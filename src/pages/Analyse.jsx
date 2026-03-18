@@ -9,8 +9,10 @@ import { PremiumModal } from '../components/PremiumModal';
 import './Analyse.css';
 
 const LIMITE_FREE = 5;
+const ADMIN_EMAILS = ['johan11elm@gmail.com'];
 
-function isOverMonthlyLimit() {
+function isOverMonthlyLimit(userEmail) {
+  if (userEmail && ADMIN_EMAILS.includes(userEmail)) return false;
   const lessons = loadLessons();
   const now = new Date();
   const thisMonth = lessons.filter(l => {
@@ -163,7 +165,7 @@ export default function Analyse() {
       return;
     }
     if (lessonText || capturedImg) {
-      if (isOverMonthlyLimit()) {
+      if (isOverMonthlyLimit(currentUser?.email)) {
         setShowPremium(true);
         setIsLoading(false);
         return;
