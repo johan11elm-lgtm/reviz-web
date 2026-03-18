@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { recordRevision } from '../services/revisionService'
 import './Quiz.css'
@@ -31,19 +31,76 @@ function getEndContent(score, total) {
   return           { emoji: '📚', title: 'À travailler…',       sub: 'Révise la leçon et retente le quiz !' }
 }
 
+/* ── Confetti ── */
+const CONFETTI_COLORS = ['#FF6B00','#FFB347','#6C63FF','#22C55E','#FF3B7F','#00C07F','#FDE047']
+function Confetti() {
+  const pieces = Array.from({ length: 60 }, (_, i) => ({
+    id: i,
+    left: Math.random() * 100,
+    delay: Math.random() * 1.2,
+    duration: 1.8 + Math.random() * 1.4,
+    color: CONFETTI_COLORS[Math.floor(Math.random() * CONFETTI_COLORS.length)],
+    size: 6 + Math.random() * 8,
+    rotation: Math.random() * 360,
+  }))
+  return (
+    <div className="confetti-wrap" aria-hidden="true">
+      {pieces.map(p => (
+        <div
+          key={p.id}
+          className="confetti-piece"
+          style={{
+            left: `${p.left}%`,
+            width: p.size,
+            height: p.size * 0.5,
+            background: p.color,
+            animationDelay: `${p.delay}s`,
+            animationDuration: `${p.duration}s`,
+            transform: `rotate(${p.rotation}deg)`,
+          }}
+        />
+      ))}
+    </div>
+  )
+}
+
+/* ── Score count-up ── */
+function useCountUp(target, active) {
+  const [count, setCount] = useState(0)
+  useEffect(() => {
+    if (!active) return
+    setCount(0)
+    const steps = 30
+    const step = target / steps
+    let current = 0
+    const id = setInterval(() => {
+      current += step
+      if (current >= target) { setCount(target); clearInterval(id) }
+      else setCount(Math.floor(current))
+    }, 40)
+    return () => clearInterval(id)
+  }, [target, active])
+  return count
+}
+
 export default function Quiz() {
   useEffect(() => { recordRevision('quiz') }, [])
   const questions = getQuestions()
 
-  const [current, setCurrent]           = useState(0)
-  const [score, setScore]               = useState(0)
-  const [answered, setAnswered]         = useState(false)
+  const [current, setCurrent]             = useState(0)
+  const [score, setScore]                 = useState(0)
+  const [answered, setAnswered]           = useState(false)
   const [selectedIndex, setSelectedIndex] = useState(null)
-  const [showEnd, setShowEnd]           = useState(false)
+  const [showEnd, setShowEnd]             = useState(false)
+  const [animKey, setAnimKey]             = useState(0)   // force re-mount pour animation
 
-  const q          = questions[current]
-  const isCorrect  = answered && selectedIndex === q.correct
-  const isLast     = current === questions.length - 1
+  const q         = questions[current]
+  const isCorrect = answered && selectedIndex === q.correct
+  const isLast    = current === questions.length - 1
+  const progress  = ((current + (answered ? 1 : 0)) / questions.length) * 100
+  const showConfetti = showEnd && score / questions.length >= 0.8
+  const displayScore = useCountUp(score, showEnd)
+  const xp = score * 10
 
   function selectAnswer(index) {
     if (answered) return
@@ -59,35 +116,39 @@ export default function Quiz() {
       setCurrent(p => p + 1)
       setAnswered(false)
       setSelectedIndex(null)
+      setAnimKey(p => p + 1)
     }
   }
 
   function restartQuiz() {
     setCurrent(0); setScore(0)
-    setAnswered(false); setSelectedIndex(null); setShowEnd(false)
+    setAnswered(false); setSelectedIndex(null)
+    setShowEnd(false); setAnimKey(0)
   }
 
   function getChoiceClass(i) {
     if (!answered) return 'choice-btn'
-    if (i === q.correct)                          return 'choice-btn correct'
-    if (i === selectedIndex && i !== q.correct)   return 'choice-btn wrong'
+    if (i === q.correct)                        return 'choice-btn correct'
+    if (i === selectedIndex && i !== q.correct) return 'choice-btn wrong'
     return 'choice-btn neutral'
   }
 
-  const endContent = getEndContent(showEnd ? score : score, questions.length)
-  const xp = score * 10
+  const endContent = getEndContent(score, questions.length)
 
   return (
     <div className="app">
 
+      {/* ── Confetti ── */}
+      {showConfetti && <Confetti />}
+
       {/* ── Écran de fin ── */}
       {showEnd && (
-        <div className="end-screen">
+        <div className="end-screen end-anim">
           <span className="end-emoji">{endContent.emoji}</span>
           <span className="end-title">{endContent.title}</span>
           <p className="end-sub">{endContent.sub}</p>
           <div className="score-ring">
-            <span className="score-big">{score}/{questions.length}</span>
+            <span className="score-big">{displayScore}/{questions.length}</span>
             <span className="score-small">score</span>
           </div>
           <div className="xp-badge">+{xp} XP gagnés !</div>
@@ -101,14 +162,11 @@ export default function Quiz() {
         <Link className="back-btn" to="/analyse">←</Link>
         <div className="header-center">
           <span className="header-title">Quiz</span>
-          <div className="progress-dots">
-            {questions.map((_, i) => (
-              <span
-                key={i}
-                className={`progress-dot${i < current ? ' done' : i === current ? ' active' : ''}`}
-              />
-            ))}
+          {/* Barre de progression */}
+          <div className="progress-bar-wrap">
+            <div className="progress-bar-fill" style={{ width: `${progress}%` }} />
           </div>
+          <span className="progress-label">{current + 1} / {questions.length}</span>
         </div>
         <div className="score-pill">
           <span className="score-pill-icon">✓</span>
@@ -119,20 +177,21 @@ export default function Quiz() {
       {/* ── Contenu ── */}
       <div className="content">
 
-        {/* Question */}
-        <div className="question-card" key={current}>
+        {/* Question — re-mount via key pour déclencher animation */}
+        <div className="question-card" key={animKey}>
           <div className="question-num">Question {current + 1}</div>
           <div className="question-text">{q.question}</div>
         </div>
 
         {/* Choix */}
-        <div className="choices">
+        <div className="choices" key={`choices-${animKey}`}>
           {q.choices.map((choice, i) => (
             <button
               key={i}
               className={getChoiceClass(i)}
               onClick={() => selectAnswer(i)}
               disabled={answered}
+              style={{ animationDelay: `${i * 50}ms` }}
             >
               <span className="choice-letter">{LETTERS[i]}</span>
               <span className="choice-text">{choice}</span>
@@ -142,7 +201,7 @@ export default function Quiz() {
 
       </div>
 
-      {/* ── Panel de feedback (slide depuis le bas) ── */}
+      {/* ── Panel de feedback ── */}
       <div className={`feedback-panel${answered ? ' visible' : ''}${answered ? (isCorrect ? ' panel-correct' : ' panel-wrong') : ''}`}>
         <div className="panel-row">
           <div className={`panel-icon${isCorrect ? ' icon-correct' : ' icon-wrong'}`}>

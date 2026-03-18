@@ -25,16 +25,25 @@
 
 .header-title { font-size: 16px; font-weight: 700; letter-spacing: -0.3px; }
 
-/* Dots */
-.progress-dots { display: flex; gap: 5px; align-items: center; flex-wrap: wrap; justify-content: center; }
-
-.progress-dot {
-  width: 6px; height: 6px; border-radius: 50%;
-  background: var(--bg-muted, #E5E7EB);
-  transition: background 0.25s, width 0.25s;
+/* Barre de progression */
+.progress-bar-wrap {
+  width: 140px;
+  height: 5px;
+  background: var(--bg-subtle);
+  border-radius: 10px;
+  overflow: hidden;
 }
-.progress-dot.done   { background: #FED7AA; }
-.progress-dot.active { background: #FF6B00; width: 16px; border-radius: 3px; }
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #FF6B00, #FFB347);
+  border-radius: 10px;
+  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.progress-label {
+  font-size: 11px;
+  color: var(--text-secondary);
+  font-weight: 600;
+}
 
 /* Score pill */
 .score-pill {
@@ -68,8 +77,34 @@
 
 /* Question card */
 @keyframes questionIn {
-  from { opacity: 0; transform: translateY(10px); }
+  from { opacity: 0; transform: translateY(18px); }
   to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Écran de fin */
+@keyframes endIn {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.end-anim { animation: endIn 0.45s cubic-bezier(0.16, 1, 0.3, 1); }
+
+/* Confetti */
+@keyframes confettiFall {
+  0%   { transform: translateY(-20px) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+}
+.confetti-wrap {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 100;
+  overflow: hidden;
+}
+.confetti-piece {
+  position: absolute;
+  top: -10px;
+  border-radius: 2px;
+  animation: confettiFall linear forwards;
 }
 
 .question-card {
