@@ -367,7 +367,6 @@ export default function Mindmap() {
               >
                 <span className="bn-emoji">{branch.emoji}</span>
                 <span className="bn-label">{branch.label}</span>
-                {!isVisited && <span className="bn-pulse" style={{ '--branch-color': branch.color }} />}
               </div>
             )
           })}
