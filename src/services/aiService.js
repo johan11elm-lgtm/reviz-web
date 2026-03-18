@@ -166,7 +166,7 @@ function _parseResult(raw) {
   if (!parsed.metadata || !parsed.flashcards || !parsed.quiz || !parsed.resume || !parsed.mindmap) {
     throw new Error('INVALID_JSON')
   }
-  if (!Array.isArray(parsed.mindmap.branches) || parsed.mindmap.branches.length !== 4) {
+  if (!Array.isArray(parsed.mindmap.branches) || parsed.mindmap.branches.length === 0) {
     throw new Error('INVALID_JSON')
   }
   parsed.mindmap.branches = parsed.mindmap.branches.map((b, i) => ({
