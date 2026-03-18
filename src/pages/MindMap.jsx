@@ -5,94 +5,73 @@ import { useTheme } from '../context/ThemeContext'
 import { recordRevision } from '../services/revisionService'
 import './Mindmap.css'
 
-// ---- DONNÉES : localStorage (IA) > mock ----
+// ── Palette de 4 couleurs (assignée par index) ────────────────────
+const PALETTE = [
+  { color: '#6366F1', bgLight: '#EEF2FF', colorLight: '#4338CA', bgDark: '#1E1B4B', colorDark: '#A5B4FC' },
+  { color: '#FF6B00', bgLight: '#FFF4E6', colorLight: '#C05621', bgDark: '#2D1F0A', colorDark: '#FBD38D' },
+  { color: '#22C55E', bgLight: '#F0FDF4', colorLight: '#15803D', bgDark: '#0D2818', colorDark: '#4ADE80' },
+  { color: '#A855F7', bgLight: '#FAF5FF', colorLight: '#7E22CE', bgDark: '#2E1065', colorDark: '#D8B4FE' },
+]
+
+// ── Emoji par matière ────────────────────────────────────────────
+const SUBJECT_EMOJI = {
+  maths: '📐', français: '📖', anglais: '🗣️', histoire: '🏛️',
+  géographie: '🌍', svt: '🧬', physique: '⚗️', philosophie: '🤔',
+  ses: '📊', arts: '🎨',
+}
+function subjectEmoji(subject) {
+  if (!subject) return '🧠'
+  const key = Object.keys(SUBJECT_EMOJI).find(k => subject.toLowerCase().includes(k))
+  return SUBJECT_EMOJI[key] ?? '📚'
+}
+
+// ── Données ───────────────────────────────────────────────────────
 function getMindmapData() {
   try {
     const ai = JSON.parse(localStorage.getItem('reviz-ai-data') || 'null')
-    if (ai?.mindmap?.branches?.length === 4) return {
-      title:    ai.metadata?.title || 'Carte mentale',
-      center:   ai.metadata?.title || 'Concept',
-      xp:       25,
-      branches: ai.mindmap.branches,
+    if (ai?.mindmap?.branches?.length >= 2) {
+      // Injecter couleurs par index
+      const branches = ai.mindmap.branches.map((b, i) => ({
+        ...b,
+        ...PALETTE[i % PALETTE.length],
+      }))
+      return {
+        title:    ai.metadata?.title || 'Carte mentale',
+        center:   ai.metadata?.title || 'Concept',
+        subject:  ai.metadata?.subject || '',
+        xp:       25,
+        branches,
+      }
     }
   } catch { /* ignore */ }
   return {
-    title: "Théorème de Pythagore",
-    center: "Pythagore",
+    title: 'Théorème de Pythagore',
+    center: 'Pythagore',
+    subject: 'Maths',
     xp: 25,
     branches: [
-      {
-        id: "definition",
-        label: "Définition",
-        emoji: "📖",
-        color: "#6366F1",
-        bgLight: "#EEF2FF", colorLight: "#4338CA",
-        bgDark:  "#1E1B4B", colorDark:  "#A5B4FC",
-        position: "top-left",
-        detail: "Dans tout triangle rectangle, le carré de l'hypoténuse est égal à la somme des carrés des deux autres côtés.",
-        children: ["a² + b² = c²", "Triangle rectangle", "Angle droit 90°"],
-      },
-      {
-        id: "elements",
-        label: "Éléments",
-        emoji: "📏",
-        color: "#FF6B00",
-        bgLight: "#FFF4E6", colorLight: "#C05621",
-        bgDark:  "#2D1F0A", colorDark:  "#FBD38D",
-        position: "top-right",
-        detail: "L'hypoténuse est le côté le plus long, toujours face à l'angle droit. Les deux autres côtés sont notés a et b.",
-        children: ["Hypoténuse (c)", "Côté a", "Côté b"],
-      },
-      {
-        id: "reciproque",
-        label: "Réciproque",
-        emoji: "🔄",
-        color: "#22C55E",
-        bgLight: "#F0FDF4", colorLight: "#15803D",
-        bgDark:  "#0D2818", colorDark:  "#4ADE80",
-        position: "bottom-left",
-        detail: "Si a² + b² = c² est vérifié, alors le triangle est nécessairement rectangle. Utile pour prouver qu'un angle est droit.",
-        children: ["Si a²+b²=c²", "→ rectangle", "Ex : 3, 4, 5 ✓"],
-      },
-      {
-        id: "applications",
-        label: "Applications",
-        emoji: "💡",
-        color: "#A855F7",
-        bgLight: "#FAF5FF", colorLight: "#7E22CE",
-        bgDark:  "#2E1065", colorDark:  "#D8B4FE",
-        position: "bottom-right",
-        detail: "On utilise ce théorème pour calculer des distances, vérifier des angles droits en construction, et résoudre des problèmes géométriques.",
-        children: ["Calcul distances", "Architecture", "Triangles remarquables"],
-      },
+      { id: 'definition', label: 'Définition', emoji: '📖', detail: 'Dans tout triangle rectangle, le carré de l\'hypoténuse est égal à la somme des carrés des deux autres côtés.', children: ['a² + b² = c²', 'Triangle rectangle', 'Angle droit 90°'], position: 'top-left',    ...PALETTE[0] },
+      { id: 'elements',   label: 'Éléments',   emoji: '📏', detail: 'L\'hypoténuse est le côté le plus long, toujours face à l\'angle droit.', children: ['Hypoténuse (c)', 'Côté a', 'Côté b'], position: 'top-right',   ...PALETTE[1] },
+      { id: 'reciproque', label: 'Réciproque', emoji: '🔄', detail: 'Si a² + b² = c² est vérifié, alors le triangle est nécessairement rectangle.', children: ['Si a²+b²=c²', '→ rectangle', 'Ex : 3-4-5'], position: 'bottom-left', ...PALETTE[2] },
+      { id: 'applications', label: 'Applications', emoji: '💡', detail: 'On utilise ce théorème pour calculer des distances et vérifier des angles droits.', children: ['Calcul distances', 'Architecture', 'Géométrie'], position: 'bottom-right', ...PALETTE[3] },
     ],
   }
 }
 
+// ── Positions (portrait + paysage) ───────────────────────────────
 function getPositions(W, H) {
-  const cx = W / 2
-  const cy = H / 2
+  const cx = W / 2, cy = H / 2
   return {
-    'top-left':     { x: Math.round(W * 0.18), y: Math.round(H * 0.20) },
-    'top-right':    { x: Math.round(W * 0.82), y: Math.round(H * 0.20) },
-    'bottom-left':  { x: Math.round(W * 0.18), y: Math.round(H * 0.65) },
-    'bottom-right': { x: Math.round(W * 0.82), y: Math.round(H * 0.65) },
-    // fallback for old top/right/bottom/left positions
+    'top-left':     { x: Math.round(W * 0.20), y: Math.round(H * 0.22) },
+    'top-right':    { x: Math.round(W * 0.80), y: Math.round(H * 0.22) },
+    'bottom-left':  { x: Math.round(W * 0.20), y: Math.round(H * 0.72) },
+    'bottom-right': { x: Math.round(W * 0.80), y: Math.round(H * 0.72) },
+    // fallbacks
     top:    { x: cx,                   y: Math.round(H * 0.18) },
     right:  { x: Math.round(W * 0.82), y: cy },
-    bottom: { x: cx,                   y: Math.round(H * 0.75) },
+    bottom: { x: cx,                   y: Math.round(H * 0.76) },
     left:   { x: Math.round(W * 0.18), y: cy },
   }
-}
-
-function RotatePrompt() {
-  return (
-    <div className="rotate-overlay">
-      <div className="rotate-icon">📱</div>
-      <div className="rotate-title">Tournez votre téléphone</div>
-      <p className="rotate-sub">La carte mentale s'affiche en mode paysage</p>
-    </div>
-  )
 }
 
 export default function Mindmap() {
@@ -110,39 +89,27 @@ export default function Mindmap() {
   const [allExplored, setAllExplored]       = useState(false)
   const [showEnd, setShowEnd]               = useState(false)
   const [dims, setDims]                     = useState({ W: window.innerWidth, H: window.innerHeight })
-  const [isPortrait, setIsPortrait]         = useState(() => window.innerWidth < 500 && window.innerHeight > window.innerWidth)
+  const [mounted, setMounted]               = useState(false)
   const INIT_SCALE = 1
-  const [scale, setScale]   = useState(INIT_SCALE)
-  const [offset, setOffset] = useState({ x: 0, y: 0 })
+  const [scale, setScale]     = useState(INIT_SCALE)
+  const [offset, setOffset]   = useState({ x: 0, y: 0 })
   const [isDragging, setIsDragging] = useState(false)
 
-  // Orientation lock + listen (compatible iOS)
-  useEffect(() => {
-    screen.orientation?.lock?.('landscape').catch(() => {})
+  // Entrée en scène
+  useEffect(() => { setTimeout(() => setMounted(true), 60) }, [])
 
-    function updateOrientation() {
-      // Petit délai pour laisser iOS mettre à jour innerWidth/innerHeight
+  // Resize
+  useEffect(() => {
+    function onResize() {
       setTimeout(() => {
-        const W = window.innerWidth, H = window.innerHeight
-        setIsPortrait(W < 768 && H > W)
-        setDims({ W, H })
+        setDims({ W: window.innerWidth, H: window.innerHeight })
       }, 100)
     }
-
-    // matchMedia : Chrome/Android
-    const mq = window.matchMedia('(orientation: portrait)')
-    mq.addEventListener?.('change', updateOrientation)
-    mq.addListener?.((e) => { if (!mq.addEventListener) updateOrientation() })
-
-    // orientationchange : iOS Safari/Chrome
-    window.addEventListener('orientationchange', updateOrientation)
-    window.addEventListener('resize', updateOrientation)
-
+    window.addEventListener('resize', onResize)
+    window.addEventListener('orientationchange', onResize)
     return () => {
-      mq.removeEventListener?.('change', updateOrientation)
-      window.removeEventListener('orientationchange', updateOrientation)
-      window.removeEventListener('resize', updateOrientation)
-      screen.orientation?.unlock?.()
+      window.removeEventListener('resize', onResize)
+      window.removeEventListener('orientationchange', onResize)
     }
   }, [])
 
@@ -165,10 +132,9 @@ export default function Mindmap() {
     setVisitedIds(next)
     setSelectedBranch(id)
     if (next.size === mindmapData.branches.length) setAllExplored(true)
-    // Auto-pan : remonte le canvas si branche du bas pour rester visible au-dessus du sheet
     if (branch?.position?.includes('bottom')) {
       const pos = getPositions(W, H)[branch.position]
-      const SHEET_H = 210
+      const SHEET_H = 220
       const targetY = H - SHEET_H - 40
       const panY = -(pos.y - targetY)
       setOffset(o => ({ x: o.x, y: Math.min(0, panY) }))
@@ -182,7 +148,6 @@ export default function Mindmap() {
     pointerStart.current = { px: e.clientX, py: e.clientY, ox: offset.x, oy: offset.y }
     canvasRef.current?.setPointerCapture(e.pointerId)
   }
-
   function handlePointerMove(e) {
     if (!pointerStart.current || !e.isPrimary) return
     const dx = e.clientX - pointerStart.current.px
@@ -195,11 +160,7 @@ export default function Mindmap() {
       })
     }
   }
-
-  function handlePointerUp() {
-    pointerStart.current = null
-    setIsDragging(false)
-  }
+  function handlePointerUp() { pointerStart.current = null; setIsDragging(false) }
 
   function handleTouchStart(e) {
     if (e.touches.length === 2) {
@@ -208,20 +169,16 @@ export default function Mindmap() {
       lastPinch.current = { dist: Math.hypot(dx, dy), scale }
       pointerStart.current = null
     } else if (e.touches.length === 1) {
-      // Fallback pan via touch pour iOS
       const t = e.touches[0]
       pointerStart.current = { px: t.clientX, py: t.clientY, ox: offset.x, oy: offset.y }
     }
   }
-
   function handleTouchMove(e) {
     if (e.touches.length === 2 && lastPinch.current) {
       const dx = e.touches[0].clientX - e.touches[1].clientX
       const dy = e.touches[0].clientY - e.touches[1].clientY
       const dist = Math.hypot(dx, dy)
-      setScale(Math.min(2.5, Math.max(0.35,
-        lastPinch.current.scale * (dist / lastPinch.current.dist)
-      )))
+      setScale(Math.min(2.5, Math.max(0.35, lastPinch.current.scale * (dist / lastPinch.current.dist))))
     } else if (e.touches.length === 1 && pointerStart.current) {
       const t = e.touches[0]
       const dx = t.clientX - pointerStart.current.px
@@ -235,39 +192,24 @@ export default function Mindmap() {
       }
     }
   }
+  function handleTouchEnd() { lastPinch.current = null; pointerStart.current = null; setIsDragging(false) }
 
-  function handleTouchEnd() {
-    lastPinch.current = null
-    pointerStart.current = null
-    setIsDragging(false)
-  }
-
-  function resetView() {
-    setScale(INIT_SCALE)
-    setOffset({ x: 0, y: 0 })
-  }
-
+  function resetView() { setScale(INIT_SCALE); setOffset({ x: 0, y: 0 }) }
   function restartMindmap() {
-    setVisitedIds(new Set())
-    setSelectedBranch(null)
-    setAllExplored(false)
-    setShowEnd(false)
-    resetView()
+    setVisitedIds(new Set()); setSelectedBranch(null)
+    setAllExplored(false); setShowEnd(false); resetView()
   }
 
   const { W, H } = dims
   const isViewMoved  = Math.abs(offset.x) > 5 || Math.abs(offset.y) > 5 || Math.abs(scale - INIT_SCALE) > 0.05
   const positions    = getPositions(W, H)
-  const cx           = W / 2
-  const cy           = H / 2
+  const cx = W / 2, cy = H / 2
   const activeBranch = mindmapData.branches.find(b => b.id === selectedBranch)
   const totalChildren = mindmapData.branches.reduce((acc, b) => acc + b.children.length, 0)
+  const centerEmoji  = subjectEmoji(mindmapData.subject)
 
   return createPortal(
     <div className="mindmap-fullscreen">
-
-      {/* ── Overlay portrait ── */}
-      {isPortrait && <RotatePrompt />}
 
       {/* ── Écran de fin ── */}
       {showEnd && (
@@ -319,7 +261,7 @@ export default function Mindmap() {
         >✓</button>
       </div>
 
-      {/* ── Canvas interactif ── */}
+      {/* ── Canvas ── */}
       <div
         className="mindmap-canvas"
         ref={canvasRef}
@@ -332,15 +274,12 @@ export default function Mindmap() {
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
       >
-        {/* Hint */}
         {!activeBranch && (
           <div className="canvas-hint">
             <span className="canvas-hint-icon">👆</span>
             <span className="canvas-hint-text">Appuie sur une branche</span>
           </div>
         )}
-
-        {/* Reset */}
         {isViewMoved && (
           <button
             className="mindmap-reset"
@@ -349,35 +288,49 @@ export default function Mindmap() {
           >↺</button>
         )}
 
-        {/* Monde transformable */}
         <div
           className="mindmap-world"
           style={{ transform: `translate(${offset.x}px, ${offset.y}px) scale(${scale})` }}
         >
-          {/* SVG lignes bezier */}
+          {/* SVG lignes gradient */}
           <svg className="mindmap-svg">
+            <defs>
+              {mindmapData.branches.map(branch => (
+                <linearGradient
+                  key={branch.id}
+                  id={`grad-${branch.id}`}
+                  x1="0%" y1="0%" x2="100%" y2="0%"
+                  gradientUnits="userSpaceOnUse"
+                  x1={cx} y1={cy}
+                  x2={positions[branch.position]?.x ?? cx}
+                  y2={positions[branch.position]?.y ?? cy}
+                >
+                  <stop offset="0%"   stopColor={branch.color} stopOpacity="0.3" />
+                  <stop offset="100%" stopColor={branch.color} stopOpacity="0.9" />
+                </linearGradient>
+              ))}
+            </defs>
             {mindmapData.branches.map(branch => {
-              const pos        = positions[branch.position]
+              const pos = positions[branch.position]
               if (!pos) return null
               const isSelected = selectedBranch === branch.id
               const isVisited  = visitedIds.has(branch.id)
               const hasSelect  = selectedBranch !== null
               const opacity    = hasSelect
-                ? (isSelected ? 1 : 0.08)
-                : (isVisited ? 0.55 : 0.2)
-              // Bezier control point: midpoint between center and node
+                ? (isSelected ? 1 : 0.07)
+                : (isVisited ? 0.6 : 0.25)
               const cpx = (cx + pos.x) / 2
               const cpy = (cy + pos.y) / 2
-              const d = `M ${cx} ${cy} Q ${cpx} ${cpy} ${pos.x} ${pos.y}`
               return (
                 <path
                   key={branch.id}
-                  d={d}
-                  stroke={isDark ? branch.colorDark : branch.color}
-                  strokeWidth={isSelected ? 3 : 2}
+                  d={`M ${cx} ${cy} Q ${cpx} ${cpy} ${pos.x} ${pos.y}`}
+                  stroke={`url(#grad-${branch.id})`}
+                  strokeWidth={isSelected ? 3.5 : 2.5}
                   fill="none"
                   opacity={opacity}
                   strokeLinecap="round"
+                  style={{ transition: 'opacity 0.25s' }}
                 />
               )
             })}
@@ -385,43 +338,43 @@ export default function Mindmap() {
 
           {/* Nœud central */}
           <div className="center-node">
-            <span className="cn-emoji">📐</span>
+            <span className="cn-emoji">{centerEmoji}</span>
             <span className="cn-label">
-              {mindmapData.center.split('\n').map((line, i, arr) => (
-                <span key={i}>{line}{i < arr.length - 1 && <br />}</span>
-              ))}
+              {mindmapData.center.split(' ').slice(0, 3).join(' ')}
             </span>
           </div>
 
-          {/* Branches */}
-          {mindmapData.branches.map(branch => {
-            const pos        = positions[branch.position]
+          {/* Branches avec animation d'entrée staggerée */}
+          {mindmapData.branches.map((branch, i) => {
+            const pos = positions[branch.position]
             if (!pos) return null
             const isSelected = selectedBranch === branch.id
             const isVisited  = visitedIds.has(branch.id)
             return (
               <div
                 key={branch.id}
-                className={`branch-node${isSelected ? ' selected' : ''}${isVisited ? ' visited' : ''}`}
+                className={`branch-node${isSelected ? ' selected' : ''}${isVisited ? ' visited' : ''}${mounted ? ' branch-in' : ''}`}
                 style={{
                   left: pos.x,
                   top:  pos.y,
-                  background: isDark ? branch.bgDark  : branch.bgLight,
+                  background: isDark ? branch.bgDark   : branch.bgLight,
                   color:      isDark ? branch.colorDark : branch.colorLight,
                   '--branch-color': branch.color,
+                  animationDelay: `${i * 100}ms`,
                 }}
                 onPointerDown={e => e.stopPropagation()}
                 onClick={() => handleSelectBranch(branch.id)}
               >
                 <span className="bn-emoji">{branch.emoji}</span>
                 <span className="bn-label">{branch.label}</span>
+                {!isVisited && <span className="bn-pulse" style={{ '--branch-color': branch.color }} />}
               </div>
             )
           })}
         </div>
       </div>
 
-      {/* ── Bottom sheet détail ── */}
+      {/* ── Bottom sheet ── */}
       <div className={`detail-sheet${activeBranch ? ' detail-sheet--open' : ''}`}>
         <div className="sheet-handle" onClick={() => setSelectedBranch(null)} />
         {activeBranch && (

@@ -50,7 +50,7 @@ FORMAT DE SORTIE OBLIGATOIRE (respecte exactement les noms de champs) :
         "emoji": "emoji pertinent selon le contenu de la branche",
         "detail": "1 phrase, l'essentiel de cette branche",
         "children": ["exemple concret ou sous-concept précis", "2-4 mots max par enfant"],
-        "position": "top"
+        "position": "top-left"
       }
     ]
   }
@@ -80,7 +80,7 @@ QUANTITÉS OBLIGATOIRES :
 - resume.keyPoints : 3 à 5 points, chacun en 1 ligne max
 - resume.sections : 2 à 3 sections, chaque "content" fait 2-3 phrases maximum
 - resume.keyTerms : 3 à 5 termes, chaque "def" fait 1 ligne max
-- mindmap.branches : EXACTEMENT 4 branches, avec les positions "top", "right", "bottom", "left" dans cet ordre (une position unique par branche)
+- mindmap.branches : EXACTEMENT 4 branches, avec les positions "top-left", "top-right", "bottom-left", "bottom-right" dans cet ordre (une position unique par branche)
 
 RÈGLES DU RÉSUMÉ :
 - Sois synthétique : chaque phrase doit apporter une info nouvelle
