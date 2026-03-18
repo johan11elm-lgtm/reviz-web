@@ -233,13 +233,13 @@
 .ob-dots { display: flex; gap: 6px; margin-bottom: 4px; }
 
 .ob-dot {
-  width: 6px; height: 6px;
+  width: 8px; height: 8px;
   border-radius: 50%;
   background: rgba(255,255,255,0.18);
-  transition: all 0.25s;
+  transition: background 0.25s, transform 0.25s;
 }
 .ob-dot.done   { background: rgba(255,107,0,0.4); }
-.ob-dot.active { width: 22px; border-radius: 3px; background: #FF6B00; }
+.ob-dot.active { background: #FF6B00; transform: scale(1.3); }
 
 /* Bouton principal */
 .ob-btn {
