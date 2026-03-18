@@ -1,6 +1,18 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom'
+import { useEffect } from 'react'
 import { ThemeProvider } from './context/ThemeContext'
 import { AuthProvider, useAuth } from './context/AuthContext'
+
+function ScrollToTop() {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    ['.content', '.pg-content'].forEach(sel => {
+      document.querySelector(sel)?.scrollTo(0, 0);
+    });
+  }, [pathname]);
+  return null;
+}
 import Home        from './pages/Home'
 import Profile     from './pages/Profile'
 import Scan        from './pages/Scan'
@@ -27,6 +39,7 @@ export default function App() {
     <AuthProvider>
       <ThemeProvider>
         <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+          <ScrollToTop />
           <Routes>
             {/* Routes publiques (accessibles sans compte) */}
             <Route path="/welcome"     element={<Welcome />} />

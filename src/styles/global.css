@@ -136,6 +136,20 @@ input, textarea {
   overflow: hidden;
 }
 
+/* Sur mobile réel : plein écran, sans bordures ni ombre */
+@media (max-width: 430px) {
+  body {
+    padding: 0;
+    background: var(--bg-app);
+  }
+  .app {
+    width: 100%;
+    min-height: 100dvh;
+    border-radius: 0;
+    box-shadow: none;
+  }
+}
+
 /* ─── Bottom nav ───────────────────────────────────────────────── */
 .bottom-nav {
   display: flex;

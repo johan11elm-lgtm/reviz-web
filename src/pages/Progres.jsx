@@ -6,32 +6,39 @@ import { Drawer } from '../components/Drawer';
 import { BottomNav } from '../components/BottomNav';
 import './Progres.css';
 
-// ─── Constantes ────────────────────────────────────────────────────
+// ─── Constantes ─────────────────────────────────────────────────────
 const XP_PAR_LECON  = 100;
 const XP_PAR_NIVEAU = 500;
 
 const SUBJECT_MAP = {
-  'maths':    { color: 'orange', dot: '#FF6B00', emoji: '📐' },
-  'français': { color: 'pink',   dot: '#EC4899', emoji: '📖' },
-  'histoire': { color: 'indigo', dot: '#6366F1', emoji: '🌍' },
-  'géo':      { color: 'indigo', dot: '#6366F1', emoji: '🌍' },
-  'svt':      { color: 'green',  dot: '#22C55E', emoji: '🧬' },
-  'physique': { color: 'blue',   dot: '#3B82F6', emoji: '⚛️' },
-  'chimie':   { color: 'blue',   dot: '#3B82F6', emoji: '🧪' },
-  'techno':   { color: 'cyan',   dot: '#06B6D4', emoji: '⚙️' },
-  'anglais':  { color: 'yellow', dot: '#EAB308', emoji: '🗣️' },
-  'espagnol': { color: 'yellow', dot: '#EAB308', emoji: '💬' },
-  'langues':  { color: 'yellow', dot: '#EAB308', emoji: '🌐' },
-  'latin':    { color: 'yellow', dot: '#EAB308', emoji: '🏛️' },
-  'arts':     { color: 'purple', dot: '#A855F7', emoji: '🎨' },
+  'maths':    { dot: '#FF6B00', emoji: '📐' },
+  'français': { dot: '#EC4899', emoji: '📖' },
+  'histoire': { dot: '#6366F1', emoji: '🌍' },
+  'géo':      { dot: '#6366F1', emoji: '🌍' },
+  'svt':      { dot: '#22C55E', emoji: '🧬' },
+  'physique': { dot: '#3B82F6', emoji: '⚛️' },
+  'chimie':   { dot: '#3B82F6', emoji: '🧪' },
+  'techno':   { dot: '#06B6D4', emoji: '⚙️' },
+  'anglais':  { dot: '#EAB308', emoji: '🗣️' },
+  'espagnol': { dot: '#EAB308', emoji: '💬' },
+  'langues':  { dot: '#EAB308', emoji: '🌐' },
+  'latin':    { dot: '#6366F1', emoji: '🏛️' },
+  'arts':     { dot: '#A855F7', emoji: '🎨' },
+};
+
+const FORMAT_INFO = {
+  flashcards: { label: 'Flashcards',    emoji: '🃏', color: '#6366F1' },
+  quiz:       { label: 'Quiz',           emoji: '❓', color: '#FF6B00' },
+  resume:     { label: 'Résumé',        emoji: '📝', color: '#22C55E' },
+  mindmap:    { label: 'Carte mentale', emoji: '🧠', color: '#A855F7' },
 };
 
 function subjectInfo(s) {
   const key = Object.keys(SUBJECT_MAP).find(k => s?.toLowerCase().includes(k)) ?? null;
-  return SUBJECT_MAP[key] ?? { color: 'indigo', dot: '#6366F1', emoji: '📚' };
+  return SUBJECT_MAP[key] ?? { dot: '#6366F1', emoji: '📚' };
 }
 
-// ─── Calculs ────────────────────────────────────────────────────────
+// ─── Calculs ─────────────────────────────────────────────────────────
 function computeStreak(items, dateKey = 'revisedAt') {
   if (!items.length) return 0;
   const days = new Set(items.map(l => new Date(l[dateKey]).toLocaleDateString('fr-FR')));
@@ -74,20 +81,19 @@ function computeActiveDays(items, dateKey = 'revisedAt') {
   return new Set(items.map(r => new Date(r[dateKey]).toLocaleDateString('fr-FR'))).size;
 }
 
-function getMondayOfCurrentWeek() {
-  const today = new Date();
-  const dow   = today.getDay();
-  const d     = new Date(today);
-  d.setDate(today.getDate() - (dow === 0 ? 6 : dow - 1));
+function getMondayOf(date) {
+  const d = new Date(date);
+  const dow = d.getDay();
+  d.setDate(d.getDate() - (dow === 0 ? 6 : dow - 1));
   d.setHours(0, 0, 0, 0);
   return d;
 }
 
 function computeWeekBars(revisions) {
   const today  = new Date();
-  const monday = getMondayOfCurrentWeek();
+  const monday = getMondayOf(today);
   const jours  = ['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam', 'Dim'];
-  return Array.from({ length: 7 }, (_, i) => {
+  const bars = Array.from({ length: 7 }, (_, i) => {
     const d       = new Date(monday);
     d.setDate(monday.getDate() + i);
     const isToday  = d.toDateString() === today.toDateString();
@@ -95,13 +101,54 @@ function computeWeekBars(revisions) {
     const count    = isFuture ? 0 : revisions.filter(r =>
       new Date(r.revisedAt).toDateString() === d.toDateString()
     ).length;
-    return {
-      day:    isToday ? 'Auj.' : jours[i],
-      height: count === 0 ? 4 : Math.min(80, count * 24),
-      type:   isToday ? 'today' : (count > 0 ? 'has-activity' : ''),
-      count,
-    };
+    return { day: isToday ? 'Auj.' : jours[i], count, isToday, isFuture };
   });
+  const maxCount = Math.max(1, ...bars.map(b => b.count));
+  return bars.map(b => ({
+    ...b,
+    height: b.count === 0 ? 4 : Math.max(14, Math.round(b.count / maxCount * 80)),
+    type:   b.isToday ? 'today' : (b.count > 0 ? 'active' : ''),
+  }));
+}
+
+function computeWeekComparison(revisions) {
+  const weekCounts = {};
+  revisions.forEach(r => {
+    const monday = getMondayOf(new Date(r.revisedAt));
+    const key = monday.toISOString().split('T')[0];
+    weekCounts[key] = (weekCounts[key] || 0) + 1;
+  });
+  const currentKey = getMondayOf(new Date()).toISOString().split('T')[0];
+  const thisWeek = weekCounts[currentKey] || 0;
+  const bestWeek = Object.values(weekCounts).length ? Math.max(...Object.values(weekCounts)) : 0;
+  return { thisWeek, bestWeek };
+}
+
+function computeHeatmap(revisions) {
+  const countByDay = {};
+  revisions.forEach(r => {
+    const key = new Date(r.revisedAt).toDateString();
+    countByDay[key] = (countByDay[key] || 0) + 1;
+  });
+  const today = new Date();
+  const startMonday = getMondayOf(today);
+  startMonday.setDate(startMonday.getDate() - 28); // 4 semaines en arrière
+  const cells = [];
+  for (let i = 0; i < 35; i++) {
+    const d = new Date(startMonday);
+    d.setDate(startMonday.getDate() + i);
+    const isFuture = d > today;
+    const count = isFuture ? -1 : (countByDay[d.toDateString()] || 0);
+    cells.push({ count, isToday: d.toDateString() === today.toDateString(), isFuture });
+  }
+  return cells;
+}
+
+function getHeatIntensity(count) {
+  if (count <= 0) return 0;
+  if (count <= 2) return 1;
+  if (count <= 5) return 2;
+  return 3;
 }
 
 function computeSubjectBreakdown(lessons) {
@@ -109,19 +156,29 @@ function computeSubjectBreakdown(lessons) {
   const map = {};
   lessons.forEach(l => {
     const name = l.metadata?.subject || 'Autre';
-    map[name]  = (map[name] || 0) + 1;
+    map[name] = (map[name] || 0) + 1;
   });
   const entries = Object.entries(map).sort((a, b) => b[1] - a[1]).slice(0, 5);
-  const max     = entries[0]?.[1] ?? 1;
+  const max = entries[0]?.[1] ?? 1;
   return entries.map(([name, count]) => ({
-    name,
-    count,
+    name, count,
     pct:  Math.round(count / max * 100),
     info: subjectInfo(name),
   }));
 }
 
-// ─── Composant ──────────────────────────────────────────────────────
+function computeFormatBreakdown(revisions) {
+  const counts = { flashcards: 0, quiz: 0, resume: 0, mindmap: 0 };
+  revisions.forEach(r => { if (r.type in counts) counts[r.type]++; });
+  const total = Object.values(counts).reduce((a, b) => a + b, 0) || 1;
+  return Object.entries(FORMAT_INFO).map(([key, info]) => ({
+    ...info,
+    count: counts[key],
+    pct:   Math.round(counts[key] / total * 100),
+  })).sort((a, b) => b.count - a.count);
+}
+
+// ─── Composant ───────────────────────────────────────────────────────
 export default function Progres() {
   const [drawerOpen,   setDrawerOpen]   = useState(false);
   const [allLessons,   setAllLessons]   = useState(() => loadLessons());
@@ -135,17 +192,19 @@ export default function Progres() {
     syncRevisionsFromFirestore().then(setAllRevisions);
   }, []);
 
-  // Stats
-  const streak              = computeStreak(allRevisions, 'revisedAt');
-  const bestStreak          = computeBestStreak(allRevisions, 'revisedAt');
+  const streak           = computeStreak(allRevisions, 'revisedAt');
+  const bestStreak       = computeBestStreak(allRevisions, 'revisedAt');
   const { level, xpInLvl, xpTotal, fillPct } = computeLevel(allLessons);
-  const activeDays          = computeActiveDays(allRevisions, 'revisedAt');
-  const weekBars            = computeWeekBars(allRevisions);
-  const subjectBreakdown    = computeSubjectBreakdown(allLessons);
+  const activeDays       = computeActiveDays(allRevisions, 'revisedAt');
+  const weekBars         = computeWeekBars(allRevisions);
+  const weekComparison   = computeWeekComparison(allRevisions);
+  const heatmap          = computeHeatmap(allRevisions);
+  const subjectBreakdown = computeSubjectBreakdown(allLessons);
+  const formatBreakdown  = computeFormatBreakdown(allRevisions);
 
-  const monday              = getMondayOfCurrentWeek();
-  const revisionsThisWeek   = allRevisions.filter(r => new Date(r.revisedAt) >= monday).length;
-  const daysWithLesson      = new Set(
+  const monday            = getMondayOf(new Date());
+  const revisionsThisWeek = allRevisions.filter(r => new Date(r.revisedAt) >= monday).length;
+  const daysWithLesson    = new Set(
     allRevisions.filter(r => new Date(r.revisedAt) >= monday)
                 .map(r => new Date(r.revisedAt).toDateString())
   ).size;
@@ -158,129 +217,193 @@ export default function Progres() {
     ? "Plus qu'1 jour pour atteindre ton objectif !"
     : `Plus que ${daysLeft} jours pour atteindre l'objectif !`;
 
+  const isNewRecord = weekComparison.bestWeek > 0 && weekComparison.thisWeek >= weekComparison.bestWeek;
+
   return (
     <div className="app">
 
       {/* Header */}
-      <div className="header">
-        <div className="header-left">
-          <span className="header-title">Mes progrès</span>
-        </div>
-        <div className="header-avatar" onClick={() => setDrawerOpen(true)}>{initiale}</div>
+      <div className="pg-header">
+        <span className="pg-header-title">Mes progrès</span>
+        <div className="pg-header-avatar" onClick={() => setDrawerOpen(true)}>{initiale}</div>
       </div>
 
-      {/* Content */}
-      <div className="content">
+      <div className="pg-content">
 
-        {/* ── Streak hero ── */}
-        <div className="streak-card">
-          <div className="streak-block">
-            <div className="streak-label">Série en cours</div>
-            <div className="streak-value">{streak}</div>
-            <div className="streak-unit">{streak === 1 ? 'jour de suite' : 'jours de suite'} 🔥</div>
+        {/* 1. Streak hero */}
+        <div className="pg-streak-card">
+          <div className="pg-streak-block">
+            <div className="pg-streak-label">Série en cours</div>
+            <div className="pg-streak-value">{streak}</div>
+            <div className="pg-streak-unit">{streak === 1 ? 'jour de suite' : 'jours de suite'} 🔥</div>
           </div>
-          <div className="streak-divider" />
-          <div className="streak-block streak-block--right">
-            <div className="streak-label">Meilleur</div>
-            <div className="streak-value streak-value--sm">{bestStreak}</div>
-            <div className="streak-unit">record 🏆</div>
+          <div className="pg-streak-divider" />
+          <div className="pg-streak-block pg-streak-block--right">
+            <div className="pg-streak-label">Meilleur</div>
+            <div className="pg-streak-value pg-streak-value--sm">{bestStreak}</div>
+            <div className="pg-streak-unit">record 🏆</div>
           </div>
         </div>
 
-        {/* ── Niveau / XP ── */}
-        <div className="level-card">
-          <div className="level-left">
-            <div className="level-badge">Niv. {level}</div>
-            <div className="level-xp-text">{xpInLvl} / {XP_PAR_NIVEAU} XP</div>
+        {/* 2. Level / XP */}
+        <div className="pg-level-card">
+          <div className="pg-level-left">
+            <div className="pg-level-badge">Niv. {level}</div>
+            <div className="pg-level-xp-text">{xpInLvl} / {XP_PAR_NIVEAU} XP</div>
           </div>
-          <div className="level-right">
-            <div className="level-total">{xpTotal} XP au total</div>
-            <div className="level-bar">
-              <div className="level-fill" style={{ width: fillPct + '%' }} />
+          <div className="pg-level-right">
+            <div className="pg-level-total">{xpTotal} XP au total</div>
+            <div className="pg-level-bar">
+              <div className="pg-level-fill" style={{ width: fillPct + '%' }} />
             </div>
-            <div className="level-next">{XP_PAR_NIVEAU - xpInLvl} XP jusqu'au niveau {level + 1}</div>
+            <div className="pg-level-next">{XP_PAR_NIVEAU - xpInLvl} XP jusqu'au niveau {level + 1}</div>
           </div>
         </div>
 
-        {/* ── Stats grid ── */}
-        <div className="section-title">Statistiques</div>
-        <div className="stats-grid">
-          <div className="stat-card">
-            <span className="stat-card-icon">📚</span>
-            <span className="stat-card-value">{allLessons.length}</span>
-            <span className="stat-card-label">Leçons scannées</span>
+        {/* 3. Heatmap */}
+        <div className="pg-section-title">Activité</div>
+        <div className="pg-heatmap-card">
+          <div className="pg-heatmap-header">
+            <span className="pg-heatmap-title">5 dernières semaines</span>
+            <span className="pg-heatmap-sub">{activeDays} jours actifs</span>
           </div>
-          <div className="stat-card">
-            <span className="stat-card-icon">🔄</span>
-            <span className="stat-card-value">{allRevisions.length}</span>
-            <span className="stat-card-label">Révisions totales</span>
+          <div className="pg-heatmap-day-labels">
+            {['L','M','M','J','V','S','D'].map((d, i) => (
+              <span key={i}>{d}</span>
+            ))}
           </div>
-          <div className="stat-card">
-            <span className="stat-card-icon">📅</span>
-            <span className="stat-card-value">{activeDays}</span>
-            <span className="stat-card-label">Jours actifs</span>
+          <div className="pg-heatmap-grid">
+            {heatmap.map((cell, i) => (
+              <div
+                key={i}
+                className={[
+                  'pg-heatmap-cell',
+                  `pg-heatmap-cell--${cell.isFuture ? 'future' : getHeatIntensity(cell.count)}`,
+                  cell.isToday ? 'pg-heatmap-cell--today' : '',
+                ].filter(Boolean).join(' ')}
+              />
+            ))}
           </div>
-          <div className="stat-card stat-card--accent">
-            <span className="stat-card-icon">⚡</span>
-            <span className="stat-card-value">{xpTotal}</span>
-            <span className="stat-card-label">XP total</span>
+          <div className="pg-heatmap-legend">
+            <span>Moins</span>
+            <div className="pg-heatmap-legend-dots">
+              {[0,1,2,3].map(i => (
+                <div key={i} className={`pg-heatmap-cell pg-heatmap-cell--${i}`} style={{ width: 10, height: 10 }} />
+              ))}
+            </div>
+            <span>Plus</span>
           </div>
         </div>
 
-        {/* ── Activité hebdomadaire ── */}
-        <div className="section-title">Cette semaine</div>
-        <div className="chart-card">
-          <div className="chart-header">
-            <span className="chart-title">Révisions par jour</span>
-            <span className="chart-total"><span>{revisionsThisWeek}</span> cette semaine</span>
+        {/* 4. Stats 3 cartes */}
+        <div className="pg-section-title">Statistiques</div>
+        <div className="pg-stats-grid">
+          <div className="pg-stat-card">
+            <span className="pg-stat-icon">📚</span>
+            <span className="pg-stat-value">{allLessons.length}</span>
+            <span className="pg-stat-label">Leçons scannées</span>
           </div>
-          <div className="bars-wrap">
+          <div className="pg-stat-card">
+            <span className="pg-stat-icon">⚡</span>
+            <span className="pg-stat-value">{allRevisions.length}</span>
+            <span className="pg-stat-label">Révisions totales</span>
+          </div>
+          <div className="pg-stat-card pg-stat-card--accent">
+            <span className="pg-stat-icon">📅</span>
+            <span className="pg-stat-value">{activeDays}</span>
+            <span className="pg-stat-label">Jours actifs</span>
+          </div>
+        </div>
+
+        {/* 5. Graphe semaine */}
+        <div className="pg-section-title">Cette semaine</div>
+        <div className="pg-chart-card">
+          <div className="pg-chart-header">
+            <span className="pg-chart-title">Révisions par jour</span>
+            <span className="pg-chart-total"><span>{revisionsThisWeek}</span> révisions</span>
+          </div>
+          <div className="pg-bars-wrap">
             {weekBars.map((bar, i) => (
-              <div key={i} className="bar-col">
-                <div
-                  className={`bar${bar.type ? ' ' + bar.type : ''}`}
-                  style={{ height: bar.height + 'px' }}
-                />
-                <span className={`bar-day${bar.type === 'today' ? ' today' : ''}`}>{bar.day}</span>
+              <div key={i} className="pg-bar-col">
+                <div className={`pg-bar${bar.type ? ' ' + bar.type : ''}`} style={{ height: bar.height + 'px' }} />
+                <span className={`pg-bar-day${bar.type === 'today' ? ' today' : ''}`}>{bar.day}</span>
               </div>
             ))}
           </div>
         </div>
 
-        {/* ── Objectif hebdo ── */}
-        <div className="goal-card">
-          <div className="goal-header">
-            <span className="goal-title">Réviser chaque jour</span>
-            <span className="goal-badge">{goalBadge}</span>
+        {/* 6. Record semaine */}
+        <div className={`pg-week-compare${isNewRecord ? ' pg-week-compare--record' : ''}`}>
+          {isNewRecord && (
+            <div className="pg-week-record-badge">🏆 Nouveau record !</div>
+          )}
+          <div className="pg-week-compare-row">
+            <div className="pg-week-compare-item">
+              <span className="pg-week-compare-label">Cette semaine</span>
+              <span className="pg-week-compare-value">{weekComparison.thisWeek}</span>
+              <span className="pg-week-compare-sub">révisions</span>
+            </div>
+            <div className="pg-week-compare-divider" />
+            <div className="pg-week-compare-item">
+              <span className="pg-week-compare-label">Meilleur</span>
+              <span className="pg-week-compare-value">{weekComparison.bestWeek}</span>
+              <span className="pg-week-compare-sub">record</span>
+            </div>
           </div>
-          <div className="goal-progress-row">
-            <span className="goal-count"><strong>{daysWithLesson}</strong> / 7 jours</span>
-            <span className="goal-pct">{goalPct} %</span>
-          </div>
-          <div className="goal-bar">
-            <div className="goal-fill" style={{ width: goalPct + '%' }} />
-          </div>
-          <span className="goal-sub">{goalMessage}</span>
         </div>
 
-        {/* ── Répartition par matière ── */}
+        {/* 7. Objectif hebdo */}
+        <div className="pg-goal-card">
+          <div className="pg-goal-header">
+            <span className="pg-goal-title">Réviser chaque jour</span>
+            <span className="pg-goal-badge">{goalBadge}</span>
+          </div>
+          <div className="pg-goal-progress-row">
+            <span className="pg-goal-count"><strong>{daysWithLesson}</strong> / 7 jours</span>
+            <span className="pg-goal-pct">{goalPct}%</span>
+          </div>
+          <div className="pg-goal-bar">
+            <div className="pg-goal-fill" style={{ width: goalPct + '%' }} />
+          </div>
+          <span className="pg-goal-sub">{goalMessage}</span>
+        </div>
+
+        {/* 8. Répartition par format */}
+        {formatBreakdown.some(f => f.count > 0) && (
+          <>
+            <div className="pg-section-title">Par format</div>
+            <div className="pg-format-card">
+              {formatBreakdown.map(f => (
+                <div key={f.label} className="pg-format-row">
+                  <div className="pg-format-left">
+                    <span className="pg-format-emoji">{f.emoji}</span>
+                    <span className="pg-format-label">{f.label}</span>
+                  </div>
+                  <div className="pg-format-bar-wrap">
+                    <div className="pg-format-bar" style={{ width: f.pct + '%', background: f.color }} />
+                  </div>
+                  <span className="pg-format-count">{f.count}</span>
+                </div>
+              ))}
+            </div>
+          </>
+        )}
+
+        {/* 9. Répartition par matière */}
         {subjectBreakdown.length > 0 && (
           <>
-            <div className="section-title">Par matière</div>
-            <div className="subject-breakdown">
+            <div className="pg-section-title">Par matière</div>
+            <div className="pg-subject-card">
               {subjectBreakdown.map(({ name, count, pct, info }) => (
-                <div key={name} className="subject-row">
-                  <div className="subject-row-left">
-                    <span className="subject-row-emoji">{info.emoji}</span>
-                    <span className="subject-row-name">{name}</span>
+                <div key={name} className="pg-subject-row">
+                  <div className="pg-subject-left">
+                    <span className="pg-subject-emoji">{info.emoji}</span>
+                    <span className="pg-subject-name">{name}</span>
                   </div>
-                  <div className="subject-row-bar-wrap">
-                    <div
-                      className="subject-row-bar"
-                      style={{ width: pct + '%', background: info.dot }}
-                    />
+                  <div className="pg-subject-bar-wrap">
+                    <div className="pg-subject-bar" style={{ width: pct + '%', background: info.dot }} />
                   </div>
-                  <span className="subject-row-count">{count}</span>
+                  <span className="pg-subject-count">{count}</span>
                 </div>
               ))}
             </div>
