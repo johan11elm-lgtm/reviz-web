@@ -28,18 +28,18 @@ FORMAT DE SORTIE OBLIGATOIRE (respecte exactement les noms de champs) :
     }
   ],
   "resume": {
-    "intro": "paragraphe d'introduction",
-    "keyPoints": ["point clé 1", "point clé 2", "point clé 3"],
+    "intro": "1 seule phrase qui résume l'essentiel de la leçon",
+    "keyPoints": ["point clé ultra-court, 1 ligne max", "point clé 2", "point clé 3"],
     "sections": [
       {
         "title": "1. Titre de section",
-        "content": "contenu de la section",
+        "content": "2-3 phrases maximum. Seulement l'essentiel. Pas de répétition. Va droit au but.",
         "formula": null,
         "formulaCaption": null
       }
     ],
     "keyTerms": [
-      { "term": "mot clé", "def": "définition courte et claire" }
+      { "term": "mot clé", "def": "définition en 1 ligne, pas plus" }
     ]
   },
   "mindmap": {
@@ -59,7 +59,14 @@ FORMAT DE SORTIE OBLIGATOIRE (respecte exactement les noms de champs) :
 QUANTITÉS OBLIGATOIRES :
 - flashcards : 6 à 8 éléments
 - quiz : 5 à 8 questions, exactement 4 choices par question, correct est l'index (0, 1, 2 ou 3)
-- resume.keyPoints : 2 à 4 points
-- resume.sections : 3 à 4 sections numérotées
-- resume.keyTerms : 3 à 5 termes
-- mindmap.branches : EXACTEMENT 4 branches, avec les positions "top", "right", "bottom", "left" dans cet ordre (une position unique par branche)`
+- resume.intro : 1 phrase maximum
+- resume.keyPoints : 3 à 5 points, chacun en 1 ligne max
+- resume.sections : 2 à 3 sections, chaque "content" fait 2-3 phrases maximum
+- resume.keyTerms : 3 à 5 termes, chaque "def" fait 1 ligne max
+- mindmap.branches : EXACTEMENT 4 branches, avec les positions "top", "right", "bottom", "left" dans cet ordre (une position unique par branche)
+
+RÈGLES DU RÉSUMÉ :
+- Sois synthétique : chaque phrase doit apporter une info nouvelle
+- Pas de répétition entre intro, keyPoints et sections
+- Pas de phrases introductives ("Dans cette leçon, nous allons voir...")
+- Vocabulaire simple, adapté à un collégien de 12 ans`
