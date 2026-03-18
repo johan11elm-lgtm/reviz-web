@@ -1,0 +1,90 @@
+/* Écran de bienvenue — fond sombre, texte clair */
+.welcome-app {
+  background: var(--bg-cta) !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-bottom: 40px;
+}
+
+/* Bloc central */
+.welcome-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 0 32px;
+}
+
+/* Logo */
+.welcome-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: -1px;
+  color: var(--text-cta);
+}
+
+.welcome-star {
+  width: 24px;
+  height: 24px;
+}
+
+/* Tagline */
+.welcome-tagline {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  color: var(--text-cta);
+  text-align: center;
+  line-height: 1.3;
+  margin: 0;
+  opacity: 0.9;
+}
+
+/* Emojis déco */
+.welcome-emoji-row {
+  display: flex;
+  gap: 16px;
+  font-size: 26px;
+  margin-top: 12px;
+  opacity: 0.55;
+}
+
+/* Boutons */
+.welcome-ctas {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 0 24px;
+}
+
+.welcome-btn {
+  display: block;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 16px;
+  padding: 16px;
+  font-size: 15px;
+  font-weight: 700;
+  transition: opacity 0.15s;
+}
+
+.welcome-btn:active {
+  opacity: 0.75;
+}
+
+.welcome-btn--primary {
+  background: #ffffff;
+  color: #1A1A1A;
+}
+
+.welcome-btn--secondary {
+  background: rgba(255, 255, 255, 0.12);
+  color: var(--text-cta);
+  border: 1.5px solid rgba(255, 255, 255, 0.2);
+}

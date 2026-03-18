@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <rect width="512" height="512" fill="#FFFFFF"/>
+  <text x="32" y="295" font-family="Inter, Helvetica Neue, Arial, sans-serif" font-weight="700" font-size="148" fill="#1A1A1A">réviz</text>
+  <!-- 4-pointed star at right of text -->
+  <polygon points="420,170 429,198 457,198 435,215 443,243 420,227 397,243 405,215 383,198 411,198" fill="#F59E0B"/>
+</svg>

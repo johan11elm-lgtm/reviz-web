@@ -1,0 +1,114 @@
+/* Header */
+.auth-header {
+  padding: 52px 24px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.auth-back {
+  font-size: 20px;
+  color: var(--text-primary);
+  text-decoration: none;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--bg-subtle);
+  flex-shrink: 0;
+}
+
+.auth-title {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+}
+
+/* Formulaire */
+.auth-content {
+  flex: 1;
+  padding: 8px 24px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  overflow-y: auto;
+}
+
+.auth-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.auth-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.auth-input {
+  background: var(--bg-card);
+  border: 1.5px solid var(--border);
+  border-radius: 14px;
+  padding: 14px 16px;
+  font-size: 15px;
+  outline: none;
+  color: var(--text-primary);
+  transition: border-color 0.15s;
+  font-family: inherit;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.auth-input:focus {
+  border-color: #6366F1;
+}
+
+.auth-input::placeholder {
+  color: var(--text-xlight);
+}
+
+/* Bouton principal */
+.auth-btn {
+  background: #1A1A1A;
+  color: #fff;
+  border: none;
+  border-radius: 16px;
+  padding: 16px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 4px;
+  transition: opacity 0.15s;
+  font-family: inherit;
+}
+
+.auth-btn:active  { opacity: 0.75; }
+.auth-btn:disabled { opacity: 0.5; cursor: default; }
+
+/* Message d'erreur */
+.auth-error {
+  font-size: 13px;
+  color: #EF4444;
+  text-align: center;
+  min-height: 18px;
+  margin: 0;
+}
+
+/* Lien secondaire */
+.auth-link {
+  font-size: 13px;
+  color: var(--text-muted);
+  text-align: center;
+  margin: 0;
+}
+
+.auth-link a {
+  color: #6366F1;
+  font-weight: 600;
+  text-decoration: none;
+}

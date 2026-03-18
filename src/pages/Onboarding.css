@@ -1,0 +1,173 @@
+.onboarding-app {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-app);
+  position: relative;
+  padding: 0 0 40px;
+}
+
+/* ── Bouton Passer ───────────────────────────────────────────────── */
+.onboarding-skip {
+  position: absolute;
+  top: 52px;
+  right: 24px;
+  background: var(--bg-subtle);
+  border: none;
+  border-radius: 20px;
+  padding: 7px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.onboarding-skip:hover { background: var(--bg-hover); }
+
+/* ── Corps de la slide ───────────────────────────────────────────── */
+.onboarding-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 32px 24px;
+  gap: 16px;
+  animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.onboarding-emoji {
+  font-size: 64px;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.onboarding-title {
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.7px;
+  text-align: center;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.onboarding-text {
+  font-size: 15px;
+  color: var(--text-muted);
+  text-align: center;
+  line-height: 1.6;
+  max-width: 300px;
+  margin: 0;
+}
+
+/* ── Feature list (slide 2) ──────────────────────────────────────── */
+.onboarding-features {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  margin-top: 8px;
+}
+
+.onboarding-feature {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.onboarding-feature-icon {
+  font-size: 28px;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-subtle);
+  border-radius: 12px;
+  flex-shrink: 0;
+}
+
+.onboarding-feature-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.onboarding-feature-label {
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+}
+
+.onboarding-feature-desc {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+/* ── Footer ─────────────────────────────────────────────────────── */
+.onboarding-footer {
+  padding: 0 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Dots */
+.onboarding-dots {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+
+.onboarding-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--bg-muted);
+  transition: all 0.2s;
+}
+
+.onboarding-dot.active {
+  width: 20px;
+  border-radius: 3px;
+  background: #1A1A1A;
+}
+
+/* Bouton principal */
+.onboarding-btn {
+  width: 100%;
+  padding: 16px;
+  border-radius: 16px;
+  background: #1A1A1A;
+  color: white;
+  font-size: 15px;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.15s;
+  font-family: inherit;
+}
+.onboarding-btn:active { opacity: 0.8; }
+
+/* Lien secondaire */
+.onboarding-secondary {
+  background: none;
+  border: none;
+  font-size: 13px;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-family: inherit;
+  padding: 4px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
