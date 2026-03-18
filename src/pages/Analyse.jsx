@@ -73,28 +73,6 @@ function buildLessonFromAiData(data) {
 // ─── Formats de révision ─────────────────────────────────────────────
 const formats = [
   {
-    id: 'flashcards',
-    emoji: '🃏',
-    name: 'Flashcards',
-    iconBg: '#EEF2FF',
-    accent: '#6366F1',
-    to: '/flashcards',
-    getCount: l => l.flashcardsCount,
-    unit: 'cartes',
-    desc: 'Révise par répétition espacée',
-  },
-  {
-    id: 'quiz',
-    emoji: '❓',
-    name: 'Quiz',
-    iconBg: '#FFF4E6',
-    accent: '#FF6B00',
-    to: '/quiz',
-    getCount: l => l.quizCount,
-    unit: 'questions',
-    desc: 'Teste tes connaissances',
-  },
-  {
     id: 'resume',
     emoji: '📝',
     name: 'Résumé',
@@ -106,6 +84,17 @@ const formats = [
     desc: "Relis l'essentiel en 2 min",
   },
   {
+    id: 'flashcards',
+    emoji: '🃏',
+    name: 'Flashcards',
+    iconBg: '#EEF2FF',
+    accent: '#6366F1',
+    to: '/flashcards',
+    getCount: l => l.flashcardsCount,
+    unit: 'cartes',
+    desc: 'Révise par répétition espacée',
+  },
+  {
     id: 'mindmap',
     emoji: '🧠',
     name: 'Carte mentale',
@@ -115,6 +104,17 @@ const formats = [
     getCount: () => null,
     unit: null,
     desc: 'Visualise les concepts clés',
+  },
+  {
+    id: 'quiz',
+    emoji: '❓',
+    name: 'Quiz',
+    iconBg: '#FFF4E6',
+    accent: '#FF6B00',
+    to: '/quiz',
+    getCount: l => l.quizCount,
+    unit: 'questions',
+    desc: 'Teste tes connaissances',
   },
 ];
 
