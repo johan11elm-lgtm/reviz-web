@@ -86,6 +86,8 @@ export default function Mindmap() {
 
   const [selectedBranch, setSelectedBranch] = useState(null)
   const [sheetCollapsed, setSheetCollapsed] = useState(false)
+  const [sheetDragY, setSheetDragY]         = useState(0)   // offset pendant le drag
+  const sheetDragStart                      = useRef(null)  // { startY, wasCollapsed }
   const [visitedIds, setVisitedIds]         = useState(() => new Set())
   const [allExplored, setAllExplored]       = useState(false)
   const [showEnd, setShowEnd]               = useState(false)
@@ -199,7 +201,35 @@ export default function Mindmap() {
   function resetView() { setScale(INIT_SCALE); setOffset({ x: 0, y: 0 }) }
   function restartMindmap() {
     setVisitedIds(new Set()); setSelectedBranch(null)
-    setSheetCollapsed(false); setAllExplored(false); setShowEnd(false); resetView()
+    setSheetCollapsed(false); setSheetDragY(0)
+    setAllExplored(false); setShowEnd(false); resetView()
+  }
+
+  // ── Drag poignée ──
+  function onHandlePointerDown(e) {
+    e.stopPropagation()
+    e.currentTarget.setPointerCapture(e.pointerId)
+    sheetDragStart.current = { startY: e.clientY, wasCollapsed: sheetCollapsed }
+  }
+  function onHandlePointerMove(e) {
+    if (!sheetDragStart.current) return
+    e.stopPropagation()
+    const dy = e.clientY - sheetDragStart.current.startY
+    const base = sheetDragStart.current.wasCollapsed ? 0 : 0
+    setSheetDragY(Math.max(-10, dy))
+  }
+  function onHandlePointerUp(e) {
+    if (!sheetDragStart.current) return
+    e.stopPropagation()
+    const dy = e.clientY - sheetDragStart.current.startY
+    // snap : si tiré vers le bas > 60px → collapse, sinon open
+    if (sheetDragStart.current.wasCollapsed) {
+      setSheetCollapsed(dy > -40 ? true : false)
+    } else {
+      setSheetCollapsed(dy > 60)
+    }
+    setSheetDragY(0)
+    sheetDragStart.current = null
   }
 
   const { W, H } = dims
@@ -376,8 +406,17 @@ export default function Mindmap() {
       </div>
 
       {/* ── Bottom sheet ── */}
-      <div className={`detail-sheet${activeBranch ? ' detail-sheet--open' : ''}${sheetCollapsed ? ' detail-sheet--collapsed' : ''}`}>
-        <div className="sheet-handle" onClick={() => activeBranch && setSheetCollapsed(c => !c)} />
+      <div
+        className={`detail-sheet${activeBranch ? ' detail-sheet--open' : ''}${sheetCollapsed ? ' detail-sheet--collapsed' : ''}${sheetDragY !== 0 ? ' detail-sheet--dragging' : ''}`}
+        style={sheetDragY !== 0 ? { transform: `translateY(${sheetCollapsed ? `calc(100% - 28px + ${sheetDragY}px)` : `${Math.max(0, sheetDragY)}px`})` } : {}}
+      >
+        <div
+          className="sheet-handle"
+          onPointerDown={onHandlePointerDown}
+          onPointerMove={onHandlePointerMove}
+          onPointerUp={onHandlePointerUp}
+          onPointerCancel={onHandlePointerUp}
+        />
         {activeBranch && (
           <>
             <div className="detail-header">
