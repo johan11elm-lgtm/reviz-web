@@ -77,8 +77,8 @@
 
 /* Question card */
 @keyframes questionIn {
-  from { opacity: 0; transform: translateY(18px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; transform: translate3d(0, 14px, 0); }
+  to   { opacity: 1; transform: translate3d(0, 0, 0); }
 }
 
 /* Écran de fin */
@@ -104,6 +104,7 @@
   position: absolute;
   top: -10px;
   border-radius: 2px;
+  will-change: transform;
   animation: confettiFall linear forwards;
 }
 

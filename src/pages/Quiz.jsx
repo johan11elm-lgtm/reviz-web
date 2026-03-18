@@ -34,7 +34,7 @@ function getEndContent(score, total) {
 /* ── Confetti ── */
 const CONFETTI_COLORS = ['#FF6B00','#FFB347','#6C63FF','#22C55E','#FF3B7F','#00C07F','#FDE047']
 function Confetti() {
-  const pieces = Array.from({ length: 60 }, (_, i) => ({
+  const pieces = Array.from({ length: 30 }, (_, i) => ({
     id: i,
     left: Math.random() * 100,
     delay: Math.random() * 1.2,
@@ -191,7 +191,7 @@ export default function Quiz() {
               className={getChoiceClass(i)}
               onClick={() => selectAnswer(i)}
               disabled={answered}
-              style={{ animationDelay: `${i * 50}ms` }}
+              style={{ animationDelay: `${i * 25}ms` }}
             >
               <span className="choice-letter">{LETTERS[i]}</span>
               <span className="choice-text">{choice}</span>
