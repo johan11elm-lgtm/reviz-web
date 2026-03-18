@@ -183,6 +183,16 @@ async function _callProxy(endpoint, payload, onProgress) {
   let idToken = null
   try { idToken = await getIdToken() } catch { /* non bloquant */ }
 
+  // Simule la progression pendant l'attente (mode non-streaming)
+  let ticker = null
+  if (onProgress) {
+    const milestones = [200, 600, 1200, 1800, 2400]
+    let i = 0
+    ticker = setInterval(() => {
+      if (i < milestones.length) onProgress(milestones[i++])
+    }, 800)
+  }
+
   let response
   try {
     response = await fetch(endpoint, {
@@ -191,10 +201,12 @@ async function _callProxy(endpoint, payload, onProgress) {
       body: JSON.stringify({ ...payload, idToken }),
     })
   } catch {
+    if (ticker) clearInterval(ticker)
     throw new Error('NETWORK_ERROR')
   }
 
   if (!response.ok) {
+    if (ticker) clearInterval(ticker)
     const body = await response.text().catch(() => '')
     if (response.status === 401) throw new Error('UNAUTHORIZED')
     if (response.status === 429 || body === 'RATE_LIMIT') throw new Error('RATE_LIMIT')
@@ -204,6 +216,7 @@ async function _callProxy(endpoint, payload, onProgress) {
 
   // Le proxy retourne le texte brut (non-streaming)
   const raw = await response.text()
+  if (ticker) clearInterval(ticker)
   if (onProgress) onProgress(raw.length)
   return _parseResult(raw)
 }
