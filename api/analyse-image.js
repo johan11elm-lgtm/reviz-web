@@ -40,7 +40,7 @@ export default async function handler(req) {
     }
   }
 
-  // Appel Anthropic vision en streaming
+  // Appel Anthropic vision (non-streaming)
   let anthropicResp
   try {
     anthropicResp = await fetch('https://api.anthropic.com/v1/messages', {
@@ -53,7 +53,7 @@ export default async function handler(req) {
       body: JSON.stringify({
         model: MODEL,
         max_tokens: 8192,
-        stream: true,
+        stream: false,
         system: SYSTEM_PROMPT,
         messages: [
           {
@@ -78,11 +78,10 @@ export default async function handler(req) {
     return new Response(`API_ERROR_${anthropicResp.status}`, { status: 502 })
   }
 
-  return new Response(anthropicResp.body, {
-    headers: {
-      'Content-Type': 'text/event-stream',
-      'Cache-Control': 'no-cache',
-      'X-Accel-Buffering': 'no',
-    },
+  const result = await anthropicResp.json()
+  const text_content = result.content?.[0]?.text ?? ''
+
+  return new Response(text_content, {
+    headers: { 'Content-Type': 'text/plain; charset=utf-8' },
   })
 }

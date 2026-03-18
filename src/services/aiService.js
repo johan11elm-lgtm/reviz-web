@@ -202,7 +202,10 @@ async function _callProxy(endpoint, payload, onProgress) {
     throw new Error(body || `API_ERROR_${response.status}`)
   }
 
-  return _readStream(response, onProgress)
+  // Le proxy retourne le texte brut (non-streaming)
+  const raw = await response.text()
+  if (onProgress) onProgress(raw.length)
+  return _parseResult(raw)
 }
 
 // -------------------------------------------------------

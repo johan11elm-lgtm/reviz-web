@@ -41,15 +41,11 @@ export default async function handler(req) {
   if (text.length > 15000)
     return new Response('TEXT_TOO_LONG', { status: 400 })
 
-  const controller = new AbortController()
-  const timeout = setTimeout(() => controller.abort(), 25000)
-
-  // Appel Anthropic en streaming
+  // Appel Anthropic (non-streaming pour fiabilité)
   let anthropicResp
   try {
     anthropicResp = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
-      signal: controller.signal,
       headers: {
         'Content-Type': 'application/json',
         'x-api-key': process.env.ANTHROPIC_API_KEY,
@@ -58,16 +54,14 @@ export default async function handler(req) {
       body: JSON.stringify({
         model: MODEL,
         max_tokens: 8192,
-        stream: true,
+        stream: false,
         system: SYSTEM_PROMPT,
         messages: [{ role: 'user', content: `Voici la leçon à analyser :\n\n${text}` }],
       }),
     })
   } catch {
-    clearTimeout(timeout)
     return new Response('NETWORK_ERROR', { status: 502 })
   }
-  clearTimeout(timeout)
 
   if (!anthropicResp.ok) {
     if (anthropicResp.status === 401 || anthropicResp.status === 403)
@@ -77,12 +71,10 @@ export default async function handler(req) {
     return new Response(`API_ERROR_${anthropicResp.status}`, { status: 502 })
   }
 
-  // Pipe le stream Anthropic directement vers le client
-  return new Response(anthropicResp.body, {
-    headers: {
-      'Content-Type': 'text/event-stream',
-      'Cache-Control': 'no-cache',
-      'X-Accel-Buffering': 'no',
-    },
+  const result = await anthropicResp.json()
+  const text_content = result.content?.[0]?.text ?? ''
+
+  return new Response(text_content, {
+    headers: { 'Content-Type': 'text/plain; charset=utf-8' },
   })
 }
