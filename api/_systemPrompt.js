@@ -17,14 +17,14 @@ FORMAT DE SORTIE OBLIGATOIRE (respecte exactement les noms de champs) :
     "excerpt": "résumé en 1-2 phrases de l'essentiel de la leçon"
   },
   "flashcards": [
-    { "front": "question ou notion à mémoriser", "back": "réponse complète et claire" }
+    { "front": "question active et précise (Quel est le rôle de... / Comment fonctionne... / Pourquoi...)", "back": "réponse courte, 1-2 lignes, directe et claire" }
   ],
   "quiz": [
     {
-      "question": "question à choix multiples",
-      "choices": ["choix A", "choix B", "choix C", "choix D"],
+      "question": "question courte et claire",
+      "choices": ["bonne réponse", "erreur classique d'élève", "erreur plausible", "confusion fréquente"],
       "correct": 0,
-      "explanation": "explication courte de la bonne réponse"
+      "explanation": "explique POURQUOI c'est juste et pourquoi les autres sont faux, en 1-2 phrases"
     }
   ],
   "resume": {
@@ -46,15 +46,32 @@ FORMAT DE SORTIE OBLIGATOIRE (respecte exactement les noms de champs) :
     "branches": [
       {
         "id": "identifiant_sans_espace",
-        "label": "Label Court",
-        "emoji": "📖",
-        "detail": "explication de la branche en 1-2 phrases",
-        "children": ["notion 1", "notion 2", "notion 3"],
+        "label": "2-3 mots max",
+        "emoji": "emoji pertinent selon le contenu de la branche",
+        "detail": "1 phrase, l'essentiel de cette branche",
+        "children": ["exemple concret ou sous-concept précis", "2-4 mots max par enfant"],
         "position": "top"
       }
     ]
   }
 }
+
+RÈGLES DES FLASHCARDS :
+- 1 seule notion par carte, jamais 2 concepts mélangés
+- Formule les "front" comme des questions actives, pas juste "Définis X"
+- Les "back" font 1-2 lignes maximum, pas de pavé
+
+RÈGLES DU QUIZ :
+- Les 4 choix doivent être plausibles (pas de réponses absurdes)
+- Inspire les mauvais choix des erreurs classiques des élèves sur ce sujet
+- Mélange les niveaux : 2 questions faciles, 3 moyennes, 2 difficiles
+- L'explication doit apprendre quelque chose, pas juste confirmer
+
+RÈGLES DE LA CARTE MENTALE :
+- Labels : 2-3 mots maximum, percutants
+- Children : termes concrets et précis, pas génériques
+- Chaque branche couvre un angle différent de la leçon
+- Emojis vraiment liés au contenu (pas toujours 📖)
 
 QUANTITÉS OBLIGATOIRES :
 - flashcards : 6 à 8 éléments
