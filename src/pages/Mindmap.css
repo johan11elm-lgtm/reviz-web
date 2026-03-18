@@ -267,6 +267,7 @@
 }
 
 .detail-sheet--open { transform: translateY(0); }
+.detail-sheet--collapsed { transform: translateY(calc(100% - 28px)); }
 
 /* Poignée */
 .sheet-handle {

@@ -85,6 +85,7 @@ export default function Mindmap() {
   const lastPinch    = useRef(null)
 
   const [selectedBranch, setSelectedBranch] = useState(null)
+  const [sheetCollapsed, setSheetCollapsed] = useState(false)
   const [visitedIds, setVisitedIds]         = useState(() => new Set())
   const [allExplored, setAllExplored]       = useState(false)
   const [showEnd, setShowEnd]               = useState(false)
@@ -126,11 +127,12 @@ export default function Mindmap() {
   }, [])
 
   function handleSelectBranch(id) {
-    if (selectedBranch === id) { setSelectedBranch(null); setOffset({ x: 0, y: 0 }); return }
+    if (selectedBranch === id) { setSheetCollapsed(c => !c); return }
     const branch = mindmapData.branches.find(b => b.id === id)
     const next = new Set([...visitedIds, id])
     setVisitedIds(next)
     setSelectedBranch(id)
+    setSheetCollapsed(false)
     if (next.size === mindmapData.branches.length) setAllExplored(true)
     if (branch?.position?.includes('bottom')) {
       const pos = getPositions(W, H)[branch.position]
@@ -197,7 +199,7 @@ export default function Mindmap() {
   function resetView() { setScale(INIT_SCALE); setOffset({ x: 0, y: 0 }) }
   function restartMindmap() {
     setVisitedIds(new Set()); setSelectedBranch(null)
-    setAllExplored(false); setShowEnd(false); resetView()
+    setSheetCollapsed(false); setAllExplored(false); setShowEnd(false); resetView()
   }
 
   const { W, H } = dims
@@ -374,8 +376,8 @@ export default function Mindmap() {
       </div>
 
       {/* ── Bottom sheet ── */}
-      <div className={`detail-sheet${activeBranch ? ' detail-sheet--open' : ''}`}>
-        <div className="sheet-handle" onClick={() => setSelectedBranch(null)} />
+      <div className={`detail-sheet${activeBranch ? ' detail-sheet--open' : ''}${sheetCollapsed ? ' detail-sheet--collapsed' : ''}`}>
+        <div className="sheet-handle" onClick={() => activeBranch && setSheetCollapsed(c => !c)} />
         {activeBranch && (
           <>
             <div className="detail-header">
