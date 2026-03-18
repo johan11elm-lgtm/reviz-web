@@ -33,23 +33,58 @@ function computeLevel(lessons) {
   return { level, xpInLvl, fillPct };
 }
 
-function computeBadges(lessons, revisions, streak) {
+function computeBadges(lessons, revisions, streak, level) {
   const types = new Set(revisions.map(r => r.type));
   const allFormats = ['flashcards', 'quiz', 'resume', 'mindmap'].every(t => types.has(t));
+
+  // Flashcards totales générées
+  const totalFlashcards = lessons.reduce((s, l) => s + (l.flashcardsCount || 0), 0);
+
+  // Max révisions en un seul jour
+  const revsByDay = {};
+  revisions.forEach(r => {
+    const day = new Date(r.revisedAt).toLocaleDateString('fr-FR');
+    revsByDay[day] = (revsByDay[day] || 0) + 1;
+  });
+  const maxRevsInDay = Object.values(revsByDay).length ? Math.max(...Object.values(revsByDay)) : 0;
+
+  // Max révisions d'une même leçon
+  const revsByLesson = {};
+  revisions.forEach(r => {
+    if (r.lessonId) revsByLesson[r.lessonId] = (revsByLesson[r.lessonId] || 0) + 1;
+  });
+  const maxRevsPerLesson = Object.values(revsByLesson).length ? Math.max(...Object.values(revsByLesson)) : 0;
+
+  // 20+ révisions de chaque format
+  const countByType = { flashcards: 0, quiz: 0, resume: 0, mindmap: 0 };
+  revisions.forEach(r => { if (r.type in countByType) countByType[r.type]++; });
+  const isMaitre = Object.values(countByType).every(c => c >= 20);
+
   return [
-    { emoji: '🚀', label: 'Lanceur',  locked: lessons.length < 1 },
-    { emoji: '⚡', label: 'Rapide',   locked: revisions.length < 1 },
-    { emoji: '🎯', label: 'Précis',   locked: !allFormats },
-    { emoji: '🔥', label: '7 jours',  locked: streak < 7 },
-    { emoji: '🧠', label: 'Expert',   locked: lessons.length < 10 },
-    { emoji: '🏆', label: 'Champion', locked: revisions.length < 50 },
-    { emoji: '💎', label: 'Diamant',  locked: lessons.length < 25 },
-    { emoji: '🌟', label: 'Légende',  locked: streak < 30 },
+    { emoji: '🚀', label: 'Lanceur',      locked: lessons.length < 1 },
+    { emoji: '⭐', label: 'Curieux',      locked: types.size < 3 },
+    { emoji: '⚡', label: 'Rapide',       locked: revisions.length < 1 },
+    { emoji: '🎓', label: 'Étudiant',     locked: lessons.length < 5 },
+    { emoji: '🔄', label: 'Régulier',     locked: streak < 3 },
+    { emoji: '🔬', label: 'Chercheur',    locked: totalFlashcards < 50 },
+    { emoji: '🎯', label: 'Précis',       locked: !allFormats },
+    { emoji: '🔥', label: '7 jours',      locked: streak < 7 },
+    { emoji: '📅', label: 'Fidèle',       locked: streak < 14 },
+    { emoji: '☕', label: 'Acharné',      locked: maxRevsInDay < 10 },
+    { emoji: '🧠', label: 'Expert',       locked: lessons.length < 10 },
+    { emoji: '💪', label: 'Approfondi',   locked: maxRevsPerLesson < 5 },
+    { emoji: '⚙️', label: 'Maître',       locked: !isMaitre },
+    { emoji: '🏆', label: 'Champion',     locked: revisions.length < 50 },
+    { emoji: '📚', label: 'Bibliothèque', locked: lessons.length < 50 },
+    { emoji: '👑', label: 'Niveau 10',    locked: level < 10 },
+    { emoji: '💎', label: 'Diamant',      locked: lessons.length < 25 },
+    { emoji: '🌟', label: 'Légende',      locked: streak < 30 },
   ];
 }
 
 export default function Profile() {
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [showAllBadges, setShowAllBadges] = useState(false);
   const navigate = useNavigate();
 
   const { currentUser, getUserClasse, logout, updateDisplayName, updateUserPassword } = useAuth();
@@ -68,7 +103,7 @@ export default function Profile() {
 
   const streak = computeStreak(allLessons);
   const { level, xpInLvl, fillPct } = computeLevel(allLessons);
-  const badges = computeBadges(allLessons, allRevisions, streak);
+  const badges = computeBadges(allLessons, allRevisions, streak, level);
 
   const createdAt = currentUser?.metadata?.creationTime
     ? new Date(currentUser.metadata.creationTime)
@@ -191,7 +226,7 @@ export default function Profile() {
         </div>
 
         {/* Stats */}
-        <div className="stats-grid">
+        <div className="profile-stats-grid">
           <div className="stat-card">
             <span className="stat-icon">🔥</span>
             <span className="stat-value">{streak}</span>
@@ -202,18 +237,31 @@ export default function Profile() {
             <span className="stat-value">{allLessons.length}</span>
             <span className="stat-label">Leçons scannées</span>
           </div>
+          <div className="stat-card">
+            <span className="stat-icon">⚡</span>
+            <span className="stat-value">{allRevisions.length}</span>
+            <span className="stat-label">Révisions faites</span>
+          </div>
         </div>
 
         {/* Badges */}
-        <div className="section-title">Badges</div>
+        <div className="badges-header">
+          <div className="section-title" style={{ margin: 0 }}>Badges</div>
+          <span className="badges-count">{badges.filter(b => !b.locked).length}/{badges.length}</span>
+        </div>
         <div className="badges-grid">
-          {badges.map((b, i) => (
+          {(showAllBadges ? badges : badges.slice(0, 8)).map((b, i) => (
             <div key={i} className={`badge-item${b.locked ? ' locked' : ''}`}>
               <span className="badge-emoji">{b.emoji}</span>
               <span className="badge-label">{b.label}</span>
             </div>
           ))}
         </div>
+        {badges.length > 8 && (
+          <button className="badges-more-btn" onClick={() => setShowAllBadges(v => !v)}>
+            {showAllBadges ? 'Voir moins' : `Voir les ${badges.length - 8} autres`}
+          </button>
+        )}
 
         {/* Settings */}
         <div className="section-title">Compte</div>

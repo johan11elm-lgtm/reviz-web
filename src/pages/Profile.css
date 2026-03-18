@@ -66,20 +66,21 @@
   width: 80px;
   height: 80px;
   border-radius: 50%;
-  background: var(--bg-avatar);
+  background: var(--bg-icon-orange);
+  border: 3px solid #FF6B00;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 32px;
   font-weight: 700;
-  color: var(--text-avatar);
+  color: #FF6B00;
 }
 
 .avatar-level {
   position: absolute;
   bottom: -2px;
   right: -2px;
-  background: #6366F1;
+  background: #FF6B00;
   color: white;
   font-size: 10px;
   font-weight: 700;
@@ -136,9 +137,9 @@
 
 .xp-fill {
   height: 100%;
-  width: 65%;
-  background: linear-gradient(90deg, #818CF8, #6366F1);
+  background: linear-gradient(90deg, #FF9500, #FF6B00);
   border-radius: 3px;
+  transition: width 0.6s ease;
 }
 
 .xp-sub {
@@ -148,7 +149,7 @@
 }
 
 /* Stats grid */
-.stats-grid {
+.profile-stats-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 8px;
@@ -192,11 +193,40 @@
 }
 
 /* Badges */
+.badges-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.badges-count {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.badges-more-btn {
+  width: 100%;
+  margin-bottom: 20px;
+  padding: 11px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.badges-more-btn:active { background: var(--bg-hover); }
+
 .badges-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 8px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 .badge-item {
@@ -281,8 +311,8 @@
 .profile-classe {
   font-size: 13px;
   font-weight: 600;
-  color: #6366F1;
-  background: #EEF2FF;
+  color: #FF6B00;
+  background: var(--bg-icon-orange);
   padding: 3px 10px;
   border-radius: 20px;
   margin-bottom: 4px;
@@ -369,14 +399,14 @@
   transition: border-color 0.15s;
 }
 
-.sheet-input:focus { border-color: #6366F1; }
+.sheet-input:focus { border-color: #FF6B00; }
 
 .sheet-save-btn {
   margin-top: 24px;
   width: 100%;
   padding: 15px;
   border-radius: 14px;
-  background: #1A1A1A;
+  background: #FF6B00;
   color: white;
   font-size: 15px;
   font-weight: 600;
@@ -414,8 +444,8 @@
 }
 
 .classe-btn.active {
-  background: #6366F1;
-  border-color: #6366F1;
+  background: #FF6B00;
+  border-color: #FF6B00;
   color: white;
 }
 
@@ -455,7 +485,7 @@
   flex-shrink: 0;
 }
 
-.toggle-btn.on { background: #6366F1; }
+.toggle-btn.on { background: #FF6B00; }
 
 .toggle-knob {
   position: absolute;

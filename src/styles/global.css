@@ -41,6 +41,7 @@
   --bg-icon-orange: #FFF4E6;
   --bg-icon-indigo: #EEF2FF;
   --bg-icon-green:  #F0FDF4;
+  --bg-danger:      #FEF2F2;
 }
 
 /* ─── Variables Dark ───────────────────────────────────────────── */
@@ -83,6 +84,7 @@
   --bg-icon-orange: #2D1F0A;
   --bg-icon-indigo: #1C1B3A;
   --bg-icon-green:  #0D2818;
+  --bg-danger:      #2D1A1A;
 }
 
 /* ─── Reset ────────────────────────────────────────────────────── */
