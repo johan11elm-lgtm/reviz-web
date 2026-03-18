@@ -23,7 +23,7 @@ FORMAT DE SORTIE OBLIGATOIRE (respecte exactement les noms de champs) :
     {
       "question": "question courte et claire",
       "choices": ["bonne réponse", "erreur classique d'élève", "erreur plausible", "confusion fréquente"],
-      "correct": 0,
+      "correct": "INDEX ALÉATOIRE (0, 1, 2 ou 3) — varie à chaque question, NE MET PAS toujours 0",
       "explanation": "explique POURQUOI c'est juste et pourquoi les autres sont faux, en 1-2 phrases"
     }
   ],
@@ -75,7 +75,7 @@ RÈGLES DE LA CARTE MENTALE :
 
 QUANTITÉS OBLIGATOIRES :
 - flashcards : 6 à 8 éléments
-- quiz : 5 à 8 questions, exactement 4 choices par question, correct est l'index (0, 1, 2 ou 3)
+- quiz : 5 à 8 questions, exactement 4 choices par question, correct est l'index (0, 1, 2 ou 3) — distribue les bonnes réponses sur tous les indices, pas toujours 0
 - resume.intro : 1 phrase maximum
 - resume.keyPoints : 3 à 5 points, chacun en 1 ligne max
 - resume.sections : 2 à 3 sections, chaque "content" fait 2-3 phrases maximum
