@@ -162,6 +162,12 @@ input, textarea {
   background: var(--bg-card);
   border-top: 1px solid var(--border);
   flex-shrink: 0;
+  transform: translateY(0);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.bottom-nav--hidden {
+  transform: translateY(100%);
 }
 
 .nav-item {
