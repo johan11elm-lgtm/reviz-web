@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import './Welcome.css';
 
@@ -16,38 +17,144 @@ const LogoStar = () => (
   </svg>
 );
 
+function useReveal() {
+  useEffect(() => {
+    const els = document.querySelectorAll('[data-reveal]');
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add('revealed');
+            observer.unobserve(e.target);
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+    els.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
+}
+
+const STEPS = [
+  { icon: '📸', title: 'Scanne', desc: 'Photo ou copie-colle ta leçon directement dans l\'app.' },
+  { icon: '🤖', title: 'L\'IA analyse', desc: 'Flashcards, quiz, résumé et carte mentale générés en quelques secondes.' },
+  { icon: '🏆', title: 'Révise', desc: 'Retiens vraiment. Progresse. Bats tes records.' },
+];
+
+const OUTPUTS = [
+  { icon: '🃏', label: 'Flashcards', color: '#FF6B00' },
+  { icon: '❓', label: 'Quiz', color: '#6C63FF' },
+  { icon: '📄', label: 'Résumé', color: '#00C07F' },
+  { icon: '🗺️', label: 'Carte mentale', color: '#FF3B7F' },
+];
+
 export default function Welcome() {
+  useReveal();
+
   return (
-    <div className="app welcome-app">
-      <div className="welcome-body">
-        {/* Logo */}
-        <div className="welcome-logo">
-          <LogoStar />
-          <span>réviz</span>
-        </div>
+    <div className="wlc-root">
 
-        {/* Tagline */}
-        <p className="welcome-tagline">Révise mieux.<br />Retiens plus.</p>
-
-        {/* Illustration / déco */}
-        <div className="welcome-emoji-row">
-          <span>📐</span>
-          <span>🧬</span>
-          <span>📖</span>
-          <span>⚛️</span>
-          <span>🌍</span>
-        </div>
+      {/* ── Fond aurora ── */}
+      <div className="wlc-aurora" aria-hidden="true">
+        <div className="wlc-orb wlc-orb--1" />
+        <div className="wlc-orb wlc-orb--2" />
+        <div className="wlc-orb wlc-orb--3" />
       </div>
 
-      {/* CTAs */}
-      <div className="welcome-ctas">
-        <Link to="/inscription" className="welcome-btn welcome-btn--primary">
-          Créer un compte
-        </Link>
-        <Link to="/connexion" className="welcome-btn welcome-btn--secondary">
-          Se connecter
-        </Link>
-      </div>
+      {/* ── Section 1 : Hero ── */}
+      <section className="wlc-section wlc-hero">
+        <div className="wlc-hero-inner">
+          <div className="wlc-logo" data-reveal>
+            <LogoStar />
+            <span>réviz</span>
+          </div>
+
+          <h1 className="wlc-headline" data-reveal>
+            Révise mieux.<br />Retiens plus.
+          </h1>
+
+          <p className="wlc-sub" data-reveal>
+            L'IA transforme tes leçons en flashcards,<br />quiz et résumés en quelques secondes.
+          </p>
+
+          <div className="wlc-emoji-row" data-reveal>
+            <span>📐</span><span>🧬</span><span>📖</span><span>⚛️</span><span>🌍</span>
+          </div>
+        </div>
+
+        <div className="wlc-scroll-hint" data-reveal>
+          <span>Découvrir</span>
+          <div className="wlc-scroll-arrow" />
+        </div>
+      </section>
+
+      {/* ── Section 2 : Comment ça marche ── */}
+      <section className="wlc-section wlc-how">
+        <h2 className="wlc-section-title" data-reveal>Comment ça marche ?</h2>
+
+        <div className="wlc-steps">
+          {STEPS.map((s, i) => (
+            <div
+              key={i}
+              className="wlc-step"
+              data-reveal
+              style={{ transitionDelay: `${i * 100}ms` }}
+            >
+              <div className="wlc-step-icon">{s.icon}</div>
+              <div className="wlc-step-line" />
+              <div className="wlc-step-content">
+                <span className="wlc-step-title">{s.title}</span>
+                <span className="wlc-step-desc">{s.desc}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ── Section 3 : Ce que tu obtiens ── */}
+      <section className="wlc-section wlc-outputs">
+        <h2 className="wlc-section-title" data-reveal>Tout ce qu'il te faut</h2>
+        <p className="wlc-section-sub" data-reveal>4 formats générés automatiquement</p>
+
+        <div className="wlc-output-grid">
+          {OUTPUTS.map((o, i) => (
+            <div
+              key={i}
+              className="wlc-output-card"
+              data-reveal
+              style={{ transitionDelay: `${i * 80}ms` }}
+            >
+              <div className="wlc-output-icon" style={{ background: o.color + '22', color: o.color }}>
+                {o.icon}
+              </div>
+              <span className="wlc-output-label">{o.label}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ── Section 4 : CTA ── */}
+      <section className="wlc-section wlc-cta-section">
+        <div className="wlc-cta-box" data-reveal>
+          <div className="wlc-cta-logo">
+            <LogoStar />
+            <span>réviz</span>
+          </div>
+          <h2 className="wlc-cta-title">Prêt à réviser autrement ?</h2>
+          <p className="wlc-cta-sub">Gratuit pour commencer. Aucune carte bancaire.</p>
+
+          <div className="wlc-cta-btns">
+            <Link to="/inscription" className="wlc-btn wlc-btn--primary">
+              Créer un compte
+            </Link>
+            <Link to="/connexion" className="wlc-btn wlc-btn--secondary">
+              Se connecter
+            </Link>
+          </div>
+        </div>
+      </section>
+
     </div>
   );
 }
