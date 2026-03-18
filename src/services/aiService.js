@@ -149,8 +149,17 @@ async function _readStream(response, onProgress) {
 function _parseResult(raw) {
   let parsed
   try {
-    const cleaned = raw.replace(/^```json\s*/i, '').replace(/```\s*$/, '').trim()
-    parsed = JSON.parse(cleaned)
+    // 1. Essaie le JSON brut
+    let cleaned = raw.replace(/^```json\s*/i, '').replace(/```\s*$/, '').trim()
+    try {
+      parsed = JSON.parse(cleaned)
+    } catch {
+      // 2. Extrait le premier objet JSON trouvé dans la réponse
+      const start = cleaned.indexOf('{')
+      const end   = cleaned.lastIndexOf('}')
+      if (start === -1 || end === -1) throw new Error('no json')
+      parsed = JSON.parse(cleaned.slice(start, end + 1))
+    }
   } catch {
     throw new Error('INVALID_JSON')
   }
