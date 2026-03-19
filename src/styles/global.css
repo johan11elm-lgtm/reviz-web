@@ -149,9 +149,11 @@ input, textarea {
   }
   .app {
     width: 100%;
-    min-height: 100dvh;
+    height: 100dvh;
+    min-height: unset;
     border-radius: 0;
     box-shadow: none;
+    overflow: hidden;
   }
 
   /* Nav fixée en bas du viewport sur mobile */
