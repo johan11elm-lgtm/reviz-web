@@ -163,24 +163,11 @@ input, textarea {
     left: 0;
     right: 0;
     z-index: 200;
-    padding-bottom: env(safe-area-inset-bottom, 0px);
   }
 
-  /* Padding pour ne pas cacher le contenu derrière la nav + home indicator */
-  /* min-height: 0 est indispensable pour que overflow-y: auto fonctionne dans un flex container */
+  /* Padding pour ne pas cacher le contenu derrière la nav */
   .content, .pg-content {
-    padding-bottom: calc(80px + env(safe-area-inset-bottom, 0px));
-    min-height: 0;
-  }
-
-  /* Safe area : padding-top dynamique pour tous les headers de page */
-  .header, .auth-header, .pg-header {
-    padding-top: calc(env(safe-area-inset-top, 20px) + 12px);
-  }
-
-  /* Drawer : même traitement */
-  .drawer {
-    padding-top: calc(env(safe-area-inset-top, 20px) + 16px);
+    padding-bottom: 80px;
   }
 }
 
