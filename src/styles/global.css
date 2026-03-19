@@ -140,25 +140,22 @@ input, textarea {
 @media (max-width: 430px) {
   html, body, #root {
     width: 100%;
-    overflow-x: hidden;
+    height: 100%;
+    overflow: hidden;
   }
   body {
     display: block;
     padding: 0;
     background: var(--bg-app);
-    /* Le body scrolle — approche la plus fiable sur iOS Safari */
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
   }
   .app {
     width: 100%;
-    min-height: 100dvh;
-    min-height: 100vh; /* fallback */
-    min-height: 100dvh;
+    height: 100vh;     /* fallback iOS < 15.4 */
+    height: 100dvh;    /* dynamic viewport (iOS 15.4+) */
+    min-height: unset;
     border-radius: 0;
     box-shadow: none;
-    /* Pas d'overflow hidden ni de hauteur fixe : on laisse le body gérer le scroll */
-    overflow-x: hidden;
+    overflow: hidden;
   }
 
   /* Nav fixée en bas du viewport sur mobile */
@@ -171,9 +168,14 @@ input, textarea {
     padding-bottom: env(safe-area-inset-bottom, 0px);
   }
 
-  /* Padding pour ne pas cacher le contenu derrière la nav fixée */
-  .content, .pg-content {
+  /* Padding pour ne pas cacher le contenu derrière la nav + home indicator */
+  /* .app .content = spécificité plus haute pour écraser les padding des pages individuelles */
+  /* min-height: 0 est indispensable pour que overflow-y: auto fonctionne dans un flex container */
+  .app .content, .app .pg-content {
+    overflow-y: scroll;                /* scroll (pas auto) = plus fiable sur iOS Safari */
     padding-bottom: calc(100px + env(safe-area-inset-bottom, 34px));
+    min-height: 0;
+    -webkit-overflow-scrolling: touch;
   }
 
   /* Safe area : padding-top dynamique pour tous les headers de page */
