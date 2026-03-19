@@ -30,7 +30,7 @@ export default function Connexion() {
     setLoading(true);
     try {
       await login(email, password);
-      navigate('/');
+      navigate('/', { replace: true });
     } catch (err) {
       setError(firebaseErrorFr(err.code));
     } finally {
@@ -43,7 +43,7 @@ export default function Connexion() {
     setLoading(true);
     try {
       await loginWithGoogle();
-      navigate('/');
+      navigate('/', { replace: true });
     } catch (err) {
       if (err.code !== 'auth/popup-closed-by-user') setError('Connexion Google impossible. Réessaie.');
     } finally {

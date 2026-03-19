@@ -27,9 +27,9 @@ export default function VerifyEmail() {
     try {
       await auth.currentUser?.reload();
       if (auth.currentUser?.emailVerified) {
-        navigate('/onboarding');
+        navigate('/onboarding', { replace: true });
       } else {
-        navigate('/onboarding'); // on laisse passer de toute façon
+        navigate('/onboarding', { replace: true }); // on laisse passer de toute façon
       }
     } finally {
       setChecking(false);

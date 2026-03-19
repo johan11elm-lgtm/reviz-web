@@ -43,7 +43,7 @@ export default function Inscription() {
     setLoading(true);
     try {
       await signup(prenom.trim(), email, password, classe.trim());
-      navigate('/verify-email');
+      navigate('/verify-email', { replace: true });
     } catch (err) {
       setError(firebaseErrorFr(err.code));
     } finally {

@@ -88,7 +88,7 @@ export default function Onboarding() {
 
   function handleSkip() {
     markOnboarded();
-    navigate('/');
+    navigate('/', { replace: true });
   }
 
   const slide = SLIDES[step];
