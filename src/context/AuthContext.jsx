@@ -14,6 +14,8 @@ import {
   EmailAuthProvider,
   sendPasswordResetEmail,
   sendEmailVerification,
+  GoogleAuthProvider,
+  signInWithPopup,
 } from 'firebase/auth';
 import { auth } from '../services/firebaseConfig';
 import { setActiveUser } from '../services/historyService';
@@ -51,6 +53,13 @@ export function AuthProvider({ children }) {
   // --- Connexion ---
   function login(email, password) {
     return signInWithEmailAndPassword(auth, email, password);
+  }
+
+  // --- Connexion Google ---
+  async function loginWithGoogle() {
+    const provider = new GoogleAuthProvider();
+    const { user } = await signInWithPopup(auth, provider);
+    return user;
   }
 
   // --- Déconnexion ---
@@ -107,6 +116,7 @@ export function AuthProvider({ children }) {
     loading,
     signup,
     login,
+    loginWithGoogle,
     logout,
     resetPassword,
     getUserClasse,

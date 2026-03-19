@@ -65,7 +65,7 @@
 }
 
 .auth-input:focus {
-  border-color: #6366F1;
+  border-color: #FF6B00;
 }
 
 .auth-input::placeholder {
@@ -77,7 +77,7 @@
   background: none;
   border: none;
   font-size: 13px;
-  color: #6366F1;
+  color: #FF6B00;
   font-weight: 600;
   cursor: pointer;
   padding: 0;
@@ -128,7 +128,45 @@
 }
 
 .auth-link a {
-  color: #6366F1;
+  color: #FF6B00;
   font-weight: 600;
   text-decoration: none;
 }
+
+/* Séparateur "ou" */
+.auth-divider {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--text-muted);
+  font-size: 12px;
+  font-weight: 500;
+}
+.auth-divider::before,
+.auth-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+/* Bouton Google */
+.auth-google-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 14px;
+  background: var(--bg-card);
+  border: 1.5px solid var(--border);
+  border-radius: 16px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-primary);
+  cursor: pointer;
+  font-family: inherit;
+  transition: border-color 0.15s, background 0.15s;
+}
+.auth-google-btn:hover { border-color: var(--border-hover); background: var(--bg-hover); }
+.auth-google-btn:disabled { opacity: 0.5; cursor: default; }
