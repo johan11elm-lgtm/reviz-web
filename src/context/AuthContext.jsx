@@ -16,6 +16,8 @@ import {
   sendEmailVerification,
   GoogleAuthProvider,
   signInWithPopup,
+  signInWithRedirect,
+  getRedirectResult,
 } from 'firebase/auth';
 import { auth } from '../services/firebaseConfig';
 import { setActiveUser } from '../services/historyService';
@@ -58,8 +60,14 @@ export function AuthProvider({ children }) {
   // --- Connexion Google ---
   async function loginWithGoogle() {
     const provider = new GoogleAuthProvider();
-    const { user } = await signInWithPopup(auth, provider);
-    return user;
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    if (isMobile) {
+      await signInWithRedirect(auth, provider);
+      // La page va se recharger — le résultat est capturé dans le useEffect
+    } else {
+      const { user } = await signInWithPopup(auth, provider);
+      return user;
+    }
   }
 
   // --- Déconnexion ---
@@ -101,6 +109,9 @@ export function AuthProvider({ children }) {
 
   // --- Écoute l'état de connexion Firebase ---
   useEffect(() => {
+    // Récupérer le résultat d'un redirect Google (mobile)
+    getRedirectResult(auth).catch(() => {});
+
     const unsub = onAuthStateChanged(auth, user => {
       setActiveUser(user?.uid ?? null);     // historique lié à l'UID
       setRevisionUser(user?.uid ?? null);   // révisions liées à l'UID
