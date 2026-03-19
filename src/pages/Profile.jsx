@@ -236,23 +236,27 @@ export default function Profile() {
 
         {/* Compte */}
         <div className="section-title">Compte</div>
-        <div className="settings-list">
-          <div className="settings-item" onClick={() => openSheet('profil')}>
-            <div className="settings-left"><div className="settings-icon">👤</div><span className="settings-label">Modifier le profil</span></div>
-            <span className="settings-chevron">›</span>
-          </div>
-          <div className="settings-item" onClick={() => openSheet('notifications')}>
-            <div className="settings-left"><div className="settings-icon">🔔</div><span className="settings-label">Notifications</span></div>
-            <span className="settings-chevron">›</span>
-          </div>
-          <div className="settings-item" onClick={() => openSheet('confidentialite')}>
-            <div className="settings-left"><div className="settings-icon">🔒</div><span className="settings-label">Confidentialité</span></div>
-            <span className="settings-chevron">›</span>
-          </div>
-          <div className="settings-item danger" onClick={handleLogout}>
-            <div className="settings-left"><div className="settings-icon">🚪</div><span className="settings-label">Se déconnecter</span></div>
-            <span className="settings-chevron">›</span>
-          </div>
+        <div className="acct-list">
+          <button className="acct-btn" onClick={() => openSheet('profil')}>
+            <span className="acct-icon">👤</span>
+            <span className="acct-label">Modifier le profil</span>
+            <span className="acct-arrow">›</span>
+          </button>
+          <button className="acct-btn" onClick={() => openSheet('notifications')}>
+            <span className="acct-icon">🔔</span>
+            <span className="acct-label">Notifications</span>
+            <span className="acct-arrow">›</span>
+          </button>
+          <button className="acct-btn" onClick={() => openSheet('confidentialite')}>
+            <span className="acct-icon">🔒</span>
+            <span className="acct-label">Confidentialité</span>
+            <span className="acct-arrow">›</span>
+          </button>
+          <button className="acct-btn acct-btn--danger" onClick={handleLogout}>
+            <span className="acct-icon">🚪</span>
+            <span className="acct-label">Se déconnecter</span>
+            <span className="acct-arrow">›</span>
+          </button>
         </div>
 
       </div>
