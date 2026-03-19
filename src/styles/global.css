@@ -150,7 +150,8 @@ input, textarea {
   }
   .app {
     width: 100%;
-    height: 100dvh;
+    height: 100vh;     /* fallback iOS < 15.4 */
+    height: 100dvh;    /* dynamic viewport (iOS 15.4+) */
     min-height: unset;
     border-radius: 0;
     box-shadow: none;
@@ -171,6 +172,7 @@ input, textarea {
   /* .app .content = spécificité plus haute pour écraser les padding des pages individuelles */
   /* min-height: 0 est indispensable pour que overflow-y: auto fonctionne dans un flex container */
   .app .content, .app .pg-content {
+    overflow-y: scroll;                /* scroll (pas auto) = plus fiable sur iOS Safari */
     padding-bottom: calc(100px + env(safe-area-inset-bottom, 34px));
     min-height: 0;
     -webkit-overflow-scrolling: touch;
