@@ -101,14 +101,14 @@ export default function Cours() {
   return (
     <div className="app">
       {/* Header */}
-      <div className="header">
-        <div className="header-left">
-          <span className="header-title">Mes cours</span>
+      <div className="cours-header">
+        <div className="cours-header-left">
+          <span className="cours-header-title">Mes cours</span>
           {allLessons.length > 0 && (
-            <span className="header-sub">{totalVisible} leçon{totalVisible > 1 ? 's' : ''}</span>
+            <span className="cours-header-sub">{totalVisible} leçon{totalVisible > 1 ? 's' : ''}</span>
           )}
         </div>
-        <div className="header-avatar" onClick={() => setDrawerOpen(true)}>{initiale}</div>
+        <div className="cours-header-avatar" onClick={() => setDrawerOpen(true)}>{initiale}</div>
       </div>
 
       {/* Search */}

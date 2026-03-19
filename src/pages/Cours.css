@@ -1,30 +1,30 @@
 /* Header */
-.header {
+.cours-header {
   padding: 52px 24px 12px;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.header-left {
+.cours-header-left {
   display: flex;
   flex-direction: column;
   gap: 2px;
 }
 
-.header-title {
+.cours-header-title {
   font-size: 26px;
   font-weight: 700;
   letter-spacing: -0.5px;
 }
 
-.header-sub {
+.cours-header-sub {
   font-size: 12px;
   font-weight: 500;
   color: var(--text-muted);
 }
 
-.header-avatar {
+.cours-header-avatar {
   width: 36px;
   height: 36px;
   border-radius: 50%;

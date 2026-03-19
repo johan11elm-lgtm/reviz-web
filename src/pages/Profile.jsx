@@ -164,9 +164,9 @@ export default function Profile() {
     <div className="app">
 
       {/* Header */}
-      <div className="header">
-        <span className="header-title">Profil</span>
-        <div className="header-avatar" onClick={() => setDrawerOpen(true)}>{initiale}</div>
+      <div className="pf-header">
+        <span className="pf-header-title">Profil</span>
+        <div className="pf-header-avatar" onClick={() => setDrawerOpen(true)}>{initiale}</div>
       </div>
 
       {/* Content */}
