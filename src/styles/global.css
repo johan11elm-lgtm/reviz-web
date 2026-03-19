@@ -167,10 +167,9 @@ input, textarea {
   }
 
   /* Padding pour ne pas cacher le contenu derrière la nav + home indicator */
-  /* .app .content = spécificité plus haute pour écraser les padding des pages individuelles */
   /* min-height: 0 est indispensable pour que overflow-y: auto fonctionne dans un flex container */
-  .app .content, .app .pg-content {
-    padding-bottom: calc(100px + env(safe-area-inset-bottom, 34px));
+  .content, .pg-content {
+    padding-bottom: calc(80px + env(safe-area-inset-bottom, 0px));
     min-height: 0;
   }
 
