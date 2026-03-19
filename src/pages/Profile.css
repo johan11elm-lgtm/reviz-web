@@ -45,6 +45,7 @@
 /* Content */
 .content {
   flex: 1;
+  min-height: 0;
   padding: 8px 24px 110px;
   overflow-y: auto;
 }
