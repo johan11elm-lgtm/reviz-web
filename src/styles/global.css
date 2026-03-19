@@ -153,6 +153,20 @@ input, textarea {
     border-radius: 0;
     box-shadow: none;
   }
+
+  /* Nav fixée en bas du viewport sur mobile */
+  .bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 200;
+  }
+
+  /* Padding pour ne pas cacher le contenu derrière la nav */
+  .content, .pg-content {
+    padding-bottom: 80px;
+  }
 }
 
 /* ─── Bottom nav ───────────────────────────────────────────────── */
