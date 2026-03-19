@@ -45,7 +45,7 @@ export default function Connexion() {
       await loginWithGoogle();
       navigate('/');
     } catch (err) {
-      if (err.code !== 'auth/popup-closed-by-user') setError(err.code || 'Connexion Google impossible.');
+      if (err.code !== 'auth/popup-closed-by-user') setError('Connexion Google impossible. Réessaie.');
     } finally {
       setLoading(false);
     }
