@@ -140,7 +140,8 @@ input, textarea {
 @media (max-width: 430px) {
   html, body, #root {
     width: 100%;
-    overflow-x: hidden;
+    height: 100%;
+    overflow: hidden;
   }
   body {
     display: block;
@@ -172,6 +173,7 @@ input, textarea {
   .app .content, .app .pg-content {
     padding-bottom: calc(100px + env(safe-area-inset-bottom, 34px));
     min-height: 0;
+    -webkit-overflow-scrolling: touch;
   }
 
   /* Safe area : padding-top dynamique pour tous les headers de page */
