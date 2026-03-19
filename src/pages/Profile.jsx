@@ -36,26 +36,18 @@ function computeLevel(lessons) {
 function computeBadges(lessons, revisions, streak, level) {
   const types = new Set(revisions.map(r => r.type));
   const allFormats = ['flashcards', 'quiz', 'resume', 'mindmap'].every(t => types.has(t));
-
-  // Flashcards totales générées
   const totalFlashcards = lessons.reduce((s, l) => s + (l.flashcardsCount || 0), 0);
-
-  // Max révisions en un seul jour
   const revsByDay = {};
   revisions.forEach(r => {
     const day = new Date(r.revisedAt).toLocaleDateString('fr-FR');
     revsByDay[day] = (revsByDay[day] || 0) + 1;
   });
   const maxRevsInDay = Object.values(revsByDay).length ? Math.max(...Object.values(revsByDay)) : 0;
-
-  // Max révisions d'une même leçon
   const revsByLesson = {};
   revisions.forEach(r => {
     if (r.lessonId) revsByLesson[r.lessonId] = (revsByLesson[r.lessonId] || 0) + 1;
   });
   const maxRevsPerLesson = Object.values(revsByLesson).length ? Math.max(...Object.values(revsByLesson)) : 0;
-
-  // 20+ révisions de chaque format
   const countByType = { flashcards: 0, quiz: 0, resume: 0, mindmap: 0 };
   revisions.forEach(r => { if (r.type in countByType) countByType[r.type]++; });
   const isMaitre = Object.values(countByType).every(c => c >= 20);
@@ -95,7 +87,6 @@ export default function Profile() {
   const [allLessons, setAllLessons]     = useState(() => loadLessons());
   const [allRevisions, setAllRevisions] = useState(() => loadRevisions());
 
-  // Sync depuis Firestore au montage
   useEffect(() => {
     syncFromFirestore().then(setAllLessons);
     syncRevisionsFromFirestore().then(setAllRevisions);
@@ -110,21 +101,14 @@ export default function Profile() {
         .toLocaleDateString('fr-FR', { month: 'long', year: 'numeric' })
     : '';
 
-  // --- Sheets ---
-  const [activeSheet, setActiveSheet] = useState(null); // 'profil' | 'notifications' | 'confidentialite'
-
-  // Sheet : Modifier le profil
+  const [activeSheet, setActiveSheet] = useState(null);
   const [editPrenom, setEditPrenom]   = useState('');
   const [editClasse, setEditClasse]   = useState('');
   const [saving, setSaving]           = useState(false);
   const [saveError, setSaveError]     = useState('');
-
-  // Sheet : Notifications
   const [notifsEnabled, setNotifsEnabled] = useState(
     () => localStorage.getItem('reviz-notifs') === 'true'
   );
-
-  // Sheet : Confidentialité — changer mot de passe
   const [currentPwd, setCurrentPwd]   = useState('');
   const [newPwd, setNewPwd]           = useState('');
   const [pwdSaving, setPwdSaving]     = useState(false);
@@ -132,18 +116,10 @@ export default function Profile() {
   const [pwdSuccess, setPwdSuccess]   = useState(false);
 
   function openSheet(name) {
-    if (name === 'profil') {
-      setEditPrenom(prenom);
-      setEditClasse(classe);
-      setSaveError('');
-    }
-    if (name === 'confidentialite') {
-      setCurrentPwd(''); setNewPwd('');
-      setPwdError(''); setPwdSuccess(false);
-    }
+    if (name === 'profil') { setEditPrenom(prenom); setEditClasse(classe); setSaveError(''); }
+    if (name === 'confidentialite') { setCurrentPwd(''); setNewPwd(''); setPwdError(''); setPwdSuccess(false); }
     setActiveSheet(name);
   }
-
   function closeSheet() { setActiveSheet(null); }
 
   async function handleSaveProfil() {
@@ -154,11 +130,8 @@ export default function Profile() {
       if (editClasse && currentUser)
         localStorage.setItem(`reviz-classe-${currentUser.uid}`, editClasse);
       closeSheet();
-    } catch {
-      setSaveError('Erreur lors de la sauvegarde, réessaie.');
-    } finally {
-      setSaving(false);
-    }
+    } catch { setSaveError('Erreur lors de la sauvegarde, réessaie.'); }
+    finally { setSaving(false); }
   }
 
   function handleToggleNotifs() {
@@ -173,16 +146,13 @@ export default function Profile() {
     setPwdSaving(true); setPwdError(''); setPwdSuccess(false);
     try {
       await updateUserPassword(currentPwd, newPwd);
-      setPwdSuccess(true);
-      setCurrentPwd(''); setNewPwd('');
+      setPwdSuccess(true); setCurrentPwd(''); setNewPwd('');
     } catch (err) {
-      if (err.code === 'auth/wrong-password' || err.code === 'auth/invalid-credential')
-        setPwdError('Mot de passe actuel incorrect.');
-      else
-        setPwdError('Erreur, réessaie.');
-    } finally {
-      setPwdSaving(false);
-    }
+      setPwdError(
+        err.code === 'auth/wrong-password' || err.code === 'auth/invalid-credential'
+          ? 'Mot de passe actuel incorrect.' : 'Erreur, réessaie.'
+      );
+    } finally { setPwdSaving(false); }
   }
 
   async function handleLogout() {
@@ -192,6 +162,7 @@ export default function Profile() {
 
   return (
     <div className="app">
+
       {/* Header */}
       <div className="header">
         <button className="back-btn" onClick={() => navigate('/')}>←</button>
@@ -263,47 +234,34 @@ export default function Profile() {
           </button>
         )}
 
-        {/* Settings */}
+        {/* Compte */}
         <div className="section-title">Compte</div>
         <div className="settings-list">
           <div className="settings-item" onClick={() => openSheet('profil')}>
-            <div className="settings-left">
-              <div className="settings-icon">👤</div>
-              <span className="settings-label">Modifier le profil</span>
-            </div>
+            <div className="settings-left"><div className="settings-icon">👤</div><span className="settings-label">Modifier le profil</span></div>
             <span className="settings-chevron">›</span>
           </div>
           <div className="settings-item" onClick={() => openSheet('notifications')}>
-            <div className="settings-left">
-              <div className="settings-icon">🔔</div>
-              <span className="settings-label">Notifications</span>
-            </div>
+            <div className="settings-left"><div className="settings-icon">🔔</div><span className="settings-label">Notifications</span></div>
             <span className="settings-chevron">›</span>
           </div>
           <div className="settings-item" onClick={() => openSheet('confidentialite')}>
-            <div className="settings-left">
-              <div className="settings-icon">🔒</div>
-              <span className="settings-label">Confidentialité</span>
-            </div>
+            <div className="settings-left"><div className="settings-icon">🔒</div><span className="settings-label">Confidentialité</span></div>
             <span className="settings-chevron">›</span>
           </div>
           <div className="settings-item danger" onClick={handleLogout}>
-            <div className="settings-left">
-              <div className="settings-icon">🚪</div>
-              <span className="settings-label">Se déconnecter</span>
-            </div>
+            <div className="settings-left"><div className="settings-icon">🚪</div><span className="settings-label">Se déconnecter</span></div>
             <span className="settings-chevron">›</span>
           </div>
         </div>
 
       </div>
 
-      {/* ── Bottom Sheets ── */}
+      {/* Bottom Sheets */}
       {activeSheet && (
         <div className="sheet-overlay" onClick={closeSheet}>
           <div className="sheet" onClick={e => e.stopPropagation()}>
 
-            {/* Sheet : Modifier le profil */}
             {activeSheet === 'profil' && (
               <>
                 <div className="sheet-header">
@@ -312,36 +270,21 @@ export default function Profile() {
                 </div>
                 <div className="sheet-body">
                   <label className="sheet-label">Prénom</label>
-                  <input
-                    className="sheet-input"
-                    value={editPrenom}
-                    onChange={e => setEditPrenom(e.target.value)}
-                    placeholder="Ton prénom"
-                    maxLength={30}
-                  />
+                  <input className="sheet-input" value={editPrenom} onChange={e => setEditPrenom(e.target.value)} placeholder="Ton prénom" maxLength={30} />
                   <label className="sheet-label" style={{ marginTop: 18 }}>Classe</label>
                   <div className="classe-grid">
                     {CLASSES.map(c => (
-                      <button
-                        key={c}
-                        className={`classe-btn${editClasse === c ? ' active' : ''}`}
-                        onClick={() => setEditClasse(c)}
-                      >{c}</button>
+                      <button key={c} className={`classe-btn${editClasse === c ? ' active' : ''}`} onClick={() => setEditClasse(c)}>{c}</button>
                     ))}
                   </div>
                   {saveError && <p className="sheet-error">{saveError}</p>}
-                  <button
-                    className="sheet-save-btn"
-                    onClick={handleSaveProfil}
-                    disabled={saving || !editPrenom.trim()}
-                  >
+                  <button className="sheet-save-btn" onClick={handleSaveProfil} disabled={saving || !editPrenom.trim()}>
                     {saving ? 'Sauvegarde…' : 'Sauvegarder'}
                   </button>
                 </div>
               </>
             )}
 
-            {/* Sheet : Notifications */}
             {activeSheet === 'notifications' && (
               <>
                 <div className="sheet-header">
@@ -354,21 +297,15 @@ export default function Profile() {
                       <span className="notif-name">Rappel quotidien</span>
                       <span className="notif-desc">Révise 10 min par jour</span>
                     </div>
-                    <button
-                      className={`toggle-btn${notifsEnabled ? ' on' : ''}`}
-                      onClick={handleToggleNotifs}
-                    >
+                    <button className={`toggle-btn${notifsEnabled ? ' on' : ''}`} onClick={handleToggleNotifs}>
                       <div className="toggle-knob" />
                     </button>
                   </div>
-                  <p className="sheet-hint">
-                    Les notifications push seront disponibles dans la version mobile.
-                  </p>
+                  <p className="sheet-hint">Les notifications push seront disponibles dans la version mobile.</p>
                 </div>
               </>
             )}
 
-            {/* Sheet : Confidentialité */}
             {activeSheet === 'confidentialite' && (
               <>
                 <div className="sheet-header">
@@ -381,28 +318,11 @@ export default function Profile() {
                     <span className="confid-email-value">{currentUser?.email}</span>
                   </div>
                   <label className="sheet-label" style={{ marginTop: 20 }}>Changer le mot de passe</label>
-                  <input
-                    className="sheet-input"
-                    type="password"
-                    value={currentPwd}
-                    onChange={e => setCurrentPwd(e.target.value)}
-                    placeholder="Mot de passe actuel"
-                  />
-                  <input
-                    className="sheet-input"
-                    type="password"
-                    value={newPwd}
-                    onChange={e => setNewPwd(e.target.value)}
-                    placeholder="Nouveau mot de passe"
-                    style={{ marginTop: 10 }}
-                  />
+                  <input className="sheet-input" type="password" value={currentPwd} onChange={e => setCurrentPwd(e.target.value)} placeholder="Mot de passe actuel" />
+                  <input className="sheet-input" type="password" value={newPwd} onChange={e => setNewPwd(e.target.value)} placeholder="Nouveau mot de passe" style={{ marginTop: 10 }} />
                   {pwdError   && <p className="sheet-error">{pwdError}</p>}
                   {pwdSuccess && <p className="sheet-success">Mot de passe mis à jour ✓</p>}
-                  <button
-                    className="sheet-save-btn"
-                    onClick={handleChangePwd}
-                    disabled={pwdSaving || !currentPwd || !newPwd}
-                  >
+                  <button className="sheet-save-btn" onClick={handleChangePwd} disabled={pwdSaving || !currentPwd || !newPwd}>
                     {pwdSaving ? 'Mise à jour…' : 'Mettre à jour'}
                   </button>
                 </div>
@@ -413,10 +333,7 @@ export default function Profile() {
         </div>
       )}
 
-      {/* Bottom Nav */}
       <BottomNav active="profile" />
-
-      {/* Drawer */}
       <Drawer isOpen={drawerOpen} onClose={() => setDrawerOpen(false)} />
     </div>
   );
