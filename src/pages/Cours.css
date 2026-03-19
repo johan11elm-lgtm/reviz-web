@@ -2,7 +2,7 @@
 .cours-header {
   padding: 52px 24px 12px;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
 }
 
