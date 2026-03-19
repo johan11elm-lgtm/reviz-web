@@ -3,7 +3,7 @@
   padding: 52px 24px 16px;
   display: flex;
   align-items: center;
-  gap: 12px;
+  justify-content: space-between;
 }
 
 .back-btn {

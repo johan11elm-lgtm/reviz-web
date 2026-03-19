@@ -105,7 +105,7 @@ export default function Cours() {
         <div className="header-left">
           <span className="header-title">Mes cours</span>
           {allLessons.length > 0 && (
-            <span className="header-count">{totalVisible} leçon{totalVisible > 1 ? 's' : ''}</span>
+            <span className="header-sub">{totalVisible} leçon{totalVisible > 1 ? 's' : ''}</span>
           )}
         </div>
         <div className="header-avatar" onClick={() => setDrawerOpen(true)}>{initiale}</div>

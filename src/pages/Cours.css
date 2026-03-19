@@ -8,8 +8,8 @@
 
 .header-left {
   display: flex;
-  align-items: center;
-  gap: 10px;
+  flex-direction: column;
+  gap: 2px;
 }
 
 .header-title {
@@ -18,13 +18,10 @@
   letter-spacing: -0.5px;
 }
 
-.header-count {
+.header-sub {
   font-size: 12px;
   font-weight: 500;
   color: var(--text-muted);
-  background: var(--bg-subtle);
-  padding: 4px 10px;
-  border-radius: 20px;
 }
 
 .header-avatar {

@@ -165,7 +165,6 @@ export default function Profile() {
 
       {/* Header */}
       <div className="header">
-        <button className="back-btn" onClick={() => navigate('/')}>←</button>
         <span className="header-title">Profil</span>
         <div className="header-avatar" onClick={() => setDrawerOpen(true)}>{initiale}</div>
       </div>
