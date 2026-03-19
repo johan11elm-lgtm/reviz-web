@@ -98,6 +98,23 @@ export default function Resume() {
     window.scrollTo(0, 0)
   }
 
+  const [shareDone, setShareDone] = useState(false)
+  async function handleShare() {
+    const text = `📚 ${resumeData.title} (${resumeData.subject})\n\n`
+      + '⭐ À retenir :\n'
+      + resumeData.keyPoints.map(p => `• ${p}`).join('\n')
+      + '\n\n---\nGénéré avec Réviz'
+    try {
+      if (navigator.share) {
+        await navigator.share({ title: resumeData.title, text })
+      } else {
+        await navigator.clipboard.writeText(text)
+        setShareDone(true)
+        setTimeout(() => setShareDone(false), 2500)
+      }
+    } catch { /* annulé par l'utilisateur */ }
+  }
+
   return (
     <div className="app">
 
@@ -114,7 +131,7 @@ export default function Resume() {
             </div>
             <div className="end-stat-divider" />
             <div className="end-stat">
-              <span className="end-stat-value" style={{ color: '#6366F1' }}>{resumeData.keyTerms.length}</span>
+              <span className="end-stat-value" style={{ color: '#FF6B00' }}>{resumeData.keyTerms.length}</span>
               <span className="end-stat-label">Termes</span>
             </div>
             <div className="end-stat-divider" />
@@ -136,7 +153,9 @@ export default function Resume() {
           <span className="header-title">Résumé</span>
           <span className="read-time-chip">📖 {resumeData.readingTime} min de lecture</span>
         </div>
-        <div style={{ width: 36 }} />
+        <button className="share-btn" onClick={handleShare} title="Partager">
+          {shareDone ? '✓' : '↗'}
+        </button>
       </div>
 
       {/* Barre de lecture liée au scroll */}

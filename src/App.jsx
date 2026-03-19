@@ -26,7 +26,8 @@ import Mindmap     from './pages/MindMap'
 import Welcome     from './pages/Welcome'
 import Inscription from './pages/Inscription'
 import Connexion   from './pages/Connexion'
-import Onboarding  from './pages/Onboarding'
+import Onboarding   from './pages/Onboarding'
+import VerifyEmail  from './pages/VerifyEmail'
 
 // Redirige vers /welcome si non connecté
 function PrivateRoute({ children }) {
@@ -43,8 +44,9 @@ export default function App() {
           <Routes>
             {/* Routes publiques (accessibles sans compte) */}
             <Route path="/welcome"     element={<Welcome />} />
-            <Route path="/inscription" element={<Inscription />} />
-            <Route path="/connexion"   element={<Connexion />} />
+            <Route path="/inscription"   element={<Inscription />} />
+            <Route path="/connexion"     element={<Connexion />} />
+            <Route path="/verify-email"  element={<PrivateRoute><VerifyEmail /></PrivateRoute>} />
 
             {/* Routes privées (redirige vers /welcome si non connecté) */}
             <Route path="/"            element={<PrivateRoute><Home /></PrivateRoute>} />

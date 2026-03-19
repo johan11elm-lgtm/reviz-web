@@ -1,6 +1,7 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { Link } from 'react-router-dom'
 import { recordRevision } from '../services/revisionService'
+import { getDueCards, updateCardState } from '../services/srsService'
 import './Flashcards.css'
 
 // ---- DONNÉES : localStorage (IA) > mock ----
@@ -21,9 +22,15 @@ function getFlashcards() {
   ]
 }
 
+function getLessonId() {
+  try { return JSON.parse(localStorage.getItem('reviz-ai-data') || 'null')?.lessonId ?? 'default' } catch { return 'default' }
+}
+
 export default function Flashcards() {
   useEffect(() => { recordRevision('flashcards') }, [])
-  const flashcards = getFlashcards()
+  const lessonId   = useMemo(() => getLessonId(), [])
+  const rawCards   = getFlashcards()
+  const flashcards = useMemo(() => getDueCards(lessonId, rawCards), [lessonId])
   const [current, setCurrent]     = useState(0)
   const [isFlipped, setIsFlipped] = useState(false)
   const [gotCount, setGotCount]   = useState(0)
@@ -49,13 +56,39 @@ export default function Flashcards() {
     }, 280)
   }
 
-  function handleGot()   { setGotCount(p => p + 1);   nextCard('got')   }
-  function handleAgain() { setAgainCount(p => p + 1); nextCard('again') }
+  function handleGot() {
+    updateCardState(lessonId, flashcards[current].index ?? current, 'got')
+    setGotCount(p => p + 1)
+    nextCard('got')
+  }
+  function handleAgain() {
+    updateCardState(lessonId, flashcards[current].index ?? current, 'again')
+    setAgainCount(p => p + 1)
+    nextCard('again')
+  }
 
   function restartDeck() {
     setCurrent(0); setIsFlipped(false)
     setGotCount(0); setAgainCount(0)
     setShowEnd(false); setAnimDir(null)
+  }
+
+  const [shareDone, setShareDone] = useState(false)
+  async function handleShare() {
+    const title = (() => {
+      try { return JSON.parse(localStorage.getItem('reviz-ai-data') || 'null')?.metadata?.title || 'Flashcards' } catch { return 'Flashcards' }
+    })()
+    const text = flashcards.map((c, i) => `${i + 1}. ${c.front}\n→ ${c.back}`).join('\n\n')
+      + '\n\n---\nGénéré avec Réviz'
+    try {
+      if (navigator.share) {
+        await navigator.share({ title, text })
+      } else {
+        await navigator.clipboard.writeText(text)
+        setShareDone(true)
+        setTimeout(() => setShareDone(false), 2500)
+      }
+    } catch { /* annulé */ }
   }
 
   const xp = gotCount * 5
@@ -87,6 +120,7 @@ export default function Flashcards() {
           </div>
           <div className="xp-badge">+{xp} XP gagnés !</div>
           <button className="end-btn primary" onClick={restartDeck}>🔄 Recommencer</button>
+          <button className="end-btn" onClick={handleShare}>{shareDone ? '✓ Copié !' : '↗ Partager les cartes'}</button>
           <Link className="end-btn" to="/analyse">← Retour aux formats</Link>
         </div>
       )}

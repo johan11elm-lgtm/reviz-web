@@ -16,18 +16,27 @@ export function BottomNav() {
   useEffect(() => {
     setHidden(false);
     lastY.current = 0;
+    let scrollUpAccum = 0;
 
-    const el = document.querySelector('.pg-content, .content');
+    const el = document.querySelector('.pg-content') || document.querySelector('.content');
     if (!el) return;
 
     function onScroll() {
       const y = el.scrollTop;
+      const delta = y - lastY.current;
+
       if (y < 10) {
         setHidden(false);
-      } else if (y > lastY.current + 6) {
-        setHidden(true);
-      } else if (y < lastY.current - 6) {
-        setHidden(false);
+        scrollUpAccum = 0;
+      } else if (delta > 0) {
+        scrollUpAccum = 0;
+        if (delta > 4) setHidden(true);
+      } else {
+        scrollUpAccum += Math.abs(delta);
+        if (scrollUpAccum > 30) {
+          setHidden(false);
+          scrollUpAccum = 0;
+        }
       }
       lastY.current = y;
     }

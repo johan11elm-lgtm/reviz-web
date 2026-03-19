@@ -13,10 +13,12 @@ import {
   reauthenticateWithCredential,
   EmailAuthProvider,
   sendPasswordResetEmail,
+  sendEmailVerification,
 } from 'firebase/auth';
 import { auth } from '../services/firebaseConfig';
 import { setActiveUser } from '../services/historyService';
 import { setActiveUser as setRevisionUser } from '../services/revisionService';
+import { setSrsUser } from '../services/srsService';
 
 const AuthContext = createContext();
 
@@ -32,11 +34,18 @@ export function AuthProvider({ children }) {
   async function signup(prenom, email, password, classe) {
     const { user } = await createUserWithEmailAndPassword(auth, email, password);
     await updateProfile(user, { displayName: prenom });
+    // Envoyer l'email de vérification (fire-and-forget)
+    sendEmailVerification(user).catch(() => {});
     // Forcer le re-render avec le displayName mis à jour
     setCurrentUser({ ...auth.currentUser });
     // La classe n'est pas gérée par Firebase Auth → on la met en localStorage
     if (classe) localStorage.setItem(`reviz-classe-${user.uid}`, classe);
     return user;
+  }
+
+  // --- Renvoyer l'email de vérification ---
+  function resendVerificationEmail() {
+    if (auth.currentUser) return sendEmailVerification(auth.currentUser);
   }
 
   // --- Connexion ---
@@ -86,6 +95,7 @@ export function AuthProvider({ children }) {
     const unsub = onAuthStateChanged(auth, user => {
       setActiveUser(user?.uid ?? null);     // historique lié à l'UID
       setRevisionUser(user?.uid ?? null);   // révisions liées à l'UID
+      setSrsUser(user?.uid ?? null);        // SRS lié à l'UID
       setCurrentUser(user);
       setLoading(false);
     });
@@ -103,6 +113,7 @@ export function AuthProvider({ children }) {
     updateDisplayName,
     updateUserEmail,
     updateUserPassword,
+    resendVerificationEmail,
   };
 
   // On ne rend les enfants qu'une fois Firebase prêt (évite le flash de redirect)

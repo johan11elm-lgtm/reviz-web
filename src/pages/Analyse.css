@@ -152,7 +152,7 @@
                    background: var(--border); border-radius: 2px; overflow: hidden;
                    opacity: 0; transition: opacity 0.3s ease; }
 .ls-bar--visible { opacity: 1; }
-.ls-bar-fill     { height: 100%; background: linear-gradient(90deg, #6366F1, #818CF8);
+.ls-bar-fill     { height: 100%; background: linear-gradient(90deg, #FF9500, #FF6B00);
                    border-radius: 2px; transition: width 0.25s ease; }
 
 /* ── Bouton retry erreur ──────────────────────────────────────────── */

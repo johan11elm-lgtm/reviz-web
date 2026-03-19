@@ -301,7 +301,7 @@
 .score-small { font-size: 12px; font-weight: 500; opacity: 0.75; }
 
 .xp-badge {
-  background: linear-gradient(135deg, #818CF8, #6366F1);
+  background: linear-gradient(135deg, #FF9500, #FF6B00);
   color: white;
   padding: 10px 20px;
   border-radius: 20px;

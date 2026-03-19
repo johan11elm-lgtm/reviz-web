@@ -310,7 +310,7 @@ input, textarea {
   width: 100%;
   box-sizing: border-box;
 }
-.drawer-panel-input:focus { border-color: #6366F1; }
+.drawer-panel-input:focus { border-color: #FF6B00; }
 .drawer-panel-btn {
   background: #1A1A1A;
   color: #fff;

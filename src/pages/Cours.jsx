@@ -5,6 +5,7 @@ import { Drawer } from '../components/Drawer';
 import { BottomNav } from '../components/BottomNav';
 import { ConfirmModal } from '../components/ConfirmModal';
 import { loadLessons, restoreLesson, deleteLesson, syncFromFirestore } from '../services/historyService';
+import { countDueCards } from '../services/srsService';
 import './Cours.css';
 
 // -------------------------------------------------------------------
@@ -210,14 +211,17 @@ export default function Cours() {
 
                   {/* Actions rapides */}
                   <div className="lesson-actions">
-                    {lesson.flashcardsCount > 0 && (
-                      <button
-                        className="lesson-action-btn"
-                        onClick={e => { e.stopPropagation(); restoreLesson(lesson.id); navigate('/flashcards'); }}
-                      >
-                        🃏 Flashcards
-                      </button>
-                    )}
+                    {lesson.flashcardsCount > 0 && (() => {
+                      const due = countDueCards(lesson.id, lesson.flashcardsCount);
+                      return (
+                        <button
+                          className="lesson-action-btn"
+                          onClick={e => { e.stopPropagation(); restoreLesson(lesson.id); navigate('/flashcards'); }}
+                        >
+                          🃏 Flashcards{due > 0 && due < lesson.flashcardsCount ? <span className="due-badge">{due}</span> : null}
+                        </button>
+                      );
+                    })()}
                     {lesson.quizCount > 0 && (
                       <button
                         className="lesson-action-btn"

@@ -34,8 +34,9 @@
   background: var(--bg-muted, #E5E7EB);
   transition: background 0.25s, transform 0.2s, width 0.25s;
 }
-.progress-dot.done    { background: #C7D2FE; }
-.progress-dot.active  { background: #6366F1; width: 16px; border-radius: 3px; }
+.progress-dot.done    { background: #FFD4A8; }
+.progress-dot.active  { background: #FF6B00; width: 16px; border-radius: 3px; }
+[data-theme="dark"] .progress-dot.done { background: #3D1F00; }
 
 /* Compteur */
 .header-counter {
@@ -128,12 +129,12 @@
   box-shadow: 0 4px 24px rgba(0,0,0,0.07);
 }
 
-/* Verso — gradient indigo */
+/* Verso — gradient orange */
 .flip-back {
-  background: linear-gradient(145deg, #6366F1 0%, #4338CA 100%);
+  background: linear-gradient(145deg, #FF9500 0%, #FF6B00 100%);
   border: none;
   transform: rotateY(180deg);
-  box-shadow: 0 8px 32px rgba(99,102,241,0.35);
+  box-shadow: 0 8px 32px rgba(255,107,0,0.35);
 }
 
 /* Tag "Question" / "Réponse" */
@@ -248,7 +249,7 @@
 .end-stat-divider { width: 1px; background: var(--border); align-self: stretch; }
 
 .xp-badge {
-  background: linear-gradient(135deg, #818CF8, #6366F1);
+  background: linear-gradient(135deg, #FF9500, #FF6B00);
   color: white;
   padding: 10px 20px;
   border-radius: 20px;
