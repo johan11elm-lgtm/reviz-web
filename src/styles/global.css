@@ -167,7 +167,8 @@ input, textarea {
 
   /* Padding pour ne pas cacher le contenu derrière la nav */
   .content, .pg-content {
-    padding-bottom: 80px;
+    padding-bottom: calc(80px + env(safe-area-inset-bottom, 0px));
+    min-height: 0; /* permet au flex child de se contraindre et activer overflow-y scroll */
   }
 }
 
