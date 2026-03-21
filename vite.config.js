@@ -21,6 +21,8 @@ export default defineConfig({
         manualChunks: {
           'vendor-react': ['react', 'react-dom', 'react-router-dom'],
           'vendor-firebase': ['firebase/app', 'firebase/auth', 'firebase/firestore'],
+          'vendor-sentry': ['@sentry/react'],
+          'vendor-posthog': ['posthog-js'],
         },
       },
     },
