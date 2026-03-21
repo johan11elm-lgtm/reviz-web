@@ -6,7 +6,7 @@ import { BottomNav } from '../components/BottomNav';
 import { ConfirmModal } from '../components/ConfirmModal';
 import { loadLessons, restoreLesson, deleteLesson, syncFromFirestore } from '../services/historyService';
 import { countDueCards } from '../services/srsService';
-import { subjectInfo } from '../utils/subjects';
+import { subjectInfo, subjectKey } from '../utils/subjects';
 import './Cours.css';
 
 function formatDate(ts) {
