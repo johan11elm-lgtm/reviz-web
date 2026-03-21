@@ -9,10 +9,15 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@sentry/react": "^10.45.0",
+    "@sentry/vite-plugin": "^5.1.1",
     "firebase": "^12.10.0",
+    "firebase-admin": "^13.7.0",
+    "posthog-js": "^1.363.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-router-dom": "^6.28.0"
+    "react-router-dom": "^6.28.0",
+    "resend": "^6.9.4"
   },
   "engines": {
     "node": ">=18"

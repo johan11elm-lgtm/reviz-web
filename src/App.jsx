@@ -31,9 +31,11 @@ const Flashcards  = lazy(() => import('./pages/Flashcards'))
 const Quiz        = lazy(() => import('./pages/Quiz'))
 const Resume      = lazy(() => import('./pages/Resume'))
 const Mindmap     = lazy(() => import('./pages/MindMap'))
-const Onboarding  = lazy(() => import('./pages/Onboarding'))
-const VerifyEmail = lazy(() => import('./pages/VerifyEmail'))
-const Legal       = lazy(() => import('./pages/Legal'))
+const Onboarding      = lazy(() => import('./pages/Onboarding'))
+const VerifyEmail     = lazy(() => import('./pages/VerifyEmail'))
+const Legal           = lazy(() => import('./pages/Legal'))
+const Brevet          = lazy(() => import('./pages/Brevet'))
+const ConsentPending  = lazy(() => import('./pages/ConsentPending'))
 
 // Fallback minimal pendant le chargement
 function LoadingFallback() {
@@ -44,10 +46,12 @@ function LoadingFallback() {
   )
 }
 
-// Redirige vers /welcome si non connecté
+// Redirige vers /welcome si non connecté, vers /consent-pending si en attente de consentement parental
 function PrivateRoute({ children }) {
-  const { currentUser } = useAuth();
-  return currentUser ? children : <Navigate to="/welcome" replace />;
+  const { currentUser, consentPending } = useAuth();
+  if (!currentUser) return <Navigate to="/welcome" replace />;
+  if (consentPending) return <Navigate to="/consent-pending" replace />;
+  return children;
 }
 
 export default function App() {
@@ -67,7 +71,8 @@ export default function App() {
               {/* Pages légales (accessibles sans compte) */}
               <Route path="/legal/:page" element={<Legal />} />
 
-              <Route path="/verify-email" element={<PrivateRoute><VerifyEmail /></PrivateRoute>} />
+              <Route path="/verify-email"     element={<PrivateRoute><VerifyEmail /></PrivateRoute>} />
+              <Route path="/consent-pending" element={<ConsentPending />} />
 
               {/* Routes privées (redirige vers /welcome si non connecté) */}
               <Route path="/"            element={<PrivateRoute><Home /></PrivateRoute>} />
@@ -81,6 +86,7 @@ export default function App() {
               <Route path="/quiz"        element={<PrivateRoute><Quiz /></PrivateRoute>} />
               <Route path="/resume"      element={<PrivateRoute><Resume /></PrivateRoute>} />
               <Route path="/mindmap"     element={<PrivateRoute><Mindmap /></PrivateRoute>} />
+              <Route path="/brevet"      element={<PrivateRoute><Brevet /></PrivateRoute>} />
             </Routes>
           </Suspense>
         </BrowserRouter>

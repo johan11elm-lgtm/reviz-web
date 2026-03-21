@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { loadLessons, syncFromFirestore } from '../services/historyService';
 import { loadRevisions, syncRevisionsFromFirestore } from '../services/revisionService';
@@ -7,6 +8,8 @@ import { BottomNav } from '../components/BottomNav';
 import { computeStreak, computeLevel, XP_PAR_LECON, XP_PAR_NIVEAU } from '../utils/gamification';
 import { subjectInfo } from '../utils/subjects';
 import { getWeeklyChallenges } from '../services/challengeService';
+import { getCoveredCount } from '../services/brevetService';
+import { TOTAL_THEMES } from '../utils/brevetProgram';
 import './Progres.css';
 
 // ─── Constantes ─────────────────────────────────────────────────────
@@ -137,6 +140,7 @@ function computeFormatBreakdown(revisions) {
 
 // ─── Composant ───────────────────────────────────────────────────────
 export default function Progres() {
+  const navigate = useNavigate();
   const [drawerOpen,   setDrawerOpen]   = useState(false);
   const [allLessons,   setAllLessons]   = useState(() => loadLessons());
   const [allRevisions, setAllRevisions] = useState(() => loadRevisions());
@@ -348,6 +352,18 @@ export default function Progres() {
               Semaine précédente : {challengeData.previousWeek.challenges?.filter(c => c.completed).length ?? 0}/3 complétés
             </div>
           )}
+        </div>
+
+        {/* 7c. Carte Brevet */}
+        <div className="pg-brevet-card" onClick={() => navigate('/brevet')}>
+          <div className="pg-brevet-left">
+            <span className="pg-brevet-icon">📚</span>
+            <div className="pg-brevet-text">
+              <span className="pg-brevet-title">Préparation Brevet</span>
+              <span className="pg-brevet-sub">{getCoveredCount(allLessons)} / {TOTAL_THEMES} thèmes couverts</span>
+            </div>
+          </div>
+          <span className="pg-brevet-arrow">→</span>
         </div>
 
         {/* 8. Répartition par format */}

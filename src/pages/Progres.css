@@ -656,3 +656,53 @@
 .pg-challenge-bar { height: 100%; background: linear-gradient(90deg, #FF6B00, #FFB347); border-radius: 3px; transition: width 0.3s; }
 .pg-challenge-count { font-size: 13px; color: var(--text-secondary); font-weight: 600; flex-shrink: 0; }
 .pg-challenge-prev { font-size: 12px; color: var(--text-secondary); text-align: center; padding-top: 8px; margin-top: 4px; border-top: 1px solid var(--border); }
+
+
+/* ── Carte Brevet ─────────────────────────────────────────────────── */
+.pg-brevet-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--bg-secondary);
+  border-radius: 16px;
+  padding: 14px 16px;
+  cursor: pointer;
+  transition: opacity .15s;
+  border: 1px solid var(--border);
+}
+
+.pg-brevet-card:active { opacity: 0.7; }
+
+.pg-brevet-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.pg-brevet-icon {
+  font-size: 24px;
+  flex-shrink: 0;
+}
+
+.pg-brevet-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.pg-brevet-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.pg-brevet-sub {
+  font-size: 12px;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.pg-brevet-arrow {
+  font-size: 18px;
+  color: var(--text-secondary);
+}

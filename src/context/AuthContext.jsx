@@ -23,7 +23,8 @@ import { setActiveUser } from '../services/historyService';
 import { setActiveUser as setRevisionUser } from '../services/revisionService';
 import { setSrsUser } from '../services/srsService';
 import { setChallengeUser } from '../services/challengeService';
-import { collection, getDocs, deleteDoc, doc } from 'firebase/firestore';
+import { setBrevetUser } from '../services/brevetService';
+import { collection, getDocs, deleteDoc, doc, getDoc } from 'firebase/firestore';
 
 const AuthContext = createContext();
 
@@ -32,8 +33,9 @@ export function useAuth() {
 }
 
 export function AuthProvider({ children }) {
-  const [currentUser, setCurrentUser] = useState(null);
-  const [loading, setLoading]         = useState(true);
+  const [currentUser, setCurrentUser]   = useState(null);
+  const [loading, setLoading]           = useState(true);
+  const [consentPending, setConsentPending] = useState(false);
 
   // --- Inscription ---
   async function signup(prenom, email, password, classe) {
@@ -137,12 +139,28 @@ export function AuthProvider({ children }) {
 
   // --- Écoute l'état de connexion Firebase ---
   useEffect(() => {
-    const unsub = onAuthStateChanged(auth, user => {
-      setActiveUser(user?.uid ?? null);     // historique lié à l'UID
-      setRevisionUser(user?.uid ?? null);   // révisions liées à l'UID
-      setSrsUser(user?.uid ?? null);        // SRS lié à l'UID
-      setChallengeUser(user?.uid ?? null); // défis liés à l'UID
+    const unsub = onAuthStateChanged(auth, async user => {
+      setActiveUser(user?.uid ?? null);
+      setRevisionUser(user?.uid ?? null);
+      setSrsUser(user?.uid ?? null);
+      setChallengeUser(user?.uid ?? null);
+      setBrevetUser(user?.uid ?? null);
       setCurrentUser(user);
+
+      // Vérifier le consentement parental pour les <15 ans
+      if (user) {
+        try {
+          const consentDoc = await getDoc(
+            doc(db, 'users', user.uid, 'parentalConsent', 'consent')
+          );
+          setConsentPending(consentDoc.exists() && consentDoc.data()?.status === 'pending');
+        } catch {
+          setConsentPending(false);
+        }
+      } else {
+        setConsentPending(false);
+      }
+
       setLoading(false);
     });
     return unsub;
@@ -151,6 +169,7 @@ export function AuthProvider({ children }) {
   const value = {
     currentUser,
     loading,
+    consentPending,
     signup,
     login,
     loginWithGoogle,

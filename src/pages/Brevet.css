@@ -1,0 +1,224 @@
+/* ── Header ─────────────────────────────────────── */
+.brevet-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px 12px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-primary);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.brevet-back {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: var(--text-primary);
+  padding: 4px 8px;
+  border-radius: 8px;
+  line-height: 1;
+}
+
+.brevet-back:hover { background: var(--bg-secondary); }
+
+.brevet-header-title {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+/* ── Content ─────────────────────────────────────── */
+.brevet-content {
+  padding: 16px 16px 100px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* ── Global progress card ───────────────────────── */
+.brevet-global-card {
+  background: var(--bg-secondary);
+  border-radius: 16px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.brevet-global-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.brevet-global-label {
+  font-size: 13px;
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+.brevet-global-count {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.brevet-global-bar {
+  height: 8px;
+  background: var(--border);
+  border-radius: 99px;
+  overflow: hidden;
+}
+
+.brevet-global-fill {
+  height: 100%;
+  background: #22C55E;
+  border-radius: 99px;
+  transition: width .4s ease;
+}
+
+.brevet-global-pct {
+  font-size: 22px;
+  font-weight: 800;
+  color: #22C55E;
+  text-align: right;
+}
+
+/* ── Légende ────────────────────────────────────── */
+.brevet-legend {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.brevet-legend-item {
+  font-size: 12px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 99px;
+}
+
+.brevet-legend--done { background: #DCFCE7; color: #16A34A; }
+.brevet-legend--auto { background: #FEF3C7; color: #D97706; }
+.brevet-legend--none { background: var(--bg-secondary); color: var(--text-secondary); }
+
+/* ── Subject card ───────────────────────────────── */
+.brevet-subject-card {
+  background: var(--bg-secondary);
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.brevet-subject-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px 10px;
+  border-bottom: 1px solid var(--border);
+}
+
+.brevet-subject-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.brevet-subject-emoji { font-size: 18px; }
+
+.brevet-subject-name {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.brevet-subject-progress {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.brevet-subject-bar {
+  width: 60px;
+  height: 5px;
+  background: var(--border);
+  border-radius: 99px;
+  overflow: hidden;
+}
+
+.brevet-subject-fill {
+  height: 100%;
+  background: #22C55E;
+  border-radius: 99px;
+  transition: width .3s ease;
+}
+
+.brevet-subject-count {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  min-width: 28px;
+  text-align: right;
+}
+
+/* ── Theme rows ─────────────────────────────────── */
+.brevet-themes {
+  display: flex;
+  flex-direction: column;
+}
+
+.brevet-theme-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 11px 16px;
+  border: none;
+  background: none;
+  text-align: left;
+  cursor: pointer;
+  border-bottom: 1px solid var(--border);
+  transition: background .15s;
+  width: 100%;
+}
+
+.brevet-theme-row:last-child { border-bottom: none; }
+.brevet-theme-row:active { background: var(--bg-primary); }
+
+.brevet-theme-icon {
+  font-size: 15px;
+  line-height: 1.4;
+  flex-shrink: 0;
+}
+
+.brevet-theme--done  .brevet-theme-icon { color: #22C55E; }
+.brevet-theme--auto  .brevet-theme-icon { color: #F59E0B; }
+.brevet-theme--none  .brevet-theme-icon { color: var(--text-secondary); }
+
+.brevet-theme-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.brevet-theme-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-primary);
+  line-height: 1.3;
+}
+
+.brevet-theme--done .brevet-theme-label {
+  color: #16A34A;
+}
+
+.brevet-theme--none .brevet-theme-label {
+  color: var(--text-secondary);
+}
+
+.brevet-theme-source {
+  font-size: 11px;
+  color: #D97706;
+  font-weight: 500;
+}

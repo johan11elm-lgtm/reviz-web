@@ -192,3 +192,32 @@
 
 .auth-google-btn:active { opacity: 0.75; }
 .auth-google-btn:disabled { opacity: 0.5; cursor: default; }
+
+/* Parental consent */
+.auth-parent-info {
+  background: #FEF3C7;
+  border-radius: 12px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.auth-parent-icon { font-size: 28px; }
+
+.auth-parent-info p {
+  margin: 0;
+  font-size: 14px;
+  color: #92400E;
+  line-height: 1.5;
+}
+
+.auth-parent-notice-inline {
+  background: #FEF3C7;
+  color: #92400E;
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 13px;
+  font-weight: 500;
+}

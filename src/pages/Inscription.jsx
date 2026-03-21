@@ -12,7 +12,6 @@ function firebaseErrorFr(code) {
   }
 }
 
-/* Vérifie si l'utilisateur a moins de 15 ans */
 function isUnder15(dateStr) {
   if (!dateStr) return false;
   const birth = new Date(dateStr);
@@ -24,18 +23,20 @@ function isUnder15(dateStr) {
 }
 
 export default function Inscription() {
-  const [prenom, setPrenom]       = useState('');
-  const [classe, setClasse]       = useState('');
+  const [step, setStep]             = useState(1); // 1 = form, 2 = parent email
+  const [prenom, setPrenom]         = useState('');
+  const [classe, setClasse]         = useState('');
   const [dateNaissance, setDateNaissance] = useState('');
-  const [email, setEmail]         = useState('');
-  const [password, setPassword]   = useState('');
-  const [parentConsent, setParentConsent] = useState(false);
-  const [acceptCgu, setAcceptCgu] = useState(false);
-  const [error, setError]         = useState('');
-  const [loading, setLoading]     = useState(false);
+  const [email, setEmail]           = useState('');
+  const [password, setPassword]     = useState('');
+  const [acceptCgu, setAcceptCgu]   = useState(false);
+  const [parentEmail, setParentEmail] = useState('');
+  const [createdUid, setCreatedUid] = useState(null);
+  const [error, setError]           = useState('');
+  const [loading, setLoading]       = useState(false);
 
   const { signup, loginWithGoogle } = useAuth();
-  const navigate   = useNavigate();
+  const navigate = useNavigate();
 
   const needsParentConsent = isUnder15(dateNaissance);
 
@@ -55,18 +56,20 @@ export default function Inscription() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    if (!prenom.trim()) { setError('Entre ton prénom.'); return; }
-    if (!dateNaissance) { setError('Entre ta date de naissance.'); return; }
-    if (needsParentConsent && !parentConsent) {
-      setError('L\'autorisation d\'un parent est requise pour les moins de 15 ans.');
-      return;
-    }
-    if (!acceptCgu) { setError('Tu dois accepter les CGU pour continuer.'); return; }
+    if (!prenom.trim())    { setError('Entre ton prénom.'); return; }
+    if (!dateNaissance)    { setError('Entre ta date de naissance.'); return; }
+    if (!acceptCgu)        { setError('Tu dois accepter les CGU pour continuer.'); return; }
     setError('');
     setLoading(true);
     try {
-      await signup(prenom.trim(), email, password, classe.trim());
-      navigate('/verify-email', { replace: true });
+      const user = await signup(prenom.trim(), email, password, classe.trim());
+      if (needsParentConsent) {
+        // Store UID for step 2, do not navigate yet
+        setCreatedUid(user.uid);
+        setStep(2);
+      } else {
+        navigate('/verify-email', { replace: true });
+      }
     } catch (err) {
       setError(firebaseErrorFr(err.code));
     } finally {
@@ -74,15 +77,70 @@ export default function Inscription() {
     }
   }
 
+  async function handleParentEmail(e) {
+    e.preventDefault();
+    if (!parentEmail.trim()) { setError('Entre l\'email de ton parent.'); return; }
+    setError('');
+    setLoading(true);
+    try {
+      await fetch('/api/send-parental-consent', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ uid: createdUid, parentEmail: parentEmail.trim(), childName: prenom }),
+      });
+      navigate('/consent-pending', { replace: true, state: { parentEmail: parentEmail.trim() } });
+    } catch {
+      setError('Impossible d\'envoyer l\'email. Réessaie.');
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  // ── Étape 2 : email du parent ──────────────────────────────────
+  if (step === 2) {
+    return (
+      <div className="app">
+        <div className="auth-header">
+          <span className="auth-back" onClick={() => setStep(1)}>←</span>
+          <span className="auth-title">Autorisation parentale</span>
+        </div>
+        <form className="auth-content" onSubmit={handleParentEmail} noValidate>
+          <div className="auth-parent-info">
+            <span className="auth-parent-icon">👪</span>
+            <p>
+              Comme tu as moins de 15 ans, nous avons besoin de l'accord d'un de tes parents
+              avant de t'ouvrir l'accès à Réviz. Un email lui sera envoyé avec un lien de confirmation.
+            </p>
+          </div>
+          <div className="auth-field">
+            <label className="auth-label">Email de ton parent</label>
+            <input
+              className="auth-input"
+              type="email"
+              placeholder="parent@exemple.com"
+              value={parentEmail}
+              onChange={e => setParentEmail(e.target.value)}
+              autoComplete="email"
+              required
+            />
+          </div>
+          <p className="auth-error">{error}</p>
+          <button className="auth-btn" type="submit" disabled={loading}>
+            {loading ? 'Envoi...' : 'Envoyer la demande →'}
+          </button>
+        </form>
+      </div>
+    );
+  }
+
+  // ── Étape 1 : formulaire principal ─────────────────────────────
   return (
     <div className="app">
-      {/* Header */}
       <div className="auth-header">
         <Link to="/welcome" className="auth-back">←</Link>
         <span className="auth-title">Créer un compte</span>
       </div>
 
-      {/* Formulaire */}
       <form className="auth-content" onSubmit={handleSubmit} noValidate>
         <div className="auth-field">
           <label className="auth-label">Prénom</label>
@@ -147,22 +205,12 @@ export default function Inscription() {
           />
         </div>
 
-        {/* Consentement parental (si < 15 ans) */}
         {needsParentConsent && (
-          <label className="auth-checkbox-row auth-parent-notice">
-            <input
-              type="checkbox"
-              checked={parentConsent}
-              onChange={e => setParentConsent(e.target.checked)}
-            />
-            <span>
-              J'ai obtenu l'autorisation de mon parent ou représentant légal pour créer ce compte
-              (obligatoire pour les moins de 15 ans, conformément à la <Link to="/legal/confidentialite">politique de confidentialité</Link>).
-            </span>
-          </label>
+          <div className="auth-parent-notice-inline">
+            👪 Un email sera envoyé à ton parent pour confirmer ton inscription.
+          </div>
         )}
 
-        {/* Acceptation CGU */}
         <label className="auth-checkbox-row">
           <input
             type="checkbox"

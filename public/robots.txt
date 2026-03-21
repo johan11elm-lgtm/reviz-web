@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /welcome
+Allow: /connexion
+Allow: /inscription
+Allow: /legal/
+Disallow: /
+
+Sitemap: https://reviz-gamma.vercel.app/sitemap.xml
