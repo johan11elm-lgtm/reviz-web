@@ -473,3 +473,42 @@
   font-size: 18px;
   opacity: 0.7;
 }
+
+/* ── Daily Goal ───────────────────────── */
+.daily-goal-indicator { margin-top: 8px; }
+.daily-goal-bar { height: 4px; background: var(--border); border-radius: 2px; overflow: hidden; }
+.daily-goal-fill { height: 100%; background: linear-gradient(90deg, #22C55E, #4ADE80); border-radius: 2px; transition: width 0.3s; }
+.daily-goal-text { font-size: 12px; color: var(--text-secondary); margin-top: 4px; display: block; }
+
+/* ── Challenges ───────────────────────── */
+.challenges-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+.challenges-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+.challenges-title { font-weight: 700; font-size: 15px; color: var(--text-primary); }
+.challenges-count { font-size: 13px; color: var(--text-secondary); font-weight: 600; }
+.challenge-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-top: 1px solid var(--border);
+  gap: 12px;
+}
+.challenge-row.completed { opacity: 0.6; }
+.challenge-info { flex: 1; min-width: 0; }
+.challenge-name { display: block; font-size: 14px; font-weight: 600; color: var(--text-primary); }
+.challenge-desc { display: block; font-size: 12px; color: var(--text-secondary); margin-top: 2px; }
+.challenge-progress { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+.challenge-bar { width: 60px; height: 6px; background: var(--border); border-radius: 3px; overflow: hidden; }
+.challenge-fill { height: 100%; background: linear-gradient(90deg, #FF6B00, #FFB347); border-radius: 3px; transition: width 0.3s; }
+.challenge-count { font-size: 12px; color: var(--text-secondary); font-weight: 600; min-width: 32px; text-align: right; }

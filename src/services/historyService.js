@@ -3,6 +3,7 @@
 // -------------------------------------------------------
 import { db } from './firebaseConfig'
 import { doc, setDoc, deleteDoc, collection, getDocs, query, orderBy } from 'firebase/firestore'
+import { updateChallengeProgress } from './challengeService'
 
 let _uid = null
 const MAX_LESSONS = 20
@@ -42,6 +43,7 @@ export function saveLesson(metadata, aiData) {
   if (lessons.length > MAX_LESSONS) lessons.splice(MAX_LESSONS)
   localStorage.setItem(getKey(), JSON.stringify(lessons))
   localStorage.setItem('reviz-current-lesson-id', entry.id)
+  updateChallengeProgress('scan');
 
   // Firestore write-through (fire-and-forget)
   if (_uid) {

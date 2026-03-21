@@ -4,28 +4,12 @@ import { loadLessons, syncFromFirestore } from '../services/historyService';
 import { loadRevisions, syncRevisionsFromFirestore } from '../services/revisionService';
 import { Drawer } from '../components/Drawer';
 import { BottomNav } from '../components/BottomNav';
+import { computeStreak, computeLevel, XP_PAR_LECON, XP_PAR_NIVEAU } from '../utils/gamification';
+import { subjectInfo } from '../utils/subjects';
+import { getWeeklyChallenges } from '../services/challengeService';
 import './Progres.css';
 
 // ─── Constantes ─────────────────────────────────────────────────────
-const XP_PAR_LECON  = 100;
-const XP_PAR_NIVEAU = 500;
-
-const SUBJECT_MAP = {
-  'maths':    { dot: '#FF6B00', emoji: '📐' },
-  'français': { dot: '#EC4899', emoji: '📖' },
-  'histoire': { dot: '#6366F1', emoji: '🌍' },
-  'géo':      { dot: '#6366F1', emoji: '🌍' },
-  'svt':      { dot: '#22C55E', emoji: '🧬' },
-  'physique': { dot: '#3B82F6', emoji: '⚛️' },
-  'chimie':   { dot: '#3B82F6', emoji: '🧪' },
-  'techno':   { dot: '#06B6D4', emoji: '⚙️' },
-  'anglais':  { dot: '#EAB308', emoji: '🗣️' },
-  'espagnol': { dot: '#EAB308', emoji: '💬' },
-  'langues':  { dot: '#EAB308', emoji: '🌐' },
-  'latin':    { dot: '#6366F1', emoji: '🏛️' },
-  'arts':     { dot: '#A855F7', emoji: '🎨' },
-};
-
 const FORMAT_INFO = {
   flashcards: { label: 'Flashcards',    emoji: '🃏', color: '#6366F1' },
   quiz:       { label: 'Quiz',           emoji: '❓', color: '#FF6B00' },
@@ -33,26 +17,7 @@ const FORMAT_INFO = {
   mindmap:    { label: 'Carte mentale', emoji: '🧠', color: '#A855F7' },
 };
 
-function subjectInfo(s) {
-  const key = Object.keys(SUBJECT_MAP).find(k => s?.toLowerCase().includes(k)) ?? null;
-  return SUBJECT_MAP[key] ?? { dot: '#6366F1', emoji: '📚' };
-}
-
 // ─── Calculs ─────────────────────────────────────────────────────────
-function computeStreak(items, dateKey = 'revisedAt') {
-  if (!items.length) return 0;
-  const days = new Set(items.map(l => new Date(l[dateKey]).toLocaleDateString('fr-FR')));
-  let streak = 0;
-  const today = new Date();
-  for (let i = 0; i < 365; i++) {
-    const d = new Date(today);
-    d.setDate(today.getDate() - i);
-    if (days.has(d.toLocaleDateString('fr-FR'))) streak++;
-    else if (i > 0) break;
-  }
-  return streak;
-}
-
 function computeBestStreak(items, dateKey = 'revisedAt') {
   if (!items.length) return 0;
   const dayKeys = [...new Set(items.map(r => {
@@ -67,14 +32,6 @@ function computeBestStreak(items, dateKey = 'revisedAt') {
     else current = 1;
   }
   return best;
-}
-
-function computeLevel(lessons) {
-  const xp      = lessons.length * XP_PAR_LECON;
-  const level   = Math.floor(xp / XP_PAR_NIVEAU) + 1;
-  const xpInLvl = xp % XP_PAR_NIVEAU;
-  const fillPct = Math.round(xpInLvl / XP_PAR_NIVEAU * 100);
-  return { level, xpInLvl, xpTotal: xp, fillPct };
 }
 
 function computeActiveDays(items, dateKey = 'revisedAt') {
@@ -201,6 +158,7 @@ export default function Progres() {
   const heatmap          = computeHeatmap(allRevisions);
   const subjectBreakdown = computeSubjectBreakdown(allLessons);
   const formatBreakdown  = computeFormatBreakdown(allRevisions);
+  const challengeData    = getWeeklyChallenges();
 
   const monday            = getMondayOf(new Date());
   const revisionsThisWeek = allRevisions.filter(r => new Date(r.revisedAt) >= monday).length;
@@ -208,14 +166,16 @@ export default function Progres() {
     allRevisions.filter(r => new Date(r.revisedAt) >= monday)
                 .map(r => new Date(r.revisedAt).toDateString())
   ).size;
+  const dailyGoal = parseInt(localStorage.getItem(`reviz-daily-goal-${currentUser?.uid}`) || '3');
+  const todayRevisions = allRevisions.filter(r =>
+    new Date(r.revisedAt).toDateString() === new Date().toDateString()
+  ).length;
   const goalPct     = Math.round(daysWithLesson / 7 * 100);
   const daysLeft    = 7 - daysWithLesson;
   const goalBadge   = daysWithLesson >= 7 ? 'Objectif atteint 🎉' : daysWithLesson >= 4 ? 'En bonne voie ✓' : 'Continue !';
-  const goalMessage = daysWithLesson >= 7
-    ? 'Félicitations, tu as révisé tous les jours !'
-    : daysLeft === 1
-    ? "Plus qu'1 jour pour atteindre ton objectif !"
-    : `Plus que ${daysLeft} jours pour atteindre l'objectif !`;
+  const goalMessage = todayRevisions >= dailyGoal
+    ? `Objectif du jour atteint (${todayRevisions}/${dailyGoal}) !`
+    : `${todayRevisions}/${dailyGoal} révisions aujourd'hui`;
 
   const isNewRecord = weekComparison.bestWeek > 0 && weekComparison.thisWeek >= weekComparison.bestWeek;
 
@@ -366,6 +326,28 @@ export default function Progres() {
             <div className="pg-goal-fill" style={{ width: goalPct + '%' }} />
           </div>
           <span className="pg-goal-sub">{goalMessage}</span>
+        </div>
+
+        {/* 7b. Défis de la semaine */}
+        <div className="pg-section-title">Défis de la semaine</div>
+        <div className="pg-challenges-card">
+          {challengeData.challenges?.map(c => (
+            <div key={c.id} className={`pg-challenge-row${c.completed ? ' pg-challenge--done' : ''}`}>
+              <span className="pg-challenge-icon">{c.completed ? '✅' : '⏳'}</span>
+              <div className="pg-challenge-info">
+                <span className="pg-challenge-title">{c.title}</span>
+                <div className="pg-challenge-bar-wrap">
+                  <div className="pg-challenge-bar" style={{ width: Math.min(100, Math.round(c.current / c.target * 100)) + '%' }} />
+                </div>
+              </div>
+              <span className="pg-challenge-count">{c.current}/{c.target}</span>
+            </div>
+          ))}
+          {challengeData.previousWeek && (
+            <div className="pg-challenge-prev">
+              Semaine précédente : {challengeData.previousWeek.challenges?.filter(c => c.completed).length ?? 0}/3 complétés
+            </div>
+          )}
         </div>
 
         {/* 8. Répartition par format */}

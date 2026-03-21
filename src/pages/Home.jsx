@@ -5,6 +5,11 @@ import { Drawer } from '../components/Drawer';
 import { BottomNav } from '../components/BottomNav';
 import { ConfirmModal } from '../components/ConfirmModal';
 import { loadLessons, restoreLesson, deleteLesson, syncFromFirestore } from '../services/historyService';
+import { loadRevisions } from '../services/revisionService';
+import { getWeeklyChallenges } from '../services/challengeService';
+import { computeStreak, computeLevel, computeBadges, XP_PAR_LECON, XP_PAR_NIVEAU } from '../utils/gamification';
+import { subjectColor, subjectEmoji } from '../utils/subjects';
+import { AchievementToast } from '../components/AchievementToast';
 import './Home.css';
 
 const LogoStar = () => (
@@ -22,56 +27,12 @@ const LogoStar = () => (
   </svg>
 );
 
-const SUBJECT_MAP = {
-  'maths':    { color: 'orange', emoji: '📐' },
-  'français': { color: 'pink',   emoji: '📖' },
-  'histoire': { color: 'indigo', emoji: '🌍' },
-  'géo':      { color: 'indigo', emoji: '🌍' },
-  'svt':      { color: 'green',  emoji: '🧬' },
-  'physique': { color: 'blue',   emoji: '⚛️' },
-  'chimie':   { color: 'blue',   emoji: '🧪' },
-  'techno':   { color: 'cyan',   emoji: '⚙️' },
-  'anglais':  { color: 'yellow', emoji: '🗣️' },
-  'espagnol': { color: 'yellow', emoji: '💬' },
-  'langues':  { color: 'yellow', emoji: '🌐' },
-  'latin':    { color: 'yellow', emoji: '🏛️' },
-  'arts':     { color: 'purple', emoji: '🎨' },
-};
-
-function subjectKey(s)   { return Object.keys(SUBJECT_MAP).find(k => s?.toLowerCase().includes(k)) ?? null; }
-function subjectColor(s) { return SUBJECT_MAP[subjectKey(s)]?.color ?? 'indigo'; }
-function subjectEmoji(s) { return SUBJECT_MAP[subjectKey(s)]?.emoji ?? '📚'; }
-
 function formatDate(ts) {
   const d = new Date(ts), now = new Date();
   const diffDays = Math.floor((now - d) / 86400000);
   if (diffDays === 0) return "Aujourd'hui";
   if (diffDays === 1) return 'Hier';
   return d.toLocaleDateString('fr-FR', { day: 'numeric', month: 'short' });
-}
-
-function computeStreak(lessons) {
-  if (!lessons.length) return 0;
-  const days = new Set(lessons.map(l => new Date(l.scannedAt).toLocaleDateString('fr-FR')));
-  let streak = 0;
-  const today = new Date();
-  for (let i = 0; i < 365; i++) {
-    const d = new Date(today);
-    d.setDate(d.getDate() - i);
-    if (days.has(d.toLocaleDateString('fr-FR'))) streak++;
-    else break;
-  }
-  return streak;
-}
-
-const XP_PAR_LECON  = 100;
-const XP_PAR_NIVEAU = 500;
-function computeLevel(lessons) {
-  const xp      = lessons.length * XP_PAR_LECON;
-  const level   = Math.floor(xp / XP_PAR_NIVEAU) + 1;
-  const xpInLvl = xp % XP_PAR_NIVEAU;
-  const fillPct = Math.round((xpInLvl / XP_PAR_NIVEAU) * 100);
-  return { level, xpInLvl, fillPct };
 }
 
 function getGreetingTime() {
@@ -99,6 +60,8 @@ export default function Home() {
   const [allLessons, setAllLessons]         = useState(() => loadLessons());
   const [recentLessons, setRecentLessons]   = useState(() => loadLessons().slice(0, 3));
   const [lessonToDelete, setLessonToDelete] = useState(null);
+  const [challenges, setChallenges]         = useState(() => getWeeklyChallenges());
+  const [newBadge, setNewBadge]             = useState(null);
 
   useEffect(() => {
     const onboardedKey = `reviz-onboarded-${currentUser?.uid}`;
@@ -123,8 +86,34 @@ export default function Home() {
   const { level, xpInLvl, fillPct } = computeLevel(allLessons);
   const lastLesson = recentLessons[0] ?? null;
 
+  // Daily goal
+  const dailyGoal = parseInt(localStorage.getItem(`reviz-daily-goal-${currentUser?.uid}`) || '3');
+  const todayRevisions = loadRevisions().filter(r =>
+    new Date(r.revisedAt).toDateString() === new Date().toDateString()
+  ).length;
+  const goalProgress = Math.min(100, Math.round(todayRevisions / dailyGoal * 100));
+
+  // Badge celebrations
+  useEffect(() => {
+    if (!currentUser) return;
+    const revisions = loadRevisions();
+    const badges = computeBadges(allLessons, revisions, streak, level);
+    const unlockedIds = badges.filter(b => !b.locked).map(b => b.id);
+    const seenKey = `reviz-seen-badges-${currentUser.uid}`;
+    const seen = JSON.parse(localStorage.getItem(seenKey) || '[]');
+    const newOnes = unlockedIds.filter(id => !seen.includes(id));
+    if (newOnes.length > 0) {
+      localStorage.setItem(seenKey, JSON.stringify(unlockedIds));
+      const badge = badges.find(b => b.id === newOnes[0]);
+      if (badge) setNewBadge(badge);
+    }
+  }, [allLessons, streak, level, currentUser]);
+
   return (
     <div className="app">
+      {newBadge && (
+        <AchievementToast badge={newBadge} onDone={() => setNewBadge(null)} />
+      )}
       {/* Header */}
       <div className="header">
         <span className="header-logo">réviz <LogoStar /></span>
@@ -137,6 +126,14 @@ export default function Home() {
         <div className="greeting">
           <h1>{getGreetingTime()}, {prenom} 👋</h1>
           <p>{getMotivation(streak)}</p>
+          <div className="daily-goal-indicator">
+            <div className="daily-goal-bar">
+              <div className="daily-goal-fill" style={{ width: goalProgress + '%' }} />
+            </div>
+            <span className="daily-goal-text">
+              {todayRevisions >= dailyGoal ? '✓ Objectif atteint !' : `${todayRevisions}/${dailyGoal} révisions aujourd'hui`}
+            </span>
+          </div>
         </div>
 
         {/* Stats */}
@@ -152,6 +149,28 @@ export default function Home() {
             <div className="stat-value-big">🔥 {streak}</div>
             <div className="stat-sub">{streak === 1 ? 'jour de suite' : 'jours de suite'}</div>
           </div>
+        </div>
+
+        {/* Défis de la semaine */}
+        <div className="challenges-card">
+          <div className="challenges-header">
+            <span className="challenges-title">Défis de la semaine</span>
+            <span className="challenges-count">{challenges.challenges?.filter(c => c.completed).length ?? 0}/3</span>
+          </div>
+          {challenges.challenges?.map(c => (
+            <div key={c.id} className={`challenge-row${c.completed ? ' completed' : ''}`}>
+              <div className="challenge-info">
+                <span className="challenge-name">{c.completed ? '✓' : '○'} {c.title}</span>
+                <span className="challenge-desc">{c.description}</span>
+              </div>
+              <div className="challenge-progress">
+                <div className="challenge-bar">
+                  <div className="challenge-fill" style={{ width: Math.min(100, Math.round(c.current / c.target * 100)) + '%' }} />
+                </div>
+                <span className="challenge-count">{c.current}/{c.target}</span>
+              </div>
+            </div>
+          ))}
         </div>
 
         {/* Carte "Reprendre" — si une leçon existe */}

@@ -6,33 +6,8 @@ import { BottomNav } from '../components/BottomNav';
 import { ConfirmModal } from '../components/ConfirmModal';
 import { loadLessons, restoreLesson, deleteLesson, syncFromFirestore } from '../services/historyService';
 import { countDueCards } from '../services/srsService';
+import { subjectInfo } from '../utils/subjects';
 import './Cours.css';
-
-// -------------------------------------------------------------------
-// Helpers matières
-// -------------------------------------------------------------------
-const SUBJECT_MAP = {
-  'maths':    { color: 'orange', dot: '#FF6B00', emoji: '📐' },
-  'français': { color: 'pink',   dot: '#EC4899', emoji: '📖' },
-  'histoire': { color: 'indigo', dot: '#6366F1', emoji: '🌍' },
-  'géo':      { color: 'indigo', dot: '#6366F1', emoji: '🌍' },
-  'svt':      { color: 'green',  dot: '#22C55E', emoji: '🧬' },
-  'physique': { color: 'blue',   dot: '#3B82F6', emoji: '⚛️' },
-  'chimie':   { color: 'blue',   dot: '#3B82F6', emoji: '🧪' },
-  'techno':   { color: 'cyan',   dot: '#06B6D4', emoji: '⚙️' },
-  'anglais':  { color: 'yellow', dot: '#EAB308', emoji: '🗣️' },
-  'espagnol': { color: 'yellow', dot: '#EAB308', emoji: '💬' },
-  'langues':  { color: 'yellow', dot: '#EAB308', emoji: '🌐' },
-  'latin':    { color: 'yellow', dot: '#EAB308', emoji: '🏛️' },
-  'arts':     { color: 'purple', dot: '#A855F7', emoji: '🎨' },
-};
-
-function subjectKey(s) {
-  return Object.keys(SUBJECT_MAP).find(k => s?.toLowerCase().includes(k)) ?? null;
-}
-function subjectInfo(s) {
-  return SUBJECT_MAP[subjectKey(s)] ?? { color: 'indigo', dot: '#6366F1', emoji: '📚' };
-}
 
 function formatDate(ts) {
   const d = new Date(ts), now = new Date();

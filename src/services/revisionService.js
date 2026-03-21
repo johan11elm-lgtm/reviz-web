@@ -3,9 +3,18 @@
 // -------------------------------------------------------
 import { db } from './firebaseConfig'
 import { doc, setDoc, collection, getDocs, query, orderBy } from 'firebase/firestore'
+import { updateChallengeProgress } from './challengeService'
 
 let _uid = null
 const MAX_REVISIONS = 500
+
+function getMondayOfWeek() {
+  const d = new Date();
+  const dow = d.getDay();
+  d.setDate(d.getDate() - (dow === 0 ? 6 : dow - 1));
+  d.setHours(0, 0, 0, 0);
+  return d;
+}
 
 export function setActiveUser(uid) { _uid = uid }
 
@@ -22,6 +31,15 @@ export function recordRevision(type) {
   revisions.unshift(entry)
   if (revisions.length > MAX_REVISIONS) revisions.splice(MAX_REVISIONS)
   localStorage.setItem(getKey(), JSON.stringify(revisions))
+
+  // Update weekly challenges
+  const todayRevisions = revisions.filter(r =>
+    new Date(r.revisedAt).toDateString() === new Date().toDateString()
+  ).length;
+  const formatsUsed = new Set(revisions.filter(r =>
+    new Date(r.revisedAt) >= getMondayOfWeek()
+  ).map(r => r.type));
+  updateChallengeProgress(type, { dailyCount: todayRevisions, formatsUsed });
 
   // Firestore write-through (fire-and-forget)
   if (_uid) {

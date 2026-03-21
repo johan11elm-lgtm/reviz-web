@@ -5,74 +5,10 @@ import { loadLessons, syncFromFirestore } from '../services/historyService';
 import { loadRevisions, syncRevisionsFromFirestore } from '../services/revisionService';
 import { Drawer } from '../components/Drawer';
 import { BottomNav } from '../components/BottomNav';
+import { computeStreak, computeLevel, computeBadges, XP_PAR_LECON, XP_PAR_NIVEAU } from '../utils/gamification';
 import './Profile.css';
 
-const XP_PAR_LECON  = 100;
-const XP_PAR_NIVEAU = 500;
 const CLASSES = ['6ème', '5ème', '4ème', '3ème'];
-
-function computeStreak(lessons) {
-  if (!lessons.length) return 0;
-  const days = new Set(lessons.map(l => new Date(l.scannedAt).toLocaleDateString('fr-FR')));
-  let streak = 0;
-  const today = new Date();
-  for (let i = 0; i < 365; i++) {
-    const d = new Date(today);
-    d.setDate(today.getDate() - i);
-    if (days.has(d.toLocaleDateString('fr-FR'))) streak++;
-    else if (i > 0) break;
-  }
-  return streak;
-}
-
-function computeLevel(lessons) {
-  const xp      = lessons.length * XP_PAR_LECON;
-  const level   = Math.floor(xp / XP_PAR_NIVEAU) + 1;
-  const xpInLvl = xp % XP_PAR_NIVEAU;
-  const fillPct = Math.round(xpInLvl / XP_PAR_NIVEAU * 100);
-  return { level, xpInLvl, fillPct };
-}
-
-function computeBadges(lessons, revisions, streak, level) {
-  const types = new Set(revisions.map(r => r.type));
-  const allFormats = ['flashcards', 'quiz', 'resume', 'mindmap'].every(t => types.has(t));
-  const totalFlashcards = lessons.reduce((s, l) => s + (l.flashcardsCount || 0), 0);
-  const revsByDay = {};
-  revisions.forEach(r => {
-    const day = new Date(r.revisedAt).toLocaleDateString('fr-FR');
-    revsByDay[day] = (revsByDay[day] || 0) + 1;
-  });
-  const maxRevsInDay = Object.values(revsByDay).length ? Math.max(...Object.values(revsByDay)) : 0;
-  const revsByLesson = {};
-  revisions.forEach(r => {
-    if (r.lessonId) revsByLesson[r.lessonId] = (revsByLesson[r.lessonId] || 0) + 1;
-  });
-  const maxRevsPerLesson = Object.values(revsByLesson).length ? Math.max(...Object.values(revsByLesson)) : 0;
-  const countByType = { flashcards: 0, quiz: 0, resume: 0, mindmap: 0 };
-  revisions.forEach(r => { if (r.type in countByType) countByType[r.type]++; });
-  const isMaitre = Object.values(countByType).every(c => c >= 20);
-
-  return [
-    { emoji: '🚀', label: 'Lanceur',      locked: lessons.length < 1 },
-    { emoji: '⭐', label: 'Curieux',      locked: types.size < 3 },
-    { emoji: '⚡', label: 'Rapide',       locked: revisions.length < 1 },
-    { emoji: '🎓', label: 'Étudiant',     locked: lessons.length < 5 },
-    { emoji: '🔄', label: 'Régulier',     locked: streak < 3 },
-    { emoji: '🔬', label: 'Chercheur',    locked: totalFlashcards < 50 },
-    { emoji: '🎯', label: 'Précis',       locked: !allFormats },
-    { emoji: '🔥', label: '7 jours',      locked: streak < 7 },
-    { emoji: '📅', label: 'Fidèle',       locked: streak < 14 },
-    { emoji: '☕', label: 'Acharné',      locked: maxRevsInDay < 10 },
-    { emoji: '🧠', label: 'Expert',       locked: lessons.length < 10 },
-    { emoji: '💪', label: 'Approfondi',   locked: maxRevsPerLesson < 5 },
-    { emoji: '⚙️', label: 'Maître',       locked: !isMaitre },
-    { emoji: '🏆', label: 'Champion',     locked: revisions.length < 50 },
-    { emoji: '📚', label: 'Bibliothèque', locked: lessons.length < 50 },
-    { emoji: '👑', label: 'Niveau 10',    locked: level < 10 },
-    { emoji: '💎', label: 'Diamant',      locked: lessons.length < 25 },
-    { emoji: '🌟', label: 'Légende',      locked: streak < 30 },
-  ];
-}
 
 export default function Profile() {
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -118,6 +54,9 @@ export default function Profile() {
   const [deletePwd, setDeletePwd]     = useState('');
   const [deleting, setDeleting]       = useState(false);
   const [deleteError, setDeleteError] = useState('');
+  const [dailyGoal, setDailyGoal] = useState(
+    () => parseInt(localStorage.getItem(`reviz-daily-goal-${currentUser?.uid}`) || '3')
+  );
 
   function openSheet(name) {
     if (name === 'profil') { setEditPrenom(prenom); setEditClasse(classe); setSaveError(''); }
@@ -268,6 +207,11 @@ export default function Profile() {
             <span className="acct-label">Notifications</span>
             <span className="acct-arrow">›</span>
           </button>
+          <button className="acct-btn" onClick={() => openSheet('objectif')}>
+            <span className="acct-icon">🎯</span>
+            <span className="acct-label">Objectif quotidien</span>
+            <span className="acct-arrow">›</span>
+          </button>
           <button className="acct-btn" onClick={() => openSheet('confidentialite')}>
             <span className="acct-icon">🔒</span>
             <span className="acct-label">Confidentialité</span>
@@ -327,6 +271,33 @@ export default function Profile() {
                     </button>
                   </div>
                   <p className="sheet-hint">Les notifications push seront disponibles dans la version mobile.</p>
+                </div>
+              </>
+            )}
+
+            {activeSheet === 'objectif' && (
+              <>
+                <div className="sheet-header">
+                  <button className="sheet-close" onClick={closeSheet}>←</button>
+                  <span className="sheet-title">Objectif quotidien</span>
+                </div>
+                <div className="sheet-body">
+                  <p className="sheet-hint" style={{ marginBottom: 16 }}>Combien de révisions par jour souhaites-tu faire ?</p>
+                  <div className="classe-grid">
+                    {[1, 3, 5, 10].map(n => (
+                      <button
+                        key={n}
+                        className={`classe-btn${dailyGoal === n ? ' active' : ''}`}
+                        onClick={() => {
+                          setDailyGoal(n);
+                          localStorage.setItem(`reviz-daily-goal-${currentUser?.uid}`, String(n));
+                          closeSheet();
+                        }}
+                      >
+                        {n}
+                      </button>
+                    ))}
+                  </div>
                 </div>
               </>
             )}

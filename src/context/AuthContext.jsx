@@ -22,6 +22,7 @@ import { auth, db } from '../services/firebaseConfig';
 import { setActiveUser } from '../services/historyService';
 import { setActiveUser as setRevisionUser } from '../services/revisionService';
 import { setSrsUser } from '../services/srsService';
+import { setChallengeUser } from '../services/challengeService';
 import { collection, getDocs, deleteDoc, doc } from 'firebase/firestore';
 
 const AuthContext = createContext();
@@ -140,6 +141,7 @@ export function AuthProvider({ children }) {
       setActiveUser(user?.uid ?? null);     // historique lié à l'UID
       setRevisionUser(user?.uid ?? null);   // révisions liées à l'UID
       setSrsUser(user?.uid ?? null);        // SRS lié à l'UID
+      setChallengeUser(user?.uid ?? null); // défis liés à l'UID
       setCurrentUser(user);
       setLoading(false);
     });
