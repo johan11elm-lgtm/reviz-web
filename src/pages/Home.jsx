@@ -151,6 +151,24 @@ export default function Home() {
           </div>
         </div>
 
+        {/* CTA Scanner */}
+        <Link to="/scan" className={`cta-scanner${lastLesson ? ' cta-scanner--compact' : ''}`}>
+          {lastLesson ? (
+            <>
+              <span>📸 Scanner une nouvelle leçon</span>
+              <span className="cta-arrow">→</span>
+            </>
+          ) : (
+            <>
+              <div className="cta-text">
+                <h2>Scanner une leçon</h2>
+                <p>Photo ou texte — l'IA fait le reste</p>
+              </div>
+              <div className="cta-icon">📸</div>
+            </>
+          )}
+        </Link>
+
         {/* Carte "Reprendre" — si une leçon existe */}
         {lastLesson && (
           <div className="featured-card">
@@ -177,24 +195,6 @@ export default function Home() {
             </div>
           </div>
         )}
-
-        {/* CTA Scanner */}
-        <Link to="/scan" className={`cta-scanner${lastLesson ? ' cta-scanner--compact' : ''}`}>
-          {lastLesson ? (
-            <>
-              <span>📸 Scanner une nouvelle leçon</span>
-              <span className="cta-arrow">→</span>
-            </>
-          ) : (
-            <>
-              <div className="cta-text">
-                <h2>Scanner une leçon</h2>
-                <p>Photo ou texte — l'IA fait le reste</p>
-              </div>
-              <div className="cta-icon">📸</div>
-            </>
-          )}
-        </Link>
 
         {/* Défis de la semaine */}
         <div className="challenges-card">
