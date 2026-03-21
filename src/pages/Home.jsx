@@ -151,28 +151,6 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Défis de la semaine */}
-        <div className="challenges-card">
-          <div className="challenges-header">
-            <span className="challenges-title">Défis de la semaine</span>
-            <span className="challenges-count">{challenges.challenges?.filter(c => c.completed).length ?? 0}/3</span>
-          </div>
-          {challenges.challenges?.map(c => (
-            <div key={c.id} className={`challenge-row${c.completed ? ' completed' : ''}`}>
-              <div className="challenge-info">
-                <span className="challenge-name">{c.completed ? '✓' : '○'} {c.title}</span>
-                <span className="challenge-desc">{c.description}</span>
-              </div>
-              <div className="challenge-progress">
-                <div className="challenge-bar">
-                  <div className="challenge-fill" style={{ width: Math.min(100, Math.round(c.current / c.target * 100)) + '%' }} />
-                </div>
-                <span className="challenge-count">{c.current}/{c.target}</span>
-              </div>
-            </div>
-          ))}
-        </div>
-
         {/* Carte "Reprendre" — si une leçon existe */}
         {lastLesson && (
           <div className="featured-card">
@@ -217,6 +195,28 @@ export default function Home() {
             </>
           )}
         </Link>
+
+        {/* Défis de la semaine */}
+        <div className="challenges-card">
+          <div className="challenges-header">
+            <span className="challenges-title">Défis de la semaine</span>
+            <span className="challenges-count">{challenges.challenges?.filter(c => c.completed).length ?? 0}/3</span>
+          </div>
+          {challenges.challenges?.map(c => (
+            <div key={c.id} className={`challenge-row${c.completed ? ' completed' : ''}`}>
+              <div className="challenge-info">
+                <span className="challenge-name">{c.completed ? '✓' : '○'} {c.title}</span>
+                <span className="challenge-desc">{c.description}</span>
+              </div>
+              <div className="challenge-progress">
+                <div className="challenge-bar">
+                  <div className="challenge-fill" style={{ width: Math.min(100, Math.round(c.current / c.target * 100)) + '%' }} />
+                </div>
+                <span className="challenge-count">{c.current}/{c.target}</span>
+              </div>
+            </div>
+          ))}
+        </div>
 
         {/* Récemment scannées */}
         {recentLessons.length > 0 && (
