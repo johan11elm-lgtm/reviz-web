@@ -14,6 +14,7 @@ export default defineConfig({
   ].filter(Boolean),
   server: { allowedHosts: true },
   build: {
+    target: ['chrome87', 'firefox78', 'safari14', 'edge88'],
     sourcemap: true, // required for readable Sentry stack traces
     rollupOptions: {
       output: {
