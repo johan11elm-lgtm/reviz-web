@@ -79,7 +79,7 @@ export default function Profile() {
   const [showAllBadges, setShowAllBadges] = useState(false);
   const navigate = useNavigate();
 
-  const { currentUser, getUserClasse, logout, updateDisplayName, updateUserPassword } = useAuth();
+  const { currentUser, getUserClasse, logout, updateDisplayName, updateUserPassword, deleteAccount } = useAuth();
   const prenom   = currentUser?.displayName ?? '';
   const initiale = prenom[0]?.toUpperCase() ?? '?';
   const classe   = getUserClasse();
@@ -114,10 +114,14 @@ export default function Profile() {
   const [pwdSaving, setPwdSaving]     = useState(false);
   const [pwdError, setPwdError]       = useState('');
   const [pwdSuccess, setPwdSuccess]   = useState(false);
+  const [deleteStep, setDeleteStep]   = useState(0); // 0=hidden, 1=confirm, 2=password
+  const [deletePwd, setDeletePwd]     = useState('');
+  const [deleting, setDeleting]       = useState(false);
+  const [deleteError, setDeleteError] = useState('');
 
   function openSheet(name) {
     if (name === 'profil') { setEditPrenom(prenom); setEditClasse(classe); setSaveError(''); }
-    if (name === 'confidentialite') { setCurrentPwd(''); setNewPwd(''); setPwdError(''); setPwdSuccess(false); }
+    if (name === 'confidentialite') { setCurrentPwd(''); setNewPwd(''); setPwdError(''); setPwdSuccess(false); setDeleteStep(0); setDeletePwd(''); setDeleteError(''); }
     setActiveSheet(name);
   }
   function closeSheet() { setActiveSheet(null); }
@@ -153,6 +157,24 @@ export default function Profile() {
           ? 'Mot de passe actuel incorrect.' : 'Erreur, réessaie.'
       );
     } finally { setPwdSaving(false); }
+  }
+
+  async function handleDeleteAccount() {
+    const isGoogle = currentUser?.providerData[0]?.providerId === 'google.com';
+    if (deleteStep === 0) { setDeleteStep(1); return; }
+    if (deleteStep === 1 && !isGoogle) { setDeleteStep(2); return; }
+    // Step 2 (password) or step 1 (Google) → actually delete
+    setDeleting(true); setDeleteError('');
+    try {
+      await deleteAccount(isGoogle ? null : deletePwd);
+      navigate('/welcome');
+    } catch (err) {
+      if (err.code === 'auth/wrong-password' || err.code === 'auth/invalid-credential') {
+        setDeleteError('Mot de passe incorrect.');
+      } else {
+        setDeleteError('Erreur lors de la suppression. Réessaie.');
+      }
+    } finally { setDeleting(false); }
   }
 
   async function handleLogout() {
@@ -328,6 +350,35 @@ export default function Profile() {
                   <button className="sheet-save-btn" onClick={handleChangePwd} disabled={pwdSaving || !currentPwd || !newPwd}>
                     {pwdSaving ? 'Mise à jour…' : 'Mettre à jour'}
                   </button>
+
+                  <div className="delete-account-section">
+                    <label className="sheet-label" style={{ marginTop: 24 }}>Zone de danger</label>
+                    {deleteStep === 0 && (
+                      <button className="delete-account-btn" onClick={handleDeleteAccount}>
+                        Supprimer mon compte
+                      </button>
+                    )}
+                    {deleteStep === 1 && (
+                      <div className="delete-confirm-box">
+                        <p className="delete-warning">Cette action est irréversible. Toutes tes leçons, révisions et données seront supprimées définitivement.</p>
+                        <button className="delete-account-btn delete-account-btn--confirm" onClick={handleDeleteAccount} disabled={deleting}>
+                          {deleting ? 'Suppression…' : 'Confirmer la suppression'}
+                        </button>
+                        <button className="delete-cancel-btn" onClick={() => setDeleteStep(0)}>Annuler</button>
+                      </div>
+                    )}
+                    {deleteStep === 2 && (
+                      <div className="delete-confirm-box">
+                        <p className="delete-warning">Entre ton mot de passe pour confirmer la suppression définitive de ton compte.</p>
+                        <input className="sheet-input" type="password" value={deletePwd} onChange={e => setDeletePwd(e.target.value)} placeholder="Mot de passe actuel" />
+                        {deleteError && <p className="sheet-error">{deleteError}</p>}
+                        <button className="delete-account-btn delete-account-btn--confirm" onClick={handleDeleteAccount} disabled={deleting || !deletePwd}>
+                          {deleting ? 'Suppression…' : 'Supprimer définitivement'}
+                        </button>
+                        <button className="delete-cancel-btn" onClick={() => setDeleteStep(0)}>Annuler</button>
+                      </div>
+                    )}
+                  </div>
                 </div>
               </>
             )}

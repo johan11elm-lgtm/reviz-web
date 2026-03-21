@@ -177,6 +177,8 @@ export default function Quiz() {
       {/* ── Contenu ── */}
       <div className="content">
 
+        <div style={{ textAlign: 'center', padding: '0 0 4px' }}><span className="ai-badge">✦ Généré par IA</span></div>
+
         {/* Question — re-mount via key pour déclencher animation */}
         <div className="question-card" key={animKey}>
           <div className="question-num">Question {current + 1}</div>

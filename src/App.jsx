@@ -1,7 +1,8 @@
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom'
-import { useEffect } from 'react'
+import { useEffect, lazy, Suspense } from 'react'
 import { ThemeProvider } from './context/ThemeContext'
 import { AuthProvider, useAuth } from './context/AuthContext'
+import { ErrorBoundary } from './components/ErrorBoundary'
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -13,21 +14,35 @@ function ScrollToTop() {
   }, [pathname]);
   return null;
 }
-import Home        from './pages/Home'
-import Profile     from './pages/Profile'
-import Scan        from './pages/Scan'
-import Cours       from './pages/Cours'
-import Progres     from './pages/Progres'
-import Analyse     from './pages/Analyse'
-import Flashcards  from './pages/Flashcards'
-import Quiz        from './pages/Quiz'
-import Resume      from './pages/Resume'
-import Mindmap     from './pages/MindMap'
+
+// Pages chargées immédiatement (auth flow critique)
 import Welcome     from './pages/Welcome'
 import Inscription from './pages/Inscription'
 import Connexion   from './pages/Connexion'
-import Onboarding   from './pages/Onboarding'
-import VerifyEmail  from './pages/VerifyEmail'
+
+// Pages lazy-loaded (code splitting)
+const Home        = lazy(() => import('./pages/Home'))
+const Profile     = lazy(() => import('./pages/Profile'))
+const Scan        = lazy(() => import('./pages/Scan'))
+const Cours       = lazy(() => import('./pages/Cours'))
+const Progres     = lazy(() => import('./pages/Progres'))
+const Analyse     = lazy(() => import('./pages/Analyse'))
+const Flashcards  = lazy(() => import('./pages/Flashcards'))
+const Quiz        = lazy(() => import('./pages/Quiz'))
+const Resume      = lazy(() => import('./pages/Resume'))
+const Mindmap     = lazy(() => import('./pages/MindMap'))
+const Onboarding  = lazy(() => import('./pages/Onboarding'))
+const VerifyEmail = lazy(() => import('./pages/VerifyEmail'))
+const Legal       = lazy(() => import('./pages/Legal'))
+
+// Fallback minimal pendant le chargement
+function LoadingFallback() {
+  return (
+    <div className="app" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <div style={{ width: 24, height: 24, border: '3px solid var(--border)', borderTopColor: 'var(--text-primary)', borderRadius: '50%', animation: 'spin .6s linear infinite' }} />
+    </div>
+  )
+}
 
 // Redirige vers /welcome si non connecté
 function PrivateRoute({ children }) {
@@ -37,32 +52,40 @@ function PrivateRoute({ children }) {
 
 export default function App() {
   return (
+    <ErrorBoundary>
     <AuthProvider>
       <ThemeProvider>
         <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
           <ScrollToTop />
-          <Routes>
-            {/* Routes publiques (accessibles sans compte) */}
-            <Route path="/welcome"     element={<Welcome />} />
-            <Route path="/inscription"   element={<Inscription />} />
-            <Route path="/connexion"     element={<Connexion />} />
-            <Route path="/verify-email"  element={<PrivateRoute><VerifyEmail /></PrivateRoute>} />
+          <Suspense fallback={<LoadingFallback />}>
+            <Routes>
+              {/* Routes publiques (accessibles sans compte) */}
+              <Route path="/welcome"     element={<Welcome />} />
+              <Route path="/inscription" element={<Inscription />} />
+              <Route path="/connexion"   element={<Connexion />} />
 
-            {/* Routes privées (redirige vers /welcome si non connecté) */}
-            <Route path="/"            element={<PrivateRoute><Home /></PrivateRoute>} />
-            <Route path="/onboarding"  element={<PrivateRoute><Onboarding /></PrivateRoute>} />
-            <Route path="/cours"      element={<PrivateRoute><Cours /></PrivateRoute>} />
-            <Route path="/progres"    element={<PrivateRoute><Progres /></PrivateRoute>} />
-            <Route path="/profil"     element={<PrivateRoute><Profile /></PrivateRoute>} />
-            <Route path="/scan"       element={<PrivateRoute><Scan /></PrivateRoute>} />
-            <Route path="/analyse"    element={<PrivateRoute><Analyse /></PrivateRoute>} />
-            <Route path="/flashcards" element={<PrivateRoute><Flashcards /></PrivateRoute>} />
-            <Route path="/quiz"       element={<PrivateRoute><Quiz /></PrivateRoute>} />
-            <Route path="/resume"     element={<PrivateRoute><Resume /></PrivateRoute>} />
-            <Route path="/mindmap"    element={<PrivateRoute><Mindmap /></PrivateRoute>} />
-          </Routes>
+              {/* Pages légales (accessibles sans compte) */}
+              <Route path="/legal/:page" element={<Legal />} />
+
+              <Route path="/verify-email" element={<PrivateRoute><VerifyEmail /></PrivateRoute>} />
+
+              {/* Routes privées (redirige vers /welcome si non connecté) */}
+              <Route path="/"            element={<PrivateRoute><Home /></PrivateRoute>} />
+              <Route path="/onboarding"  element={<PrivateRoute><Onboarding /></PrivateRoute>} />
+              <Route path="/cours"       element={<PrivateRoute><Cours /></PrivateRoute>} />
+              <Route path="/progres"     element={<PrivateRoute><Progres /></PrivateRoute>} />
+              <Route path="/profil"      element={<PrivateRoute><Profile /></PrivateRoute>} />
+              <Route path="/scan"        element={<PrivateRoute><Scan /></PrivateRoute>} />
+              <Route path="/analyse"     element={<PrivateRoute><Analyse /></PrivateRoute>} />
+              <Route path="/flashcards"  element={<PrivateRoute><Flashcards /></PrivateRoute>} />
+              <Route path="/quiz"        element={<PrivateRoute><Quiz /></PrivateRoute>} />
+              <Route path="/resume"      element={<PrivateRoute><Resume /></PrivateRoute>} />
+              <Route path="/mindmap"     element={<PrivateRoute><Mindmap /></PrivateRoute>} />
+            </Routes>
+          </Suspense>
         </BrowserRouter>
       </ThemeProvider>
     </AuthProvider>
+    </ErrorBoundary>
   )
 }

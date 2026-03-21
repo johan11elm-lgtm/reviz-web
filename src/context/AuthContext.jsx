@@ -16,11 +16,13 @@ import {
   sendEmailVerification,
   GoogleAuthProvider,
   signInWithPopup,
+  deleteUser,
 } from 'firebase/auth';
-import { auth } from '../services/firebaseConfig';
+import { auth, db } from '../services/firebaseConfig';
 import { setActiveUser } from '../services/historyService';
 import { setActiveUser as setRevisionUser } from '../services/revisionService';
 import { setSrsUser } from '../services/srsService';
+import { collection, getDocs, deleteDoc, doc } from 'firebase/firestore';
 
 const AuthContext = createContext();
 
@@ -93,6 +95,39 @@ export function AuthProvider({ children }) {
     await updatePassword(auth.currentUser, newPassword);
   }
 
+  // --- Supprimer le compte (RGPD art. 17) ---
+  async function deleteAccount(password) {
+    const user = auth.currentUser;
+    if (!user) throw new Error('No user');
+    // Réauthentifier si connexion par email
+    if (password && user.providerData[0]?.providerId === 'password') {
+      const cred = EmailAuthProvider.credential(user.email, password);
+      await reauthenticateWithCredential(user, cred);
+    }
+    const uid = user.uid;
+    // Supprimer les données Firestore (lessons + revisions)
+    try {
+      const lessonsSnap = await getDocs(collection(db, 'users', uid, 'lessons'));
+      await Promise.all(lessonsSnap.docs.map(d => deleteDoc(d.ref)));
+      const revisionsSnap = await getDocs(collection(db, 'users', uid, 'revisions'));
+      await Promise.all(revisionsSnap.docs.map(d => deleteDoc(d.ref)));
+      await deleteDoc(doc(db, 'users', uid));
+    } catch (e) { console.warn('[Réviz] Firestore cleanup error', e); }
+    // Supprimer les données localStorage
+    const keysToRemove = [];
+    for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i);
+      if (key?.startsWith('reviz-') && key.includes(uid)) keysToRemove.push(key);
+    }
+    keysToRemove.forEach(k => localStorage.removeItem(k));
+    localStorage.removeItem('reviz-ai-data');
+    localStorage.removeItem('reviz-lesson-text');
+    localStorage.removeItem('reviz-captured-image');
+    localStorage.removeItem('reviz-current-lesson-id');
+    // Supprimer le compte Firebase Auth
+    await deleteUser(user);
+  }
+
   // --- Classe de l'utilisateur (localStorage lié au uid) ---
   function getUserClasse() {
     if (!currentUser) return '';
@@ -124,6 +159,7 @@ export function AuthProvider({ children }) {
     updateUserEmail,
     updateUserPassword,
     resendVerificationEmail,
+    deleteAccount,
   };
 
   // On ne rend les enfants qu'une fois Firebase prêt (évite le flash de redirect)

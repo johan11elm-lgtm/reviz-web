@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { useTheme } from '../context/ThemeContext';
 import { useAuth } from '../context/AuthContext';
 
@@ -238,31 +238,23 @@ export function Drawer({ isOpen, onClose }) {
             </div>
           )}
 
-          <div className="drawer-item" onClick={() => activePanel === 'privacy' ? closePanel() : openPanel('privacy')} style={{ cursor: 'pointer' }}>
+          <Link to="/legal/mentions-legales" className="drawer-item" onClick={onClose} style={{ cursor: 'pointer', textDecoration: 'none', color: 'inherit' }}>
+            <span className="drawer-item-icon">⚖️</span>
+            <span className="drawer-item-label">Mentions légales</span>
+            <span className="drawer-item-arrow">›</span>
+          </Link>
+
+          <Link to="/legal/confidentialite" className="drawer-item" onClick={onClose} style={{ cursor: 'pointer', textDecoration: 'none', color: 'inherit' }}>
             <span className="drawer-item-icon">📄</span>
             <span className="drawer-item-label">Confidentialité</span>
-            <span className="drawer-item-arrow">{activePanel === 'privacy' ? '∨' : '›'}</span>
-          </div>
-          {activePanel === 'privacy' && (
-            <div className="drawer-info-panel">
-              <p><strong>Tes données</strong> — Ton email et prénom sont stockés via Firebase Auth (Google). Tes leçons et révisions sont enregistrées localement sur cet appareil uniquement.</p>
-              <p><strong>IA</strong> — Le texte de tes leçons est envoyé à un modèle d'IA pour générer les contenus. Il n'est pas conservé après traitement.</p>
-              <p><strong>Contact</strong> — Pour toute question : support@reviz.app</p>
-            </div>
-          )}
+            <span className="drawer-item-arrow">›</span>
+          </Link>
 
-          <div className="drawer-item" onClick={() => activePanel === 'cgu' ? closePanel() : openPanel('cgu')} style={{ cursor: 'pointer' }}>
+          <Link to="/legal/cgu" className="drawer-item" onClick={onClose} style={{ cursor: 'pointer', textDecoration: 'none', color: 'inherit' }}>
             <span className="drawer-item-icon">📋</span>
             <span className="drawer-item-label">CGU</span>
-            <span className="drawer-item-arrow">{activePanel === 'cgu' ? '∨' : '›'}</span>
-          </div>
-          {activePanel === 'cgu' && (
-            <div className="drawer-info-panel">
-              <p>En utilisant Réviz, tu acceptes d'utiliser l'application de façon personnelle et non commerciale.</p>
-              <p>Il est interdit de scanner des contenus protégés par le droit d'auteur sans autorisation. Réviz ne peut être tenu responsable des contenus générés par l'IA.</p>
-              <p>Ces conditions peuvent évoluer. L'utilisation continue de l'app vaut acceptation.</p>
-            </div>
-          )}
+            <span className="drawer-item-arrow">›</span>
+          </Link>
         </div>
 
         {/* Déconnexion */}

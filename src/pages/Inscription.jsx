@@ -12,19 +12,36 @@ function firebaseErrorFr(code) {
   }
 }
 
+/* Vérifie si l'utilisateur a moins de 15 ans */
+function isUnder15(dateStr) {
+  if (!dateStr) return false;
+  const birth = new Date(dateStr);
+  const today = new Date();
+  let age = today.getFullYear() - birth.getFullYear();
+  const m = today.getMonth() - birth.getMonth();
+  if (m < 0 || (m === 0 && today.getDate() < birth.getDate())) age--;
+  return age < 15;
+}
+
 export default function Inscription() {
   const [prenom, setPrenom]       = useState('');
   const [classe, setClasse]       = useState('');
+  const [dateNaissance, setDateNaissance] = useState('');
   const [email, setEmail]         = useState('');
   const [password, setPassword]   = useState('');
+  const [parentConsent, setParentConsent] = useState(false);
+  const [acceptCgu, setAcceptCgu] = useState(false);
   const [error, setError]         = useState('');
   const [loading, setLoading]     = useState(false);
 
   const { signup, loginWithGoogle } = useAuth();
   const navigate   = useNavigate();
 
+  const needsParentConsent = isUnder15(dateNaissance);
+
   async function handleGoogle() {
     setError('');
+    if (!acceptCgu) { setError('Tu dois accepter les CGU pour continuer.'); return; }
     setLoading(true);
     try {
       await loginWithGoogle();
@@ -39,6 +56,12 @@ export default function Inscription() {
   async function handleSubmit(e) {
     e.preventDefault();
     if (!prenom.trim()) { setError('Entre ton prénom.'); return; }
+    if (!dateNaissance) { setError('Entre ta date de naissance.'); return; }
+    if (needsParentConsent && !parentConsent) {
+      setError('L\'autorisation d\'un parent est requise pour les moins de 15 ans.');
+      return;
+    }
+    if (!acceptCgu) { setError('Tu dois accepter les CGU pour continuer.'); return; }
     setError('');
     setLoading(true);
     try {
@@ -70,6 +93,18 @@ export default function Inscription() {
             value={prenom}
             onChange={e => setPrenom(e.target.value)}
             autoComplete="given-name"
+            required
+          />
+        </div>
+
+        <div className="auth-field">
+          <label className="auth-label">Date de naissance</label>
+          <input
+            className="auth-input"
+            type="date"
+            value={dateNaissance}
+            onChange={e => setDateNaissance(e.target.value)}
+            autoComplete="bday"
             required
           />
         </div>
@@ -111,6 +146,33 @@ export default function Inscription() {
             required
           />
         </div>
+
+        {/* Consentement parental (si < 15 ans) */}
+        {needsParentConsent && (
+          <label className="auth-checkbox-row auth-parent-notice">
+            <input
+              type="checkbox"
+              checked={parentConsent}
+              onChange={e => setParentConsent(e.target.checked)}
+            />
+            <span>
+              J'ai obtenu l'autorisation de mon parent ou représentant légal pour créer ce compte
+              (obligatoire pour les moins de 15 ans, conformément à la <Link to="/legal/confidentialite">politique de confidentialité</Link>).
+            </span>
+          </label>
+        )}
+
+        {/* Acceptation CGU */}
+        <label className="auth-checkbox-row">
+          <input
+            type="checkbox"
+            checked={acceptCgu}
+            onChange={e => setAcceptCgu(e.target.checked)}
+          />
+          <span>
+            J'accepte les <Link to="/legal/cgu">CGU</Link> et la <Link to="/legal/confidentialite">politique de confidentialité</Link>
+          </span>
+        </label>
 
         <p className="auth-error">{error}</p>
 

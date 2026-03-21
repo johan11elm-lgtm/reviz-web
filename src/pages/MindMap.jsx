@@ -292,6 +292,7 @@ export default function Mindmap() {
           onClick={() => setShowEnd(true)}
         >✓</button>
       </div>
+      <div style={{ position: 'absolute', top: 56, left: 0, right: 0, textAlign: 'center', zIndex: 5, pointerEvents: 'none' }}><span className="ai-badge">✦ Généré par IA</span></div>
 
       {/* ── Canvas ── */}
       <div

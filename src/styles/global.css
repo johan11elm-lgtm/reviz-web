@@ -369,3 +369,23 @@ input, textarea {
   font-size: 11px;
   color: var(--text-muted) !important;
 }
+
+/* Spinner animation (code splitting fallback) */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Badge "Généré par IA" (EU AI Act art. 50) */
+.ai-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--text-muted);
+  background: var(--bg-subtle);
+  padding: 4px 10px;
+  border-radius: 20px;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+}

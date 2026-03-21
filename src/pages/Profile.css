@@ -516,3 +516,61 @@
   font-size: 13px;
   color: var(--text-primary);
 }
+
+/* Suppression de compte */
+.delete-account-section {
+  border-top: 1px solid var(--border);
+  margin-top: 24px;
+  padding-top: 8px;
+}
+
+.delete-account-btn {
+  width: 100%;
+  padding: 14px;
+  border-radius: 14px;
+  border: 1.5px solid #EF4444;
+  background: transparent;
+  color: #EF4444;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.15s;
+  margin-top: 8px;
+}
+
+.delete-account-btn:active { opacity: 0.7; }
+.delete-account-btn:disabled { opacity: 0.4; cursor: default; }
+
+.delete-account-btn--confirm {
+  background: #EF4444;
+  color: white;
+  border-color: #EF4444;
+}
+
+.delete-confirm-box {
+  margin-top: 8px;
+}
+
+.delete-warning {
+  font-size: 13px;
+  line-height: 1.5;
+  color: #EF4444;
+  margin: 0 0 12px;
+  padding: 12px;
+  background: rgba(239, 68, 68, 0.08);
+  border-radius: 12px;
+}
+
+.delete-cancel-btn {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: inherit;
+  margin-top: 8px;
+}

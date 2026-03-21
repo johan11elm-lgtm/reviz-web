@@ -142,6 +142,8 @@ export default function Flashcards() {
         <div className="header-counter">{current + 1}<span>/{flashcards.length}</span></div>
       </div>
 
+      <div style={{ textAlign: 'center', padding: '4px 0 0' }}><span className="ai-badge">✦ Généré par IA</span></div>
+
       {/* ── Zone carte ── */}
       <div className="card-area">
 

@@ -172,6 +172,7 @@ export default function Resume() {
             {info.emoji} {resumeData.subject}
           </span>
           <h1 className="resume-title">{resumeData.title}</h1>
+          <span className="ai-badge">✦ Généré par IA</span>
         </div>
 
         {/* À retenir */}
