@@ -1,4 +1,4 @@
-import { Link, useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import './Legal.css';
 
 const PAGES = {
@@ -168,6 +168,7 @@ function Section({ title, children }) {
 
 export default function Legal() {
   const { page } = useParams();
+  const navigate = useNavigate();
   const data = PAGES[page];
 
   if (!data) return <div className="app"><p style={{ padding: 24 }}>Page introuvable.</p></div>;
@@ -175,7 +176,7 @@ export default function Legal() {
   return (
     <div className="app">
       <div className="legal-header">
-        <Link to="/welcome" className="legal-back">←</Link>
+        <button className="legal-back" onClick={() => navigate(-1)}>←</button>
         <span className="legal-title">{data.title}</span>
       </div>
       <div className="legal-content">
