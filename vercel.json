@@ -23,6 +23,6 @@
     }
   ],
   "rewrites": [
-    { "source": "/((?!api/).*)", "destination": "/index.html" }
+    { "source": "/((?!api/)(?!sitemap\\.xml)(?!robots\\.txt)(?!googlee9de8164637c0bbf\\.html).*)", "destination": "/index.html" }
   ]
 }
