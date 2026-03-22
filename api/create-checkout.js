@@ -6,9 +6,7 @@ import Stripe from 'stripe'
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
 
 const PRICE_MONTHLY = process.env.STRIPE_PRICE_MONTHLY // prix mensuel créé dans Stripe Dashboard
-const BASE_URL = process.env.VERCEL_URL
-  ? `https://${process.env.VERCEL_URL}`
-  : 'http://localhost:5173'
+const BASE_URL = 'https://reviz-gamma.vercel.app'
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).end()
