@@ -29,9 +29,14 @@ export function PremiumModal({ onClose, used = 5, limit = 5 }) {
       const data = await res.json();
       if (data.url) {
         window.location.href = data.url;
+      } else {
+        console.error('[PremiumModal] No URL returned:', data);
+        alert('Erreur lors de la redirection. Réessaie dans quelques instants.');
+        setLoading(false);
       }
     } catch (err) {
       console.error('[PremiumModal] Checkout error:', err);
+      alert('Erreur de connexion. Vérifie ta connexion internet.');
       setLoading(false);
     }
   }
