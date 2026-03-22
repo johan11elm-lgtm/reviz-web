@@ -4,24 +4,11 @@ import { useAuth } from '../context/AuthContext';
 import { Drawer } from '../components/Drawer';
 import { BottomNav } from '../components/BottomNav';
 import { analyseLesson, analyseImage, popPendingAnalysis } from '../services/aiService';
-import { saveLesson, loadLessons } from '../services/historyService';
+import { saveLesson } from '../services/historyService';
 import { PremiumModal } from '../components/PremiumModal';
+import { getScanStatus } from '../services/scanLimitService';
 import { subjectInfo } from '../utils/subjects';
 import './Analyse.css';
-
-const LIMITE_FREE = 5;
-const ADMIN_EMAILS = ['johan11elm@gmail.com'];
-
-function isOverMonthlyLimit(userEmail) {
-  if (userEmail && ADMIN_EMAILS.includes(userEmail)) return false;
-  const lessons = loadLessons();
-  const now = new Date();
-  const thisMonth = lessons.filter(l => {
-    const d = new Date(l.scannedAt);
-    return d.getMonth() === now.getMonth() && d.getFullYear() === now.getFullYear();
-  });
-  return thisMonth.length >= LIMITE_FREE;
-}
 
 // ─── Mock de fallback ────────────────────────────────────────────────
 const mockLesson = {
@@ -144,7 +131,7 @@ export default function Analyse() {
       return;
     }
     if (lessonText || capturedImg) {
-      if (isOverMonthlyLimit(currentUser?.email)) {
+      if (!getScanStatus().canScan) {
         setShowPremium(true);
         setIsLoading(false);
         return;
