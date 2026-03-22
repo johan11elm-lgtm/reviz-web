@@ -32,10 +32,13 @@
 
 /* ── Content ─────────────────────────────────────── */
 .brevet-content {
+  flex: 1;
   padding: 16px 16px 100px;
   display: flex;
   flex-direction: column;
   gap: 12px;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 /* ── Global progress card ───────────────────────── */
