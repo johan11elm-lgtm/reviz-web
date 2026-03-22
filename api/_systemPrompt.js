@@ -13,7 +13,7 @@ FORMAT DE SORTIE OBLIGATOIRE (respecte exactement les noms de champs) :
 {
   "metadata": {
     "title": "titre court de la leçon",
-    "subject": "matière scolaire exacte. Indices : si les exemples sont en anglais → 'Anglais', si c'est de la grammaire française → 'Français', si c'est des formules/calculs → 'Maths', etc. Ne te base pas sur la langue du texte mais sur le sujet enseigné. Valeurs possibles : Maths / Français / Anglais / Histoire / Géographie / SVT / Physique-Chimie / Philosophie / SES / Autre",
+    "subject": "matière scolaire exacte. Indices : si les exemples sont en anglais → 'Anglais', si les exemples sont en allemand (ich, du, er, sein, haben, Schule...) → 'Allemand', si les exemples sont en espagnol (yo, tú, él, ser, estar, hablar...) → 'Espagnol', si c'est de la grammaire française → 'Français', si c'est des formules/calculs → 'Maths', etc. Ne te base pas sur la langue du texte mais sur le sujet enseigné. Valeurs possibles : Maths / Français / Anglais / Allemand / Espagnol / Histoire / Géographie / SVT / Physique-Chimie / Philosophie / SES / Autre",
     "excerpt": "résumé en 1-2 phrases de l'essentiel de la leçon"
   },
   "flashcards": [

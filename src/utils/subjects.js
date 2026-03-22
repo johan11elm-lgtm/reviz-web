@@ -13,6 +13,7 @@ export const SUBJECT_MAP = {
   'techno':   { color: 'cyan',   dot: '#06B6D4', bg: '#ECFEFF', emoji: '⚙️' },
   'anglais':  { color: 'yellow', dot: '#EAB308', bg: '#FEFCE8', emoji: '🗣️' },
   'espagnol': { color: 'yellow', dot: '#EAB308', bg: '#FEFCE8', emoji: '💬' },
+  'allemand': { color: 'yellow', dot: '#EAB308', bg: '#FEFCE8', emoji: '🇩🇪' },
   'langues':  { color: 'yellow', dot: '#EAB308', bg: '#FEFCE8', emoji: '🌐' },
   'latin':    { color: 'yellow', dot: '#6366F1', bg: '#EEF2FF', emoji: '🏛️' },
   'arts':     { color: 'purple', dot: '#A855F7', bg: '#FAF5FF', emoji: '🎨' },

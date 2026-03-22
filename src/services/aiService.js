@@ -60,7 +60,7 @@ FORMAT DE SORTIE OBLIGATOIRE (respecte exactement les noms de champs) :
 {
   "metadata": {
     "title": "titre court de la leçon",
-    "subject": "matière (Maths / Français / Histoire / SVT / Physique / Chimie / Géo / etc.)",
+    "subject": "matière scolaire exacte. Indices : si les exemples sont en anglais → 'Anglais', si en allemand → 'Allemand', si en espagnol → 'Espagnol', si grammaire française → 'Français'. Valeurs possibles : Maths / Français / Anglais / Allemand / Espagnol / Histoire / Géographie / SVT / Physique-Chimie / Autre",
     "excerpt": "résumé en 1-2 phrases de l'essentiel de la leçon"
   },
   "flashcards": [
