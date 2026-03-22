@@ -125,7 +125,7 @@ input, textarea {
 
 /* ─── App shell ────────────────────────────────────────────────── */
 .app {
-  width: 390px;
+  width: 480px;
   background: var(--bg-app);
   min-height: 844px;
   border-radius: 40px;
@@ -134,6 +134,19 @@ input, textarea {
   flex-direction: column;
   position: relative;
   overflow: hidden;
+}
+
+/* Tablette : container plus large, toujours centré */
+@media (min-width: 431px) and (max-width: 1024px) {
+  body {
+    padding: 20px 0;
+  }
+  .app {
+    width: min(600px, calc(100vw - 32px));
+    min-height: calc(100dvh - 40px);
+    border-radius: 28px;
+    box-shadow: 0 16px 48px rgba(0,0,0,0.1);
+  }
 }
 
 /* Sur mobile réel : plein écran, sans bordures ni ombre */
@@ -168,7 +181,7 @@ input, textarea {
   /* Padding pour ne pas cacher le contenu derrière la nav */
   .content, .pg-content {
     padding-bottom: calc(110px + env(safe-area-inset-bottom, 0px));
-    min-height: 0; /* permet au flex child de se contraindre et activer overflow-y scroll */
+    min-height: 0;
   }
 }
 
