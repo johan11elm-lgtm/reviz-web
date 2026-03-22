@@ -53,6 +53,7 @@ export function BottomNav() {
           to={tab.to}
           end={tab.to === '/'}
           className={({ isActive }) => `nav-item${isActive ? ' active' : ''}`}
+          aria-label={tab.label}
         >
           <span className="nav-icon">{tab.icon}</span>
           <span className="nav-label">{tab.label}</span>

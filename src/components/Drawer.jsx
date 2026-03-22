@@ -108,8 +108,9 @@ export function Drawer({ isOpen, onClose }) {
       <div
         className={`drawer-overlay${isOpen ? ' open' : ''}`}
         onClick={onClose}
+        aria-hidden="true"
       />
-      <div className={`drawer${isOpen ? ' open' : ''}`}>
+      <div className={`drawer${isOpen ? ' open' : ''}`} role="dialog" aria-label="Menu">
         {/* Header profil */}
         <div className="drawer-header">
           <div className="drawer-avatar">{initiale}</div>
@@ -124,7 +125,7 @@ export function Drawer({ isOpen, onClose }) {
         <div className="drawer-section-label">COMPTE</div>
         <div>
           {/* Modifier le profil */}
-          <div className="drawer-item" onClick={() => activePanel === 'profil' ? closePanel() : openPanel('profil')} style={{ cursor: 'pointer' }}>
+          <div className="drawer-item" onClick={() => activePanel === 'profil' ? closePanel() : openPanel('profil')} style={{ cursor: 'pointer' }} role="button" tabIndex={0} aria-expanded={activePanel === 'profil'}>
             <span className="drawer-item-icon">👤</span>
             <span className="drawer-item-label">Modifier le profil</span>
             <span className="drawer-item-arrow">{activePanel === 'profil' ? '∨' : '›'}</span>
@@ -140,7 +141,7 @@ export function Drawer({ isOpen, onClose }) {
           )}
 
           {/* Modifier l'e-mail */}
-          <div className="drawer-item" onClick={() => activePanel === 'email' ? closePanel() : openPanel('email')} style={{ cursor: 'pointer' }}>
+          <div className="drawer-item" onClick={() => activePanel === 'email' ? closePanel() : openPanel('email')} style={{ cursor: 'pointer' }} role="button" tabIndex={0} aria-expanded={activePanel === 'email'}>
             <span className="drawer-item-icon">✉️</span>
             <span className="drawer-item-label">Modifier l'e-mail</span>
             <span className="drawer-item-arrow">{activePanel === 'email' ? '∨' : '›'}</span>
@@ -156,7 +157,7 @@ export function Drawer({ isOpen, onClose }) {
           )}
 
           {/* Modifier le mot de passe */}
-          <div className="drawer-item" onClick={() => activePanel === 'password' ? closePanel() : openPanel('password')} style={{ cursor: 'pointer' }}>
+          <div className="drawer-item" onClick={() => activePanel === 'password' ? closePanel() : openPanel('password')} style={{ cursor: 'pointer' }} role="button" tabIndex={0} aria-expanded={activePanel === 'password'}>
             <span className="drawer-item-icon">🔑</span>
             <span className="drawer-item-label">Mot de passe</span>
             <span className="drawer-item-arrow">{activePanel === 'password' ? '∨' : '›'}</span>
@@ -225,7 +226,7 @@ export function Drawer({ isOpen, onClose }) {
         {/* Informations */}
         <div className="drawer-section-label">INFORMATIONS</div>
         <div>
-          <div className="drawer-item" onClick={() => activePanel === 'apropos' ? closePanel() : openPanel('apropos')} style={{ cursor: 'pointer' }}>
+          <div className="drawer-item" onClick={() => activePanel === 'apropos' ? closePanel() : openPanel('apropos')} style={{ cursor: 'pointer' }} role="button" tabIndex={0} aria-expanded={activePanel === 'apropos'}>
             <span className="drawer-item-icon">ℹ️</span>
             <span className="drawer-item-label">À propos</span>
             <span className="drawer-item-arrow">{activePanel === 'apropos' ? '∨' : '›'}</span>
@@ -258,7 +259,7 @@ export function Drawer({ isOpen, onClose }) {
         </div>
 
         {/* Déconnexion */}
-        <div className="drawer-logout" onClick={handleLogout}>
+        <div className="drawer-logout" onClick={handleLogout} role="button" tabIndex={0} aria-label="Se déconnecter" onKeyDown={e => e.key === 'Enter' && handleLogout()}>
           <span className="drawer-item-icon">🚪</span>
           <span className="drawer-logout-label">Se déconnecter</span>
           <span className="drawer-item-arrow">›</span>

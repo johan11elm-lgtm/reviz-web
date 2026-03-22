@@ -127,7 +127,7 @@ export default function Profile() {
       {/* Header */}
       <div className="pf-header">
         <span className="pf-header-title">Profil</span>
-        <div className="pf-header-avatar" onClick={() => setDrawerOpen(true)}>{initiale}</div>
+        <div className="pf-header-avatar" onClick={() => setDrawerOpen(true)} role="button" tabIndex={0} aria-label="Ouvrir le menu">{initiale}</div>
       </div>
 
       {/* Content */}

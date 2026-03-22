@@ -259,7 +259,7 @@ export default function Analyse() {
       <div className="header">
         <button className="back-btn" onClick={() => navigate('/scan')}>←</button>
         <span className="header-title">Ta leçon</span>
-        <div className="header-avatar" onClick={() => setDrawerOpen(true)}>{initiale}</div>
+        <div className="header-avatar" onClick={() => setDrawerOpen(true)} role="button" tabIndex={0} aria-label="Ouvrir le menu">{initiale}</div>
       </div>
 
       {/* ── Content ── */}

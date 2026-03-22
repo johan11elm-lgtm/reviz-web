@@ -13,7 +13,7 @@ import { AchievementToast } from '../components/AchievementToast';
 import './Home.css';
 
 const LogoStar = () => (
-  <svg className="logo-star" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <svg className="logo-star" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
     <path
       d="M8 0 C8.3 2.8 8.8 4.2 10.2 5.6 11.6 7 13 7.5 16 8 13 8.5 11.6 9 10.2 10.4 8.8 11.8 8.3 13.2 8 16 7.7 13.2 7.2 11.8 5.8 10.4 4.4 9 3 8.5 0 8 3 7.5 4.4 7 5.8 5.6 7.2 4.2 7.7 2.8 8 0Z"
       fill="url(#starGrad)"
@@ -117,7 +117,7 @@ export default function Home() {
       {/* Header */}
       <div className="header">
         <span className="header-logo">réviz <LogoStar /></span>
-        <div className="header-avatar" onClick={() => setDrawerOpen(true)}>{initiale}</div>
+        <div className="header-avatar" onClick={() => setDrawerOpen(true)} role="button" tabIndex={0} aria-label="Ouvrir le menu">{initiale}</div>
       </div>
 
       <div className="content">

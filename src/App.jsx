@@ -36,6 +36,7 @@ const VerifyEmail    = lazy(() => import('./pages/VerifyEmail'))
 const Legal          = lazy(() => import('./pages/Legal'))
 const Brevet         = lazy(() => import('./pages/Brevet'))
 const ConsentPending = lazy(() => import('./pages/ConsentPending'))
+const NotFound       = lazy(() => import('./pages/NotFound'))
 
 // Fallback minimal pendant le chargement
 function LoadingFallback() {
@@ -74,6 +75,7 @@ function AuthRoutes() {
       <Route path="/resume"      element={<PrivateRoute><Resume /></PrivateRoute>} />
       <Route path="/mindmap"     element={<PrivateRoute><Mindmap /></PrivateRoute>} />
       <Route path="/brevet"      element={<PrivateRoute><Brevet /></PrivateRoute>} />
+      <Route path="*"            element={<NotFound />} />
     </Routes>
   )
 }

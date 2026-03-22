@@ -113,7 +113,7 @@ export default function Scan() {
       <div className="header">
         <button className="back-btn" onClick={() => navigate('/')}>←</button>
         <span className="header-title">Scanner une leçon</span>
-        <div className="header-avatar" onClick={() => setDrawerOpen(true)}>{initiale}</div>
+        <div className="header-avatar" onClick={() => setDrawerOpen(true)} role="button" tabIndex={0} aria-label="Ouvrir le menu">{initiale}</div>
       </div>
 
       {/* Tabs */}

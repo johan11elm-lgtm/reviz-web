@@ -83,7 +83,7 @@ export default function Cours() {
             <span className="cours-header-sub">{totalVisible} leçon{totalVisible > 1 ? 's' : ''}</span>
           )}
         </div>
-        <div className="cours-header-avatar" onClick={() => setDrawerOpen(true)}>{initiale}</div>
+        <div className="cours-header-avatar" onClick={() => setDrawerOpen(true)} role="button" tabIndex={0} aria-label="Ouvrir le menu">{initiale}</div>
       </div>
 
       {/* Search */}

@@ -189,7 +189,7 @@ export default function Progres() {
       {/* Header */}
       <div className="pg-header">
         <span className="pg-header-title">Mes progrès</span>
-        <div className="pg-header-avatar" onClick={() => setDrawerOpen(true)}>{initiale}</div>
+        <div className="pg-header-avatar" onClick={() => setDrawerOpen(true)} role="button" tabIndex={0} aria-label="Ouvrir le menu">{initiale}</div>
       </div>
 
       <div className="pg-content">
