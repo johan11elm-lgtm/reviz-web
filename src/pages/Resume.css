@@ -143,31 +143,35 @@
   border: 1px solid var(--border);
   border-radius: 18px;
   display: flex;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .section-accent {
   width: 4px;
   background: var(--accent, #6366F1);
   flex-shrink: 0;
-  border-radius: 0;
+  border-radius: 18px 0 0 18px;
 }
 
 .section-inner {
-  flex: 1;
+  flex: 1 1 auto;
+  min-width: 0;
   padding: 16px 16px 16px 14px;
   display: flex; flex-direction: column; gap: 8px;
 }
 
 .section-heading {
   font-size: 14px; font-weight: 700; letter-spacing: -0.2px;
+  color: var(--text-primary, #1A1A1A);
 }
 
 .section-body {
   font-size: 13px;
-  color: var(--text-secondary);
+  color: var(--text-secondary, #777);
   line-height: 1.7;
   white-space: pre-line;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 /* Bloc formule */
