@@ -26,7 +26,7 @@ export default async function handler(req, res) {
           quantity: 1,
         },
       ],
-      success_url: `${BASE_URL}/scan?upgraded=true`,
+      success_url: `${BASE_URL}/upgrade-success`,
       cancel_url: `${BASE_URL}/scan`,
       locale: 'fr',
     })

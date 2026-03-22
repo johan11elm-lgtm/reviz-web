@@ -18,17 +18,7 @@ export default function Scan() {
   const fileInputRef  = useRef(null);
   const facingModeRef = useRef('environment');
   const navigate  = useNavigate();
-  const { currentUser, refreshPremium } = useAuth();
-
-  // Après retour Stripe, re-vérifier le statut premium
-  useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    if (params.get('upgraded') === 'true') {
-      refreshPremium();
-      // Nettoyer l'URL
-      window.history.replaceState({}, '', '/scan');
-    }
-  }, []);
+  const { currentUser } = useAuth();
   const initiale = currentUser?.displayName?.[0]?.toUpperCase() ?? '?';
 
   // Démarrer la caméra quand on est sur l'onglet photo
