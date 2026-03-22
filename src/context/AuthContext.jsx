@@ -24,6 +24,7 @@ import { setActiveUser as setRevisionUser } from '../services/revisionService';
 import { setSrsUser } from '../services/srsService';
 import { setChallengeUser } from '../services/challengeService';
 import { setBrevetUser } from '../services/brevetService';
+import { setScanLimitUser } from '../services/scanLimitService';
 import { collection, getDocs, deleteDoc, doc, getDoc } from 'firebase/firestore';
 
 const AuthContext = createContext();
@@ -145,6 +146,7 @@ export function AuthProvider({ children }) {
       setSrsUser(user?.uid ?? null);
       setChallengeUser(user?.uid ?? null);
       setBrevetUser(user?.uid ?? null);
+      setScanLimitUser(user?.uid ?? null);
       setCurrentUser(user);
 
       // Vérifier le consentement parental pour les <15 ans

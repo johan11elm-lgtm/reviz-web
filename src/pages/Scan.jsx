@@ -2,13 +2,16 @@ import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { Drawer } from '../components/Drawer';
+import { PremiumModal } from '../components/PremiumModal';
 import { startAnalysis, startAnalysisFromImage } from '../services/aiService';
+import { getScanStatus } from '../services/scanLimitService';
 import './Scan.css';
 
 export default function Scan() {
   const [drawerOpen, setDrawerOpen]   = useState(false);
   const [activeTab, setActiveTab]     = useState('photo');
   const [lessonText, setLessonText]   = useState('');
+  const [showLimit, setShowLimit]     = useState(false);
   const [camStatus, setCamStatus]     = useState('idle'); // 'idle' | 'active' | 'denied' | 'error'
   const videoRef      = useRef(null);
   const streamRef     = useRef(null);
@@ -64,9 +67,20 @@ export default function Scan() {
     setCamStatus('idle');
   }
 
+  // Vérifie la limite de scans avant de lancer l'analyse
+  function checkLimit() {
+    const status = getScanStatus();
+    if (!status.canScan) {
+      setShowLimit(true);
+      return false;
+    }
+    return true;
+  }
+
   // Capturer une frame et l'envoyer à l'analyse (via canvas → base64)
   function handleCapture() {
     if (!videoRef.current || camStatus !== 'active') return;
+    if (!checkLimit()) return;
     const canvas = document.createElement('canvas');
     canvas.width  = videoRef.current.videoWidth;
     canvas.height = videoRef.current.videoHeight;
@@ -88,6 +102,7 @@ export default function Scan() {
   function handleMediaImport(e) {
     const file = e.target.files?.[0];
     if (!file) return;
+    if (!checkLimit()) return;
     const reader = new FileReader();
     reader.onload = (ev) => {
       const imageData = ev.target.result;
@@ -101,6 +116,7 @@ export default function Scan() {
   }
 
   const handleAnalyse = () => {
+    if (!checkLimit()) return;
     localStorage.removeItem('reviz-ai-data');
     localStorage.setItem('reviz-lesson-text', lessonText);
     startAnalysis(lessonText);
@@ -243,6 +259,14 @@ export default function Scan() {
       </div>
 
       <Drawer isOpen={drawerOpen} onClose={() => setDrawerOpen(false)} />
+
+      {showLimit && (
+        <PremiumModal
+          onClose={() => setShowLimit(false)}
+          used={getScanStatus().used}
+          limit={getScanStatus().limit}
+        />
+      )}
     </div>
   );
 }

@@ -1,27 +1,26 @@
 .premium-overlay {
-  position: absolute;
+  position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, 0.55);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 200;
-  border-radius: 40px;
   padding: 24px;
 }
 
 .premium-card {
-  background: var(--bg-card);
+  background: var(--bg-card, #fff);
   border-radius: 24px;
   padding: 28px 22px 22px;
   width: 100%;
-  max-width: 290px;
+  max-width: 310px;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 10px;
   box-shadow: 0 16px 48px rgba(0, 0, 0, 0.22);
-  animation: confirm-in 0.22s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: premium-in 0.22s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 @keyframes premium-in {
@@ -38,17 +37,35 @@
   font-size: 18px;
   font-weight: 700;
   letter-spacing: -0.3px;
-  color: var(--text-primary);
+  color: var(--text-primary, #1A1A1A);
   text-align: center;
   margin: 0;
 }
 
 .premium-sub {
   font-size: 13px;
-  color: var(--text-muted);
+  color: var(--text-muted, #999);
   text-align: center;
   line-height: 1.5;
   margin: 0 0 4px;
+}
+
+.premium-counter {
+  display: flex;
+  gap: 8px;
+  margin: 4px 0 8px;
+}
+
+.premium-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--bg-subtle, #eee);
+  transition: background 0.2s;
+}
+
+.premium-dot.used {
+  background: #F97316;
 }
 
 .premium-btn {
@@ -72,6 +89,6 @@
 }
 
 .premium-btn--close {
-  background: var(--bg-subtle);
-  color: var(--text-primary);
+  background: var(--bg-subtle, #f0f0f0);
+  color: var(--text-primary, #1A1A1A);
 }
