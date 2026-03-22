@@ -7,7 +7,7 @@ import { updateChallengeProgress } from './challengeService'
 import { incrementScanCount } from './scanLimitService'
 
 let _uid = null
-const MAX_LESSONS = 20
+const MAX_LESSONS = 100
 
 // Appelé par AuthContext dès que l'état de connexion change
 export function setActiveUser(uid) { _uid = uid }

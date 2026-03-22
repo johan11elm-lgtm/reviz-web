@@ -22,22 +22,20 @@ export default async function handler(req) {
   const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/gif', 'image/webp']
   if (!ALLOWED_TYPES.includes(mediaType)) return new Response('INVALID_MEDIA_TYPE', { status: 400 })
 
-  // Vérification du token Firebase
-  if (idToken) {
-    const firebaseKey = process.env.FIREBASE_API_KEY
-    if (firebaseKey) {
-      try {
-        const verifyResp = await fetch(
-          `https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=${firebaseKey}`,
-          { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ idToken }) }
-        )
-        if (!verifyResp.ok) return new Response('Unauthorized', { status: 401 })
-        const { users } = await verifyResp.json()
-        if (!users?.[0]) return new Response('Unauthorized', { status: 401 })
-      } catch {
-        return new Response('Unauthorized', { status: 401 })
-      }
-    }
+  // Vérification du token Firebase (obligatoire)
+  if (!idToken) return new Response('Unauthorized', { status: 401 })
+  const firebaseKey = process.env.FIREBASE_API_KEY
+  if (!firebaseKey) return new Response('Server configuration error', { status: 500 })
+  try {
+    const verifyResp = await fetch(
+      `https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=${firebaseKey}`,
+      { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ idToken }) }
+    )
+    if (!verifyResp.ok) return new Response('Unauthorized', { status: 401 })
+    const { users } = await verifyResp.json()
+    if (!users?.[0]) return new Response('Unauthorized', { status: 401 })
+  } catch {
+    return new Response('Unauthorized', { status: 401 })
   }
 
   // Appel Anthropic vision (non-streaming)

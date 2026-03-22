@@ -194,16 +194,21 @@ async function _callProxy(endpoint, payload, onProgress) {
   }
 
   let response
+  const controller = new AbortController()
+  const fetchTimeout = setTimeout(() => controller.abort(), 30000)
   try {
     response = await fetch(endpoint, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ ...payload, idToken }),
+      signal: controller.signal,
     })
-  } catch {
+  } catch (err) {
+    clearTimeout(fetchTimeout)
     if (ticker) clearInterval(ticker)
-    throw new Error('NETWORK_ERROR')
+    throw new Error(err.name === 'AbortError' ? 'TIMEOUT' : 'NETWORK_ERROR')
   }
+  clearTimeout(fetchTimeout)
 
   if (!response.ok) {
     if (ticker) clearInterval(ticker)
@@ -232,6 +237,8 @@ export async function analyseLesson(text, onProgress) {
 
   // Appel API direct (dev local uniquement)
   let response
+  const controller = new AbortController()
+  const fetchTimeout = setTimeout(() => controller.abort(), 30000)
   try {
     response = await fetch(API_URL, {
       method: 'POST',
@@ -248,10 +255,13 @@ export async function analyseLesson(text, onProgress) {
         system: SYSTEM_PROMPT,
         messages: [{ role: 'user', content: `Voici la leçon à analyser :\n\n${text}` }],
       }),
+      signal: controller.signal,
     })
-  } catch {
-    throw new Error('NETWORK_ERROR')
+  } catch (err) {
+    clearTimeout(fetchTimeout)
+    throw new Error(err.name === 'AbortError' ? 'TIMEOUT' : 'NETWORK_ERROR')
   }
+  clearTimeout(fetchTimeout)
 
   // Erreurs HTTP
   if (!response.ok) {
@@ -279,6 +289,8 @@ export async function analyseImage(imageDataUrl, onProgress) {
   const apiKey = import.meta.env.VITE_ANTHROPIC_API_KEY
 
   let response
+  const controller = new AbortController()
+  const fetchTimeout = setTimeout(() => controller.abort(), 30000)
   try {
     response = await fetch(API_URL, {
       method: 'POST',
@@ -303,10 +315,13 @@ export async function analyseImage(imageDataUrl, onProgress) {
           },
         ],
       }),
+      signal: controller.signal,
     })
-  } catch {
-    throw new Error('NETWORK_ERROR')
+  } catch (err) {
+    clearTimeout(fetchTimeout)
+    throw new Error(err.name === 'AbortError' ? 'TIMEOUT' : 'NETWORK_ERROR')
   }
+  clearTimeout(fetchTimeout)
 
   if (!response.ok) {
     if (response.status === 401 || response.status === 403) throw new Error('INVALID_API_KEY')
