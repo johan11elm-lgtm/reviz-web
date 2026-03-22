@@ -182,11 +182,25 @@ export function AuthProvider({ children }) {
     return unsub;
   }, []);
 
+  // Permet de re-vérifier le statut premium (après retour Stripe)
+  async function refreshPremium() {
+    if (!auth.currentUser) return;
+    try {
+      const userDoc = await getDoc(doc(db, 'users', auth.currentUser.uid));
+      const premium = userDoc.exists() && userDoc.data()?.plan === 'premium';
+      setIsPremium(premium);
+      setPremiumStatus(premium);
+    } catch {
+      // ignore
+    }
+  }
+
   const value = {
     currentUser,
     loading,
     consentPending,
     isPremium,
+    refreshPremium,
     signup,
     login,
     loginWithGoogle,
