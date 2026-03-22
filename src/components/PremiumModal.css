@@ -104,10 +104,15 @@
 }
 .premium-btn:active { opacity: 0.75; transform: scale(0.98); }
 
-.premium-btn--parent {
-  background: #25D366;
+.premium-btn--upgrade {
+  background: linear-gradient(135deg, #818CF8, #6366F1);
   color: #fff;
-  font-size: 14.5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  opacity: 0.55;
+  cursor: not-allowed;
 }
 
 .premium-btn--close {
