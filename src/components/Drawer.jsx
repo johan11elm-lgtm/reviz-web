@@ -17,7 +17,7 @@ function firebaseErrorFr(code) {
 
 export function Drawer({ isOpen, onClose }) {
   const { isDark, toggleTheme } = useTheme();
-  const { currentUser, logout, getUserClasse, updateDisplayName, updateUserEmail, updateUserPassword } = useAuth();
+  const { currentUser, isPremium, logout, getUserClasse, updateDisplayName, updateUserEmail, updateUserPassword } = useAuth();
   const navigate = useNavigate();
 
   const prenom   = currentUser?.displayName ?? '';
@@ -215,11 +215,15 @@ export function Drawer({ isOpen, onClose }) {
           <div className="drawer-item">
             <div>
               <div style={{ fontSize: 11, color: 'var(--text-muted)', fontWeight: 600, marginBottom: 4 }}>
-                PLAN ACTUEL · GRATUIT
+                {isPremium ? 'PLAN ACTUEL · RÉVIZ+' : 'PLAN ACTUEL · GRATUIT'}
               </div>
-              <span className="premium-chip">✨ Passer à Premium</span>
+              {isPremium ? (
+                <span className="premium-chip premium-chip--active">💎 Réviz+ actif</span>
+              ) : (
+                <span className="premium-chip">✨ Passer à Premium</span>
+              )}
             </div>
-            <span className="drawer-item-arrow">›</span>
+            {!isPremium && <span className="drawer-item-arrow">›</span>}
           </div>
         </div>
 

@@ -314,6 +314,9 @@ input, textarea {
   color: white; font-size: 11px; font-weight: 700;
   padding: 4px 10px; border-radius: 20px; align-self: flex-start;
 }
+.premium-chip--active {
+  background: linear-gradient(135deg, #22C55E, #16A34A);
+}
 
 .drawer-logout {
   display: flex; align-items: center; gap: 10px;
