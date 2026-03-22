@@ -24,7 +24,7 @@ import { setActiveUser as setRevisionUser } from '../services/revisionService';
 import { setSrsUser } from '../services/srsService';
 import { setChallengeUser } from '../services/challengeService';
 import { setBrevetUser } from '../services/brevetService';
-import { setScanLimitUser } from '../services/scanLimitService';
+import { setScanLimitUser, setPremiumStatus } from '../services/scanLimitService';
 import { collection, getDocs, deleteDoc, doc, getDoc } from 'firebase/firestore';
 
 const AuthContext = createContext();
@@ -37,6 +37,7 @@ export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser]   = useState(null);
   const [loading, setLoading]           = useState(true);
   const [consentPending, setConsentPending] = useState(false);
+  const [isPremium, setIsPremium] = useState(false);
 
   // --- Inscription ---
   async function signup(prenom, email, password, classe) {
@@ -159,8 +160,21 @@ export function AuthProvider({ children }) {
         } catch {
           setConsentPending(false);
         }
+
+        // Vérifier le statut premium
+        try {
+          const userDoc = await getDoc(doc(db, 'users', user.uid));
+          const premium = userDoc.exists() && userDoc.data()?.plan === 'premium';
+          setIsPremium(premium);
+          setPremiumStatus(premium);
+        } catch {
+          setIsPremium(false);
+          setPremiumStatus(false);
+        }
       } else {
         setConsentPending(false);
+        setIsPremium(false);
+        setPremiumStatus(false);
       }
 
       setLoading(false);
@@ -172,6 +186,7 @@ export function AuthProvider({ children }) {
     currentUser,
     loading,
     consentPending,
+    isPremium,
     signup,
     login,
     loginWithGoogle,

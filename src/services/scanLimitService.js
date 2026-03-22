@@ -6,10 +6,12 @@
 // -------------------------------------------------------
 
 let _uid = null
+let _isPremium = false
 
 const FREE_LIMIT = 5
 
 export function setScanLimitUser(uid) { _uid = uid }
+export function setPremiumStatus(isPremium) { _isPremium = isPremium }
 
 function getKey() {
   return _uid ? `reviz-scan-limit-${_uid}` : 'reviz-scan-limit'
@@ -18,7 +20,7 @@ function getKey() {
 function getMonday(d) {
   const date = new Date(d)
   const day = date.getDay()
-  const diff = day === 0 ? -6 : 1 - day // lundi = jour 1
+  const diff = day === 0 ? -6 : 1 - day
   date.setDate(date.getDate() + diff)
   date.setHours(0, 0, 0, 0)
   return date.getTime()
@@ -37,14 +39,17 @@ function saveData(data) {
 }
 
 /**
- * Retourne { canScan, remaining, used, limit }
+ * Retourne { canScan, remaining, used, limit, isPremium }
  */
 export function getScanStatus() {
+  if (_isPremium) {
+    return { canScan: true, remaining: Infinity, used: 0, limit: FREE_LIMIT, isPremium: true }
+  }
+
   const now = Date.now()
   const currentWeek = getMonday(now)
   let data = loadData()
 
-  // Réinitialiser si nouvelle semaine ou pas de données
   if (!data || data.weekStart !== currentWeek) {
     data = { count: 0, weekStart: currentWeek }
     saveData(data)
@@ -56,6 +61,7 @@ export function getScanStatus() {
     remaining,
     used: data.count,
     limit: FREE_LIMIT,
+    isPremium: false,
   }
 }
 
@@ -63,6 +69,8 @@ export function getScanStatus() {
  * Incrémente le compteur de scans (appelé après un scan réussi)
  */
 export function incrementScanCount() {
+  if (_isPremium) return 0
+
   const now = Date.now()
   const currentWeek = getMonday(now)
   let data = loadData()

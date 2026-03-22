@@ -1,13 +1,40 @@
+import { useState } from 'react';
+import { useAuth } from '../context/AuthContext';
 import './PremiumModal.css';
 
 /**
  * Modale freemium — affichée quand la limite hebdomadaire de scans est atteinte.
  */
 export function PremiumModal({ onClose, used = 5, limit = 5 }) {
+  const { currentUser } = useAuth();
+  const [loading, setLoading] = useState(false);
+
   const now = new Date();
   const day = now.getDay();
   const daysUntilMonday = day === 0 ? 1 : 8 - day;
   const resetLabel = daysUntilMonday === 1 ? 'demain' : `dans ${daysUntilMonday} jours`;
+
+  async function handleUpgrade() {
+    if (loading) return;
+    setLoading(true);
+    try {
+      const res = await fetch('/api/create-checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          uid: currentUser?.uid,
+          email: currentUser?.email,
+        }),
+      });
+      const data = await res.json();
+      if (data.url) {
+        window.location.href = data.url;
+      }
+    } catch (err) {
+      console.error('[PremiumModal] Checkout error:', err);
+      setLoading(false);
+    }
+  }
 
   return (
     <div className="premium-overlay" onClick={onClose}>
@@ -27,9 +54,13 @@ export function PremiumModal({ onClose, used = 5, limit = 5 }) {
 
         <div className="premium-divider" />
 
-        <button className="premium-btn premium-btn--upgrade" disabled>
+        <button
+          className="premium-btn premium-btn--upgrade"
+          onClick={handleUpgrade}
+          disabled={loading}
+        >
           <span className="premium-btn-icon">💎</span>
-          Passer à Réviz+ — Bientôt
+          {loading ? 'Redirection...' : 'Passer à Réviz+ — 4,99€/mois'}
         </button>
 
         <button className="premium-btn premium-btn--close" onClick={onClose}>

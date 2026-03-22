@@ -111,8 +111,11 @@
   align-items: center;
   justify-content: center;
   gap: 8px;
-  opacity: 0.55;
-  cursor: not-allowed;
+}
+
+.premium-btn--upgrade:disabled {
+  opacity: 0.6;
+  cursor: wait;
 }
 
 .premium-btn--close {
