@@ -1,0 +1,140 @@
+/* -----------------------------------------------------
+   Réviz — LevelSelector
+   ----------------------------------------------------- */
+
+.level-selector {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.level-section-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+}
+
+.level-section-hint {
+  font-weight: 400;
+  color: var(--text-muted);
+  font-size: 12px;
+}
+
+/* --- Cycle (3 grosses cartes) --- */
+.level-cycle-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.level-cycle-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 14px 8px;
+  background: var(--bg-card);
+  border: 1.5px solid var(--border);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all .15s ease;
+}
+
+.level-cycle-btn:hover {
+  border-color: var(--border-hover);
+}
+
+.level-cycle-btn.active {
+  border-color: #FF6B00;
+  background: var(--bg-icon-orange);
+}
+
+.level-cycle-emoji {
+  font-size: 22px;
+  line-height: 1;
+}
+
+.level-cycle-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.level-cycle-desc {
+  font-size: 11px;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+/* --- Classes (boutons) --- */
+.level-classe-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.level-classe-btn {
+  padding: 8px 14px;
+  background: var(--bg-card);
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: all .15s ease;
+}
+
+.level-classe-btn:hover {
+  border-color: var(--border-hover);
+}
+
+.level-classe-btn.active {
+  background: var(--bg-cta);
+  border-color: var(--bg-cta);
+  color: var(--text-cta);
+}
+
+/* --- Chips (spécialités / filières) --- */
+.level-chips-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.level-chip {
+  padding: 7px 12px;
+  background: var(--bg-subtle);
+  border: 1.5px solid transparent;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: all .15s ease;
+}
+
+.level-chip:hover {
+  background: var(--bg-hover);
+  border-color: var(--border);
+}
+
+.level-chip.active {
+  background: var(--bg-icon-orange);
+  border-color: #FF6B00;
+  color: #C04F00;
+}
+
+/* --- Variante compacte (drawer / sheets) --- */
+.level-selector--compact .level-cycle-btn {
+  padding: 10px 6px;
+}
+
+.level-selector--compact .level-cycle-emoji {
+  font-size: 18px;
+}
+
+.level-selector--compact .level-cycle-label {
+  font-size: 12px;
+}

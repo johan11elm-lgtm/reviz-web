@@ -19,6 +19,7 @@ import {
   deleteUser,
 } from 'firebase/auth';
 import { auth, db } from '../services/firebaseConfig';
+import { parseLevel, serializeLevel, migrateLegacyClasse } from '../utils/levels';
 import { setActiveUser } from '../services/historyService';
 import { setActiveUser as setRevisionUser } from '../services/revisionService';
 import { setSrsUser } from '../services/srsService';
@@ -40,15 +41,18 @@ export function AuthProvider({ children }) {
   const [isPremium, setIsPremium] = useState(false);
 
   // --- Inscription ---
-  async function signup(prenom, email, password, classe) {
+  // `level` est un objet { cycle, classe, specialites?, filiere? }
+  async function signup(prenom, email, password, level) {
     const { user } = await createUserWithEmailAndPassword(auth, email, password);
     await updateProfile(user, { displayName: prenom });
     // Envoyer l'email de vérification (fire-and-forget)
     sendEmailVerification(user).catch(() => {});
     // Forcer le re-render avec le displayName mis à jour
     setCurrentUser({ ...auth.currentUser });
-    // La classe n'est pas gérée par Firebase Auth → on la met en localStorage
-    if (classe) localStorage.setItem(`reviz-classe-${user.uid}`, classe);
+    // Niveau scolaire stocké en localStorage (pas géré par Firebase Auth)
+    if (level?.cycle) {
+      localStorage.setItem(`reviz-level-${user.uid}`, serializeLevel(level));
+    }
     return user;
   }
 
@@ -133,10 +137,34 @@ export function AuthProvider({ children }) {
     await deleteUser(user);
   }
 
-  // --- Classe de l'utilisateur (localStorage lié au uid) ---
+  // --- Niveau scolaire de l'utilisateur (localStorage lié au uid) ---
+  // Lit `reviz-level-{uid}` (nouveau format) avec fallback automatique vers
+  // l'ancienne clé `reviz-classe-{uid}` (legacy collège uniquement).
+  function getUserLevel() {
+    if (!currentUser) return null;
+    const uid = currentUser.uid;
+    const stored = localStorage.getItem(`reviz-level-${uid}`);
+    if (stored) return parseLevel(stored);
+    const legacy = localStorage.getItem(`reviz-classe-${uid}`);
+    const migrated = migrateLegacyClasse(legacy);
+    if (migrated) {
+      localStorage.setItem(`reviz-level-${uid}`, serializeLevel(migrated));
+      return migrated;
+    }
+    return null;
+  }
+
+  function setUserLevel(level) {
+    if (!currentUser || !level?.cycle) return;
+    localStorage.setItem(`reviz-level-${currentUser.uid}`, serializeLevel(level));
+    // On nettoie l'ancienne clé après migration
+    localStorage.removeItem(`reviz-classe-${currentUser.uid}`);
+  }
+
+  // Wrapper de compatibilité — à retirer quand plus aucun appel ne l'utilise
   function getUserClasse() {
-    if (!currentUser) return '';
-    return localStorage.getItem(`reviz-classe-${currentUser.uid}`) ?? '';
+    const level = getUserLevel();
+    return level?.classe ?? '';
   }
 
   // --- Écoute l'état de connexion Firebase ---
@@ -207,6 +235,8 @@ export function AuthProvider({ children }) {
     logout,
     resetPassword,
     getUserClasse,
+    getUserLevel,
+    setUserLevel,
     updateDisplayName,
     updateUserEmail,
     updateUserPassword,

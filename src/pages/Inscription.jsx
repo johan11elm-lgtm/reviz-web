@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { LevelSelector } from '../components/LevelSelector';
+import { requiresParentalConsentCheck } from '../utils/levels';
 import './Inscription.css';
 
 function firebaseErrorFr(code) {
@@ -25,7 +27,7 @@ function isUnder15(dateStr) {
 export default function Inscription() {
   const [step, setStep]             = useState(1); // 1 = form, 2 = parent email
   const [prenom, setPrenom]         = useState('');
-  const [classe, setClasse]         = useState('');
+  const [level, setLevel]           = useState({ cycle: null, classe: null, specialites: [], filiere: null });
   const [dateNaissance, setDateNaissance] = useState('');
   const [email, setEmail]           = useState('');
   const [password, setPassword]     = useState('');
@@ -38,7 +40,10 @@ export default function Inscription() {
   const { signup, loginWithGoogle } = useAuth();
   const navigate = useNavigate();
 
-  const needsParentConsent = isUnder15(dateNaissance);
+  // La date de naissance n'est demandée qu'au collège — les autres cycles
+  // ont par définition 15 ans ou plus.
+  const needsBirthDate = requiresParentalConsentCheck(level);
+  const needsParentConsent = needsBirthDate && isUnder15(dateNaissance);
 
   async function handleGoogle() {
     setError('');
@@ -56,13 +61,14 @@ export default function Inscription() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    if (!prenom.trim())    { setError('Entre ton prénom.'); return; }
-    if (!dateNaissance)    { setError('Entre ta date de naissance.'); return; }
-    if (!acceptCgu)        { setError('Tu dois accepter les CGU pour continuer.'); return; }
+    if (!prenom.trim())                  { setError('Entre ton prénom.'); return; }
+    if (!level.cycle || !level.classe)   { setError('Choisis ton cycle et ta classe.'); return; }
+    if (needsBirthDate && !dateNaissance){ setError('Entre ta date de naissance.'); return; }
+    if (!acceptCgu)                      { setError('Tu dois accepter les CGU pour continuer.'); return; }
     setError('');
     setLoading(true);
     try {
-      const user = await signup(prenom.trim(), email, password, classe.trim());
+      const user = await signup(prenom.trim(), email, password, level);
       if (needsParentConsent) {
         // Store UID for step 2, do not navigate yet
         setCreatedUid(user.uid);
@@ -156,28 +162,23 @@ export default function Inscription() {
         </div>
 
         <div className="auth-field">
-          <label className="auth-label">Date de naissance</label>
-          <input
-            className="auth-input"
-            type="date"
-            value={dateNaissance}
-            onChange={e => setDateNaissance(e.target.value)}
-            autoComplete="bday"
-            required
-          />
+          <label className="auth-label">Ton niveau</label>
+          <LevelSelector value={level} onChange={setLevel} />
         </div>
 
-        <div className="auth-field">
-          <label className="auth-label">Classe</label>
-          <input
-            className="auth-input"
-            type="text"
-            placeholder="4ème"
-            value={classe}
-            onChange={e => setClasse(e.target.value)}
-            autoComplete="off"
-          />
-        </div>
+        {needsBirthDate && (
+          <div className="auth-field">
+            <label className="auth-label">Date de naissance</label>
+            <input
+              className="auth-input"
+              type="date"
+              value={dateNaissance}
+              onChange={e => setDateNaissance(e.target.value)}
+              autoComplete="bday"
+              required
+            />
+          </div>
+        )}
 
         <div className="auth-field">
           <label className="auth-label">Email</label>

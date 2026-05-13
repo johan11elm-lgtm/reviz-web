@@ -5,20 +5,21 @@ import { loadLessons, syncFromFirestore } from '../services/historyService';
 import { loadRevisions, syncRevisionsFromFirestore } from '../services/revisionService';
 import { Drawer } from '../components/Drawer';
 import { BottomNav } from '../components/BottomNav';
+import { LevelSelector } from '../components/LevelSelector';
 import { computeStreak, computeLevel, computeBadges, XP_PAR_LECON, XP_PAR_NIVEAU } from '../utils/gamification';
+import { formatLevelLabel } from '../utils/levels';
 import './Profile.css';
-
-const CLASSES = ['6ème', '5ème', '4ème', '3ème'];
 
 export default function Profile() {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [showAllBadges, setShowAllBadges] = useState(false);
   const navigate = useNavigate();
 
-  const { currentUser, getUserClasse, logout, updateDisplayName, updateUserPassword, deleteAccount } = useAuth();
+  const { currentUser, getUserLevel, setUserLevel, logout, updateDisplayName, updateUserPassword, deleteAccount } = useAuth();
   const prenom   = currentUser?.displayName ?? '';
   const initiale = prenom[0]?.toUpperCase() ?? '?';
-  const classe   = getUserClasse();
+  const userLevel  = getUserLevel();
+  const levelLabel = formatLevelLabel(userLevel);
 
   const [allLessons, setAllLessons]     = useState(() => loadLessons());
   const [allRevisions, setAllRevisions] = useState(() => loadRevisions());
@@ -39,7 +40,7 @@ export default function Profile() {
 
   const [activeSheet, setActiveSheet] = useState(null);
   const [editPrenom, setEditPrenom]   = useState('');
-  const [editClasse, setEditClasse]   = useState('');
+  const [editLevel, setEditLevel]     = useState({ cycle: null, classe: null, specialites: [], filiere: null });
   const [saving, setSaving]           = useState(false);
   const [saveError, setSaveError]     = useState('');
   const [notifsEnabled, setNotifsEnabled] = useState(
@@ -59,7 +60,11 @@ export default function Profile() {
   );
 
   function openSheet(name) {
-    if (name === 'profil') { setEditPrenom(prenom); setEditClasse(classe); setSaveError(''); }
+    if (name === 'profil') {
+      setEditPrenom(prenom);
+      setEditLevel(userLevel ?? { cycle: null, classe: null, specialites: [], filiere: null });
+      setSaveError('');
+    }
     if (name === 'confidentialite') { setCurrentPwd(''); setNewPwd(''); setPwdError(''); setPwdSuccess(false); setDeleteStep(0); setDeletePwd(''); setDeleteError(''); }
     setActiveSheet(name);
   }
@@ -70,8 +75,9 @@ export default function Profile() {
     setSaving(true); setSaveError('');
     try {
       await updateDisplayName(editPrenom.trim());
-      if (editClasse && currentUser)
-        localStorage.setItem(`reviz-classe-${currentUser.uid}`, editClasse);
+      if (editLevel?.cycle && editLevel?.classe) {
+        setUserLevel(editLevel);
+      }
       closeSheet();
     } catch { setSaveError('Erreur lors de la sauvegarde, réessaie.'); }
     finally { setSaving(false); }
@@ -140,7 +146,7 @@ export default function Profile() {
             <div className="avatar-level">Niv. {level}</div>
           </div>
           <div className="profile-name">{prenom}</div>
-          {classe && <div className="profile-classe">{classe}</div>}
+          {levelLabel && <div className="profile-classe">{levelLabel}</div>}
           {createdAt && <div className="profile-handle">Membre depuis {createdAt}</div>}
         </div>
 
@@ -240,12 +246,8 @@ export default function Profile() {
                 <div className="sheet-body">
                   <label className="sheet-label">Prénom</label>
                   <input className="sheet-input" value={editPrenom} onChange={e => setEditPrenom(e.target.value)} placeholder="Ton prénom" maxLength={30} />
-                  <label className="sheet-label" style={{ marginTop: 18 }}>Classe</label>
-                  <div className="classe-grid">
-                    {CLASSES.map(c => (
-                      <button key={c} className={`classe-btn${editClasse === c ? ' active' : ''}`} onClick={() => setEditClasse(c)}>{c}</button>
-                    ))}
-                  </div>
+                  <label className="sheet-label" style={{ marginTop: 18 }}>Niveau</label>
+                  <LevelSelector value={editLevel} onChange={setEditLevel} />
                   {saveError && <p className="sheet-error">{saveError}</p>}
                   <button className="sheet-save-btn" onClick={handleSaveProfil} disabled={saving || !editPrenom.trim()}>
                     {saving ? 'Sauvegarde…' : 'Sauvegarder'}

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useTheme } from '../context/ThemeContext';
 import { useAuth } from '../context/AuthContext';
+import { formatLevelLabel } from '../utils/levels';
 
 function firebaseErrorFr(code) {
   switch (code) {
@@ -17,22 +18,18 @@ function firebaseErrorFr(code) {
 
 export function Drawer({ isOpen, onClose }) {
   const { isDark, toggleTheme } = useTheme();
-  const { currentUser, isPremium, logout, getUserClasse, updateDisplayName, updateUserEmail, updateUserPassword } = useAuth();
+  const { currentUser, isPremium, logout, getUserLevel, updateUserEmail, updateUserPassword } = useAuth();
   const navigate = useNavigate();
 
   const prenom   = currentUser?.displayName ?? '';
   const initiale = prenom[0]?.toUpperCase() ?? '?';
-  const classe   = getUserClasse();
+  const levelLabel = formatLevelLabel(getUserLevel());
 
-  // Panneau actif : null | 'profil' | 'email' | 'password'
+  // Panneau actif : null | 'email' | 'password' | 'apropos'
   const [activePanel, setActivePanel] = useState(null);
   const [loading, setLoading]         = useState(false);
   const [error, setError]             = useState('');
   const [success, setSuccess]         = useState('');
-
-  // Champs profil
-  const [newPrenom, setNewPrenom] = useState('');
-  const [newClasse, setNewClasse] = useState('');
 
   // Champs email
   const [newEmail, setNewEmail]         = useState('');
@@ -46,28 +43,15 @@ export function Drawer({ isOpen, onClose }) {
     setActivePanel(panel);
     setError('');
     setSuccess('');
-    if (panel === 'profil') { setNewPrenom(prenom); setNewClasse(classe); }
     if (panel === 'email')    { setNewEmail(''); setEmailPassword(''); }
     if (panel === 'password') { setCurrentPassword(''); setNewPassword(''); }
   }
 
   function closePanel() { setActivePanel(null); setError(''); setSuccess(''); }
 
-  async function handleSaveProfil(e) {
-    e.preventDefault();
-    if (!newPrenom.trim()) return;
-    setLoading(true); setError('');
-    try {
-      await updateDisplayName(newPrenom.trim());
-      if (newClasse.trim()) {
-        localStorage.setItem(`reviz-classe-${currentUser.uid}`, newClasse.trim());
-      }
-      setSuccess('Profil mis à jour !');
-    } catch (err) {
-      setError(firebaseErrorFr(err.code));
-    } finally {
-      setLoading(false);
-    }
+  function handleEditProfile() {
+    onClose();
+    navigate('/profil');
   }
 
   async function handleSaveEmail(e) {
@@ -116,7 +100,7 @@ export function Drawer({ isOpen, onClose }) {
           <div className="drawer-avatar">{initiale}</div>
           <div>
             <div className="drawer-name">{prenom || 'Mon profil'}</div>
-            {classe && <div className="drawer-sub">{classe}</div>}
+            {levelLabel && <div className="drawer-sub">{levelLabel}</div>}
             <div className="drawer-sub">{currentUser?.email}</div>
           </div>
         </div>
@@ -124,21 +108,12 @@ export function Drawer({ isOpen, onClose }) {
         {/* Compte */}
         <div className="drawer-section-label">COMPTE</div>
         <div>
-          {/* Modifier le profil */}
-          <div className="drawer-item" onClick={() => activePanel === 'profil' ? closePanel() : openPanel('profil')} style={{ cursor: 'pointer' }} role="button" tabIndex={0} aria-expanded={activePanel === 'profil'}>
+          {/* Modifier le profil → renvoie vers la page Profil */}
+          <div className="drawer-item" onClick={handleEditProfile} style={{ cursor: 'pointer' }} role="button" tabIndex={0}>
             <span className="drawer-item-icon">👤</span>
             <span className="drawer-item-label">Modifier le profil</span>
-            <span className="drawer-item-arrow">{activePanel === 'profil' ? '∨' : '›'}</span>
+            <span className="drawer-item-arrow">›</span>
           </div>
-          {activePanel === 'profil' && (
-            <form className="drawer-panel" onSubmit={handleSaveProfil}>
-              <input className="drawer-panel-input" placeholder="Prénom" value={newPrenom} onChange={e => setNewPrenom(e.target.value)} autoFocus />
-              <input className="drawer-panel-input" placeholder="Classe (ex: 4ème)" value={newClasse} onChange={e => setNewClasse(e.target.value)} />
-              {error   && <p className="drawer-panel-error">{error}</p>}
-              {success && <p className="drawer-panel-success">{success}</p>}
-              <button className="drawer-panel-btn" type="submit" disabled={loading}>{loading ? 'Enregistrement...' : 'Enregistrer'}</button>
-            </form>
-          )}
 
           {/* Modifier l'e-mail */}
           <div className="drawer-item" onClick={() => activePanel === 'email' ? closePanel() : openPanel('email')} style={{ cursor: 'pointer' }} role="button" tabIndex={0} aria-expanded={activePanel === 'email'}>
