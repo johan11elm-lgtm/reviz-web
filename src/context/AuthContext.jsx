@@ -20,6 +20,7 @@ import {
 } from 'firebase/auth';
 import { auth, db } from '../services/firebaseConfig';
 import { parseLevel, serializeLevel, migrateLegacyClasse } from '../utils/levels';
+import { createUserProfile } from '../services/userProfileService';
 import { setActiveUser } from '../services/historyService';
 import { setActiveUser as setRevisionUser } from '../services/revisionService';
 import { setSrsUser } from '../services/srsService';
@@ -42,14 +43,16 @@ export function AuthProvider({ children }) {
 
   // --- Inscription ---
   // `level` est un objet { cycle, classe, specialites?, filiere? }
-  async function signup(prenom, email, password, level) {
+  async function signup(prenom, email, password, level, birthDate = null) {
     const { user } = await createUserWithEmailAndPassword(auth, email, password);
     await updateProfile(user, { displayName: prenom });
     // Envoyer l'email de vérification (fire-and-forget)
     sendEmailVerification(user).catch(() => {});
+    // Profil persistant dans Firestore (best-effort, ne bloque pas l'inscription)
+    createUserProfile(user.uid, { prenom, email, birthDate, level }).catch(() => {});
     // Forcer le re-render avec le displayName mis à jour
     setCurrentUser({ ...auth.currentUser });
-    // Niveau scolaire stocké en localStorage (pas géré par Firebase Auth)
+    // Niveau scolaire stocké aussi en localStorage (cache lu par le reste de l'app)
     if (level?.cycle) {
       localStorage.setItem(`reviz-level-${user.uid}`, serializeLevel(level));
     }

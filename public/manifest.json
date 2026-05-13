@@ -1,7 +1,7 @@
 {
   "name": "Réviz — Révise avec l'IA",
   "short_name": "Réviz",
-  "description": "Scanne tes leçons et révise avec des flashcards, quiz, résumés et cartes mentales générés par l'IA.",
+  "description": "Scanne tes leçons, révise avec des flashcards, quiz et résumés générés par l'IA — adaptés du collège au supérieur, pour le Brevet, le Bac et les partiels.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#F7F7F5",

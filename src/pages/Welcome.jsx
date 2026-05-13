@@ -45,16 +45,16 @@ export default function Welcome() {
       <main>
       {/* ── Hero ── */}
       <section className="wlc-hero">
-        <div className="wlc-badge">✦ Pour les collégiens</div>
+        <div className="wlc-badge">✦ Collège · Lycée · Supérieur</div>
         <h1 className="wlc-headline">
           Révise mieux.<br />Retiens plus.
         </h1>
         <p className="wlc-sub">
-          L'IA transforme tes leçons en flashcards, quiz et résumés
-          en quelques secondes.
+          L'IA transforme tes leçons en flashcards, quiz et résumés —
+          adaptés à ton niveau, du Brevet aux partiels.
         </p>
         <div className="wlc-subjects">
-          {['📐','🧬','📖','⚛️','🌍','🎨','🏛️'].map((e, i) => (
+          {['📐','🧬','📖','⚛️','🌍','💻','⚖️','🤔','🎨','🏛️'].map((e, i) => (
             <span key={i}>{e}</span>
           ))}
         </div>

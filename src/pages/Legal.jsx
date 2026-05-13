@@ -59,7 +59,7 @@ const PAGES = {
         </Section>
 
         <Section title="Mineurs">
-          <p>Réviz s'adresse aux collégiens (11-15 ans). Conformément à la réglementation française, les utilisateurs de moins de 15 ans doivent obtenir l'autorisation d'un parent ou représentant légal pour créer un compte.</p>
+          <p>Réviz s'adresse aux élèves et étudiants du système scolaire français, du collège à l'enseignement supérieur. Conformément à la réglementation française, les utilisateurs de moins de 15 ans doivent obtenir l'autorisation d'un parent ou représentant légal pour créer un compte.</p>
         </Section>
 
         <Section title="Partage des données">

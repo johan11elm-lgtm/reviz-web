@@ -1,7 +1,28 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { formatLevelLabel } from '../utils/levels';
 import './Onboarding.css';
+
+// Tagline adaptée au cycle scolaire — affichée sur le slide d'accueil.
+function levelTagline(level) {
+  if (level?.cycle === 'college') {
+    const examNote = level.classe === '3ème' ? ' et au Brevet' : '';
+    return `Réviz transforme tes leçons en outils de révision calibrés pour le programme du collège${examNote}.`;
+  }
+  if (level?.cycle === 'lycee') {
+    const examNote = level.classe === 'Terminale'
+      ? ' et préparés pour la méthode du Bac'
+      : level.classe === '1ère'
+        ? ' et préparés pour les épreuves anticipées'
+        : '';
+    return `Réviz transforme tes leçons en outils de révision calibrés pour le programme du lycée${examNote}.`;
+  }
+  if (level?.cycle === 'superieur') {
+    return `Réviz transforme tes cours en outils de révision calibrés pour le niveau universitaire — vocabulaire académique, démonstrations rigoureuses, format type partiels.`;
+  }
+  return `Réviz transforme n'importe quelle leçon en outils de révision en quelques secondes.`;
+}
 
 const LogoStar = () => (
   <svg className="ob-star" viewBox="0 0 16 16" fill="none">
@@ -22,7 +43,8 @@ const SLIDES = [
   {
     id: 'welcome',
     titleFn: prenom => `Salut ${prenom} 👋`,
-    body: 'Fini de relire tes cours pendant des heures. Réviz transforme n\'importe quelle leçon en outils de révision en quelques secondes.',
+    // body est calculé dynamiquement selon le niveau de l'utilisateur (voir render)
+    body: null,
     visual: 'logo',
   },
   {
@@ -59,9 +81,11 @@ const SLIDES = [
 export default function Onboarding() {
   const [step, setStep] = useState(0);
   const [animDir, setAnimDir] = useState('in');
-  const { currentUser } = useAuth();
+  const { currentUser, getUserLevel } = useAuth();
   const navigate = useNavigate();
   const prenom = currentUser?.displayName?.split(' ')[0] ?? 'toi';
+  const userLevel = getUserLevel();
+  const levelLabel = formatLevelLabel(userLevel);
 
   useEffect(() => {
     if (currentUser && localStorage.getItem(`reviz-onboarded-${currentUser.uid}`)) {
@@ -158,8 +182,18 @@ export default function Onboarding() {
           {slide.titleFn ? slide.titleFn(prenom) : slide.title}
         </h1>
 
-        {slide.body && (
-          <p className="ob-body-text">{slide.body}</p>
+        {slide.id === 'welcome' ? (
+          <p className="ob-body-text">
+            {levelLabel && (
+              <>
+                <span className="ob-level-chip">✦ {levelLabel}</span>
+                <br />
+              </>
+            )}
+            {levelTagline(userLevel)}
+          </p>
+        ) : (
+          slide.body && <p className="ob-body-text">{slide.body}</p>
         )}
       </div>
 
