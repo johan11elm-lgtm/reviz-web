@@ -1,4 +1,4 @@
-import { SYSTEM_PROMPT, MODEL } from './_systemPrompt.js'
+import { buildSystemPrompt, MODEL } from './_systemPrompt.js'
 
 export const config = { runtime: 'edge' }
 
@@ -7,17 +7,19 @@ export default async function handler(req) {
     return new Response('Method not allowed', { status: 405 })
   }
 
-  let imageData, mediaType, idToken
+  let imageData, mediaType, idToken, level
   try {
     const body = await req.json()
     imageData = body.imageData
     mediaType = body.mediaType
     idToken   = body.idToken
+    level     = body.level
   } catch {
     return new Response('Bad request', { status: 400 })
   }
 
   if (!imageData || !mediaType) return new Response('Missing image data', { status: 400 })
+  if (!level?.cycle) return new Response('MISSING_LEVEL', { status: 400 })
 
   const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/gif', 'image/webp']
   if (!ALLOWED_TYPES.includes(mediaType)) return new Response('INVALID_MEDIA_TYPE', { status: 400 })
@@ -52,7 +54,7 @@ export default async function handler(req) {
         model: MODEL,
         max_tokens: 8192,
         stream: false,
-        system: SYSTEM_PROMPT,
+        system: buildSystemPrompt(level),
         messages: [
           {
             role: 'user',

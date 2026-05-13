@@ -6,19 +6,22 @@ import { PremiumModal } from '../components/PremiumModal';
 import { startAnalysis, startAnalysisFromImage } from '../services/aiService';
 import { getScanStatus } from '../services/scanLimitService';
 import './Scan.css';
+import '../components/ConfirmModal.css';
 
 export default function Scan() {
   const [drawerOpen, setDrawerOpen]   = useState(false);
   const [activeTab, setActiveTab]     = useState('photo');
   const [lessonText, setLessonText]   = useState('');
   const [showLimit, setShowLimit]     = useState(false);
+  const [showLevelRequired, setShowLevelRequired] = useState(false);
   const [camStatus, setCamStatus]     = useState('idle'); // 'idle' | 'active' | 'denied' | 'error'
   const videoRef      = useRef(null);
   const streamRef     = useRef(null);
   const fileInputRef  = useRef(null);
   const facingModeRef = useRef('environment');
   const navigate  = useNavigate();
-  const { currentUser } = useAuth();
+  const { currentUser, getUserLevel } = useAuth();
+  const userLevel = getUserLevel();
   const initiale = currentUser?.displayName?.[0]?.toUpperCase() ?? '?';
 
   // Démarrer la caméra quand on est sur l'onglet photo
@@ -67,6 +70,15 @@ export default function Scan() {
     setCamStatus('idle');
   }
 
+  // Vérifie que le niveau scolaire est configuré (l'IA en a besoin pour adapter).
+  function checkLevel() {
+    if (!userLevel?.cycle) {
+      setShowLevelRequired(true);
+      return false;
+    }
+    return true;
+  }
+
   // Vérifie la limite de scans avant de lancer l'analyse
   function checkLimit() {
     const status = getScanStatus();
@@ -80,6 +92,7 @@ export default function Scan() {
   // Capturer une frame et l'envoyer à l'analyse (via canvas → base64)
   function handleCapture() {
     if (!videoRef.current || camStatus !== 'active') return;
+    if (!checkLevel()) return;
     if (!checkLimit()) return;
     const canvas = document.createElement('canvas');
     canvas.width  = videoRef.current.videoWidth;
@@ -89,7 +102,7 @@ export default function Scan() {
     localStorage.removeItem('reviz-ai-data');
     localStorage.removeItem('reviz-lesson-text');
     localStorage.setItem('reviz-captured-image', imageData);
-    startAnalysisFromImage(imageData);   // pré-lancer l'appel API immédiatement
+    startAnalysisFromImage(imageData, userLevel);   // pré-lancer l'appel API immédiatement
     navigate('/analyse');
   }
 
@@ -102,6 +115,7 @@ export default function Scan() {
   function handleMediaImport(e) {
     const file = e.target.files?.[0];
     if (!file) return;
+    if (!checkLevel()) return;
     if (!checkLimit()) return;
     const reader = new FileReader();
     reader.onload = (ev) => {
@@ -109,17 +123,18 @@ export default function Scan() {
       localStorage.removeItem('reviz-ai-data');
       localStorage.removeItem('reviz-lesson-text');
       localStorage.setItem('reviz-captured-image', imageData);
-      startAnalysisFromImage(imageData);
+      startAnalysisFromImage(imageData, userLevel);
       navigate('/analyse');
     };
     reader.readAsDataURL(file);
   }
 
   const handleAnalyse = () => {
+    if (!checkLevel()) return;
     if (!checkLimit()) return;
     localStorage.removeItem('reviz-ai-data');
     localStorage.setItem('reviz-lesson-text', lessonText);
-    startAnalysis(lessonText);
+    startAnalysis(lessonText, userLevel);
     navigate('/analyse');
   };
 
@@ -266,6 +281,27 @@ export default function Scan() {
           used={getScanStatus().used}
           limit={getScanStatus().limit}
         />
+      )}
+
+      {showLevelRequired && (
+        <div className="confirm-overlay" onClick={() => setShowLevelRequired(false)}>
+          <div className="confirm-card" onClick={e => e.stopPropagation()}>
+            <span className="confirm-icon">🎓</span>
+            <p className="confirm-title">Configure ton niveau d'abord</p>
+            <p className="confirm-sub">
+              Réviz adapte les flashcards, quiz et résumés à ce qu'on attend de toi
+              (collège, lycée ou supérieur). Choisis ton niveau dans ton profil pour commencer.
+            </p>
+            <div className="confirm-btns">
+              <button className="confirm-btn confirm-btn--cancel" onClick={() => setShowLevelRequired(false)}>
+                Plus tard
+              </button>
+              <button className="confirm-btn confirm-btn--delete" onClick={() => { setShowLevelRequired(false); navigate('/profil'); }}>
+                Aller au profil
+              </button>
+            </div>
+          </div>
+        </div>
       )}
     </div>
   );

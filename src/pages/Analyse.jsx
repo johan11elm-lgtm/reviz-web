@@ -107,8 +107,9 @@ export default function Analyse() {
   const [progress, setProgress]       = useState(0);
   const [showPremium, setShowPremium] = useState(false);
   const navigate   = useNavigate();
-  const { currentUser } = useAuth();
+  const { currentUser, getUserLevel } = useAuth();
   const initiale   = currentUser?.displayName?.[0]?.toUpperCase() ?? '?';
+  const userLevel  = getUserLevel();
   const calledRef  = useRef(false);
 
   useEffect(() => {
@@ -149,7 +150,7 @@ export default function Analyse() {
       if (now - lastUpdate > 150) { lastUpdate = now; setProgress(newP); }
     };
     const pending = popPendingAnalysis(onProgress);
-    const promise = pending ?? analyseLesson(text, onProgress);
+    const promise = pending ?? analyseLesson(text, onProgress, userLevel);
     promise
       .then(data => {
         localStorage.setItem('reviz-ai-data', JSON.stringify(data));
@@ -167,7 +168,7 @@ export default function Analyse() {
       if (now - lastUpdate > 150) { lastUpdate = now; setProgress(newP); }
     };
     const pending = popPendingAnalysis(onProgress);
-    const promise = pending ?? analyseImage(imageDataUrl, onProgress);
+    const promise = pending ?? analyseImage(imageDataUrl, onProgress, userLevel);
     promise
       .then(data => {
         localStorage.setItem('reviz-ai-data', JSON.stringify(data));

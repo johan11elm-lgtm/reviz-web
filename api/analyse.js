@@ -1,4 +1,4 @@
-import { SYSTEM_PROMPT, MODEL } from './_systemPrompt.js'
+import { buildSystemPrompt, MODEL } from './_systemPrompt.js'
 
 export const config = { runtime: 'edge' }
 
@@ -7,16 +7,18 @@ export default async function handler(req) {
     return new Response('Method not allowed', { status: 405 })
   }
 
-  let text, idToken
+  let text, idToken, level
   try {
     const body = await req.json()
     text    = body.text
     idToken = body.idToken
+    level   = body.level
   } catch {
     return new Response('Bad request', { status: 400 })
   }
 
   if (!text) return new Response('Missing text', { status: 400 })
+  if (!level?.cycle) return new Response('MISSING_LEVEL', { status: 400 })
 
   // Vérification du token Firebase (obligatoire)
   if (!idToken) return new Response('Unauthorized', { status: 401 })
@@ -53,7 +55,7 @@ export default async function handler(req) {
         model: MODEL,
         max_tokens: 8192,
         stream: false,
-        system: SYSTEM_PROMPT,
+        system: buildSystemPrompt(level),
         messages: [{ role: 'user', content: `Voici la leçon à analyser :\n\n${text}` }],
       }),
     })
