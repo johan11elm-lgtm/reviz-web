@@ -1,11 +1,13 @@
 // -------------------------------------------------------
 // Réviz — Service Worker (cache offline)
 // -------------------------------------------------------
-const CACHE_NAME = 'reviz-v1';
+const CACHE_NAME = 'reviz-v2';
 const STATIC_ASSETS = [
   '/',
   '/manifest.json',
-  '/icon.svg',
+  '/favicon-32.png',
+  '/favicon-64.png',
+  '/apple-touch-icon.png',
   '/icon-192.png',
   '/icon-512.png',
 ];
