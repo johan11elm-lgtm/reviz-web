@@ -1,0 +1,43 @@
+/* ------------------------------------------------------------
+   Mascot — Réviz brand mascot component
+   Usage: <Mascot pose="celebration" size={256} glow />
+   ------------------------------------------------------------ */
+
+.mascot {
+  display: block;
+  object-fit: contain;
+  object-position: center;
+  user-select: none;
+  -webkit-user-drag: none;
+  /* Prevent layout shift while loading */
+  background-color: transparent;
+  /* Crisp on retina, no blur on downscale */
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+}
+
+/* Signature orange glow — applied via filter so it follows the alpha shape exactly */
+.mascot--glow {
+  filter:
+    drop-shadow(0 0 var(--mascot-glow-radius, 24px) rgba(255, 90, 31, var(--mascot-glow-intensity, 0.55)))
+    drop-shadow(0 0 calc(var(--mascot-glow-radius, 24px) * 0.4) rgba(255, 145, 75, calc(var(--mascot-glow-intensity, 0.55) * 0.7)));
+}
+
+/* Gentle idle floating animation — opt in via the `animate` prop */
+.mascot--animate {
+  animation: mascot-float 4.5s ease-in-out infinite;
+  will-change: transform;
+}
+
+@keyframes mascot-float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  25%      { transform: translateY(-4px) rotate(-1deg); }
+  50%      { transform: translateY(-6px) rotate(0deg); }
+  75%      { transform: translateY(-3px) rotate(1deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mascot--animate {
+    animation: none;
+  }
+}
