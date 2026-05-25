@@ -1,0 +1,127 @@
+/* ============================================================================
+ * RV BUTTONS — CTA pill + action card + ghost.
+ * Référence: Home .featured-cta, .featured-btn
+ * ========================================================================== */
+
+/* ── CTA pill principal ── */
+.rv-btn-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 14px 22px;
+  border-radius: var(--radius-pill);
+  border: none;
+  background: var(--accent-violet);
+  color: #fff;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: -0.1px;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.12s ease, filter 0.15s ease;
+  text-decoration: none;
+}
+.rv-btn-cta:active { filter: brightness(0.95); }
+@media (hover: hover) and (pointer: fine) {
+  .rv-btn-cta:hover { background: var(--accent-violet-hover); }
+}
+.rv-btn-cta:disabled { opacity: 0.55; cursor: default; }
+
+.rv-btn-cta--full { width: 100%; }
+
+.rv-btn-cta--ghost {
+  background: var(--bg-card);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+}
+@media (hover: hover) and (pointer: fine) {
+  .rv-btn-cta--ghost:hover { background: var(--bg-hover); }
+}
+
+.rv-btn-cta--danger { background: var(--accent-red); }
+@media (hover: hover) and (pointer: fine) {
+  .rv-btn-cta--danger:hover { background: var(--accent-red); filter: brightness(0.95); }
+}
+
+.rv-btn-cta--upgrade {
+  background: linear-gradient(135deg, #FF9500, #FF6B00);
+  box-shadow: 0 6px 18px rgba(255, 117, 30, 0.32);
+}
+@media (hover: hover) and (pointer: fine) {
+  .rv-btn-cta--upgrade:hover { filter: brightness(1.05); }
+}
+
+.rv-btn-cta-arrow { font-size: 16px; line-height: 1; }
+
+/* ── Action card button — icon-square + label + sub ── */
+.rv-btn-action {
+  flex: 1;
+  min-width: 0;
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-card);
+  color: var(--text-primary);
+  cursor: pointer;
+  font-family: inherit;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-align: left;
+  position: relative;
+  transition: background 0.15s ease, border-color 0.15s ease, transform 0.12s ease;
+}
+@media (hover: hover) and (pointer: fine) {
+  .rv-btn-action:hover {
+    background: var(--bg-hover);
+    border-color: var(--border-hover);
+  }
+}
+.rv-btn-action:active { transform: scale(0.98); }
+
+.rv-btn-action-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+  flex: 1;
+}
+.rv-btn-action-label {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: -0.2px;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.rv-btn-action-sub {
+  font-size: 11px;
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.rv-btn-action-row {
+  display: flex;
+  gap: 8px;
+}
+
+/* ── Ghost button — text-only ── */
+.rv-btn-ghost {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 8px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+@media (hover: hover) and (pointer: fine) {
+  .rv-btn-ghost:hover { background: var(--bg-hover); color: var(--text-primary); }
+}

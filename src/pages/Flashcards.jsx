@@ -2,6 +2,8 @@ import { useState, useEffect, useMemo } from 'react'
 import { Link } from 'react-router-dom'
 import { recordRevision } from '../services/revisionService'
 import { getDueCards, updateCardState } from '../services/srsService'
+import { PageHeader } from '../components/PageHeader'
+import { Mascot } from '../components/Mascot'
 import './Flashcards.css'
 
 // ---- DONNÉES : localStorage (IA) > mock ----
@@ -31,14 +33,24 @@ export default function Flashcards() {
   const lessonId   = useMemo(() => getLessonId(), [])
   const rawCards   = getFlashcards()
   const flashcards = useMemo(() => getDueCards(lessonId, rawCards), [lessonId])
-  const [current, setCurrent]     = useState(0)
-  const [isFlipped, setIsFlipped] = useState(false)
-  const [gotCount, setGotCount]   = useState(0)
+  const [current, setCurrent]       = useState(0)
+  const [isFlipped, setIsFlipped]   = useState(false)
+  const [gotCount, setGotCount]     = useState(0)
   const [againCount, setAgainCount] = useState(0)
-  const [showEnd, setShowEnd]     = useState(false)
-  const [animDir, setAnimDir]     = useState(null) // 'got' | 'again'
+  const [showEnd, setShowEnd]       = useState(false)
+  const [animDir, setAnimDir]       = useState(null)  // 'got' | 'again'
+  const [streak, setStreak]         = useState(0)     // bonnes réponses consécutives
+  const [showStreakBadge, setShowStreakBadge] = useState(false)
 
   const card = flashcards[current]
+
+  // Auto-hide streak badge après 1.6s
+  useEffect(() => {
+    if (showStreakBadge) {
+      const t = setTimeout(() => setShowStreakBadge(false), 1600)
+      return () => clearTimeout(t)
+    }
+  }, [showStreakBadge, streak])
 
   function flipCard() { setIsFlipped(prev => !prev) }
 
@@ -59,11 +71,16 @@ export default function Flashcards() {
   function handleGot() {
     updateCardState(lessonId, flashcards[current].index ?? current, 'got')
     setGotCount(p => p + 1)
+    const newStreak = streak + 1
+    setStreak(newStreak)
+    if (newStreak >= 2) setShowStreakBadge(true)
     nextCard('got')
   }
   function handleAgain() {
     updateCardState(lessonId, flashcards[current].index ?? current, 'again')
     setAgainCount(p => p + 1)
+    setStreak(0)
+    setShowStreakBadge(false)
     nextCard('again')
   }
 
@@ -71,6 +88,7 @@ export default function Flashcards() {
     setCurrent(0); setIsFlipped(false)
     setGotCount(0); setAgainCount(0)
     setShowEnd(false); setAnimDir(null)
+    setStreak(0); setShowStreakBadge(false)
   }
 
   const [shareDone, setShareDone] = useState(false)
@@ -93,100 +111,143 @@ export default function Flashcards() {
 
   const xp = gotCount * 5
 
+  const dots = (
+    <div className="flashcards-progress-dots">
+      {flashcards.map((_, i) => (
+        <span
+          key={i}
+          className={`flashcards-progress-dot${i < current ? ' done' : i === current ? ' active' : ''}`}
+        />
+      ))}
+    </div>
+  )
+
+  const counter = (
+    <div className="flashcards-counter">
+      {current + 1}<span>/{flashcards.length}</span>
+    </div>
+  )
+
   return (
-    <div className="app">
+    <div className="app flashcards-page">
 
       {/* ── Écran de fin ── */}
       {showEnd && (
-        <div className="end-screen">
-          <span className="end-emoji">🎉</span>
-          <span className="end-title">Session terminée !</span>
-          <p className="end-sub">Tu as parcouru toutes les cartes !</p>
-          <div className="end-stats">
-            <div className="end-stat">
-              <span className="end-stat-value" style={{ color: '#22C55E' }}>{gotCount}</span>
-              <span className="end-stat-label">Maîtrisées</span>
+        <div className="rv-end-screen flashcards-end-screen">
+          <Mascot
+            pose="celebration"
+            size={240}
+            glow
+            animate
+            priority
+            className="rv-end-screen-mascot flashcards-end-mascot"
+            alt=""
+            aria-hidden="true"
+          />
+          <h2 className="rv-end-screen-title">Session terminée !</h2>
+          <p className="rv-end-screen-sub">Tu as parcouru toutes les cartes !</p>
+          <div className="flashcards-end-stats rv-card rv-card--padded">
+            <div className="flashcards-end-stat">
+              <span className="rv-stat-value rv-stat-value--md" style={{ color: 'var(--accent-green)' }}>{gotCount}</span>
+              <span className="rv-stat-label">Maîtrisées</span>
             </div>
-            <div className="end-stat-divider" />
-            <div className="end-stat">
-              <span className="end-stat-value" style={{ color: '#EF4444' }}>{againCount}</span>
-              <span className="end-stat-label">À revoir</span>
+            <div className="rv-stat-separator" />
+            <div className="flashcards-end-stat">
+              <span className="rv-stat-value rv-stat-value--md" style={{ color: 'var(--accent-red)' }}>{againCount}</span>
+              <span className="rv-stat-label">À revoir</span>
             </div>
-            <div className="end-stat-divider" />
-            <div className="end-stat">
-              <span className="end-stat-value">{flashcards.length}</span>
-              <span className="end-stat-label">Total</span>
+            <div className="rv-stat-separator" />
+            <div className="flashcards-end-stat">
+              <span className="rv-stat-value rv-stat-value--md">{flashcards.length}</span>
+              <span className="rv-stat-label">Total</span>
             </div>
           </div>
-          <div className="xp-badge">+{xp} XP gagnés !</div>
-          <button className="end-btn primary" onClick={restartDeck}>🔄 Recommencer</button>
-          <button className="end-btn" onClick={handleShare}>{shareDone ? '✓ Copié !' : '↗ Partager les cartes'}</button>
-          <Link className="end-btn" to="/analyse">← Retour aux formats</Link>
+          <div className="flashcards-xp-badge">+{xp} XP gagnés !</div>
+          <div className="rv-end-screen-actions">
+            <button type="button" className="rv-btn-cta rv-btn-cta--full" onClick={restartDeck}>
+              <span>🔄 Recommencer</span>
+            </button>
+            <button type="button" className="rv-btn-cta rv-btn-cta--full rv-btn-cta--ghost" onClick={handleShare}>
+              {shareDone ? '✓ Copié !' : '↗ Partager les cartes'}
+            </button>
+            <Link className="rv-btn-cta rv-btn-cta--full rv-btn-cta--ghost" to="/analyse">
+              ← Retour aux formats
+            </Link>
+          </div>
         </div>
       )}
 
-      {/* ── Header ── */}
-      <div className="header">
-        <Link className="back-btn" to="/analyse">←</Link>
-        <div className="header-center">
-          <span className="header-title">Flashcards</span>
-          <div className="progress-dots">
-            {flashcards.map((_, i) => (
-              <span
-                key={i}
-                className={`progress-dot${i < current ? ' done' : i === current ? ' active' : ''}`}
-              />
-            ))}
-          </div>
-        </div>
-        <div className="header-counter">{current + 1}<span>/{flashcards.length}</span></div>
-      </div>
+      <PageHeader
+        variant="back"
+        title="Flashcards"
+        sub={dots}
+        right={counter}
+      />
 
-      <div style={{ textAlign: 'center', padding: '4px 0 0' }}><span className="ai-badge">✦ Généré par IA</span></div>
+      <div className="flashcards-ai-row"><span className="ai-badge">✦ Généré par IA</span></div>
+
+      {/* ── Streak badge (animé) ── */}
+      {showStreakBadge && (
+        <div className="flashcards-streak-badge" aria-live="polite">
+          🔥 {streak} bonnes d'affilée
+        </div>
+      )}
 
       {/* ── Zone carte ── */}
-      <div className="card-area">
+      <div className="flashcards-card-area">
 
-        {/* Stack de cartes */}
-        <div className={`card-stack-wrap${animDir ? ` anim-${animDir}` : ''}`}>
-          <div className="card-stack-bg s2" />
-          <div className="card-stack-bg s1" />
+        <div className={`flashcards-stack-wrap${animDir ? ` flashcards-anim-${animDir}` : ''}`}>
+          <div className="flashcards-stack-bg flashcards-stack-bg--s2" />
+          <div className="flashcards-stack-bg flashcards-stack-bg--s1" />
 
-          <div className="flip-wrap" onClick={flipCard}>
-            <div className={`flip-card${isFlipped ? ' flipped' : ''}`}>
+          <div className="flashcards-flip-wrap" onClick={flipCard}>
+            <div className={`flashcards-flip-card${isFlipped ? ' flipped' : ''}`}>
 
-              {/* Recto */}
-              <div className="flip-face flip-front">
-                <span className="face-tag">Question</span>
-                <span className="face-text">{card.front}</span>
+              {/* Recto — Réviz pose la question */}
+              <div className="flashcards-flip-face flashcards-flip-front">
+                <Mascot
+                  pose="flashcard"
+                  size={220}
+                  glow
+                  priority
+                  className="flashcards-face-mascot"
+                  alt=""
+                  aria-hidden="true"
+                />
+                <span className="flashcards-face-tag">Question</span>
+                <span className="flashcards-face-text">{card.front}</span>
                 {!isFlipped && (
-                  <span className="face-hint">👆 Appuie pour révéler</span>
+                  <span className="flashcards-face-hint">👆 Appuie pour révéler</span>
                 )}
               </div>
 
-              {/* Verso */}
-              <div className="flip-face flip-back">
-                <span className="face-tag">Réponse</span>
-                <span className="face-text">{card.back}</span>
+              {/* Verso — Réviz donne la réponse */}
+              <div className="flashcards-flip-face flashcards-flip-back">
+                <Mascot
+                  pose="pointing"
+                  size={220}
+                  glow
+                  animate
+                  priority
+                  className="flashcards-face-mascot"
+                  alt=""
+                  aria-hidden="true"
+                />
+                <span className="flashcards-face-tag">Réponse</span>
+                <span className="flashcards-face-text">{card.back}</span>
               </div>
 
             </div>
           </div>
         </div>
 
-        {/* Indicateur */}
-        <p className="tap-hint">
-          {isFlipped ? "Tu t'en souviens ?" : "Lis, puis retourne la carte"}
-        </p>
-
-        {/* Boutons d'action */}
-        <div className={`actions${isFlipped ? ' visible' : ''}`}>
-          <button className="action-btn btn-again" onClick={handleAgain}>
-            <span className="btn-icon">✕</span>
+        <div className={`flashcards-actions${isFlipped ? ' visible' : ''}`}>
+          <button type="button" className="flashcards-action-btn flashcards-btn-again" onClick={handleAgain}>
+            <span className="flashcards-btn-icon">✕</span>
             <span>À revoir</span>
           </button>
-          <button className="action-btn btn-got" onClick={handleGot}>
-            <span className="btn-icon">✓</span>
+          <button type="button" className="flashcards-action-btn flashcards-btn-got" onClick={handleGot}>
+            <span className="flashcards-btn-icon">✓</span>
             <span>Maîtrisé</span>
           </button>
         </div>

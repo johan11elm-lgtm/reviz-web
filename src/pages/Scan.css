@@ -1,56 +1,17 @@
-/* Header */
-.header {
-  padding: 16px 20px 12px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
+/* CSS scoped to page wrapper — see scripts/scope-page-css.py */
+/* Wrapper: .scan-page */
+
+.scan-page {
+  position: relative;
+}
+
+/* ── Tabs Photo / Texte ── segmented control aligné DS via tokens. */
+.scan-page .scan-tabs-wrap {
+  padding: 6px 16px 4px;
   flex-shrink: 0;
 }
 
-.back-btn {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background: var(--bg-subtle);
-  border: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 16px;
-  cursor: pointer;
-  color: var(--text-primary);
-  flex-shrink: 0;
-}
-
-.header-title {
-  font-size: 22px;
-  font-weight: 700;
-  letter-spacing: -0.5px;
-}
-
-.header-avatar {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background: var(--bg-avatar);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--text-avatar);
-  cursor: pointer;
-  flex-shrink: 0;
-  margin-left: auto;
-}
-
-/* Tabs */
-.scan-tabs-wrap {
-  padding: 4px 16px 4px;
-  flex-shrink: 0;
-}
-
-.scan-tabs {
+.scan-page .scan-tabs {
   display: flex;
   background: var(--bg-subtle);
   border-radius: 14px;
@@ -58,354 +19,513 @@
   gap: 4px;
 }
 
-.scan-tab {
+.scan-page .scan-tab {
   flex: 1;
   padding: 9px 0;
   border: none;
   border-radius: 10px;
   background: transparent;
-  font-family: 'Inter', sans-serif;
+  color: var(--text-muted);
+  font-family: inherit;
   font-size: 13px;
   font-weight: 600;
-  color: var(--text-muted);
   cursor: pointer;
-  transition: background 0.15s, color 0.15s;
+  transition: background 0.15s ease, color 0.15s ease;
 }
 
-.scan-tab.active {
+.scan-page .scan-tab--active {
   background: var(--bg-card);
   color: var(--text-primary);
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  box-shadow: var(--shadow-card);
 }
 
-/* Content */
-.content {
+/* ── Content ── conteneur principal flex column. */
+.scan-page .scan-content {
   flex: 1;
-  padding: 12px 16px 24px;
+  padding: 10px 16px 24px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 14px;
   position: relative;
   overflow: hidden;
 }
 
-/* Viewfinder — always dark (camera UI) */
-.viewfinder {
-  position: relative;
-  background: #1A1A1A;
-  border-radius: 20px;
+/* ── Viewfinder shell ── chrome beige autour de la zone caméra sombre. */
+.scan-page .scan-viewfinder-shell {
   flex: 1;
-  min-height: 200px;
+  min-height: 240px;
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  padding: 10px;
+  box-shadow: var(--shadow-card);
+  display: flex;
+}
+
+/* Viewfinder — intérieur sombre (UI caméra). */
+.scan-page .viewfinder {
+  flex: 1;
+  position: relative;
+  background: #15131C;
+  border-radius: 20px;
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
-  gap: 12px;
 }
 
-/* Flux webcam */
-.cam-video {
+/* Flux vidéo */
+.scan-page .cam-video {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: 24px;
 }
 
-.cam-video-hidden {
-  display: none;
-}
+.scan-page .cam-video-hidden { display: none; }
 
-.cam-placeholder {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-}
-
-.cam-retry-btn {
-  margin-top: 4px;
-  padding: 7px 18px;
-  border: 1.5px solid rgba(255,255,255,0.3);
-  border-radius: 20px;
-  background: transparent;
-  color: rgba(255,255,255,0.7);
-  font-size: 12px;
-  font-weight: 600;
-  cursor: pointer;
-  font-family: 'Inter', sans-serif;
-}
-
-.shutter-btn.disabled {
-  opacity: 0.4;
-  cursor: not-allowed;
-}
-
-/* Corner brackets */
-.corner {
+/* Corner brackets (chrome interne caméra, blanc justifié sur fond dark). */
+.scan-page .corner {
   position: absolute;
   width: 28px;
   height: 28px;
+  pointer-events: none;
 }
 
-.corner-tl {
-  top: 20px;
-  left: 20px;
-  border-top: 2.5px solid white;
-  border-left: 2.5px solid white;
+.scan-page .corner-tl {
+  top: 16px;
+  left: 16px;
+  border-top: 2.5px solid #fff;
+  border-left: 2.5px solid #fff;
   border-radius: 4px 0 0 0;
 }
 
-.corner-tr {
-  top: 20px;
-  right: 20px;
-  border-top: 2.5px solid white;
-  border-right: 2.5px solid white;
+.scan-page .corner-tr {
+  top: 16px;
+  right: 16px;
+  border-top: 2.5px solid #fff;
+  border-right: 2.5px solid #fff;
   border-radius: 0 4px 0 0;
 }
 
-.corner-bl {
-  bottom: 20px;
-  left: 20px;
-  border-bottom: 2.5px solid white;
-  border-left: 2.5px solid white;
+.scan-page .corner-bl {
+  bottom: 16px;
+  left: 16px;
+  border-bottom: 2.5px solid #fff;
+  border-left: 2.5px solid #fff;
   border-radius: 0 0 0 4px;
 }
 
-.corner-br {
-  bottom: 20px;
-  right: 20px;
-  border-bottom: 2.5px solid white;
-  border-right: 2.5px solid white;
+.scan-page .corner-br {
+  bottom: 16px;
+  right: 16px;
+  border-bottom: 2.5px solid #fff;
+  border-right: 2.5px solid #fff;
   border-radius: 0 0 4px 0;
 }
 
-/* Scan line animation */
-.scan-line {
+/* Scan line animation — orange DS. */
+.scan-page .scan-line {
   position: absolute;
-  left: 20px;
-  right: 20px;
+  left: 16px;
+  right: 16px;
   height: 1.5px;
-  background: linear-gradient(90deg, transparent, #FF6B00, transparent);
+  background: linear-gradient(90deg, transparent, var(--accent-orange), transparent);
+  box-shadow: 0 0 8px rgba(255, 138, 61, 0.6);
   animation: scanMove 2s ease-in-out infinite;
-  box-shadow: 0 0 8px rgba(255, 107, 0, 0.6);
+  pointer-events: none;
 }
 
 @keyframes scanMove {
-  0%   { top: 20px; opacity: 0; }
-  10%  { opacity: 1; }
-  90%  { opacity: 1; }
-  100% { top: calc(100% - 20px); opacity: 0; }
+  0%   { top: 16px;             opacity: 0; }
+  10%  {                         opacity: 1; }
+  90%  {                         opacity: 1; }
+  100% { top: calc(100% - 16px); opacity: 0; }
 }
 
-.viewfinder-icon {
-  font-size: 36px;
-  opacity: 0.25;
+/* ── Placeholder caméra (idle / denied / error) avec mascotte intégrée. */
+.scan-page .scan-placeholder {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 10px;
+  padding: 24px 28px;
+  max-width: 320px;
 }
 
-.viewfinder-hint {
+.scan-page .scan-placeholder-title {
+  margin: 4px 0 0;
+  font-size: 15px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.92);
+  letter-spacing: -0.2px;
+}
+
+.scan-page .scan-placeholder-sub {
+  margin: 0;
   font-size: 13px;
-  color: rgba(255, 255, 255, 0.4);
   font-weight: 500;
+  color: rgba(255, 255, 255, 0.62);
+  line-height: 1.45;
+  max-width: 26ch;
 }
 
-/* Shutter row — 3 boutons alignés */
-.shutter-row {
+.scan-page .scan-retry-btn {
+  margin-top: 6px;
+  padding: 8px 18px;
+  background: transparent;
+  border: 1.5px solid rgba(255, 255, 255, 0.35);
+  border-radius: var(--radius-pill);
+  color: rgba(255, 255, 255, 0.92);
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.scan-page .scan-retry-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.55);
+}
+
+/* ── Shutter row ── 3 boutons (galerie / capture / flip). */
+.scan-page .scan-shutter-row {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 32px;
-  margin: 0;
   flex-shrink: 0;
+  padding: 4px 0 2px;
 }
 
-.cam-side-btn {
+.scan-page .scan-side-btn {
   width: 48px;
   height: 48px;
   border-radius: 50%;
   border: none;
-  background: var(--bg-subtle);
+  background: var(--bg-card);
   color: var(--text-secondary);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: background 0.15s, opacity 0.15s;
+  box-shadow: var(--shadow-card);
+  transition: background 0.15s ease, transform 0.12s ease;
   flex-shrink: 0;
+  font-family: inherit;
 }
 
-.cam-side-btn:hover { background: var(--bg-card); }
-.cam-side-btn.disabled { opacity: 0.35; cursor: not-allowed; }
-
-/* Shutter button — always dark (camera UI) */
-.shutter-wrap {
-  display: flex;
-  justify-content: center;
-  margin: 4px 0;
+.scan-page .scan-side-btn:hover { background: var(--bg-hover); }
+.scan-page .scan-side-btn:active { transform: scale(0.94); }
+.scan-page .scan-side-btn--disabled,
+.scan-page .scan-side-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  pointer-events: none;
 }
 
-.shutter-btn {
-  width: 64px;
-  height: 64px;
+/* Shutter central — sombre, plus gros, esthétique camera. */
+.scan-page .scan-shutter {
+  width: 68px;
+  height: 68px;
   border-radius: 50%;
-  background: #1A1A1A;
+  background: #15131C;
+  border: 3px solid #fff;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
-  transition: transform 0.12s;
-  border: 3px solid white;
+  box-shadow: var(--shadow-card);
+  transition: transform 0.12s ease, filter 0.15s ease;
+  flex-shrink: 0;
+  font-family: inherit;
+  padding: 0;
 }
 
-.shutter-btn:hover { transform: scale(1.05); }
+.scan-page .scan-shutter:hover { transform: scale(1.04); }
+.scan-page .scan-shutter:active { transform: scale(0.96); }
+.scan-page .scan-shutter--disabled,
+.scan-page .scan-shutter:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  pointer-events: none;
+}
 
-.shutter-inner {
-  width: 44px;
-  height: 44px;
+.scan-page .scan-shutter-inner {
+  width: 46px;
+  height: 46px;
   border-radius: 50%;
-  background: white;
+  background: #fff;
+  display: block;
 }
 
-/* Divider */
-.divider {
+/* ── Tip trigger ── pill discret qui ouvre la bottom sheet. */
+.scan-page .scan-tip-trigger {
+  align-self: center;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px 10px 16px;
+  border: none;
+  border-radius: var(--radius-pill);
+  background: var(--bg-card);
+  box-shadow: var(--shadow-card);
+  color: var(--text-secondary);
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.12s ease;
+  flex-shrink: 0;
+}
+
+.scan-page .scan-tip-trigger:hover { background: var(--bg-hover); }
+.scan-page .scan-tip-trigger:active { transform: scale(0.97); }
+.scan-page .scan-tip-trigger-icon { font-size: 14px; line-height: 1; }
+.scan-page .scan-tip-trigger-label { color: var(--text-primary); }
+.scan-page .scan-tip-trigger-arrow {
+  font-size: 16px;
+  line-height: 1;
+  color: var(--text-muted);
+  margin-left: 2px;
+}
+
+/* ── Bottom sheet tips ── overrides locaux de .rv-sheet--bottom.
+ * `.rv-sheet--bottom` est `position: absolute` (s'ancre au parent positionné).
+ * Sur Scan, on veut un sheet plein viewport mobile → fixed. */
+.scan-page .scan-tip-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 79;
+  animation: scanFadeIn 0.18s ease-out;
+}
+
+.scan-page .scan-tip-sheet {
+  position: fixed;
+  z-index: 80;
+  max-height: 75vh;
+  overflow-y: auto;
+}
+
+.scan-page .scan-tip-sheet-header {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 12px;
+  margin-bottom: 6px;
 }
 
-.divider-line {
-  flex: 1;
-  height: 1px;
-  background: var(--border);
+.scan-page .scan-tip-sheet-title {
+  margin: 0;
+  font-family: 'Geist', sans-serif;
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: -0.4px;
+  color: var(--text-primary);
 }
 
-.divider-text {
-  font-size: 11px;
-  font-weight: 600;
-  color: var(--text-light);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+.scan-page .scan-tip-close {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: none;
+  background: var(--bg-subtle);
+  color: var(--text-secondary);
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-family: inherit;
+  transition: background 0.15s ease;
 }
 
-/* Import options */
-.import-options {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
+.scan-page .scan-tip-close:hover { background: var(--bg-hover); }
+
+.scan-page .scan-tip-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
-.import-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 18px;
-  padding: 20px 16px;
+.scan-page .scan-tip-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 14px 0;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.scan-page .scan-tip-item:first-child { border-top: none; }
+
+.scan-page .scan-tip-emoji {
+  font-size: 22px;
+  line-height: 1.1;
+  flex-shrink: 0;
+}
+
+.scan-page .scan-tip-text {
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--text-secondary);
+}
+
+.scan-page .scan-tip-text strong {
+  color: var(--text-primary);
+  font-weight: 700;
+}
+
+/* ── Mode texte ── mascotte writing + textarea + counter + CTA. */
+.scan-page .scan-text-hero {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  gap: 10px;
-  cursor: pointer;
-  transition: border-color 0.15s;
-}
-
-.import-card:hover { border-color: var(--border-hover); }
-
-.import-icon-wrap {
-  width: 40px;
-  height: 40px;
-  border-radius: 12px;
-  display: flex;
   align-items: center;
-  justify-content: center;
-  font-size: 20px;
-}
-
-.import-label {
-  font-size: 14px;
-  font-weight: 600;
-}
-
-.import-sub {
-  font-size: 11px;
-  color: var(--text-muted);
-  margin-top: -4px;
-}
-
-/* Tips */
-.tip-card {
-  background: var(--bg-tip);
-  border: 1px solid var(--border-tip);
-  border-radius: 12px;
-  padding: 10px 14px;
-  display: flex;
+  text-align: center;
   gap: 8px;
-  align-items: center;
+  padding: 4px 0 4px;
   flex-shrink: 0;
 }
 
-.tip-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
-
-.tip-text {
-  font-size: 12px;
-  color: var(--text-tip);
-  line-height: 1.5;
+.scan-page .scan-text-hint {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  line-height: 1.45;
+  max-width: 30ch;
 }
 
-.tip-text strong { font-weight: 600; }
+.scan-page .scan-text-hint strong {
+  color: var(--text-primary);
+  font-weight: 700;
+}
 
-/* Textarea inline (onglet Texte) */
-.scan-textarea {
+.scan-page .scan-textarea-wrap {
+  position: relative;
   flex: 1;
-  min-height: 260px;
+  display: flex;
+  flex-direction: column;
+  min-height: 220px;
+}
+
+.scan-page .scan-textarea {
+  flex: 1;
+  min-height: 220px;
   resize: none;
   border: 1.5px solid var(--border);
-  border-radius: 18px;
-  padding: 16px;
+  border-radius: var(--radius-card);
+  padding: 16px 16px 38px;
   background: var(--bg-card);
   color: var(--text-primary);
+  font-family: inherit;
   font-size: 14px;
   line-height: 1.65;
   outline: none;
-  font-family: 'Inter', sans-serif;
-  transition: border-color 0.15s;
+  transition: border-color 0.15s ease;
 }
 
-.scan-textarea:focus {
-  border-color: #6366F1;
+.scan-page .scan-textarea:focus {
+  border-color: var(--accent-violet);
 }
 
-.scan-textarea::placeholder {
+.scan-page .scan-textarea::placeholder {
   color: var(--text-light);
 }
 
-.analyse-btn {
-  padding: 16px;
-  background: var(--bg-cta);
-  color: var(--text-cta);
-  border: none;
-  border-radius: 16px;
-  font-weight: 700;
-  font-size: 15px;
-  transition: opacity 0.15s;
-  cursor: pointer;
-  font-family: 'Inter', sans-serif;
-}
-
-.analyse-btn:disabled {
-  opacity: 0.4;
-  cursor: not-allowed;
-}
-
-.cancel-btn {
-  padding: 12px;
-  background: none;
-  border: 1px solid var(--border);
-  border-radius: 16px;
+.scan-page .scan-char-counter {
+  position: absolute;
+  bottom: 12px;
+  right: 14px;
+  font-size: 11px;
   font-weight: 600;
+  color: var(--text-muted);
+  background: var(--bg-card);
+  padding: 2px 6px;
+  border-radius: 8px;
+  pointer-events: none;
+  transition: color 0.2s ease;
+}
+
+.scan-page .scan-char-counter--ok {
+  color: var(--accent-green-ink);
+}
+
+/* ── Modale niveau requis ── overlay + carte centrée DS-aligned. */
+.scan-page .scan-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 1000;
+  animation: scanFadeIn 0.18s ease-out;
+}
+
+.scan-page .scan-level-modal {
+  width: 100%;
+  max-width: 360px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 12px;
+  animation: scanPopIn 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.scan-page .scan-level-modal-title {
+  margin: 4px 0 0;
+  font-family: 'Geist', sans-serif;
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+
+.scan-page .scan-level-modal-sub {
+  margin: 0;
   font-size: 14px;
   color: var(--text-secondary);
-  cursor: pointer;
-  font-family: 'Inter', sans-serif;
+  line-height: 1.5;
+  max-width: 30ch;
+}
+
+.scan-page .scan-level-modal-actions {
+  margin-top: 8px;
+  display: flex;
+  gap: 10px;
+  width: 100%;
+}
+
+.scan-page .scan-level-modal-actions .rv-btn-cta {
+  flex: 1;
+  justify-content: center;
+}
+
+@keyframes scanFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes scanPopIn {
+  from { opacity: 0; transform: scale(0.94); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+/* ── Responsive mobile ── */
+@media (max-width: 430px) {
+  .scan-page .scan-tabs-wrap { padding: 4px 14px 2px; }
+  .scan-page .scan-content { padding: 8px 14px 20px; gap: 12px; }
+  .scan-page .scan-viewfinder-shell { padding: 8px; }
+  .scan-page .scan-shutter-row { gap: 28px; }
+  .scan-page .scan-shutter { width: 64px; height: 64px; }
+  .scan-page .scan-shutter-inner { width: 44px; height: 44px; }
 }

@@ -109,7 +109,7 @@
   font-size: 11px;
   font-weight: 600;
   color: #C45200;
-  background: #FFF4E6;
+  background: var(--accent-orange-soft);
   border: 1px solid #FFD0A8;
   border-radius: 20px;
   padding: 4px 10px;
@@ -118,8 +118,8 @@
 }
 
 [data-theme="dark"] .ugs-badge {
-  background: #2D1F0A;
-  border-color: #7C3A00;
+  background: var(--accent-orange-soft);
+  border-color: var(--accent-orange-ink);
 }
 
 .ugs-headline {
@@ -140,7 +140,7 @@
 }
 
 .ugs-sub strong {
-  color: #FF6B00;
+  color: var(--accent-orange);
   font-weight: 600;
 }
 
@@ -218,7 +218,7 @@
   gap: 4px;
   font-size: 10px;
   font-weight: 700;
-  color: #22C55E;
+  color: var(--accent-green);
   letter-spacing: 0.3px;
   margin-top: auto;
   padding-top: 4px;
@@ -230,7 +230,7 @@
   justify-content: center;
   width: 14px;
   height: 14px;
-  background: #22C55E;
+  background: var(--accent-green);
   color: white;
   border-radius: 50%;
   font-size: 9px;
@@ -256,7 +256,7 @@
 .ugs-receipt-check {
   width: 28px;
   height: 28px;
-  background: #22C55E;
+  background: var(--accent-green);
   color: white;
   border-radius: 50%;
   display: flex;
@@ -285,7 +285,7 @@
   display: block;
   width: 100%;
   text-align: center;
-  background: #FF6B00;
+  background: var(--accent-orange);
   color: white;
   border: none;
   border-radius: 10px;

@@ -48,7 +48,7 @@
 .ve-btn-main {
   width: 100%;
   padding: 15px;
-  background: #FF6B00;
+  background: var(--accent-orange);
   color: white;
   border: none;
   border-radius: 14px;

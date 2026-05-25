@@ -1,0 +1,46 @@
+/* ============================================================================
+ * RV DOTS — progress dots + notification dot.
+ * Référence: Home .progress-dot, .featured-btn-dot
+ * ========================================================================== */
+
+.rv-dots {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  height: 6px;
+}
+
+.rv-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent-orange-soft);
+  flex-shrink: 0;
+  transition: background 0.15s ease;
+}
+.rv-dot--on                    { background: var(--accent-orange); }
+.rv-dot--violet                { background: var(--accent-violet-soft); }
+.rv-dot--violet.rv-dot--on     { background: var(--accent-violet); }
+.rv-dot--green                 { background: var(--accent-green-soft); }
+.rv-dot--green.rv-dot--on      { background: var(--accent-green); }
+.rv-dot--pink                  { background: var(--accent-pink-soft); }
+.rv-dot--pink.rv-dot--on       { background: var(--accent-pink); }
+
+.rv-dot--sm { width: 6px; height: 6px; }
+.rv-dot--lg { width: 10px; height: 10px; }
+
+/* Notification dot — petit cercle indicateur */
+.rv-notif-dot {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent-orange);
+  box-shadow: 0 0 0 2px var(--bg-card);
+}
+.rv-notif-dot--violet { background: var(--accent-violet); }
+.rv-notif-dot--red    { background: var(--accent-red); }
+.rv-notif-dot--green  { background: var(--accent-green); }
+.rv-notif-dot--lg     { width: 9px; height: 9px; }

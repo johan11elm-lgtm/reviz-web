@@ -3,10 +3,11 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { Drawer } from '../components/Drawer';
 import { PremiumModal } from '../components/PremiumModal';
+import { PageHeader } from '../components/PageHeader';
+import { Mascot } from '../components/Mascot';
 import { startAnalysis, startAnalysisFromImage } from '../services/aiService';
 import { getScanStatus } from '../services/scanLimitService';
 import './Scan.css';
-import '../components/ConfirmModal.css';
 
 export default function Scan() {
   const [drawerOpen, setDrawerOpen]   = useState(false);
@@ -14,6 +15,7 @@ export default function Scan() {
   const [lessonText, setLessonText]   = useState('');
   const [showLimit, setShowLimit]     = useState(false);
   const [showLevelRequired, setShowLevelRequired] = useState(false);
+  const [tipOpen, setTipOpen]         = useState(false);
   const [camStatus, setCamStatus]     = useState('idle'); // 'idle' | 'active' | 'denied' | 'error'
   const videoRef      = useRef(null);
   const streamRef     = useRef(null);
@@ -139,25 +141,40 @@ export default function Scan() {
   };
 
   return (
-    <div className="app">
-      {/* Header */}
-      <div className="header">
-        <button className="back-btn" onClick={() => navigate('/')}>←</button>
-        <span className="header-title">Scanner une leçon</span>
-        <div className="header-avatar" onClick={() => setDrawerOpen(true)} role="button" tabIndex={0} aria-label="Ouvrir le menu">{initiale}</div>
-      </div>
-
-      {/* Tabs */}
-      <div className="scan-tabs-wrap">
-        <div className="scan-tabs">
+    <div className="app scan-page">
+      <PageHeader
+        variant="back"
+        title="Scanner"
+        onBack={() => navigate('/')}
+        right={
           <button
-            className={`scan-tab${activeTab === 'photo' ? ' active' : ''}`}
+            type="button"
+            className="rv-bell-btn"
+            onClick={() => setDrawerOpen(true)}
+            aria-label="Ouvrir le menu"
+          >
+            {initiale}
+          </button>
+        }
+      />
+
+      {/* Tabs Photo / Texte */}
+      <div className="scan-tabs-wrap">
+        <div className="scan-tabs" role="tablist" aria-label="Mode de scan">
+          <button
+            type="button"
+            role="tab"
+            aria-selected={activeTab === 'photo'}
+            className={`scan-tab${activeTab === 'photo' ? ' scan-tab--active' : ''}`}
             onClick={() => setActiveTab('photo')}
           >
             📷 Photo
           </button>
           <button
-            className={`scan-tab${activeTab === 'texte' ? ' active' : ''}`}
+            type="button"
+            role="tab"
+            aria-selected={activeTab === 'texte'}
+            className={`scan-tab${activeTab === 'texte' ? ' scan-tab--active' : ''}`}
             onClick={() => setActiveTab('texte')}
           >
             ✏️ Texte
@@ -166,104 +183,155 @@ export default function Scan() {
       </div>
 
       {/* Content */}
-      <div className="content">
+      <div className="scan-content">
         {activeTab === 'photo' ? (
           <>
-            <div className="viewfinder">
-              <div className="corner corner-tl" />
-              <div className="corner corner-tr" />
-              <div className="corner corner-bl" />
-              <div className="corner corner-br" />
+            {/* Viewfinder — chrome beige autour, intérieur sombre */}
+            <div className="scan-viewfinder-shell">
+              <div className="viewfinder">
+                {/* Flux vidéo — toujours dans le DOM pour que le ref soit dispo */}
+                <video
+                  ref={videoRef}
+                  autoPlay
+                  playsInline
+                  muted
+                  className={`cam-video${camStatus === 'active' ? '' : ' cam-video-hidden'}`}
+                />
 
-              {/* Flux caméra — toujours dans le DOM pour que le ref soit disponible */}
-              <video
-                ref={videoRef}
-                autoPlay
-                playsInline
-                muted
-                className={`cam-video${camStatus === 'active' ? '' : ' cam-video-hidden'}`}
-              />
+                {camStatus === 'active' && (
+                  <>
+                    <div className="corner corner-tl" />
+                    <div className="corner corner-tr" />
+                    <div className="corner corner-bl" />
+                    <div className="corner corner-br" />
+                    <div className="scan-line" />
+                  </>
+                )}
 
-              {/* Scan line uniquement quand caméra active */}
-              {camStatus === 'active' && <div className="scan-line" />}
-
-              {/* États sans caméra */}
-              {camStatus !== 'active' && (
-                <div className="cam-placeholder">
-                  {camStatus === 'denied' && (
-                    <>
-                      <span className="viewfinder-icon">🚫</span>
-                      <span className="viewfinder-hint">Accès à la caméra refusé</span>
-                      <button className="cam-retry-btn" onClick={startCamera}>Réessayer</button>
-                    </>
-                  )}
-                  {camStatus === 'error' && (
-                    <>
-                      <span className="viewfinder-icon">⚠️</span>
-                      <span className="viewfinder-hint">Caméra indisponible</span>
-                      <button className="cam-retry-btn" onClick={startCamera}>Réessayer</button>
-                    </>
-                  )}
-                  {(camStatus === 'idle') && (
-                    <>
-                      <span className="viewfinder-icon">📷</span>
-                      <span className="viewfinder-hint">Démarrage de la caméra…</span>
-                    </>
-                  )}
-                </div>
-              )}
+                {camStatus !== 'active' && (
+                  <div className="scan-placeholder">
+                    {camStatus === 'idle' && (
+                      <>
+                        <Mascot pose="scan" size={140} glow animate priority />
+                        <p className="scan-placeholder-title">J'allume la caméra…</p>
+                      </>
+                    )}
+                    {camStatus === 'denied' && (
+                      <>
+                        <Mascot pose="confused" size={120} glow />
+                        <p className="scan-placeholder-title">Accès caméra refusé</p>
+                        <p className="scan-placeholder-sub">
+                          Pour scanner, j'ai besoin de la caméra. Active-la dans les réglages
+                          du navigateur.
+                        </p>
+                        <button type="button" className="scan-retry-btn" onClick={startCamera}>
+                          Réessayer
+                        </button>
+                      </>
+                    )}
+                    {camStatus === 'error' && (
+                      <>
+                        <Mascot pose="confused" size={120} glow />
+                        <p className="scan-placeholder-title">Caméra indisponible</p>
+                        <p className="scan-placeholder-sub">Petit pépin technique. On retente ?</p>
+                        <button type="button" className="scan-retry-btn" onClick={startCamera}>
+                          Réessayer
+                        </button>
+                      </>
+                    )}
+                  </div>
+                )}
+              </div>
             </div>
 
             {/* Shutter row */}
-            <div className="shutter-row">
-              {/* Galerie — gauche */}
-              <button className="cam-side-btn" onClick={() => fileInputRef.current?.click()}>
+            <div className="scan-shutter-row">
+              <button
+                type="button"
+                className="scan-side-btn"
+                onClick={() => fileInputRef.current?.click()}
+                aria-label="Importer depuis la galerie"
+              >
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/>
+                  <rect x="3" y="3" width="18" height="18" rx="2"/>
+                  <circle cx="8.5" cy="8.5" r="1.5"/>
                   <polyline points="21 15 16 10 5 21"/>
                 </svg>
               </button>
-              <input ref={fileInputRef} type="file" accept="image/*" style={{ display: 'none' }} onChange={handleMediaImport} />
+              <input
+                ref={fileInputRef}
+                type="file"
+                accept="image/*"
+                hidden
+                onChange={handleMediaImport}
+              />
 
-              {/* Shutter — centre */}
-              <div
-                className={`shutter-btn${camStatus !== 'active' ? ' disabled' : ''}`}
-                onClick={handleCapture}
-              >
-                <div className="shutter-inner" />
-              </div>
-
-              {/* Flip caméra — droite */}
               <button
-                className={`cam-side-btn${camStatus !== 'active' ? ' disabled' : ''}`}
+                type="button"
+                className={`scan-shutter${camStatus !== 'active' ? ' scan-shutter--disabled' : ''}`}
+                onClick={handleCapture}
+                disabled={camStatus !== 'active'}
+                aria-label="Capturer"
+              >
+                <span className="scan-shutter-inner" />
+              </button>
+
+              <button
+                type="button"
+                className={`scan-side-btn${camStatus !== 'active' ? ' scan-side-btn--disabled' : ''}`}
                 onClick={handleFlipCamera}
                 disabled={camStatus !== 'active'}
+                aria-label="Retourner la caméra"
               >
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M1 4v6h6"/><path d="M23 20v-6h-6"/>
+                  <path d="M1 4v6h6"/>
+                  <path d="M23 20v-6h-6"/>
                   <path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4-4.64 4.36A9 9 0 0 1 3.51 15"/>
                 </svg>
               </button>
             </div>
 
-            <div className="tip-card">
-              <span className="tip-icon">💡</span>
-              <span className="tip-text">
-                <strong>Conseil :</strong> Assure-toi que la leçon est bien éclairée et lisible pour une meilleure analyse.
-              </span>
-            </div>
+            {/* Tip trigger — ouvre la bottom sheet */}
+            <button
+              type="button"
+              className="scan-tip-trigger"
+              onClick={() => setTipOpen(true)}
+            >
+              <span className="scan-tip-trigger-icon">💡</span>
+              <span className="scan-tip-trigger-label">Conseils pour un bon scan</span>
+              <span className="scan-tip-trigger-arrow" aria-hidden="true">›</span>
+            </button>
           </>
         ) : (
           <>
-            <textarea
-              className="scan-textarea"
-              value={lessonText}
-              onChange={e => setLessonText(e.target.value)}
-              placeholder="Colle le texte de ta leçon..."
-              autoFocus
-            />
+            {/* Mode texte — mascotte writing + textarea + counter + CTA */}
+            <div className="scan-text-hero">
+              <Mascot pose="writing" size={120} glow priority />
+              <p className="scan-text-hint">
+                Colle ton énoncé ci-dessous. À partir de <strong>200&nbsp;caractères</strong>,
+                je fais du bon boulot.
+              </p>
+            </div>
+
+            <div className="scan-textarea-wrap">
+              <textarea
+                className="scan-textarea"
+                value={lessonText}
+                onChange={e => setLessonText(e.target.value)}
+                placeholder="Colle le texte de ta leçon…"
+                autoFocus
+              />
+              <div
+                className={`scan-char-counter${lessonText.length >= 200 ? ' scan-char-counter--ok' : ''}`}
+                aria-live="polite"
+              >
+                {lessonText.length} / 200 caractères
+              </div>
+            </div>
+
             <button
-              className="analyse-btn"
+              type="button"
+              className="rv-btn-cta rv-btn-cta--full"
               disabled={!lessonText.trim()}
               onClick={handleAnalyse}
             >
@@ -272,6 +340,61 @@ export default function Scan() {
           </>
         )}
       </div>
+
+      {/* Backdrop pour la sheet tips */}
+      {tipOpen && (
+        <div
+          className="scan-tip-backdrop"
+          onClick={() => setTipOpen(false)}
+          aria-hidden="true"
+        />
+      )}
+
+      {/* Bottom sheet — toujours dans le DOM pour l'animation slide */}
+      <aside
+        className={`rv-sheet--bottom scan-tip-sheet${tipOpen ? '' : ' rv-sheet--bottom-hidden'}`}
+        aria-hidden={!tipOpen}
+        aria-label="Conseils pour un bon scan"
+      >
+        <div className="rv-sheet-handle" />
+        <header className="scan-tip-sheet-header">
+          <h2 className="scan-tip-sheet-title">4 réflexes pour un scan nickel</h2>
+          <button
+            type="button"
+            className="scan-tip-close"
+            onClick={() => setTipOpen(false)}
+            aria-label="Fermer"
+          >
+            ×
+          </button>
+        </header>
+        <ul className="scan-tip-list">
+          <li className="scan-tip-item">
+            <span className="scan-tip-emoji" aria-hidden="true">📐</span>
+            <div className="scan-tip-text">
+              <strong>Cadre droit.</strong> Le texte horizontal, sans angle.
+            </div>
+          </li>
+          <li className="scan-tip-item">
+            <span className="scan-tip-emoji" aria-hidden="true">💡</span>
+            <div className="scan-tip-text">
+              <strong>Bien éclairé.</strong> Évite les ombres et les reflets brillants.
+            </div>
+          </li>
+          <li className="scan-tip-item">
+            <span className="scan-tip-emoji" aria-hidden="true">🔍</span>
+            <div className="scan-tip-text">
+              <strong>Texte net.</strong> Approche-toi jusqu'à ce que les lettres soient lisibles.
+            </div>
+          </li>
+          <li className="scan-tip-item">
+            <span className="scan-tip-emoji" aria-hidden="true">📄</span>
+            <div className="scan-tip-text">
+              <strong>Une leçon à la fois.</strong> Pas plusieurs énoncés sur la même photo.
+            </div>
+          </li>
+        </ul>
+      </aside>
 
       <Drawer isOpen={drawerOpen} onClose={() => setDrawerOpen(false)} />
 
@@ -283,20 +406,43 @@ export default function Scan() {
         />
       )}
 
+      {/* Modale niveau requis — restylée DS-aligned */}
       {showLevelRequired && (
-        <div className="confirm-overlay" onClick={() => setShowLevelRequired(false)}>
-          <div className="confirm-card" onClick={e => e.stopPropagation()}>
-            <span className="confirm-icon">🎓</span>
-            <p className="confirm-title">Configure ton niveau d'abord</p>
-            <p className="confirm-sub">
-              Réviz adapte les flashcards, quiz et résumés à ce qu'on attend de toi
-              (collège, lycée ou supérieur). Choisis ton niveau dans ton profil pour commencer.
+        <div
+          className="scan-modal-overlay"
+          onClick={() => setShowLevelRequired(false)}
+        >
+          <div
+            className="rv-card rv-card--modal scan-level-modal"
+            onClick={e => e.stopPropagation()}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="scan-level-modal-title"
+          >
+            <Mascot pose="graduation" size={120} glow />
+            <h2 id="scan-level-modal-title" className="scan-level-modal-title">
+              Dis-moi d'abord ton niveau
+            </h2>
+            <p className="scan-level-modal-sub">
+              Je règle les flashcards, quiz et résumés pile pour toi (collège, lycée, supérieur).
+              Une minute dans le profil et c'est plié.
             </p>
-            <div className="confirm-btns">
-              <button className="confirm-btn confirm-btn--cancel" onClick={() => setShowLevelRequired(false)}>
+            <div className="scan-level-modal-actions">
+              <button
+                type="button"
+                className="rv-btn-cta rv-btn-cta--ghost"
+                onClick={() => setShowLevelRequired(false)}
+              >
                 Plus tard
               </button>
-              <button className="confirm-btn confirm-btn--delete" onClick={() => { setShowLevelRequired(false); navigate('/profil'); }}>
+              <button
+                type="button"
+                className="rv-btn-cta"
+                onClick={() => {
+                  setShowLevelRequired(false);
+                  navigate('/profil');
+                }}
+              >
                 Aller au profil
               </button>
             </div>

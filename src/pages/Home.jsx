@@ -3,29 +3,45 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { Drawer } from '../components/Drawer';
 import { BottomNav } from '../components/BottomNav';
-import { ConfirmModal } from '../components/ConfirmModal';
-import { loadLessons, restoreLesson, deleteLesson, syncFromFirestore } from '../services/historyService';
+import { PageHeader } from '../components/PageHeader';
+import { HeroCTA } from '../components/HeroCTA';
+import { Mascot } from '../components/Mascot';
+import { loadLessons, restoreLesson, syncFromFirestore } from '../services/historyService';
 import { loadRevisions } from '../services/revisionService';
+import { countDueCards } from '../services/srsService';
 import { getWeeklyChallenges } from '../services/challengeService';
-import { computeStreak, computeLevel, computeBadges, XP_PAR_LECON, XP_PAR_NIVEAU } from '../utils/gamification';
-import { subjectColor, subjectEmoji } from '../utils/subjects';
+import { computeStreak, computeLevel, computeBadges, XP_PAR_NIVEAU } from '../utils/gamification';
 import { AchievementToast } from '../components/AchievementToast';
 import './Home.css';
 
-const LogoStar = () => (
-  <svg className="logo-star" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <path
-      d="M8 0 C8.3 2.8 8.8 4.2 10.2 5.6 11.6 7 13 7.5 16 8 13 8.5 11.6 9 10.2 10.4 8.8 11.8 8.3 13.2 8 16 7.7 13.2 7.2 11.8 5.8 10.4 4.4 9 3 8.5 0 8 3 7.5 4.4 7 5.8 5.6 7.2 4.2 7.7 2.8 8 0Z"
-      fill="url(#starGrad)"
-    />
-    <defs>
-      <linearGradient id="starGrad" x1="0" y1="0" x2="16" y2="16" gradientUnits="userSpaceOnUse">
-        <stop offset="0%" stopColor="#FFB347" />
-        <stop offset="100%" stopColor="#FF6B00" />
-      </linearGradient>
-    </defs>
+const FlashcardsIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <rect x="6" y="3" width="14" height="18" rx="2.5" transform="rotate(6 13 12)" />
+    <rect x="4" y="5" width="14" height="18" rx="2.5" />
   </svg>
 );
+
+const QuizIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <circle cx="12" cy="12" r="9" />
+    <path d="M9.5 9.2a2.5 2.5 0 0 1 4.9.5c0 1.7-2.4 1.8-2.4 3.3" />
+    <circle cx="12" cy="16.5" r="0.6" fill="currentColor" />
+  </svg>
+);
+
+// Phrases mascotte pour la carte Reprendre, rotation stable par jour
+const RESUME_PHRASES = [
+  "On reprend là où tu t'es arrêté·e ? T'étais bien parti·e.",
+  "Allez, on finit ça. Tu y étais presque.",
+  "Tu peux boucler ce chapitre tant que c'est frais.",
+  "Et si on continuait ? Plus que quelques minutes.",
+  "Reprends pendant que c'est encore bien en tête.",
+];
+
+function getResumePhrase() {
+  const hash = Math.floor(Date.now() / 86400000);
+  return RESUME_PHRASES[hash % RESUME_PHRASES.length];
+}
 
 function formatDate(ts) {
   const d = new Date(ts), now = new Date();
@@ -35,33 +51,81 @@ function formatDate(ts) {
   return d.toLocaleDateString('fr-FR', { day: 'numeric', month: 'short' });
 }
 
-function getGreetingTime() {
-  const h = new Date().getHours();
-  if (h < 12) return 'Bonjour';
-  if (h < 18) return 'Bon après-midi';
-  return 'Bonsoir';
+// Pool de phrases casual/fun, rotation stable par jour (pas de variance render-to-render)
+const MOTIVATION_POOLS = {
+  done: [
+    'Boucle bouclée. Le reste, c\'est du bonus.',
+    'Mission du jour validée. Tu fais bien.',
+    'Carton plein. Repos mérité.',
+    'Ton futur toi te remercie.',
+    'Objectif K.O. — bonus inside ?',
+  ],
+  streakStrong: [
+    'jours d\'affilée, t\'es un robot.',
+    'jours de suite, on garde le rythme ?',
+    'jours non-stop, t\'es chaud.',
+    'jours consécutifs, respect.',
+  ],
+  streakSmall: [
+    'On garde le rythme ?',
+    'T\'es bien parti, continue.',
+    'Tu chauffes, c\'est bon signe.',
+    'Encore un effort, ça paie.',
+  ],
+  morning: [
+    'Allez, on s\'y met ?',
+    'Petit warmup matinal ?',
+    'Le matin, ton cerveau est au top.',
+    'On commence la journée fort ?',
+    'Café + révisions = combo gagnant.',
+  ],
+  afternoon: [
+    'Petite session avant le goûter ?',
+    'Ton cerveau te dit merci d\'avance.',
+    '5 minutes, et déjà plus malin.',
+    'On se met en mode focus ?',
+    'Une rapide, juste une ?',
+  ],
+  evening: [
+    'Petite révision avant Netflix ?',
+    'On finit la journée en beauté ?',
+    'Un dernier effort avant la nuit ?',
+    'Le soir, ça rentre tout seul.',
+    'Pyjama + flashcards, le combo.',
+  ],
+};
+
+function pickStable(pool, dayHash) {
+  return pool[dayHash % pool.length];
 }
 
-function getMotivation(streak) {
-  if (streak === 0) return 'Prêt pour une nouvelle session ? 🚀';
-  if (streak === 1) return "C'est parti ! Reviens demain pour ton streak 🔥";
-  if (streak < 5)  return `${streak} jours d'affilée, continue comme ça ! 💪`;
-  if (streak < 10) return `${streak} jours de suite, tu assures ! 🔥`;
-  return `${streak} jours consécutifs, tu es en feu ! 🏆`;
+function getMotivation(streak, todayRevisions, dailyGoal) {
+  const dayHash = Math.floor(Date.now() / 86400000);
+  const h = new Date().getHours();
+
+  if (todayRevisions >= dailyGoal && dailyGoal > 0) {
+    return pickStable(MOTIVATION_POOLS.done, dayHash);
+  }
+  if (streak >= 5) {
+    return `${streak} ${pickStable(MOTIVATION_POOLS.streakStrong, dayHash)}`;
+  }
+  if (streak >= 1 && todayRevisions > 0) {
+    return pickStable(MOTIVATION_POOLS.streakSmall, dayHash);
+  }
+  if (h < 12)  return pickStable(MOTIVATION_POOLS.morning, dayHash);
+  if (h < 18)  return pickStable(MOTIVATION_POOLS.afternoon, dayHash);
+  return pickStable(MOTIVATION_POOLS.evening, dayHash);
 }
 
 export default function Home() {
   const { currentUser } = useAuth();
-  const prenom   = currentUser?.displayName ?? 'toi';
-  const initiale = prenom[0]?.toUpperCase() ?? '?';
+  const prenom = currentUser?.displayName ?? 'toi';
 
-  const [drawerOpen, setDrawerOpen]         = useState(false);
+  const [drawerOpen, setDrawerOpen] = useState(false);
   const navigate = useNavigate();
-  const [allLessons, setAllLessons]         = useState(() => loadLessons());
-  const [recentLessons, setRecentLessons]   = useState(() => loadLessons().slice(0, 3));
-  const [lessonToDelete, setLessonToDelete] = useState(null);
-  const [challenges, setChallenges]         = useState(() => getWeeklyChallenges());
-  const [newBadge, setNewBadge]             = useState(null);
+  const [allLessons, setAllLessons] = useState(() => loadLessons());
+  const [challenges] = useState(() => getWeeklyChallenges());
+  const [newBadge, setNewBadge] = useState(null);
 
   useEffect(() => {
     const onboardedKey = `reviz-onboarded-${currentUser?.uid}`;
@@ -69,31 +133,20 @@ export default function Home() {
       navigate('/onboarding');
       return;
     }
-    syncFromFirestore().then(lessons => {
-      setAllLessons(lessons);
-      setRecentLessons(lessons.slice(0, 3));
-    });
+    syncFromFirestore().then(setAllLessons);
   }, []);
 
-  function handleDelete(id) {
-    deleteLesson(id);
-    const updated = loadLessons();
-    setAllLessons(updated);
-    setRecentLessons(updated.slice(0, 3));
-  }
-
-  const streak     = computeStreak(allLessons);
+  const streak = computeStreak(allLessons);
   const { level, xpInLvl, fillPct } = computeLevel(allLessons);
-  const lastLesson = recentLessons[0] ?? null;
+  const lastLesson = allLessons[0] ?? null;
 
-  // Daily goal
+  const streakDots = Array.from({ length: 5 }, (_, i) => i < Math.min(5, streak));
+
   const dailyGoal = parseInt(localStorage.getItem(`reviz-daily-goal-${currentUser?.uid}`) || '3');
   const todayRevisions = loadRevisions().filter(r =>
     new Date(r.revisedAt).toDateString() === new Date().toDateString()
   ).length;
-  const goalProgress = Math.min(100, Math.round(todayRevisions / dailyGoal * 100));
 
-  // Badge celebrations
   useEffect(() => {
     if (!currentUser) return;
     const revisions = loadRevisions();
@@ -109,170 +162,180 @@ export default function Home() {
     }
   }, [allLessons, streak, level, currentUser]);
 
+  const remaining = dailyGoal - todayRevisions;
+  const goalReached = todayRevisions >= dailyGoal;
+
   return (
-    <div className="app">
+    <div className="app home-page">
       {newBadge && (
         <AchievementToast badge={newBadge} onDone={() => setNewBadge(null)} />
       )}
-      {/* Header */}
-      <div className="header">
-        <span className="header-logo">réviz <LogoStar /></span>
-        <div className="header-avatar" onClick={() => setDrawerOpen(true)} role="button" tabIndex={0} aria-label="Ouvrir le menu">{initiale}</div>
-      </div>
+
+      <PageHeader variant="brand" onBell={() => setDrawerOpen(true)} />
 
       <div className="content">
 
-        {/* Greeting */}
-        <div className="greeting">
-          <h1>{getGreetingTime()}, {prenom} 👋</h1>
-          <p>{getMotivation(streak)}</p>
-          <div className="daily-goal-indicator">
-            <div className="daily-goal-bar">
-              <div className="daily-goal-fill" style={{ width: goalProgress + '%' }} />
+        <div className="rv-greeting home-greeting">
+          <h2 className="rv-greeting-title">
+            Hey {prenom}<span className="rv-greeting-wave" aria-hidden="true">👋</span>
+          </h2>
+          <p className="rv-greeting-sub">{getMotivation(streak, todayRevisions, dailyGoal)}</p>
+        </div>
+
+        <HeroCTA
+          to="/scan"
+          tone="violet"
+          mascot="scan"
+          eyebrow="📸 Nouvelle leçon"
+          title="Scanne une nouvelle leçon"
+          sub="Photo ou texte — l'IA fait le reste."
+          action="Commencer"
+          className="home-cta"
+        />
+
+        <Link
+          to="/progres"
+          className="rv-card rv-card--link home-progress-card"
+          aria-label="Voir mes progrès"
+        >
+          <div className="rv-stat-row">
+            <div className="rv-stat-block">
+              <div className="rv-stat-block-header">
+                <span className="rv-stat-block-emoji" aria-hidden="true">⭐</span>
+                <span className="rv-stat-label">Niveau</span>
+              </div>
+              <div className="rv-stat-value rv-stat-value--xl">{level}</div>
+              <div className="rv-bar" aria-hidden="true">
+                <div
+                  className="rv-bar-fill rv-bar-fill--violet"
+                  style={{ width: fillPct + '%' }}
+                />
+              </div>
+              <div className="rv-stat-sub">{xpInLvl} / {XP_PAR_NIVEAU} XP</div>
             </div>
-            <span className="daily-goal-text">
-              {todayRevisions >= dailyGoal ? '✓ Objectif atteint !' : `${todayRevisions}/${dailyGoal} révisions aujourd'hui`}
+            <div className="rv-stat-separator" aria-hidden="true" />
+            <div className="rv-stat-block">
+              <div className="rv-stat-block-header">
+                <span className="rv-stat-block-emoji" aria-hidden="true">🔥</span>
+                <span className="rv-stat-label">Série</span>
+              </div>
+              <div className="rv-stat-value rv-stat-value--xl">{streak}</div>
+              <div className="rv-dots" aria-hidden="true">
+                {streakDots.map((on, i) => (
+                  <span key={i} className={`rv-dot${on ? ' rv-dot--on' : ''}`} />
+                ))}
+              </div>
+              <div className="rv-stat-sub">{streak === 1 ? 'jour de suite' : 'jours de suite'}</div>
+            </div>
+          </div>
+          <div className="rv-card-footer">
+            <span className="rv-card-footer-icon" aria-hidden="true">🎯</span>
+            <span className="rv-card-footer-text">
+              Objectif du jour : <strong>{todayRevisions} / {dailyGoal}</strong> cartes
+              {goalReached
+                ? <span className="rv-card-footer-check" aria-label="atteint">✓</span>
+                : <span className="rv-card-footer-remain"> · {remaining} restant{remaining > 1 ? 'es' : 'e'}</span>}
             </span>
           </div>
-        </div>
-
-        {/* Stats */}
-        <div className="stats-row">
-          <div className="stat-card stat-card--level">
-            <div className="stat-label">Niveau</div>
-            <div className="stat-value-big">⭐ {level}</div>
-            <div className="xp-bar"><div className="xp-fill" style={{ width: fillPct + '%' }} /></div>
-            <div className="xp-legend">{xpInLvl} / {XP_PAR_NIVEAU} XP</div>
-          </div>
-          <div className="stat-card stat-card--streak">
-            <div className="stat-label">Streak</div>
-            <div className="stat-value-big">🔥 {streak}</div>
-            <div className="stat-sub">{streak === 1 ? 'jour de suite' : 'jours de suite'}</div>
-          </div>
-        </div>
-
-        {/* CTA Scanner */}
-        <Link to="/scan" className={`cta-scanner${lastLesson ? ' cta-scanner--compact' : ''}`}>
-          {lastLesson ? (
-            <>
-              <span>📸 Scanner une nouvelle leçon</span>
-              <span className="cta-arrow">→</span>
-            </>
-          ) : (
-            <>
-              <div className="cta-text">
-                <h2>Scanner une leçon</h2>
-                <p>Photo ou texte — l'IA fait le reste</p>
-              </div>
-              <div className="cta-icon">📸</div>
-            </>
-          )}
         </Link>
 
-        {/* Carte "Reprendre" — si une leçon existe */}
         {lastLesson && (
-          <div className="featured-card">
-            <div className="featured-top">
-              <div className={`featured-icon ${subjectColor(lastLesson.metadata.subject)}`}>
-                {subjectEmoji(lastLesson.metadata.subject)}
-              </div>
-              <div className="featured-info">
-                <div className="featured-label">Reprendre</div>
-                <div className="featured-title">{lastLesson.metadata.title}</div>
-                <div className="featured-subject">{lastLesson.metadata.subject} · {formatDate(lastLesson.scannedAt)}</div>
+          <div className="rv-card rv-card--padded home-featured-card">
+            <div className="home-featured-top">
+              <Mascot
+                pose="reading"
+                size={128}
+                glow
+                priority
+                className="home-featured-mascot"
+                alt=""
+                aria-hidden="true"
+              />
+              <div className="home-featured-info">
+                <div className="home-featured-label">Reprendre</div>
+                <div className="home-featured-title">{lastLesson.metadata.title}</div>
+                <div className="home-featured-subject">
+                  {lastLesson.metadata.subject} · {formatDate(lastLesson.scannedAt)}
+                </div>
               </div>
             </div>
-            <div className="featured-actions">
-              <button className="featured-btn" onClick={() => { restoreLesson(lastLesson.id); navigate('/flashcards'); }}>
-                🃏 Flashcards
-              </button>
-              <button className="featured-btn" onClick={() => { restoreLesson(lastLesson.id); navigate('/quiz'); }}>
-                ❓ Quiz
-              </button>
-              <button className="featured-btn featured-btn--ghost" onClick={() => { restoreLesson(lastLesson.id); navigate('/analyse'); }}>
-                Voir tout
-              </button>
-            </div>
+            <p className="rv-speech-bubble home-featured-phrase">{getResumePhrase()}</p>
+            <button
+              className="rv-btn-cta rv-btn-cta--full"
+              onClick={() => { restoreLesson(lastLesson.id); navigate('/analyse'); }}
+            >
+              <span>Continuer</span>
+              <span className="rv-btn-cta-arrow" aria-hidden="true">→</span>
+            </button>
+            {(() => {
+              const fcTotal = lastLesson.flashcardsCount ?? 0;
+              const fcDue   = fcTotal > 0 ? countDueCards(lastLesson.id, fcTotal) : 0;
+              const qzTotal = lastLesson.quizCount ?? 0;
+              return (
+                <div className="rv-btn-action-row home-featured-actions">
+                  {fcTotal > 0 && (
+                    <button
+                      className="rv-btn-action"
+                      onClick={() => { restoreLesson(lastLesson.id); navigate('/flashcards'); }}
+                    >
+                      <span className="rv-icon-square rv-icon-square--violet"><FlashcardsIcon /></span>
+                      <span className="rv-btn-action-text">
+                        <span className="rv-btn-action-label">Flashcards</span>
+                        <span className="rv-btn-action-sub">
+                          {fcDue > 0 ? `${fcDue} à revoir` : `${fcTotal} carte${fcTotal > 1 ? 's' : ''}`}
+                        </span>
+                      </span>
+                      {fcDue > 0 && <span className="rv-notif-dot" aria-hidden="true" />}
+                    </button>
+                  )}
+                  {qzTotal > 0 && (
+                    <button
+                      className="rv-btn-action"
+                      onClick={() => { restoreLesson(lastLesson.id); navigate('/quiz'); }}
+                    >
+                      <span className="rv-icon-square rv-icon-square--orange"><QuizIcon /></span>
+                      <span className="rv-btn-action-text">
+                        <span className="rv-btn-action-label">Quiz</span>
+                        <span className="rv-btn-action-sub">{qzTotal} question{qzTotal > 1 ? 's' : ''}</span>
+                      </span>
+                    </button>
+                  )}
+                </div>
+              );
+            })()}
           </div>
         )}
 
-        {/* Défis de la semaine */}
-        <div className="challenges-card">
-          <div className="challenges-header">
-            <span className="challenges-title">Défis de la semaine</span>
-            <span className="challenges-count">{challenges.challenges?.filter(c => c.completed).length ?? 0}/3</span>
+        <div className="rv-card rv-card--padded home-challenges-card">
+          <div className="home-challenges-header">
+            <span className="home-challenges-title">Défis de la semaine</span>
+            <span className="home-challenges-count">
+              {challenges.challenges?.filter(c => c.completed).length ?? 0}/3
+            </span>
           </div>
           {challenges.challenges?.map(c => (
-            <div key={c.id} className={`challenge-row${c.completed ? ' completed' : ''}`}>
-              <div className="challenge-info">
-                <span className="challenge-name">{c.completed ? '✓' : '○'} {c.title}</span>
-                <span className="challenge-desc">{c.description}</span>
+            <div key={c.id} className={`home-challenge-row${c.completed ? ' completed' : ''}`}>
+              <div className="home-challenge-info">
+                <span className="home-challenge-name">{c.completed ? '✓' : '○'} {c.title}</span>
+                <span className="home-challenge-desc">{c.description}</span>
               </div>
-              <div className="challenge-progress">
-                <div className="challenge-bar">
-                  <div className="challenge-fill" style={{ width: Math.min(100, Math.round(c.current / c.target * 100)) + '%' }} />
+              <div className="home-challenge-progress">
+                <div className="rv-bar home-challenge-bar">
+                  <div
+                    className="rv-bar-fill rv-bar-fill--gradient"
+                    style={{ width: Math.min(100, Math.round(c.current / c.target * 100)) + '%' }}
+                  />
                 </div>
-                <span className="challenge-count">{c.current}/{c.target}</span>
+                <span className="home-challenge-count">{c.current}/{c.target}</span>
               </div>
             </div>
           ))}
         </div>
 
-        {/* Récemment scannées */}
-        {recentLessons.length > 0 && (
-          <>
-            <div className="section-title">Récemment scannées</div>
-            <div className="recent-list">
-              {recentLessons.map(lesson => (
-                <div
-                  key={lesson.id}
-                  className="recent-card"
-                  onClick={() => { restoreLesson(lesson.id); navigate('/analyse'); }}
-                >
-                  <div className={`recent-icon ${subjectColor(lesson.metadata.subject)}`}>
-                    {subjectEmoji(lesson.metadata.subject)}
-                  </div>
-                  <div className="recent-info">
-                    <div className="recent-subject">{lesson.metadata.subject}</div>
-                    <div className="recent-title">{lesson.metadata.title}</div>
-                    <div className="recent-tags">
-                      {lesson.flashcardsCount > 0 && <span className="tag">🃏 Flashcards</span>}
-                      {lesson.quizCount > 0       && <span className="tag">❓ Quiz</span>}
-                      <span className="tag">📝 Résumé</span>
-                    </div>
-                  </div>
-                  <div className="recent-actions">
-                    <span className="recent-date">{formatDate(lesson.scannedAt)}</span>
-                    <button
-                      className="delete-btn"
-                      onClick={e => { e.stopPropagation(); setLessonToDelete(lesson); }}
-                    >✕</button>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </>
-        )}
-
-        {/* État vide */}
-        {recentLessons.length === 0 && (
-          <div className="empty-recent">
-            <span>📚</span>
-            <p>Scanne ta première leçon<br/>pour commencer à réviser</p>
-          </div>
-        )}
-
       </div>
 
       <BottomNav active="home" />
       <Drawer isOpen={drawerOpen} onClose={() => setDrawerOpen(false)} />
-      {lessonToDelete && (
-        <ConfirmModal
-          lessonTitle={lessonToDelete.metadata.title}
-          onConfirm={() => { handleDelete(lessonToDelete.id); setLessonToDelete(null); }}
-          onCancel={() => setLessonToDelete(null)}
-        />
-      )}
     </div>
   );
 }

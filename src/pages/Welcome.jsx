@@ -23,10 +23,10 @@ const STEPS = [
 ];
 
 const OUTPUTS = [
-  { icon: '📝', label: 'Résumé',        color: '#22C55E' },
-  { icon: '🃏', label: 'Flashcards',    color: '#6366F1' },
+  { icon: '📝', label: 'Résumé',        color: '#34C77B' },
+  { icon: '🃏', label: 'Flashcards',    color: '#6B4EFF' },
   { icon: '🧠', label: 'Carte mentale', color: '#A855F7' },
-  { icon: '❓', label: 'Quiz',           color: '#FF6B00' },
+  { icon: '❓', label: 'Quiz',           color: '#FF8A3D' },
 ];
 
 export default function Welcome() {

@@ -4,7 +4,7 @@
   left: 50%;
   transform: translateX(-50%);
   background: var(--card-bg);
-  border: 2px solid #FFB347;
+  border: 2px solid var(--accent-orange-hover);
   border-radius: 16px;
   padding: 12px 20px;
   display: flex;
@@ -20,5 +20,5 @@
 }
 .achievement-emoji { font-size: 32px; }
 .achievement-info { display: flex; flex-direction: column; }
-.achievement-label { font-size: 11px; color: #FFB347; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+.achievement-label { font-size: 11px; color: var(--accent-orange-hover); font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
 .achievement-name { font-size: 16px; font-weight: 700; color: var(--text-primary); }

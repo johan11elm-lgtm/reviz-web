@@ -1,11 +1,42 @@
 import { NavLink, useLocation } from 'react-router-dom'
 import { useState, useEffect, useRef } from 'react'
 
+const HomeIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <path d="M3 11.5 12 4l9 7.5" />
+    <path d="M5 10v9a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1v-9" />
+  </svg>
+)
+
+const BookIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <path d="M4 5a2 2 0 0 1 2-2h12v16H6a2 2 0 0 0-2 2V5Z" />
+    <path d="M4 19a2 2 0 0 0 2 2h12" />
+    <path d="M8 7h7" />
+    <path d="M8 11h5" />
+  </svg>
+)
+
+const StatsIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <path d="M5 20V10" />
+    <path d="M12 20V4" />
+    <path d="M19 20v-7" />
+  </svg>
+)
+
+const UserIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <circle cx="12" cy="8" r="4" />
+    <path d="M4 21a8 8 0 0 1 16 0" />
+  </svg>
+)
+
 const TABS = [
-  { to: '/',        icon: '🏠', label: 'Accueil' },
-  { to: '/cours',   icon: '📚', label: 'Mes cours' },
-  { to: '/progres', icon: '🏆', label: 'Progrès' },
-  { to: '/profil',  icon: '👤', label: 'Profil' },
+  { to: '/',        Icon: HomeIcon,  label: 'Accueil' },
+  { to: '/cours',   Icon: BookIcon,  label: 'Cours' },
+  { to: '/progres', Icon: StatsIcon, label: 'Stats' },
+  { to: '/profil',  Icon: UserIcon,  label: 'Profil' },
 ]
 
 export function BottomNav() {
@@ -55,7 +86,7 @@ export function BottomNav() {
           className={({ isActive }) => `nav-item${isActive ? ' active' : ''}`}
           aria-label={tab.label}
         >
-          <span className="nav-icon">{tab.icon}</span>
+          <span className="nav-icon"><tab.Icon /></span>
           <span className="nav-label">{tab.label}</span>
         </NavLink>
       ))}

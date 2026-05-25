@@ -1,5 +1,8 @@
+/* CSS scoped to page wrapper — see scripts/scope-page-css.py */
+/* Wrapper: .mindmap-page */
+
 /* ── Fullscreen breakout ─────────────────────────────────────────── */
-.mindmap-fullscreen {
+.mindmap-page .mindmap-fullscreen {
   position: fixed;
   inset: 0;
   z-index: 50;
@@ -10,7 +13,7 @@
 }
 
 /* Dot grid background */
-.mindmap-fullscreen::before {
+.mindmap-page .mindmap-fullscreen::before {
   content: '';
   position: absolute;
   inset: 0;
@@ -33,7 +36,7 @@
 }
 
 /* ── Header flottant ─────────────────────────────────────────────── */
-.mindmap-header-float {
+.mindmap-page .mindmap-header-float {
   position: absolute;
   top: 0;
   left: 0;
@@ -47,11 +50,11 @@
   pointer-events: none;
 }
 
-.mindmap-header-float > * {
+.mindmap-page .mindmap-header-float > * {
   pointer-events: auto;
 }
 
-.back-btn {
+.mindmap-page .back-btn {
   width: 36px;
   height: 36px;
   border-radius: 50%;
@@ -68,7 +71,7 @@
   box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
 
-.header-center {
+.mindmap-page .header-center {
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -76,29 +79,29 @@
   gap: 6px;
 }
 
-.header-title { font-size: 15px; font-weight: 700; letter-spacing: -0.3px; }
+.mindmap-page .header-title { font-size: 15px; font-weight: 700; letter-spacing: -0.3px; }
 
 /* Dots de progression */
-.header-branch-dots { display: flex; gap: 7px; align-items: center; }
+.mindmap-page .header-branch-dots { display: flex; gap: 7px; align-items: center; }
 
-.branch-progress-dot {
+.mindmap-page .branch-progress-dot {
   width: 8px;
   height: 8px;
   border-radius: 50%;
   background: var(--bg-muted, #E5E7EB);
   transition: background 0.25s, transform 0.2s;
 }
-.branch-progress-dot.visited {
+.mindmap-page .branch-progress-dot.visited {
   background: var(--dot-color);
   transform: scale(1.25);
 }
 
 /* Bouton terminer */
-.done-btn {
+.mindmap-page .done-btn {
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  background: #22C55E;
+  background: var(--accent-green);
   color: white;
   border: none;
   cursor: pointer;
@@ -111,10 +114,10 @@
   flex-shrink: 0;
   box-shadow: 0 2px 8px rgba(34,197,94,0.35);
 }
-.done-btn:active { transform: scale(0.95); }
+.mindmap-page .done-btn:active { transform: scale(0.95); }
 
 /* ── Canvas plein écran ──────────────────────────────────────────── */
-.mindmap-canvas {
+.mindmap-page .mindmap-canvas {
   position: absolute;
   inset: 0;
   overflow: hidden;
@@ -123,7 +126,7 @@
 }
 
 /* Hint central */
-.canvas-hint {
+.mindmap-page .canvas-hint {
   position: absolute;
   bottom: 44px;
   left: 50%;
@@ -135,8 +138,8 @@
   pointer-events: none;
   z-index: 3;
 }
-.canvas-hint-icon { font-size: 22px; opacity: 0.45; }
-.canvas-hint-text {
+.mindmap-page .canvas-hint-icon { font-size: 22px; opacity: 0.45; }
+.mindmap-page .canvas-hint-text {
   font-size: 12px;
   font-weight: 500;
   color: var(--text-muted);
@@ -144,7 +147,7 @@
 }
 
 /* Bouton reset */
-.mindmap-reset {
+.mindmap-page .mindmap-reset {
   position: absolute;
   bottom: 44px;
   right: 16px;
@@ -163,10 +166,10 @@
   box-shadow: 0 2px 10px rgba(0,0,0,0.1);
   transition: background 0.15s;
 }
-.mindmap-reset:active { background: var(--bg-hover); }
+.mindmap-page .mindmap-reset:active { background: var(--bg-hover); }
 
 /* ── Monde transformable ─────────────────────────────────────────── */
-.mindmap-world {
+.mindmap-page .mindmap-world {
   position: absolute;
   inset: 0;
   transform-origin: center center;
@@ -174,7 +177,7 @@
   overflow: visible;
 }
 
-.mindmap-svg {
+.mindmap-page .mindmap-svg {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -185,7 +188,7 @@
 }
 
 /* ── Nœud central ────────────────────────────────────────────────── */
-.center-node {
+.mindmap-page .center-node {
   position: absolute;
   left: 50%;
   top: 50%;
@@ -204,11 +207,11 @@
   text-align: center;
   box-shadow: 0 4px 24px rgba(0,0,0,0.1);
 }
-.cn-emoji { font-size: 22px; line-height: 1; }
-.cn-label { font-size: 10px; font-weight: 700; line-height: 1.35; letter-spacing: -0.2px; padding: 0 6px; }
+.mindmap-page .cn-emoji { font-size: 22px; line-height: 1; }
+.mindmap-page .cn-label { font-size: 10px; font-weight: 700; line-height: 1.35; letter-spacing: -0.2px; padding: 0 6px; }
 
 /* ── Nœuds branches ──────────────────────────────────────────────── */
-.branch-node {
+.mindmap-page .branch-node {
   position: absolute;
   transform: translate(-50%, -50%);
   opacity: 0;
@@ -228,30 +231,30 @@
   box-shadow: 0 2px 12px rgba(0,0,0,0.08);
 }
 
-.branch-node.branch-in {
+.mindmap-page .branch-node.branch-in {
   animation: branchIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 }
 
-.branch-node:active { transform: translate(-50%, -50%) scale(0.95); }
+.mindmap-page .branch-node:active { transform: translate(-50%, -50%) scale(0.95); }
 
-.branch-node.visited {
+.mindmap-page .branch-node.visited {
   border-color: var(--branch-color);
   box-shadow: 0 3px 14px rgba(0,0,0,0.12);
 }
 
-.branch-node.selected {
+.mindmap-page .branch-node.selected {
   transform: translate(-50%, -50%) scale(1.1);
   box-shadow: 0 8px 28px rgba(0,0,0,0.2);
   border-color: var(--branch-color);
 }
 
-.bn-emoji { font-size: 18px; line-height: 1; flex-shrink: 0; }
-.bn-label { font-size: 13px; max-width: 100px; overflow: hidden; text-overflow: ellipsis; }
+.mindmap-page .bn-emoji { font-size: 18px; line-height: 1; flex-shrink: 0; }
+.mindmap-page .bn-label { font-size: 13px; max-width: 100px; overflow: hidden; text-overflow: ellipsis; }
 
 /* Pulse supprimé */
 
 /* ── Bottom sheet ────────────────────────────────────────────────── */
-.detail-sheet {
+.mindmap-page .detail-sheet {
   position: absolute;
   bottom: 0;
   left: 0;
@@ -266,15 +269,15 @@
   box-shadow: 0 -8px 32px rgba(0,0,0,0.12);
 }
 
-.detail-sheet--open { transform: translateY(0); }
-.detail-sheet--collapsed { transform: translateY(calc(100% - 28px)); }
-.detail-sheet--dragging { transition: none !important; }
+.mindmap-page .detail-sheet--open { transform: translateY(0); }
+.mindmap-page .detail-sheet--collapsed { transform: translateY(calc(100% - 28px)); }
+.mindmap-page .detail-sheet--dragging { transition: none !important; }
 
-.sheet-handle { cursor: grab; touch-action: none; }
-.sheet-handle:active { cursor: grabbing; }
+.mindmap-page .sheet-handle { cursor: grab; touch-action: none; }
+.mindmap-page .sheet-handle:active { cursor: grabbing; }
 
 /* Poignée */
-.sheet-handle {
+.mindmap-page .sheet-handle {
   width: 36px;
   height: 4px;
   background: var(--border-hover, #D1D5DB);
@@ -283,14 +286,14 @@
   cursor: pointer;
 }
 
-.detail-header {
+.mindmap-page .detail-header {
   display: flex;
   gap: 12px;
   align-items: flex-start;
   margin-bottom: 12px;
 }
 
-.detail-emoji-wrap {
+.mindmap-page .detail-emoji-wrap {
   font-size: 22px;
   width: 46px;
   height: 46px;
@@ -301,23 +304,23 @@
   flex-shrink: 0;
 }
 
-.detail-info { display: flex; flex-direction: column; gap: 4px; flex: 1; }
-.detail-title { font-size: 15px; font-weight: 700; letter-spacing: -0.2px; }
-.detail-text  { font-size: 12px; color: var(--text-secondary); line-height: 1.55; }
+.mindmap-page .detail-info { display: flex; flex-direction: column; gap: 4px; flex: 1; }
+.mindmap-page .detail-title { font-size: 15px; font-weight: 700; letter-spacing: -0.2px; }
+.mindmap-page .detail-text  { font-size: 12px; color: var(--text-secondary); line-height: 1.55; }
 
-.detail-chips { display: flex; flex-wrap: wrap; gap: 6px; }
-.chip {
+.mindmap-page .detail-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.mindmap-page .chip {
   font-size: 11px;
   font-weight: 600;
   padding: 5px 11px;
   border-radius: 20px;
 }
 
-.detail-cta {
+.mindmap-page .detail-cta {
   margin-top: 12px;
   width: 100%;
   padding: 15px;
-  background: var(--bg-cta, #1A1A1A);
+  background: var(--bg-cta);
   color: var(--text-cta, white);
   border: none;
   border-radius: 16px;
@@ -327,10 +330,10 @@
   cursor: pointer;
   transition: opacity 0.15s;
 }
-.detail-cta:active { opacity: 0.8; }
+.mindmap-page .detail-cta:active { opacity: 0.8; }
 
 /* ── Écran de fin ────────────────────────────────────────────────── */
-.end-screen {
+.mindmap-page .end-screen {
   position: absolute;
   inset: 0;
   background: var(--bg-app);
@@ -344,11 +347,11 @@
   text-align: center;
 }
 
-.end-emoji { font-size: 56px; }
-.end-title { font-size: 24px; font-weight: 700; letter-spacing: -0.5px; }
-.end-sub   { font-size: 14px; color: var(--text-secondary); line-height: 1.55; max-width: 280px; margin: 0; }
+.mindmap-page .end-emoji { font-size: 56px; }
+.mindmap-page .end-title { font-size: 24px; font-weight: 700; letter-spacing: -0.5px; }
+.mindmap-page .end-sub   { font-size: 14px; color: var(--text-secondary); line-height: 1.55; max-width: 280px; margin: 0; }
 
-.end-stats {
+.mindmap-page .end-stats {
   display: flex;
   gap: 16px;
   background: var(--bg-card);
@@ -356,12 +359,12 @@
   border-radius: 20px;
   padding: 16px 24px;
 }
-.end-stat { display: flex; flex-direction: column; align-items: center; gap: 4px; }
-.end-stat-value { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
-.end-stat-label { font-size: 11px; color: var(--text-muted); font-weight: 500; }
-.end-stat-divider { width: 1px; background: var(--border); align-self: stretch; }
+.mindmap-page .end-stat { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.mindmap-page .end-stat-value { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
+.mindmap-page .end-stat-label { font-size: 11px; color: var(--text-muted); font-weight: 500; }
+.mindmap-page .end-stat-divider { width: 1px; background: var(--border); align-self: stretch; }
 
-.xp-badge {
+.mindmap-page .xp-badge {
   background: linear-gradient(135deg, #A78BFA, #8B5CF6);
   color: white;
   padding: 10px 20px;
@@ -370,7 +373,7 @@
   font-weight: 700;
 }
 
-.end-btn {
+.mindmap-page .end-btn {
   width: 100%;
   padding: 16px;
   background: var(--bg-card);
@@ -386,9 +389,9 @@
   text-align: center;
   transition: background 0.12s;
 }
-.end-btn:active { background: var(--bg-hover); }
-.end-btn.primary {
-  background: var(--bg-cta, #1A1A1A);
+.mindmap-page .end-btn:active { background: var(--bg-hover); }
+.mindmap-page .end-btn.primary {
+  background: var(--bg-cta);
   color: var(--text-cta, white);
   border-color: transparent;
 }

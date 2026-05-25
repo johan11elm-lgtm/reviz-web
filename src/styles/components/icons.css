@@ -1,0 +1,34 @@
+/* ============================================================================
+ * RV ICON SQUARE — pastille carrée colorée pour icônes.
+ * Référence: Home .featured-btn-icon
+ * ========================================================================== */
+
+.rv-icon-square {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  flex-shrink: 0;
+  background: var(--bg-subtle);
+  color: var(--text-primary);
+  font-size: 16px;
+  line-height: 1;
+}
+.rv-icon-square svg { width: 18px; height: 18px; }
+
+.rv-icon-square--sm  { width: 24px; height: 24px; border-radius: 8px; font-size: 13px; }
+.rv-icon-square--sm svg { width: 14px; height: 14px; }
+
+.rv-icon-square--xl  { width: 48px; height: 48px; border-radius: 14px; font-size: 22px; }
+.rv-icon-square--xl svg { width: 24px; height: 24px; }
+
+.rv-icon-square--xxl { width: 64px; height: 64px; border-radius: 18px; font-size: 28px; }
+.rv-icon-square--xxl svg { width: 32px; height: 32px; }
+
+.rv-icon-square--violet { background: var(--accent-violet-soft); color: var(--accent-violet-ink); }
+.rv-icon-square--orange { background: var(--accent-orange-soft); color: var(--accent-orange-ink); }
+.rv-icon-square--green  { background: var(--accent-green-soft);  color: var(--accent-green-ink); }
+.rv-icon-square--pink   { background: var(--accent-pink-soft);   color: var(--accent-pink-ink); }
+.rv-icon-square--red    { background: var(--accent-red-soft);    color: var(--accent-red-ink); }

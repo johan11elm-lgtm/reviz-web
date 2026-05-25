@@ -1,247 +1,221 @@
-/* ── Root ─────────────────────────────────────────────────────── */
-.ob-root {
+/* CSS scoped to page wrapper — see scripts/scope-page-css.py */
+/* Wrapper: .onboarding-page */
+
+.onboarding-page {
   min-height: 100dvh;
   display: flex;
   flex-direction: column;
   background: var(--bg-app);
   color: var(--text-primary);
   position: relative;
-  padding: 0 0 40px;
+  padding: 28px 24px 16px;
 }
 
-/* ── Skip ─────────────────────────────────────────────────────── */
-.ob-skip {
+/* ── Skip top-right ── */
+.onboarding-page .onb-skip {
   position: absolute;
-  top: 52px; right: 24px;
+  top: 22px;
+  right: 22px;
   z-index: 10;
   background: var(--bg-subtle);
   border: none;
-  border-radius: 8px;
-  padding: 6px 12px;
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--text-muted);
-  cursor: pointer;
-  transition: background 0.15s;
+  border-radius: var(--radius-pill);
+  padding: 7px 14px;
   font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
 }
-.ob-skip:hover { background: var(--bg-hover); }
 
-/* ── Body ─────────────────────────────────────────────────────── */
-.ob-body {
+.onboarding-page .onb-skip:hover {
+  background: var(--bg-hover);
+  color: var(--text-primary);
+}
+
+/* ── Body (slide content) ── */
+.onboarding-page .onb-body {
   flex: 1;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
-  padding: 80px 28px 24px;
-  gap: 18px;
-  position: relative;
-  z-index: 1;
+  gap: 14px;
+  text-align: center;
+  width: 100%;
+  max-width: 420px;
+  margin: 0 auto;
+  padding: 24px 0 8px;
 }
 
-@keyframes obIn {
+/* La mascotte recule légèrement vers la bulle (pointer-top-center collé) */
+.onboarding-page .onb-body .mascot {
+  margin-bottom: -4px;
+}
+
+.onboarding-page .onb-bubble {
+  font-size: 14px;
+  font-weight: 500;
+  max-width: 30ch;
+  margin-top: 2px;
+}
+
+.onboarding-page .onb-title {
+  margin: 4px 0 4px;
+  font-family: 'Geist', sans-serif;
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: -1px;
+  line-height: 1.1;
+  color: var(--text-primary);
+}
+
+.onboarding-page .onb-body-text {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--text-secondary);
+  max-width: 32ch;
+}
+
+.onboarding-page .onb-level-chip {
+  /* utilise .rv-pill --orange ; juste un coup de margin local */
+  margin-top: 2px;
+}
+
+/* ── Animations slide in/out ── */
+@keyframes onbSlideIn {
   from { opacity: 0; transform: translateY(14px); }
   to   { opacity: 1; transform: translateY(0); }
 }
-@keyframes obOut {
+
+@keyframes onbSlideOut {
   from { opacity: 1; transform: translateY(0); }
   to   { opacity: 0; transform: translateY(-10px); }
 }
 
-.ob-anim-in  { animation: obIn  0.25s ease forwards; }
-.ob-anim-out { animation: obOut 0.18s ease forwards; }
+.onboarding-page .onb-anim-in  { animation: onbSlideIn  0.25s ease forwards; }
+.onboarding-page .onb-anim-out { animation: onbSlideOut 0.18s ease forwards; }
 
-/* ── Logo slide ───────────────────────────────────────────────── */
-.ob-logo-wrap {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 22px;
-  font-weight: 700;
-  letter-spacing: -0.6px;
-  margin-bottom: 4px;
-}
-.ob-star { width: 20px; height: 20px; flex-shrink: 0; }
-.ob-logo-text { color: var(--text-primary); }
-
-/* ── CTA icon ─────────────────────────────────────────────────── */
-.ob-cta-icon {
-  font-size: 48px;
-  line-height: 1;
-  margin-bottom: 4px;
-}
-
-/* ── Steps ────────────────────────────────────────────────────── */
-.ob-steps {
+/* ── Slide HOW : 3 steps cards ── */
+.onboarding-page .onb-steps {
+  list-style: none;
+  margin: 4px 0 0;
+  padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 10px;
   width: 100%;
+  max-width: 340px;
 }
 
-.ob-step {
+.onboarding-page .onb-step {
   display: flex;
   align-items: center;
   gap: 14px;
-  padding: 14px 0;
-  border-bottom: 1px solid var(--border);
-  animation: obIn 0.3s ease both;
-}
-.ob-step:last-child { border-bottom: none; }
-
-.ob-step-icon {
-  font-size: 22px;
-  width: 40px; height: 40px;
-  display: flex; align-items: center; justify-content: center;
-  background: var(--bg-subtle);
-  border-radius: 10px;
-  flex-shrink: 0;
+  padding: 12px 14px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-card);
+  text-align: left;
+  animation: onbSlideIn 0.3s ease both;
 }
 
-.ob-step-num {
-  font-size: 11px;
-  font-weight: 700;
-  color: #FF6B00;
-  min-width: 14px;
-}
-
-.ob-step-info {
+.onboarding-page .onb-step-text {
   display: flex;
   flex-direction: column;
   gap: 1px;
+  min-width: 0;
+  flex: 1;
 }
 
-.ob-step-label {
-  font-size: 14px;
-  font-weight: 600;
-  letter-spacing: -0.2px;
-}
-
-.ob-step-desc {
-  font-size: 13px;
-  color: var(--text-muted);
-}
-
-/* ── Grid formats ─────────────────────────────────────────────── */
-.ob-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+.onboarding-page .onb-step-label {
+  display: inline-flex;
+  align-items: baseline;
   gap: 8px;
-  width: 100%;
-}
-
-.ob-grid-item {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 10px;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  padding: 16px 14px;
-  animation: obIn 0.3s ease both;
-}
-
-.ob-grid-icon {
-  width: 40px; height: 40px;
-  border-radius: 10px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 22px;
-}
-
-.ob-grid-label {
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: -0.2px;
-}
-
-.ob-grid-dot {
-  width: 5px; height: 5px;
-  border-radius: 50%;
-  opacity: 0.8;
-}
-
-/* ── Texte ────────────────────────────────────────────────────── */
-.ob-title {
-  font-size: 28px;
+  font-size: 14px;
   font-weight: 700;
-  letter-spacing: -0.8px;
-  line-height: 1.15;
-  margin: 0;
+  letter-spacing: -0.2px;
   color: var(--text-primary);
 }
 
-.ob-body-text {
-  font-size: 15px;
-  color: var(--text-secondary);
-  line-height: 1.6;
-  max-width: 320px;
-  margin: 0;
+.onboarding-page .onb-step-num {
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--accent-orange);
+  letter-spacing: 0.3px;
 }
 
-.ob-level-chip {
-  display: inline-block;
-  padding: 4px 10px;
-  margin-bottom: 10px;
-  background: var(--bg-icon-orange);
-  color: #C04F00;
-  border-radius: 999px;
+.onboarding-page .onb-step-sub {
   font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.02em;
+  color: var(--text-muted);
+  line-height: 1.4;
 }
 
-/* ── Footer ───────────────────────────────────────────────────── */
-.ob-footer {
-  padding: 0 28px;
+/* ── Slide FORMATS : grid 2x2 ── */
+.onboarding-page .onb-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  width: 100%;
+  max-width: 340px;
+  margin: 4px 0 0;
+}
+
+.onboarding-page .onb-grid-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 18px 12px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-card);
+  animation: onbSlideIn 0.3s ease both;
+}
+
+.onboarding-page .onb-grid-label {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: -0.2px;
+  color: var(--text-primary);
+}
+
+/* ── Footer ── */
+.onboarding-page .onb-footer {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 12px;
-  position: relative;
-  z-index: 1;
-}
-
-/* Dots */
-.ob-dots { display: flex; gap: 5px; margin-bottom: 4px; align-self: flex-start; padding-left: 0; }
-
-.ob-dot {
-  width: 6px; height: 6px;
-  border-radius: 50%;
-  background: var(--border);
-  transition: background 0.2s, transform 0.2s;
-}
-.ob-dot.done   { background: #FFD0A8; }
-.ob-dot.active { background: #FF6B00; transform: scale(1.25); }
-
-/* Bouton principal */
-.ob-btn {
   width: 100%;
-  padding: 15px;
-  border-radius: 10px;
-  background: #FF6B00;
-  color: white;
-  font-size: 15px;
-  font-weight: 600;
-  border: none;
-  cursor: pointer;
-  transition: opacity 0.15s, transform 0.1s;
-  font-family: inherit;
-  letter-spacing: -0.2px;
-}
-.ob-btn:active { opacity: 0.85; transform: scale(0.99); }
-
-/* Lien secondaire */
-.ob-secondary {
-  background: none;
-  border: none;
-  font-size: 13px;
-  color: var(--text-muted);
-  cursor: pointer;
-  font-family: inherit;
-  padding: 4px;
+  max-width: 340px;
+  margin: 0 auto;
+  padding-top: 14px;
 }
 
-/* ── Supprimer aurora ─────────────────────────────────────────── */
-.ob-aurora { display: none; }
+.onboarding-page .onb-dots {
+  display: flex;
+  gap: 6px;
+  align-self: center;
+  margin-bottom: 4px;
+}
+
+/* ── Responsive mobile ── */
+@media (max-width: 430px) {
+  .onboarding-page { padding: 22px 20px 14px; }
+  .onboarding-page .onb-body { gap: 12px; padding: 16px 0 6px; }
+  .onboarding-page .onb-title { font-size: 24px; letter-spacing: -0.8px; }
+  .onboarding-page .onb-bubble { font-size: 13px; }
+  .onboarding-page .onb-step { gap: 12px; padding: 10px 12px; }
+  .onboarding-page .onb-grid-item { padding: 16px 10px; }
+}
+
+/* Adapte la taille de mascotte si le viewport est bas (< 700px). */
+@media (max-height: 700px) {
+  .onboarding-page .onb-body .mascot {
+    width: 140px !important;
+    height: 140px !important;
+  }
+}

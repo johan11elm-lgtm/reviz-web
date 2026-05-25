@@ -1,0 +1,52 @@
+/* ============================================================================
+ * RV PILL & CHIP — petits éléments d'info contextuels.
+ * Référence: Home .greeting-chip
+ * ========================================================================== */
+
+.rv-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  background: var(--bg-subtle);
+  color: var(--text-secondary);
+}
+.rv-pill--violet { background: var(--accent-violet-soft); color: var(--accent-violet-ink); }
+.rv-pill--orange { background: var(--accent-orange-soft); color: var(--accent-orange-ink); }
+.rv-pill--green  { background: var(--accent-green-soft);  color: var(--accent-green-ink); }
+.rv-pill--pink   { background: var(--accent-pink-soft);   color: var(--accent-pink-ink); }
+.rv-pill--red    { background: var(--accent-red-soft);    color: var(--accent-red-ink); }
+
+/* Chip — pastille avec icon-circle + label */
+.rv-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px 6px 8px;
+  background: var(--bg-card);
+  border-radius: var(--radius-pill);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  border: 1px solid var(--border-subtle);
+}
+.rv-chip strong { color: var(--text-primary); font-weight: 800; }
+
+.rv-chip-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  font-size: 12px;
+  background: var(--accent-orange-soft);
+}
+.rv-chip-icon--violet { background: var(--accent-violet-soft); }
+.rv-chip-icon--green  { background: var(--accent-green-soft); }
+.rv-chip-icon--pink   { background: var(--accent-pink-soft); }

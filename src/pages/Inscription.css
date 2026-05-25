@@ -65,7 +65,7 @@
 }
 
 .auth-input:focus {
-  border-color: #6366F1;
+  border-color: var(--accent-violet);
 }
 
 .auth-input::placeholder {
@@ -74,7 +74,7 @@
 
 /* Bouton principal */
 .auth-btn {
-  background: #1A1A1A;
+  background: var(--bg-cta);
   color: #fff;
   border: none;
   border-radius: 16px;
@@ -93,7 +93,7 @@
 /* Message d'erreur */
 .auth-error {
   font-size: 13px;
-  color: #EF4444;
+  color: var(--accent-red);
   text-align: center;
   min-height: 18px;
   margin: 0;
@@ -108,7 +108,7 @@
 }
 
 .auth-link a {
-  color: #6366F1;
+  color: var(--accent-violet);
   font-weight: 600;
   text-decoration: none;
 }
@@ -127,7 +127,7 @@
   height: 18px;
   margin-top: 1px;
   flex-shrink: 0;
-  accent-color: #6366F1;
+  accent-color: var(--accent-violet);
   cursor: pointer;
 }
 
@@ -138,7 +138,7 @@
 }
 
 .auth-checkbox-row a {
-  color: #6366F1;
+  color: var(--accent-violet);
   font-weight: 600;
   text-decoration: none;
 }
@@ -239,7 +239,7 @@
 
 .signup-progress-bar {
   height: 100%;
-  background: linear-gradient(90deg, #FFB347, #FF6B00);
+  background: linear-gradient(90deg, var(--accent-orange-hover), var(--accent-orange));
   border-radius: 999px;
   transition: width 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
@@ -296,7 +296,7 @@
 
 .signup-card:active { transform: scale(0.98); }
 .signup-card.active {
-  border-color: #FF6B00;
+  border-color: var(--accent-orange);
   box-shadow: 0 0 0 3px rgba(255, 107, 0, 0.15);
 }
 
@@ -346,7 +346,7 @@
 
 .signup-card-sm:active { transform: scale(0.97); }
 .signup-card-sm.active {
-  border-color: #FF6B00;
+  border-color: var(--accent-orange);
   box-shadow: 0 0 0 3px rgba(255, 107, 0, 0.15);
 }
 
@@ -372,14 +372,14 @@
 
 .signup-chip:active { transform: scale(0.96); }
 .signup-chip.active {
-  background: #1A1A1A;
-  border-color: #1A1A1A;
+  background: var(--bg-cta);
+  border-color: var(--bg-cta);
   color: #fff;
 }
 
 :root[data-theme="dark"] .signup-chip.active {
-  background: #FF6B00;
-  border-color: #FF6B00;
+  background: var(--accent-orange);
+  border-color: var(--accent-orange);
 }
 
 /* Footer collant */

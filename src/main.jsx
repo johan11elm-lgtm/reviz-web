@@ -3,6 +3,12 @@ import { createRoot } from 'react-dom/client'
 import './styles/global.css'
 import App from './App.jsx'
 
+// Désactive le scroll restoration auto du browser pour que ScrollToTop soit
+// le seul à contrôler la position, évite les sauts de quelques pixels au retour
+if (typeof history !== 'undefined' && 'scrollRestoration' in history) {
+  history.scrollRestoration = 'manual';
+}
+
 // ── Render first, load monitoring after ─────────────────────────────
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -47,10 +53,23 @@ if ('requestIdleCallback' in window) {
   setTimeout(loadMonitoring, 2000)
 }
 
-// Service Worker registration
+// Service Worker registration — uniquement en production.
+// En dev le SW intercepte le HMR et sert du CSS périmé, ce qui cause des
+// bugs de layout au retour de navigation (cards écrasées, styles obsolètes).
 if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/sw.js')
-      .catch((err) => console.warn('[Réviz] SW registration failed:', err))
-  })
+  if (import.meta.env.PROD) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/sw.js')
+        .catch((err) => console.warn('[Réviz] SW registration failed:', err))
+    })
+  } else {
+    // En dev : désinscrire tout SW résiduel et vider les caches qui pourraient
+    // avoir été créés lors d'une session antérieure.
+    navigator.serviceWorker.getRegistrations().then((regs) => {
+      regs.forEach((reg) => reg.unregister());
+    });
+    if ('caches' in window) {
+      caches.keys().then((keys) => keys.forEach((k) => caches.delete(k)));
+    }
+  }
 }

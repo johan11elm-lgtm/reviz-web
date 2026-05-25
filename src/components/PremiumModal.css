@@ -39,7 +39,7 @@
   font-size: 19px;
   font-weight: 700;
   letter-spacing: -0.3px;
-  color: var(--text-primary, #1A1A1A);
+  color: var(--text-primary);
   text-align: center;
   margin: 0;
 }
@@ -53,7 +53,7 @@
 }
 
 .premium-sub strong {
-  color: var(--text-primary, #1A1A1A);
+  color: var(--text-primary);
 }
 
 .premium-counter {
@@ -105,7 +105,7 @@
 .premium-btn:active { opacity: 0.75; transform: scale(0.98); }
 
 .premium-btn--upgrade {
-  background: linear-gradient(135deg, #818CF8, #6366F1);
+  background: linear-gradient(135deg, #818CF8, var(--accent-violet));
   color: #fff;
   display: flex;
   align-items: center;
@@ -120,5 +120,5 @@
 
 .premium-btn--close {
   background: var(--bg-subtle, #f0f0f0);
-  color: var(--text-primary, #1A1A1A);
+  color: var(--text-primary);
 }

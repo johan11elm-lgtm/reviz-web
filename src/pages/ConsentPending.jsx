@@ -43,7 +43,7 @@ export default function ConsentPending() {
         </p>
 
         {resent ? (
-          <p style={{ color: '#22C55E', fontWeight: 600, marginBottom: 16 }}>✓ Email renvoyé !</p>
+          <p style={{ color: '#34C77B', fontWeight: 600, marginBottom: 16 }}>✓ Email renvoyé !</p>
         ) : (
           <button
             className="auth-btn"

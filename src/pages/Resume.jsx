@@ -1,25 +1,14 @@
 import { useState, useRef, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { recordRevision } from '../services/revisionService'
+import { PageHeader } from '../components/PageHeader'
+import { HeroCTA } from '../components/HeroCTA'
+import { Mascot } from '../components/Mascot'
+import { subjectInfo as sharedSubjectInfo } from '../utils/subjects'
 import './Resume.css'
 
-const SUBJECT_MAP = {
-  'maths':    { dot: '#F97316', bg: '#FFF7ED', emoji: '📐' },
-  'français': { dot: '#EC4899', bg: '#FDF2F8', emoji: '📖' },
-  'histoire': { dot: '#6366F1', bg: '#EEF2FF', emoji: '🌍' },
-  'géo':      { dot: '#6366F1', bg: '#EEF2FF', emoji: '🌍' },
-  'svt':      { dot: '#22C55E', bg: '#F0FDF4', emoji: '🧬' },
-  'physique': { dot: '#3B82F6', bg: '#EFF6FF', emoji: '⚛️' },
-  'chimie':   { dot: '#3B82F6', bg: '#EFF6FF', emoji: '🧪' },
-  'techno':   { dot: '#06B6D4', bg: '#ECFEFF', emoji: '⚙️' },
-  'anglais':  { dot: '#EAB308', bg: '#FEFCE8', emoji: '🗣️' },
-  'espagnol': { dot: '#EAB308', bg: '#FEFCE8', emoji: '💬' },
-  'arts':     { dot: '#A855F7', bg: '#FAF5FF', emoji: '🎨' },
-}
-
 function subjectInfo(s) {
-  const key = Object.keys(SUBJECT_MAP).find(k => s?.toLowerCase().includes(k))
-  return SUBJECT_MAP[key] ?? { dot: '#6366F1', bg: '#EEF2FF', emoji: '📚' }
+  return sharedSubjectInfo(s);
 }
 
 // ---- DONNÉES : localStorage (IA) > mock ----
@@ -115,77 +104,107 @@ export default function Resume() {
     } catch { /* annulé par l'utilisateur */ }
   }
 
+  const shareBtn = (
+    <button
+      type="button"
+      className="rv-bell-btn"
+      onClick={handleShare}
+      aria-label="Partager le résumé"
+      title="Partager"
+    >
+      {shareDone ? '✓' : '↗'}
+    </button>
+  );
+
   return (
-    <div className="app">
+    <div className="app resume-page">
 
       {/* ── Écran de fin ── */}
       {showEnd && (
-        <div className="end-screen">
-          <span className="end-emoji">✅</span>
-          <span className="end-title">Leçon maîtrisée !</span>
-          <p className="end-sub">Tu as relu l'essentiel. La révision régulière, c'est la clé !</p>
-          <div className="end-stats">
-            <div className="end-stat">
-              <span className="end-stat-value" style={{ color: '#22C55E' }}>{resumeData.sections.length}</span>
-              <span className="end-stat-label">Sections</span>
+        <div className="rv-end-screen resume-end-screen">
+          <Mascot
+            pose="celebration"
+            size={240}
+            glow
+            animate
+            priority
+            className="rv-end-screen-mascot"
+            alt=""
+            aria-hidden="true"
+          />
+          <h2 className="rv-end-screen-title">Leçon maîtrisée !</h2>
+          <p className="rv-end-screen-sub">
+            Tu as relu l'essentiel. La révision régulière, c'est la clé !
+          </p>
+          <div className="resume-end-stats rv-card rv-card--padded">
+            <div className="resume-end-stat">
+              <span className="rv-stat-value rv-stat-value--md" style={{ color: 'var(--accent-green)' }}>{resumeData.sections.length}</span>
+              <span className="rv-stat-label">Sections</span>
             </div>
-            <div className="end-stat-divider" />
-            <div className="end-stat">
-              <span className="end-stat-value" style={{ color: '#FF6B00' }}>{resumeData.keyTerms.length}</span>
-              <span className="end-stat-label">Termes</span>
+            <div className="rv-stat-separator" />
+            <div className="resume-end-stat">
+              <span className="rv-stat-value rv-stat-value--md" style={{ color: 'var(--accent-orange)' }}>{resumeData.keyTerms.length}</span>
+              <span className="rv-stat-label">Termes</span>
             </div>
-            <div className="end-stat-divider" />
-            <div className="end-stat">
-              <span className="end-stat-value" style={{ color: info.dot }}>{resumeData.readingTime}</span>
-              <span className="end-stat-label">min lues</span>
+            <div className="rv-stat-separator" />
+            <div className="resume-end-stat">
+              <span className="rv-stat-value rv-stat-value--md" style={{ color: info.dot }}>{resumeData.readingTime}</span>
+              <span className="rv-stat-label">min lues</span>
             </div>
           </div>
-          <div className="xp-badge">+{resumeData.xp} XP gagnés !</div>
-          <button className="end-btn primary" onClick={restartResume}>🔄 Relire</button>
-          <Link className="end-btn" to="/analyse">← Retour aux formats</Link>
+          <div className="resume-xp-badge">+{resumeData.xp} XP gagnés !</div>
+          <div className="rv-end-screen-actions">
+            <button type="button" className="rv-btn-cta rv-btn-cta--full" onClick={restartResume}>
+              <span>🔄 Relire</span>
+            </button>
+            <Link className="rv-btn-cta rv-btn-cta--full rv-btn-cta--ghost" to="/analyse">
+              ← Retour aux formats
+            </Link>
+          </div>
         </div>
       )}
 
-      {/* ── Header ── */}
-      <div className="header">
-        <Link className="back-btn" to="/analyse">←</Link>
-        <div className="header-center">
-          <span className="header-title">Résumé</span>
-          <span className="read-time-chip">📖 {resumeData.readingTime} min de lecture</span>
-        </div>
-        <button className="share-btn" onClick={handleShare} title="Partager">
-          {shareDone ? '✓' : '↗'}
-        </button>
-      </div>
+      <PageHeader
+        variant="back"
+        title="Résumé"
+        sub={`📖 ${resumeData.readingTime} min de lecture`}
+        right={shareBtn}
+      />
 
       {/* Barre de lecture liée au scroll */}
-      <div className="reading-bar">
-        <div className="reading-fill" style={{ width: scrollPct + '%', background: info.dot }} />
+      <div className="resume-reading-bar" aria-hidden="true">
+        <div
+          className="resume-reading-fill"
+          style={{ width: scrollPct + '%', background: info.dot }}
+        />
       </div>
 
       {/* ── Contenu scrollable ── */}
-      <div className="content" ref={contentRef}>
+      <div className="content resume-content" ref={contentRef}>
 
-        {/* Hero : matière + titre */}
-        <div className="resume-hero">
-          <span className="subject-pill" style={{ background: info.bg, color: info.dot }}>
-            {info.emoji} {resumeData.subject}
-          </span>
-          <h1 className="resume-title">{resumeData.title}</h1>
+        {/* Hero présence — mascotte dominante style Home */}
+        <HeroCTA
+          tone="orange"
+          mascot="reading"
+          eyebrow={`${info.emoji} ${resumeData.subject}`}
+          title={resumeData.title}
+          sub={`📖 ${resumeData.readingTime} min — prends ton temps pour bien capter.`}
+          className="resume-hero-cta"
+        />
+        <div className="resume-hero-after">
           <span className="ai-badge">✦ Généré par IA</span>
         </div>
 
         {/* À retenir */}
-        <div className="retenir-card">
-          <div className="retenir-header">
-            <span className="retenir-icon">⭐</span>
-            <span className="retenir-label">À retenir</span>
-          </div>
-          <p className="retenir-intro">{resumeData.intro}</p>
-          <div className="retenir-points">
+        <div className="rv-callout rv-callout--violet resume-retenir">
+          <span className="rv-callout-label">
+            <span aria-hidden="true">⭐</span> À retenir
+          </span>
+          <p className="resume-retenir-intro">{resumeData.intro}</p>
+          <div className="resume-retenir-points">
             {resumeData.keyPoints.map((pt, i) => (
-              <div className="retenir-point" key={i}>
-                <span className="point-num">{i + 1}</span>
+              <div className="resume-retenir-point" key={i}>
+                <span className="resume-point-num">{i + 1}</span>
                 <span>{pt}</span>
               </div>
             ))}
@@ -193,18 +212,22 @@ export default function Resume() {
         </div>
 
         {/* Sections du cours */}
-        <div className="block-label">Le cours</div>
+        <div className="resume-block-label">Le cours</div>
 
         {resumeData.sections.map((section, i) => (
-          <div className="section-card" key={i} style={{ '--accent': info.dot }}>
-            <div className="section-accent" />
-            <div className="section-inner">
-              <div className="section-heading">{section.title}</div>
-              <div className="section-body">{section.content}</div>
+          <div
+            className="rv-card resume-section-card"
+            key={i}
+            style={{ '--resume-accent': info.dot }}
+          >
+            <div className="resume-section-accent" />
+            <div className="resume-section-inner">
+              <h3 className="resume-section-heading">{section.title}</h3>
+              <div className="resume-section-body">{section.content}</div>
               {section.formula && (
-                <div className="formula-block" style={{ background: info.bg, borderColor: info.dot + '33' }}>
-                  <div className="formula-text" style={{ color: info.dot }}>{section.formula}</div>
-                  <div className="formula-caption">{section.formulaCaption}</div>
+                <div className="rv-callout rv-callout--violet resume-formula-block">
+                  <div className="resume-formula-text">{section.formula}</div>
+                  <div className="resume-formula-caption">{section.formulaCaption}</div>
                 </div>
               )}
             </div>
@@ -212,20 +235,24 @@ export default function Resume() {
         ))}
 
         {/* Vocabulaire */}
-        <div className="block-label">Vocabulaire clé</div>
+        <div className="resume-block-label">Vocabulaire clé</div>
 
-        <div className="terms-grid">
+        <div className="resume-terms-grid">
           {resumeData.keyTerms.map((item, i) => (
-            <div className="term-card" key={i}>
-              <div className="term-name" style={{ color: info.dot }}>{item.term}</div>
-              <div className="term-def">{item.def}</div>
+            <div className="rv-card rv-card--tight resume-term-card" key={i}>
+              <div className="resume-term-name" style={{ color: info.dot }}>{item.term}</div>
+              <div className="resume-term-def">{item.def}</div>
             </div>
           ))}
         </div>
 
         {/* CTA */}
-        <button className="cta-btn" onClick={() => setShowEnd(true)}>
-          ✓ J'ai tout lu !
+        <button
+          type="button"
+          className="rv-btn-cta rv-btn-cta--full resume-cta"
+          onClick={() => setShowEnd(true)}
+        >
+          <span>✓ J'ai tout lu !</span>
         </button>
 
       </div>

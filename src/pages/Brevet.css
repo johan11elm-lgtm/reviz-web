@@ -78,7 +78,7 @@
 
 .brevet-global-fill {
   height: 100%;
-  background: #22C55E;
+  background: var(--accent-green);
   border-radius: 99px;
   transition: width .4s ease;
 }
@@ -86,7 +86,7 @@
 .brevet-global-pct {
   font-size: 22px;
   font-weight: 800;
-  color: #22C55E;
+  color: var(--accent-green);
   text-align: right;
 }
 
@@ -104,7 +104,7 @@
   border-radius: 99px;
 }
 
-.brevet-legend--done { background: #DCFCE7; color: #16A34A; }
+.brevet-legend--done { background: #DCFCE7; color: var(--accent-green-ink); }
 .brevet-legend--auto { background: #FEF3C7; color: #D97706; }
 .brevet-legend--none { background: var(--bg-secondary); color: var(--text-secondary); }
 
@@ -153,7 +153,7 @@
 
 .brevet-subject-fill {
   height: 100%;
-  background: #22C55E;
+  background: var(--accent-green);
   border-radius: 99px;
   transition: width .3s ease;
 }
@@ -195,7 +195,7 @@
   flex-shrink: 0;
 }
 
-.brevet-theme--done  .brevet-theme-icon { color: #22C55E; }
+.brevet-theme--done  .brevet-theme-icon { color: var(--accent-green); }
 .brevet-theme--auto  .brevet-theme-icon { color: #F59E0B; }
 .brevet-theme--none  .brevet-theme-icon { color: var(--text-secondary); }
 
@@ -213,7 +213,7 @@
 }
 
 .brevet-theme--done .brevet-theme-label {
-  color: #16A34A;
+  color: var(--accent-green-ink);
 }
 
 .brevet-theme--none .brevet-theme-label {

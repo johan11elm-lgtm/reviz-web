@@ -1,6 +1,8 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { recordRevision } from '../services/revisionService'
+import { PageHeader } from '../components/PageHeader'
+import { Mascot } from '../components/Mascot'
 import './Quiz.css'
 
 // ---- DONNÉES : localStorage (IA) > mock ----
@@ -25,14 +27,14 @@ const LETTERS = ['A', 'B', 'C', 'D']
 
 function getEndContent(score, total) {
   const pct = score / total
-  if (pct >= 0.9) return { emoji: '🏆', title: 'Excellent !',   sub: 'Tu maîtrises parfaitement ce sujet !' }
-  if (pct >= 0.7) return { emoji: '🎉', title: 'Très bien !',   sub: 'Encore un petit effort et tu seras au top !' }
-  if (pct >= 0.5) return { emoji: '💪', title: 'Pas mal !',     sub: 'Relis tes notes et réessaie !' }
-  return           { emoji: '📚', title: 'À travailler…',       sub: 'Révise la leçon et retente le quiz !' }
+  if (pct >= 0.9) return { mascot: 'trophy',      title: 'Excellent !',  sub: 'Tu maîtrises parfaitement ce sujet !' }
+  if (pct >= 0.7) return { mascot: 'celebration', title: 'Très bien !',  sub: 'Encore un petit effort et tu seras au top !' }
+  if (pct >= 0.5) return { mascot: 'fire',        title: 'Pas mal !',    sub: 'Relis tes notes et réessaie !' }
+  return           { mascot: 'sad',               title: 'À travailler', sub: 'Révise la leçon et retente le quiz !' }
 }
 
-/* ── Confetti ── */
-const CONFETTI_COLORS = ['#FF6B00','#FFB347','#6C63FF','#22C55E','#FF3B7F','#00C07F','#FDE047']
+/* ── Confetti — utilise les accents DS pour cohérence ── */
+const CONFETTI_COLORS = ['#FF8A3D', '#FFB347', '#6B4EFF', '#34C77B', '#FF6B9A', '#FFB347']
 function Confetti() {
   const pieces = Array.from({ length: 30 }, (_, i) => ({
     id: i,
@@ -44,11 +46,11 @@ function Confetti() {
     rotation: Math.random() * 360,
   }))
   return (
-    <div className="confetti-wrap" aria-hidden="true">
+    <div className="quiz-confetti-wrap" aria-hidden="true">
       {pieces.map(p => (
         <div
           key={p.id}
-          className="confetti-piece"
+          className="quiz-confetti-piece"
           style={{
             left: `${p.left}%`,
             width: p.size,
@@ -92,7 +94,7 @@ export default function Quiz() {
   const [answered, setAnswered]           = useState(false)
   const [selectedIndex, setSelectedIndex] = useState(null)
   const [showEnd, setShowEnd]             = useState(false)
-  const [animKey, setAnimKey]             = useState(0)   // force re-mount pour animation
+  const [animKey, setAnimKey]             = useState(0)
 
   const q         = questions[current]
   const isCorrect = answered && selectedIndex === q.correct
@@ -127,95 +129,138 @@ export default function Quiz() {
   }
 
   function getChoiceClass(i) {
-    if (!answered) return 'choice-btn'
-    if (i === q.correct)                        return 'choice-btn correct'
-    if (i === selectedIndex && i !== q.correct) return 'choice-btn wrong'
-    return 'choice-btn neutral'
+    if (!answered) return 'quiz-choice-btn'
+    if (i === q.correct)                        return 'quiz-choice-btn quiz-choice-btn--correct'
+    if (i === selectedIndex && i !== q.correct) return 'quiz-choice-btn quiz-choice-btn--wrong'
+    return 'quiz-choice-btn quiz-choice-btn--neutral'
   }
 
   const endContent = getEndContent(score, questions.length)
 
-  return (
-    <div className="app">
+  // Mascot narratrice — pose le sujet, puis réagit
+  let mascotPose = 'thinking'
+  if (answered) {
+    mascotPose = isCorrect ? 'celebration' : 'sad'
+  }
 
-      {/* ── Confetti ── */}
+  // Sub du PageHeader = bar + counter
+  const subBar = (
+    <div className="quiz-header-sub">
+      <div className="rv-bar quiz-header-bar">
+        <div className="rv-bar-fill rv-bar-fill--orange" style={{ width: `${progress}%` }} />
+      </div>
+      <span className="quiz-header-counter">{current + 1}/{questions.length}</span>
+    </div>
+  )
+
+  // Right slot = score-pill
+  const scorePill = (
+    <div className="rv-pill rv-pill--green quiz-score-pill">
+      <span aria-hidden="true">✓</span>
+      <span>{score}</span>
+    </div>
+  )
+
+  return (
+    <div className="app quiz-page">
+
       {showConfetti && <Confetti />}
 
       {/* ── Écran de fin ── */}
       {showEnd && (
-        <div className="end-screen end-anim">
-          <span className="end-emoji">{endContent.emoji}</span>
-          <span className="end-title">{endContent.title}</span>
-          <p className="end-sub">{endContent.sub}</p>
-          <div className="score-ring">
-            <span className="score-big">{displayScore}/{questions.length}</span>
-            <span className="score-small">score</span>
+        <div className="rv-end-screen quiz-end-screen">
+          <Mascot
+            pose={endContent.mascot}
+            size={240}
+            glow
+            animate
+            priority
+            className="rv-end-screen-mascot"
+            alt=""
+            aria-hidden="true"
+          />
+          <h2 className="rv-end-screen-title">{endContent.title}</h2>
+          <p className="rv-end-screen-sub">{endContent.sub}</p>
+          <div className="quiz-score-ring">
+            <span className="quiz-score-big">{displayScore}/{questions.length}</span>
+            <span className="quiz-score-small">score</span>
           </div>
-          <div className="xp-badge">+{xp} XP gagnés !</div>
-          <button className="end-btn primary" onClick={restartQuiz}>🔄 Recommencer</button>
-          <Link className="end-btn" to="/analyse">← Retour aux formats</Link>
+          <div className="quiz-xp-badge">+{xp} XP gagnés !</div>
+          <div className="rv-end-screen-actions">
+            <button type="button" className="rv-btn-cta rv-btn-cta--full" onClick={restartQuiz}>
+              <span>🔄 Recommencer</span>
+            </button>
+            <Link className="rv-btn-cta rv-btn-cta--full rv-btn-cta--ghost" to="/analyse">
+              ← Retour aux formats
+            </Link>
+          </div>
         </div>
       )}
 
-      {/* ── Header ── */}
-      <div className="header">
-        <Link className="back-btn" to="/analyse">←</Link>
-        <div className="header-center">
-          <span className="header-title">Quiz</span>
-          {/* Barre de progression */}
-          <div className="progress-bar-wrap">
-            <div className="progress-bar-fill" style={{ width: `${progress}%` }} />
-          </div>
-          <span className="progress-label">{current + 1} / {questions.length}</span>
-        </div>
-        <div className="score-pill">
-          <span className="score-pill-icon">✓</span>
-          <span>{score}</span>
-        </div>
-      </div>
+      <PageHeader
+        variant="back"
+        title="Quiz"
+        sub={subBar}
+        right={scorePill}
+      />
 
       {/* ── Contenu ── */}
-      <div className="content">
+      <div className="content quiz-content">
 
-        <div style={{ textAlign: 'center', padding: '0 0 4px' }}><span className="ai-badge">✦ Généré par IA</span></div>
+        <div className="quiz-ai-row"><span className="ai-badge">✦ Généré par IA</span></div>
 
-        {/* Question — re-mount via key pour déclencher animation */}
-        <div className="question-card" key={animKey}>
-          <div className="question-num">Question {current + 1}</div>
-          <div className="question-text">{q.question}</div>
+        {/* Mascotte narratrice — centrée et dominante, question dans la bulle dessous */}
+        <div className="quiz-narrator" key={animKey}>
+          <Mascot
+            pose={mascotPose}
+            size={200}
+            glow
+            animate
+            priority
+            className="quiz-narrator-mascot"
+            alt=""
+            aria-hidden="true"
+          />
+          <div className="rv-speech-bubble rv-speech-bubble--pointer-top-center quiz-narrator-bubble">
+            <span className="quiz-narrator-eyebrow">Question {current + 1}</span>
+            <span className="quiz-narrator-question">{q.question}</span>
+          </div>
         </div>
 
         {/* Choix */}
-        <div className="choices" key={`choices-${animKey}`}>
+        <div className="quiz-choices" key={`choices-${animKey}`}>
           {q.choices.map((choice, i) => (
             <button
+              type="button"
               key={i}
               className={getChoiceClass(i)}
               onClick={() => selectAnswer(i)}
               disabled={answered}
               style={{ animationDelay: `${i * 25}ms` }}
             >
-              <span className="choice-letter">{LETTERS[i]}</span>
-              <span className="choice-text">{choice}</span>
+              <span className="quiz-choice-letter">{LETTERS[i]}</span>
+              <span className="quiz-choice-text">{choice}</span>
             </button>
           ))}
         </div>
 
       </div>
 
-      {/* ── Panel de feedback ── */}
-      <div className={`feedback-panel${answered ? ' visible' : ''}${answered ? (isCorrect ? ' panel-correct' : ' panel-wrong') : ''}`}>
-        <div className="panel-row">
-          <div className={`panel-icon${isCorrect ? ' icon-correct' : ' icon-wrong'}`}>
+      {/* ── Panel de feedback (sheet partagée) ── */}
+      <div className={`rv-sheet--bottom quiz-feedback${!answered ? ' rv-sheet--bottom-hidden' : ''}${isCorrect ? ' quiz-feedback--correct' : ' quiz-feedback--wrong'}`}>
+        <div className="rv-sheet-handle" aria-hidden="true" />
+        <div className="quiz-feedback-row">
+          <div className={`rv-icon-square rv-icon-square--${isCorrect ? 'green' : 'red'} quiz-feedback-icon`}>
             {isCorrect ? '✓' : '✕'}
           </div>
-          <div className="panel-label">
-            {isCorrect ? 'Bonne réponse !' : 'Mauvaise réponse.'}
+          <div className="quiz-feedback-label">
+            {isCorrect ? 'Bonne réponse !' : 'Mauvaise réponse'}
           </div>
         </div>
-        <p className="panel-explanation">{q.explanation}</p>
-        <button className="next-btn" onClick={nextQuestion}>
-          {isLast ? 'Voir mon résultat →' : 'Question suivante →'}
+        <p className="quiz-feedback-explanation">{q.explanation}</p>
+        <button type="button" className="rv-btn-cta rv-btn-cta--full quiz-next-btn" onClick={nextQuestion}>
+          <span>{isLast ? 'Voir mon résultat' : 'Question suivante'}</span>
+          <span className="rv-btn-cta-arrow" aria-hidden="true">→</span>
         </button>
       </div>
 

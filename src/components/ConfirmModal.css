@@ -79,6 +79,6 @@
 }
 
 .confirm-btn--delete {
-  background: #EF4444;
+  background: var(--accent-red);
   color: #ffffff;
 }

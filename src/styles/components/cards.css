@@ -1,0 +1,99 @@
+/* ============================================================================
+ * RV CARDS — surface fondamentale.
+ * Référence: Home .progress-card, .featured-card, .challenges-card
+ * ========================================================================== */
+
+.rv-card {
+  background: var(--bg-card);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+  color: inherit;
+}
+
+.rv-card--padded { padding: 18px; }
+.rv-card--tight  { padding: 12px 14px; }
+.rv-card--lg     { border-radius: var(--radius-lg); }
+
+.rv-card--link {
+  display: block;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.12s ease;
+}
+@media (hover: hover) and (pointer: fine) {
+  .rv-card--link:hover { background: var(--bg-hover); }
+}
+.rv-card--link:active { transform: scale(0.995); }
+
+.rv-card--modal {
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-pop);
+  padding: 22px;
+}
+
+.rv-card--pop {
+  background: var(--bg-card);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-pop);
+  padding: 14px 16px;
+}
+
+/* Callout — card tonale (info, formule, tip, retenir).
+ * Pas d'ombre, fond coloré soft + ink color. */
+.rv-callout {
+  border-radius: 18px;
+  padding: 16px 18px;
+  background: var(--bg-subtle);
+  color: var(--text-primary);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.rv-callout--violet { background: var(--accent-violet-soft); color: var(--accent-violet-ink); }
+.rv-callout--orange { background: var(--accent-orange-soft); color: var(--accent-orange-ink); }
+.rv-callout--green  { background: var(--accent-green-soft);  color: var(--accent-green-ink); }
+.rv-callout--pink   { background: var(--accent-pink-soft);   color: var(--accent-pink-ink); }
+.rv-callout--red    { background: var(--accent-red-soft);    color: var(--accent-red-ink); }
+
+.rv-callout-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.7px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Footer interne (référence Home .progress-footer) */
+.rv-card-footer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 18px;
+  background: var(--bg-subtle);
+  border-top: 1px solid var(--border-subtle);
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+.rv-card-footer strong { font-weight: 700; color: var(--text-primary); }
+.rv-card-footer-icon { font-size: 15px; line-height: 1; flex-shrink: 0; }
+.rv-card-footer-text {
+  flex: 1;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.rv-card-footer-check {
+  display: inline-block;
+  margin-left: 6px;
+  color: var(--accent-green-ink);
+  font-weight: 700;
+}
+.rv-card-footer-remain {
+  color: var(--text-muted);
+  font-weight: 500;
+}

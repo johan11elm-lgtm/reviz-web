@@ -66,7 +66,7 @@
   font-size: 11px;
   font-weight: 600;
   color: #C45200;
-  background: #FFF4E6;
+  background: var(--accent-orange-soft);
   border: 1px solid #FFD0A8;
   border-radius: 20px;
   padding: 4px 10px;
@@ -74,7 +74,7 @@
   width: fit-content;
 }
 
-[data-theme="dark"] .wlc-badge { background: #2D1F0A; border-color: #7C3A00; }
+[data-theme="dark"] .wlc-badge { background: var(--accent-orange-soft); border-color: var(--accent-orange-ink); }
 
 .wlc-headline {
   font-size: 36px;
@@ -112,7 +112,7 @@
   width: 100%;
   text-align: center;
   text-decoration: none;
-  background: #FF6B00;
+  background: var(--accent-orange);
   color: white;
   border-radius: 10px;
   padding: 15px;

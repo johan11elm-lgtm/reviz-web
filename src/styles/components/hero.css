@@ -1,0 +1,150 @@
+/* ============================================================================
+ * RV HERO CTA — hero gradient + glow + mascotte.
+ * Référence: Home .cta-scanner
+ * Utilisé via le composant <HeroCTA /> qui compose ces classes.
+ * ========================================================================== */
+
+.rv-hero-cta {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  gap: 12px;
+  height: 250px;
+  border-radius: var(--radius-lg);
+  padding: 22px 22px 22px 24px;
+  color: #fff;
+  cursor: pointer;
+  overflow: hidden;
+  isolation: isolate;
+  text-decoration: none;
+  transition: filter 0.18s ease;
+}
+.rv-hero-cta:active { filter: brightness(0.96); }
+@media (hover: hover) and (pointer: fine) {
+  .rv-hero-cta:hover { filter: brightness(1.05); }
+}
+
+.rv-hero-cta--violet {
+  background: linear-gradient(135deg, var(--accent-violet) 0%, #5C40F0 60%, #4A2FD9 100%);
+  box-shadow:
+    0 18px 40px rgba(107, 78, 255, 0.32),
+    0 4px 12px rgba(107, 78, 255, 0.18);
+}
+
+.rv-hero-cta--orange {
+  background: linear-gradient(135deg, var(--accent-orange) 0%, #F0772A 60%, #D85F18 100%);
+  box-shadow:
+    0 18px 40px rgba(255, 138, 61, 0.32),
+    0 4px 12px rgba(255, 138, 61, 0.18);
+}
+
+.rv-hero-cta--compact { height: 200px; padding: 18px 20px; }
+
+.rv-hero-glow {
+  position: absolute;
+  top: -96px;
+  right: -24px;
+  width: 240px;
+  height: 240px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0) 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.rv-hero-text {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 4px;
+}
+
+.rv-hero-eyebrow {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.7px;
+  color: rgba(255, 255, 255, 0.78);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 2px;
+}
+
+.rv-hero-title {
+  font-family: 'Geist', sans-serif;
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -0.7px;
+  line-height: 1.1;
+  color: #fff;
+  margin: 0;
+  max-width: 16ch;
+}
+
+.rv-hero-sub {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.78);
+  line-height: 1.35;
+  margin: 4px 0 12px;
+  max-width: 22ch;
+}
+
+.rv-hero-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  align-self: flex-start;
+  padding: 10px 18px;
+  background: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: -0.1px;
+  border-radius: var(--radius-pill);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+.rv-hero-cta--violet .rv-hero-action { color: var(--accent-violet-ink); }
+.rv-hero-cta--orange .rv-hero-action { color: var(--accent-orange-ink); }
+
+.rv-hero-action-arrow { font-size: 15px; line-height: 1; }
+
+.rv-hero-mascot {
+  position: relative;
+  z-index: 1;
+  width: 200px !important;
+  height: 200px !important;
+  max-width: 200px;
+  max-height: 200px;
+  min-width: 200px;
+  min-height: 200px;
+  object-fit: contain;
+  flex-shrink: 0;
+  flex-grow: 0;
+  align-self: center;
+  margin-right: -26px;
+  margin-top: -8px;
+  margin-bottom: -8px;
+  transform: rotate(-3deg);
+  filter: drop-shadow(0 14px 26px rgba(0, 0, 0, 0.26));
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+@media (max-width: 430px) {
+  .rv-hero-cta { padding: 20px 20px 20px 22px; height: 230px; }
+  .rv-hero-cta--compact { height: 180px; }
+  .rv-hero-title { font-size: 20px; max-width: 14ch; }
+  .rv-hero-mascot {
+    width: 172px !important;
+    height: 172px !important;
+    max-width: 172px;
+    max-height: 172px;
+    min-width: 172px;
+    min-height: 172px;
+    margin-right: -26px;
+  }
+}

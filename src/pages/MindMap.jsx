@@ -7,9 +7,9 @@ import './Mindmap.css'
 
 // ── Palette de 4 couleurs (assignée par index) ────────────────────
 const PALETTE = [
-  { color: '#6366F1', bgLight: '#EEF2FF', colorLight: '#4338CA', bgDark: '#1E1B4B', colorDark: '#A5B4FC' },
-  { color: '#FF6B00', bgLight: '#FFF4E6', colorLight: '#C05621', bgDark: '#2D1F0A', colorDark: '#FBD38D' },
-  { color: '#22C55E', bgLight: '#F0FDF4', colorLight: '#15803D', bgDark: '#0D2818', colorDark: '#4ADE80' },
+  { color: '#6B4EFF', bgLight: '#EEF2FF', colorLight: '#4338CA', bgDark: '#1E1B4B', colorDark: '#A5B4FC' },
+  { color: '#FF8A3D', bgLight: '#FFF4E6', colorLight: '#C05621', bgDark: '#2D1F0A', colorDark: '#FBD38D' },
+  { color: '#34C77B', bgLight: '#F0FDF4', colorLight: '#15803D', bgDark: '#0D2818', colorDark: '#4ADE80' },
   { color: '#A855F7', bgLight: '#FAF5FF', colorLight: '#7E22CE', bgDark: '#2E1065', colorDark: '#D8B4FE' },
 ]
 
@@ -241,7 +241,7 @@ export default function Mindmap() {
   const centerEmoji  = subjectEmoji(mindmapData.subject)
 
   return createPortal(
-    <div className="mindmap-fullscreen">
+    <div className="mindmap-fullscreen mindmap-page">
 
       {/* ── Écran de fin ── */}
       {showEnd && (
@@ -256,12 +256,12 @@ export default function Mindmap() {
             </div>
             <div className="end-stat-divider" />
             <div className="end-stat">
-              <span className="end-stat-value" style={{ color: '#6366F1' }}>{totalChildren}</span>
+              <span className="end-stat-value" style={{ color: '#6B4EFF' }}>{totalChildren}</span>
               <span className="end-stat-label">Notions</span>
             </div>
             <div className="end-stat-divider" />
             <div className="end-stat">
-              <span className="end-stat-value" style={{ color: '#22C55E' }}>{mindmapData.xp}</span>
+              <span className="end-stat-value" style={{ color: '#34C77B' }}>{mindmapData.xp}</span>
               <span className="end-stat-label">XP</span>
             </div>
           </div>

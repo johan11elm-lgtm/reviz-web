@@ -3,6 +3,9 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { Drawer } from '../components/Drawer';
 import { BottomNav } from '../components/BottomNav';
+import { PageHeader } from '../components/PageHeader';
+import { HeroCTA } from '../components/HeroCTA';
+import { Mascot } from '../components/Mascot';
 import { analyseLesson, analyseImage, popPendingAnalysis } from '../services/aiService';
 import { saveLesson } from '../services/historyService';
 import { PremiumModal } from '../components/PremiumModal';
@@ -15,8 +18,9 @@ const mockLesson = {
   title: 'Théorème de Pythagore',
   subject: 'Maths',
   emoji: '📐',
-  dot: '#FF6B00',
+  dot: '#FF8A3D',
   bg: '#FFF7ED',
+  color: 'orange',
   excerpt: "Dans un triangle rectangle, le carré de la longueur de l'hypoténuse est égal à la somme des carrés des deux autres côtés : a² + b² = c².",
   flashcardsCount: 8,
   quizCount: 10,
@@ -30,6 +34,7 @@ function buildLessonFromAiData(data) {
     emoji:           info.emoji,
     dot:             info.dot,
     bg:              info.bg,
+    color:           info.color,
     excerpt:         data.metadata.excerpt,
     flashcardsCount: data.flashcards.length,
     quizCount:       data.quiz.length,
@@ -38,58 +43,18 @@ function buildLessonFromAiData(data) {
 
 // ─── Formats de révision ─────────────────────────────────────────────
 const formats = [
-  {
-    id: 'resume',
-    emoji: '📝',
-    name: 'Résumé',
-    iconBg: '#F0FDF4',
-    accent: '#22C55E',
-    to: '/resume',
-    getCount: () => null,
-    unit: null,
-    desc: "Relis l'essentiel en 2 min",
-  },
-  {
-    id: 'flashcards',
-    emoji: '🃏',
-    name: 'Flashcards',
-    iconBg: '#EEF2FF',
-    accent: '#6366F1',
-    to: '/flashcards',
-    getCount: l => l.flashcardsCount,
-    unit: 'cartes',
-    desc: 'Révise par répétition espacée',
-  },
-  {
-    id: 'mindmap',
-    emoji: '🧠',
-    name: 'Carte mentale',
-    iconBg: '#FAF5FF',
-    accent: '#A855F7',
-    to: '/mindmap',
-    getCount: () => null,
-    unit: null,
-    desc: 'Visualise les concepts clés',
-  },
-  {
-    id: 'quiz',
-    emoji: '❓',
-    name: 'Quiz',
-    iconBg: '#FFF4E6',
-    accent: '#FF6B00',
-    to: '/quiz',
-    getCount: l => l.quizCount,
-    unit: 'questions',
-    desc: 'Teste tes connaissances',
-  },
+  { id: 'resume',     emoji: '📝', name: 'Résumé',        tone: 'green',  to: '/resume',     getCount: () => null, unit: null, desc: "Relis l'essentiel en 2 min" },
+  { id: 'flashcards', emoji: '🃏', name: 'Flashcards',    tone: 'violet', to: '/flashcards', getCount: l => l.flashcardsCount, unit: 'cartes',    desc: 'Révise par répétition espacée' },
+  { id: 'mindmap',    emoji: '🧠', name: 'Carte mentale', tone: 'pink',   to: '/mindmap',    getCount: () => null,              unit: null,        desc: 'Visualise les concepts clés' },
+  { id: 'quiz',       emoji: '❓', name: 'Quiz',          tone: 'orange', to: '/quiz',       getCount: l => l.quizCount,        unit: 'questions', desc: 'Teste tes connaissances' },
 ];
 
 // ─── Écran de chargement ─────────────────────────────────────────────
 const STEPS = [
-  { id: 'flashcards', emoji: '🃏', name: 'Flashcards',   iconBg: '#EEF2FF', accent: '#6366F1', doneAt: 20 },
-  { id: 'quiz',       emoji: '❓', name: 'Quiz',          iconBg: '#FFF4E6', accent: '#FF6B00', doneAt: 47 },
-  { id: 'resume',     emoji: '📝', name: 'Résumé',        iconBg: '#F0FDF4', accent: '#22C55E', doneAt: 67 },
-  { id: 'mindmap',    emoji: '🧠', name: 'Carte mentale', iconBg: '#FAF5FF', accent: '#A855F7', doneAt: 85 },
+  { id: 'flashcards', emoji: '🃏', name: 'Flashcards',   tone: 'violet', doneAt: 20 },
+  { id: 'quiz',       emoji: '❓', name: 'Quiz',          tone: 'orange', doneAt: 47 },
+  { id: 'resume',     emoji: '📝', name: 'Résumé',        tone: 'green',  doneAt: 67 },
+  { id: 'mindmap',    emoji: '🧠', name: 'Carte mentale', tone: 'pink',   doneAt: 85 },
 ];
 
 function getStepState(index, progress) {
@@ -196,108 +161,125 @@ export default function Analyse() {
     INVALID_JSON:    "L'IA a renvoyé une réponse inattendue",
   };
 
+  const avatarBtn = (
+    <button
+      type="button"
+      className="analyse-avatar-btn"
+      onClick={() => setDrawerOpen(true)}
+      aria-label="Ouvrir le menu"
+    >
+      {initiale}
+    </button>
+  );
+
   return (
-    <div className="app">
+    <div className="app analyse-page">
 
       {/* ── Écran de chargement ── */}
       {isLoading && (
-        <div className="loading-screen">
-          <div className="ls-top">
-            <span className="ls-icon">✨</span>
-            <div className="ls-title">Réviz prépare<br/>ta session</div>
-          </div>
-          <div className="ls-grid">
+        <div className="analyse-loading-screen">
+          <Mascot
+            pose="thinking"
+            size={180}
+            glow
+            animate
+            priority
+            alt=""
+            aria-hidden="true"
+          />
+          <div className="analyse-ls-title">Réviz prépare<br/>ta session</div>
+          <div className="analyse-ls-grid">
             {STEPS.map((step, i) => {
               const state = getStepState(i, progress);
               return (
                 <div
                   key={step.id}
-                  className={`ls-card ls-card--${state}`}
-                  style={{ '--ls-bg': step.iconBg, '--ls-accent': step.accent }}
+                  className={`analyse-ls-card analyse-ls-card--${state} analyse-ls-card--${step.tone}`}
                 >
-                  {state === 'active' && <div className="ls-shimmer" />}
-                  {state === 'done'   && <span className="ls-badge">✓</span>}
-                  <span className="ls-emoji">{step.emoji}</span>
-                  <span className="ls-name">{step.name}</span>
+                  {state === 'active' && <div className="analyse-ls-shimmer" />}
+                  {state === 'done'   && <span className="analyse-ls-badge">✓</span>}
+                  <span className="analyse-ls-emoji">{step.emoji}</span>
+                  <span className="analyse-ls-name">{step.name}</span>
                 </div>
               );
             })}
           </div>
-          <div className={`ls-bar${progress > 0 ? ' ls-bar--visible' : ''}`}>
-            <div className="ls-bar-fill" style={{ width: progress + '%' }} />
+          <div className={`analyse-ls-bar${progress > 0 ? ' analyse-ls-bar--visible' : ''}`}>
+            <div className="analyse-ls-bar-fill" style={{ width: progress + '%' }} />
           </div>
         </div>
       )}
 
       {/* ── Écran d'erreur ── */}
       {error && !isLoading && (
-        <div className="loading-screen">
-          <span className="loading-icon">⚠️</span>
-          <span className="loading-title">
+        <div className="analyse-loading-screen">
+          <Mascot
+            pose="confused"
+            size={200}
+            glow
+            priority
+            alt=""
+            aria-hidden="true"
+          />
+          <div className="analyse-ls-title">
             {errorMessages[error] ?? 'Erreur de connexion'}
-          </span>
-          <span className="loading-sub">Vérifie ta connexion ou ta clé API dans .env.local</span>
-          <button className="error-retry-btn" onClick={() => navigate('/scan')}>
+          </div>
+          <p className="analyse-error-sub">
+            Vérifie ta connexion ou ta clé API dans .env.local
+          </p>
+          <button
+            type="button"
+            className="rv-btn-cta rv-btn-cta--ghost"
+            onClick={() => navigate('/scan')}
+          >
             ← Retour au scan
           </button>
         </div>
       )}
 
-      {/* ── Header ── */}
-      <div className="header">
-        <button className="back-btn" onClick={() => navigate('/scan')}>←</button>
-        <span className="header-title">Ta leçon</span>
-        <div className="header-avatar" onClick={() => setDrawerOpen(true)} role="button" tabIndex={0} aria-label="Ouvrir le menu">{initiale}</div>
-      </div>
+      <PageHeader
+        variant="back"
+        title="Ta leçon"
+        right={avatarBtn}
+        onBack={() => navigate('/scan')}
+      />
 
       {/* ── Content ── */}
-      <div className={`content${(isLoading || error) ? ' content-hidden' : ''}`}>
+      <div className={`content analyse-content${(isLoading || error) ? ' analyse-content--hidden' : ''}`}>
 
-        {/* Hero leçon */}
-        <div className="lesson-hero" style={{ background: displayLesson.bg }}>
-          <div className="lesson-hero-icon">{displayLesson.emoji}</div>
-          <div className="lesson-hero-body">
-            <div className="lesson-hero-subject" style={{ color: displayLesson.dot }}>
-              {displayLesson.subject}
-            </div>
-            <div className="lesson-hero-title">{displayLesson.title}</div>
-            <div className="lesson-hero-chips">
-              {displayLesson.flashcardsCount > 0 && (
-                <span className="hero-chip">🃏 {displayLesson.flashcardsCount} cartes</span>
-              )}
-              {displayLesson.quizCount > 0 && (
-                <span className="hero-chip">❓ {displayLesson.quizCount} questions</span>
-              )}
-              <span className="hero-chip">✨ {totalElements} éléments</span>
-            </div>
-          </div>
-        </div>
+        {/* Hero présence — mascotte dominante style Home, parle direct à l'utilisateur */}
+        <HeroCTA
+          tone="orange"
+          mascot="pointing"
+          eyebrow={`${displayLesson.emoji} ${displayLesson.subject} • ${totalElements} éléments`}
+          title={displayLesson.title}
+          sub="Choisis ton format préféré — j'ai tout préparé."
+          className="analyse-hero-cta"
+        />
 
         {/* Résumé / excerpt */}
         {displayLesson.excerpt && (
-          <div className="lesson-excerpt-card">
-            <div className="excerpt-label">Résumé détecté</div>
-            <p className="excerpt-text">{displayLesson.excerpt}</p>
+          <div className="rv-card rv-card--padded analyse-excerpt-card">
+            <div className="analyse-excerpt-label">Résumé détecté</div>
+            <p className="analyse-excerpt-text">{displayLesson.excerpt}</p>
           </div>
         )}
 
-        {/* Formats */}
-        <div className="section-title">Comment veux-tu réviser ?</div>
-        <div className="format-grid">
+        <div className="analyse-format-grid">
           {formats.map(f => {
             const count = f.getCount(displayLesson);
             return (
-              <Link key={f.id} to={f.to} className="format-card">
-                <div className="format-card-top">
-                  <div className="format-icon-wrap" style={{ background: f.iconBg }}>
+              <Link key={f.id} to={f.to} className="rv-card rv-card--link rv-card--padded analyse-format-card">
+                <div className="analyse-format-card-top">
+                  <div className={`rv-icon-square rv-icon-square--xl rv-icon-square--${f.tone}`}>
                     {f.emoji}
                   </div>
-                  <span className="format-arrow" style={{ color: f.accent }}>›</span>
+                  <span className={`analyse-format-arrow analyse-format-arrow--${f.tone}`}>›</span>
                 </div>
-                <div className="format-name">{f.name}</div>
-                <div className="format-desc">{f.desc}</div>
+                <div className="analyse-format-name">{f.name}</div>
+                <div className="analyse-format-desc">{f.desc}</div>
                 {count !== null && (
-                  <div className="format-count-pill" style={{ background: f.iconBg, color: f.accent }}>
+                  <div className={`rv-pill rv-pill--${f.tone} analyse-format-count`}>
                     {count} {f.unit}
                   </div>
                 )}

@@ -5,18 +5,19 @@ import { loadLessons, syncFromFirestore } from '../services/historyService';
 import { loadRevisions, syncRevisionsFromFirestore } from '../services/revisionService';
 import { Drawer } from '../components/Drawer';
 import { BottomNav } from '../components/BottomNav';
-import { computeStreak, computeLevel, XP_PAR_LECON, XP_PAR_NIVEAU } from '../utils/gamification';
+import { PageHeader } from '../components/PageHeader';
+import { Mascot } from '../components/Mascot';
+import { computeStreak, computeLevel, XP_PAR_NIVEAU } from '../utils/gamification';
 import { subjectInfo } from '../utils/subjects';
-import { getWeeklyChallenges } from '../services/challengeService';
 import { getCoveredCount } from '../services/brevetService';
 import { TOTAL_THEMES } from '../utils/brevetProgram';
 import './Progres.css';
 
 // ─── Constantes ─────────────────────────────────────────────────────
 const FORMAT_INFO = {
-  flashcards: { label: 'Flashcards',    emoji: '🃏', color: '#6366F1' },
-  quiz:       { label: 'Quiz',           emoji: '❓', color: '#FF6B00' },
-  resume:     { label: 'Résumé',        emoji: '📝', color: '#22C55E' },
+  flashcards: { label: 'Flashcards',    emoji: '🃏', color: '#6B4EFF' },
+  quiz:       { label: 'Quiz',           emoji: '❓', color: '#FF8A3D' },
+  resume:     { label: 'Résumé',        emoji: '📝', color: '#34C77B' },
   mindmap:    { label: 'Carte mentale', emoji: '🧠', color: '#A855F7' },
 };
 
@@ -71,20 +72,18 @@ function computeWeekBars(revisions) {
   }));
 }
 
-function computeWeekComparison(revisions) {
+function computeBestWeek(revisions) {
   const weekCounts = {};
   revisions.forEach(r => {
     const monday = getMondayOf(new Date(r.revisedAt));
     const key = monday.toISOString().split('T')[0];
     weekCounts[key] = (weekCounts[key] || 0) + 1;
   });
-  const currentKey = getMondayOf(new Date()).toISOString().split('T')[0];
-  const thisWeek = weekCounts[currentKey] || 0;
-  const bestWeek = Object.values(weekCounts).length ? Math.max(...Object.values(weekCounts)) : 0;
-  return { thisWeek, bestWeek };
+  return Object.values(weekCounts).length ? Math.max(...Object.values(weekCounts)) : 0;
 }
 
-function computeHeatmap(revisions) {
+// Vue "5 semaines" — chaque semaine en row, narrative pour les jeunes
+function computeWeekRows(revisions) {
   const countByDay = {};
   revisions.forEach(r => {
     const key = new Date(r.revisedAt).toDateString();
@@ -92,19 +91,28 @@ function computeHeatmap(revisions) {
   });
   const today = new Date();
   const startMonday = getMondayOf(today);
-  startMonday.setDate(startMonday.getDate() - 28); // 4 semaines en arrière
-  const cells = [];
-  for (let i = 0; i < 35; i++) {
-    const d = new Date(startMonday);
-    d.setDate(startMonday.getDate() + i);
-    const isFuture = d > today;
-    const count = isFuture ? -1 : (countByDay[d.toDateString()] || 0);
-    cells.push({ count, isToday: d.toDateString() === today.toDateString(), isFuture });
+  startMonday.setDate(startMonday.getDate() - 28);
+  const weeks = [];
+  for (let w = 0; w < 5; w++) {
+    const cells = [];
+    for (let d = 0; d < 7; d++) {
+      const date = new Date(startMonday);
+      date.setDate(startMonday.getDate() + w * 7 + d);
+      const isFuture = date > today;
+      const count = isFuture ? -1 : (countByDay[date.toDateString()] || 0);
+      cells.push({ count, isToday: date.toDateString() === today.toDateString(), isFuture });
+    }
+    const activeDays = cells.filter(c => c.count > 0).length;
+    const totalRevs = cells.reduce((sum, c) => sum + (c.count > 0 ? c.count : 0), 0);
+    const label = w === 4 ? 'Cette semaine'
+                : w === 3 ? 'Semaine dernière'
+                : `Il y a ${4 - w} semaines`;
+    weeks.push({ label, cells, activeDays, totalRevs });
   }
-  return cells;
+  return weeks;
 }
 
-function getHeatIntensity(count) {
+function getActivityIntensity(count) {
   if (count <= 0) return 0;
   if (count <= 2) return 1;
   if (count <= 5) return 2;
@@ -138,6 +146,26 @@ function computeFormatBreakdown(revisions) {
   })).sort((a, b) => b.count - a.count);
 }
 
+// Hero narratif : choisit pose + phrase selon l'état de progression
+function getHeroNarrative({ streak, activeDays, isNewRecord, prenom }) {
+  if (isNewRecord) {
+    return { mascot: 'trophy', phrase: `Nouveau record cette semaine, ${prenom} !` };
+  }
+  if (streak >= 7) {
+    return { mascot: 'fire', phrase: `${streak} jours d'affilée. T'es chaud.` };
+  }
+  if (streak >= 3) {
+    return { mascot: 'celebration', phrase: `Belle série de ${streak} jours. Continue !` };
+  }
+  if (streak >= 1) {
+    return { mascot: 'reading', phrase: 'Régularité installée. On continue ?' };
+  }
+  if (activeDays >= 1) {
+    return { mascot: 'thinking', phrase: 'Tu as déjà commencé. Reprends ta série !' };
+  }
+  return { mascot: 'sleeping', phrase: 'Allez, on lance ta première session.' };
+}
+
 // ─── Composant ───────────────────────────────────────────────────────
 export default function Progres() {
   const navigate = useNavigate();
@@ -147,6 +175,7 @@ export default function Progres() {
 
   const { currentUser } = useAuth();
   const initiale = currentUser?.displayName?.[0]?.toUpperCase() ?? '?';
+  const prenom = currentUser?.displayName?.split(' ')[0] ?? 'toi';
 
   useEffect(() => {
     syncFromFirestore().then(setAllLessons);
@@ -158,133 +187,178 @@ export default function Progres() {
   const { level, xpInLvl, xpTotal, fillPct } = computeLevel(allLessons);
   const activeDays       = computeActiveDays(allRevisions, 'revisedAt');
   const weekBars         = computeWeekBars(allRevisions);
-  const weekComparison   = computeWeekComparison(allRevisions);
-  const heatmap          = computeHeatmap(allRevisions);
+  const bestWeek         = computeBestWeek(allRevisions);
+  const weekRows         = computeWeekRows(allRevisions);
   const subjectBreakdown = computeSubjectBreakdown(allLessons);
   const formatBreakdown  = computeFormatBreakdown(allRevisions);
-  const challengeData    = getWeeklyChallenges();
 
   const monday            = getMondayOf(new Date());
   const revisionsThisWeek = allRevisions.filter(r => new Date(r.revisedAt) >= monday).length;
-  const daysWithLesson    = new Set(
-    allRevisions.filter(r => new Date(r.revisedAt) >= monday)
-                .map(r => new Date(r.revisedAt).toDateString())
-  ).size;
-  const dailyGoal = parseInt(localStorage.getItem(`reviz-daily-goal-${currentUser?.uid}`) || '3');
-  const todayRevisions = allRevisions.filter(r =>
-    new Date(r.revisedAt).toDateString() === new Date().toDateString()
-  ).length;
-  const goalPct     = Math.round(daysWithLesson / 7 * 100);
-  const daysLeft    = 7 - daysWithLesson;
-  const goalBadge   = daysWithLesson >= 7 ? 'Objectif atteint 🎉' : daysWithLesson >= 4 ? 'En bonne voie ✓' : 'Continue !';
-  const goalMessage = todayRevisions >= dailyGoal
-    ? `Objectif du jour atteint (${todayRevisions}/${dailyGoal}) !`
-    : `${todayRevisions}/${dailyGoal} révisions aujourd'hui`;
+  const isNewRecord       = bestWeek > 0 && revisionsThisWeek >= bestWeek;
 
-  const isNewRecord = weekComparison.bestWeek > 0 && weekComparison.thisWeek >= weekComparison.bestWeek;
+  const hero = getHeroNarrative({ streak, activeDays, isNewRecord, prenom });
+
+  const avatarBtn = (
+    <button
+      type="button"
+      className="pg-avatar-btn"
+      onClick={() => setDrawerOpen(true)}
+      aria-label="Ouvrir le menu"
+    >
+      {initiale}
+    </button>
+  );
 
   return (
-    <div className="app">
+    <div className="app progres-page">
 
-      {/* Header */}
-      <div className="pg-header">
-        <span className="pg-header-title">Mes progrès</span>
-        <div className="pg-header-avatar" onClick={() => setDrawerOpen(true)} role="button" tabIndex={0} aria-label="Ouvrir le menu">{initiale}</div>
-      </div>
+      <PageHeader variant="title-only" right={avatarBtn} />
 
       <div className="pg-content">
 
-        {/* 1. Streak hero */}
+        {/* Hero narratif — Réviz commente la progression */}
+        <div className="pg-narrator-hero">
+          <div className="pg-narrator-glow" aria-hidden="true" />
+          <div className="pg-narrator-content">
+            <span className="pg-narrator-eyebrow">📊 Hey {prenom}</span>
+            <h1 className="pg-narrator-title">Mes progrès</h1>
+            <div className="rv-speech-bubble rv-speech-bubble--pointer-right pg-narrator-bubble">
+              {hero.phrase}
+            </div>
+          </div>
+          <Mascot
+            pose={hero.mascot}
+            size={180}
+            glow
+            priority
+            className="pg-narrator-mascot"
+            alt=""
+            aria-hidden="true"
+          />
+        </div>
+
+        {/* 1. Level / XP — mascotte graduation à gauche */}
+        <div className="rv-card rv-card--padded pg-level-card">
+          <Mascot
+            pose="graduation"
+            size={72}
+            glow
+            priority
+            className="pg-level-mascot"
+            alt=""
+            aria-hidden="true"
+          />
+          <div className="pg-level-info">
+            <div className="pg-level-top">
+              <div className="pg-level-badge">Niv. {level}</div>
+              <span className="pg-level-total">{xpTotal} XP</span>
+            </div>
+            <div className="rv-bar pg-level-bar">
+              <div className="rv-bar-fill rv-bar-fill--orange" style={{ width: fillPct + '%' }} />
+            </div>
+            <div className="pg-level-next">
+              <strong>{xpInLvl}</strong> / {XP_PAR_NIVEAU} XP · {XP_PAR_NIVEAU - xpInLvl} jusqu'au niveau {level + 1}
+            </div>
+          </div>
+        </div>
+
+        {/* 2. Streak hero — mascotte fire à droite */}
         <div className="pg-streak-card">
-          <div className="pg-streak-block">
-            <div className="pg-streak-label">Série en cours</div>
-            <div className="pg-streak-value">{streak}</div>
-            <div className="pg-streak-unit">{streak === 1 ? 'jour de suite' : 'jours de suite'} 🔥</div>
-          </div>
-          <div className="pg-streak-divider" />
-          <div className="pg-streak-block pg-streak-block--right">
-            <div className="pg-streak-label">Meilleur</div>
-            <div className="pg-streak-value pg-streak-value--sm">{bestStreak}</div>
-            <div className="pg-streak-unit">record 🏆</div>
-          </div>
-        </div>
-
-        {/* 2. Level / XP */}
-        <div className="pg-level-card">
-          <div className="pg-level-left">
-            <div className="pg-level-badge">Niv. {level}</div>
-            <div className="pg-level-xp-text">{xpInLvl} / {XP_PAR_NIVEAU} XP</div>
-          </div>
-          <div className="pg-level-right">
-            <div className="pg-level-total">{xpTotal} XP au total</div>
-            <div className="pg-level-bar">
-              <div className="pg-level-fill" style={{ width: fillPct + '%' }} />
+          <div className="pg-streak-body">
+            <div className="pg-streak-block">
+              <div className="pg-streak-label">Série en cours</div>
+              <div className="pg-streak-value">{streak}</div>
+              <div className="pg-streak-unit">{streak === 1 ? 'jour de suite' : 'jours de suite'}</div>
             </div>
-            <div className="pg-level-next">{XP_PAR_NIVEAU - xpInLvl} XP jusqu'au niveau {level + 1}</div>
+            <div className="pg-streak-divider" />
+            <div className="pg-streak-block pg-streak-block--right">
+              <div className="pg-streak-label">Meilleur</div>
+              <div className="pg-streak-value pg-streak-value--sm">{bestStreak}</div>
+              <div className="pg-streak-unit">record</div>
+            </div>
           </div>
+          <Mascot
+            pose="fire"
+            size={110}
+            priority
+            className="pg-streak-mascot"
+            alt=""
+            aria-hidden="true"
+          />
         </div>
 
-        {/* 3. Heatmap */}
-        <div className="pg-section-title">Activité</div>
-        <div className="pg-heatmap-card">
-          <div className="pg-heatmap-header">
-            <span className="pg-heatmap-title">5 dernières semaines</span>
-            <span className="pg-heatmap-sub">{activeDays} jours actifs</span>
+        {/* 3. Activité — vue par semaine, claire pour les jeunes */}
+        <h2 className="pg-section-title">📅 Ton activité</h2>
+        <div className="rv-card rv-card--padded pg-weeks-card">
+          <div className="pg-weeks-summary">
+            <span className="pg-weeks-summary-value">{activeDays}</span>
+            <span className="pg-weeks-summary-text">
+              jour{activeDays > 1 ? 's' : ''} actif{activeDays > 1 ? 's' : ''} sur les 5 dernières semaines
+            </span>
           </div>
-          <div className="pg-heatmap-day-labels">
-            {['L','M','M','J','V','S','D'].map((d, i) => (
-              <span key={i}>{d}</span>
+          <div className="pg-weeks-list">
+            {weekRows.map((week, i) => (
+              <div key={i} className="pg-week-row">
+                <span className="pg-week-label">{week.label}</span>
+                <div className="pg-week-dots" aria-label={`${week.activeDays} jours actifs`}>
+                  {week.cells.map((cell, j) => (
+                    <span
+                      key={j}
+                      className={[
+                        'pg-week-dot',
+                        `pg-week-dot--${cell.isFuture ? 'future' : getActivityIntensity(cell.count)}`,
+                        cell.isToday ? 'pg-week-dot--today' : '',
+                      ].filter(Boolean).join(' ')}
+                    />
+                  ))}
+                </div>
+                <span className="pg-week-count">{week.activeDays}/7</span>
+              </div>
             ))}
           </div>
-          <div className="pg-heatmap-grid">
-            {heatmap.map((cell, i) => (
-              <div
-                key={i}
-                className={[
-                  'pg-heatmap-cell',
-                  `pg-heatmap-cell--${cell.isFuture ? 'future' : getHeatIntensity(cell.count)}`,
-                  cell.isToday ? 'pg-heatmap-cell--today' : '',
-                ].filter(Boolean).join(' ')}
-              />
-            ))}
-          </div>
-          <div className="pg-heatmap-legend">
-            <span>Moins</span>
-            <div className="pg-heatmap-legend-dots">
-              {[0,1,2,3].map(i => (
-                <div key={i} className={`pg-heatmap-cell pg-heatmap-cell--${i}`} style={{ width: 10, height: 10 }} />
-              ))}
-            </div>
-            <span>Plus</span>
-          </div>
         </div>
 
-        {/* 4. Stats 3 cartes */}
-        <div className="pg-section-title">Statistiques</div>
+        {/* 4. Stats synthétiques (3 cards avec icon-square) */}
+        <h2 className="pg-section-title">📊 Tes chiffres</h2>
         <div className="pg-stats-grid">
-          <div className="pg-stat-card">
-            <span className="pg-stat-icon">📚</span>
+          <div className="rv-card pg-stat-card">
+            <div className="rv-icon-square rv-icon-square--xl rv-icon-square--violet">📚</div>
             <span className="pg-stat-value">{allLessons.length}</span>
             <span className="pg-stat-label">Leçons scannées</span>
           </div>
-          <div className="pg-stat-card">
-            <span className="pg-stat-icon">⚡</span>
+          <div className="rv-card pg-stat-card">
+            <div className="rv-icon-square rv-icon-square--xl rv-icon-square--green">⚡</div>
             <span className="pg-stat-value">{allRevisions.length}</span>
             <span className="pg-stat-label">Révisions totales</span>
           </div>
-          <div className="pg-stat-card pg-stat-card--accent">
-            <span className="pg-stat-icon">📅</span>
+          <div className="rv-card pg-stat-card pg-stat-card--accent">
+            <div className="rv-icon-square rv-icon-square--xl rv-icon-square--orange">📅</div>
             <span className="pg-stat-value">{activeDays}</span>
             <span className="pg-stat-label">Jours actifs</span>
           </div>
         </div>
 
-        {/* 5. Graphe semaine */}
-        <div className="pg-section-title">Cette semaine</div>
-        <div className="pg-chart-card">
+        {/* 5. Graphe semaine avec mascotte signature */}
+        <h2 className="pg-section-title">📈 Cette semaine</h2>
+        <div className="rv-card rv-card--padded pg-chart-card">
           <div className="pg-chart-header">
-            <span className="pg-chart-title">Révisions par jour</span>
-            <span className="pg-chart-total"><span>{revisionsThisWeek}</span> révisions</span>
+            <div className="pg-chart-title-row">
+              <Mascot
+                pose="pointing"
+                size={56}
+                priority
+                className="pg-chart-mascot"
+                alt=""
+                aria-hidden="true"
+              />
+              <div className="pg-chart-title-block">
+                <span className="pg-chart-title">Révisions par jour</span>
+                <span className="pg-chart-sub">
+                  <strong>{revisionsThisWeek}</strong> cette semaine
+                  {isNewRecord && <span className="pg-chart-record">🏆 record !</span>}
+                </span>
+              </div>
+            </div>
           </div>
           <div className="pg-bars-wrap">
             {weekBars.map((bar, i) => (
@@ -296,81 +370,27 @@ export default function Progres() {
           </div>
         </div>
 
-        {/* 6. Record semaine */}
-        <div className={`pg-week-compare${isNewRecord ? ' pg-week-compare--record' : ''}`}>
-          {isNewRecord && (
-            <div className="pg-week-record-badge">🏆 Nouveau record !</div>
-          )}
-          <div className="pg-week-compare-row">
-            <div className="pg-week-compare-item">
-              <span className="pg-week-compare-label">Cette semaine</span>
-              <span className="pg-week-compare-value">{weekComparison.thisWeek}</span>
-              <span className="pg-week-compare-sub">révisions</span>
-            </div>
-            <div className="pg-week-compare-divider" />
-            <div className="pg-week-compare-item">
-              <span className="pg-week-compare-label">Meilleur</span>
-              <span className="pg-week-compare-value">{weekComparison.bestWeek}</span>
-              <span className="pg-week-compare-sub">record</span>
-            </div>
+        {/* 6. Carte Brevet (action) */}
+        <div
+          className="rv-card rv-card--link rv-card--padded pg-brevet-card"
+          onClick={() => navigate('/brevet')}
+          role="button"
+          tabIndex={0}
+          onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); navigate('/brevet'); } }}
+        >
+          <div className="rv-icon-square rv-icon-square--xl rv-icon-square--violet">📚</div>
+          <div className="pg-brevet-text">
+            <span className="pg-brevet-title">Préparation Brevet</span>
+            <span className="pg-brevet-sub">{getCoveredCount(allLessons)} / {TOTAL_THEMES} thèmes couverts</span>
           </div>
+          <span className="pg-brevet-arrow" aria-hidden="true">→</span>
         </div>
 
-        {/* 7. Objectif hebdo */}
-        <div className="pg-goal-card">
-          <div className="pg-goal-header">
-            <span className="pg-goal-title">Réviser chaque jour</span>
-            <span className="pg-goal-badge">{goalBadge}</span>
-          </div>
-          <div className="pg-goal-progress-row">
-            <span className="pg-goal-count"><strong>{daysWithLesson}</strong> / 7 jours</span>
-            <span className="pg-goal-pct">{goalPct}%</span>
-          </div>
-          <div className="pg-goal-bar">
-            <div className="pg-goal-fill" style={{ width: goalPct + '%' }} />
-          </div>
-          <span className="pg-goal-sub">{goalMessage}</span>
-        </div>
-
-        {/* 7b. Défis de la semaine */}
-        <div className="pg-section-title">Défis de la semaine</div>
-        <div className="pg-challenges-card">
-          {challengeData.challenges?.map(c => (
-            <div key={c.id} className={`pg-challenge-row${c.completed ? ' pg-challenge--done' : ''}`}>
-              <span className="pg-challenge-icon">{c.completed ? '✅' : '⏳'}</span>
-              <div className="pg-challenge-info">
-                <span className="pg-challenge-title">{c.title}</span>
-                <div className="pg-challenge-bar-wrap">
-                  <div className="pg-challenge-bar" style={{ width: Math.min(100, Math.round(c.current / c.target * 100)) + '%' }} />
-                </div>
-              </div>
-              <span className="pg-challenge-count">{c.current}/{c.target}</span>
-            </div>
-          ))}
-          {challengeData.previousWeek && (
-            <div className="pg-challenge-prev">
-              Semaine précédente : {challengeData.previousWeek.challenges?.filter(c => c.completed).length ?? 0}/3 complétés
-            </div>
-          )}
-        </div>
-
-        {/* 7c. Carte Brevet */}
-        <div className="pg-brevet-card" onClick={() => navigate('/brevet')}>
-          <div className="pg-brevet-left">
-            <span className="pg-brevet-icon">📚</span>
-            <div className="pg-brevet-text">
-              <span className="pg-brevet-title">Préparation Brevet</span>
-              <span className="pg-brevet-sub">{getCoveredCount(allLessons)} / {TOTAL_THEMES} thèmes couverts</span>
-            </div>
-          </div>
-          <span className="pg-brevet-arrow">→</span>
-        </div>
-
-        {/* 8. Répartition par format */}
+        {/* 7. Répartition par format */}
         {formatBreakdown.some(f => f.count > 0) && (
           <>
-            <div className="pg-section-title">Par format</div>
-            <div className="pg-format-card">
+            <h2 className="pg-section-title">🎨 Par format</h2>
+            <div className="rv-card pg-format-card">
               {formatBreakdown.map(f => (
                 <div key={f.label} className="pg-format-row">
                   <div className="pg-format-left">
@@ -387,11 +407,11 @@ export default function Progres() {
           </>
         )}
 
-        {/* 9. Répartition par matière */}
+        {/* 8. Répartition par matière */}
         {subjectBreakdown.length > 0 && (
           <>
-            <div className="pg-section-title">Par matière</div>
-            <div className="pg-subject-card">
+            <h2 className="pg-section-title">📚 Par matière</h2>
+            <div className="rv-card pg-subject-card">
               {subjectBreakdown.map(({ name, count, pct, info }) => (
                 <div key={name} className="pg-subject-row">
                   <div className="pg-subject-left">

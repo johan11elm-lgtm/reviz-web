@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { formatLevelLabel } from '../utils/levels';
+import { Mascot } from '../components/Mascot';
 import './Onboarding.css';
 
 // Tagline adaptée au cycle scolaire — affichée sur le slide d'accueil.
@@ -24,58 +25,47 @@ function levelTagline(level) {
   return `Réviz transforme n'importe quelle leçon en outils de révision en quelques secondes.`;
 }
 
-const LogoStar = () => (
-  <svg className="ob-star" viewBox="0 0 16 16" fill="none">
-    <path
-      d="M8 0 C8.3 2.8 8.8 4.2 10.2 5.6 11.6 7 13 7.5 16 8 13 8.5 11.6 9 10.2 10.4 8.8 11.8 8.3 13.2 8 16 7.7 13.2 7.2 11.8 5.8 10.4 4.4 9 3 8.5 0 8 3 7.5 4.4 7 5.8 5.6 7.2 4.2 7.7 2.8 8 0Z"
-      fill="url(#obGrad)"
-    />
-    <defs>
-      <linearGradient id="obGrad" x1="0" y1="0" x2="16" y2="16" gradientUnits="userSpaceOnUse">
-        <stop offset="0%" stopColor="#FFB347" />
-        <stop offset="100%" stopColor="#FF6B00" />
-      </linearGradient>
-    </defs>
-  </svg>
-);
-
 const SLIDES = [
   {
     id: 'welcome',
-    titleFn: prenom => `Salut ${prenom} 👋`,
-    // body est calculé dynamiquement selon le niveau de l'utilisateur (voir render)
-    body: null,
-    visual: 'logo',
+    pose: 'hello',
+    animate: true,
+    bubble: (prenom) => `Salut ${prenom} ! Moi c'est Réviz, ton coach IA. On va apprendre plus vite, ensemble.`,
+    titleFn: (prenom) => `Salut ${prenom} 👋`,
   },
   {
     id: 'how',
+    pose: 'scan',
+    bubble: () => 'Trois étapes seulement : tu scannes, je transforme, tu révises.',
     title: 'Comment ça marche ?',
-    body: null,
-    visual: 'steps',
-    steps: [
-      { icon: '📸', label: 'Scanne',        desc: 'Photo ou texte de ta leçon' },
-      { icon: '🤖', label: 'L\'IA analyse', desc: 'Contenu de révision généré en secondes' },
-      { icon: '🏆', label: 'Révise',        desc: 'Flashcards, quiz, résumé, carte mentale' },
-    ],
   },
   {
     id: 'formats',
+    pose: 'flashcard',
+    bubble: () => 'Pour chaque leçon je te fabrique 4 outils. Pioche ceux qui te parlent.',
     title: '4 formats en 1 scan',
-    body: null,
-    visual: 'grid',
-    items: [
-      { icon: '📝', label: 'Résumé',        color: '#22C55E' },
-      { icon: '🃏', label: 'Flashcards',    color: '#6366F1' },
-      { icon: '🧠', label: 'Carte mentale', color: '#A855F7' },
-      { icon: '❓', label: 'Quiz',           color: '#FF6B00' },
-    ],
   },
   {
     id: 'go',
-    title: 'Prêt à réviser autrement ?',
-    body: 'Scanne ta première leçon maintenant — ça prend 10 secondes.',
-    visual: 'cta',
+    pose: 'fire',
+    animate: true,
+    bubble: () => "Allez, on lance ta première session. 10 secondes et c'est parti.",
+    title: 'Prêt à réviser ?',
+    body: "Ta première leçon t'attend. Photo ou texte, comme tu veux.",
   },
+];
+
+const HOW_STEPS = [
+  { icon: '📸', tone: 'orange', num: '1', label: 'Scanne',   sub: 'Photo ou texte de ta leçon' },
+  { icon: '🤖', tone: 'violet', num: '2', label: 'J\'analyse', sub: "L'IA transforme en outils" },
+  { icon: '🏆', tone: 'green',  num: '3', label: 'Tu révises', sub: 'Et tu retiens vraiment' },
+];
+
+const FORMATS = [
+  { icon: '📝', tone: 'green',  label: 'Résumé' },
+  { icon: '🃏', tone: 'violet', label: 'Flashcards' },
+  { icon: '🧠', tone: 'pink',   label: 'Carte mentale' },
+  { icon: '❓', tone: 'orange', label: 'Quiz' },
 ];
 
 export default function Onboarding() {
@@ -115,107 +105,128 @@ export default function Onboarding() {
     navigate('/', { replace: true });
   }
 
+  function handleSeeHome() {
+    markOnboarded();
+    navigate('/');
+  }
+
   const slide = SLIDES[step];
   const isLast = step === SLIDES.length - 1;
 
   return (
-    <div className="ob-root">
-
-      {/* Aurora */}
-      <div className="ob-aurora" aria-hidden="true">
-        <div className="ob-orb ob-orb--1" />
-        <div className="ob-orb ob-orb--2" />
-        <div className="ob-orb ob-orb--3" />
-      </div>
-
-      {/* Skip */}
+    <div className="app onboarding-page">
+      {/* Skip top-right (sauf dernière slide) */}
       {!isLast && (
-        <button className="ob-skip" onClick={handleSkip}>Passer</button>
+        <button
+          type="button"
+          className="onb-skip"
+          onClick={handleSkip}
+        >
+          Passer
+        </button>
       )}
 
-      {/* Slide */}
-      <div className={`ob-body ob-anim-${animDir}`} key={slide.id}>
+      <main className={`onb-body onb-anim-${animDir}`} key={slide.id}>
+        <Mascot
+          pose={slide.pose}
+          size={180}
+          glow
+          animate={slide.animate}
+          priority={step === 0}
+        />
 
-        {/* Visual */}
-        {slide.visual === 'logo' && (
-          <div className="ob-logo-wrap">
-            <LogoStar />
-            <span className="ob-logo-text">réviz</span>
-          </div>
-        )}
+        <div className="rv-speech-bubble rv-speech-bubble--pointer-top-center onb-bubble">
+          {slide.bubble(prenom)}
+        </div>
 
-        {slide.visual === 'steps' && (
-          <div className="ob-steps">
-            {slide.steps.map((s, i) => (
-              <div key={i} className="ob-step" style={{ animationDelay: `${i * 80}ms` }}>
-                <div className="ob-step-icon">{s.icon}</div>
-                <div className="ob-step-num">{i + 1}</div>
-                <div className="ob-step-info">
-                  <span className="ob-step-label">{s.label}</span>
-                  <span className="ob-step-desc">{s.desc}</span>
-                </div>
-              </div>
-            ))}
-          </div>
-        )}
-
-        {slide.visual === 'grid' && (
-          <div className="ob-grid">
-            {slide.items.map((item, i) => (
-              <div key={i} className="ob-grid-item" style={{ animationDelay: `${i * 60}ms` }}>
-                <div className="ob-grid-icon" style={{ background: item.color + '22' }}>
-                  <span>{item.icon}</span>
-                </div>
-                <span className="ob-grid-label">{item.label}</span>
-                <div className="ob-grid-dot" style={{ background: item.color }} />
-              </div>
-            ))}
-          </div>
-        )}
-
-        {slide.visual === 'cta' && (
-          <div className="ob-cta-icon">🚀</div>
-        )}
-
-        {/* Texte */}
-        <h1 className="ob-title">
+        <h1 className="onb-title">
           {slide.titleFn ? slide.titleFn(prenom) : slide.title}
         </h1>
 
-        {slide.id === 'welcome' ? (
-          <p className="ob-body-text">
+        {slide.id === 'welcome' && (
+          <>
             {levelLabel && (
-              <>
-                <span className="ob-level-chip">✦ {levelLabel}</span>
-                <br />
-              </>
+              <span className="rv-pill rv-pill--orange onb-level-chip">
+                ✦ {levelLabel}
+              </span>
             )}
-            {levelTagline(userLevel)}
-          </p>
-        ) : (
-          slide.body && <p className="ob-body-text">{slide.body}</p>
+            <p className="onb-body-text">{levelTagline(userLevel)}</p>
+          </>
         )}
-      </div>
 
-      {/* Footer */}
-      <div className="ob-footer">
-        <div className="ob-dots">
+        {slide.id === 'how' && (
+          <ul className="onb-steps">
+            {HOW_STEPS.map((s, i) => (
+              <li
+                key={s.num}
+                className="onb-step"
+                style={{ animationDelay: `${i * 80}ms` }}
+              >
+                <span className={`rv-icon-square rv-icon-square--xl rv-icon-square--${s.tone}`}>
+                  {s.icon}
+                </span>
+                <div className="onb-step-text">
+                  <span className="onb-step-label">
+                    <span className="onb-step-num">{s.num}</span>
+                    {s.label}
+                  </span>
+                  <span className="onb-step-sub">{s.sub}</span>
+                </div>
+              </li>
+            ))}
+          </ul>
+        )}
+
+        {slide.id === 'formats' && (
+          <div className="onb-grid">
+            {FORMATS.map((f, i) => (
+              <div
+                key={f.label}
+                className="onb-grid-item"
+                style={{ animationDelay: `${i * 60}ms` }}
+              >
+                <span className={`rv-icon-square rv-icon-square--xl rv-icon-square--${f.tone}`}>
+                  {f.icon}
+                </span>
+                <span className="onb-grid-label">{f.label}</span>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {slide.id === 'go' && slide.body && (
+          <p className="onb-body-text">{slide.body}</p>
+        )}
+      </main>
+
+      <footer className="onb-footer">
+        <div className="onb-dots" role="presentation">
           {SLIDES.map((_, i) => (
-            <div key={i} className={`ob-dot${i === step ? ' active' : i < step ? ' done' : ''}`} />
+            <span
+              key={i}
+              className={`rv-dot${i <= step ? ' rv-dot--on' : ''}`}
+            />
           ))}
         </div>
 
-        <button className="ob-btn" onClick={handleNext}>
+        <button
+          type="button"
+          className="rv-btn-cta rv-btn-cta--full onb-next"
+          onClick={handleNext}
+        >
           {isLast ? '📸 Scanner ma première leçon' : 'Suivant →'}
         </button>
 
         {isLast && (
-          <button className="ob-secondary" onClick={handleSkip}>
+          <button
+            type="button"
+            className="rv-btn-cta rv-btn-cta--ghost rv-btn-cta--full onb-secondary"
+            onClick={handleSeeHome}
+          >
             Voir l'accueil d'abord
           </button>
         )}
-      </div>
-
+      </footer>
     </div>
   );
 }

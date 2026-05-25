@@ -1,0 +1,30 @@
+/* ============================================================================
+ * RV BAR — progress bar fine.
+ * Référence: Home .progress-block-bar, .challenge-bar
+ * ========================================================================== */
+
+.rv-bar {
+  height: 6px;
+  background: var(--accent-violet-soft);
+  border-radius: 3px;
+  overflow: hidden;
+  margin-top: 2px;
+}
+.rv-bar--tall { height: 8px; border-radius: 4px; }
+.rv-bar--thin { height: 4px; border-radius: 2px; }
+
+.rv-bar--violet-bg { background: var(--accent-violet-soft); }
+.rv-bar--orange-bg { background: var(--accent-orange-soft); }
+.rv-bar--green-bg  { background: var(--accent-green-soft); }
+.rv-bar--neutral-bg { background: var(--bg-muted); }
+
+.rv-bar-fill {
+  height: 100%;
+  border-radius: inherit;
+  transition: width 0.3s ease;
+}
+.rv-bar-fill--violet         { background: var(--accent-violet); }
+.rv-bar-fill--orange         { background: var(--accent-orange); }
+.rv-bar-fill--green          { background: var(--accent-green); }
+.rv-bar-fill--gradient       { background: linear-gradient(90deg, var(--accent-violet), var(--accent-pink)); }
+.rv-bar-fill--gradient-warm  { background: linear-gradient(90deg, var(--accent-orange), var(--accent-pink)); }
