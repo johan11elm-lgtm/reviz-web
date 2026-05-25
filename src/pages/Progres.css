@@ -633,11 +633,93 @@
   flex-shrink: 0;
 }
 
-/* ── Responsive ── */
+/* ── Empty state weeks card ── */
+.pg-weeks-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 10px;
+  padding: 12px 8px 8px;
+}
+
+.pg-weeks-empty-title {
+  font-family: 'Geist', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.pg-weeks-empty-sub {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.45;
+  max-width: 28ch;
+  margin: 0;
+}
+
+/* ── Responsive (≤ 430px : phones standards) ── */
 @media (max-width: 430px) {
-  .pg-narrator-hero { padding: 16px 14px 16px 18px; min-height: 168px; }
+  .pg-content { padding: 8px 16px 110px; gap: 14px; }
+
+  /* Hero narrator — réduire mascot et padding */
+  .pg-narrator-hero { padding: 16px 14px 16px 18px; min-height: 158px; gap: 8px; }
   .pg-narrator-title { font-size: 24px; letter-spacing: -0.8px; }
-  .pg-narrator-bubble { font-size: 12.5px; }
-  .pg-streak-value { font-size: 36px; }
-  .pg-streak-divider { margin: 0 14px; }
+  .pg-narrator-bubble { font-size: 12.5px; padding: 9px 12px; }
+  .pg-narrator-mascot {
+    width: 140px !important;
+    height: 140px !important;
+    margin-right: -10px;
+  }
+
+  /* Level card — mascot plus petite, info plus serrée */
+  .pg-level-card { gap: 12px; }
+  .pg-level-mascot {
+    width: 56px !important;
+    height: 56px !important;
+  }
+  .pg-level-info { gap: 6px; }
+  .pg-level-badge { font-size: 12px; padding: 5px 12px; }
+  .pg-level-total { font-size: 12px; }
+  .pg-level-next { font-size: 10.5px; }
+
+  /* Streak card — mascot 88px, value 32px, divider plus serré */
+  .pg-streak-card { padding: 16px 16px; gap: 10px; }
+  .pg-streak-mascot {
+    width: 88px !important;
+    height: 88px !important;
+    margin-right: -4px;
+  }
+  .pg-streak-value { font-size: 30px; }
+  .pg-streak-value--sm { font-size: 24px; }
+  .pg-streak-divider { margin: 0 10px; height: 44px; }
+  .pg-streak-label { font-size: 9.5px; }
+  .pg-streak-unit { font-size: 10.5px; }
+
+  /* Chart card mascot */
+  .pg-chart-mascot {
+    width: 48px !important;
+    height: 48px !important;
+  }
+
+  /* Weeks card — labels plus serrés */
+  .pg-week-label { width: 88px; font-size: 11px; }
+  .pg-week-count { font-size: 11px; width: 28px; }
+  .pg-weeks-summary-value { font-size: 28px; }
+  .pg-weeks-summary-text { font-size: 12px; }
+}
+
+/* ── Responsive ultra-narrow (≤ 360px : iPhone SE 1st gen, vieux androids) ── */
+@media (max-width: 360px) {
+  .pg-content { padding: 6px 12px 100px; }
+  .pg-narrator-mascot {
+    width: 120px !important;
+    height: 120px !important;
+  }
+  .pg-streak-mascot {
+    width: 76px !important;
+    height: 76px !important;
+  }
+  .pg-week-label { width: 76px; }
 }

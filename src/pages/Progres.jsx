@@ -290,32 +290,43 @@ export default function Progres() {
         {/* 3. Activité — vue par semaine, claire pour les jeunes */}
         <h2 className="pg-section-title">📅 Ton activité</h2>
         <div className="rv-card rv-card--padded pg-weeks-card">
-          <div className="pg-weeks-summary">
-            <span className="pg-weeks-summary-value">{activeDays}</span>
-            <span className="pg-weeks-summary-text">
-              jour{activeDays > 1 ? 's' : ''} actif{activeDays > 1 ? 's' : ''} sur les 5 dernières semaines
-            </span>
-          </div>
-          <div className="pg-weeks-list">
-            {weekRows.map((week, i) => (
-              <div key={i} className="pg-week-row">
-                <span className="pg-week-label">{week.label}</span>
-                <div className="pg-week-dots" aria-label={`${week.activeDays} jours actifs`}>
-                  {week.cells.map((cell, j) => (
-                    <span
-                      key={j}
-                      className={[
-                        'pg-week-dot',
-                        `pg-week-dot--${cell.isFuture ? 'future' : getActivityIntensity(cell.count)}`,
-                        cell.isToday ? 'pg-week-dot--today' : '',
-                      ].filter(Boolean).join(' ')}
-                    />
-                  ))}
-                </div>
-                <span className="pg-week-count">{week.activeDays}/7</span>
+          {allRevisions.length === 0 ? (
+            <div className="pg-weeks-empty">
+              <p className="pg-weeks-empty-title">Pas encore de révisions</p>
+              <p className="pg-weeks-empty-sub">
+                Scanne une leçon et lance une session pour démarrer ta série.
+              </p>
+            </div>
+          ) : (
+            <>
+              <div className="pg-weeks-summary">
+                <span className="pg-weeks-summary-value">{activeDays}</span>
+                <span className="pg-weeks-summary-text">
+                  jour{activeDays > 1 ? 's' : ''} actif{activeDays > 1 ? 's' : ''} sur les 5 dernières semaines
+                </span>
               </div>
-            ))}
-          </div>
+              <div className="pg-weeks-list">
+                {weekRows.map((week, i) => (
+                  <div key={i} className="pg-week-row">
+                    <span className="pg-week-label">{week.label}</span>
+                    <div className="pg-week-dots" aria-label={`${week.activeDays} jours actifs`}>
+                      {week.cells.map((cell, j) => (
+                        <span
+                          key={j}
+                          className={[
+                            'pg-week-dot',
+                            `pg-week-dot--${cell.isFuture ? 'future' : getActivityIntensity(cell.count)}`,
+                            cell.isToday ? 'pg-week-dot--today' : '',
+                          ].filter(Boolean).join(' ')}
+                        />
+                      ))}
+                    </div>
+                    <span className="pg-week-count">{week.activeDays}/7</span>
+                  </div>
+                ))}
+              </div>
+            </>
+          )}
         </div>
 
         {/* 4. Stats synthétiques (3 cards avec icon-square) */}
