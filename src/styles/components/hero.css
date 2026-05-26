@@ -9,7 +9,8 @@
   display: flex;
   align-items: stretch;
   gap: 12px;
-  height: 250px;
+  min-height: 250px;
+  flex-shrink: 0;
   border-radius: var(--radius-lg);
   padding: 22px 22px 22px 24px;
   color: #fff;
@@ -38,7 +39,7 @@
     0 4px 12px rgba(255, 138, 61, 0.18);
 }
 
-.rv-hero-cta--compact { height: 200px; padding: 18px 20px; }
+.rv-hero-cta--compact { min-height: 200px; padding: 18px 20px; }
 
 .rv-hero-glow {
   position: absolute;
@@ -135,8 +136,8 @@
 }
 
 @media (max-width: 430px) {
-  .rv-hero-cta { padding: 20px 20px 20px 22px; height: 230px; }
-  .rv-hero-cta--compact { height: 180px; }
+  .rv-hero-cta { padding: 20px 20px 20px 22px; min-height: 230px; }
+  .rv-hero-cta--compact { min-height: 180px; }
   .rv-hero-title { font-size: 20px; max-width: 14ch; }
   .rv-hero-mascot {
     width: 172px !important;
