@@ -6,3 +6,17 @@ dist/
 .vercel/
 
 .vercel
+
+# Tests
+playwright-report/
+test-results/
+coverage/
+
+# OS / éditeur
+.DS_Store
+
+# Config locale Claude Code
+.claude/
+
+# Rapport d'audit interne (failles non corrigées — ne pas publier)
+AUDIT.md

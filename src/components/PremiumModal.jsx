@@ -18,13 +18,11 @@ export function PremiumModal({ onClose, used = 5, limit = 5 }) {
     if (loading) return;
     setLoading(true);
     try {
+      const idToken = await currentUser?.getIdToken();
       const res = await fetch('/api/create-checkout', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          uid: currentUser?.uid,
-          email: currentUser?.email,
-        }),
+        body: JSON.stringify({ idToken }),
       });
       const data = await res.json();
       if (data.url) {

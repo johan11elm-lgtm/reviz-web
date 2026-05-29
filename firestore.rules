@@ -1,12 +1,52 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
+
+    // Champs de facturation gérés UNIQUEMENT côté serveur (webhook Stripe via
+    // firebase-admin, qui contourne ces règles). Le client ne doit jamais
+    // pouvoir les créer ni les modifier — sinon n'importe qui s'auto-attribue premium.
+    function billingFields() {
+      return ['plan', 'stripeCustomerId', 'stripeSubscriptionId', 'upgradedAt'];
+    }
+    function billingUnchangedOnUpdate() {
+      return !request.resource.data.diff(resource.data).affectedKeys().hasAny(billingFields());
+    }
+    function noBillingOnCreate() {
+      return !request.resource.data.keys().hasAny(['stripeCustomerId', 'stripeSubscriptionId', 'upgradedAt'])
+        && (!('plan' in request.resource.data) || request.resource.data.plan == 'free');
+    }
+    function isOwner(userId) {
+      return request.auth != null && request.auth.uid == userId;
+    }
+
+    // Document utilisateur : le propriétaire gère son profil, mais PAS sa facturation.
     match /users/{userId} {
-      allow read, write: if request.auth != null && request.auth.uid == userId;
+      allow read:   if isOwner(userId);
+      allow create: if isOwner(userId) && noBillingOnCreate();
+      allow update: if isOwner(userId) && billingUnchangedOnUpdate();
+      allow delete: if isOwner(userId);
+
+      // Sous-collections de contenu — propriétaire (lecture + écriture).
+      // NB: on énumère explicitement (pas de wildcard {document=**}) car en Firestore
+      // un wildcard permissif "OR" rouvrirait l'accès à parentalConsent ci-dessous.
+      match /lessons/{lessonId}     { allow read, write: if isOwner(userId); }
+      match /revisions/{revisionId} { allow read, write: if isOwner(userId); }
+
+      // Consentement parental : créé/approuvé UNIQUEMENT côté serveur (admin).
+      // Le client peut lire (pour l'affichage) et supprimer (RGPD art. 17),
+      // mais jamais créer ni modifier (sinon l'enfant s'auto-approuve).
+      match /parentalConsent/{doc} {
+        allow read, delete: if isOwner(userId);
+        allow create, update: if false;
+      }
     }
-    match /users/{userId}/{document=**} {
-      allow read, write: if request.auth != null && request.auth.uid == userId;
+
+    // Compteur d'usage (quota de scans) — écrit UNIQUEMENT par le serveur (admin).
+    match /usage/{userId} {
+      allow read:  if isOwner(userId);
+      allow write: if false;
     }
+
     match /{document=**} {
       allow read, write: if false;
     }

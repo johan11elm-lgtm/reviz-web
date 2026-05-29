@@ -19,14 +19,11 @@ export const BRANCH_COLORS = [
 // -------------------------------------------------------
 function audienceBlock(level) {
   if (level.cycle === 'college') {
-    const examNote = level.classe === '3ème'
-      ? '\n- L\'élève prépare le Brevet des collèges (DNB) : favorise les formulations courtes, type fiche de révision, exploitables pour des QCM officiels.'
-      : '';
     return `Tu es Réviz, un assistant pédagogique pour les collégiens français (11-15 ans).
 
 PROFIL DE L'ÉLÈVE :
 - Classe : ${level.classe}, cycle 4 du collège français.
-- L'élève consolide les bases du programme officiel de l'Éducation nationale.${examNote}
+- L'élève consolide les bases du programme officiel de l'Éducation nationale.
 
 ATTENDUS PÉDAGOGIQUES :
 - Vocabulaire CLAIR et SIMPLE, sans jargon. Quand un terme technique apparaît, donne-en une définition immédiate.
@@ -58,31 +55,6 @@ ATTENDUS PÉDAGOGIQUES :
 ${methodNote}`;
   }
 
-  if (level.cycle === 'superieur') {
-    let depthNote = '';
-    if (level.classe === 'L1') {
-      depthNote = '- En L1, l\'étudiant fait la transition lycée → université : volume important, autonomie nouvelle. Reste pédagogique mais sans dilution du formalisme.';
-    } else if (level.classe === 'L2') {
-      depthNote = '- En L2, l\'étudiant a déjà absorbé les fondamentaux : présume une maîtrise du vocabulaire de base, va plus vite sur les rappels, plus loin sur les nuances.';
-    } else if (level.classe === 'L3') {
-      depthNote = '- En L3, l\'étudiant est en spécialisation avancée et prépare l\'entrée en Master ou la sortie sur le marché. Vise un niveau pré-Master : profondeur conceptuelle, esprit critique, ouverture aux débats académiques.';
-    } else {
-      depthNote = '- Niveau supérieur : vise l\'autonomie intellectuelle et la rigueur académique.';
-    }
-    return `Tu es Réviz, un assistant pédagogique pour les étudiants français du supérieur (université).
-
-PROFIL DE L'ÉTUDIANT :
-- Niveau : ${level.classe}. Travail principalement en autonomie, partiels universitaires.
-
-ATTENDUS PÉDAGOGIQUES :
-- Vocabulaire ACADÉMIQUE et précis : on n'évite plus le jargon, on l'explicite.
-- DÉMONSTRATIONS COMPLÈTES attendues, pas juste des formules à appliquer. Pose les hypothèses, déroule le raisonnement, conclus.
-- Signale les NUANCES, les LIMITES des modèles, et les DÉBATS quand ils existent.
-- Réfère-toi à des auteurs, articles ou théories nommées quand c\'est pertinent (sans inventer de références).
-- Les partiels universitaires testent la compréhension profonde, pas la restitution : flashcards orientées définitions précises + démonstrations clés, quiz avec distracteurs subtils basés sur des confusions conceptuelles réelles, résumés organisés comme un plan de cours universitaire.
-${depthNote}`;
-  }
-
   // Fallback (ne devrait jamais arriver car on force la sélection avant scan)
   return `Tu es Réviz, un assistant pédagogique français.
 Adapte ton vocabulaire et ta rigueur à un public scolaire francophone non précisé.`;
@@ -94,9 +66,6 @@ Adapte ton vocabulaire et ta rigueur à un public scolaire francophone non préc
 function subjectsLine(level) {
   if (level.cycle === 'lycee') {
     return 'Valeurs possibles : Maths / Français / Anglais / Allemand / Espagnol / Histoire / Géographie / SVT / Physique-Chimie / SES / NSI / HGGSP / HLP / LLCE / Arts / Philosophie / EMC / Autre';
-  }
-  if (level.cycle === 'superieur') {
-    return 'Valeurs possibles : Droit / Économie / Sociologie / Psychologie / Anatomie / Biochimie / Mathématiques / Informatique / Statistiques / Comptabilité / Marketing / Histoire / Géographie / Lettres / Langues / Philosophie / STAPS / Médecine / Autre';
   }
   // college par défaut
   return 'Valeurs possibles : Maths / Français / Anglais / Allemand / Espagnol / Histoire / Géographie / SVT / Physique-Chimie / Technologie / Latin / Arts / Autre';
@@ -118,12 +87,6 @@ function flashcardRules(level) {
 - Formule les "front" pour exiger une RESTITUTION RAISONNÉE ("Énonce le théorème de...", "Quelles sont les conditions de validité de...", "Quelle problématique pose...").
 - Les "back" sont concis (2-3 lignes) mais rigoureux : terme exact + sa portée.`;
   }
-  if (level.cycle === 'superieur') {
-    return `RÈGLES DES FLASHCARDS :
-- 1 seule notion par carte. La notion peut être un théorème, une définition formelle, une démonstration clé, un mécanisme.
-- Formule les "front" comme un examinateur de partiel ("Énoncer et démontrer...", "Définir formellement...", "Quelles sont les hypothèses de...", "Critiquer la position de... face à...").
-- Les "back" sont rigoureux : terme exact, notation standard, conditions/portée. Si une démonstration est demandée, elle doit être complète (3-5 lignes max mais sans saut logique).`;
-  }
   return '';
 }
 
@@ -142,12 +105,6 @@ function quizRules(level) {
 - Les 4 choix doivent être plausibles. Les distracteurs sont des CONFUSIONS TYPIQUES de lycéens (mauvais raisonnement, hypothèse oubliée, confusion entre deux théorèmes).
 - Mélange : 2 questions de restitution (définition), 3 d\'application (raisonnement), 2 d\'analyse (cas-piège méthodologique type Bac).
 - L'explication doit pointer le RAISONNEMENT correct et expliciter pourquoi les distracteurs sont des pièges.`;
-  }
-  if (level.cycle === 'superieur') {
-    return `RÈGLES DU QUIZ :
-- Format inspiré des partiels universitaires : les distracteurs sont SUBTILS, basés sur des nuances conceptuelles, des hypothèses manquantes, ou des positions doctrinales/théoriques différentes.
-- Mélange : 2 questions de définition rigoureuse, 3 de raisonnement (démonstration courte, application d\'un théorème), 2 d\'analyse critique (limite d\'un modèle, débat académique, contre-exemple).
-- L'explication doit expliciter le RAISONNEMENT complet et signaler la nuance qui fait la différence entre bonne et mauvaise réponse.`;
   }
   return '';
 }
@@ -169,14 +126,6 @@ function resumeRules(level) {
 - Vocabulaire technique exact (théorèmes nommés, mouvements littéraires, périodes historiques précises).
 - Pas de répétition. Chaque phrase apporte une info nouvelle.
 - Quand une formule ou un théorème apparaît, donne ses CONDITIONS D'APPLICATION.`;
-  }
-  if (level.cycle === 'superieur') {
-    return `RÈGLES DU RÉSUMÉ :
-- Structure type plan de cours universitaire : intro avec problématique, sections numérotées avec sous-titres clairs, conclusion implicite via les keyTerms.
-- Vocabulaire académique précis, notations standard.
-- Cite les AUTEURS, THÉORÈMES, ARRÊTS ou ARTICLES de référence si la leçon les évoque (jamais d\'inventions).
-- Donne les CONDITIONS et LIMITES de chaque résultat énoncé.
-- Les keyTerms doivent être les concepts NOMMÉS de la leçon (pas du vocabulaire général).`;
   }
   return '';
 }

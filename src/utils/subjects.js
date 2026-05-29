@@ -29,23 +29,8 @@ export const SUBJECT_MAP = {
   'nsi':         { color: 'cyan',   dot: '#06B6D4', bg: '#ECFEFF', emoji: '💻' },
   'hggsp':       { color: 'indigo', dot: '#6366F1', bg: '#EEF2FF', emoji: '🌐' },
   'hlp':         { color: 'purple', dot: '#A855F7', bg: '#FAF5FF', emoji: '🪶' },
-
-  // --- Supérieur ---
   'philosophie': { color: 'purple', dot: '#A855F7', bg: '#FAF5FF', emoji: '🤔' },
   'philo':       { color: 'purple', dot: '#A855F7', bg: '#FAF5FF', emoji: '🤔' },
-  'droit':       { color: 'indigo', dot: '#6366F1', bg: '#EEF2FF', emoji: '⚖️' },
-  'économie':    { color: 'green',  dot: '#22C55E', bg: '#F0FDF4', emoji: '📈' },
-  'sociologie':  { color: 'purple', dot: '#A855F7', bg: '#FAF5FF', emoji: '👥' },
-  'psychologie': { color: 'pink',   dot: '#EC4899', bg: '#FDF2F8', emoji: '🧠' },
-  'anatomie':    { color: 'red',    dot: '#EF4444', bg: '#FEF2F2', emoji: '🫀' },
-  'biochimie':   { color: 'green',  dot: '#22C55E', bg: '#F0FDF4', emoji: '🧬' },
-  'médecine':    { color: 'red',    dot: '#EF4444', bg: '#FEF2F2', emoji: '⚕️' },
-  'informatique':{ color: 'cyan',   dot: '#06B6D4', bg: '#ECFEFF', emoji: '💻' },
-  'statistiques':{ color: 'green',  dot: '#22C55E', bg: '#F0FDF4', emoji: '📊' },
-  'comptabilité':{ color: 'yellow', dot: '#EAB308', bg: '#FEFCE8', emoji: '🧮' },
-  'marketing':   { color: 'orange', dot: '#FF6B00', bg: '#FFF7ED', emoji: '📣' },
-  'staps':       { color: 'green',  dot: '#22C55E', bg: '#F0FDF4', emoji: '🏃' },
-  'lettres':     { color: 'pink',   dot: '#EC4899', bg: '#FDF2F8', emoji: '🪶' },
 };
 
 export function subjectKey(s) {

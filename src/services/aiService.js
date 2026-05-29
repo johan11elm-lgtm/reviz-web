@@ -6,6 +6,7 @@
 
 import { auth } from './firebaseConfig.js'
 import { MODEL, BRANCH_COLORS, buildSystemPrompt } from '../utils/aiPrompts.js'
+import { downscaleDataUrl } from '../utils/downscaleImage.js'
 
 const API_URL   = 'https://api.anthropic.com/v1/messages'
 const USE_PROXY = !import.meta.env.VITE_ANTHROPIC_API_KEY ||
@@ -208,8 +209,10 @@ export async function analyseLesson(text, onProgress, level) {
 export async function analyseImage(imageDataUrl, onProgress, level) {
   if (!level?.cycle) throw new Error('MISSING_LEVEL')
 
+  // Réduire l'image avant envoi (poids du payload serverless + coût vision)
+  const downscaled = await downscaleDataUrl(imageDataUrl)
   // Extraire le base64 pur et le media type depuis le data URL
-  const match = imageDataUrl.match(/^data:(image\/\w+);base64,(.+)$/)
+  const match = downscaled.match(/^data:(image\/\w+);base64,(.+)$/)
   if (!match) throw new Error('INVALID_IMAGE')
   const [, mediaType, imageData] = match
 

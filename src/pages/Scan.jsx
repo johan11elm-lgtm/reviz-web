@@ -424,7 +424,7 @@ export default function Scan() {
               Dis-moi d'abord ton niveau
             </h2>
             <p className="scan-level-modal-sub">
-              Je règle les flashcards, quiz et résumés pile pour toi (collège, lycée, supérieur).
+              Je règle les flashcards, quiz et résumés pile pour toi (collège, lycée).
               Une minute dans le profil et c'est plié.
             </p>
             <div className="scan-level-modal-actions">

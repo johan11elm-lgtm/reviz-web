@@ -2,21 +2,19 @@ import {
   CYCLES,
   CLASSES_BY_CYCLE,
   SPECIALITES_LYCEE,
-  FILIERES_SUP,
   needsSpecialites,
-  needsFiliere,
 } from '../utils/levels';
 import './LevelSelector.css';
 
 export function LevelSelector({ value, onChange, compact = false }) {
-  const level = value || { cycle: null, classe: null, specialites: [], filiere: null };
+  const level = value || { cycle: null, classe: null, specialites: [] };
 
   function setCycle(cycle) {
-    onChange({ cycle, classe: null, specialites: [], filiere: null });
+    onChange({ cycle, classe: null, specialites: [] });
   }
 
   function setClasse(classe) {
-    onChange({ ...level, classe, specialites: [], filiere: null });
+    onChange({ ...level, classe, specialites: [] });
   }
 
   function toggleSpecialite(spec) {
@@ -25,10 +23,6 @@ export function LevelSelector({ value, onChange, compact = false }) {
       ? current.filter(s => s !== spec)
       : [...current, spec];
     onChange({ ...level, specialites: next });
-  }
-
-  function setFiliere(filiere) {
-    onChange({ ...level, filiere });
   }
 
   return (
@@ -71,7 +65,7 @@ export function LevelSelector({ value, onChange, compact = false }) {
         </div>
       )}
 
-      {/* Étape 3a : spécialités lycée */}
+      {/* Étape 3 : spécialités lycée */}
       {needsSpecialites(level) && (
         <div className="level-section">
           <div className="level-section-label">
@@ -91,25 +85,6 @@ export function LevelSelector({ value, onChange, compact = false }) {
                 </button>
               );
             })}
-          </div>
-        </div>
-      )}
-
-      {/* Étape 3b : filière supérieur */}
-      {needsFiliere(level) && (
-        <div className="level-section">
-          <div className="level-section-label">Filière</div>
-          <div className="level-chips-grid">
-            {FILIERES_SUP.map(f => (
-              <button
-                type="button"
-                key={f}
-                className={`level-chip${level.filiere === f ? ' active' : ''}`}
-                onClick={() => setFiliere(f)}
-              >
-                {f}
-              </button>
-            ))}
           </div>
         </div>
       )}

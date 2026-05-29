@@ -34,8 +34,8 @@ const Mindmap        = lazy(() => import('./pages/MindMap'))
 const Onboarding     = lazy(() => import('./pages/Onboarding'))
 const VerifyEmail    = lazy(() => import('./pages/VerifyEmail'))
 const Legal          = lazy(() => import('./pages/Legal'))
-const Brevet         = lazy(() => import('./pages/Brevet'))
 const ConsentPending = lazy(() => import('./pages/ConsentPending'))
+const FinishSetup    = lazy(() => import('./pages/FinishSetup'))
 const NotFound       = lazy(() => import('./pages/NotFound'))
 const UpgradeSuccess = lazy(() => import('./pages/UpgradeSuccess'))
 
@@ -50,9 +50,10 @@ function LoadingFallback() {
 
 // Redirige vers /welcome si non connecté, vers /consent-pending si en attente
 function PrivateRoute({ children }) {
-  const { currentUser, consentPending } = useAuth();
+  const { currentUser, consentBlocked, needsProfileSetup } = useAuth();
   if (!currentUser) return <Navigate to="/welcome" replace />;
-  if (consentPending) return <Navigate to="/consent-pending" replace />;
+  if (needsProfileSetup) return <Navigate to="/finish-setup" replace />;
+  if (consentBlocked) return <Navigate to="/consent-pending" replace />;
   return children;
 }
 
@@ -63,6 +64,7 @@ function AuthRoutes() {
       <Route path="/inscription" element={<Inscription />} />
       <Route path="/connexion"   element={<Connexion />} />
       <Route path="/consent-pending" element={<ConsentPending />} />
+      <Route path="/finish-setup" element={<FinishSetup />} />
       <Route path="/verify-email" element={<PrivateRoute><VerifyEmail /></PrivateRoute>} />
       <Route path="/"            element={<PrivateRoute><Home /></PrivateRoute>} />
       <Route path="/onboarding"  element={<PrivateRoute><Onboarding /></PrivateRoute>} />
@@ -75,7 +77,6 @@ function AuthRoutes() {
       <Route path="/quiz"        element={<PrivateRoute><Quiz /></PrivateRoute>} />
       <Route path="/resume"      element={<PrivateRoute><Resume /></PrivateRoute>} />
       <Route path="/mindmap"     element={<PrivateRoute><Mindmap /></PrivateRoute>} />
-      <Route path="/brevet"      element={<PrivateRoute><Brevet /></PrivateRoute>} />
       <Route path="/upgrade-success" element={<PrivateRoute><UpgradeSuccess /></PrivateRoute>} />
       <Route path="*"            element={<NotFound />} />
     </Routes>

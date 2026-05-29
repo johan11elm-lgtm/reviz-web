@@ -8,19 +8,10 @@ import './Onboarding.css';
 // Tagline adaptée au cycle scolaire — affichée sur le slide d'accueil.
 function levelTagline(level) {
   if (level?.cycle === 'college') {
-    const examNote = level.classe === '3ème' ? ' et au Brevet' : '';
-    return `Réviz transforme tes leçons en outils de révision calibrés pour le programme du collège${examNote}.`;
+    return `Réviz transforme tes leçons en outils de révision calibrés pour le programme du collège.`;
   }
   if (level?.cycle === 'lycee') {
-    const examNote = level.classe === 'Terminale'
-      ? ' et préparés pour la méthode du Bac'
-      : level.classe === '1ère'
-        ? ' et préparés pour les épreuves anticipées'
-        : '';
-    return `Réviz transforme tes leçons en outils de révision calibrés pour le programme du lycée${examNote}.`;
-  }
-  if (level?.cycle === 'superieur') {
-    return `Réviz transforme tes cours en outils de révision calibrés pour le niveau universitaire — vocabulaire académique, démonstrations rigoureuses, format type partiels.`;
+    return `Réviz transforme tes leçons en outils de révision calibrés pour le programme du lycée.`;
   }
   return `Réviz transforme n'importe quelle leçon en outils de révision en quelques secondes.`;
 }

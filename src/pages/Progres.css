@@ -472,43 +472,6 @@
   font-weight: 800;
 }
 
-/* ── Carte Brevet (utilise .rv-card --link) ── */
-.pg-brevet-card {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  cursor: pointer;
-}
-
-.pg-brevet-text {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  min-width: 0;
-}
-
-.pg-brevet-title {
-  font-family: 'Geist', sans-serif;
-  font-size: 15px;
-  font-weight: 700;
-  letter-spacing: -0.2px;
-  color: var(--text-primary);
-}
-
-.pg-brevet-sub {
-  font-size: 12px;
-  color: var(--text-muted);
-  font-weight: 500;
-}
-
-.pg-brevet-arrow {
-  font-size: 18px;
-  color: var(--accent-violet);
-  font-weight: 700;
-  flex-shrink: 0;
-}
-
 /* ── Format breakdown ── */
 .pg-format-card {
   padding: 6px 16px 10px;

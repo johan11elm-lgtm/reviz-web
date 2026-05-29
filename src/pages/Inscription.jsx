@@ -5,9 +5,8 @@ import {
   CYCLES,
   CLASSES_BY_CYCLE,
   SPECIALITES_LYCEE,
-  FILIERES_SUP,
   needsSpecialites,
-  needsFiliere,
+  isUnder15,
 } from '../utils/levels';
 import './Inscription.css';
 
@@ -20,20 +19,12 @@ function firebaseErrorFr(code) {
   }
 }
 
-function isUnder15(dateStr) {
-  if (!dateStr) return false;
-  const birth = new Date(dateStr);
-  const today = new Date();
-  let age = today.getFullYear() - birth.getFullYear();
-  const m = today.getMonth() - birth.getMonth();
-  if (m < 0 || (m === 0 && today.getDate() < birth.getDate())) age--;
-  return age < 15;
-}
+// isUnder15 est désormais importé depuis ../utils/levels (source unique).
 
 export default function Inscription() {
   const [prenom, setPrenom]               = useState('');
   const [birthDate, setBirthDate]         = useState('');
-  const [level, setLevel]                 = useState({ cycle: null, classe: null, specialites: [], filiere: null });
+  const [level, setLevel]                 = useState({ cycle: null, classe: null, specialites: [] });
   const [email, setEmail]                 = useState('');
   const [password, setPassword]           = useState('');
   const [acceptCgu, setAcceptCgu]         = useState(false);
@@ -44,13 +35,13 @@ export default function Inscription() {
   const [stepIdx, setStepIdx]             = useState(0);
   const [animDir, setAnimDir]             = useState('in');
 
-  const { signup, loginWithGoogle }       = useAuth();
+  const { signup, loginWithGoogle, refreshGate } = useAuth();
   const navigate                          = useNavigate();
 
   // Construction dynamique de la liste des étapes en fonction du profil.
   const steps = useMemo(() => {
     const base = ['prenom', 'birthdate', 'cycle', 'classe'];
-    if (needsSpecialites(level) || needsFiliere(level)) base.push('detail');
+    if (needsSpecialites(level)) base.push('detail');
     base.push('account');
     if (isUnder15(birthDate)) base.push('parent');
     return base;
@@ -100,7 +91,6 @@ export default function Inscription() {
         if (!level.classe) return 'Choisis ta classe.';
         return null;
       case 'detail':
-        if (needsFiliere(level) && !level.filiere) return 'Choisis ta filière.';
         // Spés optionnelles : on n'oblige pas un minimum (l'utilisateur peut être en 1ère sans choix défini)
         return null;
       case 'account':
@@ -127,6 +117,7 @@ export default function Inscription() {
       setLoading(true);
       try {
         const user = await signup(prenom.trim(), email.trim(), password, level, birthDate);
+        await refreshGate?.();
         if (isUnder15(birthDate)) {
           setCreatedUid(user.uid);
           goNext();
@@ -202,10 +193,6 @@ export default function Inscription() {
         specialites: cur.includes(spec) ? cur.filter(s => s !== spec) : [...cur, spec],
       };
     });
-  }
-
-  function setFiliere(filiere) {
-    setLevel(l => ({ ...l, filiere }));
   }
 
   const isLast = stepIdx === steps.length - 1;
@@ -319,25 +306,6 @@ export default function Inscription() {
                   </button>
                 );
               })}
-            </div>
-          </>
-        )}
-
-        {stepId === 'detail' && needsFiliere(level) && (
-          <>
-            <h1 className="signup-question">Ta filière ?</h1>
-            <p className="signup-hint">Pour mieux cibler tes révisions.</p>
-            <div className="signup-chips">
-              {FILIERES_SUP.map(f => (
-                <button
-                  type="button"
-                  key={f}
-                  className={`signup-chip${level.filiere === f ? ' active' : ''}`}
-                  onClick={() => setFiliere(f)}
-                >
-                  {f}
-                </button>
-              ))}
             </div>
           </>
         )}
