@@ -9,8 +9,6 @@ import { PageHeader } from '../components/PageHeader';
 import { Mascot } from '../components/Mascot';
 import { computeStreak, computeLevel, XP_PAR_NIVEAU } from '../utils/gamification';
 import { subjectInfo } from '../utils/subjects';
-import { getCoveredCount } from '../services/brevetService';
-import { TOTAL_THEMES } from '../utils/brevetProgram';
 import './Progres.css';
 
 // ─── Constantes ─────────────────────────────────────────────────────
@@ -381,23 +379,7 @@ export default function Progres() {
           </div>
         </div>
 
-        {/* 6. Carte Brevet (action) */}
-        <div
-          className="rv-card rv-card--link rv-card--padded pg-brevet-card"
-          onClick={() => navigate('/brevet')}
-          role="button"
-          tabIndex={0}
-          onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); navigate('/brevet'); } }}
-        >
-          <div className="rv-icon-square rv-icon-square--xl rv-icon-square--violet">📚</div>
-          <div className="pg-brevet-text">
-            <span className="pg-brevet-title">Préparation Brevet</span>
-            <span className="pg-brevet-sub">{getCoveredCount(allLessons)} / {TOTAL_THEMES} thèmes couverts</span>
-          </div>
-          <span className="pg-brevet-arrow" aria-hidden="true">→</span>
-        </div>
-
-        {/* 7. Répartition par format */}
+        {/* 6. Répartition par format */}
         {formatBreakdown.some(f => f.count > 0) && (
           <>
             <h2 className="pg-section-title">🎨 Par format</h2>

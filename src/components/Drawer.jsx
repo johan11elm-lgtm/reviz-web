@@ -3,6 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { useTheme } from '../context/ThemeContext';
 import { useAuth } from '../context/AuthContext';
 import { formatLevelLabel } from '../utils/levels';
+import { openBillingPortal } from '../services/billingService';
 
 function firebaseErrorFr(code) {
   switch (code) {
@@ -30,6 +31,23 @@ export function Drawer({ isOpen, onClose }) {
   const [loading, setLoading]         = useState(false);
   const [error, setError]             = useState('');
   const [success, setSuccess]         = useState('');
+  const [billingLoading, setBillingLoading] = useState(false);
+
+  async function handleManageSubscription() {
+    if (billingLoading) return;
+    setBillingLoading(true);
+    try {
+      await openBillingPortal(); // redirige vers Stripe en cas de succès
+    } catch {
+      setBillingLoading(false);
+      alert('Impossible d\'ouvrir la gestion de l\'abonnement. Réessaie dans un moment.');
+    }
+  }
+
+  // Active un élément role="button" au clavier (Entrée ou Espace) — WCAG 2.1.1.
+  const onActivate = (fn) => (e) => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); fn(); }
+  };
 
   // Champs email
   const [newEmail, setNewEmail]         = useState('');
@@ -109,14 +127,14 @@ export function Drawer({ isOpen, onClose }) {
         <div className="drawer-section-label">COMPTE</div>
         <div>
           {/* Modifier le profil → renvoie vers la page Profil */}
-          <div className="drawer-item" onClick={handleEditProfile} style={{ cursor: 'pointer' }} role="button" tabIndex={0}>
+          <div className="drawer-item" onClick={handleEditProfile} onKeyDown={onActivate(handleEditProfile)} style={{ cursor: 'pointer' }} role="button" tabIndex={0}>
             <span className="drawer-item-icon">👤</span>
             <span className="drawer-item-label">Modifier le profil</span>
             <span className="drawer-item-arrow">›</span>
           </div>
 
           {/* Modifier l'e-mail */}
-          <div className="drawer-item" onClick={() => activePanel === 'email' ? closePanel() : openPanel('email')} style={{ cursor: 'pointer' }} role="button" tabIndex={0} aria-expanded={activePanel === 'email'}>
+          <div className="drawer-item" onClick={() => activePanel === 'email' ? closePanel() : openPanel('email')} onKeyDown={onActivate(() => activePanel === 'email' ? closePanel() : openPanel('email'))} style={{ cursor: 'pointer' }} role="button" tabIndex={0} aria-expanded={activePanel === 'email'}>
             <span className="drawer-item-icon">✉️</span>
             <span className="drawer-item-label">Modifier l'e-mail</span>
             <span className="drawer-item-arrow">{activePanel === 'email' ? '∨' : '›'}</span>
@@ -132,7 +150,7 @@ export function Drawer({ isOpen, onClose }) {
           )}
 
           {/* Modifier le mot de passe */}
-          <div className="drawer-item" onClick={() => activePanel === 'password' ? closePanel() : openPanel('password')} style={{ cursor: 'pointer' }} role="button" tabIndex={0} aria-expanded={activePanel === 'password'}>
+          <div className="drawer-item" onClick={() => activePanel === 'password' ? closePanel() : openPanel('password')} onKeyDown={onActivate(() => activePanel === 'password' ? closePanel() : openPanel('password'))} style={{ cursor: 'pointer' }} role="button" tabIndex={0} aria-expanded={activePanel === 'password'}>
             <span className="drawer-item-icon">🔑</span>
             <span className="drawer-item-label">Mot de passe</span>
             <span className="drawer-item-arrow">{activePanel === 'password' ? '∨' : '›'}</span>
@@ -200,12 +218,23 @@ export function Drawer({ isOpen, onClose }) {
             </div>
             {!isPremium && <span className="drawer-item-arrow">›</span>}
           </div>
+          {isPremium && (
+            <button
+              type="button"
+              className="drawer-panel-btn"
+              style={{ marginTop: 8 }}
+              onClick={handleManageSubscription}
+              disabled={billingLoading}
+            >
+              {billingLoading ? 'Ouverture…' : 'Gérer mon abonnement'}
+            </button>
+          )}
         </div>
 
         {/* Informations */}
         <div className="drawer-section-label">INFORMATIONS</div>
         <div>
-          <div className="drawer-item" onClick={() => activePanel === 'apropos' ? closePanel() : openPanel('apropos')} style={{ cursor: 'pointer' }} role="button" tabIndex={0} aria-expanded={activePanel === 'apropos'}>
+          <div className="drawer-item" onClick={() => activePanel === 'apropos' ? closePanel() : openPanel('apropos')} onKeyDown={onActivate(() => activePanel === 'apropos' ? closePanel() : openPanel('apropos'))} style={{ cursor: 'pointer' }} role="button" tabIndex={0} aria-expanded={activePanel === 'apropos'}>
             <span className="drawer-item-icon">ℹ️</span>
             <span className="drawer-item-label">À propos</span>
             <span className="drawer-item-arrow">{activePanel === 'apropos' ? '∨' : '›'}</span>
@@ -238,7 +267,7 @@ export function Drawer({ isOpen, onClose }) {
         </div>
 
         {/* Déconnexion */}
-        <div className="drawer-logout" onClick={handleLogout} role="button" tabIndex={0} aria-label="Se déconnecter" onKeyDown={e => e.key === 'Enter' && handleLogout()}>
+        <div className="drawer-logout" onClick={handleLogout} role="button" tabIndex={0} aria-label="Se déconnecter" onKeyDown={onActivate(handleLogout)}>
           <span className="drawer-item-icon">🚪</span>
           <span className="drawer-logout-label">Se déconnecter</span>
           <span className="drawer-item-arrow">›</span>

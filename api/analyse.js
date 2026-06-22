@@ -1,47 +1,45 @@
-import { buildSystemPrompt, MODEL } from './_systemPrompt.js'
+import { buildSystemPrompt, buildLessonUserMessage, MODEL } from './_systemPrompt.js'
+import { getDb, getAuthAdmin } from './_firebaseAdmin.js'
+import { consumeQuota, refundQuota, FREE_LIMIT } from './_quota.js'
 
-export const config = { runtime: 'edge' }
+// Runtime Node (pas edge) : nécessaire pour firebase-admin (quota + auth).
+// maxDuration élargi pour laisser le temps à la génération IA.
+export const config = { maxDuration: 60 }
 
-export default async function handler(req) {
-  if (req.method !== 'POST') {
-    return new Response('Method not allowed', { status: 405 })
-  }
+export default async function handler(req, res) {
+  if (req.method !== 'POST') return res.status(405).send('Method not allowed')
 
-  let text, idToken, level
+  const { text, idToken, level } = req.body ?? {}
+
+  if (typeof text !== 'string' || text.trim().length === 0) return res.status(400).send('Missing text')
+  if (text.length > 15000) return res.status(400).send('TEXT_TOO_LONG')
+  if (!level?.cycle) return res.status(400).send('MISSING_LEVEL')
+  if (!idToken) return res.status(401).send('Unauthorized')
+
+  // 1. Authentification (vérification réelle de la signature du token Firebase)
+  let uid
   try {
-    const body = await req.json()
-    text    = body.text
-    idToken = body.idToken
-    level   = body.level
+    uid = (await getAuthAdmin().verifyIdToken(idToken)).uid
   } catch {
-    return new Response('Bad request', { status: 400 })
+    return res.status(401).send('Unauthorized')
   }
 
-  if (!text) return new Response('Missing text', { status: 400 })
-  if (!level?.cycle) return new Response('MISSING_LEVEL', { status: 400 })
-
-  // Vérification du token Firebase (obligatoire)
-  if (!idToken) return new Response('Unauthorized', { status: 401 })
-  const firebaseKey = process.env.FIREBASE_API_KEY
-  if (!firebaseKey) return new Response('Server configuration error', { status: 500 })
+  // 2. Quota serveur = SOURCE DE VÉRITÉ (le localStorage client n'est qu'un affichage).
+  const db = getDb()
+  let isPremium = false
   try {
-    const verifyResp = await fetch(
-      `https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=${firebaseKey}`,
-      { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ idToken }) }
-    )
-    if (!verifyResp.ok) return new Response('Unauthorized', { status: 401 })
-    const { users } = await verifyResp.json()
-    if (!users?.[0]) return new Response('Unauthorized', { status: 401 })
-  } catch {
-    return new Response('Unauthorized', { status: 401 })
+    const snap = await db.collection('users').doc(uid).get()
+    isPremium = snap.exists && snap.data().plan === 'premium'
+  } catch { /* en cas d'échec de lecture, on applique le quota free par prudence */ }
+
+  let consumed = false
+  if (!isPremium) {
+    const q = await consumeQuota({ db, uid, limit: FREE_LIMIT })
+    if (!q.allowed) return res.status(429).send('RATE_LIMIT')
+    consumed = true
   }
 
-  if (typeof text !== 'string' || text.trim().length === 0)
-    return new Response('Missing text', { status: 400 })
-  if (text.length > 15000)
-    return new Response('TEXT_TOO_LONG', { status: 400 })
-
-  // Appel Anthropic (non-streaming pour fiabilité)
+  // 3. Appel Anthropic (non-streaming pour fiabilité)
   let anthropicResp
   try {
     anthropicResp = await fetch('https://api.anthropic.com/v1/messages', {
@@ -56,25 +54,29 @@ export default async function handler(req) {
         max_tokens: 8192,
         stream: false,
         system: buildSystemPrompt(level),
-        messages: [{ role: 'user', content: `Voici la leçon à analyser :\n\n${text}` }],
+        messages: [{ role: 'user', content: buildLessonUserMessage(text) }],
       }),
     })
   } catch {
-    return new Response('NETWORK_ERROR', { status: 502 })
+    if (consumed) await refundQuota({ db, uid }).catch(() => {})
+    return res.status(502).send('NETWORK_ERROR')
   }
 
   if (!anthropicResp.ok) {
-    if (anthropicResp.status === 401 || anthropicResp.status === 403)
-      return new Response('INVALID_API_KEY', { status: 502 })
-    if (anthropicResp.status === 429)
-      return new Response('RATE_LIMIT', { status: 429 })
-    return new Response(`API_ERROR_${anthropicResp.status}`, { status: 502 })
+    if (consumed) await refundQuota({ db, uid }).catch(() => {})
+    if (anthropicResp.status === 401 || anthropicResp.status === 403) return res.status(502).send('INVALID_API_KEY')
+    if (anthropicResp.status === 429) return res.status(429).send('RATE_LIMIT')
+    return res.status(502).send(`API_ERROR_${anthropicResp.status}`)
   }
 
   const result = await anthropicResp.json()
   const text_content = result.content?.[0]?.text ?? ''
 
-  return new Response(text_content, {
-    headers: { 'Content-Type': 'text/plain; charset=utf-8' },
-  })
+  // Refus de sûreté (contenu non scolaire) : on ne facture pas un scan à l'élève.
+  if (consumed && /"error"\s*:\s*"NON_SCOLAIRE"/.test(text_content)) {
+    await refundQuota({ db, uid }).catch(() => {})
+  }
+
+  res.setHeader('Content-Type', 'text/plain; charset=utf-8')
+  return res.status(200).send(text_content)
 }

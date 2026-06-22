@@ -154,12 +154,17 @@ export default function Analyse() {
   const totalElements = displayLesson.flashcardsCount + displayLesson.quizCount;
 
   const errorMessages = {
-    MISSING_API_KEY: 'Clé API manquante',
-    INVALID_API_KEY: 'Clé API invalide',
-    RATE_LIMIT:      'Trop de requêtes — réessaie dans un moment',
-    NETWORK_ERROR:   'Pas de connexion internet',
-    INVALID_JSON:    "L'IA a renvoyé une réponse inattendue",
+    NON_SCOLAIRE:    { title: "Ça n'a pas l'air d'une leçon", sub: "Réviz ne marche qu'avec des cours et des leçons. Scanne une vraie leçon pour lancer ta session." },
+    RATE_LIMIT:      { title: 'Trop de scans d\'un coup', sub: 'Patiente un petit moment, puis réessaie.' },
+    NETWORK_ERROR:   { title: 'Pas de connexion', sub: 'Vérifie ta connexion internet et réessaie.' },
+    TIMEOUT:         { title: 'Ça a pris trop de temps', sub: 'Vérifie ta connexion et réessaie.' },
+    UNAUTHORIZED:    { title: 'Reconnecte-toi', sub: 'Ta session a expiré — reconnecte-toi puis réessaie.' },
+    INVALID_JSON:    { title: 'Oups, ça a coincé', sub: 'Réviz n\'a pas réussi à lire cette leçon. Réessaie de la scanner.' },
+    EMPTY_RESPONSE:  { title: 'Oups, ça a coincé', sub: 'Réviz n\'a pas réussi à lire cette leçon. Réessaie de la scanner.' },
+    MISSING_API_KEY: { title: 'Oups, ça a coincé', sub: 'Réessaie dans un moment.' },
+    INVALID_API_KEY: { title: 'Oups, ça a coincé', sub: 'Réessaie dans un moment.' },
   };
+  const errInfo = errorMessages[error] ?? { title: 'Oups, ça a coincé', sub: 'Vérifie ta connexion et réessaie.' };
 
   const avatarBtn = (
     <button
@@ -222,10 +227,10 @@ export default function Analyse() {
             aria-hidden="true"
           />
           <div className="analyse-ls-title">
-            {errorMessages[error] ?? 'Erreur de connexion'}
+            {errInfo.title}
           </div>
           <p className="analyse-error-sub">
-            Vérifie ta connexion ou ta clé API dans .env.local
+            {errInfo.sub}
           </p>
           <button
             type="button"

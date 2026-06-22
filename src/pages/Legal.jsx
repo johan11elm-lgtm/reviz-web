@@ -59,7 +59,7 @@ const PAGES = {
         </Section>
 
         <Section title="Mineurs">
-          <p>Réviz s'adresse aux élèves et étudiants du système scolaire français, du collège à l'enseignement supérieur. Conformément à la réglementation française, les utilisateurs de moins de 15 ans doivent obtenir l'autorisation d'un parent ou représentant légal pour créer un compte.</p>
+          <p>Réviz s'adresse aux élèves du système scolaire français, du collège au lycée. Conformément à la réglementation française, les utilisateurs de moins de 15 ans doivent obtenir l'autorisation d'un parent ou représentant légal pour créer un compte.</p>
         </Section>
 
         <Section title="Partage des données">
@@ -74,7 +74,7 @@ const PAGES = {
         <Section title="Durée de conservation">
           <ul>
             <li>Données de compte : jusqu'à suppression du compte.</li>
-            <li>Leçons et révisions : jusqu'à suppression par l'utilisateur (max 20 leçons).</li>
+            <li>Leçons et révisions : jusqu'à suppression par l'utilisateur (max 100 leçons conservées).</li>
             <li>Logs serveur : 30 jours maximum.</li>
           </ul>
         </Section>
@@ -135,7 +135,7 @@ const PAGES = {
 
         <Section title="Limites d'utilisation">
           <ul>
-            <li>Plan gratuit : 5 leçons analysées par mois.</li>
+            <li>Plan gratuit : 5 leçons analysées par semaine.</li>
             <li>Il est interdit de scanner des contenus illicites ou portant atteinte aux droits de tiers.</li>
             <li>Toute utilisation abusive peut entraîner la suspension du compte.</li>
           </ul>

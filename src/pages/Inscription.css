@@ -17,6 +17,8 @@
   justify-content: center;
   border-radius: 50%;
   background: var(--bg-subtle);
+  border: none;
+  cursor: pointer;
   flex-shrink: 0;
 }
 

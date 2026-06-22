@@ -19,13 +19,12 @@ import {
   deleteUser,
 } from 'firebase/auth';
 import { auth, db } from '../services/firebaseConfig';
-import { parseLevel, serializeLevel, migrateLegacyClasse } from '../utils/levels';
+import { parseLevel, serializeLevel, migrateLegacyClasse, isUnder15 } from '../utils/levels';
 import { createUserProfile } from '../services/userProfileService';
 import { setActiveUser } from '../services/historyService';
 import { setActiveUser as setRevisionUser } from '../services/revisionService';
 import { setSrsUser } from '../services/srsService';
 import { setChallengeUser } from '../services/challengeService';
-import { setBrevetUser } from '../services/brevetService';
 import { setScanLimitUser, setPremiumStatus } from '../services/scanLimitService';
 import { collection, getDocs, deleteDoc, doc, getDoc } from 'firebase/firestore';
 
@@ -38,7 +37,10 @@ export function useAuth() {
 export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser]   = useState(null);
   const [loading, setLoading]           = useState(true);
-  const [consentPending, setConsentPending] = useState(false);
+  // Mineur <15 ans dont le consentement parental n'est pas (encore) approuvé.
+  const [consentBlocked, setConsentBlocked] = useState(false);
+  // Compte Google sans profil complété (pas encore de date de naissance / niveau).
+  const [needsProfileSetup, setNeedsProfileSetup] = useState(false);
   const [isPremium, setIsPremium] = useState(false);
 
   // --- Inscription ---
@@ -48,8 +50,11 @@ export function AuthProvider({ children }) {
     await updateProfile(user, { displayName: prenom });
     // Envoyer l'email de vérification (fire-and-forget)
     sendEmailVerification(user).catch(() => {});
-    // Profil persistant dans Firestore (best-effort, ne bloque pas l'inscription)
-    createUserProfile(user.uid, { prenom, email, birthDate, level }).catch(() => {});
+    // Profil persistant dans Firestore — ATTENDU : le gate de consentement
+    // mineur en dépend (birthDate), donc on ne le laisse pas en fire-and-forget.
+    try {
+      await createUserProfile(user.uid, { prenom, email, birthDate, level });
+    } catch { /* best-effort : le profil sera recréé au besoin */ }
     // Forcer le re-render avec le displayName mis à jour
     setCurrentUser({ ...auth.currentUser });
     // Niveau scolaire stocké aussi en localStorage (cache lu par le reste de l'app)
@@ -117,12 +122,14 @@ export function AuthProvider({ children }) {
       await reauthenticateWithCredential(user, cred);
     }
     const uid = user.uid;
-    // Supprimer les données Firestore (lessons + revisions)
+    // Supprimer les données Firestore (lessons + revisions + consentement parental)
     try {
       const lessonsSnap = await getDocs(collection(db, 'users', uid, 'lessons'));
       await Promise.all(lessonsSnap.docs.map(d => deleteDoc(d.ref)));
       const revisionsSnap = await getDocs(collection(db, 'users', uid, 'revisions'));
       await Promise.all(revisionsSnap.docs.map(d => deleteDoc(d.ref)));
+      // Consentement parental (email du parent) — suppression complète (RGPD art. 17)
+      await deleteDoc(doc(db, 'users', uid, 'parentalConsent', 'consent')).catch(() => {});
       await deleteDoc(doc(db, 'users', uid));
     } catch (e) { console.warn('[Réviz] Firestore cleanup error', e); }
     // Supprimer les données localStorage
@@ -147,7 +154,12 @@ export function AuthProvider({ children }) {
     if (!currentUser) return null;
     const uid = currentUser.uid;
     const stored = localStorage.getItem(`reviz-level-${uid}`);
-    if (stored) return parseLevel(stored);
+    if (stored) {
+      const parsed = parseLevel(stored);
+      // Migration : le cycle "supérieur" n'est plus supporté → force re-sélection
+      if (parsed?.cycle === 'superieur') return null;
+      return parsed;
+    }
     const legacy = localStorage.getItem(`reviz-classe-${uid}`);
     const migrated = migrateLegacyClasse(legacy);
     if (migrated) {
@@ -170,6 +182,44 @@ export function AuthProvider({ children }) {
     return level?.classe ?? '';
   }
 
+  // Calcule l'état du gate (consentement mineur + premium) depuis le profil Firestore.
+  async function loadGateState(user) {
+    if (!user) {
+      setConsentBlocked(false);
+      setNeedsProfileSetup(false);
+      setIsPremium(false);
+      setPremiumStatus(false);
+      return;
+    }
+    let profile = null;
+    try {
+      const snap = await getDoc(doc(db, 'users', user.uid));
+      profile = snap.exists() ? snap.data() : null;
+    } catch { /* lecture impossible → on n'élève pas le blocage (fail-open UX) */ }
+
+    // Compte Google sans profil complété (pas de date de naissance) → doit finir l'inscription.
+    const isGoogle = user.providerData?.some(p => p.providerId === 'google.com');
+    setNeedsProfileSetup(!!isGoogle && !profile?.birthDate);
+
+    const premium = profile?.plan === 'premium';
+    setIsPremium(premium);
+    setPremiumStatus(premium);
+
+    let approved = false;
+    try {
+      const c = await getDoc(doc(db, 'users', user.uid, 'parentalConsent', 'consent'));
+      approved = c.exists() && c.data()?.status === 'approved';
+    } catch { /* idem */ }
+
+    // Mineur <15 ans non approuvé → accès bloqué (que le doc soit absent OU en attente).
+    setConsentBlocked(isUnder15(profile?.birthDate) && !approved);
+  }
+
+  // Re-vérifie le gate pour l'utilisateur courant (après signup, retour de consentement…).
+  function refreshGate() {
+    if (auth.currentUser) return loadGateState(auth.currentUser);
+  }
+
   // --- Écoute l'état de connexion Firebase ---
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, async user => {
@@ -177,37 +227,10 @@ export function AuthProvider({ children }) {
       setRevisionUser(user?.uid ?? null);
       setSrsUser(user?.uid ?? null);
       setChallengeUser(user?.uid ?? null);
-      setBrevetUser(user?.uid ?? null);
       setScanLimitUser(user?.uid ?? null);
       setCurrentUser(user);
 
-      // Vérifier le consentement parental pour les <15 ans
-      if (user) {
-        try {
-          const consentDoc = await getDoc(
-            doc(db, 'users', user.uid, 'parentalConsent', 'consent')
-          );
-          setConsentPending(consentDoc.exists() && consentDoc.data()?.status === 'pending');
-        } catch {
-          setConsentPending(false);
-        }
-
-        // Vérifier le statut premium
-        try {
-          const userDoc = await getDoc(doc(db, 'users', user.uid));
-          const premium = userDoc.exists() && userDoc.data()?.plan === 'premium';
-          setIsPremium(premium);
-          setPremiumStatus(premium);
-        } catch {
-          setIsPremium(false);
-          setPremiumStatus(false);
-        }
-      } else {
-        setConsentPending(false);
-        setIsPremium(false);
-        setPremiumStatus(false);
-      }
-
+      await loadGateState(user);
       setLoading(false);
     });
     return unsub;
@@ -229,9 +252,11 @@ export function AuthProvider({ children }) {
   const value = {
     currentUser,
     loading,
-    consentPending,
+    consentBlocked,
+    needsProfileSetup,
     isPremium,
     refreshPremium,
+    refreshGate,
     signup,
     login,
     loginWithGoogle,

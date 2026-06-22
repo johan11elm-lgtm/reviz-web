@@ -5,7 +5,8 @@
 // -------------------------------------------------------
 
 import { auth } from './firebaseConfig.js'
-import { MODEL, BRANCH_COLORS, buildSystemPrompt } from '../utils/aiPrompts.js'
+import { MODEL, BRANCH_COLORS, buildSystemPrompt, buildLessonUserMessage, LESSON_IMAGE_INSTRUCTION } from '../utils/aiPrompts.js'
+import { downscaleDataUrl } from '../utils/downscaleImage.js'
 
 const API_URL   = 'https://api.anthropic.com/v1/messages'
 const USE_PROXY = !import.meta.env.VITE_ANTHROPIC_API_KEY ||
@@ -73,7 +74,7 @@ async function _readStream(response, onProgress) {
   return _parseResult(raw)
 }
 
-function _parseResult(raw) {
+export function _parseResult(raw) {
   let parsed
   try {
     // 1. Essaie le JSON brut
@@ -90,9 +91,47 @@ function _parseResult(raw) {
   } catch {
     throw new Error('INVALID_JSON')
   }
+
+  if (!parsed || typeof parsed !== 'object') throw new Error('INVALID_JSON')
+
+  // Refus de sûreté renvoyé par le modèle (contenu non scolaire / inapproprié).
+  if (typeof parsed.error === 'string') {
+    if (parsed.error === 'NON_SCOLAIRE') throw new Error('NON_SCOLAIRE')
+    throw new Error('INVALID_JSON')
+  }
+
+  // Présence des blocs principaux
   if (!parsed.metadata || !parsed.flashcards || !parsed.quiz || !parsed.resume || !parsed.mindmap) {
     throw new Error('INVALID_JSON')
   }
+
+  // Flashcards : tableau non vide d'items { front, back } texte
+  if (!Array.isArray(parsed.flashcards) || parsed.flashcards.length === 0 ||
+      !parsed.flashcards.every(c => c && typeof c.front === 'string' && typeof c.back === 'string')) {
+    throw new Error('INVALID_JSON')
+  }
+
+  // Quiz : tableau non vide ; chaque item a question + 2 choix minimum +
+  // un index `correct` valide (coercition string→number, corrige "1" vs 1).
+  if (!Array.isArray(parsed.quiz) || parsed.quiz.length === 0) throw new Error('INVALID_JSON')
+  parsed.quiz = parsed.quiz.map(q => {
+    if (!q || typeof q.question !== 'string' || !Array.isArray(q.choices) || q.choices.length < 2) {
+      throw new Error('INVALID_JSON')
+    }
+    const correct = Number(q.correct)
+    if (!Number.isInteger(correct) || correct < 0 || correct >= q.choices.length) {
+      throw new Error('INVALID_JSON')
+    }
+    return { ...q, correct }
+  })
+
+  // Résumé : sections / keyPoints / keyTerms doivent être des tableaux (sinon crash UI)
+  const r = parsed.resume
+  if (!r || !Array.isArray(r.keyPoints) || !Array.isArray(r.sections) || !Array.isArray(r.keyTerms)) {
+    throw new Error('INVALID_JSON')
+  }
+
+  // Carte mentale
   if (!Array.isArray(parsed.mindmap.branches) || parsed.mindmap.branches.length === 0) {
     throw new Error('INVALID_JSON')
   }
@@ -182,7 +221,7 @@ export async function analyseLesson(text, onProgress, level) {
         max_tokens: 8192,
         stream: typeof onProgress === 'function',
         system: buildSystemPrompt(level),
-        messages: [{ role: 'user', content: `Voici la leçon à analyser :\n\n${text}` }],
+        messages: [{ role: 'user', content: buildLessonUserMessage(text) }],
       }),
       signal: controller.signal,
     })
@@ -208,8 +247,10 @@ export async function analyseLesson(text, onProgress, level) {
 export async function analyseImage(imageDataUrl, onProgress, level) {
   if (!level?.cycle) throw new Error('MISSING_LEVEL')
 
+  // Réduire l'image avant envoi (poids du payload serverless + coût vision)
+  const downscaled = await downscaleDataUrl(imageDataUrl)
   // Extraire le base64 pur et le media type depuis le data URL
-  const match = imageDataUrl.match(/^data:(image\/\w+);base64,(.+)$/)
+  const match = downscaled.match(/^data:(image\/\w+);base64,(.+)$/)
   if (!match) throw new Error('INVALID_IMAGE')
   const [, mediaType, imageData] = match
 
@@ -241,7 +282,7 @@ export async function analyseImage(imageDataUrl, onProgress, level) {
             role: 'user',
             content: [
               { type: 'image', source: { type: 'base64', media_type: mediaType, data: imageData } },
-              { type: 'text',  text: 'Voici la photo de la leçon à analyser. Lis le texte visible sur la photo et génère le contenu de révision.' },
+              { type: 'text',  text: LESSON_IMAGE_INSTRUCTION },
             ],
           },
         ],

@@ -5,10 +5,10 @@ import {
   CYCLES,
   CLASSES_BY_CYCLE,
   SPECIALITES_LYCEE,
-  FILIERES_SUP,
   needsSpecialites,
-  needsFiliere,
+  isUnder15,
 } from '../utils/levels';
+import { sendParentalConsent, consentErrorMessage } from '../services/consentService';
 import './Inscription.css';
 
 function firebaseErrorFr(code) {
@@ -20,37 +20,28 @@ function firebaseErrorFr(code) {
   }
 }
 
-function isUnder15(dateStr) {
-  if (!dateStr) return false;
-  const birth = new Date(dateStr);
-  const today = new Date();
-  let age = today.getFullYear() - birth.getFullYear();
-  const m = today.getMonth() - birth.getMonth();
-  if (m < 0 || (m === 0 && today.getDate() < birth.getDate())) age--;
-  return age < 15;
-}
+// isUnder15 est désormais importé depuis ../utils/levels (source unique).
 
 export default function Inscription() {
   const [prenom, setPrenom]               = useState('');
   const [birthDate, setBirthDate]         = useState('');
-  const [level, setLevel]                 = useState({ cycle: null, classe: null, specialites: [], filiere: null });
+  const [level, setLevel]                 = useState({ cycle: null, classe: null, specialites: [] });
   const [email, setEmail]                 = useState('');
   const [password, setPassword]           = useState('');
   const [acceptCgu, setAcceptCgu]         = useState(false);
   const [parentEmail, setParentEmail]     = useState('');
-  const [createdUid, setCreatedUid]       = useState(null);
   const [error, setError]                 = useState('');
   const [loading, setLoading]             = useState(false);
   const [stepIdx, setStepIdx]             = useState(0);
   const [animDir, setAnimDir]             = useState('in');
 
-  const { signup, loginWithGoogle }       = useAuth();
+  const { signup, loginWithGoogle, refreshGate } = useAuth();
   const navigate                          = useNavigate();
 
   // Construction dynamique de la liste des étapes en fonction du profil.
   const steps = useMemo(() => {
     const base = ['prenom', 'birthdate', 'cycle', 'classe'];
-    if (needsSpecialites(level) || needsFiliere(level)) base.push('detail');
+    if (needsSpecialites(level)) base.push('detail');
     base.push('account');
     if (isUnder15(birthDate)) base.push('parent');
     return base;
@@ -100,7 +91,6 @@ export default function Inscription() {
         if (!level.classe) return 'Choisis ta classe.';
         return null;
       case 'detail':
-        if (needsFiliere(level) && !level.filiere) return 'Choisis ta filière.';
         // Spés optionnelles : on n'oblige pas un minimum (l'utilisateur peut être en 1ère sans choix défini)
         return null;
       case 'account':
@@ -126,9 +116,9 @@ export default function Inscription() {
     if (stepId === 'account') {
       setLoading(true);
       try {
-        const user = await signup(prenom.trim(), email.trim(), password, level, birthDate);
+        await signup(prenom.trim(), email.trim(), password, level, birthDate);
+        await refreshGate?.();
         if (isUnder15(birthDate)) {
-          setCreatedUid(user.uid);
           goNext();
         } else {
           navigate('/verify-email', { replace: true });
@@ -145,14 +135,10 @@ export default function Inscription() {
     if (stepId === 'parent') {
       setLoading(true);
       try {
-        await fetch('/api/send-parental-consent', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ uid: createdUid, parentEmail: parentEmail.trim(), childName: prenom }),
-        });
+        await sendParentalConsent(parentEmail.trim(), prenom);
         navigate('/consent-pending', { replace: true, state: { parentEmail: parentEmail.trim() } });
-      } catch {
-        setError('Impossible d\'envoyer l\'email. Réessaie.');
+      } catch (err) {
+        setError(consentErrorMessage(err.message));
       } finally {
         setLoading(false);
       }
@@ -204,10 +190,6 @@ export default function Inscription() {
     });
   }
 
-  function setFiliere(filiere) {
-    setLevel(l => ({ ...l, filiere }));
-  }
-
   const isLast = stepIdx === steps.length - 1;
   const primaryLabel = (() => {
     if (loading && stepId === 'account') return 'Création...';
@@ -220,7 +202,7 @@ export default function Inscription() {
   return (
     <div className="app">
       <div className="auth-header signup-header">
-        <span className="auth-back" onClick={goPrev} role="button" aria-label="Retour">←</span>
+        <button type="button" className="auth-back" onClick={goPrev} aria-label="Retour">←</button>
         <div className="signup-progress">
           <div className="signup-progress-bar" style={{ width: `${((progressIdx + 1) / totalVisible) * 100}%` }} />
         </div>
@@ -323,32 +305,14 @@ export default function Inscription() {
           </>
         )}
 
-        {stepId === 'detail' && needsFiliere(level) && (
-          <>
-            <h1 className="signup-question">Ta filière ?</h1>
-            <p className="signup-hint">Pour mieux cibler tes révisions.</p>
-            <div className="signup-chips">
-              {FILIERES_SUP.map(f => (
-                <button
-                  type="button"
-                  key={f}
-                  className={`signup-chip${level.filiere === f ? ' active' : ''}`}
-                  onClick={() => setFiliere(f)}
-                >
-                  {f}
-                </button>
-              ))}
-            </div>
-          </>
-        )}
-
         {stepId === 'account' && (
           <>
             <h1 className="signup-question">Crée ton compte</h1>
             <p className="signup-hint">Dernière étape, {prenom || 'on y est presque'} ✨</p>
             <div className="auth-field">
-              <label className="auth-label">Email</label>
+              <label className="auth-label" htmlFor="signup-email">Email</label>
               <input
+                id="signup-email"
                 className="auth-input"
                 type="email"
                 placeholder="lucas@exemple.com"
@@ -358,8 +322,9 @@ export default function Inscription() {
               />
             </div>
             <div className="auth-field">
-              <label className="auth-label">Mot de passe</label>
+              <label className="auth-label" htmlFor="signup-password">Mot de passe</label>
               <input
+                id="signup-password"
                 className="auth-input"
                 type="password"
                 placeholder="6 caractères minimum"
@@ -397,8 +362,9 @@ export default function Inscription() {
               </p>
             </div>
             <div className="auth-field">
-              <label className="auth-label">Email de ton parent</label>
+              <label className="auth-label" htmlFor="signup-parent-email">Email de ton parent</label>
               <input
+                id="signup-parent-email"
                 className="auth-input"
                 type="email"
                 placeholder="parent@exemple.com"

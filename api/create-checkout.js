@@ -2,6 +2,7 @@
 // Réviz — Crée une session Stripe Checkout pour Réviz+
 // -------------------------------------------------------
 import Stripe from 'stripe'
+import { getAuthAdmin } from './_firebaseAdmin.js'
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
 
@@ -11,8 +12,19 @@ const BASE_URL = 'https://reviz-gamma.vercel.app'
 export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).end()
 
-  const { uid, email } = req.body ?? {}
-  if (!uid) return res.status(400).json({ error: 'Missing uid' })
+  // Authentification obligatoire : l'uid/email viennent du token vérifié,
+  // JAMAIS du body (sinon on peut créer une session sur le compte d'autrui).
+  const { idToken } = req.body ?? {}
+  if (!idToken) return res.status(401).json({ error: 'Unauthorized' })
+
+  let uid, email
+  try {
+    const decoded = await getAuthAdmin().verifyIdToken(idToken)
+    uid = decoded.uid
+    email = decoded.email
+  } catch {
+    return res.status(401).json({ error: 'Unauthorized' })
+  }
 
   try {
     const session = await stripe.checkout.sessions.create({

@@ -1,3 +1,4 @@
+/// <reference types="vitest/config" />
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import { sentryVitePlugin } from '@sentry/vite-plugin'
@@ -26,5 +27,12 @@ export default defineConfig({
         },
       },
     },
+  },
+  test: {
+    environment: 'happy-dom',
+    globals: true,
+    setupFiles: ['./src/test/setup.js'],
+    css: false,
+    exclude: ['node_modules', 'dist', 'e2e', 'ios'],
   },
 })

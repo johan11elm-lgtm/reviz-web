@@ -4,15 +4,13 @@
 // -------------------------------------------------------
 
 export const CYCLES = [
-  { id: 'college',   label: 'Collège',   emoji: '🎒', desc: '6ème à 3ème'        },
-  { id: 'lycee',     label: 'Lycée',     emoji: '🎓', desc: 'Seconde à Terminale' },
-  { id: 'superieur', label: 'Supérieur', emoji: '📚', desc: 'Licence et au-delà' },
+  { id: 'college', label: 'Collège', emoji: '🎒', desc: '6ème à 3ème'        },
+  { id: 'lycee',   label: 'Lycée',   emoji: '🎓', desc: 'Seconde à Terminale' },
 ];
 
 export const CLASSES_BY_CYCLE = {
-  college:   ['6ème', '5ème', '4ème', '3ème'],
-  lycee:     ['2nde', '1ère', 'Terminale'],
-  superieur: ['L1', 'L2', 'L3', 'Autre'],
+  college: ['6ème', '5ème', '4ème', '3ème'],
+  lycee:   ['2nde', '1ère', 'Terminale'],
 };
 
 export const SPECIALITES_LYCEE = [
@@ -20,13 +18,14 @@ export const SPECIALITES_LYCEE = [
   'Physique-Chimie', 'HLP', 'LLCE', 'Arts', 'Philosophie',
 ];
 
-export const FILIERES_SUP = [
-  'Droit', 'Médecine/PASS', 'SHS', 'Sciences',
-  'Éco-gestion', 'Lettres', 'STAPS', 'Autre',
-];
-
-// Anciennes valeurs textuelles → nouveau modèle
-const LEGACY_COLLEGE = ['6ème', '5ème', '4ème', '3ème', '6e', '5e', '4e', '3e'];
+// Anciennes valeurs textuelles → classe canonique (table explicite : le
+// remplacement par regex corrompait les formes déjà accentuées, ex. '3ème'→'3èmème').
+const LEGACY_CLASSE_MAP = {
+  '6e': '6ème', '6ème': '6ème',
+  '5e': '5ème', '5ème': '5ème',
+  '4e': '4ème', '4ème': '4ème',
+  '3e': '3ème', '3ème': '3ème',
+};
 
 export function parseLevel(stored) {
   if (!stored) return null;
@@ -46,12 +45,8 @@ export function serializeLevel(level) {
 
 export function migrateLegacyClasse(str) {
   if (!str || typeof str !== 'string') return null;
-  const normalized = str.trim();
-  if (LEGACY_COLLEGE.includes(normalized)) {
-    const canonical = normalized.replace('e', 'ème').replace('èmeme', 'ème');
-    return { cycle: 'college', classe: canonical };
-  }
-  return null;
+  const canonical = LEGACY_CLASSE_MAP[str.trim()];
+  return canonical ? { cycle: 'college', classe: canonical } : null;
 }
 
 export function isCollege(level) {
@@ -63,14 +58,11 @@ export function requiresParentalConsentCheck(level) {
   return isCollege(level);
 }
 
-// Étiquette d'affichage compacte : "3ème", "Terminale · Maths, NSI", "L2 Droit"
+// Étiquette d'affichage compacte : "3ème", "Terminale · Maths, NSI"
 export function formatLevelLabel(level) {
   if (!level?.classe) return '';
   if (level.cycle === 'lycee' && level.specialites?.length) {
     return `${level.classe} · ${level.specialites.join(', ')}`;
-  }
-  if (level.cycle === 'superieur' && level.filiere) {
-    return `${level.classe} ${level.filiere}`;
   }
   return level.classe;
 }
@@ -80,6 +72,15 @@ export function needsSpecialites(level) {
   return level?.cycle === 'lycee' && ['1ère', 'Terminale'].includes(level.classe);
 }
 
-export function needsFiliere(level) {
-  return level?.cycle === 'superieur' && !!level.classe;
+// Vrai si la date de naissance correspond à un âge < 15 ans (seuil RGPD France,
+// art. 8 RGPD / art. 45 LIL : consentement parental requis sous 15 ans).
+export function isUnder15(dateStr) {
+  if (!dateStr) return false;
+  const birth = new Date(dateStr);
+  if (isNaN(birth.getTime())) return false;
+  const today = new Date();
+  let age = today.getFullYear() - birth.getFullYear();
+  const m = today.getMonth() - birth.getMonth();
+  if (m < 0 || (m === 0 && today.getDate() < birth.getDate())) age--;
+  return age < 15;
 }

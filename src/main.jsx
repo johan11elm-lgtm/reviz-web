@@ -35,7 +35,16 @@ const loadMonitoring = () => {
     });
   }
 
-  if (import.meta.env.VITE_POSTHOG_KEY) {
+  // Analytics PostHog — DÉSACTIVÉ par défaut (public mineur, RGPD/CNIL & ePrivacy).
+  // On n'initialise RIEN tant qu'un consentement explicite n'a pas été donné, pour
+  // rester cohérent avec Legal.jsx (« aucun cookie de tracking »).
+  // Réactivation future : une bannière de consentement pose
+  // localStorage 'reviz-analytics-consent' = 'granted', puis ce bloc s'exécute.
+  const analyticsConsent = (() => {
+    try { return localStorage.getItem('reviz-analytics-consent') === 'granted'; }
+    catch { return false; }
+  })();
+  if (analyticsConsent && import.meta.env.VITE_POSTHOG_KEY) {
     import('posthog-js').then(({ default: posthog }) => {
       posthog.init(import.meta.env.VITE_POSTHOG_KEY, {
         api_host: 'https://eu.i.posthog.com',
