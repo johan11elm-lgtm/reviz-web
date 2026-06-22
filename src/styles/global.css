@@ -195,6 +195,34 @@ input, textarea {
   font-family: 'Geist', 'Inter', system-ui, sans-serif;
 }
 
+/* ─── Focus clavier visible (WCAG 2.4.7) ───────────────────────────
+ * Indicateur global pour la navigation au clavier (CTA, liens, nav,
+ * cartes, champs). Ne JAMAIS retirer un outline sans le remplacer. */
+:focus-visible {
+  outline: 2px solid var(--accent-violet);
+  outline-offset: 2px;
+}
+/* Sur fonds violets/sombres, un contour clair pour rester visible. */
+.rv-btn-cta:not(.rv-btn-cta--ghost):focus-visible,
+.auth-btn:focus-visible,
+.drawer-panel-btn:focus-visible,
+.ugs-cta:focus-visible {
+  outline-color: #FFFFFF;
+  outline-offset: 3px;
+}
+
+/* ─── Mouvement réduit (prefers-reduced-motion) ────────────────────
+ * Neutralise animations infinies (scan, shimmer, spinner) et
+ * transitions pour les élèves sensibles (vertiges, migraines, TDAH/TSA). */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
 /* ─── App shell ────────────────────────────────────────────────── */
 .app {
   width: 480px;

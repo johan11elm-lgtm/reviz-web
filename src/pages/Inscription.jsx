@@ -8,6 +8,7 @@ import {
   needsSpecialites,
   isUnder15,
 } from '../utils/levels';
+import { sendParentalConsent, consentErrorMessage } from '../services/consentService';
 import './Inscription.css';
 
 function firebaseErrorFr(code) {
@@ -29,7 +30,6 @@ export default function Inscription() {
   const [password, setPassword]           = useState('');
   const [acceptCgu, setAcceptCgu]         = useState(false);
   const [parentEmail, setParentEmail]     = useState('');
-  const [createdUid, setCreatedUid]       = useState(null);
   const [error, setError]                 = useState('');
   const [loading, setLoading]             = useState(false);
   const [stepIdx, setStepIdx]             = useState(0);
@@ -116,10 +116,9 @@ export default function Inscription() {
     if (stepId === 'account') {
       setLoading(true);
       try {
-        const user = await signup(prenom.trim(), email.trim(), password, level, birthDate);
+        await signup(prenom.trim(), email.trim(), password, level, birthDate);
         await refreshGate?.();
         if (isUnder15(birthDate)) {
-          setCreatedUid(user.uid);
           goNext();
         } else {
           navigate('/verify-email', { replace: true });
@@ -136,14 +135,10 @@ export default function Inscription() {
     if (stepId === 'parent') {
       setLoading(true);
       try {
-        await fetch('/api/send-parental-consent', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ uid: createdUid, parentEmail: parentEmail.trim(), childName: prenom }),
-        });
+        await sendParentalConsent(parentEmail.trim(), prenom);
         navigate('/consent-pending', { replace: true, state: { parentEmail: parentEmail.trim() } });
-      } catch {
-        setError('Impossible d\'envoyer l\'email. Réessaie.');
+      } catch (err) {
+        setError(consentErrorMessage(err.message));
       } finally {
         setLoading(false);
       }
@@ -207,7 +202,7 @@ export default function Inscription() {
   return (
     <div className="app">
       <div className="auth-header signup-header">
-        <span className="auth-back" onClick={goPrev} role="button" aria-label="Retour">←</span>
+        <button type="button" className="auth-back" onClick={goPrev} aria-label="Retour">←</button>
         <div className="signup-progress">
           <div className="signup-progress-bar" style={{ width: `${((progressIdx + 1) / totalVisible) * 100}%` }} />
         </div>
@@ -315,8 +310,9 @@ export default function Inscription() {
             <h1 className="signup-question">Crée ton compte</h1>
             <p className="signup-hint">Dernière étape, {prenom || 'on y est presque'} ✨</p>
             <div className="auth-field">
-              <label className="auth-label">Email</label>
+              <label className="auth-label" htmlFor="signup-email">Email</label>
               <input
+                id="signup-email"
                 className="auth-input"
                 type="email"
                 placeholder="lucas@exemple.com"
@@ -326,8 +322,9 @@ export default function Inscription() {
               />
             </div>
             <div className="auth-field">
-              <label className="auth-label">Mot de passe</label>
+              <label className="auth-label" htmlFor="signup-password">Mot de passe</label>
               <input
+                id="signup-password"
                 className="auth-input"
                 type="password"
                 placeholder="6 caractères minimum"
@@ -365,8 +362,9 @@ export default function Inscription() {
               </p>
             </div>
             <div className="auth-field">
-              <label className="auth-label">Email de ton parent</label>
+              <label className="auth-label" htmlFor="signup-parent-email">Email de ton parent</label>
               <input
+                id="signup-parent-email"
                 className="auth-input"
                 type="email"
                 placeholder="parent@exemple.com"

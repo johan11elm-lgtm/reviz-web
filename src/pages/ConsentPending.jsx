@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { sendParentalConsent, consentErrorMessage } from '../services/consentService';
 import './Inscription.css';
 
 export default function ConsentPending() {
@@ -24,14 +25,10 @@ export default function ConsentPending() {
     if (!/^\S+@\S+\.\S+$/.test(parentEmail.trim())) { setMsg('Adresse email invalide.'); return; }
     setLoading(true); setMsg('');
     try {
-      await fetch('/api/send-parental-consent', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ uid: currentUser?.uid, parentEmail: parentEmail.trim(), childName: prenom }),
-      });
+      await sendParentalConsent(parentEmail.trim(), prenom);
       setSent(true);
-    } catch {
-      setMsg('Impossible d\'envoyer l\'email. Réessaie.');
+    } catch (err) {
+      setMsg(consentErrorMessage(err.message));
     } finally { setLoading(false); }
   }
 

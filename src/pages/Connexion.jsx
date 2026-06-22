@@ -74,8 +74,9 @@ export default function Connexion() {
       {/* Formulaire */}
       <form className="auth-content" onSubmit={handleSubmit} noValidate>
         <div className="auth-field">
-          <label className="auth-label">Email</label>
+          <label className="auth-label" htmlFor="connexion-email">Email</label>
           <input
+            id="connexion-email"
             className="auth-input"
             type="email"
             placeholder="lucas@exemple.com"
@@ -87,8 +88,9 @@ export default function Connexion() {
         </div>
 
         <div className="auth-field">
-          <label className="auth-label">Mot de passe</label>
+          <label className="auth-label" htmlFor="connexion-password">Mot de passe</label>
           <input
+            id="connexion-password"
             className="auth-input"
             type="password"
             placeholder="••••••••"

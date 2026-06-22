@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
+import { useModalA11y } from '../hooks/useModalA11y';
 import './PremiumModal.css';
 
 /**
@@ -8,6 +9,7 @@ import './PremiumModal.css';
 export function PremiumModal({ onClose, used = 5, limit = 5 }) {
   const { currentUser } = useAuth();
   const [loading, setLoading] = useState(false);
+  const ref = useModalA11y(onClose);
 
   const now = new Date();
   const day = now.getDay();
@@ -41,9 +43,16 @@ export function PremiumModal({ onClose, used = 5, limit = 5 }) {
 
   return (
     <div className="premium-overlay" onClick={onClose}>
-      <div className="premium-card" onClick={e => e.stopPropagation()}>
-        <span className="premium-emoji">✨</span>
-        <p className="premium-title">Tu as atteint ta limite</p>
+      <div
+        className="premium-card"
+        ref={ref}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="premium-modal-title"
+        onClick={e => e.stopPropagation()}
+      >
+        <span className="premium-emoji" aria-hidden="true">✨</span>
+        <p className="premium-title" id="premium-modal-title">Tu as atteint ta limite</p>
         <p className="premium-sub">
           Tes <strong>{limit} scans gratuits</strong> de la semaine sont utilisés.<br />
           Nouveaux scans disponibles <strong>{resetLabel}</strong>.

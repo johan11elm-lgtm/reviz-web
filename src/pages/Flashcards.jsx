@@ -25,7 +25,10 @@ function getFlashcards() {
 }
 
 function getLessonId() {
-  try { return JSON.parse(localStorage.getItem('reviz-ai-data') || 'null')?.lessonId ?? 'default' } catch { return 'default' }
+  // Source de vérité partagée avec saveLesson/restoreLesson (historyService) et
+  // countDueCards côté Home/Cours. NE PAS lire reviz-ai-data.lessonId : ce champ
+  // n'est jamais écrit → toutes les leçons collisionnaient sous la clé 'default'.
+  return localStorage.getItem('reviz-current-lesson-id') ?? 'default'
 }
 
 export default function Flashcards() {

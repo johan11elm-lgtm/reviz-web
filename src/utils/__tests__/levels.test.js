@@ -28,18 +28,27 @@ describe('levels utilities', () => {
   })
 
   describe('migrateLegacyClasse', () => {
-    it('migrates short form "3e" to "3ème"', () => {
+    it('migrates short forms "6e"…"3e" to their canonical class', () => {
+      expect(migrateLegacyClasse('6e')).toEqual({ cycle: 'college', classe: '6ème' })
+      expect(migrateLegacyClasse('5e')).toEqual({ cycle: 'college', classe: '5ème' })
+      expect(migrateLegacyClasse('4e')).toEqual({ cycle: 'college', classe: '4ème' })
       expect(migrateLegacyClasse('3e')).toEqual({ cycle: 'college', classe: '3ème' })
+    })
+
+    it('keeps already-canonical forms intact (régression "3ème" → "3èmème")', () => {
+      for (const c of ['6ème', '5ème', '4ème', '3ème']) {
+        expect(migrateLegacyClasse(c)).toEqual({ cycle: 'college', classe: c })
+      }
+    })
+
+    it('trims surrounding whitespace', () => {
+      expect(migrateLegacyClasse('  3ème ')).toEqual({ cycle: 'college', classe: '3ème' })
     })
 
     it('returns null for unrecognized strings', () => {
       expect(migrateLegacyClasse('Master 2')).toBeNull()
       expect(migrateLegacyClasse(null)).toBeNull()
     })
-
-    // BUG connu : '3ème' en entrée produit '3èmème' à cause d'un replace('e', 'ème')
-    // mal ciblé sur l'accent. À fixer dans un PR séparé.
-    it.todo('migrates already-correct "3ème" without doubling the suffix')
   })
 
   describe('isCollege', () => {

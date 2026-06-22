@@ -1,4 +1,4 @@
-import { buildSystemPrompt, MODEL } from './_systemPrompt.js'
+import { buildSystemPrompt, buildLessonUserMessage, MODEL } from './_systemPrompt.js'
 import { getDb, getAuthAdmin } from './_firebaseAdmin.js'
 import { consumeQuota, refundQuota, FREE_LIMIT } from './_quota.js'
 
@@ -54,7 +54,7 @@ export default async function handler(req, res) {
         max_tokens: 8192,
         stream: false,
         system: buildSystemPrompt(level),
-        messages: [{ role: 'user', content: `Voici la leçon à analyser :\n\n${text}` }],
+        messages: [{ role: 'user', content: buildLessonUserMessage(text) }],
       }),
     })
   } catch {
@@ -71,6 +71,11 @@ export default async function handler(req, res) {
 
   const result = await anthropicResp.json()
   const text_content = result.content?.[0]?.text ?? ''
+
+  // Refus de sûreté (contenu non scolaire) : on ne facture pas un scan à l'élève.
+  if (consumed && /"error"\s*:\s*"NON_SCOLAIRE"/.test(text_content)) {
+    await refundQuota({ db, uid }).catch(() => {})
+  }
 
   res.setHeader('Content-Type', 'text/plain; charset=utf-8')
   return res.status(200).send(text_content)

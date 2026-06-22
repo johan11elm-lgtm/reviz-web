@@ -1,4 +1,4 @@
-import { buildSystemPrompt, MODEL } from './_systemPrompt.js'
+import { buildSystemPrompt, LESSON_IMAGE_INSTRUCTION, MODEL } from './_systemPrompt.js'
 import { getDb, getAuthAdmin } from './_firebaseAdmin.js'
 import { consumeQuota, refundQuota, FREE_LIMIT } from './_quota.js'
 
@@ -60,7 +60,7 @@ export default async function handler(req, res) {
             role: 'user',
             content: [
               { type: 'image', source: { type: 'base64', media_type: mediaType, data: imageData } },
-              { type: 'text', text: 'Voici la photo de la leçon à analyser. Lis le texte visible sur la photo et génère le contenu de révision.' },
+              { type: 'text', text: LESSON_IMAGE_INSTRUCTION },
             ],
           },
         ],
@@ -80,6 +80,11 @@ export default async function handler(req, res) {
 
   const result = await anthropicResp.json()
   const text_content = result.content?.[0]?.text ?? ''
+
+  // Refus de sûreté (contenu non scolaire) : on ne facture pas un scan à l'élève.
+  if (consumed && /"error"\s*:\s*"NON_SCOLAIRE"/.test(text_content)) {
+    await refundQuota({ db, uid }).catch(() => {})
+  }
 
   res.setHeader('Content-Type', 'text/plain; charset=utf-8')
   return res.status(200).send(text_content)
