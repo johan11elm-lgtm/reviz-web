@@ -3,16 +3,9 @@ import { Mascot } from '../components/Mascot';
 import './Welcome.css';
 
 const STEPS = [
-  { icon: '📸', tone: 'orange', num: '1', title: 'Prends en photo', desc: 'Ta leçon, même mal écrite, même en bazar. Ou colle ton texte.' },
-  { icon: '🤖', tone: 'violet', num: '2', title: "L'IA fait le tri", desc: "Flashcards, quiz, résumé et carte mentale prêts en quelques secondes." },
-  { icon: '🏆', tone: 'green',  num: '3', title: 'Et tu révises',    desc: '10 minutes dans le bus suffisent. Et là, ça rentre vraiment.' },
-];
-
-const BENEFITS = [
-  { icon: '🌙', tone: 'orange', title: 'Récupère tes soirées', desc: "Plus besoin de tout recopier à la main. Le travail de tri, c'est fait." },
-  { icon: '🎯', tone: 'violet', title: 'Calibré sur ton programme', desc: 'Collège et lycée, matière par matière. Rien d\'inutile, rien à côté.' },
-  { icon: '🧠', tone: 'pink',   title: 'Retiens pour de vrai', desc: 'Les bonnes cartes reviennent au bon moment pour ancrer la mémoire.' },
-  { icon: '🔥', tone: 'green',  title: 'Garde le rythme', desc: 'Séries, niveaux et défis pour t\'y tenir sans avoir à te forcer.' },
+  { icon: '📸', tone: 'orange', num: '1', title: 'Scanne',        desc: 'Photo ou texte de ta leçon — ça suffit.' },
+  { icon: '🤖', tone: 'violet', num: '2', title: "L'IA analyse",  desc: 'Flashcards, quiz, résumé et carte mentale en quelques secondes.' },
+  { icon: '🏆', tone: 'green',  num: '3', title: 'Révise',        desc: 'Retiens vraiment. Progresse. Bats tes records.' },
 ];
 
 const FORMATS = [
@@ -52,11 +45,11 @@ export default function Welcome() {
             />
             <span className="rv-pill rv-pill--orange wlc-badge">✦ Collège · Lycée</span>
             <h1 className="wlc-headline">
-              Ta leçon en photo.<br />Prêt pour le contrôle.
+              Révise mieux.<br />Retiens plus.
             </h1>
             <p className="wlc-sub">
-              Réviz transforme tes cours en flashcards, quiz et résumés
-              en quelques secondes. Tu révises en 10 minutes — pas toute la soirée.
+              L'IA transforme tes leçons en flashcards, quiz et résumés —
+              calibrés pour ton programme de collège ou de lycée.
             </p>
             <div className="wlc-subjects" aria-hidden="true">
               {SUBJECTS.map((e, i) => <span key={i}>{e}</span>)}
@@ -71,7 +64,7 @@ export default function Welcome() {
           {/* ── Comment ça marche ── */}
           <section className="wlc-section">
             <p className="wlc-label">COMMENT ÇA MARCHE</p>
-            <h2 className="wlc-section-title">3 étapes, zéro prise de tête</h2>
+            <h2 className="wlc-section-title">Simple comme bonjour</h2>
             <ul className="wlc-steps">
               {STEPS.map((s) => (
                 <li key={s.num} className="wlc-step">
@@ -90,29 +83,10 @@ export default function Welcome() {
             </ul>
           </section>
 
-          {/* ── Pourquoi Réviz ── */}
-          <section className="wlc-section">
-            <p className="wlc-label">POURQUOI RÉVIZ</p>
-            <h2 className="wlc-section-title">Réviser, sans la galère</h2>
-            <ul className="wlc-steps">
-              {BENEFITS.map((b) => (
-                <li key={b.title} className="wlc-step">
-                  <span className={`rv-icon-square rv-icon-square--xl rv-icon-square--${b.tone}`} aria-hidden="true">
-                    {b.icon}
-                  </span>
-                  <div className="wlc-step-text">
-                    <span className="wlc-step-title">{b.title}</span>
-                    <span className="wlc-step-desc">{b.desc}</span>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </section>
-
           {/* ── 4 formats ── */}
           <section className="wlc-section">
             <p className="wlc-label">LES FORMATS</p>
-            <h2 className="wlc-section-title">4 façons de réviser, 1 seul scan</h2>
+            <h2 className="wlc-section-title">4 outils en 1 scan</h2>
             <div className="wlc-grid">
               {FORMATS.map((f) => (
                 <div key={f.label} className="wlc-grid-item">
@@ -128,9 +102,9 @@ export default function Welcome() {
           {/* ── CTA final ── */}
           <section className="wlc-cta">
             <Mascot pose="fire" size={120} glow animate className="wlc-cta-mascot" />
-            <h2 className="wlc-cta-title">Ton prochain contrôle ?<br />Tu vas le gérer.</h2>
+            <h2 className="wlc-cta-title">Prêt à réviser autrement ?</h2>
             <p className="wlc-cta-sub">
-              Scanne ta première leçon en moins d'une minute. C'est gratuit.
+              Rejoins les élèves qui révisent plus malin avec Réviz.
             </p>
             <Link to="/inscription" className="rv-btn-cta rv-btn-cta--full wlc-cta-btn">
               Créer un compte gratuit
