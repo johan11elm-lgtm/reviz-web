@@ -170,14 +170,17 @@ export default function Progres() {
   const [drawerOpen,   setDrawerOpen]   = useState(false);
   const [allLessons,   setAllLessons]   = useState(() => loadLessons());
   const [allRevisions, setAllRevisions] = useState(() => loadRevisions());
+  const [isSyncing,    setIsSyncing]    = useState(true);
 
   const { currentUser } = useAuth();
   const initiale = currentUser?.displayName?.[0]?.toUpperCase() ?? '?';
   const prenom = currentUser?.displayName?.split(' ')[0] ?? 'toi';
 
   useEffect(() => {
-    syncFromFirestore().then(setAllLessons);
-    syncRevisionsFromFirestore().then(setAllRevisions);
+    Promise.all([
+      syncFromFirestore().then(setAllLessons),
+      syncRevisionsFromFirestore().then(setAllRevisions),
+    ]).finally(() => setIsSyncing(false));
   }, []);
 
   const streak           = computeStreak(allRevisions, 'revisedAt');
@@ -206,6 +209,40 @@ export default function Progres() {
       {initiale}
     </button>
   );
+
+  // « Pas encore synchronisé » ≠ « vraiment vide » : sur un nouvel appareil le
+  // cache local est vide → skeleton plutôt que streak/XP à 0 qui sautent après.
+  if (isSyncing && allLessons.length === 0 && allRevisions.length === 0) {
+    return (
+      <div className="app progres-page">
+        <PageHeader variant="title-only" right={avatarBtn} />
+        <div className="pg-content">
+          <div className="pg-skeleton" role="status" aria-label="Synchronisation de tes progrès…">
+            <div className="rv-skeleton pg-skeleton-hero" aria-hidden="true" />
+            <div className="rv-card rv-card--padded pg-skeleton-card" aria-hidden="true">
+              <div className="rv-skeleton rv-skeleton--icon" />
+              <div className="pg-skeleton-lines">
+                <div className="rv-skeleton rv-skeleton--title" />
+                <div className="rv-skeleton rv-skeleton--text" />
+              </div>
+            </div>
+            <div className="pg-skeleton-grid" aria-hidden="true">
+              {[0, 1, 2].map(i => (
+                <div key={i} className="rv-card pg-skeleton-stat">
+                  <div className="rv-skeleton rv-skeleton--icon" />
+                  <div className="rv-skeleton rv-skeleton--title pg-skeleton-stat-line" />
+                  <div className="rv-skeleton rv-skeleton--text pg-skeleton-stat-line" />
+                </div>
+              ))}
+            </div>
+            <div className="rv-skeleton pg-skeleton-block" aria-hidden="true" />
+          </div>
+        </div>
+        <BottomNav active="progres" />
+        <Drawer isOpen={drawerOpen} onClose={() => setDrawerOpen(false)} />
+      </div>
+    );
+  }
 
   return (
     <div className="app progres-page">

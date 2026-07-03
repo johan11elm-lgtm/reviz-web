@@ -79,6 +79,7 @@
 }
 
 .confirm-btn--delete {
-  background: var(--accent-red);
+  /* variante strong : AA 4.5:1 pour le texte blanc (action destructive) */
+  background: var(--accent-red-strong, var(--accent-red));
   color: #ffffff;
 }

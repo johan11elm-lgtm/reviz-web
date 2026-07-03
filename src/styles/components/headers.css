@@ -56,6 +56,7 @@
   line-height: 1.1;
   color: var(--text-primary);
   margin: 0;
+  overflow-wrap: anywhere; /* titres IA : pas de débordement sur mot long */
 }
 .rv-page-title-sub {
   font-size: 12px;
@@ -81,6 +82,14 @@
   flex-shrink: 0;
   font-family: inherit;
   padding: 0;
+  position: relative;
+}
+/* Zone tactile étendue à 44×44 (WCAG 2.5.5) sans changer le visuel. */
+.rv-bell-btn::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
 }
 @media (hover: hover) and (pointer: fine) {
   .rv-bell-btn:hover { background: var(--bg-hover); }

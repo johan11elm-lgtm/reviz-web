@@ -9,6 +9,7 @@ import { Mascot } from '../components/Mascot';
 import { analyseLesson, analyseImage, popPendingAnalysis } from '../services/aiService';
 import { saveLesson } from '../services/historyService';
 import { PremiumModal } from '../components/PremiumModal';
+import { MissingLessonState } from '../components/MissingLessonState';
 import { getScanStatus } from '../services/scanLimitService';
 import { subjectInfo } from '../utils/subjects';
 import './Analyse.css';
@@ -71,6 +72,7 @@ export default function Analyse() {
   const [lesson, setLesson]           = useState(null);
   const [progress, setProgress]       = useState(0);
   const [showPremium, setShowPremium] = useState(false);
+  const [noLesson, setNoLesson]       = useState(false);
   const navigate   = useNavigate();
   const { currentUser, getUserLevel } = useAuth();
   const initiale   = currentUser?.displayName?.[0]?.toUpperCase() ?? '?';
@@ -92,7 +94,7 @@ export default function Analyse() {
         localStorage.removeItem('reviz-ai-data');
         if (lessonText)  { callApi(lessonText); return; }
         if (capturedImg) { callApiImage(capturedImg); return; }
-        useMockFallback();
+        showNoLesson();
       }
       return;
     }
@@ -105,8 +107,16 @@ export default function Analyse() {
       if (lessonText)  { callApi(lessonText); return; }
       if (capturedImg) { callApiImage(capturedImg); return; }
     }
-    useMockFallback();
+    showNoLesson();
   }, []);
+
+  // Aucune leçon ni scan en cours : état vide honnête en prod — le mock
+  // « Pythagore » (avec badge IA) est réservé au dev.
+  function showNoLesson() {
+    if (import.meta.env.DEV) { useMockFallback(); return; }
+    setNoLesson(true);
+    setIsLoading(false);
+  }
 
   function callApi(text) {
     let lastUpdate = 0;
@@ -159,12 +169,16 @@ export default function Analyse() {
     NETWORK_ERROR:   { title: 'Pas de connexion', sub: 'Vérifie ta connexion internet et réessaie.' },
     TIMEOUT:         { title: 'Ça a pris trop de temps', sub: 'Vérifie ta connexion et réessaie.' },
     UNAUTHORIZED:    { title: 'Reconnecte-toi', sub: 'Ta session a expiré — reconnecte-toi puis réessaie.' },
+    EMAIL_NOT_VERIFIED: { title: 'Confirme ton email d\'abord', sub: 'Pour scanner tes leçons, clique sur le lien qu\'on t\'a envoyé par email. Ça prend 10 secondes, promis !', cta: { label: '📬 Vérifier mon email', to: '/verify-email' } },
+    IMAGE_TOO_LARGE: { title: 'Photo trop lourde', sub: 'Rapproche-toi de ta leçon et reprends la photo, ou recadre-la avant de réessayer.' },
     INVALID_JSON:    { title: 'Oups, ça a coincé', sub: 'Réviz n\'a pas réussi à lire cette leçon. Réessaie de la scanner.' },
     EMPTY_RESPONSE:  { title: 'Oups, ça a coincé', sub: 'Réviz n\'a pas réussi à lire cette leçon. Réessaie de la scanner.' },
     MISSING_API_KEY: { title: 'Oups, ça a coincé', sub: 'Réessaie dans un moment.' },
     INVALID_API_KEY: { title: 'Oups, ça a coincé', sub: 'Réessaie dans un moment.' },
   };
   const errInfo = errorMessages[error] ?? { title: 'Oups, ça a coincé', sub: 'Vérifie ta connexion et réessaie.' };
+
+  if (noLesson) return <MissingLessonState title="Ta leçon" />;
 
   const avatarBtn = (
     <button
@@ -232,6 +246,15 @@ export default function Analyse() {
           <p className="analyse-error-sub">
             {errInfo.sub}
           </p>
+          {errInfo.cta && (
+            <button
+              type="button"
+              className="rv-btn-cta"
+              onClick={() => navigate(errInfo.cta.to)}
+            >
+              {errInfo.cta.label}
+            </button>
+          )}
           <button
             type="button"
             className="rv-btn-cta rv-btn-cta--ghost"

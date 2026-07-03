@@ -5,7 +5,7 @@
 // -------------------------------------------------------
 
 import { auth } from './firebaseConfig.js'
-import { MODEL, BRANCH_COLORS, buildSystemPrompt, buildLessonUserMessage, LESSON_IMAGE_INSTRUCTION } from '../utils/aiPrompts.js'
+import { MODEL, BRANCH_COLORS, BRANCH_POSITIONS, buildSystemPrompt, buildLessonUserMessage, LESSON_IMAGE_INSTRUCTION } from '../utils/aiPrompts.js'
 import { downscaleDataUrl } from '../utils/downscaleImage.js'
 
 const API_URL   = 'https://api.anthropic.com/v1/messages'
@@ -22,14 +22,23 @@ async function getIdToken() {
 let _pending = null
 let _pendingProgressCb = null
 
+// Marque la promesse comme « gérée » sans en consommer le rejet : si l'élève
+// abandonne la navigation avant /analyse, pas d'unhandledrejection (bruit
+// Sentry / overlay dev). popPendingAnalysis() la retourne telle quelle, donc
+// l'erreur reste re-jouée chez le consommateur.
+function _trackPending(promise) {
+  promise.catch(() => {})
+  return promise
+}
+
 export function startAnalysis(text, level) {
   _pendingProgressCb = null
-  _pending = analyseLesson(text, (chars) => _pendingProgressCb?.(chars), level)
+  _pending = _trackPending(analyseLesson(text, (chars) => _pendingProgressCb?.(chars), level))
 }
 
 export function startAnalysisFromImage(imageDataUrl, level) {
   _pendingProgressCb = null
-  _pending = analyseImage(imageDataUrl, (chars) => _pendingProgressCb?.(chars), level)
+  _pending = _trackPending(analyseImage(imageDataUrl, (chars) => _pendingProgressCb?.(chars), level))
 }
 
 export function popPendingAnalysis(onProgress) {
@@ -131,14 +140,31 @@ export function _parseResult(raw) {
     throw new Error('INVALID_JSON')
   }
 
-  // Carte mentale
-  if (!Array.isArray(parsed.mindmap.branches) || parsed.mindmap.branches.length === 0) {
-    throw new Error('INVALID_JSON')
-  }
-  parsed.mindmap.branches = parsed.mindmap.branches.map((b, i) => ({
-    ...b,
-    ...BRANCH_COLORS[i % BRANCH_COLORS.length],
-  }))
+  // Carte mentale : le prompt exige exactement 4 branches, mais on
+  // normalise défensivement — champs texte garantis, children = tableau de
+  // strings, max 4 branches, positions canoniques réassignées par index
+  // (évite chevauchements si le modèle renvoie 5+ branches ou des doublons).
+  if (!Array.isArray(parsed.mindmap.branches)) throw new Error('INVALID_JSON')
+  const seenIds = new Set()
+  const branches = parsed.mindmap.branches
+    .filter(b => b && typeof b.label === 'string' && b.label.trim())
+    .slice(0, BRANCH_POSITIONS.length)
+    .map((b, i) => {
+      let id = (typeof b.id === 'string' && b.id.trim()) ? b.id.trim() : `branche-${i}`
+      if (seenIds.has(id)) id = `branche-${i}`
+      seenIds.add(id)
+      return {
+        id,
+        label:    b.label.trim(),
+        emoji:    (typeof b.emoji === 'string' && b.emoji.trim()) ? b.emoji : '📌',
+        detail:   typeof b.detail === 'string' ? b.detail : '',
+        children: Array.isArray(b.children) ? b.children.filter(c => typeof c === 'string' && c.trim()).slice(0, 6) : [],
+        position: BRANCH_POSITIONS[i],
+        ...BRANCH_COLORS[i % BRANCH_COLORS.length],
+      }
+    })
+  if (branches.length < 2) throw new Error('INVALID_JSON')
+  parsed.mindmap.branches = branches
   return parsed
 }
 
@@ -148,6 +174,14 @@ export function _parseResult(raw) {
 async function _callProxy(endpoint, payload, onProgress) {
   let idToken = null
   try { idToken = await getIdToken() } catch { /* non bloquant */ }
+
+  // Progression monotone : le ticker simulé et la valeur réelle de fin se
+  // mélangent — sans garde, la barre peut régresser (ex. 80 % → 60 %).
+  if (typeof onProgress === 'function') {
+    const raw = onProgress
+    let max = 0
+    onProgress = (v) => { if (v > max) { max = v; raw(v) } }
+  }
 
   // Simule la progression pendant l'attente (mode non-streaming)
   let ticker = null
@@ -180,6 +214,8 @@ async function _callProxy(endpoint, payload, onProgress) {
     if (ticker) clearInterval(ticker)
     const body = await response.text().catch(() => '')
     if (response.status === 401) throw new Error('UNAUTHORIZED')
+    if (body === 'EMAIL_NOT_VERIFIED') throw new Error('EMAIL_NOT_VERIFIED')
+    if (response.status === 413 || body === 'IMAGE_TOO_LARGE') throw new Error('IMAGE_TOO_LARGE')
     if (response.status === 429 || body === 'RATE_LIMIT') throw new Error('RATE_LIMIT')
     if (body === 'INVALID_API_KEY') throw new Error('INVALID_API_KEY')
     throw new Error(body || `API_ERROR_${response.status}`)

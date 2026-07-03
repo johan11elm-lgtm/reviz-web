@@ -4,6 +4,8 @@ import { recordRevision } from '../services/revisionService'
 import { PageHeader } from '../components/PageHeader'
 import { HeroCTA } from '../components/HeroCTA'
 import { Mascot } from '../components/Mascot'
+import { MissingLessonState } from '../components/MissingLessonState'
+import { FormatFeedback } from '../components/FormatFeedback'
 import { subjectInfo as sharedSubjectInfo } from '../utils/subjects'
 import './Resume.css'
 
@@ -11,7 +13,7 @@ function subjectInfo(s) {
   return sharedSubjectInfo(s);
 }
 
-// ---- DONNÉES : localStorage (IA) > mock ----
+// ---- DONNÉES : localStorage (IA) > état vide (mock réservé au dev) ----
 function getResumeData() {
   try {
     const ai = JSON.parse(localStorage.getItem('reviz-ai-data') || 'null')
@@ -23,6 +25,8 @@ function getResumeData() {
       xp: 30,
     }
   } catch { /* ignore */ }
+  // En prod, pas de leçon = état vide honnête — jamais le mock « Pythagore ».
+  if (!import.meta.env.DEV) return null
   return {
     title: "Théorème de Pythagore",
     subject: "Maths",
@@ -64,6 +68,13 @@ function getResumeData() {
 }
 
 export default function Resume() {
+  // Décision stable pour toute la vie du composant (rules-of-hooks safe).
+  const [hasData] = useState(() => getResumeData() !== null)
+  if (!hasData) return <MissingLessonState title="Résumé" />
+  return <ResumeContent />
+}
+
+function ResumeContent() {
   useEffect(() => { recordRevision('resume') }, [])
   const resumeData = getResumeData()
   const info = subjectInfo(resumeData.subject)
@@ -153,6 +164,7 @@ export default function Resume() {
             </div>
           </div>
           <div className="resume-xp-badge">+{resumeData.xp} XP gagnés !</div>
+          <FormatFeedback format="resume" question="Ce résumé t'a aidé ?" />
           <div className="rv-end-screen-actions">
             <button type="button" className="rv-btn-cta rv-btn-cta--full" onClick={restartResume}>
               <span>🔄 Relire</span>

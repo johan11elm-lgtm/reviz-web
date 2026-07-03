@@ -675,6 +675,47 @@
   .pg-weeks-summary-text { font-size: 12px; }
 }
 
+/* ── Skeleton de synchro — nouvel appareil : cache vide, Firestore en cours ── */
+.pg-skeleton {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.pg-skeleton-hero {
+  height: 170px;
+  border-radius: var(--radius-lg);
+}
+.pg-skeleton-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.pg-skeleton-lines {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.pg-skeleton-lines .rv-skeleton--title { width: 45%; }
+.pg-skeleton-lines .rv-skeleton--text  { width: 65%; }
+.pg-skeleton-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+.pg-skeleton-stat {
+  padding: 16px 10px 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+.pg-skeleton-stat-line { width: 60%; }
+.pg-skeleton-block {
+  height: 120px;
+  border-radius: var(--radius-card);
+}
+
 /* ── Responsive ultra-narrow (≤ 360px : iPhone SE 1st gen, vieux androids) ── */
 @media (max-width: 360px) {
   .pg-content { padding: 6px 12px 100px; }

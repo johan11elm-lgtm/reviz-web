@@ -9,6 +9,7 @@ export default function VerifyEmail() {
   const [sent, setSent]       = useState(false);
   const [loading, setLoading] = useState(false);
   const [checking, setChecking] = useState(false);
+  const [notYet, setNotYet]   = useState(false);
   const navigate = useNavigate();
 
   async function handleResend() {
@@ -24,12 +25,17 @@ export default function VerifyEmail() {
 
   async function handleContinue() {
     setChecking(true);
+    setNotYet(false);
     try {
       await auth.currentUser?.reload();
       if (auth.currentUser?.emailVerified) {
+        // Force un nouveau idToken : le claim email_verified est vérifié
+        // côté serveur (scan, paiement), il doit être à jour dans le token.
+        await auth.currentUser.getIdToken(true);
         navigate('/onboarding', { replace: true });
       } else {
-        navigate('/onboarding', { replace: true }); // on laisse passer de toute façon
+        setNotYet(true);
+        setTimeout(() => setNotYet(false), 5000);
       }
     } finally {
       setChecking(false);
@@ -52,12 +58,19 @@ export default function VerifyEmail() {
         {checking ? 'Vérification...' : "J'ai confirmé mon email →"}
       </button>
 
+      {notYet && (
+        <p className="ve-hint" role="alert">
+          Hmm, ton email n'est pas encore confirmé. Clique sur le lien dans
+          l'email, puis reviens ici !
+        </p>
+      )}
+
       <button className="ve-btn-ghost" onClick={handleResend} disabled={loading || sent}>
         {sent ? '✓ Email renvoyé !' : loading ? 'Envoi...' : 'Renvoyer l\'email'}
       </button>
 
       <button className="ve-btn-skip" onClick={() => navigate('/onboarding')}>
-        Continuer sans vérifier
+        Explorer sans vérifier (scan et Réviz+ bloqués)
       </button>
     </div>
   );

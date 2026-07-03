@@ -17,12 +17,17 @@ export default async function handler(req, res) {
   if (!idToken) return res.status(401).send('Unauthorized')
 
   // 1. Authentification (vérification réelle de la signature du token Firebase)
-  let uid
+  let decoded
   try {
-    uid = (await getAuthAdmin().verifyIdToken(idToken)).uid
+    decoded = await getAuthAdmin().verifyIdToken(idToken)
   } catch {
     return res.status(401).send('Unauthorized')
   }
+  const uid = decoded.uid
+
+  // Email vérifié obligatoire pour consommer un scan : le claim `email_verified`
+  // vient du token signé, jamais du client.
+  if (!decoded.email_verified) return res.status(403).send('EMAIL_NOT_VERIFIED')
 
   // 2. Quota serveur = SOURCE DE VÉRITÉ (le localStorage client n'est qu'un affichage).
   const db = getDb()
@@ -51,6 +56,11 @@ export default async function handler(req, res) {
       },
       body: JSON.stringify({
         model: MODEL,
+        // 8192 volontaire : max_tokens ne facture que ce qui est généré (aucun
+        // gain à le baisser) et une sortie tronquée = JSON invalide = scan
+        // consommé pour rien. Pas de prompt caching : le minimum cachable de
+        // claude-haiku-4-5 est 4096 tokens, notre system prompt (~1,5k tokens)
+        // est en dessous — cache_control serait un no-op silencieux.
         max_tokens: 8192,
         stream: false,
         system: buildSystemPrompt(level),

@@ -1,7 +1,9 @@
 // -------------------------------------------------------
 // Réviz — Service Worker (cache offline)
 // -------------------------------------------------------
-const CACHE_NAME = 'reviz-v2';
+// v3 : purge les mascottes PNG pré-détourage et adopte
+// stale-while-revalidate pour les images non-hashées.
+const CACHE_NAME = 'reviz-v3';
 const STATIC_ASSETS = [
   '/',
   '/manifest.json',
@@ -46,13 +48,10 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // Assets statiques (JS, CSS, images, fonts) : cache-first
-  if (
-    request.destination === 'script' ||
-    request.destination === 'style' ||
-    request.destination === 'image' ||
-    request.destination === 'font'
-  ) {
+  // Bundles Vite hashés (/assets/xxx-<hash>.js|css|woff2) : contenu immuable
+  // → cache-first strict, jamais périmé par construction.
+  const isHashedAsset = url.pathname.startsWith('/assets/');
+  if (isHashedAsset || request.destination === 'script' || request.destination === 'style' || request.destination === 'font') {
     event.respondWith(
       caches.match(request).then((cached) => {
         if (cached) return cached;
@@ -63,6 +62,25 @@ self.addEventListener('fetch', (event) => {
           }
           return response;
         });
+      })
+    );
+    return;
+  }
+
+  // Images non-hashées (mascottes, icônes) : stale-while-revalidate —
+  // réponse instantanée depuis le cache, rafraîchie en arrière-plan pour
+  // qu'une mise à jour d'asset finisse par arriver aux utilisateurs.
+  if (request.destination === 'image') {
+    event.respondWith(
+      caches.open(CACHE_NAME).then(async (cache) => {
+        const cached = await cache.match(request);
+        const refresh = fetch(request)
+          .then((response) => {
+            if (response.ok) cache.put(request, response.clone());
+            return response;
+          })
+          .catch(() => cached);
+        return cached || refresh;
       })
     );
     return;

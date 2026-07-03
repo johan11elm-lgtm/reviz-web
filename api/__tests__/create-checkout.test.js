@@ -41,8 +41,17 @@ describe('create-checkout — authentification', () => {
     expect(sessionsCreate).not.toHaveBeenCalled()
   })
 
+  it('refuse (403 EMAIL_NOT_VERIFIED) si l’email n’est pas vérifié', async () => {
+    verifyIdToken.mockResolvedValue({ uid: 'u1', email: 'eleve@test.fr', email_verified: false })
+    const res = mockRes()
+    await handler({ method: 'POST', body: { idToken: 'good' } }, res)
+    expect(res.statusCode).toBe(403)
+    expect(res.payload.error).toBe('EMAIL_NOT_VERIFIED')
+    expect(sessionsCreate).not.toHaveBeenCalled()
+  })
+
   it('utilise l’uid du token vérifié, pas celui du body', async () => {
-    verifyIdToken.mockResolvedValue({ uid: 'real-uid', email: 'eleve@test.fr' })
+    verifyIdToken.mockResolvedValue({ uid: 'real-uid', email: 'eleve@test.fr', email_verified: true })
     sessionsCreate.mockResolvedValue({ url: 'https://stripe.test/session' })
     const res = mockRes()
     await handler(

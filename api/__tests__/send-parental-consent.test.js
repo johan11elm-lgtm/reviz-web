@@ -101,12 +101,21 @@ describe('send-parental-consent — sécurité', () => {
     expect(emailsSend).not.toHaveBeenCalled()
   })
 
-  it('throttle (429) un renvoi trop rapproché', async () => {
+  it('throttle (429) un renvoi trop rapproché (email déjà parti = token présent)', async () => {
     verifyIdToken.mockResolvedValue({ uid: 'u1', email: 'kid@test.fr' })
-    docGet.mockResolvedValue({ exists: true, data: () => ({ status: 'pending', createdAt: Date.now() }) })
+    docGet.mockResolvedValue({ exists: true, data: () => ({ status: 'pending', token: 'tok-1', createdAt: Date.now() }) })
     const res = mockRes()
     await handler({ method: 'POST', body: { idToken: 'ok', parentEmail: 'parent@test.fr', childName: 'Léa' } }, res)
     expect(res.statusCode).toBe(429)
     expect(emailsSend).not.toHaveBeenCalled()
+  })
+
+  it('ne throttle PAS le doc pending posé au signup (sans token, aucun email envoyé)', async () => {
+    verifyIdToken.mockResolvedValue({ uid: 'u1', email: 'kid@test.fr' })
+    docGet.mockResolvedValue({ exists: true, data: () => ({ status: 'pending', createdAt: Date.now() }) })
+    const res = mockRes()
+    await handler({ method: 'POST', body: { idToken: 'ok', parentEmail: 'parent@test.fr', childName: 'Léa' } }, res)
+    expect(res.statusCode).toBe(200)
+    expect(emailsSend).toHaveBeenCalledWith(expect.objectContaining({ to: 'parent@test.fr' }))
   })
 })

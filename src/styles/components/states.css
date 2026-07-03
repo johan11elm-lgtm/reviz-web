@@ -77,6 +77,35 @@
   margin: 0 0 6px;
 }
 
+/* ── Skeleton — placeholder pendant la synchro Firestore ──
+ * Distingue « pas encore synchronisé » de « vraiment vide » (anti-FOEC).
+ * Le shimmer infini est neutralisé par prefers-reduced-motion (global.css). */
+.rv-skeleton {
+  position: relative;
+  overflow: hidden;
+  background: var(--border-subtle);
+  border-radius: 8px;
+}
+.rv-skeleton::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(90deg, transparent, var(--skeleton-shimmer), transparent);
+  animation: rv-skeleton-shimmer 1.5s ease-in-out infinite;
+}
+@keyframes rv-skeleton-shimmer {
+  to { transform: translateX(100%); }
+}
+.rv-skeleton--title { height: 18px; }
+.rv-skeleton--text  { height: 12px; }
+.rv-skeleton--icon  {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  flex-shrink: 0;
+}
+
 /* ── Bottom sheet — feuille remontante ── */
 .rv-sheet--bottom {
   position: absolute;

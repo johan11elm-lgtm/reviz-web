@@ -7,23 +7,38 @@ export const config = { maxDuration: 60 }
 
 const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/gif', 'image/webp']
 
+// Plafond de la chaîne base64 reçue (~3,1 Mo binaire). Le client réduit déjà
+// toute image à 1568px / JPEG q0.85 (downscaleImage.js) → typiquement <1 Mo,
+// donc ce garde ne rejette jamais une photo d'élève normale. Il n'intercepte
+// que le cas rare où le downscale a échoué (image originale renvoyée telle
+// quelle) ou un client modifié, et évite un 413 opaque de Vercel (cap ~4,5 Mo
+// du body) en renvoyant une erreur propre. base64 pèse ~33 % de plus que le
+// binaire ; 4 Mio de base64 laissent la marge JSON + idToken sous le cap Vercel.
+const MAX_IMAGE_BASE64 = 4 * 1024 * 1024
+
 export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).send('Method not allowed')
 
   const { imageData, mediaType, idToken, level } = req.body ?? {}
 
-  if (!imageData || !mediaType) return res.status(400).send('Missing image data')
+  if (typeof imageData !== 'string' || !imageData || !mediaType) return res.status(400).send('Missing image data')
   if (!level?.cycle) return res.status(400).send('MISSING_LEVEL')
   if (!ALLOWED_TYPES.includes(mediaType)) return res.status(400).send('INVALID_MEDIA_TYPE')
+  if (imageData.length > MAX_IMAGE_BASE64) return res.status(413).send('IMAGE_TOO_LARGE')
   if (!idToken) return res.status(401).send('Unauthorized')
 
   // 1. Authentification
-  let uid
+  let decoded
   try {
-    uid = (await getAuthAdmin().verifyIdToken(idToken)).uid
+    decoded = await getAuthAdmin().verifyIdToken(idToken)
   } catch {
     return res.status(401).send('Unauthorized')
   }
+  const uid = decoded.uid
+
+  // Email vérifié obligatoire pour consommer un scan : le claim `email_verified`
+  // vient du token signé, jamais du client.
+  if (!decoded.email_verified) return res.status(403).send('EMAIL_NOT_VERIFIED')
 
   // 2. Quota serveur (source de vérité)
   const db = getDb()

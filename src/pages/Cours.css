@@ -519,3 +519,36 @@
   background: var(--accent-red-soft);
   color: var(--accent-red);
 }
+
+/* ── Skeleton de synchro — nouvel appareil : cache vide, Firestore en cours ── */
+.cours-page .cours-skeleton {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+.cours-page .cours-skeleton-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.cours-page .cours-skeleton-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 6px 4px;
+}
+.cours-page .cours-skeleton-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.cours-page .cours-skeleton-lines {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.cours-page .cours-skeleton-header .rv-skeleton--title { width: 45%; }
+.cours-page .cours-skeleton-header .rv-skeleton--text  { width: 28%; }
+.cours-page .cours-skeleton-card .rv-skeleton--title   { width: 70%; }
+.cours-page .cours-skeleton-card .rv-skeleton--text    { width: 45%; }

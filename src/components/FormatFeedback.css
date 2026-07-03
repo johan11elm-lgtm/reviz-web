@@ -1,0 +1,58 @@
+/* ------------------------------------------------------------
+   FormatFeedback — micro-sondage 👍/😐/👎 sur un format IA.
+   Discret : une ligne, pas de carte lourde, cohérent .rv-*.
+   ------------------------------------------------------------ */
+
+.format-feedback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 6px 0;
+}
+
+.format-feedback-question {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.format-feedback-options {
+  display: flex;
+  gap: 8px;
+}
+
+.format-feedback-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-card);
+  box-shadow: var(--shadow-card);
+  font-size: 18px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-family: inherit;
+  position: relative;
+  transition: transform 0.12s ease, background 0.15s ease;
+}
+/* Zone tactile 44×44 (WCAG 2.5.5) sans changer le visuel */
+.format-feedback-btn::after {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+}
+@media (hover: hover) and (pointer: fine) {
+  .format-feedback-btn:hover { background: var(--bg-hover); transform: translateY(-1px); }
+}
+.format-feedback-btn:active { transform: scale(0.92); }
+
+.format-feedback--thanks {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+}

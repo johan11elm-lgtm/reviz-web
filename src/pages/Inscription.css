@@ -20,6 +20,14 @@
   border: none;
   cursor: pointer;
   flex-shrink: 0;
+  position: relative;
+}
+/* Zone tactile étendue à 44×44 (WCAG 2.5.5) sans changer le visuel. */
+.auth-back::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
 }
 
 .auth-title {

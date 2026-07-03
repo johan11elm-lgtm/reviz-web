@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { Drawer } from '../components/Drawer';
@@ -136,16 +136,19 @@ export default function Home() {
     syncFromFirestore().then(setAllLessons);
   }, []);
 
-  const streak = computeStreak(allLessons);
-  const { level, xpInLvl, fillPct } = computeLevel(allLessons);
+  // Dérivés gamification mémoïsés : sans useMemo, chaque render (ouverture du
+  // drawer, toast de badge…) re-parcourait toutes les leçons + relisait le
+  // JSON des révisions depuis localStorage.
+  const streak = useMemo(() => computeStreak(allLessons), [allLessons]);
+  const { level, xpInLvl, fillPct } = useMemo(() => computeLevel(allLessons), [allLessons]);
   const lastLesson = allLessons[0] ?? null;
 
   const streakDots = Array.from({ length: 5 }, (_, i) => i < Math.min(5, streak));
 
   const dailyGoal = parseInt(localStorage.getItem(`reviz-daily-goal-${currentUser?.uid}`) || '3');
-  const todayRevisions = loadRevisions().filter(r =>
+  const todayRevisions = useMemo(() => loadRevisions().filter(r =>
     new Date(r.revisedAt).toDateString() === new Date().toDateString()
-  ).length;
+  ).length, [allLessons]);
 
   useEffect(() => {
     if (!currentUser) return;

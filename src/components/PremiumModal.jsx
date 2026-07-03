@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useModalA11y } from '../hooks/useModalA11y';
 import './PremiumModal.css';
@@ -9,7 +10,9 @@ import './PremiumModal.css';
 export function PremiumModal({ onClose, used = 5, limit = 5 }) {
   const { currentUser } = useAuth();
   const [loading, setLoading] = useState(false);
+  const [verifyNeeded, setVerifyNeeded] = useState(false);
   const ref = useModalA11y(onClose);
+  const navigate = useNavigate();
 
   const now = new Date();
   const day = now.getDay();
@@ -27,7 +30,10 @@ export function PremiumModal({ onClose, used = 5, limit = 5 }) {
         body: JSON.stringify({ idToken }),
       });
       const data = await res.json();
-      if (data.url) {
+      if (res.status === 403 && data.error === 'EMAIL_NOT_VERIFIED') {
+        setVerifyNeeded(true);
+        setLoading(false);
+      } else if (data.url) {
         window.location.href = data.url;
       } else {
         console.error('[PremiumModal] No URL returned:', data);
@@ -66,14 +72,31 @@ export function PremiumModal({ onClose, used = 5, limit = 5 }) {
 
         <div className="premium-divider" />
 
-        <button
-          className="premium-btn premium-btn--upgrade"
-          onClick={handleUpgrade}
-          disabled={loading}
-        >
-          <span className="premium-btn-icon">💎</span>
-          {loading ? 'Redirection...' : 'Passer à Réviz+ — 4,99€/mois'}
-        </button>
+        {verifyNeeded && (
+          <p className="premium-sub">
+            📬 Confirme ton email avant de passer à Réviz+ — clique sur le lien
+            qu'on t'a envoyé, ça prend 10 secondes !
+          </p>
+        )}
+
+        {verifyNeeded ? (
+          <button
+            className="premium-btn premium-btn--upgrade"
+            onClick={() => navigate('/verify-email')}
+          >
+            <span className="premium-btn-icon">📬</span>
+            Vérifier mon email
+          </button>
+        ) : (
+          <button
+            className="premium-btn premium-btn--upgrade"
+            onClick={handleUpgrade}
+            disabled={loading}
+          >
+            <span className="premium-btn-icon">💎</span>
+            {loading ? 'Redirection...' : 'Passer à Réviz+ — 4,99€/mois'}
+          </button>
+        )}
 
         <button className="premium-btn premium-btn--close" onClick={onClose}>
           Retour

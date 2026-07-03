@@ -51,10 +51,13 @@ export default function Cours() {
   const [searchQuery, setSearchQuery]       = useState('');
   const [allLessons, setAllLessons]         = useState(() => loadLessons());
   const [lessonToDelete, setLessonToDelete] = useState(null);
+  const [isSyncing, setIsSyncing]           = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
-    syncFromFirestore().then(lessons => setAllLessons(lessons));
+    syncFromFirestore()
+      .then(lessons => setAllLessons(lessons))
+      .finally(() => setIsSyncing(false));
   }, []);
 
   const { currentUser } = useAuth();
@@ -88,6 +91,9 @@ export default function Cours() {
 
   const totalVisible = visibleSubjects.reduce((acc, s) => acc + s.visibleLessons.length, 0);
   const hasLessons = allLessons.length > 0;
+  // « Pas encore synchronisé » ≠ « vraiment vide » : sur un nouvel appareil le
+  // cache local est vide alors que Firestore a des leçons → skeleton, pas empty-state.
+  const showSkeleton = isSyncing && !hasLessons;
 
   // Compte total de cartes à revoir (toutes matières)
   const dueCards = useMemo(() => {
@@ -169,6 +175,7 @@ export default function Cours() {
       )}
 
       {/* Search */}
+      {!showSkeleton && (
       <div className="cours-search-wrap">
         <div className="rv-card rv-card--tight cours-search">
           <span className="cours-search-icon" aria-hidden="true">🔍</span>
@@ -190,6 +197,7 @@ export default function Cours() {
           )}
         </div>
       </div>
+      )}
 
       {/* Filters */}
       {subjects.length > 1 && (
@@ -258,7 +266,28 @@ export default function Cours() {
 
       {/* Content */}
       <div className="content cours-content">
-        {visibleSubjects.length === 0 ? (
+        {showSkeleton ? (
+          <div className="cours-skeleton" role="status" aria-label="Synchronisation de tes leçons…">
+            {[0, 1].map(i => (
+              <div key={i} className="cours-skeleton-section" aria-hidden="true">
+                <div className="cours-skeleton-header">
+                  <div className="rv-skeleton rv-skeleton--icon" />
+                  <div className="cours-skeleton-lines">
+                    <div className="rv-skeleton rv-skeleton--title" />
+                    <div className="rv-skeleton rv-skeleton--text" />
+                  </div>
+                </div>
+                <div className="rv-card rv-card--padded cours-skeleton-card">
+                  <div className="rv-skeleton rv-skeleton--icon" />
+                  <div className="cours-skeleton-lines">
+                    <div className="rv-skeleton rv-skeleton--title" />
+                    <div className="rv-skeleton rv-skeleton--text" />
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : visibleSubjects.length === 0 ? (
           <div className="rv-empty-state cours-empty-state">
             <Mascot
               pose={q ? 'search' : 'reading'}

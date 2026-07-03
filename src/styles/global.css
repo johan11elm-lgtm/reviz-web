@@ -40,9 +40,12 @@
 
   --text-primary:   #1B1A23;
   --text-secondary: #6B6557;
-  --text-muted:     #9E9686;
-  --text-light:     #B8B0A0;
-  --text-xlight:    #CFC7B8;
+  /* muted porte du vrai texte (labels, sous-titres, nav) → AA 4.5:1 requis.
+     6E675B = 4.93:1 sur --bg-app, 5.59:1 sur blanc. */
+  --text-muted:     #6E675B;
+  /* light/xlight : hints & placeholders uniquement — jamais de texte porteur de sens. */
+  --text-light:     #8F8776;
+  --text-xlight:    #B8B0A0;
   --text-avatar:    #6B6557;
   --text-cta:       #FFFFFF;
   --text-cta-sub:   rgba(255,255,255,0.78);
@@ -79,6 +82,12 @@
   --accent-red-soft:      #FFE0E5;
   --accent-red-ink:       #A81F36;
 
+  /* Variantes "strong" : fonds d'accent portant du TEXTE BLANC.
+     Contraste vérifié ≥ 4.5:1 (WCAG AA) — les accents de base ne passent pas. */
+  --accent-red-strong:    #D32F4D;  /* 4.90:1 vs blanc */
+  --accent-orange-strong: #C25407;  /* 4.60:1 vs blanc */
+  --accent-green-strong:  #178F52;  /* 4.13:1 vs blanc — glyphes/icônes (≥3:1) */
+
   /* Radii */
   --radius-card:   24px;
   --radius-lg:     28px;
@@ -89,6 +98,9 @@
   --shadow-card:   0 4px 14px rgba(46,31,140,0.06), 0 1px 3px rgba(0,0,0,0.04);
   --shadow-pop:    0 12px 32px rgba(107,78,255,0.18);
   --shadow-shell:  0 32px 80px rgba(46,31,140,0.12);
+
+  /* Skeleton (rv-skeleton) */
+  --skeleton-shimmer: rgba(255, 255, 255, 0.6);
 }
 
 /* ─── Variables Dark ───────────────────────────────────────────── */
@@ -110,6 +122,7 @@
   --border-hover:   #4A4470;
   --border-tip:     #2A2640;
   --border-formula: #3A2E8C;
+  --skeleton-shimmer: rgba(255, 255, 255, 0.07);
 
   --text-primary:   #F2EFFA;
   --text-secondary: #B5AECC;
@@ -359,10 +372,13 @@ input, textarea {
   display: flex;
   flex-direction: column;
   gap: 20px;
-  transition: right 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+  /* visibility : fermé = hors tab-order et lecteurs d'écran (WCAG 2.4.3),
+     la transition différée laisse l'animation de sortie se terminer. */
+  visibility: hidden;
+  transition: right 0.28s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.28s;
   overflow-y: auto;
 }
-.drawer.open { right: 0; }
+.drawer.open { right: 0; visibility: visible; }
 
 .drawer-header {
   display: flex;

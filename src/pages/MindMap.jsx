@@ -1,40 +1,41 @@
 import { useState, useRef, useEffect } from 'react'
-import { createPortal } from 'react-dom'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useTheme } from '../context/ThemeContext'
 import { recordRevision } from '../services/revisionService'
+import { BRANCH_COLORS, BRANCH_POSITIONS } from '../utils/aiPrompts'
+import { PageHeader } from '../components/PageHeader'
+import { Mascot } from '../components/Mascot'
+import { MissingLessonState } from '../components/MissingLessonState'
+import { FormatFeedback } from '../components/FormatFeedback'
 import './Mindmap.css'
 
-// ── Palette de 4 couleurs (assignée par index) ────────────────────
-const PALETTE = [
-  { color: '#6B4EFF', bgLight: '#EEF2FF', colorLight: '#4338CA', bgDark: '#1E1B4B', colorDark: '#A5B4FC' },
-  { color: '#FF8A3D', bgLight: '#FFF4E6', colorLight: '#C05621', bgDark: '#2D1F0A', colorDark: '#FBD38D' },
-  { color: '#34C77B', bgLight: '#F0FDF4', colorLight: '#15803D', bgDark: '#0D2818', colorDark: '#4ADE80' },
-  { color: '#A855F7', bgLight: '#FAF5FF', colorLight: '#7E22CE', bgDark: '#2E1065', colorDark: '#D8B4FE' },
-]
-
-// ── Emoji par matière ────────────────────────────────────────────
-const SUBJECT_EMOJI = {
-  maths: '📐', français: '📖', anglais: '🗣️', histoire: '🏛️',
-  géographie: '🌍', svt: '🧬', physique: '⚗️', philosophie: '🤔',
-  ses: '📊', arts: '🎨',
-}
-function subjectEmoji(subject) {
-  if (!subject) return '🧠'
-  const key = Object.keys(SUBJECT_EMOJI).find(k => subject.toLowerCase().includes(k))
-  return SUBJECT_EMOJI[key] ?? '📚'
-}
-
 // ── Données ───────────────────────────────────────────────────────
+// Normalisation défensive : aiService._parseResult() garantit déjà cette
+// forme pour les nouveaux scans, mais reviz-ai-data peut contenir des
+// données antérieures au durcissement (children non-tableau, emoji nul,
+// position inconnue) — on ne fait donc jamais confiance au localStorage.
+function normalizeBranches(rawBranches) {
+  if (!Array.isArray(rawBranches)) return []
+  return rawBranches
+    .filter(b => b && typeof b.label === 'string' && b.label.trim())
+    .slice(0, BRANCH_POSITIONS.length)
+    .map((b, i) => ({
+      ...b,
+      id:       (typeof b.id === 'string' && b.id.trim()) ? b.id : `branche-${i}`,
+      label:    b.label.trim(),
+      emoji:    (typeof b.emoji === 'string' && b.emoji.trim()) ? b.emoji : '📌',
+      detail:   typeof b.detail === 'string' ? b.detail : '',
+      children: Array.isArray(b.children) ? b.children.filter(c => typeof c === 'string' && c.trim()) : [],
+      position: BRANCH_POSITIONS[i],
+      ...BRANCH_COLORS[i % BRANCH_COLORS.length],
+    }))
+}
+
 function getMindmapData() {
   try {
     const ai = JSON.parse(localStorage.getItem('reviz-ai-data') || 'null')
-    if (ai?.mindmap?.branches?.length >= 2) {
-      // Injecter couleurs par index
-      const branches = ai.mindmap.branches.map((b, i) => ({
-        ...b,
-        ...PALETTE[i % PALETTE.length],
-      }))
+    const branches = normalizeBranches(ai?.mindmap?.branches)
+    if (branches.length >= 2) {
       return {
         title:    ai.metadata?.title || 'Carte mentale',
         center:   ai.metadata?.title || 'Concept',
@@ -44,41 +45,63 @@ function getMindmapData() {
       }
     }
   } catch { /* ignore */ }
+  // En prod, pas de leçon = état vide honnête — jamais le mock « Pythagore ».
+  if (!import.meta.env.DEV) return null
   return {
     title: 'Théorème de Pythagore',
     center: 'Pythagore',
     subject: 'Maths',
     xp: 25,
     branches: [
-      { id: 'definition', label: 'Définition', emoji: '📖', detail: 'Dans tout triangle rectangle, le carré de l\'hypoténuse est égal à la somme des carrés des deux autres côtés.', children: ['a² + b² = c²', 'Triangle rectangle', 'Angle droit 90°'], position: 'top-left',    ...PALETTE[0] },
-      { id: 'elements',   label: 'Éléments',   emoji: '📏', detail: 'L\'hypoténuse est le côté le plus long, toujours face à l\'angle droit.', children: ['Hypoténuse (c)', 'Côté a', 'Côté b'], position: 'top-right',   ...PALETTE[1] },
-      { id: 'reciproque', label: 'Réciproque', emoji: '🔄', detail: 'Si a² + b² = c² est vérifié, alors le triangle est nécessairement rectangle.', children: ['Si a²+b²=c²', '→ rectangle', 'Ex : 3-4-5'], position: 'bottom-left', ...PALETTE[2] },
-      { id: 'applications', label: 'Applications', emoji: '💡', detail: 'On utilise ce théorème pour calculer des distances et vérifier des angles droits.', children: ['Calcul distances', 'Architecture', 'Géométrie'], position: 'bottom-right', ...PALETTE[3] },
+      { id: 'definition', label: 'Définition', emoji: '📖', detail: 'Dans tout triangle rectangle, le carré de l\'hypoténuse est égal à la somme des carrés des deux autres côtés.', children: ['a² + b² = c²', 'Triangle rectangle', 'Angle droit 90°'], position: 'top-left',    ...BRANCH_COLORS[0] },
+      { id: 'elements',   label: 'Éléments',   emoji: '📏', detail: 'L\'hypoténuse est le côté le plus long, toujours face à l\'angle droit.', children: ['Hypoténuse (c)', 'Côté a', 'Côté b'], position: 'top-right',   ...BRANCH_COLORS[1] },
+      { id: 'reciproque', label: 'Réciproque', emoji: '🔄', detail: 'Si a² + b² = c² est vérifié, alors le triangle est nécessairement rectangle.', children: ['Si a²+b²=c²', '→ rectangle', 'Ex : 3-4-5'], position: 'bottom-left', ...BRANCH_COLORS[2] },
+      { id: 'applications', label: 'Applications', emoji: '💡', detail: 'On utilise ce théorème pour calculer des distances et vérifier des angles droits.', children: ['Calcul distances', 'Architecture', 'Géométrie'], position: 'bottom-right', ...BRANCH_COLORS[3] },
     ],
   }
 }
 
-// ── Positions (portrait + paysage) ───────────────────────────────
+// ── Positions relatives au canvas ─────────────────────────────────
+// Les % sont bornés pour que les cartes-branches (~150px de large) restent
+// entières dans le canvas, au-dessus du hint bas et sous le bord haut.
 function getPositions(W, H) {
   const cx = W / 2, cy = H / 2
+  const xLeft   = Math.max(Math.round(W * 0.24), 92)
+  const xRight  = Math.min(Math.round(W * 0.76), W - 92)
+  const yTop    = Math.max(Math.round(H * 0.18), 56)
+  const yBottom = Math.min(Math.round(H * 0.78), H - 84)
   return {
-    'top-left':     { x: Math.round(W * 0.20), y: Math.round(H * 0.22) },
-    'top-right':    { x: Math.round(W * 0.80), y: Math.round(H * 0.22) },
-    'bottom-left':  { x: Math.round(W * 0.20), y: Math.round(H * 0.72) },
-    'bottom-right': { x: Math.round(W * 0.80), y: Math.round(H * 0.72) },
-    // fallbacks
-    top:    { x: cx,                   y: Math.round(H * 0.18) },
-    right:  { x: Math.round(W * 0.82), y: cy },
-    bottom: { x: cx,                   y: Math.round(H * 0.76) },
-    left:   { x: Math.round(W * 0.18), y: cy },
+    'top-left':     { x: xLeft,  y: yTop },
+    'top-right':    { x: xRight, y: yTop },
+    'bottom-left':  { x: xLeft,  y: yBottom },
+    'bottom-right': { x: xRight, y: yBottom },
+    // fallbacks (données legacy)
+    top:    { x: cx,     y: Math.max(Math.round(H * 0.14), 52) },
+    right:  { x: xRight, y: cy },
+    bottom: { x: cx,     y: Math.min(Math.round(H * 0.82), H - 64) },
+    left:   { x: xLeft,  y: cy },
   }
 }
 
+const CheckIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <path d="M20 6L9 17l-5-5" />
+  </svg>
+)
+
 export default function Mindmap() {
+  // Décision stable pour toute la vie du composant (rules-of-hooks safe).
+  const [hasData] = useState(() => getMindmapData() !== null)
+  if (!hasData) return <MissingLessonState title="Carte mentale" />
+  return <MindmapSession />
+}
+
+function MindmapSession() {
   useEffect(() => { recordRevision('mindmap') }, [])
   const mindmapData = getMindmapData()
   const { theme } = useTheme()
   const isDark = theme === 'dark'
+  const navigate = useNavigate()
 
   const canvasRef    = useRef(null)
   const pointerStart = useRef(null)
@@ -91,7 +114,7 @@ export default function Mindmap() {
   const [visitedIds, setVisitedIds]         = useState(() => new Set())
   const [allExplored, setAllExplored]       = useState(false)
   const [showEnd, setShowEnd]               = useState(false)
-  const [dims, setDims]                     = useState({ W: window.innerWidth, H: window.innerHeight })
+  const [dims, setDims]                     = useState({ W: 480, H: 620 })
   const [mounted, setMounted]               = useState(false)
   const INIT_SCALE = 1
   const [scale, setScale]     = useState(INIT_SCALE)
@@ -101,19 +124,16 @@ export default function Mindmap() {
   // Entrée en scène
   useEffect(() => { setTimeout(() => setMounted(true), 60) }, [])
 
-  // Resize
+  // Dimensions réelles du canvas (le layout vit dans le shell .app,
+  // pas dans le viewport) — suit resize et rotation.
   useEffect(() => {
-    function onResize() {
-      setTimeout(() => {
-        setDims({ W: window.innerWidth, H: window.innerHeight })
-      }, 100)
-    }
-    window.addEventListener('resize', onResize)
-    window.addEventListener('orientationchange', onResize)
-    return () => {
-      window.removeEventListener('resize', onResize)
-      window.removeEventListener('orientationchange', onResize)
-    }
+    const el = canvasRef.current
+    if (!el) return
+    const measure = () => setDims({ W: el.clientWidth, H: el.clientHeight })
+    measure()
+    const ro = new ResizeObserver(measure)
+    ro.observe(el)
+    return () => ro.disconnect()
   }, [])
 
   // Non-passive wheel zoom
@@ -138,8 +158,8 @@ export default function Mindmap() {
     if (next.size === mindmapData.branches.length) setAllExplored(true)
     if (branch?.position?.includes('bottom')) {
       const pos = getPositions(W, H)[branch.position]
-      const SHEET_H = 220
-      const targetY = H - SHEET_H - 40
+      const SHEET_H = 210
+      const targetY = H - SHEET_H - 36
       const panY = -(pos.y - targetY)
       setOffset(o => ({ x: o.x, y: Math.min(0, panY) }))
     } else {
@@ -215,7 +235,6 @@ export default function Mindmap() {
     if (!sheetDragStart.current) return
     e.stopPropagation()
     const dy = e.clientY - sheetDragStart.current.startY
-    const base = sheetDragStart.current.wasCollapsed ? 0 : 0
     setSheetDragY(Math.max(-10, dy))
   }
   function onHandlePointerUp(e) {
@@ -238,61 +257,87 @@ export default function Mindmap() {
   const cx = W / 2, cy = H / 2
   const activeBranch = mindmapData.branches.find(b => b.id === selectedBranch)
   const totalChildren = mindmapData.branches.reduce((acc, b) => acc + b.children.length, 0)
-  const centerEmoji  = subjectEmoji(mindmapData.subject)
 
-  return createPortal(
-    <div className="mindmap-fullscreen mindmap-page">
+  const progressDots = (
+    <div className="rv-dots" aria-label={`${visitedIds.size} branche(s) explorée(s) sur ${mindmapData.branches.length}`}>
+      {mindmapData.branches.map(b => (
+        <span
+          key={b.id}
+          className="rv-dot"
+          style={visitedIds.has(b.id) ? { background: isDark ? b.colorDark : b.color } : undefined}
+        />
+      ))}
+    </div>
+  )
 
-      {/* ── Écran de fin ── */}
+  const doneButton = (
+    <button
+      type="button"
+      className={`rv-bell-btn mindmap-done-btn${allExplored ? ' ready' : ''}`}
+      disabled={!allExplored}
+      onClick={() => setShowEnd(true)}
+      aria-label="Terminer la carte mentale"
+    >
+      <CheckIcon />
+    </button>
+  )
+
+  return (
+    <div className="app mindmap-page">
+
+      {/* ── Écran de fin (mêmes conventions que Flashcards / Quiz) ── */}
       {showEnd && (
-        <div className="end-screen">
-          <span className="end-emoji">🧠</span>
-          <span className="end-title">Carte explorée !</span>
-          <p className="end-sub">Tu as parcouru toutes les branches.</p>
-          <div className="end-stats">
-            <div className="end-stat">
-              <span className="end-stat-value" style={{ color: '#A855F7' }}>{mindmapData.branches.length}</span>
-              <span className="end-stat-label">Branches</span>
+        <div className="rv-end-screen mindmap-end-screen">
+          <Mascot
+            pose="celebration"
+            size={240}
+            glow
+            animate
+            priority
+            className="rv-end-screen-mascot"
+            alt=""
+            aria-hidden="true"
+          />
+          <h2 className="rv-end-screen-title">Carte explorée !</h2>
+          <p className="rv-end-screen-sub">Tu as parcouru toutes les branches de « {mindmapData.title} ».</p>
+          <div className="mindmap-end-stats rv-card rv-card--padded">
+            <div className="mindmap-end-stat">
+              <span className="rv-stat-value rv-stat-value--md" style={{ color: 'var(--accent-violet)' }}>{mindmapData.branches.length}</span>
+              <span className="rv-stat-label">Branches</span>
             </div>
-            <div className="end-stat-divider" />
-            <div className="end-stat">
-              <span className="end-stat-value" style={{ color: '#6B4EFF' }}>{totalChildren}</span>
-              <span className="end-stat-label">Notions</span>
+            <div className="rv-stat-separator" />
+            <div className="mindmap-end-stat">
+              <span className="rv-stat-value rv-stat-value--md" style={{ color: 'var(--accent-orange)' }}>{totalChildren}</span>
+              <span className="rv-stat-label">Notions</span>
             </div>
-            <div className="end-stat-divider" />
-            <div className="end-stat">
-              <span className="end-stat-value" style={{ color: '#34C77B' }}>{mindmapData.xp}</span>
-              <span className="end-stat-label">XP</span>
+            <div className="rv-stat-separator" />
+            <div className="mindmap-end-stat">
+              <span className="rv-stat-value rv-stat-value--md" style={{ color: 'var(--accent-green-strong)' }}>+{mindmapData.xp}</span>
+              <span className="rv-stat-label">XP</span>
             </div>
           </div>
-          <div className="xp-badge">+{mindmapData.xp} XP gagnés !</div>
-          <button className="end-btn primary" onClick={restartMindmap}>🗺️ Revoir la carte</button>
-          <Link className="end-btn" to="/analyse">← Retour aux formats</Link>
+          <div className="mindmap-xp-badge">+{mindmapData.xp} XP gagnés !</div>
+          <FormatFeedback format="mindmap" question="Cette carte t'a aidé ?" />
+          <div className="rv-end-screen-actions">
+            <button type="button" className="rv-btn-cta rv-btn-cta--full" onClick={restartMindmap}>
+              <span>🗺️ Revoir la carte</span>
+            </button>
+            <Link className="rv-btn-cta rv-btn-cta--full rv-btn-cta--ghost" to="/analyse">
+              ← Retour aux formats
+            </Link>
+          </div>
         </div>
       )}
 
-      {/* ── Header flottant ── */}
-      <div className="mindmap-header-float">
-        <Link className="back-btn" to="/analyse">←</Link>
-        <div className="header-center">
-          <span className="header-title">Carte mentale</span>
-          <div className="header-branch-dots">
-            {mindmapData.branches.map(b => (
-              <span
-                key={b.id}
-                className={`branch-progress-dot${visitedIds.has(b.id) ? ' visited' : ''}`}
-                style={{ '--dot-color': b.color }}
-              />
-            ))}
-          </div>
-        </div>
-        <button
-          className="done-btn"
-          style={{ opacity: allExplored ? 1 : 0.3, pointerEvents: allExplored ? 'auto' : 'none' }}
-          onClick={() => setShowEnd(true)}
-        >✓</button>
-      </div>
-      <div style={{ position: 'absolute', top: 56, left: 0, right: 0, textAlign: 'center', zIndex: 5, pointerEvents: 'none' }}><span className="ai-badge">✦ Généré par IA</span></div>
+      <PageHeader
+        variant="back"
+        title="Carte mentale"
+        sub={progressDots}
+        right={doneButton}
+        onBack={() => navigate('/analyse')}
+      />
+
+      <div className="mindmap-ai-row"><span className="ai-badge">✦ Généré par IA</span></div>
 
       {/* ── Canvas ── */}
       <div
@@ -309,15 +354,16 @@ export default function Mindmap() {
       >
         {!activeBranch && (
           <div className="canvas-hint">
-            <span className="canvas-hint-icon">👆</span>
-            <span className="canvas-hint-text">Appuie sur une branche</span>
+            <span className="canvas-hint-text">👆 Appuie sur une branche</span>
           </div>
         )}
         {isViewMoved && (
           <button
+            type="button"
             className="mindmap-reset"
             onPointerDown={e => e.stopPropagation()}
             onClick={resetView}
+            aria-label="Recentrer la carte"
           >↺</button>
         )}
 
@@ -328,79 +374,87 @@ export default function Mindmap() {
           {/* SVG lignes gradient */}
           <svg className="mindmap-svg">
             <defs>
-              {mindmapData.branches.map(branch => (
-                <linearGradient
-                  key={branch.id}
-                  id={`grad-${branch.id}`}
-                  x1="0%" y1="0%" x2="100%" y2="0%"
-                  gradientUnits="userSpaceOnUse"
-                  x1={cx} y1={cy}
-                  x2={positions[branch.position]?.x ?? cx}
-                  y2={positions[branch.position]?.y ?? cy}
-                >
-                  <stop offset="0%"   stopColor={branch.color} stopOpacity="0.3" />
-                  <stop offset="100%" stopColor={branch.color} stopOpacity="0.9" />
-                </linearGradient>
-              ))}
+              {mindmapData.branches.map(branch => {
+                // En dark mode, la teinte pleine manque de contraste sur le
+                // fond sombre — on trace avec la variante claire (colorDark).
+                const stroke = isDark ? branch.colorDark : branch.color
+                return (
+                  <linearGradient
+                    key={branch.id}
+                    id={`grad-${branch.id}`}
+                    gradientUnits="userSpaceOnUse"
+                    x1={cx} y1={cy}
+                    x2={positions[branch.position]?.x ?? cx}
+                    y2={positions[branch.position]?.y ?? cy}
+                  >
+                    <stop offset="0%"   stopColor={stroke} stopOpacity="0.55" />
+                    <stop offset="100%" stopColor={stroke} stopOpacity="1" />
+                  </linearGradient>
+                )
+              })}
             </defs>
-            {mindmapData.branches.map(branch => {
+            {mindmapData.branches.map((branch, i) => {
               const pos = positions[branch.position]
               if (!pos) return null
               const isSelected = selectedBranch === branch.id
               const isVisited  = visitedIds.has(branch.id)
               const hasSelect  = selectedBranch !== null
               const opacity    = hasSelect
-                ? (isSelected ? 1 : 0.07)
-                : (isVisited ? 0.6 : 0.25)
+                ? (isSelected ? 1 : 0.08)
+                : (isVisited ? 0.85 : 0.5)
               const cpx = (cx + pos.x) / 2
               const cpy = (cy + pos.y) / 2
               return (
                 <path
                   key={branch.id}
+                  className={mounted ? 'mindmap-link mindmap-link--draw' : 'mindmap-link'}
                   d={`M ${cx} ${cy} Q ${cpx} ${cpy} ${pos.x} ${pos.y}`}
+                  pathLength="1"
                   stroke={`url(#grad-${branch.id})`}
-                  strokeWidth={isSelected ? 3.5 : 2.5}
+                  strokeWidth={isSelected ? 4 : 3}
                   fill="none"
                   opacity={opacity}
                   strokeLinecap="round"
-                  style={{ transition: 'opacity 0.25s' }}
+                  style={{ transition: 'opacity 0.25s', animationDelay: `${80 + i * 90}ms` }}
                 />
               )
             })}
           </svg>
 
-          {/* Nœud central */}
-          <div className="center-node">
-            <span className="cn-emoji">{centerEmoji}</span>
+          {/* Nœud central — la mascotte réfléchit, les idées rayonnent */}
+          <div className={`center-node${mounted ? ' center-in' : ''}`}>
+            <Mascot pose="thinking" size={52} alt="" aria-hidden="true" />
             <span className="cn-label">
               {mindmapData.center.split(' ').slice(0, 3).join(' ')}
             </span>
           </div>
 
-          {/* Branches avec animation d'entrée staggerée */}
+          {/* Branches — cartes blanches avec animation d'entrée staggerée */}
           {mindmapData.branches.map((branch, i) => {
             const pos = positions[branch.position]
             if (!pos) return null
             const isSelected = selectedBranch === branch.id
             const isVisited  = visitedIds.has(branch.id)
             return (
-              <div
+              <button
                 key={branch.id}
+                type="button"
                 className={`branch-node${isSelected ? ' selected' : ''}${isVisited ? ' visited' : ''}${mounted ? ' branch-in' : ''}`}
+                aria-pressed={isSelected}
                 style={{
                   left: pos.x,
                   top:  pos.y,
-                  background: isDark ? branch.bgDark   : branch.bgLight,
-                  color:      isDark ? branch.colorDark : branch.colorLight,
-                  '--branch-color': branch.color,
-                  animationDelay: `${i * 100}ms`,
+                  '--branch-color': isDark ? branch.colorDark : branch.color,
+                  '--branch-bg':    isDark ? branch.bgDark    : branch.bgLight,
+                  animationDelay: `${i * 90}ms`,
                 }}
                 onPointerDown={e => e.stopPropagation()}
                 onClick={() => handleSelectBranch(branch.id)}
               >
-                <span className="bn-emoji">{branch.emoji}</span>
+                <span className="bn-emoji" aria-hidden="true">{branch.emoji}</span>
                 <span className="bn-label">{branch.label}</span>
-              </div>
+                {isVisited && !isSelected && <span className="bn-visited-dot" aria-hidden="true" />}
+              </button>
             )
           })}
         </div>
@@ -409,7 +463,7 @@ export default function Mindmap() {
       {/* ── Bottom sheet ── */}
       <div
         className={`detail-sheet${activeBranch ? ' detail-sheet--open' : ''}${sheetCollapsed ? ' detail-sheet--collapsed' : ''}${sheetDragY !== 0 ? ' detail-sheet--dragging' : ''}`}
-        style={sheetDragY !== 0 ? { transform: `translateY(${sheetCollapsed ? `calc(100% - 28px + ${sheetDragY}px)` : `${Math.max(0, sheetDragY)}px`})` } : {}}
+        style={sheetDragY !== 0 ? { transform: `translateY(${sheetCollapsed ? `calc(100% - 30px + ${sheetDragY}px)` : `${Math.max(0, sheetDragY)}px`})` } : {}}
       >
         <div
           className="sheet-handle"
@@ -417,9 +471,11 @@ export default function Mindmap() {
           onPointerMove={onHandlePointerMove}
           onPointerUp={onHandlePointerUp}
           onPointerCancel={onHandlePointerUp}
-        />
+        >
+          <span className="sheet-handle-bar" />
+        </div>
         {activeBranch && (
-          <>
+          <div className="sheet-content">
             <div className="detail-header">
               <span
                 className="detail-emoji-wrap"
@@ -450,15 +506,14 @@ export default function Mindmap() {
               ))}
             </div>
             {allExplored && (
-              <button className="detail-cta" onClick={() => setShowEnd(true)}>
-                🧠 J'ai tout exploré !
+              <button type="button" className="rv-btn-cta rv-btn-cta--full detail-cta" onClick={() => setShowEnd(true)}>
+                <span>🧠 J'ai tout exploré !</span>
               </button>
             )}
-          </>
+          </div>
         )}
       </div>
 
-    </div>,
-    document.body
+    </div>
   )
 }

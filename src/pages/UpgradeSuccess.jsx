@@ -29,6 +29,7 @@ export default function UpgradeSuccess() {
   const navigate = useNavigate();
   const { currentUser, refreshPremium, isPremium } = useAuth();
   const [step, setStep] = useState(0);
+  const [retriesExhausted, setRetriesExhausted] = useState(false);
   const prenom = currentUser?.displayName?.split(' ')[0] || 'toi';
 
   useEffect(() => {
@@ -41,11 +42,27 @@ export default function UpgradeSuccess() {
     return () => { clearTimeout(t1); clearTimeout(t2); clearTimeout(t3); clearTimeout(t4); clearTimeout(t5); };
   }, []);
 
-  // Retry refreshPremium si le webhook n'a pas encore écrit dans Firestore
+  // Retry refreshPremium si le webhook Stripe n'a pas encore écrit dans
+  // Firestore : backoff 2s/4s/8s/16s (~30s couverts) au lieu d'un seul essai —
+  // sinon l'élève qui vient de payer revoit le PremiumModal jusqu'au reload.
   useEffect(() => {
     if (isPremium) return;
-    const retry = setTimeout(() => refreshPremium(), 2000);
-    return () => clearTimeout(retry);
+    let cancelled = false;
+    let timer = null;
+    const delays = [2000, 4000, 8000, 16000];
+    const attempt = (i) => {
+      if (cancelled || i >= delays.length) {
+        // Webhook toujours pas passé après ~30s : on laisse la main à l'élève.
+        if (!cancelled && i >= delays.length) setRetriesExhausted(true);
+        return;
+      }
+      timer = setTimeout(async () => {
+        await refreshPremium();
+        attempt(i + 1); // no-op si isPremium a changé : l'effet est re-monté
+      }, delays[i]);
+    };
+    attempt(0);
+    return () => { cancelled = true; clearTimeout(timer); };
   }, [isPremium]);
 
   return (
@@ -128,6 +145,15 @@ export default function UpgradeSuccess() {
           <button className="ugs-cta" onClick={() => navigate('/scan')}>
             C'est parti →
           </button>
+          {!isPremium && retriesExhausted && (
+            <button
+              type="button"
+              className="ugs-cta ugs-cta--verify"
+              onClick={() => refreshPremium()}
+            >
+              🔄 Vérifier mon abonnement
+            </button>
+          )}
           <p className="ugs-hint">Tu peux annuler à tout moment depuis les réglages.</p>
         </section>
       </main>

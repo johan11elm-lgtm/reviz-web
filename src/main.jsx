@@ -1,5 +1,12 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
+// Geist auto-hébergée (woff2 servis par Vite) — remplace le CSS Google Fonts
+// render-blocking. Seules les graisses réellement utilisées sont chargées.
+import '@fontsource/geist/400.css'
+import '@fontsource/geist/500.css'
+import '@fontsource/geist/600.css'
+import '@fontsource/geist/700.css'
+import '@fontsource/geist/800.css'
 import './styles/global.css'
 import App from './App.jsx'
 
@@ -17,6 +24,14 @@ createRoot(document.getElementById('root')).render(
 )
 
 // ── Lazy-load Sentry + PostHog after first paint ────────────────────
+// Sentry étant chargé après le first paint, les erreurs des toutes premières
+// secondes (chemin critique : boot, restore, premiers fetchs) passeraient à
+// la trappe — on les tamponne et on les rejoue à l'init.
+const earlyErrors = [];
+const bufferEarlyError = (e) => { earlyErrors.push(e.reason ?? e.error ?? e.message); };
+window.addEventListener('error', bufferEarlyError);
+window.addEventListener('unhandledrejection', bufferEarlyError);
+
 const loadMonitoring = () => {
   if (import.meta.env.VITE_SENTRY_DSN) {
     import('@sentry/react').then(Sentry => {
@@ -32,6 +47,11 @@ const loadMonitoring = () => {
           return event;
         },
       });
+      // Rejoue les erreurs pré-init, puis laisse les intégrations globales
+      // de Sentry (error + unhandledrejection) prendre le relais.
+      window.removeEventListener('error', bufferEarlyError);
+      window.removeEventListener('unhandledrejection', bufferEarlyError);
+      earlyErrors.splice(0).forEach(err => Sentry.captureException(err));
     });
   }
 

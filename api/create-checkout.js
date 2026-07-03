@@ -22,6 +22,10 @@ export default async function handler(req, res) {
     const decoded = await getAuthAdmin().verifyIdToken(idToken)
     uid = decoded.uid
     email = decoded.email
+    // Pas de paiement sans email vérifié (claim signé du token, pas le client).
+    if (!decoded.email_verified) {
+      return res.status(403).json({ error: 'EMAIL_NOT_VERIFIED' })
+    }
   } catch {
     return res.status(401).json({ error: 'Unauthorized' })
   }

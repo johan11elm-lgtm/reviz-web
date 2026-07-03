@@ -12,14 +12,17 @@ const FOCUSABLE =
  * - restauration du focus sur l'élément précédent à la fermeture
  *
  * @param {() => void} onClose appelé sur Escape
+ * @param {boolean} [active=true] pour les panneaux montés en permanence
+ *   (ex. Drawer animé en CSS) : ne piège le focus que quand ils sont ouverts
  * @returns ref à poser sur le conteneur de la modale (role="dialog")
  */
-export function useModalA11y(onClose) {
+export function useModalA11y(onClose, active = true) {
   const ref = useRef(null)
   const onCloseRef = useRef(onClose)
   onCloseRef.current = onClose
 
   useEffect(() => {
+    if (!active) return
     const node = ref.current
     const previouslyFocused = document.activeElement
 
@@ -51,7 +54,7 @@ export function useModalA11y(onClose) {
       document.removeEventListener('keydown', onKeyDown, true)
       previouslyFocused?.focus?.()
     }
-  }, [])
+  }, [active])
 
   return ref
 }

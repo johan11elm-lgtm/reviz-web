@@ -55,8 +55,11 @@ export default async function handler(req, res) {
       if (d.status === 'approved') {
         return res.status(200).json({ ok: true, alreadyApproved: true });
       }
-      // Throttle anti-spam : un envoi par minute maximum.
-      if (d.createdAt && Date.now() - d.createdAt < RESEND_THROTTLE_MS) {
+      // Throttle anti-spam : un envoi par minute maximum. Uniquement si un
+      // email a réellement été envoyé (token présent) — le doc 'pending' posé
+      // au signup (AuthContext) n'a pas de token et ne doit pas retarder
+      // le tout premier envoi du tunnel d'inscription.
+      if (d.token && d.createdAt && Date.now() - d.createdAt < RESEND_THROTTLE_MS) {
         return res.status(429).json({ error: 'RATE_LIMITED' });
       }
     }

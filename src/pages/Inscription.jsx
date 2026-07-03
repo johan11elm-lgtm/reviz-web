@@ -102,6 +102,11 @@ export default function Inscription() {
       case 'parent':
         if (!parentEmail.trim()) return 'Entre l\'email de ton parent.';
         if (!/^\S+@\S+\.\S+$/.test(parentEmail.trim())) return 'Adresse email invalide.';
+        // Le serveur refuse aussi (PARENT_EMAIL_IS_CHILD) — on échoue tôt ici
+        // avec un message clair plutôt qu'après l'aller-retour API.
+        if (parentEmail.trim().toLowerCase() === email.trim().toLowerCase()) {
+          return 'Entre l\'email de ton parent, pas le tien 😉';
+        }
         return null;
       default:
         return null;

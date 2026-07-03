@@ -7,12 +7,18 @@
 export const MODEL = 'claude-haiku-4-5-20251001';
 
 // Palette injectée côté client dans les branches mindmap.
+// Source unique (importée par aiService.js ET MindMap.jsx) — les `color`
+// reprennent les accents du design system (--accent-violet/-orange/-green).
 export const BRANCH_COLORS = [
-  { color: '#6366F1', bgLight: '#EEF2FF', colorLight: '#4338CA', bgDark: '#1E1B4B', colorDark: '#A5B4FC' },
-  { color: '#FF6B00', bgLight: '#FFF4E6', colorLight: '#C05621', bgDark: '#2D1F0A', colorDark: '#FBD38D' },
-  { color: '#22C55E', bgLight: '#F0FDF4', colorLight: '#15803D', bgDark: '#0D2818', colorDark: '#4ADE80' },
+  { color: '#6B4EFF', bgLight: '#EEF2FF', colorLight: '#4338CA', bgDark: '#1E1B4B', colorDark: '#A5B4FC' },
+  { color: '#FF8A3D', bgLight: '#FFF4E6', colorLight: '#C05621', bgDark: '#2D1F0A', colorDark: '#FBD38D' },
+  { color: '#34C77B', bgLight: '#F0FDF4', colorLight: '#15803D', bgDark: '#0D2818', colorDark: '#4ADE80' },
   { color: '#A855F7', bgLight: '#FAF5FF', colorLight: '#7E22CE', bgDark: '#2E1065', colorDark: '#D8B4FE' },
 ];
+
+// Positions canoniques des 4 branches — assignées par index côté client,
+// quel que soit ce que le modèle renvoie (évite doublons/positions inconnues).
+export const BRANCH_POSITIONS = ['top-left', 'top-right', 'bottom-left', 'bottom-right'];
 
 // -------------------------------------------------------
 // Identité + audience selon cycle / classe
@@ -224,6 +230,14 @@ ${flashcardRules(lvl)}
 ${quizRules(lvl)}
 
 ${resumeRules(lvl)}
+
+ADAPTATION PAR MATIÈRE — détecte la matière de la leçon, puis applique le bloc correspondant :
+- Histoire / Géographie : ancre chaque notion dans le temps (dates au format AAAA) et l'espace (lieux, repères) ; structure les explications en cause → conséquence ; le quiz teste la chronologie et les acteurs, pas seulement le vocabulaire ; la carte mentale suit la logique contexte → événements → conséquences → portée.
+- Langues vivantes (Anglais, Allemand, Espagnol...) : flashcards avec le français d'un côté et la langue de l'autre, accompagnées d'une phrase d'exemple naturelle ; couvre les conjugaisons et structures présentes dans la leçon ; distracteurs du quiz = pièges classiques (faux amis, ordre des mots, auxiliaire).
+- Maths / Physique-Chimie : nomme les formules et théorèmes, précise toujours leurs conditions d'application ; écris les formules en notation Unicode lisible (², ³, √, ×, ÷, π, Δ) ; inclus dans le quiz des applications numériques simples calculables de tête.
+- Français : distingue grammaire (règle + exemple + exception) et littérature (auteur, œuvre, mouvement, procédés) ; appuie-toi sur les exemples exacts de la leçon, sans en inventer.
+- SVT : privilégie les enchaînements mécanisme → fonction → rôle ; définis chaque terme scientifique à sa première occurrence ; la carte mentale suit structure → fonctionnement → rôle dans l'organisme/l'écosystème.
+- Autre matière : applique les règles générales avec le vocabulaire propre à la discipline.
 
 RÈGLES DE LA CARTE MENTALE :
 - Labels : 2-3 mots maximum, percutants.

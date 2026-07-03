@@ -4,6 +4,7 @@ import { useTheme } from '../context/ThemeContext';
 import { useAuth } from '../context/AuthContext';
 import { formatLevelLabel } from '../utils/levels';
 import { openBillingPortal } from '../services/billingService';
+import { useModalA11y } from '../hooks/useModalA11y';
 
 function firebaseErrorFr(code) {
   switch (code) {
@@ -25,6 +26,10 @@ export function Drawer({ isOpen, onClose }) {
   const prenom   = currentUser?.displayName ?? '';
   const initiale = prenom[0]?.toUpperCase() ?? '?';
   const levelLabel = formatLevelLabel(getUserLevel());
+
+  // A11y modale (Escape, piège + restauration du focus) — le drawer restant
+  // monté en permanence pour l'animation CSS, le hook ne s'active qu'ouvert.
+  const drawerRef = useModalA11y(onClose, isOpen);
 
   // Panneau actif : null | 'email' | 'password' | 'apropos'
   const [activePanel, setActivePanel] = useState(null);
@@ -112,7 +117,7 @@ export function Drawer({ isOpen, onClose }) {
         onClick={onClose}
         aria-hidden="true"
       />
-      <div className={`drawer${isOpen ? ' open' : ''}`} role="dialog" aria-label="Menu">
+      <div className={`drawer${isOpen ? ' open' : ''}`} role="dialog" aria-modal="true" aria-label="Menu" aria-hidden={!isOpen} ref={drawerRef}>
         {/* Header profil */}
         <div className="drawer-header">
           <div className="drawer-avatar">{initiale}</div>

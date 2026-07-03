@@ -53,11 +53,6 @@ export function isCollege(level) {
   return level?.cycle === 'college';
 }
 
-export function requiresParentalConsentCheck(level) {
-  // Seuls les collégiens peuvent avoir <15 ans → on ne vérifie qu'eux
-  return isCollege(level);
-}
-
 // Étiquette d'affichage compacte : "3ème", "Terminale · Maths, NSI"
 export function formatLevelLabel(level) {
   if (!level?.classe) return '';

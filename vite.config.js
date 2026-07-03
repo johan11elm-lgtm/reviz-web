@@ -34,5 +34,19 @@ export default defineConfig({
     setupFiles: ['./src/test/setup.js'],
     css: false,
     exclude: ['node_modules', 'dist', 'e2e', 'ios'],
+    coverage: {
+      provider: 'v8',
+      reporter: ['text', 'lcov'],
+      // Cœur métier testé unitairement — les pages/composants passent par
+      // l'e2e Playwright, pas par les seuils unitaires.
+      include: ['src/services/**', 'src/utils/**', 'api/**'],
+      exclude: ['**/__tests__/**', 'api/_systemPrompt.js'],
+      // Cliquet anti-régression : calibré juste sous la couverture du
+      // 2026-07-02 (services 38.9 % / utils 27 %) — à remonter au fil des tests.
+      thresholds: {
+        'src/services/**': { statements: 35, branches: 40 },
+        'src/utils/**':    { statements: 25, branches: 30 },
+      },
+    },
   },
 })

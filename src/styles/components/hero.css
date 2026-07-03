@@ -85,6 +85,9 @@
   color: #fff;
   margin: 0;
   max-width: 16ch;
+  /* Titres générés par l'IA : un mot long insécable (terme de chimie…)
+     ne doit jamais déborder de la carte. */
+  overflow-wrap: anywhere;
 }
 
 .rv-hero-sub {

@@ -4,14 +4,19 @@ import { recordRevision } from '../services/revisionService'
 import { getDueCards, updateCardState } from '../services/srsService'
 import { PageHeader } from '../components/PageHeader'
 import { Mascot } from '../components/Mascot'
+import { MissingLessonState } from '../components/MissingLessonState'
+import { FormatFeedback } from '../components/FormatFeedback'
 import './Flashcards.css'
 
-// ---- DONNÉES : localStorage (IA) > mock ----
+// ---- DONNÉES : localStorage (IA) > état vide (mock réservé au dev) ----
 function getFlashcards() {
   try {
     const ai = JSON.parse(localStorage.getItem('reviz-ai-data') || 'null')
     if (ai?.flashcards?.length > 0) return ai.flashcards
   } catch { /* ignore */ }
+  // En prod, pas de leçon = état vide honnête — jamais le mock « Pythagore »
+  // affiché sous badge « Généré par IA ».
+  if (!import.meta.env.DEV) return null
   return [
     { front: "Qu'énonce le théorème de Pythagore ?", back: "Dans un triangle rectangle, le carré de l'hypoténuse est égal à la somme des carrés des deux autres côtés : a² + b² = c²" },
     { front: "Qu'est-ce que l'hypoténuse ?", back: "Le côté opposé à l'angle droit dans un triangle rectangle. C'est le côté le plus long." },
@@ -32,6 +37,13 @@ function getLessonId() {
 }
 
 export default function Flashcards() {
+  // Décision stable pour toute la vie du composant (rules-of-hooks safe).
+  const [hasData] = useState(() => getFlashcards() !== null)
+  if (!hasData) return <MissingLessonState title="Flashcards" />
+  return <FlashcardsSession />
+}
+
+function FlashcardsSession() {
   useEffect(() => { recordRevision('flashcards') }, [])
   const lessonId   = useMemo(() => getLessonId(), [])
   const rawCards   = getFlashcards()
@@ -166,6 +178,7 @@ export default function Flashcards() {
             </div>
           </div>
           <div className="flashcards-xp-badge">+{xp} XP gagnés !</div>
+          <FormatFeedback format="flashcards" question="Ces cartes t'ont aidé ?" />
           <div className="rv-end-screen-actions">
             <button type="button" className="rv-btn-cta rv-btn-cta--full" onClick={restartDeck}>
               <span>🔄 Recommencer</span>

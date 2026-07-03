@@ -3,14 +3,18 @@ import { Link } from 'react-router-dom'
 import { recordRevision } from '../services/revisionService'
 import { PageHeader } from '../components/PageHeader'
 import { Mascot } from '../components/Mascot'
+import { MissingLessonState } from '../components/MissingLessonState'
+import { FormatFeedback } from '../components/FormatFeedback'
 import './Quiz.css'
 
-// ---- DONNÉES : localStorage (IA) > mock ----
+// ---- DONNÉES : localStorage (IA) > état vide (mock réservé au dev) ----
 function getQuestions() {
   try {
     const ai = JSON.parse(localStorage.getItem('reviz-ai-data') || 'null')
     if (ai?.quiz?.length > 0) return ai.quiz
   } catch { /* ignore */ }
+  // En prod, pas de leçon = état vide honnête — jamais le mock « Pythagore ».
+  if (!import.meta.env.DEV) return null
   return [
     { question: "Dans un triangle rectangle, quel est le côté opposé à l'angle droit ?", choices: ["Le côté adjacent", "L'hypoténuse", "La médiane", "Le côté opposé"], correct: 1, explanation: "L'hypoténuse est toujours le côté le plus long, situé en face de l'angle droit." },
     { question: "Quelle est la formule du théorème de Pythagore ?", choices: ["a + b = c", "a² - b² = c²", "a² + b² = c²", "2a + 2b = c"], correct: 2, explanation: "Le carré de l'hypoténuse (c) est égal à la somme des carrés des deux autres côtés (a et b)." },
@@ -86,6 +90,13 @@ function useCountUp(target, active) {
 }
 
 export default function Quiz() {
+  // Décision stable pour toute la vie du composant (rules-of-hooks safe).
+  const [hasData] = useState(() => getQuestions() !== null)
+  if (!hasData) return <MissingLessonState title="Quiz" />
+  return <QuizSession />
+}
+
+function QuizSession() {
   useEffect(() => { recordRevision('quiz') }, [])
   const questions = getQuestions()
 
@@ -186,6 +197,7 @@ export default function Quiz() {
             <span className="quiz-score-small">score</span>
           </div>
           <div className="quiz-xp-badge">+{xp} XP gagnés !</div>
+          <FormatFeedback format="quiz" question="Ces questions t'ont aidé ?" />
           <div className="rv-end-screen-actions">
             <button type="button" className="rv-btn-cta rv-btn-cta--full" onClick={restartQuiz}>
               <span>🔄 Recommencer</span>
@@ -236,6 +248,7 @@ export default function Quiz() {
               className={getChoiceClass(i)}
               onClick={() => selectAnswer(i)}
               disabled={answered}
+              aria-pressed={answered ? selectedIndex === i : undefined}
               style={{ animationDelay: `${i * 25}ms` }}
             >
               <span className="quiz-choice-letter">{LETTERS[i]}</span>
@@ -246,8 +259,12 @@ export default function Quiz() {
 
       </div>
 
-      {/* ── Panel de feedback (sheet partagée) ── */}
-      <div className={`rv-sheet--bottom quiz-feedback${!answered ? ' rv-sheet--bottom-hidden' : ''}${isCorrect ? ' quiz-feedback--correct' : ' quiz-feedback--wrong'}`}>
+      {/* ── Panel de feedback (sheet partagée) — annoncé aux lecteurs d'écran ── */}
+      <div
+        className={`rv-sheet--bottom quiz-feedback${!answered ? ' rv-sheet--bottom-hidden' : ''}${isCorrect ? ' quiz-feedback--correct' : ' quiz-feedback--wrong'}`}
+        role="status"
+        aria-live="polite"
+      >
         <div className="rv-sheet-handle" aria-hidden="true" />
         <div className="quiz-feedback-row">
           <div className={`rv-icon-square rv-icon-square--${isCorrect ? 'green' : 'red'} quiz-feedback-icon`}>

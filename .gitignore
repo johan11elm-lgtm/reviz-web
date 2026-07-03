@@ -20,3 +20,9 @@ coverage/
 
 # Rapport d'audit interne (failles non corrigées — ne pas publier)
 AUDIT.md
+AUDIT-2026-07.md
+
+# Logs de debug émulateurs Firebase (artefacts locaux)
+firebase-debug.log
+firestore-debug.log
+*-debug.log

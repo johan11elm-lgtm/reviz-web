@@ -32,12 +32,17 @@ service cloud.firestore {
       match /lessons/{lessonId}     { allow read, write: if isOwner(userId); }
       match /revisions/{revisionId} { allow read, write: if isOwner(userId); }
 
-      // Consentement parental : créé/approuvé UNIQUEMENT côté serveur (admin).
-      // Le client peut lire (pour l'affichage) et supprimer (RGPD art. 17),
-      // mais jamais créer ni modifier (sinon l'enfant s'auto-approuve).
+      // Consentement parental : approuvé UNIQUEMENT côté serveur (admin).
+      // Le client peut lire (pour l'affichage), supprimer (RGPD art. 17) et
+      // poser la trace 'pending' dès l'inscription d'un mineur — mais jamais
+      // écrire le token d'approbation ni un statut approuvé (sinon l'enfant
+      // s'auto-approuve).
       match /parentalConsent/{doc} {
         allow read, delete: if isOwner(userId);
-        allow create, update: if false;
+        allow create: if isOwner(userId)
+          && request.resource.data.keys().hasOnly(['status', 'createdAt'])
+          && request.resource.data.status == 'pending';
+        allow update: if false;
       }
     }
 
@@ -45,6 +50,17 @@ service cloud.firestore {
     match /usage/{userId} {
       allow read:  if isOwner(userId);
       allow write: if false;
+    }
+
+    // Feedback élève sur les formats IA : création seule, champs verrouillés.
+    // Lecture réservée à l'admin (console / firebase-admin) pour l'agrégation.
+    match /aiFeedback/{docId} {
+      allow create: if request.auth != null
+        && request.resource.data.uid == request.auth.uid
+        && request.resource.data.rating in ['up', 'meh', 'down']
+        && request.resource.data.format in ['flashcards', 'quiz', 'resume', 'mindmap']
+        && request.resource.data.keys().hasOnly(['uid', 'format', 'rating', 'lessonTitle', 'subject', 'classe', 'createdAt']);
+      allow read, update, delete: if false;
     }
 
     match /{document=**} {

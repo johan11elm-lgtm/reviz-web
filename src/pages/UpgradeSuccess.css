@@ -285,7 +285,8 @@
   display: block;
   width: 100%;
   text-align: center;
-  background: var(--accent-orange);
+  /* variante strong : AA 4.5:1 pour le texte blanc */
+  background: var(--accent-orange-strong, var(--accent-orange));
   color: white;
   border: none;
   border-radius: 10px;
@@ -300,6 +301,14 @@
 .ugs-cta:active {
   opacity: 0.85;
   transform: scale(0.99);
+}
+
+/* Variante secondaire : re-vérification manuelle si le webhook Stripe tarde */
+.ugs-cta--verify {
+  background: var(--bg-card);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+  margin-top: 8px;
 }
 
 .ugs-hint {

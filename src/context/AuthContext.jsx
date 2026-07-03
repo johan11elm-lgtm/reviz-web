@@ -1,7 +1,7 @@
 // -------------------------------------------------------
 // Réviz — Contexte d'authentification Firebase
 // -------------------------------------------------------
-import { createContext, useContext, useEffect, useState } from 'react';
+import { createContext, useContext, useEffect, useMemo, useState } from 'react';
 import {
   onAuthStateChanged,
   createUserWithEmailAndPassword,
@@ -26,7 +26,7 @@ import { setActiveUser as setRevisionUser } from '../services/revisionService';
 import { setSrsUser } from '../services/srsService';
 import { setChallengeUser } from '../services/challengeService';
 import { setScanLimitUser, setPremiumStatus } from '../services/scanLimitService';
-import { collection, getDocs, deleteDoc, doc, getDoc } from 'firebase/firestore';
+import { collection, getDocs, deleteDoc, doc, getDoc, setDoc } from 'firebase/firestore';
 
 const AuthContext = createContext();
 
@@ -55,6 +55,18 @@ export function AuthProvider({ children }) {
     try {
       await createUserProfile(user.uid, { prenom, email, birthDate, level });
     } catch { /* best-effort : le profil sera recréé au besoin */ }
+    // Mineur <15 ans : trace de consentement 'pending' posée dès l'inscription,
+    // même si le tunnel est abandonné avant l'étape parent. Le gate bloque déjà
+    // en l'absence de doc ; ceci rend l'attente visible/auditables côté serveur.
+    // L'approbation reste impossible côté client (firestore.rules).
+    if (isUnder15(birthDate)) {
+      try {
+        await setDoc(doc(db, 'users', user.uid, 'parentalConsent', 'consent'), {
+          status: 'pending',
+          createdAt: Date.now(),
+        });
+      } catch { /* best-effort : recréé par /api/send-parental-consent */ }
+    }
     // Forcer le re-render avec le displayName mis à jour
     setCurrentUser({ ...auth.currentUser });
     // Niveau scolaire stocké aussi en localStorage (cache lu par le reste de l'app)
@@ -249,7 +261,13 @@ export function AuthProvider({ children }) {
     }
   }
 
-  const value = {
+  // Identité stable du value : sans useMemo, chaque render du provider
+  // re-rendait tous les consommateurs (~15 pages/composants). Les fonctions
+  // sont recréées à chaque render mais seules celles closant sur un état
+  // listé en dépendance (getUserLevel/getUserClasse → currentUser) doivent
+  // être fraîches — currentUser est bien dans les deps.
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const value = useMemo(() => ({
     currentUser,
     loading,
     consentBlocked,
@@ -270,7 +288,7 @@ export function AuthProvider({ children }) {
     updateUserPassword,
     resendVerificationEmail,
     deleteAccount,
-  };
+  }), [currentUser, loading, consentBlocked, needsProfileSetup, isPremium]);
 
   // On ne rend les enfants qu'une fois Firebase prêt (évite le flash de redirect)
   return (
