@@ -280,6 +280,9 @@ input, textarea {
     border-radius: 0;
     box-shadow: none;
     overflow: hidden;
+    /* Encoche iPhone (viewport-fit=cover) : le contenu démarre sous la
+       barre de statut ; 0 partout ailleurs. */
+    padding-top: env(safe-area-inset-top, 0px);
   }
 
   /* Nav fixée en bas du viewport sur mobile, en capsule flottante */

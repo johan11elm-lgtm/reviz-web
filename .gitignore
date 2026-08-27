@@ -26,3 +26,8 @@ AUDIT-2026-07.md
 firebase-debug.log
 firestore-debug.log
 *-debug.log
+
+# Artefacts de build iOS (Capacitor)
+ios/App/build/
+ios/App/App/public/
+ios/DerivedData/

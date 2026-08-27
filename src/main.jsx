@@ -85,7 +85,8 @@ if ('requestIdleCallback' in window) {
 // Service Worker registration — uniquement en production.
 // En dev le SW intercepte le HMR et sert du CSS périmé, ce qui cause des
 // bugs de layout au retour de navigation (cards écrasées, styles obsolètes).
-if ('serviceWorker' in navigator) {
+// Dans l'app native (Capacitor), les assets sont embarqués : pas de SW.
+if ('serviceWorker' in navigator && window.location.protocol !== 'capacitor:') {
   if (import.meta.env.PROD) {
     window.addEventListener('load', () => {
       navigator.serviceWorker.register('/sw.js')

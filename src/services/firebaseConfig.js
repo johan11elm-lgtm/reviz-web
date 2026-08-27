@@ -5,8 +5,9 @@
 // projet `demo-*` 100 % hors-ligne : aucune donnée ne touche la prod.
 // -------------------------------------------------------
 import { initializeApp } from 'firebase/app';
-import { getAuth, connectAuthEmulator } from 'firebase/auth';
+import { getAuth, initializeAuth, indexedDBLocalPersistence, connectAuthEmulator } from 'firebase/auth';
 import { getFirestore, connectFirestoreEmulator } from 'firebase/firestore';
+import { Capacitor } from '@capacitor/core';
 
 const useEmulator = import.meta.env.VITE_FIREBASE_EMULATOR === '1';
 
@@ -28,7 +29,13 @@ const firebaseConfig = useEmulator
     };
 
 const app = initializeApp(firebaseConfig);
-export const auth = getAuth(app);
+
+// App native (Capacitor) : getAuth() échoue sous l'origine capacitor:// —
+// init explicite avec persistance IndexedDB (recommandation Firebase).
+// Pas de popupRedirectResolver : le login Google est masqué en natif.
+export const auth = Capacitor.isNativePlatform()
+  ? initializeAuth(app, { persistence: indexedDBLocalPersistence })
+  : getAuth(app);
 export const db   = getFirestore(app);
 
 if (useEmulator) {

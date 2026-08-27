@@ -3,6 +3,7 @@
 // Le customerId est résolu côté serveur depuis le token vérifié.
 // -------------------------------------------------------
 import { auth } from './firebaseConfig'
+import { apiFetch } from './apiClient.js'
 
 /**
  * Ouvre le portail Stripe Billing (redirection pleine page).
@@ -12,12 +13,31 @@ export async function openBillingPortal() {
   const idToken = await auth.currentUser?.getIdToken().catch(() => null)
   if (!idToken) throw new Error('UNAUTHORIZED')
 
-  const res = await fetch('/api/create-billing-portal', {
+  const res = await apiFetch('/api/create-billing-portal', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ idToken }),
   })
   const data = await res.json().catch(() => ({}))
+  if (!res.ok || !data.url) throw new Error(data.error || `HTTP_${res.status}`)
+  window.location.href = data.url
+}
+
+/**
+ * Lance le checkout Stripe Réviz+ (redirection pleine page).
+ * @throws {Error} 'UNAUTHORIZED' | 'EMAIL_NOT_VERIFIED' | 'HTTP_xxx'
+ */
+export async function startCheckout() {
+  const idToken = await auth.currentUser?.getIdToken().catch(() => null)
+  if (!idToken) throw new Error('UNAUTHORIZED')
+
+  const res = await apiFetch('/api/create-checkout', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ idToken }),
+  })
+  const data = await res.json().catch(() => ({}))
+  if (res.status === 403 && data.error === 'EMAIL_NOT_VERIFIED') throw new Error('EMAIL_NOT_VERIFIED')
   if (!res.ok || !data.url) throw new Error(data.error || `HTTP_${res.status}`)
   window.location.href = data.url
 }

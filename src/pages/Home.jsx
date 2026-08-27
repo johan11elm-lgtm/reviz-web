@@ -12,6 +12,7 @@ import { countDueCards } from '../services/srsService';
 import { getWeeklyChallenges } from '../services/challengeService';
 import { computeStreak, computeLevel, computeBadges, XP_PAR_NIVEAU } from '../utils/gamification';
 import { AchievementToast } from '../components/AchievementToast';
+import { CoachChat, CoachEntryCard } from '../components/CoachChat';
 import './Home.css';
 
 const FlashcardsIcon = () => (
@@ -126,6 +127,7 @@ export default function Home() {
   const [allLessons, setAllLessons] = useState(() => loadLessons());
   const [challenges] = useState(() => getWeeklyChallenges());
   const [newBadge, setNewBadge] = useState(null);
+  const [coachOpen, setCoachOpen] = useState(false);
 
   useEffect(() => {
     const onboardedKey = `reviz-onboarded-${currentUser?.uid}`;
@@ -309,6 +311,14 @@ export default function Home() {
           </div>
         )}
 
+        {/* Coach de révision — sur la Home, le contexte est la dernière leçon scannée */}
+        {lastLesson && (
+          <CoachEntryCard
+            onClick={() => setCoachOpen(true)}
+            desc={`Pose-moi tes questions sur « ${lastLesson.metadata.title} »`}
+          />
+        )}
+
         <div className="rv-card rv-card--padded home-challenges-card">
           <div className="home-challenges-header">
             <span className="home-challenges-title">Défis de la semaine</span>
@@ -339,6 +349,14 @@ export default function Home() {
 
       <BottomNav active="home" />
       <Drawer isOpen={drawerOpen} onClose={() => setDrawerOpen(false)} />
+      {coachOpen && lastLesson && (
+        <CoachChat
+          isOpen
+          onClose={() => setCoachOpen(false)}
+          lessonId={lastLesson.id}
+          lessonTitle={lastLesson.metadata.title}
+        />
+      )}
     </div>
   );
 }

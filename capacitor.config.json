@@ -1,0 +1,8 @@
+{
+  "appId": "com.reviz.app",
+  "appName": "Réviz",
+  "webDir": "dist",
+  "ios": {
+    "backgroundColor": "#F8EFE7"
+  }
+}

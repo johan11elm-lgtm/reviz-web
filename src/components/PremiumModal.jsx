@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useModalA11y } from '../hooks/useModalA11y';
+import { apiFetch } from '../services/apiClient.js';
 import './PremiumModal.css';
 
 /**
@@ -24,7 +25,7 @@ export function PremiumModal({ onClose, used = 5, limit = 5 }) {
     setLoading(true);
     try {
       const idToken = await currentUser?.getIdToken();
-      const res = await fetch('/api/create-checkout', {
+      const res = await apiFetch('/api/create-checkout', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ idToken }),

@@ -10,6 +10,7 @@ import { analyseLesson, analyseImage, popPendingAnalysis } from '../services/aiS
 import { saveLesson } from '../services/historyService';
 import { PremiumModal } from '../components/PremiumModal';
 import { MissingLessonState } from '../components/MissingLessonState';
+import { CoachChat, CoachEntryCard } from '../components/CoachChat';
 import { getScanStatus } from '../services/scanLimitService';
 import { subjectInfo } from '../utils/subjects';
 import './Analyse.css';
@@ -73,6 +74,7 @@ export default function Analyse() {
   const [progress, setProgress]       = useState(0);
   const [showPremium, setShowPremium] = useState(false);
   const [noLesson, setNoLesson]       = useState(false);
+  const [coachOpen, setCoachOpen]     = useState(false);
   const navigate   = useNavigate();
   const { currentUser, getUserLevel } = useAuth();
   const initiale   = currentUser?.displayName?.[0]?.toUpperCase() ?? '?';
@@ -162,6 +164,9 @@ export default function Analyse() {
 
   const displayLesson = lesson || mockLesson;
   const totalElements = displayLesson.flashcardsCount + displayLesson.quizCount;
+  // Id de la leçon courante — posé par saveLesson() / restoreLesson().
+  // Absent sur le mock dev : le coach n'a alors pas de contexte serveur.
+  const coachLessonId = localStorage.getItem('reviz-current-lesson-id');
 
   const errorMessages = {
     NON_SCOLAIRE:    { title: "Ça n'a pas l'air d'une leçon", sub: "Réviz ne marche qu'avec des cours et des leçons. Scanne une vraie leçon pour lancer ta session." },
@@ -293,6 +298,12 @@ export default function Analyse() {
           </div>
         )}
 
+        {/* Coach de révision — chat contextuel sur la leçon (Firestore requis
+            pour le contexte serveur → pas de coach sur le mock dev sans id). */}
+        {lesson && coachLessonId && (
+          <CoachEntryCard onClick={() => setCoachOpen(true)} />
+        )}
+
         <div className="analyse-format-grid">
           {formats.map(f => {
             const count = f.getCount(displayLesson);
@@ -321,6 +332,14 @@ export default function Analyse() {
       <BottomNav active="" />
       <Drawer isOpen={drawerOpen} onClose={() => setDrawerOpen(false)} />
       {showPremium && <PremiumModal onClose={() => navigate('/scan')} />}
+      {coachOpen && coachLessonId && (
+        <CoachChat
+          isOpen
+          onClose={() => setCoachOpen(false)}
+          lessonId={coachLessonId}
+          lessonTitle={displayLesson.title}
+        />
+      )}
     </div>
   );
 }

@@ -5,6 +5,7 @@
 // -------------------------------------------------------
 
 import { auth } from './firebaseConfig.js'
+import { apiFetch } from './apiClient.js'
 import { MODEL, BRANCH_COLORS, BRANCH_POSITIONS, buildSystemPrompt, buildLessonUserMessage, LESSON_IMAGE_INSTRUCTION } from '../utils/aiPrompts.js'
 import { downscaleDataUrl } from '../utils/downscaleImage.js'
 
@@ -197,7 +198,7 @@ async function _callProxy(endpoint, payload, onProgress) {
   const controller = new AbortController()
   const fetchTimeout = setTimeout(() => controller.abort(), 30000)
   try {
-    response = await fetch(endpoint, {
+    response = await apiFetch(endpoint, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ ...payload, idToken }),

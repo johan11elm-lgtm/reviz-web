@@ -3,6 +3,7 @@
 // L'uid est dérivé côté serveur du token Firebase (jamais envoyé en clair).
 // -------------------------------------------------------
 import { auth } from './firebaseConfig'
+import { apiFetch } from './apiClient.js'
 
 const ERROR_MESSAGES = {
   PARENT_EMAIL_IS_CHILD: "Utilise l'adresse d'un parent, pas la tienne.",
@@ -24,7 +25,7 @@ export async function sendParentalConsent(parentEmail, childName) {
   const idToken = await auth.currentUser?.getIdToken().catch(() => null)
   if (!idToken) throw new Error('UNAUTHORIZED')
 
-  const res = await fetch('/api/send-parental-consent', {
+  const res = await apiFetch('/api/send-parental-consent', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ idToken, parentEmail, childName }),
