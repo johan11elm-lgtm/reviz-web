@@ -47,8 +47,9 @@
 ## Règles d'intégration
 
 1. Vérifier : pas de watermark ✦, pas de texte, fond magenta uni, style cohérent.
-2. Détourage : chroma-key du magenta → alpha propre (PAS l'option `--erode`,
-   réservée aux anciens masters).
+2. Détourage : `node scripts/key-mascot.mjs <brut.png> assets-src/mascot/<pose>.png`
+   (clé douce + despill + anti-aliasing ; ne PAS utiliser `--erode` de
+   process-mascots, réservé aux anciens masters).
 3. Nommage : `pose-<id>.png` en 1024×1024 dans `assets-src/mascot/`.
 4. `node scripts/process-mascots.mjs` pour générer les @256/@512 PNG+WebP.
 5. Les anciennes poses (1 à 16) restent servies telles quelles tant que leurs
