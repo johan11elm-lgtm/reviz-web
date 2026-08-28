@@ -61,7 +61,9 @@
 .coach-sheet {
   width: 100%;
   max-width: 520px;
+  height: 82vh;  /* vh fallback iOS 15 */
   height: 82dvh;
+  max-height: 82vh;  /* vh fallback iOS 15 */
   max-height: 82dvh;
   background: var(--bg-app);
   border-radius: var(--radius-lg) var(--radius-lg) 0 0;

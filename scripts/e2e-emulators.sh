@@ -1,10 +1,11 @@
 #!/bin/bash
 # Démarre l'Emulator Suite Firebase pour les e2e, en nettoyant d'abord les
 # processus orphelins d'un run précédent (l'émulateur Firestore — java — peut
-# survivre à l'arrêt de Playwright et bloquer les ports 8080/9099).
+# survivre à l'arrêt de Playwright et bloquer les ports 8080/9099 — on
+# libère aussi le 5199 d'un Vite e2e orphelin, en strictPort).
 set -e
 
-for port in 8080 9099; do
+for port in 8080 9099 5199; do
   pids=$(lsof -ti :$port 2>/dev/null || true)
   if [ -n "$pids" ]; then
     echo "Port $port occupé (pids: $pids) — nettoyage"

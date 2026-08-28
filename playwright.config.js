@@ -24,15 +24,17 @@ export default defineConfig({
     {
       // Le script nettoie les émulateurs orphelins avant de démarrer
       // (le process java de Firestore peut survivre à l'arrêt de Playwright).
+      // En local on réutilise un serveur déjà en place (sinon Playwright
+      // échoue avant même de lancer le script de nettoyage) ; en CI, strict.
       command: 'bash scripts/e2e-emulators.sh',
       url: 'http://127.0.0.1:9099',
-      reuseExistingServer: false,
+      reuseExistingServer: !process.env.CI,
       timeout: 120_000,
     },
     {
       command: 'VITE_FIREBASE_EMULATOR=1 VITE_ANTHROPIC_API_KEY= npx vite --port 5199 --strictPort',
       url: 'http://localhost:5199',
-      reuseExistingServer: false,
+      reuseExistingServer: !process.env.CI,
       timeout: 60_000,
     },
   ],

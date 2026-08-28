@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "build:ios": "vite build --mode ios && cap sync ios",
+    "build:ios": "vite build --mode ios && bash scripts/guard-ios-bundle.sh && cap sync ios",
+    "sync:ios": "bash scripts/guard-ios-bundle.sh && cap sync ios",
     "preview": "vite preview",
     "test": "vitest run",
     "test:coverage": "vitest run --coverage",

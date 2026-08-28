@@ -256,6 +256,7 @@ input, textarea {
   }
   .app {
     width: min(600px, calc(100vw - 32px));
+    min-height: calc(100vh - 40px);  /* vh fallback iOS 15 */
     min-height: calc(100dvh - 40px);
     border-radius: 28px;
     box-shadow: 0 16px 48px rgba(0,0,0,0.1);
@@ -275,6 +276,7 @@ input, textarea {
   }
   .app {
     width: 100%;
+    height: 100vh;  /* vh fallback iOS 15 */
     height: 100dvh;
     min-height: unset;
     border-radius: 0;
@@ -300,6 +302,46 @@ input, textarea {
     padding-bottom: calc(120px + env(safe-area-inset-bottom, 0px));
     min-height: 0;
   }
+}
+
+/* App native (Capacitor) : toujours plein écran, quelle que soit la
+   largeur — les iPhone Pro Max (440 pt) et iPad tomberaient sinon dans
+   la branche « tablette » ci-dessus (carte centrée, sans safe-area).
+   La classe .native est posée sur <html> par src/main.jsx avant le
+   render ; ces règles dupliquent le bloc mobile @media (max-width: 430px)
+   et priment sur la branche tablette par spécificité et ordre. */
+html.native, html.native body, html.native #root {
+  width: 100%;
+  overflow-x: hidden;
+}
+html.native body {
+  display: block;
+  padding: 0;
+  background: var(--bg-app);
+}
+html.native .app {
+  width: 100%;
+  height: 100vh;  /* vh fallback iOS 15 */
+  height: 100dvh;
+  min-height: unset;
+  border-radius: 0;
+  box-shadow: none;
+  overflow: hidden;
+  /* Encoche iPhone (viewport-fit=cover) : le contenu démarre sous la
+     barre de statut ; 0 partout ailleurs. */
+  padding-top: env(safe-area-inset-top, 0px);
+}
+html.native .bottom-nav {
+  position: fixed;
+  bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+  left: 12px;
+  right: 12px;
+  margin: 0;
+  z-index: 200;
+}
+html.native .content, html.native .pg-content {
+  padding-bottom: calc(120px + env(safe-area-inset-bottom, 0px));
+  min-height: 0;
 }
 
 /* ─── Bottom nav ───────────────────────────────────────────────── */

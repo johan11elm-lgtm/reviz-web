@@ -30,15 +30,31 @@ export async function apiFetch(path, init = {}) {
     res = await CapacitorHttp.request({
       url,
       method: init.method || 'GET',
-      headers: init.headers || {},
-      data: init.body !== undefined ? JSON.parse(init.body) : undefined,
+      // Content-Type par défaut dès qu'un corps est présent : sans cet
+      // en-tête, la couche native iOS ignore silencieusement le corps.
+      headers: {
+        ...(init.body !== undefined ? { 'Content-Type': 'application/json' } : {}),
+        ...(init.headers || {}),
+      },
+      // Corps transmis tel quel (string) : le natif l'accepte directement,
+      // et un JSON.parse casserait tout corps non-JSON.
+      data: init.body,
       responseType: 'text',
-      connectTimeout: 30000,
-      readTimeout: 120000,
+      // Un seul timeout : iOS prend le premier fourni (connect ?? read),
+      // donc connect+read ensemble ramèneraient le budget à 30 s.
+      connectTimeout: 120000,
     })
   } catch (err) {
+    const message = err?.message || ''
+    // Timeout natif → AbortError, pour que les services affichent
+    // TIMEOUT et non NETWORK_ERROR (cf. aiService/chatService)
+    if (err?.code === -1001 || /timed out/i.test(message)) {
+      const abortErr = new Error(message || 'TIMEOUT')
+      abortErr.name = 'AbortError'
+      throw abortErr
+    }
     // Aligne les échecs réseau natifs sur le contrat de fetch (TypeError)
-    throw new TypeError(err?.message || 'NETWORK_ERROR')
+    throw new TypeError(message || 'NETWORK_ERROR')
   }
 
   const status = res.status >= 200 && res.status <= 599 ? res.status : 599

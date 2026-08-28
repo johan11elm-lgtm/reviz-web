@@ -2,6 +2,7 @@
 /* Wrapper: .onboarding-page */
 
 .onboarding-page {
+  min-height: 100vh;  /* vh fallback iOS 15 */
   min-height: 100dvh;
   display: flex;
   flex-direction: column;

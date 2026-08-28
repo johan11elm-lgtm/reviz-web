@@ -3,7 +3,7 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import { sentryVitePlugin } from '@sentry/vite-plugin'
 
-export default defineConfig({
+export default defineConfig(({ mode }) => ({
   plugins: [
     react(),
     // Upload source maps to Sentry on production builds
@@ -16,7 +16,9 @@ export default defineConfig({
   server: { allowedHosts: true },
   build: {
     target: ['chrome87', 'firefox78', 'safari14', 'edge88'],
-    sourcemap: true, // required for readable Sentry stack traces
+    // Sourcemaps requises pour des stack traces Sentry lisibles (web) —
+    // jamais en mode ios : elles embarqueraient tout le source dans l'IPA.
+    sourcemap: mode !== 'ios',
     rollupOptions: {
       output: {
         manualChunks: {
@@ -49,4 +51,4 @@ export default defineConfig({
       },
     },
   },
-})
+}))

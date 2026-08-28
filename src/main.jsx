@@ -9,6 +9,15 @@ import '@fontsource/geist/700.css'
 import '@fontsource/geist/800.css'
 import './styles/global.css'
 import App from './App.jsx'
+import { IS_NATIVE } from './services/apiClient.js'
+
+// App native (Capacitor) : layout plein écran forcé quelle que soit la
+// largeur (les iPhone Pro Max à 440 pt et les iPad tomberaient sinon dans
+// la branche « tablette » de global.css). Posé avant le render pour
+// éviter tout flash de la carte centrée.
+if (IS_NATIVE) {
+  document.documentElement.classList.add('native');
+}
 
 // Désactive le scroll restoration auto du browser pour que ScrollToTop soit
 // le seul à contrôler la position, évite les sauts de quelques pixels au retour
