@@ -9,13 +9,16 @@
   background: var(--bg-app);
   color: var(--text-primary);
   position: relative;
-  padding: 28px 24px 16px;
+  /* Encoche iPhone : la page est rendue hors du shell paddé (.app) */
+  padding: calc(28px + env(safe-area-inset-top, 0px)) 24px 16px;
 }
 
 /* ── Skip top-right ── */
 .onboarding-page .onb-skip {
   position: absolute;
-  top: 22px;
+  /* Sous l'encoche iPhone : le bouton est absolu, il ignore le padding
+     safe-area du shell — on ajoute l'inset ici (0 hors natif). */
+  top: calc(22px + env(safe-area-inset-top, 0px));
   right: 22px;
   z-index: 10;
   background: var(--bg-subtle);
