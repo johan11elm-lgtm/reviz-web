@@ -11,6 +11,7 @@ import { loadRevisions } from '../services/revisionService';
 import { countDueCards } from '../services/srsService';
 import { getWeeklyChallenges } from '../services/challengeService';
 import { computeStreak, computeLevel, computeBadges, XP_PAR_NIVEAU } from '../utils/gamification';
+import { subjectMascot } from '../utils/subjects';
 import { AchievementToast } from '../components/AchievementToast';
 import { CoachChat, CoachEntryCard } from '../components/CoachChat';
 import './Home.css';
@@ -190,7 +191,7 @@ export default function Home() {
         <HeroCTA
           to="/scan"
           tone="violet"
-          mascot="scan"
+          mascot={new Date().getHours() >= 19 ? 'soir' : 'scanphone'}
           eyebrow="📸 Nouvelle leçon"
           title="Scanne une nouvelle leçon"
           sub="Photo ou texte — l'IA fait le reste."
@@ -248,7 +249,7 @@ export default function Home() {
           <div className="rv-card rv-card--padded home-featured-card">
             <div className="home-featured-top">
               <Mascot
-                pose="reading"
+                pose={subjectMascot(lastLesson.metadata.subject)}
                 size={128}
                 glow
                 priority

@@ -31,9 +31,9 @@ const LETTERS = ['A', 'B', 'C', 'D']
 
 function getEndContent(score, total) {
   const pct = score / total
-  if (pct >= 0.9) return { mascot: 'trophy',      title: 'Excellent !',  sub: 'Tu maîtrises parfaitement ce sujet !' }
+  if (pct >= 0.9) return { mascot: 'examen',      title: 'Excellent !',  sub: 'Tu maîtrises parfaitement ce sujet !' }
   if (pct >= 0.7) return { mascot: 'celebration', title: 'Très bien !',  sub: 'Encore un petit effort et tu seras au top !' }
-  if (pct >= 0.5) return { mascot: 'fire',        title: 'Pas mal !',    sub: 'Relis tes notes et réessaie !' }
+  if (pct >= 0.5) return { mascot: 'muscu',       title: 'Pas mal !',    sub: 'Relis tes notes et réessaie !' }
   return           { mascot: 'sad',               title: 'À travailler', sub: 'Révise la leçon et retente le quiz !' }
 }
 

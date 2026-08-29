@@ -35,7 +35,7 @@ export function CoachEntryCard({ onClick, desc = 'Pose-moi tes questions sur cet
       className="rv-card rv-card--link rv-card--padded coach-entry-card"
       onClick={onClick}
     >
-      <Mascot pose="hello" size={64} alt="" aria-hidden="true" />
+      <Mascot pose="coach" size={64} alt="" aria-hidden="true" />
       <div className="coach-entry-text">
         <span className="coach-entry-title">Un truc pas clair ?</span>
         <span className="coach-entry-desc">{desc}</span>
@@ -162,7 +162,7 @@ export function CoachChat({ isOpen, onClose, lessonId, lessonTitle }) {
         onClick={e => e.stopPropagation()}
       >
         <div className="coach-header">
-          <Mascot pose="hello" size={44} alt="" aria-hidden="true" />
+          <Mascot pose="coach" size={44} alt="" aria-hidden="true" />
           <div className="coach-header-text">
             <span className="coach-header-title">Coach Réviz</span>
             <span className="coach-header-sub">{lessonTitle}</span>

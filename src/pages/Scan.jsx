@@ -212,7 +212,7 @@ export default function Scan() {
                   <div className="scan-placeholder">
                     {camStatus === 'idle' && (
                       <>
-                        <Mascot pose="scan" size={140} glow animate priority />
+                        <Mascot pose="scanphone" size={140} glow animate priority />
                         <p className="scan-placeholder-title">J'allume la caméra…</p>
                       </>
                     )}

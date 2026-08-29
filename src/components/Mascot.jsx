@@ -20,6 +20,27 @@ export const MASCOT_POSES = {
   sad:         { num: 14, alt: 'Cerveau triste' },
   search:      { num: 15, alt: 'Cerveau avec une loupe' },
   pointing:    { num: 16, alt: 'Cerveau qui pointe du doigt' },
+
+  // --- Matières (série 2026-08, cf. assets-src/mascot/BRIEF-MASCOTTES.md) ---
+  maths:       { num: 'm1', alt: 'Cerveau matheux avec compas et règle' },
+  francais:    { num: 'm2', alt: 'Cerveau plongé dans un roman' },
+  svt:         { num: 'm3', alt: 'Cerveau naturaliste avec loupe et ADN' },
+  physique:    { num: 'm4', alt: 'Cerveau chimiste avec sa fiole' },
+  histgeo:     { num: 'm5', alt: 'Cerveau explorateur avec son globe' },
+  langues:     { num: 'm6', alt: 'Cerveau polyglotte au casque audio' },
+  technonsi:   { num: 'm7', alt: 'Cerveau codeur sur son laptop' },
+  philo:       { num: 'm8', alt: 'Cerveau penseur assis sur ses livres' },
+  arts:        { num: 'm9', alt: 'Cerveau artiste avec sa palette' },
+
+  // --- Situations (série 2026-08) ---
+  quiz:        { num: 's1', alt: 'Cerveau qui appuie sur un buzzer' },
+  coach:       { num: 's2', alt: 'Coach Réviz avec son casque-micro' },
+  levelup:     { num: 's3', alt: 'Cerveau qui décolle vers le niveau supérieur' },
+  retour:      { num: 's4', alt: 'Cerveau qui accueille à bras ouverts' },
+  soir:        { num: 's5', alt: 'Cerveau en révision du soir' },
+  examen:      { num: 's6', alt: 'Cerveau fier de sa copie étoilée' },
+  scanphone:   { num: 's7', alt: 'Cerveau qui photographie une leçon' },
+  muscu:       { num: 's8', alt: 'Cerveau qui muscle sa mémoire' },
 };
 
 /**

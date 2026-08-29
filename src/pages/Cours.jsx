@@ -8,7 +8,7 @@ import { PageHeader } from '../components/PageHeader';
 import { Mascot } from '../components/Mascot';
 import { loadLessons, restoreLesson, deleteLesson, syncFromFirestore } from '../services/historyService';
 import { countDueCards } from '../services/srsService';
-import { subjectInfo, subjectKey } from '../utils/subjects';
+import { subjectInfo, subjectKey, subjectMascot } from '../utils/subjects';
 import './Cours.css';
 
 // Map subject.color → DS tone (5 available: violet/orange/green/pink/red)
@@ -224,7 +224,7 @@ export default function Cours() {
           <div className="rv-card rv-card--padded cours-resume-card">
             <div className="cours-resume-top">
               <Mascot
-                pose="pointing"
+                pose={subjectMascot(lastLesson.metadata.subject)}
                 size={140}
                 glow
                 priority

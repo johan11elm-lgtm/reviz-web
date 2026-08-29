@@ -156,10 +156,10 @@ function getHeroNarrative({ streak, activeDays, isNewRecord, prenom }) {
     return { mascot: 'celebration', phrase: `Belle série de ${streak} jours. Continue !` };
   }
   if (streak >= 1) {
-    return { mascot: 'reading', phrase: 'Régularité installée. On continue ?' };
+    return { mascot: 'muscu', phrase: 'Régularité installée. On continue ?' };
   }
   if (activeDays >= 1) {
-    return { mascot: 'thinking', phrase: 'Tu as déjà commencé. Reprends ta série !' };
+    return { mascot: 'retour', phrase: 'Tu as déjà commencé. Reprends ta série !' };
   }
   return { mascot: 'sleeping', phrase: 'Allez, on lance ta première session.' };
 }
