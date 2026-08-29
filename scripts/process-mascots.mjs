@@ -58,7 +58,8 @@ function erodeAlpha(data, w, h, r) {
   }
 }
 
-const masters = readdirSync(SRC_DIR).filter(f => /^pose-\d+-[a-z]+\.png$/.test(f))
+// pose-<n>-nom.png (poses historiques) et pose-[ms]<n>-nom.png (matières/situations)
+const masters = readdirSync(SRC_DIR).filter(f => /^pose-[ms]?\d+-[a-z]+\.png$/.test(f))
 if (masters.length === 0) {
   console.error('Aucun master pose-*.png trouvé dans', SRC_DIR)
   process.exit(1)
