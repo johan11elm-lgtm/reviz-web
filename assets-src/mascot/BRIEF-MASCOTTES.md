@@ -44,6 +44,15 @@
 | pose-s7-scan | il photographie un cahier ouvert avec un smartphone violet |
 | pose-s8-muscu | il soulève deux petits haltères violets, air déterminé, gouttelette d'effort |
 
+## Anti-drift (leçon du 2026-08-29)
+
+Dans une longue conversation ChatGPT, le personnage **dérive** (teinte plus
+orange, texture grossière, jambes apparues) : le contexte récent pèse plus que
+la référence initiale. Parade validée : **re-joindre `pose-9-hello.png` à
+CHAQUE prompt** et repartir sur une conversation neuve dès qu'un écart se voit.
+Préciser dans le prompt : « teinte creme pale, texture lisse, vaisseaux corail
+fins, PAS de jambes, petits bras fins ».
+
 ## Règles d'intégration
 
 1. Vérifier : pas de watermark ✦, pas de texte, fond magenta uni, style cohérent.
