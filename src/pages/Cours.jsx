@@ -155,7 +155,6 @@ export default function Cours() {
           <div className="cours-narrator-hero">
             <div className="cours-narrator-glow" aria-hidden="true" />
             <div className="cours-narrator-content">
-              <span className="cours-narrator-eyebrow">📚 Hey {prenom}</span>
               <h1 className="cours-narrator-title">Mes cours</h1>
               <div className="rv-speech-bubble rv-speech-bubble--pointer-right cours-narrator-bubble">
                 {heroPhrase}

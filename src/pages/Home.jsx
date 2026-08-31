@@ -32,20 +32,6 @@ const QuizIcon = () => (
   </svg>
 );
 
-// Phrases mascotte pour la carte Reprendre, rotation stable par jour
-const RESUME_PHRASES = [
-  "On reprend là où tu t'es arrêté·e ? T'étais bien parti·e.",
-  "Allez, on finit ça. Tu y étais presque.",
-  "Tu peux boucler ce chapitre tant que c'est frais.",
-  "Et si on continuait ? Plus que quelques minutes.",
-  "Reprends pendant que c'est encore bien en tête.",
-];
-
-function getResumePhrase() {
-  const hash = Math.floor(Date.now() / 86400000);
-  return RESUME_PHRASES[hash % RESUME_PHRASES.length];
-}
-
 function formatDate(ts) {
   const d = new Date(ts), now = new Date();
   const diffDays = Math.floor((now - d) / 86400000);
@@ -202,9 +188,7 @@ export default function Home() {
           to="/scan"
           tone="violet"
           mascot={new Date().getHours() >= 19 ? 'soir' : 'scanphone'}
-          eyebrow="📸 Nouvelle leçon"
-          title="Scanne une nouvelle leçon"
-          sub="Photo ou texte — l'IA fait le reste."
+          title="Scanne une leçon"
           action="Commencer"
           className="home-cta"
         />
@@ -275,7 +259,6 @@ export default function Home() {
                 </div>
               </div>
             </div>
-            <p className="rv-speech-bubble home-featured-phrase">{getResumePhrase()}</p>
             <button
               className="rv-btn-cta rv-btn-cta--full"
               onClick={() => { restoreLesson(lastLesson.id); navigate('/analyse'); }}
@@ -341,7 +324,6 @@ export default function Home() {
             <div key={c.id} className={`home-challenge-row${c.completed ? ' completed' : ''}`}>
               <div className="home-challenge-info">
                 <span className="home-challenge-name">{c.completed ? '✓' : '○'} {c.title}</span>
-                <span className="home-challenge-desc">{c.description}</span>
               </div>
               <div className="home-challenge-progress">
                 <div className="rv-bar home-challenge-bar">
