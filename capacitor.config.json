@@ -4,5 +4,11 @@
   "webDir": "dist",
   "ios": {
     "backgroundColor": "#F8EFE7"
+  },
+  "plugins": {
+    "FirebaseAuthentication": {
+      "skipNativeAuth": true,
+      "providers": ["google.com"]
+    }
   }
 }

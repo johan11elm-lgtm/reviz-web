@@ -16,8 +16,10 @@ import {
   sendEmailVerification,
   GoogleAuthProvider,
   signInWithPopup,
+  signInWithCredential,
   deleteUser,
 } from 'firebase/auth';
+import { Capacitor } from '@capacitor/core';
 import { auth, db } from '../services/firebaseConfig';
 import { parseLevel, serializeLevel, migrateLegacyClasse, isUnder15 } from '../utils/levels';
 import { createUserProfile } from '../services/userProfileService';
@@ -87,7 +89,35 @@ export function AuthProvider({ children }) {
   }
 
   // --- Connexion Google ---
+  // Web : popup Firebase classique. App native (Capacitor) : la popup ne
+  // fonctionne pas dans la WebView — on passe par le SDK Google natif
+  // (@capacitor-firebase/authentication) puis on échange le jeton contre
+  // une session Firebase JS (signInWithCredential) : tout l'aval
+  // (onAuthStateChanged, Firestore, gating) reste identique.
   async function loginWithGoogle() {
+    if (Capacitor.isNativePlatform()) {
+      const { FirebaseAuthentication } = await import('@capacitor-firebase/authentication');
+      let result;
+      try {
+        result = await FirebaseAuthentication.signInWithGoogle();
+      } catch (err) {
+        // Annulation du sheet natif → même code que la popup web fermée,
+        // déjà ignoré par Connexion/Inscription.
+        const cancelled = /cancel|12501|dismiss/i.test(err?.message ?? '');
+        const e = new Error(err?.message ?? 'Connexion Google impossible');
+        e.code = cancelled ? 'auth/popup-closed-by-user' : 'auth/google-signin-failed';
+        throw e;
+      }
+      const idToken = result?.credential?.idToken;
+      if (!idToken) {
+        const e = new Error('Connexion Google annulée');
+        e.code = 'auth/popup-closed-by-user';
+        throw e;
+      }
+      const credential = GoogleAuthProvider.credential(idToken);
+      const { user } = await signInWithCredential(auth, credential);
+      return user;
+    }
     const provider = new GoogleAuthProvider();
     const { user } = await signInWithPopup(auth, provider);
     return user;
