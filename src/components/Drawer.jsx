@@ -4,6 +4,9 @@ import { useTheme } from '../context/ThemeContext';
 import { useAuth } from '../context/AuthContext';
 import { formatLevelLabel } from '../utils/levels';
 import { openBillingPortal } from '../services/billingService';
+import { remindersAvailable, isReminderEnabled, enableReminder, disableReminder } from '../services/reminderService';
+import { loadLessons } from '../services/historyService';
+import { countDueCards } from '../services/srsService';
 import { useModalA11y } from '../hooks/useModalA11y';
 
 function firebaseErrorFr(code) {
@@ -26,6 +29,30 @@ export function Drawer({ isOpen, onClose }) {
   const prenom   = currentUser?.displayName ?? '';
   const initiale = prenom[0]?.toUpperCase() ?? '?';
   const levelLabel = formatLevelLabel(getUserLevel());
+
+  // Rappels de révision (app native uniquement — voir reminderService)
+  const [reminderOn, setReminderOn]       = useState(isReminderEnabled());
+  const [reminderDenied, setReminderDenied] = useState(false);
+
+  async function handleReminderToggle(e) {
+    const wanted = e.target.checked;
+    setReminderDenied(false);
+    if (!wanted) {
+      setReminderOn(false);
+      await disableReminder();
+      return;
+    }
+    setReminderOn(true); // optimiste, reverti si refus
+    const due = loadLessons().reduce(
+      (sum, l) => sum + countDueCards(l.id, l.flashcardsCount ?? l.aiData?.flashcards?.length ?? 0),
+      0
+    );
+    const res = await enableReminder(due);
+    if (!res.ok) {
+      setReminderOn(false);
+      if (res.reason === 'denied') setReminderDenied(true);
+    }
+  }
 
   // A11y modale (Escape, piège + restauration du focus) — le drawer restant
   // monté en permanence pour l'animation CSS, le hook ne s'active qu'ouvert.
@@ -171,26 +198,32 @@ export function Drawer({ isOpen, onClose }) {
           )}
         </div>
 
-        {/* Notifications */}
-        <div className="drawer-section-label">NOTIFICATIONS</div>
-        <div>
-          <div className="drawer-toggle-row">
-            <span className="drawer-toggle-icon">🔔</span>
-            <span className="drawer-toggle-label">Rappels de révision</span>
-            <label className="toggle-wrap">
-              <input type="checkbox" defaultChecked />
-              <span className="toggle-slider" />
-            </label>
-          </div>
-          <div className="drawer-toggle-row">
-            <span className="drawer-toggle-icon">🏆</span>
-            <span className="drawer-toggle-label">Résultats de quiz</span>
-            <label className="toggle-wrap">
-              <input type="checkbox" defaultChecked />
-              <span className="toggle-slider" />
-            </label>
-          </div>
-        </div>
+        {/* Notifications — app native uniquement (notifications locales) */}
+        {remindersAvailable() && (
+          <>
+            <div className="drawer-section-label">NOTIFICATIONS</div>
+            <div>
+              <div className="drawer-toggle-row">
+                <span className="drawer-toggle-icon">🔔</span>
+                <span className="drawer-toggle-label">Rappel quotidien (18 h 30)</span>
+                <label className="toggle-wrap">
+                  <input
+                    type="checkbox"
+                    checked={reminderOn}
+                    onChange={handleReminderToggle}
+                    aria-label="Activer le rappel de révision quotidien à 18 h 30"
+                  />
+                  <span className="toggle-slider" />
+                </label>
+              </div>
+              {reminderDenied && (
+                <p className="drawer-panel-error" role="alert">
+                  Notifications refusées — autorise Réviz dans Réglages &gt; Notifications.
+                </p>
+              )}
+            </div>
+          </>
+        )}
 
         {/* Apparence */}
         <div className="drawer-section-label">APPARENCE</div>

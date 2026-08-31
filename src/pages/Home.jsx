@@ -12,6 +12,7 @@ import { countDueCards } from '../services/srsService';
 import { getWeeklyChallenges } from '../services/challengeService';
 import { computeStreak, computeLevel, computeBadges, XP_PAR_NIVEAU } from '../utils/gamification';
 import { subjectMascot } from '../utils/subjects';
+import { refreshReminder } from '../services/reminderService';
 import { AchievementToast } from '../components/AchievementToast';
 import { CoachChat, CoachEntryCard } from '../components/CoachChat';
 import './Home.css';
@@ -136,7 +137,16 @@ export default function Home() {
       navigate('/onboarding');
       return;
     }
-    syncFromFirestore().then(setAllLessons);
+    syncFromFirestore().then(lessons => {
+      setAllLessons(lessons);
+      // App native : re-planifie le rappel quotidien avec un texte à jour
+      // (nombre de cartes dues). No-op sur web ou si le rappel est désactivé.
+      const due = lessons.reduce(
+        (sum, l) => sum + countDueCards(l.id, l.flashcardsCount ?? l.aiData?.flashcards?.length ?? 0),
+        0
+      );
+      refreshReminder(due);
+    });
   }, []);
 
   // Dérivés gamification mémoïsés : sans useMemo, chaque render (ouverture du
