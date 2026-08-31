@@ -5,6 +5,7 @@ import { useAuth } from '../context/AuthContext';
 import { formatLevelLabel } from '../utils/levels';
 import { openBillingPortal } from '../services/billingService';
 import { remindersAvailable, isReminderEnabled, enableReminder, disableReminder } from '../services/reminderService';
+import { THEMES } from '../utils/themes';
 import { loadLessons } from '../services/historyService';
 import { countDueCards } from '../services/srsService';
 import { useModalA11y } from '../hooks/useModalA11y';
@@ -22,7 +23,8 @@ function firebaseErrorFr(code) {
 }
 
 export function Drawer({ isOpen, onClose }) {
-  const { isDark, toggleTheme } = useTheme();
+  const { theme, setTheme, isDark, toggleTheme } = useTheme();
+  const [themeLockedHint, setThemeLockedHint] = useState(false);
   const { currentUser, isPremium, logout, getUserLevel, updateUserEmail, updateUserPassword } = useAuth();
   const navigate = useNavigate();
 
@@ -239,6 +241,38 @@ export function Drawer({ isOpen, onClose }) {
             <span className="toggle-slider" />
           </label>
         </div>
+
+        {/* Thèmes — les thèmes Réviz+ sont un avantage abonnement */}
+        <div className="drawer-theme-grid" role="radiogroup" aria-label="Thème de l'application">
+          {THEMES.map(t => {
+            const locked = t.premium && !isPremium;
+            const active = theme === t.id;
+            return (
+              <button
+                key={t.id}
+                type="button"
+                className={`drawer-theme-swatch${active ? ' drawer-theme-swatch--active' : ''}${locked ? ' drawer-theme-swatch--locked' : ''}`}
+                style={{ background: `linear-gradient(135deg, ${t.swatch[0]} 55%, ${t.swatch[1]} 55%)` }}
+                role="radio"
+                aria-checked={active}
+                aria-label={`Thème ${t.label}${t.premium ? ' (Réviz+)' : ''}${locked ? ' — verrouillé' : ''}`}
+                onClick={() => {
+                  if (locked) { setThemeLockedHint(true); return; }
+                  setThemeLockedHint(false);
+                  setTheme(t.id);
+                }}
+              >
+                {locked && <span className="drawer-theme-lock" aria-hidden="true">🔒</span>}
+                <span className="drawer-theme-name">{t.label}</span>
+              </button>
+            );
+          })}
+        </div>
+        {themeLockedHint && (
+          <p className="drawer-theme-hint" role="status">
+            💎 Les thèmes sont un avantage Réviz+ — débloque-les avec l'abonnement juste en dessous.
+          </p>
+        )}
 
         {/* Abonnement */}
         <div className="drawer-section-label">ABONNEMENT</div>

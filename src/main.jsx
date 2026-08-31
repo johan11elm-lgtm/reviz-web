@@ -17,6 +17,13 @@ import { IS_NATIVE } from './services/apiClient.js'
 // éviter tout flash de la carte centrée.
 if (IS_NATIVE) {
   document.documentElement.classList.add('native');
+  // App native : pas de pinch-zoom ni de double-tap zoom (comportement
+  // d'app attendu). Le WEB garde le zoom — accessibilité WCAG 1.4.4 ;
+  // en natif, la taille de texte suit les réglages système iOS.
+  document.querySelector('meta[name="viewport"]')?.setAttribute(
+    'content',
+    'width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no'
+  );
 }
 
 // Désactive le scroll restoration auto du browser pour que ScrollToTop soit

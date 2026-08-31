@@ -26,7 +26,7 @@
 }
 
 .rv-hero-cta--violet {
-  background: linear-gradient(135deg, var(--accent-violet) 0%, #5C40F0 60%, #4A2FD9 100%);
+  background: var(--grad-hero);
   box-shadow:
     0 18px 40px rgba(107, 78, 255, 0.32),
     0 4px 12px rgba(107, 78, 255, 0.18);

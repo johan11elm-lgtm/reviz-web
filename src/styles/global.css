@@ -101,6 +101,10 @@
 
   /* Skeleton (rv-skeleton) */
   --skeleton-shimmer: rgba(255, 255, 255, 0.6);
+
+  /* Dégradé des cartes héros (HeroCTA, héros narrateur de Cours).
+     Redéfini par les thèmes Réviz+ — cf. src/utils/themes.js. */
+  --grad-hero: linear-gradient(135deg, var(--accent-violet) 0%, #5C40F0 60%, #4A2FD9 100%);
 }
 
 /* ─── Variables Dark ───────────────────────────────────────────── */
@@ -168,6 +172,170 @@
   --shadow-card:   0 4px 14px rgba(0,0,0,0.35), 0 1px 2px rgba(0,0,0,0.25);
   --shadow-pop:    0 12px 32px rgba(0,0,0,0.45);
   --shadow-shell:  0 32px 80px rgba(0,0,0,0.5);
+}
+
+/* ─── Thèmes Réviz+ (avantage abonnement) ──────────────────────────
+ * Catalogue et verrouillage : src/utils/themes.js + Drawer.
+ * « Nuit d'encre » étend le sombre ; les trois autres étendent le clair. */
+
+/* 💎 Nuit d'encre — sombre profond violacé, accents néon doux */
+:root[data-theme="nuit-encre"] {
+  --bg-body:        #0A0812;
+  --bg-app:         #131020;
+  --bg-card:        #1D1930;
+  --bg-subtle:      #251F3E;
+  --bg-muted:       #251F3E;
+  --bg-hover:       #2B2449;
+  --bg-avatar:      #2B2449;
+  --bg-toggle:      #3E3564;
+  --bg-cta:         #7C5CFF;
+  --bg-tip:         #1D1930;
+  --bg-flip-back:   #2C2450;
+
+  --border:         #2E2650;
+  --border-subtle:  #262045;
+  --border-hover:   #4A3F82;
+  --border-tip:     #2E2650;
+  --border-formula: #3A2E8C;
+  --skeleton-shimmer: rgba(255, 255, 255, 0.07);
+
+  --text-primary:   #F2EFFA;
+  --text-secondary: #B5AECC;
+  --text-muted:     #8B83A8;
+  --text-light:     #5E5780;
+  --text-xlight:    #3A3550;
+  --text-avatar:    #B5AECC;
+  --text-tip:       #B5AECC;
+  --text-flip-back: #D9CFFF;
+  --text-formula:   #D9CFFF;
+
+  --bg-intro:       #2D1F0A;
+  --border-intro:   #5C3D15;
+  --text-intro:     #FFB870;
+  --bg-formula:     #2C2450;
+  --bg-icon-orange: #3A2410;
+  --bg-icon-indigo: #2C2450;
+  --bg-icon-green:  #102E1F;
+  --bg-danger:      #3A1A22;
+
+  --accent-violet:        #A78BFF;
+  --accent-violet-hover:  #B9A2FF;
+  --accent-violet-soft:   #2C2450;
+  --accent-violet-ink:    #D9CFFF;
+  --accent-orange:        #FFA866;
+  --accent-orange-hover:  #FFB680;
+  --accent-orange-soft:   #3A2410;
+  --accent-orange-ink:    #FFD5B0;
+  --accent-green:         #5BD89A;
+  --accent-green-soft:    #102E1F;
+  --accent-green-ink:     #A6F2C7;
+  --accent-pink:          #FF8FB3;
+  --accent-pink-soft:     #3A1A26;
+  --accent-pink-ink:      #FFC6D8;
+  --accent-red:           #FF7A8E;
+  --accent-red-soft:      #3A1A22;
+  --accent-red-ink:       #FFC0CC;
+
+  --shadow-card:   0 4px 18px rgba(124,92,255,0.16), 0 1px 2px rgba(0,0,0,0.4);
+  --shadow-pop:    0 12px 32px rgba(124,92,255,0.28);
+  --shadow-shell:  0 32px 80px rgba(0,0,0,0.5);
+  --grad-hero: linear-gradient(135deg, #8A72FF 0%, #6B4EFF 60%, #5433E6 100%);
+}
+
+/* 💎 Carnet kraft — papier chaud, encre de stylo, rouge correcteur */
+:root[data-theme="carnet-kraft"] {
+  --bg-body:        #E3CBA2;
+  --bg-app:         #EFDDBE;
+  --bg-card:        #FFFDF5;
+  --bg-subtle:      #F3E7CE;
+  --bg-muted:       #EADBB8;
+  --bg-hover:       #F8F0DD;
+  --bg-avatar:      #EADBB8;
+  --bg-toggle:      #D9C298;
+  --bg-cta:         #2743C7;
+
+  --border:         #DCC9A4;
+  --border-subtle:  #E6D6B4;
+  --border-hover:   #C4AC7E;
+
+  --text-primary:   #2A2014;
+  --text-secondary: #6A583E;
+  --text-muted:     #6E5C42;
+
+  --accent-violet:        #2743C7;
+  --accent-violet-hover:  #1E35A8;
+  --accent-violet-soft:   #E4E9FF;
+  --accent-violet-ink:    #1B2C86;
+  --accent-orange:        #C9401A;
+  --accent-orange-hover:  #B03714;
+  --accent-orange-soft:   #F8DDD2;
+  --accent-orange-ink:    #8F2A0E;
+
+  --radius-card:   18px;
+  --shadow-card:   0 3px 10px rgba(90,64,20,0.10), 0 1px 2px rgba(90,64,20,0.08);
+  --grad-hero: linear-gradient(135deg, #2743C7 0%, #1E35A8 60%, #16277E 100%);
+}
+
+/* 💎 Violet air — la marque assumée, lavande soutenu et cartes flottantes */
+:root[data-theme="violet-air"] {
+  --bg-body:        #CFC2FF;
+  --bg-app:         #E4DCFF;
+  --bg-card:        #FFFFFF;
+  --bg-subtle:      #F1ECFF;
+  --bg-muted:       #E9E2FF;
+  --bg-hover:       #F6F2FF;
+  --bg-avatar:      #E9E2FF;
+  --bg-toggle:      #C9BAFF;
+  --bg-cta:         #4C33C4;
+
+  --border:         #D6C9FF;
+  --border-subtle:  #E2D8FF;
+  --border-hover:   #B4A1F5;
+
+  --text-primary:   #191233;
+  --text-secondary: #4A3F73;
+  --text-muted:     #544880;
+
+  --accent-violet:        #5B3FE8;
+  --accent-violet-hover:  #4C33C4;
+  --accent-violet-soft:   #EDE7FF;
+  --accent-violet-ink:    #2A1C77;
+
+  --shadow-card:   0 6px 18px rgba(76,51,196,0.14), 0 1px 3px rgba(76,51,196,0.08);
+  --grad-hero: linear-gradient(135deg, #6B4EFF 0%, #4C33C4 60%, #3A26A0 100%);
+}
+
+/* 💎 Menthe focus — calme, frais, concentré */
+:root[data-theme="menthe-focus"] {
+  --bg-body:        #C8E6D4;
+  --bg-app:         #DFF2E7;
+  --bg-card:        #FFFFFF;
+  --bg-subtle:      #EDF7F1;
+  --bg-muted:       #DCEEE4;
+  --bg-hover:       #F3FAF6;
+  --bg-avatar:      #DCEEE4;
+  --bg-toggle:      #B7DCC7;
+  --bg-cta:         #0E7A55;
+
+  --border:         #C8E0D2;
+  --border-subtle:  #D8EADE;
+  --border-hover:   #9CC4AE;
+
+  --text-primary:   #12271C;
+  --text-secondary: #3F6250;
+  --text-muted:     #47695A;
+
+  --accent-violet:        #0E7A55;
+  --accent-violet-hover:  #0A6245;
+  --accent-violet-soft:   #D7EFE3;
+  --accent-violet-ink:    #084C36;
+  --accent-orange:        #F26D5B;
+  --accent-orange-hover:  #E05846;
+  --accent-orange-soft:   #FCE0DB;
+  --accent-orange-ink:    #9E3324;
+
+  --shadow-card:   0 4px 14px rgba(14,90,60,0.10), 0 1px 3px rgba(14,90,60,0.06);
+  --grad-hero: linear-gradient(135deg, #12A06E 0%, #0E7A55 60%, #095C40 100%);
 }
 
 /* ─── Reset ────────────────────────────────────────────────────── */
@@ -313,6 +481,8 @@ input, textarea {
 html.native, html.native body, html.native #root {
   width: 100%;
   overflow-x: hidden;
+  /* Supprime le délai et le zoom du double-tap (complément du viewport natif) */
+  touch-action: manipulation;
 }
 html.native body {
   display: block;
@@ -458,6 +628,50 @@ html.native .content, html.native .pg-content {
 .drawer-item-icon { font-size: 18px; width: 28px; text-align: center; }
 .drawer-item-label { flex: 1; font-size: 13px; font-weight: 500; }
 .drawer-item-arrow { color: var(--text-muted); font-size: 14px; }
+
+/* Sélecteur de thèmes (Drawer) — pastilles, verrou Réviz+ */
+.drawer-theme-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  padding: 4px 0 8px;
+}
+.drawer-theme-swatch {
+  position: relative;
+  height: 56px;
+  border-radius: 14px;
+  border: 2px solid var(--border);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 4px;
+  overflow: hidden;
+}
+.drawer-theme-swatch--active {
+  border-color: var(--accent-violet);
+  box-shadow: 0 0 0 2px var(--accent-violet-soft);
+}
+.drawer-theme-swatch--locked { opacity: 0.75; }
+.drawer-theme-lock {
+  position: absolute;
+  top: 4px;
+  right: 6px;
+  font-size: 12px;
+}
+.drawer-theme-name {
+  font-size: 10px;
+  font-weight: 700;
+  background: var(--bg-card);
+  color: var(--text-primary);
+  border-radius: 8px;
+  padding: 2px 6px;
+  line-height: 1.2;
+}
+.drawer-theme-hint {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin: 2px 4px 8px;
+}
 
 .drawer-toggle-row {
   display: flex; align-items: center; gap: 10px;

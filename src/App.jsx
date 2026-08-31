@@ -1,7 +1,8 @@
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom'
 import { useEffect, lazy, Suspense } from 'react'
-import { ThemeProvider } from './context/ThemeContext'
+import { ThemeProvider, useTheme } from './context/ThemeContext'
 import { AuthProvider, useAuth } from './context/AuthContext'
+import { resolveTheme } from './utils/themes'
 import { ErrorBoundary } from './components/ErrorBoundary'
 
 function ScrollToTop() {
@@ -83,6 +84,18 @@ function AuthRoutes() {
   )
 }
 
+// Repli de thème : un thème Réviz+ persisté sans abonnement actif
+// (expiré, déconnexion…) retombe silencieusement sur « Crème ».
+function ThemeGate() {
+  const { isPremium } = useAuth();
+  const { theme, setTheme } = useTheme();
+  useEffect(() => {
+    const resolved = resolveTheme(theme, isPremium);
+    if (resolved !== theme) setTheme(resolved);
+  }, [theme, isPremium, setTheme]);
+  return null;
+}
+
 export default function App() {
   return (
     <ErrorBoundary>
@@ -98,6 +111,7 @@ export default function App() {
             <Route path="/*" element={
               <AuthProvider>
                 <ThemeProvider>
+                  <ThemeGate />
                   <AuthRoutes />
                 </ThemeProvider>
               </AuthProvider>
