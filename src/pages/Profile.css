@@ -39,50 +39,35 @@
 }
 
 /* ── HERO ── */
+/* ── Hero centré : mascotte, prénom, niveau + classe, barre XP ── */
 .profile-page .pf-hero {
   display: flex;
-  align-items: center;
-  gap: 14px;
-  padding: 6px 0 4px;
-}
-
-.profile-page .pf-hero-text {
-  flex: 1;
-  min-width: 0;
-  display: flex;
   flex-direction: column;
-  gap: 6px;
-}
-
-.profile-page .pf-hero-pill {
-  align-self: flex-start;
+  align-items: center;
+  text-align: center;
+  gap: 10px;
+  padding: 8px 0 4px;
 }
 
 .profile-page .pf-hero-name {
   margin: 2px 0 0;
   font-family: 'Geist', sans-serif;
-  font-size: 26px;
+  font-size: 28px;
   font-weight: 800;
-  letter-spacing: -0.8px;
+  letter-spacing: -0.9px;
   line-height: 1.1;
   color: var(--text-primary);
+  max-width: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.profile-page .pf-hero-bubble {
-  margin-top: 6px;
-  font-size: 13px;
-  font-weight: 500;
-  line-height: 1.4;
-  max-width: 24ch;
-}
-
 .profile-page .pf-hero-meta {
   display: flex;
+  align-items: center;
   flex-wrap: wrap;
-  gap: 6px 10px;
-  margin-top: 4px;
+  justify-content: center;
+  gap: 8px;
 }
 
 .profile-page .pf-hero-classe {
@@ -94,58 +79,35 @@
   color: var(--text-secondary);
 }
 
-.profile-page .pf-hero-handle {
-  font-size: 12px;
-  font-weight: 500;
-  color: var(--text-muted);
-  align-self: center;
-}
-
 .profile-page .pf-hero-mascot {
-  flex-shrink: 0;
   filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.18));
 }
 
-/* ── XP card ── */
-.profile-page .pf-xp-card {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.profile-page .pf-xp-header {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 12px;
-}
-
-.profile-page .pf-xp-label {
-  font-family: 'Geist', sans-serif;
-  font-size: 18px;
-  font-weight: 800;
-  letter-spacing: -0.4px;
-  color: var(--text-primary);
-}
-
-.profile-page .pf-xp-value {
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--text-muted);
+.profile-page .pf-hero-xp {
+  width: 100%;
+  max-width: 300px;
+  margin-top: 4px;
 }
 
 .profile-page .pf-xp-sub {
-  margin: 4px 0 0;
+  margin: 8px 0 0;
   font-size: 11px;
   font-weight: 500;
   color: var(--text-muted);
 }
 
-/* ── Stats grid (pattern Progres Geist 800) ── */
-.profile-page .pf-stats-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 8px;
+/* ── Stats : une carte, trois colonnes séparées ── */
+.profile-page .pf-stats-card {
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  gap: 4px;
+}
+
+.profile-page .pf-stat-sep {
+  width: 1px;
+  background: var(--border-subtle);
+  margin: 4px 0;
 }
 
 .profile-page .pf-stat {
@@ -556,31 +518,9 @@
   to   { opacity: 1; }
 }
 
-/* ── Responsive mobile (≤430px) — hero stack vertical ── */
+/* ── Responsive mobile (≤430px) ── */
 @media (max-width: 430px) {
   .profile-page .pf-content { padding: 6px 14px 96px; gap: 16px; }
-  .profile-page .pf-hero {
-    flex-direction: column-reverse;
-    align-items: center;
-    text-align: center;
-    gap: 10px;
-  }
-  .profile-page .pf-hero-text {
-    align-items: center;
-  }
-  .profile-page .pf-hero-pill {
-    align-self: center;
-  }
-  .profile-page .pf-hero-bubble {
-    max-width: 28ch;
-  }
-  .profile-page .pf-hero-meta {
-    justify-content: center;
-  }
-  .profile-page .pf-hero-mascot {
-    width: 120px !important;
-    height: 120px !important;
-  }
   .profile-page .pf-stat-value { font-size: 22px; }
   .profile-page .pf-badge-emoji { font-size: 20px; }
 }

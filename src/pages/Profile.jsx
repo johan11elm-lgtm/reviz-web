@@ -61,10 +61,6 @@ export default function Profile() {
   const unlocked = badges.filter(b => !b.locked).length;
   const hero = getProfileHero(level, streak, allLessons.length);
 
-  const createdAt = currentUser?.metadata?.creationTime
-    ? new Date(currentUser.metadata.creationTime)
-        .toLocaleDateString('fr-FR', { month: 'long', year: 'numeric' })
-    : '';
 
   const [activeSheet, setActiveSheet] = useState(null);
   const [editPrenom, setEditPrenom]   = useState('');
@@ -182,56 +178,46 @@ export default function Profile() {
       />
 
       <div className="pf-content">
-        {/* HERO narratif (mascotte adaptative) */}
+        {/* HERO centré — identité + progression en un seul bloc */}
         <section className="pf-hero">
-          <div className="pf-hero-text">
-            <span className="rv-pill rv-pill--orange pf-hero-pill">Niveau {level}</span>
-            <h1 className="pf-hero-name">{prenom || 'Toi'}</h1>
-            <div className="rv-speech-bubble rv-speech-bubble--pointer-right pf-hero-bubble">
-              {hero.phrase}
-            </div>
-            <div className="pf-hero-meta">
-              {levelLabel && <span className="pf-hero-classe">{levelLabel}</span>}
-              {createdAt && <span className="pf-hero-handle">Membre depuis {createdAt}</span>}
-            </div>
-          </div>
           <Mascot
             pose={hero.pose}
-            size={140}
+            size={112}
             glow
             priority
             className="pf-hero-mascot"
           />
+          <h1 className="pf-hero-name">{prenom || 'Toi'}</h1>
+          <div className="pf-hero-meta">
+            <span className="rv-pill rv-pill--orange pf-hero-pill">Niveau {level}</span>
+            {levelLabel && <span className="pf-hero-classe">{levelLabel}</span>}
+          </div>
+          <div className="pf-hero-xp">
+            <div className="rv-bar rv-bar--tall rv-bar--orange-bg">
+              <div className="rv-bar-fill rv-bar-fill--orange" style={{ width: `${fillPct}%` }} />
+            </div>
+            <p className="pf-xp-sub">{xpInLvl} / {XP_PAR_NIVEAU} XP — encore {XP_PAR_NIVEAU - xpInLvl} avant le niveau {level + 1}</p>
+          </div>
         </section>
 
-        {/* XP card */}
-        <section className="rv-card rv-card--padded pf-xp-card">
-          <div className="pf-xp-header">
-            <span className="pf-xp-label">Niveau {level}</span>
-            <span className="pf-xp-value">{xpInLvl} / {XP_PAR_NIVEAU} XP</span>
-          </div>
-          <div className="rv-bar rv-bar--tall rv-bar--orange-bg">
-            <div className="rv-bar-fill rv-bar-fill--orange" style={{ width: `${fillPct}%` }} />
-          </div>
-          <p className="pf-xp-sub">{XP_PAR_NIVEAU - xpInLvl} XP jusqu'au niveau {level + 1}</p>
-        </section>
-
-        {/* Stats grid (pattern Progres Geist 800) */}
-        <section className="pf-stats-grid">
-          <div className="rv-card pf-stat">
+        {/* Stats — une seule carte, trois colonnes */}
+        <section className="rv-card rv-card--padded pf-stats-card">
+          <div className="pf-stat">
             <span className="pf-stat-icon" aria-hidden="true">🔥</span>
             <span className="pf-stat-value">{streak}</span>
             <span className="pf-stat-label">Jours de suite</span>
           </div>
-          <div className="rv-card pf-stat">
+          <div className="pf-stat-sep" aria-hidden="true" />
+          <div className="pf-stat">
             <span className="pf-stat-icon" aria-hidden="true">📚</span>
             <span className="pf-stat-value">{allLessons.length}</span>
-            <span className="pf-stat-label">Leçons scannées</span>
+            <span className="pf-stat-label">Leçons</span>
           </div>
-          <div className="rv-card pf-stat">
+          <div className="pf-stat-sep" aria-hidden="true" />
+          <div className="pf-stat">
             <span className="pf-stat-icon" aria-hidden="true">⚡</span>
             <span className="pf-stat-value">{allRevisions.length}</span>
-            <span className="pf-stat-label">Révisions faites</span>
+            <span className="pf-stat-label">Révisions</span>
           </div>
         </section>
 

@@ -1,9 +1,11 @@
 .achievement-toast {
   position: fixed;
-  top: -80px;
+  top: -90px;
   left: 50%;
   transform: translateX(-50%);
-  background: var(--card-bg);
+  /* --bg-card (token DS) — l'ancien var(--card-bg) n'existait pas :
+     le toast s'affichait transparent. */
+  background: var(--bg-card);
   border: 2px solid var(--accent-orange-hover);
   border-radius: 16px;
   padding: 12px 20px;
@@ -16,7 +18,8 @@
   min-width: 240px;
 }
 .achievement-toast--visible {
-  top: 20px;
+  /* Sous l'encoche iPhone (0 sur web) */
+  top: calc(20px + env(safe-area-inset-top, 0px));
 }
 .achievement-emoji { font-size: 32px; }
 .achievement-info { display: flex; flex-direction: column; }

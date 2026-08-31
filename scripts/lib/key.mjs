@@ -78,8 +78,11 @@ export async function inspectMaster(src) {
         for (let dx = -1; dx <= 1; dx++) if (data[((y + dy) * w + (x + dx)) * 4 + 3] <= 10) { isEdge = true; break }
       if (!isEdge) continue
       edge++
-      // reste de fond : rouge ET bleu nettement au-dessus du vert
-      if (Math.min(data[i], data[i + 2]) - data[i + 1] > 25) spilled++
+      // Reste de fond : magenta clair et saturé (R et B hauts, V bas). Les
+      // accessoires violets/roses du personnage sont plus sombres ou moins
+      // saturés et ne comptent pas.
+      const r = data[i], g = data[i + 1], b = data[i + 2]
+      if (r > 150 && b > 150 && Math.min(r, b) - g > 60) spilled++
     }
   }
   const total = opaque + soft || 1

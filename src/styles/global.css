@@ -567,13 +567,14 @@ html.native .content, html.native .pg-content {
 .drawer-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(0,0,0,0.3);
+  background: rgba(0,0,0,0.4);
   z-index: 99;
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.25s;
-  border-radius: 40px;
+  border-radius: var(--radius-shell);
 }
+html.native .drawer-overlay { border-radius: 0; }
 .drawer-overlay.open { opacity: 1; pointer-events: auto; }
 
 .drawer {
@@ -583,7 +584,9 @@ html.native .content, html.native .pg-content {
   background: var(--bg-card);
   z-index: 100;
   border-radius: 0 var(--radius-shell) var(--radius-shell) 0;
-  padding: 36px 20px 32px;
+  /* Safe-areas iPhone : l'en-tête sous l'encoche et « À propos » sous la
+     barre du bas sans elles (0 partout ailleurs). */
+  padding: calc(36px + env(safe-area-inset-top, 0px)) 20px calc(32px + env(safe-area-inset-bottom, 0px));
   display: flex;
   flex-direction: column;
   gap: 20px;
