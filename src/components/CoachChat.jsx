@@ -18,7 +18,7 @@ const ERROR_MESSAGES = {
   NETWORK_ERROR:      'Pas de connexion… Vérifie ton réseau et réessaie.',
   TIMEOUT:            'Ça a pris trop de temps. Réessaie dans un instant.',
   RATE_LIMIT:         "Beaucoup de monde d'un coup ! Patiente un petit moment.",
-  UNAUTHORIZED:       'Ta session a expiré — reconnecte-toi puis réessaie.',
+  UNAUTHORIZED:       'Connexion expirée — reconnecte-toi puis réessaie.',
   EMAIL_NOT_VERIFIED: "Confirme ton email d'abord (le lien qu'on t'a envoyé), puis reviens me voir !",
   LESSON_NOT_FOUND:   'Je ne retrouve plus cette leçon… Réessaie depuis « Mes cours ».',
 };

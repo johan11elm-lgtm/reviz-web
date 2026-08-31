@@ -11,9 +11,9 @@ const getKey = () => _uid ? `reviz-challenges-${_uid}` : 'reviz-challenges';
 const CHALLENGE_POOL = [
   { id: 'scan2',      title: 'Scanne 2 leçons',              description: 'Ajoute 2 nouvelles leçons',     target: 2,  eventType: 'scan',       xpReward: 100 },
   { id: 'scan5',      title: 'Scanne 5 leçons',              description: 'Ajoute 5 nouvelles leçons',     target: 5,  eventType: 'scan',       xpReward: 200 },
-  { id: 'rev5',       title: 'Fais 5 révisions',             description: 'Complète 5 sessions',           target: 5,  eventType: 'revision',   xpReward: 100 },
-  { id: 'rev10',      title: 'Fais 10 révisions',            description: 'Complète 10 sessions',          target: 10, eventType: 'revision',   xpReward: 150 },
-  { id: 'rev20',      title: 'Fais 20 révisions',            description: 'Complète 20 sessions',          target: 20, eventType: 'revision',   xpReward: 200 },
+  { id: 'rev5',       title: 'Fais 5 révisions',             description: 'Termine 5 séances de révision',           target: 5,  eventType: 'revision',   xpReward: 100 },
+  { id: 'rev10',      title: 'Fais 10 révisions',            description: 'Termine 10 séances de révision',          target: 10, eventType: 'revision',   xpReward: 150 },
+  { id: 'rev20',      title: 'Fais 20 révisions',            description: 'Termine 20 séances de révision',          target: 20, eventType: 'revision',   xpReward: 200 },
   { id: 'flash3',     title: 'Révise 3 fois en flashcards',  description: 'Utilise les flashcards 3 fois', target: 3,  eventType: 'flashcards', xpReward: 100 },
   { id: 'quiz3',      title: 'Fais 3 quiz',                  description: 'Complète 3 quiz',               target: 3,  eventType: 'quiz',       xpReward: 100 },
   { id: 'allformats', title: 'Utilise les 4 formats',        description: 'Flashcards + Quiz + Résumé + Carte mentale', target: 4, eventType: 'formats', xpReward: 150 },

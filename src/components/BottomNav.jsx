@@ -35,7 +35,7 @@ const UserIcon = () => (
 const TABS = [
   { to: '/',        Icon: HomeIcon,  label: 'Accueil' },
   { to: '/cours',   Icon: BookIcon,  label: 'Cours' },
-  { to: '/progres', Icon: StatsIcon, label: 'Stats' },
+  { to: '/progres', Icon: StatsIcon, label: 'Progrès' },
   { to: '/profil',  Icon: UserIcon,  label: 'Profil' },
 ]
 

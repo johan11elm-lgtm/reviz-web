@@ -40,7 +40,7 @@ const SLIDES = [
     id: 'go',
     pose: 'fire',
     animate: true,
-    bubble: () => "Allez, on lance ta première session. 10 secondes et c'est parti.",
+    bubble: () => "Allez, on lance ta première séance. 10 secondes et c'est parti.",
     title: 'Prêt à réviser ?',
     body: "Ta première leçon t'attend. Photo ou texte, comme tu veux.",
   },

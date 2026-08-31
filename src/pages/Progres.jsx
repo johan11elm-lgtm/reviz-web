@@ -161,7 +161,7 @@ function getHeroNarrative({ streak, activeDays, isNewRecord, prenom }) {
   if (activeDays >= 1) {
     return { mascot: 'retour', phrase: 'Tu as déjà commencé. Reprends ta série !' };
   }
-  return { mascot: 'sleeping', phrase: 'Allez, on lance ta première session.' };
+  return { mascot: 'sleeping', phrase: 'Allez, on lance ta première séance.' };
 }
 
 // ─── Composant ───────────────────────────────────────────────────────
@@ -329,7 +329,7 @@ export default function Progres() {
             <div className="pg-weeks-empty">
               <p className="pg-weeks-empty-title">Pas encore de révisions</p>
               <p className="pg-weeks-empty-sub">
-                Scanne une leçon et lance une session pour démarrer ta série.
+                Scanne une leçon et lance une séance pour démarrer ta série.
               </p>
             </div>
           ) : (

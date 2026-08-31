@@ -46,8 +46,8 @@ function buildLessonFromAiData(data) {
 // ─── Formats de révision ─────────────────────────────────────────────
 const formats = [
   { id: 'resume',     emoji: '📝', name: 'Résumé',        tone: 'green',  to: '/resume',     getCount: () => null, unit: null, desc: "Relis l'essentiel en 2 min" },
-  { id: 'flashcards', emoji: '🃏', name: 'Flashcards',    tone: 'violet', to: '/flashcards', getCount: l => l.flashcardsCount, unit: 'cartes',    desc: 'Révise par répétition espacée' },
-  { id: 'mindmap',    emoji: '🧠', name: 'Carte mentale', tone: 'pink',   to: '/mindmap',    getCount: () => null,              unit: null,        desc: 'Visualise les concepts clés' },
+  { id: 'flashcards', emoji: '🃏', name: 'Flashcards',    tone: 'violet', to: '/flashcards', getCount: l => l.flashcardsCount, unit: 'cartes',    desc: 'Réponds aux cartes pour mémoriser' },
+  { id: 'mindmap',    emoji: '🧠', name: 'Carte mentale', tone: 'pink',   to: '/mindmap',    getCount: () => null,              unit: null,        desc: "Toute ta leçon en un coup d'œil" },
   { id: 'quiz',       emoji: '❓', name: 'Quiz',          tone: 'orange', to: '/quiz',       getCount: l => l.quizCount,        unit: 'questions', desc: 'Teste tes connaissances' },
 ];
 
@@ -169,11 +169,11 @@ export default function Analyse() {
   const coachLessonId = localStorage.getItem('reviz-current-lesson-id');
 
   const errorMessages = {
-    NON_SCOLAIRE:    { title: "Ça n'a pas l'air d'une leçon", sub: "Réviz ne marche qu'avec des cours et des leçons. Scanne une vraie leçon pour lancer ta session." },
+    NON_SCOLAIRE:    { title: "Ça n'a pas l'air d'une leçon", sub: "Réviz ne marche qu'avec des cours et des leçons. Scanne une vraie leçon pour lancer ta séance." },
     RATE_LIMIT:      { title: 'Trop de scans d\'un coup', sub: 'Patiente un petit moment, puis réessaie.' },
     NETWORK_ERROR:   { title: 'Pas de connexion', sub: 'Vérifie ta connexion internet et réessaie.' },
     TIMEOUT:         { title: 'Ça a pris trop de temps', sub: 'Vérifie ta connexion et réessaie.' },
-    UNAUTHORIZED:    { title: 'Reconnecte-toi', sub: 'Ta session a expiré — reconnecte-toi puis réessaie.' },
+    UNAUTHORIZED:    { title: 'Reconnecte-toi', sub: 'Connexion expirée — reconnecte-toi puis réessaie.' },
     EMAIL_NOT_VERIFIED: { title: 'Confirme ton email d\'abord', sub: 'Pour scanner tes leçons, clique sur le lien qu\'on t\'a envoyé par email. Ça prend 10 secondes, promis !', cta: { label: '📬 Vérifier mon email', to: '/verify-email' } },
     IMAGE_TOO_LARGE: { title: 'Photo trop lourde', sub: 'Rapproche-toi de ta leçon et reprends la photo, ou recadre-la avant de réessayer.' },
     INVALID_JSON:    { title: 'Oups, ça a coincé', sub: 'Réviz n\'a pas réussi à lire cette leçon. Réessaie de la scanner.' },
@@ -211,7 +211,7 @@ export default function Analyse() {
             alt=""
             aria-hidden="true"
           />
-          <div className="analyse-ls-title">Réviz prépare<br/>ta session</div>
+          <div className="analyse-ls-title">Réviz prépare<br/>ta séance</div>
           <div className="analyse-ls-grid">
             {STEPS.map((step, i) => {
               const state = getStepState(i, progress);

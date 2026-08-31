@@ -61,7 +61,7 @@ const MOTIVATION_POOLS = {
     'Mission du jour validée. Tu fais bien.',
     'Carton plein. Repos mérité.',
     'Ton futur toi te remercie.',
-    'Objectif K.O. — bonus inside ?',
+    'Objectif atteint — tu gères !',
   ],
   streakStrong: [
     'jours d\'affilée, t\'es un robot.',
@@ -77,17 +77,17 @@ const MOTIVATION_POOLS = {
   ],
   morning: [
     'Allez, on s\'y met ?',
-    'Petit warmup matinal ?',
+    'Petit échauffement du matin ?',
     'Le matin, ton cerveau est au top.',
     'On commence la journée fort ?',
     'Café + révisions = combo gagnant.',
   ],
   afternoon: [
-    'Petite session avant le goûter ?',
+    'Une petite séance avant le goûter ?',
     'Ton cerveau te dit merci d\'avance.',
     '5 minutes, et déjà plus malin.',
-    'On se met en mode focus ?',
-    'Une rapide, juste une ?',
+    'On se concentre cinq minutes ?',
+    'Une petite révision, juste une ?',
   ],
   evening: [
     'Petite révision avant Netflix ?',
