@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect, useMemo } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useTheme } from '../context/ThemeContext'
 import { recordRevision } from '../services/revisionService'
@@ -7,6 +7,8 @@ import { PageHeader } from '../components/PageHeader'
 import { Mascot } from '../components/Mascot'
 import { MissingLessonState } from '../components/MissingLessonState'
 import { FormatFeedback } from '../components/FormatFeedback'
+import { CoachChat, CoachHeaderButton } from '../components/CoachChat'
+import { nbsp } from '../utils/typography'
 import './Mindmap.css'
 
 // ── Données ───────────────────────────────────────────────────────
@@ -22,9 +24,9 @@ function normalizeBranches(rawBranches) {
     .map((b, i) => ({
       ...b,
       id:       (typeof b.id === 'string' && b.id.trim()) ? b.id : `branche-${i}`,
-      label:    b.label.trim(),
+      label:    nbsp(b.label.trim()),
       emoji:    (typeof b.emoji === 'string' && b.emoji.trim()) ? b.emoji : '📌',
-      detail:   typeof b.detail === 'string' ? b.detail : '',
+      detail:   typeof b.detail === 'string' ? nbsp(b.detail) : '',
       children: Array.isArray(b.children) ? b.children.filter(c => typeof c === 'string' && c.trim()) : [],
       position: BRANCH_POSITIONS[i],
       ...BRANCH_COLORS[i % BRANCH_COLORS.length],
@@ -120,6 +122,10 @@ function MindmapSession() {
   const [scale, setScale]     = useState(INIT_SCALE)
   const [offset, setOffset]   = useState({ x: 0, y: 0 })
   const [isDragging, setIsDragging] = useState(false)
+
+  // Coach — uniquement sur une vraie leçon (le contexte serveur exige son id).
+  const coachLessonId = useMemo(() => localStorage.getItem('reviz-current-lesson-id'), [])
+  const [coachOpen, setCoachOpen] = useState(false)
 
   // Entrée en scène
   useEffect(() => { setTimeout(() => setMounted(true), 60) }, [])
@@ -322,6 +328,11 @@ function MindmapSession() {
             <button type="button" className="rv-btn-cta rv-btn-cta--full" onClick={restartMindmap}>
               <span>🗺️ Revoir la carte</span>
             </button>
+            {coachLessonId && (
+              <button type="button" className="rv-btn-cta rv-btn-cta--full rv-btn-cta--ghost" onClick={() => setCoachOpen(true)}>
+                💬 Encore un doute ? Demande au coach
+              </button>
+            )}
             <Link className="rv-btn-cta rv-btn-cta--full rv-btn-cta--ghost" to="/analyse">
               ← Retour aux formats
             </Link>
@@ -333,7 +344,9 @@ function MindmapSession() {
         variant="back"
         title="Carte mentale"
         sub={progressDots}
-        right={doneButton}
+        right={coachLessonId
+          ? <><CoachHeaderButton onClick={() => setCoachOpen(true)} />{doneButton}</>
+          : doneButton}
         onBack={() => navigate('/analyse')}
       />
 
@@ -514,6 +527,14 @@ function MindmapSession() {
         )}
       </div>
 
+      {coachOpen && coachLessonId && (
+        <CoachChat
+          isOpen
+          onClose={() => setCoachOpen(false)}
+          lessonId={coachLessonId}
+          lessonTitle={mindmapData.title}
+        />
+      )}
     </div>
   )
 }

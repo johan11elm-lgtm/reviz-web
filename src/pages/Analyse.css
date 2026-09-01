@@ -5,24 +5,6 @@
  * Les patterns (cards, icons, pills, buttons, etc.) sont dans
  * src/styles/components/*.css via les classes .rv-*. */
 
-/* ── Avatar bouton (slot droit du PageHeader) ── */
-.analyse-page .analyse-avatar-btn {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background: var(--bg-avatar);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: inherit;
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--text-avatar);
-  border: none;
-  cursor: pointer;
-  flex-shrink: 0;
-}
-
 /* ── Content ── */
 .analyse-page .analyse-content {
   flex: 1;
@@ -268,11 +250,6 @@
   color: var(--text-primary);
 }
 
-.analyse-page .analyse-format-desc {
-  font-size: 11px;
-  color: var(--text-muted);
-  line-height: 1.4;
-}
 
 .analyse-page .analyse-format-count {
   align-self: flex-start;

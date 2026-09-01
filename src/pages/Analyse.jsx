@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { Drawer } from '../components/Drawer';
 import { BottomNav } from '../components/BottomNav';
 import { PageHeader } from '../components/PageHeader';
 import { HeroCTA } from '../components/HeroCTA';
@@ -45,10 +44,10 @@ function buildLessonFromAiData(data) {
 
 // ─── Formats de révision ─────────────────────────────────────────────
 const formats = [
-  { id: 'resume',     emoji: '📝', name: 'Résumé',        tone: 'green',  to: '/resume',     getCount: () => null, unit: null, desc: "Relis l'essentiel en 2 min" },
-  { id: 'flashcards', emoji: '🃏', name: 'Flashcards',    tone: 'violet', to: '/flashcards', getCount: l => l.flashcardsCount, unit: 'cartes',    desc: 'Réponds aux cartes pour mémoriser' },
-  { id: 'mindmap',    emoji: '🧠', name: 'Carte mentale', tone: 'pink',   to: '/mindmap',    getCount: () => null,              unit: null,        desc: "Toute ta leçon en un coup d'œil" },
-  { id: 'quiz',       emoji: '❓', name: 'Quiz',          tone: 'orange', to: '/quiz',       getCount: l => l.quizCount,        unit: 'questions', desc: 'Teste tes connaissances' },
+  { id: 'resume',     emoji: '📝', name: 'Résumé',        tone: 'green',  to: '/resume',     getCount: () => 2,                unit: 'min' },
+  { id: 'flashcards', emoji: '🃏', name: 'Flashcards',    tone: 'violet', to: '/flashcards', getCount: l => l.flashcardsCount, unit: 'cartes' },
+  { id: 'mindmap',    emoji: '🧠', name: 'Carte mentale', tone: 'pink',   to: '/mindmap',    getCount: () => null,             unit: null },
+  { id: 'quiz',       emoji: '❓', name: 'Quiz',          tone: 'orange', to: '/quiz',       getCount: l => l.quizCount,       unit: 'questions' },
 ];
 
 // ─── Écran de chargement ─────────────────────────────────────────────
@@ -67,7 +66,6 @@ function getStepState(index, progress) {
 
 // ─── Composant ────────────────────────────────────────────────────────
 export default function Analyse() {
-  const [drawerOpen, setDrawerOpen]   = useState(false);
   const [isLoading, setIsLoading]     = useState(true);
   const [error, setError]             = useState(null);
   const [lesson, setLesson]           = useState(null);
@@ -76,8 +74,7 @@ export default function Analyse() {
   const [noLesson, setNoLesson]       = useState(false);
   const [coachOpen, setCoachOpen]     = useState(false);
   const navigate   = useNavigate();
-  const { currentUser, getUserLevel } = useAuth();
-  const initiale   = currentUser?.displayName?.[0]?.toUpperCase() ?? '?';
+  const { getUserLevel } = useAuth();
   const userLevel  = getUserLevel();
   const calledRef  = useRef(false);
 
@@ -163,7 +160,6 @@ export default function Analyse() {
   }
 
   const displayLesson = lesson || mockLesson;
-  const totalElements = displayLesson.flashcardsCount + displayLesson.quizCount;
   // Id de la leçon courante — posé par saveLesson() / restoreLesson().
   // Absent sur le mock dev : le coach n'a alors pas de contexte serveur.
   const coachLessonId = localStorage.getItem('reviz-current-lesson-id');
@@ -184,17 +180,6 @@ export default function Analyse() {
   const errInfo = errorMessages[error] ?? { title: 'Oups, ça a coincé', sub: 'Vérifie ta connexion et réessaie.' };
 
   if (noLesson) return <MissingLessonState title="Ta leçon" />;
-
-  const avatarBtn = (
-    <button
-      type="button"
-      className="analyse-avatar-btn"
-      onClick={() => setDrawerOpen(true)}
-      aria-label="Ouvrir le menu"
-    >
-      {initiale}
-    </button>
-  );
 
   return (
     <div className="app analyse-page">
@@ -273,8 +258,9 @@ export default function Analyse() {
       <PageHeader
         variant="back"
         title="Ta leçon"
-        right={avatarBtn}
-        onBack={() => navigate('/scan')}
+        // Retour contextuel : jamais vers la caméra quand on consulte une
+        // leçon depuis Home/Cours (Scan démarre getUserMedia au mount).
+        onBack={() => (window.history.state?.idx > 0 ? navigate(-1) : navigate('/cours'))}
       />
 
       {/* ── Content ── */}
@@ -284,7 +270,7 @@ export default function Analyse() {
         <HeroCTA
           tone="orange"
           mascot="pointing"
-          eyebrow={`${displayLesson.emoji} ${displayLesson.subject} • ${totalElements} éléments`}
+          eyebrow={`${displayLesson.emoji} ${displayLesson.subject}`}
           title={displayLesson.title}
           sub="Choisis ton format préféré — j'ai tout préparé."
           className="analyse-hero-cta"
@@ -316,7 +302,6 @@ export default function Analyse() {
                   <span className={`analyse-format-arrow analyse-format-arrow--${f.tone}`}>›</span>
                 </div>
                 <div className="analyse-format-name">{f.name}</div>
-                <div className="analyse-format-desc">{f.desc}</div>
                 {count !== null && (
                   <div className={`rv-pill rv-pill--${f.tone} analyse-format-count`}>
                     {count} {f.unit}
@@ -329,8 +314,7 @@ export default function Analyse() {
 
       </div>
 
-      <BottomNav active="" />
-      <Drawer isOpen={drawerOpen} onClose={() => setDrawerOpen(false)} />
+      <BottomNav />
       {showPremium && <PremiumModal onClose={() => navigate('/scan')} />}
       {coachOpen && coachLessonId && (
         <CoachChat

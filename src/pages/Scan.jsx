@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { Drawer } from '../components/Drawer';
 import { PremiumModal } from '../components/PremiumModal';
 import { PageHeader } from '../components/PageHeader';
 import { Mascot } from '../components/Mascot';
@@ -10,7 +9,6 @@ import { getScanStatus } from '../services/scanLimitService';
 import './Scan.css';
 
 export default function Scan() {
-  const [drawerOpen, setDrawerOpen]   = useState(false);
   const [activeTab, setActiveTab]     = useState('photo');
   const [lessonText, setLessonText]   = useState('');
   const [showLimit, setShowLimit]     = useState(false);
@@ -22,9 +20,8 @@ export default function Scan() {
   const fileInputRef  = useRef(null);
   const facingModeRef = useRef('environment');
   const navigate  = useNavigate();
-  const { currentUser, getUserLevel } = useAuth();
+  const { getUserLevel } = useAuth();
   const userLevel = getUserLevel();
-  const initiale = currentUser?.displayName?.[0]?.toUpperCase() ?? '?';
 
   // Démarrer la caméra quand on est sur l'onglet photo
   useEffect(() => {
@@ -145,17 +142,7 @@ export default function Scan() {
       <PageHeader
         variant="back"
         title="Scanner"
-        onBack={() => navigate('/')}
-        right={
-          <button
-            type="button"
-            className="rv-bell-btn"
-            onClick={() => setDrawerOpen(true)}
-            aria-label="Ouvrir le menu"
-          >
-            {initiale}
-          </button>
-        }
+        onBack={() => (window.history.state?.idx > 0 ? navigate(-1) : navigate('/'))}
       />
 
       {/* Tabs Photo / Texte */}
@@ -396,8 +383,6 @@ export default function Scan() {
         </ul>
       </aside>
 
-      <Drawer isOpen={drawerOpen} onClose={() => setDrawerOpen(false)} />
-
       {showLimit && (
         <PremiumModal
           onClose={() => setShowLimit(false)}
@@ -424,8 +409,7 @@ export default function Scan() {
               Dis-moi d'abord ton niveau
             </h2>
             <p className="scan-level-modal-sub">
-              Je règle les flashcards, quiz et résumés pile pour toi (collège, lycée).
-              Une minute dans le profil et c'est plié.
+              J'adapte tes révisions à ta classe — ça se règle en 10 secondes.
             </p>
             <div className="scan-level-modal-actions">
               <button

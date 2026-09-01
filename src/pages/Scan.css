@@ -7,7 +7,7 @@
 
 /* ── Tabs Photo / Texte ── segmented control aligné DS via tokens. */
 .scan-page .scan-tabs-wrap {
-  padding: 6px 16px 4px;
+  padding: 6px var(--page-gutter) 4px;
   flex-shrink: 0;
 }
 
@@ -42,7 +42,7 @@
 /* ── Content ── conteneur principal flex column. */
 .scan-page .scan-content {
   flex: 1;
-  padding: 10px 16px 24px;
+  padding: 10px var(--page-gutter) 24px;
   display: flex;
   flex-direction: column;
   gap: 14px;

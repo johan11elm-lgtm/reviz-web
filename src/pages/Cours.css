@@ -5,30 +5,11 @@
  * Les patterns visuels (cards, hero, chips, icons, etc.) sont dans
  * src/styles/components/*.css via les classes .rv-*. */
 
-/* ── Avatar bouton (slot droit du PageHeader) ── */
-.cours-page .cours-avatar-btn {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background: var(--bg-avatar);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: inherit;
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--text-avatar);
-  border: none;
-  cursor: pointer;
-  flex-shrink: 0;
-  transition: transform 0.12s ease, opacity 0.15s ease;
-}
-.cours-page .cours-avatar-btn:hover { opacity: 0.88; }
-.cours-page .cours-avatar-btn:active { transform: scale(0.94); }
-
 /* ── Hero narratif — la mascotte parle dans une bulle ── */
+/* Le hero ouvre la page (plus de PageHeader au-dessus) : marge haute alignée
+   sur le rythme vertical des autres en-têtes. */
 .cours-page .cours-hero-wrap {
-  padding: 4px 24px 0;
+  padding: 20px 24px 0;
 }
 
 .cours-page .cours-narrator-hero {
@@ -144,13 +125,13 @@
   gap: 10px;
 }
 
-.cours-page .cours-resume-bubble {
-  font-family: 'Geist', sans-serif;
-  font-size: 14px;
+/* Label eyebrow — même pattern que .home-featured-label */
+.cours-page .cours-resume-label {
+  font-size: 15px;
   font-weight: 700;
+  color: var(--accent-violet);
   letter-spacing: -0.2px;
-  line-height: 1.35;
-  padding: 10px 14px;
+  margin-bottom: 2px;
 }
 
 /* Info leçon (icon + titre + meta) */
@@ -203,7 +184,6 @@
 /* CTA bouton — la mascotte le pointe */
 .cours-page .cours-resume-cta {
   width: 100%;
-  justify-content: center;
 }
 
 @media (max-width: 430px) {
@@ -305,11 +285,11 @@
 /* ── Content ── */
 .cours-page .cours-content {
   flex: 1;
-  padding: 16px 24px 110px;
+  padding: 8px var(--page-gutter) 110px;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
-  gap: 22px;
+  gap: var(--gap-cards);
 }
 
 /* ── Subject section header (visual + meta) ── */

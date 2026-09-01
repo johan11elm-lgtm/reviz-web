@@ -2,24 +2,6 @@
  * Les patterns visuels (.rv-card, .rv-bar, .rv-icon-square, .rv-speech-bubble) viennent
  * du DS (src/styles/components/*.css). */
 
-/* ── Avatar bouton (slot droit du PageHeader) ── */
-.pg-avatar-btn {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background: var(--bg-avatar);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: inherit;
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--text-avatar);
-  border: none;
-  cursor: pointer;
-  flex-shrink: 0;
-}
-
 /* ── Content ── */
 .pg-content {
   flex: 1;
@@ -82,13 +64,6 @@
   gap: 6px;
 }
 
-.pg-narrator-eyebrow {
-  font-size: 11px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.6px;
-  color: rgba(255, 255, 255, 0.85);
-}
 
 .pg-narrator-title {
   font-family: 'Geist', sans-serif;
@@ -121,7 +96,9 @@
 /* ── Streak hero (signature visuelle orange + mascotte fire) ── */
 .pg-streak-card {
   position: relative;
-  background: linear-gradient(135deg, var(--accent-orange-hover), var(--accent-orange));
+  /* Valeurs figées : texte blanc par-dessus — les accents des thèmes sombres
+     casseraient le contraste. */
+  background: linear-gradient(135deg, #F0772A, #FF8A3D);
   border-radius: var(--radius-card);
   padding: 18px 20px;
   display: flex;
@@ -616,13 +593,6 @@
   margin: 0;
 }
 
-.pg-weeks-empty-sub {
-  font-size: 13px;
-  color: var(--text-secondary);
-  line-height: 1.45;
-  max-width: 28ch;
-  margin: 0;
-}
 
 /* ── Responsive (≤ 430px : phones standards) ── */
 @media (max-width: 430px) {

@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect, useMemo } from 'react'
 import { Link } from 'react-router-dom'
 import { recordRevision } from '../services/revisionService'
 import { PageHeader } from '../components/PageHeader'
@@ -6,7 +6,9 @@ import { HeroCTA } from '../components/HeroCTA'
 import { Mascot } from '../components/Mascot'
 import { MissingLessonState } from '../components/MissingLessonState'
 import { FormatFeedback } from '../components/FormatFeedback'
+import { CoachChat, CoachHeaderButton } from '../components/CoachChat'
 import { subjectInfo as sharedSubjectInfo } from '../utils/subjects'
+import { nbsp } from '../utils/typography'
 import './Resume.css'
 
 function subjectInfo(s) {
@@ -82,6 +84,10 @@ function ResumeContent() {
   const [scrollPct, setScrollPct] = useState(0)
   const [showEnd, setShowEnd]     = useState(false)
   const contentRef                = useRef(null)
+
+  // Coach — uniquement sur une vraie leçon (le contexte serveur exige son id).
+  const coachLessonId = useMemo(() => localStorage.getItem('reviz-current-lesson-id'), [])
+  const [coachOpen, setCoachOpen] = useState(false)
 
   useEffect(() => {
     const onScroll = () => {
@@ -169,6 +175,11 @@ function ResumeContent() {
             <button type="button" className="rv-btn-cta rv-btn-cta--full" onClick={restartResume}>
               <span>🔄 Relire</span>
             </button>
+            {coachLessonId && (
+              <button type="button" className="rv-btn-cta rv-btn-cta--full rv-btn-cta--ghost" onClick={() => setCoachOpen(true)}>
+                💬 Encore un doute ? Demande au coach
+              </button>
+            )}
             <Link className="rv-btn-cta rv-btn-cta--full rv-btn-cta--ghost" to="/analyse">
               ← Retour aux formats
             </Link>
@@ -180,7 +191,9 @@ function ResumeContent() {
         variant="back"
         title="Résumé"
         sub={`📖 ${resumeData.readingTime} min de lecture`}
-        right={shareBtn}
+        right={coachLessonId
+          ? <><CoachHeaderButton onClick={() => setCoachOpen(true)} />{shareBtn}</>
+          : shareBtn}
       />
 
       {/* Barre de lecture liée au scroll */}
@@ -195,29 +208,28 @@ function ResumeContent() {
       <div className="content resume-content" ref={contentRef}>
 
         {/* Hero présence — mascotte dominante style Home */}
+        <div className="resume-ai-row">
+          <span className="ai-badge">✦ Généré par IA</span>
+        </div>
         <HeroCTA
           tone="orange"
           mascot="reading"
           eyebrow={`${info.emoji} ${resumeData.subject}`}
           title={resumeData.title}
-          sub={`📖 ${resumeData.readingTime} min — prends ton temps pour bien capter.`}
           className="resume-hero-cta"
         />
-        <div className="resume-hero-after">
-          <span className="ai-badge">✦ Généré par IA</span>
-        </div>
 
         {/* À retenir */}
         <div className="rv-callout rv-callout--violet resume-retenir">
           <span className="rv-callout-label">
             <span aria-hidden="true">⭐</span> À retenir
           </span>
-          <p className="resume-retenir-intro">{resumeData.intro}</p>
+          <p className="resume-retenir-intro">{nbsp(resumeData.intro)}</p>
           <div className="resume-retenir-points">
             {resumeData.keyPoints.map((pt, i) => (
               <div className="resume-retenir-point" key={i}>
                 <span className="resume-point-num">{i + 1}</span>
-                <span>{pt}</span>
+                <span>{nbsp(pt)}</span>
               </div>
             ))}
           </div>
@@ -234,8 +246,8 @@ function ResumeContent() {
           >
             <div className="resume-section-accent" />
             <div className="resume-section-inner">
-              <h3 className="resume-section-heading">{section.title}</h3>
-              <div className="resume-section-body">{section.content}</div>
+              <h3 className="resume-section-heading">{nbsp(section.title)}</h3>
+              <div className="resume-section-body">{nbsp(section.content)}</div>
               {section.formula && (
                 <div className="rv-callout rv-callout--violet resume-formula-block">
                   <div className="resume-formula-text">{section.formula}</div>
@@ -268,6 +280,15 @@ function ResumeContent() {
         </button>
 
       </div>
+
+      {coachOpen && coachLessonId && (
+        <CoachChat
+          isOpen
+          onClose={() => setCoachOpen(false)}
+          lessonId={coachLessonId}
+          lessonTitle={resumeData.title}
+        />
+      )}
     </div>
   )
 }

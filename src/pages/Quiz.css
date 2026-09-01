@@ -38,10 +38,10 @@
 /* ── Content ── */
 .quiz-page .quiz-content {
   flex: 1;
-  padding: 4px 24px 16px;
+  padding: 8px var(--page-gutter) 16px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: var(--gap-cards);
   overflow-y: auto;
 }
 
@@ -79,13 +79,6 @@
   gap: 6px;
   text-align: center;
   align-items: center;
-}
-.quiz-page .quiz-narrator-eyebrow {
-  font-size: 10px;
-  font-weight: 700;
-  color: var(--accent-orange);
-  text-transform: uppercase;
-  letter-spacing: 0.8px;
 }
 .quiz-page .quiz-narrator-question {
   font-family: 'Geist', sans-serif;
@@ -212,9 +205,32 @@
   opacity: 0.85;
 }
 
+/* Chip « Demande au coach pourquoi » — hook de friction sous l'explication.
+   Pill secondaire, cible tactile ≥ 44px. */
+.quiz-page .quiz-coach-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 44px;
+  padding: 10px 16px;
+  margin: -4px 0 12px;
+  border: 1.5px solid var(--accent-violet-soft);
+  border-radius: var(--radius-pill);
+  background: var(--bg-card);
+  color: var(--accent-violet-ink);
+  font-family: inherit;
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.12s ease;
+}
+@media (hover: hover) and (pointer: fine) {
+  .quiz-page .quiz-coach-chip:hover { background: var(--accent-violet-soft); }
+}
+.quiz-page .quiz-coach-chip:active { transform: scale(0.97); }
+
 .quiz-page .quiz-next-btn {
   width: 100%;
-  justify-content: center;
 }
 
 /* ── Confetti ── */
@@ -290,5 +306,4 @@
 
 @media (max-width: 430px) {
   .quiz-page .quiz-end-screen { border-radius: 0; }
-  .quiz-page .quiz-coach { padding: 2px 0 0; }
 }

@@ -30,6 +30,9 @@
 
 .rv-btn-cta--full { width: 100%; }
 
+/* CTA sans flèche : contenu centré (avec flèche → space-between par défaut) */
+.rv-btn-cta--center { justify-content: center; }
+
 .rv-btn-cta--ghost {
   background: var(--bg-card);
   color: var(--text-primary);
@@ -59,7 +62,7 @@
   flex: 1;
   min-width: 0;
   padding: 12px 14px;
-  border-radius: 14px;
+  border-radius: var(--radius-btn);
   border: 1px solid var(--border-subtle);
   background: var(--bg-card);
   color: var(--text-primary);
@@ -118,7 +121,7 @@
   font-size: 13px;
   font-weight: 600;
   padding: 8px 12px;
-  border-radius: 10px;
+  border-radius: var(--radius-chip);
   cursor: pointer;
   transition: background 0.15s ease, color 0.15s ease;
 }

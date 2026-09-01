@@ -46,8 +46,8 @@
   border: 1px solid var(--border-subtle);
   box-shadow: var(--shadow-card);
   border-radius: var(--radius-pill);
-  padding: 8px 14px;
-  font-size: 12px;
+  padding: 10px 16px;
+  font-size: 13px;
   font-weight: 600;
   color: var(--text-secondary);
   white-space: nowrap;

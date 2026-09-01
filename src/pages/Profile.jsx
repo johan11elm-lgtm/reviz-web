@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { loadLessons, syncFromFirestore } from '../services/historyService';
 import { loadRevisions, syncRevisionsFromFirestore } from '../services/revisionService';
-import { Drawer } from '../components/Drawer';
 import { BottomNav } from '../components/BottomNav';
 import { LevelSelector } from '../components/LevelSelector';
 import { PageHeader } from '../components/PageHeader';
@@ -14,36 +13,36 @@ import './Profile.css';
 
 // Mascotte adaptative au niveau / streak / activité — pattern Progres `getHeroNarrative`.
 function getProfileHero(level, streak, lessonsCount) {
-  if (level >= 10)        return { pose: 'trophy',      phrase: `Niveau ${level}, t'es au top.` };
-  if (streak >= 7)        return { pose: 'fire',        phrase: `${streak} jours d'affilée. T'es chaud.` };
-  if (level >= 3)         return { pose: 'celebration', phrase: `Niveau ${level}, ça avance bien.` };
-  if (lessonsCount >= 1)  return { pose: 'reading',     phrase: `Tu as déjà scanné ${lessonsCount} leçon${lessonsCount > 1 ? 's' : ''}. Continue !` };
-  return                       { pose: 'hello',       phrase: `Bienvenue dans ton profil. Première leçon dans 1 clic ?` };
+  if (level >= 10)        return 'trophy';
+  if (streak >= 7)        return 'fire';
+  if (level >= 3)         return 'celebration';
+  if (lessonsCount >= 1)  return 'reading';
+  return 'hello';
 }
 
+// Icône engrenage (réglages) — trait 1.8, cohérente avec PageHeader
+const GearIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <circle cx="12" cy="12" r="3.2" />
+    <path d="M19.4 15a1.7 1.7 0 0 0 .34 1.87l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.7 1.7 0 0 0-1.87-.34 1.7 1.7 0 0 0-1.03 1.56V21a2 2 0 1 1-4 0v-.09a1.7 1.7 0 0 0-1.12-1.56 1.7 1.7 0 0 0-1.87.34l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.7 1.7 0 0 0 .34-1.87 1.7 1.7 0 0 0-1.56-1.03H3a2 2 0 1 1 0-4h.09a1.7 1.7 0 0 0 1.56-1.12 1.7 1.7 0 0 0-.34-1.87l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.7 1.7 0 0 0 1.87.34h.08a1.7 1.7 0 0 0 1.03-1.56V3a2 2 0 1 1 4 0v.09a1.7 1.7 0 0 0 1.03 1.56 1.7 1.7 0 0 0 1.87-.34l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.7 1.7 0 0 0-.34 1.87v.08a1.7 1.7 0 0 0 1.56 1.03H21a2 2 0 1 1 0 4h-.09a1.7 1.7 0 0 0-1.56 1.03Z" />
+  </svg>
+);
+
 const ACCOUNT_ITEMS = [
-  { id: 'profil',          icon: '👤', label: 'Modifier le profil', tone: 'violet' },
-  { id: 'notifications',   icon: '🔔', label: 'Notifications',      tone: 'orange' },
-  { id: 'objectif',        icon: '🎯', label: 'Objectif quotidien', tone: 'green'  },
-  { id: 'confidentialite', icon: '🔒', label: 'Confidentialité',    tone: 'pink'   },
-  { id: 'logout',          icon: '🚪', label: 'Se déconnecter',     tone: 'red', danger: true },
+  { id: 'profil',   icon: '👤', label: 'Modifier le profil', tone: 'violet' },
+  { id: 'reglages', icon: '⚙️', label: 'Réglages',           tone: 'orange' },
 ];
 
 const SHEET_TITLES = {
-  profil:          'Modifier le profil',
-  notifications:   'Notifications',
-  objectif:        'Objectif quotidien',
-  confidentialite: 'Confidentialité',
+  profil: 'Modifier le profil',
 };
 
 export default function Profile() {
-  const [drawerOpen, setDrawerOpen] = useState(false);
   const [showAllBadges, setShowAllBadges] = useState(false);
   const navigate = useNavigate();
 
-  const { currentUser, getUserLevel, setUserLevel, logout, updateDisplayName, updateUserPassword, deleteAccount } = useAuth();
+  const { currentUser, getUserLevel, setUserLevel, updateDisplayName } = useAuth();
   const prenom   = currentUser?.displayName ?? '';
-  const initiale = prenom[0]?.toUpperCase() ?? '?';
   const userLevel  = getUserLevel();
   const levelLabel = formatLevelLabel(userLevel);
 
@@ -55,11 +54,11 @@ export default function Profile() {
     syncRevisionsFromFirestore().then(setAllRevisions);
   }, []);
 
-  const streak = computeStreak(allLessons);
+  const streak = computeStreak(allRevisions, 'revisedAt');
   const { level, xpInLvl, fillPct } = computeLevel(allLessons);
   const badges = computeBadges(allLessons, allRevisions, streak, level);
   const unlocked = badges.filter(b => !b.locked).length;
-  const hero = getProfileHero(level, streak, allLessons.length);
+  const heroPose = getProfileHero(level, streak, allLessons.length);
 
 
   const [activeSheet, setActiveSheet] = useState(null);
@@ -67,31 +66,12 @@ export default function Profile() {
   const [editLevel, setEditLevel]     = useState({ cycle: null, classe: null, specialites: [], filiere: null });
   const [saving, setSaving]           = useState(false);
   const [saveError, setSaveError]     = useState('');
-  const [notifsEnabled, setNotifsEnabled] = useState(
-    () => localStorage.getItem('reviz-notifs') === 'true'
-  );
-  const [currentPwd, setCurrentPwd]   = useState('');
-  const [newPwd, setNewPwd]           = useState('');
-  const [pwdSaving, setPwdSaving]     = useState(false);
-  const [pwdError, setPwdError]       = useState('');
-  const [pwdSuccess, setPwdSuccess]   = useState(false);
-  const [deleteStep, setDeleteStep]   = useState(0); // 0=hidden, 1=confirm, 2=password
-  const [deletePwd, setDeletePwd]     = useState('');
-  const [deleting, setDeleting]       = useState(false);
-  const [deleteError, setDeleteError] = useState('');
-  const [dailyGoal, setDailyGoal] = useState(
-    () => parseInt(localStorage.getItem(`reviz-daily-goal-${currentUser?.uid}`) || '3')
-  );
 
   function openSheet(name) {
     if (name === 'profil') {
       setEditPrenom(prenom);
       setEditLevel(userLevel ?? { cycle: null, classe: null, specialites: [], filiere: null });
       setSaveError('');
-    }
-    if (name === 'confidentialite') {
-      setCurrentPwd(''); setNewPwd(''); setPwdError(''); setPwdSuccess(false);
-      setDeleteStep(0); setDeletePwd(''); setDeleteError('');
     }
     setActiveSheet(name);
   }
@@ -111,52 +91,8 @@ export default function Profile() {
     finally { setSaving(false); }
   }
 
-  function handleToggleNotifs() {
-    const next = !notifsEnabled;
-    setNotifsEnabled(next);
-    localStorage.setItem('reviz-notifs', String(next));
-  }
-
-  async function handleChangePwd() {
-    if (!currentPwd || !newPwd) return;
-    if (newPwd.length < 6) { setPwdError('Le mot de passe doit faire au moins 6 caractères.'); return; }
-    setPwdSaving(true); setPwdError(''); setPwdSuccess(false);
-    try {
-      await updateUserPassword(currentPwd, newPwd);
-      setPwdSuccess(true); setCurrentPwd(''); setNewPwd('');
-    } catch (err) {
-      setPwdError(
-        err.code === 'auth/wrong-password' || err.code === 'auth/invalid-credential'
-          ? 'Mot de passe actuel incorrect.' : 'Erreur, réessaie.'
-      );
-    } finally { setPwdSaving(false); }
-  }
-
-  async function handleDeleteAccount() {
-    const isGoogle = currentUser?.providerData[0]?.providerId === 'google.com';
-    if (deleteStep === 0) { setDeleteStep(1); return; }
-    if (deleteStep === 1 && !isGoogle) { setDeleteStep(2); return; }
-    // Step 2 (password) or step 1 (Google) → actually delete
-    setDeleting(true); setDeleteError('');
-    try {
-      await deleteAccount(isGoogle ? null : deletePwd);
-      navigate('/welcome');
-    } catch (err) {
-      if (err.code === 'auth/wrong-password' || err.code === 'auth/invalid-credential') {
-        setDeleteError('Mot de passe incorrect.');
-      } else {
-        setDeleteError('Erreur lors de la suppression. Réessaie.');
-      }
-    } finally { setDeleting(false); }
-  }
-
-  async function handleLogout() {
-    await logout();
-    navigate('/welcome');
-  }
-
   function onAccountClick(id) {
-    if (id === 'logout') return handleLogout();
+    if (id === 'reglages') return navigate('/reglages');
     openSheet(id);
   }
 
@@ -169,10 +105,10 @@ export default function Profile() {
           <button
             type="button"
             className="rv-bell-btn"
-            onClick={() => setDrawerOpen(true)}
-            aria-label="Ouvrir le menu"
+            onClick={() => navigate('/reglages')}
+            aria-label="Réglages"
           >
-            {initiale}
+            <GearIcon />
           </button>
         }
       />
@@ -181,7 +117,7 @@ export default function Profile() {
         {/* HERO centré — identité + progression en un seul bloc */}
         <section className="pf-hero">
           <Mascot
-            pose={hero.pose}
+            pose={heroPose}
             size={112}
             glow
             priority
@@ -189,14 +125,14 @@ export default function Profile() {
           />
           <h1 className="pf-hero-name">{prenom || 'Toi'}</h1>
           <div className="pf-hero-meta">
-            <span className="rv-pill rv-pill--orange pf-hero-pill">Niveau {level}</span>
+            <span className="rv-pill rv-pill--violet pf-hero-pill">Niveau {level}</span>
             {levelLabel && <span className="pf-hero-classe">{levelLabel}</span>}
           </div>
           <div className="pf-hero-xp">
-            <div className="rv-bar rv-bar--tall rv-bar--orange-bg">
-              <div className="rv-bar-fill rv-bar-fill--orange" style={{ width: `${fillPct}%` }} />
+            <div className="rv-bar rv-bar--tall rv-bar--violet-bg">
+              <div className="rv-bar-fill rv-bar-fill--violet" style={{ width: `${fillPct}%` }} />
             </div>
-            <p className="pf-xp-sub">{xpInLvl} / {XP_PAR_NIVEAU} XP — encore {XP_PAR_NIVEAU - xpInLvl} avant le niveau {level + 1}</p>
+            <p className="pf-xp-sub">{xpInLvl} / {XP_PAR_NIVEAU} XP</p>
           </div>
         </section>
 
@@ -205,19 +141,19 @@ export default function Profile() {
           <div className="pf-stat">
             <span className="pf-stat-icon" aria-hidden="true">🔥</span>
             <span className="pf-stat-value">{streak}</span>
-            <span className="pf-stat-label">Jours de suite</span>
+            <span className="pf-stat-label">{streak > 1 ? 'jours de suite' : 'jour de suite'}</span>
           </div>
           <div className="pf-stat-sep" aria-hidden="true" />
           <div className="pf-stat">
             <span className="pf-stat-icon" aria-hidden="true">📚</span>
             <span className="pf-stat-value">{allLessons.length}</span>
-            <span className="pf-stat-label">Leçons</span>
+            <span className="pf-stat-label">{allLessons.length > 1 ? 'leçons' : 'leçon'}</span>
           </div>
           <div className="pf-stat-sep" aria-hidden="true" />
           <div className="pf-stat">
             <span className="pf-stat-icon" aria-hidden="true">⚡</span>
             <span className="pf-stat-value">{allRevisions.length}</span>
-            <span className="pf-stat-label">Révisions</span>
+            <span className="pf-stat-label">{allRevisions.length > 1 ? 'révisions' : 'révision'}</span>
           </div>
         </section>
 
@@ -324,169 +260,10 @@ export default function Profile() {
             </>
           )}
 
-          {activeSheet === 'notifications' && (
-            <>
-              <div className="pf-notif-row">
-                <div className="pf-notif-info">
-                  <span className="pf-notif-name">Rappel quotidien</span>
-                  <span className="pf-notif-desc">Révise 10 min par jour</span>
-                </div>
-                <button
-                  type="button"
-                  className={`pf-toggle${notifsEnabled ? ' pf-toggle--on' : ''}`}
-                  onClick={handleToggleNotifs}
-                  aria-pressed={notifsEnabled}
-                  aria-label="Activer le rappel quotidien"
-                >
-                  <span className="pf-toggle-knob" />
-                </button>
-              </div>
-              <p className="pf-sheet-hint">
-                Les notifications push seront disponibles dans la version mobile.
-              </p>
-            </>
-          )}
-
-          {activeSheet === 'objectif' && (
-            <>
-              <p className="pf-sheet-hint">Combien de révisions par jour souhaites-tu faire ?</p>
-              <div className="pf-goal-grid">
-                {[1, 3, 5, 10].map(n => (
-                  <button
-                    key={n}
-                    type="button"
-                    className={`pf-goal-btn${dailyGoal === n ? ' pf-goal-btn--active' : ''}`}
-                    onClick={() => {
-                      setDailyGoal(n);
-                      localStorage.setItem(`reviz-daily-goal-${currentUser?.uid}`, String(n));
-                      closeSheet();
-                    }}
-                  >
-                    {n}
-                  </button>
-                ))}
-              </div>
-            </>
-          )}
-
-          {activeSheet === 'confidentialite' && (
-            <>
-              <div className="rv-card rv-card--tight pf-confid-email">
-                <span className="pf-confid-email-label">Email</span>
-                <span className="pf-confid-email-value">{currentUser?.email}</span>
-              </div>
-
-              <label className="pf-sheet-label" style={{ marginTop: 14 }}>
-                Changer le mot de passe
-              </label>
-              <input
-                className="pf-sheet-input"
-                type="password"
-                value={currentPwd}
-                onChange={e => setCurrentPwd(e.target.value)}
-                placeholder="Mot de passe actuel"
-                autoComplete="current-password"
-              />
-              <input
-                className="pf-sheet-input"
-                type="password"
-                value={newPwd}
-                onChange={e => setNewPwd(e.target.value)}
-                placeholder="Nouveau mot de passe"
-                autoComplete="new-password"
-              />
-              {pwdError   && <p className="pf-sheet-error">{pwdError}</p>}
-              {pwdSuccess && <p className="pf-sheet-success">Mot de passe mis à jour ✓</p>}
-              <button
-                type="button"
-                className="rv-btn-cta rv-btn-cta--full pf-sheet-save"
-                onClick={handleChangePwd}
-                disabled={pwdSaving || !currentPwd || !newPwd}
-              >
-                {pwdSaving ? 'Mise à jour…' : 'Mettre à jour'}
-              </button>
-
-              <div className="pf-delete-section">
-                <label className="pf-sheet-label">Zone de danger</label>
-
-                {deleteStep === 0 && (
-                  <button
-                    type="button"
-                    className="rv-btn-cta rv-btn-cta--ghost rv-btn-cta--full pf-delete-trigger"
-                    onClick={handleDeleteAccount}
-                  >
-                    Supprimer mon compte
-                  </button>
-                )}
-
-                {deleteStep === 1 && (
-                  <div className="pf-delete-confirm">
-                    <div className="rv-callout rv-callout--red">
-                      <span className="rv-callout-label">⚠️ Irréversible</span>
-                      Toutes tes leçons, révisions et données seront supprimées définitivement.
-                    </div>
-                    <div className="pf-delete-actions">
-                      <button
-                        type="button"
-                        className="rv-btn-cta rv-btn-cta--danger rv-btn-cta--full"
-                        onClick={handleDeleteAccount}
-                        disabled={deleting}
-                      >
-                        {deleting ? 'Suppression…' : 'Confirmer la suppression'}
-                      </button>
-                      <button
-                        type="button"
-                        className="rv-btn-cta rv-btn-cta--ghost rv-btn-cta--full"
-                        onClick={() => setDeleteStep(0)}
-                      >
-                        Annuler
-                      </button>
-                    </div>
-                  </div>
-                )}
-
-                {deleteStep === 2 && (
-                  <div className="pf-delete-confirm">
-                    <div className="rv-callout rv-callout--red">
-                      <span className="rv-callout-label">⚠️ Confirmation</span>
-                      Entre ton mot de passe pour confirmer la suppression définitive.
-                    </div>
-                    <input
-                      className="pf-sheet-input"
-                      type="password"
-                      value={deletePwd}
-                      onChange={e => setDeletePwd(e.target.value)}
-                      placeholder="Mot de passe actuel"
-                      autoComplete="current-password"
-                    />
-                    {deleteError && <p className="pf-sheet-error">{deleteError}</p>}
-                    <div className="pf-delete-actions">
-                      <button
-                        type="button"
-                        className="rv-btn-cta rv-btn-cta--danger rv-btn-cta--full"
-                        onClick={handleDeleteAccount}
-                        disabled={deleting || !deletePwd}
-                      >
-                        {deleting ? 'Suppression…' : 'Supprimer définitivement'}
-                      </button>
-                      <button
-                        type="button"
-                        className="rv-btn-cta rv-btn-cta--ghost rv-btn-cta--full"
-                        onClick={() => setDeleteStep(0)}
-                      >
-                        Annuler
-                      </button>
-                    </div>
-                  </div>
-                )}
-              </div>
-            </>
-          )}
         </div>
       </aside>
 
-      <BottomNav active="profile" />
-      <Drawer isOpen={drawerOpen} onClose={() => setDrawerOpen(false)} />
+      <BottomNav />
     </div>
   );
 }

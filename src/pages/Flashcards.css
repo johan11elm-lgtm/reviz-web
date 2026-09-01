@@ -74,10 +74,10 @@
 /* ── Zone carte ── */
 .flashcards-page .flashcards-card-area {
   flex: 1;
-  padding: 8px 24px 32px;
+  padding: 8px var(--page-gutter) 32px;
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: var(--gap-cards);
 }
 
 /* Stack de cartes */

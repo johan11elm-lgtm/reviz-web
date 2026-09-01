@@ -25,7 +25,7 @@
 .resume-page .resume-content {
   flex: 1;
   overflow-y: auto;
-  padding: 20px 24px 48px;
+  padding: 8px var(--page-gutter) 48px;
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -42,11 +42,9 @@
   .resume-page .resume-hero-cta:hover { filter: none; }
 }
 
-.resume-page .resume-hero-after {
-  display: flex;
-  justify-content: flex-end;
-  margin-top: -4px;
-  margin-bottom: 4px;
+.resume-page .resume-ai-row {
+  text-align: center;
+  margin-bottom: -6px;
 }
 
 /* ── Retenir card (utilise .rv-callout --violet) ── */

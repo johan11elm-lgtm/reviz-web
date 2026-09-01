@@ -111,8 +111,9 @@
   border-radius: var(--radius-pill);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
 }
-.rv-hero-cta--violet .rv-hero-action { color: var(--accent-violet-ink); }
-.rv-hero-cta--orange .rv-hero-action { color: var(--accent-orange-ink); }
+/* Fond #fff figé ci-dessus → encre figée aussi (les tokens ink bougent en dark). */
+.rv-hero-cta--violet .rv-hero-action { color: #2E1F8C; }
+.rv-hero-cta--orange .rv-hero-action { color: #B34400; }
 
 .rv-hero-action-arrow { font-size: 15px; line-height: 1; }
 

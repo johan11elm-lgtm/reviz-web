@@ -6,6 +6,8 @@ import { PageHeader } from '../components/PageHeader'
 import { Mascot } from '../components/Mascot'
 import { MissingLessonState } from '../components/MissingLessonState'
 import { FormatFeedback } from '../components/FormatFeedback'
+import { CoachChat, CoachHeaderButton } from '../components/CoachChat'
+import { nbsp } from '../utils/typography'
 import './Flashcards.css'
 
 // ---- DONNÉES : localStorage (IA) > état vide (mock réservé au dev) ----
@@ -36,6 +38,11 @@ function getLessonId() {
   return localStorage.getItem('reviz-current-lesson-id') ?? 'default'
 }
 
+function getLessonTitle(fallback = 'Ta leçon') {
+  try { return JSON.parse(localStorage.getItem('reviz-ai-data') || 'null')?.metadata?.title || fallback }
+  catch { return fallback }
+}
+
 export default function Flashcards() {
   // Décision stable pour toute la vie du composant (rules-of-hooks safe).
   const [hasData] = useState(() => getFlashcards() !== null)
@@ -56,6 +63,11 @@ function FlashcardsSession() {
   const [animDir, setAnimDir]       = useState(null)  // 'got' | 'again'
   const [streak, setStreak]         = useState(0)     // bonnes réponses consécutives
   const [showStreakBadge, setShowStreakBadge] = useState(false)
+
+  // Coach — uniquement sur une vraie leçon (le contexte serveur exige son id).
+  const coachLessonId = useMemo(() => localStorage.getItem('reviz-current-lesson-id'), [])
+  const lessonTitle   = useMemo(() => getLessonTitle(), [])
+  const [coachOpen, setCoachOpen] = useState(false)
 
   const card = flashcards[current]
 
@@ -108,9 +120,7 @@ function FlashcardsSession() {
 
   const [shareDone, setShareDone] = useState(false)
   async function handleShare() {
-    const title = (() => {
-      try { return JSON.parse(localStorage.getItem('reviz-ai-data') || 'null')?.metadata?.title || 'Flashcards' } catch { return 'Flashcards' }
-    })()
+    const title = getLessonTitle('Flashcards')
     const text = flashcards.map((c, i) => `${i + 1}. ${c.front}\n→ ${c.back}`).join('\n\n')
       + '\n\n---\nGénéré avec Réviz'
     try {
@@ -186,6 +196,11 @@ function FlashcardsSession() {
             <button type="button" className="rv-btn-cta rv-btn-cta--full rv-btn-cta--ghost" onClick={handleShare}>
               {shareDone ? '✓ Copié !' : '↗ Partager les cartes'}
             </button>
+            {coachLessonId && (
+              <button type="button" className="rv-btn-cta rv-btn-cta--full rv-btn-cta--ghost" onClick={() => setCoachOpen(true)}>
+                💬 Encore un doute ? Demande au coach
+              </button>
+            )}
             <Link className="rv-btn-cta rv-btn-cta--full rv-btn-cta--ghost" to="/analyse">
               ← Retour aux formats
             </Link>
@@ -197,7 +212,9 @@ function FlashcardsSession() {
         variant="back"
         title="Flashcards"
         sub={dots}
-        right={counter}
+        right={coachLessonId
+          ? <><CoachHeaderButton onClick={() => setCoachOpen(true)} />{counter}</>
+          : counter}
       />
 
       <div className="flashcards-ai-row"><span className="ai-badge">✦ Généré par IA</span></div>
@@ -231,8 +248,8 @@ function FlashcardsSession() {
                   aria-hidden="true"
                 />
                 <span className="flashcards-face-tag">Question</span>
-                <span className="flashcards-face-text">{card.front}</span>
-                {!isFlipped && (
+                <span className="flashcards-face-text">{nbsp(card.front)}</span>
+                {!isFlipped && current === 0 && (
                   <span className="flashcards-face-hint">👆 Appuie pour révéler</span>
                 )}
               </div>
@@ -250,7 +267,7 @@ function FlashcardsSession() {
                   aria-hidden="true"
                 />
                 <span className="flashcards-face-tag">Réponse</span>
-                <span className="flashcards-face-text">{card.back}</span>
+                <span className="flashcards-face-text">{nbsp(card.back)}</span>
               </div>
 
             </div>
@@ -269,6 +286,15 @@ function FlashcardsSession() {
         </div>
 
       </div>
+
+      {coachOpen && coachLessonId && (
+        <CoachChat
+          isOpen
+          onClose={() => setCoachOpen(false)}
+          lessonId={coachLessonId}
+          lessonTitle={lessonTitle}
+        />
+      )}
     </div>
   )
 }

@@ -1,10 +1,12 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { Link } from 'react-router-dom'
 import { recordRevision } from '../services/revisionService'
 import { PageHeader } from '../components/PageHeader'
 import { Mascot } from '../components/Mascot'
 import { MissingLessonState } from '../components/MissingLessonState'
 import { FormatFeedback } from '../components/FormatFeedback'
+import { CoachChat, CoachHeaderButton } from '../components/CoachChat'
+import { nbsp } from '../utils/typography'
 import './Quiz.css'
 
 // ---- DONNÉES : localStorage (IA) > état vide (mock réservé au dev) ----
@@ -28,6 +30,11 @@ function getQuestions() {
 }
 
 const LETTERS = ['A', 'B', 'C', 'D']
+
+function getLessonTitle(fallback = 'Ta leçon') {
+  try { return JSON.parse(localStorage.getItem('reviz-ai-data') || 'null')?.metadata?.title || fallback }
+  catch { return fallback }
+}
 
 function getEndContent(score, total) {
   const pct = score / total
@@ -107,10 +114,21 @@ function QuizSession() {
   const [showEnd, setShowEnd]             = useState(false)
   const [animKey, setAnimKey]             = useState(0)
 
+  // Coach — uniquement sur une vraie leçon (le contexte serveur exige son id).
+  const coachLessonId = useMemo(() => localStorage.getItem('reviz-current-lesson-id'), [])
+  const lessonTitle   = useMemo(() => getLessonTitle(), [])
+  const [coachOpen, setCoachOpen]       = useState(false)
+  const [coachPrefill, setCoachPrefill] = useState('')
+
+  function openCoach(prefill = '') {
+    setCoachPrefill(prefill)
+    setCoachOpen(true)
+  }
+
   const q         = questions[current]
   const isCorrect = answered && selectedIndex === q.correct
   const isLast    = current === questions.length - 1
-  const progress  = ((current + (answered ? 1 : 0)) / questions.length) * 100
+  const progress  = ((current + 1) / questions.length) * 100
   const showConfetti = showEnd && score / questions.length >= 0.8
   const displayScore = useCountUp(score, showEnd)
   const xp = score * 10
@@ -202,6 +220,11 @@ function QuizSession() {
             <button type="button" className="rv-btn-cta rv-btn-cta--full" onClick={restartQuiz}>
               <span>🔄 Recommencer</span>
             </button>
+            {coachLessonId && (
+              <button type="button" className="rv-btn-cta rv-btn-cta--full rv-btn-cta--ghost" onClick={() => openCoach()}>
+                💬 Encore un doute ? Demande au coach
+              </button>
+            )}
             <Link className="rv-btn-cta rv-btn-cta--full rv-btn-cta--ghost" to="/analyse">
               ← Retour aux formats
             </Link>
@@ -213,7 +236,9 @@ function QuizSession() {
         variant="back"
         title="Quiz"
         sub={subBar}
-        right={scorePill}
+        right={coachLessonId
+          ? <><CoachHeaderButton onClick={() => openCoach()} />{scorePill}</>
+          : scorePill}
       />
 
       {/* ── Contenu ── */}
@@ -234,8 +259,7 @@ function QuizSession() {
             aria-hidden="true"
           />
           <div className="rv-speech-bubble rv-speech-bubble--pointer-top-center quiz-narrator-bubble">
-            <span className="quiz-narrator-eyebrow">Question {current + 1}</span>
-            <span className="quiz-narrator-question">{q.question}</span>
+            <span className="quiz-narrator-question">{nbsp(q.question)}</span>
           </div>
         </div>
 
@@ -259,9 +283,11 @@ function QuizSession() {
 
       </div>
 
-      {/* ── Panel de feedback (sheet partagée) — annoncé aux lecteurs d'écran ── */}
+      {/* ── Panel de feedback (sheet partagée) — annoncé aux lecteurs d'écran.
+             Masquée aussi sur l'écran de fin : la sheet (z-index 80) passerait
+             sinon au-dessus de l'end screen (z-index 20). ── */}
       <div
-        className={`rv-sheet--bottom quiz-feedback${!answered ? ' rv-sheet--bottom-hidden' : ''}${isCorrect ? ' quiz-feedback--correct' : ' quiz-feedback--wrong'}`}
+        className={`rv-sheet--bottom quiz-feedback${!answered || showEnd ? ' rv-sheet--bottom-hidden' : ''}${isCorrect ? ' quiz-feedback--correct' : ' quiz-feedback--wrong'}`}
         role="status"
         aria-live="polite"
       >
@@ -274,13 +300,31 @@ function QuizSession() {
             {isCorrect ? 'Bonne réponse !' : 'Mauvaise réponse'}
           </div>
         </div>
-        <p className="quiz-feedback-explanation">{q.explanation}</p>
-        <button type="button" className="rv-btn-cta rv-btn-cta--full quiz-next-btn" onClick={nextQuestion}>
+        <p className="quiz-feedback-explanation">{nbsp(q.explanation)}</p>
+        {answered && !isCorrect && coachLessonId && (
+          <button
+            type="button"
+            className="quiz-coach-chip"
+            onClick={() => openCoach(`Pourquoi la bonne réponse à “${q.question}” est “${q.choices[q.correct]}” ?`)}
+          >
+            <span aria-hidden="true">💬</span> Demande au coach pourquoi
+          </button>
+        )}
+        <button type="button" className="rv-btn-cta rv-btn-cta--full rv-btn-cta--center quiz-next-btn" onClick={nextQuestion}>
           <span>{isLast ? 'Voir mon résultat' : 'Question suivante'}</span>
           <span className="rv-btn-cta-arrow" aria-hidden="true">→</span>
         </button>
       </div>
 
+      {coachOpen && coachLessonId && (
+        <CoachChat
+          isOpen
+          onClose={() => setCoachOpen(false)}
+          lessonId={coachLessonId}
+          lessonTitle={lessonTitle}
+          prefill={coachPrefill}
+        />
+      )}
     </div>
   )
 }

@@ -1,7 +1,6 @@
 import { useState, useEffect, useMemo } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { Drawer } from '../components/Drawer';
 import { BottomNav } from '../components/BottomNav';
 import { PageHeader } from '../components/PageHeader';
 import { HeroCTA } from '../components/HeroCTA';
@@ -14,7 +13,7 @@ import { computeStreak, computeLevel, computeBadges, XP_PAR_NIVEAU } from '../ut
 import { subjectMascot } from '../utils/subjects';
 import { refreshReminder } from '../services/reminderService';
 import { AchievementToast } from '../components/AchievementToast';
-import { CoachChat, CoachEntryCard } from '../components/CoachChat';
+import { CoachChat } from '../components/CoachChat';
 import './Home.css';
 
 const FlashcardsIcon = () => (
@@ -110,7 +109,6 @@ export default function Home() {
   const { currentUser } = useAuth();
   const prenom = currentUser?.displayName ?? 'toi';
 
-  const [drawerOpen, setDrawerOpen] = useState(false);
   const navigate = useNavigate();
   const [allLessons, setAllLessons] = useState(() => loadLessons());
   const [challenges] = useState(() => getWeeklyChallenges());
@@ -135,10 +133,11 @@ export default function Home() {
     });
   }, []);
 
-  // Dérivés gamification mémoïsés : sans useMemo, chaque render (ouverture du
-  // drawer, toast de badge…) re-parcourait toutes les leçons + relisait le
-  // JSON des révisions depuis localStorage.
-  const streak = useMemo(() => computeStreak(allLessons), [allLessons]);
+  // Dérivés gamification mémoïsés : sans useMemo, chaque render (toast de
+  // badge, ouverture du coach…) re-parcourait toutes les leçons + relisait
+  // le JSON des révisions depuis localStorage.
+  // Série basée sur les RÉVISIONS (pas les scans) — même règle que Progres.
+  const streak = useMemo(() => computeStreak(loadRevisions(), 'revisedAt'), [allLessons]);
   const { level, xpInLvl, fillPct } = useMemo(() => computeLevel(allLessons), [allLessons]);
   const lastLesson = allLessons[0] ?? null;
 
@@ -173,7 +172,7 @@ export default function Home() {
         <AchievementToast badge={newBadge} onDone={() => setNewBadge(null)} />
       )}
 
-      <PageHeader variant="brand" onBell={() => setDrawerOpen(true)} />
+      <PageHeader variant="brand" />
 
       <div className="content">
 
@@ -232,9 +231,7 @@ export default function Home() {
             <span className="rv-card-footer-icon" aria-hidden="true">🎯</span>
             <span className="rv-card-footer-text">
               Objectif du jour : <strong>{todayRevisions} / {dailyGoal}</strong> cartes
-              {goalReached
-                ? <span className="rv-card-footer-check" aria-label="atteint">✓</span>
-                : <span className="rv-card-footer-remain"> · {remaining} restant{remaining > 1 ? 'es' : 'e'}</span>}
+              {goalReached && <span className="rv-card-footer-check" aria-label="atteint">✓</span>}
             </span>
           </div>
         </Link>
@@ -299,18 +296,23 @@ export default function Home() {
                       </span>
                     </button>
                   )}
+                  {/* Coach de révision — le contexte est la dernière leçon scannée */}
+                  <button
+                    className="rv-btn-action"
+                    onClick={() => setCoachOpen(true)}
+                  >
+                    <span className="rv-icon-square rv-icon-square--green">
+                      <Mascot pose="coach" size={26} alt="" aria-hidden="true" />
+                    </span>
+                    <span className="rv-btn-action-text">
+                      <span className="rv-btn-action-label">Coach</span>
+                      <span className="rv-btn-action-sub">Un doute ?</span>
+                    </span>
+                  </button>
                 </div>
               );
             })()}
           </div>
-        )}
-
-        {/* Coach de révision — sur la Home, le contexte est la dernière leçon scannée */}
-        {lastLesson && (
-          <CoachEntryCard
-            onClick={() => setCoachOpen(true)}
-            desc={`Pose-moi tes questions sur « ${lastLesson.metadata.title} »`}
-          />
         )}
 
         <div className="rv-card rv-card--padded home-challenges-card">
@@ -340,8 +342,7 @@ export default function Home() {
 
       </div>
 
-      <BottomNav active="home" />
-      <Drawer isOpen={drawerOpen} onClose={() => setDrawerOpen(false)} />
+      <BottomNav />
       {coachOpen && lastLesson && (
         <CoachChat
           isOpen

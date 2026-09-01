@@ -1,7 +1,5 @@
 import { useState, useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
-import { Drawer } from '../components/Drawer';
 import { BottomNav } from '../components/BottomNav';
 import { ConfirmModal } from '../components/ConfirmModal';
 import { PageHeader } from '../components/PageHeader';
@@ -46,7 +44,6 @@ function buildSubjectsFromHistory(rawLessons) {
 }
 
 export default function Cours() {
-  const [drawerOpen, setDrawerOpen]         = useState(false);
   const [activeFilter, setActiveFilter]     = useState('toutes');
   const [searchQuery, setSearchQuery]       = useState('');
   const [allLessons, setAllLessons]         = useState(() => loadLessons());
@@ -59,9 +56,6 @@ export default function Cours() {
       .then(lessons => setAllLessons(lessons))
       .finally(() => setIsSyncing(false));
   }, []);
-
-  const { currentUser } = useAuth();
-  const initiale = currentUser?.displayName?.[0]?.toUpperCase() ?? '?';
 
   function handleDelete(id) {
     deleteLesson(id);
@@ -112,12 +106,10 @@ export default function Cours() {
   const lastEmoji = lastLesson ? subjectInfo(lastLesson.metadata.subject).emoji : '📚';
   const lastDue = lastLesson ? countDueCards(lastLesson.id, lastLesson.flashcardsCount ?? 0) : 0;
 
-  // Hero narratif — Réviz guide l'utilisateur (ton pratique)
-  const subjectCount = subjects.length;
-  const prenom = currentUser?.displayName?.split(' ')[0] ?? 'toi';
+  // Hero narratif — la bulle ne parle que s'il y a quelque chose à faire
   const heroPhrase = dueCards > 0
-    ? `J'ai rangé ici toutes les leçons que tu as scannées. Les 🔥 sont à revoir.`
-    : `J'ai rangé ici toutes les leçons que tu as scannées.`;
+    ? `${dueCards} carte${dueCards > 1 ? 's' : ''} t'attend${dueCards > 1 ? 'ent' : ''} 🔥`
+    : null;
 
   // Collapse/expand par matière — tout fermé par défaut, l'user ouvre ce qu'il veut
   const [expandedSubjects, setExpandedSubjects] = useState(new Set());
@@ -130,25 +122,14 @@ export default function Cours() {
     });
   }
 
-  const avatarBtn = (
-    <button
-      type="button"
-      className="cours-avatar-btn"
-      onClick={() => setDrawerOpen(true)}
-      aria-label="Ouvrir le menu"
-    >
-      {initiale}
-    </button>
-  );
-
   return (
     <div className="app cours-page">
 
-      <PageHeader
-        variant="title-only"
-        title={hasLessons ? undefined : 'Mes cours'}
-        right={avatarBtn}
-      />
+      {/* Sans leçon, le hero violet n'est pas rendu : le header porte le titre.
+          Avec leçons, le hero s'en charge — pas de header vide au-dessus. */}
+      {!hasLessons && (
+        <PageHeader variant="title-only" title="Mes cours" />
+      )}
 
       {hasLessons && (
         <div className="cours-hero-wrap">
@@ -156,9 +137,11 @@ export default function Cours() {
             <div className="cours-narrator-glow" aria-hidden="true" />
             <div className="cours-narrator-content">
               <h1 className="cours-narrator-title">Mes cours</h1>
-              <div className="rv-speech-bubble rv-speech-bubble--pointer-right cours-narrator-bubble">
-                {heroPhrase}
-              </div>
+              {heroPhrase && (
+                <div className="rv-speech-bubble rv-speech-bubble--pointer-right cours-narrator-bubble">
+                  {heroPhrase}
+                </div>
+              )}
             </div>
             <Mascot
               pose="reading"
@@ -232,9 +215,7 @@ export default function Cours() {
                 aria-hidden="true"
               />
               <div className="cours-resume-body">
-                <div className="rv-speech-bubble rv-speech-bubble--pointer-left cours-resume-bubble">
-                  On reprend ta dernière leçon ?
-                </div>
+                <div className="cours-resume-label">À reprendre</div>
                 <div className="cours-resume-info">
                   <span className={`rv-icon-square rv-icon-square--${lastSubjectTone} cours-resume-icon`}>
                     {lastEmoji}
@@ -253,7 +234,7 @@ export default function Cours() {
             </div>
             <button
               type="button"
-              className="rv-btn-cta rv-btn-cta--full cours-resume-cta"
+              className="rv-btn-cta rv-btn-cta--full rv-btn-cta--center cours-resume-cta"
               onClick={() => { restoreLesson(lastLesson.id); navigate('/analyse'); }}
             >
               <span>Continuer</span>
@@ -351,7 +332,6 @@ export default function Cours() {
                     <span className="cours-subject-name">{subject.name}</span>
                     <span className="cours-subject-meta">
                       {subject.visibleLessons.length} leçon{subject.visibleLessons.length > 1 ? 's' : ''}
-                      {subjectDue > 0 && ` · ${subjectDue} à revoir`}
                     </span>
                   </div>
                   {subjectDue > 0 && (
@@ -427,7 +407,7 @@ export default function Cours() {
                             )}
                             {fcDue > 0 && (
                               <span className="rv-pill rv-pill--orange cours-lesson-due-pill">
-                                🔥 {fcDue} à revoir
+                                🔥 {fcDue}
                               </span>
                             )}
                           </div>
@@ -443,8 +423,7 @@ export default function Cours() {
         )}
       </div>
 
-      <BottomNav active="cours" />
-      <Drawer isOpen={drawerOpen} onClose={() => setDrawerOpen(false)} />
+      <BottomNav />
       {lessonToDelete && (
         <ConfirmModal
           lessonTitle={lessonToDelete.metadata.title}

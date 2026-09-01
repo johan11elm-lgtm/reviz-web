@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { loadLessons, syncFromFirestore } from '../services/historyService';
 import { loadRevisions, syncRevisionsFromFirestore } from '../services/revisionService';
-import { Drawer } from '../components/Drawer';
 import { BottomNav } from '../components/BottomNav';
 import { PageHeader } from '../components/PageHeader';
 import { Mascot } from '../components/Mascot';
@@ -13,10 +12,10 @@ import './Progres.css';
 
 // ─── Constantes ─────────────────────────────────────────────────────
 const FORMAT_INFO = {
-  flashcards: { label: 'Flashcards',    emoji: '🃏', color: '#6B4EFF' },
-  quiz:       { label: 'Quiz',           emoji: '❓', color: '#FF8A3D' },
-  resume:     { label: 'Résumé',        emoji: '📝', color: '#34C77B' },
-  mindmap:    { label: 'Carte mentale', emoji: '🧠', color: '#A855F7' },
+  flashcards: { label: 'Flashcards',    emoji: '🃏', color: 'var(--accent-violet)' },
+  quiz:       { label: 'Quiz',           emoji: '❓', color: 'var(--accent-orange)' },
+  resume:     { label: 'Résumé',        emoji: '📝', color: 'var(--accent-green)' },
+  mindmap:    { label: 'Carte mentale', emoji: '🧠', color: 'var(--accent-pink)' },
 };
 
 // ─── Calculs ─────────────────────────────────────────────────────────
@@ -103,8 +102,8 @@ function computeWeekRows(revisions) {
     const activeDays = cells.filter(c => c.count > 0).length;
     const totalRevs = cells.reduce((sum, c) => sum + (c.count > 0 ? c.count : 0), 0);
     const label = w === 4 ? 'Cette semaine'
-                : w === 3 ? 'Semaine dernière'
-                : `Il y a ${4 - w} semaines`;
+                : w === 3 ? 'Sem. dernière'
+                : `Il y a ${4 - w} sem.`;
     weeks.push({ label, cells, activeDays, totalRevs });
   }
   return weeks;
@@ -167,13 +166,11 @@ function getHeroNarrative({ streak, activeDays, isNewRecord, prenom }) {
 // ─── Composant ───────────────────────────────────────────────────────
 export default function Progres() {
   const navigate = useNavigate();
-  const [drawerOpen,   setDrawerOpen]   = useState(false);
   const [allLessons,   setAllLessons]   = useState(() => loadLessons());
   const [allRevisions, setAllRevisions] = useState(() => loadRevisions());
   const [isSyncing,    setIsSyncing]    = useState(true);
 
   const { currentUser } = useAuth();
-  const initiale = currentUser?.displayName?.[0]?.toUpperCase() ?? '?';
   const prenom = currentUser?.displayName?.split(' ')[0] ?? 'toi';
 
   useEffect(() => {
@@ -199,23 +196,12 @@ export default function Progres() {
 
   const hero = getHeroNarrative({ streak, activeDays, isNewRecord, prenom });
 
-  const avatarBtn = (
-    <button
-      type="button"
-      className="pg-avatar-btn"
-      onClick={() => setDrawerOpen(true)}
-      aria-label="Ouvrir le menu"
-    >
-      {initiale}
-    </button>
-  );
-
   // « Pas encore synchronisé » ≠ « vraiment vide » : sur un nouvel appareil le
   // cache local est vide → skeleton plutôt que streak/XP à 0 qui sautent après.
   if (isSyncing && allLessons.length === 0 && allRevisions.length === 0) {
     return (
       <div className="app progres-page">
-        <PageHeader variant="title-only" right={avatarBtn} />
+        <PageHeader variant="title-only" />
         <div className="pg-content">
           <div className="pg-skeleton" role="status" aria-label="Synchronisation de tes progrès…">
             <div className="rv-skeleton pg-skeleton-hero" aria-hidden="true" />
@@ -238,8 +224,7 @@ export default function Progres() {
             <div className="rv-skeleton pg-skeleton-block" aria-hidden="true" />
           </div>
         </div>
-        <BottomNav active="progres" />
-        <Drawer isOpen={drawerOpen} onClose={() => setDrawerOpen(false)} />
+        <BottomNav />
       </div>
     );
   }
@@ -247,7 +232,7 @@ export default function Progres() {
   return (
     <div className="app progres-page">
 
-      <PageHeader variant="title-only" right={avatarBtn} />
+      <PageHeader variant="title-only" />
 
       <div className="pg-content">
 
@@ -255,7 +240,6 @@ export default function Progres() {
         <div className="pg-narrator-hero">
           <div className="pg-narrator-glow" aria-hidden="true" />
           <div className="pg-narrator-content">
-            <span className="pg-narrator-eyebrow">📊 Hey {prenom}</span>
             <h1 className="pg-narrator-title">Mes progrès</h1>
             <div className="rv-speech-bubble rv-speech-bubble--pointer-right pg-narrator-bubble">
               {hero.phrase}
@@ -289,10 +273,10 @@ export default function Progres() {
               <span className="pg-level-total">{xpTotal} XP</span>
             </div>
             <div className="rv-bar pg-level-bar">
-              <div className="rv-bar-fill rv-bar-fill--orange" style={{ width: fillPct + '%' }} />
+              <div className="rv-bar-fill rv-bar-fill--violet" style={{ width: fillPct + '%' }} />
             </div>
             <div className="pg-level-next">
-              <strong>{xpInLvl}</strong> / {XP_PAR_NIVEAU} XP · {XP_PAR_NIVEAU - xpInLvl} jusqu'au niveau {level + 1}
+              <strong>{xpInLvl}</strong> / {XP_PAR_NIVEAU} XP
             </div>
           </div>
         </div>
@@ -307,9 +291,9 @@ export default function Progres() {
             </div>
             <div className="pg-streak-divider" />
             <div className="pg-streak-block pg-streak-block--right">
-              <div className="pg-streak-label">Meilleur</div>
+              <div className="pg-streak-label">Record</div>
               <div className="pg-streak-value pg-streak-value--sm">{bestStreak}</div>
-              <div className="pg-streak-unit">record</div>
+              <div className="pg-streak-unit">{bestStreak === 1 ? 'jour' : 'jours'}</div>
             </div>
           </div>
           <Mascot
@@ -328,9 +312,6 @@ export default function Progres() {
           {allRevisions.length === 0 ? (
             <div className="pg-weeks-empty">
               <p className="pg-weeks-empty-title">Pas encore de révisions</p>
-              <p className="pg-weeks-empty-sub">
-                Scanne une leçon et lance une séance pour démarrer ta série.
-              </p>
             </div>
           ) : (
             <>
@@ -460,8 +441,7 @@ export default function Progres() {
 
       </div>
 
-      <BottomNav active="progres" />
-      <Drawer isOpen={drawerOpen} onClose={() => setDrawerOpen(false)} />
+      <BottomNav />
     </div>
   );
 }

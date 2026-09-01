@@ -83,7 +83,11 @@ export function BottomNav() {
           key={tab.to}
           to={tab.to}
           end={tab.to === '/'}
-          className={({ isActive }) => `nav-item${isActive ? ' active' : ''}`}
+          // Une leçon vit dans « Mes cours » : /analyse allume l'onglet Cours.
+          className={({ isActive }) => {
+            const active = isActive || (tab.to === '/cours' && pathname === '/analyse');
+            return `nav-item${active ? ' active' : ''}`;
+          }}
           aria-label={tab.label}
         >
           <span className="nav-icon"><tab.Icon /></span>

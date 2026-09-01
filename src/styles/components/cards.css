@@ -44,7 +44,7 @@
 /* Callout — card tonale (info, formule, tip, retenir).
  * Pas d'ombre, fond coloré soft + ink color. */
 .rv-callout {
-  border-radius: 18px;
+  border-radius: var(--radius-callout);
   padding: 16px 18px;
   background: var(--bg-subtle);
   color: var(--text-primary);

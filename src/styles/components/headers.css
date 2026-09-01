@@ -5,7 +5,7 @@
  * ========================================================================== */
 
 .rv-page-header {
-  padding: 20px 22px 6px;
+  padding: 20px var(--page-gutter) 6px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -129,7 +129,7 @@
 }
 
 @media (max-width: 430px) {
-  .rv-page-header { padding: 18px 20px 4px; }
+  .rv-page-header { padding: 18px var(--page-gutter) 4px; }
   .rv-brand-title { font-size: 22px; letter-spacing: -1.2px; }
   .rv-brand-sparkle { width: 16px; height: 16px; }
   .rv-bell-btn { width: 36px; height: 36px; }

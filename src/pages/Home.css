@@ -8,7 +8,7 @@
 /* ── Content ── */
 .home-page .content {
   flex: 1;
-  padding: 8px 24px 110px;
+  padding: 8px var(--page-gutter) 110px;
   overflow-y: auto;
 }
 
@@ -16,13 +16,13 @@
 .home-page .home-greeting { padding-top: 4px; }
 
 /* ── Hero CTA ── */
-.home-page .home-cta { margin-bottom: 16px; }
+.home-page .home-cta { margin-bottom: var(--gap-cards); }
 
 /* ── Progress card ── */
-.home-page .home-progress-card { margin-bottom: 14px; }
+.home-page .home-progress-card { margin-bottom: var(--gap-cards); }
 
 /* ── Featured "Reprendre" card ── */
-.home-page .home-featured-card { margin-bottom: 14px; }
+.home-page .home-featured-card { margin-bottom: var(--gap-cards); }
 
 .home-page .home-featured-top {
   display: flex;
@@ -71,6 +71,21 @@
 .home-page .home-featured-phrase { margin: 6px 0 14px; }
 
 .home-page .home-featured-actions { margin-top: 10px; }
+
+/* Rangée à 3 actions (Flashcards / Quiz / Coach) : disposition en colonne
+   compacte pour que les libellés restent lisibles sur petit écran (375px). */
+.home-page .home-featured-actions .rv-btn-action {
+  flex-direction: column;
+  align-items: center;
+  gap: 7px;
+  padding: 12px 8px;
+}
+
+.home-page .home-featured-actions .rv-btn-action-text {
+  align-items: center;
+  text-align: center;
+  width: 100%;
+}
 
 /* ── Challenges card ── */
 .home-page .home-challenges-card { margin-bottom: 14px; }

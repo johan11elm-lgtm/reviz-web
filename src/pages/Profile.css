@@ -8,10 +8,10 @@
 /* ── Content ── */
 .profile-page .pf-content {
   flex: 1;
-  padding: 8px 16px 100px;
+  padding: 8px var(--page-gutter) 100px;
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: var(--gap-cards);
   overflow-y: auto;
 }
 
@@ -150,7 +150,7 @@
 .profile-page .pf-badges-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 8px;
+  gap: 10px;
 }
 
 .profile-page .pf-badge {
