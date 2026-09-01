@@ -24,11 +24,11 @@ const ERROR_MESSAGES = {
 };
 
 /**
- * Carte d'entrée du coach — partagée entre Analyse et Home.
+ * Carte d'entrée du coach — une ligne : la pose coach + le titre-question
+ * suffisent à porter le sens.
  * @param {() => void} onClick  ouvre le sheet CoachChat
- * @param {string} [desc]       sous-titre (défaut : question générique)
  */
-export function CoachEntryCard({ onClick, desc = 'Pose-moi tes questions sur cette leçon' }) {
+export function CoachEntryCard({ onClick }) {
   return (
     <button
       type="button"
@@ -36,11 +36,26 @@ export function CoachEntryCard({ onClick, desc = 'Pose-moi tes questions sur cet
       onClick={onClick}
     >
       <Mascot pose="coach" size={64} alt="" aria-hidden="true" />
-      <div className="coach-entry-text">
-        <span className="coach-entry-title">Un truc pas clair ?</span>
-        <span className="coach-entry-desc">{desc}</span>
-      </div>
+      <span className="coach-entry-title">Un truc pas clair ?</span>
       <span className="coach-entry-arrow" aria-hidden="true">›</span>
+    </button>
+  );
+}
+
+/**
+ * Bouton coach pour le slot droit du PageHeader des formats de révision.
+ * @param {() => void} onClick  ouvre le sheet CoachChat
+ */
+export function CoachHeaderButton({ onClick }) {
+  return (
+    <button
+      type="button"
+      className="rv-bell-btn coach-header-btn"
+      onClick={onClick}
+      aria-label="Demander au coach"
+      title="Demander au coach"
+    >
+      <Mascot pose="coach" size={30} alt="" aria-hidden="true" />
     </button>
   );
 }
@@ -68,8 +83,9 @@ function loadConversation(lessonId) {
  * Coach de révision — bottom sheet de chat contextuel sur la leçon courante.
  * La conversation vit en sessionStorage (fermée avec l'onglet, jamais persistée
  * côté serveur — minimisation des données, public mineur).
+ * @param {string} [prefill]  question pré-remplie à l'ouverture (hook de friction)
  */
-export function CoachChat({ isOpen, onClose, lessonId, lessonTitle }) {
+export function CoachChat({ isOpen, onClose, lessonId, lessonTitle, prefill }) {
   const { isPremium, getUserLevel } = useAuth();
   const navigate = useNavigate();
   const ref = useModalA11y(onClose, isOpen);
@@ -85,6 +101,12 @@ export function CoachChat({ isOpen, onClose, lessonId, lessonTitle }) {
 
   // Changement de leçon → conversation de cette leçon.
   useEffect(() => { setMessages(loadConversation(lessonId)); setError(null); setQuotaOut(false); }, [lessonId]);
+
+  // Question pré-remplie (ex. « pourquoi » après une mauvaise réponse de quiz) :
+  // posée dans le champ à l'ouverture, l'élève reste libre de la modifier.
+  useEffect(() => {
+    if (isOpen && prefill) setInput(prefill);
+  }, [isOpen, prefill]);
 
   useEffect(() => {
     try { sessionStorage.setItem(storageKey(lessonId), JSON.stringify(messages)); }
