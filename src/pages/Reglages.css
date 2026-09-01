@@ -1,0 +1,294 @@
+/* CSS scoped to page wrapper — see scripts/scope-page-css.py */
+/* Wrapper: .reglages-page */
+
+/* ⚠️ Ce fichier ne contient QUE les overrides et layouts locaux à la page
+ * Réglages. Les patterns visuels (cards, boutons, toggles, callouts…) sont
+ * dans src/styles/components/*.css et global.css via les classes .rv-*. */
+
+.reglages-page .rg-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px 24px calc(32px + env(safe-area-inset-bottom, 0px));
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* ── Sections ── */
+.reglages-page .rg-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.reglages-page .rg-section-title {
+  margin: 0;
+  font-family: 'Geist', sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: -0.4px;
+  color: var(--text-primary);
+}
+
+.reglages-page .rg-section-title--danger {
+  color: var(--accent-red-ink);
+}
+
+.reglages-page .rg-card {
+  padding: 6px 16px;
+}
+
+/* ── Rangées (boutons dépliants + liens) ── */
+.reglages-page .rg-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 12px 0;
+  background: none;
+  border: none;
+  border-bottom: 1px solid var(--border-subtle);
+  text-align: left;
+  cursor: pointer;
+  font-family: inherit;
+  color: var(--text-primary);
+  text-decoration: none;
+}
+.reglages-page .rg-row:last-child { border-bottom: none; }
+
+.reglages-page .rg-row-text {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.reglages-page .rg-row-label {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: -0.1px;
+}
+
+.reglages-page .rg-row-sub {
+  font-size: 12px;
+  color: var(--text-muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.reglages-page .rg-row-arrow {
+  font-size: 16px;
+  color: var(--text-muted);
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+/* ── Panneaux dépliants (formulaires du compte) ── */
+.reglages-page .rg-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 4px 0 16px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.reglages-page .rg-label {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-muted);
+  margin-top: 6px;
+}
+
+.reglages-page .rg-input {
+  background: var(--bg-subtle);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-chip);
+  padding: 10px 12px;
+  font-size: 14px;
+  color: var(--text-primary);
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.15s;
+  width: 100%;
+  box-sizing: border-box;
+}
+.reglages-page .rg-input:focus { border-color: var(--accent-violet); }
+.reglages-page .rg-input::placeholder { color: var(--text-muted); }
+
+.reglages-page .rg-error   { font-size: 12px; color: var(--accent-red); margin: 0; }
+.reglages-page .rg-success { font-size: 12px; color: var(--accent-green); margin: 0; }
+.reglages-page .rg-hint {
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin: 0;
+  padding: 0 0 12px;
+}
+
+/* ── Notifications / Apparence — rangée avec toggle ── */
+.reglages-page .rg-toggle-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+}
+
+/* Rappel indisponible sur le web : toggle visiblement inactif */
+.reglages-page .toggle-wrap input:disabled + .toggle-slider {
+  opacity: 0.55;
+  cursor: default;
+}
+
+/* ── Sélecteur de thèmes — pastilles, verrou Réviz+ ── */
+.reglages-page .rg-theme-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  padding: 4px 0 14px;
+}
+
+.reglages-page .rg-theme-swatch {
+  position: relative;
+  height: 56px;
+  border-radius: var(--radius-btn);
+  border: 2px solid var(--border);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 4px;
+  overflow: hidden;
+  cursor: pointer;
+}
+.reglages-page .rg-theme-swatch--active {
+  border-color: var(--accent-violet);
+  box-shadow: 0 0 0 2px var(--accent-violet-soft);
+}
+.reglages-page .rg-theme-swatch--locked { opacity: 0.75; }
+
+.reglages-page .rg-theme-lock {
+  position: absolute;
+  top: 4px;
+  right: 6px;
+  font-size: 12px;
+}
+
+.reglages-page .rg-theme-name {
+  font-size: 10px;
+  font-weight: 700;
+  background: var(--bg-card);
+  color: var(--text-primary);
+  border-radius: 8px;
+  padding: 2px 6px;
+  line-height: 1.2;
+}
+
+/* ── Objectif quotidien ── */
+.reglages-page .rg-goal-hint { padding: 12px 0 0; }
+
+.reglages-page .rg-goal-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  padding: 10px 0 14px;
+}
+
+.reglages-page .rg-goal-btn {
+  padding: 14px 0;
+  background: var(--bg-card);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-card);
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+.reglages-page .rg-goal-btn:hover { border-color: var(--border-hover); }
+.reglages-page .rg-goal-btn--active {
+  background: var(--accent-orange);
+  border-color: var(--accent-orange);
+  color: #fff;
+}
+
+/* ── Abonnement ── */
+.reglages-page .rg-plan-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 0 10px;
+}
+
+.reglages-page .rg-plan-label {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-muted);
+}
+
+.reglages-page .rg-plan-free {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.reglages-page .rg-plan-row + .rv-btn-cta { margin-bottom: 12px; }
+.reglages-page .rg-card .rg-error { padding-bottom: 12px; }
+
+/* ── À propos ── */
+.reglages-page .rg-about {
+  padding: 4px 0 14px;
+  border-bottom: 1px solid var(--border-subtle);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.reglages-page .rg-about p {
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin: 0;
+}
+.reglages-page .rg-about-logo {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+.reglages-page .rg-about-version {
+  font-size: 11px;
+  color: var(--text-muted) !important;
+}
+
+/* ── Déconnexion + zone de danger ── */
+.reglages-page .rg-logout { justify-content: center; }
+
+.reglages-page .rg-danger {
+  margin-top: 12px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border-subtle);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.reglages-page .rg-delete-trigger {
+  color: var(--accent-red-ink);
+  justify-content: center;
+}
+
+.reglages-page .rg-delete-confirm {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* ── Responsive mobile (≤430px) — gouttière 24px conservée ── */
+@media (max-width: 430px) {
+  .reglages-page .rg-content { padding-top: 6px; }
+}

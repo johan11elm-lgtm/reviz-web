@@ -3,8 +3,8 @@
 //
 // Chaque thème correspond à un bloc `:root[data-theme="<id>"]` dans
 // global.css. Les thèmes premium sont un avantage Réviz+ : la sélection
-// est verrouillée dans l'UI (Drawer) ET re-validée au chargement par
-// resolveTheme() — un abonnement expiré retombe sur « Crème ».
+// est verrouillée dans l'UI (page Réglages) ET re-validée au chargement
+// par resolveTheme() — un abonnement expiré retombe sur « Crème ».
 // -------------------------------------------------------
 
 export const THEMES = [
