@@ -1,6 +1,8 @@
-# Brief mascottes Réviz — déclinaisons par matière & situation
+# Brief mascottes Réviz — le personnage et ses déclinaisons
 
-> Généré le 2026-08-29. Outil : ChatGPT (GPT Images) avec image de référence
+> Généré le 2026-08-29 (séries matières `m1-m9` et situations `s1-s8`),
+> complété le 2026-09-01 (reprise des 15 poses d'origine `1` à `16`).
+> Outil : ChatGPT (GPT Images) avec image de référence
 > `pose-9-hello.png` jointe à CHAQUE génération (cohérence du personnage).
 > Intégration : PNG 1024+ → détourage (fond magenta) → master transparent dans
 > `assets-src/mascot/` → `node scripts/process-mascots.mjs`.
@@ -61,5 +63,32 @@ fins, PAS de jambes, petits bras fins ».
    process-mascots, réservé aux anciens masters).
 3. Nommage : `pose-<id>.png` en 1024×1024 dans `assets-src/mascot/`.
 4. `node scripts/process-mascots.mjs` pour générer les @256/@512 PNG+WebP.
-5. Les anciennes poses (1 à 16) restent servies telles quelles tant que leurs
-   remplaçantes ne sont pas validées.
+5. Fournée complète : déposer les bruts dans `assets-src/mascot/_bruts/`
+   (un PNG par pose, nommé d'après elle) puis `node scripts/import-mascots.mjs`
+   — il détoure, écrit les masters, génère les variantes et sauvegarde les
+   masters remplacés dans `_old/`. Les deux dossiers sont ignorés par git.
+6. Contrôle : `node scripts/qa-mascots.mjs` (bord doux ≥ 0,3 %, reste de
+   fond ≤ 3 %) puis les planches de `_qa/`. Un bord doux à 0 % = alpha
+   binaire : c'est le défaut qui a motivé la reprise du 2026-09-01.
+7. Landing : relancer l'import avec `--landing` quand le rendu est validé
+   (copie les @512 dans `../reviz-landing/public/mascots`).
+
+## Scènes des 15 poses d'origine (refaites le 2026-09-01)
+
+| Fichier cible | Scène |
+|---|---|
+| pose-1-reading | il lit un gros livre marron ouvert, absorbé par sa lecture |
+| pose-2-flashcard | il présente à deux mains une carte blanche parfaitement vierge, sourire encourageant |
+| pose-3-celebration | il fête la victoire, les deux bras levés, confettis 3D orange et violets |
+| pose-4-sleeping | il dort, yeux fermés en arcs souriants, trois « Z » 3D orange en diagonale |
+| pose-5-thinking | main sous le menton façon Penseur, regard levé, trois engrenages dorés flottants |
+| pose-6-writing | il tient un carnet à spirale et écrit dedans avec un crayon jaune |
+| pose-7-trophy | il brandit un gros trophée doré à deux mains, étincelles |
+| pose-8-confused | un sourcil froncé l'autre levé, moue hésitante, goutte de sueur, deux « ? » 3D |
+| pose-9-hello | **la référence** : il salue d'une main levée, l'autre bras détendu |
+| pose-11-scan | smartphone violet tenu à deux mains, écran vide, il regarde l'écran (pas de cahier : c'est s7) |
+| pose-12-fire | flammes 3D orange sur les lobes, bras fléchis, air ultra motivé |
+| pose-13-graduation | toque noire à pompon doré, diplôme roulé à ruban rouge, air fier |
+| pose-14-sad | sourcils tombants, moue, larme bleue, bras qui pendent, toujours attachant |
+| pose-15-search | grosse loupe à manche doré devant un œil, œil agrandi par la lentille |
+| pose-16-pointing | il pointe du doigt vers le spectateur, clin d'œil, air complice |
