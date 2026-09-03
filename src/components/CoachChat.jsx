@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { Fragment, useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useModalA11y } from '../hooks/useModalA11y';
@@ -60,15 +60,77 @@ export function CoachHeaderButton({ onClick }) {
   );
 }
 
-// Mise en forme légère des réponses du coach — le prompt autorise uniquement
-// **gras** et les puces "- ". Parsing minimal sans HTML injecté (React échappe
-// tout), un ** non refermé reste affiché tel quel le temps du stream.
-export function renderCoachText(text) {
-  const withBullets = text.replace(/^- /gm, '• ');
-  return withBullets.split(/(\*\*[^*]+\*\*)/g).map((part, i) =>
+// Mise en forme des réponses du coach — le prompt n'autorise que **gras** et
+// les puces "- ". Parsing minimal sans HTML injecté (React échappe tout) ;
+// un ** non refermé reste affiché tel quel le temps du stream.
+function renderInline(text) {
+  return text.split(/(\*\*[^*]+\*\*)/g).map((part, i) =>
     part.startsWith('**') && part.endsWith('**') && part.length > 4
       ? <strong key={i}>{part.slice(2, -2)}</strong>
       : part
+  );
+}
+
+/** Rendu en ligne (gras + puces « • ») — conservé pour les usages simples. */
+export function renderCoachText(text) {
+  return renderInline(text.replace(/^- /gm, '• '));
+}
+
+/**
+ * Rendu structuré d'une réponse : paragraphes, listes à puces, gras.
+ * Les lignes vides séparent les paragraphes ; les lignes « - » / « • »
+ * consécutives forment une liste.
+ */
+export function renderCoachMessage(text) {
+  const blocks = [];
+  let para = [];
+  let list = [];
+  const flushPara = () => {
+    if (!para.length) return;
+    blocks.push(
+      <p key={`p${blocks.length}`}>
+        {para.map((line, i) => (
+          <Fragment key={i}>{renderInline(line)}{i < para.length - 1 && <br />}</Fragment>
+        ))}
+      </p>
+    );
+    para = [];
+  };
+  const flushList = () => {
+    if (!list.length) return;
+    blocks.push(
+      <ul key={`l${blocks.length}`}>
+        {list.map((item, i) => <li key={i}>{renderInline(item)}</li>)}
+      </ul>
+    );
+    list = [];
+  };
+  text.split('\n').forEach(raw => {
+    const line = raw.trim();
+    if (!line) { flushPara(); flushList(); return; }
+    const bullet = line.match(/^[-•]\s+(.*)$/);
+    if (bullet) { flushPara(); list.push(bullet[1]); return; }
+    flushList();
+    para.push(line);
+  });
+  flushPara();
+  flushList();
+  return blocks;
+}
+
+/** Une ligne du fil côté coach : avatar + bulle (ou indicateur de frappe). */
+function CoachRow({ children, typing = false }) {
+  return (
+    <div className="coach-row coach-row--coach">
+      <Mascot pose="coach" size={30} className="coach-avatar" alt="" aria-hidden="true" />
+      {typing ? (
+        <div className="coach-bubble coach-bubble--coach coach-bubble--typing" aria-label="Le coach réfléchit">
+          <span /><span /><span />
+        </div>
+      ) : (
+        <div className="coach-bubble coach-bubble--coach">{children}</div>
+      )}
+    </div>
   );
 }
 
@@ -176,27 +238,22 @@ export function CoachConversation({ lessonId, prefill, className = '' }) {
   return (
     <div className={['coach-conversation', className].filter(Boolean).join(' ')}>
         <div className="coach-messages" ref={scrollRef} role="log" aria-live="polite">
-          <div className="coach-bubble coach-bubble--coach">
-            Salut ! Un truc pas clair dans cette leçon ? Pose-moi ta question, je t'explique.
-          </div>
+          <CoachRow>
+            Salut ! Un truc pas clair dans cette leçon ? Pose-moi ta question, je t'explique.
+          </CoachRow>
 
           {messages.map((m, i) => (
-            <div
-              key={i}
-              className={`coach-bubble coach-bubble--${m.role === 'user' ? 'user' : 'coach'}`}
-            >
-              {m.role === 'user' ? m.content : renderCoachText(m.content)}
-            </div>
+            m.role === 'user' ? (
+              <div key={i} className="coach-row coach-row--user">
+                <div className="coach-bubble coach-bubble--user">{m.content}</div>
+              </div>
+            ) : (
+              <CoachRow key={i}>{renderCoachMessage(m.content)}</CoachRow>
+            )
           ))}
 
           {isStreaming && (
-            draft
-              ? <div className="coach-bubble coach-bubble--coach">{renderCoachText(draft)}</div>
-              : (
-                <div className="coach-bubble coach-bubble--coach coach-bubble--typing" aria-label="Le coach réfléchit">
-                  <span /><span /><span />
-                </div>
-              )
+            draft ? <CoachRow>{renderCoachMessage(draft)}</CoachRow> : <CoachRow typing />
           )}
 
           {error && (
@@ -205,11 +262,11 @@ export function CoachConversation({ lessonId, prefill, className = '' }) {
 
           {quotaOut && (
             <div className="coach-quota">
-              <div className="coach-bubble coach-bubble--coach">
+              <CoachRow>
                 {isPremium
                   ? 'Wow, on a beaucoup discuté aujourd\'hui ! On se retrouve demain pour la suite.'
-                  : 'Tu as utilisé tous tes messages du jour ! On se retrouve demain — ou passe à Réviz+ pour continuer maintenant.'}
-              </div>
+                  : 'Tu as utilisé tous tes messages du jour ! On se retrouve demain, ou passe à Réviz+ pour continuer maintenant.'}
+              </CoachRow>
               {!isPremium && (
                 <button
                   type="button"
@@ -226,38 +283,43 @@ export function CoachConversation({ lessonId, prefill, className = '' }) {
 
         {messages.length === 0 && !isStreaming && !quotaOut && (
           <div className="coach-suggestions">
-            {SUGGESTIONS.map(s => (
-              <button
-                type="button"
-                key={s}
-                className="coach-suggestion-chip"
-                onClick={() => send(s)}
-              >{s}</button>
-            ))}
+            <span className="coach-suggestions-label">Pour commencer</span>
+            <div className="coach-suggestions-row">
+              {SUGGESTIONS.map(s => (
+                <button
+                  type="button"
+                  key={s}
+                  className="coach-suggestion-chip"
+                  onClick={() => send(s)}
+                >{s}</button>
+              ))}
+            </div>
           </div>
         )}
 
         <form className="coach-input-row" onSubmit={handleSubmit}>
-          <input
-            className="coach-input"
-            type="text"
-            value={input}
-            onChange={e => setInput(e.target.value)}
-            placeholder="Pose ta question…"
-            maxLength={CHAT_MAX_MESSAGE_LENGTH}
-            disabled={isStreaming || quotaOut}
-            aria-label="Ta question sur la leçon"
-          />
-          <button
-            type="submit"
-            className="coach-send-btn"
-            disabled={!input.trim() || isStreaming || quotaOut}
-            aria-label="Envoyer la question"
-          >
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-              <path d="M22 2L11 13" /><path d="M22 2l-7 20-4-9-9-4 20-7z" />
-            </svg>
-          </button>
+          <div className="coach-input-pill">
+            <input
+              className="coach-input"
+              type="text"
+              value={input}
+              onChange={e => setInput(e.target.value)}
+              placeholder="Pose ta question…"
+              maxLength={CHAT_MAX_MESSAGE_LENGTH}
+              disabled={isStreaming || quotaOut}
+              aria-label="Ta question sur la leçon"
+            />
+            <button
+              type="submit"
+              className="coach-send-btn"
+              disabled={!input.trim() || isStreaming || quotaOut}
+              aria-label="Envoyer la question"
+            >
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <path d="M22 2L11 13" /><path d="M22 2l-7 20-4-9-9-4 20-7z" />
+              </svg>
+            </button>
+          </div>
         </form>
     </div>
   );
