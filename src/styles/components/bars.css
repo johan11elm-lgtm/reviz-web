@@ -26,5 +26,5 @@
 .rv-bar-fill--violet         { background: var(--accent-violet); }
 .rv-bar-fill--orange         { background: var(--accent-orange); }
 .rv-bar-fill--green          { background: var(--accent-green); }
-.rv-bar-fill--gradient       { background: linear-gradient(90deg, var(--accent-violet), var(--accent-pink)); }
+.rv-bar-fill--gradient       { background: linear-gradient(90deg, var(--accent-orange), var(--accent-pink)); }
 .rv-bar-fill--gradient-warm  { background: linear-gradient(90deg, var(--accent-orange), var(--accent-pink)); }

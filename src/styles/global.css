@@ -28,15 +28,15 @@
   --bg-hover:       #FBF5EE;
   --bg-avatar:      #EFE3D2;
   --bg-toggle:      #E6D9C7;
-  --bg-cta:         #6B4EFF;
+  --bg-cta:         #2D2B57;
   --bg-tip:         #FBF5EE;
-  --bg-flip-back:   #EBE4FF;
+  --bg-flip-back:   #EAE8F2;
 
   --border:         #EBDFCF;
   --border-subtle:  #F2E8D9;
   --border-hover:   #D6C7B0;
   --border-tip:     #EBDFCF;
-  --border-formula: #C7BEFF;
+  --border-formula: #C9C6DC;
 
   --text-primary:   #1B1A23;
   --text-secondary: #6B6557;
@@ -50,24 +50,26 @@
   --text-cta:       #FFFFFF;
   --text-cta-sub:   rgba(255,255,255,0.78);
   --text-tip:       #6B6557;
-  --text-flip-back: #2E1F8C;
-  --text-formula:   #2E1F8C;
+  --text-flip-back: #2D2B57;
+  --text-formula:   #2D2B57;
 
   --bg-intro:       #FFF1E0;
   --border-intro:   #FFD9B0;
   --text-intro:     #B36400;
-  --bg-formula:     #EBE4FF;
+  --bg-formula:     #EAE8F2;
 
   --bg-icon-orange: #FFE6D2;
-  --bg-icon-indigo: #EBE4FF;
+  --bg-icon-indigo: #EAE8F2;
   --bg-icon-green:  #DCF5E6;
   --bg-danger:      #FFE0E5;
 
-  /* Accents */
-  --accent-violet:        #6B4EFF;
-  --accent-violet-hover:  #5A3FE6;
-  --accent-violet-soft:   #EBE4FF;
-  --accent-violet-ink:    #2E1F8C;
+  /* Accents. Accent principal « encre » (bleu-noir profond) : l'orange de la
+     mascotte et le halo portent la couleur, les actions restent sobres.
+     Les tokens gardent leur nom historique (--accent-violet) : ~70 usages. */
+  --accent-violet:        #2D2B57;
+  --accent-violet-hover:  #3B3970;
+  --accent-violet-soft:   #EAE8F2;
+  --accent-violet-ink:    #2D2B57;
   --accent-orange:        #FF8A3D;
   --accent-orange-hover:  #F0772A;
   --accent-orange-soft:   #FFE6D2;
@@ -108,16 +110,16 @@
   --gap-cards:   16px;     /* espacement vertical entre cartes d'une page */
 
   /* Shadows */
-  --shadow-card:   0 4px 14px rgba(46,31,140,0.06), 0 1px 3px rgba(0,0,0,0.04);
-  --shadow-pop:    0 12px 32px rgba(107,78,255,0.18);
-  --shadow-shell:  0 32px 80px rgba(46,31,140,0.12);
+  --shadow-card:   0 4px 14px rgba(45,43,87,0.07), 0 1px 3px rgba(0,0,0,0.04);
+  --shadow-pop:    0 12px 32px rgba(45,43,87,0.18);
+  --shadow-shell:  0 32px 80px rgba(45,43,87,0.12);
 
   /* Skeleton (rv-skeleton) */
   --skeleton-shimmer: rgba(255, 255, 255, 0.6);
 
   /* Dégradé des cartes héros (HeroCTA, héros narrateur de Cours).
      Redéfini par les thèmes Réviz+ — cf. src/utils/themes.js. */
-  --grad-hero: linear-gradient(135deg, var(--accent-violet) 0%, #5C40F0 60%, #4A2FD9 100%);
+  --grad-hero: linear-gradient(135deg, #3F3C78 0%, #2D2B57 55%, #1E1C3F 100%);
 }
 
 /* ─── Variables Dark ───────────────────────────────────────────── */
@@ -130,15 +132,15 @@
   --bg-hover:       #2A2640;
   --bg-avatar:      #2A2640;
   --bg-toggle:      #3A3550;
-  --bg-cta:         #8A72FF;
+  --bg-cta:         #3B6FE8;
   --bg-tip:         #1E1B2A;
-  --bg-flip-back:   #2A2348;
+  --bg-flip-back:   #1F2A4A;
 
   --border:         #2A2640;
   --border-subtle:  #24213A;
   --border-hover:   #4A4470;
   --border-tip:     #2A2640;
-  --border-formula: #3A2E8C;
+  --border-formula: #2F4788;
   --skeleton-shimmer: rgba(255, 255, 255, 0.07);
 
   --text-primary:   #F2EFFA;
@@ -150,24 +152,25 @@
   --text-cta:       #FFFFFF;
   --text-cta-sub:   rgba(255,255,255,0.7);
   --text-tip:       #B5AECC;
-  --text-flip-back: #D9CFFF;
-  --text-formula:   #D9CFFF;
+  --text-flip-back: #BFD0FF;
+  --text-formula:   #BFD0FF;
 
   --bg-intro:       #2D1F0A;
   --border-intro:   #5C3D15;
   --text-intro:     #FFB870;
-  --bg-formula:     #2A2348;
+  --bg-formula:     #1F2A4A;
 
   --bg-icon-orange: #3A2410;
-  --bg-icon-indigo: #2A2348;
+  --bg-icon-indigo: #1F2A4A;
   --bg-icon-green:  #102E1F;
   --bg-danger:      #3A1A22;
 
-  /* Accents */
-  --accent-violet:        #9580FF;
-  --accent-violet-hover:  #A695FF;
-  --accent-violet-soft:   #2A2348;
-  --accent-violet-ink:    #D9CFFF;
+  /* Accents. En sombre, l'encre ne se voit pas : accent principal bleu
+     (4,5:1 avec du texte blanc, 4:1 sur le fond). */
+  --accent-violet:        #3B6FE8;
+  --accent-violet-hover:  #5583F0;
+  --accent-violet-soft:   #1F2A4A;
+  --accent-violet-ink:    #BFD0FF;
   --accent-orange:        #FFA866;
   --accent-orange-hover:  #FFB680;
   --accent-orange-soft:   #3A2410;
@@ -185,6 +188,7 @@
   --shadow-card:   0 4px 14px rgba(0,0,0,0.35), 0 1px 2px rgba(0,0,0,0.25);
   --shadow-pop:    0 12px 32px rgba(0,0,0,0.45);
   --shadow-shell:  0 32px 80px rgba(0,0,0,0.5);
+  --grad-hero: linear-gradient(135deg, #4A7CF6 0%, #3B6FE8 55%, #2A54C4 100%);
 }
 
 /* ─── Thèmes Réviz+ (avantage abonnement) ──────────────────────────
@@ -289,7 +293,7 @@
   --grad-hero: linear-gradient(135deg, #2743C7 0%, #1E35A8 60%, #16277E 100%);
 }
 
-/* 💎 Violet air — la marque assumée, lavande soutenu et cartes flottantes */
+/* 💎 Violet air — lavande soutenu et cartes flottantes (l'ancien accent violet, en option) */
 :root[data-theme="violet-air"] {
   --bg-body:        #CFC2FF;
   --bg-app:         #E4DCFF;
@@ -399,7 +403,9 @@ input, textarea {
 /* Sur fonds violets/sombres, un contour clair pour rester visible. */
 .rv-btn-cta:not(.rv-btn-cta--ghost):focus-visible,
 .auth-btn:focus-visible,
-.ugs-cta:focus-visible {
+.ugs-cta:focus-visible,
+.rv-hero-main:focus-visible,
+.rv-hero-secondary:focus-visible {
   outline-color: #FFFFFF;
   outline-offset: 3px;
 }

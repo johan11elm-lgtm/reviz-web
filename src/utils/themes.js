@@ -8,8 +8,8 @@
 // -------------------------------------------------------
 
 export const THEMES = [
-  { id: 'light',        label: 'Crème',        premium: false, swatch: ['#F8EFE7', '#6B4EFF'] },
-  { id: 'dark',         label: 'Sombre',       premium: false, swatch: ['#14121C', '#8A72FF'] },
+  { id: 'light',        label: 'Crème',        premium: false, swatch: ['#F8EFE7', '#2D2B57'] },
+  { id: 'dark',         label: 'Sombre',       premium: false, swatch: ['#14121C', '#3B6FE8'] },
   { id: 'nuit-encre',   label: "Nuit d'encre", premium: true,  swatch: ['#131020', '#A78BFF'] },
   { id: 'carnet-kraft', label: 'Carnet kraft', premium: true,  swatch: ['#EFDDBE', '#2743C7'] },
   { id: 'violet-air',   label: 'Violet air',   premium: true,  swatch: ['#E4DCFF', '#4C33C4'] },

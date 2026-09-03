@@ -20,7 +20,7 @@ const LogoStar = () => (
 
 const ADVANTAGES = [
   { icon: '📸', label: 'Scans illimités',        color: '#FF8A3D', desc: 'Scanne autant de leçons que tu veux' },
-  { icon: '🧠', label: 'Révisions sans limites', color: '#6B4EFF', desc: 'Quiz et flashcards à volonté' },
+  { icon: '🧠', label: 'Révisions sans limites', color: '#2D2B57', desc: 'Quiz et flashcards à volonté' },
   { icon: '🚀', label: 'Accès prioritaire',      color: '#A855F7', desc: 'Toujours premier dans la file' },
   { icon: '✨', label: 'Fonctions exclusives',   color: '#34C77B', desc: 'Carte mentale, export PDF...' },
 ];
@@ -78,7 +78,7 @@ export default function UpgradeSuccess() {
               '--x': `${Math.random() * 100}vw`,
               '--rot': `${Math.random() * 360}deg`,
               '--sway': `${(Math.random() - 0.5) * 40}px`,
-              '--color': ['#FF8A3D', '#FFB347', '#34C77B', '#6B4EFF', '#A855F7'][i % 5],
+              '--color': ['#FF8A3D', '#FFB347', '#34C77B', '#3B6FE8', '#FF6B9A'][i % 5],
             }}
           />
         ))}

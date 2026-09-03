@@ -15,14 +15,14 @@
 .cours-page .cours-narrator-hero {
   position: relative;
   display: flex;
-  align-items: center;
+  align-items: stretch;
   gap: 12px;
   padding: 18px 18px 18px 22px;
   border-radius: var(--radius-lg);
   background: var(--grad-hero);
   box-shadow:
-    0 18px 40px rgba(107, 78, 255, 0.32),
-    0 4px 12px rgba(107, 78, 255, 0.18);
+    0 18px 40px rgba(45, 43, 87, 0.28),
+    0 4px 12px rgba(45, 43, 87, 0.16);
   overflow: hidden;
   isolation: isolate;
   min-height: 180px;
@@ -30,8 +30,8 @@
 
 .cours-page .cours-narrator-glow {
   position: absolute;
-  top: -80px;
-  right: -20px;
+  bottom: -60px;
+  right: -30px;
   width: 220px;
   height: 220px;
   background: radial-gradient(circle, rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0) 60%);
@@ -68,28 +68,32 @@
   margin: 0 0 4px;
 }
 
-.cours-page .cours-narrator-bubble {
-  font-size: 13px;
+/* Phrase du coach : sous-texte hero (même langage que .rv-hero-sub),
+   pas de bulle — le chrome blanc jurait sur le gradient. */
+.cours-page .cours-narrator-sub {
+  font-size: 14px;
   font-weight: 500;
   line-height: 1.4;
-  padding: 10px 14px;
-  background: var(--bg-card);
-  color: var(--text-primary);
+  color: rgba(255, 255, 255, 0.85);
+  margin: 0;
 }
 
 .cours-page .cours-narrator-mascot {
   position: relative;
   z-index: 1;
   flex-shrink: 0;
-  align-self: center;
+  /* Ancrée en bas de carte (posée sur le bord), tête entière visible —
+     le débord bas est clippé par l'overflow du hero. */
+  align-self: flex-end;
   margin-right: -14px;
+  margin-bottom: -44px;
   filter: drop-shadow(0 12px 22px rgba(0, 0, 0, 0.28));
 }
 
 @media (max-width: 430px) {
   .cours-page .cours-narrator-hero { padding: 16px 14px 16px 18px; min-height: 168px; }
   .cours-page .cours-narrator-title { font-size: 24px; letter-spacing: -0.8px; }
-  .cours-page .cours-narrator-bubble { font-size: 12.5px; }
+  .cours-page .cours-narrator-sub { font-size: 13px; }
 }
 
 /* ── Featured "À reprendre" — Réviz propose la dernière leçon ── */

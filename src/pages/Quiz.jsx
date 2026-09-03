@@ -45,7 +45,7 @@ function getEndContent(score, total) {
 }
 
 /* ── Confetti — utilise les accents DS pour cohérence ── */
-const CONFETTI_COLORS = ['#FF8A3D', '#FFB347', '#6B4EFF', '#34C77B', '#FF6B9A', '#FFB347']
+const CONFETTI_COLORS = ['#FF8A3D', '#FFB347', '#3B6FE8', '#34C77B', '#FF6B9A', '#FFB347']
 function Confetti() {
   const pieces = Array.from({ length: 30 }, (_, i) => ({
     id: i,

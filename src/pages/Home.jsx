@@ -2,7 +2,7 @@ import { useState, useEffect, useMemo } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { BottomNav } from '../components/BottomNav';
-import { PageHeader } from '../components/PageHeader';
+import { UserHeader } from '../components/UserHeader';
 import { HeroCTA } from '../components/HeroCTA';
 import { Mascot } from '../components/Mascot';
 import { loadLessons, restoreLesson, syncFromFirestore } from '../services/historyService';
@@ -106,7 +106,7 @@ function getMotivation(streak, todayRevisions, dailyGoal) {
 }
 
 export default function Home() {
-  const { currentUser } = useAuth();
+  const { currentUser, isPremium } = useAuth();
   const prenom = currentUser?.displayName ?? 'toi';
 
   const navigate = useNavigate();
@@ -172,14 +172,19 @@ export default function Home() {
         <AchievementToast badge={newBadge} onDone={() => setNewBadge(null)} />
       )}
 
-      <PageHeader variant="brand" />
+      <UserHeader
+        prenom={prenom}
+        level={level}
+        xpInLvl={xpInLvl}
+        fillPct={fillPct}
+        isPremium={isPremium}
+        onCoach={lastLesson ? () => setCoachOpen(true) : undefined}
+      />
 
       <div className="content">
 
         <div className="rv-greeting home-greeting">
-          <h2 className="rv-greeting-title">
-            Hey {prenom}<span className="rv-greeting-wave" aria-hidden="true">👋</span>
-          </h2>
+          <h2 className="rv-greeting-title">Envie de réviser ?</h2>
           <p className="rv-greeting-sub">{getMotivation(streak, todayRevisions, dailyGoal)}</p>
         </div>
 
@@ -189,6 +194,15 @@ export default function Home() {
           mascot={new Date().getHours() >= 19 ? 'soir' : 'scanphone'}
           title="Scanne une leçon"
           action="Commencer"
+          overlap
+          ariaLabel="Scanner une leçon"
+          secondary={lastLesson ? {
+            icon: '📖',
+            label: 'Reprendre',
+            title: lastLesson.metadata.title,
+            onClick: () => { restoreLesson(lastLesson.id); navigate('/analyse'); },
+            ariaLabel: `Reprendre la leçon ${lastLesson.metadata.title}`,
+          } : undefined}
           className="home-cta"
         />
 
@@ -249,20 +263,13 @@ export default function Home() {
                 aria-hidden="true"
               />
               <div className="home-featured-info">
-                <div className="home-featured-label">Reprendre</div>
+                <div className="home-featured-label">Ta dernière leçon</div>
                 <div className="home-featured-title">{lastLesson.metadata.title}</div>
                 <div className="home-featured-subject">
                   {lastLesson.metadata.subject} · {formatDate(lastLesson.scannedAt)}
                 </div>
               </div>
             </div>
-            <button
-              className="rv-btn-cta rv-btn-cta--full"
-              onClick={() => { restoreLesson(lastLesson.id); navigate('/analyse'); }}
-            >
-              <span>Continuer</span>
-              <span className="rv-btn-cta-arrow" aria-hidden="true">→</span>
-            </button>
             {(() => {
               const fcTotal = lastLesson.flashcardsCount ?? 0;
               const fcDue   = fcTotal > 0 ? countDueCards(lastLesson.id, fcTotal) : 0;
