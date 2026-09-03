@@ -10,6 +10,7 @@ import '@fontsource/geist/800.css'
 import './styles/global.css'
 import App from './App.jsx'
 import { IS_NATIVE } from './services/apiClient.js'
+import { hideSplash } from './services/splash.js'
 
 // App native (Capacitor) : layout plein écran forcé quelle que soit la
 // largeur (les iPhone Pro Max à 440 pt et les iPad tomberaient sinon dans
@@ -24,6 +25,10 @@ if (IS_NATIVE) {
     'content',
     'width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no'
   );
+  // Filet de sécurité : l'écran de lancement natif (launchAutoHide: false)
+  // est retiré par <SplashHider /> au premier écran peint ; si le boot
+  // échoue avant, on ne le laisse jamais affiché indéfiniment.
+  setTimeout(hideSplash, 6000);
 }
 
 // Désactive le scroll restoration auto du browser pour que ScrollToTop soit

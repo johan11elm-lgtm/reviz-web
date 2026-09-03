@@ -4,6 +4,7 @@ import { ThemeProvider, useTheme } from './context/ThemeContext'
 import { AuthProvider, useAuth } from './context/AuthContext'
 import { resolveTheme } from './utils/themes'
 import { ErrorBoundary } from './components/ErrorBoundary'
+import { SplashHider } from './components/SplashHider'
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -18,11 +19,14 @@ function ScrollToTop() {
 
 // Pages publiques (pas de Firebase nécessaire)
 import Welcome from './pages/Welcome'
+// Home est le premier écran de tout élève connecté : chargée en dur pour
+// que le démarrage optimiste (cache de session) peigne sans attendre un
+// chunk ni re-rendre l'arbre après une suspension.
+import Home from './pages/Home'
 
 // Pages lazy-loaded
 const Inscription    = lazy(() => import('./pages/Inscription'))
 const Connexion      = lazy(() => import('./pages/Connexion'))
-const Home           = lazy(() => import('./pages/Home'))
 const Profile        = lazy(() => import('./pages/Profile'))
 const Reglages       = lazy(() => import('./pages/Reglages'))
 const Scan           = lazy(() => import('./pages/Scan'))
@@ -62,6 +66,8 @@ function PrivateRoute({ children }) {
 // Routes qui nécessitent Firebase Auth
 function AuthRoutes() {
   return (
+    <>
+    <SplashHider />
     <Routes>
       <Route path="/inscription" element={<Inscription />} />
       <Route path="/connexion"   element={<Connexion />} />
@@ -83,6 +89,7 @@ function AuthRoutes() {
       <Route path="/upgrade-success" element={<PrivateRoute><UpgradeSuccess /></PrivateRoute>} />
       <Route path="*"            element={<NotFound />} />
     </Routes>
+    </>
   )
 }
 
@@ -106,8 +113,8 @@ export default function App() {
         <Suspense fallback={<LoadingFallback />}>
           <Routes>
             {/* Routes publiques — pas de Firebase chargé */}
-            <Route path="/welcome"     element={<Welcome />} />
-            <Route path="/legal/:page" element={<Legal />} />
+            <Route path="/welcome"     element={<><SplashHider /><Welcome /></>} />
+            <Route path="/legal/:page" element={<><SplashHider /><Legal /></>} />
 
             {/* Toutes les autres routes — Firebase via AuthProvider */}
             <Route path="/*" element={

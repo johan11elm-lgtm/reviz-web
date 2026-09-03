@@ -35,3 +35,6 @@ ios/DerivedData/
 # Mascottes : bruts ChatGPT et sauvegardes horodatées des masters remplacés
 assets-src/mascot/_bruts/
 assets-src/mascot/_old/
+
+# DerivedData xcodebuild (-derivedDataPath build)
+build/

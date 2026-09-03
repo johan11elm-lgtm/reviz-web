@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import { hideSplash } from '../services/splash';
 
 export class ErrorBoundary extends Component {
   constructor(props) {
@@ -12,6 +13,8 @@ export class ErrorBoundary extends Component {
 
   componentDidCatch(error, info) {
     console.error('[Réviz] Erreur capturée :', error, info.componentStack);
+    // L'écran d'erreur doit être visible même si le plantage précède le premier rendu.
+    hideSplash();
   }
 
   handleReload = () => {

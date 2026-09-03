@@ -12,6 +12,11 @@
     },
     "LocalNotifications": {
       "presentationOptions": []
+    },
+    "SplashScreen": {
+      "launchAutoHide": false,
+      "backgroundColor": "#F8EFE7",
+      "showSpinner": false
     }
   }
 }

@@ -28,6 +28,7 @@ import { setActiveUser as setRevisionUser } from '../services/revisionService';
 import { setSrsUser } from '../services/srsService';
 import { setChallengeUser } from '../services/challengeService';
 import { setScanLimitUser, setPremiumStatus } from '../services/scanLimitService';
+import { readSessionCache, writeSessionCache, clearSessionCache, userFromSessionCache } from '../services/sessionCache';
 import { collection, getDocs, deleteDoc, doc, getDoc, setDoc } from 'firebase/firestore';
 
 const AuthContext = createContext();
@@ -36,14 +37,37 @@ export function useAuth() {
   return useContext(AuthContext);
 }
 
+// Rattache les services locaux (clés localStorage par utilisateur) à un uid.
+function bindServicesToUser(uid) {
+  setActiveUser(uid);
+  setRevisionUser(uid);
+  setSrsUser(uid);
+  setChallengeUser(uid);
+  setScanLimitUser(uid);
+}
+
 export function AuthProvider({ children }) {
-  const [currentUser, setCurrentUser]   = useState(null);
+  // Démarrage optimiste : la dernière session confirmée (cache local) rend
+  // l'app immédiatement ; Firebase confirme ou invalide en arrière-plan.
+  // Sans cache (premier lancement, déconnexion), on attend Firebase comme avant.
+  const [cached] = useState(() => {
+    const c = readSessionCache();
+    if (c) {
+      bindServicesToUser(c.uid);
+      setPremiumStatus(c.isPremium);
+    }
+    return c;
+  });
+  const [currentUser, setCurrentUser]   = useState(() => (cached ? userFromSessionCache(cached, auth) : null));
+  // true tant que Firebase n'a pas confirmé la session (même si l'app est déjà rendue depuis le cache).
   const [loading, setLoading]           = useState(true);
   // Mineur <15 ans dont le consentement parental n'est pas (encore) approuvé.
-  const [consentBlocked, setConsentBlocked] = useState(false);
+  const [consentBlocked, setConsentBlocked] = useState(cached?.consentBlocked ?? false);
   // Compte Google sans profil complété (pas encore de date de naissance / niveau).
-  const [needsProfileSetup, setNeedsProfileSetup] = useState(false);
-  const [isPremium, setIsPremium] = useState(false);
+  const [needsProfileSetup, setNeedsProfileSetup] = useState(cached?.needsProfileSetup ?? false);
+  const [isPremium, setIsPremium] = useState(cached?.isPremium ?? false);
+  // uid pour lequel le gate ci-dessus a été calculé (Firestore) — garde le cache cohérent.
+  const [gateUid, setGateUid] = useState(cached?.uid ?? null);
 
   // --- Inscription ---
   // `level` est un objet { cycle, classe, specialites?, filiere? }
@@ -125,6 +149,7 @@ export function AuthProvider({ children }) {
 
   // --- Déconnexion ---
   function logout() {
+    clearSessionCache();
     return signOut(auth);
   }
 
@@ -185,6 +210,7 @@ export function AuthProvider({ children }) {
     localStorage.removeItem('reviz-lesson-text');
     localStorage.removeItem('reviz-captured-image');
     localStorage.removeItem('reviz-current-lesson-id');
+    clearSessionCache();
     // Supprimer le compte Firebase Auth
     await deleteUser(user);
   }
@@ -231,13 +257,20 @@ export function AuthProvider({ children }) {
       setNeedsProfileSetup(false);
       setIsPremium(false);
       setPremiumStatus(false);
+      setGateUid(null);
       return;
     }
-    let profile = null;
-    try {
-      const snap = await getDoc(doc(db, 'users', user.uid));
-      profile = snap.exists() ? snap.data() : null;
-    } catch { /* lecture impossible → on n'élève pas le blocage (fail-open UX) */ }
+    // Les deux lectures partent en parallèle : un seul aller-retour Firestore
+    // au lieu de deux enchaînés. Lecture impossible → on n'élève pas le
+    // blocage (fail-open UX).
+    const [profile, approved] = await Promise.all([
+      getDoc(doc(db, 'users', user.uid))
+        .then(snap => (snap.exists() ? snap.data() : null))
+        .catch(() => null),
+      getDoc(doc(db, 'users', user.uid, 'parentalConsent', 'consent'))
+        .then(c => c.exists() && c.data()?.status === 'approved')
+        .catch(() => false),
+    ]);
 
     // Compte Google sans profil complété (pas de date de naissance) → doit finir l'inscription.
     const isGoogle = user.providerData?.some(p => p.providerId === 'google.com');
@@ -247,14 +280,9 @@ export function AuthProvider({ children }) {
     setIsPremium(premium);
     setPremiumStatus(premium);
 
-    let approved = false;
-    try {
-      const c = await getDoc(doc(db, 'users', user.uid, 'parentalConsent', 'consent'));
-      approved = c.exists() && c.data()?.status === 'approved';
-    } catch { /* idem */ }
-
     // Mineur <15 ans non approuvé → accès bloqué (que le doc soit absent OU en attente).
     setConsentBlocked(isUnder15(profile?.birthDate) && !approved);
+    setGateUid(user.uid);
   }
 
   // Re-vérifie le gate pour l'utilisateur courant (après signup, retour de consentement…).
@@ -265,18 +293,24 @@ export function AuthProvider({ children }) {
   // --- Écoute l'état de connexion Firebase ---
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, async user => {
-      setActiveUser(user?.uid ?? null);
-      setRevisionUser(user?.uid ?? null);
-      setSrsUser(user?.uid ?? null);
-      setChallengeUser(user?.uid ?? null);
-      setScanLimitUser(user?.uid ?? null);
+      bindServicesToUser(user?.uid ?? null);
+      // Remplace l'utilisateur issu du cache par le vrai (ou null : session
+      // invalide → PrivateRoute redirige vers /welcome).
       setCurrentUser(user);
+      if (!user) clearSessionCache();
 
       await loadGateState(user);
       setLoading(false);
     });
     return unsub;
   }, []);
+
+  // Session confirmée par Firebase et gate calculé pour cet utilisateur →
+  // on mémorise l'état pour le prochain démarrage.
+  useEffect(() => {
+    if (loading || !currentUser || gateUid !== currentUser.uid) return;
+    writeSessionCache(currentUser, { isPremium, consentBlocked, needsProfileSetup });
+  }, [loading, currentUser, gateUid, isPremium, consentBlocked, needsProfileSetup]);
 
   // Permet de re-vérifier le statut premium (après retour Stripe)
   async function refreshPremium() {
@@ -320,10 +354,13 @@ export function AuthProvider({ children }) {
     deleteAccount,
   }), [currentUser, loading, consentBlocked, needsProfileSetup, isPremium]);
 
-  // On ne rend les enfants qu'une fois Firebase prêt (évite le flash de redirect)
+  // Enfants rendus dès que Firebase a confirmé la session — ou immédiatement
+  // depuis le cache local (démarrage optimiste). Sans cache, on attend :
+  // ça évite un flash de redirection vers /welcome.
+  const ready = !loading || cached !== null;
   return (
     <AuthContext.Provider value={value}>
-      {!loading && children}
+      {ready && children}
     </AuthContext.Provider>
   );
 }
