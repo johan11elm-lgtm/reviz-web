@@ -14,7 +14,6 @@ import { subjectMascot } from '../utils/subjects';
 import { refreshReminder } from '../services/reminderService';
 import { AchievementToast } from '../components/AchievementToast';
 import { FlameIcon, TargetIcon, BookOpenIcon, CheckIcon, CircleIcon, FlashcardsIcon, QuizIcon } from '../components/Icons';
-import { CoachChat } from '../components/CoachChat';
 import './Home.css';
 
 function formatDate(ts) {
@@ -76,7 +75,6 @@ export default function Home() {
   const [allLessons, setAllLessons] = useState(() => loadLessons());
   const [challenges] = useState(() => getWeeklyChallenges());
   const [newBadge, setNewBadge] = useState(null);
-  const [coachOpen, setCoachOpen] = useState(false);
 
   useEffect(() => {
     const onboardedKey = `reviz-onboarded-${currentUser?.uid}`;
@@ -145,7 +143,7 @@ export default function Home() {
         xpInLvl={xpInLvl}
         fillPct={fillPct}
         isPremium={isPremium}
-        onCoach={lastLesson ? () => setCoachOpen(true) : undefined}
+        onCoach={() => navigate(lastLesson ? `/coach?lesson=${lastLesson.id}` : '/coach')}
       />
 
       <div className="content">
@@ -255,7 +253,7 @@ export default function Home() {
                   {/* Coach de révision — le contexte est la dernière leçon scannée */}
                   <button
                     className="rv-btn-action"
-                    onClick={() => setCoachOpen(true)}
+                    onClick={() => navigate(`/coach?lesson=${lastLesson.id}`)}
                   >
                     <span className="rv-icon-square rv-icon-square--green">
                       <Mascot pose="coach" size={26} alt="" aria-hidden="true" />
@@ -299,14 +297,6 @@ export default function Home() {
       </div>
 
       <BottomNav />
-      {coachOpen && lastLesson && (
-        <CoachChat
-          isOpen
-          onClose={() => setCoachOpen(false)}
-          lessonId={lastLesson.id}
-          lessonTitle={lastLesson.metadata.title}
-        />
-      )}
     </div>
   );
 }

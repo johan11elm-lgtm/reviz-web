@@ -1,3 +1,4 @@
+import { PageIntro } from '../components/PageIntro'
 import { RefreshIcon, ChatIcon, FlameIcon } from '../components/Icons'
 import { useState, useEffect, useMemo } from 'react'
 import { Link } from 'react-router-dom'
@@ -148,12 +149,6 @@ function FlashcardsSession() {
     </div>
   )
 
-  const counter = (
-    <div className="flashcards-counter">
-      {current + 1}<span>/{flashcards.length}</span>
-    </div>
-  )
-
   return (
     <div className="app flashcards-page">
 
@@ -211,12 +206,13 @@ function FlashcardsSession() {
 
       <PageHeader
         variant="back"
-        title="Flashcards"
-        sub={dots}
-        right={coachLessonId
-          ? <><CoachHeaderButton onClick={() => setCoachOpen(true)} />{counter}</>
-          : counter}
+        right={coachLessonId ? <CoachHeaderButton onClick={() => setCoachOpen(true)} /> : undefined}
       />
+
+      {/* Intro façon Home — la carte, juste dessous, porte la mascotte */}
+      <PageIntro title="Flashcards" sub={`Carte ${current + 1} sur ${flashcards.length} · ${lessonTitle}`} className="flashcards-intro">
+        {dots}
+      </PageIntro>
 
       <div className="flashcards-ai-row"><span className="ai-badge">✦ Généré par IA</span></div>
 

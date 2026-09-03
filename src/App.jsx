@@ -44,6 +44,7 @@ const ConsentPending = lazy(() => import('./pages/ConsentPending'))
 const FinishSetup    = lazy(() => import('./pages/FinishSetup'))
 const NotFound       = lazy(() => import('./pages/NotFound'))
 const UpgradeSuccess = lazy(() => import('./pages/UpgradeSuccess'))
+const Coach          = lazy(() => import('./pages/Coach'))
 
 // Fallback minimal pendant le chargement
 function LoadingFallback() {
@@ -87,6 +88,7 @@ function AuthRoutes() {
       <Route path="/resume"      element={<PrivateRoute><Resume /></PrivateRoute>} />
       <Route path="/mindmap"     element={<PrivateRoute><Mindmap /></PrivateRoute>} />
       <Route path="/upgrade-success" element={<PrivateRoute><UpgradeSuccess /></PrivateRoute>} />
+      <Route path="/coach"       element={<PrivateRoute><Coach /></PrivateRoute>} />
       <Route path="*"            element={<NotFound />} />
     </Routes>
     </>

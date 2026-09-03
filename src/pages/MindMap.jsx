@@ -1,3 +1,4 @@
+import { PageIntro } from '../components/PageIntro'
 import { ChatIcon, MindmapIcon } from '../components/Icons'
 import { useState, useRef, useEffect, useMemo } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
@@ -343,13 +344,16 @@ function MindmapSession() {
 
       <PageHeader
         variant="back"
-        title="Carte mentale"
-        sub={progressDots}
         right={coachLessonId
           ? <><CoachHeaderButton onClick={() => setCoachOpen(true)} />{doneButton}</>
           : doneButton}
         onBack={() => navigate('/analyse')}
       />
+
+      {/* Intro façon Home — la carte, juste dessous, est l'illustration */}
+      <PageIntro title="Carte mentale" sub={mindmapData.title} className="mindmap-intro">
+        {progressDots}
+      </PageIntro>
 
       <div className="mindmap-ai-row"><span className="ai-badge">✦ Généré par IA</span></div>
 

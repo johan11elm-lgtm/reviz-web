@@ -10,7 +10,7 @@ import { analyseLesson, analyseImage, popPendingAnalysis } from '../services/aiS
 import { saveLesson } from '../services/historyService';
 import { PremiumModal } from '../components/PremiumModal';
 import { MissingLessonState } from '../components/MissingLessonState';
-import { CoachChat, CoachEntryCard } from '../components/CoachChat';
+import { CoachEntryCard } from '../components/CoachChat';
 import { getScanStatus } from '../services/scanLimitService';
 import { subjectInfo, subjectMascot } from '../utils/subjects';
 import './Analyse.css';
@@ -71,7 +71,6 @@ export default function Analyse() {
   const [progress, setProgress]       = useState(0);
   const [showPremium, setShowPremium] = useState(false);
   const [noLesson, setNoLesson]       = useState(false);
-  const [coachOpen, setCoachOpen]     = useState(false);
   const navigate   = useNavigate();
   const { getUserLevel } = useAuth();
   const userLevel  = getUserLevel();
@@ -284,7 +283,7 @@ export default function Analyse() {
         {/* Coach de révision — chat contextuel sur la leçon (Firestore requis
             pour le contexte serveur → pas de coach sur le mock dev sans id). */}
         {lesson && coachLessonId && (
-          <CoachEntryCard onClick={() => setCoachOpen(true)} />
+          <CoachEntryCard onClick={() => navigate(`/coach?lesson=${coachLessonId}`)} />
         )}
 
         <div className="analyse-format-grid">
@@ -313,14 +312,6 @@ export default function Analyse() {
 
       <BottomNav />
       {showPremium && <PremiumModal onClose={() => navigate('/scan')} />}
-      {coachOpen && coachLessonId && (
-        <CoachChat
-          isOpen
-          onClose={() => setCoachOpen(false)}
-          lessonId={coachLessonId}
-          lessonTitle={displayLesson.title}
-        />
-      )}
     </div>
   );
 }

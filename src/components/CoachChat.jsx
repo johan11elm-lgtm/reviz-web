@@ -80,15 +80,17 @@ function loadConversation(lessonId) {
 }
 
 /**
- * Coach de révision — bottom sheet de chat contextuel sur la leçon courante.
+ * Conversation avec le coach — messages, amorces, saisie. Cœur partagé par
+ * le bottom sheet (formats de révision) et la page /coach.
  * La conversation vit en sessionStorage (fermée avec l'onglet, jamais persistée
  * côté serveur — minimisation des données, public mineur).
- * @param {string} [prefill]  question pré-remplie à l'ouverture (hook de friction)
+ * @param {string} lessonId      leçon Firestore (contexte résolu côté serveur)
+ * @param {string} [prefill]     question pré-remplie (hook de friction du quiz)
+ * @param {string} [className]
  */
-export function CoachChat({ isOpen, onClose, lessonId, lessonTitle, prefill }) {
+export function CoachConversation({ lessonId, prefill, className = '' }) {
   const { isPremium, getUserLevel } = useAuth();
   const navigate = useNavigate();
-  const ref = useModalA11y(onClose, isOpen);
 
   const [messages, setMessages] = useState(() => loadConversation(lessonId));
   const [input, setInput]             = useState('');
@@ -105,8 +107,8 @@ export function CoachChat({ isOpen, onClose, lessonId, lessonTitle, prefill }) {
   // Question pré-remplie (ex. « pourquoi » après une mauvaise réponse de quiz) :
   // posée dans le champ à l'ouverture, l'élève reste libre de la modifier.
   useEffect(() => {
-    if (isOpen && prefill) setInput(prefill);
-  }, [isOpen, prefill]);
+    if (prefill) setInput(prefill);
+  }, [prefill]);
 
   useEffect(() => {
     try { sessionStorage.setItem(storageKey(lessonId), JSON.stringify(messages)); }
@@ -117,7 +119,7 @@ export function CoachChat({ isOpen, onClose, lessonId, lessonTitle, prefill }) {
   useEffect(() => {
     const node = scrollRef.current;
     if (node) node.scrollTop = node.scrollHeight;
-  }, [messages, draft, isOpen, quotaOut, error]);
+  }, [messages, draft, quotaOut, error]);
 
   async function send(text) {
     const content = text.trim();
@@ -171,32 +173,8 @@ export function CoachChat({ isOpen, onClose, lessonId, lessonTitle, prefill }) {
     send(input);
   }
 
-  if (!isOpen) return null;
-
   return (
-    <div className="coach-overlay" onClick={onClose}>
-      <div
-        className="coach-sheet"
-        ref={ref}
-        role="dialog"
-        aria-modal="true"
-        aria-label="Coach Réviz — pose tes questions sur la leçon"
-        onClick={e => e.stopPropagation()}
-      >
-        <div className="coach-header">
-          <Mascot pose="coach" size={44} alt="" aria-hidden="true" />
-          <div className="coach-header-text">
-            <span className="coach-header-title">Coach Réviz</span>
-            <span className="coach-header-sub">{lessonTitle}</span>
-          </div>
-          <button
-            type="button"
-            className="coach-close-btn"
-            onClick={onClose}
-            aria-label="Fermer le coach"
-          >✕</button>
-        </div>
-
+    <div className={['coach-conversation', className].filter(Boolean).join(' ')}>
         <div className="coach-messages" ref={scrollRef} role="log" aria-live="polite">
           <div className="coach-bubble coach-bubble--coach">
             Salut ! Un truc pas clair dans cette leçon ? Pose-moi ta question, je t'explique.
@@ -281,6 +259,44 @@ export function CoachChat({ isOpen, onClose, lessonId, lessonTitle, prefill }) {
             </svg>
           </button>
         </form>
+    </div>
+  );
+}
+
+/**
+ * Coach de révision — bottom sheet de chat contextuel (formats de révision).
+ * Enveloppe <CoachConversation /> d'un overlay, d'un en-tête et de la
+ * gestion modale (focus, Échap).
+ * @param {string} [prefill]  question pré-remplie à l'ouverture (hook de friction)
+ */
+export function CoachChat({ isOpen, onClose, lessonId, lessonTitle, prefill }) {
+  const ref = useModalA11y(onClose, isOpen);
+  if (!isOpen) return null;
+
+  return (
+    <div className="coach-overlay" onClick={onClose}>
+      <div
+        className="coach-sheet"
+        ref={ref}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Coach Réviz — pose tes questions sur la leçon"
+        onClick={e => e.stopPropagation()}
+      >
+        <div className="coach-header">
+          <Mascot pose="coach" size={44} alt="" aria-hidden="true" />
+          <div className="coach-header-text">
+            <span className="coach-header-title">Coach Réviz</span>
+            <span className="coach-header-sub">{lessonTitle}</span>
+          </div>
+          <button
+            type="button"
+            className="coach-close-btn"
+            onClick={onClose}
+            aria-label="Fermer le coach"
+          >✕</button>
+        </div>
+        <CoachConversation lessonId={lessonId} prefill={prefill} />
       </div>
     </div>
   );

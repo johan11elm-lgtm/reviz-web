@@ -1,0 +1,25 @@
+/* CSS scoped to page wrapper — see scripts/scope-page-css.py */
+/* Wrapper: .coach-page */
+
+/* Intro hors scroll ; la conversation prend tout le reste (messages scrollables,
+   saisie collée en bas avec la safe-area, cf. CoachChat.css). */
+.coach-page .coach-page-intro { padding-top: 4px; padding-bottom: 0; }
+
+.coach-page .coach-page-body { margin-top: 8px; }
+
+.coach-page .coach-page-empty {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 0 var(--page-gutter) 40px;
+  text-align: center;
+}
+.coach-page .coach-page-empty-text {
+  font-size: 15px;
+  color: var(--text-secondary);
+  max-width: 28ch;
+  margin: 0;
+}

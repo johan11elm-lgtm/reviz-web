@@ -28,20 +28,6 @@
 }
 
 /* ── Counter (right slot) ── */
-.flashcards-page .flashcards-counter {
-  font-family: 'Geist', sans-serif;
-  font-size: 16px;
-  font-weight: 800;
-  letter-spacing: -0.4px;
-  color: var(--text-primary);
-  min-width: 36px;
-  text-align: right;
-}
-.flashcards-page .flashcards-counter span {
-  font-size: 12px;
-  font-weight: 500;
-  color: var(--text-muted);
-}
 
 /* ── AI badge row ── */
 .flashcards-page .flashcards-ai-row {
@@ -285,3 +271,7 @@
 @media (max-width: 430px) {
   .flashcards-page .flashcards-end-screen { border-radius: 0; }
 }
+
+/* ── Intro (PageIntro) : hors zone de scroll, points de progression sous le sous-titre ── */
+.flashcards-page .flashcards-intro { padding-top: 4px; padding-bottom: 0; }
+.flashcards-page .flashcards-intro .flashcards-progress-dots { margin-top: 10px; }

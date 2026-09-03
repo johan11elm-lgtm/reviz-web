@@ -76,6 +76,14 @@
   .coach-overlay, .coach-sheet { animation: none; }
 }
 
+/* ── Conversation (partagée sheet / page) : colonne qui remplit son conteneur ── */
+.coach-conversation {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
 /* ── Header ── */
 .coach-header {
   display: flex;

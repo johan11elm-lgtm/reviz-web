@@ -371,3 +371,7 @@
 @media (max-width: 430px) {
   .mindmap-page .mindmap-end-screen { border-radius: 0; }
 }
+
+/* ── Intro (PageIntro) : hors canvas, points de progression sous le sous-titre ── */
+.mindmap-page .mindmap-intro { padding-top: 4px; padding-bottom: 0; }
+.mindmap-page .mindmap-intro .rv-dots { margin-top: 10px; }
