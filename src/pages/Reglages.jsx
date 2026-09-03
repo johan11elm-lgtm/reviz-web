@@ -1,3 +1,4 @@
+import { PageIntro } from '../components/PageIntro';
 import { UserIcon, MailIcon, KeyIcon, BellIcon, MoonIcon, LockIcon, GemIcon, InfoIcon, ScaleIcon, FileTextIcon, ClipboardIcon, LogOutIcon, AlertIcon } from '../components/Icons';
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
@@ -199,9 +200,15 @@ export default function Reglages() {
 
   return (
     <div className="app reglages-page">
-      <PageHeader variant="back" title="Réglages" onBack={() => navigate('/profil')} />
+      <PageHeader variant="back" onBack={() => navigate('/profil')} />
 
       <div className="rg-content">
+        <PageIntro
+          title="Réglages"
+          sub="Compte, rappels, apparence, abonnement."
+          mascot="writing"
+          className="rg-intro"
+        />
 
         {/* ── 1. Compte ── */}
         <section className="rg-section">

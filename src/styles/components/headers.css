@@ -261,7 +261,7 @@
   min-width: 0;
   padding-bottom: 10px;
 }
-.rv-page-intro-title { display: block; }
+.rv-page-intro-title { display: block; overflow-wrap: anywhere; }
 .rv-page-intro-sub { margin-top: 6px; }
 .rv-page-intro-mascot {
   flex-shrink: 0;

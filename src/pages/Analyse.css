@@ -176,21 +176,6 @@
   .analyse-page .analyse-loading-screen { border-radius: 0; }
 }
 
-/* ── Hero présence (HeroCTA en mode statique non-cliquable) ── */
-.analyse-page .analyse-hero-cta {
-  cursor: default;
-}
-.analyse-page .analyse-hero-cta:active { filter: none; }
-@media (hover: hover) and (pointer: fine) {
-  .analyse-page .analyse-hero-cta:hover { filter: none; }
-}
-
-/* Mirror horizontal : la mascotte pointing regarde vers le contenu (à gauche)
- * au lieu de pointer vers le bord. rotate inversé pour conserver l'inclinaison. */
-.analyse-page .analyse-hero-cta .rv-hero-mascot {
-  transform: rotate(3deg) scaleX(-1);
-}
-
 /* ── Excerpt card ── */
 .analyse-page .analyse-excerpt-card {
   display: flex;
@@ -250,9 +235,10 @@
   color: var(--text-primary);
 }
 
-
 .analyse-page .analyse-format-count {
   align-self: flex-start;
   margin-top: 2px;
 }
 
+/* ── Intro (PageIntro) : dans la zone de scroll, qui porte la gouttière ── */
+.analyse-page .analyse-intro { padding: 4px 0 0; }

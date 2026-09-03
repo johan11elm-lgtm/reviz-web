@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { BottomNav } from '../components/BottomNav';
 import { PageHeader } from '../components/PageHeader';
-import { HeroCTA } from '../components/HeroCTA';
+import { PageIntro } from '../components/PageIntro';
 import { Mascot } from '../components/Mascot';
 import { analyseLesson, analyseImage, popPendingAnalysis } from '../services/aiService';
 import { saveLesson } from '../services/historyService';
@@ -12,7 +12,7 @@ import { PremiumModal } from '../components/PremiumModal';
 import { MissingLessonState } from '../components/MissingLessonState';
 import { CoachChat, CoachEntryCard } from '../components/CoachChat';
 import { getScanStatus } from '../services/scanLimitService';
-import { subjectInfo } from '../utils/subjects';
+import { subjectInfo, subjectMascot } from '../utils/subjects';
 import './Analyse.css';
 
 // ─── Mock de fallback ────────────────────────────────────────────────
@@ -256,7 +256,6 @@ export default function Analyse() {
 
       <PageHeader
         variant="back"
-        title="Ta leçon"
         // Retour contextuel : jamais vers la caméra quand on consulte une
         // leçon depuis Home/Cours (Scan démarre getUserMedia au mount).
         onBack={() => (window.history.state?.idx > 0 ? navigate(-1) : navigate('/cours'))}
@@ -265,14 +264,13 @@ export default function Analyse() {
       {/* ── Content ── */}
       <div className={`content analyse-content${(isLoading || error) ? ' analyse-content--hidden' : ''}`}>
 
-        {/* Hero présence — mascotte dominante style Home, parle direct à l'utilisateur */}
-        <HeroCTA
-          tone="orange"
-          mascot="pointing"
-          eyebrow={displayLesson.subject}
+        {/* Intro façon Home — titre de la leçon, matière, mascotte de la matière */}
+        <PageIntro
           title={displayLesson.title}
-          sub="Choisis ton format préféré — j'ai tout préparé."
-          className="analyse-hero-cta"
+          sub={`${displayLesson.subject} · choisis ton format`}
+          mascot={subjectMascot(displayLesson.subject)}
+          mascotSize={140}
+          className="analyse-intro"
         />
 
         {/* Résumé / excerpt */}

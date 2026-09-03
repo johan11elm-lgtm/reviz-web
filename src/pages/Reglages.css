@@ -14,6 +14,9 @@
   gap: 16px;
 }
 
+/* ── Intro (PageIntro) : dans la zone de scroll, qui porte la gouttière ── */
+.reglages-page .rg-intro { padding: 0 0 2px; }
+
 /* ── Sections ── */
 .reglages-page .rg-section {
   display: flex;
