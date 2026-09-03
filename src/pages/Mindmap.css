@@ -11,11 +11,16 @@
   padding: 2px 0 8px;
 }
 
-/* ── Canvas explorable ───────────────────────────────────────────── */
-.mindmap-page .mindmap-canvas {
+/* ── Scène : la carte explorable et, par-dessus, la vue d'une branche ── */
+.mindmap-page .mindmap-stage {
   position: relative;
   flex: 1;
   min-height: 0;
+}
+
+.mindmap-page .mindmap-canvas {
+  position: absolute;
+  inset: 0;
   overflow: hidden;
   touch-action: none;
 }
@@ -279,92 +284,131 @@
   overflow-wrap: anywhere;
 }
 
-/* ── Bottom sheet — conventions .rv-sheet ────────────────────────── */
-.mindmap-page .detail-sheet {
+/* ── Vue branche — la branche zoome par-dessus la carte ─────────── */
+.mindmap-page .mindmap-focus {
   position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: var(--bg-card);
-  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-  padding: 0 22px calc(20px + env(safe-area-inset-bottom, 0px));
-  transform: translateY(100%);
-  transition: transform 0.32s cubic-bezier(0.4, 0, 0.2, 1);
-  z-index: 20;
-  box-shadow: 0 -8px 28px rgba(0, 0, 0, 0.12);
-  /* Le contenu (detail long, nombreux chips) scrolle au lieu de pousser
-     le CTA hors écran sur les petits viewports. */
-  max-height: min(55%, 420px);
-  display: flex;
-  flex-direction: column;
-}
-
-.mindmap-page .detail-sheet--open { transform: translateY(0); }
-.mindmap-page .detail-sheet--collapsed { transform: translateY(calc(100% - 30px)); }
-.mindmap-page .detail-sheet--dragging { transition: none !important; }
-
-/* Poignée : zone de saisie généreuse (44px de haut), barre fine dedans */
-.mindmap-page .sheet-handle {
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 30px;
-  margin-bottom: 4px;
-  cursor: grab;
-  touch-action: none;
-}
-.mindmap-page .sheet-handle:active { cursor: grabbing; }
-.mindmap-page .sheet-handle-bar {
-  width: 36px;
-  height: 4px;
-  background: var(--border);
-  border-radius: 2px;
-}
-
-.mindmap-page .sheet-content {
+  inset: 0;
+  z-index: 15;
+  background: var(--bg-app);
   overflow-y: auto;
-  min-height: 0;
   -webkit-overflow-scrolling: touch;
   overscroll-behavior: contain;
-}
-
-.mindmap-page .detail-header {
+  padding: 6px var(--page-gutter) calc(24px + env(safe-area-inset-bottom, 0px));
   display: flex;
-  gap: 12px;
-  align-items: flex-start;
-  margin-bottom: 12px;
+  flex-direction: column;
+  gap: 14px;
+  animation: focusIn 0.28s cubic-bezier(0.2, 0.9, 0.3, 1);
+}
+@keyframes focusIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: none; }
 }
 
-.mindmap-page .detail-emoji-wrap {
-  font-size: 22px;
-  width: 46px;
-  height: 46px;
-  border-radius: 14px;
+.mindmap-page .focus-top {
   display: flex;
   align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
+  justify-content: space-between;
 }
-
-.mindmap-page .detail-info { display: flex; flex-direction: column; gap: 4px; flex: 1; }
-.mindmap-page .detail-title {
-  font-family: 'Geist', sans-serif;
-  font-size: 17px;
-  font-weight: 800;
-  letter-spacing: -0.5px;
-}
-.mindmap-page .detail-text  { font-size: 13px; color: var(--text-secondary); line-height: 1.55; }
-
-.mindmap-page .detail-chips { display: flex; flex-wrap: wrap; gap: 6px; }
-.mindmap-page .chip {
-  font-size: 12px;
-  font-weight: 600;
-  padding: 6px 12px;
+.mindmap-page .focus-back {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-card);
   border-radius: var(--radius-pill);
+  padding: 9px 14px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-primary);
+  cursor: pointer;
+}
+.mindmap-page .focus-back:active { transform: scale(0.96); }
+.mindmap-page .focus-pos {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-muted);
+  letter-spacing: 0.3px;
 }
 
-.mindmap-page .detail-cta { margin-top: 14px; justify-content: center; }
+/* La carte de la branche, agrandie */
+.mindmap-page .focus-card {
+  background: var(--bg-card);
+  border: 1.5px solid var(--branch-color);
+  border-radius: 22px;
+  padding: 16px 18px 18px;
+  box-shadow: var(--shadow-pop);
+}
+.mindmap-page .focus-title {
+  font-family: 'Geist', sans-serif;
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -0.6px;
+  line-height: 1.15;
+  color: var(--text-primary);
+  margin: 10px 0 6px;
+  overflow-wrap: anywhere;
+}
+.mindmap-page .focus-detail {
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+/* Les idées : un petit arbre sous la carte (tronc + brindilles) */
+.mindmap-page .focus-tree {
+  list-style: none;
+  margin: 0;
+  padding: 2px 0 0 24px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.mindmap-page .focus-tree::before {
+  content: '';
+  position: absolute;
+  left: 9px;
+  top: -10px;
+  bottom: 22px;
+  width: 3px;
+  border-radius: 2px;
+  background: var(--branch-color);
+  opacity: 0.35;
+}
+.mindmap-page .focus-leaf {
+  position: relative;
+  background: var(--branch-bg);
+  color: var(--branch-ink);
+  border-radius: 14px;
+  padding: 12px 14px;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.35;
+  animation: leafIn 0.32s both;
+}
+.mindmap-page .focus-leaf::before {
+  content: '';
+  position: absolute;
+  left: -15px;
+  top: 50%;
+  width: 15px;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--branch-color);
+  opacity: 0.5;
+}
+@keyframes leafIn {
+  from { opacity: 0; transform: translateX(-8px); }
+  to   { opacity: 1; transform: none; }
+}
+
+.mindmap-page .focus-actions {
+  margin-top: auto;
+  padding-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
 
 /* ── Écran de fin — overlay dans le shell, comme Flashcards ─────── */
 .mindmap-page .mindmap-end-screen {

@@ -1,6 +1,6 @@
 import { subjectMascot } from '../utils/subjects'
 import { PageIntro } from '../components/PageIntro'
-import { ChatIcon, MindmapIcon } from '../components/Icons'
+import { ChatIcon } from '../components/Icons'
 import { useState, useRef, useEffect, useMemo } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useTheme } from '../context/ThemeContext'
@@ -114,10 +114,7 @@ function MindmapSession() {
   const pointerStart = useRef(null)
   const lastPinch    = useRef(null)
 
-  const [selectedBranch, setSelectedBranch] = useState(null)
-  const [sheetCollapsed, setSheetCollapsed] = useState(false)
-  const [sheetDragY, setSheetDragY]         = useState(0)   // offset pendant le drag
-  const sheetDragStart                      = useRef(null)  // { startY, wasCollapsed }
+  const [focusId, setFocusId]               = useState(null)  // branche ouverte en vue détail
   const [visitedIds, setVisitedIds]         = useState(() => new Set())
   const [allExplored, setAllExplored]       = useState(false)
   const [showEnd, setShowEnd]               = useState(false)
@@ -159,23 +156,21 @@ function MindmapSession() {
     return () => el.removeEventListener('wheel', onWheel)
   }, [])
 
+  // Ouvre une branche en vue détail (par-dessus la carte) et la marque explorée.
   function handleSelectBranch(id) {
-    if (selectedBranch === id) { setSheetCollapsed(c => !c); return }
-    const branch = mindmapData.branches.find(b => b.id === id)
     const next = new Set([...visitedIds, id])
     setVisitedIds(next)
-    setSelectedBranch(id)
-    setSheetCollapsed(false)
+    setFocusId(id)
     if (next.size === mindmapData.branches.length) setAllExplored(true)
-    if (branch?.position?.includes('bottom')) {
-      const pos = getPositions(W, H)[branch.position]
-      const SHEET_H = 210
-      const targetY = H - SHEET_H - 36
-      const panY = -(pos.y - targetY)
-      setOffset(o => ({ x: o.x, y: Math.min(0, panY) }))
-    } else {
-      setOffset(o => ({ x: o.x, y: 0 }))
-    }
+  }
+  function closeFocus() { setFocusId(null) }
+  // Branche suivante : la première non explorée après la courante, sinon la suivante.
+  function nextBranch() {
+    const list = mindmapData.branches
+    const i = list.findIndex(b => b.id === focusId)
+    const order = [...list.slice(i + 1), ...list.slice(0, i + 1)]
+    const target = order.find(b => !visitedIds.has(b.id)) ?? order[0]
+    if (target) handleSelectBranch(target.id)
   }
 
   function handlePointerDown(e) {
@@ -231,42 +226,16 @@ function MindmapSession() {
 
   function resetView() { setScale(INIT_SCALE); setOffset({ x: 0, y: 0 }) }
   function restartMindmap() {
-    setVisitedIds(new Set()); setSelectedBranch(null)
-    setSheetCollapsed(false); setSheetDragY(0)
+    setVisitedIds(new Set()); setFocusId(null)
     setAllExplored(false); setShowEnd(false); resetView()
-  }
-
-  // ── Drag poignée ──
-  function onHandlePointerDown(e) {
-    e.stopPropagation()
-    e.currentTarget.setPointerCapture(e.pointerId)
-    sheetDragStart.current = { startY: e.clientY, wasCollapsed: sheetCollapsed }
-  }
-  function onHandlePointerMove(e) {
-    if (!sheetDragStart.current) return
-    e.stopPropagation()
-    const dy = e.clientY - sheetDragStart.current.startY
-    setSheetDragY(Math.max(-10, dy))
-  }
-  function onHandlePointerUp(e) {
-    if (!sheetDragStart.current) return
-    e.stopPropagation()
-    const dy = e.clientY - sheetDragStart.current.startY
-    // snap : si tiré vers le bas > 60px → collapse, sinon open
-    if (sheetDragStart.current.wasCollapsed) {
-      setSheetCollapsed(dy > -40 ? true : false)
-    } else {
-      setSheetCollapsed(dy > 60)
-    }
-    setSheetDragY(0)
-    sheetDragStart.current = null
   }
 
   const { W, H } = dims
   const isViewMoved  = Math.abs(offset.x) > 5 || Math.abs(offset.y) > 5 || Math.abs(scale - INIT_SCALE) > 0.05
   const positions    = getPositions(W, H)
   const cx = W / 2, cy = H / 2
-  const activeBranch = mindmapData.branches.find(b => b.id === selectedBranch)
+  const focusBranch = mindmapData.branches.find(b => b.id === focusId)
+  const focusIndex  = mindmapData.branches.findIndex(b => b.id === focusId)
   const totalChildren = mindmapData.branches.reduce((acc, b) => acc + b.children.length, 0)
 
   const progressDots = (
@@ -360,7 +329,8 @@ function MindmapSession() {
 
       <div className="mindmap-ai-row"><span className="ai-badge">✦ Généré par IA</span></div>
 
-      {/* ── Canvas ── */}
+      {/* ── Scène : carte explorable, et la vue branche par-dessus quand on en ouvre une ── */}
+      <div className="mindmap-stage">
       <div
         className="mindmap-canvas"
         ref={canvasRef}
@@ -373,7 +343,7 @@ function MindmapSession() {
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
       >
-        {!activeBranch && (
+        {!focusBranch && (
           <div className="canvas-hint">
             <span className="canvas-hint-text">Appuie sur une branche</span>
           </div>
@@ -417,12 +387,9 @@ function MindmapSession() {
             {mindmapData.branches.map((branch, i) => {
               const pos = positions[branch.position]
               if (!pos) return null
-              const isSelected = selectedBranch === branch.id
+              const isSelected = focusId === branch.id
               const isVisited  = visitedIds.has(branch.id)
-              const hasSelect  = selectedBranch !== null
-              const opacity    = hasSelect
-                ? (isSelected ? 1 : 0.08)
-                : (isVisited ? 0.85 : 0.5)
+              const opacity    = isVisited ? 0.9 : 0.55
               // Courbe en S verticale : sort du nœud central vers le haut ou le
               // bas, arrive à la verticale au milieu du bord de la carte qui lui
               // fait face (jamais sous la carte).
@@ -469,7 +436,7 @@ function MindmapSession() {
           {mindmapData.branches.map((branch, i) => {
             const pos = positions[branch.position]
             if (!pos) return null
-            const isSelected = selectedBranch === branch.id
+            const isSelected = focusId === branch.id
             const isVisited  = visitedIds.has(branch.id)
             return (
               <button
@@ -501,58 +468,66 @@ function MindmapSession() {
         </div>
       </div>
 
-      {/* ── Bottom sheet ── */}
-      <div
-        className={`detail-sheet${activeBranch ? ' detail-sheet--open' : ''}${sheetCollapsed ? ' detail-sheet--collapsed' : ''}${sheetDragY !== 0 ? ' detail-sheet--dragging' : ''}`}
-        style={sheetDragY !== 0 ? { transform: `translateY(${sheetCollapsed ? `calc(100% - 30px + ${sheetDragY}px)` : `${Math.max(0, sheetDragY)}px`})` } : {}}
-      >
+      {/* ── Vue branche : la branche zoome, son explication et ses idées en arbre ── */}
+      {focusBranch && (
         <div
-          className="sheet-handle"
-          onPointerDown={onHandlePointerDown}
-          onPointerMove={onHandlePointerMove}
-          onPointerUp={onHandlePointerUp}
-          onPointerCancel={onHandlePointerUp}
+          key={focusBranch.id}
+          className="mindmap-focus"
+          style={{
+            '--branch-color': isDark ? focusBranch.colorDark : focusBranch.color,
+            '--branch-bg':    isDark ? focusBranch.bgDark    : focusBranch.bgLight,
+            '--branch-ink':   isDark ? focusBranch.colorDark : focusBranch.colorLight,
+          }}
         >
-          <span className="sheet-handle-bar" />
-        </div>
-        {activeBranch && (
-          <div className="sheet-content">
-            <div className="detail-header">
-              <span
-                className="detail-emoji-wrap"
-                style={{ background: isDark ? activeBranch.bgDark : activeBranch.bgLight, color: isDark ? activeBranch.colorDark : activeBranch.colorLight }}
-              >
-                <MindmapIcon />
+          <div className="focus-top">
+            <button type="button" className="focus-back" onClick={closeFocus}>
+              ← Carte
+            </button>
+            <span className="focus-pos">{focusIndex + 1} / {mindmapData.branches.length}</span>
+          </div>
+
+          <div className="focus-card">
+            <span className="bn-top">
+              <span className="bn-index" aria-hidden="true">{focusIndex + 1}</span>
+              <span className="bn-count">
+                {focusBranch.children.length} {focusBranch.children.length > 1 ? 'idées' : 'idée'}
               </span>
-              <div className="detail-info">
-                <div
-                  className="detail-title"
-                  style={{ color: isDark ? activeBranch.colorDark : activeBranch.colorLight }}
-                >
-                  {activeBranch.label}
-                </div>
-                <div className="detail-text">{activeBranch.detail}</div>
-              </div>
-            </div>
-            <div className="detail-chips">
-              {activeBranch.children.map((child, i) => (
-                <span
-                  key={i}
-                  className="chip"
-                  style={{
-                    background: isDark ? activeBranch.bgDark  : activeBranch.bgLight,
-                    color:      isDark ? activeBranch.colorDark : activeBranch.colorLight,
-                  }}
-                >{child}</span>
+              <span className="bn-check" aria-label="explorée"><CheckIcon /></span>
+            </span>
+            <h3 className="focus-title">{focusBranch.label}</h3>
+            {focusBranch.detail && <p className="focus-detail">{focusBranch.detail}</p>}
+          </div>
+
+          {focusBranch.children.length > 0 && (
+            <ul className="focus-tree">
+              {focusBranch.children.map((child, i) => (
+                <li key={i} className="focus-leaf" style={{ animationDelay: `${120 + i * 70}ms` }}>
+                  {child}
+                </li>
               ))}
-            </div>
-            {allExplored && (
-              <button type="button" className="rv-btn-cta rv-btn-cta--full detail-cta" onClick={() => setShowEnd(true)}>
-                <span>J'ai tout exploré !</span>
+            </ul>
+          )}
+
+          <div className="focus-actions">
+            {allExplored ? (
+              <>
+                <button type="button" className="rv-btn-cta rv-btn-cta--full rv-btn-cta--center" onClick={() => setShowEnd(true)}>
+                  <span>J'ai tout exploré</span>
+                </button>
+                <button type="button" className="rv-btn-cta rv-btn-cta--full rv-btn-cta--ghost" onClick={nextBranch}>
+                  <span>Branche suivante</span>
+                  <span className="rv-btn-cta-arrow" aria-hidden="true">→</span>
+                </button>
+              </>
+            ) : (
+              <button type="button" className="rv-btn-cta rv-btn-cta--full" onClick={nextBranch}>
+                <span>Branche suivante</span>
+                <span className="rv-btn-cta-arrow" aria-hidden="true">→</span>
               </button>
             )}
           </div>
-        )}
+        </div>
+      )}
       </div>
 
       {coachOpen && coachLessonId && (
