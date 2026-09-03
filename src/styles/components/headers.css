@@ -265,8 +265,8 @@
 .rv-page-intro-sub { margin-top: 6px; }
 .rv-page-intro-mascot {
   flex-shrink: 0;
-  margin-right: -6px;
-  margin-bottom: -4px;
+  margin-right: -12px;
+  margin-bottom: -6px;
   filter: drop-shadow(0 12px 22px rgba(232, 101, 26, 0.24));
 }
 @media (max-width: 430px) {
