@@ -1,3 +1,4 @@
+import { PageIntro } from '../components/PageIntro';
 import { UserIcon, FlameIcon, BookIcon, BoltIcon } from '../components/Icons';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -101,7 +102,6 @@ export default function Profile() {
     <div className="app profile-page">
       <PageHeader
         variant="title-only"
-        title="Profil"
         right={
           <button
             type="button"
@@ -115,27 +115,27 @@ export default function Profile() {
       />
 
       <div className="pf-content">
-        {/* HERO centré — identité + progression en un seul bloc */}
-        <section className="pf-hero">
-          <Mascot
-            pose={heroPose}
-            size={112}
-            glow
-            priority
-            className="pf-hero-mascot"
-          />
-          <h1 className="pf-hero-name">{prenom || 'Toi'}</h1>
-          <div className="pf-hero-meta">
-            <span className="rv-pill rv-pill--violet pf-hero-pill">Niveau {level}</span>
-            {levelLabel && <span className="pf-hero-classe">{levelLabel}</span>}
-          </div>
-          <div className="pf-hero-xp">
-            <div className="rv-bar rv-bar--tall rv-bar--violet-bg">
-              <div className="rv-bar-fill rv-bar-fill--violet" style={{ width: `${fillPct}%` }} />
+        {/* Intro façon Home — prénom en titre, niveau · classe, XP, mascotte à droite */}
+        <PageIntro
+          title={prenom || 'Toi'}
+          sub={`Niveau ${level}${levelLabel ? ` · ${levelLabel}` : ''}`}
+          mascot={heroPose}
+          className="pf-intro"
+        >
+          <div className="pf-intro-xp">
+            <div
+              className="rv-bar rv-bar--tall pf-intro-bar"
+              role="progressbar"
+              aria-label={`${xpInLvl} XP sur ${XP_PAR_NIVEAU} pour passer au niveau ${level + 1}`}
+              aria-valuemin={0}
+              aria-valuemax={XP_PAR_NIVEAU}
+              aria-valuenow={xpInLvl}
+            >
+              <div className="rv-bar-fill rv-bar-fill--orange" style={{ width: `${fillPct}%` }} />
             </div>
             <p className="pf-xp-sub">{xpInLvl} / {XP_PAR_NIVEAU} XP</p>
           </div>
-        </section>
+        </PageIntro>
 
         {/* Stats — une seule carte, trois colonnes */}
         <section className="rv-card rv-card--padded pf-stats-card">

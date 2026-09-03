@@ -12,14 +12,16 @@ import { Mascot } from './Mascot';
  * @param {string} [props.mascot]          — pose de mascotte (omise : pas d'illustration)
  * @param {number} [props.mascotSize=132]
  * @param {string} [props.className]
+ * @param {React.ReactNode} [props.children] — bloc optionnel sous le sous-titre (barre d'XP…)
  */
-export function PageIntro({ title, sub, mascot, mascotSize = 132, className = '' }) {
+export function PageIntro({ title, sub, mascot, mascotSize = 132, className = '', children }) {
   const classes = ['rv-page-intro', className].filter(Boolean).join(' ');
   return (
     <div className={classes}>
       <div className="rv-page-intro-text">
         <h1 className="rv-greeting-title rv-page-intro-title">{title}</h1>
         {sub && <p className="rv-greeting-sub rv-page-intro-sub">{sub}</p>}
+        {children}
       </div>
       {mascot && (
         <Mascot
