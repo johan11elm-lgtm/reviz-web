@@ -1,21 +1,23 @@
+import { CameraIcon, SparkIcon, TrophyIcon, ResumeIcon, FlashcardsIcon, MindmapIcon, QuizIcon } from '../components/Icons';
 import { Link } from 'react-router-dom';
 import { Mascot } from '../components/Mascot';
 import './Welcome.css';
 
 const STEPS = [
-  { icon: '📸', tone: 'orange', num: '1', title: 'Scanne',        desc: 'Photo ou texte de ta leçon — ça suffit.' },
-  { icon: '🤖', tone: 'violet', num: '2', title: "L'IA analyse",  desc: 'Flashcards, quiz, résumé et carte mentale en quelques secondes.' },
-  { icon: '🏆', tone: 'green',  num: '3', title: 'Révise',        desc: 'Retiens vraiment. Progresse. Bats tes records.' },
+  { icon: <CameraIcon />, tone: 'orange', num: '1', title: 'Scanne',        desc: 'Photo ou texte de ta leçon — ça suffit.' },
+  { icon: <SparkIcon />,  tone: 'violet', num: '2', title: "L'IA analyse",  desc: 'Flashcards, quiz, résumé et carte mentale en quelques secondes.' },
+  { icon: <TrophyIcon />, tone: 'green',  num: '3', title: 'Révise',        desc: 'Retiens vraiment. Progresse. Bats tes records.' },
 ];
 
 const FORMATS = [
-  { icon: '📝', tone: 'green',  label: 'Résumé' },
-  { icon: '🃏', tone: 'violet', label: 'Flashcards' },
-  { icon: '🧠', tone: 'pink',   label: 'Carte mentale' },
-  { icon: '❓', tone: 'orange', label: 'Quiz' },
+  { icon: <ResumeIcon />,     tone: 'green',  label: 'Résumé' },
+  { icon: <FlashcardsIcon />, tone: 'violet', label: 'Flashcards' },
+  { icon: <MindmapIcon />,    tone: 'pink',   label: 'Carte mentale' },
+  { icon: <QuizIcon />,       tone: 'orange', label: 'Quiz' },
 ];
 
-const SUBJECTS = ['📐', '🧬', '📖', '⚛️', '🌍', '💻', '⚖️', '🤔', '🎨', '🏛️'];
+// Mascottes par matière (cf. utils/subjects.js) — bandeau décoratif.
+const SUBJECTS = ['maths', 'svt', 'francais', 'physique', 'histgeo', 'technonsi', 'philo', 'arts', 'langues'];
 
 export default function Welcome() {
   return (
@@ -52,7 +54,7 @@ export default function Welcome() {
               calibrés pour ton programme de collège ou de lycée.
             </p>
             <div className="wlc-subjects" aria-hidden="true">
-              {SUBJECTS.map((e, i) => <span key={i}>{e}</span>)}
+              {SUBJECTS.map(p => <Mascot key={p} pose={p} size={36} alt="" aria-hidden="true" />)}
             </div>
             <Link to="/inscription" className="rv-btn-cta rv-btn-cta--full wlc-cta-btn">
               Commencer gratuitement

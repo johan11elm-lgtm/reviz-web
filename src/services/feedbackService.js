@@ -1,6 +1,6 @@
 // -------------------------------------------------------
 // Réviz — Feedback élève sur les formats générés par l'IA
-// Un retour 👍/😐/👎 par (leçon, format), écrit dans la collection
+// Un retour utile / moyen / pas terrible par (leçon, format), écrit dans la collection
 // Firestore `aiFeedback` (création seule côté client — voir firestore.rules).
 // C'est la seule boucle de visibilité sur la qualité réelle des générations.
 // -------------------------------------------------------

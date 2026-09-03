@@ -1,3 +1,4 @@
+import { RefreshIcon, ChatIcon, StarIcon } from '../components/Icons'
 import { useState, useRef, useEffect, useMemo } from 'react'
 import { Link } from 'react-router-dom'
 import { recordRevision } from '../services/revisionService'
@@ -106,8 +107,8 @@ function ResumeContent() {
 
   const [shareDone, setShareDone] = useState(false)
   async function handleShare() {
-    const text = `📚 ${resumeData.title} (${resumeData.subject})\n\n`
-      + '⭐ À retenir :\n'
+    const text = `${resumeData.title} (${resumeData.subject})\n\n`
+      + 'À retenir :\n'
       + resumeData.keyPoints.map(p => `• ${p}`).join('\n')
       + '\n\n---\nGénéré avec Réviz'
     try {
@@ -173,11 +174,11 @@ function ResumeContent() {
           <FormatFeedback format="resume" question="Ce résumé t'a aidé ?" />
           <div className="rv-end-screen-actions">
             <button type="button" className="rv-btn-cta rv-btn-cta--full" onClick={restartResume}>
-              <span>🔄 Relire</span>
+              <span><RefreshIcon /> Relire</span>
             </button>
             {coachLessonId && (
               <button type="button" className="rv-btn-cta rv-btn-cta--full rv-btn-cta--ghost" onClick={() => setCoachOpen(true)}>
-                💬 Encore un doute ? Demande au coach
+                <ChatIcon /> Encore un doute ? Demande au coach
               </button>
             )}
             <Link className="rv-btn-cta rv-btn-cta--full rv-btn-cta--ghost" to="/analyse">
@@ -190,7 +191,7 @@ function ResumeContent() {
       <PageHeader
         variant="back"
         title="Résumé"
-        sub={`📖 ${resumeData.readingTime} min de lecture`}
+        sub={`${resumeData.readingTime} min de lecture`}
         right={coachLessonId
           ? <><CoachHeaderButton onClick={() => setCoachOpen(true)} />{shareBtn}</>
           : shareBtn}
@@ -214,7 +215,7 @@ function ResumeContent() {
         <HeroCTA
           tone="orange"
           mascot="reading"
-          eyebrow={`${info.emoji} ${resumeData.subject}`}
+          eyebrow={resumeData.subject}
           title={resumeData.title}
           className="resume-hero-cta"
         />
@@ -222,7 +223,7 @@ function ResumeContent() {
         {/* À retenir */}
         <div className="rv-callout rv-callout--violet resume-retenir">
           <span className="rv-callout-label">
-            <span aria-hidden="true">⭐</span> À retenir
+            <StarIcon /> À retenir
           </span>
           <p className="resume-retenir-intro">{nbsp(resumeData.intro)}</p>
           <div className="resume-retenir-points">

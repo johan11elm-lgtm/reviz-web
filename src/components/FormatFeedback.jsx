@@ -1,15 +1,16 @@
+import { ThumbUpIcon, MehIcon, ThumbDownIcon } from './Icons';
 import { useState } from 'react';
 import { hasGivenFeedback, sendFormatFeedback } from '../services/feedbackService';
 import './FormatFeedback.css';
 
 const OPTIONS = [
-  { rating: 'up',   emoji: '👍', label: 'Oui, utile' },
-  { rating: 'meh',  emoji: '😐', label: 'Moyen' },
-  { rating: 'down', emoji: '👎', label: 'Pas terrible' },
+  { rating: 'up',   icon: <ThumbUpIcon />,   label: 'Oui, utile' },
+  { rating: 'meh',  icon: <MehIcon />,       label: 'Moyen' },
+  { rating: 'down', icon: <ThumbDownIcon />, label: 'Pas terrible' },
 ];
 
 /**
- * Micro-sondage 👍/😐/👎 sur un format généré par l'IA.
+ * Micro-sondage utile / moyen / pas terrible sur un format généré par l'IA.
  * Un seul retour par (leçon, format) — masqué ensuite. L'envoi est
  * optimiste : l'élève voit toujours le merci, même hors-ligne.
  *
@@ -22,7 +23,7 @@ export function FormatFeedback({ format, question = 'Ce contenu t\'a aidé ?' })
   if (done === 'thanks') {
     return (
       <div className="format-feedback format-feedback--thanks" role="status">
-        Merci pour ton retour ! 💜
+        Merci pour ton retour !
       </div>
     );
   }
@@ -41,7 +42,7 @@ export function FormatFeedback({ format, question = 'Ce contenu t\'a aidé ?' })
             title={o.label}
             onClick={() => { sendFormatFeedback(format, o.rating); setDone('thanks'); }}
           >
-            <span aria-hidden="true">{o.emoji}</span>
+            <span aria-hidden="true">{o.icon}</span>
           </button>
         ))}
       </div>

@@ -38,7 +38,7 @@ export function computeLevel(lessons) {
 
 /**
  * Calcule les badges débloqués/verrouillés.
- * Chaque badge a un `id` unique pour le tracking.
+ * Chaque badge a un `id` unique pour le tracking et une `pose` de mascotte (illustration).
  */
 export function computeBadges(lessons, revisions, streak, level) {
   const types = new Set(revisions.map(r => r.type));
@@ -60,23 +60,23 @@ export function computeBadges(lessons, revisions, streak, level) {
   const isMaitre = Object.values(countByType).every(c => c >= 20);
 
   return [
-    { id: 'lanceur',      emoji: '🚀', label: 'Lanceur',      locked: lessons.length < 1 },
-    { id: 'curieux',      emoji: '⭐', label: 'Curieux',      locked: types.size < 3 },
-    { id: 'rapide',       emoji: '⚡', label: 'Rapide',       locked: revisions.length < 1 },
-    { id: 'etudiant',     emoji: '🎓', label: 'Étudiant',     locked: lessons.length < 5 },
-    { id: 'regulier',     emoji: '🔄', label: 'Régulier',     locked: streak < 3 },
-    { id: 'chercheur',    emoji: '🔬', label: 'Chercheur',    locked: totalFlashcards < 50 },
-    { id: 'precis',       emoji: '🎯', label: 'Précis',       locked: !allFormats },
-    { id: '7jours',       emoji: '🔥', label: '7 jours',      locked: streak < 7 },
-    { id: 'fidele',       emoji: '📅', label: 'Fidèle',       locked: streak < 14 },
-    { id: 'acharne',      emoji: '☕', label: 'Acharné',      locked: maxRevsInDay < 10 },
-    { id: 'expert',       emoji: '🧠', label: 'Expert',       locked: lessons.length < 10 },
-    { id: 'approfondi',   emoji: '💪', label: 'Approfondi',   locked: maxRevsPerLesson < 5 },
-    { id: 'maitre',       emoji: '⚙️', label: 'Maître',       locked: !isMaitre },
-    { id: 'champion',     emoji: '🏆', label: 'Champion',     locked: revisions.length < 50 },
-    { id: 'bibliotheque', emoji: '📚', label: 'Bibliothèque', locked: lessons.length < 50 },
-    { id: 'niveau10',     emoji: '👑', label: 'Niveau 10',    locked: level < 10 },
-    { id: 'diamant',      emoji: '💎', label: 'Diamant',      locked: lessons.length < 25 },
-    { id: 'legende',      emoji: '🌟', label: 'Légende',      locked: streak < 30 },
+    { id: 'lanceur',      pose: 'scanphone', label: 'Lanceur',      locked: lessons.length < 1 },
+    { id: 'curieux',      pose: 'thinking', label: 'Curieux',      locked: types.size < 3 },
+    { id: 'rapide',       pose: 'quiz', label: 'Rapide',       locked: revisions.length < 1 },
+    { id: 'etudiant',     pose: 'graduation', label: 'Étudiant',     locked: lessons.length < 5 },
+    { id: 'regulier',     pose: 'reading', label: 'Régulier',     locked: streak < 3 },
+    { id: 'chercheur',    pose: 'search', label: 'Chercheur',    locked: totalFlashcards < 50 },
+    { id: 'precis',       pose: 'examen', label: 'Précis',       locked: !allFormats },
+    { id: '7jours',       pose: 'fire', label: '7 jours',      locked: streak < 7 },
+    { id: 'fidele',       pose: 'retour', label: 'Fidèle',       locked: streak < 14 },
+    { id: 'acharne',      pose: 'soir', label: 'Acharné',      locked: maxRevsInDay < 10 },
+    { id: 'expert',       pose: 'flashcard', label: 'Expert',       locked: lessons.length < 10 },
+    { id: 'approfondi',   pose: 'muscu', label: 'Approfondi',   locked: maxRevsPerLesson < 5 },
+    { id: 'maitre',       pose: 'writing', label: 'Maître',       locked: !isMaitre },
+    { id: 'champion',     pose: 'trophy', label: 'Champion',     locked: revisions.length < 50 },
+    { id: 'bibliotheque', pose: 'francais', label: 'Bibliothèque', locked: lessons.length < 50 },
+    { id: 'niveau10',     pose: 'levelup', label: 'Niveau 10',    locked: level < 10 },
+    { id: 'diamant',      pose: 'celebration', label: 'Diamant',      locked: lessons.length < 25 },
+    { id: 'legende',      pose: 'pointing', label: 'Légende',      locked: streak < 30 },
   ];
 }

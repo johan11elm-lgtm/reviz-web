@@ -1,3 +1,4 @@
+import { RefreshIcon, ChatIcon, FlameIcon } from '../components/Icons'
 import { useState, useEffect, useMemo } from 'react'
 import { Link } from 'react-router-dom'
 import { recordRevision } from '../services/revisionService'
@@ -191,14 +192,14 @@ function FlashcardsSession() {
           <FormatFeedback format="flashcards" question="Ces cartes t'ont aidé ?" />
           <div className="rv-end-screen-actions">
             <button type="button" className="rv-btn-cta rv-btn-cta--full" onClick={restartDeck}>
-              <span>🔄 Recommencer</span>
+              <span><RefreshIcon /> Recommencer</span>
             </button>
             <button type="button" className="rv-btn-cta rv-btn-cta--full rv-btn-cta--ghost" onClick={handleShare}>
               {shareDone ? '✓ Copié !' : '↗ Partager les cartes'}
             </button>
             {coachLessonId && (
               <button type="button" className="rv-btn-cta rv-btn-cta--full rv-btn-cta--ghost" onClick={() => setCoachOpen(true)}>
-                💬 Encore un doute ? Demande au coach
+                <ChatIcon /> Encore un doute ? Demande au coach
               </button>
             )}
             <Link className="rv-btn-cta rv-btn-cta--full rv-btn-cta--ghost" to="/analyse">
@@ -222,7 +223,7 @@ function FlashcardsSession() {
       {/* ── Streak badge (animé) ── */}
       {showStreakBadge && (
         <div className="flashcards-streak-badge" aria-live="polite">
-          🔥 {streak} bonnes d'affilée
+          <FlameIcon /> {streak} bonnes d'affilée
         </div>
       )}
 
@@ -250,7 +251,7 @@ function FlashcardsSession() {
                 <span className="flashcards-face-tag">Question</span>
                 <span className="flashcards-face-text">{nbsp(card.front)}</span>
                 {!isFlipped && current === 0 && (
-                  <span className="flashcards-face-hint">👆 Appuie pour révéler</span>
+                  <span className="flashcards-face-hint">Appuie pour révéler</span>
                 )}
               </div>
 

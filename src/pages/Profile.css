@@ -524,3 +524,10 @@
   .profile-page .pf-stat-value { font-size: 22px; }
   .profile-page .pf-badge-emoji { font-size: 20px; }
 }
+
+/* Icônes de stats (vectorielles) : teintées, à la taille de l'ancien emoji */
+.profile-page .pf-stat-icon--orange { color: var(--accent-orange); }
+.profile-page .pf-stat-icon--violet { color: var(--accent-violet); }
+.profile-page .pf-stat-icon--green  { color: var(--accent-green-strong); }
+/* Badges : mascotte, en gris tant que le badge est verrouillé */
+.profile-page .pf-badge--locked .pf-badge-emoji { filter: grayscale(1); opacity: 0.45; }

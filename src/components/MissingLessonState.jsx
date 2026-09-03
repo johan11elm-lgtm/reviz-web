@@ -27,7 +27,7 @@ export function MissingLessonState({ title }) {
             Scanne une leçon pour générer tes supports de révision.
           </p>
           <Link className="rv-btn-cta" to="/scan">
-            <span>📸 Scanner une leçon</span>
+            <span>Scanner une leçon</span>
           </Link>
         </div>
       </div>

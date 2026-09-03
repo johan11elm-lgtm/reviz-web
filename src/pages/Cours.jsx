@@ -1,3 +1,4 @@
+import { SearchIcon, FlameIcon, FlashcardsIcon, QuizIcon, BookOpenIcon } from '../components/Icons';
 import { useState, useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { BottomNav } from '../components/BottomNav';
@@ -66,7 +67,7 @@ export default function Cours() {
   const subjects = buildSubjectsFromHistory(allLessons);
   const filters  = [
     { id: 'toutes', label: 'Toutes' },
-    ...subjects.map(s => ({ id: s.id, label: s.name, emoji: s.emoji })),
+    ...subjects.map(s => ({ id: s.id, label: s.name })),
   ];
 
   const q = searchQuery.toLowerCase().trim();
@@ -103,13 +104,12 @@ export default function Cours() {
   const lastSubjectTone = lastLesson
     ? (SUBJECT_TONE[subjectInfo(lastLesson.metadata.subject).color] ?? 'violet')
     : 'violet';
-  const lastEmoji = lastLesson ? subjectInfo(lastLesson.metadata.subject).emoji : '📚';
   const lastDue = lastLesson ? countDueCards(lastLesson.id, lastLesson.flashcardsCount ?? 0) : 0;
 
-  // Hero narratif — la bulle ne parle que s'il y a quelque chose à faire
+  // Hero narratif — le coach parle toujours : cartes dues, sinon félicitations
   const heroPhrase = dueCards > 0
-    ? `${dueCards} carte${dueCards > 1 ? 's' : ''} t'attend${dueCards > 1 ? 'ent' : ''} 🔥`
-    : null;
+    ? `${dueCards} carte${dueCards > 1 ? 's' : ''} t'attend${dueCards > 1 ? 'ent' : ''}`
+    : 'Tout est révisé, tu gères.';
 
   // Collapse/expand par matière — tout fermé par défaut, l'user ouvre ce qu'il veut
   const [expandedSubjects, setExpandedSubjects] = useState(new Set());
@@ -138,9 +138,7 @@ export default function Cours() {
             <div className="cours-narrator-content">
               <h1 className="cours-narrator-title">Mes cours</h1>
               {heroPhrase && (
-                <div className="rv-speech-bubble rv-speech-bubble--pointer-right cours-narrator-bubble">
-                  {heroPhrase}
-                </div>
+                <p className="cours-narrator-sub">{heroPhrase}</p>
               )}
             </div>
             <Mascot
@@ -160,7 +158,7 @@ export default function Cours() {
       {!showSkeleton && (
       <div className="cours-search-wrap">
         <div className="rv-card rv-card--tight cours-search">
-          <span className="cours-search-icon" aria-hidden="true">🔍</span>
+          <span className="cours-search-icon" aria-hidden="true"><SearchIcon /></span>
           <input
             className="cours-search-input"
             type="text"
@@ -192,7 +190,6 @@ export default function Cours() {
                 className={`cours-filter-chip${activeFilter === f.id ? ' cours-filter-chip--active' : ''}`}
                 onClick={() => setActiveFilter(f.id)}
               >
-                {f.emoji && f.id !== 'toutes' && <span className="cours-chip-emoji" aria-hidden="true">{f.emoji}</span>}
                 {f.label}
               </button>
             ))}
@@ -218,14 +215,14 @@ export default function Cours() {
                 <div className="cours-resume-label">À reprendre</div>
                 <div className="cours-resume-info">
                   <span className={`rv-icon-square rv-icon-square--${lastSubjectTone} cours-resume-icon`}>
-                    {lastEmoji}
+                    <BookOpenIcon />
                   </span>
                   <div className="cours-resume-text">
                     <span className="cours-resume-title">{lastLesson.metadata.title}</span>
                     <span className="cours-resume-meta">
                       {lastLesson.metadata.subject} · {formatDate(lastLesson.scannedAt)}
                       {lastDue > 0 && (
-                        <span className="cours-resume-due"> · 🔥 {lastDue} à revoir</span>
+                        <span className="cours-resume-due"> · {lastDue} à revoir</span>
                       )}
                     </span>
                   </div>
@@ -299,7 +296,7 @@ export default function Cours() {
                 className="rv-btn-cta"
                 onClick={() => navigate('/scan')}
               >
-                <span>📸 Scanner une leçon</span>
+                <span>Scanner une leçon</span>
                 <span className="rv-btn-cta-arrow" aria-hidden="true">→</span>
               </button>
             )}
@@ -326,7 +323,7 @@ export default function Cours() {
                   aria-controls={`cours-subject-list-${subject.id}`}
                 >
                   <div className={`rv-icon-square rv-icon-square--xl rv-icon-square--${tone} cours-subject-icon`}>
-                    {subject.emoji}
+                    <Mascot pose={subject.mascot ?? 'reading'} size={40} alt="" aria-hidden="true" />
                   </div>
                   <div className="cours-subject-info">
                     <span className="cours-subject-name">{subject.name}</span>
@@ -336,7 +333,7 @@ export default function Cours() {
                   </div>
                   {subjectDue > 0 && (
                     <span className="rv-pill rv-pill--orange cours-subject-due-pill">
-                      🔥 {subjectDue}
+                      <FlameIcon /> {subjectDue}
                     </span>
                   )}
                   <svg
@@ -378,7 +375,7 @@ export default function Cours() {
                     >
                       <div className="cours-lesson-main">
                         <div className={`rv-icon-square rv-icon-square--xl rv-icon-square--${tone}`}>
-                          {subject.emoji}
+                          <Mascot pose={subject.mascot ?? 'reading'} size={40} alt="" aria-hidden="true" />
                         </div>
                         <div className="cours-lesson-body">
                           <div className="cours-lesson-top">
@@ -397,17 +394,17 @@ export default function Cours() {
                             <span className="cours-lesson-meta-date">{formatDate(lesson.scannedAt)}</span>
                             {fcTotal > 0 && (
                               <span className="cours-lesson-meta-item">
-                                <span aria-hidden="true">🃏</span> {fcTotal}
+                                <FlashcardsIcon /> {fcTotal}
                               </span>
                             )}
                             {qzTotal > 0 && (
                               <span className="cours-lesson-meta-item">
-                                <span aria-hidden="true">❓</span> {qzTotal}
+                                <QuizIcon /> {qzTotal}
                               </span>
                             )}
                             {fcDue > 0 && (
                               <span className="rv-pill rv-pill--orange cours-lesson-due-pill">
-                                🔥 {fcDue}
+                                <FlameIcon /> {fcDue}
                               </span>
                             )}
                           </div>

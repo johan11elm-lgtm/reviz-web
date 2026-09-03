@@ -1,3 +1,4 @@
+import { MailIcon } from '../components/Icons';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
@@ -44,7 +45,7 @@ export default function VerifyEmail() {
 
   return (
     <div className="app ve-page">
-      <div className="ve-icon">📬</div>
+      <div className="ve-icon"><MailIcon /></div>
       <h1 className="ve-title">Vérifie ton email</h1>
       <p className="ve-sub">
         On a envoyé un lien de confirmation à<br />

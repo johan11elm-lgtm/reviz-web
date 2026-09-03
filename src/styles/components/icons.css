@@ -32,3 +32,14 @@
 .rv-icon-square--green  { background: var(--accent-green-soft);  color: var(--accent-green-ink); }
 .rv-icon-square--pink   { background: var(--accent-pink-soft);   color: var(--accent-pink-ink); }
 .rv-icon-square--red    { background: var(--accent-red-soft);    color: var(--accent-red-ink); }
+
+/* Icônes vectorielles (src/components/Icons.jsx) : 1em, alignées sur le texte.
+   Elles héritent la taille du conteneur, là où un emoji était dimensionné
+   par font-size. Dans un .rv-icon-square, la taille est fixée ci-dessus. */
+.rv-ico {
+  width: 1em;
+  height: 1em;
+  display: inline-block;
+  vertical-align: -0.15em;
+  flex-shrink: 0;
+}

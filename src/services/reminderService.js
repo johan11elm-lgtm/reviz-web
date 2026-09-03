@@ -31,17 +31,17 @@ function savePref(enabled) {
 export function reminderBody(dueCount) {
   if (dueCount > 0) {
     return dueCount > 1
-      ? `${dueCount} cartes t'attendent pour garder ta série 🔥`
-      : `1 carte t'attend pour garder ta série 🔥`
+      ? `${dueCount} cartes t'attendent pour garder ta série`
+      : `1 carte t'attend pour garder ta série`
   }
-  return 'Cinq minutes de révision et ta série continue 🔥'
+  return 'Cinq minutes de révision et ta série continue'
 }
 
 async function scheduleDaily(dueCount) {
   await LocalNotifications.schedule({
     notifications: [{
       id: NOTIF_ID,
-      title: "C'est l'heure de réviser 🧠",
+      title: "C'est l'heure de réviser",
       body: reminderBody(dueCount),
       schedule: { on: { hour: REMINDER_HOUR, minute: REMINDER_MINUTE }, allowWhileIdle: true },
     }],

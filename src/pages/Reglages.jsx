@@ -1,3 +1,4 @@
+import { UserIcon, MailIcon, KeyIcon, BellIcon, MoonIcon, LockIcon, GemIcon, InfoIcon, ScaleIcon, FileTextIcon, ClipboardIcon, LogOutIcon, AlertIcon } from '../components/Icons';
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
@@ -213,7 +214,7 @@ export default function Reglages() {
               onClick={() => togglePanel('profil')}
               aria-expanded={activePanel === 'profil'}
             >
-              <span className="rv-icon-square rv-icon-square--violet" aria-hidden="true">👤</span>
+              <span className="rv-icon-square rv-icon-square--violet" aria-hidden="true"><UserIcon /></span>
               <span className="rg-row-text">
                 <span className="rg-row-label">Prénom et niveau</span>
                 <span className="rg-row-sub">{[prenom, levelLabel].filter(Boolean).join(' · ') || 'À compléter'}</span>
@@ -247,7 +248,7 @@ export default function Reglages() {
               onClick={() => togglePanel('email')}
               aria-expanded={activePanel === 'email'}
             >
-              <span className="rv-icon-square rv-icon-square--orange" aria-hidden="true">✉️</span>
+              <span className="rv-icon-square rv-icon-square--orange" aria-hidden="true"><MailIcon /></span>
               <span className="rg-row-text">
                 <span className="rg-row-label">Adresse e-mail</span>
                 <span className="rg-row-sub">{currentUser?.email}</span>
@@ -286,7 +287,7 @@ export default function Reglages() {
               onClick={() => togglePanel('password')}
               aria-expanded={activePanel === 'password'}
             >
-              <span className="rv-icon-square rv-icon-square--green" aria-hidden="true">🔑</span>
+              <span className="rv-icon-square rv-icon-square--green" aria-hidden="true"><KeyIcon /></span>
               <span className="rg-row-text">
                 <span className="rg-row-label">Mot de passe</span>
               </span>
@@ -326,7 +327,7 @@ export default function Reglages() {
           <h2 className="rg-section-title">Notifications</h2>
           <div className="rv-card rg-card">
             <div className="rg-toggle-row">
-              <span className="rv-icon-square rv-icon-square--orange" aria-hidden="true">🔔</span>
+              <span className="rv-icon-square rv-icon-square--orange" aria-hidden="true"><BellIcon /></span>
               <span className="rg-row-text">
                 <span className="rg-row-label">Rappel quotidien</span>
                 <span className="rg-row-sub">Tous les jours à 18 h 30</span>
@@ -358,7 +359,7 @@ export default function Reglages() {
           <h2 className="rg-section-title">Apparence</h2>
           <div className="rv-card rg-card">
             <div className="rg-toggle-row">
-              <span className="rv-icon-square rv-icon-square--violet" aria-hidden="true">🌙</span>
+              <span className="rv-icon-square rv-icon-square--violet" aria-hidden="true"><MoonIcon /></span>
               <span className="rg-row-text">
                 <span className="rg-row-label">Mode sombre</span>
               </span>
@@ -393,7 +394,7 @@ export default function Reglages() {
                       setTheme(t.id);
                     }}
                   >
-                    {locked && <span className="rg-theme-lock" aria-hidden="true">🔒</span>}
+                    {locked && <span className="rg-theme-lock" aria-hidden="true"><LockIcon /></span>}
                     <span className="rg-theme-name">{t.label}</span>
                   </button>
                 );
@@ -401,7 +402,7 @@ export default function Reglages() {
             </div>
             {themeLockedHint && (
               <p className="rg-hint" role="status">
-                💎 Les thèmes sont un avantage Réviz+ — débloque-les avec l'abonnement juste en dessous.
+                Les thèmes sont un avantage Réviz+ : débloque-les avec l'abonnement juste en dessous.
               </p>
             )}
           </div>
@@ -437,7 +438,7 @@ export default function Reglages() {
             <div className="rg-plan-row">
               <span className="rg-plan-label">Plan actuel</span>
               {isPremium
-                ? <span className="premium-chip premium-chip--active">💎 Réviz+ actif</span>
+                ? <span className="premium-chip premium-chip--active"><GemIcon /> Réviz+ actif</span>
                 : <span className="rg-plan-free">Gratuit</span>}
             </div>
             {isPremium ? (
@@ -456,7 +457,7 @@ export default function Reglages() {
                 onClick={handleUpgrade}
                 disabled={billingLoading}
               >
-                {billingLoading ? 'Ouverture…' : '✨ Passer à Réviz+'}
+                {billingLoading ? 'Ouverture…' : 'Passer à Réviz+'}
               </button>
             )}
             {billingError && <p className="rg-error" role="alert">{billingError}</p>}
@@ -473,7 +474,7 @@ export default function Reglages() {
               onClick={() => setAproposOpen(o => !o)}
               aria-expanded={aproposOpen}
             >
-              <span className="rv-icon-square rv-icon-square--violet" aria-hidden="true">ℹ️</span>
+              <span className="rv-icon-square rv-icon-square--violet" aria-hidden="true"><InfoIcon /></span>
               <span className="rg-row-text">
                 <span className="rg-row-label">À propos</span>
               </span>
@@ -488,7 +489,7 @@ export default function Reglages() {
             )}
 
             <Link to="/legal/mentions-legales" className="rg-row">
-              <span className="rv-icon-square rv-icon-square--green" aria-hidden="true">⚖️</span>
+              <span className="rv-icon-square rv-icon-square--green" aria-hidden="true"><ScaleIcon /></span>
               <span className="rg-row-text">
                 <span className="rg-row-label">Mentions légales</span>
               </span>
@@ -496,7 +497,7 @@ export default function Reglages() {
             </Link>
 
             <Link to="/legal/confidentialite" className="rg-row">
-              <span className="rv-icon-square rv-icon-square--orange" aria-hidden="true">📄</span>
+              <span className="rv-icon-square rv-icon-square--orange" aria-hidden="true"><FileTextIcon /></span>
               <span className="rg-row-text">
                 <span className="rg-row-label">Confidentialité</span>
               </span>
@@ -504,7 +505,7 @@ export default function Reglages() {
             </Link>
 
             <Link to="/legal/cgu" className="rg-row">
-              <span className="rv-icon-square rv-icon-square--pink" aria-hidden="true">📋</span>
+              <span className="rv-icon-square rv-icon-square--pink" aria-hidden="true"><ClipboardIcon /></span>
               <span className="rg-row-text">
                 <span className="rg-row-label">CGU</span>
               </span>
@@ -520,7 +521,7 @@ export default function Reglages() {
             className="rv-btn-cta rv-btn-cta--ghost rv-btn-cta--full rg-logout"
             onClick={handleLogout}
           >
-            🚪 Se déconnecter
+            <LogOutIcon /> Se déconnecter
           </button>
 
           <div className="rg-danger">
@@ -539,7 +540,7 @@ export default function Reglages() {
             {deleteStep === 1 && (
               <div className="rg-delete-confirm">
                 <div className="rv-callout rv-callout--red">
-                  <span className="rv-callout-label">⚠️ Irréversible</span>
+                  <span className="rv-callout-label"><AlertIcon /> Irréversible</span>
                   Toutes tes leçons, révisions et données seront supprimées définitivement.
                 </div>
                 <button
@@ -563,7 +564,7 @@ export default function Reglages() {
             {deleteStep === 2 && (
               <div className="rg-delete-confirm">
                 <div className="rv-callout rv-callout--red">
-                  <span className="rv-callout-label">⚠️ Confirmation</span>
+                  <span className="rv-callout-label"><AlertIcon /> Confirmation</span>
                   Entre ton mot de passe pour confirmer la suppression définitive.
                 </div>
                 <input

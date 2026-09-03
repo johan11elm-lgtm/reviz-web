@@ -107,7 +107,7 @@ export default function Connexion() {
         </button>
 
         {resetSent && (
-          <p className="auth-reset-sent">✉️ Email de réinitialisation envoyé !</p>
+          <p className="auth-reset-sent">Email de réinitialisation envoyé !</p>
         )}
 
         <p className="auth-error">{error}</p>

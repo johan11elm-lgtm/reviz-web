@@ -1,3 +1,4 @@
+import { TrashIcon } from './Icons';
 import './ConfirmModal.css';
 import { useModalA11y } from '../hooks/useModalA11y';
 
@@ -20,7 +21,7 @@ export function ConfirmModal({ lessonTitle, onConfirm, onCancel }) {
         aria-labelledby="confirm-modal-title"
         onClick={e => e.stopPropagation()}
       >
-        <span className="confirm-icon" aria-hidden="true">🗑️</span>
+        <span className="confirm-icon" aria-hidden="true"><TrashIcon /></span>
         <p className="confirm-title" id="confirm-modal-title">Supprimer cette leçon ?</p>
         <p className="confirm-sub">« {lessonTitle} » sera retiré de ton historique.</p>
         <div className="confirm-btns">

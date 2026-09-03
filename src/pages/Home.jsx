@@ -13,23 +13,9 @@ import { computeStreak, computeLevel, computeBadges, XP_PAR_NIVEAU } from '../ut
 import { subjectMascot } from '../utils/subjects';
 import { refreshReminder } from '../services/reminderService';
 import { AchievementToast } from '../components/AchievementToast';
+import { FlameIcon, TargetIcon, BookOpenIcon, CheckIcon, CircleIcon, FlashcardsIcon, QuizIcon } from '../components/Icons';
 import { CoachChat } from '../components/CoachChat';
 import './Home.css';
-
-const FlashcardsIcon = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-    <rect x="6" y="3" width="14" height="18" rx="2.5" transform="rotate(6 13 12)" />
-    <rect x="4" y="5" width="14" height="18" rx="2.5" />
-  </svg>
-);
-
-const QuizIcon = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-    <circle cx="12" cy="12" r="9" />
-    <path d="M9.5 9.2a2.5 2.5 0 0 1 4.9.5c0 1.7-2.4 1.8-2.4 3.3" />
-    <circle cx="12" cy="16.5" r="0.6" fill="currentColor" />
-  </svg>
-);
 
 function formatDate(ts) {
   const d = new Date(ts), now = new Date();
@@ -118,8 +104,6 @@ export default function Home() {
   const { level, xpInLvl, fillPct } = useMemo(() => computeLevel(allLessons), [allLessons]);
   const lastLesson = allLessons[0] ?? null;
 
-  const streakDots = Array.from({ length: 5 }, (_, i) => i < Math.min(5, streak));
-
   const dailyGoal = parseInt(localStorage.getItem(`reviz-daily-goal-${currentUser?.uid}`) || '3');
   const todayRevisions = useMemo(() => loadRevisions().filter(r =>
     new Date(r.revisedAt).toDateString() === new Date().toDateString()
@@ -180,7 +164,7 @@ export default function Home() {
           overlap
           ariaLabel="Scanner une leçon"
           secondary={lastLesson ? {
-            icon: '📖',
+            icon: <BookOpenIcon />,
             label: 'Reprendre',
             title: lastLesson.metadata.title,
             onClick: () => { restoreLesson(lastLesson.id); navigate('/analyse'); },
@@ -189,47 +173,29 @@ export default function Home() {
           className="home-cta"
         />
 
+        {/* Série + objectif du jour — compact : le niveau et l'XP sont dans l'en-tête. */}
         <Link
           to="/progres"
           className="rv-card rv-card--link home-progress-card"
           aria-label="Voir mes progrès"
         >
-          <div className="rv-stat-row">
-            <div className="rv-stat-block">
-              <div className="rv-stat-block-header">
-                <span className="rv-stat-block-emoji" aria-hidden="true">⭐</span>
-                <span className="rv-stat-label">Niveau</span>
+          <div className="home-stats">
+            <div className="home-stat">
+              <span className="rv-icon-square rv-icon-square--orange" aria-hidden="true"><FlameIcon /></span>
+              <div className="home-stat-text">
+                <span className="home-stat-value">{streak} <small>{streak === 1 ? 'jour' : 'jours'}</small></span>
+                <span className="home-stat-label">de suite</span>
               </div>
-              <div className="rv-stat-value rv-stat-value--xl">{level}</div>
-              <div className="rv-bar" aria-hidden="true">
-                <div
-                  className="rv-bar-fill rv-bar-fill--violet"
-                  style={{ width: fillPct + '%' }}
-                />
-              </div>
-              <div className="rv-stat-sub">{xpInLvl} / {XP_PAR_NIVEAU} XP</div>
             </div>
-            <div className="rv-stat-separator" aria-hidden="true" />
-            <div className="rv-stat-block">
-              <div className="rv-stat-block-header">
-                <span className="rv-stat-block-emoji" aria-hidden="true">🔥</span>
-                <span className="rv-stat-label">Série</span>
+            <div className="home-stat-sep" aria-hidden="true" />
+            <div className="home-stat">
+              <span className="rv-icon-square rv-icon-square--violet" aria-hidden="true"><TargetIcon /></span>
+              <div className="home-stat-text">
+                <span className="home-stat-value">{todayRevisions} <small>/ {dailyGoal}</small></span>
+                <span className="home-stat-label">cartes aujourd'hui</span>
               </div>
-              <div className="rv-stat-value rv-stat-value--xl">{streak}</div>
-              <div className="rv-dots" aria-hidden="true">
-                {streakDots.map((on, i) => (
-                  <span key={i} className={`rv-dot${on ? ' rv-dot--on' : ''}`} />
-                ))}
-              </div>
-              <div className="rv-stat-sub">{streak === 1 ? 'jour de suite' : 'jours de suite'}</div>
+              {goalReached && <span className="home-stat-check" aria-label="objectif atteint"><CheckIcon /></span>}
             </div>
-          </div>
-          <div className="rv-card-footer">
-            <span className="rv-card-footer-icon" aria-hidden="true">🎯</span>
-            <span className="rv-card-footer-text">
-              Objectif du jour : <strong>{todayRevisions} / {dailyGoal}</strong> cartes
-              {goalReached && <span className="rv-card-footer-check" aria-label="atteint">✓</span>}
-            </span>
           </div>
         </Link>
 
@@ -315,7 +281,7 @@ export default function Home() {
           {challenges.challenges?.map(c => (
             <div key={c.id} className={`home-challenge-row${c.completed ? ' completed' : ''}`}>
               <div className="home-challenge-info">
-                <span className="home-challenge-name">{c.completed ? '✓' : '○'} {c.title}</span>
+                <span className="home-challenge-name">{c.completed ? <CheckIcon /> : <CircleIcon />} {c.title}</span>
               </div>
               <div className="home-challenge-progress">
                 <div className="rv-bar home-challenge-bar">

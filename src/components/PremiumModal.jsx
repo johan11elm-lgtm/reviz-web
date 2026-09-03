@@ -1,3 +1,5 @@
+import { MailIcon, GemIcon } from './Icons';
+import { Mascot } from './Mascot';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
@@ -58,7 +60,7 @@ export function PremiumModal({ onClose, used = 5, limit = 5 }) {
         aria-labelledby="premium-modal-title"
         onClick={e => e.stopPropagation()}
       >
-        <span className="premium-emoji" aria-hidden="true">✨</span>
+        <span className="premium-emoji" aria-hidden="true"><Mascot pose="levelup" size={110} alt="" aria-hidden="true" /></span>
         <p className="premium-title" id="premium-modal-title">Tu as atteint ta limite</p>
         <p className="premium-sub">
           Tes <strong>{limit} scans gratuits</strong> de la semaine sont utilisés.<br />
@@ -75,7 +77,7 @@ export function PremiumModal({ onClose, used = 5, limit = 5 }) {
 
         {verifyNeeded && (
           <p className="premium-sub">
-            📬 Confirme ton email avant de passer à Réviz+ — clique sur le lien
+            Confirme ton email avant de passer à Réviz+ : clique sur le lien
             qu'on t'a envoyé, ça prend 10 secondes !
           </p>
         )}
@@ -85,7 +87,7 @@ export function PremiumModal({ onClose, used = 5, limit = 5 }) {
             className="premium-btn premium-btn--upgrade"
             onClick={() => navigate('/verify-email')}
           >
-            <span className="premium-btn-icon">📬</span>
+            <span className="premium-btn-icon"><MailIcon /></span>
             Vérifier mon email
           </button>
         ) : (
@@ -94,7 +96,7 @@ export function PremiumModal({ onClose, used = 5, limit = 5 }) {
             onClick={handleUpgrade}
             disabled={loading}
           >
-            <span className="premium-btn-icon">💎</span>
+            <span className="premium-btn-icon"><GemIcon /></span>
             {loading ? 'Redirection...' : 'Passer à Réviz+ — 4,99€/mois'}
           </button>
         )}

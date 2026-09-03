@@ -1,3 +1,4 @@
+import { MailIcon } from '../components/Icons';
 import { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
@@ -47,7 +48,7 @@ export default function ConsentPending() {
   return (
     <div className="app">
       <div className="auth-content" style={{ paddingTop: 48, textAlign: 'center' }}>
-        <div style={{ fontSize: 56, marginBottom: 16 }}>📬</div>
+        <div style={{ fontSize: 56, marginBottom: 16, color: 'var(--accent-orange)' }}><MailIcon /></div>
         <h2 style={{ fontSize: 20, fontWeight: 700, marginBottom: 8 }}>Autorisation parentale requise</h2>
 
         {sent ? (

@@ -1,3 +1,4 @@
+import { ChatIcon, MindmapIcon } from '../components/Icons'
 import { useState, useRef, useEffect, useMemo } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useTheme } from '../context/ThemeContext'
@@ -326,11 +327,11 @@ function MindmapSession() {
           <FormatFeedback format="mindmap" question="Cette carte t'a aidé ?" />
           <div className="rv-end-screen-actions">
             <button type="button" className="rv-btn-cta rv-btn-cta--full" onClick={restartMindmap}>
-              <span>🗺️ Revoir la carte</span>
+              <span>Revoir la carte</span>
             </button>
             {coachLessonId && (
               <button type="button" className="rv-btn-cta rv-btn-cta--full rv-btn-cta--ghost" onClick={() => setCoachOpen(true)}>
-                💬 Encore un doute ? Demande au coach
+                <ChatIcon /> Encore un doute ? Demande au coach
               </button>
             )}
             <Link className="rv-btn-cta rv-btn-cta--full rv-btn-cta--ghost" to="/analyse">
@@ -367,7 +368,7 @@ function MindmapSession() {
       >
         {!activeBranch && (
           <div className="canvas-hint">
-            <span className="canvas-hint-text">👆 Appuie sur une branche</span>
+            <span className="canvas-hint-text">Appuie sur une branche</span>
           </div>
         )}
         {isViewMoved && (
@@ -464,7 +465,6 @@ function MindmapSession() {
                 onPointerDown={e => e.stopPropagation()}
                 onClick={() => handleSelectBranch(branch.id)}
               >
-                <span className="bn-emoji" aria-hidden="true">{branch.emoji}</span>
                 <span className="bn-label">{branch.label}</span>
                 {isVisited && !isSelected && <span className="bn-visited-dot" aria-hidden="true" />}
               </button>
@@ -492,9 +492,9 @@ function MindmapSession() {
             <div className="detail-header">
               <span
                 className="detail-emoji-wrap"
-                style={{ background: isDark ? activeBranch.bgDark : activeBranch.bgLight }}
+                style={{ background: isDark ? activeBranch.bgDark : activeBranch.bgLight, color: isDark ? activeBranch.colorDark : activeBranch.colorLight }}
               >
-                {activeBranch.emoji}
+                <MindmapIcon />
               </span>
               <div className="detail-info">
                 <div
@@ -520,7 +520,7 @@ function MindmapSession() {
             </div>
             {allExplored && (
               <button type="button" className="rv-btn-cta rv-btn-cta--full detail-cta" onClick={() => setShowEnd(true)}>
-                <span>🧠 J'ai tout exploré !</span>
+                <span>J'ai tout exploré !</span>
               </button>
             )}
           </div>

@@ -199,7 +199,7 @@ export function CoachChat({ isOpen, onClose, lessonId, lessonTitle, prefill }) {
 
         <div className="coach-messages" ref={scrollRef} role="log" aria-live="polite">
           <div className="coach-bubble coach-bubble--coach">
-            Salut ! Un truc pas clair dans cette leçon ? Pose-moi ta question, je t'explique. 😊
+            Salut ! Un truc pas clair dans cette leçon ? Pose-moi ta question, je t'explique.
           </div>
 
           {messages.map((m, i) => (
@@ -229,7 +229,7 @@ export function CoachChat({ isOpen, onClose, lessonId, lessonTitle, prefill }) {
             <div className="coach-quota">
               <div className="coach-bubble coach-bubble--coach">
                 {isPremium
-                  ? 'Wow, on a beaucoup discuté aujourd\'hui ! On se retrouve demain pour la suite. 💪'
+                  ? 'Wow, on a beaucoup discuté aujourd\'hui ! On se retrouve demain pour la suite.'
                   : 'Tu as utilisé tous tes messages du jour ! On se retrouve demain — ou passe à Réviz+ pour continuer maintenant.'}
               </div>
               {!isPremium && (
@@ -239,7 +239,7 @@ export function CoachChat({ isOpen, onClose, lessonId, lessonTitle, prefill }) {
                   onClick={handleUpgrade}
                   disabled={upgradeLoading}
                 >
-                  <span>💎 {upgradeLoading ? 'Redirection…' : 'Passer à Réviz+'}</span>
+                  <span>{upgradeLoading ? 'Redirection…' : 'Passer à Réviz+'}</span>
                 </button>
               )}
             </div>

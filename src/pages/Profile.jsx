@@ -1,3 +1,4 @@
+import { UserIcon, FlameIcon, BookIcon, BoltIcon } from '../components/Icons';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
@@ -29,8 +30,8 @@ const GearIcon = () => (
 );
 
 const ACCOUNT_ITEMS = [
-  { id: 'profil',   icon: '👤', label: 'Modifier le profil', tone: 'violet' },
-  { id: 'reglages', icon: '⚙️', label: 'Réglages',           tone: 'orange' },
+  { id: 'profil',   icon: <UserIcon />, label: 'Modifier le profil', tone: 'violet' },
+  { id: 'reglages', icon: <GearIcon />, label: 'Réglages',           tone: 'orange' },
 ];
 
 const SHEET_TITLES = {
@@ -139,19 +140,19 @@ export default function Profile() {
         {/* Stats — une seule carte, trois colonnes */}
         <section className="rv-card rv-card--padded pf-stats-card">
           <div className="pf-stat">
-            <span className="pf-stat-icon" aria-hidden="true">🔥</span>
+            <span className="pf-stat-icon pf-stat-icon--orange" aria-hidden="true"><FlameIcon /></span>
             <span className="pf-stat-value">{streak}</span>
             <span className="pf-stat-label">{streak > 1 ? 'jours de suite' : 'jour de suite'}</span>
           </div>
           <div className="pf-stat-sep" aria-hidden="true" />
           <div className="pf-stat">
-            <span className="pf-stat-icon" aria-hidden="true">📚</span>
+            <span className="pf-stat-icon pf-stat-icon--violet" aria-hidden="true"><BookIcon /></span>
             <span className="pf-stat-value">{allLessons.length}</span>
             <span className="pf-stat-label">{allLessons.length > 1 ? 'leçons' : 'leçon'}</span>
           </div>
           <div className="pf-stat-sep" aria-hidden="true" />
           <div className="pf-stat">
-            <span className="pf-stat-icon" aria-hidden="true">⚡</span>
+            <span className="pf-stat-icon pf-stat-icon--green" aria-hidden="true"><BoltIcon /></span>
             <span className="pf-stat-value">{allRevisions.length}</span>
             <span className="pf-stat-label">{allRevisions.length > 1 ? 'révisions' : 'révision'}</span>
           </div>
@@ -169,7 +170,7 @@ export default function Profile() {
                 key={b.id ?? `${b.label}-${i}`}
                 className={`pf-badge${b.locked ? ' pf-badge--locked' : ''}`}
               >
-                <span className="pf-badge-emoji" aria-hidden="true">{b.emoji}</span>
+                <span className="pf-badge-emoji" aria-hidden="true"><Mascot pose={b.pose} size={46} alt="" aria-hidden="true" /></span>
                 <span className="pf-badge-label">{b.label}</span>
               </div>
             ))}

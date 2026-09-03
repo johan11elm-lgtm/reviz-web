@@ -1,3 +1,4 @@
+import { RefreshIcon, ChatIcon, CheckIcon, XIcon } from '../components/Icons'
 import { useState, useEffect, useMemo } from 'react'
 import { Link } from 'react-router-dom'
 import { recordRevision } from '../services/revisionService'
@@ -218,11 +219,11 @@ function QuizSession() {
           <FormatFeedback format="quiz" question="Ces questions t'ont aidé ?" />
           <div className="rv-end-screen-actions">
             <button type="button" className="rv-btn-cta rv-btn-cta--full" onClick={restartQuiz}>
-              <span>🔄 Recommencer</span>
+              <span><RefreshIcon /> Recommencer</span>
             </button>
             {coachLessonId && (
               <button type="button" className="rv-btn-cta rv-btn-cta--full rv-btn-cta--ghost" onClick={() => openCoach()}>
-                💬 Encore un doute ? Demande au coach
+                <ChatIcon /> Encore un doute ? Demande au coach
               </button>
             )}
             <Link className="rv-btn-cta rv-btn-cta--full rv-btn-cta--ghost" to="/analyse">
@@ -294,7 +295,7 @@ function QuizSession() {
         <div className="rv-sheet-handle" aria-hidden="true" />
         <div className="quiz-feedback-row">
           <div className={`rv-icon-square rv-icon-square--${isCorrect ? 'green' : 'red'} quiz-feedback-icon`}>
-            {isCorrect ? '✓' : '✕'}
+            {isCorrect ? <CheckIcon /> : <XIcon />}
           </div>
           <div className="quiz-feedback-label">
             {isCorrect ? 'Bonne réponse !' : 'Mauvaise réponse'}
@@ -307,7 +308,7 @@ function QuizSession() {
             className="quiz-coach-chip"
             onClick={() => openCoach(`Pourquoi la bonne réponse à “${q.question}” est “${q.choices[q.correct]}” ?`)}
           >
-            <span aria-hidden="true">💬</span> Demande au coach pourquoi
+            <ChatIcon /> Demande au coach pourquoi
           </button>
         )}
         <button type="button" className="rv-btn-cta rv-btn-cta--full rv-btn-cta--center quiz-next-btn" onClick={nextQuestion}>

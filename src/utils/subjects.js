@@ -41,13 +41,9 @@ export function subjectColor(s) {
   return SUBJECT_MAP[subjectKey(s)]?.color ?? 'indigo';
 }
 
-export function subjectEmoji(s) {
-  return SUBJECT_MAP[subjectKey(s)]?.emoji ?? '📚';
-}
-
 export function subjectInfo(s) {
   const key = subjectKey(s);
-  return SUBJECT_MAP[key] ?? { color: 'indigo', dot: '#6366F1', bg: '#EEF2FF', emoji: '📚' };
+  return SUBJECT_MAP[key] ?? { color: 'indigo', dot: '#6366F1', bg: '#EEF2FF', emoji: '📚', mascot: 'reading' };
 }
 
 // Pose de mascotte incarnant la matière (cf. src/components/Mascot.jsx).

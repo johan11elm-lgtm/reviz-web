@@ -4,8 +4,8 @@
 // -------------------------------------------------------
 
 export const CYCLES = [
-  { id: 'college', label: 'Collège', emoji: '🎒', desc: '6ème à 3ème'        },
-  { id: 'lycee',   label: 'Lycée',   emoji: '🎓', desc: 'Seconde à Terminale' },
+  { id: 'college', label: 'Collège', pose: 'reading',    desc: '6ème à 3ème'        },
+  { id: 'lycee',   label: 'Lycée',   pose: 'graduation', desc: 'Seconde à Terminale' },
 ];
 
 export const CLASSES_BY_CYCLE = {

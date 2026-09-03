@@ -1,3 +1,4 @@
+import { CameraIcon, PencilIcon, BulbIcon, FrameIcon, SunIcon, SearchIcon, FileTextIcon } from '../components/Icons';
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
@@ -155,7 +156,7 @@ export default function Scan() {
             className={`scan-tab${activeTab === 'photo' ? ' scan-tab--active' : ''}`}
             onClick={() => setActiveTab('photo')}
           >
-            📷 Photo
+            <CameraIcon /> Photo
           </button>
           <button
             type="button"
@@ -164,7 +165,7 @@ export default function Scan() {
             className={`scan-tab${activeTab === 'texte' ? ' scan-tab--active' : ''}`}
             onClick={() => setActiveTab('texte')}
           >
-            ✏️ Texte
+            <PencilIcon /> Texte
           </button>
         </div>
       </div>
@@ -284,7 +285,7 @@ export default function Scan() {
               className="scan-tip-trigger"
               onClick={() => setTipOpen(true)}
             >
-              <span className="scan-tip-trigger-icon">💡</span>
+              <span className="scan-tip-trigger-icon"><BulbIcon /></span>
               <span className="scan-tip-trigger-label">Conseils pour un bon scan</span>
               <span className="scan-tip-trigger-arrow" aria-hidden="true">›</span>
             </button>
@@ -322,7 +323,7 @@ export default function Scan() {
               disabled={!lessonText.trim()}
               onClick={handleAnalyse}
             >
-              🤖 Analyser
+              Analyser
             </button>
           </>
         )}
@@ -357,25 +358,25 @@ export default function Scan() {
         </header>
         <ul className="scan-tip-list">
           <li className="scan-tip-item">
-            <span className="scan-tip-emoji" aria-hidden="true">📐</span>
+            <span className="scan-tip-emoji" aria-hidden="true"><FrameIcon /></span>
             <div className="scan-tip-text">
               <strong>Cadre droit.</strong> Le texte horizontal, sans angle.
             </div>
           </li>
           <li className="scan-tip-item">
-            <span className="scan-tip-emoji" aria-hidden="true">💡</span>
+            <span className="scan-tip-emoji" aria-hidden="true"><SunIcon /></span>
             <div className="scan-tip-text">
               <strong>Bien éclairé.</strong> Évite les ombres et les reflets brillants.
             </div>
           </li>
           <li className="scan-tip-item">
-            <span className="scan-tip-emoji" aria-hidden="true">🔍</span>
+            <span className="scan-tip-emoji" aria-hidden="true"><SearchIcon /></span>
             <div className="scan-tip-text">
               <strong>Texte net.</strong> Approche-toi jusqu'à ce que les lettres soient lisibles.
             </div>
           </li>
           <li className="scan-tip-item">
-            <span className="scan-tip-emoji" aria-hidden="true">📄</span>
+            <span className="scan-tip-emoji" aria-hidden="true"><FileTextIcon /></span>
             <div className="scan-tip-text">
               <strong>Une leçon à la fois.</strong> Pas plusieurs énoncés sur la même photo.
             </div>

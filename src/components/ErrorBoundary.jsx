@@ -1,3 +1,4 @@
+import { Mascot } from './Mascot';
 import { Component } from 'react';
 import { hideSplash } from '../services/splash';
 
@@ -30,7 +31,7 @@ export class ErrorBoundary extends Component {
         display: 'flex', flexDirection: 'column', alignItems: 'center',
         justifyContent: 'center', padding: 32, textAlign: 'center', gap: 16,
       }}>
-        <span style={{ fontSize: 48 }}>😵</span>
+        <Mascot pose="confused" size={120} alt="" aria-hidden="true" />
         <h2 style={{ fontSize: 20, fontWeight: 700, margin: 0, color: 'var(--text-primary)' }}>
           Oups, quelque chose a planté
         </h2>

@@ -1,3 +1,4 @@
+import { Mascot } from '../components/Mascot';
 import { useState } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
@@ -59,7 +60,7 @@ export default function FinishSetup() {
   return (
     <div className="app">
       <div className="auth-content signup-content" style={{ overflowY: 'auto' }}>
-        <h1 className="signup-question">Bienvenue {prenom} 👋</h1>
+        <h1 className="signup-question">Bienvenue {prenom}</h1>
         <p className="signup-hint">Encore quelques infos pour calibrer Réviz à ton profil.</p>
 
         <div className="auth-field">
@@ -82,7 +83,7 @@ export default function FinishSetup() {
               className={`signup-card${level.cycle === c.id ? ' active' : ''}`}
               onClick={() => pickCycle(c.id)}
             >
-              <span className="signup-card-emoji">{c.emoji}</span>
+              <span className="signup-card-emoji"><Mascot pose={c.pose} size={40} alt="" aria-hidden="true" /></span>
               <span className="signup-card-body">
                 <span className="signup-card-label">{c.label}</span>
                 <span className="signup-card-desc">{c.desc}</span>

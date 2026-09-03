@@ -1,3 +1,4 @@
+import { Mascot } from './Mascot';
 import {
   CYCLES,
   CLASSES_BY_CYCLE,
@@ -38,7 +39,7 @@ export function LevelSelector({ value, onChange, compact = false }) {
               className={`level-cycle-btn${level.cycle === c.id ? ' active' : ''}`}
               onClick={() => setCycle(c.id)}
             >
-              <span className="level-cycle-emoji">{c.emoji}</span>
+              <span className="level-cycle-emoji"><Mascot pose={c.pose} size={40} alt="" aria-hidden="true" /></span>
               <span className="level-cycle-label">{c.label}</span>
               {!compact && <span className="level-cycle-desc">{c.desc}</span>}
             </button>

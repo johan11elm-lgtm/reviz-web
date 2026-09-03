@@ -18,8 +18,23 @@
 /* ── Hero CTA ── */
 .home-page .home-cta { margin-bottom: var(--gap-cards); }
 
-/* ── Progress card ── */
+/* ── Carte série + objectif (compacte : niveau et XP vivent dans l'en-tête) ── */
 .home-page .home-progress-card { margin-bottom: var(--gap-cards); }
+.home-page .home-stats { display: flex; align-items: center; gap: 12px; padding: 14px 16px; }
+.home-page .home-stat { flex: 1; min-width: 0; display: flex; align-items: center; gap: 10px; }
+.home-page .home-stat-text { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+.home-page .home-stat-value {
+  font-family: 'Geist', sans-serif;
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: -0.6px;
+  line-height: 1;
+  color: var(--text-primary);
+}
+.home-page .home-stat-value small { font-size: 13px; font-weight: 600; letter-spacing: 0; color: var(--text-muted); }
+.home-page .home-stat-label { font-size: 11px; color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.home-page .home-stat-sep { width: 1px; height: 34px; background: var(--border-subtle); flex-shrink: 0; }
+.home-page .home-stat-check { margin-left: auto; color: var(--accent-green-strong); font-size: 18px; display: inline-flex; }
 
 /* ── Featured "Reprendre" card ── */
 .home-page .home-featured-card { margin-bottom: var(--gap-cards); }

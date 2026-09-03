@@ -1,3 +1,4 @@
+import { CameraIcon, SparkIcon, TrophyIcon, ResumeIcon, FlashcardsIcon, MindmapIcon, QuizIcon } from '../components/Icons';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
@@ -22,7 +23,7 @@ const SLIDES = [
     pose: 'hello',
     animate: true,
     bubble: (prenom) => `Salut ${prenom} ! Moi c'est Réviz, ton coach IA. On va apprendre plus vite, ensemble.`,
-    titleFn: (prenom) => `Salut ${prenom} 👋`,
+    titleFn: (prenom) => `Salut ${prenom}`,
   },
   {
     id: 'how',
@@ -47,16 +48,16 @@ const SLIDES = [
 ];
 
 const HOW_STEPS = [
-  { icon: '📸', tone: 'orange', num: '1', label: 'Scanne',   sub: 'Photo ou texte de ta leçon' },
-  { icon: '🤖', tone: 'violet', num: '2', label: 'J\'analyse', sub: "L'IA transforme en outils" },
-  { icon: '🏆', tone: 'green',  num: '3', label: 'Tu révises', sub: 'Et tu retiens vraiment' },
+  { icon: <CameraIcon />, tone: 'orange', num: '1', label: 'Scanne',   sub: 'Photo ou texte de ta leçon' },
+  { icon: <SparkIcon />,  tone: 'violet', num: '2', label: 'J\'analyse', sub: "L'IA transforme en outils" },
+  { icon: <TrophyIcon />, tone: 'green',  num: '3', label: 'Tu révises', sub: 'Et tu retiens vraiment' },
 ];
 
 const FORMATS = [
-  { icon: '📝', tone: 'green',  label: 'Résumé' },
-  { icon: '🃏', tone: 'violet', label: 'Flashcards' },
-  { icon: '🧠', tone: 'pink',   label: 'Carte mentale' },
-  { icon: '❓', tone: 'orange', label: 'Quiz' },
+  { icon: <ResumeIcon />,     tone: 'green',  label: 'Résumé' },
+  { icon: <FlashcardsIcon />, tone: 'violet', label: 'Flashcards' },
+  { icon: <MindmapIcon />,    tone: 'pink',   label: 'Carte mentale' },
+  { icon: <QuizIcon />,       tone: 'orange', label: 'Quiz' },
 ];
 
 export default function Onboarding() {
@@ -205,7 +206,7 @@ export default function Onboarding() {
           className="rv-btn-cta rv-btn-cta--full onb-next"
           onClick={handleNext}
         >
-          {isLast ? '📸 Scanner ma première leçon' : 'Suivant →'}
+          {isLast ? 'Scanner ma première leçon' : 'Suivant →'}
         </button>
 
         {isLast && (

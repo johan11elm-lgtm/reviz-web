@@ -1,3 +1,4 @@
+import { CameraIcon, BoltIcon, RocketIcon, SparkIcon } from '../components/Icons';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
@@ -19,10 +20,10 @@ const LogoStar = () => (
 );
 
 const ADVANTAGES = [
-  { icon: '📸', label: 'Scans illimités',        color: '#FF8A3D', desc: 'Scanne autant de leçons que tu veux' },
-  { icon: '🧠', label: 'Révisions sans limites', color: '#2D2B57', desc: 'Quiz et flashcards à volonté' },
-  { icon: '🚀', label: 'Accès prioritaire',      color: '#A855F7', desc: 'Toujours premier dans la file' },
-  { icon: '✨', label: 'Fonctions exclusives',   color: '#34C77B', desc: 'Carte mentale, export PDF...' },
+  { icon: <CameraIcon />, label: 'Scans illimités',        color: '#FF8A3D', desc: 'Scanne autant de leçons que tu veux' },
+  { icon: <BoltIcon />,   label: 'Révisions sans limites', color: '#2D2B57', desc: 'Quiz et flashcards à volonté' },
+  { icon: <RocketIcon />, label: 'Accès prioritaire',      color: '#A855F7', desc: 'Toujours premier dans la file' },
+  { icon: <SparkIcon />,  label: 'Fonctions exclusives',   color: '#34C77B', desc: 'Carte mentale, export PDF...' },
 ];
 
 export default function UpgradeSuccess() {
@@ -151,7 +152,7 @@ export default function UpgradeSuccess() {
               className="ugs-cta ugs-cta--verify"
               onClick={() => refreshPremium()}
             >
-              🔄 Vérifier mon abonnement
+              Vérifier mon abonnement
             </button>
           )}
           <p className="ugs-hint">Tu peux annuler à tout moment depuis les réglages.</p>

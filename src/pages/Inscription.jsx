@@ -1,3 +1,5 @@
+import { UsersIcon } from '../components/Icons';
+import { Mascot } from '../components/Mascot';
 import { useState, useMemo, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
@@ -105,7 +107,7 @@ export default function Inscription() {
         // Le serveur refuse aussi (PARENT_EMAIL_IS_CHILD) — on échoue tôt ici
         // avec un message clair plutôt qu'après l'aller-retour API.
         if (parentEmail.trim().toLowerCase() === email.trim().toLowerCase()) {
-          return 'Entre l\'email de ton parent, pas le tien 😉';
+          return 'Entre l\'email de ton parent, pas le tien.';
         }
         return null;
       default:
@@ -217,7 +219,7 @@ export default function Inscription() {
         {stepId === 'prenom' && (
           <>
             <h1 className="signup-question">Quel est ton prénom ?</h1>
-            <p className="signup-hint">On l'utilise pour te dire bonjour 👋</p>
+            <p className="signup-hint">On l'utilise pour te dire bonjour.</p>
             <input
               className="auth-input signup-input-lg"
               type="text"
@@ -258,7 +260,7 @@ export default function Inscription() {
                   className={`signup-card${level.cycle === c.id ? ' active' : ''}`}
                   onClick={() => pickCycle(c.id)}
                 >
-                  <span className="signup-card-emoji">{c.emoji}</span>
+                  <span className="signup-card-emoji"><Mascot pose={c.pose} size={40} alt="" aria-hidden="true" /></span>
                   <span className="signup-card-body">
                     <span className="signup-card-label">{c.label}</span>
                     <span className="signup-card-desc">{c.desc}</span>
@@ -313,7 +315,7 @@ export default function Inscription() {
         {stepId === 'account' && (
           <>
             <h1 className="signup-question">Crée ton compte</h1>
-            <p className="signup-hint">Dernière étape, {prenom || 'on y est presque'} ✨</p>
+            <p className="signup-hint">Dernière étape, {prenom || 'on y est presque'}.</p>
             <div className="auth-field">
               <label className="auth-label" htmlFor="signup-email">Email</label>
               <input
@@ -350,7 +352,7 @@ export default function Inscription() {
             </label>
             {isUnder15(birthDate) && (
               <div className="auth-parent-notice-inline">
-                👪 Un email sera envoyé à ton parent pour confirmer ton inscription.
+                Un email sera envoyé à ton parent pour confirmer ton inscription.
               </div>
             )}
           </>
@@ -360,7 +362,7 @@ export default function Inscription() {
           <>
             <h1 className="signup-question">Autorisation parentale</h1>
             <div className="auth-parent-info">
-              <span className="auth-parent-icon">👪</span>
+              <span className="auth-parent-icon"><UsersIcon /></span>
               <p>
                 Comme tu as moins de 15 ans, nous avons besoin de l'accord d'un de tes parents
                 avant de t'ouvrir l'accès à Réviz. Un email lui sera envoyé avec un lien de confirmation.

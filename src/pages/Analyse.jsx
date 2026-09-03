@@ -1,3 +1,4 @@
+import { ResumeIcon, FlashcardsIcon, MindmapIcon, QuizIcon } from '../components/Icons';
 import { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
@@ -18,7 +19,6 @@ import './Analyse.css';
 const mockLesson = {
   title: 'Théorème de Pythagore',
   subject: 'Maths',
-  emoji: '📐',
   dot: '#FF8A3D',
   bg: '#FFF7ED',
   color: 'orange',
@@ -32,7 +32,6 @@ function buildLessonFromAiData(data) {
   return {
     title:           data.metadata.title,
     subject:         data.metadata.subject,
-    emoji:           info.emoji,
     dot:             info.dot,
     bg:              info.bg,
     color:           info.color,
@@ -44,18 +43,18 @@ function buildLessonFromAiData(data) {
 
 // ─── Formats de révision ─────────────────────────────────────────────
 const formats = [
-  { id: 'resume',     emoji: '📝', name: 'Résumé',        tone: 'green',  to: '/resume',     getCount: () => 2,                unit: 'min' },
-  { id: 'flashcards', emoji: '🃏', name: 'Flashcards',    tone: 'violet', to: '/flashcards', getCount: l => l.flashcardsCount, unit: 'cartes' },
-  { id: 'mindmap',    emoji: '🧠', name: 'Carte mentale', tone: 'pink',   to: '/mindmap',    getCount: () => null,             unit: null },
-  { id: 'quiz',       emoji: '❓', name: 'Quiz',          tone: 'orange', to: '/quiz',       getCount: l => l.quizCount,       unit: 'questions' },
+  { id: 'resume',     icon: <ResumeIcon />, name: 'Résumé',        tone: 'green',  to: '/resume',     getCount: () => 2,                unit: 'min' },
+  { id: 'flashcards', icon: <FlashcardsIcon />, name: 'Flashcards',    tone: 'violet', to: '/flashcards', getCount: l => l.flashcardsCount, unit: 'cartes' },
+  { id: 'mindmap',    icon: <MindmapIcon />, name: 'Carte mentale', tone: 'pink',   to: '/mindmap',    getCount: () => null,             unit: null },
+  { id: 'quiz',       icon: <QuizIcon />, name: 'Quiz',          tone: 'orange', to: '/quiz',       getCount: l => l.quizCount,       unit: 'questions' },
 ];
 
 // ─── Écran de chargement ─────────────────────────────────────────────
 const STEPS = [
-  { id: 'flashcards', emoji: '🃏', name: 'Flashcards',   tone: 'violet', doneAt: 20 },
-  { id: 'quiz',       emoji: '❓', name: 'Quiz',          tone: 'orange', doneAt: 47 },
-  { id: 'resume',     emoji: '📝', name: 'Résumé',        tone: 'green',  doneAt: 67 },
-  { id: 'mindmap',    emoji: '🧠', name: 'Carte mentale', tone: 'pink',   doneAt: 85 },
+  { id: 'flashcards', icon: <FlashcardsIcon />, name: 'Flashcards',   tone: 'violet', doneAt: 20 },
+  { id: 'quiz',       icon: <QuizIcon />, name: 'Quiz',          tone: 'orange', doneAt: 47 },
+  { id: 'resume',     icon: <ResumeIcon />, name: 'Résumé',        tone: 'green',  doneAt: 67 },
+  { id: 'mindmap',    icon: <MindmapIcon />, name: 'Carte mentale', tone: 'pink',   doneAt: 85 },
 ];
 
 function getStepState(index, progress) {
@@ -170,7 +169,7 @@ export default function Analyse() {
     NETWORK_ERROR:   { title: 'Pas de connexion', sub: 'Vérifie ta connexion internet et réessaie.' },
     TIMEOUT:         { title: 'Ça a pris trop de temps', sub: 'Vérifie ta connexion et réessaie.' },
     UNAUTHORIZED:    { title: 'Reconnecte-toi', sub: 'Connexion expirée — reconnecte-toi puis réessaie.' },
-    EMAIL_NOT_VERIFIED: { title: 'Confirme ton email d\'abord', sub: 'Pour scanner tes leçons, clique sur le lien qu\'on t\'a envoyé par email. Ça prend 10 secondes, promis !', cta: { label: '📬 Vérifier mon email', to: '/verify-email' } },
+    EMAIL_NOT_VERIFIED: { title: 'Confirme ton email d\'abord', sub: 'Pour scanner tes leçons, clique sur le lien qu\'on t\'a envoyé par email. Ça prend 10 secondes, promis !', cta: { label: 'Vérifier mon email', to: '/verify-email' } },
     IMAGE_TOO_LARGE: { title: 'Photo trop lourde', sub: 'Rapproche-toi de ta leçon et reprends la photo, ou recadre-la avant de réessayer.' },
     INVALID_JSON:    { title: 'Oups, ça a coincé', sub: 'Réviz n\'a pas réussi à lire cette leçon. Réessaie de la scanner.' },
     EMPTY_RESPONSE:  { title: 'Oups, ça a coincé', sub: 'Réviz n\'a pas réussi à lire cette leçon. Réessaie de la scanner.' },
@@ -207,7 +206,7 @@ export default function Analyse() {
                 >
                   {state === 'active' && <div className="analyse-ls-shimmer" />}
                   {state === 'done'   && <span className="analyse-ls-badge">✓</span>}
-                  <span className="analyse-ls-emoji">{step.emoji}</span>
+                  <span className="analyse-ls-emoji">{step.icon}</span>
                   <span className="analyse-ls-name">{step.name}</span>
                 </div>
               );
@@ -270,7 +269,7 @@ export default function Analyse() {
         <HeroCTA
           tone="orange"
           mascot="pointing"
-          eyebrow={`${displayLesson.emoji} ${displayLesson.subject}`}
+          eyebrow={displayLesson.subject}
           title={displayLesson.title}
           sub="Choisis ton format préféré — j'ai tout préparé."
           className="analyse-hero-cta"
@@ -297,7 +296,7 @@ export default function Analyse() {
               <Link key={f.id} to={f.to} className="rv-card rv-card--link rv-card--padded analyse-format-card">
                 <div className="analyse-format-card-top">
                   <div className={`rv-icon-square rv-icon-square--xl rv-icon-square--${f.tone}`}>
-                    {f.emoji}
+                    {f.icon}
                   </div>
                   <span className={`analyse-format-arrow analyse-format-arrow--${f.tone}`}>›</span>
                 </div>

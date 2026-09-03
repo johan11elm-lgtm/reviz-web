@@ -1,3 +1,4 @@
+import { FlashcardsIcon, QuizIcon, ResumeIcon, MindmapIcon, BookIcon, BoltIcon, CalendarIcon, TrophyIcon } from '../components/Icons';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
@@ -12,10 +13,10 @@ import './Progres.css';
 
 // ─── Constantes ─────────────────────────────────────────────────────
 const FORMAT_INFO = {
-  flashcards: { label: 'Flashcards',    emoji: '🃏', color: 'var(--accent-violet)' },
-  quiz:       { label: 'Quiz',           emoji: '❓', color: 'var(--accent-orange)' },
-  resume:     { label: 'Résumé',        emoji: '📝', color: 'var(--accent-green)' },
-  mindmap:    { label: 'Carte mentale', emoji: '🧠', color: 'var(--accent-pink)' },
+  flashcards: { label: 'Flashcards',    icon: <FlashcardsIcon />, color: 'var(--accent-violet)' },
+  quiz:       { label: 'Quiz',           icon: <QuizIcon />,       color: 'var(--accent-orange)' },
+  resume:     { label: 'Résumé',        icon: <ResumeIcon />,     color: 'var(--accent-green)' },
+  mindmap:    { label: 'Carte mentale', icon: <MindmapIcon />,    color: 'var(--accent-pink)' },
 };
 
 // ─── Calculs ─────────────────────────────────────────────────────────
@@ -241,9 +242,7 @@ export default function Progres() {
           <div className="pg-narrator-glow" aria-hidden="true" />
           <div className="pg-narrator-content">
             <h1 className="pg-narrator-title">Mes progrès</h1>
-            <div className="rv-speech-bubble rv-speech-bubble--pointer-right pg-narrator-bubble">
-              {hero.phrase}
-            </div>
+            <p className="pg-narrator-sub">{hero.phrase}</p>
           </div>
           <Mascot
             pose={hero.mascot}
@@ -307,7 +306,7 @@ export default function Progres() {
         </div>
 
         {/* 3. Activité — vue par semaine, claire pour les jeunes */}
-        <h2 className="pg-section-title">📅 Ton activité</h2>
+        <h2 className="pg-section-title">Ton activité</h2>
         <div className="rv-card rv-card--padded pg-weeks-card">
           {allRevisions.length === 0 ? (
             <div className="pg-weeks-empty">
@@ -346,27 +345,27 @@ export default function Progres() {
         </div>
 
         {/* 4. Stats synthétiques (3 cards avec icon-square) */}
-        <h2 className="pg-section-title">📊 Tes chiffres</h2>
+        <h2 className="pg-section-title">Tes chiffres</h2>
         <div className="pg-stats-grid">
           <div className="rv-card pg-stat-card">
-            <div className="rv-icon-square rv-icon-square--xl rv-icon-square--violet">📚</div>
+            <div className="rv-icon-square rv-icon-square--xl rv-icon-square--violet"><BookIcon /></div>
             <span className="pg-stat-value">{allLessons.length}</span>
             <span className="pg-stat-label">Leçons scannées</span>
           </div>
           <div className="rv-card pg-stat-card">
-            <div className="rv-icon-square rv-icon-square--xl rv-icon-square--green">⚡</div>
+            <div className="rv-icon-square rv-icon-square--xl rv-icon-square--green"><BoltIcon /></div>
             <span className="pg-stat-value">{allRevisions.length}</span>
             <span className="pg-stat-label">Révisions totales</span>
           </div>
           <div className="rv-card pg-stat-card pg-stat-card--accent">
-            <div className="rv-icon-square rv-icon-square--xl rv-icon-square--orange">📅</div>
+            <div className="rv-icon-square rv-icon-square--xl rv-icon-square--orange"><CalendarIcon /></div>
             <span className="pg-stat-value">{activeDays}</span>
             <span className="pg-stat-label">Jours actifs</span>
           </div>
         </div>
 
         {/* 5. Graphe semaine avec mascotte signature */}
-        <h2 className="pg-section-title">📈 Cette semaine</h2>
+        <h2 className="pg-section-title">Cette semaine</h2>
         <div className="rv-card rv-card--padded pg-chart-card">
           <div className="pg-chart-header">
             <div className="pg-chart-title-row">
@@ -382,7 +381,7 @@ export default function Progres() {
                 <span className="pg-chart-title">Révisions par jour</span>
                 <span className="pg-chart-sub">
                   <strong>{revisionsThisWeek}</strong> cette semaine
-                  {isNewRecord && <span className="pg-chart-record">🏆 record !</span>}
+                  {isNewRecord && <span className="pg-chart-record"><TrophyIcon /> record</span>}
                 </span>
               </div>
             </div>
@@ -400,12 +399,12 @@ export default function Progres() {
         {/* 6. Répartition par format */}
         {formatBreakdown.some(f => f.count > 0) && (
           <>
-            <h2 className="pg-section-title">🎨 Par format</h2>
+            <h2 className="pg-section-title">Par format</h2>
             <div className="rv-card pg-format-card">
               {formatBreakdown.map(f => (
                 <div key={f.label} className="pg-format-row">
                   <div className="pg-format-left">
-                    <span className="pg-format-emoji">{f.emoji}</span>
+                    <span className="pg-format-emoji">{f.icon}</span>
                     <span className="pg-format-label">{f.label}</span>
                   </div>
                   <div className="pg-format-bar-wrap">
@@ -421,12 +420,12 @@ export default function Progres() {
         {/* 8. Répartition par matière */}
         {subjectBreakdown.length > 0 && (
           <>
-            <h2 className="pg-section-title">📚 Par matière</h2>
+            <h2 className="pg-section-title">Par matière</h2>
             <div className="rv-card pg-subject-card">
               {subjectBreakdown.map(({ name, count, pct, info }) => (
                 <div key={name} className="pg-subject-row">
                   <div className="pg-subject-left">
-                    <span className="pg-subject-emoji">{info.emoji}</span>
+                    <span className="pg-subject-emoji"><Mascot pose={info.mascot ?? 'reading'} size={26} alt="" aria-hidden="true" /></span>
                     <span className="pg-subject-name">{name}</span>
                   </div>
                   <div className="pg-subject-bar-wrap">
