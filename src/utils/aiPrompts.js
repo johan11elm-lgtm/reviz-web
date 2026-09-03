@@ -10,10 +10,12 @@ export const MODEL = 'claude-haiku-4-5-20251001';
 // Source unique (importée par aiService.js ET MindMap.jsx) — les `color`
 // reprennent les accents du design system (--accent-violet/-orange/-green).
 export const BRANCH_COLORS = [
-  { color: '#6B4EFF', bgLight: '#EEF2FF', colorLight: '#4338CA', bgDark: '#1E1B4B', colorDark: '#A5B4FC' },
-  { color: '#FF8A3D', bgLight: '#FFF4E6', colorLight: '#C05621', bgDark: '#2D1F0A', colorDark: '#FBD38D' },
-  { color: '#34C77B', bgLight: '#F0FDF4', colorLight: '#15803D', bgDark: '#0D2818', colorDark: '#4ADE80' },
-  { color: '#A855F7', bgLight: '#FAF5FF', colorLight: '#7E22CE', bgDark: '#2E1065', colorDark: '#D8B4FE' },
+  // Accents de l'app (global.css) : orange, bleu, vert, rose — chaque branche a
+  // sa teinte pleine (trait), sa version encre (texte) et ses fonds clair/sombre.
+  { color: '#FF8A3D', bgLight: '#FFE6D2', colorLight: '#B34400', bgDark: '#3A2410', colorDark: '#FFB680' },
+  { color: '#3B6FE8', bgLight: '#E4ECFF', colorLight: '#1F3FA8', bgDark: '#1F2A4A', colorDark: '#9DB8FF' },
+  { color: '#34C77B', bgLight: '#DCF5E6', colorLight: '#0F6B3A', bgDark: '#102E1F', colorDark: '#8FE3B5' },
+  { color: '#FF6B9A', bgLight: '#FFE0EA', colorLight: '#A8235E', bgDark: '#3A1A26', colorDark: '#FFA7C3' },
 ];
 
 // Positions canoniques des 4 branches — assignées par index côté client,

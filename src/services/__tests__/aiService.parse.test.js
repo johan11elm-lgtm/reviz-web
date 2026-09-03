@@ -149,8 +149,8 @@ describe('_parseResult — normalisation mindmap', () => {
     expect(out.mindmap.branches[0].children).toHaveLength(6)
   })
 
-  it('applique la palette design system (couleur violette en branche 0)', () => {
+  it('applique la palette design system (orange en branche 0)', () => {
     const out = _parseResult(JSON.stringify(validResult()))
-    expect(out.mindmap.branches[0].color).toBe('#6B4EFF')
+    expect(out.mindmap.branches[0].color).toBe('#FF8A3D')
   })
 })

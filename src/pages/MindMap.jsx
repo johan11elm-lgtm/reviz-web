@@ -1,3 +1,4 @@
+import { subjectMascot } from '../utils/subjects'
 import { PageIntro } from '../components/PageIntro'
 import { ChatIcon, MindmapIcon } from '../components/Icons'
 import { useState, useRef, useEffect, useMemo } from 'react'
@@ -70,10 +71,12 @@ function getMindmapData() {
 // entières dans le canvas, au-dessus du hint bas et sous le bord haut.
 function getPositions(W, H) {
   const cx = W / 2, cy = H / 2
-  const xLeft   = Math.max(Math.round(W * 0.24), 92)
-  const xRight  = Math.min(Math.round(W * 0.76), W - 92)
-  const yTop    = Math.max(Math.round(H * 0.18), 56)
-  const yBottom = Math.min(Math.round(H * 0.78), H - 84)
+  // Cartes-branches de 156px : centrées à ~27 % / 73 % de la largeur, elles
+  // occupent l'espace sans sortir du canvas ni chevaucher le nœud central.
+  const xLeft   = Math.max(Math.round(W * 0.27), 100)
+  const xRight  = Math.min(Math.round(W * 0.73), W - 100)
+  const yTop    = Math.max(Math.round(H * 0.2), 70)
+  const yBottom = Math.min(Math.round(H * 0.78), H - 92)
   return {
     'top-left':     { x: xLeft,  y: yTop },
     'top-right':    { x: xRight, y: yTop },
@@ -420,31 +423,46 @@ function MindmapSession() {
               const opacity    = hasSelect
                 ? (isSelected ? 1 : 0.08)
                 : (isVisited ? 0.85 : 0.5)
-              const cpx = (cx + pos.x) / 2
-              const cpy = (cy + pos.y) / 2
+              // Courbe en S verticale : sort du nœud central vers le haut ou le
+              // bas, arrive à la verticale au milieu du bord de la carte qui lui
+              // fait face (jamais sous la carte).
+              const below = pos.y > cy
+              const ax = pos.x
+              const ay = pos.y + (below ? -44 : 44)
+              const my = cy + (ay - cy) * 0.5
+              const d = `M ${cx} ${cy} C ${cx} ${my}, ${ax} ${my}, ${ax} ${ay}`
+              const stroke = isDark ? branch.colorDark : branch.color
               return (
-                <path
-                  key={branch.id}
-                  className={mounted ? 'mindmap-link mindmap-link--draw' : 'mindmap-link'}
-                  d={`M ${cx} ${cy} Q ${cpx} ${cpy} ${pos.x} ${pos.y}`}
-                  pathLength="1"
-                  stroke={`url(#grad-${branch.id})`}
-                  strokeWidth={isSelected ? 4 : 3}
-                  fill="none"
-                  opacity={opacity}
-                  strokeLinecap="round"
-                  style={{ transition: 'opacity 0.25s', animationDelay: `${80 + i * 90}ms` }}
-                />
+                <g key={branch.id} style={{ transition: 'opacity 0.25s' }} opacity={opacity}>
+                  <path
+                    className="mindmap-link-glow"
+                    d={d}
+                    stroke={stroke}
+                    strokeWidth={isSelected ? 12 : 8}
+                    fill="none"
+                    strokeLinecap="round"
+                  />
+                  <path
+                    className={mounted ? 'mindmap-link mindmap-link--draw' : 'mindmap-link'}
+                    d={d}
+                    pathLength="1"
+                    stroke={`url(#grad-${branch.id})`}
+                    strokeWidth={isSelected ? 4 : 3}
+                    fill="none"
+                    strokeLinecap="round"
+                    style={{ animationDelay: `${80 + i * 90}ms` }}
+                  />
+                  <circle className="mindmap-link-end" cx={ax} cy={ay} r={isSelected ? 5 : 4} fill={stroke} />
+                </g>
               )
             })}
           </svg>
 
-          {/* Nœud central — la mascotte réfléchit, les idées rayonnent */}
+          {/* Nœud central — mascotte de la matière + titre complet, les idées rayonnent */}
           <div className={`center-node${mounted ? ' center-in' : ''}`}>
-            <Mascot pose="thinking" size={52} alt="" aria-hidden="true" />
-            <span className="cn-label">
-              {mindmapData.center.split(' ').slice(0, 3).join(' ')}
-            </span>
+            <span className="cn-ring" aria-hidden="true" />
+            <Mascot pose={subjectMascot(mindmapData.subject)} size={58} animate alt="" aria-hidden="true" />
+            <span className="cn-label">{mindmapData.center}</span>
           </div>
 
           {/* Branches — cartes blanches avec animation d'entrée staggerée */}
@@ -469,8 +487,14 @@ function MindmapSession() {
                 onPointerDown={e => e.stopPropagation()}
                 onClick={() => handleSelectBranch(branch.id)}
               >
+                <span className="bn-top">
+                  <span className="bn-index" aria-hidden="true">{i + 1}</span>
+                  <span className="bn-count">
+                    {branch.children.length} {branch.children.length > 1 ? 'idées' : 'idée'}
+                  </span>
+                  {isVisited && <span className="bn-check" aria-label="explorée"><CheckIcon /></span>}
+                </span>
                 <span className="bn-label">{branch.label}</span>
-                {isVisited && !isSelected && <span className="bn-visited-dot" aria-hidden="true" />}
               </button>
             )
           })}

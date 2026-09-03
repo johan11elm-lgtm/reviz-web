@@ -53,8 +53,9 @@ describe('buildLessonUserMessage', () => {
 })
 
 describe('BRANCH_COLORS', () => {
-  it('reprend les accents du design system', () => {
-    expect(BRANCH_COLORS[0].color).toBe('#6B4EFF')
+  it('reprend les accents du design system (orange en branche 0, plus de violet)', () => {
+    expect(BRANCH_COLORS[0].color).toBe('#FF8A3D')
+    expect(BRANCH_COLORS.map(c => c.color)).not.toContain('#6B4EFF')
     expect(BRANCH_COLORS).toHaveLength(4)
   })
 })

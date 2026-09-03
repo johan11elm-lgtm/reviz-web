@@ -27,7 +27,7 @@
   inset: 0;
   background-image: radial-gradient(circle, var(--border) 1px, transparent 1px);
   background-size: 26px 26px;
-  opacity: 0.45;
+  opacity: 0.32;
   pointer-events: none;
 }
 
@@ -116,6 +116,10 @@
   overflow: visible;
 }
 
+/* Halo doux sous chaque connecteur, point d'arrivée sur la carte */
+.mindmap-page .mindmap-link-glow { opacity: 0.12; }
+.mindmap-page .mindmap-link-end  { opacity: 0.95; }
+
 /* Tracé des connecteurs à l'entrée (pathLength=1 posé dans le JSX) */
 .mindmap-page .mindmap-link--draw {
   stroke-dasharray: 1;
@@ -126,7 +130,7 @@
   to { stroke-dashoffset: 0; }
 }
 
-/* ── Nœud central — mascotte + concept ──────────────────────────── */
+/* ── Nœud central — squircle, mascotte de la matière, titre entier ─ */
 .mindmap-page .center-node {
   position: absolute;
   left: 50%;
@@ -135,14 +139,14 @@
   opacity: 0;
   background: var(--bg-card);
   border: 1px solid var(--border-subtle);
-  border-radius: 50%;
-  width: 116px;
-  height: 116px;
+  border-radius: 40px;
+  width: 144px;
+  height: 144px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 2px;
+  gap: 4px;
   z-index: 2;
   text-align: center;
   box-shadow: var(--shadow-pop);
@@ -152,40 +156,56 @@
   transform: translate(-50%, -50%) scale(1);
   opacity: 1;
 }
+/* Anneau qui respire derrière le nœud (coupé par prefers-reduced-motion global) */
+.mindmap-page .cn-ring {
+  position: absolute;
+  inset: -12px;
+  border-radius: 50px;
+  border: 2px solid var(--accent-orange);
+  opacity: 0.22;
+  pointer-events: none;
+  animation: cnPulse 3.2s ease-in-out infinite;
+}
+@keyframes cnPulse {
+  0%, 100% { transform: scale(1);    opacity: 0.22; }
+  50%      { transform: scale(1.06); opacity: 0.08; }
+}
 .mindmap-page .cn-label {
   font-family: 'Geist', sans-serif;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 800;
   letter-spacing: -0.3px;
-  line-height: 1.25;
+  line-height: 1.2;
   color: var(--text-primary);
-  padding: 0 10px;
-  max-width: 104px;
+  padding: 0 12px;
+  max-width: 140px;
   display: -webkit-box;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
   overflow-wrap: break-word;
 }
 
-/* ── Cartes-branches — même matière que les cartes de l'app ─────── */
+/* ── Cartes-branches — numéro, nombre d'idées, libellé sur deux lignes ── */
 .mindmap-page .branch-node {
   position: absolute;
   transform: translate(-50%, -50%);
   opacity: 0;
+  width: 156px;
   background: var(--bg-card);
   border: 1.5px solid var(--border-subtle);
-  border-radius: 16px;
-  padding: 9px 14px 9px 9px;
+  border-radius: 18px;
+  padding: 10px 12px 11px;
   font-family: inherit;
   display: flex;
-  align-items: center;
-  gap: 9px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  text-align: left;
   cursor: pointer;
   z-index: 2;
   user-select: none;
   transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.2s ease, opacity 0.2s ease;
-  white-space: nowrap;
   box-shadow: var(--shadow-card);
 }
 
@@ -198,50 +218,65 @@
 }
 
 .mindmap-page .branch-node:active { transform: translate(-50%, -50%) scale(0.95); }
-
-.mindmap-page .branch-node.visited {
-  border-color: var(--branch-color);
-}
-
+.mindmap-page .branch-node.visited { border-color: var(--branch-color); }
 .mindmap-page .branch-node.selected {
-  transform: translate(-50%, -50%) scale(1.08);
+  transform: translate(-50%, -50%) scale(1.06);
   box-shadow: var(--shadow-pop);
   border-color: var(--branch-color);
 }
 
-/* Squircle émoji tinté — même vocabulaire que les icon-squares de Home */
-.mindmap-page .bn-emoji {
-  width: 30px;
-  height: 30px;
-  border-radius: 10px;
-  background: var(--branch-bg);
+.mindmap-page .bn-top {
   display: flex;
   align-items: center;
+  gap: 6px;
+  width: 100%;
+}
+.mindmap-page .bn-index {
+  width: 20px;
+  height: 20px;
+  border-radius: 7px;
+  background: var(--branch-bg);
+  color: var(--branch-color);
+  font-family: 'Geist', sans-serif;
+  font-size: 11px;
+  font-weight: 800;
+  display: inline-flex;
+  align-items: center;
   justify-content: center;
-  font-size: 15px;
-  line-height: 1;
   flex-shrink: 0;
 }
-.mindmap-page .bn-label {
-  font-size: 13px;
+.mindmap-page .bn-count {
+  font-size: 10.5px;
   font-weight: 700;
-  letter-spacing: -0.2px;
-  color: var(--text-primary);
-  max-width: min(108px, 24vw);
-  overflow: hidden;
-  text-overflow: ellipsis;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-muted);
+  white-space: nowrap;
 }
-
-/* Pastille "visité" — même vocabulaire que .rv-notif-dot */
-.mindmap-page .bn-visited-dot {
-  position: absolute;
-  top: -4px;
-  right: -4px;
-  width: 12px;
-  height: 12px;
+.mindmap-page .bn-check {
+  margin-left: auto;
+  width: 18px;
+  height: 18px;
   border-radius: 50%;
   background: var(--branch-color);
-  box-shadow: 0 0 0 2px var(--bg-card);
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.mindmap-page .bn-check svg { width: 11px; height: 11px; }
+.mindmap-page .bn-label {
+  font-size: 13.5px;
+  font-weight: 700;
+  letter-spacing: -0.2px;
+  line-height: 1.25;
+  color: var(--text-primary);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  overflow-wrap: anywhere;
 }
 
 /* ── Bottom sheet — conventions .rv-sheet ────────────────────────── */
