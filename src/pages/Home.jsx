@@ -39,72 +39,6 @@ function formatDate(ts) {
   return d.toLocaleDateString('fr-FR', { day: 'numeric', month: 'short' });
 }
 
-// Pool de phrases casual/fun, rotation stable par jour (pas de variance render-to-render)
-const MOTIVATION_POOLS = {
-  done: [
-    'Boucle bouclée. Le reste, c\'est du bonus.',
-    'Mission du jour validée. Tu fais bien.',
-    'Carton plein. Repos mérité.',
-    'Ton futur toi te remercie.',
-    'Objectif atteint — tu gères !',
-  ],
-  streakStrong: [
-    'jours d\'affilée, t\'es un robot.',
-    'jours de suite, on garde le rythme ?',
-    'jours non-stop, t\'es chaud.',
-    'jours consécutifs, respect.',
-  ],
-  streakSmall: [
-    'On garde le rythme ?',
-    'T\'es bien parti, continue.',
-    'Tu chauffes, c\'est bon signe.',
-    'Encore un effort, ça paie.',
-  ],
-  morning: [
-    'Allez, on s\'y met ?',
-    'Petit échauffement du matin ?',
-    'Le matin, ton cerveau est au top.',
-    'On commence la journée fort ?',
-    'Café + révisions = combo gagnant.',
-  ],
-  afternoon: [
-    'Une petite séance avant le goûter ?',
-    'Ton cerveau te dit merci d\'avance.',
-    '5 minutes, et déjà plus malin.',
-    'On se concentre cinq minutes ?',
-    'Une petite révision, juste une ?',
-  ],
-  evening: [
-    'Petite révision avant Netflix ?',
-    'On finit la journée en beauté ?',
-    'Un dernier effort avant la nuit ?',
-    'Le soir, ça rentre tout seul.',
-    'Pyjama + flashcards, le combo.',
-  ],
-};
-
-function pickStable(pool, dayHash) {
-  return pool[dayHash % pool.length];
-}
-
-function getMotivation(streak, todayRevisions, dailyGoal) {
-  const dayHash = Math.floor(Date.now() / 86400000);
-  const h = new Date().getHours();
-
-  if (todayRevisions >= dailyGoal && dailyGoal > 0) {
-    return pickStable(MOTIVATION_POOLS.done, dayHash);
-  }
-  if (streak >= 5) {
-    return `${streak} ${pickStable(MOTIVATION_POOLS.streakStrong, dayHash)}`;
-  }
-  if (streak >= 1 && todayRevisions > 0) {
-    return pickStable(MOTIVATION_POOLS.streakSmall, dayHash);
-  }
-  if (h < 12)  return pickStable(MOTIVATION_POOLS.morning, dayHash);
-  if (h < 18)  return pickStable(MOTIVATION_POOLS.afternoon, dayHash);
-  return pickStable(MOTIVATION_POOLS.evening, dayHash);
-}
-
 export default function Home() {
   const { currentUser, isPremium } = useAuth();
   const prenom = currentUser?.displayName ?? 'toi';
@@ -185,7 +119,6 @@ export default function Home() {
 
         <div className="rv-greeting home-greeting">
           <h2 className="rv-greeting-title">Envie de réviser ?</h2>
-          <p className="rv-greeting-sub">{getMotivation(streak, todayRevisions, dailyGoal)}</p>
         </div>
 
         <HeroCTA
