@@ -114,6 +114,11 @@
   --shadow-pop:    0 12px 32px rgba(45,43,87,0.18);
   --shadow-shell:  0 32px 80px rgba(45,43,87,0.12);
 
+  /* Halo de page (deux taches radiales derrière le haut de chaque écran,
+     cf. .app::before) : orange mascotte + sable. Redéfini par thème. */
+  --halo-a: rgba(255, 138, 61, 0.30);
+  --halo-b: rgba(255, 201, 130, 0.32);
+
   /* Skeleton (rv-skeleton) */
   --skeleton-shimmer: rgba(255, 255, 255, 0.6);
 
@@ -142,6 +147,8 @@
   --border-tip:     #2A2640;
   --border-formula: #2F4788;
   --skeleton-shimmer: rgba(255, 255, 255, 0.07);
+  --halo-a: rgba(255, 138, 61, 0.16);
+  --halo-b: rgba(255, 201, 130, 0.14);
 
   --text-primary:   #F2EFFA;
   --text-secondary: #B5AECC;
@@ -215,6 +222,8 @@
   --border-tip:     #2E2650;
   --border-formula: #3A2E8C;
   --skeleton-shimmer: rgba(255, 255, 255, 0.07);
+  --halo-a: rgba(167, 139, 255, 0.16);
+  --halo-b: rgba(255, 168, 102, 0.12);
 
   --text-primary:   #F2EFFA;
   --text-secondary: #B5AECC;
@@ -288,6 +297,8 @@
   --accent-orange-soft:   #F8DDD2;
   --accent-orange-ink:    #8F2A0E;
 
+  --halo-a: rgba(201, 64, 26, 0.14);
+  --halo-b: rgba(255, 190, 90, 0.30);
   --radius-card:   18px;
   --shadow-card:   0 3px 10px rgba(90,64,20,0.10), 0 1px 2px rgba(90,64,20,0.08);
   --grad-hero: linear-gradient(135deg, #2743C7 0%, #1E35A8 60%, #16277E 100%);
@@ -318,6 +329,8 @@
   --accent-violet-soft:   #EDE7FF;
   --accent-violet-ink:    #2A1C77;
 
+  --halo-a: rgba(91, 63, 232, 0.16);
+  --halo-b: rgba(255, 138, 61, 0.20);
   --shadow-card:   0 6px 18px rgba(76,51,196,0.14), 0 1px 3px rgba(76,51,196,0.08);
   --grad-hero: linear-gradient(135deg, #6B4EFF 0%, #4C33C4 60%, #3A26A0 100%);
 }
@@ -351,6 +364,8 @@
   --accent-orange-soft:   #FCE0DB;
   --accent-orange-ink:    #9E3324;
 
+  --halo-a: rgba(14, 122, 85, 0.14);
+  --halo-b: rgba(242, 109, 91, 0.18);
   --shadow-card:   0 4px 14px rgba(14,90,60,0.10), 0 1px 3px rgba(14,90,60,0.06);
   --grad-hero: linear-gradient(135deg, #12A06E 0%, #0E7A55 60%, #095C40 100%);
 }
@@ -433,7 +448,29 @@ input, textarea {
   flex-direction: column;
   position: relative;
   overflow: hidden;
+  /* Contexte d'empilement propre : le halo ci-dessous (z-index -1) se
+     glisse entre le fond du shell et tout le contenu, sans toucher aux
+     overlays fixes (toasts, coach, modales) qui vivent tous dans .app. */
+  isolation: isolate;
 }
+
+/* Halo de page : deux taches radiales chaudes en haut de chaque écran
+   (tokens --halo-a/--halo-b, par thème). Fixé au shell : le contenu qui
+   scrolle glisse par-dessus. Opt-out : .app--no-halo. */
+.app::before {
+  content: '';
+  position: absolute;
+  top: -70px;
+  left: -50px;
+  right: -50px;
+  height: 360px;
+  background:
+    radial-gradient(52% 58% at 20% 36%, var(--halo-a) 0%, transparent 72%),
+    radial-gradient(44% 50% at 84% 20%, var(--halo-b) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: -1;
+}
+.app--no-halo::before { display: none; }
 
 /* Tablette : container plus large, toujours centré */
 @media (min-width: 431px) and (max-width: 1024px) {

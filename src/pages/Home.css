@@ -156,23 +156,3 @@
   min-width: 32px;
   text-align: right;
 }
-
-/* ── Halo chaud derrière l'en-tête (orange de la mascotte + sable) ──
- * Positionné sur la page (hors zone de scroll) : le contenu glisse par-dessus. */
-.home-page::before {
-  content: '';
-  position: absolute;
-  top: -70px;
-  left: -50px;
-  right: -50px;
-  height: 360px;
-  background:
-    radial-gradient(52% 58% at 20% 36%, rgba(255, 138, 61, 0.30) 0%, rgba(255, 138, 61, 0) 72%),
-    radial-gradient(44% 50% at 84% 20%, rgba(255, 201, 130, 0.32) 0%, rgba(255, 201, 130, 0) 70%);
-  pointer-events: none;
-  z-index: 0;
-}
-:root[data-theme="dark"] .home-page::before,
-:root[data-theme="nuit-encre"] .home-page::before { opacity: 0.5; }
-.home-page .rv-user-header,
-.home-page .content { position: relative; z-index: 1; }
