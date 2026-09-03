@@ -39,6 +39,49 @@ function formatDate(ts) {
   return d.toLocaleDateString('fr-FR', { day: 'numeric', month: 'short' });
 }
 
+// Sous-titre du greeting : d'abord l'information utile (cartes dues,
+// objectif, série), sinon une phrase calme selon le moment. Ton sobre —
+// pas de blague forcée. Rotation stable par jour (pas de variance render-to-render).
+const SUB_POOLS = {
+  done: [
+    "Objectif du jour atteint.",
+    "C'est fait pour aujourd'hui.",
+    'La séance du jour est bouclée.',
+  ],
+  morning: [
+    'Quelques cartes pour bien commencer la journée.',
+    'Une séance courte, et la journée est lancée.',
+    'Le matin, quelques minutes suffisent.',
+  ],
+  afternoon: [
+    'Cinq minutes suffisent pour avancer.',
+    'Une petite séance avant ce soir ?',
+    'Le bon moment pour revoir une leçon.',
+  ],
+  evening: [
+    'Une dernière révision avant de dormir ?',
+    'Le soir, une courte séance suffit.',
+    'Revoir ses cartes le soir aide à retenir.',
+  ],
+};
+
+function pickStable(pool, dayHash) {
+  return pool[dayHash % pool.length];
+}
+
+function getGreetingSub({ dueCards, streak, todayRevisions, dailyGoal }) {
+  const dayHash = Math.floor(Date.now() / 86400000);
+  const h = new Date().getHours();
+
+  if (dailyGoal > 0 && todayRevisions >= dailyGoal) return pickStable(SUB_POOLS.done, dayHash);
+  if (dueCards > 0) return dueCards === 1 ? '1 carte à revoir aujourd\'hui.' : `${dueCards} cartes à revoir aujourd'hui.`;
+  if (streak >= 2) return `${streak} jours de suite. Continue comme ça.`;
+  if (todayRevisions > 0) return 'Tu as déjà révisé aujourd\'hui, bien joué.';
+  if (h < 12)  return pickStable(SUB_POOLS.morning, dayHash);
+  if (h < 18)  return pickStable(SUB_POOLS.afternoon, dayHash);
+  return pickStable(SUB_POOLS.evening, dayHash);
+}
+
 export default function Home() {
   const { currentUser, isPremium } = useAuth();
   const prenom = currentUser?.displayName ?? 'toi';
@@ -99,6 +142,12 @@ export default function Home() {
 
   const remaining = dailyGoal - todayRevisions;
   const goalReached = todayRevisions >= dailyGoal;
+  // Cartes dues toutes leçons confondues (même règle que le rappel quotidien).
+  const dueCards = useMemo(() => allLessons.reduce(
+    (sum, l) => sum + countDueCards(l.id, l.flashcardsCount ?? l.aiData?.flashcards?.length ?? 0),
+    0
+  ), [allLessons]);
+  const greetingSub = getGreetingSub({ dueCards, streak, todayRevisions, dailyGoal });
 
   return (
     <div className="app home-page">
@@ -119,6 +168,7 @@ export default function Home() {
 
         <div className="rv-greeting home-greeting">
           <h2 className="rv-greeting-title">Envie de réviser ?</h2>
+          <p className="rv-greeting-sub">{greetingSub}</p>
         </div>
 
         <HeroCTA
