@@ -1,3 +1,4 @@
+import { PageIntro } from '../components/PageIntro'
 import { RefreshIcon, ChatIcon, CheckIcon, XIcon } from '../components/Icons'
 import { useState, useEffect, useMemo } from 'react'
 import { Link } from 'react-router-dom'
@@ -173,13 +174,12 @@ function QuizSession() {
     mascotPose = isCorrect ? 'celebration' : 'sad'
   }
 
-  // Sub du PageHeader = bar + counter
+  // Barre de progression sous le sous-titre de l'intro (le compteur est dans le sous-titre)
   const subBar = (
-    <div className="quiz-header-sub">
+    <div className="quiz-header-sub" role="progressbar" aria-label={`Question ${current + 1} sur ${questions.length}`} aria-valuemin={1} aria-valuemax={questions.length} aria-valuenow={current + 1}>
       <div className="rv-bar quiz-header-bar">
         <div className="rv-bar-fill rv-bar-fill--orange" style={{ width: `${progress}%` }} />
       </div>
-      <span className="quiz-header-counter">{current + 1}/{questions.length}</span>
     </div>
   )
 
@@ -235,8 +235,6 @@ function QuizSession() {
 
       <PageHeader
         variant="back"
-        title="Quiz"
-        sub={subBar}
         right={coachLessonId
           ? <><CoachHeaderButton onClick={() => openCoach()} />{scorePill}</>
           : scorePill}
@@ -244,6 +242,11 @@ function QuizSession() {
 
       {/* ── Contenu ── */}
       <div className="content quiz-content">
+
+        {/* Intro façon Home — la mascotte narratrice, juste dessous, reste l'illustration */}
+        <PageIntro title="Quiz" sub={`Question ${current + 1} sur ${questions.length} · ${lessonTitle}`} className="quiz-intro">
+          {subBar}
+        </PageIntro>
 
         <div className="quiz-ai-row"><span className="ai-badge">✦ Généré par IA</span></div>
 

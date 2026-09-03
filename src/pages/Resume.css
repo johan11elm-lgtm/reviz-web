@@ -31,17 +31,6 @@
   gap: 16px;
 }
 
-/* ── Hero présence (utilise HeroCTA orange en mode statique) ── */
-.resume-page .resume-hero-cta {
-  /* Mode "présence" : pas de cursor pointer car non-cliquable */
-  cursor: default;
-  margin-bottom: 4px;
-}
-.resume-page .resume-hero-cta:active { filter: none; }
-@media (hover: hover) and (pointer: fine) {
-  .resume-page .resume-hero-cta:hover { filter: none; }
-}
-
 .resume-page .resume-ai-row {
   text-align: center;
   margin-bottom: -6px;
@@ -216,3 +205,6 @@
 @media (max-width: 430px) {
   .resume-page .resume-end-screen { border-radius: 0; }
 }
+
+/* ── Intro (PageIntro) : dans la zone de scroll, qui porte la gouttière ── */
+.resume-page .resume-intro { padding: 4px 0 0; }

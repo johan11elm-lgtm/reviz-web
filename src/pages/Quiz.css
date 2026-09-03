@@ -307,3 +307,7 @@
 @media (max-width: 430px) {
   .quiz-page .quiz-end-screen { border-radius: 0; }
 }
+
+/* ── Intro (PageIntro) : dans la zone de scroll, barre de progression sous le sous-titre ── */
+.quiz-page .quiz-intro { padding: 4px 0 0; }
+.quiz-page .quiz-intro .quiz-header-sub { margin-top: 10px; max-width: 240px; }

@@ -3,7 +3,7 @@ import { useState, useRef, useEffect, useMemo } from 'react'
 import { Link } from 'react-router-dom'
 import { recordRevision } from '../services/revisionService'
 import { PageHeader } from '../components/PageHeader'
-import { HeroCTA } from '../components/HeroCTA'
+import { PageIntro } from '../components/PageIntro'
 import { Mascot } from '../components/Mascot'
 import { MissingLessonState } from '../components/MissingLessonState'
 import { FormatFeedback } from '../components/FormatFeedback'
@@ -190,8 +190,6 @@ function ResumeContent() {
 
       <PageHeader
         variant="back"
-        title="Résumé"
-        sub={`${resumeData.readingTime} min de lecture`}
         right={coachLessonId
           ? <><CoachHeaderButton onClick={() => setCoachOpen(true)} />{shareBtn}</>
           : shareBtn}
@@ -208,17 +206,17 @@ function ResumeContent() {
       {/* ── Contenu scrollable ── */}
       <div className="content resume-content" ref={contentRef}>
 
-        {/* Hero présence — mascotte dominante style Home */}
+        {/* Intro façon Home — titre de la leçon, matière · temps de lecture, mascotte reading */}
+        <PageIntro
+          title={resumeData.title}
+          sub={`${resumeData.subject} · ${resumeData.readingTime} min de lecture`}
+          mascot="reading"
+          mascotSize={140}
+          className="resume-intro"
+        />
         <div className="resume-ai-row">
           <span className="ai-badge">✦ Généré par IA</span>
         </div>
-        <HeroCTA
-          tone="orange"
-          mascot="reading"
-          eyebrow={resumeData.subject}
-          title={resumeData.title}
-          className="resume-hero-cta"
-        />
 
         {/* À retenir */}
         <div className="rv-callout rv-callout--violet resume-retenir">
