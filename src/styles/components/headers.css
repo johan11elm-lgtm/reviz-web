@@ -247,3 +247,28 @@
   .rv-user-name { font-size: 16px; }
   .rv-user-xp { max-width: 180px; }
 }
+
+/* ── Page intro (Cours, Progrès…) : même langage que le greeting de la Home,
+ * titre noir + sous-titre à gauche, mascotte posée à droite, sans carte. ── */
+.rv-page-intro {
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+  padding: 22px var(--page-gutter) 4px;
+}
+.rv-page-intro-text {
+  flex: 1;
+  min-width: 0;
+  padding-bottom: 10px;
+}
+.rv-page-intro-title { display: block; }
+.rv-page-intro-sub { margin-top: 6px; }
+.rv-page-intro-mascot {
+  flex-shrink: 0;
+  margin-right: -6px;
+  margin-bottom: -4px;
+  filter: drop-shadow(0 12px 22px rgba(232, 101, 26, 0.24));
+}
+@media (max-width: 430px) {
+  .rv-page-intro { padding-top: 18px; }
+}

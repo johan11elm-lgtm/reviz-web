@@ -25,76 +25,8 @@
   gap: 6px;
 }
 
-/* ── Hero narratif (mascotte commente la progression) ── */
-.pg-narrator-hero {
-  position: relative;
-  display: flex;
-  align-items: stretch;
-  gap: 12px;
-  padding: 18px 18px 18px 22px;
-  border-radius: var(--radius-lg);
-  background: var(--grad-hero);
-  box-shadow:
-    0 18px 40px rgba(45, 43, 87, 0.28),
-    0 4px 12px rgba(45, 43, 87, 0.16);
-  overflow: hidden;
-  isolation: isolate;
-  min-height: 180px;
-  flex-shrink: 0;
-}
-
-.pg-narrator-glow {
-  position: absolute;
-  bottom: -60px;
-  right: -30px;
-  width: 220px;
-  height: 220px;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0) 60%);
-  pointer-events: none;
-  z-index: 0;
-}
-
-.pg-narrator-content {
-  position: relative;
-  z-index: 1;
-  flex: 1;
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-
-.pg-narrator-title {
-  font-family: 'Geist', sans-serif;
-  font-size: 28px;
-  font-weight: 800;
-  letter-spacing: -1px;
-  line-height: 1;
-  color: #fff;
-  margin: 0 0 4px;
-}
-
-/* Phrase du coach : sous-texte hero (même langage que .rv-hero-sub),
-   pas de bulle — le chrome blanc jurait sur le gradient. */
-.pg-narrator-sub {
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 1.4;
-  color: rgba(255, 255, 255, 0.85);
-  margin: 0;
-}
-
-.pg-narrator-mascot {
-  position: relative;
-  z-index: 1;
-  flex-shrink: 0;
-  /* Ancrée en bas de carte (posée sur le bord), tête entière visible. */
-  align-self: flex-end;
-  margin-right: -14px;
-  margin-bottom: -44px;
-  filter: drop-shadow(0 12px 22px rgba(0, 0, 0, 0.28));
-}
+/* ── Intro (PageIntro) : dans la zone de scroll, qui porte déjà la gouttière ── */
+.pg-intro { padding: 12px 0 0; }
 
 /* ── Streak hero (signature visuelle orange + mascotte fire) ── */
 .pg-streak-card {
@@ -603,15 +535,6 @@
 @media (max-width: 430px) {
   .pg-content { padding: 8px 16px 110px; gap: 14px; }
 
-  /* Hero narrator — réduire mascot et padding */
-  .pg-narrator-hero { padding: 16px 14px 16px 18px; min-height: 158px; gap: 8px; }
-  .pg-narrator-title { font-size: 24px; letter-spacing: -0.8px; }
-  .pg-narrator-sub { font-size: 13px; }
-  .pg-narrator-mascot {
-    width: 140px !important;
-    height: 140px !important;
-    margin-right: -10px;
-  }
 
   /* Level card — mascot plus petite, info plus serrée */
   .pg-level-card { gap: 12px; }
@@ -694,10 +617,6 @@
 /* ── Responsive ultra-narrow (≤ 360px : iPhone SE 1st gen, vieux androids) ── */
 @media (max-width: 360px) {
   .pg-content { padding: 6px 12px 100px; }
-  .pg-narrator-mascot {
-    width: 120px !important;
-    height: 120px !important;
-  }
   .pg-streak-mascot {
     width: 76px !important;
     height: 76px !important;

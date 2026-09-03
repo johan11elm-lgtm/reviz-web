@@ -1,3 +1,4 @@
+import { PageIntro } from '../components/PageIntro';
 import { SearchIcon, FlameIcon, FlashcardsIcon, QuizIcon, BookOpenIcon } from '../components/Icons';
 import { useState, useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -125,33 +126,14 @@ export default function Cours() {
   return (
     <div className="app cours-page">
 
-      {/* Sans leçon, le hero violet n'est pas rendu : le header porte le titre.
-          Avec leçons, le hero s'en charge — pas de header vide au-dessus. */}
+      {/* Sans leçon : simple en-tête titre (l'état vide porte la mascotte).
+          Avec leçons : intro façon Home, titre + phrase du coach + mascotte. */}
       {!hasLessons && (
         <PageHeader variant="title-only" title="Mes cours" />
       )}
 
       {hasLessons && (
-        <div className="cours-hero-wrap">
-          <div className="cours-narrator-hero">
-            <div className="cours-narrator-glow" aria-hidden="true" />
-            <div className="cours-narrator-content">
-              <h1 className="cours-narrator-title">Mes cours</h1>
-              {heroPhrase && (
-                <p className="cours-narrator-sub">{heroPhrase}</p>
-              )}
-            </div>
-            <Mascot
-              pose="reading"
-              size={180}
-              glow
-              priority
-              className="cours-narrator-mascot"
-              alt=""
-              aria-hidden="true"
-            />
-          </div>
-        </div>
+        <PageIntro title="Mes cours" sub={heroPhrase} mascot="reading" />
       )}
 
       {/* Search */}

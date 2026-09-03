@@ -1,3 +1,4 @@
+import { PageIntro } from '../components/PageIntro';
 import { FlashcardsIcon, QuizIcon, ResumeIcon, MindmapIcon, BookIcon, BoltIcon, CalendarIcon, TrophyIcon } from '../components/Icons';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -233,27 +234,10 @@ export default function Progres() {
   return (
     <div className="app progres-page">
 
-      <PageHeader variant="title-only" />
-
       <div className="pg-content">
 
-        {/* Hero narratif — Réviz commente la progression */}
-        <div className="pg-narrator-hero">
-          <div className="pg-narrator-glow" aria-hidden="true" />
-          <div className="pg-narrator-content">
-            <h1 className="pg-narrator-title">Mes progrès</h1>
-            <p className="pg-narrator-sub">{hero.phrase}</p>
-          </div>
-          <Mascot
-            pose={hero.mascot}
-            size={180}
-            glow
-            priority
-            className="pg-narrator-mascot"
-            alt=""
-            aria-hidden="true"
-          />
-        </div>
+        {/* Intro façon Home — Réviz commente la progression */}
+        <PageIntro title="Mes progrès" sub={hero.phrase} mascot={hero.mascot} className="pg-intro" />
 
         {/* 1. Level / XP — mascotte graduation à gauche */}
         <div className="rv-card rv-card--padded pg-level-card">
