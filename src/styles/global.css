@@ -585,7 +585,10 @@ html.native .content, html.native .pg-content, html.native .pf-content {
 }
 
 .bottom-nav--hidden {
-  transform: translateY(calc(100% + 24px));
+  /* Sa hauteur + son décalage bas (12 px + safe-area, cf. position: fixed
+     mobile/native) + une marge pour l'ombre : sinon le haut de la capsule
+     dépassait encore de ~22 pt au-dessus de la barre d'accueil iPhone. */
+  transform: translateY(calc(100% + 40px + env(safe-area-inset-bottom, 0px)));
 }
 
 .nav-item {

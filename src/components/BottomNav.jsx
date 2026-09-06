@@ -49,11 +49,23 @@ export function BottomNav() {
     lastY.current = 0;
     let scrollUpAccum = 0;
 
-    const el = document.querySelector('.pg-content') || document.querySelector('.content');
-    if (!el) return;
+    // Le défilement d'une page vit dans son conteneur (.content, .pg-content,
+    // .pf-content, .analyse-content…), jamais sur window. Plutôt que de
+    // deviner sa classe — et de le rater quand la page arrive en lazy après
+    // ce montage — on écoute tous les scrolls en phase de capture sur le
+    // document et on ne garde que les conteneurs verticaux de la page.
+    function onScroll(e) {
+      const el = e.target;
+      if (!(el instanceof Element)) return;
+      // Rangées horizontales (amorces, chips) : pas de défilement vertical.
+      if (el.scrollHeight <= el.clientHeight + 1) return;
+      // Feuilles et modales défilent pour leur compte, la nav reste en place.
+      if (el.closest('[role="dialog"]')) return;
 
-    function onScroll() {
-      const y = el.scrollTop;
+      // Rebond élastique iOS : sans borne, le retour du rebond en bas de page
+      // compte comme une remontée et ré-affiche la nav aussitôt cachée.
+      const max = el.scrollHeight - el.clientHeight;
+      const y = Math.min(Math.max(el.scrollTop, 0), max);
       const delta = y - lastY.current;
 
       if (y < 10) {
@@ -72,8 +84,8 @@ export function BottomNav() {
       lastY.current = y;
     }
 
-    el.addEventListener('scroll', onScroll, { passive: true });
-    return () => el.removeEventListener('scroll', onScroll);
+    document.addEventListener('scroll', onScroll, { capture: true, passive: true });
+    return () => document.removeEventListener('scroll', onScroll, { capture: true });
   }, [pathname]);
 
   return (
