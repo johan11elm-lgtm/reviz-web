@@ -6,13 +6,15 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "build:ios": "vite build --mode ios && bash scripts/guard-ios-bundle.sh && cap sync ios",
-    "sync:ios": "bash scripts/guard-ios-bundle.sh && cap sync ios",
+    "build:ios": "vite build --mode ios && bash scripts/guard-ios-bundle.sh && cap sync ios && bash scripts/ios-live-reload.sh assert",
+    "sync:ios": "bash scripts/guard-ios-bundle.sh && cap sync ios && bash scripts/ios-live-reload.sh assert",
     "preview": "vite preview",
     "test": "vitest run",
     "test:coverage": "vitest run --coverage",
     "test:watch": "vitest",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "ios:live": "bash scripts/ios-live-reload.sh on && vite --mode ios --port ${REVIZ_DEV_PORT:-5173} --strictPort",
+    "ios:live:off": "bash scripts/ios-live-reload.sh off"
   },
   "dependencies": {
     "@capacitor-firebase/authentication": "^8.5.0",
