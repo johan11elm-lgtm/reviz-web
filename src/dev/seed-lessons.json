@@ -1,0 +1,2151 @@
+[
+  {
+    "metadata": {
+      "title": "Le théorème de Thalès",
+      "subject": "Maths",
+      "excerpt": "Dans une configuration de deux droites sécantes coupées par deux parallèles, les longueurs des côtés des triangles formés sont proportionnelles."
+    },
+    "flashcards": [
+      {
+        "front": "Quelle configuration faut-il pour appliquer le théorème de Thalès ?",
+        "back": "Deux droites sécantes en un point, coupées par deux droites parallèles."
+      },
+      {
+        "front": "Quelle égalité donne le théorème de Thalès ?",
+        "back": "AM/AB = AN/AC = MN/BC, où M et N sont sur les côtés du grand triangle."
+      },
+      {
+        "front": "À quoi sert la réciproque du théorème de Thalès ?",
+        "back": "À démontrer que deux droites sont parallèles, à partir de l égalité des rapports."
+      },
+      {
+        "front": "Que faut-il vérifier avant d écrire les rapports ?",
+        "back": "Que les points sont bien alignés dans le même ordre sur chaque droite."
+      },
+      {
+        "front": "Comment calcule-t-on une longueur inconnue avec Thalès ?",
+        "back": "On écrit l égalité des rapports, puis on effectue un produit en croix."
+      },
+      {
+        "front": "Que devient la figure dans la configuration papillon ?",
+        "back": "Le point d intersection est entre les deux parallèles : les triangles sont opposés par le sommet, l égalité reste valable."
+      }
+    ],
+    "quiz": [
+      {
+        "question": "Le théorème de Thalès permet de calculer :",
+        "choices": [
+          "Des aires uniquement",
+          "Des longueurs proportionnelles",
+          "Des angles",
+          "Des volumes"
+        ],
+        "correct": 1,
+        "explanation": "Thalès établit une égalité de rapports de longueurs. Les angles relèvent de la trigonométrie, et aires ou volumes ne sont pas son objet direct."
+      },
+      {
+        "question": "Que faut-il impérativement pour appliquer Thalès ?",
+        "choices": [
+          "Un triangle rectangle",
+          "Deux droites parallèles",
+          "Un cercle",
+          "Trois angles égaux"
+        ],
+        "correct": 1,
+        "explanation": "Le parallélisme est l hypothèse centrale. Le triangle rectangle est l hypothèse de Pythagore, pas de Thalès."
+      },
+      {
+        "question": "La réciproque de Thalès sert à démontrer :",
+        "choices": [
+          "Que deux droites sont parallèles",
+          "Qu un angle est droit",
+          "Qu un triangle est isocèle",
+          "Qu un quadrilatère est un carré"
+        ],
+        "correct": 0,
+        "explanation": "Si les rapports sont égaux et les points alignés dans le même ordre, on conclut au parallélisme."
+      },
+      {
+        "question": "Dans AM/AB = AN/AC, si AM = 3, AB = 6 et AN = 4, alors AC vaut :",
+        "choices": [
+          "6",
+          "12",
+          "8",
+          "2"
+        ],
+        "correct": 2,
+        "explanation": "3/6 = 1/2, donc AN/AC = 1/2 et AC = 4 × 2 = 8."
+      },
+      {
+        "question": "La configuration papillon correspond au cas où :",
+        "choices": [
+          "Les parallèles se coupent",
+          "Le point d intersection est entre les deux parallèles",
+          "Le triangle est équilatéral",
+          "Il n y a qu une seule parallèle"
+        ],
+        "correct": 1,
+        "explanation": "Les deux triangles sont alors opposés par le sommet, mais l égalité des rapports tient toujours."
+      }
+    ],
+    "resume": {
+      "intro": "Le théorème de Thalès relie les longueurs de deux triangles emboîtés formés par deux parallèles.",
+      "keyPoints": [
+        "Il faut deux droites sécantes et deux parallèles",
+        "Les rapports de longueurs sont égaux",
+        "La réciproque démontre le parallélisme",
+        "Le produit en croix donne la longueur cherchée"
+      ],
+      "sections": [
+        {
+          "title": "1. La configuration",
+          "content": "Deux droites se coupent en A. Deux droites parallèles les coupent en B, C et M, N. On obtient deux triangles emboîtés qui ont la même forme mais pas la même taille.",
+          "formula": null,
+          "formulaCaption": null
+        },
+        {
+          "title": "2. L égalité des rapports",
+          "content": "Les côtés se correspondent deux à deux et les rapports sont tous égaux. On écrit l égalité, on remplace par les valeurs connues, puis on fait un produit en croix.",
+          "formula": "AM/AB = AN/AC = MN/BC",
+          "formulaCaption": "Les trois rapports du théorème de Thalès"
+        }
+      ],
+      "keyTerms": [
+        {
+          "term": "Droites sécantes",
+          "def": "Deux droites qui se coupent en un point."
+        },
+        {
+          "term": "Rapport",
+          "def": "Quotient de deux longueurs qui mesure l agrandissement."
+        },
+        {
+          "term": "Réciproque",
+          "def": "Énoncé inverse qui permet de conclure au parallélisme."
+        }
+      ]
+    },
+    "mindmap": {
+      "branches": [
+        {
+          "id": "configuration",
+          "label": "Configuration",
+          "emoji": "📐",
+          "detail": "Deux droites sécantes coupées par deux parallèles.",
+          "children": [
+            "Point d intersection",
+            "Deux parallèles",
+            "Triangles emboîtés"
+          ],
+          "position": "top-left"
+        },
+        {
+          "id": "egalite",
+          "label": "Égalité",
+          "emoji": "🟰",
+          "detail": "Les trois rapports de longueurs sont égaux entre eux.",
+          "children": [
+            "AM/AB",
+            "AN/AC",
+            "MN/BC"
+          ],
+          "position": "top-right"
+        },
+        {
+          "id": "reciproque",
+          "label": "Réciproque",
+          "emoji": "🔄",
+          "detail": "Des rapports égaux prouvent que les droites sont parallèles.",
+          "children": [
+            "Rapports égaux",
+            "Même ordre",
+            "Conclusion parallèles"
+          ],
+          "position": "bottom-left"
+        },
+        {
+          "id": "usages",
+          "label": "Usages",
+          "emoji": "💡",
+          "detail": "On calcule une longueur inaccessible par produit en croix.",
+          "children": [
+            "Produit en croix",
+            "Hauteur d un arbre",
+            "Agrandissement"
+          ],
+          "position": "bottom-right"
+        }
+      ]
+    }
+  },
+  {
+    "metadata": {
+      "title": "Les figures de style",
+      "subject": "Français",
+      "excerpt": "Les figures de style sont des procédés d écriture qui donnent au texte plus de force, d image ou de rythme."
+    },
+    "flashcards": [
+      {
+        "front": "Qu est-ce qu une comparaison ?",
+        "back": "Un rapprochement entre deux éléments à l aide d un outil de comparaison : comme, tel, semblable à."
+      },
+      {
+        "front": "En quoi la métaphore diffère-t-elle de la comparaison ?",
+        "back": "Elle rapproche deux éléments sans outil de comparaison."
+      },
+      {
+        "front": "Qu est-ce qu une personnification ?",
+        "back": "Attribuer des caractéristiques humaines à un animal, un objet ou une idée."
+      },
+      {
+        "front": "À quoi sert une hyperbole ?",
+        "back": "À exagérer volontairement pour frapper l esprit du lecteur."
+      },
+      {
+        "front": "Qu est-ce qu une anaphore ?",
+        "back": "La répétition d un même mot ou groupe de mots en début de phrases ou de vers."
+      },
+      {
+        "front": "Que fait un oxymore ?",
+        "back": "Il réunit deux mots de sens opposés, comme une obscure clarté."
+      }
+    ],
+    "quiz": [
+      {
+        "question": "Il est fort comme un lion est :",
+        "choices": [
+          "Une métaphore",
+          "Une comparaison",
+          "Une hyperbole",
+          "Un oxymore"
+        ],
+        "correct": 1,
+        "explanation": "La présence de comme, outil de comparaison, en fait une comparaison et non une métaphore."
+      },
+      {
+        "question": "Cet homme est un lion est :",
+        "choices": [
+          "Une métaphore",
+          "Une comparaison",
+          "Une litote",
+          "Une anaphore"
+        ],
+        "correct": 0,
+        "explanation": "Le rapprochement se fait sans outil de comparaison : c est une métaphore."
+      },
+      {
+        "question": "Le vent hurlait dans la nuit est :",
+        "choices": [
+          "Une hyperbole",
+          "Un oxymore",
+          "Une personnification",
+          "Une comparaison"
+        ],
+        "correct": 2,
+        "explanation": "Hurler est une action humaine attribuée au vent."
+      },
+      {
+        "question": "Je meurs de faim est :",
+        "choices": [
+          "Une litote",
+          "Une hyperbole",
+          "Une métaphore",
+          "Une anaphore"
+        ],
+        "correct": 1,
+        "explanation": "C est une exagération volontaire pour marquer l intensité."
+      },
+      {
+        "question": "Une obscure clarté est :",
+        "choices": [
+          "Une personnification",
+          "Une anaphore",
+          "Une comparaison",
+          "Un oxymore"
+        ],
+        "correct": 3,
+        "explanation": "Deux termes de sens contraires sont réunis dans la même expression."
+      }
+    ],
+    "resume": {
+      "intro": "Les figures de style enrichissent le texte en créant des images, des effets de rythme ou d insistance.",
+      "keyPoints": [
+        "La comparaison utilise un outil, la métaphore non",
+        "La personnification humanise l inanimé",
+        "L hyperbole exagère, la litote atténue",
+        "L anaphore répète pour insister"
+      ],
+      "sections": [
+        {
+          "title": "1. Les figures d analogie",
+          "content": "Elles rapprochent deux réalités. La comparaison garde un outil comme ou tel. La métaphore le supprime et fusionne les deux images. La personnification prête des traits humains à ce qui n en a pas.",
+          "formula": null,
+          "formulaCaption": null
+        },
+        {
+          "title": "2. Les figures d insistance et d opposition",
+          "content": "L hyperbole grossit le trait, la litote dit moins pour suggérer plus. L anaphore répète un mot en tête de phrase. L oxymore réunit deux contraires pour créer la surprise.",
+          "formula": null,
+          "formulaCaption": null
+        }
+      ],
+      "keyTerms": [
+        {
+          "term": "Métaphore",
+          "def": "Image qui rapproche deux éléments sans outil de comparaison."
+        },
+        {
+          "term": "Hyperbole",
+          "def": "Exagération volontaire pour produire un effet fort."
+        },
+        {
+          "term": "Litote",
+          "def": "Formulation atténuée qui suggère bien plus qu elle ne dit."
+        }
+      ]
+    },
+    "mindmap": {
+      "branches": [
+        {
+          "id": "analogie",
+          "label": "Analogie",
+          "emoji": "🔗",
+          "detail": "Rapprocher deux réalités pour créer une image.",
+          "children": [
+            "Comparaison",
+            "Métaphore",
+            "Personnification"
+          ],
+          "position": "top-left"
+        },
+        {
+          "id": "insistance",
+          "label": "Insistance",
+          "emoji": "📣",
+          "detail": "Répéter ou amplifier pour marquer le lecteur.",
+          "children": [
+            "Anaphore",
+            "Hyperbole",
+            "Gradation"
+          ],
+          "position": "top-right"
+        },
+        {
+          "id": "attenuation",
+          "label": "Atténuation",
+          "emoji": "🤫",
+          "detail": "Dire moins pour faire entendre davantage.",
+          "children": [
+            "Litote",
+            "Euphémisme",
+            "Sous-entendu"
+          ],
+          "position": "bottom-left"
+        },
+        {
+          "id": "opposition",
+          "label": "Opposition",
+          "emoji": "⚔️",
+          "detail": "Confronter deux termes contraires dans la phrase.",
+          "children": [
+            "Oxymore",
+            "Antithèse",
+            "Chiasme"
+          ],
+          "position": "bottom-right"
+        }
+      ]
+    }
+  },
+  {
+    "metadata": {
+      "title": "Le present perfect",
+      "subject": "Anglais",
+      "excerpt": "Le present perfect relie une action passée au moment présent : le résultat compte plus que la date."
+    },
+    "flashcards": [
+      {
+        "front": "Comment se construit le present perfect ?",
+        "back": "have ou has suivi du participe passé du verbe."
+      },
+      {
+        "front": "Quand emploie-t-on has plutôt que have ?",
+        "back": "À la troisième personne du singulier : he, she, it."
+      },
+      {
+        "front": "Quelle différence entre for et since ?",
+        "back": "for indique une durée, since indique un point de départ."
+      },
+      {
+        "front": "Pourquoi ne peut-on pas dire I have seen him yesterday ?",
+        "back": "Une date passée précise impose le prétérit : I saw him yesterday."
+      },
+      {
+        "front": "Que signifie already dans une phrase au present perfect ?",
+        "back": "Déjà : l action est accomplie plus tôt que prévu."
+      },
+      {
+        "front": "Quel est le participe passé de go dans I have been to London ?",
+        "back": "been, qui indique un aller-retour, alors que gone indique que la personne est encore absente."
+      }
+    ],
+    "quiz": [
+      {
+        "question": "Quelle phrase est correcte ?",
+        "choices": [
+          "I have finished my homework",
+          "I have finish my homework",
+          "I has finished my homework",
+          "I have finishing my homework"
+        ],
+        "correct": 0,
+        "explanation": "have suivi du participe passé finished. has est réservé à la troisième personne du singulier."
+      },
+      {
+        "question": "I have lived here ... ten years.",
+        "choices": [
+          "since",
+          "for",
+          "ago",
+          "during"
+        ],
+        "correct": 1,
+        "explanation": "Dix ans est une durée, donc for. since introduirait une date de départ."
+      },
+      {
+        "question": "Quelle phrase est incorrecte ?",
+        "choices": [
+          "She has just arrived",
+          "They have never been to Spain",
+          "We have seen him last week",
+          "He has already eaten"
+        ],
+        "correct": 2,
+        "explanation": "last week est une date passée révolue : il faut le prétérit, We saw him last week."
+      },
+      {
+        "question": "She ... her keys, so she cannot open the door.",
+        "choices": [
+          "lost",
+          "has lost",
+          "is losing",
+          "loses"
+        ],
+        "correct": 1,
+        "explanation": "Le résultat compte dans le présent : la porte reste fermée. C est un present perfect."
+      },
+      {
+        "question": "Le present perfect s emploie surtout pour :",
+        "choices": [
+          "Raconter une date précise",
+          "Relier le passé au présent",
+          "Décrire le futur",
+          "Exprimer une habitude passée"
+        ],
+        "correct": 1,
+        "explanation": "Il établit un lien entre une action passée et sa conséquence actuelle."
+      }
+    ],
+    "resume": {
+      "intro": "Le present perfect exprime un lien entre une action passée et la situation présente.",
+      "keyPoints": [
+        "have ou has plus participe passé",
+        "for pour une durée, since pour un point de départ",
+        "Jamais avec une date passée précise",
+        "Marqueurs : already, yet, never, ever, just"
+      ],
+      "sections": [
+        {
+          "title": "1. La formation",
+          "content": "On utilise l auxiliaire have, ou has à la troisième personne du singulier, suivi du participe passé. À la forme négative on ajoute not, à la forme interrogative on inverse l auxiliaire et le sujet.",
+          "formula": "have / has + past participle",
+          "formulaCaption": "Structure du present perfect"
+        },
+        {
+          "title": "2. L emploi",
+          "content": "On l emploie quand le moment de l action n est pas précisé ou quand le résultat est visible maintenant. Dès qu une date passée apparaît, on bascule au prétérit.",
+          "formula": null,
+          "formulaCaption": null
+        }
+      ],
+      "keyTerms": [
+        {
+          "term": "Participe passé",
+          "def": "Troisième forme du verbe : eaten, seen, gone."
+        },
+        {
+          "term": "for",
+          "def": "Introduit une durée : for three years."
+        },
+        {
+          "term": "since",
+          "def": "Introduit un point de départ : since 2019."
+        }
+      ]
+    },
+    "mindmap": {
+      "branches": [
+        {
+          "id": "formation",
+          "label": "Formation",
+          "emoji": "🧱",
+          "detail": "Auxiliaire have ou has suivi du participe passé.",
+          "children": [
+            "have + PP",
+            "has au singulier",
+            "Négation avec not"
+          ],
+          "position": "top-left"
+        },
+        {
+          "id": "emploi",
+          "label": "Emploi",
+          "emoji": "🕰️",
+          "detail": "L action passée a une conséquence dans le présent.",
+          "children": [
+            "Résultat visible",
+            "Date non précisée",
+            "Expérience de vie"
+          ],
+          "position": "top-right"
+        },
+        {
+          "id": "marqueurs",
+          "label": "Marqueurs",
+          "emoji": "🔖",
+          "detail": "Certains mots signalent le present perfect.",
+          "children": [
+            "already, yet",
+            "never, ever",
+            "just"
+          ],
+          "position": "bottom-left"
+        },
+        {
+          "id": "pieges",
+          "label": "Pièges",
+          "emoji": "⚠️",
+          "detail": "Une date passée précise interdit le present perfect.",
+          "children": [
+            "yesterday interdit",
+            "for et since",
+            "been ou gone"
+          ],
+          "position": "bottom-right"
+        }
+      ]
+    }
+  },
+  {
+    "metadata": {
+      "title": "Le nominatif et l accusatif",
+      "subject": "Allemand",
+      "excerpt": "En allemand, la fonction du groupe nominal se lit dans l article : le nominatif marque le sujet, l accusatif le complément d objet direct."
+    },
+    "flashcards": [
+      {
+        "front": "Quelle fonction marque le nominatif ?",
+        "back": "Le sujet du verbe, celui qui fait l action."
+      },
+      {
+        "front": "Quelle fonction marque l accusatif ?",
+        "back": "Le complément d objet direct, celui qui subit l action."
+      },
+      {
+        "front": "Quel article masculin change à l accusatif ?",
+        "back": "der devient den. C est le seul genre qui change."
+      },
+      {
+        "front": "Que deviennent die et das à l accusatif ?",
+        "back": "Ils ne changent pas : die reste die, das reste das."
+      },
+      {
+        "front": "Quelle question pose-t-on pour trouver le nominatif ?",
+        "back": "Wer ou was, c est-à-dire qui ou quoi fait l action."
+      },
+      {
+        "front": "Quels verbes sont toujours suivis du nominatif ?",
+        "back": "sein, werden et bleiben, car ils relient deux sujets."
+      }
+    ],
+    "quiz": [
+      {
+        "question": "Ich sehe ... Hund. Quel article ?",
+        "choices": [
+          "der",
+          "den",
+          "dem",
+          "des"
+        ],
+        "correct": 1,
+        "explanation": "Hund est masculin et complément d objet direct : l accusatif transforme der en den."
+      },
+      {
+        "question": "... Hund schläft. Quel article ?",
+        "choices": [
+          "Der",
+          "Den",
+          "Dem",
+          "Des"
+        ],
+        "correct": 0,
+        "explanation": "Le chien est sujet du verbe schlafen, donc nominatif : der Hund."
+      },
+      {
+        "question": "Quel genre change de forme à l accusatif ?",
+        "choices": [
+          "Le féminin",
+          "Le neutre",
+          "Le masculin",
+          "Le pluriel"
+        ],
+        "correct": 2,
+        "explanation": "Seul le masculin passe de der à den. Les autres gardent leur article."
+      },
+      {
+        "question": "Ich bin ... Lehrer. Quel cas ?",
+        "choices": [
+          "Accusatif",
+          "Nominatif",
+          "Datif",
+          "Génitif"
+        ],
+        "correct": 1,
+        "explanation": "sein est un verbe d état : il relie deux nominatifs, jamais un accusatif."
+      },
+      {
+        "question": "Er kauft ... Buch. Quel article ?",
+        "choices": [
+          "dem",
+          "des",
+          "der",
+          "das"
+        ],
+        "correct": 3,
+        "explanation": "Buch est neutre : das ne change pas à l accusatif."
+      }
+    ],
+    "resume": {
+      "intro": "En allemand, l article porte la fonction du groupe nominal dans la phrase.",
+      "keyPoints": [
+        "Le nominatif marque le sujet",
+        "L accusatif marque le COD",
+        "Seul le masculin change : der devient den",
+        "sein, werden et bleiben appellent le nominatif"
+      ],
+      "sections": [
+        {
+          "title": "1. Reconnaître le cas",
+          "content": "On pose la question wer ou was pour trouver le sujet, donc le nominatif. On pose wen ou was après le verbe pour trouver le complément d objet direct, donc l accusatif.",
+          "formula": null,
+          "formulaCaption": null
+        },
+        {
+          "title": "2. Les articles",
+          "content": "Au nominatif on a der, die, das et die au pluriel. À l accusatif, seul le masculin bouge et devient den. Les autres formes restent identiques, ce qui simplifie l apprentissage.",
+          "formula": "der → den (masculin uniquement)",
+          "formulaCaption": "La seule variation entre nominatif et accusatif"
+        }
+      ],
+      "keyTerms": [
+        {
+          "term": "Nominatif",
+          "def": "Cas du sujet, celui qui accomplit l action."
+        },
+        {
+          "term": "Accusatif",
+          "def": "Cas du complément d objet direct."
+        },
+        {
+          "term": "Verbe d état",
+          "def": "sein, werden, bleiben : ils sont suivis du nominatif."
+        }
+      ]
+    },
+    "mindmap": {
+      "branches": [
+        {
+          "id": "nominatif",
+          "label": "Nominatif",
+          "emoji": "👤",
+          "detail": "Le cas du sujet, qui fait l action.",
+          "children": [
+            "der, die, das",
+            "Question wer",
+            "Verbes d état"
+          ],
+          "position": "top-left"
+        },
+        {
+          "id": "accusatif",
+          "label": "Accusatif",
+          "emoji": "🎯",
+          "detail": "Le cas du complément d objet direct.",
+          "children": [
+            "den, die, das",
+            "Question wen",
+            "Subit l action"
+          ],
+          "position": "top-right"
+        },
+        {
+          "id": "articles",
+          "label": "Articles",
+          "emoji": "📋",
+          "detail": "Seul le masculin change entre les deux cas.",
+          "children": [
+            "der devient den",
+            "die inchangé",
+            "das inchangé"
+          ],
+          "position": "bottom-left"
+        },
+        {
+          "id": "methode",
+          "label": "Méthode",
+          "emoji": "🔍",
+          "detail": "Repérer le verbe puis poser la bonne question.",
+          "children": [
+            "Trouver le verbe",
+            "Poser wer ou wen",
+            "Choisir l article"
+          ],
+          "position": "bottom-right"
+        }
+      ]
+    }
+  },
+  {
+    "metadata": {
+      "title": "Ser ou Estar",
+      "subject": "Espagnol",
+      "excerpt": "L espagnol distingue deux verbes être : ser pour ce qui définit durablement, estar pour ce qui est passager ou situé."
+    },
+    "flashcards": [
+      {
+        "front": "Quand emploie-t-on ser ?",
+        "back": "Pour l identité, l origine, la profession, la nationalité et les caractéristiques durables."
+      },
+      {
+        "front": "Quand emploie-t-on estar ?",
+        "back": "Pour la localisation, l état passager et le résultat d un changement."
+      },
+      {
+        "front": "Quelle différence entre es aburrido et está aburrido ?",
+        "back": "es aburrido signifie il est ennuyeux, está aburrido signifie il s ennuie."
+      },
+      {
+        "front": "Comment conjugue-t-on ser au présent ?",
+        "back": "soy, eres, es, somos, sois, son."
+      },
+      {
+        "front": "Comment conjugue-t-on estar au présent ?",
+        "back": "estoy, estás, está, estamos, estáis, están."
+      },
+      {
+        "front": "Quel verbe emploie-t-on pour dire l heure ?",
+        "back": "ser : son las tres, il est trois heures."
+      }
+    ],
+    "quiz": [
+      {
+        "question": "Madrid ... en España.",
+        "choices": [
+          "es",
+          "está",
+          "son",
+          "soy"
+        ],
+        "correct": 1,
+        "explanation": "Une localisation géographique appelle toujours estar, même si elle ne change jamais."
+      },
+      {
+        "question": "Yo ... profesor.",
+        "choices": [
+          "soy",
+          "estoy",
+          "es",
+          "está"
+        ],
+        "correct": 0,
+        "explanation": "La profession définit la personne : c est ser, conjugué soy à la première personne."
+      },
+      {
+        "question": "La sopa ... fría.",
+        "choices": [
+          "es",
+          "son",
+          "está",
+          "eres"
+        ],
+        "correct": 2,
+        "explanation": "La soupe est froide maintenant, c est un état passager : estar."
+      },
+      {
+        "question": "Él ... muy alto.",
+        "choices": [
+          "está",
+          "es",
+          "estoy",
+          "somos"
+        ],
+        "correct": 1,
+        "explanation": "La taille est une caractéristique durable de la personne : ser."
+      },
+      {
+        "question": "Nosotros ... cansados.",
+        "choices": [
+          "somos",
+          "sois",
+          "estáis",
+          "estamos"
+        ],
+        "correct": 3,
+        "explanation": "La fatigue est un état passager, et nosotros impose la forme estamos."
+      }
+    ],
+    "resume": {
+      "intro": "Ser décrit ce qu une chose est, estar décrit où elle est ou comment elle va.",
+      "keyPoints": [
+        "ser pour l identité et les traits durables",
+        "estar pour la localisation et les états",
+        "Certains adjectifs changent de sens selon le verbe",
+        "L heure et la date se disent avec ser"
+      ],
+      "sections": [
+        {
+          "title": "1. Le domaine de ser",
+          "content": "Ser sert à définir : identité, origine, nationalité, profession, matière, heure et date. Il répond à la question de savoir ce qu est le sujet, de manière stable.",
+          "formula": "soy, eres, es, somos, sois, son",
+          "formulaCaption": "Conjugaison de ser au présent"
+        },
+        {
+          "title": "2. Le domaine de estar",
+          "content": "Estar sert à situer et à décrire un état momentané : position géographique, humeur, santé, résultat d un changement. Il répond à la question de savoir où et comment.",
+          "formula": "estoy, estás, está, estamos, estáis, están",
+          "formulaCaption": "Conjugaison de estar au présent"
+        }
+      ],
+      "keyTerms": [
+        {
+          "term": "Ser",
+          "def": "Être, pour ce qui définit durablement le sujet."
+        },
+        {
+          "term": "Estar",
+          "def": "Être, pour la localisation et les états passagers."
+        },
+        {
+          "term": "Adjectif à double sens",
+          "def": "listo, aburrido, rico changent de sens selon ser ou estar."
+        }
+      ]
+    },
+    "mindmap": {
+      "branches": [
+        {
+          "id": "ser",
+          "label": "Ser",
+          "emoji": "🪪",
+          "detail": "Ce qui définit le sujet de façon durable.",
+          "children": [
+            "Identité",
+            "Profession",
+            "Heure et date"
+          ],
+          "position": "top-left"
+        },
+        {
+          "id": "estar",
+          "label": "Estar",
+          "emoji": "📍",
+          "detail": "Où se trouve le sujet et comment il va.",
+          "children": [
+            "Localisation",
+            "Humeur",
+            "État passager"
+          ],
+          "position": "top-right"
+        },
+        {
+          "id": "conjugaison",
+          "label": "Conjugaison",
+          "emoji": "✏️",
+          "detail": "Les deux verbes sont irréguliers au présent.",
+          "children": [
+            "soy, eres, es",
+            "estoy, estás, está",
+            "À mémoriser"
+          ],
+          "position": "bottom-left"
+        },
+        {
+          "id": "nuances",
+          "label": "Nuances",
+          "emoji": "🎭",
+          "detail": "Le même adjectif change de sens selon le verbe.",
+          "children": [
+            "es listo : malin",
+            "está listo : prêt",
+            "es rico : riche"
+          ],
+          "position": "bottom-right"
+        }
+      ]
+    }
+  },
+  {
+    "metadata": {
+      "title": "La Première Guerre mondiale",
+      "subject": "Histoire",
+      "excerpt": "De 1914 à 1918, une guerre d un genre nouveau mobilise les sociétés entières et fait basculer l Europe dans la violence de masse."
+    },
+    "flashcards": [
+      {
+        "front": "Quel événement déclenche la guerre en 1914 ?",
+        "back": "L attentat de Sarajevo contre l archiduc François-Ferdinand, le 28 juin 1914."
+      },
+      {
+        "front": "Quelles sont les trois grandes phases du conflit ?",
+        "back": "La guerre de mouvement en 1914, la guerre de position de 1915 à 1917, puis le retour au mouvement en 1918."
+      },
+      {
+        "front": "Qu appelle-t-on la guerre totale ?",
+        "back": "Un conflit qui mobilise l ensemble des ressources humaines, économiques et idéologiques d un pays."
+      },
+      {
+        "front": "Que représente la bataille de Verdun ?",
+        "back": "Une bataille d usure de dix mois en 1916, symbole de la violence subie par les soldats."
+      },
+      {
+        "front": "Quel génocide est commis pendant la guerre ?",
+        "back": "Le génocide des Arméniens dans l Empire ottoman à partir de 1915."
+      },
+      {
+        "front": "Quel traité met fin à la guerre avec l Allemagne ?",
+        "back": "Le traité de Versailles, signé le 28 juin 1919."
+      }
+    ],
+    "quiz": [
+      {
+        "question": "L armistice est signé le :",
+        "choices": [
+          "11 novembre 1918",
+          "28 juin 1919",
+          "2 août 1914",
+          "1er septembre 1939"
+        ],
+        "correct": 0,
+        "explanation": "L armistice du 11 novembre 1918 arrête les combats. Le traité de Versailles de 1919 organise ensuite la paix."
+      },
+      {
+        "question": "La guerre de position se caractérise par :",
+        "choices": [
+          "Des batailles navales",
+          "Les tranchées",
+          "Des raids aériens seuls",
+          "Des combats de cavalerie"
+        ],
+        "correct": 1,
+        "explanation": "Le front se fige de 1915 à 1917 et les armées s enterrent dans un réseau de tranchées."
+      },
+      {
+        "question": "Qu est-ce que l arrière pendant la guerre ?",
+        "choices": [
+          "La deuxième ligne de tranchées",
+          "La société civile mobilisée pour l effort de guerre",
+          "Les colonies",
+          "Les hôpitaux militaires"
+        ],
+        "correct": 1,
+        "explanation": "L arrière désigne la population civile, notamment les femmes dans les usines, qui soutient l effort de guerre."
+      },
+      {
+        "question": "En 1917, quel événement retire la Russie du conflit ?",
+        "choices": [
+          "La bataille de la Marne",
+          "L entrée en guerre des États-Unis",
+          "La révolution russe",
+          "Le traité de Versailles"
+        ],
+        "correct": 2,
+        "explanation": "La révolution de 1917 conduit à la paix séparée de Brest-Litovsk en mars 1918."
+      },
+      {
+        "question": "Le génocide arménien débute en :",
+        "choices": [
+          "1914",
+          "1916",
+          "1918",
+          "1915"
+        ],
+        "correct": 3,
+        "explanation": "Les déportations et massacres systématiques commencent au printemps 1915."
+      }
+    ],
+    "resume": {
+      "intro": "La Première Guerre mondiale inaugure la guerre totale et bouleverse durablement l Europe.",
+      "keyPoints": [
+        "1914-1918, déclenchée par l attentat de Sarajevo",
+        "Guerre de mouvement puis de position",
+        "Mobilisation totale du front et de l arrière",
+        "Génocide arménien à partir de 1915",
+        "Traité de Versailles en 1919"
+      ],
+      "sections": [
+        {
+          "title": "1. Une guerre d un type nouveau",
+          "content": "Le front se fige dans les tranchées et l artillerie industrielle provoque des pertes immenses. Verdun et la Somme, en 1916, deviennent les symboles de cette violence de masse subie par les soldats.",
+          "formula": null,
+          "formulaCaption": null
+        },
+        {
+          "title": "2. Une guerre totale",
+          "content": "Les États mobilisent l économie, la science et la propagande. Les femmes remplacent les hommes dans les usines et les champs. Les civils deviennent une cible, comme le montre le génocide des Arméniens.",
+          "formula": null,
+          "formulaCaption": null
+        }
+      ],
+      "keyTerms": [
+        {
+          "term": "Guerre totale",
+          "def": "Conflit qui mobilise toutes les ressources d un pays."
+        },
+        {
+          "term": "Tranchée",
+          "def": "Fossé fortifié où vivent et combattent les soldats."
+        },
+        {
+          "term": "Génocide",
+          "def": "Extermination programmée d un groupe humain."
+        }
+      ]
+    },
+    "mindmap": {
+      "branches": [
+        {
+          "id": "declenchement",
+          "label": "Déclenchement",
+          "emoji": "💥",
+          "detail": "L attentat de Sarajevo enclenche le jeu des alliances.",
+          "children": [
+            "Sarajevo 1914",
+            "Alliances",
+            "Mobilisation générale"
+          ],
+          "position": "top-left"
+        },
+        {
+          "id": "phases",
+          "label": "Phases",
+          "emoji": "🗓️",
+          "detail": "Mouvement, puis position, puis retour au mouvement.",
+          "children": [
+            "1914 mouvement",
+            "1915-1917 tranchées",
+            "1918 dénouement"
+          ],
+          "position": "top-right"
+        },
+        {
+          "id": "guerretotale",
+          "label": "Guerre totale",
+          "emoji": "🏭",
+          "detail": "Toute la société est mise au service du front.",
+          "children": [
+            "Usines de guerre",
+            "Femmes à l arrière",
+            "Propagande"
+          ],
+          "position": "bottom-left"
+        },
+        {
+          "id": "bilan",
+          "label": "Bilan",
+          "emoji": "🕊️",
+          "detail": "Des millions de morts et une paix fragile.",
+          "children": [
+            "Armistice 1918",
+            "Versailles 1919",
+            "Génocide arménien"
+          ],
+          "position": "bottom-right"
+        }
+      ]
+    }
+  },
+  {
+    "metadata": {
+      "title": "L urbanisation dans le monde",
+      "subject": "Géographie",
+      "excerpt": "Plus de la moitié de l humanité vit en ville : la croissance urbaine redessine les territoires et creuse les inégalités."
+    },
+    "flashcards": [
+      {
+        "front": "Qu est-ce que l urbanisation ?",
+        "back": "L augmentation de la part de la population qui vit en ville."
+      },
+      {
+        "front": "Qu est-ce qu une métropole ?",
+        "back": "Une grande ville qui concentre les fonctions de commandement économiques, politiques et culturelles."
+      },
+      {
+        "front": "Qu est-ce que l étalement urbain ?",
+        "back": "L extension de la ville sur ses marges, qui consomme des espaces agricoles et naturels."
+      },
+      {
+        "front": "Qu appelle-t-on un bidonville ?",
+        "back": "Un quartier d habitat précaire, souvent auto-construit et sans équipements de base."
+      },
+      {
+        "front": "Où la croissance urbaine est-elle la plus rapide aujourd hui ?",
+        "back": "En Afrique et en Asie du Sud, où les villes gagnent des millions d habitants par décennie."
+      },
+      {
+        "front": "Qu est-ce que la périurbanisation ?",
+        "back": "L installation d habitants en périphérie, qui continuent de travailler dans la ville-centre."
+      }
+    ],
+    "quiz": [
+      {
+        "question": "Une métropole se définit d abord par :",
+        "choices": [
+          "Sa surface",
+          "Sa concentration de fonctions de commandement",
+          "Son ancienneté",
+          "Son altitude"
+        ],
+        "correct": 1,
+        "explanation": "C est le pouvoir de décision concentré, plus que la seule taille, qui fait la métropole."
+      },
+      {
+        "question": "L étalement urbain consomme surtout :",
+        "choices": [
+          "Des espaces agricoles et naturels",
+          "Des zones industrielles",
+          "Des centres historiques",
+          "Des littoraux uniquement"
+        ],
+        "correct": 0,
+        "explanation": "La ville s étend sur ses marges, au détriment des terres cultivées et des milieux naturels."
+      },
+      {
+        "question": "La croissance urbaine est aujourd hui la plus forte :",
+        "choices": [
+          "En Europe de l Ouest",
+          "En Amérique du Nord",
+          "En Afrique et en Asie du Sud",
+          "En Océanie"
+        ],
+        "correct": 2,
+        "explanation": "Ces régions cumulent forte croissance démographique et exode rural."
+      },
+      {
+        "question": "Quel terme désigne un quartier d habitat précaire ?",
+        "choices": [
+          "Métropole",
+          "Périurbain",
+          "Centre d affaires",
+          "Bidonville"
+        ],
+        "correct": 3,
+        "explanation": "Le bidonville est un habitat auto-construit, dépourvu d équipements de base."
+      },
+      {
+        "question": "La périurbanisation désigne :",
+        "choices": [
+          "L installation en périphérie avec un travail en ville",
+          "La destruction des centres-villes",
+          "La construction de gratte-ciels",
+          "Le retour à la campagne sans lien urbain"
+        ],
+        "correct": 0,
+        "explanation": "Les périurbains habitent hors de la ville mais restent dépendants d elle au quotidien."
+      }
+    ],
+    "resume": {
+      "intro": "L urbanisation est le fait majeur du peuplement contemporain et transforme profondément les territoires.",
+      "keyPoints": [
+        "Plus d un humain sur deux vit en ville",
+        "Les métropoles concentrent le pouvoir",
+        "La croissance est la plus rapide au Sud",
+        "L étalement urbain pose un défi environnemental"
+      ],
+      "sections": [
+        {
+          "title": "1. Un monde de villes",
+          "content": "L urbanisation progresse partout mais à des rythmes différents. Les pays du Nord sont déjà très urbanisés et voient surtout un étalement. Les pays du Sud connaissent une croissance urbaine rapide, portée par l exode rural.",
+          "formula": null,
+          "formulaCaption": null
+        },
+        {
+          "title": "2. Des villes inégales",
+          "content": "Les métropoles concentrent richesses et fonctions de commandement, mais aussi de fortes inégalités. Quartiers d affaires et bidonvilles coexistent parfois à quelques kilomètres, ce qui pose la question de la ville durable.",
+          "formula": null,
+          "formulaCaption": null
+        }
+      ],
+      "keyTerms": [
+        {
+          "term": "Métropole",
+          "def": "Grande ville qui concentre les fonctions de commandement."
+        },
+        {
+          "term": "Étalement urbain",
+          "def": "Extension de la ville sur ses périphéries."
+        },
+        {
+          "term": "Exode rural",
+          "def": "Départ des habitants des campagnes vers les villes."
+        }
+      ]
+    },
+    "mindmap": {
+      "branches": [
+        {
+          "id": "definition",
+          "label": "Définition",
+          "emoji": "🏙️",
+          "detail": "La part des citadins augmente à l échelle mondiale.",
+          "children": [
+            "Plus de 50 pour cent",
+            "Exode rural",
+            "Croissance urbaine"
+          ],
+          "position": "top-left"
+        },
+        {
+          "id": "metropoles",
+          "label": "Métropoles",
+          "emoji": "🏢",
+          "detail": "Elles concentrent décisions, richesses et flux.",
+          "children": [
+            "Quartier d affaires",
+            "Réseaux mondiaux",
+            "Fonctions de commandement"
+          ],
+          "position": "top-right"
+        },
+        {
+          "id": "inegalites",
+          "label": "Inégalités",
+          "emoji": "⚖️",
+          "detail": "Richesse et précarité cohabitent dans la même ville.",
+          "children": [
+            "Bidonvilles",
+            "Ségrégation",
+            "Accès à l eau"
+          ],
+          "position": "bottom-left"
+        },
+        {
+          "id": "durabilite",
+          "label": "Durabilité",
+          "emoji": "🌱",
+          "detail": "Concilier croissance urbaine et respect des milieux.",
+          "children": [
+            "Étalement urbain",
+            "Transports",
+            "Ville durable"
+          ],
+          "position": "bottom-right"
+        }
+      ]
+    }
+  },
+  {
+    "metadata": {
+      "title": "Chromosomes, ADN et hérédité",
+      "subject": "SVT",
+      "excerpt": "L information génétique est portée par les chromosomes du noyau et se transmet des parents aux enfants lors de la reproduction sexuée."
+    },
+    "flashcards": [
+      {
+        "front": "Où se trouve l information génétique dans la cellule ?",
+        "back": "Dans le noyau, portée par les chromosomes."
+      },
+      {
+        "front": "De quoi un chromosome est-il constitué ?",
+        "back": "D une molécule d ADN très condensée."
+      },
+      {
+        "front": "Combien de chromosomes compte une cellule humaine ?",
+        "back": "46 chromosomes, soit 23 paires."
+      },
+      {
+        "front": "Qu est-ce qu un gène ?",
+        "back": "Un segment d ADN qui porte l information d un caractère héréditaire."
+      },
+      {
+        "front": "Combien de chromosomes contient un gamète ?",
+        "back": "23 chromosomes, soit la moitié du nombre habituel."
+      },
+      {
+        "front": "Qu est-ce qu un allèle ?",
+        "back": "Une version possible d un même gène, par exemple pour le groupe sanguin."
+      }
+    ],
+    "quiz": [
+      {
+        "question": "Une cellule humaine contient normalement :",
+        "choices": [
+          "23 chromosomes",
+          "46 chromosomes",
+          "92 chromosomes",
+          "12 chromosomes"
+        ],
+        "correct": 1,
+        "explanation": "46 chromosomes organisés en 23 paires, une de chaque parent."
+      },
+      {
+        "question": "Un gène est :",
+        "choices": [
+          "Une cellule entière",
+          "Un organite du cytoplasme",
+          "Un segment d ADN portant un caractère",
+          "Une protéine"
+        ],
+        "correct": 2,
+        "explanation": "Le gène est une portion d ADN qui code une information héréditaire précise."
+      },
+      {
+        "question": "Les gamètes contiennent :",
+        "choices": [
+          "23 chromosomes",
+          "46 chromosomes",
+          "Aucun chromosome",
+          "69 chromosomes"
+        ],
+        "correct": 0,
+        "explanation": "La division qui les produit divise le lot par deux, pour qu à la fécondation on retrouve 46."
+      },
+      {
+        "question": "La fécondation aboutit à :",
+        "choices": [
+          "Un gamète",
+          "Un chromosome isolé",
+          "Une cellule-œuf à 46 chromosomes",
+          "Une cellule sans noyau"
+        ],
+        "correct": 2,
+        "explanation": "23 chromosomes du père et 23 de la mère reconstituent les 46 de la cellule-œuf."
+      },
+      {
+        "question": "Deux versions différentes d un même gène s appellent :",
+        "choices": [
+          "Des noyaux",
+          "Des cellules",
+          "Des protéines",
+          "Des allèles"
+        ],
+        "correct": 3,
+        "explanation": "Chaque individu possède deux allèles par gène, un de chaque parent."
+      }
+    ],
+    "resume": {
+      "intro": "Les chromosomes portent l ADN, support de l information héréditaire transmise à chaque génération.",
+      "keyPoints": [
+        "46 chromosomes dans une cellule humaine",
+        "Le gène est un segment d ADN",
+        "Les gamètes n en portent que 23",
+        "La fécondation rétablit les 46"
+      ],
+      "sections": [
+        {
+          "title": "1. Le support de l information",
+          "content": "Dans le noyau, l ADN s enroule pour former les chromosomes. Chaque chromosome porte de nombreux gènes, et chaque gène existe en plusieurs versions appelées allèles.",
+          "formula": null,
+          "formulaCaption": null
+        },
+        {
+          "title": "2. La transmission",
+          "content": "Les gamètes ne reçoivent qu un chromosome de chaque paire. À la fécondation, les deux lots se réunissent et forment une cellule-œuf unique, ce qui explique la ressemblance et la diversité entre les enfants d un même couple.",
+          "formula": "23 + 23 = 46 chromosomes",
+          "formulaCaption": "La fécondation reconstitue le lot complet"
+        }
+      ],
+      "keyTerms": [
+        {
+          "term": "Chromosome",
+          "def": "Structure du noyau formée d ADN condensé."
+        },
+        {
+          "term": "Gène",
+          "def": "Segment d ADN portant l information d un caractère."
+        },
+        {
+          "term": "Allèle",
+          "def": "Version possible d un gène donné."
+        }
+      ]
+    },
+    "mindmap": {
+      "branches": [
+        {
+          "id": "support",
+          "label": "Support",
+          "emoji": "🧬",
+          "detail": "L ADN du noyau porte toute l information génétique.",
+          "children": [
+            "Noyau",
+            "ADN",
+            "Chromosomes"
+          ],
+          "position": "top-left"
+        },
+        {
+          "id": "organisation",
+          "label": "Organisation",
+          "emoji": "🔢",
+          "detail": "46 chromosomes répartis en 23 paires.",
+          "children": [
+            "23 paires",
+            "Gènes",
+            "Allèles"
+          ],
+          "position": "top-right"
+        },
+        {
+          "id": "transmission",
+          "label": "Transmission",
+          "emoji": "👪",
+          "detail": "Chaque parent transmet la moitié du lot.",
+          "children": [
+            "Gamètes à 23",
+            "Fécondation",
+            "Cellule-œuf"
+          ],
+          "position": "bottom-left"
+        },
+        {
+          "id": "diversite",
+          "label": "Diversité",
+          "emoji": "🎲",
+          "detail": "Le brassage explique que chaque individu soit unique.",
+          "children": [
+            "Brassage",
+            "Ressemblances",
+            "Caractères"
+          ],
+          "position": "bottom-right"
+        }
+      ]
+    }
+  },
+  {
+    "metadata": {
+      "title": "Les transformations chimiques",
+      "subject": "Physique-Chimie",
+      "excerpt": "Lors d une transformation chimique, des réactifs disparaissent et des produits se forment, mais la masse totale se conserve."
+    },
+    "flashcards": [
+      {
+        "front": "Qu est-ce qu une transformation chimique ?",
+        "back": "Une transformation où des espèces chimiques disparaissent et d autres apparaissent."
+      },
+      {
+        "front": "Comment distinguer transformation chimique et physique ?",
+        "back": "La transformation physique change l état, pas la nature des espèces ; la chimique change la nature."
+      },
+      {
+        "front": "Que sont les réactifs ?",
+        "back": "Les espèces chimiques présentes au départ et consommées pendant la réaction."
+      },
+      {
+        "front": "Que dit la loi de conservation de la masse ?",
+        "back": "La masse totale des réactifs est égale à la masse totale des produits."
+      },
+      {
+        "front": "Comment teste-t-on la présence de dioxyde de carbone ?",
+        "back": "L eau de chaux se trouble en présence de dioxyde de carbone."
+      },
+      {
+        "front": "Qu est-ce qu un réactif limitant ?",
+        "back": "Le réactif entièrement consommé, qui arrête la réaction."
+      }
+    ],
+    "quiz": [
+      {
+        "question": "Faire fondre un glaçon est :",
+        "choices": [
+          "Une transformation chimique",
+          "Une transformation physique",
+          "Une combustion",
+          "Une oxydation"
+        ],
+        "correct": 1,
+        "explanation": "L eau reste de l eau, seul son état change : c est une transformation physique."
+      },
+      {
+        "question": "Lors d une transformation chimique, la masse totale :",
+        "choices": [
+          "Augmente",
+          "Se conserve",
+          "Diminue",
+          "Devient nulle"
+        ],
+        "correct": 1,
+        "explanation": "Les atomes se réorganisent mais aucun ne disparaît : la masse totale est conservée."
+      },
+      {
+        "question": "L eau de chaux se trouble en présence de :",
+        "choices": [
+          "Dioxygène",
+          "Dihydrogène",
+          "Dioxyde de carbone",
+          "Diazote"
+        ],
+        "correct": 2,
+        "explanation": "C est le test caractéristique du dioxyde de carbone."
+      },
+      {
+        "question": "Les espèces formées pendant la réaction s appellent :",
+        "choices": [
+          "Les réactifs",
+          "Les catalyseurs",
+          "Les solvants",
+          "Les produits"
+        ],
+        "correct": 3,
+        "explanation": "Les réactifs sont consommés, les produits sont formés."
+      },
+      {
+        "question": "La combustion du carbone dans le dioxygène produit :",
+        "choices": [
+          "Du dioxyde de carbone",
+          "De l eau seule",
+          "Du dihydrogène",
+          "Du diazote"
+        ],
+        "correct": 0,
+        "explanation": "Le carbone et le dioxygène se combinent pour former du dioxyde de carbone."
+      }
+    ],
+    "resume": {
+      "intro": "Une transformation chimique réorganise les atomes des réactifs pour former de nouveaux produits.",
+      "keyPoints": [
+        "Les réactifs disparaissent, les produits apparaissent",
+        "La masse totale se conserve",
+        "Les atomes se réorganisent sans se perdre",
+        "Des tests permettent d identifier les gaz"
+      ],
+      "sections": [
+        {
+          "title": "1. Reconnaître une transformation chimique",
+          "content": "On observe un changement de couleur, un dégagement de gaz, la formation d un solide ou une variation de température. La nature des espèces change, contrairement à une simple fusion ou vaporisation.",
+          "formula": null,
+          "formulaCaption": null
+        },
+        {
+          "title": "2. La conservation de la masse",
+          "content": "Les atomes présents au départ se retrouvent tous à l arrivée, seulement associés autrement. En système fermé, la balance affiche donc la même masse avant et après la réaction.",
+          "formula": "masse des réactifs = masse des produits",
+          "formulaCaption": "Loi de conservation de la masse"
+        }
+      ],
+      "keyTerms": [
+        {
+          "term": "Réactif",
+          "def": "Espèce chimique consommée pendant la réaction."
+        },
+        {
+          "term": "Produit",
+          "def": "Espèce chimique formée pendant la réaction."
+        },
+        {
+          "term": "Réactif limitant",
+          "def": "Réactif épuisé le premier, qui stoppe la réaction."
+        }
+      ]
+    },
+    "mindmap": {
+      "branches": [
+        {
+          "id": "reconnaitre",
+          "label": "Reconnaître",
+          "emoji": "🔬",
+          "detail": "Des indices visibles signalent la réaction.",
+          "children": [
+            "Changement de couleur",
+            "Dégagement de gaz",
+            "Chaleur"
+          ],
+          "position": "top-left"
+        },
+        {
+          "id": "acteurs",
+          "label": "Acteurs",
+          "emoji": "⚗️",
+          "detail": "Les réactifs se transforment en produits.",
+          "children": [
+            "Réactifs",
+            "Produits",
+            "Réactif limitant"
+          ],
+          "position": "top-right"
+        },
+        {
+          "id": "conservation",
+          "label": "Conservation",
+          "emoji": "⚖️",
+          "detail": "Rien ne se perd, les atomes se réorganisent.",
+          "children": [
+            "Masse conservée",
+            "Atomes conservés",
+            "Système fermé"
+          ],
+          "position": "bottom-left"
+        },
+        {
+          "id": "tests",
+          "label": "Tests",
+          "emoji": "🧪",
+          "detail": "Chaque gaz possède un test caractéristique.",
+          "children": [
+            "Eau de chaux",
+            "Bûchette incandescente",
+            "Détonation"
+          ],
+          "position": "bottom-right"
+        }
+      ]
+    }
+  },
+  {
+    "metadata": {
+      "title": "Les réseaux informatiques",
+      "subject": "Technologie",
+      "excerpt": "Un réseau relie des machines pour qu elles échangent des données, du réseau local domestique jusqu à Internet."
+    },
+    "flashcards": [
+      {
+        "front": "Qu est-ce qu un réseau informatique ?",
+        "back": "Un ensemble de machines reliées entre elles pour échanger des données."
+      },
+      {
+        "front": "Quelle différence entre un réseau local et Internet ?",
+        "back": "Le réseau local couvre un lieu unique, Internet interconnecte des réseaux à l échelle mondiale."
+      },
+      {
+        "front": "À quoi sert une adresse IP ?",
+        "back": "À identifier de façon unique une machine sur le réseau."
+      },
+      {
+        "front": "Quel est le rôle d un routeur ?",
+        "back": "Il aiguille les données entre plusieurs réseaux différents."
+      },
+      {
+        "front": "Qu est-ce qu un serveur DNS ?",
+        "back": "Il traduit un nom de domaine lisible en adresse IP."
+      },
+      {
+        "front": "Comment circulent les données sur le réseau ?",
+        "back": "Découpées en paquets, qui peuvent emprunter des chemins différents puis sont réassemblés."
+      }
+    ],
+    "quiz": [
+      {
+        "question": "Une adresse IP sert à :",
+        "choices": [
+          "Identifier une machine sur le réseau",
+          "Stocker des fichiers",
+          "Afficher une page web",
+          "Chiffrer un mot de passe"
+        ],
+        "correct": 0,
+        "explanation": "C est l identifiant unique qui permet d adresser les paquets à la bonne machine."
+      },
+      {
+        "question": "Le rôle du DNS est de :",
+        "choices": [
+          "Protéger contre les virus",
+          "Traduire un nom de domaine en adresse IP",
+          "Accélérer la connexion",
+          "Sauvegarder les données"
+        ],
+        "correct": 1,
+        "explanation": "Le DNS fait le lien entre un nom lisible par l humain et l adresse numérique de la machine."
+      },
+      {
+        "question": "Les données circulent sur Internet sous forme :",
+        "choices": [
+          "D un flux continu unique",
+          "De fichiers entiers",
+          "De paquets",
+          "De signaux analogiques"
+        ],
+        "correct": 2,
+        "explanation": "Le découpage en paquets permet de partager le réseau et de contourner les pannes."
+      },
+      {
+        "question": "Quel appareil relie deux réseaux différents ?",
+        "choices": [
+          "Un écran",
+          "Un disque dur",
+          "Un clavier",
+          "Un routeur"
+        ],
+        "correct": 3,
+        "explanation": "Le routeur choisit la route des paquets entre réseaux distincts."
+      },
+      {
+        "question": "Un réseau local se caractérise par :",
+        "choices": [
+          "Une étendue géographique limitée",
+          "Une portée mondiale",
+          "L absence d adresses IP",
+          "L usage exclusif du wifi"
+        ],
+        "correct": 0,
+        "explanation": "Le réseau local couvre un logement, une salle ou un établissement, contrairement à Internet."
+      }
+    ],
+    "resume": {
+      "intro": "Un réseau permet à des machines de communiquer, du domicile jusqu à l échelle mondiale.",
+      "keyPoints": [
+        "Le réseau local est limité à un lieu",
+        "Internet interconnecte les réseaux",
+        "L adresse IP identifie chaque machine",
+        "Les données voyagent en paquets"
+      ],
+      "sections": [
+        {
+          "title": "1. Les échelles du réseau",
+          "content": "Le réseau local relie les appareils d un même lieu par câble ou wifi. Internet est un réseau de réseaux qui relie ces îlots entre eux grâce aux routeurs et aux liaisons longue distance.",
+          "formula": null,
+          "formulaCaption": null
+        },
+        {
+          "title": "2. Comment circule l information",
+          "content": "Un message est découpé en paquets qui portent l adresse de destination. Chaque routeur choisit le meilleur chemin disponible. À l arrivée, les paquets sont remis dans l ordre et le message est reconstitué.",
+          "formula": null,
+          "formulaCaption": null
+        }
+      ],
+      "keyTerms": [
+        {
+          "term": "Adresse IP",
+          "def": "Identifiant unique d une machine sur un réseau."
+        },
+        {
+          "term": "Routeur",
+          "def": "Appareil qui aiguille les paquets entre réseaux."
+        },
+        {
+          "term": "DNS",
+          "def": "Service qui traduit un nom de domaine en adresse IP."
+        }
+      ]
+    },
+    "mindmap": {
+      "branches": [
+        {
+          "id": "echelles",
+          "label": "Échelles",
+          "emoji": "🌐",
+          "detail": "Du réseau local au réseau mondial.",
+          "children": [
+            "Réseau local",
+            "Internet",
+            "Réseau de réseaux"
+          ],
+          "position": "top-left"
+        },
+        {
+          "id": "adressage",
+          "label": "Adressage",
+          "emoji": "🏷️",
+          "detail": "Chaque machine possède une adresse unique.",
+          "children": [
+            "Adresse IP",
+            "Nom de domaine",
+            "DNS"
+          ],
+          "position": "top-right"
+        },
+        {
+          "id": "materiel",
+          "label": "Matériel",
+          "emoji": "🔌",
+          "detail": "Des équipements assurent la circulation des données.",
+          "children": [
+            "Routeur",
+            "Switch",
+            "Box"
+          ],
+          "position": "bottom-left"
+        },
+        {
+          "id": "transport",
+          "label": "Transport",
+          "emoji": "📦",
+          "detail": "Le message voyage découpé puis réassemblé.",
+          "children": [
+            "Paquets",
+            "Chemins multiples",
+            "Réassemblage"
+          ],
+          "position": "bottom-right"
+        }
+      ]
+    }
+  },
+  {
+    "metadata": {
+      "title": "Les deux premières déclinaisons",
+      "subject": "Latin",
+      "excerpt": "En latin, la terminaison du nom indique sa fonction : maîtriser les deux premières déclinaisons permet de lire la plupart des phrases simples."
+    },
+    "flashcards": [
+      {
+        "front": "Qu est-ce qu une déclinaison ?",
+        "back": "L ensemble des terminaisons que prend un nom selon sa fonction dans la phrase."
+      },
+      {
+        "front": "Quels noms appartiennent à la première déclinaison ?",
+        "back": "Les noms en -a au nominatif et -ae au génitif, le plus souvent féminins, comme rosa."
+      },
+      {
+        "front": "Quels noms appartiennent à la deuxième déclinaison ?",
+        "back": "Les noms en -us ou -um au nominatif et -i au génitif, comme dominus et templum."
+      },
+      {
+        "front": "Quel cas marque le sujet ?",
+        "back": "Le nominatif."
+      },
+      {
+        "front": "Quel cas marque le complément d objet direct ?",
+        "back": "L accusatif, en -am au singulier de la première déclinaison."
+      },
+      {
+        "front": "À quoi sert le génitif ?",
+        "back": "Il marque le complément du nom, souvent traduit par de."
+      }
+    ],
+    "quiz": [
+      {
+        "question": "Rosa, rosae appartient à :",
+        "choices": [
+          "La première déclinaison",
+          "La deuxième déclinaison",
+          "La troisième déclinaison",
+          "Aucune déclinaison"
+        ],
+        "correct": 0,
+        "explanation": "Le nominatif en -a et le génitif en -ae sont la signature de la première déclinaison."
+      },
+      {
+        "question": "Quel cas exprime le sujet ?",
+        "choices": [
+          "L accusatif",
+          "Le nominatif",
+          "Le génitif",
+          "L ablatif"
+        ],
+        "correct": 1,
+        "explanation": "Le nominatif marque toujours celui qui fait l action."
+      },
+      {
+        "question": "Dans puella rosam amat, rosam est :",
+        "choices": [
+          "Sujet",
+          "Complément du nom",
+          "COD",
+          "Complément de lieu"
+        ],
+        "correct": 2,
+        "explanation": "La terminaison -am est l accusatif singulier : rosam est le complément d objet direct."
+      },
+      {
+        "question": "Le génitif se traduit le plus souvent par :",
+        "choices": [
+          "à",
+          "avec",
+          "pour",
+          "de"
+        ],
+        "correct": 3,
+        "explanation": "Le génitif exprime l appartenance ou la relation, rendue par de en français."
+      },
+      {
+        "question": "Templum, templi est un nom :",
+        "choices": [
+          "Neutre de la deuxième déclinaison",
+          "Féminin de la première",
+          "Masculin de la troisième",
+          "Invariable"
+        ],
+        "correct": 0,
+        "explanation": "La terminaison -um au nominatif avec un génitif en -i signale un neutre de la deuxième déclinaison."
+      }
+    ],
+    "resume": {
+      "intro": "En latin, c est la terminaison et non la place du mot qui indique sa fonction.",
+      "keyPoints": [
+        "Première déclinaison : -a, -ae, surtout féminine",
+        "Deuxième déclinaison : -us ou -um, génitif -i",
+        "Le nominatif marque le sujet",
+        "L accusatif marque le COD"
+      ],
+      "sections": [
+        {
+          "title": "1. Lire une terminaison",
+          "content": "On identifie d abord le génitif donné dans le dictionnaire, car il indique la déclinaison. On repère ensuite la terminaison du mot dans la phrase pour en déduire sa fonction, indépendamment de sa position.",
+          "formula": null,
+          "formulaCaption": null
+        },
+        {
+          "title": "2. Les cas essentiels",
+          "content": "Le nominatif désigne le sujet, l accusatif le complément d objet direct, le génitif le complément du nom. Ces trois cas suffisent à comprendre la structure de la plupart des phrases simples.",
+          "formula": "rosa, rosam, rosae",
+          "formulaCaption": "Nominatif, accusatif et génitif de rosa"
+        }
+      ],
+      "keyTerms": [
+        {
+          "term": "Déclinaison",
+          "def": "Modèle de terminaisons suivi par un nom."
+        },
+        {
+          "term": "Nominatif",
+          "def": "Cas du sujet de la phrase."
+        },
+        {
+          "term": "Génitif",
+          "def": "Cas du complément du nom, traduit par de."
+        }
+      ]
+    },
+    "mindmap": {
+      "branches": [
+        {
+          "id": "principe",
+          "label": "Principe",
+          "emoji": "🏛️",
+          "detail": "La terminaison porte la fonction, pas la place du mot.",
+          "children": [
+            "Terminaisons",
+            "Ordre libre",
+            "Fonction"
+          ],
+          "position": "top-left"
+        },
+        {
+          "id": "premiere",
+          "label": "1re déclinaison",
+          "emoji": "🌹",
+          "detail": "Modèle rosa, rosae, surtout des noms féminins.",
+          "children": [
+            "rosa",
+            "rosam",
+            "rosae"
+          ],
+          "position": "top-right"
+        },
+        {
+          "id": "deuxieme",
+          "label": "2e déclinaison",
+          "emoji": "🏺",
+          "detail": "Modèles dominus et templum, génitif en -i.",
+          "children": [
+            "dominus",
+            "templum",
+            "génitif -i"
+          ],
+          "position": "bottom-left"
+        },
+        {
+          "id": "cas",
+          "label": "Les cas",
+          "emoji": "🗝️",
+          "detail": "Trois cas suffisent pour lire une phrase simple.",
+          "children": [
+            "Nominatif sujet",
+            "Accusatif COD",
+            "Génitif du nom"
+          ],
+          "position": "bottom-right"
+        }
+      ]
+    }
+  },
+  {
+    "metadata": {
+      "title": "La perspective",
+      "subject": "Arts",
+      "excerpt": "La perspective est l ensemble des procédés qui donnent l illusion de la profondeur sur une surface plane."
+    },
+    "flashcards": [
+      {
+        "front": "Qu est-ce que la perspective ?",
+        "back": "Un ensemble de procédés qui créent l illusion de la profondeur sur une surface plane."
+      },
+      {
+        "front": "Qu est-ce que la ligne d horizon ?",
+        "back": "La ligne située à hauteur du regard du spectateur, où convergent les fuyantes."
+      },
+      {
+        "front": "Qu est-ce qu un point de fuite ?",
+        "back": "Le point de la ligne d horizon vers lequel convergent les lignes parallèles en profondeur."
+      },
+      {
+        "front": "Quand la perspective linéaire est-elle formalisée ?",
+        "back": "À la Renaissance italienne, au XVe siècle, notamment par Brunelleschi et Alberti."
+      },
+      {
+        "front": "Qu est-ce que la perspective atmosphérique ?",
+        "back": "Un effet de profondeur obtenu en atténuant les contrastes et en bleuissant les plans lointains."
+      },
+      {
+        "front": "Comment le chevauchement crée-t-il de la profondeur ?",
+        "back": "Un objet qui en masque un autre est perçu comme plus proche du spectateur."
+      }
+    ],
+    "quiz": [
+      {
+        "question": "Le point de fuite se situe toujours :",
+        "choices": [
+          "Sur la ligne d horizon",
+          "En haut du tableau",
+          "Au centre exact",
+          "Hors du cadre"
+        ],
+        "correct": 0,
+        "explanation": "Les fuyantes convergent vers un point placé sur la ligne d horizon, à hauteur de regard."
+      },
+      {
+        "question": "La perspective linéaire est formalisée :",
+        "choices": [
+          "Au Moyen Âge",
+          "À la Renaissance",
+          "Au XIXe siècle",
+          "Dans l Antiquité"
+        ],
+        "correct": 1,
+        "explanation": "Brunelleschi et Alberti en fixent les règles géométriques au XVe siècle à Florence."
+      },
+      {
+        "question": "Bleuir et estomper les plans lointains relève de :",
+        "choices": [
+          "La perspective linéaire",
+          "Du chevauchement",
+          "De la perspective atmosphérique",
+          "Du cadrage"
+        ],
+        "correct": 2,
+        "explanation": "L atmosphère atténue les contrastes avec la distance, ce que la peinture imite."
+      },
+      {
+        "question": "Un objet qui en masque un autre paraît :",
+        "choices": [
+          "Plus petit",
+          "Plus loin",
+          "Plus sombre",
+          "Plus proche"
+        ],
+        "correct": 3,
+        "explanation": "Le chevauchement est l indice de profondeur le plus immédiat pour l œil."
+      },
+      {
+        "question": "La ligne d horizon correspond :",
+        "choices": [
+          "Au bord supérieur du tableau",
+          "À la hauteur du regard du spectateur",
+          "Au sol représenté",
+          "Au centre géométrique"
+        ],
+        "correct": 1,
+        "explanation": "Elle se place à hauteur des yeux, ce qui détermine le point de vue adopté."
+      }
+    ],
+    "resume": {
+      "intro": "La perspective donne l illusion de l espace en trois dimensions sur une surface plane.",
+      "keyPoints": [
+        "La ligne d horizon est à hauteur du regard",
+        "Les fuyantes convergent vers le point de fuite",
+        "La perspective atmosphérique joue sur les couleurs",
+        "Le chevauchement suffit à suggérer la profondeur"
+      ],
+      "sections": [
+        {
+          "title": "1. La perspective linéaire",
+          "content": "Formalisée à la Renaissance, elle repose sur une construction géométrique. Les lignes parallèles qui s éloignent du spectateur convergent vers un ou plusieurs points de fuite placés sur la ligne d horizon.",
+          "formula": null,
+          "formulaCaption": null
+        },
+        {
+          "title": "2. Les autres procédés",
+          "content": "La perspective atmosphérique estompe et bleuit les plans lointains. Le chevauchement, la diminution des tailles et le placement dans la hauteur de l image renforcent aussi la sensation de profondeur.",
+          "formula": null,
+          "formulaCaption": null
+        }
+      ],
+      "keyTerms": [
+        {
+          "term": "Ligne d horizon",
+          "def": "Ligne placée à hauteur du regard du spectateur."
+        },
+        {
+          "term": "Point de fuite",
+          "def": "Point de convergence des lignes fuyantes."
+        },
+        {
+          "term": "Fuyante",
+          "def": "Ligne qui s éloigne vers le point de fuite."
+        }
+      ]
+    },
+    "mindmap": {
+      "branches": [
+        {
+          "id": "principe",
+          "label": "Principe",
+          "emoji": "🖼️",
+          "detail": "Créer l illusion du volume sur une surface plate.",
+          "children": [
+            "Illusion",
+            "Profondeur",
+            "Surface plane"
+          ],
+          "position": "top-left"
+        },
+        {
+          "id": "construction",
+          "label": "Construction",
+          "emoji": "📏",
+          "detail": "Une géométrie précise organise l espace du tableau.",
+          "children": [
+            "Ligne d horizon",
+            "Point de fuite",
+            "Fuyantes"
+          ],
+          "position": "top-right"
+        },
+        {
+          "id": "atmosphere",
+          "label": "Atmosphère",
+          "emoji": "🌫️",
+          "detail": "La couleur et le contraste suggèrent la distance.",
+          "children": [
+            "Plans bleutés",
+            "Contrastes atténués",
+            "Flou lointain"
+          ],
+          "position": "bottom-left"
+        },
+        {
+          "id": "histoire",
+          "label": "Histoire",
+          "emoji": "🏛️",
+          "detail": "La Renaissance en fixe les règles géométriques.",
+          "children": [
+            "Brunelleschi",
+            "Alberti",
+            "XVe siècle"
+          ],
+          "position": "bottom-right"
+        }
+      ]
+    }
+  }
+]
