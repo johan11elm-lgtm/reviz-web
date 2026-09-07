@@ -236,15 +236,18 @@ export default function Inscription() {
           <>
             <h1 className="signup-question">Quand es-tu né·e ?</h1>
             <p className="signup-hint">Pour adapter Réviz à ton âge.</p>
-            <input
-              className="auth-input signup-input-lg"
-              type="date"
-              value={birthDate}
-              onChange={e => setBirthDate(e.target.value)}
-              autoComplete="bday"
-              max={new Date().toISOString().split('T')[0]}
-              autoFocus
-            />
+            <div className={`auth-date auth-date--lg${birthDate ? '' : ' auth-date--empty'}`} data-placeholder="JJ / MM / AAAA">
+              <input
+                className="auth-input signup-input-lg"
+                type="date"
+                aria-label="Ta date de naissance"
+                value={birthDate}
+                onChange={e => setBirthDate(e.target.value)}
+                autoComplete="bday"
+                max={new Date().toISOString().split('T')[0]}
+                autoFocus
+              />
+            </div>
           </>
         )}
 

@@ -82,6 +82,47 @@
   color: var(--text-xlight);
 }
 
+/* Champ date (Inscription, FinishSetup). iOS WebKit rend <input type="date">
+   avec son contrôle natif : la largeur ignore box-sizing (le champ dépasse du
+   cadre à droite) et la valeur est centrée. On neutralise l'apparence native
+   pour qu'il se comporte comme un champ texte. Vide, iOS n'affiche rien :
+   l'indice « JJ / MM / AAAA » est porté par le conteneur .auth-date--empty. */
+.auth-input[type="date"] {
+  -webkit-appearance: none;
+  appearance: none;
+  display: block;
+  min-width: 0;
+  line-height: 1.2;
+  text-align: left;
+}
+.auth-input[type="date"]::-webkit-date-and-time-value {
+  text-align: left;
+  margin: 0;
+  min-height: 1.2em;   /* garde la hauteur d'un champ texte quand il est vide */
+}
+.auth-date {
+  position: relative;
+}
+/* L'indice n'existe que sur iOS/iPadOS (seul WebKit à comprendre
+   -webkit-touch-callout) : Chrome, Android et Safari macOS affichent déjà
+   leurs segments « jj/mm/aaaa » dans le champ, l'indice ferait doublon. */
+@supports (-webkit-touch-callout: none) {
+  .auth-date--empty::before {
+    content: attr(data-placeholder);
+    position: absolute;
+    left: 17.5px;        /* padding 16 + bordure 1.5 */
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 15px;
+    color: var(--text-xlight);
+    pointer-events: none;
+  }
+  .auth-date--lg.auth-date--empty::before {
+    left: 19.5px;        /* padding 18 + bordure 1.5 */
+    font-size: 18px;
+  }
+}
+
 /* Bouton principal */
 .auth-btn {
   background: var(--bg-cta);

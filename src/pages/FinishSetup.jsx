@@ -64,14 +64,17 @@ export default function FinishSetup() {
         <p className="signup-hint">Encore quelques infos pour calibrer Réviz à ton profil.</p>
 
         <div className="auth-field">
-          <label className="auth-label">Ta date de naissance</label>
-          <input
-            className="auth-input"
-            type="date"
-            value={birthDate}
-            onChange={e => setBirthDate(e.target.value)}
-            max={new Date().toISOString().split('T')[0]}
-          />
+          <label className="auth-label" htmlFor="fs-birthdate">Ta date de naissance</label>
+          <div className={`auth-date${birthDate ? '' : ' auth-date--empty'}`} data-placeholder="JJ / MM / AAAA">
+            <input
+              id="fs-birthdate"
+              className="auth-input"
+              type="date"
+              value={birthDate}
+              onChange={e => setBirthDate(e.target.value)}
+              max={new Date().toISOString().split('T')[0]}
+            />
+          </div>
         </div>
 
         <label className="auth-label" style={{ marginTop: 8 }}>Ton cycle</label>
