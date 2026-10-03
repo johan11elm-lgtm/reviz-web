@@ -14,6 +14,7 @@ import { IS_NATIVE } from './services/apiClient.js'
 import { hideSplash } from './services/splash.js'
 import { track } from './services/statsService.js'
 import { ecouterInstallation, detecterPlateforme } from './utils/installation.js'
+import { initAnalytics } from './services/analyticsService.js'
 
 // App native (Capacitor) : layout plein écran forcé quelle que soit la
 // largeur (les iPhone Pro Max à 440 pt et les iPad tomberaient sinon dans
@@ -82,25 +83,10 @@ const loadMonitoring = () => {
     });
   }
 
-  // Analytics PostHog — DÉSACTIVÉ par défaut (public mineur, RGPD/CNIL & ePrivacy).
-  // On n'initialise RIEN tant qu'un consentement explicite n'a pas été donné, pour
-  // rester cohérent avec Legal.jsx (« aucun cookie de tracking »).
-  // Réactivation future : une bannière de consentement pose
-  // localStorage 'reviz-analytics-consent' = 'granted', puis ce bloc s'exécute.
-  const analyticsConsent = (() => {
-    try { return localStorage.getItem('reviz-analytics-consent') === 'granted'; }
-    catch { return false; }
-  })();
-  if (analyticsConsent && import.meta.env.VITE_POSTHOG_KEY) {
-    import('posthog-js').then(({ default: posthog }) => {
-      posthog.init(import.meta.env.VITE_POSTHOG_KEY, {
-        api_host: 'https://eu.i.posthog.com',
-        person_profiles: 'identified_only',
-        capture_pageview: true,
-        capture_pageleave: true,
-      });
-    });
-  }
+  // Analytics PostHog — soumis au consentement (public mineur, RGPD/CNIL & ePrivacy).
+  // Rien ne se charge tant que l'élève n'a pas accepté via <ConsentBanner />
+  // (ou l'interrupteur de Réglages). Voir services/analyticsService.js.
+  initAnalytics();
 }
 
 if ('requestIdleCallback' in window) {

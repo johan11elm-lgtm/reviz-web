@@ -1,6 +1,6 @@
 import { PageIntro } from '../components/PageIntro';
 import { GuestBanner } from '../components/GuestBanner';
-import { UserIcon, MailIcon, KeyIcon, BellIcon, MoonIcon, LockIcon, GemIcon, InfoIcon, ScaleIcon, FileTextIcon, ClipboardIcon, LogOutIcon, AlertIcon, InstallIcon } from '../components/Icons';
+import { UserIcon, MailIcon, KeyIcon, BellIcon, MoonIcon, LockIcon, GemIcon, InfoIcon, ScaleIcon, FileTextIcon, ClipboardIcon, LogOutIcon, AlertIcon, InstallIcon, ChartIcon } from '../components/Icons';
 import { InstallerModal } from '../components/InstallerApp';
 import { useInstallation } from '../hooks/useInstallation';
 import { useState } from 'react';
@@ -13,6 +13,7 @@ import { THEMES } from '../utils/themes';
 import { formatLevelLabel } from '../utils/levels';
 import { openBillingPortal, startCheckout } from '../services/billingService';
 import { remindersAvailable, isReminderEnabled, enableReminder, disableReminder } from '../services/reminderService';
+import { analyticsConfigured, hasAnalyticsConsent, setAnalyticsConsent } from '../services/analyticsService';
 import { loadLessons } from '../services/historyService';
 import { countDueCards } from '../services/srsService';
 import './Reglages.css';
@@ -127,6 +128,15 @@ export default function Reglages() {
       setReminderOn(false);
       if (res.reason === 'denied') setReminderDenied(true);
     }
+  }
+
+  // ── 2b. Confidentialité — mesure d'audience, retirable à tout moment (RGPD art. 7-3) ──
+  const analyticsAvailable = analyticsConfigured();
+  const [analyticsOn, setAnalyticsOn] = useState(hasAnalyticsConsent());
+  function handleAnalyticsToggle(e) {
+    const wanted = e.target.checked;
+    setAnalyticsOn(wanted);
+    setAnalyticsConsent(wanted);
   }
 
   // ── 3. Apparence — thèmes Réviz+ verrouillés hors abonnement ──
@@ -530,6 +540,25 @@ export default function Reglages() {
               </span>
               <span className="rg-row-arrow" aria-hidden="true">›</span>
             </Link>
+
+            {analyticsAvailable && (
+              <div className="rg-toggle-row">
+                <span className="rv-icon-square rv-icon-square--violet" aria-hidden="true"><ChartIcon /></span>
+                <span className="rg-row-text">
+                  <span className="rg-row-label">Statistiques d'usage</span>
+                  <span className="rg-row-sub">Pages visitées, sans pub ni revente</span>
+                </span>
+                <label className="toggle-wrap">
+                  <input
+                    type="checkbox"
+                    checked={analyticsOn}
+                    onChange={handleAnalyticsToggle}
+                    aria-label="Autoriser la mesure anonyme des pages visitées"
+                  />
+                  <span className="toggle-slider" />
+                </label>
+              </div>
+            )}
 
             <Link to="/legal/cgu" className="rg-row">
               <span className="rv-icon-square rv-icon-square--pink" aria-hidden="true"><ClipboardIcon /></span>

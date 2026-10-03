@@ -6,6 +6,7 @@ import { resolveTheme } from './utils/themes'
 import { ErrorBoundary } from './components/ErrorBoundary'
 import { SplashHider } from './components/SplashHider'
 import { SideNav } from './components/SideNav'
+import { ConsentBanner } from './components/ConsentBanner'
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -136,6 +137,9 @@ export default function App() {
     <ErrorBoundary>
       <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
         <ScrollToTop />
+        {/* Consentement à la mesure d'audience : hors Suspense et hors Auth,
+            visible dès la première page, publique ou non. */}
+        <ConsentBanner />
         <Suspense fallback={<LoadingFallback />}>
           <Routes>
             {/* Routes publiques — pas de Firebase chargé */}

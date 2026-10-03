@@ -1,0 +1,91 @@
+/* Bannière de consentement — posée au-dessus de la barre de navigation,
+   non bloquante, deux boutons de poids égal (CNIL). */
+.consent-banner {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: calc(96px + env(safe-area-inset-bottom, 0px));
+  width: min(calc(100% - 24px), 420px);
+  z-index: 250;
+  background: var(--bg-card);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-card);
+  box-shadow: 0 12px 32px rgba(27, 26, 35, 0.14);
+  padding: 16px 18px 14px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  animation: consent-in 0.28s ease-out;
+}
+
+/* Pages sans barre de navigation (accueil public, connexion) : plus bas. */
+.consent-banner--low {
+  bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+}
+
+@keyframes consent-in {
+  from { opacity: 0; transform: translate(-50%, 12px); }
+  to   { opacity: 1; transform: translate(-50%, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .consent-banner { animation: none; }
+}
+
+.consent-banner-title {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.consent-banner-text {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--text-secondary);
+}
+
+.consent-banner-link {
+  color: var(--accent-violet);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.consent-banner-btns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.consent-banner-btn {
+  min-height: 44px;
+  border-radius: var(--radius-pill);
+  font: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.consent-banner-btn--deny {
+  background: var(--bg-subtle);
+  border: 1.5px solid var(--border);
+  color: var(--text-primary);
+}
+.consent-banner-btn--deny:hover { border-color: var(--border-hover); }
+
+.consent-banner-btn--accept {
+  background: var(--accent-violet);
+  border: 1.5px solid var(--accent-violet);
+  color: var(--text-cta);
+}
+.consent-banner-btn--accept:hover { background: var(--accent-violet-hover); }
+
+.consent-banner-btn:focus-visible {
+  outline: 2px solid var(--accent-orange);
+  outline-offset: 2px;
+}

@@ -46,6 +46,7 @@ const PAGES = {
             <li><strong>Battle</strong> — pour jouer à deux en direct : le prénom ou le surnom que tu choisis, tes réponses et tes temps de réponse. Sans compte, rien d'autre : un identifiant technique anonyme (Firebase) relie tes réponses à la partie, sans email ni date de naissance. Avec un compte, ton total d'aura et ton nombre de battles jouées et gagnées sont ajoutés à ton profil.</li>
             <li><strong>Avis</strong> — ce que tu écris sur la page « Votre avis » (profil, réponses, e-mail facultatif pour recevoir une réponse), sans compte ni identifiant. Conservés 2 ans au plus, supprimés sur simple demande.</li>
             <li><strong>Données techniques</strong> — logs serveur standards (adresse IP, navigateur), conservés maximum 30 jours.</li>
+            <li><strong>Mesure d'audience (optionnelle)</strong> — uniquement si tu l'acceptes : les pages visitées et quelques actions dans l'app (scan, quiz terminé…), associées à un identifiant aléatoire sans ton nom ni ton email. Sans adresse IP, sans enregistrement d'écran.</li>
           </ul>
         </Section>
 
@@ -72,6 +73,7 @@ const PAGES = {
             <li><strong>Google Firebase</strong> — authentification et stockage (hébergé en Europe).</li>
             <li><strong>Anthropic</strong> — traitement IA des leçons (le texte envoyé n'est pas conservé après génération).</li>
             <li><strong>Vercel</strong> — hébergement de l'application.</li>
+            <li><strong>PostHog</strong> — mesure d'audience, seulement avec ton accord (serveurs en Europe).</li>
           </ul>
         </Section>
 
@@ -97,8 +99,9 @@ const PAGES = {
           <p>Tu peux aussi contacter la <strong>CNIL</strong> (Commission Nationale de l'Informatique et des Libertés) : <a href="https://www.cnil.fr" target="_blank" rel="noopener noreferrer">www.cnil.fr</a></p>
         </Section>
 
-        <Section title="Cookies">
-          <p>Réviz utilise uniquement des cookies strictement nécessaires au fonctionnement (authentification Firebase). Aucun cookie publicitaire ou de tracking n'est utilisé.</p>
+        <Section title="Cookies et traceurs">
+          <p>Réviz utilise des cookies et un stockage local strictement nécessaires au fonctionnement (authentification Firebase, tes leçons, tes réglages). Aucun cookie publicitaire n'est utilisé.</p>
+          <p><strong>Mesure d'audience :</strong> à ta première visite, une bannière te demande si tu acceptes qu'on compte les pages visitées (outil PostHog, hébergé en Europe, identifiant aléatoire stocké sur ton appareil). Refuser est aussi simple qu'accepter, et rien n'est mesuré tant que tu n'as pas répondu. Tu peux changer d'avis à tout moment dans Réglages, « Statistiques d'usage » : l'identifiant est alors effacé.</p>
         </Section>
       </>
     ),
