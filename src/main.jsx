@@ -15,6 +15,18 @@ import { hideSplash } from './services/splash.js'
 import { track } from './services/statsService.js'
 import { ecouterInstallation, detecterPlateforme } from './utils/installation.js'
 import { initAnalytics } from './services/analyticsService.js'
+import { loadAuthShell } from './loadAuthShell.js'
+import { isPublicPath, shouldPrefetchAuthShell } from './utils/publicRoutes.js'
+
+// ── Cœur connecté (Firebase) : différé sur les pages publiques ──────
+// Hors /welcome et /legal, on lance le chargement du chunk AuthShell tout de
+// suite, en parallèle du premier render : un élève connecté ne paie que le
+// temps d'une requête de plus, lancée au plus tôt. Sur une page publique,
+// Firebase n'est ni téléchargé ni exécuté avant le premier affichage ; il est
+// préchargé ensuite, quand le navigateur est inactif, pour que le passage à
+// l'inscription soit instantané.
+const onPublicPage = isPublicPath(window.location.pathname);
+if (!onPublicPage) loadAuthShell();
 
 // App native (Capacitor) : layout plein écran forcé quelle que soit la
 // largeur (les iPhone Pro Max à 440 pt et les iPad tomberaient sinon dans
@@ -87,6 +99,10 @@ const loadMonitoring = () => {
   // Rien ne se charge tant que l'élève n'a pas accepté via <ConsentBanner />
   // (ou l'interrupteur de Réglages). Voir services/analyticsService.js.
   initAnalytics();
+
+  // Page publique : précharge le cœur connecté (Firebase) après le premier
+  // affichage, navigateur inactif, sauf économiseur de données / 2G.
+  if (onPublicPage && shouldPrefetchAuthShell()) loadAuthShell();
 }
 
 if ('requestIdleCallback' in window) {

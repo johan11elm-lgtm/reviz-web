@@ -1,12 +1,9 @@
-import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
 import { useEffect, lazy, Suspense } from 'react'
-import { ThemeProvider, useTheme } from './context/ThemeContext'
-import { AuthProvider, useAuth } from './context/AuthContext'
-import { resolveTheme } from './utils/themes'
 import { ErrorBoundary } from './components/ErrorBoundary'
 import { SplashHider } from './components/SplashHider'
-import { SideNav } from './components/SideNav'
 import { ConsentBanner } from './components/ConsentBanner'
+import { loadAuthShell } from './loadAuthShell'
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -19,42 +16,21 @@ function ScrollToTop() {
   return null;
 }
 
-// Pages publiques (pas de Firebase nécessaire)
+// Pages publiques (pas de Firebase nécessaire) — dans le chunk d'entrée.
 import Welcome from './pages/Welcome'
-// Home est le premier écran de tout élève connecté : chargée en dur pour
-// que le démarrage optimiste (cache de session) peigne sans attendre un
-// chunk ni re-rendre l'arbre après une suspension.
-import Home from './pages/Home'
+const Legal = lazy(() => import('./pages/Legal'))
 
-// Pages lazy-loaded
-const Inscription    = lazy(() => import('./pages/Inscription'))
-const Connexion      = lazy(() => import('./pages/Connexion'))
-const Profile        = lazy(() => import('./pages/Profile'))
-const Reglages       = lazy(() => import('./pages/Reglages'))
-const Scan           = lazy(() => import('./pages/Scan'))
-const Cours          = lazy(() => import('./pages/Cours'))
-const Progres        = lazy(() => import('./pages/Progres'))
-const Analyse        = lazy(() => import('./pages/Analyse'))
-const Flashcards     = lazy(() => import('./pages/Flashcards'))
-const Quiz           = lazy(() => import('./pages/Quiz'))
-const Resume         = lazy(() => import('./pages/Resume'))
-const Mindmap        = lazy(() => import('./pages/MindMap'))
-const Onboarding     = lazy(() => import('./pages/Onboarding'))
-const VerifyEmail    = lazy(() => import('./pages/VerifyEmail'))
-const Legal          = lazy(() => import('./pages/Legal'))
-const ConsentPending = lazy(() => import('./pages/ConsentPending'))
-const FinishSetup    = lazy(() => import('./pages/FinishSetup'))
-const NotFound       = lazy(() => import('./pages/NotFound'))
-const UpgradeSuccess = lazy(() => import('./pages/UpgradeSuccess'))
-const Coach          = lazy(() => import('./pages/Coach'))
-const Programme      = lazy(() => import('./pages/Programme'))
-const ProgrammeMatiere = lazy(() => import('./pages/ProgrammeMatiere'))
-const Essai          = lazy(() => import('./pages/Essai'))
+// Autres pages publiques (lazy, sans Firebase)
 const Avis           = lazy(() => import('./pages/Avis'))
 const Profs          = lazy(() => import('./pages/Profs'))
 const Installer      = lazy(() => import('./pages/Installer'))
-const BattleAccueil  = lazy(() => import('./pages/BattleAccueil'))
-const Battle         = lazy(() => import('./pages/Battle'))
+
+// Cœur connecté (AuthContext, Firebase, Home et toutes les pages privées) :
+// un chunk à part, chargé seulement hors des pages publiques. Sur /welcome,
+// un visiteur ne télécharge ni n'exécute Firebase. Hors pages publiques,
+// main.jsx lance ce chargement dès le boot (avant même le premier render)
+// pour ne pas allonger le démarrage optimiste des élèves connectés.
+const AuthShell = lazy(loadAuthShell)
 
 // Fallback minimal pendant le chargement
 function LoadingFallback() {
@@ -63,73 +39,6 @@ function LoadingFallback() {
       <div style={{ width: 24, height: 24, border: '3px solid var(--border)', borderTopColor: 'var(--text-primary)', borderRadius: '50%', animation: 'spin .6s linear infinite' }} />
     </div>
   )
-}
-
-// Redirige vers /welcome si non connecté, vers /consent-pending si en attente
-function PrivateRoute({ children }) {
-  const { currentUser, consentBlocked, needsProfileSetup } = useAuth();
-  if (!currentUser) return <Navigate to="/welcome" replace />;
-  if (needsProfileSetup) return <Navigate to="/finish-setup" replace />;
-  if (consentBlocked) return <Navigate to="/consent-pending" replace />;
-  return children;
-}
-
-// La Battle s'ouvre aussi sans compte (invité anonyme) ; un compte connecté
-// mais incomplet termine d'abord son inscription, comme ailleurs.
-function BattleRoute({ children }) {
-  const { currentUser, consentBlocked, needsProfileSetup } = useAuth();
-  if (currentUser && needsProfileSetup) return <Navigate to="/finish-setup" replace />;
-  if (currentUser && consentBlocked) return <Navigate to="/consent-pending" replace />;
-  return children;
-}
-
-// Routes qui nécessitent Firebase Auth
-function AuthRoutes() {
-  return (
-    <>
-    <SplashHider />
-    <SideNav />
-    <Routes>
-      <Route path="/inscription" element={<Inscription />} />
-      <Route path="/connexion"   element={<Connexion />} />
-      <Route path="/essai"       element={<Essai />} />
-      <Route path="/consent-pending" element={<ConsentPending />} />
-      <Route path="/finish-setup" element={<FinishSetup />} />
-      <Route path="/verify-email" element={<PrivateRoute><VerifyEmail /></PrivateRoute>} />
-      <Route path="/"            element={<PrivateRoute><Home /></PrivateRoute>} />
-      <Route path="/onboarding"  element={<PrivateRoute><Onboarding /></PrivateRoute>} />
-      <Route path="/cours"       element={<PrivateRoute><Cours /></PrivateRoute>} />
-      <Route path="/progres"     element={<PrivateRoute><Progres /></PrivateRoute>} />
-      <Route path="/profil"      element={<PrivateRoute><Profile /></PrivateRoute>} />
-      <Route path="/reglages"    element={<PrivateRoute><Reglages /></PrivateRoute>} />
-      <Route path="/scan"        element={<PrivateRoute><Scan /></PrivateRoute>} />
-      <Route path="/analyse"     element={<PrivateRoute><Analyse /></PrivateRoute>} />
-      <Route path="/flashcards"  element={<PrivateRoute><Flashcards /></PrivateRoute>} />
-      <Route path="/quiz"        element={<PrivateRoute><Quiz /></PrivateRoute>} />
-      <Route path="/resume"      element={<PrivateRoute><Resume /></PrivateRoute>} />
-      <Route path="/mindmap"     element={<PrivateRoute><Mindmap /></PrivateRoute>} />
-      <Route path="/upgrade-success" element={<PrivateRoute><UpgradeSuccess /></PrivateRoute>} />
-      <Route path="/coach"       element={<PrivateRoute><Coach /></PrivateRoute>} />
-      <Route path="/programme"   element={<PrivateRoute><Programme /></PrivateRoute>} />
-      <Route path="/programme/:matiere" element={<PrivateRoute><ProgrammeMatiere /></PrivateRoute>} />
-      <Route path="/battle"      element={<BattleRoute><BattleAccueil /></BattleRoute>} />
-      <Route path="/battle/:code" element={<BattleRoute><Battle /></BattleRoute>} />
-      <Route path="*"            element={<NotFound />} />
-    </Routes>
-    </>
-  )
-}
-
-// Repli de thème : un thème Réviz+ persisté sans abonnement actif
-// (expiré, déconnexion…) retombe silencieusement sur « Crème ».
-function ThemeGate() {
-  const { isPremium } = useAuth();
-  const { theme, setTheme } = useTheme();
-  useEffect(() => {
-    const resolved = resolveTheme(theme, isPremium);
-    if (resolved !== theme) setTheme(resolved);
-  }, [theme, isPremium, setTheme]);
-  return null;
 }
 
 export default function App() {
@@ -142,22 +51,15 @@ export default function App() {
         <ConsentBanner />
         <Suspense fallback={<LoadingFallback />}>
           <Routes>
-            {/* Routes publiques — pas de Firebase chargé */}
+            {/* Routes publiques — pas de Firebase chargé (cf. utils/publicRoutes.js) */}
             <Route path="/welcome"     element={<><SplashHider /><Welcome /></>} />
             <Route path="/legal/:page" element={<><SplashHider /><Legal /></>} />
             <Route path="/avis"        element={<><SplashHider /><Avis /></>} />
             <Route path="/profs"       element={<><SplashHider /><Profs /></>} />
             <Route path="/installer"   element={<><SplashHider /><Installer /></>} />
 
-            {/* Toutes les autres routes — Firebase via AuthProvider */}
-            <Route path="/*" element={
-              <AuthProvider>
-                <ThemeProvider>
-                  <ThemeGate />
-                  <AuthRoutes />
-                </ThemeProvider>
-              </AuthProvider>
-            } />
+            {/* Toutes les autres routes — Firebase via AuthProvider, dans AuthShell */}
+            <Route path="/*" element={<AuthShell />} />
           </Routes>
         </Suspense>
       </BrowserRouter>
