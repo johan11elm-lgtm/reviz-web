@@ -1,0 +1,359 @@
+{
+  "classe": "3ème",
+  "matiere": "Anglais",
+  "programme": "Langues vivantes cycle 4 (LV1, niveau A2-B1) — BO spécial n°11 du 26/11/2015, ajusté BO n°31 du 30/07/2020",
+  "modele": "claude-opus-5-5 (abonnement)",
+  "genereLe": "2026-10-05",
+  "relu": false,
+  "chapitres": [
+    {
+      "id": "present-simple-et-continu",
+      "titre": "Présent simple et présent en be + -ing : la vie au collège (school life)",
+      "ordre": 1,
+      "periode": "T1",
+      "notions": [
+        "Former le présent simple, y compris le -s de la 3e personne du singulier",
+        "Construire négations et questions avec do / does",
+        "Former le présent en be + V-ing et l'employer pour une action en cours",
+        "Choisir entre habitude (présent simple) et action en cours (be + -ing)",
+        "Placer les adverbes de fréquence",
+        "Comparer la vie scolaire au Royaume-Uni, aux États-Unis et en France"
+      ],
+      "motsCles": [
+        "present simple",
+        "present continuous",
+        "do / does",
+        "always",
+        "usually",
+        "never",
+        "right now",
+        "school uniform",
+        "timetable",
+        "subject",
+        "Year 10",
+        "high school"
+      ],
+      "reference": "Présent simple : base verbale ; 3e personne du singulier + -s (he plays, she watches, it goes, he studies).\nNégation : do not / does not (don't / doesn't) + base verbale : She doesn't like maths.\nQuestion : Do / Does + sujet + base verbale ? Does he walk to school?\nEmploi du présent simple : habitudes, vérités générales, goûts, emploi du temps (The bus leaves at 7.45).\nAdverbes de fréquence : always, usually, often, sometimes, rarely, never ; placés avant le verbe, mais après be (I am never late).\nPrésent en be + V-ing (present continuous) : am / is / are + V-ing : They are reading right now.\nEmploi : action en cours au moment où l'on parle (now, right now, at the moment, Look!, Listen!).\nOrthographe de -ing : write → writing, swim → swimming, lie → lying.\nVerbes d'état (like, love, hate, want, know, believe, understand) : en général pas en be + -ing (I know the answer).\nRoyaume-Uni (Angleterre) : uniforme scolaire fréquent (blazer, tie), élèves de 14-15 ans en Year 10, examens du GCSE à 16 ans.\nÉtats-Unis : high school de la 9th à la 12th grade ; un élève de 9th grade est appelé freshman ; pas d'uniforme dans la plupart des écoles publiques.\nVocabulaire : subject (matière), timetable (emploi du temps), break (récréation), homework (indénombrable : some homework), canteen, headteacher.\nMéthode : repérer le marqueur (every day, usually → présent simple ; now, at the moment → be + -ing) avant de choisir le temps."
+    },
+    {
+      "id": "preterit-simple-et-continu",
+      "titre": "Prétérit simple et prétérit en be + -ing : raconter une histoire (the Titanic)",
+      "ordre": 2,
+      "periode": "T1",
+      "notions": [
+        "Former le prétérit des verbes réguliers (-ed) et connaître les verbes irréguliers courants",
+        "Construire négations et questions avec did",
+        "Former le prétérit en be + -ing (was / were + V-ing)",
+        "Opposer action de premier plan et action en cours dans le passé (when / while)",
+        "Utiliser les marqueurs du passé : yesterday, last, ago, in + année",
+        "Raconter le naufrage du Titanic (1912)"
+      ],
+      "motsCles": [
+        "past simple",
+        "past continuous",
+        "did",
+        "was / were",
+        "when",
+        "while",
+        "ago",
+        "last",
+        "irregular verbs",
+        "iceberg",
+        "maiden voyage",
+        "sink / sank / sunk"
+      ],
+      "reference": "Prétérit simple, verbes réguliers : base + -ed (play → played, stop → stopped, study → studied).\nVerbes irréguliers courants : go → went, see → saw, have → had, take → took, sink → sank, hit → hit, leave → left.\nNégation : did not (didn't) + base verbale : They didn't see the iceberg in time.\nQuestion : Did + sujet + base verbale ? Did the ship reach New York? — No, it didn't.\nEmploi : action terminée, datée, coupée du présent : yesterday, last week, two days ago, in 1912.\nPrétérit en be + -ing : was / were + V-ing : The passengers were sleeping.\nEmploi : action en cours à un moment du passé, souvent interrompue par une action au prétérit simple.\nWhile + was / were + V-ing ; when + prétérit simple : The ship was sailing fast when it hit an iceberg.\nLe Titanic, paquebot britannique réputé « insubmersible » (unsinkable), quitte Southampton le 10 avril 1912 pour son voyage inaugural (maiden voyage) vers New York.\nIl heurte un iceberg dans la nuit du 14 avril 1912 et coule le 15 avril 1912 dans l'Atlantique Nord.\nPlus de 1 500 personnes meurent ; il n'y avait pas assez de canots de sauvetage (lifeboats) pour tous les passagers.\nConnecteurs du récit : first, then, after that, suddenly, finally.\nMéthode : repérer l'action de fond (was / were + -ing) et l'événement ponctuel (prétérit simple)."
+    },
+    {
+      "id": "present-perfect",
+      "titre": "Le present perfect : parler de ses expériences (travel experiences)",
+      "ordre": 3,
+      "periode": "T1",
+      "notions": [
+        "Former le present perfect : have / has + participe passé",
+        "Exprimer une expérience avec ever et never",
+        "Utiliser already, yet et just",
+        "Exprimer une durée qui dure encore avec for et since",
+        "Distinguer present perfect et prétérit (pas de date passée précise avec le present perfect)",
+        "Parler de voyages et de pays anglophones visités"
+      ],
+      "motsCles": [
+        "present perfect",
+        "past participle",
+        "ever",
+        "never",
+        "already",
+        "yet",
+        "just",
+        "for",
+        "since",
+        "been",
+        "abroad",
+        "How long"
+      ],
+      "reference": "Forme : have / has + participe passé : I have visited London. She has been to Dublin.\nParticipe passé : réguliers en -ed ; irréguliers à connaître : be → been, go → gone, see → seen, do → done, eat → eaten, write → written.\nNégation : haven't / hasn't + participe passé ; question : Have / Has + sujet + participe passé ?\nExpérience : Have you ever been to Scotland? — No, I have never been there.\nbeen / gone : He has been to New York (il y est allé et revenu) ; He has gone to New York (il y est parti, il y est encore).\nalready (déjà) dans l'affirmative ; yet (déjà ? / pas encore) en question et en négation : I haven't packed my bag yet.\njust (venir de) : The plane has just landed.\nDurée qui dure encore : for + durée (for three years), since + point de départ (since 2022, since Monday).\nHow long have you lived here? — I've lived here for five years. (en français : « J'habite ici depuis cinq ans ».)\nOpposition : prétérit avec une date ou un marqueur du passé révolu (yesterday, ago, in 2019) : I went to London last year (pas *I have gone to London last year).\nLe present perfect fait le lien entre passé et présent : on s'intéresse au résultat ou au bilan.\nMéthode : chercher un marqueur temporel ; date passée précise → prétérit ; bilan, expérience, durée jusqu'à maintenant → present perfect."
+    },
+    {
+      "id": "futur-et-projets",
+      "titre": "Exprimer le futur : projets et métiers (future jobs)",
+      "ordre": 4,
+      "periode": "T1",
+      "notions": [
+        "Former et employer will + base verbale (prédiction, décision immédiate, promesse)",
+        "Employer be going to + base verbale (intention, prédiction fondée sur un indice)",
+        "Employer le présent en be + -ing pour un projet organisé",
+        "Construire négations et questions au futur (won't, Are you going to...?)",
+        "Utiliser les marqueurs du futur : tomorrow, next, in + durée, one day",
+        "Parler de son orientation et des métiers"
+      ],
+      "motsCles": [
+        "will",
+        "won't",
+        "be going to",
+        "next year",
+        "tomorrow",
+        "one day",
+        "career",
+        "job",
+        "work experience",
+        "apply",
+        "engineer",
+        "nurse"
+      ],
+      "reference": "Will + base verbale (contraction 'll ; négation will not = won't) : forme identique à toutes les personnes.\nEmplois de will : prédiction (Robots will do many jobs), décision prise au moment où l'on parle (I'll help you), promesse (I won't forget).\nBe going to + base verbale : intention déjà décidée : I'm going to study biology.\nBe going to pour une prédiction fondée sur un indice présent : Look at those clouds! It's going to rain.\nPrésent en be + -ing pour un projet organisé, avec date : I'm meeting the careers adviser on Monday.\nQuestions : Will you...? / Are you going to...? ; réponses courtes : Yes, I will. / No, I'm not.\nMarqueurs : tomorrow, next week, next year, in ten years, one day, soon, later.\nDegré de certitude : will probably (sans doute), may / might (peut-être) : I might study abroad.\nExprimer un souhait : I would like to become a vet. I want to be an engineer. I hope to work abroad.\nArticle indéfini devant un métier : She wants to be a nurse / an architect.\nVocabulaire : job (un emploi), work (le travail, indénombrable), career, salary, skills, apply for a job, work experience (le stage d'observation de 3e).\nMéthode : intention déjà réfléchie → going to ; décision soudaine ou prévision générale → will ; rendez-vous fixé → be + -ing."
+    },
+    {
+      "id": "les-modaux",
+      "titre": "Les modaux : règles, conseils et possibilités (rules at school)",
+      "ordre": 5,
+      "periode": "T2",
+      "notions": [
+        "Connaître les propriétés des modaux (pas de -s, base verbale, négation en not)",
+        "Exprimer la capacité avec can / could et be able to",
+        "Exprimer l'obligation avec must et have to, l'interdiction avec mustn't",
+        "Distinguer mustn't (interdiction) et don't have to (absence d'obligation)",
+        "Donner un conseil avec should",
+        "Exprimer la permission et la probabilité avec can, may, might",
+        "Comparer règlements scolaires anglophones et français"
+      ],
+      "motsCles": [
+        "can",
+        "could",
+        "must",
+        "mustn't",
+        "have to",
+        "don't have to",
+        "should",
+        "may",
+        "might",
+        "be able to",
+        "rules",
+        "allowed to"
+      ],
+      "reference": "Propriétés des modaux : pas de -s à la 3e personne, suivis de la base verbale sans to, négation par not, question par inversion : Can she swim? She can't swim.\nCapacité : can (présent), could (passé) : I could read when I was five. Au futur : will be able to.\nPermission : can / may : Can I go to the toilet? May I come in? (may est plus poli).\nObligation : must (obligation ressentie par celui qui parle, ou règle écrite) ; have to (obligation extérieure) : We have to wear a uniform.\nhave to se conjugue : she has to, did you have to...?, au passé had to (must n'a pas de passé).\nInterdiction : mustn't (must not) : You mustn't use your phone in class.\nAbsence d'obligation : don't / doesn't have to : You don't have to come on Saturday (ce n'est pas obligatoire).\nConseil : should / shouldn't + base verbale : You should revise every day.\nProbabilité : may / might (peut-être) : It might rain later. Certitude logique : must (He must be tired).\nbe allowed to : avoir le droit de : We are not allowed to run in the corridors.\nAu Royaume-Uni, de nombreuses écoles imposent un uniforme ; aux États-Unis, les élèves prononcent souvent le Pledge of Allegiance en début de journée.\nMéthode : identifier la valeur (capacité, permission, obligation, interdiction, conseil, probabilité) avant de choisir le modal."
+    },
+    {
+      "id": "comparatif-et-superlatif",
+      "titre": "Comparer : le Royaume-Uni et les États-Unis (geography)",
+      "ordre": 6,
+      "periode": "T2",
+      "notions": [
+        "Former le comparatif de supériorité des adjectifs courts (-er than) et longs (more ... than)",
+        "Former le superlatif (the -est / the most)",
+        "Connaître les formes irrégulières (good, bad, far)",
+        "Exprimer l'égalité (as ... as) et l'infériorité (not as ... as, less ... than)",
+        "Appliquer les règles d'orthographe (big → bigger, easy → easier)",
+        "Connaître les nations du Royaume-Uni et des repères sur les États-Unis"
+      ],
+      "motsCles": [
+        "comparative",
+        "superlative",
+        "than",
+        "as ... as",
+        "the most",
+        "less",
+        "better",
+        "worse",
+        "United Kingdom",
+        "Great Britain",
+        "capital",
+        "state"
+      ],
+      "reference": "Adjectifs courts (1 syllabe, ou 2 syllabes en -y) : adjectif + -er + than : London is bigger than Edinburgh.\nSuperlatif court : the + adjectif + -est : the tallest, the biggest, the easiest.\nOrthographe : consonne doublée après voyelle simple (big → bigger, hot → hotter) ; -y → -ier (happy → happier) ; -e → -r (large → larger).\nAdjectifs longs : more + adjectif + than ; the most + adjectif : California is the most populated state.\nIrréguliers : good → better → the best ; bad → worse → the worst ; far → farther / further → the farthest / furthest.\nÉgalité : as + adjectif + as ; infériorité : not as ... as ou less ... than.\nLe Royaume-Uni (United Kingdom) réunit 4 nations : England (London), Scotland (Edinburgh), Wales (Cardiff), Northern Ireland (Belfast).\nLa Grande-Bretagne (Great Britain) est l'île qui regroupe l'Angleterre, l'Écosse et le pays de Galles, sans l'Irlande du Nord.\nLe Ben Nevis, en Écosse, est le plus haut sommet du Royaume-Uni (1 345 m). La Severn est le plus long fleuve du pays, devant la Tamise (Thames).\nLes États-Unis comptent 50 États ; la capitale fédérale est Washington, D.C. ; New York est la ville la plus peuplée.\nL'Alaska est le plus grand État par la superficie ; la Californie est le plus peuplé.\nMéthode : compter les syllabes de l'adjectif pour choisir entre -er / -est et more / the most."
+    },
+    {
+      "id": "used-to-et-droits-civiques",
+      "titre": "Used to et la lutte pour les droits civiques (civil rights)",
+      "ordre": 7,
+      "periode": "T2",
+      "notions": [
+        "Exprimer une habitude passée révolue avec used to + base verbale",
+        "Construire la négation et la question (didn't use to, Did ... use to?)",
+        "Expliquer la ségrégation et les lois Jim Crow",
+        "Raconter le geste de Rosa Parks et le boycott des bus de Montgomery",
+        "Présenter Martin Luther King et le discours I Have a Dream",
+        "Connaître les grandes lois de 1964 et 1965"
+      ],
+      "motsCles": [
+        "used to",
+        "didn't use to",
+        "segregation",
+        "Jim Crow laws",
+        "civil rights",
+        "boycott",
+        "Rosa Parks",
+        "Martin Luther King",
+        "non-violence",
+        "march",
+        "equality",
+        "Civil Rights Act"
+      ],
+      "reference": "used to + base verbale : habitude ou situation passée qui n'existe plus : Black people used to sit at the back of the bus.\nNégation : didn't use to + base verbale ; question : Did they use to...? Une seule forme pour toutes les personnes.\nNe pas confondre avec be used to + V-ing (être habitué à) : I'm used to getting up early.\nDans le Sud des États-Unis, les lois Jim Crow imposaient la ségrégation raciale : écoles, bus, restaurants et toilettes séparés.\n1er décembre 1955, Montgomery (Alabama) : Rosa Parks refuse de céder sa place à un passager blanc dans un bus ; elle est arrêtée.\nLe boycott des bus de Montgomery dure 381 jours ; en 1956, la Cour suprême déclare la ségrégation dans les bus contraire à la Constitution.\nMartin Luther King, pasteur, défend la non-violence (non-violence) ; il mène le boycott de Montgomery.\n28 août 1963 : Marche sur Washington ; devant le Lincoln Memorial, il prononce le discours I Have a Dream.\nCivil Rights Act (1964) : interdit la ségrégation dans les lieux publics et les discriminations à l'embauche.\nVoting Rights Act (1965) : protège le droit de vote des Afro-Américains.\nMartin Luther King reçoit le prix Nobel de la paix en 1964 ; il est assassiné le 4 avril 1968 à Memphis.\nVocabulaire : equality, rights, discrimination, protest, march, arrest, speech.\nMéthode : pour décrire un « avant / après », opposer used to (avant) et le présent simple (aujourd'hui)."
+    },
+    {
+      "id": "past-perfect-et-immigration",
+      "titre": "Le past perfect et l'immigration vers l'Amérique (Ellis Island)",
+      "ordre": 8,
+      "periode": "T2",
+      "notions": [
+        "Former le past perfect : had + participe passé",
+        "Exprimer l'antériorité dans un récit au passé",
+        "Articuler un récit avec before, after, when, by the time",
+        "Situer Ellis Island et la statue de la Liberté",
+        "Expliquer les raisons de l'émigration (push and pull factors)",
+        "Comprendre la notion de rêve américain"
+      ],
+      "motsCles": [
+        "past perfect",
+        "had + participe passé",
+        "before",
+        "after",
+        "by the time",
+        "immigrant",
+        "Ellis Island",
+        "Statue of Liberty",
+        "American Dream",
+        "famine",
+        "melting pot",
+        "steerage"
+      ],
+      "reference": "Past perfect : had + participe passé, identique à toutes les personnes ; contraction 'd ; négation hadn't.\nEmploi : action antérieure à une autre action passée : When they arrived in New York, they had travelled for ten days.\nLe past perfect marque l'antériorité ; l'action la plus récente est au prétérit simple.\nConnecteurs : before, after, when, by the time, already : By the time the ship arrived, many passengers had fallen ill.\nEllis Island, îlot dans le port de New York, est le principal centre d'accueil des immigrants de 1892 à 1954.\nEnviron 12 millions d'immigrants y sont passés : contrôle médical, questions d'identité ; la plupart étaient admis en quelques heures.\nLa statue de la Liberté (Liberty Enlightening the World), offerte par la France, est inaugurée en 1886 ; sculpteur : Frédéric Auguste Bartholdi, structure : Gustave Eiffel.\nPush factors (raisons de partir) : pauvreté, famine (Grande Famine en Irlande, 1845-1849), persécutions, guerres.\nPull factors (raisons de venir) : travail, terres, liberté religieuse et politique.\nAmerican Dream : idée que chacun peut réussir aux États-Unis par son travail.\nMelting pot : image d'une société qui mêle des populations d'origines diverses.\nMéthode : sur une frise, placer les deux actions passées ; la plus ancienne se met au past perfect."
+    },
+    {
+      "id": "pronoms-relatifs-et-heros",
+      "titre": "Les pronoms relatifs : héros et figures engagées (heroes)",
+      "ordre": 9,
+      "periode": "T2",
+      "notions": [
+        "Utiliser who pour les personnes, which pour les choses et les animaux",
+        "Utiliser that dans les relatives déterminatives",
+        "Exprimer la possession avec whose et le lieu avec where",
+        "Savoir quand le pronom relatif peut être omis",
+        "Présenter Nelson Mandela et la fin de l'apartheid",
+        "Présenter Malala Yousafzai et le droit à l'éducation"
+      ],
+      "motsCles": [
+        "relative pronoun",
+        "who",
+        "which",
+        "that",
+        "whose",
+        "where",
+        "hero",
+        "apartheid",
+        "prison",
+        "Nobel Peace Prize",
+        "education",
+        "fight for"
+      ],
+      "reference": "who : antécédent humain : Mandela is the man who fought against apartheid.\nwhich : antécédent non humain (chose, animal, idée) : It is a law which separated people.\nthat : humain ou non humain, dans une relative déterminative (sans virgules) : the book that I read.\nwhose : possession (dont le / la / les) : Malala is a girl whose school was attacked.\nwhere : lieu : Robben Island is the island where Mandela was imprisoned.\nOmission : le pronom relatif peut être omis quand il est complément d'objet : the film (that) we watched ; jamais quand il est sujet.\nApartheid : système de ségrégation raciale officielle en Afrique du Sud, de 1948 au début des années 1990.\nNelson Mandela (1918-2013), militant de l'ANC, est emprisonné 27 ans, notamment à Robben Island ; il est libéré le 11 février 1990.\nMandela reçoit le prix Nobel de la paix en 1993 avec Frederik de Klerk ; il devient en 1994 le premier président noir de l'Afrique du Sud.\nMalala Yousafzai, Pakistanaise née en 1997, milite pour l'éducation des filles ; blessée par les talibans en 2012.\nElle reçoit le prix Nobel de la paix en 2014, à 17 ans : la plus jeune lauréate de l'histoire du prix.\nMéthode : identifier l'antécédent (personne, chose, lieu, possesseur) puis choisir le pronom relatif."
+    },
+    {
+      "id": "voix-passive-et-inventions",
+      "titre": "La voix passive : inventions et découvertes (inventions)",
+      "ordre": 10,
+      "periode": "T3",
+      "notions": [
+        "Former la voix passive : be + participe passé",
+        "Conjuguer be au temps de la phrase active (présent, prétérit, present perfect, futur)",
+        "Introduire l'agent avec by",
+        "Transformer une phrase active en phrase passive",
+        "Savoir quand employer le passif (agent inconnu ou sans importance, mise en valeur du résultat)",
+        "Présenter des inventions et découvertes britanniques et américaines"
+      ],
+      "motsCles": [
+        "passive voice",
+        "be + past participle",
+        "by",
+        "invent",
+        "discover",
+        "invention",
+        "patent",
+        "inventor",
+        "telephone",
+        "World Wide Web",
+        "penicillin",
+        "steam engine"
+      ],
+      "reference": "Voix passive : be + participe passé ; be prend le temps de la phrase active.\nPrésent : English is spoken all over the world. Prétérit : The telephone was invented by Bell.\nPresent perfect : A new vaccine has been discovered. Futur : The results will be published tomorrow.\nTransformation : le complément d'objet de l'actif devient sujet du passif ; le sujet de l'actif devient complément d'agent introduit par by.\nActif : Fleming discovered penicillin. → Passif : Penicillin was discovered by Fleming.\nOn omet by quand l'agent est inconnu, évident ou sans importance : My bike was stolen.\nLe passif traduit souvent le « on » français : On parle anglais ici → English is spoken here.\nLe téléphone : brevet déposé par Alexander Graham Bell en 1876.\nLa pénicilline : découverte par Alexander Fleming (Écossais) en 1928, à Londres.\nLe World Wide Web : inventé par Tim Berners-Lee (Britannique) en 1989 au CERN.\nLa machine à vapeur : perfectionnée par James Watt (Écossais) à partir de 1769 ; elle est au cœur de la révolution industrielle.\nMéthode : repérer le temps du verbe actif, conjuguer be à ce temps, ajouter le participe passé du verbe."
+    },
+    {
+      "id": "conditionnels-et-environnement",
+      "titre": "Les phrases en if : protéger l'environnement (environment)",
+      "ordre": 11,
+      "periode": "T3",
+      "notions": [
+        "Exprimer une vérité générale avec if + présent, présent (type 0)",
+        "Exprimer une condition réalisable avec if + présent, will + base verbale (type 1)",
+        "Exprimer une hypothèse avec if + prétérit, would + base verbale (type 2)",
+        "Savoir que will et would ne s'emploient pas dans la subordonnée en if",
+        "Utiliser unless (à moins que / si ... ne ... pas)",
+        "Parler du réchauffement climatique et des gestes écologiques"
+      ],
+      "motsCles": [
+        "if",
+        "unless",
+        "would",
+        "conditional",
+        "global warming",
+        "climate change",
+        "greenhouse gases",
+        "pollution",
+        "recycle",
+        "waste",
+        "renewable energy",
+        "carbon footprint"
+      ],
+      "reference": "Type 0 : If + présent simple, présent simple : vérité générale. If you heat ice, it melts.\nType 1 : If + présent simple, will + base verbale : condition réalisable. If we recycle more, we will reduce waste.\nType 2 : If + prétérit, would + base verbale : hypothèse peu probable ou irréelle. If I had a garden, I would grow vegetables.\nAvec be au type 2, on emploie souvent were à toutes les personnes : If I were the president, I would ban plastic bags.\nJamais de will ou de would dans la proposition en if (pas *If it will rain).\nLa proposition en if peut se placer en second, sans virgule : We will save energy if we turn off the lights.\nunless = if ... not : Unless we act now, the planet will get warmer.\nRéchauffement climatique (global warming) : hausse de la température moyenne due aux gaz à effet de serre (greenhouse gases) comme le CO₂.\nConséquences : fonte des glaces, montée du niveau des mers, sécheresses, événements météorologiques extrêmes.\nAccord de Paris (2015) : objectif de limiter le réchauffement nettement en dessous de 2 °C par rapport à l'ère préindustrielle.\nVocabulaire : recycle, reduce, reuse, waste, renewable energy (solar, wind), carbon footprint, endangered species.\nMéthode : condition probable → type 1 (présent / will) ; situation imaginaire → type 2 (prétérit / would)."
+    },
+    {
+      "id": "discours-indirect-et-medias",
+      "titre": "Le discours indirect : médias et réseaux sociaux (media)",
+      "ordre": 12,
+      "periode": "T3",
+      "notions": [
+        "Distinguer say et tell dans le discours rapporté",
+        "Appliquer la concordance des temps après un verbe introducteur au passé",
+        "Modifier pronoms et repères de temps et de lieu",
+        "Rapporter une question (asked if / whether, ordre sujet-verbe affirmatif)",
+        "Rapporter un ordre ou une demande (told / asked + complément + to)",
+        "Analyser une information, repérer une fake news, parler des réseaux sociaux"
+      ],
+      "motsCles": [
+        "reported speech",
+        "say",
+        "tell",
+        "ask",
+        "if / whether",
+        "the day before",
+        "the next day",
+        "news",
+        "headline",
+        "fake news",
+        "social media",
+        "source"
+      ],
+      "reference": "Discours direct : He said, \"I am tired.\" → discours indirect : He said (that) he was tired.\nsay (something) : sans complément de personne ; tell + personne : She told me (that) she was busy.\nConcordance des temps après un verbe au passé : présent → prétérit ; be + -ing → was / were + -ing.\nPrétérit ou present perfect → past perfect ; will → would ; can → could ; must → had to.\nPronoms et possessifs changent selon la personne qui rapporte : \"I love my phone\" → She said she loved her phone.\nRepères : today → that day ; yesterday → the day before ; tomorrow → the next day ; now → then ; here → there ; this → that.\nQuestion fermée : He asked, \"Are you ready?\" → He asked if (whether) I was ready.\nQuestion ouverte : \"Where do you live?\" → She asked where I lived (ordre sujet + verbe, sans do, sans point d'interrogation).\nOrdre : \"Close the door!\" → He told me to close the door ; négatif : He told me not to shout.\nDemande polie : She asked me to help her.\nBBC : British Broadcasting Corporation, service public de radio et télévision britannique fondé en 1922.\nFake news : fausse information présentée comme vraie ; vérifier la source, la date, l'auteur, croiser plusieurs médias.\nMéthode : repérer le verbe introducteur ; s'il est au passé, reculer chaque temps d'un cran et adapter pronoms et repères."
+    }
+  ]
+}

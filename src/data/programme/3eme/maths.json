@@ -1,0 +1,234 @@
+{
+  "classe": "3ème",
+  "matiere": "Maths",
+  "programme": "Mathématiques cycle 4 (BO spécial n°11 du 26/11/2015, ajusté BO n°31 du 30/07/2020), repères annuels de progression 2019",
+  "modele": "claude-opus-5-5 (abonnement)",
+  "genereLe": "2026-10-05",
+  "relu": false,
+  "chapitres": [
+    {
+      "id": "arithmetique-nombres-premiers",
+      "titre": "Arithmétique : nombres premiers",
+      "ordre": 1,
+      "periode": "T1",
+      "notions": [
+        "Reconnaître un multiple et un diviseur d'un entier, utiliser les critères de divisibilité par 2, 3, 5, 9 et 10",
+        "Connaître la définition d'un nombre premier et la liste des nombres premiers inférieurs à 30",
+        "Décomposer un entier en produit de facteurs premiers",
+        "Rendre une fraction irréductible à l'aide de la décomposition en facteurs premiers",
+        "Résoudre des problèmes de partage, de regroupement ou d'engrenages (diviseurs communs, multiples communs)",
+        "Utiliser la division euclidienne : a = b × q + r avec 0 ≤ r < b"
+      ],
+      "motsCles": ["multiple", "diviseur", "nombre premier", "décomposition", "facteurs premiers", "fraction irréductible", "division euclidienne", "quotient", "reste", "critère de divisibilité", "diviseur commun"],
+      "reference": "Division euclidienne : pour deux entiers naturels a et b (b ≠ 0), il existe un unique couple (q ; r) tel que a = b × q + r avec 0 ≤ r < b. q est le quotient, r le reste.\nSi le reste est 0, on dit que b divise a, que b est un diviseur de a, que a est un multiple de b. Exemple : 84 = 7 × 12, donc 7 divise 84.\nCritères de divisibilité : par 2 si le chiffre des unités est pair ; par 5 s'il est 0 ou 5 ; par 10 s'il est 0 ; par 3 si la somme des chiffres est divisible par 3 ; par 9 si la somme des chiffres est divisible par 9.\nNombre premier : entier naturel qui admet exactement deux diviseurs distincts, 1 et lui-même. 1 n'est pas premier ; 2 est le seul nombre premier pair.\nNombres premiers inférieurs à 30 : 2, 3, 5, 7, 11, 13, 17, 19, 23, 29.\nTout entier supérieur ou égal à 2 se décompose en produit de facteurs premiers, de façon unique à l'ordre près.\nMéthode : on divise successivement par les nombres premiers 2, 3, 5, 7… tant que c'est possible. Exemple : 360 = 2³ × 3² × 5.\nPour savoir si n est premier, il suffit de tester les nombres premiers p tels que p × p ≤ n.\nFraction irréductible : fraction dont le numérateur et le dénominateur n'ont pas d'autre diviseur commun que 1.\nMéthode : décomposer numérateur et dénominateur, puis simplifier les facteurs communs. Exemple : 84/126 = (2² × 3 × 7)/(2 × 3² × 7) = 2/3.\nProblème de partage : le nombre maximal de lots identiques est le plus grand diviseur commun aux deux effectifs. Exemple : 84 billes et 126 cartes, au plus 42 lots (2 billes et 3 cartes par lot).\nProblème de rencontre (engrenages, cycles) : on cherche le plus petit multiple commun non nul. Exemple : cycles de 12 et 18 jours, retour simultané après 36 jours.\nLes ensembles de multiples d'un nombre sont infinis, l'ensemble de ses diviseurs est fini."
+    },
+    {
+      "id": "puissances-et-racines-carrees",
+      "titre": "Puissances et racines carrées",
+      "ordre": 2,
+      "periode": "T1",
+      "notions": [
+        "Utiliser les puissances d'exposant entier relatif d'un nombre",
+        "Appliquer les règles de calcul sur les puissances d'un même nombre",
+        "Utiliser les puissances de 10 et les préfixes (nano à giga)",
+        "Écrire un nombre en notation scientifique et comparer des ordres de grandeur",
+        "Connaître la définition de la racine carrée d'un nombre positif",
+        "Connaître les carrés parfaits de 1 à 144 et leurs racines carrées"
+      ],
+      "motsCles": ["puissance", "exposant", "puissance de 10", "notation scientifique", "ordre de grandeur", "préfixe", "racine carrée", "carré parfait", "inverse"],
+      "reference": "Pour a nombre et n entier positif non nul : aⁿ = a × a × … × a (n facteurs). Par convention a¹ = a et a⁰ = 1 (a ≠ 0).\nPour a ≠ 0 : a⁻ⁿ = 1/aⁿ, l'inverse de aⁿ. Exemple : 2⁻³ = 1/8 = 0,125.\nRègles pour a ≠ 0, m et n entiers relatifs : aᵐ × aⁿ = aᵐ⁺ⁿ ; aᵐ / aⁿ = aᵐ⁻ⁿ ; (aᵐ)ⁿ = aᵐⁿ (on multiplie les exposants).\nAttention : (−3)² = 9 mais −3² = −9 ; 2³ + 2² n'est pas 2⁵.\nPuissances de 10 : 10ⁿ = 1 suivi de n zéros ; 10⁻ⁿ = 0,00…01 avec le 1 au n-ième rang après la virgule.\nPréfixes : giga (10⁹), méga (10⁶), kilo (10³), milli (10⁻³), micro (10⁻⁶), nano (10⁻⁹).\nNotation scientifique : a × 10ⁿ avec 1 ≤ a < 10 et n entier relatif. Exemples : 45 300 = 4,53 × 10⁴ ; 0,0072 = 7,2 × 10⁻³.\nL'ordre de grandeur s'obtient en arrondissant a à l'unité dans la notation scientifique ; on compare deux nombres d'abord par leurs exposants.\nRacine carrée : pour a ≥ 0, √a est le nombre positif dont le carré vaut a. (√a)² = a.\nLa racine carrée d'un nombre négatif n'existe pas.\nCarrés parfaits : 1, 4, 9, 16, 25, 36, 49, 64, 81, 100, 121, 144 ; par exemple √49 = 7 et √144 = 12.\nSi a n'est pas un carré parfait, la calculatrice donne une valeur approchée : √2 ≈ 1,414.\nLe carré d'un nombre et celui de son opposé sont égaux : 5² = (−5)² = 25, mais √25 = 5 uniquement."
+    },
+    {
+      "id": "calcul-litteral",
+      "titre": "Calcul littéral et identités remarquables",
+      "ordre": 3,
+      "periode": "T1",
+      "notions": [
+        "Développer une expression avec la simple et la double distributivité",
+        "Factoriser une expression à l'aide d'un facteur commun",
+        "Connaître et utiliser l'identité remarquable (a + b)(a − b) = a² − b² pour développer et factoriser",
+        "Réduire une expression littérale",
+        "Utiliser le calcul littéral pour prouver un résultat général (programme de calcul)",
+        "Tester une égalité en substituant des valeurs numériques"
+      ],
+      "motsCles": ["expression littérale", "développer", "factoriser", "réduire", "distributivité", "double distributivité", "facteur commun", "identité remarquable", "différence de deux carrés", "programme de calcul", "contre-exemple"],
+      "reference": "Développer, c'est transformer un produit en somme ; factoriser, c'est transformer une somme en produit.\nSimple distributivité : k(a + b) = ka + kb et k(a − b) = ka − kb.\nDouble distributivité : (a + b)(c + d) = ac + ad + bc + bd.\nExemple : (2x + 3)(x − 5) = 2x² − 10x + 3x − 15 = 2x² − 7x − 15.\nRéduire, c'est regrouper les termes de même nature : 3x² + 2x − x² + 5x = 2x² + 7x.\nFactoriser avec un facteur commun : ka + kb = k(a + b). Exemple : (x + 1)(2x − 3) + (x + 1)(x + 4) = (x + 1)(3x + 1).\nIdentité remarquable au programme de 3e : (a + b)(a − b) = a² − b².\nExemples : (x − 3)(x + 3) = x² − 9 ; 4x² − 25 = (2x − 5)(2x + 5).\nOn peut aussi développer (a + b)² = (a + b)(a + b) = a² + 2ab + b² par double distributivité.\nAttention aux signes : −(a − b) = −a + b ; (x + 3)² n'est pas x² + 9.\nProuver un résultat général : on nomme x le nombre choisi, on traduit le programme de calcul en expression, puis on développe et on réduit.\nExemple : choisir x, ajouter 3, élever au carré, soustraire x² : (x + 3)² − x² = 6x + 9, le résultat est toujours un multiple de 3.\nUn seul contre-exemple suffit pour prouver qu'une égalité est fausse ; tester des valeurs ne prouve pas qu'elle est vraie pour tout x."
+    },
+    {
+      "id": "equations-et-inequations",
+      "titre": "Équations et inéquations",
+      "ordre": 4,
+      "periode": "T1",
+      "notions": [
+        "Résoudre une équation du premier degré à une inconnue",
+        "Résoudre une équation produit nul",
+        "Résoudre une équation du type x² = a",
+        "Résoudre une inéquation du premier degré et représenter ses solutions sur une droite graduée",
+        "Mettre un problème en équation et vérifier la cohérence de la solution",
+        "Tester si un nombre est solution d'une équation ou d'une inéquation"
+      ],
+      "motsCles": ["équation", "inconnue", "solution", "membre", "équation produit nul", "inéquation", "inégalité", "sens de l'inégalité", "mise en équation", "droite graduée"],
+      "reference": "Une équation est une égalité contenant une inconnue ; une solution est une valeur de l'inconnue qui rend l'égalité vraie.\nOn ne change pas les solutions en ajoutant ou soustrayant un même nombre aux deux membres, ni en les multipliant ou divisant par un même nombre non nul.\nExemple : 5x − 3 = 2x + 9 ⇔ 3x = 12 ⇔ x = 4.\nPropriété du produit nul : un produit est nul si et seulement si l'un au moins de ses facteurs est nul.\nExemple : (2x − 6)(x + 5) = 0 ⇔ 2x − 6 = 0 ou x + 5 = 0 ⇔ x = 3 ou x = −5.\nÉquation x² = a : si a > 0, deux solutions √a et −√a ; si a = 0, une solution 0 ; si a < 0, aucune solution.\nExemple : x² = 16 a pour solutions 4 et −4 ; x² = −9 n'a pas de solution.\nPour résoudre x² − 25 = 0, on peut factoriser : (x − 5)(x + 5) = 0.\nInéquation : on peut ajouter ou soustraire un même nombre aux deux membres sans changer le sens.\nMultiplier ou diviser par un nombre strictement positif conserve le sens ; par un nombre strictement négatif, on change le sens de l'inégalité.\nExemple : −3x + 2 > 11 ⇔ −3x > 9 ⇔ x < −3.\nOn représente les solutions sur une droite graduée, crochet tourné vers les solutions si la borne est incluse (≤ ou ≥), tourné vers l'extérieur sinon.\nMise en équation : choisir l'inconnue, écrire l'équation, la résoudre, vérifier et conclure par une phrase."
+    },
+    {
+      "id": "notion-de-fonction",
+      "titre": "Notion de fonction",
+      "ordre": 5,
+      "periode": "T1",
+      "notions": [
+        "Comprendre une fonction comme un processus qui associe à un nombre un unique nombre",
+        "Utiliser les notations f(x) et f : x ↦ f(x)",
+        "Distinguer image et antécédent",
+        "Déterminer une image ou un antécédent à partir d'une expression, d'un tableau de valeurs ou d'une courbe",
+        "Construire la représentation graphique d'une fonction à partir d'un tableau de valeurs",
+        "Passer d'un mode de représentation à un autre (formule, tableau, graphique)"
+      ],
+      "motsCles": ["fonction", "image", "antécédent", "variable", "tableau de valeurs", "représentation graphique", "courbe", "abscisse", "ordonnée", "f(x)"],
+      "reference": "Une fonction f est un processus qui, à un nombre x, associe un unique nombre noté f(x).\nNotation : f : x ↦ f(x), on lit « f qui à x associe f(x) ».\nSi f(a) = b, on dit que b est l'image de a par f et que a est un antécédent de b par f.\nUn nombre a une seule image ; un nombre peut avoir zéro, un ou plusieurs antécédents.\nExemple : f(x) = x² − 3. f(2) = 1, donc 1 est l'image de 2. f(−2) = 1 aussi : 1 a deux antécédents, 2 et −2.\nCalculer une image : on remplace x par la valeur dans l'expression.\nTrouver un antécédent de b : on résout l'équation f(x) = b.\nTableau de valeurs : première ligne x, deuxième ligne f(x) ; un tableur permet de le produire avec une formule recopiée.\nReprésentation graphique : ensemble des points de coordonnées (x ; f(x)) dans un repère.\nUn point M(a ; b) est sur la courbe de f si et seulement si f(a) = b.\nLecture graphique d'une image : on part de l'abscisse x sur l'axe horizontal et on lit l'ordonnée.\nLecture graphique d'antécédents : on part de l'ordonnée sur l'axe vertical et on lit la ou les abscisses des points de la courbe.\nLes lectures graphiques donnent des valeurs approchées ; le calcul donne des valeurs exactes."
+    },
+    {
+      "id": "fonctions-lineaires-et-affines",
+      "titre": "Fonctions linéaires et affines",
+      "ordre": 6,
+      "periode": "T2",
+      "notions": [
+        "Reconnaître une fonction linéaire f(x) = ax et une fonction affine f(x) = ax + b",
+        "Faire le lien entre fonction linéaire et proportionnalité",
+        "Représenter graphiquement une fonction linéaire ou affine par une droite",
+        "Interpréter le coefficient directeur et l'ordonnée à l'origine",
+        "Déterminer une fonction linéaire ou affine à partir de deux nombres et de leurs images",
+        "Modéliser une situation (tarifs, trajets) par une fonction affine et comparer des offres"
+      ],
+      "motsCles": ["fonction linéaire", "fonction affine", "coefficient directeur", "ordonnée à l'origine", "proportionnalité", "droite", "origine du repère", "accroissement", "fonction constante", "modélisation"],
+      "reference": "Fonction linéaire : f(x) = ax, a nombre fixé appelé coefficient. Elle modélise une situation de proportionnalité de coefficient a.\nSa représentation graphique est une droite qui passe par l'origine du repère.\nFonction affine : f(x) = ax + b, a et b nombres fixés. Une fonction linéaire est affine avec b = 0 ; si a = 0, la fonction est constante.\nSa représentation graphique est une droite ; a est le coefficient directeur (pente), b l'ordonnée à l'origine car f(0) = b.\nSi a > 0 la droite « monte », si a < 0 elle « descend », si a = 0 elle est parallèle à l'axe des abscisses.\nLes accroissements de f(x) sont proportionnels aux accroissements de x : a = (f(x₂) − f(x₁)) / (x₂ − x₁).\nExemple : f(2) = 7 et f(5) = 13 donnent a = (13 − 7)/(5 − 2) = 2, puis b = 7 − 2 × 2 = 3, donc f(x) = 2x + 3.\nPour tracer une droite d'équation y = ax + b, deux points suffisent (souvent x = 0 et une autre valeur).\nLecture graphique de a : en avançant de 1 unité vers la droite, on monte (ou descend) de a unités.\nPourcentages et fonctions linéaires : augmenter de t % revient à multiplier par 1 + t/100 ; diminuer de t %, à multiplier par 1 − t/100.\nModélisation : un abonnement de 15 € plus 2 € par séance se modélise par f(x) = 2x + 15.\nComparer deux offres : on résout f(x) = g(x) ou f(x) < g(x), ou on lit l'intersection des deux droites."
+    },
+    {
+      "id": "proportionnalite-et-grandeurs-composees",
+      "titre": "Proportionnalité, pourcentages et grandeurs composées",
+      "ordre": 7,
+      "periode": "T2",
+      "notions": [
+        "Reconnaître une situation de proportionnalité ou de non-proportionnalité",
+        "Calculer une quatrième proportionnelle (produit en croix, coefficient, linéarité)",
+        "Appliquer et calculer un pourcentage, une évolution en pourcentage",
+        "Utiliser des ratios pour partager une quantité",
+        "Calculer avec des grandeurs composées (vitesse, débit, masse volumique) et convertir leurs unités",
+        "Utiliser l'échelle d'un plan ou d'une carte"
+      ],
+      "motsCles": ["proportionnalité", "coefficient de proportionnalité", "produit en croix", "pourcentage", "coefficient multiplicateur", "ratio", "vitesse moyenne", "grandeur produit", "grandeur quotient", "échelle", "conversion"],
+      "reference": "Deux grandeurs sont proportionnelles si l'on passe des valeurs de l'une à celles de l'autre en multipliant toujours par un même nombre non nul, le coefficient de proportionnalité.\nGraphiquement, une situation de proportionnalité est représentée par des points alignés avec l'origine du repère.\nQuatrième proportionnelle : si a/b = c/d, alors a × d = b × c (produit en croix), donc d = (b × c)/a.\nAppliquer t % à une quantité Q : Q × t/100. Exemple : 15 % de 80 € = 12 €.\nAugmentation de t % : multiplier par 1 + t/100 ; diminution de t % : multiplier par 1 − t/100. Exemple : 80 € baissé de 15 % donne 80 × 0,85 = 68 €.\nDeux évolutions successives se composent en multipliant les coefficients : +10 % puis −10 % donne 1,1 × 0,9 = 0,99, soit −1 %.\nRatio : partager 60 selon le ratio 2 : 3 revient à faire 5 parts de 12, soit 24 et 36.\nVitesse moyenne : v = d / t ; donc d = v × t et t = d / v.\nConversion : 1 m/s = 3,6 km/h. Exemple : 90 km/h = 25 m/s.\nAttention aux durées : 1 h 15 min = 1,25 h, et non 1,15 h.\nGrandeur quotient : vitesse (km/h), débit (L/min), masse volumique (g/cm³), prix au kilo (€/kg).\nGrandeur produit : énergie électrique en kWh (puissance × durée), travail en personnes × jours.\nÉchelle : distance sur le plan / distance réelle, dans la même unité. Échelle 1/25 000 : 1 cm sur la carte représente 250 m."
+    },
+    {
+      "id": "theoreme-de-thales",
+      "titre": "Théorème de Thalès et sa réciproque",
+      "ordre": 8,
+      "periode": "T2",
+      "notions": [
+        "Reconnaître une configuration de Thalès (triangles emboîtés ou en papillon)",
+        "Calculer une longueur avec le théorème de Thalès",
+        "Démontrer que deux droites sont parallèles avec la réciproque du théorème de Thalès",
+        "Démontrer que deux droites ne sont pas parallèles avec la contraposée",
+        "Rédiger une démonstration en citant hypothèses, propriété et conclusion",
+        "Faire le lien entre configuration de Thalès, triangles semblables et agrandissement-réduction"
+      ],
+      "motsCles": ["Thalès", "réciproque", "contraposée", "droites parallèles", "rapports égaux", "configuration", "papillon", "alignement", "triangles semblables", "agrandissement", "réduction"],
+      "reference": "Théorème de Thalès : soient (BM) et (CN) deux droites sécantes en A. Si (MN) est parallèle à (BC), alors AM/AB = AN/AC = MN/BC.\nLa configuration peut être « emboîtée » (M sur [AB], N sur [AC]) ou « en papillon » (A entre B et M, A entre C et N).\nLes longueurs du petit triangle AMN sont proportionnelles à celles du grand triangle ABC.\nExemple : AM = 3, AB = 5, BC = 7 et (MN) // (BC) : MN = 7 × 3/5 = 4,2.\nRéciproque : si les points A, M, B d'une part et A, N, C d'autre part sont alignés dans le même ordre, et si AM/AB = AN/AC, alors (MN) est parallèle à (BC).\nLa condition sur l'ordre des points est indispensable pour la réciproque.\nContraposée : si AM/AB ≠ AN/AC, alors (MN) et (BC) ne sont pas parallèles.\nMéthode pour comparer deux quotients : calculer séparément chaque quotient (valeurs exactes) ou faire les produits en croix.\nExemple : AM = 2,4 ; AB = 4 ; AN = 3 ; AC = 5 : AM/AB = 0,6 et AN/AC = 0,6, les points sont alignés dans le même ordre, donc (MN) // (BC).\nRédaction : « Les droites (BM) et (CN) sont sécantes en A et (MN) // (BC). D'après le théorème de Thalès, … ».\nDeux triangles sont semblables s'ils ont les mêmes angles ; leurs longueurs sont alors proportionnelles. La configuration de Thalès donne deux triangles semblables.\nLe rapport k = AM/AB est le rapport de réduction (k < 1) ou d'agrandissement (k > 1)."
+    },
+    {
+      "id": "trigonometrie",
+      "titre": "Trigonométrie dans le triangle rectangle",
+      "ordre": 9,
+      "periode": "T2",
+      "notions": [
+        "Identifier l'hypoténuse, le côté adjacent et le côté opposé à un angle aigu",
+        "Connaître les définitions du cosinus, du sinus et de la tangente d'un angle aigu",
+        "Calculer une longueur à l'aide d'une relation trigonométrique",
+        "Calculer la mesure d'un angle à l'aide de la calculatrice (arccos, arcsin, arctan)",
+        "Choisir la bonne relation selon les données",
+        "Résoudre un problème concret (hauteur inaccessible, pente, angle d'élévation)"
+      ],
+      "motsCles": ["trigonométrie", "cosinus", "sinus", "tangente", "hypoténuse", "côté adjacent", "côté opposé", "angle aigu", "triangle rectangle", "SOHCAHTOA", "mode degré"],
+      "reference": "Dans un triangle rectangle, l'hypoténuse est le côté opposé à l'angle droit ; c'est le plus long côté.\nPour un angle aigu, le côté adjacent est le côté de l'angle droit qui forme cet angle ; le côté opposé est le côté de l'angle droit qui ne le forme pas.\ncos(angle) = côté adjacent / hypoténuse.\nsin(angle) = côté opposé / hypoténuse.\ntan(angle) = côté opposé / côté adjacent.\nMoyen mnémotechnique : SOH CAH TOA (Sinus = Opposé/Hypoténuse, Cosinus = Adjacent/Hypoténuse, Tangente = Opposé/Adjacent).\nPour un angle aigu, le cosinus et le sinus sont compris strictement entre 0 et 1.\nCes relations ne s'appliquent que dans un triangle rectangle.\nExemple : ABC rectangle en A, BC = 10 cm, angle ABC = 30°. AC = BC × sin(30°) = 10 × 0,5 = 5 cm.\nCalcul d'angle : si cos(x) = 0,8, alors x = arccos(0,8) ≈ 36,9° (touche cos⁻¹ ou Arccos de la calculatrice, en mode degré).\nMéthode : repérer l'angle connu ou cherché, nommer les côtés par rapport à cet angle, choisir la relation contenant deux données et l'inconnue.\nValeurs utiles : cos(60°) = sin(30°) = 0,5 ; tan(45°) = 1.\nApplication : hauteur d'un arbre vue à 20 m sous un angle de 35° : h = 20 × tan(35°) ≈ 14 m."
+    },
+    {
+      "id": "transformations-homotheties",
+      "titre": "Transformations du plan et homothéties",
+      "ordre": 10,
+      "periode": "T2",
+      "notions": [
+        "Reconnaître et construire l'image d'une figure par une symétrie, une translation ou une rotation",
+        "Connaître la définition d'une homothétie de centre O et de rapport k",
+        "Construire l'image d'une figure par une homothétie de rapport positif ou négatif",
+        "Connaître l'effet d'une homothétie sur les longueurs (× |k|), les aires (× k²) et les angles (conservés)",
+        "Identifier une transformation qui passe d'une figure à une autre dans une frise, un pavage ou une rosace",
+        "Relier homothétie, configuration de Thalès et agrandissement-réduction"
+      ],
+      "motsCles": ["transformation", "symétrie axiale", "symétrie centrale", "translation", "rotation", "homothétie", "centre", "rapport", "image", "agrandissement", "réduction", "frise"],
+      "reference": "Une transformation associe à chaque point M du plan un point M', son image.\nSymétrie axiale, symétrie centrale, translation et rotation conservent les longueurs, les angles, les aires et l'alignement.\nTranslation : glissement selon une direction, un sens et une longueur ; une translation qui transforme A en B transforme M en M' tel que ABM'M soit un parallélogramme (éventuellement aplati).\nRotation de centre O et d'angle α dans un sens donné : OM' = OM et l'angle MOM' mesure α.\nHomothétie de centre O et de rapport k (k ≠ 0) : M' est sur la droite (OM) et OM' = |k| × OM.\nSi k > 0, M' est du même côté que M par rapport à O ; si k < 0, M' est de l'autre côté de O.\nUne homothétie de rapport −1 est une symétrie centrale de centre O.\nSi |k| > 1, c'est un agrandissement ; si 0 < |k| < 1, c'est une réduction.\nUne homothétie multiplie les longueurs par |k|, les aires par k², et conserve les angles, le parallélisme et l'alignement.\nUne droite et son image par une homothétie sont parallèles.\nExemple : un triangle d'aire 6 cm² a pour image par une homothétie de rapport 3 un triangle d'aire 6 × 9 = 54 cm².\nLien avec Thalès : si M' est l'image de M et N' celle de N par l'homothétie de centre O, alors (MN) // (M'N') et OM'/OM = ON'/ON = M'N'/MN = |k|.\nFrises, pavages et rosaces s'obtiennent en répétant un motif par translations, symétries ou rotations."
+    },
+    {
+      "id": "statistiques",
+      "titre": "Statistiques",
+      "ordre": 11,
+      "periode": "T2",
+      "notions": [
+        "Recueillir et organiser des données dans un tableau d'effectifs et de fréquences",
+        "Calculer une moyenne simple et une moyenne pondérée",
+        "Déterminer la médiane d'une série et l'interpréter",
+        "Calculer l'étendue comme indicateur de dispersion",
+        "Lire et construire des représentations (diagramme en bâtons, histogramme, diagramme circulaire)",
+        "Comparer deux séries à l'aide de leurs indicateurs"
+      ],
+      "motsCles": ["série statistique", "effectif", "effectif total", "fréquence", "moyenne", "moyenne pondérée", "médiane", "étendue", "dispersion", "diagramme", "tableur"],
+      "reference": "Effectif d'une valeur : nombre de fois où elle apparaît. Effectif total : nombre total de données.\nFréquence d'une valeur = effectif de la valeur / effectif total ; elle s'exprime en fraction, en décimal ou en pourcentage. La somme des fréquences vaut 1 (100 %).\nMoyenne : somme des valeurs / effectif total.\nMoyenne pondérée : (n₁ × x₁ + n₂ × x₂ + … ) / (n₁ + n₂ + …), où nᵢ est l'effectif (ou le coefficient) de la valeur xᵢ.\nExemple : notes 12 (coef 2) et 15 (coef 3) : (2 × 12 + 3 × 15)/5 = 69/5 = 13,8.\nMédiane : valeur qui partage la série rangée dans l'ordre croissant en deux groupes de même effectif ; au moins la moitié des valeurs sont inférieures ou égales à la médiane, au moins la moitié supérieures ou égales.\nEffectif total impair N : la médiane est la valeur de rang (N + 1)/2.\nEffectif total pair N : on prend la moyenne des valeurs de rangs N/2 et N/2 + 1 (toute valeur entre ces deux convient).\nExemple : 3 ; 5 ; 7 ; 8 ; 12 ; 15 → N = 6, médiane = (7 + 8)/2 = 7,5.\nÉtendue : plus grande valeur − plus petite valeur ; elle mesure la dispersion de la série.\nLa médiane est peu sensible aux valeurs extrêmes, contrairement à la moyenne.\nDiagramme circulaire : angle du secteur = fréquence × 360°.\nUn tableur calcule ces indicateurs avec MOYENNE, MEDIANE, MAX et MIN."
+    },
+    {
+      "id": "probabilites",
+      "titre": "Probabilités",
+      "ordre": 12,
+      "periode": "T3",
+      "notions": [
+        "Utiliser le vocabulaire des probabilités : expérience aléatoire, issue, événement",
+        "Calculer une probabilité dans une situation d'équiprobabilité",
+        "Connaître les propriétés : 0 ≤ P(A) ≤ 1, somme des probabilités des issues égale à 1, événement contraire",
+        "Reconnaître des événements incompatibles",
+        "Modéliser une expérience aléatoire à deux épreuves par un arbre ou un tableau",
+        "Faire le lien entre fréquence observée et probabilité lorsque le nombre d'essais augmente"
+      ],
+      "motsCles": ["expérience aléatoire", "issue", "événement", "probabilité", "équiprobabilité", "événement contraire", "événement certain", "événement impossible", "incompatibles", "arbre", "fréquence", "loi des grands nombres"],
+      "reference": "Une expérience aléatoire a plusieurs résultats possibles, appelés issues, et on ne peut pas prévoir lequel se produira.\nUn événement est un ensemble d'issues ; il est réalisé si l'issue obtenue en fait partie.\nLa probabilité P(A) d'un événement A est un nombre compris entre 0 et 1.\nÉvénement impossible : probabilité 0 ; événement certain : probabilité 1.\nLa somme des probabilités de toutes les issues d'une expérience vaut 1.\nÉquiprobabilité (toutes les issues ont la même probabilité) : P(A) = nombre d'issues favorables / nombre total d'issues.\nExemple : dé équilibré à 6 faces, P(« obtenir un nombre pair ») = 3/6 = 1/2.\nL'événement contraire de A, noté « non A », est réalisé quand A ne l'est pas : P(non A) = 1 − P(A).\nDeux événements sont incompatibles s'ils ne peuvent pas être réalisés en même temps ; alors P(A ou B) = P(A) + P(B).\nExpérience à deux épreuves : arbre des possibles ou tableau à double entrée ; la probabilité d'un chemin est le produit des probabilités le long des branches.\nExemple : on lance deux pièces équilibrées, P(« deux piles ») = 1/2 × 1/2 = 1/4.\nDeux dés : 36 issues équiprobables ; P(« somme égale à 7 ») = 6/36 = 1/6.\nQuand on répète un grand nombre de fois une expérience, la fréquence observée d'un événement se rapproche de sa probabilité (simulation, tableur, Scratch)."
+    },
+    {
+      "id": "geometrie-dans-l-espace",
+      "titre": "Géométrie dans l'espace : sphère, sections et volumes",
+      "ordre": 13,
+      "periode": "T3",
+      "notions": [
+        "Connaître la sphère et la boule, calculer l'aire d'une sphère et le volume d'une boule",
+        "Calculer les volumes du pavé, du prisme, du cylindre, de la pyramide et du cône",
+        "Connaître la nature des sections planes d'un pavé, d'un cylindre, d'une pyramide, d'un cône et d'une sphère",
+        "Se repérer sur un pavé droit et sur la sphère terrestre (latitude, longitude)",
+        "Connaître l'effet d'un agrandissement ou d'une réduction de rapport k sur les longueurs, aires et volumes",
+        "Convertir des unités de volume et de contenance"
+      ],
+      "motsCles": ["sphère", "boule", "rayon", "volume", "aire", "section plane", "cône", "pyramide", "cylindre", "latitude", "longitude", "agrandissement", "réduction"],
+      "reference": "Sphère de centre O et de rayon r : ensemble des points M de l'espace tels que OM = r. La boule est l'ensemble des points tels que OM ≤ r.\nAire d'une sphère : A = 4 × π × r². Volume d'une boule : V = (4/3) × π × r³.\nVolume du pavé droit : L × l × h. Volume d'un prisme droit ou d'un cylindre : aire de la base × hauteur ; cylindre : π × r² × h.\nVolume d'une pyramide ou d'un cône : (1/3) × aire de la base × hauteur ; cône : (1/3) × π × r² × h.\nUnités : 1 dm³ = 1 L ; 1 m³ = 1 000 L ; 1 cm³ = 1 mL.\nSection d'un pavé droit par un plan parallèle à une face : rectangle de mêmes dimensions que cette face ; parallèle à une arête : rectangle.\nSection d'un cylindre par un plan parallèle à la base : disque de même rayon ; par un plan parallèle à l'axe : rectangle.\nSection d'une pyramide ou d'un cône par un plan parallèle à la base : réduction de la base (polygone ou disque).\nSection d'une sphère par un plan : un cercle (ou un point si le plan est tangent) ; si le plan passe par le centre, c'est un grand cercle de rayon r.\nRepérage dans un pavé : un point est repéré par trois coordonnées (abscisse ; ordonnée ; altitude).\nSur la Terre : la latitude (de 0° à 90° Nord ou Sud) se mesure à partir de l'équateur ; la longitude (de 0° à 180° Est ou Ouest) à partir du méridien de Greenwich.\nAgrandissement ou réduction de rapport k : longueurs × k, aires × k², volumes × k³, angles conservés.\nExemple : une pyramide réduite de rapport 1/2 a un volume 8 fois plus petit."
+    },
+    {
+      "id": "algorithmique-et-programmation",
+      "titre": "Algorithmique et programmation",
+      "ordre": 14,
+      "periode": "T3",
+      "notions": [
+        "Écrire, mettre au point et exécuter un programme en Scratch",
+        "Utiliser des variables et les modifier",
+        "Utiliser les boucles (répéter n fois, répéter jusqu'à, répéter indéfiniment)",
+        "Utiliser les instructions conditionnelles (si… alors… sinon)",
+        "Programmer des scripts déclenchés par des événements et faire communiquer des lutins par messages",
+        "Décomposer un problème en sous-problèmes et définir un bloc personnalisé"
+      ],
+      "motsCles": ["algorithme", "programme", "Scratch", "variable", "boucle", "condition", "instruction conditionnelle", "événement", "lutin", "message", "bloc personnalisé", "script"],
+      "reference": "Un algorithme est une suite finie d'instructions permettant de résoudre un problème ; un programme est sa traduction dans un langage compris par l'ordinateur (Scratch au collège).\nUne variable est une case mémoire qui porte un nom et contient une valeur ; on peut la mettre à une valeur ou l'ajouter à une valeur.\nBoucle « répéter n fois » : exécute un bloc d'instructions un nombre fixé de fois.\nBoucle « répéter jusqu'à » : répète tant que la condition n'est pas vérifiée ; elle s'arrête dès que la condition devient vraie.\nBoucle « répéter indéfiniment » : utilisée pour les animations et les jeux.\nInstruction conditionnelle : « si condition alors … sinon … » ; une condition est vraie ou fausse et peut combiner « et », « ou », « non ».\nÉvénements : « quand le drapeau vert est cliqué », « quand la touche espace est pressée », « quand je reçois message ».\nPlusieurs scripts peuvent s'exécuter en parallèle ; les lutins communiquent en envoyant des messages.\nBloc personnalisé (« Créer un bloc ») : sous-programme réutilisable, éventuellement avec paramètres, qui décompose un problème.\nExemple : tracer un carré de côté 100 : stylo en position d'écriture, répéter 4 fois (avancer de 100, tourner de 90 degrés).\nPolygone régulier à n côtés : répéter n fois (avancer, tourner de 360/n degrés).\nDans Scratch, l'orientation 90 correspond à la droite et la scène est un repère d'abscisses de −240 à 240 et d'ordonnées de −180 à 180.\nTester un programme sur plusieurs valeurs permet de repérer et corriger les erreurs (débogage)."
+    }
+  ]
+}

@@ -1,0 +1,378 @@
+{
+  "classe": "3ème",
+  "matiere": "Physique-Chimie",
+  "programme": "Programme du cycle 4 de physique-chimie (BO spécial n°11 du 26/11/2015, ajusté BO n°31 du 30/07/2020)",
+  "modele": "claude-opus-5-5 (abonnement)",
+  "genereLe": "2026-10-05",
+  "relu": false,
+  "chapitres": [
+    {
+      "id": "atomes-et-ions",
+      "titre": "Atomes et ions",
+      "ordre": 1,
+      "periode": "T1",
+      "notions": [
+        "Décrire la structure d'un atome : noyau (protons, neutrons) et électrons",
+        "Connaître la charge des particules et l'électroneutralité de l'atome",
+        "Utiliser le numéro atomique Z pour un élément",
+        "Comparer les dimensions de l'atome et du noyau (structure lacunaire)",
+        "Définir un ion comme un atome ou groupe d'atomes ayant gagné ou perdu des électrons",
+        "Distinguer cation et anion et écrire leur formule (Na⁺, Cl⁻, Cu²⁺…)"
+      ],
+      "motsCles": [
+        "atome",
+        "noyau",
+        "proton",
+        "neutron",
+        "électron",
+        "numéro atomique",
+        "élément chimique",
+        "ion",
+        "cation",
+        "anion",
+        "électroneutralité",
+        "structure lacunaire"
+      ],
+      "reference": "Un atome est constitué d'un noyau central et d'électrons en mouvement autour du noyau.\nLe noyau contient des protons (charge positive +e) et des neutrons (charge nulle) ; les électrons portent une charge négative −e.\nLa charge élémentaire vaut e = 1,6 × 10⁻¹⁹ C.\nLe numéro atomique Z est le nombre de protons du noyau ; il caractérise l'élément chimique (H : Z = 1, C : Z = 6, O : Z = 8, Na : Z = 11, Cl : Z = 17, Fe : Z = 26, Cu : Z = 29).\nUn atome est électriquement neutre : il possède autant d'électrons que de protons (Z électrons).\nLa masse de l'atome est presque entièrement concentrée dans le noyau (un électron est environ 2 000 fois plus léger qu'un proton).\nLe rayon d'un atome est de l'ordre de 10⁻¹⁰ m ; celui du noyau de l'ordre de 10⁻¹⁵ m, soit environ 100 000 fois plus petit : la matière a une structure lacunaire.\nUn élément chimique est l'ensemble des atomes et ions ayant le même numéro atomique Z ; il se conserve lors des transformations chimiques.\nUn ion est un atome ou un groupe d'atomes qui a perdu ou gagné un ou plusieurs électrons.\nUn cation est un ion positif (il a perdu des électrons) : Na⁺, Cu²⁺, Fe²⁺, Fe³⁺, Zn²⁺, H⁺.\nUn anion est un ion négatif (il a gagné des électrons) : Cl⁻, HO⁻.\nIons polyatomiques : SO₄²⁻ (ion sulfate), NO₃⁻ (ion nitrate).\nExemple : l'atome de cuivre (29 protons, 29 électrons) qui perd 2 électrons devient l'ion Cu²⁺ (29 protons, 27 électrons).\nExemple : l'atome de chlore (17 électrons) qui gagne 1 électron devient l'ion Cl⁻ (18 électrons).\nLors de la formation d'un ion, le noyau ne change pas : seul le nombre d'électrons varie.\nUne solution ionique est électriquement neutre : elle contient autant de charges positives que de charges négatives (ex. eau salée : Na⁺ + Cl⁻)."
+    },
+    {
+      "id": "solutions-acides-basiques-ph",
+      "titre": "Solutions acides, basiques et pH",
+      "ordre": 2,
+      "periode": "T1",
+      "notions": [
+        "Mesurer le pH d'une solution avec du papier pH ou un pH-mètre",
+        "Classer une solution comme acide, neutre ou basique selon son pH",
+        "Associer l'acidité à la présence d'ions H⁺ et la basicité à la présence d'ions HO⁻",
+        "Expliquer l'effet de la dilution sur le pH",
+        "Connaître les règles de sécurité liées aux produits acides et basiques",
+        "Lire les pictogrammes de danger"
+      ],
+      "motsCles": [
+        "pH",
+        "acide",
+        "basique",
+        "neutre",
+        "ion hydrogène",
+        "ion hydroxyde",
+        "papier pH",
+        "pH-mètre",
+        "dilution",
+        "pictogramme",
+        "corrosif"
+      ],
+      "reference": "Le pH est un nombre sans unité, compris entre 0 et 14 en solution aqueuse, qui indique si une solution est acide, neutre ou basique.\nUne solution est acide si pH < 7, neutre si pH = 7 (à 25 °C), basique si pH > 7.\nPlus le pH est petit, plus la solution est acide ; plus il est grand, plus elle est basique.\nOn mesure le pH avec du papier pH (valeur approchée, par comparaison des couleurs) ou un pH-mètre (valeur précise, à étalonner).\nUne solution acide contient plus d'ions hydrogène H⁺ que d'ions hydroxyde HO⁻.\nUne solution basique contient plus d'ions hydroxyde HO⁻ que d'ions hydrogène H⁺.\nUne solution neutre (eau pure) contient autant d'ions H⁺ que d'ions HO⁻.\nExemples : acide chlorhydrique (pH ≈ 1), jus de citron (pH ≈ 2), vinaigre (pH ≈ 3), eau pure (pH = 7), eau savonneuse (pH ≈ 10), soude/Destop (pH ≈ 14).\nLa dilution d'une solution acide fait augmenter son pH, qui se rapproche de 7 sans le dépasser.\nLa dilution d'une solution basique fait diminuer son pH, qui se rapproche de 7 sans descendre en dessous.\nPour diluer un acide concentré, on verse l'acide dans l'eau, jamais l'inverse (risque de projections).\nLes solutions très acides ou très basiques sont corrosives : port de lunettes, de gants et d'une blouse.\nPictogramme « corrosif » : liquide attaquant une main et une surface ; il signale un risque de brûlure.\nOn ne mélange jamais un produit acide et un produit basique sans précaution (réaction pouvant être violente)."
+    },
+    {
+      "id": "reactions-acides-metaux",
+      "titre": "Réaction entre un acide et un métal",
+      "ordre": 3,
+      "periode": "T1",
+      "notions": [
+        "Décrire l'action de l'acide chlorhydrique sur le fer",
+        "Identifier le dihydrogène avec le test de la détonation",
+        "Identifier les ions Fe²⁺ formés avec la soude",
+        "Constater la diminution des ions H⁺ (augmentation du pH)",
+        "Écrire le bilan et l'équation de la réaction",
+        "Connaître les dangers liés aux réactions acide-métal"
+      ],
+      "motsCles": [
+        "acide chlorhydrique",
+        "fer",
+        "dihydrogène",
+        "détonation",
+        "ion fer II",
+        "réactif",
+        "produit",
+        "bilan",
+        "équation de réaction",
+        "conservation"
+      ],
+      "reference": "L'acide chlorhydrique est une solution aqueuse contenant des ions hydrogène H⁺ et des ions chlorure Cl⁻ (formule (H⁺ + Cl⁻)).\nQuand on verse de l'acide chlorhydrique sur de la poudre de fer, le fer disparaît progressivement, une effervescence apparaît et le milieu s'échauffe.\nLe gaz dégagé est du dihydrogène H₂ : il produit une légère détonation (« aboiement ») à l'approche d'une flamme.\nLa solution obtenue, versée sur de la soude (hydroxyde de sodium), donne un précipité vert : elle contient des ions fer II Fe²⁺.\nLe pH de la solution augmente au cours de la réaction : des ions H⁺ sont consommés.\nLes ions chlorure Cl⁻ ne participent pas à la réaction : ce sont des ions spectateurs.\nRéactifs : fer Fe et ions hydrogène H⁺. Produits : dihydrogène H₂ et ions fer II Fe²⁺.\nBilan : fer + ions hydrogène → dihydrogène + ions fer II.\nÉquation : Fe + 2 H⁺ → H₂ + Fe²⁺.\nLors d'une transformation chimique, les atomes (éléments) et les charges électriques se conservent : on ajuste l'équation avec des coefficients.\nLa masse totale se conserve au cours d'une transformation chimique (loi de Lavoisier).\nD'autres métaux réagissent avec l'acide chlorhydrique : le zinc (Zn + 2 H⁺ → H₂ + Zn²⁺) ; le cuivre ne réagit pas avec l'acide chlorhydrique.\nSécurité : le dihydrogène est inflammable ; on ne stocke pas d'acide dans un récipient métallique et on ne verse pas d'acide sur un métal dans un milieu fermé."
+    },
+    {
+      "id": "tests-identification-ions",
+      "titre": "Identifier des ions en solution",
+      "ordre": 4,
+      "periode": "T1",
+      "notions": [
+        "Réaliser un test de reconnaissance avec la soude ou le nitrate d'argent",
+        "Identifier les ions Cu²⁺, Fe²⁺, Fe³⁺ et Zn²⁺ par la couleur du précipité",
+        "Identifier l'ion chlorure Cl⁻ par le nitrate d'argent",
+        "Interpréter un test positif ou négatif",
+        "Écrire la formule d'une solution ionique",
+        "Proposer un protocole d'identification"
+      ],
+      "motsCles": [
+        "test d'identification",
+        "précipité",
+        "soude",
+        "hydroxyde de sodium",
+        "nitrate d'argent",
+        "ion cuivre II",
+        "ion fer II",
+        "ion fer III",
+        "ion zinc",
+        "ion chlorure",
+        "solution ionique"
+      ],
+      "reference": "Un test d'identification permet de mettre en évidence la présence d'une espèce chimique dans une solution.\nOn verse quelques gouttes de réactif dans un tube contenant un peu de solution à tester ; l'apparition d'un précipité (solide formé dans la solution) indique un test positif.\nLe réactif des ions métalliques est la soude, solution d'hydroxyde de sodium (Na⁺ + HO⁻).\nIons cuivre II Cu²⁺ + soude → précipité bleu.\nIons fer II Fe²⁺ + soude → précipité vert.\nIons fer III Fe³⁺ + soude → précipité rouille (orangé).\nIons zinc Zn²⁺ + soude → précipité blanc (qui se redissout dans un excès de soude).\nLe réactif des ions chlorure est le nitrate d'argent (Ag⁺ + NO₃⁻).\nIons chlorure Cl⁻ + nitrate d'argent → précipité blanc qui noircit à la lumière.\nUne solution ionique est électriquement neutre ; sa formule indique les ions présents dans les bonnes proportions : sulfate de cuivre (Cu²⁺ + SO₄²⁻), chlorure de fer III (Fe³⁺ + 3 Cl⁻), chlorure de sodium (Na⁺ + Cl⁻).\nUn témoin (test sur une solution connue) permet de comparer et de valider le résultat.\nMéthode : nommer le réactif, décrire l'observation (couleur du précipité), conclure sur l'ion présent.\nSécurité : la soude et le nitrate d'argent sont corrosifs ; lunettes et gants obligatoires."
+    },
+    {
+      "id": "univers-et-elements-chimiques",
+      "titre": "L'Univers et la formation des éléments",
+      "ordre": 5,
+      "periode": "T2",
+      "notions": [
+        "Décrire l'organisation de l'Univers : système solaire, galaxies",
+        "Utiliser l'année-lumière comme unité de distance",
+        "Connaître le modèle du Big Bang et l'âge de l'Univers",
+        "Expliquer la formation des éléments chimiques dans les étoiles",
+        "Savoir que les éléments sur Terre et dans le vivant viennent des étoiles",
+        "Utiliser les puissances de 10 pour comparer des distances"
+      ],
+      "motsCles": [
+        "Univers",
+        "Big Bang",
+        "galaxie",
+        "Voie lactée",
+        "système solaire",
+        "étoile",
+        "année-lumière",
+        "fusion nucléaire",
+        "élément chimique",
+        "nébuleuse"
+      ],
+      "reference": "Selon le modèle du Big Bang, l'Univers est né il y a environ 13,8 milliards d'années d'un état extrêmement dense et chaud ; il est depuis en expansion.\nLes premiers noyaux formés après le Big Bang sont essentiellement ceux d'hydrogène et d'hélium, les éléments les plus abondants de l'Univers.\nLes éléments plus lourds (carbone, oxygène, fer…) se forment par fusion nucléaire au cœur des étoiles ; les plus lourds lors de l'explosion d'étoiles massives (supernovas).\nLes éléments dispersés dans l'espace forment des nébuleuses à partir desquelles naissent de nouvelles étoiles et planètes : « nous sommes des poussières d'étoiles ».\nLes éléments constituant la Terre et les êtres vivants (C, H, O, N…) ont été fabriqués dans les étoiles.\nLe système solaire s'est formé il y a environ 4,6 milliards d'années ; il comprend le Soleil, 8 planètes (Mercure, Vénus, Terre, Mars, Jupiter, Saturne, Uranus, Neptune), des planètes naines, des astéroïdes et des comètes.\nLes 4 planètes proches du Soleil sont telluriques (rocheuses) ; les 4 plus lointaines sont gazeuses.\nLe Soleil est une étoile parmi environ 100 à 200 milliards d'étoiles de notre galaxie, la Voie lactée ; l'Univers observable compte des centaines de milliards de galaxies.\nL'année-lumière (a.l.) est la distance parcourue par la lumière dans le vide en une année : 1 a.l. ≈ 9,46 × 10¹⁵ m ≈ 10¹⁶ m.\nLa lumière se propage dans le vide à c ≈ 3,0 × 10⁸ m/s (300 000 km/s).\nDistance Terre-Soleil ≈ 150 millions de km (1,5 × 10¹¹ m) ; la lumière du Soleil met environ 8 min pour nous parvenir.\nL'étoile la plus proche après le Soleil, Proxima du Centaure, est à environ 4,2 a.l. ; le diamètre de la Voie lactée est d'environ 100 000 a.l.\nRegarder loin, c'est regarder dans le passé : on voit un astre tel qu'il était quand la lumière l'a quitté."
+    },
+    {
+      "id": "mouvement-et-vitesse",
+      "titre": "Décrire un mouvement, calculer une vitesse",
+      "ordre": 6,
+      "periode": "T2",
+      "notions": [
+        "Choisir un référentiel et comprendre la relativité du mouvement",
+        "Décrire la trajectoire d'un objet (rectiligne, circulaire, curviligne)",
+        "Distinguer mouvement uniforme, accéléré et ralenti",
+        "Calculer une vitesse moyenne avec v = d / t",
+        "Convertir des vitesses entre m/s et km/h",
+        "Exploiter une chronophotographie"
+      ],
+      "motsCles": [
+        "référentiel",
+        "relativité du mouvement",
+        "trajectoire",
+        "rectiligne",
+        "circulaire",
+        "uniforme",
+        "accéléré",
+        "ralenti",
+        "vitesse moyenne",
+        "chronophotographie",
+        "m/s",
+        "km/h"
+      ],
+      "reference": "Le mouvement d'un objet se décrit toujours par rapport à un objet de référence appelé référentiel.\nLe mouvement est relatif : un passager assis dans un train est immobile par rapport au train mais en mouvement par rapport au quai.\nLa trajectoire est l'ensemble des positions occupées successivement par un point de l'objet.\nTrajectoire rectiligne (droite), circulaire (cercle) ou curviligne (courbe quelconque).\nUn mouvement est uniforme si la vitesse est constante, accéléré si elle augmente, ralenti (décéléré) si elle diminue.\nSur une chronophotographie (positions à intervalles de temps égaux) : points régulièrement espacés = mouvement uniforme ; espacements croissants = accéléré ; décroissants = ralenti.\nVitesse moyenne : v = d / t, avec d la distance parcourue et t la durée du parcours.\nUnités : d en mètres (m) et t en secondes (s) donnent v en m/s ; d en km et t en h donnent v en km/h.\nFormes dérivées : d = v × t et t = d / v.\nConversion : 1 m/s = 3,6 km/h ; pour passer de km/h en m/s on divise par 3,6.\nExemple : 90 km/h = 90 / 3,6 = 25 m/s.\nExemple : un cycliste parcourt 30 km en 1 h 30 min : v = 30 / 1,5 = 20 km/h.\nLa vitesse instantanée est celle à un instant donné (lue sur un compteur) ; elle peut différer de la vitesse moyenne."
+    },
+    {
+      "id": "forces-et-interactions",
+      "titre": "Interactions et forces",
+      "ordre": 7,
+      "periode": "T2",
+      "notions": [
+        "Identifier une action mécanique et l'objet qui l'exerce (acteur) et qui la subit (receveur)",
+        "Distinguer actions de contact et actions à distance",
+        "Modéliser une action mécanique par une force : point d'application, direction, sens, valeur",
+        "Représenter une force par un segment fléché (vecteur) avec une échelle",
+        "Connaître le newton et utiliser un dynamomètre",
+        "Comprendre qu'une interaction est réciproque",
+        "Réaliser un diagramme objets-interactions"
+      ],
+      "motsCles": [
+        "action mécanique",
+        "interaction",
+        "force",
+        "contact",
+        "à distance",
+        "newton",
+        "dynamomètre",
+        "vecteur",
+        "point d'application",
+        "direction",
+        "sens",
+        "diagramme objets-interactions"
+      ],
+      "reference": "Une action mécanique est exercée par un objet (acteur) sur un autre objet (receveur) ; elle peut mettre en mouvement, modifier un mouvement ou déformer un objet.\nUne action peut être de contact (main qui pousse, sol qui soutient, frottements) ou à distance (attraction gravitationnelle, action magnétique, action électrique).\nUne interaction entre deux objets A et B est réciproque : A agit sur B et B agit sur A.\nLe diagramme objets-interactions (DOI) représente les objets dans des bulles reliées par des traits : trait plein pour une interaction de contact, trait pointillé pour une interaction à distance.\nUne action mécanique est modélisée par une force caractérisée par : son point d'application, sa direction, son sens et sa valeur (intensité).\nLa valeur d'une force s'exprime en newtons (N) et se mesure avec un dynamomètre.\nUne force est représentée par un segment fléché (vecteur) partant du point d'application, de même direction et sens que la force, de longueur proportionnelle à sa valeur selon une échelle.\nExemple d'échelle : 1 cm ↔ 2 N ; une force de 6 N est représentée par une flèche de 3 cm.\nNotation : F_A/B désigne la force exercée par A sur B.\nLes forces d'interaction F_A/B et F_B/A ont même direction, même valeur et des sens opposés.\nPrincipe d'inertie : un objet soumis à des forces qui se compensent (ou à aucune force) est immobile ou en mouvement rectiligne uniforme.\nSi les forces ne se compensent pas, la vitesse ou la direction du mouvement change."
+    },
+    {
+      "id": "gravitation-et-poids",
+      "titre": "Gravitation et poids",
+      "ordre": 8,
+      "periode": "T2",
+      "notions": [
+        "Décrire l'interaction gravitationnelle entre deux objets",
+        "Utiliser l'expression de la force de gravitation et ses facteurs d'influence",
+        "Expliquer le mouvement des planètes et satellites par la gravitation",
+        "Définir le poids et ses caractéristiques",
+        "Utiliser la relation P = m × g",
+        "Distinguer masse et poids"
+      ],
+      "motsCles": [
+        "gravitation",
+        "attraction",
+        "force gravitationnelle",
+        "poids",
+        "masse",
+        "intensité de pesanteur",
+        "newton",
+        "kilogramme",
+        "satellite",
+        "orbite",
+        "verticale"
+      ],
+      "reference": "La gravitation est une interaction attractive à distance entre deux objets ayant une masse.\nValeur de la force de gravitation : F = G × (m_A × m_B) / d², avec G ≈ 6,67 × 10⁻¹¹ N·m²/kg², les masses en kg, la distance d entre les centres en m, et F en N.\nLa force est d'autant plus grande que les masses sont grandes et d'autant plus faible que la distance est grande (si d double, F est divisée par 4).\nLa gravitation explique le mouvement des planètes autour du Soleil et de la Lune ou des satellites autour de la Terre.\nSans gravitation, un satellite partirait en ligne droite ; l'attraction de la Terre courbe sa trajectoire.\nLe poids P d'un objet est la force d'attraction gravitationnelle qu'exerce la Terre (ou un astre) sur cet objet, situé à sa surface ou à proximité.\nCaractéristiques du poids : point d'application au centre de gravité de l'objet, direction verticale, sens vers le bas (vers le centre de la Terre), valeur P.\nRelation : P = m × g, avec P en newtons (N), m en kilogrammes (kg) et g, l'intensité de pesanteur, en N/kg.\nSur Terre g ≈ 9,8 N/kg (souvent arrondi à 10 N/kg) ; sur la Lune g ≈ 1,6 N/kg ; sur Mars g ≈ 3,7 N/kg ; sur Jupiter g ≈ 25 N/kg.\nLa masse (en kg, mesurée avec une balance) est une quantité de matière qui ne dépend pas du lieu ; le poids (en N, mesuré avec un dynamomètre) dépend du lieu.\nExemple : un astronaute de 80 kg pèse P = 80 × 9,8 = 784 N sur Terre et P = 80 × 1,6 = 128 N sur la Lune ; sa masse reste 80 kg.\nLe poids et la masse sont proportionnels en un lieu donné : le graphique P en fonction de m est une droite passant par l'origine."
+    },
+    {
+      "id": "energie-cinetique-mecanique",
+      "titre": "Énergie cinétique et énergie mécanique",
+      "ordre": 9,
+      "periode": "T2",
+      "notions": [
+        "Définir l'énergie cinétique et utiliser Ec = ½ × m × v²",
+        "Connaître l'influence de la masse et de la vitesse sur l'énergie cinétique",
+        "Définir l'énergie de position (potentielle de pesanteur)",
+        "Comprendre les conversions entre énergie de position et énergie cinétique lors d'une chute",
+        "Définir l'énergie mécanique et sa conservation en l'absence de frottements",
+        "Appliquer ces notions à la sécurité routière (distance de freinage, distance d'arrêt)"
+      ],
+      "motsCles": [
+        "énergie cinétique",
+        "énergie de position",
+        "énergie potentielle",
+        "énergie mécanique",
+        "joule",
+        "conversion",
+        "frottements",
+        "distance de réaction",
+        "distance de freinage",
+        "distance d'arrêt"
+      ],
+      "reference": "L'énergie cinétique Ec est l'énergie que possède un objet du fait de son mouvement.\nEc = ½ × m × v², avec Ec en joules (J), m en kilogrammes (kg) et v en mètres par seconde (m/s).\nL'énergie cinétique est proportionnelle à la masse ; elle est proportionnelle au carré de la vitesse : si la vitesse double, Ec est multipliée par 4.\nExemple : une voiture de 1 000 kg à 20 m/s (72 km/h) a Ec = 0,5 × 1 000 × 20² = 200 000 J = 200 kJ.\nL'énergie de position (énergie potentielle de pesanteur) est liée à l'altitude d'un objet : elle augmente quand l'altitude augmente.\nL'énergie mécanique est la somme : Em = Ec + Ep.\nLors d'une chute, l'énergie de position diminue et se convertit en énergie cinétique : la vitesse augmente.\nEn l'absence de frottements, l'énergie mécanique se conserve.\nAvec frottements, une partie de l'énergie mécanique est convertie en énergie thermique : l'énergie mécanique diminue.\nLors d'un freinage, l'énergie cinétique est convertie en énergie thermique par les frottements (les freins chauffent).\nDistance d'arrêt = distance de réaction (parcourue pendant le temps de réaction du conducteur, environ 1 s) + distance de freinage.\nLa distance de freinage augmente avec la vitesse (environ proportionnelle à v²) et dépend de l'état de la route et des pneus.\nLe temps de réaction augmente avec la fatigue, l'alcool, les drogues ou l'usage du téléphone.\nL'énergie se conserve toujours globalement : elle ne se crée pas, elle se convertit d'une forme à une autre."
+    },
+    {
+      "id": "loi-d-ohm",
+      "titre": "Résistance électrique et loi d'Ohm",
+      "ordre": 10,
+      "periode": "T3",
+      "notions": [
+        "Mesurer une tension avec un voltmètre et une intensité avec un ampèremètre",
+        "Connaître le rôle d'une résistance dans un circuit",
+        "Tracer et exploiter la caractéristique d'un dipôle ohmique",
+        "Utiliser la loi d'Ohm U = R × I",
+        "Mesurer une résistance avec un ohmmètre",
+        "Rappeler les lois des tensions et intensités en série et en dérivation"
+      ],
+      "motsCles": [
+        "tension",
+        "intensité",
+        "résistance",
+        "ohm",
+        "loi d'Ohm",
+        "dipôle ohmique",
+        "caractéristique",
+        "voltmètre",
+        "ampèremètre",
+        "ohmmètre",
+        "série",
+        "dérivation"
+      ],
+      "reference": "La tension électrique U se mesure en volts (V) avec un voltmètre branché en dérivation aux bornes du dipôle.\nL'intensité du courant I se mesure en ampères (A) avec un ampèremètre branché en série.\nUne résistance (dipôle ohmique) s'oppose au passage du courant : dans un circuit série, plus la résistance est grande, plus l'intensité est faible.\nLa valeur d'une résistance R s'exprime en ohms (Ω) et se mesure avec un ohmmètre, le dipôle étant hors circuit.\nLa caractéristique d'un dipôle est la courbe représentant U en fonction de I (ou I en fonction de U).\nPour un dipôle ohmique, la caractéristique est une droite passant par l'origine : U et I sont proportionnelles.\nLoi d'Ohm : U = R × I, avec U en volts (V), R en ohms (Ω) et I en ampères (A).\nFormes dérivées : R = U / I et I = U / R.\nExemple : R = 100 Ω, I = 0,05 A (50 mA), alors U = 100 × 0,05 = 5 V.\nAttention aux unités : convertir les mA en A (1 mA = 0,001 A) et les kΩ en Ω (1 kΩ = 1 000 Ω).\nUne lampe n'est pas un dipôle ohmique : sa caractéristique n'est pas une droite.\nLoi d'additivité des tensions en série : U = U₁ + U₂ ; loi d'unicité de l'intensité en série.\nEn dérivation : égalité des tensions aux bornes des branches ; loi d'additivité des intensités I = I₁ + I₂.\nUne résistance traversée par un courant chauffe (effet Joule)."
+    },
+    {
+      "id": "puissance-et-energie-electriques",
+      "titre": "Puissance et énergie électriques",
+      "ordre": 11,
+      "periode": "T3",
+      "notions": [
+        "Définir la puissance nominale d'un appareil",
+        "Utiliser la relation P = U × I",
+        "Calculer une énergie électrique avec E = P × t",
+        "Utiliser le joule et le kilowattheure et convertir entre eux",
+        "Exploiter une facture d'électricité ou un compteur",
+        "Expliquer le rôle d'un coupe-circuit (fusible, disjoncteur) face aux surintensités"
+      ],
+      "motsCles": [
+        "puissance",
+        "watt",
+        "puissance nominale",
+        "énergie électrique",
+        "joule",
+        "kilowattheure",
+        "compteur électrique",
+        "facture",
+        "disjoncteur",
+        "fusible",
+        "surintensité",
+        "effet Joule"
+      ],
+      "reference": "La puissance nominale d'un appareil, indiquée sur sa plaque signalétique, est la puissance qu'il reçoit lorsqu'il fonctionne normalement sous sa tension nominale.\nLa puissance P s'exprime en watts (W) ; 1 kW = 1 000 W.\nPour un appareil en courant continu, ou un appareil de chauffage en courant alternatif : P = U × I, avec P en W, U en V et I en A.\nExemple : une bouilloire de 2 000 W sous 230 V est traversée par I = P / U = 2 000 / 230 ≈ 8,7 A.\nL'énergie électrique consommée est E = P × t.\nAvec P en watts et t en secondes, E est en joules (J) ; avec P en kW et t en heures, E est en kilowattheures (kWh).\n1 kWh = 1 000 W × 3 600 s = 3 600 000 J = 3,6 × 10⁶ J.\nExemple : un radiateur de 1,5 kW fonctionnant 4 h consomme E = 1,5 × 4 = 6 kWh.\nLe compteur électrique mesure l'énergie consommée en kWh ; la facture = énergie consommée × prix du kWh (+ abonnement).\nPlusieurs appareils branchés sur une même prise multiple (en dérivation) : les intensités s'additionnent, ce qui peut créer une surintensité.\nUne surintensité provoque un échauffement des fils (effet Joule) et un risque d'incendie.\nLe fusible et le disjoncteur ouvrent le circuit en cas de surintensité ; le disjoncteur différentiel protège les personnes contre l'électrocution.\nL'effet Joule correspond à la conversion d'énergie électrique en énergie thermique."
+    },
+    {
+      "id": "production-energie-electrique",
+      "titre": "Sources d'énergie et production d'électricité",
+      "ordre": 12,
+      "periode": "T3",
+      "notions": [
+        "Identifier les différentes formes d'énergie (cinétique, thermique, électrique, chimique, nucléaire, lumineuse…)",
+        "Établir un diagramme énergétique (chaîne énergétique) d'un convertisseur",
+        "Expliquer le fonctionnement d'une centrale électrique (alternateur, turbine)",
+        "Distinguer sources d'énergie renouvelables et non renouvelables",
+        "Définir et calculer un rendement",
+        "Connaître la conservation de l'énergie"
+      ],
+      "motsCles": [
+        "forme d'énergie",
+        "source d'énergie",
+        "convertisseur",
+        "diagramme énergétique",
+        "alternateur",
+        "turbine",
+        "centrale électrique",
+        "renouvelable",
+        "non renouvelable",
+        "rendement",
+        "conservation de l'énergie"
+      ],
+      "reference": "L'énergie existe sous différentes formes : cinétique, de position, thermique, électrique, chimique, nucléaire, lumineuse (rayonnante).\nL'énergie se conserve : elle ne peut être ni créée ni détruite, seulement transférée ou convertie d'une forme à une autre.\nUn convertisseur d'énergie reçoit de l'énergie sous une forme et la restitue sous d'autres formes ; une partie est souvent « perdue » sous forme thermique.\nDiagramme énergétique : réservoir/source → convertisseur → formes d'énergie produites (utile et perdue). Ex. lampe : énergie électrique → lumineuse (utile) + thermique (perdue).\nRendement : η = énergie utile / énergie reçue (ou puissance utile / puissance reçue) ; il est toujours inférieur à 1 (100 %).\nDans la plupart des centrales, une turbine entraîne un alternateur qui convertit l'énergie cinétique (mécanique) en énergie électrique.\nUn alternateur fonctionne grâce au mouvement relatif d'un aimant et d'une bobine.\nCentrales thermiques (charbon, gaz, fioul) et nucléaires : on chauffe de l'eau, la vapeur fait tourner la turbine.\nCentrale hydraulique : l'eau en mouvement fait tourner la turbine ; éolienne : le vent fait tourner les pales.\nLes panneaux photovoltaïques convertissent directement l'énergie lumineuse en énergie électrique, sans alternateur.\nSources d'énergie renouvelables (le Soleil, le vent, l'eau, la géothermie, la biomasse) : elles se renouvellent à l'échelle humaine.\nSources non renouvelables (pétrole, gaz naturel, charbon, uranium) : leurs stocks s'épuisent ; les combustibles fossiles émettent du dioxyde de carbone CO₂, gaz à effet de serre.\nEn France, la majorité de l'électricité est d'origine nucléaire."
+    },
+    {
+      "id": "signaux-sonores-et-lumineux",
+      "titre": "Signaux sonores et lumineux",
+      "ordre": 13,
+      "periode": "T3",
+      "notions": [
+        "Savoir qu'un son a besoin d'un milieu matériel pour se propager",
+        "Connaître la vitesse du son dans l'air et de la lumière dans le vide",
+        "Utiliser la relation d = v × t pour un signal",
+        "Relier la fréquence d'un son à sa hauteur et connaître le domaine audible",
+        "Connaître le niveau d'intensité sonore (dB) et les risques auditifs",
+        "Utiliser des signaux pour mesurer une distance (écho, sonar, laser)"
+      ],
+      "motsCles": [
+        "signal",
+        "son",
+        "vibration",
+        "milieu matériel",
+        "vitesse de propagation",
+        "fréquence",
+        "hertz",
+        "période",
+        "infrason",
+        "ultrason",
+        "décibel",
+        "écho"
+      ],
+      "reference": "Un son est produit par la vibration d'un objet ; il se propage grâce à un milieu matériel (air, eau, solide) et ne se propage pas dans le vide.\nLa vitesse du son dans l'air est d'environ 340 m/s ; elle est plus grande dans l'eau (≈ 1 500 m/s) et dans les solides (≈ 5 000 m/s dans l'acier).\nLa lumière se propage dans le vide et dans certains milieux transparents ; dans le vide (et l'air) sa vitesse vaut c ≈ 300 000 km/s = 3 × 10⁸ m/s.\nRelation : d = v × t (distance parcourue par le signal), donc t = d / v et v = d / t.\nExemple : un éclair est vu presque instantanément, le tonnerre est entendu 3 s plus tard : l'orage est à environ 340 × 3 = 1 020 m.\nLa fréquence f d'un son est le nombre de vibrations par seconde ; elle s'exprime en hertz (Hz). f = 1 / T, avec T la période en secondes.\nPlus la fréquence est grande, plus le son est aigu ; plus elle est petite, plus le son est grave.\nL'oreille humaine perçoit les sons de 20 Hz à 20 000 Hz environ ; en dessous ce sont des infrasons, au-dessus des ultrasons.\nLe niveau d'intensité sonore se mesure en décibels (dB) avec un sonomètre.\nSeuil de danger : 85 dB ; seuil de douleur : environ 120 dB. L'exposition prolongée à un niveau élevé abîme l'audition de façon irréversible.\nUn écho est un son réfléchi par un obstacle ; le sonar et l'échographie utilisent des ultrasons réfléchis : distance = v × t / 2 (aller-retour).\nLes signaux lumineux (fibre optique, laser) et les ondes électromagnétiques (radio, wifi) servent à transmettre des informations."
+    }
+  ]
+}

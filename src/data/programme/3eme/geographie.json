@@ -1,0 +1,341 @@
+{
+  "classe": "3ème",
+  "matiere": "Géographie",
+  "programme": "Cycle 4 – 3e : Dynamiques territoriales de la France contemporaine ; Pourquoi et comment aménager le territoire ? ; La France et l'Union européenne (BO n°11 du 26/11/2015, ajusté BO n°31 du 30/07/2020)",
+  "modele": "claude-opus-5-5 (abonnement)",
+  "genereLe": "2026-10-05",
+  "relu": false,
+  "chapitres": [
+    {
+      "id": "les-aires-urbaines",
+      "titre": "Les aires urbaines, une nouvelle géographie d'une France mondialisée",
+      "ordre": 1,
+      "periode": "T1",
+      "notions": [
+        "Définir une aire urbaine (aire d'attraction d'une ville) : pôle et couronne",
+        "Mesurer le poids de l'urbanisation en France",
+        "Décrire la hiérarchie urbaine française dominée par Paris",
+        "Expliquer la métropolisation et l'insertion des métropoles dans la mondialisation",
+        "Caractériser les mobilités pendulaires entre couronne et pôle",
+        "Réaliser un croquis simple d'une aire urbaine (centre, banlieue, couronne périurbaine)"
+      ],
+      "motsCles": [
+        "aire urbaine",
+        "aire d'attraction des villes",
+        "pôle urbain",
+        "couronne périurbaine",
+        "métropole",
+        "métropolisation",
+        "hiérarchie urbaine",
+        "macrocéphalie",
+        "mobilités pendulaires",
+        "ville-centre",
+        "banlieue"
+      ],
+      "reference": "Urbanisation : processus d'augmentation de la part de la population vivant en ville. Environ 4 Français sur 5 vivent dans un espace urbain.\nAire urbaine (définition INSEE jusqu'en 2020) : un pôle urbain offrant au moins 10 000 emplois et sa couronne, formée des communes dont au moins 40 % des actifs travaillent dans le pôle.\nAire d'attraction d'une ville (définition INSEE depuis 2020) : un pôle de population et d'emploi et sa couronne, formée des communes dont au moins 15 % des actifs travaillent dans le pôle. Environ 93 % de la population vit dans une aire d'attraction des villes.\nOrganisation d'une aire urbaine : ville-centre (centre historique, quartier des affaires), banlieue (espace urbanisé en continuité), couronne périurbaine (communes discontinues, souvent pavillonnaires).\nHiérarchie urbaine : classement des villes selon leur population et leurs fonctions. Paris domine très largement (environ 13 millions d'habitants dans son aire d'attraction) : on parle de macrocéphalie.\nViennent ensuite des métropoles régionales : Lyon, Marseille-Aix, Lille, Toulouse, Bordeaux, Nantes, Strasbourg…\nMétropole : grande ville qui concentre population, activités de commandement, emplois qualifiés et fonctions de décision. Statut administratif créé par la loi MAPTAM (2014) ; on compte aujourd'hui 22 métropoles.\nMétropolisation : concentration croissante des hommes, des activités et des richesses dans les plus grandes villes.\nParis est une ville mondiale : sièges sociaux, quartier d'affaires de La Défense, aéroports Roissy-Charles-de-Gaulle et Orly, tourisme international.\nMobilités pendulaires : déplacements quotidiens entre le domicile et le lieu de travail, souvent de la couronne vers le pôle, majoritairement en voiture.\nLes aires urbaines dessinent une nouvelle géographie : la France des villes et de leurs couronnes remplace l'opposition simple ville / campagne.\nMéthode : sur une carte ou un croquis, distinguer par des figurés de surface le pôle et la couronne, et par des flèches les mobilités."
+    },
+    {
+      "id": "dynamiques-des-espaces-urbains",
+      "titre": "Les dynamiques des espaces urbains : périurbanisation et inégalités",
+      "ordre": 2,
+      "periode": "T1",
+      "notions": [
+        "Expliquer la périurbanisation et l'étalement urbain",
+        "Identifier les conséquences de l'étalement urbain (artificialisation, dépendance à la voiture)",
+        "Décrire les inégalités sociales et spatiales dans les villes",
+        "Définir la gentrification et la ségrégation socio-spatiale",
+        "Présenter des solutions pour une ville plus durable (transports en commun, écoquartiers, densification)"
+      ],
+      "motsCles": [
+        "périurbanisation",
+        "étalement urbain",
+        "artificialisation des sols",
+        "gentrification",
+        "ségrégation socio-spatiale",
+        "quartier prioritaire",
+        "rénovation urbaine",
+        "écoquartier",
+        "ville durable",
+        "transports en commun",
+        "densification"
+      ],
+      "reference": "Périurbanisation : extension des espaces urbanisés autour des villes, en discontinuité du bâti, surtout depuis les années 1970.\nCauses : recherche d'un logement individuel avec jardin, prix du foncier plus bas, généralisation de l'automobile, nouvelles routes et rocades.\nÉtalement urbain : progression des surfaces urbanisées au détriment des espaces agricoles et naturels.\nArtificialisation des sols : transformation d'un sol naturel ou agricole en sol bâti ou revêtu (routes, parkings, lotissements, zones commerciales).\nConséquences : allongement des trajets, dépendance à la voiture, embouteillages, pollution, consommation de terres agricoles, coût des réseaux.\nInégalités urbaines : coexistence de quartiers aisés et de quartiers défavorisés dans une même ville.\nSégrégation socio-spatiale : séparation des groupes sociaux dans des quartiers différents selon leurs revenus.\nGentrification : installation de catégories sociales aisées dans un quartier populaire, qui fait monter les prix et pousse les habitants modestes à partir.\nQuartiers prioritaires de la politique de la ville (QPV) : quartiers où le revenu des habitants est faible, bénéficiant d'aides publiques. Exemples d'actions : rénovation urbaine (ANRU, créée en 2004), désenclavement par le tramway.\nVille durable : ville qui cherche à concilier développement économique, justice sociale et respect de l'environnement.\nSolutions : densifier la ville, développer les transports en commun (tramway, métro, RER), les pistes cyclables, construire des écoquartiers, limiter l'artificialisation (objectif « zéro artificialisation nette » fixé pour 2050 par la loi Climat et résilience de 2021).\nMéthode : analyser un paysage urbain en distinguant premier plan, arrière-plan, types de bâti et fonctions."
+    },
+    {
+      "id": "espaces-productifs-industriels",
+      "titre": "Les espaces productifs industriels et leurs évolutions",
+      "ordre": 3,
+      "periode": "T1",
+      "notions": [
+        "Définir un espace productif",
+        "Expliquer la désindustrialisation et ses conséquences sur certains territoires",
+        "Localiser les grandes régions industrielles anciennes et nouvelles",
+        "Décrire une zone industrialo-portuaire et un technopôle",
+        "Expliquer le rôle de la mondialisation et de l'innovation dans les nouvelles localisations industrielles",
+        "Étudier un exemple d'espace productif (aéronautique toulousaine)"
+      ],
+      "motsCles": [
+        "espace productif",
+        "désindustrialisation",
+        "délocalisation",
+        "reconversion",
+        "zone industrialo-portuaire",
+        "technopôle",
+        "pôle de compétitivité",
+        "innovation",
+        "littoralisation",
+        "métropolisation",
+        "mondialisation"
+      ],
+      "reference": "Espace productif : espace aménagé et organisé pour produire des richesses (biens ou services).\nLes espaces productifs français sont de plus en plus intégrés à la mondialisation : exportations, firmes multinationales, concurrence internationale.\nDésindustrialisation : recul de la part de l'industrie dans l'emploi et la production. Elle touche depuis les années 1970 les régions industrielles anciennes (Nord, Lorraine) : fermetures de mines, de sites sidérurgiques et textiles.\nDélocalisation : transfert d'une activité de production vers un autre pays, souvent à main-d'œuvre moins chère.\nReconversion : transformation des activités d'un territoire en déclin (ex. : anciens sites miniers du Nord transformés en lieux culturels ou de services, Louvre-Lens ouvert en 2012).\nZone industrialo-portuaire (ZIP) : zone industrielle installée dans un port, accueillant des industries lourdes qui importent leurs matières premières par la mer. Exemples : Dunkerque, Le Havre, Fos-sur-Mer (Marseille).\nLittoralisation : concentration des activités et des hommes sur les littoraux.\nTechnopôle : espace qui regroupe entreprises de haute technologie, universités et centres de recherche. Exemple : Sophia Antipolis près de Nice (créé en 1969).\nPôle de compétitivité (créés à partir de 2004-2005) : association d'entreprises, de centres de recherche et d'universités d'un même territoire autour d'un projet innovant.\nNouvelles localisations : les industries de haute technologie recherchent la proximité des métropoles, des universités, des infrastructures de transport (aéroport, LGV) et une main-d'œuvre qualifiée.\nExemple : Toulouse, capitale européenne de l'aéronautique (Airbus) et du spatial, avec un réseau de sous-traitants dans tout le Sud-Ouest.\nMéthode : sur une carte, opposer les régions industrielles en difficulté du Nord-Est et les espaces dynamiques de l'Ouest, du Sud et des métropoles."
+    },
+    {
+      "id": "espaces-productifs-agricoles",
+      "titre": "Les espaces productifs agricoles",
+      "ordre": 4,
+      "periode": "T1",
+      "notions": [
+        "Mesurer la place de l'agriculture française en Europe et dans le monde",
+        "Décrire la modernisation de l'agriculture depuis 1950 (productivisme)",
+        "Localiser les grandes régions agricoles et leurs spécialisations",
+        "Expliquer le rôle de la PAC",
+        "Présenter les évolutions vers une agriculture plus durable (bio, labels, circuits courts)",
+        "Relier agriculture et industrie agroalimentaire"
+      ],
+      "motsCles": [
+        "agriculture productiviste",
+        "exploitation agricole",
+        "PAC",
+        "industrie agroalimentaire",
+        "agriculture biologique",
+        "AOP",
+        "circuit court",
+        "céréaliculture",
+        "élevage hors-sol",
+        "exportation",
+        "agriculture durable"
+      ],
+      "reference": "La France est le premier producteur agricole de l'Union européenne et l'un des grands exportateurs mondiaux (céréales, vins et spiritueux, produits laitiers).\nLes agriculteurs représentent moins de 2 % des actifs ; le nombre d'exploitations a fortement diminué (environ 390 000 en 2020) tandis que leur taille moyenne a augmenté.\nAgriculture productiviste : agriculture qui cherche à produire le plus possible grâce à la mécanisation, aux engrais, aux pesticides et à la sélection des semences. Elle s'est développée après 1950.\nPAC (politique agricole commune) : politique de l'Union européenne créée en 1962 qui soutient les revenus des agriculteurs. La France en est le premier bénéficiaire.\nGrandes régions agricoles : grandes cultures céréalières du Bassin parisien (Beauce), élevage et production laitière dans l'Ouest (Bretagne, Normandie), vignobles (Bordelais, Champagne, Bourgogne), fruits et légumes dans la vallée du Rhône et le Sud-Est.\nÉlevage hors-sol : élevage intensif (porcs, volailles) dans des bâtiments, avec une alimentation achetée à l'extérieur ; très présent en Bretagne.\nIndustrie agroalimentaire (IAA) : industrie qui transforme les produits agricoles ; premier secteur industriel français par le chiffre d'affaires.\nLimites du productivisme : pollution des sols et des eaux (nitrates, algues vertes en Bretagne), perte de biodiversité, endettement des agriculteurs.\nAgriculture biologique : agriculture sans pesticides ni engrais chimiques de synthèse, reconnue par le label AB.\nLabels de qualité : AOP (appellation d'origine protégée), IGP (indication géographique protégée), qui lient un produit à un territoire (ex. : comté, champagne).\nCircuit court : vente avec au plus un intermédiaire entre producteur et consommateur (marché, vente à la ferme, AMAP).\nMéthode : identifier sur une carte les grandes spécialisations agricoles régionales et les relier aux ports d'exportation (Rouen, premier port céréalier d'Europe de l'Ouest)."
+    },
+    {
+      "id": "espaces-productifs-de-services-et-touristiques",
+      "titre": "Les espaces productifs de services et du tourisme",
+      "ordre": 5,
+      "periode": "T2",
+      "notions": [
+        "Montrer la place dominante des services dans l'économie et l'emploi",
+        "Expliquer la concentration des services supérieurs dans les métropoles",
+        "Décrire un quartier d'affaires (La Défense)",
+        "Mesurer l'importance du tourisme en France",
+        "Localiser les grands espaces touristiques (littoraux, montagnes, villes)",
+        "Identifier les effets du tourisme sur les territoires"
+      ],
+      "motsCles": [
+        "secteur tertiaire",
+        "services",
+        "quartier d'affaires",
+        "tertiaire supérieur",
+        "tourisme",
+        "station balnéaire",
+        "station de sports d'hiver",
+        "patrimoine",
+        "tourisme de masse",
+        "logistique",
+        "plateforme multimodale"
+      ],
+      "reference": "Secteur tertiaire : ensemble des activités de services (commerce, transport, santé, éducation, banque, tourisme…). Il représente environ les trois quarts des emplois en France.\nTertiaire supérieur : services très qualifiés (finance, recherche, conseil, sièges sociaux) concentrés dans les métropoles, surtout Paris.\nQuartier d'affaires : quartier où se concentrent bureaux et sièges sociaux. Exemple : La Défense, premier quartier d'affaires d'Europe continentale.\nLes services se localisent là où vit la population (services de proximité) ou dans les métropoles bien connectées (services supérieurs).\nLogistique : organisation du transport et du stockage des marchandises. Plateforme multimodale : lieu où se croisent plusieurs modes de transport (route, rail, fleuve, air).\nTourisme : déplacement d'au moins une nuit hors de chez soi pour le loisir. La France est la première destination touristique mondiale (près de 100 millions de touristes internationaux par an).\nEspaces touristiques : littoraux (Côte d'Azur, littoral atlantique, Languedoc aménagé dans les années 1960 avec La Grande-Motte), montagnes (stations de sports d'hiver des Alpes), villes et patrimoine (Paris, châteaux de la Loire), parcs de loisirs (Disneyland Paris).\nStation balnéaire : ville touristique littorale aménagée pour les baignades. Station de sports d'hiver : ville de montagne aménagée pour le ski.\nEffets positifs : emplois, revenus, aménagements, valorisation du patrimoine.\nEffets négatifs : saisonnalité des emplois, saturation (surtourisme), hausse des prix des logements, pressions sur l'environnement.\nDéfis : adapter les stations de ski au réchauffement climatique (manque de neige), développer un tourisme durable.\nMéthode : sur un croquis, localiser les grands foyers touristiques et les relier aux flux de touristes."
+    },
+    {
+      "id": "espaces-de-faible-densite",
+      "titre": "Les espaces de faible densité et leurs atouts",
+      "ordre": 6,
+      "periode": "T2",
+      "notions": [
+        "Définir un espace de faible densité et le localiser",
+        "Expliquer l'exode rural et ses conséquences",
+        "Décrire le renouveau de certains espaces ruraux (néoruraux, périurbanisation, tourisme)",
+        "Identifier les atouts des espaces de faible densité (agriculture, tourisme, environnement, énergies)",
+        "Présenter les difficultés : enclavement, recul des services publics, vieillissement",
+        "Étudier un exemple d'espace de faible densité (montagne, parc naturel)"
+      ],
+      "motsCles": [
+        "espace de faible densité",
+        "densité de population",
+        "diagonale des faibles densités",
+        "exode rural",
+        "renouveau rural",
+        "néorural",
+        "enclavement",
+        "désert médical",
+        "parc national",
+        "parc naturel régional",
+        "espace rural"
+      ],
+      "reference": "Densité de population : nombre moyen d'habitants par km². La densité moyenne de la France métropolitaine est d'environ 120 hab./km².\nEspace de faible densité : espace peu peuplé, souvent rural ou montagnard, dont la densité est très inférieure à la moyenne nationale (souvent moins de 30 hab./km²).\nCes espaces couvrent une grande partie du territoire mais rassemblent une faible part de la population.\nDiagonale des faibles densités : bande d'espaces peu peuplés qui traverse la France du Nord-Est (Meuse, Ardennes) au Sud-Ouest (Landes), en passant par le Massif central.\nExode rural : départ des habitants des campagnes vers les villes. Il a été massif de la fin du XIXe siècle aux années 1970.\nDifficultés : vieillissement de la population, fermeture de services publics et de commerces, déserts médicaux, enclavement (mauvaise accessibilité), couverture numérique incomplète.\nRenouveau rural : de nombreux espaces ruraux regagnent des habitants depuis les années 1970-1980 : périurbanisation, néoruraux, retraités, télétravail.\nNéorural : citadin qui s'installe à la campagne pour y vivre et parfois y travailler.\nAtouts : agriculture et productions de qualité (AOP), tourisme vert et de montagne, espaces naturels préservés, production d'énergies renouvelables (éoliennes, hydroélectricité), cadre de vie.\nParc national : espace naturel protégé par l'État avec des règles strictes (la France en compte 11, dont le parc national des Cévennes et celui des Écrins).\nParc naturel régional : territoire rural habité qui associe protection du patrimoine et développement économique local (ex. : parc naturel régional du Vercors).\nLes espaces de faible densité ne sont pas tous en déclin : certains sont attractifs (littoraux, montagnes touristiques, espaces proches des villes), d'autres restent isolés.\nMéthode : utiliser une carte des densités pour localiser la diagonale des faibles densités et l'opposer aux espaces densément peuplés."
+    },
+    {
+      "id": "amenager-le-territoire",
+      "titre": "Aménager le territoire : acteurs et objectifs",
+      "ordre": 7,
+      "periode": "T2",
+      "notions": [
+        "Définir l'aménagement du territoire et ses objectifs",
+        "Rappeler les grandes étapes de l'aménagement depuis 1945 (DATAR, décentralisation)",
+        "Identifier les acteurs de l'aménagement à différentes échelles (État, collectivités, UE, entreprises, citoyens)",
+        "Décrire les grands réseaux de transport et leur rôle (LGV, autoroutes)",
+        "Comprendre les conflits d'aménagement et le rôle du débat public"
+      ],
+      "motsCles": [
+        "aménagement du territoire",
+        "DATAR",
+        "décentralisation",
+        "collectivité territoriale",
+        "région",
+        "intercommunalité",
+        "acteur",
+        "LGV",
+        "réseau de transport",
+        "enclavement",
+        "conflit d'aménagement"
+      ],
+      "reference": "Aménagement du territoire : ensemble des actions des pouvoirs publics pour organiser le territoire, réduire les déséquilibres et favoriser le développement de toutes ses parties.\nAprès 1945, la France est très déséquilibrée au profit de Paris (livre « Paris et le désert français » de Jean-François Gravier, 1947).\nDATAR (Délégation à l'aménagement du territoire et à l'action régionale) : créée en 1963 pour piloter l'aménagement. Réalisations : métropoles d'équilibre (1964), villes nouvelles autour de Paris, aménagement touristique du littoral languedocien.\nDécentralisation : transfert de compétences de l'État vers les collectivités territoriales. Lois Defferre (1982-1983).\nCollectivités territoriales : communes, départements, régions (13 régions métropolitaines depuis 2016, 18 au total avec l'outre-mer), qui ont des compétences en aménagement (transports, lycées, collèges…). Les intercommunalités regroupent plusieurs communes.\nAgence nationale de la cohésion des territoires (ANCT) : créée en 2020, elle accompagne les projets des collectivités.\nL'Union européenne finance des aménagements par ses fonds régionaux (FEDER).\nAutres acteurs : entreprises (SNCF, opérateurs de télécommunications), associations, citoyens.\nRéseaux de transport : réseau en étoile centré sur Paris (autoroutes, voies ferrées). LGV (lignes à grande vitesse) : première ligne Paris-Lyon en 1981.\nLes grands réseaux rapprochent les métropoles mais peuvent renforcer l'enclavement des espaces non desservis (« effet tunnel »).\nConflit d'aménagement : opposition entre acteurs autour d'un projet (ex. : projet d'aéroport de Notre-Dame-des-Landes, abandonné en 2018).\nDébat public : procédure de consultation des citoyens avant un grand projet d'aménagement.\nMéthode : pour étudier un aménagement, se demander qui décide, qui finance, pour quels objectifs, et quels sont les effets et les oppositions."
+    },
+    {
+      "id": "reduire-les-inegalites-entre-territoires",
+      "titre": "Aménager pour réduire les inégalités entre territoires français",
+      "ordre": 8,
+      "periode": "T2",
+      "notions": [
+        "Identifier les inégalités entre territoires à différentes échelles (régions, villes, quartiers, espaces ruraux)",
+        "Expliquer les objectifs de cohésion et d'équité territoriale",
+        "Présenter des politiques d'aménagement récentes (Action cœur de ville, Petites villes de demain, très haut débit)",
+        "Montrer le rôle des transports et du numérique pour désenclaver",
+        "Étudier un projet d'aménagement à l'échelle locale"
+      ],
+      "motsCles": [
+        "inégalités territoriales",
+        "cohésion territoriale",
+        "équité territoriale",
+        "désenclavement",
+        "fracture numérique",
+        "zone blanche",
+        "politique de la ville",
+        "revitalisation",
+        "service public",
+        "maison France Services",
+        "attractivité"
+      ],
+      "reference": "Inégalités territoriales : différences de richesse, d'emploi, d'accès aux services et aux équipements entre territoires.\nElles existent à toutes les échelles : entre régions (Île-de-France très riche, régions industrielles en difficulté), entre métropoles dynamiques et petites villes, entre quartiers d'une même ville, entre espaces urbains et ruraux isolés.\nCohésion territoriale : objectif de réduire les écarts entre territoires pour que tous les habitants aient des chances comparables.\nÉquité territoriale : donner davantage à ceux qui en ont le plus besoin pour compenser les handicaps.\nDésenclavement : amélioration de l'accessibilité d'un territoire (routes, voies ferrées, aéroports, numérique).\nFracture numérique : inégalité d'accès à Internet. Zone blanche : territoire non couvert par le réseau mobile. Le plan France Très Haut Débit (2013) vise à couvrir tout le territoire en fibre optique.\nProgramme Action cœur de ville (2018) : revitalisation des centres de villes moyennes (commerces, logements).\nProgramme Petites villes de demain (2020) : soutien aux petites villes qui jouent un rôle de centralité pour les campagnes.\nMaisons France Services : guichets regroupant plusieurs services publics dans les territoires ruraux et les quartiers prioritaires.\nPolitique de la ville : politique en faveur des quartiers prioritaires (rénovation urbaine, emploi, éducation).\nLutte contre les déserts médicaux : maisons de santé, aides à l'installation des médecins.\nMéthode : décrire une inégalité, identifier sa cause, puis présenter l'aménagement qui y répond et ses limites."
+    },
+    {
+      "id": "territoires-ultramarins",
+      "titre": "Les territoires ultramarins français : une problématique spécifique",
+      "ordre": 9,
+      "periode": "T2",
+      "notions": [
+        "Localiser les territoires ultramarins et les distinguer selon leur statut (DROM, COM)",
+        "Expliquer les contraintes liées à l'éloignement et à l'insularité",
+        "Identifier les atouts des outre-mer pour la France (ZEE, biodiversité, espace)",
+        "Décrire les inégalités avec la métropole (chômage, niveau de vie, vie chère)",
+        "Présenter les aménagements spécifiques (continuité territoriale, aides de l'UE)",
+        "Étudier un territoire ultramarin (Guyane, La Réunion ou Mayotte)"
+      ],
+      "motsCles": [
+        "territoire ultramarin",
+        "DROM",
+        "COM",
+        "région ultrapériphérique",
+        "insularité",
+        "éloignement",
+        "ZEE",
+        "continuité territoriale",
+        "risques naturels",
+        "biodiversité",
+        "vie chère"
+      ],
+      "reference": "Territoires ultramarins : territoires français situés hors du continent européen (outre-mer). Ils comptent environ 2,8 millions d'habitants.\nDROM (départements et régions d'outre-mer) : Guadeloupe, Martinique, Guyane, La Réunion, Mayotte (département depuis 2011). Les lois françaises s'y appliquent comme en métropole.\nLes DROM et Saint-Martin sont des régions ultrapériphériques (RUP) de l'Union européenne : ils appartiennent à l'UE et reçoivent ses aides.\nCOM (collectivités d'outre-mer) : Polynésie française, Saint-Pierre-et-Miquelon, Wallis-et-Futuna, Saint-Barthélemy, Saint-Martin ; elles disposent d'une large autonomie. La Nouvelle-Calédonie a un statut particulier.\nContraintes : éloignement de la métropole (plusieurs milliers de kilomètres), insularité pour la plupart, petite taille des marchés, risques naturels (cyclones, séismes, volcans comme le Piton de la Fournaise à La Réunion).\nInégalités : chômage plus élevé qu'en métropole, PIB par habitant plus faible, vie chère, logement et équipements insuffisants (notamment à Mayotte et en Guyane).\nDépendance économique vis-à-vis de la métropole (importations, emplois publics, transferts financiers).\nAtouts : ZEE (zone économique exclusive, espace maritime jusqu'à 200 milles marins des côtes) ; grâce aux outre-mer, la France possède la deuxième ZEE du monde (plus de 10 millions de km²).\nAutres atouts : biodiversité exceptionnelle (forêt guyanaise, récifs coralliens), tourisme, Centre spatial guyanais de Kourou (lancement des fusées Ariane), présence française dans tous les océans.\nContinuité territoriale : politique qui aide les habitants à se déplacer entre l'outre-mer et la métropole (aides aux billets d'avion) et réduit les effets de l'éloignement.\nAménagements : construction de logements, routes (route du Littoral à La Réunion), équipements scolaires et de santé, financés par l'État et l'UE.\nMéthode : localiser les territoires ultramarins sur un planisphère et nommer l'océan dans lequel chacun se trouve."
+    },
+    {
+      "id": "union-europeenne-territoire-de-reference",
+      "titre": "L'Union européenne, un nouveau territoire de référence et d'appartenance",
+      "ordre": 10,
+      "periode": "T3",
+      "notions": [
+        "Connaître les grandes étapes de la construction européenne",
+        "Localiser les États membres de l'UE et ses limites",
+        "Identifier les institutions et les symboles de l'UE",
+        "Expliquer ce que l'UE change pour les citoyens (libre circulation, euro, Schengen, citoyenneté européenne)",
+        "Montrer que l'UE est un territoire de référence pour les Français"
+      ],
+      "motsCles": [
+        "Union européenne",
+        "construction européenne",
+        "État membre",
+        "traité de Rome",
+        "traité de Maastricht",
+        "citoyenneté européenne",
+        "espace Schengen",
+        "zone euro",
+        "Parlement européen",
+        "Commission européenne",
+        "libre circulation"
+      ],
+      "reference": "Union européenne (UE) : association de 27 États européens qui ont choisi de mettre en commun une partie de leurs politiques. Elle compte environ 450 millions d'habitants.\n1951 : CECA (Communauté européenne du charbon et de l'acier). 1957 : traité de Rome, création de la CEE par six pays (France, RFA, Italie, Belgique, Pays-Bas, Luxembourg).\n1992 : traité de Maastricht, création de l'Union européenne et de la citoyenneté européenne.\nÉlargissements successifs : 2004 et 2007 vers l'Europe centrale et orientale ; 2013 : Croatie. 2020 : sortie du Royaume-Uni (Brexit), l'UE passe à 27 membres.\nEspace Schengen : espace de libre circulation des personnes sans contrôle aux frontières intérieures (accords de 1985, appliqués à partir de 1995). Il comprend la plupart des pays de l'UE et quelques pays non membres (Suisse, Norvège, Islande, Liechtenstein).\nEuro : monnaie unique en circulation depuis 2002 (pièces et billets) ; la zone euro compte 20 pays.\nCitoyenneté européenne : tout citoyen d'un État membre est aussi citoyen européen ; il peut circuler, étudier et travailler dans l'UE, voter et être élu aux élections municipales et européennes dans son pays de résidence.\nInstitutions : Parlement européen (élu au suffrage universel direct depuis 1979, siège à Strasbourg), Commission européenne (Bruxelles, propose les lois), Conseil européen (chefs d'État et de gouvernement), Conseil de l'UE (ministres), Cour de justice (Luxembourg), Banque centrale européenne (Francfort).\nSymboles : drapeau bleu à 12 étoiles, hymne (« Ode à la joie »), devise « Unie dans la diversité », journée de l'Europe le 9 mai.\nMarché unique (1993) : libre circulation des personnes, des marchandises, des services et des capitaux.\nProgramme Erasmus (1987) : échanges d'étudiants entre pays européens.\nL'UE est un territoire de référence : de nombreuses décisions et lois qui s'appliquent en France sont prises à l'échelle européenne.\nMéthode : sur une carte, localiser les États membres, la zone euro et l'espace Schengen, et constater que leurs limites ne coïncident pas exactement."
+    },
+    {
+      "id": "contrastes-et-cohesion-dans-l-ue",
+      "titre": "Les contrastes territoriaux et la politique de cohésion de l'Union européenne",
+      "ordre": 11,
+      "periode": "T3",
+      "notions": [
+        "Identifier les contrastes de richesse et de peuplement dans l'UE",
+        "Localiser la dorsale européenne et les périphéries",
+        "Expliquer la politique régionale de cohésion (FEDER, régions prioritaires)",
+        "Décrire les coopérations transfrontalières (Interreg, eurorégions)",
+        "Situer la France dans l'espace européen (carrefour, régions frontalières)"
+      ],
+      "motsCles": [
+        "contrastes territoriaux",
+        "dorsale européenne",
+        "centre",
+        "périphérie",
+        "politique de cohésion",
+        "politique régionale",
+        "FEDER",
+        "fonds structurels",
+        "coopération transfrontalière",
+        "travailleur frontalier",
+        "Interreg"
+      ],
+      "reference": "Les territoires de l'UE sont très inégaux : PIB par habitant, chômage, densité de population varient fortement d'une région à l'autre.\nDorsale européenne (ou mégalopole européenne) : axe urbain et économique très peuplé et riche, du sud-est de l'Angleterre au nord de l'Italie, passant par le Benelux et la vallée du Rhin.\nCentre : espace qui domine et concentre richesses et pouvoirs. Périphérie : espace dominé, plus pauvre ou moins bien relié au centre.\nPériphéries européennes : régions de l'Est (entrées en 2004-2007), du Sud (Portugal, sud de l'Italie, Grèce), régions isolées et RUP.\nPolitique de cohésion (politique régionale) : politique de l'UE qui vise à réduire les écarts de développement entre les régions.\nFonds structurels, dont le FEDER (Fonds européen de développement régional) : financent des routes, des équipements, la formation, l'innovation, en priorité dans les régions les moins développées.\nExemple : les régions d'Europe de l'Est ont reçu d'importants financements depuis leur adhésion.\nCoopération transfrontalière : projets communs entre régions de part et d'autre d'une frontière, financés notamment par le programme Interreg.\nEurorégion : territoire de coopération entre régions frontalières de plusieurs pays (ex. : Eurométropole Lille-Kortrijk-Tournai).\nTravailleur frontalier : personne qui vit dans un pays et travaille dans un pays voisin (nombreux entre la Lorraine et le Luxembourg, ou entre la France et la Suisse).\nLa France est un carrefour européen : façades maritimes, couloirs de circulation, régions frontalières ouvertes sur les pays voisins.\nMéthode : réaliser un croquis de l'UE opposant la dorsale, les périphéries intégrées et les périphéries en rattrapage."
+    },
+    {
+      "id": "france-et-europe-dans-le-monde",
+      "titre": "La France et l'Europe dans le monde",
+      "ordre": 12,
+      "periode": "T3",
+      "notions": [
+        "Mesurer la puissance de l'Union européenne dans le monde (économique, commerciale, influence)",
+        "Identifier les limites de la puissance européenne (défense, divisions politiques)",
+        "Décrire les éléments de la puissance française (diplomatie, armée, économie, culture)",
+        "Expliquer le rayonnement culturel de la France (francophonie, tourisme, soft power)",
+        "Montrer la présence de la France dans le monde grâce aux outre-mer et à la ZEE",
+        "Situer la France dans les organisations internationales (ONU, G7, G20, OTAN)"
+      ],
+      "motsCles": [
+        "puissance",
+        "influence",
+        "rayonnement",
+        "soft power",
+        "francophonie",
+        "Conseil de sécurité",
+        "membre permanent",
+        "G7",
+        "OTAN",
+        "aide au développement",
+        "ZEE"
+      ],
+      "reference": "Puissance : capacité d'un État à imposer ses choix aux autres et à exercer une influence dans le monde (économique, militaire, diplomatique, culturelle).\nL'Union européenne est une grande puissance économique : l'un des premiers marchés de consommation et l'une des premières puissances commerciales du monde ; l'euro est la deuxième monnaie internationale.\nL'UE est le premier donateur d'aide publique au développement et défend des normes (environnement, protection des données).\nLimites : l'UE n'a pas d'armée commune et ses membres sont parfois divisés en politique étrangère ; on l'a qualifiée de « géant économique, nain politique ». Beaucoup de ses membres comptent sur l'OTAN pour leur défense.\nLa France fait partie des premières puissances économiques mondiales (environ le 7e PIB mondial).\nMembre permanent du Conseil de sécurité de l'ONU, avec un droit de veto (comme les États-Unis, la Chine, la Russie et le Royaume-Uni).\nMembre du G7, du G20 et de l'OTAN ; puissance nucléaire ; l'un des plus grands réseaux diplomatiques au monde.\nPrésence militaire : bases et forces françaises à l'étranger et dans les outre-mer, participation à des opérations internationales.\nGrâce à ses territoires ultramarins, la France est présente dans tous les océans et possède la deuxième ZEE du monde.\nFrancophonie : ensemble des personnes et des pays qui ont le français en partage ; plus de 320 millions de francophones dans le monde. L'Organisation internationale de la francophonie (OIF) les rassemble.\nSoft power : capacité d'influence par la culture, la langue, l'image et les valeurs (cinéma, gastronomie, mode, luxe, grands événements comme les Jeux olympiques de Paris 2024).\nLa France est la première destination touristique mondiale et accueille des sièges d'organisations internationales (UNESCO et OCDE à Paris, Conseil de l'Europe et Parlement européen à Strasbourg).\nMéthode : classer les éléments de puissance par domaine (économique, militaire, diplomatique, culturel) et en indiquer les limites."
+    }
+  ]
+}

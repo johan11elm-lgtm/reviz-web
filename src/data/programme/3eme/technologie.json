@@ -1,0 +1,346 @@
+{
+  "classe": "3ème",
+  "matiere": "Technologie",
+  "programme": "Technologie cycle 4 (BO spécial n°11 du 26/11/2015, ajusté BO n°31 du 30/07/2020)",
+  "modele": "claude-opus-5-5 (abonnement)",
+  "genereLe": "2026-10-05",
+  "relu": false,
+  "chapitres": [
+    {
+      "id": "demarche-de-projet-et-innovation",
+      "titre": "La démarche de projet et l'innovation",
+      "ordre": 1,
+      "periode": "T1",
+      "notions": [
+        "Identifier les étapes d'une démarche de projet, du besoin à la validation",
+        "Distinguer innovation, invention et amélioration d'un objet existant",
+        "Organiser le travail d'une équipe : rôles, planning, revues de projet",
+        "Utiliser des outils de créativité pour proposer des solutions",
+        "Présenter et argumenter un choix de solution devant un groupe"
+      ],
+      "motsCles": [
+        "projet",
+        "innovation",
+        "invention",
+        "créativité",
+        "planning",
+        "revue de projet",
+        "prototype",
+        "solution technique",
+        "contrainte",
+        "carte mentale"
+      ],
+      "reference": "Projet : ensemble d'actions organisées dans le temps pour répondre à un besoin, avec des moyens et un délai donnés.\nÉtapes d'une démarche de projet : identifier le besoin → rédiger le cahier des charges → rechercher des solutions → choisir une solution → réaliser un prototype → tester et valider → communiquer.\nInvention : création d'un objet ou d'un principe qui n'existait pas encore.\nInnovation : invention ou amélioration qui est effectivement diffusée et adoptée par les utilisateurs (mise sur le marché).\nInnovation incrémentale : amélioration d'un objet existant (ex. un smartphone plus autonome).\nInnovation de rupture : nouveau principe qui remplace l'ancien (ex. l'ampoule LED face à l'ampoule à incandescence).\nBrevet : titre qui protège une invention et donne à son auteur un droit d'exploitation exclusif pour une durée limitée (20 ans en France).\nOutils de créativité : remue-méninges (brainstorming), carte mentale, croquis à main levée, recherche documentaire.\nCroquis : dessin rapide à main levée pour exprimer une idée ; schéma : représentation simplifiée du fonctionnement.\nPlanning (diagramme de Gantt) : tableau qui place les tâches du projet dans le temps et montre leur durée et leur ordre.\nRevue de projet : réunion à une étape clé pour faire le point sur l'avancement et valider les choix.\nPrototype : premier exemplaire, souvent simplifié, réalisé pour tester une solution avant la fabrication.\nRôles dans l'équipe : chef de projet, responsable de la documentation, responsable de la réalisation, etc.\nChoix d'une solution : comparer les solutions selon les critères du cahier des charges (coût, délai, performance, environnement).\nMéthode attendue : justifier un choix de solution par rapport aux contraintes du cahier des charges.\nCommunication : présenter le projet à l'oral avec un diaporama, une affiche ou une vidéo, en argumentant les choix."
+    },
+    {
+      "id": "besoin-et-cahier-des-charges",
+      "titre": "Le besoin et le cahier des charges",
+      "ordre": 2,
+      "periode": "T1",
+      "notions": [
+        "Exprimer le besoin auquel répond un objet technique",
+        "Utiliser le diagramme bête à cornes pour formuler le besoin",
+        "Distinguer fonction principale et fonctions contraintes",
+        "Lire et compléter un cahier des charges : fonction, critère, niveau",
+        "Lire un diagramme des exigences simple"
+      ],
+      "motsCles": [
+        "besoin",
+        "bête à cornes",
+        "fonction d'usage",
+        "fonction principale",
+        "fonction contrainte",
+        "critère",
+        "niveau",
+        "cahier des charges",
+        "exigence",
+        "utilisateur"
+      ],
+      "reference": "Besoin : nécessité ou désir éprouvé par un utilisateur ; l'objet technique est conçu pour y répondre.\nObjet technique : objet fabriqué par l'être humain pour répondre à un besoin.\nDiagramme bête à cornes : outil qui exprime le besoin en répondant à trois questions.\nÀ qui le produit rend-il service ? (l'utilisateur)\nSur quoi agit-il ? (la matière d'œuvre)\nDans quel but ? (le besoin, qui donne la fonction d'usage)\nFonction d'usage : ce à quoi sert l'objet (ex. un vélo sert à se déplacer).\nFonction d'estime : ce qui rend l'objet attirant (couleur, forme, marque).\nFonction principale (FP) : relation entre l'objet et deux éléments du milieu extérieur, raison d'être de l'objet.\nFonction contrainte (FC) : exigence imposée par le milieu extérieur (énergie, sécurité, environnement, coût, normes).\nDiagramme pieuvre (des interacteurs) : représente l'objet au centre et les éléments du milieu extérieur reliés par les fonctions.\nCahier des charges fonctionnel (CdCF) : document qui décrit le besoin et les fonctions attendues, sans imposer de solution.\nPour chaque fonction : un critère d'appréciation (ce qu'on mesure) et un niveau (la valeur attendue, avec son unité).\nExemple : fonction « éclairer la route » ; critère : distance éclairée ; niveau : 10 m minimum.\nFlexibilité : marge acceptée sur un niveau (ex. 10 m ± 1 m).\nDiagramme des exigences (SysML) : présente les exigences du système sous forme de blocs reliés entre eux.\nMéthode attendue : à partir d'un objet, formuler sa fonction d'usage, puis associer à une fonction un critère mesurable et un niveau chiffré."
+    },
+    {
+      "id": "evolution-des-objets-techniques",
+      "titre": "L'évolution des objets techniques",
+      "ordre": 3,
+      "periode": "T1",
+      "notions": [
+        "Situer un objet technique dans son contexte historique, social et économique",
+        "Identifier les principes techniques et les solutions d'une famille ou lignée d'objets",
+        "Distinguer évolution progressive et rupture technologique",
+        "Relier les évolutions aux progrès scientifiques et aux matériaux",
+        "Analyser les impacts sociétaux et environnementaux d'une évolution"
+      ],
+      "motsCles": [
+        "lignée",
+        "famille d'objets",
+        "principe technique",
+        "solution technique",
+        "rupture technologique",
+        "progrès",
+        "contexte",
+        "société",
+        "frise chronologique",
+        "impact"
+      ],
+      "reference": "Famille d'objets : objets qui répondent au même besoin (ex. se déplacer : vélo, voiture, train).\nLignée d'objets : objets d'une même famille qui utilisent le même principe technique et se succèdent dans le temps.\nPrincipe technique : phénomène scientifique utilisé pour faire fonctionner l'objet (ex. combustion, électromagnétisme).\nSolution technique : moyen concret choisi pour réaliser une fonction (ex. frein à disque ou frein à tambour).\nRupture technologique : changement de principe technique qui crée une nouvelle lignée (ex. passage de l'éclairage à la bougie à l'éclairage électrique).\nFacteurs d'évolution : progrès scientifiques, nouveaux matériaux, nouvelles énergies, besoins de la société, coûts, réglementation.\nRepères : machine à vapeur améliorée par James Watt (brevet 1769).\nRepères : téléphone breveté par Graham Bell en 1876 ; lampe à incandescence d'Edison en 1879.\nRepères : invention du transistor en 1947 (laboratoires Bell), base de l'électronique moderne.\nRepères : ARPANET en 1969, ancêtre d'Internet ; le Web est proposé par Tim Berners-Lee au CERN en 1989.\nRepères : premier smartphone à écran tactile grand public, l'iPhone, en 2007.\nFrise chronologique : outil pour placer les objets d'une lignée dans le temps et repérer les ruptures.\nImpacts sociétaux : nouvelles façons de communiquer, de travailler, de se déplacer ; nouveaux métiers, disparition d'autres.\nImpacts environnementaux : consommation de matières premières et d'énergie, pollution, déchets.\nMéthode attendue : comparer deux objets d'une même famille en indiquant ce qui a changé (matériaux, énergie, principe) et pourquoi."
+    },
+    {
+      "id": "cycle-de-vie-et-eco-conception",
+      "titre": "Le cycle de vie et l'éco-conception",
+      "ordre": 4,
+      "periode": "T1",
+      "notions": [
+        "Décrire les étapes du cycle de vie d'un objet technique",
+        "Identifier les impacts environnementaux à chaque étape",
+        "Comprendre le principe de l'analyse du cycle de vie (ACV)",
+        "Proposer des choix d'éco-conception (matériaux, énergie, réparabilité)",
+        "Distinguer réemploi, réparation, recyclage et valorisation",
+        "Connaître les enjeux de l'obsolescence et de la réparabilité"
+      ],
+      "motsCles": [
+        "cycle de vie",
+        "matière première",
+        "ACV",
+        "éco-conception",
+        "recyclage",
+        "réemploi",
+        "valorisation",
+        "DEEE",
+        "obsolescence",
+        "indice de réparabilité",
+        "empreinte carbone",
+        "développement durable"
+      ],
+      "reference": "Cycle de vie : ensemble des étapes de la vie d'un objet, « du berceau à la tombe ».\nÉtapes : extraction des matières premières → fabrication → transport et distribution → utilisation → fin de vie.\nAnalyse du cycle de vie (ACV) : méthode qui évalue les impacts environnementaux d'un objet à chaque étape (énergie consommée, émissions de CO₂, eau, déchets).\nPour un smartphone, l'essentiel de l'impact environnemental vient de la fabrication, avant l'utilisation.\nEmpreinte carbone : quantité de gaz à effet de serre émise, exprimée en kg équivalent CO₂.\nÉco-conception : prendre en compte l'environnement dès la conception de l'objet.\nLeviers d'éco-conception : moins de matière, matériaux recyclés ou recyclables, moins d'assemblages collés, faible consommation, objet démontable et réparable.\nRéemploi : réutiliser l'objet pour le même usage (don, revente d'occasion).\nRéparation : remettre en état l'objet pour prolonger sa durée de vie.\nRecyclage : récupérer la matière d'un déchet pour fabriquer un nouvel objet.\nValorisation énergétique : brûler des déchets non recyclables pour produire de la chaleur ou de l'électricité.\nDEEE : déchets d'équipements électriques et électroniques, à déposer en point de collecte.\nObsolescence programmée : réduction volontaire de la durée de vie d'un produit ; c'est un délit en France depuis la loi de 2015 sur la transition énergétique.\nIndice de réparabilité : note sur 10 affichée depuis le 1er janvier 2021 sur certains produits électroniques en France.\nDéveloppement durable : répondre aux besoins du présent sans compromettre ceux des générations futures (environnement, société, économie).\nMéthode attendue : à partir d'un graphique d'ACV, identifier l'étape la plus impactante et proposer une amélioration adaptée."
+    },
+    {
+      "id": "chaine-d-information-et-chaine-d-energie",
+      "titre": "Chaîne d'information et chaîne d'énergie",
+      "ordre": 5,
+      "periode": "T2",
+      "notions": [
+        "Décrire le fonctionnement d'un système automatisé à l'aide de la chaîne d'information et de la chaîne d'énergie",
+        "Identifier les fonctions acquérir, traiter, communiquer",
+        "Identifier les fonctions alimenter, distribuer, convertir, transmettre",
+        "Associer un composant à chaque fonction",
+        "Distinguer signal logique, analogique et numérique",
+        "Identifier les flux d'information, d'énergie et de matière"
+      ],
+      "motsCles": [
+        "système automatisé",
+        "chaîne d'information",
+        "chaîne d'énergie",
+        "acquérir",
+        "traiter",
+        "communiquer",
+        "alimenter",
+        "distribuer",
+        "convertir",
+        "transmettre",
+        "signal logique",
+        "signal numérique"
+      ],
+      "reference": "Système automatisé : système qui réalise des tâches sans intervention humaine permanente (ex. portail automatique, éclairage public).\nChaîne d'information : partie qui gère les informations ; fonctions acquérir → traiter → communiquer.\nAcquérir : capter une information (capteurs, boutons, détecteurs).\nTraiter : décider selon un programme (microcontrôleur, carte programmable, ordinateur).\nCommuniquer : envoyer des ordres à la chaîne d'énergie ou des informations à l'utilisateur (voyant, écran, buzzer, liaison sans fil).\nChaîne d'énergie : partie qui agit sur la matière d'œuvre ; fonctions alimenter → distribuer → convertir → transmettre.\nAlimenter : fournir l'énergie (pile, batterie, secteur, panneau solaire).\nDistribuer : laisser passer ou couper l'énergie selon les ordres (relais, transistor, interrupteur, carte de commande moteur).\nConvertir : transformer l'énergie en une autre forme (moteur, lampe, résistance chauffante) : c'est l'actionneur.\nTransmettre : transmettre le mouvement jusqu'à l'effecteur (engrenages, poulies-courroie, pignon-crémaillère, vis-écrou).\nLes ordres vont de la chaîne d'information vers la chaîne d'énergie (distribuer).\nSignal logique (tout ou rien) : deux états seulement, 0 ou 1 (ex. bouton appuyé ou non).\nSignal analogique : varie de façon continue (ex. tension fournie par un capteur de température).\nSignal numérique : suite de valeurs codées en binaire (0 et 1) ; un convertisseur analogique-numérique transforme un signal analogique en signal numérique.\nFlux : d'information (signaux), d'énergie (électrique, mécanique…) et de matière (ce que l'objet transforme ou déplace).\nMéthode attendue : compléter le schéma des deux chaînes d'un système réel en plaçant chaque composant sous sa fonction."
+    },
+    {
+      "id": "capteurs-et-actionneurs",
+      "titre": "Capteurs, actionneurs et interfaces",
+      "ordre": 6,
+      "periode": "T2",
+      "notions": [
+        "Définir capteur, détecteur, actionneur et interface",
+        "Associer un capteur à la grandeur physique qu'il mesure",
+        "Associer un actionneur à l'action qu'il produit",
+        "Choisir un capteur ou un actionneur adapté à un besoin",
+        "Interpréter la valeur renvoyée par un capteur dans un programme"
+      ],
+      "motsCles": [
+        "capteur",
+        "détecteur",
+        "grandeur physique",
+        "actionneur",
+        "interface",
+        "photorésistance",
+        "capteur à ultrasons",
+        "fin de course",
+        "moteur",
+        "servomoteur",
+        "LED",
+        "seuil"
+      ],
+      "reference": "Capteur : composant qui prélève une information sur une grandeur physique et la transforme en signal électrique exploitable.\nDétecteur : capteur qui fournit un signal logique (tout ou rien) : présence ou absence.\nGrandeurs physiques courantes : température, luminosité, distance, présence, humidité, son, position.\nCapteur de luminosité : photorésistance (LDR), dont la résistance diminue quand la lumière augmente.\nCapteur de température : thermistance ou capteur numérique, mesure en °C.\nCapteur à ultrasons : mesure une distance à partir du temps d'aller-retour d'une onde ultrasonore.\nDétecteur de présence infrarouge (PIR) : détecte le mouvement d'une personne par son rayonnement infrarouge.\nInterrupteur de fin de course : détecte qu'une pièce mobile est arrivée en position.\nActionneur : composant qui convertit l'énergie reçue en action sur la matière d'œuvre ou sur l'environnement.\nExemples d'actionneurs : moteur électrique (mouvement de rotation), servomoteur (rotation à un angle précis), vérin (mouvement de translation), LED et lampe (lumière), buzzer (son), résistance chauffante (chaleur).\nInterface homme-machine (IHM) : dispositif qui permet à l'utilisateur de dialoguer avec le système (bouton, clavier, écran tactile, voyant).\nSeuil : valeur limite choisie dans le programme pour déclencher une action (ex. si luminosité < 300 alors allumer la lampe).\nÉtalonnage : relever les valeurs données par un capteur dans des situations connues pour choisir un seuil adapté.\nMéthode attendue : à partir d'un besoin (ex. allumer un éclairage à la nuit tombée), choisir le capteur, l'actionneur et écrire la condition."
+    },
+    {
+      "id": "energie-et-rendement",
+      "titre": "Les sources d'énergie, les conversions et le rendement",
+      "ordre": 7,
+      "periode": "T2",
+      "notions": [
+        "Distinguer sources d'énergie renouvelables et non renouvelables",
+        "Identifier les formes d'énergie et leurs conversions dans un objet",
+        "Représenter une chaîne de conversion d'énergie",
+        "Calculer une puissance électrique et une énergie consommée",
+        "Calculer et interpréter un rendement",
+        "Comparer des solutions de stockage de l'énergie"
+      ],
+      "motsCles": [
+        "source d'énergie",
+        "énergie renouvelable",
+        "énergie fossile",
+        "forme d'énergie",
+        "conversion",
+        "puissance",
+        "watt",
+        "joule",
+        "wattheure",
+        "rendement",
+        "pertes",
+        "stockage"
+      ],
+      "reference": "Sources non renouvelables : pétrole, gaz naturel, charbon (énergies fossiles) et uranium (nucléaire) ; réserves limitées.\nSources renouvelables : soleil, vent, eau (hydraulique), biomasse, chaleur de la Terre (géothermie) ; elles se renouvellent à l'échelle humaine.\nFormes d'énergie : électrique, mécanique (mouvement), thermique (chaleur), chimique (pile, carburant), lumineuse (rayonnante), nucléaire.\nConversion : un convertisseur transforme une forme d'énergie en une autre.\nExemples : moteur électrique (électrique → mécanique), panneau photovoltaïque (lumineuse → électrique), éolienne avec alternateur (mécanique → électrique), pile (chimique → électrique), lampe (électrique → lumineuse et thermique).\nToute conversion entraîne des pertes, le plus souvent sous forme de chaleur.\nPuissance électrique : P = U × I (P en watts W, U en volts V, I en ampères A).\nÉnergie : E = P × t ; en joules J si t est en secondes, en wattheures Wh si t est en heures.\nConversion d'unités : 1 Wh = 3 600 J ; 1 kWh = 1 000 Wh.\nExemple : une lampe de 10 W allumée 5 h consomme E = 10 × 5 = 50 Wh.\nRendement : η = énergie utile ÷ énergie absorbée (ou puissance utile ÷ puissance absorbée) ; sans unité, toujours inférieur à 1 (ou à 100 %).\nExemple : un moteur absorbe 200 W et fournit 150 W utiles : η = 150 ÷ 200 = 0,75 soit 75 %.\nStockage : batterie (énergie chimique), barrage et station de pompage (énergie potentielle de l'eau), stockage thermique.\nÉtiquette énergie : classe un appareil selon sa consommation (de A à G).\nMéthode attendue : représenter la chaîne de conversion d'un objet par des blocs reliés par des flèches indiquant chaque forme d'énergie, pertes comprises."
+    },
+    {
+      "id": "materiaux-et-proprietes",
+      "titre": "Les matériaux et leurs propriétés",
+      "ordre": 8,
+      "periode": "T2",
+      "notions": [
+        "Classer les matériaux en familles",
+        "Identifier les propriétés mécaniques, physiques et chimiques d'un matériau",
+        "Justifier le choix d'un matériau selon le cahier des charges",
+        "Prendre en compte l'impact environnemental et le recyclage du matériau",
+        "Associer un matériau à un procédé de mise en forme"
+      ],
+      "motsCles": [
+        "famille de matériaux",
+        "métal",
+        "alliage",
+        "matière plastique",
+        "composite",
+        "céramique",
+        "propriété",
+        "conductivité",
+        "dureté",
+        "élasticité",
+        "masse volumique",
+        "recyclabilité"
+      ],
+      "reference": "Familles de matériaux : métaux et alliages, matières plastiques (polymères), matériaux organiques (bois, cuir, papier, carton), céramiques et verres, matériaux composites.\nMétaux : fer, aluminium, cuivre ; alliages : acier (fer + carbone), laiton (cuivre + zinc), bronze (cuivre + étain).\nMatières plastiques : thermoplastiques (se ramollissent à la chaleur, recyclables par refonte : PET, PLA, ABS) et thermodurcissables (ne se ramollissent pas une fois durcis).\nComposite : association de plusieurs matériaux pour cumuler leurs qualités (ex. fibre de carbone et résine, béton armé).\nPropriétés mécaniques : dureté (résistance à la rayure), élasticité (reprendre sa forme), résistance à la rupture, rigidité.\nPropriétés physiques : masse volumique, conductivité électrique, conductivité thermique, propriétés magnétiques.\nMasse volumique : ρ = m ÷ V (en kg/m³ ou g/cm³) ; ex. aluminium environ 2,7 g/cm³, acier environ 7,8 g/cm³.\nPropriétés chimiques : résistance à la corrosion (l'acier rouille, l'aluminium s'oxyde en surface et se protège).\nLe cuivre est un très bon conducteur électrique : il est utilisé dans les câbles.\nChoix d'un matériau : selon les fonctions et contraintes du cahier des charges (résistance, masse, coût, aspect, environnement).\nCritères environnementaux : origine renouvelable ou non, énergie de fabrication, recyclabilité.\nProcédés de mise en forme : découpe, pliage, thermoformage, moulage, usinage, impression 3D.\nMéthode attendue : comparer plusieurs matériaux dans un tableau de propriétés et justifier le choix le mieux adapté à une pièce."
+    },
+    {
+      "id": "modelisation-et-simulation",
+      "titre": "Modéliser, simuler et prototyper",
+      "ordre": 9,
+      "periode": "T2",
+      "notions": [
+        "Utiliser un logiciel de modélisation 3D (CAO) pour représenter une pièce",
+        "Lire et produire des représentations : croquis, schéma, dessin technique, maquette numérique",
+        "Utiliser une simulation pour prévoir le comportement d'un objet",
+        "Comparer les résultats d'une simulation aux mesures réelles et expliquer les écarts",
+        "Réaliser un prototype par fabrication additive ou soustractive"
+      ],
+      "motsCles": [
+        "modèle",
+        "CAO",
+        "maquette numérique",
+        "esquisse",
+        "extrusion",
+        "contrainte",
+        "simulation",
+        "écart",
+        "prototype",
+        "impression 3D",
+        "fabrication additive",
+        "découpe laser"
+      ],
+      "reference": "Modèle : représentation simplifiée de la réalité qui permet de comprendre, prévoir ou communiquer.\nCroquis : dessin à main levée ; schéma : représentation simplifiée avec symboles normalisés ; dessin technique : représentation précise et cotée.\nCAO (conception assistée par ordinateur) : logiciel qui crée une maquette numérique en 3D d'une pièce ou d'un assemblage.\nÉtapes en CAO : tracer une esquisse 2D, la contraindre (cotes, parallélisme…), puis créer un volume par extrusion, révolution ou enlèvement de matière.\nAssemblage : réunion de plusieurs pièces positionnées entre elles par des contraintes.\nCotation : indication des dimensions sur un dessin, en millimètres.\nSimulation : utiliser un modèle numérique pour prévoir le comportement d'un objet (mouvement, résistance, consommation) sans le fabriquer.\nIntérêts de la simulation : gagner du temps, réduire les coûts, tester des situations dangereuses ou difficiles à reproduire.\nÉcart : différence entre le résultat simulé et la mesure réelle ; il s'explique par les simplifications du modèle (frottements négligés, matériaux idéalisés, imprécision des mesures).\nPrototype : premier exemplaire réel pour valider la solution.\nFabrication additive : ajout de matière couche par couche (impression 3D, souvent en PLA, à partir d'un fichier STL).\nFabrication soustractive : enlèvement de matière (perçage, fraisage, découpe laser, découpe à commande numérique).\nMéthode attendue : relever une mesure sur le prototype, la comparer à la valeur simulée et à l'exigence du cahier des charges, puis conclure."
+    },
+    {
+      "id": "algorithmique-et-programmation",
+      "titre": "Algorithmique et programmation",
+      "ordre": 10,
+      "periode": "T3",
+      "notions": [
+        "Décrire un algorithme sous forme d'organigramme ou de pseudo-code",
+        "Utiliser des variables et des opérateurs",
+        "Utiliser des structures conditionnelles (si… alors… sinon)",
+        "Utiliser des boucles (répéter, tant que)",
+        "Programmer le déclenchement d'une action par un événement",
+        "Tester, déboguer et améliorer un programme"
+      ],
+      "motsCles": [
+        "algorithme",
+        "programme",
+        "organigramme",
+        "instruction",
+        "variable",
+        "condition",
+        "boucle",
+        "événement",
+        "opérateur",
+        "booléen",
+        "bug",
+        "Scratch"
+      ],
+      "reference": "Algorithme : suite finie d'instructions qui permet de résoudre un problème ou d'obtenir un résultat.\nProgramme : traduction d'un algorithme dans un langage compris par la machine (Scratch, Python, blocs mBlock ou MakeCode).\nOrganigramme (logigramme) : représentation graphique d'un algorithme ; ovale pour début/fin, rectangle pour une action, losange pour une condition.\nInstruction : ordre élémentaire exécuté par la machine.\nVariable : espace mémoire qui porte un nom et contient une valeur pouvant changer (ex. score, température).\nOpérateurs : arithmétiques (+, −, ×, ÷), de comparaison (<, >, =) et logiques (ET, OU, NON).\nBooléen : valeur qui ne peut être que vraie ou fausse.\nStructure conditionnelle : si condition alors actions 1 sinon actions 2.\nBoucle bornée : répéter n fois ; boucle conditionnelle : répéter jusqu'à ce que (ou tant que) une condition soit vérifiée ; boucle infinie : répéter indéfiniment.\nÉvénement : action qui déclenche une partie du programme (appui sur un bouton, réception d'un message, capteur qui dépasse un seuil).\nExécution séquentielle : les instructions s'exécutent dans l'ordre, l'une après l'autre ; plusieurs scripts peuvent s'exécuter en parallèle.\nSous-programme (bloc personnalisé) : groupe d'instructions nommé que l'on peut appeler plusieurs fois.\nBug : erreur dans un programme ; déboguer = rechercher et corriger cette erreur en testant pas à pas.\nExemple : répéter indéfiniment : si distance < 10 cm alors arrêter le moteur sinon avancer.\nMéthode attendue : lire un programme et prévoir son résultat, puis le modifier pour répondre à une nouvelle consigne."
+    },
+    {
+      "id": "programmer-un-systeme-embarque",
+      "titre": "Programmer un système embarqué et un objet connecté",
+      "ordre": 11,
+      "periode": "T3",
+      "notions": [
+        "Définir un système embarqué et un objet connecté",
+        "Identifier le rôle du microcontrôleur et des entrées-sorties",
+        "Écrire un programme qui lit un capteur et commande un actionneur",
+        "Transférer un programme dans une carte programmable et le tester",
+        "Comprendre l'échange de données entre un objet connecté et un serveur ou une application",
+        "Repérer les enjeux de sécurité et de données personnelles des objets connectés"
+      ],
+      "motsCles": [
+        "système embarqué",
+        "microcontrôleur",
+        "carte programmable",
+        "entrée",
+        "sortie",
+        "téléversement",
+        "objet connecté",
+        "Bluetooth",
+        "Wi-Fi",
+        "données",
+        "application",
+        "sécurité"
+      ],
+      "reference": "Système embarqué : système électronique et informatique intégré dans un objet pour le piloter (ex. lave-linge, voiture, montre).\nMicrocontrôleur : circuit intégré qui contient un processeur, de la mémoire et des entrées-sorties ; il exécute le programme.\nCartes programmables courantes : Arduino, micro:bit.\nEntrée : broche qui reçoit une information d'un capteur ou d'un bouton ; sortie : broche qui envoie un ordre à un actionneur.\nEntrée numérique (0 ou 1), entrée analogique (valeur variable, par exemple de 0 à 1023 sur une carte Arduino).\nTéléversement : transfert du programme de l'ordinateur vers la mémoire de la carte.\nLe programme d'un système embarqué tourne en boucle : lire les entrées → décider → commander les sorties.\nObjet connecté : objet capable d'échanger des données avec d'autres objets, un smartphone ou un serveur via un réseau.\nLiaisons sans fil : Bluetooth (courte portée, quelques mètres), Wi-Fi (réseau local, accès à Internet), réseaux longue portée basse consommation.\nExemple : un thermostat connecté mesure la température, envoie les données à une application et reçoit une consigne à distance.\nLes données collectées peuvent être personnelles : elles sont protégées par le RGPD (règlement européen en vigueur depuis 2018).\nSécurité : changer les mots de passe par défaut, mettre à jour le logiciel, limiter les données partagées.\nMéthode attendue : à partir d'un cahier des charges, écrire l'algorithme, programmer la carte, téléverser, tester et corriger."
+    },
+    {
+      "id": "reseaux-informatiques-et-internet",
+      "titre": "Les réseaux informatiques et Internet",
+      "ordre": 12,
+      "periode": "T3",
+      "notions": [
+        "Définir un réseau informatique et identifier ses composants",
+        "Distinguer réseau local et Internet",
+        "Connaître le rôle de l'adresse IP, de l'adresse MAC et du DNS",
+        "Identifier le rôle du commutateur, du routeur et de la box",
+        "Comprendre le principe du client-serveur et du découpage en paquets",
+        "Adopter des usages responsables et sécurisés des réseaux"
+      ],
+      "motsCles": [
+        "réseau",
+        "réseau local",
+        "Internet",
+        "adresse IP",
+        "adresse MAC",
+        "commutateur",
+        "routeur",
+        "serveur",
+        "client",
+        "protocole",
+        "paquet",
+        "DNS"
+      ],
+      "reference": "Réseau informatique : ensemble d'équipements reliés entre eux pour échanger des données et partager des ressources.\nRéseau local (LAN) : réseau d'une maison, d'un collège ou d'une entreprise.\nInternet : réseau mondial qui interconnecte des millions de réseaux.\nSupports de transmission : câble en cuivre (Ethernet), fibre optique, ondes radio (Wi-Fi, 4G/5G).\nCommutateur (switch) : relie les équipements d'un même réseau local et transmet les données au bon destinataire.\nRouteur : relie des réseaux différents entre eux et choisit le chemin des données ; la box Internet joue le rôle de routeur.\nAdresse IP : numéro qui identifie un équipement sur un réseau ; en IPv4, 4 nombres de 0 à 255 séparés par des points (ex. 192.168.1.12).\nMasque de sous-réseau (ex. 255.255.255.0) : indique la partie de l'adresse IP qui identifie le réseau.\nAdresse MAC : identifiant physique de la carte réseau, en principe unique, écrit en 6 nombres hexadécimaux.\nProtocole : ensemble de règles de communication ; TCP/IP est le protocole d'Internet, HTTP et HTTPS servent au Web.\nPaquets : les données sont découpées en paquets qui peuvent prendre des chemins différents, puis sont réassemblées à l'arrivée.\nDNS : service qui traduit un nom de domaine (ex. education.gouv.fr) en adresse IP.\nClient-serveur : le client (navigateur, application) envoie une requête ; le serveur répond en fournissant le service ou les données.\nInternet et Web : Internet est le réseau ; le Web est un service qui fonctionne sur Internet.\nBon usage : mots de passe robustes, HTTPS pour les données sensibles, respect de la vie privée et du droit d'auteur.\nMéthode attendue : sur un schéma de réseau, identifier les équipements et vérifier si deux ordinateurs appartiennent au même réseau en comparant leurs adresses IP."
+    }
+  ]
+}

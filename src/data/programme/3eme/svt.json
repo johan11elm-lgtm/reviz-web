@@ -1,0 +1,219 @@
+{
+  "classe": "3ème",
+  "matiere": "SVT",
+  "programme": "Cycle 4 – SVT (BO spécial n°11 du 26/11/2015, ajusté BO n°31 du 30/07/2020)",
+  "modele": "claude-opus-5-5 (abonnement)",
+  "genereLe": "2026-10-05",
+  "relu": false,
+  "chapitres": [
+    {
+      "id": "information-genetique",
+      "titre": "L'information génétique",
+      "ordre": 1,
+      "periode": "T1",
+      "notions": [
+        "Savoir que les caractères héréditaires sont déterminés par l'information génétique portée par les chromosomes",
+        "Décrire un chromosome : molécule d'ADN associée à des protéines, à un ou deux chromatides",
+        "Définir un gène comme une portion d'ADN qui détermine un caractère",
+        "Distinguer gène et allèle et expliquer l'origine des allèles (mutations)",
+        "Lire et interpréter un caryotype humain (23 paires, chromosomes sexuels XX ou XY)",
+        "Expliquer qu'un caractère dépend à la fois de l'information génétique et de l'environnement",
+        "Relier une anomalie du nombre de chromosomes à un phénotype (trisomie 21)"
+      ],
+      "motsCles": ["caractère héréditaire", "noyau", "chromosome", "ADN", "gène", "allèle", "caryotype", "chromosomes sexuels", "mutation", "génotype", "phénotype", "trisomie 21"],
+      "reference": "L'information génétique est contenue dans le noyau de chaque cellule, portée par les chromosomes.\nUn chromosome est formé d'une longue molécule d'ADN (acide désoxyribonucléique) enroulée autour de protéines.\nAvant une division, chaque chromosome est dupliqué : il possède alors deux chromatides identiques reliées par un centromère.\nUn gène est une portion d'ADN, située à un endroit précis (locus) d'un chromosome, qui détermine un caractère héréditaire.\nUn même gène peut exister sous plusieurs versions appelées allèles (ex. gène du groupe sanguin : allèles A, B et O).\nLes allèles naissent de mutations : modifications de la séquence de l'ADN, aléatoires et rares.\nChaque cellule humaine (sauf les gamètes) possède 46 chromosomes groupés en 23 paires : 22 paires d'autosomes et 1 paire de chromosomes sexuels.\nFemme : XX ; homme : XY.\nPour chaque gène, on possède donc deux allèles, un sur chaque chromosome d'une paire (l'un d'origine paternelle, l'autre maternelle).\nUn allèle est dominant s'il s'exprime en présence d'un autre allèle ; l'allèle masqué est dit récessif.\nLe caryotype est la photographie des chromosomes d'une cellule classés par paires selon leur taille et la position du centromère.\nUne anomalie du nombre de chromosomes modifie le phénotype : la trisomie 21 correspond à trois chromosomes 21 (47 chromosomes).\nLe phénotype (caractères observables) dépend du génotype (allèles possédés) et peut être modifié par l'environnement (ex. bronzage, taille selon l'alimentation).\nMéthode : pour analyser un caryotype, compter les chromosomes, repérer les paires, identifier les chromosomes sexuels et toute anomalie."
+    },
+    {
+      "id": "mitose-division-cellulaire",
+      "titre": "La division cellulaire : la mitose",
+      "ordre": 2,
+      "periode": "T1",
+      "notions": [
+        "Savoir que l'organisme se développe à partir de la cellule-œuf par des divisions cellulaires",
+        "Expliquer la duplication des chromosomes avant la division",
+        "Décrire les grandes étapes de la mitose",
+        "Montrer que la mitose conserve le nombre de chromosomes et l'information génétique",
+        "Expliquer que toutes les cellules d'un individu possèdent la même information génétique",
+        "Relier la mitose à la croissance et au renouvellement des cellules"
+      ],
+      "motsCles": ["cellule-œuf", "mitose", "duplication", "chromatide", "centromère", "cellules filles", "clone", "croissance", "renouvellement cellulaire", "46 chromosomes"],
+      "reference": "Un être humain se développe à partir d'une cellule unique, la cellule-œuf, issue de la fécondation.\nLa multiplication cellulaire se fait par mitose : une cellule mère donne deux cellules filles.\nAvant la mitose, l'ADN de chaque chromosome est copié (duplication) : chaque chromosome possède alors deux chromatides identiques.\nÉtapes de la mitose : les chromosomes se condensent et deviennent visibles ; ils s'alignent au centre de la cellule ; les deux chromatides de chaque chromosome se séparent et migrent vers deux pôles opposés ; le cytoplasme se divise et deux cellules filles se forment.\nChaque cellule fille reçoit un exemplaire de chaque chromosome : chez l'humain, 46 chromosomes à une chromatide.\nLa mitose est une division conforme : les cellules filles possèdent la même information génétique que la cellule mère (elles forment un clone).\nToutes les cellules d'un individu (sauf les gamètes) ont donc la même information génétique que la cellule-œuf.\nLa mitose permet la croissance de l'organisme, la cicatrisation et le renouvellement des cellules (peau, sang, intestin).\nSchéma attendu : cellule à 2n chromosomes simples, duplication, cellule à chromosomes doubles, séparation, deux cellules à chromosomes simples.\nUne erreur lors de la copie de l'ADN peut produire une mutation, transmise aux cellules issues de la cellule mutée.\nMéthode : observer au microscope une racine d'oignon (zone de croissance) pour repérer les cellules en division."
+    },
+    {
+      "id": "meiose-fecondation-diversite",
+      "titre": "Méiose, fécondation et diversité génétique",
+      "ordre": 3,
+      "periode": "T1",
+      "notions": [
+        "Expliquer que les gamètes ne possèdent qu'un chromosome de chaque paire",
+        "Décrire le rôle de la méiose dans la formation des gamètes",
+        "Expliquer que la répartition aléatoire des chromosomes crée des gamètes tous différents",
+        "Expliquer que la fécondation rétablit le nombre de chromosomes",
+        "Montrer que la reproduction sexuée produit des individus génétiquement uniques",
+        "Utiliser un tableau de croisement pour prévoir les allèles d'un enfant"
+      ],
+      "motsCles": ["gamète", "spermatozoïde", "ovule", "méiose", "fécondation", "cellule-œuf", "23 chromosomes", "brassage", "hasard", "unicité", "tableau de croisement"],
+      "reference": "Les gamètes (spermatozoïdes et ovules) sont produits dans les organes reproducteurs (testicules et ovaires).\nUn gamète humain contient 23 chromosomes : un seul chromosome de chaque paire.\nLa méiose est la division cellulaire qui forme les gamètes ; elle sépare les chromosomes de chaque paire.\nLors de la méiose, la répartition des chromosomes de chaque paire dans les gamètes se fait au hasard.\nAvec 23 paires, un individu peut produire 2²³ (plus de 8 millions) combinaisons différentes de chromosomes dans ses gamètes.\nLes ovules contiennent toujours un chromosome X ; les spermatozoïdes contiennent soit un X, soit un Y : c'est le spermatozoïde qui détermine le sexe.\nLa fécondation est la rencontre et la fusion d'un spermatozoïde et d'un ovule : elle forme la cellule-œuf à 46 chromosomes.\nLa cellule-œuf réunit un chromosome de chaque paire venant du père et un venant de la mère.\nLa rencontre des gamètes se fait au hasard : chaque cellule-œuf possède une combinaison d'allèles nouvelle.\nMéiose et fécondation assurent ainsi à la fois la stabilité du nombre de chromosomes et la diversité génétique.\nChaque individu issu de la reproduction sexuée est génétiquement unique (sauf les vrais jumeaux, issus d'une même cellule-œuf).\nMéthode : dans un tableau de croisement, placer les gamètes possibles du père en colonnes et ceux de la mère en lignes, puis compléter les cases avec les combinaisons d'allèles."
+    },
+    {
+      "id": "parente-classification",
+      "titre": "La parenté des êtres vivants",
+      "ordre": 4,
+      "periode": "T1",
+      "notions": [
+        "Classer les êtres vivants selon les attributs qu'ils partagent",
+        "Construire et lire une classification en groupes emboîtés",
+        "Expliquer que des espèces partageant des attributs ont hérité d'un ancêtre commun",
+        "Lire un arbre de parenté et identifier l'espèce la plus proche d'une autre",
+        "Situer l'espèce humaine parmi les primates",
+        "Utiliser des arguments anatomiques et moléculaires de parenté"
+      ],
+      "motsCles": ["espèce", "attribut", "groupes emboîtés", "classification", "ancêtre commun", "arbre de parenté", "vertébrés", "tétrapodes", "mammifères", "primates", "homologie"],
+      "reference": "Une espèce est un ensemble d'individus qui se ressemblent et peuvent se reproduire entre eux en donnant une descendance fertile.\nLa classification scientifique regroupe les êtres vivants selon les attributs (caractères) qu'ils partagent, et non selon ce qu'ils n'ont pas.\nElle forme des groupes emboîtés : ex. vertébrés (squelette interne avec colonne vertébrale) > tétrapodes (quatre membres) > mammifères (poils, mamelles).\nPartager un attribut signifie avoir hérité de cet attribut d'un ancêtre commun.\nPlus deux espèces partagent d'attributs, plus elles sont apparentées : leur ancêtre commun est plus récent.\nUn arbre de parenté représente ces liens ; chaque nœud figure un ancêtre commun hypothétique.\nL'ancêtre commun n'est jamais une espèce actuelle : l'Homme ne descend pas du chimpanzé, ils ont un ancêtre commun.\nL'espèce humaine (Homo sapiens) appartient aux primates (pouce opposable, ongles plats) ; le chimpanzé est l'espèce actuelle la plus proche.\nArguments de parenté : organes homologues (même plan d'organisation, ex. membre antérieur des tétrapodes), cellules et ADN communs à tous les êtres vivants.\nLa comparaison des séquences d'ADN ou de protéines permet aussi d'établir des liens de parenté : moins il y a de différences, plus la parenté est étroite.\nTous les êtres vivants sont formés de cellules et utilisent l'ADN : ils ont une origine commune.\nMéthode : construire un tableau espèces × attributs, puis tracer les ensembles emboîtés ou l'arbre correspondant."
+    },
+    {
+      "id": "evolution-selection-naturelle",
+      "titre": "L'évolution des êtres vivants",
+      "ordre": 5,
+      "periode": "T2",
+      "notions": [
+        "Savoir que les espèces se modifient au cours du temps et que la biodiversité change",
+        "Expliquer l'apparition de nouveaux allèles par mutation",
+        "Expliquer le mécanisme de la sélection naturelle",
+        "Expliquer le rôle du hasard (dérive génétique) dans l'évolution",
+        "Relier l'évolution à l'apparition et à la disparition d'espèces",
+        "Analyser un exemple de sélection naturelle (phalène du bouleau, résistance aux antibiotiques)"
+      ],
+      "motsCles": ["évolution", "biodiversité", "mutation", "variation", "sélection naturelle", "dérive génétique", "Darwin", "adaptation", "fossile", "extinction", "spéciation"],
+      "reference": "La biodiversité désigne la diversité des écosystèmes, des espèces et des individus au sein des espèces.\nLes fossiles montrent que des espèces ont existé puis disparu et que de nouvelles espèces sont apparues : la biodiversité évolue au cours du temps.\nLes crises biologiques (ex. il y a 66 millions d'années, disparition des dinosaures non aviens) ont fait disparaître brutalement de nombreuses espèces.\nLes mutations, aléatoires, créent de nouveaux allèles : elles sont la source de la diversité génétique.\nLa sélection naturelle (Charles Darwin, De l'origine des espèces, 1859) : dans un milieu donné, les individus porteurs de caractères avantageux survivent et se reproduisent davantage.\nIls transmettent leurs allèles à plus de descendants : la fréquence de ces allèles augmente au fil des générations.\nExemple : la phalène du bouleau en Angleterre, où la forme sombre est devenue majoritaire dans les régions industrielles noircies par la pollution.\nExemple : l'utilisation d'antibiotiques sélectionne les bactéries résistantes.\nLa dérive génétique : dans une petite population, la fréquence des allèles varie aussi au hasard, sans lien avec un avantage.\nLa sélection naturelle ne crée pas les variations : elle trie celles qui existent déjà.\nL'évolution est l'ensemble des transformations des espèces au cours des générations ; une population isolée peut former une nouvelle espèce.\nUn caractère n'apparaît pas « pour » s'adapter : il préexiste par mutation, puis est sélectionné ou non.\nMéthode : pour expliquer une évolution, identifier la variation, la pression du milieu, la survie et la reproduction différentielles, puis la transmission."
+    },
+    {
+      "id": "micro-organismes-hygiene",
+      "titre": "Les micro-organismes et la santé",
+      "ordre": 6,
+      "periode": "T2",
+      "notions": [
+        "Distinguer bactéries et virus et leurs modes de vie",
+        "Savoir que la plupart des micro-organismes sont utiles ou inoffensifs (microbiote)",
+        "Décrire les étapes d'une contamination puis d'une infection",
+        "Expliquer les mesures d'hygiène : asepsie et antisepsie",
+        "Expliquer l'action et les limites des antibiotiques",
+        "Expliquer l'apparition de bactéries résistantes et la nécessité d'un usage raisonné"
+      ],
+      "motsCles": ["micro-organisme", "bactérie", "virus", "pathogène", "microbiote", "contamination", "infection", "asepsie", "antisepsie", "antibiotique", "résistance", "Pasteur"],
+      "reference": "Les micro-organismes sont des êtres vivants microscopiques : bactéries, champignons microscopiques, certains protistes ; les virus en sont rapprochés.\nUne bactérie est une cellule sans noyau (quelques micromètres) qui peut se multiplier rapidement par division dans un milieu favorable.\nUn virus est beaucoup plus petit (environ 0,1 µm), n'est pas une cellule et ne peut se multiplier qu'à l'intérieur d'une cellule qu'il infecte.\nLa plupart des micro-organismes sont inoffensifs ou utiles : le microbiote intestinal (bactéries de l'intestin) aide la digestion et protège contre des pathogènes.\nUn micro-organisme pathogène provoque une maladie.\nContamination : entrée de micro-organismes dans l'organisme (plaie, voies respiratoires, aliments, rapports sexuels, sang).\nInfection : multiplication des micro-organismes dans l'organisme.\nAsepsie : ensemble de mesures empêchant la contamination (stérilisation, port du masque, lavage des mains).\nAntisepsie : destruction des micro-organismes sur les tissus vivants (désinfection d'une plaie avec un antiseptique).\nLes antibiotiques détruisent les bactéries ou bloquent leur multiplication ; ils sont inefficaces contre les virus.\nL'usage excessif ou inadapté des antibiotiques sélectionne des bactéries résistantes : d'où le message « les antibiotiques, c'est pas automatique ».\nLouis Pasteur (XIXe siècle) a montré le rôle des micro-organismes dans les maladies infectieuses ; Alexander Fleming a découvert la pénicilline en 1928.\nLes IST (infections sexuellement transmissibles, ex. VIH) se préviennent par l'usage du préservatif."
+    },
+    {
+      "id": "reactions-immunitaires",
+      "titre": "Les réactions immunitaires",
+      "ordre": 7,
+      "periode": "T2",
+      "notions": [
+        "Décrire la réaction inflammatoire et la phagocytose, réponse rapide et non spécifique",
+        "Savoir que les lymphocytes reconnaissent spécifiquement un antigène",
+        "Expliquer la production d'anticorps par les lymphocytes B",
+        "Expliquer la destruction des cellules infectées par les lymphocytes T",
+        "Expliquer la mémoire immunitaire et la réponse secondaire",
+        "Relier l'affaiblissement du système immunitaire au sida (VIH)"
+      ],
+      "motsCles": ["système immunitaire", "leucocyte", "inflammation", "phagocytose", "phagocyte", "antigène", "lymphocyte B", "anticorps", "lymphocyte T", "complexe immun", "mémoire immunitaire", "séropositivité"],
+      "reference": "Le système immunitaire est l'ensemble des organes (moelle osseuse, thymus, ganglions, rate), des cellules (leucocytes ou globules blancs) et des molécules qui défendent l'organisme.\nRéaction inflammatoire : rougeur, chaleur, gonflement et douleur au point d'infection.\nPhagocytose : des phagocytes (ex. macrophages) englobent, digèrent et détruisent les micro-organismes ; réponse rapide et non spécifique.\nUn antigène est une molécule reconnue comme étrangère par le système immunitaire.\nLes lymphocytes reconnaissent de manière spécifique un antigène donné ; ceux qui le reconnaissent se multiplient (dans les ganglions, qui gonflent).\nLes lymphocytes B produisent des anticorps, molécules spécifiques d'un antigène, libérées dans le sang.\nLes anticorps se fixent sur l'antigène et forment un complexe immun qui neutralise le micro-organisme et facilite sa phagocytose.\nLes lymphocytes T détruisent spécifiquement les cellules infectées par un virus.\nCes réponses spécifiques demandent plusieurs jours à se mettre en place.\nAprès un premier contact, des lymphocytes mémoire persistent : lors d'un second contact, la réponse est plus rapide et plus intense (réponse secondaire).\nLe VIH (virus de l'immunodéficience humaine) infecte certains lymphocytes T ; leur destruction progressive aboutit au sida et aux maladies opportunistes.\nUne personne séropositive possède des anticorps contre un antigène (ex. anti-VIH) dans son sang.\nMéthode : comparer deux courbes de quantité d'anticorps (premier et second contact) en relevant délai et quantité maximale."
+    },
+    {
+      "id": "vaccination",
+      "titre": "La vaccination et l'aide au système immunitaire",
+      "ordre": 8,
+      "periode": "T2",
+      "notions": [
+        "Expliquer le principe de la vaccination et son lien avec la mémoire immunitaire",
+        "Connaître les étapes historiques de la vaccination (Jenner, Pasteur)",
+        "Distinguer vaccination (préventive, durable) et sérothérapie (curative, immédiate)",
+        "Expliquer l'intérêt collectif de la vaccination (couverture vaccinale)",
+        "Interpréter des données épidémiologiques sur une maladie avant et après vaccination",
+        "Argumenter sur la vaccination à partir de faits scientifiques"
+      ],
+      "motsCles": ["vaccin", "vaccination", "mémoire immunitaire", "rappel", "Jenner", "Pasteur", "sérothérapie", "couverture vaccinale", "immunité collective", "épidémie", "antigène atténué"],
+      "reference": "Un vaccin contient un antigène rendu inoffensif : micro-organisme tué ou atténué, fragment ou toxine inactivée (anatoxine), ou ARN messager codant un antigène.\nLa vaccination provoque une première réponse immunitaire sans maladie et la formation de lymphocytes mémoire.\nEn cas de contamination ultérieure, la réponse secondaire rapide et intense empêche la maladie : la vaccination est préventive.\nDes rappels sont parfois nécessaires pour entretenir la mémoire immunitaire.\nEdward Jenner (1796) : inoculation de la variole de la vache (vaccine) pour protéger contre la variole ; origine du mot vaccin.\nLouis Pasteur (1885) : vaccination contre la rage (Joseph Meister).\nLa variole a été déclarée éradiquée par l'OMS en 1980 grâce à la vaccination.\nSérothérapie : injection d'anticorps déjà fabriqués (sérum) ; action immédiate mais temporaire, sans mémoire ; elle est curative (ex. morsure de serpent, tétanos).\nCouverture vaccinale : pourcentage de la population vaccinée.\nImmunité collective : lorsqu'une forte proportion de la population est vaccinée, le micro-organisme circule peu et les personnes non vaccinables sont protégées.\nEn France, 11 vaccins sont obligatoires pour les enfants nés depuis le 1er janvier 2018.\nMéthode : sur un graphique du nombre de cas, repérer la date d'introduction du vaccin et décrire l'évolution avant et après."
+    },
+    {
+      "id": "systeme-nerveux-sante",
+      "titre": "Le système nerveux et les comportements responsables",
+      "ordre": 9,
+      "periode": "T2",
+      "notions": [
+        "Décrire le trajet du message nerveux de l'organe sensoriel à l'organe effecteur",
+        "Savoir que le cerveau est formé de neurones connectés par des synapses",
+        "Expliquer la transmission du message au niveau d'une synapse (neurotransmetteur)",
+        "Expliquer comment certaines substances (alcool, cannabis, nicotine) perturbent le fonctionnement cérébral",
+        "Expliquer les effets du manque de sommeil et des écrans sur l'activité cérébrale",
+        "Argumenter en faveur de comportements responsables"
+      ],
+      "motsCles": ["neurone", "message nerveux", "nerf sensitif", "nerf moteur", "centre nerveux", "synapse", "neurotransmetteur", "plasticité cérébrale", "drogue", "addiction", "sommeil", "temps de réaction"],
+      "reference": "Le système nerveux comprend les centres nerveux (cerveau, moelle épinière) et les nerfs.\nTrajet du message nerveux : organe sensoriel (récepteur) → nerf sensitif → centre nerveux → nerf moteur → organe effecteur (muscle).\nLe message nerveux est de nature électrique le long des neurones.\nUn neurone est une cellule nerveuse formée d'un corps cellulaire, de dendrites et d'un long prolongement, l'axone.\nLe cerveau contient environ 86 milliards de neurones reliés par des synapses.\nAu niveau d'une synapse, le message électrique est converti en message chimique : libération d'un neurotransmetteur qui se fixe sur des récepteurs du neurone suivant.\nPlasticité cérébrale : les connexions entre neurones se modifient avec l'apprentissage et l'entraînement.\nCertaines substances (nicotine, alcool, cannabis) agissent au niveau des synapses : elles imitent ou perturbent l'action des neurotransmetteurs.\nConséquences : allongement du temps de réaction, troubles de la mémoire et de la vigilance, risque d'addiction (dépendance).\nL'alcool est la première cause de mortalité routière ; il est dangereux à tout âge et particulièrement pendant l'adolescence et la grossesse.\nLe sommeil permet la consolidation des apprentissages ; un adolescent a besoin d'environ 8 à 10 heures de sommeil.\nLa lumière des écrans le soir retarde l'endormissement.\nMéthode : interpréter une expérience de mesure du temps de réaction en identifiant le facteur testé et le témoin."
+    },
+    {
+      "id": "meteo-climat",
+      "titre": "Météorologie et climat",
+      "ordre": 10,
+      "periode": "T3",
+      "notions": [
+        "Distinguer météorologie (court terme, local) et climat (moyenne sur au moins 30 ans)",
+        "Expliquer l'inégale répartition de l'énergie solaire selon la latitude",
+        "Relier les mouvements de l'atmosphère et des océans à cette inégale répartition",
+        "Décrire les principales zones climatiques",
+        "Expliquer l'effet de serre naturel",
+        "Savoir que le climat a varié au cours de l'histoire de la Terre"
+      ],
+      "motsCles": ["météorologie", "climat", "température", "précipitations", "latitude", "énergie solaire", "vent", "courants marins", "zones climatiques", "effet de serre", "glaciation"],
+      "reference": "La météorologie étudie le temps qu'il fait en un lieu à un moment donné (température, précipitations, vent, pression) ; les prévisions portent sur quelques jours.\nLe climat est la moyenne des conditions météorologiques d'une région sur une longue période (au moins 30 ans).\nLe Soleil est la principale source d'énergie de la Terre.\nL'énergie solaire reçue est maximale à l'équateur, où les rayons arrivent presque perpendiculairement, et minimale aux pôles, où ils arrivent rasants.\nCette inégale répartition crée des différences de température qui mettent en mouvement l'atmosphère (vents) et les océans (courants marins).\nCes mouvements transportent la chaleur de l'équateur vers les pôles.\nL'air chaud, moins dense, s'élève ; en s'élevant, il se refroidit et la vapeur d'eau se condense en nuages.\nGrandes zones climatiques : chaude (intertropicale), tempérées, froides (polaires).\nL'effet de serre naturel : certains gaz de l'atmosphère (vapeur d'eau, CO₂, méthane) absorbent une partie du rayonnement infrarouge émis par la Terre et la réchauffent.\nSans effet de serre, la température moyenne à la surface de la Terre serait d'environ −18 °C au lieu de +15 °C.\nLe climat a varié au cours des temps géologiques : alternance de périodes glaciaires et interglaciaires (dernier maximum glaciaire il y a environ 20 000 ans).\nIndices des climats passés : fossiles, pollens, bulles d'air piégées dans les glaces polaires.\nMéthode : lire un climatogramme (températures en courbe, précipitations en barres) pour caractériser un climat."
+    },
+    {
+      "id": "changement-climatique",
+      "titre": "Activités humaines et changement climatique",
+      "ordre": 11,
+      "periode": "T3",
+      "notions": [
+        "Savoir que la température moyenne de la Terre augmente rapidement depuis le XIXe siècle",
+        "Relier l'augmentation des gaz à effet de serre aux activités humaines",
+        "Décrire les conséquences du réchauffement climatique (niveau de la mer, glaciers, biodiversité, événements extrêmes)",
+        "Distinguer mesures d'atténuation et d'adaptation",
+        "Exploiter des données du GIEC et des courbes de CO₂",
+        "Argumenter sur des comportements individuels et collectifs responsables"
+      ],
+      "motsCles": ["réchauffement climatique", "gaz à effet de serre", "CO₂", "méthane", "combustibles fossiles", "déforestation", "GIEC", "élévation du niveau de la mer", "atténuation", "adaptation", "accord de Paris"],
+      "reference": "Depuis la révolution industrielle (milieu du XIXe siècle), la température moyenne à la surface de la Terre a augmenté d'environ 1,1 à 1,2 °C.\nLa concentration atmosphérique en CO₂ est passée d'environ 280 ppm avant l'ère industrielle à plus de 420 ppm aujourd'hui.\nPrincipales sources humaines de gaz à effet de serre : combustion des combustibles fossiles (charbon, pétrole, gaz), déforestation, élevage et rizières (méthane), engrais.\nCes gaz renforcent l'effet de serre et provoquent un réchauffement climatique.\nLe GIEC (Groupe d'experts intergouvernemental sur l'évolution du climat, créé en 1988) synthétise les travaux scientifiques : l'influence humaine sur le réchauffement est sans équivoque.\nConséquences : fonte des glaciers et des calottes, élévation du niveau de la mer (dilatation de l'eau et fonte des glaces), vagues de chaleur et sécheresses plus fréquentes, acidification des océans, déplacement ou disparition d'espèces.\nAtténuation : réduire les émissions (énergies renouvelables, sobriété, isolation, transports moins émetteurs, préservation des forêts).\nAdaptation : se préparer aux effets inévitables (digues, cultures adaptées, végétalisation des villes).\nAccord de Paris (2015) : contenir le réchauffement nettement en dessous de 2 °C et poursuivre les efforts pour le limiter à 1,5 °C.\nLe climat change naturellement, mais l'actuel réchauffement est beaucoup plus rapide que les variations naturelles passées.\nMéthode : comparer deux courbes (CO₂ et température) en repérant leur évolution conjointe ; corrélation à appuyer par le mécanisme de l'effet de serre."
+    },
+    {
+      "id": "ressources-naturelles",
+      "titre": "L'exploitation des ressources naturelles",
+      "ordre": 12,
+      "periode": "T3",
+      "notions": [
+        "Distinguer ressources renouvelables et non renouvelables",
+        "Expliquer la formation lente des combustibles fossiles",
+        "Expliquer la gestion de l'eau et des sols comme ressources fragiles",
+        "Évaluer l'impact de l'exploitation des ressources sur l'environnement",
+        "Connaître des solutions pour une gestion durable des ressources",
+        "Comparer différentes sources d'énergie"
+      ],
+      "motsCles": ["ressource naturelle", "renouvelable", "non renouvelable", "combustibles fossiles", "pétrole", "charbon", "énergie solaire", "eau potable", "sol", "érosion", "développement durable", "recyclage"],
+      "reference": "Une ressource naturelle est un élément du milieu exploité par l'être humain : eau, sol, roches, minerais, énergies, êtres vivants.\nUne ressource est renouvelable si elle se reconstitue à l'échelle de la vie humaine (soleil, vent, bois, eau si elle n'est pas surexploitée).\nUne ressource est non renouvelable si sa formation demande des millions d'années (pétrole, gaz, charbon, minerais).\nLe charbon provient de l'accumulation de végétaux dans des marécages ; le pétrole et le gaz proviennent de matière organique (surtout du plancton) enfouie dans des sédiments marins, transformée sous l'effet de la température et de la pression pendant des millions d'années.\nLes réserves de combustibles fossiles sont limitées, et leur combustion libère du CO₂.\nLe sol se forme très lentement (quelques centimètres en plusieurs siècles) à partir de la roche et de la matière organique : il est fragile face à l'érosion, au tassement et à la pollution.\nL'eau douce ne représente qu'environ 2,5 % de l'eau sur Terre, et une petite partie seulement est facilement accessible.\nL'eau potable est obtenue par captage, traitement (filtration, désinfection) puis distribution ; les eaux usées sont épurées en station d'épuration.\nImpacts de l'exploitation : pollutions, destruction de milieux, perte de biodiversité, émissions de gaz à effet de serre.\nGestion durable : économies, recyclage, énergies renouvelables, agriculture préservant les sols.\nLe développement durable répond aux besoins du présent sans compromettre la capacité des générations futures à répondre aux leurs (rapport Brundtland, 1987).\nMéthode : comparer les sources d'énergie selon leur caractère renouvelable, leurs émissions de CO₂ et leurs impacts locaux."
+    },
+    {
+      "id": "ecosystemes-activites-humaines",
+      "titre": "Écosystèmes, biodiversité et activités humaines",
+      "ordre": 13,
+      "periode": "T3",
+      "notions": [
+        "Définir un écosystème (biotope et biocénose) et ses interactions",
+        "Expliquer les services rendus par les écosystèmes",
+        "Identifier les menaces sur la biodiversité liées aux activités humaines",
+        "Évaluer l'impact des pratiques agricoles sur l'environnement",
+        "Expliquer des mesures de protection et de restauration de la biodiversité",
+        "Argumenter sur un choix d'aménagement en tenant compte de l'environnement"
+      ],
+      "motsCles": ["écosystème", "biotope", "biocénose", "réseau trophique", "biodiversité", "services écosystémiques", "pollinisation", "espèce invasive", "pesticide", "agriculture biologique", "aire protégée", "corridor écologique"],
+      "reference": "Un écosystème est l'ensemble formé par un milieu de vie (biotope) et les êtres vivants qui y vivent (biocénose), en interaction.\nLes êtres vivants sont reliés par des relations alimentaires formant des réseaux trophiques : producteurs, consommateurs, décomposeurs.\nServices écosystémiques : bienfaits fournis à l'être humain par les écosystèmes (pollinisation, épuration de l'eau, production de nourriture et de bois, stockage du carbone, régulation du climat).\nPrincipales menaces sur la biodiversité : destruction et fragmentation des habitats, surexploitation (pêche, chasse), pollutions, changement climatique, espèces exotiques envahissantes.\nExemple : le frelon asiatique, introduit en France vers 2004, menace les abeilles.\nL'agriculture intensive augmente les rendements mais utilise engrais et pesticides qui peuvent polluer l'eau et réduire la biodiversité (pollinisateurs).\nL'excès d'engrais (nitrates, phosphates) dans l'eau provoque l'eutrophisation : prolifération d'algues et manque de dioxygène.\nPratiques plus durables : agriculture biologique, lutte biologique (coccinelles contre pucerons), rotation des cultures, haies.\nProtection : aires protégées (parcs nationaux, réserves naturelles), corridors écologiques (trame verte et bleue), réglementation de la chasse et de la pêche.\nRestauration : replantation, renaturation de cours d'eau, réintroduction d'espèces.\nMéthode : pour argumenter sur un aménagement, lister ses avantages pour l'être humain et ses impacts sur l'écosystème, puis proposer des mesures pour éviter, réduire ou compenser ces impacts."
+    }
+  ]
+}

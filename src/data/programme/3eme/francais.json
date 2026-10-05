@@ -1,0 +1,381 @@
+{
+  "classe": "3ème",
+  "matiere": "Français",
+  "programme": "Programme de français du cycle 4 (BO 2015, ajusté en 2020) et repères annuels de progression 2019",
+  "modele": "claude-opus-5-5 (abonnement)",
+  "genereLe": "2026-10-05",
+  "relu": false,
+  "chapitres": [
+    {
+      "id": "se-raconter-se-representer",
+      "titre": "Se raconter, se représenter : l'autobiographie",
+      "ordre": 1,
+      "periode": "T1",
+      "notions": [
+        "Définir l'autobiographie et le pacte autobiographique (auteur = narrateur = personnage)",
+        "Distinguer autobiographie, mémoires, journal intime, autoportrait et autofiction",
+        "Repérer le double point de vue : le narrateur adulte et l'enfant qu'il a été",
+        "Identifier les raisons d'écrire sur soi : se comprendre, se justifier, témoigner, garder une trace",
+        "Analyser le rôle de la mémoire, ses failles et la reconstruction du souvenir",
+        "Rédiger un récit autobiographique à la première personne en alternant passé simple, imparfait et présent d'énonciation"
+      ],
+      "motsCles": [
+        "autobiographie",
+        "pacte autobiographique",
+        "mémoires",
+        "journal intime",
+        "autoportrait",
+        "autofiction",
+        "rétrospectif",
+        "première personne",
+        "souvenir",
+        "Rousseau",
+        "Sarraute",
+        "Perec"
+      ],
+      "reference": "Autobiographie (définition de Philippe Lejeune, Le Pacte autobiographique, 1975) : récit rétrospectif en prose qu'une personne réelle fait de sa propre existence, en mettant l'accent sur sa vie individuelle et l'histoire de sa personnalité.\nPacte autobiographique : engagement de l'auteur à dire la vérité sur lui-même ; il suppose l'identité auteur = narrateur = personnage principal.\nMémoires : récit de sa vie centré sur les événements historiques dont l'auteur a été témoin ou acteur (ex. Chateaubriand, Mémoires d'outre-tombe, publiés en 1849-1850).\nJournal intime : notes datées, écrites au jour le jour, sans recul (ex. Journal d'Anne Frank, écrit de 1942 à 1944).\nAutoportrait : représentation de soi par la peinture ou l'écriture (ex. autoportraits de Rembrandt, de Frida Kahlo).\nAutofiction : terme créé par Serge Doubrovsky (Fils, 1977) pour un récit qui mêle faits réels de la vie de l'auteur et fiction.\nJean-Jacques Rousseau, Les Confessions (rédigées de 1765 à 1770, publiées en 1782 et 1789) : texte fondateur ; préambule « Je forme une entreprise qui n'eut jamais d'exemple ».\nNathalie Sarraute, Enfance (1983) : dialogue entre l'autrice et un double qui la questionne et met en doute ses souvenirs.\nGeorges Perec, W ou le souvenir d'enfance (1975) : alterne fiction et souvenirs ; l'enfance de l'auteur, dont la mère a été déportée, est marquée par les manques de la mémoire.\nDouble point de vue : le narrateur adulte (présent d'énonciation, commentaires, jugements) raconte l'enfant qu'il a été (passé simple et imparfait).\nTemps du récit : passé simple pour les actions de premier plan, imparfait pour les descriptions et habitudes, présent pour les réflexions du narrateur au moment de l'écriture.\nRaisons d'écrire sur soi : se connaître, se justifier, témoigner, rendre hommage, lutter contre l'oubli.\nLimites : la mémoire est sélective et lacunaire ; l'écrivain reconstruit ses souvenirs.\nMéthode d'écriture : raconter un souvenir précis à la première personne, situer le moment, mêler récit, description des sensations et commentaire de l'adulte."
+    },
+    {
+      "id": "phrase-complexe",
+      "titre": "La phrase complexe : juxtaposition, coordination, subordination",
+      "ordre": 2,
+      "periode": "T1",
+      "notions": [
+        "Distinguer phrase simple (un verbe conjugué) et phrase complexe (plusieurs propositions)",
+        "Délimiter les propositions d'une phrase complexe",
+        "Identifier la juxtaposition, la coordination et la subordination",
+        "Reconnaître les principales sortes de subordonnées : relative, conjonctive complétive, circonstancielle, interrogative indirecte",
+        "Identifier l'antécédent et la fonction du pronom relatif dans une subordonnée relative",
+        "Varier la construction des phrases dans ses propres écrits"
+      ],
+      "motsCles": [
+        "proposition",
+        "phrase complexe",
+        "juxtaposition",
+        "coordination",
+        "subordination",
+        "proposition principale",
+        "subordonnée relative",
+        "antécédent",
+        "pronom relatif",
+        "complétive",
+        "conjonction de subordination",
+        "interrogative indirecte"
+      ],
+      "reference": "Phrase simple : contient un seul verbe conjugué, donc une seule proposition. Phrase complexe : contient plusieurs verbes conjugués, donc plusieurs propositions.\nProposition : ensemble de mots organisé autour d'un verbe conjugué.\nJuxtaposition : propositions reliées par un signe de ponctuation (virgule, point-virgule, deux-points). Ex. : « Il pleut, je reste à la maison. »\nCoordination : propositions reliées par une conjonction de coordination (mais, ou, et, donc, or, ni, car) ou un adverbe de liaison (puis, ensuite, pourtant…). Ex. : « Il pleut, donc je reste. »\nSubordination : une proposition subordonnée dépend d'une proposition principale ; elle est introduite par un mot subordonnant.\nSubordonnée relative : introduite par un pronom relatif (qui, que, quoi, dont, où, lequel, auquel, duquel…) ; elle complète un nom ou un pronom appelé antécédent. Ex. : « Le livre que je lis est passionnant. » (antécédent : livre)\nLe pronom relatif a une fonction dans la relative : qui est sujet, que est souvent COD, dont remplace un complément introduit par « de », où est complément de lieu ou de temps.\nSubordonnée conjonctive complétive : introduite par la conjonction « que », souvent COD du verbe principal. Ex. : « Je crois que tu as raison. »\nSubordonnée conjonctive circonstancielle : introduite par une conjonction de subordination (quand, parce que, pour que, bien que, si…) ; elle exprime une circonstance (temps, cause, but…).\nSubordonnée interrogative indirecte : introduite par si ou un mot interrogatif, après un verbe comme demander, savoir, ignorer. Ex. : « Je me demande s'il viendra. »\nAttention : « que » peut être pronom relatif (il a un antécédent) ou conjonction de subordination (il n'a pas d'antécédent).\nMéthode : repérer les verbes conjugués, délimiter les propositions, puis chercher ce qui les relie (ponctuation, conjonction de coordination, mot subordonnant)."
+    },
+    {
+      "id": "accord-du-participe-passe",
+      "titre": "L'accord du participe passé",
+      "ordre": 3,
+      "periode": "T1",
+      "notions": [
+        "Former le participe passé des verbes (terminaisons -é, -i, -u, -s, -t)",
+        "Accorder le participe passé employé sans auxiliaire comme un adjectif",
+        "Accorder le participe passé employé avec être avec le sujet",
+        "Appliquer la règle de l'accord avec avoir : accord avec le COD placé avant le verbe",
+        "Repérer le COD antéposé (pronom personnel, pronom relatif que, interrogation)",
+        "Connaître la règle générale d'accord des verbes pronominaux"
+      ],
+      "motsCles": [
+        "participe passé",
+        "auxiliaire être",
+        "auxiliaire avoir",
+        "sujet",
+        "COD",
+        "COD antéposé",
+        "pronom relatif que",
+        "accord",
+        "verbe pronominal",
+        "temps composé"
+      ],
+      "reference": "Le participe passé sert à former les temps composés (passé composé, plus-que-parfait…) et la voix passive ; il peut aussi être employé seul comme un adjectif.\nTerminaisons : -é pour les verbes du 1er groupe (chanté) ; -i, -u, -s, -t pour les autres (fini, vendu, pris, écrit). Pour trouver la lettre finale muette, mettre au féminin : prise, écrite.\nEmployé sans auxiliaire : il s'accorde en genre et en nombre avec le nom auquel il se rapporte. Ex. : « des fenêtres fermées ».\nAvec l'auxiliaire être : il s'accorde avec le sujet. Ex. : « Elles sont parties. » « La lettre a été envoyée. »\nAvec l'auxiliaire avoir : il ne s'accorde jamais avec le sujet.\nAvec avoir, il s'accorde avec le COD si ce COD est placé avant le verbe. Ex. : « J'ai cueilli des fleurs » (COD après : pas d'accord) ; « Ces fleurs, je les ai cueillies » (COD les placé avant : accord).\nLe COD placé avant est souvent un pronom personnel (le, la, les, l'), le pronom relatif « que » (« Les pommes que j'ai mangées ») ou un groupe interrogatif (« Quelles villes as-tu visitées ? »).\nSi le verbe n'a pas de COD, ou si le COD est placé après, le participe reste invariable : « Elles ont couru. »\nMéthode : 1) repérer l'auxiliaire ; 2) avec être, chercher le sujet ; 3) avec avoir, poser la question « quoi ? » ou « qui ? » après le verbe pour trouver le COD et vérifier sa place.\nVerbes pronominaux (se laver, s'évanouir…) : le participe passé s'accorde le plus souvent avec le sujet. Ex. : « Elle s'est évanouie. »\nExemples : « Les lettres qu'il a écrites » (que = lettres, féminin pluriel, placé avant) ; « Ils ont écrit des lettres » (COD après : invariable).\nException courante : si le pronom réfléchi n'est pas COD, pas d'accord. Ex. : « Elles se sont parlé » (parler à quelqu'un) ; « Elle s'est lavé les mains » (COD : les mains, placé après)."
+    },
+    {
+      "id": "denoncer-les-travers-de-la-societe",
+      "titre": "Dénoncer les travers de la société",
+      "ordre": 4,
+      "periode": "T1",
+      "notions": [
+        "Identifier les cibles d'une dénonciation : injustice, esclavage, misère, intolérance, abus de pouvoir",
+        "Reconnaître les procédés de la satire : ironie, antiphrase, exagération, caricature",
+        "Comprendre le fonctionnement de l'apologue (fable, conte philosophique) et de sa morale",
+        "Étudier des textes du XVIIe au XIXe siècle : La Fontaine, Montesquieu, Voltaire, Hugo, Zola",
+        "Analyser une image satirique (caricature, dessin de presse)",
+        "Distinguer dénonciation directe et dénonciation indirecte"
+      ],
+      "motsCles": [
+        "satire",
+        "ironie",
+        "antiphrase",
+        "caricature",
+        "apologue",
+        "fable",
+        "conte philosophique",
+        "morale",
+        "dénonciation",
+        "registre polémique",
+        "Voltaire",
+        "La Fontaine"
+      ],
+      "reference": "Dénoncer : rendre publique une injustice ou un abus pour la combattre et faire réagir le lecteur.\nSatire : œuvre qui se moque des défauts d'une personne, d'un groupe ou d'une société pour les critiquer.\nIronie : procédé qui consiste à dire le contraire de ce que l'on pense en laissant comprendre sa vraie pensée ; l'antiphrase en est la forme la plus nette.\nCaricature : représentation qui exagère les traits d'une personne pour s'en moquer ; ex. les dessins d'Honoré Daumier au XIXe siècle.\nApologue : court récit qui illustre une leçon morale ; la fable et le conte philosophique sont des apologues.\nLa Fontaine, « Les Animaux malades de la peste » (Fables, livre VII, 1678) : dénonce une justice qui épargne les puissants et condamne les faibles (morale : « Selon que vous serez puissant ou misérable, / Les jugements de cour vous rendront blanc ou noir »).\nMontesquieu, « De l'esclavage des nègres » (De l'esprit des lois, 1748) : dénonciation ironique de l'esclavage en faisant parler un esclavagiste aux arguments absurdes.\nVoltaire, Candide (1759), chapitre 19 : la rencontre de l'esclave de Surinam, mutilé, dénonce l'esclavage (« C'est à ce prix que vous mangez du sucre en Europe »).\nVictor Hugo, « Melancholia » (Les Contemplations, 1856) : dénonce le travail des enfants dans les usines.\nÉmile Zola, « J'accuse…! » (L'Aurore, 13 janvier 1898) : lettre ouverte au président de la République pour défendre le capitaine Dreyfus, injustement condamné.\nDénonciation directe : l'auteur exprime ouvertement son indignation (registre polémique, phrases exclamatives, accusations).\nDénonciation indirecte : l'auteur passe par la fiction, l'humour ou l'ironie, et laisse le lecteur tirer la leçon.\nMéthode d'analyse : identifier la cible, le procédé (ironie, exagération, fiction), puis l'effet recherché sur le lecteur."
+    },
+    {
+      "id": "subordonnees-circonstancielles",
+      "titre": "Les subordonnées circonstancielles",
+      "ordre": 5,
+      "periode": "T1",
+      "notions": [
+        "Reconnaître une subordonnée circonstancielle et sa conjonction de subordination",
+        "Identifier la circonstance exprimée : temps, cause, conséquence, but, concession, condition, comparaison",
+        "Choisir le mode correct (indicatif ou subjonctif) selon la conjonction",
+        "Distinguer cause et conséquence, but et conséquence",
+        "Employer les rapports logiques pour enrichir une argumentation",
+        "Transformer un complément circonstanciel en subordonnée et inversement"
+      ],
+      "motsCles": [
+        "subordonnée circonstancielle",
+        "conjonction de subordination",
+        "temps",
+        "cause",
+        "conséquence",
+        "but",
+        "concession",
+        "opposition",
+        "condition",
+        "comparaison",
+        "subjonctif",
+        "indicatif"
+      ],
+      "reference": "Subordonnée circonstancielle : proposition subordonnée introduite par une conjonction de subordination ; elle a la fonction de complément circonstanciel et peut souvent être déplacée ou supprimée.\nTemps : quand, lorsque, dès que, pendant que, après que (+ indicatif) ; avant que, jusqu'à ce que (+ subjonctif). Ex. : « Quand la cloche sonne, les élèves sortent. »\nCause : parce que, puisque, comme, étant donné que (+ indicatif). Ex. : « Comme il pleuvait, nous sommes restés. »\nConséquence : si bien que, de sorte que, si… que, tellement… que (+ indicatif). Ex. : « Il a tant couru qu'il est épuisé. »\nBut : pour que, afin que, de peur que (+ subjonctif). Ex. : « Je parle fort pour qu'on m'entende. »\nConcession : bien que, quoique (+ subjonctif) ; la subordonnée indique un fait qui aurait dû empêcher l'action principale. Ex. : « Bien qu'il soit malade, il travaille. »\nOpposition : alors que, tandis que (+ indicatif) mettent deux faits en contraste.\nCondition (hypothèse) : si (+ indicatif), à condition que, pourvu que (+ subjonctif). Ex. : « Si tu viens, je serai content. »\nSystème hypothétique : si + présent → futur ; si + imparfait → conditionnel présent ; si + plus-que-parfait → conditionnel passé. On n'emploie jamais le conditionnel après « si ».\nComparaison : comme, ainsi que, de même que, plus… que (+ indicatif ou conditionnel).\nDifférence but / conséquence : le but est un résultat visé (subjonctif), la conséquence un résultat obtenu (indicatif).\nÉquivalences : un complément circonstanciel peut devenir une subordonnée : « À cause de la pluie » → « Parce qu'il pleut ».\nMéthode : repérer la conjonction, se demander quelle circonstance elle exprime, vérifier le mode du verbe."
+    },
+    {
+      "id": "argumenter",
+      "titre": "Argumenter : convaincre et persuader",
+      "ordre": 6,
+      "periode": "T2",
+      "notions": [
+        "Identifier le thème, la thèse défendue et la thèse réfutée",
+        "Distinguer argument et exemple",
+        "Distinguer convaincre (raisonnement) et persuader (émotions)",
+        "Repérer et employer les connecteurs logiques",
+        "Organiser un texte argumentatif en paragraphes",
+        "Pratiquer la concession et la réfutation"
+      ],
+      "motsCles": [
+        "thème",
+        "thèse",
+        "argument",
+        "exemple",
+        "convaincre",
+        "persuader",
+        "connecteur logique",
+        "concession",
+        "réfutation",
+        "paragraphe argumentatif",
+        "point de vue"
+      ],
+      "reference": "Argumenter : défendre une opinion (thèse) en la justifiant par des arguments, pour amener un destinataire à la partager.\nThème : sujet dont on parle. Thèse : opinion défendue sur ce thème. Thèse adverse : opinion que l'on combat.\nArgument : idée générale qui justifie la thèse. Exemple : fait précis, concret, qui illustre l'argument et le rend plus crédible.\nConvaincre : faire appel à la raison du destinataire par un raisonnement logique, des faits, des chiffres.\nPersuader : faire appel aux sentiments du destinataire (émotion, indignation, pitié), par exemple avec des phrases exclamatives, des interpellations, des images fortes.\nConnecteurs d'addition : de plus, en outre, par ailleurs. De cause : car, en effet, parce que. De conséquence : donc, ainsi, c'est pourquoi. D'opposition : mais, cependant, pourtant, en revanche. De conclusion : enfin, en conclusion, finalement.\nConcession : reconnaître une part de vérité dans la thèse adverse avant de la dépasser. Ex. : « Certes, les écrans divertissent, mais ils nuisent au sommeil. »\nRéfutation : montrer qu'un argument adverse est faux ou insuffisant.\nParagraphe argumentatif : un alinéa, un argument annoncé, une explication, un exemple, éventuellement une phrase de bilan.\nTexte argumentatif : introduction (présentation du thème et de la question), développement (paragraphes d'arguments classés du moins fort au plus fort), conclusion (bilan et éventuelle ouverture).\nIndices de l'implication de l'énonciateur : première personne, modalisateurs (sans doute, certainement, il me semble), vocabulaire mélioratif ou péjoratif.\nAu brevet, le sujet de réflexion demande un texte organisé qui s'appuie sur des exemples tirés des lectures, de la culture et de l'expérience."
+    },
+    {
+      "id": "agir-dans-la-cite-individu-et-pouvoir",
+      "titre": "Agir dans la cité : individu et pouvoir",
+      "ordre": 7,
+      "periode": "T2",
+      "notions": [
+        "Découvrir des œuvres liées aux guerres mondiales et aux totalitarismes du XXe siècle",
+        "Comprendre la notion d'engagement de l'écrivain et la poésie de la Résistance",
+        "Distinguer témoignage, récit de fiction et poésie engagée",
+        "Analyser la représentation de la violence de guerre et de la déshumanisation",
+        "Situer les œuvres dans leur contexte historique (1914-1918, Occupation, déportation)",
+        "Réfléchir au rôle de la littérature face au pouvoir et à l'oubli"
+      ],
+      "motsCles": [
+        "engagement",
+        "témoignage",
+        "Résistance",
+        "Grande Guerre",
+        "poilu",
+        "totalitarisme",
+        "déportation",
+        "poésie engagée",
+        "clandestinité",
+        "Éluard",
+        "Primo Levi",
+        "devoir de mémoire"
+      ],
+      "reference": "Le thème invite à lire des œuvres en lien avec l'histoire du XXe siècle et à comprendre comment l'individu se situe face au pouvoir, à la guerre et à l'oppression.\nÉcrivain engagé : auteur qui met son œuvre au service d'une cause (liberté, paix, justice) et prend position dans les débats de son temps.\nHenri Barbusse, Le Feu (1916, prix Goncourt) : journal d'une escouade dans les tranchées de la Première Guerre mondiale.\nRoland Dorgelès, Les Croix de bois (1919) ; Erich Maria Remarque, À l'Ouest rien de nouveau (1929) : la vie et la mort des soldats, du côté français puis allemand.\nPoésie de la Résistance (1940-1944) : publiée clandestinement ou sous pseudonyme, elle appelle à résister et à espérer.\nPaul Éluard, « Liberté » (Poésie et vérité 1942) : poème à l'anaphore « J'écris ton nom », largement diffusé, notamment parachuté par les avions alliés au-dessus de la France.\nVercors, Le Silence de la mer (1942) : récit publié clandestinement aux Éditions de Minuit, la résistance par le silence face à un officier allemand.\nLouis Aragon, « L'Affiche rouge » (1955) : hommage aux résistants étrangers du groupe Manouchian, fusillés en 1944.\nPrimo Levi, Si c'est un homme (1947) : témoignage d'un déporté juif italien à Auschwitz sur la déshumanisation des camps.\nTémoignage : récit à la première personne d'un événement vécu, qui cherche à faire connaître la vérité et à transmettre la mémoire.\nProcédés fréquents : registre pathétique, énumérations, images de la violence, apostrophe au lecteur, anaphores.\nEnjeux : dénoncer la guerre et l'oppression, rendre hommage aux victimes et aux combattants, lutter contre l'oubli (devoir de mémoire)."
+    },
+    {
+      "id": "voix-active-et-voix-passive",
+      "titre": "Voix active et voix passive",
+      "ordre": 8,
+      "periode": "T2",
+      "notions": [
+        "Distinguer voix active et voix passive",
+        "Transformer une phrase active en phrase passive et inversement",
+        "Conjuguer l'auxiliaire être au temps du verbe actif et accorder le participe passé",
+        "Identifier le complément d'agent introduit par « par » ou « de »",
+        "Savoir que seuls les verbes ayant un COD peuvent être mis au passif",
+        "Analyser l'effet de la voix passive : mettre en valeur celui qui subit, taire l'agent"
+      ],
+      "motsCles": [
+        "voix active",
+        "voix passive",
+        "sujet",
+        "complément d'agent",
+        "COD",
+        "auxiliaire être",
+        "participe passé",
+        "transformation passive",
+        "agent",
+        "patient"
+      ],
+      "reference": "Voix active : le sujet fait l'action. Ex. : « Le jury récompense l'élève. »\nVoix passive : le sujet subit l'action. Ex. : « L'élève est récompensé par le jury. »\nTransformation : le COD de la phrase active devient sujet de la phrase passive ; le sujet de la phrase active devient complément d'agent.\nFormation : auxiliaire être conjugué au temps du verbe actif + participe passé du verbe, accordé avec le sujet.\nCorrespondance des temps : « récompense » (présent) → « est récompensé » ; « récompensait » → « était récompensé » ; « a récompensé » (passé composé) → « a été récompensé » ; « récompensera » → « sera récompensé ».\nComplément d'agent : introduit par « par » (le plus souvent) ou « de » (surtout avec des verbes de sentiment ou d'état : « Elle est aimée de tous »).\nLe complément d'agent peut être absent : « La route a été fermée. » On ne sait pas, ou on ne veut pas dire, qui a fait l'action.\nSeuls les verbes transitifs directs (qui ont un COD) peuvent se mettre à la voix passive : « Il parle à son ami » ne peut pas être mis au passif.\nNe pas confondre passif et temps composé avec être : « Il est parti » est un passé composé actif ; « Il est appelé » est un présent passif.\nTest : un verbe au passif peut recevoir un complément d'agent (« Il est appelé par son père »).\nPhrase passive → active : le complément d'agent redevient sujet ; s'il est absent, on prend « on » comme sujet (« La route a été fermée » → « On a fermé la route »).\nIntérêts : mettre en valeur le sujet qui subit, garder l'anonymat de l'agent, varier les phrases ; fréquent dans les articles de presse et les textes scientifiques."
+    },
+    {
+      "id": "modes-et-valeurs-des-temps",
+      "titre": "Modes et valeurs des temps verbaux",
+      "ordre": 9,
+      "periode": "T2",
+      "notions": [
+        "Distinguer modes personnels (indicatif, subjonctif, impératif) et modes impersonnels (infinitif, participe)",
+        "Identifier les valeurs du présent de l'indicatif",
+        "Distinguer les emplois de l'imparfait et du passé simple dans un récit",
+        "Connaître les valeurs du conditionnel : futur dans le passé, hypothèse, politesse, information incertaine",
+        "Employer le subjonctif après les verbes de volonté, de sentiment, de doute et certaines conjonctions",
+        "Conjuguer correctement le subjonctif présent et le conditionnel présent"
+      ],
+      "motsCles": [
+        "mode",
+        "indicatif",
+        "subjonctif",
+        "impératif",
+        "infinitif",
+        "participe",
+        "conditionnel",
+        "présent d'énonciation",
+        "présent de vérité générale",
+        "imparfait",
+        "passé simple",
+        "premier plan"
+      ],
+      "reference": "Le mode indique la manière dont le locuteur envisage l'action ; le temps situe l'action dans le temps.\nModes personnels (variables selon la personne) : indicatif, subjonctif, impératif. Modes impersonnels : infinitif, participe (le gérondif se forme avec en + participe présent).\nLe conditionnel est aujourd'hui rattaché à l'indicatif dans la terminologie grammaticale officielle (2020), mais ses valeurs restent à connaître.\nIndicatif : présente l'action comme réelle. Subjonctif : présente l'action comme envisagée, souhaitée ou redoutée. Impératif : donne un ordre ou un conseil.\nValeurs du présent : d'énonciation (au moment où l'on parle), de vérité générale (« La Terre tourne autour du Soleil »), d'habitude, de narration ou présent historique (rend un récit passé plus vivant), futur ou passé proche.\nImparfait : actions d'arrière-plan, descriptions, habitudes, actions en cours de déroulement.\nPassé simple : actions de premier plan, ponctuelles, successives, qui font avancer le récit.\nConditionnel : futur dans le passé (« Il dit qu'il viendrait »), hypothèse (« Si j'avais le temps, je lirais »), politesse (« Je voudrais un renseignement »), information non confirmée (« Le ministre serait malade »), imaginaire.\nConditionnel présent : radical du futur + terminaisons de l'imparfait (-ais, -ais, -ait, -ions, -iez, -aient). Ne pas confondre « je serai » (futur) et « je serais » (conditionnel).\nSubjonctif présent : terminaisons -e, -es, -e, -ions, -iez, -ent ; s'emploie après « il faut que », les verbes de volonté (vouloir que), de sentiment (craindre que) et des conjonctions comme bien que, pour que, avant que.\nFormes à retenir : que je sois, que j'aie, que je fasse, que je puisse, que je sache, que j'aille.\nMéthode : pour reconnaître le subjonctif, remplacer le verbe par celui d'un verbe comme « faire » : « il faut qu'il fasse »."
+    },
+    {
+      "id": "discours-rapporte",
+      "titre": "Le discours rapporté : direct, indirect, indirect libre",
+      "ordre": 10,
+      "periode": "T2",
+      "notions": [
+        "Reconnaître le discours direct, le discours indirect et le discours indirect libre",
+        "Ponctuer correctement un dialogue au discours direct",
+        "Transposer un discours direct en discours indirect (pronoms, temps, indices de temps et de lieu)",
+        "Appliquer la concordance des temps quand le verbe introducteur est au passé",
+        "Varier les verbes de parole",
+        "Analyser l'effet du discours indirect libre dans un récit"
+      ],
+      "motsCles": [
+        "discours direct",
+        "discours indirect",
+        "discours indirect libre",
+        "verbe introducteur",
+        "verbe de parole",
+        "guillemets",
+        "tiret",
+        "proposition incise",
+        "concordance des temps",
+        "transposition",
+        "subordonnée complétive"
+      ],
+      "reference": "Discours rapporté : façon de rapporter les paroles ou les pensées d'un personnage dans un récit.\nDiscours direct : les paroles sont rapportées telles quelles, entre guillemets, avec des tirets pour les changements d'interlocuteur ; on garde les temps, les pronoms et les indices de l'énonciation. Ex. : Il dit : « Je viendrai demain. »\nLe verbe de parole peut précéder les paroles (suivi de deux-points) ou être placé dans une proposition incise avec sujet inversé : « Je viendrai, dit-il, demain. »\nDiscours indirect : les paroles sont intégrées au récit dans une subordonnée introduite par un verbe de parole ; plus de guillemets. Ex. : Il dit qu'il viendra le lendemain.\nIntroduction au discours indirect : « que » pour une déclaration, « si » pour une question fermée, un mot interrogatif (où, quand, pourquoi, ce que…) pour une question ouverte, « de + infinitif » pour un ordre.\nTranspositions : les pronoms changent (je → il), les indices de temps et de lieu aussi (demain → le lendemain, hier → la veille, aujourd'hui → ce jour-là, ici → là).\nConcordance des temps si le verbe introducteur est au passé : présent → imparfait ; passé composé → plus-que-parfait ; futur → conditionnel présent. Ex. : Il a dit : « Je pars » → Il a dit qu'il partait.\nDiscours indirect libre : les paroles ou pensées sont intégrées au récit sans verbe introducteur ni subordination ; temps et pronoms sont transposés, mais on garde l'expressivité (exclamations, questions). Ex. : Il hésitait. Partirait-il demain ? Quelle folie !\nEffets : le discours direct rend la scène vivante ; le discours indirect résume et accélère le récit ; le discours indirect libre fait entendre la pensée du personnage de l'intérieur.\nDiscours narrativisé : les paroles sont seulement résumées par le narrateur (« Il parla longuement de son voyage »).\nMéthode de transposition : 1) supprimer guillemets et deux-points ; 2) ajouter le mot introducteur ; 3) changer les pronoms ; 4) appliquer la concordance des temps ; 5) adapter les indices de temps et de lieu.\nVerbes de parole variés : affirmer, déclarer, murmurer, s'écrier, répliquer, demander, ordonner, supplier."
+    },
+    {
+      "id": "visions-poetiques-du-monde",
+      "titre": "Visions poétiques du monde",
+      "ordre": 11,
+      "periode": "T3",
+      "notions": [
+        "Comprendre que la poésie propose un regard singulier qui renouvelle la perception du monde",
+        "Connaître les règles de la versification : vers, mètre, rimes, strophes, sonnet",
+        "Distinguer poésie versifiée, vers libre et poème en prose",
+        "Identifier et interpréter les figures de style : comparaison, métaphore, personnification, anaphore, synesthésie",
+        "Étudier des poètes du XIXe et du XXe siècle : Baudelaire, Rimbaud, Apollinaire, Ponge",
+        "Rédiger un texte poétique en travaillant les images et les sonorités"
+      ],
+      "motsCles": [
+        "vers",
+        "alexandrin",
+        "rime",
+        "strophe",
+        "sonnet",
+        "vers libre",
+        "poème en prose",
+        "métaphore",
+        "comparaison",
+        "personnification",
+        "synesthésie",
+        "calligramme"
+      ],
+      "reference": "Le poète propose une vision personnelle du monde : il transforme le regard porté sur la réalité grâce aux images et au travail du langage.\nVers : ligne d'un poème. Mètre : nombre de syllabes ; l'alexandrin compte 12 syllabes, le décasyllabe 10, l'octosyllabe 8. Le « e » muet se prononce devant une consonne, pas devant une voyelle ni en fin de vers.\nRimes : suivies (AABB), croisées (ABAB), embrassées (ABBA).\nStrophe : groupe de vers (quatrain : 4 vers ; tercet : 3 vers). Sonnet : 14 vers répartis en deux quatrains et deux tercets.\nVers libre : vers sans mètre régulier ni rimes obligatoires, fréquent au XXe siècle. Poème en prose : poème sans vers, organisé en paragraphes.\nCharles Baudelaire, Les Fleurs du mal (1857), « Correspondances » : la nature comme « forêt de symboles » ; synesthésie (« Les parfums, les couleurs et les sons se répondent »). Le Spleen de Paris (1869) : poèmes en prose.\nArthur Rimbaud, « Le Dormeur du val » (1870) : sonnet sur un soldat mort, dont la fin révèle la violence de la guerre.\nGuillaume Apollinaire, Calligrammes (1918) : poèmes dont la disposition des mots dessine une image ; Alcools (1913) supprime la ponctuation.\nFrancis Ponge, Le Parti pris des choses (1942) : poèmes en prose qui décrivent des objets ordinaires (l'huître, le cageot) avec un regard neuf.\nComparaison : rapprochement de deux éléments avec un outil (comme, tel, pareil à). Métaphore : rapprochement sans outil de comparaison.\nPersonnification : attribuer des caractéristiques humaines à un animal, un objet ou une idée. Allégorie : représentation concrète d'une idée abstraite.\nAnaphore : répétition d'un mot ou d'un groupe en début de vers ou de phrase. Synesthésie : association de sensations différentes.\nSonorités : allitération (répétition d'un son consonne), assonance (répétition d'un son voyelle).\nMéthode : identifier le thème, la forme, les images et les sonorités, puis dire quelle vision du monde le poème propose."
+    },
+    {
+      "id": "formation-des-mots-et-sens",
+      "titre": "Le lexique : formation des mots et sens",
+      "ordre": 12,
+      "periode": "T3",
+      "notions": [
+        "Décomposer un mot en radical, préfixe et suffixe",
+        "Distinguer dérivation et composition, y compris la composition savante à partir de racines grecques et latines",
+        "Construire et utiliser les familles de mots",
+        "Connaître quelques racines grecques et latines courantes",
+        "Distinguer sens propre et sens figuré, polysémie, synonymie, antonymie",
+        "Ne pas confondre homonymes et paronymes"
+      ],
+      "motsCles": [
+        "radical",
+        "préfixe",
+        "suffixe",
+        "dérivation",
+        "composition",
+        "famille de mots",
+        "étymologie",
+        "racine grecque",
+        "racine latine",
+        "polysémie",
+        "homonyme",
+        "paronyme"
+      ],
+      "reference": "Radical : partie du mot qui porte le sens principal. Préfixe : élément placé avant le radical. Suffixe : élément placé après le radical. Ex. : im-prévis-ible.\nDérivation : formation d'un mot nouveau par ajout d'un préfixe et/ou d'un suffixe à un radical (lire → relire, lisible, illisible).\nComposition : formation d'un mot à partir de deux mots ou plus (porte-monnaie, pomme de terre, chou-fleur).\nComposition savante : formation à partir de racines grecques ou latines (bio-logie, télé-phone, chrono-mètre).\nFamille de mots : ensemble des mots formés sur le même radical (terre, terrain, terrestre, enterrer, atterrir).\nÉtymologie : origine d'un mot ; la plupart des mots français viennent du latin, de nombreux termes savants du grec.\nRacines grecques : bio (vie), chrono (temps), graph (écrire), logie (science, discours), phil (aimer), phone (son, voix), poly (plusieurs), géo (terre), auto (soi-même), télé (loin).\nRacines et préfixes latins : omni (tout), aqua (eau), -vore (qui mange), -cide (qui tue), bene (bien), male (mal).\nPréfixes de sens contraire : in-, im-, il-, ir- (inutile, impossible, illégal, irréel), dé-/dés- (défaire), mal- (malheureux).\nSens propre : sens premier, concret, d'un mot. Sens figuré : sens imagé (« un cœur de pierre »).\nPolysémie : un mot a plusieurs sens selon le contexte (« une feuille d'arbre », « une feuille de papier »).\nSynonymes : mots de sens proche. Antonymes : mots de sens contraire.\nHomonymes : mots qui se prononcent de la même façon mais ont des sens différents (verre, vert, ver, vers). Paronymes : mots de forme proche mais de sens différent (éminent / imminent, effraction / infraction)."
+    },
+    {
+      "id": "progres-et-reves-scientifiques",
+      "titre": "Progrès et rêves scientifiques",
+      "ordre": 13,
+      "periode": "T3",
+      "notions": [
+        "Découvrir des récits d'anticipation et de science-fiction",
+        "Distinguer utopie et dystopie (contre-utopie)",
+        "Comprendre comment la littérature exprime l'enthousiasme et les inquiétudes face au progrès",
+        "Étudier des œuvres de référence : Mary Shelley, Jules Verne, Huxley, Orwell, Bradbury, Barjavel",
+        "Analyser la mise en garde contre les dérives de la science et de la technique",
+        "Débattre des questions éthiques soulevées par le progrès"
+      ],
+      "motsCles": [
+        "progrès",
+        "science-fiction",
+        "anticipation",
+        "utopie",
+        "dystopie",
+        "contre-utopie",
+        "merveilleux scientifique",
+        "éthique",
+        "Jules Verne",
+        "Frankenstein",
+        "Orwell",
+        "Bradbury"
+      ],
+      "reference": "Le thème montre comment la littérature s'empare des avancées scientifiques, entre fascination et inquiétude.\nRécit d'anticipation : récit qui imagine un futur possible à partir des connaissances de son époque.\nScience-fiction : genre qui met en scène des inventions, des mondes ou des technologies imaginaires, souvent pour interroger notre présent.\nUtopie : description d'une société idéale imaginaire ; le mot vient de Thomas More, Utopia (1516).\nDystopie ou contre-utopie : société imaginaire présentée comme idéale mais en réalité oppressive, qui sert d'avertissement.\nMary Shelley, Frankenstein ou le Prométhée moderne (1818) : un savant crée un être vivant puis l'abandonne ; réflexion sur la responsabilité du créateur.\nJules Verne : De la Terre à la Lune (1865), Vingt mille lieues sous les mers (1869-1870) ; romans d'aventures scientifiques, enthousiastes envers le progrès.\nAldous Huxley, Le Meilleur des mondes (1932) : société où les humains sont fabriqués et conditionnés dès la naissance.\nRené Barjavel, Ravage (1943) : une panne d'électricité géante fait s'effondrer une société dépendante de la technique.\nGeorge Orwell, 1984 (1949) : régime totalitaire qui surveille chacun ; « Big Brother vous regarde ».\nRay Bradbury, Fahrenheit 451 (1953) : société où les pompiers brûlent les livres ; 451 °F est présenté comme la température à laquelle le papier s'enflamme.\nEnjeux : enthousiasme pour les découvertes (XIXe siècle) puis méfiance face aux dérives (manipulation, surveillance, perte de liberté, destruction de la nature).\nMéthode d'analyse : repérer les éléments scientifiques ou techniques, le cadre futur, puis la critique de la société que l'auteur propose."
+    }
+  ]
+}

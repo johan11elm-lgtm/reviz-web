@@ -1,0 +1,372 @@
+{
+  "classe": "3ème",
+  "matiere": "Histoire",
+  "programme": "Histoire et EMC cycle 4, classe de 3e (BO n°11 du 26/11/2015, ajusté BO n°31 du 30/07/2020)",
+  "modele": "claude-opus-5-5 (abonnement)",
+  "genereLe": "2026-10-05",
+  "relu": false,
+  "chapitres": [
+    {
+      "id": "premiere-guerre-mondiale",
+      "titre": "Civils et militaires dans la Première Guerre mondiale",
+      "ordre": 1,
+      "periode": "T1",
+      "notions": [
+        "Situer la Première Guerre mondiale (1914-1918) et ses grandes phases",
+        "Décrire l'expérience combattante des soldats, notamment à Verdun",
+        "Expliquer la notion de guerre totale et la mobilisation des civils",
+        "Connaître le génocide des Arméniens (1915) comme violence extrême contre des civils",
+        "Expliquer les révolutions russes de 1917 et leurs conséquences",
+        "Présenter les traités de paix et la nouvelle carte de l'Europe"
+      ],
+      "motsCles": [
+        "guerre totale",
+        "tranchées",
+        "Verdun",
+        "poilu",
+        "mobilisation",
+        "front",
+        "arrière",
+        "génocide",
+        "armistice",
+        "traité de Versailles",
+        "révolution russe"
+      ],
+      "reference": "Déclenchement : assassinat de l'archiduc François-Ferdinand à Sarajevo le 28 juin 1914 ; guerre déclarée début août 1914.\nDeux camps : les Alliés de la Triple-Entente (France, Royaume-Uni, Russie) contre les Empires centraux (Allemagne, Autriche-Hongrie, rejoints par l’Empire ottoman fin 1914).\n1914 : guerre de mouvement (bataille de la Marne, septembre 1914), puis guerre de position dans les tranchées (1915-1917).\nVerdun (février-décembre 1916) : environ 300 000 morts français et allemands ; symbole de la bataille d'usure. La Somme (juillet-novembre 1916).\nExpérience combattante : tranchées, boue, poux, rats, bombardements d'artillerie, gaz (à partir de 1915), assauts meurtriers ; on appelle « poilus » les soldats français.\nGuerre totale : mobilisation de toutes les ressources humaines, économiques, financières et morales d'un pays au service de la guerre.\nÀ l'arrière : économie de guerre, travail des femmes (munitionnettes), emprunts nationaux, propagande, censure ; recours aux troupes et travailleurs coloniaux.\nGénocide des Arméniens (1915-1916) : extermination organisée par le gouvernement Jeune-Turc de l'Empire ottoman ; environ 1,2 à 1,5 million de morts.\nGénocide : destruction volontaire et organisée d'un peuple en raison de sa naissance (terme défini en 1944 par Raphaël Lemkin).\n1917 : entrée en guerre des États-Unis (avril) ; révolutions russes (février puis octobre 1917, prise du pouvoir par les bolcheviks de Lénine) ; mutineries dans l'armée française.\nMars 1918 : traité de Brest-Litovsk, la Russie bolchevique sort de la guerre.\n11 novembre 1918 : armistice signé à Rethondes.\nBilan : environ 10 millions de soldats morts (dont 1,4 million de Français), des millions de blessés et « gueules cassées ».\n28 juin 1919 : traité de Versailles ; l'Allemagne est déclarée responsable de la guerre, perd l'Alsace-Moselle, doit payer des réparations, son armée est limitée.\nDisparition des empires austro-hongrois, ottoman et russe ; naissance de nouveaux États (Pologne, Tchécoslovaquie, Yougoslavie) ; création de la Société des Nations (SDN).\nMéthode attendue : décrire l'expérience combattante à partir d'un témoignage ; expliquer en quoi c'est une guerre totale."
+    },
+    {
+      "id": "democraties-et-totalitarismes",
+      "titre": "Démocraties fragilisées et expériences totalitaires dans l'entre-deux-guerres",
+      "ordre": 2,
+      "periode": "T1",
+      "notions": [
+        "Définir le totalitarisme et en connaître les caractéristiques communes",
+        "Décrire le régime stalinien en URSS (terreur, collectivisation, culte du chef)",
+        "Décrire le régime nazi en Allemagne (arrivée au pouvoir, antisémitisme, embrigadement)",
+        "Expliquer les effets de la crise de 1929 en Europe",
+        "Expliquer la fragilité de la démocratie française et le Front populaire",
+        "Comparer démocratie et régime totalitaire"
+      ],
+      "motsCles": [
+        "totalitarisme",
+        "stalinisme",
+        "nazisme",
+        "fascisme",
+        "Goulag",
+        "collectivisation",
+        "propagande",
+        "crise de 1929",
+        "Front populaire",
+        "lois de Nuremberg",
+        "embrigadement"
+      ],
+      "reference": "Totalitarisme : régime politique dans lequel un parti unique et son chef contrôlent l'État, la société et les individus, par la propagande, l'embrigadement et la terreur, au nom d'une idéologie.\nItalie : Mussolini (fascisme) au pouvoir en 1922 après la Marche sur Rome.\nURSS : Lénine meurt en 1924 ; Staline s'impose à la fin des années 1920.\nStalinisme : collectivisation forcée des terres (kolkhozes, sovkhozes) à partir de 1929, plans quinquennaux, élimination des koulaks, famine en Ukraine (1932-1933).\nTerreur stalinienne : police politique (NKVD), camps du Goulag, Grande Terreur (1936-1938) avec procès truqués et environ 700 000 exécutions ; culte de la personnalité.\nCrise de 1929 : krach boursier de Wall Street (octobre 1929), elle touche l'Europe, provoque chômage de masse et favorise les extrêmes.\nAllemagne : Hitler (parti nazi, NSDAP) est nommé chancelier le 30 janvier 1933 ; il obtient les pleins pouvoirs en mars 1933 et devient Führer en 1934.\nNazisme : idéologie raciste et antisémite fondée sur la supériorité de la prétendue « race aryenne » et la conquête d'un « espace vital ».\nRégime nazi : parti unique, Gestapo, SS, premiers camps de concentration (Dachau, 1933) ; Jeunesses hitlériennes ; propagande de Goebbels.\nPersécution des Juifs : lois de Nuremberg (1935) qui les privent de la citoyenneté ; nuit de Cristal (9-10 novembre 1938).\nFrance : démocratie fragilisée par la crise, l'instabilité gouvernementale et l'émeute des ligues d'extrême droite du 6 février 1934.\nFront populaire : coalition de gauche (SFIO, radicaux, communistes) victorieuse en 1936 ; Léon Blum président du Conseil.\nAccords de Matignon (juin 1936) : hausse des salaires, conventions collectives ; lois sur les congés payés (2 semaines) et la semaine de 40 heures.\nMéthode attendue : comparer deux régimes totalitaires et les opposer à une démocratie."
+    },
+    {
+      "id": "seconde-guerre-mondiale",
+      "titre": "La Deuxième Guerre mondiale, une guerre d'anéantissement",
+      "ordre": 3,
+      "periode": "T1",
+      "notions": [
+        "Connaître les grandes phases de la Seconde Guerre mondiale (1939-1945)",
+        "Expliquer la notion de guerre d'anéantissement",
+        "Décrire le génocide des Juifs et des Tsiganes et ses étapes",
+        "Distinguer camps de concentration et centres de mise à mort",
+        "Expliquer l'implication des civils (bombardements, occupation, massacres)",
+        "Connaître le bilan de la guerre et le procès de Nuremberg"
+      ],
+      "motsCles": [
+        "guerre d'anéantissement",
+        "Blitzkrieg",
+        "Shoah",
+        "génocide",
+        "Einsatzgruppen",
+        "camp d'extermination",
+        "Auschwitz-Birkenau",
+        "Stalingrad",
+        "Pearl Harbor",
+        "bombe atomique",
+        "Nuremberg"
+      ],
+      "reference": "1er septembre 1939 : l'Allemagne envahit la Pologne ; le 3 septembre, la France et le Royaume-Uni lui déclarent la guerre. Pacte germano-soviétique signé en août 1939.\n1939-1941 : victoires de l'Axe par la guerre éclair (Blitzkrieg) ; défaite de la France en juin 1940 ; le Royaume-Uni résiste (bataille d'Angleterre, 1940).\n22 juin 1941 : l'Allemagne attaque l'URSS (opération Barbarossa). 7 décembre 1941 : le Japon attaque Pearl Harbor, les États-Unis entrent en guerre.\nTournant 1942-1943 : Midway (juin 1942), El-Alamein (1942), Stalingrad (capitulation allemande en février 1943).\n6 juin 1944 : débarquement allié en Normandie. 8 mai 1945 : capitulation de l'Allemagne.\nBombes atomiques sur Hiroshima (6 août 1945) et Nagasaki (9 août 1945) ; capitulation du Japon le 2 septembre 1945.\nGuerre d'anéantissement : guerre qui vise à détruire totalement l'adversaire, militaires et civils, pour des raisons idéologiques.\nViolences contre les civils : bombardements de villes (Londres, Dresde, Tokyo), massacres, travail forcé ; massacre d'Oradour-sur-Glane (10 juin 1944).\nShoah : génocide des Juifs d'Europe par les nazis, environ 6 millions de morts. Les Tsiganes sont aussi victimes d'un génocide (plusieurs centaines de milliers de morts).\nÉtapes : ghettos en Pologne ; fusillades massives par les Einsatzgruppen à l'Est à partir de 1941 (« Shoah par balles ») ; conférence de Wannsee (janvier 1942) qui organise la « solution finale ».\nCamps de concentration (Dachau, Buchenwald) : détention et travail forcé des opposants et déportés. Centres de mise à mort (Treblinka, Sobibor, Belzec, Chelmno) : extermination dans des chambres à gaz.\nAuschwitz-Birkenau : à la fois camp de concentration et centre de mise à mort, environ 1,1 million de morts.\nBilan : 50 à 60 millions de morts, dont une majorité de civils ; l'URSS est le pays le plus touché (environ 26 millions de morts).\nProcès de Nuremberg (1945-1946) : jugement des dirigeants nazis ; apparition de la notion de crime contre l'humanité.\nMéthode attendue : expliquer pourquoi c'est une guerre d'anéantissement à partir d'exemples précis."
+    },
+    {
+      "id": "france-defaite-et-occupee",
+      "titre": "La France défaite et occupée : Vichy, collaboration, Résistance",
+      "ordre": 4,
+      "periode": "T1",
+      "notions": [
+        "Expliquer la défaite de 1940 et l'armistice",
+        "Décrire le régime de Vichy et la Révolution nationale",
+        "Expliquer la collaboration d'État et la participation à la Shoah",
+        "Décrire l'appel du 18 juin et la France libre du général de Gaulle",
+        "Présenter les formes de la Résistance intérieure et son unification",
+        "Raconter la Libération de la France"
+      ],
+      "motsCles": [
+        "armistice",
+        "régime de Vichy",
+        "Révolution nationale",
+        "collaboration",
+        "rafle du Vel d'Hiv",
+        "France libre",
+        "Résistance",
+        "CNR",
+        "Jean Moulin",
+        "maquis",
+        "STO",
+        "Libération"
+      ],
+      "reference": "Mai-juin 1940 : offensive allemande, défaite rapide de l'armée française ; exode de millions de civils.\n17 juin 1940 : le maréchal Pétain demande l'armistice, signé le 22 juin 1940 à Rethondes. La France est coupée en une zone occupée au nord et une zone libre au sud (occupée à partir de novembre 1942).\n18 juin 1940 : depuis Londres, le général de Gaulle lance un appel à la BBC à poursuivre le combat ; il fonde la France libre.\n10 juillet 1940 : les parlementaires votent les pleins pouvoirs à Pétain. Fin de la IIIe République ; Pétain devient chef de l'État français, installé à Vichy.\nRégime de Vichy : régime autoritaire, sans élections, culte du chef ; Révolution nationale avec la devise « Travail, Famille, Patrie ».\nAntisémitisme d'État : statuts des Juifs d'octobre 1940 et juin 1941, qui les excluent de nombreuses professions.\nCollaboration d'État : entrevue de Montoire entre Pétain et Hitler (octobre 1940) ; Pierre Laval chef du gouvernement à partir de 1942.\nRafle du Vél d'Hiv (16-17 juillet 1942) : plus de 13 000 Juifs arrêtés à Paris par la police française. Environ 75 000 Juifs sont déportés de France ; très peu reviennent.\nService du travail obligatoire (STO, février 1943) : envoi de jeunes Français travailler en Allemagne ; beaucoup de réfractaires rejoignent les maquis.\nMilice (1943) : force supplétive de Vichy qui traque les résistants.\nRésistance intérieure : réseaux et mouvements (Combat, Libération, Franc-Tireur…), presse clandestine, sabotages, renseignement, maquis.\nJean Moulin, envoyé par de Gaulle, unifie la Résistance : création du Conseil national de la Résistance (CNR) le 27 mai 1943. Il est arrêté en juin 1943 et meurt après avoir été torturé.\nProgramme du CNR (mars 1944) : rétablissement de la démocratie, mesures sociales (Sécurité sociale).\nLibération : débarquements en Normandie (6 juin 1944) et en Provence (15 août 1944) ; libération de Paris le 25 août 1944 avec la 2e DB du général Leclerc.\nLe Gouvernement provisoire de la République française (GPRF) présidé par de Gaulle rétablit la légalité républicaine.\nMéthode attendue : opposer les choix de Vichy et ceux de la Résistance."
+    },
+    {
+      "id": "independances-et-nouveaux-etats",
+      "titre": "Indépendances et construction de nouveaux États",
+      "ordre": 5,
+      "periode": "T2",
+      "notions": [
+        "Définir la décolonisation et en connaître les causes",
+        "Connaître les grandes étapes et les deux vagues de décolonisation",
+        "Étudier l'indépendance de l'Inde (1947)",
+        "Étudier la guerre d'Algérie (1954-1962)",
+        "Expliquer l'affirmation du tiers-monde et du non-alignement (Bandung)",
+        "Comprendre les difficultés des nouveaux États"
+      ],
+      "motsCles": [
+        "décolonisation",
+        "indépendance",
+        "colonie",
+        "guerre d'Algérie",
+        "FLN",
+        "accords d'Évian",
+        "Gandhi",
+        "non-violence",
+        "tiers-monde",
+        "conférence de Bandung",
+        "non-alignement"
+      ],
+      "reference": "Décolonisation : processus par lequel les colonies obtiennent leur indépendance politique.\nCauses : affaiblissement des métropoles après 1945, rôle des soldats coloniaux, montée des nationalismes, soutien de l'ONU, des États-Unis et de l'URSS au droit des peuples à disposer d'eux-mêmes.\nPremière vague en Asie après 1945 : Indonésie (1945-1949), Inde et Pakistan (1947), Indochine.\nInde : le mouvement indépendantiste du Parti du Congrès, mené par Gandhi, prône la non-violence et la désobéissance civile (marche du sel, 1930).\n15 août 1947 : indépendance de l'Inde ; partition entre l'Inde (majorité hindoue) et le Pakistan (majorité musulmane), accompagnée de violences et de millions de déplacés. Nehru devient Premier ministre.\nGuerre d'Indochine (1946-1954) : défaite française à Diên Biên Phu (mai 1954) ; accords de Genève (1954).\nConférence de Bandung (Indonésie, avril 1955) : 29 pays d'Afrique et d'Asie condamnent le colonialisme ; naissance du tiers-monde. Le non-alignement s'affirme ensuite (Belgrade, 1961).\nTiers-monde : expression d'Alfred Sauvy (1952) désignant les pays pauvres, ni alignés sur les États-Unis ni sur l'URSS.\nDeuxième vague en Afrique : indépendance du Maroc et de la Tunisie (1956), du Ghana (1957), de la plupart des colonies françaises d'Afrique subsaharienne en 1960.\nGuerre d'Algérie : commence le 1er novembre 1954 (attentats de la « Toussaint rouge ») menés par le Front de libération nationale (FLN).\nL'Algérie compte environ un million d'Européens (« pieds-noirs »). Envoi du contingent, usage de la torture, attentats, bataille d'Alger (1957).\n1958 : crise du 13 mai à Alger, retour au pouvoir du général de Gaulle.\nAccords d'Évian (18 mars 1962) ; indépendance de l'Algérie le 5 juillet 1962 ; exode des pieds-noirs et des harkis vers la France.\nDifficultés des nouveaux États : pauvreté, frontières héritées de la colonisation, conflits, dépendance économique envers les anciennes métropoles.\nMéthode attendue : raconter les étapes d'une indépendance (Inde ou Algérie)."
+    },
+    {
+      "id": "guerre-froide",
+      "titre": "Un monde bipolaire au temps de la guerre froide",
+      "ordre": 6,
+      "periode": "T2",
+      "notions": [
+        "Définir la guerre froide et le monde bipolaire",
+        "Opposer les modèles américain et soviétique",
+        "Expliquer les crises de Berlin (blocus, mur)",
+        "Expliquer la crise de Cuba et l'équilibre de la terreur",
+        "Connaître les conflits indirects (Corée, Vietnam)",
+        "Expliquer la fin de la guerre froide (1989-1991)"
+      ],
+      "motsCles": [
+        "guerre froide",
+        "bipolaire",
+        "rideau de fer",
+        "doctrine Truman",
+        "plan Marshall",
+        "OTAN",
+        "pacte de Varsovie",
+        "blocus de Berlin",
+        "mur de Berlin",
+        "crise de Cuba",
+        "dissuasion nucléaire",
+        "détente"
+      ],
+      "reference": "Guerre froide (1947-1991) : affrontement idéologique, politique, économique et militaire, sans conflit armé direct, entre les États-Unis et l'URSS et leurs alliés.\nMonde bipolaire : monde organisé autour de deux superpuissances et de leurs blocs.\nModèle américain : démocratie libérale, libertés, économie capitaliste. Modèle soviétique : parti unique communiste, économie planifiée et collectivisée.\n1946 : Churchill dénonce le « rideau de fer » qui coupe l'Europe en deux.\n1947 : doctrine Truman (endiguement du communisme) et plan Marshall (aide économique à l'Europe) ; réponse soviétique : doctrine Jdanov.\nBlocus de Berlin (juin 1948-mai 1949) : l'URSS bloque Berlin-Ouest ; les Américains organisent un pont aérien.\n1949 : création de la RFA et de la RDA ; création de l'OTAN (1949) puis du pacte de Varsovie (1955).\n1949 : l'URSS possède la bombe atomique ; début de l'équilibre de la terreur (dissuasion nucléaire).\nConflits indirects : guerre de Corée (1950-1953), guerre du Vietnam (engagement américain massif de 1965 à 1973).\n13 août 1961 : construction du mur de Berlin par la RDA pour stopper la fuite des Allemands de l'Est.\nCrise de Cuba (octobre 1962) : installation de missiles soviétiques à Cuba ; blocus américain ; Khrouchtchev retire les missiles. Le monde frôle la guerre nucléaire. Ensuite téléphone rouge et détente.\nAnnées 1980 : Gorbatchev (au pouvoir en 1985) lance des réformes (perestroïka, glasnost).\n9 novembre 1989 : chute du mur de Berlin. 3 octobre 1990 : réunification de l'Allemagne.\nDécembre 1991 : dislocation de l'URSS, fin de la guerre froide.\nMéthode attendue : expliquer pourquoi Berlin est un symbole de la guerre froide."
+    },
+    {
+      "id": "projet-europeen",
+      "titre": "Affirmation et mise en œuvre du projet européen",
+      "ordre": 7,
+      "periode": "T2",
+      "notions": [
+        "Expliquer les motivations de la construction européenne après 1945",
+        "Connaître les étapes clés de la CECA à l'Union européenne",
+        "Identifier les élargissements successifs",
+        "Connaître les institutions et les réalisations de l'UE (marché unique, euro, Schengen)",
+        "Comprendre les débats et les difficultés du projet européen"
+      ],
+      "motsCles": [
+        "construction européenne",
+        "CECA",
+        "CEE",
+        "traité de Rome",
+        "Union européenne",
+        "traité de Maastricht",
+        "euro",
+        "espace Schengen",
+        "élargissement",
+        "Parlement européen",
+        "Brexit"
+      ],
+      "reference": "Motivations : garantir la paix après deux guerres mondiales, reconstruire l'économie, faire face au bloc soviétique dans le contexte de la guerre froide.\n9 mai 1950 : déclaration de Robert Schuman, inspirée par Jean Monnet, proposant de mettre en commun le charbon et l'acier.\n1951 : création de la CECA (Communauté européenne du charbon et de l'acier) par six pays : France, RFA, Italie, Belgique, Pays-Bas, Luxembourg.\n25 mars 1957 : traité de Rome créant la CEE (Communauté économique européenne), marché commun entre les Six.\nÉlargissements : 1973 (Royaume-Uni, Irlande, Danemark), 1981 (Grèce), 1986 (Espagne, Portugal), 1995 (Autriche, Finlande, Suède), 2004 (dix pays dont huit d'Europe centrale et orientale), 2007 (Roumanie, Bulgarie), 2013 (Croatie).\n1979 : première élection du Parlement européen au suffrage universel direct.\n1985 : accords de Schengen ; l'espace Schengen permet la libre circulation des personnes sans contrôle aux frontières intérieures.\n1992 : traité de Maastricht qui crée l'Union européenne (UE) et la citoyenneté européenne.\n1993 : marché unique (libre circulation des marchandises, capitaux, services et personnes).\n2002 : mise en circulation des pièces et billets en euro (monnaie créée en 1999).\nInstitutions : Commission européenne (propose et fait appliquer les lois), Parlement européen et Conseil de l'UE (votent les lois), Conseil européen (chefs d'État et de gouvernement), Cour de justice.\nDébats : non au référendum français sur la Constitution européenne (2005), crise de la dette, euroscepticisme.\nBrexit : référendum britannique en 2016 ; le Royaume-Uni quitte l'UE le 31 janvier 2020. L'UE compte alors 27 États membres.\nMéthode attendue : construire une frise des étapes de la construction européenne."
+    },
+    {
+      "id": "monde-apres-1989",
+      "titre": "Enjeux et conflits dans le monde après 1989",
+      "ordre": 8,
+      "periode": "T2",
+      "notions": [
+        "Comprendre le nouvel ordre mondial après la fin de la guerre froide",
+        "Expliquer l'hyperpuissance américaine et ses limites",
+        "Connaître les attentats du 11 septembre 2001 et leurs conséquences",
+        "Identifier de nouvelles formes de conflits (terrorisme, guerres civiles)",
+        "Comprendre l'émergence de nouvelles puissances dans un monde multipolaire",
+        "Étudier un conflit de l'après-guerre froide"
+      ],
+      "motsCles": [
+        "hyperpuissance",
+        "nouvel ordre mondial",
+        "terrorisme",
+        "11 septembre 2001",
+        "Al-Qaïda",
+        "guerre d'Irak",
+        "puissances émergentes",
+        "multipolaire",
+        "ONU",
+        "Daech"
+      ],
+      "reference": "Après la chute de l'URSS (1991), les États-Unis restent la seule superpuissance : on parle d'hyperpuissance.\nGuerre du Golfe (1991) : une coalition internationale mandatée par l'ONU et dirigée par les États-Unis libère le Koweït envahi par l'Irak de Saddam Hussein.\nLe président George H. W. Bush évoque un « nouvel ordre mondial » fondé sur le droit international et l'ONU.\nAnnées 1990 : guerres en ex-Yougoslavie (1991-1999), massacre de Srebrenica (1995) ; génocide des Tutsi au Rwanda (avril-juillet 1994, environ 800 000 morts).\n11 septembre 2001 : attentats terroristes d'Al-Qaïda (dirigé par Oussama Ben Laden) contre le World Trade Center à New York et le Pentagone ; près de 3 000 morts.\nRéponse américaine : guerre en Afghanistan (2001) contre les talibans ; guerre en Irak (2003) lancée sans l'accord de l'ONU, renversement de Saddam Hussein.\nTerrorisme : usage de la violence contre des civils pour créer la peur et atteindre des objectifs politiques.\nDéveloppement du terrorisme islamiste : attentats de Madrid (2004), Londres (2005), Paris (janvier et 13 novembre 2015).\nDaech (État islamique) : organisation terroriste qui contrôle une partie de l'Irak et de la Syrie entre 2014 et 2019.\nNouveaux conflits : surtout des guerres civiles et des conflits asymétriques, à l'intérieur des États, avec de nombreuses victimes civiles et réfugiés.\nÉmergence de nouvelles puissances : Chine, Inde, Brésil, Russie (BRICS) ; le monde devient multipolaire.\nRetour des tensions entre puissances : annexion de la Crimée par la Russie (2014).\nMéthode attendue : présenter un conflit et ses acteurs à l'aide d'une carte."
+    },
+    {
+      "id": "refonder-la-republique-1944-1947",
+      "titre": "1944-1947 : refonder la République, redéfinir la démocratie",
+      "ordre": 9,
+      "periode": "T3",
+      "notions": [
+        "Expliquer le rôle du GPRF et du général de Gaulle à la Libération",
+        "Connaître l'élargissement de la démocratie (droit de vote des femmes)",
+        "Expliquer les grandes réformes sociales et économiques (Sécurité sociale, nationalisations)",
+        "Présenter la naissance de la IVe République",
+        "Comprendre l'épuration et le rétablissement de l'État de droit"
+      ],
+      "motsCles": [
+        "GPRF",
+        "Libération",
+        "programme du CNR",
+        "droit de vote des femmes",
+        "Sécurité sociale",
+        "nationalisations",
+        "État-providence",
+        "IVe République",
+        "Constitution",
+        "épuration",
+        "référendum"
+      ],
+      "reference": "Gouvernement provisoire de la République française (GPRF), créé en juin 1944, dirigé par le général de Gaulle jusqu'en janvier 1946.\nLe GPRF rétablit la légalité républicaine : il déclare nuls les actes du régime de Vichy.\nÉpuration : sanctions contre les collaborateurs ; épuration « sauvage » (exécutions sommaires, femmes tondues) puis épuration légale par des tribunaux. Pétain est condamné à mort en 1945, peine commuée en détention à vie.\nOrdonnance du 21 avril 1944 : les femmes obtiennent le droit de vote et d'éligibilité ; elles votent pour la première fois aux élections municipales du 29 avril 1945.\nRéformes inspirées du programme du CNR : nationalisations (Renault, houillères, banques de dépôt, électricité et gaz avec EDF-GDF en 1946).\nCréation de la Sécurité sociale (ordonnances d'octobre 1945), avec Ambroise Croizat et Pierre Laroque : protection contre la maladie, la vieillesse, les accidents du travail ; allocations familiales.\nÉtat-providence : État qui intervient pour protéger les citoyens contre les risques sociaux.\nCréation des comités d'entreprise (1945) ; création de l'ENA (1945) pour former les hauts fonctionnaires.\nRéférendum d'octobre 1945 : les Français rejettent le retour à la IIIe République et élisent une Assemblée constituante.\nDe Gaulle démissionne en janvier 1946, en désaccord avec les partis qui veulent un régime parlementaire.\nUn premier projet de Constitution est rejeté par référendum en mai 1946 ; un second est adopté le 13 octobre 1946 : naissance de la IVe République.\nIVe République : régime parlementaire où l'Assemblée nationale domine ; son préambule proclame de nouveaux droits (égalité femmes-hommes, droit de grève, droit à la santé).\nMéthode attendue : expliquer en quoi la démocratie est redéfinie et élargie entre 1944 et 1947."
+    },
+    {
+      "id": "cinquieme-republique",
+      "titre": "La Ve République, de la République gaullienne à l'alternance et à la cohabitation",
+      "ordre": 10,
+      "periode": "T3",
+      "notions": [
+        "Expliquer les circonstances de la naissance de la Ve République (1958)",
+        "Décrire les institutions et le rôle central du président",
+        "Connaître la République gaullienne et la crise de mai 1968",
+        "Expliquer l'élection du président au suffrage universel direct (1962)",
+        "Définir et dater l'alternance de 1981",
+        "Définir la cohabitation et en connaître les exemples"
+      ],
+      "motsCles": [
+        "Ve République",
+        "Constitution de 1958",
+        "président de la République",
+        "suffrage universel direct",
+        "référendum",
+        "mai 1968",
+        "alternance",
+        "cohabitation",
+        "Premier ministre",
+        "Parlement",
+        "quinquennat"
+      ],
+      "reference": "Mai 1958 : crise de la guerre d'Algérie ; le général de Gaulle est appelé au pouvoir par le président René Coty et devient président du Conseil en juin 1958.\nConstitution de la Ve République, préparée notamment par Michel Debré, adoptée par référendum le 28 septembre 1958 (environ 80 % de oui), promulguée le 4 octobre 1958.\nElle renforce le pouvoir exécutif : le président nomme le Premier ministre, peut dissoudre l'Assemblée nationale, recourir au référendum (article 11) et dispose de pouvoirs exceptionnels (article 16).\nLe Parlement comprend l'Assemblée nationale et le Sénat ; le gouvernement est responsable devant l'Assemblée nationale.\nCharles de Gaulle est élu président en décembre 1958 (par un collège de grands électeurs).\nRéférendum d'octobre 1962 : le président sera désormais élu au suffrage universel direct ; première élection de ce type en 1965 (de Gaulle réélu face à Mitterrand).\nMai 1968 : révolte étudiante puis grève générale ouvrière ; accords de Grenelle (hausse du SMIG). De Gaulle dissout l'Assemblée ; les gaullistes gagnent les élections de juin 1968.\nDe Gaulle démissionne en avril 1969 après l'échec d'un référendum. Lui succèdent Georges Pompidou (1969-1974) puis Valéry Giscard d'Estaing (1974-1981).\nAlternance : passage du pouvoir d'une majorité politique à une majorité opposée. Mai 1981 : élection de François Mitterrand (socialiste), première alternance de la Ve République.\nRéformes de 1981-1982 : abolition de la peine de mort (1981, Robert Badinter), lois de décentralisation (1982), retraite à 60 ans, 5e semaine de congés payés.\nCohabitation : situation où le président et le Premier ministre appartiennent à des camps politiques opposés.\nTrois cohabitations : 1986-1988 (Mitterrand / Chirac), 1993-1995 (Mitterrand / Balladur), 1997-2002 (Chirac / Jospin).\nQuinquennat : depuis le référendum de 2000, le mandat présidentiel est de 5 ans (au lieu de 7 ans), appliqué à partir de 2002.\nMéthode attendue : expliquer le rôle du président à l'aide d'un schéma des institutions."
+    },
+    {
+      "id": "societe-1950-1980",
+      "titre": "Femmes et hommes dans la société des années 1950 aux années 1980",
+      "ordre": 11,
+      "periode": "T3",
+      "notions": [
+        "Décrire les transformations de la société pendant les Trente Glorieuses",
+        "Expliquer l'évolution de la place des femmes et leurs nouveaux droits",
+        "Connaître les lois de 1965, 1967 et 1975 (loi Veil)",
+        "Comprendre le rôle de l'immigration dans la société française",
+        "Expliquer les nouvelles pratiques culturelles (société de consommation, jeunesse)",
+        "Comprendre les effets de la crise à partir de 1973"
+      ],
+      "motsCles": [
+        "Trente Glorieuses",
+        "société de consommation",
+        "baby-boom",
+        "exode rural",
+        "émancipation",
+        "loi Neuwirth",
+        "loi Veil",
+        "IVG",
+        "immigration",
+        "majorité à 18 ans",
+        "chômage"
+      ],
+      "reference": "Trente Glorieuses (1945-1975 environ) : forte croissance économique, plein emploi et hausse du niveau de vie (expression de Jean Fourastié, 1979).\nBaby-boom (de 1946 au milieu des années 1960) : forte natalité ; la population française passe d'environ 40 millions en 1946 à plus de 50 millions à la fin des années 1960.\nExode rural et urbanisation : construction de grands ensembles et de villes nouvelles ; montée du secteur tertiaire.\nSociété de consommation : diffusion de l'automobile, de la télévision, de l'électroménager ; premier hypermarché Carrefour en 1963.\nImmigration de travail venue d'Europe du Sud (Italie, Espagne, Portugal) puis du Maghreb ; bidonvilles (Nanterre) ; regroupement familial autorisé en 1976.\nJeunesse : culture spécifique (musique yé-yé, rock) ; mai 1968 ; majorité abaissée de 21 à 18 ans en 1974.\nLoi du 13 juillet 1965 : une femme mariée peut travailler et ouvrir un compte bancaire sans l'autorisation de son mari.\nLoi Neuwirth (1967) : autorise la contraception (pilule).\nMouvement de libération des femmes (MLF, 1970) ; manifeste des 343 (1971).\n1970 : l'autorité parentale remplace la puissance paternelle.\nLoi Veil (janvier 1975) : dépénalise l'interruption volontaire de grossesse (IVG) ; défendue par Simone Veil, ministre de la Santé.\nLoi de 1975 : divorce par consentement mutuel. Loi Roudy (1983) : égalité professionnelle entre femmes et hommes.\n1973 : premier choc pétrolier, fin des Trente Glorieuses ; montée du chômage, désindustrialisation.\nMéthode attendue : montrer à l'aide d'exemples datés comment la place des femmes évolue."
+    },
+    {
+      "id": "emc-citoyennete-republique-democratie",
+      "titre": "EMC : Citoyenneté, République et démocratie",
+      "ordre": 12,
+      "periode": "T3",
+      "notions": [
+        "Connaître les valeurs et les symboles de la République française",
+        "Définir la nationalité et la citoyenneté française et européenne",
+        "Connaître les droits et devoirs du citoyen",
+        "Expliquer le fonctionnement de la démocratie représentative et le droit de vote",
+        "Comprendre le rôle de la laïcité et de l'État de droit",
+        "Identifier les formes d'engagement du citoyen"
+      ],
+      "motsCles": [
+        "citoyenneté",
+        "nationalité",
+        "droit de vote",
+        "suffrage universel",
+        "laïcité",
+        "démocratie représentative",
+        "Déclaration des droits de l'homme",
+        "Marianne",
+        "devise",
+        "citoyenneté européenne",
+        "État de droit",
+        "engagement"
+      ],
+      "reference": "Article 1 de la Constitution de 1958 : « La France est une République indivisible, laïque, démocratique et sociale. »\nDevise : « Liberté, Égalité, Fraternité ». Principe : « gouvernement du peuple, par le peuple et pour le peuple ».\nSymboles : drapeau tricolore bleu-blanc-rouge, Marseillaise (hymne national, composée par Rouget de Lisle en 1792), Marianne, 14 juillet (fête nationale).\nNationalité : lien juridique qui rattache une personne à un État. Elle s'acquiert par filiation (droit du sang), par la naissance et la résidence en France (droit du sol) ou par naturalisation.\nCitoyen : personne qui possède la nationalité et des droits civils et politiques ; en France, on vote à partir de 18 ans.\nCitoyenneté européenne (traité de Maastricht, 1992) : tout national d'un État membre est citoyen de l'UE ; il peut voter aux élections municipales et européennes dans son pays de résidence.\nDroits : libertés fondamentales garanties par la Déclaration des droits de l'homme et du citoyen (1789) et le préambule de 1946. Devoirs : respecter la loi, payer l'impôt, participer à la défense.\nDémocratie représentative : les citoyens élisent des représentants (députés, sénateurs, maires…). Démocratie directe : les citoyens décident eux-mêmes, par exemple par référendum.\nSuffrage universel : droit de vote accordé à tous les citoyens majeurs. Le vote est un droit et un devoir civique, mais il n'est pas obligatoire en France ; il est secret.\nSéparation des pouvoirs : législatif (Parlement), exécutif (président et gouvernement), judiciaire (juges).\nÉtat de droit : État dans lequel tous, y compris les gouvernants, sont soumis au droit ; le Conseil constitutionnel contrôle la conformité des lois à la Constitution.\nLaïcité : loi de séparation des Églises et de l'État (9 décembre 1905) ; l'État est neutre, garantit la liberté de conscience et le libre exercice des cultes. Loi de 2004 sur les signes religieux ostensibles à l'école.\nEngagement : vote, adhésion à une association, un syndicat, un parti politique, bénévolat, service civique.\nMéthode attendue : argumenter sur une question de citoyenneté en s'appuyant sur des textes de référence."
+    },
+    {
+      "id": "emc-defense-et-engagement",
+      "titre": "EMC : La Défense nationale et l'engagement",
+      "ordre": 13,
+      "periode": "T3",
+      "notions": [
+        "Connaître les missions de la défense nationale",
+        "Expliquer le parcours de citoyenneté (recensement, JDC)",
+        "Comprendre la notion de défense globale et la dissuasion nucléaire",
+        "Connaître le rôle de la France dans les alliances et opérations extérieures",
+        "Identifier les formes d'engagement au service de la Nation"
+      ],
+      "motsCles": [
+        "défense nationale",
+        "recensement",
+        "Journée défense et citoyenneté",
+        "parcours de citoyenneté",
+        "armée professionnelle",
+        "dissuasion nucléaire",
+        "OTAN",
+        "opérations extérieures",
+        "Service national universel",
+        "réserve"
+      ],
+      "reference": "La défense nationale a pour mission d'assurer la sécurité et l'intégrité du territoire, de protéger la population et les intérêts de la France.\nLe président de la République est le chef des armées (article 15 de la Constitution) ; il décide de l'emploi de l'arme nucléaire.\nArmées : Terre, Marine nationale, Air et Espace ; la Gendarmerie nationale est une force militaire.\nLe service militaire obligatoire est suspendu par la loi de 1997 (décision de Jacques Chirac en 1996) ; l'armée devient professionnelle.\nParcours de citoyenneté : enseignement de défense au collège et au lycée, recensement, Journée défense et citoyenneté (JDC).\nRecensement : obligatoire pour tous les jeunes Français, filles et garçons, entre 16 ans et la fin du 3e mois qui suit ; il se fait à la mairie ou en ligne.\nL'attestation de recensement puis le certificat de participation à la JDC sont nécessaires pour s'inscrire aux examens (baccalauréat, permis de conduire) avant 25 ans ; le recensement permet aussi l'inscription automatique sur les listes électorales à 18 ans.\nDéfense globale : militaire, mais aussi civile et économique (protection face au terrorisme, aux cyberattaques, aux catastrophes).\nDissuasion nucléaire : la France possède l'arme nucléaire depuis 1960 ; elle vise à empêcher toute agression contre ses intérêts vitaux.\nAlliances : la France est membre de l'OTAN (elle a réintégré son commandement intégré en 2009), de l'Union européenne et membre permanent du Conseil de sécurité de l'ONU.\nOpérations extérieures (OPEX) et opérations de maintien de la paix sous mandat de l'ONU ; opération Sentinelle sur le territoire depuis 2015.\nEngagement : réserve opérationnelle, service civique, Service national universel (SNU) lancé en 2019, sapeurs-pompiers volontaires.\nMéthode attendue : expliquer pourquoi la défense est l'affaire de tous les citoyens."
+    }
+  ]
+}

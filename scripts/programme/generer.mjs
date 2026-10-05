@@ -54,7 +54,9 @@ function apiKey() {
   } catch { /* pas de .env.local */ }
   throw new Error('ANTHROPIC_API_KEY introuvable (.env.local ou environnement)')
 }
-const client = new Anthropic({ apiKey: apiKey() })
+// Client créé à la demande : la phase « index » ne demande pas de clé.
+let _client = null
+const client = { beta: { messages: { stream: (...a) => (_client ??= new Anthropic({ apiKey: apiKey() })).beta.messages.stream(...a) } }, messages: { stream: (...a) => (_client ??= new Anthropic({ apiKey: apiKey() })).messages.stream(...a) } }
 
 const log = (...a) => console.log(new Date().toISOString().slice(11, 19), ...a)
 const usage = { input: 0, output: 0, calls: 0 }
