@@ -3,9 +3,11 @@
 // Source unique pour main.jsx (préchauffage du cœur connecté) et App.jsx.
 // -------------------------------------------------------
 
-// Pages servies sans Firebase : l'accueil public (acquisition, SEO brevet)
-// et les pages légales. Tout le reste passe par <AuthShell /> (Firebase Auth).
-const PUBLIC_PATH = /^\/(welcome|legal)(\/|$)/;
+// Pages servies sans Firebase : l'accueil public (acquisition, SEO brevet),
+// les pages légales, l'inscription (ses étapes s'affichent sans Firebase,
+// qui n'arrive qu'à la création du compte), les avis, la page profs et le
+// tutoriel d'installation. Tout le reste passe par <AuthShell /> (Firebase Auth).
+const PUBLIC_PATH = /^\/(welcome|legal|inscription|avis|profs|installer)(\/|$)/;
 
 export function isPublicPath(pathname = '') {
   return PUBLIC_PATH.test(pathname);

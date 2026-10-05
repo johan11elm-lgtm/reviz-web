@@ -4,7 +4,6 @@
 import { createContext, useContext, useEffect, useMemo, useState } from 'react';
 import {
   onAuthStateChanged,
-  createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
   updateProfile,
@@ -14,15 +13,11 @@ import {
   EmailAuthProvider,
   sendPasswordResetEmail,
   sendEmailVerification,
-  GoogleAuthProvider,
-  signInWithPopup,
-  signInWithCredential,
   deleteUser,
 } from 'firebase/auth';
-import { Capacitor } from '@capacitor/core';
 import { auth, db } from '../services/firebaseConfig';
 import { parseLevel, serializeLevel, migrateLegacyClasse, isUnder15 } from '../utils/levels';
-import { createUserProfile } from '../services/userProfileService';
+import { signup as createAccount, loginWithGoogle as signInWithGoogle } from '../services/signupActions';
 import { setActiveUser, pushLessonsToFirestore } from '../services/historyService';
 import { setActiveUser as setRevisionUser, pushRevisionsToFirestore } from '../services/revisionService';
 import { readGuest, startGuest, clearGuest, guestUser, isGuestUid, migrateGuestLocalData } from '../services/guestService';
@@ -83,36 +78,12 @@ export function AuthProvider({ children }) {
   const [levelTick, setLevelTick] = useState(0);
 
   // --- Inscription ---
-  // `level` est un objet { cycle, classe, specialites?, filiere? }
+  // La logique vit dans services/signupActions (chargée en différé par
+  // /inscription, qui s'affiche hors de ce provider). Ici on ne fait que
+  // forcer le re-render avec le displayName mis à jour.
   async function signup(prenom, email, password, level, birthDate = null) {
-    const { user } = await createUserWithEmailAndPassword(auth, email, password);
-    track('compte_cree', { classe: level?.classe });
-    await updateProfile(user, { displayName: prenom });
-    // Envoyer l'email de vérification (fire-and-forget)
-    sendEmailVerification(user).catch(() => {});
-    // Profil persistant dans Firestore — ATTENDU : le gate de consentement
-    // mineur en dépend (birthDate), donc on ne le laisse pas en fire-and-forget.
-    try {
-      await createUserProfile(user.uid, { prenom, email, birthDate, level });
-    } catch { /* best-effort : le profil sera recréé au besoin */ }
-    // Mineur <15 ans : trace de consentement 'pending' posée dès l'inscription,
-    // même si le tunnel est abandonné avant l'étape parent. Le gate bloque déjà
-    // en l'absence de doc ; ceci rend l'attente visible/auditables côté serveur.
-    // L'approbation reste impossible côté client (firestore.rules).
-    if (isUnder15(birthDate)) {
-      try {
-        await setDoc(doc(db, 'users', user.uid, 'parentalConsent', 'consent'), {
-          status: 'pending',
-          createdAt: Date.now(),
-        });
-      } catch { /* best-effort : recréé par /api/send-parental-consent */ }
-    }
-    // Forcer le re-render avec le displayName mis à jour
+    const user = await createAccount(prenom, email, password, level, birthDate);
     setCurrentUser({ ...auth.currentUser });
-    // Niveau scolaire stocké aussi en localStorage (cache lu par le reste de l'app)
-    if (level?.cycle) {
-      localStorage.setItem(`reviz-level-${user.uid}`, serializeLevel(level));
-    }
     return user;
   }
 
@@ -126,39 +97,10 @@ export function AuthProvider({ children }) {
     return signInWithEmailAndPassword(auth, email, password);
   }
 
-  // --- Connexion Google ---
-  // Web : popup Firebase classique. App native (Capacitor) : la popup ne
-  // fonctionne pas dans la WebView — on passe par le SDK Google natif
-  // (@capacitor-firebase/authentication) puis on échange le jeton contre
-  // une session Firebase JS (signInWithCredential) : tout l'aval
-  // (onAuthStateChanged, Firestore, gating) reste identique.
-  async function loginWithGoogle() {
-    if (Capacitor.isNativePlatform()) {
-      const { FirebaseAuthentication } = await import('@capacitor-firebase/authentication');
-      let result;
-      try {
-        result = await FirebaseAuthentication.signInWithGoogle();
-      } catch (err) {
-        // Annulation du sheet natif → même code que la popup web fermée,
-        // déjà ignoré par Connexion/Inscription.
-        const cancelled = /cancel|12501|dismiss/i.test(err?.message ?? '');
-        const e = new Error(err?.message ?? 'Connexion Google impossible');
-        e.code = cancelled ? 'auth/popup-closed-by-user' : 'auth/google-signin-failed';
-        throw e;
-      }
-      const idToken = result?.credential?.idToken;
-      if (!idToken) {
-        const e = new Error('Connexion Google annulée');
-        e.code = 'auth/popup-closed-by-user';
-        throw e;
-      }
-      const credential = GoogleAuthProvider.credential(idToken);
-      const { user } = await signInWithCredential(auth, credential);
-      return user;
-    }
-    const provider = new GoogleAuthProvider();
-    const { user } = await signInWithPopup(auth, provider);
-    return user;
+  // --- Connexion Google (web : popup ; natif : SDK Google) ---
+  // Logique dans services/signupActions, partagée avec /inscription.
+  function loginWithGoogle() {
+    return signInWithGoogle();
   }
 
   // --- Déconnexion ---

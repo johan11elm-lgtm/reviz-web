@@ -2,7 +2,6 @@ import { UsersIcon } from '../components/Icons';
 import { Mascot } from '../components/Mascot';
 import { useState, useMemo, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
 import {
   CYCLES,
   CLASSES_BY_CYCLE,
@@ -11,8 +10,14 @@ import {
   isUnder15,
 } from '../utils/levels';
 import { readGuest } from '../services/guestService';
-import { sendParentalConsent, consentErrorMessage } from '../services/consentService';
 import './Inscription.css';
+
+// Firebase (création de compte, Google, consentement parental) n'est chargé
+// qu'au moment où il sert : la page affiche ses étapes sans lui. Un seul
+// import() → un seul chunk, préchauffé dès que l'élève passe la première
+// étape (intention claire de s'inscrire). Voir services/signupActions.js.
+const loadSignupActions = () => import('../services/signupActions.js');
+const OFFLINE_MESSAGE = 'Connexion impossible. Vérifie ton réseau et réessaie.';
 
 function firebaseErrorFr(code) {
   switch (code) {
@@ -44,8 +49,13 @@ export default function Inscription() {
   const [stepIdx, setStepIdx]             = useState(0);
   const [animDir, setAnimDir]             = useState('in');
 
-  const { signup, loginWithGoogle, refreshGate } = useAuth();
   const navigate                          = useNavigate();
+
+  // Préchauffe le chunk Firebase dès la deuxième étape : d'ici l'étape
+  // « compte », il est là, et « Créer mon compte » ne fait pas attendre.
+  useEffect(() => {
+    if (stepIdx === 1) loadSignupActions().catch(() => {});
+  }, [stepIdx]);
 
   // Construction dynamique de la liste des étapes en fonction du profil.
   const steps = useMemo(() => {
@@ -130,8 +140,11 @@ export default function Inscription() {
     if (stepId === 'account') {
       setLoading(true);
       try {
+        const { signup } = await loadSignupActions();
         await signup(prenom.trim(), email.trim(), password, level, birthDate);
-        await refreshGate?.();
+        // Pas de refreshGate : cette page vit hors du AuthProvider, qui
+        // calcule le gate (profil, consentement) à son montage, après la
+        // navigation — le profil Firestore est déjà écrit à ce moment-là.
         if (isUnder15(birthDate)) {
           goNext();
         } else {
@@ -148,11 +161,13 @@ export default function Inscription() {
     // Étape 'parent' : envoi de la demande de consentement parental
     if (stepId === 'parent') {
       setLoading(true);
+      const actions = await loadSignupActions().catch(() => null);
+      if (!actions) { setError(OFFLINE_MESSAGE); setLoading(false); return; }
       try {
-        await sendParentalConsent(parentEmail.trim(), prenom);
+        await actions.sendParentalConsent(parentEmail.trim(), prenom);
         navigate('/consent-pending', { replace: true, state: { parentEmail: parentEmail.trim() } });
       } catch (err) {
-        setError(consentErrorMessage(err.message));
+        setError(actions.consentErrorMessage(err.message));
       } finally {
         setLoading(false);
       }
@@ -166,6 +181,7 @@ export default function Inscription() {
     setError('');
     setLoading(true);
     try {
+      const { loginWithGoogle } = await loadSignupActions();
       await loginWithGoogle();
       navigate('/');
     } catch (err) {

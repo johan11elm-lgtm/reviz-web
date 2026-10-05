@@ -7,10 +7,11 @@ describe('isPublicPath', () => {
     expect(isPublicPath('/welcome/')).toBe(true)
     expect(isPublicPath('/legal/confidentialite')).toBe(true)
     expect(isPublicPath('/legal')).toBe(true)
+    expect(isPublicPath('/inscription')).toBe(true)
   })
 
   it('envoie tout le reste vers le cœur connecté', () => {
-    for (const p of ['/', '/inscription', '/connexion', '/cours', '/welcomeback', '/legalese', '/profsx', ''])
+    for (const p of ['/', '/connexion', '/cours', '/welcomeback', '/legalese', '/inscriptions', '/profsx', ''])
       expect(isPublicPath(p)).toBe(false)
   })
 })

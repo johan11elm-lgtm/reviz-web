@@ -47,6 +47,16 @@ describe('<App />', () => {
     expect(fb.listeners).toHaveLength(0)
   })
 
+  it('affiche la première étape de /inscription — sans charger Firebase', async () => {
+    window.history.replaceState({}, '', '/inscription')
+    render(<App />)
+    // La page est en chunk à part (lazy) : on attend son premier écran…
+    expect(await screen.findByText('Quel est ton prénom ?')).toBeInTheDocument()
+    // …qui n'a tiré ni AuthContext ni Firebase (chargés à la création du compte).
+    expect(fb.configLoaded).toBe(false)
+    expect(fb.listeners).toHaveLength(0)
+  })
+
   it('charge le cœur connecté (Firebase) hors des pages publiques', async () => {
     window.history.replaceState({}, '', '/connexion')
     render(<App />)

@@ -1,7 +1,7 @@
 // -------------------------------------------------------
 // Réviz — Cœur connecté (tout ce qui a besoin de Firebase)
-// Chargé en différé par App.jsx : les pages publiques (/welcome, /legal)
-// ne tirent ni Firebase ni AuthContext. Voir utils/publicRoutes.js.
+// Chargé en différé par App.jsx : les pages publiques (/welcome, /legal,
+// /inscription) ne tirent ni Firebase ni AuthContext. Voir utils/publicRoutes.js.
 // -------------------------------------------------------
 import { Routes, Route, Navigate } from 'react-router-dom'
 import { useEffect, lazy } from 'react'
@@ -17,7 +17,6 @@ import { SideNav } from './components/SideNav'
 import Home from './pages/Home'
 
 // Pages lazy-loaded
-const Inscription    = lazy(() => import('./pages/Inscription'))
 const Connexion      = lazy(() => import('./pages/Connexion'))
 const Profile        = lazy(() => import('./pages/Profile'))
 const Reglages       = lazy(() => import('./pages/Reglages'))
@@ -67,7 +66,6 @@ function AuthRoutes() {
     <SplashHider />
     <SideNav />
     <Routes>
-      <Route path="/inscription" element={<Inscription />} />
       <Route path="/connexion"   element={<Connexion />} />
       <Route path="/essai"       element={<Essai />} />
       <Route path="/consent-pending" element={<ConsentPending />} />

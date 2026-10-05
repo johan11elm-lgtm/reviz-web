@@ -16,9 +16,12 @@ function ScrollToTop() {
   return null;
 }
 
-// Pages publiques (pas de Firebase nécessaire) — dans le chunk d'entrée.
+// Pages publiques (pas de Firebase nécessaire). Welcome dans le chunk
+// d'entrée ; Legal et Inscription en chunks à part, toujours sans Firebase :
+// l'inscription ne le charge qu'à l'étape « compte » (services/signupActions).
 import Welcome from './pages/Welcome'
-const Legal = lazy(() => import('./pages/Legal'))
+const Legal       = lazy(() => import('./pages/Legal'))
+const Inscription = lazy(() => import('./pages/Inscription'))
 
 // Autres pages publiques (lazy, sans Firebase)
 const Avis           = lazy(() => import('./pages/Avis'))
@@ -57,6 +60,7 @@ export default function App() {
             <Route path="/avis"        element={<><SplashHider /><Avis /></>} />
             <Route path="/profs"       element={<><SplashHider /><Profs /></>} />
             <Route path="/installer"   element={<><SplashHider /><Installer /></>} />
+            <Route path="/inscription" element={<><SplashHider /><Inscription /></>} />
 
             {/* Toutes les autres routes — Firebase via AuthProvider, dans AuthShell */}
             <Route path="/*" element={<AuthShell />} />
