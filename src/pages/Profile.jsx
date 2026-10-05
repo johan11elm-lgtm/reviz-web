@@ -1,4 +1,5 @@
 import { PageIntro } from '../components/PageIntro';
+import { GuestBanner } from '../components/GuestBanner';
 import { UserIcon, FlameIcon, BookIcon, BoltIcon } from '../components/Icons';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -43,7 +44,7 @@ export default function Profile() {
   const [showAllBadges, setShowAllBadges] = useState(false);
   const navigate = useNavigate();
 
-  const { currentUser, getUserLevel, setUserLevel, updateDisplayName } = useAuth();
+  const { currentUser, getUserLevel, setUserLevel, updateDisplayName, isGuest } = useAuth();
   const prenom   = currentUser?.displayName ?? '';
   const userLevel  = getUserLevel();
   const levelLabel = formatLevelLabel(userLevel);
@@ -115,6 +116,7 @@ export default function Profile() {
       />
 
       <div className="pf-content">
+        <GuestBanner />
         {/* Intro façon Home — prénom en titre, niveau · classe, XP, mascotte à droite */}
         <PageIntro
           title={prenom || 'Toi'}
@@ -190,7 +192,7 @@ export default function Profile() {
         <section className="pf-section">
           <h2 className="pf-section-title">Compte</h2>
           <div className="pf-account-list">
-            {ACCOUNT_ITEMS.map(it => (
+            {ACCOUNT_ITEMS.filter(it => !isGuest || it.id === 'reglages').map(it => (
               <button
                 key={it.id}
                 type="button"

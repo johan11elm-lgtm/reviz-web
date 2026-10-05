@@ -1,4 +1,5 @@
 import { PageIntro } from '../components/PageIntro';
+import { GuestBanner } from '../components/GuestBanner';
 import { UserIcon, MailIcon, KeyIcon, BellIcon, MoonIcon, LockIcon, GemIcon, InfoIcon, ScaleIcon, FileTextIcon, ClipboardIcon, LogOutIcon, AlertIcon } from '../components/Icons';
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
@@ -30,7 +31,7 @@ export default function Reglages() {
   const navigate = useNavigate();
   const { theme, setTheme, isDark, toggleTheme } = useTheme();
   const {
-    currentUser, isPremium, logout,
+    currentUser, isPremium, logout, isGuest,
     getUserLevel, setUserLevel, updateDisplayName,
     updateUserEmail, updateUserPassword, deleteAccount,
   } = useAuth();
@@ -205,12 +206,14 @@ export default function Reglages() {
       <div className="rg-content">
         <PageIntro
           title="Réglages"
-          sub="Compte, rappels, apparence, abonnement."
+          sub={isGuest ? 'Rappels, apparence, objectif.' : 'Compte, rappels, apparence, abonnement.'}
           mascot="writing"
           className="rg-intro"
         />
+        <GuestBanner />
 
         {/* ── 1. Compte ── */}
+        {!isGuest && (
         <section className="rg-section">
           <h2 className="rg-section-title">Compte</h2>
           <div className="rv-card rg-card">
@@ -328,6 +331,7 @@ export default function Reglages() {
             )}
           </div>
         </section>
+        )}
 
         {/* ── 2. Notifications ── */}
         <section className="rg-section">
@@ -439,6 +443,7 @@ export default function Reglages() {
         </section>
 
         {/* ── 5. Abonnement ── */}
+        {!isGuest && (
         <section className="rg-section">
           <h2 className="rg-section-title">Abonnement</h2>
           <div className="rv-card rg-card">
@@ -470,6 +475,7 @@ export default function Reglages() {
             {billingError && <p className="rg-error" role="alert">{billingError}</p>}
           </div>
         </section>
+        )}
 
         {/* ── 6. Informations ── */}
         <section className="rg-section">
@@ -522,6 +528,17 @@ export default function Reglages() {
         </section>
 
         {/* ── 7. Déconnexion + zone de danger ── */}
+        {isGuest ? (
+          <section className="rg-section">
+            <button
+              type="button"
+              className="rv-btn-cta rv-btn-cta--ghost rv-btn-cta--full rg-logout"
+              onClick={handleLogout}
+            >
+              <LogOutIcon /> Quitter le mode essai
+            </button>
+          </section>
+        ) : (
         <section className="rg-section">
           <button
             type="button"
@@ -602,6 +619,7 @@ export default function Reglages() {
             )}
           </div>
         </section>
+        )}
 
       </div>
     </div>

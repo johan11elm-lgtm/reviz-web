@@ -45,6 +45,9 @@ const FinishSetup    = lazy(() => import('./pages/FinishSetup'))
 const NotFound       = lazy(() => import('./pages/NotFound'))
 const UpgradeSuccess = lazy(() => import('./pages/UpgradeSuccess'))
 const Coach          = lazy(() => import('./pages/Coach'))
+const Programme      = lazy(() => import('./pages/Programme'))
+const ProgrammeMatiere = lazy(() => import('./pages/ProgrammeMatiere'))
+const Essai          = lazy(() => import('./pages/Essai'))
 
 // Fallback minimal pendant le chargement
 function LoadingFallback() {
@@ -72,6 +75,7 @@ function AuthRoutes() {
     <Routes>
       <Route path="/inscription" element={<Inscription />} />
       <Route path="/connexion"   element={<Connexion />} />
+      <Route path="/essai"       element={<Essai />} />
       <Route path="/consent-pending" element={<ConsentPending />} />
       <Route path="/finish-setup" element={<FinishSetup />} />
       <Route path="/verify-email" element={<PrivateRoute><VerifyEmail /></PrivateRoute>} />
@@ -89,6 +93,8 @@ function AuthRoutes() {
       <Route path="/mindmap"     element={<PrivateRoute><Mindmap /></PrivateRoute>} />
       <Route path="/upgrade-success" element={<PrivateRoute><UpgradeSuccess /></PrivateRoute>} />
       <Route path="/coach"       element={<PrivateRoute><Coach /></PrivateRoute>} />
+      <Route path="/programme"   element={<PrivateRoute><Programme /></PrivateRoute>} />
+      <Route path="/programme/:matiere" element={<PrivateRoute><ProgrammeMatiere /></PrivateRoute>} />
       <Route path="*"            element={<NotFound />} />
     </Routes>
     </>

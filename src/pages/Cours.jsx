@@ -2,6 +2,7 @@ import { PageIntro } from '../components/PageIntro';
 import { SearchIcon, FlameIcon, FlashcardsIcon, QuizIcon, BookOpenIcon } from '../components/Icons';
 import { useState, useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 import { BottomNav } from '../components/BottomNav';
 import { ConfirmModal } from '../components/ConfirmModal';
 import { PageHeader } from '../components/PageHeader';
@@ -52,6 +53,7 @@ export default function Cours() {
   const [lessonToDelete, setLessonToDelete] = useState(null);
   const [isSyncing, setIsSyncing]           = useState(true);
   const navigate = useNavigate();
+  const { isGuest } = useAuth();
 
   useEffect(() => {
     syncFromFirestore()
@@ -138,6 +140,15 @@ export default function Cours() {
 
       {/* Contenu défilant — seul PageIntro (titre + mascotte) reste fixe */}
       <div className="content cours-content">
+        {/* Réviser sans scan : raccourci vers les chapitres du programme */}
+        {hasLessons && !showSkeleton && (
+          <button type="button" className="rv-card rv-card--link rv-card--tight cours-programme-link" onClick={() => navigate('/programme')}>
+            <Mascot pose="reading" size={36} alt="" aria-hidden="true" />
+            <span className="cours-programme-link-text"><b>Mon programme</b> · révise chapitre par chapitre</span>
+            <span className="cours-programme-link-arrow" aria-hidden="true">›</span>
+          </button>
+        )}
+
         {/* Search */}
         {!showSkeleton && (
         <div className="cours-search-wrap">
@@ -263,24 +274,36 @@ export default function Cours() {
                 ? 'Aucun résultat'
                 : hasLessons
                   ? 'Rien dans cette matière'
-                  : 'Allez, on scanne ?'}
+                  : isGuest
+                    ? 'Tes chapitres apparaîtront ici'
+                    : 'Allez, on scanne ?'}
             </h2>
             <div className="rv-speech-bubble rv-speech-bubble--pointer-top-center cours-empty-bubble">
               {q
                 ? "Essaie un autre mot-clé — ou efface la recherche."
                 : hasLessons
                   ? "Choisis une autre matière, je suis prêt·e."
-                  : "Ta première leçon est à un scan d'ici. Je m'occupe du reste."}
+                  : isGuest
+                    ? "Ouvre un chapitre de ton programme : il s'ajoute ici avec ta progression."
+                    : "Ta première leçon est à un scan d'ici. Je m'occupe du reste."}
             </div>
             {!hasLessons && (
-              <button
-                type="button"
-                className="rv-btn-cta"
-                onClick={() => navigate('/scan')}
-              >
-                <span>Scanner une leçon</span>
-                <span className="rv-btn-cta-arrow" aria-hidden="true">→</span>
-              </button>
+              <div className="cours-empty-actions">
+                {!isGuest && (
+                  <button type="button" className="rv-btn-cta" onClick={() => navigate('/scan')}>
+                    <span>Scanner une leçon</span>
+                    <span className="rv-btn-cta-arrow" aria-hidden="true">→</span>
+                  </button>
+                )}
+                <button
+                  type="button"
+                  className={`rv-btn-cta${isGuest ? '' : ' rv-btn-cta--ghost'}`}
+                  onClick={() => navigate('/programme')}
+                >
+                  <span>Réviser mon programme</span>
+                  {isGuest && <span className="rv-btn-cta-arrow" aria-hidden="true">→</span>}
+                </button>
+              </div>
             )}
           </div>
         ) : (

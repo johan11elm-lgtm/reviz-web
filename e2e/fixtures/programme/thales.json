@@ -1,0 +1,45 @@
+{
+  "metadata": {
+    "title": "Le théorème de Thalès",
+    "subject": "Maths",
+    "excerpt": "Quand deux droites parallèles coupent deux droites sécantes, les longueurs des triangles formés sont proportionnelles."
+  },
+  "flashcards": [
+    { "front": "Que faut-il pour appliquer le théorème de Thalès ?", "back": "Deux droites sécantes en A, coupées par deux droites parallèles (MN) et (BC), avec M sur (AB) et N sur (AC)." },
+    { "front": "Quelle égalité donne le théorème de Thalès ?", "back": "AM/AB = AN/AC = MN/BC." },
+    { "front": "À quoi sert la réciproque du théorème de Thalès ?", "back": "À prouver que deux droites sont parallèles, quand les points sont alignés dans le même ordre et que AM/AB = AN/AC." },
+    { "front": "Que calcule-t-on avec le produit en croix dans Thalès ?", "back": "Une longueur manquante : si AM/AB = MN/BC, alors MN = AM × BC ÷ AB." },
+    { "front": "Qu'est-ce qu'un agrandissement de rapport k ?", "back": "Une figure dont toutes les longueurs sont multipliées par k (k > 1) ; les angles sont conservés." },
+    { "front": "Dans un agrandissement de rapport k, l'aire est multipliée par…", "back": "k², et le volume par k³." }
+  ],
+  "quiz": [
+    { "question": "Que faut-il pour appliquer le théorème de Thalès ?", "choices": ["Un triangle rectangle", "Deux droites parallèles coupant deux droites sécantes", "Un cercle", "Deux angles droits"], "correct": 1, "explanation": "Thalès demande deux sécantes et deux parallèles ; le triangle rectangle, c'est Pythagore." },
+    { "question": "Si AM = 3, AB = 6 et BC = 8, que vaut MN ?", "choices": ["4", "6", "16", "2"], "correct": 0, "explanation": "MN = AM × BC ÷ AB = 3 × 8 ÷ 6 = 4." },
+    { "question": "La réciproque de Thalès permet de prouver que…", "choices": ["un triangle est rectangle", "deux droites sont parallèles", "deux longueurs sont égales", "un angle mesure 90°"], "correct": 1, "explanation": "Si les rapports sont égaux et les points dans le même ordre, les droites sont parallèles." },
+    { "question": "Dans une réduction de rapport 1/2, l'aire est multipliée par…", "choices": ["1/2", "1/4", "2", "1/8"], "correct": 1, "explanation": "L'aire est multipliée par k² = (1/2)² = 1/4." },
+    { "question": "AM/AB = AN/AC = 2/3 et MN = 4. Que vaut BC ?", "choices": ["6", "8/3", "2", "12"], "correct": 0, "explanation": "MN/BC = 2/3 donc BC = 4 × 3 ÷ 2 = 6." }
+  ],
+  "resume": {
+    "intro": "Le théorème de Thalès relie les longueurs de deux triangles emboîtés formés par des droites parallèles.",
+    "keyPoints": ["Deux sécantes + deux parallèles → longueurs proportionnelles", "AM/AB = AN/AC = MN/BC", "La réciproque prouve un parallélisme", "Agrandissement de rapport k : aire × k², volume × k³"],
+    "sections": [
+      { "title": "1. L'énoncé", "content": "Si M est sur (AB), N sur (AC) et (MN) parallèle à (BC), alors AM/AB = AN/AC = MN/BC. On calcule une longueur manquante par un produit en croix.", "formula": "AM/AB = AN/AC = MN/BC", "formulaCaption": "Égalité des rapports de Thalès" },
+      { "title": "2. La réciproque", "content": "Si les points A, M, B et A, N, C sont alignés dans le même ordre et que AM/AB = AN/AC, alors (MN) et (BC) sont parallèles.", "formula": null, "formulaCaption": null },
+      { "title": "3. Agrandissement et réduction", "content": "Multiplier toutes les longueurs par k conserve les angles ; l'aire est multipliée par k² et le volume par k³.", "formula": null, "formulaCaption": null }
+    ],
+    "keyTerms": [
+      { "term": "Sécantes", "def": "Deux droites qui se coupent en un point." },
+      { "term": "Rapport", "def": "Quotient de deux longueurs, comme AM/AB." },
+      { "term": "Réciproque", "def": "Énoncé qui échange hypothèse et conclusion." }
+    ]
+  },
+  "mindmap": {
+    "branches": [
+      { "id": "configuration", "label": "Configuration", "emoji": "📐", "detail": "Deux sécantes coupées par deux parallèles.", "children": ["Point A commun", "(MN) ∥ (BC)"], "position": "top-left" },
+      { "id": "egalite", "label": "Égalité", "emoji": "🟰", "detail": "Les rapports de longueurs sont égaux.", "children": ["AM/AB", "AN/AC", "MN/BC"], "position": "top-right" },
+      { "id": "reciproque", "label": "Réciproque", "emoji": "↔️", "detail": "Rapports égaux et même ordre → parallèles.", "children": ["Même ordre", "Produit en croix"], "position": "bottom-left" },
+      { "id": "agrandissement", "label": "Agrandissement", "emoji": "🔍", "detail": "Rapport k pour les longueurs.", "children": ["Aire × k²", "Volume × k³"], "position": "bottom-right" }
+    ]
+  },
+  "programme": { "classe": "3ème", "matiere": "Maths", "chapitreId": "theoreme-de-thales", "modele": "fixture e2e", "genereLe": "2026-10-05" }
+}

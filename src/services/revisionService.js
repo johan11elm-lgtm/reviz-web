@@ -4,6 +4,7 @@
 import { db } from './firebaseConfig'
 import { doc, setDoc, collection, getDocs, query, orderBy } from 'firebase/firestore'
 import { updateChallengeProgress } from './challengeService'
+import { isGuestUid } from './guestService'
 
 let _uid = null
 const MAX_REVISIONS = 500
@@ -19,6 +20,17 @@ function getMondayOfWeek() {
 export function setActiveUser(uid) { _uid = uid }
 
 const getKey = () => _uid ? `reviz-revisions-${_uid}` : 'reviz-revisions'
+// Firestore uniquement pour un vrai compte : en mode essai, tout reste local.
+const canSync = () => !!_uid && !isGuestUid(_uid)
+
+// Écritures en vol attendues avant une synchronisation (voir historyService).
+const _pending = new Set()
+function track(promise) {
+  const p = promise.catch(err => console.warn('[Réviz] Firestore recordRevision error', err))
+  _pending.add(p)
+  p.finally(() => _pending.delete(p))
+  return p
+}
 
 /**
  * Enregistre une session de révision (ouverture d'un format).
@@ -42,9 +54,8 @@ export function recordRevision(type) {
   updateChallengeProgress(type, { dailyCount: todayRevisions, formatsUsed });
 
   // Firestore write-through (fire-and-forget)
-  if (_uid) {
-    setDoc(doc(db, 'users', _uid, 'revisions', entry.id), entry)
-      .catch(err => console.warn('[Réviz] Firestore recordRevision error', err))
+  if (canSync()) {
+    track(setDoc(doc(db, 'users', _uid, 'revisions', entry.id), entry))
   }
 }
 
@@ -61,8 +72,9 @@ export function loadRevisions() {
  * Retourne le tableau de révisions (fallback localStorage en cas d'erreur).
  */
 export async function syncRevisionsFromFirestore() {
-  if (!_uid) return loadRevisions()
+  if (!canSync()) return loadRevisions()
   try {
+    await Promise.all([..._pending])
     const q = query(
       collection(db, 'users', _uid, 'revisions'),
       orderBy('revisedAt', 'desc')
@@ -75,4 +87,17 @@ export async function syncRevisionsFromFirestore() {
     console.warn('[Réviz] Firestore syncRevisionsFromFirestore error', err)
     return loadRevisions()  // fallback offline
   }
+}
+
+/**
+ * Envoie à Firestore des révisions déjà présentes en local (reprise d'une
+ * session d'essai au moment de l'inscription). Fire-and-forget.
+ */
+export function pushRevisionsToFirestore(entries) {
+  if (!canSync() || !Array.isArray(entries)) return
+  entries.forEach(entry => {
+    if (!entry?.id) return
+    setDoc(doc(db, 'users', _uid, 'revisions', entry.id), entry)
+      .catch(err => console.warn('[Réviz] Firestore pushRevisions error', err))
+  })
 }

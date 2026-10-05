@@ -60,6 +60,9 @@ export default function Welcome() {
               Commencer gratuitement
               <span className="rv-btn-cta-arrow" aria-hidden="true">→</span>
             </Link>
+            <Link to="/essai" className="rv-btn-cta rv-btn-cta--ghost rv-btn-cta--full wlc-cta-btn">
+              Essayer sans compte
+            </Link>
             <p className="wlc-hint">Aucune carte bancaire · Gratuit pour commencer</p>
           </section>
 
@@ -114,6 +117,9 @@ export default function Welcome() {
             </Link>
             <Link to="/connexion" className="rv-btn-cta rv-btn-cta--ghost rv-btn-cta--full wlc-cta-btn">
               J'ai déjà un compte
+            </Link>
+            <Link to="/essai" className="rv-btn-cta rv-btn-cta--ghost rv-btn-cta--full wlc-cta-btn">
+              Essayer sans compte
             </Link>
           </section>
 

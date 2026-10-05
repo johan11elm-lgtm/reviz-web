@@ -8,6 +8,7 @@ import { PageIntro } from '../components/PageIntro';
 import { Mascot } from '../components/Mascot';
 import { analyseLesson, analyseImage, popPendingAnalysis } from '../services/aiService';
 import { LESSON_TEXT_MAX_LABEL } from '../utils/lessonText';
+import { isProgrammeLessonId } from '../utils/programme';
 import { saveLesson } from '../services/historyService';
 import { PremiumModal } from '../components/PremiumModal';
 import { MissingLessonState } from '../components/MissingLessonState';
@@ -73,7 +74,7 @@ export default function Analyse() {
   const [showPremium, setShowPremium] = useState(false);
   const [noLesson, setNoLesson]       = useState(false);
   const navigate   = useNavigate();
-  const { getUserLevel } = useAuth();
+  const { getUserLevel, isGuest } = useAuth();
   const userLevel  = getUserLevel();
   const calledRef  = useRef(false);
 
@@ -162,6 +163,8 @@ export default function Analyse() {
   // Id de la leçon courante — posé par saveLesson() / restoreLesson().
   // Absent sur le mock dev : le coach n'a alors pas de contexte serveur.
   const coachLessonId = localStorage.getItem('reviz-current-lesson-id');
+  // Chapitre du programme (pas de scan) : textes adaptés.
+  const fromProgramme = isProgrammeLessonId(coachLessonId);
 
   const errorMessages = {
     NON_SCOLAIRE:    { title: "Ça n'a pas l'air d'une leçon", sub: "Réviz ne marche qu'avec des cours et des leçons. Scanne une vraie leçon pour lancer ta séance." },
@@ -277,14 +280,14 @@ export default function Analyse() {
         {/* Résumé / excerpt */}
         {displayLesson.excerpt && (
           <div className="rv-card rv-card--padded analyse-excerpt-card">
-            <div className="analyse-excerpt-label">Résumé détecté</div>
+            <div className="analyse-excerpt-label">{fromProgramme ? "L'essentiel du chapitre" : 'Résumé détecté'}</div>
             <p className="analyse-excerpt-text">{displayLesson.excerpt}</p>
           </div>
         )}
 
         {/* Coach de révision — chat contextuel sur la leçon (Firestore requis
             pour le contexte serveur → pas de coach sur le mock dev sans id). */}
-        {lesson && coachLessonId && (
+        {lesson && coachLessonId && !isGuest && (
           <CoachEntryCard onClick={() => navigate(`/coach?lesson=${coachLessonId}`)} />
         )}
 

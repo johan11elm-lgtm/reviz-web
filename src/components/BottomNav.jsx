@@ -95,9 +95,10 @@ export function BottomNav() {
           key={tab.to}
           to={tab.to}
           end={tab.to === '/'}
-          // Une leçon vit dans « Mes cours » : /analyse allume l'onglet Cours.
+          // Une leçon vit dans « Mes cours » : /analyse et « Mon programme »
+          // allument l'onglet Cours.
           className={({ isActive }) => {
-            const active = isActive || (tab.to === '/cours' && pathname === '/analyse');
+            const active = isActive || (tab.to === '/cours' && (pathname === '/analyse' || pathname.startsWith('/programme')));
             return `nav-item${active ? ' active' : ''}`;
           }}
           aria-label={tab.label}

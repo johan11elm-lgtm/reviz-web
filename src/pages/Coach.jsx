@@ -1,6 +1,8 @@
 import { useMemo } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { PageHeader } from '../components/PageHeader';
+import { GuestWall } from '../components/GuestWall';
+import { useAuth } from '../context/AuthContext';
 import { PageIntro } from '../components/PageIntro';
 import { CoachConversation } from '../components/CoachChat';
 import { Mascot } from '../components/Mascot';
@@ -19,6 +21,12 @@ export default function Coach() {
   const lessons = useMemo(() => loadLessons(), []);
   const wanted = params.get('lesson');
   const lesson = lessons.find(l => l.id === wanted) ?? lessons[0] ?? null;
+  const { isGuest } = useAuth();
+
+  // Mode essai : le coach passe par une API authentifiée → compte requis.
+  if (isGuest) {
+    return <GuestWall action="parler au coach" text="Le coach Réviz demande un compte. C'est gratuit, et tout ce que tu as révisé en mode essai te suit." />;
+  }
 
   return (
     <div className="app coach-page">

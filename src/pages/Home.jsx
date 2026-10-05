@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { BottomNav } from '../components/BottomNav';
 import { UserHeader } from '../components/UserHeader';
+import { GuestBanner } from '../components/GuestBanner';
 import { HeroCTA } from '../components/HeroCTA';
 import { Mascot } from '../components/Mascot';
 import { loadLessons, restoreLesson, syncFromFirestore } from '../services/historyService';
@@ -68,7 +69,7 @@ function getGreetingSub({ dueCards, streak, todayRevisions, dailyGoal }) {
 }
 
 export default function Home() {
-  const { currentUser, isPremium } = useAuth();
+  const { currentUser, isPremium, isGuest, getUserLevel } = useAuth();
   const prenom = currentUser?.displayName ?? 'toi';
 
   const navigate = useNavigate();
@@ -143,10 +144,12 @@ export default function Home() {
         xpInLvl={xpInLvl}
         fillPct={fillPct}
         isPremium={isPremium}
-        onCoach={() => navigate(lastLesson ? `/coach?lesson=${lastLesson.id}` : '/coach')}
+        onCoach={isGuest ? undefined : () => navigate(lastLesson ? `/coach?lesson=${lastLesson.id}` : '/coach')}
       />
 
       <div className="content">
+
+        <GuestBanner />
 
         <div className="rv-greeting home-greeting">
           <h2 className="rv-greeting-title">Envie de réviser ?</h2>
@@ -154,13 +157,13 @@ export default function Home() {
         </div>
 
         <HeroCTA
-          to="/scan"
+          to={isGuest ? '/programme' : '/scan'}
           tone="violet"
-          mascot={new Date().getHours() >= 19 ? 'soir' : 'scanphone'}
-          title="Scanne une leçon"
+          mascot={isGuest ? 'reading' : new Date().getHours() >= 19 ? 'soir' : 'scanphone'}
+          title={isGuest ? 'Révise ton programme' : 'Scanne une leçon'}
           action="Commencer"
           overlap
-          ariaLabel="Scanner une leçon"
+          ariaLabel={isGuest ? 'Réviser mon programme' : 'Scanner une leçon'}
           secondary={lastLesson ? {
             icon: <BookOpenIcon />,
             label: 'Reprendre',
@@ -196,6 +199,21 @@ export default function Home() {
             </div>
           </div>
         </Link>
+
+        {/* Réviser sans scan : les chapitres du programme de sa classe. En mode
+            essai, le héros pointe déjà dessus. */}
+        {!isGuest && (
+          <Link to="/programme" className="rv-card rv-card--link home-programme-card" aria-label="Réviser mon programme">
+            <Mascot pose="reading" size={52} alt="" aria-hidden="true" className="home-programme-mascot" />
+            <div className="home-programme-text">
+              <span className="home-programme-title">Mon programme</span>
+              <span className="home-programme-sub">
+                {getUserLevel()?.classe ? `${getUserLevel().classe} · ` : ''}révise chapitre par chapitre, sans scanner
+              </span>
+            </div>
+            <span className="home-programme-arrow" aria-hidden="true">›</span>
+          </Link>
+        )}
 
         {lastLesson && (
           <div className="rv-card rv-card--padded home-featured-card">

@@ -1,0 +1,38 @@
+/* ─── Mode essai : bandeau et mur « crée ton compte » ─────────────── */
+
+.guest-banner {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  border-radius: 14px;
+  background: var(--bg-card);
+  box-shadow: var(--shadow-card);
+  font-size: 12.5px;
+  line-height: 1.35;
+  color: var(--text-secondary);
+}
+.guest-banner-mascot { flex-shrink: 0; }
+.guest-banner-text { flex: 1; min-width: 0; }
+.guest-banner-text b { color: var(--text-primary); font-weight: 700; }
+.guest-banner-link {
+  flex-shrink: 0;
+  font-weight: 700;
+  color: var(--accent-violet);
+  text-decoration: none;
+  white-space: nowrap;
+}
+.guest-banner-link:hover { text-decoration: underline; }
+
+/* Home : le bandeau vit dans la colonne de contenu, sous l'en-tête. */
+.home-page .guest-banner { margin-bottom: 4px; }
+
+.guest-wall-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 var(--page-gutter) 40px;
+}
+.guest-wall .rv-empty-state .rv-btn-cta + .rv-btn-cta { margin-top: 10px; }

@@ -4,6 +4,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { PremiumModal } from '../components/PremiumModal';
 import { PageHeader } from '../components/PageHeader';
+import { GuestWall } from '../components/GuestWall';
 import { Mascot } from '../components/Mascot';
 import { startAnalysis, startAnalysisFromImage } from '../services/aiService';
 import { getScanStatus } from '../services/scanLimitService';
@@ -26,18 +27,18 @@ export default function Scan() {
   const fileInputRef  = useRef(null);
   const facingModeRef = useRef('environment');
   const navigate  = useNavigate();
-  const { getUserLevel } = useAuth();
+  const { getUserLevel, isGuest } = useAuth();
   const userLevel = getUserLevel();
 
   // Démarrer la caméra quand on est sur l'onglet photo
   useEffect(() => {
-    if (activeTab !== 'photo') {
+    if (activeTab !== 'photo' || isGuest) {
       stopCamera();
       return;
     }
     startCamera();
     return () => stopCamera();
-  }, [activeTab]);
+  }, [activeTab, isGuest]);
 
   async function startCamera() {
     try {
@@ -147,6 +148,11 @@ export default function Scan() {
     startAnalysis(text, userLevel);
     navigate('/analyse');
   };
+
+  // Mode essai : le scan passe par une API authentifiée → compte requis.
+  if (isGuest) {
+    return <GuestWall action="scanner tes leçons" text="Le scan de leçons demande un compte. C'est gratuit, et tout ce que tu as révisé en mode essai te suit." />;
+  }
 
   return (
     <div className="app scan-page">

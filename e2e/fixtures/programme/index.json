@@ -1,0 +1,55 @@
+{
+  "classe": "3ème",
+  "genereLe": "2026-10-05",
+  "matieres": [
+    {
+      "matiere": "Maths",
+      "slug": "maths",
+      "programme": "cycle 4 (BO 2015, ajusté 2020)",
+      "relu": false,
+      "chapitres": [
+        {
+          "id": "theoreme-de-thales",
+          "titre": "Le théorème de Thalès",
+          "ordre": 1,
+          "periode": "T1",
+          "notions": ["Énoncé du théorème", "Réciproque", "Agrandissement et réduction"],
+          "motsCles": ["proportionnalité", "triangles", "parallèles"],
+          "pret": true,
+          "flashcards": 6,
+          "quiz": 5
+        },
+        {
+          "id": "trigonometrie",
+          "titre": "Trigonométrie",
+          "ordre": 2,
+          "periode": "T1",
+          "notions": ["Cosinus, sinus, tangente", "Calcul d'une longueur", "Calcul d'un angle"],
+          "motsCles": ["triangle rectangle", "hypoténuse"],
+          "pret": false,
+          "flashcards": 0,
+          "quiz": 0
+        }
+      ]
+    },
+    {
+      "matiere": "Français",
+      "slug": "francais",
+      "programme": "cycle 4 (BO 2015, ajusté 2020)",
+      "relu": false,
+      "chapitres": [
+        {
+          "id": "argumentation",
+          "titre": "L'argumentation",
+          "ordre": 1,
+          "periode": "T1",
+          "notions": ["Thèse et arguments", "Convaincre et persuader"],
+          "motsCles": ["thèse", "argument", "exemple"],
+          "pret": false,
+          "flashcards": 0,
+          "quiz": 0
+        }
+      ]
+    }
+  ]
+}

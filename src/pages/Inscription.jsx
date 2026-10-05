@@ -10,6 +10,7 @@ import {
   needsSpecialites,
   isUnder15,
 } from '../utils/levels';
+import { readGuest } from '../services/guestService';
 import { sendParentalConsent, consentErrorMessage } from '../services/consentService';
 import './Inscription.css';
 
@@ -25,9 +26,15 @@ function firebaseErrorFr(code) {
 // isUnder15 est désormais importé depuis ../utils/levels (source unique).
 
 export default function Inscription() {
-  const [prenom, setPrenom]               = useState('');
+  const [prenom, setPrenom]               = useState(() => readGuest()?.prenom ?? '');
   const [birthDate, setBirthDate]         = useState('');
-  const [level, setLevel]                 = useState({ cycle: null, classe: null, specialites: [] });
+  const [level, setLevel]                 = useState(() => {
+    // Un élève en mode essai arrive avec sa classe déjà connue.
+    const g = readGuest()?.level;
+    return g?.cycle && g?.classe
+      ? { cycle: g.cycle, classe: g.classe, specialites: g.specialites ?? [] }
+      : { cycle: null, classe: null, specialites: [] };
+  });
   const [email, setEmail]                 = useState('');
   const [password, setPassword]           = useState('');
   const [acceptCgu, setAcceptCgu]         = useState(false);

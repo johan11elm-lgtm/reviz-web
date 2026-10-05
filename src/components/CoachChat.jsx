@@ -47,6 +47,9 @@ export function CoachEntryCard({ onClick }) {
  * @param {() => void} onClick  ouvre le sheet CoachChat
  */
 export function CoachHeaderButton({ onClick }) {
+  // Le coach passe par une API authentifiée : rien à proposer en mode essai.
+  const auth = useAuth();
+  if (auth?.isGuest) return null;
   return (
     <button
       type="button"

@@ -1,0 +1,171 @@
+/* ─── Mon programme (liste des matières et des chapitres) ───────────
+ * Même langage que Cours : cartes blanches arrondies, halo de page,
+ * mascottes de matière. Les cartes sont des <button> : on neutralise
+ * les styles natifs et on hérite de .rv-card / .rv-card--link. */
+
+.programme-page .programme-content {
+  flex: 1;
+  padding: 8px var(--page-gutter) 110px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-cards);
+}
+
+.programme-page .programme-note {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--text-secondary);
+}
+
+.programme-page .programme-callout {
+  flex-shrink: 0;
+  font-size: 13px;
+}
+
+/* ── Carte matière ── */
+.programme-page .programme-matiere,
+.programme-page .programme-chapitre {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  text-align: left;
+  font-family: inherit;
+  color: inherit;
+  border: none;
+  cursor: pointer;
+}
+.programme-page .programme-chapitre:disabled {
+  cursor: default;
+}
+
+.programme-page .programme-matiere-mascot {
+  flex-shrink: 0;
+}
+
+.programme-page .programme-matiere-text,
+.programme-page .programme-chapitre-text {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.programme-page .programme-matiere-name {
+  font-family: 'Geist', sans-serif;
+  font-size: 17px;
+  font-weight: 800;
+  letter-spacing: -0.3px;
+  color: var(--text-primary);
+}
+
+.programme-page .programme-matiere-meta {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+.programme-page .programme-bar {
+  margin-top: 4px;
+  height: 6px;
+  border-radius: 6px;
+  background: var(--bg-hover);
+  overflow: hidden;
+}
+.programme-page .programme-bar-fill {
+  height: 100%;
+  border-radius: 6px;
+  background: var(--accent-orange);
+  transition: width 0.3s ease;
+}
+
+.programme-page .programme-chevron {
+  flex-shrink: 0;
+  font-size: 22px;
+  line-height: 1;
+  color: var(--text-muted);
+}
+
+/* ── Carte chapitre ── */
+.programme-page .programme-chapitre-num {
+  flex-shrink: 0;
+  width: 34px;
+  height: 34px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  font-family: 'Geist', sans-serif;
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--text-secondary);
+  background: var(--bg-hover);
+}
+.programme-page .programme-chapitre--maitrise .programme-chapitre-num {
+  color: var(--accent-green-ink);
+  background: var(--accent-green-soft);
+}
+.programme-page .programme-chapitre--a-revoir .programme-chapitre-num,
+.programme-page .programme-chapitre--commence .programme-chapitre-num {
+  color: var(--accent-orange-ink);
+  background: var(--accent-orange-soft);
+}
+
+.programme-page .programme-chapitre-title {
+  font-family: 'Geist', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: -0.2px;
+  color: var(--text-primary);
+  line-height: 1.3;
+}
+
+.programme-page .programme-chapitre-notions {
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--text-muted);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.programme-page .programme-chapitre-state {
+  flex-shrink: 0;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 5px 10px;
+  border-radius: 999px;
+  white-space: nowrap;
+  color: var(--text-secondary);
+  background: var(--bg-hover);
+}
+.programme-page .programme-chapitre-state--commence,
+.programme-page .programme-chapitre-state--a-revoir {
+  color: var(--accent-orange-ink);
+  background: var(--accent-orange-soft);
+}
+.programme-page .programme-chapitre-state--maitrise {
+  color: var(--accent-green-ink);
+  background: var(--accent-green-soft);
+}
+.programme-page .programme-chapitre--bientot {
+  opacity: 0.55;
+}
+
+/* ── Squelette ── */
+.programme-page .programme-skeleton {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-cards);
+}
+.programme-page .programme-matiere--skeleton {
+  cursor: default;
+}
+
+.programme-page .programme-empty {
+  flex-shrink: 0;
+}

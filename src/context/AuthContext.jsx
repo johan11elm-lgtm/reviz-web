@@ -23,8 +23,9 @@ import { Capacitor } from '@capacitor/core';
 import { auth, db } from '../services/firebaseConfig';
 import { parseLevel, serializeLevel, migrateLegacyClasse, isUnder15 } from '../utils/levels';
 import { createUserProfile } from '../services/userProfileService';
-import { setActiveUser } from '../services/historyService';
-import { setActiveUser as setRevisionUser } from '../services/revisionService';
+import { setActiveUser, pushLessonsToFirestore } from '../services/historyService';
+import { setActiveUser as setRevisionUser, pushRevisionsToFirestore } from '../services/revisionService';
+import { readGuest, startGuest, clearGuest, guestUser, isGuestUid, migrateGuestLocalData } from '../services/guestService';
 import { setSrsUser } from '../services/srsService';
 import { setChallengeUser } from '../services/challengeService';
 import { setScanLimitUser, setPremiumStatus } from '../services/scanLimitService';
@@ -58,7 +59,15 @@ export function AuthProvider({ children }) {
     }
     return c;
   });
-  const [currentUser, setCurrentUser]   = useState(() => (cached ? userFromSessionCache(cached, auth) : null));
+  // Mode essai (« sans compte ») : un invité (prénom + classe) vit dans le
+  // navigateur, sans Firestore. Une vraie session en cache prime sur lui.
+  const [guest, setGuest] = useState(() => {
+    if (cached) return null;
+    const g = readGuest();
+    if (g) bindServicesToUser(g.uid);
+    return g;
+  });
+  const [currentUser, setCurrentUser]   = useState(() => (cached ? userFromSessionCache(cached, auth) : guest ? guestUser(guest) : null));
   // true tant que Firebase n'a pas confirmé la session (même si l'app est déjà rendue depuis le cache).
   const [loading, setLoading]           = useState(true);
   // Mineur <15 ans dont le consentement parental n'est pas (encore) approuvé.
@@ -68,6 +77,9 @@ export function AuthProvider({ children }) {
   const [isPremium, setIsPremium] = useState(cached?.isPremium ?? false);
   // uid pour lequel le gate ci-dessus a été calculé (Firestore) — garde le cache cohérent.
   const [gateUid, setGateUid] = useState(cached?.uid ?? null);
+  // Incrémenté quand le niveau change hors d'un setState (localStorage) pour
+  // que les consommateurs de getUserLevel() se re-rendent.
+  const [levelTick, setLevelTick] = useState(0);
 
   // --- Inscription ---
   // `level` est un objet { cycle, classe, specialites?, filiere? }
@@ -150,7 +162,28 @@ export function AuthProvider({ children }) {
   // --- Déconnexion ---
   function logout() {
     clearSessionCache();
+    if (guest) {
+      // Fin de la session d'essai : rien à révoquer côté serveur.
+      clearGuest();
+      bindServicesToUser(null);
+      setGuest(null);
+      setCurrentUser(null);
+      return Promise.resolve();
+    }
     return signOut(auth);
+  }
+
+  // --- Mode essai : prénom + classe, sans compte ---
+  function loginAsGuest({ prenom, level }) {
+    const g = startGuest({ prenom, level });
+    bindServicesToUser(g.uid);
+    setPremiumStatus(false);
+    setIsPremium(false);
+    setConsentBlocked(false);
+    setNeedsProfileSetup(false);
+    setGuest(g);
+    setCurrentUser(guestUser(g));
+    return g;
   }
 
   // --- Mot de passe oublié ---
@@ -242,6 +275,11 @@ export function AuthProvider({ children }) {
     localStorage.setItem(`reviz-level-${currentUser.uid}`, serializeLevel(level));
     // On nettoie l'ancienne clé après migration
     localStorage.removeItem(`reviz-classe-${currentUser.uid}`);
+    // Le profil Firestore suit, pour retrouver la classe sur un autre appareil.
+    if (!isGuestUid(currentUser.uid)) {
+      setDoc(doc(db, 'users', currentUser.uid), { level }, { merge: true }).catch(() => {});
+    }
+    setLevelTick(n => n + 1);
   }
 
   // Wrapper de compatibilité — à retirer quand plus aucun appel ne l'utilise
@@ -272,6 +310,14 @@ export function AuthProvider({ children }) {
         .catch(() => false),
     ]);
 
+    // Classe retrouvée depuis le profil quand ce navigateur ne la connaît pas
+    // (nouvel appareil, poste du CDI) : getUserLevel() ne lit que localStorage.
+    const levelKey = `reviz-level-${user.uid}`;
+    if (profile?.level?.cycle && !localStorage.getItem(levelKey)) {
+      localStorage.setItem(levelKey, serializeLevel(profile.level));
+      setLevelTick(n => n + 1);
+    }
+
     // Compte Google sans profil complété (pas de date de naissance) → doit finir l'inscription.
     const isGoogle = user.providerData?.some(p => p.providerId === 'google.com');
     setNeedsProfileSetup(!!isGoogle && !profile?.birthDate);
@@ -293,11 +339,34 @@ export function AuthProvider({ children }) {
   // --- Écoute l'état de connexion Firebase ---
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, async user => {
+      if (!user) {
+        clearSessionCache();
+        // Pas de session Firebase : un invité en cours reste en mode essai.
+        const g = readGuest();
+        if (g) {
+          bindServicesToUser(g.uid);
+          setGuest(g);
+          setCurrentUser(guestUser(g));
+          await loadGateState(null);
+          setLoading(false);
+          return;
+        }
+      } else {
+        // Un invité qui vient de créer son compte (ou de se connecter) :
+        // sa progression d'essai suit sur le vrai compte.
+        const g = readGuest();
+        if (g) {
+          const { lessons, revisions } = migrateGuestLocalData(g.uid, user.uid);
+          bindServicesToUser(user.uid);
+          pushLessonsToFirestore(lessons);
+          pushRevisionsToFirestore(revisions);
+        }
+      }
       bindServicesToUser(user?.uid ?? null);
+      setGuest(null);
       // Remplace l'utilisateur issu du cache par le vrai (ou null : session
       // invalide → PrivateRoute redirige vers /welcome).
       setCurrentUser(user);
-      if (!user) clearSessionCache();
 
       await loadGateState(user);
       setLoading(false);
@@ -337,6 +406,8 @@ export function AuthProvider({ children }) {
     consentBlocked,
     needsProfileSetup,
     isPremium,
+    isGuest: !!currentUser?.isGuest,
+    loginAsGuest,
     refreshPremium,
     refreshGate,
     signup,
@@ -352,12 +423,12 @@ export function AuthProvider({ children }) {
     updateUserPassword,
     resendVerificationEmail,
     deleteAccount,
-  }), [currentUser, loading, consentBlocked, needsProfileSetup, isPremium]);
+  }), [currentUser, loading, consentBlocked, needsProfileSetup, isPremium, guest, levelTick]);
 
   // Enfants rendus dès que Firebase a confirmé la session — ou immédiatement
   // depuis le cache local (démarrage optimiste). Sans cache, on attend :
   // ça évite un flash de redirection vers /welcome.
-  const ready = !loading || cached !== null;
+  const ready = !loading || cached !== null || guest !== null;
   return (
     <AuthContext.Provider value={value}>
       {ready && children}
