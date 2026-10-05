@@ -96,6 +96,16 @@ Dans le poste de pilotage et PostHog (la bannière de consentement arrive avec l
 5. Relecture du contenu : Johan seul, ou un professeur par matière.
 6. Ordinateur : **juste après le socle, même quinzaine** (recommandé), ou avant.
 
+## Décisions du 5 octobre au soir (Johan) et avancement
+
+- **On construit tout de suite**, pas en tâches de nuit.
+- **Mode essai sans compte** : prénom + classe, et l'élève révise son programme ; tout reste dans le navigateur et suit à l'inscription. Il remplace la synchronisation multi-appareils comme prérequis du cas CDI (un élève de passage n'a pas besoin de retrouver sa progression ailleurs).
+- **Contenus statiques pré-générés** plutôt qu'un point d'entrée serveur avec cache : chaque chapitre est un fichier JSON partagé (`public/programme/<classe>/<matière>/<id>.json`), produit une fois par `scripts/programme/generer.mjs` (Claude Opus 5.5, prompt « programme » dérivé de celui du scan, même validation). Aucun appel IA ni quota à l'usage, aucune règle Firestore à déployer, et ça marche sans compte. Le serveur n'a rien à faire.
+- **Fait le 5 octobre (commit local, non poussé)** : pages Mon programme et matière, ouverture d'un chapitre comme une leçon, mode essai complet (entrée, bandeau, murs scan et coach, reprise à l'inscription), niveau retrouvé depuis le profil, entrées depuis l'accueil, Cours, Welcome, état vide ; synchronisations Firestore qui attendent les écritures en vol ; 278 tests unitaires et 8 parcours e2e (dont deux pour le programme, avec captures).
+- **Bloqué** : la génération des contenus de 3e. La clé Anthropic de `.env.local` est révoquée (401 sur l'URL officielle). Dès qu'une clé valide est posée dans `.env.local`, lancer `node scripts/programme/generer.mjs tout` (≈ 100 chapitres, ≈ 10 €, 45 min en arrière-plan), relire les catalogues `src/data/programme/3eme/*.json`, puis commiter `public/programme/3eme/`.
+- **Ordinateur, fait le 5 octobre au soir (commit local)**. Une première version « colonne de téléphone agrandie » a été refusée par Johan (« c'est juste mobile grossi ») : la bonne version compose pour la largeur, à look constant. Barre latérale, colonne de 1120 px, et une grille par page dans `src/styles/desktop.css` : accueil en tableau de bord, matières en grille de trois, chapitres sur deux colonnes, Mes cours avec rail « À reprendre », Analyse en deux volets, Résumé avec rail « à retenir » collant, quiz à choix sur deux colonnes, Progrès, Profil et Réglages sur deux colonnes, Scanner en deux panneaux (photo ou glisser-déposer, texte) sans onglets, clavier sur Flashcards et Quiz. Sous 1024 px et dans l'app native, rien ne change. Vérifié par le parcours e2e `desktop.spec.js` (captures en 1280 px, témoin en 390 px).
+- **À suivre** : relecture humaine des catalogues (champ `relu`), bouton « Signaler une erreur » par chapitre, pages publiques par chapitre (phase 3), retirer les fichiers de démonstration de `public/programme/` avant de générer les vrais contenus.
+
 ## 11. Branchement technique
 
 _D'après l'exploration du code du 5 octobre (branche `main`, HEAD `c7ada6d`)._
