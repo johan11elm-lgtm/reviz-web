@@ -136,95 +136,95 @@ export default function Cours() {
         <PageIntro title="Mes cours" sub={heroPhrase} mascot="reading" />
       )}
 
-      {/* Search */}
-      {!showSkeleton && (
-      <div className="cours-search-wrap">
-        <div className="rv-card rv-card--tight cours-search">
-          <span className="cours-search-icon" aria-hidden="true"><SearchIcon /></span>
-          <input
-            className="cours-search-input"
-            type="text"
-            placeholder="Rechercher une leçon..."
-            value={searchQuery}
-            onChange={e => setSearchQuery(e.target.value)}
-            aria-label="Rechercher une leçon"
-          />
-          {searchQuery && (
-            <button
-              type="button"
-              className="cours-search-clear"
-              onClick={() => setSearchQuery('')}
-              aria-label="Effacer la recherche"
-            >✕</button>
-          )}
-        </div>
-      </div>
-      )}
-
-      {/* Filters */}
-      {subjects.length > 1 && (
-        <div className="cours-filters-wrap">
-          <div className="cours-filters">
-            {filters.map(f => (
+      {/* Contenu défilant — seul PageIntro (titre + mascotte) reste fixe */}
+      <div className="content cours-content">
+        {/* Search */}
+        {!showSkeleton && (
+        <div className="cours-search-wrap">
+          <div className="rv-card rv-card--tight cours-search">
+            <span className="cours-search-icon" aria-hidden="true"><SearchIcon /></span>
+            <input
+              className="cours-search-input"
+              type="text"
+              placeholder="Rechercher une leçon..."
+              value={searchQuery}
+              onChange={e => setSearchQuery(e.target.value)}
+              aria-label="Rechercher une leçon"
+            />
+            {searchQuery && (
               <button
                 type="button"
-                key={f.id}
-                className={`cours-filter-chip${activeFilter === f.id ? ' cours-filter-chip--active' : ''}`}
-                onClick={() => setActiveFilter(f.id)}
-              >
-                {f.label}
-              </button>
-            ))}
+                className="cours-search-clear"
+                onClick={() => setSearchQuery('')}
+                aria-label="Effacer la recherche"
+              >✕</button>
+            )}
           </div>
         </div>
-      )}
+        )}
 
-      {/* Featured "À reprendre" — Réviz propose la dernière leçon */}
-      {showResume && (
-        <div className="cours-resume-wrap">
-          <div className="rv-card rv-card--padded cours-resume-card">
-            <div className="cours-resume-top">
-              <Mascot
-                pose={subjectMascot(lastLesson.metadata.subject)}
-                size={140}
-                glow
-                priority
-                className="cours-resume-mascot"
-                alt=""
-                aria-hidden="true"
-              />
-              <div className="cours-resume-body">
-                <div className="cours-resume-label">À reprendre</div>
-                <div className="cours-resume-info">
-                  <span className={`rv-icon-square rv-icon-square--${lastSubjectTone} cours-resume-icon`}>
-                    <BookOpenIcon />
-                  </span>
-                  <div className="cours-resume-text">
-                    <span className="cours-resume-title">{lastLesson.metadata.title}</span>
-                    <span className="cours-resume-meta">
-                      {lastLesson.metadata.subject} · {formatDate(lastLesson.scannedAt)}
-                      {lastDue > 0 && (
-                        <span className="cours-resume-due"> · {lastDue} à revoir</span>
-                      )}
+        {/* Filters */}
+        {subjects.length > 1 && (
+          <div className="cours-filters-wrap">
+            <div className="cours-filters">
+              {filters.map(f => (
+                <button
+                  type="button"
+                  key={f.id}
+                  className={`cours-filter-chip${activeFilter === f.id ? ' cours-filter-chip--active' : ''}`}
+                  onClick={() => setActiveFilter(f.id)}
+                >
+                  {f.label}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Featured "À reprendre" — Réviz propose la dernière leçon */}
+        {showResume && (
+          <div className="cours-resume-wrap">
+            <div className="rv-card rv-card--padded cours-resume-card">
+              <div className="cours-resume-top">
+                <Mascot
+                  pose={subjectMascot(lastLesson.metadata.subject)}
+                  size={140}
+                  glow
+                  priority
+                  className="cours-resume-mascot"
+                  alt=""
+                  aria-hidden="true"
+                />
+                <div className="cours-resume-body">
+                  <div className="cours-resume-label">À reprendre</div>
+                  <div className="cours-resume-info">
+                    <span className={`rv-icon-square rv-icon-square--${lastSubjectTone} cours-resume-icon`}>
+                      <BookOpenIcon />
                     </span>
+                    <div className="cours-resume-text">
+                      <span className="cours-resume-title">{lastLesson.metadata.title}</span>
+                      <span className="cours-resume-meta">
+                        {lastLesson.metadata.subject} · {formatDate(lastLesson.scannedAt)}
+                        {lastDue > 0 && (
+                          <span className="cours-resume-due"> · {lastDue} à revoir</span>
+                        )}
+                      </span>
+                    </div>
                   </div>
                 </div>
               </div>
+              <button
+                type="button"
+                className="rv-btn-cta rv-btn-cta--full rv-btn-cta--center cours-resume-cta"
+                onClick={() => { restoreLesson(lastLesson.id); navigate('/analyse'); }}
+              >
+                <span>Continuer</span>
+                <span className="rv-btn-cta-arrow" aria-hidden="true">→</span>
+              </button>
             </div>
-            <button
-              type="button"
-              className="rv-btn-cta rv-btn-cta--full rv-btn-cta--center cours-resume-cta"
-              onClick={() => { restoreLesson(lastLesson.id); navigate('/analyse'); }}
-            >
-              <span>Continuer</span>
-              <span className="rv-btn-cta-arrow" aria-hidden="true">→</span>
-            </button>
           </div>
-        </div>
-      )}
+        )}
 
-      {/* Content */}
-      <div className="content cours-content">
         {showSkeleton ? (
           <div className="cours-skeleton" role="status" aria-label="Synchronisation de tes leçons…">
             {[0, 1].map(i => (

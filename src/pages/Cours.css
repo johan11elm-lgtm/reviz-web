@@ -6,8 +6,15 @@
  * src/styles/components/*.css via les classes .rv-*. */
 
 /* ── Featured "À reprendre" — Réviz propose la dernière leçon ── */
+/* Ces trois blocs vivent maintenant DANS .cours-content (cf. Cours.jsx) :
+   la gouttière et le rythme vertical viennent du conteneur (padding +
+   gap), donc plus de padding propre ici — sinon il se cumulerait.
+   `flex-shrink: 0` est indispensable : .cours-content est une colonne
+   flex scrollable, ses enfants se feraient écraser par défaut (même
+   piège que .rv-card et .pg-streak-card, déjà corrigé ailleurs). */
 .cours-page .cours-resume-wrap {
-  padding: 14px 24px 0;
+  padding: 0;
+  flex-shrink: 0;
 }
 
 .cours-page .cours-resume-card {
@@ -106,7 +113,8 @@
 
 /* ── Search bar ── */
 .cours-page .cours-search-wrap {
-  padding: 8px 24px 4px;
+  padding: 0;
+  flex-shrink: 0;
 }
 
 .cours-page .cours-search {
@@ -157,7 +165,12 @@
 
 /* ── Filter chips (scrollable horizontal) ── */
 .cours-page .cours-filters-wrap {
-  padding: 12px 24px 8px;
+  /* La rangée file jusqu'aux bords de l'écran malgré la gouttière du
+     conteneur : marge négative exactement compensée par un padding égal,
+     donc la largeur reste celle de la boîte de padding. */
+  margin-inline: calc(-1 * var(--page-gutter));
+  padding: 0 var(--page-gutter);
+  flex-shrink: 0;
   overflow-x: auto;
   scrollbar-width: none;
 }
