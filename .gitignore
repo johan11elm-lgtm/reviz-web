@@ -38,3 +38,5 @@ assets-src/mascot/_old/
 
 # DerivedData xcodebuild (-derivedDataPath build)
 build/
+.unslop/
+.app-designer/
