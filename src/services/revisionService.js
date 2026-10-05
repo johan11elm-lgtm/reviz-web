@@ -80,7 +80,14 @@ export async function syncRevisionsFromFirestore() {
       orderBy('revisedAt', 'desc')
     )
     const snap = await getDocs(q)
-    const revisions = snap.docs.map(d => d.data())
+    const remote = snap.docs.map(d => d.data())
+    // Révisions locales récentes absentes du serveur = écritures pas encore
+    // arrivées (rechargement juste après) : conservées et renvoyées.
+    const known = new Set(remote.map(e => e.id))
+    const now = Date.now()
+    const missing = loadRevisions().filter(e => e?.id && !known.has(e.id) && now - (e.revisedAt ?? 0) < 10 * 60 * 1000)
+    missing.forEach(entry => track(setDoc(doc(db, 'users', _uid, 'revisions', entry.id), entry)))
+    const revisions = missing.length ? [...missing, ...remote].sort((a, b) => (b.revisedAt ?? 0) - (a.revisedAt ?? 0)) : remote
     localStorage.setItem(getKey(), JSON.stringify(revisions))
     return revisions
   } catch (err) {

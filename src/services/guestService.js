@@ -33,6 +33,8 @@ export function startGuest({ prenom, level }) {
   const guest = { uid, prenom: clean, level, createdAt: Date.now() }
   localStorage.setItem(GUEST_KEY, JSON.stringify(guest))
   localStorage.setItem(`reviz-level-${uid}`, JSON.stringify(level))
+  // Pas de présentation en quatre écrans en mode essai : l'élève veut réviser tout de suite.
+  localStorage.setItem(`reviz-onboarded-${uid}`, '1')
   return guest
 }
 
@@ -64,7 +66,7 @@ export function guestUser(guest) {
 // quand il crée son compte (même suffixe -{uid}).
 const MIGRATED_PREFIXES = [
   'reviz-lessons-', 'reviz-revisions-', 'reviz-srs-',
-  'reviz-challenges-', 'reviz-daily-goal-', 'reviz-seen-badges-',
+  'reviz-challenges-', 'reviz-daily-goal-', 'reviz-seen-badges-', 'reviz-onboarded-',
 ]
 
 /**

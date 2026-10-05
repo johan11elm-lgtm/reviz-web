@@ -27,7 +27,9 @@ test.describe('Leçon trop longue (mode texte)', () => {
 
     // ── Scan : texte de ≈ 21 500 caractères ──
     await page.goto('/scan')
-    await page.getByRole('tab', { name: /Texte/ }).click()
+    // Sur ordinateur les deux panneaux sont visibles : l'onglet n'existe qu'en étroit.
+    const ongletTexte = page.getByRole('tab', { name: /Texte/ })
+    if (await ongletTexte.isVisible()) await ongletTexte.click()
     const texte = 'La photosynthèse transforme la lumière en matière organique. '.repeat(350)
     expect(texte.length).toBeGreaterThan(LIMITE)
     await page.locator('.scan-textarea').fill(texte)
@@ -54,7 +56,8 @@ test.describe('Leçon trop longue (mode texte)', () => {
     // ── Retour au texte : onglet Texte ouvert, texte coupé restauré ──
     await page.getByRole('button', { name: 'Modifier mon texte' }).click()
     await expect(page).toHaveURL(/scan\?mode=texte/)
-    await expect(page.getByRole('tab', { name: /Texte/ })).toHaveAttribute('aria-selected', 'true')
+    const onglet = page.getByRole('tab', { name: /Texte/ })
+    if (await onglet.isVisible()) await expect(onglet).toHaveAttribute('aria-selected', 'true')
     const restaure = await page.locator('.scan-textarea').inputValue()
     expect(restaure.length).toBe(longueurs[0])
     expect(restaure.endsWith('organique.')).toBe(true)

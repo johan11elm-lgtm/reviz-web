@@ -44,6 +44,22 @@ describe('syncFromFirestore', () => {
   })
 })
 
+describe('syncFromFirestore — entrées locales absentes du serveur', () => {
+  it('garde et renvoie une entrée récente, laisse tomber une entrée ancienne', async () => {
+    setActiveUser('u1')
+    const now = Date.now()
+    localStorage.setItem('reviz-lessons-u1', JSON.stringify([
+      { id: 'prog-recent', scannedAt: now - 5_000, metadata: { title: 'Récent' } },
+      { id: 'old-deleted', scannedAt: now - 3 * 60 * 60 * 1000, metadata: { title: 'Vieux' } },
+    ]))
+    getDocs.mockImplementation(async () => ({ docs: [{ data: () => ({ id: 'remote-1', scannedAt: now - 60_000, metadata: { title: 'Serveur' } }) }] }))
+    const lessons = await syncFromFirestore()
+    expect(lessons.map(l => l.id)).toEqual(['prog-recent', 'remote-1'])
+    expect(setDoc.mock.calls.map(c => c[0].path)).toEqual(['users/u1/lessons/prog-recent'])
+    expect(JSON.parse(localStorage.getItem('reviz-lessons-u1')).map(l => l.id)).toEqual(['prog-recent', 'remote-1'])
+  })
+})
+
 describe('saveLesson — scan (comportement historique)', () => {
   it('crée une entrée datée, compte un scan et écrit dans Firestore', () => {
     setActiveUser('u1')

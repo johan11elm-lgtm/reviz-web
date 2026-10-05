@@ -32,6 +32,28 @@ function track(promise) {
 }
 export function whenLessonsSynced() { return Promise.all([..._pending]) }
 
+// Fenêtre pendant laquelle une entrée locale absente du serveur est tenue
+// pour une écriture pas encore arrivée (rechargement juste après), et non
+// pour une suppression faite ailleurs.
+const RECENT_MS = 10 * 60 * 1000
+
+/**
+ * Fusionne la liste serveur avec les entrées locales récentes qu'elle ne
+ * contient pas : celles-ci sont conservées et renvoyées à Firestore. Les
+ * entrées locales plus anciennes qui manquent au serveur sont considérées
+ * supprimées ailleurs et disparaissent.
+ */
+function mergeRecentLocal(remote, local, dateKey) {
+  const known = new Set(remote.map(e => e.id))
+  const now = Date.now()
+  const missing = local.filter(e => e?.id && !known.has(e.id) && now - (e[dateKey] ?? 0) < RECENT_MS)
+  if (missing.length === 0) return remote
+  missing.forEach(entry => {
+    track(setDoc(doc(db, 'users', _uid, 'lessons', entry.id), entry))
+  })
+  return [...missing, ...remote].sort((a, b) => (b[dateKey] ?? 0) - (a[dateKey] ?? 0))
+}
+
 // Normalise un titre pour la déduplication (casse + espaces insensible)
 const normalize = s => s?.toLowerCase().trim().replace(/\s+/g, ' ') ?? ''
 
@@ -135,7 +157,8 @@ export async function syncFromFirestore() {
       orderBy('scannedAt', 'desc')
     )
     const snap = await getDocs(q)
-    const lessons = snap.docs.map(d => d.data())
+    const remote = snap.docs.map(d => d.data())
+    const lessons = mergeRecentLocal(remote, loadLessons(), 'scannedAt')
     localStorage.setItem(getKey(), JSON.stringify(lessons))
     return lessons
   } catch (err) {

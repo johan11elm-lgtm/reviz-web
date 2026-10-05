@@ -105,6 +105,19 @@ function FlashcardsSession() {
     if (newStreak >= 2) setShowStreakBadge(true)
     nextCard('got')
   }
+  // Clavier (ordinateur) : Espace / Entrée retourne, ← « encore », → « acquis ».
+  useEffect(() => {
+    if (showEnd || coachOpen) return undefined
+    function onKey(e) {
+      if (e.target instanceof HTMLElement && ['INPUT', 'TEXTAREA', 'SELECT'].includes(e.target.tagName)) return
+      if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); flipCard() }
+      else if (isFlipped && (e.key === 'ArrowLeft' || e.key === '1')) { e.preventDefault(); handleAgain() }
+      else if (isFlipped && (e.key === 'ArrowRight' || e.key === '2')) { e.preventDefault(); handleGot() }
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  })
+
   function handleAgain() {
     updateCardState(lessonId, flashcards[current].index ?? current, 'again')
     setAgainCount(p => p + 1)
@@ -271,6 +284,7 @@ function FlashcardsSession() {
           </div>
         </div>
 
+        <p className="flashcards-kbd-hint" aria-hidden="true"><kbd>Espace</kbd> retourner · <kbd>←</kbd> encore · <kbd>→</kbd> acquis</p>
         <div className={`flashcards-actions${isFlipped ? ' visible' : ''}`}>
           <button type="button" className="flashcards-action-btn flashcards-btn-again" onClick={handleAgain}>
             <span className="flashcards-btn-icon">✕</span>

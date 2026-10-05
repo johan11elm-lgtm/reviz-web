@@ -17,6 +17,9 @@ vi.mock('../../services/scanLimitService', () => ({
 vi.mock('../../services/billingService', () => ({ startCheckout: vi.fn() }))
 const ai = vi.hoisted(() => ({ startAnalysis: vi.fn(), startAnalysisFromImage: vi.fn() }))
 vi.mock('../../services/aiService', () => ai)
+// happy-dom fait 1024 px de large : on choisit explicitement mobile ou ordinateur par test.
+const screenMode = vi.hoisted(() => ({ desktop: false }))
+vi.mock('../../hooks/useMediaQuery', () => ({ useIsDesktop: () => screenMode.desktop, useMediaQuery: () => screenMode.desktop }))
 
 const { default: Scan } = await import('../Scan')
 
@@ -32,7 +35,7 @@ const colle = (texte) => {
 }
 
 describe('<Scan /> — mode texte et limite de longueur', () => {
-  beforeEach(() => { localStorage.clear(); nav.mockClear(); ai.startAnalysis.mockClear() })
+  beforeEach(() => { localStorage.clear(); nav.mockClear(); ai.startAnalysis.mockClear(); screenMode.desktop = false })
 
   it('texte court : compteur sur 200 et envoi tel quel', () => {
     renderAt()
@@ -67,6 +70,16 @@ describe('<Scan /> — mode texte et limite de longueur', () => {
     renderAt('/scan?mode=texte')
     expect(screen.getByRole('tab', { name: /Texte/ })).toHaveAttribute('aria-selected', 'true')
     expect(screen.getByPlaceholderText('Colle le texte de ta leçon…')).toHaveValue('Texte à corriger')
+  })
+
+  it('sur ordinateur : photo et texte côte à côte, sans onglets', () => {
+    screenMode.desktop = true
+    renderAt()
+    expect(screen.queryByRole('tab', { name: /Texte/ })).not.toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: "Photo d'une leçon" })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: 'Texte de la leçon' })).toBeInTheDocument()
+    expect(screen.getByPlaceholderText('Colle le texte de ta leçon…')).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: 'Capturer' })).toBeInTheDocument()
   })
 
   it('sans paramètre : onglet Photo, textarea vide même si un texte traîne en stockage', () => {

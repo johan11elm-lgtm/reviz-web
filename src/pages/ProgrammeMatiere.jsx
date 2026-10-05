@@ -64,7 +64,7 @@ export default function ProgrammeMatiere() {
         mascotSize={140}
       />
 
-      <div className="content programme-content">
+      <div className="content programme-content programme-content--liste">
         {error === 'chapitre' && (
           <div className="rv-callout rv-callout--orange programme-callout" role="alert">
             Ce chapitre n'a pas pu être chargé. Vérifie ta connexion et réessaie.

@@ -32,7 +32,7 @@ test.describe('Mon programme', () => {
 
     // ── Mon programme : matières, bandeau du mode essai ──
     await expect(page).toHaveURL(/\/programme$/)
-    await expect(page.getByText('Mode essai')).toBeVisible()
+    await expect(page.getByRole('status').getByText('Mode essai')).toBeVisible()
     await expect(page.getByRole('button', { name: /^Maths/ })).toBeVisible()
     await page.screenshot({ path: test.info().outputPath('programme.png') })
 
@@ -60,7 +60,7 @@ test.describe('Mon programme', () => {
     // ── Accueil : héros vers le programme, bandeau, et le chapitre devient « commencé » ──
     await page.goto('/')
     await expect(page.getByRole('link', { name: 'Réviser mon programme' })).toBeVisible()
-    await expect(page.getByText('Mode essai')).toBeVisible()
+    await expect(page.getByRole('status').getByText('Mode essai')).toBeVisible()
     await page.goto('/programme/maths')
     await expect(page.getByText('Commencé')).toBeVisible()
 
@@ -84,7 +84,7 @@ test.describe('Mon programme', () => {
 
     await page.getByRole('link', { name: 'Réviser mon programme' }).click()
     await expect(page).toHaveURL(/\/programme$/)
-    await expect(page.getByText('Mode essai')).toHaveCount(0)
+    await expect(page.locator('.guest-banner, .side-nav-note')).toHaveCount(0)
 
     await page.getByRole('button', { name: /^Maths/ }).click()
     await page.getByRole('button', { name: /Le théorème de Thalès/ }).click()
@@ -97,7 +97,7 @@ test.describe('Mon programme', () => {
     await page.waitForTimeout(1200)
     await expect(page.getByText('Allez, on scanne ?')).toHaveCount(0)
     await expect(page.getByText('Le théorème de Thalès').first()).toBeVisible()
-    await expect(page.getByText('Mon programme')).toBeVisible()
+    await expect(page.getByRole('button', { name: /Mon programme · révise/ })).toBeVisible()
     await page.screenshot({ path: test.info().outputPath('cours-avec-chapitre.png') })
   })
 })

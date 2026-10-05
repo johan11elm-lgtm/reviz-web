@@ -16,7 +16,9 @@ test.describe('Parcours cœur : inscription → scan → révision', () => {
 
     // ── Scan en mode texte ──
     await page.goto('/scan')
-    await page.getByRole('tab', { name: /Texte/ }).click()
+    // Sur ordinateur les deux panneaux sont visibles : l'onglet n'existe qu'en étroit.
+    const ongletTexte = page.getByRole('tab', { name: /Texte/ })
+    if (await ongletTexte.isVisible()) await ongletTexte.click()
     await page.locator('.scan-textarea').fill(
       'La photosynthèse est le processus par lequel les végétaux chlorophylliens '
       + 'fabriquent leur matière organique à partir de CO2, d\'eau et de lumière. '

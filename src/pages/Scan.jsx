@@ -5,6 +5,7 @@ import { useAuth } from '../context/AuthContext';
 import { PremiumModal } from '../components/PremiumModal';
 import { PageHeader } from '../components/PageHeader';
 import { GuestWall } from '../components/GuestWall';
+import { useIsDesktop } from '../hooks/useMediaQuery';
 import { Mascot } from '../components/Mascot';
 import { startAnalysis, startAnalysisFromImage } from '../services/aiService';
 import { getScanStatus } from '../services/scanLimitService';
@@ -29,16 +30,27 @@ export default function Scan() {
   const navigate  = useNavigate();
   const { getUserLevel, isGuest } = useAuth();
   const userLevel = getUserLevel();
+  // Ordinateur : les deux panneaux (photo, texte) côte à côte, sans onglets.
+  const double = useIsDesktop();
+  const [dropping, setDropping] = useState(false);
 
   // Démarrer la caméra quand on est sur l'onglet photo
   useEffect(() => {
-    if (activeTab !== 'photo' || isGuest) {
+    if ((activeTab !== 'photo' && !double) || isGuest) {
       stopCamera();
       return;
     }
     startCamera();
     return () => stopCamera();
-  }, [activeTab, isGuest]);
+  }, [activeTab, isGuest, double]);
+
+  // Poste sans caméra (ordinateur du CDI) : on ouvre directement l'onglet Texte.
+  useEffect(() => {
+    if (isGuest) return;
+    navigator.mediaDevices?.enumerateDevices?.()
+      .then(list => { if (!list.some(d => d.kind === 'videoinput')) setActiveTab('texte'); })
+      .catch(() => {});
+  }, [isGuest]);
 
   async function startCamera() {
     try {
@@ -119,7 +131,18 @@ export default function Scan() {
   }
 
   function handleMediaImport(e) {
-    const file = e.target.files?.[0];
+    importFile(e.target.files?.[0]);
+  }
+
+  // Glisser-déposer d'une image (ordinateur)
+  function handleDrop(e) {
+    e.preventDefault();
+    setDropping(false);
+    const file = Array.from(e.dataTransfer?.files ?? []).find(f => f.type.startsWith('image/'));
+    if (file) importFile(file);
+  }
+
+  function importFile(file) {
     if (!file) return;
     if (!checkLevel()) return;
     if (!checkLimit()) return;
@@ -162,7 +185,8 @@ export default function Scan() {
         onBack={() => (window.history.state?.idx > 0 ? navigate(-1) : navigate('/'))}
       />
 
-      {/* Tabs Photo / Texte */}
+      {/* Tabs Photo / Texte (sur ordinateur, les deux panneaux sont visibles) */}
+      {!double && (
       <div className="scan-tabs-wrap">
         <div className="scan-tabs" role="tablist" aria-label="Mode de scan">
           <button
@@ -185,13 +209,20 @@ export default function Scan() {
           </button>
         </div>
       </div>
+      )}
 
       {/* Content */}
-      <div className="scan-content">
-        {activeTab === 'photo' ? (
-          <>
+      <div className={`scan-content${double ? ' scan-content--double' : ''}`}>
+        {(double || activeTab === 'photo') && (
+          <section className="scan-panel scan-panel--photo" aria-label="Photo d'une leçon">
+            {double && <h2 className="scan-panel-title">Photo d'une leçon</h2>}
             {/* Viewfinder — chrome beige autour, intérieur sombre */}
-            <div className="scan-viewfinder-shell">
+            <div
+              className={`scan-viewfinder-shell${dropping ? ' scan-viewfinder-shell--drop' : ''}`}
+              onDragOver={e => { e.preventDefault(); if (!dropping) setDropping(true); }}
+              onDragLeave={() => setDropping(false)}
+              onDrop={handleDrop}
+            >
               <div className="viewfinder">
                 {/* Flux vidéo — toujours dans le DOM pour que le ref soit dispo */}
                 <video
@@ -226,20 +257,26 @@ export default function Scan() {
                         <p className="scan-placeholder-title">Accès caméra refusé</p>
                         <p className="scan-placeholder-sub">
                           Pour scanner, j'ai besoin de la caméra. Active-la dans les réglages
-                          du navigateur.
+                          du navigateur, ou importe une photo.
                         </p>
                         <button type="button" className="scan-retry-btn" onClick={startCamera}>
                           Réessayer
+                        </button>
+                        <button type="button" className="scan-retry-btn" onClick={() => fileInputRef.current?.click()}>
+                          Importer une photo
                         </button>
                       </>
                     )}
                     {camStatus === 'error' && (
                       <>
-                        <Mascot pose="confused" size={120} glow />
-                        <p className="scan-placeholder-title">Caméra indisponible</p>
-                        <p className="scan-placeholder-sub">Petit pépin technique. On retente ?</p>
+                        <Mascot pose="scanphone" size={120} glow />
+                        <p className="scan-placeholder-title">Pas de caméra ici</p>
+                        <p className="scan-placeholder-sub">Importe la photo de ta leçon, ou colle son texte.</p>
+                        <button type="button" className="scan-retry-btn" onClick={() => fileInputRef.current?.click()}>
+                          Importer une photo
+                        </button>
                         <button type="button" className="scan-retry-btn" onClick={startCamera}>
-                          Réessayer
+                          Réessayer la caméra
                         </button>
                       </>
                     )}
@@ -247,6 +284,8 @@ export default function Scan() {
                 )}
               </div>
             </div>
+
+            <p className="scan-drop-hint">Tu peux aussi glisser une photo ici.</p>
 
             {/* Shutter row */}
             <div className="scan-shutter-row">
@@ -305,9 +344,11 @@ export default function Scan() {
               <span className="scan-tip-trigger-label">Conseils pour un bon scan</span>
               <span className="scan-tip-trigger-arrow" aria-hidden="true">›</span>
             </button>
-          </>
-        ) : (
-          <>
+          </section>
+        )}
+        {(double || activeTab === 'texte') && (
+          <section className="scan-panel scan-panel--texte" aria-label="Texte de la leçon">
+            {double && <h2 className="scan-panel-title">Texte de la leçon</h2>}
             {/* Mode texte — mascotte writing + textarea + counter + CTA */}
             <div className="scan-text-hero">
               <Mascot pose="writing" size={120} glow priority />
@@ -349,7 +390,7 @@ export default function Scan() {
             >
               {textTooLong ? `Analyser les ${LESSON_TEXT_MAX_LABEL} premiers caractères` : 'Analyser'}
             </button>
-          </>
+          </section>
         )}
       </div>
 

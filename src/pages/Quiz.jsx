@@ -142,6 +142,23 @@ function QuizSession() {
     if (index === q.correct) setScore(p => p + 1)
   }
 
+  // Clavier (ordinateur) : 1-4 ou A-D répondent, Entrée / Espace passent.
+  useEffect(() => {
+    if (showEnd || coachOpen) return undefined
+    function onKey(e) {
+      if (e.target instanceof HTMLElement && ['INPUT', 'TEXTAREA', 'SELECT'].includes(e.target.tagName)) return
+      if (!answered) {
+        const map = { 1: 0, 2: 1, 3: 2, 4: 3, a: 0, b: 1, c: 2, d: 3 }
+        const i = map[String(e.key).toLowerCase()]
+        if (i !== undefined && i < (questions[current]?.choices?.length ?? 0)) { e.preventDefault(); selectAnswer(i) }
+      } else if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault(); nextQuestion()
+      }
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  })
+
   function nextQuestion() {
     if (current + 1 >= questions.length) {
       setShowEnd(true)
@@ -268,6 +285,7 @@ function QuizSession() {
         </div>
 
         {/* Choix */}
+        <p className="quiz-kbd-hint" aria-hidden="true"><kbd>1</kbd>–<kbd>4</kbd> répondre · <kbd>Entrée</kbd> question suivante</p>
         <div className="quiz-choices" key={`choices-${animKey}`}>
           {q.choices.map((choice, i) => (
             <button

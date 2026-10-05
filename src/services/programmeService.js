@@ -4,7 +4,7 @@
 // scripts/programme/generer.mjs et partagés par tous les élèves : aucun
 // appel IA, aucun quota, et ça marche aussi en mode essai.
 // -------------------------------------------------------
-import { loadLessons, saveLesson } from './historyService'
+import { loadLessons, saveLesson, whenLessonsSynced } from './historyService'
 import { countDueCards, getCardState } from './srsService'
 import {
   catalogueUrl, chapterContentUrl, chapterLessonId, chapterState,
@@ -71,11 +71,15 @@ export async function openChapter(classe, matiere, chapter) {
   localStorage.removeItem('reviz-lesson-text')
   localStorage.removeItem('reviz-captured-image')
   localStorage.setItem('reviz-ai-data', JSON.stringify(data))
-  return saveLesson(metadata, data, {
+  const entry = saveLesson(metadata, data, {
     id: chapterLessonId(chapter.id),
     source: 'programme',
     chapterId: chapter.id,
   })
+  // Un rechargement immédiat perdrait l'écriture Firestore en vol : on lui
+  // laisse jusqu'à 1,5 s, sans bloquer l'élève au-delà.
+  await Promise.race([whenLessonsSynced(), new Promise(r => setTimeout(r, 1500))])
+  return entry
 }
 
 // Tests : vider le cache mémoire entre deux cas.

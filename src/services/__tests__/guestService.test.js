@@ -14,6 +14,7 @@ describe('mode essai — session invitée', () => {
     expect(g.prenom).toBe('Léa')
     expect(readGuest()).toEqual(g)
     expect(JSON.parse(localStorage.getItem(`reviz-level-${g.uid}`))).toEqual(level)
+    expect(localStorage.getItem(`reviz-onboarded-${g.uid}`)).toBe('1')
   })
 
   it('refuse un prénom vide ou un niveau incomplet', () => {

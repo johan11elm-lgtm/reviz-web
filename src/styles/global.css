@@ -667,3 +667,47 @@ html.native .content, html.native .pg-content, html.native .pf-content {
   letter-spacing: 0.3px;
   text-transform: uppercase;
 }
+
+/* ─── Ordinateur (≥ 1024 px, hors app native) ─────────────────────
+ * Plus de « téléphone dans la page » : barre latérale fixe (SideNav),
+ * coquille sur toute la hauteur, contenu dans une colonne centrale.
+ * Sous 1024 px rien ne change ; l'app native garde ses règles plein écran. */
+:root {
+  --sidenav-w: 248px;
+  --content-max: 1120px;
+}
+@media (min-width: 1024px) {
+  html:not(.native) body { display: block; padding: 0; margin: 0; }
+  html:not(.native) #root { display: block; }
+  html:not(.native) .app {
+    width: auto;
+    max-width: none;
+    min-height: 100vh;
+    height: 100dvh;
+    margin: 0 0 0 var(--sidenav-w);
+    border-radius: 0;
+    box-shadow: none;
+    /* Colonne centrale : les pages gardent leur gouttière propre à l'intérieur.
+       (un pourcentage se calculerait sur la fenêtre entière, d'où 100vw moins la barre) */
+    padding-left: clamp(0px, calc((100vw - var(--sidenav-w) - var(--content-max)) / 2), 240px);
+    padding-right: clamp(0px, calc((100vw - var(--sidenav-w) - var(--content-max)) / 2), 240px);
+  }
+  /* Le halo couvre toute la largeur de la coquille */
+  html:not(.native) .app::before { left: 0; right: 0; }
+  /* La capsule du bas laisse la place à la barre latérale */
+  html:not(.native) .bottom-nav { display: none; }
+  html:not(.native) .content,
+  html:not(.native) .pg-content,
+  html:not(.native) .pf-content,
+  html:not(.native) .cours-content,
+  html:not(.native) .programme-content { padding-bottom: 48px; }
+}
+@media (min-width: 1024px) {
+  /* Feuilles du bas (coach, formats) : centrées dans la coquille, largeur bornée */
+  html:not(.native) .rv-sheet--bottom {
+    left: 0;
+    right: 0;
+    max-width: 560px;
+    margin: 0 auto;
+  }
+}

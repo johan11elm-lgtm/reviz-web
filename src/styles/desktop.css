@@ -1,0 +1,265 @@
+/* ─── Compositions ordinateur (≥ 1024 px, hors app native) ─────────
+ * Le langage visuel ne change pas (crème, cartes blanches, halo, encre,
+ * mascottes) : on compose pour la largeur au lieu d'agrandir la colonne
+ * du téléphone. Chaque page pose sa grille ; sous 1024 px, aucune de ces
+ * règles ne s'applique et l'app native garde ses règles plein écran.
+ * La coquille (barre latérale, colonne centrale) est dans global.css. */
+
+/* Indices clavier : invisibles hors ordinateur */
+.flashcards-kbd-hint,
+.quiz-kbd-hint { display: none; }
+
+@media (min-width: 1024px) {
+  :root {
+    --content-max: 1120px;
+    --rail-w: 360px;
+    --grid-gap: 24px;
+  }
+
+  html:not(.native) .flashcards-kbd-hint,
+  html:not(.native) .quiz-kbd-hint {
+    display: block;
+    margin: 14px auto 0;
+    text-align: center;
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+  html:not(.native) .flashcards-kbd-hint kbd,
+  html:not(.native) .quiz-kbd-hint kbd {
+    display: inline-block;
+    min-width: 20px;
+    padding: 1px 6px;
+    border-radius: 6px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    font: inherit;
+    font-size: 11px;
+    color: var(--text-secondary);
+  }
+
+  /* ── Accueil : tableau de bord ── */
+  html:not(.native) .home-page .content {
+    display: grid;
+    grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr);
+    grid-template-areas:
+      "banner    banner"
+      "greeting  greeting"
+      "cta       stats"
+      "cta       programme"
+      "featured  challenges";
+    column-gap: var(--grid-gap);
+    row-gap: 20px;
+    align-items: start;
+    align-content: start;
+  }
+  html:not(.native) .home-page .guest-banner        { grid-area: banner; margin: 0; }
+  html:not(.native) .home-page .home-greeting       { grid-area: greeting; }
+  html:not(.native) .home-page .home-cta            { grid-area: cta; margin-bottom: 0; align-self: stretch; }
+  html:not(.native) .home-page .home-progress-card  { grid-area: stats; margin-bottom: 0; }
+  html:not(.native) .home-page .home-programme-card { grid-area: programme; }
+  html:not(.native) .home-page .home-featured-card  { grid-area: featured; }
+  html:not(.native) .home-page .home-challenges-card{ grid-area: challenges; }
+
+  /* ── Mon programme : matières en grille, chapitres sur deux colonnes ── */
+  html:not(.native) .programme-page .programme-content:not(.programme-content--liste) {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--grid-gap);
+    align-content: start;
+  }
+  html:not(.native) .programme-page .programme-content:not(.programme-content--liste) > .guest-banner,
+  html:not(.native) .programme-page .programme-content:not(.programme-content--liste) > .programme-note,
+  html:not(.native) .programme-page .programme-content:not(.programme-content--liste) > .programme-empty,
+  html:not(.native) .programme-page .programme-content:not(.programme-content--liste) > .programme-skeleton {
+    grid-column: 1 / -1;
+  }
+  html:not(.native) .programme-page .programme-matiere {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 22px;
+    min-height: 196px;
+  }
+  html:not(.native) .programme-page .programme-matiere-text { width: 100%; }
+  html:not(.native) .programme-page .programme-matiere .programme-chevron { display: none; }
+  html:not(.native) .programme-page .programme-skeleton {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--grid-gap);
+  }
+  html:not(.native) .programme-page .programme-content--liste {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px var(--grid-gap);
+    align-content: start;
+  }
+  html:not(.native) .programme-page .programme-content--liste > .programme-callout,
+  html:not(.native) .programme-page .programme-content--liste > .programme-empty {
+    grid-column: 1 / -1;
+  }
+
+  /* ── Mes cours : liste à gauche, rail « À reprendre » à droite ── */
+  html:not(.native) .cours-page .cours-content {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) var(--rail-w);
+    grid-auto-rows: max-content;
+    column-gap: var(--grid-gap);
+    row-gap: 16px;
+    align-items: start;
+    align-content: start;
+  }
+  html:not(.native) .cours-page .cours-programme-link { grid-column: 2; grid-row: 1; }
+  html:not(.native) .cours-page .cours-resume-wrap    { grid-column: 2; grid-row: 2 / span 60; }
+  html:not(.native) .cours-page .cours-search-wrap    { grid-column: 1; grid-row: 1; }
+  html:not(.native) .cours-page .cours-filters-wrap   { grid-column: 1; grid-row: 2; margin-inline: 0; padding: 0; }
+  html:not(.native) .cours-page .cours-subject-section,
+  html:not(.native) .cours-page .cours-skeleton { grid-column: 1; }
+  html:not(.native) .cours-page .cours-empty-state { grid-column: 1 / -1; }
+  html:not(.native) .cours-page .cours-subject-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+  html:not(.native) .cours-page .cours-subject-list--hidden { display: none; }
+  html:not(.native) .cours-page .cours-resume-card { position: sticky; top: 0; }
+  html:not(.native) .cours-page .cours-resume-top { flex-direction: column; align-items: flex-start; gap: 8px; }
+  html:not(.native) .cours-page .cours-resume-body { width: 100%; }
+
+  /* ── Analyse : l'essentiel à gauche, les formats à droite ── */
+  html:not(.native) .analyse-page .analyse-content {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+    grid-template-areas:
+      "intro   intro"
+      "excerpt formats"
+      "coach   formats"
+      ".       formats";
+    gap: 16px var(--grid-gap);
+    align-items: start;
+    align-content: start;
+  }
+  html:not(.native) .analyse-page .analyse-content > .rv-page-intro { grid-area: intro; }
+  html:not(.native) .analyse-page .analyse-excerpt-card { grid-area: excerpt; }
+  html:not(.native) .analyse-page .analyse-format-grid { grid-area: formats; }
+  html:not(.native) .analyse-page .analyse-content > :not(.rv-page-intro):not(.analyse-excerpt-card):not(.analyse-format-grid) {
+    grid-area: coach;
+  }
+
+  /* ── Résumé : colonne de lecture + rail « à retenir » qui suit ── */
+  html:not(.native) .resume-page .resume-content {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) var(--rail-w);
+    grid-auto-rows: max-content;
+    column-gap: var(--grid-gap);
+    align-items: start;
+    align-content: start;
+  }
+  html:not(.native) .resume-page .resume-content > * { grid-column: 1; }
+  html:not(.native) .resume-page .resume-content > .rv-page-intro { grid-column: 1 / -1; }
+  html:not(.native) .resume-page .resume-retenir {
+    grid-column: 2;
+    grid-row: 2 / span 80;
+    position: sticky;
+    top: 8px;
+  }
+
+  /* ── Flashcards et Quiz : scène centrée, choix sur deux colonnes ── */
+  html:not(.native) .flashcards-page .flashcards-card-area {
+    width: 100%;
+    max-width: 640px;
+    margin-inline: auto;
+  }
+  html:not(.native) .quiz-page .quiz-content {
+    max-width: 820px;
+    margin-inline: auto;
+    width: 100%;
+  }
+  html:not(.native) .quiz-page .quiz-choices {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  /* ── Mes progrès : flux à deux colonnes, intertitres en pleine largeur ──
+   * Niveau | série, puis le calendrier d'activité à côté du graphique de la
+   * semaine (son intertitre devient redondant), les chiffres sur toute la
+   * largeur, le reste à la suite. */
+  html:not(.native) .progres-page .pg-content {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px var(--grid-gap);
+    align-items: start;
+    align-content: start;
+  }
+  html:not(.native) .progres-page .pg-content > .pg-intro,
+  html:not(.native) .progres-page .pg-content > .pg-section-title,
+  html:not(.native) .progres-page .pg-content > .pg-stats-grid { grid-column: 1 / -1; margin: 0; }
+  html:not(.native) .progres-page .pg-content > .pg-section-title { margin-top: 6px; }
+  html:not(.native) .progres-page .pg-level-card  { margin: 0; }
+  html:not(.native) .progres-page .pg-streak-card { margin: 0; align-self: stretch; }
+  html:not(.native) .progres-page .pg-weeks-card  { grid-column: 1; grid-row: 4; margin: 0; }
+  html:not(.native) .progres-page .pg-chart-card  { grid-column: 2; grid-row: 4; margin: 0; }
+  html:not(.native) .progres-page .pg-content > .pg-section-title:nth-of-type(3) { display: none; }
+
+  /* ── Profil : identité à gauche, badges à droite ── */
+  html:not(.native) .profile-page .pf-content {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr);
+    grid-template-areas:
+      "banner  banner"
+      "intro   badges"
+      "stats   badges"
+      "account badges"
+      ".       badges";
+    gap: 20px var(--grid-gap);
+    align-items: start;
+    align-content: start;
+  }
+  html:not(.native) .profile-page .pf-content > .guest-banner { grid-area: banner; }
+  html:not(.native) .profile-page .pf-intro { grid-area: intro; }
+  html:not(.native) .profile-page .pf-stats-card { grid-area: stats; margin: 0; }
+  html:not(.native) .profile-page .pf-section:has(.pf-badges-grid) { grid-area: badges; margin: 0; }
+  html:not(.native) .profile-page .pf-section:has(.pf-account-list) { grid-area: account; margin: 0; }
+
+  /* ── Réglages : deux colonnes ── */
+  html:not(.native) .reglages-page .rg-content {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px var(--grid-gap);
+    align-items: start;
+    align-content: start;
+  }
+  html:not(.native) .reglages-page .rg-intro,
+  html:not(.native) .reglages-page .rg-content > .guest-banner { grid-column: 1 / -1; }
+
+  /* ── Scanner : deux panneaux, photo et texte ── */
+  html:not(.native) .scan-page .scan-content--double {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--grid-gap);
+    align-items: start;
+  }
+  html:not(.native) .scan-page .scan-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    min-width: 0;
+  }
+  html:not(.native) .scan-page .scan-panel-title {
+    margin: 0;
+    font-family: 'Geist', sans-serif;
+    font-size: 17px;
+    font-weight: 800;
+    letter-spacing: -0.3px;
+    color: var(--text-primary);
+  }
+  html:not(.native) .scan-page .scan-viewfinder-shell--drop {
+    outline: 2px dashed var(--accent-orange);
+    outline-offset: 4px;
+    border-radius: 24px;
+  }
+  html:not(.native) .scan-page .scan-drop-hint { display: block; }
+}
+
+/* Indice de glisser-déposer : seulement sur ordinateur */
+.scan-drop-hint { display: none; margin: 0; font-size: 12.5px; color: var(--text-muted); text-align: center; }
