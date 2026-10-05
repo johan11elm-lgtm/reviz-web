@@ -456,6 +456,20 @@
   color: var(--accent-green-ink);
 }
 
+.scan-page .scan-char-counter--over {
+  color: var(--accent-orange-ink);
+}
+
+/* Leçon au-delà de la limite serveur (15 000 caractères) : on prévient
+   avant l'envoi, le bouton annonce qu'on analyse le début. */
+.scan-page .scan-text-over {
+  margin: 10px 2px 0;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.45;
+  color: var(--accent-orange-ink);
+}
+
 /* ── Modale niveau requis ── overlay + carte centrée DS-aligned. */
 .scan-page .scan-modal-overlay {
   position: fixed;

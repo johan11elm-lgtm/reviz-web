@@ -7,6 +7,7 @@ import { PageHeader } from '../components/PageHeader';
 import { PageIntro } from '../components/PageIntro';
 import { Mascot } from '../components/Mascot';
 import { analyseLesson, analyseImage, popPendingAnalysis } from '../services/aiService';
+import { LESSON_TEXT_MAX_LABEL } from '../utils/lessonText';
 import { saveLesson } from '../services/historyService';
 import { PremiumModal } from '../components/PremiumModal';
 import { MissingLessonState } from '../components/MissingLessonState';
@@ -169,6 +170,7 @@ export default function Analyse() {
     TIMEOUT:         { title: 'Ça a pris trop de temps', sub: 'Vérifie ta connexion et réessaie.' },
     UNAUTHORIZED:    { title: 'Reconnecte-toi', sub: 'Connexion expirée — reconnecte-toi puis réessaie.' },
     EMAIL_NOT_VERIFIED: { title: 'Confirme ton email d\'abord', sub: 'Pour scanner tes leçons, clique sur le lien qu\'on t\'a envoyé par email. Ça prend 10 secondes, promis !', cta: { label: 'Vérifier mon email', to: '/verify-email' } },
+    TEXT_TOO_LONG:   { title: 'Leçon trop longue', sub: `Réviz lit jusqu'à ${LESSON_TEXT_MAX_LABEL} caractères d'un coup. Raccourcis ton texte, ou découpe ta leçon en deux scans.`, cta: { label: 'Modifier mon texte', to: '/scan?mode=texte' } },
     IMAGE_TOO_LARGE: { title: 'Photo trop lourde', sub: 'Rapproche-toi de ta leçon et reprends la photo, ou recadre-la avant de réessayer.' },
     INVALID_JSON:    { title: 'Oups, ça a coincé', sub: 'Réviz n\'a pas réussi à lire cette leçon. Réessaie de la scanner.' },
     EMPTY_RESPONSE:  { title: 'Oups, ça a coincé', sub: 'Réviz n\'a pas réussi à lire cette leçon. Réessaie de la scanner.' },

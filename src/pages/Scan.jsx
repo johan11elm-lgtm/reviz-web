@@ -1,17 +1,22 @@
 import { CameraIcon, PencilIcon, BulbIcon, FrameIcon, SunIcon, SearchIcon, FileTextIcon } from '../components/Icons';
 import { useState, useEffect, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { PremiumModal } from '../components/PremiumModal';
 import { PageHeader } from '../components/PageHeader';
 import { Mascot } from '../components/Mascot';
 import { startAnalysis, startAnalysisFromImage } from '../services/aiService';
 import { getScanStatus } from '../services/scanLimitService';
+import { LESSON_TEXT_MAX_LABEL, isLessonTextTooLong, truncateLessonText } from '../utils/lessonText';
 import './Scan.css';
 
 export default function Scan() {
-  const [activeTab, setActiveTab]     = useState('photo');
-  const [lessonText, setLessonText]   = useState('');
+  // `?mode=texte` (retour depuis une erreur d'Analyse) : onglet Texte ouvert
+  // et texte collé restauré, pour corriger sans tout recoller.
+  const [searchParams] = useSearchParams();
+  const restoreText = searchParams.get('mode') === 'texte';
+  const [activeTab, setActiveTab]     = useState(restoreText ? 'texte' : 'photo');
+  const [lessonText, setLessonText]   = useState(() => (restoreText && localStorage.getItem('reviz-lesson-text')) || '');
   const [showLimit, setShowLimit]     = useState(false);
   const [showLevelRequired, setShowLevelRequired] = useState(false);
   const [tipOpen, setTipOpen]         = useState(false);
@@ -129,12 +134,17 @@ export default function Scan() {
     reader.readAsDataURL(file);
   }
 
+  const textTooLong = isLessonTextTooLong(lessonText);
+
   const handleAnalyse = () => {
     if (!checkLevel()) return;
     if (!checkLimit()) return;
+    // Au-delà de la limite serveur, le bouton annonce qu'on analyse le début :
+    // on envoie le texte coupé proprement plutôt que d'essuyer un TEXT_TOO_LONG.
+    const text = textTooLong ? truncateLessonText(lessonText) : lessonText;
     localStorage.removeItem('reviz-ai-data');
-    localStorage.setItem('reviz-lesson-text', lessonText);
-    startAnalysis(lessonText, userLevel);
+    localStorage.setItem('reviz-lesson-text', text);
+    startAnalysis(text, userLevel);
     navigate('/analyse');
   };
 
@@ -310,12 +320,20 @@ export default function Scan() {
                 autoFocus
               />
               <div
-                className={`scan-char-counter${lessonText.length >= 200 ? ' scan-char-counter--ok' : ''}`}
+                className={`scan-char-counter${textTooLong ? ' scan-char-counter--over' : lessonText.length >= 200 ? ' scan-char-counter--ok' : ''}`}
                 aria-live="polite"
               >
-                {lessonText.length} / 200 caractères
+                {textTooLong
+                  ? `${lessonText.length.toLocaleString('fr-FR')} / ${LESSON_TEXT_MAX_LABEL} caractères max`
+                  : `${lessonText.length} / 200 caractères`}
               </div>
             </div>
+
+            {textTooLong && (
+              <p className="scan-text-over">
+                {`Ta leçon est longue : Réviz analysera les ${LESSON_TEXT_MAX_LABEL} premiers caractères. Scanne la suite dans une seconde leçon.`}
+              </p>
+            )}
 
             <button
               type="button"
@@ -323,7 +341,7 @@ export default function Scan() {
               disabled={!lessonText.trim()}
               onClick={handleAnalyse}
             >
-              Analyser
+              {textTooLong ? `Analyser les ${LESSON_TEXT_MAX_LABEL} premiers caractères` : 'Analyser'}
             </button>
           </>
         )}
