@@ -1,0 +1,400 @@
+{
+  "classe": "4ème",
+  "matiere": "Maths",
+  "programme": "Mathématiques cycle 4 (BO spécial n°11 du 26/11/2015, ajusté BO n°31 du 30/07/2020), repères annuels de progression 2019",
+  "modele": "claude-opus-5-5 (abonnement)",
+  "genereLe": "2026-10-05",
+  "relu": false,
+  "chapitres": [
+    {
+      "id": "operations-sur-les-relatifs",
+      "titre": "Multiplication et division des nombres relatifs",
+      "ordre": 1,
+      "periode": "T1",
+      "notions": [
+        "Rappeler l'addition et la soustraction de deux nombres relatifs",
+        "Multiplier deux nombres relatifs en appliquant la règle des signes",
+        "Déterminer le signe d'un produit de plusieurs facteurs selon le nombre de facteurs négatifs",
+        "Diviser deux nombres relatifs (quotient, division par un nombre non nul)",
+        "Calculer une expression avec des relatifs en respectant les priorités opératoires",
+        "Connaître l'inverse d'un nombre non nul et l'opposé d'un nombre"
+      ],
+      "motsCles": [
+        "nombre relatif",
+        "signe",
+        "règle des signes",
+        "produit",
+        "quotient",
+        "facteur",
+        "opposé",
+        "inverse",
+        "priorités opératoires",
+        "distance à zéro"
+      ],
+      "reference": "Un nombre relatif est formé d'un signe (+ ou −) et d'une distance à zéro. Deux nombres opposés ont la même distance à zéro et des signes contraires.\nRappel : soustraire un nombre revient à ajouter son opposé. Exemple : 5 − (−3) = 5 + 3 = 8.\nRègle des signes : le produit de deux nombres de même signe est positif ; le produit de deux nombres de signes contraires est négatif.\nExemples : (−4) × (−5) = 20 ; (−4) × 5 = −20 ; 3 × (−7) = −21.\nLa distance à zéro du produit est le produit des distances à zéro.\nProduit de plusieurs facteurs non nuls : il est positif si le nombre de facteurs négatifs est pair, négatif s'il est impair.\nExemple : (−2) × (−3) × (−1) = −6 (trois facteurs négatifs) ; (−1) × (−2) × 5 × (−1) × (−1) = 10 (quatre facteurs négatifs).\nSi l'un des facteurs est nul, le produit est nul.\nLe quotient de deux nombres relatifs (diviseur non nul) suit la même règle des signes que le produit.\nExemples : (−20) ÷ (−4) = 5 ; 18 ÷ (−3) = −6 ; (−7)/2 = −3,5. On ne divise jamais par 0.\nÉcritures équivalentes : −a/b = (−a)/b = a/(−b).\nL'inverse d'un nombre non nul a est le nombre 1/a : a × 1/a = 1. Exemple : l'inverse de −4 est −1/4 = −0,25. Zéro n'a pas d'inverse.\nNe pas confondre opposé (somme nulle : 4 + (−4) = 0) et inverse (produit égal à 1 : 4 × 0,25 = 1).\nPriorités : parenthèses, puis multiplications et divisions, puis additions et soustractions. Exemple : −3 + 4 × (−2) = −3 + (−8) = −11.\nErreur classique : (−3)² = 9 alors que −3² = −9 (le carré ne porte que sur 3)."
+    },
+    {
+      "id": "operations-sur-les-fractions",
+      "titre": "Opérations sur les fractions",
+      "ordre": 2,
+      "periode": "T1",
+      "notions": [
+        "Comparer et simplifier des fractions grâce à l'égalité a/b = (a × k)/(b × k)",
+        "Additionner et soustraire des fractions de dénominateurs quelconques en les réduisant au même dénominateur",
+        "Multiplier des fractions et prendre une fraction d'une quantité",
+        "Déterminer l'inverse d'une fraction non nulle",
+        "Diviser par une fraction en multipliant par son inverse",
+        "Calculer avec des fractions et des nombres relatifs en respectant les priorités",
+        "Résoudre des problèmes utilisant des fractions"
+      ],
+      "motsCles": [
+        "fraction",
+        "numérateur",
+        "dénominateur",
+        "dénominateur commun",
+        "simplifier",
+        "fraction irréductible",
+        "produit",
+        "inverse",
+        "quotient",
+        "fraction d'une quantité"
+      ],
+      "reference": "Une fraction a/b (b ≠ 0) est le quotient de a par b : b × (a/b) = a.\nPropriété : on ne change pas une fraction en multipliant (ou divisant) numérateur et dénominateur par un même nombre non nul : a/b = (a × k)/(b × k).\nSimplifier : 18/24 = (6 × 3)/(6 × 4) = 3/4. Une fraction est irréductible quand on ne peut plus la simplifier.\nAddition / soustraction : on réduit au même dénominateur, puis on additionne (ou soustrait) les numérateurs ; le dénominateur ne change pas.\nExemple : 2/3 + 3/4 = 8/12 + 9/12 = 17/12. Exemple : 5/6 − 1/4 = 10/12 − 3/12 = 7/12.\nErreur classique : 2/3 + 3/4 ≠ 5/7 (on n'additionne pas les dénominateurs).\nMultiplication : on multiplie les numérateurs entre eux et les dénominateurs entre eux : (a/b) × (c/d) = (a × c)/(b × d).\nExemple : 3/5 × 10/9 = 30/45 = 2/3. On simplifie de préférence avant de calculer : (3 × 10)/(5 × 9) = (3 × 2 × 5)/(5 × 3 × 3) = 2/3.\nPrendre une fraction d'une quantité revient à multiplier : les 3/4 de 20 € valent 3/4 × 20 = 15 €.\nInverse : l'inverse de a/b (a ≠ 0 et b ≠ 0) est b/a, car (a/b) × (b/a) = 1. Exemple : l'inverse de 2/7 est 7/2 ; l'inverse de 5 est 1/5.\nDivision : diviser par une fraction non nulle revient à multiplier par son inverse : (a/b) ÷ (c/d) = (a/b) × (d/c).\nExemple : 3/4 ÷ 5/2 = 3/4 × 2/5 = 6/20 = 3/10.\nSignes : −2/3 × 9/4 = −18/12 = −3/2 ; la règle des signes s'applique comme pour les relatifs.\nPriorités : les multiplications et divisions passent avant les additions et soustractions : 1/2 + 1/2 × 1/3 = 1/2 + 1/6 = 3/6 + 1/6 = 4/6 = 2/3."
+    },
+    {
+      "id": "theoreme-de-pythagore",
+      "titre": "Racine carrée et théorème de Pythagore",
+      "ordre": 3,
+      "periode": "T1",
+      "notions": [
+        "Connaître la définition de la racine carrée d'un nombre positif et les carrés parfaits usuels",
+        "Utiliser la calculatrice pour obtenir une valeur exacte ou une valeur approchée d'une racine carrée",
+        "Reconnaître l'hypoténuse d'un triangle rectangle",
+        "Calculer une longueur dans un triangle rectangle avec le théorème de Pythagore",
+        "Démontrer qu'un triangle est rectangle avec la réciproque du théorème de Pythagore",
+        "Démontrer qu'un triangle n'est pas rectangle avec la contraposée",
+        "Rédiger une démonstration : données, propriété utilisée, conclusion"
+      ],
+      "motsCles": [
+        "racine carrée",
+        "carré parfait",
+        "triangle rectangle",
+        "hypoténuse",
+        "côtés de l'angle droit",
+        "théorème de Pythagore",
+        "réciproque",
+        "contraposée",
+        "égalité de Pythagore",
+        "valeur approchée"
+      ],
+      "reference": "La racine carrée d'un nombre positif a est le nombre positif, noté √a, dont le carré est a : (√a)² = a.\nCarrés parfaits : √1 = 1, √4 = 2, √9 = 3, √16 = 4, √25 = 5, √36 = 6, √49 = 7, √64 = 8, √81 = 9, √100 = 10, √144 = 12.\nUn nombre négatif n'a pas de racine carrée. √50 n'est pas entier : √50 ≈ 7,07 (valeur approchée au centième).\nDans un triangle rectangle, l'hypoténuse est le côté opposé à l'angle droit ; c'est le plus long côté.\nThéorème de Pythagore : si un triangle ABC est rectangle en A, alors BC² = AB² + AC² (le carré de l'hypoténuse est égal à la somme des carrés des deux autres côtés).\nCalcul de l'hypoténuse : ABC rectangle en A, AB = 3 cm, AC = 4 cm : BC² = 9 + 16 = 25, donc BC = √25 = 5 cm.\nCalcul d'un côté de l'angle droit : ABC rectangle en A, BC = 13 cm, AB = 5 cm : AC² = 13² − 5² = 169 − 25 = 144, donc AC = 12 cm.\nSi le résultat n'est pas un carré parfait, on donne la valeur exacte √… puis une valeur approchée : AB = 2 et AC = 3 donnent BC = √13 ≈ 3,6.\nRéciproque : si dans un triangle ABC on a BC² = AB² + AC², alors ce triangle est rectangle en A.\nMéthode : on calcule séparément le carré du plus grand côté et la somme des carrés des deux autres côtés, puis on compare.\nExemple : DE = 6, EF = 8, DF = 10 : DF² = 100 et DE² + EF² = 36 + 64 = 100 ; égalité, donc DEF est rectangle en E.\nContraposée : si BC² ≠ AB² + AC² (BC étant le plus grand côté), alors le triangle n'est pas rectangle. Exemple : 4, 5, 6 : 36 ≠ 16 + 25 = 41.\nTriplets pythagoriciens classiques : (3 ; 4 ; 5), (5 ; 12 ; 13), (6 ; 8 ; 10), (8 ; 15 ; 17).\nRédaction : « Le triangle ABC est rectangle en A. D'après le théorème de Pythagore, BC² = AB² + AC². »"
+    },
+    {
+      "id": "expressions-litterales-et-equations",
+      "titre": "Expressions littérales et équations du premier degré",
+      "ordre": 4,
+      "periode": "T1",
+      "notions": [
+        "Utiliser les conventions d'écriture (signe × sous-entendu, a², a³)",
+        "Calculer la valeur d'une expression littérale en remplaçant la lettre par un nombre (substitution)",
+        "Réduire une somme algébrique en regroupant les termes de même nature",
+        "Tester si une égalité est vraie pour une valeur donnée",
+        "Vérifier si un nombre est solution d'une équation",
+        "Résoudre une équation du premier degré du type ax + b = cx + d",
+        "Mettre un problème en équation et interpréter la solution"
+      ],
+      "motsCles": [
+        "expression littérale",
+        "variable",
+        "substituer",
+        "réduire",
+        "terme",
+        "coefficient",
+        "égalité",
+        "équation",
+        "inconnue",
+        "solution",
+        "résoudre"
+      ],
+      "reference": "Une expression littérale contient une ou plusieurs lettres qui désignent des nombres.\nConventions : 3 × x s'écrit 3x ; a × b s'écrit ab ; x × x = x² ; x × x × x = x³ ; 1x s'écrit x. On garde × entre deux nombres : 3 × 5.\nSubstituer : pour x = −2, l'expression 3x² − 5x + 1 vaut 3 × (−2)² − 5 × (−2) + 1 = 12 + 10 + 1 = 23.\nRéduire : on regroupe les termes de même nature. 5x + 3 − 2x + 7 = 3x + 10 ; 4x² + 3x − x² = 3x² + 3x.\nErreur classique : 3x + 2 ne se réduit pas en 5x ; x² + x ne vaut pas x³.\nUne égalité contenant une ou des lettres peut être vraie pour certaines valeurs et fausse pour d'autres : pour la tester, on calcule séparément chaque membre.\nExemple : 2x + 3 = 5x − 6 pour x = 3 : 2 × 3 + 3 = 9 et 5 × 3 − 6 = 9 ; l'égalité est vraie.\nUne équation est une égalité où figure une inconnue. Une solution est une valeur de l'inconnue pour laquelle l'égalité est vraie. Résoudre, c'est trouver toutes les solutions.\nRègle 1 : on obtient une équation équivalente en ajoutant ou en soustrayant un même nombre aux deux membres.\nRègle 2 : on obtient une équation équivalente en multipliant ou en divisant les deux membres par un même nombre non nul.\nExemple : 5x − 4 = 2x + 11 ; 5x − 2x = 11 + 4 ; 3x = 15 ; x = 15 ÷ 3 = 5. Vérification : 5 × 5 − 4 = 21 et 2 × 5 + 11 = 21.\nExemple : 4x + 7 = 1 ; 4x = −6 ; x = −6/4 = −1,5.\nMettre en équation : choisir l'inconnue, écrire l'équation, la résoudre, vérifier, conclure par une phrase.\nExemple : trois nombres entiers consécutifs ont pour somme 81 : x + (x + 1) + (x + 2) = 81 ; 3x + 3 = 81 ; x = 26 ; les nombres sont 26, 27 et 28."
+    },
+    {
+      "id": "proportionnalite",
+      "titre": "Proportionnalité : quatrième proportionnelle, graphiques et pourcentages",
+      "ordre": 5,
+      "periode": "T1",
+      "notions": [
+        "Reconnaître une situation de proportionnalité dans un tableau (égalité des quotients ou produits en croix)",
+        "Calculer une quatrième proportionnelle par l'égalité des produits en croix",
+        "Reconnaître graphiquement la proportionnalité : points alignés avec l'origine",
+        "Appliquer un pourcentage et calculer un pourcentage de répartition",
+        "Utiliser une échelle sur une carte ou un plan",
+        "Utiliser la relation d = v × t pour un mouvement à vitesse constante"
+      ],
+      "motsCles": [
+        "proportionnalité",
+        "coefficient de proportionnalité",
+        "quatrième proportionnelle",
+        "produits en croix",
+        "représentation graphique",
+        "origine du repère",
+        "pourcentage",
+        "échelle",
+        "vitesse moyenne",
+        "grandeurs proportionnelles"
+      ],
+      "reference": "Deux grandeurs sont proportionnelles quand on obtient les valeurs de l'une en multipliant celles de l'autre par un même nombre non nul, le coefficient de proportionnalité.\nDans un tableau de proportionnalité, tous les quotients (deuxième ligne ÷ première ligne) sont égaux.\nProduits en croix : a/b = c/d (b ≠ 0, d ≠ 0) équivaut à a × d = b × c.\nQuatrième proportionnelle : si 3 kg coûtent 7,50 € et x kg coûtent 12,50 €, alors 3/7,5 = x/12,5 donc x = 3 × 12,5 ÷ 7,5 = 5 kg.\nReprésentation graphique : une situation de proportionnalité est représentée par des points alignés avec l'origine du repère.\nRéciproquement, si les points sont alignés avec l'origine, il y a proportionnalité. Des points alignés sur une droite qui ne passe pas par l'origine ne traduisent pas une proportionnalité.\nPrendre t % d'une quantité, c'est la multiplier par t/100. Exemple : 15 % de 80 € = 80 × 15/100 = 12 €.\nPourcentage de répartition : 12 élèves sur 30 font du sport : 12/30 = 0,4 = 40 %.\nAugmenter de 20 % un prix de 50 € : 50 + 50 × 20/100 = 60 €. Diminuer de 10 % un prix de 50 € : 50 − 5 = 45 €.\nÉchelle : sur une carte, les distances sont proportionnelles aux distances réelles. Échelle = distance sur la carte / distance réelle (même unité).\nExemple : à l'échelle 1/25 000, 4 cm sur la carte représentent 4 × 25 000 = 100 000 cm = 1 km.\nMouvement uniforme : la distance parcourue est proportionnelle à la durée ; le coefficient est la vitesse. d = v × t, v = d/t, t = d/v.\nExemple : à 90 km/h pendant 2 h 30 min = 2,5 h, on parcourt 90 × 2,5 = 225 km. Attention : 2 h 30 min ≠ 2,30 h.\nContre-exemple : la taille d'un enfant n'est pas proportionnelle à son âge."
+    },
+    {
+      "id": "triangles-semblables",
+      "titre": "Triangles semblables",
+      "ordre": 6,
+      "periode": "T2",
+      "notions": [
+        "Définir des triangles semblables (angles deux à deux égaux)",
+        "Reconnaître des triangles semblables à partir de leurs angles",
+        "Reconnaître des triangles semblables à partir de la proportionnalité de leurs longueurs",
+        "Identifier les sommets et côtés homologues de deux triangles semblables",
+        "Calculer une longueur à l'aide du rapport de proportionnalité",
+        "Relier triangles semblables, agrandissement et réduction"
+      ],
+      "motsCles": [
+        "triangles semblables",
+        "angles égaux",
+        "sommets homologues",
+        "côtés homologues",
+        "longueurs proportionnelles",
+        "rapport",
+        "agrandissement",
+        "réduction",
+        "somme des angles"
+      ],
+      "reference": "Deux triangles sont semblables lorsque leurs angles sont deux à deux de même mesure.\nDeux triangles qui ont deux angles respectivement égaux sont semblables : le troisième angle est aussi égal, car la somme des angles d'un triangle vaut 180°.\nExemple : un triangle d'angles 50° et 60° et un triangle d'angles 60° et 70° sont semblables (angles 50°, 60°, 70° dans les deux).\nPropriété : si deux triangles sont semblables, alors les longueurs de leurs côtés sont proportionnelles.\nRéciproque : si les longueurs des côtés de deux triangles sont proportionnelles, alors ces triangles sont semblables.\nLes sommets homologues (ou correspondants) sont les sommets des angles égaux ; les côtés homologues sont opposés aux angles égaux.\nLe plus grand côté de l'un correspond au plus grand côté de l'autre, et le plus petit au plus petit.\nExemple : ABC de côtés 3, 4, 5 et DEF de côtés 6, 8, 10 : 6/3 = 8/4 = 10/5 = 2 ; les triangles sont semblables, DEF est un agrandissement de ABC de rapport 2.\nCalcul : ABC et A'B'C' sont semblables avec A'B'/AB = 1,5. Si BC = 6 cm, alors B'C' = 6 × 1,5 = 9 cm.\nUn rapport k > 1 correspond à un agrandissement, un rapport 0 < k < 1 à une réduction ; k = 1 donne des triangles égaux (superposables).\nDeux triangles égaux sont semblables, mais deux triangles semblables ne sont pas forcément égaux.\nContre-exemple : deux triangles qui ont seulement un angle égal ne sont pas forcément semblables.\nRédaction : « Les triangles ABC et DEF ont deux angles égaux, donc ils sont semblables. Leurs longueurs sont donc proportionnelles : DE/AB = EF/BC = DF/AC. »"
+    },
+    {
+      "id": "puissances",
+      "titre": "Puissances et notation scientifique",
+      "ordre": 7,
+      "periode": "T2",
+      "notions": [
+        "Comprendre la notation aⁿ (n entier positif) comme produit de n facteurs égaux à a",
+        "Calculer des puissances de nombres relatifs en maîtrisant le signe",
+        "Connaître les puissances de 10 à exposant positif et négatif",
+        "Utiliser les préfixes de nano à giga",
+        "Écrire un nombre en notation scientifique",
+        "Comparer et calculer des ordres de grandeur avec des puissances de 10"
+      ],
+      "motsCles": [
+        "puissance",
+        "exposant",
+        "base",
+        "carré",
+        "cube",
+        "puissance de 10",
+        "notation scientifique",
+        "ordre de grandeur",
+        "préfixe",
+        "nano",
+        "giga"
+      ],
+      "reference": "Pour un nombre a et un entier n ≥ 1 : aⁿ = a × a × … × a (n facteurs). a est la base, n l'exposant. Par convention, a¹ = a et a⁰ = 1 (a ≠ 0).\nExemples : 2⁵ = 2 × 2 × 2 × 2 × 2 = 32 ; 3² = 9 (« 3 au carré ») ; 4³ = 64 (« 4 au cube »).\nErreur classique : 2⁵ ≠ 2 × 5.\nSigne : (−2)⁴ = 16 (exposant pair, résultat positif) ; (−2)³ = −8 (exposant impair, résultat négatif) ; mais −2⁴ = −16.\nPuissances de 10 : 10ⁿ = 1 suivi de n zéros (10³ = 1 000) ; 10⁻ⁿ = 1/10ⁿ = 0,0…01 avec n chiffres après la virgule (10⁻³ = 0,001).\nMultiplier par 10ⁿ décale la virgule de n rangs vers la droite ; multiplier par 10⁻ⁿ la décale de n rangs vers la gauche.\nRègles : 10ᵐ × 10ⁿ = 10ᵐ⁺ⁿ ; 10ᵐ / 10ⁿ = 10ᵐ⁻ⁿ ; (10ᵐ)ⁿ = 10ᵐˣⁿ. Exemples : 10⁴ × 10⁻⁶ = 10⁻² ; 10⁵ / 10² = 10³.\nPréfixes : giga (G) = 10⁹ ; méga (M) = 10⁶ ; kilo (k) = 10³ ; milli (m) = 10⁻³ ; micro (µ) = 10⁻⁶ ; nano (n) = 10⁻⁹.\nNotation scientifique : a × 10ⁿ avec 1 ≤ a < 10 (a a un seul chiffre non nul avant la virgule) et n entier relatif.\nExemples : 45 000 = 4,5 × 10⁴ ; 0,000 72 = 7,2 × 10⁻⁴ ; 38 × 10⁵ = 3,8 × 10⁶.\nErreur classique : 45 × 10³ est une écriture correcte de 45 000 mais n'est pas la notation scientifique.\nOrdre de grandeur : la distance Terre–Soleil vaut environ 1,5 × 10⁸ km ; la taille d'une bactérie est de l'ordre de 10⁻⁶ m (1 µm).\nComparer : on compare d'abord les exposants des notations scientifiques, puis les nombres a si les exposants sont égaux."
+    },
+    {
+      "id": "translations-et-rotations",
+      "titre": "Translations et rotations",
+      "ordre": 8,
+      "periode": "T2",
+      "notions": [
+        "Construire l'image d'un point et d'une figure par une translation",
+        "Construire l'image d'une figure par une rotation de centre et d'angle donnés (sens indiqué)",
+        "Reconnaître une translation, une rotation ou une symétrie dans une frise, un pavage ou une rosace",
+        "Connaître les propriétés de conservation des transformations (longueurs, angles, aires, alignement, parallélisme)",
+        "Relier la symétrie centrale à une rotation d'angle 180°",
+        "Utiliser un logiciel de géométrie dynamique pour construire des images"
+      ],
+      "motsCles": [
+        "transformation",
+        "translation",
+        "glissement",
+        "rotation",
+        "centre de rotation",
+        "angle de rotation",
+        "sens",
+        "image",
+        "conservation",
+        "frise",
+        "pavage",
+        "rosace"
+      ],
+      "reference": "Une transformation associe à chaque point M d'une figure un point M', son image.\nTranslation : la translation qui transforme A en B fait glisser toute figure dans la même direction (celle de (AB)), le même sens (de A vers B) et sur la même longueur AB.\nSi M' est l'image de M par la translation qui transforme A en B, alors ABM'M est un parallélogramme (éventuellement aplati).\nRotation : la rotation de centre O, d'angle α et de sens donné transforme M en M' tel que OM' = OM et l'angle MOM' = α, dans le sens indiqué (horaire ou anti-horaire).\nLe centre d'une rotation est le seul point qui ne bouge pas (sauf rotation d'angle 0°).\nUne symétrie centrale de centre O est une rotation de centre O et d'angle 180°.\nConstruction d'une image par rotation : tracer [OM], reporter l'angle α au rapporteur dans le bon sens, reporter la longueur OM au compas.\nPropriétés : symétries, translations et rotations conservent les longueurs, les mesures d'angles, les aires, l'alignement et le parallélisme.\nL'image d'une droite est une droite, d'un segment un segment de même longueur, d'un cercle un cercle de même rayon.\nUne figure et son image par l'une de ces transformations sont superposables.\nUne translation conserve l'orientation de la figure ; une symétrie axiale la retourne.\nFrise : motif répété par translation dans une seule direction. Pavage : plan recouvert sans trou ni chevauchement. Rosace : motif répété par rotation autour d'un centre.\nExemple : une rosace à 6 motifs identiques est obtenue par des rotations de 360° ÷ 6 = 60°."
+    },
+    {
+      "id": "developper-et-factoriser",
+      "titre": "Développer, factoriser et réduire",
+      "ordre": 9,
+      "periode": "T2",
+      "notions": [
+        "Utiliser la distributivité simple pour développer k(a + b) et k(a − b)",
+        "Factoriser une expression en mettant en évidence un facteur commun",
+        "Réduire une expression après développement",
+        "Supprimer des parenthèses précédées d'un signe + ou −",
+        "Utiliser le calcul littéral pour prouver une propriété générale",
+        "Utiliser la distributivité pour le calcul mental"
+      ],
+      "motsCles": [
+        "distributivité",
+        "développer",
+        "factoriser",
+        "réduire",
+        "facteur commun",
+        "somme",
+        "produit",
+        "parenthèses",
+        "opposé",
+        "expression littérale"
+      ],
+      "reference": "Distributivité simple : pour tous nombres k, a, b : k(a + b) = ka + kb et k(a − b) = ka − kb.\nDévelopper, c'est transformer un produit en somme. Exemple : 3(x + 5) = 3x + 15 ; −2(4x − 3) = −8x + 6.\nFactoriser, c'est transformer une somme en produit en repérant un facteur commun : ka + kb = k(a + b).\nExemples : 6x + 12 = 6(x + 2) ; 5x² − 3x = x(5x − 3) ; 7a − 7 = 7(a − 1).\nRéduire : regrouper les termes de même nature après développement. Exemple : 2(3x + 1) + 4(x − 2) = 6x + 2 + 4x − 8 = 10x − 6.\nParenthèses précédées de + : on les supprime sans rien changer. a + (b − c) = a + b − c.\nParenthèses précédées de − : on les supprime en changeant chaque terme en son opposé. a − (b − c) = a − b + c.\nExemple : 5x − (2x − 3) = 5x − 2x + 3 = 3x + 3.\nErreur classique : 3(x + 5) ≠ 3x + 5 ; il faut multiplier chaque terme de la parenthèse.\nVérification : on peut tester un développement en remplaçant x par une valeur, par exemple x = 1.\nProuver une propriété : la somme de trois entiers consécutifs n, n + 1, n + 2 vaut 3n + 3 = 3(n + 1), c'est donc un multiple de 3.\nCalcul mental : 23 × 101 = 23 × 100 + 23 × 1 = 2 323 ; 15 × 98 = 15 × 100 − 15 × 2 = 1 470.\nFactoriser pour calculer : 37 × 8 + 37 × 2 = 37 × (8 + 2) = 370."
+    },
+    {
+      "id": "statistiques",
+      "titre": "Statistiques : moyenne pondérée, médiane et étendue",
+      "ordre": 10,
+      "periode": "T2",
+      "notions": [
+        "Lire et organiser des données dans un tableau d'effectifs et de fréquences",
+        "Calculer une fréquence et l'exprimer en pourcentage",
+        "Calculer une moyenne simple et une moyenne pondérée par les effectifs ou des coefficients",
+        "Déterminer une médiane d'une série ordonnée et l'interpréter",
+        "Calculer l'étendue d'une série",
+        "Lire et construire des diagrammes, utiliser un tableur"
+      ],
+      "motsCles": [
+        "série statistique",
+        "effectif",
+        "effectif total",
+        "fréquence",
+        "moyenne",
+        "moyenne pondérée",
+        "coefficient",
+        "médiane",
+        "étendue",
+        "diagramme",
+        "tableur"
+      ],
+      "reference": "Une série statistique est un ensemble de données. L'effectif d'une valeur est le nombre de fois où elle apparaît ; l'effectif total est le nombre de données.\nFréquence d'une valeur = effectif de la valeur / effectif total ; elle est comprise entre 0 et 1 et peut s'écrire en pourcentage. La somme des fréquences vaut 1.\nMoyenne = somme des valeurs / effectif total. Exemple : 12, 8, 15, 9 : (12 + 8 + 15 + 9) ÷ 4 = 44 ÷ 4 = 11.\nMoyenne pondérée : on multiplie chaque valeur par son effectif (ou son coefficient), on additionne, puis on divise par la somme des effectifs (ou des coefficients).\nExemple : notes 12 (coef. 2) et 15 (coef. 1) : (12 × 2 + 15 × 1) ÷ 3 = 39 ÷ 3 = 13.\nExemple : 3 élèves ont 10, 5 élèves ont 14, 2 élèves ont 18 : (3 × 10 + 5 × 14 + 2 × 18) ÷ 10 = 136 ÷ 10 = 13,6.\nMédiane : la série étant rangée dans l'ordre croissant, c'est une valeur qui partage la série en deux groupes de même effectif : au moins la moitié des valeurs sont inférieures ou égales, au moins la moitié supérieures ou égales.\nEffectif impair : la médiane est la valeur du milieu. Série 3 ; 5 ; 7 ; 9 ; 20 : médiane 7 (3e valeur).\nEffectif pair : on prend en général la moyenne des deux valeurs centrales. Série 4 ; 6 ; 9 ; 11 ; 13 ; 15 : médiane (9 + 11) ÷ 2 = 10.\nErreur classique : oublier de ranger la série avant de chercher la médiane.\nLa moyenne est sensible aux valeurs extrêmes, la médiane beaucoup moins. Série 3 ; 5 ; 7 ; 9 ; 20 : moyenne 8,8, médiane 7.\nÉtendue = plus grande valeur − plus petite valeur ; elle mesure la dispersion. Série 3 ; 5 ; 7 ; 9 ; 20 : étendue 20 − 3 = 17.\nReprésentations : diagramme en bâtons, histogramme, diagramme circulaire (angle = fréquence × 360°)."
+    },
+    {
+      "id": "pyramides-et-cones",
+      "titre": "Pyramides et cônes : représentations et volumes",
+      "ordre": 11,
+      "periode": "T3",
+      "notions": [
+        "Reconnaître et nommer une pyramide et un cône de révolution (sommet, base, hauteur, faces, arêtes)",
+        "Représenter une pyramide ou un cône en perspective cavalière",
+        "Construire ou reconnaître un patron de pyramide et de cône",
+        "Calculer le volume d'une pyramide et d'un cône",
+        "Convertir des unités de volume et de contenance",
+        "Se repérer dans un pavé droit (abscisse, ordonnée, altitude)"
+      ],
+      "motsCles": [
+        "pyramide",
+        "cône de révolution",
+        "sommet",
+        "base",
+        "hauteur",
+        "apothème",
+        "face latérale",
+        "patron",
+        "perspective cavalière",
+        "volume",
+        "contenance",
+        "litre"
+      ],
+      "reference": "Une pyramide a pour base un polygone et pour faces latérales des triangles qui ont un sommet commun, le sommet de la pyramide.\nLa hauteur d'une pyramide est le segment issu du sommet et perpendiculaire à la base (ou sa longueur).\nUne pyramide régulière a pour base un polygone régulier (triangle équilatéral, carré…) et ses faces latérales sont des triangles isocèles superposables.\nExemple : une pyramide à base carrée a 5 faces (1 carré + 4 triangles), 8 arêtes et 5 sommets.\nUn cône de révolution est obtenu en faisant tourner un triangle rectangle autour d'un côté de l'angle droit ; sa base est un disque.\nPatron d'un cône : un disque (la base) et une portion de disque (la face latérale).\nEn perspective cavalière, les arêtes cachées sont en pointillés et les faces de face sont en vraie grandeur.\nVolume d'une pyramide ou d'un cône : V = (aire de la base × hauteur) / 3.\nExemple : pyramide à base carrée de côté 6 cm et de hauteur 5 cm : V = (6 × 6 × 5) / 3 = 60 cm³.\nCône : V = (π × r² × h) / 3. Exemple : r = 3 cm, h = 10 cm : V = (π × 9 × 10)/3 = 30π ≈ 94,2 cm³.\nUne pyramide a un volume trois fois plus petit que le prisme de même base et de même hauteur ; un cône, trois fois plus petit que le cylindre correspondant.\nUnités : 1 m³ = 1 000 dm³ ; 1 dm³ = 1 000 cm³ ; 1 dm³ = 1 L ; 1 cm³ = 1 mL.\nRepérage dans un pavé droit : un point est repéré par trois nombres, son abscisse, son ordonnée et son altitude, à partir d'une origine.\nErreur classique : oublier de diviser par 3, ou multiplier par l'apothème (hauteur d'une face) au lieu de la hauteur."
+    },
+    {
+      "id": "probabilites",
+      "titre": "Probabilités",
+      "ordre": 12,
+      "periode": "T3",
+      "notions": [
+        "Utiliser le vocabulaire : expérience aléatoire, issue, événement, événement élémentaire",
+        "Reconnaître une situation d'équiprobabilité",
+        "Calculer la probabilité d'un événement dans une situation d'équiprobabilité",
+        "Connaître les propriétés : probabilité entre 0 et 1, événement certain, impossible",
+        "Calculer la probabilité de l'événement contraire",
+        "Relier fréquence observée et probabilité lors de nombreuses répétitions"
+      ],
+      "motsCles": [
+        "expérience aléatoire",
+        "issue",
+        "événement",
+        "événement élémentaire",
+        "équiprobabilité",
+        "probabilité",
+        "événement certain",
+        "événement impossible",
+        "événement contraire",
+        "fréquence",
+        "incompatibles"
+      ],
+      "reference": "Une expérience aléatoire a plusieurs résultats possibles, appelés issues, et on ne peut pas prévoir lequel se produira.\nUn événement est un ensemble d'issues. Un événement élémentaire est formé d'une seule issue.\nExemple : lancer d'un dé à 6 faces ; issues 1, 2, 3, 4, 5, 6 ; l'événement « obtenir un nombre pair » est réalisé par 2, 4, 6.\nLa probabilité d'un événement est un nombre compris entre 0 et 1 ; elle peut s'écrire sous forme de fraction, de décimal ou de pourcentage.\nUn événement impossible a une probabilité 0 ; un événement certain a une probabilité 1.\nLa somme des probabilités de toutes les issues d'une expérience vaut 1.\nÉquiprobabilité : toutes les issues ont la même probabilité (dé équilibré, pièce équilibrée, tirage au hasard de boules indiscernables au toucher).\nEn situation d'équiprobabilité : P(A) = nombre d'issues favorables à A / nombre total d'issues.\nExemple : P(« obtenir un nombre pair ») = 3/6 = 1/2. Urne de 3 boules rouges et 5 vertes : P(rouge) = 3/8.\nL'événement contraire de A, noté « non A », est réalisé quand A ne l'est pas : P(non A) = 1 − P(A).\nExemple : P(« obtenir 6 ») = 1/6, donc P(« ne pas obtenir 6 ») = 5/6.\nDeux événements incompatibles ne peuvent pas se réaliser en même temps.\nQuand on répète un très grand nombre de fois une expérience, la fréquence observée d'un événement se rapproche de sa probabilité.\nErreur classique : penser qu'après cinq « pile », « face » est plus probable ; chaque lancer reste indépendant, P(face) = 1/2."
+    },
+    {
+      "id": "nombres-premiers",
+      "titre": "Divisibilité et nombres premiers",
+      "ordre": 13,
+      "periode": "T3",
+      "notions": [
+        "Utiliser le vocabulaire multiple, diviseur, divisible et la division euclidienne",
+        "Appliquer les critères de divisibilité par 2, 3, 5, 9 et 10",
+        "Connaître la définition d'un nombre premier et les nombres premiers inférieurs à 30",
+        "Déterminer si un entier est premier",
+        "Décomposer un entier en produit de facteurs premiers",
+        "Utiliser la décomposition pour simplifier une fraction et résoudre des problèmes"
+      ],
+      "motsCles": [
+        "multiple",
+        "diviseur",
+        "divisible",
+        "division euclidienne",
+        "critère de divisibilité",
+        "nombre premier",
+        "décomposition",
+        "facteur premier",
+        "fraction irréductible",
+        "crible d'Ératosthène"
+      ],
+      "reference": "Division euclidienne : pour deux entiers a et b (b ≠ 0), a = b × q + r avec 0 ≤ r < b. Exemple : 47 = 6 × 7 + 5.\nSi le reste est nul, a est un multiple de b, b est un diviseur de a, a est divisible par b. Exemple : 36 = 4 × 9.\nCritères : divisible par 2 si le chiffre des unités est pair ; par 5 s'il est 0 ou 5 ; par 10 s'il est 0 ; par 3 (ou par 9) si la somme des chiffres est divisible par 3 (ou par 9).\nUn nombre premier est un entier naturel qui a exactement deux diviseurs distincts : 1 et lui-même.\n1 n'est pas premier (un seul diviseur) ; 2 est le seul nombre premier pair.\nNombres premiers inférieurs à 30 : 2, 3, 5, 7, 11, 13, 17, 19, 23, 29.\nCrible d'Ératosthène : on barre successivement les multiples de 2, 3, 5, 7… ; les nombres non barrés (sauf 1) sont premiers.\nTester si un nombre est premier : chercher un diviseur parmi les nombres premiers 2, 3, 5, 7, 11… ; on peut s'arrêter quand le carré du diviseur testé dépasse le nombre. Exemple : 91 = 7 × 13 n'est pas premier ; 97 est premier.\nTout entier supérieur ou égal à 2 se décompose en produit de facteurs premiers, et cette décomposition est unique (à l'ordre près).\nMéthode : diviser successivement par les nombres premiers dans l'ordre. 60 = 2 × 30 = 2 × 2 × 15 = 2 × 2 × 3 × 5 = 2² × 3 × 5.\nExemple : 126 = 2 × 3² × 7 ; 84 = 2² × 3 × 7.\nSimplifier une fraction : 84/126 = (2 × 2 × 3 × 7)/(2 × 3 × 3 × 7) = 2/3, fraction irréductible.\nProblème type : partager 84 billes rouges et 126 bleues en paquets identiques le plus nombreux possible : on cherche le plus grand diviseur commun, 2 × 3 × 7 = 42 paquets."
+    },
+    {
+      "id": "algorithmique-et-programmation",
+      "titre": "Algorithmique et programmation",
+      "ordre": 14,
+      "periode": "T3",
+      "notions": [
+        "Écrire et lire un programme en langage par blocs (Scratch)",
+        "Utiliser des variables : créer, initialiser, modifier",
+        "Utiliser les boucles (répéter n fois, répéter jusqu'à) et les instructions conditionnelles (si… alors… sinon)",
+        "Déclencher des actions par des événements et faire communiquer des lutins par messages",
+        "Créer et utiliser un bloc personnalisé (sous-programme)",
+        "Décomposer un problème en sous-problèmes et tester un programme"
+      ],
+      "motsCles": [
+        "algorithme",
+        "programme",
+        "Scratch",
+        "lutin",
+        "variable",
+        "boucle",
+        "répéter",
+        "condition",
+        "si alors sinon",
+        "événement",
+        "message",
+        "bloc personnalisé"
+      ],
+      "reference": "Un algorithme est une suite finie d'instructions permettant de résoudre un problème ; un programme est sa traduction dans un langage compris par l'ordinateur.\nDans Scratch, un programme est un script de blocs exécuté par un lutin ; il démarre par un bloc événement (« quand le drapeau vert est cliqué », « quand ce lutin est cliqué », « quand je reçois… »).\nUne variable est une case mémoire qui porte un nom et contient une valeur. On l'initialise (« mettre score à 0 ») puis on la modifie (« ajouter 1 à score »).\nBoucle « répéter n fois » : répète un bloc d'instructions un nombre fixé de fois. Exemple : répéter 4 fois (avancer de 100, tourner de 90°) trace un carré.\nPour un polygone régulier à n côtés, le lutin tourne de 360° ÷ n à chaque sommet. Exemple : hexagone, 6 fois 60°.\nBoucle « répéter jusqu'à » : répète tant que la condition est fausse et s'arrête quand elle devient vraie. Boucle « répéter indéfiniment » : ne s'arrête pas.\nInstruction conditionnelle : « si condition alors … sinon … » exécute un bloc ou l'autre selon que la condition est vraie ou fausse.\nConditions : comparaisons (<, =, >) et opérateurs logiques « et », « ou », « non ».\nExemple : si la réponse = 42 alors dire « Bravo » sinon dire « Perdu ».\nPlusieurs scripts peuvent s'exécuter en parallèle ; les lutins communiquent avec « envoyer à tous [message] » et « quand je reçois [message] ».\nBloc personnalisé (« Mes blocs ») : sous-programme que l'on définit une fois et que l'on réutilise, éventuellement avec des paramètres (ex. carré de côté c).\nNombre aléatoire : « nombre aléatoire entre 1 et 6 » simule un dé.\nMéthode : décomposer le problème, programmer étape par étape, tester, corriger les erreurs (débogage)."
+    }
+  ]
+}

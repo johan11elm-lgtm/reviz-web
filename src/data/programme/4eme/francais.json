@@ -1,0 +1,404 @@
+{
+  "classe": "4ème",
+  "matiere": "Français",
+  "programme": "Programme de français du cycle 4 (BO 2015, ajusté en 2020) et repères annuels de progression 2019, classe de 4e",
+  "modele": "claude-opus-5-5 (abonnement)",
+  "genereLe": "2026-10-05",
+  "relu": false,
+  "chapitres": [
+    {
+      "id": "dire-l-amour",
+      "titre": "Dire l'amour : la poésie lyrique",
+      "ordre": 1,
+      "periode": "T1",
+      "notions": [
+        "Définir le lyrisme et reconnaître ses marques (première personne, émotions, apostrophe)",
+        "Identifier les principales formes et mesures du vers : sonnet, alexandrin, décasyllabe, octosyllabe",
+        "Reconnaître les dispositions des rimes : plates, croisées, embrassées",
+        "Situer quelques poèmes d'amour majeurs (Ronsard, Louise Labé, Hugo, Verlaine, Apollinaire)",
+        "Repérer les thèmes de la poésie amoureuse : célébration, absence, fuite du temps, carpe diem",
+        "Analyser le champ lexical des sentiments et l'effet des sonorités"
+      ],
+      "motsCles": [
+        "lyrisme",
+        "poésie lyrique",
+        "sonnet",
+        "alexandrin",
+        "quatrain",
+        "tercet",
+        "rime",
+        "strophe",
+        "carpe diem",
+        "apostrophe",
+        "champ lexical",
+        "élégie"
+      ],
+      "reference": "Lyrisme : expression des sentiments personnels du poète (amour, joie, tristesse). Le mot vient de la lyre, instrument d'Orphée dans la mythologie grecque.\nMarques du lyrisme : première personne (je), apostrophe à l'être aimé (« ô », tutoiement), phrases exclamatives, champ lexical des sentiments.\nVers : on compte les syllabes. Alexandrin = 12 syllabes ; décasyllabe = 10 ; octosyllabe = 8. Le e muet se prononce devant une consonne, mais pas en fin de vers ni devant une voyelle.\nStrophes : distique (2 vers), tercet (3), quatrain (4).\nSonnet : forme fixe de 14 vers, 2 quatrains puis 2 tercets, souvent en alexandrins ou en décasyllabes.\nRimes plates AABB, croisées ABAB, embrassées ABBA.\nPierre de Ronsard, « Mignonne, allons voir si la rose » (1550, Odes) : la rose fanée en un soir montre la fuite du temps ; il faut profiter de la jeunesse (carpe diem, « cueille le jour », formule du poète latin Horace).\nLouise Labé, sonnet « Je vis, je meurs » (1555) : la passion fait éprouver des sentiments contraires (antithèses : « je me brûle et me noie »).\nVictor Hugo, « Demain, dès l'aube... » (Les Contemplations, 1856) : poème adressé à sa fille Léopoldine, noyée en 1843 ; le lecteur découvre à la fin qu'il marche vers une tombe.\nPaul Verlaine, « Mon rêve familier » (Poèmes saturniens, 1866) : une femme idéale, rêvée, qui le comprend.\nGuillaume Apollinaire, « Le Pont Mirabeau » (Alcools, 1913) : l'amour passe comme l'eau de la Seine ; refrain et absence de ponctuation.\nThèmes : célébration de la beauté de l'être aimé, souffrance de l'absence ou de la séparation (élégie : poème de plainte), fuite du temps, amour impossible.\nGrandes figures du couple amoureux : Tristan et Iseut (récits médiévaux, XIIe siècle), Roméo et Juliette (Shakespeare, vers 1597).\nMéthode : identifier qui parle et à qui, relever le champ lexical des sentiments, observer la forme (strophes, vers, rimes) et dire l'effet produit."
+    },
+    {
+      "id": "expansions-du-nom",
+      "titre": "Les expansions du nom : épithète, complément du nom, apposition",
+      "ordre": 2,
+      "periode": "T1",
+      "notions": [
+        "Identifier le nom noyau d'un groupe nominal",
+        "Reconnaître l'adjectif épithète et l'accorder avec le nom",
+        "Reconnaître le complément du nom et sa construction",
+        "Identifier l'apposition et la distinguer de l'épithète et du complément du nom",
+        "Repérer la proposition subordonnée relative comme expansion du nom",
+        "Enrichir une description à l'aide des expansions du nom"
+      ],
+      "motsCles": [
+        "groupe nominal",
+        "nom noyau",
+        "expansion",
+        "adjectif épithète",
+        "complément du nom",
+        "préposition",
+        "apposition",
+        "subordonnée relative",
+        "antécédent",
+        "suppression"
+      ],
+      "reference": "Groupe nominal (GN) : groupe de mots organisé autour d'un nom, le nom noyau. Ex. : « une vieille maison de pierre ».\nExpansion du nom : mot ou groupe de mots qui complète le nom noyau. On peut généralement la supprimer sans rendre la phrase incorrecte.\nAdjectif épithète : adjectif placé directement à côté du nom, sans verbe ni virgule. Ex. : « un ciel gris ». Il s'accorde en genre et en nombre avec le nom.\nComplément du nom : groupe relié au nom le plus souvent par une préposition (de, à, en, pour, sans...). Ex. : « une tasse de thé », « une robe en soie », « une machine à laver ».\nLe complément du nom peut être un nom, un GN, un pronom, un infinitif ou un adverbe : « les gens d'ici ».\nApposition : mot ou groupe détaché du nom par une ou deux virgules (ou deux-points), qui apporte une précision sur lui. Ex. : « Victor Hugo, poète célèbre, est né en 1802. »\nL'apposition peut être un nom ou un GN, un adjectif, un participe : « Fatigués, les marcheurs s'arrêtèrent. » L'adjectif ou le participe apposé s'accorde avec le nom.\nDifférence épithète / apposition : l'épithète est collée au nom ; l'apposition est séparée par la ponctuation et peut souvent se déplacer.\nProposition subordonnée relative : introduite par un pronom relatif (qui, que, dont, où...), elle complète un nom appelé antécédent. Ex. : « le livre que je lis ».\nUne relative est une expansion du nom : « la maison qui est au bout de la rue ».\nMéthode : repérer le nom noyau, puis chercher ce qui le complète ; préciser la nature (adjectif, GN prépositionnel, relative) et la fonction (épithète, complément du nom, apposition, complément de l'antécédent).\nIntérêt en écriture : les expansions enrichissent les descriptions et les portraits."
+    },
+    {
+      "id": "figures-de-style",
+      "titre": "Les figures de style",
+      "ordre": 3,
+      "periode": "T1",
+      "notions": [
+        "Définir une figure de style et son rôle",
+        "Distinguer comparaison et métaphore",
+        "Reconnaître la personnification",
+        "Identifier l'hyperbole, l'antithèse et l'oxymore",
+        "Repérer l'anaphore et la gradation",
+        "Interpréter l'effet produit par une figure dans un texte"
+      ],
+      "motsCles": [
+        "figure de style",
+        "comparaison",
+        "outil de comparaison",
+        "comparé",
+        "comparant",
+        "métaphore",
+        "personnification",
+        "hyperbole",
+        "antithèse",
+        "oxymore",
+        "anaphore",
+        "gradation"
+      ],
+      "reference": "Figure de style : manière de s'exprimer qui s'écarte de l'usage ordinaire pour produire un effet (rendre une image plus forte, émouvoir, insister).\nComparaison : rapproche deux éléments (le comparé et le comparant) à l'aide d'un outil de comparaison : comme, tel, pareil à, semblable à, ressembler à. Ex. : « Ses yeux brillent comme des étoiles. »\nMétaphore : rapproche deux éléments SANS outil de comparaison. Ex. : « Ses yeux sont des étoiles. »\nPersonnification : attribue des caractéristiques humaines à un animal, un objet ou une idée. Ex. : « La ville s'éveille. »\nHyperbole : exagération pour frapper l'esprit. Ex. : « Je meurs de faim. »\nAntithèse : rapproche deux mots ou idées opposés dans une même phrase. Ex. : Louise Labé, « Je vis, je meurs ».\nOxymore : associe deux mots de sens contraire étroitement liés, souvent un nom et un adjectif. Ex. : « cette obscure clarté » (Corneille, Le Cid).\nAnaphore : répétition d'un même mot ou groupe en début de vers ou de phrase. Effet d'insistance, de rythme.\nGradation : suite de termes d'intensité croissante (ou décroissante). Ex. : « Va, cours, vole » (Corneille, Le Cid).\nPour analyser : nommer la figure, citer précisément le texte, expliquer l'effet produit (insistance, émotion, image, opposition).\nPiège fréquent : « comme » ne signale une comparaison que s'il rapproche deux éléments pour leur ressemblance (pas dans « comme il pleuvait, je suis resté »).\nLes figures de style sont très présentes dans la poésie lyrique pour exprimer l'intensité des sentiments."
+    },
+    {
+      "id": "relatives-et-conjonctives",
+      "titre": "Subordonnée relative et subordonnée conjonctive",
+      "ordre": 4,
+      "periode": "T1",
+      "notions": [
+        "Distinguer phrase simple et phrase complexe, compter les propositions",
+        "Reconnaître juxtaposition, coordination et subordination",
+        "Identifier une proposition subordonnée relative, son pronom relatif et son antécédent",
+        "Identifier une proposition subordonnée conjonctive introduite par une conjonction de subordination",
+        "Distinguer « que » pronom relatif et « que » conjonction de subordination",
+        "Reconnaître la subordonnée conjonctive complétive (COD) et la circonstancielle de conséquence"
+      ],
+      "motsCles": [
+        "phrase complexe",
+        "proposition",
+        "verbe conjugué",
+        "juxtaposition",
+        "coordination",
+        "subordination",
+        "proposition principale",
+        "pronom relatif",
+        "antécédent",
+        "conjonction de subordination",
+        "complétive",
+        "conséquence"
+      ],
+      "reference": "Phrase simple : un seul verbe conjugué. Phrase complexe : plusieurs verbes conjugués, donc plusieurs propositions.\nJuxtaposition : propositions séparées par une virgule, un point-virgule ou deux-points. Coordination : propositions reliées par une conjonction de coordination (mais, ou, et, donc, or, ni, car) ou un adverbe de liaison.\nSubordination : une proposition subordonnée dépend d'une proposition principale.\nSubordonnée relative : introduite par un pronom relatif (qui, que, quoi, dont, où, lequel, auquel, duquel...). Elle complète un nom ou un pronom placé avant : l'antécédent. Fonction : complément de l'antécédent.\nEx. : « J'ai lu le roman que tu m'as prêté. » Antécédent : roman ; « que » remplace « le roman » et est COD de « as prêté ».\nLe pronom relatif a une fonction dans la relative : qui = sujet ; que = COD (ou attribut) ; dont = complément introduit par « de » ; où = complément de lieu ou de temps.\nSubordonnée conjonctive : introduite par une conjonction de subordination (que, quand, lorsque, parce que, puisque, si, bien que, afin que, de sorte que...). La conjonction n'a pas de fonction et ne remplace aucun mot.\nConjonctive complétive : introduite par « que », elle complète le verbe, le plus souvent comme COD. Ex. : « Je pense que tu as raison. » On peut la remplacer par « cela ».\nDistinguer les deux « que » : le pronom relatif a un antécédent (le roman que...) ; la conjonction suit le verbe et n'a pas d'antécédent (je crois que...).\nConjonctive circonstancielle : complément circonstanciel de la principale (temps, cause, but...).\nConséquence (attendu en 4e) : « si bien que », « de sorte que », « si... que », « tellement... que ». Ex. : « Il pleuvait tellement que le match fut annulé. »\nMéthode : souligner les verbes conjugués, délimiter les propositions, repérer le mot qui introduit la subordonnée, puis chercher s'il y a un antécédent."
+    },
+    {
+      "id": "accord-du-participe-passe",
+      "titre": "L'accord du participe passé avec être et avoir",
+      "ordre": 5,
+      "periode": "T1",
+      "notions": [
+        "Former le participe passé des verbes (é, i, u, consonne finale)",
+        "Accorder le participe passé employé avec être avec le sujet",
+        "Savoir que le participe passé employé avec avoir ne s'accorde jamais avec le sujet",
+        "Accorder le participe passé employé avec avoir avec le COD placé avant le verbe",
+        "Reconnaître les COD antéposés : pronom personnel, pronom relatif « que », groupe interrogatif",
+        "Accorder le participe passé employé comme adjectif"
+      ],
+      "motsCles": [
+        "participe passé",
+        "auxiliaire être",
+        "auxiliaire avoir",
+        "sujet",
+        "COD",
+        "COD antéposé",
+        "pronom personnel",
+        "pronom relatif que",
+        "accord",
+        "consonne finale"
+      ],
+      "reference": "Participe passé : forme du verbe utilisée dans les temps composés (passé composé, plus-que-parfait...) et à la voix passive.\nTerminaisons : 1er groupe en -é (chanté) ; 2e groupe en -i (fini) ; 3e groupe en -i, -u ou avec consonne finale -s, -t (pris, mis, fait, écrit, offert, peint).\nAstuce pour trouver la consonne finale : mettre au féminin (« prise », « écrite », « offerte »).\nEmployé seul, le participe passé s'accorde comme un adjectif avec le nom auquel il se rapporte : « des volets fermés ».\nAvec l'auxiliaire être : accord en genre et en nombre avec le sujet. Ex. : « Elles sont parties. » « La lettre a été envoyée. »\nAvec l'auxiliaire avoir : JAMAIS d'accord avec le sujet. Ex. : « Elles ont mangé. »\nAvec avoir : accord avec le COD seulement s'il est placé AVANT le verbe. Ex. : « J'ai cueilli des fleurs » (COD après : pas d'accord) ; « Les fleurs que j'ai cueillies » (COD avant : accord).\nCOD placés avant : pronoms personnels (me, te, le, la, l', les, nous, vous) : « Ces lettres, je les ai lues. »\nPronom relatif « que », dont on cherche l'antécédent : « la robe que j'ai choisie ».\nGroupe interrogatif : « Quelles chansons as-tu chantées ? »\nMéthode avec avoir : chercher le COD en posant la question « quoi ? » ou « qui ? » après le verbe ; s'il est placé avant, accorder avec lui (avec l'antécédent si c'est « que »).\nAvec « en » COD, on n'accorde pas : « Des pommes, j'en ai mangé. »"
+    },
+    {
+      "id": "individu-et-societe-confrontations-de-valeurs",
+      "titre": "Individu et société : confrontations de valeurs ?",
+      "ordre": 6,
+      "periode": "T2",
+      "notions": [
+        "Comprendre le conflit entre aspirations personnelles et valeurs de la société",
+        "Connaître l'intrigue et les enjeux du Cid de Corneille (1637)",
+        "Définir le dilemme et le dilemme cornélien",
+        "Connaître les caractéristiques du théâtre classique : genres, règle des trois unités, bienséance",
+        "Maîtriser le vocabulaire du théâtre : réplique, tirade, monologue, aparté, didascalie, stichomythie",
+        "Analyser une scène de confrontation entre personnages"
+      ],
+      "motsCles": [
+        "dilemme",
+        "honneur",
+        "devoir",
+        "Le Cid",
+        "Corneille",
+        "tragédie",
+        "tragi-comédie",
+        "règle des trois unités",
+        "bienséance",
+        "monologue",
+        "stances",
+        "stichomythie"
+      ],
+      "reference": "Questionnement : un individu doit-il suivre ses désirs ou se plier aux valeurs de sa famille et de la société ? Les œuvres mettent en scène des personnages tiraillés entre deux exigences.\nPierre Corneille, Le Cid (1637), tragi-comédie en cinq actes et en alexandrins, dans l'Espagne médiévale.\nIntrigue : Rodrigue et Chimène s'aiment. Le père de Chimène, le Comte (don Gomès), donne un soufflet au père de Rodrigue, don Diègue, trop âgé pour se venger. Don Diègue demande à son fils de laver l'affront.\nRodrigue doit choisir entre son amour pour Chimène et l'honneur de sa famille : c'est un dilemme. Il tue le Comte en duel ; Chimène réclame alors au roi la punition de celui qu'elle aime.\nStances de Rodrigue (acte I, scène 6) : monologue en strophes où il exprime son dilemme.\nRépliques célèbres : « Rodrigue, as-tu du cœur ? » (don Diègue) ; « Va, je ne te hais point » (Chimène, litote : elle dit moins pour faire entendre plus).\nDilemme : choix impossible entre deux solutions qui entraînent chacune une perte. Dilemme cornélien : conflit entre la passion et le devoir.\nThéâtre classique (XVIIe siècle) : règle des trois unités : unité de temps (l'action dure au plus 24 heures), de lieu (un seul lieu), d'action (une intrigue principale). Bienséance : ne pas montrer sur scène ce qui choquerait (mort, violence). Vraisemblance.\nTragédie : personnages nobles, conflit entre passion et devoir, fin malheureuse. Tragi-comédie : sujet sérieux mais fin heureuse ou ouverte. Comédie : personnages ordinaires, vise à faire rire et à corriger les mœurs.\nVocabulaire du théâtre : réplique (ce qu'un personnage dit quand vient son tour), tirade (longue réplique), monologue (personnage seul en scène), aparté (paroles que les autres personnages sont censés ne pas entendre), didascalie (indication scénique), stichomythie (échange rapide de répliques courtes, souvent d'un vers).\nAutre exemple possible : Antigone (Sophocle, Ve siècle avant J.-C. ; Anouilh, 1944) : Antigone veut enterrer son frère malgré l'interdiction du roi Créon ; loi personnelle contre loi de la cité.\nMéthode : repérer les valeurs en conflit, qui les défend, et comment le langage (antithèses, questions, exclamations) traduit le déchirement du personnage."
+    },
+    {
+      "id": "subjonctif-et-conditionnel",
+      "titre": "Le subjonctif et le conditionnel : formes et emplois",
+      "ordre": 7,
+      "periode": "T2",
+      "notions": [
+        "Conjuguer le subjonctif présent des verbes des trois groupes et des irréguliers courants",
+        "Former le passé du subjonctif",
+        "Connaître les emplois du subjonctif : souhait, ordre, doute, sentiment, après certaines conjonctions",
+        "Conjuguer le conditionnel présent et le conditionnel passé",
+        "Connaître les emplois du conditionnel : hypothèse, politesse, souhait, information incertaine, futur dans le passé",
+        "Distinguer le futur (-rai) et le conditionnel présent (-rais)"
+      ],
+      "motsCles": [
+        "mode",
+        "subjonctif présent",
+        "passé du subjonctif",
+        "conditionnel présent",
+        "conditionnel passé",
+        "hypothèse",
+        "irréel",
+        "souhait",
+        "doute",
+        "politesse",
+        "futur dans le passé"
+      ],
+      "reference": "Un mode indique la manière dont le locuteur présente l'action : l'indicatif présente un fait réel ; le subjonctif présente une action envisagée (souhaitée, crainte, douteuse) ; le conditionnel présente une action soumise à une condition ou incertaine.\nSubjonctif présent : radical de la 3e personne du pluriel du présent de l'indicatif + -e, -es, -e, -ions, -iez, -ent. Ex. : ils finissent → que je finisse, que nous finissions.\nIrréguliers : être → que je sois, que nous soyons ; avoir → que j'aie, qu'il ait, que nous ayons ; faire → que je fasse ; aller → que j'aille, que nous allions ; pouvoir → que je puisse ; savoir → que je sache ; vouloir → que je veuille, que nous voulions.\nPassé du subjonctif : auxiliaire avoir ou être au subjonctif présent + participe passé. Ex. : « que j'aie fini », « qu'elle soit partie ».\nEmplois du subjonctif : après des verbes de souhait, de volonté, d'ordre ou de sentiment (« Je veux que tu viennes »), de doute (« Je doute qu'il réussisse »), après « il faut que », et après certaines conjonctions (pour que, afin que, bien que, avant que). En proposition indépendante : ordre ou souhait (« Qu'il entre ! »).\nConditionnel présent : radical du futur + terminaisons de l'imparfait -ais, -ais, -ait, -ions, -iez, -aient. Ex. : je chanterais, nous finirions, il serait, j'aurais, je ferais, j'irais.\nConditionnel passé : auxiliaire au conditionnel présent + participe passé. Ex. : « j'aurais chanté », « elle serait venue ».\nEmplois : hypothèse avec « si » : « Si j'avais le temps, je lirais plus » (si + imparfait → conditionnel présent) ; « Si j'avais eu le temps, j'aurais lu » (si + plus-que-parfait → conditionnel passé, irréel du passé).\nAutres emplois : politesse (« Pourriez-vous m'aider ? »), souhait (« J'aimerais voyager »), information non vérifiée (« L'incendie aurait fait deux blessés »), futur dans le passé (« Il disait qu'il viendrait »).\nJamais de conditionnel juste après « si » de condition : on dit « si j'avais », pas « si j'aurais ».\nDistinguer futur et conditionnel à la 1re personne : « je chanterai » (futur) / « je chanterais » (conditionnel). Astuce : remplacer par « nous » (nous chanterons / nous chanterions).\nValeur aspectuelle : les formes composées (passé du subjonctif, conditionnel passé) présentent l'action comme accomplie."
+    },
+    {
+      "id": "pronoms-et-degres-de-l-adjectif",
+      "titre": "Pronoms démonstratifs et possessifs, degrés de l'adjectif",
+      "ordre": 8,
+      "periode": "T2",
+      "notions": [
+        "Distinguer déterminant et pronom",
+        "Reconnaître et employer les pronoms démonstratifs",
+        "Reconnaître et employer les pronoms possessifs, orthographier nôtre et vôtre",
+        "Former le comparatif de supériorité, d'égalité et d'infériorité",
+        "Former le superlatif relatif et le superlatif absolu",
+        "Connaître les formes irrégulières : meilleur, pire, moindre"
+      ],
+      "motsCles": [
+        "déterminant",
+        "pronom",
+        "pronom démonstratif",
+        "pronom possessif",
+        "nôtre",
+        "vôtre",
+        "comparatif",
+        "superlatif relatif",
+        "superlatif absolu",
+        "meilleur",
+        "pire"
+      ],
+      "reference": "Un déterminant accompagne un nom (« ce livre », « mon livre ») ; un pronom remplace un nom ou un groupe nominal (« celui-ci », « le mien »).\nPronoms démonstratifs : celui, celle, ceux, celles, souvent suivis de -ci (proche) ou -là (éloigné), d'une relative ou d'un complément : « celui qui parle », « celle de Paul ».\nFormes neutres : ce (c'), ceci, cela, ça. Ex. : « Cela me plaît. »\nPronoms possessifs : le mien, la mienne, les miens, les miennes ; le tien... ; le sien... ; le nôtre, la nôtre, les nôtres ; le vôtre, la vôtre, les vôtres ; le leur, la leur, les leurs.\nLe pronom possessif s'accorde avec l'objet possédé et indique la personne du possesseur : « Ce vélo est le sien. »\nOrthographe : notre, votre (déterminants, sans accent) ≠ le nôtre, le vôtre (pronoms, avec accent circonflexe). Ex. : « Votre maison est grande, la nôtre est petite. »\nDegrés de l'adjectif : comparatif de supériorité (plus... que), d'égalité (aussi... que), d'infériorité (moins... que). Ex. : « Léa est plus grande que Tom. »\nSuperlatif relatif : le plus / le moins + adjectif (+ de). Ex. : « C'est la plus haute tour de la ville. »\nSuperlatif absolu : très, extrêmement, fort + adjectif, sans comparaison. Ex. : « Ce film est très drôle. »\nFormes irrégulières : bon → meilleur, le meilleur ; mauvais → pire ou plus mauvais ; petit → moindre (abstrait) ou plus petit. On ne dit pas « plus bon ».\nPour l'adverbe : bien → mieux, le mieux. Ne pas confondre « meilleur » (adjectif) et « mieux » (adverbe).\nIntérêt : les pronoms évitent les répétitions ; les degrés de l'adjectif servent à comparer et à décrire."
+    },
+    {
+      "id": "la-fiction-pour-interroger-le-reel",
+      "titre": "La fiction pour interroger le réel : réalisme et fantastique",
+      "ordre": 9,
+      "periode": "T2",
+      "notions": [
+        "Définir la nouvelle et ses caractéristiques, dont la chute",
+        "Comprendre le projet réaliste au XIXe siècle et ses auteurs",
+        "Repérer les procédés qui créent l'illusion du réel",
+        "Définir le registre fantastique et l'hésitation entre rationnel et surnaturel",
+        "Connaître des nouvelles de Maupassant, Mérimée, Gautier",
+        "Identifier le point de vue narratif (interne, externe, omniscient)"
+      ],
+      "motsCles": [
+        "nouvelle",
+        "chute",
+        "réalisme",
+        "naturalisme",
+        "Maupassant",
+        "fantastique",
+        "surnaturel",
+        "hésitation",
+        "narrateur",
+        "point de vue",
+        "modalisateur",
+        "vraisemblance"
+      ],
+      "reference": "Question : comment une histoire inventée peut-elle nous faire mieux comprendre la réalité ?\nNouvelle : récit bref, peu de personnages, une action resserrée, souvent une fin surprenante appelée chute.\nRéalisme (XIXe siècle) : mouvement qui veut représenter la réalité telle qu'elle est, y compris la vie des gens modestes. Auteurs : Balzac, Flaubert, Maupassant. Le naturalisme (Zola) prolonge le réalisme avec une démarche presque scientifique.\nProcédés réalistes : lieux et dates réels, descriptions précises, détails concrets, personnages ordinaires, langage adapté au milieu social.\nGuy de Maupassant (1850-1893) a écrit environ 300 nouvelles. « La Parure » (1884) : Mathilde Loisel emprunte une rivière de diamants pour un bal, la perd et s'endette pendant dix ans pour la remplacer ; la chute révèle que le bijou était faux.\nFantastique : un événement étrange, apparemment surnaturel, survient dans un cadre réaliste ; le personnage et le lecteur hésitent entre une explication rationnelle (rêve, folie, hasard) et une explication surnaturelle.\nProcédés du fantastique : narrateur souvent à la 1re personne, modalisateurs du doute (il me semblait, peut-être, sans doute), champ lexical de la peur, fin ouverte.\nProsper Mérimée, « La Vénus d'Ille » (1837) : une statue de bronze semble prendre vie.\nThéophile Gautier, « La Morte amoureuse » (1836) : un jeune prêtre vit une double vie avec une morte, Clarimonde.\nMaupassant, « Le Horla » (1887) : journal d'un narrateur persuadé qu'un être invisible le domine ; on hésite entre folie et surnaturel.\nPoint de vue : interne (on voit par les yeux d'un personnage), externe (on voit de l'extérieur, comme une caméra), omniscient (le narrateur sait tout, y compris les pensées de tous).\nPortée : ces récits dénoncent la vanité, l'injustice sociale, ou interrogent les limites de la raison."
+    },
+    {
+      "id": "interrogation-directe-et-indirecte",
+      "titre": "L'interrogation directe et indirecte",
+      "ordre": 10,
+      "periode": "T2",
+      "notions": [
+        "Reconnaître une phrase interrogative directe et ses trois tournures",
+        "Distinguer interrogation totale et interrogation partielle",
+        "Connaître les mots interrogatifs",
+        "Identifier la proposition subordonnée interrogative indirecte et sa fonction",
+        "Transformer une interrogation directe en interrogation indirecte",
+        "Maîtriser la ponctuation et l'ordre des mots dans l'interrogation indirecte"
+      ],
+      "motsCles": [
+        "phrase interrogative",
+        "interrogation directe",
+        "inversion du sujet",
+        "est-ce que",
+        "interrogation totale",
+        "interrogation partielle",
+        "mot interrogatif",
+        "interrogative indirecte",
+        "verbe introducteur",
+        "si"
+      ],
+      "reference": "Interrogation directe : question posée directement, terminée par un point d'interrogation.\nTrois tournures : intonation (« Tu viens ? »), « est-ce que » (« Est-ce que tu viens ? »), inversion du sujet (« Viens-tu ? »), qui relève d'un niveau de langue plus soutenu.\nInversion avec un nom sujet : on reprend le nom par un pronom (« Paul vient-il ? »). Un -t- est ajouté entre deux voyelles : « A-t-il fini ? »\nInterrogation totale : porte sur toute la phrase, on répond par oui ou non. Interrogation partielle : porte sur un élément, introduite par un mot interrogatif.\nMots interrogatifs : pronoms (qui, que, quoi, lequel), adverbes (où, quand, comment, pourquoi, combien), déterminant (quel, quelle, quels, quelles).\nInterrogation indirecte : la question est rapportée dans une proposition subordonnée interrogative indirecte, complément (le plus souvent COD) d'un verbe comme demander, se demander, savoir, ignorer.\nEx. : « Je me demande s'il viendra. » « Dis-moi où tu vas. »\nDans l'interrogation indirecte : pas de point d'interrogation (sauf si la phrase entière est une question), pas d'inversion du sujet, pas de « est-ce que ».\nTransformations : interrogation totale → « si » (« Viens-tu ? » → « Il demande si tu viens. »). Interrogation partielle → on garde le mot interrogatif (« Où vas-tu ? » → « Il demande où tu vas. »).\n« Qu'est-ce que » devient « ce que » ; « qu'est-ce qui » devient « ce qui ». Ex. : « Qu'est-ce que tu veux ? » → « Il demande ce que tu veux. »\nAttention : la subordonnée interrogative indirecte n'a pas d'antécédent (différence avec la relative) ; « si » n'y exprime pas une condition.\nSi le verbe introducteur est au passé, les temps changent comme au discours indirect : « Il demanda si je viendrais. »"
+    },
+    {
+      "id": "informer-s-informer-deformer",
+      "titre": "Informer, s'informer, déformer ?",
+      "ordre": 11,
+      "periode": "T3",
+      "notions": [
+        "Connaître les grandes étapes de l'histoire de la presse et la liberté de la presse",
+        "Identifier les différents genres journalistiques (brève, reportage, interview, éditorial)",
+        "Analyser la construction d'un article : titre, chapeau, attaque, règle des 5W",
+        "Distinguer un fait d'une opinion",
+        "Repérer les procédés de déformation de l'information et les fausses informations",
+        "Vérifier une information : source, date, recoupement"
+      ],
+      "motsCles": [
+        "information",
+        "presse",
+        "source",
+        "fait",
+        "opinion",
+        "article",
+        "titre",
+        "chapeau",
+        "règle des 5W",
+        "éditorial",
+        "infox",
+        "recoupement"
+      ],
+      "reference": "Questionnement : comment s'informer de manière fiable, et comment l'information peut-elle être déformée ?\nRepères : Théophraste Renaudot fonde La Gazette en 1631, l'un des premiers journaux français. La loi du 29 juillet 1881 établit la liberté de la presse en France.\nÉmile Zola, « J'accuse... ! », publié dans L'Aurore le 13 janvier 1898 : lettre ouverte au président de la République pour défendre le capitaine Dreyfus, condamné à tort ; exemple de presse engagée.\nGenres journalistiques : brève (information courte), fait divers, reportage (le journaliste raconte ce qu'il a vu sur place), interview (questions-réponses), éditorial (article d'opinion qui engage la rédaction).\nConstruction d'un article : titre (accrocheur), chapeau (court texte en gras qui résume l'essentiel), attaque (première phrase qui donne envie de lire), corps de l'article, éventuellement intertitres et légende des photos.\nRègle des 5W : un article d'information répond à Qui ? Quoi ? Où ? Quand ? Pourquoi ? (souvent aussi Comment ?). L'essentiel est donné d'abord (pyramide inversée).\nFait : élément vérifiable. Opinion : jugement personnel, repérable par la 1re personne, des modalisateurs (sans doute, heureusement), un vocabulaire mélioratif ou péjoratif.\nDéformation de l'information : titre trompeur, photo sortie de son contexte, chiffres incomplets, rumeur, choix des mots orientés.\nInfox (fake news) : fausse information diffusée volontairement, souvent sur les réseaux sociaux pour faire réagir.\nVérifier une information : identifier la source (qui parle ?), vérifier la date, recouper avec d'autres médias fiables, se méfier des titres choc.\nLittérature et presse : dans Illusions perdues (1837-1843), Balzac montre un milieu journalistique où l'on peut acheter les critiques.\nMéthode : pour un article, repérer le genre, la source, les faits et les opinions, et l'effet recherché sur le lecteur."
+    },
+    {
+      "id": "voix-passive-et-forme-impersonnelle",
+      "titre": "La voix passive et la tournure impersonnelle",
+      "ordre": 12,
+      "periode": "T3",
+      "notions": [
+        "Distinguer voix active et voix passive",
+        "Construire la voix passive : être au temps du verbe actif + participe passé accordé",
+        "Identifier le complément d'agent et savoir qu'il peut être absent",
+        "Savoir que seuls les verbes ayant un COD se mettent au passif",
+        "Reconnaître un verbe impersonnel et une tournure impersonnelle",
+        "Distinguer sujet apparent et sujet réel"
+      ],
+      "motsCles": [
+        "voix active",
+        "voix passive",
+        "auxiliaire être",
+        "participe passé",
+        "complément d'agent",
+        "COD",
+        "verbe transitif direct",
+        "verbe impersonnel",
+        "tournure impersonnelle",
+        "sujet apparent",
+        "sujet réel"
+      ],
+      "reference": "Voix active : le sujet fait l'action. « Le chat attrape la souris. »\nVoix passive : le sujet subit l'action. « La souris est attrapée par le chat. »\nPassage de l'actif au passif : le COD de la phrase active devient sujet ; le sujet actif devient complément d'agent, introduit par « par » (parfois « de » : « Elle est aimée de tous »).\nFormation : auxiliaire être conjugué au temps du verbe actif + participe passé accordé avec le sujet.\nEx. : présent « attrape » → « est attrapée » ; passé composé « a attrapé » → « a été attrapée » ; futur « attrapera » → « sera attrapée » ; imparfait « attrapait » → « était attrapée ».\nSeuls les verbes transitifs directs (qui ont un COD) peuvent se mettre au passif.\nLe complément d'agent peut être absent : « Le magasin a été cambriolé. » Cela permet de ne pas dire qui agit, ou de mettre en valeur celui qui subit.\nNe pas confondre passif et passé composé avec être : « Elle est partie » (actif, passé composé de partir) ≠ « Elle est invitée » (passif, présent).\nVerbe impersonnel : verbe qui ne se conjugue qu'à la 3e personne du singulier avec « il » qui ne représente rien : il pleut, il neige, il faut.\nTournure impersonnelle : un verbe ordinaire employé avec « il » impersonnel. « Il arrive un malheur » = « Un malheur arrive ». « Il » est le sujet apparent (grammatical), « un malheur » le sujet réel.\nAutres exemples : « Il est interdit de fumer », « Il manque deux élèves ».\nEffet : la tournure impersonnelle met en relief une information ou évite de désigner un responsable."
+    },
+    {
+      "id": "discours-direct-et-indirect",
+      "titre": "Rapporter des paroles : discours direct et discours indirect",
+      "ordre": 13,
+      "periode": "T3",
+      "notions": [
+        "Reconnaître le discours direct et sa ponctuation",
+        "Repérer le verbe de parole et la proposition incise",
+        "Reconnaître le discours indirect et la subordonnée qu'il contient",
+        "Transformer le discours direct en discours indirect : pronoms, temps, indicateurs de temps et de lieu",
+        "Appliquer la concordance des temps quand le verbe introducteur est au passé",
+        "Choisir des verbes de parole variés et précis"
+      ],
+      "motsCles": [
+        "paroles rapportées",
+        "discours direct",
+        "discours indirect",
+        "guillemets",
+        "tiret",
+        "incise",
+        "verbe de parole",
+        "concordance des temps",
+        "subordonnée complétive",
+        "indicateur de temps"
+      ],
+      "reference": "Discours direct : les paroles sont rapportées telles quelles, entre guillemets, après deux-points ; un tiret signale le changement d'interlocuteur dans un dialogue.\nVerbe de parole (ou verbe introducteur) : dire, demander, répondre, s'écrier, murmurer, affirmer...\nIncise : courte proposition insérée dans les paroles, avec inversion du sujet. Ex. : « Je pars, dit-il, mais je reviendrai. »\nDiscours indirect : les paroles sont intégrées au récit dans une subordonnée introduite par « que », « si » ou un mot interrogatif, après un verbe de parole. Pas de guillemets.\nEx. : Il dit : « Je suis fatigué. » → Il dit qu'il est fatigué.\nTransformations des pronoms : je/tu deviennent il/elle selon la situation ; « mon » devient « son ».\nPhrase déclarative → « que » ; interrogation totale → « si » ; interrogation partielle → mot interrogatif ; impératif → « de » + infinitif (« Sors ! » → Il lui ordonne de sortir).\nConcordance des temps si le verbe introducteur est au passé : présent → imparfait ; passé composé → plus-que-parfait ; futur → conditionnel présent.\nEx. : Elle a dit : « Je viendrai demain. » → Elle a dit qu'elle viendrait le lendemain.\nIndicateurs de temps et de lieu : aujourd'hui → ce jour-là ; hier → la veille ; demain → le lendemain ; maintenant → alors ; ici → là.\nEffets : le discours direct rend la scène vivante et fidèle ; le discours indirect résume et intègre les paroles au récit.\nEn écriture, varier les verbes de parole permet de préciser le ton (chuchoter, crier, protester, avouer)."
+    },
+    {
+      "id": "la-ville-lieu-de-tous-les-possibles",
+      "titre": "La ville, lieu de tous les possibles ?",
+      "ordre": 14,
+      "periode": "T3",
+      "notions": [
+        "Comprendre comment la littérature représente la ville moderne",
+        "Distinguer la ville attirante (liberté, rencontres, progrès) et la ville inquiétante (foule, solitude, misère)",
+        "Connaître des textes de Baudelaire, Zola, Verhaeren et Apollinaire",
+        "Analyser une description de ville : point de vue, expansions du nom, champ lexical",
+        "Identifier les procédés poétiques au service de la ville (personnification, métaphore)",
+        "Découvrir la ville rêvée : utopie et dystopie"
+      ],
+      "motsCles": [
+        "ville",
+        "modernité",
+        "foule",
+        "Baudelaire",
+        "Haussmann",
+        "description",
+        "personnification",
+        "champ lexical",
+        "utopie",
+        "dystopie",
+        "poème en prose"
+      ],
+      "reference": "Questionnement : la ville est-elle un lieu de liberté et de possibilités, ou un lieu d'anonymat et de dangers ?\nAu XIXe siècle, les villes grandissent avec l'industrialisation. À Paris, le baron Haussmann transforme la ville sous Napoléon III (1853-1870) : grands boulevards, immeubles alignés, égouts.\nCharles Baudelaire, Les Fleurs du mal (1857) : « À une passante » (ajouté en 1861) évoque une rencontre fugitive dans la rue assourdissante ; la ville favorise des rencontres aussitôt perdues.\nBaudelaire, Le Spleen de Paris (1869), poèmes en prose (sans vers ni rimes) : « Les Foules » célèbre le plaisir de se mêler à la multitude.\nÉmile Zola, Au Bonheur des Dames (1883) : un grand magasin parisien fascine les clientes et ruine les petits commerçants voisins.\nÉmile Verhaeren, Les Villes tentaculaires (1895) : la ville industrielle est décrite comme une pieuvre qui attire et dévore les campagnes (personnification, métaphore).\nGuillaume Apollinaire, « Zone » (Alcools, 1913) : promenade dans un Paris moderne, entre usines, affiches et nouveauté.\nVille attirante : lumières, spectacle, progrès, liberté, anonymat qui libère, rencontres. Ville inquiétante : bruit, foule, solitude, pauvreté, pollution.\nFlâneur : promeneur qui observe la ville sans but précis ; Baudelaire en fait une figure du poète moderne.\nUtopie : société idéale imaginaire (mot créé par Thomas More, Utopia, 1516). Dystopie : société imaginaire cauchemardesque.\nAnalyser une description de ville : point de vue (qui regarde ?), expansions du nom, champ lexical (bruit, lumière, foule), figures de style, impression produite (fascination ou rejet).\nÉcrire sur la ville : organiser la description (de près à loin, ou au fil d'une promenade) et faire ressentir une impression dominante."
+    }
+  ]
+}

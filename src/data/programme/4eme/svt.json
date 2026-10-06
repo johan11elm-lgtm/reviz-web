@@ -1,0 +1,356 @@
+{
+  "classe": "4ème",
+  "matiere": "SVT",
+  "programme": "Cycle 4 – SVT, partie traitée en 4e (BO spécial n°11 du 26/11/2015, ajusté BO n°31 du 30/07/2020)",
+  "modele": "claude-opus-5-5 (abonnement)",
+  "genereLe": "2026-10-05",
+  "relu": false,
+  "chapitres": [
+    {
+      "id": "structure-interne-terre",
+      "titre": "La structure interne de la Terre",
+      "ordre": 1,
+      "periode": "T1",
+      "notions": [
+        "Décrire les enveloppes de la Terre : croûte, manteau, noyau externe et noyau interne",
+        "Distinguer croûte continentale (granitique, épaisse) et croûte océanique (basaltique, fine)",
+        "Définir la lithosphère rigide et l'asthénosphère plus déformable située en dessous",
+        "Expliquer comment l'étude de la propagation des ondes sismiques renseigne sur l'intérieur du globe",
+        "Savoir que la température augmente avec la profondeur et que la Terre libère de la chaleur interne",
+        "Construire et utiliser un modèle à l'échelle de la structure du globe"
+      ],
+      "motsCles": [
+        "croûte",
+        "manteau",
+        "noyau",
+        "lithosphère",
+        "asthénosphère",
+        "ondes sismiques",
+        "discontinuité",
+        "Moho",
+        "granite",
+        "basalte",
+        "péridotite",
+        "chaleur interne"
+      ],
+      "reference": "La Terre a un rayon moyen d'environ 6 370 km. Elle est formée d'enveloppes concentriques de composition et d'état différents.\nCroûte continentale : épaisseur moyenne d'environ 30 km (jusqu'à 70 km sous les montagnes), roches de type granite.\nCroûte océanique : épaisseur d'environ 7 km, roches de type basalte et gabbro.\nManteau : de la base de la croûte jusqu'à environ 2 900 km de profondeur, roche principale : péridotite. Il est solide.\nNoyau externe : de 2 900 km à environ 5 150 km, liquide, composé surtout de fer et de nickel.\nNoyau interne (graine) : de 5 150 km au centre (6 370 km), solide, fer et nickel.\nLithosphère : croûte + partie supérieure du manteau, rigide, épaisse d'environ 100 km. Elle est découpée en plaques.\nAsthénosphère : partie du manteau située sous la lithosphère, plus chaude et plus déformable, mais solide.\nLes ondes sismiques changent de vitesse et de direction quand elles traversent une limite entre deux milieux (discontinuité).\nRepères historiques : Mohorovičić découvre en 1909 la limite croûte-manteau (le Moho) ; Gutenberg situe en 1913 le noyau à 2 900 km ; Inge Lehmann montre en 1936 l'existence d'un noyau interne.\nLes ondes S ne traversent pas les liquides : leur absence au-delà d'une certaine distance montre que le noyau externe est liquide.\nLa température augmente avec la profondeur (environ 3 °C tous les 100 m dans la croûte continentale) et atteint plusieurs milliers de degrés au centre.\nLa Terre dissipe en permanence sa chaleur interne ; ce flux de chaleur est à l'origine des mouvements dans le manteau.\nMéthode : construire un modèle à l'échelle (ex. 1 cm pour 500 km) et calculer des proportions entre épaisseurs."
+    },
+    {
+      "id": "seismes",
+      "titre": "Les séismes",
+      "ordre": 2,
+      "periode": "T1",
+      "notions": [
+        "Définir un séisme comme une libération brutale d'énergie due à la rupture de roches en profondeur",
+        "Localiser le foyer (hypocentre) et l'épicentre d'un séisme",
+        "Expliquer le rôle des failles et l'accumulation de contraintes dans les roches",
+        "Décrire la propagation des ondes sismiques et leur enregistrement par un sismomètre (sismogramme)",
+        "Distinguer magnitude (énergie libérée) et intensité (effets observés en un lieu)",
+        "Utiliser un modèle analogique pour expliquer la rupture et le décalage des roches"
+      ],
+      "motsCles": [
+        "séisme",
+        "faille",
+        "foyer",
+        "hypocentre",
+        "épicentre",
+        "ondes sismiques",
+        "sismomètre",
+        "sismogramme",
+        "magnitude",
+        "échelle de Richter",
+        "intensité",
+        "échelle EMS-98"
+      ],
+      "reference": "Un séisme est une vibration du sol provoquée par la rupture brutale de roches en profondeur, qui libère de l'énergie.\nLes roches soumises à des forces (contraintes) se déforment lentement puis cassent quand leur limite de résistance est dépassée.\nLa cassure se fait le long d'une faille ; les deux blocs se décalent : ce décalage s'appelle le rejet.\nLe foyer (ou hypocentre) est le point en profondeur où commence la rupture. L'épicentre est le point de la surface situé à la verticale du foyer.\nL'énergie se propage dans toutes les directions sous forme d'ondes sismiques. Les ondes P (premières) arrivent avant les ondes S (secondes) ; les ondes de surface causent le plus de dégâts.\nUn sismomètre enregistre les vibrations du sol ; l'enregistrement s'appelle un sismogramme.\nPlusieurs stations sismiques permettent de localiser l'épicentre grâce aux temps d'arrivée des ondes.\nLa magnitude mesure l'énergie libérée au foyer ; elle est calculée à partir des sismogrammes (échelle de Richter, ouverte). Chaque degré supplémentaire correspond à environ 30 fois plus d'énergie.\nL'intensité décrit les effets du séisme en un lieu (dégâts, ressenti) : échelle EMS-98 graduée de I à XII. Elle diminue en général quand on s'éloigne de l'épicentre.\nUn séisme n'a qu'une magnitude mais il a des intensités différentes selon les lieux.\nUn séisme sous la mer peut déclencher un tsunami (vague géante).\nExemples : Japon (Tohoku), 11 mars 2011, magnitude 9,0, suivi d'un tsunami ; Haïti, 12 janvier 2010, magnitude 7,0 ; Turquie-Syrie, 6 février 2023, magnitude 7,8.\nLes séismes se concentrent surtout en bandes étroites qui correspondent aux limites des plaques.\nModèle analogique : des couches de matériau poussées ou étirées finissent par casser brusquement en libérant l'énergie accumulée."
+    },
+    {
+      "id": "volcanisme",
+      "titre": "Le volcanisme",
+      "ordre": 3,
+      "periode": "T1",
+      "notions": [
+        "Décrire l'organisation d'un volcan : chambre magmatique, cheminée, cratère, cône",
+        "Définir le magma et expliquer la remontée du magma vers la surface",
+        "Distinguer éruption effusive (coulées de lave fluide) et éruption explosive (lave visqueuse, gaz, nuées ardentes)",
+        "Relier le type d'éruption à la viscosité de la lave et à la quantité de gaz",
+        "Reconnaître une roche volcanique (basalte) et relier sa structure au refroidissement rapide",
+        "Situer les principaux volcans du globe et relier leur répartition aux limites de plaques et aux points chauds"
+      ],
+      "motsCles": [
+        "volcan",
+        "magma",
+        "lave",
+        "chambre magmatique",
+        "cheminée",
+        "cratère",
+        "éruption effusive",
+        "éruption explosive",
+        "viscosité",
+        "nuée ardente",
+        "basalte",
+        "point chaud"
+      ],
+      "reference": "Un volcan est un relief formé par l'accumulation de produits émis lors des éruptions.\nLe magma est une roche fondue contenant des gaz dissous, formée en profondeur par la fusion partielle de roches du manteau. Il s'accumule dans une chambre magmatique.\nLe magma, moins dense que les roches qui l'entourent, remonte par la cheminée et sort par le cratère : on l'appelle alors lave.\nÉruption effusive : lave fluide (peu visqueuse), les gaz s'échappent facilement, coulées de lave et fontaines de lave. Exemples : Piton de la Fournaise (La Réunion), Kīlauea (Hawaï).\nÉruption explosive : lave visqueuse (pâteuse), les gaz restent piégés puis s'échappent brutalement ; projections de cendres et de blocs, panaches, nuées ardentes, dômes de lave.\nUne nuée ardente est un nuage de gaz brûlants, de cendres et de blocs qui dévale les pentes à grande vitesse.\nExemples d'éruptions explosives : Vésuve en 79 (destruction de Pompéi) ; Montagne Pelée (Martinique) le 8 mai 1902, environ 28 000 morts à Saint-Pierre ; mont Saint Helens (États-Unis) en 1980.\nPlus une lave est visqueuse et riche en gaz, plus l'éruption est explosive.\nLe basalte est une roche volcanique sombre : refroidi rapidement en surface, il contient du verre et de petits cristaux (structure microlitique).\nLes volcans se répartissent surtout le long des dorsales océaniques (volcanisme effusif) et des zones de subduction (volcanisme explosif), ainsi qu'au-dessus de points chauds (Hawaï, La Réunion).\nLa chaîne des Puys (Massif central) est un ensemble de volcans endormis en France métropolitaine.\nL'activité volcanique est une manifestation de la chaleur interne de la Terre.\nModèle analogique : un liquide épais dans lequel on injecte de l'air forme de grosses bulles qui éclatent brusquement, comme une lave visqueuse."
+    },
+    {
+      "id": "tectonique-des-plaques",
+      "titre": "La tectonique des plaques",
+      "ordre": 4,
+      "periode": "T1",
+      "notions": [
+        "Connaître l'hypothèse de la dérive des continents d'Alfred Wegener et les arguments qui la soutiennent",
+        "Savoir que la lithosphère est découpée en plaques rigides qui se déplacent de quelques centimètres par an",
+        "Décrire les frontières divergentes : dorsales océaniques et création de lithosphère océanique",
+        "Décrire les frontières convergentes : subduction et collision",
+        "Relier la répartition des séismes, des volcans et des reliefs aux limites de plaques",
+        "Expliquer que les mouvements des plaques sont liés à la dissipation de la chaleur interne du globe",
+        "Mesurer la vitesse de déplacement d'une plaque à partir de données GPS ou de l'âge des fonds océaniques"
+      ],
+      "motsCles": [
+        "Wegener",
+        "dérive des continents",
+        "plaque lithosphérique",
+        "dorsale océanique",
+        "rift",
+        "subduction",
+        "fosse océanique",
+        "collision",
+        "chaîne de montagnes",
+        "GPS",
+        "convection"
+      ],
+      "reference": "En 1912, Alfred Wegener propose l'hypothèse de la dérive des continents : les continents formaient autrefois un seul bloc (la Pangée) qui s'est fragmenté.\nSes arguments : emboîtement des côtes de l'Afrique et de l'Amérique du Sud, mêmes fossiles (Mesosaurus, Glossopteris) et mêmes roches sur des continents séparés, traces d'anciens glaciers sous les tropiques.\nSon hypothèse est rejetée à l'époque, car il ne peut pas expliquer ce qui fait bouger les continents.\nDans les années 1960, l'étude des fonds océaniques conduit à la théorie de la tectonique des plaques : les roches du plancher océanique sont de plus en plus âgées en s'éloignant des dorsales.\nLa lithosphère est découpée en une douzaine de grandes plaques rigides qui se déplacent sur l'asthénosphère, de 1 à 10 cm par an environ (Atlantique : environ 2 cm par an).\nLes satellites et les balises GPS mesurent aujourd'hui ces déplacements. Vitesse = distance ÷ durée.\nFrontière divergente : deux plaques s'écartent au niveau d'une dorsale océanique ; du magma remonte et crée une nouvelle lithosphère océanique ; volcanisme effusif et séismes peu profonds.\nFrontière convergente avec subduction : une plaque océanique, plus dense, plonge sous une autre plaque ; formation d'une fosse océanique, séismes jusqu'à grande profondeur et volcanisme explosif. Exemples : Andes, Japon.\nFrontière convergente avec collision : deux continents se rencontrent après la fermeture d'un océan ; la croûte se plisse et s'épaissit et forme une chaîne de montagnes. Exemples : Himalaya, Alpes.\nCertaines plaques coulissent l'une contre l'autre (ex. faille de San Andreas en Californie), provoquant des séismes.\nLes séismes, les volcans, les dorsales, les fosses et les chaînes de montagnes dessinent les limites des plaques.\nMoteur : la Terre évacue sa chaleur interne ; des mouvements très lents du manteau solide (convection) et l'enfoncement des plaques dans les zones de subduction entraînent le déplacement des plaques.\nUne théorie scientifique se construit par étapes, en confrontant des hypothèses à de nouvelles observations."
+    },
+    {
+      "id": "risques-geologiques",
+      "titre": "Les risques sismiques et volcaniques",
+      "ordre": 5,
+      "periode": "T2",
+      "notions": [
+        "Définir un risque naturel comme la rencontre d'un aléa et d'enjeux humains",
+        "Expliquer que la vulnérabilité d'une population dépend de son niveau de préparation et de protection",
+        "Savoir qu'on ne sait pas prévoir la date d'un séisme mais qu'on peut s'en protéger (prévention)",
+        "Citer des mesures de prévention : constructions parasismiques, zonage, information, exercices",
+        "Expliquer la surveillance des volcans et la possibilité de prévoir une éruption",
+        "Connaître les bons comportements à adopter avant, pendant et après un séisme ou une éruption"
+      ],
+      "motsCles": [
+        "risque",
+        "aléa",
+        "enjeux",
+        "vulnérabilité",
+        "prévention",
+        "prévision",
+        "construction parasismique",
+        "zonage sismique",
+        "surveillance",
+        "observatoire volcanologique",
+        "évacuation",
+        "tsunami"
+      ],
+      "reference": "Aléa : événement naturel possible (séisme, éruption) avec une probabilité et une intensité.\nEnjeux : personnes, habitations, activités et biens exposés à l'aléa.\nUn risque naturel existe quand un aléa menace des enjeux : sans population ni biens, il n'y a pas de risque.\nVulnérabilité : sensibilité des enjeux aux dégâts. Elle est plus forte quand les constructions sont fragiles et la population mal préparée.\nPour un même aléa, les conséquences sont plus graves dans un pays peu préparé (ex. Haïti 2010, magnitude 7,0, plus de 200 000 morts) que dans un pays équipé.\nPrévision : annoncer à l'avance un événement. On ne sait pas prévoir la date d'un séisme ; on peut seulement repérer les zones à risque.\nPrévention : mesures pour réduire les dégâts. Règles de construction parasismique, cartes de zonage sismique, plans de prévention des risques, information et exercices.\nEn France, le territoire est découpé en 5 zones de sismicité ; les Antilles sont classées en zone de sismicité forte (zone 5).\nSurveillance des volcans : sismomètres (petits séismes dus à la remontée du magma), mesures de déformation du sol (inclinomètres, GPS), analyse des gaz. Ex. Observatoire volcanologique du Piton de la Fournaise.\nUne éruption peut souvent être anticipée quelques heures à quelques jours avant : on peut alors évacuer la population.\nPendant un séisme : à l'intérieur, s'abriter sous un meuble solide, loin des fenêtres ; à l'extérieur, s'éloigner des bâtiments et des fils électriques.\nAprès un séisme : évacuer calmement sans utiliser l'ascenseur, couper gaz et électricité ; en bord de mer, rejoindre les hauteurs en cas d'alerte au tsunami.\nLors d'une éruption : suivre les consignes des autorités, s'éloigner des zones interdites, se protéger des cendres."
+    },
+    {
+      "id": "puberte",
+      "titre": "La puberté",
+      "ordre": 6,
+      "periode": "T2",
+      "notions": [
+        "Définir la puberté comme la période où l'organisme devient capable de se reproduire",
+        "Distinguer caractères sexuels primaires et caractères sexuels secondaires",
+        "Décrire les transformations du corps chez la fille et chez le garçon",
+        "Expliquer le rôle des hormones sexuelles produites par les ovaires et les testicules",
+        "Expliquer que le déclenchement de la puberté est commandé par le cerveau (hypophyse)",
+        "Savoir que l'âge et le rythme de la puberté varient d'une personne à l'autre"
+      ],
+      "motsCles": [
+        "puberté",
+        "caractères sexuels primaires",
+        "caractères sexuels secondaires",
+        "hormone",
+        "testostérone",
+        "œstrogènes",
+        "hypophyse",
+        "ovaires",
+        "testicules",
+        "règles",
+        "organe cible"
+      ],
+      "reference": "La puberté est la période de transformations du corps et du comportement au cours de laquelle l'organisme devient capable de se reproduire.\nElle commence en général entre 8 et 13 ans chez les filles et entre 9 et 14 ans chez les garçons ; l'âge varie beaucoup d'une personne à l'autre.\nCaractères sexuels primaires : appareils reproducteurs, présents dès la naissance.\nCaractères sexuels secondaires : caractères qui apparaissent à la puberté.\nChez la fille : développement des seins, apparition de poils (pubis, aisselles), élargissement du bassin, premières règles.\nChez le garçon : augmentation du volume des testicules et du pénis, poils (pubis, aisselles, visage), mue de la voix, développement musculaire, premières éjaculations.\nChez les deux : forte poussée de croissance, transpiration plus importante, apparition possible d'acné.\nCes transformations sont dues à des hormones. Une hormone est une substance produite par une glande, transportée par le sang et qui agit sur des organes cibles.\nLes testicules produisent la testostérone ; les ovaires produisent les œstrogènes et la progestérone.\nÀ la puberté, l'hypophyse, une petite glande située sous le cerveau, augmente la production d'hormones qui stimulent les testicules ou les ovaires.\nLes premières règles marquent le début du fonctionnement cyclique des ovaires ; la production de spermatozoïdes commence chez le garçon.\nLa puberté s'accompagne aussi de changements dans les émotions et les relations aux autres ; une bonne hygiène et un sommeil suffisant sont importants."
+    },
+    {
+      "id": "appareils-reproducteurs",
+      "titre": "Les appareils reproducteurs et leur fonctionnement",
+      "ordre": 7,
+      "periode": "T2",
+      "notions": [
+        "Décrire l'appareil reproducteur masculin et le rôle de chaque organe",
+        "Décrire l'appareil reproducteur féminin et le rôle de chaque organe",
+        "Comparer spermatozoïdes et ovocytes (taille, forme, mobilité, nombre)",
+        "Expliquer la production continue de spermatozoïdes par les testicules à partir de la puberté",
+        "Décrire le cycle menstruel : ovulation, épaississement puis élimination de la muqueuse utérine (règles)",
+        "Expliquer que le fonctionnement des ovaires et de l'utérus est contrôlé par des hormones"
+      ],
+      "motsCles": [
+        "testicule",
+        "spermatozoïde",
+        "spermiducte",
+        "prostate",
+        "sperme",
+        "ovaire",
+        "ovocyte",
+        "trompe",
+        "utérus",
+        "muqueuse utérine",
+        "ovulation",
+        "cycle menstruel"
+      ],
+      "reference": "Appareil masculin : deux testicules produisent les spermatozoïdes et la testostérone. Les spermiductes conduisent les spermatozoïdes vers l'urètre.\nLes vésicules séminales et la prostate produisent le liquide séminal. Sperme = spermatozoïdes + liquide séminal ; il sort par l'urètre, dans le pénis.\nLes testicules produisent des spermatozoïdes en continu de la puberté jusqu'à la fin de la vie, par millions chaque jour.\nLe spermatozoïde est une cellule très petite (environ 0,06 mm), mobile grâce à son flagelle.\nAppareil féminin : deux ovaires contiennent les ovocytes et produisent les hormones ovariennes. Les trompes (oviductes) recueillent l'ovocyte ; c'est là que peut avoir lieu la fécondation.\nL'utérus est un organe musclé dont la paroi interne, la muqueuse utérine, peut accueillir un embryon. Le col de l'utérus s'ouvre sur le vagin.\nL'ovocyte est une grosse cellule (environ 0,1 mm) immobile, riche en réserves.\nDe la puberté à la ménopause (vers 50 ans), les ovaires et l'utérus fonctionnent de façon cyclique : le cycle menstruel dure environ 28 jours (variable).\nLe jour 1 du cycle est le premier jour des règles. La muqueuse utérine s'épaissit pendant la première partie du cycle.\nOvulation : vers le 14e jour d'un cycle de 28 jours, un ovaire libère en général un ovocyte.\nS'il n'y a pas de fécondation, la muqueuse utérine se détruit et est éliminée avec un peu de sang : ce sont les règles, qui marquent le début d'un nouveau cycle.\nLes hormones ovariennes (œstrogènes, progestérone) commandent l'épaississement de la muqueuse ; leur chute déclenche les règles. L'hypophyse contrôle le fonctionnement des ovaires et des testicules."
+    },
+    {
+      "id": "fecondation-grossesse",
+      "titre": "De la fécondation à la naissance",
+      "ordre": 8,
+      "periode": "T2",
+      "notions": [
+        "Décrire la fécondation dans la trompe : rencontre d'un spermatozoïde et d'un ovocyte formant une cellule-œuf",
+        "Expliquer les premières divisions de la cellule-œuf et la nidation de l'embryon dans l'utérus",
+        "Distinguer embryon et fœtus et décrire les grandes étapes du développement",
+        "Expliquer le rôle du placenta dans les échanges entre la mère et le fœtus",
+        "Expliquer que certaines substances (alcool, tabac, drogues, certains médicaments) traversent le placenta et sont dangereuses",
+        "Décrire l'accouchement"
+      ],
+      "motsCles": [
+        "fécondation",
+        "cellule-œuf",
+        "embryon",
+        "nidation",
+        "fœtus",
+        "placenta",
+        "cordon ombilical",
+        "liquide amniotique",
+        "grossesse",
+        "accouchement",
+        "jumeaux"
+      ],
+      "reference": "Lors d'un rapport sexuel, des millions de spermatozoïdes sont déposés dans le vagin ; ils traversent l'utérus et remontent dans les trompes.\nFécondation : un seul spermatozoïde pénètre dans l'ovocyte ; les deux noyaux s'unissent pour former une cellule-œuf. Elle a lieu dans une trompe.\nLa cellule-œuf se divise en 2, 4, 8 cellules… tout en descendant vers l'utérus : c'est le début du développement de l'embryon.\nNidation : environ 7 jours après la fécondation, l'embryon s'implante dans la muqueuse utérine. La grossesse commence ; les règles s'arrêtent.\nOn parle d'embryon pendant les 2 premiers mois (8 semaines) : les organes se mettent en place. Ensuite, on parle de fœtus : les organes grandissent et deviennent fonctionnels.\nLe placenta, relié au fœtus par le cordon ombilical, permet les échanges entre le sang de la mère et le sang du fœtus, sans que les deux sangs se mélangent.\nLe fœtus reçoit de la mère du dioxygène et des nutriments ; il rejette du dioxyde de carbone et des déchets qui passent dans le sang de la mère.\nLe fœtus baigne dans le liquide amniotique qui le protège des chocs.\nCertaines substances traversent le placenta : alcool, nicotine et autres substances du tabac, drogues, certains médicaments, certains virus (rubéole). L'alcool pendant la grossesse peut provoquer de graves troubles chez l'enfant (syndrome d'alcoolisation fœtale) : zéro alcool pendant la grossesse.\nLa grossesse dure environ 9 mois (environ 38 semaines après la fécondation).\nAccouchement : contractions de l'utérus, ouverture du col, sortie du bébé, puis expulsion du placenta (délivrance).\nVrais jumeaux : une seule cellule-œuf qui se sépare en deux embryons (même information génétique). Faux jumeaux : deux ovocytes fécondés par deux spermatozoïdes."
+    },
+    {
+      "id": "maitrise-procreation-ist",
+      "titre": "Maîtriser sa procréation et se protéger des IST",
+      "ordre": 9,
+      "periode": "T2",
+      "notions": [
+        "Expliquer le principe des principales méthodes de contraception",
+        "Savoir que le préservatif est la seule méthode qui protège aussi des infections sexuellement transmissibles",
+        "Connaître l'existence de la contraception d'urgence et les lieux où obtenir aide et information",
+        "Définir une IST, en citer des exemples et expliquer les moyens de prévention (préservatif, vaccination, dépistage)",
+        "Expliquer le principe de l'assistance médicale à la procréation (insémination, fécondation in vitro)",
+        "Argumenter sur des comportements responsables en matière de sexualité"
+      ],
+      "motsCles": [
+        "contraception",
+        "préservatif",
+        "pilule contraceptive",
+        "dispositif intra-utérin",
+        "contraception d'urgence",
+        "IST",
+        "VIH",
+        "papillomavirus",
+        "dépistage",
+        "vaccination",
+        "assistance médicale à la procréation",
+        "fécondation in vitro"
+      ],
+      "reference": "La contraception regroupe les méthodes qui permettent d'éviter une grossesse non désirée.\nPréservatif (masculin ou féminin) : il empêche les spermatozoïdes d'atteindre l'ovocyte. C'est la seule méthode qui protège aussi des IST.\nPilule contraceptive : comprimé contenant des hormones de synthèse, pris chaque jour, qui bloque en général l'ovulation. Un oubli diminue son efficacité.\nAutres méthodes hormonales : implant, patch, anneau vaginal.\nDispositif intra-utérin (stérilet), au cuivre ou hormonal : placé dans l'utérus par un professionnel de santé, il empêche la fécondation ou la nidation.\nContraception d'urgence : pilule à prendre le plus tôt possible après un rapport non ou mal protégé ; elle est disponible en pharmacie sans ordonnance, gratuitement et de façon anonyme pour les mineures. Ce n'est pas une contraception régulière.\nInfirmière scolaire, médecin, centres de santé sexuelle (anciens centres de planification) informent gratuitement et confidentiellement.\nIST (infection sexuellement transmissible) : infection due à un virus ou une bactérie qui se transmet lors de rapports sexuels. Exemples : VIH (responsable du sida), chlamydia, papillomavirus (HPV), hépatite B, syphilis, herpès génital.\nBeaucoup d'IST ne donnent pas de symptômes au début : seul un dépistage permet de savoir si on est infecté.\nPrévention : préservatif, dépistage (gratuit dans les centres de dépistage), vaccination contre le papillomavirus (recommandée de 11 à 14 ans, filles et garçons) et contre l'hépatite B.\nAssistance médicale à la procréation (AMP) : aide les couples qui ne parviennent pas à avoir un enfant.\nInsémination artificielle : les spermatozoïdes sont déposés dans l'utérus par un médecin.\nFécondation in vitro (FIV) : ovocytes et spermatozoïdes sont mis en contact hors du corps ; un embryon obtenu est ensuite placé dans l'utérus. Premier bébé né par FIV : 1978 (Royaume-Uni), 1982 en France.\nLa sexualité repose sur le respect de soi et des autres et sur le consentement de chacun."
+    },
+    {
+      "id": "mouvement-commande-nerveuse",
+      "titre": "Le mouvement et sa commande par le système nerveux",
+      "ordre": 10,
+      "periode": "T3",
+      "notions": [
+        "Décrire les éléments de l'appareil locomoteur : os, articulations, muscles, tendons",
+        "Expliquer que la contraction d'un muscle (raccourcissement) tire sur un os et provoque un mouvement autour d'une articulation",
+        "Expliquer le fonctionnement de muscles antagonistes (biceps et triceps)",
+        "Décrire la chaîne organe des sens → nerf sensitif → centre nerveux → nerf moteur → muscle",
+        "Distinguer mouvement volontaire (commandé par le cerveau) et réflexe (moelle épinière)",
+        "Expliquer les conséquences d'une lésion de la moelle épinière ou du cerveau sur le mouvement"
+      ],
+      "motsCles": [
+        "appareil locomoteur",
+        "os",
+        "articulation",
+        "ligament",
+        "tendon",
+        "muscle",
+        "contraction",
+        "muscles antagonistes",
+        "récepteur sensoriel",
+        "nerf",
+        "moelle épinière",
+        "cerveau"
+      ],
+      "reference": "L'appareil locomoteur comprend le squelette (os), les articulations et les muscles squelettiques.\nUne articulation est la zone de contact entre deux os mobiles ; les os sont reliés par des ligaments et recouverts de cartilage qui facilite le glissement.\nUn muscle est relié aux os par des tendons. En se contractant, il se raccourcit, se gonfle et tire sur l'os : celui-ci pivote autour de l'articulation.\nMuscles antagonistes : ils ont des actions opposées. Pour plier le bras, le biceps se contracte et le triceps se relâche ; pour tendre le bras, c'est l'inverse.\nUn mouvement est commandé par le système nerveux : cerveau et moelle épinière (centres nerveux) et nerfs.\nLes organes des sens (œil, oreille, peau…) contiennent des récepteurs sensoriels qui captent une information de l'environnement.\nUn message nerveux sensitif part du récepteur, circule dans un nerf sensitif jusqu'au centre nerveux.\nLe cerveau analyse l'information et élabore un message nerveux moteur, qui descend dans la moelle épinière puis dans un nerf moteur jusqu'au muscle (organe effecteur).\nLe message nerveux est de nature électrique et circule toujours dans le même sens.\nChaque hémisphère du cerveau commande les muscles du côté opposé du corps.\nRéflexe : réponse automatique, rapide et involontaire. Ex. réflexe rotulien (choc sous le genou → la jambe se lève) : le centre nerveux est la moelle épinière.\nMouvement volontaire : décidé et commandé par le cerveau.\nUne lésion de la moelle épinière peut empêcher le passage des messages et entraîner une paralysie des parties du corps situées en dessous.\nLe temps de réaction (de l'ordre de quelques dixièmes de seconde) augmente avec la fatigue, l'alcool ou les distractions (téléphone)."
+    },
+    {
+      "id": "relations-alimentaires",
+      "titre": "Les relations alimentaires dans un écosystème",
+      "ordre": 11,
+      "periode": "T3",
+      "notions": [
+        "Construire une chaîne alimentaire et un réseau alimentaire à partir de régimes alimentaires",
+        "Distinguer producteurs primaires, consommateurs (primaires, secondaires) et décomposeurs",
+        "Expliquer que les végétaux chlorophylliens fabriquent leur matière organique à partir de matière minérale et de lumière",
+        "Expliquer la perte de matière et d'énergie à chaque niveau d'une chaîne (pyramide)",
+        "Décrire d'autres relations entre êtres vivants : compétition, parasitisme, symbiose",
+        "Expliquer l'accumulation de polluants le long des chaînes alimentaires et les conséquences d'une perturbation d'un maillon"
+      ],
+      "motsCles": [
+        "chaîne alimentaire",
+        "réseau alimentaire",
+        "producteur primaire",
+        "consommateur",
+        "herbivore",
+        "carnivore",
+        "omnivore",
+        "décomposeur",
+        "pyramide",
+        "compétition",
+        "parasitisme",
+        "symbiose"
+      ],
+      "reference": "Une chaîne alimentaire est une suite d'êtres vivants dans laquelle chacun mange le précédent. La flèche signifie « est mangé par » : herbe → lapin → renard.\nUn réseau alimentaire est l'ensemble des chaînes alimentaires reliées entre elles dans un écosystème.\nProducteurs primaires : végétaux chlorophylliens (et algues). Ils fabriquent leur propre matière organique à partir d'eau, de sels minéraux, de dioxyde de carbone et de lumière.\nConsommateurs : ils se nourrissent de matière organique déjà produite. Consommateurs primaires = herbivores ; consommateurs secondaires = carnivores qui mangent des herbivores. Un omnivore mange des végétaux et des animaux.\nDécomposeurs : champignons, bactéries et petits animaux du sol qui se nourrissent de cadavres, de déchets et de feuilles mortes.\nMéthodes pour connaître un régime alimentaire : observation, analyse de pelotes de réjection (chouette), de contenus stomacaux ou d'excréments.\nÀ chaque niveau de la chaîne, une grande partie de la matière consommée est utilisée pour vivre (respiration, mouvement) ou rejetée ; seule une faible partie (environ 10 %) sert à construire le corps du consommateur.\nC'est pourquoi la biomasse diminue à chaque niveau : on la représente par une pyramide, et les chaînes comptent rarement plus de 4 ou 5 maillons.\nCompétition : deux espèces utilisent la même ressource (nourriture, lumière, territoire).\nParasitisme : un être vivant (le parasite) vit aux dépens d'un autre (l'hôte) et lui nuit. Ex. le gui sur un arbre, le ténia.\nSymbiose : association à bénéfice réciproque et durable. Ex. le lichen (champignon + algue), les mycorhizes (champignon + racines).\nCertains polluants peu dégradables (mercure, certains pesticides) s'accumulent le long des chaînes : leur concentration est la plus forte chez les grands prédateurs.\nLa disparition ou l'introduction d'une espèce peut modifier tout le réseau alimentaire."
+    },
+    {
+      "id": "decomposeurs-recyclage-matiere",
+      "titre": "Les décomposeurs et le recyclage de la matière",
+      "ordre": 12,
+      "periode": "T3",
+      "notions": [
+        "Décrire l'organisation d'un sol : litière, humus, horizons minéraux, roche-mère",
+        "Identifier les êtres vivants du sol et leur rôle dans la décomposition",
+        "Expliquer que les champignons et bactéries transforment la matière organique en matière minérale (minéralisation)",
+        "Expliquer que la matière minérale libérée est réutilisée par les végétaux",
+        "Construire le cycle de la matière dans un écosystème (producteurs, consommateurs, décomposeurs)",
+        "Relier certaines pratiques humaines (compostage, labour, pesticides) à l'activité des organismes du sol"
+      ],
+      "motsCles": [
+        "sol",
+        "litière",
+        "humus",
+        "horizon",
+        "roche-mère",
+        "décomposeur",
+        "ver de terre",
+        "champignon",
+        "bactérie",
+        "minéralisation",
+        "cycle de la matière",
+        "compost"
+      ],
+      "reference": "Le sol est la couche superficielle, meuble, qui recouvre les roches. Il est formé de matière minérale (issue de la roche-mère), de matière organique, d'eau, d'air et d'êtres vivants.\nDe haut en bas : la litière (feuilles mortes, débris), l'humus (matière organique sombre en cours de décomposition), des horizons de plus en plus minéraux, puis la roche-mère.\nLa matière organique provient des êtres vivants : feuilles mortes, cadavres, excréments.\nLa faune du sol (vers de terre, cloportes, collemboles, acariens, mille-pattes) fragmente et consomme la litière. On peut l'extraire avec un appareil de Berlese (lumière et chaleur au-dessus d'un entonnoir).\nLes vers de terre mélangent les couches du sol et creusent des galeries qui l'aèrent.\nLes champignons et les bactéries achèvent la décomposition : ils transforment la matière organique en matière minérale (sels minéraux, dioxyde de carbone, eau). C'est la minéralisation.\nLes sels minéraux libérés sont absorbés par les racines des végétaux, qui fabriquent de nouvelle matière organique.\nCycle de la matière : producteurs → consommateurs → décomposeurs → matière minérale → producteurs. La matière est recyclée en permanence dans un écosystème.\nSans décomposeurs, les déchets s'accumuleraient et les sels minéraux ne retourneraient pas aux végétaux.\nLa décomposition est plus rapide lorsqu'il fait doux et humide et que le sol est aéré.\nExpérience : des feuilles enfermées dans des sacs à mailles fines (sans faune du sol) se décomposent plus lentement que dans des sacs à larges mailles.\nLe compostage utilise les décomposeurs pour transformer les déchets organiques en compost, qui enrichit le sol.\nCertains pesticides, le tassement et un travail excessif du sol réduisent la faune du sol et donc sa fertilité."
+    }
+  ]
+}

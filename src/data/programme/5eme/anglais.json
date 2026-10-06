@@ -1,0 +1,351 @@
+{
+  "classe": "5ème",
+  "matiere": "Anglais",
+  "programme": "Langues vivantes étrangères cycle 4, nouveau programme (BOEN n°22 du 29 mai 2025), en vigueur en 5e à la rentrée 2026 — LVA, niveau A1+ vers A2",
+  "modele": "claude-opus-5-5 (abonnement)",
+  "genereLe": "2026-10-05",
+  "relu": false,
+  "chapitres": [
+    {
+      "id": "present-simple-et-be-ing",
+      "titre": "Présent simple et présent en be + -ing : la vie quotidienne (daily life)",
+      "ordre": 1,
+      "periode": "T1",
+      "notions": [
+        "Employer le présent simple pour les habitudes, les vérités générales et les goûts",
+        "Ajouter le -s à la 3e personne du singulier et en maîtriser l'orthographe",
+        "Construire la négation et la question avec do / does",
+        "Employer be + V-ing pour une action en cours au moment où l'on parle",
+        "Choisir entre présent simple et be + -ing grâce aux repères de temps",
+        "Placer les adverbes de fréquence dans la phrase"
+      ],
+      "motsCles": [
+        "present simple",
+        "be + -ing",
+        "do / does",
+        "don't / doesn't",
+        "always",
+        "usually",
+        "often",
+        "sometimes",
+        "never",
+        "every day",
+        "now",
+        "at the moment"
+      ],
+      "reference": "Présent simple : habitudes, actions répétées, vérités générales, goûts : I get up at 7 every day. Water boils at 100 °C.\nÀ la 3e personne du singulier (he, she, it), on ajoute -s : she plays, he works.\nOrthographe : -es après -s, -sh, -ch, -x, -o (he watches, she goes, he does) ; consonne + y → -ies (study → she studies) ; have → has.\nNégation : don't / doesn't + base verbale : I don't like tea. He doesn't play tennis (et non he doesn't plays).\nQuestion : Do / Does + sujet + base verbale : Do you walk to school? — Yes, I do. Does she live in Dublin? — No, she doesn't.\nAdverbes de fréquence : always (100 %), usually, often, sometimes, rarely, never (0 %).\nIls se placent avant le verbe (I often read) mais après be (She is always late).\nRepères du présent simple : every day, on Mondays, at the weekend, once a week, twice a week.\nPrésent en be + -ing (présent continu) : be conjugué + V-ing pour une action en cours : I'm doing my homework now.\nNégation : I'm not / he isn't / they aren't + V-ing ; question : Are you listening? — Yes, I am.\nOrthographe de -ing : e muet tombe (write → writing) ; consonne doublée après voyelle courte accentuée (swim → swimming, run → running) ; -ie → -ying (lie → lying).\nRepères du be + -ing : now, right now, at the moment, Look!, Listen!\nVerbes d'état (like, love, hate, want, know, understand) : normalement au présent simple : I want a drink (et non I'm wanting).\nContraste : I usually walk to school, but today I'm taking the bus.\nMéthode : chercher le repère de temps (habitude ou moment présent), puis vérifier -s ou be + -ing."
+    },
+    {
+      "id": "decrire-une-personne",
+      "titre": "Décrire une personne : apparence et personnalité (portraits)",
+      "ordre": 2,
+      "periode": "T1",
+      "notions": [
+        "Décrire l'apparence physique : taille, corpulence, cheveux, yeux",
+        "Respecter l'ordre des adjectifs et leur invariabilité",
+        "Distinguer What does he look like? et What is he like?",
+        "Décrire la personnalité avec des adjectifs de qualités et de défauts",
+        "Employer have got et be dans une description",
+        "Nuancer avec very, quite, a bit, too"
+      ],
+      "motsCles": [
+        "tall",
+        "short",
+        "slim",
+        "curly hair",
+        "blue eyes",
+        "look like",
+        "be like",
+        "friendly",
+        "shy",
+        "funny",
+        "kind",
+        "have got"
+      ],
+      "reference": "En anglais, l'adjectif est invariable et se place avant le nom : a tall boy, two tall boys (et non talls).\nTaille et corpulence avec be : He is tall / short / of medium height. She is slim / thin / strong.\nCheveux et yeux avec have got : She has got long curly red hair. He has got brown eyes.\nOrdre habituel des adjectifs : longueur puis forme puis couleur : long straight black hair, short curly fair hair.\nhair est indénombrable quand il désigne la chevelure : her hair is long (et non her hairs are).\nAutres traits : He wears glasses. He has got a beard / a moustache. She has got freckles.\nApparence : What does he look like? — He's tall and he has got short dark hair.\nPersonnalité : What is he like? — He's friendly and funny.\nlook like + nom = ressembler à : She looks like her mother.\nQualités : kind, friendly, funny, generous, brave, clever, hard-working, polite, patient.\nDéfauts : shy (timide), lazy, rude, bossy, selfish, moody, impatient.\nFaux amis : sensible = raisonnable (sensé), sensitive = sensible ; nice = gentil, sympa.\nNuancer : very tall, quite shy, a bit lazy, too bossy (too = trop, avec une idée négative).\nContraires : tall ≠ short, kind ≠ unkind, patient ≠ impatient, polite ≠ rude.\nMéthode : décrire du général au détail (taille, cheveux, yeux) puis donner la personnalité avec un exemple : She's generous: she always shares her snacks."
+    },
+    {
+      "id": "preterit-de-be",
+      "titre": "Le prétérit de be : was / were (childhood memories)",
+      "ordre": 3,
+      "periode": "T1",
+      "notions": [
+        "Conjuguer be au prétérit : was et were",
+        "Construire la négation wasn't / weren't",
+        "Poser des questions et répondre brièvement avec was / were",
+        "Employer there was / there were",
+        "Utiliser les repères du passé : yesterday, last, ago",
+        "Parler de souvenirs d'enfance"
+      ],
+      "motsCles": [
+        "was",
+        "were",
+        "wasn't",
+        "weren't",
+        "there was",
+        "there were",
+        "yesterday",
+        "last week",
+        "ago",
+        "when I was a child",
+        "born"
+      ],
+      "reference": "Le prétérit sert à parler d'un fait passé, terminé et daté.\nBe au prétérit : I was, you were, he / she / it was, we were, you were, they were.\nNégation : was not = wasn't ; were not = weren't : We weren't at school yesterday.\nQuestion : on inverse be et le sujet : Were you happy? — Yes, I was. / No, I wasn't.\nQuestions avec mot interrogatif : Where were you last night? What was your first pet?\nThere was + singulier / There were + pluriel : There was a park near my house. There were two cats.\nRepères : yesterday, yesterday morning, last night, last week, last year, two days ago, in 2020.\nago se place après la durée : three years ago (il y a trois ans).\nNaître : be born : I was born in 2014. Where were you born? — I was born in Lyon.\nÂge dans le passé : When I was six, I was afraid of the dark.\nJamais de did avec be : Were you tired? (et non Did you were tired?).\nMéthode : repérer le sujet (singulier ou pluriel) pour choisir was ou were ; avec you, toujours were."
+    },
+    {
+      "id": "preterit-verbes-reguliers",
+      "titre": "Le prétérit des verbes réguliers : raconter son week-end (last weekend)",
+      "ordre": 4,
+      "periode": "T1",
+      "notions": [
+        "Former le prétérit des verbes réguliers avec -ed",
+        "Maîtriser l'orthographe de -ed",
+        "Prononcer -ed : /t/, /d/, /ɪd/",
+        "Construire la négation avec didn't + base verbale",
+        "Poser des questions avec did et y répondre brièvement",
+        "Organiser un récit avec first, then, after that, finally"
+      ],
+      "motsCles": [
+        "-ed",
+        "played",
+        "watched",
+        "visited",
+        "did",
+        "didn't",
+        "Did you…?",
+        "last weekend",
+        "first",
+        "then",
+        "finally"
+      ],
+      "reference": "Verbes réguliers : base verbale + -ed à toutes les personnes : I played, she played, they played.\nOrthographe : verbe en -e → + d (like → liked) ; consonne + y → -ied (study → studied) ; voyelle + y → -yed (play → played).\nConsonne finale doublée après une voyelle courte accentuée : stop → stopped, plan → planned, chat → chatted.\nPrononciation : /ɪd/ après t ou d (visited, wanted) ; /t/ après les sons sourds p, k, s, ʃ, tʃ (stopped, walked, watched) ; /d/ dans les autres cas (played, cleaned).\nNégation : didn't (did not) + base verbale : I didn't watch TV (et non I didn't watched).\nQuestion : Did + sujet + base verbale : Did you visit your grandparents? — Yes, I did. / No, I didn't.\nQuestions avec mot interrogatif : What did you do last weekend? Where did you go?\ndid porte la marque du passé : le verbe reste à la base verbale dans la question et la négation.\nRepères : last Saturday, last weekend, yesterday afternoon, an hour ago.\nConnecteurs du récit : first, then, next, after that, finally.\nExemple : Last Saturday, I tidied my room. Then I played football and in the evening I watched a film.\nMéthode : vérifier le repère de temps passé, ajouter -ed avec la bonne orthographe ; à la forme négative et interrogative, did + base verbale."
+    },
+    {
+      "id": "preterit-verbes-irreguliers",
+      "titre": "Les verbes irréguliers au prétérit : raconter des vacances (holidays)",
+      "ordre": 5,
+      "periode": "T2",
+      "notions": [
+        "Connaître le prétérit des verbes irréguliers les plus courants",
+        "Employer les verbes irréguliers à la forme affirmative",
+        "Construire négation et question avec did + base verbale",
+        "Poser des questions avec what, where, when, who, how",
+        "Raconter un voyage ou des vacances au passé",
+        "Situer un événement avec ago, last, in + année"
+      ],
+      "motsCles": [
+        "irregular verbs",
+        "went",
+        "had",
+        "saw",
+        "ate",
+        "took",
+        "bought",
+        "made",
+        "met",
+        "did",
+        "holiday",
+        "trip"
+      ],
+      "reference": "Les verbes irréguliers ont une forme propre au prétérit, la même à toutes les personnes ; il faut les apprendre.\nListe de base : go → went, have → had, see → saw, eat → ate, take → took, buy → bought, make → made, meet → met, do → did, get → got.\nSuite : come → came, leave → left, swim → swam, write → wrote, drink → drank, sleep → slept, give → gave, find → found, say → said, tell → told, read → read (prononcé /red/).\nAffirmatif : We went to Scotland last summer. I saw a dolphin.\nNégation : didn't + base verbale : We didn't go to the beach (et non didn't went).\nQuestion : Did + sujet + base verbale : Did you take photos? — Yes, I did.\nMots interrogatifs : What did you eat? Where did you go? When did you leave? Who did you meet? How did you travel?\nWho sujet : pas de did : Who went with you? — My cousins did.\nMoyens de transport : by car, by train, by plane, by boat ; mais on foot.\nVocabulaire du voyage : holiday (vacances, britannique) / vacation (américain), trip, journey, suitcase, hotel, campsite, souvenir.\nRepères : last summer, last July, two weeks ago, in 2025.\nMéthode : repérer si le verbe est régulier ou irrégulier ; à la question et à la négation, did suffit pour marquer le passé."
+    },
+    {
+      "id": "denombrables-et-quantites",
+      "titre": "Dénombrables, indénombrables et quantités : la nourriture (food)",
+      "ordre": 6,
+      "periode": "T2",
+      "notions": [
+        "Distinguer noms dénombrables et indénombrables",
+        "Employer a / an, some et any",
+        "Employer much, many, a lot of et a few / a little",
+        "Poser les questions How much? et How many?",
+        "Nommer des aliments et des contenants (a bottle of, a slice of)",
+        "Commander poliment avec Can I have…? et I'd like…"
+      ],
+      "motsCles": [
+        "countable",
+        "uncountable",
+        "some",
+        "any",
+        "much",
+        "many",
+        "a lot of",
+        "How much?",
+        "How many?",
+        "a piece of",
+        "I'd like"
+      ],
+      "reference": "Dénombrables : on peut les compter, ils ont un pluriel : an apple, two apples, an egg, three tomatoes.\nIndénombrables : pas de pluriel, pas de a / an : bread, water, milk, rice, cheese, butter, money, information.\na devant un son consonne (a banana), an devant un son voyelle (an apple, an hour).\nsome : phrase affirmative et offre polie : I want some bread. Would you like some tea?\nany : phrase négative et question : There isn't any milk. Are there any eggs?\nmany + dénombrable pluriel : How many eggs? There aren't many eggs.\nmuch + indénombrable : How much sugar? I don't drink much coffee.\na lot of / lots of : avec les deux types : a lot of apples, a lot of water.\na few + dénombrable (quelques), a little + indénombrable (un peu de) : a few biscuits, a little milk.\nRendre dénombrable : a bottle of water, a glass of milk, a slice of bread, a piece of cake, a cup of tea, a kilo of potatoes.\nCommander : I'd like a sandwich, please. Can I have some chips? How much is it? — It's three pounds.\nVocabulaire britannique / américain : chips (UK) = French fries (US) ; crisps (UK) = chips (US).\nMéthode : se demander si on peut compter le nom, puis choisir a / some / any et much / many."
+    },
+    {
+      "id": "le-comparatif",
+      "titre": "Le comparatif : comparer des personnes et des choses (animals)",
+      "ordre": 7,
+      "periode": "T2",
+      "notions": [
+        "Former le comparatif de supériorité des adjectifs courts avec -er than",
+        "Former le comparatif des adjectifs longs avec more … than",
+        "Connaître les comparatifs irréguliers good / bad / far",
+        "Exprimer l'égalité avec as … as et l'infériorité avec not as … as / less … than",
+        "Appliquer les règles d'orthographe de -er",
+        "Comparer des animaux à l'aide de caractéristiques"
+      ],
+      "motsCles": [
+        "comparative",
+        "than",
+        "-er",
+        "more",
+        "less",
+        "as … as",
+        "better",
+        "worse",
+        "bigger",
+        "faster",
+        "heavier",
+        "dangerous"
+      ],
+      "reference": "Adjectifs courts (1 syllabe) : adjectif + -er + than : A cheetah is faster than a lion.\nAdjectifs de 2 syllabes terminés par -y : -y → -ier : happy → happier, heavy → heavier, funny → funnier.\nOrthographe : -e → -r (large → larger) ; consonne doublée après voyelle courte (big → bigger, hot → hotter, thin → thinner).\nAdjectifs longs (2 syllabes ou plus, hors -y) : more + adjectif + than : An elephant is more intelligent than a cow.\nExemples : more dangerous, more beautiful, more expensive, more interesting.\nIrréguliers : good → better, bad → worse, far → farther / further.\nÉgalité : as + adjectif + as : My dog is as clever as your cat.\nInfériorité : not as … as ou less … than : A mouse is not as heavy as a rabbit. It is less dangerous than a shark.\nthan se traduit par que : taller than me / taller than I am.\nOn ne dit jamais more taller ni more good : un seul marqueur de comparaison.\nIntensifier : much / far + comparatif : A whale is much bigger than a dolphin.\nVocabulaire : heavy, light, fast, slow, big, small, strong, weak, dangerous, rare, endangered (en voie de disparition).\nMéthode : compter les syllabes de l'adjectif, puis choisir -er ou more ; vérifier les irréguliers."
+    },
+    {
+      "id": "superlatif-irlande",
+      "titre": "Le superlatif : découvrir l'Irlande (the Emerald Isle)",
+      "ordre": 8,
+      "periode": "T2",
+      "notions": [
+        "Former le superlatif des adjectifs courts avec the … -est",
+        "Former le superlatif des adjectifs longs avec the most",
+        "Connaître les superlatifs irréguliers the best / the worst",
+        "Employer in et of après un superlatif",
+        "Situer l'Irlande et nommer ses repères (Dublin, Belfast, Giant's Causeway)",
+        "Décrire un paysage et donner son opinion"
+      ],
+      "motsCles": [
+        "superlative",
+        "the most",
+        "the -est",
+        "the best",
+        "the worst",
+        "Ireland",
+        "Dublin",
+        "Northern Ireland",
+        "landscape",
+        "breathtaking",
+        "Giant's Causeway",
+        "St Patrick's Day"
+      ],
+      "reference": "Adjectif court : the + adjectif + -est : the tallest, the oldest, the biggest (consonne doublée), the nicest.\nAdjectif en -y : -y → -iest : the happiest, the funniest, the prettiest.\nAdjectif long : the most + adjectif : the most beautiful, the most famous, the most spectacular.\nIrréguliers : good → the best, bad → the worst, far → the farthest / the furthest.\nAprès un superlatif, in + lieu ou groupe (the longest river in Ireland), of + ensemble (the best of all).\nthe est obligatoire devant le superlatif : It's the most popular place (et non most popular place).\nL'île d'Irlande : la République d'Irlande (capitale Dublin), indépendante depuis 1922 et membre de l'Union européenne depuis 1973.\nL'Irlande du Nord (capitale Belfast) fait partie du Royaume-Uni.\nSurnom : the Emerald Isle (l'île d'Émeraude), pour ses paysages verts.\nLangues : anglais et irlandais (gaélique) ; symboles : le trèfle (shamrock), la harpe ; fête nationale : St Patrick's Day, le 17 mars.\nLe Shannon est le plus long fleuve d'Irlande : The Shannon is the longest river in Ireland.\nLa Chaussée des Géants (Giant's Causeway), en Irlande du Nord, est formée de colonnes de basalte ; la légende l'attribue au géant Finn McCool.\nLe Wild Atlantic Way est une route touristique le long de la côte ouest ; des films comme Star Wars y ont été tournés (Skellig Michael).\nDécrire un paysage : cliffs, hills, lakes (loughs), the coast, green fields ; amazing, breathtaking, wild.\nMéthode : compter les syllabes pour choisir -est ou the most ; ne pas oublier the."
+    },
+    {
+      "id": "must-have-to-regles",
+      "titre": "Must, mustn't et have to : les règles et obligations (rules)",
+      "ordre": 9,
+      "periode": "T2",
+      "notions": [
+        "Exprimer l'obligation avec must + base verbale",
+        "Exprimer l'interdiction avec mustn't",
+        "Exprimer une obligation extérieure avec have to / has to",
+        "Exprimer l'absence d'obligation avec don't have to",
+        "Distinguer mustn't et don't have to",
+        "Formuler les règles du collège ou de la maison"
+      ],
+      "motsCles": [
+        "must",
+        "mustn't",
+        "have to",
+        "has to",
+        "don't have to",
+        "rules",
+        "allowed",
+        "forbidden",
+        "uniform",
+        "should"
+      ],
+      "reference": "must + base verbale : obligation ressentie par celui qui parle ou règle stricte : You must listen to the teacher.\nmust est invariable : he must (et non he musts) ; jamais de to après must.\nmustn't (must not) : interdiction : You mustn't run in the corridors. Prononciation : /ˈmʌsnt/ (le premier t ne se prononce pas).\nhave to / has to + base verbale : obligation venue de l'extérieur (règlement, situation) : She has to wear a uniform.\nQuestion avec have to : Do you have to wear a uniform? — Yes, I do.\ndon't / doesn't have to : absence d'obligation : We don't have to go to school on Sunday (ce n'est pas nécessaire).\nAttention : mustn't = c'est interdit ; don't have to = ce n'est pas obligatoire.\nbe allowed to = avoir le droit de : We aren't allowed to use phones in class.\nshould + base verbale : conseil : You should go to bed early.\nRègles du collège britannique : wear a uniform (blazer, tie), be on time, raise your hand, do your homework.\nPanneaux : No smoking, No entry, Keep off the grass = interdictions.\nMéthode : se demander s'il s'agit d'une obligation, d'une interdiction ou d'une absence d'obligation, puis choisir must, mustn't ou don't have to."
+    },
+    {
+      "id": "futur-going-to-will",
+      "titre": "Exprimer le futur : be going to et will (plans and predictions)",
+      "ordre": 10,
+      "periode": "T3",
+      "notions": [
+        "Exprimer une intention ou un projet avec be going to",
+        "Faire une prédiction appuyée sur un indice présent avec be going to",
+        "Employer will pour une prédiction, une promesse ou une décision immédiate",
+        "Construire la négation won't et la question avec will",
+        "Utiliser les repères du futur : tomorrow, next, in + durée",
+        "Parler de ses projets et de la météo"
+      ],
+      "motsCles": [
+        "be going to",
+        "will",
+        "won't",
+        "tomorrow",
+        "next week",
+        "plans",
+        "forecast",
+        "promise",
+        "I think",
+        "probably"
+      ],
+      "reference": "be going to + base verbale : intention, projet déjà décidé : I'm going to visit London next summer.\nConjugaison : I'm going to, you're going to, he's going to, we're going to, they're going to.\nNégation et question : She isn't going to come. Are you going to play? — Yes, I am.\nbe going to sert aussi pour une prédiction fondée sur un indice visible : Look at the clouds! It's going to rain.\nwill + base verbale, invariable : prédiction ou opinion sur l'avenir : I think it will be sunny tomorrow.\nForme contractée : I'll, you'll, she'll ; négation : will not = won't : It won't snow.\nQuestion : Will you help me? — Yes, I will. / No, I won't.\nwill pour une décision prise au moment où l'on parle : The phone is ringing. — I'll answer it!\nwill pour une promesse : I'll call you tonight. I won't be late.\nNe pas confondre won't (will not) et want (vouloir).\nRepères : tomorrow, tonight, next week, next year, in two days, soon, one day.\nModaliser une prédiction : I think…, probably, maybe : People will probably live on Mars one day.\nMéthode : projet décidé ou indice visible → be going to ; avis, promesse ou décision spontanée → will."
+    },
+    {
+      "id": "decrire-un-tableau-saisons",
+      "titre": "Décrire un tableau : les saisons dans la peinture (seasons and paintings)",
+      "ordre": 11,
+      "periode": "T3",
+      "notions": [
+        "Nommer les saisons, les mois et le temps qu'il fait",
+        "Situer les éléments d'une image (in the foreground, in the background)",
+        "Décrire ce qui se passe avec be + -ing",
+        "Exprimer son opinion avec I think, in my opinion et la justifier avec because",
+        "Découvrir des peintres anglophones (Constable, Hopper, Hockney)",
+        "Associer un sentiment à un élément de l'œuvre"
+      ],
+      "motsCles": [
+        "painting",
+        "in the foreground",
+        "in the background",
+        "on the left",
+        "on the right",
+        "season",
+        "landscape",
+        "I think",
+        "because",
+        "in my opinion",
+        "Constable",
+        "Hopper"
+      ],
+      "reference": "Saisons : spring, summer, autumn (UK) / fall (US), winter ; in spring, in winter.\nMois avec une majuscule : January, February, March… ; in July, on 14th July.\nMétéo : It's sunny, cloudy, windy, rainy, snowy, foggy ; It's raining / snowing ; It's hot, warm, cold.\nSituer : in the foreground (au premier plan), in the background (à l'arrière-plan), in the middle / centre, on the left, on the right, at the top, at the bottom.\nDécrire une action dans l'image avec be + -ing : A man is fishing. Two children are playing in the snow.\nThere is / There are : There is a cart in the river. There are trees on the right.\nOpinion : I think…, In my opinion…, I like / I don't like this painting because…\nJustifier : because, so, but : The colours are dark, so the scene looks sad.\nSentiments : peaceful (paisible), calm, lonely, sad, happy, cheerful, mysterious.\nJohn Constable (1776-1837), peintre anglais de paysages ruraux : The Hay Wain (1821).\nEdward Hopper (1882-1967), peintre américain de la solitude urbaine : Nighthawks (1942).\nDavid Hockney (né en 1937), peintre britannique, a peint les saisons dans le Yorkshire et des piscines en Californie.\nMéthode : dire ce que l'on voit (où, qui, quoi), puis l'atmosphère, puis son opinion justifiée."
+    },
+    {
+      "id": "raconter-une-legende",
+      "titre": "Le réel et l'imaginaire : raconter une légende (Nessie and legends)",
+      "ordre": 12,
+      "periode": "T3",
+      "notions": [
+        "Raconter une histoire au prétérit",
+        "Organiser un récit avec des connecteurs de temps",
+        "Employer could / couldn't pour la capacité passée",
+        "Distinguer réalité et imaginaire : légende, mythe, créature",
+        "Connaître des légendes britanniques : le monstre du Loch Ness, le roi Arthur",
+        "Exprimer le doute et la croyance (I believe, maybe, I don't believe)"
+      ],
+      "motsCles": [
+        "legend",
+        "once upon a time",
+        "one day",
+        "suddenly",
+        "could",
+        "couldn't",
+        "monster",
+        "Loch Ness",
+        "Scotland",
+        "King Arthur",
+        "real",
+        "imaginary"
+      ],
+      "reference": "Un récit au passé s'écrit au prétérit : verbes réguliers en -ed et verbes irréguliers à connaître (was, saw, went, found).\nDébuts de récit : Once upon a time (Il était une fois), Long, long ago, One day.\nConnecteurs : first, then, after that, suddenly (soudain), at last / finally (enfin), in the end.\ncould / couldn't + base verbale : prétérit de can : He could see a strange shape. They couldn't believe it.\nLe Loch Ness est un lac profond des Highlands, en Écosse ; « loch » signifie lac en gaélique écossais.\nNessie, le monstre du Loch Ness, est une créature légendaire ; aucune preuve scientifique ne montre qu'il existe.\nLa célèbre photo de 1934, dite « photo du chirurgien », était un trucage.\nLe roi Arthur est un roi légendaire de Grande-Bretagne : l'épée Excalibur, les chevaliers de la Table ronde, le magicien Merlin.\nVocabulaire : legend, myth, creature, monster, giant, dragon, knight (chevalier), sword (épée), castle.\nRéel / imaginaire : real ≠ imaginary, true ≠ false, a fact ≠ a story ; Is it true?\nCroyance et doute : I believe in…, I don't believe it, maybe, perhaps, It may be true.\nMéthode : planter le décor (où, quand, qui), raconter les événements dans l'ordre avec des connecteurs, puis donner la fin."
+    }
+  ]
+}

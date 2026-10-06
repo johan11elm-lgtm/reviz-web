@@ -1,0 +1,401 @@
+{
+  "classe": "5ème",
+  "matiere": "Maths",
+  "programme": "Mathématiques cycle 4, programme de 5e (arrêté du 18 février 2026, BO n°10 du 5 mars 2026)",
+  "modele": "claude-opus-5-5 (abonnement)",
+  "genereLe": "2026-10-05",
+  "relu": false,
+  "chapitres": [
+    {
+      "id": "enchainement-des-operations",
+      "titre": "Enchaînement des opérations et divisibilité",
+      "ordre": 1,
+      "periode": "T1",
+      "notions": [
+        "Effectuer un calcul sans parenthèses en respectant les priorités : multiplications et divisions avant additions et soustractions",
+        "Effectuer un calcul avec parenthèses en commençant par les parenthèses les plus intérieures",
+        "Traduire un calcul en phrase et une phrase en calcul (somme, différence, produit, quotient)",
+        "Utiliser la division euclidienne et le vocabulaire multiple, diviseur, « est divisible par »",
+        "Appliquer les critères de divisibilité par 2, 3, 5, 9 et 10",
+        "Calculer mentalement en utilisant les propriétés des opérations (regroupements, distributivité)"
+      ],
+      "motsCles": [
+        "priorités opératoires",
+        "parenthèses",
+        "somme",
+        "différence",
+        "produit",
+        "quotient",
+        "division euclidienne",
+        "multiple",
+        "diviseur",
+        "critère de divisibilité",
+        "calcul mental"
+      ],
+      "reference": "Vocabulaire : le résultat d'une addition est une somme, d'une soustraction une différence, d'une multiplication un produit, d'une division un quotient.\nRègle 1 : dans un calcul sans parenthèses, on effectue d'abord les multiplications et les divisions, de gauche à droite, puis les additions et les soustractions, de gauche à droite.\nExemple : 7 + 3 × 5 = 7 + 15 = 22 (et non 10 × 5 = 50).\nRègle 2 : dans un calcul avec parenthèses, on effectue d'abord les calculs entre parenthèses, en commençant par les plus intérieures.\nExemple : 4 × (9 − 2 × 3) = 4 × (9 − 6) = 4 × 3 = 12.\nAvec un trait de fraction, on calcule séparément le numérateur et le dénominateur : (12 + 8) / (7 − 2) = 20 / 5 = 4.\nUne suite d'additions et de soustractions (ou de multiplications et de divisions) se calcule de gauche à droite : 20 − 5 + 3 = 18 ; 24 ÷ 4 × 2 = 12.\nNature d'un calcul : c'est la dernière opération effectuée qui donne son nom. 3 + 4 × 5 est une somme ; (3 + 4) × 5 est un produit.\nDivision euclidienne : pour deux entiers a et b (b ≠ 0), a = b × q + r avec 0 ≤ r < b. Exemple : 47 = 6 × 7 + 5.\nSi le reste est nul, a est un multiple de b, b est un diviseur de a, a est divisible par b. Exemple : 63 = 9 × 7.\nCritères : divisible par 2 si le chiffre des unités est 0, 2, 4, 6 ou 8 ; par 5 s'il est 0 ou 5 ; par 10 s'il est 0.\nDivisible par 3 si la somme des chiffres est divisible par 3 ; par 9 si la somme des chiffres est divisible par 9. Exemple : 4 572 → 4 + 5 + 7 + 2 = 18, divisible par 3 et par 9.\nUn nombre divisible par 9 est divisible par 3 ; la réciproque est fausse (12 est divisible par 3, pas par 9).\nCalcul mental : regrouper astucieusement, 25 × 7 × 4 = 100 × 7 = 700 ; 17 + 46 + 3 = 20 + 46 = 66.\nDistributivité pour calculer : 12 × 99 = 12 × 100 − 12 × 1 = 1 188 ; 7 × 13 + 7 × 87 = 7 × 100 = 700."
+    },
+    {
+      "id": "nombres-relatifs-reperage",
+      "titre": "Nombres relatifs et repérage",
+      "ordre": 2,
+      "periode": "T1",
+      "notions": [
+        "Connaître la notion de nombre relatif, positif ou négatif, et le vocabulaire « strictement positif », « strictement négatif »",
+        "Repérer et placer un nombre relatif sur une droite graduée, lire une abscisse",
+        "Connaître l'opposé d'un nombre et la distance à zéro (valeur absolue)",
+        "Comparer et ranger des nombres relatifs",
+        "Repérer et placer un point dans un repère du plan à l'aide de ses coordonnées (abscisse, ordonnée)"
+      ],
+      "motsCles": [
+        "nombre relatif",
+        "positif",
+        "négatif",
+        "opposé",
+        "distance à zéro",
+        "valeur absolue",
+        "droite graduée",
+        "abscisse",
+        "ordonnée",
+        "coordonnées",
+        "repère",
+        "origine"
+      ],
+      "reference": "Un nombre relatif est formé d'un signe (+ ou −) et d'une distance à zéro. Exemples : +5 (ou 5), −3,2.\nUn nombre positif est supérieur ou égal à 0 ; un nombre négatif est inférieur ou égal à 0. 0 est à la fois positif et négatif.\nStrictement positif : supérieur à 0 et différent de 0. Strictement négatif : inférieur à 0 et différent de 0.\nSur une droite graduée d'origine O, chaque point est repéré par un nombre relatif appelé son abscisse. Les négatifs sont à gauche de l'origine.\nDeux nombres opposés ont la même distance à zéro et des signes contraires : l'opposé de 4 est −4, l'opposé de −2,5 est 2,5. Ils sont symétriques par rapport à l'origine.\nLa distance à zéro d'un nombre est aussi appelée sa valeur absolue : la valeur absolue de −7 est 7, celle de 7 est 7.\nComparaison : un nombre négatif est plus petit qu'un nombre positif. −8 < 3.\nDeux nombres positifs sont rangés comme leurs distances à zéro : 2,5 < 4.\nDeux nombres négatifs sont rangés dans l'ordre inverse de leurs distances à zéro : −7 < −2, car 7 > 2.\nSur la droite graduée, le plus petit des deux nombres est le plus à gauche.\nExemple de rangement croissant : −5 < −1,5 < 0 < 2 < 3,7.\nUn repère du plan est formé de deux droites graduées perpendiculaires de même origine O : l'axe des abscisses (horizontal) et l'axe des ordonnées (vertical).\nUn point est repéré par ses coordonnées (abscisse ; ordonnée), toujours dans cet ordre. Exemple : A(−3 ; 2) se trouve 3 unités à gauche et 2 unités en haut.\nUn point de l'axe des abscisses a une ordonnée nulle ; un point de l'axe des ordonnées a une abscisse nulle. L'origine a pour coordonnées (0 ; 0)."
+    },
+    {
+      "id": "symetrie-centrale",
+      "titre": "Symétrie centrale",
+      "ordre": 3,
+      "periode": "T1",
+      "notions": [
+        "Comprendre la symétrie centrale comme un demi-tour autour d'un point",
+        "Construire le symétrique d'un point, d'un segment, d'une droite, d'un cercle par rapport à un point",
+        "Savoir que O est le milieu du segment qui joint un point et son symétrique",
+        "Connaître les propriétés de conservation : alignement, longueurs, angles, aires, parallélisme",
+        "Reconnaître une figure ayant un centre de symétrie",
+        "Distinguer symétrie centrale et symétrie axiale"
+      ],
+      "motsCles": [
+        "symétrie centrale",
+        "demi-tour",
+        "centre de symétrie",
+        "symétrique",
+        "milieu",
+        "image",
+        "conservation",
+        "symétrie axiale",
+        "rotation"
+      ],
+      "reference": "La symétrie centrale de centre O est le demi-tour autour du point O (rotation d'un demi-tour, soit 180°).\nDéfinition : le symétrique du point M par rapport à O est le point M' tel que O soit le milieu du segment [MM'].\nLe symétrique du point O par rapport à O est O lui-même.\nConstruction à la règle et au compas : tracer la demi-droite [MO), puis reporter la longueur OM de l'autre côté de O : OM' = OM.\nSur quadrillage, on compte les carreaux de M jusqu'à O et on reporte le même déplacement à partir de O.\nLe symétrique d'un segment est un segment de même longueur.\nLe symétrique d'une droite est une droite qui lui est parallèle.\nLe symétrique d'un cercle est un cercle de même rayon ; son centre est le symétrique du centre.\nLa symétrie centrale conserve l'alignement, les longueurs, les mesures d'angles, les aires et le parallélisme.\nUne figure et son symétrique sont superposables (même forme, mêmes dimensions) : on passe de l'une à l'autre par un demi-tour.\nUne figure admet un centre de symétrie O si elle est sa propre image par la symétrie de centre O. Exemples : parallélogramme (centre : point d'intersection des diagonales), cercle (son centre), segment (son milieu).\nLe triangle équilatéral n'a pas de centre de symétrie ; il a trois axes de symétrie.\nDifférence avec la symétrie axiale : la symétrie axiale est un pliage le long d'une droite, la symétrie centrale un demi-tour autour d'un point.\nMéthode « parallèle » : si A' et B' sont les symétriques de A et B par rapport à O, alors (A'B') est parallèle à (AB) et A'B' = AB."
+    },
+    {
+      "id": "addition-soustraction-relatifs",
+      "titre": "Addition et soustraction de nombres relatifs",
+      "ordre": 4,
+      "periode": "T1",
+      "notions": [
+        "Additionner deux nombres relatifs de même signe et de signes contraires",
+        "Savoir que la somme de deux nombres opposés est nulle",
+        "Transformer une soustraction en addition de l'opposé",
+        "Calculer une suite d'additions et de soustractions de relatifs en simplifiant l'écriture",
+        "Calculer une distance sur une droite graduée comme différence de deux abscisses",
+        "Résoudre des problèmes concrets (températures, altitudes, soldes, dates)"
+      ],
+      "motsCles": [
+        "somme",
+        "différence",
+        "opposé",
+        "même signe",
+        "signes contraires",
+        "distance à zéro",
+        "écriture simplifiée",
+        "addition",
+        "soustraction",
+        "écart"
+      ],
+      "reference": "Somme de deux nombres de même signe : on garde le signe commun et on additionne les distances à zéro. (−3) + (−5) = −8 ; (+2) + (+6) = +8.\nSomme de deux nombres de signes contraires : on prend le signe de celui qui a la plus grande distance à zéro et on soustrait les distances à zéro. (−9) + (+4) = −5 ; (+7) + (−2) = +5.\nLa somme de deux nombres opposés est égale à 0 : (−6) + (+6) = 0.\nAjouter 0 ne change pas un nombre.\nSoustraire un nombre revient à additionner son opposé : a − b = a + (−b).\nExemples : 3 − 8 = 3 + (−8) = −5 ; (−4) − (−10) = (−4) + (+10) = 6 ; (−2) − 5 = −7.\nÉcriture simplifiée : on supprime les parenthèses et le signe + d'addition. (+5) + (−3) − (+2) s'écrit 5 − 3 − 2.\nPour calculer une suite de termes, on peut regrouper les positifs entre eux et les négatifs entre eux : 7 − 4 + 3 − 9 = (7 + 3) − (4 + 9) = 10 − 13 = −3.\nSur une droite graduée, la distance entre deux points d'abscisses a et b (avec b > a) est b − a. Exemple : entre −3 et 5, la distance est 5 − (−3) = 8.\nExemple températures : il fait −4 °C le matin et 7 °C l'après-midi ; l'écart est 7 − (−4) = 11 °C.\nExemple altitudes : un plongeur à −12 m remonte de 5 m : −12 + 5 = −7 m.\nL'addition est commutative : a + b = b + a ; la soustraction ne l'est pas : 3 − 5 = −2 alors que 5 − 3 = 2.\nVérification : le résultat d'une soustraction a − b est le nombre qu'il faut ajouter à b pour obtenir a."
+    },
+    {
+      "id": "angles-et-triangles",
+      "titre": "Angles et somme des angles d'un triangle",
+      "ordre": 5,
+      "periode": "T1",
+      "notions": [
+        "Connaître le vocabulaire : angles adjacents, complémentaires, supplémentaires, opposés par le sommet",
+        "Reconnaître des angles alternes-internes et correspondants formés par deux droites et une sécante",
+        "Utiliser l'égalité des angles alternes-internes ou correspondants lorsque les droites sont parallèles",
+        "Connaître et démontrer la propriété de la somme des angles d'un triangle (180°)",
+        "Calculer la mesure d'un angle dans un triangle quelconque, isocèle, équilatéral ou rectangle",
+        "Rédiger une courte justification en citant la propriété utilisée"
+      ],
+      "motsCles": [
+        "angle",
+        "adjacents",
+        "complémentaires",
+        "supplémentaires",
+        "opposés par le sommet",
+        "alternes-internes",
+        "correspondants",
+        "sécante",
+        "parallèles",
+        "somme des angles",
+        "triangle isocèle",
+        "triangle équilatéral"
+      ],
+      "reference": "Deux angles adjacents ont le même sommet, un côté commun, et sont situés de part et d'autre de ce côté commun.\nDeux angles complémentaires ont une somme de 90° ; deux angles supplémentaires ont une somme de 180°.\nDeux angles opposés par le sommet ont le même sommet et des côtés dans le prolongement l'un de l'autre ; ils ont la même mesure.\nDeux droites coupées par une sécante forment des angles alternes-internes (de part et d'autre de la sécante, entre les deux droites) et des angles correspondants (du même côté de la sécante, l'un entre les droites, l'autre à l'extérieur).\nPropriété : si deux droites parallèles sont coupées par une sécante, alors les angles alternes-internes sont égaux et les angles correspondants sont égaux.\nRéciproque : si deux angles alternes-internes (ou correspondants) sont égaux, alors les deux droites sont parallèles.\nPropriété : dans un triangle, la somme des mesures des trois angles est égale à 180°.\nIdée de la démonstration : on trace la parallèle au côté [BC] passant par A ; les angles alternes-internes égaux reconstituent un angle plat (180°) en A.\nExemple : dans ABC, si Â = 50° et B̂ = 70°, alors Ĉ = 180° − 50° − 70° = 60°.\nDans un triangle isocèle, les deux angles à la base ont la même mesure. Si l'angle au sommet mesure 40°, chaque angle à la base mesure (180° − 40°) ÷ 2 = 70°.\nDans un triangle équilatéral, chaque angle mesure 180° ÷ 3 = 60°.\nDans un triangle rectangle, les deux angles aigus sont complémentaires (leur somme vaut 90°).\nUn triangle a au plus un angle droit ou un angle obtus.\nRédaction : « Dans le triangle ABC, la somme des angles vaut 180°, donc Ĉ = 180° − (Â + B̂) »."
+    },
+    {
+      "id": "fractions",
+      "titre": "Fractions : égalité, comparaison, addition et soustraction",
+      "ordre": 6,
+      "periode": "T2",
+      "notions": [
+        "Connaître le sens de la fraction a/b comme quotient : le nombre qui multiplié par b donne a",
+        "Utiliser l'égalité des quotients : a/b = (a × k)/(b × k) pour simplifier ou mettre au même dénominateur",
+        "Comparer des fractions, en particulier à 1 et entre elles après réduction au même dénominateur",
+        "Additionner et soustraire des fractions, y compris de dénominateurs différents",
+        "Calculer une fraction d'une quantité",
+        "Résoudre des problèmes contextualisés utilisant des fractions"
+      ],
+      "motsCles": [
+        "fraction",
+        "numérateur",
+        "dénominateur",
+        "quotient",
+        "simplifier",
+        "fraction égale",
+        "même dénominateur",
+        "comparer",
+        "somme de fractions",
+        "fraction d'une quantité"
+      ],
+      "reference": "La fraction a/b (b ≠ 0) est le quotient de a par b : c'est le nombre qui, multiplié par b, donne a. b × (a/b) = a. Exemple : 7 × (3/7) = 3.\na est le numérateur, b le dénominateur. 3/4 = 0,75 ; 1/3 n'a pas d'écriture décimale exacte (0,333…).\nPropriété : on ne change pas un quotient en multipliant (ou en divisant) son numérateur et son dénominateur par un même nombre non nul : a/b = (a × k)/(b × k).\nSimplifier : 18/24 = (6 × 3)/(6 × 4) = 3/4. On utilise les critères de divisibilité pour trouver un diviseur commun.\nComparaison à 1 : si le numérateur est plus petit que le dénominateur, la fraction est inférieure à 1 ; s'il est plus grand, elle est supérieure à 1.\nMême dénominateur : la plus grande fraction est celle qui a le plus grand numérateur. 5/9 > 2/9.\nDénominateurs différents : on réduit au même dénominateur (un multiple commun). 2/3 et 3/4 : 8/12 < 9/12, donc 2/3 < 3/4.\nAddition et soustraction avec le même dénominateur : on additionne (ou soustrait) les numérateurs et on garde le dénominateur. 2/7 + 3/7 = 5/7.\nDénominateurs différents : on écrit d'abord les fractions avec un même dénominateur. 1/2 + 1/3 = 3/6 + 2/6 = 5/6 ; 5/4 − 2/3 = 15/12 − 8/12 = 7/12.\nErreur à éviter : 1/2 + 1/3 n'est pas égal à 2/5 ; on n'additionne jamais les dénominateurs.\nUn entier s'écrit comme une fraction : 2 = 2/1 = 8/4. Exemple : 2 + 3/4 = 8/4 + 3/4 = 11/4.\nFraction d'une quantité : prendre a/b de Q revient à calculer (a/b) × Q = (Q ÷ b) × a. Les 3/5 de 40 € : 40 ÷ 5 × 3 = 24 €.\nExemple de problème : un réservoir est rempli aux 2/5 puis on ajoute 1/4 de sa capacité ; il est rempli aux 8/20 + 5/20 = 13/20."
+    },
+    {
+      "id": "droites-remarquables-du-triangle",
+      "titre": "Médiatrices, hauteurs, médianes et aire du triangle",
+      "ordre": 7,
+      "periode": "T2",
+      "notions": [
+        "Connaître la médiatrice d'un segment et sa propriété caractéristique (équidistance)",
+        "Savoir que les trois médiatrices d'un triangle sont concourantes au centre du cercle circonscrit et construire ce cercle",
+        "Définir et tracer les hauteurs d'un triangle",
+        "Définir et tracer les médianes d'un triangle",
+        "Calculer l'aire d'un triangle : base × hauteur ÷ 2",
+        "Justifier qu'une médiane partage un triangle en deux triangles de même aire"
+      ],
+      "motsCles": [
+        "médiatrice",
+        "équidistant",
+        "cercle circonscrit",
+        "concourantes",
+        "hauteur",
+        "pied de la hauteur",
+        "médiane",
+        "milieu",
+        "aire du triangle",
+        "base",
+        "sommet opposé"
+      ],
+      "reference": "La médiatrice d'un segment est la droite perpendiculaire à ce segment qui passe par son milieu.\nPropriété caractéristique : un point est sur la médiatrice de [AB] si et seulement si il est à égale distance de A et de B (MA = MB).\nLes trois médiatrices d'un triangle sont concourantes : elles se coupent en un même point O.\nCe point O est équidistant des trois sommets : c'est le centre du cercle circonscrit au triangle, cercle qui passe par les trois sommets.\nPour construire le cercle circonscrit, deux médiatrices suffisent : leur point d'intersection est le centre, le rayon est OA.\nUne hauteur d'un triangle est la droite passant par un sommet et perpendiculaire au côté opposé (ou à son prolongement). Le point d'intersection avec ce côté est le pied de la hauteur.\nUn triangle a trois hauteurs. Dans un triangle obtus, deux hauteurs tombent à l'extérieur du triangle, sur le prolongement des côtés.\nDans un triangle rectangle, les deux côtés de l'angle droit sont aussi des hauteurs.\nUne médiane d'un triangle est la droite (ou le segment) qui joint un sommet au milieu du côté opposé.\nAire d'un triangle : A = (base × hauteur) ÷ 2, où la hauteur est la longueur du segment perpendiculaire à la base issu du sommet opposé.\nExemple : base 8 cm, hauteur associée 5 cm, aire = 8 × 5 ÷ 2 = 20 cm².\nJustification de la formule : un triangle est la moitié d'un rectangle (ou d'un parallélogramme) de même base et de même hauteur.\nPropriété : une médiane partage le triangle en deux triangles de même aire, car ces deux triangles ont des bases égales (les deux moitiés du côté) et la même hauteur.\nAttention : les unités doivent être les mêmes avant de calculer ; l'aire s'exprime en unités carrées (cm², m²)."
+    },
+    {
+      "id": "proportionnalite",
+      "titre": "Proportionnalité et pourcentages",
+      "ordre": 8,
+      "periode": "T2",
+      "notions": [
+        "Reconnaître une situation de proportionnalité ou de non-proportionnalité",
+        "Calculer et interpréter un coefficient de proportionnalité (prix unitaire, vitesse, échelle)",
+        "Calculer une quatrième proportionnelle par différentes procédures (linéarité, coefficient, passage à l'unité, produit en croix)",
+        "Appliquer un pourcentage et calculer un pourcentage",
+        "Utiliser une échelle sur un plan ou une carte",
+        "Reconnaître graphiquement une situation de proportionnalité : points alignés avec l'origine"
+      ],
+      "motsCles": [
+        "proportionnalité",
+        "coefficient de proportionnalité",
+        "tableau",
+        "quatrième proportionnelle",
+        "linéarité",
+        "passage à l'unité",
+        "pourcentage",
+        "échelle",
+        "vitesse moyenne",
+        "prix unitaire",
+        "représentation graphique"
+      ],
+      "reference": "Deux grandeurs sont proportionnelles si l'on obtient les valeurs de l'une en multipliant celles de l'autre par un même nombre non nul, le coefficient de proportionnalité.\nDans un tableau de proportionnalité, tous les quotients (2e ligne ÷ 1re ligne) sont égaux au coefficient.\nContre-exemple : l'âge et la taille d'une personne ne sont pas proportionnels.\nLinéarité (addition) : si 3 cahiers coûtent 6 € et 2 cahiers 4 €, alors 5 cahiers coûtent 10 €.\nLinéarité (multiplication) : si 4 kg coûtent 10 €, alors 12 kg (3 fois plus) coûtent 30 €.\nPassage à l'unité : 5 stylos coûtent 7,50 € ; 1 stylo coûte 1,50 € (prix unitaire) ; 8 stylos coûtent 12 €.\nQuatrième proportionnelle avec le produit en croix : si a/b = c/x, alors x = (b × c) ÷ a.\nVitesse moyenne : distance = vitesse × durée. À 60 km/h, on parcourt 60 km en 1 h, 30 km en 30 min, 90 km en 1 h 30.\nPourcentage : t % signifie t pour 100. Prendre t % d'une quantité Q revient à calculer Q × t/100. 20 % de 45 € : 45 × 20/100 = 9 €.\nCalculer un pourcentage : 12 élèves sur 30 font du sport, soit 12/30 = 40/100 = 40 %.\nÉchelle : sur un plan, l'échelle est le coefficient qui relie distance sur le plan et distance réelle, exprimées dans la même unité. Échelle 1/1 000 : 1 cm sur le plan représente 1 000 cm = 10 m en réalité.\nExemple : à l'échelle 1/25 000, 4 cm sur la carte représentent 100 000 cm = 1 km.\nGraphiquement, une situation de proportionnalité est représentée par des points alignés avec l'origine du repère.\nSi les points sont alignés mais que la droite ne passe pas par l'origine, la situation n'est pas proportionnelle (exemple : abonnement + prix par séance)."
+    },
+    {
+      "id": "parallelogrammes",
+      "titre": "Parallélogrammes",
+      "ordre": 9,
+      "periode": "T2",
+      "notions": [
+        "Connaître la définition du parallélogramme : quadrilatère dont les côtés opposés sont parallèles deux à deux",
+        "Connaître les propriétés : diagonales de même milieu, côtés opposés de même longueur, angles opposés égaux, centre de symétrie",
+        "Utiliser la propriété caractéristique des diagonales pour reconnaître un parallélogramme",
+        "Connaître le rectangle, le losange et le carré comme parallélogrammes particuliers et leurs propriétés des diagonales",
+        "Construire un parallélogramme à partir de données",
+        "Calculer l'aire d'un parallélogramme : base × hauteur"
+      ],
+      "motsCles": [
+        "parallélogramme",
+        "côtés opposés",
+        "diagonales",
+        "milieu",
+        "centre de symétrie",
+        "rectangle",
+        "losange",
+        "carré",
+        "propriété caractéristique",
+        "hauteur",
+        "aire"
+      ],
+      "reference": "Définition : un parallélogramme est un quadrilatère dont les côtés opposés sont parallèles deux à deux. ABCD est un parallélogramme si (AB) // (DC) et (AD) // (BC).\nPropriété caractéristique : un quadrilatère est un parallélogramme si et seulement si ses diagonales ont le même milieu.\nLe point d'intersection des diagonales est le centre de symétrie du parallélogramme.\nDans un parallélogramme, les côtés opposés ont la même longueur et les angles opposés ont la même mesure.\nDeux angles consécutifs d'un parallélogramme sont supplémentaires (somme 180°).\nPour démontrer qu'un quadrilatère est un parallélogramme, on peut montrer que ses côtés opposés sont parallèles deux à deux ou que ses diagonales ont le même milieu.\nUn rectangle est un parallélogramme qui a un angle droit ; ses diagonales ont le même milieu et la même longueur.\nUn losange est un parallélogramme qui a deux côtés consécutifs de même longueur ; ses diagonales ont le même milieu et sont perpendiculaires.\nUn carré est à la fois un rectangle et un losange ; ses diagonales ont le même milieu, la même longueur et sont perpendiculaires.\nConstruction : pour construire ABCD connaissant A, B, C, on trace le milieu O de [AC], puis D symétrique de B par rapport à O.\nConstruire un rectangle sans équerre : on trace deux segments de même longueur ayant le même milieu ; leurs extrémités forment un rectangle.\nAire du parallélogramme : A = base × hauteur, la hauteur étant la distance entre la base et le côté opposé. Base 6 cm, hauteur 4 cm : A = 24 cm².\nJustification : en découpant un triangle et en le déplaçant, le parallélogramme se transforme en rectangle de même base et même hauteur.\nAttention : l'aire n'est pas le produit de deux côtés consécutifs (sauf pour le rectangle)."
+    },
+    {
+      "id": "carres-et-cubes",
+      "titre": "Carrés, cubes et premières puissances",
+      "ordre": 10,
+      "periode": "T2",
+      "notions": [
+        "Connaître les notations a² (a au carré) et a³ (a au cube) comme raccourcis de a × a et a × a × a",
+        "Connaître les carrés des entiers de 0 à 12 et le cube de 10",
+        "Calculer des expressions comportant des carrés et des cubes en respectant les priorités",
+        "Relier le carré à l'aire d'un carré et le cube au volume d'un cube",
+        "Utiliser les notations a² et a³ dans des expressions littérales"
+      ],
+      "motsCles": [
+        "carré",
+        "cube",
+        "puissance",
+        "exposant",
+        "a²",
+        "a³",
+        "priorités",
+        "aire du carré",
+        "volume du cube",
+        "expression littérale"
+      ],
+      "reference": "Le carré d'un nombre a est a² = a × a (« a au carré »). Exemple : 7² = 7 × 7 = 49.\nLe cube d'un nombre a est a³ = a × a × a (« a au cube »). Exemple : 2³ = 2 × 2 × 2 = 8.\nCarrés à connaître : 0² = 0, 1² = 1, 2² = 4, 3² = 9, 4² = 16, 5² = 25, 6² = 36, 7² = 49, 8² = 64, 9² = 81, 10² = 100, 11² = 121, 12² = 144.\nCube de 10 : 10³ = 1 000.\nErreur fréquente : 5² n'est pas égal à 5 × 2 = 10, mais à 5 × 5 = 25.\nPriorité : on calcule les carrés et les cubes avant les multiplications et les additions. 3 + 4² = 3 + 16 = 19 ; 2 × 3² = 2 × 9 = 18.\nAvec des parenthèses, on calcule d'abord la parenthèse : (2 × 3)² = 6² = 36 alors que 2 × 3² = 18.\n(3 + 4)² = 7² = 49 alors que 3² + 4² = 9 + 16 = 25 : on ne peut pas « distribuer » le carré.\nInterprétation géométrique : l'aire d'un carré de côté c est c × c = c². Côté 6 cm : aire 36 cm².\nLe volume d'un cube d'arête a est a × a × a = a³. Arête 3 cm : volume 27 cm³.\nLes unités suivent la même logique : cm² pour les aires, cm³ pour les volumes.\nEn calcul littéral : x × x s'écrit x², x × x × x s'écrit x³ ; 3 × x × x s'écrit 3x².\nExemple : pour x = 4, 2x² + 1 = 2 × 16 + 1 = 33."
+    },
+    {
+      "id": "calcul-litteral-et-equations",
+      "titre": "Calcul littéral et équations simples",
+      "ordre": 11,
+      "periode": "T3",
+      "notions": [
+        "Utiliser une lettre pour représenter un nombre quelconque et produire une expression littérale (formule, programme de calcul)",
+        "Connaître les conventions d'écriture : suppression du signe × devant une lettre ou une parenthèse",
+        "Calculer la valeur d'une expression littérale en substituant une valeur à une lettre",
+        "Utiliser la distributivité k(a + b) = ka + kb pour développer et pour factoriser",
+        "Réduire une expression simple (regrouper les termes en x)",
+        "Tester si une égalité est vraie pour une valeur donnée",
+        "Résoudre des équations simples du type x + b = c ou ax = c par des méthodes arithmétiques"
+      ],
+      "motsCles": [
+        "expression littérale",
+        "variable",
+        "substituer",
+        "distributivité",
+        "développer",
+        "factoriser",
+        "réduire",
+        "égalité",
+        "équation",
+        "inconnue",
+        "solution",
+        "tester"
+      ],
+      "reference": "Une expression littérale contient une ou plusieurs lettres qui désignent des nombres. Exemple : le périmètre d'un carré de côté c est 4 × c.\nConventions : on peut supprimer le signe × devant une lettre ou une parenthèse : 4 × c = 4c ; 3 × (x + 2) = 3(x + 2) ; 1x = x. On ne le supprime pas entre deux nombres : 3 × 5 ≠ 35.\nSubstituer : remplacer la lettre par un nombre. Pour x = 3, 5x − 2 = 5 × 3 − 2 = 13.\nDistributivité : pour tous nombres k, a, b : k(a + b) = ka + kb et k(a − b) = ka − kb.\nDévelopper, c'est transformer un produit en somme : 4(x + 3) = 4x + 12 ; 2(5 − y) = 10 − 2y.\nFactoriser, c'est transformer une somme en produit en repérant un facteur commun : 6x + 9 = 3(2x + 3) ; 7a + 7b = 7(a + b).\nRéduire : regrouper les termes de même nature. 3x + 5x = 8x ; 2x + 4 + x − 1 = 3x + 3. Attention : 3x + 2 ne se réduit pas.\nTester une égalité : on calcule séparément chaque membre pour une valeur. Pour x = 2, 3x + 1 = 7 et x + 5 = 7 : l'égalité est vraie pour x = 2.\nUne égalité vraie pour une valeur ne l'est pas forcément pour toutes : pour x = 0, 3x + 1 = 1 et x + 5 = 5.\nUne équation est une égalité contenant une inconnue. Résoudre, c'est trouver toutes les valeurs de l'inconnue qui rendent l'égalité vraie (les solutions).\nx + b = c : x est le nombre qu'il faut ajouter à b pour obtenir c, donc x = c − b. Exemple : x + 7 = 15 donne x = 8.\nax = c (a ≠ 0) : x est le nombre qui multiplié par a donne c, donc x = c ÷ a = c/a. Exemple : 4x = 28 donne x = 7 ; 3x = 5 donne x = 5/3.\nOn vérifie toujours la solution en la remplaçant dans l'équation : 4 × 7 = 28.\nMise en équation : « Le triple d'un nombre vaut 42 » se traduit par 3x = 42, donc x = 14."
+    },
+    {
+      "id": "aires-et-volumes",
+      "titre": "Aires, volumes et solides",
+      "ordre": 12,
+      "periode": "T3",
+      "notions": [
+        "Calculer l'aire d'un disque : π × r²",
+        "Calculer le volume d'un cube et d'un pavé droit",
+        "Reconnaître un prisme droit et un cylindre, en réaliser un patron simple",
+        "Calculer le volume d'un prisme droit et d'un cylindre : aire de la base × hauteur",
+        "Convertir des unités de volume et de contenance (1 L = 1 dm³, 1 mL = 1 cm³)",
+        "Résoudre des problèmes de contenance avec choix de l'unité"
+      ],
+      "motsCles": [
+        "disque",
+        "rayon",
+        "π",
+        "aire",
+        "pavé droit",
+        "prisme droit",
+        "cylindre",
+        "patron",
+        "volume",
+        "contenance",
+        "litre",
+        "dm³"
+      ],
+      "reference": "Aire d'un disque de rayon r : A = π × r². Rayon 3 cm : A = π × 9 ≈ 28,3 cm². π ≈ 3,14.\nNe pas confondre avec le périmètre du cercle : P = 2 × π × r (vu en 6e).\nVolume d'un pavé droit de dimensions L, l, h : V = L × l × h. 5 cm × 3 cm × 2 cm = 30 cm³.\nVolume d'un cube d'arête a : V = a³. Arête 4 cm : 64 cm³.\nUn prisme droit a deux bases superposables et parallèles (des polygones) et des faces latérales rectangulaires, perpendiculaires aux bases.\nUn cylindre (de révolution) a deux bases qui sont des disques superposables et parallèles ; sa surface latérale déroulée est un rectangle.\nPatron du pavé droit : six rectangles, opposés deux à deux identiques. Patron du cylindre : deux disques et un rectangle de longueur 2πr.\nVolume d'un prisme droit : V = aire de la base × hauteur. Base triangulaire d'aire 6 cm², hauteur 10 cm : V = 60 cm³.\nVolume d'un cylindre de rayon r et de hauteur h : V = π × r² × h. r = 2 cm, h = 5 cm : V = 20π ≈ 62,8 cm³.\nUnités de volume : 1 m³ = 1 000 dm³ ; 1 dm³ = 1 000 cm³ ; 1 cm³ = 1 000 mm³ (on multiplie par 1 000 à chaque rang).\nContenances : 1 L = 1 dm³ ; 1 mL = 1 cm³ ; 1 m³ = 1 000 L ; 1 L = 10 dL = 100 cL = 1 000 mL.\nExemple : un aquarium de 50 cm × 30 cm × 40 cm a un volume de 60 000 cm³ = 60 dm³ = 60 L.\nUnités d'aire : 1 m² = 100 dm² = 10 000 cm².\nToujours exprimer toutes les longueurs dans la même unité avant de calculer."
+    },
+    {
+      "id": "statistiques-et-probabilites",
+      "titre": "Statistiques et probabilités",
+      "ordre": 13,
+      "periode": "T3",
+      "notions": [
+        "Recueillir et organiser des données dans un tableau d'effectifs et de fréquences",
+        "Lire, interpréter et construire des diagrammes en barres et circulaires, et choisir la représentation adaptée",
+        "Calculer une moyenne et comprendre comment elle évolue quand on ajoute une valeur",
+        "Calculer une fréquence (fraction, décimal, pourcentage)",
+        "Mener et enregistrer une expérience aléatoire répétée, observer la stabilisation des fréquences",
+        "Utiliser le vocabulaire des probabilités et calculer une probabilité dans une situation d'équiprobabilité, en questionnant ce modèle"
+      ],
+      "motsCles": [
+        "effectif",
+        "effectif total",
+        "fréquence",
+        "moyenne",
+        "diagramme en barres",
+        "diagramme circulaire",
+        "expérience aléatoire",
+        "issue",
+        "événement",
+        "probabilité",
+        "équiprobabilité"
+      ],
+      "reference": "L'effectif d'une valeur est le nombre de fois où elle apparaît ; l'effectif total est le nombre total de données.\nFréquence d'une valeur = effectif de la valeur ÷ effectif total. Elle est comprise entre 0 et 1 et peut s'écrire en pourcentage. 6 élèves sur 24 : 6/24 = 0,25 = 25 %.\nLa somme des fréquences de toutes les valeurs est égale à 1 (100 %).\nDiagramme en barres : la hauteur de chaque barre est proportionnelle à l'effectif ; adapté pour comparer des effectifs.\nDiagramme circulaire : l'angle de chaque secteur est proportionnel à l'effectif ; angle = fréquence × 360°. Adapté pour montrer la répartition d'un tout.\nMoyenne d'une série = somme des valeurs ÷ effectif total. Notes 12, 15, 9, 14 : (12 + 15 + 9 + 14) ÷ 4 = 50 ÷ 4 = 12,5.\nAjouter une valeur supérieure à la moyenne fait augmenter la moyenne ; une valeur inférieure la fait baisser. Une valeur très éloignée peut beaucoup la modifier.\nUne expérience est aléatoire si on connaît toutes les issues possibles mais qu'on ne peut pas prévoir laquelle se produira. Exemple : lancer un dé à six faces.\nUn événement est un ensemble d'issues. « Obtenir un nombre pair » avec un dé est réalisé par les issues 2, 4, 6.\nLa probabilité d'un événement est un nombre entre 0 et 1. Un événement impossible a une probabilité 0, un événement certain une probabilité 1.\nEn situation d'équiprobabilité (toutes les issues ont la même chance), probabilité = nombre d'issues favorables ÷ nombre d'issues possibles. Dé équilibré : P(pair) = 3/6 = 1/2.\nQuand on répète un grand nombre de fois une expérience, la fréquence d'apparition d'une issue se stabilise autour de sa probabilité.\nEsprit critique : l'équiprobabilité est un modèle ; une punaise lancée ne tombe pas forcément aussi souvent sur la pointe que sur le dos ; on peut estimer la probabilité par la fréquence observée sur beaucoup d'essais."
+    },
+    {
+      "id": "pensee-informatique",
+      "titre": "Pensée informatique et programmation par blocs",
+      "ordre": 14,
+      "periode": "T3",
+      "notions": [
+        "Identifier les entrées et les sorties d'un programme",
+        "Traduire une formule ou un programme de calcul en langage de programmation par blocs (Scratch)",
+        "Utiliser des variables et l'instruction d'affectation",
+        "Lire, analyser et modifier un programme simple pour en prévoir le résultat",
+        "Utiliser une boucle « répéter n fois » pour tracer une figure ou répéter un calcul",
+        "Utiliser une instruction conditionnelle simple « si … alors … sinon »"
+      ],
+      "motsCles": [
+        "algorithme",
+        "programme",
+        "entrée",
+        "sortie",
+        "variable",
+        "affectation",
+        "boucle",
+        "répéter",
+        "condition",
+        "si alors sinon",
+        "Scratch",
+        "bloc"
+      ],
+      "reference": "Un algorithme est une suite finie d'instructions permettant de résoudre un problème. Un programme est un algorithme écrit dans un langage compréhensible par une machine.\nLes entrées sont les données fournies au programme (exemple : un nombre demandé avec « demander … et attendre ») ; les sorties sont les résultats produits (exemple : « dire … »).\nUne variable est une « boîte » nommée qui contient une valeur pouvant changer au cours du programme.\nAffectation : « mettre nombre à 5 » donne la valeur 5 à la variable nombre ; « ajouter 2 à nombre » augmente sa valeur de 2.\nTraduire une formule : (réponse + 10) × 2 s'écrit avec un bloc « × » dont le premier emplacement contient un bloc « + » : l'imbrication des blocs joue le rôle des parenthèses.\nProgramme de calcul : choisir un nombre, ajouter 3, multiplier par 4. Avec 5 en entrée, la sortie est (5 + 3) × 4 = 32.\nBoucle « répéter n fois » : exécute n fois les instructions qu'elle contient. Répéter 4 fois [avancer de 100, tourner de 90°] trace un carré.\nPour tracer un polygone régulier à n côtés, on tourne de 360° ÷ n à chaque sommet : 120° pour un triangle équilatéral, 60° pour un hexagone régulier.\nInstruction conditionnelle : « si condition alors A sinon B » exécute A si la condition est vraie, B sinon.\nExemple : si réponse > 10 alors dire « grand » sinon dire « petit ».\nAnalyser un programme : on le déroule pas à pas en notant la valeur des variables à chaque étape.\nRepérer une erreur : comparer le résultat obtenu au résultat attendu, puis corriger l'instruction en cause (angle, nombre de répétitions, ordre des blocs).\nDans Scratch, un programme démarre par un bloc d'événement, par exemple « quand le drapeau vert est cliqué »."
+    }
+  ]
+}

@@ -1,0 +1,295 @@
+{
+  "classe": "5ème",
+  "matiere": "Histoire",
+  "programme": "Histoire cycle 4, classe de 5e (BO spécial n°11 du 26/11/2015, ajusté BO n°31 du 30/07/2020) ; EMC : programme 2024 (BO n°24 du 13/06/2024), en vigueur en 5e depuis la rentrée 2024",
+  "modele": "claude-opus-5-5 (abonnement)",
+  "genereLe": "2026-10-05",
+  "relu": false,
+  "chapitres": [
+    {
+      "id": "byzance-et-europe-carolingienne",
+      "titre": "Byzance et l'Europe carolingienne",
+      "ordre": 1,
+      "periode": "T1",
+      "notions": [
+        "Situer l'Empire byzantin et l'Empire carolingien dans le temps et dans l'espace",
+        "Connaître Constantinople, capitale de l'Empire romain d'Orient, et le règne de Justinien",
+        "Expliquer le lien entre pouvoir impérial et christianisme à Byzance et chez les Carolingiens",
+        "Connaître le couronnement de Charlemagne (800) et l'organisation de son empire",
+        "Comprendre la séparation progressive des chrétiens d'Orient et d'Occident (schisme de 1054)",
+        "Montrer que ces deux mondes chrétiens sont en contact avec d'autres mondes"
+      ],
+      "motsCles": [
+        "Empire byzantin",
+        "Constantinople",
+        "Justinien",
+        "basileus",
+        "Sainte-Sophie",
+        "Charlemagne",
+        "empire carolingien",
+        "missi dominici",
+        "schisme",
+        "orthodoxe",
+        "catholique"
+      ],
+      "reference": "Après 476, l'Empire romain d'Occident disparaît ; l'Empire romain d'Orient, appelé Empire byzantin, se maintient jusqu'en 1453 autour de sa capitale Constantinople (ancienne Byzance, aujourd'hui Istanbul).\nL'empereur byzantin (basileus) est considéré comme le représentant de Dieu sur terre ; il dirige l'État et intervient dans les affaires de l'Église.\nJustinien (empereur de 527 à 565) reconquiert une partie de l'Occident (Italie, Afrique du Nord), fait rédiger un recueil de lois (Code Justinien) et fait reconstruire la basilique Sainte-Sophie (achevée en 537).\nLes Byzantins parlent grec ; leur art religieux utilise les mosaïques et les icônes (images saintes).\nEn Occident, les Francs dominent ; Charlemagne devient roi des Francs en 768 et conquiert un vaste territoire (Lombardie, Saxe, Bavière, Nord de l'Espagne).\nLe 25 décembre 800, à Rome, le pape Léon III couronne Charlemagne empereur : le pouvoir impérial est restauré en Occident avec le soutien de l'Église.\nCharlemagne gouverne depuis Aix-la-Chapelle ; il divise l'empire en comtés confiés à des comtes et les fait contrôler par des envoyés, les missi dominici ; il publie des capitulaires (ordonnances).\nIl favorise l'instruction des clercs et la copie des manuscrits (écriture minuscule caroline) : on parle de renaissance carolingienne.\nEn 843, le traité de Verdun partage l'empire entre les trois petits-fils de Charlemagne.\nDeux chrétientés se séparent peu à peu : à l'Est, l'Église orthodoxe (patriarche de Constantinople, liturgie en grec) ; à l'Ouest, l'Église catholique (pape de Rome, latin).\nSchisme de 1054 : rupture entre le pape et le patriarche de Constantinople.\nByzance est en contact avec le monde musulman (guerres, commerce) ; en 1204, les croisés de la quatrième croisade pillent Constantinople ; en 1453, les Ottomans prennent la ville.\nMéthode attendue : situer sur une carte les deux empires vers 800 ; décrire une mosaïque ou une source pour montrer le lien entre pouvoir et religion."
+    },
+    {
+      "id": "naissance-de-l-islam-a-bagdad",
+      "titre": "De la naissance de l'islam à la prise de Bagdad par les Mongols",
+      "ordre": 2,
+      "periode": "T1",
+      "notions": [
+        "Connaître les débuts de l'islam en Arabie au VIIe siècle et le rôle de Mahomet",
+        "Connaître les fondements de la religion musulmane : Coran, cinq piliers",
+        "Expliquer l'expansion de l'islam et la formation d'empires (califats omeyyade et abbasside)",
+        "Décrire Bagdad, capitale abbasside, centre de pouvoir, de commerce et de savoir",
+        "Montrer les contacts, pacifiques ou conflictuels, entre chrétientés et islam (croisades, échanges)",
+        "Savoir que la prise de Bagdad par les Mongols en 1258 met fin au califat abbasside"
+      ],
+      "motsCles": [
+        "islam",
+        "Mahomet",
+        "Hégire",
+        "Coran",
+        "monothéisme",
+        "calife",
+        "Omeyyades",
+        "Abbassides",
+        "Bagdad",
+        "dhimmi",
+        "croisade",
+        "Mongols"
+      ],
+      "reference": "L'islam naît en Arabie au début du VIIe siècle ; Mahomet (vers 570-632), marchand de La Mecque, se présente comme le prophète d'un Dieu unique, Allah : l'islam est un monothéisme.\nHégire (622) : départ de Mahomet et de ses fidèles de La Mecque vers Médine ; c'est l'an 1 du calendrier musulman.\nLe Coran, livre sacré des musulmans, rassemble les révélations reçues par Mahomet selon la tradition ; il est mis par écrit après sa mort.\nLes cinq piliers de l'islam : la profession de foi (chahada), la prière cinq fois par jour, l'aumône, le jeûne du mois de ramadan, le pèlerinage à La Mecque.\nAprès la mort de Mahomet (632), les califes (successeurs) dirigent la communauté ; une division apparaît entre sunnites et chiites.\nConquêtes rapides : Syrie, Égypte, Perse, Afrique du Nord, Espagne (711) ; en 732, les Francs de Charles Martel arrêtent une expédition musulmane près de Poitiers.\nLes Omeyyades (661-750) ont pour capitale Damas ; les Abbassides (à partir de 750) fondent Bagdad en 762.\nBagdad, grande ville ronde sur le Tigre, est un carrefour commercial (route de la soie, épices, papier venu de Chine) et un centre de savoir (traductions de textes grecs, mathématiques, astronomie, médecine).\nLes chrétiens et les juifs des territoires conquis sont des dhimmis : protégés, ils peuvent pratiquer leur religion mais paient un impôt spécial.\nCroisades : expéditions militaires de chrétiens d'Occident vers la Terre sainte ; la première est lancée par le pape Urbain II en 1095 ; les croisés prennent Jérusalem en 1099 ; Saladin la reprend en 1187.\nLes contacts sont aussi pacifiques : commerce en Méditerranée (marchands italiens), transmission de savoirs en Espagne (Tolède) et en Sicile, mots d'origine arabe (algèbre, chiffre, sucre).\nEn 1258, les Mongols prennent et pillent Bagdad : le califat abbasside de Bagdad prend fin.\nMéthode attendue : réaliser une frise de 622 à 1258 ; décrire une ville (Bagdad) à partir de documents."
+    },
+    {
+      "id": "ordre-seigneurial",
+      "titre": "L'ordre seigneurial : la formation et la domination des campagnes",
+      "ordre": 3,
+      "periode": "T1",
+      "notions": [
+        "Expliquer la formation de la seigneurie et le pouvoir des seigneurs sur les paysans",
+        "Décrire la vie des paysans et l'organisation de la seigneurie (réserve, tenures, corvées, banalités)",
+        "Connaître les liens de vassalité entre seigneurs (fief, hommage)",
+        "Connaître les trois ordres de la société médiévale",
+        "Comprendre l'essor des campagnes du XIe au XIIIe siècle (défrichements, progrès techniques, croissance démographique)",
+        "Montrer le rôle de l'Église dans la société (paroisse, monastères, encadrement des fidèles)"
+      ],
+      "motsCles": [
+        "seigneurie",
+        "seigneur",
+        "paysan",
+        "serf",
+        "corvée",
+        "banalités",
+        "fief",
+        "vassal",
+        "trois ordres",
+        "défrichement",
+        "paroisse"
+      ],
+      "reference": "Aux Xe-XIe siècles, le pouvoir royal est faible ; des seigneurs construisent des châteaux (d'abord en bois sur une motte, puis en pierre) et dominent un territoire : la seigneurie.\nLa seigneurie comprend la réserve, exploitée directement pour le seigneur, et les tenures (manses), terres confiées aux paysans.\nLes paysans (vilains libres et serfs, attachés à la terre) doivent au seigneur des redevances (cens, champart), des corvées (travail gratuit) et paient les banalités pour utiliser le four, le moulin ou le pressoir du seigneur.\nLe seigneur exerce le ban : il commande, rend la justice, protège et lève des taxes.\nVassalité : un seigneur (le vassal) prête hommage à un seigneur plus puissant (le suzerain) qui lui confie un fief (une terre) ; le vassal lui doit aide militaire et conseil, le suzerain protection.\nSociété des trois ordres (vers l'an 1000, Adalbéron de Laon) : ceux qui prient (clercs), ceux qui combattent (chevaliers), ceux qui travaillent (paysans).\nDu XIe au XIIIe siècle, la population de l'Occident augmente fortement ; les paysans défrichent forêts et marais et créent de nouveaux villages.\nProgrès agricoles : charrue à versoir, collier d'épaule pour le cheval, moulins, assolement triennal (rotation des cultures sur trois ans avec une jachère).\nL'Église encadre la vie des fidèles du baptême à la mort ; la paroisse, avec son église et son curé, est le cadre de la vie religieuse ; les fidèles paient la dîme.\nLes moines vivent dans des monastères selon une règle (Cluny fondé en 910, Cîteaux en 1098) ; ils défrichent et prient.\nL'Église tente de limiter la violence des guerriers (paix de Dieu, trêve de Dieu).\nMéthode attendue : décrire et expliquer le plan d'une seigneurie ; analyser une miniature (par exemple les Très Riches Heures du duc de Berry, XVe siècle)."
+    },
+    {
+      "id": "essor-des-villes-medievales",
+      "titre": "L'émergence d'une nouvelle société urbaine",
+      "ordre": 4,
+      "periode": "T2",
+      "notions": [
+        "Expliquer l'essor des villes en Occident à partir du XIe siècle",
+        "Connaître le rôle du commerce, des foires et des marchands dans cet essor",
+        "Décrire la société urbaine : bourgeois, artisans, métiers, pauvres",
+        "Expliquer l'obtention de libertés par les villes (chartes de franchise, communes)",
+        "Montrer le rôle de l'Église en ville : cathédrales, ordres mendiants, universités",
+        "Situer les grands espaces du commerce médiéval (Flandre, Italie, Champagne, Hanse)"
+      ],
+      "motsCles": [
+        "ville",
+        "bourgeois",
+        "artisan",
+        "métier",
+        "corporation",
+        "foire",
+        "charte de franchise",
+        "commune",
+        "cathédrale",
+        "université",
+        "Hanse"
+      ],
+      "reference": "À partir du XIe siècle, la croissance de la population et des productions agricoles permet l'essor des villes en Occident.\nLes villes se développent autour d'un château, d'une abbaye, d'un pont ou d'un port ; elles sont entourées de remparts.\nLe commerce se développe : foires de Champagne (Troyes, Provins) aux XIIe-XIIIe siècles, grandes villes marchandes d'Italie (Venise, Gênes, Florence) et de Flandre (Bruges), villes de la Hanse en mer du Nord et Baltique (Lübeck).\nLes marchands utilisent la lettre de change et font appel aux banquiers (Italiens notamment).\nBourgeois : habitant d'un bourg, c'est-à-dire d'une ville ; les plus riches sont marchands.\nLes artisans sont organisés en métiers (corporations) qui fixent les règles de fabrication, les prix et l'apprentissage (apprenti, compagnon, maître).\nLes bourgeois obtiennent du seigneur, souvent contre de l'argent, une charte de franchise qui leur accorde des libertés (impôts fixés, justice, administration de la ville).\nCertaines villes deviennent des communes dirigées par des magistrats élus par les bourgeois (échevins, consuls) ; le beffroi symbolise ces libertés.\nLa société urbaine est inégale : riches marchands, artisans, domestiques, pauvres et mendiants.\nLes cathédrales gothiques sont construites dans les villes à partir du XIIe siècle (Saint-Denis, Notre-Dame de Paris commencée en 1163, Chartres, Amiens) : grandes fenêtres, vitraux, voûtes sur croisée d'ogives, arcs-boutants.\nLes ordres mendiants (franciscains, dominicains), fondés au début du XIIIe siècle, prêchent en ville et vivent de dons.\nLes universités naissent aux XIIe-XIIIe siècles (Bologne, Paris, Oxford) ; on y enseigne en latin la théologie, le droit, la médecine.\nMéthode attendue : décrire une ville médiévale à partir d'un plan ou d'une miniature ; expliquer ce que les bourgeois obtiennent par une charte."
+    },
+    {
+      "id": "affirmation-de-l-etat-monarchique",
+      "titre": "L'affirmation de l'État monarchique dans le royaume des Capétiens et des Valois",
+      "ordre": 5,
+      "periode": "T2",
+      "notions": [
+        "Connaître l'avènement des Capétiens (987) et la faiblesse initiale du pouvoir royal",
+        "Expliquer comment les rois agrandissent le domaine royal et s'imposent aux seigneurs",
+        "Montrer le caractère sacré du pouvoir royal (sacre à Reims)",
+        "Connaître les instruments de l'État : administration, justice, impôts, armée",
+        "Connaître la guerre de Cent Ans et son rôle dans le renforcement du pouvoir royal",
+        "Identifier quelques rois : Philippe Auguste, Louis IX, Philippe le Bel, Charles VII"
+      ],
+      "motsCles": [
+        "Capétiens",
+        "Valois",
+        "domaine royal",
+        "sacre",
+        "Philippe Auguste",
+        "Bouvines",
+        "Louis IX",
+        "bailli",
+        "impôt",
+        "guerre de Cent Ans",
+        "Jeanne d'Arc"
+      ],
+      "reference": "En 987, Hugues Capet est élu roi par les grands seigneurs ; il fonde la dynastie des Capétiens ; son domaine royal est petit (autour de Paris et Orléans).\nLe roi est sacré à Reims : l'onction d'huile sainte fait de lui un personnage choisi par Dieu ; on lui attribue le pouvoir de guérir les écrouelles.\nLe roi est le suzerain des grands seigneurs du royaume et utilise les liens féodo-vassaliques pour s'imposer à eux.\nPhilippe Auguste (1180-1223) reprend des territoires au roi d'Angleterre (Normandie en 1204) et remporte la bataille de Bouvines (1214) ; il crée les baillis (Nord) et sénéchaux (Sud) qui représentent le roi.\nLouis IX (Saint Louis, 1226-1270) rend la justice, impose la monnaie royale dans le royaume, interdit les guerres privées ; il part en croisade et meurt devant Tunis en 1270 ; il est canonisé en 1297.\nPhilippe le Bel (1285-1314) s'appuie sur des juristes (légistes), réunit des assemblées et s'oppose au pape Boniface VIII.\nL'administration royale se développe : Parlement (justice), Chambre des comptes (finances) ; le roi lève des impôts.\nEn 1328, faute d'héritier direct, la couronne passe à Philippe VI de Valois ; le roi d'Angleterre Édouard III revendique le trône.\nGuerre de Cent Ans (1337-1453) : conflit entre rois de France et d'Angleterre, marqué par des défaites françaises (Crécy 1346, Azincourt 1415) et par la peste noire (1347-1352).\nJeanne d'Arc délivre Orléans (1429) et fait sacrer Charles VII à Reims ; elle est brûlée à Rouen en 1431.\nCharles VII crée un impôt permanent (la taille) et une armée permanente ; la guerre se termine en 1453 avec la bataille de Castillon ; les Anglais ne gardent que Calais.\nÀ la fin du Moyen Âge, le roi gouverne un royaume plus étendu avec des institutions durables : l'État monarchique s'affirme.\nMéthode attendue : réaliser une frise chronologique des rois ; comparer deux cartes du domaine royal (987 et vers 1500)."
+    },
+    {
+      "id": "charles-quint-et-soliman",
+      "titre": "Le monde au temps de Charles Quint et Soliman le Magnifique",
+      "ordre": 6,
+      "periode": "T2",
+      "notions": [
+        "Situer les grandes découvertes et leurs acteurs (Colomb, Vasco de Gama, Magellan)",
+        "Expliquer les causes des voyages des Européens aux XVe-XVIe siècles",
+        "Connaître l'empire de Charles Quint et la conquête de l'Amérique (Aztèques, Incas)",
+        "Expliquer les conséquences de la conquête pour les populations amérindiennes et la traite atlantique",
+        "Connaître l'Empire ottoman de Soliman le Magnifique et sa puissance",
+        "Comprendre que la Méditerranée est un espace d'affrontements et d'échanges entre ces deux empires"
+      ],
+      "motsCles": [
+        "grandes découvertes",
+        "Christophe Colomb",
+        "Magellan",
+        "Charles Quint",
+        "conquistador",
+        "Aztèques",
+        "Incas",
+        "Amérindiens",
+        "traite",
+        "Empire ottoman",
+        "Soliman le Magnifique",
+        "Istanbul"
+      ],
+      "reference": "À la fin du XVe siècle, les Européens cherchent une route maritime vers les épices et l'or de l'Asie ; ils disposent de la caravelle, de la boussole, de l'astrolabe et de meilleures cartes.\n1492 : Christophe Colomb, au service des rois d'Espagne, atteint les Antilles en pensant arriver en Asie.\n1498 : le Portugais Vasco de Gama atteint l'Inde en contournant l'Afrique.\n1519-1522 : l'expédition de Magellan réalise le premier tour du monde (Magellan meurt en route, aux Philippines, en 1521).\nCharles Quint (1500-1558) hérite de vastes territoires : Espagne et ses colonies d'Amérique, Pays-Bas, possessions en Italie ; il est élu empereur du Saint-Empire en 1519 ; on dit que « le soleil ne se couche jamais » sur son empire.\nLes conquistadors conquièrent l'Amérique : Hernan Cortés soumet l'Empire aztèque (Tenochtitlan, 1521), Francisco Pizarro l'Empire inca (à partir de 1532).\nLes Amérindiens subissent violences, travail forcé et surtout des maladies venues d'Europe : leur population s'effondre.\nControverse de Valladolid (1550-1551) : Las Casas défend les Amérindiens face à Sepúlveda.\nPour remplacer cette main-d'œuvre, les Européens déportent des Africains réduits en esclavage vers l'Amérique : c'est le début de la traite atlantique.\nL'or et l'argent d'Amérique (mines de Potosí) enrichissent l'Espagne ; Séville contrôle le commerce avec l'Amérique.\nSoliman le Magnifique (sultan de 1520 à 1566) dirige l'Empire ottoman depuis Istanbul (l'ancienne Constantinople, prise par les Ottomans en 1453).\nL'empire de Soliman s'étend sur trois continents ; il assiège Vienne en 1529 sans la prendre ; il fait construire la mosquée Süleymaniye (architecte Sinan).\nLes deux empires s'affrontent en Méditerranée et en Europe centrale ; François Ier s'allie à Soliman contre Charles Quint.\nMéthode attendue : situer sur une carte les voyages et les deux empires ; comparer deux souverains et leurs pouvoirs."
+    },
+    {
+      "id": "humanisme-reformes-conflits-religieux",
+      "titre": "Humanisme, réformes et conflits religieux",
+      "ordre": 7,
+      "periode": "T3",
+      "notions": [
+        "Définir l'humanisme et connaître des humanistes (Érasme, Rabelais, Montaigne)",
+        "Montrer le rôle de l'imprimerie dans la diffusion des idées",
+        "Connaître la Renaissance artistique (Italie, Léonard de Vinci, Michel-Ange)",
+        "Expliquer la Réforme protestante (Luther, Calvin) et la réponse de l'Église catholique",
+        "Connaître les guerres de Religion en France et l'édit de Nantes (1598)",
+        "Comprendre que l'unité religieuse de l'Occident chrétien est rompue"
+      ],
+      "motsCles": [
+        "humanisme",
+        "Renaissance",
+        "imprimerie",
+        "Érasme",
+        "Réforme",
+        "protestant",
+        "Luther",
+        "Calvin",
+        "concile de Trente",
+        "guerres de Religion",
+        "édit de Nantes"
+      ],
+      "reference": "L'humanisme est un mouvement intellectuel des XVe-XVIe siècles qui place l'être humain au centre de la réflexion et s'appuie sur la redécouverte des textes de l'Antiquité grecque et latine.\nVers 1450-1455, Gutenberg met au point à Mayence l'imprimerie à caractères mobiles ; la Bible est le premier grand livre imprimé ; les livres deviennent plus nombreux et moins chers.\nHumanistes : Érasme (vers 1467-1536), Thomas More, Rabelais (Gargantua, Pantagruel), Montaigne (Essais) ; ils veulent mieux éduquer et revenir aux textes originaux de la Bible.\nLa Renaissance artistique naît en Italie (Florence) : perspective, représentation réaliste du corps humain ; Léonard de Vinci, Michel-Ange (plafond de la chapelle Sixtine), Raphaël ; en France, François Ier fait venir Léonard de Vinci et construire Chambord.\nAu début du XVIe siècle, des chrétiens critiquent l'Église : la vente des indulgences (pardon des péchés contre de l'argent), le mode de vie de certains clercs.\n1517 : le moine allemand Martin Luther publie 95 thèses contre les indulgences ; il affirme que seule la foi sauve et que seule la Bible fait autorité ; il traduit la Bible en allemand ; il est excommunié en 1521.\nJean Calvin, réformateur français, s'installe à Genève ; ses idées se diffusent en France.\nLes protestants refusent l'autorité du pape, ne gardent que deux sacrements (baptême et Cène) et lisent la Bible en langue courante.\nRéforme catholique : le concile de Trente (1545-1563) réaffirme les dogmes catholiques, l'autorité du pape et améliore la formation des prêtres ; les Jésuites (fondés en 1540) enseignent et évangélisent.\nEn France, les guerres de Religion (1562-1598) opposent catholiques et protestants ; le massacre de la Saint-Barthélemy à Paris (24 août 1572) tue des milliers de protestants.\nHenri IV, protestant devenu catholique en 1593, signe l'édit de Nantes en 1598 : les protestants obtiennent la liberté de conscience et une liberté de culte limitée ; le catholicisme reste religion du royaume.\nMéthode attendue : comparer les croyances catholiques et protestantes ; analyser une œuvre de la Renaissance."
+    },
+    {
+      "id": "du-prince-de-la-renaissance-au-roi-absolu",
+      "titre": "Du Prince de la Renaissance au roi absolu",
+      "ordre": 8,
+      "periode": "T3",
+      "notions": [
+        "Connaître François Ier, prince de la Renaissance, et le renforcement de son pouvoir",
+        "Connaître le rôle d'Henri IV dans la restauration de l'autorité royale",
+        "Définir la monarchie absolue de droit divin",
+        "Expliquer comment Louis XIV gouverne et contrôle la noblesse",
+        "Montrer le rôle de Versailles et de la cour dans la mise en scène du pouvoir",
+        "Identifier les limites de la puissance du roi et ses moyens (guerres, impôts, révocation de l'édit de Nantes)"
+      ],
+      "motsCles": [
+        "François Ier",
+        "ordonnance de Villers-Cotterêts",
+        "Henri IV",
+        "monarchie absolue",
+        "droit divin",
+        "Louis XIV",
+        "Versailles",
+        "cour",
+        "courtisan",
+        "Colbert",
+        "intendant",
+        "révocation de l'édit de Nantes"
+      ],
+      "reference": "François Ier (roi de 1515 à 1547) est un prince de la Renaissance : vainqueur à Marignan (1515), mécène des artistes (Léonard de Vinci), il fait construire Chambord et crée le Collège des lecteurs royaux (futur Collège de France) en 1530.\nOrdonnance de Villers-Cotterêts (1539) : le français remplace le latin dans les actes officiels et de justice ; les curés doivent tenir des registres des baptêmes.\nFrançois Ier renforce le pouvoir royal : il nomme les évêques (concordat de Bologne, 1516) et s'entoure de conseillers.\nHenri IV (1589-1610), premier roi Bourbon, met fin aux guerres de Religion (édit de Nantes, 1598) et reconstruit le royaume avec son ministre Sully ; il est assassiné par Ravaillac en 1610.\nSous Louis XIII, le cardinal de Richelieu renforce l'autorité du roi face aux nobles et aux protestants.\nLa Fronde (1648-1653) : révolte des parlementaires et des nobles pendant l'enfance de Louis XIV.\nMonarchie absolue : le roi concentre tous les pouvoirs (faire les lois, rendre la justice, lever les impôts, décider de la guerre et de la paix) ; il tient son pouvoir de Dieu (droit divin) et n'a de comptes à rendre qu'à Dieu.\nLouis XIV règne de 1643 à 1715 et gouverne personnellement à partir de 1661 ; il prend pour emblème le soleil (« Roi-Soleil »).\nIl gouverne avec des conseils et des ministres (Colbert pour les finances et l'économie) ; les intendants appliquent ses décisions dans les provinces.\nÀ partir de 1682, la cour s'installe à Versailles ; l'étiquette règle la vie des courtisans ; les nobles, surveillés, dépendent des faveurs du roi.\nLe roi est mécène : Molière, Lully, Le Brun ; académies (Académie française créée en 1635 par Richelieu).\n1685 : édit de Fontainebleau, Louis XIV révoque l'édit de Nantes ; de nombreux protestants fuient le royaume.\nLes guerres nombreuses agrandissent le royaume mais coûtent cher ; les impôts pèsent sur les paysans et provoquent des révoltes.\nMéthode attendue : analyser un portrait officiel (Louis XIV par Rigaud, 1701) pour montrer les symboles du pouvoir absolu."
+    },
+    {
+      "id": "emc-egalite-et-lutte-contre-les-discriminations",
+      "titre": "EMC : L'égalité femmes-hommes et la lutte contre les discriminations",
+      "ordre": 9,
+      "periode": "T2",
+      "notions": [
+        "Connaître le principe d'égalité inscrit dans la devise et la Constitution de la République",
+        "Définir une discrimination et un stéréotype",
+        "Identifier les critères de discrimination interdits par la loi (sexe, origine, religion, handicap...)",
+        "Connaître les étapes de l'égalité entre les femmes et les hommes et les inégalités qui persistent",
+        "Savoir que les discriminations sont punies par la loi et connaître les recours (Défenseur des droits)",
+        "Adopter une attitude respectueuse et réagir face au sexisme, au racisme et au harcèlement"
+      ],
+      "motsCles": [
+        "égalité",
+        "discrimination",
+        "stéréotype",
+        "préjugé",
+        "sexisme",
+        "racisme",
+        "antisémitisme",
+        "handicap",
+        "parité",
+        "Défenseur des droits",
+        "Déclaration des droits de l'homme et du citoyen",
+        "Constitution"
+      ],
+      "reference": "La devise de la République est « Liberté, Égalité, Fraternité ».\nDéclaration des droits de l'homme et du citoyen (1789), article 1 : « Les hommes naissent et demeurent libres et égaux en droits. »\nConstitution de 1958, article 1 : la République assure l'égalité devant la loi de tous les citoyens sans distinction d'origine, de race ou de religion.\nPréambule de la Constitution de 1946 : la loi garantit à la femme, dans tous les domaines, des droits égaux à ceux de l'homme.\nStéréotype : idée toute faite, caricaturale, sur un groupe de personnes ; préjugé : jugement porté à l'avance, sans connaître.\nDiscrimination : traiter une personne moins bien qu'une autre, dans une situation comparable, en raison d'un critère interdit par la loi.\nLa loi interdit plus de vingt critères de discrimination, notamment le sexe, l'origine, la religion, le handicap, l'apparence physique, l'âge, l'orientation sexuelle, le lieu de résidence.\nUne discrimination est un délit (Code pénal) : elle peut être punie jusqu'à 3 ans d'emprisonnement et 45 000 euros d'amende.\nÉtapes de l'égalité femmes-hommes : droit de vote des femmes (ordonnance de 1944, premier vote en 1945) ; les femmes peuvent ouvrir un compte bancaire et travailler sans l'autorisation de leur mari (1965) ; loi sur l'égalité salariale (1972) ; loi sur la parité en politique (2000).\nDes inégalités persistent : écarts de salaire, répartition des tâches domestiques, violences faites aux femmes, métiers encore très « genrés ».\nLe Défenseur des droits (créé en 2011) aide gratuitement les victimes de discriminations ; on peut aussi porter plainte.\nLe sexisme, le racisme, l'antisémitisme, les propos homophobes et le harcèlement scolaire sont punis par la loi ; numéro national gratuit contre le harcèlement, y compris en ligne : 3018.\nMéthode attendue : identifier une situation de discrimination, nommer le critère concerné et proposer une réponse fondée sur le droit."
+    },
+    {
+      "id": "emc-solidarite",
+      "titre": "EMC : La solidarité, une valeur de la République",
+      "ordre": 10,
+      "periode": "T3",
+      "notions": [
+        "Définir la fraternité et la solidarité, valeurs de la République",
+        "Connaître la solidarité nationale organisée par l'État (Sécurité sociale, impôt, aides sociales)",
+        "Comprendre le rôle des associations et de l'engagement bénévole",
+        "Connaître des formes de solidarité envers les personnes vulnérables (handicap, pauvreté, personnes âgées)",
+        "Identifier la solidarité internationale et européenne",
+        "Savoir s'engager à son échelle au collège (délégués, projets solidaires)"
+      ],
+      "motsCles": [
+        "fraternité",
+        "solidarité",
+        "Sécurité sociale",
+        "protection sociale",
+        "impôt",
+        "redistribution",
+        "association",
+        "bénévole",
+        "engagement",
+        "ONG",
+        "solidarité internationale",
+        "délégué"
+      ],
+      "reference": "La fraternité, inscrite dans la devise républicaine, est le lien qui unit les membres d'une même communauté ; en 2018, le Conseil constitutionnel l'a reconnue comme un principe à valeur constitutionnelle.\nSolidarité : aide mutuelle entre les personnes ; elle peut être organisée par l'État ou venir de l'engagement des citoyens.\nConstitution de 1958, article 1 : la France est une République indivisible, laïque, démocratique et sociale.\nPréambule de 1946 : la Nation garantit à tous la protection de la santé, la sécurité matérielle, le repos et les loisirs.\nLa Sécurité sociale est créée en 1945 : elle protège contre les risques de la vie (maladie, accident du travail, vieillesse, famille) grâce aux cotisations de ceux qui travaillent.\nL'impôt finance les services publics (école, hôpital) et des aides pour les plus fragiles : c'est la redistribution.\nExemples d'aides : allocations familiales, revenu de solidarité active (RSA), aides aux personnes handicapées et aux personnes âgées.\nLoi de 2005 : égalité des droits et des chances des personnes handicapées (accessibilité, scolarisation).\nLes associations (loi de 1901) permettent aux citoyens de s'engager comme bénévoles : Restos du cœur (fondés par Coluche en 1985), Croix-Rouge, Secours populaire.\nSolidarité internationale : aide au développement, aide humanitaire en cas de catastrophe, rôle des ONG (Médecins sans frontières, créée en 1971) ; l'Union européenne pratique aussi la solidarité entre États membres.\nAu collège, les élèves peuvent s'engager : délégués de classe, éco-délégués, actions solidaires (collectes, tutorat).\nMéthode attendue : expliquer comment une situation de fragilité est prise en charge par la solidarité nationale ou associative."
+    }
+  ]
+}

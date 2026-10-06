@@ -1,0 +1,416 @@
+{
+  "classe": "6ème",
+  "matiere": "Sciences et technologie",
+  "programme": "Cycle 3 – Sciences et technologie (programme de cycle 3, BO n°31 du 30/07/2020 ; repères annuels 2019)",
+  "modele": "claude-opus-5-5 (abonnement)",
+  "genereLe": "2026-10-05",
+  "relu": false,
+  "chapitres": [
+    {
+      "id": "etats-de-la-matiere",
+      "titre": "Les états de la matière et leurs changements",
+      "ordre": 1,
+      "periode": "T1",
+      "notions": [
+        "Distinguer les trois états de la matière : solide, liquide, gazeux",
+        "Décrire les propriétés de chaque état (forme propre, volume propre)",
+        "Nommer les changements d'état : fusion, solidification, vaporisation, liquéfaction",
+        "Savoir que l'eau pure fond à 0 °C et bout à 100 °C (pression atmosphérique normale)",
+        "Savoir que la masse se conserve lors d'un changement d'état, mais pas le volume",
+        "Mesurer une masse avec une balance et un volume avec une éprouvette graduée"
+      ],
+      "motsCles": [
+        "matière",
+        "solide",
+        "liquide",
+        "gaz",
+        "fusion",
+        "solidification",
+        "vaporisation",
+        "liquéfaction",
+        "ébullition",
+        "masse",
+        "volume",
+        "température"
+      ],
+      "reference": "La matière existe sous trois états physiques : solide, liquide et gazeux.\nUn solide a une forme propre et un volume propre (ex. un glaçon).\nUn liquide n'a pas de forme propre (il prend la forme du récipient) mais a un volume propre ; sa surface libre au repos est plane et horizontale.\nUn gaz n'a ni forme propre ni volume propre : il occupe tout l'espace disponible ; il est compressible et a une masse (ex. l'air).\nFusion : solide → liquide. Solidification : liquide → solide.\nVaporisation : liquide → gaz (évaporation lente ou ébullition). Liquéfaction (ou condensation liquide) : gaz → liquide (buée sur une vitre froide).\nPour l'eau pure, sous la pression atmosphérique normale : fusion et solidification à 0 °C, ébullition à 100 °C.\nPendant le changement d'état d'un corps pur, la température reste constante (palier de température).\nAu cours d'un changement d'état, la masse se conserve ; le volume, lui, peut changer (l'eau augmente de volume en gelant : la glace flotte).\nLa vapeur d'eau est invisible ; la « fumée » au-dessus d'une casserole est formée de fines gouttelettes d'eau liquide.\nLa masse se mesure avec une balance, en kilogrammes (kg) ou grammes (g) : 1 kg = 1 000 g.\nLe volume d'un liquide se mesure avec une éprouvette graduée, en litres (L) ou millilitres (mL) : 1 L = 1 000 mL ; 1 mL = 1 cm³.\nMéthode : lire le volume dans une éprouvette en plaçant l'œil à la hauteur du bas du ménisque.\nLa température se mesure avec un thermomètre, en degrés Celsius (°C)."
+    },
+    {
+      "id": "melanges-et-solutions",
+      "titre": "Mélanges, solutions et séparation",
+      "ordre": 2,
+      "periode": "T1",
+      "notions": [
+        "Distinguer un corps pur d'un mélange",
+        "Distinguer un mélange homogène d'un mélange hétérogène",
+        "Savoir qu'une solution est obtenue en dissolvant un soluté dans un solvant",
+        "Savoir que la masse se conserve lors d'une dissolution",
+        "Connaître la notion de saturation d'une solution",
+        "Choisir une technique de séparation : décantation, filtration, évaporation",
+        "Savoir que l'eau du robinet ou l'eau minérale est un mélange"
+      ],
+      "motsCles": [
+        "corps pur",
+        "mélange",
+        "homogène",
+        "hétérogène",
+        "soluble",
+        "dissolution",
+        "soluté",
+        "solvant",
+        "solution",
+        "saturation",
+        "décantation",
+        "filtration"
+      ],
+      "reference": "Un corps pur est constitué d'une seule espèce chimique (ex. eau distillée). Un mélange contient plusieurs espèces chimiques.\nL'eau minérale et l'eau du robinet sont des mélanges : elles contiennent des sels minéraux dissous (étiquette).\nMélange homogène : on ne distingue pas ses constituants à l'œil nu (eau sucrée). Mélange hétérogène : on distingue au moins deux constituants (eau boueuse, eau et huile).\nUne espèce qui se dissout dans l'eau est dite soluble (sel, sucre) ; sinon insoluble (sable).\nDeux liquides qui se mélangent de façon homogène sont miscibles (eau et sirop) ; sinon non miscibles (eau et huile : l'huile, moins dense, surnage).\nDissolution : le soluté (ex. sel) se disperse dans le solvant (ex. eau) ; on obtient une solution.\nAu cours d'une dissolution, la masse se conserve : masse de la solution = masse du solvant + masse du soluté.\nEx. : 200 g d'eau + 10 g de sel → 210 g d'eau salée.\nUne solution est saturée quand on ne peut plus dissoudre de soluté : l'excès reste au fond.\nDécantation : on laisse reposer ; les particules solides plus lourdes tombent au fond.\nFiltration : un filtre retient les particules solides ; le liquide récupéré s'appelle le filtrat. Le filtrat peut rester un mélange homogène.\nÉvaporation : en chauffant une eau salée, l'eau s'évapore et le sel reste (marais salants).\nMéthode : pour rendre une eau boueuse limpide, décanter puis filtrer ; la filtration ne retire pas ce qui est dissous."
+    },
+    {
+      "id": "decrire-un-mouvement",
+      "titre": "Décrire un mouvement",
+      "ordre": 3,
+      "periode": "T1",
+      "notions": [
+        "Savoir que la description d'un mouvement dépend de l'objet de référence choisi",
+        "Décrire une trajectoire : rectiligne, circulaire ou quelconque",
+        "Distinguer un mouvement à vitesse constante, accélérée ou ralentie",
+        "Calculer une vitesse moyenne avec v = d ÷ t",
+        "Utiliser les unités de vitesse (m/s, km/h)",
+        "Exploiter une chronophotographie"
+      ],
+      "motsCles": [
+        "mouvement",
+        "immobile",
+        "référence",
+        "trajectoire",
+        "rectiligne",
+        "circulaire",
+        "vitesse",
+        "accéléré",
+        "ralenti",
+        "uniforme",
+        "chronophotographie",
+        "durée"
+      ],
+      "reference": "Un objet est en mouvement ou immobile par rapport à un objet de référence choisi.\nEx. : un passager assis dans un train est immobile par rapport au train mais en mouvement par rapport au quai.\nLa trajectoire est l'ensemble des positions successives occupées par un point de l'objet.\nTrajectoire rectiligne : une droite (chute d'une bille). Circulaire : un cercle (point d'une roue de manège). Sinon, curviligne ou quelconque.\nLa vitesse moyenne se calcule par v = d ÷ t (d : distance parcourue ; t : durée du parcours).\nUnités : mètre par seconde (m/s) ou kilomètre par heure (km/h). 1 m/s = 3,6 km/h.\nEx. : 150 km en 2 h → v = 150 ÷ 2 = 75 km/h.\nEx. : 100 m en 10 s → v = 10 m/s = 36 km/h.\nOn peut aussi calculer d = v × t et t = d ÷ v.\nMouvement uniforme : la vitesse est constante. Accéléré : la vitesse augmente. Ralenti : la vitesse diminue.\nChronophotographie : plusieurs positions d'un objet photographiées à intervalles de temps égaux.\nSur une chronophotographie : écarts égaux entre deux positions → vitesse constante ; écarts croissants → mouvement accéléré ; écarts décroissants → mouvement ralenti.\nMéthode : identifier la référence, décrire la trajectoire, puis l'évolution de la vitesse."
+    },
+    {
+      "id": "sources-et-conversions-d-energie",
+      "titre": "Sources d'énergie et conversions",
+      "ordre": 4,
+      "periode": "T1",
+      "notions": [
+        "Identifier des sources d'énergie et des formes d'énergie",
+        "Distinguer sources d'énergie renouvelables et non renouvelables",
+        "Savoir qu'un objet a besoin d'énergie pour fonctionner",
+        "Décrire une chaîne d'énergie simple : source, convertisseur, forme d'énergie utile",
+        "Savoir qu'une conversion d'énergie s'accompagne de pertes, souvent sous forme thermique",
+        "Connaître des économies d'énergie au quotidien"
+      ],
+      "motsCles": [
+        "énergie",
+        "source d'énergie",
+        "renouvelable",
+        "non renouvelable",
+        "énergie électrique",
+        "énergie thermique",
+        "énergie lumineuse",
+        "énergie de mouvement",
+        "énergie chimique",
+        "conversion",
+        "convertisseur",
+        "pertes"
+      ],
+      "reference": "L'énergie est nécessaire pour chauffer, éclairer, mettre en mouvement, faire fonctionner un appareil ou un être vivant.\nFormes d'énergie : énergie de mouvement (cinétique), thermique, lumineuse, électrique, chimique (dans les aliments, les piles, les carburants), énergie de position.\nSources d'énergie renouvelables : le Soleil, le vent, l'eau en mouvement (barrage), la biomasse (bois), la chaleur de la Terre (géothermie). Elles se renouvellent rapidement à l'échelle humaine.\nSources non renouvelables : pétrole, charbon, gaz naturel (énergies fossiles), uranium (nucléaire). Leurs réserves sont limitées.\nLa combustion des énergies fossiles rejette du dioxyde de carbone, qui contribue au réchauffement climatique.\nUn convertisseur transforme une forme d'énergie en une autre.\nEx. : lampe : électrique → lumineuse + thermique. Moteur : électrique → mouvement + thermique.\nEx. : panneau solaire photovoltaïque : lumineuse → électrique. Éolienne : mouvement du vent → électrique.\nEx. : pile : chimique → électrique. Être humain : énergie chimique des aliments → mouvement + chaleur.\nUne chaîne d'énergie se représente par un schéma : source → convertisseur → énergie utile, avec les pertes (souvent thermiques).\nL'énergie ne disparaît pas : elle se transforme ; la partie non utile est appelée « pertes ».\nÉconomies d'énergie : éteindre les appareils en veille, utiliser des lampes à LED, isoler les bâtiments."
+    },
+    {
+      "id": "classer-les-etres-vivants",
+      "titre": "Classer les êtres vivants",
+      "ordre": 5,
+      "periode": "T1",
+      "notions": [
+        "Distinguer le vivant, le non-vivant et ce qui est issu du vivant",
+        "Savoir qu'on classe les êtres vivants selon les attributs (caractères) qu'ils possèdent",
+        "Construire et lire une classification en groupes emboîtés",
+        "Savoir que les groupes emboîtés traduisent des liens de parenté",
+        "Distinguer une classification scientifique d'un tri selon le mode de vie",
+        "Définir la biodiversité et l'espèce"
+      ],
+      "motsCles": [
+        "être vivant",
+        "attribut",
+        "caractère",
+        "groupe emboîté",
+        "classification",
+        "vertébré",
+        "squelette interne",
+        "espèce",
+        "biodiversité",
+        "parenté",
+        "ancêtre commun"
+      ],
+      "reference": "Un être vivant naît (ou germe), se nourrit, respire, grandit, se reproduit et meurt.\nOn distingue le vivant (chat, chêne), le non-vivant (caillou) et ce qui est issu du vivant (bois d'une table, coquille vide).\nClasser scientifiquement, c'est regrouper les êtres vivants selon ce qu'ils POSSÈDENT (attributs ou caractères), pas selon ce qu'ils n'ont pas ni selon leur mode de vie.\nEx. d'attributs : squelette interne (vertébrés), quatre membres, poils, plumes, mamelles, six pattes articulées.\nLes groupes sont emboîtés : un groupe plus petit est inclus dans un groupe plus grand (ex. les animaux à poils sont inclus dans les vertébrés à quatre membres, eux-mêmes inclus dans les vertébrés).\nOn représente la classification par des ensembles emboîtés (boîtes) ; plus deux espèces partagent d'attributs, plus elles sont proches.\nEx. : la chauve-souris a des poils et des mamelles : c'est un mammifère, même si elle vole comme un oiseau.\nLa baleine respire avec des poumons et allaite ses petits : c'est un mammifère, pas un poisson.\nLes espèces d'un même groupe partagent des attributs hérités d'un ancêtre commun : la classification traduit des liens de parenté.\nUn tri selon le milieu de vie ou le régime alimentaire (animaux volants, aquatiques) n'est pas une classification scientifique.\nUne espèce regroupe des individus qui se ressemblent et peuvent se reproduire entre eux en donnant des descendants fertiles.\nLa biodiversité est la diversité des êtres vivants (espèces, individus) et de leurs milieux.\nMéthode : lister les attributs de chaque espèce dans un tableau, puis former les groupes du plus large au plus petit."
+    },
+    {
+      "id": "la-cellule",
+      "titre": "La cellule, unité du vivant",
+      "ordre": 6,
+      "periode": "T2",
+      "notions": [
+        "Savoir que tous les êtres vivants sont constitués de cellules",
+        "Distinguer êtres unicellulaires et pluricellulaires",
+        "Identifier les éléments d'une cellule : membrane, cytoplasme, noyau",
+        "Repérer la paroi et les chloroplastes chez les cellules végétales",
+        "Utiliser un microscope et réaliser une préparation",
+        "Réaliser un dessin d'observation légendé avec un titre et un grossissement"
+      ],
+      "motsCles": [
+        "cellule",
+        "unicellulaire",
+        "pluricellulaire",
+        "membrane",
+        "cytoplasme",
+        "noyau",
+        "paroi",
+        "chloroplaste",
+        "microscope",
+        "grossissement",
+        "micro-organisme",
+        "dessin d'observation"
+      ],
+      "reference": "Tous les êtres vivants sont constitués d'une ou plusieurs cellules : la cellule est l'unité du vivant.\nUn être unicellulaire est formé d'une seule cellule (paramécie, levure, bactérie). Un être pluricellulaire en compte beaucoup (humain, chêne).\nLes cellules sont microscopiques : on les observe au microscope.\nToute cellule possède une membrane qui la délimite et un cytoplasme ; la plupart possèdent un noyau.\nLes cellules végétales ont en plus une paroi rigide autour de la membrane ; celles des parties vertes contiennent des chloroplastes (verts).\nEx. : cellules d'épiderme d'oignon (noyau visible après coloration) ; cellules de feuille d'élodée (chloroplastes) ; cellules de la joue (pas de paroi).\nLes bactéries sont des cellules sans noyau.\nGrossissement du microscope = grossissement de l'oculaire × grossissement de l'objectif (ex. 10 × 40 = 400).\nMéthode d'utilisation : commencer par le plus faible grossissement, centrer l'objet, faire la mise au point, puis augmenter le grossissement.\nPréparation : déposer l'échantillon très fin dans une goutte d'eau sur une lame, puis recouvrir d'une lamelle sans bulles d'air.\nDessin d'observation : au crayon, traits nets, légendes avec traits horizontaux à la règle, titre et grossissement indiqués.\nLes micro-organismes (bactéries, levures, certains champignons) sont des êtres vivants microscopiques souvent unicellulaires."
+    },
+    {
+      "id": "besoins-des-vegetaux",
+      "titre": "Les besoins des plantes et la production de matière",
+      "ordre": 7,
+      "periode": "T2",
+      "notions": [
+        "Identifier les besoins d'une plante verte : eau, sels minéraux, lumière, dioxyde de carbone",
+        "Savoir que les plantes vertes produisent leur propre matière (producteurs primaires)",
+        "Savoir que l'eau et les sels minéraux sont prélevés dans le sol par les racines",
+        "Savoir que le dioxyde de carbone est prélevé dans l'air par les feuilles",
+        "Concevoir une expérience en ne faisant varier qu'un seul facteur (témoin)",
+        "Expliquer le rôle des décomposeurs dans le recyclage de la matière dans le sol"
+      ],
+      "motsCles": [
+        "plante verte",
+        "besoins nutritifs",
+        "eau",
+        "sels minéraux",
+        "lumière",
+        "dioxyde de carbone",
+        "racine",
+        "feuille",
+        "chlorophylle",
+        "producteur primaire",
+        "décomposeur",
+        "matière organique"
+      ],
+      "reference": "Une plante verte (chlorophyllienne) a besoin d'eau, de sels minéraux, de lumière et de dioxyde de carbone pour se développer.\nL'eau et les sels minéraux sont prélevés dans le sol par les racines (au niveau des poils absorbants).\nLe dioxyde de carbone (CO₂) est prélevé dans l'air par les feuilles.\nGrâce à la lumière, les parties vertes (qui contiennent de la chlorophylle) fabriquent la matière de la plante à partir de ces éléments minéraux.\nLes plantes vertes sont des producteurs primaires : elles produisent leur propre matière sans manger d'autres êtres vivants.\nLes animaux, eux, doivent se nourrir de matière produite par d'autres êtres vivants.\nAu cours de cette production, les plantes rejettent du dioxygène à la lumière.\nMéthode expérimentale : comparer deux lots identiques sauf pour un seul facteur (ex. lumière / obscurité) ; le lot qui reçoit tout est le témoin.\nUne plante privée de lumière jaunit et finit par mourir, même si elle a de l'eau.\nDans le sol, les décomposeurs (vers de terre, cloportes, champignons, bactéries) transforment les déchets des êtres vivants (feuilles mortes, cadavres, excréments).\nCette décomposition libère des sels minéraux réutilisés par les plantes : la matière est recyclée.\nL'humus est la matière organique du sol issue de la décomposition."
+    },
+    {
+      "id": "alimentation-humaine",
+      "titre": "Alimentation humaine et transformation des aliments",
+      "ordre": 8,
+      "periode": "T2",
+      "notions": [
+        "Expliquer que les besoins en aliments varient selon l'âge, l'activité et l'état de santé",
+        "Classer les aliments en familles et connaître leurs rôles",
+        "Reconnaître une alimentation équilibrée en qualité et en quantité",
+        "Savoir que certains aliments sont produits grâce à des micro-organismes (fermentation)",
+        "Savoir que des micro-organismes peuvent altérer les aliments",
+        "Connaître des techniques de conservation des aliments et leur principe"
+      ],
+      "motsCles": [
+        "aliment",
+        "besoins alimentaires",
+        "alimentation équilibrée",
+        "groupes d'aliments",
+        "énergie",
+        "micro-organisme",
+        "fermentation",
+        "levure",
+        "conservation",
+        "hygiène",
+        "date limite de consommation",
+        "pasteurisation"
+      ],
+      "reference": "Les aliments apportent à l'organisme la matière pour grandir et se réparer, et l'énergie pour fonctionner.\nLes besoins varient selon l'âge, le sexe, l'activité physique et l'état de santé (croissance, grossesse, sport).\nGroupes d'aliments : fruits et légumes ; féculents (pain, pâtes, riz) ; produits laitiers ; viandes, poissons, œufs ; matières grasses ; produits sucrés ; l'eau est la seule boisson indispensable.\nUne alimentation équilibrée est variée (tous les groupes) et adaptée en quantité aux besoins ; elle se répartit sur plusieurs repas dans la journée.\nTrop manger par rapport aux besoins favorise le surpoids ; pas assez peut provoquer des carences.\nLes micro-organismes sont des êtres vivants microscopiques (bactéries, levures, moisissures).\nCertains transforment des aliments par fermentation : le lait devient yaourt ou fromage (bactéries), la pâte du pain lève grâce aux levures, le raisin devient vin.\nD'autres altèrent les aliments (moisissures, aliments avariés) ou peuvent rendre malade.\nLes micro-organismes se développent surtout avec de l'eau, de la chaleur, de l'air et des nutriments.\nConservation par le froid : réfrigérateur (ralentit le développement) ; congélateur (−18 °C, bloque le développement).\nConservation par la chaleur : pasteurisation, stérilisation (conserves), qui détruisent les micro-organismes.\nAutres techniques : séchage, salage, sucrage (confitures), fumage, mise sous vide.\nRespecter la date limite de consommation et la chaîne du froid ; se laver les mains avant de cuisiner."
+    },
+    {
+      "id": "developpement-et-reproduction",
+      "titre": "Développement et reproduction des êtres vivants",
+      "ordre": 9,
+      "periode": "T2",
+      "notions": [
+        "Décrire les étapes du développement d'un animal, avec ou sans métamorphose",
+        "Décrire le développement d'une plante à fleurs : de la graine à la graine",
+        "Savoir que la reproduction sexuée nécessite deux cellules reproductrices (fécondation)",
+        "Connaître le rôle de la fleur, du fruit et de la graine",
+        "Décrire les changements du corps à la puberté",
+        "Citer des modes de reproduction asexuée chez les végétaux"
+      ],
+      "motsCles": [
+        "développement",
+        "métamorphose",
+        "larve",
+        "reproduction sexuée",
+        "fécondation",
+        "œuf",
+        "fleur",
+        "pollinisation",
+        "fruit",
+        "graine",
+        "germination",
+        "puberté"
+      ],
+      "reference": "Un être vivant naît, grandit (croissance), devient adulte capable de se reproduire (maturité), vieillit et meurt.\nDéveloppement direct : le jeune ressemble à l'adulte (chat, humain).\nDéveloppement avec métamorphose : le jeune (larve) est très différent de l'adulte (têtard → grenouille ; chenille → chrysalide → papillon).\nLa reproduction sexuée fait intervenir deux cellules reproductrices, une mâle et une femelle, qui s'unissent : c'est la fécondation, qui donne une cellule-œuf.\nChez les animaux : spermatozoïde (mâle) + ovule (femelle) → œuf. Fécondation interne (mammifères, oiseaux) ou externe, dans l'eau (la plupart des poissons, grenouilles).\nChez les plantes à fleurs : le pollen est transporté (par le vent ou les insectes) jusqu'au pistil d'une fleur : c'est la pollinisation, suivie de la fécondation.\nAprès fécondation, la fleur se transforme en fruit, qui contient les graines.\nUne graine contient un embryon de plante et des réserves ; dans de bonnes conditions (eau, température), elle germe.\nCycle d'une plante à fleurs : graine → germination → plantule → plante adulte → fleur → fruit → graine.\nReproduction asexuée chez les végétaux : bouturage, stolons (fraisier), tubercules (pomme de terre), bulbes ; les descendants sont identiques au parent.\nLa puberté est la période (environ 10 à 16 ans) où le corps devient capable de se reproduire.\nChez la fille : développement des seins, des poils, début des règles. Chez le garçon : mue de la voix, développement des poils et des organes génitaux, production de spermatozoïdes.\nCes transformations sont commandées par des hormones ; leur âge varie d'une personne à l'autre."
+    },
+    {
+      "id": "objets-techniques-besoins-et-fonctions",
+      "titre": "Les objets techniques : besoins, fonctions et évolution",
+      "ordre": 10,
+      "periode": "T3",
+      "notions": [
+        "Savoir qu'un objet technique répond à un besoin",
+        "Identifier la fonction d'usage d'un objet technique",
+        "Distinguer fonction d'usage, fonctions techniques et solutions techniques",
+        "Décrire le fonctionnement d'un objet technique à l'aide d'un schéma",
+        "Situer l'évolution d'un objet dans le temps (ligne du temps, innovations)",
+        "Relier l'évolution des objets aux progrès techniques et aux usages"
+      ],
+      "motsCles": [
+        "objet technique",
+        "besoin",
+        "fonction d'usage",
+        "fonction technique",
+        "solution technique",
+        "contrainte",
+        "cahier des charges",
+        "évolution",
+        "innovation",
+        "prototype",
+        "schéma"
+      ],
+      "reference": "Un objet technique est un objet fabriqué par l'être humain pour répondre à un besoin.\nLe besoin est ce que l'utilisateur veut faire (ex. se déplacer, s'éclairer, communiquer).\nLa fonction d'usage dit à quoi sert l'objet. Ex. : une lampe de poche sert à éclairer dans l'obscurité.\nUne fonction technique est une action que l'objet doit réaliser pour assurer sa fonction d'usage (ex. produire de la lumière, stocker l'énergie).\nLa solution technique est l'élément choisi pour réaliser une fonction technique (ex. une DEL pour produire de la lumière, des piles pour stocker l'énergie).\nUne même fonction peut être réalisée par différentes solutions (ex. freiner : patins ou frein à disque).\nLe cahier des charges décrit ce que doit faire un objet et ses contraintes (coût, sécurité, esthétique, environnement).\nUn prototype est un premier exemplaire réalisé pour tester un objet avant sa fabrication.\nLes objets évoluent au cours du temps selon les besoins, les progrès techniques, les matériaux et les sources d'énergie disponibles.\nEx. : éclairage : bougie → lampe à huile → ampoule à incandescence → lampe fluocompacte → lampe à DEL.\nEx. : le vélo : draisienne (1817), pédales, chaîne de transmission, pneus gonflables, vélo à assistance électrique.\nUne innovation est une amélioration nouvelle qui modifie l'objet ou son usage.\nMéthode : décrire un objet en répondant à « à qui rend-il service ? sur quoi agit-il ? dans quel but ? »."
+    },
+    {
+      "id": "familles-de-materiaux",
+      "titre": "Les familles de matériaux",
+      "ordre": 11,
+      "periode": "T3",
+      "notions": [
+        "Distinguer objet et matériau",
+        "Connaître les familles de matériaux : métaux, plastiques, matériaux organiques, céramiques, composites",
+        "Identifier des propriétés des matériaux : conductivité, masse, dureté, résistance à la corrosion",
+        "Réaliser des tests simples pour caractériser un matériau",
+        "Justifier le choix d'un matériau pour un usage donné",
+        "Connaître l'impact environnemental des matériaux et le recyclage"
+      ],
+      "motsCles": [
+        "matériau",
+        "famille de matériaux",
+        "métal",
+        "matière plastique",
+        "matériau organique",
+        "céramique",
+        "verre",
+        "composite",
+        "propriété",
+        "conducteur électrique",
+        "isolant thermique",
+        "recyclage"
+      ],
+      "reference": "Un objet est fabriqué avec un ou plusieurs matériaux (ex. une casserole : métal et plastique).\nFamilles de matériaux : métaux et alliages (fer, acier, aluminium, cuivre) ; matières plastiques (PVC, polystyrène) ; matériaux organiques d'origine végétale ou animale (bois, coton, laine, cuir) ; matériaux céramiques et minéraux (verre, porcelaine, terre cuite, béton) ; matériaux composites (fibre de carbone, contreplaqué).\nLes métaux sont conducteurs de l'électricité et de la chaleur ; l'acier (contenant du fer) est attiré par un aimant, l'aluminium et le cuivre non.\nLe fer rouille au contact de l'eau et de l'air : c'est une corrosion.\nLes plastiques sont légers, isolants électriques, faciles à mettre en forme ; la plupart sont fabriqués à partir du pétrole.\nLe bois est un isolant thermique, léger et renouvelable.\nLe verre est transparent, dur mais fragile (il casse).\nUn matériau composite associe plusieurs matériaux pour cumuler leurs qualités.\nPropriétés testables : conductivité électrique (circuit avec une lampe), conductivité thermique, attraction par un aimant, masse pour un même volume, dureté (rayure), flottabilité.\nLe choix d'un matériau dépend de la fonction de l'objet, de ses contraintes, de son coût et de son impact environnemental.\nEx. : un câble électrique : âme en cuivre (conducteur) + gaine en plastique (isolant).\nLe recyclage permet de réutiliser la matière d'un objet usagé (verre, métaux, papier, certains plastiques) et d'économiser des ressources.\nTrier ses déchets selon les consignes locales facilite le recyclage."
+    },
+    {
+      "id": "signaux-information-et-objets-communicants",
+      "titre": "Signaux, information et objets programmés",
+      "ordre": 12,
+      "periode": "T3",
+      "notions": [
+        "Identifier un signal et l'information qu'il transporte",
+        "Citer différents types de signaux : sonore, lumineux, électrique, radio",
+        "Savoir qu'un objet programmé utilise des capteurs, un programme et des actionneurs",
+        "Comprendre la notion d'algorithme et de programme",
+        "Lire et écrire un programme simple avec des blocs (Scratch) : séquence, boucle, condition",
+        "Adopter un usage responsable des objets communicants et d'Internet"
+      ],
+      "motsCles": [
+        "signal",
+        "information",
+        "émetteur",
+        "récepteur",
+        "capteur",
+        "actionneur",
+        "algorithme",
+        "programme",
+        "boucle",
+        "condition",
+        "objet communicant",
+        "données personnelles"
+      ],
+      "reference": "Un signal est un phénomène qui transporte une information d'un émetteur vers un récepteur.\nTypes de signaux : sonore (sonnerie, sirène), lumineux (feu de circulation, phare), électrique (dans un câble), ondes radio (téléphone, Wi-Fi).\nEx. : le feu rouge (signal lumineux) donne l'information « arrêt ».\nUn objet programmé (robot, thermostat, lampe automatique) contient : des capteurs qui prélèvent des informations, un programme qui les traite, des actionneurs qui agissent.\nCapteurs : bouton poussoir, capteur de lumière, de température, de présence. Actionneurs : moteur, lampe, haut-parleur.\nEx. : un éclairage automatique : le capteur détecte une présence → le programme décide → la lampe s'allume.\nUn algorithme est une suite ordonnée d'instructions permettant de résoudre un problème (comme une recette).\nUn programme est un algorithme écrit dans un langage compris par la machine (ex. Scratch, langage par blocs).\nSéquence : instructions exécutées l'une après l'autre. Boucle : répéter des instructions (« répéter 4 fois »). Condition : « si… alors… sinon ».\nEx. : pour tracer un carré : répéter 4 fois [avancer de 100, tourner de 90°].\nUn événement déclenche un programme (ex. « quand le drapeau vert est cliqué »).\nUn objet communicant échange des informations avec d'autres objets via un réseau (Internet, Bluetooth).\nUsage responsable : protéger ses données personnelles, choisir des mots de passe solides, ne pas tout partager, vérifier ses sources."
+    },
+    {
+      "id": "la-terre-dans-le-systeme-solaire",
+      "titre": "La Terre dans le système solaire",
+      "ordre": 13,
+      "periode": "T3",
+      "notions": [
+        "Situer la Terre dans le système solaire et connaître ses caractéristiques",
+        "Distinguer étoile, planète et satellite",
+        "Expliquer l'alternance jour/nuit par la rotation de la Terre sur elle-même",
+        "Savoir que la Terre tourne autour du Soleil en une année",
+        "Expliquer les saisons par l'inclinaison de l'axe de rotation de la Terre",
+        "Décrire les phases de la Lune",
+        "Relier certains phénomènes naturels (séismes, éruptions, tempêtes) à des risques pour les populations"
+      ],
+      "motsCles": [
+        "système solaire",
+        "Soleil",
+        "planète",
+        "satellite",
+        "Lune",
+        "rotation",
+        "révolution",
+        "jour et nuit",
+        "saisons",
+        "phases de la Lune",
+        "séisme",
+        "risque naturel"
+      ],
+      "reference": "Le Soleil est une étoile : il produit sa propre lumière. Les planètes et la Lune ne font que renvoyer la lumière du Soleil.\nLe système solaire comprend le Soleil et les objets qui tournent autour : 8 planètes, leurs satellites, des astéroïdes et des comètes.\nOrdre des planètes à partir du Soleil : Mercure, Vénus, Terre, Mars (planètes rocheuses), Jupiter, Saturne, Uranus, Neptune (planètes gazeuses géantes).\nLa Terre est la 3e planète ; elle est rocheuse, possède une atmosphère et de l'eau liquide, ce qui permet la vie.\nLa Lune est le satellite naturel de la Terre : elle tourne autour de la Terre en environ 29,5 jours (cycle des phases).\nLa Terre tourne sur elle-même autour de son axe (rotation) en 24 heures, d'ouest en est : c'est l'alternance jour/nuit.\nLa moitié de la Terre éclairée par le Soleil est dans le jour, l'autre moitié dans la nuit.\nLe mouvement apparent du Soleil dans le ciel (lever à l'est, coucher à l'ouest) est dû à la rotation de la Terre.\nLa Terre tourne autour du Soleil (révolution) en un an, environ 365,25 jours.\nL'axe de rotation de la Terre est incliné (environ 23°) : selon la position sur l'orbite, un hémisphère reçoit les rayons du Soleil plus directement et plus longtemps : ce sont les saisons.\nLes saisons ne sont pas dues à la distance Terre-Soleil.\nPhases de la Lune : nouvelle lune, premier quartier, pleine lune, dernier quartier ; on voit la partie de la moitié éclairée tournée vers la Terre.\nLa Terre est une planète active : séismes (tremblements de terre) et éruptions volcaniques ; l'atmosphère produit tempêtes et inondations.\nUn risque naturel existe quand un phénomène naturel (aléa) menace des populations (enjeux) ; on s'en protège par la surveillance, l'information et des constructions adaptées."
+    },
+    {
+      "id": "peuplement-des-milieux",
+      "titre": "Les êtres vivants dans leur environnement",
+      "ordre": 14,
+      "periode": "T3",
+      "notions": [
+        "Identifier les composantes biologiques et géologiques d'un milieu",
+        "Relier la répartition des êtres vivants aux conditions du milieu",
+        "Expliquer les variations du peuplement au cours des saisons",
+        "Construire une chaîne alimentaire et un réseau alimentaire",
+        "Identifier des actions humaines qui modifient les milieux et la biodiversité",
+        "Proposer des actions pour préserver l'environnement"
+      ],
+      "motsCles": [
+        "milieu",
+        "environnement",
+        "peuplement",
+        "chaîne alimentaire",
+        "réseau alimentaire",
+        "producteur",
+        "consommateur",
+        "décomposeur",
+        "hibernation",
+        "migration",
+        "biodiversité",
+        "espèce invasive"
+      ],
+      "reference": "Un milieu (forêt, mare, prairie) comprend des composantes non vivantes (sol, roches, eau, air, lumière, température) et des êtres vivants.\nLa répartition des êtres vivants dépend des conditions du milieu : lumière, humidité, température, nature du sol.\nEx. : les mousses se développent dans les endroits humides et ombragés.\nLe peuplement d'un milieu varie au cours des saisons.\nEn hiver, les animaux réagissent : migration (hirondelles), hibernation (marmotte, hérisson), vie ralentie (escargot) ou forme résistante (œufs, larves).\nLes végétaux passent l'hiver sous forme de graines, de bourgeons, de bulbes ou en perdant leurs feuilles.\nUne chaîne alimentaire montre « qui est mangé par qui » ; la flèche signifie « est mangé par » (ex. herbe → lapin → renard).\nToute chaîne alimentaire commence par un végétal chlorophyllien (producteur primaire) ; viennent ensuite les consommateurs (herbivores, puis carnivores).\nLes chaînes alimentaires d'un milieu s'entrecroisent et forment un réseau alimentaire.\nLes décomposeurs recyclent la matière des déchets et cadavres en sels minéraux pour les plantes.\nLa disparition d'une espèce peut perturber tout le réseau alimentaire.\nLes activités humaines modifient les milieux : déforestation, urbanisation, pollution, surpêche, introduction d'espèces invasives (frelon asiatique).\nPréserver la biodiversité : aires protégées, haies, réduction des pesticides, tri des déchets, respect des milieux."
+    }
+  ]
+}

@@ -9,7 +9,7 @@ import { GuestBanner } from '../components/GuestBanner';
 import { loadCatalogue, matiereProgress } from '../services/programmeService';
 import { loadLessons } from '../services/historyService';
 import { subjectMascot } from '../utils/subjects';
-import { hasProgramme, PROGRAMME_CLASSES } from '../utils/programme';
+import { hasProgramme, PROGRAMME_FALLBACK } from '../utils/programme';
 import './Programme.css';
 
 /**
@@ -24,7 +24,7 @@ export default function Programme() {
   const level = getUserLevel();
   // Classe affichée : celle de l'élève si son programme est publié, sinon la
   // première disponible (un élève de 4e peut parcourir la 3e en attendant).
-  const classe = hasProgramme(level) ? level.classe : PROGRAMME_CLASSES[0];
+  const classe = hasProgramme(level) ? level.classe : PROGRAMME_FALLBACK;
   const autreClasse = !!level?.classe && classe !== level.classe;
 
   const [catalogue, setCatalogue] = useState(null);

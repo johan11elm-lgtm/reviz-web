@@ -1,0 +1,375 @@
+{
+  "classe": "6ème",
+  "matiere": "Géographie",
+  "programme": "Cycle 3 – 6e : Habiter une métropole ; Habiter un espace de faible densité ; Habiter les littoraux ; Le monde habité (BO spécial n°11 du 26/11/2015, modifié BO n°31 du 30/07/2020 ; repères annuels 2019)",
+  "modele": "claude-opus-5-5 (abonnement)",
+  "genereLe": "2026-10-05",
+  "relu": false,
+  "chapitres": [
+    {
+      "id": "se-reperer-sur-la-terre",
+      "titre": "Se repérer sur la Terre : continents, océans et grands repères",
+      "ordre": 1,
+      "periode": "T1",
+      "notions": [
+        "Nommer et localiser les continents et les océans sur un planisphère",
+        "Situer l'équateur, les tropiques, les cercles polaires et le méridien de Greenwich",
+        "Distinguer les hémisphères Nord et Sud, Est et Ouest",
+        "Utiliser latitude et longitude pour situer un lieu",
+        "Lire une carte : titre, légende, échelle, orientation",
+        "Comprendre que la géographie étudie la manière dont les hommes habitent la Terre"
+      ],
+      "motsCles": [
+        "continent",
+        "océan",
+        "planisphère",
+        "équateur",
+        "tropique",
+        "cercle polaire",
+        "méridien de Greenwich",
+        "hémisphère",
+        "latitude",
+        "longitude",
+        "légende",
+        "échelle"
+      ],
+      "reference": "Habiter : pour le géographe, c'est la manière dont les hommes occupent un lieu, y vivent, y travaillent, s'y déplacent et le transforment.\nPlanisphère : carte qui représente toute la surface de la Terre à plat. Le globe est la représentation la plus fidèle de la Terre, qui est ronde.\nLa Terre est recouverte à environ 71 % par les océans et à 29 % par les terres émergées.\nContinents : Afrique, Amérique (souvent divisée en Amérique du Nord et Amérique du Sud), Antarctique, Asie, Europe, Océanie.\nOcéans : Pacifique (le plus vaste), Atlantique, Indien, Arctique, Austral.\nÉquateur : ligne imaginaire de latitude 0° qui partage la Terre en hémisphère Nord et hémisphère Sud.\nTropique du Cancer (environ 23° N) et tropique du Capricorne (environ 23° S) ; cercles polaires arctique (environ 66° N) et antarctique (environ 66° S).\nMéridien de Greenwich : méridien de longitude 0°, passant près de Londres ; il sépare l'hémisphère Est et l'hémisphère Ouest.\nParallèles : cercles parallèles à l'équateur ; méridiens : demi-cercles reliant le pôle Nord au pôle Sud.\nLatitude : distance en degrés d'un lieu par rapport à l'équateur (de 0° à 90° Nord ou Sud).\nLongitude : distance en degrés d'un lieu par rapport au méridien de Greenwich (de 0° à 180° Est ou Ouest).\nExemple : Paris est située à environ 49° de latitude Nord et 2° de longitude Est.\nUne carte comporte un titre, une légende (qui explique les figurés et les couleurs), une échelle (qui indique le rapport entre la distance sur la carte et la distance réelle) et une orientation (flèche du nord).\nExemple d'échelle : 1 cm sur la carte = 10 km dans la réalité.\nLa France métropolitaine est en Europe, dans l'hémisphère Nord ; la France a aussi des territoires ultramarins sur plusieurs océans (Guadeloupe, Martinique, Guyane, La Réunion, Mayotte…).\nMéthode : pour localiser un lieu, on le situe par rapport à un continent, un océan, l'équateur et les tropiques."
+    },
+    {
+      "id": "les-metropoles-et-leurs-habitants",
+      "titre": "Les métropoles et leurs habitants",
+      "ordre": 2,
+      "periode": "T1",
+      "notions": [
+        "Définir une métropole et la distinguer d'une simple ville",
+        "Localiser quelques grandes métropoles dans le monde",
+        "Décrire l'organisation d'une métropole : centre, quartiers d'affaires, banlieues, périphérie",
+        "Comprendre la croissance urbaine et l'étalement urbain",
+        "Comparer une métropole d'un pays riche et une métropole d'un pays pauvre ou émergent",
+        "Identifier les inégalités entre habitants d'une métropole (quartiers aisés, bidonvilles)"
+      ],
+      "motsCles": [
+        "métropole",
+        "mégapole",
+        "agglomération",
+        "centre-ville",
+        "quartier d'affaires",
+        "banlieue",
+        "périurbain",
+        "étalement urbain",
+        "croissance urbaine",
+        "bidonville",
+        "urbanisation"
+      ],
+      "reference": "Ville : espace où vivent de nombreuses personnes de façon dense, avec des bâtiments proches et des activités variées.\nMétropole : très grande ville qui concentre population, emplois, richesses, activités de commandement (sièges d'entreprises, institutions) et qui exerce son influence sur un vaste territoire, parfois sur le monde entier.\nMégapole : très grande agglomération de plus de 10 millions d'habitants (exemples : Tokyo, Delhi, Shanghai, Le Caire, Mexico, São Paulo, Lagos).\nAgglomération : ville-centre et ses banlieues qui forment un espace bâti continu.\nUrbanisation : augmentation de la part de la population qui vit en ville. Depuis 2007, plus de la moitié de l'humanité vit en ville.\nOrganisation d'une métropole : un centre ancien et un quartier d'affaires (gratte-ciel, bureaux : CBD en anglais, La Défense à Paris, Manhattan à New York), des banlieues, puis des espaces périurbains.\nPériurbain : espace situé autour de la ville, où se mêlent lotissements pavillonnaires, zones commerciales et espaces encore agricoles.\nÉtalement urbain : extension de la ville sur les espaces ruraux qui l'entourent.\nDans les pays riches, la croissance des métropoles est plus lente ; la ville s'étale avec des lotissements de maisons individuelles et des zones d'activités.\nDans de nombreux pays pauvres ou émergents, la croissance urbaine est très rapide, alimentée par l'exode rural et la natalité.\nExode rural : départ des habitants des campagnes vers les villes.\nBidonville : quartier d'habitat précaire construit sans autorisation, souvent sans eau courante, électricité ni égouts. Environ un milliard de personnes vivent dans des bidonvilles ou des quartiers informels.\nExemples de bidonvilles : Dharavi à Mumbai (Inde), les favelas de Rio de Janeiro et de São Paulo (Brésil).\nLes métropoles concentrent de fortes inégalités : quartiers aisés et protégés (parfois fermés), quartiers populaires, bidonvilles.\nMéthode : décrire un paysage urbain en distinguant premier plan, second plan et arrière-plan, et repérer les types d'habitat."
+    },
+    {
+      "id": "habiter-une-metropole-au-quotidien",
+      "titre": "Habiter une métropole au quotidien : se loger, travailler, se déplacer",
+      "ordre": 3,
+      "periode": "T1",
+      "notions": [
+        "Décrire comment les habitants se logent dans une métropole",
+        "Identifier les lieux de travail et les activités d'une métropole",
+        "Expliquer les mobilités quotidiennes et les moyens de transport",
+        "Comprendre les difficultés de la vie quotidienne : embouteillages, pollution, prix des logements",
+        "Repérer les inégalités d'accès au logement et aux transports",
+        "Lire un plan de transports en commun"
+      ],
+      "motsCles": [
+        "logement",
+        "habitat collectif",
+        "habitat individuel",
+        "mobilité",
+        "migration pendulaire",
+        "transports en commun",
+        "embouteillage",
+        "pollution",
+        "réseau de transport",
+        "accessibilité",
+        "loisirs"
+      ],
+      "reference": "Habiter une métropole, c'est s'y loger, y travailler, s'y déplacer, y faire ses achats et y avoir des loisirs.\nHabitat collectif : immeubles où vivent de nombreuses familles (appartements). Habitat individuel : maisons, souvent dans les espaces périurbains.\nDans les métropoles, les logements sont chers au centre ; beaucoup d'habitants s'installent plus loin, en banlieue ou dans le périurbain.\nLogement social : logement à loyer modéré construit avec l'aide de l'État ou des communes (HLM en France).\nLes emplois sont concentrés dans le centre, les quartiers d'affaires, les zones industrielles et commerciales.\nMobilité : déplacement des personnes. Migration pendulaire : aller-retour quotidien entre le domicile et le lieu de travail.\nMoyens de transport : voiture, bus, métro, tramway, train de banlieue (RER en Île-de-France), vélo, marche.\nRéseau de transport : ensemble des lignes et des points d'arrêt qui relient les lieux d'une ville.\nLe métro de Paris a été inauguré en 1900 ; celui de Londres, le plus ancien du monde, en 1863.\nDifficultés : embouteillages, temps de trajet longs, pollution de l'air, bruit, manque de logements abordables.\nDans les métropoles des pays pauvres, beaucoup d'habitants se déplacent à pied ou en minibus collectifs, et les quartiers informels sont mal desservis.\nLes inégalités se voient dans l'accès au logement, aux services (écoles, hôpitaux) et aux transports.\nLoisirs : parcs, musées, stades, centres commerciaux, souvent concentrés au centre.\nMéthode : sur un plan de métro, repérer les lignes, les correspondances et le trajet le plus court entre deux stations."
+    },
+    {
+      "id": "la-ville-de-demain",
+      "titre": "La ville de demain : vers des villes durables",
+      "ordre": 4,
+      "periode": "T1",
+      "notions": [
+        "Définir le développement durable et ses trois piliers",
+        "Identifier les problèmes des villes actuelles (pollution, étalement, inégalités)",
+        "Décrire un écoquartier et ses aménagements",
+        "Présenter des solutions pour une ville durable : mobilités douces, énergies renouvelables, végétalisation",
+        "Identifier les acteurs qui imaginent la ville de demain",
+        "Comprendre le rôle des habitants dans la ville durable"
+      ],
+      "motsCles": [
+        "ville durable",
+        "développement durable",
+        "écoquartier",
+        "mobilités douces",
+        "énergies renouvelables",
+        "végétalisation",
+        "îlot de chaleur",
+        "tri des déchets",
+        "transports en commun",
+        "acteurs",
+        "urbanisme"
+      ],
+      "reference": "Développement durable : développement qui répond aux besoins des générations présentes sans compromettre ceux des générations futures.\nTrois piliers du développement durable : environnemental (protéger la nature), social (réduire les inégalités, bien vivre ensemble), économique (créer des emplois et des richesses).\nVille durable : ville qui cherche à réduire son impact sur l'environnement tout en offrant une bonne qualité de vie à tous ses habitants.\nProblèmes des villes actuelles : pollution de l'air, bruit, embouteillages, étalement urbain qui consomme des terres agricoles, production de déchets, inégalités.\nÎlot de chaleur urbain : en ville, la température est plus élevée qu'à la campagne à cause du béton, du goudron et du manque de végétation.\nÉcoquartier : quartier conçu pour respecter l'environnement : bâtiments économes en énergie, énergies renouvelables, espaces verts, transports doux, mixité sociale.\nExemple : le quartier Vauban à Fribourg-en-Brisgau (Allemagne), écoquartier construit à partir des années 1990, où une grande partie des habitants vit sans voiture.\nMobilités douces : déplacements sans moteur ou peu polluants : marche, vélo, trottinette ; on développe aussi les transports en commun (tramway, bus électriques).\nÉnergies renouvelables : énergies qui ne s'épuisent pas : solaire, éolien, hydraulique, géothermie.\nVégétalisation : création de parcs, toits et murs végétalisés pour rafraîchir la ville et accueillir la biodiversité.\nVille compacte : construire la ville sur elle-même (réhabiliter, densifier) plutôt que de l'étaler.\nActeurs : la mairie et les élus, les urbanistes et architectes, les entreprises, les associations et les habitants.\nLes habitants participent : tri des déchets, économies d'eau et d'énergie, choix des transports, concertations publiques.\nMéthode : pour un projet urbain, identifier le problème, la solution proposée, les acteurs et les effets attendus sur les trois piliers."
+    },
+    {
+      "id": "les-espaces-de-faible-densite",
+      "titre": "Les espaces de faible densité dans le monde",
+      "ordre": 5,
+      "periode": "T2",
+      "notions": [
+        "Calculer et interpréter une densité de population",
+        "Définir un espace de faible densité",
+        "Localiser les grands espaces de faible densité dans le monde",
+        "Identifier les facteurs naturels et humains de la faible densité",
+        "Distinguer espaces à fortes contraintes, espaces de grande biodiversité et espaces agricoles",
+        "Comprendre que ces espaces sont habités et parfois convoités"
+      ],
+      "motsCles": [
+        "densité de population",
+        "faible densité",
+        "espace rural",
+        "contrainte naturelle",
+        "désert",
+        "montagne",
+        "forêt",
+        "milieu",
+        "isolement",
+        "enclavement"
+      ],
+      "reference": "Densité de population : nombre moyen d'habitants par kilomètre carré (hab./km²).\nFormule : densité = nombre d'habitants ÷ superficie en km².\nExemple : 1 000 habitants sur 100 km² donnent une densité de 10 hab./km².\nRepères : la densité moyenne mondiale est d'environ 60 hab./km² ; celle de la France est d'environ 120 hab./km².\nEspace de faible densité : espace où vivent peu d'habitants par km², souvent moins de quelques dizaines. On parle de vide humain quand il n'y a presque personne.\nGrands espaces de faible densité : déserts chauds (Sahara, désert d'Australie), régions froides (Grand Nord canadien, Sibérie, Groenland, Antarctique), hautes montagnes (Himalaya, Andes), forêts tropicales (Amazonie), grandes plaines agricoles.\nContrainte naturelle : caractéristique du milieu qui rend difficile l'installation des hommes : froid, sécheresse, altitude, pente, forêt dense.\nFacteurs humains : isolement, éloignement des villes, manque de routes et de services, histoire du peuplement.\nEnclavement : situation d'un lieu difficile d'accès, mal relié aux autres.\nTrois types d'espaces étudiés en 6e : les espaces à fortes contraintes naturelles, les espaces de grande biodiversité, les espaces agricoles de faible densité.\nCes espaces sont habités : les habitants s'adaptent au milieu et le transforment (irrigation, aménagements, tourisme).\nIls sont parfois convoités pour leurs ressources (pétrole, minerais, bois, terres agricoles) ou pour le tourisme.\nEn France, la « diagonale des faibles densités » (ou diagonale du vide) s'étend des Ardennes aux Pyrénées.\nMéthode : lire une carte des densités en repérant les teintes claires (faibles densités) et les teintes foncées (fortes densités)."
+    },
+    {
+      "id": "habiter-un-espace-a-fortes-contraintes",
+      "titre": "Habiter un espace à fortes contraintes naturelles",
+      "ordre": 6,
+      "periode": "T2",
+      "notions": [
+        "Identifier les contraintes naturelles d'un milieu : aridité, froid, altitude, relief",
+        "Étudier un exemple de désert chaud : le Sahara et ses oasis",
+        "Étudier un exemple de montagne ou de milieu froid",
+        "Décrire comment les habitants s'adaptent à ces contraintes",
+        "Montrer comment les sociétés aménagent et transforment ces espaces",
+        "Identifier les nouvelles activités : tourisme, exploitation des ressources"
+      ],
+      "motsCles": [
+        "contrainte naturelle",
+        "aridité",
+        "désert",
+        "oasis",
+        "irrigation",
+        "nomade",
+        "sédentaire",
+        "altitude",
+        "montagne",
+        "station de ski",
+        "Inuits",
+        "adaptation"
+      ],
+      "reference": "Contrainte naturelle : élément du milieu qui gêne l'installation et les activités humaines.\nAridité : manque d'eau dû à de très faibles pluies (moins de 250 mm par an dans un désert) et à une forte évaporation.\nLe Sahara, en Afrique du Nord, est le plus grand désert chaud du monde (environ 9 millions de km²) ; les températures y sont très élevées le jour et peuvent chuter la nuit.\nOasis : lieu du désert où l'eau est accessible (source, nappe souterraine), ce qui permet de cultiver (palmiers-dattiers, légumes) et de vivre.\nIrrigation : apport d'eau artificiel aux cultures (puits, canaux, forages).\nNomade : personne qui se déplace avec ses troupeaux à la recherche d'eau et de pâturages (exemple : les Touaregs au Sahara). Sédentaire : personne qui vit toujours au même endroit.\nAujourd'hui le Sahara est aussi exploité pour le pétrole, le gaz et les minerais, et accueille des touristes.\nMontagne : contraintes de l'altitude (froid, neige), des pentes fortes et de l'isolement. L'Everest, dans l'Himalaya, est le plus haut sommet du monde (8 849 m).\nAdaptations en montagne : cultures en terrasses, élevage avec transhumance, villages sur les versants ensoleillés (adret).\nLes Alpes sont aménagées pour le tourisme : stations de ski, remontées mécaniques, routes et tunnels.\nMilieux froids : dans l'Arctique, les Inuits (Canada, Groenland) vivaient de la chasse et de la pêche ; aujourd'hui ils vivent dans des villages modernes mais restent isolés.\nLes sociétés modernes réduisent les contraintes grâce à la technique (forages, routes, avions, climatisation), mais ces aménagements coûtent cher et fragilisent parfois le milieu.\nMéthode : pour un espace à fortes contraintes, présenter le milieu, les contraintes, les adaptations des habitants et les aménagements."
+    },
+    {
+      "id": "habiter-un-espace-de-grande-biodiversite",
+      "titre": "Habiter un espace de grande biodiversité : l'exemple de la forêt amazonienne",
+      "ordre": 7,
+      "periode": "T2",
+      "notions": [
+        "Définir la biodiversité",
+        "Localiser la forêt amazonienne et décrire son milieu",
+        "Identifier les habitants de l'Amazonie et leurs modes de vie",
+        "Expliquer les activités qui menacent la forêt : déforestation, élevage, soja, orpaillage",
+        "Présenter les mesures de protection : parcs nationaux, réserves",
+        "Comprendre les conflits entre exploitation et protection"
+      ],
+      "motsCles": [
+        "biodiversité",
+        "forêt tropicale humide",
+        "Amazonie",
+        "peuples autochtones",
+        "déforestation",
+        "front pionnier",
+        "orpaillage",
+        "parc national",
+        "protection",
+        "développement durable"
+      ],
+      "reference": "Biodiversité : diversité des êtres vivants (plantes, animaux, micro-organismes) présents dans un milieu.\nLa forêt amazonienne est la plus grande forêt tropicale humide du monde (environ 5,5 millions de km²). Elle s'étend surtout au Brésil, mais aussi dans huit autres pays et territoires, dont la Guyane française.\nLe fleuve Amazone est le plus puissant fleuve du monde par son débit.\nForêt tropicale humide : forêt dense, chaude et très arrosée toute l'année, située près de l'équateur.\nL'Amazonie abrite une part très importante des espèces vivantes connues de la planète.\nHabitants : des peuples autochtones (Amérindiens) vivant de la chasse, de la pêche, de la cueillette et de petites cultures ; des petits paysans ; des habitants des villes comme Manaus (Brésil), qui compte plus de 2 millions d'habitants.\nPeuples autochtones : peuples qui vivaient sur un territoire avant l'arrivée des colonisateurs.\nDéforestation : destruction de la forêt pour exploiter le bois ou libérer des terres.\nCauses de la déforestation : élevage de bovins, culture du soja, exploitation du bois, routes (comme la Transamazonienne), barrages, mines et orpaillage.\nFront pionnier : zone où l'on défriche et met en valeur de nouvelles terres.\nOrpaillage : recherche de l'or dans les rivières, souvent illégale, qui pollue l'eau au mercure.\nProtection : parcs nationaux et réserves où les activités sont limitées. Le Parc amazonien de Guyane, créé en 2007, est le plus grand parc national de France.\nConflits : entre ceux qui veulent exploiter les ressources pour se développer et ceux qui veulent protéger la forêt et les peuples autochtones.\nMéthode : réaliser un schéma montrant les acteurs, leurs activités et leurs effets sur la forêt."
+    },
+    {
+      "id": "habiter-un-espace-agricole-de-faible-densite",
+      "titre": "Habiter un espace de faible densité à vocation agricole",
+      "ordre": 8,
+      "periode": "T2",
+      "notions": [
+        "Décrire un paysage agricole de faible densité",
+        "Étudier un exemple de grande plaine agricole (la Beauce ou le Middle West américain)",
+        "Expliquer l'agriculture productiviste et la mécanisation",
+        "Comparer avec une agriculture vivrière dans un pays du Sud",
+        "Décrire la vie des habitants : services, déplacements, isolement",
+        "Identifier les évolutions : exode rural, néoruraux, agriculture durable"
+      ],
+      "motsCles": [
+        "espace agricole",
+        "agriculture productiviste",
+        "agriculture vivrière",
+        "mécanisation",
+        "exploitation agricole",
+        "openfield",
+        "rendement",
+        "exode rural",
+        "néoruraux",
+        "agriculture biologique",
+        "service"
+      ],
+      "reference": "Espace agricole de faible densité : espace rural principalement consacré à l'agriculture, où vivent peu d'habitants.\nExploitation agricole : ensemble des terres, des bâtiments et du matériel dirigés par un agriculteur.\nAgriculture productiviste : agriculture qui cherche à produire le plus possible grâce aux machines, aux engrais, aux pesticides et à l'irrigation.\nMécanisation : remplacement du travail humain et animal par des machines (tracteurs, moissonneuses-batteuses).\nRendement : quantité produite par hectare.\nExemple : la Beauce, au sud-ouest de Paris, est une grande plaine céréalière (blé, maïs, colza) aux champs ouverts (openfield) ; on la surnomme le « grenier à blé » de la France.\nExemple : le Middle West des États-Unis (Corn Belt) produit de très grandes quantités de maïs et de soja sur d'immenses exploitations.\nDans ces espaces, peu d'agriculteurs cultivent de très grandes surfaces : la densité est faible.\nAgriculture vivrière : agriculture destinée d'abord à nourrir la famille de l'agriculteur, fréquente dans de nombreux pays d'Afrique et d'Asie ; elle utilise peu de machines.\nVie des habitants : villages éloignés, services (commerces, médecins, écoles) parfois rares et loin ; la voiture est indispensable.\nExode rural : départ des habitants des campagnes vers les villes, important au XXe siècle en France.\nNéoruraux : citadins qui s'installent à la campagne pour la qualité de vie.\nÉvolutions : développement de l'agriculture biologique (sans pesticides ni engrais chimiques), circuits courts, vente directe.\nMéthode : décrire un paysage agricole en identifiant la taille des champs, les cultures, les bâtiments et l'habitat."
+    },
+    {
+      "id": "habiter-un-littoral-industrialo-portuaire",
+      "titre": "Habiter un littoral industrialo-portuaire",
+      "ordre": 9,
+      "periode": "T2",
+      "notions": [
+        "Définir un littoral et une zone industrialo-portuaire",
+        "Localiser de grands ports mondiaux (Shanghai, Singapour, Rotterdam, Le Havre)",
+        "Décrire les aménagements d'un grand port : terminaux, conteneurs, usines",
+        "Expliquer le rôle des ports dans les échanges mondiaux",
+        "Identifier les habitants et les activités d'un littoral industrialo-portuaire",
+        "Comprendre les problèmes : pollution, risques, conflits d'usage"
+      ],
+      "motsCles": [
+        "littoral",
+        "port",
+        "zone industrialo-portuaire",
+        "conteneur",
+        "porte-conteneurs",
+        "terminal",
+        "interface",
+        "mondialisation",
+        "hinterland",
+        "raffinerie",
+        "pollution",
+        "risque industriel"
+      ],
+      "reference": "Littoral : espace de contact entre la terre et la mer.\nPort : lieu aménagé sur un littoral ou un fleuve pour accueillir les navires, charger et décharger les marchandises.\nZone industrialo-portuaire (ZIP) : vaste espace où se regroupent un port et des industries (raffineries, chimie, sidérurgie) qui transforment les matières premières arrivées par la mer.\nConteneur : grande boîte métallique standardisée qui permet de transporter des marchandises par bateau, train ou camion. Porte-conteneurs : navire géant qui transporte des milliers de conteneurs.\nEnviron 80 % des marchandises échangées dans le monde voyagent par la mer.\nMondialisation : mise en relation des différentes parties du monde par les échanges de marchandises, de personnes, de capitaux et d'informations.\nGrands ports : Shanghai (Chine), premier port à conteneurs du monde ; Singapour ; Rotterdam (Pays-Bas), premier port d'Europe ; en France, Le Havre, Marseille-Fos et Dunkerque.\nInterface : zone de contact et d'échanges entre deux espaces (ici, la mer et la terre).\nHinterland (arrière-pays) : espace intérieur desservi par un port, relié par routes, voies ferrées, fleuves et oléoducs.\nAménagements : quais, terminaux à conteneurs, grues, bassins, digues, zones de stockage, autoroutes et voies ferrées.\nHabitants : dockers, ouvriers, employés de la logistique ; les villes portuaires accueillent des quartiers résidentiels près des installations.\nProblèmes : pollution de l'air et de l'eau, marées noires, risques industriels (usines classées Seveso), destruction de milieux naturels (zones humides), conflits avec les habitants et les pêcheurs.\nMéthode : sur une photographie ou un plan, repérer l'avant-port, les terminaux, les zones industrielles et les axes de transport."
+    },
+    {
+      "id": "habiter-un-littoral-touristique",
+      "titre": "Habiter un littoral touristique",
+      "ordre": 10,
+      "periode": "T3",
+      "notions": [
+        "Définir le tourisme et la littoralisation",
+        "Localiser de grands littoraux touristiques (Méditerranée, Caraïbes)",
+        "Étudier un exemple de station balnéaire aménagée (Cancún, La Grande-Motte ou la Côte d'Azur)",
+        "Identifier les habitants permanents et les touristes",
+        "Expliquer les effets du tourisme : emplois, saisonnalité, bétonisation",
+        "Présenter les mesures de protection du littoral"
+      ],
+      "motsCles": [
+        "tourisme",
+        "touriste",
+        "littoralisation",
+        "station balnéaire",
+        "saisonnalité",
+        "marina",
+        "aménagement",
+        "bétonisation",
+        "érosion",
+        "conflit d'usage",
+        "loi Littoral",
+        "Conservatoire du littoral"
+      ],
+      "reference": "Tourisme : déplacement pour les loisirs, hors de son lieu de vie habituel, pour au moins une nuit.\nLittoralisation : concentration croissante des hommes et des activités sur les littoraux.\nStation balnéaire : ville ou village aménagé au bord de la mer pour accueillir les touristes (hôtels, résidences, plages, ports de plaisance).\nMarina : port de plaisance entouré de logements, où les bateaux peuvent s'amarrer près des résidences.\nLe bassin méditerranéen est la première région touristique du monde ; la France est l'un des pays les plus visités au monde.\nExemple : Cancún, au Mexique (presqu'île du Yucatán), station balnéaire créée à partir des années 1970 par l'État mexicain sur un littoral presque vide ; elle accueille aujourd'hui des millions de touristes par an.\nExemple : La Grande-Motte, station créée dans les années 1960 lors de l'aménagement du littoral du Languedoc-Roussillon par l'État (mission Racine, lancée en 1963).\nExemple : la Côte d'Azur (Nice, Cannes), littoral touristique très ancien et très urbanisé.\nHabitants : habitants permanents (souvent nombreux à travailler dans le tourisme), travailleurs saisonniers, propriétaires de résidences secondaires, touristes.\nSaisonnalité : variation de l'activité selon les saisons ; la population peut être multipliée en été.\nEffets positifs : emplois, revenus, équipements.\nEffets négatifs : bétonisation du littoral, hausse du prix des logements, embouteillages, pollution, consommation d'eau, érosion des plages, conflits d'usage.\nConflit d'usage : désaccord entre des acteurs qui veulent utiliser un même espace de façons différentes (touristes, pêcheurs, promoteurs, protecteurs de la nature).\nProtection en France : création du Conservatoire du littoral en 1975 (qui achète des terrains pour les protéger) et loi Littoral en 1986 (qui limite les constructions au bord de la mer).\nMéthode : décrire un paysage de station balnéaire en repérant plage, front de mer, immeubles, port de plaisance et arrière-pays."
+    },
+    {
+      "id": "la-repartition-de-la-population-mondiale",
+      "titre": "La répartition de la population mondiale",
+      "ordre": 11,
+      "periode": "T3",
+      "notions": [
+        "Connaître l'effectif de la population mondiale",
+        "Localiser les grands foyers de peuplement : Asie de l'Est, Asie du Sud, Europe",
+        "Localiser les foyers secondaires et les vides humains",
+        "Expliquer la répartition par des facteurs naturels et historiques",
+        "Utiliser la notion de densité pour comparer des espaces",
+        "Lire une carte par points ou par anamorphose de la population mondiale"
+      ],
+      "motsCles": [
+        "population mondiale",
+        "répartition",
+        "foyer de peuplement",
+        "vide humain",
+        "densité",
+        "littoralisation",
+        "vallée fluviale",
+        "Asie",
+        "anamorphose",
+        "peuplement"
+      ],
+      "reference": "La population mondiale dépasse 8 milliards d'habitants (seuil atteint en 2022 selon l'ONU).\nLa population est très inégalement répartie : une grande partie de l'humanité vit sur une petite partie des terres émergées.\nFoyer de peuplement : région où les hommes sont nombreux et concentrés, avec de fortes densités.\nTrois grands foyers : l'Asie de l'Est (Chine, Japon, Corée), l'Asie du Sud (Inde, Pakistan, Bangladesh) et l'Europe.\nL'Asie regroupe environ 6 habitants de la planète sur 10. L'Inde et la Chine comptent chacune plus de 1,4 milliard d'habitants ; l'Inde est le pays le plus peuplé du monde depuis 2023.\nFoyers secondaires : Nord-Est des États-Unis, golfe de Guinée (Nigeria), vallée du Nil (Égypte), Sud-Est du Brésil, Asie du Sud-Est (Java en Indonésie).\nVide humain : espace presque inhabité (Sahara, Antarctique, Grand Nord, forêt amazonienne, hautes montagnes).\nFacteurs naturels favorables : climat tempéré ou de mousson, plaines, vallées fluviales, deltas, littoraux, sols fertiles, accès à l'eau.\nFacteurs naturels défavorables : froid, aridité, altitude, forêt dense.\nFacteurs historiques et économiques : peuplement ancien (civilisations des vallées du Nil, du Gange, du fleuve Jaune), développement des villes, de l'industrie et des échanges.\nDe nombreux hommes vivent près des littoraux et des fleuves : c'est la littoralisation.\nDensité = nombre d'habitants ÷ superficie. Exemple : le Bangladesh dépasse 1 000 hab./km², le Canada a environ 4 hab./km².\nAnamorphose : carte où la taille des pays est déformée proportionnellement à leur population.\nMéthode : sur une carte des densités, nommer les foyers, puis les vides, et proposer une explication pour chacun."
+    },
+    {
+      "id": "les-dynamiques-de-la-population-mondiale",
+      "titre": "Les dynamiques de la population mondiale",
+      "ordre": 12,
+      "periode": "T3",
+      "notions": [
+        "Décrire la croissance de la population mondiale depuis 1800",
+        "Définir natalité, mortalité et accroissement naturel",
+        "Distinguer les pays à forte croissance et les pays à population vieillissante",
+        "Expliquer la croissance urbaine et l'exode rural",
+        "Identifier les grandes migrations internationales",
+        "Présenter les perspectives d'évolution de la population mondiale"
+      ],
+      "motsCles": [
+        "croissance démographique",
+        "natalité",
+        "mortalité",
+        "accroissement naturel",
+        "fécondité",
+        "vieillissement",
+        "exode rural",
+        "urbanisation",
+        "migration",
+        "migrant",
+        "projection"
+      ],
+      "reference": "Croissance démographique : augmentation du nombre d'habitants.\nRepères : environ 1 milliard d'habitants vers 1800, 2 milliards en 1927, 6 milliards en 1999, 8 milliards en 2022.\nNatalité : nombre de naissances. Mortalité : nombre de décès.\nAccroissement naturel = naissances − décès. S'il est positif, la population augmente.\nFécondité : nombre moyen d'enfants par femme. Il faut environ 2,1 enfants par femme pour que la population se renouvelle.\nLa croissance s'explique d'abord par la baisse de la mortalité (progrès de la médecine, de l'hygiène, de l'alimentation), alors que la natalité reste un temps élevée.\nAujourd'hui la croissance est la plus forte en Afrique subsaharienne (exemple : le Nigeria, pays le plus peuplé d'Afrique, à forte fécondité).\nVieillissement : augmentation de la part des personnes âgées. Il touche l'Europe, le Japon et la Chine, où la fécondité est faible.\nLe Japon perd des habitants : il y a plus de décès que de naissances.\nUrbanisation : depuis 2007, plus de la moitié de l'humanité vit en ville ; la croissance urbaine est très rapide en Afrique et en Asie, alimentée par l'exode rural.\nMigration : déplacement d'une personne qui change de lieu de vie de façon durable. Migrant international : personne qui vit dans un autre pays que celui où elle est née.\nOn compte environ 300 millions de migrants internationaux dans le monde, soit moins de 4 % de la population mondiale.\nLes migrations ont des causes économiques (chercher du travail), politiques (fuir une guerre ou des persécutions : réfugiés), familiales, climatiques.\nProjections de l'ONU : environ 9,7 milliards d'habitants en 2050 ; la croissance ralentit car la fécondité baisse presque partout.\nMéthode : lire un graphique d'évolution de la population en repérant les dates, les valeurs et le rythme de la croissance."
+    },
+    {
+      "id": "la-variete-des-formes-d-occupation-spatiale",
+      "titre": "La variété des formes d'occupation spatiale dans le monde",
+      "ordre": 13,
+      "periode": "T3",
+      "notions": [
+        "Distinguer espaces urbains, espaces ruraux et espaces peu occupés",
+        "Décrire des formes d'occupation dense : mégapoles, campagnes densément peuplées d'Asie",
+        "Décrire des formes d'occupation lâche : grandes exploitations, déserts, montagnes",
+        "Comparer les manières d'habiter selon les régions du monde",
+        "Relier les formes d'occupation aux milieux, à l'histoire et au niveau de développement",
+        "Réaliser un croquis ou un schéma de synthèse sur l'habiter dans le monde"
+      ],
+      "motsCles": [
+        "occupation de l'espace",
+        "espace urbain",
+        "espace rural",
+        "rizière",
+        "campagne densément peuplée",
+        "étalement urbain",
+        "littoralisation",
+        "habitat groupé",
+        "habitat dispersé",
+        "croquis",
+        "synthèse"
+      ],
+      "reference": "Occupation de l'espace : manière dont les hommes s'installent sur un territoire et l'utilisent (habitations, cultures, routes, activités).\nLes hommes habitent la Terre de manières très variées selon les milieux, l'histoire et le niveau de développement.\nEspaces urbains : villes et métropoles, très densément occupées ; les mégapoles concentrent des dizaines de millions d'habitants (Tokyo, Delhi, Shanghai).\nCampagnes densément peuplées : en Asie du Sud et de l'Est (deltas, plaines rizicoles), de nombreux paysans cultivent de petites parcelles ; la riziculture demande beaucoup de main-d'œuvre.\nRizière : champ inondé où l'on cultive le riz, souvent aménagé en terrasses dans les régions de collines.\nEspaces ruraux peu peuplés : grandes plaines agricoles mécanisées (Beauce, Middle West), où les exploitations sont vastes et les habitants peu nombreux.\nEspaces peu occupés : déserts, régions froides, hautes montagnes, grandes forêts, avec des formes d'habitat adaptées (oasis, villages isolés).\nLittoraux : espaces de plus en plus occupés (ports, stations touristiques, villes), c'est la littoralisation.\nHabitat groupé : maisons rassemblées en villages ou en villes. Habitat dispersé : maisons et fermes isolées.\nÉtalement urbain : extension des villes sur les campagnes, visible partout dans le monde.\nDans les pays riches, la population est très majoritairement urbaine (environ 80 % en France) ; dans plusieurs pays d'Afrique et d'Asie, une part importante vit encore à la campagne.\nSynthèse du programme de 6e : habiter une métropole, un espace de faible densité, un littoral ; partout, habiter c'est s'adapter au milieu et le transformer.\nMéthode : un croquis comporte un titre, une légende organisée et des figurés (surfaces pour les foyers, points pour les villes, lignes ou flèches pour les flux)."
+    }
+  ]
+}

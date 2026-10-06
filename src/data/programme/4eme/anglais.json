@@ -1,0 +1,380 @@
+{
+  "classe": "4ème",
+  "matiere": "Anglais",
+  "programme": "Langues vivantes cycle 4 (LV1, niveau A2) — BO spécial n°11 du 26/11/2015, ajusté BO n°31 du 30/07/2020",
+  "modele": "claude-opus-5-5 (abonnement)",
+  "genereLe": "2026-10-05",
+  "relu": false,
+  "chapitres": [
+    {
+      "id": "se-reperer-en-ville-imperatif",
+      "titre": "Se repérer en ville : l'impératif et les prépositions de lieu (getting around London)",
+      "ordre": 1,
+      "periode": "T1",
+      "notions": [
+        "Donner une consigne ou un itinéraire avec l'impératif (Turn left, Go straight on)",
+        "Construire l'impératif négatif avec Don't et la suggestion avec Let's",
+        "Situer un lieu avec les prépositions next to, opposite, between, behind, in front of, on the corner of",
+        "Demander son chemin poliment (Excuse me, how can I get to…?)",
+        "Comprendre un plan de ville et un itinéraire en métro (the Tube)",
+        "Nommer des lieux célèbres de Londres"
+      ],
+      "motsCles": [
+        "imperative",
+        "don't",
+        "let's",
+        "turn left",
+        "turn right",
+        "go straight on",
+        "next to",
+        "opposite",
+        "between",
+        "on the corner of",
+        "the Tube",
+        "landmark"
+      ],
+      "reference": "Impératif : base verbale sans sujet : Turn left. Go straight on. Cross the street.\nImpératif négatif : Don't + base verbale : Don't cross here! Don't be late!\nLet's + base verbale = proposition qui inclut celui qui parle : Let's take the Tube.\nPour être poli, on ajoute please : Please sit down. / Sit down, please.\nDemander son chemin : Excuse me, how can I get to Trafalgar Square? / Where is the nearest Tube station? / Is it far from here?\nDonner un itinéraire : go straight on (tout droit), turn left / right, take the first street on the left, go past the church (passer devant), cross the bridge, go along the river (longer).\nIt's on your left / on your right. You can't miss it.\nPrépositions de lieu : next to (à côté de), opposite (en face de), between … and … (entre), behind (derrière), in front of (devant), near (près de), on the corner of (à l'angle de).\nExemple : The bank is between the café and the bookshop, opposite the park.\nin + quartier ou rue sans numéro (in Oxford Street), at + adresse précise (at 10 Downing Street).\nLieux de la ville : station, museum, bridge, square, crossroads (carrefour), traffic lights (feux), pedestrian crossing (passage piéton).\nLondres : capitale du Royaume-Uni, traversée par la Tamise (the Thames).\nRepères : Buckingham Palace (résidence du roi), Big Ben (la cloche de la tour Elizabeth, au Parlement de Westminster), the Tower of London, the London Eye, Trafalgar Square.\n10 Downing Street est la résidence du Premier ministre britannique.\nThe Tube (the Underground) : le métro de Londres, ouvert en 1863, le plus ancien du monde. Mind the gap!\nAu Royaume-Uni, on roule à gauche : Look right before you cross."
+    },
+    {
+      "id": "genitif-et-possessifs",
+      "titre": "Le génitif et les pronoms possessifs : la famille royale (the Royal Family)",
+      "ordre": 2,
+      "periode": "T1",
+      "notions": [
+        "Exprimer l'appartenance avec le génitif 's (Charles's son)",
+        "Placer l'apostrophe après le -s d'un pluriel (my parents' car)",
+        "Distinguer le génitif 's et la construction of pour les choses",
+        "Employer les adjectifs possessifs my, your, his, her, its, our, their",
+        "Employer les pronoms possessifs mine, yours, his, hers, ours, theirs",
+        "Demander à qui appartient quelque chose avec Whose…?",
+        "Présenter les liens de parenté dans une famille (family tree)"
+      ],
+      "motsCles": [
+        "genitive",
+        "'s",
+        "s'",
+        "whose",
+        "mine",
+        "yours",
+        "hers",
+        "ours",
+        "theirs",
+        "family tree",
+        "grandson",
+        "the Royal Family"
+      ],
+      "reference": "Génitif : possesseur + 's + objet possédé, sans article devant l'objet : William's wife (la femme de William).\nOrdre inverse du français : the King's palace = le palais du roi.\nNom pluriel en -s : on ajoute seulement l'apostrophe : my parents' house (la maison de mes parents).\nPluriel irrégulier sans -s : on ajoute 's : the children's room.\nNom propre en -s : Charles's son ou Charles' son (les deux s'écrivent).\nPour une chose, on emploie plutôt of : the roof of the house, the capital of England.\nGénitif de lieu : at my grandmother's (chez ma grand-mère), at the baker's.\nAdjectifs possessifs (devant un nom) : my, your, his (à lui), her (à elle), its (objet, animal), our, their.\nHis / her s'accordent avec le possesseur, pas avec l'objet : Charlotte and her brother.\nPronoms possessifs (remplacent le nom) : mine, yours, his, hers, ours, yours, theirs : This bag is mine.\nPas d'apostrophe dans les possessifs : its, hers, ours, yours, theirs. It's = it is.\nWhose + nom ? = À qui ? : Whose phone is this? — It's Tom's. / It's mine.\nParenté : parents, grandparents, uncle, aunt, cousin, nephew, niece, grandson, granddaughter, only child, twins.\nFamille royale : Elizabeth II a régné de 1952 à 2022.\nCharles III, son fils, est roi depuis le 8 septembre 2022 ; il a été couronné le 6 mai 2023. Son épouse est la reine Camilla.\nWilliam, fils aîné de Charles, est prince de Galles (Prince of Wales) ; sa femme est Catherine.\nLeurs enfants : George, Charlotte et Louis. George is William's eldest son.\nLe roi est le chef de l'État, mais c'est le Premier ministre qui gouverne (monarchie constitutionnelle)."
+    },
+    {
+      "id": "poser-des-questions",
+      "titre": "Poser des questions : mots interrogatifs et questions sujet (interviews)",
+      "ordre": 3,
+      "periode": "T1",
+      "notions": [
+        "Choisir le bon mot interrogatif : what, which, who, whose, where, when, why, how",
+        "Employer how + adjectif ou adverbe : how old, how long, how often, how far, how tall",
+        "Distinguer question sur le sujet (Who called you?) et question sur le complément (Who did you call?)",
+        "Placer la préposition en fin de question (Who are you talking to?)",
+        "Distinguer what et which",
+        "Préparer et mener une interview"
+      ],
+      "motsCles": [
+        "question word",
+        "who",
+        "which",
+        "whose",
+        "why",
+        "how often",
+        "how long",
+        "how far",
+        "subject question",
+        "interview",
+        "auxiliary"
+      ],
+      "reference": "Ordre d'une question : mot interrogatif + auxiliaire + sujet + verbe : Where do you live? What is she doing?\nWho (qui), What (que, quoi, quel), Which (lequel, quel parmi un choix limité), Whose (à qui), Where (où), When (quand), Why (pourquoi), How (comment).\nWhat colour is it? / What time is it? / What kind of music do you like?\nWhich : choix entre éléments connus : Which do you prefer, tea or coffee?\nWhy…? — Because… : Why are you late? — Because I missed the bus.\nHow + adjectif / adverbe : How old are you? How tall is he? How far is it? How long does it take? How often do you train? How many brothers have you got? How much is it?\nHow often? (fréquence) : Twice a week. How long? (durée) : For two hours.\nQuestion sur le sujet : pas d'auxiliaire do / did, ordre affirmatif : Who won the match? What happened?\nQuestion sur le complément : auxiliaire obligatoire : Who did you meet? What did you buy?\nComparer : Who saw Tom? (on cherche le sujet) / Who did Tom see? (on cherche le complément).\nPréposition rejetée en fin de question : Where are you from? What are you looking at? Who are you talking to?\nRéponses courtes : Do you like football? — Yes, I do. / Can you swim? — No, I can't.\nInterview : se présenter, poser des questions ouvertes (Wh-), relancer (Really? Why?), remercier (Thank you for your time).\nErreur fréquente : Where you live? (oubli de l'auxiliaire) ; Who did win? (auxiliaire inutile dans une question sujet)."
+    },
+    {
+      "id": "gerondif-ou-infinitif",
+      "titre": "Exprimer ses goûts : verbe + -ing ou to + base verbale (hobbies)",
+      "ordre": 4,
+      "periode": "T1",
+      "notions": [
+        "Employer like, love, enjoy, hate, can't stand, don't mind + V-ing pour parler de ses goûts",
+        "Employer want, would like, decide, hope, learn + to + base verbale",
+        "Distinguer I like (goût général) et I'd like (souhait)",
+        "Employer V-ing après une préposition (be good at, be interested in, be fond of)",
+        "Nuancer ses goûts du plus positif au plus négatif",
+        "Parler de ses loisirs et de ses activités"
+      ],
+      "motsCles": [
+        "hobbies",
+        "enjoy",
+        "can't stand",
+        "don't mind",
+        "would like",
+        "be good at",
+        "be interested in",
+        "be fond of",
+        "-ing",
+        "to + base verbale",
+        "keen on"
+      ],
+      "reference": "Après les verbes de goût, on emploie V-ing : I love dancing. She enjoys reading. I hate getting up early.\nÉchelle des goûts : love > really like > like > don't mind (ça m'est égal) > don't like > hate > can't stand (ne pas supporter).\nEnjoy, don't mind, can't stand, finish, stop sont toujours suivis de V-ing : I can't stand waiting.\nAprès une préposition, toujours V-ing : I'm good at drawing. He's interested in cooking. She's fond of swimming. I'm keen on playing chess.\nWant, would like, decide, hope, learn, need, plan + to + base verbale : I want to play the guitar. I'd like to go to London.\nI like swimming = j'aime nager (en général) / I'd like to swim = j'aimerais nager (maintenant, souhait).\nWould like est poli : Would you like to come? — Yes, I'd love to.\nLike et love peuvent aussi être suivis de to : I like to read in bed (habitude choisie).\nOrthographe de -ing : e muet tombe (dance → dancing), consonne doublée (swim → swimming), -ie → -ying (lie → lying).\nLe V-ing peut être sujet : Swimming is good for you. Reading is my favourite hobby.\nLoisirs : play + sport de ballon (play football), go + activité en -ing (go swimming, go skateboarding), do + art martial ou activité (do judo, do gymnastics).\nInstruments : play the piano, play the drums.\nErreur fréquente : I enjoy to swim (faux) → I enjoy swimming ; I want playing (faux) → I want to play."
+    },
+    {
+      "id": "prepositions-de-temps-et-fetes",
+      "titre": "Se situer dans le temps : in, on, at, for, during (festivals and celebrations)",
+      "ordre": 5,
+      "periode": "T1",
+      "notions": [
+        "Employer at avec une heure, un moment précis et une fête (at 6 o'clock, at Christmas)",
+        "Employer on avec un jour ou une date (on Monday, on 5th November)",
+        "Employer in avec un mois, une saison, une année, une partie de la journée",
+        "Exprimer une durée avec for et un moment avec during",
+        "Exprimer un intervalle avec from … to et une limite avec until",
+        "Lire et dire une date en anglais",
+        "Présenter des fêtes et traditions du monde anglophone"
+      ],
+      "motsCles": [
+        "at",
+        "on",
+        "in",
+        "for",
+        "during",
+        "from … to",
+        "until",
+        "date",
+        "Bonfire Night",
+        "Thanksgiving",
+        "St Patrick's Day",
+        "Halloween"
+      ],
+      "reference": "at + heure : at 7 o'clock, at half past six, at noon, at midnight.\nat + moment ou fête : at night, at the weekend (anglais britannique), at Christmas, at Easter.\non + jour ou date : on Monday, on Sunday morning, on 31st October, on Christmas Day, on my birthday.\nin + mois, saison, année, siècle : in March, in winter, in 1605, in the 21st century.\nin + partie de la journée : in the morning, in the afternoon, in the evening (mais at night).\nPas de préposition devant next, last, this, every : next Saturday, last week, every year.\nfor + durée (combien de temps) : I stayed in Dublin for two weeks.\nduring + nom de période (pendant quand) : during the holidays, during the night.\nfrom … to / until : The shop is open from 9 to 6. Wait until Friday.\nDates : on 5th November se dit « on the fifth of November » ; écrit à l'américaine November 5.\nHalloween : 31 octobre (trick or treat, pumpkins, costumes).\nBonfire Night (Guy Fawkes Night) : 5 novembre au Royaume-Uni ; on rappelle l'échec du complot des poudres (Gunpowder Plot, 1605) contre le Parlement, avec feux de joie et feux d'artifice.\nThanksgiving : aux États-Unis, le quatrième jeudi de novembre ; repas en famille avec de la dinde (turkey).\nChristmas Day (25 décembre) puis Boxing Day (26 décembre) au Royaume-Uni.\nSt Patrick's Day : 17 mars, fête nationale de l'Irlande (parades, vert, trèfle : shamrock).\nBurns Night : 25 janvier en Écosse, en l'honneur du poète Robert Burns."
+    },
+    {
+      "id": "indefinis-some-any-no-every",
+      "titre": "Les indéfinis somebody, anything, nowhere… : une enquête (Sherlock Holmes)",
+      "ordre": 6,
+      "periode": "T2",
+      "notions": [
+        "Former les composés de some, any, no et every avec -body / -one, -thing, -where",
+        "Employer some- à la forme affirmative et dans une offre ou une demande",
+        "Employer any- à la forme négative et interrogative",
+        "Employer no- et nobody avec un verbe à la forme affirmative (une seule négation)",
+        "Accorder les composés de every- et de no- au singulier",
+        "Découvrir Sherlock Holmes et le vocabulaire de l'enquête"
+      ],
+      "motsCles": [
+        "somebody",
+        "someone",
+        "something",
+        "somewhere",
+        "anybody",
+        "anything",
+        "nobody",
+        "nothing",
+        "nowhere",
+        "everybody",
+        "detective",
+        "clue"
+      ],
+      "reference": "Composés : some / any / no / every + -body ou -one (personnes), + -thing (choses), + -where (lieux).\nsomebody = someone : quelqu'un ; something : quelque chose ; somewhere : quelque part.\nsome- à l'affirmative : Somebody stole the diamond. I heard something.\nsome- aussi dans une offre ou une demande polie : Would you like something to drink?\nany- à la négative et à l'interrogative : I didn't see anybody. Did you find anything?\nanything / anywhere à l'affirmative = n'importe quoi / n'importe où : You can sit anywhere.\nno- = négation, avec un verbe affirmatif : Nobody knows. I saw nothing. (= I didn't see anything).\nUne seule négation en anglais : jamais I didn't see nobody.\nevery- : everybody (tout le monde), everything (tout), everywhere (partout).\neverybody, nobody, somebody se conjuguent au singulier : Everybody is here. Nobody knows the truth.\nAdjectif après le composé : something strange (quelque chose d'étrange), somewhere quiet.\nSherlock Holmes : détective imaginé par l'écrivain écossais Arthur Conan Doyle ; premier roman : A Study in Scarlet (1887).\nIl habite au 221B Baker Street, à Londres, avec son ami le docteur Watson, qui raconte ses enquêtes.\nMéthode de Holmes : observer les détails (clues) et raisonner par déduction.\nVocabulaire de l'enquête : a detective, a crime, a thief, a suspect, a witness (témoin), a clue (indice), evidence (preuves), a magnifying glass (loupe), to steal, to solve a mystery."
+    },
+    {
+      "id": "adverbes-de-maniere",
+      "titre": "Les adverbes de manière : décrire une performance (talent show)",
+      "ordre": 7,
+      "periode": "T2",
+      "notions": [
+        "Former un adverbe de manière avec -ly (slow → slowly)",
+        "Appliquer les règles d'orthographe (happy → happily, gentle → gently)",
+        "Connaître les adverbes irréguliers well, fast, hard, late",
+        "Distinguer adjectif et adverbe (a good singer / she sings well)",
+        "Placer l'adverbe de manière après le verbe et son complément",
+        "Commenter une performance : chant, danse, musique"
+      ],
+      "motsCles": [
+        "adverb",
+        "-ly",
+        "well",
+        "fast",
+        "hard",
+        "late",
+        "beautifully",
+        "carefully",
+        "perfectly",
+        "talent show",
+        "performance"
+      ],
+      "reference": "L'adjectif décrit un nom (a quiet boy) ; l'adverbe de manière décrit une action (He speaks quietly).\nFormation : adjectif + -ly : slow → slowly, quick → quickly, careful → carefully, perfect → perfectly.\nOrthographe : consonne + y → -ily (happy → happily, easy → easily) ; -le → -ly (gentle → gently, terrible → terribly) ; -ic → -ically (fantastic → fantastically).\nIrréguliers : good → well (She dances well).\nMême forme que l'adjectif : fast (a fast runner / he runs fast), hard (hard work / she works hard), late, early.\nAttention : hardly = à peine, lately = récemment ; ce ne sont pas les adverbes de hard et late.\nPlace : après le verbe, ou après le complément s'il y en a un : She sang the song beautifully (jamais entre le verbe et son complément).\nAprès be, look, seem, feel, on emploie un adjectif : She looks happy. The music sounds good.\nCertains adjectifs se terminent déjà par -ly : friendly, lovely, lonely ; pour l'adverbe, on dit in a friendly way.\nNuancer : very well, quite badly, really fast, too slowly.\nTalent show : un concours de talents (chanteurs, danseurs, magiciens) devant un jury (the judges) et un public (the audience).\nVocabulaire : perform, a performer, a stage (scène), to clap (applaudir), to vote, the winner.\nCommenter : He played the piano perfectly. She didn't sing loudly enough. They danced really well."
+    },
+    {
+      "id": "too-enough-so-such",
+      "titre": "Too, enough, so, such : l'excès et l'intensité (school uniforms)",
+      "ordre": 8,
+      "periode": "T2",
+      "notions": [
+        "Exprimer l'excès avec too + adjectif (too short, too expensive)",
+        "Exprimer la quantité excessive avec too much et too many",
+        "Exprimer la suffisance avec adjectif + enough et enough + nom",
+        "Exprimer l'insuffisance avec not … enough",
+        "Renforcer avec so + adjectif et such (a) + adjectif + nom",
+        "Décrire et donner son avis sur les vêtements et l'uniforme scolaire"
+      ],
+      "motsCles": [
+        "too",
+        "too much",
+        "too many",
+        "enough",
+        "not … enough",
+        "so",
+        "such",
+        "school uniform",
+        "blazer",
+        "tie",
+        "jumper"
+      ],
+      "reference": "too + adjectif = trop : This skirt is too short. These shoes are too expensive.\ntoo much + indénombrable : too much homework, too much noise.\ntoo many + dénombrable pluriel : too many rules, too many students.\nenough = assez : il se place APRÈS l'adjectif : big enough, warm enough.\nenough se place AVANT le nom : enough money, enough time.\nnot … enough = pas assez : This coat isn't warm enough.\ntoo / enough + to + base verbale : I'm too tired to go out. She's old enough to come.\nNe pas confondre too (trop) et very (très) : It's very hot (fait) / It's too hot to play (excès, conséquence négative).\nso + adjectif = si, tellement : The uniform is so smart!\nsuch + a / an + adjectif + nom singulier : It's such a nice blazer!\nsuch + adjectif + nom pluriel ou indénombrable : They are such good friends. It's such bad weather.\nso / such … that = tellement … que : It was so cold that we stayed inside.\nUniforme scolaire : très répandu au Royaume-Uni ; chaque établissement a ses couleurs.\nVêtements : a blazer (veste), a tie (cravate), a jumper (pull), a shirt (chemise), trousers (pantalon), a skirt (jupe), shoes, a school badge (écusson).\nOpinion : I think uniforms are too strict / smart / practical. In my opinion, … because …"
+    },
+    {
+      "id": "pronoms-reflechis-et-reciproques",
+      "titre": "Pronoms réfléchis et réciproques : l'amitié (friendship)",
+      "ordre": 9,
+      "periode": "T2",
+      "notions": [
+        "Connaître les pronoms réfléchis myself, yourself, himself, herself, itself, ourselves, yourselves, themselves",
+        "Employer un pronom réfléchi quand le sujet et le complément sont la même personne",
+        "Employer le pronom réfléchi pour insister (I did it myself) et by + réfléchi (seul)",
+        "Exprimer la réciprocité avec each other",
+        "Distinguer They hurt themselves et They hurt each other",
+        "Repérer les verbes pronominaux français non réfléchis en anglais (get up, meet, feel)",
+        "Parler de l'amitié et des relations entre amis"
+      ],
+      "motsCles": [
+        "myself",
+        "yourself",
+        "himself",
+        "herself",
+        "ourselves",
+        "themselves",
+        "each other",
+        "by myself",
+        "enjoy yourself",
+        "friendship",
+        "best friend"
+      ],
+      "reference": "Pronoms réfléchis : myself, yourself, himself, herself, itself, ourselves, yourselves, themselves.\nSingulier en -self, pluriel en -selves.\nEmploi : le sujet fait l'action sur lui-même : She looked at herself in the mirror. I hurt myself.\nExpressions : Enjoy yourself! (amuse-toi bien), Help yourself! (sers-toi), Be careful, don't cut yourself.\nInsistance (moi-même) : I made this cake myself. The singer himself answered.\nby + réfléchi = tout seul : He lives by himself. I did my homework by myself.\nRéciprocité : each other = l'un l'autre, mutuellement : Tom and Ben help each other.\nThey hurt themselves (chacun s'est fait mal) ≠ They hurt each other (ils se sont fait mal l'un à l'autre).\nBeaucoup de verbes pronominaux français ne sont pas réfléchis en anglais : se lever (get up), se réveiller (wake up), se rencontrer (meet), se sentir (feel), se dépêcher (hurry up), se souvenir (remember), se disputer (argue).\nOn dit I feel sad (et non I feel myself sad).\nAmitié : a best friend, a close friend, to get on well with (bien s'entendre), to make friends, to argue / to fall out (se fâcher), to make up (se réconcilier), to trust (faire confiance), to share secrets.\nQualités d'un ami : loyal, honest, kind, funny, reliable (sur qui on peut compter).\nExemple : My best friend and I have known each other since primary school. We trust each other."
+    },
+    {
+      "id": "argumenter-cause-consequence",
+      "titre": "Argumenter : cause, conséquence et opposition (screens and teenagers)",
+      "ordre": 10,
+      "periode": "T3",
+      "notions": [
+        "Exprimer la cause avec because et because of",
+        "Exprimer la conséquence avec so et that's why",
+        "Exprimer l'opposition avec but, however et although",
+        "Organiser un argumentaire (firstly, secondly, finally, on the one hand, on the other hand)",
+        "Donner son opinion, exprimer l'accord et le désaccord (I agree / I disagree)",
+        "Débattre de la place des écrans dans la vie des adolescents"
+      ],
+      "motsCles": [
+        "because",
+        "because of",
+        "so",
+        "that's why",
+        "but",
+        "however",
+        "although",
+        "on the one hand",
+        "on the other hand",
+        "I agree",
+        "I disagree",
+        "screen time"
+      ],
+      "reference": "Cause : because + sujet + verbe : I'm tired because I played video games all night.\nbecause of + nom : I'm tired because of my phone.\nConséquence : so + phrase (donc) : I had no battery, so I couldn't call you.\nthat's why (c'est pourquoi) : Screens keep us awake. That's why we should switch them off before bed.\nOpposition : but (mais) relie deux propositions : It's fun but it's addictive.\nhowever (cependant) en début de phrase, suivi d'une virgule : Social networks are useful. However, they can be dangerous.\nalthough (bien que) + sujet + verbe à l'indicatif : Although he likes his phone, he reads a lot.\nOrganiser : firstly / first of all, secondly, then, finally ; on the one hand … on the other hand (d'un côté … de l'autre).\nAjouter : and, also, moreover (de plus).\nOpinion : I think / I believe / In my opinion / As far as I'm concerned.\nAccord : I agree with you. You're right. Désaccord : I disagree. I don't agree with you. I'm not sure about that.\nAttention : I agree (et non I am agree).\nÉcrans : screen time, a smartphone, a tablet, social networks, to chat online, to be addicted (accro), to switch off, cyberbullying (cyberharcèlement).\nArguments possibles : rester en contact, apprendre, se détendre / fatigue, manque de sommeil, moins de sport, dangers en ligne."
+    },
+    {
+      "id": "want-make-let",
+      "titre": "Want someone to, make et let : adolescents et parents (teenagers and parents)",
+      "ordre": 11,
+      "periode": "T3",
+      "notions": [
+        "Exprimer une volonté sur autrui avec want / would like + complément + to + base verbale",
+        "Employer le pronom complément (me, him, her, us, them) dans cette structure",
+        "Exprimer la permission avec let + complément + base verbale",
+        "Exprimer la contrainte avec make + complément + base verbale",
+        "Exprimer l'autorisation avec be allowed to",
+        "Parler des règles familiales, des tâches ménagères et de l'argent de poche"
+      ],
+      "motsCles": [
+        "want somebody to",
+        "would like somebody to",
+        "let",
+        "make",
+        "be allowed to",
+        "object pronoun",
+        "chores",
+        "pocket money",
+        "curfew",
+        "rules"
+      ],
+      "reference": "Vouloir que quelqu'un fasse quelque chose : want + complément + to + base verbale.\nMy parents want me to tidy my room (et jamais want that I).\nwould like + complément + to : I'd like you to help me.\nLe complément est un nom ou un pronom complément : me, you, him, her, it, us, them : She wants them to come.\nNégation : They don't want us to stay up late.\nQuestion : Do you want me to open the window?\nlet + complément + base verbale (sans to) = laisser, permettre : My mum lets me go out on Saturdays.\nmake + complément + base verbale (sans to) = obliger, faire faire : My dad makes me do the dishes.\nbe allowed to + base verbale = avoir le droit de : I'm allowed to use my phone after dinner. I'm not allowed to go out at night.\nAu passé : let → let, make → made, was / were allowed to.\nTâches ménagères (chores) : do the washing-up / the dishes, tidy my room, make my bed, lay the table, take out the rubbish, walk the dog.\nPocket money : argent de poche ; curfew : heure limite de retour.\nExemple : My parents let me watch TV, but they make me finish my homework first."
+    },
+    {
+      "id": "faire-des-suggestions",
+      "titre": "Proposer et répondre : Let's, Shall we, Why don't we, How about (a trip to Edinburgh)",
+      "ordre": 12,
+      "periode": "T3",
+      "notions": [
+        "Faire une suggestion avec Let's, Shall we…?, Why don't we…?, What about / How about + V-ing",
+        "Choisir la bonne construction après chaque formule (base verbale ou V-ing)",
+        "Accepter ou refuser poliment une proposition",
+        "Proposer son aide avec Shall I…?",
+        "Organiser un voyage : transport, hébergement, activités",
+        "Découvrir Édimbourg, capitale de l'Écosse"
+      ],
+      "motsCles": [
+        "let's",
+        "shall we",
+        "why don't we",
+        "how about",
+        "what about",
+        "suggestion",
+        "Edinburgh",
+        "Scotland",
+        "castle",
+        "Highlands"
+      ],
+      "reference": "Let's + base verbale : Let's visit the castle! Négation : Let's not go there.\nShall we + base verbale ? : Shall we take the train?\nWhy don't we + base verbale ? : Why don't we go to the museum?\nHow about / What about + V-ing ou nom ? : How about going to the Highlands? What about a picnic?\nShall I + base verbale ? = proposer son aide : Shall I book the tickets?\nCould we + base verbale ? : demande polie : Could we stay one more day?\nAccepter : Good idea! That sounds great! Why not? OK, let's do that.\nRefuser poliment : I'm not sure. I'd rather (+ base verbale) … I don't really feel like it. Maybe another time.\nErreur fréquente : How about to go (faux) → How about going ; Let's to go (faux) → Let's go.\nVoyage : to book (réserver), a youth hostel (auberge de jeunesse), a return ticket (aller-retour), a guided tour, a map.\nÉcosse : nation du Royaume-Uni, capitale Édimbourg (Edinburgh) ; plus grande ville : Glasgow.\nÉdimbourg : Edinburgh Castle sur un rocher volcanique, the Royal Mile (rue principale de la vieille ville), Arthur's Seat (colline).\nLe festival d'Édimbourg a lieu chaque année en août ; Hogmanay est le Nouvel An écossais.\nSymboles : le kilt et le tartan, la cornemuse (bagpipes), le chardon (thistle), les Highlands (montagnes du nord)."
+    },
+    {
+      "id": "exclamatives-new-york",
+      "titre": "Les phrases exclamatives : What a…! How…! (discovering New York)",
+      "ordre": 13,
+      "periode": "T3",
+      "notions": [
+        "Former une exclamative avec What a / an + (adjectif) + nom singulier",
+        "Former une exclamative avec What + nom pluriel ou indénombrable (What beautiful buildings!)",
+        "Former une exclamative avec How + adjectif ou adverbe",
+        "Exprimer ses impressions et ses émotions face à un lieu",
+        "Prononcer avec une intonation descendante et écrire avec un point d'exclamation",
+        "Découvrir New York et ses lieux emblématiques"
+      ],
+      "motsCles": [
+        "exclamation",
+        "what a",
+        "how",
+        "amazing",
+        "impressive",
+        "huge",
+        "skyscraper",
+        "Manhattan",
+        "Central Park",
+        "Times Square",
+        "the Big Apple"
+      ],
+      "reference": "What a / an + (adjectif) + nom singulier dénombrable : What a view! What an amazing city!\nWhat + (adjectif) + nom pluriel : What tall buildings!\nWhat + (adjectif) + nom indénombrable : What awful weather! (jamais What a weather).\nHow + adjectif : How beautiful! How noisy it is!\nHow + adverbe : How fast he runs!\nAprès How + adjectif, ordre sujet + verbe affirmatif, sans inversion : How big this park is!\nNe pas oublier l'article a / an : What a nice day (et non What nice day).\nIntonation descendante à l'oral, point d'exclamation à l'écrit.\nAdjectifs d'impression : amazing, impressive, huge, crowded (bondé), noisy, breathtaking, wonderful, scary.\nSentiments : I was amazed / impressed / scared ; It was exciting.\nNew York : plus grande ville des États-Unis, formée de cinq quartiers (boroughs), dont Manhattan et Brooklyn ; surnom : the Big Apple.\nRepères : Central Park (grand parc de Manhattan), Times Square et ses écrans géants, l'Empire State Building (gratte-ciel achevé en 1931), le pont de Brooklyn (ouvert en 1883).\nVocabulaire : a skyscraper (gratte-ciel), a yellow cab (taxi jaune), the subway (métro), a block (pâté de maisons), downtown."
+    }
+  ]
+}

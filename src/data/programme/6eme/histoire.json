@@ -1,0 +1,352 @@
+{
+  "classe": "6ème",
+  "matiere": "Histoire",
+  "programme": "Histoire cycle 3, classe de 6e (BO spécial n°11 du 26/11/2015, ajusté BO n°31 du 30/07/2020) ; EMC : nouveau programme (BO n°24 du 13/06/2024), en vigueur en 6e à la rentrée 2026",
+  "modele": "claude-opus-5-5 (abonnement)",
+  "genereLe": "2026-10-05",
+  "relu": false,
+  "chapitres": [
+    {
+      "id": "debuts-de-l-humanite",
+      "titre": "Les débuts de l'humanité",
+      "ordre": 1,
+      "periode": "T1",
+      "notions": [
+        "Situer les débuts de l'humanité sur une frise chronologique et utiliser les dates « avant le présent »",
+        "Savoir que l'humanité est apparue en Afrique et a peuplé progressivement toute la Terre",
+        "Décrire le mode de vie des chasseurs-cueilleurs nomades du Paléolithique",
+        "Connaître les principaux progrès techniques : outils de pierre taillée, maîtrise du feu",
+        "Présenter l'art des grottes ornées (Chauvet, Lascaux)",
+        "Expliquer comment les scientifiques connaissent la Préhistoire (fouilles, fossiles, datations)"
+      ],
+      "motsCles": [
+        "Préhistoire",
+        "Paléolithique",
+        "hominidés",
+        "Homo sapiens",
+        "fossile",
+        "nomade",
+        "chasseur-cueilleur",
+        "biface",
+        "art pariétal",
+        "archéologue",
+        "migration"
+      ],
+      "reference": "Préhistoire : très longue période qui va de l'apparition des premiers humains à l'invention de l'écriture (vers 3300 av. J.-C.).\nPaléolithique (« âge de la pierre ancienne ») : la plus longue période de la Préhistoire, celle des outils de pierre taillée.\nLes plus anciens fossiles d'hominidés ont été trouvés en Afrique : Toumaï (Tchad, environ 7 millions d'années), Lucy (australopithèque, Éthiopie, environ 3,2 millions d'années, découverte en 1974).\nLes premiers outils de pierre taillée datent de plus de 2,5 millions d'années (Afrique de l'Est).\nLe genre Homo apparaît en Afrique ; Homo erectus quitte l'Afrique il y a environ 2 millions d'années.\nMaîtrise du feu : attestée au plus tard vers 400 000 ans avant le présent ; il sert à se chauffer, s'éclairer, cuire les aliments, se protéger.\nHomo sapiens (notre espèce) apparaît en Afrique il y a environ 300 000 ans.\nEn Europe vivent les Néandertaliens (environ 400 000 à 40 000 ans avant le présent) ; ils enterrent leurs morts.\nHomo sapiens migre hors d'Afrique : Asie, Australie (il y a au moins 50 000 ans), Europe (vers 45 000 à 40 000 ans), Amérique (il y a au moins 15 000 ans, par la Béringie).\nMode de vie : petits groupes nomades de chasseurs-cueilleurs-pêcheurs qui se déplacent selon les saisons et le gibier ; abris sous roche, tentes de peaux, campements.\nOutils : biface, grattoirs, pointes de sagaie, propulseur, aiguilles en os ; le biface est un outil taillé sur deux faces.\nArt pariétal : peintures et gravures sur les parois des grottes ; grotte Chauvet (Ardèche, environ 36 000 ans), grotte de Lascaux (Dordogne, environ 18 000 ans).\nLes climats changent : périodes glaciaires (mammouths, rennes) et réchauffements.\nSources : fossiles, outils, restes de repas et de foyers, peintures ; l'archéologue fouille, le paléontologue étudie les fossiles ; datation au carbone 14 pour les restes de moins de 50 000 ans environ.\nMéthode attendue : se repérer sur une frise chronologique à très grande échelle ; lire une carte des migrations de Homo sapiens ; décrire un document (outil, peinture)."
+    },
+    {
+      "id": "revolution-neolithique",
+      "titre": "La « révolution » néolithique",
+      "ordre": 2,
+      "periode": "T1",
+      "notions": [
+        "Situer le Néolithique dans le temps (à partir de 10 000 av. J.-C. au Proche-Orient) et dans l'espace",
+        "Expliquer le passage à l'agriculture et à l'élevage",
+        "Décrire la sédentarisation et les premiers villages",
+        "Identifier les nouvelles techniques : poterie, pierre polie, tissage",
+        "Comprendre les conséquences sociales : hausse de la population, inégalités, conflits",
+        "Expliquer pourquoi on parle de « révolution » néolithique"
+      ],
+      "motsCles": [
+        "Néolithique",
+        "agriculture",
+        "élevage",
+        "domestication",
+        "sédentaire",
+        "village",
+        "Croissant fertile",
+        "pierre polie",
+        "poterie",
+        "mégalithe",
+        "menhir",
+        "dolmen"
+      ],
+      "reference": "Néolithique (« âge de la pierre nouvelle ») : période qui commence vers 10 000 av. J.-C. au Proche-Orient, quand les humains deviennent agriculteurs et éleveurs.\nPremier foyer : le Croissant fertile (Proche-Orient), avec la culture du blé et de l'orge et l'élevage des chèvres, moutons, porcs et bovins.\nAutres foyers indépendants : Chine (riz, millet), Amérique (maïs, courge), Afrique, Nouvelle-Guinée.\nDomestication : transformation progressive de plantes et d'animaux sauvages par les humains qui les cultivent ou les élèvent.\nLe Néolithique se diffuse lentement : il atteint le territoire de la France vers 6000 à 5000 av. J.-C.\nSédentarisation : les humains vivent toute l'année au même endroit, dans des villages (exemple : Çatal Höyük, en Turquie, vers 7000 av. J.-C.).\nNouvelles techniques : poterie (stocker, cuire), pierre polie (haches pour défricher), tissage (laine, lin), meules pour moudre le grain, greniers.\nConséquences : la nourriture devient plus abondante et peut être stockée, la population augmente.\nApparition d'inégalités (chefs, tombes plus riches), de métiers spécialisés et de conflits entre groupes (villages fortifiés).\nMégalithes : grands monuments de pierre ; menhir (pierre dressée), dolmen (tombe collective) ; alignements de Carnac (Bretagne, vers 4500 av. J.-C.).\nÀ la fin du Néolithique, travail des métaux : cuivre, puis bronze (alliage de cuivre et d'étain), puis fer.\nOn parle de « révolution » car le mode de vie change profondément, mais la transformation s'étale sur plusieurs millénaires.\nMéthode attendue : comparer le mode de vie au Paléolithique et au Néolithique ; lire une carte des foyers et de la diffusion de l'agriculture."
+    },
+    {
+      "id": "premiers-etats-premieres-ecritures",
+      "titre": "Premiers États, premières écritures",
+      "ordre": 3,
+      "periode": "T1",
+      "notions": [
+        "Situer la Mésopotamie et l'Égypte et les dates de l'invention de l'écriture (vers 3300 av. J.-C.)",
+        "Expliquer le lien entre l'écriture et l'organisation des premiers États",
+        "Décrire une cité-État de Mésopotamie : roi, temple, scribes",
+        "Présenter le pouvoir du pharaon dans l'Égypte ancienne",
+        "Connaître le Code de Hammurabi comme exemple de lois écrites",
+        "Savoir que l'invention de l'écriture marque le début de l'Histoire"
+      ],
+      "motsCles": [
+        "État",
+        "écriture",
+        "cunéiforme",
+        "hiéroglyphe",
+        "scribe",
+        "Mésopotamie",
+        "cité-État",
+        "roi",
+        "pharaon",
+        "Nil",
+        "pyramide",
+        "Code de Hammurabi"
+      ],
+      "reference": "État : territoire et population dirigés par un pouvoir organisé (roi, administration, impôts, armée, lois).\nMésopotamie (« pays entre les fleuves ») : région entre le Tigre et l'Euphrate (Irak actuel).\nVers 3300 av. J.-C., à Uruk (Sumer), naissance de l'écriture cunéiforme : signes en forme de clous tracés avec un roseau (calame) sur des tablettes d'argile.\nLes premières écritures servent surtout à compter : récoltes, impôts, troupeaux, échanges ; puis à écrire des lois, des récits, des prières.\nCité-État : ville indépendante avec son territoire, dirigée par un roi ; le temple et la ziggourat sont au centre.\nLe roi mésopotamien est un chef de guerre, un juge et le représentant des dieux ; les scribes, qui savent écrire, travaillent pour lui et pour les temples.\nCode de Hammurabi (roi de Babylone, vers 1750 av. J.-C.) : environ 280 lois gravées sur une stèle de basalte (conservée au Louvre).\nÉgypte : civilisation née le long du Nil, dont la crue annuelle dépose le limon fertile ; « l'Égypte est un don du Nil » (Hérodote).\nVers 3100 av. J.-C., unification de la Haute et de la Basse-Égypte sous l'autorité d'un seul roi, le pharaon.\nÉcriture hiéroglyphique : apparaît vers 3200 av. J.-C. ; signes-images gravés ou peints, écrits aussi sur papyrus.\nLe pharaon est considéré comme un dieu vivant ; il possède les terres, lève les impôts, dirige l'armée et fait construire des monuments.\nPyramides de Gizeh (vers 2500 av. J.-C., dont celle de Khéops) : tombeaux des pharaons.\nChampollion déchiffre les hiéroglyphes en 1822 grâce à la pierre de Rosette (texte en hiéroglyphes, démotique et grec).\nL'invention de l'écriture marque la fin de la Préhistoire et le début de l'Histoire (Antiquité).\nMéthode attendue : expliquer à quoi sert l'écriture pour un État à partir d'une tablette ou d'une stèle."
+    },
+    {
+      "id": "monde-des-cites-grecques",
+      "titre": "Le monde des cités grecques",
+      "ordre": 4,
+      "periode": "T2",
+      "notions": [
+        "Situer le monde grec autour de la Méditerranée entre le VIIIe et le Ve siècle av. J.-C.",
+        "Définir une cité grecque et savoir que les Grecs forment des cités indépendantes",
+        "Identifier ce qui unit les Grecs : langue, dieux, sanctuaires, jeux, récits d'Homère",
+        "Connaître le rôle des récits mythologiques (Iliade, Odyssée)",
+        "Expliquer le fonctionnement de la démocratie athénienne au Ve siècle av. J.-C.",
+        "Savoir qui est citoyen à Athènes et qui en est exclu"
+      ],
+      "motsCles": [
+        "cité",
+        "polythéisme",
+        "mythe",
+        "Homère",
+        "sanctuaire",
+        "Jeux olympiques",
+        "colonie",
+        "Athènes",
+        "citoyen",
+        "démocratie",
+        "Ecclésia",
+        "Acropole"
+      ],
+      "reference": "Cité (polis) : petit État indépendant formé d'une ville et du territoire agricole qui l'entoure, avec ses lois, ses dieux protecteurs et son armée (exemples : Athènes, Sparte, Corinthe).\nDu VIIIe au VIe siècle av. J.-C., les Grecs fondent des colonies autour de la Méditerranée et de la mer Noire ; Marseille (Massalia) est fondée vers 600 av. J.-C. par des Grecs de Phocée.\nMalgré leurs rivalités, les Grecs partagent une même langue, un même alphabet, les mêmes dieux et les mêmes récits.\nPolythéisme : croyance en plusieurs dieux ; les dieux grecs vivent sur l'Olympe (Zeus, roi des dieux ; Athéna, Poséidon, Apollon, Héra...).\nMythe : récit fabuleux mettant en scène des dieux et des héros, qui explique le monde et les origines.\nHomère (VIIIe siècle av. J.-C., selon la tradition) : l'Iliade raconte la guerre de Troie (Achille) ; l'Odyssée raconte le retour d'Ulysse à Ithaque.\nSanctuaires panhelléniques : Delphes (oracle d'Apollon), Olympie (Zeus) ; Jeux olympiques organisés tous les 4 ans à Olympie, selon la tradition à partir de 776 av. J.-C., avec une trêve sacrée.\nAthènes : la démocratie est mise en place par Clisthène vers 508 av. J.-C. et atteint son apogée au Ve siècle av. J.-C. avec Périclès.\nDémocratie (« pouvoir du peuple ») : les citoyens participent directement aux décisions.\nCitoyen athénien : homme libre, majeur, né de père citoyen (et à partir de 451 av. J.-C. de mère fille de citoyen).\nExclus de la citoyenneté : les femmes, les métèques (étrangers libres) et les esclaves, soit la grande majorité de la population.\nEcclésia : assemblée des citoyens qui se réunit sur la colline de la Pnyx ; elle vote les lois, décide de la guerre et de la paix ; la Boulè (500 citoyens tirés au sort) prépare les lois ; l'ostracisme permet d'exiler un citoyen jugé dangereux.\nAcropole d'Athènes : colline sacrée où se trouve le Parthénon, temple dédié à Athéna (construit au Ve siècle av. J.-C.).\nGuerres médiques contre les Perses : Marathon (490 av. J.-C.), Salamine (480 av. J.-C.).\nMéthode attendue : expliquer ce qui unit et ce qui divise les Grecs ; décrire le fonctionnement de la démocratie athénienne à partir d'un schéma."
+    },
+    {
+      "id": "rome-du-mythe-a-l-histoire",
+      "titre": "Rome du mythe à l'histoire",
+      "ordre": 5,
+      "periode": "T2",
+      "notions": [
+        "Raconter le mythe de la fondation de Rome (Romulus et Remus, 753 av. J.-C.)",
+        "Distinguer le mythe et ce que l'histoire et l'archéologie apprennent sur les origines de Rome",
+        "Connaître les grandes étapes : royauté, République (509 av. J.-C.), Empire (27 av. J.-C.)",
+        "Décrire les institutions de la République romaine : consuls, Sénat, assemblées",
+        "Expliquer le passage de la République à l'Empire avec Jules César et Auguste"
+      ],
+      "motsCles": [
+        "mythe",
+        "fondation",
+        "Romulus et Remus",
+        "Énée",
+        "archéologie",
+        "royauté",
+        "République",
+        "consul",
+        "Sénat",
+        "citoyen romain",
+        "empereur",
+        "Auguste"
+      ],
+      "reference": "Mythe de fondation : Romulus et Remus, jumeaux fils du dieu Mars et de Rhea Silvia, abandonnés sur le Tibre, sont recueillis par une louve ; Romulus fonde Rome en 753 av. J.-C. et tue son frère.\nSelon un autre récit, les Romains descendent du Troyen Énée, fils de la déesse Vénus (l'Énéide, poème de Virgile écrit sous Auguste).\nCes récits ont été écrits plusieurs siècles après les faits (Tite-Live, Virgile, Ier siècle av. J.-C.) ; ils servent à glorifier Rome et ses origines divines.\nArchéologie : des traces de cabanes datant du VIIIe siècle av. J.-C. ont été retrouvées sur le Palatin ; Rome naît du regroupement de villages sur des collines au bord du Tibre.\nRoyauté (753-509 av. J.-C. selon la tradition) : sept rois, dont les derniers sont étrusques.\n509 av. J.-C. : les Romains chassent le roi Tarquin le Superbe et fondent la République (res publica, « la chose publique »).\nInstitutions de la République : deux consuls élus pour un an dirigent la cité et l'armée ; le Sénat (anciens magistrats) conseille et contrôle ; les assemblées de citoyens (comices) votent les lois et élisent les magistrats.\nSociété : patriciens (familles nobles) et plébéiens ; les esclaves et les étrangers ne sont pas citoyens.\nRome conquiert l'Italie puis tout le pourtour de la Méditerranée (guerres puniques contre Carthage, IIIe-IIe siècles av. J.-C.).\nJules César conquiert la Gaule (58-51 av. J.-C.), prend le pouvoir et devient dictateur ; il est assassiné en 44 av. J.-C. (aux ides de mars).\nOctave, son fils adoptif, devient seul maître de Rome ; en 27 av. J.-C., le Sénat lui donne le titre d'Auguste : c'est le premier empereur.\nEmpereur : chef suprême qui concentre les pouvoirs politiques, militaires et religieux, tout en conservant en apparence les institutions de la République.\nMéthode attendue : confronter un récit mythique et des découvertes archéologiques ; distinguer légende et histoire."
+    },
+    {
+      "id": "naissance-du-monotheisme-juif",
+      "titre": "La naissance du monothéisme juif dans un monde polythéiste",
+      "ordre": 6,
+      "periode": "T2",
+      "notions": [
+        "Définir monothéisme et polythéisme",
+        "Situer les Hébreux au Proche-Orient au Ier millénaire av. J.-C.",
+        "Connaître la Bible hébraïque et quelques grands récits (Abraham, Moïse, David)",
+        "Distinguer les récits bibliques et ce que l'on sait par l'histoire et l'archéologie",
+        "Expliquer le rôle de l'exil à Babylone dans l'affirmation du monothéisme",
+        "Connaître les grands principes du judaïsme (alliance, Dix Commandements, shabbat)"
+      ],
+      "motsCles": [
+        "monothéisme",
+        "polythéisme",
+        "Hébreux",
+        "Bible hébraïque",
+        "Torah",
+        "alliance",
+        "Abraham",
+        "Moïse",
+        "Dix Commandements",
+        "Temple de Jérusalem",
+        "exil",
+        "diaspora"
+      ],
+      "reference": "Polythéisme : croyance en plusieurs dieux (Égyptiens, Mésopotamiens, Grecs) ; monothéisme : croyance en un dieu unique.\nLes Hébreux vivent au Proche-Orient, entre la Méditerranée et le Jourdain ; ils sont d'abord entourés de peuples polythéistes.\nLa Bible hébraïque est un ensemble de livres écrits et rassemblés sur plusieurs siècles (environ VIIIe-IIe siècles av. J.-C.) ; ses cinq premiers livres forment la Torah.\nRécits bibliques : Dieu fait alliance avec Abraham et lui promet une terre (Canaan) ; Moïse conduit les Hébreux hors d'Égypte et reçoit les Dix Commandements (Tables de la Loi) sur le mont Sinaï.\nAlliance : pacte entre Dieu et son peuple ; les Hébreux doivent respecter sa loi.\nSelon la Bible, David puis son fils Salomon règnent sur un royaume uni ; Salomon fait construire le Temple de Jérusalem.\nL'histoire et l'archéologie attestent l'existence de deux royaumes, Israël au nord et Juda au sud (capitale Jérusalem) ; une stèle du IXe siècle av. J.-C. (Tel Dan) mentionne la « maison de David ».\n722 av. J.-C. : le royaume d'Israël est détruit par les Assyriens.\n587 av. J.-C. : le roi de Babylone Nabuchodonosor prend Jérusalem, détruit le Temple et déporte une partie des habitants : c'est l'exil à Babylone.\nPendant et après l'exil, les textes sont rassemblés et l'idée d'un dieu unique, Yahvé, s'affirme ; le Temple est reconstruit après le retour (fin du VIe siècle av. J.-C.).\n70 apr. J.-C. : les Romains détruisent le second Temple ; les Juifs se dispersent davantage dans le monde : la diaspora.\nPratiques du judaïsme : respect de la Loi, shabbat (jour de repos, du vendredi soir au samedi soir), prière à la synagogue, enseignement des rabbins.\nMéthode attendue : distinguer un récit religieux (croyance) d'un fait historique établi par des sources ; situer les événements sur une frise."
+    },
+    {
+      "id": "conquetes-paix-romaine-romanisation",
+      "titre": "Conquêtes, paix romaine et romanisation",
+      "ordre": 7,
+      "periode": "T3",
+      "notions": [
+        "Décrire l'étendue de l'Empire romain à son apogée (IIe siècle apr. J.-C.)",
+        "Connaître la conquête de la Gaule par Jules César (Alésia, 52 av. J.-C.)",
+        "Expliquer la paix romaine et la défense des frontières (limes)",
+        "Définir la romanisation et en donner des exemples (villes, routes, langue latine)",
+        "Décrire une ville romaine et ses monuments",
+        "Expliquer l'extension de la citoyenneté romaine (édit de Caracalla, 212)"
+      ],
+      "motsCles": [
+        "Empire romain",
+        "conquête",
+        "légion",
+        "Alésia",
+        "Vercingétorix",
+        "pax romana",
+        "limes",
+        "romanisation",
+        "Gallo-Romains",
+        "forum",
+        "aqueduc",
+        "citoyenneté"
+      ],
+      "reference": "L'Empire romain s'étend tout autour de la Méditerranée, que les Romains appellent Mare nostrum (« notre mer ») ; il atteint sa plus grande étendue en 117 apr. J.-C., sous l'empereur Trajan.\nL'armée romaine est organisée en légions de soldats bien entraînés et équipés.\nConquête de la Gaule par Jules César (58-51 av. J.-C.) ; en 52 av. J.-C., le chef gaulois Vercingétorix est vaincu à Alésia.\nPax romana (paix romaine) : longue période de paix intérieure, du règne d'Auguste à la fin du IIe siècle apr. J.-C.\nLimes : frontière fortifiée de l'Empire, gardée par les légions (exemple : le mur d'Hadrien en Bretagne, l'actuelle Grande-Bretagne).\nRomanisation : diffusion du mode de vie, de la langue latine, du droit et de la culture des Romains dans les provinces conquises.\nLes Romains construisent des villes sur un plan régulier, avec un forum (place publique), des temples, des thermes (bains publics), un théâtre, un amphithéâtre (combats de gladiateurs), un aqueduc.\nExemples en Gaule : Lyon (Lugdunum, capitale des Gaules), Nîmes (Maison carrée, arènes), le pont du Gard (aqueduc).\nVoies romaines : routes pavées qui relient les villes et permettent les déplacements des armées et des marchands.\nGallo-Romains : habitants de la Gaule romanisée, qui mêlent traditions gauloises et romaines.\nCulte impérial : on honore l'empereur comme un personnage sacré, ce qui renforce l'unité de l'Empire.\nCitoyenneté : d'abord réservée à une minorité, elle s'étend peu à peu ; en 212 apr. J.-C., l'édit de Caracalla accorde la citoyenneté romaine à presque tous les hommes libres de l'Empire.\nMéthode attendue : lire une carte de l'Empire ; décrire le plan d'une ville romaine ; expliquer en quoi un monument témoigne de la romanisation."
+    },
+    {
+      "id": "chretiens-dans-l-empire",
+      "titre": "Des chrétiens dans l'Empire",
+      "ordre": 8,
+      "periode": "T3",
+      "notions": [
+        "Situer la naissance du christianisme en Judée, province romaine, au Ier siècle",
+        "Connaître les sources sur Jésus et les débuts du christianisme (Nouveau Testament)",
+        "Expliquer la diffusion du christianisme dans l'Empire (rôle de Paul)",
+        "Comprendre pourquoi les chrétiens sont persécutés",
+        "Connaître les étapes de la reconnaissance du christianisme (313, 380)"
+      ],
+      "motsCles": [
+        "christianisme",
+        "Jésus",
+        "Judée",
+        "messie",
+        "apôtre",
+        "Évangiles",
+        "Nouveau Testament",
+        "Paul",
+        "persécution",
+        "martyr",
+        "Constantin",
+        "religion officielle"
+      ],
+      "reference": "Jésus est un Juif né en Judée, province de l'Empire romain, au début de notre ère ; il prêche en Galilée et en Judée.\nSes disciples le considèrent comme le Messie (en grec, Christ), l'envoyé de Dieu ; il est crucifié à Jérusalem vers 30 apr. J.-C., sur ordre du gouverneur romain Ponce Pilate.\nLes chrétiens croient que Jésus est ressuscité ; ils croient en un dieu unique.\nSources : les Évangiles (Marc, Matthieu, Luc, Jean), écrits dans la seconde moitié du Ier siècle, font partie du Nouveau Testament ; quelques auteurs romains (Tacite, Pline le Jeune) mentionnent les chrétiens.\nApôtres : disciples chargés de diffuser le message de Jésus ; Paul de Tarse voyage autour de la Méditerranée et fonde des communautés chrétiennes.\nLe christianisme se diffuse d'abord dans les villes, grâce aux routes et à la paix romaine.\nLes chrétiens refusent de rendre un culte aux dieux romains et à l'empereur ; ils sont accusés de mettre en danger l'Empire.\nPersécutions : sous Néron (64 apr. J.-C., après l'incendie de Rome), puis de grandes persécutions au IIIe siècle et sous Dioclétien (à partir de 303).\nMartyr : personne qui meurt pour sa foi (exemple : Blandine à Lyon en 177).\n313 : l'empereur Constantin (avec Licinius) accorde la liberté de culte aux chrétiens (édit de Milan) ; il favorise ensuite l'Église.\n380 : l'empereur Théodose fait du christianisme la religion officielle de l'Empire (édit de Thessalonique) ; en 392, il interdit les cultes païens.\nL'Église s'organise : les évêques dirigent les communautés dans les villes.\nLe calendrier chrétien compte les années à partir de la naissance supposée de Jésus (av. J.-C. / apr. J.-C.).\nMéthode attendue : situer les étapes sur une frise ; expliquer le passage de chrétiens persécutés à une religion officielle."
+    },
+    {
+      "id": "route-de-la-soie-chine-des-han",
+      "titre": "Les relations de l'Empire romain avec les autres mondes anciens : la route de la soie et la Chine des Han",
+      "ordre": 9,
+      "periode": "T3",
+      "notions": [
+        "Situer la Chine des Han (206 av. J.-C. - 220 apr. J.-C.) et la comparer à l'Empire romain",
+        "Décrire l'organisation de l'empire des Han : empereur, fonctionnaires lettrés",
+        "Connaître l'ancienne route de la soie : itinéraires terrestres et maritimes",
+        "Identifier les produits échangés et le rôle des intermédiaires",
+        "Comprendre que Romains et Chinois se connaissent surtout de façon indirecte"
+      ],
+      "motsCles": [
+        "Chine des Han",
+        "empereur",
+        "Qin Shi Huangdi",
+        "Grande Muraille",
+        "fonctionnaire",
+        "Confucius",
+        "route de la soie",
+        "caravane",
+        "soie",
+        "intermédiaire",
+        "échanges"
+      ],
+      "reference": "221 av. J.-C. : Qin Shi Huangdi unifie la Chine et devient le premier empereur ; il fait relier des murailles (ancêtre de la Grande Muraille) ; son tombeau est gardé par une armée de soldats en terre cuite.\nLa dynastie des Han règne de 206 av. J.-C. à 220 apr. J.-C. ; capitales : Chang'an puis Luoyang.\nL'empereur, appelé « Fils du Ciel », gouverne un immense empire peuplé d'environ 60 millions d'habitants, comme l'Empire romain à la même époque.\nL'empire est administré par des fonctionnaires lettrés, formés aux idées de Confucius (respect de l'ordre, des ancêtres et de l'autorité).\nInventions et productions : soie (secret de fabrication gardé par les Chinois), papier (amélioré au IIe siècle, attribué à Cai Lun vers 105 apr. J.-C.), laque, fer.\nVers 138 av. J.-C., l'empereur envoie Zhang Qian vers l'Asie centrale ; les Han ouvrent ensuite des routes vers l'ouest.\nRoute de la soie : ensemble d'itinéraires terrestres (caravanes à travers l'Asie centrale, oasis) et maritimes (océan Indien, Inde, mer Rouge) reliant la Chine à la Méditerranée ; le nom a été inventé au XIXe siècle.\nMarchandises : la soie, les épices, les pierres précieuses vont vers l'ouest ; l'or, l'argent, le verre, le vin, les tissus de laine vont vers l'est.\nLes marchandises passent par de nombreux intermédiaires (Parthes, Kouchans, marchands indiens et arabes) ; aucun marchand ne fait tout le trajet.\nLes Romains appellent les Chinois les « Sères » (le peuple de la soie) ; les Chinois appellent l'Empire romain « Da Qin ».\nSelon les sources chinoises, en 166 apr. J.-C. des envoyés se présentant comme venant de l'Empire romain arrivent à la cour des Han.\nÀ Rome, la soie est un produit de luxe très cher ; Pline l'Ancien critique l'or dépensé pour l'acheter.\nPar ces routes circulent aussi des idées, des religions (le bouddhisme arrive en Chine) et des techniques.\nMéthode attendue : comparer deux empires (étendue, population, pouvoir) ; lire une carte des routes commerciales."
+    },
+    {
+      "id": "emc-representer-les-autres",
+      "titre": "EMC : Représenter les autres et servir l'intérêt général",
+      "ordre": 10,
+      "periode": "T1",
+      "notions": [
+        "Distinguer intérêt particulier et intérêt général",
+        "Comprendre le principe de la représentation en démocratie",
+        "Connaître le rôle et l'élection des délégués de classe",
+        "Identifier les instances du collège où les élèves sont représentés",
+        "Connaître un exemple de représentation dans la commune : le conseil municipal et le maire",
+        "Savoir argumenter et respecter le vote et le choix de la majorité"
+      ],
+      "motsCles": [
+        "démocratie",
+        "représentant",
+        "élection",
+        "vote",
+        "délégué de classe",
+        "conseil de classe",
+        "éco-délégué",
+        "intérêt général",
+        "intérêt particulier",
+        "conseil municipal",
+        "maire",
+        "citoyen"
+      ],
+      "reference": "Démocratie : régime politique dans lequel le pouvoir appartient au peuple, qui l'exerce directement ou par l'intermédiaire de représentants élus.\nDémocratie représentative : les citoyens élisent des représentants qui décident en leur nom (députés, conseillers municipaux...).\nIntérêt particulier : ce qui profite à une personne ou à un petit groupe ; intérêt général : ce qui profite à l'ensemble de la communauté.\nLes délégués de classe sont élus par les élèves de la classe, au début de l'année scolaire, au scrutin secret ; il y a deux délégués titulaires et des suppléants.\nLe délégué représente toute la classe, pas seulement ses amis ; il fait le lien entre les élèves, les professeurs et la direction ; il participe au conseil de classe.\nConseil de classe : réunion trimestrielle des professeurs, des délégués des élèves et des parents, présidée par le chef d'établissement, qui fait le bilan du travail des élèves.\nAutres instances : conseil de la vie collégienne (CVC), éco-délégués (projets pour l'environnement), représentants des élèves au conseil d'administration.\nUne élection respecte des règles : candidature, campagne, vote secret et personnel, dépouillement, résultats ; on respecte le choix de la majorité.\nÊtre représentant, c'est un engagement : écouter, rapporter fidèlement, rendre des comptes.\nDans la commune, les habitants qui ont le droit de vote élisent le conseil municipal pour 6 ans au suffrage universel direct ; le conseil municipal élit le maire.\nLe maire et le conseil municipal agissent pour l'intérêt général de la commune (écoles, voirie, état civil...).\nEn France, on peut voter à partir de 18 ans ; certaines communes ont un conseil municipal des jeunes.\nMéthode attendue : expliquer le rôle d'un représentant ; distinguer une décision d'intérêt général d'une demande d'intérêt particulier."
+    },
+    {
+      "id": "emc-laicite-a-l-ecole",
+      "titre": "EMC : Respecter des règles, l'exemple de la laïcité à l'École",
+      "ordre": 11,
+      "periode": "T2",
+      "notions": [
+        "Comprendre pourquoi une société et une école ont besoin de règles",
+        "Connaître le règlement intérieur du collège : droits, devoirs, sanctions",
+        "Définir la laïcité et ses principes : liberté de conscience, neutralité, égalité",
+        "Connaître les grandes lois de la laïcité (1882, 1905, 2004)",
+        "Connaître la Charte de la laïcité à l'École",
+        "Expliquer en quoi la laïcité protège chaque élève"
+      ],
+      "motsCles": [
+        "règle",
+        "loi",
+        "règlement intérieur",
+        "droits",
+        "devoirs",
+        "sanction",
+        "laïcité",
+        "liberté de conscience",
+        "neutralité",
+        "égalité",
+        "Charte de la laïcité",
+        "République"
+      ],
+      "reference": "Une règle fixe ce qui est permis et interdit dans un groupe ; elle protège chacun et permet de vivre ensemble ; la loi est une règle votée par le Parlement qui s'applique à tous.\nRèglement intérieur : texte qui fixe les règles de vie du collège, les droits et les devoirs des élèves, les punitions et les sanctions ; il est voté par le conseil d'administration.\nUne sanction doit être juste, expliquée et proportionnée à la faute.\nLaïcité : principe qui sépare l'État et les religions ; l'État ne reconnaît et ne finance aucun culte, il garantit la liberté de croire ou de ne pas croire.\nLiberté de conscience : chacun est libre d'avoir une religion, d'en changer ou de ne pas en avoir.\nNeutralité : les services publics, et donc les personnels de l'École, ne manifestent pas de préférence religieuse ou politique.\nÉgalité : tous les citoyens sont égaux devant la loi, quelles que soient leurs croyances.\n1881-1882 : lois Jules Ferry ; l'école primaire publique devient gratuite (1881), obligatoire et laïque (1882).\n9 décembre 1905 : loi de séparation des Églises et de l'État.\nConstitution de 1958, article 1er : « La France est une République indivisible, laïque, démocratique et sociale. »\nLoi du 15 mars 2004 : dans les écoles, collèges et lycées publics, le port de signes ou tenues par lesquels les élèves manifestent ostensiblement une appartenance religieuse est interdit.\nCharte de la laïcité à l'École (2013) : 15 articles, affichée dans les établissements publics ; elle rappelle que la laïcité protège les élèves de toute pression et permet l'exercice de la liberté d'expression.\nÀ l'École, aucun élève ne peut refuser un enseignement ou contester un cours au nom de ses convictions.\nLa laïcité est un principe de la République, à côté de la devise « Liberté, Égalité, Fraternité ».\nMéthode attendue : expliquer la finalité d'une règle ; analyser une situation à l'aide de la Charte de la laïcité."
+    },
+    {
+      "id": "emc-droit-a-la-vie-privee",
+      "titre": "EMC : Avoir des droits et respecter ceux des autres, le droit à la vie privée",
+      "ordre": 12,
+      "periode": "T3",
+      "notions": [
+        "Comprendre que chaque personne a des droits, y compris les enfants",
+        "Définir la vie privée et le droit à l'image",
+        "Connaître les textes qui protègent la vie privée (Code civil, Convention internationale des droits de l'enfant)",
+        "Identifier les données personnelles et les risques sur internet et les réseaux sociaux",
+        "Adopter de bons usages numériques et respecter la vie privée des autres",
+        "Savoir réagir et à qui s'adresser en cas de cyberharcèlement"
+      ],
+      "motsCles": [
+        "droit",
+        "vie privée",
+        "droit à l'image",
+        "données personnelles",
+        "réseaux sociaux",
+        "consentement",
+        "mot de passe",
+        "cyberharcèlement",
+        "CNIL",
+        "Convention internationale des droits de l'enfant",
+        "3018"
+      ],
+      "reference": "Un droit est ce qui est permis et protégé par la loi ; avoir des droits implique de respecter ceux des autres.\nVie privée : ce qui concerne l'intimité d'une personne (famille, santé, domicile, amitiés, correspondances, opinions) et qu'elle peut garder pour elle.\nCode civil, article 9 (loi de 1970) : « Chacun a droit au respect de sa vie privée. »\nDéclaration universelle des droits de l'homme (1948), article 12 : nul ne peut faire l'objet d'immixtions arbitraires dans sa vie privée.\nConvention internationale des droits de l'enfant (ONU, 1989), article 16 : l'enfant a droit à la protection de sa vie privée.\nDroit à l'image : on ne peut pas photographier, filmer ou publier l'image d'une personne sans son accord.\nDonnées personnelles : informations qui permettent d'identifier une personne (nom, adresse, photo, numéro de téléphone, localisation...).\nLa CNIL (créée en 1978, loi « Informatique et libertés ») protège les données personnelles en France ; le RGPD (2018) les protège dans l'Union européenne.\nEn France, un mineur peut consentir seul à l'utilisation de ses données par un réseau social à partir de 15 ans ; avant, l'accord des parents est nécessaire. Les grands réseaux sociaux fixent un âge minimum de 13 ans.\nSur internet, ce qui est publié peut être copié, partagé et rester longtemps : on parle de traces numériques.\nBons usages : paramétrer son compte en privé, garder ses mots de passe secrets, réfléchir avant de publier, ne pas partager les photos ou messages des autres sans leur accord.\nCyberharcèlement : harcèlement (moqueries, insultes, rumeurs, diffusion d'images) par internet ou téléphone ; le harcèlement scolaire est un délit puni par la loi depuis 2022.\nEn cas de problème : en parler à un adulte de confiance, garder des preuves, signaler ; numéro national gratuit 3018 (contre le harcèlement en ligne).\nMéthode attendue : analyser une situation où un droit n'est pas respecté et proposer une réponse adaptée."
+    }
+  ]
+}

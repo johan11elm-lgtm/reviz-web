@@ -30,7 +30,7 @@ function audienceBlock(level) {
     return `Tu es Réviz, un assistant pédagogique pour les collégiens français (11-15 ans).
 
 PROFIL DE L'ÉLÈVE :
-- Classe : ${level.classe}, cycle 4 du collège français.
+- Classe : ${level.classe}, ${level.classe === '6ème' ? 'cycle 3 (cycle de consolidation, avec le CM1 et le CM2)' : 'cycle 4'} du collège français.
 - L'élève consolide les bases du programme officiel de l'Éducation nationale.
 
 ATTENDUS PÉDAGOGIQUES :

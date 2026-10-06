@@ -1,0 +1,345 @@
+{
+  "classe": "6ème",
+  "matiere": "Anglais",
+  "programme": "Langues vivantes cycle 3 (6e, niveau A1 vers A2) — BO n°31 du 30/07/2020",
+  "modele": "claude-opus-5-5 (abonnement)",
+  "genereLe": "2026-10-05",
+  "relu": false,
+  "chapitres": [
+    {
+      "id": "se-presenter-verbe-be",
+      "titre": "Se présenter : saluer et le verbe be (Hello!)",
+      "ordre": 1,
+      "periode": "T1",
+      "notions": [
+        "Saluer et prendre congé selon le moment de la journée",
+        "Se présenter : nom, âge, ville, pays",
+        "Conjuguer be au présent aux formes pleines et contractées",
+        "Construire la négation et la question avec be",
+        "Poser les questions What's your name? How old are you? Where are you from?",
+        "Utiliser les pronoms personnels sujets"
+      ],
+      "motsCles": [
+        "Hello",
+        "Hi",
+        "Goodbye",
+        "Good morning",
+        "my name is",
+        "I am",
+        "How old are you?",
+        "Where are you from?",
+        "pronoun",
+        "nationality"
+      ],
+      "reference": "Saluer : Hello / Hi ; Good morning (le matin), Good afternoon (l'après-midi), Good evening (le soir).\nPrendre congé : Goodbye / Bye / See you! ; Good night se dit seulement en allant se coucher ou en partant le soir.\nPronoms personnels sujets : I, you, he, she, it, we, you, they. I s'écrit toujours avec une majuscule.\nhe = un garçon / un homme ; she = une fille / une femme ; it = un objet ou un animal non nommé.\nBe au présent : I am, you are, he / she / it is, we are, you are, they are.\nFormes contractées : I'm, you're, he's, she's, it's, we're, they're.\nNégation : be + not : I'm not, he isn't (is not), they aren't (are not).\nQuestion : on inverse be et le sujet : Are you English? — Yes, I am. / No, I'm not.\nOn ne contracte pas dans une réponse courte affirmative : Yes, I am (et non Yes, I'm).\nSe présenter : My name is Tom. / I'm Tom. I'm eleven (years old). I'm from Leeds, in England.\nQuestions : What's your name? How old are you? Where are you from? How are you? — I'm fine, thank you.\nL'âge se dit avec be : I am eleven (et non I have eleven).\nNationalités avec une majuscule : French, English, British, American, Irish, Scottish.\nMéthode : repérer le sujet, choisir la bonne forme de be, puis vérifier l'ordre des mots dans la question."
+    },
+    {
+      "id": "alphabet-nombres-et-dates",
+      "titre": "Épeler, compter, dire la date (alphabet, numbers, dates)",
+      "ordre": 2,
+      "periode": "T1",
+      "notions": [
+        "Réciter et épeler avec l'alphabet anglais",
+        "Compter de 0 à 100 et écrire les nombres",
+        "Nommer les jours de la semaine et les mois avec une majuscule",
+        "Utiliser les nombres ordinaux pour la date",
+        "Dire et écrire une date, demander l'anniversaire",
+        "Employer on avec un jour et in avec un mois"
+      ],
+      "motsCles": [
+        "alphabet",
+        "spell",
+        "number",
+        "Monday",
+        "January",
+        "first",
+        "second",
+        "third",
+        "birthday",
+        "date",
+        "When is your birthday?"
+      ],
+      "reference": "Alphabet : 26 lettres ; attention à la prononciation de A [eɪ], E [iː], I [aɪ], G [dʒiː], J [dʒeɪ], H [eɪtʃ], R [ɑː], W (double u), Y [waɪ].\nÉpeler : How do you spell it? — T-O-M. Une lettre doublée se dit double : Anna = A, double N, A.\nNombres : one, two, three … ten, eleven, twelve, thirteen … nineteen, twenty, thirty, forty (sans u), fifty … one hundred.\nDizaines + unités avec un trait d'union : twenty-one, forty-five, ninety-nine.\n-teen (fourteen) est accentué à la fin ; -ty (forty) au début.\nJours (avec majuscule) : Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday.\nMois (avec majuscule) : January, February, March, April, May, June, July, August, September, October, November, December.\nOrdinaux : first (1st), second (2nd), third (3rd), fourth (4th), fifth (5th), twelfth (12th), twentieth (20th), twenty-first (21st).\nDate écrite au Royaume-Uni : Monday 3rd May ; dite : Monday the third of May.\nDate aux États-Unis : le mois avant le jour : May 3rd (05/03 = 3 mai aux États-Unis).\nPrépositions : on Monday, on 3rd May ; in May, in 2026.\nQuestions : What day is it today? — It's Tuesday. When is your birthday? — It's on 12th June.\nMéthode : un nombre ordinal finit presque toujours par -th, sauf first, second, third et leurs composés (21st, 22nd, 23rd)."
+    },
+    {
+      "id": "famille-possessifs-genitif",
+      "titre": "La famille : adjectifs possessifs et génitif 's (my family)",
+      "ordre": 3,
+      "periode": "T1",
+      "notions": [
+        "Nommer les membres de la famille",
+        "Utiliser les adjectifs possessifs my, your, his, her, its, our, their",
+        "Choisir entre his et her selon le possesseur",
+        "Exprimer la possession avec le génitif 's",
+        "Présenter sa famille ou un arbre généalogique",
+        "Distinguer it's et its"
+      ],
+      "motsCles": [
+        "family",
+        "mother",
+        "father",
+        "brother",
+        "sister",
+        "grandparents",
+        "his",
+        "her",
+        "their",
+        "'s",
+        "family tree"
+      ],
+      "reference": "Famille : mother (mum, Mum en Angleterre ; mom aux États-Unis), father (dad), parents, brother, sister, son, daughter.\ngrandmother, grandfather, grandparents, uncle, aunt, cousin ; an only child = un enfant unique.\nAdjectifs possessifs : I → my, you → your, he → his, she → her, it → its, we → our, they → their.\nLe possessif s'accorde avec le possesseur, pas avec l'objet : Tom and his sister ; Emma and her brother.\nLe possessif ne change pas au pluriel : my brother, my brothers.\nits (possessif, sans apostrophe) ≠ it's (= it is) : The dog is in its basket. It's big.\nGénitif (cas possessif) : possesseur + 's + objet : Tom's dog = le chien de Tom.\nPossesseur au pluriel en -s : on ajoute seulement l'apostrophe : my parents' car.\nPluriel irrégulier : children's books.\nLe nom qui suit le génitif n'a pas d'article : Emma's bike (et non the bike of Emma).\nExemple : This is my family. My mum's name is Sarah. I've got one brother ; his name is Leo.\nQuestion : Who is this? — It's my cousin. Whose bag is it? — It's Lucy's.\nMéthode : identifier le possesseur (garçon → his, fille → her, plusieurs → their)."
+    },
+    {
+      "id": "have-got-decrire",
+      "titre": "Have got : se décrire, décrire un animal (pets)",
+      "ordre": 4,
+      "periode": "T1",
+      "notions": [
+        "Conjuguer have got au présent",
+        "Construire la négation et la question avec have got",
+        "Décrire une personne : cheveux, yeux, taille",
+        "Placer l'adjectif avant le nom, sans accord",
+        "Parler de ses animaux de compagnie",
+        "Employer a / an correctement"
+      ],
+      "motsCles": [
+        "have got",
+        "has got",
+        "hasn't got",
+        "Have you got…?",
+        "hair",
+        "eyes",
+        "tall",
+        "short",
+        "pet",
+        "a / an"
+      ],
+      "reference": "Have got (posséder, avoir) : I / you / we / they have got ('ve got) ; he / she / it has got ('s got).\nNégation : haven't got / hasn't got : She hasn't got a cat.\nQuestion : Have you got a pet? — Yes, I have. / No, I haven't. Has he got a brother? — Yes, he has.\nDans la réponse courte, on ne reprend pas got.\nhe's got = he has got ; ne pas confondre avec he's = he is.\nL'adjectif se place avant le nom et ne s'accorde pas : a black cat, two black cats.\nOrdre : taille puis couleur : She's got long brown hair.\nHair est indénombrable : il ne prend pas de -s (She's got short hair).\nDescription : blue / green / brown eyes ; blond / dark / red hair ; tall, short ; glasses (lunettes).\nAnimaux : a dog, a cat, a rabbit, a hamster, a goldfish, a guinea pig, a horse.\nArticle a devant un son consonne, an devant un son voyelle : a dog, an elephant, an orange cat.\nPluriel : + s (cats), + es après s, sh, ch, x (boxes), consonne + y → ies (puppies) ; irréguliers : mouse → mice, fish → fish.\nMéthode : sujet à la 3e personne du singulier → has got."
+    },
+    {
+      "id": "la-classe-there-is",
+      "titre": "Au collège : there is / there are et les prépositions de lieu (classroom)",
+      "ordre": 5,
+      "periode": "T2",
+      "notions": [
+        "Nommer les objets de la classe et les couleurs",
+        "Utiliser there is avec un singulier et there are avec un pluriel",
+        "Construire négation et question avec there is / there are",
+        "Situer un objet avec les prépositions de lieu",
+        "Comprendre et utiliser les consignes de classe (classroom English)",
+        "Employer some et any"
+      ],
+      "motsCles": [
+        "there is",
+        "there are",
+        "pencil case",
+        "schoolbag",
+        "in",
+        "on",
+        "under",
+        "next to",
+        "behind",
+        "Can I…?",
+        "some",
+        "any"
+      ],
+      "reference": "Objets : a pen, a pencil, a ruler, a rubber (UK) / an eraser (US), a pencil case, a schoolbag, an exercise book, a book, a desk, a chair, a board.\nCouleurs : red, blue, green, yellow, black, white, orange, pink, purple, brown, grey.\nThere is (there's) + nom singulier : There is a map on the wall.\nThere are + nom pluriel : There are twenty-five pupils in my class.\nNégation : there isn't a… / there aren't any… : There aren't any computers.\nQuestion : Is there a…? — Yes, there is. Are there any…? — No, there aren't.\nsome en phrase affirmative au pluriel, any en phrase négative et interrogative.\nHow many + pluriel ? How many pupils are there in your class?\nPrépositions : in (dans), on (sur), under (sous), next to (à côté de), behind (derrière), in front of (devant), between (entre).\nConsignes : Listen! Repeat! Open your books. Sit down. Stand up. Be quiet, please.\nPhrases de l'élève : Can I go to the toilet, please? How do you say « trousse » in English? I don't understand. Can you repeat, please?\nMatières : English, French, maths, history, geography, science, art, music, PE (sport).\nMéthode : regarder si le nom qui suit est au singulier ou au pluriel avant de choisir there is ou there are."
+    },
+    {
+      "id": "fetes-et-traditions",
+      "titre": "Fêtes et traditions du monde anglophone (festivals)",
+      "ordre": 6,
+      "periode": "T2",
+      "notions": [
+        "Situer dans l'année les principales fêtes britanniques et américaines",
+        "Décrire Halloween, Bonfire Night et Thanksgiving",
+        "Décrire les traditions de Noël au Royaume-Uni",
+        "Connaître Saint Patrick's Day et Independence Day",
+        "Souhaiter une fête en anglais",
+        "Utiliser on et in avec les dates des fêtes"
+      ],
+      "motsCles": [
+        "Halloween",
+        "trick or treat",
+        "Bonfire Night",
+        "Guy Fawkes",
+        "Thanksgiving",
+        "Christmas",
+        "Boxing Day",
+        "St Patrick's Day",
+        "Independence Day",
+        "Happy…!",
+        "Merry Christmas"
+      ],
+      "reference": "Halloween : le 31 octobre ; costumes, citrouilles creusées (jack-o'-lanterns), les enfants disent Trick or treat! pour obtenir des bonbons.\nBonfire Night (Guy Fawkes Night) : le 5 novembre au Royaume-Uni ; feux de joie et feux d'artifice.\nElle rappelle l'échec du complot des Poudres (Gunpowder Plot, 1605) : Guy Fawkes voulait faire sauter le Parlement de Londres et le roi Jacques Ier.\nThanksgiving : aux États-Unis, le 4e jeudi de novembre ; repas en famille avec de la dinde (turkey) et une tarte à la citrouille (pumpkin pie).\nThanksgiving rappelle le repas partagé en 1621 par les colons venus sur le Mayflower (les Pilgrims) et des Amérindiens.\nChristmas : le 25 décembre ; Father Christmas (UK) / Santa Claus, stockings, crackers, Christmas pudding, turkey.\nChristmas Eve = le 24 décembre ; Boxing Day = le 26 décembre, jour férié au Royaume-Uni.\nPancake Day (Shrove Tuesday) : mardi gras, on mange des crêpes.\nSt Patrick's Day : le 17 mars, fête nationale de l'Irlande ; on porte du vert et le trèfle (shamrock) est le symbole.\nEaster (Pâques) : œufs en chocolat, chasse aux œufs (Easter egg hunt).\nIndependence Day (the Fourth of July) : le 4 juillet, fête nationale des États-Unis, déclaration d'indépendance de 1776.\nVœux : Happy Halloween! Merry Christmas! Happy New Year! Happy Thanksgiving!\nOn + jour précis : on 31st October ; in + mois : in November."
+    },
+    {
+      "id": "gouts-et-nourriture",
+      "titre": "Exprimer ses goûts : like, love, hate (food)",
+      "ordre": 7,
+      "periode": "T2",
+      "notions": [
+        "Exprimer goûts et dégoûts avec like, love, hate, don't like, prefer",
+        "Utiliser un nom ou un verbe en -ing après like / love / hate",
+        "Nommer des aliments et des repas",
+        "Distinguer dénombrables et indénombrables (some, a)",
+        "Demander poliment avec I'd like… / Would you like…?",
+        "Décrire un petit-déjeuner anglais"
+      ],
+      "motsCles": [
+        "like",
+        "love",
+        "hate",
+        "don't like",
+        "prefer",
+        "favourite",
+        "food",
+        "breakfast",
+        "I'd like",
+        "Would you like…?",
+        "some"
+      ],
+      "reference": "Échelle des goûts : I love > I like > I don't mind > I don't like > I hate.\nLike / love / hate + nom : I love pizza. ou + verbe en -ing : I like reading. She hates swimming.\n3e personne du singulier : He likes chips. She doesn't like fish.\nQuestion : Do you like cheese? — Yes, I do. / No, I don't. Does she like tea? — Yes, she does.\nPréférence : I prefer apples to bananas. My favourite food is pasta.\nAliments : bread, butter, cheese, milk, water, juice, tea, eggs, apples, bananas, chicken, chips (UK) / fries (US), crisps (UK) / chips (US).\nIndénombrables (pas de a, pas de -s) : bread, water, milk, cheese, rice ; dénombrables : an apple, two eggs.\nsome + indénombrable ou pluriel : some bread, some eggs.\nI'd like = I would like (je voudrais) : I'd like some water, please. Would you like some tea? — Yes, please. / No, thank you.\nRepas : breakfast (petit-déjeuner), lunch (déjeuner), dinner (dîner), a snack (goûter, en-cas).\nFull English breakfast : œufs, bacon, saucisses, haricots à la sauce tomate (baked beans), toast, champignons, tomates.\nPlat britannique connu : fish and chips.\nNe pas confondre I like (j'aime, en général) et I'd like (je voudrais, maintenant)."
+    },
+    {
+      "id": "can-capacites",
+      "titre": "Can : dire ce que l'on sait faire (sports and hobbies)",
+      "ordre": 8,
+      "periode": "T2",
+      "notions": [
+        "Exprimer la capacité avec can et can't",
+        "Construire la question et la réponse courte avec can",
+        "Utiliser can pour demander la permission",
+        "Nommer des sports et des loisirs",
+        "Employer play, do et go avec les activités",
+        "Nuancer avec well, very well, a little"
+      ],
+      "motsCles": [
+        "can",
+        "can't",
+        "Can you…?",
+        "swim",
+        "ride a bike",
+        "play football",
+        "play the piano",
+        "sport",
+        "hobby",
+        "well"
+      ],
+      "reference": "Can + base verbale (sans to) : I can swim. She can play the guitar.\nCan est invariable : pas de -s à la 3e personne (he can, et non he cans) et pas de do / does.\nNégation : cannot (can't) : I can't dance.\nQuestion : Can you ride a bike? — Yes, I can. / No, I can't.\nPrononciation : can [kən] ou [kæn], can't [kɑːnt] en anglais britannique.\nCan sert aussi à demander la permission : Can I open the window, please?\nNuancer : I can swim very well. I can sing a little. I can't cook at all.\nSports avec ballon : play + sport sans article : play football, play tennis, play basketball.\nInstruments : play + the + instrument : play the piano, play the guitar.\ngo + -ing : go swimming, go cycling, go skateboarding ; do + activité : do judo, do karate, do gymnastics.\nLoisirs : read, draw, sing, dance, cook, play video games, ride a horse.\nLe football américain se dit football aux États-Unis ; le football européen y est appelé soccer.\nMéthode : après can, le verbe est toujours à la base verbale."
+    },
+    {
+      "id": "heure-et-routine",
+      "titre": "L'heure et la routine quotidienne : le présent simple (daily routine)",
+      "ordre": 9,
+      "periode": "T3",
+      "notions": [
+        "Demander et dire l'heure",
+        "Utiliser at avec une heure, in the morning / afternoon / evening",
+        "Décrire sa journée au présent simple",
+        "Ajouter le -s de la 3e personne du singulier",
+        "Prononcer et écrire le -s : -s, -es, -ies",
+        "Enchaîner les actions avec first, then, after that, finally"
+      ],
+      "motsCles": [
+        "What time is it?",
+        "o'clock",
+        "half past",
+        "quarter to",
+        "at",
+        "get up",
+        "have breakfast",
+        "go to school",
+        "routine",
+        "every day",
+        "then"
+      ],
+      "reference": "Demander l'heure : What time is it? / What's the time? — It's seven o'clock.\nMinutes après l'heure : past ; minutes avant l'heure : to.\n7:15 = quarter past seven ; 7:30 = half past seven ; 7:45 = quarter to eight ; 7:10 = ten past seven ; 7:50 = ten to eight.\nOn peut aussi lire l'heure en chiffres : 7:45 = seven forty-five.\na.m. = le matin (avant midi), p.m. = l'après-midi et le soir ; au Royaume-Uni, on utilise surtout l'horloge de 12 heures à l'oral.\nÀ quelle heure : at seven o'clock ; in the morning, in the afternoon, in the evening, mais at night.\nRoutine : get up, have a shower, get dressed, have breakfast, go to school, have lunch, do my homework, go to bed.\nPrésent simple : pour les habitudes : I get up at seven every day.\n3e personne du singulier : base + -s : he gets up, she plays.\nAprès s, sh, ch, x, o : -es : she watches, he goes, he does ; consonne + y → -ies : he studies.\nhave → has : She has breakfast at half past seven.\nConnecteurs : first, then, after that, finally.\nMéthode : he / she / it au présent simple → le verbe prend un -s."
+    },
+    {
+      "id": "present-simple-questions",
+      "titre": "Le présent simple : questions, négation et fréquence (free time)",
+      "ordre": 10,
+      "periode": "T3",
+      "notions": [
+        "Construire la négation avec don't / doesn't + base verbale",
+        "Poser une question fermée avec do / does",
+        "Poser une question ouverte avec un mot interrogatif",
+        "Donner une réponse courte",
+        "Placer les adverbes de fréquence",
+        "Parler de ses activités du week-end"
+      ],
+      "motsCles": [
+        "do",
+        "does",
+        "don't",
+        "doesn't",
+        "What",
+        "Where",
+        "When",
+        "Who",
+        "always",
+        "usually",
+        "sometimes",
+        "never"
+      ],
+      "reference": "Négation : don't (do not) + base verbale : I don't play tennis.\n3e personne du singulier : doesn't (does not) + base verbale, sans -s : She doesn't like maths (et non doesn't likes).\nQuestion fermée : Do / Does + sujet + base verbale ? Do you play the piano? Does he walk to school?\nRéponses courtes : Yes, I do. / No, I don't. Yes, she does. / No, she doesn't.\nMots interrogatifs : What (quoi), Where (où), When (quand), Who (qui), Why (pourquoi), How (comment), What time (à quelle heure), How often (à quelle fréquence).\nQuestion ouverte : mot interrogatif + do / does + sujet + verbe : Where do you live? What time does she get up?\nUne question avec be n'utilise pas do : Where are you? (et non Where do you are?).\nAdverbes de fréquence : always (100 %), usually, often, sometimes, never (0 %).\nPlace : avant le verbe : I often go to the cinema ; mais après be : He is always late.\nExpressions : every day, every Saturday, once a week, twice a week, at the weekend (UK) / on the weekend (US).\nRéponse à Why : Because… : Why do you like Saturdays? — Because I don't go to school.\nMéthode : dans la question et la négation, c'est do / does qui porte le -s, jamais le verbe."
+    },
+    {
+      "id": "be-ing-vetements-meteo",
+      "titre": "Le présent en be + -ing : décrire une image, les vêtements, la météo",
+      "ordre": 11,
+      "periode": "T3",
+      "notions": [
+        "Former le présent en be + V-ing",
+        "Employer be + -ing pour une action en cours au moment où l'on parle",
+        "Appliquer les règles d'orthographe du -ing",
+        "Distinguer présent simple (habitude) et be + -ing (action en cours)",
+        "Nommer des vêtements et décrire une tenue",
+        "Parler du temps qu'il fait"
+      ],
+      "motsCles": [
+        "be + -ing",
+        "now",
+        "right now",
+        "Look!",
+        "What are you doing?",
+        "T-shirt",
+        "jeans",
+        "wear",
+        "weather",
+        "It's sunny",
+        "It's raining"
+      ],
+      "reference": "Formation : be au présent (am / is / are) + verbe + -ing : I am reading. They are playing.\nNégation : I'm not running. She isn't sleeping. Question : Are you listening? What is he doing?\nEmploi : action en cours au moment où l'on parle, souvent avec now, right now, at the moment, Look!, Listen!\nOrthographe : e muet supprimé (dance → dancing, write → writing) ; consonne doublée après une voyelle courte accentuée (swim → swimming, run → running, sit → sitting).\nie → ying : lie → lying.\nComparer : She usually wears a skirt (habitude) / Today she is wearing jeans (en ce moment).\nDécrire une image : In the picture, a boy is running and two girls are eating ice creams.\nVêtements : a T-shirt, a jumper (UK) / a sweater, a coat, a dress, a skirt, jeans, trousers (UK) / pants (US), shorts, shoes, trainers (UK) / sneakers (US), a cap, a scarf.\nJeans, trousers et shorts sont toujours au pluriel : My jeans are blue.\nMétéo : What's the weather like? — It's sunny / cloudy / windy / foggy / cold / hot.\nPluie et neige : It's raining / It's snowing (be + -ing) ; It's rainy est aussi correct.\nSaisons : spring, summer, autumn (UK) / fall (US), winter ; in winter.\nMéthode : maintenant → be + -ing ; habituellement → présent simple."
+    },
+    {
+      "id": "londres-imperatif-directions",
+      "titre": "Visiter Londres : l'impératif et les directions (London)",
+      "ordre": 12,
+      "periode": "T3",
+      "notions": [
+        "Situer le Royaume-Uni, ses quatre nations et leurs capitales",
+        "Connaître les principaux monuments de Londres",
+        "Donner un ordre ou un conseil avec l'impératif",
+        "Former l'impératif négatif avec don't et l'invitation avec let's",
+        "Demander et indiquer son chemin",
+        "Nommer des lieux de la ville"
+      ],
+      "motsCles": [
+        "London",
+        "United Kingdom",
+        "Big Ben",
+        "Buckingham Palace",
+        "Tower Bridge",
+        "the Tube",
+        "imperative",
+        "Let's",
+        "turn left",
+        "go straight on",
+        "Excuse me"
+      ],
+      "reference": "Royaume-Uni (United Kingdom) : England (capitale London), Scotland (Edinburgh), Wales (Cardiff), Northern Ireland (Belfast).\nLondres est la capitale du Royaume-Uni ; la Tamise (the Thames) la traverse.\nMonuments : Big Ben (la grande cloche de la tour Elizabeth, au palais de Westminster, siège du Parlement), Buckingham Palace (résidence du roi), Tower Bridge, the Tower of London, the London Eye.\nLe métro de Londres s'appelle the Underground ou the Tube ; bus rouges à étage (double-decker buses) ; taxis noirs (black cabs).\nOn roule à gauche au Royaume-Uni.\nImpératif : base verbale sans sujet : Turn left! Open the door, please.\nImpératif négatif : Don't + base verbale : Don't cross the road here!\nProposition : Let's + base verbale (Let's = Let us) : Let's visit the London Eye!\nDemander son chemin : Excuse me, where is the station, please? How can I get to the museum?\nDirections : go straight on (tout droit), turn left / right, take the first street on the left, cross the street, it's on your right, it's next to / opposite the bank.\nLieux : a station, a museum, a park, a shop, a bank, a hospital, a church, a library (bibliothèque), a bus stop.\nRemercier : Thank you very much. — You're welcome.\nMéthode : l'impératif commence directement par le verbe ; ajouter please pour être poli."
+    }
+  ]
+}

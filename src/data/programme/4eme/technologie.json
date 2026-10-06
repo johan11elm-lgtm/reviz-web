@@ -1,0 +1,353 @@
+{
+  "classe": "4ème",
+  "matiere": "Technologie",
+  "programme": "cycle 4 (BO spécial n°11 du 26/11/2015, ajusté BO n°31 du 30/07/2020) — partie traitée en 4e",
+  "modele": "claude-opus-5-5 (abonnement)",
+  "genereLe": "2026-10-05",
+  "relu": false,
+  "chapitres": [
+    {
+      "id": "design-et-ergonomie",
+      "titre": "Le design d'un objet : esthétique et ergonomie",
+      "ordre": 1,
+      "periode": "T1",
+      "notions": [
+        "Définir le design comme une démarche de conception qui associe fonction, forme et usage",
+        "Distinguer fonction d'usage, fonction d'estime (esthétique) et ergonomie",
+        "Analyser l'ergonomie d'un objet : prise en main, dimensions, confort, sécurité d'usage",
+        "Identifier les éléments de style d'un objet : formes, couleurs, matériaux, textures",
+        "Relier l'apparence d'un objet à son époque et à un courant de design",
+        "Prendre en compte la diversité des utilisateurs : âge, gauchers, personnes en situation de handicap"
+      ],
+      "motsCles": [
+        "design",
+        "designer",
+        "esthétique",
+        "fonction d'estime",
+        "ergonomie",
+        "anthropométrie",
+        "prise en main",
+        "style",
+        "Bauhaus",
+        "accessibilité",
+        "conception universelle"
+      ],
+      "reference": "Design : démarche de conception qui cherche à rendre un objet à la fois utile, agréable à utiliser et beau ; le designer travaille avec les ingénieurs dès le début du projet.\nFonction d'usage : ce à quoi sert l'objet (ex. : un presse-agrumes sert à extraire le jus des agrumes).\nFonction d'estime : ce qui rend l'objet attirant pour l'utilisateur (forme, couleur, matière, image de marque) ; elle relève de l'esthétique.\nErgonomie : étude de l'adaptation d'un objet ou d'un poste de travail à l'être humain, pour qu'il soit utilisé avec confort, efficacité et sécurité.\nAnthropométrie : mesure des dimensions du corps humain (taille de la main, hauteur des yeux…) ; on s'en sert pour dimensionner les objets.\nCritères ergonomiques : forme adaptée à la main, effort à fournir, poids, lisibilité des commandes, posture, bruit, facilité d'entretien.\nExemple : une souris d'ordinateur ergonomique épouse la forme de la main et évite les douleurs au poignet.\nÉléments de style : formes (géométriques ou arrondies), couleurs, matériaux, textures, proportions.\n« La forme suit la fonction » : principe formulé par l'architecte américain Louis Sullivan à la fin du XIXe siècle et repris par le design moderne.\nBauhaus : école d'art et de design fondée en 1919 à Weimar (Allemagne) par Walter Gropius ; formes simples, géométriques, fabrication en série.\nArt nouveau (vers 1890-1910) : formes courbes inspirées des végétaux ; design scandinave (milieu du XXe siècle) : formes simples, bois clair, fonctionnalité.\nLes formes d'un objet évoluent avec les matériaux disponibles (ex. : le plastique moulé permet des formes arrondies d'une seule pièce).\nConception universelle (ou pour tous) : concevoir un objet utilisable par le plus grand nombre, y compris les enfants, les personnes âgées ou en situation de handicap.\nExemples d'accessibilité : poignée de porte en béquille plutôt que bouton rond, ciseaux pour gauchers, boutons en relief, contraste des couleurs.\nMéthode attendue : analyser un objet en décrivant sa fonction d'usage, ses éléments de style et ses qualités ergonomiques, puis proposer une amélioration justifiée."
+    },
+    {
+      "id": "creativite-et-recherche-de-solutions",
+      "titre": "Imaginer des solutions : créativité et choix d'une solution",
+      "ordre": 2,
+      "periode": "T1",
+      "notions": [
+        "Participer à une séance de créativité (remue-méninges) en respectant ses règles",
+        "Organiser des idées avec une carte mentale",
+        "S'inspirer d'objets existants ou de la nature (biomimétisme) pour imaginer une solution",
+        "Exprimer une idée de solution par un croquis de recherche annoté",
+        "Comparer plusieurs solutions à l'aide des critères du cahier des charges",
+        "Choisir une solution avec une matrice de décision et argumenter ce choix"
+      ],
+      "motsCles": [
+        "créativité",
+        "remue-méninges",
+        "brainstorming",
+        "carte mentale",
+        "biomimétisme",
+        "croquis de recherche",
+        "annotation",
+        "critère",
+        "matrice de décision",
+        "pondération",
+        "solution technique"
+      ],
+      "reference": "Créativité : capacité à produire des idées nouvelles et utiles pour répondre à un problème ; elle se travaille avec des méthodes.\nRemue-méninges (brainstorming) : méthode de créativité en groupe popularisée par le publicitaire américain Alex Osborn au milieu du XXe siècle.\nRègles du remue-méninges : ne critiquer aucune idée pendant la séance ; chercher la quantité ; accepter les idées les plus originales ; rebondir sur les idées des autres.\nDéroulement : on rappelle le problème, on produit les idées (phase de divergence), puis on les trie et on les regroupe (phase de convergence).\nCarte mentale : schéma qui part d'une idée centrale et se ramifie en branches et sous-branches ; elle aide à organiser et relier les idées.\nBiomimétisme : s'inspirer de la nature pour concevoir des solutions techniques.\nExemples de biomimétisme : la bande auto-agrippante (Velcro), imaginée par George de Mestral en observant les fruits de la bardane accrochés à ses vêtements ; le nez du train japonais Shinkansen inspiré du bec du martin-pêcheur.\nCroquis de recherche : dessin rapide à main levée, sans instrument, accompagné d'annotations (matériaux, dimensions, fonctionnement) pour communiquer une idée.\nCritères de choix : ils viennent du cahier des charges (coût, encombrement, masse, sécurité, facilité de fabrication, esthétique, impact environnemental).\nMatrice de décision : tableau où chaque solution reçoit une note pour chaque critère ; on peut multiplier chaque note par un coefficient (pondération) selon l'importance du critère.\nExemple : solution A notée 3 (coût, coefficient 2) et 4 (sécurité, coefficient 3) : total = 3 × 2 + 4 × 3 = 18 ; on retient la solution au total le plus élevé.\nUne solution retenue doit toujours respecter les contraintes impératives du cahier des charges, même si son total est bon.\nMéthode attendue : produire plusieurs idées, les représenter par des croquis annotés, les comparer avec des critères, puis justifier le choix final à l'oral ou à l'écrit."
+    },
+    {
+      "id": "normes-et-securite-des-objets",
+      "titre": "Normes, réglementation et sécurité des produits",
+      "ordre": 3,
+      "periode": "T1",
+      "notions": [
+        "Distinguer une norme (document de référence) et une réglementation (règle obligatoire)",
+        "Expliquer le rôle des normes : sécurité, qualité, compatibilité entre produits",
+        "Connaître la signification du marquage CE",
+        "Distinguer marquage obligatoire, marque de certification (NF) et label",
+        "Lire les pictogrammes de sécurité et de tri présents sur un produit",
+        "Repérer les contraintes de sécurité et de normes dans un cahier des charges"
+      ],
+      "motsCles": [
+        "norme",
+        "réglementation",
+        "AFNOR",
+        "ISO",
+        "marquage CE",
+        "marque NF",
+        "label",
+        "pictogramme",
+        "compatibilité",
+        "Triman",
+        "DEEE",
+        "sécurité"
+      ],
+      "reference": "Norme : document de référence qui fixe des caractéristiques ou des règles techniques pour un produit ou un service ; elle est en général d'application volontaire.\nOrganismes de normalisation : AFNOR en France (normes NF), CEN en Europe (normes EN), ISO au niveau mondial (normes ISO).\nRéglementation : ensemble des lois et règles obligatoires fixées par les pouvoirs publics ; une norme devient obligatoire quand la réglementation l'impose.\nRôle des normes : garantir la sécurité des utilisateurs, assurer la compatibilité entre produits de fabricants différents (formats de piles, prises, câbles), faciliter les échanges.\nExemple de compatibilité : depuis le 28 décembre 2024, le connecteur USB-C est obligatoire dans l'Union européenne pour charger les téléphones portables neufs et de nombreux appareils électroniques.\nMarquage CE : apposé par le fabricant, il indique que le produit respecte les exigences essentielles des règles européennes (sécurité, santé, environnement) ; il est obligatoire pour vendre certains produits dans l'Union européenne (jouets, appareils électriques…).\nLe marquage CE n'est pas un label de qualité : c'est une déclaration de conformité du fabricant.\nMarque NF : marque de certification délivrée par un organisme indépendant (AFNOR Certification) après contrôle de la conformité du produit à une norme.\nLabel : signe volontaire qui met en avant une qualité particulière (ex. : Écolabel européen pour un impact environnemental réduit).\nPictogramme poubelle barrée : déchet d'équipement électrique et électronique (DEEE) à ne pas jeter avec les ordures ménagères mais à rapporter en point de collecte.\nLogo Triman : indique que le produit ou l'emballage doit être trié ou rapporté pour être recyclé.\nPictogrammes de danger des produits chimiques : losange à bord rouge sur fond blanc (inflammable, corrosif, toxique…).\nMention sur les jouets : « Ne convient pas aux enfants de moins de 36 mois » quand ils contiennent de petites pièces (risque d'étouffement).\nDans un cahier des charges, les normes et règles de sécurité apparaissent comme des contraintes à respecter (ex. : tension maximale, absence d'angles vifs, matériaux non toxiques).\nMéthode attendue : repérer sur un produit ou son emballage les marquages et pictogrammes, puis expliquer ce que chacun garantit ou impose."
+    },
+    {
+      "id": "structures-et-stabilite-des-ouvrages",
+      "titre": "Les structures et la stabilité des ouvrages",
+      "ordre": 4,
+      "periode": "T1",
+      "notions": [
+        "Identifier les éléments d'une structure : fondations, poteaux, poutres, contreventement",
+        "Distinguer les efforts subis par une pièce : compression, traction, flexion, torsion",
+        "Expliquer le rôle de la triangulation pour rigidifier une structure",
+        "Identifier les principaux types de ponts et leur principe de fonctionnement",
+        "Justifier le choix d'un matériau selon les efforts qu'il subit",
+        "Tester ou simuler la résistance d'une structure à l'aide d'une maquette ou d'un logiciel"
+      ],
+      "motsCles": [
+        "structure",
+        "ouvrage",
+        "fondations",
+        "poteau",
+        "poutre",
+        "contreventement",
+        "compression",
+        "traction",
+        "flexion",
+        "triangulation",
+        "pont à haubans",
+        "béton armé"
+      ],
+      "reference": "Ouvrage : construction de grande taille réalisée par l'être humain (bâtiment, pont, tour, barrage, tunnel).\nStructure : ensemble des éléments qui supportent les charges et assurent la stabilité d'un ouvrage.\nÉléments d'une structure : fondations (transmettent les charges au sol), poteaux (éléments verticaux), poutres (éléments horizontaux), contreventement (empêche la déformation sous l'effet du vent).\nCharges : poids propre de l'ouvrage (charges permanentes), charges d'exploitation (personnes, véhicules, mobilier), charges climatiques (vent, neige).\nCompression : la pièce est écrasée (ex. : un poteau) ; traction : la pièce est étirée (ex. : un câble) ; flexion : la pièce se courbe (ex. : une poutre chargée en son milieu) ; torsion : la pièce est tordue autour de son axe.\nTriangulation : un cadre rectangulaire articulé se déforme, alors qu'un triangle est indéformable ; ajouter une barre en diagonale rigidifie une structure.\nExemples de triangulation : pylônes électriques, grues, charpentes, tour Eiffel (structure en treillis métallique inaugurée en 1889).\nPont à poutre : le tablier repose sur des piles et travaille en flexion.\nPont en arc : l'arc reporte les charges vers ses appuis et travaille en compression.\nPont suspendu : le tablier est accroché à des câbles porteurs tendus entre des pylônes ; les câbles travaillent en traction.\nPont à haubans : des câbles (haubans) relient directement le tablier aux pylônes ; exemple : viaduc de Millau, inauguré en 2004.\nBéton : très résistant en compression mais faible en traction ; le béton armé associe le béton à des barres d'acier qui reprennent la traction.\nAcier : résiste bien à la traction et à la compression ; bois : léger, renouvelable, bonne résistance pour sa masse.\nStabilité : un ouvrage est stable si sa base est assez large et son centre de gravité assez bas, et s'il résiste au renversement et au glissement.\nMéthode attendue : identifier sur un ouvrage ou une maquette les efforts subis par chaque élément, puis proposer une amélioration (triangulation, changement de section ou de matériau) et la tester."
+    },
+    {
+      "id": "isolation-thermique-de-l-habitat",
+      "titre": "Le confort thermique et l'isolation de l'habitat",
+      "ordre": 5,
+      "periode": "T2",
+      "notions": [
+        "Identifier les zones de pertes de chaleur d'un logement",
+        "Distinguer un matériau isolant thermique d'un matériau conducteur thermique",
+        "Comparer des matériaux à l'aide de leur conductivité thermique λ",
+        "Interpréter une image prise par une caméra thermique",
+        "Citer des solutions d'isolation, de ventilation et de chauffage économes",
+        "Expliquer les objectifs d'une réglementation pour les constructions neuves (RE2020)"
+      ],
+      "motsCles": [
+        "confort thermique",
+        "isolation",
+        "pertes de chaleur",
+        "conductivité thermique",
+        "résistance thermique",
+        "isolant",
+        "pont thermique",
+        "thermographie",
+        "VMC",
+        "double vitrage",
+        "RE2020"
+      ],
+      "reference": "La chaleur passe toujours spontanément d'un corps chaud vers un corps plus froid : en hiver, elle s'échappe de l'intérieur du logement vers l'extérieur.\nModes de transfert de chaleur : conduction (à travers un matériau), convection (par un fluide en mouvement, comme l'air), rayonnement (sans contact, comme le soleil).\nPertes d'une maison mal isolée (ordre de grandeur, ADEME) : toit 25 à 30 %, murs 20 à 25 %, renouvellement d'air 20 à 25 %, fenêtres 10 à 15 %, sols 7 à 10 %, ponts thermiques 5 à 10 %.\nConductivité thermique λ (lambda), en W/(m·K) : elle indique la facilité avec laquelle la chaleur traverse un matériau ; plus λ est petit, plus le matériau est isolant.\nOrdres de grandeur de λ : acier environ 50 ; béton environ 1,7 ; verre environ 1 ; bois environ 0,15 ; laine de verre et polystyrène environ 0,035 ; air immobile environ 0,025.\nLes isolants contiennent beaucoup d'air emprisonné (laine de verre, laine de bois, ouate de cellulose, polystyrène).\nRésistance thermique d'une couche : R = e ÷ λ (e épaisseur en mètres, R en m²·K/W) ; plus R est grand, mieux la paroi isole.\nExemple : 0,20 m de laine de verre (λ = 0,04) donne R = 0,20 ÷ 0,04 = 5 m²·K/W.\nPont thermique : zone où l'isolation est interrompue (jonction mur-plancher, encadrement de fenêtre), par laquelle la chaleur s'échappe davantage.\nThermographie : une caméra infrarouge affiche la température des surfaces en couleurs ; vue de l'extérieur en hiver, une zone claire ou rouge signale une fuite de chaleur.\nSolutions : isoler les combles, les murs et les sols, poser du double ou triple vitrage, supprimer les ponts thermiques, installer une ventilation mécanique contrôlée (VMC).\nVMC double flux : elle récupère une partie de la chaleur de l'air extrait pour réchauffer l'air neuf entrant.\nTempérature de confort recommandée par l'ADEME : 19 °C dans les pièces à vivre, 17 °C dans les chambres ; baisser le chauffage de 1 °C économise environ 7 % d'énergie.\nRE2020 : réglementation environnementale applicable aux logements neufs depuis le 1er janvier 2022 ; elle vise une faible consommation d'énergie, une baisse des émissions de CO₂ et le confort en été.\nMéthode attendue : comparer des isolants à partir d'un tableau de valeurs de λ ou de R, puis justifier un choix d'isolation en tenant compte du prix et de l'impact environnemental."
+    },
+    {
+      "id": "mouvements-et-transmissions",
+      "titre": "Les mouvements et leur transmission",
+      "ordre": 6,
+      "periode": "T2",
+      "notions": [
+        "Distinguer un mouvement de rotation et un mouvement de translation, continu ou alternatif",
+        "Identifier un mécanisme qui transmet un mouvement : engrenages, poulies et courroie, pignons et chaîne",
+        "Identifier un mécanisme qui transforme un mouvement : pignon-crémaillère, vis-écrou, bielle-manivelle, came",
+        "Déterminer le sens de rotation des roues dans un système de transmission",
+        "Calculer un rapport de transmission et une vitesse de sortie",
+        "Distinguer réducteur et multiplicateur de vitesse"
+      ],
+      "motsCles": [
+        "mouvement",
+        "rotation",
+        "translation",
+        "engrenage",
+        "roue dentée",
+        "poulie",
+        "courroie",
+        "crémaillère",
+        "bielle-manivelle",
+        "came",
+        "rapport de transmission",
+        "réducteur"
+      ],
+      "reference": "Mouvement de rotation : la pièce tourne autour d'un axe (roue, hélice) ; mouvement de translation : la pièce se déplace en ligne droite (tiroir, piston).\nUn mouvement est continu s'il se fait toujours dans le même sens, alternatif s'il change de sens régulièrement (aller-retour).\nTransmettre un mouvement : le mouvement reste du même type (rotation → rotation), mais sa vitesse ou son sens peuvent changer.\nEngrenage : deux roues dentées en contact ; en contact extérieur, elles tournent en sens inverse ; une roue intermédiaire permet de retrouver le même sens.\nPoulies et courroie : les deux poulies tournent dans le même sens (courroie non croisée) ; la courroie peut glisser.\nPignons et chaîne (vélo) : même sens de rotation, sans glissement.\nTransformer un mouvement : le type de mouvement change.\nPignon-crémaillère : rotation ↔ translation (portail coulissant, direction de voiture) ; vis-écrou : rotation → translation (étau, cric) ; bielle-manivelle : rotation ↔ translation alternative (moteur à pistons) ; came : rotation → translation alternative.\nRapport de transmission : r = vitesse de sortie ÷ vitesse d'entrée.\nPour un engrenage : r = nombre de dents de la roue menante ÷ nombre de dents de la roue menée ; pour des poulies : r = diamètre de la poulie menante ÷ diamètre de la poulie menée.\nExemple : pignon moteur de 10 dents entraînant une roue de 40 dents : r = 10 ÷ 40 = 0,25 ; si le moteur tourne à 1 200 tr/min, la roue tourne à 1 200 × 0,25 = 300 tr/min.\nSi r < 1, le système est un réducteur : la sortie tourne moins vite, mais avec plus de force (couple plus grand) ; si r > 1, c'est un multiplicateur.\nExemple du vélo : plateau de 44 dents et pignon arrière de 11 dents : r = 44 ÷ 11 = 4 ; la roue fait 4 tours pour un tour de pédalier.\nMéthode attendue : sur un schéma, repérer la pièce menante et la pièce menée, indiquer le sens de rotation de chaque roue, puis calculer le rapport et la vitesse de sortie."
+    },
+    {
+      "id": "liaisons-mecaniques",
+      "titre": "Les liaisons mécaniques",
+      "ordre": 7,
+      "periode": "T2",
+      "notions": [
+        "Définir une liaison mécanique entre deux pièces",
+        "Identifier les mouvements possibles (degrés de liberté) entre deux pièces",
+        "Reconnaître les liaisons encastrement, pivot, glissière, pivot glissant, hélicoïdale et rotule",
+        "Associer une liaison à un exemple d'objet du quotidien",
+        "Repérer les ensembles de pièces qui bougent ensemble dans un mécanisme",
+        "Simuler le mouvement d'un mécanisme avec un logiciel de modélisation 3D"
+      ],
+      "motsCles": [
+        "liaison",
+        "mobilité",
+        "degré de liberté",
+        "encastrement",
+        "pivot",
+        "glissière",
+        "pivot glissant",
+        "hélicoïdale",
+        "rotule",
+        "schéma cinématique",
+        "assemblage"
+      ],
+      "reference": "Liaison mécanique : relation de contact entre deux pièces qui autorise certains mouvements et en empêche d'autres.\nDans l'espace, une pièce libre peut faire 6 mouvements élémentaires : 3 translations (selon les axes x, y, z) et 3 rotations (autour de ces axes).\nDegré de liberté (ou mobilité) : mouvement élémentaire autorisé par une liaison ; on le note souvent T pour une translation et R pour une rotation.\nLiaison encastrement (ou complète) : aucun mouvement possible (0 degré de liberté) ; exemples : pièces soudées, collées, vissées et serrées.\nLiaison pivot : une seule rotation autour d'un axe ; exemples : charnière de porte, roue de vélo sur son axe.\nLiaison glissière : une seule translation selon un axe ; exemples : tiroir, règle d'un pied à coulisse.\nLiaison pivot glissant : une rotation et une translation selon le même axe, indépendantes ; exemple : tige dans un tube lisse.\nLiaison hélicoïdale : une rotation et une translation liées entre elles ; exemple : vis dans un écrou, couvercle de bocal vissé.\nLiaison rotule : trois rotations ; exemples : manette de jeu (joystick), attelage à boule d'une voiture.\nUn mécanisme se décompose en ensembles de pièces qui restent fixes les unes par rapport aux autres (pièces encastrées entre elles) ; les liaisons relient ces ensembles.\nSchéma cinématique : représentation simplifiée d'un mécanisme où chaque liaison est dessinée par un symbole normalisé, sans tenir compte de la forme réelle des pièces.\nEn modélisation 3D (CAO), on assemble les pièces avec des contraintes (coïncidence, alignement d'axes) qui reproduisent les liaisons, puis on simule le mouvement.\nMéthode attendue : pour deux pièces, chercher quelles translations et quelles rotations sont possibles, puis en déduire le nom de la liaison."
+    },
+    {
+      "id": "installation-electrique-de-l-habitat",
+      "titre": "L'installation électrique de l'habitat",
+      "ordre": 8,
+      "periode": "T2",
+      "notions": [
+        "Identifier les éléments d'une installation domestique : compteur, disjoncteur de branchement, tableau électrique, circuits",
+        "Lire et compléter un schéma électrique avec les symboles normalisés",
+        "Distinguer un montage en série et un montage en dérivation",
+        "Expliquer le fonctionnement d'un montage va-et-vient",
+        "Identifier le rôle des dispositifs de protection : disjoncteur, interrupteur différentiel, prise de terre",
+        "Appliquer les règles de sécurité face aux dangers du courant électrique"
+      ],
+      "motsCles": [
+        "installation électrique",
+        "compteur",
+        "tableau électrique",
+        "schéma électrique",
+        "dérivation",
+        "série",
+        "va-et-vient",
+        "disjoncteur",
+        "interrupteur différentiel",
+        "prise de terre",
+        "court-circuit",
+        "surcharge"
+      ],
+      "reference": "En France, le réseau électrique domestique fournit une tension alternative de 230 V et de fréquence 50 Hz.\nÉléments d'une installation : compteur (mesure l'énergie consommée, en kWh ; le compteur Linky est communicant), disjoncteur de branchement (coupe tout le logement), tableau électrique (regroupe les protections de chaque circuit), circuits (éclairage, prises, appareils puissants).\nLes règles d'installation électrique des logements sont fixées par la norme NF C 15-100.\nSchéma électrique : représentation d'un circuit avec des symboles normalisés (générateur, lampe, interrupteur, moteur, fils de liaison).\nMontage en série : les dipôles forment une seule boucle ; si un dipôle est coupé, tout le circuit s'arrête.\nMontage en dérivation : chaque dipôle est sur sa propre branche ; dans un logement, tous les appareils sont branchés en dérivation et reçoivent chacun 230 V.\nVa-et-vient : deux interrupteurs spéciaux (commutateurs ou inverseurs) commandent une même lampe depuis deux endroits (ex. : en haut et en bas d'un escalier).\nCouleurs des fils : neutre en bleu, protection (terre) en vert et jaune, phase dans une autre couleur (souvent rouge, marron ou noir).\nCourt-circuit : les deux bornes d'un générateur sont reliées par un fil sans appareil ; le courant devient très intense et peut provoquer un incendie.\nSurcharge : trop d'appareils sur un même circuit ; le courant dépasse la valeur prévue et les fils chauffent.\nDisjoncteur divisionnaire (ou fusible) : coupe le circuit en cas de court-circuit ou de surcharge ; il protège l'installation.\nInterrupteur différentiel 30 mA : coupe le courant s'il détecte une fuite de courant, par exemple à travers le corps d'une personne ; il protège les personnes.\nPrise de terre : évacue vers le sol les courants de fuite des appareils à carcasse métallique (lave-linge, four).\nDangers : le corps humain conduit le courant ; l'électrisation peut provoquer brûlures, arrêt respiratoire ou cardiaque (électrocution quand elle est mortelle).\nRègles de sécurité : couper le courant avant toute intervention, ne pas toucher un appareil avec les mains mouillées, ne pas surcharger une multiprise, protéger les prises (cache-prises).\nMéthode attendue : lire le schéma d'une installation, indiquer la position des interrupteurs pour qu'une lampe s'allume, et nommer la protection adaptée à chaque danger."
+    },
+    {
+      "id": "domotique-et-habitat-connecte",
+      "titre": "La domotique et la gestion de l'habitat",
+      "ordre": 9,
+      "periode": "T3",
+      "notions": [
+        "Définir la domotique et ses domaines d'application : confort, sécurité, économies d'énergie, assistance",
+        "Identifier les capteurs, l'unité de traitement et les actionneurs d'un système domotique",
+        "Décrire un scénario domotique sous la forme « si… alors… »",
+        "Expliquer comment la domotique permet de réduire la consommation d'énergie",
+        "Distinguer commande locale, programmation horaire et commande à distance",
+        "Identifier les limites et les risques : coût, dépendance au réseau, piratage, données personnelles"
+      ],
+      "motsCles": [
+        "domotique",
+        "maison connectée",
+        "scénario",
+        "capteur",
+        "actionneur",
+        "box domotique",
+        "thermostat programmable",
+        "détecteur de présence",
+        "volet roulant",
+        "commande à distance",
+        "économie d'énergie"
+      ],
+      "reference": "Domotique : ensemble des techniques qui permettent de gérer, d'automatiser et de commander à distance les équipements d'un logement ; le mot vient du latin domus (maison) et d'informatique.\nDomaines : confort (éclairage, volets, chauffage), sécurité (alarme, détecteur de fumée, caméra), économies d'énergie (chauffage, éclairage), assistance aux personnes âgées ou en situation de handicap.\nUn système domotique fonctionne comme un système automatisé : chaîne d'information (acquérir, traiter, communiquer) et chaîne d'énergie (alimenter, distribuer, convertir, transmettre).\nCapteurs utilisés : détecteur de mouvement (infrarouge), capteur de température, capteur de luminosité, détecteur d'ouverture de porte, détecteur de fumée, anémomètre (vent).\nUnité de traitement : box domotique, centrale ou microcontrôleur ; elle exécute le programme et les scénarios.\nActionneurs : moteur de volet roulant, lampe, radiateur, sirène, serrure électrique.\nScénario domotique : suite d'actions déclenchées par un événement ou une condition, par exemple « si le vent dépasse 50 km/h, alors remonter le store ».\nProgrammation horaire : les actions se déclenchent à une heure donnée (ex. : chauffage abaissé la nuit et en journée quand le logement est vide).\nCommande à distance : par une application sur smartphone, via Internet et la box ; la communication sans fil utilise par exemple le Wi-Fi, le Bluetooth ou des protocoles dédiés comme Zigbee.\nÉconomies d'énergie : thermostat programmable, éclairage commandé par détecteur de présence, coupure des appareils en veille, fermeture des volets la nuit en hiver.\nRepère ADEME : baisser le chauffage de 1 °C permet d'économiser environ 7 % d'énergie.\nLimites : coût d'installation, consommation électrique des équipements connectés, dépendance à Internet, risque de piratage, collecte de données personnelles sur les habitudes des habitants.\nMéthode attendue : à partir d'un besoin, écrire un scénario avec l'événement déclencheur, la condition, et les actions, puis identifier le capteur et l'actionneur nécessaires."
+    },
+    {
+      "id": "codage-numerique-de-l-information",
+      "titre": "Le codage numérique de l'information",
+      "ordre": 10,
+      "periode": "T3",
+      "notions": [
+        "Distinguer une information analogique et une information numérique",
+        "Définir le bit et l'octet",
+        "Convertir un petit nombre entier du décimal vers le binaire et inversement",
+        "Expliquer comment un texte est codé (table ASCII)",
+        "Expliquer comment une image est codée (pixels, couleurs RVB)",
+        "Utiliser les unités de quantité d'information et calculer la taille d'une image simple"
+      ],
+      "motsCles": [
+        "analogique",
+        "numérique",
+        "binaire",
+        "bit",
+        "octet",
+        "code ASCII",
+        "pixel",
+        "définition",
+        "RVB",
+        "kilooctet",
+        "mégaoctet",
+        "numérisation"
+      ],
+      "reference": "Information analogique : elle varie de façon continue (ex. : température, son, aiguille d'une montre).\nInformation numérique : elle est représentée par une suite de nombres, codés en binaire avec seulement deux valeurs, 0 et 1.\nNumérisation : transformation d'une information analogique en information numérique, réalisée par un convertisseur analogique-numérique (CAN).\nBit (binary digit) : plus petite unité d'information, qui vaut 0 ou 1.\nOctet : groupe de 8 bits ; un octet peut prendre 2⁸ = 256 valeurs différentes, de 0 à 255.\nBinaire vers décimal : chaque rang a un poids qui est une puissance de 2 (… 16, 8, 4, 2, 1) ; exemple : 1101 = 8 + 4 + 0 + 1 = 13.\nDécimal vers binaire : on décompose le nombre en somme de puissances de 2 ; exemple : 6 = 4 + 2 donc 6 s'écrit 110 en binaire.\nAvec n bits, on peut coder 2ⁿ valeurs différentes (ex. : 3 bits donnent 8 valeurs, de 0 à 7).\nCodage d'un texte : chaque caractère correspond à un nombre ; dans la table ASCII, « A » = 65, soit 01000001 en binaire ; l'ASCII code 128 caractères sur 7 bits ; l'Unicode permet de coder les caractères accentués et ceux de toutes les langues.\nCodage d'une image : l'image est découpée en pixels (petits carrés) ; la définition est le nombre de pixels (ex. : 1 920 × 1 080).\nCouleur d'un pixel en RVB : trois composantes rouge, vert, bleu, chacune codée sur un octet (de 0 à 255) ; soit 3 octets par pixel et 256³ = 16 777 216 couleurs possibles.\nExemples RVB : (255, 0, 0) = rouge ; (0, 0, 0) = noir ; (255, 255, 255) = blanc.\nUnités : 1 ko (kilooctet) = 1 000 octets ; 1 Mo = 1 000 ko ; 1 Go = 1 000 Mo ; 1 To = 1 000 Go (en informatique, on rencontre aussi 1 Kio = 1 024 octets).\nExemple : une image de 800 × 600 pixels en RVB non compressée occupe 800 × 600 × 3 = 1 440 000 octets, soit 1,44 Mo.\nLa compression (JPEG pour les photos, MP3 pour le son) réduit la taille des fichiers.\nMéthode attendue : convertir un nombre en binaire en utilisant le tableau des puissances de 2, et calculer une taille de fichier en multipliant nombre de pixels × octets par pixel."
+    },
+    {
+      "id": "sous-programmes-et-messages",
+      "titre": "Structurer un programme : sous-programmes et messages",
+      "ordre": 11,
+      "periode": "T3",
+      "notions": [
+        "Décomposer un problème en sous-problèmes plus simples",
+        "Créer et utiliser un sous-programme (bloc personnalisé), avec ou sans paramètre",
+        "Utiliser des messages pour faire communiquer plusieurs objets ou lutins",
+        "Faire exécuter plusieurs scripts en parallèle à partir d'un même événement",
+        "Lire et modifier un programme existant pour changer son comportement",
+        "Tester un programme, repérer une erreur et la corriger"
+      ],
+      "motsCles": [
+        "décomposition",
+        "sous-problème",
+        "sous-programme",
+        "bloc personnalisé",
+        "paramètre",
+        "message",
+        "envoyer à tous",
+        "quand je reçois",
+        "parallélisme",
+        "script",
+        "débogage",
+        "test"
+      ],
+      "reference": "Décomposer un problème : découper une tâche complexe en sous-problèmes plus simples, chacun programmé séparément ; on rend ainsi le programme plus lisible.\nExemple : faire traverser un robot dans un labyrinthe se décompose en « avancer jusqu'à un obstacle », « choisir une direction », « tourner ».\nSous-programme : suite d'instructions regroupée sous un nom, que l'on peut appeler plusieurs fois dans le programme principal ; il évite de répéter le même code.\nDans Scratch, on crée un sous-programme dans la catégorie « Mes blocs » avec « Créer un bloc », puis on le définit sous le bloc « définir ».\nParamètre : valeur transmise au sous-programme quand on l'appelle, qui modifie son comportement (ex. : la longueur du côté).\nExemple : bloc « polygone (n) » défini par : répéter n fois [avancer de 50 pas ; tourner de 360 ÷ n degrés] ; « polygone (4) » trace un carré (angle de 90°), « polygone (3) » un triangle équilatéral (angle de 120°).\nMessage : signal envoyé par un script et reçu par d'autres scripts ou lutins, qui permet de synchroniser leurs actions.\nDans Scratch : « envoyer à tous [message] » déclenche les scripts qui commencent par « quand je reçois [message] » ; « envoyer à tous et attendre » attend la fin de ces scripts avant de continuer.\nParallélisme : plusieurs scripts qui démarrent sur le même événement (ex. : « quand le drapeau vert est cliqué ») s'exécutent en même temps.\nExemple : dans un jeu, un script gère le déplacement du personnage pendant qu'un autre compte le temps ; quand le temps est écoulé, un message « fin de partie » arrête les autres lutins.\nProgramme principal : il enchaîne les appels aux sous-programmes dans l'ordre voulu.\nDébogage : rechercher et corriger les erreurs (bugs) ; on teste le programme pas à pas, on affiche la valeur des variables et on compare le comportement obtenu au comportement attendu.\nMéthode attendue : à partir d'un cahier des charges, écrire l'algorithme décomposé en sous-programmes, le programmer, puis le tester et le corriger."
+    },
+    {
+      "id": "stocker-et-proteger-les-donnees",
+      "titre": "Stocker, organiser et protéger les données numériques",
+      "ordre": 12,
+      "periode": "T3",
+      "notions": [
+        "Identifier les supports de stockage : disque dur, SSD, clé USB, carte mémoire, stockage en ligne",
+        "Organiser ses fichiers dans une arborescence de dossiers et reconnaître les extensions",
+        "Distinguer stockage local et stockage en ligne (cloud) dans des centres de données",
+        "Mettre en place une sauvegarde de ses données",
+        "Protéger ses données : mot de passe robuste, droits d'accès, données personnelles (RGPD)",
+        "Mesurer l'impact environnemental du stockage et des échanges de données"
+      ],
+      "motsCles": [
+        "donnée",
+        "fichier",
+        "dossier",
+        "arborescence",
+        "extension",
+        "chemin d'accès",
+        "disque dur",
+        "SSD",
+        "cloud",
+        "centre de données",
+        "sauvegarde",
+        "RGPD"
+      ],
+      "reference": "Fichier : ensemble de données enregistrées sous un nom ; l'extension indique son type (.txt texte, .pdf document, .jpg ou .png image, .mp3 son, .mp4 vidéo).\nArborescence : organisation des fichiers en dossiers et sous-dossiers, comme les branches d'un arbre ; le chemin d'accès décrit le trajet jusqu'au fichier (ex. : Documents/Technologie/projet.odt).\nDisque dur (HDD) : stocke les données sur des plateaux magnétiques en rotation ; grande capacité, moins cher, mais plus lent et plus fragile aux chocs.\nSSD, clé USB, carte mémoire : mémoire flash sans pièce mobile ; plus rapide et résistante aux chocs.\nStockage local : sur l'appareil ou un support que l'on possède ; stockage en ligne (cloud) : sur des serveurs distants accessibles par Internet.\nCentre de données (data center) : bâtiment regroupant des milliers de serveurs qui stockent et traitent les données ; il consomme beaucoup d'électricité, notamment pour le refroidissement.\nSauvegarde : copie de ses données sur un autre support pour pouvoir les récupérer en cas de panne, de vol ou de virus.\nRègle 3-2-1 : garder 3 copies des données, sur 2 supports différents, dont 1 dans un autre lieu (ou en ligne).\nMot de passe robuste : long (au moins 12 caractères selon la CNIL), mêlant majuscules, minuscules, chiffres et caractères spéciaux, différent pour chaque compte, jamais partagé.\nDroits d'accès : on choisit qui peut lire, modifier ou partager un fichier (lecture seule, modification).\nDonnée personnelle : information qui permet d'identifier une personne directement ou indirectement (nom, photo, adresse, numéro de téléphone, adresse IP).\nRGPD (règlement général sur la protection des données) : règlement européen appliqué depuis le 25 mai 2018 ; il donne à chacun le droit d'accéder à ses données, de les rectifier et d'en demander l'effacement ; en France, la CNIL veille à son respect.\nImpact environnemental : stocker et échanger des données consomme de l'énergie ; supprimer les fichiers inutiles, éviter les pièces jointes lourdes et garder ses appareils plus longtemps réduisent cet impact.\nMéthode attendue : organiser un dossier de projet avec des noms de fichiers clairs, choisir un support adapté à un besoin (capacité, mobilité, partage) et justifier une stratégie de sauvegarde."
+    }
+  ]
+}

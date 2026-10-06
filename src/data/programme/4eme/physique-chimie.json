@@ -1,0 +1,344 @@
+{
+  "classe": "4ème",
+  "matiere": "Physique-Chimie",
+  "programme": "Physique-chimie cycle 4, partie habituellement traitée en 4e (BO spécial n°11 du 26/11/2015, ajusté BO n°31 du 30/07/2020)",
+  "modele": "claude-opus-5-5 (abonnement)",
+  "genereLe": "2026-10-05",
+  "relu": false,
+  "chapitres": [
+    {
+      "id": "molecules-et-atomes",
+      "titre": "Molécules et atomes",
+      "ordre": 1,
+      "periode": "T1",
+      "notions": [
+        "Savoir que la matière est constituée de molécules, elles-mêmes formées d'atomes",
+        "Connaître les symboles des atomes H, C, O, N et leur représentation conventionnelle (couleurs des modèles)",
+        "Lire et écrire la formule chimique d'une molécule (H₂O, O₂, CO₂, CH₄…)",
+        "Déterminer la nature et le nombre d'atomes d'une molécule à partir de sa formule",
+        "Distinguer corps pur simple et corps pur composé à l'échelle moléculaire",
+        "Connaître l'ordre de grandeur de la taille d'un atome (10⁻¹⁰ m)"
+      ],
+      "motsCles": [
+        "molécule",
+        "atome",
+        "symbole chimique",
+        "formule chimique",
+        "indice",
+        "modèle moléculaire",
+        "hydrogène",
+        "carbone",
+        "oxygène",
+        "azote",
+        "corps pur simple",
+        "corps pur composé"
+      ],
+      "reference": "La matière est constituée de particules extrêmement petites : les molécules, elles-mêmes constituées d'atomes.\nUn atome est représenté par un symbole : une lettre majuscule, parfois suivie d'une minuscule (H hydrogène, C carbone, O oxygène, N azote, Cu cuivre, Fe fer).\nIl existe un peu plus d'une centaine d'éléments chimiques différents, rangés dans la classification périodique ; en assemblant les atomes, on obtient des millions de molécules.\nDans les modèles moléculaires, chaque atome est représenté par une sphère de couleur conventionnelle : H blanc, C noir, O rouge, N bleu.\nUne molécule est un assemblage d'atomes liés entre eux ; elle est électriquement neutre.\nLa formule chimique d'une molécule indique la nature des atomes (symboles) et leur nombre (indice écrit en bas à droite du symbole) ; l'indice 1 ne s'écrit pas.\nExemples : eau H₂O (2 atomes d'hydrogène, 1 atome d'oxygène) ; dioxygène O₂ ; diazote N₂ ; dihydrogène H₂ ; dioxyde de carbone CO₂ ; méthane CH₄ ; butane C₄H₁₀.\nNe pas confondre CO₂ (dioxyde de carbone, 3 atomes) et CO (monoxyde de carbone, 2 atomes) : changer un indice change la molécule.\nLe préfixe indique le nombre d'atomes : di = 2 (dioxygène O₂), mono = 1 (monoxyde de carbone CO).\nUn corps pur est constitué d'une seule sorte de molécules ; un mélange contient plusieurs sortes de molécules (l'air : surtout N₂ et O₂).\nUn corps pur simple est formé de molécules constituées d'une seule sorte d'atomes (O₂, H₂, N₂) ; un corps pur composé est formé de molécules contenant plusieurs sortes d'atomes (H₂O, CO₂).\nLe carbone (C) et les métaux comme le fer ou le cuivre sont des corps purs simples constitués d'atomes (non regroupés en molécules).\nUn atome a une taille de l'ordre de 10⁻¹⁰ m (un dix-milliardième de mètre) : une goutte d'eau contient des milliards de milliards de molécules.\nMéthode : pour lire une formule, on liste chaque symbole et son indice ; pour l'écrire, on compte les atomes de chaque sorte sur le modèle moléculaire."
+    },
+    {
+      "id": "modele-moleculaire-de-la-matiere",
+      "titre": "Le modèle moléculaire de la matière",
+      "ordre": 2,
+      "periode": "T1",
+      "notions": [
+        "Décrire les états solide, liquide et gazeux à l'échelle moléculaire (compact/dispersé, ordonné/désordonné)",
+        "Interpréter un changement d'état comme une réorganisation des molécules, sans changement de leur nature",
+        "Expliquer avec les molécules la conservation de la masse et la variation du volume lors d'un changement d'état",
+        "Interpréter la dissolution à l'échelle moléculaire (dispersion du soluté parmi les molécules de solvant)",
+        "Représenter un corps pur et un mélange avec des modèles moléculaires",
+        "Expliquer la compressibilité des gaz par l'espace entre les molécules"
+      ],
+      "motsCles": [
+        "modèle moléculaire",
+        "état solide",
+        "état liquide",
+        "état gazeux",
+        "compact",
+        "dispersé",
+        "ordonné",
+        "désordonné",
+        "changement d'état",
+        "agitation des molécules",
+        "dissolution",
+        "compressible"
+      ],
+      "reference": "Le modèle moléculaire permet d'expliquer les propriétés de la matière à notre échelle à partir du comportement des molécules.\nÉtat solide : molécules très proches (compact), liées entre elles et bien rangées (ordonné) ; elles vibrent sur place : le solide a une forme propre.\nÉtat liquide : molécules proches (compact) mais désordonnées, elles glissent les unes sur les autres : le liquide n'a pas de forme propre, il prend la forme du récipient.\nÉtat gazeux : molécules très éloignées les unes des autres (dispersé), désordonnées et très agitées : le gaz occupe tout l'espace disponible.\nUn gaz est compressible et expansible car il y a beaucoup d'espace vide entre ses molécules ; un liquide et un solide sont quasiment incompressibles.\nLors d'un changement d'état, les molécules restent les mêmes (même nature, même nombre) : seule leur disposition et leur agitation changent ; c'est une transformation physique.\nExemple : la vaporisation de l'eau : les molécules H₂O se séparent et se dispersent, mais restent des molécules H₂O.\nLe nombre de molécules ne change pas lors d'un changement d'état, donc la masse se conserve.\nLe volume change car l'espace entre les molécules change (cas particulier de l'eau : la glace occupe un volume plus grand que l'eau liquide).\nPlus la température est élevée, plus les molécules sont agitées ; c'est cette agitation qui permet le passage d'un état à un autre quand on chauffe.\nDissolution : les molécules du soluté (sucre) se dispersent entre les molécules du solvant (eau) ; elles ne disparaissent pas, donc la masse se conserve : m(solution) = m(soluté) + m(solvant).\nUn corps pur est représenté par une seule sorte de molécules, un mélange par plusieurs sortes de molécules (modèle de l'air : environ 4 molécules de N₂ pour 1 molécule de O₂).\nDans les schémas de modèles moléculaires, on garde la même représentation d'une molécule d'un état à l'autre : seule la disposition change."
+    },
+    {
+      "id": "transformation-physique-ou-chimique",
+      "titre": "Transformation physique ou transformation chimique",
+      "ordre": 3,
+      "periode": "T1",
+      "notions": [
+        "Distinguer une transformation physique d'une transformation chimique",
+        "Identifier les réactifs et les produits d'une transformation chimique",
+        "Repérer les indices d'une transformation chimique (apparition d'une nouvelle espèce, changement de couleur, dégagement gazeux, effet thermique)",
+        "Savoir que lors d'une transformation chimique les molécules des réactifs sont détruites et que leurs atomes se réarrangent pour former les produits",
+        "Écrire le bilan d'une transformation chimique en toutes lettres",
+        "Distinguer espèce chimique et transformation"
+      ],
+      "motsCles": [
+        "transformation physique",
+        "transformation chimique",
+        "réactif",
+        "produit",
+        "espèce chimique",
+        "bilan",
+        "réarrangement des atomes",
+        "état initial",
+        "état final",
+        "dégagement gazeux"
+      ],
+      "reference": "Une espèce chimique est une substance caractérisée par la nature des molécules (ou atomes) qui la constituent : eau, dioxygène, dioxyde de carbone.\nLors d'une transformation physique (changement d'état, dissolution, mélange), aucune nouvelle espèce chimique n'apparaît : les molécules restent les mêmes.\nExemples de transformations physiques : la fonte de la glace, la dissolution du sucre dans l'eau, l'évaporation de l'eau.\nLors d'une transformation chimique, des espèces chimiques disparaissent (les réactifs) et de nouvelles espèces chimiques apparaissent (les produits).\nExemples de transformations chimiques : une combustion, la rouille du fer, la cuisson d'un œuf, la réaction entre le vinaigre et le bicarbonate de soude.\nIndices d'une transformation chimique : changement de couleur, dégagement de gaz (effervescence), formation d'un solide, élévation ou baisse de température, apparition d'une odeur. Ces indices ne suffisent pas toujours : il faut identifier le nouveau produit par un test.\nOn décrit une transformation par son état initial (espèces présentes avant) et son état final (espèces présentes après).\nUn réactif peut être totalement consommé ou rester en partie à l'état final s'il était en excès.\nBilan en toutes lettres : réactifs → produits, la flèche signifiant « se transforme en » et le signe + signifiant « et ».\nExemple : vinaigre + bicarbonate de soude → dioxyde de carbone + eau + acétate de sodium (le gaz qui se dégage trouble l'eau de chaux).\nInterprétation moléculaire : les molécules des réactifs sont cassées, leurs atomes se réarrangent pour former les molécules des produits.\nLes atomes ne sont ni créés ni détruits lors d'une transformation chimique : ce sont les mêmes atomes, assemblés autrement.\nMéthode : pour savoir si une transformation est chimique, on cherche si une nouvelle espèce chimique est apparue à l'état final."
+    },
+    {
+      "id": "tests-d-identification",
+      "titre": "Identifier des espèces chimiques par des tests",
+      "ordre": 4,
+      "periode": "T1",
+      "notions": [
+        "Connaître le test de l'eau au sulfate de cuivre anhydre",
+        "Connaître le test du dioxyde de carbone à l'eau de chaux",
+        "Connaître le test du dioxygène avec une bûchette incandescente",
+        "Connaître le test du dihydrogène par une petite détonation",
+        "Utiliser un test pour prouver l'apparition d'un produit lors d'une transformation chimique",
+        "Respecter les règles de sécurité au laboratoire (lunettes, blouse, pictogrammes)"
+      ],
+      "motsCles": [
+        "test caractéristique",
+        "sulfate de cuivre anhydre",
+        "eau de chaux",
+        "bûchette incandescente",
+        "détonation",
+        "dioxyde de carbone",
+        "dioxygène",
+        "dihydrogène",
+        "eau",
+        "pictogramme de danger"
+      ],
+      "reference": "Un test caractéristique permet d'identifier une espèce chimique grâce à une réaction visible (changement de couleur, trouble, flamme).\nTest de l'eau : le sulfate de cuivre anhydre, poudre blanche, devient bleu au contact de l'eau.\nCe test révèle la présence d'eau mais ne dit pas si un liquide est de l'eau pure.\nTest du dioxyde de carbone (CO₂) : l'eau de chaux, limpide, se trouble (devient blanchâtre) en présence de dioxyde de carbone.\nTest du dioxygène (O₂) : une bûchette incandescente (qui rougeoie sans flamme) se rallume au contact du dioxygène pur.\nTest du dihydrogène (H₂) : une flamme approchée de l'ouverture d'un tube contenant du dihydrogène produit une petite détonation (« pop ») ; de l'eau se forme.\nLe dioxygène est un comburant : il entretient les combustions, d'où la bûchette qui se rallume.\nLe dioxyde de carbone éteint une flamme mais ce n'est pas un test suffisant : d'autres gaz (comme le diazote) éteignent aussi une flamme ; on utilise l'eau de chaux.\nExemple : en soufflant dans de l'eau de chaux avec une paille, elle se trouble : l'air expiré contient du dioxyde de carbone.\nExemple : la buée formée sur un verre froid au-dessus d'une flamme de bougie bleuit le sulfate de cuivre anhydre : la combustion produit de l'eau.\nLes tests servent à prouver qu'une transformation chimique a eu lieu, en identifiant un produit qui n'existait pas à l'état initial.\nSécurité au laboratoire : porter des lunettes et une blouse, attacher ses cheveux, lire les pictogrammes de danger (inflammable, corrosif, toxique, nocif) sur les flacons.\nLe dihydrogène est très inflammable : on ne réalise le test qu'avec de petites quantités, sous la surveillance du professeur."
+    },
+    {
+      "id": "combustion-du-carbone",
+      "titre": "La combustion du carbone",
+      "ordre": 5,
+      "periode": "T2",
+      "notions": [
+        "Savoir qu'une combustion nécessite un combustible, un comburant et une source de chaleur (triangle du feu)",
+        "Décrire la combustion du carbone dans le dioxygène (incandescence, consommation des réactifs)",
+        "Identifier le produit de la combustion du carbone par le test à l'eau de chaux",
+        "Écrire le bilan et l'équation de la combustion du carbone : C + O₂ → CO₂",
+        "Interpréter la combustion à l'échelle des atomes et des molécules",
+        "Connaître le rôle du dioxygène de l'air dans les combustions et l'effet de l'apport en dioxygène"
+      ],
+      "motsCles": [
+        "combustion",
+        "combustible",
+        "comburant",
+        "triangle du feu",
+        "carbone",
+        "dioxygène",
+        "dioxyde de carbone",
+        "incandescence",
+        "eau de chaux",
+        "équation de réaction",
+        "effet de serre"
+      ],
+      "reference": "Une combustion est une transformation chimique qui nécessite un combustible (ce qui brûle), un comburant (en général le dioxygène) et une source de chaleur pour la démarrer : c'est le triangle du feu.\nSupprimer un des trois éléments du triangle du feu arrête la combustion (couvrir une casserole en feu supprime le dioxygène).\nLe charbon de bois est constitué presque uniquement de carbone (C) ; c'est un combustible.\nDans l'air, le carbone brûle lentement en rougeoyant (incandescence) ; dans un flacon de dioxygène pur, la combustion est beaucoup plus vive, avec des étincelles.\nPendant la combustion, le carbone et le dioxygène sont consommés : ce sont les réactifs.\nÀ la fin, on verse de l'eau de chaux dans le flacon : elle se trouble, donc il s'est formé du dioxyde de carbone (CO₂) : c'est le produit.\nLa combustion du carbone libère de l'énergie sous forme de chaleur et de lumière.\nBilan : carbone + dioxygène → dioxyde de carbone.\nÉquation de réaction : C + O₂ → CO₂.\nInterprétation : un atome de carbone et une molécule de dioxygène (2 atomes O) se réarrangent pour former une molécule de dioxyde de carbone (1 C et 2 O) : les atomes sont conservés.\nL'air contient environ 21 % de dioxygène ; c'est lui qui entretient la combustion à l'air libre (le diazote n'y participe pas).\nSi le dioxygène manque, la combustion du carbone peut être incomplète et produire du monoxyde de carbone (CO), gaz très toxique : il ne faut jamais faire brûler du charbon (barbecue, brasero) dans un lieu fermé.\nLe dioxyde de carbone produit par les combustions s'accumule dans l'atmosphère et renforce l'effet de serre, responsable du réchauffement climatique."
+    },
+    {
+      "id": "combustions-du-methane-et-du-butane",
+      "titre": "Combustions du méthane et du butane",
+      "ordre": 6,
+      "periode": "T2",
+      "notions": [
+        "Connaître les formules du méthane (CH₄) et du butane (C₄H₁₀)",
+        "Identifier les produits d'une combustion complète d'un hydrocarbure : dioxyde de carbone et eau",
+        "Écrire l'équation de la combustion complète du méthane : CH₄ + 2 O₂ → CO₂ + 2 H₂O",
+        "Distinguer combustion complète (flamme bleue) et combustion incomplète (flamme jaune, suie, monoxyde de carbone)",
+        "Connaître les dangers du monoxyde de carbone et les gestes de prévention",
+        "Relier les combustions d'énergies fossiles à l'augmentation du dioxyde de carbone dans l'atmosphère"
+      ],
+      "motsCles": [
+        "méthane",
+        "butane",
+        "gaz naturel",
+        "hydrocarbure",
+        "combustion complète",
+        "combustion incomplète",
+        "flamme bleue",
+        "flamme jaune",
+        "suie",
+        "monoxyde de carbone",
+        "intoxication",
+        "détecteur"
+      ],
+      "reference": "Le méthane (CH₄) est le principal constituant du gaz naturel (gaz de ville) ; le butane (C₄H₁₀) est vendu en bouteilles (camping, gazinière).\nCe sont des hydrocarbures : des molécules constituées uniquement d'atomes de carbone et d'hydrogène.\nLors de la combustion complète du méthane, avec suffisamment de dioxygène, la flamme est bleue et peu éclairante.\nProduits de la combustion complète : du dioxyde de carbone (l'eau de chaux se trouble) et de l'eau (buée qui bleuit le sulfate de cuivre anhydre).\nBilan : méthane + dioxygène → dioxyde de carbone + eau.\nÉquation : CH₄ + 2 O₂ → CO₂ + 2 H₂O (1 C, 4 H et 4 O de chaque côté).\nCombustion complète du butane : 2 C₄H₁₀ + 13 O₂ → 8 CO₂ + 10 H₂O.\nLorsque le dioxygène est insuffisant (virole d'un bec Bunsen fermée, appareil mal réglé), la combustion est incomplète : la flamme est jaune et éclairante, elle dépose de la suie noire (carbone).\nUne combustion incomplète produit aussi du monoxyde de carbone (CO), gaz incolore, inodore et très toxique, qui peut être mortel.\nLe monoxyde de carbone empêche le sang de transporter correctement le dioxygène ; symptômes : maux de tête, nausées, vertiges, malaise.\nPrévention : aérer les pièces, ne pas boucher les aérations, faire entretenir chaque année chaudières et chauffe-eau, installer un détecteur de monoxyde de carbone, ne jamais utiliser un barbecue ou un groupe électrogène à l'intérieur.\nLe gaz naturel, le butane, le pétrole et le charbon sont des combustibles fossiles, non renouvelables ; leur combustion libère du dioxyde de carbone qui renforce l'effet de serre.\nUne fuite de gaz est dangereuse (risque d'explosion) : on ne crée aucune étincelle, on ferme l'arrivée de gaz, on aère et on appelle les secours."
+    },
+    {
+      "id": "conservation-de-la-masse",
+      "titre": "Conservation de la masse lors d'une transformation chimique",
+      "ordre": 7,
+      "periode": "T2",
+      "notions": [
+        "Savoir que la masse totale se conserve lors d'une transformation chimique",
+        "Expliquer la conservation de la masse par la conservation des atomes",
+        "Interpréter une expérience en récipient ouvert (masse qui semble diminuer) et en récipient fermé (masse conservée)",
+        "Calculer la masse d'un produit ou d'un réactif à partir de la conservation de la masse",
+        "Connaître l'apport d'Antoine Lavoisier (XVIIIe siècle)",
+        "Distinguer conservation des atomes et non-conservation des molécules"
+      ],
+      "motsCles": [
+        "conservation de la masse",
+        "Lavoisier",
+        "réactifs",
+        "produits",
+        "récipient fermé",
+        "récipient ouvert",
+        "atome",
+        "molécule",
+        "balance",
+        "masse totale"
+      ],
+      "reference": "Lors d'une transformation chimique, la masse totale des réactifs consommés est égale à la masse totale des produits formés : la masse se conserve.\nExplication : les atomes ne sont ni créés ni détruits, ils se réarrangent ; comme le nombre et la nature des atomes ne changent pas, la masse totale ne change pas.\nLes molécules, elles, ne sont pas conservées : celles des réactifs disparaissent et de nouvelles molécules (produits) apparaissent.\nExpérience : on fait réagir du vinaigre et du bicarbonate de soude dans un flacon ouvert posé sur une balance : la masse diminue car le dioxyde de carbone formé s'échappe dans l'air.\nLa même expérience dans un flacon fermé (ou avec un ballon de baudruche sur le goulot) : la masse affichée reste la même avant et après la transformation.\nConclusion : il faut tenir compte des gaz qui entrent ou qui sortent ; en récipient fermé, rien ne se perd.\nAntoine Lavoisier (1743-1794), chimiste français, a montré par des pesées précises en récipient fermé que la masse se conserve au cours des transformations chimiques.\nOn résume souvent son idée par la phrase : « Rien ne se perd, rien ne se crée, tout se transforme ».\nCalcul : m(réactifs consommés) = m(produits formés).\nExemple : 12 g de carbone réagissent avec 32 g de dioxygène ; la masse de dioxyde de carbone formé est 12 + 32 = 44 g.\nExemple : 16 g de méthane brûlent avec 64 g de dioxygène en formant 44 g de dioxyde de carbone ; la masse d'eau formée est 16 + 64 − 44 = 36 g.\nSi un réactif est en excès, seule la partie consommée compte dans le calcul.\nLa masse se conserve aussi lors des transformations physiques (changement d'état, dissolution) car les molécules elles-mêmes sont conservées."
+    },
+    {
+      "id": "equation-de-reaction",
+      "titre": "Écrire et ajuster une équation de réaction",
+      "ordre": 8,
+      "periode": "T2",
+      "notions": [
+        "Écrire une équation de réaction à partir du bilan en remplaçant les noms par les formules",
+        "Distinguer l'indice d'une formule et le coefficient placé devant une formule",
+        "Ajuster une équation pour que chaque sorte d'atome soit présente en même nombre de chaque côté",
+        "Vérifier qu'une équation respecte la conservation des atomes",
+        "Lire une équation en nombre de molécules (2 H₂ + O₂ → 2 H₂O)",
+        "Relier l'équation ajustée à la conservation de la masse"
+      ],
+      "motsCles": [
+        "équation de réaction",
+        "bilan",
+        "formule chimique",
+        "coefficient",
+        "indice",
+        "ajuster",
+        "conservation des atomes",
+        "réactifs",
+        "produits",
+        "flèche"
+      ],
+      "reference": "Une équation de réaction traduit une transformation chimique avec les formules chimiques : réactifs à gauche de la flèche, produits à droite.\nOn l'écrit à partir du bilan en toutes lettres en remplaçant chaque nom par sa formule.\nExemple : dihydrogène + dioxygène → eau devient H₂ + O₂ → H₂O (équation non ajustée).\nUne équation doit être ajustée : chaque sorte d'atome doit apparaître en même nombre du côté des réactifs et du côté des produits, car les atomes se conservent.\nPour ajuster, on place des coefficients devant les formules ; le coefficient 1 ne s'écrit pas.\nOn ne modifie JAMAIS les indices d'une formule : changer un indice change la molécule (H₂O est l'eau, H₂O₂ est une autre espèce).\nLe coefficient multiplie tous les atomes de la molécule : 2 H₂O représente 2 molécules d'eau, soit 4 atomes H et 2 atomes O.\nExemple ajusté : 2 H₂ + O₂ → 2 H₂O (4 H et 2 O de chaque côté).\nExemple ajusté : C + O₂ → CO₂ (déjà ajustée : 1 C et 2 O de chaque côté).\nExemple ajusté : CH₄ + 2 O₂ → CO₂ + 2 H₂O (1 C, 4 H, 4 O de chaque côté).\nExemple ajusté : 2 C + O₂ → 2 CO (combustion incomplète du carbone).\nMéthode : 1) écrire les formules ; 2) compter les atomes de chaque sorte de chaque côté ; 3) ajuster en commençant par l'atome présent dans le moins de molécules, souvent en gardant O pour la fin ; 4) recompter pour vérifier.\nLecture : 2 H₂ + O₂ → 2 H₂O signifie « 2 molécules de dihydrogène réagissent avec 1 molécule de dioxygène pour former 2 molécules d'eau ».\nUne équation ajustée traduit la conservation des atomes, et donc la conservation de la masse."
+    },
+    {
+      "id": "intensite-du-courant",
+      "titre": "L'intensité du courant électrique",
+      "ordre": 9,
+      "periode": "T3",
+      "notions": [
+        "Savoir que l'intensité du courant mesure le débit du courant électrique",
+        "Connaître l'unité d'intensité, l'ampère (A), et convertir A et mA",
+        "Brancher un ampèremètre en série dans un circuit et connaître son symbole",
+        "Utiliser correctement un multimètre en ampèremètre (bornes A ou mA et COM, choix du calibre)",
+        "Interpréter le signe de la valeur affichée par l'ampèremètre",
+        "Connaître les ordres de grandeur d'intensités et les effets d'une intensité trop forte"
+      ],
+      "motsCles": [
+        "intensité",
+        "ampère",
+        "milliampère",
+        "ampèremètre",
+        "multimètre",
+        "calibre",
+        "borne COM",
+        "branchement en série",
+        "symbole",
+        "I"
+      ],
+      "reference": "L'intensité du courant électrique, notée I, indique l'importance (le « débit ») du courant qui traverse un dipôle.\nElle s'exprime en ampères (symbole A) ; on utilise aussi le milliampère : 1 A = 1 000 mA, donc 1 mA = 0,001 A.\nExemples de conversions : 0,25 A = 250 mA ; 80 mA = 0,08 A.\nL'intensité se mesure avec un ampèremètre, souvent un multimètre utilisé en position ampèremètre (zone A⎓ ou mA⎓ pour le courant continu).\nSymbole de l'ampèremètre : un cercle contenant la lettre A.\nL'ampèremètre se branche en série : on ouvre le circuit à l'endroit de la mesure et on y insère l'ampèremètre, pour que le courant le traverse.\nBranchement du multimètre : un fil sur la borne A (ou mA) et un fil sur la borne COM ; le courant doit entrer par la borne A (ou mA) et sortir par la borne COM pour obtenir une valeur positive.\nSi la valeur affichée est négative, l'ampèremètre est branché à l'envers ; la valeur absolue reste la bonne intensité.\nChoix du calibre : on commence par le plus grand calibre, puis on choisit le plus petit calibre supérieur à la valeur mesurée pour plus de précision.\nUn ampèremètre ne doit jamais être branché directement aux bornes d'un générateur : cela crée un court-circuit et peut l'endommager (son fusible peut fondre).\nOrdres de grandeur : lampe de poche ≈ 0,1 à 0,3 A ; DEL ≈ 20 mA ; appareil électroménager ≈ quelques ampères.\nPlus l'intensité qui traverse une lampe est grande (dans la limite de ses valeurs nominales), plus elle brille.\nUne intensité trop forte fait chauffer les fils (risque d'incendie) ; les fusibles et disjoncteurs coupent le courant en cas de surintensité.\nUne intensité d'environ 30 mA traversant le corps humain peut être mortelle : d'où les disjoncteurs différentiels 30 mA des habitations."
+    },
+    {
+      "id": "lois-de-l-intensite",
+      "titre": "Lois de l'intensité dans les circuits",
+      "ordre": 10,
+      "periode": "T3",
+      "notions": [
+        "Connaître la loi d'unicité de l'intensité dans un circuit en série",
+        "Savoir que l'intensité ne dépend pas de l'ordre ni de la position des dipôles dans un circuit en série",
+        "Connaître la loi d'additivité des intensités (loi des nœuds) dans un circuit en dérivation",
+        "Repérer la branche principale, les branches dérivées et les nœuds d'un circuit",
+        "Calculer une intensité inconnue à l'aide des lois des intensités",
+        "Comprendre pourquoi brancher trop d'appareils sur une même prise multiple est dangereux"
+      ],
+      "motsCles": [
+        "intensité",
+        "circuit en série",
+        "circuit en dérivation",
+        "unicité de l'intensité",
+        "loi des nœuds",
+        "additivité",
+        "nœud",
+        "branche principale",
+        "branche dérivée",
+        "multiprise",
+        "surintensité"
+      ],
+      "reference": "Loi d'unicité de l'intensité : dans un circuit en série (une seule boucle), l'intensité du courant est la même en tout point du circuit.\nFormule pour deux lampes en série avec un générateur : I = I₁ = I₂.\nLe courant n'est pas « consommé » par les lampes : on mesure la même intensité avant et après une lampe.\nDans un circuit en série, l'ordre des dipôles ne change pas l'intensité.\nEn revanche, ajouter un dipôle en série (une lampe de plus) diminue en général l'intensité dans tout le circuit.\nUn nœud est un point du circuit relié à au moins trois fils ; la branche principale contient le générateur, les branches dérivées sont entre deux nœuds.\nLoi d'additivité des intensités (loi des nœuds) : dans un circuit en dérivation, l'intensité du courant dans la branche principale est égale à la somme des intensités dans les branches dérivées.\nFormule pour deux branches dérivées : I = I₁ + I₂.\nAu niveau d'un nœud, la somme des intensités des courants qui arrivent est égale à la somme des intensités des courants qui en repartent.\nExemple : I = 0,5 A dans la branche principale et I₁ = 0,2 A dans la première branche, donc I₂ = 0,5 − 0,2 = 0,3 A.\nSi deux branches dérivées contiennent des lampes identiques, elles sont traversées par la même intensité (chacune la moitié de I).\nPlus on branche d'appareils en dérivation sur une multiprise, plus l'intensité dans le fil principal augmente : risque de surchauffe et d'incendie.\nMéthode : repérer d'abord si le circuit est en série ou en dérivation, puis appliquer la bonne loi en vérifiant les unités (A ou mA)."
+    },
+    {
+      "id": "tension-electrique",
+      "titre": "La tension électrique",
+      "ordre": 11,
+      "periode": "T3",
+      "notions": [
+        "Savoir qu'il existe une tension aux bornes d'un générateur, même lorsqu'il n'est pas branché",
+        "Connaître l'unité de tension, le volt (V), et convertir V, mV et kV",
+        "Brancher un voltmètre en dérivation aux bornes d'un dipôle et connaître son symbole",
+        "Utiliser correctement un multimètre en voltmètre (bornes V et COM, choix du calibre)",
+        "Connaître la tension aux bornes d'un fil, d'un interrupteur ouvert ou fermé",
+        "Connaître des ordres de grandeur de tensions et les dangers du secteur"
+      ],
+      "motsCles": [
+        "tension",
+        "volt",
+        "millivolt",
+        "kilovolt",
+        "voltmètre",
+        "multimètre",
+        "dérivation",
+        "borne V",
+        "borne COM",
+        "calibre",
+        "U",
+        "secteur 230 V"
+      ],
+      "reference": "La tension électrique, notée U, existe entre les deux bornes d'un dipôle ; elle s'exprime en volts (symbole V).\nConversions : 1 V = 1 000 mV ; 1 kV = 1 000 V. Exemple : 4,5 V = 4 500 mV ; 230 mV = 0,23 V.\nLa tension se mesure avec un voltmètre (multimètre en position voltmètre, zone V⎓ pour le continu) ; symbole : un cercle contenant la lettre V.\nLe voltmètre se branche en dérivation, c'est-à-dire directement aux bornes du dipôle étudié, sans ouvrir le circuit.\nBranchement : la borne V du multimètre reliée du côté de la borne + du générateur et la borne COM du côté de la borne − ; sinon la valeur affichée est négative.\nChoix du calibre : commencer par le plus grand, puis prendre le plus petit calibre supérieur à la valeur mesurée.\nUn générateur (pile) possède une tension entre ses bornes même lorsqu'il n'est relié à rien ; une pile « plate » a une tension de 4,5 V.\nUn dipôle récepteur isolé (lampe non branchée) a une tension nulle à ses bornes.\nLa tension aux bornes d'un fil de connexion est pratiquement nulle ; la tension aux bornes d'un interrupteur fermé est nulle.\nDans un circuit en série simple, la tension aux bornes d'un interrupteur ouvert est égale à la tension du générateur ; la lampe a alors une tension nulle à ses bornes.\nOrdres de grandeur : pile bâton 1,5 V ; pile plate 4,5 V ; batterie de voiture 12 V ; prise du secteur 230 V ; lignes à haute tension jusqu'à 400 kV.\nNe pas confondre tension et intensité : la tension se mesure en dérivation, en volts ; l'intensité se mesure en série, en ampères.\nUne tension supérieure à environ 50 V peut être dangereuse pour le corps humain : on ne réalise jamais d'expérience avec le secteur (230 V)."
+    },
+    {
+      "id": "lois-des-tensions",
+      "titre": "Lois des tensions et adaptation d'un dipôle",
+      "ordre": 12,
+      "periode": "T3",
+      "notions": [
+        "Connaître la loi d'additivité des tensions dans un circuit en série",
+        "Connaître la loi d'égalité (d'unicité) des tensions pour des dipôles en dérivation",
+        "Calculer une tension inconnue à l'aide des lois des tensions",
+        "Connaître la signification des valeurs nominales d'une lampe (tension et intensité)",
+        "Prévoir le fonctionnement d'une lampe en sous-tension, surtension ou fonctionnement normal",
+        "Expliquer pourquoi les appareils de la maison sont branchés en dérivation"
+      ],
+      "motsCles": [
+        "tension",
+        "additivité des tensions",
+        "loi d'unicité des tensions",
+        "série",
+        "dérivation",
+        "valeurs nominales",
+        "sous-tension",
+        "surtension",
+        "fonctionnement normal",
+        "adaptation"
+      ],
+      "reference": "Loi d'additivité des tensions : dans un circuit en série, la tension aux bornes du générateur est égale à la somme des tensions aux bornes des récepteurs.\nFormule pour deux lampes en série : U = U₁ + U₂.\nExemple : pile de 4,5 V, tension aux bornes de la lampe L₁ : 3,0 V, donc tension aux bornes de L₂ : U₂ = 4,5 − 3,0 = 1,5 V.\nDeux lampes identiques en série ont la même tension à leurs bornes : chacune reçoit la moitié de la tension du générateur.\nLoi d'unicité (égalité) des tensions : des dipôles branchés en dérivation ont la même tension à leurs bornes.\nFormule pour deux lampes en dérivation aux bornes d'un générateur : U = U₁ = U₂.\nExemple : avec une pile de 4,5 V, chaque lampe branchée en dérivation a une tension de 4,5 V à ses bornes.\nLes valeurs nominales sont inscrites sur le culot d'une lampe (exemple : 6 V – 0,1 A) : ce sont les valeurs pour un fonctionnement normal.\nUne lampe est adaptée au générateur si la tension à ses bornes est proche de sa tension nominale : elle brille normalement.\nSi la tension est nettement inférieure à la tension nominale (sous-tension), la lampe brille faiblement ou pas du tout.\nSi la tension est supérieure à la tension nominale (surtension), la lampe brille très fort et risque de griller.\nLes appareils de la maison sont branchés en dérivation : ils reçoivent tous la tension du secteur (230 V) et fonctionnent indépendamment.\nMéthode : identifier le type de branchement, écrire la loi adaptée (U = U₁ + U₂ ou U = U₁ = U₂), remplacer par les valeurs, calculer avec l'unité."
+    }
+  ]
+}

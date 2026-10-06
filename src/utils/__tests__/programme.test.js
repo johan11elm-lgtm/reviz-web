@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest'
 import {
   slugify, classeSlug, matiereSlug, hasProgramme, chapterLessonId, isProgrammeLessonId,
-  catalogueUrl, chapterContentUrl, chapterState, MATIERES_3E, PROGRAMME_CLASSES,
+  catalogueUrl, chapterContentUrl, chapterState, MATIERES_3E, MATIERES_6E, PROGRAMME_CLASSES,
 } from '../programme'
 import { SUBJECT_MAP } from '../subjects'
 
@@ -28,15 +28,14 @@ describe('programme — slugs et chemins', () => {
 })
 
 describe('programme — classes et matières', () => {
-  it('la 3e est publiée, pas les autres classes (pour l’instant)', () => {
-    expect(PROGRAMME_CLASSES).toContain('3ème')
-    expect(hasProgramme({ cycle: 'college', classe: '3ème' })).toBe(true)
-    expect(hasProgramme({ cycle: 'college', classe: '4ème' })).toBe(false)
+  it('tout le collège est publié, pas encore le lycée', () => {
+    for (const c of ['6ème', '5ème', '4ème', '3ème']) expect(hasProgramme({ cycle: 'college', classe: c })).toBe(true)
+    expect(hasProgramme({ cycle: 'lycee', classe: '2nde' })).toBe(false)
     expect(hasProgramme(null)).toBe(false)
   })
 
   it('chaque matière de 3e a une entrée dans SUBJECT_MAP (mascotte, couleur)', () => {
-    for (const m of MATIERES_3E) {
+    for (const m of [...MATIERES_3E, ...MATIERES_6E]) {
       const key = Object.keys(SUBJECT_MAP).find(k => m.toLowerCase().includes(k))
       expect(key, m).toBeTruthy()
     }

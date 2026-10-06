@@ -1,0 +1,417 @@
+{
+  "classe": "6ème",
+  "matiere": "Français",
+  "programme": "Programme de français du cycle 3 (arrêté du 10 avril 2025, BO n°16 du 17 avril 2025), en vigueur en 6e depuis la rentrée 2025",
+  "modele": "claude-opus-5-5 (abonnement)",
+  "genereLe": "2026-10-05",
+  "relu": false,
+  "chapitres": [
+    {
+      "id": "creer-recreer-le-monde",
+      "titre": "Créer, recréer le monde : récits des origines",
+      "ordre": 1,
+      "periode": "T1",
+      "notions": [
+        "Définir un récit des origines, un mythe et un texte fondateur",
+        "Connaître les grandes étapes du récit de la création dans la Genèse (Bible)",
+        "Découvrir des mythes de création d'autres cultures (Grèce, Mayas, Chine)",
+        "Reconnaître un récit étiologique qui explique le « pourquoi » d'un phénomène",
+        "Comparer plusieurs récits de création : points communs et différences",
+        "Repérer les symboles (lumière, eau, souffle, parole) et les valeurs portées par ces récits",
+        "Écrire un court récit étiologique en respectant ses caractéristiques"
+      ],
+      "motsCles": [
+        "récit des origines",
+        "mythe",
+        "texte fondateur",
+        "récit étiologique",
+        "Genèse",
+        "Bible",
+        "création",
+        "chaos",
+        "Prométhée",
+        "Pandore",
+        "cosmogonie",
+        "symbole"
+      ],
+      "reference": "Récit des origines (récit de création) : récit qui raconte comment le monde, les êtres vivants ou les humains sont apparus.\nMythe : récit très ancien, d'abord transmis oralement, qui met en scène des dieux, des héros ou des forces de la nature pour expliquer l'origine du monde ou d'un phénomène.\nTexte fondateur : texte qui fonde une culture ou une religion et transmet ses croyances et ses valeurs (ex. la Bible, l'Odyssée).\nRécit étiologique (du grec aitia, « la cause ») : récit qui explique l'origine d'un phénomène, d'un animal, d'une coutume ou d'un nom.\nCosmogonie : récit qui raconte la naissance de l'univers.\nLa Genèse : premier livre de la Bible. Dieu crée le monde en six jours par la parole (« Que la lumière soit ! ») et se repose le septième jour.\nOrdre de la création dans la Genèse : lumière ; ciel ; terre, mers et plantes ; soleil, lune et étoiles ; poissons et oiseaux ; animaux terrestres puis l'homme et la femme, créés le sixième jour.\nAutres épisodes de la Genèse : Adam et Ève chassés du jardin d'Éden après avoir mangé le fruit défendu ; le Déluge et l'arche de Noé (l'arc-en-ciel, signe d'alliance) ; la tour de Babel, qui explique la diversité des langues.\nMythologie grecque (Hésiode, Théogonie, vers le VIIe siècle av. J.-C.) : au commencement le Chaos, puis Gaïa (la Terre) et Ouranos (le Ciel), les Titans, Cronos, puis Zeus qui devient roi des dieux.\nProméthée façonne les hommes avec de l'argile et leur donne le feu volé aux dieux ; Zeus le punit en l'enchaînant sur un rocher où un aigle lui dévore le foie.\nPandore, première femme dans le mythe grec, ouvre la jarre (la « boîte ») qui libère les maux sur la Terre ; seule l'espérance reste à l'intérieur.\nOvide, Les Métamorphoses (poème latin du Ier siècle) : le monde naît du chaos, puis les éléments sont séparés et mis en ordre.\nPopol Vuh (Mayas, Amérique centrale) : les dieux essaient de créer les hommes avec de la boue, puis du bois, et réussissent enfin avec du maïs.\nMythe de Pangu (Chine) : un géant naît d'un œuf cosmique et sépare le ciel de la terre ; à sa mort, son corps devient les montagnes, les fleuves et les astres.\nRudyard Kipling, Histoires comme ça (1902) : contes étiologiques humoristiques, comme « Comment le léopard a eu ses taches ».\nPoints communs fréquents : un désordre ou un vide au départ (chaos, eaux, ténèbres), une création par étapes, des éléments séparés, l'humain façonné à partir de terre ou d'argile.\nCaractéristiques d'écriture : formule d'ouverture (« Au commencement »), personnages surnaturels, répétitions, explication d'un « pourquoi ».\nMéthode pour comparer deux récits : relever qui crée, à partir de quoi, dans quel ordre, et ce que le récit explique.\nÉcrire un récit étiologique : partir d'une question (« Pourquoi la girafe a-t-elle un long cou ? »), raconter une situation d'origine, un événement transformateur et la conséquence qui dure encore aujourd'hui."
+    },
+    {
+      "id": "la-phrase-types-et-formes",
+      "titre": "La phrase : types, formes, sujet et groupe verbal",
+      "ordre": 2,
+      "periode": "T1",
+      "notions": [
+        "Reconnaître une phrase à l'écrit (majuscule, ponctuation finale, sens complet)",
+        "Identifier les trois types de phrases : déclarative, interrogative, impérative",
+        "Reconnaître les formes négative et exclamative",
+        "Identifier le verbe conjugué d'une phrase",
+        "Identifier le groupe sujet avec « C'est… qui » et repérer un sujet inversé",
+        "Délimiter le groupe verbal",
+        "Utiliser les manipulations : suppression, déplacement, remplacement, encadrement"
+      ],
+      "motsCles": [
+        "phrase",
+        "déclarative",
+        "interrogative",
+        "impérative",
+        "forme négative",
+        "forme exclamative",
+        "sujet",
+        "groupe sujet",
+        "groupe verbal",
+        "verbe conjugué",
+        "manipulation",
+        "ponctuation"
+      ],
+      "reference": "Phrase (définition du programme) : construction grammaticale qui suit les règles de la langue et qui forme une unité de sens. À l'écrit, elle commence par une majuscule et se termine par un point (. ? ! …).\nPhrase verbale : elle contient au moins un verbe conjugué. Phrase non verbale : sans verbe conjugué (« Quelle belle journée ! »).\nPhrase déclarative : elle donne une information ; elle se termine par un point (« Le navire quitte le port. »).\nPhrase interrogative : elle pose une question ; elle se termine par un point d'interrogation (« Où vas-tu ? »).\nPhrase impérative : elle donne un ordre ou un conseil ; le verbe est souvent à l'impératif, sans sujet exprimé (« Ferme la porte. »).\nForme négative : elle utilise deux mots de négation autour du verbe conjugué : ne… pas, ne… plus, ne… jamais, ne… rien, ne… personne (« Il ne parle jamais. »).\nForme exclamative : elle exprime une émotion (joie, surprise, colère) et se termine par un point d'exclamation (« Comme il est courageux ! »).\nUne même phrase peut combiner un type et des formes : « Ne pars pas ! » est impérative, négative et exclamative.\nPhrase de base : groupe sujet (GS) + groupe verbal (GV), auxquels on peut ajouter des compléments circonstanciels facultatifs.\nRepérer le verbe conjugué : il change quand on change le temps (aujourd'hui / hier / demain) et on peut l'encadrer par ne… pas.\nRepérer le sujet : l'encadrer par « C'est… qui » ou « Ce sont… qui » (« C'est le renard qui ruse. »). Le sujet commande l'accord du verbe.\nLe sujet peut être un nom propre, un groupe nominal, un pronom ou un verbe à l'infinitif (« Lire me plaît. »).\nSujet inversé : placé après le verbe (« Dans la forêt vivait un ogre. » : le sujet est « un ogre »).\nGroupe verbal : le verbe conjugué et ses compléments éventuels (« Le héros / saisit son épée. »).\nManipulations : supprimer un groupe pour voir s'il est obligatoire, le déplacer, le remplacer par un pronom, l'encadrer par « c'est… qui » ou « ne… pas »."
+    },
+    {
+      "id": "classes-de-mots",
+      "titre": "Les classes de mots et les pronoms personnels",
+      "ordre": 3,
+      "periode": "T1",
+      "notions": [
+        "Distinguer la nature (classe grammaticale) et la fonction d'un mot",
+        "Identifier les mots variables : nom, déterminant, adjectif, pronom, verbe",
+        "Identifier les mots invariables : adverbe, préposition, conjonction",
+        "Classer les déterminants : articles définis et indéfinis, possessifs, démonstratifs",
+        "Identifier les pronoms personnels et préciser leur fonction",
+        "Relier un pronom à son antécédent",
+        "Distinguer « le, la, les, leur » déterminants et pronoms"
+      ],
+      "motsCles": [
+        "nature",
+        "classe grammaticale",
+        "fonction",
+        "nom",
+        "déterminant",
+        "adjectif",
+        "pronom",
+        "verbe",
+        "adverbe",
+        "préposition",
+        "conjonction",
+        "antécédent"
+      ],
+      "reference": "Nature (ou classe grammaticale) : ce que le mot est ; elle ne change pas et elle est indiquée dans le dictionnaire. Fonction : le rôle du mot ou du groupe dans la phrase (sujet, COD…).\nMots variables (qui changent de forme) : nom, déterminant, adjectif, pronom, verbe. Mots invariables : adverbe, préposition, conjonction.\nNom commun (un loup, une île) ; nom propre, avec une majuscule (Ulysse, Paris).\nArticles définis : le, la, l', les. Articles indéfinis : un, une, des.\nDéterminants possessifs : mon, ton, son, ma, ta, sa, mes, tes, ses, notre, votre, leur, nos, vos, leurs. Déterminants démonstratifs : ce, cet, cette, ces.\nAdjectif : il précise le nom et s'accorde avec lui en genre et en nombre (une mer calme, des mers calmes).\nVerbe : mot qui se conjugue (il change selon la personne et le temps).\nAdverbe : mot invariable qui modifie un verbe, un adjectif ou un autre adverbe (vite, très, hier, souvent, lentement, ici).\nPrépositions : à, de, dans, par, pour, sans, avec, en, sur, sous, chez, vers, entre.\nConjonctions de coordination : mais, ou, et, donc, or, ni, car. Conjonctions de subordination : que, quand, lorsque, si, comme, puisque, parce que.\nPronom : mot qui remplace un nom ou un groupe nominal pour éviter une répétition.\nPronoms personnels sujets : je, tu, il, elle, on, nous, vous, ils, elles. Pronoms compléments : me, te, se, le, la, les, lui, leur, en, y. Formes toniques : moi, toi, lui, elle, eux, elles.\nAntécédent : le mot ou groupe que le pronom remplace (« Le Cyclope dort. Ulysse l'aveugle. » : « l' » a pour antécédent « le Cyclope »).\nFonction des pronoms : « Il la regarde. » « Il » est sujet, « la » est COD. « Je lui parle. » « lui » est COI.\nPièges : « le, la, les » devant un nom sont des déterminants (la porte) ; devant un verbe ce sont des pronoms (je la ferme). « leur » devant un nom est déterminant (leur maison) ; devant un verbe il est pronom (je leur parle)."
+    },
+    {
+      "id": "temps-simples-de-l-indicatif",
+      "titre": "Le verbe et les temps simples de l'indicatif",
+      "ordre": 4,
+      "periode": "T1",
+      "notions": [
+        "Décomposer un verbe : radical, marque de temps, marque de personne",
+        "Classer les verbes dans les trois groupes",
+        "Conjuguer le présent, l'imparfait, le passé simple et le futur de l'indicatif",
+        "Conjuguer être, avoir et les verbes irréguliers fréquents (aller, faire, dire, venir, pouvoir, voir, vouloir, prendre)",
+        "Maîtriser les variations du radical de certains verbes du 1er groupe (-cer, -ger, appeler, jeter, acheter)",
+        "Distinguer le temps chronologique (passé, présent, futur) et le temps verbal",
+        "Reconnaître les valeurs principales : présent d'énonciation, imparfait et passé simple dans le récit"
+      ],
+      "motsCles": [
+        "verbe",
+        "infinitif",
+        "radical",
+        "terminaison",
+        "groupe",
+        "indicatif",
+        "présent",
+        "imparfait",
+        "passé simple",
+        "futur",
+        "temps du récit",
+        "valeur"
+      ],
+      "reference": "Un verbe conjugué = radical + terminaison ; la terminaison porte la marque de temps et la marque de personne (nous chant-i-ons : -i- marque l'imparfait, -ons la 1re personne du pluriel).\n1er groupe : verbes en -er (chanter), sauf aller. 2e groupe : verbes en -ir dont le participe présent est en -issant (finir, finissant). 3e groupe : tous les autres (aller, venir, faire, prendre, voir…).\nPrésent : 1er groupe -e, -es, -e, -ons, -ez, -ent ; 2e groupe -is, -is, -it, -issons, -issez, -issent.\nÊtre au présent : je suis, tu es, il est, nous sommes, vous êtes, ils sont. Avoir : j'ai, tu as, il a, nous avons, vous avez, ils ont.\nPrésent de quelques verbes du 3e groupe : je vais, je fais (vous faites), je dis (vous dites), je viens, je peux, je vois, je veux, je prends (ils prennent).\nImparfait : -ais, -ais, -ait, -ions, -iez, -aient pour tous les verbes, sur le radical de « nous » au présent (nous finissons → je finissais). Être : j'étais.\nPassé simple : 1er groupe -ai, -as, -a, -âmes, -âtes, -èrent (il chanta, ils chantèrent) ; 2e groupe et beaucoup de verbes du 3e : -is, -is, -it, -îmes, -îtes, -irent (il finit, il prit, il dit, il vit) ; d'autres en -us (il fut, il eut, il voulut, il put) ; venir : il vint.\nFutur : infinitif (ou radical) + -ai, -as, -a, -ons, -ez, -ont (je chanterai). Irréguliers : je serai, j'aurai, j'irai, je ferai, je verrai, je viendrai, je pourrai, je voudrai.\nVariations du radical : nous lançons (ç devant a, o), nous mangeons (e après g devant a, o), j'appelle, je jette, j'achète.\nTemps chronologique (passé, présent, futur) : moment où se passe l'action. Temps verbal (imparfait, passé simple…) : forme du verbe. Ne pas confondre les deux.\nPrésent d'énonciation : action qui se passe au moment où l'on parle. Présent de vérité générale : fait toujours vrai (« La Terre tourne autour du Soleil. »).\nDans un récit au passé : le passé simple exprime les actions de premier plan, brèves, qui font avancer l'histoire ; l'imparfait exprime l'arrière-plan : descriptions, habitudes, actions en cours.\nExemple : « Le vent soufflait (arrière-plan) quand soudain le mât se brisa (premier plan). »\nTemps du discours (dialogues, lettres) : présent, passé composé, futur. Temps du récit : passé simple et imparfait."
+    },
+    {
+      "id": "partir-a-l-aventure",
+      "titre": "Partir à l'aventure !",
+      "ordre": 5,
+      "periode": "T1",
+      "notions": [
+        "Définir le récit d'aventures et ses ingrédients (départ, dangers, épreuves, découverte)",
+        "Utiliser le schéma narratif pour résumer un récit",
+        "Identifier le héros, ses alliés (adjuvants) et ses ennemis (opposants)",
+        "Distinguer narrateur interne et narrateur externe",
+        "Connaître quelques grands récits d'aventures (Homère, Defoe, Stevenson, Verne)",
+        "Comprendre comment le récit crée le suspense et le dépaysement",
+        "Écrire un récit d'aventures cohérent en employant les temps du récit"
+      ],
+      "motsCles": [
+        "aventure",
+        "récit d'aventures",
+        "héros",
+        "péripétie",
+        "schéma narratif",
+        "élément perturbateur",
+        "suspense",
+        "narrateur",
+        "adjuvant",
+        "opposant",
+        "Odyssée",
+        "Robinson"
+      ],
+      "reference": "Aventure : suite d'événements imprévus, souvent dangereux, qu'un personnage vit loin de son monde habituel.\nRécit d'aventures : le héros part (voyage, naufrage, quête), affronte des obstacles et des dangers, découvre des lieux et des êtres inconnus, et revient souvent transformé.\nSchéma narratif : situation initiale ; élément perturbateur (ou déclencheur) ; péripéties ; élément de résolution ; situation finale.\nPéripétie : événement qui fait rebondir l'action. Suspense : attente inquiète du lecteur, qui veut savoir ce qui va arriver.\nPersonnages : le héros ; les adjuvants (qui l'aident) ; les opposants (qui s'opposent à lui).\nNarrateur interne : un personnage raconte l'histoire à la 1re personne (« je »). Narrateur externe : il ne participe pas à l'histoire et raconte à la 3e personne (« il », « elle »).\nHomère, L'Odyssée (VIIIe siècle av. J.-C.) : après la guerre de Troie, Ulysse erre dix ans sur la mer avant de rentrer à Ithaque ; épisodes : le Cyclope Polyphème, la magicienne Circé, les Sirènes.\nDaniel Defoe, Robinson Crusoé (1719) : un naufragé survit seul sur une île pendant vingt-huit ans, puis rencontre Vendredi.\nMichel Tournier, Vendredi ou la Vie sauvage (1971) : réécriture pour la jeunesse de Robinson Crusoé, où Vendredi enseigne une autre façon de vivre.\nRobert Louis Stevenson, L'Île au trésor (1883) : le jeune Jim Hawkins part à la recherche d'un trésor et affronte le pirate Long John Silver.\nJules Verne, Vingt mille lieues sous les mers (1869-1870, capitaine Nemo et le sous-marin Nautilus) et Le Tour du monde en quatre-vingts jours (1872, Phileas Fogg et Passepartout).\nProcédés : dépaysement (lieux lointains, vocabulaire de la mer, de la jungle), descriptions précises, rythme rapide dans les scènes d'action, fins de chapitre qui laissent le lecteur en attente.\nTemps du récit : passé simple pour les actions de premier plan, imparfait pour les descriptions et l'arrière-plan.\nÉcrire un récit d'aventures : choisir un héros et un but, suivre le schéma narratif, inventer au moins deux péripéties, garder les mêmes temps du début à la fin."
+    },
+    {
+      "id": "complements-du-verbe",
+      "titre": "Les compléments du verbe : COD, COI et attribut du sujet",
+      "ordre": 6,
+      "periode": "T2",
+      "notions": [
+        "Savoir que les compléments du verbe appartiennent au groupe verbal",
+        "Identifier le COD (sans préposition) et le remplacer par le, la, l', les",
+        "Identifier le COI (introduit par une préposition) et le remplacer par lui, leur, en, y",
+        "Distinguer verbe transitif et verbe intransitif",
+        "Identifier l'attribut du sujet après un verbe d'état",
+        "Distinguer attribut du sujet et COD",
+        "Accorder l'attribut du sujet avec le sujet"
+      ],
+      "motsCles": [
+        "complément du verbe",
+        "COD",
+        "COI",
+        "attribut du sujet",
+        "verbe d'état",
+        "verbe transitif",
+        "verbe intransitif",
+        "préposition",
+        "pronominalisation",
+        "groupe verbal"
+      ],
+      "reference": "Les compléments du verbe font partie du groupe verbal. En général, on ne peut ni les supprimer ni les déplacer sans changer le sens ou rendre la phrase incorrecte.\nCOD (complément d'objet direct) : complément construit directement, sans préposition (« Le héros saisit son épée. »).\nRepérer le COD : poser « verbe + qui ? » ou « verbe + quoi ? » (saisit quoi ? son épée) et le remplacer par le, la, l', les (« Il la saisit. »).\nCOI (complément d'objet indirect) : complément introduit par une préposition, le plus souvent à ou de (« Ulysse pense à sa famille. » « Il parle de son voyage. »).\nRepérer le COI : poser « verbe + à qui ? à quoi ? de qui ? de quoi ? » ; le remplacer par lui, leur, en, y (« Ulysse y pense. » « Il lui parle. »).\nUn verbe peut avoir à la fois un COD et un COI : « Il donne un livre (COD) à son frère (COI). »\nVerbe transitif : il se construit avec un complément d'objet. Verbe intransitif : il n'en a pas (« Le bébé dort. »).\nNature des compléments d'objet : groupe nominal, nom propre, pronom, verbe à l'infinitif (« J'aime lire. »).\nAttribut du sujet : il donne une caractéristique du sujet par l'intermédiaire d'un verbe d'état : être, paraître, sembler, devenir, demeurer, rester, avoir l'air, passer pour.\nL'attribut peut être un adjectif (« La mer semble calme. »), un groupe nominal (« Ulysse devient un mendiant. ») ou un pronom.\nL'attribut adjectif s'accorde avec le sujet : « Les Sirènes paraissent douces. »\nDistinguer attribut et COD : l'attribut désigne le sujet lui-même (« Il est un héros » : il = héros) ; le COD désigne autre chose que le sujet (« Il rencontre un héros » : il ≠ héros).\nTest : si on peut remplacer le verbe par « être » sans changer le sens général, c'est un attribut."
+    },
+    {
+      "id": "complements-circonstanciels",
+      "titre": "Les compléments circonstanciels",
+      "ordre": 7,
+      "periode": "T2",
+      "notions": [
+        "Définir le complément circonstanciel et ses caractéristiques (supprimable, déplaçable)",
+        "Distinguer les compléments circonstanciels de lieu, de temps et de cause",
+        "Reconnaître aussi le complément circonstanciel de manière",
+        "Identifier la nature d'un complément circonstanciel (GN prépositionnel, adverbe, GN, proposition)",
+        "Distinguer complément circonstanciel et complément du verbe",
+        "Ponctuer une phrase qui commence par un complément circonstanciel"
+      ],
+      "motsCles": [
+        "complément circonstanciel",
+        "lieu",
+        "temps",
+        "cause",
+        "manière",
+        "supprimable",
+        "déplaçable",
+        "adverbe",
+        "groupe nominal prépositionnel",
+        "virgule"
+      ],
+      "reference": "Complément circonstanciel (CC) : il précise les circonstances de l'action (où, quand, pourquoi, comment).\nIl est en général supprimable (la phrase reste correcte) et déplaçable (on peut le placer en début, au milieu ou en fin de phrase).\nExemple : « Le lendemain, à cause de la tempête, les marins restèrent au port. » Phrase minimale : « Les marins restèrent. »\nCC de lieu : répond à « où ? » (« dans la forêt », « ici », « sur l'île »).\nCC de temps : répond à « quand ? » (« hier », « le lendemain », « pendant la nuit », « en 1872 »).\nCC de cause : répond à « pourquoi ? » (« à cause de la tempête », « par peur », « grâce à son courage »).\nCC de manière : répond à « comment ? » (« lentement », « avec prudence », « en silence »).\nNatures possibles : groupe nominal prépositionnel (dans la grotte), adverbe (hier, ici, prudemment), groupe nominal (le lendemain, ce matin), proposition subordonnée (quand le jour se leva).\nUne phrase peut contenir plusieurs CC : « Hier, au port, les pirates chantaient joyeusement. »\nCC et COI : le COI fait partie du groupe verbal et ne se supprime pas (« Il pense à sa mère. ») ; le CC est mobile et facultatif (« Il pense à sa mère pendant la nuit. »).\nPonctuation : un CC placé en début de phrase est souvent suivi d'une virgule.\nMéthode : supprimer le groupe ; s'il est facultatif et mobile, c'est un CC ; poser la question (où ? quand ? pourquoi ? comment ?) pour préciser sa sorte."
+    },
+    {
+      "id": "chanter-et-enchanter-le-monde",
+      "titre": "Chanter et enchanter le monde : la poésie",
+      "ordre": 8,
+      "periode": "T2",
+      "notions": [
+        "Reconnaître les formes d'un poème : vers, strophe, rime, vers libre, poème en prose",
+        "Compter les syllabes d'un vers et nommer l'octosyllabe, le décasyllabe, l'alexandrin",
+        "Identifier la disposition des rimes : suivies, croisées, embrassées",
+        "Repérer les jeux de sonorités : allitération, assonance, répétition, anaphore",
+        "Reconnaître les images poétiques : comparaison, métaphore, personnification",
+        "Découvrir des poètes d'époques et de cultures différentes, dont la francophonie",
+        "Lire un poème à voix haute de façon expressive"
+      ],
+      "motsCles": [
+        "poème",
+        "vers",
+        "strophe",
+        "rime",
+        "syllabe",
+        "alexandrin",
+        "allitération",
+        "assonance",
+        "comparaison",
+        "métaphore",
+        "personnification",
+        "calligramme"
+      ],
+      "reference": "Poème : texte qui joue avec les sons, les rythmes et les images pour exprimer une émotion ou une vision du monde.\nVers : ligne d'un poème. Strophe : groupe de vers séparé par un blanc ; distique (2 vers), tercet (3 vers), quatrain (4 vers).\nCompter les syllabes : le « e » muet se prononce devant une consonne, mais pas devant une voyelle ni en fin de vers. Octosyllabe = 8 syllabes, décasyllabe = 10, alexandrin = 12.\nRime : retour du même son à la fin de deux vers. Rimes suivies (AABB), croisées (ABAB), embrassées (ABBA).\nVers libres : vers sans rime ni nombre de syllabes régulier. Poème en prose : poème écrit en paragraphes, sans vers.\nAllitération : répétition d'un même son consonne. Assonance : répétition d'un même son voyelle.\nAnaphore : répétition d'un mot ou d'un groupe de mots en début de vers ou de phrase.\nComparaison : rapproche deux éléments à l'aide d'un outil (comme, tel, pareil à, semblable à, ressembler à) : « La lune est comme une pièce d'or. »\nMétaphore : rapproche deux éléments sans outil de comparaison : « La lune, pièce d'or du ciel ».\nPersonnification : présente une chose ou un animal comme une personne (« Le vent chante dans les arbres. »).\nCalligramme : poème dont les mots dessinent la forme de ce dont il parle (Guillaume Apollinaire, Calligrammes, 1918).\nHaïku : court poème japonais de trois vers (traditionnellement 5, 7 et 5 syllabes) qui saisit un instant de la nature (Bashō, XVIIe siècle).\nQuelques poètes : Victor Hugo (Les Contemplations, 1856), Jacques Prévert (Paroles, 1946, « Pour faire le portrait d'un oiseau »), Robert Desnos (Chantefables), Maurice Carême, Léopold Sédar Senghor (poète sénégalais).\nPouvoir de la parole poétique : nommer, célébrer et transformer le monde par les images ; la poésie était à l'origine chantée.\nLire un poème à voix haute : respecter la ponctuation, les liaisons, les « e » muets prononcés, et marquer une légère pause en fin de vers."
+    },
+    {
+      "id": "temps-composes-imperatif-conditionnel",
+      "titre": "Temps composés, impératif présent et conditionnel présent",
+      "ordre": 9,
+      "periode": "T2",
+      "notions": [
+        "Former le passé composé et le plus-que-parfait (auxiliaire + participe passé)",
+        "Choisir l'auxiliaire être ou avoir",
+        "Former le participe passé des verbes des trois groupes",
+        "Accorder le participe passé avec être et avec le COD placé avant l'auxiliaire avoir",
+        "Conjuguer l'impératif présent (trois personnes, sans sujet)",
+        "Conjuguer le conditionnel présent et le distinguer du futur",
+        "Reconnaître quelques valeurs de ces temps"
+      ],
+      "motsCles": [
+        "temps composé",
+        "auxiliaire",
+        "participe passé",
+        "passé composé",
+        "plus-que-parfait",
+        "impératif",
+        "conditionnel",
+        "accord",
+        "antériorité",
+        "demande polie"
+      ],
+      "reference": "Temps composé : auxiliaire être ou avoir conjugué + participe passé du verbe.\nPassé composé : auxiliaire au présent + participe passé (j'ai chanté, je suis venu). Plus-que-parfait : auxiliaire à l'imparfait + participe passé (j'avais chanté, j'étais venu).\nAuxiliaire être : verbes de déplacement ou de changement d'état (aller, venir, partir, arriver, entrer, sortir, tomber, rester, devenir, naître, mourir) et verbes pronominaux. Avoir : la plupart des autres verbes, dont être et avoir (j'ai été, j'ai eu).\nParticipe passé : 1er groupe en -é (chanté) ; 2e groupe en -i (fini) ; 3e groupe : -i, -u, -is, -it (parti, venu, vu, pu, voulu, pris, dit, fait).\nAstuce pour la lettre finale : mettre le participe au féminin (prise → pris, dite → dit, faite → fait).\nAvec être, le participe passé s'accorde avec le sujet : « Elles sont parties. »\nAvec avoir, il ne s'accorde jamais avec le sujet ; il s'accorde avec le COD si celui-ci est placé avant (pronom personnel) : « Ces pommes, je les ai mangées. » mais « J'ai mangé les pommes. »\nValeurs : le passé composé exprime une action passée et achevée ; le plus-que-parfait une action antérieure à une autre action passée (« Il avait plu, la route était glissante. »).\nImpératif présent : trois personnes sans sujet (2e du singulier, 1re et 2e du pluriel) : chante, chantons, chantez ; finis, finissons, finissez.\nImpératif irrégulier : sois, soyons, soyez ; aie, ayons, ayez ; va, allons, allez ; fais, faisons, faites ; dis, disons, dites ; viens ; prends ; vois ; veuille, veuillez.\n1er groupe et aller : pas de -s à la 2e personne du singulier (chante, va), sauf devant en et y (vas-y, manges-en).\nConditionnel présent : radical du futur + terminaisons de l'imparfait -ais, -ais, -ait, -ions, -iez, -aient (je chanterais, je serais, j'aurais, j'irais, je ferais, je dirais, je viendrais, je pourrais, je verrais, je voudrais, je prendrais).\nFutur ou conditionnel ? À la 1re personne, je chanterai (futur) / je chanterais (conditionnel) : remplacer par « nous » : nous chanterons / nous chanterions.\nValeurs du conditionnel : souhait, demande polie (« Je voudrais un livre. »), imaginaire (« Tu serais le capitaine. »), fait soumis à une condition (« Si j'avais un bateau, je partirais. »)."
+    },
+    {
+      "id": "se-masquer-jouer-dejouer",
+      "titre": "Se masquer, jouer, déjouer : ruses en action",
+      "ordre": 10,
+      "periode": "T2",
+      "notions": [
+        "Reconnaître les caractéristiques du texte théâtral (répliques, didascalies, actes, scènes)",
+        "Distinguer réplique, tirade, monologue et aparté",
+        "Identifier les ruses : mensonge, déguisement, quiproquo",
+        "Reconnaître les formes de comique : mots, gestes, situation, caractère, répétition",
+        "Connaître Molière et Les Fourberies de Scapin, ainsi que la farce",
+        "Comprendre l'opposition entre être et paraître, illusion et vérité",
+        "Mettre en voix et en jeu une scène"
+      ],
+      "motsCles": [
+        "théâtre",
+        "réplique",
+        "didascalie",
+        "acte",
+        "scène",
+        "monologue",
+        "aparté",
+        "comédie",
+        "ruse",
+        "quiproquo",
+        "Molière",
+        "Scapin"
+      ],
+      "reference": "Théâtre : texte écrit pour être joué par des comédiens sur une scène devant un public.\nRéplique : ce que dit un personnage, précédé de son nom. Tirade : longue réplique. Monologue : un personnage seul parle. Aparté : paroles que le public entend mais pas les autres personnages.\nDidascalies : indications de mise en scène (gestes, ton, décor), souvent en italique.\nUne pièce est découpée en actes, eux-mêmes divisés en scènes ; on change de scène quand un personnage entre ou sort.\nDouble énonciation : les personnages se parlent entre eux, mais à travers eux l'auteur s'adresse au public.\nComédie : pièce qui fait rire et finit bien. Farce : courte pièce comique du Moyen Âge, fondée sur les tromperies et le comique de gestes (La Farce de maître Pathelin, XVe siècle).\nFormes de comique : de mots (jeux de mots), de gestes (coups de bâton, chutes), de situation (quiproquo, personnage caché), de caractère (défaut exagéré : avarice, peur), de répétition.\nRuse : moyen habile de tromper quelqu'un ; elle passe par le mensonge, le déguisement, le masque ou la mise en scène.\nQuiproquo : malentendu où l'on prend une personne ou une chose pour une autre.\nMolière (Jean-Baptiste Poquelin, 1622-1673) : auteur, comédien et chef de troupe.\nLes Fourberies de Scapin (1671) : le valet Scapin trompe les pères avares Argante et Géronte pour aider leurs fils ; réplique célèbre : « Que diable allait-il faire dans cette galère ? » ; scène du sac (acte III, scène 2), où Scapin roue de coups Géronte caché dans un sac.\nLe Médecin malgré lui (1666) : le bûcheron Sganarelle est forcé de se faire passer pour médecin.\nLes valets rusés de Molière s'inspirent de la commedia dell'arte, théâtre italien où les comédiens portent des masques (Arlequin).\nRuse et pouvoir : le faible l'emporte sur le fort par l'intelligence (Jean de La Fontaine, « Le Corbeau et le Renard », Fables, 1668 : « tout flatteur vit aux dépens de celui qui l'écoute »).\nÊtre et paraître : le théâtre montre l'écart entre ce que les personnages semblent être et ce qu'ils sont vraiment.\nMettre en scène : choisir le ton, les gestes, les déplacements, les costumes et le décor ; lire les didascalies avant de jouer."
+    },
+    {
+      "id": "groupe-nominal-et-accords",
+      "titre": "Le groupe nominal et les accords",
+      "ordre": 11,
+      "periode": "T3",
+      "notions": [
+        "Identifier le nom noyau et les constituants du groupe nominal",
+        "Distinguer adjectif épithète et complément du nom",
+        "Réaliser la chaîne d'accords dans le groupe nominal",
+        "Former le féminin et le pluriel des noms et des adjectifs, y compris les pluriels en -x et -al/-aux",
+        "Accorder le verbe avec son sujet, même éloigné ou inversé",
+        "Accorder le verbe avec plusieurs sujets coordonnés"
+      ],
+      "motsCles": [
+        "groupe nominal",
+        "nom noyau",
+        "déterminant",
+        "adjectif épithète",
+        "complément du nom",
+        "expansion",
+        "chaîne d'accords",
+        "genre",
+        "nombre",
+        "accord sujet-verbe"
+      ],
+      "reference": "Groupe nominal (GN) : groupe organisé autour d'un nom, le nom noyau. GN minimal : déterminant + nom (« le navire »).\nExpansions du nom : elles enrichissent le GN et peuvent être supprimées : l'adjectif épithète et le complément du nom.\nAdjectif épithète : placé directement à côté du nom, il s'accorde avec lui (« un vieux navire », « des voiles blanches »). Groupe adjectival : adjectif précédé d'un adverbe (« une mer très calme »).\nComplément du nom : groupe introduit par une préposition (de, à, en, sans…) : « un sac de cuir », « la cabane du pirate », « une barque à voile ». Il ne s'accorde pas avec le nom noyau.\nChaîne d'accords : dans le GN, le déterminant et les adjectifs prennent le genre (masculin/féminin) et le nombre (singulier/pluriel) du nom noyau : « de vieilles cartes marines ».\nFéminin des adjectifs : + e (petit → petite) ; doublement de la consonne (bon → bonne, cruel → cruelle) ; -er → -ère (fier → fière) ; -eux → -euse (heureux → heureuse) ; -f → -ve (vif → vive).\nPluriel : en général + s. Noms en -eau, -au, -eu : + x (bateaux, tuyaux, jeux), sauf landaus, bleus, pneus.\nNoms en -al : -aux (cheval → chevaux), sauf bals, carnavals, chacals, festivals, récitals, régals. Adjectifs en -al : -aux (amicaux), sauf banals, fatals, finals, navals.\nNoms en -ou : + s, sauf bijou, caillou, chou, genou, hibou, joujou, pou (+ x). Noms en -ail : + s, sauf bail, corail, émail, soupirail, travail, vitrail, vantail (-aux).\nAccord sujet-verbe : le verbe s'accorde en personne et en nombre avec son sujet (« Les pirates chantent. »).\nSujet éloigné : « Les marins du vieux navire chantent. » (le noyau du sujet est « marins »). Sujet inversé : « Au loin brillent les étoiles. »\nPronom écran : « Il les regarde » : le verbe s'accorde avec « il », pas avec « les ».\nPlusieurs sujets coordonnés : verbe au pluriel (« Le loup et le renard rusent. »).\nMéthode : trouver le nom noyau ou le sujet, déterminer son genre et son nombre, puis vérifier chaque mot qui en dépend."
+    },
+    {
+      "id": "phrase-simple-et-phrase-complexe",
+      "titre": "Phrase simple et phrase complexe",
+      "ordre": 12,
+      "periode": "T3",
+      "notions": [
+        "Comprendre la notion de proposition",
+        "Distinguer phrase simple et phrase complexe en comptant les verbes conjugués",
+        "Délimiter les propositions d'une phrase complexe",
+        "Reconnaître la juxtaposition, la coordination et la subordination",
+        "Distinguer le rôle de la conjonction de coordination et celui de la conjonction de subordination",
+        "Identifier la proposition principale et la proposition subordonnée"
+      ],
+      "motsCles": [
+        "proposition",
+        "phrase simple",
+        "phrase complexe",
+        "verbe conjugué",
+        "juxtaposition",
+        "coordination",
+        "subordination",
+        "conjonction de coordination",
+        "conjonction de subordination",
+        "proposition principale",
+        "proposition subordonnée"
+      ],
+      "reference": "Proposition : groupe de mots organisé autour d'un verbe conjugué. Une phrase compte autant de propositions que de verbes conjugués.\nPhrase simple : une seule proposition, donc un seul verbe conjugué (« Le loup attend sous l'arbre. »).\nPhrase complexe : plusieurs propositions (« Le loup attend, le renard approche. »).\nAttention : un verbe à l'infinitif ou un participe seul ne forme pas une proposition (« Il veut partir » est une phrase simple).\nJuxtaposition : propositions séparées par une virgule, un point-virgule ou deux-points (« Le vent se lève ; la mer gronde. »).\nCoordination : propositions reliées par une conjonction de coordination (mais, ou, et, donc, or, ni, car) ou par un adverbe de liaison (puis, ensuite, alors) : « Il pleuvait, mais nous sommes sortis. »\nLes propositions juxtaposées ou coordonnées sont indépendantes : chacune pourrait former une phrase seule.\nSubordination : une proposition subordonnée dépend d'une proposition principale ; elle est introduite par une conjonction de subordination (que, quand, lorsque, si, comme, puisque, parce que) ou par un pronom relatif (qui, que, où).\nExemple : « Les marins chantaient (principale) / quand le navire quitta le port (subordonnée). »\nLa subordonnée ne peut pas former une phrase seule (« quand la guerre fut finie » n'a pas de sens complet).\nLa conjonction de coordination relie deux éléments de même niveau ; la conjonction de subordination rend une proposition dépendante d'une autre.\nMéthode : souligner les verbes conjugués, délimiter chaque proposition par des crochets, puis repérer ce qui les relie (ponctuation, conjonction de coordination, mot subordonnant)."
+    },
+    {
+      "id": "formation-des-mots-et-sens",
+      "titre": "Le vocabulaire : formation des mots et relations de sens",
+      "ordre": 13,
+      "periode": "T3",
+      "notions": [
+        "Distinguer mot simple, mot dérivé et mot composé",
+        "Identifier radical, préfixe et suffixe et connaître leur sens",
+        "Constituer une famille de mots",
+        "Donner des synonymes et des antonymes de la même classe grammaticale",
+        "Reconnaître homonymes, mots polysémiques, sens propre et sens figuré",
+        "Découvrir l'étymologie : mots d'origine latine, grecque et empruntés",
+        "Choisir un mot selon le registre de langue (familier, courant, soutenu)"
+      ],
+      "motsCles": [
+        "radical",
+        "préfixe",
+        "suffixe",
+        "dérivation",
+        "mot composé",
+        "famille de mots",
+        "synonyme",
+        "antonyme",
+        "homonyme",
+        "polysémie",
+        "étymologie",
+        "registre de langue"
+      ],
+      "reference": "Mot simple : il ne peut pas être décomposé (terre). Mot dérivé : radical + préfixe et/ou suffixe (enterrer, terrain). Mot composé : formé de plusieurs mots (pomme de terre, arc-en-ciel, portemanteau).\nRadical : partie du mot qui porte le sens principal. Préfixe : élément placé avant le radical. Suffixe : élément placé après le radical.\nPréfixes fréquents : re- (à nouveau), dé- ou dés- (contraire), in-, im-, il-, ir- (contraire : impossible, illisible, irréel), pré- (avant), sous-, sur-, mal-.\nSuffixes fréquents : -eur (celui qui fait : chanteur), -age (action : lavage), -able (qu'on peut : lavable), -ette (petit : fillette), -ment (forme des adverbes : lentement).\nUn suffixe change souvent la classe grammaticale du mot : laver (verbe) → lavage (nom) → lavable (adjectif).\nFamille de mots : mots formés sur le même radical (terre, terrien, terrasse, atterrir, souterrain).\nSynonymes : mots de même classe grammaticale et de sens proche (effrayé / apeuré). Antonymes : mots de même classe et de sens contraire (courageux / lâche).\nHomonymes : mots qui se prononcent de la même façon mais ont des sens différents (ver, vert, verre, vers).\nMot polysémique : mot qui a plusieurs sens selon le contexte (« opération » en mathématiques et à l'hôpital ; « une feuille » d'arbre ou de papier).\nSens propre : sens premier, concret (« une montagne de pierre »). Sens figuré : sens imagé (« une montagne de devoirs »).\nÉtymologie : origine d'un mot. Beaucoup de mots viennent du latin (aqua, « eau » → aquatique) ou du grec (hippos, « cheval » → hippodrome ; gê, « terre » → géographie) ; d'autres sont empruntés (algèbre, de l'arabe ; football, de l'anglais).\nChamp lexical : ensemble des mots qui se rapportent à un même thème (la mer : vague, marin, navire, écume).\nRegistres de langue : familier (bagnole), courant (voiture), soutenu (automobile) ; on choisit le registre selon la situation.\nDictionnaire : il indique la classe grammaticale (n. m., n. f., adj., v.), les différents sens numérotés et souvent l'étymologie."
+    },
+    {
+      "id": "rencontrer-des-monstres",
+      "titre": "Rencontrer des monstres : expérience de l'autre, expérience de soi",
+      "ordre": 14,
+      "periode": "T3",
+      "notions": [
+        "Définir le monstre et ses caractéristiques (démesure, hybridité, laideur, danger)",
+        "Connaître des monstres de la mythologie grecque (Minotaure, Cyclope, Méduse)",
+        "Connaître des monstres de contes (ogre, Bête) et leur visée éducative",
+        "Découvrir la part d'humanité d'un personnage monstrueux qui inspire la peur ou la compassion",
+        "Analyser l'affrontement entre le héros et le monstre (courage, ruse, aide)",
+        "Décrire et inventer un monstre avec un vocabulaire précis"
+      ],
+      "motsCles": [
+        "monstre",
+        "créature",
+        "hybride",
+        "Minotaure",
+        "Cyclope",
+        "Méduse",
+        "ogre",
+        "La Belle et la Bête",
+        "peur",
+        "compassion",
+        "conte",
+        "morale"
+      ],
+      "reference": "Monstre : du latin monstrum, « prodige, avertissement des dieux » ; créature extraordinaire, souvent effrayante, qui sort de la norme.\nCaractéristiques fréquentes : taille démesurée, corps hybride (mi-homme, mi-animal), laideur, force, appétit dévorant, vie dans un lieu isolé (grotte, labyrinthe, forêt).\nLe Minotaure : mi-homme, mi-taureau, enfermé dans le Labyrinthe construit par Dédale en Crète ; Thésée le tue et retrouve la sortie grâce au fil d'Ariane.\nPolyphème, le Cyclope (Homère, L'Odyssée, chant IX) : géant à un seul œil qui dévore des compagnons d'Ulysse ; Ulysse se fait appeler « Personne », l'enivre puis l'aveugle.\nMéduse, la Gorgone : sa chevelure est faite de serpents et son regard change en pierre ; Persée la tue en la regardant dans le reflet de son bouclier.\nLe Sphinx : il pose une énigme aux voyageurs et dévore ceux qui ne la résolvent pas ; Œdipe trouve la réponse (l'être humain).\nCharles Perrault, Contes (1697) : l'ogre du « Petit Poucet », Barbe bleue ; le monstre fait peur pour transmettre une leçon de prudence.\nMadame Leprince de Beaumont, La Belle et la Bête (1757) : la Bête, laide mais bonne, redevient prince grâce à l'amour de Belle ; morale : ne pas juger sur l'apparence.\nVictor Hugo, Notre-Dame de Paris (1831) : Quasimodo, sonneur de cloches difforme, se révèle généreux et capable d'amour.\nMary Shelley, Frankenstein (1818) : la créature fabriquée par Victor Frankenstein, rejetée à cause de son apparence, devient violente par solitude.\nVisée éducative : le conte ou le récit transmet une morale (explicite ou implicite) ; le monstre peut représenter nos peurs, nos défauts ou la différence.\nLe héros face au monstre : il triomphe par le courage, la force, la ruse (Ulysse) ou grâce à une aide (Ariane pour Thésée).\nPeur ou compassion : certains monstres sont cruels ; d'autres font pitié car ils souffrent d'être rejetés.\nDécrire un monstre : expansions du nom (adjectifs, compléments du nom), comparaisons, vocabulaire de la peur (effroi, terreur, épouvante, frisson, terrifiant)."
+    }
+  ]
+}

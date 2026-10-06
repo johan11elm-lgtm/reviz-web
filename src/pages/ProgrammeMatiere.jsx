@@ -8,7 +8,7 @@ import { Mascot } from '../components/Mascot';
 import { loadCatalogue, chapterProgress, openChapter } from '../services/programmeService';
 import { loadLessons } from '../services/historyService';
 import { subjectMascot } from '../utils/subjects';
-import { hasProgramme, PROGRAMME_CLASSES, CHAPTER_STATE_LABEL } from '../utils/programme';
+import { hasProgramme, PROGRAMME_FALLBACK, CHAPTER_STATE_LABEL } from '../utils/programme';
 import './Programme.css';
 
 /**
@@ -21,7 +21,7 @@ export default function ProgrammeMatiere() {
   const navigate = useNavigate();
   const { getUserLevel } = useAuth();
   const level = getUserLevel();
-  const classe = hasProgramme(level) ? level.classe : PROGRAMME_CLASSES[0];
+  const classe = hasProgramme(level) ? level.classe : PROGRAMME_FALLBACK;
 
   const [catalogue, setCatalogue] = useState(null);
   const [error, setError] = useState(null);      // 'catalogue' | 'chapitre'

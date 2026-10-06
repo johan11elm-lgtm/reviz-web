@@ -1,0 +1,358 @@
+{
+  "classe": "5ème",
+  "matiere": "SVT",
+  "programme": "Cycle 4 – SVT, partie traitée en 5e (BO spécial n°11 du 26/11/2015, ajusté BO n°31 du 30/07/2020)",
+  "modele": "claude-opus-5-5 (abonnement)",
+  "genereLe": "2026-10-05",
+  "relu": false,
+  "chapitres": [
+    {
+      "id": "paysages-erosion",
+      "titre": "Les paysages et l'érosion des roches",
+      "ordre": 1,
+      "periode": "T1",
+      "notions": [
+        "Décrire un paysage et relier ses formes (relief, végétation, aménagements) à la nature des roches et au climat",
+        "Distinguer l'altération d'une roche (dégradation sur place) de l'érosion (arrachement et transport)",
+        "Identifier les agents de l'érosion : eau, gel, vent, glaciers, êtres vivants",
+        "Expliquer que la résistance d'une roche à l'érosion dépend de sa dureté, de sa porosité et de sa composition",
+        "Décrire le transport des particules et le tri des sédiments selon leur taille et la vitesse du courant",
+        "Relier certaines activités humaines (déboisement, aménagements) à l'accélération de l'érosion"
+      ],
+      "motsCles": [
+        "paysage",
+        "roche",
+        "altération",
+        "érosion",
+        "gel",
+        "ruissellement",
+        "transport",
+        "sédiment",
+        "granite",
+        "calcaire",
+        "argile",
+        "dissolution"
+      ],
+      "reference": "Un paysage est la portion de territoire visible depuis un point ; il dépend des roches du sous-sol, du climat, des êtres vivants et des activités humaines.\nUne roche est un matériau naturel formé d'un ou plusieurs minéraux ; elle peut être dure (granite) ou tendre (argile, sable).\nL'altération est la dégradation d'une roche sur place : elle se fragmente ou se transforme chimiquement.\nAltération physique : le gel. L'eau qui s'infiltre dans les fissures augmente de volume en gelant (environ 9 %) et fait éclater la roche (gélifraction).\nAltération chimique : l'eau de pluie légèrement acide dissout le calcaire ; elle transforme les minéraux du granite (feldspaths) en argile, ce qui libère les grains de quartz : le granite devient une arène granitique.\nL'érosion est l'arrachement de particules aux roches puis leur transport par l'eau (ruissellement, rivières, vagues), le vent ou les glaciers.\nLes êtres vivants participent à l'altération : racines qui écartent les fissures, lichens.\nUne roche résiste d'autant mieux qu'elle est dure, peu fissurée et peu poreuse ; les roches tendres sont érodées plus vite, ce qui crée des reliefs en creux (vallées) et les roches dures restent en relief.\nLe transport dépend de la vitesse de l'eau : un courant rapide transporte des galets, un courant lent seulement des sables fins et des argiles.\nLors du transport, les fragments s'usent et s'arrondissent (galets).\nQuand le courant ralentit, les particules se déposent, les plus grosses d'abord : c'est le tri granulométrique.\nLes produits de l'érosion (blocs, galets, sables, argiles, ions dissous) sont appelés sédiments.\nLa végétation protège le sol : ses racines le retiennent. Le déboisement, le surpâturage ou l'imperméabilisation des sols accélèrent le ruissellement et l'érosion.\nExemples de paysages : la Bretagne granitique (chaos de boules de granite), les causses calcaires (grottes, gorges creusées par dissolution), les falaises de craie d'Étretat reculant sous l'action des vagues.\nMéthode : observer un paysage, formuler une hypothèse, la tester par une expérience (modèle de ruissellement sur sol nu ou couvert) ou une observation."
+    },
+    {
+      "id": "roches-sedimentaires-fossiles",
+      "titre": "Sédimentation, roches sédimentaires et fossiles",
+      "ordre": 2,
+      "periode": "T1",
+      "notions": [
+        "Expliquer le dépôt des sédiments en couches horizontales (strates) dans un bassin de sédimentation",
+        "Décrire la transformation de sédiments meubles en roche sédimentaire (compaction, cimentation)",
+        "Reconnaître quelques roches sédimentaires et leur origine : grès, argile, calcaire, conglomérat",
+        "Définir un fossile et expliquer les conditions de la fossilisation",
+        "Utiliser les fossiles pour reconstituer un milieu de vie ancien",
+        "Appliquer le principe d'actualisme pour interpréter des roches anciennes"
+      ],
+      "motsCles": [
+        "sédimentation",
+        "strate",
+        "bassin de sédimentation",
+        "compaction",
+        "cimentation",
+        "grès",
+        "calcaire",
+        "conglomérat",
+        "fossile",
+        "fossilisation",
+        "actualisme",
+        "paléoenvironnement"
+      ],
+      "reference": "Les sédiments transportés se déposent là où le courant s'arrête : fond des lacs, des mers, des océans, deltas. Ces lieux sont des bassins de sédimentation.\nLes sédiments se déposent en couches successives, à peu près horizontales, appelées strates.\nCertains sédiments viennent des êtres vivants (coquilles, squelettes calcaires) ou de la précipitation de substances dissoutes dans l'eau.\nAvec le temps, les couches sont enfouies sous de nouveaux dépôts : l'eau est chassée et les grains se tassent (compaction) puis se soudent par un ciment naturel (cimentation). Le sédiment meuble devient une roche sédimentaire.\nExemples : sable → grès ; galets cimentés → conglomérat ; boue argileuse → argile ; coquilles et boues calcaires → calcaire ; la craie est un calcaire formé de restes d'algues microscopiques.\nTest du calcaire : une goutte d'acide chlorhydrique dilué fait effervescence (dégagement de dioxyde de carbone).\nUn fossile est un reste (coquille, os, dent) ou une trace (empreinte, terrier) d'un être vivant conservé dans une roche.\nConditions de la fossilisation : enfouissement rapide sous des sédiments, à l'abri du dioxygène et des décomposeurs ; les parties dures se conservent le mieux. La fossilisation est donc rare.\nPrincipe d'actualisme : les phénomènes qui ont agi dans le passé sont les mêmes que ceux observés aujourd'hui.\nApplication : un grès avec des rides de courant fossilisées (ripple-marks) indique une ancienne plage ou un ancien fond de rivière ; des coraux fossiles indiquent une mer chaude et peu profonde.\nLes fossiles d'espèces marines trouvés sur des continents ou en montagne montrent que la mer recouvrait ces régions autrefois.\nExemple : les ammonites, mollusques marins disparus, sont fréquentes dans les calcaires de France.\nLes roches sédimentaires couvrent environ les trois quarts de la surface des continents, mais en couche relativement mince.\nMéthode : observer une roche (couleur, grains, présence de fossiles, effervescence), la comparer à des sédiments actuels pour en déduire son milieu de formation."
+    },
+    {
+      "id": "histoire-de-la-terre",
+      "titre": "Les roches, témoins de l'histoire de la Terre",
+      "ordre": 3,
+      "periode": "T1",
+      "notions": [
+        "Appliquer le principe de superposition pour dater relativement des couches sédimentaires",
+        "Utiliser le principe de recoupement pour ordonner des événements géologiques",
+        "Expliquer l'intérêt d'un fossile stratigraphique pour comparer l'âge de couches éloignées",
+        "Situer sur l'échelle des temps géologiques quelques grands repères : âge de la Terre, apparition de la vie, ères",
+        "Relier des crises biologiques au découpage des temps géologiques",
+        "Distinguer datation relative et datation absolue"
+      ],
+      "motsCles": [
+        "datation relative",
+        "principe de superposition",
+        "principe de recoupement",
+        "fossile stratigraphique",
+        "échelle des temps géologiques",
+        "ère",
+        "milliard d'années",
+        "crise biologique",
+        "datation absolue",
+        "Paléozoïque",
+        "Mésozoïque",
+        "Cénozoïque"
+      ],
+      "reference": "La datation relative permet de dire si un événement est plus ancien ou plus récent qu'un autre, sans donner d'âge en années.\nPrincipe de superposition : dans une série de couches sédimentaires non déformées, une couche est plus récente que celle qu'elle recouvre et plus ancienne que celle qui la recouvre.\nPrincipe de recoupement : un événement (faille, intrusion de roche) qui recoupe des couches est plus récent que les couches qu'il recoupe.\nUn fossile stratigraphique est le fossile d'une espèce qui a vécu peu de temps et sur une large zone géographique ; deux couches éloignées contenant le même fossile stratigraphique ont le même âge. Exemple : certaines ammonites.\nLa datation absolue donne un âge en années grâce à la radioactivité naturelle de certaines roches.\nÂge de la Terre : environ 4,6 milliards d'années (Ga).\nPlus anciennes traces de vie : environ 3,5 milliards d'années (bactéries).\nLes temps géologiques sont découpés en ères, séparées par de grands changements de faune et de flore.\nPaléozoïque (ère primaire) : d'environ 540 à 252 millions d'années (Ma) ; trilobites, premiers poissons, conquête des terres par les végétaux et les animaux.\nMésozoïque (ère secondaire) : de 252 à 66 Ma ; dinosaures et ammonites.\nCénozoïque (ères tertiaire et quaternaire) : de 66 Ma à aujourd'hui ; diversification des mammifères. Homo sapiens apparaît il y a environ 300 000 ans.\nUne crise biologique est la disparition d'un grand nombre d'espèces en un temps court à l'échelle géologique.\nCrise de la fin du Permien (252 Ma) : la plus importante, la grande majorité des espèces marines disparaissent.\nCrise de la fin du Crétacé (66 Ma) : disparition des dinosaures non aviens et des ammonites ; elle est associée à la chute d'une météorite et à un volcanisme intense.\nComparaison utile : si l'histoire de la Terre durait 24 heures, l'espèce humaine n'apparaîtrait que dans les toutes dernières secondes.\nMéthode : sur une coupe géologique, numéroter les couches de la plus ancienne (en bas) à la plus récente, puis placer failles et intrusions."
+    },
+    {
+      "id": "peuplement-des-milieux",
+      "titre": "Le peuplement des milieux et ses variations",
+      "ordre": 4,
+      "periode": "T1",
+      "notions": [
+        "Définir un milieu de vie et distinguer facteurs abiotiques (physico-chimiques) et facteurs biotiques",
+        "Relier la répartition des êtres vivants dans un milieu aux conditions physico-chimiques (lumière, température, humidité)",
+        "Expliquer les variations saisonnières du peuplement d'un milieu",
+        "Décrire les stratégies des animaux face à l'hiver : migration, hibernation, vie ralentie",
+        "Décrire les formes de résistance des végétaux : graines, bourgeons, organes souterrains, perte des feuilles",
+        "Mettre en œuvre une démarche expérimentale pour tester l'influence d'un facteur du milieu"
+      ],
+      "motsCles": [
+        "milieu de vie",
+        "facteur abiotique",
+        "facteur biotique",
+        "répartition",
+        "peuplement",
+        "variations saisonnières",
+        "migration",
+        "hibernation",
+        "vie ralentie",
+        "forme de résistance",
+        "feuilles caduques",
+        "espèce"
+      ],
+      "reference": "Un milieu de vie est un lieu caractérisé par ses conditions physico-chimiques et par les êtres vivants qui l'habitent (forêt, mare, prairie).\nLe peuplement d'un milieu est l'ensemble des espèces qui y vivent.\nFacteurs abiotiques (non vivants) : lumière, température, humidité, nature du sol, quantité d'eau, teneur en dioxygène.\nFacteurs biotiques (liés aux êtres vivants) : nourriture disponible, présence de prédateurs, compétition, action de l'être humain.\nLa répartition des êtres vivants dépend des conditions du milieu : les mousses et fougères poussent à l'ombre et à l'humidité ; le cloporte recherche l'obscurité et l'humidité.\nExpérience classique : placer des cloportes dans une boîte présentant un côté sec et éclairé et un côté humide et sombre ; ils se regroupent du côté humide et sombre. On ne fait varier qu'un facteur à la fois et on compare à un témoin.\nLe peuplement d'un milieu varie au cours des saisons, principalement à cause des variations de température, de durée du jour et de nourriture disponible.\nMigration : certains animaux quittent le milieu à la mauvaise saison et vont vers des régions plus favorables (hirondelle, cigogne).\nHibernation : certains mammifères (marmotte, hérisson, loir) passent l'hiver dans un état de sommeil profond ; leur température et leur rythme cardiaque baissent fortement.\nVie ralentie : les animaux dont la température varie avec celle du milieu (grenouille, lézard, escargot, insectes) deviennent inactifs quand il fait froid.\nCertains animaux passent l'hiver sous forme d'œufs ou de larves ; les adultes meurent.\nLes arbres à feuilles caduques (chêne, hêtre) perdent leurs feuilles en automne et passent l'hiver sous forme de bourgeons protégés par des écailles. Les conifères comme le pin gardent leurs aiguilles.\nLes plantes annuelles meurent et passent l'hiver sous forme de graines ; d'autres plantes passent l'hiver sous forme d'organes souterrains (bulbes de tulipe, tubercules de pomme de terre).\nCes formes de résistance permettent le repeuplement du milieu au printemps.\nMéthode : relevés de terrain (inventaire, quadrat), mesures (luxmètre, thermomètre, hygromètre) et mise en relation avec la présence des espèces."
+    },
+    {
+      "id": "respiration-animaux",
+      "titre": "La respiration des animaux dans différents milieux",
+      "ordre": 5,
+      "periode": "T2",
+      "notions": [
+        "Expliquer que tous les animaux prélèvent du dioxygène et rejettent du dioxyde de carbone dans leur milieu",
+        "Mettre en évidence ces échanges gazeux par une expérience (eau de chaux, sonde à dioxygène)",
+        "Associer les organes respiratoires au milieu de vie : poumons, branchies, trachées, peau",
+        "Décrire les caractéristiques communes des surfaces d'échange : grande surface, paroi fine, bonne irrigation",
+        "Comparer la disponibilité du dioxygène dans l'air et dans l'eau",
+        "Expliquer comment la pollution ou le réchauffement de l'eau modifie le peuplement aquatique"
+      ],
+      "motsCles": [
+        "respiration",
+        "dioxygène",
+        "dioxyde de carbone",
+        "échanges gazeux",
+        "eau de chaux",
+        "poumon",
+        "branchie",
+        "trachée",
+        "respiration cutanée",
+        "surface d'échange",
+        "irrigation",
+        "milieu aquatique"
+      ],
+      "reference": "La respiration consiste à prélever du dioxygène (O₂) dans le milieu et à y rejeter du dioxyde de carbone (CO₂). Tous les animaux respirent, qu'ils vivent dans l'air ou dans l'eau.\nMise en évidence : une sonde à dioxygène dans un bocal fermé contenant un animal montre la baisse de la teneur en O₂ ; l'eau de chaux se trouble en présence de CO₂.\nExpérience témoin : même dispositif sans animal, pour montrer que les variations sont dues à l'animal.\nL'eau contient beaucoup moins de dioxygène que l'air (environ 20 à 30 fois moins), et l'eau froide en contient plus que l'eau chaude.\nPoumons : organes en forme de sacs très ramifiés, à l'intérieur du corps ; mammifères, oiseaux, reptiles, grenouille adulte. Respiration en milieu aérien.\nBranchies : lamelles très fines et très irriguées, baignées par l'eau ; poissons, têtards, nombreux mollusques et crustacés. Chez le poisson, l'eau entre par la bouche et ressort par les ouïes.\nTrachées : fins tubes ramifiés qui apportent l'air directement aux organes ; insectes (l'air entre par des orifices appelés stigmates).\nRespiration cutanée : échanges à travers une peau fine et humide ; ver de terre, et en partie la grenouille.\nLes branchies ne fonctionnent pas dans l'air : les lamelles se collent et la surface d'échange diminue ; c'est pourquoi un poisson s'asphyxie hors de l'eau.\nPoints communs des surfaces d'échange : très grande surface, paroi très fine, très irriguée par le sang (sauf trachées) et humide.\nCertains animaux aquatiques respirent l'air : la baleine et le dauphin (poumons) remontent à la surface ; la larve de moustique respire par un siphon.\nChez la grenouille, le têtard aquatique respire avec des branchies et l'adulte avec des poumons et sa peau.\nUne eau réchauffée ou polluée (matières organiques en décomposition) s'appauvrit en dioxygène : les espèces exigeantes (truite) disparaissent, les plus tolérantes restent.\nMéthode : formuler une hypothèse, réaliser une expérience avec témoin, ne faire varier qu'un paramètre, conclure."
+    },
+    {
+      "id": "nutrition-vegetaux",
+      "titre": "Les besoins des végétaux et la photosynthèse",
+      "ordre": 6,
+      "periode": "T2",
+      "notions": [
+        "Identifier les besoins nutritifs d'une plante verte : eau, sels minéraux, dioxyde de carbone, lumière",
+        "Expliquer le rôle des racines et des poils absorbants dans le prélèvement de l'eau et des sels minéraux",
+        "Expliquer le rôle des stomates des feuilles dans les échanges de gaz",
+        "Décrire la photosynthèse : production de matière organique et rejet de dioxygène à la lumière",
+        "Mettre en évidence l'amidon dans une feuille à l'aide de l'eau iodée",
+        "Distinguer sève brute et sève élaborée et leur circulation dans la plante"
+      ],
+      "motsCles": [
+        "besoins nutritifs",
+        "sels minéraux",
+        "poils absorbants",
+        "stomate",
+        "chlorophylle",
+        "photosynthèse",
+        "matière organique",
+        "amidon",
+        "eau iodée",
+        "sève brute",
+        "sève élaborée",
+        "producteur primaire"
+      ],
+      "reference": "Une plante verte a besoin d'eau, de sels minéraux, de dioxyde de carbone et de lumière pour se développer. Elle ne mange pas d'autres êtres vivants.\nL'eau et les sels minéraux (nitrates, phosphates, potassium) sont prélevés dans le sol par les racines, au niveau des poils absorbants, très nombreux, qui augmentent la surface d'échange.\nLe dioxyde de carbone de l'air entre dans les feuilles par de petits orifices, les stomates, situés surtout sur la face inférieure ; la vapeur d'eau sort aussi par les stomates (transpiration).\nLa photosynthèse se fait dans les parties vertes de la plante (contenant de la chlorophylle), surtout les feuilles, à la lumière.\nBilan : eau + dioxyde de carbone → matière organique (glucose, puis amidon) + dioxygène, en présence de lumière et de chlorophylle.\nMise en évidence de l'amidon : une feuille décolorée devient bleu-noir avec l'eau iodée là où elle a été éclairée ; une partie cachée de la lumière ou non chlorophyllienne ne se colore pas.\nLe rejet de dioxygène à la lumière se montre avec une sonde à dioxygène ou par les bulles d'une plante aquatique (élodée) éclairée.\nLes plantes respirent aussi, jour et nuit : elles consomment du dioxygène et rejettent du dioxyde de carbone. À la lumière, la photosynthèse l'emporte.\nLa sève brute (eau et sels minéraux) monte des racines vers les feuilles dans des vaisseaux.\nLa sève élaborée (eau et matière organique fabriquée par les feuilles) est distribuée à tous les organes : tiges, racines, fleurs, fruits, organes de réserve.\nLa plante stocke sa matière organique sous forme de réserves (amidon de la pomme de terre, sucre de la betterave).\nLes végétaux chlorophylliens sont des producteurs primaires : ils fabriquent leur matière organique à partir de matière minérale, et sont à la base des chaînes alimentaires.\nLes engrais apportent des sels minéraux ; en excès, ils polluent les cours d'eau.\nMéthode : expérience avec témoin, par exemple deux plants identiques, l'un à la lumière, l'autre à l'obscurité."
+    },
+    {
+      "id": "reproduction-peuplement",
+      "titre": "Reproduction des êtres vivants et peuplement des milieux",
+      "ordre": 7,
+      "periode": "T2",
+      "notions": [
+        "Distinguer reproduction sexuée et reproduction asexuée",
+        "Décrire la fécondation : rencontre d'un gamète mâle et d'un gamète femelle formant une cellule-œuf",
+        "Décrire la reproduction sexuée des plantes à fleurs : pollinisation, fécondation, formation du fruit et de la graine",
+        "Expliquer la dissémination des graines et son rôle dans la colonisation des milieux",
+        "Citer des exemples de reproduction asexuée chez les végétaux (bouturage, stolons, tubercules, bulbes)",
+        "Relier le nombre de descendants et les conditions du milieu à l'évolution d'une population"
+      ],
+      "motsCles": [
+        "reproduction sexuée",
+        "reproduction asexuée",
+        "gamète",
+        "fécondation",
+        "cellule-œuf",
+        "fécondation externe",
+        "fécondation interne",
+        "pollinisation",
+        "fruit",
+        "graine",
+        "dissémination",
+        "bouturage"
+      ],
+      "reference": "La reproduction permet aux êtres vivants de produire de nouveaux individus et assure la survie de l'espèce et le peuplement des milieux.\nReproduction sexuée : elle fait intervenir deux cellules reproductrices, les gamètes (gamète mâle et gamète femelle). Leur fusion, la fécondation, donne une cellule-œuf qui se développe en un nouvel individu.\nChez les animaux, les gamètes mâles sont les spermatozoïdes, les gamètes femelles les ovules.\nFécondation externe : dans l'eau, hors du corps de la femelle (grenouille, truite, oursin) ; les gamètes sont produits en très grand nombre.\nFécondation interne : dans le corps de la femelle, après accouplement (mammifères, oiseaux, insectes) ; adaptée au milieu aérien.\nPlantes à fleurs : les étamines produisent le pollen (contenant le gamète mâle) ; le pistil contient l'ovaire, qui renferme les ovules (contenant le gamète femelle).\nLa pollinisation est le transport du pollen des étamines jusqu'au pistil, par le vent ou par les animaux (insectes pollinisateurs comme l'abeille).\nAprès la fécondation, l'ovule devient la graine et l'ovaire devient le fruit.\nLa dissémination des graines par le vent (pissenlit, érable), les animaux (fruits mangés, graines accrochées au pelage) ou l'eau permet de coloniser de nouveaux milieux.\nReproduction asexuée : un seul parent produit des descendants identiques à lui, sans gamètes ni fécondation.\nExemples végétaux : stolons du fraisier, tubercules de la pomme de terre, bulbes de la tulipe, bouturage (un fragment de tige mis en terre forme des racines).\nExemples animaux : bourgeonnement de l'hydre, fragmentation de certaines étoiles de mer.\nLa reproduction asexuée permet une colonisation rapide d'un milieu ; la reproduction sexuée produit des individus tous différents.\nLe nombre de descendants qui survivent dépend des conditions du milieu (nourriture, prédateurs, climat) ; beaucoup d'œufs ou de graines ne donnent pas d'adulte.\nLes activités humaines (pesticides réduisant les pollinisateurs, destruction des milieux) peuvent nuire à la reproduction des espèces."
+    },
+    {
+      "id": "effort-physique",
+      "titre": "L'organisme pendant un effort physique",
+      "ordre": 8,
+      "periode": "T2",
+      "notions": [
+        "Mesurer et comparer fréquence cardiaque et fréquence respiratoire au repos, pendant et après un effort",
+        "Expliquer que les muscles en activité consomment davantage de dioxygène et de nutriments et rejettent davantage de dioxyde de carbone",
+        "Relier l'augmentation des rythmes cardiaque et respiratoire à l'approvisionnement des muscles",
+        "Expliquer l'augmentation du débit sanguin dans les muscles actifs",
+        "Identifier les limites de l'organisme lors d'un effort (fréquence cardiaque maximale, consommation maximale de dioxygène)",
+        "Connaître les conditions d'une pratique sportive bénéfique (échauffement, entraînement, hydratation, récupération) et les dangers du dopage"
+      ],
+      "motsCles": [
+        "effort physique",
+        "fréquence cardiaque",
+        "fréquence respiratoire",
+        "pouls",
+        "débit sanguin",
+        "consommation de dioxygène",
+        "nutriments",
+        "glucose",
+        "fréquence cardiaque maximale",
+        "entraînement",
+        "récupération",
+        "dopage"
+      ],
+      "reference": "La fréquence cardiaque est le nombre de battements du cœur par minute ; on la mesure en prenant le pouls (au poignet ou au cou) ou avec un cardiofréquencemètre.\nLa fréquence respiratoire est le nombre de mouvements respiratoires par minute.\nAu repos, un adulte a une fréquence cardiaque d'environ 60 à 80 battements par minute ; elle est un peu plus élevée chez un enfant.\nPendant un effort, la fréquence cardiaque, la fréquence respiratoire et le volume d'air inspiré à chaque mouvement augmentent. Après l'effort, ils reviennent progressivement à leur valeur de repos : c'est la récupération.\nLes muscles ont besoin de dioxygène et de nutriments (dont le glucose) pour produire l'énergie nécessaire à leur contraction ; ils rejettent du dioxyde de carbone.\nPendant l'effort, les muscles consomment davantage de dioxygène et de glucose et produisent davantage de dioxyde de carbone.\nLe sang apporte le dioxygène et les nutriments aux muscles et emporte leurs déchets. Le cœur bat plus vite, donc le débit sanguin augmente ; il augmente surtout vers les muscles actifs.\nLa respiration plus rapide et plus ample augmente l'apport de dioxygène dans les poumons et l'élimination du dioxyde de carbone.\nIl existe des limites : la fréquence cardiaque maximale s'estime par la formule 220 − âge (en battements par minute). Exemple : à 12 ans, environ 208.\nLa consommation de dioxygène augmente avec l'intensité de l'effort jusqu'à une valeur maximale propre à chacun.\nL'entraînement régulier améliore les performances : le cœur devient plus efficace (fréquence cardiaque de repos plus basse) et la récupération plus rapide.\nBonnes pratiques : s'échauffer avant l'effort, s'hydrater, respecter des temps de repos, avoir une alimentation adaptée et un sommeil suffisant.\nLe dopage consiste à utiliser des substances interdites pour augmenter artificiellement ses performances ; il est interdit et dangereux pour la santé.\nMéthode : mesurer, tracer un graphique (fréquence en fonction du temps) et interpréter repos / effort / récupération."
+    },
+    {
+      "id": "respiration-humaine",
+      "titre": "La respiration humaine et les échanges gazeux",
+      "ordre": 9,
+      "periode": "T3",
+      "notions": [
+        "Décrire le trajet de l'air dans l'appareil respiratoire jusqu'aux alvéoles pulmonaires",
+        "Expliquer les mouvements respiratoires (inspiration, expiration) et le rôle du diaphragme",
+        "Comparer la composition de l'air inspiré et de l'air expiré",
+        "Expliquer les échanges gazeux entre l'air des alvéoles et le sang",
+        "Relier les caractéristiques des alvéoles (grande surface, paroi fine, irrigation) à leur fonction",
+        "Expliquer les effets du tabac et de la pollution sur l'appareil respiratoire"
+      ],
+      "motsCles": [
+        "appareil respiratoire",
+        "trachée",
+        "bronches",
+        "bronchioles",
+        "alvéoles pulmonaires",
+        "inspiration",
+        "expiration",
+        "diaphragme",
+        "échanges gazeux",
+        "capillaires sanguins",
+        "globules rouges",
+        "tabac"
+      ],
+      "reference": "L'appareil respiratoire comprend les voies respiratoires et les poumons.\nTrajet de l'air : fosses nasales (ou bouche) → pharynx → larynx → trachée → bronches → bronchioles → alvéoles pulmonaires.\nLes alvéoles pulmonaires sont de minuscules sacs situés au bout des bronchioles ; il y en a plusieurs centaines de millions.\nInspiration : le diaphragme (muscle sous les poumons) se contracte et s'abaisse, les côtes se soulèvent ; la cage thoracique augmente de volume et l'air entre dans les poumons.\nExpiration : le diaphragme se relâche et remonte, la cage thoracique diminue de volume et l'air est rejeté.\nAir inspiré : environ 21 % de dioxygène et 0,04 % de dioxyde de carbone. Air expiré : environ 16 % de dioxygène et 4 % de dioxyde de carbone. Le diazote (78 %) ne varie pas.\nDans les alvéoles, le dioxygène passe de l'air dans le sang ; le dioxyde de carbone passe du sang dans l'air alvéolaire.\nLes alvéoles sont entourées de capillaires sanguins, vaisseaux très fins. Leur paroi et celle des capillaires sont très minces, ce qui facilite le passage des gaz.\nLa surface totale des alvéoles est très grande, d'environ 100 m², ce qui permet des échanges importants.\nLe dioxygène est transporté par les globules rouges jusqu'à tous les organes ; le dioxyde de carbone produit par les organes est rapporté aux poumons et rejeté.\nLe mucus et les cils des voies respiratoires retiennent et évacuent poussières et microbes.\nLa fumée de tabac contient de la nicotine (responsable de la dépendance), des goudrons (cancérigènes) et du monoxyde de carbone (qui prend la place du dioxygène dans le sang).\nLe tabac paralyse les cils, provoque toux et bronchites, et augmente fortement le risque de cancer du poumon ; il détruit des alvéoles.\nLa pollution de l'air (particules fines) irrite les voies respiratoires et peut aggraver l'asthme.\nMéthode : utiliser un modèle (bocal à ballons) en précisant ce qu'il représente et ses limites."
+    },
+    {
+      "id": "circulation-sanguine",
+      "titre": "Le cœur et la circulation sanguine",
+      "ordre": 10,
+      "periode": "T3",
+      "notions": [
+        "Décrire l'organisation du cœur : deux oreillettes, deux ventricules, valvules, cloison",
+        "Expliquer que le cœur est un muscle qui fonctionne comme une double pompe",
+        "Distinguer artères, veines et capillaires sanguins",
+        "Décrire la double circulation : circulation pulmonaire et circulation générale",
+        "Expliquer le rôle du sang dans le transport du dioxygène, des nutriments et des déchets",
+        "Citer les composants du sang et leur rôle"
+      ],
+      "motsCles": [
+        "cœur",
+        "oreillette",
+        "ventricule",
+        "valvule",
+        "artère",
+        "veine",
+        "capillaire",
+        "circulation pulmonaire",
+        "circulation générale",
+        "sang",
+        "plasma",
+        "globules rouges"
+      ],
+      "reference": "Le cœur est un muscle creux, situé dans la cage thoracique, qui se contracte régulièrement pour mettre le sang en mouvement.\nIl comporte quatre cavités : une oreillette et un ventricule à droite, une oreillette et un ventricule à gauche. Une cloison sépare cœur droit et cœur gauche : le sang ne passe pas de l'un à l'autre.\nLe sang entre dans le cœur par les oreillettes et en sort par les ventricules.\nLes valvules empêchent le sang de revenir en arrière : il circule toujours dans le même sens.\nLes artères transportent le sang du cœur vers les organes ; les veines ramènent le sang des organes vers le cœur.\nLes capillaires sont des vaisseaux très fins qui relient artères et veines dans les organes ; c'est à leur niveau que se font les échanges entre le sang et les cellules.\nCirculation pulmonaire (petite circulation) : le ventricule droit envoie le sang pauvre en dioxygène vers les poumons par l'artère pulmonaire ; il revient enrichi en dioxygène à l'oreillette gauche par les veines pulmonaires.\nCirculation générale (grande circulation) : le ventricule gauche envoie le sang riche en dioxygène vers tous les organes par l'aorte ; il revient pauvre en dioxygène à l'oreillette droite par les veines caves.\nLa paroi du ventricule gauche est la plus épaisse car il propulse le sang dans tout le corps.\nOn parle de double circulation car le sang passe deux fois par le cœur pour faire un tour complet.\nEn 1628, le médecin anglais William Harvey démontre que le sang circule en circuit fermé, propulsé par le cœur.\nLe sang est composé de plasma (liquide qui transporte nutriments, dioxyde de carbone et déchets), de globules rouges (transport du dioxygène), de globules blancs (défense contre les microbes) et de plaquettes (coagulation).\nUn adulte possède environ 5 litres de sang. Au repos, le cœur bat environ 70 fois par minute.\nLe sang apporte à chaque organe dioxygène et nutriments et emporte le dioxyde de carbone et les déchets (éliminés par les poumons et les reins).\nMéthode : sur un schéma, suivre le trajet du sang en indiquant par des couleurs conventionnelles le sang riche (rouge) ou pauvre (bleu) en dioxygène."
+    },
+    {
+      "id": "digestion-absorption",
+      "titre": "La digestion et l'absorption des nutriments",
+      "ordre": 11,
+      "periode": "T3",
+      "notions": [
+        "Décrire l'appareil digestif : tube digestif et glandes digestives",
+        "Expliquer la transformation des aliments en nutriments par l'action mécanique et chimique",
+        "Expliquer le rôle des enzymes digestives, mis en évidence par une expérience de digestion in vitro",
+        "Expliquer le passage des nutriments dans le sang au niveau de l'intestin grêle (absorption)",
+        "Relier la structure de l'intestin grêle (replis, villosités, capillaires) à sa fonction d'absorption",
+        "Connaître le rôle du microbiote intestinal pour la santé"
+      ],
+      "motsCles": [
+        "appareil digestif",
+        "tube digestif",
+        "glandes digestives",
+        "aliment",
+        "nutriment",
+        "digestion",
+        "enzyme digestive",
+        "amylase",
+        "intestin grêle",
+        "villosités",
+        "absorption",
+        "microbiote"
+      ],
+      "reference": "L'appareil digestif comprend le tube digestif (bouche, œsophage, estomac, intestin grêle, gros intestin, anus) et des glandes digestives (glandes salivaires, foie, pancréas, glandes de la paroi de l'estomac et de l'intestin).\nLa digestion est la transformation des aliments en nutriments, petites molécules capables de passer dans le sang.\nAction mécanique : les dents découpent et broient les aliments, l'estomac et l'intestin les brassent.\nAction chimique : les sucs digestifs contiennent des enzymes digestives qui découpent les grosses molécules des aliments en nutriments.\nExemple : l'amylase de la salive transforme l'amidon en sucres plus simples ; c'est pourquoi le pain mâché longtemps devient sucré.\nExpérience in vitro : empois d'amidon + salive à 37 °C ; après un moment, l'eau iodée ne bleuit plus (l'amidon a disparu) et un test montre la présence de sucre. Le tube témoin sans salive bleuit toujours.\nLes protéines sont transformées en acides aminés, l'amidon en glucose, les lipides en acides gras et glycérol.\nLa bile, produite par le foie, ne contient pas d'enzyme mais facilite la digestion des graisses.\nL'eau, les sels minéraux et les vitamines ne sont pas digérés : ils passent directement dans le sang.\nL'absorption est le passage des nutriments de l'intestin grêle vers le sang. Elle se fait surtout dans l'intestin grêle, long d'environ 6 à 7 mètres.\nLa paroi de l'intestin grêle porte des replis couverts de villosités, ce qui donne une très grande surface d'échange ; la paroi est fine et très irriguée par des capillaires sanguins.\nLes résidus non digérés (fibres) passent dans le gros intestin, où l'eau est en partie réabsorbée, puis sont éliminés sous forme de selles.\nLe microbiote intestinal est l'ensemble des micro-organismes (surtout des bactéries) qui vivent dans l'intestin ; ils participent à la digestion des fibres, produisent certaines vitamines et protègent contre des microbes pathogènes.\nUne alimentation variée et riche en fibres favorise un microbiote équilibré ; certains antibiotiques peuvent le perturber.\nMéthode : expérience avec témoin ; schéma de l'appareil digestif légendé."
+    },
+    {
+      "id": "hygiene-de-vie",
+      "titre": "Alimentation, activité physique et santé",
+      "ordre": 12,
+      "periode": "T3",
+      "notions": [
+        "Relier les besoins de l'organisme en énergie et en matériaux aux apports de l'alimentation",
+        "Classer les aliments selon leurs apports (glucides, lipides, protides, vitamines, sels minéraux, fibres, eau)",
+        "Expliquer ce qu'est une alimentation équilibrée et les conséquences d'une alimentation déséquilibrée",
+        "Expliquer que les besoins varient selon l'âge, le sexe et l'activité physique",
+        "Relier une activité physique régulière et un sommeil suffisant à une bonne santé",
+        "Expliquer les effets nocifs du tabac et de l'alcool et la notion de dépendance"
+      ],
+      "motsCles": [
+        "besoins nutritionnels",
+        "énergie",
+        "kilojoule",
+        "glucides",
+        "lipides",
+        "protides",
+        "vitamines",
+        "fibres",
+        "alimentation équilibrée",
+        "obésité",
+        "sédentarité",
+        "dépendance"
+      ],
+      "reference": "L'organisme a besoin d'énergie (pour fonctionner, se déplacer, maintenir sa température) et de matériaux (pour grandir et renouveler ses cellules). Tout cela est apporté par l'alimentation.\nLes besoins en énergie s'expriment en kilojoules (kJ) ou en kilocalories (kcal) ; 1 kcal ≈ 4,18 kJ. Ils varient selon l'âge, le sexe, la taille et l'activité physique.\nGlucides (pain, pâtes, riz, féculents, sucre) : principale source d'énergie rapide.\nLipides (huile, beurre, fromage) : source d'énergie importante et de réserve.\nProtides ou protéines (viande, poisson, œufs, lait, légumes secs) : matériaux de construction du corps, indispensables à la croissance.\nVitamines et sels minéraux (fruits, légumes, produits laitiers pour le calcium) : indispensables en petites quantités ; les fibres (fruits, légumes, céréales complètes) facilitent le transit intestinal. L'eau est la seule boisson indispensable.\nUne alimentation équilibrée est variée et apporte en quantités adaptées tous les éléments nécessaires, répartis sur plusieurs repas (petit-déjeuner, déjeuner, goûter, dîner).\nSi les apports dépassent régulièrement les dépenses, l'excès est stocké sous forme de graisses : risque de surpoids et d'obésité, puis de maladies (diabète de type 2, maladies cardiovasculaires).\nDes apports insuffisants ou carencés peuvent provoquer fatigue et troubles de la croissance (exemple : carence en calcium pour les os).\nLa sédentarité (rester longtemps assis, devant les écrans) augmente les risques pour la santé. L'OMS recommande aux 5-17 ans au moins 60 minutes d'activité physique modérée à soutenue par jour.\nLe sommeil est indispensable à la croissance, à la mémoire et à la récupération ; un collégien a besoin d'environ 9 heures de sommeil par nuit.\nLe tabac et l'alcool contiennent des substances toxiques. La nicotine du tabac crée une dépendance : il devient très difficile de s'en passer. L'alcool est particulièrement dangereux pour le cerveau d'un adolescent.\nLa vente de tabac et d'alcool aux mineurs est interdite en France.\nMéthode : lire une étiquette alimentaire (énergie pour 100 g, glucides, lipides, protéines) et comparer des menus ou des aliments."
+    }
+  ]
+}

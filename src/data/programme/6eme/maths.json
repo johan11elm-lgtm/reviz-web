@@ -1,0 +1,415 @@
+{
+  "classe": "6ème",
+  "matiere": "Maths",
+  "programme": "Mathématiques cycle 3, programme de l'arrêté du 10/04/2025 (BO n°16 du 17/04/2025), en vigueur en 6e depuis la rentrée 2025",
+  "modele": "claude-opus-5-5 (abonnement)",
+  "genereLe": "2026-10-05",
+  "relu": false,
+  "chapitres": [
+    {
+      "id": "nombres-entiers-et-decimaux",
+      "titre": "Nombres entiers et nombres décimaux",
+      "ordre": 1,
+      "periode": "T1",
+      "notions": [
+        "Connaître la valeur de chaque chiffre selon son rang (unités, dizaines, centaines, milliers, millions, milliards ; dixièmes, centièmes, millièmes)",
+        "Connaître les liens entre les unités de numération : 1 unité = 10 dixièmes = 100 centièmes = 1 000 millièmes",
+        "Lire et écrire de grands nombres entiers, jusqu'au milliard",
+        "Passer d'une fraction décimale à une écriture à virgule et inversement",
+        "Placer et repérer un nombre décimal sur une demi-droite graduée",
+        "Comparer, ranger, encadrer et intercaler des nombres décimaux",
+        "Donner la valeur arrondie d'un nombre décimal à l'unité, au dixième ou au centième"
+      ],
+      "motsCles": [
+        "chiffre",
+        "nombre",
+        "rang",
+        "milliard",
+        "dixième",
+        "centième",
+        "millième",
+        "fraction décimale",
+        "partie entière",
+        "demi-droite graduée",
+        "encadrement",
+        "arrondi"
+      ],
+      "reference": "Un nombre s'écrit avec des chiffres (0, 1, 2, …, 9) ; la valeur d'un chiffre dépend de son rang dans le nombre.\nClasses des entiers : unités, milliers, millions, milliards. 1 milliard = 1 000 millions = 1 000 000 000.\nExemple : dans 3 405 000 000, le chiffre 3 est le chiffre des milliards ; on lit « trois milliards quatre cent cinq millions ».\nUnités de numération : 1 = 10 dixièmes = 100 centièmes = 1 000 millièmes ; 1/10 = 0,1 ; 1/100 = 0,01 ; 1/1 000 = 0,001.\nUn nombre décimal peut s'écrire comme une fraction décimale (dénominateur 10, 100, 1 000…).\nExemple : 4 107/1 000 = 4 + 107/1 000 = 4 + 1/10 + 7/1 000 = 4,107.\nDans 4,107 : la partie entière est 4 ; 1 est le chiffre des dixièmes, 0 celui des centièmes, 7 celui des millièmes.\nOn peut ajouter ou retirer des zéros à droite de la partie décimale sans changer le nombre : 2,5 = 2,50 = 2,500.\nDemi-droite graduée : chaque point est repéré par un nombre, son abscisse ; on lit l'unité choisie et la valeur d'un petit intervalle.\nComparer deux décimaux : on compare d'abord les parties entières, puis les dixièmes, puis les centièmes… Exemple : 3,9 > 3,85 car 9 dixièmes > 8 dixièmes.\nErreur classique : 3,85 n'est pas plus grand que 3,9 sous prétexte que 85 > 9.\nOrdre croissant : du plus petit au plus grand ; ordre décroissant : du plus grand au plus petit. Symboles < et >.\nEncadrer : 3,7 < 3,74 < 3,8 (encadrement au dixième). Intercaler : entre 2,3 et 2,4 on peut placer 2,35.\nArrondir : on garde le nombre le plus proche ; 7,36 arrondi au dixième est 7,4 ; 7,32 arrondi au dixième est 7,3.\nSi le chiffre suivant est 5 ou plus, on arrondit au-dessus : 2,45 arrondi au dixième est 2,5.\nOn peut aussi arrondir des nombres non décimaux : 1/3 ≈ 0,33 au centième."
+    },
+    {
+      "id": "angles",
+      "titre": "Les angles",
+      "ordre": 2,
+      "periode": "T1",
+      "notions": [
+        "Connaître le vocabulaire et les notations d'un angle : sommet, côtés, notation avec un chapeau",
+        "Distinguer angle nul, aigu, droit, obtus, plat et plein",
+        "Mesurer un angle en degrés avec un rapporteur",
+        "Construire un angle de mesure donnée",
+        "Reconnaître des angles adjacents, opposés par le sommet, supplémentaires",
+        "Connaître la définition de la bissectrice d'un angle et la construire"
+      ],
+      "motsCles": [
+        "angle",
+        "sommet",
+        "côté",
+        "degré",
+        "rapporteur",
+        "aigu",
+        "obtus",
+        "droit",
+        "plat",
+        "adjacents",
+        "opposés par le sommet",
+        "bissectrice"
+      ],
+      "reference": "Un angle est formé par deux demi-droites de même origine ; cette origine est le sommet, les demi-droites sont les côtés.\nNotation : l'angle de sommet O et de côtés [Ox) et [Oy) se note xÔy ; l'angle formé par les points A, O, B se note AÔB (la lettre du sommet au milieu, avec un chapeau).\nL'unité de mesure des angles au collège est le degré (°).\nAngle nul : 0°. Angle aigu : entre 0° et 90°. Angle droit : 90°. Angle obtus : entre 90° et 180°. Angle plat : 180°. Angle plein : 360°.\nUn angle droit se code par un petit carré ; des angles de même mesure se codent par le même symbole.\nMesurer avec un rapporteur : placer le centre du rapporteur sur le sommet, aligner le zéro d'une graduation sur un côté, lire sur la même graduation là où passe l'autre côté.\nErreur classique : lire sur la mauvaise graduation (lire 130° au lieu de 50°) ; vérifier si l'angle est aigu ou obtus.\nConstruire un angle de 40° de sommet A : tracer une demi-droite [Ax), placer le rapporteur, marquer le point à 40°, tracer le second côté.\nAngles adjacents : ils ont le même sommet, un côté commun, et sont situés de part et d'autre de ce côté.\nAngles opposés par le sommet : formés par deux droites sécantes, ils ont le même sommet et des côtés dans le prolongement l'un de l'autre ; ils ont la même mesure.\nAngles supplémentaires : la somme de leurs mesures est 180°. Exemple : 70° et 110°.\nBissectrice d'un angle saillant : demi-droite issue du sommet qui partage l'angle en deux angles de même mesure.\nExemple : la bissectrice d'un angle de 80° le partage en deux angles de 40°.\nConstruction de la bissectrice : au rapporteur (moitié de la mesure) ou au compas."
+    },
+    {
+      "id": "multiplication-des-nombres-decimaux",
+      "titre": "Multiplication des nombres décimaux",
+      "ordre": 3,
+      "periode": "T1",
+      "notions": [
+        "Additionner et soustraire des nombres décimaux en alignant les chiffres de même rang",
+        "Multiplier et diviser un nombre décimal par 10, 100, 1 000",
+        "Multiplier un nombre par 0,1, 0,01, 0,001 et faire le lien avec la division par 10, 100, 1 000",
+        "Comprendre le sens de la multiplication de deux décimaux (aire d'un rectangle)",
+        "Calculer le produit de deux nombres décimaux et placer la virgule",
+        "Contrôler un résultat à l'aide d'un ordre de grandeur",
+        "Résoudre des problèmes mettant en jeu des multiplications de décimaux"
+      ],
+      "motsCles": [
+        "addition",
+        "soustraction",
+        "somme",
+        "différence",
+        "produit",
+        "facteur",
+        "virgule",
+        "ordre de grandeur",
+        "commutativité",
+        "décomposition",
+        "dixième",
+        "centième"
+      ],
+      "reference": "Addition et soustraction posées : on aligne les virgules, donc les chiffres de même rang. Exemple : 12,5 + 3,75 = 16,25.\nLe résultat d'une addition est une somme, celui d'une soustraction une différence, celui d'une multiplication un produit ; les nombres multipliés sont les facteurs.\nMultiplier par 10, 100, 1 000 : chaque chiffre prend une valeur 10, 100, 1 000 fois plus grande. Exemple : 3,47 × 100 = 347.\nDiviser par 10, 100, 1 000 : chaque chiffre prend une valeur 10, 100, 1 000 fois plus petite. Exemple : 52,3 ÷ 10 = 5,23.\nMultiplier par 0,1 revient à diviser par 10 ; par 0,01 à diviser par 100 ; par 0,001 à diviser par 1 000. Exemple : 45 × 0,1 = 4,5.\nErreur classique : croire qu'une multiplication donne toujours un résultat plus grand ; 8 × 0,5 = 4.\nSens : 2,5 × 1,2 est l'aire en m² d'un rectangle de 2,5 m sur 1,2 m.\nOn peut changer l'ordre des facteurs (commutativité) et les regrouper (associativité) : 0,4 × 7 × 25 = 7 × (0,4 × 25) = 7 × 10 = 70.\nMéthode : on multiplie sans tenir compte des virgules, puis le produit a autant de chiffres après la virgule que les deux facteurs réunis.\nExemple : 3,2 × 1,5 : 32 × 15 = 480 ; 1 + 1 = 2 chiffres après la virgule, donc 3,2 × 1,5 = 4,80 = 4,8.\nOrdre de grandeur : on remplace les nombres par des valeurs proches simples. 19,8 × 4,1 ≈ 20 × 4 = 80, donc le résultat est proche de 80.\nL'ordre de grandeur permet de repérer une erreur de virgule (811,8 et non 8,118 pour 19,8 × 41).\nProblème : 2,5 kg de pommes à 3,20 € le kg coûtent 2,5 × 3,20 = 8 €."
+    },
+    {
+      "id": "division-euclidienne-division-decimale-et-durees",
+      "titre": "Division euclidienne, division décimale et durées",
+      "ordre": 4,
+      "periode": "T1",
+      "notions": [
+        "Effectuer la division euclidienne d'un entier par un entier inférieur à 100 : dividende, diviseur, quotient, reste",
+        "Écrire l'égalité a = b × q + r avec r < b",
+        "Reconnaître multiples et diviseurs ; critères de divisibilité par 2, 5 et 10",
+        "Diviser un nombre décimal par un entier inférieur à 10",
+        "Distinguer division-partage (valeur d'une part) et division-groupement (nombre de parts)",
+        "Convertir des durées (heures, minutes, secondes, jours) et calculer des horaires et des durées"
+      ],
+      "motsCles": [
+        "division euclidienne",
+        "dividende",
+        "diviseur",
+        "quotient",
+        "reste",
+        "multiple",
+        "division décimale",
+        "partage",
+        "durée",
+        "horaire",
+        "heure",
+        "minute"
+      ],
+      "reference": "Division euclidienne de 187 par 12 : 187 = 12 × 15 + 7. 187 est le dividende, 12 le diviseur, 15 le quotient, 7 le reste.\nLe reste est toujours strictement plus petit que le diviseur : a = b × q + r avec r < b.\nSi le reste est 0, a est un multiple de b et b est un diviseur de a. Exemple : 84 = 7 × 12, donc 84 est un multiple de 7.\nCritères de divisibilité : un nombre est divisible par 2 si son chiffre des unités est 0, 2, 4, 6 ou 8 ; par 5 s'il finit par 0 ou 5 ; par 10 s'il finit par 0.\nDivision-partage : 24 € partagés entre 4 amis → 24 ÷ 4 = 6 € chacun (valeur d'une part).\nDivision-groupement : combien de boîtes de 6 œufs avec 50 œufs ? 50 = 6 × 8 + 2 → 8 boîtes pleines et 2 œufs restants.\nLe sens de la réponse dépend de la question : pour transporter 50 personnes dans des voitures de 4 places, il faut 13 voitures (50 = 4 × 12 + 2).\nDivision décimale : on continue la division après la virgule en ajoutant des zéros. Exemple : 7 ÷ 4 = 1,75 ; 15,6 ÷ 3 = 5,2.\nCertaines divisions ne s'arrêtent pas : 10 ÷ 3 = 3,333… ; on donne alors une valeur arrondie (3,33 au centième).\nDurées : 1 jour = 24 h ; 1 h = 60 min ; 1 min = 60 s ; 1 h = 3 600 s. Une demi-heure = 30 min, un quart d'heure = 15 min, trois quarts d'heure = 45 min.\nUne année compte 365 jours, ou 366 jours si elle est bissextile ; un siècle = 100 ans ; un millénaire = 1 000 ans.\nConvertir 200 min : 200 = 60 × 3 + 20, donc 200 min = 3 h 20 min.\nAttention : 1,5 h = 1 h 30 min (et non 1 h 50 min), car 0,5 h = 30 min.\nHoraire et durée : un film commence à 20 h 45 et dure 1 h 50 min ; il finit à 22 h 35 (20 h 45 + 15 min = 21 h, puis + 1 h 35 min)."
+    },
+    {
+      "id": "distances-cercles-et-mediatrice",
+      "titre": "Distances, cercles et médiatrice",
+      "ordre": 5,
+      "periode": "T1",
+      "notions": [
+        "Connaître la définition de la distance entre deux points et la notation AB",
+        "Connaître la définition du milieu d'un segment",
+        "Connaître les définitions du cercle, du disque, du centre, du rayon, du diamètre et d'une corde",
+        "Comprendre le cercle comme l'ensemble des points situés à une même distance du centre",
+        "Connaître la définition de la médiatrice d'un segment et sa propriété caractéristique",
+        "Construire la médiatrice d'un segment à la règle et au compas",
+        "Résoudre des problèmes de distances à un point"
+      ],
+      "motsCles": [
+        "distance",
+        "segment",
+        "milieu",
+        "cercle",
+        "disque",
+        "centre",
+        "rayon",
+        "diamètre",
+        "corde",
+        "médiatrice",
+        "équidistant",
+        "compas"
+      ],
+      "reference": "Notations : [AB] est le segment d'extrémités A et B ; (AB) est la droite ; [AB) est la demi-droite d'origine A ; AB est la longueur du segment, c'est-à-dire la distance entre A et B.\nLe milieu I du segment [AB] est le point de [AB] tel que IA = IB.\nLe cercle de centre O et de rayon r est l'ensemble des points situés à la distance r du point O.\nLe disque de centre O et de rayon r est l'ensemble des points situés à une distance inférieure ou égale à r du point O (le cercle et son intérieur).\nUn rayon est un segment qui joint le centre à un point du cercle ; c'est aussi sa longueur.\nUne corde est un segment qui joint deux points du cercle ; un diamètre est une corde qui passe par le centre.\nLa longueur du diamètre est le double de celle du rayon : d = 2 × r.\nLe compas sert à tracer des cercles et à reporter des longueurs.\nProblème : les points situés à 3 cm de A et à 4 cm de B se trouvent à l'intersection du cercle de centre A de rayon 3 cm et du cercle de centre B de rayon 4 cm.\nLa médiatrice d'un segment est la droite perpendiculaire à ce segment qui passe par son milieu.\nPropriété caractéristique : un point est sur la médiatrice de [AB] si et seulement s'il est à égale distance (équidistant) de A et de B.\nConstruction au compas : avec le même écartement (plus grand que la moitié de AB), on trace deux arcs de centre A et deux arcs de centre B ; la droite passant par leurs deux points d'intersection est la médiatrice.\nExemple : si M est sur la médiatrice de [AB] et MA = 5 cm, alors MB = 5 cm."
+    },
+    {
+      "id": "triangles",
+      "titre": "Les triangles",
+      "ordre": 6,
+      "periode": "T2",
+      "notions": [
+        "Construire un triangle connaissant les longueurs de ses trois côtés, à la règle et au compas",
+        "Savoir que trois longueurs ne permettent pas toujours de construire un triangle",
+        "Construire un triangle connaissant des longueurs et des angles",
+        "Connaître les triangles particuliers (rectangle, isocèle, équilatéral) et leurs propriétés sur les angles",
+        "Savoir que la somme des mesures des angles d'un triangle vaut 180° et l'utiliser pour calculer un angle",
+        "Savoir que les médiatrices d'un triangle sont concourantes et construire le cercle circonscrit"
+      ],
+      "motsCles": [
+        "triangle",
+        "sommet",
+        "côté",
+        "isocèle",
+        "équilatéral",
+        "rectangle",
+        "hypoténuse",
+        "base",
+        "somme des angles",
+        "180°",
+        "médiatrices",
+        "cercle circonscrit"
+      ],
+      "reference": "Un triangle ABC a trois sommets (A, B, C), trois côtés ([AB], [BC], [AC]) et trois angles.\nConstruire ABC avec AB = 6 cm, AC = 4 cm, BC = 5 cm : tracer [AB], arc de centre A de rayon 4 cm, arc de centre B de rayon 5 cm ; C est à l'intersection.\nTrois longueurs ne donnent pas toujours un triangle : avec 2 cm, 3 cm et 7 cm, les arcs ne se coupent pas (la plus grande longueur doit être plus petite que la somme des deux autres).\nTriangle isocèle : il a deux côtés de même longueur ; le point commun à ces côtés est le sommet principal, le troisième côté est la base. Ses deux angles à la base ont la même mesure.\nTriangle équilatéral : ses trois côtés ont la même longueur ; ses trois angles mesurent chacun 60°.\nTriangle rectangle : il a un angle droit ; le côté opposé à l'angle droit est l'hypoténuse. Ses deux autres angles ont une somme de 90°.\nPropriété : dans tout triangle, la somme des mesures des trois angles est égale à 180°.\nExemple : si deux angles mesurent 50° et 70°, le troisième mesure 180° − (50° + 70°) = 60°.\nExemple : dans un triangle isocèle dont l'angle au sommet principal mesure 40°, chaque angle à la base mesure (180° − 40°) ÷ 2 = 70°.\nConstruire un triangle avec un côté et deux angles : tracer le côté, puis les angles au rapporteur à chaque extrémité.\nLes trois médiatrices d'un triangle se coupent en un même point : elles sont concourantes.\nCe point est à égale distance des trois sommets : c'est le centre du cercle circonscrit au triangle, le cercle qui passe par les trois sommets.\nConstruction : tracer deux médiatrices, leur intersection O est le centre ; le rayon est OA."
+    },
+    {
+      "id": "fractions-sens-et-quotient",
+      "titre": "Les fractions : sens et quotient",
+      "ordre": 7,
+      "periode": "T2",
+      "notions": [
+        "Lire, écrire et représenter une fraction : numérateur et dénominateur",
+        "Relier la fraction a/b au résultat exact de la division de a par b (sens quotient)",
+        "Connaître la définition du quotient de a par b : le nombre qui multiplié par b donne a",
+        "Compléter des égalités à trous multiplicatives (4 × … = 3)",
+        "Placer une fraction sur une demi-droite graduée",
+        "Savoir qu'une fraction peut représenter un entier, un décimal ou un nombre non décimal",
+        "Appliquer une fraction à une quantité ou à un nombre (fraction d'une quantité)"
+      ],
+      "motsCles": [
+        "fraction",
+        "numérateur",
+        "dénominateur",
+        "quotient",
+        "partage",
+        "demi-droite graduée",
+        "nombre mixte",
+        "fraction décimale",
+        "opérateur",
+        "égalité à trous"
+      ],
+      "reference": "Dans la fraction 3/4, 3 est le numérateur et 4 le dénominateur ; on lit « trois quarts ».\nSens « partage » : 3/4 d'une unité, c'est partager l'unité en 4 parts égales et en prendre 3.\nUne fraction peut être plus grande que 1 : 7/4 = 4/4 + 3/4 = 1 + 3/4 (nombre mixte).\nSens « quotient » : 3/4 est aussi le quart de 3, c'est-à-dire le résultat exact de 3 ÷ 4 = 0,75.\nDéfinition : le quotient de a par b (b ≠ 0) est le nombre qui, multiplié par b, donne a. On le note a/b. On a donc b × a/b = a.\nExemple : 7 × 3/7 = 3. Pour compléter 4 × … = 3, on écrit 3/4.\nUne fraction peut représenter un entier (12/4 = 3), un décimal (7/4 = 1,75) ou un nombre non décimal (1/3 = 0,333…, qu'on ne peut pas écrire exactement avec une virgule).\nÉcritures à connaître : 1/4 = 0,25 ; 1/2 = 0,5 ; 3/4 = 0,75 ; 3/2 = 1,5 ; 4/2 = 2 ; 5/2 = 2,5.\nPlacer 5/3 sur une demi-droite graduée : on partage chaque unité en 3 parts égales et on compte 5 parts depuis 0.\nPour partager un segment en 5, 7 ou 11 parts égales, on peut utiliser un « guide-âne » (réseau de droites parallèles équidistantes).\nFraction d'une quantité : 2/3 de 12 œufs = 12 ÷ 3 × 2 = 8 œufs ; 3/4 de 10 m = 7,5 m.\nPrendre une fraction d'un nombre, c'est multiplier : 1/4 de 7 = 1/4 × 7 = 7/4 ; et 7 × 1/4 = 1/4 × 7.\nUne fraction décimale a pour dénominateur 10, 100, 1 000… : 37/100 = 0,37."
+    },
+    {
+      "id": "calculer-avec-les-fractions",
+      "titre": "Calculer avec les fractions",
+      "ordre": 8,
+      "periode": "T2",
+      "notions": [
+        "Reconnaître et établir des égalités de fractions (multiplier ou diviser numérateur et dénominateur par un même nombre)",
+        "Simplifier une fraction en utilisant les tables de multiplication et les diviseurs communs",
+        "Comparer une fraction à 1 et comparer des fractions",
+        "Encadrer une fraction entre deux entiers consécutifs et ordonner des fractions",
+        "Additionner et soustraire des fractions de même dénominateur, ou dont un dénominateur est multiple de l'autre",
+        "Multiplier une fraction par un nombre entier",
+        "Résoudre des problèmes mettant en jeu des fractions"
+      ],
+      "motsCles": [
+        "égalité de fractions",
+        "simplifier",
+        "fraction irréductible",
+        "dénominateur commun",
+        "comparer",
+        "encadrer",
+        "nombre mixte",
+        "somme",
+        "différence",
+        "produit",
+        "multiple"
+      ],
+      "reference": "Propriété : on obtient une fraction égale en multipliant (ou en divisant) le numérateur et le dénominateur par un même nombre non nul.\nExemples : 2/3 = 4/6 = 10/15 ; 18/24 = 3/4 (on divise par 6).\nSimplifier une fraction, c'est écrire une fraction égale avec des nombres plus petits ; on utilise les diviseurs communs du numérateur et du dénominateur.\nComparer à 1 : une fraction est plus petite que 1 si son numérateur est plus petit que son dénominateur (5/8 < 1) ; plus grande si le numérateur est plus grand (9/8 > 1).\nMême dénominateur : la plus grande fraction est celle qui a le plus grand numérateur (5/7 > 3/7).\nMême numérateur : la plus grande fraction est celle qui a le plus petit dénominateur (3/4 > 3/5), car les parts sont plus grandes.\nSinon, on met les fractions au même dénominateur : 2/3 et 5/6 → 4/6 < 5/6, donc 2/3 < 5/6.\nEncadrer : 7/3 est entre 2 et 3 car 6/3 = 2 et 9/3 = 3 ; donc 2 < 7/3 < 3.\nAdditionner (même dénominateur) : on additionne les numérateurs et on garde le dénominateur : 2/7 + 3/7 = 5/7. De même 5/9 − 1/9 = 4/9.\nErreur classique : 1/4 + 1/4 n'est pas égal à 2/8 ; c'est 2/4 = 1/2.\nSi un dénominateur est multiple de l'autre, on commence par écrire les deux fractions avec le même dénominateur : 1/2 + 1/4 = 2/4 + 1/4 = 3/4 ; 1 − 1/4 = 4/4 − 1/4 = 3/4.\nMultiplier une fraction par un entier : on multiplie le numérateur : 3 × 2/7 = 6/7.\nProblème : Léa a lu 1/3 d'un livre lundi et 1/6 mardi ; elle a lu 2/6 + 1/6 = 3/6 = 1/2 du livre."
+    },
+    {
+      "id": "longueurs-perimetres-et-aires",
+      "titre": "Longueurs, périmètres et aires",
+      "ordre": 9,
+      "periode": "T2",
+      "notions": [
+        "Connaître les unités de longueur du millimètre au kilomètre et effectuer des conversions",
+        "Calculer le périmètre d'un polygone, d'un carré et d'un rectangle",
+        "Savoir que le périmètre d'un cercle est proportionnel à son diamètre et connaître la formule P = π × d",
+        "Calculer des périmètres de figures composées",
+        "Distinguer périmètre et aire ; comparer des aires sans mesurer",
+        "Connaître les unités d'aire (mm², cm², dm², m², km²) et effectuer des conversions",
+        "Connaître et utiliser les formules de l'aire d'un carré et d'un rectangle"
+      ],
+      "motsCles": [
+        "longueur",
+        "kilomètre",
+        "mètre",
+        "périmètre",
+        "cercle",
+        "diamètre",
+        "π",
+        "aire",
+        "centimètre carré",
+        "mètre carré",
+        "conversion",
+        "rectangle"
+      ],
+      "reference": "Unités de longueur : km, hm, dam, m, dm, cm, mm. On passe d'une unité à la suivante en multipliant ou en divisant par 10.\n1 km = 1 000 m ; 1 m = 100 cm = 1 000 mm ; 1 cm = 0,1 dm. Exemple : 3,5 m = 350 cm ; 2 400 m = 2,4 km.\nLe périmètre d'une figure est la longueur de son contour.\nPérimètre d'un carré de côté c : P = 4 × c. Périmètre d'un rectangle de longueur L et de largeur ℓ : P = 2 × (L + ℓ).\nLe périmètre d'un cercle (on dit aussi d'un disque) est proportionnel à son diamètre ; le coefficient est le nombre π (pi), environ 3,14.\nFormule : P = π × d, ou P = 2 × π × r. Exemple : cercle de diamètre 10 cm, P = π × 10 ≈ 31,4 cm.\nFigure composée : on additionne les longueurs de chaque partie du contour, sans compter les segments intérieurs.\nL'aire d'une figure est la mesure de sa surface. Deux figures peuvent avoir le même périmètre et des aires différentes, et inversement.\n1 cm² est l'aire d'un carré de 1 cm de côté ; 1 m² celle d'un carré de 1 m de côté.\n1 m² = 10 dm × 10 dm = 100 dm² ; 1 dm² = 100 cm² ; 1 cm² = 100 mm². Pour les aires, on multiplie ou divise par 100 d'une unité à la suivante.\nExemples : 3 m² = 300 dm² ; 450 cm² = 4,5 dm² ; 1 cm² = 0,01 dm².\nAire d'un carré de côté c : A = c × c. Aire d'un rectangle : A = L × ℓ (les deux longueurs dans la même unité).\nExemple : rectangle de 8 m sur 3,5 m : A = 8 × 3,5 = 28 m² ; P = 2 × (8 + 3,5) = 23 m.\nErreur classique : écrire une aire en cm au lieu de cm², ou confondre aire et périmètre."
+    },
+    {
+      "id": "proportionnalite-et-pourcentages",
+      "titre": "Proportionnalité et pourcentages",
+      "ordre": 10,
+      "periode": "T2",
+      "notions": [
+        "Connaître la définition de la proportionnalité entre deux grandeurs et la relier à des expressions comme « prix au kilo »",
+        "Reconnaître si une situation relève ou non de la proportionnalité",
+        "Résoudre un problème de proportionnalité par la linéarité (multiplicative ou additive) ou le retour à l'unité",
+        "Représenter une situation de proportionnalité dans un tableau avec les grandeurs et leurs unités",
+        "S'initier aux problèmes d'échelle",
+        "Comprendre le sens d'un pourcentage et calculer une proportion sous forme de pourcentage",
+        "Appliquer un pourcentage à une quantité"
+      ],
+      "motsCles": [
+        "proportionnalité",
+        "grandeur",
+        "linéarité",
+        "retour à l'unité",
+        "prix au kilo",
+        "tableau",
+        "échelle",
+        "plan",
+        "pourcentage",
+        "proportion"
+      ],
+      "reference": "Deux grandeurs sont proportionnelles si, quand on multiplie (ou divise) l'une par un nombre, l'autre est multipliée (ou divisée) par le même nombre.\nExemple : le prix de pommes vendues au kilo est proportionnel à leur masse ; le « prix au kilo » est constant.\nContre-exemple : la taille d'un enfant n'est pas proportionnelle à son âge.\nLinéarité multiplicative : 3 kg coûtent 6 € ; 6 kg (2 fois plus) coûtent 12 € (2 fois plus).\nLinéarité additive : 2 kg coûtent 4 € et 3 kg coûtent 6 €, donc 5 kg (2 + 3) coûtent 4 + 6 = 10 €.\nRetour à l'unité : 4 cahiers coûtent 10 € ; 1 cahier coûte 10 ÷ 4 = 2,50 € ; 7 cahiers coûtent 7 × 2,50 = 17,50 €.\nDans un tableau, on écrit le nom de chaque grandeur avec son unité (ex. « Masse (kg) », « Prix (€) »).\nExpressions : « 4 fois plus » → multiplier par 4 ; « 4 fois moins » → diviser par 4.\nÉchelle d'un plan : les longueurs sur le plan sont proportionnelles aux longueurs réelles. Échelle 1/100 : 1 cm sur le plan représente 100 cm = 1 m en réalité.\nExemple : à l'échelle 1/100, un mur de 4,5 m mesure 4,5 cm sur le plan.\nUn pourcentage est une fraction de dénominateur 100 : 25 % = 25/100 = 0,25 = 1/4 ; 50 % = 1/2 ; 10 % = 1/10 ; 100 % = le tout.\nAppliquer un pourcentage : 20 % de 60 € = 20/100 × 60 = 12 €. Astuce : 10 % de 60 = 6, donc 20 % = 12.\nCalculer une proportion : 6 élèves sur 25 portent des lunettes ; 6/25 = 24/100 = 24 %."
+    },
+    {
+      "id": "symetrie-axiale",
+      "titre": "La symétrie axiale",
+      "ordre": 11,
+      "periode": "T3",
+      "notions": [
+        "Reconnaître une figure qui possède un ou plusieurs axes de symétrie",
+        "Connaître la définition du symétrique d'un point par rapport à une droite (lien avec la médiatrice)",
+        "Construire le symétrique d'un point, d'un segment, d'une droite, d'un cercle sur papier quadrillé, pointé ou uni",
+        "Connaître les propriétés de conservation de la symétrie axiale : longueurs, angles, alignement, aires",
+        "Utiliser ces propriétés pour effectuer des constructions et justifier"
+      ],
+      "motsCles": [
+        "symétrie axiale",
+        "axe de symétrie",
+        "symétrique",
+        "médiatrice",
+        "pliage",
+        "perpendiculaire",
+        "équerre",
+        "compas",
+        "conservation",
+        "figure symétrique"
+      ],
+      "reference": "Deux figures sont symétriques par rapport à une droite (d) si elles se superposent par pliage le long de (d) ; (d) est l'axe de symétrie.\nUne figure a un axe de symétrie si les deux parties se superposent quand on la plie le long de cet axe.\nExemples : un rectangle (non carré) a 2 axes, un carré 4, un triangle équilatéral 3, un triangle isocèle 1, un cercle une infinité (tous ses diamètres).\nDéfinition : le symétrique du point A par rapport à la droite (d) est le point A' tel que (d) soit la médiatrice du segment [AA'].\nSi A est sur (d), son symétrique est lui-même.\nConstruction à l'équerre : tracer la perpendiculaire à (d) passant par A, puis reporter de l'autre côté de (d) la même distance.\nConstruction au compas : prendre deux points de (d), tracer deux arcs passant par A, centrés sur ces points ; ils se recoupent en A'.\nPour construire le symétrique d'un segment, on construit les symétriques de ses extrémités.\nLe symétrique d'un cercle est un cercle de même rayon, dont le centre est le symétrique du centre.\nPropriétés : la symétrie axiale conserve les longueurs, les mesures d'angles, l'alignement des points et les aires.\nExemple : si [AB] mesure 5 cm, son symétrique [A'B'] mesure 5 cm.\nErreur classique : reporter la figure en la décalant parallèlement à l'axe (glissement) au lieu de la retourner."
+    },
+    {
+      "id": "volumes-et-vision-dans-l-espace",
+      "titre": "Volumes et vision dans l'espace",
+      "ordre": 12,
+      "periode": "T3",
+      "notions": [
+        "Reconnaître et nommer les solides usuels : cube, pavé droit, prisme droit, pyramide, cylindre, cône, boule",
+        "Connaître le vocabulaire des solides : face, arête, sommet",
+        "Passer d'un assemblage de cubes à ses représentations en deux dimensions (vues de face, de dessus, de côté) et inversement",
+        "Dénombrer les cubes d'un assemblage, y compris ceux qui sont cachés",
+        "Connaître l'unité de volume centimètre cube (cm³)",
+        "Comparer et déterminer des volumes en comptant des cubes unités"
+      ],
+      "motsCles": [
+        "solide",
+        "cube",
+        "pavé droit",
+        "prisme droit",
+        "pyramide",
+        "cylindre",
+        "cône",
+        "boule",
+        "face",
+        "arête",
+        "volume",
+        "centimètre cube"
+      ],
+      "reference": "Un solide a des faces (surfaces), des arêtes (segments où deux faces se rencontrent) et des sommets (points où des arêtes se rencontrent).\nLe cube a 6 faces carrées identiques, 12 arêtes et 8 sommets.\nLe pavé droit a 6 faces rectangulaires, 12 arêtes et 8 sommets ; le cube est un pavé droit particulier.\nLe prisme droit a deux bases polygonales identiques et parallèles, et des faces latérales rectangulaires.\nLa pyramide a une base polygonale et des faces latérales triangulaires qui se rejoignent en un sommet.\nCylindre, cône et boule ont des surfaces courbes : le cylindre a deux disques comme bases, le cône une seule base en disque et un sommet.\nUn assemblage de cubes peut être représenté par des vues : de face, de dessus, de côté. Une vue ne montre pas les cubes cachés.\nDénombrer un assemblage : on peut compter étage par étage, ou colonne par colonne, sans oublier les cubes cachés.\nLe volume d'un solide est la mesure de l'espace qu'il occupe.\nLe centimètre cube (cm³) est le volume d'un cube de 1 cm d'arête.\nUn assemblage de 12 cubes de 1 cm d'arête a un volume de 12 cm³.\nUn pavé de 4 cubes de long, 3 de large et 2 de haut contient 4 × 3 × 2 = 24 cubes, soit 24 cm³ si les cubes ont 1 cm d'arête.\nDeux solides de formes différentes peuvent avoir le même volume."
+    },
+    {
+      "id": "donnees-et-probabilites",
+      "titre": "Données et probabilités",
+      "ordre": 13,
+      "periode": "T3",
+      "notions": [
+        "Planifier une enquête, recueillir des données et les organiser dans un tableau",
+        "Lire et interpréter un tableau, un diagramme en barres, un diagramme circulaire, une courbe",
+        "Filtrer les données d'un tableau selon un critère",
+        "Savoir qu'une probabilité est un nombre compris entre 0 et 1",
+        "Calculer une probabilité dans une situation simple d'équiprobabilité et l'écrire sous forme de fraction, de décimal ou de pourcentage",
+        "Comparer les résultats d'une expérience répétée (fréquence) à la probabilité calculée"
+      ],
+      "motsCles": [
+        "enquête",
+        "donnée",
+        "tableau",
+        "diagramme en barres",
+        "diagramme circulaire",
+        "courbe",
+        "effectif",
+        "hasard",
+        "probabilité",
+        "équiprobabilité",
+        "chances",
+        "fréquence"
+      ],
+      "reference": "Une enquête statistique se prépare : question posée, personnes interrogées ou mesures à faire, recueil, puis organisation des données dans un tableau.\nL'effectif d'une valeur est le nombre de fois où elle apparaît ; l'effectif total est le nombre total de données.\nDiagramme en barres : la hauteur de chaque barre représente l'effectif. Diagramme circulaire : chaque part du disque représente une proportion du total. Courbe : elle montre l'évolution d'une grandeur, souvent dans le temps.\nLire un graphique : bien regarder le titre, les axes, les unités et la graduation.\nFiltrer un tableau : ne garder que les lignes qui vérifient un critère (par exemple les villes de plus de 100 000 habitants).\nUne expérience aléatoire est une expérience dont on ne peut pas prévoir le résultat à l'avance (lancer un dé, tirer une bille).\nAu CM2 on disait « a chances sur b » ; en 6e, la probabilité est le nombre a/b.\nUne probabilité est un nombre compris entre 0 et 1 : 0 pour un événement impossible, 1 pour un événement certain.\nÉquiprobabilité (tous les résultats ont la même chance) : probabilité = nombre de résultats favorables ÷ nombre total de résultats.\nExemple : avec un dé équilibré à 6 faces, la probabilité d'obtenir un 5 est 1/6 ; celle d'obtenir un nombre pair est 3/6 = 1/2 = 0,5 = 50 %.\nExemple : un sac contient 3 billes rouges et 7 bleues ; la probabilité de tirer une rouge est 3/10 = 0,3 = 30 %.\nLe dé « n'a pas de mémoire » : après trois 6, la probabilité d'obtenir 6 au lancer suivant est toujours 1/6.\nFréquence = nombre de fois où le résultat est obtenu ÷ nombre de lancers. Quand on répète l'expérience un grand nombre de fois, la fréquence se rapproche de la probabilité."
+    },
+    {
+      "id": "pensee-algebrique-et-programmation",
+      "titre": "Pensée algébrique et programmation",
+      "ordre": 14,
+      "periode": "T3",
+      "notions": [
+        "Résoudre des problèmes avec un nombre inconnu à l'aide de schémas en barres et d'égalités à trous",
+        "Identifier la régularité d'un motif évolutif et prévoir une étape plus lointaine",
+        "Exécuter un programme de calcul de plusieurs étapes",
+        "Identifier une instruction et une séquence d'instructions",
+        "Produire et exécuter une séquence d'instructions, avec des répétitions",
+        "Programmer un déplacement ou la construction d'un chemin simple (Scratch ou sans ordinateur)"
+      ],
+      "motsCles": [
+        "nombre inconnu",
+        "schéma en barres",
+        "égalité à trous",
+        "motif évolutif",
+        "régularité",
+        "programme de calcul",
+        "instruction",
+        "séquence",
+        "répétition",
+        "entrée",
+        "sortie",
+        "Scratch"
+      ],
+      "reference": "La pensée algébrique consiste à raisonner sur les relations entre des quantités, même quand on ne connaît pas leur valeur.\nÉgalité à trous : … + 17 = 42 → le nombre cherché est 42 − 17 = 25 ; 6 × … = 54 → 54 ÷ 6 = 9.\nSchéma en barres : on représente les quantités par des barres de longueurs adaptées. Exemple : Tom a 3 fois plus de billes que Léo, à eux deux ils en ont 48 ; 4 barres égales font 48, une barre = 12 ; Léo a 12 billes, Tom 36.\nOn vérifie toujours la solution dans l'énoncé : 12 + 36 = 48 et 36 = 3 × 12.\nMotif évolutif : on repère ce qui change d'une étape à la suivante. Exemple : 4, 7, 10, 13… on ajoute 3 à chaque étape ; l'étape 10 vaut 4 + 9 × 3 = 31.\nProgramme de calcul : choisir un nombre ; ajouter 2 ; multiplier par 4 ; retirer 3. Avec 5 : 5 + 2 = 7 ; 7 × 4 = 28 ; 28 − 3 = 25.\nErreur classique : appliquer les étapes dans le désordre ; l'ordre des instructions compte.\nUne instruction est un ordre élémentaire (avancer de 1 case, tourner à droite). Une séquence d'instructions est une suite d'instructions exécutées dans l'ordre.\nUne entrée est une donnée fournie au programme (le nombre choisi) ; une sortie est le résultat produit (le nombre affiché).\nUne boucle « répéter n fois » évite d'écrire plusieurs fois la même instruction.\nExemple Scratch : « répéter 4 fois : avancer de 100, tourner de 90° » trace un carré.\nOn peut exécuter un programme à la main (sur quadrillage) pour vérifier qu'il accomplit bien la tâche demandée."
+    }
+  ]
+}

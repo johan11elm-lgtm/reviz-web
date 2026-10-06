@@ -1,0 +1,378 @@
+{
+  "classe": "4ème",
+  "matiere": "Géographie",
+  "programme": "Cycle 4 – 4e : L'urbanisation du monde ; Les mobilités humaines transnationales ; Des espaces transformés par la mondialisation (BO spécial n°11 du 26/11/2015, ajusté BO n°31 du 30/07/2020)",
+  "modele": "claude-opus-5-5 (abonnement)",
+  "genereLe": "2026-10-05",
+  "relu": false,
+  "chapitres": [
+    {
+      "id": "la-croissance-urbaine-dans-le-monde",
+      "titre": "L'urbanisation du monde",
+      "ordre": 1,
+      "periode": "T1",
+      "notions": [
+        "Définir l'urbanisation et la croissance urbaine",
+        "Connaître la part de la population urbaine dans le monde et son évolution",
+        "Distinguer pays développés déjà très urbanisés et pays en développement où la croissance urbaine est rapide",
+        "Expliquer les causes de la croissance urbaine (exode rural, accroissement naturel)",
+        "Localiser quelques mégapoles et métropoles mondiales",
+        "Lire une carte ou un graphique de l'urbanisation"
+      ],
+      "motsCles": [
+        "urbanisation",
+        "croissance urbaine",
+        "exode rural",
+        "ville",
+        "agglomération",
+        "mégapole",
+        "métropole",
+        "taux d'urbanisation",
+        "population urbaine",
+        "étalement urbain"
+      ],
+      "reference": "Urbanisation : augmentation de la part de la population qui vit en ville.\nCroissance urbaine : augmentation du nombre d'habitants des villes et de leur superficie.\nTaux d'urbanisation = population urbaine ÷ population totale × 100 (en %).\nDepuis 2007-2008, plus de la moitié de l'humanité vit en ville (ONU) ; vers 1950, moins d'un habitant sur trois était citadin.\nSelon les projections de l'ONU (2018), environ 2 habitants sur 3 vivront en ville en 2050.\nPays développés (Europe, Amérique du Nord, Japon) : urbanisation ancienne, liée à la révolution industrielle ; plus de 75 % de citadins.\nPays en développement et émergents (Afrique, Asie du Sud) : urbanisation plus récente mais très rapide ; l'Afrique et l'Asie concentrent l'essentiel de la croissance urbaine actuelle.\nCauses : exode rural (départ des habitants des campagnes vers les villes pour trouver du travail, des écoles, des soins) et accroissement naturel élevé des citadins.\nAgglomération : ensemble formé par une ville-centre et ses banlieues.\nMégapole : agglomération de plus de 10 millions d'habitants (ex. Tokyo, Delhi, Shanghai, São Paulo, Mexico, Le Caire, Lagos, Mumbai).\nLe nombre de mégapoles augmente : quelques-unes en 1975, plus de 30 aujourd'hui, majoritairement en Asie.\nMétropole : grande ville qui concentre population, pouvoirs et activités de commandement et qui exerce une influence sur un vaste territoire.\nUne mégapole n'est pas forcément une métropole mondiale : Lagos est très peuplée mais moins influente que Londres.\nÉtalement urbain : extension de la ville sur les espaces ruraux voisins.\nMéthode : décrire une carte par anamorphose ou en cercles proportionnels (localiser, comparer les continents) ; lire un graphique d'évolution de la population urbaine."
+    },
+    {
+      "id": "centres-et-peripheries-des-villes",
+      "titre": "Espaces et paysages de l'urbanisation : centres et périphéries",
+      "ordre": 2,
+      "periode": "T1",
+      "notions": [
+        "Décrire l'organisation d'une grande ville du centre vers les périphéries",
+        "Caractériser le centre-ville (CBD, quartiers anciens, fonctions de commandement)",
+        "Identifier les différents types de périphéries (banlieues, zones d'activités, espaces périurbains)",
+        "Expliquer l'étalement urbain et la périurbanisation",
+        "Connaître les effets de l'étalement urbain (mobilités pendulaires, artificialisation des sols)",
+        "Étudier une grande ville à l'aide d'un paysage ou d'un plan"
+      ],
+      "motsCles": [
+        "centre-ville",
+        "CBD",
+        "quartier d'affaires",
+        "banlieue",
+        "périphérie",
+        "périurbanisation",
+        "étalement urbain",
+        "mobilités pendulaires",
+        "gentrification",
+        "ville durable",
+        "artificialisation"
+      ],
+      "reference": "Une grande ville s'organise en auréoles : centre, banlieues (proches périphéries), espace périurbain (lointaines périphéries).\nCentre-ville : souvent le quartier le plus ancien ; il concentre les pouvoirs politiques, les commerces, les monuments, les activités culturelles.\nCBD (Central Business District) : quartier d'affaires aux gratte-ciel qui rassemble sièges sociaux, banques et bourses (ex. Manhattan à New York, La Défense près de Paris, Pudong à Shanghai).\nGentrification : arrivée d'habitants plus aisés dans un quartier ancien et populaire, qui fait monter les prix des logements.\nBanlieue : espace urbanisé autour de la ville-centre ; on y trouve des quartiers résidentiels (pavillons, grands ensembles), des zones industrielles et commerciales.\nPériphéries : accueillent aussi aéroports, centres commerciaux, zones logistiques, technopôles, le long des axes de transport.\nPériurbanisation : installation d'habitants dans des communes rurales proches de la ville, souvent en maisons individuelles, tout en travaillant en ville.\nÉtalement urbain : la ville s'étend sur les terres agricoles et naturelles ; c'est l'artificialisation des sols.\nMobilités pendulaires : déplacements quotidiens entre le domicile et le lieu de travail ; ils provoquent embouteillages et pollution.\nModèle nord-américain : CBD au centre, immenses banlieues pavillonnaires (suburbs) reliées par autoroutes.\nDans les villes des pays pauvres, les périphéries accueillent souvent des quartiers informels construits par leurs habitants.\nVille durable : ville qui cherche à limiter l'étalement, développer les transports en commun (tramway, métro, vélo) et la mixité sociale ; écoquartier.\nMéthode : décrire un paysage urbain par plans (premier plan, arrière-plan) ; réaliser un croquis simple centre / périphéries / axes de transport."
+    },
+    {
+      "id": "les-inegalites-dans-les-villes",
+      "titre": "Des villes inégales : ségrégation et quartiers informels",
+      "ordre": 3,
+      "periode": "T1",
+      "notions": [
+        "Montrer que les inégalités sociales se lisent dans l'espace urbain",
+        "Définir la ségrégation socio-spatiale",
+        "Décrire les quartiers aisés fermés (gated communities) et les quartiers pauvres",
+        "Définir un bidonville (quartier informel) et en connaître les caractéristiques",
+        "Connaître les difficultés des citadins pauvres (logement, accès à l'eau, transports, risques)",
+        "Présenter quelques réponses : réhabilitation, transports, politiques de logement"
+      ],
+      "motsCles": [
+        "inégalités",
+        "ségrégation socio-spatiale",
+        "bidonville",
+        "quartier informel",
+        "favela",
+        "gated community",
+        "économie informelle",
+        "réhabilitation",
+        "logement",
+        "accès aux services"
+      ],
+      "reference": "Ségrégation socio-spatiale : séparation dans l'espace urbain des groupes sociaux selon leurs revenus ; les riches et les pauvres vivent dans des quartiers différents.\nGated community : quartier résidentiel fermé et gardé, réservé à des habitants aisés (fréquent aux États-Unis, au Brésil, en Afrique du Sud).\nBidonville (quartier informel) : quartier construit sans autorisation, souvent avec des matériaux de récupération, sur des terrains non constructibles ; accès difficile à l'eau potable, à l'électricité, à l'assainissement.\nNoms locaux : favela (Brésil), township (Afrique du Sud, héritage de l'apartheid), slum (Inde, ex. Dharavi à Mumbai).\nSelon l'ONU-Habitat, environ 1 milliard de personnes vivent dans des bidonvilles, surtout en Afrique subsaharienne et en Asie du Sud.\nLes quartiers informels sont souvent situés sur des terrains à risque : pentes (mornes de Rio de Janeiro), zones inondables, près des décharges.\nÉconomie informelle : activités non déclarées (vente de rue, petits métiers) qui font vivre de nombreux citadins pauvres.\nLes inégalités existent aussi dans les villes des pays riches : quartiers aisés du centre, grands ensembles dégradés en banlieue, sans-abri.\nExemple de Rio de Janeiro : quartiers aisés en bord de mer (Copacabana, Ipanema) et favelas sur les collines (Rocinha).\nRéponses : réhabilitation des quartiers (raccordement à l'eau, à l'électricité, construction en dur), relogement, transports publics (téléphériques reliant des favelas, métro), politiques de logement social.\nCes aménagements peuvent améliorer la vie des habitants mais aussi provoquer des expulsions.\nMéthode : comparer deux photographies de quartiers d'une même ville ; relever les indices de richesse et de pauvreté."
+    },
+    {
+      "id": "des-villes-inegalement-connectees",
+      "titre": "Des villes inégalement connectées aux réseaux de la mondialisation",
+      "ordre": 4,
+      "periode": "T1",
+      "notions": [
+        "Définir la mondialisation et la métropolisation",
+        "Identifier les villes mondiales et leurs fonctions de commandement",
+        "Décrire les réseaux qui relient les métropoles (aéroports, ports, câbles, Internet)",
+        "Montrer la hiérarchie des villes dans la mondialisation",
+        "Expliquer pourquoi certaines villes restent en marge des réseaux",
+        "Localiser les grandes métropoles mondiales sur un planisphère"
+      ],
+      "motsCles": [
+        "mondialisation",
+        "métropolisation",
+        "ville mondiale",
+        "fonction de commandement",
+        "réseau",
+        "flux",
+        "hub",
+        "archipel métropolitain mondial",
+        "firme transnationale",
+        "connexion",
+        "marge"
+      ],
+      "reference": "Mondialisation : mise en relation des différentes parties du monde par des échanges de marchandises, de capitaux, d'informations et de personnes.\nMétropolisation : concentration de la population, des richesses et des activités de commandement dans les plus grandes villes.\nVille mondiale (ville globale) : métropole qui exerce une influence sur le monde entier (ex. New York, Londres, Tokyo, Paris).\nFonctions de commandement : sièges sociaux des firmes transnationales, bourses, banques, grandes institutions internationales (ONU à New York), médias, universités.\nFirme transnationale (FTN) : grande entreprise implantée dans plusieurs pays.\nLes métropoles sont reliées par des réseaux : aéroports internationaux, grands ports, lignes à grande vitesse, câbles sous-marins, Internet.\nHub : plateforme de correspondance où se concentrent et se redistribuent les flux (ex. aéroports de Dubaï, Londres-Heathrow, Atlanta ; port de Singapour).\nArchipel métropolitain mondial (AMM) : réseau des grandes métropoles reliées entre elles et qui dirigent la mondialisation.\nLes métropoles se concentrent dans trois pôles : Amérique du Nord, Europe de l'Ouest, Asie de l'Est ; de nouvelles métropoles émergent (Shanghai, Singapour, Dubaï, São Paulo, Mumbai).\nHiérarchie : quelques villes mondiales au sommet, puis des métropoles régionales, puis des villes moins connectées.\nCertaines villes très peuplées restent peu connectées (de nombreuses villes d'Afrique) : on parle de villes en marge de la mondialisation.\nDans une même métropole, tous les quartiers ne sont pas connectés : le CBD est relié au monde alors que des quartiers pauvres restent à l'écart.\nMéthode : lire une carte de flux (épaisseur des flèches, sens des échanges) ; localiser les grandes métropoles sur un planisphère."
+    },
+    {
+      "id": "un-monde-de-migrants",
+      "titre": "Un monde de migrants",
+      "ordre": 5,
+      "periode": "T2",
+      "notions": [
+        "Définir un migrant international et distinguer migrant, réfugié, déplacé",
+        "Connaître l'ordre de grandeur du nombre de migrants internationaux",
+        "Expliquer les causes des migrations (économiques, politiques, environnementales, familiales)",
+        "Identifier les grands flux migratoires Sud-Nord, Sud-Sud et les grands pays d'accueil",
+        "Connaître les effets des migrations sur les pays de départ et d'arrivée (transferts de fonds, main-d'œuvre, diasporas)",
+        "Lire une carte de flux migratoires"
+      ],
+      "motsCles": [
+        "migration",
+        "migrant international",
+        "émigration",
+        "immigration",
+        "réfugié",
+        "déplacé",
+        "flux migratoire",
+        "pays de départ",
+        "pays d'accueil",
+        "transferts de fonds",
+        "diaspora",
+        "mobilité"
+      ],
+      "reference": "Migration : déplacement d'une personne qui change de lieu de résidence de façon durable (au moins un an selon l'ONU).\nMigrant international : personne qui vit dans un autre pays que celui où elle est née.\nÉmigration : départ de son pays ; immigration : arrivée dans un pays.\nEnviron 281 millions de migrants internationaux en 2020 (ONU, OIM), soit environ 3,6 % de la population mondiale : la grande majorité des humains ne migre pas.\nRéfugié : personne qui a fui son pays parce qu'elle y était persécutée ou menacée et qui est protégée par la Convention de Genève (1951) ; le HCR (agence de l'ONU) leur vient en aide.\nDéplacé interne : personne qui a fui son foyer mais reste dans son propre pays.\nCauses économiques : chercher un emploi, de meilleurs revenus ; causes politiques : guerres, persécutions (Syrie, Afghanistan, Ukraine, Soudan) ; causes environnementales : sécheresses, catastrophes ; regroupement familial ; études.\nFlux Sud-Nord : des pays pauvres vers les pays riches (Mexique et Amérique centrale vers les États-Unis ; Afrique vers l'Europe).\nFlux Sud-Sud : aussi importants que les flux Sud-Nord (Asie du Sud vers les pays du Golfe, migrations entre pays africains).\nPrincipaux pays d'accueil : États-Unis (premier pays d'accueil), Allemagne, Arabie saoudite, Royaume-Uni, France ; dans les Émirats arabes unis, la grande majorité des habitants sont des immigrés.\nEffets sur les pays d'accueil : main-d'œuvre pour l'agriculture, le bâtiment, les services ; diversité culturelle ; débats politiques sur l'immigration.\nEffets sur les pays de départ : transferts de fonds (argent envoyé par les migrants à leur famille, plus de 600 milliards de dollars par an), mais départ de jeunes actifs et de diplômés (fuite des cerveaux).\nDiaspora : ensemble des personnes originaires d'un même pays qui vivent dispersées dans d'autres pays et gardent des liens avec lui.\nMéthode : lire une carte de flux (sens, épaisseur des flèches, légende) ; distinguer pays de départ, de transit et d'arrivée."
+    },
+    {
+      "id": "les-migrations-vers-l-europe",
+      "titre": "Les migrations vers l'Europe : routes et enjeux",
+      "ordre": 6,
+      "periode": "T2",
+      "notions": [
+        "Localiser les principales routes migratoires vers l'Europe à travers la Méditerranée",
+        "Expliquer pourquoi l'Europe attire des migrants",
+        "Identifier les pays de départ, de transit et d'arrivée",
+        "Connaître les dangers du parcours migratoire et le rôle des passeurs",
+        "Connaître le contrôle des frontières de l'espace Schengen (Frontex)",
+        "Montrer les effets des migrations sur des territoires d'arrivée (Lampedusa, îles grecques)"
+      ],
+      "motsCles": [
+        "route migratoire",
+        "Méditerranée",
+        "pays de transit",
+        "passeur",
+        "espace Schengen",
+        "frontière extérieure",
+        "Frontex",
+        "demandeur d'asile",
+        "Lampedusa",
+        "camp",
+        "hotspot"
+      ],
+      "reference": "L'Union européenne attire des migrants : richesse, emplois, paix, protection des droits, proximité de l'Afrique et du Moyen-Orient, liens familiaux et historiques.\nEspace Schengen : espace de libre circulation des personnes entre la plupart des pays européens (accords de Schengen, 1985) ; ses frontières extérieures sont contrôlées.\nFrontex : agence européenne de garde-frontières et de garde-côtes, créée en 2004, chargée d'aider à surveiller les frontières extérieures de l'UE.\nRoute de la Méditerranée centrale : de la Libye ou de la Tunisie vers l'Italie (île de Lampedusa, Sicile) ; la plus meurtrière.\nRoute de la Méditerranée orientale : de la Turquie vers la Grèce (îles de Lesbos, Samos) puis vers l'Europe par les Balkans.\nRoute de la Méditerranée occidentale : du Maroc ou de l'Algérie vers l'Espagne ; route atlantique vers les îles Canaries.\nPays de départ : Afrique de l'Ouest, Afrique de l'Est, Syrie, Afghanistan... ; pays de transit : Libye, Tunisie, Maroc, Turquie, Niger.\nEn 2015, plus d'un million de personnes arrivent en Europe par la mer, beaucoup fuyant la guerre en Syrie : c'est la « crise migratoire ».\nPasseur : personne qui fait payer cher le passage des frontières, souvent dans des conditions dangereuses (bateaux surchargés).\nPlusieurs dizaines de milliers de migrants sont morts ou disparus en Méditerranée depuis 2014 (OIM).\nDemandeur d'asile : personne qui demande à être reconnue comme réfugiée ; l'État d'accueil examine sa demande.\nLes territoires d'arrivée (Lampedusa, Lesbos) accueillent des centres d'enregistrement (hotspots) et des camps ; leurs habitants et les ONG se mobilisent pour secourir et accueillir.\nMéthode : réaliser un schéma des routes migratoires (départ, transit, arrivée, obstacles)."
+    },
+    {
+      "id": "le-tourisme-un-phenomene-mondial",
+      "titre": "Le tourisme, une mobilité mondiale",
+      "ordre": 7,
+      "periode": "T2",
+      "notions": [
+        "Définir le tourisme et le touriste international",
+        "Connaître la croissance du nombre de touristes internationaux depuis 1950",
+        "Expliquer les facteurs de l'essor du tourisme (revenus, congés payés, transports)",
+        "Identifier les principaux pays émetteurs et récepteurs de touristes",
+        "Montrer l'essor du tourisme des pays émergents (Chine)",
+        "Connaître la place de la France, première destination touristique mondiale"
+      ],
+      "motsCles": [
+        "tourisme",
+        "touriste international",
+        "mobilité",
+        "flux touristiques",
+        "congés payés",
+        "transport aérien",
+        "pays émetteur",
+        "pays récepteur",
+        "destination",
+        "ONU Tourisme",
+        "tourisme de masse"
+      ],
+      "reference": "Tourisme : déplacement d'une personne hors de son lieu de vie habituel pour au moins une nuit, pour ses loisirs (ou un voyage d'affaires), pour moins d'un an.\nTouriste international : personne qui séjourne dans un autre pays que le sien.\nArrivées de touristes internationaux : environ 25 millions en 1950 ; environ 1,4 milliard en 2019 ; chute brutale en 2020 (pandémie de Covid-19) ; retour à un niveau proche de 2019 en 2024 (ONU Tourisme, ex-OMT).\nFacteurs de l'essor : hausse des revenus, congés payés (en France depuis 1936), temps libre, progrès des transports (avion, compagnies à bas coût), Internet et réservation en ligne.\nTourisme de masse : tourisme qui concerne un très grand nombre de personnes à partir des années 1960, concentré sur certains lieux.\nLes touristes viennent surtout des pays riches (Europe, Amérique du Nord, Japon) et de plus en plus des pays émergents : la Chine est devenue l'un des premiers pays émetteurs.\nLes flux sont surtout régionaux : la majorité des touristes voyagent dans leur propre continent (l'Europe reçoit environ la moitié des arrivées mondiales).\nPrincipales destinations : France (première destination mondiale, environ 100 millions de touristes internationaux en 2024), Espagne, États-Unis, Italie, Turquie.\nLe tourisme est une activité économique majeure : emplois, devises, infrastructures (hôtels, aéroports).\nInégalités : une grande partie de l'humanité ne voyage pas faute de moyens.\nLe tourisme d'affaires (congrès, salons) et le tourisme de croisière se développent aussi.\nMéthode : lire une carte des flux touristiques ; distinguer pays émetteurs et pays récepteurs."
+    },
+    {
+      "id": "les-espaces-du-tourisme",
+      "titre": "Les espaces du tourisme et leurs aménagements",
+      "ordre": 8,
+      "periode": "T2",
+      "notions": [
+        "Identifier les différents espaces touristiques (littoraux, montagnes, villes, espaces naturels)",
+        "Décrire les aménagements touristiques d'une station",
+        "Montrer les effets positifs du tourisme sur un territoire (emplois, revenus, équipements)",
+        "Montrer les effets négatifs (surtourisme, pollution, hausse des prix, saisonnalité)",
+        "Connaître des formes de tourisme durable",
+        "Étudier un lieu touristique à partir d'un paysage"
+      ],
+      "motsCles": [
+        "espace touristique",
+        "station balnéaire",
+        "station de sports d'hiver",
+        "littoralisation",
+        "aménagement",
+        "saisonnalité",
+        "surtourisme",
+        "patrimoine mondial",
+        "UNESCO",
+        "tourisme durable",
+        "écotourisme"
+      ],
+      "reference": "Les espaces touristiques les plus fréquentés : littoraux (tourisme balnéaire, les « 3 S » : sea, sand, sun), montagnes (sports d'hiver, randonnée), grandes villes et sites culturels, parcs et espaces naturels.\nStation balnéaire : ville du littoral aménagée pour accueillir des touristes (front de mer, hôtels, marinas) ; ex. Benidorm (Espagne), Cancún (Mexique), La Grande-Motte (France).\nStation de sports d'hiver : aménagée en montagne (remontées mécaniques, pistes, résidences) ; ex. stations des Alpes.\nAménagements : hôtels, résidences secondaires, aéroports, ports de plaisance, parcs de loisirs (ex. Disneyland Paris).\nPatrimoine mondial de l'UNESCO : liste de sites culturels et naturels protégés pour leur valeur exceptionnelle ; l'inscription attire des touristes.\nEffets positifs : emplois, revenus, équipements nouveaux, valorisation du patrimoine.\nEffets négatifs : bétonnisation du littoral, pollution, consommation d'eau, hausse du prix des logements, emplois souvent saisonniers et précaires.\nSaisonnalité : forte fréquentation pendant une partie de l'année seulement (été ou hiver).\nSurtourisme : fréquentation trop importante d'un lieu qui gêne les habitants et abîme le site (ex. Venise, Barcelone, Dubrovnik) ; Venise a instauré une taxe d'accès pour les visiteurs à la journée.\nTourisme durable : tourisme qui respecte l'environnement et les habitants (limitation des visiteurs, transports doux).\nÉcotourisme : tourisme dans des espaces naturels préservés, qui finance leur protection et profite aux populations locales.\nLe tourisme peut créer des « enclaves » réservées aux touristes, séparées de la population locale (complexes hôteliers fermés).\nMéthode : décrire un paysage de station touristique ; réaliser un croquis simple (littoral, front de mer, hôtels, axes de transport)."
+    },
+    {
+      "id": "mers-et-oceans-un-monde-maritimise",
+      "titre": "Mers et océans : un monde maritimisé",
+      "ordre": 9,
+      "periode": "T3",
+      "notions": [
+        "Définir la maritimisation de l'économie mondiale",
+        "Expliquer le rôle du transport maritime dans les échanges (conteneurisation)",
+        "Localiser les grandes routes maritimes, les détroits et les canaux",
+        "Identifier les grands ports et les principales façades maritimes",
+        "Montrer que les littoraux attirent populations et activités (littoralisation)",
+        "Lire une carte des routes maritimes"
+      ],
+      "motsCles": [
+        "maritimisation",
+        "transport maritime",
+        "conteneur",
+        "porte-conteneurs",
+        "route maritime",
+        "détroit",
+        "canal",
+        "port",
+        "hub portuaire",
+        "façade maritime",
+        "littoralisation",
+        "ZIP"
+      ],
+      "reference": "Maritimisation : rôle croissant des mers et des océans dans l'économie mondiale ; les échanges et les activités se tournent vers la mer.\nEnviron 80 % des marchandises échangées dans le monde (en volume) voyagent par la mer.\nConteneur : grande boîte métallique de taille standard qui permet de transporter tous types de marchandises et de les transférer facilement du navire au camion ou au train. Inventé aux États-Unis dans les années 1950.\nPorte-conteneurs : navire géant qui transporte des milliers de conteneurs ; le transport maritime est lent mais peu coûteux.\nRoutes maritimes principales : entre l'Asie de l'Est, l'Europe et l'Amérique du Nord.\nPoints de passage stratégiques : détroits (Malacca, Ormuz, Gibraltar, Bab el-Mandeb, Pas-de-Calais) et canaux (Suez, ouvert en 1869 ; Panama, ouvert en 1914).\nLe blocage d'un passage perturbe le commerce mondial (ex. porte-conteneurs Ever Given bloquant le canal de Suez en 2021).\nGrands ports : Shanghai (premier port à conteneurs du monde), Singapour, Ningbo, Shenzhen, Busan ; Rotterdam est le premier port d'Europe.\nHub portuaire : grand port où les marchandises sont redistribuées vers d'autres ports.\nFaçade maritime : littoral qui regroupe plusieurs grands ports proches reliés à un arrière-pays ; ex. Northern Range (du Havre à Hambourg), façade de l'Asie de l'Est.\nZIP (zone industrialo-portuaire) : zone qui associe un port et des industries (raffineries, sidérurgie) ; ex. Rotterdam, Le Havre, Fos-Marseille.\nLittoralisation : concentration croissante des populations et des activités sur les littoraux.\nMéthode : lire une carte des routes maritimes (épaisseur des flux, passages stratégiques, grands ports)."
+    },
+    {
+      "id": "les-espaces-maritimes-ressources-et-tensions",
+      "titre": "Les espaces maritimes : ressources, appropriation et tensions",
+      "ordre": 10,
+      "periode": "T3",
+      "notions": [
+        "Connaître les principales ressources des mers et des océans",
+        "Expliquer le découpage des espaces maritimes (eaux territoriales, ZEE, haute mer)",
+        "Connaître la convention de Montego Bay (1982)",
+        "Montrer que la France possède un vaste domaine maritime grâce à ses territoires ultramarins",
+        "Identifier des espaces de tensions (détroits, mer de Chine méridionale, Arctique, piraterie)",
+        "Connaître les menaces environnementales qui pèsent sur les océans"
+      ],
+      "motsCles": [
+        "ressource",
+        "pêche",
+        "hydrocarbures offshore",
+        "eaux territoriales",
+        "zone économique exclusive",
+        "ZEE",
+        "haute mer",
+        "Montego Bay",
+        "mille marin",
+        "piraterie",
+        "Arctique",
+        "pollution"
+      ],
+      "reference": "Ressources des océans : pêche et aquaculture, hydrocarbures offshore (pétrole et gaz extraits en mer, ex. mer du Nord, golfe de Guinée, golfe du Mexique), minerais des fonds marins, énergies marines (éoliennes en mer).\nConvention des Nations unies sur le droit de la mer, signée à Montego Bay (Jamaïque) en 1982 : elle découpe les espaces maritimes.\nMille marin (mille nautique) = 1 852 m.\nEaux territoriales : jusqu'à 12 milles marins des côtes ; l'État y est souverain comme sur son territoire.\nZone économique exclusive (ZEE) : jusqu'à 200 milles marins ; l'État y exploite seul les ressources (pêche, pétrole), mais les navires étrangers peuvent y circuler librement.\nHaute mer : au-delà des ZEE ; elle n'appartient à aucun État et ses espaces représentent environ les deux tiers des océans.\nLa France possède la deuxième ZEE du monde (environ 10 millions de km²), après les États-Unis, grâce à ses territoires d'outre-mer (Polynésie française, Nouvelle-Calédonie, îles Kerguelen...).\nTensions : partage des ZEE et des îles (mer de Chine méridionale, revendiquée en grande partie par la Chine face au Vietnam et aux Philippines) ; contrôle des détroits (Ormuz).\nArctique : la fonte de la banquise ouvre de nouvelles routes maritimes et attire les convoitises pour les hydrocarbures.\nPiraterie : attaques de navires (golfe d'Aden au large de la Somalie, golfe de Guinée) ; des marines militaires protègent les routes (opération européenne Atalante depuis 2008).\nMenaces : surpêche, pollution par les plastiques (« continents de plastique »), marées noires, réchauffement et acidification des océans.\nProtection : aires marines protégées, quotas de pêche.\nMéthode : schématiser le découpage des espaces maritimes à partir d'une côte (12 milles, 200 milles, haute mer)."
+    },
+    {
+      "id": "les-etats-unis-puissance-de-la-mondialisation",
+      "titre": "Les États-Unis, une puissance dans la mondialisation",
+      "ordre": 11,
+      "periode": "T3",
+      "notions": [
+        "Présenter les atouts du territoire des États-Unis (taille, ressources, façades)",
+        "Montrer la puissance économique des États-Unis (PIB, FTN, innovation)",
+        "Identifier les métropoles et pôles d'influence mondiale (New York, Silicon Valley)",
+        "Expliquer l'ouverture des États-Unis sur le monde (échanges, accords commerciaux)",
+        "Connaître les formes de puissance douce (culture, universités, numérique)",
+        "Localiser les principaux ensembles et villes des États-Unis"
+      ],
+      "motsCles": [
+        "puissance",
+        "superpuissance",
+        "PIB",
+        "firme transnationale",
+        "Silicon Valley",
+        "technopôle",
+        "soft power",
+        "dollar",
+        "façade maritime",
+        "ACEUM",
+        "Wall Street",
+        "GAFAM"
+      ],
+      "reference": "États-Unis : environ 9,8 millions de km² (3e ou 4e pays du monde par la superficie selon les modes de calcul), plus de 330 millions d'habitants (3e pays le plus peuplé), 50 États ; capitale fédérale : Washington.\nAtouts : territoire immense ouvert sur deux océans (Atlantique et Pacifique) et sur le golfe du Mexique ; nombreuses ressources (terres agricoles, pétrole, gaz, charbon).\nPremière puissance économique mondiale : premier PIB du monde (environ un quart de la richesse mondiale).\nPIB (produit intérieur brut) : richesse produite dans un pays en un an.\nLes États-Unis abritent de nombreuses firmes transnationales parmi les plus puissantes (Apple, Microsoft, Alphabet-Google, Amazon, Meta, Walmart).\nWall Street (New York) : première place boursière mondiale ; le dollar est la principale monnaie des échanges internationaux.\nSilicon Valley (près de San Francisco) : technopôle mondial du numérique et de l'innovation.\nTechnopôle : lieu qui réunit universités, laboratoires de recherche et entreprises de haute technologie.\nGrandes universités (Harvard, Stanford, MIT) qui attirent étudiants et chercheurs du monde entier.\nSoft power (puissance douce) : capacité à influencer le monde par la culture et le mode de vie (cinéma d'Hollywood, musique, séries, réseaux sociaux, marques).\nHard power : puissance militaire (premier budget militaire du monde, bases dans le monde entier).\nOuverture : premiers importateurs mondiaux de marchandises ; accord de libre-échange avec le Canada et le Mexique (ALENA en 1994, remplacé par l'ACEUM en 2020).\nConcurrence de la Chine, devenue premier exportateur mondial de marchandises.\nMéthode : localiser sur une carte les grandes villes (New York, Los Angeles, Chicago, Houston, San Francisco, Washington) et les façades maritimes."
+    },
+    {
+      "id": "l-adaptation-du-territoire-des-etats-unis",
+      "titre": "L'adaptation du territoire des États-Unis à la mondialisation",
+      "ordre": 12,
+      "periode": "T3",
+      "notions": [
+        "Décrire l'organisation du territoire des États-Unis (Nord-Est, Sun Belt, intérieur)",
+        "Montrer le rôle de la mégalopole du Nord-Est",
+        "Expliquer le déclin de la Manufacturing Belt devenue Rust Belt et ses reconversions",
+        "Expliquer le dynamisme de la Sun Belt et des façades littorales",
+        "Montrer le rôle de l'interface avec le Mexique (frontière, maquiladoras)",
+        "Réaliser un croquis de l'organisation du territoire des États-Unis"
+      ],
+      "motsCles": [
+        "Nord-Est",
+        "mégalopole",
+        "Manufacturing Belt",
+        "Rust Belt",
+        "Sun Belt",
+        "façade pacifique",
+        "façade atlantique",
+        "interface",
+        "frontière",
+        "maquiladora",
+        "Grandes Plaines",
+        "reconversion"
+      ],
+      "reference": "La population et les activités se concentrent sur les littoraux et dans le Nord-Est ; l'intérieur (Grandes Plaines, Rocheuses) est moins peuplé.\nMégalopole du Nord-Est (BosWash) : chaîne de grandes villes de Boston à Washington (New York, Philadelphie, Baltimore) ; centre de commandement politique et économique, façade atlantique ouverte sur l'Europe.\nManufacturing Belt : ancienne région industrielle du Nord-Est et des Grands Lacs (Chicago, Detroit, Pittsburgh) ; avec la concurrence mondiale, beaucoup d'usines ont fermé : on parle de Rust Belt (« ceinture de la rouille »).\nDétroit, capitale de l'automobile, a perdu une grande partie de sa population depuis les années 1950 et a fait faillite en 2013 ; certaines villes se reconvertissent (Pittsburgh : santé, universités, technologies).\nSun Belt (« ceinture du soleil ») : États du Sud et de l'Ouest (Californie, Texas, Floride) ; dynamisme démographique et économique depuis les années 1970 : climat agréable, pétrole, industries de pointe, tourisme, retraités.\nFaçade pacifique : Los Angeles, San Francisco, Seattle ; tournée vers l'Asie, premier partenaire commercial (Chine, Japon, Corée du Sud).\nGolfe du Mexique : Houston (pétrole, chimie, centre spatial), Nouvelle-Orléans.\nGrandes Plaines : immense espace agricole (céréales, soja, élevage) ; les États-Unis sont l'un des premiers exportateurs agricoles du monde.\nInterface : zone de contact et d'échanges entre deux territoires différents.\nFrontière avec le Mexique (environ 3 100 km) : interface très active, avec des villes jumelles (San Diego-Tijuana, El Paso-Ciudad Juárez) ; elle est aussi fortement surveillée (murs, barrières) contre l'immigration clandestine.\nMaquiladoras : usines installées au Mexique près de la frontière, qui assemblent des produits pour le marché américain grâce à une main-d'œuvre moins chère.\nMéthode : croquis de l'organisation du territoire : centres d'impulsion (mégalopole, grandes métropoles), régions dynamiques (Sun Belt, façades), régions en reconversion (Rust Belt), interfaces et flux."
+    },
+    {
+      "id": "l-afrique-de-l-ouest-dans-la-mondialisation",
+      "titre": "Les dynamiques de l'Afrique de l'Ouest",
+      "ordre": 13,
+      "periode": "T3",
+      "notions": [
+        "Localiser l'Afrique de l'Ouest, ses principaux États et ses grandes villes",
+        "Connaître les dynamiques démographiques et urbaines (croissance, Lagos, Abidjan, Dakar)",
+        "Montrer l'insertion de l'Afrique de l'Ouest dans la mondialisation par l'exportation de matières premières",
+        "Identifier le rôle des littoraux et des ports du golfe de Guinée",
+        "Connaître les difficultés de la région (pauvreté, Sahel, conflits, dépendance)",
+        "Connaître l'intégration régionale (CEDEAO) et les nouveaux partenaires (Chine)"
+      ],
+      "motsCles": [
+        "Afrique de l'Ouest",
+        "golfe de Guinée",
+        "Sahel",
+        "croissance démographique",
+        "urbanisation",
+        "matières premières",
+        "cacao",
+        "pétrole",
+        "port",
+        "littoralisation",
+        "CEDEAO",
+        "Lagos"
+      ],
+      "reference": "L'Afrique de l'Ouest s'étend du Sahara au golfe de Guinée ; elle comprend notamment le Nigeria, le Ghana, la Côte d'Ivoire, le Sénégal, le Mali, le Burkina Faso, le Niger, la Guinée, le Bénin, le Togo.\nDeux grands ensembles : le Sahel au nord, zone semi-aride au bord du Sahara ; la zone côtière et humide du golfe de Guinée au sud.\nForte croissance démographique : plus de 400 millions d'habitants, une population très jeune ; le Nigeria est le pays le plus peuplé d'Afrique (plus de 220 millions d'habitants).\nUrbanisation rapide : Lagos (Nigeria) est l'une des plus grandes agglomérations d'Afrique ; autres grandes villes : Abidjan, Accra, Dakar, Kano, Abuja.\nLittoralisation : les hommes et les activités se concentrent sur les côtes du golfe de Guinée ; les grands ports (Lagos, Abidjan, Tema, Dakar, Lomé) relient la région au monde.\nLes pays sahéliens enclavés (Mali, Burkina Faso, Niger) dépendent des ports côtiers et des corridors routiers et ferroviaires.\nInsertion dans la mondialisation surtout par l'exportation de matières premières : pétrole (Nigeria), cacao (Côte d'Ivoire, premier producteur mondial, et Ghana), or, uranium (Niger), coton.\nDépendance : les prix des matières premières varient sur les marchés mondiaux ; peu de transformation sur place.\nNouveaux partenaires : la Chine (infrastructures, ports, routes), la Turquie, l'Inde, en plus des anciens partenaires européens.\nDifficultés : pauvreté, insécurité alimentaire, conflits et terrorisme au Sahel, effets du changement climatique (sécheresses, désertification).\nÉmigration vers l'Europe mais surtout migrations entre pays de la région (vers la Côte d'Ivoire, le Ghana, le Nigeria).\nCEDEAO (Communauté économique des États de l'Afrique de l'Ouest), créée en 1975 : organisation d'intégration régionale (libre circulation, échanges) ; le Mali, le Burkina Faso et le Niger l'ont quittée en 2025.\nAtouts : jeunesse, croissance économique de certains pays (Côte d'Ivoire, Sénégal, Ghana), essor du numérique (paiement par téléphone mobile), Nollywood (cinéma nigérian).\nMéthode : croquis des dynamiques de l'Afrique de l'Ouest : littoral dynamique et ports, grandes villes, Sahel en difficulté, flux d'exportation."
+    }
+  ]
+}

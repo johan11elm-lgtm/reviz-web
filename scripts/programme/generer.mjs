@@ -35,13 +35,20 @@ const [phase = 'tout', ...rest] = process.argv.slice(2)
 const opt = (name, def) => { const i = rest.indexOf(`--${name}`); return i >= 0 ? rest[i + 1] : def }
 const flag = name => rest.includes(`--${name}`)
 const CLASSE = opt('classe', '3ème')
-const MATIERES = (opt('matieres', '') || MATIERES_3E.join(',')).split(',').map(s => s.trim()).filter(Boolean)
+// Sans --matieres : celles dont un catalogue existe déjà pour la classe (sinon la liste de 3e).
+const MATIERES_OPT = opt('matieres', '')
+let MATIERES = (MATIERES_OPT || MATIERES_3E.join(',')).split(',').map(s => s.trim()).filter(Boolean)
 const CONCURRENCE = Math.max(1, Number(opt('concurrence', 3)) || 3)
 const LIMITE = Number(opt('limite', 0)) || 0
 const FORCE = flag('force')
 const LEVEL = { cycle: ['2nde', '1ère', 'Terminale'].includes(CLASSE) ? 'lycee' : 'college', classe: CLASSE }
 
 const DATA_DIR = path.join(ROOT, 'src/data/programme', classeSlug(CLASSE))
+if (!MATIERES_OPT && existsSync(DATA_DIR)) {
+  const { readdirSync } = await import('node:fs')
+  const found = readdirSync(DATA_DIR).filter(f => f.endsWith('.json')).map(f => JSON.parse(readFileSync(path.join(DATA_DIR, f), 'utf8')).matiere)
+  if (found.length) MATIERES = [...MATIERES.filter(m => found.includes(m)), ...found.filter(m => !MATIERES.includes(m))]
+}
 const PUBLIC_DIR = path.join(ROOT, 'public/programme', classeSlug(CLASSE))
 
 // ── Clé API (depuis .env.local, sans jamais l'afficher) ──

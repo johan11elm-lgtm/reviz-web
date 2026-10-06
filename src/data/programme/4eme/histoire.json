@@ -1,0 +1,355 @@
+{
+  "classe": "4ème",
+  "matiere": "Histoire",
+  "programme": "Histoire cycle 4, classe de 4e (BO spécial n°11 du 26/11/2015, ajusté BO n°31 du 30/07/2020) ; EMC : programme 2024 (BO n°24 du 13/06/2024), en vigueur en 4e depuis la rentrée 2025",
+  "modele": "claude-opus-5-5 (abonnement)",
+  "genereLe": "2026-10-05",
+  "relu": false,
+  "chapitres": [
+    {
+      "id": "traites-negrieres-xviiie",
+      "titre": "Bourgeoisies marchandes, négoces internationaux et traites négrières au XVIIIe siècle",
+      "ordre": 1,
+      "periode": "T1",
+      "notions": [
+        "Situer l'expansion du commerce maritime européen au XVIIIe siècle et ses grands ports",
+        "Décrire le commerce triangulaire et ses trois étapes",
+        "Expliquer le fonctionnement de la traite atlantique et l'économie de plantation",
+        "Connaître les conditions de vie des esclaves et le Code noir",
+        "Identifier la bourgeoisie marchande et son enrichissement",
+        "Connaître les autres traites (orientale, intra-africaine) et les résistances des esclaves"
+      ],
+      "motsCles": [
+        "commerce triangulaire",
+        "traite négrière",
+        "esclave",
+        "négrier",
+        "Code noir",
+        "plantation",
+        "colonie",
+        "bourgeoisie marchande",
+        "armateur",
+        "marronnage",
+        "Saint-Domingue",
+        "Nantes"
+      ],
+      "reference": "Au XVIIIe siècle, le commerce maritime européen s'étend au monde entier : l'Europe domine les échanges atlantiques.\nGrands ports français : Nantes (1er port négrier français), Bordeaux, La Rochelle, Le Havre ; en Europe : Liverpool, Londres, Amsterdam, Lisbonne.\nCommerce triangulaire : 1) des navires partent d'Europe avec des produits manufacturés (tissus, armes, alcool, pacotille) ; 2) en Afrique, ces produits sont échangés contre des captifs ; 3) les captifs sont vendus aux Antilles et en Amérique ; les navires reviennent en Europe chargés de produits coloniaux (sucre, café, cacao, coton, tabac).\nTraite négrière : commerce d'êtres humains réduits en esclavage. La traite atlantique a déporté environ 12 à 13 millions d'Africains du XVIe au XIXe siècle, dont environ 6 millions au XVIIIe siècle.\nLa traversée (le « passage du milieu ») dure environ deux mois ; une partie des captifs meurt en mer (de 10 à 15 % en moyenne).\nAux Antilles (Saint-Domingue, Martinique, Guadeloupe), les esclaves travaillent dans les plantations, surtout de canne à sucre ; Saint-Domingue est la colonie la plus riche du monde à la fin du XVIIIe siècle.\nCode noir (1685, sous Louis XIV) : règlement royal qui encadre l'esclavage dans les colonies françaises ; l'esclave y est considéré comme un bien meuble.\nRésistances : révoltes, fuites (marronnage), refus du travail, préservation de cultures africaines.\nD'autres traites existent : traite orientale (vers le monde musulman) et traites intra-africaines.\nLa bourgeoisie marchande (négociants, armateurs) s'enrichit grâce à ce commerce : hôtels particuliers à Nantes et Bordeaux, essor des villes portuaires.\nCe commerce enrichit les ports, développe des industries (raffineries de sucre, chantiers navals) mais repose sur l'exploitation et la violence.\nLa loi Taubira (2001) reconnaît la traite et l'esclavage comme crimes contre l'humanité.\nMéthode attendue : décrire le commerce triangulaire à partir d'une carte ; analyser le témoignage d'un ancien esclave ou un document sur un navire négrier."
+    },
+    {
+      "id": "europe-des-lumieres",
+      "titre": "L'Europe des Lumières : circulation des idées, despotisme éclairé et contestation de l'absolutisme",
+      "ordre": 2,
+      "periode": "T1",
+      "notions": [
+        "Définir les Lumières et leur idée centrale : l'usage de la raison",
+        "Connaître les principaux philosophes et leurs idées (Montesquieu, Voltaire, Rousseau, Diderot)",
+        "Expliquer comment les idées circulent (Encyclopédie, salons, cafés, académies, correspondances)",
+        "Comprendre la critique de l'absolutisme, de l'intolérance et de l'esclavage",
+        "Définir le despotisme éclairé et en donner des exemples",
+        "Connaître les progrès scientifiques du XVIIIe siècle"
+      ],
+      "motsCles": [
+        "Lumières",
+        "philosophe",
+        "raison",
+        "Encyclopédie",
+        "salon",
+        "séparation des pouvoirs",
+        "tolérance",
+        "despotisme éclairé",
+        "absolutisme",
+        "censure",
+        "souveraineté du peuple"
+      ],
+      "reference": "Les Lumières : mouvement intellectuel européen du XVIIIe siècle qui veut éclairer les hommes par la raison et combattre l'ignorance, la superstition et l'intolérance.\nMontesquieu, De l'esprit des lois (1748) : séparation des pouvoirs législatif, exécutif et judiciaire pour éviter le despotisme.\nVoltaire : défend la tolérance religieuse et la liberté d'expression ; il s'engage dans l'affaire Calas (1762-1765) pour faire réhabiliter un protestant exécuté à tort ; Traité sur la tolérance (1763).\nRousseau, Du contrat social (1762) : la souveraineté appartient au peuple.\nDiderot et d'Alembert dirigent l'Encyclopédie (1751-1772) : elle rassemble les connaissances de l'époque, malgré la censure.\nLes philosophes critiquent l'absolutisme, les privilèges, l'intolérance religieuse, la torture et l'esclavage.\nCirculation des idées : livres, journaux, salons (comme celui de Madame Geoffrin), cafés, académies, correspondances entre savants de toute l'Europe.\nLe français est la langue des élites européennes.\nProgrès scientifiques : Lavoisier (chimie), Buffon (sciences naturelles), Franklin (paratonnerre) ; expériences publiques comme les montgolfières (1783).\nDespotisme éclairé : monarques qui s'inspirent de certaines idées des Lumières tout en gardant un pouvoir absolu : Frédéric II de Prusse, Catherine II de Russie, Joseph II d'Autriche.\nEn France, la monarchie absolue de Louis XV puis Louis XVI est de plus en plus contestée.\nLa Déclaration d'indépendance américaine (4 juillet 1776) s'inspire des idées des Lumières.\nMéthode attendue : présenter un philosophe et ses idées ; expliquer un extrait de texte des Lumières en le replaçant dans son contexte."
+    },
+    {
+      "id": "revolution-francaise-1789-1799",
+      "titre": "La Révolution française : un nouvel ordre politique (1789-1799)",
+      "ordre": 3,
+      "periode": "T1",
+      "notions": [
+        "Connaître les causes de la Révolution française (crise financière, contestation, privilèges)",
+        "Raconter les événements de 1789 et leur portée",
+        "Expliquer les principes de la Déclaration des droits de l'homme et du citoyen",
+        "Décrire le passage de la monarchie constitutionnelle à la République",
+        "Comprendre la Terreur et les guerres révolutionnaires",
+        "Identifier les transformations durables de la société française"
+      ],
+      "motsCles": [
+        "États généraux",
+        "tiers état",
+        "Assemblée nationale",
+        "prise de la Bastille",
+        "privilèges",
+        "DDHC",
+        "monarchie constitutionnelle",
+        "République",
+        "suffrage universel masculin",
+        "Terreur",
+        "sans-culottes",
+        "Directoire"
+      ],
+      "reference": "Causes : crise financière de la monarchie, crise économique (mauvaises récoltes, pain cher), contestation des privilèges et influence des Lumières.\n5 mai 1789 : ouverture des États généraux à Versailles (clergé, noblesse, tiers état).\n17 juin 1789 : les députés du tiers état se proclament Assemblée nationale ; 20 juin : serment du Jeu de paume (donner une Constitution à la France).\n14 juillet 1789 : prise de la Bastille par le peuple de Paris.\nNuit du 4 août 1789 : abolition des privilèges.\n26 août 1789 : Déclaration des droits de l'homme et du citoyen (DDHC) : « Les hommes naissent et demeurent libres et égaux en droits » (article 1) ; souveraineté de la nation, liberté, égalité devant la loi, propriété.\n1791 : première Constitution, monarchie constitutionnelle, séparation des pouvoirs, suffrage censitaire ; juin 1791 : fuite du roi arrêtée à Varennes.\nAvril 1792 : début de la guerre contre l'Autriche ; 10 août 1792 : prise des Tuileries, chute de la monarchie.\n21-22 septembre 1792 : la Convention, élue au suffrage universel masculin, abolit la royauté et proclame la Ire République.\n21 janvier 1793 : exécution de Louis XVI.\n1793-1794 : la Terreur, gouvernement révolutionnaire (Comité de salut public, Robespierre), suspension des libertés, nombreuses exécutions ; guerre de Vendée ; Robespierre est exécuté en juillet 1794.\n4 février 1794 : première abolition de l'esclavage dans les colonies françaises.\n1795-1799 : le Directoire, régime instable ; 9 novembre 1799 (18 brumaire an VIII) : coup d'État de Napoléon Bonaparte.\nSans-culottes : révolutionnaires parisiens issus du peuple, partisans de l'égalité et de la démocratie directe.\nHéritages : fin de la société d'ordres, égalité des droits, souveraineté nationale, état civil laïque (1792), départements (1790), système métrique.\nMéthode attendue : construire une frise chronologique de la Révolution ; expliquer un article de la DDHC."
+    },
+    {
+      "id": "consulat-et-empire",
+      "titre": "Le Consulat et l'Empire : Napoléon, la France et l'Europe (1799-1815)",
+      "ordre": 4,
+      "periode": "T2",
+      "notions": [
+        "Expliquer comment Napoléon Bonaparte prend et exerce le pouvoir",
+        "Connaître les réformes durables du Consulat (Code civil, préfets, lycées, Banque de France, Concordat)",
+        "Décrire un régime autoritaire : l'Empire",
+        "Comprendre l'expansion de l'Empire en Europe et les réactions des peuples",
+        "Connaître la chute de l'Empire et le congrès de Vienne",
+        "Faire la part entre héritages révolutionnaires conservés et remis en cause"
+      ],
+      "motsCles": [
+        "coup d'État",
+        "Consulat",
+        "Code civil",
+        "préfet",
+        "Concordat",
+        "lycée",
+        "Empire",
+        "sacre",
+        "plébiscite",
+        "Grande Armée",
+        "Waterloo",
+        "congrès de Vienne"
+      ],
+      "reference": "9 novembre 1799 (18 brumaire) : coup d'État de Napoléon Bonaparte, général victorieux ; il met en place le Consulat et devient Premier consul.\nLes Français approuvent les changements par plébiscite (vote par oui ou non), mais le pouvoir est concentré entre ses mains.\n1801 : Concordat avec le pape, le catholicisme est reconnu comme religion de la majorité des Français ; le clergé est payé par l'État.\n1800 : création des préfets (un par département, nommé par le pouvoir) et de la Banque de France ; 1802 : création des lycées ; 1802 : création de la Légion d'honneur.\n1802 : rétablissement de l'esclavage dans les colonies françaises.\n1804 : Code civil, qui conserve l'égalité devant la loi, la propriété, la liberté de travail, mais place la femme sous l'autorité de son mari.\n2 décembre 1804 : sacre de Napoléon Ier à Notre-Dame de Paris : début du Premier Empire.\nRégime autoritaire : censure de la presse, police surveillant les opposants, propagande, assemblées sans réel pouvoir.\nGuerres napoléoniennes : victoires d'Austerlitz (2 décembre 1805), Iéna (1806) ; défaite navale de Trafalgar face aux Britanniques (1805).\nVers 1811, le Grand Empire domine une grande partie de l'Europe ; le Code civil est diffusé dans les territoires conquis.\nRésistances et sentiment national : soulèvement espagnol (1808), réveil allemand ; campagne de Russie désastreuse (1812).\n1814 : première abdication ; 1815 : retour pendant les Cent-Jours, défaite de Waterloo (18 juin 1815), exil à Sainte-Hélène où il meurt en 1821.\nCongrès de Vienne (1814-1815) : les souverains vainqueurs redessinent la carte de l'Europe ; en France, retour des Bourbons (Louis XVIII).\nMéthode attendue : analyser un tableau de propagande (Le Sacre de David) ; distinguer héritages de la Révolution conservés (égalité civile) et abandonnés (libertés politiques)."
+    },
+    {
+      "id": "europe-revolution-industrielle",
+      "titre": "L'Europe de la « révolution industrielle »",
+      "ordre": 5,
+      "periode": "T2",
+      "notions": [
+        "Définir l'industrialisation et la situer dans le temps et l'espace (Royaume-Uni puis Europe)",
+        "Identifier les innovations techniques et les sources d'énergie (charbon, machine à vapeur, électricité, pétrole)",
+        "Décrire la transformation des paysages et la croissance des villes",
+        "Connaître les nouveaux acteurs : bourgeoisie industrielle et classe ouvrière",
+        "Décrire la condition ouvrière et les luttes pour l'améliorer",
+        "Connaître les grandes idéologies nées de l'industrialisation (libéralisme, socialisme)"
+      ],
+      "motsCles": [
+        "industrialisation",
+        "machine à vapeur",
+        "charbon",
+        "chemin de fer",
+        "usine",
+        "capitalisme",
+        "exode rural",
+        "ouvrier",
+        "prolétariat",
+        "syndicat",
+        "grève",
+        "socialisme"
+      ],
+      "reference": "Industrialisation : passage d'une économie fondée sur l'agriculture et l'artisanat à une économie dominée par l'industrie et la production en grande quantité dans des usines.\nElle commence au Royaume-Uni à la fin du XVIIIe siècle puis gagne la Belgique, la France, l'Allemagne au XIXe siècle.\nPremière phase : charbon, machine à vapeur (perfectionnée par James Watt en 1769), textile, sidérurgie, chemin de fer (première ligne de voyageurs Liverpool-Manchester en 1830).\nSeconde phase (fin du XIXe siècle) : électricité, pétrole, moteur à explosion, chimie, automobile.\nCapitalisme : système économique fondé sur la propriété privée des moyens de production et la recherche du profit ; essor des banques et des sociétés par actions ; exemple : la famille Schneider au Creusot.\nTransformation des paysages : bassins miniers, cités ouvrières, usines, voies ferrées ; croissance rapide des villes (urbanisation) et exode rural.\nBourgeoisie : patrons, banquiers, ingénieurs, de plus en plus riches et influents.\nOuvriers : longues journées (12 à 15 heures), salaires faibles, travail des enfants, logements insalubres, accidents.\nPaternalisme : certains patrons logent, soignent et éduquent les ouvriers en échange de leur obéissance.\nLuttes ouvrières : grèves, syndicats ; en France, le droit de grève est reconnu en 1864 et les syndicats autorisés en 1884.\nLois sociales : en France, la loi de 1841 limite le travail des enfants ; en 1892, les enfants de moins de 13 ans ne peuvent plus travailler en usine.\nIdéologies : libéralisme (liberté d'entreprendre, État peu présent) ; socialisme (critique du capitalisme, Karl Marx publie le Manifeste du Parti communiste avec Engels en 1848).\nMigrations : des millions d'Européens émigrent vers l'Amérique au XIXe siècle.\nMéthode attendue : décrire un paysage industriel ; analyser un témoignage sur la condition ouvrière."
+    },
+    {
+      "id": "conquetes-et-societes-coloniales",
+      "titre": "Conquêtes et sociétés coloniales",
+      "ordre": 6,
+      "periode": "T2",
+      "notions": [
+        "Expliquer les motivations de l'expansion coloniale européenne au XIXe siècle",
+        "Connaître les étapes et les formes de la conquête coloniale (exemple de l'Algérie ou de l'Afrique)",
+        "Situer les empires coloniaux français et britannique vers 1914",
+        "Décrire une société coloniale et ses inégalités (statut de l'indigénat)",
+        "Connaître les résistances à la conquête et à la domination coloniale",
+        "Comprendre l'abolition de l'esclavage de 1848 et ses limites"
+      ],
+      "motsCles": [
+        "colonisation",
+        "colonie",
+        "empire colonial",
+        "conquête",
+        "métropole",
+        "colon",
+        "indigène",
+        "code de l'indigénat",
+        "mission civilisatrice",
+        "conférence de Berlin",
+        "abolition",
+        "résistance"
+      ],
+      "reference": "Colonisation : domination politique, économique et culturelle d'un territoire et de sa population par un État étranger (la métropole).\nMotivations : économiques (matières premières, débouchés), politiques (puissance, prestige national), religieuses et idéologiques (missionnaires, prétendue « mission civilisatrice » fondée sur des idées racistes) ; exploration et science.\nJules Ferry défend la colonisation en 1885 ; Georges Clemenceau s'y oppose.\nAbolition définitive de l'esclavage dans les colonies françaises : décret du 27 avril 1848, préparé par Victor Schœlcher ; le Royaume-Uni l'avait abolie en 1833.\nAlgérie : conquête à partir de 1830 ; résistance de l'émir Abd el-Kader jusqu'en 1847 ; l'Algérie devient une colonie de peuplement.\nConférence de Berlin (1884-1885) : les puissances européennes fixent les règles du partage de l'Afrique.\nVers 1914 : l'Empire britannique est le plus vaste (Inde, Afrique de l'Est et du Sud…) ; l'Empire français est le deuxième (Afrique occidentale et équatoriale, Maghreb, Madagascar, Indochine).\nLa conquête est violente : guerres, massacres, destructions ; exemple : Samory Touré résiste aux Français en Afrique de l'Ouest jusqu'en 1898.\nSociété coloniale inégalitaire : colons européens d'un côté, colonisés de l'autre.\nCode de l'indigénat (1881 en Algérie, étendu ensuite) : régime de sanctions spéciales pour les colonisés, privés des droits des citoyens ; travail forcé dans certaines colonies.\nLa colonisation transforme les territoires : routes, ports, voies ferrées, cultures d'exportation, écoles et hôpitaux surtout utiles aux colons, exploitation des ressources.\nL'Exposition coloniale de 1931 montre la propagande en faveur de l'empire.\nMéthode attendue : lire une carte des empires coloniaux ; analyser un document de propagande coloniale avec esprit critique."
+    },
+    {
+      "id": "voter-de-1815-a-1870",
+      "titre": "Une difficile conquête : voter de 1815 à 1870",
+      "ordre": 7,
+      "periode": "T2",
+      "notions": [
+        "Connaître la succession des régimes politiques en France de 1815 à 1870",
+        "Distinguer suffrage censitaire et suffrage universel masculin",
+        "Expliquer les révolutions de 1830 et 1848",
+        "Connaître les acquis de la IIe République (suffrage universel masculin, abolition de l'esclavage)",
+        "Décrire le Second Empire, régime autoritaire utilisant le plébiscite",
+        "Comprendre que les femmes restent exclues du vote"
+      ],
+      "motsCles": [
+        "Restauration",
+        "monarchie de Juillet",
+        "suffrage censitaire",
+        "cens",
+        "Trois Glorieuses",
+        "IIe République",
+        "suffrage universel masculin",
+        "Second Empire",
+        "plébiscite",
+        "candidature officielle",
+        "isoloir"
+      ],
+      "reference": "1815-1830 : la Restauration, monarchie des Bourbons (Louis XVIII puis Charles X), avec la Charte de 1814.\nSuffrage censitaire : seuls votent les hommes qui paient un impôt minimum (le cens) ; vers 1820, environ 100 000 électeurs.\nJuillet 1830 : révolution des Trois Glorieuses (27, 28 et 29 juillet) contre Charles X ; Louis-Philippe devient roi des Français : monarchie de Juillet (1830-1848). Le cens est abaissé : environ 240 000 électeurs vers 1846.\nFévrier 1848 : révolution à Paris, chute de Louis-Philippe ; proclamation de la IIe République.\n1848 : suffrage universel masculin (tous les hommes de 21 ans et plus) ; le corps électoral passe à environ 9 millions d'électeurs ; abolition de l'esclavage (27 avril 1848), liberté de la presse et de réunion.\nAvril 1848 : premières élections au suffrage universel masculin ; décembre 1848 : Louis-Napoléon Bonaparte est élu président de la République.\nJuin 1848 : insurrection ouvrière réprimée à Paris après la fermeture des Ateliers nationaux.\n2 décembre 1851 : coup d'État de Louis-Napoléon Bonaparte ; 2 décembre 1852 : il devient l'empereur Napoléon III : début du Second Empire.\nSecond Empire : le suffrage universel masculin est maintenu mais encadré : candidatures officielles soutenues par les préfets, plébiscites, presse surveillée ; le régime se libéralise à partir des années 1860.\nSeptembre 1870 : défaite de Sedan contre la Prusse ; le 4 septembre 1870, la République est proclamée.\nLes femmes sont exclues du vote pendant toute la période (et jusqu'en 1944) ; l'isoloir n'est introduit qu'en 1913.\nApprendre à voter prend du temps : le vote se fait souvent sous l'influence des notables (vote public, pressions).\nMéthode attendue : construire une frise des régimes politiques ; comparer le nombre d'électeurs selon les régimes."
+    },
+    {
+      "id": "troisieme-republique",
+      "titre": "La IIIe République : un régime politique, un projet de société",
+      "ordre": 8,
+      "periode": "T3",
+      "notions": [
+        "Expliquer l'installation difficile de la République après 1870 (Commune de Paris, lois constitutionnelles de 1875)",
+        "Connaître les symboles et les valeurs républicaines diffusés par le régime",
+        "Connaître les grandes lois républicaines (libertés, école, laïcité)",
+        "Expliquer le rôle de l'école de Jules Ferry dans l'enracinement de la République",
+        "Comprendre les crises de la République (affaire Dreyfus)",
+        "Expliquer la loi de séparation des Églises et de l'État (1905)"
+      ],
+      "motsCles": [
+        "Commune de Paris",
+        "lois constitutionnelles",
+        "symboles républicains",
+        "Marseillaise",
+        "lois Ferry",
+        "école gratuite",
+        "laïcité",
+        "instituteur",
+        "affaire Dreyfus",
+        "antisémitisme",
+        "séparation des Églises et de l'État",
+        "libertés"
+      ],
+      "reference": "4 septembre 1870 : proclamation de la République après la défaite de Sedan.\nMars-mai 1871 : la Commune de Paris, insurrection parisienne, est écrasée par l'armée lors de la « Semaine sanglante » (fin mai 1871).\n1875 : lois constitutionnelles, qui installent un régime parlementaire : Chambre des députés élue au suffrage universel masculin, Sénat, président de la République élu par les deux chambres.\n1879-1880 : les républicains contrôlent les institutions ; La Marseillaise devient hymne national (1879), le 14 juillet fête nationale (1880) ; Marianne et la devise « Liberté, Égalité, Fraternité » sont diffusées.\nGrandes lois de liberté : liberté de réunion (1881), liberté de la presse (29 juillet 1881), syndicats (1884), associations (1er juillet 1901).\nLois Jules Ferry (1881-1882) : école primaire gratuite, obligatoire de 6 à 13 ans et laïque dans les écoles publiques.\nLes instituteurs, surnommés les « hussards noirs de la République », diffusent les valeurs républicaines, le patriotisme et la langue française.\nAffaire Dreyfus (1894-1906) : le capitaine juif Alfred Dreyfus est condamné à tort pour espionnage ; Émile Zola publie « J'accuse… ! » (13 janvier 1898) ; la France se divise entre dreyfusards et antidreyfusards ; Dreyfus est réhabilité en 1906.\nL'affaire révèle un fort antisémitisme et oppose défenseurs des droits de l'individu et partisans de l'armée.\nLoi du 9 décembre 1905 : séparation des Églises et de l'État : la République assure la liberté de conscience et garantit le libre exercice des cultes ; elle ne reconnaît, ne salarie ni ne subventionne aucun culte.\nLa République s'enracine mais exclut toujours les femmes du vote.\nMéthode attendue : analyser un symbole républicain ou une affiche ; expliquer comment l'école enracine la République."
+    },
+    {
+      "id": "conditions-feminines-xixe",
+      "titre": "Conditions féminines dans une société en mutation",
+      "ordre": 9,
+      "periode": "T3",
+      "notions": [
+        "Décrire la place des femmes dans la société du XIXe siècle selon les milieux sociaux",
+        "Connaître l'infériorité juridique des femmes fixée par le Code civil de 1804",
+        "Décrire le travail féminin (ouvrières, domestiques, paysannes)",
+        "Connaître les progrès de l'instruction des filles",
+        "Identifier les combats féministes et leurs figures",
+        "Mesurer les évolutions et les limites des droits des femmes avant 1914"
+      ],
+      "motsCles": [
+        "Code civil",
+        "incapacité juridique",
+        "autorité maritale",
+        "ouvrière",
+        "domestique",
+        "instruction",
+        "lycée de jeunes filles",
+        "féminisme",
+        "suffragette",
+        "droit de vote",
+        "égalité"
+      ],
+      "reference": "Code civil de 1804 : la femme mariée est juridiquement incapable, elle doit obéissance à son mari (article 213), ne peut ni travailler ni disposer de ses biens sans son autorisation.\nLe divorce, autorisé en 1792, est supprimé en 1816 puis rétabli par la loi Naquet en 1884.\nModèle bourgeois : la femme est d'abord épouse, mère et maîtresse de maison ; elle reste au foyer.\nLes femmes des milieux populaires travaillent : paysannes, ouvrières du textile, domestiques, couturières ; elles sont moins payées que les hommes.\nVers 1900, environ un tiers de la population active française est féminine.\nDe nouveaux métiers apparaissent à la fin du XIXe siècle : institutrices, employées de bureau, de commerce (grands magasins), infirmières, postières.\nInstruction : loi Camille Sée (1880) qui crée les lycées de jeunes filles ; les lois Ferry (1881-1882) rendent l'école primaire obligatoire pour les filles comme pour les garçons.\n1907 : les femmes mariées peuvent disposer librement de leur salaire.\nFigures : Louise Michel (communarde, 1871) ; Hubertine Auclert, militante du droit de vote des femmes ; Marie Curie, prix Nobel en 1903 et 1911.\nAu Royaume-Uni, les suffragettes d'Emmeline Pankhurst militent pour le droit de vote au début du XXe siècle.\nPremiers pays à accorder le droit de vote aux femmes : Nouvelle-Zélande (1893), Finlande (1906) ; en France, il faut attendre 1944.\nMalgré des progrès, les femmes restent exclues de la citoyenneté politique en France avant 1914.\nMéthode attendue : comparer la situation des femmes selon leur milieu social ; expliquer un document sur le combat féministe."
+    },
+    {
+      "id": "emc-libertes-et-ordre-public",
+      "titre": "EMC : Les libertés fondamentales et leurs limites",
+      "ordre": 10,
+      "periode": "T1",
+      "notions": [
+        "Distinguer libertés individuelles et libertés collectives",
+        "Connaître les textes qui garantissent les libertés (DDHC, DUDH, CIDE)",
+        "Expliquer la liberté d'expression et la liberté de la presse, y compris en ligne",
+        "Comprendre que les libertés sont limitées par la liberté des autres (art. 4 DDHC)",
+        "Définir l'ordre public et ses composantes",
+        "Savoir que l'intérêt supérieur de l'enfant est protégé (CIDE)"
+      ],
+      "motsCles": [
+        "liberté",
+        "libertés individuelles",
+        "libertés collectives",
+        "liberté d'expression",
+        "liberté de la presse",
+        "liberté de conscience",
+        "ordre public",
+        "dignité humaine",
+        "DDHC",
+        "CIDE",
+        "intérêt général",
+        "cyberharcèlement"
+      ],
+      "reference": "La liberté est le premier principe de la devise de la République « Liberté, Égalité, Fraternité ».\nLibertés individuelles : celles que chacun exerce seul : liberté de circulation, de mariage, d'opinion, de conscience, d'expression.\nLibertés collectives : celles qui s'exercent avec d'autres : droit de réunion, d'association (loi de 1901), de manifestation, droit syndical, liberté de la presse.\nDDHC (1789), article 2 : les droits naturels de l'homme sont la liberté, la propriété, la sûreté et la résistance à l'oppression.\nDDHC, article 4 : « La liberté consiste à pouvoir faire tout ce qui ne nuit pas à autrui. »\nDDHC, article 11 : la libre communication des pensées et des opinions est un des droits les plus précieux de l'homme, sauf à répondre de l'abus de cette liberté dans les cas déterminés par la loi.\nDéclaration universelle des droits de l'homme (ONU, 1948), article 1 : tous les êtres humains naissent libres et égaux en dignité et en droits.\nConvention internationale des droits de l'enfant (CIDE, 1989) : intérêt supérieur de l'enfant (art. 3), liberté d'expression (art. 13), d'association et de réunion (art. 15), droit à l'information (art. 17).\nLoi du 29 juillet 1881 sur la liberté de la presse : elle punit aussi les abus (diffamation, injure, provocation à la haine).\nLimites de la liberté d'expression : interdiction de la diffamation, de l'injure, de l'appel à la haine ou à la violence, du harcèlement et du cyberharcèlement (délit puni par la loi).\nOrdre public : ensemble des conditions qui permettent à chacun de vivre en sécurité et d'exercer ses libertés : sécurité, tranquillité, salubrité publiques et respect de la dignité de la personne humaine (Conseil d'État, 1995).\nEn droit, la liberté est la règle et la restriction l'exception ; une restriction doit être prévue par la loi et proportionnée.\nExemple : la loi ne définit pas ce qu'est une secte (liberté de croyance) mais punit les dérives sectaires qui portent atteinte aux personnes.\nMéthode attendue : identifier dans une situation quelle liberté est en jeu et ce qui peut la limiter."
+    },
+    {
+      "id": "emc-etat-de-droit-et-justice",
+      "titre": "EMC : L'État de droit et la justice",
+      "ordre": 11,
+      "periode": "T2",
+      "notions": [
+        "Définir l'État de droit et la hiérarchie des normes",
+        "Comprendre le rôle du Conseil constitutionnel dans la protection des libertés",
+        "Connaître les grands principes de la justice (indépendance, présomption d'innocence, procès équitable)",
+        "Distinguer ordre judiciaire et ordre administratif, justice civile et justice pénale",
+        "Connaître les degrés de juridiction : première instance, appel, cassation",
+        "Connaître la justice des mineurs et les recours (Défenseur des droits, CEDH)"
+      ],
+      "motsCles": [
+        "État de droit",
+        "hiérarchie des normes",
+        "Constitution",
+        "Conseil constitutionnel",
+        "présomption d'innocence",
+        "procès équitable",
+        "tribunal",
+        "cour d'appel",
+        "Cour de cassation",
+        "Conseil d'État",
+        "jury populaire",
+        "Défenseur des droits"
+      ],
+      "reference": "État de droit : État dans lequel tous, y compris les gouvernants et l'administration, sont soumis au droit ; l'action de l'État peut être contrôlée et sanctionnée par un juge.\nHiérarchie des normes : chaque règle doit respecter celles qui lui sont supérieures : Constitution (et bloc de constitutionnalité), traités internationaux, lois, règlements (décrets, arrêtés).\nBloc de constitutionnalité : Constitution de 1958, DDHC de 1789, Préambule de 1946, Charte de l'environnement de 2004.\nLe Conseil constitutionnel vérifie que les lois respectent la Constitution ; depuis 2010, un justiciable peut le saisir indirectement par une question prioritaire de constitutionnalité (QPC).\nPrincipes de la justice : indépendance des juges, gratuité, publicité des audiences, droit à un procès équitable, présomption d'innocence (art. 9 DDHC), droit à un avocat, principe du contradictoire.\nOrdre judiciaire : juridictions civiles (litiges entre personnes : tribunal judiciaire, conseil de prud'hommes…) et pénales (infractions : tribunal de police pour les contraventions, tribunal correctionnel pour les délits, cour d'assises ou cour criminelle départementale pour les crimes).\nOrdre administratif : litiges entre les particuliers et l'administration (tribunal administratif, cour administrative d'appel, Conseil d'État).\nDegrés de juridiction : première instance ; appel (on peut faire rejuger l'affaire) ; pourvoi en cassation (Cour de cassation ou Conseil d'État vérifient le respect du droit, sans rejuger les faits).\nCour d'assises : des citoyens tirés au sort (jurés) jugent les crimes aux côtés de magistrats professionnels.\nJustice des mineurs : priorité à l'éducation sur la sanction ; juge des enfants ; un mineur est jugé selon des règles spécifiques (code de la justice pénale des mineurs, 2021).\nDéfenseur des droits (institution créée en 2011) : autorité indépendante qui protège les droits des personnes, notamment des enfants, face aux administrations et aux discriminations.\nCour européenne des droits de l'homme (CEDH, Strasbourg) : veille au respect de la Convention européenne des droits de l'homme (1950) ; la France peut y être condamnée.\nLes lieux de privation de liberté (prisons, centres de rétention) sont contrôlés par le Contrôleur général des lieux de privation de liberté.\nMéthode attendue : situer une décision de justice dans l'organisation juridictionnelle ; expliquer pourquoi l'indépendance de la justice protège les libertés."
+    },
+    {
+      "id": "emc-securite-et-defense-nationale",
+      "titre": "EMC : Défendre le cadre démocratique : sécurité et défense nationale",
+      "ordre": 12,
+      "periode": "T3",
+      "notions": [
+        "Comprendre que la sûreté est un droit affirmé par la DDHC (article 2)",
+        "Connaître les forces de sécurité intérieure et leurs missions (police, gendarmerie, pompiers, douanes)",
+        "Connaître les missions des forces armées : défendre la souveraineté nationale et agir dans le cadre international (ONU)",
+        "Comprendre les nouveaux enjeux : guerre informationnelle, ingérences étrangères, cyberdéfense",
+        "Connaître la sécurité civile face aux risques (incendies de forêt, plan Vigipirate)",
+        "Comprendre le rôle de la police de l'environnement (Office français de la biodiversité)"
+      ],
+      "motsCles": [
+        "sûreté",
+        "sécurité",
+        "défense nationale",
+        "souveraineté",
+        "police",
+        "gendarmerie",
+        "sécurité civile",
+        "forces armées",
+        "Vigipirate",
+        "ingérence",
+        "guerre informationnelle",
+        "cyberdéfense"
+      ],
+      "reference": "DDHC, article 2 : la sûreté fait partie des droits naturels de l'homme ; elle signifie que les droits du citoyen sont protégés et qu'il doit se trouver en sécurité.\nLa sécurité permet l'exercice des libertés : elle est une mission de l'État au nom de l'intérêt général.\nForces de sécurité intérieure : police nationale (surtout en ville), gendarmerie nationale (militaires, surtout en zones rurales et périurbaines), douanes (contrôle des marchandises aux frontières) ; police municipale sous l'autorité du maire.\nSécurité civile : sapeurs-pompiers (professionnels et volontaires) et services de secours ; ils protègent les personnes et les biens face aux catastrophes, par exemple les incendies de forêt.\nPlan Vigipirate : dispositif de vigilance et de prévention face à la menace terroriste, créé en 1978.\nSouveraineté nationale : autorité exclusive de l'État sur son territoire et sa population ; les forces armées (armée de Terre, Marine nationale, armée de l'Air et de l'Espace) ont pour mission de la défendre.\nLe président de la République est le chef des armées (Constitution de 1958, article 15) ; la France dispose de l'arme nucléaire (dissuasion).\nLes armées agissent aussi à l'extérieur, dans le cadre de traités et d'organisations internationales (ONU, OTAN, Union européenne) : opérations de maintien de la paix.\nIngérence : intervention d'un État étranger dans les affaires intérieures d'un pays sans son consentement ; la Charte des Nations unies (1945) pose le principe de non-ingérence.\nGuerre informationnelle : utilisation de fausses informations et de manipulations, notamment sur les réseaux sociaux, pour influencer l'opinion ; VIGINUM (créé en 2021) détecte les ingérences numériques étrangères.\nCyberdéfense : protection des réseaux informatiques de l'État et des entreprises contre les cyberattaques.\nPolice de l'environnement : l'Office français de la biodiversité (OFB, créé en 2020) contrôle le respect des lois protégeant la nature ; la Charte de l'environnement (2004) affirme le droit de chacun à vivre dans un environnement équilibré et respectueux de la santé.\nParcours citoyen : recensement à 16 ans, Journée défense et citoyenneté (JDC).\nMéthode attendue : identifier l'acteur de la sécurité ou de la défense qui intervient dans une situation ; repérer une tentative de manipulation de l'information."
+    }
+  ]
+}

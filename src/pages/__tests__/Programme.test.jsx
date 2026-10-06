@@ -64,11 +64,11 @@ describe('<Programme />', () => {
     expect(nav).toHaveBeenCalledWith('/programme/maths')
   })
 
-  it('un élève de 4e voit le programme de 3e avec une note', async () => {
-    authState.level = { cycle: 'college', classe: '4ème' }
+  it('un lycéen voit le programme de 3e avec une note', async () => {
+    authState.level = { cycle: 'lycee', classe: '2nde' }
     renderPage()
     expect(await screen.findByText('Maths')).toBeInTheDocument()
-    expect(screen.getByText(/Le programme de 4ème arrive bientôt/)).toBeInTheDocument()
+    expect(screen.getByText(/Le programme de 2nde arrive bientôt/)).toBeInTheDocument()
   })
 
   it('en mode essai, le bandeau rappelle que la progression reste sur l’appareil', async () => {

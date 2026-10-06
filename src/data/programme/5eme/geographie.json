@@ -1,0 +1,347 @@
+{
+  "classe": "5ème",
+  "matiere": "Géographie",
+  "programme": "Cycle 4 – 5e : La question démographique et l'inégal développement ; Des ressources limitées, à gérer et à renouveler ; Prévenir les risques, s'adapter au changement global (BO spécial n°11 du 26/11/2015, ajusté BO n°31 du 30/07/2020)",
+  "modele": "claude-opus-5-5 (abonnement)",
+  "genereLe": "2026-10-05",
+  "relu": false,
+  "chapitres": [
+    {
+      "id": "la-croissance-de-la-population-mondiale",
+      "titre": "La croissance de la population mondiale",
+      "ordre": 1,
+      "periode": "T1",
+      "notions": [
+        "Décrire l'évolution de la population mondiale depuis 1800 et ses étapes",
+        "Expliquer l'accroissement naturel par la natalité et la mortalité",
+        "Localiser les grands foyers de peuplement et les régions où la population augmente le plus",
+        "Connaître les projections de population pour 2050",
+        "Lire et construire un graphique d'évolution de la population"
+      ],
+      "motsCles": [
+        "population mondiale",
+        "croissance démographique",
+        "natalité",
+        "mortalité",
+        "accroissement naturel",
+        "foyer de peuplement",
+        "densité",
+        "explosion démographique",
+        "projection",
+        "ONU"
+      ],
+      "reference": "Démographie : étude des populations humaines (nombre, répartition, évolution).\nTaux de natalité : nombre de naissances pour 1 000 habitants en un an. Taux de mortalité : nombre de décès pour 1 000 habitants en un an.\nAccroissement naturel = naissances − décès ; taux d'accroissement naturel = taux de natalité − taux de mortalité.\nPopulation mondiale : environ 1 milliard vers 1800 ; 2,5 milliards en 1950 ; 6 milliards en 1999 ; 7 milliards en 2011 ; 8 milliards en novembre 2022 (ONU).\nAprès 1950, la population augmente très vite : on parle d'explosion démographique, car la mortalité baisse fortement (vaccins, médicaments, hygiène, meilleure alimentation) alors que la natalité reste forte.\nLe rythme de croissance ralentit depuis les années 1970 : la population augmente encore, mais de moins en moins vite.\nProjections de l'ONU : environ 9,7 milliards d'habitants en 2050 ; un maximum autour de 10 milliards vers la fin du XXIe siècle.\nGrands foyers de peuplement : Asie de l'Est (Chine), Asie du Sud (Inde, Pakistan, Bangladesh), Europe ; foyers secondaires : golfe de Guinée (Nigeria), vallée du Nil, Nord-Est des États-Unis.\nL'Asie regroupe environ 6 habitants sur 10. L'Inde est le pays le plus peuplé du monde depuis 2023 (plus de 1,4 milliard), devant la Chine.\nL'Afrique est le continent dont la population augmente le plus vite : elle pourrait compter environ 2,5 milliards d'habitants en 2050. Le Nigeria compte plus de 220 millions d'habitants.\nDensité de population = nombre d'habitants ÷ superficie (en hab./km²).\nMéthode : lire un graphique d'évolution de la population (axes, unités, périodes de croissance lente ou rapide) ; décrire une carte de répartition (foyers, vides)."
+    },
+    {
+      "id": "la-transition-demographique",
+      "titre": "La transition démographique et les contrastes démographiques",
+      "ordre": 2,
+      "periode": "T1",
+      "notions": [
+        "Définir la transition démographique et en décrire les phases",
+        "Expliquer la baisse de la mortalité puis de la natalité",
+        "Comprendre l'indice de fécondité et le seuil de renouvellement des générations",
+        "Distinguer des pays jeunes et des pays vieillissants",
+        "Lire une pyramide des âges",
+        "Comparer des pays à différentes étapes de la transition (Niger, Inde, Japon)"
+      ],
+      "motsCles": [
+        "transition démographique",
+        "fécondité",
+        "indice de fécondité",
+        "seuil de renouvellement",
+        "espérance de vie",
+        "pyramide des âges",
+        "vieillissement",
+        "population jeune",
+        "mortalité infantile",
+        "politique démographique"
+      ],
+      "reference": "Transition démographique : passage d'un régime démographique où natalité et mortalité sont fortes à un régime où natalité et mortalité sont faibles.\nPhase 1 : la mortalité baisse (progrès médicaux, hygiène, alimentation) alors que la natalité reste forte → l'accroissement naturel est très fort.\nPhase 2 : la natalité baisse à son tour (scolarisation des filles, urbanisation, contraception, travail des femmes) → l'accroissement naturel diminue.\nFin de transition : natalité et mortalité sont faibles et proches ; la population augmente peu, voire diminue.\nIndice (synthétique) de fécondité : nombre moyen d'enfants par femme. Moyenne mondiale : environ 2,2 à 2,3 enfants par femme.\nSeuil de renouvellement des générations : environ 2,1 enfants par femme.\nEspérance de vie : nombre moyen d'années qu'un nouveau-né peut espérer vivre ; environ 73 ans dans le monde.\nMortalité infantile : décès d'enfants de moins d'un an.\nPays en début ou au milieu de transition : population jeune, forte fécondité (Niger : environ 6 enfants par femme).\nPays ayant terminé leur transition : population vieillissante, faible fécondité (Japon, Italie, Allemagne, Corée du Sud). Au Japon, près de 3 habitants sur 10 ont 65 ans ou plus.\nPyramide des âges : graphique qui représente la population par âge et par sexe (hommes à gauche, femmes à droite). Base large = population jeune ; sommet large = population vieillissante.\nPolitique démographique : actions d'un État pour agir sur la natalité, par exemple la politique de l'enfant unique en Chine (1979-2015) pour freiner les naissances.\nMéthode : décrire une pyramide des âges (forme de la base, du sommet) et en déduire si la population est jeune ou âgée."
+    },
+    {
+      "id": "les-effets-de-la-croissance-demographique",
+      "titre": "Les effets de la croissance démographique sur les territoires",
+      "ordre": 3,
+      "periode": "T1",
+      "notions": [
+        "Identifier les besoins créés par une population en forte croissance (nourriture, logement, emploi, éducation, santé)",
+        "Expliquer la croissance urbaine et la formation de bidonvilles",
+        "Comprendre les conséquences sur l'environnement et les ressources",
+        "Montrer que la croissance démographique peut aussi être un atout (main-d'œuvre, marché)",
+        "Étudier un exemple de pays à forte croissance (Nigeria ou Inde)",
+        "Comprendre les défis des pays vieillissants"
+      ],
+      "motsCles": [
+        "besoins",
+        "urbanisation",
+        "exode rural",
+        "bidonville",
+        "métropole",
+        "mégapole",
+        "pression sur les ressources",
+        "main-d'œuvre",
+        "emploi",
+        "éducation",
+        "vieillissement"
+      ],
+      "reference": "Une population en forte croissance a des besoins croissants : se nourrir, se loger, se soigner, être scolarisée, travailler.\nUrbanisation : augmentation de la part de la population vivant en ville. Depuis 2007-2008, plus de la moitié de l'humanité vit en ville.\nCroissance urbaine : elle s'explique par l'accroissement naturel des villes et par l'exode rural (départ des habitants des campagnes vers les villes).\nBidonville : quartier d'habitat précaire construit sans autorisation, souvent sans eau courante, électricité ni assainissement. Environ 1 milliard de personnes vivent dans des bidonvilles ou des quartiers informels.\nMégapole : ville de plus de 10 millions d'habitants (Lagos, Delhi, Mumbai, Le Caire, Dacca).\nExemple du Nigeria : plus de 220 millions d'habitants, une population très jeune (âge médian d'environ 18 ans) ; Lagos, mégapole en croissance rapide, avec des quartiers aisés et de vastes bidonvilles (Makoko).\nExemple de l'Inde : plus de 1,4 milliard d'habitants ; Mumbai compte des bidonvilles comme Dharavi, l'un des plus grands d'Asie.\nConséquences : manque de logements, d'écoles, d'hôpitaux et d'emplois ; développement du secteur informel (emplois non déclarés) ; pression sur l'eau, les sols, les forêts ; pollution et embouteillages.\nLa croissance démographique peut aussi être un atout : main-d'œuvre jeune et nombreuse, grand marché de consommateurs, dynamisme économique. On parle de dividende démographique quand la part des actifs augmente.\nLes pays vieillissants (Japon, Europe) font face à d'autres défis : financer les retraites et la santé, manque de main-d'œuvre, recours à l'immigration.\nLa croissance démographique n'est pas la seule cause des problèmes : le niveau de développement et les choix des sociétés comptent aussi.\nMéthode : réaliser un croquis ou un schéma des effets de la croissance urbaine sur une ville du Sud."
+    },
+    {
+      "id": "richesse-et-pauvrete-dans-le-monde",
+      "titre": "La répartition de la richesse et de la pauvreté dans le monde",
+      "ordre": 4,
+      "periode": "T1",
+      "notions": [
+        "Définir le développement et ses différentes dimensions",
+        "Utiliser des indicateurs : PIB par habitant et IDH",
+        "Localiser les pays riches, les pays émergents et les pays les moins avancés",
+        "Montrer que les inégalités existent aussi à l'intérieur des pays et des villes",
+        "Définir la pauvreté et l'extrême pauvreté",
+        "Lire une carte de l'IDH"
+      ],
+      "motsCles": [
+        "développement",
+        "richesse",
+        "pauvreté",
+        "extrême pauvreté",
+        "PIB",
+        "IDH",
+        "inégalités",
+        "pays développés",
+        "pays émergents",
+        "PMA",
+        "Nord",
+        "Sud"
+      ],
+      "reference": "Développement : amélioration des conditions de vie d'une population (revenus, santé, éducation, accès aux services).\nPIB (produit intérieur brut) : valeur des richesses produites dans un pays en un an. PIB par habitant = PIB ÷ nombre d'habitants : il mesure la richesse moyenne.\nIDH (indice de développement humain) : indicateur créé en 1990 par le PNUD (ONU). Il combine trois critères : l'espérance de vie (santé), la durée de scolarisation (éducation) et le revenu par habitant (niveau de vie). Il varie de 0 à 1.\nIDH le plus élevé : pays d'Europe du Nord et de l'Ouest (Islande, Norvège, Suisse), États-Unis, Australie, Japon. IDH le plus faible : pays d'Afrique subsaharienne (Niger, Tchad, Somalie, Soudan du Sud).\nPays développés (dits « du Nord ») : niveau de vie élevé, IDH élevé (Amérique du Nord, Europe, Japon, Australie).\nPays émergents : pays en forte croissance économique, qui s'intègrent à la mondialisation, mais où les inégalités restent fortes (Chine, Inde, Brésil, Afrique du Sud, Mexique).\nPMA (pays les moins avancés) : une quarantaine de pays parmi les plus pauvres, définis par l'ONU, majoritairement en Afrique subsaharienne (aussi Haïti, Afghanistan).\nLa limite Nord/Sud est une simplification : il existe de grands contrastes à l'intérieur du Sud et du Nord.\nExtrême pauvreté : vivre avec moins d'environ 3 dollars par jour (seuil de la Banque mondiale relevé en 2025). Environ une personne sur dix dans le monde est concernée, surtout en Afrique subsaharienne.\nLes inégalités existent aussi à l'intérieur des pays (régions riches et pauvres) et des villes (quartiers aisés et bidonvilles, comme à Rio de Janeiro ou Mumbai). En France aussi, il existe des personnes pauvres.\nLa pauvreté recule à l'échelle mondiale depuis 1990, notamment en Asie de l'Est (Chine), mais les écarts de richesse restent très importants.\nMéthode : lire une carte en plages de couleurs (légende, nuances du plus clair au plus foncé), comparer deux indicateurs."
+    },
+    {
+      "id": "le-developpement-durable",
+      "titre": "Le développement durable : un enjeu pour l'humanité",
+      "ordre": 5,
+      "periode": "T2",
+      "notions": [
+        "Définir le développement durable et ses trois piliers",
+        "Comprendre l'origine de la notion (rapport Brundtland 1987, sommet de Rio 1992)",
+        "Identifier les acteurs du développement durable (États, ONU, entreprises, ONG, citoyens)",
+        "Connaître les objectifs de développement durable (ODD) de l'ONU",
+        "Relier développement durable, ressources limitées et croissance démographique"
+      ],
+      "motsCles": [
+        "développement durable",
+        "pilier économique",
+        "pilier social",
+        "pilier environnemental",
+        "générations futures",
+        "ressource",
+        "empreinte écologique",
+        "ODD",
+        "Agenda 2030",
+        "acteur",
+        "ONG"
+      ],
+      "reference": "Développement durable : « développement qui répond aux besoins du présent sans compromettre la capacité des générations futures de répondre aux leurs » (rapport Brundtland, ONU, 1987).\nTrois piliers : économique (produire des richesses, créer des emplois), social (réduire les inégalités, satisfaire les besoins de tous), environnemental (préserver les ressources et les milieux).\nLe sommet de la Terre de Rio de Janeiro (1992) a fait connaître la notion dans le monde entier.\nObjectifs de développement durable (ODD) : 17 objectifs adoptés par l'ONU en 2015 pour 2030 (Agenda 2030) : éliminer la pauvreté et la faim, accès à l'eau, à l'énergie propre, à l'éducation, lutte contre le changement climatique…\nRessource : élément utilisé par les sociétés pour satisfaire leurs besoins (eau, énergie, sols, forêts, minerais).\nRessource renouvelable : qui se reconstitue à l'échelle humaine (eau, soleil, vent, forêt si elle est bien gérée). Ressource non renouvelable : en quantité limitée (pétrole, charbon, gaz, uranium, minerais).\nEmpreinte écologique : surface nécessaire pour produire ce qu'une population consomme et absorber ses déchets. L'humanité consomme chaque année plus que ce que la planète peut renouveler (« jour du dépassement » atteint en été).\nLes pays riches ont une empreinte écologique par habitant bien plus forte que les pays pauvres.\nExemples d'actions durables : énergies renouvelables, transports en commun, gestion économe de l'eau, agriculture biologique, écoquartiers (comme Vauban à Fribourg-en-Brisgau, en Allemagne).\nActeurs : organisations internationales (ONU), États, collectivités locales (Agenda 21 local), entreprises, ONG (WWF, Greenpeace), citoyens (tri des déchets, économies d'eau et d'énergie).\nLe développement durable concerne tous les thèmes de la géographie de 5e : population, richesse, énergie, eau, alimentation, climat, risques.\nMéthode : classer des actions selon les trois piliers ; schéma des trois piliers qui se recoupent."
+    },
+    {
+      "id": "l-energie-une-ressource-a-menager",
+      "titre": "L'énergie, une ressource à ménager et à mieux utiliser",
+      "ordre": 6,
+      "periode": "T2",
+      "notions": [
+        "Distinguer énergies non renouvelables et énergies renouvelables",
+        "Décrire l'inégale répartition de la production et de la consommation d'énergie dans le monde",
+        "Comprendre la place dominante des énergies fossiles et ses conséquences",
+        "Expliquer les enjeux de la transition énergétique",
+        "Étudier un exemple d'exploitation énergétique (barrage, champ éolien, pétrole)",
+        "Connaître le mix énergétique de la France"
+      ],
+      "motsCles": [
+        "énergie",
+        "énergies fossiles",
+        "pétrole",
+        "charbon",
+        "gaz naturel",
+        "nucléaire",
+        "énergies renouvelables",
+        "transition énergétique",
+        "mix énergétique",
+        "sobriété",
+        "gaz à effet de serre"
+      ],
+      "reference": "Énergie : ce qui permet de produire de la chaleur, de l'électricité ou un mouvement (se chauffer, s'éclairer, se déplacer, produire).\nÉnergies non renouvelables : énergies fossiles (pétrole, charbon, gaz naturel), issues de la décomposition très lente d'êtres vivants, et nucléaire (uranium). Leurs réserves sont limitées.\nÉnergies renouvelables : hydraulique (barrages), solaire, éolienne, biomasse (bois, déchets), géothermie (chaleur du sous-sol). Elles se renouvellent rapidement.\nLes énergies fossiles fournissent environ 80 % de l'énergie consommée dans le monde. Leur combustion rejette du CO₂, principal gaz à effet de serre responsable du réchauffement climatique.\nGrands producteurs de pétrole et de gaz : États-Unis, Arabie saoudite, Russie, Iran, Qatar. Grands producteurs de charbon : Chine, Inde, Indonésie.\nConsommation très inégale : un Américain consomme en moyenne plusieurs fois plus d'énergie qu'un Indien, et beaucoup plus qu'un habitant d'Afrique subsaharienne. La Chine est le premier consommateur mondial d'énergie.\nEnviron 700 millions de personnes n'ont pas accès à l'électricité, surtout en Afrique subsaharienne.\nMix énergétique : répartition des différentes sources d'énergie utilisées par un pays.\nFrance : environ 65 à 70 % de l'électricité est d'origine nucléaire ; le nucléaire émet peu de CO₂ mais produit des déchets radioactifs et présente des risques d'accident.\nTransition énergétique : passage d'un modèle fondé sur les énergies fossiles à un modèle reposant davantage sur les énergies renouvelables et les économies d'énergie.\nLimites des renouvelables : production intermittente (vent, soleil), barrages qui inondent des vallées et déplacent des populations (barrage des Trois-Gorges en Chine, plus de 1 million de personnes déplacées).\nSobriété et efficacité énergétique : consommer moins (isolation des bâtiments, transports en commun) et mieux (appareils moins gourmands).\nMéthode : lire un diagramme circulaire du mix énergétique ; comparer des consommations par habitant."
+    },
+    {
+      "id": "l-eau-une-ressource-a-menager",
+      "titre": "L'eau, une ressource à ménager et à mieux utiliser",
+      "ordre": 7,
+      "periode": "T2",
+      "notions": [
+        "Montrer que l'eau douce est une ressource limitée et inégalement répartie",
+        "Identifier les usages de l'eau (agriculture, industrie, usages domestiques)",
+        "Expliquer le stress hydrique et les inégalités d'accès à l'eau potable",
+        "Décrire les aménagements pour mobiliser l'eau (barrages, irrigation, dessalement)",
+        "Comprendre les conflits d'usage et les tensions autour de l'eau",
+        "Connaître des solutions pour une gestion durable de l'eau"
+      ],
+      "motsCles": [
+        "eau douce",
+        "eau potable",
+        "ressource",
+        "stress hydrique",
+        "pénurie",
+        "irrigation",
+        "barrage",
+        "dessalement",
+        "assainissement",
+        "conflit d'usage",
+        "nappe phréatique",
+        "gestion durable"
+      ],
+      "reference": "L'eau recouvre environ 71 % de la surface de la Terre, mais 97 % de cette eau est salée. L'eau douce ne représente qu'environ 2,5 à 3 % du total, et la plus grande partie est stockée dans les glaces et les nappes souterraines.\nEau potable : eau que l'on peut boire sans danger pour la santé.\nPlus de 2 milliards de personnes n'ont pas accès à une eau potable gérée de façon sûre et environ 3,5 milliards n'ont pas d'assainissement sûr (toilettes, traitement des eaux usées), surtout en Afrique subsaharienne et en Asie du Sud.\nUsages de l'eau dans le monde : l'agriculture (irrigation) représente environ 70 % des prélèvements, l'industrie environ 20 %, les usages domestiques environ 10 %.\nLes besoins en eau augmentent avec la croissance démographique, l'urbanisation et l'élévation du niveau de vie.\nStress hydrique : situation où la demande en eau dépasse les ressources disponibles (moins de 1 700 m³ d'eau par habitant et par an ; pénurie en dessous de 1 000 m³). Régions concernées : Afrique du Nord, Moyen-Orient, Asie centrale, Ouest des États-Unis.\nAménagements : barrages et retenues, canaux, puits et forages, irrigation, usines de dessalement de l'eau de mer (Arabie saoudite, Israël, Émirats arabes unis), stations d'épuration.\nIrrigation : apport artificiel d'eau aux cultures. Le goutte-à-goutte permet d'économiser l'eau.\nExemple de mauvaise gestion : la mer d'Aral (Asie centrale) a perdu la plus grande partie de sa surface depuis les années 1960, car les fleuves qui l'alimentaient ont été détournés pour irriguer le coton.\nConflits d'usage : concurrence entre utilisateurs (agriculteurs, industriels, villes, tourisme). Tensions entre États : partage des eaux du Nil entre l'Égypte, le Soudan et l'Éthiopie (Grand barrage de la Renaissance).\nPollution de l'eau : rejets industriels, engrais et pesticides agricoles, eaux usées non traitées.\nGestion durable : réduire le gaspillage (réparer les fuites, recycler les eaux usées), protéger les nappes phréatiques, partager équitablement la ressource.\nMéthode : étudier un document sur un aménagement hydraulique et en dégager les avantages et les inconvénients."
+    },
+    {
+      "id": "nourrir-l-humanite",
+      "titre": "Nourrir une humanité en croissance",
+      "ordre": 8,
+      "periode": "T2",
+      "notions": [
+        "Montrer que la production agricole mondiale a fortement augmenté",
+        "Expliquer la révolution verte et ses limites",
+        "Distinguer agriculture vivrière, agriculture commerciale et agriculture productiviste",
+        "Identifier les grands pays producteurs et exportateurs",
+        "Comprendre les moyens d'augmenter la production (intensification, extension des surfaces)",
+        "Mesurer les conséquences environnementales de l'agriculture"
+      ],
+      "motsCles": [
+        "agriculture",
+        "production agricole",
+        "révolution verte",
+        "agriculture vivrière",
+        "agriculture commerciale",
+        "agriculture productiviste",
+        "agrobusiness",
+        "rendement",
+        "intensification",
+        "déforestation",
+        "exportation"
+      ],
+      "reference": "Besoins alimentaires : ils augmentent avec la croissance de la population et l'évolution des régimes alimentaires (plus de viande, de produits laitiers et de produits transformés).\nDepuis 1960, la production agricole mondiale a augmenté plus vite que la population : la planète produit globalement assez de nourriture pour tous.\nRendement : quantité produite par unité de surface (en quintaux par hectare, q/ha).\nRévolution verte (à partir des années 1960, Inde, Mexique, Asie du Sud-Est) : semences sélectionnées à haut rendement, engrais, pesticides, irrigation. Elle a fortement augmenté les productions de riz et de blé.\nLimites de la révolution verte : épuisement et pollution des sols et des nappes, endettement des petits paysans, inégalités entre agriculteurs.\nAgriculture vivrière : agriculture destinée à nourrir la famille du paysan ou la population locale, souvent peu mécanisée (Afrique subsaharienne).\nAgriculture commerciale : production destinée à être vendue, souvent exportée (café, cacao, soja, huile de palme).\nAgriculture productiviste : agriculture intensive, très mécanisée, utilisant beaucoup d'engrais et de pesticides, qui cherche les rendements les plus élevés (Grandes Plaines des États-Unis, Bassin parisien).\nAgrobusiness : ensemble des activités de grandes entreprises qui contrôlent la production, la transformation et la vente des produits agricoles.\nGrands exportateurs : États-Unis, Brésil, Union européenne (dont la France), Argentine, Canada, Australie, Ukraine, Russie (blé).\nAugmenter la production : intensifier (produire plus sur la même surface) ou étendre les surfaces cultivées (défrichement, déforestation en Amazonie pour le soja et l'élevage, en Indonésie pour l'huile de palme).\nConséquences environnementales : déforestation, perte de biodiversité, pollution des eaux par les engrais et pesticides, épuisement des sols, émissions de gaz à effet de serre (élevage).\nMéthode : lire un graphique comparant l'évolution de la population et de la production agricole."
+    },
+    {
+      "id": "l-insecurite-alimentaire",
+      "titre": "L'insécurité alimentaire et les solutions pour une agriculture durable",
+      "ordre": 9,
+      "periode": "T2",
+      "notions": [
+        "Définir la sécurité alimentaire et l'insécurité alimentaire",
+        "Distinguer sous-nutrition et malnutrition",
+        "Localiser les régions touchées par la faim",
+        "Expliquer les causes de la faim (pauvreté, conflits, aléas climatiques, prix)",
+        "Connaître des solutions : aide alimentaire, agriculture durable, commerce équitable, réduction du gaspillage",
+        "Comprendre les enjeux de l'agriculture biologique et de l'agroécologie"
+      ],
+      "motsCles": [
+        "sécurité alimentaire",
+        "insécurité alimentaire",
+        "sous-nutrition",
+        "malnutrition",
+        "famine",
+        "obésité",
+        "FAO",
+        "aide alimentaire",
+        "commerce équitable",
+        "agriculture biologique",
+        "agroécologie",
+        "gaspillage alimentaire"
+      ],
+      "reference": "Sécurité alimentaire : situation où toutes les personnes ont, à tout moment, accès à une nourriture suffisante, saine et nutritive (FAO, 1996).\nInsécurité alimentaire : situation où une personne n'a pas accès de façon régulière à une alimentation suffisante et de qualité.\nSous-nutrition : apport alimentaire insuffisant en quantité (pas assez de calories). Environ 700 millions de personnes souffraient de la faim dans le monde au milieu des années 2020 (FAO), soit environ une personne sur onze ou douze.\nMalnutrition : alimentation déséquilibrée en qualité (carences en vitamines, protéines ou fer, ou excès de graisses et de sucres). L'obésité est aussi une forme de malnutrition, en hausse dans le monde.\nFamine : situation de manque extrême de nourriture qui touche toute une population et provoque de nombreux décès.\nRégions les plus touchées : Afrique subsaharienne (Sahel, Corne de l'Afrique), Asie du Sud, Haïti, Yémen, régions en guerre.\nCauses : pauvreté (on ne peut pas acheter la nourriture), conflits et guerres, sécheresses et inondations, hausse des prix agricoles, mauvaises infrastructures (routes, stockage).\nParadoxe : la production mondiale suffirait à nourrir l'humanité, mais elle est inégalement répartie. Environ un tiers de la nourriture produite dans le monde est perdu ou gaspillé.\nActeurs de la lutte contre la faim : FAO (Organisation des Nations unies pour l'alimentation et l'agriculture), PAM (Programme alimentaire mondial, aide d'urgence), ONG (Action contre la faim), États.\nAgriculture durable : produire suffisamment tout en respectant l'environnement et en assurant un revenu correct aux paysans.\nAgriculture biologique : sans engrais chimiques ni pesticides de synthèse. Agroécologie : agriculture qui s'appuie sur le fonctionnement des écosystèmes (rotation des cultures, haies, association cultures-élevage).\nCommerce équitable : commerce qui garantit aux petits producteurs du Sud un prix juste et stable (café, cacao, bananes).\nMéthode : lire une carte de la sous-nutrition dans le monde et identifier les régions les plus touchées."
+    },
+    {
+      "id": "le-changement-global-et-climatique",
+      "titre": "Le changement global et le réchauffement climatique",
+      "ordre": 10,
+      "periode": "T3",
+      "notions": [
+        "Définir le changement global (changement climatique, érosion de la biodiversité, transformation des milieux)",
+        "Distinguer climat et météo",
+        "Expliquer l'effet de serre et le rôle des activités humaines",
+        "Connaître les principales manifestations du réchauffement climatique",
+        "Identifier le rôle du GIEC et des conférences internationales (accord de Paris 2015)",
+        "Distinguer atténuation et adaptation"
+      ],
+      "motsCles": [
+        "changement global",
+        "changement climatique",
+        "réchauffement climatique",
+        "effet de serre",
+        "gaz à effet de serre",
+        "CO₂",
+        "GIEC",
+        "biodiversité",
+        "accord de Paris",
+        "atténuation",
+        "adaptation"
+      ],
+      "reference": "Météo : temps qu'il fait en un lieu à un moment donné. Climat : moyenne des conditions météorologiques d'un lieu sur une longue période (au moins 30 ans).\nChangement global : ensemble des transformations de la planète provoquées par les activités humaines : changement climatique, érosion de la biodiversité, pollution, artificialisation des sols.\nEffet de serre : phénomène naturel par lequel certains gaz de l'atmosphère retiennent une partie de la chaleur du Soleil renvoyée par la Terre. Sans lui, la température moyenne de la Terre serait d'environ −18 °C au lieu de +15 °C.\nGaz à effet de serre : vapeur d'eau, dioxyde de carbone (CO₂), méthane (CH₄)… Les activités humaines augmentent leur quantité dans l'atmosphère : combustion des énergies fossiles, déforestation, élevage, industrie.\nLe GIEC (Groupe d'experts intergouvernemental sur l'évolution du climat), créé en 1988, rassemble les travaux des scientifiques : selon lui, le réchauffement actuel est sans équivoque dû aux activités humaines.\nLa température moyenne de la Terre a augmenté d'environ 1,1 à 1,2 °C depuis la fin du XIXe siècle (période 1850-1900). 2024 est l'année la plus chaude jamais mesurée.\nManifestations : fonte des glaciers et de la banquise arctique, élévation du niveau de la mer (environ 20 cm depuis 1900), vagues de chaleur, sécheresses, pluies intenses et inondations plus fréquentes.\nÉrosion de la biodiversité : disparition d'espèces animales et végétales, accélérée par la destruction des milieux, la pollution et le changement climatique.\nPrincipaux émetteurs de CO₂ : Chine, États-Unis, Union européenne, Inde. Les pays riches ont émis la plus grande partie du CO₂ dans l'histoire ; les pays pauvres, qui ont peu émis, sont souvent les plus vulnérables.\nAccord de Paris (COP21, décembre 2015) : presque tous les États s'engagent à limiter le réchauffement nettement en dessous de 2 °C, si possible à 1,5 °C, par rapport à l'époque préindustrielle.\nAtténuation : réduire les émissions de gaz à effet de serre (énergies renouvelables, sobriété, transports moins polluants, reboisement).\nAdaptation : se préparer aux effets du changement climatique (digues, cultures résistantes à la sécheresse, végétalisation des villes).\nMéthode : lire une courbe d'évolution des températures moyennes ; schéma de l'effet de serre."
+    },
+    {
+      "id": "les-effets-regionaux-du-changement-climatique",
+      "titre": "Les effets régionaux du changement climatique",
+      "ordre": 11,
+      "periode": "T3",
+      "notions": [
+        "Montrer que le changement climatique n'a pas les mêmes effets selon les régions",
+        "Étudier des espaces très exposés : Arctique, littoraux et deltas, petites îles, Sahel, montagnes",
+        "Comprendre la notion de vulnérabilité",
+        "Expliquer les migrations liées au climat (déplacés climatiques)",
+        "Identifier des mesures d'adaptation selon les territoires",
+        "Montrer que le changement climatique peut créer de nouvelles opportunités (routes maritimes arctiques)"
+      ],
+      "motsCles": [
+        "effets régionaux",
+        "vulnérabilité",
+        "adaptation",
+        "Arctique",
+        "banquise",
+        "élévation du niveau de la mer",
+        "delta",
+        "submersion",
+        "désertification",
+        "déplacé climatique",
+        "glacier",
+        "sécheresse"
+      ],
+      "reference": "Les effets du changement climatique varient selon les régions du monde et selon la capacité des sociétés à s'adapter.\nVulnérabilité : fragilité d'une population ou d'un territoire face à un danger. Elle est plus forte dans les pays pauvres, qui ont moins de moyens pour se protéger.\nArctique : la région se réchauffe environ trois à quatre fois plus vite que la moyenne mondiale. La banquise fond en été, ce qui menace les Inuits et la faune (ours polaire), mais ouvre de nouvelles routes maritimes et l'accès à des ressources (pétrole, gaz).\nLittoraux et deltas : l'élévation du niveau de la mer provoque l'érosion des côtes, la submersion et la salinisation des terres. Le Bangladesh, pays de delta très peuplé (Gange-Brahmapoutre), est très exposé aux inondations et aux cyclones.\nPetits États insulaires du Pacifique (Tuvalu, Kiribati, Maldives dans l'océan Indien) : leurs terres culminent à quelques mètres d'altitude et sont menacées de submersion.\nSahel (sud du Sahara) : sécheresses plus fréquentes, pluies irrégulières, risque de désertification (dégradation des sols qui deviennent stériles) ; insécurité alimentaire.\nMontagnes : recul rapide des glaciers (Alpes, Himalaya, Andes), menace sur les réserves d'eau des fleuves et sur les stations de ski de basse altitude.\nVilles : îlots de chaleur urbains, canicules plus fréquentes.\nDéplacés climatiques : personnes forcées de quitter leur lieu de vie à cause d'un événement climatique (sécheresse, inondation, montée des eaux). Elles se déplacent surtout à l'intérieur de leur propre pays.\nAdaptation : digues et protections du littoral (Pays-Bas), abris anticycloniques (Bangladesh), Grande Muraille verte au Sahel (reboisement de part et d'autre du Sahara), retenues d'eau, relocalisation des habitants, végétalisation des villes.\nEn France : recul du trait de côte (Lacanau, Soulac-sur-Mer), canicules, sécheresses, recul des glaciers alpins (mer de Glace).\nMéthode : localiser sur un planisphère les régions les plus exposées et légender une carte."
+    },
+    {
+      "id": "prevenir-les-risques-industriels-et-technologiques",
+      "titre": "Prévenir les risques industriels et technologiques",
+      "ordre": 12,
+      "periode": "T3",
+      "notions": [
+        "Définir le risque, l'aléa, l'enjeu et la vulnérabilité",
+        "Distinguer risques naturels et risques industriels ou technologiques",
+        "Étudier des catastrophes industrielles et technologiques (AZF, Bhopal, Tchernobyl, Fukushima)",
+        "Localiser des espaces exposés aux risques industriels",
+        "Connaître les moyens de prévention et de protection (directive Seveso, PPRT, information des habitants)",
+        "Comprendre l'inégale vulnérabilité des sociétés face aux risques"
+      ],
+      "motsCles": [
+        "risque",
+        "aléa",
+        "enjeu",
+        "vulnérabilité",
+        "risque industriel",
+        "risque technologique",
+        "catastrophe",
+        "prévention",
+        "Seveso",
+        "PPRT",
+        "culture du risque",
+        "résilience"
+      ],
+      "reference": "Risque : possibilité qu'un événement dangereux (aléa) touche une population et provoque des dégâts. Risque = aléa × vulnérabilité (enjeux exposés).\nAléa : phénomène dangereux qui peut se produire (explosion, incendie, fuite toxique, séisme, inondation).\nEnjeux : personnes, biens, activités et milieux exposés à l'aléa. Vulnérabilité : fragilité de ces enjeux face à l'aléa.\nRisques naturels : liés à un aléa naturel (séisme, cyclone, inondation). Risques industriels et technologiques : liés aux activités humaines (usines chimiques, centrales nucléaires, barrages, transport de matières dangereuses).\nCatastrophe : réalisation du risque, qui provoque d'importants dégâts humains, matériels et environnementaux.\nSeveso (Italie, 1976) : fuite de dioxine dans une usine chimique ; elle a donné son nom aux directives européennes Seveso (la première en 1982) qui classent et surveillent les sites dangereux. La France compte environ 1 300 sites Seveso.\nBhopal (Inde, décembre 1984) : fuite de gaz toxique dans une usine de pesticides ; des milliers de morts, la plus grave catastrophe industrielle de l'histoire.\nTchernobyl (Ukraine, alors en URSS, 26 avril 1986) : explosion d'un réacteur de centrale nucléaire ; nuage radioactif sur l'Europe, zone d'exclusion de 30 km autour de la centrale.\nAZF (Toulouse, 21 septembre 2001) : explosion d'un stock de nitrate d'ammonium dans une usine d'engrais ; 31 morts, des milliers de blessés et de logements endommagés.\nFukushima (Japon, 11 mars 2011) : un séisme suivi d'un tsunami provoque un accident nucléaire ; plus de 100 000 personnes évacuées.\nAutres exemples : explosion du port de Beyrouth (Liban, 4 août 2020, nitrate d'ammonium) ; incendie de l'usine Lubrizol à Rouen (26 septembre 2019).\nPrévention en France : PPRT (plans de prévention des risques technologiques, créés par une loi de 2003 après AZF) qui limitent les constructions autour des usines dangereuses ; contrôle des installations ; exercices dans les établissements scolaires (PPMS) ; sirène d'alerte testée le premier mercredi de chaque mois à midi ; DICRIM (document d'information communal sur les risques majeurs).\nCulture du risque : connaissance des risques et des bons comportements par la population. Résilience : capacité d'une société à se relever après une catastrophe.\nLes pays pauvres sont plus vulnérables : contrôles moins stricts, habitations proches des usines, moins de moyens de secours.\nMéthode : réaliser un schéma aléa / enjeux / risque ; étudier un plan de prévention autour d'une zone industrielle."
+    }
+  ]
+}

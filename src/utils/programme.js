@@ -7,12 +7,17 @@
 // -------------------------------------------------------
 
 // Classes dont le catalogue est publié (voir public/programme/<slug>/index.json).
-export const PROGRAMME_CLASSES = ['3ème']
+export const PROGRAMME_CLASSES = ['6ème', '5ème', '4ème', '3ème']
+// Classe montrée à qui n'a pas encore de programme (lycée) : la 3e, celle du brevet.
+export const PROGRAMME_FALLBACK = '3ème'
 
 // Matières de 3e couvertes en premier : les épreuves du brevet, plus la LV1.
 // Les noms sont EXACTEMENT ceux attendus par le reste de l'app
 // (subjectsLine dans aiPrompts.js, SUBJECT_MAP dans subjects.js) : le
 // regroupement de la page Cours, les mascottes et Progrès en dépendent.
+// 6e (cycle 3) : sciences et technologie forment une seule discipline.
+export const MATIERES_6E = ['Maths', 'Français', 'Histoire', 'Géographie', 'Sciences et technologie', 'Anglais']
+
 export const MATIERES_3E = [
   'Maths', 'Français', 'Histoire', 'Géographie',
   'SVT', 'Physique-Chimie', 'Technologie', 'Anglais',

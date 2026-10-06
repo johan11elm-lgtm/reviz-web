@@ -1,0 +1,383 @@
+{
+  "classe": "5ème",
+  "matiere": "Physique-Chimie",
+  "programme": "Physique-chimie cycle 4, partie habituellement traitée en 5e (BO spécial n°11 du 26/11/2015, ajusté BO n°31 du 30/07/2020)",
+  "modele": "claude-opus-5-5 (abonnement)",
+  "genereLe": "2026-10-05",
+  "relu": false,
+  "chapitres": [
+    {
+      "id": "etats-de-la-matiere",
+      "titre": "Les trois états de la matière",
+      "ordre": 1,
+      "periode": "T1",
+      "notions": [
+        "Distinguer les états solide, liquide et gazeux par leurs propriétés (forme propre, volume propre)",
+        "Savoir que la surface libre d'un liquide au repos est plane et horizontale",
+        "Reconnaître les trois états de l'eau dans la nature et au quotidien",
+        "Utiliser un modèle particulaire simple pour décrire chaque état",
+        "Mesurer un volume de liquide avec une éprouvette graduée",
+        "Convertir des unités de volume (L, mL, cm³, dm³)"
+      ],
+      "motsCles": [
+        "solide",
+        "liquide",
+        "gaz",
+        "forme propre",
+        "volume propre",
+        "surface libre",
+        "vapeur d'eau",
+        "modèle particulaire",
+        "éprouvette graduée",
+        "ménisque",
+        "litre",
+        "centimètre cube"
+      ],
+      "reference": "La matière existe principalement sous trois états physiques : solide, liquide et gazeux.\nUn solide (compact) a une forme propre et un volume propre : il ne change ni de forme ni de volume quand on le change de récipient.\nUne poudre (sucre, sable) est un solide : chaque grain garde sa forme propre.\nUn liquide n'a pas de forme propre (il prend la forme du récipient) mais il a un volume propre.\nAu repos, la surface libre d'un liquide est plane et horizontale.\nUn gaz n'a ni forme propre ni volume propre : il occupe tout l'espace qui lui est offert ; il est compressible et expansible.\nL'eau existe sous les trois états : glace (solide), eau liquide, vapeur d'eau (gaz).\nLa vapeur d'eau est invisible ; la buée, le brouillard et les nuages sont formés de fines gouttelettes d'eau liquide (ou de cristaux de glace).\nModèle particulaire : la matière est constituée de particules (molécules) très petites.\nSolide : particules serrées, ordonnées et presque immobiles. Liquide : particules serrées mais désordonnées, qui glissent les unes sur les autres. Gaz : particules très espacées, désordonnées et en mouvement rapide.\nLe volume d'un liquide se mesure avec une éprouvette graduée posée à plat : l'œil se place à la hauteur du bas du ménisque.\nLe volume d'un solide peut se mesurer par déplacement d'eau : V(solide) = V(final) − V(initial).\nConversions : 1 L = 1 dm³ = 1 000 mL ; 1 mL = 1 cm³ ; 1 m³ = 1 000 L.\nExemple : 250 mL = 0,25 L = 250 cm³."
+    },
+    {
+      "id": "changements-d-etat",
+      "titre": "Les changements d'état de l'eau",
+      "ordre": 2,
+      "periode": "T1",
+      "notions": [
+        "Nommer les changements d'état : fusion, solidification, vaporisation, liquéfaction, sublimation, condensation",
+        "Distinguer ébullition et évaporation",
+        "Connaître les températures de fusion (0 °C) et d'ébullition (100 °C) de l'eau pure à la pression atmosphérique normale",
+        "Interpréter le palier de température d'un corps pur sur une courbe de changement d'état",
+        "Savoir que la masse se conserve lors d'un changement d'état mais pas le volume",
+        "Expliquer pourquoi la glace flotte et pourquoi une bouteille pleine d'eau éclate au congélateur"
+      ],
+      "motsCles": [
+        "fusion",
+        "solidification",
+        "vaporisation",
+        "ébullition",
+        "évaporation",
+        "liquéfaction",
+        "sublimation",
+        "condensation",
+        "palier",
+        "température",
+        "thermomètre",
+        "conservation de la masse"
+      ],
+      "reference": "Un changement d'état est le passage d'un état physique à un autre ; la substance reste la même (l'eau reste de l'eau).\nFusion : solide → liquide. Solidification : liquide → solide.\nVaporisation : liquide → gaz. Liquéfaction : gaz → liquide (la buée sur une vitre froide est une liquéfaction de la vapeur d'eau ; dans le langage courant on parle souvent de condensation).\nSublimation : solide → gaz. Condensation (ou condensation solide) : gaz → solide (formation du givre).\nLa vaporisation peut être lente, à la surface du liquide et à toute température : c'est l'évaporation (linge qui sèche).\nElle peut être rapide, avec des bulles de vapeur dans tout le liquide : c'est l'ébullition.\nÀ la pression atmosphérique normale, l'eau pure fond (et se solidifie) à 0 °C et bout à 100 °C.\nPendant le changement d'état d'un corps pur, la température reste constante : la courbe température-temps présente un palier.\nUn mélange (eau salée par exemple) ne présente pas de palier net et se solidifie en dessous de 0 °C.\nLa température se mesure en degrés Celsius (°C) avec un thermomètre.\nLors d'un changement d'état, la masse se conserve : 100 g de glace donnent 100 g d'eau liquide.\nLe volume, lui, ne se conserve pas : l'eau qui gèle augmente de volume d'environ 9 %.\nConséquences : la glace flotte sur l'eau liquide ; une bouteille pleine d'eau peut éclater au congélateur ; le gel peut fendre les roches.\nCycle de l'eau : évaporation des océans, liquéfaction en nuages, précipitations, ruissellement."
+    },
+    {
+      "id": "masse-volume-masse-volumique",
+      "titre": "Masse, volume et masse volumique",
+      "ordre": 3,
+      "periode": "T1",
+      "notions": [
+        "Distinguer masse et volume et choisir l'instrument de mesure adapté",
+        "Mesurer une masse avec une balance et convertir les unités de masse",
+        "Mesurer le volume d'un solide par déplacement d'eau",
+        "Définir la masse volumique et la calculer avec ρ = m / V",
+        "Connaître la masse volumique de l'eau (1 g/cm³ = 1 kg/L)",
+        "Prévoir si un objet flotte ou coule en comparant des masses volumiques",
+        "Identifier une substance à partir de sa masse volumique"
+      ],
+      "motsCles": [
+        "masse",
+        "volume",
+        "balance",
+        "gramme",
+        "kilogramme",
+        "masse volumique",
+        "ρ",
+        "g/cm³",
+        "kg/L",
+        "flotter",
+        "couler",
+        "identifier"
+      ],
+      "reference": "La masse mesure la quantité de matière d'un objet ; elle se mesure avec une balance ; l'unité légale est le kilogramme (kg).\nConversions : 1 kg = 1 000 g ; 1 g = 1 000 mg ; 1 t = 1 000 kg.\nLe volume mesure la place occupée par un objet ; unités : m³, L ; 1 L = 1 dm³ = 1 000 cm³ ; 1 mL = 1 cm³.\nPour peser un liquide : on tare la balance avec le récipient vide, ou on soustrait la masse du récipient vide.\nVolume d'un solide de forme quelconque : on le plonge dans une éprouvette d'eau ; V(solide) = V(final) − V(initial).\nLa masse volumique ρ (lettre grecque rhô) d'une substance est la masse d'une unité de volume de cette substance.\nFormule : ρ = m / V, avec m la masse et V le volume.\nUnités courantes : g/cm³, g/mL, kg/L, kg/m³ ; 1 g/cm³ = 1 kg/L = 1 000 kg/m³.\nMasse volumique de l'eau liquide : environ 1 g/cm³ (1 L d'eau a une masse d'environ 1 kg).\nAutres valeurs : huile ≈ 0,92 g/cm³ ; glace ≈ 0,92 g/cm³ ; aluminium ≈ 2,7 g/cm³ ; fer ≈ 7,9 g/cm³ ; air ≈ 1,2 g/L.\nExemple : un objet de masse 54 g et de volume 20 cm³ a une masse volumique ρ = 54 ÷ 20 = 2,7 g/cm³ : il peut être en aluminium.\nLa masse volumique est une caractéristique d'une substance : elle permet de l'identifier (avec d'autres propriétés).\nUn objet plein flotte sur un liquide si sa masse volumique est inférieure à celle du liquide, il coule si elle est supérieure.\nL'huile flotte sur l'eau et la glace flotte sur l'eau liquide car leur masse volumique est plus faible que celle de l'eau."
+    },
+    {
+      "id": "corps-purs-et-melanges",
+      "titre": "Corps purs et mélanges",
+      "ordre": 4,
+      "periode": "T1",
+      "notions": [
+        "Distinguer un corps pur d'un mélange",
+        "Distinguer mélange homogène et mélange hétérogène",
+        "Savoir qu'une eau minérale est un mélange et lire son étiquette",
+        "Mettre en évidence la présence d'eau avec le sulfate de cuivre anhydre",
+        "Savoir qu'un corps pur se reconnaît à des caractéristiques fixes (température de changement d'état, masse volumique)"
+      ],
+      "motsCles": [
+        "corps pur",
+        "mélange",
+        "homogène",
+        "hétérogène",
+        "constituant",
+        "eau minérale",
+        "eau distillée",
+        "sels minéraux",
+        "sulfate de cuivre anhydre",
+        "test",
+        "résidu sec"
+      ],
+      "reference": "Un corps pur est constitué d'une seule espèce chimique (exemple : eau distillée, considérée comme de l'eau pure).\nUn mélange est constitué de plusieurs espèces chimiques, appelées constituants.\nMélange homogène : on ne distingue pas ses constituants à l'œil nu (eau sucrée, eau minérale, air, sirop dilué).\nMélange hétérogène : on distingue au moins deux constituants à l'œil nu (eau boueuse, eau et huile, jus d'orange avec pulpe).\nUne eau minérale est un mélange homogène : elle contient de l'eau et des sels minéraux dissous.\nL'étiquette d'une eau minérale indique la masse de chaque minéral dissous par litre, en mg/L (calcium, magnésium, sodium...).\nQuand on fait évaporer une eau minérale, il reste un dépôt solide : le résidu sec ; l'eau distillée ne laisse pas de résidu.\nTest de l'eau : le sulfate de cuivre anhydre, poudre blanche, devient bleu au contact de l'eau.\nCe test montre la présence d'eau mais ne dit pas si l'eau est pure.\nUn corps pur a des caractéristiques fixes : par exemple l'eau pure fond à 0 °C et bout à 100 °C (à la pression atmosphérique normale), avec un palier de température.\nUn mélange n'a pas de palier net de changement d'état : sa température varie pendant le changement d'état.\nDans la vie courante, le mot « pur » ne veut pas dire « corps pur » : une eau « pure » de source est en réalité un mélange."
+    },
+    {
+      "id": "dissolution-et-miscibilite",
+      "titre": "Dissolution et miscibilité",
+      "ordre": 5,
+      "periode": "T2",
+      "notions": [
+        "Définir soluté, solvant et solution",
+        "Savoir que la masse se conserve lors d'une dissolution",
+        "Définir une solution saturée et la solubilité",
+        "Savoir qu'un gaz peut se dissoudre dans l'eau",
+        "Distinguer liquides miscibles et non miscibles",
+        "Prévoir la position de deux liquides non miscibles"
+      ],
+      "motsCles": [
+        "dissolution",
+        "soluté",
+        "solvant",
+        "solution",
+        "soluble",
+        "insoluble",
+        "solubilité",
+        "saturée",
+        "miscible",
+        "non miscible",
+        "conservation de la masse"
+      ],
+      "reference": "La dissolution est l'action de dissoudre un soluté dans un solvant ; on obtient une solution.\nLe soluté est l'espèce qui se dissout (sel, sucre) ; le solvant est le liquide qui dissout (souvent l'eau) ; une solution dont le solvant est l'eau est une solution aqueuse.\nUn solide soluble se dissout dans le solvant ; un solide insoluble (sable) ne se dissout pas.\nLe soluté dissous ne disparaît pas : il devient invisible mais il est toujours présent (l'eau sucrée a un goût sucré).\nLors d'une dissolution, la masse se conserve : m(solution) = m(solvant) + m(soluté).\nExemple : 200 g d'eau + 10 g de sel donnent 210 g d'eau salée.\nOn ne peut pas dissoudre une quantité illimitée de soluté : quand le solvant ne peut plus en dissoudre, la solution est saturée et le soluté en excès reste au fond.\nLa solubilité est la masse maximale de soluté que l'on peut dissoudre dans un litre de solvant (environ 360 g de sel par litre d'eau à 20 °C ; environ 2 000 g de sucre).\nLa solubilité dépend du soluté, du solvant et de la température (le sucre se dissout mieux dans l'eau chaude).\nLes gaz peuvent aussi se dissoudre dans l'eau : dioxyde de carbone dans les boissons gazeuses, dioxygène dissous respiré par les poissons.\nDeux liquides sont miscibles s'ils forment un mélange homogène (eau et sirop, eau et alcool).\nDeux liquides sont non miscibles s'ils forment un mélange hétérogène (eau et huile).\nDans un mélange de liquides non miscibles, le liquide le moins dense (de plus faible masse volumique) se place au-dessus : l'huile flotte sur l'eau."
+    },
+    {
+      "id": "separer-les-constituants-d-un-melange",
+      "titre": "Séparer les constituants d'un mélange",
+      "ordre": 6,
+      "periode": "T2",
+      "notions": [
+        "Séparer un mélange hétérogène par décantation et par filtration",
+        "Utiliser une ampoule à décanter pour séparer deux liquides non miscibles",
+        "Récupérer un soluté par évaporation du solvant",
+        "Décrire le principe de la distillation",
+        "Séparer des colorants par chromatographie",
+        "Décrire les étapes de la potabilisation de l'eau"
+      ],
+      "motsCles": [
+        "décantation",
+        "filtration",
+        "filtre",
+        "filtrat",
+        "ampoule à décanter",
+        "évaporation",
+        "distillation",
+        "distillat",
+        "réfrigérant",
+        "chromatographie",
+        "potabilisation"
+      ],
+      "reference": "La décantation consiste à laisser reposer un mélange hétérogène : les particules solides plus denses tombent au fond ; on récupère ensuite le liquide au-dessus.\nLa filtration fait passer le mélange à travers un filtre (papier filtre dans un entonnoir) qui retient les particules solides ; le liquide récupéré est le filtrat.\nUn filtrat peut être limpide mais reste un mélange : la filtration ne retient pas les espèces dissoutes (le sel reste dans l'eau).\nOn réalise souvent une décantation puis une filtration pour obtenir un liquide limpide.\nL'ampoule à décanter sépare deux liquides non miscibles : on ouvre le robinet pour faire couler le liquide du bas.\nPour récupérer un soluté dissous, on fait évaporer le solvant (marais salants : le sel est récupéré après évaporation de l'eau de mer).\nLa distillation sépare les constituants d'un mélange homogène de liquides ou récupère le solvant : on chauffe le mélange, la vapeur est refroidie dans un réfrigérant et se liquéfie ; le liquide recueilli est le distillat.\nLa distillation de l'eau salée donne de l'eau distillée, sans sel.\nLa chromatographie sur papier sépare les colorants d'une encre ou d'un sirop : chaque colorant migre plus ou moins haut avec le solvant.\nUne tache qui ne se sépare pas correspond à un seul colorant ; un mélange donne plusieurs taches.\nPotabilisation de l'eau : dégrillage (gros déchets), décantation, filtration (sable, charbon), puis désinfection (chlore ou ozone).\nUne eau limpide n'est pas forcément potable : elle peut contenir des espèces dissoutes ou des microbes."
+    },
+    {
+      "id": "l-air-qui-nous-entoure",
+      "titre": "L'air qui nous entoure",
+      "ordre": 7,
+      "periode": "T2",
+      "notions": [
+        "Savoir que l'air est un mélange de gaz",
+        "Connaître la composition de l'air : environ 78 % de diazote et 21 % de dioxygène",
+        "Savoir que l'air a une masse (environ 1,2 g par litre)",
+        "Savoir que le dioxygène est indispensable à la respiration et aux combustions",
+        "Mettre en évidence le dioxyde de carbone avec l'eau de chaux",
+        "Citer des polluants de l'air et leurs origines"
+      ],
+      "motsCles": [
+        "air",
+        "mélange gazeux",
+        "diazote",
+        "dioxygène",
+        "dioxyde de carbone",
+        "argon",
+        "masse d'un litre d'air",
+        "eau de chaux",
+        "respiration",
+        "pollution",
+        "atmosphère"
+      ],
+      "reference": "L'air est un mélange homogène de gaz ; il forme l'atmosphère autour de la Terre.\nComposition de l'air (en volume) : environ 78 % de diazote, 21 % de dioxygène et 1 % d'autres gaz (argon, dioxyde de carbone, vapeur d'eau...).\nPour retenir : environ 4/5 de diazote et 1/5 de dioxygène.\nDans 100 L d'air, il y a environ 78 L de diazote et 21 L de dioxygène.\nLe dioxyde de carbone ne représente qu'environ 0,04 % de l'air, mais il joue un rôle important dans l'effet de serre.\nL'air est un gaz : il n'a ni forme ni volume propre et il est compressible (on peut l'enfermer dans une seringue bouchée et le comprimer).\nL'air a une masse : 1 L d'air a une masse d'environ 1,2 g (à 20 °C, à la pression atmosphérique normale).\nLe dioxygène est indispensable à la respiration des êtres vivants et aux combustions (un feu s'éteint sans dioxygène).\nLe diazote est un gaz qui n'intervient ni dans la respiration ni dans les combustions courantes.\nTest du dioxyde de carbone : l'eau de chaux, limpide, se trouble (devient blanchâtre) en présence de dioxyde de carbone.\nL'air que nous expirons contient moins de dioxygène et plus de dioxyde de carbone que l'air inspiré.\nPolluants de l'air : particules fines, oxydes d'azote, monoxyde de carbone (gaz toxique), dioxyde de soufre ; ils proviennent surtout des transports, du chauffage et de l'industrie."
+    },
+    {
+      "id": "circuit-electrique-simple",
+      "titre": "Le circuit électrique simple",
+      "ordre": 8,
+      "periode": "T2",
+      "notions": [
+        "Identifier les éléments d'un circuit : générateur, récepteurs, interrupteur, fils de connexion",
+        "Représenter un circuit par un schéma normalisé",
+        "Savoir qu'un courant ne circule que dans un circuit fermé (boucle)",
+        "Connaître le sens conventionnel du courant",
+        "Connaître le comportement d'une diode et d'une DEL (sens passant, sens bloquant)",
+        "Distinguer conducteurs et isolants électriques"
+      ],
+      "motsCles": [
+        "circuit électrique",
+        "générateur",
+        "borne",
+        "récepteur",
+        "interrupteur",
+        "schéma normalisé",
+        "circuit fermé",
+        "sens du courant",
+        "diode",
+        "DEL",
+        "conducteur",
+        "isolant"
+      ],
+      "reference": "Un circuit électrique comporte au moins un générateur (pile, batterie) et des récepteurs (lampe, moteur, DEL) reliés par des fils de connexion.\nChaque élément ayant deux bornes est un dipôle ; une pile a une borne positive (+) et une borne négative (−).\nLe courant électrique ne circule que si le circuit forme une boucle fermée sans interruption.\nUn interrupteur ouvert coupe la boucle : le circuit est ouvert et le courant ne circule pas ; fermé, il laisse passer le courant.\nOn représente un circuit par un schéma avec des symboles normalisés : pile (un grand trait et un petit trait), lampe (cercle avec une croix), moteur (cercle avec la lettre M), interrupteur, diode (triangle et barre).\nDans un schéma, les fils sont représentés par des traits droits et le circuit forme un rectangle.\nPar convention, le courant sort par la borne + du générateur, traverse le circuit et revient par la borne −.\nSi on inverse les bornes de la pile, le moteur tourne dans l'autre sens.\nUne diode (ou une DEL, diode électroluminescente) ne laisse passer le courant que dans un sens : le sens passant ; dans l'autre sens elle est bloquante.\nUn matériau conducteur laisse passer le courant : les métaux (cuivre, fer, aluminium), le graphite (mine de crayon), l'eau salée.\nUn matériau isolant ne laisse pas passer le courant : plastique, verre, bois sec, caoutchouc, air.\nTest : on insère l'objet dans un circuit avec une lampe ; si la lampe brille, l'objet est conducteur.\nLe corps humain est conducteur : c'est pourquoi le courant du secteur est dangereux."
+    },
+    {
+      "id": "circuits-serie-et-derivation",
+      "titre": "Circuits en série et en dérivation",
+      "ordre": 9,
+      "periode": "T2",
+      "notions": [
+        "Reconnaître un circuit en série (une seule boucle)",
+        "Reconnaître un circuit en dérivation (plusieurs boucles, nœuds, branches)",
+        "Comparer le fonctionnement des récepteurs en série et en dérivation",
+        "Identifier un court-circuit et en connaître les dangers",
+        "Savoir pourquoi l'installation domestique est en dérivation",
+        "Connaître les règles de sécurité électrique et le rôle des fusibles et disjoncteurs"
+      ],
+      "motsCles": [
+        "série",
+        "dérivation",
+        "boucle",
+        "nœud",
+        "branche principale",
+        "branche dérivée",
+        "court-circuit",
+        "fusible",
+        "disjoncteur",
+        "secteur",
+        "230 V",
+        "sécurité électrique"
+      ],
+      "reference": "Dans un circuit en série, les dipôles sont branchés les uns à la suite des autres et forment une seule boucle.\nEn série, l'ordre des dipôles n'a pas d'importance ; si un dipôle est retiré ou si une lampe grille, le circuit est ouvert et plus rien ne fonctionne.\nEn série, plus on ajoute de lampes identiques, moins elles brillent.\nDans un circuit en dérivation, il y a plusieurs boucles ; un nœud est un point relié à au moins trois fils.\nLa branche qui contient le générateur est la branche principale ; les autres sont les branches dérivées.\nEn dérivation, les branches fonctionnent de manière indépendante : si une lampe grille, les autres continuent de briller.\nLes appareils de la maison sont branchés en dérivation : on peut les allumer et les éteindre indépendamment.\nUn court-circuit se produit quand les deux bornes d'un dipôle sont reliées par un fil (de résistance quasi nulle) : le courant passe par le fil et le dipôle ne fonctionne plus.\nLe court-circuit d'un générateur est dangereux : le courant devient très intense, les fils et la pile chauffent, ce qui peut provoquer un incendie.\nLe fusible fond et le disjoncteur s'ouvre pour couper le courant en cas de court-circuit ou de surintensité.\nLa tension du secteur (230 V) est dangereuse : risque d'électrisation (et d'électrocution si elle est mortelle).\nRègles de sécurité : ne jamais toucher un appareil électrique avec des mains mouillées, ne rien introduire dans une prise, ne pas surcharger une multiprise, ne jamais faire d'expérience avec le secteur.\nLa prise de terre évacue le courant vers le sol en cas de défaut d'un appareil à carcasse métallique."
+    },
+    {
+      "id": "sources-et-conversions-d-energie",
+      "titre": "Sources, formes et conversions de l'énergie",
+      "ordre": 10,
+      "periode": "T3",
+      "notions": [
+        "Citer différentes formes d'énergie (cinétique, thermique, électrique, lumineuse, chimique, nucléaire)",
+        "Distinguer sources d'énergie renouvelables et non renouvelables",
+        "Identifier les conversions d'énergie réalisées par un convertisseur",
+        "Réaliser une chaîne énergétique (réservoir, convertisseur, formes d'énergie)",
+        "Savoir que l'énergie se conserve et qu'une partie est souvent « perdue » sous forme thermique",
+        "Connaître l'unité d'énergie : le joule (J)"
+      ],
+      "motsCles": [
+        "énergie",
+        "joule",
+        "forme d'énergie",
+        "source d'énergie",
+        "renouvelable",
+        "non renouvelable",
+        "combustible fossile",
+        "convertisseur",
+        "chaîne énergétique",
+        "conservation de l'énergie",
+        "énergie thermique"
+      ],
+      "reference": "L'énergie permet de produire un mouvement, de chauffer, d'éclairer, de faire fonctionner un appareil.\nL'unité d'énergie est le joule (J).\nFormes d'énergie : cinétique (liée au mouvement), de position (liée à la hauteur), thermique (liée à la température), électrique, lumineuse (rayonnante), chimique (stockée dans les aliments, les combustibles, les piles), nucléaire (stockée dans les noyaux d'atomes).\nUne source d'énergie renouvelable se renouvelle rapidement à l'échelle humaine : Soleil, vent, eau en mouvement, biomasse (bois), géothermie.\nUne source non renouvelable existe en quantité limitée : pétrole, charbon, gaz naturel (combustibles fossiles) et uranium.\nLa combustion des combustibles fossiles rejette du dioxyde de carbone, qui renforce l'effet de serre.\nUn convertisseur transforme une forme d'énergie en une autre.\nExemples : lampe (électrique → lumineuse + thermique), moteur (électrique → cinétique + thermique), pile (chimique → électrique), panneau photovoltaïque (lumineuse → électrique), éolienne (cinétique du vent → électrique), radiateur (électrique → thermique).\nUne chaîne énergétique représente les transferts : réservoir d'énergie → convertisseur → énergie utile, avec des flèches nommant chaque forme d'énergie.\nExemple : pile (énergie chimique) → énergie électrique → lampe → énergie lumineuse (utile) + énergie thermique (perdue).\nL'énergie ne se crée pas et ne disparaît pas : elle se conserve, elle se transforme d'une forme en une autre.\nL'énergie « perdue » (souvent thermique) n'est pas utile ; une lampe à DEL perd moins d'énergie qu'une lampe à incandescence pour le même éclairage.\nÉconomiser l'énergie : éteindre les appareils, isoler les bâtiments, préférer des appareils efficaces."
+    },
+    {
+      "id": "lumiere-sources-et-propagation",
+      "titre": "La lumière : sources et propagation",
+      "ordre": 11,
+      "periode": "T3",
+      "notions": [
+        "Distinguer source primaire de lumière et objet diffusant",
+        "Expliquer la condition de visibilité d'un objet (la lumière entre dans l'œil)",
+        "Savoir que la lumière se propage en ligne droite dans un milieu transparent et homogène",
+        "Modéliser la lumière par un rayon lumineux",
+        "Connaître la vitesse de la lumière dans le vide (environ 300 000 km/s)",
+        "Expliquer l'ombre propre et l'ombre portée",
+        "Définir l'année-lumière comme une unité de distance"
+      ],
+      "motsCles": [
+        "source primaire",
+        "objet diffusant",
+        "propagation rectiligne",
+        "rayon lumineux",
+        "faisceau",
+        "transparent",
+        "translucide",
+        "opaque",
+        "ombre propre",
+        "ombre portée",
+        "vitesse de la lumière",
+        "année-lumière"
+      ],
+      "reference": "Une source primaire de lumière produit sa propre lumière : Soleil, étoiles, flamme, lampe allumée.\nUn objet diffusant ne produit pas de lumière : il renvoie dans toutes les directions une partie de la lumière qu'il reçoit (Lune, cahier, mur).\nOn voit un objet quand de la lumière venant de cet objet entre dans l'œil.\nUn milieu transparent laisse passer la lumière et voir nettement à travers (air, eau, verre) ; translucide : il laisse passer la lumière mais on ne voit pas nettement (verre dépoli) ; opaque : il ne laisse pas passer la lumière (bois, métal).\nDans un milieu transparent et homogène, la lumière se propage en ligne droite : c'est la propagation rectiligne.\nOn modélise le trajet de la lumière par un rayon lumineux : une droite avec une flèche indiquant le sens de propagation.\nUn faisceau lumineux est un ensemble de rayons ; il peut être divergent, parallèle ou convergent.\nUn objet opaque éclairé présente une ombre propre (sa partie non éclairée) et projette une ombre portée sur un écran.\nLa zone de l'espace non éclairée derrière l'objet est le cône d'ombre ; la propagation rectiligne explique la forme des ombres.\nLa lumière se propage dans le vide à une vitesse d'environ 300 000 km/s (presque la même dans l'air).\nLa lumière du Soleil met environ 8 minutes pour parvenir jusqu'à la Terre.\nL'année-lumière (al) est une unité de distance : la distance parcourue par la lumière dans le vide en une année, environ 9 500 milliards de km.\nNe jamais regarder le Soleil directement, même avec des lunettes de soleil : cela peut abîmer les yeux définitivement."
+    },
+    {
+      "id": "decrire-un-mouvement",
+      "titre": "Décrire un mouvement",
+      "ordre": 12,
+      "periode": "T3",
+      "notions": [
+        "Décrire la trajectoire d'un objet : rectiligne, circulaire, curviligne",
+        "Savoir que le mouvement dépend de l'objet de référence choisi",
+        "Reconnaître un mouvement uniforme, accéléré ou ralenti",
+        "Exploiter une chronophotographie",
+        "Calculer une vitesse moyenne avec v = d / t",
+        "Utiliser les unités de vitesse m/s et km/h"
+      ],
+      "motsCles": [
+        "mouvement",
+        "trajectoire",
+        "rectiligne",
+        "circulaire",
+        "curviligne",
+        "référence",
+        "chronophotographie",
+        "uniforme",
+        "accéléré",
+        "ralenti",
+        "vitesse moyenne",
+        "km/h"
+      ],
+      "reference": "Décrire un mouvement, c'est préciser sa trajectoire et l'évolution de sa vitesse.\nLa trajectoire est l'ensemble des positions successives occupées par un point de l'objet au cours du temps.\nTrajectoire rectiligne : une droite ; circulaire : un cercle ou un arc de cercle ; curviligne : une courbe quelconque.\nUn mouvement se décrit toujours par rapport à un objet de référence : un passager assis dans un train est immobile par rapport au train mais en mouvement par rapport au quai.\nUne chronophotographie montre les positions d'un objet à intervalles de temps égaux.\nSi les points sont également espacés, la vitesse est constante : le mouvement est uniforme.\nSi l'écart entre les points augmente, le mouvement est accéléré ; s'il diminue, le mouvement est ralenti.\nExemple : mouvement rectiligne uniforme (voiture à vitesse constante sur une route droite) ; mouvement circulaire uniforme (point d'une roue qui tourne régulièrement).\nLa vitesse moyenne se calcule par v = d / t, avec d la distance parcourue et t la durée du parcours.\nUnités : si d est en mètres et t en secondes, v est en m/s ; si d est en km et t en heures, v est en km/h.\nExemple : 120 km parcourus en 2 h donnent v = 120 ÷ 2 = 60 km/h.\nExemple : 100 m parcourus en 10 s donnent v = 100 ÷ 10 = 10 m/s.\nConversion : 1 m/s = 3,6 km/h (10 m/s = 36 km/h).\nConnaissant la vitesse et la durée, on calcule la distance : d = v × t."
+    },
+    {
+      "id": "systeme-solaire-et-univers",
+      "titre": "Le Système solaire et l'Univers",
+      "ordre": 13,
+      "periode": "T3",
+      "notions": [
+        "Décrire le Système solaire : le Soleil, une étoile, et les huit planètes qui tournent autour",
+        "Distinguer planètes telluriques et planètes géantes gazeuses",
+        "Expliquer l'alternance jour-nuit par la rotation de la Terre et l'année par sa révolution",
+        "Expliquer les phases de la Lune",
+        "Connaître quelques ordres de grandeur de distances dans l'Univers",
+        "Situer le Système solaire dans la Voie lactée et dans l'Univers"
+      ],
+      "motsCles": [
+        "Soleil",
+        "étoile",
+        "planète",
+        "satellite",
+        "orbite",
+        "rotation",
+        "révolution",
+        "phases de la Lune",
+        "Système solaire",
+        "Voie lactée",
+        "galaxie",
+        "année-lumière"
+      ],
+      "reference": "Le Soleil est une étoile : une boule de gaz très chaud qui produit sa propre lumière.\nLe Système solaire est formé du Soleil et des objets qui tournent autour : huit planètes, leurs satellites, des planètes naines, des astéroïdes et des comètes.\nLes huit planètes dans l'ordre à partir du Soleil : Mercure, Vénus, la Terre, Mars, Jupiter, Saturne, Uranus, Neptune.\nLes quatre premières sont des planètes telluriques (rocheuses) ; Jupiter et Saturne sont des géantes gazeuses, Uranus et Neptune des géantes glacées (souvent regroupées avec les géantes gazeuses).\nUne planète ne produit pas de lumière : c'est un objet diffusant éclairé par le Soleil ; elle décrit une orbite presque circulaire autour du Soleil.\nUn satellite tourne autour d'une planète : la Lune est le satellite naturel de la Terre.\nLa Terre tourne sur elle-même en environ 24 h (rotation) : cela explique l'alternance du jour et de la nuit.\nLa Terre tourne autour du Soleil en environ 365,25 jours (révolution) : c'est une année.\nLa Lune tourne autour de la Terre en environ 27 jours ; le cycle de ses phases dure environ 29,5 jours.\nLes phases de la Lune (nouvelle lune, premier quartier, pleine lune, dernier quartier) s'expliquent car on voit depuis la Terre une partie plus ou moins grande de sa moitié éclairée par le Soleil.\nDistances : Terre-Lune environ 384 000 km ; Terre-Soleil environ 150 millions de km.\nLe Système solaire fait partie d'une galaxie, la Voie lactée, qui contient plus de 100 milliards d'étoiles ; l'Univers contient des milliards de galaxies.\nL'étoile la plus proche après le Soleil, Proxima du Centaure, est à environ 4,2 années-lumière.\nÂges : le Système solaire s'est formé il y a environ 4,6 milliards d'années ; l'Univers a environ 13,8 milliards d'années."
+    }
+  ]
+}

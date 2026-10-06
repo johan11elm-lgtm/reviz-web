@@ -1,0 +1,408 @@
+{
+  "classe": "5ème",
+  "matiere": "Français",
+  "programme": "Programme de français du cycle 4 (arrêté du 18 février 2026, BO n°10 du 5 mars 2026), classe de 5e : « Éprouver, expérimenter »",
+  "modele": "claude-opus-5-5 (abonnement)",
+  "genereLe": "2026-10-05",
+  "relu": false,
+  "chapitres": [
+    {
+      "id": "devenir-heroine-heros",
+      "titre": "Devenir héroïne/héros : destins romanesques",
+      "ordre": 1,
+      "periode": "T1",
+      "notions": [
+        "Définir le héros et l'héroïne : un personnage hors du commun par sa bravoure, ses exploits et ses valeurs",
+        "Connaître le roman de chevalerie médiéval et le code du chevalier (prouesse, loyauté, courtoisie, protection des faibles)",
+        "Situer Chrétien de Troyes et Perceval ou le Conte du Graal (vers 1180)",
+        "Repérer les étapes d'une quête et le rôle des adjuvants et des opposants",
+        "Comparer les représentations du héros de l'Antiquité à nos jours, de l'épopée au roman moderne",
+        "Repérer les stéréotypes du héros et leur remise en question (parodie, héroïnes, héros ordinaires)"
+      ],
+      "motsCles": [
+        "héros",
+        "héroïne",
+        "exploit",
+        "chevalier",
+        "quête",
+        "adoubement",
+        "roman de chevalerie",
+        "épopée",
+        "merveilleux",
+        "adjuvant",
+        "opposant",
+        "parodie"
+      ],
+      "reference": "Héros, héroïne : personnage principal qui dépasse l'humanité ordinaire par son courage, ses exploits et ses valeurs ; il agit souvent au service d'une communauté.\nPersonnage principal ≠ héros : un personnage peut être central sans être héroïque (antihéros, héros ordinaire).\nÉpopée : long poème qui célèbre les exploits d'un héros (ex. Homère, l'Odyssée ; La Chanson de Roland, chanson de geste de la fin du XIe siècle).\nRoman de chevalerie : récit médiéval (XIIe-XIIIe siècles), d'abord écrit en vers et en langue romane (ancien français), qui raconte les aventures des chevaliers.\nChrétien de Troyes : auteur du XIIe siècle, créateur des romans de la Table ronde (Lancelot ou le Chevalier de la charrette, Yvain ou le Chevalier au lion, Perceval ou le Conte du Graal, vers 1180, roman resté inachevé).\nPerceval : jeune Gallois naïf élevé par sa mère loin de la chevalerie, dans la Gaste Forêt ; il rencontre des chevaliers, se rend à la cour du roi Arthur, est formé par le sage Gornemant de Goort, puis voit le cortège du Graal chez le Roi Pêcheur sans oser poser de question.\nSégurant, le chevalier au dragon : roman arthurien du XIIIe siècle reconstitué à partir de fragments par Emanuele Arioli et publié en 2019.\nCode de la chevalerie : prouesse (courage au combat), loyauté envers son seigneur, largesse (générosité), courtoisie envers les dames, protection des faibles, foi chrétienne.\nAdoubement : cérémonie qui fait d'un jeune homme un chevalier (remise de l'épée et des éperons).\nQuête : recherche d'un objet ou d'un but, faite d'épreuves qui transforment le héros ; schéma actantiel : sujet, objet, adjuvants (aident), opposants (gênent).\nMerveilleux : surnaturel accepté sans surprise dans le récit (fées, enchanteurs comme Merlin, dragons, objets magiques).\nÉvolution du héros : de l'épopée au roman moderne, le héros « perd en superbe et gagne en banalité » ; il devient plus humain, avec doutes et faiblesses.\nParodie : Cervantès, Don Quichotte (1605 et 1615), se moque des romans de chevalerie à travers un gentilhomme qui se croit chevalier.\nRomans du programme : Alexandre Dumas, Le Comte de Monte-Cristo (1844-1846) ; Victor Hugo, Notre-Dame de Paris (1831) ; Charlotte Brontë, Jane Eyre (1847) ; Louisa May Alcott, Les Quatre Filles du docteur March (1868) ; J. R. R. Tolkien, Bilbo le Hobbit (1937).\nHéroïnes : Jane Eyre ou Jo March montrent des figures féminines courageuses et indépendantes qui bousculent les stéréotypes de leur époque.\nQuestion du programme : avons-nous encore besoin de héros aujourd'hui ? Quels personnages incarnent de nos jours le courage et la générosité ?\nMéthode : pour analyser un héros, relever ses qualités physiques et morales, ses actions, le regard des autres personnages et la manière dont le narrateur le présente."
+    },
+    {
+      "id": "formation-des-mots-et-relations-de-sens",
+      "titre": "Formation des mots et relations de sens",
+      "ordre": 2,
+      "periode": "T1",
+      "notions": [
+        "Décomposer un mot en préfixe, radical et suffixe pour en déduire le sens",
+        "Distinguer dérivation et composition et reconnaître une famille de mots",
+        "Connaître le sens de préfixes et suffixes fréquents, dont les suffixes péjoratifs",
+        "Identifier quelques racines latines et grecques (étymologie) et s'en servir pour l'orthographe",
+        "Reconnaître synonymie, antonymie, polysémie et homonymie",
+        "Distinguer sens propre et sens figuré, champ lexical et famille de mots"
+      ],
+      "motsCles": [
+        "radical",
+        "préfixe",
+        "suffixe",
+        "dérivation",
+        "composition",
+        "famille de mots",
+        "étymologie",
+        "synonyme",
+        "antonyme",
+        "polysémie",
+        "homonyme",
+        "champ lexical"
+      ],
+      "reference": "Radical : partie du mot qui porte le sens principal (lég- dans léger, alléger, légèreté).\nPréfixe : élément placé avant le radical, qui modifie le sens (re- : de nouveau ; in-/im-/il-/ir- : contraire ; pré- : avant ; dé- : action inverse).\nSuffixe : élément placé après le radical, qui change souvent la classe du mot (-ment : adverbe ; -eur : celui qui fait ; -able : qui peut être ; -té : nom de qualité).\nSuffixes péjoratifs (dépréciatifs) : -âtre (rougeâtre), -ard (chauffard), -aille (ferraille) ; suffixes diminutifs : -et, -ette (fillette), -on (chaton).\nDérivation : former un mot en ajoutant un préfixe et/ou un suffixe à un radical (heureux → malheureux, heureusement).\nComposition : former un mot en assemblant deux mots ou plus (porte-monnaie, chou-fleur, pomme de terre).\nFamille de mots : ensemble des mots formés sur le même radical (terre, terrain, terrestre, enterrer).\nÉtymologie : origine et histoire d'un mot ; beaucoup de mots français viennent du latin (aqua : eau → aquatique) ou du grec (graphein : écrire → biographie ; chronos : temps → chronologie).\nL'étymologie aide à l'orthographe : le t de « chant » se retrouve dans chanter ; le h de « hippodrome » vient du grec hippos, cheval.\nSynonymes : mots de sens proche (peur, crainte, frayeur) ; antonymes : mots de sens contraire (courageux / lâche).\nPolysémie : un même mot a plusieurs sens selon le contexte (une pièce de théâtre, une pièce de monnaie, une pièce de la maison).\nHomonymes : mots qui se prononcent de la même façon mais ont un sens différent (homophones : vers, verre, vert, ver).\nSens propre : sens premier et concret (un cœur qui bat) ; sens figuré : sens imagé (avoir le cœur sur la main).\nChamp lexical : ensemble des mots qui se rapportent à un même thème dans un texte (épée, bouclier, combat, armure → champ lexical de la guerre).\nNéologisme : mot nouvellement créé (courriel, formé à partir de « courrier électronique »).\nMéthode : face à un mot inconnu, utiliser le contexte, décomposer le mot, chercher un mot de la même famille, puis vérifier dans le dictionnaire."
+    },
+    {
+      "id": "types-et-formes-de-phrases",
+      "titre": "Types et formes de phrases",
+      "ordre": 3,
+      "periode": "T1",
+      "notions": [
+        "Reconnaître une phrase grâce à des indices graphiques (majuscule, ponctuation forte) et fonctionnels (sujet + verbe)",
+        "Identifier les trois types de phrases : déclarative, interrogative, injonctive",
+        "Reconnaître les formes exclamative, négative et passive",
+        "Distinguer interrogation totale et interrogation partielle",
+        "Connaître le rôle des principaux signes de ponctuation, en particulier la virgule",
+        "Analyser l'effet produit par le choix d'un type ou d'une forme de phrase dans un texte"
+      ],
+      "motsCles": [
+        "phrase",
+        "ponctuation",
+        "déclarative",
+        "interrogative",
+        "injonctive",
+        "exclamative",
+        "négative",
+        "passive",
+        "interrogation totale",
+        "interrogation partielle",
+        "virgule"
+      ],
+      "reference": "Phrase : suite de mots qui a un sens, commence par une majuscule et se termine par un point (. ? ! …) ; la phrase de base contient un groupe sujet et un groupe verbal.\nIl existe trois types de phrases ; chaque phrase appartient à un seul type.\nPhrase déclarative : elle donne une information ; se termine par un point. Ex. : « Perceval quitte sa mère. »\nPhrase interrogative : elle pose une question ; se termine par un point d'interrogation. Ex. : « Où vas-tu ? »\nPhrase injonctive : elle donne un ordre, un conseil ou une interdiction ; souvent à l'impératif. Ex. : « Ferme la porte. »\nInterrogation totale : on peut répondre par oui ou non (« Viendras-tu ? ») ; interrogation partielle : elle porte sur un élément et commence par un mot interrogatif (qui, que, où, quand, comment, pourquoi, combien).\nTrois manières de poser une question : intonation (« Tu viens ? », registre courant), « est-ce que » (« Est-ce que tu viens ? »), inversion du sujet (« Viens-tu ? », registre soutenu).\nFormes de phrases : une phrase peut être exclamative, négative ou passive, et cumuler ces formes avec son type.\nForme exclamative : elle exprime un sentiment fort (joie, colère, surprise) ; se termine par un point d'exclamation. Ex. : « Quel courage ! »\nForme négative : elle utilise une négation en deux parties : ne… pas, ne… jamais, ne… plus, ne… rien, ne… personne. À l'oral, le « ne » est souvent omis.\nForme passive : le sujet subit l'action ; verbe être + participe passé, complément d'agent introduit par « par ». Ex. : « Le dragon est vaincu par le chevalier. »\nVirgule : elle sépare des mots ou groupes juxtaposés (« épée, bouclier, lance ») et isole un complément circonstanciel placé en début de phrase (« Le lendemain, il partit. »).\nPoints de suspension : marquent une hésitation ou une phrase inachevée ; deux-points : annoncent une explication, une énumération ou des paroles.\nEffets : l'interrogation peut traduire le doute d'un personnage ; l'exclamation, son émotion ; l'injonction, son autorité."
+    },
+    {
+      "id": "conjugaison-des-temps-simples-et-composes",
+      "titre": "Conjuguer : radical, terminaison et temps",
+      "ordre": 4,
+      "periode": "T1",
+      "notions": [
+        "Décomposer une forme verbale en radical et terminaison (marques de temps et de personne)",
+        "Identifier mode, temps, personne et nombre d'une forme verbale",
+        "Conjuguer au présent, futur simple, imparfait et passé simple de l'indicatif et au présent de l'impératif",
+        "Former le passé composé et le plus-que-parfait avec l'auxiliaire être ou avoir",
+        "Conjuguer par analogie au passé antérieur et au futur antérieur",
+        "Repérer les radicaux des verbes irréguliers fréquents (être, avoir, faire, aller, pouvoir, voir, devoir, venir, vouloir)"
+      ],
+      "motsCles": [
+        "radical",
+        "terminaison",
+        "infinitif",
+        "groupe",
+        "mode",
+        "indicatif",
+        "impératif",
+        "temps simple",
+        "temps composé",
+        "auxiliaire",
+        "participe passé"
+      ],
+      "reference": "Forme verbale = radical (porte le sens du verbe) + terminaison (indique le temps, la personne et le nombre). Ex. : chant-ions → radical chant-, -i- marque de l'imparfait, -ons 1re personne du pluriel.\nTrois groupes : 1er groupe, verbes en -er (sauf aller) ; 2e groupe, verbes en -ir qui font -issons (finir → finissons) ; 3e groupe, tous les autres (prendre, venir, aller…).\nPrésent : -e, -es, -e, -ons, -ez, -ent (1er groupe) ; -s, -s, -t, -ons, -ez, -ent (2e groupe et beaucoup de verbes du 3e).\nImparfait : -ais, -ais, -ait, -ions, -iez, -aient pour tous les verbes, sur le radical de la 1re personne du pluriel du présent (nous finissons → je finissais).\nFutur simple : -ai, -as, -a, -ons, -ez, -ont ajoutés à l'infinitif (je chanterai) ou à un radical irrégulier (je serai, j'aurai, j'irai, je ferai, je pourrai, je verrai, je viendrai, je voudrai, je devrai).\nPassé simple : 1er groupe -ai, -as, -a, -âmes, -âtes, -èrent (il chanta) ; 2e groupe et nombreux verbes du 3e en -is (il finit, il prit) ; d'autres en -us (il voulut, il dut) ou -ins (il vint).\nPassé simple des verbes fréquents : être → il fut, ils furent ; avoir → il eut, ils eurent ; faire → il fit ; aller → il alla ; voir → il vit ; venir → il vint.\nImpératif présent : 3 personnes sans sujet exprimé (chante, chantons, chantez) ; pas de -s à la 2e personne du singulier des verbes en -er (sauf devant en et y : vas-y).\nTemps composés = auxiliaire avoir ou être conjugué + participe passé.\nPassé composé : auxiliaire au présent (il a chanté, elle est partie) ; plus-que-parfait : auxiliaire à l'imparfait (il avait chanté) ; passé antérieur : auxiliaire au passé simple (il eut chanté) ; futur antérieur : auxiliaire au futur (il aura chanté).\nAuxiliaire être : verbes de mouvement ou de changement d'état (aller, venir, partir, arriver, naître, mourir…) et verbes pronominaux ; avoir pour la plupart des autres verbes.\nTemps chronologique (passé, présent, futur dans la réalité) ≠ temps verbal (forme de conjugaison) : un présent peut raconter une action passée.\nMéthode pour identifier un temps : retrouver l'infinitif, isoler le radical et la terminaison, repérer un éventuel auxiliaire (même séparé du participe par un mot : « il n'a jamais su »)."
+    },
+    {
+      "id": "les-temps-du-recit",
+      "titre": "Les temps du récit et leurs valeurs",
+      "ordre": 5,
+      "periode": "T1",
+      "notions": [
+        "Connaître l'emploi du passé simple et de l'imparfait dans un récit au passé",
+        "Distinguer actions de premier plan et arrière-plan",
+        "Identifier les valeurs de l'imparfait (description, habitude, action en cours)",
+        "Employer le plus-que-parfait pour exprimer l'antériorité",
+        "Reconnaître le présent de narration et le présent de vérité générale",
+        "Rédiger un récit cohérent au passé en justifiant le choix des temps"
+      ],
+      "motsCles": [
+        "passé simple",
+        "imparfait",
+        "plus-que-parfait",
+        "premier plan",
+        "arrière-plan",
+        "action ponctuelle",
+        "habitude",
+        "description",
+        "antériorité",
+        "présent de narration",
+        "valeur"
+      ],
+      "reference": "Un récit au passé utilise surtout deux temps : le passé simple et l'imparfait.\nPassé simple : actions de premier plan, ponctuelles (limitées dans le temps), achevées et successives, qui font avancer l'histoire. Ex. : « Il saisit son épée, monta à cheval et partit. »\nImparfait : arrière-plan du récit ; il présente des actions vues dans leur durée, sans limites précises.\nValeurs de l'imparfait : description (« La forêt était sombre »), habitude ou répétition (« Chaque matin, il chassait »), action en cours interrompue par une action au passé simple (« Il dormait quand le dragon surgit »).\nPlus-que-parfait : action passée antérieure à une autre action passée (« Il retrouva l'épée qu'il avait perdue »). Il sert aussi aux retours en arrière.\nPassé antérieur : action antérieure à une action au passé simple, souvent après « quand », « dès que », « lorsque » (« Dès qu'il eut fini, il sortit »).\nPrésent de narration : présent employé dans un récit au passé pour rendre une action plus vivante (« Soudain, le géant s'avance… »).\nPrésent de vérité générale : énonce une vérité toujours valable (« La Terre tourne autour du Soleil » ; morale d'une fable).\nPrésent d'énonciation : action qui a lieu au moment où l'on parle (dialogues).\nPassé composé : temps du récit à la première personne ou des dialogues ; il exprime une action passée accomplie, en lien avec le présent.\nValeur temporelle : situe l'action dans le temps (passé, présent, futur) ; valeur aspectuelle : montre comment l'action est vue (achevée ou en cours, ponctuelle ou durable).\nMéthode : pour justifier un temps, se demander si l'action fait avancer l'histoire (passé simple) ou décrit le décor, une habitude, une durée (imparfait).\nErreurs fréquentes : confondre « il chanta » (passé simple) et « il chantait » (imparfait) ; « je chanterai » (futur) et « je chanterais » (conditionnel)."
+    },
+    {
+      "id": "voyager-en-poesie",
+      "titre": "Voyager en poésie : « Du monde entier au cœur du monde »",
+      "ordre": 6,
+      "periode": "T2",
+      "notions": [
+        "Comprendre que la poésie fait voyager dans des horizons réels, imaginaires et intérieurs",
+        "Connaître le vocabulaire de la versification : vers, strophe, rime, mètre",
+        "Compter les syllabes d'un vers (alexandrin, décasyllabe, octosyllabe) en tenant compte du e muet",
+        "Reconnaître les dispositions des rimes (plates, croisées, embrassées)",
+        "Identifier les principales images et les jeux sur les sonorités (comparaison, métaphore, personnification, anaphore, allitération, assonance)",
+        "Distinguer poème en vers réguliers, vers libres, poème en prose et haïku"
+      ],
+      "motsCles": [
+        "vers",
+        "strophe",
+        "rime",
+        "alexandrin",
+        "syllabe",
+        "comparaison",
+        "métaphore",
+        "personnification",
+        "anaphore",
+        "allitération",
+        "assonance",
+        "haïku"
+      ],
+      "reference": "Le titre de l'entrée reprend la formule « Du monde entier au cœur du monde » de Blaise Cendrars (1887-1961), poète voyageur, auteur de la Prose du Transsibérien (1913).\nLa poésie du voyage décrit des pays réels ou rêvés, mais aussi un voyage intérieur : souvenirs, émotions, rêves.\nExemples célèbres : Joachim du Bellay, « Heureux qui, comme Ulysse, a fait un beau voyage » (Les Regrets, 1558) ; Charles Baudelaire, « L'Invitation au voyage » (Les Fleurs du mal, 1857).\nMatsuo Bashô (1644-1694) : poète japonais, maître du haïku, auteur de journaux de voyage mêlant prose et poèmes.\nHaïku : court poème japonais de trois vers (traditionnellement 5, 7 et 5 syllabes) qui saisit un instant de la nature et évoque souvent une saison.\nVers : ligne d'un poème ; strophe : groupe de vers séparé par un blanc (quatrain : 4 vers ; tercet : 3 vers ; distique : 2 vers).\nMètre : nombre de syllabes d'un vers ; alexandrin : 12 syllabes ; décasyllabe : 10 ; octosyllabe : 8.\nLe e muet se prononce devant une consonne à l'intérieur du vers, mais ne compte pas devant une voyelle ni en fin de vers.\nRimes plates (AABB), croisées (ABAB), embrassées (ABBA).\nSonnet : poème de 14 vers, deux quatrains suivis de deux tercets.\nVers libres : vers sans nombre de syllabes fixe ni rimes obligatoires ; poème en prose : poème sans vers, en paragraphes.\nComparaison : rapproche deux éléments à l'aide d'un outil (comme, tel, pareil à, ressembler) : « La mer est comme un miroir. » Métaphore : même rapprochement sans outil : « La mer, miroir immense ».\nPersonnification : attribuer des caractéristiques humaines à une chose ou un animal (« le vent chante »).\nAnaphore : répétition d'un même mot ou groupe en début de vers ou de phrase.\nAllitération : répétition d'un même son consonne ; assonance : répétition d'un même son voyelle.\nMéthode : lire le poème à voix haute, relever le thème, les images, les sonorités, puis dire quelles impressions ou émotions elles créent.\nŒuvres proposées : Cendrars, Du monde entier au cœur du monde ; Andrée Chedid ; Raymond Queneau, Battre la campagne ; Anna de Noailles ; Abdellatif Laâbi ; Jules Supervielle."
+    },
+    {
+      "id": "classes-de-mots",
+      "titre": "Les classes de mots : déterminants, pronoms et mots invariables",
+      "ordre": 7,
+      "periode": "T2",
+      "notions": [
+        "Identifier les classes de mots variables : nom, verbe, adjectif, déterminant, pronom",
+        "Identifier les classes de mots invariables : adverbe, préposition, conjonction de coordination, conjonction de subordination",
+        "Distinguer déterminant et pronom (le, la, les, leur)",
+        "Reconnaître les pronoms personnels, démonstratifs et indéfinis et retrouver leur référent",
+        "Connaître les principales conjonctions de coordination et prépositions",
+        "Utiliser la substitution pour trouver la classe d'un mot"
+      ],
+      "motsCles": [
+        "classe grammaticale",
+        "nature",
+        "déterminant",
+        "pronom",
+        "référent",
+        "adverbe",
+        "préposition",
+        "conjonction de coordination",
+        "conjonction de subordination",
+        "pronom relatif",
+        "substitution"
+      ],
+      "reference": "Classe grammaticale (ou nature) : catégorie à laquelle appartient un mot ; elle ne change pas, contrairement à la fonction qui dépend de la phrase.\nMots variables : nom, déterminant, adjectif, pronom, verbe. Mots invariables : adverbe, préposition, conjonction, interjection.\nDéterminant : se place devant un nom et forme avec lui un groupe nominal : articles (le, un, du), possessifs (mon, leur), démonstratifs (ce, cette), indéfinis (chaque, plusieurs), numéraux (deux), interrogatifs et exclamatifs (quel).\nPronom : remplace un nom ou un groupe nominal (son référent) ou désigne un participant de la communication.\nPronoms personnels : je, tu, il, elle, nous, vous, ils, elles, me, te, se, le, la, les, lui, leur, en, y. Ex. : « Il m'entend » (me = COD) ; « Je te parle » (te = COI).\nPronoms démonstratifs : celui, celle, ceux, ce, ceci, cela, ça ; pronoms indéfinis : quelqu'un, personne, rien, chacun, tout, on.\nDéterminant ou pronom ? Devant un nom : déterminant (« les chevaliers ») ; devant un verbe : pronom (« il les appelle »). « Leur » devant un nom est déterminant et varie (leurs chevaux) ; devant un verbe, pronom invariable (je leur parle).\nAdverbe : mot invariable qui modifie le sens d'un verbe, d'un adjectif ou d'un autre adverbe (vite, très, souvent, ne… pas, courageusement).\nPréposition : mot invariable qui introduit un complément (à, de, par, pour, sans, avec, dans, en, chez, sur, sous, vers).\nConjonctions de coordination : mais, ou, et, donc, or, ni, car ; elles relient deux mots, groupes ou propositions de même fonction.\nMots subordonnants : conjonctions de subordination (que, quand, si, parce que, lorsque, comme) et pronoms relatifs (qui, que, quoi, dont, où) ; ils introduisent une proposition subordonnée.\nMéthode de substitution : remplacer le mot par un autre de la même classe ; ex. « la » remplaçable par « une » → déterminant ; remplaçable par « lui » ou un nom → pronom.\nRéférent : mot ou groupe que le pronom reprend ; il peut être éloigné dans le texte : il faut le retrouver pour bien comprendre."
+    },
+    {
+      "id": "groupe-nominal-et-accords",
+      "titre": "Le groupe nominal et ses accords",
+      "ordre": 8,
+      "periode": "T2",
+      "notions": [
+        "Distinguer groupe nominal minimal et groupe nominal étendu",
+        "Identifier le nom noyau et ses expansions : adjectif épithète, complément du nom, proposition subordonnée relative",
+        "Remplacer un groupe nominal par un pronom pour le délimiter",
+        "Maîtriser la chaîne d'accord dans le groupe nominal (déterminant, nom, adjectif)",
+        "Former le féminin et le pluriel des noms et des adjectifs",
+        "Employer des groupes nominaux étendus pour décrire avec précision"
+      ],
+      "motsCles": [
+        "groupe nominal",
+        "nom noyau",
+        "déterminant",
+        "expansion",
+        "adjectif épithète",
+        "complément du nom",
+        "proposition relative",
+        "chaîne d'accord",
+        "genre",
+        "nombre"
+      ],
+      "reference": "Groupe nominal (GN) : groupe de mots organisé autour d'un nom, appelé nom noyau.\nGN minimal : déterminant + nom (« un chevalier ») ; certains noms propres forment seuls un GN (« Perceval »).\nGN étendu : GN minimal enrichi d'une ou plusieurs expansions (« un jeune chevalier gallois à l'armure rouge »).\nExpansions du nom : adjectif épithète (« un chevalier courageux ») ; complément du nom, introduit par une préposition (« l'épée du roi », « une tasse à café ») ; proposition subordonnée relative (« le chevalier qui combat le dragon »).\nLes expansions sont supprimables : on retrouve alors le GN minimal.\nPour délimiter un GN, on peut le remplacer par un pronom : « Le jeune chevalier gallois part » → « Il part ».\nChaîne d'accord : dans le GN, le déterminant et l'adjectif s'accordent en genre et en nombre avec le nom noyau (« de belles princesses courageuses »).\nLe complément du nom ne s'accorde pas avec le nom noyau : « des robes de soie » (soie reste au singulier).\nSi l'adjectif qualifie plusieurs noms, il se met au pluriel ; si l'un des noms est masculin, l'adjectif est au masculin pluriel (« un roi et une reine généreux »).\nPluriel des noms et adjectifs : en général -s ; -x pour les mots en -eau, -au, -eu (des châteaux, des feux) ; -al → -aux (un cheval, des chevaux), sauf bal, carnaval, festival, chacal, récital, régal.\nFéminin des adjectifs : en général + e ; doublement de la consonne (bon → bonne, cruel → cruelle) ; -eux → -euse ; -if → -ive ; -er → -ère.\nMéthode pour accorder : repérer le nom noyau, trouver son genre et son nombre, puis vérifier chaque mot qui en dépend (flèches d'accord).\nEffet : les GN étendus permettent des descriptions précises (portrait d'un héros, paysage d'un poème)."
+    },
+    {
+      "id": "fonctions-dans-la-phrase",
+      "titre": "Les fonctions dans la phrase : sujet, compléments d'objet et circonstanciels",
+      "ordre": 9,
+      "periode": "T2",
+      "notions": [
+        "Identifier le sujet, y compris lorsqu'il est un pronom ou séparé du verbe",
+        "Distinguer complément d'objet direct (COD) et complément d'objet indirect (COI), notamment sous forme de pronom",
+        "Identifier les compléments circonstanciels de lieu, de temps, de manière et de cause",
+        "Distinguer compléments essentiels (non supprimables) et compléments circonstanciels (supprimables, déplaçables)",
+        "Utiliser les manipulations syntaxiques : suppression, déplacement, pronominalisation, encadrement par « c'est… qui / que »",
+        "Verbaliser son raisonnement pour justifier une fonction"
+      ],
+      "motsCles": [
+        "fonction",
+        "sujet",
+        "verbe",
+        "COD",
+        "COI",
+        "complément circonstanciel",
+        "lieu",
+        "temps",
+        "manière",
+        "cause",
+        "encadrement",
+        "pronominalisation"
+      ],
+      "reference": "Fonction : rôle d'un mot ou d'un groupe dans la phrase ; un même mot peut avoir des fonctions différentes selon les phrases.\nSujet : indique de qui ou de quoi on parle ; il commande l'accord du verbe. Pour le trouver : « C'est … qui » + verbe (« C'est le chevalier qui part »).\nLe sujet peut être un nom, un GN, un pronom ou un infinitif ; il peut être séparé du verbe (« Le roi, furieux, se lève ») ou placé après lui (« Arrive alors un messager »).\nCOD : complément du verbe construit sans préposition ; il répond à la question « qui ? » ou « quoi ? » posée après le verbe (« Perceval cherche le Graal »).\nCOI : complément du verbe construit avec une préposition (à, de) ; il répond à « à qui ? », « à quoi ? », « de qui ? », « de quoi ? » (« Il parle à sa mère », « Il se souvient de son père »).\nCOD et COI sous forme de pronom placé avant le verbe : « Il m'entend » (me = COD, entendre quelqu'un) ; « Je te parle » (te = COI, parler à quelqu'un) ; « Je la vois » (COD) ; « Je lui réponds » (COI).\nCOD et COI sont des compléments essentiels : on ne peut généralement ni les supprimer ni les déplacer.\nCompléments circonstanciels (CC) : ils donnent des précisions sur les circonstances de l'action ; on peut souvent les supprimer et les déplacer.\nCC de lieu : où ? (« dans la forêt ») ; CC de temps : quand ? (« le lendemain ») ; CC de manière : comment ? (« avec courage », « prudemment ») ; CC de cause : pourquoi ? (« à cause de la tempête », « par jalousie »).\nLes CC peuvent être des GN, des groupes prépositionnels, des adverbes ou des propositions subordonnées.\nUn CC placé en début de phrase est souvent suivi d'une virgule (« Au lever du jour, les chevaliers partirent. »).\nManipulations : suppression (le groupe est-il essentiel ?), déplacement (est-il mobile ?), pronominalisation (le/la/les → COD ; lui/leur → COI), encadrement par « c'est… qui » (sujet).\nPiège : « Il marche la nuit » : « la nuit » n'est pas COD mais CC de temps (on peut dire « la nuit, il marche »)."
+    },
+    {
+      "id": "theatre-societe-sens-dessus-dessous",
+      "titre": "Expérimenter et jouer au théâtre : la société sens dessus dessous",
+      "ordre": 10,
+      "periode": "T2",
+      "notions": [
+        "Connaître le vocabulaire du texte théâtral : acte, scène, réplique, tirade, monologue, aparté, didascalie",
+        "Comprendre la double énonciation et les étapes d'une pièce (exposition, nœud, dénouement)",
+        "Identifier les formes du comique : de mots, de gestes, de situation, de caractère, de répétition",
+        "Connaître la farce médiévale, la commedia dell'arte et la comédie de Molière",
+        "Analyser le renversement des rapports entre maîtres et valets et la critique de la société",
+        "Mettre en voix et en espace une scène de comédie"
+      ],
+      "motsCles": [
+        "comédie",
+        "farce",
+        "commedia dell'arte",
+        "Molière",
+        "valet",
+        "réplique",
+        "didascalie",
+        "aparté",
+        "quiproquo",
+        "comique de situation",
+        "double énonciation",
+        "dénouement"
+      ],
+      "reference": "Le texte théâtral est écrit pour être joué devant des spectateurs ; il se compose de répliques et de didascalies.\nActe : grande partie d'une pièce ; scène : partie d'un acte, qui change à chaque entrée ou sortie d'un personnage.\nRéplique : paroles d'un personnage en réponse à un autre ; tirade : longue réplique ; monologue : personnage seul sur scène qui parle ; aparté : paroles que le personnage dit pour lui-même, entendues du public mais pas des autres personnages.\nDidascalies : indications de l'auteur (souvent en italique) sur le décor, les gestes, le ton, les entrées et sorties.\nDouble énonciation : les personnages se parlent entre eux, mais l'auteur s'adresse en même temps au public.\nStructure : scène d'exposition (présente personnages et situation), nœud (obstacles), dénouement (résolution, souvent heureuse dans la comédie : mariages, réconciliations).\nFarce : courte pièce comique du Moyen Âge (XVe siècle), au comique grossier de gestes et de situation (ex. La Farce du cuvier, La Farce de maître Pathelin).\nCommedia dell'arte : théâtre italien (XVIe siècle) joué par des acteurs masqués qui improvisent à partir d'un canevas, avec des personnages types (Arlequin, Pantalon, Scapino).\nMolière (Jean-Baptiste Poquelin, 1622-1673) : comédien et auteur ; L'Avare (1668), dont l'avare Harpagon s'inspire de La Marmite de Plaute ; Les Fourberies de Scapin (1671).\nLes Fourberies de Scapin : le valet rusé Scapin aide les jeunes Octave et Léandre contre leurs pères, Argante et Géronte ; scène de la galère (« Que diable allait-il faire dans cette galère ? », acte II, scène 7) ; scène du sac (acte III, scène 2), où Scapin roue de coups Géronte caché dans un sac.\nFormes du comique : de mots (jeux de mots, langage déformé), de gestes (coups de bâton, chutes), de situation (quiproquo, personnage caché), de caractère (défaut exagéré : avarice, crédulité), de répétition.\nQuiproquo : malentendu où un personnage prend une personne ou une chose pour une autre.\nSociété sens dessus dessous : le valet rusé domine son maître, les jeunes l'emportent sur les pères ; ce renversement, hérité du carnaval, fait rire et critique les abus des puissants.\nMolière veut « corriger les mœurs en divertissant » : le rire montre les défauts humains comme dans un miroir grossissant.\nAutres œuvres : Carlo Goldoni, La Locandiera (1753) ; Jules Romains, Knock ou le Triomphe de la médecine (1923) ; Shakespeare, Beaucoup de bruit pour rien."
+    },
+    {
+      "id": "phrase-simple-et-phrase-complexe",
+      "titre": "Phrase simple, phrase complexe : juxtaposition, coordination, subordination",
+      "ordre": 11,
+      "periode": "T3",
+      "notions": [
+        "Distinguer phrase simple, phrase complexe et phrase non verbale",
+        "Compter les propositions d'une phrase en repérant les verbes conjugués",
+        "Reconnaître la juxtaposition et la coordination et en analyser les effets",
+        "Reconnaître une relation de subordination grâce au mot subordonnant",
+        "Utiliser les connecteurs pour enchaîner les phrases et assurer la cohérence d'un texte",
+        "Corriger les erreurs de construction dans ses écrits"
+      ],
+      "motsCles": [
+        "phrase simple",
+        "phrase complexe",
+        "phrase non verbale",
+        "proposition",
+        "verbe conjugué",
+        "juxtaposition",
+        "coordination",
+        "subordination",
+        "proposition principale",
+        "proposition subordonnée",
+        "connecteur"
+      ],
+      "reference": "Phrase verbale : construite autour d'au moins un verbe conjugué ; phrase non verbale : sans verbe conjugué (« Silence ! », « Quelle aventure ! »), fréquente à l'oral, dans les titres et les didascalies.\nProposition : partie de phrase organisée autour d'un verbe conjugué ; une phrase contient autant de propositions que de verbes conjugués.\nPhrase simple : une seule proposition (« Le chevalier entre dans la forêt. »).\nPhrase complexe : au moins deux propositions (« Le chevalier entre dans la forêt et il découvre un château. »).\nJuxtaposition : propositions reliées par un signe de ponctuation (virgule, point-virgule, deux-points) : « Il arriva, il vit, il vainquit. »\nCoordination : propositions reliées par une conjonction de coordination (mais, ou, et, donc, or, ni, car) ou un adverbe de liaison (puis, ensuite, alors) : « Il appela, mais personne ne répondit. »\nEffets : la juxtaposition donne du rythme et de la rapidité ; la coordination explicite le lien logique (opposition avec mais, conséquence avec donc, cause avec car).\nSubordination : une proposition subordonnée dépend d'une proposition principale ; elle est introduite par un mot subordonnant (pronom relatif qui, que, dont, où ; conjonction de subordination que, quand, parce que, si…). Ex. : « Il partit [quand le jour se leva]. »\nEn 5e, on reconnaît la relation de subordination sans avoir à nommer les types de subordonnées.\nMéthode : 1) souligner les verbes conjugués ; 2) délimiter les propositions ; 3) repérer ce qui les relie (ponctuation, conjonction de coordination, mot subordonnant).\nConnecteurs pour enchaîner les phrases : temporels (d'abord, ensuite, enfin, ce matin-là) ; logiques (car, donc, pourtant, en effet).\nErreurs fréquentes : phrases sans verbe conjugué non voulues, propositions mal reliées, oubli de la virgule avant « mais »."
+    },
+    {
+      "id": "attribut-du-sujet-et-accords",
+      "titre": "L'attribut du sujet et les accords dans la phrase",
+      "ordre": 12,
+      "periode": "T3",
+      "notions": [
+        "Identifier l'attribut du sujet et les verbes attributifs (être, paraître, sembler, devenir, demeurer, rester, avoir l'air)",
+        "Repérer l'emploi occasionnellement attributif de certains verbes (rester, tomber, passer pour)",
+        "Accorder l'attribut du sujet avec le sujet",
+        "Accorder le verbe avec son sujet dans les cas complexes (sujet éloigné, sujet composé de plusieurs noms)",
+        "Accorder le participe passé employé avec être et avec avoir (COD placé après le verbe, pronom COD ou COI placé avant)",
+        "Justifier un accord à l'oral ou à l'écrit en verbalisant son raisonnement"
+      ],
+      "motsCles": [
+        "attribut du sujet",
+        "verbe attributif",
+        "verbe d'état",
+        "accord sujet-verbe",
+        "sujet inversé",
+        "participe passé",
+        "auxiliaire être",
+        "auxiliaire avoir",
+        "COD",
+        "COI",
+        "chaîne d'accord"
+      ],
+      "reference": "Attribut du sujet : mot ou groupe qui exprime une caractéristique du sujet, relié à lui par un verbe attributif. Ex. : « Scapin est rusé. »\nVerbes attributifs (ou verbes d'état) : être, paraître, sembler, devenir, demeurer, rester, avoir l'air, passer pour.\nTest : on peut remplacer un verbe attributif par « être » (« Il semble inquiet » → « Il est inquiet »).\nCertains verbes ne sont attributifs que dans certains emplois : « Il reste inquiet » (attribut) / « Il reste à la maison » (CC de lieu) ; « Elle tomba malade » (attribut).\nL'attribut peut être un adjectif, un nom ou GN (« Perceval devient chevalier »), un pronom (« Il l'est »).\nDifférence avec le COD : l'attribut désigne la même réalité que le sujet (Scapin = rusé) ; le COD désigne une autre réalité (« Scapin trompe Géronte »).\nAccord : l'adjectif attribut s'accorde en genre et en nombre avec le sujet (« Les princesses semblaient heureuses »).\nAccord sujet-verbe : le verbe s'accorde avec son sujet, même s'il en est séparé par un complément : « Les élèves de la classe de 5e vous aident. » (le sujet est « les élèves », pas « 5e » ; « vous » est COD).\nSujet composé de plusieurs noms : verbe au pluriel (« Le roi et la reine arrivent ») ; sujet inversé : chercher le sujet après le verbe (« Au loin galopaient deux chevaliers »).\nParticipe passé avec être : il s'accorde avec le sujet (« Elles sont parties »).\nParticipe passé avec avoir : il ne s'accorde jamais avec le sujet ; il reste invariable si le COD est placé après le verbe (« Elle a vaincu le dragon »).\nAvec avoir, il s'accorde avec un pronom COD placé avant : « Tu m'as appelée » (une fille parle : m' = COD féminin) ; mais « Tu m'as parlé » reste invariable car m' est COI (parler à quelqu'un).\nMéthode : identifier l'auxiliaire ; avec être, chercher le sujet ; avec avoir, chercher le COD et sa place ; se servir de manipulations (pronominalisation, suppression) pour vérifier."
+    },
+    {
+      "id": "paroles-rapportees-et-registres",
+      "titre": "Paroles rapportées et registres de langue",
+      "ordre": 13,
+      "periode": "T3",
+      "notions": [
+        "Distinguer discours direct et discours indirect",
+        "Insérer un dialogue dans un récit en respectant la ponctuation (deux-points, guillemets, tirets)",
+        "Employer des verbes de parole variés et précis",
+        "Transformer des paroles du discours direct au discours indirect (pronoms, temps, indicateurs de temps et de lieu)",
+        "Distinguer registres familier, courant et soutenu et les adapter à la situation",
+        "Comparer grammaire de l'oral et grammaire de l'écrit (négation, interrogation, élisions)"
+      ],
+      "motsCles": [
+        "discours direct",
+        "discours indirect",
+        "verbe de parole",
+        "dialogue",
+        "guillemets",
+        "tiret",
+        "proposition incise",
+        "registre familier",
+        "registre courant",
+        "registre soutenu",
+        "oral",
+        "écrit"
+      ],
+      "reference": "Discours direct : les paroles sont rapportées telles qu'elles ont été prononcées ; elles sont introduites par deux-points et encadrées de guillemets. Ex. : Perceval demanda : « Qui êtes-vous ? »\nDialogue : on ouvre les guillemets, on va à la ligne et on met un tiret à chaque changement d'interlocuteur, puis on ferme les guillemets à la fin.\nProposition incise : courte proposition insérée dans les paroles, avec sujet inversé (« Je partirai, dit-il, demain matin. »).\nVerbes de parole : dire, demander, répondre, s'écrier, murmurer, ordonner, supplier, s'exclamer, répliquer ; ils précisent le ton et l'intention.\nDiscours indirect : les paroles sont intégrées au récit dans une proposition subordonnée, sans guillemets, après un verbe de parole : Il dit qu'il partirait le lendemain.\nPassage au discours indirect : changement des pronoms (je → il), des temps si le verbe introducteur est au passé (présent → imparfait ; futur → conditionnel ; passé composé → plus-que-parfait) et des indicateurs (demain → le lendemain ; ici → là).\nQuestion au discours indirect : « Viens-tu ? » → Il lui demanda s'il venait ; ordre : « Pars ! » → Il lui ordonna de partir.\nRegistre familier : langue relâchée, entre proches (« T'as vu ça ? », « bouquin », « bagnole »).\nRegistre courant : langue correcte de tous les jours (« As-tu vu cela ? », « livre », « voiture »).\nRegistre soutenu : langue recherchée, surtout écrite et littéraire (« Avez-vous aperçu cela ? », « ouvrage », « automobile »).\nOral et écrit : à l'oral, on supprime souvent le « ne » de la négation (« J'sais pas »), on pose la question par l'intonation, on répète et on se reprend ; l'écrit suit une syntaxe plus normée.\nEffets : le discours direct rend la scène vivante et montre la façon de parler du personnage ; le discours indirect résume et accélère le récit.\nMéthode d'écriture : varier les verbes de parole, vérifier la ponctuation du dialogue et adapter le registre à chaque personnage (un valet de comédie ne parle pas comme un roi)."
+    },
+    {
+      "id": "histoires-pour-plaire-et-instruire",
+      "titre": "Imaginer, sentir, raisonner : des histoires pour plaire et instruire",
+      "ordre": 14,
+      "periode": "T3",
+      "notions": [
+        "Définir l'apologue : court récit qui divertit et transmet une leçon (fable, conte)",
+        "Distinguer morale explicite et morale implicite",
+        "Connaître la fable de l'Antiquité à La Fontaine (Ésope, Phèdre, Marie de France, Kalila et Dimna)",
+        "Connaître des contes et récits de traditions diverses (Les Mille et Une Nuits, Le Roman de Renart, contes africains et antillais)",
+        "Analyser ce que les personnages, souvent des animaux, révèlent des comportements humains et de la société",
+        "Débattre d'une morale et écrire ou réécrire un apologue"
+      ],
+      "motsCles": [
+        "apologue",
+        "fable",
+        "conte",
+        "morale",
+        "explicite",
+        "implicite",
+        "personnification",
+        "La Fontaine",
+        "Ésope",
+        "plaire et instruire",
+        "Roman de Renart",
+        "Shéhérazade"
+      ],
+      "reference": "Apologue : court récit qui cherche à la fois à plaire (divertir) et à instruire (transmettre une leçon) ; la fable et certains contes sont des apologues.\nMorale : leçon tirée du récit ; explicite quand elle est clairement formulée (souvent au début ou à la fin, au présent de vérité générale) ; implicite quand le lecteur doit la déduire.\nFable : court récit, souvent en vers, mettant en scène des animaux personnifiés qui représentent des types humains (le renard rusé, le lion puissant, le loup cruel).\nÉsope (VIe siècle av. J.-C., Grèce) et Phèdre (Ier siècle, Rome) : fabulistes antiques dont s'inspire La Fontaine.\nMarie de France : autrice de la fin du XIIe siècle, auteure d'un des premiers recueils de fables en français.\nKalila et Dimna : recueil de fables d'origine indienne, traduit en arabe au VIIIe siècle par Ibn al-Muqaffa ; La Fontaine cite le sage indien « Pilpay » (Bidpaï) comme source.\nJean de La Fontaine (1621-1695) : Fables, premier recueil publié en 1668, dédié au Dauphin ; il affirme vouloir « instruire » en plaisant. Ex. : « Le Corbeau et le Renard » : « Tout flatteur vit aux dépens de celui qui l'écoute. » ; « Le Loup et l'Agneau » : « La raison du plus fort est toujours la meilleure. »\nLe Roman de Renart : ensemble de récits (branches) des XIIe-XIIIe siècles ; le goupil Renart, rusé, se joue du loup Isengrin et du roi lion Noble ; il fait la satire de la société féodale.\nLes Mille et Une Nuits : recueil de contes orientaux ; Shéhérazade raconte chaque nuit une histoire au roi Shahriyar pour retarder sa mort ; traduit en français par Antoine Galland au début du XVIIIe siècle.\nContes de traditions diverses : Birago Diop, Les Contes d'Amadou Koumba (1947, Sénégal) ; Patrick Chamoiseau, contes de Martinique ; Marguerite Yourcenar, « Comment Wang-Fô fut sauvé » (Nouvelles orientales, 1938).\nConte : récit souvent merveilleux, situé dans un temps et un lieu indéterminés (« Il était une fois »), qui transmet des valeurs.\nStructure d'une fable : récit (situation, péripétie, issue) + morale ; procédés : dialogue vivant, personnification, présent de vérité générale dans la morale.\nMéthode : identifier les personnages et ce qu'ils représentent, résumer l'histoire, formuler la morale avec ses propres mots, puis en discuter la valeur."
+    }
+  ]
+}
