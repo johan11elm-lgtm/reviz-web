@@ -42,6 +42,11 @@ describe('buildAvis', () => {
     expect(avis).toEqual({ profil: 'eleve', manque: 'Plus de 3e', source: 'direct', createdAt: NOW })
   })
 
+  it('garde les notions difficiles des enseignants seulement', () => {
+    expect(buildAvis({ profil: 'enseignant', notions: ' Pythagore ' }, NOW).avis.notions).toBe('Pythagore')
+    expect(buildAvis({ profil: 'eleve', notions: 'Pythagore' })).toEqual({ error: 'VIDE' })
+  })
+
   it('coupe les textes trop longs', () => {
     const { avis } = buildAvis({ profil: 'parent', plait: 'a'.repeat(MAX_TEXTE + 50) }, NOW)
     expect(avis.plait).toHaveLength(MAX_TEXTE)

@@ -73,6 +73,7 @@ export default function Avis() {
   const [conseil, setConseil] = useState('');
   const [plait, setPlait] = useState('');
   const [manque, setManque] = useState('');
+  const [notions, setNotions] = useState('');
   const [email, setEmail] = useState('');
   const [site, setSite] = useState('');
   const [etat, setEtat] = useState('saisie'); // saisie | envoi | merci
@@ -81,7 +82,8 @@ export default function Avis() {
   async function envoyer(e) {
     e.preventDefault();
     if (!profil) return setErreur(ERREURS.PROFIL);
-    if (!conseil && !plait.trim() && !manque.trim()) return setErreur(ERREURS.VIDE);
+    const notionsProf = profil === 'enseignant' ? notions.trim() : '';
+    if (!conseil && !plait.trim() && !manque.trim() && !notionsProf) return setErreur(ERREURS.VIDE);
     setErreur('');
     setEtat('envoi');
     try {
@@ -90,7 +92,7 @@ export default function Avis() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           profil, discipline: profil === 'enseignant' ? discipline : '', conseil,
-          plait, manque, email, site, source, device: device(),
+          plait, manque, notions: notionsProf, email, site, source, device: device(),
         }),
       });
       if (res.ok) return setEtat('merci');
@@ -205,6 +207,21 @@ export default function Avis() {
                   onChange={e => setManque(e.target.value)}
                 />
               </div>
+
+              {profil === 'enseignant' && (
+                <div className="avis-field">
+                  <label className="avis-label" htmlFor="avis-notions">Les notions que vos élèves ont le plus de mal à retenir</label>
+                  <textarea
+                    id="avis-notions"
+                    className="avis-input avis-textarea"
+                    rows={3}
+                    maxLength={2000}
+                    placeholder="Par exemple : la réciproque du théorème de Pythagore, l'accord du participe passé…"
+                    value={notions}
+                    onChange={e => setNotions(e.target.value)}
+                  />
+                </div>
+              )}
 
               <div className="avis-field">
                 <label className="avis-label" htmlFor="avis-email">Votre e-mail <span>(facultatif)</span></label>

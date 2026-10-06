@@ -1,11 +1,12 @@
 // -------------------------------------------------------
 // Réviz — Avis (page publique /avis)
 // Reçoit un avis (profil, « le conseilleriez-vous ? », ce qui plaît, ce
-// qui manque, e-mail facultatif) et l'enregistre dans Firestore
-// (avis/{id}). Écrit par le serveur seul : la règle par défaut refuse tout
-// accès client à cette collection, rien à déployer. Pas d'adresse IP ni
-// d'identifiant : seulement ce que la personne a écrit, la date, la
-// provenance (affiche, profil…) et le type d'appareil.
+// qui manque, notions difficiles pour les enseignants, e-mail facultatif)
+// et l'enregistre dans Firestore (avis/{id}). Écrit par le serveur seul :
+// la règle par défaut refuse tout accès client à cette collection, rien à
+// déployer. Pas d'adresse IP ni d'identifiant : seulement ce que la
+// personne a écrit, la date, la provenance (affiche, profil…) et le type
+// d'appareil.
 // -------------------------------------------------------
 import { getDb } from './_firebaseAdmin.js'
 
@@ -45,9 +46,11 @@ export function buildAvis(body, now = new Date()) {
 
   const plait = texte(body.plait)
   const manque = texte(body.manque)
+  const notions = profil === 'enseignant' ? texte(body.notions) : ''
   if (plait) avis.plait = plait
   if (manque) avis.manque = manque
-  if (!avis.conseil && !plait && !manque) return { error: 'VIDE' }
+  if (notions) avis.notions = notions
+  if (!avis.conseil && !plait && !manque && !notions) return { error: 'VIDE' }
 
   const email = texte(body.email, 200)
   if (email) {
