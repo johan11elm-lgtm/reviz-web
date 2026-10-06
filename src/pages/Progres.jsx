@@ -382,7 +382,7 @@ export default function Progres() {
 
         {/* 6. Répartition par format */}
         {formatBreakdown.some(f => f.count > 0) && (
-          <>
+          <div className="pg-breakdown">
             <h2 className="pg-section-title">Par format</h2>
             <div className="rv-card pg-format-card">
               {formatBreakdown.map(f => (
@@ -398,12 +398,12 @@ export default function Progres() {
                 </div>
               ))}
             </div>
-          </>
+          </div>
         )}
 
         {/* 8. Répartition par matière */}
         {subjectBreakdown.length > 0 && (
-          <>
+          <div className="pg-breakdown">
             <h2 className="pg-section-title">Par matière</h2>
             <div className="rv-card pg-subject-card">
               {subjectBreakdown.map(({ name, count, pct, info }) => (
@@ -419,7 +419,7 @@ export default function Progres() {
                 </div>
               ))}
             </div>
-          </>
+          </div>
         )}
 
       </div>

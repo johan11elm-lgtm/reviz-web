@@ -16,6 +16,12 @@
     --grid-gap: 24px;
   }
 
+  /* Les pages défilent dans un conteneur de hauteur fixe et les cartes
+   * (overflow: hidden) n'ont pas de hauteur minimum : en rangées « auto »,
+   * la grille les écrase pour tenir dans l'écran dès que la page dépasse,
+   * et les intertitres passent sur les cartes. D'où grid-auto-rows:
+   * max-content sur chaque grille de page. */
+
   html:not(.native) .flashcards-kbd-hint,
   html:not(.native) .quiz-kbd-hint {
     display: block;
@@ -40,6 +46,7 @@
   /* ── Accueil : tableau de bord ── */
   html:not(.native) .home-page .content {
     display: grid;
+    grid-auto-rows: max-content;
     grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr);
     grid-template-areas:
       "banner    banner"
@@ -63,6 +70,7 @@
   /* ── Mon programme : matières en grille, chapitres sur deux colonnes ── */
   html:not(.native) .programme-page .programme-content:not(.programme-content--chemin) {
     display: grid;
+    grid-auto-rows: max-content;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: var(--grid-gap);
     align-content: start;
@@ -132,6 +140,7 @@
   /* ── Analyse : l'essentiel à gauche, les formats à droite ── */
   html:not(.native) .analyse-page .analyse-content {
     display: grid;
+    grid-auto-rows: max-content;
     grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
     grid-template-areas:
       "intro   intro"
@@ -190,6 +199,7 @@
    * largeur, le reste à la suite. */
   html:not(.native) .progres-page .pg-content {
     display: grid;
+    grid-auto-rows: max-content;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 18px var(--grid-gap);
     align-items: start;
@@ -204,10 +214,20 @@
   html:not(.native) .progres-page .pg-weeks-card  { grid-column: 1; grid-row: 4; margin: 0; }
   html:not(.native) .progres-page .pg-chart-card  { grid-column: 2; grid-row: 4; margin: 0; }
   html:not(.native) .progres-page .pg-content > .pg-section-title:nth-of-type(3) { display: none; }
+  /* Par format | par matière, côte à côte */
+  html:not(.native) .progres-page .pg-breakdown {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  html:not(.native) .progres-page .pg-breakdown > .pg-section-title { margin: 6px 0 0; }
+  html:not(.native) .progres-page .pg-format-left,
+  html:not(.native) .progres-page .pg-subject-left { width: 150px; }
 
   /* ── Profil : identité à gauche, badges à droite ── */
   html:not(.native) .profile-page .pf-content {
     display: grid;
+    grid-auto-rows: max-content;
     grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr);
     grid-template-areas:
       "banner  banner"
@@ -228,6 +248,7 @@
   /* ── Réglages : deux colonnes ── */
   html:not(.native) .reglages-page .rg-content {
     display: grid;
+    grid-auto-rows: max-content;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 8px var(--grid-gap);
     align-items: start;

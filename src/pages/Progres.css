@@ -386,6 +386,10 @@
   font-weight: 800;
 }
 
+/* Intertitre + carte d'une répartition : transparent sur téléphone (le flux
+ * de .pg-content s'applique tel quel), bloc de grille sur ordinateur. */
+.pg-breakdown { display: contents; }
+
 /* ── Format breakdown ── */
 .pg-format-card {
   padding: 6px 16px 10px;
