@@ -6,6 +6,7 @@
 // -------------------------------------------------------
 import { loadLessons, saveLesson, whenLessonsSynced } from './historyService'
 import { countDueCards, getCardState } from './srsService'
+import { track } from './statsService'
 import {
   catalogueUrl, chapterContentUrl, chapterLessonId, chapterState,
 } from '../utils/programme'
@@ -64,6 +65,7 @@ export function matiereProgress(entry, lessons = loadLessons()) {
  */
 export async function openChapter(classe, matiere, chapter) {
   const content = await loadChapterContent(classe, matiere, chapter.id)
+  track('chapitre_ouvert', { classe, matiere })
   // eslint-disable-next-line no-unused-vars
   const { programme, ...aiData } = content
   const metadata = { ...(aiData.metadata ?? {}), title: chapter.titre, subject: matiere }

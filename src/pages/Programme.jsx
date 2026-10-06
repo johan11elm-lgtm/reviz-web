@@ -8,6 +8,7 @@ import { Mascot } from '../components/Mascot';
 import { GuestBanner } from '../components/GuestBanner';
 import { loadCatalogue, matiereProgress } from '../services/programmeService';
 import { loadLessons } from '../services/historyService';
+import { track } from '../services/statsService';
 import { subjectMascot } from '../utils/subjects';
 import { hasProgramme, PROGRAMME_FALLBACK } from '../utils/programme';
 import './Programme.css';
@@ -30,6 +31,8 @@ export default function Programme() {
   const [catalogue, setCatalogue] = useState(null);
   const [error, setError] = useState(null);
   const lessons = useMemo(() => loadLessons(), []);
+
+  useEffect(() => { track('programme_ouvert', { classe }); }, [classe]);
 
   useEffect(() => {
     let alive = true;

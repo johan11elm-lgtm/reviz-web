@@ -5,6 +5,7 @@ import { db } from './firebaseConfig'
 import { doc, setDoc, collection, getDocs, query, orderBy } from 'firebase/firestore'
 import { updateChallengeProgress } from './challengeService'
 import { isGuestUid } from './guestService'
+import { track as trackStat } from './statsService'
 
 let _uid = null
 const MAX_REVISIONS = 500
@@ -40,6 +41,7 @@ export function recordRevision(type) {
   const lessonId  = localStorage.getItem('reviz-current-lesson-id') ?? null
   const revisions = loadRevisions()
   const entry = { id: String(Date.now()), type, lessonId, revisedAt: Date.now() }
+  trackStat('revision', { format: type, source: lessonId?.startsWith('prog-') ? 'programme' : 'scan' })
   revisions.unshift(entry)
   if (revisions.length > MAX_REVISIONS) revisions.splice(MAX_REVISIONS)
   localStorage.setItem(getKey(), JSON.stringify(revisions))

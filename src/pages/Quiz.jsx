@@ -9,6 +9,7 @@ import { MissingLessonState } from '../components/MissingLessonState'
 import { FormatFeedback } from '../components/FormatFeedback'
 import { CoachChat, CoachHeaderButton } from '../components/CoachChat'
 import { nbsp } from '../utils/typography'
+import { track } from '../services/statsService'
 import './Quiz.css'
 
 // ---- DONNÉES : localStorage (IA) > état vide (mock réservé au dev) ----
@@ -162,6 +163,7 @@ function QuizSession() {
   function nextQuestion() {
     if (current + 1 >= questions.length) {
       setShowEnd(true)
+      track('quiz_termine', { source: coachLessonId?.startsWith('prog-') ? 'programme' : 'scan' })
     } else {
       setCurrent(p => p + 1)
       setAnswered(false)

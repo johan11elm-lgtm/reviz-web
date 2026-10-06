@@ -30,6 +30,7 @@ import { setSrsUser } from '../services/srsService';
 import { setChallengeUser } from '../services/challengeService';
 import { setScanLimitUser, setPremiumStatus } from '../services/scanLimitService';
 import { readSessionCache, writeSessionCache, clearSessionCache, userFromSessionCache } from '../services/sessionCache';
+import { track } from '../services/statsService';
 import { collection, getDocs, deleteDoc, doc, getDoc, setDoc } from 'firebase/firestore';
 
 const AuthContext = createContext();
@@ -85,6 +86,7 @@ export function AuthProvider({ children }) {
   // `level` est un objet { cycle, classe, specialites?, filiere? }
   async function signup(prenom, email, password, level, birthDate = null) {
     const { user } = await createUserWithEmailAndPassword(auth, email, password);
+    track('compte_cree', { classe: level?.classe });
     await updateProfile(user, { displayName: prenom });
     // Envoyer l'email de vérification (fire-and-forget)
     sendEmailVerification(user).catch(() => {});
@@ -176,6 +178,7 @@ export function AuthProvider({ children }) {
   // --- Mode essai : prénom + classe, sans compte ---
   function loginAsGuest({ prenom, level }) {
     const g = startGuest({ prenom, level });
+    track('essai_demarre', { classe: level?.classe });
     bindServicesToUser(g.uid);
     setPremiumStatus(false);
     setIsPremium(false);
