@@ -42,9 +42,9 @@ describe('buildAvis', () => {
     expect(avis).toEqual({ profil: 'eleve', manque: 'Plus de 3e', source: 'direct', createdAt: NOW })
   })
 
-  it('garde les notions difficiles des enseignants seulement', () => {
-    expect(buildAvis({ profil: 'enseignant', notions: ' Pythagore ' }, NOW).avis.notions).toBe('Pythagore')
-    expect(buildAvis({ profil: 'eleve', notions: 'Pythagore' })).toEqual({ error: 'VIDE' })
+  it('accepte une remarque libre seule, quel que soit le profil', () => {
+    expect(buildAvis({ profil: 'eleve', autre: ' Une idée ' }, NOW).avis.autre).toBe('Une idée')
+    expect(buildAvis({ profil: 'enseignant', autre: '   ' })).toEqual({ error: 'VIDE' })
   })
 
   it('coupe les textes trop longs', () => {

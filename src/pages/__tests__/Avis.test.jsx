@@ -36,22 +36,20 @@ describe('<Avis />', () => {
     expect(screen.getByRole('link', { name: /Découvrir l'appli/ })).toHaveAttribute('href', '/profs')
   })
 
-  it('propose la matière et les notions difficiles seulement aux enseignants', () => {
+  it('propose la matière seulement aux enseignants', () => {
     renderAvis()
     expect(screen.queryByLabelText(/Votre matière/i)).toBeNull()
-    expect(screen.queryByLabelText(/mal à retenir/i)).toBeNull()
     fireEvent.click(screen.getByLabelText('Enseignant·e'))
     expect(screen.getByLabelText(/Votre matière/i)).toBeInTheDocument()
-    expect(screen.getByLabelText(/mal à retenir/i)).toBeInTheDocument()
   })
 
-  it('envoie les notions difficiles, qui suffisent à elles seules', async () => {
+  it('envoie une remarque libre, qui suffit à elle seule', async () => {
     apiFetch.mockResolvedValue({ ok: true })
     renderAvis('/avis?src=affiche-profs')
-    fireEvent.change(screen.getByLabelText(/mal à retenir/i), { target: { value: 'Les fractions' } })
+    fireEvent.change(screen.getByLabelText('Autre chose ?'), { target: { value: 'Une version imprimable ?' } })
     envoyer()
     expect(await screen.findByText(/bien arrivé/i)).toBeInTheDocument()
-    expect(JSON.parse(apiFetch.mock.calls[0][1].body)).toMatchObject({ profil: 'enseignant', notions: 'Les fractions' })
+    expect(JSON.parse(apiFetch.mock.calls[0][1].body)).toMatchObject({ profil: 'enseignant', autre: 'Une version imprimable ?' })
   })
 
   it('envoie l\'avis avec la provenance de l\'affiche et remercie', async () => {
