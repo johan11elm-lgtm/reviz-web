@@ -61,16 +61,16 @@
   html:not(.native) .home-page .home-challenges-card{ grid-area: challenges; }
 
   /* ── Mon programme : matières en grille, chapitres sur deux colonnes ── */
-  html:not(.native) .programme-page .programme-content:not(.programme-content--liste) {
+  html:not(.native) .programme-page .programme-content:not(.programme-content--chemin) {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: var(--grid-gap);
     align-content: start;
   }
-  html:not(.native) .programme-page .programme-content:not(.programme-content--liste) > .guest-banner,
-  html:not(.native) .programme-page .programme-content:not(.programme-content--liste) > .programme-note,
-  html:not(.native) .programme-page .programme-content:not(.programme-content--liste) > .programme-empty,
-  html:not(.native) .programme-page .programme-content:not(.programme-content--liste) > .programme-skeleton {
+  html:not(.native) .programme-page .programme-content:not(.programme-content--chemin) > .guest-banner,
+  html:not(.native) .programme-page .programme-content:not(.programme-content--chemin) > .programme-note,
+  html:not(.native) .programme-page .programme-content:not(.programme-content--chemin) > .programme-empty,
+  html:not(.native) .programme-page .programme-content:not(.programme-content--chemin) > .programme-skeleton {
     grid-column: 1 / -1;
   }
   html:not(.native) .programme-page .programme-matiere {
@@ -87,15 +87,19 @@
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: var(--grid-gap);
   }
-  html:not(.native) .programme-page .programme-content--liste {
+  /* Page matière : le chemin au centre, la progression en rail à droite */
+  html:not(.native) .programme-page .programme-path-layout {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 14px var(--grid-gap);
-    align-content: start;
+    grid-template-columns: minmax(0, 1fr) var(--rail-w);
+    gap: var(--grid-gap);
+    align-items: start;
   }
-  html:not(.native) .programme-page .programme-content--liste > .programme-callout,
-  html:not(.native) .programme-page .programme-content--liste > .programme-empty {
-    grid-column: 1 / -1;
+  html:not(.native) .programme-page .programme-path-rail {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    position: sticky;
+    top: 8px;
   }
 
   /* ── Mes cours : liste à gauche, rail « À reprendre » à droite ── */

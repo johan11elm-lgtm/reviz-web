@@ -46,9 +46,15 @@ test.describe('Ordinateur (1280 px)', () => {
 
     await page.getByRole('button', { name: /^Maths/ }).click()
     await expect(page).toHaveURL(/\/programme\/maths/)
+    await page.waitForTimeout(500)
     await page.screenshot({ path: test.info().outputPath('desktop-programme-maths.png') })
+    await page.getByRole('button', { name: /Le théorème de Thalès/ }).click()
+    await page.waitForTimeout(300)
+    await page.screenshot({ path: test.info().outputPath('desktop-chemin-fiche.png') })
+    await page.getByRole('button', { name: /Le théorème de Thalès/ }).click()
 
     await page.getByRole('button', { name: /Le théorème de Thalès/ }).click()
+    await page.getByRole('button', { name: /chapitre$/ }).click()
     await expect(page).toHaveURL(/\/analyse/)
     await page.waitForTimeout(700)
     await page.screenshot({ path: test.info().outputPath('desktop-analyse.png') })
@@ -97,6 +103,9 @@ test.describe('Mobile (390 px)', () => {
     await expect(page.locator('.side-nav')).toBeHidden()
     await expect(page.locator('.bottom-nav')).toBeVisible()
     await page.screenshot({ path: test.info().outputPath('mobile-programme.png') })
+    await page.getByRole('button', { name: /^Maths/ }).click()
+    await page.waitForTimeout(500)
+    await page.screenshot({ path: test.info().outputPath('mobile-chemin.png') })
     await page.goto('/')
     await page.waitForTimeout(500)
     await page.screenshot({ path: test.info().outputPath('mobile-home.png') })
@@ -127,6 +136,7 @@ test.describe('Ordinateur (1280 px) — avec un compte', () => {
     // Un chapitre ouvert, puis l'accueil et Mes cours composés avec la leçon
     await page.goto('/programme/maths')
     await page.getByRole('button', { name: /Le théorème de Thalès/ }).click()
+    await page.getByRole('button', { name: /chapitre$/ }).click()
     await expect(page).toHaveURL(/\/analyse/)
     await page.goto('/')
     await page.waitForTimeout(600)

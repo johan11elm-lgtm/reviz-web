@@ -6,9 +6,10 @@ import { PageHeader } from '../components/PageHeader';
 import { PageIntro } from '../components/PageIntro';
 import { Mascot } from '../components/Mascot';
 import { loadCatalogue, chapterProgress, openChapter } from '../services/programmeService';
+import { ChapterPath } from '../components/ChapterPath';
 import { loadLessons } from '../services/historyService';
 import { subjectMascot } from '../utils/subjects';
-import { hasProgramme, PROGRAMME_FALLBACK, CHAPTER_STATE_LABEL } from '../utils/programme';
+import { hasProgramme, PROGRAMME_FALLBACK } from '../utils/programme';
 import './Programme.css';
 
 /**
@@ -27,6 +28,7 @@ export default function ProgrammeMatiere() {
   const [error, setError] = useState(null);      // 'catalogue' | 'chapitre'
   const [opening, setOpening] = useState(null);  // id du chapitre en cours d'ouverture
   const [lessons] = useState(() => loadLessons());
+  const [selectedId, setSelectedId] = useState(null);
 
   useEffect(() => {
     let alive = true;
@@ -53,6 +55,8 @@ export default function ProgrammeMatiere() {
 
   const title = entry?.matiere ?? (catalogue ? 'Matière inconnue' : '');
   const count = entry?.chapitres.length ?? 0;
+  const items = (entry?.chapitres ?? []).map(ch => ({ chapter: ch, ...chapterProgress(ch, lessons) }));
+  const maitrises = items.filter(i => i.state === 'maitrise').length;
 
   return (
     <div className="app programme-page">
@@ -64,7 +68,7 @@ export default function ProgrammeMatiere() {
         mascotSize={140}
       />
 
-      <div className="content programme-content programme-content--liste">
+      <div className="content programme-content programme-content--chemin">
         {error === 'chapitre' && (
           <div className="rv-callout rv-callout--orange programme-callout" role="alert">
             Ce chapitre n'a pas pu être chargé. Vérifie ta connexion et réessaie.
@@ -88,36 +92,33 @@ export default function ProgrammeMatiere() {
           </div>
         )}
 
-        {entry && entry.chapitres.map(ch => {
-          const { state, dueCards } = chapterProgress(ch, lessons);
-          const busy = opening === ch.id;
-          const pill = busy
-            ? 'Ouverture…'
-            : !ch.pret
-              ? 'Bientôt'
-              : state === 'a-revoir'
-                ? `${dueCards} à revoir`
-                : CHAPTER_STATE_LABEL[state];
-          return (
-            <button
-              key={ch.id}
-              type="button"
-              className={`rv-card rv-card--link rv-card--padded programme-chapitre programme-chapitre--${state}${ch.pret ? '' : ' programme-chapitre--bientot'}`}
-              disabled={!ch.pret || (!!opening && !busy)}
-              aria-busy={busy || undefined}
-              onClick={() => open(ch)}
-            >
-              <span className="programme-chapitre-num" aria-hidden="true">{ch.ordre}</span>
-              <div className="programme-chapitre-text">
-                <div className="programme-chapitre-title">{ch.titre}</div>
-                {ch.notions?.length > 0 && (
-                  <div className="programme-chapitre-notions">{ch.notions.slice(0, 3).join(' · ')}</div>
-                )}
+        {entry && (
+          <div className="programme-path-layout">
+            <ChapterPath
+              items={items}
+              mascot={subjectMascot(entry.matiere)}
+              selectedId={selectedId}
+              onSelect={setSelectedId}
+              onOpen={open}
+              opening={opening}
+            />
+            <aside className="programme-path-rail" aria-label="Ta progression">
+              <div className="rv-card rv-card--padded programme-path-summary">
+                <Mascot pose={subjectMascot(entry.matiere)} size={72} alt="" aria-hidden="true" />
+                <div className="programme-path-summary-text">
+                  <div className="programme-path-summary-title">{entry.matiere}</div>
+                  <div className="programme-path-summary-sub">{maitrises} / {count} chapitres maîtrisés</div>
+                  <div className="programme-bar" aria-hidden="true"><div className="programme-bar-fill" style={{ width: `${count ? Math.round((maitrises / count) * 100) : 0}%` }} /></div>
+                </div>
               </div>
-              <span className={`programme-chapitre-state programme-chapitre-state--${ch.pret ? state : 'bientot'}`}>{pill}</span>
-            </button>
-          );
-        })}
+              <div className="rv-card rv-card--padded programme-path-legend">
+                <div className="programme-path-legend-title">Comment ça marche</div>
+                <p>Avance chapitre par chapitre. Une étape devient verte quand toutes ses cartes sont acquises, orange quand des cartes reviennent à revoir.</p>
+                <p>Tu peux ouvrir n'importe quel chapitre, dans l'ordre que tu veux.</p>
+              </div>
+            </aside>
+          </div>
+        )}
       </div>
 
       <BottomNav />

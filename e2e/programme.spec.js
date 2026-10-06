@@ -40,11 +40,12 @@ test.describe('Mon programme', () => {
     await page.getByRole('button', { name: /^Maths/ }).click()
     await expect(page).toHaveURL(/\/programme\/maths/)
     await expect(page.getByText('Trigonométrie')).toBeVisible()
-    await expect(page.getByText('Bientôt')).toBeVisible()
+    await expect(page.getByRole('button', { name: /Trigonométrie — Bientôt/ })).toBeDisabled()
     await page.screenshot({ path: test.info().outputPath('programme-maths.png') })
 
     // ── Ouvrir un chapitre = la page des formats, sans coach en mode essai ──
     await page.getByRole('button', { name: /Le théorème de Thalès/ }).click()
+    await page.getByRole('button', { name: /chapitre$/ }).click()
     await expect(page).toHaveURL(/\/analyse/)
     await expect(page.getByText("L'essentiel du chapitre")).toBeVisible()
     await expect(page.getByRole('link', { name: /Quiz/ })).toBeVisible()
@@ -62,7 +63,7 @@ test.describe('Mon programme', () => {
     await expect(page.getByRole('link', { name: 'Réviser mon programme' })).toBeVisible()
     await expect(page.getByRole('status').getByText('Mode essai')).toBeVisible()
     await page.goto('/programme/maths')
-    await expect(page.getByText('Commencé')).toBeVisible()
+    await expect(page.getByRole('button', { name: /Le théorème de Thalès — Commencé/ })).toBeVisible()
 
     // ── Le scan demande un compte ──
     await page.goto('/scan')
@@ -88,6 +89,7 @@ test.describe('Mon programme', () => {
 
     await page.getByRole('button', { name: /^Maths/ }).click()
     await page.getByRole('button', { name: /Le théorème de Thalès/ }).click()
+    await page.getByRole('button', { name: /chapitre$/ }).click()
     await expect(page).toHaveURL(/\/analyse/)
     await expect(page.getByText('Le théorème de Thalès').first()).toBeVisible()
 
