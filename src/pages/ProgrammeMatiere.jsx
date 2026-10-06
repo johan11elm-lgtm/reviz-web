@@ -60,7 +60,8 @@ export default function ProgrammeMatiere() {
 
   return (
     <div className="app programme-page">
-      <PageHeader variant="back" onBack={() => navigate('/programme')} />
+      {/* Retour = revenir en arrière dans l'historique (sinon on empile /programme et le retour boucle entre les deux pages) ; arrivée directe : on remplace par la liste. */}
+      <PageHeader variant="back" onBack={() => (window.history.state?.idx > 0 ? navigate(-1) : navigate('/programme', { replace: true }))} />
       <PageIntro
         title={title || 'Mon programme'}
         sub={entry ? `${classe} · ${count} chapitre${count > 1 ? 's' : ''}, dans l'ordre de l'année` : classe}
