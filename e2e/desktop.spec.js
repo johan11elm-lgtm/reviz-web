@@ -56,6 +56,10 @@ test.describe('Ordinateur (1280 px)', () => {
     await page.getByRole('button', { name: /Le théorème de Thalès/ }).click()
     await page.getByRole('button', { name: /chapitre$/ }).click()
     await expect(page).toHaveURL(/\/analyse/)
+    // Ouvert depuis Mon programme : c'est cette entrée qui reste allumée
+    await expect(page.locator('.side-nav-item--active')).toHaveText(/Mon programme/)
+    await expect(page.getByText('À retenir')).toBeVisible()
+    await expect(page.getByText('Ton avancement')).toBeVisible()
     await page.waitForTimeout(700)
     await page.screenshot({ path: test.info().outputPath('desktop-analyse.png') })
 
@@ -75,6 +79,11 @@ test.describe('Ordinateur (1280 px)', () => {
 
     await page.goto('/')
     await expect(page.getByRole('link', { name: 'Réviser mon programme' })).toBeVisible()
+    await expect(page.getByRole('heading', { name: 'À reprendre' })).toBeVisible()
+    await expect(page.getByRole('button', { name: /Le théorème de Thalès/ })).toBeVisible()
+    // Le mode essai n'est rappelé que dans la barre latérale
+    await expect(page.locator('.guest-banner')).toBeHidden()
+    await expect(page.locator('.side-nav-note')).toBeVisible()
     await page.waitForTimeout(500)
     await page.screenshot({ path: test.info().outputPath('desktop-home.png') })
 
@@ -107,6 +116,8 @@ test.describe('Mobile (390 px)', () => {
     await page.waitForTimeout(500)
     await page.screenshot({ path: test.info().outputPath('mobile-chemin.png') })
     await page.goto('/')
+    await expect(page.locator('.home-desk')).toHaveCount(0)
+    await expect(page.locator('.guest-banner')).toBeVisible()
     await page.waitForTimeout(500)
     await page.screenshot({ path: test.info().outputPath('mobile-home.png') })
   })

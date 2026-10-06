@@ -10,6 +10,7 @@ import { Mascot } from '../components/Mascot';
 import { loadLessons, restoreLesson, deleteLesson, syncFromFirestore } from '../services/historyService';
 import { countDueCards } from '../services/srsService';
 import { subjectInfo, subjectKey, subjectMascot } from '../utils/subjects';
+import { useIsDesktop } from '../hooks/useMediaQuery';
 import './Cours.css';
 
 // Map subject.color → DS tone (5 available: violet/orange/green/pink/red)
@@ -89,6 +90,7 @@ export default function Cours() {
 
   const totalVisible = visibleSubjects.reduce((acc, s) => acc + s.visibleLessons.length, 0);
   const hasLessons = allLessons.length > 0;
+  const isDesktop = useIsDesktop();
   // « Pas encore synchronisé » ≠ « vraiment vide » : sur un nouvel appareil le
   // cache local est vide alors que Firestore a des leçons → skeleton, pas empty-state.
   const showSkeleton = isSyncing && !hasLessons;
@@ -129,9 +131,15 @@ export default function Cours() {
     <div className="app cours-page">
 
       {/* Sans leçon : simple en-tête titre (l'état vide porte la mascotte).
-          Avec leçons : intro façon Home, titre + phrase du coach + mascotte. */}
-      {!hasLessons && (
+          Avec leçons : intro façon Home, titre + phrase du coach + mascotte.
+          Sur ordinateur, toujours l'intro : le titre tombe au même endroit
+          que sur les autres pages. */}
+      {!hasLessons && !isDesktop && (
         <PageHeader variant="title-only" title="Mes cours" />
+      )}
+
+      {!hasLessons && isDesktop && (
+        <PageIntro title="Mes cours" sub="Les chapitres et les leçons que tu révises." />
       )}
 
       {hasLessons && (

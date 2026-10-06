@@ -22,6 +22,21 @@
    * et les intertitres passent sur les cartes. D'où grid-auto-rows:
    * max-content sur chaque grille de page. */
 
+  /* ── Coquille commune ──
+   * Le mode essai est rappelé une fois, dans la barre latérale : pas de
+   * bandeau dans les pages. Les pages de premier niveau (celles de la barre
+   * latérale) n'ont ni flèche retour ni rangée d'en-tête : leur titre
+   * tombe au même endroit partout. */
+  html:not(.native) .guest-banner { display: none; }
+  html:not(.native) .rv-page-header--racine,
+  html:not(.native) .profile-page > .rv-page-header { display: none; }
+  /* Titre des pages de premier niveau à 99 px du haut, comme Mes cours et
+   * Mon programme (l'accueil s'aligne sous son en-tête profil). */
+  html:not(.native) .profile-page .pf-content { padding-top: 56px; }
+  html:not(.native) .progres-page .pg-intro { padding-top: 14px; }
+  /* Feuille du bas fermée : son ombre dépassait en bas de l'écran */
+  html:not(.native) .rv-sheet--bottom-hidden { box-shadow: none; }
+
   html:not(.native) .flashcards-kbd-hint,
   html:not(.native) .quiz-kbd-hint {
     display: block;
@@ -43,29 +58,104 @@
     color: var(--text-secondary);
   }
 
-  /* ── Accueil : tableau de bord ── */
-  html:not(.native) .home-page .content {
-    display: grid;
-    grid-auto-rows: max-content;
-    grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr);
-    grid-template-areas:
-      "banner    banner"
-      "greeting  greeting"
-      "cta       stats"
-      "cta       programme"
-      "featured  challenges";
-    column-gap: var(--grid-gap);
-    row-gap: 20px;
-    align-items: start;
-    align-content: start;
+  /* ── Accueil : tableau de bord (balisage propre à l'ordinateur, Home.jsx) ──
+   * Héros à gauche, série + défis empilés à droite, puis « À reprendre » et
+   * les matières du programme sur toute la largeur. */
+  html:not(.native) .home-page .home-desk {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
   }
-  html:not(.native) .home-page .guest-banner        { grid-area: banner; margin: 0; }
-  html:not(.native) .home-page .home-greeting       { grid-area: greeting; }
-  html:not(.native) .home-page .home-cta            { grid-area: cta; margin-bottom: 0; align-self: stretch; }
-  html:not(.native) .home-page .home-progress-card  { grid-area: stats; margin-bottom: 0; }
-  html:not(.native) .home-page .home-programme-card { grid-area: programme; }
-  html:not(.native) .home-page .home-featured-card  { grid-area: featured; }
-  html:not(.native) .home-page .home-challenges-card{ grid-area: challenges; }
+  html:not(.native) .home-page .home-desk .home-greeting { margin: 11px 0 -8px; }
+  html:not(.native) .home-page .home-desk-top {
+    display: grid;
+    grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr);
+    gap: var(--grid-gap);
+    align-items: stretch;
+  }
+  html:not(.native) .home-page .home-desk .home-cta { margin: 0; }
+  html:not(.native) .home-page .home-desk .rv-hero-sub { max-width: 46ch; font-size: 14px; margin-top: 8px; }
+  html:not(.native) .home-page .home-desk-side {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    min-width: 0;
+  }
+  html:not(.native) .home-page .home-desk .home-progress-card,
+  html:not(.native) .home-page .home-desk .home-challenges-card { margin: 0; }
+  html:not(.native) .home-page .home-desk .home-challenges-card { flex: 1; }
+
+  html:not(.native) .home-page .home-desk-section { display: flex; flex-direction: column; gap: 14px; }
+  html:not(.native) .home-page .home-desk-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; }
+  html:not(.native) .home-page .home-desk-title {
+    margin: 0;
+    font-family: 'Geist', sans-serif;
+    font-size: 18px;
+    font-weight: 800;
+    letter-spacing: -0.4px;
+    color: var(--text-primary);
+  }
+  html:not(.native) .home-page .home-desk-more {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-decoration: none;
+  }
+  html:not(.native) .home-page .home-desk-more:hover { color: var(--text-primary); }
+
+  /* À reprendre : trois dernières leçons */
+  html:not(.native) .home-page .home-desk-recent {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+  }
+  html:not(.native) .home-page .home-desk-lesson {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px 18px;
+    border: none;
+    text-align: left;
+    font-family: inherit;
+    color: inherit;
+    cursor: pointer;
+  }
+  html:not(.native) .home-page .home-desk-lesson-mascot { flex-shrink: 0; }
+  html:not(.native) .home-page .home-desk-lesson-text { display: flex; flex-direction: column; align-items: flex-start; gap: 3px; min-width: 0; }
+  html:not(.native) .home-page .home-desk-lesson-meta { font-size: 12px; color: var(--text-muted); }
+  html:not(.native) .home-page .home-desk-lesson-title {
+    font-size: 14.5px;
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--text-primary);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  html:not(.native) .home-page .home-desk-lesson-pill { margin-top: 5px; }
+
+  /* Mon programme : une tuile par matière */
+  html:not(.native) .home-page .home-desk-matieres {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 14px;
+  }
+  html:not(.native) .home-page .home-desk-matiere {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 16px;
+    border: none;
+    text-align: left;
+    font-family: inherit;
+    color: inherit;
+    cursor: pointer;
+  }
+  html:not(.native) .home-page .home-desk-matiere-text { display: flex; flex-direction: column; gap: 2px; flex: 1; min-width: 0; }
+  html:not(.native) .home-page .home-desk-matiere-name { font-size: 14.5px; font-weight: 700; color: var(--text-primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  html:not(.native) .home-page .home-desk-matiere-meta { font-size: 12px; color: var(--text-muted); }
+  html:not(.native) .home-page .home-desk-matiere-bar { margin-top: 6px; }
 
   /* ── Mon programme : matières en grille, chapitres sur deux colonnes ── */
   html:not(.native) .programme-page .programme-content:not(.programme-content--chemin) {
@@ -75,7 +165,6 @@
     gap: var(--grid-gap);
     align-content: start;
   }
-  html:not(.native) .programme-page .programme-content:not(.programme-content--chemin) > .guest-banner,
   html:not(.native) .programme-page .programme-content:not(.programme-content--chemin) > .programme-note,
   html:not(.native) .programme-page .programme-content:not(.programme-content--chemin) > .programme-empty,
   html:not(.native) .programme-page .programme-content:not(.programme-content--chemin) > .programme-skeleton {
@@ -137,26 +226,43 @@
   html:not(.native) .cours-page .cours-resume-top { flex-direction: column; align-items: flex-start; gap: 8px; }
   html:not(.native) .cours-page .cours-resume-body { width: 100%; }
 
-  /* ── Analyse : l'essentiel à gauche, les formats à droite ── */
-  html:not(.native) .analyse-page .analyse-content {
+  /* ── Analyse : l'essentiel et « à retenir » à gauche, les formats et
+   * l'avancement à droite (balisage propre à l'ordinateur, Analyse.jsx) ── */
+  html:not(.native) .analyse-page .analyse-desk {
     display: grid;
-    grid-auto-rows: max-content;
     grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
-    grid-template-areas:
-      "intro   intro"
-      "excerpt formats"
-      "coach   formats"
-      ".       formats";
-    gap: 16px var(--grid-gap);
+    gap: var(--grid-gap);
     align-items: start;
-    align-content: start;
   }
-  html:not(.native) .analyse-page .analyse-content > .rv-page-intro { grid-area: intro; }
-  html:not(.native) .analyse-page .analyse-excerpt-card { grid-area: excerpt; }
-  html:not(.native) .analyse-page .analyse-format-grid { grid-area: formats; }
-  html:not(.native) .analyse-page .analyse-content > :not(.rv-page-intro):not(.analyse-excerpt-card):not(.analyse-format-grid) {
-    grid-area: coach;
+  html:not(.native) .analyse-page .analyse-desk-col { display: flex; flex-direction: column; gap: 16px; min-width: 0; }
+  html:not(.native) .analyse-page .analyse-desk-col > * { margin: 0; }
+  html:not(.native) .analyse-page .analyse-retenir { display: flex; flex-direction: column; gap: 12px; }
+  html:not(.native) .analyse-page .analyse-retenir-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
   }
+  html:not(.native) .analyse-page .analyse-retenir-list li {
+    display: flex;
+    gap: 10px;
+    font-size: 14px;
+    line-height: 1.45;
+    color: var(--text-primary);
+  }
+  html:not(.native) .analyse-page .analyse-retenir-list svg { flex-shrink: 0; width: 15px; height: 15px; margin-top: 3px; color: var(--accent-orange); }
+  html:not(.native) .analyse-page .analyse-avancement { display: flex; flex-direction: column; gap: 10px; }
+  html:not(.native) .analyse-page .analyse-avancement-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  html:not(.native) .analyse-page .analyse-avancement-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    font-size: 13.5px;
+    color: var(--text-secondary);
+  }
+  html:not(.native) .analyse-page .analyse-avancement-row b { color: var(--text-primary); font-weight: 700; }
 
   /* ── Résumé : colonne de lecture + rail « à retenir » qui suit ── */
   html:not(.native) .resume-page .resume-content {
@@ -230,7 +336,6 @@
     grid-auto-rows: max-content;
     grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr);
     grid-template-areas:
-      "banner  banner"
       "intro   badges"
       "stats   badges"
       "account badges"
@@ -239,7 +344,6 @@
     align-items: start;
     align-content: start;
   }
-  html:not(.native) .profile-page .pf-content > .guest-banner { grid-area: banner; }
   html:not(.native) .profile-page .pf-intro { grid-area: intro; }
   html:not(.native) .profile-page .pf-stats-card { grid-area: stats; margin: 0; }
   html:not(.native) .profile-page .pf-section:has(.pf-badges-grid) { grid-area: badges; margin: 0; }
@@ -254,8 +358,7 @@
     align-items: start;
     align-content: start;
   }
-  html:not(.native) .reglages-page .rg-intro,
-  html:not(.native) .reglages-page .rg-content > .guest-banner { grid-column: 1 / -1; }
+  html:not(.native) .reglages-page .rg-intro { grid-column: 1 / -1; }
 
   /* ── Scanner : deux panneaux, photo et texte ── */
   html:not(.native) .scan-page .scan-content--double {

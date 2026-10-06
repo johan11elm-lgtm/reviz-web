@@ -51,6 +51,7 @@ export default function Programme() {
       <PageHeader
         variant="back"
         onBack={() => (window.history.state?.idx > 0 ? navigate(-1) : navigate('/'))}
+        className="rv-page-header--racine"
       />
       <PageIntro
         title="Mon programme"

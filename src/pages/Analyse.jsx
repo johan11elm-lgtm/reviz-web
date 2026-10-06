@@ -1,4 +1,4 @@
-import { ResumeIcon, FlashcardsIcon, MindmapIcon, QuizIcon } from '../components/Icons';
+import { ResumeIcon, FlashcardsIcon, MindmapIcon, QuizIcon, StarIcon } from '../components/Icons';
 import { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
@@ -8,7 +8,10 @@ import { PageIntro } from '../components/PageIntro';
 import { Mascot } from '../components/Mascot';
 import { analyseLesson, analyseImage, popPendingAnalysis } from '../services/aiService';
 import { LESSON_TEXT_MAX_LABEL } from '../utils/lessonText';
-import { isProgrammeLessonId } from '../utils/programme';
+import { isProgrammeLessonId, chapterState, CHAPTER_STATE_LABEL } from '../utils/programme';
+import { countDueCards, getCardState } from '../services/srsService';
+import { loadRevisions } from '../services/revisionService';
+import { useIsDesktop } from '../hooks/useMediaQuery';
 import { saveLesson } from '../services/historyService';
 import { PremiumModal } from '../components/PremiumModal';
 import { MissingLessonState } from '../components/MissingLessonState';
@@ -40,7 +43,32 @@ function buildLessonFromAiData(data) {
     excerpt:         data.metadata.excerpt,
     flashcardsCount: data.flashcards.length,
     quizCount:       data.quiz.length,
+    keyPoints:       data.resume?.keyPoints ?? [],
   };
+}
+
+const STATE_TONE = { nouveau: 'violet', commence: 'orange', 'a-revoir': 'orange', maitrise: 'green' };
+
+/** Avancement de l'élève sur la leçon (cartes vues, à revoir, séances). */
+function lessonProgress(lessonId, total) {
+  let seen = 0;
+  for (let i = 0; i < total; i++) if (getCardState(lessonId, i)) seen++;
+  const due = countDueCards(lessonId, total);
+  const sessions = loadRevisions().filter(r => r.lessonId === lessonId);
+  return {
+    seen,
+    due,
+    sessions: sessions.length,
+    last: sessions[0]?.revisedAt ?? null,
+    state: chapterState({ lesson: true, dueCards: due, reviewedCards: seen }),
+  };
+}
+
+function formatDay(ts) {
+  const days = Math.floor((Date.now() - ts) / 86400000);
+  if (days <= 0) return "aujourd'hui";
+  if (days === 1) return 'hier';
+  return `il y a ${days} jours`;
 }
 
 // ─── Formats de révision ─────────────────────────────────────────────
@@ -74,6 +102,7 @@ export default function Analyse() {
   const [showPremium, setShowPremium] = useState(false);
   const [noLesson, setNoLesson]       = useState(false);
   const navigate   = useNavigate();
+  const isDesktop  = useIsDesktop();
   const { getUserLevel, isGuest } = useAuth();
   const userLevel  = getUserLevel();
   const calledRef  = useRef(false);
@@ -182,6 +211,56 @@ export default function Analyse() {
   };
   const errInfo = errorMessages[error] ?? { title: 'Oups, ça a coincé', sub: 'Vérifie ta connexion et réessaie.' };
 
+  // ── Blocs de la page (le téléphone les empile, l'ordinateur les répartit) ──
+  const excerptCard = (
+    <>
+      {/* Résumé / excerpt */}
+      {displayLesson.excerpt && (
+        <div className="rv-card rv-card--padded analyse-excerpt-card">
+          <div className="analyse-excerpt-label">{fromProgramme ? "L'essentiel du chapitre" : 'Résumé détecté'}</div>
+          <p className="analyse-excerpt-text">{displayLesson.excerpt}</p>
+        </div>
+      )}
+    </>
+  );
+  const coachCard = (
+    <>
+      {/* Coach de révision — chat contextuel sur la leçon (Firestore requis
+          pour le contexte serveur → pas de coach sur le mock dev sans id). */}
+      {lesson && coachLessonId && !isGuest && (
+        <CoachEntryCard onClick={() => navigate(`/coach?lesson=${coachLessonId}`)} />
+      )}
+    </>
+  );
+  const formatGrid = (
+    <div className="analyse-format-grid">
+      {formats.map(f => {
+        const count = f.getCount(displayLesson);
+        return (
+          <Link key={f.id} to={f.to} className="rv-card rv-card--link rv-card--padded analyse-format-card">
+            <div className="analyse-format-card-top">
+              <div className={`rv-icon-square rv-icon-square--xl rv-icon-square--${f.tone}`}>
+                {f.icon}
+              </div>
+              <span className={`analyse-format-arrow analyse-format-arrow--${f.tone}`}>›</span>
+            </div>
+            <div className="analyse-format-name">{f.name}</div>
+            {count !== null && (
+              <div className={`rv-pill rv-pill--${f.tone} analyse-format-count`}>
+                {count} {f.unit}
+              </div>
+            )}
+          </Link>
+        );
+      })}
+    </div>
+  );
+
+  // Ordinateur : « À retenir » (points clés du résumé) et l'avancement.
+  const avancement = isDesktop && lesson && coachLessonId
+    ? lessonProgress(coachLessonId, displayLesson.flashcardsCount ?? 0)
+    : null;
+
   if (noLesson) return <MissingLessonState title="Ta leçon" />;
 
   return (
@@ -277,42 +356,57 @@ export default function Analyse() {
           className="analyse-intro"
         />
 
-        {/* Résumé / excerpt */}
-        {displayLesson.excerpt && (
-          <div className="rv-card rv-card--padded analyse-excerpt-card">
-            <div className="analyse-excerpt-label">{fromProgramme ? "L'essentiel du chapitre" : 'Résumé détecté'}</div>
-            <p className="analyse-excerpt-text">{displayLesson.excerpt}</p>
-          </div>
-        )}
-
-        {/* Coach de révision — chat contextuel sur la leçon (Firestore requis
-            pour le contexte serveur → pas de coach sur le mock dev sans id). */}
-        {lesson && coachLessonId && !isGuest && (
-          <CoachEntryCard onClick={() => navigate(`/coach?lesson=${coachLessonId}`)} />
-        )}
-
-        <div className="analyse-format-grid">
-          {formats.map(f => {
-            const count = f.getCount(displayLesson);
-            return (
-              <Link key={f.id} to={f.to} className="rv-card rv-card--link rv-card--padded analyse-format-card">
-                <div className="analyse-format-card-top">
-                  <div className={`rv-icon-square rv-icon-square--xl rv-icon-square--${f.tone}`}>
-                    {f.icon}
-                  </div>
-                  <span className={`analyse-format-arrow analyse-format-arrow--${f.tone}`}>›</span>
+        {isDesktop ? (
+          <div className="analyse-desk">
+            <div className="analyse-desk-col">
+              {excerptCard}
+              {displayLesson.keyPoints?.length > 0 && (
+                <div className="rv-card rv-card--padded analyse-retenir">
+                  <div className="analyse-excerpt-label">À retenir</div>
+                  <ul className="analyse-retenir-list">
+                    {displayLesson.keyPoints.map(k => <li key={k}><StarIcon />{k}</li>)}
+                  </ul>
                 </div>
-                <div className="analyse-format-name">{f.name}</div>
-                {count !== null && (
-                  <div className={`rv-pill rv-pill--${f.tone} analyse-format-count`}>
-                    {count} {f.unit}
+              )}
+              {coachCard}
+            </div>
+            <div className="analyse-desk-col">
+              {formatGrid}
+              {avancement && (
+                <div className="rv-card rv-card--padded analyse-avancement">
+                  <div className="analyse-avancement-head">
+                    <span className="analyse-excerpt-label">Ton avancement</span>
+                    <span className={`rv-pill rv-pill--${STATE_TONE[avancement.state]}`}>{CHAPTER_STATE_LABEL[avancement.state]}</span>
                   </div>
-                )}
-              </Link>
-            );
-          })}
-        </div>
-
+                  <div className="analyse-avancement-row">
+                    <span>Cartes vues</span>
+                    <b>{avancement.seen} / {displayLesson.flashcardsCount}</b>
+                  </div>
+                  <div className="rv-bar rv-bar--neutral-bg" aria-hidden="true">
+                    <div
+                      className="rv-bar-fill rv-bar-fill--orange"
+                      style={{ width: `${displayLesson.flashcardsCount ? Math.round(avancement.seen / displayLesson.flashcardsCount * 100) : 0}%` }}
+                    />
+                  </div>
+                  <div className="analyse-avancement-row">
+                    <span>À revoir aujourd'hui</span>
+                    <b>{avancement.due} carte{avancement.due > 1 ? 's' : ''}</b>
+                  </div>
+                  <div className="analyse-avancement-row">
+                    <span>Séances</span>
+                    <b>{avancement.sessions}{avancement.last ? ` · la dernière ${formatDay(avancement.last)}` : ''}</b>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        ) : (
+          <>
+            {excerptCard}
+            {coachCard}
+            {formatGrid}
+          </>
+        )}
       </div>
 
       <BottomNav />

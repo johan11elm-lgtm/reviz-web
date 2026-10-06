@@ -32,7 +32,8 @@ test.describe('Mon programme', () => {
 
     // ── Mon programme : matières, bandeau du mode essai ──
     await expect(page).toHaveURL(/\/programme$/)
-    await expect(page.getByRole('status').getByText('Mode essai')).toBeVisible()
+    // Sur ordinateur (1280 px), le mode essai est rappelé dans la barre latérale.
+    await expect(page.locator('.guest-banner:visible, .side-nav-note:visible').getByText('Mode essai')).toBeVisible()
     await expect(page.getByRole('button', { name: /^Maths/ })).toBeVisible()
     await page.screenshot({ path: test.info().outputPath('programme.png') })
 
@@ -61,7 +62,7 @@ test.describe('Mon programme', () => {
     // ── Accueil : héros vers le programme, bandeau, et le chapitre devient « commencé » ──
     await page.goto('/')
     await expect(page.getByRole('link', { name: 'Réviser mon programme' })).toBeVisible()
-    await expect(page.getByRole('status').getByText('Mode essai')).toBeVisible()
+    await expect(page.locator('.guest-banner:visible, .side-nav-note:visible').getByText('Mode essai')).toBeVisible()
     await page.goto('/programme/maths')
     await expect(page.getByRole('button', { name: /Le théorème de Thalès — Commencé/ })).toBeVisible()
 
@@ -83,7 +84,8 @@ test.describe('Mon programme', () => {
     const email = await signup(page, { birthDate: '2004-03-15' })  // le tunnel choisit la 3ème
     await verifyEmailAndOnboard(page, email)
 
-    await page.getByRole('link', { name: 'Réviser mon programme' }).click()
+    // Accueil sur ordinateur : la section « Mon programme » mène au programme.
+    await page.locator('.home-desk-more', { hasText: 'chapitres' }).click()
     await expect(page).toHaveURL(/\/programme$/)
     await expect(page.locator('.guest-banner, .side-nav-note')).toHaveCount(0)
 
@@ -104,21 +106,27 @@ test.describe('Mon programme', () => {
   })
 })
 
-test('le retour depuis une matière remonte jusqu’à l’accueil sans boucler', async ({ page }) => {
-  await mockApiRoutes(page)
-  await mockProgramme(page)
-  await page.goto('/essai')
-  await page.getByLabel('Ton prénom').fill('Léa')
-  await page.getByRole('button', { name: '3ème', exact: true }).click()
-  await page.getByRole('button', { name: /C'est parti/ }).click()
-  await expect(page).toHaveURL(/\/programme$/)
-  await page.goto('/')
-  await page.getByRole('link', { name: 'Réviser mon programme' }).first().click()
-  await expect(page).toHaveURL(/\/programme$/)
-  await page.getByRole('button', { name: /^Maths/ }).click()
-  await expect(page).toHaveURL(/\/programme\/maths/)
-  await page.getByRole('button', { name: 'Retour' }).first().click()
-  await expect(page).toHaveURL(/\/programme$/)
-  await page.getByRole('button', { name: 'Retour' }).first().click()
-  await expect(page).toHaveURL(/\/$/)
+// La flèche retour de Mon programme n'existe que sur téléphone (sur ordinateur,
+// la page s'ouvre depuis la barre latérale).
+test.describe('Téléphone (390 px)', () => {
+  test.use({ viewport: { width: 390, height: 844 } })
+
+  test('le retour depuis une matière remonte jusqu’à l’accueil sans boucler', async ({ page }) => {
+    await mockApiRoutes(page)
+    await mockProgramme(page)
+    await page.goto('/essai')
+    await page.getByLabel('Ton prénom').fill('Léa')
+    await page.getByRole('button', { name: '3ème', exact: true }).click()
+    await page.getByRole('button', { name: /C'est parti/ }).click()
+    await expect(page).toHaveURL(/\/programme$/)
+    await page.goto('/')
+    await page.getByRole('link', { name: 'Réviser mon programme' }).first().click()
+    await expect(page).toHaveURL(/\/programme$/)
+    await page.getByRole('button', { name: /^Maths/ }).click()
+    await expect(page).toHaveURL(/\/programme\/maths/)
+    await page.getByRole('button', { name: 'Retour' }).first().click()
+    await expect(page).toHaveURL(/\/programme$/)
+    await page.getByRole('button', { name: 'Retour' }).first().click()
+    await expect(page).toHaveURL(/\/$/)
+  })
 })
