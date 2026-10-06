@@ -1,0 +1,264 @@
+/* ─── Page publique « Votre avis » (/avis) ─────────────────────────
+ * Même langage que le reste : crème + halo, titre Geist noir, carte
+ * blanche, pastilles encre. Sur ordinateur : intro à gauche, formulaire
+ * à droite (pas de barre latérale sur cette page publique). */
+
+.avis-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  flex-shrink: 0;
+}
+.avis-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  color: var(--text-primary);
+  text-decoration: none;
+}
+.avis-nav-link {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  padding: 7px 16px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  text-decoration: none;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+@media (hover: hover) and (pointer: fine) {
+  .avis-nav-link:hover { background: var(--bg-hover); border-color: var(--border-hover); }
+}
+
+.avis-scroll {
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.avis-layout {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-cards);
+  padding-bottom: calc(40px + env(safe-area-inset-bottom, 0px));
+}
+
+/* Téléphone : intro, formulaire, puis l'encadré d'aide (le formulaire
+   reste visible dès l'arrivée par le QR code de l'affiche) */
+.avis-intro { display: contents; }
+.avis-aide { order: 2; }
+
+.avis-page-intro { padding-top: 6px; }
+
+/* Encadré « ce qui aide le plus » */
+.avis-aide {
+  margin: 0 var(--page-gutter);
+  padding: 16px 18px;
+  border-radius: var(--radius-callout);
+  background: var(--bg-tip);
+  border: 1px solid var(--border-tip);
+}
+.avis-aide-titre {
+  margin: 0 0 8px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+.avis-aide ul {
+  margin: 0;
+  padding-left: 18px;
+}
+.avis-aide li {
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--text-secondary);
+}
+.avis-aide-note {
+  margin: 10px 0 0;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--text-muted);
+}
+
+/* Carte du formulaire */
+.avis-card {
+  margin: 0 var(--page-gutter);
+  padding: 22px 20px;
+}
+.avis-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.avis-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  min-width: 0;
+}
+.avis-label {
+  padding: 0;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.1px;
+}
+.avis-label span { font-weight: 500; color: var(--text-muted); }
+/* La légende d'un fieldset n'est pas un élément flex : pas de gap */
+legend.avis-label { margin-bottom: 8px; }
+
+.avis-choix {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.avis-pastille {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  padding: 9px 16px;
+  border-radius: var(--radius-pill);
+  border: 1.5px solid var(--border);
+  background: var(--bg-card);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+.avis-pastille input {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+  pointer-events: none;
+}
+.avis-pastille:has(input:focus-visible) {
+  outline: 2px solid var(--accent-violet);
+  outline-offset: 2px;
+}
+.avis-pastille--on {
+  background: var(--accent-violet);
+  border-color: var(--accent-violet);
+  color: #fff;
+}
+@media (hover: hover) and (pointer: fine) {
+  .avis-pastille:not(.avis-pastille--on):hover { background: var(--bg-hover); border-color: var(--border-hover); }
+}
+
+.avis-input {
+  width: 100%;
+  box-sizing: border-box;
+  background: var(--bg-card);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-btn);
+  padding: 12px 14px;
+  font-family: inherit;
+  font-size: 15px;
+  line-height: 1.45;
+  color: var(--text-primary);
+  outline: none;
+  transition: border-color 0.15s ease;
+}
+.avis-input:focus { border-color: var(--accent-violet); }
+.avis-input::placeholder { color: var(--text-light); }
+.avis-textarea { resize: vertical; min-height: 84px; }
+.avis-select {
+  appearance: none;
+  -webkit-appearance: none;
+  padding-right: 40px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236B6557' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  background-size: 16px;
+}
+.avis-hint {
+  margin: 0;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+/* Champ piège hors écran (pas display:none, que certains robots repèrent) */
+.avis-piege {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.avis-erreur {
+  margin: 0;
+  padding: 10px 14px;
+  border-radius: var(--radius-chip);
+  background: var(--accent-red-soft);
+  color: var(--accent-red-ink);
+  font-size: 13px;
+  font-weight: 600;
+}
+.avis-legal {
+  margin: -6px 0 0;
+  text-align: center;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+.avis-legal a { color: var(--text-secondary); font-weight: 600; }
+
+/* Remerciement */
+.avis-merci {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 28px 22px 26px;
+}
+.avis-merci-titre {
+  margin: 8px 0 0;
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -0.6px;
+  color: var(--text-primary);
+}
+.avis-merci-sub {
+  margin: 6px 0 0;
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+.avis-merci-cta { margin-top: 18px; }
+
+/* ─── Ordinateur : deux colonnes, page centrée sans barre latérale ─── */
+@media (min-width: 1024px) {
+  html:not(.native) .avis-page {
+    margin-left: 0;
+    padding-left: max(24px, calc((100vw - 1040px) / 2));
+    padding-right: max(24px, calc((100vw - 1040px) / 2));
+  }
+  html:not(.native) .avis-nav { padding: 22px var(--page-gutter) 6px; }
+  html:not(.native) .avis-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 520px);
+    grid-auto-rows: max-content;
+    align-items: start;
+    column-gap: 40px;
+    padding-top: 28px;
+  }
+  html:not(.native) .avis-intro {
+    position: sticky;
+    top: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  html:not(.native) .avis-page-intro .rv-greeting-title { font-size: 44px; letter-spacing: -1.8px; }
+  html:not(.native) .avis-page-intro .rv-greeting-sub { font-size: 16px; max-width: 36ch; }
+  html:not(.native) .avis-card { padding: 28px 28px 24px; }
+  html:not(.native) .avis-card,
+  html:not(.native) .avis-aide { margin: 0 var(--page-gutter); }
+}

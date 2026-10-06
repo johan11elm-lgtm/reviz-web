@@ -49,6 +49,7 @@ const Coach          = lazy(() => import('./pages/Coach'))
 const Programme      = lazy(() => import('./pages/Programme'))
 const ProgrammeMatiere = lazy(() => import('./pages/ProgrammeMatiere'))
 const Essai          = lazy(() => import('./pages/Essai'))
+const Avis           = lazy(() => import('./pages/Avis'))
 
 // Fallback minimal pendant le chargement
 function LoadingFallback() {
@@ -125,6 +126,7 @@ export default function App() {
             {/* Routes publiques — pas de Firebase chargé */}
             <Route path="/welcome"     element={<><SplashHider /><Welcome /></>} />
             <Route path="/legal/:page" element={<><SplashHider /><Legal /></>} />
+            <Route path="/avis"        element={<><SplashHider /><Avis /></>} />
 
             {/* Toutes les autres routes — Firebase via AuthProvider */}
             <Route path="/*" element={

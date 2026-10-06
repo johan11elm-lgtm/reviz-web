@@ -1,6 +1,6 @@
 import { PageIntro } from '../components/PageIntro';
 import { GuestBanner } from '../components/GuestBanner';
-import { UserIcon, FlameIcon, BookIcon, BoltIcon } from '../components/Icons';
+import { UserIcon, FlameIcon, BookIcon, BoltIcon, ChatIcon } from '../components/Icons';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
@@ -34,6 +34,7 @@ const GearIcon = () => (
 const ACCOUNT_ITEMS = [
   { id: 'profil',   icon: <UserIcon />, label: 'Modifier le profil', tone: 'violet' },
   { id: 'reglages', icon: <GearIcon />, label: 'Réglages',           tone: 'orange' },
+  { id: 'avis',     icon: <ChatIcon />, label: 'Donner mon avis',    tone: 'green' },
 ];
 
 const SHEET_TITLES = {
@@ -96,6 +97,7 @@ export default function Profile() {
 
   function onAccountClick(id) {
     if (id === 'reglages') return navigate('/reglages');
+    if (id === 'avis') return navigate('/avis?src=profil');
     openSheet(id);
   }
 
@@ -192,7 +194,7 @@ export default function Profile() {
         <section className="pf-section">
           <h2 className="pf-section-title">Compte</h2>
           <div className="pf-account-list">
-            {ACCOUNT_ITEMS.filter(it => !isGuest || it.id === 'reglages').map(it => (
+            {ACCOUNT_ITEMS.filter(it => !isGuest || it.id !== 'profil').map(it => (
               <button
                 key={it.id}
                 type="button"

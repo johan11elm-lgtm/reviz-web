@@ -130,6 +130,8 @@ export default function Welcome() {
             <Link to="/legal/cgu">CGU</Link>
             <span aria-hidden="true">·</span>
             <Link to="/legal/confidentialite">Confidentialité</Link>
+            <span aria-hidden="true">·</span>
+            <Link to="/avis?src=accueil">Donner un avis</Link>
           </footer>
 
         </main>

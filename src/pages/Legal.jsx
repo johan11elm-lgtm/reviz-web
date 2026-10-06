@@ -43,6 +43,7 @@ const PAGES = {
             <li><strong>Date de naissance</strong> — collectée à l'inscription, uniquement pour déterminer si le consentement parental est requis (moins de 15 ans, art. 45 de la loi Informatique et Libertés).</li>
             <li><strong>Leçons scannées</strong> — le texte ou l'image de tes leçons, envoyé à l'IA pour générer les contenus de révision. Ces données ne sont pas conservées côté serveur après traitement.</li>
             <li><strong>Historique</strong> — tes leçons et révisions sont stockées localement sur ton appareil (localStorage) et synchronisées dans ta collection Firestore personnelle.</li>
+            <li><strong>Avis</strong> — ce que tu écris sur la page « Votre avis » (profil, réponses, e-mail facultatif pour recevoir une réponse), sans compte ni identifiant. Conservés 2 ans au plus, supprimés sur simple demande.</li>
             <li><strong>Données techniques</strong> — logs serveur standards (adresse IP, navigateur), conservés maximum 30 jours.</li>
           </ul>
         </Section>
