@@ -1,7 +1,7 @@
 {
   "classe": "3ème",
   "matiere": "Histoire",
-  "programme": "Histoire et EMC cycle 4, classe de 3e (BO n°11 du 26/11/2015, ajusté BO n°31 du 30/07/2020)",
+  "programme": "Histoire et EMC cycle 4, classe de 3e (BO n°11 du 26/11/2015, ajusté BO n°31 du 30/07/2020) ; EMC : programme 2024 (BO n°24 du 13/06/2024), thème annuel « Faire vivre la démocratie », en vigueur en 3e à la rentrée 2026",
   "modele": "claude-opus-5-5 (abonnement)",
   "genereLe": "2026-10-05",
   "relu": false,
@@ -314,59 +314,93 @@
       "reference": "Trente Glorieuses (1945-1975 environ) : forte croissance économique, plein emploi et hausse du niveau de vie (expression de Jean Fourastié, 1979).\nBaby-boom (de 1946 au milieu des années 1960) : forte natalité ; la population française passe d'environ 40 millions en 1946 à plus de 50 millions à la fin des années 1960.\nExode rural et urbanisation : construction de grands ensembles et de villes nouvelles ; montée du secteur tertiaire.\nSociété de consommation : diffusion de l'automobile, de la télévision, de l'électroménager ; premier hypermarché Carrefour en 1963.\nImmigration de travail venue d'Europe du Sud (Italie, Espagne, Portugal) puis du Maghreb ; bidonvilles (Nanterre) ; regroupement familial autorisé en 1976.\nJeunesse : culture spécifique (musique yé-yé, rock) ; mai 1968 ; majorité abaissée de 21 à 18 ans en 1974.\nLoi du 13 juillet 1965 : une femme mariée peut travailler et ouvrir un compte bancaire sans l'autorisation de son mari.\nLoi Neuwirth (1967) : autorise la contraception (pilule).\nMouvement de libération des femmes (MLF, 1970) ; manifeste des 343 (1971).\n1970 : l'autorité parentale remplace la puissance paternelle.\nLoi Veil (janvier 1975) : dépénalise l'interruption volontaire de grossesse (IVG) ; défendue par Simone Veil, ministre de la Santé.\nLoi de 1975 : divorce par consentement mutuel. Loi Roudy (1983) : égalité professionnelle entre femmes et hommes.\n1973 : premier choc pétrolier, fin des Trente Glorieuses ; montée du chômage, désindustrialisation.\nMéthode attendue : montrer à l'aide d'exemples datés comment la place des femmes évolue."
     },
     {
-      "id": "emc-citoyennete-republique-democratie",
-      "titre": "EMC : Citoyenneté, République et démocratie",
+      "id": "emc-regles-du-jeu-democratique",
+      "titre": "EMC : Les règles du jeu démocratique : Constitution, laïcité et institutions européennes",
       "ordre": 12,
-      "periode": "T3",
+      "periode": "T1",
       "notions": [
-        "Connaître les valeurs et les symboles de la République française",
-        "Définir la nationalité et la citoyenneté française et européenne",
-        "Connaître les droits et devoirs du citoyen",
-        "Expliquer le fonctionnement de la démocratie représentative et le droit de vote",
-        "Comprendre le rôle de la laïcité et de l'État de droit",
-        "Identifier les formes d'engagement du citoyen"
+        "Comprendre que la Constitution est la norme juridique fondamentale qui garantit les droits et libertés",
+        "Connaître le bloc de constitutionnalité et la hiérarchie des normes",
+        "Expliquer la séparation des pouvoirs et le contrôle du gouvernement par le Parlement",
+        "Suivre le trajet d'élaboration d'une loi et le rôle de chaque institution",
+        "Comprendre la laïcité de l'État affirmée par la Constitution",
+        "Connaître les grandes révisions de la Constitution depuis 1958",
+        "Présenter les institutions européennes et la citoyenneté européenne"
       ],
       "motsCles": [
-        "citoyenneté",
-        "nationalité",
-        "droit de vote",
-        "suffrage universel",
+        "Constitution",
+        "bloc de constitutionnalité",
+        "hiérarchie des normes",
+        "séparation des pouvoirs",
+        "Parlement",
+        "Conseil constitutionnel",
+        "QPC",
+        "commission d'enquête",
         "laïcité",
-        "démocratie représentative",
-        "Déclaration des droits de l'homme",
-        "Marianne",
-        "devise",
-        "citoyenneté européenne",
-        "État de droit",
-        "engagement"
+        "révision constitutionnelle",
+        "Union européenne",
+        "citoyenneté européenne"
       ],
-      "reference": "Article 1 de la Constitution de 1958 : « La France est une République indivisible, laïque, démocratique et sociale. »\nDevise : « Liberté, Égalité, Fraternité ». Principe : « gouvernement du peuple, par le peuple et pour le peuple ».\nSymboles : drapeau tricolore bleu-blanc-rouge, Marseillaise (hymne national, composée par Rouget de Lisle en 1792), Marianne, 14 juillet (fête nationale).\nNationalité : lien juridique qui rattache une personne à un État. Elle s'acquiert par filiation (droit du sang), par la naissance et la résidence en France (droit du sol) ou par naturalisation.\nCitoyen : personne qui possède la nationalité et des droits civils et politiques ; en France, on vote à partir de 18 ans.\nCitoyenneté européenne (traité de Maastricht, 1992) : tout national d'un État membre est citoyen de l'UE ; il peut voter aux élections municipales et européennes dans son pays de résidence.\nDroits : libertés fondamentales garanties par la Déclaration des droits de l'homme et du citoyen (1789) et le préambule de 1946. Devoirs : respecter la loi, payer l'impôt, participer à la défense.\nDémocratie représentative : les citoyens élisent des représentants (députés, sénateurs, maires…). Démocratie directe : les citoyens décident eux-mêmes, par exemple par référendum.\nSuffrage universel : droit de vote accordé à tous les citoyens majeurs. Le vote est un droit et un devoir civique, mais il n'est pas obligatoire en France ; il est secret.\nSéparation des pouvoirs : législatif (Parlement), exécutif (président et gouvernement), judiciaire (juges).\nÉtat de droit : État dans lequel tous, y compris les gouvernants, sont soumis au droit ; le Conseil constitutionnel contrôle la conformité des lois à la Constitution.\nLaïcité : loi de séparation des Églises et de l'État (9 décembre 1905) ; l'État est neutre, garantit la liberté de conscience et le libre exercice des cultes. Loi de 2004 sur les signes religieux ostensibles à l'école.\nEngagement : vote, adhésion à une association, un syndicat, un parti politique, bénévolat, service civique.\nMéthode attendue : argumenter sur une question de citoyenneté en s'appuyant sur des textes de référence."
+      "reference": "Constitution : norme juridique fondamentale, placée au sommet de la hiérarchie des normes ; celle de la Ve République date du 4 octobre 1958.\nArticle 1 de la Constitution : « La France est une République indivisible, laïque, démocratique et sociale. »\nBloc de constitutionnalité : Constitution de 1958, Déclaration des droits de l'homme et du citoyen (1789), préambule de la Constitution de 1946, Charte de l'environnement (2004).\nHiérarchie des normes (pyramide de Kelsen) : Constitution, puis traités internationaux et droit de l'Union européenne, puis lois, puis règlements (décrets, arrêtés).\nSéparation des pouvoirs : pouvoir législatif (Parlement : Assemblée nationale et Sénat), pouvoir exécutif (président de la République, Premier ministre et gouvernement), autorité judiciaire (juges), indépendante (article 64).\nÉlaboration d'une loi : un projet de loi (gouvernement) ou une proposition de loi (parlementaires) est examiné et voté par l'Assemblée nationale et le Sénat (navette parlementaire), puis promulgué par le président de la République.\nLe Conseil constitutionnel vérifie que les lois respectent la Constitution ; depuis 2010, un justiciable peut le saisir indirectement par une question prioritaire de constitutionnalité (QPC).\nContrôle du gouvernement par le Parlement : questions au gouvernement, commissions d'enquête parlementaires, motion de censure qui peut renverser le gouvernement (article 49).\nExemple : la loi Veil (17 janvier 1975) dépénalise l'interruption volontaire de grossesse (IVG) ; la loi constitutionnelle du 8 mars 2024 inscrit dans la Constitution la liberté garantie à la femme de recourir à l'IVG.\nLaïcité : l'autorité politique est indépendante des autorités religieuses ; aucune référence religieuse dans le lien entre l'État et la Nation. Loi de séparation des Églises et de l'État du 9 décembre 1905 : l'État ne reconnaît et ne subventionne aucun culte, mais garantit la liberté de conscience et le libre exercice des cultes.\nLes autorités religieuses peuvent participer au débat public dans les limites fixées par la loi.\nRévisions de la Constitution (par le Parlement réuni en Congrès ou par référendum) : élection du président au suffrage universel direct (1962), rôle accru du Conseil constitutionnel (1971, 1974, réforme de 2008), parité (1999), quinquennat (2000), décentralisation (2003), Charte de l'environnement (2004-2005), IVG (2024).\nConseil de l'Europe (1949) : Convention européenne des droits de l'homme (1950), Cour européenne des droits de l'homme (CEDH, Strasbourg).\nUnion européenne : Commission européenne (propose les textes et veille à leur application), Parlement européen (élu au suffrage universel direct depuis 1979) et Conseil de l'UE (ministres des États) votent les textes ; Conseil européen (chefs d'État et de gouvernement) fixe les grandes orientations ; Cour de justice de l'UE (Luxembourg).\nLes États membres doivent appliquer le droit de l'UE (traités, règlements, directives, décisions de la Cour de justice) ; certains domaines relèvent de la souveraineté des États, d'autres d'une logique supranationale.\nCitoyenneté européenne (traité de Maastricht, 1992) : libre circulation, droit de vote et d'éligibilité aux élections municipales et européennes dans le pays de résidence ; Charte des droits fondamentaux de l'UE (2000).\nMéthode attendue : identifier l'institution et le pouvoir en jeu dans une situation ; situer un texte dans la hiérarchie des normes."
     },
     {
-      "id": "emc-defense-et-engagement",
-      "titre": "EMC : La Défense nationale et l'engagement",
+      "id": "emc-opinion-publique-et-information",
+      "titre": "EMC : Les acteurs du jeu démocratique : l'opinion publique, l'information et la désinformation",
       "ordre": 13,
-      "periode": "T3",
+      "periode": "T2",
       "notions": [
-        "Connaître les missions de la défense nationale",
-        "Expliquer le parcours de citoyenneté (recensement, JDC)",
-        "Comprendre la notion de défense globale et la dissuasion nucléaire",
-        "Connaître le rôle de la France dans les alliances et opérations extérieures",
-        "Identifier les formes d'engagement au service de la Nation"
+        "Comprendre le rôle de l'opinion publique dans une démocratie délibérative",
+        "Savoir comment on mesure l'opinion : conception et limites des sondages",
+        "Connaître le rôle des médias, dont les médias sociaux, dans le débat public",
+        "Distinguer croyance, opinion et savoir ; établir rigoureusement les faits",
+        "Identifier la désinformation, les opérations de déstabilisation et le complotisme",
+        "Connaître le rôle et la protection des lanceurs d'alerte"
       ],
       "motsCles": [
-        "défense nationale",
-        "recensement",
-        "Journée défense et citoyenneté",
-        "parcours de citoyenneté",
-        "armée professionnelle",
-        "dissuasion nucléaire",
-        "OTAN",
-        "opérations extérieures",
-        "Service national universel",
-        "réserve"
+        "opinion publique",
+        "démocratie délibérative",
+        "sondage",
+        "échantillon représentatif",
+        "médias",
+        "médias sociaux",
+        "désinformation",
+        "infox",
+        "complotisme",
+        "intelligence artificielle",
+        "esprit critique",
+        "lanceur d'alerte"
       ],
-      "reference": "La défense nationale a pour mission d'assurer la sécurité et l'intégrité du territoire, de protéger la population et les intérêts de la France.\nLe président de la République est le chef des armées (article 15 de la Constitution) ; il décide de l'emploi de l'arme nucléaire.\nArmées : Terre, Marine nationale, Air et Espace ; la Gendarmerie nationale est une force militaire.\nLe service militaire obligatoire est suspendu par la loi de 1997 (décision de Jacques Chirac en 1996) ; l'armée devient professionnelle.\nParcours de citoyenneté : enseignement de défense au collège et au lycée, recensement, Journée défense et citoyenneté (JDC).\nRecensement : obligatoire pour tous les jeunes Français, filles et garçons, entre 16 ans et la fin du 3e mois qui suit ; il se fait à la mairie ou en ligne.\nL'attestation de recensement puis le certificat de participation à la JDC sont nécessaires pour s'inscrire aux examens (baccalauréat, permis de conduire) avant 25 ans ; le recensement permet aussi l'inscription automatique sur les listes électorales à 18 ans.\nDéfense globale : militaire, mais aussi civile et économique (protection face au terrorisme, aux cyberattaques, aux catastrophes).\nDissuasion nucléaire : la France possède l'arme nucléaire depuis 1960 ; elle vise à empêcher toute agression contre ses intérêts vitaux.\nAlliances : la France est membre de l'OTAN (elle a réintégré son commandement intégré en 2009), de l'Union européenne et membre permanent du Conseil de sécurité de l'ONU.\nOpérations extérieures (OPEX) et opérations de maintien de la paix sous mandat de l'ONU ; opération Sentinelle sur le territoire depuis 2015.\nEngagement : réserve opérationnelle, service civique, Service national universel (SNU) lancé en 2019, sapeurs-pompiers volontaires.\nMéthode attendue : expliquer pourquoi la défense est l'affaire de tous les citoyens."
+      "reference": "Démocratie délibérative : les décisions sont préparées par le débat public et l'échange d'arguments entre citoyens.\nOpinion publique : ensemble des idées et jugements partagés par une partie importante de la population ; elle s'exprime par les élections, les médias, les médias sociaux, les manifestations, les pétitions.\nSondage : enquête menée auprès d'un échantillon représentatif de la population, construit par la méthode des quotas (même structure que la population : âge, sexe, profession, région) ou par tirage au hasard.\nUn sondage comporte une marge d'erreur ; ses résultats dépendent de la taille de l'échantillon, de la formulation et de l'ordre des questions et du commanditaire.\nLoi du 19 juillet 1977 : encadre les sondages électoraux ; la Commission des sondages contrôle leur qualité ; publication interdite la veille et le jour du scrutin.\nMédias : presse écrite, radio, télévision, sites d'information ; le pluralisme des médias et la liberté de la presse (loi du 29 juillet 1881) sont indispensables à la démocratie.\nMédias sociaux : lieux de débats et de mobilisations (ex. : mouvement #MeToo, 2017), mais aussi de diffusion rapide de fausses informations.\nDistinguer croyance (conviction personnelle non démontrée), opinion (point de vue discutable) et savoir (connaissance établie et vérifiée par des méthodes rigoureuses).\nDésinformation : diffusion volontaire de fausses informations pour tromper ou manipuler ; une infox (fake news) est une fausse information présentée comme vraie.\nLes intelligences artificielles génératives permettent de fabriquer de faux textes, images et vidéos (hypertrucages ou deepfakes) : il faut vérifier la source, la date et croiser les informations.\nLoi du 22 décembre 2018 relative à la lutte contre la manipulation de l'information : en période électorale, un juge peut faire retirer rapidement une fausse information diffusée massivement en ligne.\nComplotisme : croyance selon laquelle des événements seraient secrètement organisés par un groupe caché ; la désinformation peut nourrir le complotisme, souvent lié au racisme et à l'antisémitisme.\nLanceur d'alerte : personne qui signale ou divulgue, de bonne foi et sans contrepartie financière directe, un crime, un délit, une menace ou un préjudice pour l'intérêt général.\nExemples : Irène Frachon, médecin qui a révélé en 2010 les dangers du Mediator ; Chelsea Manning, militaire américaine qui a divulgué des documents sur les guerres d'Irak et d'Afghanistan.\nProtection des lanceurs d'alerte : loi Sapin II (9 décembre 2016), renforcée par la loi du 21 mars 2022 (protection contre les représailles).\nMéthode attendue : analyser un sondage (commanditaire, échantillon, question posée) ; vérifier une information en identifiant et en croisant les sources."
+    },
+    {
+      "id": "emc-engagement-collectif",
+      "titre": "EMC : Les acteurs du jeu démocratique : l'engagement collectif et la citoyenneté active",
+      "ordre": 14,
+      "periode": "T3",
+      "notions": [
+        "Comprendre que la démocratie repose sur l'engagement effectif des citoyens",
+        "Connaître les différentes élections et leurs temporalités, ainsi que le référendum",
+        "Comprendre les règles des campagnes électorales et le rôle du vote",
+        "Connaître les formes traditionnelles d'engagement : politique, syndical, associatif, humanitaire",
+        "Connaître l'engagement dans les institutions (armée, police, justice, éducation)",
+        "Comprendre la démocratie scolaire et le rôle des élèves",
+        "Comprendre la liberté de manifester comme moyen d'exprimer une opinion"
+      ],
+      "motsCles": [
+        "citoyenneté active",
+        "engagement",
+        "élection",
+        "référendum",
+        "campagne électorale",
+        "suffrage universel",
+        "mandat",
+        "syndicat",
+        "association",
+        "démocratie scolaire",
+        "manifestation",
+        "SNU"
+      ],
+      "reference": "Citoyenneté active : participation effective des citoyens à la vie économique, sociale et politique ; la démocratie est un idéal à faire vivre, pas une réalité figée.\nEn France, on vote à partir de 18 ans ; le vote est un droit et un devoir civique, il est secret mais n'est pas obligatoire ; l'inscription sur les listes électorales est automatique à 18 ans pour les jeunes recensés.\nÉlections : présidentielle (tous les 5 ans), législatives (députés, 5 ans), sénatoriales (sénateurs élus par de grands électeurs, 6 ans, renouvellement par moitié tous les 3 ans), municipales (6 ans), départementales et régionales (6 ans), européennes (5 ans).\nRéférendum : les citoyens répondent directement par oui ou par non à une question (article 11 de la Constitution) ; exemple : référendum de 2005 sur le traité constitutionnel européen (victoire du non).\nCampagne électorale : période de débats avant le scrutin ; des règles garantissent l'égalité entre candidats et la sincérité du scrutin (panneaux d'affichage officiels, temps de parole contrôlé par l'Arcom, plafond des dépenses de campagne).\nLes délibérations du conseil municipal sont publiques.\nEngagement politique : adhérer ou militer dans un parti, être candidat, exercer un mandat d'élu (maire, conseiller municipal, député…).\nEngagement syndical : un syndicat défend les intérêts des salariés ; droit syndical et droit de grève garantis par le préambule de 1946.\nEngagement associatif ou humanitaire : loi du 1er juillet 1901 sur la liberté d'association ; bénévolat ; exemple de l'engagement pour la cause animale.\nEngagement dans les institutions : armée, police, gendarmerie, justice, éducation, sapeurs-pompiers volontaires ; réserve opérationnelle.\nService civique (dès 16 ans) ; service national universel (SNU, créé en 2019) pour découvrir différentes formes d'engagement ; Journée défense et citoyenneté (JDC).\nDémocratie scolaire : délégués de classe élus, conseil de la vie collégienne (CVC), éco-délégués, représentants au conseil d'administration.\nLiberté de manifester : permet d'exprimer collectivement une opinion et de faire pression sur les gouvernants ; une manifestation doit être déclarée en préfecture ou en mairie.\nExemple de parcours d'une loi avec mobilisations et débats : loi Veil (1975) ; loi ouvrant le mariage aux couples de même sexe (17 mai 2013).\nMéthode attendue : identifier une forme d'engagement et ses effets sur la vie démocratique ; argumenter sur l'importance du vote et de l'engagement."
     }
   ]
 }
