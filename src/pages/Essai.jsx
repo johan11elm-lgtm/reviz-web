@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { PageHeader } from '../components/PageHeader';
 import { PageIntro } from '../components/PageIntro';
 import { CYCLES, CLASSES_BY_CYCLE } from '../utils/levels';
+import { CLASSES_DECOUVERTE, startDecouverte, stopDecouverte } from '../services/decouverteService';
 import './Essai.css';
 
 /**
@@ -14,7 +15,12 @@ import './Essai.css';
  */
 export default function Essai() {
   const navigate = useNavigate();
+  const [params] = useSearchParams();
   const { loginAsGuest, currentUser, isGuest } = useAuth();
+  // Enseignant arrivé par /profs (affiche) : la classe est déjà choisie,
+  // on ouvre directement son programme en mode découverte, sans formulaire.
+  const classeProf = params.get('prof') && CLASSES_DECOUVERTE.includes(params.get('classe'))
+    ? params.get('classe') : null;
   const [prenom, setPrenom] = useState('');
   const [cycle, setCycle] = useState('college');
   const [classe, setClasse] = useState(null);
@@ -25,14 +31,26 @@ export default function Essai() {
     if (currentUser && !isGuest) navigate('/', { replace: true });
   }, [currentUser, isGuest, navigate]);
 
+  useEffect(() => {
+    if (!classeProf || (currentUser && !isGuest)) return;
+    startDecouverte();
+    loginAsGuest({ prenom: 'Prof', level: { cycle: 'college', classe: classeProf, specialites: [] } });
+    navigate('/programme', { replace: true });
+    // Une seule fois, à l'arrivée sur la page.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   function submit(e) {
     e.preventDefault();
     const p = prenom.trim();
     if (!p) { setError('Entre ton prénom.'); return; }
     if (!classe) { setError('Choisis ta classe.'); return; }
+    stopDecouverte();
     loginAsGuest({ prenom: p, level: { cycle, classe, specialites: [] } });
     navigate('/programme', { replace: true });
   }
+
+  if (classeProf) return <div className="app essai-page" />;
 
   return (
     <div className="app essai-page">

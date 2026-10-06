@@ -67,7 +67,8 @@ export default function Avis() {
   const [params] = useSearchParams();
   const source = SOURCES.includes(params.get('src')) ? params.get('src') : 'direct';
 
-  const [profil, setProfil] = useState('');
+  // Arrivée par l'affiche de la salle des profs : profil présélectionné.
+  const [profil, setProfil] = useState(source === 'affiche-profs' ? 'enseignant' : '');
   const [discipline, setDiscipline] = useState('');
   const [conseil, setConseil] = useState('');
   const [plait, setPlait] = useState('');
@@ -108,7 +109,9 @@ export default function Avis() {
           <Mascot pose="hello" size={28} priority alt="" aria-hidden="true" />
           <span>réviz</span>
         </Link>
-        <Link to="/essai" className="avis-nav-link">Essayer sans compte</Link>
+        {source === 'affiche-profs'
+          ? <Link to="/profs" className="avis-nav-link">Découvrir l'appli</Link>
+          : <Link to="/essai" className="avis-nav-link">Essayer sans compte</Link>}
       </nav>
 
       <div className="avis-scroll">
@@ -147,7 +150,9 @@ export default function Avis() {
                   ? 'Vous aurez une réponse à l’adresse indiquée.'
                   : 'Votre avis sera lu avec attention.'}
               </p>
-              <Link to="/essai" className="rv-btn-cta rv-btn-cta--center avis-merci-cta">Essayer Réviz sans compte</Link>
+              {source === 'affiche-profs'
+                ? <Link to="/profs" className="rv-btn-cta rv-btn-cta--center avis-merci-cta">Découvrir l'appli</Link>
+                : <Link to="/essai" className="rv-btn-cta rv-btn-cta--center avis-merci-cta">Essayer Réviz sans compte</Link>}
             </section>
           ) : (
             <form className="rv-card avis-card avis-form" onSubmit={envoyer} noValidate>

@@ -12,9 +12,9 @@ vi.mock('../../context/AuthContext', () => ({ useAuth: () => auth }))
 
 const { default: Essai } = await import('../Essai')
 
-const renderPage = () => render(<MemoryRouter initialEntries={['/essai']}><Essai /></MemoryRouter>)
+const renderPage = (url = '/essai') => render(<MemoryRouter initialEntries={[url]}><Essai /></MemoryRouter>)
 
-beforeEach(() => { nav.mockClear(); auth.loginAsGuest.mockClear(); auth.currentUser = null; auth.isGuest = false })
+beforeEach(() => { nav.mockClear(); auth.loginAsGuest.mockClear(); auth.currentUser = null; auth.isGuest = false; localStorage.clear() })
 
 describe('<Essai /> — mode essai', () => {
   it('demande un prénom puis une classe', () => {
@@ -41,6 +41,24 @@ describe('<Essai /> — mode essai', () => {
     fireEvent.click(screen.getByRole('tab', { name: 'Lycée' }))
     expect(screen.getByRole('button', { name: 'Terminale' })).toBeInTheDocument()
     expect(screen.queryByRole('button', { name: '3ème' })).not.toBeInTheDocument()
+  })
+
+  it('un enseignant venu de /profs ouvre directement le programme de la classe choisie', () => {
+    renderPage('/essai?prof=1&classe=4%C3%A8me')
+    expect(auth.loginAsGuest).toHaveBeenCalledWith({ prenom: 'Prof', level: { cycle: 'college', classe: '4ème', specialites: [] } })
+    expect(nav).toHaveBeenCalledWith('/programme', { replace: true })
+    expect(localStorage.getItem('reviz-decouverte-prof')).toBe('1')
+    expect(screen.queryByLabelText('Ton prénom')).not.toBeInTheDocument()
+  })
+
+  it('une classe inconnue retombe sur le formulaire, et un essai d’élève sort du mode découverte', () => {
+    localStorage.setItem('reviz-decouverte-prof', '1')
+    renderPage('/essai?prof=1&classe=CM2')
+    expect(auth.loginAsGuest).not.toHaveBeenCalled()
+    fireEvent.change(screen.getByLabelText('Ton prénom'), { target: { value: 'Léa' } })
+    fireEvent.click(screen.getByRole('button', { name: '5ème' }))
+    fireEvent.click(screen.getByRole('button', { name: /C'est parti/ }))
+    expect(localStorage.getItem('reviz-decouverte-prof')).toBeNull()
   })
 
   it('un utilisateur déjà connecté est renvoyé à l’accueil', () => {

@@ -5,6 +5,7 @@ import { Mascot } from './Mascot';
 import { HomeIcon, BookIcon, StatsIcon, UserIcon } from './BottomNav';
 import { CameraIcon, BookOpenIcon, ChatIcon } from './Icons';
 import { isProgrammeLessonId } from '../utils/programme';
+import { AVIS_PROFS_URL, isDecouverte } from '../services/decouverteService';
 import './SideNav.css';
 
 // Pages du tunnel (inscription, connexion, essai…) : pas de menu latéral.
@@ -72,7 +73,14 @@ export function SideNav() {
       </ul>
 
       <div className="side-nav-foot">
-        {isGuest ? (
+        {isGuest && isDecouverte() ? (
+          <>
+            <p className="side-nav-note"><b>Mode découverte</b> · l'app telle que la voient vos élèves.</p>
+            <Link to={AVIS_PROFS_URL} className="rv-btn-cta rv-btn-cta--full side-nav-cta">
+              <span>Donner mon avis</span>
+            </Link>
+          </>
+        ) : isGuest ? (
           <>
             <p className="side-nav-note"><b>Mode essai</b> · progression gardée sur cet ordinateur.</p>
             <Link to="/inscription" className="rv-btn-cta rv-btn-cta--full side-nav-cta">

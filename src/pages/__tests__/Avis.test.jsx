@@ -30,6 +30,12 @@ describe('<Avis />', () => {
     expect(apiFetch).not.toHaveBeenCalled()
   })
 
+  it('présélectionne « Enseignant·e » quand on arrive par l’affiche', () => {
+    renderAvis('/avis?src=affiche-profs')
+    expect(screen.getByLabelText('Enseignant·e')).toBeChecked()
+    expect(screen.getByRole('link', { name: /Découvrir l'appli/ })).toHaveAttribute('href', '/profs')
+  })
+
   it('propose la matière seulement aux enseignants', () => {
     renderAvis()
     expect(screen.queryByLabelText(/Votre matière/i)).toBeNull()
