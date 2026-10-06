@@ -1,6 +1,6 @@
-/* ─── Mon programme (liste des matières et des chapitres) ───────────
+/* ─── Mon programme (liste des matières et page d'une matière) ──────
  * Même langage que Cours : cartes blanches arrondies, halo de page,
- * mascottes de matière. Les cartes sont des <button> : on neutralise
+ * mascottes de matière. Les tuiles sont des <button> : on neutralise
  * les styles natifs et on hérite de .rv-card / .rv-card--link. */
 
 .programme-page .programme-content {
@@ -24,147 +24,91 @@
   font-size: 13px;
 }
 
-/* ── Carte matière ── */
-.programme-page .programme-matiere,
-.programme-page .programme-chapitre {
+/* ── Tuiles matières : deux colonnes sur téléphone ── */
+.programme-page .programme-grid {
   flex-shrink: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.programme-page .programme-matiere {
   display: flex;
-  align-items: center;
-  gap: 14px;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 0;
   width: 100%;
+  padding: 12px 14px 16px;
   text-align: left;
   font-family: inherit;
   color: inherit;
   border: none;
   cursor: pointer;
 }
-.programme-page .programme-chapitre:disabled {
-  cursor: default;
-}
 
+/* Les poses ont une marge transparente : on recale la mascotte sur le texte */
 .programme-page .programme-matiere-mascot {
   flex-shrink: 0;
-}
-
-.programme-page .programme-matiere-text,
-.programme-page .programme-chapitre-text {
-  flex: 1;
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
+  margin: 0 0 6px -6px;
 }
 
 .programme-page .programme-matiere-name {
   font-family: 'Geist', sans-serif;
-  font-size: 17px;
+  font-size: 16px;
   font-weight: 800;
   letter-spacing: -0.3px;
+  line-height: 1.2;
   color: var(--text-primary);
 }
 
-.programme-page .programme-matiere-meta {
+.programme-page .programme-matiere-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin: 4px 0 14px;
   font-size: 12px;
-  font-weight: 500;
+  font-weight: 600;
   color: var(--text-muted);
 }
+.programme-page .programme-matiere-status .rv-ico { font-size: 13px; }
+.programme-page .programme-matiere-status--revoir { color: var(--accent-orange-ink); }
+.programme-page .programme-matiere-status--fini { color: var(--accent-green-ink); }
 
-.programme-page .programme-bar {
-  margin-top: 4px;
+/* Une encoche par chapitre, dans l'ordre de l'année : mêmes couleurs que
+ * les étapes du chemin (orange = commencé ou à revoir, vert = maîtrisé).
+ * Poussée en bas de tuile pour rester alignée d'une tuile à l'autre. */
+.programme-page .programme-strip {
+  display: flex;
+  gap: 3px;
+  width: 100%;
+  margin-top: auto;
+}
+.programme-page .programme-strip-seg {
+  flex: 1;
   height: 6px;
-  border-radius: 6px;
-  background: var(--bg-hover);
-  overflow: hidden;
+  border-radius: 3px;
+  background: var(--bg-muted);
 }
-.programme-page .programme-bar-fill {
-  height: 100%;
-  border-radius: 6px;
-  background: var(--accent-orange);
-  transition: width 0.3s ease;
+.programme-page .programme-strip-seg--commence {
+  background: color-mix(in srgb, var(--accent-orange) 45%, var(--bg-muted));
 }
+.programme-page .programme-strip-seg--a-revoir { background: var(--accent-orange); }
+.programme-page .programme-strip-seg--maitrise { background: var(--accent-green); }
+.programme-page .programme-strip-seg--bientot { opacity: 0.45; }
 
-.programme-page .programme-chevron {
-  flex-shrink: 0;
-  font-size: 22px;
-  line-height: 1;
-  color: var(--text-muted);
-}
-
-/* ── Carte chapitre ── */
-.programme-page .programme-chapitre-num {
-  flex-shrink: 0;
-  width: 34px;
-  height: 34px;
-  border-radius: 12px;
-  display: grid;
-  place-items: center;
-  font-family: 'Geist', sans-serif;
-  font-size: 14px;
-  font-weight: 800;
-  color: var(--text-secondary);
-  background: var(--bg-hover);
-}
-.programme-page .programme-chapitre--maitrise .programme-chapitre-num {
-  color: var(--accent-green-ink);
-  background: var(--accent-green-soft);
-}
-.programme-page .programme-chapitre--a-revoir .programme-chapitre-num,
-.programme-page .programme-chapitre--commence .programme-chapitre-num {
-  color: var(--accent-orange-ink);
-  background: var(--accent-orange-soft);
-}
-
-.programme-page .programme-chapitre-title {
-  font-family: 'Geist', sans-serif;
-  font-size: 15px;
-  font-weight: 700;
-  letter-spacing: -0.2px;
-  color: var(--text-primary);
-  line-height: 1.3;
-}
-
-.programme-page .programme-chapitre-notions {
-  font-size: 12px;
-  line-height: 1.4;
-  color: var(--text-muted);
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-.programme-page .programme-chapitre-state {
-  flex-shrink: 0;
-  font-size: 11px;
-  font-weight: 700;
-  padding: 5px 10px;
-  border-radius: 999px;
-  white-space: nowrap;
-  color: var(--text-secondary);
-  background: var(--bg-hover);
-}
-.programme-page .programme-chapitre-state--commence,
-.programme-page .programme-chapitre-state--a-revoir {
-  color: var(--accent-orange-ink);
-  background: var(--accent-orange-soft);
-}
-.programme-page .programme-chapitre-state--maitrise {
-  color: var(--accent-green-ink);
-  background: var(--accent-green-soft);
-}
-.programme-page .programme-chapitre--bientot {
-  opacity: 0.55;
-}
+/* Prochaine étape : seulement sur ordinateur (desktop.css), la tuile de
+ * téléphone reste compacte. */
+.programme-page .programme-matiere-next { display: none; }
 
 /* ── Squelette ── */
-.programme-page .programme-skeleton {
-  display: flex;
-  flex-direction: column;
-  gap: var(--gap-cards);
-}
 .programme-page .programme-matiere--skeleton {
+  gap: 10px;
+  min-height: 150px;
   cursor: default;
 }
+.programme-page .programme-matiere--skeleton .rv-skeleton--icon { width: 56px; height: 56px; }
+.programme-page .programme-matiere--skeleton .rv-skeleton--title { width: 70%; }
+.programme-page .programme-matiere--skeleton .rv-skeleton--text { width: 45%; }
 
 .programme-page .programme-empty {
   flex-shrink: 0;

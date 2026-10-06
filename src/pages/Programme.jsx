@@ -6,9 +6,11 @@ import { PageHeader } from '../components/PageHeader';
 import { PageIntro } from '../components/PageIntro';
 import { Mascot } from '../components/Mascot';
 import { GuestBanner } from '../components/GuestBanner';
-import { loadCatalogue, matiereProgress } from '../services/programmeService';
+import { CheckIcon, RefreshIcon } from '../components/Icons';
+import { loadCatalogue, chapterProgress } from '../services/programmeService';
 import { loadLessons } from '../services/historyService';
 import { track } from '../services/statsService';
+import { useIsDesktop } from '../hooks/useMediaQuery';
 import { subjectMascot } from '../utils/subjects';
 import { hasProgramme, PROGRAMME_FALLBACK } from '../utils/programme';
 import './Programme.css';
@@ -44,7 +46,23 @@ export default function Programme() {
     return () => { alive = false; };
   }, [classe]);
 
-  const total = catalogue?.matieres.reduce((n, m) => n + m.chapitres.length, 0) ?? 0;
+  // État de chaque chapitre, calculé une fois par matière (tuiles et sous-titre).
+  const matieres = useMemo(() => (catalogue?.matieres ?? []).map(m => {
+    const items = m.chapitres.map(ch => ({ chapter: ch, ...chapterProgress(ch, lessons) }));
+    return {
+      ...m,
+      items,
+      commences: items.filter(i => i.state !== 'nouveau').length,
+      maitrises: items.filter(i => i.state === 'maitrise').length,
+      aRevoir: items.reduce((n, i) => n + (i.state === 'a-revoir' ? i.dueCards : 0), 0),
+      // Même repère que le chemin de la matière : le premier chapitre non maîtrisé.
+      prochain: items.find(i => i.chapter.pret && i.state !== 'maitrise') ?? null,
+    };
+  }), [catalogue, lessons]);
+  const total = matieres.reduce((n, m) => n + m.items.length, 0);
+  const commences = matieres.reduce((n, m) => n + m.commences, 0);
+  // 8 matières → 4 colonnes sur ordinateur, 6 (en 6e) → 3 : jamais de trou en fin de grille.
+  const cols = matieres.length % 4 === 0 ? 4 : matieres.length % 3 === 0 ? 3 : 4;
 
   return (
     <div className="app programme-page">
@@ -55,7 +73,9 @@ export default function Programme() {
       />
       <PageIntro
         title="Mon programme"
-        sub={catalogue ? `${classe} · ${total} chapitres, à réviser sans scanner` : classe}
+        sub={!catalogue ? classe
+          : commences ? `${classe} · ${commences} chapitre${commences > 1 ? 's' : ''} commencé${commences > 1 ? 's' : ''} sur ${total}`
+          : `${classe} · ${total} chapitres, à réviser sans scanner`}
         mascot="reading"
       />
 
@@ -78,50 +98,80 @@ export default function Programme() {
         )}
 
         {!catalogue && !error && (
-          <div className="programme-skeleton" role="status" aria-label="Chargement du programme…">
-            {[0, 1, 2].map(i => (
-              <div key={i} className="rv-card rv-card--padded programme-matiere programme-matiere--skeleton" aria-hidden="true">
+          <div className="programme-grid" role="status" aria-label="Chargement du programme…">
+            {[0, 1, 2, 3].map(i => (
+              <div key={i} className="rv-card programme-matiere programme-matiere--skeleton" aria-hidden="true">
                 <div className="rv-skeleton rv-skeleton--icon" />
-                <div className="programme-matiere-text">
-                  <div className="rv-skeleton rv-skeleton--title" />
-                  <div className="rv-skeleton rv-skeleton--text" />
-                </div>
+                <div className="rv-skeleton rv-skeleton--title" />
+                <div className="rv-skeleton rv-skeleton--text" />
               </div>
             ))}
           </div>
         )}
 
-        {catalogue && catalogue.matieres.map(m => {
-          const p = matiereProgress(m, lessons);
-          const pct = p.total ? Math.round((p.commences / p.total) * 100) : 0;
-          const meta = [
-            `${p.total} chapitre${p.total > 1 ? 's' : ''}`,
-            p.commences ? `${p.commences} commencé${p.commences > 1 ? 's' : ''}` : null,
-            p.maitrises ? `${p.maitrises} maîtrisé${p.maitrises > 1 ? 's' : ''}` : null,
-          ].filter(Boolean).join(' · ');
-          return (
-            <button
-              key={m.slug}
-              type="button"
-              className="rv-card rv-card--link rv-card--padded programme-matiere"
-              onClick={() => navigate(`/programme/${m.slug}`)}
-              aria-label={`${m.matiere} : ${meta}`}
-            >
-              <Mascot pose={subjectMascot(m.matiere)} size={56} alt="" aria-hidden="true" className="programme-matiere-mascot" />
-              <div className="programme-matiere-text">
-                <div className="programme-matiere-name">{m.matiere}</div>
-                <div className="programme-matiere-meta">{meta}</div>
-                <div className="programme-bar" aria-hidden="true">
-                  <div className="programme-bar-fill" style={{ width: `${pct}%` }} />
-                </div>
-              </div>
-              <span className="programme-chevron" aria-hidden="true">›</span>
-            </button>
-          );
-        })}
+        {catalogue && (
+          <div className="programme-grid" style={{ '--programme-cols': cols }}>
+            {matieres.map(m => <MatiereTile key={m.slug} m={m} onOpen={() => navigate(`/programme/${m.slug}`)} />)}
+          </div>
+        )}
       </div>
 
       <BottomNav />
     </div>
+  );
+}
+
+/**
+ * Tuile d'une matière : mascotte, avancement en une phrase, une encoche par
+ * chapitre (même code couleur que le chemin), et sur ordinateur la
+ * prochaine étape. Les cartes à revoir passent devant le reste.
+ */
+function MatiereTile({ m, onOpen }) {
+  const isDesktop = useIsDesktop();
+  const total = m.items.length;
+  const fini = total > 0 && m.maitrises === total;
+  const label = [
+    `${total} chapitre${total > 1 ? 's' : ''}`,
+    m.commences ? `${m.commences} commencé${m.commences > 1 ? 's' : ''}` : null,
+    m.maitrises ? `${m.maitrises} maîtrisé${m.maitrises > 1 ? 's' : ''}` : null,
+    m.aRevoir ? `${m.aRevoir} carte${m.aRevoir > 1 ? 's' : ''} à revoir` : null,
+  ].filter(Boolean).join(' · ');
+
+  let status;
+  if (m.aRevoir) {
+    status = <span className="programme-matiere-status programme-matiere-status--revoir"><RefreshIcon />{m.aRevoir} carte{m.aRevoir > 1 ? 's' : ''} à revoir</span>;
+  } else if (fini) {
+    status = <span className="programme-matiere-status programme-matiere-status--fini"><CheckIcon />Tout maîtrisé</span>;
+  } else if (m.maitrises) {
+    // Même repère que le rail de la page matière : les chapitres maîtrisés.
+    status = <span className="programme-matiere-status">{m.maitrises} / {total} maîtrisé{m.maitrises > 1 ? 's' : ''}</span>;
+  } else if (m.commences) {
+    status = <span className="programme-matiere-status">{m.commences} / {total} commencé{m.commences > 1 ? 's' : ''}</span>;
+  } else {
+    status = <span className="programme-matiere-status">{total} chapitre{total > 1 ? 's' : ''}</span>;
+  }
+
+  return (
+    <button
+      type="button"
+      className="rv-card rv-card--link programme-matiere"
+      onClick={onOpen}
+      aria-label={`${m.matiere} : ${label}`}
+    >
+      <Mascot pose={subjectMascot(m.matiere)} size={isDesktop ? 84 : 64} alt="" aria-hidden="true" className="programme-matiere-mascot" />
+      <span className="programme-matiere-name">{m.matiere}</span>
+      {status}
+      <span className="programme-strip" aria-hidden="true">
+        {m.items.map(it => (
+          <span key={it.chapter.id} className={`programme-strip-seg programme-strip-seg--${it.chapter.pret ? it.state : 'bientot'}`} />
+        ))}
+      </span>
+      {m.prochain && (
+        <span className="programme-matiere-next">
+          <span className="programme-matiere-next-label">Prochaine étape</span>
+          <span className="programme-matiere-next-title">{m.prochain.chapter.titre}</span>
+        </span>
+      )}
+    </button>
   );
 }

@@ -64,6 +64,29 @@ describe('<Programme />', () => {
     expect(nav).toHaveBeenCalledWith('/programme/maths')
   })
 
+  it('montre l’avancement de chaque matière : cartes à revoir, tout maîtrisé, une encoche par chapitre', async () => {
+    const now = Date.now(), DAY = 86400000
+    localStorage.setItem('reviz-lessons', JSON.stringify([
+      { id: 'prog-thales', title: 'Le théorème de Thalès', subject: 'Maths', flashcardsCount: 2, source: 'programme' },
+      { id: 'prog-argumentation', title: "L'argumentation", subject: 'Français', flashcardsCount: 1, source: 'programme' },
+    ]))
+    localStorage.setItem('reviz-srs', JSON.stringify({
+      'prog-thales_0': { interval: 1, reps: 1, ease: 2.5, nextReview: now - DAY },
+      'prog-thales_1': { interval: 3, reps: 2, ease: 2.5, nextReview: now + 3 * DAY },
+      'prog-argumentation_0': { interval: 3, reps: 2, ease: 2.5, nextReview: now + 3 * DAY },
+    }))
+    const { container } = renderPage()
+    expect(await screen.findByText('1 carte à revoir')).toBeInTheDocument()
+    expect(screen.getByText('Tout maîtrisé')).toBeInTheDocument()
+    expect(screen.getByText(/3ème · 2 chapitres commencés sur 3/)).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: /^Maths : 2 chapitres · 1 commencé · 1 carte à revoir/ })).toBeInTheDocument()
+    expect(container.querySelectorAll('.programme-strip-seg--a-revoir')).toHaveLength(1)
+    expect(container.querySelectorAll('.programme-strip-seg--bientot')).toHaveLength(1)
+    expect(container.querySelectorAll('.programme-strip-seg--maitrise')).toHaveLength(1)
+    // Prochaine étape : le premier chapitre prêt et non maîtrisé ; aucune pour une matière finie.
+    expect(screen.getAllByText('Prochaine étape')).toHaveLength(1)
+  })
+
   it('un lycéen voit le programme de 3e avec une note', async () => {
     authState.level = { cycle: 'lycee', classe: '2nde' }
     renderPage()
