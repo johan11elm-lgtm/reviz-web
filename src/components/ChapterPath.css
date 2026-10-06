@@ -43,11 +43,15 @@
   flex-direction: column;
   align-items: center;
   gap: 22px;
+  container-type: inline-size; /* la fiche se cale sur la largeur du chemin (100cqw) */
 }
 
-/* ── Étape ── */
+/* ── Étape ──
+ * Largeur du rond : la fiche, plus large, déborde des deux côtés sans
+ * élargir l'étape (sinon, décalée, celle-ci fait défiler la page de côté). */
 .path-step {
   position: relative;
+  width: var(--node);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -185,12 +189,19 @@
   display: none;
 }
 
-/* ── Fiche du chapitre (au clic) ── */
+/* ── Fiche du chapitre (au clic) ──
+ * Centrée sous l'étape, mais jamais hors du chemin : on annule juste la
+ * part du décalage en zigzag qui la ferait déborder (left, pour laisser
+ * transform à l'animation d'entrée). */
 .path-card {
+  --card-w: min(340px, 86vw);
+  --card-room: max(0px, (100cqw - var(--card-w)) / 2);
+  --card-shift: calc(var(--offset) * var(--path-step));
   position: relative;
+  left: calc(clamp(-1 * var(--card-room), var(--card-shift), var(--card-room)) - var(--card-shift));
   z-index: 5;
   margin-top: 16px;
-  width: min(340px, 86vw);
+  width: var(--card-w);
   padding: 16px;
   border-radius: 20px;
   background: var(--bg-card);
@@ -252,6 +263,10 @@
 }
 .path-card-formats span { display: inline-flex; align-items: center; gap: 5px; }
 .path-card-formats svg { width: 14px; height: 14px; }
+/* Sans unités de conteneur (Safari < 16, iOS 15) : fiche centrée sur le chemin */
+@supports not (width: 1cqw) {
+  .path-card { --card-room: 0px; }
+}
 
 @media (prefers-reduced-motion: reduce) {
   .path-step--current .path-step-node::before,

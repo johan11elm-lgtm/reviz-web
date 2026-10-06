@@ -129,4 +129,39 @@ test.describe('Téléphone (390 px)', () => {
     await page.getByRole('button', { name: 'Retour' }).first().click()
     await expect(page).toHaveURL(/\/$/)
   })
+
+  test('la fiche d’un chapitre reste dans l’écran, de chaque côté du zigzag', async ({ page }) => {
+    await mockApiRoutes(page)
+    // Huit chapitres prêts : toutes les positions du zigzag (décalages 0, ±1, ±1,6).
+    const index = JSON.parse(fixture('index.json'))
+    const maths = index.matieres.find(m => m.slug === 'maths')
+    maths.chapitres = Array.from({ length: 8 }, (_, i) => ({
+      ...maths.chapitres[0], id: `chapitre-${i + 1}`, titre: `Chapitre de test numéro ${i + 1}`, ordre: i + 1,
+    }))
+    await page.route('**/programme/3eme/index.json', route =>
+      route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify(index) }))
+    await page.goto('/essai')
+    await page.getByLabel('Ton prénom').fill('Léa')
+    await page.getByRole('button', { name: '3ème', exact: true }).click()
+    await page.getByRole('button', { name: /C'est parti/ }).click()
+    await page.getByRole('button', { name: /^Maths/ }).click()
+    await expect(page).toHaveURL(/\/programme\/maths/)
+
+    const content = page.locator('.programme-content')
+    for (let i = 1; i <= 8; i++) {
+      const step = page.getByRole('button', { name: new RegExp(`^${i}\\. `) })
+      // Rond centré à l'écran : caché sous la barre d'onglets, Playwright le
+      // recentrerait aussi à l'horizontale (le halo rend .app défilable) et
+      // décalerait toute la page, ce qui fausserait la mesure.
+      await step.evaluate(el => el.scrollIntoView({ block: 'center' }))
+      await step.click()
+      const card = page.getByRole('dialog', { name: `Chapitre de test numéro ${i}` })
+      await card.evaluate(el => Promise.all(el.getAnimations().map(a => a.finished)))
+      const box = await card.boundingBox()
+      expect(box.x, `chapitre ${i}, bord gauche`).toBeGreaterThanOrEqual(16)
+      expect(box.x + box.width, `chapitre ${i}, bord droit`).toBeLessThanOrEqual(390 - 16)
+      // L'étape décalée ne doit pas non plus faire défiler la page de côté.
+      expect(await content.evaluate(el => el.scrollWidth - el.clientWidth), `chapitre ${i}`).toBe(0)
+    }
+  })
 })
