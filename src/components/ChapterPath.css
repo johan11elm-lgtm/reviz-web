@@ -106,8 +106,9 @@
 .path-step--bientot .path-step-node { cursor: default; }
 .path-step--bientot .path-step-face { opacity: 0.45; color: var(--text-muted); }
 
-/* Étape en cours : plus grande, encre, halo qui respire */
-.path-step--current { --node: 86px; }
+/* Étape en cours : plus grande, encre, halo qui respire ; place au-dessus pour sa bulle */
+.path-step--current { --node: 86px; margin-top: 40px; }
+.chapter-path-steps > .path-step--current:first-child { margin-top: 0; }
 .path-step--current .path-step-face {
   color: #fff;
   background: var(--accent-violet);
