@@ -49,7 +49,7 @@ test.describe('Mon programme', () => {
     await expect(page).toHaveURL(/\/analyse/)
     await expect(page.getByText("L'essentiel du chapitre")).toBeVisible()
     await expect(page.getByRole('link', { name: /Quiz/ })).toBeVisible()
-    await expect(page.locator('a[href^="/coach"]')).toHaveCount(0)
+    await expect(page.locator('.analyse-page a[href^="/coach"]')).toHaveCount(0)
     await page.waitForTimeout(700)  // fin du fondu d'entrée, pour la capture seulement
     await page.screenshot({ path: test.info().outputPath('analyse-chapitre.png') })
 

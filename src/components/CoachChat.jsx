@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useModalA11y } from '../hooks/useModalA11y';
 import { Mascot } from './Mascot';
+import { BulbIcon, StarIcon, QuizIcon, PencilIcon } from './Icons';
 import { sendCoachMessage, CHAT_MAX_MESSAGE_LENGTH } from '../services/chatService';
 import { startCheckout } from '../services/billingService';
 import './CoachChat.css';
@@ -12,6 +13,14 @@ const SUGGESTIONS = [
   'Explique-moi ça simplement',
   'Donne-moi un exemple concret',
   "C'est quoi le plus important à retenir ?",
+];
+
+// Page /coach : cartes d'amorce avec icône et sous-titre (façon assistant IA).
+const PAGE_SUGGESTIONS = [
+  { Icon: BulbIcon,   text: 'Explique-moi ça simplement', sub: 'Avec des mots de tous les jours' },
+  { Icon: PencilIcon, text: 'Donne-moi un exemple concret', sub: 'Pour voir comment ça marche' },
+  { Icon: StarIcon,   text: "C'est quoi le plus important à retenir ?", sub: "L'essentiel pour le contrôle" },
+  { Icon: QuizIcon,   text: 'Pose-moi une question pour vérifier', sub: 'Teste-toi sur la leçon' },
 ];
 
 const ERROR_MESSAGES = {
@@ -153,7 +162,8 @@ function loadConversation(lessonId) {
  * @param {string} [prefill]     question pré-remplie (hook de friction du quiz)
  * @param {string} [className]
  */
-export function CoachConversation({ lessonId, prefill, className = '' }) {
+export function CoachConversation({ lessonId, prefill, className = '', variant = 'sheet', lessonTitle = '' }) {
+  const isPage = variant === 'page';
   const { isPremium, getUserLevel } = useAuth();
   const navigate = useNavigate();
 
@@ -238,12 +248,46 @@ export function CoachConversation({ lessonId, prefill, className = '' }) {
     send(input);
   }
 
+  // Page : Entrée envoie, Maj+Entrée va à la ligne ; le champ grandit avec le texte.
+  function handleKeyDown(e) {
+    if (e.key === 'Enter' && !e.shiftKey && !e.nativeEvent.isComposing) {
+      e.preventDefault();
+      send(input);
+    }
+  }
+  const textareaRef = useRef(null);
+  useEffect(() => {
+    const el = textareaRef.current;
+    if (!el) return;
+    el.style.height = 'auto';
+    el.style.height = `${Math.min(el.scrollHeight, 200)}px`;
+  }, [input]);
+
+  const empty = messages.length === 0 && !isStreaming && !quotaOut;
+
   return (
-    <div className={['coach-conversation', className].filter(Boolean).join(' ')}>
+    <div className={['coach-conversation', isPage && 'coach-conversation--page', className].filter(Boolean).join(' ')}>
         <div className="coach-messages" ref={scrollRef} role="log" aria-live="polite">
-          <CoachRow>
-            Salut ! Un truc pas clair dans cette leçon ? Pose-moi ta question, je t'explique.
-          </CoachRow>
+          {isPage && empty ? (
+            <div className="coach-hero">
+              <Mascot pose="coach" size={132} glow animate alt="" aria-hidden="true" className="coach-hero-mascot" />
+              <h2 className="coach-hero-title">Qu'est-ce que tu veux comprendre ?</h2>
+              {lessonTitle && <p className="coach-hero-sub">Je connais ta leçon « {lessonTitle} ». Demande-moi ce que tu veux.</p>}
+              <div className="coach-hero-cards">
+                {PAGE_SUGGESTIONS.map(s => (
+                  <button type="button" key={s.text} className="coach-hero-card" onClick={() => send(s.text)}>
+                    <span className="coach-hero-card-icon" aria-hidden="true"><s.Icon /></span>
+                    <span className="coach-hero-card-text">{s.text}</span>
+                    <span className="coach-hero-card-sub">{s.sub}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+          ) : !isPage && (
+            <CoachRow>
+              Salut ! Un truc pas clair dans cette leçon ? Pose-moi ta question, je t'explique.
+            </CoachRow>
+          )}
 
           {messages.map((m, i) => (
             m.role === 'user' ? (
@@ -284,7 +328,7 @@ export function CoachConversation({ lessonId, prefill, className = '' }) {
           )}
         </div>
 
-        {messages.length === 0 && !isStreaming && !quotaOut && (
+        {!isPage && empty && (
           <div className="coach-suggestions">
             <span className="coach-suggestions-label">Pour commencer</span>
             <div className="coach-suggestions-row">
@@ -302,6 +346,20 @@ export function CoachConversation({ lessonId, prefill, className = '' }) {
 
         <form className="coach-input-row" onSubmit={handleSubmit}>
           <div className="coach-input-pill">
+            {isPage ? (
+            <textarea
+              ref={textareaRef}
+              className="coach-input coach-input--area"
+              rows={1}
+              value={input}
+              onChange={e => setInput(e.target.value)}
+              onKeyDown={handleKeyDown}
+              placeholder="Pose ta question sur la leçon…"
+              maxLength={CHAT_MAX_MESSAGE_LENGTH}
+              disabled={isStreaming || quotaOut}
+              aria-label="Ta question sur la leçon"
+            />
+            ) : (
             <input
               className="coach-input"
               type="text"
@@ -312,6 +370,7 @@ export function CoachConversation({ lessonId, prefill, className = '' }) {
               disabled={isStreaming || quotaOut}
               aria-label="Ta question sur la leçon"
             />
+            )}
             <button
               type="submit"
               className="coach-send-btn"
@@ -323,6 +382,12 @@ export function CoachConversation({ lessonId, prefill, className = '' }) {
               </svg>
             </button>
           </div>
+          {isPage && (
+            <p className="coach-input-hint">
+              <span className="coach-input-hint-keys">Entrée pour envoyer · Maj + Entrée pour aller à la ligne</span>
+              <span>Le coach peut se tromper : vérifie avec ton cours.</span>
+            </p>
+          )}
         </form>
     </div>
   );

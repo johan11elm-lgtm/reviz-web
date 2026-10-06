@@ -2,7 +2,7 @@ import { NavLink, Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { Mascot } from './Mascot';
 import { HomeIcon, BookIcon, StatsIcon, UserIcon } from './BottomNav';
-import { CameraIcon, BookOpenIcon } from './Icons';
+import { CameraIcon, BookOpenIcon, ChatIcon } from './Icons';
 import './SideNav.css';
 
 // Pages du tunnel (inscription, connexion, essai…) : pas de menu latéral.
@@ -11,7 +11,7 @@ const HIDDEN_PREFIXES = [
   '/consent-pending', '/finish-setup', '/welcome', '/legal',
 ];
 // Une leçon vit dans « Mes cours » : ses pages allument cette entrée.
-const LESSON_PATHS = ['/analyse', '/flashcards', '/quiz', '/resume', '/mindmap', '/coach'];
+const LESSON_PATHS = ['/analyse', '/flashcards', '/quiz', '/resume', '/mindmap'];
 
 /**
  * Barre latérale des grands écrans (≥ 1024 px, hors app native). Mêmes
@@ -28,6 +28,7 @@ export function SideNav() {
     { to: '/',          label: 'Accueil',       Icon: HomeIcon,     end: true },
     { to: '/cours',     label: 'Mes cours',     Icon: BookIcon,     also: LESSON_PATHS },
     { to: '/programme', label: 'Mon programme', Icon: BookOpenIcon },
+    { to: '/coach',     label: 'Coach',         Icon: ChatIcon },
     { to: '/progres',   label: 'Progrès',       Icon: StatsIcon },
     { to: '/profil',    label: 'Profil',        Icon: UserIcon,     also: ['/reglages'] },
   ];

@@ -267,3 +267,69 @@
 
 /* Indice de glisser-déposer : seulement sur ordinateur */
 .scan-drop-hint { display: none; margin: 0; font-size: 12.5px; color: var(--text-muted); text-align: center; }
+
+/* ── Coach : façon assistant IA — leçons à gauche, conversation au centre ── */
+@media (min-width: 1024px) {
+  html:not(.native) .coach-page { padding-left: 0; padding-right: 0; height: 100dvh; }
+  html:not(.native) .coach-page > .rv-page-header,
+  html:not(.native) .coach-page > .coach-page-intro { display: none; }
+  html:not(.native) .coach-page .coach-layout {
+    display: grid;
+    grid-template-columns: 300px minmax(0, 1fr);
+    height: 100%;
+  }
+  html:not(.native) .coach-page .coach-side {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    min-height: 0;
+    padding: 22px 14px;
+    border-right: 1px solid var(--border-subtle, var(--border));
+    background: color-mix(in srgb, var(--bg-card) 45%, transparent);
+  }
+  html:not(.native) .coach-page .coach-side-head { display: flex; align-items: center; gap: 10px; padding: 0 6px 4px; }
+  html:not(.native) .coach-page .coach-side-title { font-family: 'Geist', sans-serif; font-size: 17px; font-weight: 800; color: var(--text-primary); }
+  html:not(.native) .coach-page .coach-side-sub { font-size: 12px; color: var(--text-muted); }
+  html:not(.native) .coach-page .coach-side-search {
+    display: flex; align-items: center; gap: 8px; padding: 9px 12px;
+    border-radius: 12px; background: var(--bg-card); box-shadow: var(--shadow-card); color: var(--text-muted);
+  }
+  html:not(.native) .coach-page .coach-side-search svg { width: 15px; height: 15px; flex-shrink: 0; }
+  html:not(.native) .coach-page .coach-side-search input { flex: 1; min-width: 0; border: none; background: transparent; font: inherit; font-size: 13.5px; color: var(--text-primary); outline: none; }
+  html:not(.native) .coach-page .coach-side-list { list-style: none; margin: 0; padding: 0; overflow-y: auto; display: flex; flex-direction: column; gap: 2px; }
+  html:not(.native) .coach-page .coach-side-item {
+    width: 100%; display: flex; align-items: center; gap: 10px; padding: 9px 10px;
+    border: none; border-radius: 12px; background: transparent; text-align: left; font-family: inherit; color: inherit; cursor: pointer;
+  }
+  html:not(.native) .coach-page .coach-side-item:hover { background: var(--bg-hover); }
+  html:not(.native) .coach-page .coach-side-item--active { background: var(--bg-card); box-shadow: var(--shadow-card); }
+  html:not(.native) .coach-page .coach-side-item-text { min-width: 0; display: flex; flex-direction: column; }
+  html:not(.native) .coach-page .coach-side-item-title { font-size: 13.5px; font-weight: 700; color: var(--text-primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  html:not(.native) .coach-page .coach-side-item-sub { font-size: 11.5px; color: var(--text-muted); }
+  html:not(.native) .coach-page .coach-side-empty { padding: 10px; font-size: 13px; color: var(--text-muted); }
+
+  html:not(.native) .coach-page .coach-main { min-height: 0; }
+  html:not(.native) .coach-page .coach-lesson-select { display: none; }
+  html:not(.native) .coach-page .coach-main-head {
+    display: flex; align-items: center; gap: 12px; padding: 18px 32px 14px;
+    border-bottom: 1px solid var(--border-subtle, var(--border));
+  }
+  html:not(.native) .coach-page .coach-main-head-title { font-family: 'Geist', sans-serif; font-size: 16px; font-weight: 800; color: var(--text-primary); }
+  html:not(.native) .coach-page .coach-main-head-sub { font-size: 12.5px; color: var(--text-muted); }
+  html:not(.native) .coach-page .coach-page-body { margin-top: 0; }
+  /* Fil et composer dans une colonne de lecture centrée */
+  html:not(.native) .coach-conversation--page .coach-messages {
+    padding: 28px max(32px, calc((100% - 760px) / 2)) 16px;
+    gap: 22px;
+  }
+  html:not(.native) .coach-conversation--page .coach-input-row,
+  html:not(.native) .coach-conversation--page + .coach-suggestions {
+    padding-left: max(32px, calc((100% - 760px) / 2));
+    padding-right: max(32px, calc((100% - 760px) / 2));
+    padding-bottom: 20px;
+  }
+  html:not(.native) .coach-hero-title { font-size: 32px; }
+  html:not(.native) .coach-hero-sub { font-size: 15px; }
+  html:not(.native) .coach-hero-cards { grid-template-columns: repeat(4, minmax(0, 1fr)); max-width: 760px; }
+  html:not(.native) .coach-input-hint-keys { display: inline; }
+}

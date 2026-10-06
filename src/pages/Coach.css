@@ -1,12 +1,152 @@
-/* CSS scoped to page wrapper — see scripts/scope-page-css.py */
-/* Wrapper: .coach-page */
+/* ─── Page Coach : chat façon assistant IA, à la sauce Réviz ────────
+ * Téléphone : intro, sélecteur de leçon, conversation plein écran.
+ * Ordinateur (desktop.css) : liste des leçons à gauche, conversation au
+ * centre, composer large en bas. */
 
-/* Intro hors scroll ; la conversation prend tout le reste (messages scrollables,
-   saisie collée en bas avec la safe-area, cf. CoachChat.css). */
 .coach-page .coach-page-intro { padding-top: 4px; padding-bottom: 0; }
+
+.coach-page .coach-layout {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+.coach-page .coach-side { display: none; }
+.coach-page .coach-main {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+.coach-page .coach-main-head { display: none; }
+
+/* Sélecteur de leçon (téléphone) */
+.coach-page .coach-lesson-select {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 10px var(--page-gutter) 0;
+  padding: 8px 12px;
+  border-radius: 14px;
+  background: var(--bg-card);
+  box-shadow: var(--shadow-card);
+}
+.coach-page .coach-lesson-select-label { font-size: 12px; font-weight: 700; color: var(--text-muted); }
+.coach-page .coach-lesson-select select {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  background: transparent;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
 
 .coach-page .coach-page-body { margin-top: 8px; }
 
+/* ── Écran d'accueil de la conversation (hero) ── */
+.coach-hero {
+  margin: auto 0;
+  padding: 12px 0 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.coach-hero-title {
+  margin: 8px 0 0;
+  font-family: 'Geist', sans-serif;
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: -0.6px;
+  color: var(--text-primary);
+}
+.coach-hero-sub {
+  margin: 6px 0 0;
+  max-width: 44ch;
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--text-secondary);
+}
+.coach-hero-cards {
+  margin-top: 20px;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.coach-hero-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  padding: 14px;
+  text-align: left;
+  font-family: inherit;
+  color: inherit;
+  border: 1.5px solid var(--border);
+  border-radius: 18px;
+  background: var(--bg-card);
+  cursor: pointer;
+  transition: border-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+}
+@media (hover: hover) and (pointer: fine) {
+  .coach-hero-card:hover {
+    border-color: var(--accent-violet);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-card);
+  }
+}
+.coach-hero-card-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 4px;
+  color: var(--accent-orange-ink);
+  background: var(--accent-orange-soft);
+}
+.coach-hero-card-icon svg { width: 17px; height: 17px; }
+.coach-hero-card-text { font-size: 14px; font-weight: 700; line-height: 1.3; color: var(--text-primary); }
+.coach-hero-card-sub { font-size: 12px; color: var(--text-muted); }
+
+/* ── Messages en mode page : le coach écrit en pleine largeur, sans bulle ── */
+.coach-conversation--page .coach-row--coach .coach-bubble--coach:not(.coach-bubble--typing) {
+  background: transparent;
+  box-shadow: none;
+  padding: 2px 0 0;
+  font-size: 15px;
+  line-height: 1.6;
+}
+.coach-conversation--page .coach-bubble--user { font-size: 15px; }
+
+/* ── Composer : grand champ qui grandit, indications dessous ── */
+.coach-conversation--page .coach-input-pill {
+  align-items: flex-end;
+  border-radius: 22px;
+  padding: 8px 8px 8px 16px;
+}
+.coach-input--area {
+  resize: none;
+  min-height: 24px;
+  max-height: 200px;
+  padding: 8px 0;
+  line-height: 1.5;
+  font-family: inherit;
+}
+.coach-input-hint {
+  margin: 8px 4px 0;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 11.5px;
+  color: var(--text-muted);
+}
+.coach-input-hint-keys { display: none; }
+
+/* ── État vide (aucune leçon) ── */
 .coach-page .coach-page-empty {
   flex: 1;
   display: flex;
@@ -20,6 +160,11 @@
 .coach-page .coach-page-empty-text {
   font-size: 15px;
   color: var(--text-secondary);
-  max-width: 28ch;
+  max-width: 34ch;
   margin: 0;
 }
+.coach-page .coach-page-empty-actions { display: flex; flex-direction: column; gap: 10px; }
+
+/* Avatar du coach en haut de sa réponse (lecture façon assistant) */
+.coach-conversation--page .coach-row--coach { align-items: flex-start; }
+.coach-conversation--page .coach-row--coach .coach-avatar { margin-top: 2px; }

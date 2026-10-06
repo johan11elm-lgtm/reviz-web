@@ -39,10 +39,11 @@ describe('<Coach /> (page)', () => {
     expect(screen.getByText(/À propos de « Pythagore »/)).toBeInTheDocument()
   })
 
-  it('sans leçon : état vide et CTA scan', () => {
+  it('sans leçon : état vide, programme et scan proposés', () => {
     lessons.list = []
     renderAt('/coach')
-    expect(screen.getByText(/Scanne une leçon pour lui poser tes questions/)).toBeInTheDocument()
+    expect(screen.getByText(/Ouvre une leçon pour lui poser tes questions/)).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: 'Ouvrir mon programme' })).toHaveAttribute('href', '/programme')
     expect(screen.getByRole('link', { name: 'Scanner une leçon' })).toHaveAttribute('href', '/scan')
     expect(screen.queryByLabelText('Ta question sur la leçon')).toBeNull()
   })

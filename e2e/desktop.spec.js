@@ -145,6 +145,24 @@ test.describe('Ordinateur (1280 px) — avec un compte', () => {
     await expect(page.getByText('Le théorème de Thalès').first()).toBeVisible()
     await page.waitForTimeout(1200)
     await page.screenshot({ path: test.info().outputPath('desktop-compte-cours.png') })
+    await page.goto('/coach')
+    await expect(page.getByText("Qu'est-ce que tu veux comprendre ?")).toBeVisible()
+    await expect(page.locator('.coach-side')).toBeVisible()
+    await expect(page.locator('.side-nav').getByRole('link', { name: 'Coach' })).toBeVisible()
+    await page.waitForTimeout(600)
+    await page.screenshot({ path: test.info().outputPath('desktop-coach.png') })
+    // Une réponse simulée du coach (flux SSE comme api/chat.js)
+    const reponse = "Bonne question ! Le théorème de Thalès sert à **calculer une longueur** quand deux droites parallèles coupent deux droites sécantes.\n\nPour l'utiliser :\n- vérifie que les droites sont bien **parallèles** ;\n- écris l'égalité des rapports AM/AB = AN/AC = MN/BC ;\n- fais un produit en croix.\n\nTu veux qu'on essaie sur un exemple ?"
+    await page.route('**/api/chat', route => route.fulfill({
+      status: 200,
+      contentType: 'text/event-stream',
+      body: 'data: ' + JSON.stringify({ meta: { remaining: 9, limit: 10 } }) + '\n\n' + 'data: ' + JSON.stringify({ text: reponse }) + '\n\ndata: [DONE]\n\n',
+    }))
+    await page.getByLabel('Ta question sur la leçon').fill('À quoi sert le théorème de Thalès ?')
+    await page.keyboard.press('Enter')
+    await expect(page.getByText('Tu veux qu\'on essaie sur un exemple ?')).toBeVisible({ timeout: 10_000 })
+    await page.waitForTimeout(500)
+    await page.screenshot({ path: test.info().outputPath('desktop-coach-conversation.png') })
     await page.goto('/reglages')
     await page.waitForTimeout(500)
     await page.screenshot({ path: test.info().outputPath('desktop-compte-reglages.png') })
