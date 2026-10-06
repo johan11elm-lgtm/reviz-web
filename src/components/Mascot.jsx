@@ -31,6 +31,7 @@ export const MASCOT_POSES = {
   technonsi:   { num: 'm7', alt: 'Cerveau codeur sur son laptop' },
   philo:       { num: 'm8', alt: 'Cerveau penseur assis sur ses livres' },
   arts:        { num: 'm9', alt: 'Cerveau artiste avec sa palette' },
+  geo:         { num: 'm10', alt: 'Cerveau géographe avec sa carte et sa boussole' },
 
   // --- Situations (série 2026-08) ---
   quiz:        { num: 's1', alt: 'Cerveau qui appuie sur un buzzer' },

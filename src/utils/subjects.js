@@ -10,7 +10,7 @@ export const SUBJECT_MAP = {
   'maths':       { color: 'orange', dot: '#FF6B00', bg: '#FFF7ED', emoji: '📐', mascot: 'maths' },
   'français':    { color: 'pink',   dot: '#EC4899', bg: '#FDF2F8', emoji: '📖', mascot: 'francais' },
   'histoire':    { color: 'indigo', dot: '#6366F1', bg: '#EEF2FF', emoji: '🌍', mascot: 'histgeo' },
-  'géo':         { color: 'indigo', dot: '#6366F1', bg: '#EEF2FF', emoji: '🌍', mascot: 'histgeo' },
+  'géo':         { color: 'indigo', dot: '#6366F1', bg: '#EEF2FF', emoji: '🌍', mascot: 'geo' },
   'svt':         { color: 'green',  dot: '#22C55E', bg: '#F0FDF4', emoji: '🧬', mascot: 'svt' },
   'physique':    { color: 'blue',   dot: '#3B82F6', bg: '#EFF6FF', emoji: '⚛️', mascot: 'physique' },
   'chimie':      { color: 'blue',   dot: '#3B82F6', bg: '#EFF6FF', emoji: '🧪', mascot: 'physique' },

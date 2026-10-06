@@ -3,7 +3,8 @@ import {
   slugify, classeSlug, matiereSlug, hasProgramme, chapterLessonId, isProgrammeLessonId,
   catalogueUrl, chapterContentUrl, chapterState, MATIERES_3E, MATIERES_6E, PROGRAMME_CLASSES,
 } from '../programme'
-import { SUBJECT_MAP } from '../subjects'
+import { SUBJECT_MAP, subjectMascot } from '../subjects'
+import { MASCOT_POSES } from '../../components/Mascot'
 
 describe('programme — slugs et chemins', () => {
   it('slugifie sans accents ni espaces', () => {
@@ -39,6 +40,13 @@ describe('programme — classes et matières', () => {
       const key = Object.keys(SUBJECT_MAP).find(k => m.toLowerCase().includes(k))
       expect(key, m).toBeTruthy()
     }
+  })
+
+  it('Histoire et Géographie ont chacune leur mascotte, Histoire-Géographie garde l’explorateur', () => {
+    expect(subjectMascot('Histoire')).toBe('histgeo')
+    expect(subjectMascot('Géographie')).toBe('geo')
+    expect(subjectMascot('Histoire-Géographie')).toBe('histgeo')
+    expect(MASCOT_POSES.geo).toBeTruthy()
   })
 })
 

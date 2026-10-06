@@ -35,7 +35,7 @@ const POSES = {
   sad: [14, 'sad'], search: [15, 'search'], pointing: [16, 'pointing'],
   maths: ['m1', 'maths'], francais: ['m2', 'francais'], svt: ['m3', 'svt'],
   physique: ['m4', 'physique'], histgeo: ['m5', 'histgeo'], langues: ['m6', 'langues'],
-  technonsi: ['m7', 'techno'], philo: ['m8', 'philo'], arts: ['m9', 'arts'],
+  technonsi: ['m7', 'techno'], philo: ['m8', 'philo'], arts: ['m9', 'arts'], geo: ['m10', 'geo'],
   quiz: ['s1', 'quiz'], coach: ['s2', 'coach'], levelup: ['s3', 'levelup'],
   retour: ['s4', 'welcome'], soir: ['s5', 'night'], examen: ['s6', 'exam'],
   scanphone: ['s7', 'scanphone'], muscu: ['s8', 'muscu'],

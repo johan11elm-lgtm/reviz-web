@@ -32,6 +32,7 @@
 | pose-m7-technonsi | laptop ouvert devant lui, symboles « < > » 3D flottants, air concentré |
 | pose-m8-philo | assis en penseur de Rodin sur une pile de livres, point d'interrogation doré flottant |
 | pose-m9-arts | palette de peintre et pinceau, une touche de peinture violette sur un lobe |
+| pose-m10-geo | (2026-10-06) le géographe : grande carte du monde dépliée tenue d'une main, boussole dorée ouverte dans l'autre, épingle de localisation rouge 3D au-dessus de l'épaule. Pas de globe ni de chapeau (c'est histgeo, gardé pour Histoire). Brut recadré avec 70 px de fond magenta par côté : la carte remplissait 94 % de la largeur, contre ~85 % pour les autres matières |
 
 ## Scènes « situations » (gamification, coach, moments de vie)
 
