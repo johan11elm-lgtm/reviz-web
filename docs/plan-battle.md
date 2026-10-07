@@ -111,6 +111,8 @@ battles/{code}
 - Le salon est supprimé à la fin de la partie ; seuls restent l'aura totale et les compteurs de parties.
 - Pas de chat, pas de texte libre en dehors du prénom, pas d'adversaire inconnu.
 
+**Fait le 2026-10-07, après la mise en prod :** politique de confidentialité, CGU (section Battle : surnom correct, pas de triche) et e-mail de consentement parental à jour ; le champ sans compte devient « Ton prénom ou un surnom ». Nettoyage quotidien `api/battle-nettoyage.js` (cron Vercel 3 h UTC, protégé par `CRON_SECRET`, posé dans Vercel) : salons de plus d'une heure, marques `battlesComptees` de plus de 48 h ; index `creeLe` dans `database.rules.json` (à republier). Compteur d'usage anonyme (`/api/track`) : `battle_creee`, `battle_rejointe`, `battle_terminee` (issue), `battle_revanche`, `battle_compte_propose`, `battle_annonce_cta`, avec `joueur` = compte ou invité.
+
 ## 8. Vérification
 
 - Tests unitaires : `resoudreRound`, calcul de l'aura, plafonds, plancher, forfait, mort subite.

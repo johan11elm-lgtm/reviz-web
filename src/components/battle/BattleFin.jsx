@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { BattleJoueur } from './BattleJoueur';
 import { joueursDe } from '../../utils/battle';
 import { nbsp } from '../../utils/typography';
+import { track } from '../../services/statsService';
 
 const LETTRES = ['A', 'B', 'C', 'D'];
 // Au moins 3 rounds d'écart : le gagnant fait le 6-7.
@@ -93,7 +94,7 @@ function AuraRangee({ avecCompte, resultat }) {
     return (
       <div className="rv-card rv-card--padded battle-fin-compte">
         <p>Sans compte, ton aura n’est pas gardée.</p>
-        <Link className="rv-btn-cta rv-btn-cta--full" to="/inscription">
+        <Link className="rv-btn-cta rv-btn-cta--full" to="/inscription" onClick={() => track('battle_compte_propose')}>
           <span>Créer mon compte gratuit</span>
           <span className="rv-btn-cta-arrow" aria-hidden="true">→</span>
         </Link>

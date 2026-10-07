@@ -30,6 +30,12 @@ describe('buildUpdate', () => {
       revision: { total: 1, matiere: { Autre: 1 }, format: { quiz: 1 } },
     })
   })
+  it('compte les parties de Battle avec leur issue et le type de joueur', () => {
+    expect(buildUpdate('battle_terminee', { issue: 'victoire', joueur: 'invite', mode: 'compte' })).toEqual({
+      battle_terminee: { total: 1, issue: { victoire: 1 }, joueur: { invite: 1 }, mode: { compte: 1 } },
+    })
+    expect(buildUpdate('battle_creee', { joueur: 'anonyme', issue: 'abandon' })).toEqual({ battle_creee: { total: 1 } })
+  })
   it('refuse un événement inconnu', () => {
     expect(buildUpdate('mouchard', {})).toBeNull()
   })

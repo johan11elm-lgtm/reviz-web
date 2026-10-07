@@ -9,6 +9,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { contexteBattle } from '../services/battleConnexion'
 import { apiFetch } from '../services/apiClient'
+import { track } from '../services/statsService'
 import {
   ecouterBattle, ecouterHorloge, tenirPresence, rejoindreBattle, lancerPartie, repondre,
   avancer, declarerAbandon, quitterBattle, lancerRevanche, marquerAbsent,
@@ -185,6 +186,15 @@ export function useBattle(code, { prenom, onRevanche }) {
     [salon, quiz, maintenant],
   )
 
+  // --- Compteur d'usage : une partie terminée, une fois par joueur ---
+  const finComptee = useRef(false)
+  const issue = finie && partie?.terminee ? partie.issue : null
+  useEffect(() => {
+    if (!joue || !issue || finComptee.current) return
+    finComptee.current = true
+    track('battle_terminee', { issue, joueur: ctx.avecCompte ? 'compte' : 'invite' })
+  }, [ctx, joue, issue])
+
   // --- Actions ---
   const executer = useCallback(async (nom, action) => {
     setErreurAction(null)
@@ -192,7 +202,11 @@ export function useBattle(code, { prenom, onRevanche }) {
   }, [])
 
   const actions = useMemo(() => ({
-    rejoindre: () => executer('rejoindre', () => rejoindreBattle(ctx, code, prenom)),
+    rejoindre: () => executer('rejoindre', async () => {
+      const resultat = await rejoindreBattle(ctx, code, prenom)
+      track('battle_rejointe', { joueur: ctx.avecCompte ? 'compte' : 'invite' })
+      return resultat
+    }),
     lancer: () => executer('lancer', () => lancerPartie(ctx, code, maintenantServeur(decalage))),
     repondre: (n, choix) => {
       if (mesReponses[n] !== undefined) return
@@ -203,6 +217,7 @@ export function useBattle(code, { prenom, onRevanche }) {
     quitter: () => executer('quitter', () => quitterBattle(ctx, code, salon)),
     revanche: () => executer('revanche', async () => {
       const nouveau = await lancerRevanche(ctx, code, salon, { prenom, nbQuestions: quiz.length })
+      track('battle_revanche', { joueur: ctx.avecCompte ? 'compte' : 'invite' })
       onRevanche?.(nouveau)
       return nouveau
     }),

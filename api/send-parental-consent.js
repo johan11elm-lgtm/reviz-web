@@ -100,7 +100,8 @@ export default async function handler(req, res) {
           <div style="background: #F7F7F5; border-radius: 12px; padding: 16px; margin: 24px 0;">
             <p style="margin: 0; font-size: 14px; color: #666;">
               <strong>Ce que l'application collecte :</strong><br/>
-              Prénom, email, leçons scannées (texte uniquement). Aucune photo stockée, aucune pub, aucun partage de données à des tiers sauf pour le fonctionnement du service.
+              Prénom, email, leçons scannées (texte uniquement). Aucune photo stockée, aucune pub, aucun partage de données à des tiers sauf pour le fonctionnement du service.<br/>
+              Battle (quiz à deux en direct) : l'adversaire voit le prénom ou le surnom choisi et les scores de la partie, supprimée sous 48 heures.
             </p>
           </div>
           <a href="${approveUrl}" style="display: inline-block; background: #1A1A1A; color: white; padding: 14px 28px; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 15px;">

@@ -7,6 +7,8 @@
   // Tests : src/services/__tests__/battle.emulator.test.js (npm run test:emulateur).
   "rules": {
     "battles": {
+      // Le nettoyage quotidien (api/battle-nettoyage.js) cherche les vieux salons par date.
+      ".indexOn": ["creeLe"],
       "$code": {
         // Lecture : les deux joueurs ; avant l'arrivée d'un invité, tout élève
         // connecté qui a le code (pour voir le salon et le rejoindre).

@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { useModalA11y } from '../../hooks/useModalA11y';
 import { BattleMascot } from '../BattleMascot';
 import { BattleRegles } from './BattleRegles';
+import { track } from '../../services/statsService';
 import './BattleAnnonce.css';
 
 const cle = uid => `reviz-annonce-battle-${uid}`;
@@ -42,7 +43,7 @@ export function BattleAnnonce({ uid, onClose }) {
         <p className="battle-annonce-sous">Défie quelqu’un en direct sur un chapitre de ton programme, et gagne de l’aura.</p>
         <BattleRegles partage />
         <div className="battle-annonce-actions">
-          <button type="button" className="rv-btn-cta rv-btn-cta--full" onClick={() => { marquerVue(uid); navigate('/battle'); }}>
+          <button type="button" className="rv-btn-cta rv-btn-cta--full" onClick={() => { marquerVue(uid); track('battle_annonce_cta'); navigate('/battle'); }}>
             <span>Lancer une battle</span>
             <span className="rv-btn-cta-arrow" aria-hidden="true">→</span>
           </button>

@@ -10,7 +10,12 @@
 import { FieldValue } from 'firebase-admin/firestore'
 import { getDb } from './_firebaseAdmin.js'
 
-export const EVENTS = ['essai_demarre', 'compte_cree', 'programme_ouvert', 'chapitre_ouvert', 'revision', 'quiz_termine']
+export const EVENTS = [
+  'essai_demarre', 'compte_cree', 'programme_ouvert', 'chapitre_ouvert', 'revision', 'quiz_termine',
+  // Battle : salon ouvert, partie rejointe et terminée, revanche, clic « Créer mon
+  // compte » en fin de partie, clic « Lancer une battle » dans la popup de lancement.
+  'battle_creee', 'battle_rejointe', 'battle_terminee', 'battle_revanche', 'battle_compte_propose', 'battle_annonce_cta',
+]
 
 const ALLOWED = {
   mode: ['essai', 'compte'],
@@ -23,6 +28,8 @@ const ALLOWED = {
   ],
   format: ['flashcards', 'quiz', 'resume', 'mindmap'],
   source: ['programme', 'scan'],
+  joueur: ['compte', 'invite'],
+  issue: ['victoire', 'egalite', 'forfait'],
 }
 
 /** Date du jour à Paris, au format AAAA-MM-JJ (un document par jour). */

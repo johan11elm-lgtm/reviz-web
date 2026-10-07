@@ -4,6 +4,7 @@ import { useAuth } from '../context/AuthContext';
 import { useContexteBattle } from '../hooks/useBattle';
 import { creerBattle } from '../services/battleService';
 import { loadChapterContent } from '../services/programmeService';
+import { track } from '../services/statsService';
 import { PageHeader } from '../components/PageHeader';
 import { BattleMascot } from '../components/BattleMascot';
 import { BattleRegles } from '../components/battle/BattleRegles';
@@ -43,7 +44,10 @@ function Creation({ chapitre }) {
     lance.current = true;
     loadChapterContent(chapitre.classe, chapitre.matiere, chapitre.id)
       .then(data => creerBattle(ctx, { prenom, chapitre, nbQuestions: data.quiz.length }))
-      .then(code => navigate(`/battle/${code}`, { replace: true }))
+      .then(code => {
+        track('battle_creee', { classe: chapitre.classe, matiere: chapitre.matiere, joueur: ctx.avecCompte ? 'compte' : 'invite' });
+        navigate(`/battle/${code}`, { replace: true });
+      })
       .catch(() => setErreur(true));
   }, [ctx, prenom, chapitre, navigate]);
 

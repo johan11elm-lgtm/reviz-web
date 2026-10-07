@@ -35,7 +35,7 @@ const PAGES = {
     title: 'Politique de confidentialité',
     content: () => (
       <>
-        <p className="legal-updated">Dernière mise à jour : 21 mars 2026</p>
+        <p className="legal-updated">Dernière mise à jour : 7 octobre 2026</p>
 
         <Section title="Données collectées">
           <ul>
@@ -43,6 +43,7 @@ const PAGES = {
             <li><strong>Date de naissance</strong> — collectée à l'inscription, uniquement pour déterminer si le consentement parental est requis (moins de 15 ans, art. 45 de la loi Informatique et Libertés).</li>
             <li><strong>Leçons scannées</strong> — le texte ou l'image de tes leçons, envoyé à l'IA pour générer les contenus de révision. Ces données ne sont pas conservées côté serveur après traitement.</li>
             <li><strong>Historique</strong> — tes leçons et révisions sont stockées localement sur ton appareil (localStorage) et synchronisées dans ta collection Firestore personnelle.</li>
+            <li><strong>Battle</strong> — pour jouer à deux en direct : le prénom ou le surnom que tu choisis, tes réponses et tes temps de réponse. Sans compte, rien d'autre : un identifiant technique anonyme (Firebase) relie tes réponses à la partie, sans email ni date de naissance. Avec un compte, ton total d'aura et ton nombre de battles jouées et gagnées sont ajoutés à ton profil.</li>
             <li><strong>Avis</strong> — ce que tu écris sur la page « Votre avis » (profil, réponses, e-mail facultatif pour recevoir une réponse), sans compte ni identifiant. Conservés 2 ans au plus, supprimés sur simple demande.</li>
             <li><strong>Données techniques</strong> — logs serveur standards (adresse IP, navigateur), conservés maximum 30 jours.</li>
           </ul>
@@ -67,6 +68,7 @@ const PAGES = {
         <Section title="Partage des données">
           <p>Tes données ne sont jamais vendues. Elles sont partagées uniquement avec :</p>
           <ul>
+            <li><strong>Ton adversaire de Battle</strong> — pendant une partie, il voit ton prénom ou surnom, si tes réponses sont justes, tes temps de réponse et ton aura de la partie. Rien d'autre.</li>
             <li><strong>Google Firebase</strong> — authentification et stockage (hébergé en Europe).</li>
             <li><strong>Anthropic</strong> — traitement IA des leçons (le texte envoyé n'est pas conservé après génération).</li>
             <li><strong>Vercel</strong> — hébergement de l'application.</li>
@@ -77,6 +79,7 @@ const PAGES = {
           <ul>
             <li>Données de compte : jusqu'à suppression du compte.</li>
             <li>Leçons et révisions : jusqu'à suppression par l'utilisateur (max 100 leçons conservées).</li>
+            <li>Parties de Battle : supprimées automatiquement au plus tard 48 heures après leur création. Avec un compte, l'aura totale et le nombre de battles restent sur ton profil jusqu'à la suppression du compte.</li>
             <li>Logs serveur : 30 jours maximum.</li>
           </ul>
         </Section>
@@ -105,7 +108,7 @@ const PAGES = {
     title: "Conditions Générales d'Utilisation",
     content: () => (
       <>
-        <p className="legal-updated">Dernière mise à jour : 21 mars 2026</p>
+        <p className="legal-updated">Dernière mise à jour : 7 octobre 2026</p>
 
         <Section title="Objet">
           <p>Les présentes CGU régissent l'utilisation de l'application Réviz, un outil de révision scolaire assisté par intelligence artificielle, destiné aux collégiens.</p>
@@ -122,8 +125,14 @@ const PAGES = {
             <li>Scanner tes leçons (texte ou photo).</li>
             <li>Générer des flashcards, quiz, résumés et cartes mentales via l'IA.</li>
             <li>Suivre ta progression et tes révisions.</li>
+            <li>Défier quelqu'un en Battle, un quiz à deux en direct sur un chapitre du programme.</li>
           </ul>
           <p>L'utilisation est strictement personnelle et non commerciale.</p>
+        </Section>
+
+        <Section title="Battle">
+          <p>Une Battle se joue avec une personne à qui tu as donné le code de la partie. Le prénom ou le surnom que tu choisis est vu par ton adversaire : il ne doit être ni injurieux, ni celui de quelqu'un d'autre.</p>
+          <p>L'aura récompense des bonnes réponses données par toi-même. Réviz peut retirer l'aura obtenue en trichant ou en jouant contre ses propres comptes.</p>
         </Section>
 
         <Section title="Contenu généré par IA">
