@@ -82,7 +82,7 @@ export default async function handler(req, res) {
 
     const resend = new Resend(process.env.RESEND_API_KEY);
     await resend.emails.send({
-      from: 'Réviz <noreply@reviz-gamma.vercel.app>',
+      from: 'Réviz <noreply@revizapp.fr>',
       to: email,
       subject: 'Votre enfant souhaite utiliser Réviz',
       html: `
