@@ -6,6 +6,7 @@
 //
 //   node scripts/programme/resumes.mjs consigne
 //   node scripts/programme/resumes.mjs chapitre <classe> <matiere> <id>
+//   node scripts/programme/resumes.mjs relire   <classe> <matiere> <id>
 //   node scripts/programme/resumes.mjs ecrire   <classe> <matiere> <id> <resume.json>
 //   node scripts/programme/resumes.mjs etat     [classe] [matiere]
 //
@@ -108,6 +109,31 @@ ${JSON.stringify(data.resume, null, 1)}
 
 === QUESTIONS DES FLASHCARDS (ce que l'élève doit savoir répondre) ===
 ${data.flashcards.map(c => `- ${c.front}`).join('\n')}`)
+} else if (cmd === 'relire') {
+  // Pour relire une fiche déjà refaite : la référence, la fiche, et les réponses
+  // des flashcards et du quiz, avec lesquelles elle ne doit pas se contredire.
+  const [classe, matiere, id] = args
+  const cat = catalogue(classe, matiere)
+  const ch = cat.chapitres.find(c => c.id === id)
+  if (!ch) throw new Error(`chapitre introuvable : ${id}`)
+  const data = JSON.parse(readFileSync(chapitreFile(classe, matiere, id), 'utf8'))
+  console.log(`=== CHAPITRE ===
+Classe : ${classe} · Matière : ${cat.matiere}
+Programme : ${cat.programme}
+Titre : ${ch.titre}
+Notions attendues :
+${ch.notions.map((x, i) => `  ${i + 1}. ${x}`).join('\n')}
+Référence :
+${ch.reference}
+
+=== FICHE À RELIRE (champ resume) ===
+${JSON.stringify(data.resume, null, 1)}
+
+=== FLASHCARDS ===
+${data.flashcards.map(c => `- ${c.front}\n    → ${c.back}`).join('\n')}
+
+=== QUIZ (bonne réponse marquée ✓) ===
+${data.quiz.map(q => `- ${q.question}\n${q.choices.map((c, i) => `    ${i === q.correct ? '✓' : ' '} ${c}`).join('\n')}\n    Explication : ${q.explanation}`).join('\n')}`)
 } else if (cmd === 'ecrire') {
   const [classe, matiere, id, source] = args
   const cat = catalogue(classe, matiere)
@@ -146,6 +172,6 @@ ${data.flashcards.map(c => `- ${c.front}`).join('\n')}`)
   }
   console.log(`refaits ${faits} · à faire ${restants}`)
 } else {
-  console.log('usage : consigne | chapitre <classe> <matiere> <id> | ecrire <classe> <matiere> <id> <resume.json> | etat [classe] [matiere]')
+  console.log('usage : consigne | chapitre <classe> <matiere> <id> | relire <classe> <matiere> <id> | ecrire <classe> <matiere> <id> <resume.json> | etat [classe] [matiere]')
   process.exit(1)
 }
