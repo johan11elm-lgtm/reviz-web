@@ -1,0 +1,54 @@
+/* ─── Page publique du tutoriel d'installation (/installer) ──────
+ * Même langage que /profs : logo en haut, intro avec mascotte, une carte.
+ * Sur ordinateur, la page reste centrée (pas de barre latérale). */
+
+.inst-page-nav {
+  display: flex;
+  align-items: center;
+  padding: 16px 20px;
+  flex-shrink: 0;
+}
+.inst-page-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  color: var(--text-primary);
+  text-decoration: none;
+}
+
+.inst-page-scroll {
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.inst-page-main {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-cards);
+  padding-bottom: calc(40px + env(safe-area-inset-bottom, 0px));
+}
+.inst-page-intro { padding-top: 6px; }
+
+.inst-page-carte {
+  margin: 0 var(--page-gutter);
+  padding: 16px;
+}
+.inst-page-deja { margin: 0; font-size: 14px; line-height: 1.45; color: var(--text-secondary); }
+
+.inst-page-actions { padding: 0 var(--page-gutter); }
+
+@media (min-width: 1024px) {
+  html:not(.native) .inst-page {
+    margin-left: 0;
+    padding-left: max(24px, calc((100vw - 640px) / 2));
+    padding-right: max(24px, calc((100vw - 640px) / 2));
+  }
+  html:not(.native) .inst-page-nav { padding: 22px var(--page-gutter) 6px; }
+  html:not(.native) .inst-page-main { padding-top: 28px; gap: 24px; }
+  html:not(.native) .inst-page-intro .rv-greeting-title { font-size: 44px; letter-spacing: -1.8px; }
+  html:not(.native) .inst-page-intro .rv-greeting-sub { font-size: 16px; max-width: 40ch; }
+  html:not(.native) .inst-page-carte { padding: 24px; }
+}

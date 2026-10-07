@@ -97,6 +97,26 @@
   margin: 0;
 }
 
+/* Ouvre le tutoriel d'installation (absent dans l'app native et l'app installée) */
+.wlc-installer {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin: 2px auto 0;
+  padding: 8px 12px;
+  border: none;
+  border-radius: var(--radius-pill);
+  background: transparent;
+  color: var(--accent-violet-ink);
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+.wlc-installer .rv-ico { font-size: 16px; }
+
 /* ── Sections ────────────────────────────────────────────────────── */
 .wlc-section {
   padding: 12px 24px 28px;

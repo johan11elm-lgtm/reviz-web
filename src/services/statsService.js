@@ -20,8 +20,9 @@ function mode() {
 
 /**
  * @param {'essai_demarre'|'compte_cree'|'programme_ouvert'|'chapitre_ouvert'|'revision'|'quiz_termine'
- *   |'battle_creee'|'battle_rejointe'|'battle_terminee'|'battle_revanche'|'battle_compte_propose'|'battle_annonce_cta'} event
- * @param {object} [props]  classe, matiere, format, source, joueur, issue (listes fermées côté serveur)
+ *   |'battle_creee'|'battle_rejointe'|'battle_terminee'|'battle_revanche'|'battle_compte_propose'|'battle_annonce_cta'
+ *   |'installer_ouvert'|'app_installee'} event
+ * @param {object} [props]  classe, matiere, format, source, joueur, issue, plateforme (listes fermées côté serveur)
  */
 export function track(event, props = {}) {
   if (import.meta.env.MODE === 'test') return

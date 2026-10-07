@@ -51,6 +51,7 @@ const ProgrammeMatiere = lazy(() => import('./pages/ProgrammeMatiere'))
 const Essai          = lazy(() => import('./pages/Essai'))
 const Avis           = lazy(() => import('./pages/Avis'))
 const Profs          = lazy(() => import('./pages/Profs'))
+const Installer      = lazy(() => import('./pages/Installer'))
 const BattleAccueil  = lazy(() => import('./pages/BattleAccueil'))
 const Battle         = lazy(() => import('./pages/Battle'))
 
@@ -142,6 +143,7 @@ export default function App() {
             <Route path="/legal/:page" element={<><SplashHider /><Legal /></>} />
             <Route path="/avis"        element={<><SplashHider /><Avis /></>} />
             <Route path="/profs"       element={<><SplashHider /><Profs /></>} />
+            <Route path="/installer"   element={<><SplashHider /><Installer /></>} />
 
             {/* Toutes les autres routes — Firebase via AuthProvider */}
             <Route path="/*" element={

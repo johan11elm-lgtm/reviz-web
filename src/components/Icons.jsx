@@ -301,3 +301,62 @@ export const GraduationIcon = (p) => (
     <path d="M22 9v6" />
   </Icon>
 );
+
+// ── Installation de l'app (tutoriel iPhone, Android, ordinateur) ──
+// Reprennent les pictos que l'élève cherche dans son navigateur.
+export const ShareIcon = (p) => (
+  <Icon {...p}>
+    <path d="M12 3v12" />
+    <path d="M8 7l4-4 4 4" />
+    <path d="M8 10H6a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-9a1 1 0 0 0-1-1h-2" />
+  </Icon>
+);
+export const PlusSquareIcon = (p) => (
+  <Icon {...p}>
+    <rect x="3.5" y="3.5" width="17" height="17" rx="4" />
+    <path d="M12 8v8" />
+    <path d="M8 12h8" />
+  </Icon>
+);
+export const DotsVerticalIcon = (p) => (
+  <Icon {...p}>
+    <circle cx="12" cy="5" r="1.3" fill="currentColor" stroke="none" />
+    <circle cx="12" cy="12" r="1.3" fill="currentColor" stroke="none" />
+    <circle cx="12" cy="19" r="1.3" fill="currentColor" stroke="none" />
+  </Icon>
+);
+export const DotsIcon = (p) => (
+  <Icon {...p}>
+    <circle cx="5" cy="12" r="1.3" fill="currentColor" stroke="none" />
+    <circle cx="12" cy="12" r="1.3" fill="currentColor" stroke="none" />
+    <circle cx="19" cy="12" r="1.3" fill="currentColor" stroke="none" />
+  </Icon>
+);
+export const InstallIcon = (p) => (
+  <Icon {...p}>
+    <rect x="2.5" y="4" width="19" height="13" rx="2" />
+    <path d="M8 21h8" />
+    <path d="M12 7.5v6" />
+    <path d="M9.5 11l2.5 2.5 2.5-2.5" />
+  </Icon>
+);
+export const PhoneIcon = (p) => (
+  <Icon {...p}>
+    <rect x="6" y="2.5" width="12" height="19" rx="3" />
+    <path d="M10.5 18.5h3" />
+  </Icon>
+);
+export const MonitorIcon = (p) => (
+  <Icon {...p}>
+    <rect x="2.5" y="4" width="19" height="13" rx="2" />
+    <path d="M8 21h8" />
+    <path d="M12 17v4" />
+  </Icon>
+);
+export const ExternalIcon = (p) => (
+  <Icon {...p}>
+    <path d="M14 4h6v6" />
+    <path d="M20 4l-9 9" />
+    <path d="M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5" />
+  </Icon>
+);

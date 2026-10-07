@@ -1,6 +1,7 @@
 import { CameraIcon, SparkIcon, TrophyIcon, ResumeIcon, FlashcardsIcon, MindmapIcon, QuizIcon } from '../components/Icons';
 import { Link } from 'react-router-dom';
 import { Mascot } from '../components/Mascot';
+import { BoutonInstaller } from '../components/InstallerApp';
 import './Welcome.css';
 
 const STEPS = [
@@ -64,6 +65,7 @@ export default function Welcome() {
               Essayer sans compte
             </Link>
             <p className="wlc-hint">Aucune carte bancaire · Gratuit pour commencer</p>
+            <BoutonInstaller className="wlc-installer">Installer l'app sur ton appareil</BoutonInstaller>
           </section>
 
           {/* ── Comment ça marche ── */}

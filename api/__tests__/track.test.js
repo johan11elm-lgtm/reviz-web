@@ -25,6 +25,12 @@ describe('buildUpdate', () => {
       chapitre_ouvert: { total: 1, classe: { '3ème': 1 }, matiere: { Maths: 1 }, mode: { essai: 1 }, device: { ordinateur: 1 } },
     })
   })
+  it("compte les installations de l'app par plateforme", () => {
+    expect(buildUpdate('app_installee', { plateforme: 'android', device: 'mobile' })).toEqual({
+      app_installee: { total: 1, device: { mobile: 1 }, plateforme: { android: 1 } },
+    })
+    expect(buildUpdate('installer_ouvert', { plateforme: 'windows' })).toEqual({ installer_ouvert: { total: 1 } })
+  })
   it('ignore les valeurs hors liste, sauf la matière qui devient « Autre »', () => {
     expect(buildUpdate('revision', { classe: 'CM2', matiere: 'Jardinage', prenom: 'Léa', format: 'quiz' })).toEqual({
       revision: { total: 1, matiere: { Autre: 1 }, format: { quiz: 1 } },

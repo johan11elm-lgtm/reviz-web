@@ -12,6 +12,8 @@ import './styles/desktop.css'
 import App from './App.jsx'
 import { IS_NATIVE } from './services/apiClient.js'
 import { hideSplash } from './services/splash.js'
+import { track } from './services/statsService.js'
+import { ecouterInstallation, detecterPlateforme } from './utils/installation.js'
 
 // App native (Capacitor) : layout plein écran forcé quelle que soit la
 // largeur (les iPhone Pro Max à 440 pt et les iPad tomberaient sinon dans
@@ -127,4 +129,13 @@ if ('serviceWorker' in navigator && window.location.protocol !== 'capacitor:') {
       caches.keys().then((keys) => keys.forEach((k) => caches.delete(k)));
     }
   }
+}
+
+// Installation de la web app (pas encore sur les stores) : on garde de côté
+// l'invitation de Chrome / Edge pour le tutoriel « Installer Réviz », et on
+// compte les installations confirmées (un total par jour, sans identifiant).
+if (!IS_NATIVE) {
+  ecouterInstallation(() => track('app_installee', {
+    plateforme: detecterPlateforme(navigator.userAgent, navigator.maxTouchPoints),
+  }))
 }

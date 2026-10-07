@@ -15,6 +15,8 @@ export const EVENTS = [
   // Battle : salon ouvert, partie rejointe et terminée, revanche, clic « Créer mon
   // compte » en fin de partie, clic « Lancer une battle » dans la popup de lancement.
   'battle_creee', 'battle_rejointe', 'battle_terminee', 'battle_revanche', 'battle_compte_propose', 'battle_annonce_cta',
+  // Installation de la web app : tutoriel ouvert, installation confirmée par le navigateur.
+  'installer_ouvert', 'app_installee',
 ]
 
 const ALLOWED = {
@@ -30,6 +32,7 @@ const ALLOWED = {
   source: ['programme', 'scan'],
   joueur: ['compte', 'invite'],
   issue: ['victoire', 'egalite', 'forfait'],
+  plateforme: ['ios', 'android', 'ordinateur'],
 }
 
 /** Date du jour à Paris, au format AAAA-MM-JJ (un document par jour). */

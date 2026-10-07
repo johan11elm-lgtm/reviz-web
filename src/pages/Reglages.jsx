@@ -1,6 +1,8 @@
 import { PageIntro } from '../components/PageIntro';
 import { GuestBanner } from '../components/GuestBanner';
-import { UserIcon, MailIcon, KeyIcon, BellIcon, MoonIcon, LockIcon, GemIcon, InfoIcon, ScaleIcon, FileTextIcon, ClipboardIcon, LogOutIcon, AlertIcon } from '../components/Icons';
+import { UserIcon, MailIcon, KeyIcon, BellIcon, MoonIcon, LockIcon, GemIcon, InfoIcon, ScaleIcon, FileTextIcon, ClipboardIcon, LogOutIcon, AlertIcon, InstallIcon } from '../components/Icons';
+import { InstallerModal } from '../components/InstallerApp';
+import { useInstallation } from '../hooks/useInstallation';
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
@@ -169,6 +171,8 @@ export default function Reglages() {
 
   // ── 6. Informations ──
   const [aproposOpen, setAproposOpen] = useState(false);
+  const [installerOpen, setInstallerOpen] = useState(false);
+  const { aProposer: installerAProposer } = useInstallation();
 
   // ── 7. Déconnexion + zone de danger ──
   const [deleteStep, setDeleteStep]   = useState(0); // 0=hidden, 1=confirm, 2=password
@@ -481,6 +485,16 @@ export default function Reglages() {
         <section className="rg-section">
           <h2 className="rg-section-title">Informations</h2>
           <div className="rv-card rg-card">
+            {installerAProposer && (
+              <button type="button" className="rg-row" onClick={() => setInstallerOpen(true)}>
+                <span className="rv-icon-square rv-icon-square--violet" aria-hidden="true"><InstallIcon /></span>
+                <span className="rg-row-text">
+                  <span className="rg-row-label">Installer l'app</span>
+                  <span className="rg-row-sub">Sur ton téléphone ou ton ordinateur</span>
+                </span>
+                <span className="rg-row-arrow" aria-hidden="true">›</span>
+              </button>
+            )}
             <button
               type="button"
               className="rg-row"
@@ -622,6 +636,7 @@ export default function Reglages() {
         )}
 
       </div>
+      {installerOpen && <InstallerModal onClose={() => setInstallerOpen(false)} />}
     </div>
   );
 }
