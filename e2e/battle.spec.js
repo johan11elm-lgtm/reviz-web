@@ -1,7 +1,8 @@
 // Battle : deux élèves, deux navigateurs, une partie complète en temps réel
 // contre l'Emulator Suite (auth, firestore et base temps réel, projet demo-reviz).
-// Popup de lancement → chapitre → salon → invitation par code → 5 rounds →
-// fin (6-7 du gagnant) → revanche rejointe automatiquement.
+// Johan a un compte : popup de lancement → chapitre → salon. Léa n'en a pas :
+// elle ouvre le lien, donne son prénom et joue en invitée (connexion anonyme).
+// 5 rounds → fin (6-7 du gagnant, aura rangée ou non) → revanche suivie.
 import { test, expect } from '@playwright/test'
 import { readFileSync } from 'node:fs'
 import path from 'node:path'
@@ -64,10 +65,6 @@ test('deux élèves jouent une battle complète, puis la revanche', async ({ bro
   await expect(hote.getByRole('link', { name: /Battle/ })).toBeVisible()
   await expect(hote.getByRole('dialog', { name: 'La Battle' })).toHaveCount(0)
 
-  // ── Léa : compte (sa popup est fermée par le helper) ──
-  const emailLea = await signup(invite, { birthDate: '1990-06-01', prenom: 'Léa' })
-  await verifyEmailAndOnboard(invite, emailLea)
-
   // ── Johan lance une battle depuis le chapitre ──
   await hote.goto('/programme/maths')
   await hote.getByRole('button', { name: /Le théorème de Thalès/ }).click()
@@ -79,14 +76,20 @@ test('deux élèves jouent une battle complète, puis la revanche', async ({ bro
   await expect(hote.getByText('Code de la partie')).toBeVisible()
   await expect(hote.getByRole('button', { name: 'En attente de ton adversaire…' })).toBeDisabled()
 
-  // ── Léa rejoint avec le code, tapé en minuscules ──
+  // ── Léa, sans compte : la page /battle, puis le code tapé en minuscules ──
   await invite.goto('/battle')
+  await expect(invite.getByLabel('Rejoindre avec un code')).toBeVisible()
+  await expect(invite.locator('.bottom-nav')).toHaveCount(0)
   await capture(invite, '02-rejoindre')
   await invite.getByLabel('Rejoindre avec un code').fill(code.toLowerCase())
   await invite.getByRole('button', { name: 'Rejoindre', exact: true }).click()
+  await expect(invite).toHaveURL(new RegExp(`/battle/${code}$`))
   await expect(invite.getByRole('heading', { name: 'Johan te défie' })).toBeVisible()
+  const rejoindre = invite.getByRole('button', { name: 'Rejoindre la battle' })
+  await expect(rejoindre).toBeDisabled()
+  await invite.getByLabel('Ton prénom').fill('Léa')
   await capture(invite, '03-invitation')
-  await invite.getByRole('button', { name: 'Rejoindre la battle' }).click()
+  await rejoindre.click()
   await expect(invite.getByText('Johan va lancer la partie.')).toBeVisible()
   await expect(hote.getByRole('button', { name: "C'est parti" })).toBeEnabled()
   await capture(hote, '04-salon')
@@ -121,6 +124,10 @@ test('deux élèves jouent une battle complète, puis la revanche', async ({ bro
   await expect(hote.locator('.battle-fin').getByText('+130 aura')).toBeVisible()
   await expect(invite.locator('.battle-fin').getByText('−50 aura')).toBeVisible()
   await expect(hote.locator('.battle-fin .battle-67')).toHaveCount(1)
+  // Aura rangée par le serveur pour Johan ; Léa, invitée, est invitée à créer un compte.
+  await expect(hote.getByText('Ton aura :')).toBeVisible()
+  await expect(invite.getByText('Sans compte, ton aura n’est pas gardée.')).toBeVisible()
+  await expect(invite.getByRole('link', { name: /Créer mon compte gratuit/ })).toBeVisible()
   await capture(hote, '08-fin-hote')
   await capture(invite, '09-fin-invite')
 

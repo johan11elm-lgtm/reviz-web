@@ -5,7 +5,7 @@ import { test, expect } from '@playwright/test'
 import { readFileSync } from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { mockApiRoutes, signup, verifyEmailAndOnboard } from './helpers'
+import { mockApiRoutes, signup, verifyEmailAndOnboard, fermerAnnonceBattle } from './helpers'
 
 const here = path.dirname(fileURLToPath(import.meta.url))
 const fixture = name => readFileSync(path.join(here, 'fixtures/programme', name), 'utf8')
@@ -120,6 +120,7 @@ test.describe('Téléphone (390 px)', () => {
     await page.getByRole('button', { name: /C'est parti/ }).click()
     await expect(page).toHaveURL(/\/programme$/)
     await page.goto('/')
+    await fermerAnnonceBattle(page)
     await page.getByRole('link', { name: 'Réviser mon programme' }).first().click()
     await expect(page).toHaveURL(/\/programme$/)
     await page.getByRole('button', { name: /^Maths/ }).click()

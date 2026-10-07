@@ -137,8 +137,8 @@ export default function Home() {
   const [allLessons, setAllLessons] = useState(() => loadLessons());
   const [challenges] = useState(() => getWeeklyChallenges());
   const [newBadge, setNewBadge] = useState(null);
-  // Popup « Nouveau : la Battle », une fois par compte (pas en mode essai : il faut un compte pour jouer).
-  const [annonceBattle, setAnnonceBattle] = useState(() => !isGuest && !!currentUser?.uid && !annonceBattleVue(currentUser.uid));
+  // Popup « Nouveau : la Battle », une fois par élève (compte ou mode essai).
+  const [annonceBattle, setAnnonceBattle] = useState(() => !!currentUser?.uid && !annonceBattleVue(currentUser.uid));
 
   useEffect(() => {
     const onboardedKey = `reviz-onboarded-${currentUser?.uid}`;
@@ -284,7 +284,7 @@ export default function Home() {
   const recentLessons = allLessons.slice(0, 3);
   const programmeClasse = hasProgramme(getUserLevel()) ? getUserLevel().classe : PROGRAMME_FALLBACK;
 
-  const battleCard = !isGuest && (
+  const battleCard = (
     <Link to="/battle" className="rv-card rv-card--link home-programme-card home-battle-card" aria-label="Battle : défier quelqu'un en direct">
       <BattleMascot pose="garde" size={52} alt="" aria-hidden="true" className="home-programme-mascot" />
       <div className="home-programme-text">

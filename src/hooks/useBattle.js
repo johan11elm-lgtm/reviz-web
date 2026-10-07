@@ -7,8 +7,8 @@
 // Toute la logique de jeu vient de utils/battle.js.
 // -------------------------------------------------------
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { auth } from '../services/firebaseConfig'
 import { contexteBattle } from '../services/battleConnexion'
+import { apiFetch } from '../services/apiClient'
 import {
   ecouterBattle, ecouterHorloge, tenirPresence, rejoindreBattle, lancerPartie, repondre,
   avancer, declarerAbandon, quitterBattle, lancerRevanche, marquerAbsent,
@@ -20,15 +20,32 @@ import {
 
 const TICK_MS = 100
 
-/** Contexte de jeu une fois Firebase Auth prêt : { db, uid } ou null (pas connecté). */
+/**
+ * Contexte de jeu : le compte de l'élève, ou un invité anonyme s'il n'en a pas.
+ * undefined pendant la connexion, null si elle a échoué.
+ */
 export function useContexteBattle() {
   const [ctx, setCtx] = useState(undefined)
   useEffect(() => {
     let vivant = true
-    auth.authStateReady().then(() => { if (vivant) setCtx(contexteBattle()) })
+    contexteBattle()
+      .then(c => { if (vivant) setCtx(c) })
+      .catch(() => { if (vivant) setCtx(null) })
     return () => { vivant = false }
   }, [])
   return ctx
+}
+
+/** Fin de partie : le serveur recalcule et range l'aura (api/battle-fin.js). */
+async function envoyerFin(ctx, code) {
+  const idToken = await ctx.jeton()
+  const res = await apiFetch('/api/battle-fin', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ idToken, code }),
+  })
+  if (!res.ok) throw new Error(`battle-fin ${res.status}`)
+  return (await res.json()).compte ?? null
 }
 
 /** Titre et quiz du chapitre d'un salon (fichiers statiques du programme). */
@@ -141,6 +158,21 @@ export function useBattle(code, { prenom, onRevanche }) {
       .catch(() => setErreurAction('revanche'))
   }, [ctx, role, salon, prenom, onRevanche])
 
+  // --- Partie finie : le serveur compte l'aura (une fois, quel que soit le téléphone qui appelle) ---
+  const [compte, setCompte] = useState(null)
+  const finEnvoyee = useRef(false)
+  const finie = salon?.etat === 'fin' || salon?.etat === 'abandon'
+  useEffect(() => {
+    if (!joue || !finie || salon.compte || finEnvoyee.current || !salon.invite) return
+    finEnvoyee.current = true
+    let essais = 0
+    const tenter = () => envoyerFin(ctx, code).then(setCompte).catch(() => {
+      // Une nouvelle tentative : la dernière écriture du salon peut arriver juste après.
+      if (++essais < 2) setTimeout(tenter, 3000)
+    })
+    tenter()
+  }, [ctx, code, joue, finie, salon])
+
   // --- Mesure du temps de réponse : depuis l'affichage de la question ---
   const affichage = useRef({})
   useEffect(() => {
@@ -184,6 +216,9 @@ export function useBattle(code, { prenom, onRevanche }) {
 
   return {
     etat, salon, role, uid, adversaire, phase, partie, maintenant,
+    avecCompte: !!ctx?.avecCompte,
+    // Ce que le serveur a rangé : { [uid]: { delta, aura?, comptee, sansCompte? } }
+    compte: salon?.compte ?? compte,
     chapitre: contenu?.erreur ? null : contenu, mesReponses, erreurAction, actions,
   }
 }

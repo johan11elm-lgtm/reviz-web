@@ -2,7 +2,7 @@ import { PageIntro } from '../components/PageIntro';
 import { GuestBanner } from '../components/GuestBanner';
 import { UserIcon, FlameIcon, BookIcon, BoltIcon, ChatIcon } from '../components/Icons';
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { loadLessons, syncFromFirestore } from '../services/historyService';
 import { loadRevisions, syncRevisionsFromFirestore } from '../services/revisionService';
@@ -10,6 +10,8 @@ import { BottomNav } from '../components/BottomNav';
 import { LevelSelector } from '../components/LevelSelector';
 import { PageHeader } from '../components/PageHeader';
 import { Mascot } from '../components/Mascot';
+import { BattleMascot } from '../components/BattleMascot';
+import { getUserProfile } from '../services/userProfileService';
 import { computeStreak, computeLevel, computeBadges, XP_PAR_NIVEAU } from '../utils/gamification';
 import { formatLevelLabel } from '../utils/levels';
 import './Profile.css';
@@ -57,6 +59,15 @@ export default function Profile() {
     syncFromFirestore().then(setAllLessons);
     syncRevisionsFromFirestore().then(setAllRevisions);
   }, []);
+
+  // Aura de la Battle : écrite par le serveur sur le profil (api/battle-fin.js).
+  const [battle, setBattle] = useState(null);
+  useEffect(() => {
+    if (isGuest || !currentUser?.uid) return;
+    getUserProfile(currentUser.uid)
+      .then(p => setBattle({ aura: p?.aura ?? 0, jouees: p?.battles?.jouees ?? 0, gagnees: p?.battles?.gagnees ?? 0 }))
+      .catch(() => {});
+  }, [isGuest, currentUser?.uid]);
 
   const streak = computeStreak(allRevisions, 'revisedAt');
   const { level, xpInLvl, fillPct } = computeLevel(allLessons);
@@ -163,6 +174,21 @@ export default function Profile() {
         </section>
 
         {/* Badges */}
+        {battle && (
+          <Link to="/battle" className="rv-card rv-card--link pf-battle-card" aria-label={`Battle : ${battle.aura} aura`}>
+            <BattleMascot pose="aura" size={64} glow glowIntensity={0.6} alt="" aria-hidden="true" />
+            <span className="pf-battle-texte">
+              <span className="pf-battle-aura">{battle.aura} aura</span>
+              <span className="pf-battle-sous">
+                {battle.jouees
+                  ? `${battle.jouees} battle${battle.jouees > 1 ? 's' : ''} · ${battle.gagnees} gagnée${battle.gagnees > 1 ? 's' : ''}`
+                  : 'Pas encore de battle'}
+              </span>
+            </span>
+            <span className="pf-battle-fleche" aria-hidden="true">›</span>
+          </Link>
+        )}
+
         <section className="pf-section">
           <header className="pf-section-header">
             <h2 className="pf-section-title">Badges</h2>

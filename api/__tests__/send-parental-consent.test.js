@@ -52,6 +52,15 @@ describe('send-parental-consent — sécurité', () => {
     expect(emailsSend).not.toHaveBeenCalled()
   })
 
+  it('refuse (403) un compte anonyme (invité de la Battle)', async () => {
+    verifyIdToken.mockResolvedValue({ uid: 'anon', firebase: { sign_in_provider: 'anonymous' } })
+    const res = mockRes()
+    await handler({ method: 'POST', body: { idToken: 'ok', parentEmail: 'p@test.fr', childName: 'Léa' } }, res)
+    expect(res.statusCode).toBe(403)
+    expect(emailsSend).not.toHaveBeenCalled()
+    expect(docSet).not.toHaveBeenCalled()
+  })
+
   it('refuse (400) si l\'email parent est celui de l\'enfant', async () => {
     verifyIdToken.mockResolvedValue({ uid: 'u1', email: 'kid@test.fr' })
     const res = mockRes()

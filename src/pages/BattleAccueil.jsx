@@ -5,24 +5,22 @@ import { useContexteBattle } from '../hooks/useBattle';
 import { creerBattle } from '../services/battleService';
 import { loadChapterContent } from '../services/programmeService';
 import { PageHeader } from '../components/PageHeader';
-import { GuestWall } from '../components/GuestWall';
 import { BattleMascot } from '../components/BattleMascot';
 import { BattleRegles } from '../components/battle/BattleRegles';
 import { BottomNav } from '../components/BottomNav';
-import { LONGUEUR_CODE, normaliserCode } from '../utils/battle';
+import { ChampPrenom } from '../components/battle/ChampPrenom';
+import { prenomInvite, retenirPrenomInvite } from '../services/battleConnexion';
+import { LONGUEUR_CODE, nettoyerPrenom, normaliserCode } from '../utils/battle';
 import { nbsp } from '../utils/typography';
 import './Battle.css';
 
 /**
  * /battle : rejoindre avec un code, ou — avec ?classe&matiere&chapitre, depuis
- * un chapitre de Mon programme — ouvrir un salon et y aller.
+ * un chapitre de Mon programme — ouvrir un salon et y aller. Ouvert à tous :
+ * sans compte, l'élève joue en invité avec son prénom.
  */
 export default function BattleAccueil() {
-  const { isGuest } = useAuth();
   const [params] = useSearchParams();
-  if (isGuest) {
-    return <GuestWall action="jouer en battle" text="La Battle se joue à deux, en direct : il faut un compte pour que ton adversaire te retrouve." />;
-  }
   const chapitre = params.get('chapitre')
     ? { classe: params.get('classe'), matiere: params.get('matiere'), id: params.get('chapitre') }
     : null;
@@ -33,17 +31,39 @@ function Creation({ chapitre }) {
   const navigate = useNavigate();
   const { currentUser } = useAuth();
   const ctx = useContexteBattle();
+  const prenomConnu = currentUser?.displayName || '';
+  const [saisie, setSaisie] = useState(() => prenomConnu || prenomInvite());
+  // Sans compte ni prénom retenu, on le demande avant d'ouvrir le salon.
+  const [prenom, setPrenom] = useState(() => nettoyerPrenom(prenomConnu || prenomInvite()));
   const [erreur, setErreur] = useState(false);
   const lance = useRef(false);
 
   useEffect(() => {
-    if (!ctx || lance.current) return;
+    if (!ctx || !prenom || lance.current) return;
     lance.current = true;
     loadChapterContent(chapitre.classe, chapitre.matiere, chapitre.id)
-      .then(data => creerBattle(ctx, { prenom: currentUser?.displayName || 'Élève', chapitre, nbQuestions: data.quiz.length }))
+      .then(data => creerBattle(ctx, { prenom, chapitre, nbQuestions: data.quiz.length }))
       .then(code => navigate(`/battle/${code}`, { replace: true }))
       .catch(() => setErreur(true));
-  }, [ctx, chapitre, currentUser, navigate]);
+  }, [ctx, prenom, chapitre, navigate]);
+
+  if (!prenom && !erreur) {
+    return (
+      <div className="app battle-page">
+        <PageHeader variant="back" />
+        <form
+          className="content battle-content"
+          onSubmit={e => { e.preventDefault(); const p = nettoyerPrenom(saisie); if (p) { retenirPrenomInvite(p); setPrenom(p); } }}
+        >
+          <ChampPrenom valeur={saisie} onChange={setSaisie} />
+          <button type="submit" className="rv-btn-cta rv-btn-cta--full" disabled={!nettoyerPrenom(saisie)}>
+            <span>Ouvrir le salon</span>
+            <span className="rv-btn-cta-arrow" aria-hidden="true">→</span>
+          </button>
+        </form>
+      </div>
+    );
+  }
 
   return (
     <div className="app battle-page">
@@ -66,6 +86,7 @@ function Creation({ chapitre }) {
 
 function Rejoindre() {
   const navigate = useNavigate();
+  const { currentUser } = useAuth();
   const [saisie, setSaisie] = useState('');
   const [erreur, setErreur] = useState(false);
   const code = normaliserCode(saisie);
@@ -114,7 +135,8 @@ function Rejoindre() {
         <div className="rv-card rv-card--padded battle-lancer">
           <h2 className="battle-lancer-titre">Lancer une battle</h2>
           <p className="battle-lancer-texte">{nbsp('Choisis un chapitre dans Mon programme, puis « Lancer une battle ».')}</p>
-          <Link className="rv-btn-cta rv-btn-cta--full rv-btn-cta--ghost" to="/programme">
+          {/* Sans compte, le programme passe par le mode essai (prénom + classe). */}
+          <Link className="rv-btn-cta rv-btn-cta--full rv-btn-cta--ghost" to={currentUser ? '/programme' : '/essai'}>
             <span>Choisir un chapitre</span>
             <span className="rv-btn-cta-arrow" aria-hidden="true">→</span>
           </Link>
@@ -122,7 +144,7 @@ function Rejoindre() {
 
         <BattleRegles partage />
       </div>
-      <BottomNav />
+      {currentUser && <BottomNav />}
     </div>
   );
 }

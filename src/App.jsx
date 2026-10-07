@@ -72,6 +72,15 @@ function PrivateRoute({ children }) {
   return children;
 }
 
+// La Battle s'ouvre aussi sans compte (invité anonyme) ; un compte connecté
+// mais incomplet termine d'abord son inscription, comme ailleurs.
+function BattleRoute({ children }) {
+  const { currentUser, consentBlocked, needsProfileSetup } = useAuth();
+  if (currentUser && needsProfileSetup) return <Navigate to="/finish-setup" replace />;
+  if (currentUser && consentBlocked) return <Navigate to="/consent-pending" replace />;
+  return children;
+}
+
 // Routes qui nécessitent Firebase Auth
 function AuthRoutes() {
   return (
@@ -101,8 +110,8 @@ function AuthRoutes() {
       <Route path="/coach"       element={<PrivateRoute><Coach /></PrivateRoute>} />
       <Route path="/programme"   element={<PrivateRoute><Programme /></PrivateRoute>} />
       <Route path="/programme/:matiere" element={<PrivateRoute><ProgrammeMatiere /></PrivateRoute>} />
-      <Route path="/battle"      element={<PrivateRoute><BattleAccueil /></PrivateRoute>} />
-      <Route path="/battle/:code" element={<PrivateRoute><Battle /></PrivateRoute>} />
+      <Route path="/battle"      element={<BattleRoute><BattleAccueil /></BattleRoute>} />
+      <Route path="/battle/:code" element={<BattleRoute><Battle /></BattleRoute>} />
       <Route path="*"            element={<NotFound />} />
     </Routes>
     </>

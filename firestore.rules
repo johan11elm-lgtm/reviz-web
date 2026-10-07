@@ -15,15 +15,24 @@ service cloud.firestore {
       return !request.resource.data.keys().hasAny(['stripeCustomerId', 'stripeSubscriptionId', 'upgradedAt'])
         && (!('plan' in request.resource.data) || request.resource.data.plan == 'free');
     }
+    // Aura de la Battle : écrite UNIQUEMENT par api/battle-fin.js (firebase-admin),
+    // après avoir recalculé la partie. Sinon un élève s'attribue l'aura qu'il veut.
+    function auraFields() {
+      return ['aura', 'auraJour', 'battles'];
+    }
+    function auraUnchangedOnUpdate() {
+      return !request.resource.data.diff(resource.data).affectedKeys().hasAny(auraFields());
+    }
     function isOwner(userId) {
       return request.auth != null && request.auth.uid == userId;
     }
 
-    // Document utilisateur : le propriétaire gère son profil, mais PAS sa facturation.
+    // Document utilisateur : le propriétaire gère son profil, mais PAS sa facturation ni son aura.
     match /users/{userId} {
       allow read:   if isOwner(userId);
-      allow create: if isOwner(userId) && noBillingOnCreate();
-      allow update: if isOwner(userId) && billingUnchangedOnUpdate();
+      allow create: if isOwner(userId) && noBillingOnCreate()
+        && !request.resource.data.keys().hasAny(auraFields());
+      allow update: if isOwner(userId) && billingUnchangedOnUpdate() && auraUnchangedOnUpdate();
       allow delete: if isOwner(userId);
 
       // Sous-collections de contenu — propriétaire (lecture + écriture).

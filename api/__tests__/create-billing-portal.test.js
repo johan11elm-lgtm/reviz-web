@@ -33,6 +33,14 @@ describe('create-billing-portal', () => {
     expect(portalCreate).not.toHaveBeenCalled()
   })
 
+  it('refuse (403) un compte anonyme (invité de la Battle)', async () => {
+    verifyIdToken.mockResolvedValue({ uid: 'anon', firebase: { sign_in_provider: 'anonymous' } })
+    const res = mockRes()
+    await handler({ method: 'POST', body: { idToken: 'ok' } }, res)
+    expect(res.statusCode).toBe(403)
+    expect(portalCreate).not.toHaveBeenCalled()
+  })
+
   it('404 si l\'utilisateur n\'a pas de stripeCustomerId', async () => {
     verifyIdToken.mockResolvedValue({ uid: 'u1' })
     userGet.mockResolvedValue({ exists: true, data: () => ({}) })

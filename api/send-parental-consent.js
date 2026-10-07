@@ -37,6 +37,11 @@ export default async function handler(req, res) {
     return res.status(401).json({ error: 'UNAUTHORIZED' });
   }
   const uid = decoded.uid;
+  // Les invités de la Battle sont des comptes anonymes jetables : ils ne
+  // doivent pas pouvoir envoyer d'e-mails.
+  if (decoded.firebase?.sign_in_provider === 'anonymous') {
+    return res.status(403).json({ error: 'ANONYMOUS' });
+  }
 
   // 2. Effort raisonnable (art. 8(2) RGPD) : le parent ne peut pas être l'enfant.
   if (decoded.email && decoded.email.toLowerCase() === email.toLowerCase()) {

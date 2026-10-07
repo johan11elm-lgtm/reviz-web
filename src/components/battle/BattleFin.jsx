@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { BattleJoueur } from './BattleJoueur';
 import { joueursDe } from '../../utils/battle';
 import { nbsp } from '../../utils/typography';
@@ -10,7 +11,7 @@ const ECART_SIX_SEVEN = 3;
  * Fin de partie : le résultat vu par ce joueur, l'aura de la partie, la
  * correction, et la revanche (lancée par l'hôte, rejointe automatiquement).
  */
-export function BattleFin({ salon, role, uid, partie, quiz, onRevanche, onAccueil, revancheEnCours }) {
+export function BattleFin({ salon, role, uid, partie, quiz, onRevanche, onAccueil, revancheEnCours, avecCompte, compte }) {
   const [hote, invite] = joueursDe(salon);
   const adversaire = role === 'hote' ? salon.invite : salon.hote;
   if (!adversaire) {
@@ -44,6 +45,8 @@ export function BattleFin({ salon, role, uid, partie, quiz, onRevanche, onAccuei
         <BattleJoueur joueur={salon.hote} role="hote" moi={role === 'hote'} pose={pose(hote)} taille={136} aura={aura[hote]} glow={vainqueur === hote} />
         <BattleJoueur joueur={salon.invite} role="invite" moi={role === 'invite'} pose={pose(invite)} taille={136} aura={aura[invite]} glow={vainqueur === invite} />
       </div>
+
+      <AuraRangee avecCompte={avecCompte} resultat={compte?.[uid]} />
 
       {rounds.length > 0 && (
         <details className="rv-card rv-card--padded battle-fin-correction">
@@ -83,3 +86,24 @@ export function BattleFin({ salon, role, uid, partie, quiz, onRevanche, onAccuei
     </div>
   );
 }
+
+/** Ce que le serveur a fait de l'aura de la partie (api/battle-fin.js). */
+function AuraRangee({ avecCompte, resultat }) {
+  if (!avecCompte || resultat?.sansCompte) {
+    return (
+      <div className="rv-card rv-card--padded battle-fin-compte">
+        <p>Sans compte, ton aura n’est pas gardée.</p>
+        <Link className="rv-btn-cta rv-btn-cta--full" to="/inscription">
+          <span>Créer mon compte gratuit</span>
+          <span className="rv-btn-cta-arrow" aria-hidden="true">→</span>
+        </Link>
+      </div>
+    );
+  }
+  if (!resultat) return <p className="battle-aide" role="status">Enregistrement de ton aura…</p>;
+  if (!resultat.comptee) {
+    return <p className="battle-aide" role="status">Partie amicale : assez de parties comptées aujourd’hui, ton aura ne bouge pas.</p>;
+  }
+  return <p className="battle-fin-total" role="status">Ton aura : <strong>{resultat.aura}</strong></p>;
+}
+

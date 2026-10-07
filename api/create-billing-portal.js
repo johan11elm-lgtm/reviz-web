@@ -16,12 +16,15 @@ export default async function handler(req, res) {
   const { idToken } = req.body ?? {}
   if (!idToken) return res.status(401).json({ error: 'Unauthorized' })
 
-  let uid
+  let decoded
   try {
-    uid = (await getAuthAdmin().verifyIdToken(idToken)).uid
+    decoded = await getAuthAdmin().verifyIdToken(idToken)
   } catch {
     return res.status(401).json({ error: 'Unauthorized' })
   }
+  // Compte anonyme (invité de la Battle) : jamais d'abonnement.
+  if (decoded.firebase?.sign_in_provider === 'anonymous') return res.status(403).json({ error: 'ANONYMOUS' })
+  const uid = decoded.uid
 
   try {
     const snap = await getDb().collection('users').doc(uid).get()

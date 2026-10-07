@@ -3,38 +3,38 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useBattle } from '../hooks/useBattle';
 import { PageHeader } from '../components/PageHeader';
-import { GuestWall } from '../components/GuestWall';
 import { Mascot } from '../components/Mascot';
 import { BattleMascot } from '../components/BattleMascot';
 import { BattleSalon } from '../components/battle/BattleSalon';
 import { BattleRegles } from '../components/battle/BattleRegles';
 import { BattleJeu } from '../components/battle/BattleJeu';
 import { BattleFin } from '../components/battle/BattleFin';
-import { normaliserCode } from '../utils/battle';
+import { ChampPrenom } from '../components/battle/ChampPrenom';
+import { prenomInvite, retenirPrenomInvite } from '../services/battleConnexion';
+import { nettoyerPrenom, normaliserCode } from '../utils/battle';
 import './Battle.css';
 
 /**
  * Une partie de Battle (/battle/:code) : invitation, salon, rounds, fin.
+ * Ouverte à tous : sans compte, l'élève joue en invité avec son prénom.
  * Le composant est remonté à chaque code (revanche) pour repartir à zéro.
  */
 export default function Battle() {
   const { code: brut } = useParams();
-  const { isGuest } = useAuth();
   const code = normaliserCode(brut);
-  if (isGuest) {
-    return <GuestWall action="jouer en battle" text="La Battle se joue à deux, en direct : il faut un compte pour que ton adversaire te retrouve." />;
-  }
   return <Partie key={code ?? brut} code={code} />;
 }
 
 function Partie({ code }) {
   const navigate = useNavigate();
   const { currentUser } = useAuth();
-  const prenom = currentUser?.displayName || 'Élève';
+  // Compte ou mode essai : le prénom est connu. Sinon, l'invité le donne en rejoignant.
+  const prenomConnu = currentUser?.displayName || '';
+  const [prenom, setPrenom] = useState(() => prenomConnu || prenomInvite());
   const [revancheEnCours, setRevancheEnCours] = useState(false);
   const versRevanche = useCallback(nouveau => navigate(`/battle/${nouveau}`, { replace: true }), [navigate]);
   const battle = useBattle(code, { prenom, onRevanche: versRevanche });
-  const { etat, salon, role, uid, phase, partie, maintenant, chapitre, mesReponses, erreurAction, actions } = battle;
+  const { etat, salon, role, uid, phase, partie, maintenant, chapitre, mesReponses, erreurAction, actions, avecCompte, compte } = battle;
 
   const enJeu = phase.type === 'annonce' || phase.type === 'question' || phase.type === 'revelation';
 
@@ -60,7 +60,7 @@ function Partie({ code }) {
       />
     );
   } else if (etat === 'deconnecte') {
-    corps = <EtatVide pose="confused" titre="Connexion perdue" texte="Reconnecte-toi pour jouer." action="Me connecter" onAction={() => navigate('/connexion')} />;
+    corps = <EtatVide pose="confused" titre="Connexion impossible" texte="La partie n’a pas pu se connecter. Vérifie ta connexion internet et réessaie." action="Réessayer" onAction={() => navigate(0)} />;
   } else if (etat === 'chapitre') {
     corps = <EtatVide pose="confused" titre="Chapitre indisponible" texte="Les questions de ce chapitre n’ont pas pu être chargées. Vérifie ta connexion." action="Réessayer" onAction={() => navigate(0)} />;
   } else if (etat === 'chargement' || !chapitre || (role !== 'spectateur' && salon.invite && !partie)) {
@@ -73,7 +73,13 @@ function Partie({ code }) {
         <p className="battle-invitation-chapitre">{chapitre.titre} · {chapitre.matiere}</p>
         <BattleRegles />
         <div className="battle-actions">
-          <button type="button" className="rv-btn-cta rv-btn-cta--full" onClick={actions.rejoindre}>
+          {!prenomConnu && <ChampPrenom valeur={prenom} onChange={setPrenom} />}
+          <button
+            type="button"
+            className="rv-btn-cta rv-btn-cta--full"
+            disabled={!nettoyerPrenom(prenom)}
+            onClick={() => { if (!prenomConnu) retenirPrenomInvite(nettoyerPrenom(prenom)); actions.rejoindre(); }}
+          >
             <span>Rejoindre la battle</span>
             <span className="rv-btn-cta-arrow" aria-hidden="true">→</span>
           </button>
@@ -95,6 +101,7 @@ function Partie({ code }) {
       <BattleFin
         salon={salon} role={role} uid={uid} partie={partie} quiz={chapitre.quiz}
         onRevanche={revanche} revancheEnCours={revancheEnCours} onAccueil={() => navigate('/', { replace: true })}
+        avecCompte={avecCompte} compte={compte}
       />
     );
   }

@@ -22,3 +22,11 @@ export function getAuthAdmin() {
   ensureApp()
   return getAuth()
 }
+
+// Base temps réel de la Battle (instance europe-west1). Import à la demande :
+// seules les routes battle chargent le module database.
+export async function getRtdb() {
+  ensureApp()
+  const { getDatabaseWithUrl } = await import('firebase-admin/database')
+  return getDatabaseWithUrl(process.env.FIREBASE_DATABASE_URL || process.env.VITE_FIREBASE_DATABASE_URL)
+}

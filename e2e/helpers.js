@@ -51,6 +51,16 @@ export async function mockApiRoutes(page) {
     route.fulfill({ status: 200, contentType: 'text/plain; charset=utf-8', body: JSON.stringify(MOCK_AI_RESPONSE) }))
   await page.route('**/api/send-parental-consent', route =>
     route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ ok: true }) }))
+  // Fin de Battle : la vraie route (firebase-admin) ne tourne pas sous Vite. On
+  // répond pour l'élève qui appelle (uid lu dans son jeton d'émulateur) : un
+  // compte voit son total, un invité anonyme apprend que son aura n'est pas gardée.
+  await page.route('**/api/battle-fin', route => {
+    const { idToken } = route.request().postDataJSON()
+    const jeton = JSON.parse(Buffer.from(idToken.split('.')[1], 'base64url').toString())
+    const anonyme = jeton.firebase?.sign_in_provider === 'anonymous'
+    const compte = { [jeton.user_id]: anonyme ? { delta: 0, comptee: false, sansCompte: true } : { delta: 130, aura: 130, comptee: true } }
+    return route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ compte }) })
+  })
   // Ceinture + bretelles : aucun test ne doit jamais atteindre Anthropic.
   await page.route('**/api.anthropic.com/**', route =>
     route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ content: [{ type: 'text', text: JSON.stringify(MOCK_AI_RESPONSE) }] }) }))
@@ -127,8 +137,11 @@ export async function verifyEmailAndOnboard(page, email, { garderAnnonce = false
   await expect(page).toHaveURL(/onboarding/, { timeout: 15_000 })
   await page.getByRole('button', { name: 'Passer' }).click()
   await expect(page).toHaveURL(/\/$/, { timeout: 10_000 })
-  if (!garderAnnonce) {
-    const plusTard = page.getByRole('dialog', { name: 'La Battle' }).getByRole('button', { name: 'Plus tard' })
-    await plusTard.click({ timeout: 5_000 }).catch(() => {})
-  }
+  if (!garderAnnonce) await fermerAnnonceBattle(page)
+}
+
+/** Ferme la popup « Nouveau : la Battle » si elle est ouverte (accueil, une fois par élève). */
+export async function fermerAnnonceBattle(page) {
+  const plusTard = page.getByRole('dialog', { name: 'La Battle' }).getByRole('button', { name: 'Plus tard' })
+  await plusTard.click({ timeout: 5_000 }).catch(() => {})
 }
