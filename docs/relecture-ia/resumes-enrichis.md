@@ -4,7 +4,7 @@ _7 octobre 2026. La partie « résumé » de 347 chapitres (6e → 3e, toutes ma
 
 Les sections ci-dessous reprennent les rapports des sous-agents, matière par matière. Elles distinguent deux choses :
 - les **doutes**, à faire trancher par un professeur de la matière ;
-- les **erreurs dans la référence du catalogue** (`src/data/programme`). Elles ne sont pas corrigées dans le catalogue, mais elles sont déjà évitées dans le résumé.
+- les **erreurs dans la référence du catalogue** (`src/data/programme`). Elles sont évitées dans les résumés et ont été **corrigées dans le catalogue le 7 octobre 2026**, ainsi que dans les flashcards, quiz et cartes mentales de 11 chapitres qui les reprenaient. Restent ouverts : la ZEE (« environ » ou « plus de » 10 millions de km², les deux sont justes) et les points « déjà signalés » du rapport de relecture.
 
 ## Physique-chimie 3e — 13/13
 Doutes prof :
