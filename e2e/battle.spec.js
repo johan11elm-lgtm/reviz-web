@@ -64,6 +64,14 @@ test('deux élèves jouent une battle complète, puis la revanche', async ({ bro
   await hote.goto('/')
   await expect(hote.getByRole('link', { name: /Battle/ })).toBeVisible()
   await expect(hote.getByRole('dialog', { name: 'La Battle' })).toHaveCount(0)
+  // Téléphone : « Mon programme » et « Battle » se suivent, avec l'écart habituel entre cartes.
+  const cartes = hote.locator('.home-programme-card')
+  if (await cartes.count() === 2) {
+    const [haut, bas] = [await cartes.nth(0).boundingBox(), await cartes.nth(1).boundingBox()]
+    expect(bas.y - (haut.y + haut.height)).toBeGreaterThanOrEqual(8)
+    await cartes.nth(1).scrollIntoViewIfNeeded()
+    await capture(hote, '01a-accueil')
+  }
 
   // ── Johan lance une battle depuis le chapitre ──
   await hote.goto('/programme/maths')
