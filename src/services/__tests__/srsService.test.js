@@ -69,3 +69,27 @@ describe('srsService — contrat de clé write/read', () => {
     expect(countDueCards('lessonA', CARDS.length)).toBe(2)
   })
 })
+
+describe('srsService — summarizeCards', () => {
+  it('répartit les cartes en nouvelles, à revoir et en mémoire, et trie les leçons', async () => {
+    const { summarizeCards } = await import('../srsService')
+    updateCardState('lessonA', 0, 'got')   // en mémoire (revue demain)
+    updateCardState('lessonB', 0, 'got')
+    // lessonB carte 0 arrivée à échéance
+    const key = 'reviz-srs'
+    const data = JSON.parse(localStorage.getItem(key))
+    data.lessonB_0.nextReview = Date.now() - 1000
+    localStorage.setItem(key, JSON.stringify(data))
+
+    const s = summarizeCards([
+      { id: 'lessonA', flashcardsCount: 3 },
+      { id: 'lessonB', aiData: { flashcards: CARDS } },
+      { id: 'lessonC' },
+    ])
+    expect(s).toMatchObject({ total: 6, nouvelles: 4, aRevoir: 1, enMemoire: 1, dues: 5 })
+    // Même total de dues que countDueCards, leçon par leçon
+    expect(s.dues).toBe(countDueCards('lessonA', 3) + countDueCards('lessonB', 3))
+    // lessonB (une carte vue à revoir) passe devant lessonA (que des nouvelles)
+    expect(s.lecons.map(l => l.lesson.id)).toEqual(['lessonB', 'lessonA'])
+  })
+})

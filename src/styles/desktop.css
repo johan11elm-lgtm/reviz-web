@@ -311,55 +311,383 @@
     gap: 12px;
   }
 
-  /* ── Mes progrès : flux à deux colonnes, intertitres en pleine largeur ──
-   * Niveau | série, puis le calendrier d'activité à côté du graphique de la
-   * semaine (son intertitre devient redondant), les chiffres sur toute la
-   * largeur, le reste à la suite. */
-  html:not(.native) .progres-page .pg-content {
+  /* ── Mes progrès : tableau de bord (balisage propre à l'ordinateur,
+   * Progres.jsx) — série · niveau · semaine, puis programme | mémoire,
+   * le calendrier du semestre, et les répartitions côte à côte. ── */
+  html:not(.native) .progres-page .pg-desk { gap: 28px; }
+  html:not(.native) .progres-page .pg-desk > .pg-intro { margin-bottom: -10px; }
+  html:not(.native) .progres-page .pg-desk-top {
     display: grid;
-    grid-auto-rows: max-content;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr) minmax(0, 1fr);
+    gap: var(--grid-gap);
+    align-items: stretch;
+  }
+  html:not(.native) .progres-page .pg-desk-duo {
+    display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 18px var(--grid-gap);
-    align-items: start;
-    align-content: start;
+    gap: var(--grid-gap);
+    align-items: stretch;
   }
-  html:not(.native) .progres-page .pg-content > .pg-intro,
-  html:not(.native) .progres-page .pg-content > .pg-section-title,
-  html:not(.native) .progres-page .pg-content > .pg-stats-grid { grid-column: 1 / -1; margin: 0; }
-  html:not(.native) .progres-page .pg-content > .pg-section-title { margin-top: 6px; }
-  html:not(.native) .progres-page .pg-level-card  { margin: 0; }
-  html:not(.native) .progres-page .pg-streak-card { margin: 0; align-self: stretch; }
-  html:not(.native) .progres-page .pg-weeks-card  { grid-column: 1; grid-row: 4; margin: 0; }
-  html:not(.native) .progres-page .pg-chart-card  { grid-column: 2; grid-row: 4; margin: 0; }
-  html:not(.native) .progres-page .pg-content > .pg-section-title:nth-of-type(3) { display: none; }
-  /* Par format | par matière, côte à côte */
-  html:not(.native) .progres-page .pg-breakdown {
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
+  html:not(.native) .progres-page .pg-desk-duo--programme { grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); }
+  html:not(.native) .progres-page .pg-desk-section { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+  html:not(.native) .progres-page .pg-desk-section > .rv-card { flex: 1; }
+  html:not(.native) .progres-page .pg-desk-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; }
+  html:not(.native) .progres-page .pg-desk-title {
+    margin: 0;
+    font-family: 'Geist', sans-serif;
+    font-size: 18px;
+    font-weight: 800;
+    letter-spacing: -0.4px;
+    color: var(--text-primary);
   }
-  html:not(.native) .progres-page .pg-breakdown > .pg-section-title { margin: 6px 0 0; }
-  html:not(.native) .progres-page .pg-format-left,
-  html:not(.native) .progres-page .pg-subject-left { width: 150px; }
+  html:not(.native) .progres-page .pg-desk-more { font-size: 13px; font-weight: 600; color: var(--text-secondary); text-decoration: none; }
+  html:not(.native) .progres-page .pg-desk-more:hover { color: var(--text-primary); }
+  html:not(.native) .progres-page .pg-desk-head-note { font-size: 13px; color: var(--text-muted); }
+  html:not(.native) .progres-page .pg-desk-big {
+    font-family: 'Geist', sans-serif;
+    font-size: 34px;
+    font-weight: 800;
+    letter-spacing: -1.4px;
+    line-height: 1;
+    color: var(--accent-orange);
+  }
+  html:not(.native) .progres-page .pg-desk-big-text { font-size: 13.5px; font-weight: 500; color: var(--text-secondary); line-height: 1.35; }
+  html:not(.native) .progres-page .pg-desk-empty { margin: 0; font-size: 13.5px; line-height: 1.45; color: var(--text-muted); }
 
-  /* ── Profil : identité à gauche, badges à droite ── */
-  html:not(.native) .profile-page .pf-content {
-    display: grid;
-    grid-auto-rows: max-content;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr);
-    grid-template-areas:
-      "intro   badges"
-      "stats   badges"
-      "account badges"
-      ".       badges";
-    gap: 20px var(--grid-gap);
-    align-items: start;
-    align-content: start;
+  /* Série : même carte orange que sur téléphone, empilée pour tenir au tiers */
+  html:not(.native) .progres-page .pg-desk-streak { padding: 20px 22px; align-items: stretch; }
+  html:not(.native) .progres-page .pg-desk-streak-text { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 6px; }
+  html:not(.native) .progres-page .pg-desk-streak .pg-streak-value { font-size: 44px; margin-top: 4px; }
+  html:not(.native) .progres-page .pg-desk-streak .pg-streak-value small { font-size: 16px; letter-spacing: -0.2px; font-weight: 700; }
+  html:not(.native) .progres-page .pg-desk-streak-record {
+    margin-top: auto;
+    padding-top: 12px;
+    border-top: 1px solid rgba(255, 255, 255, 0.32);
+    font-size: 13px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.92);
   }
-  html:not(.native) .profile-page .pf-intro { grid-area: intro; }
-  html:not(.native) .profile-page .pf-stats-card { grid-area: stats; margin: 0; }
-  html:not(.native) .profile-page .pf-section:has(.pf-badges-grid) { grid-area: badges; margin: 0; }
-  html:not(.native) .profile-page .pf-section:has(.pf-account-list) { grid-area: account; margin: 0; }
+  html:not(.native) .progres-page .pg-desk-streak .pg-streak-mascot { align-self: flex-end; margin-bottom: -26px; }
+  html:not(.native) .progres-page .pg-desk-streak .pg-streak-label,
+  html:not(.native) .progres-page .pg-desk-streak-record { white-space: nowrap; }
+
+  /* Niveau et semaine : petites cartes chiffrées */
+  html:not(.native) .progres-page .pg-desk-kpi { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+  html:not(.native) .progres-page .pg-desk-kpi-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; min-height: 30px; }
+  html:not(.native) .progres-page .pg-desk-kpi-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-muted);
+  }
+  html:not(.native) .progres-page .pg-desk-kpi-value {
+    font-family: 'Geist', sans-serif;
+    font-size: 32px;
+    font-weight: 800;
+    letter-spacing: -1.2px;
+    line-height: 1;
+    color: var(--text-primary);
+  }
+  html:not(.native) .progres-page .pg-desk-kpi-value small { font-size: 14px; font-weight: 700; letter-spacing: -0.2px; color: var(--text-muted); }
+  html:not(.native) .progres-page .pg-desk-kpi-note { margin-top: auto; font-size: 12.5px; line-height: 1.4; color: var(--text-muted); }
+  html:not(.native) .progres-page .pg-desk-bars { height: 58px; gap: 5px; }
+  html:not(.native) .progres-page .pg-chart-record { display: inline-flex; align-items: center; gap: 4px; }
+  html:not(.native) .progres-page .pg-chart-record svg { width: 12px; height: 12px; }
+
+  /* Encoches de chapitre : même code couleur que Mon programme */
+  html:not(.native) .progres-page .pg-seg { display: block; flex: 1; height: 7px; border-radius: 3px; background: var(--bg-muted); }
+  html:not(.native) .progres-page .pg-seg--commence { background: color-mix(in srgb, var(--accent-orange) 45%, var(--bg-muted)); }
+  html:not(.native) .progres-page .pg-seg--a-revoir { background: var(--accent-orange); }
+  html:not(.native) .progres-page .pg-seg--maitrise { background: var(--accent-green); }
+  html:not(.native) .progres-page .pg-seg--bientot { opacity: 0.45; }
+  html:not(.native) .progres-page .pg-legend {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin: 0 0 0 auto;
+    padding: 0;
+    list-style: none;
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+  html:not(.native) .progres-page .pg-legend li { display: flex; align-items: center; gap: 6px; white-space: nowrap; }
+  html:not(.native) .progres-page .pg-legend .pg-seg { flex: none; width: 14px; }
+
+  /* Mon programme : une rangée par matière */
+  html:not(.native) .progres-page .pg-prog-card { display: flex; flex-direction: column; gap: 14px; }
+  html:not(.native) .progres-page .pg-prog-summary { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 10px; }
+  /* La phrase reste sur une ligne : c'est la légende qui passe dessous */
+  html:not(.native) .progres-page .pg-prog-summary .pg-desk-big-text { flex: 1 0 auto; max-width: calc(100% - 50px); }
+  html:not(.native) .progres-page .pg-prog-list { display: flex; flex-direction: column; margin: 0 -10px; }
+  html:not(.native) .progres-page .pg-prog-skeleton { height: 46px; margin: 4px 10px; border-radius: 12px; }
+  html:not(.native) .progres-page .pg-prog-row {
+    display: grid;
+    grid-template-columns: 38px minmax(0, 1fr) 128px 10px; /* colonne de pastille fixe : les encoches s'alignent */
+    align-items: center;
+    gap: 14px;
+    padding: 9px 10px;
+    border: none;
+    border-radius: 14px;
+    background: transparent;
+    text-align: left;
+    font-family: inherit;
+    color: inherit;
+    cursor: pointer;
+    transition: background 0.15s ease;
+  }
+  html:not(.native) .progres-page .pg-prog-row { position: relative; }
+  /* Séparateur droit, qui commence après la mascotte ; effacé au survol */
+  html:not(.native) .progres-page .pg-prog-row + .pg-prog-row::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 62px;
+    right: 10px;
+    height: 1px;
+    background: var(--border-subtle);
+  }
+  html:not(.native) .progres-page .pg-prog-row:hover { background: var(--bg-hover); }
+  html:not(.native) .progres-page .pg-prog-row:hover::before,
+  html:not(.native) .progres-page .pg-prog-row:hover + .pg-prog-row::before { display: none; }
+  html:not(.native) .progres-page .pg-prog-mascot { display: flex; }
+  html:not(.native) .progres-page .pg-prog-main { display: flex; flex-direction: column; gap: 7px; min-width: 0; }
+  html:not(.native) .progres-page .pg-prog-line { display: flex; align-items: baseline; gap: 10px; min-width: 0; }
+  html:not(.native) .progres-page .pg-prog-name { font-size: 14px; font-weight: 700; color: var(--text-primary); white-space: nowrap; }
+  html:not(.native) .progres-page .pg-prog-detail { font-size: 12px; color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  html:not(.native) .progres-page .pg-prog-strip { display: flex; gap: 3px; }
+  html:not(.native) .progres-page .pg-prog-status { display: flex; justify-content: flex-end; }
+  html:not(.native) .progres-page .pg-prog-status .rv-pill { white-space: nowrap; }
+  html:not(.native) .progres-page .pg-prog-arrow { font-size: 18px; line-height: 1; color: var(--text-muted); }
+
+  /* Ta mémoire */
+  html:not(.native) .progres-page .pg-mem-card { display: flex; flex-direction: column; gap: 14px; }
+  html:not(.native) .progres-page .pg-mem-top { display: flex; align-items: baseline; gap: 10px; }
+  html:not(.native) .progres-page .pg-mem-bar { display: flex; height: 10px; border-radius: 5px; overflow: hidden; background: var(--bg-muted); }
+  html:not(.native) .progres-page .pg-mem-bar-seg { height: 100%; }
+  html:not(.native) .progres-page .pg-mem-bar-seg--memoire,
+  html:not(.native) .progres-page .pg-mem-dot--memoire { background: var(--accent-green); }
+  html:not(.native) .progres-page .pg-mem-bar-seg--revoir,
+  html:not(.native) .progres-page .pg-mem-dot--revoir { background: var(--accent-orange); }
+  html:not(.native) .progres-page .pg-mem-bar-seg--nouvelles,
+  html:not(.native) .progres-page .pg-mem-dot--nouvelles { background: color-mix(in srgb, var(--text-muted) 35%, var(--bg-muted)); }
+  html:not(.native) .progres-page .pg-mem-legend { display: flex; flex-direction: column; gap: 8px; margin: 0; padding: 0; list-style: none; }
+  html:not(.native) .progres-page .pg-mem-legend li { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--text-secondary); }
+  html:not(.native) .progres-page .pg-mem-legend b { margin-left: auto; font-weight: 700; color: var(--text-primary); }
+  html:not(.native) .progres-page .pg-mem-dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
+  html:not(.native) .progres-page .pg-mem-sub {
+    margin-top: 4px;
+    padding-top: 14px;
+    border-top: 1px solid var(--border-subtle);
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-muted);
+  }
+  html:not(.native) .progres-page .pg-mem-list { display: flex; flex-direction: column; margin: -6px -8px 0; padding: 0; list-style: none; }
+  html:not(.native) .progres-page .pg-mem-lesson {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 7px 8px;
+    border: none;
+    border-radius: 12px;
+    background: transparent;
+    text-align: left;
+    font-family: inherit;
+    color: inherit;
+    cursor: pointer;
+  }
+  html:not(.native) .progres-page .pg-mem-lesson:hover { background: var(--bg-hover); }
+  html:not(.native) .progres-page .pg-mem-lesson-text { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+  html:not(.native) .progres-page .pg-mem-lesson-title { font-size: 13.5px; font-weight: 700; color: var(--text-primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  html:not(.native) .progres-page .pg-mem-lesson-meta { font-size: 11.5px; color: var(--text-muted); }
+  html:not(.native) .progres-page .pg-mem-cta { margin-top: auto; }
+  html:not(.native) .progres-page .pg-mem-done {
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding-top: 14px;
+    border-top: 1px solid var(--border-subtle);
+    font-size: 13.5px;
+    line-height: 1.4;
+    color: var(--text-secondary);
+  }
+  html:not(.native) .progres-page .pg-mem-empty { margin: auto 0; display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center; }
+  html:not(.native) .progres-page .pg-mem-empty-title { margin: 0; font-size: 15px; font-weight: 800; color: var(--text-primary); }
+
+  /* Ton activité : le semestre, une colonne par semaine */
+  html:not(.native) .progres-page .pg-act-card {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 250px;
+    gap: 28px;
+    align-items: center;
+  }
+  /* Cases carrées qui remplissent la largeur (12 px au moins) ; ce qui ne
+   * tient pas, les semaines les plus anciennes, sort à gauche. Le rognage
+   * ne coupe que ce côté : le mois de la dernière colonne peut déborder. */
+  html:not(.native) .progres-page .pg-heat {
+    /* 28 px de jours, 8 px d'écart, 25 écarts de 4 px entre 26 semaines */
+    --cell: clamp(12px, calc((100cqw - 136px) / 26), 26px);
+    container-type: inline-size;
+    display: flex;
+    gap: 8px;
+    min-width: 0;
+  }
+  html:not(.native) .progres-page .pg-heat-weeks {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    justify-content: flex-end;
+    gap: 4px;
+    clip-path: inset(-4px -40px -4px 0);
+  }
+  html:not(.native) .progres-page .pg-heat-days,
+  html:not(.native) .progres-page .pg-heat-week { display: grid; grid-template-rows: 16px repeat(7, var(--cell, 18px)); gap: 4px; flex: none; }
+  html:not(.native) .progres-page .pg-heat-days { width: 28px; }
+  html:not(.native) .progres-page .pg-heat-week { width: var(--cell); }
+  html:not(.native) .progres-page .pg-heat-days span { font-size: 10px; font-weight: 600; line-height: 1; color: var(--text-muted); align-self: center; }
+  html:not(.native) .progres-page .pg-heat-month { font-size: 10px; font-weight: 600; line-height: 16px; color: var(--text-muted); white-space: nowrap; }
+  html:not(.native) .progres-page .pg-heat-cell { display: block; width: var(--cell, 11px); height: var(--cell, 11px); border-radius: 4px; }
+  html:not(.native) .progres-page .pg-heat-cell--today { outline: 2px solid var(--accent-orange); outline-offset: 1px; }
+  html:not(.native) .progres-page .pg-act-side { display: flex; flex-direction: column; gap: 12px; padding-left: 28px; border-left: 1px solid var(--border-subtle); }
+  html:not(.native) .progres-page .pg-act-stat { display: grid; grid-template-columns: 34px auto; column-gap: 12px; align-items: center; }
+  html:not(.native) .progres-page .pg-act-stat .rv-icon-square { width: 34px; height: 34px; grid-row: span 2; }
+  html:not(.native) .progres-page .pg-act-stat b { font-family: 'Geist', sans-serif; font-size: 20px; font-weight: 800; letter-spacing: -0.6px; line-height: 1.05; color: var(--text-primary); }
+  html:not(.native) .progres-page .pg-act-stat span:last-child { font-size: 12px; line-height: 1.3; color: var(--text-muted); }
+  html:not(.native) .progres-page .pg-act-legend { margin: 4px 0 0; gap: 4px; }
+  html:not(.native) .progres-page .pg-act-legend .pg-heat-cell { --cell: 11px; }
+
+  /* Répartitions (une seule : sur toute la largeur) */
+  html:not(.native) .progres-page .pg-desk-duo--seul { grid-template-columns: minmax(0, 1fr); }
+  html:not(.native) .progres-page .pg-format-left,
+  html:not(.native) .progres-page .pg-subject-left { width: 160px; }
+
+  /* ── Profil (balisage propre à l'ordinateur, Profile.jsx) : identité,
+   * trois cartes (chiffres, Battle, compte), puis tous les badges avec ce
+   * qu'il faut faire pour les obtenir. ── */
+  html:not(.native) .profile-page .pf-desk { gap: 28px; }
+  html:not(.native) .profile-page .pf-desk > .pf-intro { margin-bottom: -10px; }
+  html:not(.native) .profile-page .pf-desk-row {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--grid-gap);
+    align-items: stretch;
+  }
+  html:not(.native) .profile-page .pf-desk-card { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+  html:not(.native) .profile-page .pf-desk-card-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; min-height: 22px; }
+  html:not(.native) .profile-page .pf-desk-label {
+    margin: 0;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-muted);
+  }
+  html:not(.native) .profile-page .pf-desk-more { font-size: 13px; font-weight: 600; color: var(--text-secondary); text-decoration: none; }
+  html:not(.native) .profile-page .pf-desk-more:hover { color: var(--text-primary); }
+  html:not(.native) .profile-page .pf-desk-stats { flex: 1; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: center; }
+  html:not(.native) .profile-page .pf-desk-stats .pf-stat { padding: 6px 4px; }
+  html:not(.native) .profile-page .pf-desk-stats .pf-stat + .pf-stat { box-shadow: -1px 0 0 var(--border-subtle); }
+
+  html:not(.native) .profile-page .pf-desk-battle { text-decoration: none; color: inherit; }
+  html:not(.native) .profile-page .pf-desk-battle-body { flex: 1; display: flex; align-items: center; gap: 14px; }
+  html:not(.native) .profile-page .pf-desk-battle-mascot { display: flex; flex-shrink: 0; }
+  html:not(.native) .profile-page .pf-desk-battle-text { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+  html:not(.native) .profile-page .pf-desk-battle-value {
+    font-family: 'Geist', sans-serif;
+    font-size: 30px;
+    font-weight: 800;
+    letter-spacing: -1px;
+    line-height: 1;
+    color: var(--text-primary);
+  }
+  html:not(.native) .profile-page .pf-desk-battle-value small { font-size: 14px; letter-spacing: -0.2px; color: var(--text-muted); }
+  html:not(.native) .profile-page .pf-desk-battle-title { font-size: 16px; font-weight: 800; letter-spacing: -0.3px; color: var(--text-primary); }
+  html:not(.native) .profile-page .pf-desk-battle-sub { font-size: 12.5px; line-height: 1.35; color: var(--text-muted); }
+
+  html:not(.native) .profile-page .pf-desk-compte { display: flex; flex-direction: column; margin: -4px -8px -6px; }
+  html:not(.native) .profile-page .pf-desk-compte-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px;
+    border: none;
+    border-radius: 12px;
+    background: transparent;
+    text-align: left;
+    font-family: inherit;
+    color: var(--text-primary);
+    cursor: pointer;
+  }
+  html:not(.native) .profile-page .pf-desk-compte-row:hover { background: var(--bg-hover); }
+  html:not(.native) .profile-page .pf-desk-compte-row .rv-icon-square { width: 34px; height: 34px; flex-shrink: 0; }
+
+  /* Badges : le prochain à viser, puis la collection complète */
+  html:not(.native) .profile-page .pf-desk-section { display: flex; flex-direction: column; gap: 14px; }
+  html:not(.native) .profile-page .pf-desk-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; }
+  html:not(.native) .profile-page .pf-desk-title {
+    margin: 0;
+    font-family: 'Geist', sans-serif;
+    font-size: 18px;
+    font-weight: 800;
+    letter-spacing: -0.4px;
+    color: var(--text-primary);
+  }
+  html:not(.native) .profile-page .pf-desk-head-note { font-size: 13px; font-weight: 600; color: var(--text-muted); }
+  html:not(.native) .profile-page .pf-next { display: flex; align-items: center; gap: 18px; }
+  html:not(.native) .profile-page .pf-next-mascot { display: flex; flex-shrink: 0; }
+  html:not(.native) .profile-page .pf-next-text { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+  html:not(.native) .profile-page .pf-next-name { font-family: 'Geist', sans-serif; font-size: 18px; font-weight: 800; letter-spacing: -0.4px; color: var(--text-primary); }
+  html:not(.native) .profile-page .pf-next-hint { font-size: 13px; color: var(--text-secondary); }
+  html:not(.native) .profile-page .pf-next-progress { flex: 1; max-width: 360px; margin-left: auto; display: flex; align-items: center; gap: 12px; }
+  html:not(.native) .profile-page .pf-next-progress .rv-bar { flex: 1; background: var(--bg-muted); }
+  html:not(.native) .profile-page .pf-next-count { font-size: 13px; font-weight: 700; color: var(--text-primary); white-space: nowrap; }
+
+  html:not(.native) .profile-page .pf-desk-badges {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 12px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  html:not(.native) .profile-page .pf-desk-badge { gap: 4px; padding: 14px 8px 12px; text-align: center; }
+  html:not(.native) .profile-page .pf-desk-badge.pf-badge--locked { opacity: 1; background: color-mix(in srgb, var(--bg-card) 55%, transparent); }
+  html:not(.native) .profile-page .pf-desk-badge-mascot { display: flex; margin-bottom: 4px; }
+  html:not(.native) .profile-page .pf-badge--locked .pf-desk-badge-mascot { filter: grayscale(1); opacity: 0.35; }
+  html:not(.native) .profile-page .pf-desk-badge-label { font-size: 13px; font-weight: 700; color: var(--text-primary); }
+  html:not(.native) .profile-page .pf-desk-badge-hint { font-size: 11.5px; line-height: 1.3; color: var(--text-muted); min-height: 2.6em; }
+  html:not(.native) .profile-page .pf-desk-badge-state { margin-top: 2px; font-size: 11.5px; font-weight: 700; color: var(--text-muted); }
+  html:not(.native) .profile-page .pf-desk-badge-state--ok { display: inline-flex; align-items: center; gap: 4px; color: var(--accent-green-ink); }
+  html:not(.native) .profile-page .pf-desk-badge-state--ok svg { width: 12px; height: 12px; }
+
+  /* Modifier le profil : fenêtre centrée sur la colonne, plus de feuille du bas */
+  html:not(.native) .profile-page .pf-sheet {
+    top: 50%;
+    bottom: auto;
+    left: calc(50% + var(--sidenav-w) / 2);
+    right: auto;
+    width: min(520px, calc(100vw - var(--sidenav-w) - 48px));
+    max-width: none;
+    max-height: calc(100dvh - 64px);
+    margin: 0;
+    padding: 22px 26px 26px;
+    border-radius: 24px;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.18);
+    transform: translate(-50%, -50%);
+    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0s linear 0s;
+  }
+  html:not(.native) .profile-page .pf-sheet.rv-sheet--bottom-hidden {
+    opacity: 0;
+    visibility: hidden;
+    transform: translate(-50%, -47%);
+    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0s linear 0.2s;
+  }
+  html:not(.native) .profile-page .pf-sheet .rv-sheet-handle { display: none; }
 
   /* ── Réglages : deux colonnes ── */
   html:not(.native) .reglages-page .rg-content {
@@ -399,6 +727,17 @@
     border-radius: 24px;
   }
   html:not(.native) .scan-page .scan-drop-hint { display: block; }
+}
+
+/* Badges du profil : deux rangées de neuf dès que la place le permet */
+@media (min-width: 1240px) {
+  html:not(.native) .profile-page .pf-desk-badges { grid-template-columns: repeat(9, minmax(0, 1fr)); }
+}
+
+/* Ordinateur étroit (1024 à 1279 px) : un peu d'air rendu à la carte de
+ * série, dont les libellés restent sur une ligne */
+@media (min-width: 1024px) and (max-width: 1279px) {
+  html:not(.native) .progres-page .pg-desk-streak { padding: 18px 14px 18px 18px; }
 }
 
 /* Indice de glisser-déposer : seulement sur ordinateur */

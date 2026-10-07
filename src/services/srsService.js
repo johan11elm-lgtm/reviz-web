@@ -100,3 +100,30 @@ export function countDueCards(lessonId, totalCards) {
   }
   return count
 }
+
+// ── État des cartes de toutes les leçons (page Progrès, ordinateur) ──
+// Une seule lecture du stockage. « Dues » suit la même règle que
+// countDueCards (jamais vues comprises), donc le même chiffre que l'accueil.
+export function summarizeCards(lessons) {
+  const data = loadData()
+  const now  = Date.now()
+  const summary = { total: 0, nouvelles: 0, aRevoir: 0, enMemoire: 0, dues: 0, lecons: [] }
+  for (const lesson of lessons) {
+    const total = lesson.flashcardsCount ?? lesson.aiData?.flashcards?.length ?? 0
+    let nouvelles = 0, aRevoir = 0
+    for (let i = 0; i < total; i++) {
+      const state = data[cardKey(lesson.id, i)]
+      if (!state) nouvelles++
+      else if (!state.nextReview || state.nextReview <= now) aRevoir++
+    }
+    summary.total     += total
+    summary.nouvelles += nouvelles
+    summary.aRevoir   += aRevoir
+    summary.enMemoire += total - nouvelles - aRevoir
+    if (nouvelles + aRevoir > 0) summary.lecons.push({ lesson, nouvelles, aRevoir, dues: nouvelles + aRevoir })
+  }
+  summary.dues = summary.nouvelles + summary.aRevoir
+  // Les cartes déjà vues et arrivées à échéance passent avant les nouvelles.
+  summary.lecons.sort((a, b) => (b.aRevoir - a.aRevoir) || (b.dues - a.dues))
+  return summary
+}

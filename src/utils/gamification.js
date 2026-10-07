@@ -42,7 +42,7 @@ export function computeLevel(lessons) {
  */
 export function computeBadges(lessons, revisions, streak, level) {
   const types = new Set(revisions.map(r => r.type));
-  const allFormats = ['flashcards', 'quiz', 'resume', 'mindmap'].every(t => types.has(t));
+  const formatsEssayes = ['flashcards', 'quiz', 'resume', 'mindmap'].filter(t => types.has(t)).length;
   const totalFlashcards = lessons.reduce((s, l) => s + (l.flashcardsCount || 0), 0);
   const revsByDay = {};
   revisions.forEach(r => {
@@ -59,24 +59,31 @@ export function computeBadges(lessons, revisions, streak, level) {
   revisions.forEach(r => { if (r.type in countByType) countByType[r.type]++; });
   const isMaitre = Object.values(countByType).every(c => c >= 20);
 
+  // Ce qu'il faut faire (`hint`) et où on en est (`current` / `target`) :
+  // la page Profil sur ordinateur les affiche sous chaque badge.
+  const minParFormat = Math.min(...Object.values(countByType));
+  const badge = (id, pose, label, hint, current, target) => ({
+    id, pose, label, hint, current: Math.min(current, target), target, locked: current < target,
+  });
+
   return [
-    { id: 'lanceur',      pose: 'scanphone', label: 'Lanceur',      locked: lessons.length < 1 },
-    { id: 'curieux',      pose: 'thinking', label: 'Curieux',      locked: types.size < 3 },
-    { id: 'rapide',       pose: 'quiz', label: 'Rapide',       locked: revisions.length < 1 },
-    { id: 'etudiant',     pose: 'graduation', label: 'Étudiant',     locked: lessons.length < 5 },
-    { id: 'regulier',     pose: 'reading', label: 'Régulier',     locked: streak < 3 },
-    { id: 'chercheur',    pose: 'search', label: 'Chercheur',    locked: totalFlashcards < 50 },
-    { id: 'precis',       pose: 'examen', label: 'Précis',       locked: !allFormats },
-    { id: '7jours',       pose: 'fire', label: '7 jours',      locked: streak < 7 },
-    { id: 'fidele',       pose: 'retour', label: 'Fidèle',       locked: streak < 14 },
-    { id: 'acharne',      pose: 'soir', label: 'Acharné',      locked: maxRevsInDay < 10 },
-    { id: 'expert',       pose: 'flashcard', label: 'Expert',       locked: lessons.length < 10 },
-    { id: 'approfondi',   pose: 'muscu', label: 'Approfondi',   locked: maxRevsPerLesson < 5 },
-    { id: 'maitre',       pose: 'writing', label: 'Maître',       locked: !isMaitre },
-    { id: 'champion',     pose: 'trophy', label: 'Champion',     locked: revisions.length < 50 },
-    { id: 'bibliotheque', pose: 'francais', label: 'Bibliothèque', locked: lessons.length < 50 },
-    { id: 'niveau10',     pose: 'levelup', label: 'Niveau 10',    locked: level < 10 },
-    { id: 'diamant',      pose: 'celebration', label: 'Diamant',      locked: lessons.length < 25 },
-    { id: 'legende',      pose: 'pointing', label: 'Légende',      locked: streak < 30 },
+    badge('lanceur',      'scanphone',   'Lanceur',      '1re leçon ouverte',         lessons.length, 1),
+    badge('curieux',      'thinking',    'Curieux',      '3 formats essayés',         types.size, 3),
+    badge('rapide',       'quiz',        'Rapide',       '1re révision',              revisions.length, 1),
+    badge('etudiant',     'graduation',  'Étudiant',     '5 leçons ouvertes',         lessons.length, 5),
+    badge('regulier',     'reading',     'Régulier',     '3 jours de suite',          streak, 3),
+    badge('chercheur',    'search',      'Chercheur',    '50 flashcards',             totalFlashcards, 50),
+    badge('precis',       'examen',      'Précis',       'Les 4 formats essayés',     formatsEssayes, 4),
+    badge('7jours',       'fire',        '7 jours',      '7 jours de suite',          streak, 7),
+    badge('fidele',       'retour',      'Fidèle',       '14 jours de suite',         streak, 14),
+    badge('acharne',      'soir',        'Acharné',      '10 révisions en un jour',   maxRevsInDay, 10),
+    badge('expert',       'flashcard',   'Expert',       '10 leçons ouvertes',        lessons.length, 10),
+    badge('approfondi',   'muscu',       'Approfondi',   '5 révisions d\'une leçon',  maxRevsPerLesson, 5),
+    badge('maitre',       'writing',     'Maître',       '20 révisions par format',   isMaitre ? 20 : minParFormat, 20),
+    badge('champion',     'trophy',      'Champion',     '50 révisions',              revisions.length, 50),
+    badge('bibliotheque', 'francais',    'Bibliothèque', '50 leçons ouvertes',        lessons.length, 50),
+    badge('niveau10',     'levelup',     'Niveau 10',    'Atteindre le niveau 10',    level, 10),
+    badge('diamant',      'celebration', 'Diamant',      '25 leçons ouvertes',        lessons.length, 25),
+    badge('legende',      'pointing',    'Légende',      '30 jours de suite',         streak, 30),
   ];
 }

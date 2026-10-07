@@ -93,10 +93,24 @@ test.describe('Ordinateur (1280 px)', () => {
     await page.screenshot({ path: test.info().outputPath('desktop-cours.png') })
 
     await page.goto('/progres')
+    // Tableau de bord : le programme (une rangée par matière) et la mémoire
+    await expect(page.getByRole('heading', { name: 'Mon programme' })).toBeVisible()
+    await expect(page.getByRole('button', { name: /^Maths : 1 \/ \d+ commencé/ })).toBeVisible()
+    await expect(page.getByRole('heading', { name: 'Ta mémoire' })).toBeVisible()
+    await expect(page.getByRole('button', { name: /Réviser maintenant/ })).toBeVisible()
+    await expect(page.getByRole('heading', { name: 'Ton activité' })).toBeVisible()
     await page.waitForTimeout(1600)  // fin des animations d'entrée des cartes
     await page.screenshot({ path: test.info().outputPath('desktop-progres.png') })
+    // « Réviser maintenant » ouvre les flashcards de la leçon la plus en retard
+    await page.getByRole('button', { name: /Réviser maintenant/ }).click()
+    await expect(page).toHaveURL(/\/flashcards/)
 
     await page.goto('/profil')
+    // Tous les badges d'un coup, avec ce qu'il faut faire pour les obtenir
+    await expect(page.locator('.pf-desk-badges > li')).toHaveCount(18)
+    await expect(page.getByText('Prochain badge')).toBeVisible()
+    await expect(page.locator('.pf-desk-badges').getByText('3 jours de suite')).toBeVisible()
+    await expect(page.getByRole('link', { name: /^Battle/ })).toHaveAttribute('href', '/battle')
     await page.waitForTimeout(500)
     await page.screenshot({ path: test.info().outputPath('desktop-profil.png') })
   })
@@ -156,6 +170,22 @@ test.describe('Ordinateur (1280 px) — avec un compte', () => {
     await expect(page.getByText('Le théorème de Thalès').first()).toBeVisible()
     await page.waitForTimeout(1200)
     await page.screenshot({ path: test.info().outputPath('desktop-compte-cours.png') })
+    // Profil d'un compte : l'aura de la Battle, et « Modifier le profil » en
+    // fenêtre centrée dans la colonne (plus de feuille collée en bas)
+    await page.goto('/profil')
+    await expect(page.getByRole('link', { name: /^Battle : 0 aura/ })).toBeVisible()
+    await page.getByRole('button', { name: 'Modifier le profil' }).click()
+    const fenetre = page.getByRole('complementary', { name: 'Modifier le profil' })
+    await expect(fenetre).toBeVisible()
+    await page.waitForTimeout(300)
+    const box = await fenetre.boundingBox()
+    expect(Math.abs(box.x + box.width / 2 - (248 + (1280 - 248) / 2))).toBeLessThan(4)
+    expect(box.y).toBeGreaterThan(20)
+    expect(box.y + box.height).toBeLessThan(800 - 20)
+    await page.screenshot({ path: test.info().outputPath('desktop-compte-profil-modifier.png') })
+    await page.getByRole('button', { name: 'Fermer' }).click()
+    await expect(fenetre).toBeHidden()
+
     await page.goto('/coach')
     await expect(page.getByText("Qu'est-ce que tu veux comprendre ?")).toBeVisible()
     await expect(page.locator('.coach-side')).toBeVisible()

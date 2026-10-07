@@ -1,15 +1,19 @@
 import { PageIntro } from '../components/PageIntro';
 import { FlashcardsIcon, QuizIcon, ResumeIcon, MindmapIcon, BookIcon, BoltIcon, CalendarIcon, TrophyIcon } from '../components/Icons';
-import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState, useEffect, useMemo } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { loadLessons, syncFromFirestore } from '../services/historyService';
+import { loadLessons, restoreLesson, syncFromFirestore } from '../services/historyService';
 import { loadRevisions, syncRevisionsFromFirestore } from '../services/revisionService';
+import { loadCatalogue, chapterProgress } from '../services/programmeService';
+import { summarizeCards } from '../services/srsService';
+import { useIsDesktop } from '../hooks/useMediaQuery';
+import { hasProgramme, isProgrammeLessonId, PROGRAMME_FALLBACK } from '../utils/programme';
 import { BottomNav } from '../components/BottomNav';
 import { PageHeader } from '../components/PageHeader';
 import { Mascot } from '../components/Mascot';
 import { computeStreak, computeLevel, XP_PAR_NIVEAU } from '../utils/gamification';
-import { subjectInfo } from '../utils/subjects';
+import { subjectInfo, subjectMascot } from '../utils/subjects';
 import './Progres.css';
 
 // ─── Constantes ─────────────────────────────────────────────────────
@@ -165,6 +169,64 @@ function getHeroNarrative({ streak, activeDays, isNewRecord, prenom }) {
   return { mascot: 'sleeping', phrase: 'Allez, on lance ta première séance.' };
 }
 
+// ─── Ordinateur ──────────────────────────────────────────────────────
+// Calendrier d'activité sur un semestre : une colonne par semaine, une
+// ligne par jour, mêmes intensités que la vue « 5 semaines » du téléphone.
+const HEATMAP_SEMAINES = 26;
+const JOURS_COURTS = ['Lun', '', 'Mer', '', 'Ven', '', ''];
+
+function computeHeatmap(revisions, semaines = HEATMAP_SEMAINES) {
+  const countByDay = {};
+  revisions.forEach(r => {
+    const key = new Date(r.revisedAt).toDateString();
+    countByDay[key] = (countByDay[key] || 0) + 1;
+  });
+  const today = new Date();
+  const start = getMondayOf(today);
+  start.setDate(start.getDate() - (semaines - 1) * 7);
+  const weeks = [];
+  let prevMonth = null;
+  for (let w = 0; w < semaines; w++) {
+    const monday = new Date(start);
+    monday.setDate(start.getDate() + w * 7);
+    const days = [];
+    for (let d = 0; d < 7; d++) {
+      const date = new Date(monday);
+      date.setDate(monday.getDate() + d);
+      const isFuture = date > today;
+      days.push({
+        date,
+        count: isFuture ? -1 : (countByDay[date.toDateString()] || 0),
+        isToday: date.toDateString() === today.toDateString(),
+        isFuture,
+      });
+    }
+    const month = monday.getMonth();
+    weeks.push({ days, month: month !== prevMonth ? monday.toLocaleDateString('fr-FR', { month: 'short' }) : null });
+    prevMonth = month;
+  }
+  // Le mois de la première colonne s'efface s'il touche le suivant.
+  if (weeks[1]?.month || weeks[2]?.month) weeks[0].month = null;
+  return weeks;
+}
+
+// Révisions par matière : la matière de la leçon révisée (scan ou chapitre).
+function computeRevisionsBySubject(revisions, lessons) {
+  const subjectOf = new Map(lessons.map(l => [l.id, l.metadata?.subject]));
+  const map = {};
+  revisions.forEach(r => {
+    const name = subjectOf.get(r.lessonId);
+    if (name) map[name] = (map[name] || 0) + 1;
+  });
+  const entries = Object.entries(map).sort((a, b) => b[1] - a[1]).slice(0, 6);
+  const max = entries[0]?.[1] ?? 1;
+  return entries.map(([name, count]) => ({ name, count, pct: Math.round(count / max * 100), info: subjectInfo(name) }));
+}
+
+function plural(n, one, many = one + 's') {
+  return `${n} ${n > 1 ? many : one}`;
+}
+
 // ─── Composant ───────────────────────────────────────────────────────
 export default function Progres() {
   const navigate = useNavigate();
@@ -172,8 +234,9 @@ export default function Progres() {
   const [allRevisions, setAllRevisions] = useState(() => loadRevisions());
   const [isSyncing,    setIsSyncing]    = useState(true);
 
-  const { currentUser } = useAuth();
+  const { currentUser, getUserLevel } = useAuth();
   const prenom = currentUser?.displayName?.split(' ')[0] ?? 'toi';
+  const isDesktop = useIsDesktop();
 
   useEffect(() => {
     Promise.all([
@@ -227,6 +290,39 @@ export default function Progres() {
           </div>
         </div>
         <BottomNav />
+      </div>
+    );
+  }
+
+  // Ordinateur : tableau de bord de progression (le téléphone garde son flux).
+  if (isDesktop) {
+    const userLevel = getUserLevel();
+    const revisionsLastWeek = allRevisions.filter(r => {
+      const t = new Date(r.revisedAt);
+      return t < monday && t >= new Date(monday.getTime() - 7 * 86400000);
+    }).length;
+    return (
+      <div className="app progres-page">
+        <div className="pg-content pg-desk">
+          <PageIntro title="Mes progrès" sub={hero.phrase} mascot={hero.mascot} className="pg-intro" />
+          <ProgresDesk
+            lessons={allLessons}
+            revisions={allRevisions}
+            classe={hasProgramme(userLevel) ? userLevel.classe : PROGRAMME_FALLBACK}
+            streak={streak}
+            bestStreak={bestStreak}
+            level={level}
+            xpInLvl={xpInLvl}
+            xpTotal={xpTotal}
+            fillPct={fillPct}
+            weekBars={weekBars}
+            bestWeek={bestWeek}
+            revisionsThisWeek={revisionsThisWeek}
+            revisionsLastWeek={revisionsLastWeek}
+            isNewRecord={isNewRecord}
+            formatBreakdown={formatBreakdown}
+          />
+        </div>
       </div>
     );
   }
@@ -426,5 +522,364 @@ export default function Progres() {
 
       <BottomNav />
     </div>
+  );
+}
+
+// ─── Ordinateur : tableau de bord ────────────────────────────────────
+// Série · niveau · semaine en tête, puis le programme et la mémoire (ce
+// qu'il reste à faire), le calendrier du semestre, et les répartitions.
+function ProgresDesk({
+  lessons, revisions, classe, streak, bestStreak, level, xpInLvl, xpTotal, fillPct,
+  weekBars, bestWeek, revisionsThisWeek, revisionsLastWeek, isNewRecord, formatBreakdown,
+}) {
+  const bySubject = useMemo(() => computeRevisionsBySubject(revisions, lessons), [revisions, lessons]);
+
+  return (
+    <>
+      <div className="pg-desk-top">
+        <div className="pg-streak-card pg-desk-streak">
+          <div className="pg-desk-streak-text">
+            <span className="pg-streak-label">Série en cours</span>
+            <span className="pg-streak-value">{streak} <small>{streak === 1 ? 'jour' : 'jours'}</small></span>
+            <span className="pg-desk-streak-record">Record : {plural(bestStreak, 'jour')}</span>
+          </div>
+          <Mascot pose="fire" size={96} priority className="pg-streak-mascot" alt="" aria-hidden="true" />
+        </div>
+
+        <div className="rv-card rv-card--padded pg-desk-kpi">
+          <div className="pg-desk-kpi-head">
+            <span className="pg-desk-kpi-label">Niveau</span>
+            <span className="pg-level-badge">Niv. {level}</span>
+          </div>
+          <span className="pg-desk-kpi-value">{xpTotal} <small>XP</small></span>
+          <div
+            className="rv-bar pg-level-bar"
+            role="progressbar"
+            aria-label={`${xpInLvl} XP sur ${XP_PAR_NIVEAU} pour passer au niveau ${level + 1}`}
+            aria-valuemin={0}
+            aria-valuemax={XP_PAR_NIVEAU}
+            aria-valuenow={xpInLvl}
+          >
+            <div className="rv-bar-fill rv-bar-fill--violet" style={{ width: fillPct + '%' }} />
+          </div>
+          <span className="pg-desk-kpi-note">
+            Encore {XP_PAR_NIVEAU - xpInLvl} XP pour le niveau {level + 1}. Chaque nouvelle leçon rapporte 100 XP.
+          </span>
+        </div>
+
+        <div className="rv-card rv-card--padded pg-desk-kpi">
+          <div className="pg-desk-kpi-head">
+            <span className="pg-desk-kpi-label">Cette semaine</span>
+            {isNewRecord && <span className="pg-chart-record"><TrophyIcon /> record</span>}
+          </div>
+          <span className="pg-desk-kpi-value">{revisionsThisWeek} <small>{revisionsThisWeek > 1 ? 'révisions' : 'révision'}</small></span>
+          <div className="pg-bars-wrap pg-desk-bars" aria-hidden="true">
+            {weekBars.map((bar, i) => (
+              <div key={i} className="pg-bar-col">
+                <div className={`pg-bar${bar.type ? ' ' + bar.type : ''}`} style={{ height: Math.round(bar.height * 0.5) + 'px' }} />
+                <span className={`pg-bar-day${bar.type === 'today' ? ' today' : ''}`}>{bar.day}</span>
+              </div>
+            ))}
+          </div>
+          <span className="pg-desk-kpi-note">
+            {revisionsLastWeek ? `La semaine dernière : ${plural(revisionsLastWeek, 'révision')}.` : 'Aucune révision la semaine dernière.'}
+          </span>
+        </div>
+      </div>
+
+      <div className="pg-desk-duo pg-desk-duo--programme">
+        <ProgresProgramme classe={classe} lessons={lessons} />
+        <ProgresMemoire lessons={lessons} />
+      </div>
+
+      <ProgresActivite revisions={revisions} lessons={lessons} bestWeek={bestWeek} />
+
+      {formatBreakdown.some(f => f.count > 0) && (
+        <div className={`pg-desk-duo${bySubject.length ? '' : ' pg-desk-duo--seul'}`}>
+          <section className="pg-desk-section" aria-labelledby="pg-desk-formats">
+            <h2 id="pg-desk-formats" className="pg-desk-title">Par format</h2>
+            <div className="rv-card pg-format-card">
+              {formatBreakdown.map(f => (
+                <div key={f.label} className="pg-format-row">
+                  <div className="pg-format-left">
+                    <span className="pg-format-emoji">{f.icon}</span>
+                    <span className="pg-format-label">{f.label}</span>
+                  </div>
+                  <div className="pg-format-bar-wrap">
+                    <div className="pg-format-bar" style={{ width: f.pct + '%', background: f.color }} />
+                  </div>
+                  <span className="pg-format-count">{f.count}</span>
+                </div>
+              ))}
+            </div>
+          </section>
+          {bySubject.length > 0 && (
+            <section className="pg-desk-section" aria-labelledby="pg-desk-matieres">
+              <h2 id="pg-desk-matieres" className="pg-desk-title">Révisions par matière</h2>
+              <div className="rv-card pg-subject-card">
+                {bySubject.map(({ name, count, pct, info }) => (
+                  <div key={name} className="pg-subject-row">
+                    <div className="pg-subject-left">
+                      <span className="pg-subject-emoji"><Mascot pose={info.mascot ?? 'reading'} size={26} alt="" aria-hidden="true" /></span>
+                      <span className="pg-subject-name">{name}</span>
+                    </div>
+                    <div className="pg-subject-bar-wrap">
+                      <div className="pg-subject-bar" style={{ width: pct + '%', background: info.dot }} />
+                    </div>
+                    <span className="pg-subject-count">{count}</span>
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
+        </div>
+      )}
+    </>
+  );
+}
+
+/**
+ * Avancement dans Mon programme, matière par matière : une encoche par
+ * chapitre, même code couleur que les tuiles et le chemin.
+ */
+function ProgresProgramme({ classe, lessons }) {
+  const navigate = useNavigate();
+  const [catalogue, setCatalogue] = useState(null);
+  const [error, setError] = useState(false);
+
+  useEffect(() => {
+    let alive = true;
+    setCatalogue(null);
+    setError(false);
+    loadCatalogue(classe)
+      .then(c => { if (alive) setCatalogue(c); })
+      .catch(() => { if (alive) setError(true); });
+    return () => { alive = false; };
+  }, [classe]);
+
+  const matieres = useMemo(() => (catalogue?.matieres ?? []).map(m => {
+    const items = m.chapitres.map(ch => ({ chapter: ch, ...chapterProgress(ch, lessons) }));
+    return {
+      ...m,
+      items,
+      commences: items.filter(i => i.state !== 'nouveau').length,
+      maitrises: items.filter(i => i.state === 'maitrise').length,
+      aRevoir: items.reduce((n, i) => n + (i.state === 'a-revoir' ? i.dueCards : 0), 0),
+    };
+  }), [catalogue, lessons]);
+  const total = matieres.reduce((n, m) => n + m.items.length, 0);
+  const commences = matieres.reduce((n, m) => n + m.commences, 0);
+  const maitrises = matieres.reduce((n, m) => n + m.maitrises, 0);
+
+  return (
+    <section className="pg-desk-section" aria-labelledby="pg-desk-programme">
+      <div className="pg-desk-head">
+        <h2 id="pg-desk-programme" className="pg-desk-title">Mon programme</h2>
+        <Link to="/programme" className="pg-desk-more">{classe}{total ? ` · ${total} chapitres` : ''} ›</Link>
+      </div>
+      <div className="rv-card rv-card--padded pg-prog-card">
+        {error ? (
+          <p className="pg-desk-empty">Le programme ne se charge pas pour le moment. Vérifie ta connexion.</p>
+        ) : !catalogue ? (
+          <div className="pg-prog-list" role="status" aria-label="Chargement du programme…">
+            {[0, 1, 2, 3].map(i => <div key={i} className="rv-skeleton pg-prog-skeleton" aria-hidden="true" />)}
+          </div>
+        ) : (
+          <>
+            <div className="pg-prog-summary">
+              <span className="pg-desk-big">{commences}</span>
+              <span className="pg-desk-big-text">
+                {commences > 1 ? 'chapitres commencés' : 'chapitre commencé'} sur {total}
+                {maitrises > 0 && `, dont ${plural(maitrises, 'maîtrisé')}`}
+              </span>
+              <ul className="pg-legend" aria-label="Légende">
+                <li><i className="pg-seg pg-seg--commence" />Commencé</li>
+                <li><i className="pg-seg pg-seg--a-revoir" />À revoir</li>
+                <li><i className="pg-seg pg-seg--maitrise" />Maîtrisé</li>
+              </ul>
+            </div>
+            <div className="pg-prog-list">
+              {matieres.map(m => {
+                const n = m.items.length;
+                const detail = m.maitrises ? `${m.maitrises} / ${n} maîtrisé${m.maitrises > 1 ? 's' : ''}`
+                  : m.commences ? `${m.commences} / ${n} commencé${m.commences > 1 ? 's' : ''}`
+                  : `${n} chapitre${n > 1 ? 's' : ''}`;
+                return (
+                  <button
+                    key={m.slug}
+                    type="button"
+                    className="pg-prog-row"
+                    onClick={() => navigate(`/programme/${m.slug}`)}
+                    aria-label={`${m.matiere} : ${detail}${m.aRevoir ? `, ${plural(m.aRevoir, 'carte')} à revoir` : ''}`}
+                  >
+                    {/* <picture> en display: contents : on l'enveloppe pour qu'il reste une seule case de grille */}
+                    <span className="pg-prog-mascot"><Mascot pose={subjectMascot(m.matiere)} size={38} alt="" aria-hidden="true" /></span>
+                    <span className="pg-prog-main">
+                      <span className="pg-prog-line">
+                        <span className="pg-prog-name">{m.matiere}</span>
+                        <span className="pg-prog-detail">{detail}</span>
+                      </span>
+                      <span className="pg-prog-strip" aria-hidden="true">
+                        {m.items.map(it => (
+                          <span key={it.chapter.id} className={`pg-seg pg-seg--${it.chapter.pret ? it.state : 'bientot'}`} />
+                        ))}
+                      </span>
+                    </span>
+                    <span className="pg-prog-status">
+                      {m.aRevoir > 0 && <span className="rv-pill rv-pill--orange">{plural(m.aRevoir, 'carte')} à revoir</span>}
+                    </span>
+                    <span className="pg-prog-arrow" aria-hidden="true">›</span>
+                  </button>
+                );
+              })}
+            </div>
+          </>
+        )}
+      </div>
+    </section>
+  );
+}
+
+/**
+ * Ta mémoire : où en sont les flashcards de toutes les leçons ouvertes
+ * (répétition espacée), et par où reprendre.
+ */
+function ProgresMemoire({ lessons }) {
+  const navigate = useNavigate();
+  const s = useMemo(() => summarizeCards(lessons), [lessons]);
+  const prio = s.lecons.slice(0, 4);
+  const pct = n => (s.total ? (n / s.total) * 100 : 0);
+
+  function reviser(lesson) {
+    restoreLesson(lesson.id);
+    navigate('/flashcards');
+  }
+
+  return (
+    <section className="pg-desk-section" aria-labelledby="pg-desk-memoire">
+      <div className="pg-desk-head">
+        <h2 id="pg-desk-memoire" className="pg-desk-title">Ta mémoire</h2>
+      </div>
+      <div className="rv-card rv-card--padded pg-mem-card">
+        {s.total === 0 ? (
+          <div className="pg-mem-empty">
+            <Mascot pose="flashcard" size={88} alt="" aria-hidden="true" />
+            <p className="pg-mem-empty-title">Pas encore de flashcards</p>
+            <p className="pg-desk-empty">Ouvre un chapitre de ton programme : ses cartes arrivent ici, avec le moment de les revoir.</p>
+            <Link to="/programme" className="rv-btn-cta rv-btn-cta--ghost rv-btn-cta--center">Mon programme</Link>
+          </div>
+        ) : (
+          <>
+            <div className="pg-mem-top">
+              <span className="pg-desk-big">{s.dues}</span>
+              <span className="pg-desk-big-text">{s.dues > 1 ? 'cartes à revoir' : 'carte à revoir'} aujourd'hui, sur {s.total}</span>
+            </div>
+            <div className="pg-mem-bar" aria-hidden="true">
+              <span className="pg-mem-bar-seg pg-mem-bar-seg--memoire" style={{ width: pct(s.enMemoire) + '%' }} />
+              <span className="pg-mem-bar-seg pg-mem-bar-seg--revoir" style={{ width: pct(s.aRevoir) + '%' }} />
+              <span className="pg-mem-bar-seg pg-mem-bar-seg--nouvelles" style={{ width: pct(s.nouvelles) + '%' }} />
+            </div>
+            <ul className="pg-mem-legend">
+              <li><i className="pg-mem-dot pg-mem-dot--memoire" />En mémoire<b>{s.enMemoire}</b></li>
+              <li><i className="pg-mem-dot pg-mem-dot--revoir" />À revoir<b>{s.aRevoir}</b></li>
+              <li><i className="pg-mem-dot pg-mem-dot--nouvelles" />Pas encore vues<b>{s.nouvelles}</b></li>
+            </ul>
+
+            {prio.length === 0 ? (
+              <div className="pg-mem-done">
+                <Mascot pose="celebration" size={56} alt="" aria-hidden="true" />
+                <span>Tout est à jour. Les prochaines cartes reviendront au bon moment.</span>
+              </div>
+            ) : (
+              <>
+                <span className="pg-mem-sub">À revoir en priorité</span>
+                <ul className="pg-mem-list">
+                  {prio.map(({ lesson, dues }) => (
+                    <li key={lesson.id}>
+                      <button
+                        type="button"
+                        className="pg-mem-lesson"
+                        onClick={() => reviser(lesson)}
+                        aria-label={`Revoir ${plural(dues, 'carte')} de ${lesson.metadata?.title}`}
+                      >
+                        <Mascot pose={subjectMascot(lesson.metadata?.subject)} size={32} alt="" aria-hidden="true" />
+                        <span className="pg-mem-lesson-text">
+                          <span className="pg-mem-lesson-title">{lesson.metadata?.title}</span>
+                          <span className="pg-mem-lesson-meta">{lesson.metadata?.subject}</span>
+                        </span>
+                        <span className="rv-pill rv-pill--orange">{dues}</span>
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+                <button type="button" className="rv-btn-cta rv-btn-cta--full pg-mem-cta" onClick={() => reviser(prio[0].lesson)}>
+                  <span>Réviser maintenant</span>
+                  <span className="rv-btn-cta-arrow" aria-hidden="true">→</span>
+                </button>
+              </>
+            )}
+          </>
+        )}
+      </div>
+    </section>
+  );
+}
+
+/** Le semestre en un coup d'œil, et les chiffres qui vont avec. */
+function ProgresActivite({ revisions, lessons, bestWeek }) {
+  const weeks = useMemo(() => computeHeatmap(revisions), [revisions]);
+  const joursActifs = weeks.reduce((n, w) => n + w.days.filter(d => d.count > 0).length, 0);
+  const chapitres = lessons.filter(l => isProgrammeLessonId(l.id)).length;
+  const scans = lessons.length - chapitres;
+  const fmt = d => d.toLocaleDateString('fr-FR', { weekday: 'short', day: 'numeric', month: 'short' });
+
+  return (
+    <section className="pg-desk-section" aria-labelledby="pg-desk-activite">
+      <div className="pg-desk-head">
+        <h2 id="pg-desk-activite" className="pg-desk-title">Ton activité</h2>
+        <span className="pg-desk-head-note">Les 6 derniers mois</span>
+      </div>
+      <div className="rv-card rv-card--padded pg-act-card">
+        <div className="pg-heat" role="img" aria-label={`${plural(joursActifs, 'jour actif', 'jours actifs')} sur les 6 derniers mois`}>
+          <div className="pg-heat-days" aria-hidden="true">
+            <span />
+            {JOURS_COURTS.map((j, i) => <span key={i}>{j}</span>)}
+          </div>
+          {/* Sur un écran étroit, les semaines les plus anciennes sortent à gauche */}
+          <div className="pg-heat-weeks">
+            {weeks.map((w, i) => (
+              <div key={i} className="pg-heat-week" aria-hidden="true">
+                <span className="pg-heat-month">{w.month}</span>
+                {w.days.map((d, j) => (
+                  <span
+                    key={j}
+                    className={[
+                      'pg-heat-cell',
+                      `pg-week-dot--${d.isFuture ? 'future' : getActivityIntensity(d.count)}`,
+                      d.isToday ? 'pg-heat-cell--today' : '',
+                    ].filter(Boolean).join(' ')}
+                    title={d.isFuture ? undefined : `${fmt(d.date)} : ${d.count ? plural(d.count, 'révision') : 'aucune révision'}`}
+                  />
+                ))}
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="pg-act-side">
+          <div className="pg-act-stat"><span className="rv-icon-square rv-icon-square--orange" aria-hidden="true"><CalendarIcon /></span><b>{joursActifs}</b><span>{joursActifs > 1 ? 'jours actifs' : 'jour actif'}</span></div>
+          <div className="pg-act-stat"><span className="rv-icon-square rv-icon-square--green" aria-hidden="true"><BoltIcon /></span><b>{revisions.length}</b><span>{revisions.length > 1 ? 'révisions' : 'révision'} en tout</span></div>
+          <div className="pg-act-stat"><span className="rv-icon-square rv-icon-square--violet" aria-hidden="true"><BookIcon /></span><b>{lessons.length}</b><span>{lessons.length > 1 ? 'leçons ouvertes' : 'leçon ouverte'}{scans > 0 ? `, dont ${scans} scannée${scans > 1 ? 's' : ''}` : ''}</span></div>
+          <div className="pg-act-stat"><span className="rv-icon-square rv-icon-square--orange" aria-hidden="true"><TrophyIcon /></span><b>{bestWeek}</b><span>meilleure semaine</span></div>
+          <div className="pg-legend pg-act-legend" aria-hidden="true">
+            Moins
+            <i className="pg-heat-cell pg-week-dot--0" />
+            <i className="pg-heat-cell pg-week-dot--1" />
+            <i className="pg-heat-cell pg-week-dot--2" />
+            <i className="pg-heat-cell pg-week-dot--3" />
+            Plus
+          </div>
+        </div>
+      </div>
+    </section>
   );
 }

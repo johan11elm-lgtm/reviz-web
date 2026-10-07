@@ -1,6 +1,6 @@
 import { PageIntro } from '../components/PageIntro';
 import { GuestBanner } from '../components/GuestBanner';
-import { UserIcon, FlameIcon, BookIcon, BoltIcon, ChatIcon } from '../components/Icons';
+import { UserIcon, FlameIcon, BookIcon, BoltIcon, ChatIcon, CheckIcon } from '../components/Icons';
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
@@ -14,6 +14,7 @@ import { BattleMascot } from '../components/BattleMascot';
 import { getUserProfile } from '../services/userProfileService';
 import { computeStreak, computeLevel, computeBadges, XP_PAR_NIVEAU } from '../utils/gamification';
 import { formatLevelLabel } from '../utils/levels';
+import { useIsDesktop } from '../hooks/useMediaQuery';
 import './Profile.css';
 
 // Mascotte adaptative au niveau / streak / activité — pattern Progres `getHeroNarrative`.
@@ -43,9 +44,18 @@ const SHEET_TITLES = {
   profil: 'Modifier le profil',
 };
 
+// Badge le plus proche d'être débloqué (part de l'objectif déjà faite,
+// puis ce qu'il reste à faire) ; null quand tout est débloqué.
+function nextBadge(badges) {
+  return badges
+    .filter(b => b.locked)
+    .sort((a, b) => (b.current / b.target - a.current / a.target) || ((a.target - a.current) - (b.target - b.current)))[0] ?? null;
+}
+
 export default function Profile() {
   const [showAllBadges, setShowAllBadges] = useState(false);
   const navigate = useNavigate();
+  const isDesktop = useIsDesktop();
 
   const { currentUser, getUserLevel, setUserLevel, updateDisplayName, isGuest } = useAuth();
   const prenom   = currentUser?.displayName ?? '';
@@ -110,6 +120,218 @@ export default function Profile() {
     if (id === 'reglages') return navigate('/reglages');
     if (id === 'avis') return navigate('/avis?src=profil');
     openSheet(id);
+  }
+
+  const sheet = (
+    <>
+      {/* Backdrop sheet — fade in/out */}
+      {activeSheet && (
+        <div
+          className="pf-sheet-backdrop"
+          onClick={closeSheet}
+          aria-hidden="true"
+        />
+      )}
+
+      {/* Bottom sheet unifiée — toujours dans le DOM, transform-slide */}
+      <aside
+        className={`rv-sheet--bottom pf-sheet${activeSheet ? '' : ' rv-sheet--bottom-hidden'}`}
+        aria-hidden={!activeSheet}
+        aria-label={activeSheet ? SHEET_TITLES[activeSheet] : undefined}
+      >
+        <div className="rv-sheet-handle" />
+        <header className="pf-sheet-header">
+          <h2 className="pf-sheet-title">{SHEET_TITLES[activeSheet] || ''}</h2>
+          <button
+            type="button"
+            className="pf-sheet-close"
+            onClick={closeSheet}
+            aria-label="Fermer"
+          >
+            ×
+          </button>
+        </header>
+        <div className="pf-sheet-body" key={activeSheet || 'closed'}>
+          {activeSheet === 'profil' && (
+            <>
+              <label className="pf-sheet-label" htmlFor="pf-prenom">Prénom</label>
+              <input
+                id="pf-prenom"
+                className="pf-sheet-input"
+                value={editPrenom}
+                onChange={e => setEditPrenom(e.target.value)}
+                placeholder="Ton prénom"
+                maxLength={30}
+              />
+              <label className="pf-sheet-label" style={{ marginTop: 14 }}>Niveau</label>
+              <LevelSelector value={editLevel} onChange={setEditLevel} />
+              {saveError && <p className="pf-sheet-error">{saveError}</p>}
+              <button
+                type="button"
+                className="rv-btn-cta rv-btn-cta--full pf-sheet-save"
+                onClick={handleSaveProfil}
+                disabled={saving || !editPrenom.trim()}
+              >
+                {saving ? 'Sauvegarde…' : 'Sauvegarder'}
+              </button>
+            </>
+          )}
+
+        </div>
+      </aside>
+    </>
+  );
+
+  // Ordinateur : identité en tête, trois cartes (chiffres, Battle, compte),
+  // puis tous les badges avec ce qu'il faut faire pour les obtenir.
+  if (isDesktop) {
+    const next = nextBadge(badges);
+    return (
+      <div className="app profile-page">
+        <div className="pf-content pf-desk">
+          <PageIntro
+            title={prenom || 'Toi'}
+            sub={`Niveau ${level}${levelLabel ? ` · ${levelLabel}` : ''}`}
+            mascot={heroPose}
+            className="pf-intro"
+          >
+            <div className="pf-intro-xp">
+              <div
+                className="rv-bar rv-bar--tall pf-intro-bar"
+                role="progressbar"
+                aria-label={`${xpInLvl} XP sur ${XP_PAR_NIVEAU} pour passer au niveau ${level + 1}`}
+                aria-valuemin={0}
+                aria-valuemax={XP_PAR_NIVEAU}
+                aria-valuenow={xpInLvl}
+              >
+                <div className="rv-bar-fill rv-bar-fill--orange" style={{ width: `${fillPct}%` }} />
+              </div>
+              <p className="pf-xp-sub">{xpInLvl} / {XP_PAR_NIVEAU} XP</p>
+            </div>
+          </PageIntro>
+
+          <div className="pf-desk-row">
+            <section className="rv-card rv-card--padded pf-desk-card" aria-labelledby="pf-desk-chiffres">
+              <div className="pf-desk-card-head">
+                <h2 id="pf-desk-chiffres" className="pf-desk-label">Tes chiffres</h2>
+                <Link to="/progres" className="pf-desk-more">Mes progrès ›</Link>
+              </div>
+              <div className="pf-desk-stats">
+                <div className="pf-stat">
+                  <span className="pf-stat-icon pf-stat-icon--orange" aria-hidden="true"><FlameIcon /></span>
+                  <span className="pf-stat-value">{streak}</span>
+                  <span className="pf-stat-label">{streak > 1 ? 'jours de suite' : 'jour de suite'}</span>
+                </div>
+                <div className="pf-stat">
+                  <span className="pf-stat-icon pf-stat-icon--violet" aria-hidden="true"><BookIcon /></span>
+                  <span className="pf-stat-value">{allLessons.length}</span>
+                  <span className="pf-stat-label">{allLessons.length > 1 ? 'leçons' : 'leçon'}</span>
+                </div>
+                <div className="pf-stat">
+                  <span className="pf-stat-icon pf-stat-icon--green" aria-hidden="true"><BoltIcon /></span>
+                  <span className="pf-stat-value">{allRevisions.length}</span>
+                  <span className="pf-stat-label">{allRevisions.length > 1 ? 'révisions' : 'révision'}</span>
+                </div>
+              </div>
+            </section>
+
+            <Link
+              to="/battle"
+              className="rv-card rv-card--padded rv-card--link pf-desk-card pf-desk-battle"
+              aria-label={battle ? `Battle : ${battle.aura} aura` : 'Battle : défier quelqu\'un en direct'}
+            >
+              <span className="pf-desk-card-head">
+                <span className="pf-desk-label">Battle</span>
+                <span className="pf-desk-more" aria-hidden="true">›</span>
+              </span>
+              <span className="pf-desk-battle-body">
+                <span className="pf-desk-battle-mascot"><BattleMascot pose={battle ? 'aura' : 'garde'} size={68} glow={!!battle} glowIntensity={0.6} alt="" aria-hidden="true" /></span>
+                <span className="pf-desk-battle-text">
+                  {battle ? (
+                    <>
+                      <span className="pf-desk-battle-value">{battle.aura} <small>aura</small></span>
+                      <span className="pf-desk-battle-sub">
+                        {battle.jouees
+                          ? `${battle.jouees} battle${battle.jouees > 1 ? 's' : ''} · ${battle.gagnees} gagnée${battle.gagnees > 1 ? 's' : ''}`
+                          : 'Pas encore de battle'}
+                      </span>
+                    </>
+                  ) : (
+                    <>
+                      <span className="pf-desk-battle-title">Défie quelqu'un</span>
+                      <span className="pf-desk-battle-sub">En direct, sur un chapitre de ton programme</span>
+                    </>
+                  )}
+                </span>
+              </span>
+            </Link>
+
+            <section className="rv-card rv-card--padded pf-desk-card" aria-labelledby="pf-desk-compte">
+              <div className="pf-desk-card-head">
+                <h2 id="pf-desk-compte" className="pf-desk-label">Compte</h2>
+              </div>
+              <div className="pf-desk-compte">
+                {ACCOUNT_ITEMS.filter(it => !isGuest || it.id !== 'profil').map(it => (
+                  <button key={it.id} type="button" className="pf-desk-compte-row" onClick={() => onAccountClick(it.id)}>
+                    <span className={`rv-icon-square rv-icon-square--${it.tone}`} aria-hidden="true">{it.icon}</span>
+                    <span className="pf-account-label">{it.label}</span>
+                    <span className="pf-account-arrow" aria-hidden="true">›</span>
+                  </button>
+                ))}
+              </div>
+            </section>
+          </div>
+
+          <section className="pf-desk-section" aria-labelledby="pf-desk-badges">
+            <div className="pf-desk-head">
+              <h2 id="pf-desk-badges" className="pf-desk-title">Badges</h2>
+              <span className="pf-desk-head-note">{unlocked} sur {badges.length} obtenus</span>
+            </div>
+            {next && (
+              <div className="rv-card rv-card--padded pf-next">
+                <span className="pf-next-mascot"><Mascot pose={next.pose} size={64} glow alt="" aria-hidden="true" /></span>
+                <span className="pf-next-text">
+                  <span className="pf-desk-label">Prochain badge</span>
+                  <span className="pf-next-name">{next.label}</span>
+                  <span className="pf-next-hint">{next.hint}</span>
+                </span>
+                <div className="pf-next-progress">
+                  <div
+                    className="rv-bar rv-bar--tall"
+                    role="progressbar"
+                    aria-label={`${next.label} : ${next.current} sur ${next.target}`}
+                    aria-valuemin={0}
+                    aria-valuemax={next.target}
+                    aria-valuenow={next.current}
+                  >
+                    <div className="rv-bar-fill rv-bar-fill--orange" style={{ width: `${Math.round(next.current / next.target * 100)}%` }} />
+                  </div>
+                  <span className="pf-next-count">{next.current} / {next.target}</span>
+                </div>
+              </div>
+            )}
+            <ul className="pf-desk-badges">
+              {badges.map(b => (
+                <li
+                  key={b.id}
+                  className={`pf-badge pf-desk-badge${b.locked ? ' pf-badge--locked' : ''}`}
+                  title={b.locked ? `${b.label} : ${b.hint} (${b.current} / ${b.target})` : `${b.label} : obtenu`}
+                >
+                  <span className="pf-desk-badge-mascot"><Mascot pose={b.pose} size={52} alt="" aria-hidden="true" /></span>
+                  <span className="pf-desk-badge-label">{b.label}</span>
+                  <span className="pf-desk-badge-hint">{b.hint}</span>
+                  {b.locked
+                    ? <span className="pf-desk-badge-state">{b.current} / {b.target}</span>
+                    : <span className="pf-desk-badge-state pf-desk-badge-state--ok"><CheckIcon /> Obtenu</span>}
+                </li>
+              ))}
+            </ul>
+          </section>
+        </div>
+
+        {sheet}
+      </div>
+    );
   }
 
   return (
@@ -238,61 +460,7 @@ export default function Profile() {
         </section>
       </div>
 
-      {/* Backdrop sheet — fade in/out */}
-      {activeSheet && (
-        <div
-          className="pf-sheet-backdrop"
-          onClick={closeSheet}
-          aria-hidden="true"
-        />
-      )}
-
-      {/* Bottom sheet unifiée — toujours dans le DOM, transform-slide */}
-      <aside
-        className={`rv-sheet--bottom pf-sheet${activeSheet ? '' : ' rv-sheet--bottom-hidden'}`}
-        aria-hidden={!activeSheet}
-        aria-label={activeSheet ? SHEET_TITLES[activeSheet] : undefined}
-      >
-        <div className="rv-sheet-handle" />
-        <header className="pf-sheet-header">
-          <h2 className="pf-sheet-title">{SHEET_TITLES[activeSheet] || ''}</h2>
-          <button
-            type="button"
-            className="pf-sheet-close"
-            onClick={closeSheet}
-            aria-label="Fermer"
-          >
-            ×
-          </button>
-        </header>
-        <div className="pf-sheet-body" key={activeSheet || 'closed'}>
-          {activeSheet === 'profil' && (
-            <>
-              <label className="pf-sheet-label" htmlFor="pf-prenom">Prénom</label>
-              <input
-                id="pf-prenom"
-                className="pf-sheet-input"
-                value={editPrenom}
-                onChange={e => setEditPrenom(e.target.value)}
-                placeholder="Ton prénom"
-                maxLength={30}
-              />
-              <label className="pf-sheet-label" style={{ marginTop: 14 }}>Niveau</label>
-              <LevelSelector value={editLevel} onChange={setEditLevel} />
-              {saveError && <p className="pf-sheet-error">{saveError}</p>}
-              <button
-                type="button"
-                className="rv-btn-cta rv-btn-cta--full pf-sheet-save"
-                onClick={handleSaveProfil}
-                disabled={saving || !editPrenom.trim()}
-              >
-                {saving ? 'Sauvegarde…' : 'Sauvegarder'}
-              </button>
-            </>
-          )}
-
-        </div>
-      </aside>
+      {sheet}
 
       <BottomNav />
     </div>
