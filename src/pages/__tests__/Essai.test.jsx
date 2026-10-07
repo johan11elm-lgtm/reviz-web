@@ -36,11 +36,14 @@ describe('<Essai /> — mode essai', () => {
     expect(nav).toHaveBeenCalledWith('/programme', { replace: true })
   })
 
-  it('propose les classes du lycée quand on change de cycle', () => {
+  it('annonce le lycée « à venir » sans l’ouvrir : Mon programme s’arrête en 3e', () => {
     renderPage()
-    fireEvent.click(screen.getByRole('tab', { name: 'Lycée' }))
-    expect(screen.getByRole('button', { name: 'Terminale' })).toBeInTheDocument()
-    expect(screen.queryByRole('button', { name: '3ème' })).not.toBeInTheDocument()
+    const lycee = screen.getByRole('tab', { name: /Lycée/ })
+    expect(lycee).toBeDisabled()
+    expect(lycee).toHaveTextContent('à venir')
+    fireEvent.click(lycee)
+    expect(screen.getByRole('button', { name: '3ème' })).toBeInTheDocument()
+    expect(screen.queryByRole('button', { name: 'Terminale' })).not.toBeInTheDocument()
   })
 
   it('un enseignant venu de /profs ouvre directement le programme de la classe choisie', () => {

@@ -78,18 +78,24 @@ export default function Essai() {
 
         <div className="essai-label" id="essai-classe-label">Ta classe</div>
         <div className="essai-cycles" role="tablist" aria-label="Collège ou lycée">
-          {CYCLES.map(c => (
-            <button
-              key={c.id}
-              type="button"
-              role="tab"
-              aria-selected={cycle === c.id}
-              className={`essai-cycle${cycle === c.id ? ' essai-cycle--active' : ''}`}
-              onClick={() => { setCycle(c.id); setClasse(null); setError(''); }}
-            >
-              {c.label}
-            </button>
-          ))}
+          {/* Mon programme ne couvre que la 6e à la 3e : le lycée est annoncé, pas encore ouvert. */}
+          {CYCLES.map(c => {
+            const bientot = c.id === 'lycee';
+            return (
+              <button
+                key={c.id}
+                type="button"
+                role="tab"
+                aria-selected={cycle === c.id}
+                disabled={bientot}
+                className={`essai-cycle${cycle === c.id ? ' essai-cycle--active' : ''}${bientot ? ' essai-cycle--bientot' : ''}`}
+                onClick={() => { setCycle(c.id); setClasse(null); setError(''); }}
+              >
+                {c.label}
+                {bientot && <span className="essai-cycle-bientot">à venir</span>}
+              </button>
+            );
+          })}
         </div>
         <div className="essai-classes" role="group" aria-labelledby="essai-classe-label">
           {CLASSES_BY_CYCLE[cycle].map(k => (

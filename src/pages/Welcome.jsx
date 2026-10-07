@@ -45,13 +45,13 @@ export default function Welcome() {
               priority
               className="wlc-hero-mascot"
             />
-            <span className="rv-pill rv-pill--orange wlc-badge">✦ Collège · Lycée</span>
+            <span className="rv-pill rv-pill--orange wlc-badge">✦ Collège · Lycée à venir</span>
             <h1 className="wlc-headline">
               Révise mieux.<br />Retiens plus.
             </h1>
             <p className="wlc-sub">
-              L'IA transforme tes leçons en flashcards, quiz et résumés —
-              calibrés pour ton programme de collège ou de lycée.
+              L'IA transforme tes leçons en flashcards, quiz et résumés,
+              et ton programme de la 6e à la 3e t'attend déjà.
             </p>
             <div className="wlc-subjects" aria-hidden="true">
               {SUBJECTS.map(p => <Mascot key={p} pose={p} size={36} alt="" aria-hidden="true" />)}

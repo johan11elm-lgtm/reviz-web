@@ -1,4 +1,4 @@
-import { CameraIcon, BoltIcon, RocketIcon, SparkIcon } from '../components/Icons';
+import { CameraIcon, ChatIcon, SunIcon, StarIcon } from '../components/Icons';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
@@ -19,11 +19,12 @@ const LogoStar = () => (
   </svg>
 );
 
+// Seulement ce que Réviz+ débloque vraiment (api/_quota.js, api/_chatQuota.js, utils/themes.js).
 const ADVANTAGES = [
-  { icon: <CameraIcon />, label: 'Scans illimités',        color: '#FF8A3D', desc: 'Scanne autant de leçons que tu veux' },
-  { icon: <BoltIcon />,   label: 'Révisions sans limites', color: '#2D2B57', desc: 'Quiz et flashcards à volonté' },
-  { icon: <RocketIcon />, label: 'Accès prioritaire',      color: '#A855F7', desc: 'Toujours premier dans la file' },
-  { icon: <SparkIcon />,  label: 'Fonctions exclusives',   color: '#34C77B', desc: 'Carte mentale, export PDF...' },
+  { icon: <CameraIcon />, label: 'Scans illimités',     color: '#FF8A3D', desc: 'Scanne autant de leçons que tu veux' },
+  { icon: <ChatIcon />,   label: 'Coach sans compter',  color: '#2D2B57', desc: 'Jusqu’à 200 questions par jour' },
+  { icon: <SunIcon />,    label: '4 thèmes exclusifs',  color: '#0E7A55', desc: 'Nuit d’encre, Carnet kraft, Violet air, Menthe' },
+  { icon: <StarIcon />,   label: 'Un projet soutenu',   color: '#34C77B', desc: 'Réviz reste sans pub grâce à toi' },
 ];
 
 export default function UpgradeSuccess() {
