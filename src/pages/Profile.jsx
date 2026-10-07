@@ -52,8 +52,82 @@ function nextBadge(badges) {
     .sort((a, b) => (b.current / b.target - a.current / a.target) || ((a.target - a.current) - (b.target - b.current)))[0] ?? null;
 }
 
+// Tuile de badge : mascotte sur un disque (chaud quand obtenu, neutre sinon),
+// coche verte une fois obtenu, mini-barre de progression tant qu'il manque.
+function BadgeTile({ badge: b, onOpen, desktop }) {
+  const pct = Math.min(100, Math.round(b.current / b.target * 100));
+  const title = b.locked ? `${b.label} : ${b.hint} (${b.current} / ${b.target})` : `${b.label} : obtenu`;
+  const art = (
+    <span className="pf-badge-art" aria-hidden="true">
+      <Mascot pose={b.pose} size={desktop ? 48 : 40} alt="" aria-hidden="true" />
+      {!b.locked && <span className="pf-badge-check"><CheckIcon /></span>}
+    </span>
+  );
+  if (desktop) {
+    return (
+      <li className={`pf-badge pf-desk-badge${b.locked ? ' pf-badge--locked' : ''}`} title={title}>
+        {art}
+        <span className="pf-badge-label pf-desk-badge-label">{b.label}</span>
+        <span className="pf-desk-badge-hint">{b.hint}</span>
+        {b.locked
+          ? <span className="pf-desk-badge-state">{b.current} / {b.target}</span>
+          : <span className="pf-desk-badge-state pf-desk-badge-state--ok"><CheckIcon /> Obtenu</span>}
+        {b.locked && (
+          <span className="rv-bar rv-bar--thin rv-bar--neutral-bg pf-badge-bar" aria-hidden="true">
+            <span className="rv-bar-fill rv-bar-fill--orange" style={{ width: `${pct}%` }} />
+          </span>
+        )}
+      </li>
+    );
+  }
+  return (
+    <button
+      type="button"
+      className={`pf-badge${b.locked ? ' pf-badge--locked' : ''}`}
+      onClick={() => onOpen(b)}
+      aria-label={title}
+    >
+      {art}
+      <span className="pf-badge-label">{b.label}</span>
+      {b.locked && (
+        <span className="rv-bar rv-bar--thin rv-bar--neutral-bg pf-badge-bar" aria-hidden="true">
+          <span className="rv-bar-fill rv-bar-fill--orange" style={{ width: `${pct}%` }} />
+        </span>
+      )}
+    </button>
+  );
+}
+
+function NextBadgeCard({ next }) {
+  const pct = Math.round(next.current / next.target * 100);
+  return (
+    <div className="rv-card rv-card--padded pf-next">
+      <span className="pf-next-mascot"><Mascot pose={next.pose} size={56} glow glowIntensity={0.35} alt="" aria-hidden="true" /></span>
+      <span className="pf-next-text">
+        <span className="pf-desk-label pf-next-kicker">Prochain badge</span>
+        <span className="pf-next-name">{next.label}</span>
+        <span className="pf-next-hint">{next.hint}</span>
+      </span>
+      <div className="pf-next-progress">
+        <div
+          className="rv-bar rv-bar--tall"
+          role="progressbar"
+          aria-label={`${next.label} : ${next.current} sur ${next.target}`}
+          aria-valuemin={0}
+          aria-valuemax={next.target}
+          aria-valuenow={next.current}
+        >
+          <div className="rv-bar-fill rv-bar-fill--orange" style={{ width: `${pct}%` }} />
+        </div>
+        <span className="pf-next-count">{next.current} / {next.target}</span>
+      </div>
+    </div>
+  );
+}
+
 export default function Profile() {
   const [showAllBadges, setShowAllBadges] = useState(false);
+  const [badgeDetail, setBadgeDetail] = useState(null);
   const navigate = useNavigate();
   const isDesktop = useIsDesktop();
 
@@ -83,6 +157,7 @@ export default function Profile() {
   const { level, xpInLvl, fillPct } = computeLevel(allLessons);
   const badges = computeBadges(allLessons, allRevisions, streak, level);
   const unlocked = badges.filter(b => !b.locked).length;
+  const next = nextBadge(badges);
   const heroPose = getProfileHero(level, streak, allLessons.length);
 
 
@@ -103,6 +178,11 @@ export default function Profile() {
 
   function closeSheet() { setActiveSheet(null); }
 
+  function openBadge(b) {
+    setBadgeDetail(b);
+    setActiveSheet('badge');
+  }
+
   async function handleSaveProfil() {
     if (!editPrenom.trim()) return;
     setSaving(true); setSaveError('');
@@ -122,6 +202,7 @@ export default function Profile() {
     openSheet(id);
   }
 
+  const sheetTitle = activeSheet === 'badge' ? (badgeDetail?.label ?? '') : (SHEET_TITLES[activeSheet] || '');
   const sheet = (
     <>
       {/* Backdrop sheet — fade in/out */}
@@ -137,11 +218,11 @@ export default function Profile() {
       <aside
         className={`rv-sheet--bottom pf-sheet${activeSheet ? '' : ' rv-sheet--bottom-hidden'}`}
         aria-hidden={!activeSheet}
-        aria-label={activeSheet ? SHEET_TITLES[activeSheet] : undefined}
+        aria-label={activeSheet ? sheetTitle : undefined}
       >
         <div className="rv-sheet-handle" />
         <header className="pf-sheet-header">
-          <h2 className="pf-sheet-title">{SHEET_TITLES[activeSheet] || ''}</h2>
+          <h2 className="pf-sheet-title">{sheetTitle}</h2>
           <button
             type="button"
             className="pf-sheet-close"
@@ -177,6 +258,32 @@ export default function Profile() {
             </>
           )}
 
+          {activeSheet === 'badge' && badgeDetail && (
+            <div className="pf-badge-detail">
+              <span className={`pf-badge-art pf-badge-art--lg${badgeDetail.locked ? ' pf-badge-art--locked' : ''}`} aria-hidden="true">
+                <Mascot pose={badgeDetail.pose} size={88} glow={!badgeDetail.locked} glowIntensity={0.4} alt="" aria-hidden="true" />
+              </span>
+              <p className="pf-badge-detail-hint">{badgeDetail.hint}</p>
+              {badgeDetail.locked ? (
+                <div className="pf-badge-detail-progress">
+                  <div
+                    className="rv-bar rv-bar--tall rv-bar--neutral-bg"
+                    role="progressbar"
+                    aria-label={`${badgeDetail.label} : ${badgeDetail.current} sur ${badgeDetail.target}`}
+                    aria-valuemin={0}
+                    aria-valuemax={badgeDetail.target}
+                    aria-valuenow={badgeDetail.current}
+                  >
+                    <div className="rv-bar-fill rv-bar-fill--orange" style={{ width: `${Math.min(100, Math.round(badgeDetail.current / badgeDetail.target * 100))}%` }} />
+                  </div>
+                  <span className="pf-badge-detail-count">{badgeDetail.current} / {badgeDetail.target}</span>
+                </div>
+              ) : (
+                <span className="rv-pill rv-pill--green pf-badge-detail-ok"><CheckIcon /> Obtenu</span>
+              )}
+            </div>
+          )}
+
         </div>
       </aside>
     </>
@@ -185,7 +292,6 @@ export default function Profile() {
   // Ordinateur : identité en tête, trois cartes (chiffres, Battle, compte),
   // puis tous les badges avec ce qu'il faut faire pour les obtenir.
   if (isDesktop) {
-    const next = nextBadge(badges);
     return (
       <div className="app profile-page">
         <div className="pf-content pf-desk">
@@ -287,44 +393,9 @@ export default function Profile() {
               <h2 id="pf-desk-badges" className="pf-desk-title">Badges</h2>
               <span className="pf-desk-head-note">{unlocked} sur {badges.length} obtenus</span>
             </div>
-            {next && (
-              <div className="rv-card rv-card--padded pf-next">
-                <span className="pf-next-mascot"><Mascot pose={next.pose} size={64} glow alt="" aria-hidden="true" /></span>
-                <span className="pf-next-text">
-                  <span className="pf-desk-label">Prochain badge</span>
-                  <span className="pf-next-name">{next.label}</span>
-                  <span className="pf-next-hint">{next.hint}</span>
-                </span>
-                <div className="pf-next-progress">
-                  <div
-                    className="rv-bar rv-bar--tall"
-                    role="progressbar"
-                    aria-label={`${next.label} : ${next.current} sur ${next.target}`}
-                    aria-valuemin={0}
-                    aria-valuemax={next.target}
-                    aria-valuenow={next.current}
-                  >
-                    <div className="rv-bar-fill rv-bar-fill--orange" style={{ width: `${Math.round(next.current / next.target * 100)}%` }} />
-                  </div>
-                  <span className="pf-next-count">{next.current} / {next.target}</span>
-                </div>
-              </div>
-            )}
+            {next && <NextBadgeCard next={next} />}
             <ul className="pf-desk-badges">
-              {badges.map(b => (
-                <li
-                  key={b.id}
-                  className={`pf-badge pf-desk-badge${b.locked ? ' pf-badge--locked' : ''}`}
-                  title={b.locked ? `${b.label} : ${b.hint} (${b.current} / ${b.target})` : `${b.label} : obtenu`}
-                >
-                  <span className="pf-desk-badge-mascot"><Mascot pose={b.pose} size={52} alt="" aria-hidden="true" /></span>
-                  <span className="pf-desk-badge-label">{b.label}</span>
-                  <span className="pf-desk-badge-hint">{b.hint}</span>
-                  {b.locked
-                    ? <span className="pf-desk-badge-state">{b.current} / {b.target}</span>
-                    : <span className="pf-desk-badge-state pf-desk-badge-state--ok"><CheckIcon /> Obtenu</span>}
-                </li>
-              ))}
+              {badges.map(b => <BadgeTile key={b.id} badge={b} desktop />)}
             </ul>
           </section>
         </div>
@@ -416,15 +487,10 @@ export default function Profile() {
             <h2 className="pf-section-title">Badges</h2>
             <span className="pf-badges-count">{unlocked}/{badges.length}</span>
           </header>
+          {next && <NextBadgeCard next={next} />}
           <div className="pf-badges-grid">
-            {(showAllBadges ? badges : badges.slice(0, 8)).map((b, i) => (
-              <div
-                key={b.id ?? `${b.label}-${i}`}
-                className={`pf-badge${b.locked ? ' pf-badge--locked' : ''}`}
-              >
-                <span className="pf-badge-emoji" aria-hidden="true"><Mascot pose={b.pose} size={46} alt="" aria-hidden="true" /></span>
-                <span className="pf-badge-label">{b.label}</span>
-              </div>
+            {(showAllBadges ? badges : badges.slice(0, 8)).map(b => (
+              <BadgeTile key={b.id} badge={b} onOpen={openBadge} />
             ))}
           </div>
           {badges.length > 8 && (

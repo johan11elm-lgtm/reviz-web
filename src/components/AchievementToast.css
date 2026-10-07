@@ -3,25 +3,33 @@
   top: -90px;
   left: 50%;
   transform: translateX(-50%);
-  /* --bg-card (token DS) — l'ancien var(--card-bg) n'existait pas :
-     le toast s'affichait transparent. */
   background: var(--bg-card);
-  border: 2px solid var(--accent-orange-hover);
-  border-radius: 16px;
-  padding: 12px 20px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  padding: 10px 18px 10px 10px;
   display: flex;
   align-items: center;
   gap: 12px;
   z-index: 9999;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+  box-shadow: var(--shadow-pop);
   transition: top 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
   min-width: 240px;
+  max-width: calc(100vw - 32px);
 }
 .achievement-toast--visible {
   /* Sous l'encoche iPhone (0 sur web) */
-  top: calc(20px + env(safe-area-inset-top, 0px));
+  top: calc(16px + env(safe-area-inset-top, 0px));
 }
-.achievement-emoji { font-size: 32px; }
-.achievement-info { display: flex; flex-direction: column; }
-.achievement-label { font-size: 11px; color: var(--accent-orange-hover); font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
-.achievement-name { font-size: 16px; font-weight: 700; color: var(--text-primary); }
+.achievement-emoji {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--accent-orange-soft);
+  flex-shrink: 0;
+}
+.achievement-info { display: flex; flex-direction: column; gap: 1px; }
+.achievement-label { font-size: 11px; color: var(--accent-orange-ink); font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+.achievement-name { font-family: 'Geist', sans-serif; font-size: 16px; font-weight: 800; letter-spacing: -0.3px; color: var(--text-primary); }

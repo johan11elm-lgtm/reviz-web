@@ -21,7 +21,7 @@ export function AchievementToast({ badge, onDone }) {
       role="status"
       aria-live="polite"
     >
-      <span className="achievement-emoji" aria-hidden="true"><Mascot pose={badge.pose} size={44} alt="" aria-hidden="true" /></span>
+      <span className="achievement-emoji" aria-hidden="true"><Mascot pose={badge.pose} size={40} alt="" aria-hidden="true" /></span>
       <div className="achievement-info">
         <span className="achievement-label">Badge débloqué !</span>
         <span className="achievement-name">{badge.label}</span>

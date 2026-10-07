@@ -1,63 +1,21 @@
-import { CameraIcon, SparkIcon, TrophyIcon, ResumeIcon, FlashcardsIcon, MindmapIcon, QuizIcon } from '../components/Icons';
+import { ResumeIcon, FlashcardsIcon, MindmapIcon, QuizIcon, CameraIcon, BookOpenIcon } from '../components/Icons';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { formatLevelLabel } from '../utils/levels';
+import { hasProgramme } from '../utils/programme';
 import { Mascot } from '../components/Mascot';
 import './Onboarding.css';
 
-// Tagline adaptée au cycle scolaire — affichée sur le slide d'accueil.
-function levelTagline(level) {
-  if (level?.cycle === 'college') {
-    return `Réviz transforme tes leçons en outils de révision calibrés pour le programme du collège.`;
-  }
-  if (level?.cycle === 'lycee') {
-    return `Réviz transforme tes leçons en outils de révision calibrés pour le programme du lycée.`;
-  }
-  return `Réviz transforme n'importe quelle leçon en outils de révision en quelques secondes.`;
-}
-
-const SLIDES = [
-  {
-    id: 'welcome',
-    pose: 'hello',
-    animate: true,
-    bubble: (prenom) => `Salut ${prenom} ! Moi c'est Réviz, ton coach IA. On va apprendre plus vite, ensemble.`,
-    titleFn: (prenom) => `Salut ${prenom}`,
-  },
-  {
-    id: 'how',
-    pose: 'scan',
-    bubble: () => 'Trois étapes seulement : tu scannes, je transforme, tu révises.',
-    title: 'Comment ça marche ?',
-  },
-  {
-    id: 'formats',
-    pose: 'flashcard',
-    bubble: () => 'Pour chaque leçon je te fabrique 4 outils. Pioche ceux qui te parlent.',
-    title: '4 formats en 1 scan',
-  },
-  {
-    id: 'go',
-    pose: 'fire',
-    animate: true,
-    bubble: () => "Allez, on lance ta première séance. 10 secondes et c'est parti.",
-    title: 'Prêt à réviser ?',
-    body: "Ta première leçon t'attend. Photo ou texte, comme tu veux.",
-  },
-];
-
-const HOW_STEPS = [
-  { icon: <CameraIcon />, tone: 'orange', num: '1', label: 'Scanne',   sub: 'Photo ou texte de ta leçon' },
-  { icon: <SparkIcon />,  tone: 'violet', num: '2', label: 'J\'analyse', sub: "L'IA transforme en outils" },
-  { icon: <TrophyIcon />, tone: 'green',  num: '3', label: 'Tu révises', sub: 'Et tu retiens vraiment' },
-];
+// Trois écrans, courts : ce que Réviz fabrique, les deux façons de réviser,
+// et un premier geste. Le texte reste factuel (pas de bulle de dialogue).
+const SLIDES = ['formats', 'how', 'go'];
 
 const FORMATS = [
-  { icon: <ResumeIcon />,     tone: 'green',  label: 'Résumé' },
-  { icon: <FlashcardsIcon />, tone: 'violet', label: 'Flashcards' },
-  { icon: <MindmapIcon />,    tone: 'pink',   label: 'Carte mentale' },
-  { icon: <QuizIcon />,       tone: 'orange', label: 'Quiz' },
+  { icon: <ResumeIcon />,     tone: 'green',  label: 'Résumé',        sub: "L'essentiel" },
+  { icon: <FlashcardsIcon />, tone: 'violet', label: 'Flashcards',    sub: 'Pour mémoriser' },
+  { icon: <MindmapIcon />,    tone: 'pink',   label: 'Carte mentale', sub: "Vue d'ensemble" },
+  { icon: <QuizIcon />,       tone: 'orange', label: 'Quiz',          sub: 'Pour te tester' },
 ];
 
 export default function Onboarding() {
@@ -68,6 +26,10 @@ export default function Onboarding() {
   const prenom = currentUser?.displayName?.split(' ')[0] ?? 'toi';
   const userLevel = getUserLevel();
   const levelLabel = formatLevelLabel(userLevel);
+  // Collège : le programme de la classe est prêt, c'est le chemin le plus court.
+  // Lycée : on scanne d'abord, le programme montré est celui de 3e.
+  const programmePret = hasProgramme(userLevel);
+  const classeProgramme = programmePret ? userLevel.classe : '3ème';
 
   useEffect(() => {
     if (currentUser && localStorage.getItem(`reviz-onboarded-${currentUser.uid}`)) {
@@ -82,139 +44,133 @@ export default function Onboarding() {
   function handleNext() {
     setAnimDir('out');
     setTimeout(() => {
-      if (step < SLIDES.length - 1) {
-        setStep(s => s + 1);
-        setAnimDir('in');
-      } else {
-        markOnboarded();
-        navigate('/scan');
-      }
-    }, 200);
+      setStep(s => Math.min(s + 1, SLIDES.length - 1));
+      setAnimDir('in');
+    }, 180);
   }
 
-  function handleSkip() {
+  function finish(to) {
     markOnboarded();
-    navigate('/', { replace: true });
-  }
-
-  function handleSeeHome() {
-    markOnboarded();
-    navigate('/');
+    navigate(to, { replace: to === '/' });
   }
 
   const slide = SLIDES[step];
   const isLast = step === SLIDES.length - 1;
+  const mascotPose = slide === 'formats' ? 'hello' : slide === 'how' ? 'scan' : 'fire';
 
   return (
     <div className="app onboarding-page">
-      {/* Skip top-right (sauf dernière slide) */}
-      {!isLast && (
-        <button
-          type="button"
-          className="onb-skip"
-          onClick={handleSkip}
-        >
-          Passer
-        </button>
-      )}
+      <header className="onb-top">
+        <ol className="onb-progress" aria-label={`Étape ${step + 1} sur ${SLIDES.length}`}>
+          {SLIDES.map((id, i) => (
+            <li key={id} className={`onb-progress-seg${i <= step ? ' onb-progress-seg--on' : ''}`} aria-current={i === step ? 'step' : undefined} />
+          ))}
+        </ol>
+        {!isLast && (
+          <button type="button" className="onb-skip" onClick={() => finish('/')}>
+            Passer
+          </button>
+        )}
+      </header>
 
-      <main className={`onb-body onb-anim-${animDir}`} key={slide.id}>
+      <main className={`onb-body onb-anim-${animDir}`} key={slide}>
         <Mascot
-          pose={slide.pose}
-          size={180}
+          pose={mascotPose}
+          size={150}
           glow
-          animate={slide.animate}
+          animate={slide !== 'how'}
           priority={step === 0}
         />
 
-        <div className="rv-speech-bubble rv-speech-bubble--pointer-top-center onb-bubble">
-          {slide.bubble(prenom)}
-        </div>
-
-        <h1 className="onb-title">
-          {slide.titleFn ? slide.titleFn(prenom) : slide.title}
-        </h1>
-
-        {slide.id === 'welcome' && (
+        {slide === 'formats' && (
           <>
-            {levelLabel && (
-              <span className="rv-pill rv-pill--orange onb-level-chip">
-                ✦ {levelLabel}
-              </span>
-            )}
-            <p className="onb-body-text">{levelTagline(userLevel)}</p>
+            <div className="onb-heading">
+              <h1 className="onb-title">Salut {prenom}</h1>
+              {levelLabel && <span className="rv-pill rv-pill--orange onb-level-chip">{levelLabel}</span>}
+              <p className="onb-sub">
+                Chaque leçon devient quatre supports de révision. Tu révises avec ceux qui te conviennent.
+              </p>
+            </div>
+            <ul className="rv-card onb-formats">
+              {FORMATS.map((f, i) => (
+                <li key={f.label} className="onb-format" style={{ animationDelay: `${120 + i * 60}ms` }}>
+                  <span className={`rv-icon-square rv-icon-square--${f.tone}`} aria-hidden="true">{f.icon}</span>
+                  <span className="onb-format-text">
+                    <span className="onb-format-label">{f.label}</span>
+                    <span className="onb-format-sub">{f.sub}</span>
+                  </span>
+                </li>
+              ))}
+            </ul>
           </>
         )}
 
-        {slide.id === 'how' && (
-          <ul className="onb-steps">
-            {HOW_STEPS.map((s, i) => (
-              <li
-                key={s.num}
-                className="onb-step"
-                style={{ animationDelay: `${i * 80}ms` }}
-              >
-                <span className={`rv-icon-square rv-icon-square--xl rv-icon-square--${s.tone}`}>
-                  {s.icon}
-                </span>
-                <div className="onb-step-text">
-                  <span className="onb-step-label">
-                    <span className="onb-step-num">{s.num}</span>
-                    {s.label}
+        {slide === 'how' && (
+          <>
+            <div className="onb-heading">
+              <h1 className="onb-title">Deux façons de réviser</h1>
+              <p className="onb-sub">Sans rien scanner, ou à partir de ta propre leçon.</p>
+            </div>
+            <ul className="onb-ways">
+              <li className="rv-card onb-way" style={{ animationDelay: '120ms' }}>
+                <span className="onb-way-art onb-way-art--orange"><Mascot pose="reading" size={56} alt="" aria-hidden="true" /></span>
+                <span className="onb-way-text">
+                  <span className="onb-way-label">Mon programme</span>
+                  <span className="onb-way-sub">
+                    {programmePret
+                      ? `Les chapitres de ${classeProgramme}, déjà prêts, dans l'ordre de l'année.`
+                      : 'Les chapitres de 3ème, déjà prêts. Ta classe arrive bientôt.'}
                   </span>
-                  <span className="onb-step-sub">{s.sub}</span>
-                </div>
-              </li>
-            ))}
-          </ul>
-        )}
-
-        {slide.id === 'formats' && (
-          <div className="onb-grid">
-            {FORMATS.map((f, i) => (
-              <div
-                key={f.label}
-                className="onb-grid-item"
-                style={{ animationDelay: `${i * 60}ms` }}
-              >
-                <span className={`rv-icon-square rv-icon-square--xl rv-icon-square--${f.tone}`}>
-                  {f.icon}
                 </span>
-                <span className="onb-grid-label">{f.label}</span>
-              </div>
-            ))}
-          </div>
+              </li>
+              <li className="rv-card onb-way" style={{ animationDelay: '200ms' }}>
+                <span className="onb-way-art onb-way-art--violet"><Mascot pose="scanphone" size={56} alt="" aria-hidden="true" /></span>
+                <span className="onb-way-text">
+                  <span className="onb-way-label">Scanner une leçon</span>
+                  <span className="onb-way-sub">Photo ou texte : les quatre supports en quelques secondes.</span>
+                </span>
+              </li>
+            </ul>
+          </>
         )}
 
-        {slide.id === 'go' && slide.body && (
-          <p className="onb-body-text">{slide.body}</p>
+        {slide === 'go' && (
+          <div className="onb-heading">
+            <h1 className="onb-title">On commence ?</h1>
+            <p className="onb-sub">Chaque révision compte pour ton niveau et ta série de jours.</p>
+          </div>
         )}
       </main>
 
       <footer className="onb-footer">
-        <div className="onb-dots" role="presentation">
-          {SLIDES.map((_, i) => (
-            <span
-              key={i}
-              className={`rv-dot${i <= step ? ' rv-dot--on' : ''}`}
-            />
-          ))}
-        </div>
-
-        <button
-          type="button"
-          className="rv-btn-cta rv-btn-cta--full onb-next"
-          onClick={handleNext}
-        >
-          {isLast ? 'Scanner ma première leçon' : 'Suivant →'}
-        </button>
-
+        {!isLast ? (
+          <button type="button" className="rv-btn-cta rv-btn-cta--full onb-next" onClick={handleNext}>
+            <span>Continuer</span>
+            <span className="rv-btn-cta-arrow" aria-hidden="true">→</span>
+          </button>
+        ) : programmePret ? (
+          <>
+            <button type="button" className="rv-btn-cta rv-btn-cta--full onb-next" onClick={() => finish('/programme')}>
+              <span><BookOpenIcon className="onb-cta-ico" aria-hidden="true" /> Ouvrir mon programme</span>
+              <span className="rv-btn-cta-arrow" aria-hidden="true">→</span>
+            </button>
+            <button type="button" className="rv-btn-cta rv-btn-cta--ghost rv-btn-cta--full rv-btn-cta--center onb-secondary" onClick={() => finish('/scan')}>
+              <CameraIcon className="onb-cta-ico" aria-hidden="true" /> Scanner une leçon
+            </button>
+          </>
+        ) : (
+          <>
+            <button type="button" className="rv-btn-cta rv-btn-cta--full onb-next" onClick={() => finish('/scan')}>
+              <span><CameraIcon className="onb-cta-ico" aria-hidden="true" /> Scanner ma première leçon</span>
+              <span className="rv-btn-cta-arrow" aria-hidden="true">→</span>
+            </button>
+            <button type="button" className="rv-btn-cta rv-btn-cta--ghost rv-btn-cta--full rv-btn-cta--center onb-secondary" onClick={() => finish('/programme')}>
+              <BookOpenIcon className="onb-cta-ico" aria-hidden="true" /> Voir le programme de 3ème
+            </button>
+          </>
+        )}
         {isLast && (
-          <button
-            type="button"
-            className="rv-btn-cta rv-btn-cta--ghost rv-btn-cta--full onb-secondary"
-            onClick={handleSeeHome}
-          >
+          <button type="button" className="rv-btn-ghost onb-home" onClick={() => finish('/')}>
             Voir l'accueil d'abord
           </button>
         )}
