@@ -5,4 +5,4 @@ Allow: /inscription
 Allow: /legal/
 Disallow: /
 
-Sitemap: https://reviz-gamma.vercel.app/sitemap.xml
+Sitemap: https://app.revizapp.fr/sitemap.xml

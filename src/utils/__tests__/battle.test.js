@@ -314,6 +314,6 @@ describe('affichage', () => {
 
   it('le lien d’invitation pointe toujours vers le site', () => {
     expect(lienBattle('K7RM', 'http://localhost:5173')).toBe('http://localhost:5173/battle/K7RM')
-    expect(lienBattle('K7RM', 'capacitor://localhost')).toBe('https://reviz-gamma.vercel.app/battle/K7RM')
+    expect(lienBattle('K7RM', 'capacitor://localhost')).toBe('https://app.revizapp.fr/battle/K7RM')
   })
 })

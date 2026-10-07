@@ -7,7 +7,7 @@ import { getAuthAdmin } from './_firebaseAdmin.js'
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
 
 const PRICE_MONTHLY = process.env.STRIPE_PRICE_MONTHLY // prix mensuel créé dans Stripe Dashboard
-const BASE_URL = 'https://reviz-gamma.vercel.app'
+const BASE_URL = 'https://app.revizapp.fr'
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).end()

@@ -264,8 +264,8 @@ export function formaterTemps(ms) {
   return `${(ms / 1000).toFixed(1).replace('.', ',')} s`
 }
 
-// Adresse publique de l'app : l'app iOS (capacitor://) n'en a pas de partageable.
-export const URL_APP = 'https://reviz-gamma.vercel.app'
+// Adresse publique de l'app (domaine branché le 8 octobre 2026) : l'app iOS (capacitor://) n'en a pas de partageable.
+export const URL_APP = 'https://app.revizapp.fr'
 
 export function lienBattle(code, origine = URL_APP) {
   const base = /^https?:\/\//.test(origine ?? '') ? origine : URL_APP

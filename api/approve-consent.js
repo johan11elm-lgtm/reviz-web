@@ -110,5 +110,5 @@ function page(title, message) {
 <meta name="robots" content="noindex"><title>${escapeHtml(title)} — Réviz</title>
 <style>${STYLE}</style></head>
 <body><div class="card"><h1>${escapeHtml(title)}</h1><p>${escapeHtml(message)}</p>
-<a href="https://reviz-gamma.vercel.app">← Retour à Réviz</a></div></body></html>`;
+<a href="https://app.revizapp.fr">← Retour à Réviz</a></div></body></html>`;
 }

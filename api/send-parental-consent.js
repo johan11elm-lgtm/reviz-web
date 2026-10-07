@@ -77,7 +77,7 @@ export default async function handler(req, res) {
       createdAt: Date.now(),
     });
 
-    const approveUrl = `https://reviz-gamma.vercel.app/api/approve-consent?token=${token}&uid=${uid}`;
+    const approveUrl = `https://app.revizapp.fr/api/approve-consent?token=${token}&uid=${uid}`;
     const safeName = escapeHtml(childName);
 
     const resend = new Resend(process.env.RESEND_API_KEY);
@@ -111,7 +111,7 @@ export default async function handler(req, res) {
             Ce lien est valable 7 jours. Vous devrez confirmer sur la page qui s'ouvre.<br/>
             Si vous n'avez pas fait cette demande ou si vous refusez, ignorez simplement cet email :
             le compte de votre enfant ne sera pas activé.<br/><br/>
-            <a href="https://reviz-gamma.vercel.app/legal/confidentialite" style="color: #888;">Politique de confidentialité</a>
+            <a href="https://app.revizapp.fr/legal/confidentialite" style="color: #888;">Politique de confidentialité</a>
           </p>
         </div>
       `,
