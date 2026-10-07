@@ -53,17 +53,33 @@ export async function mockApiRoutes(page) {
     route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ ok: true }) }))
   // Fin de Battle : la vraie route (firebase-admin) ne tourne pas sous Vite. On
   // répond pour l'élève qui appelle (uid lu dans son jeton d'émulateur) : un
-  // compte voit son total, un invité anonyme apprend que son aura n'est pas gardée.
-  await page.route('**/api/battle-fin', route => {
+  // compte voit son total, rangé sur son profil comme le ferait le serveur ;
+  // un invité anonyme apprend que son aura n'est pas gardée.
+  await page.route('**/api/battle-fin', async route => {
     const { idToken } = route.request().postDataJSON()
     const jeton = JSON.parse(Buffer.from(idToken.split('.')[1], 'base64url').toString())
     const anonyme = jeton.firebase?.sign_in_provider === 'anonymous'
+    if (!anonyme) await rangerAuraEmulateur(jeton.user_id, 130)
     const compte = { [jeton.user_id]: anonyme ? { delta: 0, comptee: false, sansCompte: true } : { delta: 130, aura: 130, comptee: true } }
     return route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ compte }) })
   })
   // Ceinture + bretelles : aucun test ne doit jamais atteindre Anthropic.
   await page.route('**/api.anthropic.com/**', route =>
     route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ content: [{ type: 'text', text: JSON.stringify(MOCK_AI_RESPONSE) }] }) }))
+}
+
+// Ce qu'écrit api/battle-fin.js sur users/{uid}, posé dans l'émulateur Firestore.
+async function rangerAuraEmulateur(uid, aura) {
+  const champs = ['aura', 'battles'].map(c => `updateMask.fieldPaths=${c}`).join('&')
+  const res = await fetch(`http://127.0.0.1:8080/v1/projects/demo-reviz/databases/(default)/documents/users/${uid}?${champs}`, {
+    method: 'PATCH',
+    headers: { Authorization: 'Bearer owner', 'Content-Type': 'application/json' },
+    body: JSON.stringify({ fields: {
+      aura: { integerValue: String(aura) },
+      battles: { mapValue: { fields: { jouees: { integerValue: '1' }, gagnees: { integerValue: '1' } } } },
+    } }),
+  })
+  if (!res.ok) throw new Error(`émulateur Firestore : ${res.status} ${await res.text()}`)
 }
 
 let userCounter = 0

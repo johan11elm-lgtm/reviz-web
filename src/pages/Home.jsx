@@ -11,6 +11,7 @@ import { loadRevisions } from '../services/revisionService';
 import { loadCatalogue, matiereProgress } from '../services/programmeService';
 import { hasProgramme, PROGRAMME_FALLBACK } from '../utils/programme';
 import { useIsDesktop } from '../hooks/useMediaQuery';
+import { useAuraCompte } from '../hooks/useAuraCompte';
 import { countDueCards } from '../services/srsService';
 import { getWeeklyChallenges } from '../services/challengeService';
 import { computeStreak, computeLevel, computeBadges, XP_PAR_NIVEAU } from '../utils/gamification';
@@ -134,6 +135,9 @@ export default function Home() {
 
   const navigate = useNavigate();
   const isDesktop = useIsDesktop();
+  // Aura de la Battle dans l'en-tête, dès la première partie comptée.
+  const auraCompte = useAuraCompte(isGuest ? null : currentUser?.uid);
+  const aura = auraCompte && (auraCompte.jouees > 0 || auraCompte.aura > 0) ? auraCompte.aura : undefined;
   const [allLessons, setAllLessons] = useState(() => loadLessons());
   const [challenges] = useState(() => getWeeklyChallenges());
   const [newBadge, setNewBadge] = useState(null);
@@ -307,6 +311,7 @@ export default function Home() {
         level={level}
         xpInLvl={xpInLvl}
         fillPct={fillPct}
+        aura={aura}
         isPremium={isPremium}
         onCoach={isGuest ? undefined : () => navigate(lastLesson ? `/coach?lesson=${lastLesson.id}` : '/coach')}
       />

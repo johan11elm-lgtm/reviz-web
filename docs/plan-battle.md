@@ -131,6 +131,8 @@ battles/{code}
    **Sans compte (demande de Johan) :** `/battle` et `/battle/:code` ouverts à tous ; un élève sans compte Firebase (mode essai, ou lien ouvert sans être connecté) joue en connexion anonyme sur une seconde instance Firebase (`battleConnexion.js`), avec son prénom. `send-parental-consent` et `create-billing-portal` refusent les comptes anonymes. CSP de `vercel.json` : ajout de `*.firebasedatabase.app` (sinon la base europe-west1 est bloquée en prod).
    **À faire dans la console avant de pousser :** publier `firestore.rules` et `database.rules.json` ; activer la connexion anonyme (Authentication → Méthodes de connexion) une fois le garde-fou serveur en ligne.
 4. **Finitions** : e2e à deux joueurs, iOS, forfait, cron de nettoyage, textes RGPD.
+   **iOS vérifié le 2026-10-07** (simulateur, compte de Johan, `npm run build:ios`) : popup, salon créé depuis la fiche d'un chapitre, feuille de partage native (`navigator.share` marche dans la WebView), partie complète contre un invité sur le web, aura écrite par `api/battle-fin` via `apiFetch`. Rien à corriger côté natif ; l'app ne sort pas du simulateur tant qu'il n'y a pas de compte Apple Developer.
+   **Aura dans l'en-tête de Home (2026-10-07)** : « ✦ N aura » au bout de la barre d'XP (`UserHeader`, prop `aura`), lien vers `/battle`, affichée dès la première partie comptée. `useAuraCompte` relit le profil à chaque visite et garde la dernière valeur sur l'appareil (`reviz-aura-{uid}`). L'e2e vérifie l'en-tête après la partie.
 
 **À faire par Johan dans la console Firebase** : activer Realtime Database (région europe-west1) et la connexion anonyme ; déployer les règles (la CLI firebase n'est pas authentifiée sur le Mac) ; ajouter l'URL de la base aux variables d'environnement Vercel.
 
@@ -142,9 +144,9 @@ battles/{code}
 - Un chapitre précis du programme par partie.
 - À chaque round, on voit qui gagne et qui perd de l'aura.
 - Des mascottes dédiées au mode.
+- L'aura s'affiche dans l'en-tête de Home, au bout de la barre d'XP.
 
 **Encore ouvertes :**
 - Les valeurs : +20 / 0 / −10 par round, +30 en fin de partie, 5 parties par jour.
-- L'aura dans l'en-tête de Home, ou seulement sur le Profil.
 - Quand afficher la pose 6-7 (écart de rounds, palier d'aura).
 - Plus tard : battle de classe (le prof lance un chapitre, toute la classe joue), et « ton pote n'est pas dispo ? envoie-lui la partie » en différé.

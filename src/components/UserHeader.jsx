@@ -1,6 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { Mascot } from './Mascot';
 import { CoachHeaderButton } from './CoachChat';
+import { SparkIcon } from './Icons';
 import { XP_PAR_NIVEAU } from '../utils/gamification';
 
 const CrownIcon = () => (
@@ -12,19 +13,21 @@ const CrownIcon = () => (
 
 /**
  * UserHeader — en-tête « identité » de la Home : avatar mascotte (lien vers
- * le profil) avec badge de niveau, prénom · niveau, barre d'XP, et à droite
- * les actions Réviz+ (couronne) et coach. Compose .rv-user-* (headers.css).
+ * le profil) avec badge de niveau, prénom · niveau, barre d'XP suivie de
+ * l'aura de la Battle (lien vers /battle), et à droite les actions Réviz+
+ * (couronne) et coach. Compose .rv-user-* (headers.css).
  *
  * @param {object} props
  * @param {string} props.prenom
  * @param {number} props.level
  * @param {number} props.xpInLvl           — XP acquis dans le niveau courant
  * @param {number} props.fillPct           — remplissage de la barre (0–100)
+ * @param {number} [props.aura]           — aura de la Battle ; masquée si absente
  * @param {boolean} [props.isPremium]      — couronne « active » (orange)
  * @param {function} [props.onCoach]       — ouvre le coach ; bouton masqué si absent
  * @param {string} [props.className]
  */
-export function UserHeader({ prenom, level, xpInLvl, fillPct, isPremium = false, onCoach, className = '' }) {
+export function UserHeader({ prenom, level, xpInLvl, fillPct, aura, isPremium = false, onCoach, className = '' }) {
   const navigate = useNavigate();
   const classes = ['rv-user-header', className].filter(Boolean).join(' ');
 
@@ -41,15 +44,23 @@ export function UserHeader({ prenom, level, xpInLvl, fillPct, isPremium = false,
           <span className="rv-user-sep" aria-hidden="true">•</span>
           <span className="rv-user-level">Niveau {level}</span>
         </div>
-        <div
-          className="rv-bar rv-user-xp"
-          role="progressbar"
-          aria-label={`${xpInLvl} XP sur ${XP_PAR_NIVEAU} pour passer au niveau ${level + 1}`}
-          aria-valuemin={0}
-          aria-valuemax={XP_PAR_NIVEAU}
-          aria-valuenow={xpInLvl}
-        >
-          <div className="rv-bar-fill rv-bar-fill--orange" style={{ width: `${fillPct}%` }} />
+        <div className="rv-user-progress">
+          <div
+            className="rv-bar rv-user-xp"
+            role="progressbar"
+            aria-label={`${xpInLvl} XP sur ${XP_PAR_NIVEAU} pour passer au niveau ${level + 1}`}
+            aria-valuemin={0}
+            aria-valuemax={XP_PAR_NIVEAU}
+            aria-valuenow={xpInLvl}
+          >
+            <div className="rv-bar-fill rv-bar-fill--orange" style={{ width: `${fillPct}%` }} />
+          </div>
+          {typeof aura === 'number' && (
+            <Link to="/battle" className="rv-user-aura" aria-label={`${aura} aura : ouvrir la Battle`}>
+              <SparkIcon />
+              <span>{aura.toLocaleString('fr-FR')} aura</span>
+            </Link>
+          )}
         </div>
       </div>
 

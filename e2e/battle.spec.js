@@ -2,7 +2,8 @@
 // contre l'Emulator Suite (auth, firestore et base temps réel, projet demo-reviz).
 // Johan a un compte : popup de lancement → chapitre → salon. Léa n'en a pas :
 // elle ouvre le lien, donne son prénom et joue en invitée (connexion anonyme).
-// 5 rounds → fin (6-7 du gagnant, aura rangée ou non) → revanche suivie.
+// 5 rounds → fin (6-7 du gagnant, aura rangée ou non) → revanche suivie →
+// l'aura de Johan dans l'en-tête de l'accueil.
 import { test, expect } from '@playwright/test'
 import { readFileSync } from 'node:fs'
 import path from 'node:path'
@@ -147,4 +148,11 @@ test('deux élèves jouent une battle complète, puis la revanche', async ({ bro
   await expect(invite).toHaveURL(new RegExp(`/battle/${nouveau}$`), { timeout: 15_000 })
   await expect(invite.getByText('Johan va lancer la partie.')).toBeVisible()
   await expect(hote.getByRole('button', { name: "C'est parti" })).toBeEnabled()
+
+  // ── De retour sur l'accueil, l'aura rangée suit la barre d'XP ──
+  await hote.goto('/')
+  const aura = hote.getByRole('link', { name: '130 aura : ouvrir la Battle' })
+  await expect(aura).toBeVisible()
+  await expect(aura).toHaveText('130 aura')
+  await capture(hote, '10-accueil-aura')
 })

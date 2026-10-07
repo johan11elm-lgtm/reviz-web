@@ -43,6 +43,21 @@ describe('<UserHeader />', () => {
     expect(screen.getByRole('button', { name: /Réviz\+ actif/ })).toHaveClass('rv-user-premium-btn--active')
   })
 
+  it('l’aura de la Battle suit la barre d’XP et mène à la Battle', () => {
+    setup({ aura: 1250 })
+    const lien = screen.getByRole('link', { name: '1250 aura : ouvrir la Battle' })
+    expect(lien).toHaveTextContent(/1\s250 aura/)
+    fireEvent.click(lien)
+    expect(screen.getByTestId('loc')).toHaveTextContent('/battle')
+  })
+
+  it('pas d’aura affichée sans valeur, même 0 est montré si fourni', () => {
+    setup()
+    expect(screen.queryByRole('link', { name: /aura/ })).toBeNull()
+    setup({ aura: 0 })
+    expect(screen.getByRole('link', { name: /aura/ })).toHaveTextContent('0 aura')
+  })
+
   it('le bouton coach n’apparaît qu’avec onCoach', () => {
     setup()
     expect(screen.queryByRole('button', { name: /coach/i })).toBeNull()
