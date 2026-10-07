@@ -1,9 +1,10 @@
 // -------------------------------------------------------
 // Réviz — Service Worker (cache offline)
 // -------------------------------------------------------
+// v4 : nouvelle icône (mascotte 3D, 8 octobre 2026) — force le rechargement des icônes.
 // v3 : purge les mascottes PNG pré-détourage et adopte
 // stale-while-revalidate pour les images non-hashées.
-const CACHE_NAME = 'reviz-v3';
+const CACHE_NAME = 'reviz-v4';
 const STATIC_ASSETS = [
   '/',
   '/manifest.json',
