@@ -1,0 +1,128 @@
+import { useEffect, useRef, useState } from 'react';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
+import { useContexteBattle } from '../hooks/useBattle';
+import { creerBattle } from '../services/battleService';
+import { loadChapterContent } from '../services/programmeService';
+import { PageHeader } from '../components/PageHeader';
+import { GuestWall } from '../components/GuestWall';
+import { BattleMascot } from '../components/BattleMascot';
+import { BattleRegles } from '../components/battle/BattleRegles';
+import { BottomNav } from '../components/BottomNav';
+import { LONGUEUR_CODE, normaliserCode } from '../utils/battle';
+import { nbsp } from '../utils/typography';
+import './Battle.css';
+
+/**
+ * /battle : rejoindre avec un code, ou — avec ?classe&matiere&chapitre, depuis
+ * un chapitre de Mon programme — ouvrir un salon et y aller.
+ */
+export default function BattleAccueil() {
+  const { isGuest } = useAuth();
+  const [params] = useSearchParams();
+  if (isGuest) {
+    return <GuestWall action="jouer en battle" text="La Battle se joue à deux, en direct : il faut un compte pour que ton adversaire te retrouve." />;
+  }
+  const chapitre = params.get('chapitre')
+    ? { classe: params.get('classe'), matiere: params.get('matiere'), id: params.get('chapitre') }
+    : null;
+  return chapitre ? <Creation chapitre={chapitre} /> : <Rejoindre />;
+}
+
+function Creation({ chapitre }) {
+  const navigate = useNavigate();
+  const { currentUser } = useAuth();
+  const ctx = useContexteBattle();
+  const [erreur, setErreur] = useState(false);
+  const lance = useRef(false);
+
+  useEffect(() => {
+    if (!ctx || lance.current) return;
+    lance.current = true;
+    loadChapterContent(chapitre.classe, chapitre.matiere, chapitre.id)
+      .then(data => creerBattle(ctx, { prenom: currentUser?.displayName || 'Élève', chapitre, nbQuestions: data.quiz.length }))
+      .then(code => navigate(`/battle/${code}`, { replace: true }))
+      .catch(() => setErreur(true));
+  }, [ctx, chapitre, currentUser, navigate]);
+
+  return (
+    <div className="app battle-page">
+      <PageHeader variant="back" />
+      <div className="content battle-content">
+        {erreur || ctx === null ? (
+          <div className="rv-empty-state battle-vide">
+            <BattleMascot pose="moinsaura" size={140} className="rv-empty-state-mascot" alt="" aria-hidden="true" />
+            <h2 className="rv-empty-state-title">Le salon n’a pas pu être créé</h2>
+            <p className="rv-empty-state-sub">Vérifie ta connexion et réessaie.</p>
+            <button type="button" className="rv-btn-cta" onClick={() => navigate(0)}>Réessayer</button>
+          </div>
+        ) : (
+          <div className="battle-chargement" role="status"><span className="battle-spinner" aria-hidden="true" />Ouverture du salon…</div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function Rejoindre() {
+  const navigate = useNavigate();
+  const [saisie, setSaisie] = useState('');
+  const [erreur, setErreur] = useState(false);
+  const code = normaliserCode(saisie);
+
+  function valider(e) {
+    e.preventDefault();
+    if (!code) { setErreur(true); return; }
+    navigate(`/battle/${code}`);
+  }
+
+  return (
+    <div className="app battle-page">
+      <PageHeader variant="back" onBack={() => (window.history.state?.idx > 0 ? navigate(-1) : navigate('/'))} />
+      <div className="rv-page-intro">
+        <div className="rv-page-intro-text">
+          <h1 className="rv-greeting-title rv-page-intro-title">Battle</h1>
+          <p className="rv-greeting-sub rv-page-intro-sub">Défie quelqu’un en direct sur un chapitre de ton programme.</p>
+        </div>
+        <BattleMascot pose="garde" size={140} priority className="rv-page-intro-mascot" alt="" aria-hidden="true" />
+      </div>
+
+      <div className="content battle-content battle-accueil">
+        <form className="rv-card rv-card--padded battle-rejoindre" onSubmit={valider} noValidate>
+          <label className="battle-rejoindre-label" htmlFor="battle-code">Rejoindre avec un code</label>
+          <input
+            id="battle-code"
+            className="battle-rejoindre-input"
+            value={saisie}
+            onChange={e => { setSaisie(e.target.value.toUpperCase().slice(0, LONGUEUR_CODE + 1)); setErreur(false); }}
+            placeholder="K7RM"
+            autoComplete="off"
+            autoCapitalize="characters"
+            autoCorrect="off"
+            spellCheck={false}
+            inputMode="text"
+            aria-invalid={erreur || undefined}
+            aria-describedby={erreur ? 'battle-code-erreur' : undefined}
+          />
+          {erreur && <p id="battle-code-erreur" className="battle-erreur" role="alert">Un code fait 4 caractères, sans O, 0, I ni 1.</p>}
+          <button type="submit" className="rv-btn-cta rv-btn-cta--full" disabled={!saisie.trim()}>
+            <span>Rejoindre</span>
+            <span className="rv-btn-cta-arrow" aria-hidden="true">→</span>
+          </button>
+        </form>
+
+        <div className="rv-card rv-card--padded battle-lancer">
+          <h2 className="battle-lancer-titre">Lancer une battle</h2>
+          <p className="battle-lancer-texte">{nbsp('Choisis un chapitre dans Mon programme, puis « Lancer une battle ».')}</p>
+          <Link className="rv-btn-cta rv-btn-cta--full rv-btn-cta--ghost" to="/programme">
+            <span>Choisir un chapitre</span>
+            <span className="rv-btn-cta-arrow" aria-hidden="true">→</span>
+          </Link>
+        </div>
+
+        <BattleRegles partage />
+      </div>
+      <BottomNav />
+    </div>
+  );
+}

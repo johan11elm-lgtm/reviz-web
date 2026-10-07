@@ -227,6 +227,51 @@ export function prochaineEtape(battle, quiz, maintenant) {
   return { type: 'round', n: n + 1, debut }
 }
 
+/**
+ * Ce que l'écran montre à `maintenant` (horloge serveur), déduit des seules
+ * données du salon : les deux téléphones affichent la même chose au même moment.
+ * @returns {{ type: 'ferme' } | { type: 'salon' } | { type: 'annonce', n, depart: number|null }
+ *   | { type: 'question', n, fin: number } | { type: 'revelation', n } | { type: 'fin' }}
+ */
+export function phaseDeJeu(battle, maintenant) {
+  if (!battle) return { type: 'ferme' }
+  if (battle.etat === 'salon') return { type: 'salon' }
+  if (battle.etat === 'abandon') return { type: 'fin' }
+  const joueurs = joueursDe(battle)
+  const n = battle.round ?? 1
+  const round = battle.rounds?.[n]
+  if (battle.etat === 'fin') {
+    // Le dernier round reste affiché le temps de sa révélation.
+    if (round?.debut && maintenant < finDuRound(round, joueurs) + REVELATION_MS) return { type: 'revelation', n }
+    return { type: 'fin' }
+  }
+  if (!round?.debut) return { type: 'annonce', n, depart: null }
+  if (n > 1 && maintenant < round.debut - PAUSE_ROUND_MS) return { type: 'revelation', n: n - 1 }
+  if (maintenant < round.debut) return { type: 'annonce', n, depart: round.debut }
+  if (!roundTermine(round, joueurs, maintenant)) return { type: 'question', n, fin: round.debut + CHRONO_MS }
+  return { type: 'revelation', n }
+}
+
+/** « +20 aura », « −10 aura », « 0 aura » (vrai signe moins). */
+export function formaterAura(n) {
+  if (n > 0) return `+${n} aura`
+  if (n < 0) return `−${Math.abs(n)} aura`
+  return '0 aura'
+}
+
+/** 2437 → « 2,4 s » */
+export function formaterTemps(ms) {
+  return `${(ms / 1000).toFixed(1).replace('.', ',')} s`
+}
+
+// Adresse publique de l'app : l'app iOS (capacitor://) n'en a pas de partageable.
+export const URL_APP = 'https://reviz-gamma.vercel.app'
+
+export function lienBattle(code, origine = URL_APP) {
+  const base = /^https?:\/\//.test(origine ?? '') ? origine : URL_APP
+  return `${base}/battle/${code}`
+}
+
 /** La partie fait-elle encore bouger l'aura de ce joueur aujourd'hui contre cet adversaire ? */
 export function partieComptee(jour, adversaire, date) {
   if (jour?.date !== date) return true

@@ -101,6 +101,7 @@ export default function ProgrammeMatiere() {
               selectedId={selectedId}
               onSelect={setSelectedId}
               onOpen={open}
+              onBattle={ch => navigate(`/battle?${new URLSearchParams({ classe, matiere: entry.matiere, chapitre: ch.id })}`)}
               opening={opening}
             />
             <aside className="programme-path-rail" aria-label="Ta progression">

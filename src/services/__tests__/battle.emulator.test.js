@@ -6,6 +6,7 @@ import { initializeApp, deleteApp } from 'firebase/app'
 import { getDatabase, connectDatabaseEmulator, ref, get, set, update, remove, goOffline } from 'firebase/database'
 import {
   creerBattle, rejoindreBattle, lireSalon, lancerPartie, repondre, avancer, declarerAbandon, ecouterBattle, quitterBattle,
+  lancerRevanche,
 } from '../battleService'
 import { prochaineEtape, resoudrePartie, nouveauSalon, AURA } from '../../utils/battle'
 
@@ -169,6 +170,20 @@ describe('règles — réponses et rounds', () => {
     await refuse(update(ref(hote.db, `battles/${code}`), { 'rounds/2/debut': Date.now() + 5000 }))
     await refuse(avancer(eleve('i'), code, { type: 'fin' }))
     await avancer(hote, code, { type: 'fin' })
+  })
+
+  it('revanche : l’hôte seul, une fois la partie finie, et l’invitée la rejoint', async () => {
+    const code = await salonEnJeu()
+    const hote = eleve('h'), invite = eleve('i')
+    const salon = await lireSalon(hote, code)
+    await refuse(lancerRevanche(hote, code, salon, { prenom: 'Hôte', nbQuestions: 7, random: graine(2) }))
+    await avancer(hote, code, { type: 'fin' })
+    await refuse(set(ref(invite.db, `battles/${code}/revanche`), 'ABCD'))
+    const nouveau = await lancerRevanche(hote, code, salon, { prenom: 'Hôte', nbQuestions: 7, random: graine(2) })
+    expect((await lireSalon(invite, code)).revanche).toBe(nouveau)
+    await refuse(set(ref(hote.db, `battles/${code}/revanche`), 'WXYZ'))
+    const { salon: rejoint } = await rejoindreBattle(invite, nouveau, 'Invité')
+    expect(rejoint).toMatchObject({ etat: 'salon', chapitre: CHAPITRE, invite: { uid: 'i' } })
   })
 
   it('l’abandon ne se déclare que contre un joueur parti', async () => {

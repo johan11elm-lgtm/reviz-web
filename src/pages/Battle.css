@@ -1,0 +1,434 @@
+/* ------------------------------------------------------------
+   Battle — salon, rounds, fin de partie, accueil (/battle)
+   Deux couleurs, celles des bandeaux : encre pour l'hôte, rouge pour l'invité.
+   ------------------------------------------------------------ */
+
+.battle-page {
+  --battle-encre: var(--accent-violet);
+  --battle-rouge: #C8283A;
+}
+
+/* Zone qui défile, avec la gouttière des autres pages. Sans barre d'onglets
+   pendant la partie : seulement la marge de l'encoche en bas. */
+.battle-page .battle-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 8px var(--page-gutter) calc(32px + env(safe-area-inset-bottom, 0px));
+  overflow-y: auto;
+}
+/* /battle garde la barre d'onglets : on ne cache rien derrière. */
+.battle-page .battle-accueil { padding-bottom: calc(120px + env(safe-area-inset-bottom, 0px)); }
+
+.battle-chargement {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 72px 0;
+  font-size: 14px;
+  color: var(--text-muted);
+}
+.battle-spinner {
+  width: 20px;
+  height: 20px;
+  border: 3px solid var(--border);
+  border-top-color: var(--text-primary);
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+}
+
+/* ── Joueur ── */
+.battle-joueur {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  text-align: center;
+}
+.battle-joueur-nom {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  max-width: 100%;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.battle-joueur-nom::before {
+  content: '';
+  flex-shrink: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--battle-encre);
+}
+.battle-joueur--rouge .battle-joueur-nom::before { background: var(--battle-rouge); }
+.battle-joueur-moi { font-weight: 500; color: var(--text-muted); }
+.battle-joueur-aura { font-size: 14px; font-weight: 700; color: var(--text-secondary); }
+.battle-joueur-detail { font-size: 13px; color: var(--text-secondary); }
+.battle-joueur--absent { opacity: 0.45; }
+.battle-joueur-place {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px dashed var(--border-hover);
+  border-radius: 50%;
+  font-family: 'Geist', sans-serif;
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--text-xlight);
+}
+.battle-joueur--libre .battle-joueur-nom { font-weight: 500; color: var(--text-muted); }
+.battle-joueur--libre .battle-joueur-nom::before { display: none; }
+
+.battle-versus {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 8px;
+}
+.battle-versus-vs {
+  align-self: center;
+  margin-top: -24px;
+  font-family: 'Geist', sans-serif;
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  color: var(--text-light);
+}
+
+/* ── Salon ── */
+.battle-salon { display: flex; flex-direction: column; gap: 18px; }
+.battle-code-card { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+.battle-code-label,
+.battle-correction-label {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.battle-code { display: flex; gap: 8px; }
+.battle-code-car {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 64px;
+  border: 1.5px solid var(--border);
+  border-radius: 16px;
+  background: var(--bg-subtle);
+  font-family: 'Geist', sans-serif;
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+.battle-partager { width: 100%; }
+
+.battle-regles {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.battle-regles li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 13.5px;
+  line-height: 1.4;
+  color: var(--text-secondary);
+}
+.battle-regles svg {
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  margin-top: 1px;
+  color: var(--accent-orange);
+}
+
+.battle-actions { display: flex; flex-direction: column; gap: 10px; }
+.battle-actions .rv-btn-cta--ghost { justify-content: center; }
+.battle-aide { margin: 0; text-align: center; font-size: 13px; color: var(--text-muted); }
+.battle-aide--fort { font-size: 14px; font-weight: 600; color: var(--text-secondary); }
+.battle-erreur { margin: 0; text-align: center; font-size: 13px; color: var(--accent-red-ink); }
+
+/* ── Invitation ── */
+.battle-invitation {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding-top: 8px;
+  text-align: center;
+}
+.battle-invitation-titre,
+.battle-fin-titre {
+  margin: 0;
+  font-family: 'Geist', sans-serif;
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: -1px;
+  line-height: 1.1;
+  color: var(--text-primary);
+}
+.battle-invitation-chapitre { margin: 0 0 8px; font-size: 14px; color: var(--text-secondary); }
+.battle-invitation .battle-regles,
+.battle-invitation .battle-actions { width: 100%; text-align: left; }
+
+/* ── Score ── */
+.battle-score {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  background: var(--bg-card);
+}
+.battle-score-joueur {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas: "nom points" "aura points";
+  column-gap: 8px;
+  align-items: center;
+  min-width: 0;
+}
+.battle-score-joueur--rouge {
+  grid-template-columns: auto minmax(0, 1fr);
+  grid-template-areas: "points nom" "points aura";
+  text-align: right;
+}
+.battle-score-nom {
+  grid-area: nom;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.battle-score-aura { grid-area: aura; font-size: 11.5px; font-weight: 600; color: var(--text-muted); }
+.battle-score-points {
+  grid-area: points;
+  font-family: 'Geist', sans-serif;
+  font-size: 26px;
+  font-weight: 800;
+  line-height: 1;
+}
+.battle-score-joueur--encre .battle-score-points { color: var(--battle-encre); }
+.battle-score-joueur--rouge .battle-score-points { color: var(--battle-rouge); }
+
+.battle-points { display: flex; gap: 5px; margin: 0; padding: 0; list-style: none; }
+.battle-point { width: 10px; height: 10px; border-radius: 50%; background: var(--bg-muted); }
+.battle-point--encre { background: var(--battle-encre); }
+.battle-point--rouge { background: var(--battle-rouge); }
+.battle-point--egal { background: linear-gradient(90deg, var(--battle-encre) 50%, var(--battle-rouge) 50%); }
+.battle-point--nul { background: var(--text-xlight); }
+.battle-point--encours { background: transparent; box-shadow: inset 0 0 0 2px var(--text-primary); }
+
+/* ── Annonce du round ── */
+.battle-annonce {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 320px;
+  text-align: center;
+}
+.battle-annonce-titre {
+  font-family: 'Geist', sans-serif;
+  font-size: 32px;
+  font-weight: 800;
+  letter-spacing: -1px;
+  color: var(--text-primary);
+}
+.battle-annonce-decompte {
+  font-family: 'Geist', sans-serif;
+  font-size: 96px;
+  font-weight: 800;
+  line-height: 1;
+  color: var(--accent-violet);
+  animation: battle-pop 0.9s ease-out both;
+}
+.battle-annonce-sous { max-width: 28ch; font-size: 14px; color: var(--text-secondary); }
+@keyframes battle-pop {
+  from { transform: scale(1.4); opacity: 0; }
+  30%  { opacity: 1; }
+  to   { transform: scale(1); opacity: 1; }
+}
+
+/* ── Question ── */
+.battle-question { display: flex; flex-direction: column; gap: 12px; }
+.battle-chrono { height: 8px; overflow: hidden; border-radius: var(--radius-pill); background: var(--bg-muted); }
+.battle-chrono-barre {
+  height: 100%;
+  background: var(--accent-orange);
+  transform-origin: left;
+  transition: transform 0.1s linear;
+}
+.battle-question-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.battle-question-texte {
+  margin: 4px 0;
+  font-family: 'Geist', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+  line-height: 1.3;
+  color: var(--text-primary);
+}
+.battle-choix { display: flex; flex-direction: column; gap: 8px; }
+.battle-choix-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 14px 16px;
+  border: 1.5px solid var(--border);
+  border-radius: 14px;
+  background: var(--bg-card);
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-primary);
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease, transform 0.1s ease;
+}
+.battle-choix-btn:active:not(:disabled) { transform: scale(0.985); }
+@media (hover: hover) and (pointer: fine) {
+  .battle-choix-btn:hover:not(:disabled) { border-color: var(--accent-orange); background: var(--accent-orange-soft); }
+}
+.battle-choix-btn:disabled { cursor: default; }
+.battle-choix-btn:disabled:not(.battle-choix-btn--choisi) { opacity: 0.5; }
+.battle-choix-lettre {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 10px;
+  background: var(--bg-subtle);
+  font-size: 12px;
+  font-weight: 700;
+}
+.battle-choix-texte { flex: 1; line-height: 1.35; }
+.battle-choix-btn--choisi { border-color: var(--accent-violet); background: var(--accent-violet-soft); }
+.battle-choix-btn--choisi .battle-choix-lettre { background: var(--accent-violet); color: #fff; }
+.battle-statut {
+  min-height: 1.4em;
+  margin: 0;
+  text-align: center;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+/* ── Révélation du round ── */
+.battle-revelation { display: flex; flex-direction: column; gap: 14px; animation: battle-fondu 0.25s ease-out both; }
+@keyframes battle-fondu {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: none; }
+}
+.battle-revelation-titre {
+  margin: 4px 0 0;
+  text-align: center;
+  font-family: 'Geist', sans-serif;
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: -0.8px;
+  color: var(--text-primary);
+}
+.battle-revelation-sur { color: var(--text-muted); }
+.battle-delta {
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
+  font-family: 'Geist', sans-serif;
+  font-size: 17px;
+  font-weight: 800;
+}
+.battle-delta--plus  { color: var(--accent-green-ink); background: var(--accent-green-soft); }
+.battle-delta--moins { color: var(--accent-red-ink); background: var(--accent-red-soft); }
+.battle-delta--zero  { color: var(--text-secondary); background: var(--bg-subtle); }
+.battle-correction-label { color: var(--accent-green-ink); }
+.battle-correction-reponse { margin: 4px 0 0; font-size: 15px; font-weight: 700; color: var(--text-primary); }
+.battle-correction-explication { margin: 6px 0 0; font-size: 13.5px; line-height: 1.45; color: var(--text-secondary); }
+
+/* ── Fin de partie ── */
+.battle-fin { display: flex; flex-direction: column; gap: 14px; text-align: center; }
+.battle-fin-sous {
+  margin: -6px 0 4px;
+  font-family: 'Geist', sans-serif;
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--text-secondary);
+}
+.battle-fin-correction { text-align: left; }
+.battle-fin-correction summary { font-weight: 700; color: var(--text-primary); cursor: pointer; }
+.battle-fin-correction ol { display: flex; flex-direction: column; gap: 12px; margin: 12px 0 0; padding-left: 20px; }
+.battle-fin-correction p { margin: 0; }
+.battle-fin-question { font-size: 14px; font-weight: 600; color: var(--text-primary); }
+.battle-fin-reponse { font-size: 13.5px; color: var(--accent-green-ink); }
+.battle-fin-gagnant { font-size: 12.5px; color: var(--text-muted); }
+
+/* ── Accueil /battle ── */
+.battle-rejoindre { display: flex; flex-direction: column; gap: 10px; }
+.battle-rejoindre-label { font-size: 15px; font-weight: 700; color: var(--text-primary); }
+.battle-rejoindre-input {
+  width: 100%;
+  padding: 12px;
+  border: 1.5px solid var(--border);
+  border-radius: 16px;
+  background: var(--bg-subtle);
+  font-family: 'Geist', sans-serif;
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: 0.35em;
+  text-align: center;
+  text-transform: uppercase;
+  color: var(--text-primary);
+}
+.battle-rejoindre-input::placeholder { color: var(--text-xlight); }
+.battle-rejoindre-input:focus-visible { outline: 2px solid var(--accent-violet); outline-offset: 2px; }
+.battle-rejoindre-input[aria-invalid="true"] { border-color: var(--accent-red); }
+.battle-lancer-titre { margin: 0; font-family: 'Geist', sans-serif; font-size: 16px; font-weight: 800; color: var(--text-primary); }
+.battle-lancer-texte { margin: 4px 0 12px; font-size: 13.5px; line-height: 1.4; color: var(--text-secondary); }
+
+@media (prefers-reduced-motion: reduce) {
+  .battle-annonce-decompte,
+  .battle-revelation { animation: none; }
+  .battle-chrono-barre { transition: none; }
+}
+
+/* ── Ordinateur : colonne de lecture, choix sur deux colonnes ── */
+@media (min-width: 1024px) {
+  html:not(.native) .battle-page .battle-content { width: 100%; max-width: 760px; margin: 0 auto; }
+  html:not(.native) .battle-page .battle-choix { display: grid; grid-template-columns: 1fr 1fr; }
+  html:not(.native) .battle-page .battle-question-texte { font-size: 24px; }
+  html:not(.native) .battle-page .battle-accueil {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+  }
+  html:not(.native) .battle-page .battle-accueil .battle-regles { grid-column: 1 / -1; }
+}

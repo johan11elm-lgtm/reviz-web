@@ -51,6 +51,8 @@ const ProgrammeMatiere = lazy(() => import('./pages/ProgrammeMatiere'))
 const Essai          = lazy(() => import('./pages/Essai'))
 const Avis           = lazy(() => import('./pages/Avis'))
 const Profs          = lazy(() => import('./pages/Profs'))
+const BattleAccueil  = lazy(() => import('./pages/BattleAccueil'))
+const Battle         = lazy(() => import('./pages/Battle'))
 
 // Fallback minimal pendant le chargement
 function LoadingFallback() {
@@ -99,6 +101,8 @@ function AuthRoutes() {
       <Route path="/coach"       element={<PrivateRoute><Coach /></PrivateRoute>} />
       <Route path="/programme"   element={<PrivateRoute><Programme /></PrivateRoute>} />
       <Route path="/programme/:matiere" element={<PrivateRoute><ProgrammeMatiere /></PrivateRoute>} />
+      <Route path="/battle"      element={<PrivateRoute><BattleAccueil /></PrivateRoute>} />
+      <Route path="/battle/:code" element={<PrivateRoute><Battle /></PrivateRoute>} />
       <Route path="*"            element={<NotFound />} />
     </Routes>
     </>

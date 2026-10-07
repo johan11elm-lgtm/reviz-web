@@ -3,7 +3,8 @@ import {
   AURA, CHRONO_MS, MARGE_RESEAU_MS, REVELATION_MS, PAUSE_ROUND_MS, QUESTIONS_PAR_PARTIE,
   genererCode, normaliserCode, nettoyerPrenom, tirerQuestions, nouveauSalon,
   reponseValable, roundTermine, finDuRound, resoudreRound, resoudrePartie,
-  prochaineEtape, partieComptee, appliquerAura,
+  prochaineEtape, partieComptee, appliquerAura, phaseDeJeu, formaterAura, formaterTemps, lienBattle,
+  DECOMPTE_MS,
 } from '../battle'
 
 // Générateur pseudo-aléatoire reproductible
@@ -262,5 +263,57 @@ describe('aura du compte (serveur)', () => {
     expect(appliquerAura(compte, { delta: 10, adversaire: 'f', date }).comptee).toBe(false)
     const demain = appliquerAura(compte, { delta: 10, adversaire: 'f', date: '2026-10-08' })
     expect(demain).toMatchObject({ comptee: true, aura: 60, jour: { parties: 1 } })
+  })
+})
+
+describe('phase affichée', () => {
+  it('salon, puis décompte, question, révélation, annonce du round suivant', () => {
+    expect(phaseDeJeu(null, 0)).toEqual({ type: 'ferme' })
+    expect(phaseDeJeu({ ...salon([]), etat: 'salon' }, 0)).toEqual({ type: 'salon' })
+
+    const s = salon([[null, null]])
+    const d1 = s.rounds[1].debut
+    expect(phaseDeJeu(s, d1 - DECOMPTE_MS)).toEqual({ type: 'annonce', n: 1, depart: d1 })
+    expect(phaseDeJeu(s, d1 + 100)).toEqual({ type: 'question', n: 1, fin: d1 + CHRONO_MS })
+    // chrono écoulé mais marge réseau en cours : la question reste (temps écoulé)
+    expect(phaseDeJeu(s, d1 + CHRONO_MS + 500).type).toBe('question')
+    expect(phaseDeJeu(s, d1 + CHRONO_MS + MARGE_RESEAU_MS)).toEqual({ type: 'revelation', n: 1 })
+
+    // l'hôte a programmé le round 2 : révélation du 1, puis annonce du 2
+    s.round = 2
+    const d2 = d1 + CHRONO_MS + MARGE_RESEAU_MS + REVELATION_MS + PAUSE_ROUND_MS
+    s.rounds[2] = { debut: d2 }
+    expect(phaseDeJeu(s, d2 - PAUSE_ROUND_MS - 1)).toEqual({ type: 'revelation', n: 1 })
+    expect(phaseDeJeu(s, d2 - 100)).toEqual({ type: 'annonce', n: 2, depart: d2 })
+  })
+
+  it('les deux ont répondu : révélation tout de suite', () => {
+    const s = salon([[juste(0, 1200), faux(0)]])
+    expect(phaseDeJeu(s, s.rounds[1].debut + 2100)).toEqual({ type: 'revelation', n: 1 })
+  })
+
+  it('en fin de partie, la dernière révélation reste affichée avant l’écran de fin', () => {
+    const s = { ...salon([[juste(0, 1000), faux(0)]]), etat: 'fin' }
+    const fin = s.rounds[1].debut + 2000
+    expect(phaseDeJeu(s, fin + REVELATION_MS - 1)).toEqual({ type: 'revelation', n: 1 })
+    expect(phaseDeJeu(s, fin + REVELATION_MS)).toEqual({ type: 'fin' })
+    expect(phaseDeJeu({ ...s, etat: 'abandon' }, 0)).toEqual({ type: 'fin' })
+  })
+})
+
+describe('affichage', () => {
+  it('formate l’aura avec un vrai signe moins', () => {
+    expect(formaterAura(20)).toBe('+20 aura')
+    expect(formaterAura(-10)).toBe('−10 aura')
+    expect(formaterAura(0)).toBe('0 aura')
+  })
+
+  it('formate le temps de réponse à la française', () => {
+    expect(formaterTemps(2437)).toBe('2,4 s')
+  })
+
+  it('le lien d’invitation pointe toujours vers le site', () => {
+    expect(lienBattle('K7RM', 'http://localhost:5173')).toBe('http://localhost:5173/battle/K7RM')
+    expect(lienBattle('K7RM', 'capacitor://localhost')).toBe('https://reviz-gamma.vercel.app/battle/K7RM')
   })
 })

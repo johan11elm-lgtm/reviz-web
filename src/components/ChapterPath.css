@@ -263,6 +263,8 @@
 }
 .path-card-formats span { display: inline-flex; align-items: center; gap: 5px; }
 .path-card-formats svg { width: 14px; height: 14px; }
+.path-card-battle { gap: 8px; margin-top: 8px; }
+.path-card-battle svg { width: 16px; height: 16px; }
 /* Sans unités de conteneur (Safari < 16, iOS 15) : fiche centrée sur le chemin */
 @supports not (width: 1cqw) {
   .path-card { --card-room: 0px; }

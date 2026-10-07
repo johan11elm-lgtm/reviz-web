@@ -116,6 +116,11 @@ export function tenirPresence({ db }, code, role) {
   })
 }
 
+/** Le joueur quitte l'écran : il est absent (l'autre gagnera par forfait s'il ne revient pas). */
+export function marquerAbsent({ db }, code, role) {
+  return set(salonRef(db, code, `${role}/present`), false)
+}
+
 /** L'hôte lance la partie : décompte, puis round 1. `maintenant` : horloge serveur. */
 export function lancerPartie({ db }, code, maintenant) {
   return update(salonRef(db, code), { etat: 'jeu', round: 1, 'rounds/1/debut': maintenant + DECOMPTE_MS })
@@ -138,6 +143,17 @@ export function avancer({ db }, code, etape) {
 /** Un joueur constate le départ de l'autre (présence fausse depuis RETOUR_MS). */
 export function declarerAbandon({ db }, code, uidParti) {
   return update(salonRef(db, code), { etat: 'abandon', abandonPar: uidParti })
+}
+
+/**
+ * Revanche : l'hôte ouvre un nouveau salon sur le même chapitre et l'annonce
+ * dans l'ancien, où l'invité le voit et le rejoint.
+ * @returns {Promise<string>} le code du nouveau salon
+ */
+export async function lancerRevanche(ctx, code, salon, { prenom, nbQuestions, random }) {
+  const nouveau = await creerBattle(ctx, { prenom, chapitre: salon.chapitre, nbQuestions, random })
+  await set(salonRef(ctx.db, code, 'revanche'), nouveau)
+  return nouveau
 }
 
 /** Quitter : l'hôte ferme le salon qui attend encore ; sinon on se déclare absent. */

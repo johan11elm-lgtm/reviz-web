@@ -68,14 +68,15 @@ export function uniqueEmail(prefix = 'eleve') {
  * @param {object} opts
  * @param {string} opts.birthDate  format YYYY-MM-DD (pilote le tunnel <15 ans)
  * @param {string} [opts.parentEmail]  requis si <15 ans
+ * @param {string} [opts.prenom='Testeur']
  * @returns l'email du compte créé
  */
-export async function signup(page, { birthDate, parentEmail } = {}) {
+export async function signup(page, { birthDate, parentEmail, prenom = 'Testeur' } = {}) {
   const email = uniqueEmail()
   await page.goto('/inscription')
 
   // Étape prénom
-  await page.getByPlaceholder('Lucas').fill('Testeur')
+  await page.getByPlaceholder('Lucas').fill(prenom)
   await page.getByRole('button', { name: 'Continuer', exact: true }).click()
 
   // Étape date de naissance
@@ -114,12 +115,20 @@ export async function verifyEmailViaEmulator(page, email) {
   await page.request.get(code.oobLink)
 }
 
-/** Vérifie l'email (via émulateur) puis passe l'onboarding (compte majeur). */
-export async function verifyEmailAndOnboard(page, email) {
+/**
+ * Vérifie l'email (via émulateur) puis passe l'onboarding (compte majeur).
+ * La popup « Nouveau : la Battle » s'ouvre alors sur l'accueil : on la ferme,
+ * sauf si la spec veut la tester (garderAnnonce).
+ */
+export async function verifyEmailAndOnboard(page, email, { garderAnnonce = false } = {}) {
   await expect(page).toHaveURL(/verify-email/, { timeout: 15_000 })
   await verifyEmailViaEmulator(page, email)
   await page.getByRole('button', { name: /J'ai confirmé mon email/ }).click()
   await expect(page).toHaveURL(/onboarding/, { timeout: 15_000 })
   await page.getByRole('button', { name: 'Passer' }).click()
   await expect(page).toHaveURL(/\/$/, { timeout: 10_000 })
+  if (!garderAnnonce) {
+    const plusTard = page.getByRole('dialog', { name: 'La Battle' }).getByRole('button', { name: 'Plus tard' })
+    await plusTard.click({ timeout: 5_000 }).catch(() => {})
+  }
 }

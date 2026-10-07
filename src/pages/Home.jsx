@@ -17,6 +17,8 @@ import { computeStreak, computeLevel, computeBadges, XP_PAR_NIVEAU } from '../ut
 import { subjectMascot } from '../utils/subjects';
 import { refreshReminder } from '../services/reminderService';
 import { AchievementToast } from '../components/AchievementToast';
+import { BattleMascot } from '../components/BattleMascot';
+import { BattleAnnonce, annonceBattleVue } from '../components/battle/BattleAnnonce';
 import { FlameIcon, TargetIcon, BookOpenIcon, CheckIcon, CircleIcon, FlashcardsIcon, QuizIcon } from '../components/Icons';
 import './Home.css';
 
@@ -135,6 +137,8 @@ export default function Home() {
   const [allLessons, setAllLessons] = useState(() => loadLessons());
   const [challenges] = useState(() => getWeeklyChallenges());
   const [newBadge, setNewBadge] = useState(null);
+  // Popup « Nouveau : la Battle », une fois par compte (pas en mode essai : il faut un compte pour jouer).
+  const [annonceBattle, setAnnonceBattle] = useState(() => !isGuest && !!currentUser?.uid && !annonceBattleVue(currentUser.uid));
 
   useEffect(() => {
     const onboardedKey = `reviz-onboarded-${currentUser?.uid}`;
@@ -280,11 +284,23 @@ export default function Home() {
   const recentLessons = allLessons.slice(0, 3);
   const programmeClasse = hasProgramme(getUserLevel()) ? getUserLevel().classe : PROGRAMME_FALLBACK;
 
+  const battleCard = !isGuest && (
+    <Link to="/battle" className="rv-card rv-card--link home-programme-card home-battle-card" aria-label="Battle : défier quelqu'un en direct">
+      <BattleMascot pose="garde" size={52} alt="" aria-hidden="true" className="home-programme-mascot" />
+      <div className="home-programme-text">
+        <span className="home-programme-title">Battle</span>
+        <span className="home-programme-sub">Défie quelqu'un en direct sur un chapitre</span>
+      </div>
+      <span className="home-programme-arrow" aria-hidden="true">›</span>
+    </Link>
+  );
+
   return (
     <div className="app home-page">
       {newBadge && (
         <AchievementToast badge={newBadge} onDone={() => setNewBadge(null)} />
       )}
+      {annonceBattle && <BattleAnnonce uid={currentUser.uid} onClose={() => setAnnonceBattle(false)} />}
 
       <UserHeader
         prenom={prenom}
@@ -307,6 +323,7 @@ export default function Home() {
             <div className="home-desk-side">
               {statsCard}
               {challengesCard}
+              {battleCard}
             </div>
           </div>
 
@@ -369,6 +386,8 @@ export default function Home() {
               <span className="home-programme-arrow" aria-hidden="true">›</span>
             </Link>
           )}
+
+          {battleCard}
 
           {lastLesson && (
             <div className="rv-card rv-card--padded home-featured-card">

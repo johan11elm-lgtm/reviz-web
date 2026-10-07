@@ -1,7 +1,8 @@
 import { useEffect, useRef } from 'react';
 import { Mascot } from './Mascot';
-import { CheckIcon, RefreshIcon, LockIcon, StarIcon, BookOpenIcon, FlashcardsIcon, QuizIcon } from './Icons';
+import { CheckIcon, RefreshIcon, LockIcon, StarIcon, BookOpenIcon, FlashcardsIcon, QuizIcon, UsersIcon } from './Icons';
 import { CHAPTER_STATE_LABEL } from '../utils/programme';
+import { QUESTIONS_PAR_PARTIE } from '../utils/battle';
 import './ChapterPath.css';
 
 // Décalage horizontal des étapes, façon sentier qui serpente (en unités de --path-step).
@@ -20,9 +21,10 @@ const PERIODE_LABEL = { T1: '1er trimestre', T2: '2e trimestre', T3: '3e trimest
  * @param {string|null} props.selectedId
  * @param {(id: string|null) => void} props.onSelect
  * @param {(chapter) => void} props.onOpen      ouvrir le chapitre (réviser)
+ * @param {(chapter) => void} [props.onBattle]  lancer une battle sur le chapitre
  * @param {string|null} props.opening           id en cours d'ouverture
  */
-export function ChapterPath({ items, mascot, selectedId, onSelect, onOpen, opening }) {
+export function ChapterPath({ items, mascot, selectedId, onSelect, onOpen, onBattle, opening }) {
   const currentId = items.find(i => i.chapter.pret && i.state !== 'maitrise')?.chapter.id ?? null;
   const groups = [];
   for (const it of items) {
@@ -57,6 +59,7 @@ export function ChapterPath({ items, mascot, selectedId, onSelect, onOpen, openi
                     mascot={mascot}
                     onSelect={onSelect}
                     onOpen={onOpen}
+                    onBattle={onBattle}
                     opening={opening}
                   />
                 );
@@ -76,7 +79,7 @@ function stepIcon(state, pret) {
   return null;
 }
 
-function PathStep({ item, offset, isCurrent, isSelected, mascot, onSelect, onOpen, opening }) {
+function PathStep({ item, offset, isCurrent, isSelected, mascot, onSelect, onOpen, onBattle, opening }) {
   const { chapter, state, dueCards } = item;
   const pret = !!chapter.pret;
   const icon = stepIcon(state, pret);
@@ -117,6 +120,7 @@ function PathStep({ item, offset, isCurrent, isSelected, mascot, onSelect, onOpe
           state={state}
           onClose={() => onSelect(null)}
           onOpen={() => onOpen(chapter)}
+          onBattle={onBattle && chapter.quiz >= QUESTIONS_PAR_PARTIE ? () => onBattle(chapter) : null}
           busy={opening === chapter.id}
         />
       )}
@@ -124,7 +128,7 @@ function PathStep({ item, offset, isCurrent, isSelected, mascot, onSelect, onOpe
   );
 }
 
-function StepCard({ chapter, status, state, onClose, onOpen, busy }) {
+function StepCard({ chapter, status, state, onClose, onOpen, onBattle, busy }) {
   const ref = useRef(null);
   useEffect(() => {
     ref.current?.querySelector('.path-card-cta')?.focus();
@@ -155,6 +159,11 @@ function StepCard({ chapter, status, state, onClose, onOpen, busy }) {
         <span>{cta}</span>
         <span className="rv-btn-cta-arrow" aria-hidden="true">→</span>
       </button>
+      {onBattle && (
+        <button type="button" className="rv-btn-cta rv-btn-cta--full rv-btn-cta--ghost rv-btn-cta--center path-card-battle" onClick={onBattle} disabled={busy}>
+          <UsersIcon /> Lancer une battle
+        </button>
+      )}
     </div>
   );
 }

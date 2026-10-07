@@ -93,6 +93,13 @@
           ".validate": "newData.isString()"
         },
 
+        "revanche": {
+          // Après la partie, l'hôte ouvre un nouveau salon sur le même chapitre ;
+          // l'invité le voit ici et le rejoint.
+          ".write": "auth != null && !data.exists() && data.parent().child('hote/uid').val() === auth.uid && (data.parent().child('etat').val() === 'fin' || data.parent().child('etat').val() === 'abandon')",
+          ".validate": "newData.isString() && newData.val().matches(/^[A-HJ-NP-Z2-9]{4}$/)"
+        },
+
         "$autre": { ".validate": false }
       }
     }
