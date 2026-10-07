@@ -82,7 +82,8 @@
     min-width: 0;
   }
   html:not(.native) .home-page .home-desk .home-progress-card,
-  html:not(.native) .home-page .home-desk .home-challenges-card { margin: 0; }
+  html:not(.native) .home-page .home-desk .home-challenges-card,
+  html:not(.native) .home-page .home-desk .home-battle-card { margin: 0; }
   html:not(.native) .home-page .home-desk .home-challenges-card { flex: 1; }
 
   html:not(.native) .home-page .home-desk-section { display: flex; flex-direction: column; gap: 14px; }
