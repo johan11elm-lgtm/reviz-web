@@ -121,6 +121,7 @@ battles/{code}
 ## 9. Découpage
 
 1. **Moteur** : Realtime Database (émulateur), modèle du salon, règles et leurs tests, `battleService.js` (créer, rejoindre, répondre, avancer), `resoudreRound` et calcul de l'aura testés.
+   **Fait le 2026-10-07.** Règles du jeu pures dans `src/utils/battle.js` (rounds, partie, mort subite, forfait, enchaînement `prochaineEtape`, `appliquerAura` avec plafonds et plancher), 26 tests unitaires. Règles d'accès `database.rules.json` (déclarées dans `firebase.json`, émulateur sur le port 9000). Service `src/services/battleService.js` (contexte `{ db, uid }` injecté) et branchement `src/services/battleConnexion.js` (`VITE_FIREBASE_DATABASE_URL`). `npm run test:emulateur` : 15 tests contre l'émulateur, dont trois parties complètes jouées par deux élèves simulés (victoire 3–2, mort subite, forfait après coupure réseau). Non fait volontairement : le bouton « Suivant » pendant la révélation (5 s fixes pour l'instant), et une borne basse sur le temps de réponse déclaré (un retard réseau ferait refuser des réponses honnêtes).
 2. **Écrans** : salon, question, révélation, fin, route `/battle/:code`, entrées chapitre et Home, chargement à la demande.
 3. **Aura et mascottes** : `api/battle-fin.js`, règles Firestore, aura sur Home et Profil ; génération des six poses de la série b, animation du halo.
 4. **Finitions** : e2e à deux joueurs, iOS, forfait, cron de nettoyage, textes RGPD.

@@ -1,0 +1,100 @@
+{
+  // Réviz — règles Realtime Database : salons de Battle (docs/plan-battle.md).
+  // Tout est fermé sauf battles/{code}. Les deux joueurs lisent le salon ;
+  // chacun n'écrit que sa présence et ses réponses, une seule fois, dans le
+  // temps du chrono ; l'hôte fait avancer la partie. L'aura n'est jamais
+  // écrite ici : api/battle-fin.js la calcule et l'écrit dans Firestore.
+  // Tests : src/services/__tests__/battle.emulator.test.js (npm run test:emulateur).
+  "rules": {
+    "battles": {
+      "$code": {
+        // Lecture : les deux joueurs ; avant l'arrivée d'un invité, tout élève
+        // connecté qui a le code (pour voir le salon et le rejoindre).
+        ".read": "auth != null && (data.child('hote/uid').val() === auth.uid || data.child('invite/uid').val() === auth.uid || (data.child('etat').val() === 'salon' && !data.child('invite').exists()))",
+        // Création par l'hôte sur un code libre, suppression par l'hôte.
+        ".write": "auth != null && $code.matches(/^[A-HJ-NP-Z2-9]{4}$/) && ((!data.exists() && newData.child('hote/uid').val() === auth.uid && newData.child('etat').val() === 'salon' && !newData.child('invite').exists() && !newData.child('round').exists() && !newData.child('rounds').exists() && !newData.child('abandonPar').exists()) || (data.exists() && !newData.exists() && data.child('hote/uid').val() === auth.uid))",
+        ".validate": "newData.hasChildren(['etat', 'hote', 'chapitre', 'questions', 'creeLe'])",
+
+        "etat": {
+          // L'hôte lance la partie (invité présent) puis la termine ; un joueur
+          // constate l'abandon de l'autre (voir abandonPar).
+          ".write": "auth != null && ((data.parent().child('hote/uid').val() === auth.uid && ((data.val() === 'salon' && newData.val() === 'jeu' && data.parent().child('invite/present').val() === true) || (data.val() === 'jeu' && newData.val() === 'fin'))) || ((data.parent().child('hote/uid').val() === auth.uid || data.parent().child('invite/uid').val() === auth.uid) && (data.val() === 'salon' || data.val() === 'jeu') && newData.val() === 'abandon' && newData.parent().child('abandonPar').exists()))",
+          ".validate": "newData.isString() && newData.val().matches(/^(salon|jeu|fin|abandon)$/)"
+        },
+
+        "hote": {
+          "uid": { ".validate": "newData.isString()" },
+          "prenom": { ".validate": "newData.isString() && newData.val().length >= 1 && newData.val().length <= 20" },
+          "present": {
+            ".write": "auth != null && data.parent().child('uid').val() === auth.uid",
+            ".validate": "newData.isBoolean()"
+          },
+          "$autre": { ".validate": false }
+        },
+
+        "invite": {
+          // Une seule place, prise une fois, tant que le salon attend, et pas par l'hôte.
+          ".write": "auth != null && !data.exists() && data.parent().child('etat').val() === 'salon' && data.parent().child('hote/uid').val() !== auth.uid && newData.child('uid').val() === auth.uid",
+          ".validate": "newData.hasChildren(['uid', 'prenom', 'present'])",
+          "uid": { ".validate": "newData.isString()" },
+          "prenom": { ".validate": "newData.isString() && newData.val().length >= 1 && newData.val().length <= 20" },
+          "present": {
+            ".write": "auth != null && data.parent().child('uid').val() === auth.uid",
+            ".validate": "newData.isBoolean()"
+          },
+          "$autre": { ".validate": false }
+        },
+
+        "chapitre": {
+          ".validate": "newData.hasChildren(['classe', 'matiere', 'id'])",
+          "classe": { ".validate": "newData.isString() && newData.val().length <= 20" },
+          "matiere": { ".validate": "newData.isString() && newData.val().length <= 40" },
+          "id": { ".validate": "newData.isString() && newData.val().length <= 120" },
+          "$autre": { ".validate": false }
+        },
+
+        "questions": {
+          "$i": { ".validate": "$i.matches(/^[0-5]$/) && newData.isNumber() && newData.val() >= 0 && newData.val() < 100" }
+        },
+
+        "creeLe": { ".validate": "newData.isNumber() && newData.val() <= now" },
+
+        "round": {
+          // L'hôte passe au round suivant (1, puis +1), jusqu'à la mort subite.
+          ".write": "auth != null && data.parent().child('hote/uid').val() === auth.uid && newData.parent().child('etat').val() === 'jeu' && ((!data.exists() && newData.val() === 1) || (data.exists() && newData.val() === data.val() + 1))",
+          ".validate": "newData.isNumber() && newData.val() >= 1 && newData.val() <= 6"
+        },
+
+        "rounds": {
+          "$n": {
+            ".validate": "$n.matches(/^[1-6]$/)",
+            "debut": {
+              // Fixé une fois par l'hôte, sur l'horloge du serveur, dans un futur proche.
+              ".write": "auth != null && !data.exists() && root.child('battles/' + $code + '/hote/uid').val() === auth.uid && newData.parent().parent().parent().child('etat').val() === 'jeu'",
+              ".validate": "newData.isNumber() && newData.val() >= now - 1000 && newData.val() <= now + 20000"
+            },
+            "reponses": {
+              "$uid": {
+                // Sa propre réponse, une seule fois, pendant le chrono (15 s + 2 s de marge réseau).
+                ".write": "auth != null && auth.uid === $uid && !data.exists() && (root.child('battles/' + $code + '/hote/uid').val() === auth.uid || root.child('battles/' + $code + '/invite/uid').val() === auth.uid) && root.child('battles/' + $code + '/etat').val() === 'jeu' && root.child('battles/' + $code + '/rounds/' + $n + '/debut').exists() && now >= root.child('battles/' + $code + '/rounds/' + $n + '/debut').val() - 1000 && now <= root.child('battles/' + $code + '/rounds/' + $n + '/debut').val() + 17000",
+                ".validate": "newData.hasChildren(['choix', 'ms'])",
+                "choix": { ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 3" },
+                "ms": { ".validate": "newData.isNumber() && newData.val() >= 300 && newData.val() <= 15000" },
+                "$autre": { ".validate": false }
+              }
+            },
+            "$autre": { ".validate": false }
+          }
+        },
+
+        "abandonPar": {
+          // Un joueur constate que l'autre est parti (sa présence est à faux).
+          ".write": "auth != null && !data.exists() && newData.val() !== auth.uid && (data.parent().child('hote/uid').val() === auth.uid || data.parent().child('invite/uid').val() === auth.uid) && ((data.parent().child('hote/uid').val() === newData.val() && data.parent().child('hote/present').val() === false) || (data.parent().child('invite/uid').val() === newData.val() && data.parent().child('invite/present').val() === false)) && newData.parent().child('etat').val() === 'abandon'",
+          ".validate": "newData.isString()"
+        },
+
+        "$autre": { ".validate": false }
+      }
+    }
+  }
+}

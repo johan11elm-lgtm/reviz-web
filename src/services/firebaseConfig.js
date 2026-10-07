@@ -28,7 +28,8 @@ const firebaseConfig = useEmulator
       appId:             import.meta.env.VITE_FIREBASE_APP_ID,
     };
 
-const app = initializeApp(firebaseConfig);
+// Exportée pour les modules chargés à la demande (Realtime Database de la Battle).
+export const app = initializeApp(firebaseConfig);
 
 // App native (Capacitor) : getAuth() échoue sous l'origine capacitor:// —
 // init explicite avec persistance IndexedDB (recommandation Firebase).

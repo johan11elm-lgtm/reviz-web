@@ -13,6 +13,7 @@
     "test:coverage": "vitest run --coverage",
     "test:watch": "vitest",
     "test:e2e": "playwright test",
+    "test:emulateur": "bash scripts/test-emulateur.sh",
     "ios:live": "bash scripts/ios-live-reload.sh on && vite --mode ios --port ${REVIZ_DEV_PORT:-5173} --strictPort",
     "ios:live:off": "bash scripts/ios-live-reload.sh off"
   },

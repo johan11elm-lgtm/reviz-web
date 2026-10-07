@@ -35,7 +35,8 @@ export default defineConfig(({ mode }) => ({
     globals: true,
     setupFiles: ['./src/test/setup.js'],
     css: false,
-    exclude: ['node_modules', 'dist', 'e2e', 'ios'],
+    // *.emulator.test.js : contre l'émulateur Firebase (npm run test:emulateur)
+    exclude: ['node_modules', 'dist', 'e2e', 'ios', '**/*.emulator.test.js'],
     coverage: {
       provider: 'v8',
       reporter: ['text', 'lcov'],
