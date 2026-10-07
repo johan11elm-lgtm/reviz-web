@@ -1,316 +1,358 @@
 {
   "classe": "5ème",
   "matiere": "Technologie",
-  "programme": "Technologie cycle 4 (BO spécial n°11 du 26/11/2015, ajusté BO n°31 du 30/07/2020) — partie traitée en 5e",
+  "programme": "Technologie cycle 4 (BO n°9 du 29/02/2024), repères de 5e, applicable depuis la rentrée 2024",
   "modele": "claude-opus-5-5 (abonnement)",
-  "genereLe": "2026-10-05",
+  "genereLe": "2026-10-07",
   "relu": false,
   "chapitres": [
     {
-      "id": "objet-technique-et-besoin",
-      "titre": "L'objet technique et le besoin",
+      "id": "objets-techniques-usages-et-evolution",
+      "titre": "Les objets techniques : usages et évolution",
       "ordre": 1,
       "periode": "T1",
       "notions": [
-        "Définir un objet technique et le distinguer d'un objet naturel",
         "Identifier le besoin auquel répond un objet technique",
-        "Formuler la fonction d'usage d'un objet",
-        "Distinguer fonction d'usage et fonction d'estime",
-        "Utiliser le diagramme « bête à cornes » pour exprimer le besoin"
+        "Distinguer la fonction technique d'un objet et le principe technique qui permet de la réaliser",
+        "Comparer plusieurs principes techniques qui réalisent une même fonction technique",
+        "Classer des objets en familles et en lignées",
+        "Distinguer une invention d'une innovation à partir d'exemples datés",
+        "Repérer ce qui fait évoluer les besoins et les objets : invention, innovation, développement durable",
+        "Collecter, trier et analyser des données sur des objets d'une même famille (tableau, frise chronologique)"
       ],
       "motsCles": [
         "objet technique",
-        "objet naturel",
         "besoin",
-        "fonction d'usage",
-        "fonction d'estime",
-        "utilisateur",
-        "bête à cornes",
-        "matière d'œuvre"
+        "fonction technique",
+        "principe technique",
+        "famille d'objets",
+        "lignée d'objets",
+        "invention",
+        "innovation",
+        "évolution des besoins",
+        "développement durable",
+        "frise chronologique",
+        "données"
       ],
-      "reference": "Objet technique : objet fabriqué par l'être humain pour répondre à un besoin (ex. une trottinette, une lampe de bureau).\nObjet naturel : objet qui existe dans la nature sans intervention humaine (ex. un caillou, une branche).\nBesoin : nécessité ou désir éprouvé par un utilisateur (se déplacer, s'éclairer, communiquer, se nourrir…).\nUn même besoin peut être satisfait par plusieurs objets différents (se déplacer : vélo, trottinette, bus).\nFonction d'usage : ce à quoi sert l'objet, son utilité principale. Elle s'exprime par un verbe à l'infinitif (ex. lampe de poche : éclairer).\nFonction d'estime : ce qui rend l'objet agréable ou désirable pour l'utilisateur (couleur, forme, marque, matière), sans changer son utilité.\nExemple : deux montres ont la même fonction d'usage (indiquer l'heure) mais des fonctions d'estime différentes (design, marque).\nDiagramme « bête à cornes » : outil qui exprime le besoin en répondant à trois questions.\nÀ qui le produit rend-il service ? (l'utilisateur)\nSur quoi agit-il ? (la matière d'œuvre, ce sur quoi l'objet agit : papier, cheveux, aliments…)\nDans quel but ? (la fonction d'usage, formulée avec un verbe).\nExemple : sèche-cheveux → rend service à l'utilisateur, agit sur les cheveux, dans le but de sécher les cheveux.\nMéthode attendue : à partir d'un objet du quotidien, identifier le besoin, formuler la fonction d'usage et compléter une bête à cornes."
+      "reference": "Objet technique : objet fabriqué par l'être humain pour répondre à un besoin (ex. trottinette, lampe de poche, montre connectée).\nBesoin : nécessité ou envie ressentie par une personne : se déplacer, s'éclairer, communiquer, écouter de la musique. Un même besoin peut être satisfait par plusieurs objets.\nFonction technique : action que doit réaliser l'objet ou une de ses parties pour répondre au besoin (éclairer, mesurer le temps, freiner). Elle s'exprime par un verbe à l'infinitif.\nPrincipe technique : manière dont la fonction est réalisée, phénomène utilisé. Pour éclairer : brûler une mèche (bougie), chauffer un filament (lampe à incandescence), faire passer un courant dans une LED.\nComparer des principes pour la fonction « mesurer le temps » : sablier (écoulement du sable), horloge à balancier (oscillation du balancier), montre à quartz (vibration d'un cristal de quartz).\nFamille d'objets : objets qui répondent au même besoin, quel que soit leur principe. Pour écouter de la musique : phonographe, tourne-disque, baladeur à cassette, lecteur CD, smartphone.\nLignée d'objets : objets d'une même famille qui utilisent le même principe technique et se perfectionnent au fil du temps. Lecture d'un sillon gravé : phonographe (1877) puis tourne-disque pour vinyles.\nInvention : création d'une solution technique nouvelle qui n'existait pas (ex. le téléphone, breveté par Graham Bell en 1876).\nInnovation : invention ou amélioration mise sur le marché et adoptée par les utilisateurs (ex. le baladeur Walkman de Sony en 1979 rend la musique transportable).\nLes objets évoluent avec les besoins (mobilité, confort, sécurité), les progrès techniques (nouveaux matériaux, miniaturisation) et le développement durable : peu économes, les lampes à incandescence ont été retirées peu à peu de la vente dans l'Union européenne entre 2009 et 2012.\nCollecter des données : relever pour chaque objet sa date, son principe, sa masse, son prix, l'énergie utilisée.\nTrier et analyser : ranger ces données dans un tableau ou sur une frise chronologique pour repérer les évolutions (plus léger, plus petit, plus de fonctions).\nMéthode attendue : pour une fonction technique donnée, comparer les principes techniques de plusieurs objets, puis les ranger en famille et en lignées sur une frise chronologique datée."
     },
     {
-      "id": "fonctions-techniques-et-solutions-techniques",
-      "titre": "Fonctions techniques et solutions techniques",
+      "id": "objet-technique-dans-son-environnement",
+      "titre": "L'objet technique, ses utilisateurs et son environnement",
       "ordre": 2,
       "periode": "T1",
       "notions": [
-        "Définir une fonction technique",
-        "Associer une fonction technique à une ou plusieurs solutions techniques",
-        "Comparer des solutions techniques différentes pour une même fonction",
-        "Lire et compléter un diagramme FAST simplifié",
-        "Identifier les éléments d'un objet technique et leur rôle"
+        "Faire la liste des interacteurs extérieurs d'un objet : usagers, données, autres objets, éléments de l'environnement",
+        "Représenter les relations entre un objet et ses interacteurs par un schéma",
+        "Repérer et expliquer un choix de conception lié à l'ergonomie",
+        "Repérer et expliquer un choix de conception lié à la sécurité des utilisateurs",
+        "Repérer et expliquer un choix de conception lié au développement durable",
+        "Distinguer un croquis d'un schéma et choisir le mode de représentation adapté"
       ],
       "motsCles": [
-        "fonction technique",
-        "solution technique",
-        "diagramme FAST",
-        "composant",
-        "pièce",
-        "assemblage",
-        "guidage",
-        "liaison"
+        "interacteur",
+        "usager",
+        "données",
+        "environnement",
+        "ergonomie",
+        "sécurité",
+        "développement durable",
+        "choix de conception",
+        "mode de représentation",
+        "croquis",
+        "schéma"
       ],
-      "reference": "Fonction technique : action qu'une partie de l'objet doit réaliser pour que l'objet assure sa fonction d'usage. Elle s'exprime par un verbe à l'infinitif (ex. « guider la roue en rotation »).\nSolution technique : moyen concret (pièce, composant, matériau, procédé) choisi pour réaliser une fonction technique.\nExemple vélo : fonction d'usage « déplacer une personne » ; fonction technique « transmettre le mouvement des pédales à la roue » ; solution technique : chaîne et pignons.\nUne même fonction technique peut être réalisée par plusieurs solutions techniques (freiner : frein à patins, frein à disque).\nExemple lampe de poche : alimenter en énergie → piles ; éclairer → ampoule ou LED ; commander l'allumage → interrupteur.\nAssembler deux pièces : vis, clou, colle, rivet, emboîtement (clipsage), soudure.\nGuider en rotation : axe et roulement ; guider en translation : glissière, rail.\nDiagramme FAST (Function Analysis System Technique) : diagramme qui part de la fonction d'usage, la décompose en fonctions techniques et associe à chacune sa solution technique.\nIl se lit de gauche à droite en répondant à « Comment ? » et de droite à gauche en répondant à « Pourquoi ? ».\nLes solutions techniques sont choisies selon des critères : coût, résistance, facilité de fabrication, esthétique, sécurité.\nComposant : élément d'un objet qui réalise une fonction précise (pile, interrupteur, moteur) ; pièce : élément fabriqué en un seul morceau.\nMéthode attendue : observer un objet, repérer ses éléments, nommer la fonction technique de chacun et compléter un FAST simplifié."
+      "reference": "Interacteur : élément extérieur à l'objet avec lequel il est en relation pendant son utilisation.\nQuatre sortes d'interacteurs : les usagers (utilisateur, entourage), les données (informations reçues ou envoyées), les autres objets (chargeur, smartphone, réseau) et les éléments de l'environnement (air, eau, sol, température, lumière).\nExemple, la trottinette électrique : le conducteur, les piétons et les autres usagers de la route ; le sol et la pluie ; le chargeur et la prise électrique ; les données affichées (vitesse, niveau de batterie) ou échangées avec une application.\nExemple, la montre connectée : le poignet de l'utilisateur, la sueur et l'eau, le smartphone avec lequel elle échange des données, le signal des satellites GPS.\nPour faire la liste, on se demande : qui utilise l'objet ? Avec quoi est-il en contact ? Quelles informations reçoit-il ou envoie-t-il ? Dans quel milieu fonctionne-t-il ?\nErgonomie : adaptation de l'objet à l'utilisateur pour qu'il soit confortable et facile à utiliser (poignées antidérapantes, guidon réglable en hauteur, écran lisible, bouton facile à atteindre).\nSécurité : choix qui protègent l'utilisateur et les autres (freins avant et arrière, feux, avertisseur sonore). En France, une trottinette électrique est bridée par construction à 25 km/h.\nDéveloppement durable : répondre aux besoins d'aujourd'hui sans empêcher les générations futures de répondre aux leurs.\nChoix de conception liés au développement durable : batterie remplaçable, pièces vissées plutôt que collées pour pouvoir réparer, matériaux recyclables, mode veille qui consomme peu d'énergie.\nCroquis : dessin rapide à main levée, sans instruments, pour montrer une forme ou une idée.\nSchéma : représentation simplifiée, avec des traits et des symboles, qui montre un fonctionnement ou des liaisons (schéma électrique, schéma des interacteurs avec l'objet au centre relié à chaque interacteur).\nMéthode attendue : placer l'objet au centre d'un schéma, le relier à tous ses interacteurs, puis expliquer pour chacun un choix de conception lié à l'ergonomie, à la sécurité ou au développement durable."
     },
     {
-      "id": "evolution-des-objets-techniques",
-      "titre": "L'évolution des objets techniques",
+      "id": "choisir-un-objet-materiaux-energie-cycle-de-vie",
+      "titre": "Choisir un objet : matériaux, énergie et cycle de vie",
       "ordre": 3,
       "periode": "T1",
       "notions": [
-        "Situer des objets techniques dans le temps sur une frise chronologique",
-        "Repérer ce qui change d'un modèle à l'autre : principe, énergie, matériaux, forme",
-        "Expliquer les raisons d'une évolution : besoin, progrès technique, contraintes, mode",
-        "Distinguer amélioration, invention et innovation",
-        "Constituer une lignée d'objets répondant au même besoin"
+        "Repérer pour un objet ses matériaux, sa source et ses formes d'énergie, et s'il traite de l'information",
+        "Citer les étapes du cycle de vie d'un objet et repérer celles qui dépendent des choix de matériaux et d'énergie",
+        "Retrouver une information dans une notice ou une documentation technique",
+        "Lire une étiquette énergie et un indice de réparabilité ou de durabilité",
+        "Mesurer et comparer une performance d'un objet en suivant un protocole fourni",
+        "Choisir un objet parmi plusieurs propositions et justifier ce choix avec des critères"
       ],
       "motsCles": [
-        "lignée d'objets",
-        "évolution",
-        "frise chronologique",
-        "progrès technique",
-        "invention",
-        "innovation",
-        "principe technique",
-        "famille d'objets"
+        "source d'énergie",
+        "forme d'énergie",
+        "cycle de vie",
+        "matière première",
+        "notice",
+        "documentation technique",
+        "étiquette énergie",
+        "indice de réparabilité",
+        "indice de durabilité",
+        "performance",
+        "protocole",
+        "critère de choix"
       ],
-      "reference": "Les objets techniques évoluent dans le temps pour mieux répondre au besoin, profiter de nouvelles techniques ou suivre la mode.\nLignée d'objets : ensemble d'objets ayant la même fonction d'usage et le même principe de fonctionnement, qui se sont succédé dans le temps.\nFamille d'objets : ensemble d'objets ayant la même fonction d'usage mais des principes différents (ex. pour s'éclairer : bougie, lampe à huile, ampoule).\nExemple de famille pour s'éclairer : bougie, lampe à huile, lampe à incandescence (Edison, 1879), lampe à LED : même usage, principes différents.\nExemple de lignée pour se déplacer : draisienne (1817) → vélocipède à pédales sur la roue avant (années 1860) → bicyclette à chaîne (années 1880) ; le vélo à assistance électrique y ajoute un moteur.\nExemple pour communiquer : télégraphe → téléphone fixe (Bell, 1876) → téléphone mobile → smartphone.\nCe qui évolue : le principe technique, la source d'énergie, les matériaux, la forme et la taille, le coût, l'esthétique.\nCauses d'évolution : nouveaux besoins, progrès scientifiques et techniques, nouveaux matériaux, contraintes de sécurité ou d'environnement, mode.\nInvention : création d'un objet ou d'un principe nouveau.\nInnovation : invention ou amélioration réellement mise sur le marché et adoptée par les utilisateurs.\nFrise chronologique : axe du temps gradué sur lequel on place les objets selon leur date d'apparition.\nMéthode attendue : placer des objets sur une frise et comparer deux modèles en indiquant ce qui a changé et pourquoi."
+      "reference": "Source d'énergie : origine de l'énergie dans la nature, renouvelable (soleil, vent, eau, bois) ou non renouvelable (pétrole, gaz, charbon, uranium).\nForme d'énergie : manière dont l'énergie se présente : électrique, cinétique (mouvement), thermique (chaleur), lumineuse…\nExemple, la trottinette électrique : matériaux (aluminium, caoutchouc, plastique) ; énergie électrique du secteur stockée dans une batterie puis transformée en mouvement ; information traitée par une carte électronique qui affiche la vitesse.\nCycle de vie : extraction des matières premières, traitement (fabrication des matériaux), fabrication des pièces, assemblage, utilisation, fin de vie (réemploi, recyclage, élimination). Le transport intervient entre les étapes.\nLe choix des matériaux pèse sur l'extraction, la fabrication et la fin de vie ; le choix de l'énergie pèse sur l'utilisation. Pour un smartphone, la fabrication est la principale source d'impacts (ADEME, Arcep).\nNotice : document pour l'utilisateur : pièces, consignes de sécurité, mise en service, utilisation, entretien, pannes courantes, caractéristiques techniques, garantie, recyclage.\nDocumentation technique : informations détaillées (caractéristiques, schémas, plans) pour installer ou réparer.\nÉtiquette énergie (indice énergétique) : depuis 2021 pour l'électroménager courant et les lampes, classes de A (la plus économe, vert) à G (la moins économe, rouge) et consommation en kWh ; un QR code renvoie à la base européenne EPREL.\nIndice de réparabilité : note sur 10 affichée depuis 2021 (ordinateur portable, lave-vaisselle, aspirateur…).\nIndice de durabilité : note sur 10 qui ajoute la fiabilité ; il remplace l'indice de réparabilité pour les téléviseurs (janvier 2025) et les lave-linge (avril 2025). Depuis juin 2025, l'étiquette énergie des smartphones et tablettes indique une classe de réparabilité de A à E.\nPerformance : grandeur mesurable (vitesse, autonomie, temps de charge). Un robot parcourt 2 m en 4 s : vitesse = 2 ÷ 4 = 0,5 m/s.\nCritères de choix : réponse au besoin, prix, performances, efficacité énergétique, qualité, durabilité, recyclabilité.\nMéthode attendue : pour choisir entre plusieurs objets qui répondent au même besoin, relever les critères utiles (étiquette énergie, indice de réparabilité ou de durabilité, performance mesurée, prix), les comparer dans un tableau et justifier son choix."
     },
     {
-      "id": "familles-de-materiaux",
-      "titre": "Les familles de matériaux",
+      "id": "fichiers-et-donnees-numeriques",
+      "titre": "Les données numériques : fichiers, formats et tailles",
       "ordre": 4,
       "periode": "T1",
       "notions": [
-        "Distinguer matière première, matériau et produit fini",
-        "Classer les matériaux en grandes familles",
-        "Identifier l'origine d'un matériau : végétale, animale, minérale, fossile",
-        "Reconnaître les matériaux d'un objet du quotidien",
-        "Distinguer métal pur et alliage"
+        "Décrire le rôle d'un système d'information dans le partage d'information",
+        "Classer, stocker et retrouver des fichiers dans une arborescence de dossiers",
+        "Reconnaître le type d'un fichier à son extension et expliquer les droits de lecture et d'écriture",
+        "Convertir des tailles de fichiers entre octet, ko, Mo, Go et To",
+        "Donner l'ordre de grandeur de la taille d'un texte, d'une image, d'un son et d'une vidéo",
+        "Décrire des objets sous forme de données : objet, descripteur, collection, type et format"
       ],
       "motsCles": [
-        "matière première",
-        "matériau",
-        "famille de matériaux",
-        "métal",
-        "alliage",
-        "matière plastique",
-        "matériau organique",
-        "céramique",
-        "composite",
-        "origine"
+        "système d'information",
+        "fichier",
+        "dossier",
+        "arborescence",
+        "extension",
+        "format",
+        "droits de lecture et d'écriture",
+        "bit",
+        "octet",
+        "descripteur",
+        "collection",
+        "CSV"
       ],
-      "reference": "Matière première : matière prélevée dans la nature avant transformation (minerai de fer, bois d'un arbre, pétrole, sable).\nMatériau : matière transformée et prête à être utilisée pour fabriquer un objet (planche, tôle d'acier, granulés de plastique).\nOrigine des matériaux : végétale (bois, coton), animale (cuir, laine), minérale (métaux, sable, argile), fossile (pétrole pour les plastiques).\nFamille des métaux : fer, cuivre, aluminium, zinc, or.\nAlliage : mélange d'un métal avec un ou plusieurs autres éléments. Acier = fer + carbone ; laiton = cuivre + zinc ; bronze = cuivre + étain.\nFamille des matières plastiques : fabriquées le plus souvent à partir du pétrole (PVC, PET, polystyrène, ABS) ; certaines sont d'origine végétale (PLA, fabriqué à partir d'amidon de maïs).\nFamille des matériaux organiques : d'origine vivante, végétale ou animale (bois, papier, carton, liège, cuir, laine, coton).\nFamille des céramiques et verres : obtenues à partir de minéraux cuits à haute température (porcelaine, terre cuite, brique, verre).\nFamille des matériaux composites : association de plusieurs matériaux pour cumuler leurs qualités (fibre de verre et résine, béton armé, carton ondulé multicouche).\nUn objet est souvent composé de plusieurs matériaux (ex. un crayon : bois, graphite, peinture).\nLe bois est un matériau renouvelable s'il provient de forêts gérées ; les métaux et le verre se recyclent très bien.\nMéthode attendue : repérer les matériaux d'un objet, les classer par famille dans un tableau et indiquer leur origine."
+      "reference": "Système d'information : ensemble organisé de personnes, de matériels, de logiciels et de données qui permet de collecter, stocker, traiter et partager l'information (ex. l'ENT du collège : notes, emploi du temps, messagerie).\nFichier : ensemble de données enregistrées sous un nom (expose.odt). Dossier : regroupe des fichiers et d'autres dossiers.\nArborescence : organisation en arbre des dossiers et sous-dossiers. Le chemin d'accès indique où se trouve un fichier : Documents/Techno/expose.odt.\nExtension : lettres après le point, qui indiquent le format du fichier : .txt (texte brut), .odt ou .docx (traitement de texte), .jpg ou .png (image), .mp3 (son), .mp4 (vidéo), .ods ou .xlsx (tableur), .csv (données en tableau).\nCSV : fichier texte où les valeurs d'un tableau sont séparées par des virgules ou des points-virgules ; il s'ouvre avec un tableur.\nDroits : lecture (ouvrir, consulter) et écriture (modifier, supprimer). Dans un dossier en lecture seule, on consulte sans pouvoir modifier.\nBit : plus petite unité d'information, il vaut 0 ou 1. Octet : 8 bits.\nMultiples (système international) : 1 ko = 1 000 octets ; 1 Mo = 1 000 ko ; 1 Go = 1 000 Mo ; 1 To = 1 000 Go. À ne pas confondre : 1 Kio (kibioctet) = 1 024 octets.\nOrdres de grandeur : une page de texte brut, quelques ko ; une photo de smartphone, 2 à 5 Mo ; une chanson MP3 de 4 minutes, environ 4 Mo ; une minute de vidéo HD, de l'ordre de 100 Mo ; un film HD de 2 heures, quelques Go.\nCalcul : une clé USB de 32 Go = 32 000 Mo peut stocker 32 000 ÷ 4 = 8 000 photos de 4 Mo.\nDécrire des objets par des données : chaque objet (une trottinette) est décrit par des descripteurs (couleur, vitesse maximale, pliable). L'ensemble des objets forme une collection, souvent un tableau : une ligne par objet, une colonne par descripteur.\nType d'une donnée : chaîne de caractères (couleur : « noir »), nombre (vitesse maximale : 25), booléen (pliable : vrai ou faux). Le format précise l'écriture (unité km/h, date jj/mm/aaaa).\nMéthode attendue : ranger des fichiers dans une arborescence adaptée, reconnaître leur type à l'extension et convertir leur taille avec 1 ko = 1 000 octets, 1 Mo = 1 000 ko et 1 Go = 1 000 Mo."
     },
     {
-      "id": "proprietes-et-choix-des-materiaux",
-      "titre": "Les propriétés des matériaux et leur choix",
+      "id": "securite-et-respect-dans-le-monde-numerique",
+      "titre": "Se protéger et respecter les autres dans le monde numérique",
       "ordre": 5,
       "periode": "T2",
       "notions": [
-        "Identifier les principales propriétés d'un matériau",
-        "Réaliser ou interpréter un test simple de propriété",
-        "Distinguer conducteur et isolant électrique ou thermique",
-        "Justifier le choix d'un matériau pour une pièce",
-        "Prendre en compte le recyclage et l'impact environnemental"
+        "Distinguer identification et authentification",
+        "Créer un mot de passe robuste et appliquer les règles de base pour sécuriser son environnement numérique",
+        "Identifier ses données personnelles et les traces numériques que l'on laisse",
+        "Respecter la propriété intellectuelle et le droit à l'image",
+        "Reconnaître les dérives : cyberviolence, atteinte à la vie privée, usurpation d'identité",
+        "Expliquer la responsabilité de chacun et savoir réagir face à une dérive"
       ],
       "motsCles": [
-        "propriété",
-        "dureté",
-        "élasticité",
-        "rigidité",
-        "conducteur",
-        "isolant",
-        "masse volumique",
-        "corrosion",
-        "recyclable",
-        "test"
+        "cybersécurité",
+        "identifiant",
+        "identification",
+        "authentification",
+        "mot de passe",
+        "données personnelles",
+        "traces numériques",
+        "vie privée",
+        "propriété intellectuelle",
+        "droit d'auteur",
+        "cyberviolence",
+        "usurpation d'identité"
       ],
-      "reference": "Propriété d'un matériau : caractéristique qui décrit son comportement (sa façon de réagir).\nDureté : capacité à résister à la rayure ou à l'enfoncement (test : rayer avec une pointe).\nÉlasticité : capacité à se déformer puis à reprendre sa forme initiale (ex. caoutchouc).\nRigidité : capacité à ne pas se déformer sous un effort (ex. acier, contreplaqué).\nConductivité électrique : capacité à laisser passer le courant ; conducteurs : cuivre, aluminium ; isolants : plastique, bois sec, verre.\nConductivité thermique : capacité à laisser passer la chaleur ; les métaux conduisent bien, le bois et le polystyrène isolent.\nMasse volumique : masse d'un matériau par unité de volume ; ρ = m ÷ V. Ex. eau 1 g/cm³ ; aluminium environ 2,7 g/cm³ ; acier environ 7,8 g/cm³.\nUn matériau de masse volumique inférieure à 1 g/cm³ flotte sur l'eau (ex. le liège, la plupart des bois).\nRésistance à la corrosion : capacité à ne pas se dégrader au contact de l'air ou de l'eau ; l'acier ordinaire rouille, l'aluminium et l'acier inoxydable résistent.\nPropriétés d'aspect : couleur, transparence, toucher.\nChoix d'un matériau : on compare les propriétés des matériaux avec les contraintes de la pièce (résistance, masse, coût, aspect, sécurité).\nCritères environnementaux : matériau recyclable, renouvelable, peu énergivore à produire, local.\nExemple : une casserole a un fond en métal (bon conducteur thermique) et un manche en bois ou en plastique (isolant thermique).\nMéthode attendue : mener un test de propriété, noter les résultats dans un tableau et justifier un choix de matériau."
+      "reference": "Cybersécurité : règles et moyens qui protègent les appareils, les comptes et les données contre les attaques et les usages malveillants.\nIdentification : dire qui on est en donnant son identifiant (nom d'utilisateur, adresse e-mail).\nAuthentification : prouver qu'on est bien cette personne, avec un mot de passe, un code PIN ou une empreinte digitale.\nMot de passe robuste : la CNIL (2022) recommande au moins 12 caractères mêlant majuscules, minuscules, chiffres et caractères spéciaux, ou une phrase de passe d'au moins 7 mots.\nUn mot de passe différent pour chaque compte, jamais partagé, sans prénom ni date de naissance.\nAutres règles : verrouiller sa session ou se déconnecter sur un ordinateur partagé, faire les mises à jour, utiliser un antivirus, sauvegarder ses fichiers.\nDonnées personnelles : informations qui identifient une personne directement (nom, photo) ou indirectement (numéro de téléphone, adresse). En Europe, le RGPD les protège depuis 2018.\nTraces numériques : informations laissées, volontairement ou non, en utilisant le numérique (publications, commentaires, recherches, localisation). Elles peuvent rester longtemps et être retrouvées.\nVie privée et droit à l'image : on ne publie pas la photo d'une personne sans son accord.\nPropriété intellectuelle : droits de l'auteur sur ses créations (texte, image, musique, vidéo, logiciel). On ne copie pas et on ne diffuse pas une œuvre sans autorisation ; on cite toujours la source (auteur, site).\nCyberviolence : violence exercée avec des outils numériques : insultes, moqueries ou rumeurs répétées, diffusion de photos humiliantes (cyberharcèlement).\nUsurpation d'identité : se faire passer pour quelqu'un, par exemple en créant un faux compte à son nom. C'est un délit puni par la loi.\nResponsabilité : partager, « liker » ou commenter un contenu blessant, c'est participer. Face à une dérive : ne pas répondre, garder des preuves (captures d'écran), signaler le contenu, en parler à un adulte, appeler le 3018 (gratuit, anonyme, numéro unique contre le harcèlement depuis 2024).\nMéthode attendue : face à une situation numérique, repérer la règle de sécurité ou de respect qui s'applique (mot de passe, données personnelles, droit d'auteur, droit à l'image) et la conduite à tenir en cas de dérive."
     },
     {
-      "id": "representer-un-objet",
-      "titre": "Représenter un objet : croquis, schéma et modélisation 3D",
+      "id": "chaine-d-energie-decouverte",
+      "titre": "La chaîne d'énergie d'un objet",
       "ordre": 6,
       "periode": "T2",
       "notions": [
-        "Réaliser un croquis à main levée pour exprimer une idée",
-        "Distinguer croquis, schéma et dessin technique",
-        "Lire un schéma avec des symboles normalisés",
-        "Utiliser un logiciel de CAO pour modéliser une pièce simple",
-        "Exploiter une vue en perspective et des vues de face, de dessus, de côté"
-      ],
-      "motsCles": [
-        "croquis",
-        "schéma",
-        "dessin technique",
-        "perspective",
-        "vue de face",
-        "CAO",
-        "modélisation 3D",
-        "maquette numérique",
-        "cotation",
-        "symbole normalisé"
-      ],
-      "reference": "Croquis : dessin rapide réalisé à main levée, sans instrument, pour exprimer une idée ou décrire un objet ; il peut être annoté.\nSchéma : représentation simplifiée qui montre le fonctionnement ou l'organisation d'un objet, souvent avec des symboles normalisés.\nSymbole normalisé : dessin conventionnel compris par tous (ex. symboles de la pile, de la lampe, de l'interrupteur dans un schéma électrique).\nDessin technique : représentation précise et à l'échelle, réalisée avec des instruments ou un logiciel, qui permet de fabriquer l'objet.\nCotation : indication des dimensions sur un dessin, en millimètres en dessin technique.\nPerspective : représentation en 3D qui donne une idée de l'objet en volume sur une feuille.\nVues : vue de face, vue de dessus, vue de gauche ; chacune montre l'objet depuis une seule direction.\nCAO (conception assistée par ordinateur) : utilisation d'un logiciel pour dessiner et modéliser un objet en 3D.\nModélisation 3D : construction d'une maquette numérique de l'objet ; méthode courante : dessiner une esquisse 2D puis l'extruder (lui donner une épaisseur).\nMaquette numérique : modèle virtuel de l'objet qui permet de visualiser, modifier et tester avant de fabriquer.\nLe fichier 3D peut être envoyé à une imprimante 3D ou à une machine de découpe.\nMéthode attendue : réaliser un croquis annoté d'une solution, puis modéliser une pièce simple en CAO en respectant des dimensions données."
-    },
-    {
-      "id": "fabriquer-un-prototype",
-      "titre": "Fabriquer un prototype : procédés et sécurité",
-      "ordre": 7,
-      "periode": "T2",
-      "notions": [
-        "Définir un prototype et son rôle dans un projet",
-        "Citer des procédés de fabrication courants au collège",
-        "Associer un procédé à un matériau et à une forme de pièce",
-        "Respecter les règles de sécurité à l'atelier",
-        "Suivre une gamme de fabrication et contrôler une pièce"
-      ],
-      "motsCles": [
-        "prototype",
-        "procédé de fabrication",
-        "découpe",
-        "perçage",
-        "pliage",
-        "thermoformage",
-        "impression 3D",
-        "gamme de fabrication",
-        "sécurité",
-        "contrôle"
-      ],
-      "reference": "Prototype : premier exemplaire d'un objet, fabriqué pour tester et valider une solution avant la production.\nProcédé de fabrication : technique utilisée pour transformer un matériau en pièce.\nEnlèvement de matière : découpe (scie, découpe laser), perçage (perceuse), limage, ponçage.\nDéformation : pliage (plieuse à chaud pour le plastique), thermoformage (une feuille de plastique chauffée épouse la forme d'un moule).\nAjout de matière : impression 3D, qui dépose un fil de plastique fondu (souvent du PLA) couche par couche.\nAssemblage : vissage, collage, rivetage, emboîtement.\nLe choix du procédé dépend du matériau, de la forme voulue, du nombre de pièces et des machines disponibles.\nGamme de fabrication : document qui liste dans l'ordre les étapes de fabrication, avec pour chacune la machine, l'outil et le contrôle à faire.\nContrôle : vérifier que la pièce respecte les dimensions et l'aspect prévus (règle, réglet, pied à coulisse, gabarit).\nRègles de sécurité : porter des lunettes de protection, attacher les cheveux longs, ne jamais laisser une machine en marche sans surveillance, utiliser les protections de la machine, ranger le poste.\nLes pictogrammes de sécurité indiquent les obligations (fond bleu), les interdictions (cercle rouge barré) et les dangers (triangle jaune).\nMéthode attendue : choisir un procédé adapté, suivre une gamme de fabrication en sécurité et contrôler la pièce obtenue."
-    },
-    {
-      "id": "sources-et-formes-d-energie",
-      "titre": "Sources et formes d'énergie",
-      "ordre": 8,
-      "periode": "T2",
-      "notions": [
-        "Distinguer source d'énergie et forme d'énergie",
-        "Classer les sources d'énergie en renouvelables et non renouvelables",
-        "Identifier la forme d'énergie utilisée par un objet",
-        "Repérer une conversion d'énergie dans un objet",
-        "Associer l'unité d'énergie (joule, kWh) et de puissance (watt)"
-      ],
-      "motsCles": [
-        "énergie",
-        "source d'énergie",
-        "forme d'énergie",
-        "renouvelable",
-        "non renouvelable",
-        "conversion",
-        "énergie électrique",
-        "énergie mécanique",
-        "watt",
-        "kilowattheure"
-      ],
-      "reference": "Énergie : ce qui permet à un objet de fonctionner, de produire un mouvement, de la chaleur ou de la lumière.\nSource d'énergie : ressource naturelle d'où l'on tire l'énergie (soleil, vent, eau, pétrole, gaz, charbon, uranium, bois).\nÉnergie renouvelable : source qui se renouvelle rapidement à l'échelle humaine (solaire, éolienne, hydraulique, biomasse, géothermie).\nÉnergie non renouvelable : source en quantité limitée, qui met des millions d'années à se former ou n'est pas reconstituée (pétrole, gaz naturel, charbon, uranium).\nLes énergies fossiles (pétrole, gaz, charbon) rejettent du dioxyde de carbone en brûlant, ce qui contribue au réchauffement climatique.\nFormes d'énergie : électrique, mécanique (mouvement), thermique (chaleur), lumineuse, chimique (piles, carburants, aliments), nucléaire.\nConversion d'énergie : transformation d'une forme d'énergie en une autre par un convertisseur.\nExemples : moteur électrique : électrique → mécanique ; lampe : électrique → lumineuse (et thermique) ; panneau photovoltaïque : lumineuse → électrique ; pile : chimique → électrique ; éolienne : mécanique → électrique.\nUne conversion n'est jamais parfaite : une partie de l'énergie est perdue, le plus souvent sous forme de chaleur.\nUnité d'énergie : le joule (J) ; pour l'électricité on utilise aussi le kilowattheure (kWh).\nPuissance : énergie consommée ou fournie chaque seconde ; unité : le watt (W).\nÉnergie consommée : E = P × t (ex. un appareil de 1 000 W pendant 2 h consomme 2 000 Wh = 2 kWh).\nMéthode attendue : pour un objet donné, indiquer la source et la forme d'énergie utilisées et décrire la conversion réalisée."
-    },
-    {
-      "id": "chaine-d-energie",
-      "titre": "La chaîne d'énergie",
-      "ordre": 9,
-      "periode": "T2",
-      "notions": [
-        "Identifier les fonctions de la chaîne d'énergie : alimenter, distribuer, convertir, transmettre",
-        "Associer un composant à chaque fonction de la chaîne d'énergie",
-        "Distinguer stockage et alimentation en énergie",
-        "Représenter la chaîne d'énergie d'un objet simple",
-        "Repérer l'énergie d'entrée et l'action finale de l'objet"
+        "Associer des solutions techniques à des fonctions techniques",
+        "Citer les formes d'énergie : électrique, cinétique, potentielle, thermique, lumineuse",
+        "Identifier les constituants de la chaîne d'énergie d'un objet, l'organisation de la chaîne étant fournie",
+        "Donner le rôle d'une batterie, d'un interrupteur et d'un relais",
+        "Indiquer la forme d'énergie reçue et fournie par un moteur électrique, une lampe et un radiateur"
       ],
       "motsCles": [
         "chaîne d'énergie",
-        "alimenter",
-        "distribuer",
-        "convertir",
-        "transmettre",
-        "pile",
+        "solution technique",
+        "constituant",
+        "énergie électrique",
+        "énergie cinétique",
+        "énergie potentielle",
+        "énergie thermique",
+        "énergie lumineuse",
         "batterie",
         "interrupteur",
-        "moteur",
-        "actionneur"
+        "relais",
+        "moteur électrique"
       ],
-      "reference": "Chaîne d'énergie : partie d'un objet qui fait circuler et transforme l'énergie pour réaliser une action (bouger, éclairer, chauffer).\nAlimenter : fournir l'énergie nécessaire au fonctionnement (pile, batterie, prise secteur, panneau solaire).\nStocker : garder l'énergie pour l'utiliser plus tard (batterie rechargeable, réservoir de carburant).\nDistribuer : laisser passer ou couper l'énergie vers le convertisseur (interrupteur, bouton-poussoir, relais, carte de commande moteur).\nConvertir : transformer l'énergie en une autre forme (moteur : électrique → mécanique ; lampe ou LED : électrique → lumineuse ; résistance chauffante : électrique → thermique).\nTransmettre : faire passer le mouvement du moteur jusqu'à l'élément qui agit (engrenages, poulies et courroie, chaîne, axe).\nActionneur : composant qui réalise une action physique à partir de l'énergie reçue (moteur, lampe, buzzer, vérin).\nExemple ventilateur de bureau : alimenter (prise USB) → distribuer (interrupteur) → convertir (moteur) → transmettre (axe) → hélice qui brasse l'air.\nExemple lampe de poche : alimenter (piles) → distribuer (interrupteur) → convertir (LED) → la lumière éclaire.\nLa chaîne d'énergie se représente par une suite de blocs reliés par des flèches qui indiquent le sens de circulation de l'énergie.\nLe vélo à assistance électrique combine l'énergie musculaire du cycliste et l'énergie électrique de la batterie.\nMéthode attendue : à partir d'un objet ou d'une photo, nommer les composants et les placer dans les blocs de la chaîne d'énergie."
+      "reference": "Fonction technique : ce que doit faire une partie de l'objet (stocker l'énergie, commander la mise en marche, produire un mouvement, éclairer, chauffer).\nSolution technique : moyen choisi pour réaliser une fonction technique. Pour stocker l'énergie : une pile ou une batterie ; pour éclairer : une LED.\nChaîne d'énergie : ensemble des constituants qui amènent l'énergie jusqu'à l'action de l'objet (déplacer, éclairer, chauffer). En 5e, son organisation est fournie : on y place les constituants.\nFormes d'énergie : électrique (courant dans un circuit), cinétique (liée au mouvement), potentielle (liée à la hauteur, comme l'eau retenue par un barrage), thermique (chaleur), lumineuse (lumière).\nBatterie : stocke l'énergie (sous forme chimique) et fournit de l'énergie électrique ; elle se recharge, contrairement à une pile.\nInterrupteur : laisse passer ou coupe le courant ; il est actionné à la main.\nRelais : interrupteur commandé électriquement, par exemple par une carte électronique : un petit courant commande un circuit plus puissant.\nMoteur électrique : reçoit de l'énergie électrique et fournit de l'énergie cinétique (avec un peu de chaleur perdue).\nLampe : reçoit de l'énergie électrique et fournit de l'énergie lumineuse, avec de la chaleur. Pour la même lumière, une LED chauffe beaucoup moins qu'une lampe à incandescence.\nRadiateur électrique : reçoit de l'énergie électrique et fournit de l'énergie thermique.\nExemple, la lampe torche : piles → interrupteur → LED → lumière.\nExemple, le ventilateur de bureau : prise ou port USB → interrupteur → moteur électrique → hélice qui brasse l'air.\nExemple, la trottinette électrique : batterie → carte électronique qui dose l'énergie selon l'accélérateur → moteur dans la roue → déplacement.\nMéthode attendue : sur la chaîne d'énergie fournie d'un objet, placer chaque constituant et indiquer pour chacun la forme d'énergie qu'il reçoit et celle qu'il fournit."
     },
     {
-      "id": "chaine-d-information",
-      "titre": "La chaîne d'information",
-      "ordre": 10,
-      "periode": "T3",
+      "id": "chaine-d-information-decouverte",
+      "titre": "La chaîne d'information d'un objet",
+      "ordre": 7,
+      "periode": "T2",
       "notions": [
-        "Identifier les fonctions de la chaîne d'information : acquérir, traiter, communiquer",
-        "Distinguer capteur, unité de traitement et interface",
-        "Associer un capteur à la grandeur qu'il détecte",
-        "Relier la chaîne d'information à la chaîne d'énergie",
-        "Représenter la chaîne d'information d'un objet automatisé simple"
+        "Identifier les entrées et les sorties d'un objet",
+        "Identifier les constituants de la chaîne d'information d'un objet, l'organisation de la chaîne étant fournie",
+        "Donner le rôle d'un capteur et citer des capteurs courants : température, présence, distance, luminosité",
+        "Donner le rôle du microcontrôleur, qui traite les informations grâce à un programme",
+        "Reconnaître les composants d'une interface humain-machine : boutons, afficheurs, voyants",
+        "Expliquer comment la chaîne d'information commande la chaîne d'énergie"
       ],
       "motsCles": [
         "chaîne d'information",
-        "acquérir",
-        "traiter",
-        "communiquer",
+        "information",
         "capteur",
-        "détecteur",
+        "capteur de température",
+        "capteur de présence",
+        "capteur de distance",
         "microcontrôleur",
-        "carte programmable",
-        "interface",
-        "ordre"
+        "interface humain-machine",
+        "bouton",
+        "afficheur",
+        "entrée",
+        "sortie"
       ],
-      "reference": "Chaîne d'information : partie d'un objet qui recueille des informations, les traite et donne des ordres ou des messages.\nAcquérir : prendre une information sur l'environnement ou l'utilisateur grâce à un capteur ou un détecteur.\nCapteur : composant qui détecte une grandeur physique et la transforme en signal électrique (capteur de lumière, de température, de distance, de mouvement).\nBouton-poussoir et clavier : composants d'interface qui permettent à l'utilisateur de donner une consigne.\nTraiter : analyser l'information et décider de l'action à faire ; c'est le rôle d'un microcontrôleur ou d'une carte programmable (ex. carte micro:bit, Arduino), qui exécute un programme.\nCommuniquer : transmettre un ordre à la chaîne d'énergie ou un message à l'utilisateur (voyant, écran, buzzer, haut-parleur).\nLes deux chaînes travaillent ensemble : la chaîne d'information commande la chaîne d'énergie (fonction distribuer).\nExemple éclairage automatique d'un couloir : acquérir (détecteur de mouvement) → traiter (carte programmable) → communiquer (ordre d'allumer) → la lampe s'allume.\nExemple porte automatique de magasin : un capteur détecte une personne, la carte décide d'ouvrir, le moteur ouvre la porte.\nL'information circule sous forme de signal électrique : signal logique (0 ou 1, tout ou rien) ou signal analogique (valeur qui varie).\nInterface homme-machine : ensemble des éléments qui permettent à l'utilisateur de dialoguer avec l'objet (boutons, écran, voyants).\nMéthode attendue : identifier dans un objet automatisé les composants qui acquièrent, traitent et communiquent l'information."
+      "reference": "Information : renseignement sur l'état de l'objet ou de son environnement (température, présence d'une personne, appui sur un bouton).\nChaîne d'information : ensemble des constituants qui recueillent les informations, les traitent et envoient des ordres ou des messages. En 5e, son organisation est fournie : on y place les constituants.\nCapteur : constituant qui prélève une information sur l'environnement et la transforme en signal électrique.\nCapteur de température : thermostat d'un radiateur, station météo.\nCapteur de présence (détecteur infrarouge) : éclairage automatique d'un couloir, alarme.\nCapteur de distance (ultrasons ou infrarouge) : robot aspirateur, aide au stationnement d'une voiture.\nCapteur de luminosité : lampadaire qui s'allume à la tombée de la nuit.\nMicrocontrôleur : petit ordinateur sur une seule puce qui exécute un programme ; il traite les informations reçues et décide des ordres à envoyer (ex. cartes micro:bit, Arduino).\nInterface humain-machine (IHM) : ce qui permet à l'utilisateur de dialoguer avec l'objet : boutons, clavier, écran tactile pour donner des consignes ; afficheur, voyant lumineux, buzzer pour recevoir des messages.\nEntrées : informations qui arrivent au microcontrôleur (capteurs, boutons). Sorties : ce que l'objet produit (affichage, son, mise en marche d'un moteur ou d'une lampe).\nLa chaîne d'information commande la chaîne d'énergie : le microcontrôleur envoie un ordre, par exemple à un relais, qui alimente un moteur.\nExemple, la porte automatique : capteur de présence → microcontrôleur → ordre au moteur → la porte s'ouvre.\nExemple, le robot aspirateur : en entrée, capteurs de distance, capteurs de vide (pour ne pas tomber dans un escalier) et bouton marche ; un microcontrôleur ; en sortie, moteurs des roues et de la brosse, voyants.\nMéthode attendue : sur la chaîne d'information fournie d'un objet, placer chaque capteur, le microcontrôleur et les composants de l'IHM, puis distinguer les entrées et les sorties de l'objet."
     },
     {
-      "id": "algorithme-et-programme",
-      "titre": "Algorithme et programme : séquences et événements",
+      "id": "materiaux-familles-proprietes-et-choix",
+      "titre": "Les matériaux : familles, propriétés et choix",
+      "ordre": 8,
+      "periode": "T2",
+      "notions": [
+        "Identifier les principaux matériaux d'un objet et les classer par famille",
+        "Citer les principales propriétés des matériaux : masse volumique, dureté, résistance, élasticité, résistance à la corrosion, conduction",
+        "Choisir un matériau parmi plusieurs proposés en fonction de ses caractéristiques",
+        "Utiliser une simulation fournie pour vérifier la tenue mécanique d'une pièce",
+        "Mettre en œuvre un protocole de test fourni pour valider la tenue mécanique d'un matériau",
+        "Repérer si un matériau est recyclable et lire les logos de tri"
+      ],
+      "motsCles": [
+        "matériau",
+        "famille de matériaux",
+        "matériaux métalliques",
+        "matériaux organiques",
+        "céramiques",
+        "matériaux composites",
+        "propriété",
+        "masse volumique",
+        "résistance mécanique",
+        "tenue mécanique",
+        "simulation",
+        "recyclabilité"
+      ],
+      "reference": "Matériau : matière transformée par l'être humain pour fabriquer des objets (acier, bois, PLA…).\nMatériaux métalliques : acier (fer et un peu de carbone), fonte, aluminium, cuivre, laiton.\nMatériaux organiques : d'origine végétale ou animale (bois, papier, carton, coton, cuir) ou de synthèse (matières plastiques, le plus souvent issues du pétrole : PET, polypropylène, PVC ; le PLA est fabriqué à partir d'amidon de maïs).\nMatériaux minéraux, céramiques et verres : verre, porcelaine, terre cuite, pierre.\nMatériaux composites : association de plusieurs matériaux qui cumulent leurs qualités (fibres de carbone et résine, béton armé).\nPropriétés : masse volumique (léger ou lourd), dureté (résiste aux rayures), résistance mécanique (supporte une charge sans casser), élasticité (reprend sa forme), résistance à la corrosion (ne rouille pas), conduction de l'électricité ou de la chaleur (conducteur ou isolant).\nMasses volumiques : acier, environ 7 800 kg/m³ ; aluminium, environ 2 700 kg/m³ (près de trois fois plus léger) ; PLA, environ 1 250 kg/m³ ; bois de pin, environ 500 kg/m³.\nChoisir un matériau : comparer les propriétés utiles à la pièce. Cadre de vélo : acier (solide, peu cher, mais lourd et sensible à la rouille), aluminium (léger, ne rouille pas), carbone (très léger et rigide, mais cher et difficile à recycler).\nTenue mécanique : capacité d'une pièce à supporter des efforts sans se déformer exagérément ni casser.\nSimulation fournie : le logiciel applique un effort à la pièce modélisée et colore les zones les plus sollicitées (le rouge signale un risque).\nProtocole de test fourni : poser une éprouvette sur deux appuis, accrocher des masses croissantes en son milieu, mesurer à la règle de combien elle s'enfonce et noter la masse qui la fait casser.\nRecyclabilité : aptitude d'un matériau à être recyclé. L'aluminium, l'acier et le verre se recyclent sans fin ; recycler l'aluminium demande environ 95 % d'énergie en moins que le produire à partir du minerai.\nLogo Triman : le produit doit être trié. Un triangle de flèches numéroté de 1 à 7 indique le type de plastique (1 = PET des bouteilles d'eau).\nMéthode attendue : relever les propriétés nécessaires à une pièce, comparer les matériaux proposés dans un tableau, choisir le plus adapté, puis vérifier sa tenue mécanique par la simulation ou le protocole de test fourni."
+    },
+    {
+      "id": "reseau-local-decouverte",
+      "titre": "Le réseau local : relier des appareils",
+      "ordre": 9,
+      "periode": "T3",
+      "notions": [
+        "Identifier les composants d'un réseau local : terminaux, commutateur, liaisons filaires et sans fil",
+        "Distinguer une liaison filaire d'une liaison sans fil (WiFi)",
+        "Représenter la topologie d'un réseau local",
+        "Justifier la nécessité d'identifier chaque terminal par une adresse pour communiquer",
+        "Vérifier le fonctionnement d'un réseau par une activité débranchée ou un logiciel de simulation",
+        "Distinguer un réseau local du réseau Internet"
+      ],
+      "motsCles": [
+        "réseau informatique",
+        "réseau local",
+        "terminal",
+        "commutateur",
+        "liaison filaire",
+        "câble Ethernet",
+        "WiFi",
+        "point d'accès",
+        "topologie",
+        "adresse",
+        "adresse IP",
+        "Internet"
+      ],
+      "reference": "Réseau informatique : ensemble d'appareils reliés entre eux pour échanger des données (messages, fichiers, impressions).\nRéseau local : réseau limité à un lieu : une maison, une salle de classe, un collège.\nTerminal : appareil situé au bout du réseau, qui envoie ou reçoit des données : ordinateur, smartphone, tablette, imprimante réseau, console de jeux, télévision connectée.\nCommutateur (switch) : boîtier central qui relie les terminaux par des câbles et transmet chaque message uniquement au terminal destinataire.\nLiaison filaire : câble réseau Ethernet terminé par des prises RJ45 ; liaison stable et rapide.\nLiaison sans fil (WiFi) : les données circulent par ondes radio entre le terminal et un point d'accès WiFi ; pratique pour les appareils mobiles, mais sensible à la distance et aux obstacles (murs).\nBox internet : à la maison, elle sert de commutateur et de point d'accès WiFi, et relie le réseau local à Internet.\nTopologie : forme de l'organisation des liaisons d'un réseau. La plus courante est la topologie en étoile : tous les terminaux sont reliés à un même commutateur central.\nAdresse : pour qu'un message arrive au bon destinataire, chaque terminal doit être identifié par une adresse unique dans le réseau, comme une adresse postale. On utilise notamment l'adresse IP (ex. 192.168.1.12).\nSi deux terminaux avaient la même adresse, le réseau ne saurait pas auquel remettre le message.\nActivité débranchée : des élèves jouent les terminaux et le commutateur et se passent des messages papier portant l'adresse de l'expéditeur et celle du destinataire.\nSimulation : un logiciel (ex. Filius) permet de construire un réseau virtuel et de vérifier que les messages arrivent.\nInternet : réseau mondial qui relie entre eux des millions de réseaux ; un réseau local y est relié, par exemple, par la box.\nMéthode attendue : sur le schéma d'un réseau local, nommer chaque composant (terminal, commutateur, liaison filaire ou WiFi), indiquer la topologie et expliquer pourquoi chaque terminal doit avoir une adresse unique."
+    },
+    {
+      "id": "reperer-une-panne-et-reparer",
+      "titre": "Repérer une panne et réparer un objet",
+      "ordre": 10,
+      "periode": "T3",
+      "notions": [
+        "Repérer visuellement une pièce défectueuse dans un objet",
+        "Réaliser une réparation en suivant un protocole fourni",
+        "Définir la fiabilité et la durabilité d'un objet",
+        "Lire un indice de réparabilité ou de durabilité",
+        "Appliquer les règles de sécurité de l'atelier : équipements de protection individuelle, outillage manuel",
+        "Découvrir les procédés de réalisation d'un atelier de fabrication collaboratif (fablab)"
+      ],
+      "motsCles": [
+        "dysfonctionnement",
+        "panne",
+        "pièce défectueuse",
+        "protocole",
+        "réparation",
+        "fiabilité",
+        "durabilité",
+        "indice de réparabilité",
+        "indice de durabilité",
+        "équipement de protection individuelle",
+        "outillage manuel",
+        "fablab"
+      ],
+      "reference": "Dysfonctionnement : l'objet ne fonctionne pas ou fonctionne mal. Une panne vient souvent d'une seule pièce défectueuse.\nRepérer visuellement une pièce défectueuse : fil coupé ou dénudé, soudure décollée, pièce cassée ou fissurée, pile qui a coulé (dépôt blanchâtre), contacts oxydés, câble de chargeur abîmé, courroie détendue, dent d'engrenage cassée.\nProtocole de réparation fourni : liste ordonnée d'étapes. 1) débrancher l'objet ou retirer les piles ; 2) démonter en photographiant chaque étape et en rangeant les vis ; 3) repérer la pièce défectueuse ; 4) la remplacer ; 5) remonter ; 6) tester.\nFiabilité : aptitude d'un objet à fonctionner sans panne pendant une durée donnée.\nDurabilité : aptitude d'un objet à durer longtemps en restant utilisable, grâce à sa solidité, à son entretien et aux réparations.\nRéparer plutôt que jeter allonge la durée de vie de l'objet et évite d'extraire de nouvelles matières premières.\nIndice de réparabilité : note sur 10 (depuis 2021) qui indique si un produit est facile à réparer (démontage, pièces détachées, documentation).\nIndice de durabilité : note sur 10 qui ajoute la fiabilité ; il remplace l'indice de réparabilité pour les téléviseurs (depuis janvier 2025) et les lave-linge (depuis avril 2025).\nÉquipements de protection individuelle (EPI) : lunettes de protection, blouse, cheveux attachés ; gants seulement si le professeur l'indique, jamais près d'une machine qui tourne (perceuse).\nOutillage manuel : tournevis plat ou cruciforme, pince coupante, pince à dénuder, clé, scie, lime ; chaque outil a un usage précis.\nFablab : atelier de fabrication collaboratif équipé de machines commandées par ordinateur.\nImprimante 3D : dépose du plastique fondu (environ 200 °C pour le PLA) couche par couche.\nDécoupe laser : découpe ou grave des plaques de bois ou de plastique ; capot fermé pendant la découpe, jamais de PVC (gaz toxiques).\nMéthode attendue : observer l'objet pour repérer la pièce défectueuse, la remplacer en suivant pas à pas le protocole fourni, avec les bons outils et les équipements de protection, puis tester l'objet réparé."
+    },
+    {
+      "id": "lire-et-modifier-un-programme",
+      "titre": "Lire et modifier un programme",
       "ordre": 11,
       "periode": "T3",
       "notions": [
-        "Définir un algorithme et un programme",
-        "Écrire une suite d'instructions dans le bon ordre (séquence)",
-        "Déclencher une action par un événement",
-        "Lire et représenter un algorithme avec un organigramme",
-        "Programmer un script simple dans Scratch et tester son fonctionnement"
+        "Identifier les données utilisées (entrées) et produites (sorties) par un programme existant",
+        "Traduire un programme par blocs en algorithme en langage naturel",
+        "Reconnaître une séquence d'instructions, un événement, une boucle et une instruction conditionnelle",
+        "Utiliser une variable pour mémoriser une valeur",
+        "Modifier les paramètres d'un programme et évaluer leurs effets sur le fonctionnement de l'objet",
+        "Tester un programme simple pour vérifier qu'il répond au besoin"
       ],
       "motsCles": [
         "algorithme",
         "programme",
+        "programmation par blocs",
         "instruction",
         "séquence",
         "événement",
-        "script",
-        "Scratch",
-        "lutin",
-        "organigramme",
-        "bug"
+        "boucle",
+        "instruction conditionnelle",
+        "variable",
+        "paramètre",
+        "entrée",
+        "sortie"
       ],
-      "reference": "Algorithme : suite finie et ordonnée d'instructions qui permet de résoudre un problème ou de réaliser une tâche (ex. une recette de cuisine).\nProgramme : algorithme traduit dans un langage compréhensible par une machine (langage par blocs comme Scratch, ou langage écrit comme Python).\nInstruction : ordre élémentaire donné à la machine (avancer de 10 pas, tourner de 90 degrés, attendre 1 seconde).\nSéquence d'instructions : instructions exécutées les unes après les autres, dans l'ordre où elles sont écrites ; changer l'ordre change le résultat.\nÉvénement : action qui déclenche l'exécution d'un script (clic sur le drapeau vert, appui sur une touche, clic sur un lutin, réception d'un message).\nScript : ensemble de blocs assemblés sous un bloc événement dans Scratch.\nLutin : personnage ou objet animé par un script dans Scratch ; la scène est le décor.\nCoordonnées dans Scratch : x de -240 à 240 (horizontal), y de -180 à 180 (vertical) ; le centre de la scène est (0 ; 0).\nPlusieurs scripts peuvent s'exécuter en même temps s'ils sont déclenchés par le même événement.\nOrganigramme : représentation graphique d'un algorithme ; début et fin dans des ovales, instructions dans des rectangles, tests dans des losanges.\nBug : erreur dans un programme ; déboguer consiste à tester le programme, trouver l'erreur et la corriger.\nMéthode attendue : écrire un algorithme en langage courant, le traduire en script Scratch déclenché par un événement, le tester et le corriger."
+      "reference": "Algorithme : suite ordonnée d'instructions qui décrit, en langage naturel, comment réaliser une tâche.\nProgramme : traduction d'un algorithme dans un langage que la machine exécute. En 5e, on utilise la programmation graphique par blocs (Scratch, MakeCode pour micro:bit, mBlock).\nInstruction : ordre élémentaire donné à la machine (allumer une LED, attendre 1 seconde, afficher un nombre).\nSéquence : suite d'instructions exécutées les unes après les autres, dans l'ordre.\nÉvénement : action qui déclenche une séquence d'instructions (« quand le drapeau vert est cliqué », « lorsque le bouton A est pressé »).\nBoucle (instruction itérative) : répète des instructions un nombre de fois donné (« répéter 10 fois ») ou sans fin (« répéter indéfiniment », « toujours »).\nInstruction conditionnelle : exécute des instructions seulement si une condition est vraie : « si… alors… sinon… ».\nVariable : case mémoire qui porte un nom et contient une valeur qui peut changer (score, température). « Mettre score à 0 » est une affectation.\nEntrées : données utilisées par le programme, venant des capteurs ou des boutons. Sorties : données produites et actions (affichage, son, LED, moteur).\nParamètre : valeur réglable dans le programme (seuil de température, durée d'attente, vitesse d'un moteur).\nExemple, ventilateur automatique : répéter indéfiniment : lire la température ; si elle est supérieure à 25 °C, alors mettre le ventilateur en marche, sinon l'arrêter.\nIci, l'entrée est la température, la sortie la commande du ventilateur, le paramètre 25 °C. En remplaçant 25 par 28, le ventilateur se déclenche moins souvent.\nTester : essayer le programme dans plusieurs situations (température basse, haute, égale au seuil) et vérifier que le comportement correspond au besoin.\nMéthode attendue : lire un programme par blocs, l'écrire en langage naturel, repérer ses entrées, ses sorties et ses paramètres, puis modifier un paramètre et tester l'effet obtenu."
     },
     {
-      "id": "boucles-conditions-et-variables",
-      "titre": "Boucles, conditions et variables",
+      "id": "mini-projet-du-besoin-au-prototype",
+      "titre": "Mener un mini-projet : du besoin au prototype",
       "ordre": 12,
       "periode": "T3",
       "notions": [
-        "Utiliser une boucle pour répéter des instructions",
-        "Distinguer boucle « répéter n fois » et boucle « répéter indéfiniment »",
-        "Utiliser une condition « si… alors… sinon »",
-        "Créer et modifier une variable pour mémoriser une valeur",
-        "Programmer un jeu ou une animation simple combinant boucles, conditions et variables"
+        "Citer les étapes d'un projet et suivre une planification fournie avec des tâches identifiées",
+        "Expliquer le rôle d'une revue de projet",
+        "Fabriquer une solution pour améliorer un objet existant",
+        "Choisir une source d'énergie parmi plusieurs proposées",
+        "Assembler les constituants fournis pour réaliser un prototype",
+        "Réaliser une forme en suivant une procédure fournie (impression 3D, découpe laser)",
+        "Appliquer des principes d'écoconception"
       ],
       "motsCles": [
-        "boucle",
-        "répéter",
-        "répéter indéfiniment",
-        "condition",
-        "si alors sinon",
-        "test",
-        "variable",
-        "score",
-        "capteur",
-        "opérateur"
+        "projet",
+        "besoin",
+        "tâche",
+        "planning",
+        "revue de projet",
+        "prototype",
+        "solution",
+        "assemblage",
+        "source d'énergie",
+        "impression 3D",
+        "découpe laser",
+        "écoconception"
       ],
-      "reference": "Boucle (ou structure itérative) : bloc qui répète plusieurs fois les mêmes instructions.\n« Répéter n fois » : la boucle s'exécute un nombre de fois connu à l'avance (ex. répéter 4 fois « avancer de 100, tourner de 90° » trace un carré).\n« Répéter indéfiniment » : la boucle tourne sans fin tant que le programme n'est pas arrêté ; elle sert à surveiller en permanence.\n« Répéter jusqu'à » : la boucle s'arrête quand une condition devient vraie.\nCondition (ou structure conditionnelle) : bloc qui exécute des instructions seulement si un test est vrai.\n« Si … alors » : exécute les instructions si la condition est vraie, sinon ne fait rien.\n« Si … alors … sinon » : exécute un premier groupe d'instructions si la condition est vraie, un second groupe si elle est fausse.\nTest : expression qui est vraie ou fausse (ex. « touche espace pressée ? », « couleur rouge touchée ? », « score > 10 »).\nOpérateurs de comparaison : =, <, > ; opérateurs logiques : et, ou, non.\nVariable : espace de mémoire qui porte un nom et contient une valeur pouvant changer pendant le programme (ex. score, vies, temps).\nDans Scratch : « mettre score à 0 » initialise la variable ; « ajouter 1 à score » la modifie.\nIl faut initialiser une variable au début du programme (ex. au clic sur le drapeau vert).\nExemple : répéter indéfiniment, si le lutin touche la pomme alors ajouter 1 à score.\nMéthode attendue : analyser un script, prévoir son résultat, puis programmer un jeu simple qui utilise une boucle, une condition et une variable."
+      "reference": "Projet : ensemble de tâches organisées dans le temps pour répondre à un besoin, avec une date de fin.\nÉtapes d'un mini-projet : 1) identifier le besoin ou le problème ; 2) chercher des idées de solutions (croquis) ; 3) choisir une solution ; 4) fabriquer et assembler le prototype ; 5) tester et valider ; 6) présenter le résultat.\nEn 5e, la planification est fournie : chaque membre de l'équipe réalise les tâches qui lui sont confiées et respecte les délais.\nRevue de projet : réunion à une étape clé pour faire le point sur l'avancement, vérifier que la solution répond au besoin et décider de la suite.\nPrototype : premier exemplaire d'un objet, fabriqué pour tester une solution avant de la produire.\nAméliorer un objet existant : ajouter un éclairage automatique à une boîte à livres, rendre réglable un support de smartphone, ajouter une alarme à un casier.\nChoisir une source d'énergie : piles jetables, batterie rechargeable, panneau solaire photovoltaïque (gratuit à l'usage mais dépendant du soleil), secteur ou port USB. On compare l'autonomie, la mobilité, le coût et l'impact sur l'environnement.\nAssembler : relier les constituants fournis (carte programmable, capteur, LED, moteur, pile) en suivant un schéma de câblage, puis fixer les pièces (vis, écrous, clips).\nImprimante 3D : fabrique une pièce couche par couche à partir d'un fichier 3D, souvent en PLA.\nDécoupe laser : découpe ou grave une plaque (contreplaqué, carton, plastique acrylique) selon un dessin numérique.\nProcédure fournie : suivre les étapes dans l'ordre (ouvrir le fichier, régler, lancer, surveiller) en respectant les règles de sécurité.\nÉcoconception : concevoir un objet en réduisant ses impacts sur l'environnement pendant tout son cycle de vie : moins de matière, matériaux recyclés ou recyclables, pièces vissées plutôt que collées, faible consommation d'énergie.\nMéthode attendue : suivre le planning fourni pour fabriquer, assembler et tester un prototype qui améliore un objet existant, puis justifier en revue de projet le choix de la source d'énergie et les choix d'écoconception."
     }
   ]
 }
