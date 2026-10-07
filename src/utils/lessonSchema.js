@@ -65,6 +65,13 @@ export function parseLessonJson(raw) {
   if (!r || !Array.isArray(r.keyPoints) || !Array.isArray(r.sections) || !Array.isArray(r.keyTerms)) {
     throw new Error('INVALID_JSON')
   }
+  // Rubriques ajoutées en octobre 2026 (exemple, méthode, pièges) : optionnelles,
+  // les leçons plus anciennes ne les ont pas. On garde seulement ce qui est affichable.
+  const texte = v => (typeof v === 'string' && v.trim() ? v.trim() : null)
+  r.sections = r.sections.filter(s => s && typeof s === 'object').map(s => ({ ...s, exemple: texte(s.exemple) }))
+  const etapes = Array.isArray(r.methode?.etapes) ? r.methode.etapes.map(texte).filter(Boolean) : []
+  r.methode = etapes.length ? { titre: texte(r.methode.titre) ?? 'La méthode', etapes } : null
+  r.pieges = Array.isArray(r.pieges) ? r.pieges.map(texte).filter(Boolean) : []
 
   // Carte mentale : le prompt exige exactement 4 branches, mais on
   // normalise défensivement — champs texte garantis, children = tableau de

@@ -120,19 +120,27 @@ function quizRules(level) {
 // -------------------------------------------------------
 // Règles résumé adaptées par cycle
 // -------------------------------------------------------
-function resumeRules(level) {
+// Communes aux deux cycles : la forme d'une vraie fiche de révision
+// (cours découpé, exemple, méthode, pièges), pas un paragraphe compressé.
+const RESUME_RULES_COMMON = `- Le résumé est une FICHE DE RÉVISION complète : un élève qui ne lit que lui doit pouvoir réviser toute la leçon. Ne laisse de côté aucune grande partie.
+- resume.keyPoints = ce qui se sait PAR CŒUR (dates, règles, formules, définitions-clés), en quelques mots. Les sections EXPLIQUENT ; elles ne recopient pas les keyPoints.
+- resume.sections[].exemple : un exemple concret et court qui montre la notion en action (calcul posé, phrase d'exemple, date et événement, document, expérience). null si la section n'en a pas besoin. Jamais un exemple inventé de toutes pièces quand la leçon en donne un.
+- resume.methode : si la leçon enseigne un savoir-faire (résoudre, rédiger, analyser un document, construire une frise, conjuguer, choisir un temps…), décris-le en 2 à 5 étapes courtes et actionnables, avec un titre « Comment… ». Sinon null.
+- resume.pieges : 2 ou 3 erreurs classiques d'élèves sur cette leçon, chacune en 1 phrase qui dit l'erreur ET le bon réflexe (ex. « Ne confonds pas développer et factoriser : développer transforme un produit en somme. »).
+- Pas de phrases introductives ("Dans cette leçon, nous allons voir...").`;
+
+export function resumeRules(level) {
   if (level.cycle === 'college') {
     return `RÈGLES DU RÉSUMÉ :
 - Phrases courtes, vocabulaire usuel.
-- Pas de répétition entre intro, keyPoints et sections.
-- Pas de phrases introductives ("Dans cette leçon, nous allons voir...").
+${RESUME_RULES_COMMON}
 - Chaque phrase apporte une info nouvelle, mémorisable.`;
   }
   if (level.cycle === 'lycee') {
     return `RÈGLES DU RÉSUMÉ :
 - Structure type fiche de révision : intro problématisée, points clés hiérarchisés, sections méthodiques.
 - Vocabulaire technique exact (théorèmes nommés, mouvements littéraires, périodes historiques précises).
-- Pas de répétition. Chaque phrase apporte une info nouvelle.
+${RESUME_RULES_COMMON}
 - Quand une formule ou un théorème apparaît, donne ses CONDITIONS D'APPLICATION.`;
   }
   return '';
@@ -162,15 +170,21 @@ function outputSchema(level) {
   ],
   "resume": {
     "intro": "1 seule phrase qui résume l'essentiel de la leçon",
-    "keyPoints": ["point clé ultra-court", "point clé 2", "point clé 3"],
+    "keyPoints": ["à savoir par cœur, ultra-court", "point clé 2", "point clé 3"],
     "sections": [
       {
         "title": "1. Titre de section",
-        "content": "contenu de la section, adapté au niveau",
+        "content": "explication de la notion, adaptée au niveau",
+        "exemple": "exemple concret et court, ou null",
         "formula": null,
         "formulaCaption": null
       }
     ],
+    "methode": {
+      "titre": "Comment … (ou null pour tout le bloc s'il n'y a pas de savoir-faire)",
+      "etapes": ["étape 1, courte et actionnable", "étape 2"]
+    },
+    "pieges": ["erreur classique + bon réflexe, en 1 phrase"],
     "keyTerms": [
       { "term": "mot clé", "def": "définition précise, adaptée au niveau" }
     ]
@@ -198,8 +212,10 @@ const QUANTITIES_BLOCK = `QUANTITÉS OBLIGATOIRES :
 - quiz : 5 à 8 questions, exactement 4 choices par question, correct est l'index (0, 1, 2 ou 3) — distribue les bonnes réponses sur tous les indices, pas toujours 0
 - resume.intro : 1 phrase maximum
 - resume.keyPoints : 3 à 5 points, chacun en 1 ligne max
-- resume.sections : 2 à 3 sections, chaque "content" fait 2-3 phrases maximum
-- resume.keyTerms : 3 à 5 termes, chaque "def" fait 1 ligne max
+- resume.sections : une section par grande partie de la leçon (2 à 5 selon sa longueur), chaque "content" fait 2-4 phrases courtes
+- resume.methode : null, ou 2 à 5 étapes
+- resume.pieges : 2 ou 3 phrases
+- resume.keyTerms : 3 à 6 termes, chaque "def" fait 1 ligne max
 - mindmap.branches : EXACTEMENT 4 branches, avec les positions "top-left", "top-right", "bottom-left", "bottom-right" dans cet ordre (une position unique par branche)`;
 
 // -------------------------------------------------------
@@ -290,6 +306,8 @@ export function buildProgrammeSystemPrompt(level, chapitre) {
 - metadata.subject DOIT valoir exactement : "${chapitre.matiere}"
 - metadata.excerpt : 1 à 2 phrases qui disent ce que l'élève doit retenir de ce chapitre.
 - Couvre l'ensemble des notions ci-dessus dans les quatre formats, avec le vocabulaire et les méthodes attendus au programme officiel de ${lvl.classe}.
+- resume.sections : une section par notion attendue (4 à 6 ; regroupe deux notions seulement si elles sont très liées). Cette règle remplace la quantité générale des sections. Aucune notion ne doit manquer au résumé.
+- resume.methode : si le contenu de référence contient une « Méthode attendue », c'est elle que tu détailles en étapes.
 - Le contenu de référence fourni par l'utilisateur résume le chapitre ; ce n'est pas un texte d'élève.`;
   return assembleSystemPrompt(lvl, 'programme', extra);
 }

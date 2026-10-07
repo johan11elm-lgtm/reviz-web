@@ -18,6 +18,7 @@ import { MissingLessonState } from '../components/MissingLessonState';
 import { CoachEntryCard } from '../components/CoachChat';
 import { getScanStatus } from '../services/scanLimitService';
 import { subjectInfo, subjectMascot } from '../utils/subjects';
+import { resumeReadingMinutes } from '../utils/resume';
 import './Analyse.css';
 
 // ─── Mock de fallback ────────────────────────────────────────────────
@@ -44,6 +45,7 @@ function buildLessonFromAiData(data) {
     flashcardsCount: data.flashcards.length,
     quizCount:       data.quiz.length,
     keyPoints:       data.resume?.keyPoints ?? [],
+    resumeMinutes:   resumeReadingMinutes(data.resume),
   };
 }
 
@@ -73,7 +75,7 @@ function formatDay(ts) {
 
 // ─── Formats de révision ─────────────────────────────────────────────
 const formats = [
-  { id: 'resume',     icon: <ResumeIcon />, name: 'Résumé',        tone: 'green',  to: '/resume',     getCount: () => 2,                unit: 'min' },
+  { id: 'resume',     icon: <ResumeIcon />, name: 'Résumé',        tone: 'green',  to: '/resume',     getCount: l => l.resumeMinutes ?? 2, unit: 'min' },
   { id: 'flashcards', icon: <FlashcardsIcon />, name: 'Flashcards',    tone: 'violet', to: '/flashcards', getCount: l => l.flashcardsCount, unit: 'cartes' },
   { id: 'mindmap',    icon: <MindmapIcon />, name: 'Carte mentale', tone: 'pink',   to: '/mindmap',    getCount: () => null,             unit: null },
   { id: 'quiz',       icon: <QuizIcon />, name: 'Quiz',          tone: 'orange', to: '/quiz',       getCount: l => l.quizCount,       unit: 'questions' },

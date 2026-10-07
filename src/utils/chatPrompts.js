@@ -37,9 +37,16 @@ export function buildChatLessonContext(entry) {
       .map(s => {
         let block = `${s.title}\n${s.content}`;
         if (s.formula) block += `\nFormule : ${s.formula}${s.formulaCaption ? ` (${s.formulaCaption})` : ''}`;
+        if (s.exemple) block += `\nExemple : ${s.exemple}`;
         return block;
       })
       .join('\n\n'));
+  }
+  if (Array.isArray(r.methode?.etapes) && r.methode.etapes.length) {
+    parts.push(`${r.methode.titre ?? 'Méthode'} :\n` + r.methode.etapes.map((e, i) => `${i + 1}. ${e}`).join('\n'));
+  }
+  if (Array.isArray(r.pieges) && r.pieges.length) {
+    parts.push('Pièges à éviter :\n' + r.pieges.map(p => `- ${p}`).join('\n'));
   }
   if (Array.isArray(r.keyTerms) && r.keyTerms.length) {
     parts.push('Vocabulaire :\n' + r.keyTerms.map(t => `- ${t.term} : ${t.def}`).join('\n'));

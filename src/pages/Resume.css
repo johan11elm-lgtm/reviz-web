@@ -83,27 +83,48 @@
   text-transform: uppercase;
   letter-spacing: 1px;
   margin-top: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 28px;
+}
+.resume-page .resume-block-label-text {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+.resume-page .resume-block-label-icon {
+  display: inline-flex;
+  font-size: 14px;
 }
 
-/* ── Section card (chrome de .rv-card + accent gauche) ── */
+/* ── Section card : pastille numérotée à la couleur de la matière ── */
 .resume-page .resume-section-card {
-  display: flex;
   border-radius: 18px;
-  overflow: hidden;
-}
-.resume-page .resume-section-accent {
-  width: 4px;
-  background: var(--resume-accent, var(--accent-violet));
-  flex-shrink: 0;
-}
-.resume-page .resume-section-inner {
-  flex: 1 1 auto;
-  min-width: 0;
-  padding: 16px 16px 16px 14px;
+  padding: 16px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
 }
+.resume-page .resume-section-head {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+.resume-page .resume-section-num {
+  width: 24px;
+  height: 24px;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.resume-page .resume-section-head .resume-section-heading { padding-top: 3px; }
 .resume-page .resume-section-heading {
   font-size: 14px;
   font-weight: 700;
@@ -112,9 +133,9 @@
   margin: 0;
 }
 .resume-page .resume-section-body {
-  font-size: 13px;
+  font-size: 14px;
   color: var(--text-secondary);
-  line-height: 1.7;
+  line-height: 1.65;
   white-space: pre-line;
   word-wrap: break-word;
   overflow-wrap: break-word;
@@ -155,9 +176,272 @@
   letter-spacing: -0.1px;
 }
 .resume-page .resume-term-def {
-  font-size: 11px;
+  font-size: 12px;
   color: var(--text-secondary);
   line-height: 1.5;
+}
+
+/* Nombre impair de termes : le dernier prend toute la largeur (pas de case vide). */
+.resume-page .resume-term-card:last-child:nth-child(odd) { grid-column: 1 / -1; }
+
+/* ── Termes du vocabulaire repérés dans le cours : touchables ── */
+.resume-page .resume-term-mark {
+  font: inherit;
+  font-weight: 700;
+  color: var(--text-primary);
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  text-decoration: underline dotted;
+  text-decoration-color: var(--resume-accent, currentColor);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+  border-radius: 4px;
+}
+.resume-page .resume-term-mark.is-open {
+  background: var(--bg-subtle);
+  box-shadow: 0 0 0 3px var(--bg-subtle);
+}
+.resume-page .resume-term-pop {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  background: var(--bg-subtle);
+  border-radius: 12px;
+  padding: 10px 8px 10px 12px;
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: var(--text-primary);
+  animation: resume-pop-in 0.18s ease-out;
+}
+.resume-page .resume-term-pop-text { flex: 1; min-width: 0; }
+.resume-page .resume-term-pop-close {
+  background: none;
+  border: 0;
+  padding: 2px;
+  color: var(--text-muted);
+  font-size: 16px;
+  display: inline-flex;
+  cursor: pointer;
+}
+@keyframes resume-pop-in {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .resume-page .resume-term-pop { animation: none; }
+}
+
+/* ── Mode « Me tester » ── */
+.resume-page .resume-retenir-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.resume-page .resume-test-toggle {
+  font: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--text-primary);
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-pill);
+  padding: 6px 12px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.resume-page .resume-test-toggle.is-on {
+  background: var(--accent-violet);
+  border-color: var(--accent-violet);
+  color: #fff;
+}
+.resume-page .resume-test-hint {
+  margin: -4px 0 0;
+  font-size: 12px;
+  color: var(--accent-violet-ink);
+  opacity: 0.8;
+}
+.resume-page .resume-cache {
+  font: inherit;
+  color: inherit;
+  text-align: left;
+  background: none;
+  border: 0;
+  padding: 0;
+  width: 100%;
+  cursor: pointer;
+}
+.resume-page .resume-cache-inner { display: contents; }
+.resume-page .resume-cache.is-hidden .resume-cache-text {
+  filter: blur(6px);
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* ── Exemple (dans une section), teinté par la matière ── */
+.resume-page .resume-exemple {
+  background: var(--bg-subtle);
+  background: color-mix(in srgb, var(--resume-accent) 9%, var(--bg-card));
+  border-radius: 12px;
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  margin-top: 2px;
+}
+.resume-page .resume-exemple-label {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.7px;
+  color: var(--text-muted);
+}
+.resume-page .resume-exemple-text {
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: var(--text-primary);
+  white-space: pre-line;
+  overflow-wrap: break-word;
+}
+
+/* ── Méthode (étapes numérotées) ── */
+.resume-page .resume-methode {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.resume-page .resume-methode-steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.resume-page .resume-methode-steps li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--text-secondary);
+}
+.resume-page .resume-methode-num {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* ── Pièges (utilise .rv-callout --orange) ── */
+.resume-page .resume-pieges { gap: 12px; }
+.resume-page .resume-piege {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 13.5px;
+  line-height: 1.5;
+}
+.resume-page .resume-piege-icon {
+  font-size: 16px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+/* ── Vérifie-toi (une carte, mascotte en tête, questions séparées par un filet) ── */
+.resume-page .resume-checks {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-top: 8px;
+}
+.resume-page .resume-checks-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 6px;
+}
+.resume-page .resume-checks-title {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 800;
+  letter-spacing: -0.3px;
+  color: var(--text-primary);
+}
+.resume-page .resume-checks-sub {
+  margin: 2px 0 0;
+  font-size: 12.5px;
+  line-height: 1.4;
+  color: var(--text-muted);
+}
+.resume-page .resume-check {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 14px 0;
+  border-top: 1px solid var(--border-subtle);
+}
+.resume-page .resume-check:last-child { padding-bottom: 0; }
+.resume-page .resume-check-grade {
+  display: flex;
+  gap: 8px;
+}
+.resume-page .resume-check-btn {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  border: 0;
+  border-radius: var(--radius-pill);
+  padding: 9px 12px;
+  cursor: pointer;
+}
+.resume-page .resume-check-btn.is-got   { background: var(--accent-green-soft);  color: var(--accent-green-ink); }
+.resume-page .resume-check-btn.is-again { background: var(--accent-orange-soft); color: var(--accent-orange-ink); }
+.resume-page .resume-check-verdict {
+  margin: 0;
+  font-size: 12.5px;
+  font-weight: 600;
+}
+.resume-page .resume-check-verdict.is-got   { color: var(--accent-green-ink); }
+.resume-page .resume-check-verdict.is-again { color: var(--accent-orange-ink); }
+.resume-page .resume-check-question {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.45;
+  color: var(--text-primary);
+}
+.resume-page .resume-check-answer {
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: var(--text-secondary);
+  animation: resume-pop-in 0.18s ease-out;
+}
+.resume-page .resume-check-reveal {
+  align-self: flex-start;
+  background: var(--bg-subtle);
+  border: 0;
+  border-radius: var(--radius-pill);
+  padding: 8px 14px;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+  cursor: pointer;
 }
 
 /* ── CTA ── */
