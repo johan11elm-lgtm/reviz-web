@@ -1,0 +1,43 @@
+/* ------------------------------------------------------------
+   BattleMascot — mascottes réservées à la Battle
+   Usage: <BattleMascot pose="sixseven" couleur="rouge" size={160} />
+   ------------------------------------------------------------ */
+
+/* Le 6-7 : deux images superposées qui s'affichent tour à tour */
+.battle-67 {
+  position: relative;
+  display: block;
+  flex-shrink: 0;
+}
+
+.battle-67 .mascot {
+  position: absolute;
+  inset: 0;
+}
+
+.battle-67__a {
+  animation: battle-67-a 600ms steps(1, end) infinite;
+}
+
+.battle-67__b {
+  opacity: 0;
+  animation: battle-67-b 600ms steps(1, end) infinite;
+}
+
+@keyframes battle-67-a {
+  0%  { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+@keyframes battle-67-b {
+  0%  { opacity: 0; }
+  50% { opacity: 1; }
+}
+
+/* Sans animation : la première image reste, la seconde reste cachée */
+@media (prefers-reduced-motion: reduce) {
+  .battle-67__a,
+  .battle-67__b {
+    animation: none;
+  }
+}

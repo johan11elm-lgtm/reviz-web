@@ -93,3 +93,29 @@ fins, PAS de jambes, petits bras fins ».
 | pose-14-sad | sourcils tombants, moue, larme bleue, bras qui pendent, toujours attachant |
 | pose-15-search | grosse loupe à manche doré devant un œil, œil agrandi par la lentille |
 | pose-16-pointing | il pointe du doigt vers le spectateur, clin d'œil, air complice |
+
+## Série « battle » (2026-10-07) — réservée à la feature Battle
+
+Accessoire commun ajouté au prompt maître : « un bandeau de combat en tissu
+bleu encre (#2D2B57) noué autour du haut des lobes, deux petits pans du nœud
+qui dépassent sur le côté », plus « aucun halo, aucune lueur, aucun rayon
+lumineux autour du personnage » (l'aura est le halo `glow` animé par l'app).
+
+| Fichier cible | Scène |
+|---|---|
+| pose-b1-garde | il se met en garde comme un boxeur, ses deux petits poings fermés levés devant lui, regard déterminé, sourire en coin |
+| pose-b2-aura | bras croisés devant lui, menton relevé, yeux mi-clos, demi-sourire très sûr de lui, attitude cool, calme absolu |
+| pose-b3-moinsaura | il se cache les yeux d'une main, gêné, joues roses, petite goutte de sueur bleue, l'autre bras ballant, petite moue embarrassée ; drôle et attachant, jamais humilié |
+| pose-b4-champion | il brandit à deux mains au-dessus de sa tête une ceinture de champion dorée façon boxe (plaque centrale sans inscription), petites étincelles dorées, air triomphant |
+| pose-b5-gg | le bandeau a glissé de travers ; il tend une main ouverte vers le spectateur, l'autre se gratte l'arrière du lobe, sourire de bon perdant |
+| pose-b6-sixseven-a | le geste de balance du mème « six-seven » : bras écartés, paumes vers le ciel, main côté gauche de l'image à hauteur des yeux, main côté droit sous la bouche ; sourcils levés, air malicieux |
+| pose-b6-sixseven-b | même conversation que A : « refais EXACTEMENT cette même image en changeant UNIQUEMENT la hauteur des mains » (pas de miroir : le nœud changerait de côté) |
+
+Deux couleurs, une par joueur : encre (hôte) et rouge #C8283A (invité). Le
+rouge n'est pas regénéré mais recoloré :
+`python3 scripts/recolor-bandeau.py <brut encre> <brut>-rouge.png C8283A`.
+Import à part, jamais dans `MASCOT_POSES` ni sur la landing :
+bruts dans `_bruts/battle/`, puis `node scripts/import-battle-mascots.mjs`
+(marge magenta auto au-delà de 0,90 du cadre, la même pour toutes les images
+d'une pose) → masters `assets-src/mascot/battle/`, variantes
+`public/mascot/battle/`, composant `<BattleMascot pose couleur>`.
