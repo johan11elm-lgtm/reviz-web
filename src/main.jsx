@@ -54,11 +54,14 @@ const bufferEarlyError = (e) => { earlyErrors.push(e.reason ?? e.error ?? e.mess
 window.addEventListener('error', bufferEarlyError);
 window.addEventListener('unhandledrejection', bufferEarlyError);
 
+// trim : une valeur collée dans Vercel peut traîner un saut de ligne final.
+const SENTRY_DSN = import.meta.env.VITE_SENTRY_DSN?.trim();
+
 const loadMonitoring = () => {
-  if (import.meta.env.VITE_SENTRY_DSN) {
+  if (SENTRY_DSN) {
     import('@sentry/react').then(Sentry => {
       Sentry.init({
-        dsn: import.meta.env.VITE_SENTRY_DSN,
+        dsn: SENTRY_DSN,
         environment: import.meta.env.MODE,
         tracesSampleRate: 0.1,
         beforeSend(event) {

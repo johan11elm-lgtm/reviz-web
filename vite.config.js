@@ -19,6 +19,10 @@ export default defineConfig(({ mode }) => ({
     // Sourcemaps requises pour des stack traces Sentry lisibles (web) —
     // jamais en mode ios : elles embarqueraient tout le source dans l'IPA.
     sourcemap: mode !== 'ios',
+    // Polices jamais inlinées en data: URI (les petits sous-ensembles Geist
+    // passeraient sous la limite de 4 Ko) : la CSP de vercel.json
+    // (font-src 'self') les bloquerait. Les autres assets gardent le défaut.
+    assetsInlineLimit: (filePath) => (/\.woff2?$/.test(filePath) ? false : undefined),
     rollupOptions: {
       output: {
         manualChunks: {
