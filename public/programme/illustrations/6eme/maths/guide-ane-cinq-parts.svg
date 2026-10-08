@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 172" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="11.5" font-weight="600" fill="#2D2B57">
+  <!-- Guide-âne : réseau de droites parallèles équidistantes posé sous le segment [AB] ; A est sur une droite, B sur la cinquième droite suivante, et les quatre droites intermédiaires coupent [AB] en 5 parts égales. Réviz, 6e maths, fractions : sens et quotient. -->
+  <path d="M24,22 H336 M24,44 H336 M24,66 H336 M24,88 H336 M24,110 H336 M24,132 H336 M24,154 H336" stroke="#B9B4CF" stroke-width="1.2"/>
+  <path d="M104,44 L262,154" stroke="#B34400" stroke-width="2.25" stroke-linecap="round"/>
+  <path d="M123.5,52.4 L116.1,57.6 M155.1,74.4 L147.7,79.6 M186.7,96.4 L179.3,101.6 M218.3,118.4 L210.9,123.6 M249.9,140.4 L242.5,145.6" fill="none" stroke="#2D2B57" stroke-width="1.3"/>
+  <g><circle cx="104" cy="44" r="2.4"/><circle cx="135.6" cy="66" r="2.4"/><circle cx="167.2" cy="88" r="2.4"/><circle cx="198.8" cy="110" r="2.4"/><circle cx="230.4" cy="132" r="2.4"/><circle cx="262" cy="154" r="2.4"/></g>
+  <g font-size="12.5" font-weight="700" fill="#2D2B57" text-anchor="middle"><text x="94" y="39">A</text><text x="273" y="158">B</text></g>
+</svg>

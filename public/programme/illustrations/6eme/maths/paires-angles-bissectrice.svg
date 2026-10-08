@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 214" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="11.5" font-weight="600" fill="#2D2B57">
+  <!-- Trois figures : deux angles adjacents (même sommet, un côté commun, de part et d'autre de ce côté) ; deux droites sécantes qui forment deux angles opposés par le sommet de 70° et deux de 110° ; la bissectrice d'un angle de 80° construite au compas, avec l'arc centré sur le sommet et les deux arcs de même rayon qui se coupent sur la bissectrice. Réviz, 6e maths, angles. -->
+  <path d="M122,20 V178 M234,20 V178" stroke="#EDE8E1" stroke-width="1"/>
+  <path d="M26,156 L50,156 A24 24 0 0 0 43,139 Z M26,156 L43,139 A24 24 0 0 0 21.8,132.4 Z" fill="#FBE9DD"/>
+  <path d="M26,156 L110,156 M26,156 L11.4,73.3" fill="none" stroke="#2D2B57" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M26,156 L85.4,96.6" fill="none" stroke="#B34400" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M50,156 A24 24 0 0 0 43,139 M40.1,141.9 A20 20 0 0 0 22.5,136.3 M43,139 A24 24 0 0 0 21.8,132.4" fill="none" stroke="#2D2B57" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+  <g class="ill-legende"><rect class="ill-fond" x="30.7" y="183.6" width="62.7" height="18.5" rx="4" fill="#FFFFFF"/><text x="62" y="196" text-anchor="middle">Adjacents</text></g>
+  <path d="M232.2,121.5 L131.8,94.5 M217.6,57.2 L146.4,158.8" fill="none" stroke="#2D2B57" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M199.4,112.7 A18 18 0 0 0 192.3,93.3 M164.6,103.3 A18 18 0 0 0 171.7,122.7" fill="none" stroke="#B34400" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M190,96.5 A14 14 0 0 0 168.5,104.4 M174,119.5 A14 14 0 0 0 195.5,111.6" fill="none" stroke="#2D2B57" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="213.9" y="100.4" text-anchor="middle">70°</text>
+  <g class="ill-legende"><rect class="ill-fond" x="137.6" y="111.2" width="24.9" height="18.5" rx="4" fill="#FFFFFF"/><text x="150.1" y="123.6" text-anchor="middle">70°</text></g>
+  <g class="ill-legende"><rect class="ill-fond" x="154.8" y="67.6" width="31.2" height="18.5" rx="4" fill="#FFFFFF"/><text x="170.4" y="80.1" text-anchor="middle">110°</text></g>
+  <g class="ill-legende"><rect class="ill-fond" x="178" y="131.5" width="31.2" height="18.5" rx="4" fill="#FFFFFF"/><text x="193.6" y="143.9" text-anchor="middle">110°</text></g>
+  <g class="ill-legende"><rect class="ill-fond" x="144.4" y="177.1" width="75.3" height="31.5" rx="4" fill="#FFFFFF"/><text x="182" y="189.5" text-anchor="middle">Opposés par<tspan x="182" dy="13">le sommet</tspan></text></g>
+  <path d="M307.2,164.7 A50 50 0 0 0 258,106 M316.7,117 A40 40 0 0 0 294.7,118.3 M301.5,126.4 A40 40 0 0 0 306.6,105" fill="none" stroke="#2D2B57" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" opacity="0.65"/>
+  <path d="M258,156 L344,156 M258,156 L272.9,71.3" fill="none" stroke="#2D2B57" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M258,156 L328.5,96.9" fill="none" stroke="#B34400" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M280,156 A22 22 0 0 0 274.9,141.9 M274.9,141.9 A22 22 0 0 0 261.8,134.3 M274.9,149.8 L282.4,147.1 M267,140.4 L271,133.5" fill="none" stroke="#2D2B57" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+  <g class="ill-legende"><rect class="ill-fond" x="260.4" y="183.6" width="75.3" height="18.5" rx="4" fill="#FFFFFF"/><text x="298" y="196" text-anchor="middle">Bissectrice</text></g>
+  <g><circle cx="26" cy="156" r="2.2"/><circle cx="182" cy="108" r="2.2"/><circle cx="258" cy="156" r="2.2"/><circle cx="308" cy="156" r="2.2"/><circle cx="266.7" cy="106.8" r="2.2"/><circle cx="305.6" cy="116.1" r="2.2"/></g>
+</svg>
