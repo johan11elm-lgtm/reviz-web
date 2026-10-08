@@ -32,8 +32,8 @@ const chevron = (lo, la) => { const [x, y] = xy(lo, la); return `M${r1(x - 4)},$
 const montagnes = [[84, 29.5], [90, 28.5], [-69, -18], [-70, -32], [-77, -6]].map(([lo, la]) => chevron(lo, la)).join('')
 
 const NOMS = [
-  [-104, 63, ['Grand Nord', 'canadien']],
-  [-40, 71, 'Groenland'],
+  [-112, 60, ['Grand Nord', 'canadien']],
+  [-30, 73, 'Groenland'],
   [102, 64, 'Sibérie'],
   [6, 23, 'Sahara'],
   [80, 36.5, 'Himalaya'],

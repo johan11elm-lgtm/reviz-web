@@ -58,6 +58,9 @@ function controler(ill, lecon) {
   const poids = statSync(fichier).size
   if (poids > POIDS_MAX[ext]) pb.push(`trop lourd : ${Math.round(poids / 1024)} Ko (max ${POIDS_MAX[ext] / 1024} Ko)`)
   if (ill.alt.length < 40) pb.push('texte alternatif trop court : décrire ce que montre la figure')
+  // Surtitre et titre de la carte (style v2) : sans eux, la figure arrive nue dans le Résumé.
+  if (!ill.type) pb.push('type absent ou inconnu (schema, figure, carte, croquis, graphique, oeuvre, photo, document)')
+  if (!ill.titre) pb.push('titre absent')
   const m = ill.ancre.match(/^resume\.sections\[(\d+)\]$/)
   if (m && !lecon.resume?.sections?.[Number(m[1])]) pb.push(`ancre ${ill.ancre} : cette section n'existe pas`)
   if (ill.ancre === 'resume.methode' && !lecon.resume?.methode?.etapes?.length) pb.push('ancre resume.methode : le chapitre n\'a pas de méthode')

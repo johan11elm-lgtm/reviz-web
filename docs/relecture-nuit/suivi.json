@@ -1,0 +1,64 @@
+{
+  "faits": [
+    {
+      "chemin": "3eme/maths/arithmetique-nombres-premiers",
+      "le": "2026-10-08",
+      "corrections": 1
+    },
+    {
+      "chemin": "3eme/maths/puissances-et-racines-carrees",
+      "le": "2026-10-08",
+      "corrections": 0
+    },
+    {
+      "chemin": "3eme/maths/calcul-litteral",
+      "le": "2026-10-08",
+      "corrections": 1
+    },
+    {
+      "chemin": "3eme/maths/equations-et-inequations",
+      "le": "2026-10-08",
+      "corrections": 0
+    },
+    {
+      "chemin": "3eme/maths/notion-de-fonction",
+      "le": "2026-10-08",
+      "corrections": 1
+    },
+    {
+      "chemin": "3eme/maths/fonctions-lineaires-et-affines",
+      "le": "2026-10-08",
+      "corrections": 0
+    },
+    {
+      "chemin": "3eme/maths/proportionnalite-et-grandeurs-composees",
+      "le": "2026-10-08",
+      "corrections": 0
+    },
+    {
+      "chemin": "3eme/maths/theoreme-de-thales",
+      "le": "2026-10-08",
+      "corrections": 1
+    },
+    {
+      "chemin": "3eme/maths/trigonometrie",
+      "le": "2026-10-08",
+      "corrections": 0
+    },
+    {
+      "chemin": "3eme/maths/transformations-homotheties",
+      "le": "2026-10-08",
+      "corrections": 0
+    },
+    {
+      "chemin": "3eme/maths/statistiques",
+      "le": "2026-10-08",
+      "corrections": 1
+    },
+    {
+      "chemin": "3eme/maths/probabilites",
+      "le": "2026-10-08",
+      "corrections": 0
+    }
+  ]
+}
