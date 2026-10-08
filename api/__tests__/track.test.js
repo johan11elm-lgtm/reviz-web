@@ -42,6 +42,12 @@ describe('buildUpdate', () => {
     })
     expect(buildUpdate('battle_creee', { joueur: 'anonyme', issue: 'abandon' })).toEqual({ battle_creee: { total: 1 } })
   })
+  it('compte la provenance (?via=) et ignore une valeur inconnue', () => {
+    expect(buildUpdate('installer_ouvert', { plateforme: 'ios', via: 'tiktok' })).toEqual({
+      installer_ouvert: { total: 1, plateforme: { ios: 1 }, via: { tiktok: 1 } },
+    })
+    expect(buildUpdate('compte_cree', { via: 'javascript:alert(1)' })).toEqual({ compte_cree: { total: 1 } })
+  })
   it('refuse un événement inconnu', () => {
     expect(buildUpdate('mouchard', {})).toBeNull()
   })

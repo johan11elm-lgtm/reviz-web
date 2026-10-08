@@ -33,6 +33,9 @@ const ALLOWED = {
   joueur: ['compte', 'invite'],
   issue: ['victoire', 'egalite', 'forfait'],
   plateforme: ['ios', 'android', 'ordinateur'],
+  // Provenance (`?via=` dans le lien de bio, d'une épingle ou d'une affiche) :
+  // d'où vient l'élève, sans rien identifier.
+  via: ['tiktok', 'instagram', 'pinterest', 'youtube', 'affiche', 'landing'],
 }
 
 /** Date du jour à Paris, au format AAAA-MM-JJ (un document par jour). */
