@@ -1,0 +1,210 @@
+/* -------------------------------------------------------
+   Illustration d'un chapitre : une feuille blanche dans les deux thèmes
+   (couleurs du dessin fixes, comme un document de manuel).
+   ------------------------------------------------------- */
+
+.ill-figure {
+  margin: 14px auto 4px;
+  /* Sur ordinateur, un schéma pleine colonne devient une affiche : on le borne. */
+  max-width: 560px;
+}
+
+.ill-feuille {
+  position: relative;
+  background: #FFFFFF;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 12px;
+  overflow: hidden;
+}
+:root[data-theme="dark"] .ill-feuille {
+  border-color: transparent;
+}
+
+.ill-svg,
+.ill-image {
+  display: block;
+  width: 100%;
+  cursor: zoom-in;
+}
+.ill-svg svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.ill-image {
+  height: auto;
+  border-radius: 8px;
+}
+.ill-attente {
+  min-height: 200px;
+  border-radius: 10px;
+  background: #F6F3EE;
+}
+
+.ill-agrandir {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border: 1px solid #E8E1D6;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.92);
+  color: #2D2B57;
+  font-size: 17px;
+  cursor: pointer;
+}
+.ill-agrandir:hover { background: #FBF5EE; }
+.ill-agrandir:focus-visible { outline: 2px solid #2D2B57; outline-offset: 2px; }
+
+.ill-legende-texte {
+  margin-top: 8px;
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--text-secondary);
+}
+.ill-credit {
+  display: block;
+  margin-top: 2px;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.ill-indice {
+  margin: 8px 0 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+/* ── Mode « Me tester » : étiquettes masquées, révélées au toucher ── */
+.ill-svg.is-test { cursor: default; }
+.ill-svg .ill-legende text,
+.ill-svg .ill-legende .ill-fond {
+  transition: opacity 0.2s ease, fill 0.2s ease;
+}
+.ill-svg.is-test .ill-legende { cursor: pointer; outline: none; }
+.ill-svg.is-test .ill-legende text { opacity: 0; }
+.ill-svg.is-test .ill-legende .ill-fond {
+  fill: #ECE9F4;
+  stroke: #B9B2CF;
+  stroke-width: 1;
+  stroke-dasharray: 3 2;
+}
+.ill-svg.is-test .ill-legende.is-revealed text { opacity: 1; }
+.ill-svg.is-test .ill-legende.is-revealed .ill-fond {
+  fill: #DCF5E6;
+  stroke: #0F6B3A;
+  stroke-dasharray: none;
+}
+.ill-svg.is-test .ill-legende:focus-visible .ill-fond {
+  stroke: #2D2B57;
+  stroke-width: 2;
+  stroke-dasharray: none;
+}
+
+/* ── Plein écran ── */
+.ill-plein-ecran {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  background: #FFFFFF;
+  padding: env(safe-area-inset-top, 0) env(safe-area-inset-right, 0) env(safe-area-inset-bottom, 0) env(safe-area-inset-left, 0);
+  animation: ill-pe-in 0.2s ease-out both;
+}
+@keyframes ill-pe-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.ill-pe-barre {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 12px 8px 18px;
+}
+.ill-pe-titre {
+  flex: 1;
+  margin: 0;
+  padding-top: 8px;
+  font-size: 14px;
+  line-height: 1.4;
+  color: #4A4658;
+}
+.ill-pe-fermer {
+  flex: none;
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border: none;
+  border-radius: 12px;
+  background: #F4EFE8;
+  color: #2D2B57;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.ill-pe-vue {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  touch-action: none;
+  padding: 8px;
+}
+.ill-pe-feuille {
+  width: min(100%, 980px);
+  max-height: 100%;
+  transform-origin: center center;
+  will-change: transform;
+}
+.ill-pe-feuille .ill-svg,
+.ill-pe-feuille .ill-image {
+  cursor: grab;
+}
+.ill-pe-feuille .ill-svg.is-test { cursor: default; }
+.ill-pe-feuille .ill-image {
+  max-height: calc(100dvh - 160px);
+  object-fit: contain;
+}
+
+.ill-pe-zoom {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px 12px 14px;
+}
+.ill-pe-zoom button {
+  min-width: 46px;
+  height: 42px;
+  padding: 0 12px;
+  border: 1px solid #E8E1D6;
+  border-radius: 12px;
+  background: #FFFFFF;
+  color: #2D2B57;
+  font-size: 20px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.ill-pe-zoom .ill-pe-taille {
+  font-size: 14px;
+  min-width: 72px;
+}
+.ill-pe-zoom button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+.ill-pe-credit {
+  margin: 0;
+  padding: 0 18px 12px;
+  font-size: 12px;
+  color: #6E675B;
+  text-align: center;
+}

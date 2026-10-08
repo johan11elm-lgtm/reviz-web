@@ -360,3 +360,12 @@ export const ExternalIcon = (p) => (
     <path d="M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5" />
   </Icon>
 );
+// Agrandir une illustration (flèches vers les coins).
+export const ExpandIcon = (p) => (
+  <Icon {...p}>
+    <path d="M15 3h6v6" />
+    <path d="M21 3l-7 7" />
+    <path d="M9 21H3v-6" />
+    <path d="M3 21l7-7" />
+  </Icon>
+);

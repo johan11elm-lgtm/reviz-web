@@ -1,5 +1,5 @@
-import { describe, it, expect, beforeEach } from 'vitest'
-import { render, screen, fireEvent } from '@testing-library/react'
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
+import { render, screen, fireEvent, within } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
 import Resume from '../Resume'
 
@@ -86,5 +86,59 @@ describe('<Resume /> — fiche enrichie', () => {
     const srs = JSON.parse(localStorage.getItem('reviz-srs') || '{}')
     expect(Object.keys(srs)).toEqual(['prog-revolution_2'])
     expect(screen.getByText(/dès demain dans tes flashcards/)).toBeInTheDocument()
+  })
+})
+
+describe('<Resume /> — illustrations', () => {
+  const avecFigures = illustrations =>
+    localStorage.setItem('reviz-ai-data', JSON.stringify({ ...AI_DATA, illustrations }))
+  const SVG = '<svg viewBox="0 0 10 10"><g class="ill-legende"><rect class="ill-fond"/><text>Aorte</text></g></svg>'
+
+  afterEach(() => vi.unstubAllGlobals())
+
+  it('affiche la figure dans sa section, avec légende et crédit', () => {
+    avecFigures([{
+      src: '/programme/illustrations/4eme/histoire/sacre.webp', alt: 'Le Sacre de Napoléon', ancre: 'resume.sections[1]',
+      legende: 'Napoléon couronne Joséphine.', credit: 'Jacques-Louis David, 1807, musée du Louvre',
+    }])
+    renderResume()
+    const img = screen.getByRole('img', { name: 'Le Sacre de Napoléon' })
+    const section = img.closest('.resume-section-card')
+    expect(within(section).getByText('La République est proclamée en 1792.')).toBeInTheDocument()
+    expect(within(section).getByText('Jacques-Louis David, 1807, musée du Louvre')).toBeInTheDocument()
+  })
+
+  it('ignore une figure qui ne vient pas de nos fichiers', () => {
+    avecFigures([{ src: 'https://exemple.com/x.png', alt: 'Piège', ancre: 'resume.sections[0]' }])
+    renderResume()
+    expect(screen.queryByRole('img', { name: 'Piège' })).not.toBeInTheDocument()
+  })
+
+  it('« Me tester » masque les légendes du schéma, révélées une à une au toucher', async () => {
+    vi.stubGlobal('fetch', vi.fn(async () => ({ ok: true, text: async () => SVG })))
+    avecFigures([{
+      src: '/programme/illustrations/5eme/svt/coeur.svg', alt: 'Le cœur', ancre: 'resume.methode', legendesMasquables: true,
+    }])
+    renderResume()
+    await screen.findByRole('img', { name: 'Le cœur' })
+    fireEvent.click(screen.getAllByRole('button', { name: 'Me tester' })[0])
+    const legende = screen.getByRole('button', { name: /Légende masquée/ })
+    expect(screen.getByText(/Retrouve chaque légende/)).toBeInTheDocument()
+    fireEvent.click(legende.querySelector('text'))
+    expect(legende).toHaveClass('is-revealed')
+    fireEvent.click(screen.getAllByRole('button', { name: 'Tout afficher' })[0])
+    expect(legende).not.toHaveClass('is-revealed')
+    expect(screen.queryByRole('button', { name: /Légende masquée/ })).not.toBeInTheDocument()
+  })
+
+  it('« Agrandir » ouvre le plein écran, « Fermer » le referme', () => {
+    avecFigures([{ src: '/programme/illustrations/4eme/histoire/sacre.webp', alt: 'Le Sacre', ancre: 'resume.intro', legende: 'Le Sacre' }])
+    renderResume()
+    fireEvent.click(screen.getByRole('button', { name: "Agrandir l'illustration" }))
+    const dialog = screen.getByRole('dialog', { name: 'Le Sacre' })
+    fireEvent.click(within(dialog).getByRole('button', { name: 'Zoomer' }))
+    expect(within(dialog).getByText('150 %')).toBeInTheDocument()
+    fireEvent.click(within(dialog).getByRole('button', { name: 'Fermer' }))
+    expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
   })
 })

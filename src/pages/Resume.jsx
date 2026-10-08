@@ -12,6 +12,9 @@ import { CoachChat, CoachHeaderButton } from '../components/CoachChat'
 import { subjectInfo as sharedSubjectInfo } from '../utils/subjects'
 import { nbsp } from '../utils/typography'
 import { resumeReadingMinutes, splitOnTerms, pickCheckCards } from '../utils/resume'
+import { parseIllustrations } from '../utils/lessonSchema'
+import { illustrationsAJour } from '../services/programmeService'
+import { Illustration } from '../components/Illustration'
 import './Resume.css'
 
 function subjectInfo(s) {
@@ -28,6 +31,7 @@ function getResumeData() {
       subject:     ai.metadata?.subject || 'Cours',
       readingTime: resumeReadingMinutes(ai.resume),
       checks:      pickCheckCards(ai.flashcards),
+      illustrations: parseIllustrations(ai.illustrations),
       xp: 30,
     }
   } catch { /* ignore */ }
@@ -108,6 +112,8 @@ function ResumeContent() {
   const methode = resumeData.methode?.etapes?.length ? resumeData.methode : null
   const pieges = Array.isArray(resumeData.pieges) ? resumeData.pieges : []
   const checks = Array.isArray(resumeData.checks) ? resumeData.checks : []
+  const illustrations = useIllustrations(resumeData.illustrations ?? [])
+  const figuresDe = ancre => illustrations.filter(ill => ill.ancre === ancre)
 
   // Mode « Me tester » : points à retenir et définitions masqués, révélés au toucher.
   const [testMode, setTestMode] = useState(false)
@@ -277,12 +283,23 @@ function ResumeContent() {
             ))}
           </div>
         </div>
+        {figuresDe('resume.intro').map(ill => (
+          <Illustration key={ill.id} illustration={ill} testMode={testMode} />
+        ))}
 
         {/* Sections du cours */}
         <BlockLabel icon={<BookOpenIcon />} color={info.dot}>Le cours</BlockLabel>
 
         {resumeData.sections.map((section, i) => (
-          <SectionCard key={i} index={i} section={section} keyTerms={resumeData.keyTerms} accent={info.dot} />
+          <SectionCard
+            key={i}
+            index={i}
+            section={section}
+            keyTerms={resumeData.keyTerms}
+            accent={info.dot}
+            illustrations={figuresDe(`resume.sections[${i}]`)}
+            testMode={testMode}
+          />
         ))}
 
         {/* Méthode : le savoir-faire du chapitre, en étapes */}
@@ -291,6 +308,9 @@ function ResumeContent() {
             <BlockLabel icon={<TargetIcon />} color={info.dot}>La méthode</BlockLabel>
             <div className="rv-card rv-card--padded resume-methode">
               <h3 className="resume-section-heading">{nbsp(methode.titre)}</h3>
+              {figuresDe('resume.methode').map(ill => (
+                <Illustration key={ill.id} illustration={ill} testMode={testMode} />
+              ))}
               <ol className="resume-methode-steps">
                 {methode.etapes.map((etape, i) => (
                   <li key={i}>
@@ -371,6 +391,23 @@ function ResumeContent() {
   )
 }
 
+/**
+ * Illustrations de la leçon. Pour un chapitre du programme, on relit celles du
+ * fichier du chapitre : une figure ajoutée après la première ouverture
+ * apparaît aussi, sans attendre que l'élève rouvre le chapitre.
+ */
+function useIllustrations(initiales) {
+  const [liste, setListe] = useState(initiales)
+  useEffect(() => {
+    let annule = false
+    illustrationsAJour()
+      .then(l => { if (!annule && l) setListe(l) })
+      .catch(() => { /* hors ligne : on garde celles de la copie */ })
+    return () => { annule = true }
+  }, [])
+  return liste
+}
+
 function BlockLabel({ icon, color, right, children }) {
   return (
     <div className="resume-block-label">
@@ -405,7 +442,7 @@ function Cache({ hidden, className, label, children }) {
 // « 1. Le triangle rectangle » → « Le triangle rectangle » : le numéro passe dans la pastille.
 const sansNumero = titre => String(titre ?? '').replace(/^\s*\d+\s*[.)\-–]\s*/, '')
 
-function SectionCard({ index, section, keyTerms, accent }) {
+function SectionCard({ index, section, keyTerms, accent, illustrations = [], testMode = false }) {
   const [openTerm, setOpenTerm] = useState(null)
   const termNames = keyTerms.map(t => t.term)
   const def = openTerm && keyTerms.find(t => t.term === openTerm)
@@ -440,6 +477,9 @@ function SectionCard({ index, section, keyTerms, accent }) {
           </button>
         </div>
       )}
+      {illustrations.map(ill => (
+        <Illustration key={ill.id} illustration={ill} testMode={testMode} />
+      ))}
       {section.formula && (
         <div className="rv-callout rv-callout--violet resume-formula-block">
           <div className="resume-formula-text">{section.formula}</div>

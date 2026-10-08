@@ -8,8 +8,9 @@ import { loadLessons, saveLesson, whenLessonsSynced } from './historyService'
 import { countDueCards, getCardState } from './srsService'
 import { track } from './statsService'
 import {
-  catalogueUrl, chapterContentUrl, chapterLessonId, chapterState,
+  catalogueUrl, chapterContentUrl, chapterLessonId, chapterState, isProgrammeLessonId,
 } from '../utils/programme'
+import { parseIllustrations } from '../utils/lessonSchema'
 
 const _cache = new Map()
 
@@ -77,11 +78,27 @@ export async function openChapter(classe, matiere, chapter) {
     id: chapterLessonId(chapter.id),
     source: 'programme',
     chapterId: chapter.id,
+    classe,
+    matiere,
   })
   // Un rechargement immédiat perdrait l'écriture Firestore en vol : on lui
   // laisse jusqu'à 1,5 s, sans bloquer l'élève au-delà.
   await Promise.race([whenLessonsSynced(), new Promise(r => setTimeout(r, 1500))])
   return entry
+}
+
+/**
+ * Illustrations à jour d'une leçon du programme : relues dans le fichier du
+ * chapitre, pour qu'une figure ajoutée après la première ouverture apparaisse
+ * aussi. null si ce n'est pas un chapitre ou si l'entrée est trop ancienne
+ * (enregistrée sans classe : rouvrir le chapitre suffit à la compléter).
+ */
+export async function illustrationsAJour(lessonId = localStorage.getItem('reviz-current-lesson-id')) {
+  if (!isProgrammeLessonId(lessonId)) return null
+  const entry = loadLessons().find(l => l.id === lessonId)
+  if (!entry?.chapterId || !entry.classe || !entry.matiere) return null
+  const content = await loadChapterContent(entry.classe, entry.matiere, entry.chapterId)
+  return parseIllustrations(content.illustrations)
 }
 
 // Tests : vider le cache mémoire entre deux cas.

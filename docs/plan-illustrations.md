@@ -1,6 +1,8 @@
 # Plan — Illustrations dans les chapitres (schémas, cartes, figures, œuvres)
 
-_Rédigé le 2026-10-08, à la demande de Johan, après l'audit `docs/relecture-ia/ressources-manquantes.md`. Statut : proposition, décisions en fin de document. Annonce « Bientôt » déjà sur la landing (reviz-landing 4a54638, non poussé)._
+_Rédigé le 2026-10-08, à la demande de Johan, après l'audit `docs/relecture-ia/ressources-manquantes.md`. Annonce « Bientôt » en ligne sur la landing (reviz-landing 4a54638, poussé le 8 octobre)._
+
+**Avancement (8 octobre au soir) : socle et premier exemple faits, non poussés.** Champ `illustrations` (`lessonSchema.parseIllustrations`), composant `Illustration` (feuille blanche, plein écran avec pincement et boutons − / +, légendes masquables en mode « Me tester »), ancrage dans `Resume.jsx`, `classe`/`matiere` enregistrées à l'ouverture d'un chapitre et relecture des illustrations (`illustrationsAJour`), fiches publiques et sitemap d'images côté landing. Exemple : schéma du cœur vu de face dans `5eme/svt/circulation-sanguine` (section 1). Reste avant de lancer la production : vérifier au simulateur iOS, puis l'outil `scripts/programme/illustrations.mjs` (§ 5).
 
 ## 1. Le problème
 

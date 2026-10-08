@@ -8,7 +8,7 @@ vi.mock('../firebaseConfig', () => ({ db: {} }))
 vi.mock('../scanLimitService', () => ({ incrementScanCount: vi.fn() }))
 vi.mock('../challengeService', () => ({ updateChallengeProgress: vi.fn() }))
 
-const { loadCatalogue, loadChapterContent, openChapter, chapterProgress, matiereProgress, _resetProgrammeCache } = await import('../programmeService')
+const { loadCatalogue, loadChapterContent, openChapter, chapterProgress, matiereProgress, illustrationsAJour, _resetProgrammeCache } = await import('../programmeService')
 const { setActiveUser, loadLessons } = await import('../historyService')
 const { setSrsUser, updateCardState } = await import('../srsService')
 
@@ -97,5 +97,35 @@ describe('progression', () => {
     expect(matiereProgress(catalogue.matieres[0])).toEqual({ total: 2, commences: 0, maitrises: 0 })
     await openChapter('3ème', 'Maths', ch)
     expect(matiereProgress(catalogue.matieres[0])).toEqual({ total: 2, commences: 1, maitrises: 0 })
+  })
+})
+
+describe('illustrations', () => {
+  const ch = catalogue.matieres[0].chapitres[0]
+  const figure = {
+    id: 'thales', src: '/programme/illustrations/3eme/maths/thales.svg', alt: 'Configuration de Thalès', ancre: 'resume.sections[0]',
+  }
+
+  it('openChapter retient la classe et la matière du chapitre', async () => {
+    await openChapter('3ème', 'Maths', ch)
+    expect(loadLessons()[0]).toMatchObject({ chapterId: 'thales', classe: '3ème', matiere: 'Maths' })
+  })
+
+  it('relit les illustrations ajoutées au chapitre après sa première ouverture', async () => {
+    await openChapter('3ème', 'Maths', ch)
+    expect(await illustrationsAJour()).toEqual([])
+    _resetProgrammeCache()
+    vi.stubGlobal('fetch', mockFetch({ '/programme/3eme/maths/thales.json': { ...content, illustrations: [figure] } }))
+    const liste = await illustrationsAJour()
+    expect(liste.map(i => i.src)).toEqual(['/programme/illustrations/3eme/maths/thales.svg'])
+  })
+
+  it('ne relit rien pour une leçon scannée ou une entrée enregistrée sans classe', async () => {
+    expect(await illustrationsAJour('1700000000000')).toBeNull()
+    await openChapter('3ème', 'Maths', ch)
+    // eslint-disable-next-line no-unused-vars
+    const lessons = loadLessons().map(({ classe, ...l }) => l)
+    localStorage.setItem('reviz-lessons-u1', JSON.stringify(lessons))
+    expect(await illustrationsAJour('prog-thales')).toBeNull()
   })
 })

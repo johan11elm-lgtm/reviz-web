@@ -98,5 +98,39 @@ export function parseLessonJson(raw) {
     })
   if (branches.length < 2) throw new Error('INVALID_JSON')
   parsed.mindmap.branches = branches
+
+  // Illustrations (octobre 2026) : seulement sur les chapitres du programme,
+  // jamais exigées. Une entrée invalide est écartée, pas bloquante.
+  parsed.illustrations = parseIllustrations(parsed.illustrations)
   return parsed
+}
+
+// Seuls nos propres fichiers sont acceptés : une URL venue d'ailleurs (réponse
+// d'IA détournée, leçon modifiée à la main) ne doit jamais être chargée.
+const ILLUSTRATION_SRC = /^\/programme\/illustrations\/[a-z0-9/_-]+\.(svg|webp|png|jpg)$/
+const ILLUSTRATION_ANCRE = /^resume\.(intro|methode|sections\[\d+\])$/
+
+/**
+ * Normalise la liste des illustrations d'un chapitre :
+ * [{ id, src, alt, legende, credit, ancre, legendesMasquables }].
+ * Entrée non conforme → ignorée ; champ absent → tableau vide.
+ */
+export function parseIllustrations(list) {
+  if (!Array.isArray(list)) return []
+  const texte = v => (typeof v === 'string' && v.trim() ? v.trim() : null)
+  return list
+    .filter(i => i && typeof i === 'object'
+      && typeof i.src === 'string' && ILLUSTRATION_SRC.test(i.src) && !i.src.includes('..')
+      && texte(i.alt)
+      && typeof i.ancre === 'string' && ILLUSTRATION_ANCRE.test(i.ancre))
+    .map((i, n) => ({
+      id:      texte(i.id) ?? `illustration-${n}`,
+      src:     i.src,
+      alt:     texte(i.alt),
+      legende: texte(i.legende),
+      credit:  texte(i.credit),
+      ancre:   i.ancre,
+      // Légendes cachables en mode « Me tester » : SVG maison uniquement.
+      legendesMasquables: i.legendesMasquables === true && i.src.endsWith('.svg'),
+    }))
 }

@@ -68,10 +68,12 @@ const normalize = s => s?.toLowerCase().trim().replace(/\s+/g, ' ') ?? ''
  * @param {string} [options.id]            identifiant stable (chapitre du programme : « prog-<id> »)
  * @param {'scan'|'programme'} [options.source='scan']
  * @param {string} [options.chapterId]     identifiant du chapitre dans le catalogue
+ * @param {string} [options.classe]        classe du chapitre (« 5ème ») : un même id existe dans plusieurs classes
+ * @param {string} [options.matiere]       matière du chapitre, pour relire son fichier plus tard
  * @param {boolean} [options.countsAsScan] compte dans le quota et le défi « scan » (défaut : source === 'scan')
  */
 export function saveLesson(metadata, aiData, options = {}) {
-  const { id = null, source = 'scan', chapterId = null, countsAsScan = source === 'scan' } = options
+  const { id = null, source = 'scan', chapterId = null, classe = null, matiere = null, countsAsScan = source === 'scan' } = options
   const lessons = loadLessons()
 
   // Supprimer une éventuelle entrée équivalente (rescanner la même leçon,
@@ -91,6 +93,8 @@ export function saveLesson(metadata, aiData, options = {}) {
     aiData,
   }
   if (chapterId) entry.chapterId = chapterId
+  if (classe) entry.classe = classe
+  if (matiere) entry.matiere = matiere
 
   lessons.unshift(entry)                               // plus récent en premier
   if (lessons.length > MAX_LESSONS) lessons.splice(MAX_LESSONS)
