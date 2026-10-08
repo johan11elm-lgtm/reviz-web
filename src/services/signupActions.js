@@ -18,6 +18,7 @@ import { Capacitor } from '@capacitor/core';
 import { auth, db } from './firebaseConfig';
 import { createUserProfile } from './userProfileService';
 import { serializeLevel, isUnder15 } from '../utils/levels';
+import { track } from './statsService';
 
 // Tout ce dont l'inscription a besoin côté Firebase passe par ce seul module
 // (un seul import() côté page) : le consentement parental y est ré-exporté.
@@ -27,6 +28,7 @@ export { sendParentalConsent, consentErrorMessage } from './consentService';
 // `level` est un objet { cycle, classe, specialites?, filiere? }
 export async function signup(prenom, email, password, level, birthDate = null) {
   const { user } = await createUserWithEmailAndPassword(auth, email, password);
+  track('compte_cree', { classe: level?.classe });
   await updateProfile(user, { displayName: prenom });
   // Envoyer l'email de vérification (fire-and-forget)
   sendEmailVerification(user).catch(() => {});
