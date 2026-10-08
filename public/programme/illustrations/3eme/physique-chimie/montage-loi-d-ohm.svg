@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 204" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
+  <!-- Montage pour tracer la caractéristique : générateur, ampèremètre et résistance en série ; voltmètre branché en dérivation aux bornes de la résistance. Réviz, 3e physique-chimie, loi d’Ohm. -->
+  <g fill="none" stroke="#2D2B57" stroke-width="1.75" stroke-linejoin="miter">
+    <path d="M100,60 H250 V190 H100 Z"/>
+  </g>
+  <g fill="none" stroke="#B34400" stroke-width="2.25" stroke-linejoin="miter">
+    <path d="M250,95 H305 V155 H250"/>
+  </g>
+  <circle cx="250" cy="95" r="2.6" fill="#2D2B57"/>
+  <circle cx="250" cy="155" r="2.6" fill="#2D2B57"/>
+  <g><rect x="97" y="121" width="6" height="8" fill="#FFFFFF"/><path d="M87,121 H113" stroke="#2D2B57" stroke-width="1.75"/><path d="M94,129 H106" stroke="#2D2B57" stroke-width="4.5"/><g font-size="11" font-weight="600" fill="#8A8273"><text x="119" y="120" text-anchor="middle">+</text><text x="113" y="140" text-anchor="middle">−</text></g></g>
+  <g><circle cx="175" cy="60" r="11" fill="#FBE9DD" stroke="#B34400" stroke-width="2.25"/><text x="175" y="64.4" font-size="12.5" font-weight="700" fill="#2D2B57" text-anchor="middle">A</text></g>
+  <rect x="244.5" y="111" width="11" height="28" fill="#FFFFFF" stroke="#2D2B57" stroke-width="1.75"/>
+  <g><circle cx="305" cy="125" r="11" fill="#FBE9DD" stroke="#B34400" stroke-width="2.25"/><text x="305" y="129.4" font-size="12.5" font-weight="700" fill="#2D2B57" text-anchor="middle">V</text></g>
+  <g><path d="M138,60 L127,55 L127,65 Z" fill="#2D2B57"/><text x="132" y="78" font-size="11.5" font-weight="600" fill="#2D2B57" text-anchor="middle">I</text></g>
+  <g stroke="#2D2B57" stroke-width="1" opacity="0.6" fill="none">
+    <path d="M175,34 L175,46"/>
+    <path d="M78,125 L86,125"/>
+    <path d="M235,125 L243,125"/>
+    <path d="M318,34 L313.4,117.9"/>
+  </g>
+  <g fill="#2D2B57">
+    <circle cx="175" cy="46" r="1.8"/>
+    <circle cx="86" cy="125" r="1.8"/>
+    <circle cx="243" cy="125" r="1.8"/>
+    <circle cx="313.4" cy="117.9" r="1.8"/>
+  </g>
+  <g font-size="11.5" font-weight="600" fill="#2D2B57">
+    <g class="ill-legende" text-anchor="middle">
+      <rect class="ill-fond" x="137.4" y="6" width="75.3" height="28" rx="4" fill="#FFFFFF"/>
+      <text x="175" y="17">Ampèremètre<tspan x="175" dy="13">en série</tspan></text>
+    </g>
+    <g class="ill-legende" text-anchor="end">
+      <rect class="ill-fond" x="9" y="118" width="69" height="15" rx="4" fill="#FFFFFF"/>
+      <text x="75" y="129">Générateur</text>
+    </g>
+    <g class="ill-legende" text-anchor="end">
+      <rect class="ill-fond" x="166" y="118" width="69" height="15" rx="4" fill="#FFFFFF"/>
+      <text x="232" y="129">Résistance</text>
+    </g>
+    <g class="ill-legende" text-anchor="middle">
+      <rect class="ill-fond" x="256.1" y="6" width="87.9" height="28" rx="4" fill="#FFFFFF"/>
+      <text x="300" y="17">Voltmètre<tspan x="300" dy="13">en dérivation</tspan></text>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 190" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
+  <!-- Circuit simple en rectangle : pile, interrupteur fermé, lampe ; flèche du sens conventionnel du courant, de la borne + vers la borne −. Réviz, 5e physique-chimie, le circuit électrique simple. -->
+  <g fill="none" stroke="#2D2B57" stroke-width="1.75" stroke-linejoin="miter">
+    <path d="M100,50 H260 V170 H100 Z"/>
+  </g>
+  <g><rect x="97" y="106" width="6" height="8" fill="#FFFFFF"/><path d="M87,106 H113" stroke="#2D2B57" stroke-width="1.75"/><path d="M94,114 H106" stroke="#2D2B57" stroke-width="4.5"/><g font-size="11" font-weight="600" fill="#8A8273"><text x="119" y="105" text-anchor="middle">+</text><text x="113" y="125" text-anchor="middle">−</text></g></g>
+  <g><rect x="195" y="47" width="20" height="6" fill="#FFFFFF"/><path d="M197,50 L213,50" stroke="#2D2B57" stroke-width="1.75" stroke-linecap="round"/><circle cx="195" cy="50" r="2.4" fill="#FFFFFF" stroke="#2D2B57" stroke-width="1.5"/><circle cx="215" cy="50" r="2.4" fill="#FFFFFF" stroke="#2D2B57" stroke-width="1.5"/></g>
+  <g><circle cx="260" cy="110" r="10" fill="#FFFFFF" stroke="#2D2B57" stroke-width="1.75"/><path d="M252.9,102.9 L267.1,117.1 M252.9,117.1 L267.1,102.9" stroke="#2D2B57" stroke-width="1.75"/></g>
+  <g><path d="M151,50 L140,45 L140,55 Z" fill="#B34400"/><text x="145" y="67" font-size="11.5" font-weight="600" fill="#2D2B57" text-anchor="middle">I</text></g>
+  <g stroke="#2D2B57" stroke-width="1" opacity="0.6" fill="none">
+    <path d="M75,110 L86,110"/>
+    <path d="M205,42 L205,47"/>
+    <path d="M287,110 L271,110"/>
+    <path d="M118,31 L141,45"/>
+  </g>
+  <g fill="#2D2B57">
+    <circle cx="86" cy="110" r="1.8"/>
+    <circle cx="205" cy="47" r="1.8"/>
+    <circle cx="271" cy="110" r="1.8"/>
+    <circle cx="141" cy="45" r="1.8"/>
+  </g>
+  <g font-size="11.5" font-weight="600" fill="#2D2B57">
+    <g class="ill-legende" text-anchor="end">
+      <rect class="ill-fond" x="43.8" y="103" width="31.2" height="15" rx="4" fill="#FFFFFF"/>
+      <text x="72" y="114">Pile</text>
+    </g>
+    <g class="ill-legende" text-anchor="middle">
+      <rect class="ill-fond" x="164.2" y="14" width="81.6" height="28" rx="4" fill="#FFFFFF"/>
+      <text x="205" y="25">Interrupteur<tspan x="205" dy="13">fermé</tspan></text>
+    </g>
+    <g class="ill-legende">
+      <rect class="ill-fond" x="287" y="103" width="37.5" height="15" rx="4" fill="#FFFFFF"/>
+      <text x="290" y="114">Lampe</text>
+    </g>
+    <g class="ill-legende">
+      <rect class="ill-fond" x="37" y="16" width="100.5" height="15" rx="4" fill="#FFFFFF"/>
+      <text x="40" y="27">Sens du courant</text>
+    </g>
+  </g>
+</svg>

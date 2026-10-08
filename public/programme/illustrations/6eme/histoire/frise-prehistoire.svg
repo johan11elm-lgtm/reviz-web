@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 362" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
+<!-- Frise de la Préhistoire à l'échelle, en trois bandes (7 millions d'années, 500 000 ans, 50 000 ans jusqu'à aujourd'hui) : Toumaï, Lucy, premiers outils, Homo erectus, feu, Homo sapiens, Chauvet, Lascaux, écriture. Réviz, 6e histoire, les débuts de l'humanité. Généré par scripts/illustrations/frise-prehistoire.mjs -->
+<path d="M313.7,96V106L24,130H336V96Z" fill="#B34400" fill-opacity="0.07" stroke="#B34400" stroke-width="1" stroke-dasharray="3 3" stroke-opacity="0.7"/>
+<path d="M304.8,162V220L24,250H336V162Z" fill="#B34400" fill-opacity="0.07" stroke="#B34400" stroke-width="1" stroke-dasharray="3 3" stroke-opacity="0.7"/>
+<g font-size="11.5" font-weight="600" fill="#2D2B57">
+<rect x="24" y="84" width="312" height="10" fill="#EAE8F2" stroke="#2D2B57" stroke-width="1.75"/>
+<rect x="313.7" y="84" width="22.3" height="10" fill="#FBE9DD" stroke="#B34400" stroke-width="2.25"/>
+<text x="336" y="78" text-anchor="end" font-size="11" font-weight="600" fill="#8A8273">aujourd'hui</text>
+<g class="ill-legende"><rect class="ill-fond" x="24" y="25" width="69" height="28" rx="4" fill="#FFFFFF"/><text x="27" y="36">Toumaï<tspan x="27" dy="13">7 millions</tspan></text></g>
+<path d="M25,53L24,83" stroke="#2D2B57" stroke-width="1" opacity="0.6" fill="none"/><circle cx="24" cy="83" r="1.8" fill="#2D2B57" opacity="0.8"/>
+<circle cx="24" cy="89" r="2.6" fill="#2D2B57"/>
+<g class="ill-legende"><rect class="ill-fond" x="115.4" y="38" width="81.6" height="28" rx="4" fill="#FFFFFF"/><text x="194" y="49" text-anchor="end">Lucy<tspan x="194" dy="13">3,2 millions</tspan></text></g>
+<path d="M193,66L193.4,83" stroke="#2D2B57" stroke-width="1" opacity="0.6" fill="none"/><circle cx="193.4" cy="83" r="1.8" fill="#2D2B57" opacity="0.8"/>
+<circle cx="193.4" cy="89" r="2.6" fill="#2D2B57"/>
+<g class="ill-legende"><rect class="ill-fond" x="129.5" y="8" width="100.5" height="28" rx="4" fill="#FFFFFF"/><text x="227" y="19" text-anchor="end">Premiers outils<tspan x="227" dy="13">2,5 millions</tspan></text></g>
+<path d="M224.6,36L224.6,83" stroke="#2D2B57" stroke-width="1" opacity="0.6" fill="none"/><circle cx="224.6" cy="83" r="1.8" fill="#2D2B57" opacity="0.8"/>
+<circle cx="224.6" cy="89" r="2.6" fill="#2D2B57"/>
+<g class="ill-legende"><rect class="ill-fond" x="246" y="12" width="94.2" height="41" rx="4" fill="#FFFFFF"/><text x="249" y="23">Homo erectus<tspan x="249" dy="13">hors d'Afrique</tspan><tspan x="249" dy="13">2 millions</tspan></text></g>
+<path d="M249,53L246.9,83" stroke="#2D2B57" stroke-width="1" opacity="0.6" fill="none"/><circle cx="246.9" cy="83" r="1.8" fill="#2D2B57" opacity="0.8"/>
+<circle cx="246.9" cy="89" r="2.6" fill="#2D2B57"/>
+<rect x="24" y="150" width="312" height="10" fill="#EAE8F2" stroke="#2D2B57" stroke-width="1.75"/>
+<rect x="304.8" y="150" width="31.2" height="10" fill="#FBE9DD" stroke="#B34400" stroke-width="2.25"/>
+<text x="24" y="144" font-size="11" font-weight="600" fill="#8A8273">il y a 500 000 ans</text>
+<text x="336" y="144" text-anchor="end" font-size="11" font-weight="600" fill="#8A8273">aujourd'hui</text>
+<g class="ill-legende"><rect class="ill-fond" x="33" y="173" width="106.8" height="28" rx="4" fill="#FFFFFF"/><text x="86.4" y="184" text-anchor="middle">Maîtrise du feu<tspan x="86.4" dy="13">vers 400 000 ans</tspan></text></g>
+<path d="M86.4,173L86.4,161" stroke="#2D2B57" stroke-width="1" opacity="0.6" fill="none"/><circle cx="86.4" cy="161" r="1.8" fill="#2D2B57" opacity="0.8"/>
+<circle cx="86.4" cy="155" r="2.6" fill="#2D2B57"/>
+<g class="ill-legende"><rect class="ill-fond" x="149" y="173" width="81.6" height="28" rx="4" fill="#FFFFFF"/><text x="152" y="184">Homo sapiens<tspan x="152" dy="13">300 000 ans</tspan></text></g>
+<path d="M152,173L148.8,161" stroke="#2D2B57" stroke-width="1" opacity="0.6" fill="none"/><circle cx="148.8" cy="161" r="1.8" fill="#2D2B57" opacity="0.8"/>
+<circle cx="148.8" cy="155" r="2.6" fill="#2D2B57"/>
+<rect x="24" y="270" width="312" height="10" fill="#EAE8F2" stroke="#2D2B57" stroke-width="1.75"/>
+<text x="24" y="264" font-size="11" font-weight="600" fill="#8A8273">il y a 50 000 ans</text>
+<text x="336" y="264" text-anchor="end" font-size="11" font-weight="600" fill="#8A8273">aujourd'hui</text>
+<g class="ill-legende"><rect class="ill-fond" x="76.9" y="293" width="69" height="28" rx="4" fill="#FFFFFF"/><text x="111.4" y="304" text-anchor="middle">Chauvet<tspan x="111.4" dy="13">36 000 ans</tspan></text></g>
+<path d="M111.4,293L111.4,281" stroke="#2D2B57" stroke-width="1" opacity="0.6" fill="none"/><circle cx="111.4" cy="281" r="1.8" fill="#2D2B57" opacity="0.8"/>
+<circle cx="111.4" cy="275" r="2.6" fill="#2D2B57"/>
+<g class="ill-legende"><rect class="ill-fond" x="189.2" y="293" width="69" height="28" rx="4" fill="#FFFFFF"/><text x="223.7" y="304" text-anchor="middle">Lascaux<tspan x="223.7" dy="13">18 000 ans</tspan></text></g>
+<path d="M223.7,293L223.7,281" stroke="#2D2B57" stroke-width="1" opacity="0.6" fill="none"/><circle cx="223.7" cy="281" r="1.8" fill="#2D2B57" opacity="0.8"/>
+<circle cx="223.7" cy="275" r="2.6" fill="#2D2B57"/>
+<g class="ill-legende"><rect class="ill-fond" x="213.3" y="333" width="125.7" height="28" rx="4" fill="#FFFFFF"/><text x="336" y="344" text-anchor="end">Écriture<tspan x="336" dy="13">vers 3300 av. J.-C.</tspan></text></g>
+<path d="M307,333L302.9,281" stroke="#2D2B57" stroke-width="1" opacity="0.6" fill="none"/><circle cx="302.9" cy="281" r="1.8" fill="#2D2B57" opacity="0.8"/>
+<circle cx="302.9" cy="275" r="2.6" fill="#2D2B57"/>
+</g>
+</svg>

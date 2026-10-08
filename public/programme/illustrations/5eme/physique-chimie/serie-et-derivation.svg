@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 322" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
+  <!-- En haut, pile et deux lampes en série (une seule boucle) ; en bas, pile et deux lampes en dérivation avec deux nœuds, la branche principale et deux branches dérivées. Réviz, 5e physique-chimie, circuits en série et en dérivation. -->
+  <text x="15" y="22" font-size="11" font-weight="600" fill="#8A8273" text-anchor="start">En série</text>
+  <g fill="none" stroke="#2D2B57" stroke-width="1.75" stroke-linejoin="miter">
+    <path d="M100,36 H260 V114 H100 Z"/>
+  </g>
+  <g><rect x="97" y="71" width="6" height="8" fill="#FFFFFF"/><path d="M87,71 H113" stroke="#2D2B57" stroke-width="1.75"/><path d="M94,79 H106" stroke="#2D2B57" stroke-width="4.5"/><g font-size="11" font-weight="600" fill="#8A8273"><text x="119" y="70" text-anchor="middle">+</text><text x="113" y="90" text-anchor="middle">−</text></g></g>
+  <g><circle cx="180" cy="36" r="10" fill="#FFFFFF" stroke="#2D2B57" stroke-width="1.75"/><path d="M172.9,28.9 L187.1,43.1 M172.9,43.1 L187.1,28.9" stroke="#2D2B57" stroke-width="1.75"/></g>
+  <g><circle cx="260" cy="75" r="10" fill="#FFFFFF" stroke="#2D2B57" stroke-width="1.75"/><path d="M252.9,67.9 L267.1,82.1 M252.9,82.1 L267.1,67.9" stroke="#2D2B57" stroke-width="1.75"/></g>
+  <text x="180" y="61" font-size="11.5" font-weight="600" fill="#2D2B57" text-anchor="middle">L₁</text>
+  <text x="244" y="79" font-size="11.5" font-weight="600" fill="#2D2B57" text-anchor="end">L₂</text>
+  <text x="15" y="152" font-size="11" font-weight="600" fill="#8A8273" text-anchor="start">En dérivation</text>
+  <g fill="none" stroke="#2D2B57" stroke-width="1.75" stroke-linejoin="miter">
+    <path d="M200,162 H100 V282 H200"/>
+    <path d="M200,162 H300 V282 H200"/>
+    <path d="M200,162 V282"/>
+  </g>
+  <g><rect x="97" y="218" width="6" height="8" fill="#FFFFFF"/><path d="M87,218 H113" stroke="#2D2B57" stroke-width="1.75"/><path d="M94,226 H106" stroke="#2D2B57" stroke-width="4.5"/><g font-size="11" font-weight="600" fill="#8A8273"><text x="119" y="217" text-anchor="middle">+</text><text x="113" y="237" text-anchor="middle">−</text></g></g>
+  <g><circle cx="200" cy="222" r="10" fill="#FFFFFF" stroke="#2D2B57" stroke-width="1.75"/><path d="M192.9,214.9 L207.1,229.1 M192.9,229.1 L207.1,214.9" stroke="#2D2B57" stroke-width="1.75"/></g>
+  <g><circle cx="300" cy="222" r="10" fill="#FFFFFF" stroke="#2D2B57" stroke-width="1.75"/><path d="M292.9,214.9 L307.1,229.1 M292.9,229.1 L307.1,214.9" stroke="#2D2B57" stroke-width="1.75"/></g>
+  <text x="184" y="226" font-size="11.5" font-weight="600" fill="#2D2B57" text-anchor="end">L₁</text>
+  <text x="316" y="226" font-size="11.5" font-weight="600" fill="#2D2B57" text-anchor="start">L₂</text>
+  <circle cx="200" cy="162" r="3.4" fill="#B34400"/>
+  <circle cx="200" cy="282" r="3.4" fill="#B34400"/>
+  <g stroke="#2D2B57" stroke-width="1" opacity="0.6" fill="none">
+    <path d="M200,151 L200,157"/>
+    <path d="M200,294 L200,287"/>
+    <path d="M81,202 L99,192"/>
+    <path d="M222,228 L200,250"/>
+    <path d="M278,228 L300,250"/>
+  </g>
+  <g fill="#2D2B57">
+    <circle cx="200" cy="157" r="1.8"/>
+    <circle cx="200" cy="287" r="1.8"/>
+    <circle cx="99" cy="192" r="1.8"/>
+    <circle cx="200" cy="250" r="1.8"/>
+    <circle cx="300" cy="250" r="1.8"/>
+  </g>
+  <g font-size="11.5" font-weight="600" fill="#2D2B57">
+    <g class="ill-legende" text-anchor="middle">
+      <rect class="ill-fond" x="184.4" y="136" width="31.2" height="15" rx="4" fill="#FFFFFF"/>
+      <text x="200" y="147">Nœud</text>
+    </g>
+    <g class="ill-legende" text-anchor="middle">
+      <rect class="ill-fond" x="184.4" y="294" width="31.2" height="15" rx="4" fill="#FFFFFF"/>
+      <text x="200" y="305">Nœud</text>
+    </g>
+    <g class="ill-legende">
+      <rect class="ill-fond" x="12" y="188" width="69" height="28" rx="4" fill="#FFFFFF"/>
+      <text x="15" y="199">Branche<tspan x="15" dy="13">principale</tspan></text>
+    </g>
+    <g class="ill-legende" text-anchor="middle">
+      <rect class="ill-fond" x="221.8" y="208" width="56.4" height="28" rx="4" fill="#FFFFFF"/>
+      <text x="250" y="219">Branches<tspan x="250" dy="13">dérivées</tspan></text>
+    </g>
+  </g>
+</svg>

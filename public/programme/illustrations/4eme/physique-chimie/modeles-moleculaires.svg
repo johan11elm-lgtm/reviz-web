@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 262" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
+  <!-- Modèles moléculaires compacts, code couleur H blanc, C noir, O rouge, N bleu : eau H₂O, dioxygène O₂, diazote N₂, dihydrogène H₂, dioxyde de carbone CO₂, monoxyde de carbone CO, méthane CH₄. Réviz, 4e physique-chimie, molécules et atomes. -->
+  <circle cx="40" cy="22" r="8" fill="#FFFFFF" stroke="#2D2B57" stroke-width="1.5"/>
+  <g font-size="11.5" font-weight="600" fill="#2D2B57"><text x="55" y="26">H</text></g>
+  <circle cx="124" cy="22" r="11" fill="#2B2A33" stroke="#2D2B57" stroke-width="1.5"/>
+  <g font-size="11.5" font-weight="600" fill="#2D2B57"><text x="142" y="26">C</text></g>
+  <circle cx="208" cy="22" r="10.5" fill="#C8364F" stroke="#2D2B57" stroke-width="1.5"/>
+  <g font-size="11.5" font-weight="600" fill="#2D2B57"><text x="225.5" y="26">O</text></g>
+  <circle cx="292" cy="22" r="10.5" fill="#3461C9" stroke="#2D2B57" stroke-width="1.5"/>
+  <g font-size="11.5" font-weight="600" fill="#2D2B57"><text x="309.5" y="26">N</text></g>
+  <path d="M14,48 H346" stroke="#EAE8F2" stroke-width="1.5"/>
+  <circle cx="40.6" cy="100.8" r="8" fill="#FFFFFF" stroke="#2D2B57" stroke-width="1.5"/>
+  <circle cx="63.4" cy="100.8" r="8" fill="#FFFFFF" stroke="#2D2B57" stroke-width="1.5"/>
+  <circle cx="52" cy="92" r="10.5" fill="#C8364F" stroke="#2D2B57" stroke-width="1.5"/>
+  <g class="ill-legende" font-size="11.5" font-weight="600" fill="#2D2B57"><rect class="ill-fond" x="39.6" y="119" width="24.9" height="15" rx="4" fill="#FFFFFF"/><text x="52" y="130" text-anchor="middle">H₂O</text></g>
+  <g font-size="11" font-weight="600" fill="#8A8273"><text x="52" y="146" text-anchor="middle">eau</text></g>
+  <circle cx="127.8" cy="92" r="10.5" fill="#C8364F" stroke="#2D2B57" stroke-width="1.5"/>
+  <circle cx="144.2" cy="92" r="10.5" fill="#C8364F" stroke="#2D2B57" stroke-width="1.5"/>
+  <g class="ill-legende" font-size="11.5" font-weight="600" fill="#2D2B57"><rect class="ill-fond" x="126.7" y="119" width="18.6" height="15" rx="4" fill="#FFFFFF"/><text x="136" y="130" text-anchor="middle">O₂</text></g>
+  <g font-size="11" font-weight="600" fill="#8A8273"><text x="136" y="146" text-anchor="middle">dioxygène</text></g>
+  <circle cx="211.8" cy="92" r="10.5" fill="#3461C9" stroke="#2D2B57" stroke-width="1.5"/>
+  <circle cx="228.2" cy="92" r="10.5" fill="#3461C9" stroke="#2D2B57" stroke-width="1.5"/>
+  <g class="ill-legende" font-size="11.5" font-weight="600" fill="#2D2B57"><rect class="ill-fond" x="210.7" y="119" width="18.6" height="15" rx="4" fill="#FFFFFF"/><text x="220" y="130" text-anchor="middle">N₂</text></g>
+  <g font-size="11" font-weight="600" fill="#8A8273"><text x="220" y="146" text-anchor="middle">diazote</text></g>
+  <circle cx="297.8" cy="92" r="8" fill="#FFFFFF" stroke="#2D2B57" stroke-width="1.5"/>
+  <circle cx="310.2" cy="92" r="8" fill="#FFFFFF" stroke="#2D2B57" stroke-width="1.5"/>
+  <g class="ill-legende" font-size="11.5" font-weight="600" fill="#2D2B57"><rect class="ill-fond" x="294.7" y="119" width="18.6" height="15" rx="4" fill="#FFFFFF"/><text x="304" y="130" text-anchor="middle">H₂</text></g>
+  <g font-size="11" font-weight="600" fill="#8A8273"><text x="304" y="146" text-anchor="middle">dihydrogène</text></g>
+  <circle cx="49.2" cy="186" r="10.5" fill="#C8364F" stroke="#2D2B57" stroke-width="1.5"/>
+  <circle cx="82.8" cy="186" r="10.5" fill="#C8364F" stroke="#2D2B57" stroke-width="1.5"/>
+  <circle cx="66" cy="186" r="11" fill="#2B2A33" stroke="#2D2B57" stroke-width="1.5"/>
+  <g class="ill-legende" font-size="11.5" font-weight="600" fill="#2D2B57"><rect class="ill-fond" x="53.6" y="213" width="24.9" height="15" rx="4" fill="#FFFFFF"/><text x="66" y="224" text-anchor="middle">CO₂</text></g>
+  <g font-size="11" font-weight="600" fill="#8A8273"><text x="66" y="240" text-anchor="middle">dioxyde<tspan x="66" dy="13">de carbone</tspan></text></g>
+  <circle cx="171.6" cy="186" r="11" fill="#2B2A33" stroke="#2D2B57" stroke-width="1.5"/>
+  <circle cx="188.4" cy="186" r="10.5" fill="#C8364F" stroke="#2D2B57" stroke-width="1.5"/>
+  <g class="ill-legende" font-size="11.5" font-weight="600" fill="#2D2B57"><rect class="ill-fond" x="170.7" y="213" width="18.6" height="15" rx="4" fill="#FFFFFF"/><text x="180" y="224" text-anchor="middle">CO</text></g>
+  <g font-size="11" font-weight="600" fill="#8A8273"><text x="180" y="240" text-anchor="middle">monoxyde<tspan x="180" dy="13">de carbone</tspan></text></g>
+  <circle cx="294" cy="171.2" r="8" fill="#FFFFFF" stroke="#2D2B57" stroke-width="1.5"/>
+  <circle cx="280.1" cy="191.1" r="8" fill="#FFFFFF" stroke="#2D2B57" stroke-width="1.5"/>
+  <circle cx="307.9" cy="191.1" r="8" fill="#FFFFFF" stroke="#2D2B57" stroke-width="1.5"/>
+  <circle cx="294" cy="186" r="11" fill="#2B2A33" stroke="#2D2B57" stroke-width="1.5"/>
+  <circle cx="293.7" cy="195.2" r="8" fill="#FFFFFF" stroke="#2D2B57" stroke-width="1.5"/>
+  <g class="ill-legende" font-size="11.5" font-weight="600" fill="#2D2B57"><rect class="ill-fond" x="281.6" y="213" width="24.9" height="15" rx="4" fill="#FFFFFF"/><text x="294" y="224" text-anchor="middle">CH₄</text></g>
+  <g font-size="11" font-weight="600" fill="#8A8273"><text x="294" y="240" text-anchor="middle">méthane</text></g>
+</svg>

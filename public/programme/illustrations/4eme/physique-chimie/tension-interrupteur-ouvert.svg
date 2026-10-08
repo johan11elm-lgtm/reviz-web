@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 206" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
+  <!-- Pile de 4,5 V, interrupteur ouvert et lampe en série ; un voltmètre aux bornes de l’interrupteur ouvert affiche 4,5 V, un voltmètre aux bornes de la lampe éteinte affiche 0 V. Réviz, 4e physique-chimie, la tension électrique. -->
+  <g fill="none" stroke="#2D2B57" stroke-width="1.75" stroke-linejoin="miter">
+    <path d="M100,60 H250 V190 H100 Z"/>
+  </g>
+  <g fill="none" stroke="#B34400" stroke-width="2.25" stroke-linejoin="miter">
+    <path d="M150,60 V26 H200 V60"/>
+    <path d="M250,95 H305 V155 H250"/>
+  </g>
+  <circle cx="150" cy="60" r="2.6" fill="#2D2B57"/>
+  <circle cx="200" cy="60" r="2.6" fill="#2D2B57"/>
+  <circle cx="250" cy="95" r="2.6" fill="#2D2B57"/>
+  <circle cx="250" cy="155" r="2.6" fill="#2D2B57"/>
+  <g><rect x="97" y="121" width="6" height="8" fill="#FFFFFF"/><path d="M87,121 H113" stroke="#2D2B57" stroke-width="1.75"/><path d="M94,129 H106" stroke="#2D2B57" stroke-width="4.5"/><g font-size="11" font-weight="600" fill="#8A8273"><text x="119" y="120" text-anchor="middle">+</text><text x="113" y="140" text-anchor="middle">−</text></g></g>
+  <g><rect x="165" y="57" width="20" height="6" fill="#FFFFFF"/><path d="M167,60 L183,50" stroke="#2D2B57" stroke-width="1.75" stroke-linecap="round"/><circle cx="165" cy="60" r="2.4" fill="#FFFFFF" stroke="#2D2B57" stroke-width="1.5"/><circle cx="185" cy="60" r="2.4" fill="#FFFFFF" stroke="#2D2B57" stroke-width="1.5"/></g>
+  <g><circle cx="250" cy="125" r="10" fill="#FFFFFF" stroke="#2D2B57" stroke-width="1.75"/><path d="M242.9,117.9 L257.1,132.1 M242.9,132.1 L257.1,117.9" stroke="#2D2B57" stroke-width="1.75"/></g>
+  <g><circle cx="175" cy="26" r="11" fill="#FBE9DD" stroke="#B34400" stroke-width="2.25"/><text x="175" y="30.4" font-size="12.5" font-weight="700" fill="#2D2B57" text-anchor="middle">V</text></g>
+  <g><circle cx="305" cy="125" r="11" fill="#FBE9DD" stroke="#B34400" stroke-width="2.25"/><text x="305" y="129.4" font-size="12.5" font-weight="700" fill="#2D2B57" text-anchor="middle">V</text></g>
+  <text x="80" y="129" font-size="11.5" font-weight="600" fill="#2D2B57" text-anchor="end">4,5 V</text>
+  <g class="ill-legende" font-size="11.5" font-weight="600" fill="#2D2B57" text-anchor="start"><rect class="ill-fond" x="208" y="18.5" width="39.5" height="15.5" rx="4" fill="#FFFFFF"/><text x="212" y="30">4,5 V</text></g>
+  <g class="ill-legende" font-size="11.5" font-weight="600" fill="#2D2B57" text-anchor="start"><rect class="ill-fond" x="318" y="117.5" width="26.9" height="15.5" rx="4" fill="#FFFFFF"/><text x="322" y="129">0 V</text></g>
+  <g stroke="#2D2B57" stroke-width="1" opacity="0.6" fill="none">
+    <path d="M175,84 L175,57"/>
+    <path d="M225,125 L239,125"/>
+  </g>
+  <g fill="#2D2B57">
+    <circle cx="175" cy="57" r="1.8"/>
+    <circle cx="239" cy="125" r="1.8"/>
+  </g>
+  <g font-size="11.5" font-weight="600" fill="#2D2B57">
+    <g class="ill-legende" text-anchor="middle">
+      <rect class="ill-fond" x="112.2" y="84" width="125.7" height="15" rx="4" fill="#FFFFFF"/>
+      <text x="175" y="95">Interrupteur ouvert</text>
+    </g>
+    <g class="ill-legende" text-anchor="end">
+      <rect class="ill-fond" x="187.5" y="118" width="37.5" height="15" rx="4" fill="#FFFFFF"/>
+      <text x="222" y="129">Lampe</text>
+    </g>
+  </g>
+</svg>

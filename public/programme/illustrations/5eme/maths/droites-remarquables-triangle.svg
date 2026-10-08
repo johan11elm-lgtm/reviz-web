@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 232" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="11.5" font-weight="600" fill="#2D2B57">
+  <!-- Triangle ABC avec la médiatrice de [BC] (perpendiculaire à [BC] en son milieu I), la hauteur issue de A (perpendiculaire à (BC), de pied H) et la médiane [AI]. Réviz, 5e maths, droites remarquables du triangle. -->
+  <path d="M36,204 L312,204 M312,204 L268,52 M268,52 L36,204" fill="none" stroke="#2D2B57" stroke-width="1.75" stroke-linejoin="round"/>
+  <path d="M105.1,199.3 L101.7,208.7 M108.3,199.3 L104.9,208.7 M243.1,199.3 L239.7,208.7 M246.3,199.3 L242.9,208.7" fill="none" stroke="#2D2B57" stroke-width="1.4"/>
+  <path d="M174,20 L174,224" fill="none" stroke="#B34400" stroke-width="2.25" stroke-linecap="round"/>
+  <path d="M166,204 L166,196 L174,196" fill="none" stroke="#B34400" stroke-width="1.4"/>
+  <path d="M268,26 L268,222" fill="none" stroke="#3461C9" stroke-width="2.25" stroke-linecap="round"/>
+  <path d="M276,204 L276,196 L268,196" fill="none" stroke="#3461C9" stroke-width="1.4"/>
+  <path d="M268,52 L174,204" fill="none" stroke="#2E8B57" stroke-width="2.25" stroke-linecap="round"/>
+  <g><circle cx="268" cy="52" r="2.2"/><circle cx="36" cy="204" r="2.2"/><circle cx="312" cy="204" r="2.2"/><circle cx="174" cy="204" r="2.2"/><circle cx="268" cy="204" r="2.2"/></g>
+  <g font-size="12.5" font-weight="700" fill="#2D2B57" text-anchor="middle"><text x="279" y="49">A</text><text x="33" y="221">B</text><text x="315" y="221">C</text><text x="165" y="221">I</text><text x="259" y="221">H</text></g>
+  <path d="M16,30 H36" stroke="#B34400" stroke-width="2.25" stroke-linecap="round"/><g class="ill-legende"><rect class="ill-fond" x="40" y="21.6" width="69" height="18.5" rx="4" fill="#FFFFFF"/><text x="43" y="34">Médiatrice</text></g>
+  <path d="M16,54 H36" stroke="#3461C9" stroke-width="2.25" stroke-linecap="round"/><g class="ill-legende"><rect class="ill-fond" x="40" y="45.6" width="50.1" height="18.5" rx="4" fill="#FFFFFF"/><text x="43" y="58">Hauteur</text></g>
+  <path d="M16,78 H36" stroke="#2E8B57" stroke-width="2.25" stroke-linecap="round"/><g class="ill-legende"><rect class="ill-fond" x="40" y="69.6" width="50.1" height="18.5" rx="4" fill="#FFFFFF"/><text x="43" y="82">Médiane</text></g>
+</svg>

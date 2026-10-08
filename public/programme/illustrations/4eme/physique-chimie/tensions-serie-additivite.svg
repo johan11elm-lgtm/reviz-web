@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 214" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
+  <!-- Pile de 4,5 V et deux lampes en série ; un voltmètre en dérivation aux bornes de chaque lampe : 3,0 V pour L1 et 1,5 V pour L2. Réviz, 4e physique-chimie, lois des tensions. -->
+  <g fill="none" stroke="#2D2B57" stroke-width="1.75" stroke-linejoin="miter">
+    <path d="M110,80 H270 V196 H110 Z"/>
+  </g>
+  <g fill="none" stroke="#B34400" stroke-width="2.25" stroke-linejoin="miter">
+    <path d="M165,80 V40 H215 V80"/>
+    <path d="M270,113 H312 V167 H270"/>
+  </g>
+  <circle cx="165" cy="80" r="2.6" fill="#2D2B57"/>
+  <circle cx="215" cy="80" r="2.6" fill="#2D2B57"/>
+  <circle cx="270" cy="113" r="2.6" fill="#2D2B57"/>
+  <circle cx="270" cy="167" r="2.6" fill="#2D2B57"/>
+  <g><rect x="107" y="134" width="6" height="8" fill="#FFFFFF"/><path d="M97,134 H123" stroke="#2D2B57" stroke-width="1.75"/><path d="M104,142 H116" stroke="#2D2B57" stroke-width="4.5"/><g font-size="11" font-weight="600" fill="#8A8273"><text x="129" y="133" text-anchor="middle">+</text><text x="123" y="153" text-anchor="middle">−</text></g></g>
+  <g><circle cx="190" cy="80" r="10" fill="#FFFFFF" stroke="#2D2B57" stroke-width="1.75"/><path d="M182.9,72.9 L197.1,87.1 M182.9,87.1 L197.1,72.9" stroke="#2D2B57" stroke-width="1.75"/></g>
+  <g><circle cx="270" cy="140" r="10" fill="#FFFFFF" stroke="#2D2B57" stroke-width="1.75"/><path d="M262.9,132.9 L277.1,147.1 M262.9,147.1 L277.1,132.9" stroke="#2D2B57" stroke-width="1.75"/></g>
+  <g><circle cx="190" cy="40" r="11" fill="#FBE9DD" stroke="#B34400" stroke-width="2.25"/><text x="190" y="44.4" font-size="12.5" font-weight="700" fill="#2D2B57" text-anchor="middle">V</text></g>
+  <g><circle cx="312" cy="140" r="11" fill="#FBE9DD" stroke="#B34400" stroke-width="2.25"/><text x="312" y="144.4" font-size="12.5" font-weight="700" fill="#2D2B57" text-anchor="middle">V</text></g>
+  <text x="190" y="106" font-size="11.5" font-weight="600" fill="#2D2B57" text-anchor="middle">L₁</text>
+  <text x="254" y="144" font-size="11.5" font-weight="600" fill="#2D2B57" text-anchor="end">L₂</text>
+  <text x="90" y="142" font-size="11.5" font-weight="600" fill="#2D2B57" text-anchor="end">4,5 V</text>
+  <text x="190" y="20" font-size="11.5" font-weight="600" fill="#2D2B57" text-anchor="middle">3,0 V</text>
+  <g class="ill-legende" font-size="11.5" font-weight="600" fill="#2D2B57" text-anchor="middle"><rect class="ill-fond" x="292.3" y="176.5" width="39.5" height="15.5" rx="4" fill="#FFFFFF"/><text x="312" y="188">1,5 V</text></g>
+</svg>

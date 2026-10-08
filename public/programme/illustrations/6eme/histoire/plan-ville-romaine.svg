@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 226" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
+<!-- Plan type d'une ville romaine : rues en damier, cardo et decumanus, forum et temple au centre, thermes, théâtre, amphithéâtre, aqueduc. Réviz, 6e histoire, conquêtes, paix romaine et romanisation. Généré par scripts/illustrations/plan-ville-romaine.mjs -->
+<rect x="96" y="40" width="168" height="168" fill="#FFFFFF"/>
+<path d="M98,42h17v17h-17zM98,63h17v17h-17zM98,84h17v17h-17zM98,105h17v17h-17zM98,126h17v17h-17zM98,147h17v17h-17zM98,168h17v17h-17zM98,189h17v17h-17zM119,42h17v17h-17zM119,63h17v17h-17zM119,84h17v17h-17zM119,105h17v17h-17zM119,126h17v17h-17zM119,147h17v17h-17zM119,168h17v17h-17zM119,189h17v17h-17zM140,42h17v17h-17zM140,63h17v17h-17zM140,84h17v17h-17zM140,105h17v17h-17zM140,126h17v17h-17zM140,147h17v17h-17zM140,168h17v17h-17zM140,189h17v17h-17zM161,42h17v17h-17zM161,63h17v17h-17zM161,84h17v17h-17zM161,105h17v17h-17zM161,126h17v17h-17zM161,147h17v17h-17zM161,168h17v17h-17zM161,189h17v17h-17zM182,42h17v17h-17zM182,63h17v17h-17zM182,84h17v17h-17zM182,105h17v17h-17zM182,126h17v17h-17zM182,147h17v17h-17zM182,168h17v17h-17zM182,189h17v17h-17zM203,42h17v17h-17zM203,63h17v17h-17zM203,84h17v17h-17zM203,105h17v17h-17zM203,126h17v17h-17zM203,147h17v17h-17zM203,168h17v17h-17zM203,189h17v17h-17zM224,42h17v17h-17zM224,63h17v17h-17zM224,84h17v17h-17zM224,105h17v17h-17zM224,126h17v17h-17zM224,147h17v17h-17zM224,168h17v17h-17zM224,189h17v17h-17zM245,42h17v17h-17zM245,63h17v17h-17zM245,84h17v17h-17zM245,105h17v17h-17zM245,126h17v17h-17zM245,147h17v17h-17zM245,168h17v17h-17zM245,189h17v17h-17z" fill="#F4EBDD"/>
+<path d="M180,32V216M88,124H272" stroke="#E4E1DA" stroke-width="8"/>
+<path d="M96,120V40H175.5M184.5,40H264V119.5M264,128.5V208H184.5M175.5,208H96V128.5" fill="none" stroke="#2D2B57" stroke-width="3"/>
+<rect x="182" y="84" width="38" height="38" fill="#FFFFFF"/>
+<rect x="182" y="84" width="38" height="38" fill="#FBE9DD" stroke="#B34400" stroke-width="2.25"/>
+<rect x="193" y="88" width="16" height="12" fill="#FFFFFF" stroke="#2D2B57" stroke-width="1.5"/>
+<path d="M196,97v-6M201,97v-6M206,97v-6" stroke="#2D2B57" stroke-width="1.2"/>
+<rect x="119" y="147" width="38" height="38" fill="#FFFFFF"/>
+<rect x="119" y="147" width="38" height="38" fill="#FFFFFF" stroke="#2D2B57" stroke-width="1.75"/>
+<rect x="125" y="153" width="12" height="10" rx="2" fill="#DCE6FA" stroke="#3461C9" stroke-width="1.2"/>
+<circle cx="146" cy="172" r="7" fill="#DCE6FA" stroke="#3461C9" stroke-width="1.2"/>
+<rect x="118" y="80" width="40" height="24" fill="#FFFFFF"/>
+<path d="M120,100A18,18 0 0 1 156,100Z" fill="#FFFFFF" stroke="#2D2B57" stroke-width="1.75"/>
+<path d="M127,100A11,11 0 0 1 149,100M133,100A5,5 0 0 1 143,100" fill="none" stroke="#2D2B57" stroke-width="1"/>
+<rect x="201" y="148" width="42" height="38" fill="#FFFFFF"/>
+<ellipse cx="222" cy="167" rx="20" ry="15" fill="#FFFFFF" stroke="#2D2B57" stroke-width="1.75"/>
+<ellipse cx="222" cy="167" rx="10" ry="6.5" fill="#F4EBDD" stroke="#2D2B57" stroke-width="1"/>
+<path d="M117,10V37" stroke="#3461C9" stroke-width="3"/>
+<path d="M113,12h8M113,18h8M113,24h8M113,30h8" stroke="#3461C9" stroke-width="1.5"/>
+<rect x="113" y="36" width="8" height="8" fill="#3461C9"/>
+<g font-size="11.5" font-weight="600" fill="#2D2B57">
+<g class="ill-legende"><rect class="ill-fond" x="11" y="11" width="50.1" height="15" rx="4" fill="#FFFFFF"/><text x="14" y="22">Aqueduc</text></g><path d="M66,18L113,20" stroke="#2D2B57" stroke-width="1" opacity="0.6" fill="none"/><circle cx="113" cy="20" r="1.8" fill="#2D2B57" opacity="0.8"/>
+<g class="ill-legende"><rect class="ill-fond" x="11" y="67" width="50.1" height="15" rx="4" fill="#FFFFFF"/><text x="14" y="78">Théâtre</text></g><path d="M64,74L124,92" stroke="#2D2B57" stroke-width="1" opacity="0.6" fill="none"/><circle cx="124" cy="92" r="1.8" fill="#2D2B57" opacity="0.8"/>
+<g class="ill-legende"><rect class="ill-fond" x="11" y="99" width="62.7" height="15" rx="4" fill="#FFFFFF"/><text x="14" y="110">Decumanus</text></g><path d="M48,114L92,124" stroke="#2D2B57" stroke-width="1" opacity="0.6" fill="none"/><circle cx="92" cy="124" r="1.8" fill="#2D2B57" opacity="0.8"/>
+<g class="ill-legende"><rect class="ill-fond" x="11" y="175" width="50.1" height="15" rx="4" fill="#FFFFFF"/><text x="14" y="186">Thermes</text></g><path d="M66,182L123,177" stroke="#2D2B57" stroke-width="1" opacity="0.6" fill="none"/><circle cx="123" cy="177" r="1.8" fill="#2D2B57" opacity="0.8"/>
+<g class="ill-legende"><rect class="ill-fond" x="311.5" y="11" width="37.5" height="15" rx="4" fill="#FFFFFF"/><text x="346" y="22" text-anchor="end">Cardo</text></g><path d="M309,18L184,36" stroke="#2D2B57" stroke-width="1" opacity="0.6" fill="none"/><circle cx="184" cy="36" r="1.8" fill="#2D2B57" opacity="0.8"/>
+<g class="ill-legende"><rect class="ill-fond" x="305.2" y="47" width="43.8" height="15" rx="4" fill="#FFFFFF"/><text x="346" y="58" text-anchor="end">Temple</text></g><path d="M301,54L209,92" stroke="#2D2B57" stroke-width="1" opacity="0.6" fill="none"/><circle cx="209" cy="92" r="1.8" fill="#2D2B57" opacity="0.8"/>
+<g class="ill-legende"><rect class="ill-fond" x="311.5" y="101" width="37.5" height="15" rx="4" fill="#FFFFFF"/><text x="346" y="112" text-anchor="end">Forum</text></g><path d="M306,108L217,114" stroke="#2D2B57" stroke-width="1" opacity="0.6" fill="none"/><circle cx="217" cy="114" r="1.8" fill="#2D2B57" opacity="0.8"/>
+<g class="ill-legende"><rect class="ill-fond" x="267.4" y="211" width="81.6" height="15" rx="4" fill="#FFFFFF"/><text x="346" y="222" text-anchor="end">Amphithéâtre</text></g><path d="M300,211L230,179" stroke="#2D2B57" stroke-width="1" opacity="0.6" fill="none"/><circle cx="230" cy="179" r="1.8" fill="#2D2B57" opacity="0.8"/>
+</g>
+</svg>

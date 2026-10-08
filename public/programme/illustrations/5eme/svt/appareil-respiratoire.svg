@@ -1,0 +1,110 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-9 -9 378 333" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
+  <!-- Appareil respiratoire vu de face (le poumon droit est à gauche du dessin) : voies respiratoires, poumons, côtes et diaphragme ; la flèche montre le trajet de l'air. Réviz, 5e SVT, respiration humaine. -->
+
+  <!-- Silhouette -->
+  <g fill="none" stroke="#8A8273" stroke-width="1.5" opacity="0.5">
+    <ellipse cx="180" cy="36" rx="27" ry="31"/>
+    <path d="M169,66 V84 C150,92 114,90 100,102 C94,108 92,120 90,138 L84,300 M191,66 V84 C210,92 246,90 260,102 C266,108 268,120 270,138 L276,300"/>
+  </g>
+
+  <!-- Poumons -->
+  <g fill="#FBE9DD" stroke="#2D2B57" stroke-width="1.75" stroke-linejoin="round">
+    <path d="M152,118 C132,122 104,168 100,226 C98,252 104,268 120,266 C140,264 156,260 170,262 C174,232 172,170 166,138 C163,126 159,118 152,118 Z"/>
+    <path d="M208,118 C228,122 256,168 260,226 C262,252 256,268 240,266 C222,264 206,262 192,262 C196,252 204,240 196,226 C190,212 191,170 194,138 C197,126 201,118 208,118 Z"/>
+  </g>
+
+  <!-- Bronchioles et alvéoles -->
+  <g fill="none" stroke="#2D2B57" stroke-linecap="round">
+    <path d="M142,190 L134.8,174.6 M142,190 L128.5,186.1 M142,190 L122.9,201 M142,190 L133.3,216.6 M218,190 L225.2,174.6 M218,190 L231.5,186.1 M218,190 L237.1,201 M218,190 L226.7,216.6" stroke-width="2.6"/>
+    <path d="M134.8,174.6 L125.9,169.6 M134.8,174.6 L136.7,164.6 M128.5,186.1 L120.6,188.9 M128.5,186.1 L123.3,179.6 M122.9,201 L117.5,213 M122.9,201 L109.8,199.7 M133.3,216.6 L138.4,232.6 M133.3,216.6 L119.8,226.6 M225.2,174.6 L223.3,164.6 M225.2,174.6 L234.1,169.6 M231.5,186.1 L236.7,179.6 M231.5,186.1 L239.4,188.9 M237.1,201 L250.2,199.7 M237.1,201 L242.5,213 M226.7,216.6 L240.2,226.6 M226.7,216.6 L221.6,232.6" stroke-width="1.75"/>
+    <path d="M125.9,169.6 L119.8,169.5 M125.9,169.6 L122.7,164.4 M136.7,164.6 L134.8,158.7 M136.7,164.6 L140.5,159.8 M120.6,188.9 L117.3,192.7 M120.6,188.9 L115.6,188.1 M123.3,179.6 L118.7,177.6 M123.3,179.6 L122.5,174.6 M117.5,213 L118.1,220.9 M117.5,213 L111.1,217.8 M109.8,199.7 L102.5,202.8 M109.8,199.7 L103.3,195.3 M138.4,232.6 L145.7,239.6 M138.4,232.6 L136.5,242.5 M119.8,226.6 L115.6,235.8 M119.8,226.6 L109.9,228 M223.3,164.6 L219.5,159.8 M223.3,164.6 L225.2,158.7 M234.1,169.6 L237.3,164.4 M234.1,169.6 L240.2,169.5 M236.7,179.6 L237.5,174.6 M236.7,179.6 L241.3,177.6 M239.4,188.9 L244.4,188.1 M239.4,188.9 L242.7,192.7 M250.2,199.7 L256.7,195.3 M250.2,199.7 L257.5,202.8 M242.5,213 L248.9,217.8 M242.5,213 L241.9,220.9 M240.2,226.6 L250.1,228 M240.2,226.6 L244.4,235.8 M221.6,232.6 L223.5,242.5 M221.6,232.6 L214.3,239.6" stroke-width="1.2"/>
+  </g>
+  <g fill="#FFFFFF" stroke="#2D2B57" stroke-width="0.9">
+    <circle cx="117" cy="171.4" r="2.2"/><circle cx="116.4" cy="169.4" r="2.2"/><circle cx="117" cy="167.5" r="2.2"/><circle cx="119.6" cy="163" r="2.2"/><circle cx="120.9" cy="161.5" r="2.2"/><circle cx="122.9" cy="161" r="2.2"/><circle cx="132.1" cy="156.7" r="2.2"/><circle cx="133.7" cy="155.5" r="2.2"/><circle cx="135.7" cy="155.5" r="2.2"/><circle cx="140.8" cy="156.4" r="2.2"/><circle cx="142.7" cy="157.2" r="2.2"/><circle cx="143.8" cy="158.9" r="2.2"/><circle cx="116.8" cy="196.1" r="2.2"/><circle cx="115" cy="195.2" r="2.2"/><circle cx="114" cy="193.5" r="2.2"/><circle cx="112.6" cy="189.6" r="2.2"/><circle cx="112.3" cy="187.6" r="2.2"/><circle cx="113.2" cy="185.8" r="2.2"/><circle cx="115.3" cy="178.3" r="2.2"/><circle cx="115.5" cy="176.3" r="2.2"/><circle cx="116.8" cy="174.7" r="2.2"/><circle cx="120.1" cy="172.2" r="2.2"/><circle cx="121.9" cy="171.2" r="2.2"/><circle cx="123.9" cy="171.5" r="2.2"/><circle cx="120.2" cy="223.6" r="2.2"/><circle cx="118.3" cy="224.3" r="2.2"/><circle cx="116.3" cy="223.9" r="2.2"/><circle cx="110.1" cy="221" r="2.2"/><circle cx="108.4" cy="219.8" r="2.2"/><circle cx="107.7" cy="217.9" r="2.2"/><circle cx="100.7" cy="205.7" r="2.2"/><circle cx="99.4" cy="204.2" r="2.2"/><circle cx="99.2" cy="202.2" r="2.2"/><circle cx="99.9" cy="195.3" r="2.2"/><circle cx="100.4" cy="193.4" r="2.2"/><circle cx="102" cy="192.1" r="2.2"/><circle cx="149" cy="240.2" r="2.2"/><circle cx="148.1" cy="242" r="2.2"/><circle cx="146.4" cy="243" r="2.2"/><circle cx="137.8" cy="245.7" r="2.2"/><circle cx="135.8" cy="245.9" r="2.2"/><circle cx="134" cy="244.9" r="2.2"/><circle cx="116.2" cy="239.1" r="2.2"/><circle cx="114.2" cy="238.8" r="2.2"/><circle cx="112.7" cy="237.5" r="2.2"/><circle cx="107.3" cy="230.3" r="2.2"/><circle cx="106.5" cy="228.5" r="2.2"/><circle cx="106.8" cy="226.5" r="2.2"/><circle cx="216.2" cy="158.9" r="2.2"/><circle cx="217.3" cy="157.2" r="2.2"/><circle cx="219.2" cy="156.4" r="2.2"/><circle cx="224.3" cy="155.5" r="2.2"/><circle cx="226.3" cy="155.5" r="2.2"/><circle cx="227.9" cy="156.7" r="2.2"/><circle cx="237.1" cy="161" r="2.2"/><circle cx="239.1" cy="161.5" r="2.2"/><circle cx="240.4" cy="163" r="2.2"/><circle cx="243" cy="167.5" r="2.2"/><circle cx="243.6" cy="169.4" r="2.2"/><circle cx="243" cy="171.4" r="2.2"/><circle cx="236.1" cy="171.5" r="2.2"/><circle cx="238.1" cy="171.2" r="2.2"/><circle cx="239.9" cy="172.2" r="2.2"/><circle cx="243.2" cy="174.7" r="2.2"/><circle cx="244.5" cy="176.3" r="2.2"/><circle cx="244.7" cy="178.3" r="2.2"/><circle cx="246.8" cy="185.8" r="2.2"/><circle cx="247.7" cy="187.6" r="2.2"/><circle cx="247.4" cy="189.6" r="2.2"/><circle cx="246" cy="193.5" r="2.2"/><circle cx="245" cy="195.2" r="2.2"/><circle cx="243.2" cy="196.1" r="2.2"/><circle cx="258" cy="192.1" r="2.2"/><circle cx="259.6" cy="193.4" r="2.2"/><circle cx="260.1" cy="195.3" r="2.2"/><circle cx="260.8" cy="202.2" r="2.2"/><circle cx="260.6" cy="204.2" r="2.2"/><circle cx="259.3" cy="205.7" r="2.2"/><circle cx="252.3" cy="217.9" r="2.2"/><circle cx="251.6" cy="219.8" r="2.2"/><circle cx="249.9" cy="221" r="2.2"/><circle cx="243.7" cy="223.9" r="2.2"/><circle cx="241.7" cy="224.3" r="2.2"/><circle cx="239.8" cy="223.6" r="2.2"/><circle cx="253.2" cy="226.5" r="2.2"/><circle cx="253.5" cy="228.5" r="2.2"/><circle cx="252.7" cy="230.3" r="2.2"/><circle cx="247.3" cy="237.5" r="2.2"/><circle cx="245.8" cy="238.8" r="2.2"/><circle cx="243.8" cy="239.1" r="2.2"/><circle cx="226" cy="244.9" r="2.2"/><circle cx="224.2" cy="245.9" r="2.2"/><circle cx="222.2" cy="245.7" r="2.2"/><circle cx="213.6" cy="243" r="2.2"/><circle cx="211.9" cy="242" r="2.2"/><circle cx="211" cy="240.2" r="2.2"/>
+  </g>
+
+  <!-- Côtes -->
+  <path d="M168,132 C146,125 106,128 92,148 M192,132 C214,125 254,128 268,148 M168,159 C146,152 106,155 92,175 M192,159 C214,152 254,155 268,175 M168,186 C146,179 106,182 92,202 M192,186 C214,179 254,182 268,202 M168,213 C146,206 106,209 92,229 M192,213 C214,206 254,209 268,229 M168,240 C146,233 106,236 92,256 M192,240 C214,233 254,236 268,256" fill="none" stroke="#2D2B57" stroke-width="2.4" stroke-linecap="round" opacity="0.3"/>
+
+  <!-- Diaphragme -->
+  <path d="M84,288 C108,258 154,262 180,272 C206,262 252,258 276,288" fill="none" stroke="#2D2B57" stroke-width="9" stroke-linecap="round"/>
+  <path d="M84,288 C108,258 154,262 180,272 C206,262 252,258 276,288" fill="none" stroke="#FFFFFF" stroke-width="5.5" stroke-linecap="round"/>
+
+  <!-- Voies respiratoires : fosses nasales, pharynx, larynx, trachée, bronches -->
+  <g fill="none" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M180,96 V150 M180,150 Q168,168 142,190 M180,150 Q192,168 218,190" stroke="#2D2B57" stroke-width="12"/>
+    <path d="M180,96 V150 M180,150 Q168,168 142,190 M180,150 Q192,168 218,190" stroke="#FFFFFF" stroke-width="8.5"/>
+  </g>
+  <path d="M175,102 H185 M175,108 H185 M175,114 H185 M175,120 H185 M175,126 H185 M175,132 H185 M175,138 H185 M175,144 H185" stroke="#2D2B57" stroke-width="1.2"/>
+  <g fill="#FFFFFF" stroke="#2D2B57" stroke-width="1.75" stroke-linejoin="round">
+    <path d="M173,56 V80 H187 V56 Z"/>
+    <path d="M171,80 H189 L187,98 H173 Z"/>
+    <path d="M171,52 C170,40 173,30 180,26 C187,30 190,40 189,52 C189,57 184,58 180,56 C176,58 171,57 171,52 Z"/>
+  </g>
+  <path d="M180,28 V55 M173,89 H187" fill="none" stroke="#2D2B57" stroke-width="1.2"/>
+
+  <!-- Trajet de l'air -->
+  <path d="M199,26 V108 M194.5,101.5 L199,108 L203.5,101.5" fill="none" stroke="#B34400" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="203" y="24" font-size="11" font-weight="600" fill="#8A8273">air</text>
+
+  <!-- Traits de rappel -->
+  <g stroke="#2D2B57" stroke-width="1" opacity="0.6" fill="none">
+    <path d="M72,37 L175,41"/>
+    <path d="M53,68 L175,68"/>
+    <path d="M53,118 L176,118"/>
+    <path d="M55,184 L116,184"/>
+    <path d="M45,246 L96,236"/>
+    <path d="M53,90 L173,90"/>
+    <path d="M297,160 L204,172"/>
+    <path d="M287,198 L243.7,200.4"/>
+    <path d="M278,238 L249.7,237.5"/>
+    <path d="M287,308 L254,280"/>
+  </g>
+  <g fill="#2D2B57">
+    <circle cx="175" cy="41" r="1.8"/><circle cx="175" cy="68" r="1.8"/><circle cx="176" cy="118" r="1.8"/><circle cx="116" cy="184" r="1.8"/><circle cx="96" cy="236" r="1.8"/><circle cx="173" cy="90" r="1.8"/><circle cx="204" cy="172" r="1.8"/><circle cx="243.7" cy="200.4" r="1.8"/><circle cx="249.7" cy="237.5" r="1.8"/><circle cx="254" cy="280" r="1.8"/>
+  </g>
+
+  <!-- Légendes : un groupe par étiquette (masquables en mode « Me tester ») -->
+  <g font-size="11.5" font-weight="600" fill="#2D2B57">
+    <g class="ill-legende">
+      <rect class="ill-fond" x="3" y="23" width="69" height="28" rx="4" fill="#FFFFFF"/>
+      <text x="6" y="34">Fosses<tspan x="6" dy="13">nasales</tspan></text>
+    </g>
+    <g class="ill-legende">
+      <rect class="ill-fond" x="3" y="61" width="50" height="15" rx="4" fill="#FFFFFF"/>
+      <text x="6" y="72">Pharynx</text>
+    </g>
+    <g class="ill-legende">
+      <rect class="ill-fond" x="3" y="111" width="50" height="15" rx="4" fill="#FFFFFF"/>
+      <text x="6" y="122">Trachée</text>
+    </g>
+    <g class="ill-legende">
+      <rect class="ill-fond" x="3" y="177" width="52" height="15" rx="4" fill="#FFFFFF"/>
+      <text x="6" y="188">Poumon</text>
+    </g>
+    <g class="ill-legende">
+      <rect class="ill-fond" x="3" y="239" width="42" height="15" rx="4" fill="#FFFFFF"/>
+      <text x="6" y="250">Côtes</text>
+    </g>
+    <g class="ill-legende">
+      <rect class="ill-fond" x="3" y="83" width="50" height="15" rx="4" fill="#FFFFFF"/>
+      <text x="6" y="94">Larynx</text>
+    </g>
+    <g class="ill-legende" text-anchor="end">
+      <rect class="ill-fond" x="297" y="153" width="60" height="15" rx="4" fill="#FFFFFF"/>
+      <text x="354" y="164">Bronche</text>
+    </g>
+    <g class="ill-legende" text-anchor="end">
+      <rect class="ill-fond" x="287" y="191" width="70" height="15" rx="4" fill="#FFFFFF"/>
+      <text x="354" y="202">Bronchioles</text>
+    </g>
+    <g class="ill-legende" text-anchor="end">
+      <rect class="ill-fond" x="278" y="231" width="79" height="28" rx="4" fill="#FFFFFF"/>
+      <text x="354" y="242">Alvéoles<tspan x="354" dy="13">pulmonaires</tspan></text>
+    </g>
+    <g class="ill-legende" text-anchor="end">
+      <rect class="ill-fond" x="287" y="301" width="70" height="15" rx="4" fill="#FFFFFF"/>
+      <text x="354" y="312">Diaphragme</text>
+    </g>
+  </g>
+</svg>

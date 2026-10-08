@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 190" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
+  <!-- Symboles normalisés : pile (grand trait = borne +), lampe, moteur, fil de connexion, interrupteur ouvert et fermé, diode, DEL. Réviz, 5e physique-chimie, le circuit électrique simple. -->
+  <g fill="none" stroke="#2D2B57" stroke-width="1.75" stroke-linejoin="miter">
+    <path d="M26,36 H82"/>
+    <path d="M110,36 H166"/>
+    <path d="M194,36 H250"/>
+    <path d="M278,36 H334"/>
+    <path d="M26,126 H82"/>
+    <path d="M110,126 H166"/>
+    <path d="M194,126 H250"/>
+    <path d="M278,126 H334"/>
+  </g>
+  <g><rect x="50" y="33" width="8" height="6" fill="#FFFFFF"/><path d="M50,23 V49" stroke="#2D2B57" stroke-width="1.75"/><path d="M58,30 V42" stroke="#2D2B57" stroke-width="4.5"/><g font-size="11" font-weight="600" fill="#8A8273"><text x="42" y="25" text-anchor="middle">+</text><text x="66" y="25" text-anchor="middle">−</text></g></g>
+  <g><circle cx="138" cy="36" r="10" fill="#FFFFFF" stroke="#2D2B57" stroke-width="1.75"/><path d="M130.9,28.9 L145.1,43.1 M130.9,43.1 L145.1,28.9" stroke="#2D2B57" stroke-width="1.75"/></g>
+  <g><circle cx="222" cy="36" r="10" fill="#FFFFFF" stroke="#2D2B57" stroke-width="1.75"/><text x="222" y="40.4" font-size="12.5" font-weight="700" fill="#2D2B57" text-anchor="middle">M</text></g>
+  <g><rect x="44" y="123" width="20" height="6" fill="#FFFFFF"/><path d="M46,126 L62,116" stroke="#2D2B57" stroke-width="1.75" stroke-linecap="round"/><circle cx="44" cy="126" r="2.4" fill="#FFFFFF" stroke="#2D2B57" stroke-width="1.5"/><circle cx="64" cy="126" r="2.4" fill="#FFFFFF" stroke="#2D2B57" stroke-width="1.5"/></g>
+  <g><rect x="128" y="123" width="20" height="6" fill="#FFFFFF"/><path d="M130,126 L146,126" stroke="#2D2B57" stroke-width="1.75" stroke-linecap="round"/><circle cx="128" cy="126" r="2.4" fill="#FFFFFF" stroke="#2D2B57" stroke-width="1.5"/><circle cx="148" cy="126" r="2.4" fill="#FFFFFF" stroke="#2D2B57" stroke-width="1.5"/></g>
+  <g><path d="M216,119 L228,126 L216,133 Z" fill="#FFFFFF" stroke="#2D2B57" stroke-width="1.75" stroke-linejoin="round"/><path d="M228,118 L228,134" stroke="#2D2B57" stroke-width="1.75"/></g>
+  <g><path d="M300,119 L312,126 L300,133 Z" fill="#FFFFFF" stroke="#2D2B57" stroke-width="1.75" stroke-linejoin="round"/><path d="M312,118 L312,134" stroke="#2D2B57" stroke-width="1.75"/><path d="M302,117 L306.9,109.7" stroke="#2D2B57" stroke-width="1.5"/><path d="M308,108 L307.7,113.2 L303.3,110.3 Z" fill="#2D2B57"/><path d="M308,117 L312.9,109.7" stroke="#2D2B57" stroke-width="1.5"/><path d="M314,108 L313.7,113.2 L309.3,110.3 Z" fill="#2D2B57"/></g>
+  <g font-size="11.5" font-weight="600" fill="#2D2B57">
+    <g class="ill-legende" text-anchor="middle">
+      <rect class="ill-fond" x="38.4" y="58" width="31.2" height="15" rx="4" fill="#FFFFFF"/>
+      <text x="54" y="69">Pile</text>
+    </g>
+    <g class="ill-legende" text-anchor="middle">
+      <rect class="ill-fond" x="119.3" y="58" width="37.5" height="15" rx="4" fill="#FFFFFF"/>
+      <text x="138" y="69">Lampe</text>
+    </g>
+    <g class="ill-legende" text-anchor="middle">
+      <rect class="ill-fond" x="200.1" y="58" width="43.8" height="15" rx="4" fill="#FFFFFF"/>
+      <text x="222" y="69">Moteur</text>
+    </g>
+    <g class="ill-legende" text-anchor="middle">
+      <rect class="ill-fond" x="274.7" y="58" width="62.7" height="28" rx="4" fill="#FFFFFF"/>
+      <text x="306" y="69">Fil de<tspan x="306" dy="13">connexion</tspan></text>
+    </g>
+    <g class="ill-legende" text-anchor="middle">
+      <rect class="ill-fond" x="13.2" y="148" width="81.6" height="28" rx="4" fill="#FFFFFF"/>
+      <text x="54" y="159">Interrupteur<tspan x="54" dy="13">ouvert</tspan></text>
+    </g>
+    <g class="ill-legende" text-anchor="middle">
+      <rect class="ill-fond" x="97.2" y="148" width="81.6" height="28" rx="4" fill="#FFFFFF"/>
+      <text x="138" y="159">Interrupteur<tspan x="138" dy="13">fermé</tspan></text>
+    </g>
+    <g class="ill-legende" text-anchor="middle">
+      <rect class="ill-fond" x="203.3" y="148" width="37.5" height="15" rx="4" fill="#FFFFFF"/>
+      <text x="222" y="159">Diode</text>
+    </g>
+    <g class="ill-legende" text-anchor="middle">
+      <rect class="ill-fond" x="293.6" y="148" width="24.9" height="15" rx="4" fill="#FFFFFF"/>
+      <text x="306" y="159">DEL</text>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-9 -9 378 358" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
+  <!-- Paroi de l'intestin grêle en coupe : replis couverts de villosités, puis une villosité agrandie avec ses capillaires sanguins et le passage des nutriments vers le sang. Réviz, 5e SVT, digestion et absorption. -->
+
+  <text x="180" y="22" font-size="11" font-weight="600" fill="#8A8273" text-anchor="middle">intérieur de l'intestin</text>
+
+  <!-- Paroi en coupe : villosités sur les replis -->
+  <path d="M82.1,94.1 L80,83.3 M89.9,89.1 L86.4,78.7 M96.3,82.5 L92,72.4 M101.8,75.4 L97.3,65.3 M107.3,68 L102.9,57.9 M113.4,61.1 L109.9,50.7 M120.9,58.1 L121.5,47.1 M128.1,62.5 L131.9,52.2 M133.9,69.6 L138.4,59.5 M139.4,77 L143.9,67 M145.3,84.2 L149.3,73.9 M152.2,90.3 L155.2,79.7 M161.1,93.7 L161.7,82.8 M170.7,92.1 L168.4,81.3 M178.4,86.5 L174.7,76.2 M184.5,79.7 L180.2,69.6 M190.1,72.3 L185.6,62.2 M195.8,64.9 L191.6,54.7 M202.2,59.1 L199.8,48.4 M210,59.2 L212.6,48.5 M216.5,65.2 L220.7,55 M221.9,72.3 L226.5,62.3 M227.5,79.7 L231.8,69.6 M233.6,86.7 L237.4,76.4 M240.8,92.5 L243.5,81.8 M249.3,96 L250.6,85.1 M258.4,97.5 L258.8,86.5 M267.5,97.9 L267.6,86.9 M276.5,98 L276.5,87 M285.5,98 L285.5,87" fill="none" stroke="#2D2B57" stroke-width="6.75" stroke-linecap="round"/>
+  <path d="M70,106 L70,95.3 L72,95 L74,94.6 L76,94.2 L78,93.6 L80,92.9 L82,92 L84,91 L86,89.7 L88,88.2 L90,86.5 L92,84.6 L94,82.4 L96,80.1 L98,77.6 L100,74.9 L102,72.2 L104,69.4 L106,66.8 L108,64.2 L110,61.9 L112,59.9 L114,58.2 L116,57 L118,56.3 L120,56 L122,56.3 L124,57 L126,58.2 L128,59.9 L130,61.9 L132,64.2 L134,66.8 L136,69.4 L138,72.2 L140,74.9 L142,77.5 L144,80 L146,82.3 L148,84.4 L150,86.3 L152,87.9 L154,89.2 L156,90.2 L158,91 L160,91.6 L162,91.8 L164,91.8 L166,91.6 L168,91 L170,90.2 L172,89.2 L174,87.9 L176,86.3 L178,84.4 L180,82.3 L182,80 L184,77.5 L186,74.9 L188,72.2 L190,69.4 L192,66.8 L194,64.2 L196,61.9 L198,59.9 L200,58.2 L202,57 L204,56.3 L206,56 L208,56.3 L210,57 L212,58.2 L214,59.9 L216,61.9 L218,64.2 L220,66.8 L222,69.4 L224,72.2 L226,74.9 L228,77.6 L230,80.1 L232,82.4 L234,84.6 L236,86.5 L238,88.2 L240,89.7 L242,91 L244,92 L246,92.9 L248,93.6 L250,94.2 L252,94.6 L254,95 L256,95.3 L258,95.5 L260,95.6 L262,95.7 L264,95.8 L266,95.9 L268,95.9 L270,95.9 L272,96 L274,96 L276,96 L278,96 L280,96 L282,96 L284,96 L286,96 L288,96 L290,96 L290,106 Z" fill="#FFFFFF" stroke="#2D2B57" stroke-width="1.75" stroke-linejoin="round"/>
+  <path d="M82.1,94.1 L80,83.3 M89.9,89.1 L86.4,78.7 M96.3,82.5 L92,72.4 M101.8,75.4 L97.3,65.3 M107.3,68 L102.9,57.9 M113.4,61.1 L109.9,50.7 M120.9,58.1 L121.5,47.1 M128.1,62.5 L131.9,52.2 M133.9,69.6 L138.4,59.5 M139.4,77 L143.9,67 M145.3,84.2 L149.3,73.9 M152.2,90.3 L155.2,79.7 M161.1,93.7 L161.7,82.8 M170.7,92.1 L168.4,81.3 M178.4,86.5 L174.7,76.2 M184.5,79.7 L180.2,69.6 M190.1,72.3 L185.6,62.2 M195.8,64.9 L191.6,54.7 M202.2,59.1 L199.8,48.4 M210,59.2 L212.6,48.5 M216.5,65.2 L220.7,55 M221.9,72.3 L226.5,62.3 M227.5,79.7 L231.8,69.6 M233.6,86.7 L237.4,76.4 M240.8,92.5 L243.5,81.8 M249.3,96 L250.6,85.1 M258.4,97.5 L258.8,86.5 M267.5,97.9 L267.6,86.9 M276.5,98 L276.5,87 M285.5,98 L285.5,87" fill="none" stroke="#FFFFFF" stroke-width="3.25" stroke-linecap="round"/>
+  <rect x="70" y="106" width="220" height="12" fill="#FFFFFF" stroke="#2D2B57" stroke-width="1.75"/>
+
+  <!-- Villosité agrandie -->
+  <circle cx="200.8" cy="54.1" r="10" fill="none" stroke="#2D2B57" stroke-width="1.25"/>
+  <path d="M193.8,60.1 L163,166 M209.8,60.1 L217,166" fill="none" stroke="#2D2B57" stroke-width="1" stroke-dasharray="3 2.5" opacity="0.6"/>
+  <path d="M150,322 V200 C150,172 168,158 190,158 C212,158 230,172 230,200 V322" fill="#FFFFFF" stroke="#2D2B57" stroke-width="1.75"/>
+  <path d="M157,322 V200 C157,178 172,165 190,165 C208,165 223,178 223,200 V322 Z" fill="none" stroke="#2D2B57" stroke-width="1" opacity="0.7"/>
+  <path d="M120,322 H260" stroke="#2D2B57" stroke-width="1.75"/>
+
+  <!-- Capillaires : le sang arrive (rouge) et repart (bleu) chargé de nutriments -->
+  <g fill="none" stroke-width="3" stroke-linecap="round">
+    <path d="M170,334 V200 C170,186 179,177 190,177 M170,216 Q180,222 190,222 M170,248 Q180,254 190,254 M170,280 Q180,286 190,286" stroke="#C8364F"/>
+    <path d="M190,177 C201,177 210,186 210,200 V334 M190,222 Q200,222 210,216 M190,254 Q200,254 210,248 M190,286 Q200,286 210,280" stroke="#3461C9"/>
+  </g>
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M170,334 L170,326 M167.6,330.4 L170,326 L172.4,330.4" stroke="#8E1F33" stroke-width="2"/>
+    <path d="M210,326 L210,335 M212.4,330.6 L210,335 L207.6,330.6" stroke="#1F3F8F" stroke-width="2"/>
+  </g>
+
+  <!-- Nutriments qui traversent la paroi -->
+  <g fill="#B34400">
+    <circle cx="124" cy="228" r="2.6"/><circle cx="124" cy="270" r="2.6"/><circle cx="118" cy="249" r="2.6"/><circle cx="132" cy="296" r="2.6"/><circle cx="130" cy="192" r="2.6"/>
+    <circle cx="256" cy="238" r="2.6"/><circle cx="256" cy="282" r="2.6"/><circle cx="262" cy="212" r="2.6"/><circle cx="248" cy="304" r="2.6"/>
+    <circle cx="165" cy="300" r="2.2"/><circle cx="214" cy="232" r="2.2"/><circle cx="205" cy="300" r="2.2"/>
+  </g>
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M130,228 L164,230 M159.3,227.1 L164,230 L159,232.3" stroke="#B34400" stroke-width="1.8"/>
+    <path d="M130,270 L164,272 M159.3,269.1 L164,272 L159,274.3" stroke="#B34400" stroke-width="1.8"/>
+    <path d="M250,238 L216,240 M221,242.3 L216,240 L220.7,237.1" stroke="#B34400" stroke-width="1.8"/>
+    <path d="M250,282 L216,284 M221,286.3 L216,284 L220.7,281.1" stroke="#B34400" stroke-width="1.8"/>
+  </g>
+
+  <!-- Traits de rappel -->
+  <g stroke="#2D2B57" stroke-width="1" opacity="0.6" fill="none">
+    <path d="M45,62 L101,72"/>
+    <path d="M293,72 L266,84"/>
+    <path d="M70,140 L140,112"/>
+    <path d="M62,182 L151,190"/>
+    <path d="M73,249 L115,249"/>
+    <path d="M283,190 L227,196"/>
+    <path d="M283,262 L211,262"/>
+  </g>
+  <g fill="#2D2B57">
+    <circle cx="101" cy="72" r="1.8"/><circle cx="266" cy="84" r="1.8"/><circle cx="140" cy="112" r="1.8"/>
+    <circle cx="151" cy="190" r="1.8"/><circle cx="227" cy="196" r="1.8"/><circle cx="211" cy="262" r="1.8"/>
+  </g>
+
+  <!-- Légendes : un groupe par étiquette (masquables en mode « Me tester ») -->
+  <g font-size="11.5" font-weight="600" fill="#2D2B57">
+    <g class="ill-legende">
+      <rect class="ill-fond" x="3" y="55" width="42" height="15" rx="4" fill="#FFFFFF"/>
+      <text x="6" y="66">Repli</text>
+    </g>
+    <g class="ill-legende" text-anchor="end">
+      <rect class="ill-fond" x="293" y="65" width="64" height="15" rx="4" fill="#FFFFFF"/>
+      <text x="354" y="76">Villosités</text>
+    </g>
+    <g class="ill-legende">
+      <rect class="ill-fond" x="3" y="126" width="67" height="28" rx="4" fill="#FFFFFF"/>
+      <text x="6" y="137">Paroi de<tspan x="6" dy="13">l'intestin</tspan></text>
+    </g>
+    <g class="ill-legende">
+      <rect class="ill-fond" x="3" y="175" width="59" height="15" rx="4" fill="#FFFFFF"/>
+      <text x="6" y="186">Villosité</text>
+    </g>
+    <g class="ill-legende">
+      <rect class="ill-fond" x="3" y="242" width="70" height="15" rx="4" fill="#FFFFFF"/>
+      <text x="6" y="253">Nutriments</text>
+    </g>
+    <g class="ill-legende" text-anchor="end">
+      <rect class="ill-fond" x="283" y="183" width="74" height="15" rx="4" fill="#FFFFFF"/>
+      <text x="354" y="194">Paroi fine</text>
+    </g>
+    <g class="ill-legende" text-anchor="end">
+      <rect class="ill-fond" x="283" y="249" width="74" height="28" rx="4" fill="#FFFFFF"/>
+      <text x="354" y="260">Capillaires<tspan x="354" dy="13">sanguins</tspan></text>
+    </g>
+  </g>
+</svg>

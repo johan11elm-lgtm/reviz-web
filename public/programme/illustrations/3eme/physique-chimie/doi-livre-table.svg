@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 204" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
+  <!-- Diagramme objets-interactions du livre posé sur une table : bulle Livre reliée à Table par un trait plein (contact) et à Terre par un trait pointillé (à distance). Réviz, 3e physique-chimie, interactions et forces. -->
+  <path d="M164.1,61.3 L91.9,148.7" stroke="#2D2B57" stroke-width="2.25"/>
+  <path d="M195.9,61.3 L268.1,148.7" stroke="#2D2B57" stroke-width="2.25" stroke-dasharray="6 5"/>
+  <ellipse cx="180" cy="42" rx="40" ry="21" fill="#FBE9DD" stroke="#B34400" stroke-width="2.25"/><g font-size="11.5" font-weight="600" fill="#2D2B57"><text x="180" y="46.5" text-anchor="middle">Livre</text></g>
+  <ellipse cx="76" cy="168" rx="40" ry="21" fill="#FFFFFF" stroke="#2D2B57" stroke-width="1.75"/><g font-size="11.5" font-weight="600" fill="#2D2B57"><text x="76" y="172.5" text-anchor="middle">Table</text></g>
+  <ellipse cx="284" cy="168" rx="40" ry="21" fill="#FFFFFF" stroke="#2D2B57" stroke-width="1.75"/><g font-size="11.5" font-weight="600" fill="#2D2B57"><text x="284" y="172.5" text-anchor="middle">Terre</text></g>
+  <g class="ill-legende" font-size="11.5" font-weight="600" fill="#2D2B57"><rect class="ill-fond" x="66.9" y="92" width="50.1" height="15" rx="4" fill="#FFFFFF"/><text x="114" y="103" text-anchor="end">Contact</text></g>
+  <g class="ill-legende" font-size="11.5" font-weight="600" fill="#2D2B57"><rect class="ill-fond" x="243" y="92" width="69" height="15" rx="4" fill="#FFFFFF"/><text x="246" y="103">À distance</text></g>
+</svg>

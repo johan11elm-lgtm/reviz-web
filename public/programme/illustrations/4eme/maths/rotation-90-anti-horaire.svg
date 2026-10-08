@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 250" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
+  <!-- Rotation de centre O, d'angle 90°, dans le sens anti-horaire : M′ est sur le cercle de centre O passant par M et l'angle MOM′ est droit ; un triangle et son image par cette rotation. Réviz, 4e maths, translations et rotations. -->
+  <circle cx="176" cy="114" r="90.7" fill="none" stroke="#2D2B57" stroke-width="1" stroke-dasharray="3 4" opacity="0.5"/>
+  <path d="M176,114L264,136" fill="none" stroke="#2D2B57" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M176,114L198,26" fill="none" stroke="#2D2B57" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M185.7,116.4L188.1,106.7L178.4,104.3" fill="none" stroke="#2D2B57" stroke-width="1.3" stroke-linejoin="round"/>
+  <path d="M265,131.4L265.8,126.7L266.4,122L266.7,117.2L266.7,112.5L266.5,107.7L266,103L265.3,98.3L264.4,93.7L263.2,89.1L261.8,84.5L260.1,80.1L258.2,75.7L256.1,71.5L253.8,67.3L251.2,63.3L248.5,59.5L245.5,55.7L242.4,52.2L239.1,48.8L235.6,45.6L231.9,42.6L228.1,39.7L224.1,37.1L220,34.7L215.8,32.5L211.5,30.5L207.1,28.8" fill="none" stroke="#B34400" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"/><path d="M198,26L207.8,24.8L205.4,32.5Z" fill="#B34400"/>
+  <path d="M52,132L88,148L66,184Z" fill="#FBE9DD"/>
+  <path d="M52,132L88,148L66,184Z" fill="none" stroke="#2D2B57" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M194,238L210,202L246,224Z" fill="none" stroke="#2D2B57" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="176" cy="114" r="2.2" fill="#2D2B57"/>
+  <circle cx="264" cy="136" r="2.2" fill="#2D2B57"/>
+  <circle cx="198" cy="26" r="2.2" fill="#2D2B57"/>
+  <text x="170.6" y="129.2" font-size="12.5" font-weight="700" fill="#2D2B57" text-anchor="middle">O</text>
+  <text x="274.8" y="142.7" font-size="12.5" font-weight="700" fill="#2D2B57" text-anchor="middle">M</text>
+  <text x="195.8" y="19.7" font-size="12.5" font-weight="700" fill="#2D2B57" text-anchor="middle">M′</text>
+  <g class="ill-legende"><rect class="ill-fond" x="264.8" y="47.1" width="81.6" height="28" rx="4" fill="#FFFFFF"/><text x="267.8" y="58.1" font-size="11.5" font-weight="600" fill="#2D2B57">sens<tspan x="267.8" dy="13">anti-horaire</tspan></text></g>
+  <g class="ill-legende"><rect class="ill-fond" x="247.7" y="230.3" width="37.5" height="15" rx="4" fill="#FFFFFF"/><text x="250.7" y="241.3" font-size="11.5" font-weight="600" fill="#2D2B57">image</text></g>
+</svg>

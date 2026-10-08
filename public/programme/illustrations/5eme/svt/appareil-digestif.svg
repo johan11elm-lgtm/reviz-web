@@ -1,0 +1,120 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-9 -9 378 394" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
+  <!-- Appareil digestif vu de face (le foie, à droite du corps, est à gauche du dessin) : tube digestif en blanc, glandes digestives en orange clair. Réviz, 5e SVT, digestion et absorption. -->
+
+  <!-- Silhouette -->
+  <g fill="none" stroke="#8A8273" stroke-width="1.5" opacity="0.5">
+    <ellipse cx="180" cy="40" rx="27" ry="32"/>
+    <path d="M169,71 V86 C150,94 114,92 100,104 C94,110 93,122 93,140 L95,232 C95,266 99,304 110,344 M191,71 V86 C210,94 246,92 260,104 C266,110 267,122 267,140 L265,232 C265,266 261,304 250,344"/>
+  </g>
+
+  <!-- Intestin grêle (passe sous le gros intestin) -->
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M180,171.5 L171,170 Q148,166 144,188 Q140,214 164,214 Q192,214 206,232 Q214,244 204,248 H150 Q138,248 138,257 Q138,266 150,266 H210 Q222,266 222,275 Q222,284 210,284 H148 Q136,284 126,292" stroke="#2D2B57" stroke-width="10"/>
+    <path d="M180,171.5 L171,170 Q148,166 144,188 Q140,214 164,214 Q192,214 206,232 Q214,244 204,248 H150 Q138,248 138,257 Q138,266 150,266 H210 Q222,266 222,275 Q222,284 210,284 H148 Q136,284 126,292" stroke="#FFFFFF" stroke-width="6"/>
+  </g>
+
+  <!-- Gros intestin, du cæcum à l'anus -->
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M118,296 V236 Q118,224 130,224 H232 Q244,224 244,236 V288 Q244,304 226,306 Q198,308 190,320 L185,336" stroke="#2D2B57" stroke-width="17"/>
+    <path d="M118,296 V236 Q118,224 130,224 H232 Q244,224 244,236 V288 Q244,304 226,306 Q198,308 190,320 L185,336" stroke="#FFFFFF" stroke-width="12.5"/>
+  </g>
+
+  <!-- Pancréas (derrière l'estomac), canal vers l'intestin -->
+  <path d="M150,196 C150,188 162,186 176,190 C198,194 222,186 240,186 C250,186 252,196 242,200 C222,206 198,208 178,208 C162,208 150,206 150,196 Z" fill="#FBE9DD" stroke="#B34400" stroke-width="2.25"/>
+
+  <!-- Œsophage et estomac (ouverts l'un dans l'autre) -->
+  <g fill="none">
+    <path d="M180,60 V108 Q180,120 194,128" stroke="#2D2B57" stroke-width="11"/>
+    <path d="M180,60 V108 Q180,120 194,128" stroke="#FFFFFF" stroke-width="7"/>
+  </g>
+  <path d="M196.2,124.1 C206,108 228,104 242,114 C256,126 258,156 246,172 C234,186 206,190 186,182 C180,180 175,177 170.3,173.9 L171.7,166.1 C182,169 192,170 200,166 C210,160 211,148 205,140 C201,135 195,134 191.8,131.9 Z" fill="#FFFFFF"/>
+  <path d="M196.2,124.1 C206,108 228,104 242,114 C256,126 258,156 246,172 C234,186 206,190 186,182 C180,180 175,177 170.3,173.9 M171.7,166.1 C182,169 192,170 200,166 C210,160 211,148 205,140 C201,135 195,134 191.8,131.9" fill="none" stroke="#2D2B57" stroke-width="1.75"/>
+
+  <!-- Bouche -->
+  <ellipse cx="180" cy="56" rx="9" ry="4" fill="#FFFFFF" stroke="#2D2B57" stroke-width="1.8"/>
+
+  <!-- Glandes : salivaires, foie (avec le canal de la bile) -->
+  <g fill="none" stroke="#B34400" stroke-width="1.6">
+    <path d="M164,53 Q167,56 171,56 M196,53 Q193,56 189,56 M165,65 Q168,60 172,58 M195,65 Q192,60 188,58"/>
+    <path d="M136,146 Q146,160 145,176"/>
+  </g>
+  <g fill="#FBE9DD" stroke="#B34400" stroke-width="1.8">
+    <ellipse cx="161" cy="49" rx="4" ry="6"/>
+    <ellipse cx="199" cy="49" rx="4" ry="6"/>
+    <ellipse cx="162" cy="66" rx="6.5" ry="3.8"/>
+    <ellipse cx="198" cy="66" rx="6.5" ry="3.8"/>
+    <path d="M96,110 C104,96 140,94 167,101 C174,103 174,110 167,114 C156,128 136,146 114,150 C100,152 94,144 94,130 Z" stroke-width="2.25"/>
+  </g>
+
+  <!-- Clé des couleurs -->
+  <g font-size="11" font-weight="600" fill="#8A8273">
+    <rect x="62" y="358" width="14" height="10" rx="2" fill="#FFFFFF" stroke="#2D2B57" stroke-width="1.5"/>
+    <text x="81" y="367">Tube digestif</text>
+    <rect x="182" y="358" width="14" height="10" rx="2" fill="#FBE9DD" stroke="#B34400" stroke-width="1.5"/>
+    <text x="201" y="367">Glandes digestives</text>
+  </g>
+
+  <!-- Traits de rappel -->
+  <g stroke="#2D2B57" stroke-width="1" opacity="0.6" fill="none">
+    <path d="M65,72 L156,65"/>
+    <path d="M37,125 L112,126"/>
+    <path d="M85,256 L111,256"/>
+    <path d="M91,330 L154,287"/>
+    <path d="M310,56 L190,56"/>
+    <path d="M288,90 L185,90"/>
+    <path d="M296,142 L244,142"/>
+    <path d="M290,198 L242,194"/>
+    <path d="M314,340 L190,336"/>
+  </g>
+  <g fill="#2D2B57">
+    <circle cx="156" cy="65" r="1.8"/>
+    <circle cx="112" cy="126" r="1.8"/>
+    <circle cx="111" cy="256" r="1.8"/>
+    <circle cx="154" cy="287" r="1.8"/>
+    <circle cx="190" cy="56" r="1.8"/>
+    <circle cx="185" cy="90" r="1.8"/>
+    <circle cx="244" cy="142" r="1.8"/>
+    <circle cx="242" cy="194" r="1.8"/>
+    <circle cx="190" cy="336" r="1.8"/>
+  </g>
+
+  <!-- Légendes : un groupe par étiquette (masquables en mode « Me tester ») -->
+  <g font-size="11.5" font-weight="600" fill="#2D2B57">
+    <g class="ill-legende">
+      <rect class="ill-fond" x="3" y="58" width="62" height="28" rx="4" fill="#FFFFFF"/>
+      <text x="6" y="69">Glandes<tspan x="6" dy="13">salivaires</tspan></text>
+    </g>
+    <g class="ill-legende">
+      <rect class="ill-fond" x="3" y="118" width="34" height="15" rx="4" fill="#FFFFFF"/>
+      <text x="6" y="129">Foie</text>
+    </g>
+    <g class="ill-legende">
+      <rect class="ill-fond" x="3" y="249" width="82" height="15" rx="4" fill="#FFFFFF"/>
+      <text x="6" y="260">Gros intestin</text>
+    </g>
+    <g class="ill-legende">
+      <rect class="ill-fond" x="3" y="323" width="88" height="15" rx="4" fill="#FFFFFF"/>
+      <text x="6" y="334">Intestin grêle</text>
+    </g>
+    <g class="ill-legende" text-anchor="end">
+      <rect class="ill-fond" x="310" y="49" width="47" height="15" rx="4" fill="#FFFFFF"/>
+      <text x="354" y="60">Bouche</text>
+    </g>
+    <g class="ill-legende" text-anchor="end">
+      <rect class="ill-fond" x="288" y="83" width="69" height="15" rx="4" fill="#FFFFFF"/>
+      <text x="354" y="94">Œsophage</text>
+    </g>
+    <g class="ill-legende" text-anchor="end">
+      <rect class="ill-fond" x="296" y="135" width="61" height="15" rx="4" fill="#FFFFFF"/>
+      <text x="354" y="146">Estomac</text>
+    </g>
+    <g class="ill-legende" text-anchor="end">
+      <rect class="ill-fond" x="290" y="191" width="67" height="15" rx="4" fill="#FFFFFF"/>
+      <text x="354" y="202">Pancréas</text>
+    </g>
+    <g class="ill-legende" text-anchor="end">
+      <rect class="ill-fond" x="314" y="333" width="43" height="15" rx="4" fill="#FFFFFF"/>
+      <text x="354" y="344">Anus</text>
+    </g>
+  </g>
+</svg>
