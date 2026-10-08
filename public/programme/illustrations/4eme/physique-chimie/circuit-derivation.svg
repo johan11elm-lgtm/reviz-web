@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 390 256" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
+  <!-- Circuit en dérivation avec ampèremètres (valeurs de la leçon). Réviz, 4e physique-chimie, lois de l'intensité. -->
+
+  <!-- Fils : branche principale en orange, branches dérivées à l'encre -->
+  <g fill="none" stroke-width="3" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M56,134 V60 H210 M56,146 V220 H210" stroke="#D2602A"/>
+    <path d="M210,60 H320 V220 H210 M210,60 V220" stroke="#2D2B57"/>
+  </g>
+
+  <!-- Pile : grand trait fin (+), petit trait épais (−) -->
+  <path d="M40,134 H72" stroke="#2D2B57" stroke-width="2.5"/>
+  <path d="M48,146 H64" stroke="#2D2B57" stroke-width="6"/>
+  <g font-size="13" font-weight="700" fill="#2D2B57"><text x="78" y="132">+</text><text x="72" y="157">−</text></g>
+
+  <!-- Nœuds -->
+  <circle cx="210" cy="60" r="5" fill="#2D2B57"/>
+  <circle cx="210" cy="220" r="5" fill="#2D2B57"/>
+
+  <!-- Ampèremètres -->
+  <g fill="#FFFFFF" stroke="#2D2B57" stroke-width="2.2">
+    <circle cx="133" cy="60" r="13"/><circle cx="210" cy="105" r="13"/><circle cx="320" cy="105" r="13"/>
+  </g>
+  <g font-size="13" font-weight="700" fill="#2D2B57" text-anchor="middle">
+    <text x="133" y="64.5">A</text><text x="210" y="109.5">A</text><text x="320" y="109.5">A</text>
+  </g>
+
+  <!-- Lampes -->
+  <g fill="#FFFFFF" stroke="#2D2B57" stroke-width="2.2">
+    <circle cx="210" cy="170" r="13"/><circle cx="320" cy="170" r="13"/>
+  </g>
+  <path d="M201,161 L219,179 M219,161 L201,179 M311,161 L329,179 M329,161 L311,179" stroke="#2D2B57" stroke-width="2"/>
+
+  <!-- Sens conventionnel du courant -->
+  <g fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M168,54 L175,60 L168,66 M157,214 L150,220 L157,226" stroke="#D2602A"/>
+    <path d="M204,132 L210,139 L216,132 M314,132 L320,139 L326,132" stroke="#2D2B57"/>
+  </g>
+
+  <!-- Valeurs lues (toujours visibles) -->
+  <g font-size="12" font-weight="700">
+    <text x="133" y="38" text-anchor="middle" fill="#B34400">I = 0,40 A</text>
+    <text x="228" y="102" fill="#2D2B57">I₁ =</text><text x="228" y="116" fill="#2D2B57">0,20 A</text>
+    <text x="338" y="102" fill="#2D2B57">I₂ =</text><text x="338" y="116" fill="#2D2B57">0,20 A</text>
+  </g>
+
+  <!-- Légendes : un groupe par étiquette (masquables en mode « Me tester ») -->
+  <g font-size="11.5" font-weight="600" fill="#2D2B57">
+    <g class="ill-legende"><rect class="ill-fond" x="3" y="129" width="31" height="16" rx="4" fill="#FFFFFF"/><text x="6" y="141">Pile</text></g>
+    <g class="ill-legende">
+      <path d="M214,56 L232,40" stroke="#2D2B57" stroke-width="1" opacity="0.6"/>
+      <rect class="ill-fond" x="230" y="26" width="42" height="16" rx="4" fill="#FFFFFF"/><text x="234" y="38">Nœud</text>
+    </g>
+    <g class="ill-legende">
+      <path d="M214,224 L232,238" stroke="#2D2B57" stroke-width="1" opacity="0.6"/>
+      <rect class="ill-fond" x="230" y="232" width="42" height="16" rx="4" fill="#FFFFFF"/><text x="234" y="244">Nœud</text>
+    </g>
+    <g class="ill-legende"><rect class="ill-fond" x="226" y="163" width="56" height="16" rx="4" fill="#FFFFFF"/><text x="229" y="175">Lampe L₁</text></g>
+    <g class="ill-legende"><rect class="ill-fond" x="335" y="163" width="54" height="16" rx="4" fill="#FFFFFF"/><text x="338" y="175">Lampe L₂</text></g>
+    <g class="ill-legende"><rect class="ill-fond" x="62" y="230" width="118" height="16" rx="4" fill="#FFFFFF"/><text x="65" y="242" fill="#B34400">Branche principale</text></g>
+    <g class="ill-legende"><rect class="ill-fond" x="282" y="232" width="104" height="16" rx="4" fill="#FFFFFF"/><text x="285" y="244">Branches dérivées</text></g>
+  </g>
+</svg>

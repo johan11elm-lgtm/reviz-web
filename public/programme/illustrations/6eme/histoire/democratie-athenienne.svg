@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 282" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
+  <!-- Institutions de la démocratie athénienne au Ve siècle av. J.-C. Réviz, 6e histoire, le monde des cités grecques. -->
+  <defs>
+    <marker id="democratie-fleche" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#2D2B57"/>
+    </marker>
+  </defs>
+
+  <!-- Les citoyens -->
+  <rect x="50" y="10" width="280" height="52" rx="10" fill="#EAE8F2" stroke="#2D2B57" stroke-width="2"/>
+  <text x="190" y="32" text-anchor="middle" font-size="14.5" font-weight="700" fill="#2D2B57">Les citoyens</text>
+  <text x="190" y="51" text-anchor="middle" font-size="11.5" fill="#4A4766">hommes libres, nés de parents athéniens</text>
+
+  <!-- Ecclésia -->
+  <rect x="10" y="108" width="165" height="114" rx="10" fill="#FFE6D2" stroke="#C25407" stroke-width="2"/>
+  <g font-size="11.5" fill="#6B3A12" text-anchor="middle">
+    <text x="92.5" y="147">tous les citoyens,</text>
+    <text x="92.5" y="161">sur la Pnyx</text>
+  </g>
+  <g font-size="12.5" fill="#2D2B57">
+    <text x="22" y="182">• vote les lois</text>
+    <text x="22" y="198">• guerre et paix</text>
+    <text x="22" y="214">• l'ostracisme</text>
+  </g>
+
+  <!-- Boulè -->
+  <rect x="235" y="108" width="135" height="80" rx="10" fill="#DCF5E6" stroke="#0F6B3A" stroke-width="2"/>
+  <g font-size="11.5" fill="#0F4F2C" text-anchor="middle">
+    <text x="302.5" y="148">500 citoyens</text>
+    <text x="302.5" y="162">tirés au sort</text>
+    <text x="302.5" y="176">pour un an</text>
+  </g>
+
+  <!-- Flèches -->
+  <g fill="none" stroke="#2D2B57" stroke-width="1.8" marker-end="url(#democratie-fleche)">
+    <path d="M140,62 L102,105"/>
+    <path d="M240,62 L278,105"/>
+    <path d="M233,142 L179,142"/>
+  </g>
+  <g font-size="11" font-style="italic" fill="#4A4766">
+    <text x="114" y="89" text-anchor="end">se réunissent</text>
+    <text x="266" y="89">une partie forme</text>
+    <text x="205" y="135" text-anchor="middle">prépare</text>
+    <text x="205" y="158" text-anchor="middle">les lois</text>
+  </g>
+
+  <!-- Exclus -->
+  <rect x="10" y="236" width="360" height="38" rx="10" fill="#FFF4F5" stroke="#A81F36" stroke-width="1.6" stroke-dasharray="5 4"/>
+  <text x="190" y="259" text-anchor="middle" font-size="12" fill="#7A1628"><tspan font-weight="700">Exclus :</tspan> femmes, métèques (étrangers), esclaves</text>
+
+  <!-- Légendes : les noms des institutions (masquables en mode « Me tester ») -->
+  <g font-size="14.5" font-weight="700" text-anchor="middle">
+    <g class="ill-legende"><rect class="ill-fond" x="54" y="114" width="77" height="20" rx="4" fill="#FFE6D2"/><text x="92.5" y="129" fill="#8A3A00">Ecclésia</text></g>
+    <g class="ill-legende"><rect class="ill-fond" x="270" y="114" width="65" height="20" rx="4" fill="#DCF5E6"/><text x="302.5" y="129" fill="#0F6B3A">Boulè</text></g>
+  </g>
+</svg>

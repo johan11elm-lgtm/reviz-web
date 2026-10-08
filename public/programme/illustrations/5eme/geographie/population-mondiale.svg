@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 236" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
+  <!-- Population mondiale 1800-2100, en milliards. Réviz, 5e géographie, la croissance de la population mondiale.
+       Échelle : x = 44 + (année − 1800) × 1,0733 ; y = 200 − 16 × milliards.
+       Données : 1800 0,98 · 1850 1,26 · 1900 1,65 · 1927 2 · 1950 2,5 · 1960 3 · 1974 4 · 1987 5 · 1999 6 · 2011 7 · 2022 8 · 2024 8,16
+       Projection moyenne : 2030 8,55 · 2040 9,19 · 2050 9,66 · 2060 10 · 2070 10,2 · 2084 10,29 · 2100 10,18
+       Sources : ONU, World Population Prospects 2024 (1950-2100) ; avant 1950, estimations historiques HYDE. -->
+
+  <!-- Grille et axes -->
+  <path d="M44,168 H366 M44,136 H366 M44,104 H366 M44,72 H366 M44,40 H366" stroke="#ECE6DC" stroke-width="1"/>
+  <path d="M44,200 H366" stroke="#2D2B57" stroke-width="1.4"/>
+  <g font-size="10.5" fill="#6E675B" text-anchor="end">
+    <text x="38" y="204">0</text><text x="38" y="172">2</text><text x="38" y="140">4</text><text x="38" y="108">6</text><text x="38" y="76">8</text><text x="38" y="44">10</text>
+  </g>
+  <g font-size="10.5" fill="#6E675B" text-anchor="middle">
+    <text x="44" y="216">1800</text><text x="97.7" y="216">1850</text><text x="151.3" y="216">1900</text><text x="205" y="216">1950</text><text x="258.7" y="216">2000</text><text x="312.3" y="216">2050</text><text x="352" y="216">2100</text>
+  </g>
+  <text x="44" y="18" font-size="10.5" font-weight="600" fill="#6E675B">milliards d'habitants</text>
+
+  <!-- Aire sous la courbe observée -->
+  <path d="M44,184.3 L97.7,179.8 L151.3,173.6 L180.3,168 L205,160 L215.7,152 L230.8,136 L244.7,120 L257.6,104 L270.5,88 L282.3,72 L284.4,69.4 L284.4,200 L44,200 Z" fill="#FFE0EA"/>
+
+  <!-- Courbe observée, puis projection en pointillés -->
+  <path d="M44,184.3 L97.7,179.8 L151.3,173.6 L180.3,168 L205,160 L215.7,152 L230.8,136 L244.7,120 L257.6,104 L270.5,88 L282.3,72 L284.4,69.4" fill="none" stroke="#C2336A" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/>
+  <path d="M284.4,69.4 L290.9,63.2 L301.6,53 L312.3,45.4 L323.1,40 L333.8,36.8 L348.8,35.4 L366,37.1" fill="none" stroke="#C2336A" stroke-width="2.4" stroke-dasharray="5 4" stroke-linecap="round"/>
+
+  <!-- Repères -->
+  <g fill="#C2336A"><circle cx="44" cy="184.3" r="3.4"/><circle cx="205" cy="160" r="3.4"/><circle cx="282.3" cy="72" r="3.4"/></g>
+  <g font-size="10.5" font-weight="700" fill="#2D2B57">
+    <text x="50" y="176">1 Md</text>
+    <text x="210" y="173">2,5 Mds</text>
+    <text x="276" y="66" text-anchor="end">8 Mds (2022)</text>
+  </g>
+
+  <!-- Légendes : les trois phases (masquables en mode « Me tester ») -->
+  <g font-size="11.5" font-weight="600" fill="#2D2B57">
+    <g class="ill-legende"><rect class="ill-fond" x="66" y="142" width="98" height="16" rx="4" fill="#FFFFFF"/><text x="69" y="154">Croissance lente</text></g>
+    <g class="ill-legende">
+      <path d="M168,112 L237,129" stroke="#2D2B57" stroke-width="1" opacity="0.6"/>
+      <rect class="ill-fond" x="70" y="88" width="98" height="30" rx="4" fill="#FFFFFF"/><text x="73" y="100">Explosion<tspan x="73" dy="13">démographique</tspan></text>
+    </g>
+    <g class="ill-legende"><rect class="ill-fond" x="310" y="56" width="66" height="16" rx="4" fill="#FFFFFF"/><text x="313" y="68">Projection</text></g>
+  </g>
+</svg>

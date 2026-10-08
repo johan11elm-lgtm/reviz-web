@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 234" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
+  <!-- Les deux configurations de Thalès, lettres de la leçon (AM/AB = 3/5). Réviz, 3e maths, théorème de Thalès. -->
+  <!-- Coin haut droit laissé libre : le bouton plein écran s'y pose. -->
+
+  <!-- Emboîtée : M sur [AB], N sur [AC] -->
+  <path d="M95,28 L20,200 L175,200 Z" fill="#EAE8F2" stroke="#2D2B57" stroke-width="2.2" stroke-linejoin="round"/>
+  <path d="M95,28 L50,131.2 L140,131.2 Z" fill="#FFE0C8" stroke="#D2602A" stroke-width="2.4" stroke-linejoin="round"/>
+
+  <!-- Papillon : A entre B et M, et entre C et N -->
+  <path d="M290,118 L222,200 L358,200 Z" fill="#EAE8F2" stroke="#2D2B57" stroke-width="2.2" stroke-linejoin="round"/>
+  <path d="M290,118 L330.8,68.8 L249.2,68.8 Z" fill="#FFE0C8" stroke="#D2602A" stroke-width="2.4" stroke-linejoin="round"/>
+
+  <!-- Codage des parallèles (MN) et (BC) -->
+  <g fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M92,127 L98,131.2 L92,135.4" stroke="#D2602A"/>
+    <path d="M94,196 L100,200 L94,204" stroke="#2D2B57"/>
+    <path d="M287,64.6 L293,68.8 L287,73" stroke="#D2602A"/>
+    <path d="M287,196 L293,200 L287,204" stroke="#2D2B57"/>
+  </g>
+
+  <!-- Points et lettres -->
+  <g fill="#2D2B57">
+    <circle cx="95" cy="28" r="2.6"/><circle cx="50" cy="131.2" r="2.6"/><circle cx="140" cy="131.2" r="2.6"/>
+    <circle cx="290" cy="118" r="2.6"/><circle cx="330.8" cy="68.8" r="2.6"/><circle cx="249.2" cy="68.8" r="2.6"/>
+  </g>
+  <g font-size="14" font-weight="700" fill="#2D2B57">
+    <text x="95" y="19" text-anchor="middle">A</text>
+    <text x="13" y="214">B</text><text x="176" y="214">C</text>
+    <text x="41" y="131" text-anchor="end">M</text><text x="149" y="131">N</text>
+    <text x="302" y="123">A</text>
+    <text x="214" y="214" text-anchor="end">B</text><text x="362" y="214">C</text>
+    <text x="338" y="66">M</text><text x="242" y="66" text-anchor="end">N</text>
+  </g>
+
+  <!-- Légendes : le nom de chaque configuration (masquables en mode « Me tester ») -->
+  <g font-size="12" font-weight="700" fill="#2D2B57" text-anchor="middle">
+    <g class="ill-legende"><rect class="ill-fond" x="48" y="214" width="98" height="17" rx="4" fill="#FFFFFF"/><text x="97" y="227">Emboîtée</text></g>
+    <g class="ill-legende"><rect class="ill-fond" x="240" y="214" width="100" height="17" rx="4" fill="#FFFFFF"/><text x="290" y="227">Papillon</text></g>
+  </g>
+</svg>
