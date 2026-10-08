@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "origin": {
+    "base_url": "https://api.anthropic.com",
+    "organization_id": "7283b5b6-7f67-47c0-8d85-4eed5153f7dc",
+    "workspace_id": "wrkspc_01PdbZrx71ZiVUdanrLffqs8"
+  },
+  "resources": {
+    "./managed-agents/relecteur-nuit/agent.md": {
+      "kind": "agent",
+      "id": "agent_01YLfaZcXYCQLswxEbEd9SgU",
+      "version": "1",
+      "hash": "48f2c47d68c37afe865597189c5b5ad0",
+      "remote_hash": "b815d5ad8f99fcd7eecca9872bb847ba"
+    },
+    "./managed-agents/relecteur-nuit/environment.yaml": {
+      "kind": "environment",
+      "id": "env_011TUwgfUNqGMnXcNwGZDqD1",
+      "hash": "89e144bc7f151137d58a25eed065cfc7",
+      "remote_hash": "7753ce09067364b125261e2f08c88c03"
+    },
+    "./managed-agents/relecteur-nuit/vault.yaml": {
+      "kind": "vault",
+      "id": "vlt_011CfqSBf7SXdN9ZHXuTLQVE",
+      "hash": "ebeebb7d001afe27b9323f1e9ce82b95",
+      "remote_hash": "ebeebb7d001afe27b9323f1e9ce82b95"
+    }
+  }
+}

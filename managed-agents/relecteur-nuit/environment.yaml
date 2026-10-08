@@ -1,0 +1,5 @@
+name: reviz-relecture
+config:
+  type: cloud
+  # Le dépôt passe par le proxy git d'Anthropic ; seul le serveur MCP GitHub sort.
+  networking: {type: limited, allow_mcp_servers: true, allow_package_managers: false}
