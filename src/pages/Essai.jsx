@@ -21,9 +21,14 @@ export default function Essai() {
   // on ouvre directement son programme en mode découverte, sans formulaire.
   const classeProf = params.get('prof') && CLASSES_DECOUVERTE.includes(params.get('classe'))
     ? params.get('classe') : null;
+  // Élève arrivé depuis une fiche publique de la landing (`?classe=3ème&matiere=maths`) :
+  // sa classe est déjà cochée et, après le prénom, on ouvre directement la matière.
+  const classeFiche = !classeProf && CLASSES_BY_CYCLE.college.includes(params.get('classe'))
+    ? params.get('classe') : null;
+  const matiereFiche = /^[a-z0-9-]{1,40}$/.test(params.get('matiere') ?? '') ? params.get('matiere') : null;
   const [prenom, setPrenom] = useState('');
   const [cycle, setCycle] = useState('college');
-  const [classe, setClasse] = useState(null);
+  const [classe, setClasse] = useState(classeFiche);
   const [error, setError] = useState('');
 
   // Déjà connecté avec un vrai compte : rien à essayer, direction l'accueil.
@@ -47,7 +52,7 @@ export default function Essai() {
     if (!classe) { setError('Choisis ta classe.'); return; }
     stopDecouverte();
     loginAsGuest({ prenom: p, level: { cycle, classe, specialites: [] } });
-    navigate('/programme', { replace: true });
+    navigate(matiereFiche ? `/programme/${matiereFiche}` : '/programme', { replace: true });
   }
 
   if (classeProf) return <div className="app essai-page" />;

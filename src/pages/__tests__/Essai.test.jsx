@@ -36,6 +36,24 @@ describe('<Essai /> — mode essai', () => {
     expect(nav).toHaveBeenCalledWith('/programme', { replace: true })
   })
 
+  it('un élève venu d’une fiche publique a sa classe cochée et ouvre la matière', () => {
+    renderPage('/essai?classe=3%C3%A8me&matiere=maths&chapitre=theoreme-de-thales&via=pinterest')
+    expect(screen.getByRole('button', { name: '3ème' })).toHaveAttribute('aria-pressed', 'true')
+    fireEvent.change(screen.getByLabelText('Ton prénom'), { target: { value: 'Léa' } })
+    fireEvent.click(screen.getByRole('button', { name: /C'est parti/ }))
+    expect(auth.loginAsGuest).toHaveBeenCalledWith({ prenom: 'Léa', level: { cycle: 'college', classe: '3ème', specialites: [] } })
+    expect(nav).toHaveBeenCalledWith('/programme/maths', { replace: true })
+  })
+
+  it('une matière mal formée ou une classe de lycée dans le lien sont ignorées', () => {
+    renderPage('/essai?classe=Terminale&matiere=../hack')
+    expect(screen.getByRole('button', { name: '3ème' })).toHaveAttribute('aria-pressed', 'false')
+    fireEvent.change(screen.getByLabelText('Ton prénom'), { target: { value: 'Léa' } })
+    fireEvent.click(screen.getByRole('button', { name: '4ème' }))
+    fireEvent.click(screen.getByRole('button', { name: /C'est parti/ }))
+    expect(nav).toHaveBeenCalledWith('/programme', { replace: true })
+  })
+
   it('annonce le lycée « à venir » sans l’ouvrir : Mon programme s’arrête en 3e', () => {
     renderPage()
     const lycee = screen.getByRole('tab', { name: /Lycée/ })
