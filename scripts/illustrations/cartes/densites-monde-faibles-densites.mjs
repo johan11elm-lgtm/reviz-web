@@ -12,7 +12,7 @@
 //
 //   node scripts/illustrations/cartes/densites-monde-faibles-densites.mjs
 // -------------------------------------------------------
-import { C, FONT, compact, ecrireSvg, r1, titrePartie } from './_commun.mjs'
+import { C, FONT, compact, ecrireSvg, r1, titrePartie, xml } from './_commun.mjs'
 import { fondMonde, nomMasquable, fichePays, classeDensite, CLASSES_DENSITE, TEINTES_DENSITE, bordLeger, graticuleLeger } from './_geographie-5e-6e.mjs'
 
 const W = 360
@@ -54,7 +54,7 @@ const lw = 62
 const leg = CLASSES_DENSITE.map((c, i) => {
   const x = 14 + i * (lw + 4)
   return `<rect x="${x}" y="${yL + 6}" width="${lw}" height="12" fill="${TEINTES_DENSITE[i]}" stroke="${C.encre}" stroke-width="0.75"/>` +
-    `<text x="${x + lw / 2}" y="${yL + 33}" text-anchor="middle">${c.texte}</text>`
+    `<text x="${x + lw / 2}" y="${yL + 33}" text-anchor="middle">${xml(c.texte)}</text>`
 }).join('')
 const H = yL + 42
 

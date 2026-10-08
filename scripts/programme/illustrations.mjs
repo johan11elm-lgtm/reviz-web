@@ -65,6 +65,10 @@ function controler(ill, lecon) {
     const svg = readFileSync(fichier, 'utf8')
     if (!/^\s*<svg[\s>]/.test(svg)) pb.push('le SVG doit commencer par <svg> (pas de prologue XML ni de DOCTYPE)')
     if (!/viewBox=/.test(svg)) pb.push('SVG sans viewBox')
+    // « < 30 » ou « R&D » non échappés : le fichier n'est plus du XML et l'image ne s'affiche pas.
+    const sansCommentaires = svg.replace(/<!--[\s\S]*?-->/g, '')
+    if (/<(?![a-zA-Z/!?])/.test(sansCommentaires)) pb.push('SVG mal formé : « < » non échappé dans un texte (écrire &lt;)')
+    if (/&(?!(amp|lt|gt|quot|apos|#\d+|#x[0-9a-f]+);)/i.test(sansCommentaires)) pb.push('SVG mal formé : « & » non échappé (écrire &amp;)')
     if (/<script|on[a-z]+\s*=|javascript:/i.test(svg)) pb.push('SVG avec script ou gestionnaire d\'événement')
     if (/<style/i.test(svg)) pb.push('SVG avec <style> : interdit (inséré en ligne, il s\'appliquerait à toute la page)')
     if (/(href|src)\s*=\s*["'](?!#)/i.test(svg)) pb.push('SVG qui charge une ressource externe')

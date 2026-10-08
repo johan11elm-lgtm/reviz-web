@@ -168,9 +168,12 @@ export function hachures(rings, { angle = 45, pas = 4, dans = [], decalage = 0 }
   return s.replace(/,-/g, '-')
 }
 
+/** Échappe un texte pour le SVG (« < 30 » dans une légende casserait le fichier). */
+export const xml = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+
 /** Texte simple. */
 export function texte(x, y, s, attrs = '') {
-  return `<text x="${r1(x)}" y="${r1(y)}"${attrs ? ' ' + attrs : ''}>${s}</text>`
+  return `<text x="${r1(x)}" y="${r1(y)}"${attrs ? ' ' + attrs : ''}>${xml(s)}</text>`
 }
 
 /** Pointe de flèche pleine au point `b`, orientée selon a→b. */
