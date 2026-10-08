@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 308" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
+<!-- Plan schématique d'une ville médiévale : remparts et portes, château, cathédrale, beffroi, place du marché, rues des métiers, port et pont sur la rivière. Réviz, 5e histoire, l'essor des villes médiévales. Généré par scripts/illustrations/plan-ville-medievale.mjs -->
+<rect x="12" y="226" width="336" height="26" fill="#DCE6FA"/>
+<path d="M12,226H348" stroke="#3461C9" stroke-width="1.2"/>
+<path d="M12,252H348" stroke="#3461C9" stroke-width="1.2"/>
+<path d="M57.8,162.4L110,162L158,158" fill="none" stroke="#E4E1DA" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M204.1,61.2L207,82L207,132" fill="none" stroke="#E4E1DA" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M314.2,162.4L230,152L214,152" fill="none" stroke="#E4E1DA" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M214,226L214,196L198,172" fill="none" stroke="#E4E1DA" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M214,252L214,260" fill="none" stroke="#E4E1DA" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/>
+<rect x="208" y="225" width="12" height="28" fill="#E4E1DA" stroke="#2D2B57" stroke-width="1.5"/>
+<path d="M60,226h70" stroke="#B8A27E" stroke-width="5"/>
+<path d="M72,234h16l-3,5h-10zM104,235h16l-3,5h-10z" fill="#FFFFFF" stroke="#2D2B57" stroke-width="1.2"/>
+<rect x="230" y="137" width="11" height="8" fill="#F4EBDD" stroke="#B8A27E" stroke-width="1"/><rect x="230" y="155" width="11" height="8" fill="#F4EBDD" stroke="#B8A27E" stroke-width="1"/><rect x="246" y="139.6" width="11" height="8" fill="#F4EBDD" stroke="#B8A27E" stroke-width="1"/><rect x="246" y="157.6" width="11" height="8" fill="#F4EBDD" stroke="#B8A27E" stroke-width="1"/><rect x="262" y="142.2" width="11" height="8" fill="#F4EBDD" stroke="#B8A27E" stroke-width="1"/><rect x="262" y="160.2" width="11" height="8" fill="#F4EBDD" stroke="#B8A27E" stroke-width="1"/><rect x="278" y="144.8" width="11" height="8" fill="#F4EBDD" stroke="#B8A27E" stroke-width="1"/><rect x="278" y="162.8" width="11" height="8" fill="#F4EBDD" stroke="#B8A27E" stroke-width="1"/><rect x="294" y="147.4" width="11" height="8" fill="#F4EBDD" stroke="#B8A27E" stroke-width="1"/><rect x="294" y="165.4" width="11" height="8" fill="#F4EBDD" stroke="#B8A27E" stroke-width="1"/>
+<rect x="158" y="132" width="56" height="40" fill="#F4EBDD" stroke="#B8A27E" stroke-width="1.5"/>
+<path d="M168,144h8v6h-8zM186,144h8v6h-8zM177,156h8v6h-8zM196,157h8v6h-8z" fill="#FFFFFF" stroke="#B8A27E" stroke-width="1"/>
+<rect x="218" y="130" width="12" height="12" fill="#FBE9DD" stroke="#B34400" stroke-width="2"/>
+<path d="M124,94h44v-16h14v16h12a8,8 0 0 1 0,16h-12v16h-14v-16h-44z" fill="#FBE9DD" stroke="#B34400" stroke-width="2" stroke-linejoin="round"/>
+<rect x="233" y="89" width="34" height="30" fill="#FBE9DD" stroke="#B34400" stroke-width="2"/><circle cx="233" cy="89" r="4.5" fill="#FBE9DD" stroke="#B34400" stroke-width="2"/><circle cx="267" cy="89" r="4.5" fill="#FBE9DD" stroke="#B34400" stroke-width="2"/><circle cx="233" cy="119" r="4.5" fill="#FBE9DD" stroke="#B34400" stroke-width="2"/><circle cx="267" cy="119" r="4.5" fill="#FBE9DD" stroke="#B34400" stroke-width="2"/>
+<path d="M46,226L50.8,182.6L64.8,142.2L87,107.4L116,80.8L149.8,64L186,58.3L222.2,64L256,80.8L285,107.4L307.2,142.2L321.2,182.6L326,226" fill="none" stroke="#2D2B57" stroke-width="4" stroke-linejoin="round"/>
+<circle cx="46" cy="226" r="4" fill="#2D2B57"/><circle cx="64.8" cy="142.2" r="4" fill="#2D2B57"/><circle cx="116" cy="80.8" r="4" fill="#2D2B57"/><circle cx="186" cy="58.3" r="4" fill="#2D2B57"/><circle cx="256" cy="80.8" r="4" fill="#2D2B57"/><circle cx="307.2" cy="142.2" r="4" fill="#2D2B57"/><circle cx="326" cy="226" r="4" fill="#2D2B57"/>
+<circle cx="57.8" cy="162.4" r="6.5" fill="#FFFFFF" stroke="#2D2B57" stroke-width="2.5"/><circle cx="204.1" cy="61.2" r="6.5" fill="#FFFFFF" stroke="#2D2B57" stroke-width="2.5"/><circle cx="314.2" cy="162.4" r="6.5" fill="#FFFFFF" stroke="#2D2B57" stroke-width="2.5"/>
+<g font-size="11.5" font-weight="600" fill="#2D2B57">
+<g class="ill-legende"><rect class="ill-fond" x="11" y="19" width="56.4" height="15" rx="4" fill="#FFFFFF"/><text x="14" y="30">Remparts</text></g><path d="M74,34L115,81.8" stroke="#2D2B57" stroke-width="1" opacity="0.6" fill="none"/><circle cx="115" cy="81.8" r="1.8" fill="#2D2B57" opacity="0.8"/>
+<g class="ill-legende"><rect class="ill-fond" x="11" y="129" width="37.5" height="15" rx="4" fill="#FFFFFF"/><text x="14" y="140">Porte</text></g><path d="M50,144L51.8,164.4" stroke="#2D2B57" stroke-width="1" opacity="0.6" fill="none"/><circle cx="51.8" cy="164.4" r="1.8" fill="#2D2B57" opacity="0.8"/>
+<g class="ill-legende"><rect class="ill-fond" x="298.9" y="47" width="50.1" height="15" rx="4" fill="#FFFFFF"/><text x="346" y="58" text-anchor="end">Château</text></g><path d="M300,62L268,98" stroke="#2D2B57" stroke-width="1" opacity="0.6" fill="none"/><circle cx="268" cy="98" r="1.8" fill="#2D2B57" opacity="0.8"/>
+<g class="ill-legende"><rect class="ill-fond" x="11" y="71" width="69" height="15" rx="4" fill="#FFFFFF"/><text x="14" y="82">Cathédrale</text></g><path d="M84,78L128,100" stroke="#2D2B57" stroke-width="1" opacity="0.6" fill="none"/><circle cx="128" cy="100" r="1.8" fill="#2D2B57" opacity="0.8"/>
+<g class="ill-legende"><rect class="ill-fond" x="298.9" y="121" width="50.1" height="15" rx="4" fill="#FFFFFF"/><text x="346" y="132" text-anchor="end">Beffroi</text></g><path d="M301,128L230,134" stroke="#2D2B57" stroke-width="1" opacity="0.6" fill="none"/><circle cx="230" cy="134" r="1.8" fill="#2D2B57" opacity="0.8"/>
+<g class="ill-legende"><rect class="ill-fond" x="94.3" y="183" width="62.7" height="28" rx="4" fill="#FFFFFF"/><text x="154" y="194" text-anchor="end">Place<tspan x="154" dy="13">du marché</tspan></text></g><path d="M152,187L164,168" stroke="#2D2B57" stroke-width="1" opacity="0.6" fill="none"/><circle cx="164" cy="168" r="1.8" fill="#2D2B57" opacity="0.8"/>
+<g class="ill-legende"><rect class="ill-fond" x="292.6" y="185" width="56.4" height="28" rx="4" fill="#FFFFFF"/><text x="346" y="196" text-anchor="end">Rues des<tspan x="346" dy="13">métiers</tspan></text></g><path d="M318,185L300,168" stroke="#2D2B57" stroke-width="1" opacity="0.6" fill="none"/><circle cx="300" cy="168" r="1.8" fill="#2D2B57" opacity="0.8"/>
+<g class="ill-legende"><rect class="ill-fond" x="223" y="259" width="31.2" height="15" rx="4" fill="#FFFFFF"/><text x="226" y="270">Pont</text></g>
+<g class="ill-legende"><rect class="ill-fond" x="63" y="259" width="31.2" height="15" rx="4" fill="#FFFFFF"/><text x="66" y="270">Port</text></g><path d="M80,259L84,238" stroke="#2D2B57" stroke-width="1" opacity="0.6" fill="none"/><circle cx="84" cy="238" r="1.8" fill="#2D2B57" opacity="0.8"/>
+<rect x="14" y="286" width="24" height="13" fill="#FBE9DD" stroke="#B34400" stroke-width="1.75"/>
+<text x="44" y="296">lieu de pouvoir</text>
+<rect x="186" y="286" width="24" height="13" fill="#F4EBDD" stroke="#B8A27E" stroke-width="1.5"/>
+<text x="216" y="296">lieu d'activité</text>
+</g>
+</svg>
