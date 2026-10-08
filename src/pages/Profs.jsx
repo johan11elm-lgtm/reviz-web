@@ -1,7 +1,7 @@
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { Mascot } from '../components/Mascot';
 import { BookOpenIcon, ChatIcon } from '../components/Icons';
-import { AVIS_PROFS_URL, CLASSES_DECOUVERTE } from '../services/decouverteService';
+import { AVIS_PROFS_URL, CLASSES_DECOUVERTE, SOURCES_PROFS } from '../services/decouverteService';
 import './Profs.css';
 
 /**
@@ -11,6 +11,11 @@ import './Profs.css';
  * directement leur avis. Publique, sans Firebase côté client.
  */
 export default function Profs() {
+  // Provenance du QR (affiche de la salle des profs, demi-page du CDI…) : on la
+  // transmet au formulaire d'avis pour savoir d'où viennent les retours.
+  const [params] = useSearchParams();
+  const src = params.get('src');
+  const avisUrl = SOURCES_PROFS.includes(src) ? `/avis?src=${src}` : AVIS_PROFS_URL;
   return (
     <div className="app profs-page">
       <nav className="profs-nav" aria-label="Navigation">
@@ -52,7 +57,7 @@ export default function Profs() {
               </div>
             </section>
 
-            <Link to={AVIS_PROFS_URL} className="rv-card profs-carte profs-carte--lien">
+            <Link to={avisUrl} className="rv-card profs-carte profs-carte--lien">
               <span className="rv-icon-square rv-icon-square--xl rv-icon-square--green" aria-hidden="true"><ChatIcon /></span>
               <span className="profs-carte-titre">Donner mon avis</span>
               <span className="profs-carte-texte">

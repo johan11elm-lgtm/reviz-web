@@ -66,9 +66,11 @@ function Choix({ name, legend, options, value, onChange }) {
 export default function Avis() {
   const [params] = useSearchParams();
   const source = SOURCES.includes(params.get('src')) ? params.get('src') : 'direct';
+  // Les supports papier (affiche salle des profs, demi-page du CDI) visent les enseignants.
+  const depuisAffiche = source.startsWith('affiche-');
 
   // Arrivée par l'affiche de la salle des profs : profil présélectionné.
-  const [profil, setProfil] = useState(source === 'affiche-profs' ? 'enseignant' : '');
+  const [profil, setProfil] = useState(depuisAffiche ? 'enseignant' : '');
   const [discipline, setDiscipline] = useState('');
   const [conseil, setConseil] = useState('');
   const [plait, setPlait] = useState('');
@@ -110,7 +112,7 @@ export default function Avis() {
           <Mascot pose="hello" size={28} priority alt="" aria-hidden="true" />
           <span>réviz</span>
         </Link>
-        {source === 'affiche-profs'
+        {depuisAffiche
           ? <Link to="/profs" className="avis-nav-link">Découvrir l'appli</Link>
           : <Link to="/essai" className="avis-nav-link">Essayer sans compte</Link>}
       </nav>
@@ -151,7 +153,7 @@ export default function Avis() {
                   ? 'Vous aurez une réponse à l’adresse indiquée.'
                   : 'Votre avis sera lu avec attention.'}
               </p>
-              {source === 'affiche-profs'
+              {depuisAffiche
                 ? <Link to="/profs" className="rv-btn-cta rv-btn-cta--center avis-merci-cta">Découvrir l'appli</Link>
                 : <Link to="/essai" className="rv-btn-cta rv-btn-cta--center avis-merci-cta">Essayer Réviz sans compte</Link>}
             </section>

@@ -9,6 +9,8 @@ export const DECOUVERTE_KEY = 'reviz-decouverte-prof'
 
 /** Lien vers le formulaire d'avis, provenance « affiche salle des profs ». */
 export const AVIS_PROFS_URL = '/avis?src=affiche-profs'
+/** Provenances « enseignant » reconnues par /profs et /avis (QR des supports papier). */
+export const SOURCES_PROFS = ['affiche-profs', 'affiche-cdi']
 
 /** Classes proposées à la découverte (contenus du programme : collège). */
 export const CLASSES_DECOUVERTE = ['6ème', '5ème', '4ème', '3ème']
