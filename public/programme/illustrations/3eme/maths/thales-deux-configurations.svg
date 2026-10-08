@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 248" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
+  <!-- Les deux configurations de Thalès : emboîtée (M sur [AB], N sur [AC]) et en papillon (A entre B et M, et entre C et N) ; (MN) // (BC), AM/AB = AN/AC = MN/BC (rapport 0,6). Réviz, 3e maths, théorème de Thalès. -->
+  <g font-size="11" font-weight="600" fill="#8A8273" text-anchor="middle">
+    <g class="ill-legende">
+      <rect class="ill-fond" x="59.9" y="5" width="56.2" height="15" rx="4" fill="#FFFFFF"/>
+      <text x="88" y="16">Emboîtée</text>
+    </g>
+    <g class="ill-legende">
+      <rect class="ill-fond" x="234.9" y="5" width="74.3" height="15" rx="4" fill="#FFFFFF"/>
+      <text x="272" y="16">En papillon</text>
+    </g>
+  </g>
+  <path d="M180,28 V196" stroke="#EDE8E1" stroke-width="1"/>
+  <g stroke-linejoin="round">
+    <path d="M85,40 L47.2,124 L128.8,124 Z" fill="#FBE9DD"/>
+    <path d="M85,40 L22,180 L158,180 Z" fill="none" stroke="#2D2B57" stroke-width="1.75"/>
+    <path d="M233,68 L317,68 L275,110 Z" fill="#FBE9DD"/>
+    <path d="M205,180 L317,68 M345,180 L233,68" fill="none" stroke="#2D2B57" stroke-width="1.75"/>
+  </g>
+  <g stroke="#B34400" stroke-width="2.25" stroke-linecap="round" fill="none">
+    <path d="M47.2,124 H128.8 M22,180 H158 M233,68 H317 M205,180 H345"/>
+    <path d="M85,121 L89,124 L85,127 M87,177 L91,180 L87,183 M272,65 L276,68 L272,71 M272,177 L276,180 L272,183" stroke-width="1.6" stroke-linejoin="round"/>
+  </g>
+  <g fill="#2D2B57">
+    <circle cx="85" cy="40" r="2.2"/><circle cx="47.2" cy="124" r="2.2"/><circle cx="128.8" cy="124" r="2.2"/><circle cx="22" cy="180" r="2.2"/><circle cx="158" cy="180" r="2.2"/>
+    <circle cx="275" cy="110" r="2.2"/><circle cx="233" cy="68" r="2.2"/><circle cx="317" cy="68" r="2.2"/><circle cx="205" cy="180" r="2.2"/><circle cx="345" cy="180" r="2.2"/>
+  </g>
+  <g font-size="12.5" font-weight="700" fill="#2D2B57" text-anchor="middle">
+    <text x="85" y="32">A</text><text x="37" y="128">M</text><text x="140" y="128">N</text><text x="16" y="195">B</text><text x="164" y="195">C</text>
+    <text x="289" y="114">A</text><text x="222" y="64">N</text><text x="328" y="64">M</text><text x="199" y="195">B</text><text x="351" y="195">C</text>
+  </g>
+  <g font-size="13" font-weight="600" fill="#2D2B57" text-anchor="middle">
+    <text x="128" y="219">AM</text><text x="128" y="240">AB</text>
+    <text x="180" y="219">AN</text><text x="180" y="240">AC</text>
+    <text x="232" y="219">MN</text><text x="232" y="240">BC</text>
+    <text x="154" y="230" font-weight="400">=</text><text x="206" y="230" font-weight="400">=</text>
+  </g>
+  <path d="M114,225.5 H142 M166,225.5 H194 M218,225.5 H246" stroke="#2D2B57" stroke-width="1.2"/>
+</svg>

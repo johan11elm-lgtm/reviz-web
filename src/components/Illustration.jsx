@@ -3,6 +3,7 @@ import { createPortal } from 'react-dom'
 import { ExpandIcon, XIcon } from './Icons'
 import { useModalA11y } from '../hooks/useModalA11y'
 import { nbsp } from '../utils/typography'
+import { ILLUSTRATION_TYPES } from '../utils/lessonSchema'
 import './Illustration.css'
 
 // -------------------------------------------------------
@@ -103,10 +104,15 @@ function Dessin({ illustration, testMode, onOuvrir }) {
 export function Illustration({ illustration, testMode = false }) {
   const [plein, setPlein] = useState(false)
   const masquable = testMode && illustration.legendesMasquables
+  const surtitre = ILLUSTRATION_TYPES[illustration.type]
+  const image = !illustration.src.endsWith('.svg')
   return (
-    <figure className="ill-figure">
-      <div className="ill-feuille">
-        <Dessin illustration={illustration} testMode={masquable} onOuvrir={() => setPlein(true)} />
+    <figure className={`ill-figure${image ? ' ill-figure--image' : ''}`}>
+      <div className="ill-tete">
+        <div className="ill-tete-texte">
+          {surtitre && <span className="ill-surtitre">{surtitre}</span>}
+          {illustration.titre && <p className="ill-titre">{nbsp(illustration.titre)}</p>}
+        </div>
         <button
           type="button"
           className="ill-agrandir"
@@ -116,6 +122,9 @@ export function Illustration({ illustration, testMode = false }) {
         >
           <ExpandIcon />
         </button>
+      </div>
+      <div className="ill-feuille">
+        <Dessin illustration={illustration} testMode={masquable} onOuvrir={() => setPlein(true)} />
       </div>
       {masquable && <p className="ill-indice">Retrouve chaque légende, puis touche-la pour vérifier.</p>}
       {(illustration.legende || illustration.credit) && (
@@ -202,10 +211,10 @@ function PleinEcran({ illustration, testMode, onClose }) {
       ref={ref}
       role="dialog"
       aria-modal="true"
-      aria-label={illustration.legende ?? illustration.alt}
+      aria-label={illustration.titre ?? illustration.legende ?? illustration.alt}
     >
       <div className="ill-pe-barre">
-        <p className="ill-pe-titre">{illustration.legende ? nbsp(illustration.legende) : null}</p>
+        <p className="ill-pe-titre">{nbsp(illustration.titre ?? illustration.legende ?? '')}</p>
         <button type="button" className="ill-pe-fermer" onClick={onClose} aria-label="Fermer">
           <XIcon />
         </button>

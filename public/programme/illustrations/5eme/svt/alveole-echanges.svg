@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-9 -9 378 290" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
+  <!-- Alvéole pulmonaire agrandie, au bout d'une bronchiole, entourée d'un capillaire sanguin : le dioxygène passe de l'air dans le sang, le dioxyde de carbone du sang dans l'air. Réviz, 5e SVT, respiration humaine. -->
+
+  <!-- Capillaire sanguin : le sang arrive pauvre en dioxygène (bleu) et repart riche en dioxygène (rouge) -->
+  <g fill="none">
+    <path d="M6,100 C64,100 92,104 92,140 A88,74 0 0 0 180,214" stroke="#3461C9" stroke-width="22"/>
+    <path d="M6,100 C64,100 92,104 92,140 A88,74 0 0 0 180,214" stroke="#DCE6FA" stroke-width="18"/>
+    <path d="M180,214 A88,74 0 0 0 268,140 C268,104 296,100 354,100" stroke="#C8364F" stroke-width="22"/>
+    <path d="M180,214 A88,74 0 0 0 268,140 C268,104 296,100 354,100" stroke="#F9DCE1" stroke-width="18"/>
+  </g>
+  <g fill="#FFFFFF" stroke="#2D2B57" stroke-width="1">
+    <ellipse cx="93.3" cy="152.8" rx="4.6" ry="2.8" transform="rotate(80 93.3 152.8)"/>
+    <ellipse cx="147" cy="208.6" rx="4.6" ry="2.8" transform="rotate(22 147 208.6)"/>
+    <ellipse cx="213" cy="208.6" rx="4.6" ry="2.8" transform="rotate(158 213 208.6)"/>
+    <ellipse cx="266.7" cy="152.8" rx="4.6" ry="2.8" transform="rotate(100 266.7 152.8)"/>
+  </g>
+  <path d="M26,95.5 L31,100 L26,104.5 M324,95.5 L329,100 L324,104.5" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke="#2D2B57"/>
+
+  <!-- Bronchiole et alvéole -->
+  <path d="M168,0 V76 C130,79 104,104 104,140 A76,62 0 0 0 256,140 C256,104 230,79 192,76 V0" fill="#FFFFFF" stroke="#2D2B57" stroke-width="1.75" stroke-linejoin="round"/>
+  <text x="180" y="110" font-size="11" font-weight="600" fill="#8A8273" text-anchor="middle">air</text>
+
+  <!-- Échanges gazeux -->
+  <path d="M131.3,162.9 L104.6,176.6 M110.5,176.8 L104.6,176.6 L107.9,171.7" fill="none" stroke="#C8364F" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M148.6,178 L131.3,200.7 M136.8,198.3 L131.3,200.7 L132.2,194.8" fill="none" stroke="#C8364F" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M228.7,200.7 L211.4,178 M212.3,184 L211.4,178 L216.9,180.5" fill="none" stroke="#3461C9" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M255.4,176.6 L228.7,162.9 M232.1,167.9 L228.7,162.9 L234.7,162.8" fill="none" stroke="#3461C9" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Traits de rappel -->
+  <g stroke="#2D2B57" stroke-width="1" opacity="0.6" fill="none">
+    <path d="M68,26 L167,30"/>
+    <path d="M70,72 L133,91"/>
+    <path d="M292,66 L234,96"/>
+    <path d="M289,159 L271.7,152.8"/>
+    <path d="M83,206 L98.4,167.7"/>
+    <path d="M277,206 L262.7,165.3"/>
+    <path d="M180,250 L180,225"/>
+  </g>
+  <g fill="#2D2B57">
+    <circle cx="167" cy="30" r="1.8"/><circle cx="133" cy="91" r="1.8"/><circle cx="234" cy="96" r="1.8"/><circle cx="271.7" cy="152.8" r="1.8"/><circle cx="98.4" cy="167.7" r="1.8"/><circle cx="262.7" cy="165.3" r="1.8"/><circle cx="180" cy="225" r="1.8"/>
+  </g>
+
+  <!-- Légendes : un groupe par étiquette (masquables en mode « Me tester ») -->
+  <g font-size="11.5" font-weight="600" fill="#2D2B57">
+    <g class="ill-legende">
+      <rect class="ill-fond" x="3" y="19" width="65" height="15" rx="4" fill="#FFFFFF"/>
+      <text x="6" y="30">Bronchiole</text>
+    </g>
+    <g class="ill-legende">
+      <rect class="ill-fond" x="3" y="58" width="67" height="28" rx="4" fill="#FFFFFF"/>
+      <text x="6" y="69">Alvéole<tspan x="6" dy="13">pulmonaire</tspan></text>
+    </g>
+    <g class="ill-legende">
+      <rect class="ill-fond" x="3" y="192" width="80" height="28" rx="4" fill="#FFFFFF"/>
+      <text x="6" y="203">Sang pauvre<tspan x="6" dy="13">en dioxygène</tspan></text>
+    </g>
+    <g class="ill-legende" text-anchor="end">
+      <rect class="ill-fond" x="292" y="59" width="65" height="15" rx="4" fill="#FFFFFF"/>
+      <text x="354" y="70">Paroi fine</text>
+    </g>
+    <g class="ill-legende" text-anchor="end">
+      <rect class="ill-fond" x="289" y="145" width="68" height="28" rx="4" fill="#FFFFFF"/>
+      <text x="354" y="156">Globule<tspan x="354" dy="13">rouge</tspan></text>
+    </g>
+    <g class="ill-legende" text-anchor="end">
+      <rect class="ill-fond" x="277" y="192" width="80" height="28" rx="4" fill="#FFFFFF"/>
+      <text x="354" y="203">Sang riche<tspan x="354" dy="13">en dioxygène</tspan></text>
+    </g>
+    <g class="ill-legende">
+      <rect class="ill-fond" x="110" y="134" width="64" height="15" rx="4" fill="#FFFFFF"/>
+      <text x="113" y="145">Dioxygène</text>
+    </g>
+    <g class="ill-legende" text-anchor="end">
+      <rect class="ill-fond" x="183" y="128" width="67" height="28" rx="4" fill="#FFFFFF"/>
+      <text x="247" y="139">Dioxyde de<tspan x="247" dy="13">carbone</tspan></text>
+    </g>
+    <g class="ill-legende" text-anchor="middle">
+      <rect class="ill-fond" x="110" y="250" width="140" height="15" rx="4" fill="#FFFFFF"/>
+      <text x="180" y="261">Capillaire sanguin</text>
+    </g>
+  </g>
+</svg>

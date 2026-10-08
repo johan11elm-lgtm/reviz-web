@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 180" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
+  <!-- Pile et deux lampes en série ; un fil relie les deux bornes de la lampe L2 : le courant passe par ce fil, L2 s’éteint, L1 reste allumée. Réviz, 5e physique-chimie, circuits en série et en dérivation. -->
+  <g fill="none" stroke="#2D2B57" stroke-width="1.75" stroke-linejoin="miter">
+    <path d="M110,70 H250 V160 H110 Z"/>
+  </g>
+  <g fill="none" stroke="#B34400" stroke-width="2.25" stroke-linejoin="miter">
+    <path d="M150,70 V35 H210 V70"/>
+  </g>
+  <circle cx="150" cy="70" r="3" fill="#2D2B57"/>
+  <circle cx="210" cy="70" r="3" fill="#2D2B57"/>
+  <g><rect x="107" y="111" width="6" height="8" fill="#FFFFFF"/><path d="M97,111 H123" stroke="#2D2B57" stroke-width="1.75"/><path d="M104,119 H116" stroke="#2D2B57" stroke-width="4.5"/><g font-size="11" font-weight="600" fill="#8A8273"><text x="129" y="110" text-anchor="middle">+</text><text x="123" y="130" text-anchor="middle">−</text></g></g>
+  <g><circle cx="180" cy="70" r="10" fill="#FFFFFF" stroke="#2D2B57" stroke-width="1.75"/><path d="M172.9,62.9 L187.1,77.1 M172.9,77.1 L187.1,62.9" stroke="#2D2B57" stroke-width="1.75"/></g>
+  <g><circle cx="250" cy="115" r="10" fill="#FFFFFF" stroke="#2D2B57" stroke-width="1.75"/><path d="M242.9,107.9 L257.1,122.1 M242.9,122.1 L257.1,107.9" stroke="#2D2B57" stroke-width="1.75"/><path d="M257,102.9 L259.3,99 M262.7,109.1 L266.8,107.2 M262.7,120.9 L266.8,122.8 M257,127.1 L259.3,131 M243,127.1 L240.8,131 M237.3,120.9 L233.2,122.8 M237.3,109.1 L233.2,107.2 M243,102.9 L240.8,99" stroke="#2D2B57" stroke-width="1.5" stroke-linecap="round"/></g>
+  <g><path d="M178,35 L167,30 L167,40 Z" fill="#2D2B57"/><text x="172" y="52" font-size="11.5" font-weight="600" fill="#2D2B57" text-anchor="middle">I</text></g>
+  <text x="180" y="96" font-size="11.5" font-weight="600" fill="#2D2B57" text-anchor="middle">L₂</text>
+  <text x="276" y="119" font-size="11.5" font-weight="600" fill="#2D2B57" text-anchor="start">L₁</text>
+  <g stroke="#2D2B57" stroke-width="1" opacity="0.6" fill="none">
+    <path d="M247,24 L212,35"/>
+  </g>
+  <g fill="#2D2B57">
+    <circle cx="212" cy="35" r="1.8"/>
+  </g>
+  <g font-size="11.5" font-weight="600" fill="#2D2B57">
+    <g class="ill-legende">
+      <rect class="ill-fond" x="247" y="14" width="87.9" height="15" rx="4" fill="#FFFFFF"/>
+      <text x="250" y="25">Court-circuit</text>
+    </g>
+  </g>
+</svg>

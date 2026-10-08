@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 200" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
+  <!-- Pile, ampèremètre, lampe et interrupteur fermé en série ; le courant entre dans l’ampèremètre par la borne A et en sort par la borne COM. Réviz, 4e physique-chimie, l’intensité du courant. -->
+  <g fill="none" stroke="#2D2B57" stroke-width="1.75" stroke-linejoin="miter">
+    <path d="M110,60 H270 V180 H110 Z"/>
+  </g>
+  <g><rect x="107" y="116" width="6" height="8" fill="#FFFFFF"/><path d="M97,116 H123" stroke="#2D2B57" stroke-width="1.75"/><path d="M104,124 H116" stroke="#2D2B57" stroke-width="4.5"/><g font-size="11" font-weight="600" fill="#8A8273"><text x="129" y="115" text-anchor="middle">+</text><text x="123" y="135" text-anchor="middle">−</text></g></g>
+  <g><circle cx="165" cy="60" r="11" fill="#FBE9DD" stroke="#B34400" stroke-width="2.25"/><text x="165" y="64.4" font-size="12.5" font-weight="700" fill="#2D2B57" text-anchor="middle">A</text></g>
+  <text x="149" y="52" font-size="11" font-weight="600" fill="#8A8273" text-anchor="end">A</text>
+  <text x="181" y="52" font-size="11" font-weight="600" fill="#8A8273" text-anchor="start">COM</text>
+  <g><circle cx="270" cy="120" r="10" fill="#FFFFFF" stroke="#2D2B57" stroke-width="1.75"/><path d="M262.9,112.9 L277.1,127.1 M262.9,127.1 L277.1,112.9" stroke="#2D2B57" stroke-width="1.75"/></g>
+  <g><rect x="180" y="177" width="20" height="6" fill="#FFFFFF"/><path d="M182,180 L198,180" stroke="#2D2B57" stroke-width="1.75" stroke-linecap="round"/><circle cx="180" cy="180" r="2.4" fill="#FFFFFF" stroke="#2D2B57" stroke-width="1.5"/><circle cx="200" cy="180" r="2.4" fill="#FFFFFF" stroke="#2D2B57" stroke-width="1.5"/></g>
+  <g><path d="M136,60 L125,55 L125,65 Z" fill="#2D2B57"/><text x="130" y="78" font-size="11.5" font-weight="600" fill="#2D2B57" text-anchor="middle">I</text></g>
+  <g stroke="#2D2B57" stroke-width="1" opacity="0.6" fill="none">
+    <path d="M165,34 L165,46"/>
+    <path d="M81,120 L96,120"/>
+    <path d="M297,120 L281,120"/>
+  </g>
+  <g fill="#2D2B57">
+    <circle cx="165" cy="46" r="1.8"/>
+    <circle cx="96" cy="120" r="1.8"/>
+    <circle cx="281" cy="120" r="1.8"/>
+  </g>
+  <g font-size="11.5" font-weight="600" fill="#2D2B57">
+    <g class="ill-legende" text-anchor="middle">
+      <rect class="ill-fond" x="127.4" y="6" width="75.3" height="28" rx="4" fill="#FFFFFF"/>
+      <text x="165" y="17">Ampèremètre<tspan x="165" dy="13">en série</tspan></text>
+    </g>
+    <g class="ill-legende" text-anchor="end">
+      <rect class="ill-fond" x="49.8" y="113" width="31.2" height="15" rx="4" fill="#FFFFFF"/>
+      <text x="78" y="124">Pile</text>
+    </g>
+    <g class="ill-legende">
+      <rect class="ill-fond" x="297" y="113" width="37.5" height="15" rx="4" fill="#FFFFFF"/>
+      <text x="300" y="124">Lampe</text>
+    </g>
+  </g>
+</svg>

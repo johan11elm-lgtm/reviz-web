@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 290" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
+  <!-- Pile et deux lampes en dérivation : l’ampèremètre de la branche principale affiche 0,4 A ; ceux des deux branches dérivées affichent 0,2 A chacun. Réviz, 4e physique-chimie, lois de l’intensité. -->
+  <g fill="none" stroke="#2D2B57" stroke-width="1.75" stroke-linejoin="miter">
+    <path d="M196,50 H90 V250 H196"/>
+    <path d="M196,50 H292 V250 H196"/>
+    <path d="M196,50 V250"/>
+  </g>
+  <g><rect x="87" y="146" width="6" height="8" fill="#FFFFFF"/><path d="M77,146 H103" stroke="#2D2B57" stroke-width="1.75"/><path d="M84,154 H96" stroke="#2D2B57" stroke-width="4.5"/><g font-size="11" font-weight="600" fill="#8A8273"><text x="109" y="145" text-anchor="middle">+</text><text x="103" y="165" text-anchor="middle">−</text></g></g>
+  <g><circle cx="136" cy="50" r="11" fill="#FBE9DD" stroke="#B34400" stroke-width="2.25"/><text x="136" y="54.4" font-size="12.5" font-weight="700" fill="#2D2B57" text-anchor="middle">A</text></g>
+  <g><circle cx="196" cy="100" r="11" fill="#FBE9DD" stroke="#B34400" stroke-width="2.25"/><text x="196" y="104.4" font-size="12.5" font-weight="700" fill="#2D2B57" text-anchor="middle">A</text></g>
+  <g><circle cx="292" cy="100" r="11" fill="#FBE9DD" stroke="#B34400" stroke-width="2.25"/><text x="292" y="104.4" font-size="12.5" font-weight="700" fill="#2D2B57" text-anchor="middle">A</text></g>
+  <g><circle cx="196" cy="180" r="10" fill="#FFFFFF" stroke="#2D2B57" stroke-width="1.75"/><path d="M188.9,172.9 L203.1,187.1 M188.9,187.1 L203.1,172.9" stroke="#2D2B57" stroke-width="1.75"/></g>
+  <g><circle cx="292" cy="180" r="10" fill="#FFFFFF" stroke="#2D2B57" stroke-width="1.75"/><path d="M284.9,172.9 L299.1,187.1 M284.9,187.1 L299.1,172.9" stroke="#2D2B57" stroke-width="1.75"/></g>
+  <circle cx="196" cy="50" r="3" fill="#2D2B57"/>
+  <circle cx="196" cy="250" r="3" fill="#2D2B57"/>
+  <g><path d="M172,50 L161,45 L161,55 Z" fill="#2D2B57"/><text x="166" y="68" font-size="11.5" font-weight="600" fill="#2D2B57" text-anchor="middle">I</text></g>
+  <g><path d="M196,146 L201,135 L191,135 Z" fill="#2D2B57"/><text x="182" y="144" font-size="11.5" font-weight="600" fill="#2D2B57" text-anchor="middle">I₁</text></g>
+  <g><path d="M292,146 L297,135 L287,135 Z" fill="#2D2B57"/><text x="278" y="144" font-size="11.5" font-weight="600" fill="#2D2B57" text-anchor="middle">I₂</text></g>
+  <text x="136" y="30" font-size="11.5" font-weight="600" fill="#2D2B57" text-anchor="middle">0,4 A</text>
+  <text x="212" y="104" font-size="11.5" font-weight="600" fill="#2D2B57" text-anchor="start">0,2 A</text>
+  <g class="ill-legende" font-size="11.5" font-weight="600" fill="#2D2B57" text-anchor="start"><rect class="ill-fond" x="304" y="92.5" width="39.5" height="15.5" rx="4" fill="#FFFFFF"/><text x="308" y="104">0,2 A</text></g>
+  <g stroke="#2D2B57" stroke-width="1" opacity="0.6" fill="none">
+    <path d="M196,37 L196,46"/>
+    <path d="M196,262 L196,254"/>
+    <path d="M81,106 L89,98"/>
+    <path d="M216,214 L196,228"/>
+    <path d="M272,214 L292,228"/>
+  </g>
+  <g fill="#2D2B57">
+    <circle cx="196" cy="46" r="1.8"/>
+    <circle cx="196" cy="254" r="1.8"/>
+    <circle cx="89" cy="98" r="1.8"/>
+    <circle cx="196" cy="228" r="1.8"/>
+    <circle cx="292" cy="228" r="1.8"/>
+  </g>
+  <g font-size="11.5" font-weight="600" fill="#2D2B57">
+    <g class="ill-legende" text-anchor="middle">
+      <rect class="ill-fond" x="180.4" y="22" width="31.2" height="15" rx="4" fill="#FFFFFF"/>
+      <text x="196" y="33">Nœud</text>
+    </g>
+    <g class="ill-legende" text-anchor="middle">
+      <rect class="ill-fond" x="180.4" y="262" width="31.2" height="15" rx="4" fill="#FFFFFF"/>
+      <text x="196" y="273">Nœud</text>
+    </g>
+    <g class="ill-legende">
+      <rect class="ill-fond" x="12" y="92" width="69" height="28" rx="4" fill="#FFFFFF"/>
+      <text x="15" y="103">Branche<tspan x="15" dy="13">principale</tspan></text>
+    </g>
+    <g class="ill-legende" text-anchor="middle">
+      <rect class="ill-fond" x="215.8" y="200" width="56.4" height="28" rx="4" fill="#FFFFFF"/>
+      <text x="244" y="211">Branches<tspan x="244" dy="13">dérivées</tspan></text>
+    </g>
+  </g>
+</svg>

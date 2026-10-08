@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 214" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
+  <!-- Pile et deux lampes en série avec trois ampèremètres : avant la première lampe, entre les deux et après la seconde ; tous affichent 0,18 A. Réviz, 4e physique-chimie, lois de l’intensité. -->
+  <g fill="none" stroke="#2D2B57" stroke-width="1.75" stroke-linejoin="miter">
+    <path d="M90,50 H270 V180 H90 Z"/>
+  </g>
+  <g><rect x="87" y="111" width="6" height="8" fill="#FFFFFF"/><path d="M77,111 H103" stroke="#2D2B57" stroke-width="1.75"/><path d="M84,119 H96" stroke="#2D2B57" stroke-width="4.5"/><g font-size="11" font-weight="600" fill="#8A8273"><text x="109" y="110" text-anchor="middle">+</text><text x="103" y="130" text-anchor="middle">−</text></g></g>
+  <g><circle cx="140" cy="50" r="11" fill="#FBE9DD" stroke="#B34400" stroke-width="2.25"/><text x="140" y="54.4" font-size="12.5" font-weight="700" fill="#2D2B57" text-anchor="middle">A</text></g>
+  <g><circle cx="270" cy="88" r="11" fill="#FBE9DD" stroke="#B34400" stroke-width="2.25"/><text x="270" y="92.4" font-size="12.5" font-weight="700" fill="#2D2B57" text-anchor="middle">A</text></g>
+  <g><circle cx="180" cy="180" r="11" fill="#FBE9DD" stroke="#B34400" stroke-width="2.25"/><text x="180" y="184.4" font-size="12.5" font-weight="700" fill="#2D2B57" text-anchor="middle">A</text></g>
+  <g><circle cx="215" cy="50" r="10" fill="#FFFFFF" stroke="#2D2B57" stroke-width="1.75"/><path d="M207.9,42.9 L222.1,57.1 M207.9,57.1 L222.1,42.9" stroke="#2D2B57" stroke-width="1.75"/></g>
+  <g><circle cx="270" cy="142" r="10" fill="#FFFFFF" stroke="#2D2B57" stroke-width="1.75"/><path d="M262.9,134.9 L277.1,149.1 M262.9,149.1 L277.1,134.9" stroke="#2D2B57" stroke-width="1.75"/></g>
+  <g><path d="M90,72 L85,83 L95,83 Z" fill="#2D2B57"/><text x="77" y="82" font-size="11.5" font-weight="600" fill="#2D2B57" text-anchor="middle">I</text></g>
+  <text x="140" y="30" font-size="11.5" font-weight="600" fill="#2D2B57" text-anchor="middle">0,18 A</text>
+  <g class="ill-legende" font-size="11.5" font-weight="600" fill="#2D2B57" text-anchor="start"><rect class="ill-fond" x="284" y="80.5" width="45.8" height="15.5" rx="4" fill="#FFFFFF"/><text x="288" y="92">0,18 A</text></g>
+  <g class="ill-legende" font-size="11.5" font-weight="600" fill="#2D2B57" text-anchor="middle"><rect class="ill-fond" x="157.1" y="194.5" width="45.8" height="15.5" rx="4" fill="#FFFFFF"/><text x="180" y="206">0,18 A</text></g>
+</svg>

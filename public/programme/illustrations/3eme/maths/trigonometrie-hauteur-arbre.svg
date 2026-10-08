@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 236" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
+  <!-- Schéma codé du problème de l'arbre : observateur au sol à 20 m du pied, sommet vu sous un angle de 35°, hauteur h verticale, angle droit au pied. Réviz, 3e maths, trigonométrie. -->
+  <path d="M20,197 L14,204 M32,197 L26,204 M44,197 L38,204 M56,197 L50,204 M68,197 L62,204 M80,197 L74,204 M92,197 L86,204 M104,197 L98,204 M116,197 L110,204 M128,197 L122,204 M140,197 L134,204 M152,197 L146,204 M164,197 L158,204 M176,197 L170,204 M188,197 L182,204 M200,197 L194,204 M212,197 L206,204 M224,197 L218,204 M236,197 L230,204 M248,197 L242,204 M260,197 L254,204 M272,197 L266,204 M284,197 L278,204 M296,197 L290,204 M308,197 L302,204 M320,197 L314,204 M332,197 L326,204" stroke="#2D2B57" stroke-width="1" opacity="0.3"/>
+  <path d="M14,196 H346" stroke="#2D2B57" stroke-width="1.2" opacity="0.6"/>
+  <path d="M44,196 L254,196 L254,49 Z" fill="#FBE9DD"/>
+  <!-- Arbre (simple contour) -->
+  <g fill="none" stroke="#8A8273" stroke-width="1.3"><ellipse cx="254" cy="91" rx="33" ry="42"/><path d="M248,133 V196 M260,133 V196"/></g>
+  <path d="M82,196 A38 38 0 0 0 75.1,174.2" fill="none" stroke="#2D2B57" stroke-width="1.3"/>
+  <path d="M244,196 L244,186 L254,186" fill="none" stroke="#2D2B57" stroke-width="1.3"/>
+  <g fill="none" stroke="#2D2B57" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M254,49 L44,196 L254,196"/>
+  </g>
+  <g fill="none" stroke="#B34400" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M254,196 L254,49"/>
+  </g>
+  <g fill="#2D2B57"><circle cx="44" cy="196" r="2.2" fill="#2D2B57"/><circle cx="254" cy="196" r="2.2" fill="#2D2B57"/><circle cx="254" cy="49" r="2.2" fill="#2D2B57"/></g>
+  <g font-size="12.5" font-weight="700" fill="#2D2B57" text-anchor="middle">
+    <text x="93.6" y="184.4">35°</text>
+    <text x="149" y="188">20 m</text>
+    <text x="244" y="166" font-style="italic" fill="#B34400">h</text>
+  </g>
+  <text x="44" y="220" font-size="11" font-weight="600" fill="#8A8273" text-anchor="middle">observateur</text>
+  <g stroke="#2D2B57" stroke-width="1" opacity="0.6" fill="none">
+    <path d="M305,153 L254,150"/>
+  </g>
+  <g fill="#2D2B57">
+    <circle cx="254" cy="150" r="1.8"/>
+  </g>
+  <g font-size="11.5" font-weight="600" fill="#2D2B57">
+    <g class="ill-legende" text-anchor="middle">
+      <rect class="ill-fond" x="105.1" y="209" width="87.9" height="15" rx="4" fill="#FFFFFF"/>
+      <text x="149" y="220">Côté adjacent</text>
+    </g>
+    <g class="ill-legende">
+      <rect class="ill-fond" x="89" y="89" width="69" height="15" rx="4" fill="#FFFFFF"/>
+      <text x="92" y="100">Hypoténuse</text>
+    </g>
+    <g class="ill-legende">
+      <rect class="ill-fond" x="305" y="139" width="43.8" height="28" rx="4" fill="#FFFFFF"/>
+      <text x="308" y="150">Côté<tspan x="308" dy="13">opposé</tspan></text>
+    </g>
+  </g>
+</svg>
