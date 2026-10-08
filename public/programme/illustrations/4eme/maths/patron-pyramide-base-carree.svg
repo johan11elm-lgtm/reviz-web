@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 250" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
+  <!-- Patron d'une pyramide régulière à base carrée : un carré (la base) et quatre triangles isocèles superposables, un sur chaque côté du carré ; toutes les arêtes latérales ont la même longueur. Réviz, 4e maths, pyramides et cônes. -->
+  <path d="M140,88L212,88L212,160L140,160Z" fill="#FBE9DD"/>
+  <path d="M140,88L176,18L212,88" fill="none" stroke="#2D2B57" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M212,88L282,124L212,160" fill="none" stroke="#2D2B57" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M212,160L176,230L140,160" fill="none" stroke="#2D2B57" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M140,160L70,124L140,88" fill="none" stroke="#2D2B57" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M140,88L212,88L212,160L140,160Z" fill="none" stroke="#2D2B57" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M161.6,54.8L154.4,51.2" fill="none" stroke="#2D2B57" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M190.4,54.8L197.6,51.2" fill="none" stroke="#2D2B57" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M245.2,109.6L248.8,102.4" fill="none" stroke="#2D2B57" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M245.2,138.4L248.8,145.6" fill="none" stroke="#2D2B57" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M190.4,193.2L197.6,196.8" fill="none" stroke="#2D2B57" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M161.6,193.2L154.4,196.8" fill="none" stroke="#2D2B57" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M106.8,138.4L103.2,145.6" fill="none" stroke="#2D2B57" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M106.8,109.6L103.2,102.4" fill="none" stroke="#2D2B57" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+  <g class="ill-legende"><rect class="ill-fond" x="160.4" y="117" width="31.2" height="15" rx="4" fill="#FFFFFF"/><text x="176" y="128" font-size="11.5" font-weight="600" fill="#2D2B57" text-anchor="middle">base</text></g>
+  <g class="ill-legende"><rect class="ill-fond" x="297" y="165" width="56.4" height="28" rx="4" fill="#FFFFFF"/><text x="300" y="176" font-size="11.5" font-weight="600" fill="#2D2B57">face<tspan x="300" dy="13">latérale</tspan></text></g>
+  <path d="M297,172.5L243.5,124" stroke="#2D2B57" stroke-width="1" opacity="0.6"/><circle cx="243.5" cy="124" r="1.8" fill="#2D2B57" opacity="0.8"/>
+</svg>
