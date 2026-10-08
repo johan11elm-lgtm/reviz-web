@@ -9,6 +9,14 @@
 //
 // <dossier> contient ne_50m_admin_0_countries.geojson et
 // ne_10m_admin_1_states_provinces.geojson (dépôt GitHub nvkelso/natural-earth-vector).
+//
+//   node scripts/illustrations/extraire-natural-earth.mjs <dossier> monde
+//
+// Fonds du monde (planisphères et cartes régionales, lots 2 et 3) : <dossier>
+// contient en plus ne_50m_admin_0_map_units.geojson, ne_50m_lakes.geojson,
+// ne_50m_rivers_lake_centerlines.geojson ; produit monde-pays.json,
+// monde-lacs.json, monde-fleuves.json et allemagne-lander.json. Les fichiers
+// de France et d'Europe ne sont alors pas réécrits.
 // -------------------------------------------------------
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs'
 import path from 'node:path'
@@ -41,6 +49,11 @@ function aire(a) {
 }
 
 mkdirSync(SORTIE, { recursive: true })
+
+if (process.argv[3] === 'monde') {
+  extraireMonde()
+  process.exit(0)
+}
 
 // Départements de métropole (Corse comprise).
 const admin1 = lire('ne_10m_admin_1_states_provinces.geojson')
@@ -76,3 +89,41 @@ writeFileSync(path.join(SORTIE, 'europe-pays.json'), JSON.stringify({
   pays,
 }))
 console.log(`${departements.length} départements, ${pays.length} pays`)
+
+/** Fonds du monde : unités cartographiques (Angleterre, Écosse… et DROM séparés), lacs, fleuves. */
+function extraireMonde() {
+  const unites = lire('ne_50m_admin_0_map_units.geojson').features
+    .map(f => ({
+      iso: f.properties.ADM0_A3,
+      unite: f.properties.GU_A3,
+      nom: f.properties.NAME_FR ?? f.properties.NAME,
+      continent: f.properties.CONTINENT,
+      population: f.properties.POP_EST,
+      anneePopulation: f.properties.POP_YEAR,
+      polygones: alleger(f.geometry, 0.05, 0.004),
+    }))
+    .filter(p => p.polygones.length)
+    .sort((a, b) => a.unite.localeCompare(b.unite))
+  writeFileSync(path.join(SORTIE, 'monde-pays.json'), JSON.stringify({
+    source: 'Natural Earth 1:50m Admin 0 map units (domaine public), allégé ; population : champ POP_EST',
+    pays: unites,
+  }))
+  const lacs = lire('ne_50m_lakes.geojson').features
+    .filter(f => f.properties.scalerank <= 3)
+    .map(f => ({ nom: f.properties.name_fr ?? f.properties.name, polygones: alleger(f.geometry, 0.05, 0.05) }))
+    .filter(l => l.polygones.length)
+  writeFileSync(path.join(SORTIE, 'monde-lacs.json'), JSON.stringify({ source: 'Natural Earth 1:50m Lakes (domaine public), allégé', lacs }))
+  const fleuves = lire('ne_50m_rivers_lake_centerlines.geojson').features
+    .filter(f => f.properties.featurecla === 'River' && f.properties.scalerank <= 6)
+    .map(f => {
+      const g = f.geometry
+      const lignes = g.type === 'LineString' ? [g.coordinates] : g.coordinates
+      return { nom: f.properties.name_en ?? f.properties.name, rang: f.properties.scalerank, lignes: lignes.map(l => arrondir(simplifier(l, 0.03))) }
+    })
+  writeFileSync(path.join(SORTIE, 'monde-fleuves.json'), JSON.stringify({ source: 'Natural Earth 1:50m Rivers (domaine public), allégé', fleuves }))
+  const lander = lire('ne_10m_admin_1_states_provinces.geojson').features
+    .filter(f => f.properties.adm0_a3 === 'DEU')
+    .map(f => ({ nom: f.properties.name, polygones: alleger(f.geometry, 0.02, 0.001) }))
+  writeFileSync(path.join(SORTIE, 'allemagne-lander.json'), JSON.stringify({ source: 'Natural Earth 1:10m Admin 1 (domaine public), allégé', lander }))
+  console.log(`${unites.length} unités, ${lacs.length} lacs, ${fleuves.length} fleuves, ${lander.length} Länder`)
+}

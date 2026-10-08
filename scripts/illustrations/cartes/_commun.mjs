@@ -236,10 +236,14 @@ export function titrePartie(x, y, s) {
 /** Halo blanc sous les noms posés sur la carte. */
 export const HALO = 'stroke="#FFFFFF" stroke-width="3" stroke-linejoin="round" paint-order="stroke"'
 
-/** Écrit le SVG final et affiche son poids. */
-export function ecrireSvg(nom, svg) {
-  mkdirSync(SORTIE, { recursive: true })
-  const f = path.join(SORTIE, `${nom}.svg`)
+/**
+ * Écrit le SVG final et affiche son poids. `dossier` : sous-dossier de
+ * public/programme/illustrations/ (3eme/geographie par défaut, ou communs, 6eme/histoire…).
+ */
+export function ecrireSvg(nom, svg, dossier = null) {
+  const sortie = dossier ? path.resolve(ICI, '../../../public/programme/illustrations', dossier) : SORTIE
+  mkdirSync(sortie, { recursive: true })
+  const f = path.join(sortie, `${nom}.svg`)
   const propre = svg.replace(/\n\s*\n/g, '\n')
   writeFileSync(f, propre)
   console.log(`${nom}.svg : ${(Buffer.byteLength(propre) / 1024).toFixed(1)} Ko`)
