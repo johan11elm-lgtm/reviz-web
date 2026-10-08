@@ -33,6 +33,12 @@
     <!-- Valvules entre oreillettes et ventricules -->
     <path d="M140,150 L152,161 M168,150 L157,161 M230,152 L242,166 M260,152 L248,166" fill="none" stroke="#2D2B57" stroke-width="3.5" stroke-linecap="round"/>
 
+    <!-- Trajet du sang dans le cœur : oreillette → ventricule → artère -->
+    <g fill="none" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M154,112 V190 Q154,238 170,234 Q184,230 184,180 M178,188 L184,180 L190,188" stroke="#1F3F8F"/>
+      <path d="M245,112 V188 Q245,236 229,232 Q214,228 214,184 M208,192 L214,184 L220,192" stroke="#8E1F33"/>
+    </g>
+
     <!-- Sens du sang dans les vaisseaux -->
     <path d="M145,56 L150,62 L155,56 M106,129 L112,134 L106,139 M179,64 L184,58 L189,64 M309,68 L314,74 L319,68 M334,113 L328,118 L334,123" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
   </g>
