@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 294" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
+  <!-- Éprouvette graduée en gros plan : graduations de 50 à 60 mL en 10 intervalles (1 mL chacune), ménisque dont le bas est à 56 mL, œil à la hauteur du bas du ménisque. Réviz, 5e physique-chimie et 6e sciences, états de la matière. -->
+  <path d="M128,118 C132,126 144,130 168,130 C192,130 204,126 208,118 V282 H128 Z" fill="#DCE6FA"/>
+  <path d="M128,118 C132,126 144,130 168,130 C192,130 204,126 208,118" fill="none" stroke="#3461C9" stroke-width="1.75"/>
+  <path d="M128,22 V282 M208,22 V282" stroke="#2D2B57" stroke-width="1.75" fill="none"/>
+  <path d="M128,250 h26 M128,230 h13 M128,210 h13 M128,190 h13 M128,170 h13 M128,150 h26 M128,130 h13 M128,110 h13 M128,90 h13 M128,70 h13 M128,50 h26 M128,270 h13 M128,30 h13" stroke="#2D2B57" stroke-width="1.5"/>
+  <g font-size="11.5" font-weight="600" fill="#2D2B57"><text x="120" y="54" text-anchor="end">60</text></g>
+  <g font-size="11.5" font-weight="600" fill="#2D2B57"><text x="120" y="254" text-anchor="end">50</text></g>
+  <g font-size="11" font-weight="600" fill="#8A8273"><text x="120" y="36" text-anchor="end">mL</text></g>
+  <path d="M146,71 h4 V89 h-4" stroke="#2D2B57" stroke-width="1.25" fill="none"/>
+  <g class="ill-legende" font-size="11.5" font-weight="600" fill="#2D2B57"><rect class="ill-fond" x="153" y="73" width="31.2" height="15" rx="4" fill="#FFFFFF"/><text x="156" y="84">1 mL</text></g>
+  <path d="M282,130 Q298,117 316,127 M282,130 Q298,142 316,133" stroke="#2D2B57" stroke-width="1.75" fill="none" stroke-linecap="round"/>
+  <circle cx="292" cy="130" r="4.2" fill="#2D2B57"/>
+  <path d="M278,130 H128" stroke="#B34400" stroke-width="2.25" stroke-dasharray="6 4"/>
+  <circle cx="168" cy="130" r="2.6" fill="#B34400"/>
+  <g class="ill-legende" font-size="11.5" font-weight="600" fill="#2D2B57"><rect class="ill-fond" x="229" y="79" width="56.4" height="15" rx="4" fill="#FFFFFF"/><text x="232" y="90">Ménisque</text></g>
+  <path d="M244,94 L202,121.5" stroke="#2D2B57" stroke-width="1" opacity="0.6" fill="none"/><circle cx="202" cy="121.5" r="1.8" fill="#2D2B57"/>
+  <g class="ill-legende" font-size="11.5" font-weight="600" fill="#2D2B57"><rect class="ill-fond" x="223" y="157" width="56.4" height="28" rx="4" fill="#FFFFFF"/><text x="226" y="168">Bas du<tspan x="226" dy="13">ménisque</tspan></text></g>
+  <path d="M234,156 L172,132" stroke="#2D2B57" stroke-width="1" opacity="0.6" fill="none"/><circle cx="172" cy="132" r="1.8" fill="#2D2B57"/>
+  <g class="ill-legende" font-size="11.5" font-weight="600" fill="#2D2B57"><rect class="ill-fond" x="285.6" y="149" width="24.9" height="15" rx="4" fill="#FFFFFF"/><text x="298" y="160" text-anchor="middle">Œil</text></g>
+  <g class="ill-legende" font-size="11.5" font-weight="600" fill="#2D2B57"><rect class="ill-fond" x="13" y="123" width="37.5" height="15" rx="4" fill="#FFFFFF"/><text x="16" y="134">56 mL</text></g>
+  <path d="M58,130 L126,130" stroke="#2D2B57" stroke-width="1" opacity="0.6" fill="none"/><circle cx="126" cy="130" r="1.8" fill="#2D2B57"/>
+</svg>
