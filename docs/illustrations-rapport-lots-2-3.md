@@ -103,7 +103,7 @@ _Session cloud du 8 octobre 2026, suite de `docs/illustrations-lots-2-3.md`. Bra
   - planisphère des repères, et sa version muette ;
   - globe : latitude et longitude.
 
-### SVT et sciences 6e : 26 sur 28, plus le n° 48
+### SVT et sciences 6e : 25 sur 27 (n° 49 à 72, 76 à 78), plus le n° 48
 - **3e** :
   - caryotypes (garçon ; trisomie 21) ;
   - chromosome à une et deux chromatides ;
