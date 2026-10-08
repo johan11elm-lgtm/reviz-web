@@ -12,6 +12,19 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
 
+    # Firebase se configure au chargement du module (firebaseConfig.js) : sans
+    # VITE_FIREBASE_*, getAuth() lève `auth/invalid-api-key` et cinq suites de
+    # tests échouent à l'import. Valeurs factices (jamais la prod) : les tests
+    # unitaires simulent Firebase, et les e2e tournent sur l'émulateur
+    # (VITE_FIREBASE_EMULATOR=1, projet demo-reviz) qui ignore ces variables.
+    env:
+      VITE_FIREBASE_API_KEY: ci-fake-key
+      VITE_FIREBASE_AUTH_DOMAIN: demo-reviz.firebaseapp.com
+      VITE_FIREBASE_PROJECT_ID: demo-reviz
+      VITE_FIREBASE_STORAGE_BUCKET: demo-reviz.appspot.com
+      VITE_FIREBASE_MESSAGING_SENDER_ID: '000000000000'
+      VITE_FIREBASE_APP_ID: 1:000000000000:web:ci
+
     steps:
       - uses: actions/checkout@v4
 
@@ -19,6 +32,12 @@ jobs:
         with:
           node-version: '20'
           cache: 'npm'
+
+      # L'émulateur Firestore (e2e) a besoin de Java.
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
 
       - name: Install dependencies
         run: npm ci
