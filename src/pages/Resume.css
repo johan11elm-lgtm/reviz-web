@@ -475,16 +475,6 @@
   align-items: center;
   gap: 4px;
 }
-.resume-page .resume-xp-badge {
-  background: linear-gradient(135deg, var(--accent-green), #2BA968);
-  color: #fff;
-  padding: 10px 20px;
-  border-radius: var(--radius-pill);
-  font-size: 14px;
-  font-weight: 700;
-  letter-spacing: -0.2px;
-  box-shadow: 0 4px 14px rgba(52, 199, 123, 0.28);
-}
 
 @media (max-width: 430px) {
   .resume-page .resume-end-screen { border-radius: 0; }

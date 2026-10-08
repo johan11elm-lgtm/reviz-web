@@ -41,10 +41,10 @@ function getLessonTitle(fallback = 'Ta leçon') {
 
 function getEndContent(score, total) {
   const pct = score / total
-  if (pct >= 0.9) return { mascot: 'examen',      title: 'Excellent !',  sub: 'Tu maîtrises parfaitement ce sujet !' }
-  if (pct >= 0.7) return { mascot: 'celebration', title: 'Très bien !',  sub: 'Encore un petit effort et tu seras au top !' }
-  if (pct >= 0.5) return { mascot: 'muscu',       title: 'Pas mal !',    sub: 'Relis tes notes et réessaie !' }
-  return           { mascot: 'sad',               title: 'À travailler', sub: 'Révise la leçon et retente le quiz !' }
+  if (pct >= 0.9) return { mascot: 'examen',      title: 'Excellent',      sub: 'Tu maîtrises ce chapitre.' }
+  if (pct >= 0.7) return { mascot: 'celebration', title: 'Très bien',      sub: 'Encore quelques points à revoir.' }
+  if (pct >= 0.5) return { mascot: 'muscu',       title: 'Pas mal',        sub: 'Relis le résumé, puis retente le quiz.' }
+  return           { mascot: 'sad',               title: 'À retravailler', sub: 'Relis la leçon avant de retenter le quiz.' }
 }
 
 /* ── Confetti — utilise les accents DS pour cohérence ── */
@@ -230,11 +230,23 @@ function QuizSession() {
           />
           <h2 className="rv-end-screen-title">{endContent.title}</h2>
           <p className="rv-end-screen-sub">{endContent.sub}</p>
-          <div className="quiz-score-ring">
-            <span className="quiz-score-big">{displayScore}/{questions.length}</span>
-            <span className="quiz-score-small">score</span>
+          <div className="rv-card rv-end-score">
+            <div className="rv-end-score-head">
+              <span className="rv-end-score-value">{displayScore}<small> / {questions.length}</small></span>
+              <span className="rv-end-score-label">{displayScore > 1 ? 'bonnes réponses' : 'bonne réponse'}</span>
+            </div>
+            <div
+              className="rv-bar rv-bar--tall rv-bar--neutral-bg rv-end-score-bar"
+              role="progressbar"
+              aria-label={`${score} bonnes réponses sur ${questions.length}`}
+              aria-valuemin={0}
+              aria-valuemax={questions.length}
+              aria-valuenow={score}
+            >
+              <div className={`rv-bar-fill ${score / questions.length >= 0.7 ? 'rv-bar-fill--green' : 'rv-bar-fill--orange'}`} style={{ width: `${Math.round(displayScore / questions.length * 100)}%` }} />
+            </div>
+            <span className="rv-pill rv-pill--orange rv-end-xp">+{xp} XP</span>
           </div>
-          <div className="quiz-xp-badge">+{xp} XP gagnés !</div>
           <FormatFeedback format="quiz" question="Ces questions t'ont aidé ?" />
           <div className="rv-end-screen-actions">
             <button type="button" className="rv-btn-cta rv-btn-cta--full" onClick={restartQuiz}>

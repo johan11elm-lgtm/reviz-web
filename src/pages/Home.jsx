@@ -301,7 +301,8 @@ export default function Home() {
 
   return (
     <div className="app home-page">
-      {newBadge && (
+      {/* Le toast attend que la popup Battle soit fermée : deux calques en même temps se chevauchaient */}
+      {newBadge && !annonceBattle && (
         <AchievementToast badge={newBadge} onDone={() => setNewBadge(null)} />
       )}
       {annonceBattle && <BattleAnnonce uid={currentUser.uid} onClose={() => setAnnonceBattle(false)} />}

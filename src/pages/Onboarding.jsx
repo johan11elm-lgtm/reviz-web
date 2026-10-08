@@ -79,7 +79,7 @@ export default function Onboarding() {
           size={150}
           glow
           animate={slide !== 'how'}
-          priority={step === 0}
+          priority
         />
 
         {slide === 'formats' && (

@@ -354,18 +354,19 @@
   html:not(.native) .progres-page .pg-desk-big-text { font-size: 13.5px; font-weight: 500; color: var(--text-secondary); line-height: 1.35; }
   html:not(.native) .progres-page .pg-desk-empty { margin: 0; font-size: 13.5px; line-height: 1.45; color: var(--text-muted); }
 
-  /* Série : même carte orange que sur téléphone, empilée pour tenir au tiers */
+  /* Série : même carte blanche que sur téléphone, empilée pour tenir au tiers */
   html:not(.native) .progres-page .pg-desk-streak { padding: 20px 22px; align-items: stretch; }
+  html:not(.native) .progres-page .pg-desk-streak .pg-streak-flame { align-self: flex-start; }
   html:not(.native) .progres-page .pg-desk-streak-text { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 6px; }
   html:not(.native) .progres-page .pg-desk-streak .pg-streak-value { font-size: 44px; margin-top: 4px; }
   html:not(.native) .progres-page .pg-desk-streak .pg-streak-value small { font-size: 16px; letter-spacing: -0.2px; font-weight: 700; }
   html:not(.native) .progres-page .pg-desk-streak-record {
     margin-top: auto;
     padding-top: 12px;
-    border-top: 1px solid rgba(255, 255, 255, 0.32);
+    border-top: 1px solid var(--border-subtle);
     font-size: 13px;
     font-weight: 600;
-    color: rgba(255, 255, 255, 0.92);
+    color: var(--text-secondary);
   }
   html:not(.native) .progres-page .pg-desk-streak .pg-streak-mascot { align-self: flex-end; margin-bottom: -26px; }
   html:not(.native) .progres-page .pg-desk-streak .pg-streak-label,

@@ -8,8 +8,9 @@ import './guest.css';
  * compte (scan, coach) : les deux passent par des API authentifiées.
  * @param {string} props.action  ce que le compte débloque (« scanner tes leçons »)
  * @param {string} [props.text]  phrase d'explication
+ * @param {string} [props.pose]  mascotte (« scanphone » pour le scan, « coach » pour le coach)
  */
-export function GuestWall({ action, text }) {
+export function GuestWall({ action, text, pose = 'pointing' }) {
   const navigate = useNavigate();
   return (
     <div className="app guest-wall">
@@ -19,7 +20,7 @@ export function GuestWall({ action, text }) {
       />
       <div className="guest-wall-body">
         <div className="rv-empty-state">
-          <Mascot pose="pointing" size={160} glow className="rv-empty-state-mascot" alt="" aria-hidden="true" />
+          <Mascot pose={pose} size={160} glow priority className="rv-empty-state-mascot" alt="" aria-hidden="true" />
           <h2 className="rv-empty-state-title">Crée ton compte pour {action}</h2>
           <p className="rv-empty-state-sub">
             {text ?? "C'est gratuit, et tout ce que tu as révisé en mode essai te suit."}

@@ -1,46 +1,40 @@
-.notfound {
+/* CSS scoped to page wrapper — see scripts/scope-page-css.py */
+/* Wrapper: .notfound-page */
+
+.notfound-page {
+  min-height: 100vh;  /* vh fallback iOS 15 */
+  min-height: 100dvh;
+}
+
+.notfound-page .notfound {
+  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;  /* vh fallback iOS 15 */
-  min-height: 100dvh;
-  padding: 24px;
+  gap: 8px;
+  padding: 24px var(--page-gutter) 48px;
   text-align: center;
-  background: var(--bg);
 }
 
-.notfound-emoji {
-  font-size: 64px;
-  margin-bottom: 16px;
-}
+.notfound-page .notfound-mascot { margin-bottom: 8px; }
 
-.notfound-title {
+.notfound-page .notfound-title {
+  margin: 0;
+  font-family: 'Geist', sans-serif;
   font-size: 28px;
-  font-weight: 700;
+  font-weight: 800;
+  letter-spacing: -1px;
+  line-height: 1.1;
   color: var(--text-primary);
-  margin: 0 0 8px;
 }
 
-.notfound-text {
-  font-size: 16px;
-  color: var(--text-muted);
-  margin: 0 0 32px;
-  max-width: 300px;
+.notfound-page .notfound-text {
+  margin: 0 0 18px;
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--text-secondary);
+  max-width: 30ch;
 }
 
-.notfound-btn {
-  display: inline-block;
-  padding: 14px 32px;
-  background: var(--accent-orange);
-  color: #fff;
-  border-radius: 12px;
-  font-weight: 600;
-  font-size: 16px;
-  text-decoration: none;
-  transition: opacity 0.2s;
-}
-
-.notfound-btn:hover {
-  opacity: 0.9;
-}
+.notfound-page .notfound-btn { min-width: 220px; }

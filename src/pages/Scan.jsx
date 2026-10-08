@@ -174,7 +174,7 @@ export default function Scan() {
 
   // Mode essai : le scan passe par une API authentifiée → compte requis.
   if (isGuest) {
-    return <GuestWall action="scanner tes leçons" text="Le scan de leçons demande un compte. C'est gratuit, et tout ce que tu as révisé en mode essai te suit." />;
+    return <GuestWall pose="scanphone" action="scanner tes leçons" text="Le scan de leçons demande un compte. C'est gratuit, et tout ce que tu as révisé en mode essai te suit." />;
   }
 
   return (

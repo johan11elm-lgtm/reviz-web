@@ -36,6 +36,45 @@
   line-height: 1.4;
   margin: 0 0 4px;
 }
+/* Score de fin (quiz) : carte blanche, chiffre Geist, barre, XP en pilule */
+.rv-end-score {
+  width: 100%;
+  max-width: 320px;
+  padding: 16px 18px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 4px;
+}
+.rv-end-score-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+.rv-end-score-value {
+  font-family: 'Geist', sans-serif;
+  font-size: 34px;
+  font-weight: 800;
+  letter-spacing: -1.4px;
+  line-height: 1;
+  color: var(--text-primary);
+}
+.rv-end-score-value small {
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+  color: var(--text-muted);
+}
+.rv-end-score-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+.rv-end-score-bar { margin: 0; }
+.rv-end-xp { align-self: center; font-weight: 700; }
+.rv-end-score .rv-end-xp { align-self: flex-start; }
+
 .rv-end-screen-actions {
   display: flex;
   flex-direction: column;

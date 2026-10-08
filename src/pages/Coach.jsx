@@ -30,7 +30,7 @@ export default function Coach() {
 
   // Mode essai : le coach passe par une API authentifiée → compte requis.
   if (isGuest) {
-    return <GuestWall action="parler au coach" text="Le coach Réviz demande un compte. C'est gratuit, et tout ce que tu as révisé en mode essai te suit." />;
+    return <GuestWall pose="coach" action="parler au coach" text="Le coach Réviz demande un compte. C'est gratuit, et tout ce que tu as révisé en mode essai te suit." />;
   }
 
   const select = id => setParams({ lesson: id }, { replace: true });

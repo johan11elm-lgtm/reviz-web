@@ -296,7 +296,7 @@ function MindmapSession() {
               <span className="rv-stat-label">XP</span>
             </div>
           </div>
-          <div className="mindmap-xp-badge">+{mindmapData.xp} XP gagnés !</div>
+          <span className="rv-pill rv-pill--orange rv-end-xp">+{mindmapData.xp} XP</span>
           <FormatFeedback format="mindmap" question="Cette carte t'a aidé ?" />
           <div className="rv-end-screen-actions">
             <button type="button" className="rv-btn-cta rv-btn-cta--full" onClick={restartMindmap}>

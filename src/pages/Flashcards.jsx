@@ -178,8 +178,12 @@ function FlashcardsSession() {
             alt=""
             aria-hidden="true"
           />
-          <h2 className="rv-end-screen-title">Session terminée !</h2>
-          <p className="rv-end-screen-sub">Tu as parcouru toutes les cartes !</p>
+          <h2 className="rv-end-screen-title">Série terminée</h2>
+          <p className="rv-end-screen-sub">
+            {againCount === 0
+              ? 'Toutes les cartes sont maîtrisées.'
+              : `${againCount} carte${againCount > 1 ? 's' : ''} à revoir, elles reviendront en priorité.`}
+          </p>
           <div className="flashcards-end-stats rv-card rv-card--padded">
             <div className="flashcards-end-stat">
               <span className="rv-stat-value rv-stat-value--md" style={{ color: 'var(--accent-green)' }}>{gotCount}</span>
@@ -196,7 +200,7 @@ function FlashcardsSession() {
               <span className="rv-stat-label">Total</span>
             </div>
           </div>
-          <div className="flashcards-xp-badge">+{xp} XP gagnés !</div>
+          <span className="rv-pill rv-pill--orange rv-end-xp">+{xp} XP</span>
           <FormatFeedback format="flashcards" question="Ces cartes t'ont aidé ?" />
           <div className="rv-end-screen-actions">
             <button type="button" className="rv-btn-cta rv-btn-cta--full" onClick={restartDeck}>

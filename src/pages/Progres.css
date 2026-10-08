@@ -31,16 +31,23 @@
 /* ── Streak hero (signature visuelle orange + mascotte fire) ── */
 .pg-streak-card {
   position: relative;
-  /* Valeurs figées : texte blanc par-dessus — les accents des thèmes sombres
-     casseraient le contraste. */
-  background: linear-gradient(135deg, #F0772A, #FF8A3D);
-  border-radius: var(--radius-card);
-  padding: 18px 20px;
+  padding: 16px 18px 16px 16px;
   display: flex;
   align-items: center;
   gap: 14px;
-  box-shadow: 0 12px 28px rgba(255, 138, 61, 0.34);
-  overflow: hidden;
+}
+
+/* La flamme sur son disque orange pâle, comme les tuiles de badges */
+.pg-streak-flame {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--accent-orange-soft);
+  color: var(--accent-orange-strong);
+  font-size: 26px;
   flex-shrink: 0;
 }
 
@@ -48,11 +55,11 @@
   flex: 1;
   display: flex;
   align-items: center;
+  min-width: 0;
 }
 
 .pg-streak-mascot {
   flex-shrink: 0;
-  filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.28));
   align-self: flex-end;
   margin-right: -6px;
   margin-bottom: -22px;
@@ -70,7 +77,7 @@
 .pg-streak-divider {
   width: 1px;
   height: 52px;
-  background: rgba(255, 255, 255, 0.32);
+  background: var(--border-subtle);
   margin: 0 14px;
   flex-shrink: 0;
 }
@@ -78,16 +85,17 @@
 .pg-streak-label {
   font-size: 10px;
   font-weight: 700;
-  color: rgba(255, 255, 255, 0.85);
+  color: var(--accent-orange-ink);
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  white-space: nowrap;
 }
 
 .pg-streak-value {
   font-family: 'Geist', sans-serif;
   font-size: 40px;
   font-weight: 800;
-  color: #fff;
+  color: var(--text-primary);
   letter-spacing: -1.5px;
   line-height: 1;
 }
@@ -96,7 +104,7 @@
 .pg-streak-unit {
   font-size: 11px;
   font-weight: 600;
-  color: rgba(255, 255, 255, 0.85);
+  color: var(--text-muted);
 }
 
 /* ── Level / XP — mascotte graduation + info ── */
@@ -552,7 +560,8 @@
   .pg-level-next { font-size: 10.5px; }
 
   /* Streak card — mascot 88px, value 32px, divider plus serré */
-  .pg-streak-card { padding: 16px 16px; gap: 10px; }
+  .pg-streak-card { padding: 14px 14px 14px 12px; gap: 10px; }
+  .pg-streak-flame { width: 44px; height: 44px; font-size: 22px; }
   .pg-streak-mascot {
     width: 88px !important;
     height: 88px !important;

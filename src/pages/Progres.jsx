@@ -1,5 +1,5 @@
 import { PageIntro } from '../components/PageIntro';
-import { FlashcardsIcon, QuizIcon, ResumeIcon, MindmapIcon, BookIcon, BoltIcon, CalendarIcon, TrophyIcon } from '../components/Icons';
+import { FlashcardsIcon, QuizIcon, ResumeIcon, MindmapIcon, BookIcon, BoltIcon, CalendarIcon, TrophyIcon, FlameIcon } from '../components/Icons';
 import { useState, useEffect, useMemo } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
@@ -361,10 +361,11 @@ export default function Progres() {
         </div>
 
         {/* 2. Streak hero — mascotte fire à droite */}
-        <div className="pg-streak-card">
+        <div className="rv-card pg-streak-card">
+          <span className="pg-streak-flame" aria-hidden="true"><FlameIcon /></span>
           <div className="pg-streak-body">
             <div className="pg-streak-block">
-              <div className="pg-streak-label">Série en cours</div>
+              <div className="pg-streak-label">Série</div>
               <div className="pg-streak-value">{streak}</div>
               <div className="pg-streak-unit">{streak === 1 ? 'jour de suite' : 'jours de suite'}</div>
             </div>
@@ -537,7 +538,8 @@ function ProgresDesk({
   return (
     <>
       <div className="pg-desk-top">
-        <div className="pg-streak-card pg-desk-streak">
+        <div className="rv-card pg-streak-card pg-desk-streak">
+          <span className="pg-streak-flame" aria-hidden="true"><FlameIcon /></span>
           <div className="pg-desk-streak-text">
             <span className="pg-streak-label">Série en cours</span>
             <span className="pg-streak-value">{streak} <small>{streak === 1 ? 'jour' : 'jours'}</small></span>
