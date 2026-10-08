@@ -6,6 +6,16 @@
     <changefreq>monthly</changefreq>
   </url>
   <url>
+    <loc>https://app.revizapp.fr/installer</loc>
+    <priority>0.9</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://app.revizapp.fr/profs</loc>
+    <priority>0.8</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
     <loc>https://app.revizapp.fr/inscription</loc>
     <priority>0.8</priority>
     <changefreq>monthly</changefreq>

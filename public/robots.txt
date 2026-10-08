@@ -1,5 +1,7 @@
 User-agent: *
 Allow: /welcome
+Allow: /installer
+Allow: /profs
 Allow: /connexion
 Allow: /inscription
 Allow: /legal/

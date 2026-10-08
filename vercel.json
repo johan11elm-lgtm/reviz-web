@@ -28,6 +28,14 @@
       ]
     }
   ],
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "(?<sub>.*)\\.vercel\\.app" }],
+      "destination": "https://app.revizapp.fr/$1",
+      "permanent": true
+    }
+  ],
   "rewrites": [
     { "source": "/((?!api/)(?!sitemap\\.xml)(?!robots\\.txt)(?!googlee9de8164637c0bbf\\.html).*)", "destination": "/index.html" }
   ]
