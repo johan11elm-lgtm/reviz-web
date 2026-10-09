@@ -180,7 +180,7 @@
   border-radius: 11px;
   background: var(--accent-orange);
   color: #fff;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 800;
   line-height: 17px;
   text-align: center;
@@ -296,4 +296,29 @@
 }
 @media (max-width: 430px) {
   .rv-page-intro { padding-top: 18px; }
+}
+/* Téléphone : le titre prend toute la largeur (« Mon programme » tenait sur
+ * deux lignes, coincé à gauche de la mascotte) ; la mascotte descend d'un
+ * cran, à côté du sous-titre. Le bloc de texte s'efface (display: contents)
+ * pour que titre, sous-titre et extras (barre d'XP…) se placent dans la
+ * grille : extras en pleine largeur sous la mascotte. */
+@media (max-width: 600px) {
+  .rv-page-intro:has(.rv-page-intro-mascot) {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    column-gap: 14px;
+  }
+  .rv-page-intro:has(.rv-page-intro-mascot) .rv-page-intro-text { display: contents; }
+  .rv-page-intro:has(.rv-page-intro-mascot) .rv-page-intro-title { grid-column: 1 / -1; grid-row: 1; }
+  .rv-page-intro:has(.rv-page-intro-mascot) .rv-page-intro-text > :not(.rv-page-intro-title, .rv-page-intro-sub) { grid-column: 1 / -1; }
+  .rv-page-intro:has(.rv-page-intro-mascot) .rv-page-intro-sub { grid-column: 1; grid-row: 2; align-self: start; margin: 6px 0 0; max-width: none; }
+  /* La mascotte remonte un peu sous la fin du titre (le titre passe devant) */
+  .rv-page-intro:has(.rv-page-intro-mascot) .rv-page-intro-mascot {
+    grid-column: 2;
+    grid-row: 2;
+    align-self: end;
+    width: 104px !important;
+    height: 104px !important;
+    margin: -26px -6px -6px 0;
+  }
 }

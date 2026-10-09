@@ -59,7 +59,7 @@
 .rv-callout--red    { background: var(--accent-red-soft);    color: var(--accent-red-ink); }
 
 .rv-callout-label {
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.7px;

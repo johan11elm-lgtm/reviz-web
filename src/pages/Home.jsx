@@ -314,7 +314,6 @@ export default function Home() {
         fillPct={fillPct}
         aura={aura}
         isPremium={isPremium}
-        onCoach={isGuest ? undefined : () => navigate(lastLesson ? `/coach?lesson=${lastLesson.id}` : '/coach')}
       />
 
       {/* Ordinateur : tableau de bord. Le bandeau d'essai vit dans la barre
@@ -400,7 +399,7 @@ export default function Home() {
               <div className="home-featured-top">
                 <Mascot
                   pose={subjectMascot(lastLesson.metadata.subject)}
-                  size={128}
+                  size={96}
                   glow
                   priority
                   className="home-featured-mascot"

@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { Mascot } from './Mascot';
 import { CheckIcon, RefreshIcon, LockIcon, StarIcon, BookOpenIcon, FlashcardsIcon, QuizIcon, UsersIcon } from './Icons';
 import { CHAPTER_STATE_LABEL } from '../utils/programme';
@@ -44,8 +44,11 @@ export function ChapterPath({ items, mascot, selectedId, onSelect, onOpen, onBat
             <header className="chapter-path-unit-head">
               <span className="chapter-path-unit-title">{PERIODE_LABEL[g.key] ?? g.key}</span>
               <span className="chapter-path-unit-meta">{done} / {g.items.length} maîtrisés</span>
+              <span className="chapter-path-unit-bar" aria-hidden="true">
+                <span style={{ width: `${Math.round((done / g.items.length) * 100)}%` }} />
+              </span>
             </header>
-            <ol className="chapter-path-steps">
+            <PathTrack items={g.items}>
               {g.items.map(it => {
                 const i = index++;
                 const offset = WAVE[i % WAVE.length];
@@ -64,10 +67,69 @@ export function ChapterPath({ items, mascot, selectedId, onSelect, onOpen, onBat
                   />
                 );
               })}
-            </ol>
+            </PathTrack>
           </section>
         );
       })}
+    </div>
+  );
+}
+
+// Ton d'un tronçon du sentier : celui de l'étape d'où il part.
+function segmentTone(item) {
+  if (!item.chapter.pret || item.state === 'nouveau') return 'todo';
+  return item.state === 'maitrise' ? 'done' : 'started';
+}
+
+/**
+ * Liste des étapes d'un trimestre + le sentier qui les relie. Le tracé
+ * passe par le centre des ronds, mesurés après rendu : le zigzag vient du
+ * CSS (et change de pas selon l'écran), la fiche ouverte pousse les étapes
+ * suivantes ; on retrace donc à chaque changement de taille.
+ */
+function PathTrack({ items, children }) {
+  const ref = useRef(null);
+  const [geo, setGeo] = useState(null);
+
+  useLayoutEffect(() => {
+    const box = ref.current;
+    if (!box) return undefined;
+    const measure = () => {
+      const origin = box.getBoundingClientRect();
+      const points = [...box.querySelectorAll('.path-step-node')].map(n => {
+        const r = n.getBoundingClientRect();
+        return { x: r.left - origin.left + r.width / 2, y: r.top - origin.top + r.height / 2 };
+      });
+      setGeo({ w: origin.width, h: origin.height, points });
+    };
+    measure();
+    if (typeof ResizeObserver === 'undefined') return undefined;
+    const ro = new ResizeObserver(measure);
+    ro.observe(box);
+    box.querySelectorAll('.path-step').forEach(el => ro.observe(el));
+    return () => ro.disconnect();
+  }, [items]);
+
+  const segments = [];
+  if (geo) {
+    for (let i = 0; i < geo.points.length - 1; i++) {
+      const a = geo.points[i], b = geo.points[i + 1];
+      const dy = (b.y - a.y) / 2;
+      segments.push({
+        d: `M${a.x} ${a.y} C${a.x} ${a.y + dy} ${b.x} ${b.y - dy} ${b.x} ${b.y}`,
+        tone: segmentTone(items[i]),
+      });
+    }
+  }
+
+  return (
+    <div className="chapter-path-track" ref={ref}>
+      {geo && geo.w > 0 && (
+        <svg className="chapter-path-trail" width={geo.w} height={geo.h} viewBox={`0 0 ${geo.w} ${geo.h}`} aria-hidden="true" focusable="false">
+          {segments.map((s, i) => <path key={i} d={s.d} className={`chapter-path-trail-seg chapter-path-trail-seg--${s.tone}`} />)}
+        </svg>
+      )}
+      <ol className="chapter-path-steps">{children}</ol>
     </div>
   );
 }
@@ -107,7 +169,18 @@ function PathStep({ item, offset, isCurrent, isSelected, mascot, onSelect, onOpe
           {icon ?? <span className="path-step-num">{chapter.ordre}</span>}
         </span>
       </button>
-      <span className={`path-step-label path-step-label--${side}`} aria-hidden="true">{chapter.titre}</span>
+      {/* Étiquette accrochée à l'étape : même info que le nom accessible du rond, d'où aria-hidden ; un clic dessus ouvre aussi la fiche. */}
+      <span
+        className={`path-step-label path-step-label--${side}`}
+        aria-hidden="true"
+        onClick={pret ? () => onSelect(isSelected ? null : chapter.id) : undefined}
+      >
+        <span className="path-step-label-meta">
+          <span className="path-step-label-num">Chap. {chapter.ordre}</span>
+          {(state !== 'nouveau' || !pret) && <span className="path-step-label-status">{status}</span>}
+        </span>
+        <span className="path-step-label-title">{chapter.titre}</span>
+      </span>
 
       {isCurrent && (
         <Mascot pose={mascot} size={88} alt="" aria-hidden="true" className={`path-step-mascot path-step-mascot--${side}`} />

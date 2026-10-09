@@ -218,7 +218,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.battle-score-aura { grid-area: aura; font-size: 11.5px; font-weight: 600; color: var(--text-muted); }
+.battle-score-aura { grid-area: aura; font-size: 12px; font-weight: 600; color: var(--text-muted); }
 .battle-score-points {
   grid-area: points;
   font-family: 'Geist', sans-serif;

@@ -66,7 +66,7 @@
   border-radius: 50%;
   background: var(--accent-violet);
   color: #fff;
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 700;
   display: flex;
   align-items: center;
@@ -77,7 +77,7 @@
 
 /* ── Block label ── */
 .resume-page .resume-block-label {
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 700;
   color: var(--text-muted);
   text-transform: uppercase;
@@ -154,7 +154,7 @@
   letter-spacing: -0.5px;
 }
 .resume-page .resume-formula-caption {
-  font-size: 11px;
+  font-size: 12px;
   color: var(--text-muted);
   line-height: 1.4;
 }
@@ -294,7 +294,7 @@
   margin-top: 2px;
 }
 .resume-page .resume-exemple-label {
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.7px;
@@ -335,7 +335,7 @@
   height: 22px;
   border-radius: 50%;
   color: #fff;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
   display: flex;
   align-items: center;

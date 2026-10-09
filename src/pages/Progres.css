@@ -83,7 +83,7 @@
 }
 
 .pg-streak-label {
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 700;
   color: var(--accent-orange-ink);
   text-transform: uppercase;
@@ -102,9 +102,10 @@
 .pg-streak-value--sm { font-size: 30px; }
 
 .pg-streak-unit {
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 600;
   color: var(--text-muted);
+  white-space: nowrap;
 }
 
 /* ── Level / XP — mascotte graduation + info ── */
@@ -159,7 +160,7 @@
 }
 
 .pg-level-next {
-  font-size: 11px;
+  font-size: 12px;
   color: var(--text-muted);
   font-weight: 500;
 }
@@ -289,7 +290,7 @@
 }
 
 .pg-stat-label {
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 600;
   color: var(--text-muted);
   text-align: center;
@@ -348,7 +349,7 @@
 }
 
 .pg-chart-record {
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
   color: var(--accent-orange-ink);
   background: var(--accent-orange-soft);
@@ -385,7 +386,7 @@
 .pg-bar.active { background: var(--accent-orange-soft); }
 
 .pg-bar-day {
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 600;
   color: var(--text-muted);
 }
@@ -545,7 +546,7 @@
 
 /* ── Responsive (≤ 430px : phones standards) ── */
 @media (max-width: 430px) {
-  .pg-content { padding: 8px 16px 110px; gap: 14px; }
+  .pg-content { padding: 8px var(--page-gutter) 110px; gap: 14px; }
 
 
   /* Level card — mascot plus petite, info plus serrée */
@@ -557,7 +558,7 @@
   .pg-level-info { gap: 6px; }
   .pg-level-badge { font-size: 12px; padding: 5px 12px; }
   .pg-level-total { font-size: 12px; }
-  .pg-level-next { font-size: 10.5px; }
+  .pg-level-next { font-size: 12px; }
 
   /* Streak card — mascot 88px, value 32px, divider plus serré */
   .pg-streak-card { padding: 14px 14px 14px 12px; gap: 10px; }
@@ -570,8 +571,8 @@
   .pg-streak-value { font-size: 30px; }
   .pg-streak-value--sm { font-size: 24px; }
   .pg-streak-divider { margin: 0 10px; height: 44px; }
-  .pg-streak-label { font-size: 9.5px; }
-  .pg-streak-unit { font-size: 10.5px; }
+  .pg-streak-label { font-size: 12px; }
+  .pg-streak-unit { font-size: 12px; }
 
   /* Chart card mascot */
   .pg-chart-mascot {
@@ -580,8 +581,8 @@
   }
 
   /* Weeks card — labels plus serrés */
-  .pg-week-label { width: 88px; font-size: 11px; }
-  .pg-week-count { font-size: 11px; width: 28px; }
+  .pg-week-label { width: 88px; font-size: 12px; }
+  .pg-week-count { font-size: 12px; width: 28px; }
   .pg-weeks-summary-value { font-size: 28px; }
   .pg-weeks-summary-text { font-size: 12px; }
 }

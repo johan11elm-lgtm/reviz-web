@@ -32,7 +32,7 @@
   color: var(--text-primary);
 }
 .home-page .home-stat-value small { font-size: 13px; font-weight: 600; letter-spacing: 0; color: var(--text-muted); }
-.home-page .home-stat-label { font-size: 11px; color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.home-page .home-stat-label { font-size: 12px; color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .home-page .home-stat-sep { width: 1px; height: 34px; background: var(--border-subtle); flex-shrink: 0; }
 .home-page .home-stat-check { margin-left: auto; color: var(--accent-green-strong); font-size: 18px; display: inline-flex; }
 
@@ -47,37 +47,47 @@
 }
 
 .home-page .home-featured-mascot {
-  width: 128px;
-  height: 128px;
+  width: 96px;
+  height: 96px;
+  flex-shrink: 0;
+  margin: -6px -2px -6px -8px;
   filter: drop-shadow(0 10px 20px rgba(232, 101, 26, 0.26));
 }
 
 .home-page .home-featured-info {
   flex: 1;
   min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
 }
 
+/* Étiquette discrète, le titre de la leçon porte la carte */
 .home-page .home-featured-label {
-  font-size: 15px;
-  font-weight: 700;
-  color: var(--accent-violet);
-  letter-spacing: -0.2px;
-  margin-bottom: 2px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  color: var(--accent-orange-ink);
 }
 
 .home-page .home-featured-title {
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--text-secondary);
-  white-space: nowrap;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
   overflow: hidden;
-  text-overflow: ellipsis;
+  font-family: 'Geist', sans-serif;
+  font-size: 18px;
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.4px;
+  color: var(--text-primary);
+  text-wrap: balance;
 }
 
 .home-page .home-featured-subject {
-  font-size: 12px;
+  font-size: 13px;
   color: var(--text-muted);
-  margin-top: 2px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

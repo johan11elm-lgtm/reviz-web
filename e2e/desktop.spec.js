@@ -187,7 +187,7 @@ test.describe('Ordinateur (1280 px) — avec un compte', () => {
     await expect(fenetre).toBeHidden()
 
     await page.goto('/coach')
-    await expect(page.getByText("Qu'est-ce que tu veux comprendre ?")).toBeVisible()
+    await expect(page.getByText(/Qu'est-ce que tu veux comprendre/)).toBeVisible()
     await expect(page.locator('.coach-side')).toBeVisible()
     await expect(page.locator('.side-nav').getByRole('link', { name: 'Coach' })).toBeVisible()
     await page.waitForTimeout(600)

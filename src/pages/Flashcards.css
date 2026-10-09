@@ -152,7 +152,7 @@
 
 /* Tag "Question" / "Réponse" */
 .flashcards-page .flashcards-face-tag {
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 1.2px;
@@ -166,11 +166,13 @@
 /* Texte */
 .flashcards-page .flashcards-face-text {
   font-family: 'Geist', sans-serif;
-  font-size: 18px;
+  font-size: 21px;
   font-weight: 700;
-  letter-spacing: -0.3px;
+  letter-spacing: -0.4px;
   text-align: center;
-  line-height: 1.45;
+  line-height: 1.35;
+  text-wrap: balance;
+  max-width: 30ch;
 }
 .flashcards-page .flashcards-flip-front .flashcards-face-text { color: var(--text-primary); }
 .flashcards-page .flashcards-flip-back  .flashcards-face-text { color: var(--accent-violet-ink); }
