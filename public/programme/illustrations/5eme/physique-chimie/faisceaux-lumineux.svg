@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 136" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
+  <!-- Trois faisceaux lumineux représentés par cinq rayons fléchés : divergent (les rayons partent d’une source et s’écartent), parallèle, convergent (les rayons se rapprochent vers un point). Réviz, 5e physique-chimie, la lumière. -->
+  <circle cx="18" cy="60" r="3.6" fill="#FBE9DD" stroke="#B34400" stroke-width="2"/>
+  <path d="M21,58.8 L110,26" stroke="#B34400" stroke-width="1.75"/><path d="M72.6,39.8L67.1,45L65,39.4Z" fill="#B34400"/>
+  <path d="M21,59.4 L110,43" stroke="#B34400" stroke-width="1.75"/><path d="M72.6,49.9L66.3,54.1L65.2,48.2Z" fill="#B34400"/>
+  <path d="M21,60 L110,60" stroke="#B34400" stroke-width="1.75"/><path d="M72.6,60L65.6,63L65.6,57Z" fill="#B34400"/>
+  <path d="M21,60.6 L110,77" stroke="#B34400" stroke-width="1.75"/><path d="M72.6,70.1L65.2,71.8L66.3,65.9Z" fill="#B34400"/>
+  <path d="M21,61.2 L110,94" stroke="#B34400" stroke-width="1.75"/><path d="M72.6,80.2L65,80.6L67.1,75Z" fill="#B34400"/>
+  <path d="M136,30 L228,30" stroke="#B34400" stroke-width="1.75"/><path d="M189.4,30L182.4,33L182.4,27Z" fill="#B34400"/>
+  <path d="M136,45 L228,45" stroke="#B34400" stroke-width="1.75"/><path d="M189.4,45L182.4,48L182.4,42Z" fill="#B34400"/>
+  <path d="M136,60 L228,60" stroke="#B34400" stroke-width="1.75"/><path d="M189.4,60L182.4,63L182.4,57Z" fill="#B34400"/>
+  <path d="M136,75 L228,75" stroke="#B34400" stroke-width="1.75"/><path d="M189.4,75L182.4,78L182.4,72Z" fill="#B34400"/>
+  <path d="M136,90 L228,90" stroke="#B34400" stroke-width="1.75"/><path d="M189.4,90L182.4,93L182.4,87Z" fill="#B34400"/>
+  <path d="M254,26 L346,60" stroke="#B34400" stroke-width="1.75"/><path d="M307.4,45.7L299.8,46.1L301.8,40.5Z" fill="#B34400"/>
+  <path d="M254,43 L346,60" stroke="#B34400" stroke-width="1.75"/><path d="M307.4,52.9L299.9,54.5L301,48.6Z" fill="#B34400"/>
+  <path d="M254,60 L346,60" stroke="#B34400" stroke-width="1.75"/><path d="M307.4,60L300.4,63L300.4,57Z" fill="#B34400"/>
+  <path d="M254,77 L346,60" stroke="#B34400" stroke-width="1.75"/><path d="M307.4,67.1L301,71.4L299.9,65.5Z" fill="#B34400"/>
+  <path d="M254,94 L346,60" stroke="#B34400" stroke-width="1.75"/><path d="M307.4,74.3L301.8,79.5L299.8,73.9Z" fill="#B34400"/>
+  <circle cx="346" cy="60" r="2.2" fill="#2D2B57"/>
+  <g class="ill-legende" font-size="11.5" font-weight="600" fill="#2D2B57"><rect class="ill-fond" x="32.7" y="111" width="62.7" height="15" rx="4" fill="#FFFFFF"/><text x="64" y="122" text-anchor="middle">Divergent</text></g>
+  <g class="ill-legende" font-size="11.5" font-weight="600" fill="#2D2B57"><rect class="ill-fond" x="150.7" y="111" width="62.7" height="15" rx="4" fill="#FFFFFF"/><text x="182" y="122" text-anchor="middle">Parallèle</text></g>
+  <g class="ill-legende" font-size="11.5" font-weight="600" fill="#2D2B57"><rect class="ill-fond" x="265.5" y="111" width="69" height="15" rx="4" fill="#FFFFFF"/><text x="300" y="122" text-anchor="middle">Convergent</text></g>
+</svg>

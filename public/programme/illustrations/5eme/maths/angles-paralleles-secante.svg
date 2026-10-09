@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 206" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="11.5" font-weight="600" fill="#2D2B57">
+  <!-- Deux droites parallèles (d) et (d') coupées par une sécante, trois fois : angles alternes-internes, angles correspondants, angles opposés par le sommet (65° chacun). Réviz, 5e maths, angles et triangles. -->
+  <path d="M140,20 V170 M250,20 V170" stroke="#EDE8E1" stroke-width="1"/>
+  <path d="M101.8,58 L86.8,58 A15 15 0 0 0 95.4,71.6 Z M68.2,130 L83.2,130 A15 15 0 0 0 74.6,116.4 Z M211.8,58 L226.8,58 A15 15 0 0 0 218.1,44.4 Z M178.2,130 L193.2,130 A15 15 0 0 0 184.6,116.4 Z M321.8,58 L336.8,58 A15 15 0 0 0 328.1,44.4 Z M321.8,58 L306.8,58 A15 15 0 0 0 315.4,71.6 Z" fill="#FBE9DD"/>
+  <path d="M36,58 L134,58 M36,130 L134,130 M51.3,166.3 L118.7,21.7 M146,58 L244,58 M146,130 L244,130 M161.3,166.3 L228.7,21.7 M256,58 L354,58 M256,130 L354,130 M271.3,166.3 L338.7,21.7" fill="none" stroke="#2D2B57" stroke-width="1.75" stroke-linecap="round"/>
+  <path d="M116.7,55.7 L120,58 L116.7,60.3 M116.7,127.7 L120,130 L116.7,132.3 M226.7,55.7 L230,58 L226.7,60.3 M226.7,127.7 L230,130 L226.7,132.3 M336.7,55.7 L340,58 L336.7,60.3 M336.7,127.7 L340,130 L336.7,132.3" fill="none" stroke="#2D2B57" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M86.8,58 A15 15 0 0 0 95.4,71.6 M83.2,130 A15 15 0 0 0 74.6,116.4 M226.8,58 A15 15 0 0 0 218.1,44.4 M193.2,130 A15 15 0 0 0 184.6,116.4 M336.8,58 A15 15 0 0 0 328.1,44.4 M306.8,58 A15 15 0 0 0 315.4,71.6" fill="none" stroke="#B34400" stroke-width="2.25"/>
+  <g><circle cx="101.8" cy="58" r="2.2"/><circle cx="68.2" cy="130" r="2.2"/><circle cx="211.8" cy="58" r="2.2"/><circle cx="178.2" cy="130" r="2.2"/><circle cx="321.8" cy="58" r="2.2"/><circle cx="288.2" cy="130" r="2.2"/></g>
+  <g font-size="12.5" font-weight="700" fill="#2D2B57" text-anchor="middle"><text x="4" y="62.5" text-anchor="start">(d)</text><text x="4" y="134.5" text-anchor="start">(d')</text></g>
+  <g class="ill-legende"><rect class="ill-fond" x="28.5" y="179.6" width="113.1" height="18.5" rx="4" fill="#FFFFFF"/><text x="85" y="192" text-anchor="middle">Alternes-internes</text></g>
+  <g class="ill-legende"><rect class="ill-fond" x="147.9" y="179.6" width="94.2" height="18.5" rx="4" fill="#FFFFFF"/><text x="195" y="192" text-anchor="middle">Correspondants</text></g>
+  <g class="ill-legende"><rect class="ill-fond" x="267.4" y="173.6" width="75.3" height="31.5" rx="4" fill="#FFFFFF"/><text x="305" y="186" text-anchor="middle">Opposés par<tspan x="305" dy="13">le sommet</tspan></text></g>
+</svg>

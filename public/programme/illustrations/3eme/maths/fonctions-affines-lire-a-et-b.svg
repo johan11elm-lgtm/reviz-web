@@ -1,0 +1,104 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 284" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
+  <!-- Droites de f(x) = 2x + 3 (ordonnée à l'origine 3 ; on avance de 1, on monte de 2), de g(x) = −x + 4 (on avance de 1, on descend de 1) et de la fonction linéaire x ↦ 1,2x, qui passe par l'origine. Réviz, 3e maths, fonctions linéaires et affines. -->
+  <!-- Quadrillage -->
+  <g stroke="#EAE8F2" stroke-width="1">
+    <path d="M22,272 V20"/>
+    <path d="M50,272 V20"/>
+    <path d="M78,272 V20"/>
+    <path d="M106,272 V20"/>
+    <path d="M134,272 V20"/>
+    <path d="M162,272 V20"/>
+    <path d="M190,272 V20"/>
+    <path d="M218,272 V20"/>
+    <path d="M22,258 H232"/>
+    <path d="M22,230 H232"/>
+    <path d="M22,202 H232"/>
+    <path d="M22,174 H232"/>
+    <path d="M22,146 H232"/>
+    <path d="M22,118 H232"/>
+    <path d="M22,90 H232"/>
+    <path d="M22,62 H232"/>
+    <path d="M22,34 H232"/>
+  </g>
+  <!-- Axes -->
+  <g stroke="#2D2B57" stroke-width="1.4" fill="none">
+    <path d="M22,230 H238"/>
+    <path d="M106,272 V14"/>
+    <path d="M22,227 V233 M50,227 V233 M78,227 V233 M134,227 V233 M162,227 V233 M190,227 V233 M218,227 V233 M103,258 H109 M103,202 H109 M103,174 H109 M103,146 H109 M103,118 H109 M103,90 H109 M103,62 H109 M103,34 H109"/>
+  </g>
+  <path d="M242,230 L235,233.2 L235,226.9 Z" fill="#2D2B57"/>
+  <path d="M106,10 L109.2,17 L102.9,17 Z" fill="#2D2B57"/>
+
+  <!-- f(x) = 2x + 3 en accent ; g(x) = −x + 4 et x ↦ 1,2x en encre -->
+  <g stroke-linecap="round">
+    <path d="M71,272 L232,78.8" stroke="#2D2B57" stroke-width="1.75"/>
+    <path d="M22,34 L232,244" stroke="#2D2B57" stroke-width="1.75"/>
+    <path d="M43,272 L169,20" stroke="#B34400" stroke-width="2.25"/>
+  </g>
+  <!-- Escalier de f : on avance de 1, on monte de 2 -->
+  <path d="M106,146 H134 V95" fill="none" stroke="#B34400" stroke-width="1.75" stroke-dasharray="4 3"/>
+  <path d="M134,90 L136.7,96 L131.3,96 Z" fill="#B34400"/>
+  <!-- Escalier de g : on avance de 1, on descend de 1 -->
+  <path d="M50,62 H78 V85" fill="none" stroke="#2D2B57" stroke-width="1.5" stroke-dasharray="4 3"/>
+  <path d="M78,90 L75.3,84 L80.7,84 Z" fill="#2D2B57"/>
+  <g fill="#2D2B57"><circle cx="106" cy="118" r="2.2" fill="#2D2B57"/><circle cx="106" cy="230" r="2.2" fill="#2D2B57"/></g><circle cx="106" cy="146" r="3" fill="#B34400"/>
+  <!-- Graduations -->
+  <g font-size="10.5" fill="#2D2B57" stroke="#FFFFFF" stroke-width="3" stroke-linejoin="round" paint-order="stroke">
+    <text x="22" y="243" text-anchor="middle">−3</text>
+    <text x="50" y="243" text-anchor="middle">−2</text>
+    <text x="78" y="243" text-anchor="middle">−1</text>
+    <text x="134" y="243" text-anchor="middle">1</text>
+    <text x="162" y="243" text-anchor="middle">2</text>
+    <text x="190" y="243" text-anchor="middle">3</text>
+    <text x="218" y="243" text-anchor="middle">4</text>
+    <text x="101" y="261.5" text-anchor="end">−1</text>
+    <text x="101" y="205.5" text-anchor="end">1</text>
+    <text x="101" y="177.5" text-anchor="end">2</text>
+    <text x="101" y="149.5" text-anchor="end">3</text>
+    <text x="101" y="121.5" text-anchor="end">4</text>
+    <text x="101" y="93.5" text-anchor="end">5</text>
+    <text x="101" y="65.5" text-anchor="end">6</text>
+    <text x="101" y="37.5" text-anchor="end">7</text>
+    <text x="101" y="243" text-anchor="end">0</text>
+  </g>
+  <g font-size="11" font-weight="700" font-style="italic" fill="#2D2B57">
+    <text x="238" y="223" text-anchor="end">x</text>
+    <text x="113" y="16">y</text>
+  </g>
+
+  <g font-size="11" font-weight="700" fill="#2D2B57" stroke="#FFFFFF" stroke-width="3.5" stroke-linejoin="round" paint-order="stroke">
+    <text x="120" y="160" text-anchor="middle">+1</text>
+    <text x="140" y="122">+2</text>
+    <text x="64" y="56" text-anchor="middle">+1</text>
+    <text x="84" y="80">−1</text>
+  </g>
+  <g font-size="12" font-weight="700" fill="#2D2B57" stroke="#FFFFFF" stroke-width="3.5" stroke-linejoin="round" paint-order="stroke">
+    <text x="176" y="31">f(x) = 2x + 3</text>
+    <text x="236" y="259">g(x) = −x + 4</text>
+    <text x="238" y="82.8">x ↦ 1,2x</text>
+  </g>
+  <g stroke="#2D2B57" stroke-width="1" opacity="0.6" fill="none">
+    <path d="M87.3,122.4 L101,146"/>
+    <path d="M161.8,84.2 L134,101.2"/>
+    <path d="M204,136.4 L185.8,134.2"/>
+  </g>
+  <g fill="#2D2B57">
+    <circle cx="101" cy="146" r="1.8"/>
+    <circle cx="134" cy="101.2" r="1.8"/>
+    <circle cx="185.8" cy="134.2" r="1.8"/>
+  </g>
+  <g font-size="11.5" font-weight="600" fill="#2D2B57">
+    <g class="ill-legende">
+      <rect class="ill-fond" x="12" y="108.4" width="75.3" height="28" rx="4" fill="#FFFFFF"/>
+      <text x="15" y="119.4">Ordonnée<tspan x="15" dy="13">à l’origine</tspan></text>
+    </g>
+    <g class="ill-legende">
+      <rect class="ill-fond" x="161.8" y="62.2" width="75.3" height="28" rx="4" fill="#FFFFFF"/>
+      <text x="164.8" y="73.2">Coefficient<tspan x="164.8" dy="13">directeur</tspan></text>
+    </g>
+    <g class="ill-legende">
+      <rect class="ill-fond" x="194" y="136.4" width="56.4" height="28" rx="4" fill="#FFFFFF"/>
+      <text x="197" y="147.4">Fonction<tspan x="197" dy="13">linéaire</tspan></text>
+    </g>
+  </g>
+</svg>

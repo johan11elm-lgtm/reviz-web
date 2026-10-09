@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 240" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
+  <!-- Chromatographie d’une encre noire : au départ, une tache d’encre sur un papier dont le bas trempe dans le solvant ; à la fin, le solvant est monté dans le papier et a séparé trois taches de couleurs différentes à des hauteurs différentes. Réviz, 5e physique-chimie. -->
+  <path d="M73.5,202 H144.5 V224.5 H73.5 Z" fill="#DCE6FA"/>
+  <rect x="92" y="46" width="34" height="172" fill="#FFFFFF" stroke="#2D2B57" stroke-width="1.5"/>
+  <path d="M92.75,202 H125.25" stroke="#3461C9" stroke-width="1.5"/>
+  <path d="M96,186 H122" stroke="#8A8273" stroke-width="1" stroke-dasharray="3 2"/>
+  <path d="M68,52 q4,0 4,4 V226 H146 V56 q0,-4 4,-4" stroke="#2D2B57" stroke-width="1.75" stroke-linejoin="round" fill="none"/>
+  <path d="M79,46 H139" stroke="#2D2B57" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="109" cy="186" r="4.5" fill="#2B2A33"/>
+  <g font-size="11" font-weight="600" fill="#8A8273"><text x="109" y="22" text-anchor="middle">au départ</text></g>
+  <path d="M205.5,202 H276.5 V224.5 H205.5 Z" fill="#DCE6FA"/>
+  <rect x="224" y="46" width="34" height="172" fill="#FFFFFF" stroke="#2D2B57" stroke-width="1.5"/>
+  <rect x="224.75" y="76" width="32.5" height="126" fill="#EEF3FA"/>
+  <path d="M224.75,202 H257.25" stroke="#3461C9" stroke-width="1.5"/>
+  <path d="M228,186 H254" stroke="#8A8273" stroke-width="1" stroke-dasharray="3 2"/>
+  <path d="M200,52 q4,0 4,4 V226 H278 V56 q0,-4 4,-4" stroke="#2D2B57" stroke-width="1.75" stroke-linejoin="round" fill="none"/>
+  <path d="M211,46 H271" stroke="#2D2B57" stroke-width="3" stroke-linecap="round"/>
+  <ellipse cx="241" cy="164" rx="8" ry="5.5" fill="#E3B23C" opacity="0.9"/>
+  <ellipse cx="241" cy="132" rx="8" ry="5.5" fill="#C8364F" opacity="0.9"/>
+  <ellipse cx="241" cy="96" rx="8" ry="5.5" fill="#3461C9" opacity="0.9"/>
+  <g font-size="11" font-weight="600" fill="#8A8273"><text x="241" y="22" text-anchor="middle">à la fin</text></g>
+  <g class="ill-legende" font-size="11.5" font-weight="600" fill="#2D2B57"><rect class="ill-fond" x="11" y="101" width="43.8" height="15" rx="4" fill="#FFFFFF"/><text x="14" y="112">Papier</text></g>
+  <path d="M56,108 L95,112" stroke="#2D2B57" stroke-width="1" opacity="0.6" fill="none"/><circle cx="95" cy="112" r="1.8" fill="#2D2B57"/>
+  <g class="ill-legende" font-size="11.5" font-weight="600" fill="#2D2B57"><rect class="ill-fond" x="11" y="157" width="37.5" height="28" rx="4" fill="#FFFFFF"/><text x="14" y="168">Encre<tspan x="14" dy="13">noire</tspan></text></g>
+  <path d="M52,172 L104,185" stroke="#2D2B57" stroke-width="1" opacity="0.6" fill="none"/><circle cx="104" cy="185" r="1.8" fill="#2D2B57"/>
+  <g class="ill-legende" font-size="11.5" font-weight="600" fill="#2D2B57"><rect class="ill-fond" x="11" y="211" width="50.1" height="15" rx="4" fill="#FFFFFF"/><text x="14" y="222">Solvant</text></g>
+  <path d="M62,218 L78,212" stroke="#2D2B57" stroke-width="1" opacity="0.6" fill="none"/><circle cx="78" cy="212" r="1.8" fill="#2D2B57"/>
+  <g class="ill-legende" font-size="11.5" font-weight="600" fill="#2D2B57"><rect class="ill-fond" x="283" y="125" width="62.7" height="15" rx="4" fill="#FFFFFF"/><text x="286" y="136">Colorants</text></g>
+  <path d="M283,132 L250,132" stroke="#2D2B57" stroke-width="1" opacity="0.6" fill="none"/><circle cx="250" cy="132" r="1.8" fill="#2D2B57"/>
+</svg>

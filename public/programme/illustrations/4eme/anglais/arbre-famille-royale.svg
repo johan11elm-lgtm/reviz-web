@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 276" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
+<!-- Arbre généalogique simplifié de la famille royale britannique, limité aux personnes citées dans le chapitre : Elizabeth II, son fils Charles III (épouse Camilla), son fils William (épouse Catherine), leurs enfants George, Charlotte et Louis. Trait horizontal : époux ; trait vertical : parent et enfant. Réviz, 4e anglais, le génitif et les possessifs. -->
+<!-- Liens -->
+<g fill="none" stroke="#2D2B57" stroke-width="1.75">
+<path d="M140,46V86"/>
+<path d="M188,102H236"/>
+<path d="M140,118V158"/>
+<path d="M188,174H236"/>
+<path d="M212,174V212M70,212H290M70,212V230M180,212V230M290,212V230"/>
+</g>
+<!-- Cases -->
+<g fill="#FFFFFF" stroke="#2D2B57" stroke-width="1.75">
+<rect x="92" y="14" width="96" height="32" rx="5"/>
+<rect x="92" y="86" width="96" height="32" rx="5"/>
+<rect x="236" y="86" width="96" height="32" rx="5"/>
+<rect x="92" y="158" width="96" height="32" rx="5"/>
+<rect x="236" y="158" width="96" height="32" rx="5"/>
+<rect x="22" y="230" width="96" height="32" rx="5"/>
+<rect x="132" y="230" width="96" height="32" rx="5"/>
+<rect x="242" y="230" width="96" height="32" rx="5"/>
+</g>
+<text x="200" y="34" font-size="11" font-weight="600" fill="#8A8273">1952–2022</text>
+<g font-size="12" font-weight="600" fill="#2D2B57" text-anchor="middle">
+<text x="140" y="34.5">Elizabeth II</text>
+<g class="ill-legende"><rect class="ill-fond" x="100" y="91" width="80" height="22" rx="4" fill="#FFFFFF"/><text x="140" y="106.5">Charles III</text></g>
+<g class="ill-legende"><rect class="ill-fond" x="252" y="91" width="64" height="22" rx="4" fill="#FFFFFF"/><text x="284" y="106.5">Camilla</text></g>
+<g class="ill-legende"><rect class="ill-fond" x="108" y="163" width="64" height="22" rx="4" fill="#FFFFFF"/><text x="140" y="178.5">William</text></g>
+<g class="ill-legende"><rect class="ill-fond" x="246" y="163" width="76" height="22" rx="4" fill="#FFFFFF"/><text x="284" y="178.5">Catherine</text></g>
+<g class="ill-legende"><rect class="ill-fond" x="40" y="235" width="60" height="22" rx="4" fill="#FFFFFF"/><text x="70" y="250.5">George</text></g>
+<g class="ill-legende"><rect class="ill-fond" x="144" y="235" width="72" height="22" rx="4" fill="#FFFFFF"/><text x="180" y="250.5">Charlotte</text></g>
+<g class="ill-legende"><rect class="ill-fond" x="262" y="235" width="56" height="22" rx="4" fill="#FFFFFF"/><text x="290" y="250.5">Louis</text></g>
+</g>
+</svg>

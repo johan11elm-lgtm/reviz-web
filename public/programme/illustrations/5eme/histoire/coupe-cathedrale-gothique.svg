@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 300" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
+<!-- Coupe transversale schématique d'une cathédrale gothique (nef, bas-côtés, voûte sur croisée d'ogives, arcs-boutants, contreforts, vitraux) et encart de la voûte vue d'en dessous. Réviz, 5e histoire, l'essor des villes médiévales. Généré par scripts/illustrations/coupe-cathedrale-gothique.mjs -->
+<rect x="18" y="22" width="64" height="64" fill="#F4EBDD" stroke="#2D2B57" stroke-width="1.75"/>
+<path d="M18,22L82,86M82,22L18,86" stroke="#B34400" stroke-width="2.25"/>
+<circle cx="50" cy="54" r="3" fill="#B34400"/>
+<path d="M171,204V160.8A18,18 0 0 1 180,150A18,18 0 0 1 189,160.8V204zM127,262V234.4A14,14 0 0 1 134,226A14,14 0 0 1 141,234.4V262zM219,262V234.4A14,14 0 0 1 226,226A14,14 0 0 1 233,234.4V262z" fill="#DCE6FA" stroke="#3461C9" stroke-width="1.3"/>
+<path d="M180,150V204M171,180H189M134,232V262M226,232V262" stroke="#3461C9" stroke-width="1"/>
+<path d="M142,114L180,48L218,114" fill="none" stroke="#2D2B57" stroke-width="1.75" stroke-linejoin="round"/>
+<path d="M148,170L106,198M212,170L254,198" fill="none" stroke="#2D2B57" stroke-width="1.75"/>
+<path d="M154,132A52,52 0 0 1 180,87A52,52 0 0 1 206,132" fill="none" stroke="#B34400" stroke-width="2.25"/>
+<path d="M118,208A30,30 0 0 1 133,182A30,30 0 0 1 148,208M212,208A30,30 0 0 1 227,182A30,30 0 0 1 242,208" fill="none" stroke="#2D2B57" stroke-width="1.5"/>
+<path d="M148,276V112h6V276zM206,276V112h6V276zM112,276V196h6V276zM242,276V196h6V276zM90,276V160l9,-16l9,16V276zM252,276V160l9,-16l9,16V276z" fill="#F4EBDD" stroke="#2D2B57" stroke-width="1.5" stroke-linejoin="round"/>
+<path d="M108,164L148,124L148,140Q130,142 108,182zM252,164L212,124L212,140Q230,142 252,182z" fill="#F4EBDD" stroke="#2D2B57" stroke-width="1.5" stroke-linejoin="round"/>
+<path d="M14,276H346" stroke="#2D2B57" stroke-width="1.75"/>
+<g font-size="11.5" font-weight="600" fill="#2D2B57">
+<g class="ill-legende"><rect class="ill-fond" x="242.2" y="29" width="106.8" height="28" rx="4" fill="#FFFFFF"/><text x="346" y="40" text-anchor="end">Voûte sur<tspan x="346" dy="13">croisée d'ogives</tspan></text></g><path d="M262,54L201,107" stroke="#2D2B57" stroke-width="1" opacity="0.6" fill="none"/><circle cx="201" cy="107" r="1.8" fill="#2D2B57" opacity="0.8"/><path d="M250,40L84,54" stroke="#2D2B57" stroke-width="1" opacity="0.6" fill="none"/><circle cx="84" cy="54" r="1.8" fill="#2D2B57" opacity="0.8"/>
+<g class="ill-legende"><rect class="ill-fond" x="273.7" y="121" width="75.3" height="15" rx="4" fill="#FFFFFF"/><text x="346" y="132" text-anchor="end">Arc-boutant</text></g><path d="M276,136L240,154" stroke="#2D2B57" stroke-width="1" opacity="0.6" fill="none"/><circle cx="240" cy="154" r="1.8" fill="#2D2B57" opacity="0.8"/>
+<g class="ill-legende"><rect class="ill-fond" x="11" y="121" width="69" height="15" rx="4" fill="#FFFFFF"/><text x="14" y="132">Contrefort</text></g><path d="M48,136L95,170" stroke="#2D2B57" stroke-width="1" opacity="0.6" fill="none"/><circle cx="95" cy="170" r="1.8" fill="#2D2B57" opacity="0.8"/>
+<g class="ill-legende"><rect class="ill-fond" x="11" y="203" width="50.1" height="15" rx="4" fill="#FFFFFF"/><text x="14" y="214">Vitraux</text></g><path d="M64,210L130,238" stroke="#2D2B57" stroke-width="1" opacity="0.6" fill="none"/><circle cx="130" cy="238" r="1.8" fill="#2D2B57" opacity="0.8"/>
+</g>
+<text x="50" y="100" text-anchor="middle" font-size="11" font-weight="600" fill="#8A8273">vue d'en dessous</text>
+<text x="180" y="262" text-anchor="middle" stroke="#FFFFFF" stroke-width="3" stroke-linejoin="round" paint-order="stroke" font-size="11" font-weight="600" fill="#8A8273">nef</text>
+<text x="227" y="291" text-anchor="middle" font-size="11" font-weight="600" fill="#8A8273">bas-côté</text>
+</svg>

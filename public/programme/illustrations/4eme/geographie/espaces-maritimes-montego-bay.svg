@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 323" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
+<!-- Schéma du découpage des espaces maritimes (convention de Montego Bay, 1982) : terre, trait de côte, eaux territoriales (12 milles), ZEE (200 milles), haute mer, droits de l'État dans chaque zone. Échelle non respectée. Réviz, 4e géographie, les espaces maritimes. Généré par scripts/illustrations/cartes/espaces-maritimes-montego-bay.mjs -->
+<rect x="68" y="70" width="36" height="112" fill="#AFC3F0"/>
+<rect x="104" y="70" width="158" height="112" fill="#DCE6FA"/>
+<rect x="262" y="70" width="86" height="112" fill="#F5F8FD"/>
+<path d="M12,70L74,70L77.9,78L77.3,86L73.9,94L73,102L75.4,110L76.7,118L73.7,126L69.6,134L69.8,142L73.8,150L76.5,158L74.9,166L72.7,174L74.2,182L12,182Z" fill="#F4EBDD"/>
+<path d="M74,70L77.9,78L77.3,86L73.9,94L73,102L75.4,110L76.7,118L73.7,126L69.6,134L69.8,142L73.8,150L76.5,158L74.9,166L72.7,174L74.2,182" fill="none" stroke="#2D2B57" stroke-width="2.25" stroke-linejoin="round"/>
+<path d="M104,70V182M262,70V182" stroke="#2D2B57" stroke-width="1.75" stroke-dasharray="5 3"/>
+<rect x="12" y="70" width="336" height="112" fill="none" stroke="#2D2B57" stroke-width="1" opacity="0.5"/>
+<path d="M74,52H104" stroke="#2D2B57" stroke-width="1.25"/><path d="M74,52L80,49.5L80,54.5Z" fill="#2D2B57"/><path d="M104,52L98,54.5L98,49.5Z" fill="#2D2B57"/><path d="M104,47V70" stroke="#2D2B57" stroke-width="1" stroke-dasharray="2 2" opacity="0.6"/><path d="M74,26H262" stroke="#2D2B57" stroke-width="1.25"/><path d="M74,26L80,23.5L80,28.5Z" fill="#2D2B57"/><path d="M262,26L256,28.5L256,23.5Z" fill="#2D2B57"/><path d="M262,21V70" stroke="#2D2B57" stroke-width="1" stroke-dasharray="2 2" opacity="0.6"/><path d="M74,21V70" stroke="#2D2B57" stroke-width="1" stroke-dasharray="2 2" opacity="0.6"/>
+<g font-size="11" font-weight="600" fill="#8A8273">
+<text x="345" y="196" text-anchor="end">échelle non respectée</text>
+</g>
+<g font-size="11.5" font-weight="600" fill="#2D2B57">
+<text x="40" y="130" text-anchor="middle">État</text>
+<text x="40" y="143" text-anchor="middle">côtier</text>
+<text x="110" y="56">12 milles ≈ 22 km</text>
+<text x="79" y="20">200 milles marins ≈ 370 km</text>
+<g class="ill-legende"><rect class="ill-fond" x="161" y="115" width="44" height="15" rx="4" fill="#DCE6FA"/><text x="183" y="126" text-anchor="middle">ZEE</text></g>
+<g class="ill-legende"><rect class="ill-fond" x="274" y="115" width="62" height="15" rx="4" fill="#F5F8FD"/><text x="305" y="126" text-anchor="middle">Haute mer</text></g>
+<g class="ill-legende"><rect class="ill-fond" x="81" y="78" width="16" height="96" rx="4" fill="#AFC3F0"/><text transform="translate(93,126) rotate(-90)" text-anchor="middle">Eaux territoriales</text></g>
+<rect x="14" y="205" width="26" height="14" fill="#AFC3F0" stroke="#2D2B57" stroke-width="0.75"/><text x="50" y="216">Eaux territoriales</text><g class="ill-legende"><rect class="ill-fond" x="47" y="220" width="247" height="15" rx="4" fill="#FFFFFF"/><text font-size="11" fill="#8A8273" x="50" y="231">l'État est souverain, comme sur sa terre</text></g>
+<rect x="14" y="245" width="26" height="14" fill="#DCE6FA" stroke="#2D2B57" stroke-width="0.75"/><text x="50" y="256">Zone économique exclusive (ZEE)</text><g class="ill-legende"><rect class="ill-fond" x="47" y="260" width="216.9" height="15" rx="4" fill="#FFFFFF"/><text font-size="11" fill="#8A8273" x="50" y="271">l'État exploite seul les ressources</text></g>
+<rect x="14" y="285" width="26" height="14" fill="#F5F8FD" stroke="#2D2B57" stroke-width="0.75"/><text x="50" y="296">Haute mer</text><g class="ill-legende"><rect class="ill-fond" x="47" y="300" width="156.7" height="15" rx="4" fill="#FFFFFF"/><text font-size="11" fill="#8A8273" x="50" y="311">n'appartient à aucun État</text></g>
+</g>
+</svg>

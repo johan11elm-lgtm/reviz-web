@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 280" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
+  <!-- Réciproque de Thalès : AM/AB = AN/AC = 0,6 dans les deux cas ; à gauche, points alignés dans le même ordre et (MN) // (BC) ; à droite, N de l'autre côté de A et (MN) non parallèle à (BC). Réviz, 3e maths, théorème de Thalès. -->
+  <path d="M180,28 V210" stroke="#EDE8E1" stroke-width="1"/>
+  <g stroke-linejoin="round"><path d="M86,100 L57.6,163 L118.9,163 Z" fill="#FBE9DD"/><path d="M268,100 L239.6,163 L235.1,37 Z" fill="#FBE9DD"/></g>
+  <g fill="none" stroke="#2D2B57" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M86,100 L38.7,205 M86,100 L140.8,205"/>
+    <path d="M220.7,205 L275.4,83.6 M322.8,205 L229.6,26.4"/>
+  </g>
+  <g fill="none" stroke="#B34400" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M57.6,163 L118.9,163 M38.7,205 L140.8,205 M239.6,163 L235.1,37 M220.7,205 L322.8,205"/>
+  </g>
+  <path d="M84.8,166.5 L88.3,163 L84.8,159.5" fill="none" stroke="#B34400" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M86.3,208.5 L89.8,205 L86.3,201.5" fill="none" stroke="#B34400" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+  <g fill="#2D2B57"><circle cx="86" cy="100" r="2.2" fill="#2D2B57"/><circle cx="38.7" cy="205" r="2.2" fill="#2D2B57"/><circle cx="140.8" cy="205" r="2.2" fill="#2D2B57"/><circle cx="57.6" cy="163" r="2.2" fill="#2D2B57"/><circle cx="118.9" cy="163" r="2.2" fill="#2D2B57"/><circle cx="268" cy="100" r="2.2" fill="#2D2B57"/><circle cx="220.7" cy="205" r="2.2" fill="#2D2B57"/><circle cx="322.8" cy="205" r="2.2" fill="#2D2B57"/><circle cx="239.6" cy="163" r="2.2" fill="#2D2B57"/><circle cx="235.1" cy="37" r="2.2" fill="#2D2B57"/></g>
+  <g font-size="12.5" font-weight="700" fill="#2D2B57" text-anchor="middle">
+    <text x="86" y="92">A</text><text x="46.6" y="167">M</text><text x="129.9" y="167">N</text><text x="32.7" y="220">B</text><text x="146.8" y="220">C</text>
+    <text x="281" y="104">A</text><text x="228.6" y="167">M</text><text x="247.1" y="41">N</text><text x="214.7" y="220">B</text><text x="328.8" y="220">C</text>
+  </g>
+  <g font-size="11" font-weight="600" fill="#8A8273" text-anchor="middle">
+    <g class="ill-legende">
+      <rect class="ill-fond" x="55.9" y="5" width="68.3" height="15" rx="4" fill="#FFFFFF"/>
+      <text x="90" y="16">Même ordre</text>
+    </g>
+    <g class="ill-legende">
+      <rect class="ill-fond" x="220.8" y="5" width="98.4" height="15" rx="4" fill="#FFFFFF"/>
+      <text x="270" y="16">Ordre différent</text>
+    </g>
+  </g>
+  <g font-size="13" font-weight="600" fill="#2D2B57" text-anchor="middle">
+    <text x="138" y="248">AM</text><text x="138" y="269">AB</text>
+    <text x="164" y="259" font-weight="400">=</text>
+    <text x="190" y="248">AN</text><text x="190" y="269">AC</text>
+    <text x="216" y="259" font-weight="400">=</text>
+    <text x="234" y="259">0,6</text>
+  </g>
+  <path d="M124,254.5 H152 M176,254.5 H204" stroke="#2D2B57" stroke-width="1.2"/>
+</svg>

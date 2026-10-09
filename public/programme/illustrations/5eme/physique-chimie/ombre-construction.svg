@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 268" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
+  <!-- Construction de l’ombre : source ponctuelle, balle opaque de 4 cm à 20 cm, écran à 60 cm ; rayons limites tangents à la balle, cône d’ombre hachuré, ombre propre et ombre portée (12 cm). Variante : balle rapprochée à 15 cm, ombre portée plus grande (16 cm). Réviz, 5e physique-chimie, la lumière. -->
+  <g font-size="11" font-weight="600" fill="#8A8273"><text x="14" y="20">balle à 20 cm de la source</text></g>
+  <path d="M121.1,81.1L122.9,82.9M121.1,76.1L128.5,83.5M121.1,71.1L134.1,84.1M121.1,66.1L139.6,84.6M124.9,64.9L145.2,85.2M129.4,64.4L150.7,85.7M134,64L156.3,86.3M138.5,63.5L161.8,86.8M143,63L167.4,87.4M147.6,62.6L173,88M152.1,62.1L178.5,88.5M156.7,61.7L184.1,89.1M161.2,61.2L189.6,89.6M165.8,60.8L195.2,90.2M170.3,60.3L200.8,90.8M174.8,59.8L206.3,91.3M179.4,59.4L211.9,91.9M183.9,58.9L217.4,92.4M188.5,58.5L223,93M193,58L228.6,93.6M197.6,57.6L234.1,94.1M202.1,57.1L239.7,94.7M206.6,56.6L245.2,95.2M211.2,56.2L250.8,95.8M215.7,55.7L256.3,96.3M220.3,55.3L261.9,96.9M224.8,54.8L267.5,97.5M229.4,54.4L273,98M233.9,53.9L278.6,98.6M238.5,53.5L284.1,99.1M243,53L289.7,99.7M247.5,52.5L295.3,100.3M252.1,52.1L298,98M256.6,51.6L298,93M261.2,51.2L298,88M265.7,50.7L298,83M270.3,50.3L298,78M274.8,49.8L298,73M279.3,49.3L298,68M283.9,48.9L298,63M288.4,48.4L298,58M293,48L298,53M297.5,47.5L298,48" stroke="#2D2B57" stroke-width="0.9" opacity="0.45"/>
+  <path d="M34,74 L298,47.5 M34,74 L298,100.5" stroke="#B34400" stroke-width="2"/>
+  <path d="M82.4,69.1L74.8,73.4L74.1,66.5Z" fill="#B34400"/>
+  <path d="M82.4,78.9L74.1,81.5L74.8,74.6Z" fill="#B34400"/>
+  <circle cx="122" cy="74" r="8.8" fill="#FFFFFF" stroke="#2D2B57" stroke-width="1.75"/>
+  <path d="M121.1,65.2 A8.8,8.8 0 1 1 121.1,82.8 Z" fill="#2D2B57" opacity="0.75"/>
+  <path d="M298,30 V118" stroke="#2D2B57" stroke-width="1.75"/>
+  <path d="M300.5,47.5 V100.5" stroke="#2D2B57" stroke-width="5"/>
+  <circle cx="34" cy="74" r="4" fill="#FBE9DD" stroke="#B34400" stroke-width="2"/>
+  <g font-size="11" font-weight="600" fill="#8A8273"><text x="308" y="78">12 cm</text></g>
+  <g class="ill-legende" font-size="11.5" font-weight="600" fill="#2D2B57"><rect class="ill-fond" x="11" y="93" width="43.8" height="15" rx="4" fill="#FFFFFF"/><text x="14" y="104">Source</text></g>
+  <path d="M26,93 L32,79" stroke="#2D2B57" stroke-width="1" opacity="0.6" fill="none"/><circle cx="32" cy="79" r="1.8" fill="#2D2B57"/>
+  <g class="ill-legende" font-size="11.5" font-weight="600" fill="#2D2B57"><rect class="ill-fond" x="70.1" y="31" width="43.8" height="28" rx="4" fill="#FFFFFF"/><text x="92" y="42" text-anchor="middle">Ombre<tspan x="92" dy="13">propre</tspan></text></g>
+  <path d="M100,68 L126,71" stroke="#2D2B57" stroke-width="1" opacity="0.6" fill="none"/><circle cx="126" cy="71" r="1.8" fill="#2D2B57"/>
+  <g class="ill-legende" font-size="11.5" font-weight="600" fill="#2D2B57"><rect class="ill-fond" x="159.2" y="29" width="81.6" height="15" rx="4" fill="#FFFFFF"/><text x="200" y="40" text-anchor="middle">Cône d’ombre</text></g>
+  <path d="M200,44 L200,68" stroke="#2D2B57" stroke-width="1" opacity="0.6" fill="none"/><circle cx="200" cy="68" r="1.8" fill="#2D2B57"/>
+  <g class="ill-legende" font-size="11.5" font-weight="600" fill="#2D2B57"><rect class="ill-fond" x="213.4" y="117" width="81.6" height="15" rx="4" fill="#FFFFFF"/><text x="292" y="128" text-anchor="end">Ombre portée</text></g>
+  <path d="M292,120 L299,94" stroke="#2D2B57" stroke-width="1" opacity="0.6" fill="none"/><circle cx="299" cy="94" r="1.8" fill="#2D2B57"/>
+  <g class="ill-legende" font-size="11.5" font-weight="600" fill="#2D2B57"><rect class="ill-fond" x="279.3" y="11" width="37.5" height="15" rx="4" fill="#FFFFFF"/><text x="298" y="22" text-anchor="middle">Écran</text></g>
+  <g font-size="11" font-weight="600" fill="#8A8273"><text x="14" y="158">balle rapprochée : à 15 cm</text></g>
+  <path d="M98.8,213.8L104.5,219.5M98.8,208.8L110.3,220.3M98.8,203.8L116,221M101,201L121.8,221.8M105.4,200.4L127.6,222.6M109.8,199.8L133.4,223.4M114.2,199.2L139.1,224.1M118.6,198.6L144.9,224.9M123,198L150.7,225.7M127.4,197.4L156.5,226.5M131.8,196.8L162.3,227.3M136.2,196.2L168,228M140.7,195.7L173.8,228.8M145.1,195.1L179.6,229.6M149.5,194.5L185.4,230.4M153.9,193.9L191.1,231.1M158.3,193.3L196.9,231.9M162.7,192.7L202.7,232.7M167.1,192.1L208.5,233.5M171.5,191.5L214.2,234.2M175.9,190.9L220,235M180.3,190.3L225.8,235.8M184.7,189.7L231.6,236.6M189.1,189.1L237.4,237.4M193.5,188.5L243.1,238.1M197.9,187.9L248.9,238.9M202.4,187.4L254.7,239.7M206.8,186.8L260.5,240.5M211.2,186.2L266.2,241.2M215.6,185.6L272,242M220,185L277.8,242.8M224.4,184.4L283.6,243.6M228.8,183.8L289.4,244.4M233.2,183.2L295.1,245.1M237.6,182.6L298,243M242,182L298,238M246.4,181.4L298,233M250.8,180.8L298,228M255.2,180.2L298,223M259.6,179.6L298,218M264.1,179.1L298,213M268.5,178.5L298,208M272.9,177.9L298,203M277.3,177.3L298,198M281.7,176.7L298,193M286.1,176.1L298,188M290.5,175.5L298,183M294.9,174.9L298,178" stroke="#2D2B57" stroke-width="0.9" opacity="0.45"/>
+  <path d="M34,210 L298,174.5 M34,210 L298,245.5" stroke="#B34400" stroke-width="2"/>
+  <path d="M70.3,205.1L62.8,209.7L61.9,202.7Z" fill="#B34400"/>
+  <path d="M70.3,214.9L61.9,217.3L62.8,210.3Z" fill="#B34400"/>
+  <circle cx="100" cy="210" r="8.8" fill="#FFFFFF" stroke="#2D2B57" stroke-width="1.75"/>
+  <path d="M98.8,201.3 A8.8,8.8 0 1 1 98.8,218.7 Z" fill="#2D2B57" opacity="0.75"/>
+  <path d="M298,166 V254" stroke="#2D2B57" stroke-width="1.75"/>
+  <path d="M300.5,174.5 V245.5" stroke="#2D2B57" stroke-width="5"/>
+  <circle cx="34" cy="210" r="4" fill="#FBE9DD" stroke="#B34400" stroke-width="2"/>
+  <g font-size="11" font-weight="600" fill="#8A8273"><text x="308" y="214">16 cm</text></g>
+</svg>

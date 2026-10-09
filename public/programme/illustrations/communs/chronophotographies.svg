@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 252" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
+  <!-- Trois chronophotographies schématiques, une position toutes les 0,1 s : uniforme (écarts égaux de 2 cm), accéléré (1, 2, 3, 4 cm), ralenti (4, 3, 2, 1 cm), et une règle en cm. Réviz, 5e physique-chimie et 6e sciences, décrire un mouvement. -->
+  <g font-size="11" font-weight="600" fill="#8A8273"><text x="86" y="20">sens du mouvement</text></g>
+  <path d="M204,16 L258,16" stroke="#2D2B57" stroke-width="1.5" fill="none"/><path d="M264,16L257,19L257,13Z" fill="#2D2B57"/>
+  <path d="M92,60 H284" stroke="#2D2B57" stroke-width="1" opacity="0.35"/>
+  <g font-size="11" font-weight="600" fill="#8A8273" text-anchor="middle"><text x="116" y="49">2 cm</text><text x="164" y="49">2 cm</text><text x="212" y="49">2 cm</text><text x="260" y="49">2 cm</text></g>
+  <g fill="#FBE9DD" stroke="#B34400" stroke-width="2.25"><circle cx="92" cy="60" r="5"/><circle cx="140" cy="60" r="5"/><circle cx="188" cy="60" r="5"/><circle cx="236" cy="60" r="5"/><circle cx="284" cy="60" r="5"/></g>
+  <g class="ill-legende" font-size="11.5" font-weight="600" fill="#2D2B57"><rect class="ill-fond" x="11" y="53" width="56.4" height="15" rx="4" fill="#FFFFFF"/><text x="14" y="64">Uniforme</text></g>
+  <path d="M92,114 H332" stroke="#2D2B57" stroke-width="1" opacity="0.35"/>
+  <g font-size="11" font-weight="600" fill="#8A8273" text-anchor="middle"><text x="104" y="103">1 cm</text><text x="140" y="103">2 cm</text><text x="200" y="103">3 cm</text><text x="284" y="103">4 cm</text></g>
+  <g fill="#FBE9DD" stroke="#B34400" stroke-width="2.25"><circle cx="92" cy="114" r="5"/><circle cx="116" cy="114" r="5"/><circle cx="164" cy="114" r="5"/><circle cx="236" cy="114" r="5"/><circle cx="332" cy="114" r="5"/></g>
+  <g class="ill-legende" font-size="11.5" font-weight="600" fill="#2D2B57"><rect class="ill-fond" x="11" y="107" width="56.4" height="15" rx="4" fill="#FFFFFF"/><text x="14" y="118">Accéléré</text></g>
+  <path d="M92,168 H332" stroke="#2D2B57" stroke-width="1" opacity="0.35"/>
+  <g font-size="11" font-weight="600" fill="#8A8273" text-anchor="middle"><text x="140" y="157">4 cm</text><text x="224" y="157">3 cm</text><text x="284" y="157">2 cm</text><text x="320" y="157">1 cm</text></g>
+  <g fill="#FBE9DD" stroke="#B34400" stroke-width="2.25"><circle cx="92" cy="168" r="5"/><circle cx="188" cy="168" r="5"/><circle cx="260" cy="168" r="5"/><circle cx="308" cy="168" r="5"/><circle cx="332" cy="168" r="5"/></g>
+  <g class="ill-legende" font-size="11.5" font-weight="600" fill="#2D2B57"><rect class="ill-fond" x="11" y="161" width="50.1" height="15" rx="4" fill="#FFFFFF"/><text x="14" y="172">Ralenti</text></g>
+  <rect x="84" y="212" width="256" height="26" rx="2" fill="#FFFFFF" stroke="#2D2B57" stroke-width="1.75"/>
+  <path d="M92,212 v9 M104,212 v5 M116,212 v9 M128,212 v5 M140,212 v9 M152,212 v5 M164,212 v9 M176,212 v5 M188,212 v9 M200,212 v5 M212,212 v9 M224,212 v5 M236,212 v9 M248,212 v5 M260,212 v9 M272,212 v5 M284,212 v9 M296,212 v5 M308,212 v9 M320,212 v5 M332,212 v9" stroke="#2D2B57" stroke-width="1.25"/>
+  <g font-size="11" font-weight="600" fill="#8A8273" text-anchor="middle"><text x="92" y="233">0</text><text x="116" y="233">1</text><text x="140" y="233">2</text><text x="164" y="233">3</text><text x="188" y="233">4</text><text x="212" y="233">5</text><text x="236" y="233">6</text><text x="260" y="233">7</text><text x="284" y="233">8</text><text x="308" y="233">9</text><text x="332" y="233">10</text></g>
+  <g font-size="11" font-weight="600" fill="#8A8273"><text x="78" y="233" text-anchor="end">cm</text></g>
+</svg>

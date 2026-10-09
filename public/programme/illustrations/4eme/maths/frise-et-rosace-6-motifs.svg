@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 302" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
+  <!-- Frise : un drapeau répété six fois par translation (flèche). Rosace de 6 motifs identiques autour d'un centre : on passe d'un motif au suivant par une rotation de 360° ÷ 6 = 60°. Réviz, 4e maths, translations et rotations. -->
+  <g class="ill-legende"><rect class="ill-fond" x="36" y="7" width="36.1" height="15" rx="4" fill="#FFFFFF"/><text x="39" y="18" font-size="11" font-weight="600" fill="#8A8273">frise</text></g>
+  <path d="M30,74L322,74" fill="none" stroke="#2D2B57" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" opacity="0.35"/>
+  <path d="M42,74L42,32L69,45L53,52L53,74Z" fill="#FBE9DD"/>
+  <path d="M42,74L42,32L69,45L53,52L53,74Z" fill="none" stroke="#2D2B57" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M90,74L90,32L117,45L101,52L101,74Z" fill="none" stroke="#2D2B57" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M138,74L138,32L165,45L149,52L149,74Z" fill="none" stroke="#2D2B57" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M186,74L186,32L213,45L197,52L197,74Z" fill="none" stroke="#2D2B57" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M234,74L234,32L261,45L245,52L245,74Z" fill="none" stroke="#2D2B57" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M282,74L282,32L309,45L293,52L293,74Z" fill="none" stroke="#2D2B57" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M42,86L85,86" fill="none" stroke="#B34400" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"/><path d="M90,86L82,89.5L82,82.5Z" fill="#B34400"/>
+  <g class="ill-legende"><rect class="ill-fond" x="101" y="79" width="75.3" height="15" rx="4" fill="#FFFFFF"/><text x="104" y="90" font-size="11.5" font-weight="600" fill="#2D2B57">translation</text></g>
+  <g class="ill-legende"><rect class="ill-fond" x="36" y="117" width="42.2" height="15" rx="4" fill="#FFFFFF"/><text x="39" y="128" font-size="11" font-weight="600" fill="#8A8273">rosace</text></g>
+  <path d="M165.6,207.2L195.6,215.6L235.7,202.6L196.4,176.1Z" fill="#FBE9DD"/>
+  <path d="M165.6,207.2L195.6,215.6L235.7,202.6L196.4,176.1Z" fill="none" stroke="#2D2B57" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M158.4,200.3L180.6,178.5L189.4,137.3L146.8,158Z" fill="none" stroke="#2D2B57" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M148.8,203.1L141,172.9L109.7,144.7L106.4,191.9Z" fill="none" stroke="#2D2B57" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M146.4,212.8L116.4,204.4L76.3,217.4L115.6,243.9Z" fill="none" stroke="#2D2B57" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M153.6,219.7L131.4,241.5L122.6,282.7L165.2,262Z" fill="none" stroke="#2D2B57" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M163.2,216.9L171,247.1L202.3,275.3L205.6,228.1Z" fill="none" stroke="#2D2B57" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M156,210L235.7,202.6" fill="none" stroke="#B34400" stroke-width="1" stroke-dasharray="3 3" stroke-linecap="round" stroke-linejoin="round"/><path d="M156,210L189.4,137.3" fill="none" stroke="#B34400" stroke-width="1" stroke-dasharray="3 3" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M244.3,198.6L243.6,194.2L242.7,189.8L241.6,185.5L240.2,181.2L238.6,177L236.9,172.9L234.9,168.8L232.7,164.9L230.4,161.1L227.8,157.4L225.1,153.9L222.1,150.4L219.1,147.2L215.8,144.1L212.4,141.2L208.9,138.4L205.2,135.8L201.4,133.4" fill="none" stroke="#B34400" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"/><path d="M195.9,130.5L204.6,131.2L201.3,137.4Z" fill="#B34400"/>
+  <circle cx="156" cy="210" r="2.2" fill="#2D2B57"/>
+  <g class="ill-legende"><rect class="ill-fond" x="237.4" y="144.6" width="100.5" height="15" rx="4" fill="#FFFFFF"/><text x="240.4" y="155.6" font-size="11.5" font-weight="600" fill="#2D2B57">rotation de 60°</text></g>
+</svg>

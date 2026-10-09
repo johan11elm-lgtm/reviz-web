@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 244" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
+<!-- Latitude et longitude sur le globe : à gauche, la latitude est l'angle mesuré au centre de la Terre entre l'équateur et le lieu (45° N) ; à droite, vue du pôle Nord, la longitude est l'angle entre le méridien de Greenwich et le méridien du lieu (60° E), vers l'est ou l'ouest. Réviz, 6e géographie, se repérer sur la Terre. Généré par scripts/illustrations/graphiques/globe-latitude-longitude.mjs -->
+<circle cx="92" cy="128" r="60" fill="#DCE6FA" stroke="#2D2B57" stroke-width="1.75"/>
+<path d="M32,128A60,13 0 0 1 152,128" fill="none" stroke="#2D2B57" stroke-width="1" stroke-dasharray="3 3" opacity="0.7"/>
+<path d="M32,128A60,13 0 0 0 152,128" fill="none" stroke="#2D2B57" stroke-width="1.75"/>
+<path d="M49.6,85.6A42.4,9.2 0 0 0 134.4,85.6" fill="none" stroke="#2D2B57" stroke-width="1" opacity="0.6"/>
+<path d="M92,62V194" stroke="#2D2B57" stroke-width="1" stroke-dasharray="2 2"/>
+<path d="M92,128L152,128M92,128L134.4,85.6" stroke="#2D2B57" stroke-width="1.5"/>
+<path d="M92,128L116,128L116,128A24,24 0 0 0 109,111Z" fill="#FBE9DD"/>
+<path d="M116,128A24,24 0 0 0 109,111" fill="none" stroke="#B34400" stroke-width="2.25"/>
+<circle cx="92" cy="128" r="2.2" fill="#2D2B57"/>
+<circle cx="134.4" cy="85.6" r="3" fill="#B34400" stroke="#FFFFFF" stroke-width="1"/>
+<circle cx="266" cy="128" r="60" fill="#DCE6FA" stroke="#2D2B57" stroke-width="1.75"/>
+<path d="M266,128L296,180M266,128L326,128M266,128L318,98M266,128L296,76M266,128L266,68M266,128L236,76M266,128L214,98M266,128L206,128M266,128L214,158M266,128L236,180" stroke="#2D2B57" stroke-width="0.75" opacity="0.4"/>
+<path d="M266,128L266,152L266,152A24,24 0 0 0 286.8,140Z" fill="#FBE9DD"/>
+<path d="M266,128L266,188" stroke="#2D2B57" stroke-width="2.25"/>
+<path d="M266,128L318,158" stroke="#2D2B57" stroke-width="1.5"/>
+<path d="M266,152A24,24 0 0 0 286.8,140" fill="none" stroke="#B34400" stroke-width="2.25"/>
+<circle cx="266" cy="128" r="2.2" fill="#2D2B57"/>
+<circle cx="318" cy="158" r="3" fill="#B34400" stroke="#FFFFFF" stroke-width="1"/>
+<path d="M283.9,194.6A69,69 0 0 0 323.2,166.6" fill="none" stroke="#8A8273" stroke-width="1.5"/><path d="M325.8,162.5L324.9,169.2L319.9,165.8Z" fill="#8A8273"/><path d="M248.1,194.6A69,69 0 0 1 208.8,166.6" fill="none" stroke="#8A8273" stroke-width="1.5"/><path d="M206.2,162.5L212.1,165.8L207.1,169.2Z" fill="#8A8273"/>
+<g font-size="11" font-weight="600" fill="#8A8273" text-anchor="middle">
+<text x="92" y="36">vue de côté</text>
+<text x="266" y="36">vue du dessus du pôle Nord</text>
+<text x="341.6" y="158.5">est</text>
+<text x="186.4" y="158.5">ouest</text>
+</g>
+<g font-size="11.5" font-weight="600" fill="#2D2B57">
+<path d="M51,205L70,140" stroke="#2D2B57" stroke-width="1" opacity="0.6" fill="none"/><circle cx="70" cy="140" r="1.8" fill="#2D2B57"/>
+<g class="ill-legende"><rect class="ill-fond" x="33" y="205" width="56.4" height="15" rx="4" fill="#FFFFFF"/><text x="36" y="216">Équateur</text></g>
+<g class="ill-legende"><rect class="ill-fond" x="60.7" y="46" width="62.7" height="15" rx="4" fill="#FFFFFF"/><text x="92" y="57" text-anchor="middle">Pôle Nord</text></g>
+<path d="M157,119L114,119" stroke="#2D2B57" stroke-width="1" opacity="0.6" fill="none"/><circle cx="114" cy="119" r="1.8" fill="#2D2B57"/>
+<g class="ill-legende"><rect class="ill-fond" x="157" y="111" width="37.5" height="15" rx="4" fill="#FFFFFF"/><text x="160" y="122">45° N</text></g>
+<path d="M281,163L276,150" stroke="#2D2B57" stroke-width="1" opacity="0.6" fill="none"/><circle cx="276" cy="150" r="1.8" fill="#2D2B57"/>
+<g class="ill-legende"><rect class="ill-fond" x="275" y="163" width="37.5" height="15" rx="4" fill="#FFFFFF"/><text x="278" y="174">60° E</text></g>
+<path d="M261,210L266,174" stroke="#2D2B57" stroke-width="1" opacity="0.6" fill="none"/><circle cx="266" cy="174" r="1.8" fill="#2D2B57"/>
+<g class="ill-legende"><rect class="ill-fond" x="179.4" y="203" width="81.6" height="28" rx="4" fill="#FFFFFF"/><text x="258" y="214" text-anchor="end">Méridien<tspan x="258" dy="13">de Greenwich</tspan></text></g>
+<g class="ill-legende"><rect class="ill-fond" x="63.8" y="9" width="56.4" height="15" rx="4" fill="#FFFFFF"/><text x="92" y="20" text-anchor="middle">Latitude</text></g>
+<g class="ill-legende"><rect class="ill-fond" x="234.7" y="9" width="62.7" height="15" rx="4" fill="#FFFFFF"/><text x="266" y="20" text-anchor="middle">Longitude</text></g>
+</g>
+</svg>

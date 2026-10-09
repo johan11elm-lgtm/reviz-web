@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 280" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
+  <!-- Caractéristique U = f(I) d’un dipôle ohmique de 100 Ω : les points de mesure (0,01 A ; 1 V), (0,02 A ; 2 V), (0,03 A ; 3 V) sont alignés sur une droite passant par l’origine ; en pointillés, l’allure de la caractéristique d’une lampe, qui n’est pas une droite. Réviz, 3e physique-chimie, loi d’Ohm. -->
+  <path d="M84,246 V36 M116,246 V36 M148,246 V36 M180,246 V36 M212,246 V36 M244,246 V36 M276,246 V36 M308,246 V36 M52,221 H320.8 M52,196 H320.8 M52,171 H320.8 M52,146 H320.8 M52,121 H320.8 M52,96 H320.8 M52,71 H320.8 M52,46 H320.8" stroke="#EAE8F2" stroke-width="1" fill="none"/>
+  <path d="M52,246 H330 M52,246 V24" stroke="#2D2B57" stroke-width="1.75" fill="none"/>
+  <path d="M336,246 L327,241.5 L327,250.5 Z M52,18 L47.5,27 L56.5,27 Z" fill="#2D2B57"/>
+  <path d="M116,246 v4 M180,246 v4 M244,246 v4 M308,246 v4 M52,196 h-4 M52,146 h-4 M52,96 h-4 M52,46 h-4" stroke="#2D2B57" stroke-width="1.5"/>
+  <g font-size="11" font-weight="600" fill="#8A8273" text-anchor="middle"><text x="116" y="263">0,01</text><text x="180" y="263">0,02</text><text x="244" y="263">0,03</text><text x="308" y="263">0,04</text><text x="43" y="261">0</text></g>
+  <g font-size="11" font-weight="600" fill="#8A8273" text-anchor="end"><text x="43" y="200">1</text><text x="43" y="150">2</text><text x="43" y="100">3</text><text x="43" y="50">4</text></g>
+  <text x="62" y="27" font-size="11.5" font-weight="600" fill="#2D2B57" text-anchor="start">U (V)</text>
+  <text x="346" y="237" font-size="11.5" font-weight="600" fill="#2D2B57" text-anchor="end">I (A)</text>
+  <path d="M52,246 C150,242 242,202 296,112" fill="none" stroke="#2D2B57" stroke-width="1.75" stroke-dasharray="5 4"/>
+  <path d="M52,246 L314.4,41" stroke="#B34400" stroke-width="2.25"/>
+  <path d="M112,192 L120,200 M112,200 L120,192 M176,142 L184,150 M176,150 L184,142 M240,92 L248,100 M240,100 L248,92" stroke="#2D2B57" stroke-width="1.75"/>
+  <g stroke="#2D2B57" stroke-width="1" opacity="0.6" fill="none">
+    <path d="M200,55 L277.7,69.5"/>
+    <path d="M304,193 L256.7,164.8"/>
+    <path d="M100,164 L112.5,192.5"/>
+  </g>
+  <g fill="#2D2B57">
+    <circle cx="277.7" cy="69.5" r="1.8"/>
+    <circle cx="256.7" cy="164.8" r="1.8"/>
+    <circle cx="112.5" cy="192.5" r="1.8"/>
+  </g>
+  <g font-size="11.5" font-weight="600" fill="#2D2B57">
+    <g class="ill-legende">
+      <rect class="ill-fond" x="147" y="40" width="94.2" height="15" rx="4" fill="#FFFFFF"/>
+      <text x="150" y="51">Dipôle ohmique</text>
+    </g>
+    <g class="ill-legende" text-anchor="end">
+      <rect class="ill-fond" x="310.5" y="186" width="37.5" height="15" rx="4" fill="#FFFFFF"/>
+      <text x="345" y="197">Lampe</text>
+    </g>
+    <g class="ill-legende">
+      <rect class="ill-fond" x="67" y="136" width="56.4" height="28" rx="4" fill="#FFFFFF"/>
+      <text x="70" y="147">Point de<tspan x="70" dy="13">mesure</tspan></text>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 274" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
+  <!-- À gauche, filtration : entonnoir garni d’un papier filtre contenant un mélange boueux ; le filtrat limpide coule dans un bécher. À droite, ampoule à décanter : huile au-dessus, eau en dessous, robinet en bas. Réviz, 5e physique-chimie, séparer les constituants d’un mélange. -->
+  <path d="M66.4,82 L92,122 L117.6,82 Z" fill="#E9DCC8"/>
+  <g fill="#2D2B57" opacity="0.55"><circle cx="80" cy="88" r="1.4"/><circle cx="88" cy="94" r="1.4"/><circle cx="98" cy="90" r="1.4"/><circle cx="106" cy="86" r="1.4"/><circle cx="92" cy="104" r="1.4"/><circle cx="86" cy="112" r="1.4"/><circle cx="97" cy="116" r="1.4"/><circle cx="76" cy="84" r="1.4"/><circle cx="110" cy="92" r="1.4"/></g>
+  <path d="M52,60 L92,124 L132,60" stroke="#B34400" stroke-width="2.25" fill="none" stroke-linejoin="round"/>
+  <path d="M46,56 L88,128 V148 M138,56 L96,128 V148" stroke="#2D2B57" stroke-width="1.75" stroke-linejoin="round" fill="none"/>
+  <g fill="#3461C9"><ellipse cx="92" cy="157" rx="2" ry="3"/><ellipse cx="92" cy="170" rx="2" ry="3"/></g>
+  <path d="M60,206 H124 V234 H60 Z" fill="#DCE6FA"/>
+  <path d="M54,166 q4,0 4,4 V236 H126 V170 q0,-4 4,-4" stroke="#2D2B57" stroke-width="1.75" stroke-linejoin="round" fill="none"/>
+  <path d="M60,206 H124" stroke="#3461C9" stroke-width="1.5"/>
+  <g class="ill-legende" font-size="11.5" font-weight="600" fill="#2D2B57"><rect class="ill-fond" x="11" y="19" width="62.7" height="15" rx="4" fill="#FFFFFF"/><text x="14" y="30">Entonnoir</text></g>
+  <path d="M40,34 L47.5,58" stroke="#2D2B57" stroke-width="1" opacity="0.6" fill="none"/><circle cx="47.5" cy="58" r="1.8" fill="#2D2B57"/>
+  <g class="ill-legende" font-size="11.5" font-weight="600" fill="#2D2B57"><rect class="ill-fond" x="147" y="81" width="43.8" height="28" rx="4" fill="#FFFFFF"/><text x="150" y="92">Papier<tspan x="150" dy="13">filtre</tspan></text></g>
+  <path d="M147,94 L114,86" stroke="#2D2B57" stroke-width="1" opacity="0.6" fill="none"/><circle cx="114" cy="86" r="1.8" fill="#2D2B57"/>
+  <g class="ill-legende" font-size="11.5" font-weight="600" fill="#2D2B57"><rect class="ill-fond" x="147" y="207" width="50.1" height="15" rx="4" fill="#FFFFFF"/><text x="150" y="218">Filtrat</text></g>
+  <path d="M147,214 L118,218" stroke="#2D2B57" stroke-width="1" opacity="0.6" fill="none"/><circle cx="118" cy="218" r="1.8" fill="#2D2B57"/>
+  <g font-size="11" font-weight="600" fill="#8A8273"><text x="92" y="262" text-anchor="middle">filtration</text></g>
+  <path d="M243.9,66 L241.2,70 L235.2,96 L237.2,104 L302.8,104 L304.8,96 L298.8,70 L296.1,66 Z" fill="#F6E7B8"/>
+  <path d="M237.2,104 L241.2,120 L265.2,150 L267.5,156 L272.6,156 L274.8,150 L298.8,120 L302.8,104 Z" fill="#DCE6FA"/>
+  <path d="M237,104 H303" stroke="#2D2B57" stroke-width="1" opacity="0.6"/>
+  <path d="M264,20 L264,34 L240,70 L234,96 L240,120 L264,150 L267,158 L273,158 L276,150 L300,120 L306,96 L300,70 L276,34 L276,20" stroke="#2D2B57" stroke-width="1.75" stroke-linejoin="round" fill="none"/>
+  <rect x="262" y="10" width="16" height="10" rx="2" fill="#FFFFFF" stroke="#2D2B57" stroke-width="1.75"/>
+  <path d="M267,158 V184 M273,158 V184" stroke="#2D2B57" stroke-width="1.75" stroke-linejoin="round" fill="none"/>
+  <rect x="263" y="164" width="14" height="10" rx="2" fill="#FFFFFF" stroke="#2D2B57" stroke-width="1.75"/><path d="M277,169 H290" stroke="#2D2B57" stroke-width="3" stroke-linecap="round"/>
+  <path d="M242,226 H298 V234 H242 Z" fill="#DCE6FA"/>
+  <path d="M236,196 q4,0 4,4 V236 H300 V200 q0,-4 4,-4" stroke="#2D2B57" stroke-width="1.75" stroke-linejoin="round" fill="none"/>
+  <g class="ill-legende" font-size="11.5" font-weight="600" fill="#2D2B57"><rect class="ill-fond" x="179.5" y="51" width="37.5" height="15" rx="4" fill="#FFFFFF"/><text x="214" y="62" text-anchor="end">Huile</text></g>
+  <path d="M214,58 L248,84" stroke="#2D2B57" stroke-width="1" opacity="0.6" fill="none"/><circle cx="248" cy="84" r="1.8" fill="#2D2B57"/>
+  <g class="ill-legende" font-size="11.5" font-weight="600" fill="#2D2B57"><rect class="ill-fond" x="192.1" y="125" width="24.9" height="15" rx="4" fill="#FFFFFF"/><text x="214" y="136" text-anchor="end">Eau</text></g>
+  <path d="M214,132 L252,128" stroke="#2D2B57" stroke-width="1" opacity="0.6" fill="none"/><circle cx="252" cy="128" r="1.8" fill="#2D2B57"/>
+  <g class="ill-legende" font-size="11.5" font-weight="600" fill="#2D2B57"><rect class="ill-fond" x="298.9" y="139" width="50.1" height="15" rx="4" fill="#FFFFFF"/><text x="346" y="150" text-anchor="end">Robinet</text></g>
+  <path d="M320,154 L286,169" stroke="#2D2B57" stroke-width="1" opacity="0.6" fill="none"/><circle cx="286" cy="169" r="1.8" fill="#2D2B57"/>
+  <g font-size="11" font-weight="600" fill="#8A8273"><text x="270" y="262" text-anchor="middle">ampoule à décanter</text></g>
+</svg>

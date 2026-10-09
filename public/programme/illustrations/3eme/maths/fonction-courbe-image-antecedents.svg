@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 292" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
+  <!-- Courbe de f(x) = x² − 3 pour x de −3 à 3, avec les points du tableau de valeurs ; en pointillés, lecture de l'image de 1 (f(1) = −2) et des deux antécédents de 1 (−2 et 2). Réviz, 3e maths, notion de fonction. -->
+  <!-- Quadrillage -->
+  <g stroke="#EAE8F2" stroke-width="1">
+    <path d="M26,237.2 V12.8"/>
+    <path d="M48,237.2 V12.8"/>
+    <path d="M70,237.2 V12.8"/>
+    <path d="M92,237.2 V12.8"/>
+    <path d="M114,237.2 V12.8"/>
+    <path d="M136,237.2 V12.8"/>
+    <path d="M158,237.2 V12.8"/>
+    <path d="M180,237.2 V12.8"/>
+    <path d="M202,237.2 V12.8"/>
+    <path d="M224,237.2 V12.8"/>
+    <path d="M246,237.2 V12.8"/>
+    <path d="M268,237.2 V12.8"/>
+    <path d="M290,237.2 V12.8"/>
+    <path d="M312,237.2 V12.8"/>
+    <path d="M334,237.2 V12.8"/>
+    <path d="M26,224 H334"/>
+    <path d="M26,202 H334"/>
+    <path d="M26,180 H334"/>
+    <path d="M26,158 H334"/>
+    <path d="M26,136 H334"/>
+    <path d="M26,114 H334"/>
+    <path d="M26,92 H334"/>
+    <path d="M26,70 H334"/>
+    <path d="M26,48 H334"/>
+    <path d="M26,26 H334"/>
+  </g>
+  <!-- Axes -->
+  <g stroke="#2D2B57" stroke-width="1.4" fill="none">
+    <path d="M26,158 H340"/>
+    <path d="M180,237.2 V6.8"/>
+    <path d="M48,155 V161 M92,155 V161 M136,155 V161 M224,155 V161 M268,155 V161 M312,155 V161 M177,224 H183 M177,202 H183 M177,180 H183 M177,136 H183 M177,114 H183 M177,92 H183 M177,70 H183 M177,48 H183 M177,26 H183"/>
+  </g>
+  <path d="M344,158 L337,161.2 L337,154.9 Z" fill="#2D2B57"/>
+  <path d="M180,2.8 L183.2,9.8 L176.9,9.8 Z" fill="#2D2B57"/>
+
+  <!-- Courbe de f : arc de parabole tracé en Bézier quadratique exacte (tangentes en ±3 sécantes en (0 ; −12)) -->
+  <path d="M48,26 Q180,422 312,26" fill="none" stroke="#2D2B57" stroke-width="2"/>
+  <!-- Image de 1 (encre) : verticale depuis x = 1, lecture de l'ordonnée -->
+  <path d="M224,158 V202 H180" stroke="#2D2B57" stroke-width="1.5" stroke-dasharray="4 3" fill="none"/>
+  <path d="M224,183.3 L221.3,177.3 L226.7,177.3 Z" fill="#2D2B57"/>
+  <path d="M193.2,202 L199.2,199.3 L199.2,204.7 Z" fill="#2D2B57"/>
+  <!-- Antécédents de 1 (accent) : horizontale y = 1, lecture des abscisses -->
+  <path d="M92,136 H268 M92,136 V158 M268,136 V158" stroke="#B34400" stroke-width="2" stroke-dasharray="4 3" fill="none"/>
+  <path d="M127.2,136 L133.2,133.3 L133.2,138.7 Z" fill="#B34400"/>
+  <path d="M232.8,136 L226.8,138.7 L226.8,133.3 Z" fill="#B34400"/>
+  <path d="M92,152.5 L89.3,146.5 L94.7,146.5 Z" fill="#B34400"/>
+  <path d="M268,152.5 L265.3,146.5 L270.7,146.5 Z" fill="#B34400"/>
+  <!-- Points du tableau : (−2 ; 1), (−1 ; −2), (0 ; −3), (1 ; −2), (2 ; 1) -->
+  <g fill="#2D2B57"><circle cx="92" cy="136" r="2.8" fill="#2D2B57"/><circle cx="136" cy="202" r="2.8" fill="#2D2B57"/><circle cx="180" cy="224" r="2.8" fill="#2D2B57"/><circle cx="224" cy="202" r="2.8" fill="#2D2B57"/><circle cx="268" cy="136" r="2.8" fill="#2D2B57"/></g>
+  <!-- Graduations -->
+  <g font-size="10.5" fill="#2D2B57" stroke="#FFFFFF" stroke-width="3" stroke-linejoin="round" paint-order="stroke">
+    <text x="48" y="171" text-anchor="middle">−3</text>
+    <text x="92" y="171" text-anchor="middle">−2</text>
+    <text x="136" y="171" text-anchor="middle">−1</text>
+    <text x="224" y="171" text-anchor="middle">1</text>
+    <text x="268" y="171" text-anchor="middle">2</text>
+    <text x="312" y="171" text-anchor="middle">3</text>
+    <text x="175" y="232" text-anchor="end">−3</text>
+    <text x="175" y="205.5" text-anchor="end">−2</text>
+    <text x="175" y="183.5" text-anchor="end">−1</text>
+    <text x="175" y="139.5" text-anchor="end">1</text>
+    <text x="175" y="117.5" text-anchor="end">2</text>
+    <text x="175" y="95.5" text-anchor="end">3</text>
+    <text x="175" y="73.5" text-anchor="end">4</text>
+    <text x="175" y="51.5" text-anchor="end">5</text>
+    <text x="175" y="29.5" text-anchor="end">6</text>
+    <text x="175" y="171" text-anchor="end">0</text>
+  </g>
+  <g font-size="11" font-weight="700" font-style="italic" fill="#2D2B57">
+    <text x="340" y="151" text-anchor="end">x</text>
+    <text x="187" y="8.8">y</text>
+  </g>
+
+  <text x="191" y="39.2" font-size="12" font-weight="700" fill="#2D2B57" stroke="#FFFFFF" stroke-width="3.5" stroke-linejoin="round" paint-order="stroke">f(x) = x² − 3</text>
+  <path d="M16,256 H40" stroke="#2D2B57" stroke-width="1.5" stroke-dasharray="4 3"/>
+  <path d="M16,276 H40" stroke="#B34400" stroke-width="2" stroke-dasharray="4 3"/>
+  <g font-size="11.5" font-weight="600" fill="#2D2B57">
+    <g class="ill-legende">
+      <rect class="ill-fond" x="47" y="249" width="144.6" height="15" rx="4" fill="#FFFFFF"/>
+      <text x="50" y="260">Image de 1 : f(1) = −2</text>
+    </g>
+    <g class="ill-legende">
+      <rect class="ill-fond" x="47" y="269" width="169.8" height="15" rx="4" fill="#FFFFFF"/>
+      <text x="50" y="280">Antécédents de 1 : −2 et 2</text>
+    </g>
+  </g>
+</svg>

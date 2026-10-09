@@ -50,6 +50,8 @@ describe('parseIllustrations', () => {
       id: 'coeur',
       src: '/programme/illustrations/5eme/svt/coeur-vu-de-face.svg',
       alt: 'Le cœur vu de face',
+      type: null,
+      titre: null,
       legende: 'Le cœur droit est à gauche du dessin.',
       credit: null,
       ancre: 'resume.sections[0]',
@@ -71,6 +73,12 @@ describe('parseIllustrations', () => {
     ]
     expect(parseIllustrations(rejets)).toEqual([])
     expect(parseIllustrations(undefined)).toEqual([])
+  })
+
+  it('garde le titre et un type connu, ignore un type inventé', () => {
+    const [a, b] = parseIllustrations([{ ...coeur, type: 'schema', titre: ' Le cœur ' }, { ...coeur, id: 'b', type: 'dessin-animé' }])
+    expect(a).toMatchObject({ type: 'schema', titre: 'Le cœur' })
+    expect(b.type).toBeNull()
   })
 
   it('ne masque les légendes que dans un SVG, et nomme une entrée sans id', () => {

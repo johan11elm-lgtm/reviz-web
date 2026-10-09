@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 158" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="11.5" font-weight="600" fill="#2D2B57">
+  <!-- Schéma en barres : Léo a une barre, Tom trois barres de même longueur ; une accolade indique que les 4 barres font 48 billes, donc 1 barre vaut 48 ÷ 4 = 12. Réviz, 6e maths, pensée algébrique et programmation. -->
+  <path d="M92,30 h62 v30 h-62 Z M92,76 h62 v30 h-62 Z M154,76 h62 v30 h-62 Z M216,76 h62 v30 h-62 Z" fill="#FBE9DD" stroke="#2D2B57" stroke-width="1.75" stroke-linejoin="round"/>
+  <path d="M290,30 C299,30 291.8,68 299,68 C291.8,68 299,106 290,106" fill="none" stroke="#B34400" stroke-width="2" stroke-linejoin="round"/>
+  <g font-size="12.5" font-weight="700" text-anchor="end"><text x="82" y="49.5">Léo</text><text x="82" y="95.5">Tom</text></g>
+  <text x="307" y="73" font-size="12.5" font-weight="700">48</text>
+  <g class="ill-legende"><rect class="ill-fond" x="140.9" y="126.8" width="88.2" height="19.5" rx="4" fill="#FFFFFF"/><text x="185" y="140" text-anchor="middle" font-size="12.5" font-weight="700">1 barre = 12</text></g>
+</svg>

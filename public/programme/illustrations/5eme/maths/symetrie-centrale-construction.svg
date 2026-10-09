@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 220" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="11.5" font-weight="600" fill="#2D2B57">
+  <!-- À gauche, triangle ABC et son symétrique A'B'C' par rapport à O : O est le milieu de [AA'], [BB'] et [CC'], et (A'B') est parallèle à (AB). À droite, sur quadrillage, de M à O on avance de 2 carreaux à droite et 1 en haut, puis encore 2 à droite et 1 en haut depuis O jusqu'à M'. Réviz, 5e maths, symétrie centrale. -->
+  <path d="M215,20 V200" stroke="#EDE8E1" stroke-width="1"/>
+  <path d="M225,56 V158 M242,56 V158 M259,56 V158 M276,56 V158 M293,56 V158 M310,56 V158 M327,56 V158 M344,56 V158 M225,56 H344 M225,73 H344 M225,90 H344 M225,107 H344 M225,124 H344 M225,141 H344 M225,158 H344" stroke="#EAE8F2" stroke-width="1"/>
+  <path d="M192,112 L130,192 L144,138 Z" fill="#FBE9DD"/>
+  <path d="M20,104 L192,112 M82,24 L130,192 M68,78 L144,138" fill="none" stroke="#2D2B57" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+  <path d="M64.4,102.7 L61.6,109.3 M150.4,106.7 L147.6,113.3 M97.2,65 L90.1,64.5 M97.9,67.5 L90.8,67 M121.2,149 L114.1,148.5 M121.9,151.5 L114.8,151 M88,89.5 L81.9,93.3 M90.1,91.1 L83.9,94.9 M92.1,92.7 L86,96.5 M126,119.5 L119.9,123.3 M128.1,121.1 L121.9,124.9 M130.1,122.7 L124,126.5" fill="none" stroke="#2D2B57" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M20,104 L82,24 L68,78 Z" fill="none" stroke="#2D2B57" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M192,112 L130,192 L144,138 Z" fill="none" stroke="#B34400" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M47.2,65.2 L51,64 L50.8,68 M164.8,150.8 L161,152 L161.2,148" fill="none" stroke="#2D2B57" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <g font-size="12.5" font-weight="700" fill="#2D2B57" text-anchor="middle"><text x="11" y="108">A</text><text x="73" y="20">B</text><text x="69" y="95">C</text><text x="203" y="116">A'</text><text x="141" y="200">B'</text><text x="143" y="130">C'</text><text x="94" y="122">O</text></g>
+  <path d="M242,132.5 L310,98.5" fill="none" stroke="#2D2B57" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+  <path d="M242,132.5 H276 V124" fill="none" stroke="#2D2B57" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M276,119 L279,125 L273,125 Z" fill="#2D2B57"/>
+  <path d="M276,115.5 H310 V107" fill="none" stroke="#B34400" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M310,102 L313,108 L307,108 Z" fill="#B34400"/>
+  <g font-size="12.5" font-weight="700" fill="#2D2B57" text-anchor="middle"><text x="233" y="137.5">M</text><text x="274" y="108.5">O</text><text x="311" y="90.5">M'</text></g>
+  <g><circle cx="20" cy="104" r="2.2"/><circle cx="82" cy="24" r="2.2"/><circle cx="68" cy="78" r="2.2"/><circle cx="192" cy="112" r="2.2"/><circle cx="130" cy="192" r="2.2"/><circle cx="144" cy="138" r="2.2"/><circle cx="106" cy="108" r="2.2"/><circle cx="242" cy="132.5" r="2.2"/><circle cx="276" cy="115.5" r="2.2"/><circle cx="310" cy="98.5" r="2.2"/></g>
+</svg>

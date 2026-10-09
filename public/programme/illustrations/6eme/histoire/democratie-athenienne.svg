@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 312" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
+<!-- Schéma des institutions de la démocratie athénienne au Ve siècle av. J.-C. : citoyens, Boulè, Ecclésia et ses décisions, exclus. Réviz, 6e histoire, le monde des cités grecques. Généré par scripts/illustrations/democratie-athenienne.mjs -->
+<rect x="95" y="14" width="170" height="46" rx="8" fill="#FBE9DD" stroke="#B34400" stroke-width="2.25"/>
+<rect x="14" y="118" width="128" height="46" rx="8" fill="#FFFFFF" stroke="#2D2B57" stroke-width="1.75"/>
+<rect x="218" y="118" width="128" height="46" rx="8" fill="#FFFFFF" stroke="#2D2B57" stroke-width="1.75"/>
+<rect x="204" y="214" width="144" height="84" rx="8" fill="#EAE8F2" stroke="#EAE8F2" stroke-width="1.75"/>
+<rect x="14" y="214" width="128" height="84" rx="8" fill="#FFFFFF" stroke="#C9C4B8" stroke-width="1.75" stroke-dasharray="4 3"/>
+<path d="M150,60C143.3,64.3 121,77.2 110,86C99,94.8 88.5,108.2 84.2,112.7" fill="none" stroke="#2D2B57" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/><path d="M80,117L82.4,109.5L87.4,114.4Z" fill="#2D2B57"/>
+<path d="M210,60C216.7,64.3 239,77.2 250,86C261,94.8 271.5,108.2 275.8,112.7" fill="none" stroke="#2D2B57" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/><path d="M280,117L272.6,114.4L277.6,109.5Z" fill="#2D2B57"/>
+<path d="M142,152L211,152" fill="none" stroke="#2D2B57" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/><path d="M217,152L210,155.5L210,148.5Z" fill="#2D2B57"/>
+<path d="M282,164L282,207" fill="none" stroke="#2D2B57" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/><path d="M282,213L278.5,206L285.5,206Z" fill="#2D2B57"/>
+<g font-size="11.5" font-weight="600" fill="#2D2B57">
+<g class="ill-legende"><rect class="ill-fond" x="151.8" y="24" width="56.4" height="15" rx="4" fill="#FBE9DD"/><text x="180" y="35" text-anchor="middle">Citoyens</text></g>
+<text x="180" y="51" text-anchor="middle" font-size="11" font-weight="600" fill="#8A8273">hommes libres et majeurs</text>
+<text x="84" y="86" text-anchor="end" font-size="11" font-weight="600" fill="#8A8273">tirés au sort</text>
+<text x="276" y="86" font-size="11" font-weight="600" fill="#8A8273">se réunissent</text>
+<g class="ill-legende"><rect class="ill-fond" x="59.3" y="128" width="37.5" height="15" rx="4" fill="#FFFFFF"/><text x="78" y="139" text-anchor="middle">Boulè</text></g>
+<text x="78" y="155" text-anchor="middle" font-size="11" font-weight="600" fill="#8A8273">500 citoyens</text>
+<g class="ill-legende"><rect class="ill-fond" x="253.8" y="128" width="56.4" height="15" rx="4" fill="#FFFFFF"/><text x="282" y="139" text-anchor="middle">Ecclésia</text></g>
+<text x="282" y="155" text-anchor="middle" font-size="11" font-weight="600" fill="#8A8273">sur la Pnyx</text>
+<g class="ill-legende"><rect class="ill-fond" x="151.8" y="117" width="56.4" height="28" rx="4" fill="#FFFFFF"/><text x="180" y="128" text-anchor="middle">prépare<tspan x="180" dy="13">les lois</tspan></text></g>
+<text x="290" y="194" font-size="11" font-weight="600" fill="#8A8273">vote</text>
+<g class="ill-legende"><rect class="ill-fond" x="212" y="229" width="56.4" height="15" rx="4" fill="#EAE8F2"/><text x="215" y="240">les lois</text></g>
+<g class="ill-legende"><rect class="ill-fond" x="212" y="249" width="132" height="15" rx="4" fill="#EAE8F2"/><text x="215" y="260">la guerre et la paix</text></g>
+<g class="ill-legende"><rect class="ill-fond" x="212" y="269" width="81.6" height="15" rx="4" fill="#EAE8F2"/><text x="215" y="280">l'ostracisme</text></g>
+<text x="26" y="232" font-size="11" font-weight="600" fill="#8A8273">exclus</text>
+<g class="ill-legende"><rect class="ill-fond" x="23" y="240" width="43.8" height="15" rx="4" fill="#FFFFFF"/><text x="26" y="251">femmes</text></g>
+<g class="ill-legende"><rect class="ill-fond" x="23" y="257" width="56.4" height="15" rx="4" fill="#FFFFFF"/><text x="26" y="268">métèques</text></g>
+<g class="ill-legende"><rect class="ill-fond" x="23" y="274" width="56.4" height="15" rx="4" fill="#FFFFFF"/><text x="26" y="285">esclaves</text></g>
+</g>
+</svg>

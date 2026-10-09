@@ -109,10 +109,15 @@ export function parseLessonJson(raw) {
 // d'IA détournée, leçon modifiée à la main) ne doit jamais être chargée.
 const ILLUSTRATION_SRC = /^\/programme\/illustrations\/[a-z0-9/_-]+\.(svg|webp|png|jpg)$/
 const ILLUSTRATION_ANCRE = /^resume\.(intro|methode|sections\[\d+\])$/
+// Nature de la figure, affichée en surtitre au-dessus de son titre.
+export const ILLUSTRATION_TYPES = {
+  schema: 'Schéma', figure: 'Figure', carte: 'Carte', croquis: 'Croquis',
+  graphique: 'Graphique', oeuvre: 'Œuvre', photo: 'Photo', document: 'Document',
+}
 
 /**
  * Normalise la liste des illustrations d'un chapitre :
- * [{ id, src, alt, legende, credit, ancre, legendesMasquables }].
+ * [{ id, src, alt, type, titre, legende, credit, ancre, legendesMasquables }].
  * Entrée non conforme → ignorée ; champ absent → tableau vide.
  */
 export function parseIllustrations(list) {
@@ -127,6 +132,8 @@ export function parseIllustrations(list) {
       id:      texte(i.id) ?? `illustration-${n}`,
       src:     i.src,
       alt:     texte(i.alt),
+      type:    Object.hasOwn(ILLUSTRATION_TYPES, i.type) ? i.type : null,
+      titre:   texte(i.titre),
       legende: texte(i.legende),
       credit:  texte(i.credit),
       ancre:   i.ancre,
