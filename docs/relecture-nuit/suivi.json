@@ -79,6 +79,11 @@
       "chemin": "3eme/francais/phrase-complexe",
       "le": "2026-10-09",
       "corrections": 0
+    },
+    {
+      "chemin": "3eme/francais/accord-du-participe-passe",
+      "le": "2026-10-09",
+      "corrections": 1
     }
   ]
 }
