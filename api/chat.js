@@ -1,6 +1,7 @@
 import { MODEL, buildChatSystemPrompt, buildChatLessonContext, CHAT_MAX_MESSAGE_LENGTH, CHAT_MAX_HISTORY, CHAT_MAX_OUTPUT_TOKENS } from './_chatPrompt.js'
 import { getDb, getAuthAdmin } from './_firebaseAdmin.js'
 import { consumeChatQuota, refundChatQuota, CHAT_FREE_LIMIT, CHAT_PREMIUM_LIMIT } from './_chatQuota.js'
+import { LANCEMENT_OFFERT, LANCEMENT_CHAT_LIMIT } from './_lancement.js'
 
 // Runtime Node (firebase-admin) + streaming SSE : contrairement à /api/analyse
 // (JSON complet à parser → non-streaming), une réponse de chat est du texte
@@ -67,7 +68,7 @@ export default async function handler(req, res) {
 
   // 3. Quota jour = SOURCE DE VÉRITÉ. Les premium ont aussi un plafond
   //    (généreux) : garde-fou coût, un chat se spamme plus vite qu'un scan.
-  const limit = isPremium ? CHAT_PREMIUM_LIMIT : CHAT_FREE_LIMIT
+  const limit = isPremium ? CHAT_PREMIUM_LIMIT : (LANCEMENT_OFFERT ? LANCEMENT_CHAT_LIMIT : CHAT_FREE_LIMIT)
   const q = await consumeChatQuota({ db, uid, limit })
   if (!q.allowed) return res.status(429).send('CHAT_LIMIT')
 

@@ -122,12 +122,12 @@ function AuthRoutes() {
 // Repli de thème : un thème Réviz+ persisté sans abonnement actif
 // (expiré, déconnexion…) retombe silencieusement sur « Crème ».
 function ThemeGate() {
-  const { isPremium } = useAuth();
+  const { hasRevizPlus } = useAuth();
   const { theme, setTheme } = useTheme();
   useEffect(() => {
-    const resolved = resolveTheme(theme, isPremium);
+    const resolved = resolveTheme(theme, hasRevizPlus);
     if (resolved !== theme) setTheme(resolved);
-  }, [theme, isPremium, setTheme]);
+  }, [theme, hasRevizPlus, setTheme]);
   return null;
 }
 

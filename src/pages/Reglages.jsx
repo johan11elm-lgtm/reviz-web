@@ -33,7 +33,7 @@ export default function Reglages() {
   const navigate = useNavigate();
   const { theme, setTheme, isDark, toggleTheme } = useTheme();
   const {
-    currentUser, isPremium, logout, isGuest,
+    currentUser, isPremium, hasRevizPlus, revizPlusOffert, logout, isGuest,
     getUserLevel, setUserLevel, updateDisplayName,
     updateUserEmail, updateUserPassword, deleteAccount,
   } = useAuth();
@@ -392,7 +392,7 @@ export default function Reglages() {
             {/* Thèmes — les thèmes Réviz+ sont un avantage abonnement */}
             <div className="rg-theme-grid" role="radiogroup" aria-label="Thème de l'application">
               {THEMES.map(t => {
-                const locked = t.premium && !isPremium;
+                const locked = t.premium && !hasRevizPlus;
                 const active = theme === t.id;
                 return (
                   <button
@@ -455,9 +455,13 @@ export default function Reglages() {
               <span className="rg-plan-label">Plan actuel</span>
               {isPremium
                 ? <span className="premium-chip premium-chip--active"><GemIcon /> Réviz+ actif</span>
-                : <span className="rg-plan-free">Gratuit</span>}
+                : revizPlusOffert
+                  ? <span className="premium-chip premium-chip--active"><GemIcon /> Réviz+ offert</span>
+                  : <span className="rg-plan-free">Gratuit</span>}
             </div>
-            {isPremium ? (
+            {revizPlusOffert ? (
+              <p className="rg-hint">Pendant le lancement de Réviz, Réviz+ est offert à tout le monde : thèmes, coach et jusqu'à 30 leçons analysées par semaine. Rien à payer, rien à activer.</p>
+            ) : isPremium ? (
               <button
                 type="button"
                 className="rv-btn-cta rv-btn-cta--ghost rv-btn-cta--full"

@@ -29,6 +29,7 @@ import { readGuest, startGuest, clearGuest, guestUser, isGuestUid, migrateGuestL
 import { setSrsUser } from '../services/srsService';
 import { setChallengeUser } from '../services/challengeService';
 import { setScanLimitUser, setPremiumStatus } from '../services/scanLimitService';
+import { LANCEMENT_OFFERT } from '../../api/_lancement.js';
 import { readSessionCache, writeSessionCache, clearSessionCache, userFromSessionCache } from '../services/sessionCache';
 import { track } from '../services/statsService';
 import { collection, getDocs, deleteDoc, doc, getDoc, setDoc } from 'firebase/firestore';
@@ -408,7 +409,10 @@ export function AuthProvider({ children }) {
     loading,
     consentBlocked,
     needsProfileSetup,
-    isPremium,
+    isPremium, // abonnement payé (Stripe)
+    // Avantages Réviz+ : abonné, ou offert à tous pendant le lancement.
+    hasRevizPlus: isPremium || LANCEMENT_OFFERT,
+    revizPlusOffert: LANCEMENT_OFFERT && !isPremium,
     isGuest: !!currentUser?.isGuest,
     loginAsGuest,
     refreshPremium,
