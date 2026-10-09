@@ -82,22 +82,23 @@ const loadMonitoring = () => {
     });
   }
 
-  // Analytics PostHog — DÉSACTIVÉ par défaut (public mineur, RGPD/CNIL & ePrivacy).
-  // On n'initialise RIEN tant qu'un consentement explicite n'a pas été donné, pour
-  // rester cohérent avec Legal.jsx (« aucun cookie de tracking »).
-  // Réactivation future : une bannière de consentement pose
-  // localStorage 'reviz-analytics-consent' = 'granted', puis ce bloc s'exécute.
-  const analyticsConsent = (() => {
-    try { return localStorage.getItem('reviz-analytics-consent') === 'granted'; }
-    catch { return false; }
-  })();
-  if (analyticsConsent && import.meta.env.VITE_POSTHOG_KEY) {
+  // Analytics PostHog — mesure d'audience SANS cookie (public mineur, RGPD/CNIL).
+  // cookieless_mode 'always' : rien n'est écrit sur l'appareil (ni cookie ni
+  // localStorage), PostHog compte les visiteurs avec un hash serveur tournant
+  // chaque jour. Pas de profil, pas d'identify, pas de replay : cohérent avec
+  // Legal.jsx (« aucun cookie de tracking »). Exige l'option « Cookieless server
+  // hash mode » dans les réglages du projet PostHog, sinon les events sont jetés.
+  const POSTHOG_KEY = import.meta.env.VITE_POSTHOG_KEY?.trim();
+  if (POSTHOG_KEY) {
     import('posthog-js').then(({ default: posthog }) => {
-      posthog.init(import.meta.env.VITE_POSTHOG_KEY, {
+      posthog.init(POSTHOG_KEY, {
         api_host: 'https://eu.i.posthog.com',
+        cookieless_mode: 'always',
         person_profiles: 'identified_only',
-        capture_pageview: true,
+        capture_pageview: 'history_change',
         capture_pageleave: true,
+        disable_session_recording: true,
+        disable_surveys: true,
       });
     });
   }
