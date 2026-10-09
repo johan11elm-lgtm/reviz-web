@@ -254,7 +254,7 @@ function FlashcardsSession() {
               <div className="flashcards-flip-face flashcards-flip-front">
                 <Mascot
                   pose="flashcard"
-                  size={220}
+                  size={150}
                   glow
                   priority
                   className="flashcards-face-mascot"
@@ -272,7 +272,7 @@ function FlashcardsSession() {
               <div className="flashcards-flip-face flashcards-flip-back">
                 <Mascot
                   pose="pointing"
-                  size={220}
+                  size={150}
                   glow
                   animate
                   priority

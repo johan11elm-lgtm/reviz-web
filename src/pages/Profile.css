@@ -44,7 +44,7 @@
 .profile-page .pf-intro-bar { background: var(--bg-card); }
 .profile-page .pf-xp-sub {
   margin: 6px 0 0;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 500;
   color: var(--text-muted);
 }
@@ -86,7 +86,7 @@
 }
 
 .profile-page .pf-stat-label {
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 600;
   text-align: center;
   line-height: 1.25;
@@ -112,7 +112,7 @@
 .profile-page .pf-next-mascot { display: flex; flex-shrink: 0; }
 .profile-page .pf-next-text { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
 .profile-page .pf-next-kicker {
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -195,7 +195,7 @@
 .profile-page .pf-badge-check svg { width: 12px; height: 12px; stroke-width: 2.6; }
 
 .profile-page .pf-badge-label {
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
   line-height: 1.2;
   letter-spacing: -0.1px;
@@ -373,7 +373,7 @@
 
 .profile-page .pf-sheet-label {
   margin: 6px 0 0;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -580,7 +580,7 @@
 
 /* ── Responsive mobile (≤430px) ── */
 @media (max-width: 430px) {
-  .profile-page .pf-content { padding: 6px 14px 96px; gap: 16px; }
+  .profile-page .pf-content { padding: 6px var(--page-gutter) 96px; gap: 16px; }
   .profile-page .pf-stat-value { font-size: 22px; }
 }
 

@@ -1,5 +1,7 @@
 import { NavLink, useLocation } from 'react-router-dom'
 import { useState, useEffect, useRef } from 'react'
+import { Mascot } from './Mascot'
+import { useAuth } from '../context/AuthContext'
 
 export const HomeIcon = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -32,9 +34,14 @@ export const UserIcon = () => (
   </svg>
 )
 
+// Le coach a sa place au centre, porté par sa mascotte (comme dans la
+// barre latérale de l'ordinateur, où il a sa propre entrée).
+const CoachTabIcon = () => <Mascot pose="coach" size={34} alt="" aria-hidden="true" />
+
 const TABS = [
   { to: '/',        Icon: HomeIcon,  label: 'Accueil' },
   { to: '/cours',   Icon: BookIcon,  label: 'Cours' },
+  { to: '/coach',   Icon: CoachTabIcon, label: 'Coach', coach: true },  // compte requis : absent en mode essai
   { to: '/progres', Icon: StatsIcon, label: 'Progrès' },
   { to: '/profil',  Icon: UserIcon,  label: 'Profil' },
 ]
@@ -43,6 +50,9 @@ export function BottomNav() {
   const [hidden, setHidden] = useState(false);
   const lastY = useRef(0);
   const { pathname } = useLocation();
+  // Le coach passe par une API authentifiée : pas d'onglet en mode essai.
+  const isGuest = useAuth()?.isGuest;
+  const tabs = isGuest ? TABS.filter(t => !t.coach) : TABS;
 
   useEffect(() => {
     setHidden(false);
@@ -90,7 +100,7 @@ export function BottomNav() {
 
   return (
     <nav className={`bottom-nav${hidden ? ' bottom-nav--hidden' : ''}`}>
-      {TABS.map(tab => (
+      {tabs.map(tab => (
         <NavLink
           key={tab.to}
           to={tab.to}
@@ -99,7 +109,7 @@ export function BottomNav() {
           // allument l'onglet Cours.
           className={({ isActive }) => {
             const active = isActive || (tab.to === '/cours' && (pathname === '/analyse' || pathname.startsWith('/programme')));
-            return `nav-item${active ? ' active' : ''}`;
+            return `nav-item${tab.coach ? ' nav-item--coach' : ''}${active ? ' active' : ''}`;
           }}
           aria-label={tab.label}
         >

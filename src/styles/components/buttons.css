@@ -100,7 +100,7 @@
   text-overflow: ellipsis;
 }
 .rv-btn-action-sub {
-  font-size: 11px;
+  font-size: 12px;
   color: var(--text-muted);
   white-space: nowrap;
   overflow: hidden;

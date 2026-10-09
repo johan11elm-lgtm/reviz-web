@@ -1,5 +1,5 @@
 import { PageIntro } from '../components/PageIntro';
-import { SearchIcon, FlameIcon, FlashcardsIcon, QuizIcon, BookOpenIcon } from '../components/Icons';
+import { SearchIcon, FlameIcon, FlashcardsIcon, QuizIcon } from '../components/Icons';
 import { useState, useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
@@ -106,9 +106,6 @@ export default function Cours() {
     ? (Date.now() - new Date(lastLesson.scannedAt).getTime()) / 86400000
     : Infinity;
   const showResume = lastLesson && lastLessonAge < 14;
-  const lastSubjectTone = lastLesson
-    ? (SUBJECT_TONE[subjectInfo(lastLesson.metadata.subject).color] ?? 'violet')
-    : 'violet';
   const lastDue = lastLesson ? countDueCards(lastLesson.id, lastLesson.flashcardsCount ?? 0) : 0;
 
   // Hero narratif — le coach parle toujours : cartes dues, sinon félicitations
@@ -207,7 +204,7 @@ export default function Cours() {
               <div className="cours-resume-top">
                 <Mascot
                   pose={subjectMascot(lastLesson.metadata.subject)}
-                  size={140}
+                  size={96}
                   glow
                   priority
                   className="cours-resume-mascot"
@@ -216,20 +213,13 @@ export default function Cours() {
                 />
                 <div className="cours-resume-body">
                   <div className="cours-resume-label">À reprendre</div>
-                  <div className="cours-resume-info">
-                    <span className={`rv-icon-square rv-icon-square--${lastSubjectTone} cours-resume-icon`}>
-                      <BookOpenIcon />
-                    </span>
-                    <div className="cours-resume-text">
-                      <span className="cours-resume-title">{lastLesson.metadata.title}</span>
-                      <span className="cours-resume-meta">
-                        {lastLesson.metadata.subject} · {formatDate(lastLesson.scannedAt)}
-                        {lastDue > 0 && (
-                          <span className="cours-resume-due"> · {lastDue} à revoir</span>
-                        )}
-                      </span>
-                    </div>
-                  </div>
+                  <h2 className="cours-resume-title">{lastLesson.metadata.title}</h2>
+                  <span className="cours-resume-meta">
+                    {lastLesson.metadata.subject} · {formatDate(lastLesson.scannedAt)}
+                  </span>
+                  {lastDue > 0 && (
+                    <span className={`rv-pill rv-pill--orange cours-resume-due`}>{lastDue} carte{lastDue > 1 ? 's' : ''} à revoir</span>
+                  )}
                 </div>
               </div>
               <button

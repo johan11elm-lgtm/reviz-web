@@ -243,7 +243,7 @@
   background: var(--branch-bg);
   color: var(--branch-color);
   font-family: 'Geist', sans-serif;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 800;
   display: inline-flex;
   align-items: center;
@@ -251,7 +251,7 @@
   flex-shrink: 0;
 }
 .mindmap-page .bn-count {
-  font-size: 10.5px;
+  font-size: 12px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.5px;

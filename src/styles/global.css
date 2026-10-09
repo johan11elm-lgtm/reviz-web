@@ -629,7 +629,26 @@ html.native .content, html.native .pg-content, html.native .pf-content {
   line-height: 1;
 }
 .nav-icon svg { width: 22px; height: 22px; }
-.nav-label { font-size: 10px; font-weight: 600; letter-spacing: -0.2px; }
+.nav-label { font-size: 12px; font-weight: 600; letter-spacing: -0.2px; }
+
+/* Onglet Coach : la mascotte dans une pastille encre, qui dépasse un peu
+ * de la capsule. Actif, la pastille passe à l'orange. */
+.nav-item--coach { position: relative; padding-top: 0; }
+.nav-item--coach .nav-icon {
+  width: 46px;
+  height: 46px;
+  margin-top: -20px;
+  border-radius: 50%;
+  background: var(--accent-violet);
+  border: 3px solid var(--bg-card);
+  box-shadow: 0 6px 14px -4px color-mix(in srgb, var(--accent-violet) 60%, transparent);
+  overflow: hidden;
+  transition: background 0.15s, transform 0.15s;
+}
+.nav-item--coach .nav-icon .mascot { margin-top: 6px; }
+.nav-item--coach.active { background: transparent; }
+.nav-item--coach.active .nav-icon { background: var(--accent-orange); transform: translateY(-2px); }
+.nav-item--coach.active .nav-label { color: var(--accent-violet-ink); font-weight: 800; }
 
 /* Toggle switch (réutilisé par la page Réglages) */
 .toggle-wrap { position: relative; width: 44px; height: 24px; }
@@ -651,7 +670,7 @@ html.native .content, html.native .pg-content, html.native .pf-content {
 /* Premium chip (réutilisé par la page Réglages) */
 .premium-chip {
   background: linear-gradient(135deg, #FF6B00, #FF9500);
-  color: white; font-size: 11px; font-weight: 700;
+  color: white; font-size: 12px; font-weight: 700;
   padding: 4px 10px; border-radius: 20px; align-self: flex-start;
 }
 .premium-chip--active {
@@ -668,7 +687,7 @@ html.native .content, html.native .pg-content, html.native .pf-content {
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 600;
   color: var(--text-muted);
   background: var(--bg-subtle);

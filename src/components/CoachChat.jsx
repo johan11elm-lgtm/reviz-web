@@ -34,8 +34,8 @@ const ERROR_MESSAGES = {
 };
 
 /**
- * Carte d'entrée du coach — une ligne : la pose coach + le titre-question
- * suffisent à porter le sens.
+ * Carte d'entrée du coach — une rangée compacte : la pose coach, la
+ * question et ce que le coach sait faire.
  * @param {() => void} onClick  ouvre le sheet CoachChat
  */
 export function CoachEntryCard({ onClick }) {
@@ -45,8 +45,13 @@ export function CoachEntryCard({ onClick }) {
       className="rv-card rv-card--link rv-card--padded coach-entry-card"
       onClick={onClick}
     >
-      <Mascot pose="coach" size={64} alt="" aria-hidden="true" />
-      <span className="coach-entry-title">Un truc pas clair ?</span>
+      <span className="coach-entry-avatar" aria-hidden="true">
+        <Mascot pose="coach" size={46} alt="" />
+      </span>
+      <span className="coach-entry-text">
+        <span className="coach-entry-title">Un truc pas clair ?</span>
+        <span className="coach-entry-sub">Demande au coach, il connaît cette leçon</span>
+      </span>
       <span className="coach-entry-arrow" aria-hidden="true">›</span>
     </button>
   );
@@ -153,6 +158,17 @@ function storageKey(lessonId) { return `reviz-coach-${lessonId}`; }
 function loadConversation(lessonId) {
   try { return JSON.parse(sessionStorage.getItem(storageKey(lessonId)) || '[]'); }
   catch { return []; }
+}
+
+/**
+ * Aperçu d'une conversation pour la liste du coach : dernier message,
+ * nettoyé de sa mise en forme, et qui l'a écrit. null si rien d'échangé.
+ */
+export function coachPreview(lessonId) {
+  const last = loadConversation(lessonId).at(-1);
+  if (!last?.content) return null;
+  const text = last.content.replace(/\*\*/g, '').replace(/^[-•]\s+/gm, '').replace(/\s+/g, ' ').trim();
+  return { text, fromCoach: last.role === 'assistant' };
 }
 
 /**
@@ -273,7 +289,7 @@ export function CoachConversation({ lessonId, prefill, className = '', variant =
           {isPage && empty ? (
             <div className="coach-hero">
               <Mascot pose="coach" size={132} glow animate alt="" aria-hidden="true" className="coach-hero-mascot" />
-              <h2 className="coach-hero-title">Qu'est-ce que tu veux comprendre ?</h2>
+              <h2 className="coach-hero-title">Qu'est-ce que tu veux comprendre&nbsp;?</h2>
               {lessonTitle && <p className="coach-hero-sub">Je connais ta leçon « {lessonTitle} ». Demande-moi ce que tu veux.</p>}
               <div className="coach-hero-cards">
                 {PAGE_SUGGESTIONS.map(s => (

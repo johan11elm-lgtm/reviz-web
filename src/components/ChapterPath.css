@@ -34,6 +34,45 @@
   font-weight: 600;
   opacity: 0.85;
 }
+.chapter-path-unit-head { flex-wrap: wrap; row-gap: 8px; }
+/* Jauge du trimestre : sur toute la largeur du bandeau, sous le titre */
+.chapter-path-unit-bar {
+  flex-basis: 100%;
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.18);
+  overflow: hidden;
+}
+.chapter-path-unit-bar > span {
+  display: block;
+  height: 100%;
+  min-width: 6px;
+  border-radius: inherit;
+  background: var(--accent-green);
+}
+
+/* ── Sentier ──
+ * Tracé SVG derrière les ronds (mesurés en JS) : plein là où l'élève est
+ * passé, en pointillés devant lui. */
+.chapter-path-track { position: relative; }
+.chapter-path-trail {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: visible;
+}
+.chapter-path-trail-seg {
+  fill: none;
+  stroke-width: 7;
+  stroke-linecap: round;
+}
+.chapter-path-trail-seg--todo {
+  stroke: var(--border-hover);
+  stroke-width: 6;
+  stroke-dasharray: 0 14;
+}
+.chapter-path-trail-seg--started { stroke: color-mix(in srgb, var(--accent-orange) 45%, var(--bg-app)); }
+.chapter-path-trail-seg--done { stroke: color-mix(in srgb, var(--accent-green) 55%, var(--bg-app)); }
 
 .chapter-path-steps {
   list-style: none;
@@ -42,7 +81,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 22px;
+  gap: 26px;
   container-type: inline-size; /* la fiche se cale sur la largeur du chemin (100cqw) */
 }
 
@@ -51,6 +90,7 @@
  * élargir l'étape (sinon, décalée, celle-ci fait défiler la page de côté). */
 .path-step {
   position: relative;
+  z-index: 1;
   width: var(--node);
   display: flex;
   flex-direction: column;
@@ -129,6 +169,7 @@
   pointer-events: none;
 }
 .path-step-node { position: relative; }
+.path-step:has(.path-card) { z-index: 3; }
 @keyframes path-breathe {
   0%, 100% { transform: scale(1); opacity: 1; }
   50% { transform: scale(1.08); opacity: 0.5; }
@@ -167,20 +208,77 @@
   50% { transform: translateY(-4px); }
 }
 
-/* Titre du chapitre à côté de l'étape */
+/* Étiquette du chapitre, accrochée à l'étape : petite carte avec le
+ * numéro et l'état au-dessus du titre. Texte toujours aligné à gauche,
+ * de quelque côté qu'elle soit, pour éviter les bords en escalier. */
 .path-step-label {
   position: absolute;
   top: calc(var(--node) / 2);
   transform: translateY(-50%);
-  width: 150px;
-  font-size: 12.5px;
-  font-weight: 700;
-  line-height: 1.3;
-  color: var(--text-secondary);
+  width: max-content;
+  max-width: 190px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 8px 12px 9px;
+  border-radius: 14px;
+  background: var(--bg-card);
+  border: 2px solid var(--border-subtle);
+  box-shadow: 0 3px 0 var(--border);
+  text-align: left;
+  cursor: pointer;
 }
-.path-step-label--right { left: calc(50% + var(--node) / 2 + 14px); }
-.path-step-label--left { right: calc(50% + var(--node) / 2 + 14px); text-align: right; }
-.path-step--current .path-step-label { color: var(--text-primary); }
+.path-step--bientot .path-step-label { cursor: default; opacity: 0.7; }
+.path-step-label--right { left: calc(50% + var(--node) / 2 + 12px); }
+.path-step-label--left { right: calc(50% + var(--node) / 2 + 12px); }
+/* Petite pointe vers le rond */
+.path-step-label::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 9px;
+  height: 9px;
+  background: inherit;
+  border: inherit;
+  border-width: 0 0 2px 2px;
+  border-radius: 0 0 0 2px;
+}
+.path-step-label--right::before { left: -6px; transform: translateY(-50%) rotate(45deg); }
+.path-step-label--left::before { right: -6px; transform: translateY(-50%) rotate(-135deg); }
+.path-step-label-meta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+.path-step-label-status { font-weight: 800; }
+.path-step-label-status::before { content: '·'; margin-right: 6px; color: var(--text-xlight); }
+.path-step--maitrise .path-step-label-status { color: var(--accent-green-ink); }
+.path-step--a-revoir .path-step-label-status,
+.path-step--commence .path-step-label-status { color: var(--accent-orange-ink); }
+.path-step-label-title {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  font-family: 'Geist', sans-serif;
+  font-size: 13.5px;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.15px;
+  color: var(--text-primary);
+  text-wrap: balance;
+}
+/* Étape en cours : l'étiquette prend l'encre de l'étape */
+.path-step--current .path-step-label {
+  border-color: var(--accent-violet);
+  box-shadow: 0 3px 0 color-mix(in srgb, var(--accent-violet) 65%, #000);
+}
+.path-step--current .path-step-label-num { color: var(--accent-violet); }
 
 /* Mascotte de la matière à côté de l'étape en cours (grands écrans) */
 .path-step-mascot {
@@ -217,7 +315,7 @@
 .path-card-top { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
 .path-card-num { font-size: 12px; font-weight: 600; color: var(--text-muted); }
 .path-card-status {
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 800;
   padding: 4px 10px;
   border-radius: 999px;
@@ -275,20 +373,48 @@
   .path-step-cta { animation: none; }
 }
 
-/* ── Téléphone : zigzag resserré, titres masqués sauf l'étape en cours ── */
-@media (max-width: 480px) {
-  .chapter-path { --path-step: 46px; --node: 64px; }
-  .path-step--current { --node: 76px; }
-  .path-step-label { width: 110px; font-size: 11.5px; }
+/* ── Téléphone : le sentier ondule le long d'un rail à gauche, les
+ * étiquettes ont toute la place à droite (en zigzag centré, elles
+ * n'avaient que ~110 px et se coupaient sur trois lignes). ── */
+@media (max-width: 600px) {
+  .chapter-path { --path-step: 14px; --node: 60px; --rail: 46px; }
+  .path-step--current { --node: 72px; }
+  .chapter-path-steps { align-items: flex-start; padding-top: 52px; }
+  .path-step {
+    margin-left: calc(var(--rail) + 14px - var(--node) / 2);
+  }
+  /* Toutes les étiquettes partent de la même colonne (--label-x, depuis le
+   * bord du chemin), quel que soit le décalage ou la taille du rond. */
+  .chapter-path-steps { --label-x: calc(var(--rail) + 14px + 1.6 * var(--path-step) + 48px); }
+  .path-step-label,
+  .path-step-label--left {
+    left: calc(var(--label-x) - var(--rail) - 14px + var(--node) / 2 - var(--offset) * var(--path-step));
+    right: auto;
+    width: calc(100cqw - var(--label-x) - 2px);
+    max-width: none;
+  }
+  .path-step-label--left::before { left: -6px; right: auto; transform: translateY(-50%) rotate(45deg); }
+  .path-step-face svg { width: 26px; height: 26px; }
+  .path-step-face { font-size: 21px; }
 }
 
 /* ── Ordinateur : sentier plus ample, mascotte compagne ── */
 @media (min-width: 1024px) {
   html:not(.native) .chapter-path { --path-step: 84px; --node: 80px; }
   html:not(.native) .path-step--current { --node: 96px; }
-  html:not(.native) .path-step-label { width: 210px; font-size: 13.5px; }
+  html:not(.native) .path-step-label { max-width: 230px; }
+  html:not(.native) .path-step-label-title { font-size: 14.5px; }
   html:not(.native) .path-step-mascot { display: block; }
   /* La mascotte se place du côté opposé au titre */
   html:not(.native) .path-step-mascot--right { right: calc(50% + var(--node) / 2 + 22px); }
   html:not(.native) .path-step-mascot--left { left: calc(50% + var(--node) / 2 + 22px); }
+}
+
+/* Téléphone : la fiche s'étale sur toute la largeur du chemin, depuis son bord gauche */
+@media (max-width: 600px) {
+  .path-card {
+    align-self: flex-start;
+    --card-w: 100cqw;
+    left: calc(-1 * (var(--rail) + 14px - var(--node) / 2 + var(--offset) * var(--path-step)));
+  }
 }
