@@ -538,6 +538,14 @@ export default function Reglages() {
               </span>
               <span className="rg-row-arrow" aria-hidden="true">›</span>
             </Link>
+
+            <Link to="/legal/cgv" className="rg-row">
+              <span className="rv-icon-square rv-icon-square--violet" aria-hidden="true"><GemIcon /></span>
+              <span className="rg-row-text">
+                <span className="rg-row-label">CGV Réviz+</span>
+              </span>
+              <span className="rg-row-arrow" aria-hidden="true">›</span>
+            </Link>
           </div>
         </section>
 

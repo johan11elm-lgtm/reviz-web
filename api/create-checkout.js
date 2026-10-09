@@ -45,6 +45,12 @@ export default async function handler(req, res) {
       success_url: `${BASE_URL}/upgrade-success`,
       cancel_url: `${BASE_URL}/scan`,
       locale: 'fr',
+      // Rappel des CGV au-dessus du bouton de paiement (rétractation 14 jours incluse).
+      custom_text: {
+        submit: {
+          message: `Abonnement mensuel sans engagement, résiliable à tout moment depuis les Réglages. Remboursé sur simple demande dans les 14 jours. En payant, tu acceptes les CGV : ${BASE_URL}/legal/cgv`,
+        },
+      },
     })
 
     return res.status(200).json({ url: session.url })

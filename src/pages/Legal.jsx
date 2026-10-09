@@ -1,5 +1,16 @@
-import { useParams, useNavigate } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import './Legal.css';
+
+// Identité de l'éditeur, à compléter dès l'immatriculation (micro-entreprise).
+// Tant qu'un champ est vide, la ligne correspondante n'est pas affichée.
+const EDITEUR = {
+  nom: 'Johan El Mesmoudi',
+  statut: 'Entrepreneur individuel (EI)',
+  siren: '',      // ex. '123 456 789'
+  adresse: '',    // adresse postale (ou domiciliation)
+  mediateur: '',  // médiateur de la consommation : nom + site
+};
+const CONTACT = 'johan11elm@gmail.com';
 
 const PAGES = {
   'mentions-legales': {
@@ -7,8 +18,10 @@ const PAGES = {
     content: () => (
       <>
         <Section title="Éditeur de l'application">
-          <p>Réviz est édité par Johan El Mesmoudi.</p>
-          <p>Email de contact : <a href="mailto:johan11elm@gmail.com">johan11elm@gmail.com</a></p>
+          <p>Réviz est édité par {EDITEUR.nom}{EDITEUR.siren ? `, ${EDITEUR.statut}` : ''}.</p>
+          {EDITEUR.siren && <p>SIREN : {EDITEUR.siren}<br />TVA non applicable, article 293 B du CGI.</p>}
+          {EDITEUR.adresse && <p>Adresse : {EDITEUR.adresse}</p>}
+          <p>Email de contact : <a href={`mailto:${CONTACT}`}>{CONTACT}</a></p>
         </Section>
 
         <Section title="Hébergement">
@@ -72,6 +85,7 @@ const PAGES = {
             <li><strong>Google Firebase</strong> — authentification et stockage (hébergé en Europe).</li>
             <li><strong>Anthropic</strong> — traitement IA des leçons (le texte envoyé n'est pas conservé après génération).</li>
             <li><strong>Vercel</strong> — hébergement de l'application.</li>
+            <li><strong>Stripe</strong> — paiement de l'abonnement Réviz+. Les coordonnées bancaires sont saisies chez Stripe : Réviz ne les voit ni ne les conserve jamais.</li>
             <li><strong>PostHog</strong> — mesure d'audience anonyme (pages vues, clics), hébergée en Europe, sans cookie ni profil.</li>
           </ul>
         </Section>
@@ -82,6 +96,7 @@ const PAGES = {
             <li>Leçons et révisions : jusqu'à suppression par l'utilisateur (max 100 leçons conservées).</li>
             <li>Parties de Battle : supprimées automatiquement au plus tard 48 heures après leur création. Avec un compte, l'aura totale et le nombre de battles restent sur ton profil jusqu'à la suppression du compte.</li>
             <li>Logs serveur : 30 jours maximum.</li>
+            <li>Factures d'abonnement : 10 ans (obligation comptable).</li>
           </ul>
         </Section>
 
@@ -100,6 +115,50 @@ const PAGES = {
 
         <Section title="Cookies">
           <p>Réviz utilise uniquement des cookies strictement nécessaires au fonctionnement (authentification Firebase). Aucun cookie publicitaire ou de tracking n'est utilisé. La mesure d'audience (PostHog) fonctionne sans cookie et sans rien enregistrer sur ton appareil : elle compte les visites de façon anonyme, sans savoir qui tu es.</p>
+        </Section>
+      </>
+    ),
+  },
+
+  'cgv': {
+    title: 'Conditions Générales de Vente',
+    content: () => (
+      <>
+        <p className="legal-updated">Dernière mise à jour : 10 octobre 2026</p>
+
+        <Section title="Objet">
+          <p>Les présentes CGV encadrent la souscription à <strong>Réviz+</strong>, l'abonnement payant de l'application Réviz, vendu par {EDITEUR.nom}{EDITEUR.siren ? ` (${EDITEUR.statut}, SIREN ${EDITEUR.siren})` : ''}. Elles complètent les <Link to="/legal/cgu">CGU</Link>.</p>
+        </Section>
+
+        <Section title="Ce que comprend Réviz+">
+          <p>Réviz+ lève la limite hebdomadaire de leçons analysées du plan gratuit et débloque les fonctions signalées « Réviz+ » dans l'application. Le plan gratuit reste disponible sans abonnement.</p>
+        </Section>
+
+        <Section title="Qui peut s'abonner">
+          <p>L'abonnement est souscrit et payé par une personne majeure titulaire du moyen de paiement, en général un parent pour le compte de son enfant.</p>
+        </Section>
+
+        <Section title="Prix et paiement">
+          <p><strong>4,99 € TTC par mois</strong>{EDITEUR.siren ? ' (TVA non applicable, article 293 B du CGI)' : ''}. Le paiement se fait par carte bancaire via Stripe, prestataire de paiement sécurisé. Le premier mois est prélevé à la souscription, puis chaque mois à la même date.</p>
+          <p>Toute évolution du prix est annoncée par email au moins 30 jours avant de s'appliquer ; tu peux résilier avant, sans frais.</p>
+        </Section>
+
+        <Section title="Durée et résiliation">
+          <p>L'abonnement est mensuel et se renouvelle automatiquement. Tu peux le résilier à tout moment, sans frais, depuis <strong>Réglages → Gérer mon abonnement</strong>, ou par email. La résiliation prend effet à la fin du mois déjà payé : Réviz+ reste actif jusque-là, puis le compte repasse au plan gratuit sans perdre ses leçons.</p>
+        </Section>
+
+        <Section title="Droit de rétractation">
+          <p>Tu disposes de <strong>14 jours</strong> après la souscription pour changer d'avis, sans avoir à te justifier : écris à <a href={`mailto:${CONTACT}`}>{CONTACT}</a> et le premier mois est remboursé en entier, sous 14 jours, sur la carte utilisée.</p>
+        </Section>
+
+        <Section title="Impayés">
+          <p>Si un prélèvement échoue, Stripe le retente pendant quelques jours et Réviz+ reste actif pendant ce temps. Si le paiement n'aboutit pas, l'abonnement s'arrête et le compte repasse au plan gratuit.</p>
+        </Section>
+
+        <Section title="Réclamations et médiation">
+          <p>Pour toute réclamation : <a href={`mailto:${CONTACT}`}>{CONTACT}</a>. Une réponse est apportée sous 7 jours.</p>
+          {EDITEUR.mediateur && <p>En cas de désaccord persistant, tu peux saisir gratuitement le médiateur de la consommation : {EDITEUR.mediateur}.</p>}
+          <p>Les présentes CGV sont soumises au droit français.</p>
         </Section>
       </>
     ),
@@ -162,7 +221,7 @@ const PAGES = {
         </Section>
 
         <Section title="Contact">
-          <p>Pour toute question : <a href="mailto:johan11elm@gmail.com">johan11elm@gmail.com</a></p>
+          <p>Pour toute question : <a href={`mailto:${CONTACT}`}>{CONTACT}</a></p>
         </Section>
       </>
     ),
