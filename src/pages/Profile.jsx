@@ -35,10 +35,11 @@ const GearIcon = () => (
   </svg>
 );
 
+// Icônes neutres : ce sont des liens, pas des états (docs/design-grammaire.md §5).
 const ACCOUNT_ITEMS = [
-  { id: 'profil',   icon: <UserIcon />, label: 'Modifier le profil', tone: 'violet' },
-  { id: 'reglages', icon: <GearIcon />, label: 'Réglages',           tone: 'orange' },
-  { id: 'avis',     icon: <ChatIcon />, label: 'Donner mon avis',    tone: 'green' },
+  { id: 'profil',   icon: <UserIcon />, label: 'Modifier le profil' },
+  { id: 'reglages', icon: <GearIcon />, label: 'Réglages' },
+  { id: 'avis',     icon: <ChatIcon />, label: 'Donner mon avis' },
 ];
 
 const SHEET_TITLES = {
@@ -380,7 +381,7 @@ export default function Profile() {
               <div className="pf-desk-compte">
                 {ACCOUNT_ITEMS.filter(it => !isGuest || it.id !== 'profil').map(it => (
                   <button key={it.id} type="button" className="pf-desk-compte-row" onClick={() => onAccountClick(it.id)}>
-                    <span className={`rv-icon-square rv-icon-square--${it.tone}`} aria-hidden="true">{it.icon}</span>
+                    <span className="rv-icon-square pf-account-icon" aria-hidden="true">{it.icon}</span>
                     <span className="pf-account-label">{it.label}</span>
                     <span className="pf-account-arrow" aria-hidden="true">›</span>
                   </button>
@@ -512,19 +513,18 @@ export default function Profile() {
         {/* Compte */}
         <section className="pf-section">
           <h2 className="pf-section-title">Compte</h2>
-          <div className="pf-account-list">
+          {/* Des rangées dans une carte blanche (grammaire §4) */}
+          <div className="rv-card rv-rows">
             {ACCOUNT_ITEMS.filter(it => !isGuest || it.id !== 'profil').map(it => (
               <button
                 key={it.id}
                 type="button"
-                className={`pf-account-btn${it.danger ? ' pf-account-btn--danger' : ''}`}
+                className="rv-row"
                 onClick={() => onAccountClick(it.id)}
               >
-                <span className={`rv-icon-square rv-icon-square--${it.tone}`} aria-hidden="true">
-                  {it.icon}
-                </span>
-                <span className="pf-account-label">{it.label}</span>
-                <span className="pf-account-arrow" aria-hidden="true">›</span>
+                <span className="rv-row-avatar" aria-hidden="true">{it.icon}</span>
+                <span className="rv-row-text"><span className="rv-row-title">{it.label}</span></span>
+                <span className="rv-row-arrow" aria-hidden="true">›</span>
               </button>
             ))}
           </div>

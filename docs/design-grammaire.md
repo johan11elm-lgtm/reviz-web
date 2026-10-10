@@ -71,6 +71,8 @@ du contenu, de la mascotte ou de la position.
 - **Encre** (`--accent-violet`) : ce qu'on touche. Bouton principal, onglet actif, lien.
 - **Orange** : ce qui attend l'élève. Cartes à revoir, série, chapitre en cours.
 - **Vert** : ce qui est acquis. Maîtrisé, bonne réponse, objectif atteint.
+- **La flamme de la série** est orange partout (accueil, Progrès, Profil) ;
+  les autres compteurs (leçons, révisions, jours actifs) ont des icônes neutres.
 - **Couleurs des formats** (résumé vert, flashcards encre, carte mentale rose,
   quiz orange) : **uniquement sur l'icône du format**. Le reste de la tuile
   (chevron, compteur) reste neutre.
@@ -100,5 +102,6 @@ acquis. Pas d'étoiles : elles se lisent comme des favoris ou une note.
 | Accueil | fait : une action dans le héros, « Ta dernière leçon » reprend la leçon, Mon programme et Battle en rangées, défis en surtitre |
 | Mes cours | fait : « À reprendre » d'abord, Mon programme en rangée, recherche au-dessus de la liste, une carte par matière avec ses leçons en rangées, « N à revoir » |
 | Progrès | fait : surtitres neutres, « Niveau 1 » en titre (plus de pastille orange), XP restant en clair, chiffres sans tuile teintée ni icônes colorées, record en vert |
-| Profil, formats | à passer à la grammaire |
+| Profil | fait : « Prochain badge » en surtitre neutre, Compte en rangées d'une seule carte, icônes neutres (sauf la flamme de la série, orange partout) ; carte Réviz+ inchangée (seule carte foncée de la page) |
+| Formats (résumé, flashcards, quiz, carte mentale), Réglages, Battle | à passer à la grammaire |
 | Toast « Badge débloqué » | surtitre orange à neutraliser ou à classer en exception (célébration) |
