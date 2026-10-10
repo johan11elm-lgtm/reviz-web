@@ -21,6 +21,10 @@ import { AchievementToast } from '../components/AchievementToast';
 import { BattleMascot } from '../components/BattleMascot';
 import { BattleAnnonce, annonceBattleVue } from '../components/battle/BattleAnnonce';
 import { RevizPlusAnnonce, annonceRevizPlusVue } from '../components/RevizPlusAnnonce';
+import { RevizPlusSheet } from '../components/RevizPlus';
+import { ThemeEssai, essaiThemeVu } from '../components/ThemeEssai';
+import { useTheme } from '../context/ThemeContext';
+import { themeById } from '../utils/themes';
 import { FlameIcon, TargetIcon, BookOpenIcon, CheckIcon, CircleIcon, FlashcardsIcon, QuizIcon } from '../components/Icons';
 import './Home.css';
 
@@ -146,6 +150,11 @@ export default function Home() {
   // Une seule popup à la fois : « Réviz+ offert » d'abord, la Battle à la visite suivante.
   const [annonceRevizPlus, setAnnonceRevizPlus] = useState(() => revizPlusOffert && !isGuest && !!currentUser?.uid && !annonceRevizPlusVue(currentUser.uid));
   const [annonceBattle, setAnnonceBattle] = useState(() => !annonceRevizPlus && !!currentUser?.uid && !annonceBattleVue(currentUser.uid));
+  const [ficheRevizPlus, setFicheRevizPlus] = useState(false);
+  const { theme } = useTheme();
+  // « Essaie un thème Réviz+ » : une fois, tant qu'aucun thème Réviz+ n'est choisi.
+  const [essaiTheme, setEssaiTheme] = useState(() => !essaiThemeVu());
+  const montrerEssai = essaiTheme && hasRevizPlus && !isGuest && !themeById(theme)?.premium;
 
   useEffect(() => {
     const onboardedKey = `reviz-onboarded-${currentUser?.uid}`;
@@ -310,6 +319,7 @@ export default function Home() {
       )}
       {annonceRevizPlus && <RevizPlusAnnonce uid={currentUser.uid} onClose={() => setAnnonceRevizPlus(false)} />}
       {annonceBattle && <BattleAnnonce uid={currentUser.uid} onClose={() => setAnnonceBattle(false)} />}
+      {ficheRevizPlus && <RevizPlusSheet onClose={() => setFicheRevizPlus(false)} />}
 
       <UserHeader
         prenom={prenom}
@@ -317,8 +327,9 @@ export default function Home() {
         xpInLvl={xpInLvl}
         fillPct={fillPct}
         aura={aura}
-        isPremium={hasRevizPlus}
+        isPremium={hasRevizPlus && !isGuest}
         offert={revizPlusOffert}
+        onRevizPlus={isGuest ? undefined : () => setFicheRevizPlus(true)}
         onCoach={isGuest ? undefined : () => navigate(lastLesson ? `/coach?lesson=${lastLesson.id}` : '/coach')}
       />
 
@@ -333,6 +344,7 @@ export default function Home() {
             {hero}
             <div className="home-desk-side">
               {statsCard}
+              {montrerEssai && <ThemeEssai onClose={() => setEssaiTheme(false)} />}
               {challengesCard}
               {battleCard}
             </div>
@@ -382,6 +394,8 @@ export default function Home() {
           {hero}
 
           {statsCard}
+
+          {montrerEssai && <ThemeEssai onClose={() => setEssaiTheme(false)} />}
 
           {/* Réviser sans scan : les chapitres du programme de sa classe. En mode
               essai, le héros pointe déjà dessus. */}

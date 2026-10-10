@@ -199,175 +199,185 @@
 }
 
 /* ─── Thèmes Réviz+ (avantage abonnement) ──────────────────────────
- * Catalogue et verrouillage : src/utils/themes.js + Drawer.
- * « Nuit d'encre » étend le sombre ; les trois autres étendent le clair. */
+ * Catalogue et verrouillage : src/utils/themes.js (+ alias des anciens ids).
+ * Même famille que Crème : fonds désaturés, cartes blanches, halo chaud qui
+ * reste accordé à la mascotte, un accent profond par thème et des cartes
+ * héros en dégradé tonal (jamais néon). « Nuit d'encre » étend le sombre. */
 
-/* 💎 Nuit d'encre — sombre profond violacé, accents néon doux */
+/* Nuit d'encre — marine profond, blancs chauds, or à la place de l'orange */
 :root[data-theme="nuit-encre"] {
-  --bg-body:        #0A0812;
-  --bg-app:         #131020;
-  --bg-card:        #1D1930;
-  --bg-subtle:      #251F3E;
-  --bg-muted:       #251F3E;
-  --bg-hover:       #2B2449;
-  --bg-avatar:      #2B2449;
-  --bg-toggle:      #3E3564;
-  --bg-cta:         #7C5CFF;
-  --bg-tip:         #1D1930;
-  --bg-flip-back:   #2C2450;
+  --bg-body:        #090A13;
+  --bg-app:         #10121D;
+  --bg-card:        #191B29;
+  --bg-subtle:      #202334;
+  --bg-muted:       #202334;
+  --bg-hover:       #252839;
+  --bg-avatar:      #252839;
+  --bg-toggle:      #33374D;
+  --bg-cta:         #4F5FD8;
+  --bg-tip:         #191B29;
+  --bg-flip-back:   #1E2340;
 
-  --border:         #2E2650;
-  --border-subtle:  #262045;
-  --border-hover:   #4A3F82;
-  --border-tip:     #2E2650;
-  --border-formula: #3A2E8C;
-  --skeleton-shimmer: rgba(255, 255, 255, 0.07);
-  --halo-a: rgba(167, 139, 255, 0.16);
-  --halo-b: rgba(255, 168, 102, 0.12);
+  --border:         #262A3C;
+  --border-subtle:  #202334;
+  --border-hover:   #40455F;
+  --border-tip:     #262A3C;
+  --border-formula: #343C70;
+  --skeleton-shimmer: rgba(255, 255, 255, 0.06);
+  --halo-a: rgba(232, 180, 90, 0.13);
+  --halo-b: rgba(120, 132, 230, 0.12);
 
-  --text-primary:   #F2EFFA;
-  --text-secondary: #B5AECC;
-  --text-muted:     #8B83A8;
-  --text-light:     #5E5780;
-  --text-xlight:    #3A3550;
-  --text-avatar:    #B5AECC;
-  --text-tip:       #B5AECC;
-  --text-flip-back: #D9CFFF;
-  --text-formula:   #D9CFFF;
+  --text-primary:   #F4F1EA;
+  --text-secondary: #BCB7AB;
+  --text-muted:     #948F84;
+  --text-light:     #6A665E;
+  --text-xlight:    #3D3C44;
+  --text-avatar:    #BCB7AB;
+  --text-cta:       #FFFFFF;
+  --text-cta-sub:   rgba(255,255,255,0.72);
+  --text-tip:       #BCB7AB;
+  --text-flip-back: #D3D9FF;
+  --text-formula:   #D3D9FF;
 
-  --bg-intro:       #2D1F0A;
-  --border-intro:   #5C3D15;
-  --text-intro:     #FFB870;
-  --bg-formula:     #2C2450;
-  --bg-icon-orange: #3A2410;
-  --bg-icon-indigo: #2C2450;
-  --bg-icon-green:  #102E1F;
-  --bg-danger:      #3A1A22;
+  --bg-intro:       #2A2110;
+  --border-intro:   #57431C;
+  --text-intro:     #F1CB82;
+  --bg-formula:     #1E2340;
+  --bg-icon-orange: #2E2512;
+  --bg-icon-indigo: #1E2340;
+  --bg-icon-green:  #12291E;
+  --bg-danger:      #36191F;
 
-  --accent-violet:        #A78BFF;
-  --accent-violet-hover:  #B9A2FF;
-  --accent-violet-soft:   #2C2450;
-  --accent-violet-ink:    #D9CFFF;
-  --accent-orange:        #FFA866;
-  --accent-orange-hover:  #FFB680;
-  --accent-orange-soft:   #3A2410;
-  --accent-orange-ink:    #FFD5B0;
+  --accent-violet:        #4F5FD8;
+  --accent-violet-hover:  #6170E6;
+  --accent-violet-soft:   #1E2340;
+  --accent-violet-ink:    #C9D0FF;
+  --accent-orange:        #E8B45A;
+  --accent-orange-hover:  #F0C273;
+  --accent-orange-soft:   #2E2512;
+  --accent-orange-ink:    #F6D9A1;
   --accent-green:         #5BD89A;
-  --accent-green-soft:    #102E1F;
+  --accent-green-soft:    #12291E;
   --accent-green-ink:     #A6F2C7;
-  --accent-pink:          #FF8FB3;
-  --accent-pink-soft:     #3A1A26;
+  --accent-pink:          #F08FB0;
+  --accent-pink-soft:     #351A26;
   --accent-pink-ink:      #FFC6D8;
   --accent-red:           #FF7A8E;
-  --accent-red-soft:      #3A1A22;
+  --accent-red-soft:      #36191F;
   --accent-red-ink:       #FFC0CC;
 
-  --shadow-card:   0 4px 18px rgba(124,92,255,0.16), 0 1px 2px rgba(0,0,0,0.4);
-  --shadow-pop:    0 12px 32px rgba(124,92,255,0.28);
-  --shadow-shell:  0 32px 80px rgba(0,0,0,0.5);
-  --grad-hero: linear-gradient(135deg, #8A72FF 0%, #6B4EFF 60%, #5433E6 100%);
+  --shadow-card:   0 4px 16px rgba(0,0,0,0.38), 0 1px 2px rgba(0,0,0,0.3);
+  --shadow-pop:    0 12px 32px rgba(0,0,0,0.5);
+  --shadow-shell:  0 32px 80px rgba(0,0,0,0.55);
+  --grad-hero: linear-gradient(135deg, #2A3058 0%, #1D2140 55%, #131629 100%);
 }
 
-/* 💎 Carnet kraft — papier chaud, encre de stylo, rouge correcteur */
-:root[data-theme="carnet-kraft"] {
-  --bg-body:        #E3CBA2;
-  --bg-app:         #EFDDBE;
-  --bg-card:        #FFFDF5;
-  --bg-subtle:      #F3E7CE;
-  --bg-muted:       #EADBB8;
-  --bg-hover:       #F8F0DD;
-  --bg-avatar:      #EADBB8;
-  --bg-toggle:      #D9C298;
-  --bg-cta:         #2743C7;
-
-  --border:         #DCC9A4;
-  --border-subtle:  #E6D6B4;
-  --border-hover:   #C4AC7E;
-
-  --text-primary:   #2A2014;
-  --text-secondary: #6A583E;
-  --text-muted:     #6E5C42;
-
-  --accent-violet:        #2743C7;
-  --accent-violet-hover:  #1E35A8;
-  --accent-violet-soft:   #E4E9FF;
-  --accent-violet-ink:    #1B2C86;
-  --accent-orange:        #C9401A;
-  --accent-orange-hover:  #B03714;
-  --accent-orange-soft:   #F8DDD2;
-  --accent-orange-ink:    #8F2A0E;
-
-  --halo-a: rgba(201, 64, 26, 0.14);
-  --halo-b: rgba(255, 190, 90, 0.30);
-  --radius-card:   18px;
-  --shadow-card:   0 3px 10px rgba(90,64,20,0.10), 0 1px 2px rgba(90,64,20,0.08);
-  --grad-hero: linear-gradient(135deg, #2743C7 0%, #1E35A8 60%, #16277E 100%);
-}
-
-/* 💎 Violet air — lavande soutenu et cartes flottantes (l'ancien accent violet, en option) */
-:root[data-theme="violet-air"] {
-  --bg-body:        #CFC2FF;
-  --bg-app:         #E4DCFF;
+/* Abricot — pêche douce, accent terre cuite, au plus près de la mascotte */
+:root[data-theme="abricot"] {
+  --bg-body:        #F1D9C4;
+  --bg-app:         #F9EADC;
   --bg-card:        #FFFFFF;
-  --bg-subtle:      #F1ECFF;
-  --bg-muted:       #E9E2FF;
-  --bg-hover:       #F6F2FF;
-  --bg-avatar:      #E9E2FF;
-  --bg-toggle:      #C9BAFF;
-  --bg-cta:         #4C33C4;
+  --bg-subtle:      #FBEFE4;
+  --bg-muted:       #F4E1CF;
+  --bg-hover:       #FDF4EC;
+  --bg-avatar:      #F4E1CF;
+  --bg-toggle:      #EACCB0;
+  --bg-cta:         #8A3B1F;
+  --bg-flip-back:   #F7E3D8;
 
-  --border:         #D6C9FF;
-  --border-subtle:  #E2D8FF;
-  --border-hover:   #B4A1F5;
+  --border:         #F0D8C2;
+  --border-subtle:  #F6E6D6;
+  --border-hover:   #DDB896;
 
-  --text-primary:   #191233;
-  --text-secondary: #4A3F73;
-  --text-muted:     #544880;
+  --text-primary:   #2A1A12;
+  --text-secondary: #72574A;
+  --text-muted:     #745749;
+  --text-flip-back: #6E2C14;
+  --text-formula:   #6E2C14;
+  --bg-formula:     #F7E3D8;
+  --border-formula: #E5C2AF;
 
-  --accent-violet:        #5B3FE8;
-  --accent-violet-hover:  #4C33C4;
-  --accent-violet-soft:   #EDE7FF;
-  --accent-violet-ink:    #2A1C77;
+  --accent-violet:        #8A3B1F;
+  --accent-violet-hover:  #A04727;
+  --accent-violet-soft:   #F7E3D8;
+  --accent-violet-ink:    #6E2C14;
 
-  --halo-a: rgba(91, 63, 232, 0.16);
-  --halo-b: rgba(255, 138, 61, 0.20);
-  --shadow-card:   0 6px 18px rgba(76,51,196,0.14), 0 1px 3px rgba(76,51,196,0.08);
-  --grad-hero: linear-gradient(135deg, #6B4EFF 0%, #4C33C4 60%, #3A26A0 100%);
+  --halo-a: rgba(255, 138, 61, 0.34);
+  --halo-b: rgba(255, 186, 140, 0.38);
+  --shadow-card:   0 4px 14px rgba(120,60,30,0.08), 0 1px 3px rgba(120,60,30,0.05);
+  --grad-hero: linear-gradient(135deg, #A9502F 0%, #8A3B1F 55%, #5E2410 100%);
 }
 
-/* 💎 Menthe focus — calme, frais, concentré */
-:root[data-theme="menthe-focus"] {
-  --bg-body:        #C8E6D4;
-  --bg-app:         #DFF2E7;
+/* Sauge — vert gris apaisé, accent forêt */
+:root[data-theme="sauge"] {
+  --bg-body:        #DAE1D2;
+  --bg-app:         #EAEEE3;
   --bg-card:        #FFFFFF;
-  --bg-subtle:      #EDF7F1;
-  --bg-muted:       #DCEEE4;
-  --bg-hover:       #F3FAF6;
-  --bg-avatar:      #DCEEE4;
-  --bg-toggle:      #B7DCC7;
-  --bg-cta:         #0E7A55;
+  --bg-subtle:      #F1F4EC;
+  --bg-muted:       #E3E9DB;
+  --bg-hover:       #F6F8F2;
+  --bg-avatar:      #E3E9DB;
+  --bg-toggle:      #C8D3BC;
+  --bg-cta:         #2F5D46;
+  --bg-flip-back:   #DFEAE2;
 
-  --border:         #C8E0D2;
-  --border-subtle:  #D8EADE;
-  --border-hover:   #9CC4AE;
+  --border:         #DBE2D1;
+  --border-subtle:  #E6EBDF;
+  --border-hover:   #B8C5A9;
 
-  --text-primary:   #12271C;
-  --text-secondary: #3F6250;
-  --text-muted:     #47695A;
+  --text-primary:   #172019;
+  --text-secondary: #4D5B4E;
+  --text-muted:     #505F51;
+  --text-flip-back: #1F4232;
+  --text-formula:   #1F4232;
+  --bg-formula:     #DFEAE2;
+  --border-formula: #B5CDBD;
 
-  --accent-violet:        #0E7A55;
-  --accent-violet-hover:  #0A6245;
-  --accent-violet-soft:   #D7EFE3;
-  --accent-violet-ink:    #084C36;
-  --accent-orange:        #F26D5B;
-  --accent-orange-hover:  #E05846;
-  --accent-orange-soft:   #FCE0DB;
-  --accent-orange-ink:    #9E3324;
+  --accent-violet:        #2F5D46;
+  --accent-violet-hover:  #3A6E54;
+  --accent-violet-soft:   #DFEAE2;
+  --accent-violet-ink:    #1F4232;
 
-  --halo-a: rgba(14, 122, 85, 0.14);
-  --halo-b: rgba(242, 109, 91, 0.18);
-  --shadow-card:   0 4px 14px rgba(14,90,60,0.10), 0 1px 3px rgba(14,90,60,0.06);
-  --grad-hero: linear-gradient(135deg, #12A06E 0%, #0E7A55 60%, #095C40 100%);
+  --halo-a: rgba(255, 160, 90, 0.24);
+  --halo-b: rgba(140, 170, 120, 0.30);
+  --shadow-card:   0 4px 14px rgba(40,70,50,0.08), 0 1px 3px rgba(40,70,50,0.05);
+  --grad-hero: linear-gradient(135deg, #43775C 0%, #2F5D46 55%, #1E3E2E 100%);
+}
+
+/* Prune — mauve poudré, accent prune profond */
+:root[data-theme="prune"] {
+  --bg-body:        #E3D9E4;
+  --bg-app:         #F1EBF1;
+  --bg-card:        #FFFFFF;
+  --bg-subtle:      #F6F1F6;
+  --bg-muted:       #EBE2EC;
+  --bg-hover:       #F9F6F9;
+  --bg-avatar:      #EBE2EC;
+  --bg-toggle:      #D5C6D7;
+  --bg-cta:         #5B2E5E;
+  --bg-flip-back:   #F0E3F0;
+
+  --border:         #E5DAE6;
+  --border-subtle:  #EEE6EF;
+  --border-hover:   #C8B4CA;
+
+  --text-primary:   #1F1522;
+  --text-secondary: #5D4A61;
+  --text-muted:     #5F4C63;
+  --text-flip-back: #4A244D;
+  --text-formula:   #4A244D;
+  --bg-formula:     #F0E3F0;
+  --border-formula: #D3BCD5;
+
+  --accent-violet:        #5B2E5E;
+  --accent-violet-hover:  #6E3A72;
+  --accent-violet-soft:   #F0E3F0;
+  --accent-violet-ink:    #4A244D;
+
+  --halo-a: rgba(255, 150, 110, 0.26);
+  --halo-b: rgba(180, 120, 175, 0.24);
+  --shadow-card:   0 4px 14px rgba(70,30,70,0.08), 0 1px 3px rgba(70,30,70,0.05);
+  --grad-hero: linear-gradient(135deg, #7A4580 0%, #5B2E5E 55%, #3D1C40 100%);
 }
 
 /* ─── Reset ────────────────────────────────────────────────────── */

@@ -16,6 +16,7 @@ import { computeStreak, computeLevel, computeBadges, XP_PAR_NIVEAU } from '../ut
 import { formatLevelLabel } from '../utils/levels';
 import { useIsDesktop } from '../hooks/useMediaQuery';
 import './Profile.css';
+import { RevizPlusCard } from '../components/RevizPlus';
 
 // Mascotte adaptative au niveau / streak / activité — pattern Progres `getHeroNarrative`.
 function getProfileHero(level, streak, lessonsCount) {
@@ -131,7 +132,7 @@ export default function Profile() {
   const navigate = useNavigate();
   const isDesktop = useIsDesktop();
 
-  const { currentUser, getUserLevel, setUserLevel, updateDisplayName, isGuest } = useAuth();
+  const { currentUser, getUserLevel, setUserLevel, updateDisplayName, isGuest, hasRevizPlus } = useAuth();
   const prenom   = currentUser?.displayName ?? '';
   const userLevel  = getUserLevel();
   const levelLabel = formatLevelLabel(userLevel);
@@ -388,6 +389,8 @@ export default function Profile() {
             </section>
           </div>
 
+          {hasRevizPlus && !isGuest && <RevizPlusCard className="rp-card--wide" />}
+
           <section className="pf-desk-section" aria-labelledby="pf-desk-badges">
             <div className="pf-desk-head">
               <h2 id="pf-desk-badges" className="pf-desk-title">Badges</h2>
@@ -465,6 +468,8 @@ export default function Profile() {
             <span className="pf-stat-label">{allRevisions.length > 1 ? 'révisions' : 'révision'}</span>
           </div>
         </section>
+
+        {hasRevizPlus && !isGuest && <RevizPlusCard />}
 
         {/* Badges */}
         {battle && (

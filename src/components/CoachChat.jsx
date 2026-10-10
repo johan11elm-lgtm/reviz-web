@@ -7,6 +7,7 @@ import { BulbIcon, StarIcon, QuizIcon, PencilIcon } from './Icons';
 import { sendCoachMessage, CHAT_MAX_MESSAGE_LENGTH } from '../services/chatService';
 import { startCheckout } from '../services/billingService';
 import './CoachChat.css';
+import './RevizPlus.css';
 
 // Amorces de conversation — affichées tant que l'élève n'a rien envoyé.
 const SUGGESTIONS = [
@@ -64,10 +65,11 @@ export function CoachHeaderButton({ onClick }) {
       type="button"
       className="rv-bell-btn coach-header-btn"
       onClick={onClick}
-      aria-label="Demander au coach"
+      aria-label={auth?.hasRevizPlus ? 'Demander au coach (Réviz+)' : 'Demander au coach'}
       title="Demander au coach"
     >
       <Mascot pose="coach" size={30} alt="" aria-hidden="true" />
+      {auth?.hasRevizPlus && <span className="rp-coach-tag" aria-hidden="true">+</span>}
     </button>
   );
 }

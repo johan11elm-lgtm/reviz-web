@@ -805,3 +805,8 @@
   html:not(.native) .coach-hero-cards { grid-template-columns: repeat(4, minmax(0, 1fr)); max-width: 760px; }
   html:not(.native) .coach-input-hint-keys { display: inline; }
 }
+
+/* Réglages — vignettes de thème à taille fixe (sinon une colonne large les étire) */
+@media (min-width: 1024px) {
+  html:not(.native) .reglages-page .rg-theme-grid { grid-template-columns: repeat(4, 84px); gap: 14px; }
+}

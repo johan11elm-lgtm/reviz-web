@@ -1,0 +1,382 @@
+/* Réviz+ — badge, sceau fondateur, carte et fiche (RevizPlus.jsx).
+ * Signature commune à tous les thèmes : encre profonde + or. Les couleurs
+ * sont fixes (pas de tokens de thème) pour que Réviz+ se reconnaisse partout. */
+
+:root {
+  --rp-gold-1: #F7DB9C;
+  --rp-gold-2: #E3A94F;
+  --rp-gold-text: #F2CD84;
+  --rp-gold-ink: #2B1D05;
+  --rp-on: #FBF6EC;
+  --rp-on-sub: rgba(251, 246, 236, 0.72);
+  --rp-grad: linear-gradient(155deg, #3C3973 0%, #2A2853 46%, #17162F 100%);
+  --rp-line: rgba(242, 205, 132, 0.24);
+}
+
+/* ── Badge doré ── */
+.rp-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+  height: 22px;
+  padding: 0 8px 0 7px;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: linear-gradient(135deg, var(--rp-gold-1) 0%, var(--rp-gold-2) 100%);
+  box-shadow: 0 2px 8px rgba(227, 169, 79, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.55);
+  color: var(--rp-gold-ink);
+  font: 800 11.5px/1 'Geist', sans-serif;
+  letter-spacing: -0.1px;
+  white-space: nowrap;
+  cursor: default;
+}
+button.rp-badge { cursor: pointer; -webkit-tap-highlight-color: transparent; }
+button.rp-badge:active { transform: scale(0.96); }
+.rp-badge .rv-ico { font-size: 12px; stroke-width: 2.2; }
+
+/* Étiquette « + » dorée sur le bouton du coach (CoachHeaderButton) */
+.coach-header-btn { position: relative; }
+.rp-coach-tag {
+  position: absolute;
+  top: -3px;
+  right: -3px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  border: 2px solid var(--bg-app);
+  background: linear-gradient(135deg, var(--rp-gold-1), var(--rp-gold-2));
+  color: var(--rp-gold-ink);
+  font: 900 11px/1 'Geist', sans-serif;
+}
+
+/* ── Sceau « Membre fondateur » ── */
+.rp-seal {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 26px;
+  padding: 0 11px 0 9px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--rp-line);
+  background: rgba(242, 205, 132, 0.12);
+  color: var(--rp-gold-text);
+  font: 700 12.5px/1 'Geist', sans-serif;
+  white-space: nowrap;
+}
+.rp-seal .rv-ico { font-size: 14px; }
+
+/* ── Carte ── */
+.rp-card {
+  position: relative;
+  flex-shrink: 0; /* jamais écrasée dans une page en colonne flex (profil) */
+  isolation: isolate;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 20px 20px 18px;
+  border-radius: var(--radius-card);
+  background: var(--rp-grad);
+  border: 1px solid var(--rp-line);
+  box-shadow: 0 14px 34px rgba(23, 22, 47, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  color: var(--rp-on);
+}
+/* Lueur dorée en haut à droite, derrière la mascotte */
+.rp-card::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  top: -70px;
+  right: -60px;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(242, 205, 132, 0.30) 0%, rgba(242, 205, 132, 0) 70%);
+}
+.rp-card-mascot {
+  position: absolute;
+  top: 6px;
+  right: 8px;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.rp-card-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-right: 92px; /* place de la mascotte */
+}
+.rp-wordmark {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font: 800 15px/1 'Geist', sans-serif;
+  letter-spacing: -0.3px;
+  color: var(--rp-on);
+}
+.rp-wordmark .rv-ico { font-size: 16px; color: var(--rp-gold-text); }
+.rp-wordmark-plus { color: var(--rp-gold-text); }
+.rp-status {
+  height: 20px;
+  padding: 0 8px;
+  border-radius: var(--radius-pill);
+  background: linear-gradient(135deg, var(--rp-gold-1), var(--rp-gold-2));
+  color: var(--rp-gold-ink);
+  font: 800 10.5px/20px 'Geist', sans-serif;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+}
+
+.rp-card-title {
+  margin: 4px 0 0;
+  padding-right: 92px;
+  font: 800 23px/1.12 'Geist', sans-serif;
+  letter-spacing: -0.8px;
+  color: var(--rp-on);
+}
+.rp-card-sub {
+  margin: -4px 0 0;
+  padding-right: 70px;
+  font-size: 13.5px;
+  line-height: 1.45;
+  color: var(--rp-on-sub);
+}
+
+.rp-fondateur {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+.rp-fondateur-depuis { font-size: 12.5px; color: var(--rp-on-sub); }
+
+/* Jauges */
+.rp-meters {
+  display: flex;
+  flex-direction: column;
+  margin-top: 2px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+}
+.rp-meter {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  column-gap: 10px;
+  row-gap: 8px;
+  padding: 11px 14px;
+}
+.rp-meter + .rp-meter { border-top: 1px solid rgba(255, 255, 255, 0.07); }
+.rp-meter-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 10px;
+  background: rgba(242, 205, 132, 0.14);
+  color: var(--rp-gold-text);
+  font-size: 16px;
+}
+.rp-meter-text { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.rp-meter-label { font-size: 13.5px; font-weight: 700; color: var(--rp-on); }
+.rp-meter-detail {
+  font-size: 12px;
+  color: var(--rp-on-sub);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.rp-meter-value { font-size: 13px; font-weight: 700; color: var(--rp-gold-text); white-space: nowrap; }
+.rp-meter-bar {
+  grid-column: 2 / 4;
+  height: 4px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.10);
+  overflow: hidden;
+}
+.rp-meter-fill {
+  display: block;
+  height: 100%;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--rp-gold-2), var(--rp-gold-1));
+}
+
+.rp-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 46px;
+  margin-top: 2px;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: linear-gradient(135deg, var(--rp-gold-1) 0%, var(--rp-gold-2) 100%);
+  box-shadow: 0 6px 16px rgba(227, 169, 79, 0.30), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  color: var(--rp-gold-ink);
+  font: 800 15px/1 'Geist', sans-serif;
+  cursor: pointer;
+}
+.rp-cta:active { transform: scale(0.98); }
+.rp-cta:focus-visible, button.rp-badge:focus-visible { outline: 2px solid var(--rp-gold-1); outline-offset: 2px; }
+
+/* ── Fiche « Ton Réviz+ » ── */
+.rp-sheet-fond {
+  position: fixed;
+  inset: 0;
+  z-index: 300; /* au-dessus de la barre d'onglets */
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  background: rgba(10, 9, 20, 0.55);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  animation: rp-fade 0.2s ease both;
+}
+.rp-sheet {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  max-height: calc(100dvh - 40px);
+  overflow-y: auto;
+  padding: 52px 14px calc(14px + env(safe-area-inset-bottom));
+  border-radius: 28px 28px 0 0;
+  background: var(--bg-app);
+  box-shadow: var(--shadow-pop);
+  animation: rp-up 0.28s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.rp-sheet::before {
+  /* poignée */
+  content: '';
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  width: 40px;
+  height: 4px;
+  margin-left: -20px;
+  border-radius: 2px;
+  background: var(--border-hover);
+}
+.rp-sheet-close {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  z-index: 2;
+  width: 32px;
+  height: 32px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--bg-subtle);
+  color: var(--text-muted);
+  font-size: 13px;
+  cursor: pointer;
+}
+
+@media (min-width: 1024px) {
+  .rp-sheet-fond { align-items: center; }
+  .rp-sheet { border-radius: 30px; padding: 52px 14px 14px; }
+  .rp-sheet::before { display: none; }
+}
+
+@keyframes rp-fade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes rp-up { from { transform: translateY(24px); opacity: 0; } to { transform: none; opacity: 1; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .rp-sheet-fond, .rp-sheet { animation: none; }
+}
+
+/* ── Vignette de thème (sélecteur des Réglages, carte d'essai) ── */
+.rp-vignette {
+  position: relative;
+  display: block;
+  width: 34px;
+  height: 46px;
+  border-radius: 9px;
+  overflow: hidden;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08), 0 2px 6px rgba(0, 0, 0, 0.10);
+}
+.rp-vignette-hero {
+  position: absolute;
+  left: 4px; right: 4px; top: 5px;
+  height: 15px;
+  border-radius: 4px;
+}
+.rp-vignette-card {
+  position: absolute;
+  left: 4px; right: 4px; top: 23px;
+  height: 11px;
+  border-radius: 3px;
+}
+.rp-vignette-dot {
+  position: absolute;
+  left: 3px; top: 3px;
+  width: 5px; height: 5px;
+  border-radius: 50%;
+}
+
+/* ── Carte « Essaie un thème Réviz+ » (accueil) ── */
+.rp-essai { position: relative; padding: 0; }
+.rp-essai-lien {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 44px 14px 16px;
+  color: inherit;
+  text-decoration: none;
+}
+.rp-essai-vignettes { display: flex; flex-shrink: 0; }
+.rp-essai-vignettes .rp-vignette { width: 26px; height: 36px; border-radius: 7px; border: 2px solid var(--bg-card); box-sizing: content-box; }
+.rp-essai-vignettes .rp-vignette + .rp-vignette { margin-left: -10px; }
+.rp-essai-vignettes .rp-vignette-hero { left: 3px; right: 3px; top: 4px; height: 12px; }
+.rp-essai-vignettes .rp-vignette-card { left: 3px; right: 3px; top: 19px; height: 9px; }
+.rp-essai-texte { display: flex; flex-direction: column; gap: 3px; min-width: 0; flex: 1; }
+.rp-essai-titre { font: 800 15px/1.2 'Geist', sans-serif; letter-spacing: -0.3px; color: var(--text-primary); }
+.rp-essai-sous { font-size: 12.5px; color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.rp-essai-fleche { color: var(--text-light); font-size: 20px; }
+.rp-essai-fermer {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  width: 28px;
+  height: 28px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--bg-subtle);
+  color: var(--text-muted);
+  font-size: 11px;
+  cursor: pointer;
+}
+.rp-essai-fleche { display: none; }
+
+/* Carte large (profil sur ordinateur) : texte à gauche, jauges en ligne */
+@media (min-width: 1024px) {
+  html:not(.native) .rp-card--wide {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr);
+    grid-template-areas:
+      'head   meters'
+      'title  meters'
+      'sub    meters'
+      'fond   meters'
+      'cta    meters';
+    grid-auto-rows: max-content;
+    column-gap: 28px;
+    row-gap: 10px;
+    padding: 26px 28px;
+  }
+  html:not(.native) .rp-card--wide .rp-card-head { grid-area: head; }
+  html:not(.native) .rp-card--wide .rp-card-title { grid-area: title; padding-right: 0; }
+  html:not(.native) .rp-card--wide .rp-card-sub { grid-area: sub; padding-right: 0; }
+  html:not(.native) .rp-card--wide .rp-fondateur { grid-area: fond; }
+  html:not(.native) .rp-card--wide .rp-cta { grid-area: cta; justify-self: start; padding: 0 22px; }
+  html:not(.native) .rp-card--wide .rp-meters { grid-area: meters; align-self: center; margin: 0 96px 0 0; }
+  html:not(.native) .rp-card--wide .rp-card-mascot { top: auto; bottom: 10px; right: 14px; }
+  html:not(.native) .rp-card--wide .rp-card-head { padding-right: 0; }
+}

@@ -7,14 +7,18 @@
 // par resolveTheme() — un abonnement expiré retombe sur « Crème ».
 // -------------------------------------------------------
 
+// preview : couleurs de la vignette du sélecteur (fond, carte, héros, accent).
 export const THEMES = [
-  { id: 'light',        label: 'Crème',        premium: false, swatch: ['#F8EFE7', '#2D2B57'] },
-  { id: 'dark',         label: 'Sombre',       premium: false, swatch: ['#14121C', '#3B6FE8'] },
-  { id: 'nuit-encre',   label: "Nuit d'encre", premium: true,  swatch: ['#131020', '#A78BFF'] },
-  { id: 'carnet-kraft', label: 'Carnet kraft', premium: true,  swatch: ['#EFDDBE', '#2743C7'] },
-  { id: 'violet-air',   label: 'Violet air',   premium: true,  swatch: ['#E4DCFF', '#4C33C4'] },
-  { id: 'menthe-focus', label: 'Menthe',       premium: true,  swatch: ['#DFF2E7', '#0E7A55'] },
+  { id: 'light',      label: 'Crème',        premium: false, preview: { app: '#F8EFE7', card: '#FFFFFF', hero: ['#3F3C78', '#1E1C3F'], accent: '#FF8A3D' } },
+  { id: 'dark',       label: 'Sombre',       premium: false, preview: { app: '#14121C', card: '#1E1B2A', hero: ['#4A7CF6', '#2A54C4'], accent: '#FFA866' } },
+  { id: 'nuit-encre', label: "Nuit d'encre", premium: true,  preview: { app: '#10121D', card: '#191B29', hero: ['#2A3058', '#131629'], accent: '#E8B45A' } },
+  { id: 'abricot',    label: 'Abricot',      premium: true,  preview: { app: '#F9EADC', card: '#FFFFFF', hero: ['#A9502F', '#5E2410'], accent: '#FF8A3D' } },
+  { id: 'sauge',      label: 'Sauge',        premium: true,  preview: { app: '#EAEEE3', card: '#FFFFFF', hero: ['#43775C', '#1E3E2E'], accent: '#FF8A3D' } },
+  { id: 'prune',      label: 'Prune',        premium: true,  preview: { app: '#F1EBF1', card: '#FFFFFF', hero: ['#7A4580', '#3D1C40'], accent: '#FF8A3D' } },
 ];
+
+// Anciens thèmes Réviz+ (avant octobre 2026) → leur remplaçant le plus proche.
+const ALIASES = { 'carnet-kraft': 'abricot', 'violet-air': 'prune', 'menthe-focus': 'sauge' };
 
 // Thèmes à interface sombre (pilote isDark : status bar, images, etc.)
 export const DARK_THEMES = ['dark', 'nuit-encre'];
@@ -24,11 +28,11 @@ export function themeById(id) {
 }
 
 /**
- * Thème effectivement applicable : id inconnu → 'light' ; thème premium
+ * Thème effectivement applicable : ancien id → son remplaçant ; id inconnu → 'light' ; thème premium
  * sans abonnement actif → 'light' (repli silencieux, jamais bloquant).
  */
 export function resolveTheme(storedId, isPremium) {
-  const t = themeById(storedId);
+  const t = themeById(ALIASES[storedId] ?? storedId);
   if (!t) return 'light';
   if (t.premium && !isPremium) return 'light';
   return t.id;

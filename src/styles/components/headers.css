@@ -264,6 +264,9 @@
   flex-shrink: 0;
 }
 .rv-user-premium-btn--active { color: var(--accent-orange); }
+/* Badge Réviz+ dans la rangée prénom · niveau : centré sur la ligne, pas sur la ligne de base */
+.rv-user-name-row:has(.rv-user-plus) { align-items: center; }
+.rv-user-plus { margin-left: 2px; }
 
 @media (max-width: 430px) {
   .rv-user-header { padding: 14px var(--page-gutter) 4px; gap: 10px; }

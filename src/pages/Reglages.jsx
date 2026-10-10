@@ -1,15 +1,16 @@
 import { PageIntro } from '../components/PageIntro';
 import { GuestBanner } from '../components/GuestBanner';
-import { UserIcon, MailIcon, KeyIcon, BellIcon, MoonIcon, LockIcon, GemIcon, InfoIcon, ScaleIcon, FileTextIcon, ClipboardIcon, LogOutIcon, AlertIcon, InstallIcon } from '../components/Icons';
+import { UserIcon, MailIcon, KeyIcon, BellIcon, MoonIcon, LockIcon, GemIcon, CheckIcon, InfoIcon, ScaleIcon, FileTextIcon, ClipboardIcon, LogOutIcon, AlertIcon, InstallIcon } from '../components/Icons';
 import { InstallerModal } from '../components/InstallerApp';
 import { useInstallation } from '../hooks/useInstallation';
-import { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useTheme } from '../context/ThemeContext';
 import { PageHeader } from '../components/PageHeader';
 import { LevelSelector } from '../components/LevelSelector';
 import { THEMES } from '../utils/themes';
+import { RevizPlusBadge, RevizPlusCard } from '../components/RevizPlus';
 import { formatLevelLabel } from '../utils/levels';
 import { openBillingPortal, startCheckout } from '../services/billingService';
 import { remindersAvailable, isReminderEnabled, enableReminder, disableReminder } from '../services/reminderService';
@@ -32,6 +33,13 @@ function firebaseErrorFr(code) {
 export default function Reglages() {
   const navigate = useNavigate();
   const { theme, setTheme, isDark, toggleTheme } = useTheme();
+  const location = useLocation();
+  // Arrivée depuis « Choisir mon thème » (fiche Réviz+, accueil) : on descend aux thèmes.
+  useEffect(() => {
+    if (location.hash !== '#themes') return;
+    const t = setTimeout(() => document.getElementById('themes')?.scrollIntoView({ block: 'start', behavior: 'smooth' }), 80);
+    return () => clearTimeout(t);
+  }, [location.hash]);
   const {
     currentUser, isPremium, hasRevizPlus, revizPlusOffert, logout, isGuest,
     getUserLevel, setUserLevel, updateDisplayName,
@@ -370,7 +378,7 @@ export default function Reglages() {
         </section>
 
         {/* ── 3. Apparence ── */}
-        <section className="rg-section">
+        <section className="rg-section" id="themes">
           <h2 className="rg-section-title">Apparence</h2>
           <div className="rv-card rg-card">
             <div className="rg-toggle-row">
@@ -389,32 +397,52 @@ export default function Reglages() {
               </label>
             </div>
 
-            {/* Thèmes — les thèmes Réviz+ sont un avantage abonnement */}
-            <div className="rg-theme-grid" role="radiogroup" aria-label="Thème de l'application">
-              {THEMES.map(t => {
-                const locked = t.premium && !hasRevizPlus;
-                const active = theme === t.id;
-                return (
-                  <button
-                    key={t.id}
-                    type="button"
-                    className={`rg-theme-swatch${active ? ' rg-theme-swatch--active' : ''}${locked ? ' rg-theme-swatch--locked' : ''}`}
-                    style={{ background: `linear-gradient(135deg, ${t.swatch[0]} 55%, ${t.swatch[1]} 55%)` }}
-                    role="radio"
-                    aria-checked={active}
-                    aria-label={`Thème ${t.label}${t.premium ? ' (Réviz+)' : ''}${locked ? ' — verrouillé' : ''}`}
-                    onClick={() => {
-                      if (locked) { setThemeLockedHint(true); return; }
-                      setThemeLockedHint(false);
-                      setTheme(t.id);
-                    }}
-                  >
-                    {locked && <span className="rg-theme-lock" aria-hidden="true"><LockIcon /></span>}
-                    <span className="rg-theme-name">{t.label}</span>
-                  </button>
-                );
-              })}
-            </div>
+            {/* Thèmes — classiques, puis les thèmes Réviz+ */}
+            {[
+              { titre: 'Classiques', liste: THEMES.filter(t => !t.premium) },
+              { titre: 'Réviz+', liste: THEMES.filter(t => t.premium) },
+            ].map(groupe => (
+              <div key={groupe.titre} className="rg-theme-group">
+                <div className="rg-theme-group-head">
+                  {groupe.titre === 'Réviz+'
+                    ? <><RevizPlusBadge /><span className="rg-theme-group-note">{hasRevizPlus ? `${groupe.liste.length} thèmes débloqués` : 'Avec l’abonnement'}</span></>
+                    : <span className="rg-theme-group-title">{groupe.titre}</span>}
+                </div>
+                <div className="rg-theme-grid" role="radiogroup" aria-label={`Thèmes ${groupe.titre}`}>
+                  {groupe.liste.map(t => {
+                    const locked = t.premium && !hasRevizPlus;
+                    const active = theme === t.id;
+                    const p = t.preview;
+                    return (
+                      <button
+                        key={t.id}
+                        type="button"
+                        className={`rg-theme-tile${active ? ' rg-theme-tile--active' : ''}${locked ? ' rg-theme-tile--locked' : ''}`}
+                        role="radio"
+                        aria-checked={active}
+                        aria-label={`Thème ${t.label}${t.premium ? ' (Réviz+)' : ''}${locked ? ' — verrouillé' : ''}`}
+                        onClick={() => {
+                          if (locked) { setThemeLockedHint(true); return; }
+                          setThemeLockedHint(false);
+                          setTheme(t.id);
+                        }}
+                      >
+                        <span className="rg-theme-preview" style={{ background: p.app }} aria-hidden="true">
+                          <span className="rg-theme-preview-hero" style={{ background: `linear-gradient(135deg, ${p.hero[0]}, ${p.hero[1]})` }} />
+                          <span className="rg-theme-preview-card" style={{ background: p.card }}>
+                            <span className="rg-theme-preview-dot" style={{ background: p.accent }} />
+                          </span>
+                          <span className="rg-theme-preview-card rg-theme-preview-card--short" style={{ background: p.card }} />
+                          {active && <span className="rg-theme-check"><CheckIcon /></span>}
+                          {locked && <span className="rg-theme-lock"><LockIcon /></span>}
+                        </span>
+                        <span className="rg-theme-name">{t.label}</span>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            ))}
             {themeLockedHint && (
               <p className="rg-hint" role="status">
                 Les thèmes sont un avantage Réviz+ : débloque-les avec l'abonnement juste en dessous.
@@ -450,18 +478,17 @@ export default function Reglages() {
         {!isGuest && (
         <section className="rg-section">
           <h2 className="rg-section-title">Abonnement</h2>
+          {revizPlusOffert ? (
+            <RevizPlusCard onTheme={() => document.getElementById('themes')?.scrollIntoView({ block: 'start', behavior: 'smooth' })} />
+          ) : (
           <div className="rv-card rg-card">
             <div className="rg-plan-row">
               <span className="rg-plan-label">Plan actuel</span>
               {isPremium
                 ? <span className="premium-chip premium-chip--active"><GemIcon /> Réviz+ actif</span>
-                : revizPlusOffert
-                  ? <span className="premium-chip premium-chip--active"><GemIcon /> Réviz+ offert</span>
-                  : <span className="rg-plan-free">Gratuit</span>}
+                : <span className="rg-plan-free">Gratuit</span>}
             </div>
-            {revizPlusOffert ? (
-              <p className="rg-hint">Pendant le lancement de Réviz, Réviz+ est offert à tout le monde : thèmes, coach et jusqu'à 30 leçons analysées par semaine. Rien à payer, rien à activer.</p>
-            ) : isPremium ? (
+            {isPremium ? (
               <button
                 type="button"
                 className="rv-btn-cta rv-btn-cta--ghost rv-btn-cta--full"
@@ -482,6 +509,7 @@ export default function Reglages() {
             )}
             {billingError && <p className="rg-error" role="alert">{billingError}</p>}
           </div>
+          )}
         </section>
         )}
 
