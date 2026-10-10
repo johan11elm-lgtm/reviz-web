@@ -114,5 +114,6 @@ acquis. Pas d'étoiles : elles se lisent comme des favoris ou une note.
 | Fins de séance | fait : action principale = « Retour à la leçon » (flashcards) ou « Relire le résumé » sous 70 % (quiz) ; plus de mascotte triste |
 | Connexion, inscription | fait : liens et choix en encre, libellés de champ en phrase normale, bouton retour commun |
 | Accueil public, essai | vérifiés, déjà conformes |
-| Scan, onboarding, salon et jeu de la Battle | à vérifier (compte requis) |
+| Vérification de l'email, Battle (annonce, jeu) | fait (relu dans le code) : bouton principal en encre, survol des réponses en encre, puces neutres |
+| Scan, onboarding | relus dans le code : conformes (l'orange y marque une alerte ou une progression) |
 | Toast « Badge débloqué » | surtitre orange à neutraliser ou à classer en exception (célébration) |
