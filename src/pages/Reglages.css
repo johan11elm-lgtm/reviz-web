@@ -272,10 +272,15 @@
 }
 .reglages-page .rg-goal-btn:hover { border-color: var(--border-hover); }
 .reglages-page .rg-goal-btn--active {
-  background: var(--accent-orange);
-  border-color: var(--accent-orange);
+  /* Un choix fait se marque en encre, comme le filtre actif de Mes cours */
+  background: var(--accent-violet);
+  border-color: var(--accent-violet);
   color: #fff;
 }
+
+/* Icônes des rangées : neutres, ce sont des liens et des réglages, pas des
+ * états (docs/design-grammaire.md §5) */
+.reglages-page .rg-icon { background: var(--bg-subtle); color: var(--text-secondary); }
 
 /* ── Abonnement ── */
 .reglages-page .rg-plan-row {

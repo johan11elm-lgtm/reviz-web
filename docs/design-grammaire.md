@@ -104,5 +104,7 @@ acquis. Pas d'étoiles : elles se lisent comme des favoris ou une note.
 | Progrès | fait : surtitres neutres, « Niveau 1 » en titre (plus de pastille orange), XP restant en clair, chiffres sans tuile teintée ni icônes colorées, record en vert |
 | Profil | fait : « Prochain badge » en surtitre neutre, Compte en rangées d'une seule carte, icônes neutres (sauf la flamme de la série, orange partout) ; carte Réviz+ inchangée (seule carte foncée de la page) |
 | Formats | fait : sous-titre « Carte 1 sur 8 · leçon » sur une ligne, « Généré par IA » et « 3 idées » sans majuscules, « À revoir » des flashcards en orange (plus de rouge) ; le Résumé suivait déjà (couleur de matière sur ses icônes) |
-| Réglages, Battle | à passer à la grammaire |
+| Réglages | fait : icônes des rangées neutres, objectif quotidien choisi en encre (plus en orange) ; carte Réviz+ et zone de danger inchangées |
+| Battle | fait : puces des règles neutres |
+| Écrans secondaires (connexion, inscription, onboarding, scan, salon et jeu de la Battle, fin de séance) | à vérifier |
 | Toast « Badge débloqué » | surtitre orange à neutraliser ou à classer en exception (célébration) |

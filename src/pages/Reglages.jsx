@@ -236,7 +236,7 @@ export default function Reglages() {
               onClick={() => togglePanel('profil')}
               aria-expanded={activePanel === 'profil'}
             >
-              <span className="rv-icon-square rv-icon-square--violet" aria-hidden="true"><UserIcon /></span>
+              <span className="rv-icon-square rg-icon" aria-hidden="true"><UserIcon /></span>
               <span className="rg-row-text">
                 <span className="rg-row-label">Prénom et niveau</span>
                 <span className="rg-row-sub">{[prenom, levelLabel].filter(Boolean).join(' · ') || 'À compléter'}</span>
@@ -270,7 +270,7 @@ export default function Reglages() {
               onClick={() => togglePanel('email')}
               aria-expanded={activePanel === 'email'}
             >
-              <span className="rv-icon-square rv-icon-square--orange" aria-hidden="true"><MailIcon /></span>
+              <span className="rv-icon-square rg-icon" aria-hidden="true"><MailIcon /></span>
               <span className="rg-row-text">
                 <span className="rg-row-label">Adresse e-mail</span>
                 <span className="rg-row-sub">{currentUser?.email}</span>
@@ -309,7 +309,7 @@ export default function Reglages() {
               onClick={() => togglePanel('password')}
               aria-expanded={activePanel === 'password'}
             >
-              <span className="rv-icon-square rv-icon-square--green" aria-hidden="true"><KeyIcon /></span>
+              <span className="rv-icon-square rg-icon" aria-hidden="true"><KeyIcon /></span>
               <span className="rg-row-text">
                 <span className="rg-row-label">Mot de passe</span>
               </span>
@@ -350,7 +350,7 @@ export default function Reglages() {
           <h2 className="rg-section-title">Notifications</h2>
           <div className="rv-card rg-card">
             <div className="rg-toggle-row">
-              <span className="rv-icon-square rv-icon-square--orange" aria-hidden="true"><BellIcon /></span>
+              <span className="rv-icon-square rg-icon" aria-hidden="true"><BellIcon /></span>
               <span className="rg-row-text">
                 <span className="rg-row-label">Rappel quotidien</span>
                 <span className="rg-row-sub">Tous les jours à 18 h 30</span>
@@ -382,7 +382,7 @@ export default function Reglages() {
           <h2 className="rg-section-title">Apparence</h2>
           <div className="rv-card rg-card">
             <div className="rg-toggle-row">
-              <span className="rv-icon-square rv-icon-square--violet" aria-hidden="true"><MoonIcon /></span>
+              <span className="rv-icon-square rg-icon" aria-hidden="true"><MoonIcon /></span>
               <span className="rg-row-text">
                 <span className="rg-row-label">Mode sombre</span>
               </span>
@@ -519,7 +519,7 @@ export default function Reglages() {
           <div className="rv-card rg-card">
             {installerAProposer && (
               <button type="button" className="rg-row" onClick={() => setInstallerOpen(true)}>
-                <span className="rv-icon-square rv-icon-square--violet" aria-hidden="true"><InstallIcon /></span>
+                <span className="rv-icon-square rg-icon" aria-hidden="true"><InstallIcon /></span>
                 <span className="rg-row-text">
                   <span className="rg-row-label">Installer l'app</span>
                   <span className="rg-row-sub">Sur ton téléphone ou ton ordinateur</span>
@@ -533,7 +533,7 @@ export default function Reglages() {
               onClick={() => setAproposOpen(o => !o)}
               aria-expanded={aproposOpen}
             >
-              <span className="rv-icon-square rv-icon-square--violet" aria-hidden="true"><InfoIcon /></span>
+              <span className="rv-icon-square rg-icon" aria-hidden="true"><InfoIcon /></span>
               <span className="rg-row-text">
                 <span className="rg-row-label">À propos</span>
               </span>
@@ -548,7 +548,7 @@ export default function Reglages() {
             )}
 
             <Link to="/legal/mentions-legales" className="rg-row">
-              <span className="rv-icon-square rv-icon-square--green" aria-hidden="true"><ScaleIcon /></span>
+              <span className="rv-icon-square rg-icon" aria-hidden="true"><ScaleIcon /></span>
               <span className="rg-row-text">
                 <span className="rg-row-label">Mentions légales</span>
               </span>
@@ -556,7 +556,7 @@ export default function Reglages() {
             </Link>
 
             <Link to="/legal/confidentialite" className="rg-row">
-              <span className="rv-icon-square rv-icon-square--orange" aria-hidden="true"><FileTextIcon /></span>
+              <span className="rv-icon-square rg-icon" aria-hidden="true"><FileTextIcon /></span>
               <span className="rg-row-text">
                 <span className="rg-row-label">Confidentialité</span>
               </span>
@@ -564,7 +564,7 @@ export default function Reglages() {
             </Link>
 
             <Link to="/legal/cgu" className="rg-row">
-              <span className="rv-icon-square rv-icon-square--pink" aria-hidden="true"><ClipboardIcon /></span>
+              <span className="rv-icon-square rg-icon" aria-hidden="true"><ClipboardIcon /></span>
               <span className="rg-row-text">
                 <span className="rg-row-label">CGU</span>
               </span>
