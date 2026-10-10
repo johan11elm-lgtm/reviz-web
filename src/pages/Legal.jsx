@@ -35,11 +35,12 @@ const PAGES = {
     title: 'Politique de confidentialité',
     content: () => (
       <>
-        <p className="legal-updated">Dernière mise à jour : 7 octobre 2026</p>
+        <p className="legal-updated">Dernière mise à jour : 10 octobre 2026</p>
 
         <Section title="Données collectées">
           <ul>
             <li><strong>Compte utilisateur</strong> — prénom, adresse email, classe (optionnel), via Firebase Authentication.</li>
+            <li><strong>Connexion avec Google, Apple, Microsoft ou TikTok</strong> — si tu choisis de te connecter avec l'un de ces services, il nous transmet ton nom ou ton pseudo, ton adresse email quand il la fournit (Apple peut la remplacer par une adresse masquée, TikTok ne la fournit pas) et un identifiant technique propre à Réviz. Nous ne recevons jamais ton mot de passe, ni tes contacts, vidéos, publications ou abonnés.</li>
             <li><strong>Date de naissance</strong> — collectée à l'inscription, uniquement pour déterminer si le consentement parental est requis (moins de 15 ans, art. 45 de la loi Informatique et Libertés).</li>
             <li><strong>Leçons scannées</strong> — le texte ou l'image de tes leçons, envoyé à l'IA pour générer les contenus de révision. Ces données ne sont pas conservées côté serveur après traitement.</li>
             <li><strong>Historique</strong> — tes leçons et révisions sont stockées localement sur ton appareil (localStorage) et synchronisées dans ta collection Firestore personnelle.</li>
@@ -62,7 +63,8 @@ const PAGES = {
         </Section>
 
         <Section title="Mineurs">
-          <p>Réviz s'adresse aux élèves du système scolaire français, du collège au lycée. Conformément à la réglementation française, les utilisateurs de moins de 15 ans doivent obtenir l'autorisation d'un parent ou représentant légal pour créer un compte.</p>
+          <p>Réviz s'adresse aux élèves du système scolaire français, du collège au lycée. Conformément à la réglementation française, les utilisateurs de moins de 15 ans doivent obtenir l'autorisation d'un parent ou représentant légal pour créer un compte, quelle que soit la façon dont ils se connectent (email, Google, Apple, Microsoft ou TikTok).</p>
+          <p>Chaque service de connexion applique aussi ses propres règles d'âge : par exemple, TikTok est réservé aux 13 ans et plus.</p>
         </Section>
 
         <Section title="Partage des données">
@@ -70,6 +72,7 @@ const PAGES = {
           <ul>
             <li><strong>Ton adversaire de Battle</strong> — pendant une partie, il voit ton prénom ou surnom, si tes réponses sont justes, tes temps de réponse et ton aura de la partie. Rien d'autre.</li>
             <li><strong>Google Firebase</strong> — authentification et stockage (hébergé en Europe).</li>
+            <li><strong>Google, Apple, Microsoft, TikTok</strong> — uniquement si tu choisis de te connecter avec l'un d'eux : ce service sait alors que tu utilises Réviz. Nous ne lui envoyons ni tes leçons, ni ta progression, ni aucune autre donnée.</li>
             <li><strong>Anthropic</strong> — traitement IA des leçons (le texte envoyé n'est pas conservé après génération).</li>
             <li><strong>Vercel</strong> — hébergement de l'application.</li>
             <li><strong>PostHog</strong> — mesure d'audience anonyme (pages vues, clics), hébergée en Europe, sans cookie ni profil.</li>
@@ -78,7 +81,7 @@ const PAGES = {
 
         <Section title="Durée de conservation">
           <ul>
-            <li>Données de compte : jusqu'à suppression du compte.</li>
+            <li>Données de compte (y compris l'identifiant transmis par Google, Apple, Microsoft ou TikTok) : jusqu'à suppression du compte. Si tu as créé ton compte avec Apple dans l'app iPhone, sa suppression retire aussi l'accès que tu avais donné à Réviz chez Apple. Pour les autres services, tu peux retirer cet accès à tout moment depuis les réglages de ton compte Google, Microsoft ou TikTok.</li>
             <li>Leçons et révisions : jusqu'à suppression par l'utilisateur (max 100 leçons conservées).</li>
             <li>Parties de Battle : supprimées automatiquement au plus tard 48 heures après leur création. Avec un compte, l'aura totale et le nombre de battles restent sur ton profil jusqu'à la suppression du compte.</li>
             <li>Logs serveur : 30 jours maximum.</li>
@@ -99,7 +102,7 @@ const PAGES = {
         </Section>
 
         <Section title="Cookies">
-          <p>Réviz utilise uniquement des cookies strictement nécessaires au fonctionnement (authentification Firebase). Aucun cookie publicitaire ou de tracking n'est utilisé. La mesure d'audience (PostHog) fonctionne sans cookie et sans rien enregistrer sur ton appareil : elle compte les visites de façon anonyme, sans savoir qui tu es.</p>
+          <p>Réviz utilise uniquement des cookies strictement nécessaires au fonctionnement (authentification Firebase, et un cookie de sécurité de 10 minutes au plus pendant une connexion avec TikTok, supprimé dès la connexion terminée). Aucun cookie publicitaire ou de tracking n'est utilisé. La mesure d'audience (PostHog) fonctionne sans cookie et sans rien enregistrer sur ton appareil : elle compte les visites de façon anonyme, sans savoir qui tu es.</p>
         </Section>
       </>
     ),
@@ -109,15 +112,16 @@ const PAGES = {
     title: "Conditions Générales d'Utilisation",
     content: () => (
       <>
-        <p className="legal-updated">Dernière mise à jour : 7 octobre 2026</p>
+        <p className="legal-updated">Dernière mise à jour : 10 octobre 2026</p>
 
         <Section title="Objet">
           <p>Les présentes CGU régissent l'utilisation de l'application Réviz, un outil de révision scolaire assisté par intelligence artificielle, destiné aux collégiens.</p>
         </Section>
 
         <Section title="Inscription">
-          <p>L'inscription est gratuite et nécessite un prénom, une adresse email et un mot de passe. Les utilisateurs de moins de 15 ans doivent disposer de l'autorisation d'un parent ou représentant légal.</p>
-          <p>Tu es responsable de la confidentialité de tes identifiants de connexion.</p>
+          <p>L'inscription est gratuite. Tu peux créer ton compte avec un prénom, une adresse email et un mot de passe, ou te connecter avec un compte Google, Apple, Microsoft ou TikTok. Dans tous les cas, ta date de naissance et ta classe te sont demandées. Les utilisateurs de moins de 15 ans doivent disposer de l'autorisation d'un parent ou représentant légal.</p>
+          <p>Si tu te connectes avec un autre service, ce sont aussi ses conditions d'utilisation qui s'appliquent à ce compte (par exemple l'âge minimum de TikTok).</p>
+          <p>Tu es responsable de la confidentialité de tes identifiants de connexion, y compris ceux du compte Google, Apple, Microsoft ou TikTok que tu utilises pour te connecter.</p>
         </Section>
 
         <Section title="Utilisation du service">
