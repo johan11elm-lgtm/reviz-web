@@ -19,6 +19,7 @@ import { CoachEntryCard } from '../components/CoachChat';
 import { getScanStatus } from '../services/scanLimitService';
 import { subjectInfo, subjectMascot } from '../utils/subjects';
 import { resumeReadingMinutes } from '../utils/resume';
+import { nextStep } from '../utils/nextStep';
 import './Analyse.css';
 
 // ─── Mock de fallback ────────────────────────────────────────────────
@@ -54,39 +55,26 @@ const STATE_TONE = { nouveau: null, commence: 'orange', 'a-revoir': 'orange', ma
 
 /** Avancement de l'élève sur la leçon (cartes vues, à revoir, séances). */
 function lessonProgress(lessonId, total) {
-  let seen = 0;
-  for (let i = 0; i < total; i++) if (getCardState(lessonId, i)) seen++;
+  // seenDue : cartes déjà vues et arrivées à échéance (countDueCards compte
+  // aussi les jamais vues, d'où ce second compte pour « Revois tes cartes »).
+  let seen = 0, seenDue = 0;
+  const now = Date.now();
+  for (let i = 0; i < total; i++) {
+    const card = getCardState(lessonId, i);
+    if (!card) continue;
+    seen++;
+    if (!card.nextReview || card.nextReview <= now) seenDue++;
+  }
   const due = countDueCards(lessonId, total);
   const sessions = loadRevisions().filter(r => r.lessonId === lessonId);
   return {
     seen,
     due,
+    seenDue,
     sessions: sessions.length,
     last: sessions[0]?.revisedAt ?? null,
     state: chapterState({ lesson: true, dueCards: due, reviewedCards: seen }),
   };
-}
-
-/**
- * La prochaine étape conseillée sur la leçon, dans l'ordre d'une séance :
- * découvrir (résumé), apprendre puis revoir les cartes, se tester (quiz).
- */
-function nextStep(lesson, progress, didFormat) {
-  const total = lesson.flashcardsCount ?? 0;
-  if (!progress || (progress.seen === 0 && !didFormat('resume'))) {
-    return { title: 'Lis le résumé', sub: `${lesson.resumeMinutes ?? 2} min pour découvrir l'essentiel, avant les cartes.`, to: '/resume', action: 'Lire le résumé' };
-  }
-  if (progress.due > 0) {
-    return { title: `Revois tes ${progress.due} carte${progress.due > 1 ? 's' : ''}`, sub: "C'est le bon moment : elles commencent à s'effacer.", to: '/flashcards', action: 'Réviser les cartes' };
-  }
-  if (progress.seen < total) {
-    const left = total - progress.seen;
-    return { title: 'Apprends les flashcards', sub: `${left} carte${left > 1 ? 's' : ''} encore jamais vue${left > 1 ? 's' : ''}.`, to: '/flashcards', action: 'Ouvrir les flashcards' };
-  }
-  if (!didFormat('quiz')) {
-    return { title: 'Teste-toi avec le quiz', sub: `${lesson.quizCount} questions pour vérifier que tout est en place.`, to: '/quiz', action: 'Faire le quiz' };
-  }
-  return { title: 'Tout est à jour', sub: 'Refais le quiz pour garder le chapitre en tête.', to: '/quiz', action: 'Refaire le quiz' };
 }
 
 function formatDay(ts) {
@@ -294,7 +282,7 @@ export default function Analyse() {
         <span className="rv-next-progress">
           <span className="rv-next-progress-row">
             <span>{avancement.seen} / {total} cartes vues</span>
-            {avancement.due > 0 && <span>{avancement.due} à revoir</span>}
+            {avancement.seenDue > 0 && <span>{avancement.seenDue} à revoir</span>}
           </span>
           <span className="rv-next-bar" aria-hidden="true">
             <span style={{ width: `${Math.round(avancement.seen / total * 100)}%` }} />
