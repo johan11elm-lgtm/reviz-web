@@ -87,6 +87,6 @@ export function chapterState({ lesson, dueCards = 0, reviewedCards = 0 }) {
 export const CHAPTER_STATE_LABEL = {
   nouveau:  'À découvrir',
   commence: 'Commencé',
-  'a-revoir': 'À revoir',
+  'a-revoir': 'À travailler',
   maitrise: 'Maîtrisé',
 }

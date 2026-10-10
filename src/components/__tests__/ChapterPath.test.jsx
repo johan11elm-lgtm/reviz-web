@@ -33,7 +33,7 @@ describe('<ChapterPath />', () => {
 
   it('états dans le nom accessible, chapitre pas prêt désactivé', () => {
     render(<Harness onOpen={() => {}} />)
-    expect(screen.getByRole('button', { name: '2. Chapitre b — 3 à revoir' })).toBeEnabled()
+    expect(screen.getByRole('button', { name: '2. Chapitre b — 3 à travailler' })).toBeEnabled()
     expect(screen.getByRole('button', { name: '4. Chapitre d — Bientôt' })).toBeDisabled()
   })
 

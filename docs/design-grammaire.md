@@ -45,9 +45,14 @@ L'état d'une chose (chapitre, leçon, carte) s'écrit avec `.rv-pill`, et chaqu
 |---|---|---|
 | Pas commencé | « À découvrir » | neutre (`rv-pill`) |
 | Commencé | « Commencé » | orange |
-| À revoir | « 4 à revoir » | orange |
+| À travailler | « 4 à travailler » | orange |
 | Maîtrisé | « Maîtrisé » | vert |
 | Pas encore prêt | « Bientôt » | neutre |
+
+**« À travailler » ou « à revoir » ?** Le compte des cartes du jour
+(`countDueCards`) inclut les cartes jamais vues : on l'écrit « à travailler ».
+« À revoir » est réservé aux cartes déjà vues revenues à échéance (bouton des
+flashcards, légende de « Ta mémoire », carte « Ta prochaine étape »).
 
 Exception assumée : l'autocollant « Commencer / Continuer » du chemin des
 chapitres (élément de jeu, pas un état).

@@ -134,12 +134,12 @@ function MatiereTile({ m, onOpen }) {
     `${total} chapitre${total > 1 ? 's' : ''}`,
     m.commences ? `${m.commences} commencé${m.commences > 1 ? 's' : ''}` : null,
     m.maitrises ? `${m.maitrises} maîtrisé${m.maitrises > 1 ? 's' : ''}` : null,
-    m.aRevoir ? `${m.aRevoir} carte${m.aRevoir > 1 ? 's' : ''} à revoir` : null,
+    m.aRevoir ? `${m.aRevoir} carte${m.aRevoir > 1 ? 's' : ''} à travailler` : null,
   ].filter(Boolean).join(' · ');
 
   let status;
   if (m.aRevoir) {
-    status = <span className="programme-matiere-status programme-matiere-status--revoir"><RefreshIcon />{m.aRevoir} carte{m.aRevoir > 1 ? 's' : ''} à revoir</span>;
+    status = <span className="programme-matiere-status programme-matiere-status--revoir"><RefreshIcon />{m.aRevoir} carte{m.aRevoir > 1 ? 's' : ''} à travailler</span>;
   } else if (fini) {
     status = <span className="programme-matiere-status programme-matiere-status--fini"><CheckIcon />Tout maîtrisé</span>;
   } else if (m.maitrises) {

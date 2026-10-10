@@ -169,7 +169,7 @@ export default function Cours() {
                     {lastLesson.metadata.subject} · {formatDate(lastLesson.scannedAt)}
                   </span>
                   {lastDue > 0 && (
-                    <span className="rv-pill rv-pill--orange cours-resume-due">{lastDue} carte{lastDue > 1 ? 's' : ''} à revoir</span>
+                    <span className="rv-pill rv-pill--orange cours-resume-due">{lastDue} carte{lastDue > 1 ? 's' : ''} à travailler</span>
                   )}
                 </div>
               </div>
@@ -347,7 +347,7 @@ export default function Cours() {
                     </span>
                   </div>
                   {subjectDue > 0 && (
-                    <span className="rv-pill rv-pill--orange cours-subject-due-pill">{subjectDue} à revoir</span>
+                    <span className="rv-pill rv-pill--orange cours-subject-due-pill">{subjectDue} à travailler</span>
                   )}
                   <svg
                     className="cours-subject-chevron"
@@ -386,7 +386,7 @@ export default function Cours() {
                         <span className="cours-lesson-title">{lesson.metadata.title}</span>
                         <span className="cours-lesson-meta">
                           {meta}
-                          {fcDue > 0 && <span className="rv-pill rv-pill--orange cours-lesson-due-pill">{fcDue} à revoir</span>}
+                          {fcDue > 0 && <span className="rv-pill rv-pill--orange cours-lesson-due-pill">{fcDue} à travailler</span>}
                         </span>
                       </button>
                       <button

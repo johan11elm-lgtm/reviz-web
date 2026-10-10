@@ -127,7 +127,7 @@ function getGreetingSub({ dueCards, streak, todayRevisions, dailyGoal }) {
   const h = new Date().getHours();
 
   if (dailyGoal > 0 && todayRevisions >= dailyGoal) return pickStable(SUB_POOLS.done, dayHash);
-  if (dueCards > 0) return dueCards === 1 ? '1 carte à revoir aujourd\'hui.' : `${dueCards} cartes à revoir aujourd'hui.`;
+  if (dueCards > 0) return dueCards === 1 ? '1 carte à travailler aujourd\'hui.' : `${dueCards} cartes à travailler aujourd'hui.`;
   if (streak >= 2) return `${streak} jours de suite. Continue comme ça.`;
   if (todayRevisions > 0) return 'Tu as déjà révisé aujourd\'hui, bien joué.';
   if (h < 12)  return pickStable(SUB_POOLS.morning, dayHash);
@@ -414,7 +414,7 @@ export default function Home() {
               <span className="rv-btn-action-text">
                 <span className="rv-btn-action-label">Flashcards</span>
                 <span className="rv-btn-action-sub">
-                  {fcDue > 0 ? `${fcDue} à revoir` : `${fcTotal} carte${fcTotal > 1 ? 's' : ''}`}
+                  {fcDue > 0 ? `${fcDue} à travailler` : `${fcTotal} carte${fcTotal > 1 ? 's' : ''}`}
                 </span>
               </span>
               {fcDue > 0 && <span className="rv-notif-dot" aria-hidden="true" />}
@@ -497,7 +497,7 @@ export default function Home() {
                         <span className="home-desk-lesson-meta">{l.metadata.subject} · {formatDate(l.scannedAt)}</span>
                         <span className="home-desk-lesson-title">{l.metadata.title}</span>
                         <span className={`rv-pill rv-pill--${due > 0 ? 'orange' : 'green'} home-desk-lesson-pill`}>
-                          {due > 0 ? `${due} carte${due > 1 ? 's' : ''} à revoir` : 'À jour'}
+                          {due > 0 ? `${due} carte${due > 1 ? 's' : ''} à travailler` : 'À jour'}
                         </span>
                       </span>
                     </button>
