@@ -299,20 +299,14 @@
     align-items: start;
     align-content: start;
   }
-  html:not(.native) .cours-page .cours-programme-link { grid-column: 2; grid-row: 1; }
-  html:not(.native) .cours-page .cours-resume-wrap    { grid-column: 2; grid-row: 2 / span 60; }
-  html:not(.native) .cours-page .cours-search-wrap    { grid-column: 1; grid-row: 1; }
-  html:not(.native) .cours-page .cours-filters-wrap   { grid-column: 1; grid-row: 2; margin-inline: 0; padding: 0; }
-  html:not(.native) .cours-page .cours-subject-section,
-  html:not(.native) .cours-page .cours-skeleton { grid-column: 1; }
-  html:not(.native) .cours-page .cours-empty-state { grid-column: 1 / -1; }
-  html:not(.native) .cours-page .cours-subject-list {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 12px;
-  }
-  html:not(.native) .cours-page .cours-subject-list--hidden { display: none; }
-  html:not(.native) .cours-page .cours-resume-card { position: sticky; top: 0; }
+  html:not(.native) .cours-page .cours-main,
+  html:not(.native) .cours-page .cours-rail { display: flex; flex-direction: column; gap: 16px; min-width: 0; }
+  html:not(.native) .cours-page .cours-main { grid-column: 1; grid-row: 1; }
+  html:not(.native) .cours-page .cours-rail { grid-column: 2; grid-row: 1; position: sticky; top: 0; }
+  /* Sans leçon, pas de rail : l'état vide prend toute la largeur */
+  html:not(.native) .cours-page .cours-rail:empty { display: none; }
+  html:not(.native) .cours-page .cours-content:has(.cours-rail:empty) .cours-main { grid-column: 1 / -1; }
+  html:not(.native) .cours-page .cours-filters-wrap { margin-inline: 0; padding: 0; }
   html:not(.native) .cours-page .cours-resume-top { flex-direction: column; align-items: flex-start; gap: 8px; }
   html:not(.native) .cours-page .cours-resume-body { width: 100%; }
 

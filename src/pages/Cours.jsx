@@ -1,5 +1,5 @@
 import { PageIntro } from '../components/PageIntro';
-import { SearchIcon, FlameIcon, FlashcardsIcon, QuizIcon } from '../components/Icons';
+import { SearchIcon } from '../components/Icons';
 import { useState, useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
@@ -145,16 +145,65 @@ export default function Cours() {
 
       {/* Contenu défilant — seul PageIntro (titre + mascotte) reste fixe */}
       <div className="content cours-content">
-        {/* Réviser sans scan : raccourci vers les chapitres du programme */}
-        {hasLessons && !showSkeleton && (
-          <button type="button" className="rv-card rv-card--link rv-card--tight cours-programme-link" onClick={() => navigate('/programme')}>
-            <Mascot pose="reading" size={36} alt="" aria-hidden="true" />
-            <span className="cours-programme-link-text"><b>Mon programme</b> · révise chapitre par chapitre</span>
-            <span className="cours-programme-link-arrow" aria-hidden="true">›</span>
-          </button>
+        {/* Rail : « À reprendre » puis Mon programme (colonne de droite sur
+            ordinateur ; display: contents sur téléphone, où ils s'empilent) */}
+        <div className="cours-rail">
+        {/* Featured "À reprendre" — Réviz propose la dernière leçon */}
+        {showResume && (
+          <div className="cours-resume-wrap">
+            <div className="rv-card rv-card--padded cours-resume-card">
+              <div className="cours-resume-top">
+                <Mascot
+                  pose={subjectMascot(lastLesson.metadata.subject)}
+                  size={96}
+                  glow
+                  priority
+                  className="cours-resume-mascot"
+                  alt=""
+                  aria-hidden="true"
+                />
+                <div className="cours-resume-body">
+                  <span className="rv-eyebrow">À reprendre</span>
+                  <h2 className="cours-resume-title">{lastLesson.metadata.title}</h2>
+                  <span className="cours-resume-meta">
+                    {lastLesson.metadata.subject} · {formatDate(lastLesson.scannedAt)}
+                  </span>
+                  {lastDue > 0 && (
+                    <span className="rv-pill rv-pill--orange cours-resume-due">{lastDue} carte{lastDue > 1 ? 's' : ''} à revoir</span>
+                  )}
+                </div>
+              </div>
+              <button
+                type="button"
+                className="rv-btn-cta rv-btn-cta--full rv-btn-cta--center cours-resume-cta"
+                onClick={() => { restoreLesson(lastLesson.id); navigate('/analyse'); }}
+              >
+                <span>Continuer</span>
+                <span className="rv-btn-cta-arrow" aria-hidden="true">→</span>
+              </button>
+            </div>
+          </div>
         )}
 
-        {/* Search */}
+        {/* Réviser sans scan : les chapitres du programme, en rangée (grammaire §4) */}
+        {hasLessons && !showSkeleton && (
+          <div className="rv-card rv-rows cours-programme-link">
+            <button type="button" className="rv-row" onClick={() => navigate('/programme')}>
+              <span className="rv-row-avatar" aria-hidden="true"><Mascot pose="reading" size={40} alt="" /></span>
+              <span className="rv-row-text">
+                <span className="rv-row-title">Mon programme</span>
+                <span className="rv-row-sub">Révise chapitre par chapitre, sans scanner</span>
+              </span>
+              <span className="rv-row-arrow" aria-hidden="true">›</span>
+            </button>
+          </div>
+        )}
+
+        </div>
+
+        {/* La liste et ses outils (colonne principale sur ordinateur) */}
+        <div className="cours-main">
+        {/* Recherche et filtres : les outils de la liste, juste au-dessus d'elle */}
         {!showSkeleton && (
         <div className="cours-search-wrap">
           <div className="rv-card rv-card--tight cours-search">
@@ -193,43 +242,6 @@ export default function Cours() {
                   {f.label}
                 </button>
               ))}
-            </div>
-          </div>
-        )}
-
-        {/* Featured "À reprendre" — Réviz propose la dernière leçon */}
-        {showResume && (
-          <div className="cours-resume-wrap">
-            <div className="rv-card rv-card--padded cours-resume-card">
-              <div className="cours-resume-top">
-                <Mascot
-                  pose={subjectMascot(lastLesson.metadata.subject)}
-                  size={96}
-                  glow
-                  priority
-                  className="cours-resume-mascot"
-                  alt=""
-                  aria-hidden="true"
-                />
-                <div className="cours-resume-body">
-                  <div className="cours-resume-label">À reprendre</div>
-                  <h2 className="cours-resume-title">{lastLesson.metadata.title}</h2>
-                  <span className="cours-resume-meta">
-                    {lastLesson.metadata.subject} · {formatDate(lastLesson.scannedAt)}
-                  </span>
-                  {lastDue > 0 && (
-                    <span className={`rv-pill rv-pill--orange cours-resume-due`}>{lastDue} carte{lastDue > 1 ? 's' : ''} à revoir</span>
-                  )}
-                </div>
-              </div>
-              <button
-                type="button"
-                className="rv-btn-cta rv-btn-cta--full rv-btn-cta--center cours-resume-cta"
-                onClick={() => { restoreLesson(lastLesson.id); navigate('/analyse'); }}
-              >
-                <span>Continuer</span>
-                <span className="rv-btn-cta-arrow" aria-hidden="true">→</span>
-              </button>
             </div>
           </div>
         )}
@@ -315,7 +327,7 @@ export default function Cours() {
             return (
               <div
                 key={subject.id}
-                className={`cours-subject-section${isCollapsed ? ' cours-subject-section--collapsed' : ''}`}
+                className={`rv-card cours-subject-section${isCollapsed ? ' cours-subject-section--collapsed' : ''}`}
               >
 
                 <button
@@ -335,9 +347,7 @@ export default function Cours() {
                     </span>
                   </div>
                   {subjectDue > 0 && (
-                    <span className="rv-pill rv-pill--orange cours-subject-due-pill">
-                      <FlameIcon /> {subjectDue}
-                    </span>
+                    <span className="rv-pill rv-pill--orange cours-subject-due-pill">{subjectDue} à revoir</span>
                   )}
                   <svg
                     className="cours-subject-chevron"
@@ -353,7 +363,7 @@ export default function Cours() {
                   </svg>
                 </button>
 
-                <div
+                <ul
                   id={`cours-subject-list-${subject.id}`}
                   className={`cours-subject-list${isCollapsed ? ' cours-subject-list--hidden' : ''}`}
                 >
@@ -361,66 +371,39 @@ export default function Cours() {
                   const fcTotal = lesson.flashcardsCount ?? 0;
                   const fcDue   = fcTotal > 0 ? countDueCards(lesson.id, fcTotal) : 0;
                   const qzTotal = lesson.quizCount ?? 0;
+                  const meta = [
+                    formatDate(lesson.scannedAt),
+                    fcTotal > 0 && `${fcTotal} carte${fcTotal > 1 ? 's' : ''}`,
+                    qzTotal > 0 && `${qzTotal} question${qzTotal > 1 ? 's' : ''}`,
+                  ].filter(Boolean).join(' · ');
                   return (
-                    <div
-                      key={lesson.id}
-                      role="button"
-                      tabIndex={0}
-                      className="rv-card rv-card--link rv-card--padded cours-lesson-card"
-                      onClick={() => { restoreLesson(lesson.id); navigate('/analyse'); }}
-                      onKeyDown={e => {
-                        if (e.key === 'Enter' || e.key === ' ') {
-                          e.preventDefault();
-                          restoreLesson(lesson.id);
-                          navigate('/analyse');
-                        }
-                      }}
-                    >
-                      <div className="cours-lesson-main">
-                        <div className={`rv-icon-square rv-icon-square--xl rv-icon-square--${tone}`}>
-                          <Mascot pose={subject.mascot ?? 'reading'} size={40} alt="" aria-hidden="true" />
-                        </div>
-                        <div className="cours-lesson-body">
-                          <div className="cours-lesson-top">
-                            <h3 className="cours-lesson-title">{lesson.metadata.title}</h3>
-                            <button
-                              type="button"
-                              className="cours-delete-btn"
-                              onClick={e => { e.stopPropagation(); setLessonToDelete(lesson); }}
-                              aria-label="Supprimer la leçon"
-                            >✕</button>
-                          </div>
-                          {lesson.metadata.excerpt && (
-                            <p className="cours-lesson-excerpt">{lesson.metadata.excerpt}</p>
-                          )}
-                          <div className="cours-lesson-meta">
-                            <span className="cours-lesson-meta-date">{formatDate(lesson.scannedAt)}</span>
-                            {fcTotal > 0 && (
-                              <span className="cours-lesson-meta-item">
-                                <FlashcardsIcon /> {fcTotal}
-                              </span>
-                            )}
-                            {qzTotal > 0 && (
-                              <span className="cours-lesson-meta-item">
-                                <QuizIcon /> {qzTotal}
-                              </span>
-                            )}
-                            {fcDue > 0 && (
-                              <span className="rv-pill rv-pill--orange cours-lesson-due-pill">
-                                <FlameIcon /> {fcDue}
-                              </span>
-                            )}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+                    <li key={lesson.id} className="cours-lesson-row">
+                      <button
+                        type="button"
+                        className="cours-lesson-open"
+                        onClick={() => { restoreLesson(lesson.id); navigate('/analyse'); }}
+                      >
+                        <span className="cours-lesson-title">{lesson.metadata.title}</span>
+                        <span className="cours-lesson-meta">
+                          {meta}
+                          {fcDue > 0 && <span className="rv-pill rv-pill--orange cours-lesson-due-pill">{fcDue} à revoir</span>}
+                        </span>
+                      </button>
+                      <button
+                        type="button"
+                        className="cours-delete-btn"
+                        onClick={() => setLessonToDelete(lesson)}
+                        aria-label={`Supprimer la leçon ${lesson.metadata.title}`}
+                      >✕</button>
+                    </li>
                   );
                 })}
-                </div>
+                </ul>
               </div>
             );
           })
         )}
+        </div>
       </div>
 
       <BottomNav />

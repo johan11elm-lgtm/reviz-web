@@ -101,7 +101,7 @@ test.describe('Mon programme', () => {
     await page.waitForTimeout(1200)
     await expect(page.getByText('Allez, on scanne ?')).toHaveCount(0)
     await expect(page.getByText('Le théorème de Thalès').first()).toBeVisible()
-    await expect(page.getByRole('button', { name: /Mon programme · révise/ })).toBeVisible()
+    await expect(page.getByRole('button', { name: /^Mon programme Révise chapitre par chapitre/ })).toBeVisible()
     await page.screenshot({ path: test.info().outputPath('cours-avec-chapitre.png') })
   })
 })

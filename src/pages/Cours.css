@@ -46,14 +46,6 @@
   gap: 3px;
 }
 
-.cours-page .cours-resume-label {
-  font-size: 12px;
-  font-weight: 800;
-  letter-spacing: 0.6px;
-  text-transform: uppercase;
-  color: var(--accent-orange-ink);
-}
-
 .cours-page .cours-resume-title {
   margin: 0;
   display: -webkit-box;
@@ -190,18 +182,19 @@
   gap: var(--gap-cards);
 }
 
-/* ── Subject section header (visual + meta) ── */
+/* ── Une carte blanche par matière : l'en-tête (ouvre/ferme), puis ses
+ * leçons en rangées séparées d'un filet (docs/design-grammaire.md §4) ── */
 .cours-page .cours-subject-section {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  padding: 4px;
 }
 
 .cours-page .cours-subject-header {
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 6px 4px;
+  padding: 8px 10px 8px 8px;
   width: 100%;
   background: transparent;
   border: none;
@@ -209,7 +202,7 @@
   cursor: pointer;
   color: inherit;
   text-align: left;
-  border-radius: 14px;
+  border-radius: 20px;
   transition: background 0.15s ease;
 }
 @media (hover: hover) and (pointer: fine) {
@@ -217,11 +210,11 @@
 }
 .cours-page .cours-subject-header:active { background: var(--bg-hover); }
 
-/* Chevron — rotate quand collapsed */
+/* Chevron — tourné quand la matière est fermée */
 .cours-page .cours-subject-chevron {
   width: 20px;
   height: 20px;
-  color: var(--text-muted);
+  color: var(--text-light);
   flex-shrink: 0;
   transition: transform 0.2s ease;
 }
@@ -229,20 +222,7 @@
   transform: rotate(-90deg);
 }
 
-/* Liste leçons */
-.cours-page .cours-subject-list {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-.cours-page .cours-subject-list--hidden {
-  display: none;
-}
-
-.cours-page .cours-subject-icon {
-  /* hérite de .rv-icon-square --xl --tone (taille, color) */
-  flex-shrink: 0;
-}
+.cours-page .cours-subject-icon { flex-shrink: 0; }
 
 .cours-page .cours-subject-info {
   flex: 1;
@@ -261,98 +241,80 @@
 }
 
 .cours-page .cours-subject-meta {
-  font-size: 12px;
+  font-size: 13px;
   color: var(--text-muted);
-  font-weight: 500;
 }
 
-.cours-page .cours-subject-due-pill {
-  flex-shrink: 0;
-  font-size: 12px;
-  padding: 5px 12px;
-  font-weight: 700;
-}
+.cours-page .cours-subject-due-pill { flex-shrink: 0; }
 
-/* ── Lesson card (layout interne — chrome vient de .rv-card) ── */
-.cours-page .cours-lesson-card {
-  position: relative;
-}
-
-.cours-page .cours-lesson-main {
+/* Leçons de la matière */
+.cours-page .cours-subject-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
   display: flex;
-  gap: 14px;
-  align-items: flex-start;
+  flex-direction: column;
+  border-top: 1px solid var(--border-subtle);
+  margin-top: 4px;
+}
+.cours-page .cours-subject-list--hidden { display: none; }
+
+.cours-page .cours-lesson-row {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.cours-page .cours-lesson-row + .cours-lesson-row::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 12px;
+  right: 12px;
+  height: 1px;
+  background: var(--border-subtle);
 }
 
-.cours-page .cours-lesson-body {
+.cours-page .cours-lesson-open {
   flex: 1;
   min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 4px;
+  padding: 12px 8px 12px 12px;
+  border: none;
+  border-radius: 18px;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
 }
-
-.cours-page .cours-lesson-top {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 8px;
+.cours-page .cours-lesson-open:active { background: var(--bg-hover); }
+@media (hover: hover) and (pointer: fine) {
+  .cours-page .cours-lesson-open:hover { background: var(--bg-hover); }
 }
 
 .cours-page .cours-lesson-title {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
   font-size: 15px;
   font-weight: 700;
   line-height: 1.3;
   letter-spacing: -0.2px;
   color: var(--text-primary);
-  margin: 0;
-  flex: 1;
-  min-width: 0;
-}
-
-.cours-page .cours-lesson-excerpt {
-  font-size: 13px;
-  color: var(--text-secondary);
-  line-height: 1.45;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  margin: 0;
 }
 
 .cours-page .cours-lesson-meta {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: 10px;
-  font-size: 12px;
+  gap: 4px 10px;
+  font-size: 13px;
   color: var(--text-muted);
-  margin-top: 2px;
-}
-
-.cours-page .cours-lesson-meta-date {
-  font-weight: 500;
-}
-
-.cours-page .cours-lesson-meta-item {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  font-weight: 500;
-}
-
-.cours-page .cours-lesson-meta-due {
-  color: var(--accent-orange-ink);
-  font-weight: 600;
-}
-
-/* Pill "à revoir" sur une leçon — incite à cliquer */
-.cours-page .cours-lesson-due-pill {
-  font-size: 12px;
-  padding: 4px 9px;
-  font-weight: 700;
-  letter-spacing: -0.1px;
 }
 
 /* Empty state — ajustements pour mascotte agressive + bulle */
@@ -370,8 +332,9 @@
 
 /* Bouton supprimer — discret, rouge au tap */
 .cours-page .cours-delete-btn {
-  width: 24px;
-  height: 24px;
+  width: 36px;
+  height: 36px;
+  margin-right: 6px;
   border-radius: 50%;
   border: none;
   background: transparent;
@@ -432,35 +395,14 @@
 .cours-page .cours-skeleton-card .rv-skeleton--text    { width: 45%; }
 
 /* ── Mon programme : raccourci en tête de liste et état vide ── */
-.cours-page .cours-programme-link {
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  width: 100%;
-  padding: 10px 14px;
-  text-align: left;
-  font-family: inherit;
-  color: inherit;
-  border: none;
-  cursor: pointer;
-}
-.cours-page .cours-programme-link-text {
-  flex: 1;
-  min-width: 0;
-  font-size: 13px;
-  color: var(--text-secondary);
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-.cours-page .cours-programme-link-text b { color: var(--text-primary); font-weight: 700; }
-.cours-page .cours-programme-link-arrow {
-  flex-shrink: 0;
-  font-size: 20px;
-  line-height: 1;
-  color: var(--text-muted);
-}
+/* Rail et liste : deux colonnes sur ordinateur (desktop.css), une seule
+ * pile sur téléphone */
+.cours-page .cours-rail,
+.cours-page .cours-main { display: contents; }
+
+/* Mon programme : carte de rangées (.rv-rows), rien de propre à la page */
+.cours-page .cours-programme-link { flex-shrink: 0; }
+
 .cours-page .cours-empty-actions {
   display: flex;
   flex-direction: column;
