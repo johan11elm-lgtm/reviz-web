@@ -275,7 +275,7 @@ function QuizSession() {
       <div className="content quiz-content">
 
         {/* Intro façon Home — la mascotte narratrice, juste dessous, reste l'illustration */}
-        <PageIntro title="Quiz" sub={`Question ${current + 1} sur ${questions.length} · ${lessonTitle}`} className="quiz-intro">
+        <PageIntro title="Quiz" sub={`Question ${current + 1} sur ${questions.length} · ${lessonTitle}`} className="quiz-intro rv-page-intro--format">
           {subBar}
         </PageIntro>
 

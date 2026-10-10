@@ -191,7 +191,7 @@ function FlashcardsSession() {
             </div>
             <div className="rv-stat-separator" />
             <div className="flashcards-end-stat">
-              <span className="rv-stat-value rv-stat-value--md" style={{ color: 'var(--accent-red)' }}>{againCount}</span>
+              <span className="rv-stat-value rv-stat-value--md" style={{ color: 'var(--accent-orange-ink)' }}>{againCount}</span>
               <span className="rv-stat-label">À revoir</span>
             </div>
             <div className="rv-stat-separator" />
@@ -227,7 +227,7 @@ function FlashcardsSession() {
       />
 
       {/* Intro façon Home — la carte, juste dessous, porte la mascotte */}
-      <PageIntro title="Flashcards" sub={`Carte ${current + 1} sur ${flashcards.length} · ${lessonTitle}`} className="flashcards-intro">
+      <PageIntro title="Flashcards" sub={`Carte ${current + 1} sur ${flashcards.length} · ${lessonTitle}`} className="flashcards-intro rv-page-intro--format">
         {dots}
       </PageIntro>
 

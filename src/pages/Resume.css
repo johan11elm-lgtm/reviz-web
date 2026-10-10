@@ -81,7 +81,7 @@
   font-weight: 700;
   color: var(--text-muted);
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 0.6px;
   margin-top: 4px;
   display: flex;
   align-items: center;

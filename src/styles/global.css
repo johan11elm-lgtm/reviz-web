@@ -694,8 +694,7 @@ html.native .content, html.native .pg-content, html.native .pf-content {
   background: var(--bg-subtle);
   padding: 4px 10px;
   border-radius: 20px;
-  letter-spacing: 0.3px;
-  text-transform: uppercase;
+  letter-spacing: 0;
 }
 
 /* ─── Ordinateur (≥ 1024 px, hors app native) ─────────────────────

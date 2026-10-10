@@ -224,8 +224,9 @@
 }
 
 .flashcards-page .flashcards-btn-again {
-  background: var(--accent-red-soft);
-  color: var(--accent-red-ink);
+  /* « À revoir » attend l'élève : orange, jamais rouge (l'échec n'est pas puni) */
+  background: var(--accent-orange-soft);
+  color: var(--accent-orange-ink);
 }
 .flashcards-page .flashcards-btn-got {
   background: var(--accent-green-soft);

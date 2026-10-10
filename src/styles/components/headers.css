@@ -332,3 +332,12 @@
 @media (min-width: 1024px) {
   html:not(.native) .rv-page-intro--long .rv-page-intro-title { font-size: 30px; }
 }
+
+/* Formats (flashcards, quiz, carte mentale) : le sous-titre « Carte 1 sur 8 ·
+ * titre de la leçon » tient sur une ligne ; la leçon est un rappel, l'exercice
+ * passe devant (docs/design-grammaire.md §1). */
+.rv-page-intro--format .rv-page-intro-sub {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

@@ -103,5 +103,6 @@ acquis. Pas d'étoiles : elles se lisent comme des favoris ou une note.
 | Mes cours | fait : « À reprendre » d'abord, Mon programme en rangée, recherche au-dessus de la liste, une carte par matière avec ses leçons en rangées, « N à revoir » |
 | Progrès | fait : surtitres neutres, « Niveau 1 » en titre (plus de pastille orange), XP restant en clair, chiffres sans tuile teintée ni icônes colorées, record en vert |
 | Profil | fait : « Prochain badge » en surtitre neutre, Compte en rangées d'une seule carte, icônes neutres (sauf la flamme de la série, orange partout) ; carte Réviz+ inchangée (seule carte foncée de la page) |
-| Formats (résumé, flashcards, quiz, carte mentale), Réglages, Battle | à passer à la grammaire |
+| Formats | fait : sous-titre « Carte 1 sur 8 · leçon » sur une ligne, « Généré par IA » et « 3 idées » sans majuscules, « À revoir » des flashcards en orange (plus de rouge) ; le Résumé suivait déjà (couleur de matière sur ses icônes) |
+| Réglages, Battle | à passer à la grammaire |
 | Toast « Badge débloqué » | surtitre orange à neutraliser ou à classer en exception (célébration) |
