@@ -348,14 +348,14 @@ export default function Progres() {
           />
           <div className="pg-level-info">
             <div className="pg-level-top">
-              <div className="pg-level-badge">Niv. {level}</div>
+              <span className="pg-level-title">Niveau {level}</span>
               <span className="pg-level-total">{xpTotal} XP</span>
             </div>
             <div className="rv-bar pg-level-bar">
               <div className="rv-bar-fill rv-bar-fill--violet" style={{ width: fillPct + '%' }} />
             </div>
             <div className="pg-level-next">
-              <strong>{xpInLvl}</strong> / {XP_PAR_NIVEAU} XP
+              Encore <strong>{XP_PAR_NIVEAU - xpInLvl} XP</strong> pour le niveau {level + 1}
             </div>
           </div>
         </div>
@@ -438,7 +438,7 @@ export default function Progres() {
             <span className="pg-stat-value">{allRevisions.length}</span>
             <span className="pg-stat-label">Révisions totales</span>
           </div>
-          <div className="rv-card pg-stat-card pg-stat-card--accent">
+          <div className="rv-card pg-stat-card">
             <div className="rv-icon-square rv-icon-square--xl rv-icon-square--orange"><CalendarIcon /></div>
             <span className="pg-stat-value">{activeDays}</span>
             <span className="pg-stat-label">Jours actifs</span>

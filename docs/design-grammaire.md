@@ -99,5 +99,6 @@ acquis. Pas d'étoiles : elles se lisent comme des favoris ou une note.
 | Coach | refait (conversation directe) |
 | Accueil | fait : une action dans le héros, « Ta dernière leçon » reprend la leçon, Mon programme et Battle en rangées, défis en surtitre |
 | Mes cours | fait : « À reprendre » d'abord, Mon programme en rangée, recherche au-dessus de la liste, une carte par matière avec ses leçons en rangées, « N à revoir » |
-| Progrès, Profil, formats | à passer à la grammaire |
+| Progrès | fait : surtitres neutres, « Niveau 1 » en titre (plus de pastille orange), XP restant en clair, chiffres sans tuile teintée ni icônes colorées, record en vert |
+| Profil, formats | à passer à la grammaire |
 | Toast « Badge débloqué » | surtitre orange à neutraliser ou à classer en exception (célébration) |
