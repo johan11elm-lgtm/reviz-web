@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<style>
+@font-face { font-family: Geist; font-weight: 500; src: url(../../node_modules/@fontsource/geist/files/geist-latin-500-normal.woff2); }
+@font-face { font-family: Geist; font-weight: 600; src: url(../../node_modules/@fontsource/geist/files/geist-latin-600-normal.woff2); }
+@font-face { font-family: Geist; font-weight: 700; src: url(../../node_modules/@fontsource/geist/files/geist-latin-700-normal.woff2); }
+@font-face { font-family: Geist; font-weight: 800; src: url(../../node_modules/@fontsource/geist/files/geist-latin-800-normal.woff2); }
+@font-face { font-family: Geist; font-weight: 900; src: url(../../node_modules/@fontsource/geist/files/geist-latin-900-normal.woff2); }
+:root {
+  --cream: #F8EFE7; --ink: #2D2B57; --text: #1B1A23; --muted: #6B6557;
+  --orange: #FF8A3D; --orange-ink: #B34400; --green: #34C77B; --green-ink: #0F6B3A;
+  --red: #FF5470; --red-ink: #A81F36; --red-strong: #D32F4D; --border: #EBDFCF;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { width: 1080px; height: 1920px; overflow: hidden; background: var(--cream); }
+body { font-family: Geist, Inter, 'Noto Color Emoji', sans-serif; color: var(--text); position: relative; }
+.abs { position: absolute; }
+.scene { position: absolute; inset: 0; }
+img.m { position: absolute; width: 900px; height: 900px; transform-origin: 50% 70%; }
+
+/* Scène 1-2 : la conversation */
+.kicker { left: 0; right: 0; top: 190px; text-align: center; font-weight: 700; font-size: 46px; color: var(--muted); }
+.bubble { max-width: 820px; padding: 36px 46px; border-radius: 48px; font-size: 64px; font-weight: 700; line-height: 1.12; box-shadow: 0 10px 30px rgba(45,43,87,.10); }
+.b-in { left: 80px; top: 290px; background: #fff; border-bottom-left-radius: 14px; }
+.b-out { right: 80px; top: 520px; background: var(--ink); color: #fff; border-bottom-right-radius: 14px; }
+.code { display: inline-block; margin-top: 14px; padding: 8px 26px; border-radius: 20px; background: var(--orange); color: #fff; letter-spacing: 10px; font-weight: 900; font-size: 76px; }
+.vs { left: 0; right: 0; top: 960px; text-align: center; font-weight: 900; font-size: 210px; color: var(--orange); -webkit-text-stroke: 10px #fff; paint-order: stroke fill; }
+.tag { padding: 12px 30px; border-radius: 999px; font-weight: 800; font-size: 40px; color: #fff; }
+
+/* Scène 3 : la question */
+.round { left: 0; right: 0; top: 150px; text-align: center; font-weight: 800; font-size: 44px; color: var(--orange-ink); letter-spacing: 2px; }
+.card { left: 60px; right: 60px; top: 230px; background: #fff; border-radius: 40px; padding: 48px 52px 52px; box-shadow: 0 14px 40px rgba(45,43,87,.10); }
+.q { font-size: 50px; font-weight: 700; line-height: 1.25; }
+.q small { display: block; font-size: 36px; font-weight: 600; color: var(--muted); margin-bottom: 18px; }
+.timer { height: 18px; border-radius: 999px; background: #F4EBE0; margin: 34px 0 36px; overflow: hidden; }
+.timer i { display: block; height: 100%; background: var(--orange); border-radius: 999px; }
+.choices { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+.ch { position: relative; height: 140px; border-radius: 28px; border: 4px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 66px; font-weight: 800; background: #fff; }
+.ch .who { position: absolute; top: -22px; right: 18px; font-size: 30px; padding: 6px 18px; }
+.delta { font-weight: 900; font-size: 84px; }
+
+/* Scène 4 : le score */
+.score { left: 0; right: 0; top: 230px; text-align: center; font-weight: 900; font-size: 300px; color: var(--ink); letter-spacing: -6px; }
+.score span { color: var(--red-strong); }
+.sub { left: 80px; right: 80px; text-align: center; font-weight: 700; font-size: 54px; line-height: 1.2; }
+
+/* Scène 5 : la fin */
+.logo { left: 0; right: 0; top: 260px; text-align: center; font-weight: 900; font-size: 190px; color: var(--ink); letter-spacing: -6px; }
+.logo b { color: var(--orange); }
+.cta { left: 50%; top: 1680px; transform: translateX(-50%); background: var(--ink); color: #fff; font-weight: 800; font-size: 58px; padding: 34px 70px; border-radius: 999px; white-space: nowrap; }
+</style>
+</head>
+<body>
+
+<!-- Scène 1-2 -->
+<div class="scene" id="s1">
+  <div class="abs kicker" id="k1">Ton pote, ce matin :</div>
+  <div class="abs bubble b-in" id="bin">Thalès ? Je maîtrise 😎</div>
+  <div class="abs bubble b-out" id="bout">Prouve-le.<br><span class="code">K7RM</span></div>
+  <img class="m" id="m1r" src="../../assets-src/mascot/battle/pose-b2-aura-rouge.png">
+  <img class="m" id="m1e" src="../../assets-src/mascot/battle/pose-b1-garde-encre.png">
+  <div class="abs vs" id="vs">VS</div>
+  <div class="abs tag" id="t1e" style="background:var(--ink)">Toi</div>
+  <div class="abs tag" id="t1r" style="background:var(--red-strong)">Ton pote</div>
+</div>
+
+<!-- Scène 3 -->
+<div class="scene" id="s3">
+  <div class="abs round">ROUND 3 · 3e · MATHS</div>
+  <div class="abs card" id="card">
+    <div class="q"><small>(MN) // (BC), AM = 4, AB = 10, AC = 15</small>Combien vaut AN ?</div>
+    <div class="timer"><i id="bar"></i></div>
+    <div class="choices">
+      <div class="ch" id="c0">6<span class="tag who" id="w0" style="background:var(--ink)">Toi</span></div>
+      <div class="ch" id="c1">9</div>
+      <div class="ch" id="c2">37,5<span class="tag who" id="w2" style="background:var(--red-strong)">Ton pote</span></div>
+      <div class="ch" id="c3">11</div>
+    </div>
+  </div>
+  <img class="m" id="m3e" src="../../assets-src/mascot/battle/pose-b1-garde-encre.png">
+  <img class="m" id="m3e2" src="../../assets-src/mascot/battle/pose-b2-aura-encre.png">
+  <img class="m" id="m3r" src="../../assets-src/mascot/battle/pose-b1-garde-rouge.png">
+  <img class="m" id="m3r2" src="../../assets-src/mascot/battle/pose-b3-moinsaura-rouge.png">
+  <div class="abs delta" id="d1" style="color:var(--green-ink)">+20 aura</div>
+  <div class="abs delta" id="d2" style="color:var(--red-ink)">−10 aura</div>
+</div>
+
+<!-- Scène 4 -->
+<div class="scene" id="s4">
+  <div class="abs score" id="score">3<span>–</span>0</div>
+  <img class="m" id="m67a" src="../../assets-src/mascot/battle/pose-b6-sixseven-a-encre.png">
+  <img class="m" id="m67b" src="../../assets-src/mascot/battle/pose-b6-sixseven-b-encre.png">
+  <div class="abs sub" id="sub4" style="top:1700px">Bon… il révisera la prochaine fois.</div>
+</div>
+
+<!-- Scène 5 -->
+<div class="scene" id="s5">
+  <div class="abs logo" id="logo">Réviz<b>.</b></div>
+  <div class="abs sub" id="sub5" style="top:520px">Défie tes potes sur<br>n'importe quel chapitre.</div>
+  <img class="m" id="m5" src="../../assets-src/mascot/battle/pose-b4-champion-encre.png">
+  <div class="abs sub" id="sub5b" style="top:1570px; font-size:42px; color:var(--muted)">Collège · Lycée · Toutes les matières</div>
+  <div class="abs cta" id="cta">revizapp.fr</div>
+</div>
+
+<script>
+const $ = id => document.getElementById(id);
+const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+const prog = (t, a, b) => clamp((t - a) / (b - a));
+const eOut = x => 1 - Math.pow(1 - x, 3);
+const eIn = x => x * x * x;
+const eBack = x => { const c = 1.70158, c3 = c + 1; return 1 + c3 * Math.pow(x - 1, 3) + c * Math.pow(x - 1, 2); };
+const lerp = (a, b, x) => a + (b - a) * x;
+
+function set(el, { x = 0, y = 0, s = 1, r = 0, o = 1, left, top } = {}) {
+  if (typeof el === 'string') el = $(el);
+  if (left !== undefined) el.style.left = left + 'px';
+  if (top !== undefined) el.style.top = top + 'px';
+  el.style.transform = `translate(${x}px, ${y}px) scale(${s}) rotate(${r}deg)`;
+  el.style.opacity = o;
+}
+// Pop d'entrée : échelle avec rebond + fondu
+const pop = (t, at, d = 0.45) => { const p = prog(t, at, at + d); return { s: eBack(p) * 1 || 0.001, o: clamp(p * 3) }; };
+// Respiration légère pour que les mascottes ne soient jamais figées
+const breathe = (t, ph = 0) => ({ y: Math.sin(t * 3.2 + ph) * 10, r: Math.sin(t * 2.1 + ph) * 1.5 });
+
+// Fenêtres des scènes (secondes)
+const S1 = [0, 4.9], S3 = [4.9, 10.1], S4 = [10.1, 12.9], S5 = [12.9, 15.5];
+const sceneOpacity = (t, [a, b], fade = 0.25) =>
+  (a === 0 ? 1 : prog(t, a, a + fade)) * (1 - prog(t, b - fade, b));
+
+window.render = function (t) {
+  // --- Scène 1-2 : conversation puis face-à-face ---
+  $('s1').style.opacity = sceneOpacity(t, S1);
+  set('k1', { o: prog(t, 0.05, 0.3) });
+  { const p = pop(t, 0.15); set('bin', { s: p.s, o: p.o }); $('bin').style.transformOrigin = '0% 100%'; }
+  { const p = pop(t, 1.9); set('bout', { s: p.s, o: p.o }); $('bout').style.transformOrigin = '100% 100%'; }
+  {
+    // Le pote arrive seul, au centre, très sûr de lui ; puis glisse à droite quand tu réponds
+    const p = pop(t, 0.55, 0.5), b = breathe(t, 1), slide = eOut(prog(t, 2.6, 3.1));
+    set('m1r', { left: lerp(90, 340, slide), top: lerp(820, 880, slide), s: p.s * lerp(1, 0.6, slide), o: p.o, y: b.y, r: b.r });
+    const pe = prog(t, 2.75, 3.25), be = breathe(t, 0);
+    set('m1e', { left: lerp(-900, -160, eOut(pe)), top: 880, s: 0.6, o: pe > 0 ? 1 : 0, y: be.y, r: be.r });
+    const pv = pop(t, 3.45, 0.35);
+    set('vs', { s: lerp(2.2, 1, eOut(prog(t, 3.45, 3.8))), o: pv.o, r: -6 });
+    set('t1e', { left: 235, top: 1610, ...pop(t, 3.7) });
+    set('t1r', { left: 680, top: 1610, ...pop(t, 3.8) });
+  }
+
+  // --- Scène 3 : la question, le chrono, la révélation ---
+  $('s3').style.opacity = sceneOpacity(t, S3);
+  {
+    const a = S3[0];
+    set('card', { y: lerp(60, 0, eOut(prog(t, a, a + 0.4))), o: prog(t, a, a + 0.3) });
+    $('bar').style.width = (100 * (1 - prog(t, a + 0.3, a + 3.2))) + '%';
+    const reveal = t >= a + 3.0;
+    // Les choix des joueurs apparaissent pendant le chrono
+    set('w0', { ...pop(t, a + 1.5, 0.3) });
+    set('w2', { ...pop(t, a + 2.2, 0.3) });
+    const c0 = $('c0'), c2 = $('c2');
+    c0.style.borderColor = reveal ? 'var(--green)' : 'var(--border)';
+    c0.style.background = reveal ? '#DCF5E6' : '#fff';
+    c0.style.color = reveal ? 'var(--green-ink)' : 'var(--text)';
+    c2.style.borderColor = reveal ? 'var(--red)' : 'var(--border)';
+    c2.style.background = reveal ? '#FFE0E5' : '#fff';
+    c2.style.color = reveal ? 'var(--red-ink)' : 'var(--text)';
+    const pr = prog(t, a + 3.0, a + 3.25);
+    set('c0', { s: reveal ? lerp(1.12, 1, pr) : 1 });
+    set('c2', { x: reveal ? Math.sin(pr * Math.PI * 6) * 14 * (1 - pr) : 0 });
+
+    const be = breathe(t, 0), br = breathe(t, 1.3);
+    const enter = eOut(prog(t, a + 0.1, a + 0.5));
+    const swap = prog(t, a + 3.05, a + 3.2);
+    set('m3e', { left: -160, top: 1000, s: 0.62, y: be.y + lerp(300, 0, enter), r: be.r, o: 1 - swap });
+    set('m3r', { left: 340, top: 1000, s: 0.62, y: br.y + lerp(300, 0, enter), r: br.r, o: 1 - swap });
+    const ps = pop(t, a + 3.05, 0.4);
+    set('m3e2', { left: -160, top: 1000, s: 0.62 * ps.s, y: be.y, r: be.r, o: ps.o });
+    set('m3r2', { left: 340, top: 1000, s: 0.62 * ps.s, y: br.y, r: br.r, o: ps.o });
+    const pd = prog(t, a + 3.3, a + 4.6);
+    set('d1', { left: 110, top: 1060, y: -120 * eOut(pd), o: pd > 0 ? clamp(1.4 - pd) : 0 });
+    set('d2', { left: 610, top: 1060, y: -120 * eOut(pd), o: pd > 0 ? clamp(1.4 - pd) : 0 });
+  }
+
+  // --- Scène 4 : 3-0 et le 6-7 ---
+  $('s4').style.opacity = sceneOpacity(t, S4);
+  {
+    const a = S4[0];
+    set('score', { ...pop(t, a + 0.05, 0.4) });
+    // Le geste 6-7 : deux images alignées au pixel, alternées comme dans l'app
+    const on = t >= a + 0.35, flip = Math.floor((t - a) / 0.22) % 2 === 1;
+    const p = pop(t, a + 0.35, 0.4), b = breathe(t);
+    const base = { left: 90, top: 700, s: 1.0 * p.s, y: b.y * 0.5 };
+    set('m67a', { ...base, o: on && !flip ? p.o : 0 });
+    set('m67b', { ...base, o: on && flip ? p.o : 0 });
+    set('sub4', { o: prog(t, a + 1.0, a + 1.3) });
+  }
+
+  // --- Scène 5 : signature ---
+  $('s5').style.opacity = sceneOpacity(t, S5);
+  {
+    const a = S5[0];
+    set('logo', { ...pop(t, a + 0.05, 0.45) });
+    set('sub5', { o: prog(t, a + 0.35, a + 0.65), y: lerp(30, 0, eOut(prog(t, a + 0.35, a + 0.65))) });
+    const p = pop(t, a + 0.45, 0.5), b = breathe(t);
+    set('m5', { left: 90, top: 640, s: 0.92 * p.s, o: p.o, y: b.y, r: b.r });
+    set('sub5b', { o: prog(t, a + 0.8, a + 1.1) });
+    const pc = pop(t, a + 0.9, 0.4);
+    $('cta').style.transform = `translateX(-50%) scale(${pc.s * (1 + Math.max(0, Math.sin((t - a - 1.4) * 6)) * 0.04 * (t > a + 1.4))})`;
+    $('cta').style.opacity = pc.o;
+  }
+};
+render(0);
+</script>
+</body>
+</html>
