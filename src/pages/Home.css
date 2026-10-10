@@ -12,6 +12,11 @@
   overflow-y: auto;
 }
 
+/* Téléphone : une pile, un seul espacement entre les blocs (les marges
+ * propres à chaque carte laissaient « Essaie un thème » collée à la suite). */
+.home-page .home-stack { display: flex; flex-direction: column; gap: var(--gap-cards); }
+.home-page .home-stack > * { margin-top: 0; margin-bottom: 0; flex-shrink: 0; }
+
 /* ── Greeting (utilise .rv-greeting du DS) ── */
 .home-page .home-greeting { padding-top: 4px; }
 
@@ -36,21 +41,31 @@
 .home-page .home-stat-sep { width: 1px; height: 34px; background: var(--border-subtle); flex-shrink: 0; }
 .home-page .home-stat-check { margin-left: auto; color: var(--accent-green-strong); font-size: 18px; display: inline-flex; }
 
-/* ── Featured "Reprendre" card ── */
-.home-page .home-featured-card { margin-bottom: var(--gap-cards); }
+/* ── « Ta dernière leçon » : la rangée du haut reprend la leçon ── */
+.home-page .home-featured-card { margin-bottom: var(--gap-cards); padding: 6px 6px 14px; }
 
 .home-page .home-featured-top {
   display: flex;
   align-items: center;
-  gap: 14px;
-  margin-bottom: 14px;
+  gap: 12px;
+  width: 100%;
+  padding: 8px 10px 8px 8px;
+  border: none;
+  border-radius: 20px;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
 }
+.home-page .home-featured-top:active { background: var(--bg-hover); }
 
 .home-page .home-featured-mascot {
-  width: 96px;
-  height: 96px;
+  width: 84px;
+  height: 84px;
   flex-shrink: 0;
-  margin: -6px -2px -6px -8px;
+  margin: -6px -2px -6px -4px;
   filter: drop-shadow(0 10px 20px rgba(232, 101, 26, 0.26));
 }
 
@@ -60,15 +75,6 @@
   display: flex;
   flex-direction: column;
   gap: 3px;
-}
-
-/* Étiquette discrète, le titre de la leçon porte la carte */
-.home-page .home-featured-label {
-  font-size: 12px;
-  font-weight: 800;
-  letter-spacing: 0.6px;
-  text-transform: uppercase;
-  color: var(--accent-orange-ink);
 }
 
 .home-page .home-featured-title {
@@ -93,24 +99,7 @@
   text-overflow: ellipsis;
 }
 
-.home-page .home-featured-phrase { margin: 6px 0 14px; }
-
-.home-page .home-featured-actions { margin-top: 10px; }
-
-/* Rangée à 3 actions (Flashcards / Quiz / Coach) : disposition en colonne
-   compacte pour que les libellés restent lisibles sur petit écran (375px). */
-.home-page .home-featured-actions .rv-btn-action {
-  flex-direction: column;
-  align-items: center;
-  gap: 7px;
-  padding: 12px 8px;
-}
-
-.home-page .home-featured-actions .rv-btn-action-text {
-  align-items: center;
-  text-align: center;
-  width: 100%;
-}
+.home-page .home-featured-actions { margin: 8px 12px 0; }
 
 /* ── Challenges card ── */
 .home-page .home-challenges-card { margin-bottom: 14px; }
@@ -120,13 +109,6 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 12px;
-}
-
-.home-page .home-challenges-title {
-  font-weight: 700;
-  font-size: 15px;
-  color: var(--accent-violet);
-  letter-spacing: -0.2px;
 }
 
 .home-page .home-challenges-count {
@@ -180,41 +162,4 @@
   font-weight: 600;
   min-width: 32px;
   text-align: right;
-}
-
-/* ── Mon programme : entrée vers la révision sans scan ── */
-.home-page .home-programme-card {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  padding: 12px 16px;
-  margin-bottom: var(--gap-cards);
-  text-decoration: none;
-  color: inherit;
-}
-.home-page .home-programme-mascot { flex-shrink: 0; }
-.home-page .home-programme-text {
-  flex: 1;
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-.home-page .home-programme-title {
-  font-family: 'Geist', sans-serif;
-  font-size: 16px;
-  font-weight: 800;
-  letter-spacing: -0.3px;
-  color: var(--text-primary);
-}
-.home-page .home-programme-sub {
-  font-size: 12.5px;
-  line-height: 1.35;
-  color: var(--text-muted);
-}
-.home-page .home-programme-arrow {
-  flex-shrink: 0;
-  font-size: 22px;
-  line-height: 1;
-  color: var(--text-muted);
 }

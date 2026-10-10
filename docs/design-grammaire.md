@@ -58,9 +58,10 @@ chapitres (élément de jeu, pas un état).
    l'action principale. **Une par écran au maximum.** Le bandeau de trimestre du
    chemin est un en-tête, pas une carte héros : il ne porte pas d'action.
 2. **La carte blanche** (`.rv-card`) : du contenu ou un groupe de rangées.
-3. **La rangée** : avatar (mascotte dans un carré `--bg-subtle` de 44 px, rayon
-   14 px), titre d'élément, méta, chevron `›` en `--text-light`. En liste, les
-   rangées partagent une carte blanche et sont séparées d'un filet.
+3. **La rangée** (`.rv-row`, cards.css) : avatar (mascotte dans un carré
+   `--bg-subtle` de 44 px, rayon 14 px), titre d'élément, méta, chevron `›` en
+   `--text-light`. En liste, les rangées partagent une carte blanche
+   (`.rv-card.rv-rows`) et sont séparées d'un filet.
 
 Pas de carte teintée (beige, rose…) pour se distinguer : la distinction vient
 du contenu, de la mascotte ou de la position.
@@ -79,6 +80,9 @@ du contenu, de la mascotte ou de la position.
 
 - **Un seul bouton plein par écran** (`rv-btn-cta`, ou le bouton blanc d'une
   carte héros). Les autres actions sont `rv-btn-cta--ghost`, des rangées ou des tuiles.
+- **Une action, une entrée par écran** : pas deux chemins vers la même chose
+  (« Reprendre » dans le héros et dans une carte, un bouton coach quand
+  l'onglet Coach est là).
 - Le libellé dit ce qui va se passer, avec un verbe : « Lire le résumé », pas « Go ».
 - Une durée ou un nombre aide à se lancer : « 5 min », « 8 cartes ».
 
@@ -93,4 +97,6 @@ acquis. Pas d'étoiles : elles se lisent comme des favoris ou une note.
 |---|---|
 | Chapitre : fiche du chemin + page de la leçon | pilote |
 | Coach | refait (conversation directe) |
-| Accueil, Mes cours, Progrès, Profil, formats | à passer à la grammaire |
+| Accueil | fait : une action dans le héros, « Ta dernière leçon » reprend la leçon, Mon programme et Battle en rangées, défis en surtitre |
+| Mes cours, Progrès, Profil, formats | à passer à la grammaire |
+| Toast « Badge débloqué » | surtitre orange à neutraliser ou à classer en exception (célébration) |

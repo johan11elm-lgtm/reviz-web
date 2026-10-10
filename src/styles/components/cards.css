@@ -98,3 +98,55 @@
   color: var(--text-muted);
   font-weight: 500;
 }
+
+/* ============================================================================
+ * RV ROWS — la rangée (docs/design-grammaire.md §4) : avatar dans un carré
+ * neutre, titre d'élément, méta, chevron. En liste, les rangées partagent
+ * une carte blanche (.rv-card.rv-rows) et sont séparées d'un filet.
+ * ========================================================================== */
+.rv-rows { display: flex; flex-direction: column; padding: 4px; }
+.rv-row {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 10px 12px 10px 10px;
+  border: none;
+  border-radius: 20px;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  text-decoration: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: background 0.15s ease;
+}
+.rv-row + .rv-row::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 66px;
+  right: 12px;
+  height: 1px;
+  background: var(--border-subtle);
+}
+.rv-row:active { background: var(--bg-hover); }
+@media (hover: hover) and (pointer: fine) {
+  .rv-row:hover { background: var(--bg-hover); }
+}
+.rv-row-avatar {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: var(--bg-subtle);
+}
+.rv-row-text { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.rv-row-title { font-size: 15px; font-weight: 700; letter-spacing: -0.2px; line-height: 1.25; color: var(--text-primary); }
+.rv-row-sub { font-size: 13px; line-height: 1.35; color: var(--text-muted); }
+.rv-row-arrow { flex-shrink: 0; font-size: 22px; font-weight: 700; line-height: 1; color: var(--text-light); }
