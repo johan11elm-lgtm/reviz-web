@@ -52,6 +52,9 @@ button.rp-badge:active { transform: scale(0.96); }
   color: var(--rp-gold-ink);
   font: 900 11px/1 'Geist', sans-serif;
 }
+/* … et sur l'onglet Coach de la barre du bas (BottomNav) : hors du rond
+   (overflow: hidden), calée sur son bord haut droit. */
+.nav-item--coach .rp-coach-tag { top: -22px; right: auto; left: calc(50% + 11px); z-index: 1; }
 
 /* ── Sceau « Membre fondateur » ── */
 .rp-seal {

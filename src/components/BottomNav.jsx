@@ -2,6 +2,7 @@ import { NavLink, useLocation } from 'react-router-dom'
 import { useState, useEffect, useRef } from 'react'
 import { Mascot } from './Mascot'
 import { useAuth } from '../context/AuthContext'
+import './RevizPlus.css'
 
 export const HomeIcon = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -51,7 +52,10 @@ export function BottomNav() {
   const lastY = useRef(0);
   const { pathname } = useLocation();
   // Le coach passe par une API authentifiée : pas d'onglet en mode essai.
-  const isGuest = useAuth()?.isGuest;
+  const auth = useAuth();
+  const isGuest = auth?.isGuest;
+  // Réviz+ : pastille « + » dorée sur l'onglet du coach (RevizPlus.css).
+  const hasRevizPlus = !!auth?.hasRevizPlus && !isGuest;
   const tabs = isGuest ? TABS.filter(t => !t.coach) : TABS;
 
   useEffect(() => {
@@ -114,6 +118,7 @@ export function BottomNav() {
           aria-label={tab.label}
         >
           <span className="nav-icon"><tab.Icon /></span>
+          {tab.coach && hasRevizPlus && <span className="rp-coach-tag" aria-hidden="true">+</span>}
           <span className="nav-label">{tab.label}</span>
         </NavLink>
       ))}

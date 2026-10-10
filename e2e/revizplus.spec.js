@@ -23,7 +23,10 @@ for (const [appareil, viewport] of [['telephone', { width: 390, height: 844 }], 
     // Accueil : badge doré, étiquette du coach, carte d'essai de thème
     const badge = page.getByRole('button', { name: 'Voir mon Réviz+' })
     await expect(badge).toBeVisible()
-    await expect(page.getByRole('button', { name: 'Demander au coach (Réviz+)' })).toBeVisible()
+    // Le coach a son onglet (téléphone, avec la pastille « + » dorée) ou sa
+    // place dans la barre latérale (ordinateur) : plus de bouton dans l'en-tête.
+    if (appareil === 'telephone') await expect(page.locator('.bottom-nav .nav-item--coach .rp-coach-tag')).toBeVisible()
+    else await expect(page.locator('.side-nav').getByRole('link', { name: 'Coach' })).toBeVisible()
     await expect(page.getByText('Essaie un thème Réviz+')).toBeVisible()
     await page.waitForTimeout(400)
     await capture('01-accueil')
