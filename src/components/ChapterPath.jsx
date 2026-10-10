@@ -1,12 +1,15 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { Mascot } from './Mascot';
-import { CheckIcon, RefreshIcon, LockIcon, StarIcon, BookOpenIcon, FlashcardsIcon, QuizIcon, UsersIcon } from './Icons';
+import { CheckIcon, RefreshIcon, LockIcon, UsersIcon } from './Icons';
 import { CHAPTER_STATE_LABEL } from '../utils/programme';
 import { QUESTIONS_PAR_PARTIE } from '../utils/battle';
 import './ChapterPath.css';
 
 // Décalage horizontal des étapes, façon sentier qui serpente (en unités de --path-step).
 const WAVE = [0, 1, 1.6, 1, 0, -1, -1.6, -1];
+
+// Ton de la pastille d'état (docs/design-grammaire.md §3).
+const STATE_TONE = { commence: 'orange', 'a-revoir': 'orange', maitrise: 'green' };
 
 const PERIODE_LABEL = { T1: '1er trimestre', T2: '2e trimestre', T3: '3e trimestre' };
 
@@ -214,20 +217,21 @@ function StepCard({ chapter, status, state, onClose, onOpen, onBattle, busy }) {
   return (
     <div className="path-card" ref={ref} role="dialog" aria-label={chapter.titre}>
       <div className="path-card-top">
-        <span className={`path-card-status path-card-status--${state}`}>{status}</span>
         <span className="path-card-num">Chapitre {chapter.ordre}</span>
+        <span className={`rv-pill${STATE_TONE[state] ? ` rv-pill--${STATE_TONE[state]}` : ''}`}>{status}</span>
       </div>
       <h3 className="path-card-title">{chapter.titre}</h3>
+      <p className="path-card-meta">
+        Résumé · {chapter.flashcards} cartes · {chapter.quiz} questions · carte mentale
+      </p>
       {chapter.notions?.length > 0 && (
-        <ul className="path-card-notions">
-          {chapter.notions.slice(0, 4).map(n => <li key={n}><StarIcon />{n}</li>)}
-        </ul>
+        <div className="path-card-notions">
+          <span className="rv-eyebrow">Tu sauras</span>
+          <ul className="rv-bullets">
+            {chapter.notions.slice(0, 4).map(n => <li key={n}>{n}</li>)}
+          </ul>
+        </div>
       )}
-      <div className="path-card-formats" aria-hidden="true">
-        <span><FlashcardsIcon /> {chapter.flashcards} cartes</span>
-        <span><QuizIcon /> {chapter.quiz} questions</span>
-        <span><BookOpenIcon /> résumé et carte mentale</span>
-      </div>
       <button type="button" className="rv-btn-cta rv-btn-cta--full path-card-cta" onClick={onOpen} disabled={busy}>
         <span>{cta}</span>
         <span className="rv-btn-cta-arrow" aria-hidden="true">→</span>

@@ -17,6 +17,7 @@
 @import './components/icons.css';
 @import './components/states.css';
 @import './components/dots.css';
+@import './components/type.css';
 
 /* ─── Variables Light ──────────────────────────────────────────── */
 :root {

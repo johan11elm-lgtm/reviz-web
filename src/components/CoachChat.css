@@ -17,13 +17,13 @@
 
 .coach-entry-avatar {
   flex-shrink: 0;
-  width: 48px;
-  height: 48px;
-  border-radius: 16px;
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
   display: grid;
   place-items: center;
   overflow: hidden;
-  background: var(--accent-violet-soft);
+  background: var(--bg-subtle);
 }
 .coach-entry-avatar .mascot { margin-top: 8px; }
 
@@ -40,8 +40,7 @@
 .coach-entry-arrow {
   font-size: 22px;
   font-weight: 700;
-  color: var(--accent-violet);
-  opacity: 0.7;
+  color: var(--text-light);
 }
 
 /* ── Bouton coach du PageHeader (formats de révision) ── */

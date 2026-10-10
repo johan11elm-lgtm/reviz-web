@@ -325,3 +325,10 @@
     margin: -26px -6px -6px 0;
   }
 }
+
+/* Titre long (titres de leçon, souvent sur trois lignes) : un cran plus
+ * petit, pour que l'action de la page reste visible au premier écran. */
+.rv-page-intro--long .rv-page-intro-title { font-size: 25px; letter-spacing: -0.8px; line-height: 1.12; }
+@media (min-width: 1024px) {
+  html:not(.native) .rv-page-intro--long .rv-page-intro-title { font-size: 30px; }
+}

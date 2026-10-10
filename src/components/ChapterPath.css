@@ -313,54 +313,33 @@
   to { opacity: 1; transform: none; }
 }
 .path-card-top { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
-.path-card-num { font-size: 12px; font-weight: 600; color: var(--text-muted); }
-.path-card-status {
-  font-size: 12px;
-  font-weight: 800;
-  padding: 4px 10px;
-  border-radius: 999px;
-  color: var(--text-secondary);
-  background: var(--bg-hover);
-}
-.path-card-status--commence,
-.path-card-status--a-revoir { color: var(--accent-orange-ink); background: var(--accent-orange-soft); }
-.path-card-status--maitrise { color: var(--accent-green-ink); background: var(--accent-green-soft); }
+.path-card-num { font-size: 13px; font-weight: 600; color: var(--text-muted); }
 .path-card-title {
-  margin: 10px 0 8px;
+  margin: 8px 0 0;
   font-family: 'Geist', sans-serif;
-  font-size: 17px;
+  font-size: 18px;
   font-weight: 800;
   letter-spacing: -0.3px;
   line-height: 1.25;
   color: var(--text-primary);
 }
-.path-card-notions {
-  list-style: none;
-  margin: 0 0 12px;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-.path-card-notions li {
-  display: flex;
-  gap: 8px;
+.path-card-meta {
+  margin: 4px 0 0;
   font-size: 13px;
-  line-height: 1.35;
-  color: var(--text-secondary);
-}
-.path-card-notions svg { flex-shrink: 0; width: 14px; height: 14px; margin-top: 2px; color: var(--accent-orange); }
-.path-card-formats {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px 12px;
-  margin-bottom: 14px;
-  font-size: 12px;
   font-weight: 600;
+  line-height: 1.4;
   color: var(--text-muted);
 }
-.path-card-formats span { display: inline-flex; align-items: center; gap: 5px; }
-.path-card-formats svg { width: 14px; height: 14px; }
+.path-card-notions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border-subtle);
+}
+.path-card-notions .rv-bullets li { font-size: 13.5px; }
+.path-card-cta { margin-top: 16px; }
 .path-card-battle { gap: 8px; margin-top: 8px; }
 .path-card-battle svg { width: 16px; height: 16px; }
 /* Sans unités de conteneur (Safari < 16, iOS 15) : fiche centrée sur le chemin */

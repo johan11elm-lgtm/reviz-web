@@ -1,6 +1,5 @@
 import { useMemo, useState } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
-import { PageHeader } from '../components/PageHeader';
 import { GuestWall } from '../components/GuestWall';
 import { BottomNav } from '../components/BottomNav';
 import { useAuth } from '../context/AuthContext';
@@ -12,13 +11,14 @@ import { loadLessons } from '../services/historyService';
 import { subjectMascot } from '../utils/subjects';
 import { isProgrammeLessonId } from '../utils/programme';
 import { useIsDesktop } from '../hooks/useMediaQuery';
+import { useModalA11y } from '../hooks/useModalA11y';
 import './Coach.css';
 
 /**
  * Liste des conversations : une par leçon (scannée ou chapitre du
  * programme). Celles où l'élève a déjà écrit remontent, avec l'aperçu du
- * dernier message. Barre latérale sur ordinateur, écran d'accueil du coach
- * sur téléphone.
+ * dernier message. Barre latérale sur ordinateur, feuille « Changer de
+ * leçon » sur téléphone.
  */
 function CoachThreads({ lessons, activeId, onSelect }) {
   const [query, setQuery] = useState('');
@@ -48,7 +48,7 @@ function CoachThreads({ lessons, activeId, onSelect }) {
               : <>{l.metadata.subject}{isProgrammeLessonId(l.id) ? ' · programme' : ''}</>}
           </span>
         </span>
-        <span className="coach-side-item-arrow" aria-hidden="true">›</span>
+        <span className="coach-side-item-arrow" aria-hidden="true">{l.id === activeId ? '✓' : '›'}</span>
       </button>
     </li>
   );
@@ -85,19 +85,50 @@ function CoachThreads({ lessons, activeId, onSelect }) {
 }
 
 /**
+ * Téléphone : choix de la leçon dans une feuille, ouverte depuis le titre
+ * de la conversation (ou le lien « Changer de leçon » de l'accueil du chat).
+ */
+function LessonPicker({ lessons, activeId, onSelect, onClose }) {
+  const ref = useModalA11y(onClose, true);
+  return (
+    <div className="coach-overlay" onClick={onClose}>
+      <div
+        className="coach-sheet coach-picker"
+        ref={ref}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Changer de leçon"
+        onClick={e => e.stopPropagation()}
+      >
+        <div className="coach-picker-head">
+          <h2 className="coach-picker-title">Sur quelle leçon&nbsp;?</h2>
+          <button type="button" className="coach-close-btn" onClick={onClose} aria-label="Fermer">✕</button>
+        </div>
+        <div className="coach-picker-body">
+          <CoachThreads lessons={lessons} activeId={activeId} onSelect={onSelect} />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+const ChevronDown = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6" /></svg>
+);
+
+/**
  * Page Coach — interface de chat façon assistant IA, à la sauce Réviz.
- * Une conversation par leçon. Sur ordinateur, la liste des conversations
- * à gauche et la conversation au centre. Sur téléphone, les deux mêmes
- * écrans l'un après l'autre, comme une messagerie : la liste (onglet Coach
- * de la barre du bas), puis la conversation en plein écran.
- * La leçon vient de `?lesson=<id>` ; sans paramètre, l'ordinateur ouvre la
- * plus récente et le téléphone montre la liste.
+ * Une conversation par leçon, ouverte directement : la leçon de `?lesson=`,
+ * sinon la plus récente. Sur téléphone, on change de leçon en touchant son
+ * titre en haut (feuille de choix) ; sur ordinateur, la liste des
+ * conversations reste à gauche.
  */
 export default function Coach() {
   const navigate = useNavigate();
   const isDesktop = useIsDesktop();
   const [params, setParams] = useSearchParams();
   const lessons = useMemo(() => loadLessons(), []);
+  const [picking, setPicking] = useState(false);
   const wanted = params.get('lesson');
   const { isGuest } = useAuth();
 
@@ -106,14 +137,11 @@ export default function Coach() {
     return <GuestWall pose="coach" action="parler au coach" text="Le coach Réviz demande un compte. C'est gratuit, et tout ce que tu as révisé en mode essai te suit." />;
   }
 
-  const asked = lessons.find(l => l.id === wanted) ?? null;
-  const lesson = asked ?? (isDesktop ? lessons[0] ?? null : null);
-  // Ordinateur : on remplace (la liste reste à côté) ; téléphone : on empile,
-  // le retour ramène à la liste.
-  const select = id => setParams({ lesson: id }, { replace: isDesktop });
-  const backToList = () => (window.history.state?.idx > 0 ? navigate(-1) : setParams({}, { replace: true }));
+  const lesson = lessons.find(l => l.id === wanted) ?? lessons[0] ?? null;
+  const select = id => { setParams({ lesson: id }, { replace: true }); setPicking(false); };
+  const back = () => (window.history.state?.idx > 0 ? navigate(-1) : navigate('/'));
 
-  if (lessons.length === 0) {
+  if (!lesson) {
     return (
       <div className="app coach-page">
         <PageIntro title="Coach Réviz" sub="Ouvre une leçon pour lui poser tes questions." mascot="coach" mascotSize={140} className="coach-page-intro" />
@@ -129,36 +157,32 @@ export default function Coach() {
     );
   }
 
-  // Téléphone, sans leçon choisie : la liste des conversations.
-  if (!lesson) {
-    return (
-      <div className="app coach-page coach-page--list">
-        <div className="content coach-list-content">
-          <PageIntro
-            title="Coach Réviz"
-            sub="Une conversation par leçon. Je connais tes cours : demande-moi ce que tu veux."
-            mascot="coach"
-            mascotSize={140}
-            className="coach-page-intro"
-          />
-          <CoachThreads lessons={lessons} activeId={null} onSelect={select} />
-        </div>
-        <BottomNav />
-      </div>
-    );
-  }
+  const canSwitch = lessons.length > 1;
 
   return (
     <div className="app coach-page coach-page--chat">
-      {/* Téléphone : barre de conversation façon messagerie */}
+      {/* Téléphone : barre de conversation ; le titre de la leçon ouvre le choix */}
       <header className="coach-chat-bar">
-        <button type="button" className="rv-bell-btn coach-chat-back" onClick={backToList} aria-label="Toutes les conversations">
+        <button type="button" className="rv-bell-btn coach-chat-back" onClick={back} aria-label="Retour">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6" /></svg>
         </button>
-        <Mascot pose={subjectMascot(lesson.metadata.subject)} size={38} alt="" aria-hidden="true" />
-        <div className="coach-chat-bar-text">
-          <h1 className="coach-chat-bar-title">{lesson.metadata.title}</h1>
-          <p className="coach-chat-bar-sub">Coach Réviz · {lesson.metadata.subject ?? 'ta leçon'}</p>
+        <div className="coach-topic">
+          <span className="coach-topic-avatar" aria-hidden="true">
+            <Mascot pose={subjectMascot(lesson.metadata.subject)} size={34} alt="" />
+          </span>
+          <div className="coach-topic-text">
+            <h1 className="coach-topic-title">{lesson.metadata.title}</h1>
+            <span className="coach-topic-sub">Coach Réviz · {lesson.metadata.subject ?? 'ta leçon'}</span>
+          </div>
+          {canSwitch && (
+            <>
+              <span className="coach-topic-chevron" aria-hidden="true"><ChevronDown /></span>
+              {/* Toute la rangée est cliquable : le bouton la recouvre. */}
+              <button type="button" className="coach-topic-hit" onClick={() => setPicking(true)} aria-haspopup="dialog">
+                <span className="coach-topic-hit-label">Changer de leçon</span>
+              </button>
+            </>
+          )}
         </div>
       </header>
 
@@ -188,9 +212,14 @@ export default function Coach() {
             lessonTitle={lesson.metadata.title}
             variant="page"
             className="coach-page-body"
+            onChangeLesson={canSwitch && !isDesktop ? () => setPicking(true) : undefined}
           />
         </main>
       </div>
+
+      {picking && !isDesktop && (
+        <LessonPicker lessons={lessons} activeId={lesson.id} onSelect={select} onClose={() => setPicking(false)} />
+      )}
     </div>
   );
 }

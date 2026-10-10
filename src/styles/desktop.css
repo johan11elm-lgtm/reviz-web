@@ -238,33 +238,20 @@
   html:not(.native) .cours-page .cours-resume-top { flex-direction: column; align-items: flex-start; gap: 8px; }
   html:not(.native) .cours-page .cours-resume-body { width: 100%; }
 
-  /* ── Analyse : l'essentiel et « à retenir » à gauche, les formats et
-   * l'avancement à droite (balisage propre à l'ordinateur, Analyse.jsx) ── */
+  /* ── Analyse : la prochaine étape, les formats et le coach à gauche ;
+   * l'essentiel, « à retenir » et l'avancement à droite (balisage propre
+   * à l'ordinateur, Analyse.jsx) ── */
   html:not(.native) .analyse-page .analyse-desk {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
     gap: var(--grid-gap);
     align-items: start;
   }
   html:not(.native) .analyse-page .analyse-desk-col { display: flex; flex-direction: column; gap: 16px; min-width: 0; }
   html:not(.native) .analyse-page .analyse-desk-col > * { margin: 0; }
   html:not(.native) .analyse-page .analyse-retenir { display: flex; flex-direction: column; gap: 12px; }
-  html:not(.native) .analyse-page .analyse-retenir-list {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-  html:not(.native) .analyse-page .analyse-retenir-list li {
-    display: flex;
-    gap: 10px;
-    font-size: 14px;
-    line-height: 1.45;
-    color: var(--text-primary);
-  }
-  html:not(.native) .analyse-page .analyse-retenir-list svg { flex-shrink: 0; width: 15px; height: 15px; margin-top: 3px; color: var(--accent-orange); }
+  /* La progression est détaillée dans « Ton avancement » : pas de doublon dans la carte du haut */
+  html:not(.native) .analyse-page .rv-next-progress { display: none; }
   html:not(.native) .analyse-page .analyse-avancement { display: flex; flex-direction: column; gap: 10px; }
   html:not(.native) .analyse-page .analyse-avancement-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
   html:not(.native) .analyse-page .analyse-avancement-row {
@@ -812,7 +799,24 @@
   }
   html:not(.native) .coach-hero-title { font-size: 32px; }
   html:not(.native) .coach-hero-sub { font-size: 15px; }
-  html:not(.native) .coach-hero-cards { grid-template-columns: repeat(4, minmax(0, 1fr)); max-width: 760px; }
+  /* Amorces : quatre tuiles côte à côte (rangées sur téléphone, Coach.css) */
+  html:not(.native) .coach-hero-cards { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; max-width: 760px; padding: 0; background: transparent; box-shadow: none; }
+  html:not(.native) .coach-hero-card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    padding: 14px;
+    border: 1.5px solid var(--border);
+    border-radius: 18px;
+    background: var(--bg-card);
+    transition: border-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  html:not(.native) .coach-hero-card + .coach-hero-card::before { display: none; }
+  html:not(.native) .coach-hero-card:hover { border-color: var(--accent-violet); transform: translateY(-2px); box-shadow: var(--shadow-card); }
+  html:not(.native) .coach-hero-card-icon { width: 32px; height: 32px; border-radius: 10px; margin-bottom: 4px; }
+  html:not(.native) .coach-hero-card-text { font-size: 14px; }
+  html:not(.native) .coach-hero-card-sub { font-size: 12px; }
   html:not(.native) .coach-input-hint-keys { display: inline; }
 }
 

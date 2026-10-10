@@ -46,7 +46,7 @@ export function CoachEntryCard({ onClick }) {
       onClick={onClick}
     >
       <span className="coach-entry-avatar" aria-hidden="true">
-        <Mascot pose="coach" size={46} alt="" />
+        <Mascot pose="coach" size={42} alt="" />
       </span>
       <span className="coach-entry-text">
         <span className="coach-entry-title">Un truc pas clair ?</span>
@@ -179,8 +179,9 @@ export function coachPreview(lessonId) {
  * @param {string} lessonId      leçon Firestore (contexte résolu côté serveur)
  * @param {string} [prefill]     question pré-remplie (hook de friction du quiz)
  * @param {string} [className]
+ * @param {() => void} [onChangeLesson]  page (téléphone) : lien « Changer de leçon » sur l'accueil du chat
  */
-export function CoachConversation({ lessonId, prefill, className = '', variant = 'sheet', lessonTitle = '' }) {
+export function CoachConversation({ lessonId, prefill, className = '', variant = 'sheet', lessonTitle = '', onChangeLesson }) {
   const isPage = variant === 'page';
   const { hasRevizPlus, getUserLevel } = useAuth();
   const navigate = useNavigate();
@@ -291,6 +292,9 @@ export function CoachConversation({ lessonId, prefill, className = '', variant =
               <Mascot pose="coach" size={132} glow animate alt="" aria-hidden="true" className="coach-hero-mascot" />
               <h2 className="coach-hero-title">Qu'est-ce que tu veux comprendre&nbsp;?</h2>
               {lessonTitle && <p className="coach-hero-sub">Je connais ta leçon « {lessonTitle} ». Demande-moi ce que tu veux.</p>}
+              {onChangeLesson && (
+                <button type="button" className="coach-hero-switch" onClick={onChangeLesson}>Changer de leçon</button>
+              )}
               <div className="coach-hero-cards">
                 {PAGE_SUGGESTIONS.map(s => (
                   <button type="button" key={s.text} className="coach-hero-card" onClick={() => send(s.text)}>

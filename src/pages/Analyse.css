@@ -182,17 +182,10 @@
   flex-direction: column;
   gap: 8px;
 }
-.analyse-page .analyse-excerpt-label {
-  font-size: 12px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.6px;
-  color: var(--text-muted);
-}
 .analyse-page .analyse-excerpt-text {
-  font-size: 13px;
+  font-size: 14px;
   color: var(--text-secondary);
-  line-height: 1.6;
+  line-height: 1.55;
   margin: 0;
 }
 
@@ -221,23 +214,21 @@
   font-size: 22px;
   font-weight: 700;
   line-height: 1;
-  opacity: 0.7;
+  color: var(--text-light);
 }
-.analyse-page .analyse-format-arrow--violet { color: var(--accent-violet); }
-.analyse-page .analyse-format-arrow--orange { color: var(--accent-orange); }
-.analyse-page .analyse-format-arrow--green  { color: var(--accent-green); }
-.analyse-page .analyse-format-arrow--pink   { color: var(--accent-pink); }
 
 .analyse-page .analyse-format-name {
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 700;
   letter-spacing: -0.2px;
   color: var(--text-primary);
 }
 
-.analyse-page .analyse-format-count {
-  align-self: flex-start;
-  margin-top: 2px;
+.analyse-page .analyse-format-meta {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-top: -4px;
 }
 
 /* ── Intro (PageIntro) : dans la zone de scroll, qui porte la gouttière ── */
