@@ -21,11 +21,6 @@
       "corrections": 0
     },
     {
-      "chemin": "3eme/maths/notion-de-fonction",
-      "le": "2026-10-08",
-      "corrections": 1
-    },
-    {
       "chemin": "3eme/maths/fonctions-lineaires-et-affines",
       "le": "2026-10-08",
       "corrections": 0
@@ -34,11 +29,6 @@
       "chemin": "3eme/maths/proportionnalite-et-grandeurs-composees",
       "le": "2026-10-08",
       "corrections": 0
-    },
-    {
-      "chemin": "3eme/maths/theoreme-de-thales",
-      "le": "2026-10-08",
-      "corrections": 1
     },
     {
       "chemin": "3eme/maths/trigonometrie",
@@ -58,6 +48,116 @@
     {
       "chemin": "3eme/maths/probabilites",
       "le": "2026-10-08",
+      "corrections": 0
+    },
+    {
+      "chemin": "3eme/maths/geometrie-dans-l-espace",
+      "le": "2026-10-09",
+      "corrections": 0
+    },
+    {
+      "chemin": "3eme/maths/algorithmique-et-programmation",
+      "le": "2026-10-09",
+      "corrections": 0
+    },
+    {
+      "chemin": "3eme/francais/se-raconter-se-representer",
+      "le": "2026-10-09",
+      "corrections": 0
+    },
+    {
+      "chemin": "3eme/francais/phrase-complexe",
+      "le": "2026-10-09",
+      "corrections": 0
+    },
+    {
+      "chemin": "3eme/francais/accord-du-participe-passe",
+      "le": "2026-10-09",
+      "corrections": 1
+    },
+    {
+      "chemin": "3eme/francais/denoncer-les-travers-de-la-societe",
+      "le": "2026-10-09",
+      "corrections": 0
+    },
+    {
+      "chemin": "3eme/francais/subordonnees-circonstancielles",
+      "le": "2026-10-09",
+      "corrections": 0
+    },
+    {
+      "chemin": "3eme/francais/argumenter",
+      "le": "2026-10-09",
+      "corrections": 0
+    },
+    {
+      "chemin": "3eme/francais/agir-dans-la-cite-individu-et-pouvoir",
+      "le": "2026-10-09",
+      "corrections": 0
+    },
+    {
+      "chemin": "3eme/francais/voix-active-et-voix-passive",
+      "le": "2026-10-09",
+      "corrections": 0
+    },
+    {
+      "chemin": "3eme/maths/notion-de-fonction",
+      "le": "2026-10-10",
+      "corrections": 0
+    },
+    {
+      "chemin": "3eme/maths/theoreme-de-thales",
+      "le": "2026-10-10",
+      "corrections": 1
+    },
+    {
+      "chemin": "3eme/francais/modes-et-valeurs-des-temps",
+      "le": "2026-10-10",
+      "corrections": 1
+    },
+    {
+      "chemin": "3eme/francais/discours-rapporte",
+      "le": "2026-10-10",
+      "corrections": 0
+    },
+    {
+      "chemin": "3eme/francais/visions-poetiques-du-monde",
+      "le": "2026-10-10",
+      "corrections": 0
+    },
+    {
+      "chemin": "3eme/francais/formation-des-mots-et-sens",
+      "le": "2026-10-10",
+      "corrections": 0
+    },
+    {
+      "chemin": "3eme/francais/progres-et-reves-scientifiques",
+      "le": "2026-10-10",
+      "corrections": 0
+    },
+    {
+      "chemin": "3eme/histoire/premiere-guerre-mondiale",
+      "le": "2026-10-10",
+      "corrections": 0
+    },
+    {
+      "chemin": "3eme/histoire/democraties-et-totalitarismes",
+      "le": "2026-10-10",
+      "corrections": 0
+    },
+    {
+      "chemin": "3eme/histoire/seconde-guerre-mondiale",
+      "le": "2026-10-10",
+      "corrections": 0
+    },
+    {
+      "chemin": "3eme/histoire/france-defaite-et-occupee",
+      "le": "2026-10-10",
+      "corrections": 0
+    },
+    {
+      "chemin": "3eme/histoire/independances-et-nouveaux-etats",
+      "le": "2026-10-10",
       "corrections": 0
     }
   ]
