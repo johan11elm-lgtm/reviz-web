@@ -75,6 +75,84 @@
   }
   html:not(.native) .home-page .home-desk .home-cta { margin: 0; }
   html:not(.native) .home-page .home-desk .rv-hero-sub { max-width: 46ch; font-size: 14px; margin-top: 8px; }
+  /* Héros « Scanne une leçon » (compte) : aussi haut que la colonne d'à
+   * côté, donc rempli — les quatre formats préparés et les deux façons de
+   * commencer (photo, texte). Mascotte posée en bas à droite. */
+  html:not(.native) .home-page .home-scan-desk { flex-direction: row; cursor: default; padding: 26px 28px; }
+  html:not(.native) .home-page .home-scan-desk:hover { filter: none; }
+  html:not(.native) .home-page .home-scan-desk-text {
+    position: relative;
+    z-index: 1;
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  html:not(.native) .home-page .home-scan-desk .rv-hero-title { font-size: 28px; max-width: none; }
+  html:not(.native) .home-page .home-scan-desk .rv-hero-sub { max-width: 40ch; color: rgba(255, 255, 255, 0.82); }
+  html:not(.native) .home-page .home-scan-formats {
+    list-style: none;
+    margin: 20px 0 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    max-width: 380px;
+  }
+  html:not(.native) .home-page .home-scan-formats li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+  }
+  html:not(.native) .home-page .home-scan-format-icon {
+    flex-shrink: 0;
+    width: 34px;
+    height: 34px;
+    border-radius: 11px;
+    display: grid;
+    place-items: center;
+    background: rgba(255, 255, 255, 0.14);
+    color: #fff;
+  }
+  html:not(.native) .home-page .home-scan-format-icon svg { width: 18px; height: 18px; }
+  html:not(.native) .home-page .home-scan-format-text { min-width: 0; display: flex; flex-direction: column; gap: 1px; }
+  html:not(.native) .home-page .home-scan-format-name { font-size: 14px; font-weight: 700; color: #fff; }
+  html:not(.native) .home-page .home-scan-format-sub { font-size: 12px; color: rgba(255, 255, 255, 0.72); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  html:not(.native) .home-page .home-scan-quota { margin: auto 0 0; padding-top: 22px; font-size: 13px; font-weight: 600; color: rgba(255, 255, 255, 0.72); }
+  html:not(.native) .home-page .home-scan-actions { margin-top: 12px; padding-top: 0; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  html:not(.native) .home-page .home-scan-actions .rv-hero-action { color: #2D2B57; text-decoration: none; font-size: 14px; padding: 12px 20px; }
+  html:not(.native) .home-page .home-scan-actions svg { width: 17px; height: 17px; }
+  html:not(.native) .home-page .home-scan-ghost {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 11px 18px;
+    border-radius: var(--radius-pill);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: #fff;
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: background 0.15s ease;
+  }
+  html:not(.native) .home-page .home-scan-ghost:hover { background: rgba(255, 255, 255, 0.12); }
+  html:not(.native) .home-page .home-scan-actions .rv-hero-action:hover { filter: brightness(0.97); }
+  html:not(.native) .home-page .home-scan-desk-mascot {
+    position: absolute;
+    right: -18px;
+    bottom: -16px;
+    width: 220px !important;
+    height: 220px !important;
+    max-width: 220px;
+    max-height: 220px;
+    min-width: 0;
+    min-height: 0;
+    margin: 0;
+  }
   html:not(.native) .home-page .home-desk-side {
     display: flex;
     flex-direction: column;

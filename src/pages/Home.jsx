@@ -6,6 +6,7 @@ import { UserHeader } from '../components/UserHeader';
 import { GuestBanner } from '../components/GuestBanner';
 import { HeroCTA } from '../components/HeroCTA';
 import { Mascot } from '../components/Mascot';
+import { getScanStatus } from '../services/scanLimitService';
 import { loadLessons, restoreLesson, syncFromFirestore } from '../services/historyService';
 import { loadRevisions } from '../services/revisionService';
 import { loadCatalogue, matiereProgress } from '../services/programmeService';
@@ -25,7 +26,7 @@ import { RevizPlusSheet } from '../components/RevizPlus';
 import { ThemeEssai, essaiThemeVu } from '../components/ThemeEssai';
 import { useTheme } from '../context/ThemeContext';
 import { themeById } from '../utils/themes';
-import { FlameIcon, TargetIcon, CheckIcon, CircleIcon, FlashcardsIcon, QuizIcon } from '../components/Icons';
+import { FlameIcon, TargetIcon, CheckIcon, CircleIcon, FlashcardsIcon, QuizIcon, ResumeIcon, MindmapIcon, CameraIcon, PencilIcon } from '../components/Icons';
 import './Home.css';
 
 function formatDate(ts) {
@@ -236,6 +237,58 @@ export default function Home() {
     />
   );
 
+  // Ordinateur (compte) : le héros est aussi haut que la colonne d'à côté ;
+  // on le remplit de ce que Réviz prépare et des deux façons de commencer.
+  const SCAN_FORMATS = [
+    { Icon: ResumeIcon,     name: 'Résumé',        sub: "L'essentiel à relire" },
+    { Icon: FlashcardsIcon, name: 'Flashcards',    sub: 'Pour mémoriser' },
+    { Icon: QuizIcon,       name: 'Quiz',          sub: 'Pour te tester' },
+    { Icon: MindmapIcon,    name: 'Carte mentale', sub: 'Pour tout relier' },
+  ];
+  const scanStatus = isDesktop && !isGuest ? getScanStatus() : null;
+  const scanQuota = !scanStatus ? null : Number.isFinite(scanStatus.remaining)
+    ? (scanStatus.remaining >= scanStatus.limit
+      ? `${scanStatus.limit} leçons à scanner cette semaine.`
+      : `Encore ${scanStatus.remaining} leçon${scanStatus.remaining > 1 ? 's' : ''} à scanner cette semaine, sur ${scanStatus.limit}.`)
+    : 'Leçons illimitées avec Réviz+.';
+  const heroDesk = (
+    <div className="rv-hero-cta rv-hero-cta--violet home-cta home-scan-desk">
+      <div className="rv-hero-glow" aria-hidden="true" />
+      <div className="home-scan-desk-text">
+        <h2 className="rv-hero-title">Scanne une leçon</h2>
+        <p className="rv-hero-sub">Une photo de ton cahier ou un texte copié, et Réviz prépare en quelques secondes&nbsp;:</p>
+        <ul className="home-scan-formats">
+          {SCAN_FORMATS.map(f => (
+            <li key={f.name}>
+              <span className="home-scan-format-icon" aria-hidden="true"><f.Icon /></span>
+              <span className="home-scan-format-text">
+                <span className="home-scan-format-name">{f.name}</span>
+                <span className="home-scan-format-sub">{f.sub}</span>
+              </span>
+            </li>
+          ))}
+        </ul>
+        <p className="home-scan-quota">{scanQuota}</p>
+        <div className="home-scan-actions">
+          <Link to="/scan" className="rv-hero-action">
+            <CameraIcon /> Prendre une photo
+          </Link>
+          <Link to="/scan?mode=texte" className="home-scan-ghost">
+            <PencilIcon /> Coller un texte
+          </Link>
+        </div>
+      </div>
+      <Mascot
+        pose={new Date().getHours() >= 19 ? 'soir' : 'scanphone'}
+        size={220}
+        priority
+        className="rv-hero-mascot home-scan-desk-mascot"
+        alt=""
+        aria-hidden="true"
+      />
+    </div>
+  );
+
   // Série + objectif du jour — compact : le niveau et l'XP sont dans l'en-tête.
   const statsCard = (
     <Link
@@ -413,7 +466,7 @@ export default function Home() {
           {greeting}
 
           <div className="home-desk-top">
-            {hero}
+            {isGuest ? hero : heroDesk}
             <div className="home-desk-side">
               {statsCard}
               {montrerEssai && <ThemeEssai onClose={() => setEssaiTheme(false)} />}
