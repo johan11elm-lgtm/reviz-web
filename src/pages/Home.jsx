@@ -20,6 +20,7 @@ import { refreshReminder } from '../services/reminderService';
 import { AchievementToast } from '../components/AchievementToast';
 import { BattleMascot } from '../components/BattleMascot';
 import { BattleAnnonce, annonceBattleVue } from '../components/battle/BattleAnnonce';
+import { RevizPlusAnnonce, annonceRevizPlusVue } from '../components/RevizPlusAnnonce';
 import { FlameIcon, TargetIcon, BookOpenIcon, CheckIcon, CircleIcon, FlashcardsIcon, QuizIcon } from '../components/Icons';
 import './Home.css';
 
@@ -130,7 +131,7 @@ function getGreetingSub({ dueCards, streak, todayRevisions, dailyGoal }) {
 }
 
 export default function Home() {
-  const { currentUser, isPremium, isGuest, getUserLevel } = useAuth();
+  const { currentUser, hasRevizPlus, revizPlusOffert, isGuest, getUserLevel } = useAuth();
   const prenom = currentUser?.displayName ?? 'toi';
 
   const navigate = useNavigate();
@@ -142,7 +143,9 @@ export default function Home() {
   const [challenges] = useState(() => getWeeklyChallenges());
   const [newBadge, setNewBadge] = useState(null);
   // Popup « Nouveau : la Battle », une fois par élève (compte ou mode essai).
-  const [annonceBattle, setAnnonceBattle] = useState(() => !!currentUser?.uid && !annonceBattleVue(currentUser.uid));
+  // Une seule popup à la fois : « Réviz+ offert » d'abord, la Battle à la visite suivante.
+  const [annonceRevizPlus, setAnnonceRevizPlus] = useState(() => revizPlusOffert && !isGuest && !!currentUser?.uid && !annonceRevizPlusVue(currentUser.uid));
+  const [annonceBattle, setAnnonceBattle] = useState(() => !annonceRevizPlus && !!currentUser?.uid && !annonceBattleVue(currentUser.uid));
 
   useEffect(() => {
     const onboardedKey = `reviz-onboarded-${currentUser?.uid}`;
@@ -305,6 +308,7 @@ export default function Home() {
       {newBadge && !annonceBattle && (
         <AchievementToast badge={newBadge} onDone={() => setNewBadge(null)} />
       )}
+      {annonceRevizPlus && <RevizPlusAnnonce uid={currentUser.uid} onClose={() => setAnnonceRevizPlus(false)} />}
       {annonceBattle && <BattleAnnonce uid={currentUser.uid} onClose={() => setAnnonceBattle(false)} />}
 
       <UserHeader
@@ -313,7 +317,8 @@ export default function Home() {
         xpInLvl={xpInLvl}
         fillPct={fillPct}
         aura={aura}
-        isPremium={isPremium}
+        isPremium={hasRevizPlus}
+        offert={revizPlusOffert}
         onCoach={isGuest ? undefined : () => navigate(lastLesson ? `/coach?lesson=${lastLesson.id}` : '/coach')}
       />
 

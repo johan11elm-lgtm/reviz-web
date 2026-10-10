@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useModalA11y } from '../hooks/useModalA11y';
 import { apiFetch } from '../services/apiClient.js';
+import { LANCEMENT_OFFERT } from '../../api/_lancement.js';
 import './PremiumModal.css';
 
 /**
@@ -67,13 +68,17 @@ export function PremiumModal({ onClose, used = 5, limit = 5 }) {
           Nouveaux scans disponibles <strong>{resetLabel}</strong>.
         </p>
 
-        <div className="premium-counter">
+        {limit <= 10 && <div className="premium-counter">
           {Array.from({ length: limit }).map((_, i) => (
             <span key={i} className={`premium-dot ${i < used ? 'used' : ''}`} />
           ))}
-        </div>
+        </div>}
 
-        <div className="premium-divider" />
+        {LANCEMENT_OFFERT && (
+          <p className="premium-sub">Réviz+ est offert pendant le lancement : c'est déjà la limite la plus haute.</p>
+        )}
+
+        {!LANCEMENT_OFFERT && <div className="premium-divider" />}
 
         {verifyNeeded && (
           <p className="premium-sub">
@@ -82,7 +87,7 @@ export function PremiumModal({ onClose, used = 5, limit = 5 }) {
           </p>
         )}
 
-        {verifyNeeded ? (
+        {LANCEMENT_OFFERT ? null : verifyNeeded ? (
           <button
             className="premium-btn premium-btn--upgrade"
             onClick={() => navigate('/verify-email')}

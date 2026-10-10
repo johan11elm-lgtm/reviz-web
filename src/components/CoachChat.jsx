@@ -164,7 +164,7 @@ function loadConversation(lessonId) {
  */
 export function CoachConversation({ lessonId, prefill, className = '', variant = 'sheet', lessonTitle = '' }) {
   const isPage = variant === 'page';
-  const { isPremium, getUserLevel } = useAuth();
+  const { hasRevizPlus, getUserLevel } = useAuth();
   const navigate = useNavigate();
 
   const [messages, setMessages] = useState(() => loadConversation(lessonId));
@@ -310,11 +310,11 @@ export function CoachConversation({ lessonId, prefill, className = '', variant =
           {quotaOut && (
             <div className="coach-quota">
               <CoachRow>
-                {isPremium
+                {hasRevizPlus
                   ? 'Wow, on a beaucoup discuté aujourd\'hui ! On se retrouve demain pour la suite.'
                   : 'Tu as utilisé tous tes messages du jour ! On se retrouve demain, ou passe à Réviz+ pour continuer maintenant.'}
               </CoachRow>
-              {!isPremium && (
+              {!hasRevizPlus && (
                 <button
                   type="button"
                   className="rv-btn-cta coach-upgrade-btn"

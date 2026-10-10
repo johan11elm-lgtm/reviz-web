@@ -1,6 +1,7 @@
 import { buildSystemPrompt, buildLessonUserMessage, MODEL } from './_systemPrompt.js'
 import { getDb, getAuthAdmin } from './_firebaseAdmin.js'
 import { consumeQuota, refundQuota, FREE_LIMIT } from './_quota.js'
+import { LANCEMENT_OFFERT, LANCEMENT_SCAN_LIMIT } from './_lancement.js'
 
 // Runtime Node (pas edge) : nécessaire pour firebase-admin (quota + auth).
 // maxDuration élargi pour laisser le temps à la génération IA.
@@ -39,7 +40,7 @@ export default async function handler(req, res) {
 
   let consumed = false
   if (!isPremium) {
-    const q = await consumeQuota({ db, uid, limit: FREE_LIMIT })
+    const q = await consumeQuota({ db, uid, limit: LANCEMENT_OFFERT ? LANCEMENT_SCAN_LIMIT : FREE_LIMIT })
     if (!q.allowed) return res.status(429).send('RATE_LIMIT')
     consumed = true
   }

@@ -5,7 +5,7 @@
 // S'appuie sur carto.mjs (carteMonde, Natural Earth) et _commun.mjs ; ne les modifie pas.
 // -------------------------------------------------------
 import { carteMonde } from '../carto.mjs'
-import { C, anneaux, compact, r1 } from './_commun.mjs'
+import { C, anneaux, compact, r1, xml } from './_commun.mjs'
 
 /**
  * Fond de planisphère : `cadre` { x, y, largeur }, options de carteMonde ({ sud, nord }),
@@ -158,7 +158,7 @@ export function legendeDensites(y, titre = 'Densité de population en 2024 (hab.
   const cases = CLASSES_DENSITE.map((c, i) => {
     const x = 14 + i * (lw + 4)
     return `<rect x="${x}" y="${y + 6}" width="${lw}" height="12" fill="${TEINTES_DENSITE[i]}" stroke="${C.encre}" stroke-width="0.75"/>` +
-      `<text x="${x + lw / 2}" y="${y + 33}" text-anchor="middle">${c.texte}</text>`
+      `<text x="${x + lw / 2}" y="${y + 33}" text-anchor="middle">${xml(c.texte)}</text>`
   }).join('')
   return `<text x="12" y="${y}" font-size="11" font-weight="600" fill="${C.gris}">${titre}</text>
 <g font-size="11" font-weight="600" fill="${C.encre}">${cases}</g>`

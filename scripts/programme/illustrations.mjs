@@ -58,6 +58,9 @@ function controler(ill, lecon) {
   const poids = statSync(fichier).size
   if (poids > POIDS_MAX[ext]) pb.push(`trop lourd : ${Math.round(poids / 1024)} Ko (max ${POIDS_MAX[ext] / 1024} Ko)`)
   if (ill.alt.length < 40) pb.push('texte alternatif trop court : décrire ce que montre la figure')
+  // Surtitre et titre de la carte (style v2) : sans eux, la figure arrive nue dans le Résumé.
+  if (!ill.type) pb.push('type absent ou inconnu (schema, figure, carte, croquis, graphique, oeuvre, photo, document)')
+  if (!ill.titre) pb.push('titre absent')
   const m = ill.ancre.match(/^resume\.sections\[(\d+)\]$/)
   if (m && !lecon.resume?.sections?.[Number(m[1])]) pb.push(`ancre ${ill.ancre} : cette section n'existe pas`)
   if (ill.ancre === 'resume.methode' && !lecon.resume?.methode?.etapes?.length) pb.push('ancre resume.methode : le chapitre n\'a pas de méthode')
@@ -65,6 +68,10 @@ function controler(ill, lecon) {
     const svg = readFileSync(fichier, 'utf8')
     if (!/^\s*<svg[\s>]/.test(svg)) pb.push('le SVG doit commencer par <svg> (pas de prologue XML ni de DOCTYPE)')
     if (!/viewBox=/.test(svg)) pb.push('SVG sans viewBox')
+    // « < 30 » ou « R&D » non échappés : le fichier n'est plus du XML et l'image ne s'affiche pas.
+    const sansCommentaires = svg.replace(/<!--[\s\S]*?-->/g, '')
+    if (/<(?![a-zA-Z/!?])/.test(sansCommentaires)) pb.push('SVG mal formé : « < » non échappé dans un texte (écrire &lt;)')
+    if (/&(?!(amp|lt|gt|quot|apos|#\d+|#x[0-9a-f]+);)/i.test(sansCommentaires)) pb.push('SVG mal formé : « & » non échappé (écrire &amp;)')
     if (/<script|on[a-z]+\s*=|javascript:/i.test(svg)) pb.push('SVG avec script ou gestionnaire d\'événement')
     if (/<style/i.test(svg)) pb.push('SVG avec <style> : interdit (inséré en ligne, il s\'appliquerait à toute la page)')
     if (/(href|src)\s*=\s*["'](?!#)/i.test(svg)) pb.push('SVG qui charge une ressource externe')

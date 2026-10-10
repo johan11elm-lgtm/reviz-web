@@ -72,6 +72,7 @@ const PAGES = {
             <li><strong>Google Firebase</strong> — authentification et stockage (hébergé en Europe).</li>
             <li><strong>Anthropic</strong> — traitement IA des leçons (le texte envoyé n'est pas conservé après génération).</li>
             <li><strong>Vercel</strong> — hébergement de l'application.</li>
+            <li><strong>PostHog</strong> — mesure d'audience anonyme (pages vues, clics), hébergée en Europe, sans cookie ni profil.</li>
           </ul>
         </Section>
 
@@ -98,7 +99,7 @@ const PAGES = {
         </Section>
 
         <Section title="Cookies">
-          <p>Réviz utilise uniquement des cookies strictement nécessaires au fonctionnement (authentification Firebase). Aucun cookie publicitaire ou de tracking n'est utilisé.</p>
+          <p>Réviz utilise uniquement des cookies strictement nécessaires au fonctionnement (authentification Firebase). Aucun cookie publicitaire ou de tracking n'est utilisé. La mesure d'audience (PostHog) fonctionne sans cookie et sans rien enregistrer sur ton appareil : elle compte les visites de façon anonyme, sans savoir qui tu es.</p>
         </Section>
       </>
     ),
@@ -146,7 +147,7 @@ const PAGES = {
 
         <Section title="Limites d'utilisation">
           <ul>
-            <li>Plan gratuit : 5 leçons analysées par semaine.</li>
+            <li>Plan gratuit : 5 leçons analysées par semaine. Pendant le lancement, Réviz+ est offert à tous : 30 leçons par semaine.</li>
             <li>Il est interdit de scanner des contenus illicites ou portant atteinte aux droits de tiers.</li>
             <li>Toute utilisation abusive peut entraîner la suspension du compte.</li>
           </ul>

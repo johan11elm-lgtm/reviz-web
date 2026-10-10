@@ -143,8 +143,9 @@ export async function verifyEmailViaEmulator(page, email) {
 
 /**
  * Vérifie l'email (via émulateur) puis passe l'onboarding (compte majeur).
- * La popup « Nouveau : la Battle » s'ouvre alors sur l'accueil : on la ferme,
- * sauf si la spec veut la tester (garderAnnonce).
+ * Les popups de l'accueil (« Réviz+ est offert », puis « Nouveau : la Battle »)
+ * sont fermées, sauf si la spec veut en tester une (garderAnnonce : true pour
+ * la Battle, 'revizplus' pour Réviz+).
  */
 export async function verifyEmailAndOnboard(page, email, { garderAnnonce = false } = {}) {
   await expect(page).toHaveURL(/verify-email/, { timeout: 15_000 })
@@ -153,7 +154,17 @@ export async function verifyEmailAndOnboard(page, email, { garderAnnonce = false
   await expect(page).toHaveURL(/onboarding/, { timeout: 15_000 })
   await page.getByRole('button', { name: 'Passer' }).click()
   await expect(page).toHaveURL(/\/$/, { timeout: 10_000 })
-  if (!garderAnnonce) await fermerAnnonceBattle(page)
+  if (garderAnnonce === 'revizplus') return
+  // Lancement : « Réviz+ offert » passe en premier, la Battle à la visite suivante.
+  await fermerAnnonceRevizPlus(page)
+  if (garderAnnonce) await page.goto('/')
+  else await fermerAnnonceBattle(page)
+}
+
+/** Ferme la popup « Réviz+ est offert » si elle est ouverte (accueil, une fois par élève). */
+export async function fermerAnnonceRevizPlus(page) {
+  const plusTard = page.getByRole('dialog', { name: 'Réviz+ est offert' }).getByRole('button', { name: 'Plus tard' })
+  await plusTard.click({ timeout: 5_000 }).catch(() => {})
 }
 
 /** Ferme la popup « Nouveau : la Battle » si elle est ouverte (accueil, une fois par élève). */

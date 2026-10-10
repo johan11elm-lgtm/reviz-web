@@ -1,14 +1,16 @@
 // -------------------------------------------------------
 // Réviz — Service de limite de scans hebdomadaire
 // -------------------------------------------------------
-// Free : 5 scans / semaine (lundi → dimanche)
+// Free : 5 scans / semaine (lundi → dimanche), 30 pendant le lancement
 // Premium : illimité
 // -------------------------------------------------------
+
+import { LANCEMENT_OFFERT, LANCEMENT_SCAN_LIMIT } from '../../api/_lancement.js'
 
 let _uid = null
 let _isPremium = false
 
-const FREE_LIMIT = 5
+const FREE_LIMIT = LANCEMENT_OFFERT ? LANCEMENT_SCAN_LIMIT : 5
 
 export function setScanLimitUser(uid) { _uid = uid }
 export function setPremiumStatus(isPremium) { _isPremium = isPremium }

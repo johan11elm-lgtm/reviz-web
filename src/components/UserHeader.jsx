@@ -27,7 +27,7 @@ const CrownIcon = () => (
  * @param {function} [props.onCoach]       — ouvre le coach ; bouton masqué si absent
  * @param {string} [props.className]
  */
-export function UserHeader({ prenom, level, xpInLvl, fillPct, aura, isPremium = false, onCoach, className = '' }) {
+export function UserHeader({ prenom, level, xpInLvl, fillPct, aura, isPremium = false, offert = false, onCoach, className = '' }) {
   const navigate = useNavigate();
   const classes = ['rv-user-header', className].filter(Boolean).join(' ');
 
@@ -69,7 +69,7 @@ export function UserHeader({ prenom, level, xpInLvl, fillPct, aura, isPremium = 
           type="button"
           className={`rv-bell-btn rv-user-premium-btn${isPremium ? ' rv-user-premium-btn--active' : ''}`}
           onClick={() => navigate('/reglages')}
-          aria-label={isPremium ? 'Réviz+ actif : gérer mon abonnement' : 'Découvrir Réviz+'}
+          aria-label={offert ? 'Réviz+ offert pendant le lancement' : isPremium ? 'Réviz+ actif : gérer mon abonnement' : 'Découvrir Réviz+'}
           title="Réviz+"
         >
           <CrownIcon />
