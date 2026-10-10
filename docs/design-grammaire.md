@@ -111,5 +111,8 @@ acquis. Pas d'étoiles : elles se lisent comme des favoris ou une note.
 | Formats | fait : sous-titre « Carte 1 sur 8 · leçon » sur une ligne, « Généré par IA » et « 3 idées » sans majuscules, « À revoir » des flashcards en orange (plus de rouge) ; le Résumé suivait déjà (couleur de matière sur ses icônes) |
 | Réglages | fait : icônes des rangées neutres, objectif quotidien choisi en encre (plus en orange) ; carte Réviz+ et zone de danger inchangées |
 | Battle | fait : puces des règles neutres |
-| Écrans secondaires (connexion, inscription, onboarding, scan, salon et jeu de la Battle, fin de séance) | à vérifier |
+| Fins de séance | fait : action principale = « Retour à la leçon » (flashcards) ou « Relire le résumé » sous 70 % (quiz) ; plus de mascotte triste |
+| Connexion, inscription | fait : liens et choix en encre, libellés de champ en phrase normale, bouton retour commun |
+| Accueil public, essai | vérifiés, déjà conformes |
+| Scan, onboarding, salon et jeu de la Battle | à vérifier (compte requis) |
 | Toast « Badge débloqué » | surtitre orange à neutraliser ou à classer en exception (célébration) |
