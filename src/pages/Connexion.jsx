@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import SocialLogin, { erreurConnexionSociale } from '../components/SocialLogin';
 import './Connexion.css';
 
 function firebaseErrorFr(code) {
@@ -21,7 +22,7 @@ export default function Connexion() {
   const [loading, setLoading]   = useState('');
   const [resetSent, setResetSent] = useState(false);
 
-  const { login, loginWithGoogle, resetPassword } = useAuth();
+  const { login, loginWithProvider, loginWithCustomToken, resetPassword } = useAuth();
   const navigate = useNavigate();
 
   async function handleSubmit(e) {
@@ -38,14 +39,31 @@ export default function Connexion() {
     }
   }
 
-  async function handleGoogle() {
+  // Retour de la connexion TikTok : /api/auth renvoie ici avec un jeton
+  // Firebase dans le fragment (#tiktok=…), jamais envoyé au serveur.
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.hash.slice(1));
+    const token = params.get('tiktok');
+    const echec = params.has('tiktok_erreur');
+    if (!token && !echec) return;
+    window.history.replaceState(null, '', window.location.pathname + window.location.search);
+    if (echec) { setError('Connexion TikTok impossible. Réessaie.'); return; }
+    setLoading(true);
+    loginWithCustomToken(token)
+      .then(() => navigate('/', { replace: true }))
+      .catch(() => { setError('Connexion TikTok impossible. Réessaie.'); setLoading(false); });
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  async function handleProvider(id) {
     setError('');
     setLoading(true);
     try {
-      await loginWithGoogle();
+      const user = await loginWithProvider(id);
+      if (!user) return; // redirection en cours (TikTok)
       navigate('/', { replace: true });
     } catch (err) {
-      if (err.code !== 'auth/popup-closed-by-user') setError('Connexion Google impossible. Réessaie.');
+      const msg = erreurConnexionSociale(err);
+      if (msg) setError(msg);
     } finally {
       setLoading(false);
     }
@@ -118,15 +136,7 @@ export default function Connexion() {
 
                   <div className="auth-divider"><span>ou</span></div>
 
-          <button type="button" className="auth-google-btn" onClick={handleGoogle} disabled={!!loading}>
-            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.258h2.908c1.702-1.567 2.684-3.874 2.684-6.615z" fill="#4285F4"/>
-              <path d="M9 18c2.43 0 4.467-.806 5.956-2.18l-2.908-2.259c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332A8.997 8.997 0 009 18z" fill="#34A853"/>
-              <path d="M3.964 10.71A5.41 5.41 0 013.682 9c0-.593.102-1.17.282-1.71V4.958H.957A8.996 8.996 0 000 9c0 1.452.348 2.827.957 4.042l3.007-2.332z" fill="#FBBC05"/>
-              <path d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0A8.997 8.997 0 00.957 4.958L3.964 7.29C4.672 5.163 6.656 3.58 9 3.58z" fill="#EA4335"/>
-            </svg>
-            Continuer avec Google
-          </button>
+          <SocialLogin onLogin={handleProvider} disabled={!!loading} />
 
         <p className="auth-link">
           Pas encore de compte ?{' '}

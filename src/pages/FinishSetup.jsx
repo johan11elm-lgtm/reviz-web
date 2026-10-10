@@ -6,13 +6,15 @@ import { CYCLES, CLASSES_BY_CYCLE, SPECIALITES_LYCEE, needsSpecialites } from '.
 import { createUserProfile } from '../services/userProfileService';
 import './Inscription.css';
 
-// Écran de complétion de profil pour les nouveaux comptes Google :
-// collecte date de naissance + niveau. Le gate redirige ensuite les <15 ans
+// Écran de complétion de profil pour les nouveaux comptes sans mot de passe
+// (Google, Apple, Microsoft, TikTok) : collecte date de naissance + niveau,
+// et le prénom quand le fournisseur ne l'a pas transmis (Apple, e-mail masqué). Le gate redirige ensuite les <15 ans
 // vers /consent-pending (consentement parental) automatiquement.
 export default function FinishSetup() {
-  const { currentUser, setUserLevel, refreshGate } = useAuth();
+  const { currentUser, setUserLevel, refreshGate, updateDisplayName } = useAuth();
   const navigate = useNavigate();
   const [birthDate, setBirthDate] = useState('');
+  const [prenomSaisi, setPrenomSaisi] = useState('');
   const [level, setLevel] = useState({ cycle: null, classe: null, specialites: [] });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
@@ -20,6 +22,7 @@ export default function FinishSetup() {
   if (!currentUser) return <Navigate to="/welcome" replace />;
 
   const prenom = currentUser.displayName?.split(' ')[0] ?? '';
+  const demanderPrenom = !currentUser.displayName;
 
   function pickCycle(cycleId) {
     setLevel({ cycle: cycleId, classe: null, specialites: [] });
@@ -33,6 +36,7 @@ export default function FinishSetup() {
   }
 
   async function handleSubmit() {
+    if (demanderPrenom && !prenomSaisi.trim()) return setError('Entre ton prénom.');
     if (!birthDate) return setError('Entre ta date de naissance.');
     const d = new Date(birthDate);
     if (isNaN(d.getTime()) || d > new Date()) return setError('Date invalide.');
@@ -41,8 +45,9 @@ export default function FinishSetup() {
 
     setLoading(true); setError('');
     try {
+      if (demanderPrenom) await updateDisplayName(prenomSaisi.trim());
       await createUserProfile(currentUser.uid, {
-        prenom: currentUser.displayName ?? null,
+        prenom: demanderPrenom ? prenomSaisi.trim() : currentUser.displayName ?? null,
         email: currentUser.email ?? null,
         birthDate,
         level,
@@ -60,8 +65,23 @@ export default function FinishSetup() {
   return (
     <div className="app">
       <div className="auth-content signup-content" style={{ overflowY: 'auto' }}>
-        <h1 className="signup-question">Bienvenue {prenom}</h1>
+        <h1 className="signup-question">{prenom ? `Bienvenue ${prenom}` : 'Bienvenue'}</h1>
         <p className="signup-hint">Encore quelques infos pour calibrer Réviz à ton profil.</p>
+
+        {demanderPrenom && (
+          <div className="auth-field">
+            <label className="auth-label" htmlFor="fs-prenom">Ton prénom</label>
+            <input
+              id="fs-prenom"
+              className="auth-input"
+              type="text"
+              autoComplete="given-name"
+              value={prenomSaisi}
+              onChange={e => setPrenomSaisi(e.target.value)}
+              maxLength={40}
+            />
+          </div>
+        )}
 
         <div className="auth-field">
           <label className="auth-label" htmlFor="fs-birthdate">Ta date de naissance</label>

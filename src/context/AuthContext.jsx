@@ -15,8 +15,11 @@ import {
   sendPasswordResetEmail,
   sendEmailVerification,
   GoogleAuthProvider,
+  OAuthProvider,
   signInWithPopup,
   signInWithCredential,
+  signInWithCustomToken,
+  revokeAccessToken,
   deleteUser,
 } from 'firebase/auth';
 import { Capacitor } from '@capacitor/core';
@@ -33,6 +36,7 @@ import { LANCEMENT_OFFERT } from '../../api/_lancement.js';
 import { estFondateur } from '../utils/revizPlus.js';
 import { readSessionCache, writeSessionCache, clearSessionCache, userFromSessionCache } from '../services/sessionCache';
 import { track } from '../services/statsService';
+import { apiFetch, apiUrl } from '../services/apiClient';
 import { collection, getDocs, deleteDoc, doc, getDoc, setDoc } from 'firebase/firestore';
 
 const AuthContext = createContext();
@@ -48,6 +52,25 @@ function bindServicesToUser(uid) {
   setSrsUser(uid);
   setChallengeUser(uid);
   setScanLimitUser(uid);
+}
+
+// Fournisseur pour la popup web (signInWithPopup).
+function providerWeb(id) {
+  if (id === 'google') return new GoogleAuthProvider();
+  if (id === 'apple') {
+    const p = new OAuthProvider('apple.com');
+    p.addScope('email');
+    p.addScope('name');
+    p.setCustomParameters({ locale: 'fr_FR' });
+    return p;
+  }
+  if (id === 'microsoft') {
+    const p = new OAuthProvider('microsoft.com');
+    // Comptes perso ET scolaires (Office 365 du lycée) ; choix du compte à chaque fois.
+    p.setCustomParameters({ prompt: 'select_account' });
+    return p;
+  }
+  throw new Error(`Fournisseur inconnu : ${id}`);
 }
 
 export function AuthProvider({ children }) {
@@ -75,7 +98,7 @@ export function AuthProvider({ children }) {
   const [loading, setLoading]           = useState(true);
   // Mineur <15 ans dont le consentement parental n'est pas (encore) approuvé.
   const [consentBlocked, setConsentBlocked] = useState(cached?.consentBlocked ?? false);
-  // Compte Google sans profil complété (pas encore de date de naissance / niveau).
+  // Compte sans mot de passe (Google, Apple…) sans profil complété (pas encore de date de naissance / niveau).
   const [needsProfileSetup, setNeedsProfileSetup] = useState(cached?.needsProfileSetup ?? false);
   const [isPremium, setIsPremium] = useState(cached?.isPremium ?? false);
   // uid pour lequel le gate ci-dessus a été calculé (Firestore) — garde le cache cohérent.
@@ -128,38 +151,92 @@ export function AuthProvider({ children }) {
     return signInWithEmailAndPassword(auth, email, password);
   }
 
-  // --- Connexion Google ---
+  // --- Connexion Google / Apple / Microsoft / TikTok ---
   // Web : popup Firebase classique. App native (Capacitor) : la popup ne
-  // fonctionne pas dans la WebView — on passe par le SDK Google natif
-  // (@capacitor-firebase/authentication) puis on échange le jeton contre
-  // une session Firebase JS (signInWithCredential) : tout l'aval
-  // (onAuthStateChanged, Firestore, gating) reste identique.
-  async function loginWithGoogle() {
-    if (Capacitor.isNativePlatform()) {
-      const { FirebaseAuthentication } = await import('@capacitor-firebase/authentication');
-      let result;
-      try {
-        result = await FirebaseAuthentication.signInWithGoogle();
-      } catch (err) {
-        // Annulation du sheet natif → même code que la popup web fermée,
-        // déjà ignoré par Connexion/Inscription.
-        const cancelled = /cancel|12501|dismiss/i.test(err?.message ?? '');
-        const e = new Error(err?.message ?? 'Connexion Google impossible');
-        e.code = cancelled ? 'auth/popup-closed-by-user' : 'auth/google-signin-failed';
-        throw e;
-      }
-      const idToken = result?.credential?.idToken;
-      if (!idToken) {
-        const e = new Error('Connexion Google annulée');
-        e.code = 'auth/popup-closed-by-user';
-        throw e;
-      }
-      const credential = GoogleAuthProvider.credential(idToken);
-      const { user } = await signInWithCredential(auth, credential);
-      return user;
+  // fonctionne pas dans la WebView — on passe par le SDK natif
+  // (@capacitor-firebase/authentication) puis on ouvre une session
+  // Firebase JS : tout l'aval (onAuthStateChanged, Firestore, gating)
+  // reste identique quel que soit le fournisseur.
+  async function loginWithProvider(id) {
+    if (id === 'tiktok') {
+      // Redirection complète : /api/auth renvoie sur /connexion avec un
+      // jeton Firebase (cf. loginWithCustomToken).
+      window.location.assign(apiUrl('/api/auth?action=tiktok'));
+      return null;
     }
-    const provider = new GoogleAuthProvider();
-    const { user } = await signInWithPopup(auth, provider);
+    if (Capacitor.isNativePlatform()) return loginNatif(id);
+    const { user } = await signInWithPopup(auth, providerWeb(id));
+    return user;
+  }
+
+  // Compat : anciens appels.
+  function loginWithGoogle() {
+    return loginWithProvider('google');
+  }
+
+  async function loginNatif(id) {
+    const { FirebaseAuthentication } = await import('@capacitor-firebase/authentication');
+    const appel = {
+      google:    () => FirebaseAuthentication.signInWithGoogle(),
+      apple:     () => FirebaseAuthentication.signInWithApple(),
+      // Firebase refuse les jetons Microsoft dans signInWithCredential :
+      // connexion côté natif, puis passage de session via /api/auth.
+      microsoft: () => FirebaseAuthentication.signInWithMicrosoft({ skipNativeAuth: false }),
+    }[id];
+    if (!appel) throw new Error(`Fournisseur inconnu : ${id}`);
+    let result;
+    try {
+      result = await appel();
+    } catch (err) {
+      // Annulation du sheet natif → même code que la popup web fermée,
+      // déjà ignoré par Connexion/Inscription.
+      const cancelled = /cancel|12501|dismiss|1001/i.test(err?.message ?? '');
+      const e = new Error(err?.message ?? 'Connexion impossible');
+      e.code = cancelled ? 'auth/popup-closed-by-user' : 'auth/native-signin-failed';
+      throw e;
+    }
+
+    if (id === 'microsoft') {
+      const { token } = await FirebaseAuthentication.getIdToken();
+      const res = await apiFetch('/api/auth', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'natif', idToken: token }),
+      });
+      const data = await res.json().catch(() => ({}));
+      // La session JS prend le relais : la session native ne sert plus.
+      FirebaseAuthentication.signOut().catch(() => {});
+      if (!res.ok || !data.customToken) {
+        const e = new Error(data.error ?? 'Connexion Microsoft impossible');
+        e.code = 'auth/native-signin-failed';
+        throw e;
+      }
+      return loginWithCustomToken(data.customToken);
+    }
+
+    const idToken = result?.credential?.idToken;
+    if (!idToken) {
+      const e = new Error('Connexion annulée');
+      e.code = 'auth/popup-closed-by-user';
+      throw e;
+    }
+    const credential = id === 'apple'
+      ? new OAuthProvider('apple.com').credential({ idToken, rawNonce: result.credential.nonce })
+      : GoogleAuthProvider.credential(idToken);
+    const { user } = await signInWithCredential(auth, credential);
+    // Apple ne transmet le nom qu'à la toute première connexion, et
+    // seulement au SDK natif : on le recopie sur le compte Firebase.
+    const nomApple = result?.user?.displayName;
+    if (id === 'apple' && nomApple && !user.displayName) {
+      await updateProfile(user, { displayName: nomApple }).catch(() => {});
+      setCurrentUser({ ...auth.currentUser });
+    }
+    return user;
+  }
+
+  // Session ouverte par le serveur (TikTok, Microsoft natif).
+  async function loginWithCustomToken(token) {
+    const { user } = await signInWithCustomToken(auth, token);
     return user;
   }
 
@@ -225,6 +302,22 @@ export function AuthProvider({ children }) {
     if (password && user.providerData[0]?.providerId === 'password') {
       const cred = EmailAuthProvider.credential(user.email, password);
       await reauthenticateWithCredential(user, cred);
+    }
+    // Compte Apple dans l'app iOS : Apple exige de révoquer l'accès à la
+    // suppression (App Store 5.1.1). Il faut un code tout frais → on
+    // redemande la connexion Apple, qui sert aussi de réauthentification.
+    if (Capacitor.isNativePlatform() && user.providerData?.some(p => p.providerId === 'apple.com')) {
+      const { FirebaseAuthentication } = await import('@capacitor-firebase/authentication');
+      const result = await FirebaseAuthentication.signInWithApple();
+      const { idToken, nonce, authorizationCode } = result?.credential ?? {};
+      await reauthenticateWithCredential(
+        user,
+        new OAuthProvider('apple.com').credential({ idToken, rawNonce: nonce }),
+      );
+      if (authorizationCode) {
+        await revokeAccessToken(auth, authorizationCode)
+          .catch(e => console.warn('[Réviz] Révocation Apple impossible', e));
+      }
     }
     const uid = user.uid;
     // Supprimer les données Firestore (lessons + revisions + consentement parental)
@@ -323,9 +416,10 @@ export function AuthProvider({ children }) {
       setLevelTick(n => n + 1);
     }
 
-    // Compte Google sans profil complété (pas de date de naissance) → doit finir l'inscription.
-    const isGoogle = user.providerData?.some(p => p.providerId === 'google.com');
-    setNeedsProfileSetup(!!isGoogle && !profile?.birthDate);
+    // Compte sans mot de passe (Google, Apple, Microsoft, TikTok) sans profil
+    // complété (pas de date de naissance) → doit finir l'inscription.
+    const hasPassword = user.providerData?.some(p => p.providerId === 'password');
+    setNeedsProfileSetup(!hasPassword && !user.isAnonymous && !profile?.birthDate);
 
     const premium = profile?.plan === 'premium';
     setIsPremium(premium);
@@ -423,6 +517,8 @@ export function AuthProvider({ children }) {
     signup,
     login,
     loginWithGoogle,
+    loginWithProvider,
+    loginWithCustomToken,
     logout,
     resetPassword,
     getUserClasse,

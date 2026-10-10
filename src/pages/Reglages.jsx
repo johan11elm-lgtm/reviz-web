@@ -194,13 +194,14 @@ export default function Reglages() {
   }
 
   async function handleDeleteAccount() {
-    const isGoogle = currentUser?.providerData[0]?.providerId === 'google.com';
+    // Compte Google / Apple / Microsoft / TikTok : pas de mot de passe à redemander.
+    const sansMotDePasse = !currentUser?.providerData?.some(p => p.providerId === 'password');
     if (deleteStep === 0) { setDeleteStep(1); return; }
-    if (deleteStep === 1 && !isGoogle) { setDeleteStep(2); return; }
-    // Étape 2 (mot de passe) ou étape 1 (Google) → suppression réelle
+    if (deleteStep === 1 && !sansMotDePasse) { setDeleteStep(2); return; }
+    // Étape 2 (mot de passe) ou étape 1 (sans mot de passe) → suppression réelle
     setDeleting(true); setDeleteError('');
     try {
-      await deleteAccount(isGoogle ? null : deletePwd);
+      await deleteAccount(sansMotDePasse ? null : deletePwd);
       navigate('/welcome');
     } catch (err) {
       if (err.code === 'auth/wrong-password' || err.code === 'auth/invalid-credential') {

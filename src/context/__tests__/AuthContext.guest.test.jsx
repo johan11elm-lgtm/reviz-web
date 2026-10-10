@@ -16,6 +16,7 @@ vi.mock('firebase/auth', () => ({
   EmailAuthProvider: { credential: vi.fn() }, sendPasswordResetEmail: vi.fn(),
   sendEmailVerification: vi.fn(), GoogleAuthProvider: class { static credential() {} },
   signInWithPopup: vi.fn(), signInWithCredential: vi.fn(), deleteUser: vi.fn(),
+  OAuthProvider: class {}, signInWithCustomToken: vi.fn(), revokeAccessToken: vi.fn(),
 }))
 vi.mock('firebase/firestore', () => ({
   getDoc: (...a) => fb.getDoc(...a),

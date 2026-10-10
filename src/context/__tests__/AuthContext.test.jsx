@@ -15,6 +15,7 @@ vi.mock('firebase/auth', () => ({
   EmailAuthProvider: { credential: vi.fn() }, sendPasswordResetEmail: vi.fn(),
   sendEmailVerification: vi.fn(), GoogleAuthProvider: class { static credential() {} },
   signInWithPopup: vi.fn(), signInWithCredential: vi.fn(), deleteUser: vi.fn(),
+  OAuthProvider: class {}, signInWithCustomToken: vi.fn(), revokeAccessToken: vi.fn(),
 }))
 vi.mock('firebase/firestore', () => ({
   getDoc: (...a) => fb.getDoc(...a),
@@ -137,5 +138,25 @@ describe('<AuthProvider /> — démarrage optimiste', () => {
     await resolveAuth(johan)
     expect(screen.getByTestId('probe')).toHaveTextContent('user=Johan cache=0 premium=false blocked=false loading=false')
     await waitFor(() => expect(cacheOf().uid).toBe('u1'))
+  })
+
+  it.each([
+    ['google.com', [{ providerId: 'google.com' }]],
+    ['apple.com', [{ providerId: 'apple.com' }]],
+    ['microsoft.com', [{ providerId: 'microsoft.com' }]],
+    ['TikTok (jeton personnalisé)', []],
+  ])('compte %s sans date de naissance → doit finir l’inscription', async (_, providerData) => {
+    mockFirestore({ profile: null })
+    renderProvider()
+    await resolveAuth({ ...johan, providerData })
+    await waitFor(() => expect(cacheOf().needsProfileSetup).toBe(true))
+  })
+
+  it('compte e-mail sans profil (écriture ratée) → pas renvoyé vers la fin d’inscription', async () => {
+    mockFirestore({ profile: null })
+    renderProvider()
+    await resolveAuth(johan)
+    await waitFor(() => expect(cacheOf().uid).toBe('u1'))
+    expect(cacheOf().needsProfileSetup).toBe(false)
   })
 })
