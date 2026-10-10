@@ -1,5 +1,6 @@
 import { MODEL, buildChatSystemPrompt, buildChatLessonContext, CHAT_MAX_MESSAGE_LENGTH, CHAT_MAX_HISTORY, CHAT_MAX_OUTPUT_TOKENS } from './_chatPrompt.js'
 import { getDb, getAuthAdmin } from './_firebaseAdmin.js'
+import { compteVerifie } from './_compteVerifie.js'
 import { consumeChatQuota, refundChatQuota, CHAT_FREE_LIMIT, CHAT_PREMIUM_LIMIT } from './_chatQuota.js'
 import { LANCEMENT_OFFERT, LANCEMENT_CHAT_LIMIT } from './_lancement.js'
 
@@ -48,7 +49,7 @@ export default async function handler(req, res) {
     return res.status(401).send('Unauthorized')
   }
   const uid = decoded.uid
-  if (!decoded.email_verified) return res.status(403).send('EMAIL_NOT_VERIFIED')
+  if (!compteVerifie(decoded)) return res.status(403).send('EMAIL_NOT_VERIFIED')
 
   // 2. Contexte = la leçon Firestore de CET élève (le client n'envoie qu'un id,
   //    jamais le contenu du system prompt) + plan pour le quota.

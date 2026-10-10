@@ -4,9 +4,10 @@ const verifyIdToken = vi.fn()
 const createCustomToken = vi.fn(async (uid) => `custom-${uid}`)
 const getUser = vi.fn()
 const createUser = vi.fn()
+const setCustomUserClaims = vi.fn()
 
 vi.mock('../_firebaseAdmin.js', () => ({
-  getAuthAdmin: () => ({ verifyIdToken, createCustomToken, getUser, createUser }),
+  getAuthAdmin: () => ({ verifyIdToken, createCustomToken, getUser, createUser, setCustomUserClaims }),
 }))
 
 const { default: handler } = await import('../auth.js')
@@ -24,6 +25,8 @@ const now = () => Math.floor(Date.now() / 1000)
 
 beforeEach(() => {
   verifyIdToken.mockReset(); createCustomToken.mockClear(); getUser.mockReset(); createUser.mockReset()
+  setCustomUserClaims.mockReset()
+  getUser.mockResolvedValue({ customClaims: undefined })
   vi.stubEnv('TIKTOK_CLIENT_KEY', 'ck')
   vi.stubEnv('TIKTOK_CLIENT_SECRET', 'cs')
 })
@@ -59,6 +62,14 @@ describe('auth — session native (Microsoft iOS)', () => {
     expect(verifyIdToken).toHaveBeenCalledWith('x', true)
     expect(res.statusCode).toBe(200)
     expect(res.payload).toEqual({ customToken: 'custom-u42' })
+    expect(setCustomUserClaims).toHaveBeenCalledWith('u42', { reviz_social: true })
+  })
+
+  it('garde les claims existants et ne réécrit pas un compte déjà marqué', async () => {
+    verifyIdToken.mockResolvedValue({ uid: 'u42', auth_time: now(), firebase: { sign_in_provider: 'microsoft.com' } })
+    getUser.mockResolvedValue({ customClaims: { reviz_social: true, autre: 1 } })
+    await post({ action: 'natif', idToken: 'x' })
+    expect(setCustomUserClaims).not.toHaveBeenCalled()
   })
 })
 
@@ -101,9 +112,10 @@ describe('auth — TikTok', () => {
         ? { access_token: 'at', open_id: 'oid' }
         : { data: { user: { display_name: 'Lina' } } }),
     })))
-    getUser.mockRejectedValue(Object.assign(new Error('nf'), { code: 'auth/user-not-found' }))
+    getUser.mockRejectedValueOnce(Object.assign(new Error('nf'), { code: 'auth/user-not-found' }))
     const res = await get({ code: 'c', state: 's' }, 'reviz_tiktok_state=s')
     expect(createUser).toHaveBeenCalledWith({ uid: 'tiktok:oid', displayName: 'Lina' })
+    expect(setCustomUserClaims).toHaveBeenCalledWith('tiktok:oid', { reviz_social: true })
     expect(createCustomToken).toHaveBeenCalledWith('tiktok:oid', { provider: 'tiktok' })
     expect(res.headers.location).toBe(`https://app.revizapp.fr/connexion#tiktok=${encodeURIComponent('custom-tiktok:oid')}`)
   })

@@ -3,6 +3,7 @@
 // -------------------------------------------------------
 import Stripe from 'stripe'
 import { getAuthAdmin } from './_firebaseAdmin.js'
+import { compteVerifie } from './_compteVerifie.js'
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
 
@@ -22,8 +23,8 @@ export default async function handler(req, res) {
     const decoded = await getAuthAdmin().verifyIdToken(idToken)
     uid = decoded.uid
     email = decoded.email
-    // Pas de paiement sans email vérifié (claim signé du token, pas le client).
-    if (!decoded.email_verified) {
+    // Pas de paiement sans compte vérifié (claim signé du token, pas le client).
+    if (!compteVerifie(decoded)) {
       return res.status(403).json({ error: 'EMAIL_NOT_VERIFIED' })
     }
   } catch {

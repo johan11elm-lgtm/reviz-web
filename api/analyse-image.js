@@ -1,5 +1,6 @@
 import { buildSystemPrompt, LESSON_IMAGE_INSTRUCTION, MODEL } from './_systemPrompt.js'
 import { getDb, getAuthAdmin } from './_firebaseAdmin.js'
+import { compteVerifie } from './_compteVerifie.js'
 import { consumeQuota, refundQuota, FREE_LIMIT } from './_quota.js'
 import { LANCEMENT_OFFERT, LANCEMENT_SCAN_LIMIT } from './_lancement.js'
 
@@ -37,9 +38,8 @@ export default async function handler(req, res) {
   }
   const uid = decoded.uid
 
-  // Email vérifié obligatoire pour consommer un scan : le claim `email_verified`
-  // vient du token signé, jamais du client.
-  if (!decoded.email_verified) return res.status(403).send('EMAIL_NOT_VERIFIED')
+  // Compte vérifié obligatoire pour consommer un scan (cf. _compteVerifie.js).
+  if (!compteVerifie(decoded)) return res.status(403).send('EMAIL_NOT_VERIFIED')
 
   // 2. Quota serveur (source de vérité)
   const db = getDb()

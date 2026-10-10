@@ -49,6 +49,16 @@ function rediriger(res, url) {
 
 const retourConnexion = (fragment) => `${BASE_URL}/connexion#${fragment}`
 
+// Compte vérifié par son fournisseur (TikTok, Microsoft) : pas d'e-mail de
+// confirmation à cliquer pour scanner, parler au coach ou s'abonner.
+// Les claims arrivent dans le jeton dès la connexion qui suit.
+async function marquerSocial(uid) {
+  const authAdmin = getAuthAdmin()
+  const { customClaims } = await authAdmin.getUser(uid)
+  if (customClaims?.reviz_social === true) return
+  await authAdmin.setCustomUserClaims(uid, { ...customClaims, reviz_social: true })
+}
+
 // --- App native : jeton Firebase natif → jeton personnalisé ---
 async function sessionNative(req, res) {
   const { idToken } = req.body ?? {}
@@ -66,6 +76,9 @@ async function sessionNative(req, res) {
     return res.status(401).json({ error: 'STALE' })
   }
   try {
+    // Session JS ouverte par jeton personnalisé (fournisseur « custom ») :
+    // le claim garde le compte « vérifié » (cf. _compteVerifie.js).
+    await marquerSocial(decoded.uid)
     const customToken = await getAuthAdmin().createCustomToken(decoded.uid)
     return res.status(200).json({ customToken })
   } catch (err) {
@@ -132,6 +145,7 @@ async function tiktokRetour(req, res) {
       if (err?.code !== 'auth/user-not-found') throw err
       await authAdmin.createUser({ uid, displayName })
     }
+    await marquerSocial(uid)
     const customToken = await authAdmin.createCustomToken(uid, { provider: 'tiktok' })
     return rediriger(res, retourConnexion(`tiktok=${encodeURIComponent(customToken)}`))
   } catch (err) {
