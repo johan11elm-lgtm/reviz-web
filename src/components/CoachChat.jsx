@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useModalA11y } from '../hooks/useModalA11y';
 import { Mascot } from './Mascot';
+import { nbsp } from '../utils/typography';
 import { BulbIcon, StarIcon, QuizIcon, PencilIcon } from './Icons';
 import { sendCoachMessage, CHAT_MAX_MESSAGE_LENGTH } from '../services/chatService';
 import { startCheckout } from '../services/billingService';
@@ -299,7 +300,7 @@ export function CoachConversation({ lessonId, prefill, className = '', variant =
                 {PAGE_SUGGESTIONS.map(s => (
                   <button type="button" key={s.text} className="coach-hero-card" onClick={() => send(s.text)}>
                     <span className="coach-hero-card-icon" aria-hidden="true"><s.Icon /></span>
-                    <span className="coach-hero-card-text">{s.text}</span>
+                    <span className="coach-hero-card-text">{nbsp(s.text)}</span>
                     <span className="coach-hero-card-sub">{s.sub}</span>
                   </button>
                 ))}
