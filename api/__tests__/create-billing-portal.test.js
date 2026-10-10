@@ -12,7 +12,7 @@ vi.mock('stripe', () => ({
   default: class { constructor() { this.billingPortal = { sessions: { create: portalCreate } } } },
 }))
 
-const { default: handler } = await import('../create-billing-portal.js')
+const { default: handler } = await import('../_billingPortal.js')
 
 function mockRes() {
   return {

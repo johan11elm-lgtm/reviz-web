@@ -37,6 +37,8 @@
     }
   ],
   "rewrites": [
+    { "source": "/api/create-checkout", "destination": "/api/abonnement?op=checkout" },
+    { "source": "/api/create-billing-portal", "destination": "/api/abonnement?op=portail" },
     { "source": "/((?!api/)(?!sitemap\\.xml)(?!robots\\.txt)(?!googlee9de8164637c0bbf\\.html).*)", "destination": "/index.html" }
   ]
 }

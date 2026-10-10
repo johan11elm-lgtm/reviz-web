@@ -11,7 +11,7 @@ vi.mock('stripe', () => ({
   default: class { constructor() { this.checkout = { sessions: { create: sessionsCreate } } } },
 }))
 
-const { default: handler } = await import('../create-checkout.js')
+const { default: handler } = await import('../_checkout.js')
 
 function mockRes() {
   return {
