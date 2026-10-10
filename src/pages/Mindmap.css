@@ -251,10 +251,9 @@
   flex-shrink: 0;
 }
 .mindmap-page .bn-count {
-  font-size: 12px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+  /* Méta, pas un surtitre : en phrase normale (docs/design-grammaire.md §2) */
+  font-size: 13px;
+  font-weight: 600;
   color: var(--text-muted);
   white-space: nowrap;
 }
