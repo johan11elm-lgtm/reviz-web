@@ -7,6 +7,7 @@ import { PageIntro } from '../components/PageIntro';
 import { Mascot } from '../components/Mascot';
 import { AjoutControle } from '../components/AjoutControle';
 import { XIcon } from '../components/Icons';
+import { useIsDesktop } from '../hooks/useMediaQuery';
 import { track } from '../services/statsService';
 import {
   agendaLocal, chargerAgenda, supprimerControle, relierPronote, delierPronote,
@@ -129,6 +130,7 @@ export default function Agenda() {
 }
 
 function EmploiDuTemps({ user, isGuest, lien, controles, onAgenda, onAjout }) {
+  const isDesktop = useIsDesktop();
   const aujourdhui = jourIso();
   // Le week-end, on montre déjà la semaine qui vient.
   const debutParDefaut = (() => {
@@ -211,7 +213,11 @@ function EmploiDuTemps({ user, isGuest, lien, controles, onAgenda, onAjout }) {
 
       {!cours && !erreur && <p className="agenda-chargement" role="status">Chargement de ta semaine…</p>}
 
-      {cours && (
+      {cours && isDesktop && (
+        <GrilleSemaine jours={jours} cours={cours} controles={controles} aujourdhui={aujourdhui} onAjout={onAjout} />
+      )}
+
+      {cours && !isDesktop && (
         <div className="agenda-grille">
           {jours.map(j => {
             const duJour = cours.filter(c => c.debut.startsWith(j));
@@ -269,6 +275,68 @@ function EmploiDuTemps({ user, isGuest, lien, controles, onAgenda, onAjout }) {
   );
 }
 
+const minutes = debut => Number(debut.slice(11, 13)) * 60 + Number(debut.slice(14, 16));
+const PAS = 15; // une rangée de grille = 15 minutes
+
+/**
+ * Ordinateur : la semaine en vraie grille horaire. Chaque cours est placé
+ * selon son début et sa fin, donc tous les jours s'alignent heure par heure.
+ * Les contrôles vivent dans l'en-tête du jour (hauteur fixe).
+ */
+function GrilleSemaine({ jours, cours, controles, aujourdhui, onAjout }) {
+  const enMinutes = cours.flatMap(c => [minutes(c.debut), minutes(c.fin)]);
+  const debut = Math.floor(Math.min(8 * 60, ...enMinutes) / 60) * 60;
+  const fin = Math.ceil(Math.max(17 * 60, ...enMinutes) / 60) * 60;
+  const rangees = (fin - debut) / PAS;
+  const heures = Array.from({ length: (fin - debut) / 60 }, (_, i) => debut / 60 + i);
+  const colonnes = { '--agenda-jours': jours.length, '--agenda-rangees': rangees };
+
+  return (
+    <div className="agenda-semaine-grille" style={colonnes}>
+      <div className="agenda-semaine-tetes">
+        <span aria-hidden="true" />
+        {jours.map(j => {
+          const ctrl = controles.filter(c => c.date === j);
+          return (
+            <div key={j} className={`agenda-tete${j === aujourdhui ? ' aujourdhui' : ''}`}>
+              <span className="agenda-tete-jour">{jourCourt(j)} {Number(j.slice(8))}</span>
+              <span className="agenda-tete-controle">
+                {ctrl.length > 0 && (
+                  <><span className="agenda-tete-point" aria-hidden="true" />{ctrl.map(intituleControle).join(', ')}</>
+                )}
+              </span>
+            </div>
+          );
+        })}
+      </div>
+      <div className="agenda-semaine-corps">
+        {heures.map((h, i) => (
+          <span key={h} className="agenda-heure" style={{ gridRow: `${i * 4 + 1} / span 4` }}>{h}h</span>
+        ))}
+        {jours.map((j, col) => cours.filter(c => c.debut.startsWith(j)).map((c, i) => {
+          const matiere = matiereDuCours(c.titre);
+          const de = (minutes(c.debut) - debut) / PAS + 1;
+          const a = Math.max(de + 1, (minutes(c.fin) - debut) / PAS + 1);
+          const detail = [detailDuCours(c.titre), salleEnClair(c.salle)].filter(Boolean).join(' · ');
+          return (
+            <button
+              key={`${j}-${i}`}
+              type="button"
+              className={`agenda-bloc matiere-${matiere ?? 'autre'}${c.annule ? ' annule' : ''}`}
+              style={{ gridColumn: col + 2, gridRow: `${de} / ${a}` }}
+              onClick={() => onAjout({ matiere: matiere ?? 'autre', date: j })}
+              aria-label={`${jourEnClair(j)}, ${nomDuCours(c.titre)} de ${heure(c.debut)} à ${heure(c.fin)}${c.annule ? ', annulé' : ''}. Ajouter un contrôle ce jour-là`}
+            >
+              <span className="agenda-bloc-nom">{nomDuCours(c.titre)}</span>
+              <span className="agenda-bloc-detail">{c.annule ? 'Annulé' : `${heure(c.debut)}${detail ? ` · ${detail}` : ''}`}</span>
+            </button>
+          );
+        }))}
+      </div>
+    </div>
+  );
+}
+
 // « 105 » → « salle 105 » ; « Salle de musique », « Labo 2 », « Piscine » restent tels quels.
 function salleEnClair(salle) {
   if (!salle) return '';
@@ -281,19 +349,30 @@ function RelierPronote({ user, onAgenda }) {
   const [erreur, setErreur] = useState('');
   const lien = useMemo(() => saisie.trim(), [saisie]);
 
-  async function relier(e) {
-    e.preventDefault();
+  async function verifier(valeur) {
     setErreur('');
     setEtat('verif');
     try {
       // On vérifie que Pronote répond avant d'enregistrer le lien.
       const lundi = lundiDe(jourIso());
-      await chargerCours(user, lien, { du: lundi, au: ajouterJours(lundi, 6) });
+      await chargerCours(user, valeur, { du: lundi, au: ajouterJours(lundi, 6) });
       track('agenda_pronote_relie');
-      onAgenda(await relierPronote(user, lien));
+      onAgenda(await relierPronote(user, valeur));
     } catch (err) {
       setErreur(messageErreurPronote(err.message));
       setEtat('');
+    }
+  }
+
+  // Le plus simple après « Copier l'adresse » dans Pronote : un seul bouton.
+  async function coller() {
+    try {
+      const texte = (await navigator.clipboard.readText()).trim();
+      if (!texte) return setErreur("Le presse-papiers est vide : copie d'abord l'adresse dans Pronote.");
+      setSaisie(texte);
+      verifier(texte);
+    } catch {
+      setErreur('Colle le lien dans le champ ci-dessous.');
     }
   }
 
@@ -301,27 +380,60 @@ function RelierPronote({ user, onAgenda }) {
     <section className="rv-card agenda-relier" aria-labelledby="agenda-edt-titre">
       <h2 id="agenda-edt-titre" className="agenda-relier-titre">Relie ton emploi du temps Pronote</h2>
       <p className="agenda-relier-texte">Ta semaine s'affiche ici, toujours à jour. Réviz ne voit que tes horaires de cours, pas tes notes.</p>
-      <ol className="agenda-etapes">
-        <li>Dans Pronote, ouvre <b>Mes données</b>, puis <b>Compte</b>.</li>
-        <li>Choisis <b>Export au format ICal</b>, coche <b>Votre emploi du temps</b>.</li>
-        <li>Touche <b>Copier l'adresse</b> et colle-la ici.</li>
+
+      {/* Trois étapes illustrées : on glisse de l'une à l'autre sur téléphone. */}
+      <ol className="agenda-tuto">
+        <li className="agenda-tuto-etape">
+          <span className="agenda-tuto-num">1</span>
+          <div className="agenda-tuto-ecran" aria-hidden="true">
+            <div className="agenda-tuto-onglets">
+              <span className="agenda-tuto-onglet actif">Mes données</span>
+              <span className="agenda-tuto-onglet">Notes</span>
+            </div>
+            <div className="agenda-tuto-menu">
+              <span className="agenda-tuto-item actif">Compte</span>
+              <span className="agenda-tuto-item">Documents</span>
+            </div>
+          </div>
+          <p className="agenda-tuto-texte">Dans Pronote, ouvre <b>Mes données</b>, puis <b>Compte</b>.</p>
+        </li>
+        <li className="agenda-tuto-etape">
+          <span className="agenda-tuto-num">2</span>
+          <div className="agenda-tuto-ecran" aria-hidden="true">
+            <span className="agenda-tuto-item actif">Export au format ICal</span>
+            <span className="agenda-tuto-case"><span className="agenda-tuto-coche">✓</span> Votre emploi du temps</span>
+          </div>
+          <p className="agenda-tuto-texte">Choisis <b>Export au format ICal</b>. La case emploi du temps est cochée.</p>
+        </li>
+        <li className="agenda-tuto-etape">
+          <span className="agenda-tuto-num">3</span>
+          <div className="agenda-tuto-ecran" aria-hidden="true">
+            <span className="agenda-tuto-lien">https://….index-education.net/…</span>
+            <span className="agenda-tuto-bouton">Copier l'adresse</span>
+          </div>
+          <p className="agenda-tuto-texte">Touche <b>Copier l'adresse</b>, puis reviens ici.</p>
+        </li>
       </ol>
-      <form className="agenda-relier-form" onSubmit={relier} noValidate>
-        <label className="agenda-label" htmlFor="agenda-lien">Adresse de ton emploi du temps</label>
-        <input
-          id="agenda-lien"
-          className="agenda-input"
-          type="url"
-          inputMode="url"
-          autoComplete="off"
-          placeholder="https://….index-education.net/pronote/ical/…"
-          value={saisie}
-          onChange={e => setSaisie(e.target.value)}
-        />
-        {erreur && <p className="agenda-relier-erreur">{erreur}</p>}
-        <button type="submit" className="rv-btn-cta rv-btn-cta--ghost" disabled={!lien || etat === 'verif'}>
-          {etat === 'verif' ? 'Vérification…' : 'Relier Pronote'}
-        </button>
+
+      <button type="button" className="rv-btn-cta rv-btn-cta--ghost agenda-coller" onClick={coller} disabled={etat === 'verif'}>
+        {etat === 'verif' ? 'Vérification…' : 'Coller le lien'}
+      </button>
+      <form className="agenda-relier-form" onSubmit={e => { e.preventDefault(); if (lien) verifier(lien); }} noValidate>
+        <label className="agenda-label" htmlFor="agenda-lien">Ou colle-le toi-même</label>
+        <div className="agenda-relier-ligne">
+          <input
+            id="agenda-lien"
+            className="agenda-input"
+            type="url"
+            inputMode="url"
+            autoComplete="off"
+            placeholder="https://….index-education.net/pronote/ical/…"
+            value={saisie}
+            onChange={e => setSaisie(e.target.value)}
+          />
+          <button type="submit" className="agenda-relier-ok" disabled={!lien || etat === 'verif'} aria-label="Relier Pronote">›</button>
+        </div>
+        {erreur && <p className="agenda-relier-erreur" role="alert">{erreur}</p>}
       </form>
     </section>
   );

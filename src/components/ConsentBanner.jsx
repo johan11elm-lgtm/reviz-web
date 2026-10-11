@@ -32,7 +32,7 @@ export function ConsentBanner({ className = '' }) {
       <span className="guest-banner-text">
         {etat && etat !== 'envoi' && etat !== 'envoye' ? etat : (
           <>
-            <b>Accord parental en attente</b> · encore {jours} jour{jours > 1 ? 's' : ''} pour que ton parent accepte.
+            <b>Accord parental en attente</b> · encore {jours} jour{jours > 1 ? 's' : ''}<span className="guest-banner-detail"> pour que ton parent accepte</span>.
           </>
         )}
       </span>

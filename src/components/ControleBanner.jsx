@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { Mascot } from './Mascot';
 import { agendaLocal, chargerAgenda } from '../services/agendaService';
-import { controlesAVenir, compteARebours, intituleControle, matiereControle } from '../utils/agenda';
+import { controlesAVenir, compteARebours, matiereControle } from '../utils/agenda';
 import './guest.css';
 
 // Au-delà, le contrôle reste dans l'Agenda mais ne s'affiche pas sur l'accueil.
@@ -38,8 +38,8 @@ export function ControleBanner({ className = '' }) {
     <div className={`guest-banner controle-banner ${className}`.trim()} role="status">
       <Mascot pose={m.mascot} size={30} alt="" aria-hidden="true" className="guest-banner-mascot" />
       <span className="guest-banner-text">
-        <b>{intituleControle(prochain)} {quand}</b>
-        {prochain.titre ? ` · ${prochain.titre}` : ''}
+        <b>{m.label}</b> · contrôle {quand}
+        {prochain.titre && <span className="guest-banner-detail"> · {prochain.titre}</span>}
       </span>
       <Link to={cible} className="guest-banner-link">Réviser</Link>
     </div>

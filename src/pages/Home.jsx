@@ -467,8 +467,10 @@ export default function Home() {
         <div className="content home-desk">
           {greeting}
 
-          <ConsentBanner />
-          <ControleBanner />
+          <div className="home-rappels">
+            <ConsentBanner />
+            <ControleBanner />
+          </div>
 
           <div className="home-desk-top">
             {isGuest ? hero : heroDesk}
@@ -517,9 +519,13 @@ export default function Home() {
       ) : (
         <div className="content home-stack">
 
-          <GuestBanner />
-          <ConsentBanner />
-          <ControleBanner />
+          {/* Rappels (essai, accord parental, prochain contrôle) : une seule
+              carte de rangées fines, vide → masquée (home-rappels:empty). */}
+          <div className="home-rappels">
+            <GuestBanner />
+            <ConsentBanner />
+            <ControleBanner />
+          </div>
 
           {greeting}
 

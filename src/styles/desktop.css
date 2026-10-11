@@ -964,50 +964,95 @@
   html:not(.native) .auth-desk-page .signup-primary { margin-top: 6px; }
 }
 
-/* Agenda — contrôles à gauche, la semaine entière en colonnes à droite
- * (le téléphone n'affiche qu'un jour, choisi dans la rangée de jours). */
+/* Agenda — contrôles à gauche, la semaine en grille horaire à droite
+ * (GrilleSemaine, balisage propre à l'ordinateur : tous les jours
+ * s'alignent heure par heure). Le téléphone garde la liste d'un jour. */
 @media (min-width: 1024px) {
   html:not(.native) .agenda-page .agenda-content {
     display: grid;
-    grid-template-columns: var(--rail-w) minmax(0, 1fr);
+    grid-template-columns: 300px minmax(0, 1fr);
     grid-auto-rows: max-content;
     gap: var(--grid-gap);
     align-items: start;
     padding-bottom: 48px;
   }
   html:not(.native) .agenda-page .agenda-jours { display: none; }
-  html:not(.native) .agenda-page .agenda-grille {
+  html:not(.native) .agenda-semaine-grille {
+    --agenda-heure-h: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  html:not(.native) .agenda-semaine-tetes,
+  html:not(.native) .agenda-semaine-corps {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
-    grid-auto-flow: column;
-    grid-auto-rows: max-content;
-    gap: 12px;
+    grid-template-columns: 34px repeat(var(--agenda-jours), minmax(0, 1fr));
+    column-gap: 8px;
   }
-  html:not(.native) .agenda-page .agenda-colonne { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
-  html:not(.native) .agenda-page .agenda-colonne-titre {
-    display: block;
-    margin: 0 0 2px;
-    font-size: 13px;
+  html:not(.native) .agenda-tete { min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+  html:not(.native) .agenda-tete-jour { font-size: 13px; font-weight: 700; color: var(--text-secondary); }
+  html:not(.native) .agenda-tete-jour::first-letter { text-transform: uppercase; }
+  html:not(.native) .agenda-tete.aujourdhui .agenda-tete-jour { color: var(--accent-violet); }
+  /* Hauteur fixe, vide ou non : les grilles des jours restent alignées */
+  html:not(.native) .agenda-tete-controle {
+    height: 16px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 11.5px;
     font-weight: 700;
-    color: var(--text-secondary);
+    color: var(--accent-orange-ink);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
-  html:not(.native) .agenda-page .agenda-colonne-titre::first-letter { text-transform: uppercase; }
-  html:not(.native) .agenda-page .agenda-colonne.aujourdhui .agenda-colonne-titre { color: var(--accent-violet); }
-  html:not(.native) .agenda-page .agenda-cours-item { flex-direction: column; gap: 4px; padding: 10px 12px; border-left: 4px solid var(--border); }
-  html:not(.native) .agenda-page .agenda-cours-heure { width: auto; }
-  html:not(.native) .agenda-page .agenda-cours-heure br { display: none; }
-  html:not(.native) .agenda-page .agenda-cours-heure span::before { content: ' – '; }
-  html:not(.native) .agenda-page .agenda-cours-barre { display: none; }
-  html:not(.native) .agenda-page .agenda-cours-nom { font-size: 14px; }
-  html:not(.native) .agenda-page .agenda-cours-detail { white-space: normal; }
-  html:not(.native) .agenda-page .agenda-cours-item:has(.matiere-maths) { border-left-color: #FF6B00; }
-  html:not(.native) .agenda-page .agenda-cours-item:has(.matiere-francais) { border-left-color: #EC4899; }
-  html:not(.native) .agenda-page .agenda-cours-item:has(.matiere-histoire),
-  html:not(.native) .agenda-page .agenda-cours-item:has(.matiere-geographie) { border-left-color: #6366F1; }
-  html:not(.native) .agenda-page .agenda-cours-item:has(.matiere-svt) { border-left-color: #22C55E; }
-  html:not(.native) .agenda-page .agenda-cours-item:has(.matiere-physique-chimie) { border-left-color: #3B82F6; }
-  html:not(.native) .agenda-page .agenda-cours-item:has(.matiere-technologie) { border-left-color: #06B6D4; }
-  html:not(.native) .agenda-page .agenda-cours-item:has(.matiere-anglais) { border-left-color: #EAB308; }
+  html:not(.native) .agenda-tete-point { flex-shrink: 0; width: 7px; height: 7px; border-radius: 50%; background: var(--accent-orange); }
+  html:not(.native) .agenda-semaine-corps {
+    grid-template-rows: repeat(var(--agenda-rangees), calc(var(--agenda-heure-h) / 4));
+    row-gap: 0;
+    /* Une ligne fine par heure */
+    background-image: repeating-linear-gradient(to bottom, var(--border-subtle) 0 1px, transparent 1px var(--agenda-heure-h));
+  }
+  html:not(.native) .agenda-heure {
+    grid-column: 1;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-muted);
+    transform: translateY(-6px);
+  }
+  html:not(.native) .agenda-bloc {
+    min-width: 0;
+    margin: 2px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    padding: 5px 8px;
+    overflow: hidden;
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-left: 4px solid var(--border);
+    border-radius: 10px;
+    box-shadow: var(--shadow-card);
+    font: inherit;
+    text-align: left;
+    color: inherit;
+    cursor: pointer;
+  }
+  html:not(.native) .agenda-bloc:hover { border-color: var(--border); }
+  html:not(.native) .agenda-bloc-nom { font-size: 13px; font-weight: 700; color: var(--text-primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  html:not(.native) .agenda-bloc-detail { font-size: 11.5px; color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  html:not(.native) .agenda-bloc.annule { opacity: .5; }
+  html:not(.native) .agenda-bloc.annule .agenda-bloc-nom { text-decoration: line-through; }
+  html:not(.native) .agenda-bloc.matiere-maths { border-left-color: #FF6B00; }
+  html:not(.native) .agenda-bloc.matiere-francais { border-left-color: #EC4899; }
+  html:not(.native) .agenda-bloc.matiere-histoire,
+  html:not(.native) .agenda-bloc.matiere-geographie { border-left-color: #6366F1; }
+  html:not(.native) .agenda-bloc.matiere-svt { border-left-color: #22C55E; }
+  html:not(.native) .agenda-bloc.matiere-physique-chimie { border-left-color: #3B82F6; }
+  html:not(.native) .agenda-bloc.matiere-technologie { border-left-color: #06B6D4; }
+  html:not(.native) .agenda-bloc.matiere-anglais { border-left-color: #EAB308; }
+  /* Tutoriel Pronote : les trois étapes côte à côte */
+  html:not(.native) .agenda-tuto { grid-auto-columns: minmax(0, 1fr); overflow: visible; margin: 0; padding: 8px 0 6px; }
   /* La fenêtre d'ajout se centre au lieu de monter du bas */
   html:not(.native) .agenda-overlay { align-items: center; }
   html:not(.native) .agenda-modal { border-radius: var(--radius-card); max-width: 480px; padding-bottom: 22px; }

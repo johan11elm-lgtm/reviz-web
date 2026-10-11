@@ -125,6 +125,13 @@ export function jourEnClair(jour) {
   return `${JOURS[d.getDay()]} ${d.getDate()} ${MOIS[d.getMonth()]}`
 }
 
+const MOIS_COURTS = ['janv.', 'févr.', 'mars', 'avr.', 'mai', 'juin', 'juil.', 'août', 'sept.', 'oct.', 'nov.', 'déc.']
+
+/** « oct. » */
+export function moisCourt(jour) {
+  return MOIS_COURTS[versDate(jour).getMonth()]
+}
+
 /** « lun. » */
 export function jourCourt(jour) {
   return `${JOURS[versDate(jour).getDay()].slice(0, 3)}.`

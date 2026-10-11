@@ -49,17 +49,107 @@
 .agenda-relier { padding: 20px; display: flex; flex-direction: column; gap: 12px; }
 .agenda-relier-titre { margin: 0; font-size: 15px; font-weight: 700; color: var(--text-primary); }
 .agenda-relier-texte { margin: 0; font-size: 14px; line-height: 1.5; color: var(--text-secondary); }
-.agenda-etapes {
-  margin: 0;
-  padding-left: 20px;
+/* Tutoriel : trois cartes illustrées, glissées sur téléphone */
+.agenda-tuto {
+  list-style: none;
+  margin: 0 -20px;
+  padding: 8px 20px 6px; /* place pour les pastilles numérotées (top: -6px) */
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 78%;
+  gap: 10px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+.agenda-tuto::-webkit-scrollbar { display: none; }
+.agenda-tuto-etape {
+  position: relative;
+  scroll-snap-align: start;
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  font-size: 14px;
-  line-height: 1.45;
-  color: var(--text-secondary);
+  gap: 10px;
+  padding: 12px;
+  background: var(--bg-app);
+  border-radius: 18px;
 }
-.agenda-etapes b { color: var(--text-primary); font-weight: 700; }
+.agenda-tuto-num {
+  position: absolute;
+  top: -6px;
+  left: -6px;
+  width: 24px;
+  height: 24px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--accent-violet);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 800;
+}
+.agenda-tuto-ecran {
+  height: 92px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  font-size: 11.5px;
+  color: var(--text-secondary);
+  overflow: hidden;
+}
+.agenda-tuto-onglets { display: flex; gap: 6px; }
+.agenda-tuto-onglet { padding: 3px 7px; border-radius: 6px; white-space: nowrap; }
+.agenda-tuto-onglet.actif, .agenda-tuto-item.actif {
+  background: var(--accent-violet-soft);
+  color: var(--accent-violet);
+  font-weight: 700;
+  box-shadow: inset 0 0 0 1.5px var(--accent-violet);
+}
+.agenda-tuto-menu { display: flex; flex-direction: column; gap: 3px; padding-left: 4px; }
+.agenda-tuto-item { align-self: flex-start; padding: 3px 7px; border-radius: 6px; white-space: nowrap; }
+.agenda-tuto-case { display: flex; align-items: center; gap: 6px; padding-left: 4px; }
+.agenda-tuto-coche {
+  width: 15px;
+  height: 15px;
+  display: grid;
+  place-items: center;
+  border-radius: 4px;
+  background: var(--accent-violet);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 800;
+}
+.agenda-tuto-lien { color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.agenda-tuto-bouton {
+  align-self: flex-start;
+  padding: 5px 10px;
+  border-radius: 99px;
+  background: var(--accent-violet);
+  color: #fff;
+  font-weight: 700;
+}
+.agenda-tuto-texte { margin: 0; font-size: 13.5px; line-height: 1.4; color: var(--text-secondary); }
+.agenda-tuto-texte b { color: var(--text-primary); font-weight: 700; }
+
+.agenda-coller { align-self: stretch; }
+.agenda-relier-ligne { display: flex; gap: 8px; }
+.agenda-relier-ok {
+  flex-shrink: 0;
+  width: 48px;
+  border: 0;
+  border-radius: 14px;
+  background: var(--accent-violet);
+  color: #fff;
+  font-size: 22px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.agenda-relier-ok:disabled { opacity: .35; cursor: default; }
 .agenda-relier-form { display: flex; flex-direction: column; gap: 8px; }
 .agenda-relier-erreur { margin: 0; font-size: 13px; color: var(--accent-red); }
 
@@ -190,7 +280,7 @@
 .agenda-cours-barre.matiere-technologie { background: #06B6D4; }
 .agenda-cours-barre.matiere-anglais { background: #EAB308; }
 
-/* ── Fenêtre « Ajouter un contrôle » ── */
+/* ── Fenêtre « Ajouter un contrôle » : une question par écran ── */
 .agenda-overlay {
   position: fixed;
   inset: 0;
@@ -204,34 +294,92 @@
   width: 100%;
   max-width: 520px;
   max-height: 92dvh;
+  min-height: min(520px, 92dvh); /* même hauteur d'un écran à l'autre */
   overflow-y: auto;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  padding: 22px 20px calc(20px + env(safe-area-inset-bottom));
+  gap: 14px;
+  padding: 14px 20px calc(22px + env(safe-area-inset-bottom));
   background: var(--bg-app);
   border-radius: 28px 28px 0 0;
   box-shadow: 0 -8px 30px rgba(0, 0, 0, 0.12);
 }
-.agenda-modal-titre { margin: 0 0 4px; font-size: 20px; font-weight: 800; color: var(--text-primary); }
-.agenda-fieldset { border: 0; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
-.agenda-matieres { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.agenda-modal-head { display: flex; align-items: center; justify-content: space-between; }
+.agenda-modal-icone {
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 0;
+  background: none;
+  font-size: 20px;
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+.agenda-modal-icone svg { width: 20px; height: 20px; }
+button.agenda-modal-icone:hover { background: var(--bg-hover); }
+.agenda-modal-etapes { display: flex; gap: 6px; }
+.agenda-modal-point { width: 22px; height: 5px; border-radius: 99px; background: var(--border); transition: background .2s; }
+.agenda-modal-point.fait { background: var(--accent-violet); }
+.agenda-modal-titre { margin: 0; font-size: 24px; font-weight: 800; letter-spacing: -0.4px; color: var(--text-primary); }
+.agenda-modal-sous { margin: 0; font-size: 14px; color: var(--text-muted); }
+.agenda-etape { flex: 1; display: flex; flex-direction: column; gap: 12px; animation: agendaEtape .22s ease both; }
+.agenda-matieres { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; animation: agendaEtape .22s ease both; }
+@keyframes agendaEtape { from { opacity: 0; transform: translateX(10px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .agenda-etape, .agenda-matieres { animation: none; } }
+
 .agenda-matiere {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
-  padding: 10px 4px;
+  gap: 6px;
+  padding: 14px 4px 12px;
   background: var(--bg-card);
-  border: 1.5px solid var(--border);
-  border-radius: 14px;
+  border: 1.5px solid var(--border-subtle);
+  border-radius: 18px;
+  box-shadow: var(--shadow-card);
   font: inherit;
-  font-size: 12px;
-  font-weight: 600;
+  font-size: 13px;
+  font-weight: 700;
   color: var(--text-primary);
   cursor: pointer;
+  transition: border-color .15s, transform .1s;
 }
-.agenda-matiere.active { border-color: var(--accent-violet); box-shadow: 0 0 0 3px var(--accent-violet-soft); }
-.agenda-modal-btns { display: flex; gap: 10px; margin-top: 8px; }
-.agenda-modal-btns > * { flex: 1; }
+.agenda-matiere:active { transform: scale(0.97); }
+.agenda-matiere:hover, .agenda-matiere.active { border-color: var(--accent-violet); }
+
+.agenda-dates { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+.agenda-date {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+  padding: 10px 2px;
+  background: var(--bg-card);
+  border: 1.5px solid var(--border-subtle);
+  border-radius: 16px;
+  box-shadow: var(--shadow-card);
+  font: inherit;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: border-color .15s, transform .1s;
+}
+.agenda-date:active { transform: scale(0.97); }
+.agenda-date:hover, .agenda-date.active { border-color: var(--accent-violet); }
+.agenda-date-jour { font-size: 12px; font-weight: 600; }
+.agenda-date-num { font-size: 22px; font-weight: 800; color: var(--text-primary); line-height: 1.1; }
+.agenda-date-mois { font-size: 11px; color: var(--text-muted); }
+.agenda-autre-date { align-self: center; padding: 6px; }
+
+.agenda-recap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  background: var(--bg-card);
+  border-radius: 18px;
+  box-shadow: var(--shadow-card);
+}
+.agenda-modal-ok { margin-top: auto; }
