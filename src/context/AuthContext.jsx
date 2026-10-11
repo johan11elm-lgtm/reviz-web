@@ -47,6 +47,17 @@ export function useAuth() {
 }
 
 // Rattache les services locaux (clés localStorage par utilisateur) à un uid.
+/** Champs d'abonnement du profil Firestore (api/stripe-webhook.js). */
+function lireAbonnement(profile) {
+  if (profile?.plan !== 'premium') return null;
+  return {
+    formule: profile.formule ?? null,
+    fondateur: profile.fondateur ?? null,
+    periodeFin: profile.periodeFin ?? null,
+    annuleLe: profile.annuleLe ?? null,
+  };
+}
+
 function bindServicesToUser(uid) {
   setActiveUser(uid);
   setRevisionUser(uid);
@@ -107,6 +118,9 @@ export function AuthProvider({ children }) {
   // Compte sans mot de passe (Google, Apple…) sans profil complété (pas encore de date de naissance / niveau).
   const [needsProfileSetup, setNeedsProfileSetup] = useState(cached?.needsProfileSetup ?? false);
   const [isPremium, setIsPremium] = useState(cached?.isPremium ?? false);
+  // Récapitulatif de l'abonnement écrit par le webhook Stripe (formule,
+  // tarif fondateur, fin de période, annulation programmée) ; null sans abonnement.
+  const [abonnement, setAbonnement] = useState(null);
   // uid pour lequel le gate ci-dessus a été calculé (Firestore) — garde le cache cohérent.
   const [gateUid, setGateUid] = useState(cached?.uid ?? null);
   // Incrémenté quand le niveau change hors d'un setState (localStorage) pour
@@ -401,6 +415,7 @@ export function AuthProvider({ children }) {
       setNeedsProfileSetup(false);
       setIsPremium(false);
       setPremiumStatus(false);
+      setAbonnement(null);
       setGateUid(null);
       return;
     }
@@ -432,6 +447,7 @@ export function AuthProvider({ children }) {
     const premium = profile?.plan === 'premium';
     setIsPremium(premium);
     setPremiumStatus(premium);
+    setAbonnement(lireAbonnement(profile));
 
     // Mineur <15 ans : accès ouvert pendant l'attente de la réponse du parent,
     // suspendu si rien n'est parti, en cas de refus ou sans réponse à temps.
@@ -499,6 +515,7 @@ export function AuthProvider({ children }) {
       const premium = userDoc.exists() && userDoc.data()?.plan === 'premium';
       setIsPremium(premium);
       setPremiumStatus(premium);
+      setAbonnement(lireAbonnement(userDoc.exists() ? userDoc.data() : null));
     } catch {
       // ignore
     }
@@ -521,6 +538,7 @@ export function AuthProvider({ children }) {
     consent,
     needsProfileSetup,
     isPremium, // abonnement payé (Stripe)
+    abonnement,
     // Avantages Réviz+ : abonné, ou offert (à tous pendant le lancement).
     hasRevizPlus: isPremium || offert,
     revizPlusOffert: offert,
@@ -545,7 +563,7 @@ export function AuthProvider({ children }) {
     updateUserPassword,
     resendVerificationEmail,
     deleteAccount,
-  }), [currentUser, loading, consentBlocked, consent, needsProfileSetup, isPremium, offert, guest, levelTick]);
+  }), [currentUser, loading, consentBlocked, consent, needsProfileSetup, isPremium, abonnement, offert, guest, levelTick]);
 
   // Enfants rendus dès que Firebase a confirmé la session — ou immédiatement
   // depuis le cache local (démarrage optimiste). Sans cache, on attend :

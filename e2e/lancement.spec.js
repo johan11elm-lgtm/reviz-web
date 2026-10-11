@@ -13,7 +13,7 @@ test('Réviz+ offert : popup une seule fois, Réglages sans paiement', async ({ 
 
   const annonce = page.getByRole('dialog', { name: /Réviz\+ offert jusqu’au 25 octobre/ })
   await expect(annonce).toBeVisible()
-  await expect(annonce.getByText('30 leçons analysées par semaine', { exact: false })).toBeVisible()
+  await expect(annonce.getByText('Leçons analysées en illimité', { exact: false })).toBeVisible()
   await page.waitForTimeout(600)
   await capture('01-annonce')
   await annonce.getByRole('button', { name: 'Plus tard' }).click()

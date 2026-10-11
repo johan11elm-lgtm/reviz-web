@@ -1,6 +1,6 @@
 import { PageIntro } from '../components/PageIntro';
 import { GuestBanner } from '../components/GuestBanner';
-import { UserIcon, MailIcon, KeyIcon, BellIcon, MoonIcon, LockIcon, GemIcon, CheckIcon, InfoIcon, ScaleIcon, FileTextIcon, ClipboardIcon, LogOutIcon, AlertIcon, InstallIcon } from '../components/Icons';
+import { UserIcon, MailIcon, KeyIcon, BellIcon, MoonIcon, LockIcon, CheckIcon, InfoIcon, ScaleIcon, FileTextIcon, ClipboardIcon, LogOutIcon, AlertIcon, InstallIcon } from '../components/Icons';
 import { InstallerModal } from '../components/InstallerApp';
 import { useInstallation } from '../hooks/useInstallation';
 import { useState, useEffect } from 'react';
@@ -13,7 +13,6 @@ import { THEMES } from '../utils/themes';
 import { RevizPlusBadge, RevizPlusCard } from '../components/RevizPlus';
 import { formatLevelLabel } from '../utils/levels';
 import { openBillingPortal } from '../services/billingService';
-import { ChoixFormule } from '../components/ChoixFormule';
 import { remindersAvailable, isReminderEnabled, enableReminder, disableReminder } from '../services/reminderService';
 import { loadLessons } from '../services/historyService';
 import { countDueCards } from '../services/srsService';
@@ -44,7 +43,7 @@ export default function Reglages() {
     return () => clearTimeout(t);
   }, [location.hash]);
   const {
-    currentUser, isPremium, hasRevizPlus, revizPlusOffert, logout, isGuest,
+    currentUser, isPremium, hasRevizPlus, logout, isGuest,
     getUserLevel, setUserLevel, updateDisplayName,
     updateUserEmail, updateUserPassword, deleteAccount,
   } = useAuth();
@@ -469,31 +468,15 @@ export default function Reglages() {
         {!isGuest && (
         <section className="rg-section" id="abonnement">
           <h2 className="rg-section-title">Abonnement</h2>
-          {revizPlusOffert ? (
-            <RevizPlusCard onTheme={() => document.getElementById('themes')?.scrollIntoView({ block: 'start', behavior: 'smooth' })} />
-          ) : (
-          <div className="rv-card rg-card">
-            <div className="rg-plan-row">
-              <span className="rg-plan-label">Plan actuel</span>
-              {isPremium
-                ? <span className="premium-chip premium-chip--active"><GemIcon /> Réviz+ actif</span>
-                : <span className="rg-plan-free">Gratuit</span>}
-            </div>
-            {isPremium ? (
-              <button
-                type="button"
-                className="rv-btn-cta rv-btn-cta--ghost rv-btn-cta--full"
-                onClick={handleManageSubscription}
-                disabled={billingLoading}
-              >
-                {billingLoading ? 'Ouverture…' : 'Gérer mon abonnement'}
-              </button>
-            ) : (
-              <ChoixFormule />
-            )}
-            {billingError && <p className="rg-error" role="alert">{billingError}</p>}
-          </div>
-          )}
+          {/* Une seule carte pour tous les cas : offert, abonné (récapitulatif
+              et portail Stripe) ou gratuit (choix de la formule). */}
+          <RevizPlusCard
+            details
+            onTheme={() => document.getElementById('themes')?.scrollIntoView({ block: 'start', behavior: 'smooth' })}
+            onGerer={isPremium ? handleManageSubscription : undefined}
+            gererEnCours={billingLoading}
+          />
+          {billingError && <p className="rg-error" role="alert">{billingError}</p>}
         </section>
         )}
 

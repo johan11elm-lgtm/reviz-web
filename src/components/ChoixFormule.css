@@ -113,3 +113,36 @@
   font-weight: 600;
   color: var(--text-muted);
 }
+
+/* Badge de la formule mise en avant : or Réviz+ */
+.cf-option-badge {
+  background: linear-gradient(135deg, var(--rp-gold-1), var(--rp-gold-2));
+  color: var(--rp-gold-ink);
+  font-weight: 800;
+  box-shadow: 0 2px 8px rgba(227, 169, 79, 0.30);
+}
+
+/* ── Sur fond encre (carte Réviz+) ── */
+.cf--encre { gap: 12px; }
+.cf--encre .cf-fondateur { color: var(--rp-gold-text); font-weight: 700; text-align: left; }
+.cf--encre .cf-option {
+  border: 1.5px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--rp-on);
+}
+.cf--encre .cf-option:hover { border-color: rgba(242, 205, 132, 0.45); }
+.cf--encre .cf-option--on {
+  border-color: var(--rp-gold-2);
+  background: rgba(242, 205, 132, 0.12);
+  box-shadow: 0 0 0 3px rgba(242, 205, 132, 0.14);
+}
+.cf--encre .cf-option:focus-visible { outline-color: var(--rp-gold-1); }
+.cf--encre .cf-option-detail,
+.cf--encre .cf-option-cadence,
+.cf--encre .cf-option-barre { color: var(--rp-on-sub); }
+.cf--encre .cf-option-prix { color: var(--rp-on); }
+.cf--encre .cf-option--on .cf-option-prix { color: var(--rp-gold-text); }
+.cf--encre .cf-cta { width: 100%; }
+.cf--encre .cf-cta:disabled { opacity: 0.7; cursor: wait; }
+.cf--encre .cf-note { color: var(--rp-on-sub); }
+.cf--encre .cf-erreur { color: #FFB4A8; }

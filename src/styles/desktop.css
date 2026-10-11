@@ -745,6 +745,17 @@
   }
   html:not(.native) .profile-page .pf-sheet .rv-sheet-handle { display: none; }
 
+  /* ── Merci Réviz+ : la carte à gauche, la suite à droite ── */
+  html:not(.native) .ugs-page .ugs-content {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+    grid-auto-rows: max-content;
+    gap: var(--grid-gap);
+    align-items: start;
+  }
+  html:not(.native) .ugs-page .ugs-carte { padding: 24px 24px 22px; }
+  html:not(.native) .ugs-page .ugs-suite .rv-section-title { margin-top: 0; }
+
   /* ── Réglages : deux colonnes ── */
   html:not(.native) .reglages-page .rg-content {
     display: grid;

@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { startCheckout } from '../services/billingService';
 import { FORMULE_PAR_DEFAUT, prixDe } from '../../api/_prix.js';
 import { tarifFondateurOuvert, PREMIER_PRELEVEMENT } from '../../api/_lancement.js';
+import './RevizPlus.css'; // couleurs or et encre de Réviz+
 import './ChoixFormule.css';
 
 /**
@@ -10,8 +11,9 @@ import './ChoixFormule.css';
  * passage au paiement Stripe. Avant le 26 octobre, c'est le tarif fondateur,
  * prélevé le 26 ; l'affichage d'ici n'engage rien, le serveur décide
  * (api/_checkout.js).
+ * variant="encre" : sur fond encre (carte Réviz+), bouton doré.
  */
-export function ChoixFormule({ className = '' }) {
+export function ChoixFormule({ className = '', variant }) {
   const estFondateur = tarifFondateurOuvert();
   const navigate = useNavigate();
   const [formule, setFormule] = useState(FORMULE_PAR_DEFAUT);
@@ -39,7 +41,7 @@ export function ChoixFormule({ className = '' }) {
   ];
 
   return (
-    <div className={['cf', className].filter(Boolean).join(' ')}>
+    <div className={['cf', variant && `cf--${variant}`, className].filter(Boolean).join(' ')}>
       {estFondateur && <p className="cf-fondateur">Prix fondateur, gardé tant que tu restes abonné.</p>}
       <div className="cf-options" role="radiogroup" aria-label="Formule Réviz+">
         {options.map(o => (
@@ -63,7 +65,7 @@ export function ChoixFormule({ className = '' }) {
           </button>
         ))}
       </div>
-      <button type="button" className="rv-btn-cta rv-btn-cta--full cf-cta" onClick={payer} disabled={loading}>
+      <button type="button" className={variant === 'encre' ? 'rp-cta cf-cta' : 'rv-btn-cta rv-btn-cta--full cf-cta'} onClick={payer} disabled={loading}>
         {loading ? 'Ouverture du paiement…' : estFondateur ? 'Réserver mon prix fondateur' : 'Passer à Réviz+'}
       </button>
       <p className="cf-note">

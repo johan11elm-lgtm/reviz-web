@@ -509,7 +509,9 @@ export default function Scan() {
 
 function ScanQuota({ plus }) {
   const { remaining, limit } = getScanStatus();
-  if (!Number.isFinite(remaining)) {
+  // Réviz+ (payé ou offert) s'affiche illimité : le plafond de l'offre de
+  // lancement est un garde-fou invisible (api/_lancement.js).
+  if (plus || !Number.isFinite(remaining)) {
     return (
       <p className="scan-quota">
         <RevizPlusBadge />

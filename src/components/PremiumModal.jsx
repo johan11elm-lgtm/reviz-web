@@ -1,5 +1,7 @@
+import { createPortal } from 'react-dom';
 import { Mascot } from './Mascot';
 import { ChoixFormule } from './ChoixFormule';
+import { GemIcon } from './Icons';
 import { useModalA11y } from '../hooks/useModalA11y';
 import { useAuth } from '../context/AuthContext';
 import { DERNIER_JOUR_OFFERT, VENTES_OUVERTES } from '../../api/_lancement.js';
@@ -17,7 +19,8 @@ export function PremiumModal({ onClose, used = 5, limit = 5 }) {
   const daysUntilMonday = day === 0 ? 1 : 8 - day;
   const resetLabel = daysUntilMonday === 1 ? 'demain' : `dans ${daysUntilMonday} jours`;
 
-  return (
+  // Rendue dans <body> : le voile couvre aussi la barre latérale (ordinateur).
+  return createPortal(
     <div className="premium-overlay" onClick={onClose}>
       <div
         className="premium-card"
@@ -46,14 +49,21 @@ export function PremiumModal({ onClose, used = 5, limit = 5 }) {
           </p>
         )}
 
-        {VENTES_OUVERTES && <div className="premium-divider" />}
-
-        {VENTES_OUVERTES && <ChoixFormule />}
+        {/* L'offre, aux couleurs de Réviz+ (encre + or, RevizPlus.css). */}
+        {VENTES_OUVERTES && !revizPlusOffert && (
+          <section className="premium-plus" aria-label="Réviz+">
+            <span className="rp-wordmark"><GemIcon /><span>Réviz<span className="rp-wordmark-plus">+</span></span></span>
+            <p className="premium-plus-titre">Scanne sans limite</p>
+            <p className="premium-plus-sub">Avec le coach illimité et quatre thèmes en plus.</p>
+            <ChoixFormule variant="encre" />
+          </section>
+        )}
 
         <button className="premium-btn premium-btn--close" onClick={onClose}>
-          Retour
+          Plus tard
         </button>
       </div>
-    </div>
+    </div>,
+    document.body,
   );
 }

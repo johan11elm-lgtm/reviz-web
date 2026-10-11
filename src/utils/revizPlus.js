@@ -62,3 +62,9 @@ export function quotaCoachDuJour() {
     return q && q.jour === jourUTC() ? q : null
   } catch { return null }
 }
+
+/** « 26 octobre » (heure de Paris), espace insécable ; '' si la date manque. */
+export function dateCourte(ms) {
+  if (!Number.isFinite(ms)) return ''
+  return new Date(ms).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', timeZone: 'Europe/Paris' }).replace(' ', ' ')
+}

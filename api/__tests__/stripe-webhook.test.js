@@ -32,7 +32,7 @@ vi.mock('stripe', () => ({
 }))
 vi.mock('../_firebaseAdmin.js', () => ({ getDb: () => makeDb() }))
 
-const { default: handler, planForStatus } = await import('../stripe-webhook.js')
+const { default: handler, planForStatus, champsAbonnement } = await import('../stripe-webhook.js')
 
 function makeReq() {
   return {
@@ -93,6 +93,24 @@ describe('stripe-webhook — subscription.updated', () => {
   })
 })
 
+describe('champsAbonnement — récapitulatif affiché dans l\'app', () => {
+  it('formule, fondateur et dates en millisecondes', () => {
+    expect(champsAbonnement({
+      metadata: { formule: 'mensuel', fondateur: 'true' },
+      items: { data: [{ current_period_end: 1761433200 }] },
+      cancel_at: 1761433200,
+    })).toEqual({ formule: 'mensuel', fondateur: true, periodeFin: 1761433200000, annuleLe: 1761433200000 })
+  })
+  it('ancienne API : fin de période sur l\'abonnement ; pas d\'annulation → null', () => {
+    expect(champsAbonnement({ metadata: {}, current_period_end: 10, cancel_at: null }))
+      .toEqual({ periodeFin: 10000, annuleLe: null })
+  })
+  it('subscription.updated recopie l\'annulation programmée', async () => {
+    await run({ id: 'e6', type: 'customer.subscription.updated', data: { object: { customer: 'cus_1', status: 'active', cancel_at: 5, metadata: { formule: 'annuel', fondateur: 'false' } } } })
+    expect(userUpdate).toHaveBeenCalledWith(expect.objectContaining({ plan: 'premium', formule: 'annuel', fondateur: false, annuleLe: 5000 }))
+  })
+})
+
 describe('stripe-webhook — autres events', () => {
   it('subscription.deleted déclasse en gratuit', async () => {
     await run({ id: 'e3', type: 'customer.subscription.deleted', data: { object: { customer: 'cus_1' } } })
@@ -108,6 +126,14 @@ describe('stripe-webhook — autres events', () => {
     await run({ id: 'e5', type: 'checkout.session.completed', data: { object: { metadata: { firebaseUid: 'u1' }, customer: 'cus_1', subscription: 'sub_1' } } })
     expect(userSet).toHaveBeenCalledWith(
       expect.objectContaining({ plan: 'premium', stripeSubscriptionId: 'sub_1' }),
+      { merge: true },
+    )
+  })
+
+  it('checkout.session.completed garde la formule et le tarif fondateur', async () => {
+    await run({ id: 'e7', type: 'checkout.session.completed', data: { object: { metadata: { firebaseUid: 'u1', formule: 'mensuel', fondateur: 'true' }, customer: 'cus_1', subscription: 'sub_1' } } })
+    expect(userSet).toHaveBeenCalledWith(
+      expect.objectContaining({ formule: 'mensuel', fondateur: true, annuleLe: null }),
       { merge: true },
     )
   })

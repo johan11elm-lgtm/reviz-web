@@ -74,7 +74,7 @@ describe('create-checkout — authentification', () => {
     expect(res.statusCode).toBe(200)
     expect(res.payload.url).toBe('https://stripe.test/session')
     expect(sessionsCreate).toHaveBeenCalledWith(
-      expect.objectContaining({ metadata: { firebaseUid: 'real-uid' } }),
+      expect.objectContaining({ metadata: expect.objectContaining({ firebaseUid: 'real-uid' }) }),
     )
   })
 })

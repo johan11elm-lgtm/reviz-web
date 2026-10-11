@@ -429,7 +429,6 @@ input, textarea {
 /* Sur fonds violets/sombres, un contour clair pour rester visible. */
 .rv-btn-cta:not(.rv-btn-cta--ghost):focus-visible,
 .auth-btn:focus-visible,
-.ugs-cta:focus-visible,
 .rv-hero-main:focus-visible,
 .rv-hero-secondary:focus-visible {
   outline-color: #FFFFFF;

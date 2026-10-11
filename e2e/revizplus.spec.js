@@ -35,12 +35,16 @@ for (const [appareil, viewport] of [['telephone', { width: 390, height: 844 }], 
     await badge.click()
     const fiche = page.getByRole('dialog', { name: 'Ton Réviz+' })
     await expect(fiche).toBeVisible()
-    await expect(fiche.getByText('Membre fondateur')).toBeVisible()
-    await expect(fiche.getByText('30 restantes')).toBeVisible()
+    // Avant le 26 octobre : le ticket du prix fondateur, et tout en illimité
+    await expect(fiche.getByText('Ton prix fondateur')).toBeVisible()
+    await expect(fiche.getByText('Illimité').first()).toBeVisible()
     await page.waitForTimeout(400)
     await capture('02-fiche')
-    await fiche.getByRole('button', { name: 'Choisir mon thème' }).click()
-    await expect(page).toHaveURL(/\/reglages#themes$/)
+    // Avant le 26, la fiche propose de réserver le prix fondateur ; les
+    // thèmes se choisissent dans les Réglages.
+    await expect(fiche.getByRole('button', { name: /Réserver à/ })).toBeVisible()
+    await fiche.getByRole('button', { name: 'Fermer' }).click()
+    await page.goto('/reglages#themes')
     await page.waitForTimeout(800)
     await capture('03-themes')
 
@@ -60,15 +64,15 @@ for (const [appareil, viewport] of [['telephone', { width: 390, height: 844 }], 
 
     // Scan : quota de la semaine
     await page.goto('/scan')
-    await expect(page.getByText('30 leçons sur 30 cette semaine')).toBeVisible()
+    await expect(page.getByText('Leçons illimitées')).toBeVisible()
     await page.waitForTimeout(400)
     await capture('06-scan')
 
-    // Profil : carte Réviz+ avec le sceau fondateur
+    // Profil : carte Réviz+ avec le ticket du prix fondateur
     await page.goto('/profil')
     const carte = page.locator('.rp-card')
     await expect(carte).toBeVisible()
-    await expect(carte.getByText('Membre fondateur')).toBeVisible()
+    await expect(carte.getByText('Ton prix fondateur')).toBeVisible()
     await carte.scrollIntoViewIfNeeded()
     await page.waitForTimeout(400)
     await capture('07-profil')

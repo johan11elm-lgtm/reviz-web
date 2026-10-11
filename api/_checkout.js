@@ -55,7 +55,9 @@ export default async function handler(req, res) {
       mode: 'subscription',
       payment_method_types: ['card'],
       customer_email: email || undefined,
-      metadata: { firebaseUid: uid },
+      // formule et fondateur aussi sur la session : le webhook les recopie
+      // dans le profil (récapitulatif de l'abonnement dans les Réglages).
+      metadata: { firebaseUid: uid, formule, fondateur: String(fondateur) },
       subscription_data: {
         metadata: { firebaseUid: uid, formule, fondateur: String(fondateur) },
         // Avant la bascule : carte enregistrée, rien de prélevé avant le

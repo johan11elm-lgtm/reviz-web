@@ -4,12 +4,13 @@ import { useAuth } from '../context/AuthContext';
 import { useModalA11y } from '../hooks/useModalA11y';
 import { Mascot } from './Mascot';
 import { GemIcon, SparkIcon, CameraIcon, ChatIcon, SunIcon } from './Icons';
-import { moisInscription, phaseRevizPlus, joursAvant } from '../utils/revizPlus';
+import { moisInscription, phaseRevizPlus, joursAvant, dateCourte } from '../utils/revizPlus';
+import { ChoixFormule } from './ChoixFormule';
 import { startCheckout } from '../services/billingService';
 import {
   FIN_LANCEMENT, DERNIER_JOUR_OFFERT, PREMIER_PRELEVEMENT, VENTES_OUVERTES, tarifFondateurOuvert,
 } from '../../api/_lancement.js';
-import { PRIX, PRIX_FONDATEUR, remiseFondateur } from '../../api/_prix.js';
+import { PRIX, PRIX_FONDATEUR, remiseFondateur, prixDe } from '../../api/_prix.js';
 import './RevizPlus.css';
 
 /**
@@ -84,13 +85,61 @@ function Jauge({ icon, label, valeur, detail, pct }) {
   );
 }
 
+/** Ce que Réviz+ donne : leçons, coach, thèmes (carte, page de remerciement). */
+export function RevizPlusJauges({ className = '' }) {
+  return (
+    <div className={['rp-meters', className].filter(Boolean).join(' ')}>
+      {/* Réviz+ est illimité : pas de compteur (les garde-fous anti-abus ne s'affichent pas). */}
+      <Jauge icon={<CameraIcon />} label="Leçons analysées" detail="autant que tu veux" valeur="Illimité" />
+      <Jauge icon={<ChatIcon />} label="Coach" detail="toutes tes questions" valeur="Illimité" />
+      <Jauge icon={<SunIcon />} label="Thèmes" detail="dans les Réglages" valeur="4 débloqués" />
+    </div>
+  );
+}
+
+/**
+ * Récapitulatif d'un abonnement payé : formule, prix, prochaine échéance ou
+ * fin programmée. Les champs viennent du webhook Stripe (profil) ou, juste
+ * après le paiement, de l'adresse de retour ; chaque ligne absente est omise.
+ */
+export function RecapAbonnement({ formule, fondateur, periodeFin, annuleLe, className = '' }) {
+  const prix = formule ? prixDe(formule, !!fondateur) : null;
+  const avantBascule = tarifFondateurOuvert();
+  const lignes = [];
+  if (prix) {
+    lignes.push({
+      label: formule === 'mensuel' ? 'Au mois' : 'À l\'année',
+      detail: fondateur ? 'prix fondateur, gardé tant que tu restes abonné' : (formule === 'mensuel' ? 'sans engagement' : `soit ${prix.parMois} par mois`),
+      valeur: `${prix.montant}${prix.cadence}`,
+    });
+  }
+  if (annuleLe) {
+    lignes.push({ label: 'Se termine le', detail: 'plus rien ne sera prélevé', valeur: dateCourte(annuleLe) });
+  } else if (avantBascule && (fondateur ?? true)) {
+    lignes.push({ label: 'Premier prélèvement', detail: 'annulable sans frais d\'ici là', valeur: PREMIER_PRELEVEMENT });
+  } else if (periodeFin) {
+    lignes.push({ label: 'Prochain prélèvement', detail: 'renouvellement automatique', valeur: dateCourte(periodeFin) });
+  }
+  if (!lignes.length) return null;
+  return (
+    <dl className={['rp-recu', className].filter(Boolean).join(' ')}>
+      {lignes.map(l => (
+        <div className="rp-recu-ligne" key={l.label}>
+          <dt className="rp-recu-label">{l.label}<span className="rp-recu-detail">{l.detail}</span></dt>
+          <dd className="rp-recu-valeur">{l.valeur}</dd>
+        </div>
+      ))}
+    </dl>
+  );
+}
+
 /**
  * Carte Réviz+ : statut (offert / actif), membre fondateur, ce qu'il reste
  * cette semaine et aujourd'hui, accès aux thèmes.
  */
-export function RevizPlusCard({ onTheme, className = '' }) {
+export function RevizPlusCard({ onTheme, onGerer, gererEnCours = false, details = false, className = '' }) {
   const navigate = useNavigate();
-  const { currentUser, isPremium, revizPlusOffert, estFondateur } = useAuth();
+  const { currentUser, isPremium, revizPlusOffert, estFondateur, abonnement } = useAuth();
   const depuis = moisInscription(currentUser?.metadata?.creationTime);
 
   const choisirTheme = onTheme ?? (() => navigate('/reglages#themes'));
@@ -99,10 +148,16 @@ export function RevizPlusCard({ onTheme, className = '' }) {
   const phase = phaseRevizPlus();
   const fondateurOuvert = tarifFondateurOuvert();
   const reserver = VENTES_OUVERTES && fondateurOuvert && !isPremium;
+  // Sans abonnement ni offre de lancement : la carte devient le paywall.
+  const inactif = !isPremium && !revizPlusOffert;
   const plusQue = n => `plus que ${n}\u00a0jour${n > 1 ? 's' : ''}`;
-  const sousTitre = isPremium
-    ? (fondateurOuvert
-      ? `Ton prix fondateur est réservé. Premier prélèvement le ${PREMIER_PRELEVEMENT}.`
+  const sousTitre = inactif
+    ? 'Scans et coach sans limite, quatre thèmes en plus. Le programme reste gratuit.'
+    : isPremium
+    ? (abonnement?.annuleLe
+      ? `Ton abonnement s'arrête le ${dateCourte(abonnement.annuleLe)}. D'ici là, tout reste débloqué.`
+      : fondateurOuvert
+      ? (details ? 'Ton prix fondateur est réservé.' : `Ton prix fondateur est réservé. Premier prélèvement le ${PREMIER_PRELEVEMENT}.`)
       : 'Ton abonnement est actif.')
     : phase === 'derniers-jours'
         ? `Offert jusqu'au ${DERNIER_JOUR_OFFERT} : ${plusQue(joursAvant(FIN_LANCEMENT))}.`
@@ -133,29 +188,33 @@ export function RevizPlusCard({ onTheme, className = '' }) {
 
       <div className="rp-card-head">
         <span className="rp-wordmark"><GemIcon /><span>Réviz<span className="rp-wordmark-plus">+</span></span></span>
-        <span className="rp-status">{isPremium ? (fondateurOuvert ? 'Réservé' : 'Actif') : revizPlusOffert ? 'Offert' : 'Inactif'}</span>
+        {!inactif && <span className="rp-status">{isPremium ? (fondateurOuvert ? 'Réservé' : 'Actif') : 'Offert'}</span>}
       </div>
 
-      <h2 className="rp-card-title" id="rp-card-titre">Tout Réviz+ est à toi</h2>
+      <h2 className="rp-card-title" id="rp-card-titre">{inactif ? 'Débloque tout Réviz+' : 'Tout Réviz+ est à toi'}</h2>
       <p className="rp-card-sub">{sousTitre}</p>
 
       {fondateurOuvert && !isPremium ? (
         <TicketFondateur />
-      ) : estFondateur && (
+      ) : estFondateur && !inactif && (
         <div className="rp-fondateur">
           <FondateurSeal />
           {depuis && <span className="rp-fondateur-depuis">depuis {depuis}</span>}
         </div>
       )}
 
-      <div className="rp-meters">
-        {/* Réviz+ est illimité : pas de compteur (les garde-fous anti-abus ne s'affichent pas). */}
-        <Jauge icon={<CameraIcon />} label="Leçons analysées" detail="autant que tu veux" valeur="Illimité" />
-        <Jauge icon={<ChatIcon />} label="Coach" detail="toutes tes questions" valeur="Illimité" />
-        <Jauge icon={<SunIcon />} label="Thèmes" detail="à choisir dans les Réglages" valeur="4 débloqués" />
-      </div>
+      <RevizPlusJauges />
 
-      {reserver ? (
+      {details && isPremium && <RecapAbonnement {...abonnement} fondateur={abonnement?.fondateur ?? (fondateurOuvert || null)} />}
+
+      {inactif ? (
+        VENTES_OUVERTES && <ChoixFormule variant="encre" />
+      ) : isPremium && onGerer ? (
+        <button type="button" className="rp-cta" onClick={onGerer} disabled={gererEnCours}>
+          {gererEnCours ? 'Ouverture…' : 'Gérer mon abonnement'}
+          <span aria-hidden="true">→</span>
+        </button>
+      ) : reserver ? (
         <>
           <button type="button" className="rp-cta" onClick={() => garder('annuel')} disabled={!!paiement}>
             {paiement === 'annuel' ? 'Ouverture du paiement…' : `Réserver à ${PRIX_FONDATEUR.annuel.montant}${PRIX_FONDATEUR.annuel.cadence}`}
