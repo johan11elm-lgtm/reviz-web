@@ -37,7 +37,7 @@ const CONTEXTE = process.env.BATTLE_MOBILE
   : {}
 
 // L'affichage pose des espaces insécables (typographie française) : on compare sans.
-const sansInsecables = t => t.replace(/\u00a0/g, ' ').trim()
+const sansInsecables = t => t.replace(/\u00a0/g, ' ').replace(/\u2060/g, '').trim()
 async function repondre(page, juste) {
   const texte = sansInsecables(await page.locator('.battle-question-texte').textContent())
   const q = chapitre.quiz.find(x => x.question === texte)

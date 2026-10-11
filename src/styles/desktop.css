@@ -374,6 +374,38 @@
     gap: 12px;
   }
 
+  /* ── Fins de séance (quiz, flashcards) : la mascotte à gauche, le
+   * résultat et la suite à droite, au lieu d'une colonne de téléphone
+   * centrée ; plus de coin arrondi de la coquille mobile. ── */
+  html:not(.native) .quiz-page .quiz-end-screen,
+  html:not(.native) .flashcards-page .flashcards-end-screen {
+    display: grid;
+    grid-template-columns: 300px minmax(0, 440px);
+    grid-auto-rows: max-content;
+    justify-content: center;
+    align-content: center;
+    justify-items: start;
+    column-gap: 64px;
+    row-gap: 14px;
+    padding: 48px;
+    border-radius: 0;
+    text-align: left;
+  }
+  html:not(.native) .rv-end-screen > * { grid-column: 2; }
+  /* <Mascot> rend un <picture> en display: contents : l'<img> est l'élément de grille */
+  html:not(.native) .rv-end-screen .rv-end-screen-mascot {
+    grid-column: 1;
+    grid-row: 1 / span 8;
+    align-self: center;
+    justify-self: center;
+    margin: 0;
+  }
+  html:not(.native) .rv-end-screen .rv-end-screen-title { font-size: 36px; letter-spacing: -1.4px; }
+  html:not(.native) .rv-end-screen .rv-end-screen-sub { max-width: 40ch; font-size: 16px; }
+  html:not(.native) .rv-end-screen .rv-end-score { max-width: 440px; }
+  html:not(.native) .rv-end-screen > .rv-end-xp { justify-self: start; }
+  html:not(.native) .rv-end-screen .rv-end-screen-actions { max-width: 440px; }
+
   /* ── Mes progrès : tableau de bord (balisage propre à l'ordinateur,
    * Progres.jsx) — série · niveau · semaine, puis programme | mémoire,
    * le calendrier du semestre, et les répartitions côte à côte. ── */

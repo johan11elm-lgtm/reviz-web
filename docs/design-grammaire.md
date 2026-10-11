@@ -119,3 +119,4 @@ acquis. Pas d'étoiles : elles se lisent comme des favoris ou une note.
 | Toast « Badge débloqué » | surtitre orange à neutraliser ou à classer en exception (célébration) |
 | Parcours Réviz+ (11/10) | fait : page merci, Réglages › Abonnement et paywall dans la carte encre + or (RevizPlus.css) ; récapitulatif d'abonnement (formule, prix, échéance) |
 | Pages négligées sur ordinateur (11/10) | fait : Prévenir un parent et Essai en composition auth-desk (comme la connexion), Bienvenue en hero deux colonnes, Battle en trois cartes, conseils du scan en rangée, Flashcards plus lisibles, pages légales en colonne de lecture |
+| Écrans secondaires (11/10, 2e passe) | fait : vérification de l'email en auth-desk, mise en route en carte centrée sur ordinateur, fins de séance en deux colonnes (mascotte, résultat et suite) ; salon et jeu de la Battle relus, conformes ; « a-t-il » insécable (typography.js) |
