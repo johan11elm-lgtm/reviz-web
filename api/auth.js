@@ -101,6 +101,9 @@ function tiktokDepart(res) {
     response_type: 'code',
     redirect_uri: REDIRECT_URI,
     state,
+    // Toujours montrer l'écran d'autorisation : sur un ordinateur partagé
+    // (CDI), l'élève voit quel compte TikTok il s'apprête à utiliser.
+    disable_auto_auth: '1',
   }).toString()
   return rediriger(res, url.toString())
 }

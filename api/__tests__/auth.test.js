@@ -86,6 +86,7 @@ describe('auth — TikTok', () => {
     expect(url.origin + url.pathname).toBe('https://www.tiktok.com/v2/auth/authorize/')
     expect(url.searchParams.get('client_key')).toBe('ck')
     expect(url.searchParams.get('redirect_uri')).toBe('https://app.revizapp.fr/api/auth')
+    expect(url.searchParams.get('disable_auto_auth')).toBe('1')
     const state = url.searchParams.get('state')
     expect(res.headers['set-cookie']).toContain(`reviz_tiktok_state=${state}`)
     expect(res.headers['set-cookie']).toContain('HttpOnly')
