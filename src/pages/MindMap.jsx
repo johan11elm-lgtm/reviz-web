@@ -323,7 +323,7 @@ function MindmapSession() {
       />
 
       {/* Intro façon Home — la carte, juste dessous, est l'illustration */}
-      <PageIntro title="Carte mentale" sub={mindmapData.title} className="mindmap-intro">
+      <PageIntro title="Carte mentale" sub={mindmapData.title} className="mindmap-intro rv-page-intro--format">
         {progressDots}
       </PageIntro>
 

@@ -1,5 +1,6 @@
 /* ─── Page Coach : chat façon assistant IA, à la sauce Réviz ────────
- * Téléphone : intro, sélecteur de leçon, conversation plein écran.
+ * Téléphone : la conversation s'ouvre directement, en plein écran ; le
+ * titre de la leçon en haut ouvre la feuille « Changer de leçon ».
  * Ordinateur (desktop.css) : liste des leçons à gauche, conversation au
  * centre, composer large en bas. */
 
@@ -20,30 +21,186 @@
 }
 .coach-page .coach-main-head { display: none; }
 
-/* Sélecteur de leçon (téléphone) */
-.coach-page .coach-lesson-select {
+/* ── Liste des conversations (barre latérale de l'ordinateur, feuille
+ * « Changer de leçon » du téléphone) ── */
+.coach-page .coach-side-search {
   display: flex;
   align-items: center;
-  gap: 10px;
-  margin: 10px var(--page-gutter) 0;
-  padding: 8px 12px;
+  gap: 8px;
+  padding: 11px 14px;
   border-radius: 14px;
   background: var(--bg-card);
   box-shadow: var(--shadow-card);
+  color: var(--text-muted);
 }
-.coach-page .coach-lesson-select-label { font-size: 12px; font-weight: 700; color: var(--text-muted); }
-.coach-page .coach-lesson-select select {
+.coach-page .coach-side-search svg { width: 16px; height: 16px; flex-shrink: 0; }
+.coach-page .coach-side-search input {
   flex: 1;
   min-width: 0;
   border: none;
   background: transparent;
   font: inherit;
-  font-size: 14px;
+  font-size: 14.5px;
+  color: var(--text-primary);
+  outline: none;
+}
+.coach-page .coach-side-lists { display: flex; flex-direction: column; gap: 8px; }
+.coach-page .coach-side-label {
+  margin: 8px 4px 0;
+  font-family: 'Geist', sans-serif;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.2px;
+  color: var(--text-secondary);
+}
+.coach-page .coach-side-list {
+  list-style: none;
+  margin: 0;
+  padding: 4px;
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--radius-card);
+  background: var(--bg-card);
+  box-shadow: var(--shadow-card);
+}
+.coach-page .coach-side-list > li + li { border-top: 1px solid var(--border-subtle); }
+.coach-page .coach-side-item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 10px;
+  border: none;
+  border-radius: 18px;
+  background: transparent;
+  text-align: left;
+  font-family: inherit;
+  color: inherit;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.coach-page .coach-side-item:active { background: var(--bg-hover); }
+.coach-page .coach-side-item-avatar {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  background: var(--bg-subtle);
+}
+.coach-page .coach-side-item-text { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.coach-page .coach-side-item-title {
+  font-size: 15px;
   font-weight: 700;
   color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.coach-page .coach-side-item-sub {
+  font-size: 13px;
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.coach-page .coach-side-item-arrow { font-size: 20px; color: var(--text-light); }
+.coach-page .coach-side-item--active .coach-side-item-arrow { font-size: 17px; font-weight: 800; color: var(--accent-green-ink); }
+.coach-page .coach-side-empty { margin: 0; padding: 10px 4px; font-size: 13.5px; color: var(--text-muted); }
+
+/* ── Conversation (téléphone) : barre façon messagerie. Le titre de la
+ * leçon, avec son chevron, ouvre le choix de la leçon. ── */
+.coach-page .coach-chat-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px var(--page-gutter) 12px 16px;
+  border-bottom: 1px solid var(--border-subtle);
+  background: color-mix(in srgb, var(--bg-app) 85%, transparent);
+}
+.coach-page .coach-chat-back { flex-shrink: 0; }
+.coach-page .coach-chat-back svg { width: 20px; height: 20px; }
+.coach-page .coach-topic {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 4px 8px 4px 4px;
+  border-radius: 16px;
+}
+.coach-page .coach-topic:has(.coach-topic-hit:active) { background: var(--bg-hover); }
+.coach-page .coach-topic-avatar {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  background: var(--bg-subtle);
+}
+.coach-page .coach-topic-text { flex: 1; min-width: 0; }
+.coach-page .coach-topic-title {
+  margin: 0;
+  font-family: 'Geist', sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: -0.3px;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.coach-page .coach-topic-sub { display: block; margin-top: 1px; font-size: 13px; color: var(--text-muted); }
+.coach-page .coach-topic-chevron { flex-shrink: 0; display: grid; color: var(--text-muted); }
+.coach-page .coach-topic-chevron svg { width: 18px; height: 18px; }
+.coach-page .coach-topic-hit {
+  position: absolute;
+  inset: 0;
+  border: none;
+  border-radius: inherit;
+  background: transparent;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.coach-page .coach-topic-hit:focus-visible { outline: 2px solid var(--accent-violet); outline-offset: 2px; }
+.coach-page .coach-topic-hit-label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
 }
 
-.coach-page .coach-page-body { margin-top: 8px; }
+/* ── Feuille « Changer de leçon » (téléphone) ── */
+.coach-page .coach-picker { height: auto; }
+.coach-page .coach-picker-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 18px var(--page-gutter) 8px;
+}
+.coach-page .coach-picker-title {
+  margin: 0;
+  font-family: 'Geist', sans-serif;
+  font-size: 19px;
+  font-weight: 800;
+  letter-spacing: -0.4px;
+  color: var(--text-primary);
+}
+.coach-page .coach-picker-body {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 6px var(--page-gutter) calc(20px + env(safe-area-inset-bottom, 0px));
+}
 
 /* ── Écran d'accueil de la conversation (hero) ── */
 .coach-hero {
@@ -69,48 +226,69 @@
   line-height: 1.45;
   color: var(--text-secondary);
 }
+.coach-hero-switch {
+  margin-top: 8px;
+  padding: 6px 12px;
+  border: none;
+  border-radius: var(--radius-pill);
+  background: transparent;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--accent-violet);
+  cursor: pointer;
+}
+/* Amorces : des rangées dans une carte blanche (docs/design-grammaire.md §4) ;
+ * l'ordinateur les repasse en quatre tuiles (desktop.css). */
 .coach-hero-cards {
   margin-top: 20px;
   width: 100%;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-}
-.coach-hero-card {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  gap: 4px;
-  padding: 14px;
+  padding: 4px;
+  border-radius: var(--radius-card);
+  background: var(--bg-card);
+  box-shadow: var(--shadow-card);
+}
+.coach-hero-card {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  column-gap: 12px;
+  align-items: center;
+  padding: 10px 10px;
   text-align: left;
   font-family: inherit;
   color: inherit;
-  border: 1.5px solid var(--border);
+  border: none;
   border-radius: 18px;
-  background: var(--bg-card);
+  background: transparent;
   cursor: pointer;
-  transition: border-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+  -webkit-tap-highlight-color: transparent;
 }
-@media (hover: hover) and (pointer: fine) {
-  .coach-hero-card:hover {
-    border-color: var(--accent-violet);
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-card);
-  }
+.coach-hero-card { position: relative; }
+.coach-hero-card + .coach-hero-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 58px;
+  right: 10px;
+  height: 1px;
+  background: var(--border-subtle);
 }
+.coach-hero-card:active { background: var(--bg-hover); }
 .coach-hero-card-icon {
-  width: 32px;
-  height: 32px;
-  border-radius: 10px;
+  grid-row: 1 / span 2;
+  width: 36px;
+  height: 36px;
+  border-radius: 12px;
   display: grid;
   place-items: center;
-  margin-bottom: 4px;
   color: var(--accent-orange-ink);
   background: var(--accent-orange-soft);
 }
-.coach-hero-card-icon svg { width: 17px; height: 17px; }
-.coach-hero-card-text { font-size: 14px; font-weight: 700; line-height: 1.3; color: var(--text-primary); }
-.coach-hero-card-sub { font-size: 12px; color: var(--text-muted); }
+.coach-hero-card-icon svg { width: 18px; height: 18px; }
+.coach-hero-card-text { font-size: 15px; font-weight: 700; line-height: 1.3; color: var(--text-primary); }
+.coach-hero-card-sub { font-size: 13px; color: var(--text-muted); }
 
 /* ── Messages en mode page : le coach écrit en pleine largeur, sans bulle ── */
 .coach-conversation--page .coach-row--coach .coach-bubble--coach:not(.coach-bubble--typing) {
@@ -141,7 +319,7 @@
   display: flex;
   justify-content: space-between;
   gap: 12px;
-  font-size: 11.5px;
+  font-size: 12px;
   color: var(--text-muted);
 }
 .coach-input-hint-keys { display: none; }

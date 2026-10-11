@@ -6,6 +6,7 @@ import { UserHeader } from '../components/UserHeader';
 import { GuestBanner } from '../components/GuestBanner';
 import { HeroCTA } from '../components/HeroCTA';
 import { Mascot } from '../components/Mascot';
+import { getScanStatus } from '../services/scanLimitService';
 import { loadLessons, restoreLesson, syncFromFirestore } from '../services/historyService';
 import { loadRevisions } from '../services/revisionService';
 import { loadCatalogue, matiereProgress } from '../services/programmeService';
@@ -21,7 +22,11 @@ import { AchievementToast } from '../components/AchievementToast';
 import { BattleMascot } from '../components/BattleMascot';
 import { BattleAnnonce, annonceBattleVue } from '../components/battle/BattleAnnonce';
 import { RevizPlusAnnonce, annonceRevizPlusVue } from '../components/RevizPlusAnnonce';
-import { FlameIcon, TargetIcon, BookOpenIcon, CheckIcon, CircleIcon, FlashcardsIcon, QuizIcon } from '../components/Icons';
+import { RevizPlusSheet } from '../components/RevizPlus';
+import { ThemeEssai, essaiThemeVu } from '../components/ThemeEssai';
+import { useTheme } from '../context/ThemeContext';
+import { themeById } from '../utils/themes';
+import { FlameIcon, TargetIcon, CheckIcon, CircleIcon, FlashcardsIcon, QuizIcon, ResumeIcon, MindmapIcon, CameraIcon, PencilIcon } from '../components/Icons';
 import './Home.css';
 
 function formatDate(ts) {
@@ -122,7 +127,7 @@ function getGreetingSub({ dueCards, streak, todayRevisions, dailyGoal }) {
   const h = new Date().getHours();
 
   if (dailyGoal > 0 && todayRevisions >= dailyGoal) return pickStable(SUB_POOLS.done, dayHash);
-  if (dueCards > 0) return dueCards === 1 ? '1 carte à revoir aujourd\'hui.' : `${dueCards} cartes à revoir aujourd'hui.`;
+  if (dueCards > 0) return dueCards === 1 ? '1 carte à travailler aujourd\'hui.' : `${dueCards} cartes à travailler aujourd'hui.`;
   if (streak >= 2) return `${streak} jours de suite. Continue comme ça.`;
   if (todayRevisions > 0) return 'Tu as déjà révisé aujourd\'hui, bien joué.';
   if (h < 12)  return pickStable(SUB_POOLS.morning, dayHash);
@@ -146,6 +151,11 @@ export default function Home() {
   // Une seule popup à la fois : « Réviz+ offert » d'abord, la Battle à la visite suivante.
   const [annonceRevizPlus, setAnnonceRevizPlus] = useState(() => revizPlusOffert && !isGuest && !!currentUser?.uid && !annonceRevizPlusVue(currentUser.uid));
   const [annonceBattle, setAnnonceBattle] = useState(() => !annonceRevizPlus && !!currentUser?.uid && !annonceBattleVue(currentUser.uid));
+  const [ficheRevizPlus, setFicheRevizPlus] = useState(false);
+  const { theme } = useTheme();
+  // « Essaie un thème Réviz+ » : une fois, tant qu'aucun thème Réviz+ n'est choisi.
+  const [essaiTheme, setEssaiTheme] = useState(() => !essaiThemeVu());
+  const montrerEssai = essaiTheme && hasRevizPlus && !isGuest && !themeById(theme)?.premium;
 
   useEffect(() => {
     const onboardedKey = `reviz-onboarded-${currentUser?.uid}`;
@@ -209,7 +219,8 @@ export default function Home() {
     </div>
   );
 
-  // Sur ordinateur, « Reprendre » passe dans la rangée À reprendre.
+  // Une seule action dans le héros : « Reprendre » vit dans la carte « Ta
+  // dernière leçon » (téléphone) ou la rangée « À reprendre » (ordinateur).
   const hero = (
     <HeroCTA
       to={isGuest ? '/programme' : '/scan'}
@@ -222,15 +233,60 @@ export default function Home() {
       action="Commencer"
       overlap
       ariaLabel={isGuest ? 'Réviser mon programme' : 'Scanner une leçon'}
-      secondary={!isDesktop && lastLesson ? {
-        icon: <BookOpenIcon />,
-        label: 'Reprendre',
-        title: lastLesson.metadata.title,
-        onClick: () => { restoreLesson(lastLesson.id); navigate('/analyse'); },
-        ariaLabel: `Reprendre la leçon ${lastLesson.metadata.title}`,
-      } : undefined}
       className="home-cta"
     />
+  );
+
+  // Ordinateur (compte) : le héros est aussi haut que la colonne d'à côté ;
+  // on le remplit de ce que Réviz prépare et des deux façons de commencer.
+  const SCAN_FORMATS = [
+    { Icon: ResumeIcon,     name: 'Résumé',        sub: "L'essentiel à relire" },
+    { Icon: FlashcardsIcon, name: 'Flashcards',    sub: 'Pour mémoriser' },
+    { Icon: QuizIcon,       name: 'Quiz',          sub: 'Pour te tester' },
+    { Icon: MindmapIcon,    name: 'Carte mentale', sub: 'Pour tout relier' },
+  ];
+  const scanStatus = isDesktop && !isGuest ? getScanStatus() : null;
+  const scanQuota = !scanStatus ? null : Number.isFinite(scanStatus.remaining)
+    ? (scanStatus.remaining >= scanStatus.limit
+      ? `${scanStatus.limit} leçons à scanner cette semaine.`
+      : `Encore ${scanStatus.remaining} leçon${scanStatus.remaining > 1 ? 's' : ''} à scanner cette semaine, sur ${scanStatus.limit}.`)
+    : 'Leçons illimitées avec Réviz+.';
+  const heroDesk = (
+    <div className="rv-hero-cta rv-hero-cta--violet home-cta home-scan-desk">
+      <div className="rv-hero-glow" aria-hidden="true" />
+      <div className="home-scan-desk-text">
+        <h2 className="rv-hero-title">Scanne une leçon</h2>
+        <p className="rv-hero-sub">Une photo de ton cahier ou un texte copié, et Réviz prépare en quelques secondes&nbsp;:</p>
+        <ul className="home-scan-formats">
+          {SCAN_FORMATS.map(f => (
+            <li key={f.name}>
+              <span className="home-scan-format-icon" aria-hidden="true"><f.Icon /></span>
+              <span className="home-scan-format-text">
+                <span className="home-scan-format-name">{f.name}</span>
+                <span className="home-scan-format-sub">{f.sub}</span>
+              </span>
+            </li>
+          ))}
+        </ul>
+        <p className="home-scan-quota">{scanQuota}</p>
+        <div className="home-scan-actions">
+          <Link to="/scan" className="rv-hero-action">
+            <CameraIcon /> Prendre une photo
+          </Link>
+          <Link to="/scan?mode=texte" className="home-scan-ghost">
+            <PencilIcon /> Coller un texte
+          </Link>
+        </div>
+      </div>
+      <Mascot
+        pose={new Date().getHours() >= 19 ? 'soir' : 'scanphone'}
+        size={220}
+        priority
+        className="rv-hero-mascot home-scan-desk-mascot"
+        alt=""
+        aria-hidden="true"
+      />
+    </div>
   );
 
   // Série + objectif du jour — compact : le niveau et l'XP sont dans l'en-tête.
@@ -264,7 +320,7 @@ export default function Home() {
   const challengesCard = (
     <div className="rv-card rv-card--padded home-challenges-card">
       <div className="home-challenges-header">
-        <span className="home-challenges-title">Défis de la semaine</span>
+        <span className="rv-eyebrow">Défis de la semaine</span>
         <span className="home-challenges-count">
           {challenges.challenges?.filter(c => c.completed).length ?? 0}/3
         </span>
@@ -291,15 +347,94 @@ export default function Home() {
   const recentLessons = allLessons.slice(0, 3);
   const programmeClasse = hasProgramme(getUserLevel()) ? getUserLevel().classe : PROGRAMME_FALLBACK;
 
-  const battleCard = (
-    <Link to="/battle" className="rv-card rv-card--link home-programme-card home-battle-card" aria-label="Battle : défier quelqu'un en direct">
-      <BattleMascot pose="garde" size={52} alt="" aria-hidden="true" className="home-programme-mascot" />
-      <div className="home-programme-text">
-        <span className="home-programme-title">Battle</span>
-        <span className="home-programme-sub">Défie quelqu'un en direct sur un chapitre</span>
-      </div>
-      <span className="home-programme-arrow" aria-hidden="true">›</span>
+  // « Réviser autrement » : des rangées dans une carte blanche (grammaire §4).
+  const programmeRow = (
+    <Link to="/programme" className="rv-row" aria-label="Réviser mon programme">
+      <span className="rv-row-avatar" aria-hidden="true"><Mascot pose="reading" size={40} alt="" /></span>
+      <span className="rv-row-text">
+        <span className="rv-row-title">Mon programme</span>
+        <span className="rv-row-sub">
+          {getUserLevel()?.classe ? `${getUserLevel().classe} · ` : ''}révise chapitre par chapitre, sans scanner
+        </span>
+      </span>
+      <span className="rv-row-arrow" aria-hidden="true">›</span>
     </Link>
+  );
+  const battleRow = (
+    <Link to="/battle" className="rv-row" aria-label="Battle : défier quelqu'un en direct">
+      <span className="rv-row-avatar" aria-hidden="true"><BattleMascot pose="garde" size={40} alt="" /></span>
+      <span className="rv-row-text">
+        <span className="rv-row-title">Battle</span>
+        <span className="rv-row-sub">Défie quelqu'un en direct sur un chapitre</span>
+      </span>
+      <span className="rv-row-arrow" aria-hidden="true">›</span>
+    </Link>
+  );
+  const battleCard = <div className="rv-card rv-rows home-battle-card">{battleRow}</div>;
+
+  // Ta dernière leçon : la reprendre (rangée du haut), ou filer droit aux
+  // flashcards ou au quiz. Le coach a son onglet.
+  const fcTotal = lastLesson?.flashcardsCount ?? 0;
+  const fcDue   = lastLesson && fcTotal > 0 ? countDueCards(lastLesson.id, fcTotal) : 0;
+  const qzTotal = lastLesson?.quizCount ?? 0;
+  const lastLessonCard = lastLesson && (
+    <div className="rv-card home-featured-card">
+      <button
+        type="button"
+        className="home-featured-top"
+        onClick={() => { restoreLesson(lastLesson.id); navigate('/analyse'); }}
+        aria-label={`Reprendre la leçon ${lastLesson.metadata.title}`}
+      >
+        <Mascot
+          pose={subjectMascot(lastLesson.metadata.subject)}
+          size={84}
+          glow
+          priority
+          className="home-featured-mascot"
+          alt=""
+          aria-hidden="true"
+        />
+        <span className="home-featured-info">
+          <span className="rv-eyebrow">Ta dernière leçon</span>
+          <span className="home-featured-title">{lastLesson.metadata.title}</span>
+          <span className="home-featured-subject">
+            {lastLesson.metadata.subject} · {formatDate(lastLesson.scannedAt)}
+          </span>
+        </span>
+        <span className="rv-row-arrow" aria-hidden="true">›</span>
+      </button>
+      {(fcTotal > 0 || qzTotal > 0) && (
+        <div className="rv-btn-action-row home-featured-actions">
+          {fcTotal > 0 && (
+            <button
+              className="rv-btn-action"
+              onClick={() => { restoreLesson(lastLesson.id); navigate('/flashcards'); }}
+            >
+              <span className="rv-icon-square rv-icon-square--violet"><FlashcardsIcon /></span>
+              <span className="rv-btn-action-text">
+                <span className="rv-btn-action-label">Flashcards</span>
+                <span className="rv-btn-action-sub">
+                  {fcDue > 0 ? `${fcDue} à travailler` : `${fcTotal} carte${fcTotal > 1 ? 's' : ''}`}
+                </span>
+              </span>
+              {fcDue > 0 && <span className="rv-notif-dot" aria-hidden="true" />}
+            </button>
+          )}
+          {qzTotal > 0 && (
+            <button
+              className="rv-btn-action"
+              onClick={() => { restoreLesson(lastLesson.id); navigate('/quiz'); }}
+            >
+              <span className="rv-icon-square rv-icon-square--orange"><QuizIcon /></span>
+              <span className="rv-btn-action-text">
+                <span className="rv-btn-action-label">Quiz</span>
+                <span className="rv-btn-action-sub">{qzTotal} question{qzTotal > 1 ? 's' : ''}</span>
+              </span>
+            </button>
+          )}
+        </div>
+      )}
+    </div>
   );
 
   return (
@@ -310,6 +445,7 @@ export default function Home() {
       )}
       {annonceRevizPlus && <RevizPlusAnnonce uid={currentUser.uid} onClose={() => setAnnonceRevizPlus(false)} />}
       {annonceBattle && <BattleAnnonce uid={currentUser.uid} onClose={() => setAnnonceBattle(false)} />}
+      {ficheRevizPlus && <RevizPlusSheet onClose={() => setFicheRevizPlus(false)} />}
 
       <UserHeader
         prenom={prenom}
@@ -317,9 +453,9 @@ export default function Home() {
         xpInLvl={xpInLvl}
         fillPct={fillPct}
         aura={aura}
-        isPremium={hasRevizPlus}
+        isPremium={hasRevizPlus && !isGuest}
         offert={revizPlusOffert}
-        onCoach={isGuest ? undefined : () => navigate(lastLesson ? `/coach?lesson=${lastLesson.id}` : '/coach')}
+        onRevizPlus={isGuest ? undefined : () => setFicheRevizPlus(true)}
       />
 
       {/* Ordinateur : tableau de bord. Le bandeau d'essai vit dans la barre
@@ -330,9 +466,10 @@ export default function Home() {
           {greeting}
 
           <div className="home-desk-top">
-            {hero}
+            {isGuest ? hero : heroDesk}
             <div className="home-desk-side">
               {statsCard}
+              {montrerEssai && <ThemeEssai onClose={() => setEssaiTheme(false)} />}
               {challengesCard}
               {battleCard}
             </div>
@@ -360,7 +497,7 @@ export default function Home() {
                         <span className="home-desk-lesson-meta">{l.metadata.subject} · {formatDate(l.scannedAt)}</span>
                         <span className="home-desk-lesson-title">{l.metadata.title}</span>
                         <span className={`rv-pill rv-pill--${due > 0 ? 'orange' : 'green'} home-desk-lesson-pill`}>
-                          {due > 0 ? `${due} carte${due > 1 ? 's' : ''} à revoir` : 'À jour'}
+                          {due > 0 ? `${due} carte${due > 1 ? 's' : ''} à travailler` : 'À jour'}
                         </span>
                       </span>
                     </button>
@@ -373,7 +510,7 @@ export default function Home() {
           <HomeProgramme classe={programmeClasse} />
         </div>
       ) : (
-        <div className="content">
+        <div className="content home-stack">
 
           <GuestBanner />
 
@@ -383,94 +520,16 @@ export default function Home() {
 
           {statsCard}
 
-          {/* Réviser sans scan : les chapitres du programme de sa classe. En mode
-              essai, le héros pointe déjà dessus. */}
-          {!isGuest && (
-            <Link to="/programme" className="rv-card rv-card--link home-programme-card" aria-label="Réviser mon programme">
-              <Mascot pose="reading" size={52} alt="" aria-hidden="true" className="home-programme-mascot" />
-              <div className="home-programme-text">
-                <span className="home-programme-title">Mon programme</span>
-                <span className="home-programme-sub">
-                  {getUserLevel()?.classe ? `${getUserLevel().classe} · ` : ''}révise chapitre par chapitre, sans scanner
-                </span>
-              </div>
-              <span className="home-programme-arrow" aria-hidden="true">›</span>
-            </Link>
-          )}
+          {montrerEssai && <ThemeEssai onClose={() => setEssaiTheme(false)} />}
 
-          {battleCard}
+          {lastLessonCard}
 
-          {lastLesson && (
-            <div className="rv-card rv-card--padded home-featured-card">
-              <div className="home-featured-top">
-                <Mascot
-                  pose={subjectMascot(lastLesson.metadata.subject)}
-                  size={128}
-                  glow
-                  priority
-                  className="home-featured-mascot"
-                  alt=""
-                  aria-hidden="true"
-                />
-                <div className="home-featured-info">
-                  <div className="home-featured-label">Ta dernière leçon</div>
-                  <div className="home-featured-title">{lastLesson.metadata.title}</div>
-                  <div className="home-featured-subject">
-                    {lastLesson.metadata.subject} · {formatDate(lastLesson.scannedAt)}
-                  </div>
-                </div>
-              </div>
-              {(() => {
-                const fcTotal = lastLesson.flashcardsCount ?? 0;
-                const fcDue   = fcTotal > 0 ? countDueCards(lastLesson.id, fcTotal) : 0;
-                const qzTotal = lastLesson.quizCount ?? 0;
-                return (
-                  <div className="rv-btn-action-row home-featured-actions">
-                    {fcTotal > 0 && (
-                      <button
-                        className="rv-btn-action"
-                        onClick={() => { restoreLesson(lastLesson.id); navigate('/flashcards'); }}
-                      >
-                        <span className="rv-icon-square rv-icon-square--violet"><FlashcardsIcon /></span>
-                        <span className="rv-btn-action-text">
-                          <span className="rv-btn-action-label">Flashcards</span>
-                          <span className="rv-btn-action-sub">
-                            {fcDue > 0 ? `${fcDue} à revoir` : `${fcTotal} carte${fcTotal > 1 ? 's' : ''}`}
-                          </span>
-                        </span>
-                        {fcDue > 0 && <span className="rv-notif-dot" aria-hidden="true" />}
-                      </button>
-                    )}
-                    {qzTotal > 0 && (
-                      <button
-                        className="rv-btn-action"
-                        onClick={() => { restoreLesson(lastLesson.id); navigate('/quiz'); }}
-                      >
-                        <span className="rv-icon-square rv-icon-square--orange"><QuizIcon /></span>
-                        <span className="rv-btn-action-text">
-                          <span className="rv-btn-action-label">Quiz</span>
-                          <span className="rv-btn-action-sub">{qzTotal} question{qzTotal > 1 ? 's' : ''}</span>
-                        </span>
-                      </button>
-                    )}
-                    {/* Coach de révision — le contexte est la dernière leçon scannée */}
-                    <button
-                      className="rv-btn-action"
-                      onClick={() => navigate(`/coach?lesson=${lastLesson.id}`)}
-                    >
-                      <span className="rv-icon-square rv-icon-square--green">
-                        <Mascot pose="coach" size={26} alt="" aria-hidden="true" />
-                      </span>
-                      <span className="rv-btn-action-text">
-                        <span className="rv-btn-action-label">Coach</span>
-                        <span className="rv-btn-action-sub">Un doute ?</span>
-                      </span>
-                    </button>
-                  </div>
-                );
-              })()}
-            </div>
-          )}
+          {/* Réviser sans scan (programme de sa classe) ou en duel. En mode
+              essai, le héros pointe déjà sur le programme. */}
+          <div className="rv-card rv-rows">
+            {!isGuest && programmeRow}
+            {battleRow}
+          </div>
 
           {challengesCard}
 

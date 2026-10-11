@@ -10,6 +10,7 @@ import { Mascot } from '../components/Mascot';
 import { startAnalysis, startAnalysisFromImage } from '../services/aiService';
 import { getScanStatus } from '../services/scanLimitService';
 import { LESSON_TEXT_MAX_LABEL, isLessonTextTooLong, truncateLessonText } from '../utils/lessonText';
+import { RevizPlusBadge } from '../components/RevizPlus';
 import './Scan.css';
 
 export default function Scan() {
@@ -28,7 +29,7 @@ export default function Scan() {
   const fileInputRef  = useRef(null);
   const facingModeRef = useRef('environment');
   const navigate  = useNavigate();
-  const { getUserLevel, isGuest } = useAuth();
+  const { getUserLevel, isGuest, hasRevizPlus } = useAuth();
   const userLevel = getUserLevel();
   // Ordinateur : les deux panneaux (photo, texte) côte à côte, sans onglets.
   const double = useIsDesktop();
@@ -184,6 +185,9 @@ export default function Scan() {
         title="Scanner"
         onBack={() => (window.history.state?.idx > 0 ? navigate(-1) : navigate('/'))}
       />
+
+      {/* Quota de la semaine : ce que Réviz+ apporte, visible là où il sert */}
+      <ScanQuota plus={hasRevizPlus} />
 
       {/* Tabs Photo / Texte (sur ordinateur, les deux panneaux sont visibles) */}
       {!double && (
@@ -500,5 +504,24 @@ export default function Scan() {
         </div>
       )}
     </div>
+  );
+}
+
+function ScanQuota({ plus }) {
+  const { remaining, limit } = getScanStatus();
+  if (!Number.isFinite(remaining)) {
+    return (
+      <p className="scan-quota">
+        <RevizPlusBadge />
+        <span>Leçons illimitées</span>
+      </p>
+    );
+  }
+  const texte = `${remaining} leçon${remaining > 1 ? 's' : ''} sur ${limit} cette semaine`;
+  return (
+    <p className="scan-quota">
+      {plus ? <RevizPlusBadge /> : <span className="scan-quota-free">Gratuit</span>}
+      <span>{texte}</span>
+    </p>
   );
 }

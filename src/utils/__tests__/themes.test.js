@@ -11,11 +11,12 @@ describe('catalogue', () => {
     expect(THEMES.filter(t => t.premium).length).toBeGreaterThanOrEqual(4)
   })
 
-  it('chaque thème a un id, un label et deux couleurs de pastille', () => {
+  it('chaque thème a un id, un label et une vignette', () => {
     for (const t of THEMES) {
       expect(t.id).toBeTruthy()
       expect(t.label).toBeTruthy()
-      expect(t.swatch).toHaveLength(2)
+      expect(t.preview.app).toBeTruthy()
+      expect(t.preview.hero).toHaveLength(2)
     }
   })
 
@@ -34,12 +35,15 @@ describe('resolveTheme (repli abonnement)', () => {
 
   it('autorise un thème premium avec Réviz+ actif', () => {
     expect(resolveTheme('nuit-encre', true)).toBe('nuit-encre')
-    expect(resolveTheme('carnet-kraft', true)).toBe('carnet-kraft')
+    expect(resolveTheme('abricot', true)).toBe('abricot')
+    expect(resolveTheme('carnet-kraft', true)).toBe('abricot')
+    expect(resolveTheme('violet-air', true)).toBe('prune')
   })
 
   it('replie un thème premium sans abonnement sur « light »', () => {
     expect(resolveTheme('nuit-encre', false)).toBe('light')
     expect(resolveTheme('menthe-focus', false)).toBe('light')
+    expect(resolveTheme('sauge', false)).toBe('light')
   })
 
   it('replie un id inconnu ou vide sur « light »', () => {

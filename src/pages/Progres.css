@@ -15,7 +15,7 @@
 /* ── Section title (plus expressif : Geist 800 avec emoji) ── */
 .pg-section-title {
   font-family: 'Geist', sans-serif;
-  font-size: 16px;
+  font-size: 17px;
   font-weight: 800;
   letter-spacing: -0.3px;
   color: var(--text-primary);
@@ -83,11 +83,12 @@
 }
 
 .pg-streak-label {
-  font-size: 10px;
+  /* Surtitre (docs/design-grammaire.md §2) : neutre, jamais en couleur */
+  font-size: 12px;
   font-weight: 700;
-  color: var(--accent-orange-ink);
+  color: var(--text-muted);
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.6px;
   white-space: nowrap;
 }
 
@@ -102,9 +103,10 @@
 .pg-streak-value--sm { font-size: 30px; }
 
 .pg-streak-unit {
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 600;
   color: var(--text-muted);
+  white-space: nowrap;
 }
 
 /* ── Level / XP — mascotte graduation + info ── */
@@ -134,16 +136,24 @@
   gap: 10px;
 }
 
+.pg-level-title {
+  font-family: 'Geist', sans-serif;
+  font-size: 17px;
+  font-weight: 800;
+  letter-spacing: -0.3px;
+  color: var(--text-primary);
+}
+
+/* Pastille de niveau (ordinateur) : neutre — un niveau n'est pas un état */
 .pg-level-badge {
-  background: var(--accent-orange);
-  color: #fff;
+  background: var(--bg-subtle);
+  color: var(--text-primary);
   font-size: 13px;
   font-weight: 800;
   padding: 6px 14px;
   border-radius: var(--radius-pill);
   white-space: nowrap;
   letter-spacing: -0.2px;
-  box-shadow: 0 4px 12px rgba(255, 138, 61, 0.34);
 }
 
 .pg-level-total {
@@ -159,7 +169,7 @@
 }
 
 .pg-level-next {
-  font-size: 11px;
+  font-size: 12px;
   color: var(--text-muted);
   font-weight: 500;
 }
@@ -273,10 +283,10 @@
   gap: 8px;
 }
 
-.pg-stat-card--accent {
-  background: var(--accent-orange-soft);
-}
-.pg-stat-card--accent .pg-stat-value { color: var(--accent-orange-ink); }
+/* Chiffres : icônes neutres (ce ne sont pas des états, docs/design-grammaire.md §5) */
+.pg-stat-card .rv-icon-square { background: var(--bg-subtle); color: var(--text-secondary); }
+
+.pg-stat-value { color: var(--accent-orange-ink); }
 .pg-stat-card--accent .pg-stat-label { color: var(--accent-orange-ink); opacity: 0.7; }
 
 .pg-stat-value {
@@ -289,7 +299,7 @@
 }
 
 .pg-stat-label {
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 600;
   color: var(--text-muted);
   text-align: center;
@@ -348,10 +358,11 @@
 }
 
 .pg-chart-record {
-  font-size: 11px;
+  /* Un record est acquis : vert (grammaire §5) */
+  font-size: 12px;
   font-weight: 700;
-  color: var(--accent-orange-ink);
-  background: var(--accent-orange-soft);
+  color: var(--accent-green-ink);
+  background: var(--accent-green-soft);
   padding: 3px 8px;
   border-radius: var(--radius-pill);
 }
@@ -385,7 +396,7 @@
 .pg-bar.active { background: var(--accent-orange-soft); }
 
 .pg-bar-day {
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 600;
   color: var(--text-muted);
 }
@@ -545,7 +556,7 @@
 
 /* ── Responsive (≤ 430px : phones standards) ── */
 @media (max-width: 430px) {
-  .pg-content { padding: 8px 16px 110px; gap: 14px; }
+  .pg-content { padding: 8px var(--page-gutter) 110px; gap: 14px; }
 
 
   /* Level card — mascot plus petite, info plus serrée */
@@ -557,7 +568,7 @@
   .pg-level-info { gap: 6px; }
   .pg-level-badge { font-size: 12px; padding: 5px 12px; }
   .pg-level-total { font-size: 12px; }
-  .pg-level-next { font-size: 10.5px; }
+  .pg-level-next { font-size: 12px; }
 
   /* Streak card — mascot 88px, value 32px, divider plus serré */
   .pg-streak-card { padding: 14px 14px 14px 12px; gap: 10px; }
@@ -570,8 +581,8 @@
   .pg-streak-value { font-size: 30px; }
   .pg-streak-value--sm { font-size: 24px; }
   .pg-streak-divider { margin: 0 10px; height: 44px; }
-  .pg-streak-label { font-size: 9.5px; }
-  .pg-streak-unit { font-size: 10.5px; }
+  .pg-streak-label { font-size: 12px; }
+  .pg-streak-unit { font-size: 12px; }
 
   /* Chart card mascot */
   .pg-chart-mascot {
@@ -580,8 +591,8 @@
   }
 
   /* Weeks card — labels plus serrés */
-  .pg-week-label { width: 88px; font-size: 11px; }
-  .pg-week-count { font-size: 11px; width: 28px; }
+  .pg-week-label { width: 88px; font-size: 12px; }
+  .pg-week-count { font-size: 12px; width: 28px; }
   .pg-weeks-summary-value { font-size: 28px; }
   .pg-weeks-summary-text { font-size: 12px; }
 }

@@ -11,3 +11,8 @@ export const LANCEMENT_OFFERT = true
 // Plafonds pendant le lancement (les vrais abonnés gardent les leurs).
 export const LANCEMENT_SCAN_LIMIT = 30 // leçons analysées par semaine
 export const LANCEMENT_CHAT_LIMIT = 50 // messages au coach par jour
+
+// Membres fondateurs : les comptes créés pendant le lancement. Le jour où le
+// paywall revient, mettre ici la date de fin (ISO, ex. '2026-12-01') : les
+// comptes plus récents ne sont plus fondateurs, les autres le restent.
+export const FONDATEURS_JUSQU_AU = null

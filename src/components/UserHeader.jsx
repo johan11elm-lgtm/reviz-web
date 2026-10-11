@@ -2,6 +2,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Mascot } from './Mascot';
 import { CoachHeaderButton } from './CoachChat';
 import { SparkIcon } from './Icons';
+import { RevizPlusBadge } from './RevizPlus';
 import { XP_PAR_NIVEAU } from '../utils/gamification';
 
 const CrownIcon = () => (
@@ -24,10 +25,11 @@ const CrownIcon = () => (
  * @param {number} props.fillPct           — remplissage de la barre (0–100)
  * @param {number} [props.aura]           — aura de la Battle ; masquée si absente
  * @param {boolean} [props.isPremium]      — couronne « active » (orange)
+ * @param {function} [props.onRevizPlus]   — ouvre la fiche Réviz+ (badge doré à côté du niveau)
  * @param {function} [props.onCoach]       — ouvre le coach ; bouton masqué si absent
  * @param {string} [props.className]
  */
-export function UserHeader({ prenom, level, xpInLvl, fillPct, aura, isPremium = false, offert = false, onCoach, className = '' }) {
+export function UserHeader({ prenom, level, xpInLvl, fillPct, aura, isPremium = false, offert = false, onRevizPlus, onCoach, className = '' }) {
   const navigate = useNavigate();
   const classes = ['rv-user-header', className].filter(Boolean).join(' ');
 
@@ -43,6 +45,7 @@ export function UserHeader({ prenom, level, xpInLvl, fillPct, aura, isPremium = 
           <span className="rv-user-name">{prenom}</span>
           <span className="rv-user-sep" aria-hidden="true">•</span>
           <span className="rv-user-level">Niveau {level}</span>
+          {isPremium && onRevizPlus && <RevizPlusBadge onClick={onRevizPlus} className="rv-user-plus" />}
         </div>
         <div className="rv-user-progress">
           <div
@@ -65,7 +68,7 @@ export function UserHeader({ prenom, level, xpInLvl, fillPct, aura, isPremium = 
       </div>
 
       <div className="rv-user-actions">
-        <button
+        {!(isPremium && onRevizPlus) && <button
           type="button"
           className={`rv-bell-btn rv-user-premium-btn${isPremium ? ' rv-user-premium-btn--active' : ''}`}
           onClick={() => navigate('/reglages')}
@@ -73,7 +76,7 @@ export function UserHeader({ prenom, level, xpInLvl, fillPct, aura, isPremium = 
           title="Réviz+"
         >
           <CrownIcon />
-        </button>
+        </button>}
         {onCoach && <CoachHeaderButton onClick={onCoach} />}
       </div>
     </header>

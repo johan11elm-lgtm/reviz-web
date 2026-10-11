@@ -1,4 +1,4 @@
-import { ResumeIcon, FlashcardsIcon, MindmapIcon, QuizIcon, StarIcon } from '../components/Icons';
+import { ResumeIcon, FlashcardsIcon, MindmapIcon, QuizIcon } from '../components/Icons';
 import { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
@@ -19,6 +19,7 @@ import { CoachEntryCard } from '../components/CoachChat';
 import { getScanStatus } from '../services/scanLimitService';
 import { subjectInfo, subjectMascot } from '../utils/subjects';
 import { resumeReadingMinutes } from '../utils/resume';
+import { nextStep } from '../utils/nextStep';
 import './Analyse.css';
 
 // ─── Mock de fallback ────────────────────────────────────────────────
@@ -49,17 +50,27 @@ function buildLessonFromAiData(data) {
   };
 }
 
-const STATE_TONE = { nouveau: 'violet', commence: 'orange', 'a-revoir': 'orange', maitrise: 'green' };
+// Tons des états (docs/design-grammaire.md §3) : pas commencé = neutre.
+const STATE_TONE = { nouveau: null, commence: 'orange', 'a-revoir': 'orange', maitrise: 'green' };
 
 /** Avancement de l'élève sur la leçon (cartes vues, à revoir, séances). */
 function lessonProgress(lessonId, total) {
-  let seen = 0;
-  for (let i = 0; i < total; i++) if (getCardState(lessonId, i)) seen++;
+  // seenDue : cartes déjà vues et arrivées à échéance (countDueCards compte
+  // aussi les jamais vues, d'où ce second compte pour « Revois tes cartes »).
+  let seen = 0, seenDue = 0;
+  const now = Date.now();
+  for (let i = 0; i < total; i++) {
+    const card = getCardState(lessonId, i);
+    if (!card) continue;
+    seen++;
+    if (!card.nextReview || card.nextReview <= now) seenDue++;
+  }
   const due = countDueCards(lessonId, total);
   const sessions = loadRevisions().filter(r => r.lessonId === lessonId);
   return {
     seen,
     due,
+    seenDue,
     sessions: sessions.length,
     last: sessions[0]?.revisedAt ?? null,
     state: chapterState({ lesson: true, dueCards: due, reviewedCards: seen }),
@@ -219,7 +230,7 @@ export default function Analyse() {
       {/* Résumé / excerpt */}
       {displayLesson.excerpt && (
         <div className="rv-card rv-card--padded analyse-excerpt-card">
-          <div className="analyse-excerpt-label">{fromProgramme ? "L'essentiel du chapitre" : 'Résumé détecté'}</div>
+          <span className="rv-eyebrow">{fromProgramme ? "L'essentiel du chapitre" : 'En bref'}</span>
           <p className="analyse-excerpt-text">{displayLesson.excerpt}</p>
         </div>
       )}
@@ -244,24 +255,52 @@ export default function Analyse() {
               <div className={`rv-icon-square rv-icon-square--xl rv-icon-square--${f.tone}`}>
                 {f.icon}
               </div>
-              <span className={`analyse-format-arrow analyse-format-arrow--${f.tone}`}>›</span>
+              <span className="analyse-format-arrow" aria-hidden="true">›</span>
             </div>
             <div className="analyse-format-name">{f.name}</div>
-            {count !== null && (
-              <div className={`rv-pill rv-pill--${f.tone} analyse-format-count`}>
-                {count} {f.unit}
-              </div>
-            )}
+            <div className="analyse-format-meta">{count !== null ? `${count} ${f.unit}` : 'Vue d\'ensemble'}</div>
           </Link>
         );
       })}
     </div>
   );
 
-  // Ordinateur : « À retenir » (points clés du résumé) et l'avancement.
-  const avancement = isDesktop && lesson && coachLessonId
+  // Avancement de l'élève : la carte « Ta prochaine étape » (et, sur
+  // ordinateur, le détail dans « Ton avancement »).
+  const avancement = lesson && coachLessonId
     ? lessonProgress(coachLessonId, displayLesson.flashcardsCount ?? 0)
     : null;
+  const lessonRevisions = coachLessonId ? loadRevisions().filter(r => r.lessonId === coachLessonId) : [];
+  const step = nextStep(displayLesson, avancement, type => lessonRevisions.some(r => r.type === type));
+  const total = displayLesson.flashcardsCount ?? 0;
+  const nextCard = (
+    <Link to={step.to} className="rv-next">
+      <span className="rv-eyebrow">Ta prochaine étape</span>
+      <span className="rv-next-title">{step.title}</span>
+      <span className="rv-next-sub">{step.sub}</span>
+      {avancement && avancement.seen > 0 && total > 0 && (
+        <span className="rv-next-progress">
+          <span className="rv-next-progress-row">
+            <span>{avancement.seen} / {total} cartes vues</span>
+            {avancement.seenDue > 0 && <span>{avancement.seenDue} à revoir</span>}
+          </span>
+          <span className="rv-next-bar" aria-hidden="true">
+            <span style={{ width: `${Math.round(avancement.seen / total * 100)}%` }} />
+          </span>
+        </span>
+      )}
+      <span className="rv-next-action">
+        {step.action}
+        <span aria-hidden="true">→</span>
+      </span>
+    </Link>
+  );
+  const formatsSection = (
+    <>
+      <h2 className="rv-section-title">Tous les formats</h2>
+      {formatGrid}
+    </>
+  );
 
   if (noLesson) return <MissingLessonState title="Ta leçon" />;
 
@@ -352,33 +391,34 @@ export default function Analyse() {
         {/* Intro façon Home — titre de la leçon, matière, mascotte de la matière */}
         <PageIntro
           title={displayLesson.title}
-          sub={`${displayLesson.subject} · choisis ton format`}
+          sub={`${displayLesson.subject} · ${fromProgramme ? 'chapitre du programme' : 'leçon scannée'}`}
           mascot={subjectMascot(displayLesson.subject)}
           mascotSize={140}
-          className="analyse-intro"
+          className={`analyse-intro${displayLesson.title.length > 34 ? ' rv-page-intro--long' : ''}`}
         />
 
         {isDesktop ? (
           <div className="analyse-desk">
             <div className="analyse-desk-col">
-              {excerptCard}
-              {displayLesson.keyPoints?.length > 0 && (
-                <div className="rv-card rv-card--padded analyse-retenir">
-                  <div className="analyse-excerpt-label">À retenir</div>
-                  <ul className="analyse-retenir-list">
-                    {displayLesson.keyPoints.map(k => <li key={k}><StarIcon />{k}</li>)}
-                  </ul>
-                </div>
-              )}
+              {nextCard}
+              {formatsSection}
               {coachCard}
             </div>
             <div className="analyse-desk-col">
-              {formatGrid}
+              {excerptCard}
+              {displayLesson.keyPoints?.length > 0 && (
+                <div className="rv-card rv-card--padded analyse-retenir">
+                  <span className="rv-eyebrow">À retenir</span>
+                  <ul className="rv-bullets">
+                    {displayLesson.keyPoints.map(k => <li key={k}>{k}</li>)}
+                  </ul>
+                </div>
+              )}
               {avancement && (
                 <div className="rv-card rv-card--padded analyse-avancement">
                   <div className="analyse-avancement-head">
-                    <span className="analyse-excerpt-label">Ton avancement</span>
-                    <span className={`rv-pill rv-pill--${STATE_TONE[avancement.state]}`}>{CHAPTER_STATE_LABEL[avancement.state]}</span>
+                    <span className="rv-eyebrow">Ton avancement</span>
+                    <span className={`rv-pill${STATE_TONE[avancement.state] ? ` rv-pill--${STATE_TONE[avancement.state]}` : ''}`}>{CHAPTER_STATE_LABEL[avancement.state]}</span>
                   </div>
                   <div className="analyse-avancement-row">
                     <span>Cartes vues</span>
@@ -391,7 +431,7 @@ export default function Analyse() {
                     />
                   </div>
                   <div className="analyse-avancement-row">
-                    <span>À revoir aujourd'hui</span>
+                    <span>À travailler aujourd'hui</span>
                     <b>{avancement.due} carte{avancement.due > 1 ? 's' : ''}</b>
                   </div>
                   <div className="analyse-avancement-row">
@@ -404,9 +444,10 @@ export default function Analyse() {
           </div>
         ) : (
           <>
-            {excerptCard}
+            {nextCard}
+            {formatsSection}
             {coachCard}
-            {formatGrid}
+            {excerptCard}
           </>
         )}
       </div>

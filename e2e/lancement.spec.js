@@ -25,8 +25,8 @@ test('Réviz+ offert : popup une seule fois, Réglages sans paiement', async ({ 
   await page.getByRole('dialog', { name: 'La Battle' }).getByRole('button', { name: 'Plus tard' }).click()
 
   await page.goto('/reglages')
-  await expect(page.getByText('Réviz+ offert', { exact: true })).toBeVisible()
+  await expect(page.getByText('Offert', { exact: true })).toBeVisible()
   await expect(page.getByRole('button', { name: 'Passer à Réviz+' })).toHaveCount(0)
-  await page.getByText('Réviz+ offert', { exact: true }).scrollIntoViewIfNeeded()
+  await page.getByText('Offert', { exact: true }).scrollIntoViewIfNeeded()
   await capture('02-reglages')
 })

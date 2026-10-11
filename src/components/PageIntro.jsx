@@ -1,4 +1,5 @@
 import { Mascot } from './Mascot';
+import { nbsp } from '../utils/typography';
 
 /**
  * PageIntro — ouverture de page façon Home : titre noir Geist + sous-titre
@@ -19,8 +20,9 @@ export function PageIntro({ title, sub, mascot, mascotSize = 156, className = ''
   return (
     <div className={classes}>
       <div className="rv-page-intro-text">
-        <h1 className="rv-greeting-title rv-page-intro-title">{title}</h1>
-        {sub && <p className="rv-greeting-sub rv-page-intro-sub">{sub}</p>}
+        {/* Espaces insécables avant ?!: — sinon « Léa / ! » sur deux lignes */}
+        <h1 className="rv-greeting-title rv-page-intro-title">{nbsp(title)}</h1>
+        {sub && <p className="rv-greeting-sub rv-page-intro-sub">{nbsp(sub)}</p>}
         {children}
       </div>
       {mascot && (

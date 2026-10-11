@@ -123,7 +123,7 @@
 }
 
 .wlc-label {
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
   color: var(--text-muted);
   letter-spacing: 1px;
@@ -181,7 +181,7 @@
 }
 
 .wlc-step-num {
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 800;
   color: var(--accent-orange);
   letter-spacing: 0.3px;

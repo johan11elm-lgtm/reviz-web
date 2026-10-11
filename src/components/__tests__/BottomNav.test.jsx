@@ -1,7 +1,11 @@
-import { describe, it, expect, afterEach } from 'vitest'
-import { render, cleanup, act } from '@testing-library/react'
+import { describe, it, expect, afterEach, vi } from 'vitest'
+import { render, cleanup, act, screen } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
-import { BottomNav } from '../BottomNav'
+
+const auth = vi.hoisted(() => ({ isGuest: false }))
+vi.mock('../../context/AuthContext', () => ({ useAuth: () => auth }))
+
+const { BottomNav } = await import('../BottomNav')
 
 // happy-dom ne calcule pas de layout : on simule un conteneur de page qui
 // défile verticalement (ou une rangée horizontale) en fixant ses mesures.
@@ -30,6 +34,23 @@ const isHidden = () => document.querySelector('.bottom-nav').classList.contains(
 afterEach(() => {
   cleanup()
   document.body.innerHTML = ''
+  auth.isGuest = false
+})
+
+describe('<BottomNav /> — onglets', () => {
+  it('le coach a son onglet, au centre', () => {
+    setup()
+    const labels = screen.getAllByRole('link').map(l => l.getAttribute('aria-label'))
+    expect(labels).toEqual(['Accueil', 'Cours', 'Coach', 'Progrès', 'Profil'])
+    expect(screen.getByRole('link', { name: 'Coach' })).toHaveAttribute('href', '/coach')
+  })
+
+  it('pas d’onglet Coach en mode essai (compte requis)', () => {
+    auth.isGuest = true
+    setup()
+    expect(screen.queryByRole('link', { name: 'Coach' })).toBeNull()
+    expect(screen.getAllByRole('link')).toHaveLength(4)
+  })
 })
 
 describe('<BottomNav /> — masquage au défilement', () => {

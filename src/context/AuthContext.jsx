@@ -30,6 +30,7 @@ import { setSrsUser } from '../services/srsService';
 import { setChallengeUser } from '../services/challengeService';
 import { setScanLimitUser, setPremiumStatus } from '../services/scanLimitService';
 import { LANCEMENT_OFFERT } from '../../api/_lancement.js';
+import { estFondateur } from '../utils/revizPlus.js';
 import { readSessionCache, writeSessionCache, clearSessionCache, userFromSessionCache } from '../services/sessionCache';
 import { track } from '../services/statsService';
 import { collection, getDocs, deleteDoc, doc, getDoc, setDoc } from 'firebase/firestore';
@@ -413,6 +414,8 @@ export function AuthProvider({ children }) {
     // Avantages Réviz+ : abonné, ou offert à tous pendant le lancement.
     hasRevizPlus: isPremium || LANCEMENT_OFFERT,
     revizPlusOffert: LANCEMENT_OFFERT && !isPremium,
+    // Compte créé pendant le lancement (jamais un invité).
+    estFondateur: !!currentUser && !currentUser.isGuest && estFondateur(currentUser.metadata?.creationTime),
     isGuest: !!currentUser?.isGuest,
     loginAsGuest,
     refreshPremium,

@@ -31,5 +31,5 @@
   flex-shrink: 0;
 }
 .achievement-info { display: flex; flex-direction: column; gap: 1px; }
-.achievement-label { font-size: 11px; color: var(--accent-orange-ink); font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+.achievement-label { font-size: 12px; color: var(--accent-orange-ink); font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
 .achievement-name { font-family: 'Geist', sans-serif; font-size: 16px; font-weight: 800; letter-spacing: -0.3px; color: var(--text-primary); }

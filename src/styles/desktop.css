@@ -54,7 +54,7 @@
     background: var(--bg-card);
     border: 1px solid var(--border);
     font: inherit;
-    font-size: 11px;
+    font-size: 12px;
     color: var(--text-secondary);
   }
 
@@ -75,6 +75,84 @@
   }
   html:not(.native) .home-page .home-desk .home-cta { margin: 0; }
   html:not(.native) .home-page .home-desk .rv-hero-sub { max-width: 46ch; font-size: 14px; margin-top: 8px; }
+  /* Héros « Scanne une leçon » (compte) : aussi haut que la colonne d'à
+   * côté, donc rempli — les quatre formats préparés et les deux façons de
+   * commencer (photo, texte). Mascotte posée en bas à droite. */
+  html:not(.native) .home-page .home-scan-desk { flex-direction: row; cursor: default; padding: 26px 28px; }
+  html:not(.native) .home-page .home-scan-desk:hover { filter: none; }
+  html:not(.native) .home-page .home-scan-desk-text {
+    position: relative;
+    z-index: 1;
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  html:not(.native) .home-page .home-scan-desk .rv-hero-title { font-size: 28px; max-width: none; }
+  html:not(.native) .home-page .home-scan-desk .rv-hero-sub { max-width: 40ch; color: rgba(255, 255, 255, 0.82); }
+  html:not(.native) .home-page .home-scan-formats {
+    list-style: none;
+    margin: 20px 0 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    max-width: 380px;
+  }
+  html:not(.native) .home-page .home-scan-formats li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+  }
+  html:not(.native) .home-page .home-scan-format-icon {
+    flex-shrink: 0;
+    width: 34px;
+    height: 34px;
+    border-radius: 11px;
+    display: grid;
+    place-items: center;
+    background: rgba(255, 255, 255, 0.14);
+    color: #fff;
+  }
+  html:not(.native) .home-page .home-scan-format-icon svg { width: 18px; height: 18px; }
+  html:not(.native) .home-page .home-scan-format-text { min-width: 0; display: flex; flex-direction: column; gap: 1px; }
+  html:not(.native) .home-page .home-scan-format-name { font-size: 14px; font-weight: 700; color: #fff; }
+  html:not(.native) .home-page .home-scan-format-sub { font-size: 12px; color: rgba(255, 255, 255, 0.72); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  html:not(.native) .home-page .home-scan-quota { margin: auto 0 0; padding-top: 22px; font-size: 13px; font-weight: 600; color: rgba(255, 255, 255, 0.72); }
+  html:not(.native) .home-page .home-scan-actions { margin-top: 12px; padding-top: 0; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  html:not(.native) .home-page .home-scan-actions .rv-hero-action { color: #2D2B57; text-decoration: none; font-size: 14px; padding: 12px 20px; }
+  html:not(.native) .home-page .home-scan-actions svg { width: 17px; height: 17px; }
+  html:not(.native) .home-page .home-scan-ghost {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 11px 18px;
+    border-radius: var(--radius-pill);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: #fff;
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: background 0.15s ease;
+  }
+  html:not(.native) .home-page .home-scan-ghost:hover { background: rgba(255, 255, 255, 0.12); }
+  html:not(.native) .home-page .home-scan-actions .rv-hero-action:hover { filter: brightness(0.97); }
+  html:not(.native) .home-page .home-scan-desk-mascot {
+    position: absolute;
+    right: -18px;
+    bottom: -16px;
+    width: 220px !important;
+    height: 220px !important;
+    max-width: 220px;
+    max-height: 220px;
+    min-width: 0;
+    min-height: 0;
+    margin: 0;
+  }
   html:not(.native) .home-page .home-desk-side {
     display: flex;
     flex-direction: column;
@@ -180,7 +258,7 @@
     border-top: 1px solid var(--border-subtle);
   }
   html:not(.native) .programme-page .programme-matiere-next-label {
-    font-size: 11.5px;
+    font-size: 12px;
     font-weight: 600;
     color: var(--text-muted);
   }
@@ -221,50 +299,31 @@
     align-items: start;
     align-content: start;
   }
-  html:not(.native) .cours-page .cours-programme-link { grid-column: 2; grid-row: 1; }
-  html:not(.native) .cours-page .cours-resume-wrap    { grid-column: 2; grid-row: 2 / span 60; }
-  html:not(.native) .cours-page .cours-search-wrap    { grid-column: 1; grid-row: 1; }
-  html:not(.native) .cours-page .cours-filters-wrap   { grid-column: 1; grid-row: 2; margin-inline: 0; padding: 0; }
-  html:not(.native) .cours-page .cours-subject-section,
-  html:not(.native) .cours-page .cours-skeleton { grid-column: 1; }
-  html:not(.native) .cours-page .cours-empty-state { grid-column: 1 / -1; }
-  html:not(.native) .cours-page .cours-subject-list {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 12px;
-  }
-  html:not(.native) .cours-page .cours-subject-list--hidden { display: none; }
-  html:not(.native) .cours-page .cours-resume-card { position: sticky; top: 0; }
+  html:not(.native) .cours-page .cours-main,
+  html:not(.native) .cours-page .cours-rail { display: flex; flex-direction: column; gap: 16px; min-width: 0; }
+  html:not(.native) .cours-page .cours-main { grid-column: 1; grid-row: 1; }
+  html:not(.native) .cours-page .cours-rail { grid-column: 2; grid-row: 1; position: sticky; top: 0; }
+  /* Sans leçon, pas de rail : l'état vide prend toute la largeur */
+  html:not(.native) .cours-page .cours-rail:empty { display: none; }
+  html:not(.native) .cours-page .cours-content:has(.cours-rail:empty) .cours-main { grid-column: 1 / -1; }
+  html:not(.native) .cours-page .cours-filters-wrap { margin-inline: 0; padding: 0; }
   html:not(.native) .cours-page .cours-resume-top { flex-direction: column; align-items: flex-start; gap: 8px; }
   html:not(.native) .cours-page .cours-resume-body { width: 100%; }
 
-  /* ── Analyse : l'essentiel et « à retenir » à gauche, les formats et
-   * l'avancement à droite (balisage propre à l'ordinateur, Analyse.jsx) ── */
+  /* ── Analyse : la prochaine étape, les formats et le coach à gauche ;
+   * l'essentiel, « à retenir » et l'avancement à droite (balisage propre
+   * à l'ordinateur, Analyse.jsx) ── */
   html:not(.native) .analyse-page .analyse-desk {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
     gap: var(--grid-gap);
     align-items: start;
   }
   html:not(.native) .analyse-page .analyse-desk-col { display: flex; flex-direction: column; gap: 16px; min-width: 0; }
   html:not(.native) .analyse-page .analyse-desk-col > * { margin: 0; }
   html:not(.native) .analyse-page .analyse-retenir { display: flex; flex-direction: column; gap: 12px; }
-  html:not(.native) .analyse-page .analyse-retenir-list {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-  html:not(.native) .analyse-page .analyse-retenir-list li {
-    display: flex;
-    gap: 10px;
-    font-size: 14px;
-    line-height: 1.45;
-    color: var(--text-primary);
-  }
-  html:not(.native) .analyse-page .analyse-retenir-list svg { flex-shrink: 0; width: 15px; height: 15px; margin-top: 3px; color: var(--accent-orange); }
+  /* La progression est détaillée dans « Ton avancement » : pas de doublon dans la carte du haut */
+  html:not(.native) .analyse-page .rv-next-progress { display: none; }
   html:not(.native) .analyse-page .analyse-avancement { display: flex; flex-direction: column; gap: 10px; }
   html:not(.native) .analyse-page .analyse-avancement-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
   html:not(.native) .analyse-page .analyse-avancement-row {
@@ -376,7 +435,7 @@
   html:not(.native) .progres-page .pg-desk-kpi { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
   html:not(.native) .progres-page .pg-desk-kpi-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; min-height: 30px; }
   html:not(.native) .progres-page .pg-desk-kpi-label {
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.5px;
@@ -480,7 +539,7 @@
     margin-top: 4px;
     padding-top: 14px;
     border-top: 1px solid var(--border-subtle);
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.5px;
@@ -504,7 +563,7 @@
   html:not(.native) .progres-page .pg-mem-lesson:hover { background: var(--bg-hover); }
   html:not(.native) .progres-page .pg-mem-lesson-text { flex: 1; min-width: 0; display: flex; flex-direction: column; }
   html:not(.native) .progres-page .pg-mem-lesson-title { font-size: 13.5px; font-weight: 700; color: var(--text-primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  html:not(.native) .progres-page .pg-mem-lesson-meta { font-size: 11.5px; color: var(--text-muted); }
+  html:not(.native) .progres-page .pg-mem-lesson-meta { font-size: 12px; color: var(--text-muted); }
   html:not(.native) .progres-page .pg-mem-cta { margin-top: auto; }
   html:not(.native) .progres-page .pg-mem-done {
     margin-top: auto;
@@ -582,7 +641,7 @@
   html:not(.native) .profile-page .pf-desk-card-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; min-height: 22px; }
   html:not(.native) .profile-page .pf-desk-label {
     margin: 0;
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.5px;
@@ -657,8 +716,8 @@
   html:not(.native) .profile-page .pf-desk-badge .pf-badge-art { width: 64px; height: 64px; margin-bottom: 4px; }
   html:not(.native) .profile-page .pf-desk-badge-label { font-size: 13px; }
   html:not(.native) .profile-page .pf-desk-badge .pf-badge-bar { width: 48px; margin-top: 4px; }
-  html:not(.native) .profile-page .pf-desk-badge-hint { font-size: 11.5px; line-height: 1.3; color: var(--text-muted); min-height: 2.6em; }
-  html:not(.native) .profile-page .pf-desk-badge-state { margin-top: 2px; font-size: 11.5px; font-weight: 700; color: var(--text-muted); }
+  html:not(.native) .profile-page .pf-desk-badge-hint { font-size: 12px; line-height: 1.3; color: var(--text-muted); min-height: 2.6em; }
+  html:not(.native) .profile-page .pf-desk-badge-state { margin-top: 2px; font-size: 12px; font-weight: 700; color: var(--text-muted); }
   html:not(.native) .profile-page .pf-desk-badge-state--ok { display: inline-flex; align-items: center; gap: 4px; color: var(--accent-green-ink); }
   html:not(.native) .profile-page .pf-desk-badge-state--ok svg { width: 12px; height: 12px; }
 
@@ -744,7 +803,17 @@
 @media (min-width: 1024px) {
   html:not(.native) .coach-page { padding-left: 0; padding-right: 0; height: 100dvh; }
   html:not(.native) .coach-page > .rv-page-header,
+  html:not(.native) .coach-page > .coach-chat-bar,
   html:not(.native) .coach-page > .coach-page-intro { display: none; }
+  /* Barre latérale : la liste du téléphone, en version compacte et sans cartes */
+  html:not(.native) .coach-page .coach-side .coach-side-list { padding: 0; background: transparent; box-shadow: none; gap: 2px; }
+  html:not(.native) .coach-page .coach-side .coach-side-list > li + li { border-top: none; }
+  html:not(.native) .coach-page .coach-side .coach-side-lists { overflow-y: auto; min-height: 0; gap: 4px; }
+  html:not(.native) .coach-page .coach-side .coach-side-label { margin: 6px 10px 2px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.4px; color: var(--text-muted); }
+  html:not(.native) .coach-page .coach-side-item-avatar { width: 34px; height: 34px; border-radius: 10px; }
+  html:not(.native) .coach-page .coach-side-item-avatar .mascot,
+  html:not(.native) .coach-page .coach-side-item-avatar img { width: 30px !important; height: 30px !important; }
+  html:not(.native) .coach-page .coach-side-item-arrow { display: none; }
   html:not(.native) .coach-page .coach-layout {
     display: grid;
     grid-template-columns: 300px minmax(0, 1fr);
@@ -777,7 +846,7 @@
   html:not(.native) .coach-page .coach-side-item--active { background: var(--bg-card); box-shadow: var(--shadow-card); }
   html:not(.native) .coach-page .coach-side-item-text { min-width: 0; display: flex; flex-direction: column; }
   html:not(.native) .coach-page .coach-side-item-title { font-size: 13.5px; font-weight: 700; color: var(--text-primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  html:not(.native) .coach-page .coach-side-item-sub { font-size: 11.5px; color: var(--text-muted); }
+  html:not(.native) .coach-page .coach-side-item-sub { font-size: 12px; color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   html:not(.native) .coach-page .coach-side-empty { padding: 10px; font-size: 13px; color: var(--text-muted); }
 
   html:not(.native) .coach-page .coach-main { min-height: 0; }
@@ -802,6 +871,28 @@
   }
   html:not(.native) .coach-hero-title { font-size: 32px; }
   html:not(.native) .coach-hero-sub { font-size: 15px; }
-  html:not(.native) .coach-hero-cards { grid-template-columns: repeat(4, minmax(0, 1fr)); max-width: 760px; }
+  /* Amorces : quatre tuiles côte à côte (rangées sur téléphone, Coach.css) */
+  html:not(.native) .coach-hero-cards { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; max-width: 760px; padding: 0; background: transparent; box-shadow: none; }
+  html:not(.native) .coach-hero-card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    padding: 14px;
+    border: 1.5px solid var(--border);
+    border-radius: 18px;
+    background: var(--bg-card);
+    transition: border-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  html:not(.native) .coach-hero-card + .coach-hero-card::before { display: none; }
+  html:not(.native) .coach-hero-card:hover { border-color: var(--accent-violet); transform: translateY(-2px); box-shadow: var(--shadow-card); }
+  html:not(.native) .coach-hero-card-icon { width: 32px; height: 32px; border-radius: 10px; margin-bottom: 4px; }
+  html:not(.native) .coach-hero-card-text { font-size: 14px; }
+  html:not(.native) .coach-hero-card-sub { font-size: 12px; }
   html:not(.native) .coach-input-hint-keys { display: inline; }
+}
+
+/* Réglages — vignettes de thème à taille fixe (sinon une colonne large les étire) */
+@media (min-width: 1024px) {
+  html:not(.native) .reglages-page .rg-theme-grid { grid-template-columns: repeat(4, 84px); gap: 14px; }
 }

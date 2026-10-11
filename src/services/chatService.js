@@ -8,6 +8,7 @@ import { auth } from './firebaseConfig.js'
 import { apiFetch } from './apiClient.js'
 import { loadLessons } from './historyService.js'
 import { MODEL, buildChatSystemPrompt, buildChatLessonContext, CHAT_MAX_MESSAGE_LENGTH, CHAT_MAX_HISTORY, CHAT_MAX_OUTPUT_TOKENS } from '../utils/chatPrompts.js'
+import { memoriserQuotaCoach } from '../utils/revizPlus.js'
 
 export { CHAT_MAX_MESSAGE_LENGTH }
 
@@ -102,6 +103,7 @@ async function _viaProxy({ lessonId, messages, level, onDelta }) {
         onDelta?.(text)
       } else if (event.meta) {
         remaining = event.meta.remaining ?? null
+        memoriserQuotaCoach(event.meta.remaining, event.meta.limit)
       } else if (event.error) {
         streamError = event.error
       }

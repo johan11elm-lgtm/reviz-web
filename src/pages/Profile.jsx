@@ -16,6 +16,7 @@ import { computeStreak, computeLevel, computeBadges, XP_PAR_NIVEAU } from '../ut
 import { formatLevelLabel } from '../utils/levels';
 import { useIsDesktop } from '../hooks/useMediaQuery';
 import './Profile.css';
+import { RevizPlusCard } from '../components/RevizPlus';
 
 // Mascotte adaptative au niveau / streak / activité — pattern Progres `getHeroNarrative`.
 function getProfileHero(level, streak, lessonsCount) {
@@ -34,10 +35,11 @@ const GearIcon = () => (
   </svg>
 );
 
+// Icônes neutres : ce sont des liens, pas des états (docs/design-grammaire.md §5).
 const ACCOUNT_ITEMS = [
-  { id: 'profil',   icon: <UserIcon />, label: 'Modifier le profil', tone: 'violet' },
-  { id: 'reglages', icon: <GearIcon />, label: 'Réglages',           tone: 'orange' },
-  { id: 'avis',     icon: <ChatIcon />, label: 'Donner mon avis',    tone: 'green' },
+  { id: 'profil',   icon: <UserIcon />, label: 'Modifier le profil' },
+  { id: 'reglages', icon: <GearIcon />, label: 'Réglages' },
+  { id: 'avis',     icon: <ChatIcon />, label: 'Donner mon avis' },
 ];
 
 const SHEET_TITLES = {
@@ -131,7 +133,7 @@ export default function Profile() {
   const navigate = useNavigate();
   const isDesktop = useIsDesktop();
 
-  const { currentUser, getUserLevel, setUserLevel, updateDisplayName, isGuest } = useAuth();
+  const { currentUser, getUserLevel, setUserLevel, updateDisplayName, isGuest, hasRevizPlus } = useAuth();
   const prenom   = currentUser?.displayName ?? '';
   const userLevel  = getUserLevel();
   const levelLabel = formatLevelLabel(userLevel);
@@ -379,7 +381,7 @@ export default function Profile() {
               <div className="pf-desk-compte">
                 {ACCOUNT_ITEMS.filter(it => !isGuest || it.id !== 'profil').map(it => (
                   <button key={it.id} type="button" className="pf-desk-compte-row" onClick={() => onAccountClick(it.id)}>
-                    <span className={`rv-icon-square rv-icon-square--${it.tone}`} aria-hidden="true">{it.icon}</span>
+                    <span className="rv-icon-square pf-account-icon" aria-hidden="true">{it.icon}</span>
                     <span className="pf-account-label">{it.label}</span>
                     <span className="pf-account-arrow" aria-hidden="true">›</span>
                   </button>
@@ -387,6 +389,8 @@ export default function Profile() {
               </div>
             </section>
           </div>
+
+          {hasRevizPlus && !isGuest && <RevizPlusCard className="rp-card--wide" />}
 
           <section className="pf-desk-section" aria-labelledby="pf-desk-badges">
             <div className="pf-desk-head">
@@ -466,6 +470,8 @@ export default function Profile() {
           </div>
         </section>
 
+        {hasRevizPlus && !isGuest && <RevizPlusCard />}
+
         {/* Badges */}
         {battle && (
           <Link to="/battle" className="rv-card rv-card--link pf-battle-card" aria-label={`Battle : ${battle.aura} aura`}>
@@ -507,19 +513,18 @@ export default function Profile() {
         {/* Compte */}
         <section className="pf-section">
           <h2 className="pf-section-title">Compte</h2>
-          <div className="pf-account-list">
+          {/* Des rangées dans une carte blanche (grammaire §4) */}
+          <div className="rv-card rv-rows">
             {ACCOUNT_ITEMS.filter(it => !isGuest || it.id !== 'profil').map(it => (
               <button
                 key={it.id}
                 type="button"
-                className={`pf-account-btn${it.danger ? ' pf-account-btn--danger' : ''}`}
+                className="rv-row"
                 onClick={() => onAccountClick(it.id)}
               >
-                <span className={`rv-icon-square rv-icon-square--${it.tone}`} aria-hidden="true">
-                  {it.icon}
-                </span>
-                <span className="pf-account-label">{it.label}</span>
-                <span className="pf-account-arrow" aria-hidden="true">›</span>
+                <span className="rv-row-avatar" aria-hidden="true">{it.icon}</span>
+                <span className="rv-row-text"><span className="rv-row-title">{it.label}</span></span>
+                <span className="rv-row-arrow" aria-hidden="true">›</span>
               </button>
             ))}
           </div>
