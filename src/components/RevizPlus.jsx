@@ -1,11 +1,15 @@
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useModalA11y } from '../hooks/useModalA11y';
 import { Mascot } from './Mascot';
 import { GemIcon, SparkIcon, CameraIcon, ChatIcon, SunIcon } from './Icons';
 import { getScanStatus } from '../services/scanLimitService';
-import { moisInscription, quotaCoachDuJour } from '../utils/revizPlus';
-import { LANCEMENT_CHAT_LIMIT } from '../../api/_lancement.js';
+import { moisInscription, quotaCoachDuJour, phaseRevizPlus, joursAvant } from '../utils/revizPlus';
+import { startCheckout } from '../services/billingService';
+import {
+  LANCEMENT_CHAT_LIMIT, FIN_LANCEMENT, DERNIER_JOUR_OFFERT, FIN_GRACE_FONDATEURS, DERNIER_JOUR_GRACE,
+} from '../../api/_lancement.js';
 import { PRIX, PRIX_FONDATEUR, remiseFondateur } from '../../api/_prix.js';
 import './RevizPlus.css';
 
@@ -54,7 +58,9 @@ export function TicketFondateur({ depuis, className = '' }) {
           <s className="rp-ticket-barre" aria-label={`au lieu de ${PRIX.annuel.montant}`}>{PRIX.annuel.montant}</s>
         </span>
         <span className="rp-ticket-note">
-          Après le lancement, tant que tu restes abonné.
+          {phaseRevizPlus() === 'grace' || phaseRevizPlus() === 'payant'
+            ? 'Tant que tu restes abonné.'
+            : `Après le ${DERNIER_JOUR_OFFERT}, tant que tu restes abonné.`}
           {depuis && <> Membre depuis {depuis}.</>}
         </span>
       </div>
@@ -96,6 +102,33 @@ export function RevizPlusCard({ onTheme, className = '' }) {
 
   const choisirTheme = onTheme ?? (() => navigate('/reglages#themes'));
 
+  // Où en est la bascule (lancement → derniers jours → grâce des fondateurs).
+  const phase = phaseRevizPlus();
+  const enGrace = phase === 'grace' && revizPlusOffert;
+  const plusQue = n => `plus que ${n}\u00a0jour${n > 1 ? 's' : ''}`;
+  const sousTitre = isPremium
+    ? 'Ton abonnement est actif.'
+    : enGrace
+      ? `Réviz+ est maintenant payant. Pour toi, il reste offert jusqu'au ${DERNIER_JOUR_GRACE} : ${plusQue(joursAvant(FIN_GRACE_FONDATEURS))}.`
+      : phase === 'derniers-jours'
+        ? `Offert jusqu'au ${DERNIER_JOUR_OFFERT} : ${plusQue(joursAvant(FIN_LANCEMENT))}.`
+        : `Offert jusqu'au ${DERNIER_JOUR_OFFERT}. Rien à payer, rien à activer.`;
+
+  // Pendant la grâce : s'abonner au tarif fondateur depuis la carte.
+  const [paiement, setPaiement] = useState(null);
+  const [erreur, setErreur] = useState('');
+  async function garder(formule) {
+    if (paiement) return;
+    setPaiement(formule); setErreur('');
+    try {
+      await startCheckout(formule); // redirection pleine page en cas de succès
+    } catch (err) {
+      setPaiement(null);
+      if (err.message === 'EMAIL_NOT_VERIFIED') navigate('/verify-email');
+      else setErreur('Impossible d\'ouvrir le paiement. Réessaie dans un moment.');
+    }
+  }
+
   return (
     <section className={['rp-card', className].filter(Boolean).join(' ')} aria-labelledby="rp-card-titre">
       <span className="rp-card-mascot" aria-hidden="true">
@@ -107,10 +140,8 @@ export function RevizPlusCard({ onTheme, className = '' }) {
         <span className="rp-status">{isPremium ? 'Actif' : revizPlusOffert ? 'Offert' : 'Inactif'}</span>
       </div>
 
-      <h2 className="rp-card-title" id="rp-card-titre">Tout Réviz+ est à toi</h2>
-      <p className="rp-card-sub">
-        {isPremium ? 'Ton abonnement est actif.' : 'Offert pendant le lancement de Réviz. Rien à payer, rien à activer.'}
-      </p>
+      <h2 className="rp-card-title" id="rp-card-titre">{enGrace ? 'Garde ton Réviz+' : 'Tout Réviz+ est à toi'}</h2>
+      <p className="rp-card-sub">{sousTitre}</p>
 
       {estFondateur && !isPremium ? (
         <TicketFondateur depuis={depuis} />
@@ -139,10 +170,23 @@ export function RevizPlusCard({ onTheme, className = '' }) {
         <Jauge icon={<SunIcon />} label="Thèmes" detail="à choisir dans les Réglages" valeur="4 débloqués" />
       </div>
 
-      <button type="button" className="rp-cta" onClick={choisirTheme}>
-        Choisir mon thème
-        <span aria-hidden="true">→</span>
-      </button>
+      {enGrace ? (
+        <>
+          <button type="button" className="rp-cta" onClick={() => garder('annuel')} disabled={!!paiement}>
+            {paiement === 'annuel' ? 'Ouverture du paiement…' : `Garder Réviz+ à ${PRIX_FONDATEUR.annuel.montant}${PRIX_FONDATEUR.annuel.cadence}`}
+            <span aria-hidden="true">→</span>
+          </button>
+          <button type="button" className="rp-cta-lien" onClick={() => garder('mensuel')} disabled={!!paiement}>
+            {paiement === 'mensuel' ? 'Ouverture du paiement…' : `ou ${PRIX_FONDATEUR.mensuel.montant} par mois, sans engagement`}
+          </button>
+          {erreur && <p className="rp-erreur" role="alert">{erreur}</p>}
+        </>
+      ) : (
+        <button type="button" className="rp-cta" onClick={choisirTheme}>
+          Choisir mon thème
+          <span aria-hidden="true">→</span>
+        </button>
+      )}
     </section>
   );
 }

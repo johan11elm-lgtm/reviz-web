@@ -154,7 +154,7 @@ const PAGES = {
 
         <Section title="Limites d'utilisation">
           <ul>
-            <li>Plan gratuit : 5 leçons analysées par semaine. Pendant le lancement, Réviz+ est offert à tous : 30 leçons par semaine.</li>
+            <li>Plan gratuit : 5 leçons analysées par semaine. Pendant le lancement (jusqu'au 25 octobre 2026), Réviz+ est offert à tous : 30 leçons par semaine.</li>
             <li>Il est interdit de scanner des contenus illicites ou portant atteinte aux droits de tiers.</li>
             <li>Toute utilisation abusive peut entraîner la suspension du compte.</li>
           </ul>

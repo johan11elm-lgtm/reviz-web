@@ -12,7 +12,18 @@ export const LANCEMENT_OFFERT = true
 export const LANCEMENT_SCAN_LIMIT = 30 // leçons analysées par semaine
 export const LANCEMENT_CHAT_LIMIT = 50 // messages au coach par jour
 
-// Membres fondateurs : les comptes créés pendant le lancement. Le jour où le
-// paywall revient, mettre ici la date de fin (ISO, ex. '2026-12-01') : les
-// comptes plus récents ne sont plus fondateurs, les autres le restent.
-export const FONDATEURS_JUSQU_AU = null
+// Calendrier de la bascule (décidé le 2026-10-11, docs/prix-revizplus.md).
+// LANCEMENT_OFFERT reste l'interrupteur : il faut le passer à false le jour
+// de la bascule (avec Stripe en réel). Les dates servent à l'affichage, au
+// statut de fondateur et au délai de grâce.
+export const FIN_LANCEMENT = '2026-10-26T00:00:00+01:00' // premier jour payant
+export const DERNIER_JOUR_OFFERT = '25\u00a0octobre'
+
+// Membres fondateurs : les comptes créés avant la bascule. Ils gardent le
+// tarif fondateur (api/_prix.js) tant que leur abonnement court.
+export const FONDATEURS_JUSQU_AU = FIN_LANCEMENT
+
+// Délai de grâce : après la bascule, les fondateurs gardent Réviz+ offert
+// encore quatorze jours, le temps de s'abonner.
+export const FIN_GRACE_FONDATEURS = '2026-11-09T00:00:00+01:00'
+export const DERNIER_JOUR_GRACE = '8\u00a0novembre'

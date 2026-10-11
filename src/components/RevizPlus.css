@@ -459,3 +459,24 @@ button.rp-badge:active { transform: scale(0.96); }
   transform: rotate(-4deg);
   box-shadow: 0 4px 12px rgba(227, 169, 79, 0.3);
 }
+
+/* Pendant la grâce : formule mensuelle en lien sous le bouton doré */
+.rp-cta-lien {
+  align-self: center;
+  margin-top: -4px;
+  padding: 4px 8px;
+  border: 0;
+  background: none;
+  color: var(--rp-on-sub);
+  font: 600 13px/1.3 'Geist', sans-serif;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+.rp-cta-lien:hover { color: var(--rp-on); }
+.rp-erreur {
+  margin: 0;
+  font-size: 13px;
+  color: #FFB4A8;
+  text-align: center;
+}

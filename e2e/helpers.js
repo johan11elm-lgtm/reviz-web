@@ -166,7 +166,7 @@ export async function verifyEmailViaEmulator(page, email) {
 
 /**
  * Vérifie l'email (via émulateur) puis passe l'onboarding (compte majeur).
- * Les popups de l'accueil (« Réviz+ est offert », puis « Nouveau : la Battle »)
+ * Les popups de l'accueil (« Réviz+ offert jusqu'au … », puis « Nouveau : la Battle »)
  * sont fermées, sauf si la spec veut en tester une (garderAnnonce : true pour
  * la Battle, 'revizplus' pour Réviz+).
  */
@@ -184,9 +184,9 @@ export async function verifyEmailAndOnboard(page, email, { garderAnnonce = false
   else await fermerAnnonceBattle(page)
 }
 
-/** Ferme la popup « Réviz+ est offert » si elle est ouverte (accueil, une fois par élève). */
+/** Ferme la popup Réviz+ (offert, derniers jours ou grâce) si elle est ouverte (accueil, une fois par élève). */
 export async function fermerAnnonceRevizPlus(page) {
-  const plusTard = page.getByRole('dialog', { name: 'Réviz+ est offert' }).getByRole('button', { name: 'Plus tard' })
+  const plusTard = page.getByRole('dialog', { name: /Réviz\+ offert|Garde ton Réviz\+/ }).getByRole('button', { name: 'Plus tard' })
   await plusTard.click({ timeout: 5_000 }).catch(() => {})
 }
 

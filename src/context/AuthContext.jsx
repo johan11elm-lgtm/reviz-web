@@ -32,9 +32,8 @@ import { setActiveUser as setRevisionUser, pushRevisionsToFirestore } from '../s
 import { readGuest, startGuest, clearGuest, guestUser, isGuestUid, migrateGuestLocalData } from '../services/guestService';
 import { setSrsUser } from '../services/srsService';
 import { setChallengeUser } from '../services/challengeService';
-import { setScanLimitUser, setPremiumStatus } from '../services/scanLimitService';
-import { LANCEMENT_OFFERT } from '../../api/_lancement.js';
-import { estFondateur } from '../utils/revizPlus.js';
+import { setScanLimitUser, setPremiumStatus, setRevizPlusOffert } from '../services/scanLimitService';
+import { estFondateur, revizPlusOffertPour } from '../utils/revizPlus.js';
 import { readSessionCache, writeSessionCache, clearSessionCache, userFromSessionCache } from '../services/sessionCache';
 import { track } from '../services/statsService';
 import { apiFetch, apiUrl } from '../services/apiClient';
@@ -504,6 +503,11 @@ export function AuthProvider({ children }) {
     }
   }
 
+  // Réviz+ offert à ce compte : à tous pendant le lancement, puis aux
+  // fondateurs jusqu'à la fin de la grâce (même règle que l'API).
+  const offert = !isPremium && revizPlusOffertPour(currentUser?.isGuest ? null : currentUser?.metadata?.creationTime);
+  setRevizPlusOffert(offert); // simple variable de module, réglée avant le rendu des enfants
+
   // Identité stable du value : sans useMemo, chaque render du provider
   // re-rendait tous les consommateurs (~15 pages/composants). Les fonctions
   // sont recréées à chaque render mais seules celles closant sur un état
@@ -517,9 +521,10 @@ export function AuthProvider({ children }) {
     consent,
     needsProfileSetup,
     isPremium, // abonnement payé (Stripe)
-    // Avantages Réviz+ : abonné, ou offert à tous pendant le lancement.
-    hasRevizPlus: isPremium || LANCEMENT_OFFERT,
-    revizPlusOffert: LANCEMENT_OFFERT && !isPremium,
+    // Avantages Réviz+ : abonné, ou offert (à tous pendant le lancement).
+    // Après la bascule, les fondateurs le gardent jusqu'à la fin de la grâce.
+    hasRevizPlus: isPremium || offert,
+    revizPlusOffert: offert,
     // Compte créé pendant le lancement (jamais un invité).
     estFondateur: !!currentUser && !currentUser.isGuest && estFondateur(currentUser.metadata?.creationTime),
     isGuest: !!currentUser?.isGuest,
@@ -541,7 +546,7 @@ export function AuthProvider({ children }) {
     updateUserPassword,
     resendVerificationEmail,
     deleteAccount,
-  }), [currentUser, loading, consentBlocked, consent, needsProfileSetup, isPremium, guest, levelTick]);
+  }), [currentUser, loading, consentBlocked, consent, needsProfileSetup, isPremium, offert, guest, levelTick]);
 
   // Enfants rendus dès que Firebase a confirmé la session — ou immédiatement
   // depuis le cache local (démarrage optimiste). Sans cache, on attend :

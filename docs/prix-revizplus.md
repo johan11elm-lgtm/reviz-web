@@ -132,16 +132,24 @@ Coûts par payeur et par mois :
 3. **Le papier** : CGV et mentions légales avec SIRET et adresse (branche
    `stripe-live`), Vercel Pro (le plan Hobby interdit l'usage commercial).
 
-### Le calendrier
+### Le calendrier (décidé le 2026-10-11 : payant le lundi 26 octobre)
 
-| Quand | Quoi |
-|---|---|
-| Fait le 2026-10-11 | Le prix d'après est affiché partout (landing, fiche Réviz+, popup) et le prix fondateur est promis. La bascule ne sera pas une surprise. |
-| J-30 | Fixer la date D. Mettre `FONDATEURS_JUSQU_AU = D` dans `api/_lancement.js` : les comptes créés avant D sont fondateurs, les autres non. Bandeau dans l'app et email aux élèves, email aux parents connus (consentement) : « Le D, Réviz+ devient payant. Ce qui reste gratuit : … Pour toi : 29 € par an, tant que tu restes abonné. » |
-| J-7 | Rappel, même canaux. |
-| Jour D | `STRIPE_SECRET_KEY=sk_live_… bash scripts/stripe-prix.sh prod_UCEkP56xqL2PYg` ; variables Vercel en réel (clé secrète, nouveau webhook réel → `STRIPE_WEBHOOK_SECRET`) ; portail client configuré en réel (changement de formule autorisé) ; `LANCEMENT_OFFERT = false` dans l'app **et** dans la landing ; CGV en ligne. |
-| D à D+14 | Délai de grâce : les fondateurs gardent Réviz+ quatorze jours avec un compte à rebours (« Ton Réviz+ offert se termine dans 5 jours »), et le bouton « Garder Réviz+ à 29 € par an ». À coder avant D. |
-| Après D | Nouveaux inscrits : gratuit, plus l'essai de sept jours au premier contrôle noté (à coder). Suivre dans PostHog la part des fondateurs qui s'abonnent. |
+Les dates vivent dans `api/_lancement.js` (app et API) et dans
+`reviz-landing/src/lib/data.ts` (landing). `LANCEMENT_OFFERT` reste
+l'interrupteur manuel : rien ne devient payant tout seul.
+
+| Quand | Quoi | État |
+|---|---|---|
+| 11 → 22 octobre | Landing : prix barrés, « offert jusqu'au 25 octobre », compte à rebours, argument « inscris-toi avant le 25 octobre ». App : carte Réviz+ et popup avec la date et le ticket fondateur. Les comptes créés avant le 26 octobre sont fondateurs (`FONDATEURS_JUSQU_AU`). | En place |
+| 23 → 25 octobre | La popup revient une fois (« Plus que 3 jours ») et la carte affiche le compte à rebours. | Automatique |
+| 25 octobre au soir | Vérifier les conditions (cumul, SIRET, CGV). Si une manque : repousser les dates dans les deux fichiers, rien d'autre. | À faire |
+| 26 octobre | `STRIPE_SECRET_KEY=sk_live_… bash scripts/stripe-prix.sh prod_UCEkP56xqL2PYg` ; variables Vercel en réel (clé secrète, nouveau webhook réel → `STRIPE_WEBHOOK_SECRET`) ; portail client en réel ; `LANCEMENT_OFFERT = false` dans `api/_lancement.js` **et** `reviz-landing/src/lib/data.ts` ; CGV en ligne. | À faire |
+| 26 octobre → 8 novembre | Grâce des fondateurs : Réviz+ reste offert (app et API), la carte devient « Garde ton Réviz+ » avec le bouton « Garder Réviz+ à 29 €/an », la popup revient une fois. | Automatique après l'interrupteur |
+| À partir du 9 novembre | Fondateurs non abonnés : gratuit, avec le tarif fondateur toujours proposé. Nouveaux comptes : gratuit, prix public. | Automatique |
+
+Les vacances de la Toussaint (17 octobre → 2 novembre) tombent pendant la
+bascule : la grâce couvre la semaine de la rentrée, quand les contrôles
+reprennent.
 
 ### Ce que vit un élève qui ne s'abonne pas
 
@@ -174,16 +182,16 @@ une date limite dans `api/_prix.js`.
   `revizplus_fondateur_mensuel`), sessions Checkout vérifiées.
 - Stripe **réel** : pas encore créés (le connecteur n'a que la lecture) ; le
   script ci-dessus s'en charge le jour D.
+- Bascule datée (2026-10-11) : `FIN_LANCEMENT`, `FONDATEURS_JUSQU_AU`, `FIN_GRACE_FONDATEURS` dans `api/_lancement.js` ; règle « offert » commune à l'app (`revizPlusOffertPour`) et à l'API (`api/_offert.js`) ; carte et popup Réviz+ par période (`phaseRevizPlus`).
 - Landing : prix d'après et prix fondateur affichés (tarifs, FAQ, parents,
   comparatif, llms.txt).
 
-## Reste à faire avant le jour D
+## Reste à faire avant le 26 octobre
 
-- Délai de grâce des fondateurs et compte à rebours.
 - Essai de sept jours au premier contrôle (côté serveur, champ non modifiable
   par l'élève).
 - Bouton « Demander à mes parents » (email au parent avec lien de paiement).
-- Bandeau et emails d'annonce J-30 et J-7.
+- Emails d'annonce aux élèves et aux parents (les popups de l'app sont faites).
 - Fusionner la branche `stripe-live` (CGV) : elle modifie encore
   `api/create-checkout.js`, devenu `api/_checkout.js`.
 

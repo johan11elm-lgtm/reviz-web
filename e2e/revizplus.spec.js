@@ -4,7 +4,7 @@ import { test, expect } from '@playwright/test'
 import { mockApiRoutes, signup, verifyEmailAndOnboard } from './helpers'
 
 const fermerPopups = async page => {
-  for (const nom of ['Réviz+ est offert', 'La Battle']) {
+  for (const nom of [/Réviz\+ offert/, 'La Battle']) {
     await page.getByRole('dialog', { name: nom }).getByRole('button', { name: 'Plus tard' }).click({ timeout: 1500 }).catch(() => {})
   }
 }

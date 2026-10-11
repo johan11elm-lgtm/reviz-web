@@ -1,7 +1,8 @@
 import { Mascot } from './Mascot';
 import { ChoixFormule } from './ChoixFormule';
 import { useModalA11y } from '../hooks/useModalA11y';
-import { LANCEMENT_OFFERT } from '../../api/_lancement.js';
+import { useAuth } from '../context/AuthContext';
+import { LANCEMENT_OFFERT, DERNIER_JOUR_OFFERT, DERNIER_JOUR_GRACE } from '../../api/_lancement.js';
 import './PremiumModal.css';
 
 /**
@@ -9,6 +10,7 @@ import './PremiumModal.css';
  */
 export function PremiumModal({ onClose, used = 5, limit = 5 }) {
   const ref = useModalA11y(onClose);
+  const { revizPlusOffert } = useAuth();
 
   const now = new Date();
   const day = now.getDay();
@@ -38,8 +40,10 @@ export function PremiumModal({ onClose, used = 5, limit = 5 }) {
           ))}
         </div>}
 
-        {LANCEMENT_OFFERT && (
-          <p className="premium-sub">Réviz+ est offert pendant le lancement : c'est déjà la limite la plus haute.</p>
+        {revizPlusOffert && (
+          <p className="premium-sub">
+            Réviz+ t'est offert jusqu'au {LANCEMENT_OFFERT ? DERNIER_JOUR_OFFERT : DERNIER_JOUR_GRACE} : c'est déjà la limite la plus haute.
+          </p>
         )}
 
         {!LANCEMENT_OFFERT && <div className="premium-divider" />}
