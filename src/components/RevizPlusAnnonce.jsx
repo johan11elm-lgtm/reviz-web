@@ -39,6 +39,11 @@ const TEXTES = {
     titre: `Réviz+ offert jusqu’au ${DERNIER_JOUR_OFFERT}`,
     sous: `Ensuite Réviz+ devient payant. Toi, tu le gardes offert jusqu’au ${DERNIER_JOUR_GRACE}, puis à ${fondateur} si tu t’abonnes.`,
   },
+  prolonge: {
+    pill: () => 'Offert',
+    titre: 'Réviz+ est offert',
+    sous: `Pendant le lancement, tout Réviz+ est gratuit pour toi. Ensuite, comme tu t’es inscrit pendant le lancement, tu le gardes à ${fondateur}.`,
+  },
   grace: {
     pill: () => 'Membre fondateur',
     titre: 'Garde ton Réviz+',

@@ -26,10 +26,15 @@ export function revizPlusOffertPour(creationTime, now = Date.now()) {
 /**
  * Où en est la bascule, pour l'affichage :
  * 'lancement' → 'derniers-jours' (3 derniers jours offerts) → 'grace'
- * (payant, fondateurs encore offerts) → 'payant'.
+ * (payant, fondateurs encore offerts) → 'payant'. 'prolonge' : la date est
+ * passée mais l'interrupteur est resté ouvert (bascule repoussée) ; on
+ * n'affiche alors plus de date.
  */
 export function phaseRevizPlus(now = Date.now()) {
-  if (LANCEMENT_OFFERT) return now >= Date.parse(FIN_LANCEMENT) - 3 * JOUR ? 'derniers-jours' : 'lancement'
+  if (LANCEMENT_OFFERT) {
+    if (now >= Date.parse(FIN_LANCEMENT)) return 'prolonge'
+    return now >= Date.parse(FIN_LANCEMENT) - 3 * JOUR ? 'derniers-jours' : 'lancement'
+  }
   return now < Date.parse(FIN_GRACE_FONDATEURS) ? 'grace' : 'payant'
 }
 

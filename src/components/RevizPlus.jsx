@@ -60,7 +60,9 @@ export function TicketFondateur({ depuis, className = '' }) {
         <span className="rp-ticket-note">
           {phaseRevizPlus() === 'grace' || phaseRevizPlus() === 'payant'
             ? 'Tant que tu restes abonné.'
-            : `Après le ${DERNIER_JOUR_OFFERT}, tant que tu restes abonné.`}
+            : phaseRevizPlus() === 'prolonge'
+              ? 'Après le lancement, tant que tu restes abonné.'
+              : `Après le ${DERNIER_JOUR_OFFERT}, tant que tu restes abonné.`}
           {depuis && <> Membre depuis {depuis}.</>}
         </span>
       </div>
@@ -112,7 +114,9 @@ export function RevizPlusCard({ onTheme, className = '' }) {
       ? `Réviz+ est maintenant payant. Pour toi, il reste offert jusqu'au ${DERNIER_JOUR_GRACE} : ${plusQue(joursAvant(FIN_GRACE_FONDATEURS))}.`
       : phase === 'derniers-jours'
         ? `Offert jusqu'au ${DERNIER_JOUR_OFFERT} : ${plusQue(joursAvant(FIN_LANCEMENT))}.`
-        : `Offert jusqu'au ${DERNIER_JOUR_OFFERT}. Rien à payer, rien à activer.`;
+        : phase === 'prolonge'
+          ? 'Offert pendant le lancement de Réviz. Rien à payer, rien à activer.'
+          : `Offert jusqu'au ${DERNIER_JOUR_OFFERT}. Rien à payer, rien à activer.`;
 
   // Pendant la grâce : s'abonner au tarif fondateur depuis la carte.
   const [paiement, setPaiement] = useState(null);

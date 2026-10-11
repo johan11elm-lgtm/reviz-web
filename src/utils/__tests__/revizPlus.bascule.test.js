@@ -26,6 +26,10 @@ describe('bascule Réviz+ — pendant le lancement', () => {
     expect(phaseRevizPlus(t('2026-10-23T08:00:00+02:00'))).toBe('derniers-jours')
   })
 
+  it('date passée mais interrupteur ouvert : phase prolonge, plus de date', () => {
+    expect(phaseRevizPlus(t('2026-10-27T08:00:00+01:00'))).toBe('prolonge')
+  })
+
   it('fondateur = compte créé avant le 26 octobre', () => {
     expect(estFondateur(AVANT)).toBe(true)
     expect(estFondateur('2026-10-25T23:30:00+01:00')).toBe(true)
