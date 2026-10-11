@@ -14,6 +14,7 @@ import { auth, db } from './firebaseConfig'
 import { apiFetch } from './apiClient'
 import { planifierRappelsControles } from './reminderService'
 import { controlesAVenir, jourIso } from '../utils/agenda'
+import { coursDemo, estLienDemo } from '../utils/edtDemo'
 
 const cleAgenda = uid => `reviz-agenda-${uid}`
 const cleCours = uid => `reviz-agenda-cours-${uid}`
@@ -103,6 +104,11 @@ export function coursEnCache(uid) {
  * @throws {Error} LIEN_INVALIDE | LIEN_EXPIRE | PRONOTE_INDISPONIBLE | UNAUTHORIZED | NETWORK_ERROR
  */
 export async function chargerCours(user, lien, { du, au }) {
+  if (estLienDemo(lien)) {
+    const cours = coursDemo({ du, au })
+    ecrireLocal(cleCours(user.uid), { du, au, cours, le: Date.now() })
+    return cours
+  }
   const idToken = await auth.currentUser?.getIdToken().catch(() => null)
   if (!idToken) throw new Error('UNAUTHORIZED')
   let res
