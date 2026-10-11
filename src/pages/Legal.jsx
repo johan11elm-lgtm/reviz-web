@@ -63,7 +63,7 @@ const PAGES = {
         </Section>
 
         <Section title="Mineurs">
-          <p>Réviz s'adresse aux élèves du système scolaire français, du collège au lycée. Conformément à la réglementation française, l'utilisation de Réviz par un mineur de moins de 15 ans nécessite l'autorisation d'un parent ou représentant légal, quelle que soit la façon dont il se connecte (email, Google, Apple, Microsoft ou TikTok). Dès l'inscription, un email est envoyé au parent indiqué, qui peut accepter ou refuser. L'élève peut utiliser l'application pendant ce délai ; en cas de refus, ou sans réponse sous 7 jours, son accès est suspendu jusqu'à l'accord du parent.</p>
+          <p>Réviz s'adresse aux élèves du système scolaire français, du collège au lycée. Conformément à la réglementation française, l'utilisation de Réviz par un mineur de moins de 15 ans nécessite l'autorisation d'un parent ou représentant légal, quelle que soit la façon dont il se connecte (email, Google, Apple, Microsoft ou TikTok). Dès l'inscription, un email est envoyé au parent indiqué, qui peut accepter ou refuser. L'élève peut utiliser l'application pendant ce délai ; en cas de refus, ou sans réponse sous 10 jours, son accès est suspendu jusqu'à l'accord du parent.</p>
           <p>Chaque service de connexion applique aussi ses propres règles d'âge : par exemple, TikTok est réservé aux 13 ans et plus.</p>
         </Section>
 
@@ -119,7 +119,7 @@ const PAGES = {
         </Section>
 
         <Section title="Inscription">
-          <p>L'inscription est gratuite. Tu peux créer ton compte avec un prénom, une adresse email et un mot de passe, ou te connecter avec un compte Google, Apple, Microsoft ou TikTok. Dans tous les cas, ta date de naissance et ta classe te sont demandées. Les utilisateurs de moins de 15 ans doivent disposer de l'autorisation d'un parent ou représentant légal, demandée par email dès l'inscription (accès suspendu en cas de refus ou sans réponse sous 7 jours).</p>
+          <p>L'inscription est gratuite. Tu peux créer ton compte avec un prénom, une adresse email et un mot de passe, ou te connecter avec un compte Google, Apple, Microsoft ou TikTok. Dans tous les cas, ta date de naissance et ta classe te sont demandées. Les utilisateurs de moins de 15 ans doivent disposer de l'autorisation d'un parent ou représentant légal, demandée par email dès l'inscription (accès suspendu en cas de refus ou sans réponse sous 10 jours).</p>
           <p>Si tu te connectes avec un autre service, ce sont aussi ses conditions d'utilisation qui s'appliquent à ce compte (par exemple l'âge minimum de TikTok).</p>
           <p>Tu es responsable de la confidentialité de tes identifiants de connexion, y compris ceux du compte Google, Apple, Microsoft ou TikTok que tu utilises pour te connecter.</p>
         </Section>

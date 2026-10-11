@@ -7,7 +7,7 @@
 // refus, l'accès est suspendu jusqu'à son accord.
 // -------------------------------------------------------
 
-export const DELAI_REPONSE_MS = 7 * 24 * 60 * 60 * 1000 // 7 jours
+export const DELAI_REPONSE_MS = 10 * 24 * 60 * 60 * 1000 // 10 jours
 
 /**
  * @param {{ under15:boolean, consent:object|null, now?:number }} p

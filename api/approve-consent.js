@@ -12,7 +12,7 @@ import { getDb } from './_firebaseAdmin.js';
 
 export const config = { maxDuration: 30 };
 
-const TOKEN_TTL_MS = 7 * 24 * 60 * 60 * 1000; // 7 jours
+const TOKEN_TTL_MS = 10 * 24 * 60 * 60 * 1000; // 10 jours, = délai de réponse (src/utils/consent.js)
 
 function safeEqual(a, b) {
   const ab = Buffer.from(String(a));

@@ -63,7 +63,7 @@ describe('approve-consent — POST approuve', () => {
   })
 
   it('POST avec token expiré → 410', async () => {
-    docGet.mockResolvedValue({ exists: true, data: () => ({ status: 'pending', token: 'good', createdAt: Date.now() - 8 * DAY }) })
+    docGet.mockResolvedValue({ exists: true, data: () => ({ status: 'pending', token: 'good', createdAt: Date.now() - 11 * DAY }) })
     const res = mockRes()
     await handler({ method: 'POST', body: { token: 'good', uid: 'u' } }, res)
     expect(res.statusCode).toBe(410)

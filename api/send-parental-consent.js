@@ -4,7 +4,7 @@
 // L'uid est dérivé du token Firebase vérifié — JAMAIS du body.
 // Génère un token, le stocke dans Firestore, envoie l'email au parent via Resend.
 // L'élève utilise déjà l'app : le parent accepte ou refuse depuis l'email. Sans
-// réponse sous 7 jours (src/utils/consent.js), l'accès est suspendu.
+// réponse sous 10 jours (src/utils/consent.js), l'accès est suspendu.
 
 import { Resend } from 'resend';
 import { randomUUID } from 'node:crypto';
@@ -79,7 +79,7 @@ export default async function handler(req, res) {
       token,
       createdAt: now,
       // Début du délai de réponse : conservé d'un renvoi à l'autre, sinon
-      // chaque renvoi (ou un refus suivi d'un renvoi) rouvrirait 7 jours.
+      // chaque renvoi (ou un refus suivi d'un renvoi) rouvrirait le délai.
       firstRequestedAt: d?.firstRequestedAt ?? now,
     });
 
@@ -114,8 +114,8 @@ export default async function handler(req, res) {
           <a href="${lien}" style="${bouton} background: #1A1A1A; color: white;">J'accepte</a>
           <a href="${lien}&choix=refuser" style="${bouton} background: #F7F7F5; color: #1A1A1A; border: 1px solid #DDD;">Je refuse</a>
           <p style="color: #888; font-size: 13px; margin-top: 24px;">
-            Vous confirmerez votre choix sur la page qui s'ouvre. Ce lien est valable 7 jours.<br/>
-            En cas de refus, ou sans réponse sous 7 jours, l'accès de votre enfant à Réviz est suspendu.<br/><br/>
+            Vous confirmerez votre choix sur la page qui s'ouvre. Ce lien est valable 10 jours.<br/>
+            En cas de refus, ou sans réponse sous 10 jours, l'accès de votre enfant à Réviz est suspendu.<br/><br/>
             <a href="https://app.revizapp.fr/legal/confidentialite" style="color: #888;">Politique de confidentialité</a>
           </p>
         </div>

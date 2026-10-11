@@ -21,7 +21,7 @@ describe('consentGate', () => {
 
   it('email parti, délai en cours → accès ouvert avec les jours restants', () => {
     const c = { status: 'pending', parentEmail: 'p@f.fr', createdAt: now, firstRequestedAt: now - 2 * DAY }
-    expect(gate(c)).toEqual({ status: 'en-attente', blocked: false, parentEmail: 'p@f.fr', joursRestants: 5 })
+    expect(gate(c)).toEqual({ status: 'en-attente', blocked: false, parentEmail: 'p@f.fr', joursRestants: 8 })
   })
 
   it('le délai part de la première demande, pas du dernier renvoi', () => {
@@ -30,7 +30,7 @@ describe('consentGate', () => {
   })
 
   it('ancienne demande sans firstRequestedAt → délai depuis createdAt', () => {
-    expect(gate({ status: 'pending', parentEmail: 'p@f.fr', createdAt: now - 8 * DAY }))
+    expect(gate({ status: 'pending', parentEmail: 'p@f.fr', createdAt: now - 11 * DAY }))
       .toMatchObject({ status: 'sans-reponse', blocked: true })
   })
 
