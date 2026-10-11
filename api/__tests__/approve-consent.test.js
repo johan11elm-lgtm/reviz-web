@@ -79,13 +79,12 @@ describe('approve-consent — POST approuve', () => {
   })
 })
 
-describe('approve-consent — refus du parent', () => {
-  it('GET ?choix=refuser met le refus en premier, sans rien muter', async () => {
+describe('approve-consent — refus (plus proposé, toujours géré)', () => {
+  it('la page de confirmation ne propose pas de refus', async () => {
     const res = mockRes()
-    await handler({ method: 'GET', query: { token: 't', uid: 'u', choix: 'refuser' } }, res)
-    expect(res.statusCode).toBe(200)
-    expect(res.body.indexOf('value="refuser"')).toBeLessThan(res.body.indexOf('value="accepter"'))
-    expect(docUpdate).not.toHaveBeenCalled()
+    await handler({ method: 'GET', query: { token: 't', uid: 'u' } }, res)
+    expect(res.body).toContain('Donner mon autorisation')
+    expect(res.body).not.toContain('value="refuser"')
   })
 
   it('POST decision=refuser → statut refusé + token invalidé', async () => {

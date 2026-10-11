@@ -103,13 +103,14 @@ describe('send-parental-consent — sécurité', () => {
     expect(docSet).toHaveBeenCalledWith(expect.objectContaining({ status: 'pending', firstRequestedAt: 1000 }))
   })
 
-  it('l\'email propose d\'accepter et de refuser', async () => {
+  it('l\'email propose seulement de donner son autorisation', async () => {
     verifyIdToken.mockResolvedValue({ uid: 'u1', email: 'kid@test.fr' })
     docGet.mockResolvedValue({ exists: false })
     await handler({ method: 'POST', body: { idToken: 'ok', parentEmail: 'parent@test.fr', childName: 'Léa' } }, mockRes())
     const html = emailsSend.mock.calls[0][0].html
-    expect(html).toContain('J\'accepte')
-    expect(html).toMatch(/approve-consent\?token=[^"]+&amp;uid=u1&amp;choix=refuser|approve-consent\?token=[^"]+&uid=u1&choix=refuser/)
+    expect(html).toContain('Donner mon autorisation')
+    expect(html).toMatch(/approve-consent\?token=[^"]+&uid=u1"/)
+    expect(html).not.toContain('refuse')
   })
 
   it('échappe childName dans le HTML de l\'email (anti-injection)', async () => {

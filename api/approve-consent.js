@@ -1,7 +1,8 @@
 // Vercel Serverless Function (Node runtime)
-// GET  /api/approve-consent?token=xxx&uid=yyy[&choix=refuser] → page de confirmation (NE MUTE RIEN)
-// POST /api/approve-consent (form: token, uid, decision)       → enregistre l'accord ou le refus
-//   decision = 'accepter' (défaut) | 'refuser'. Un refus suspend l'accès de l'enfant.
+// GET  /api/approve-consent?token=xxx&uid=yyy → page de confirmation (NE MUTE RIEN)
+// POST /api/approve-consent (form: token, uid, decision) → enregistre l'autorisation
+//   decision = 'accepter' (défaut) | 'refuser'. Le refus n'est plus proposé au
+//   parent (il lui suffit d'ignorer l'email) mais reste géré : il suspend l'accès.
 //
 // La mutation est volontairement réservée au POST : les scanners de liens / proxys
 // de sécurité / prévisualisations d'email font des GET automatiques et pourraient
@@ -29,12 +30,12 @@ function escapeHtml(s) {
 
 export default async function handler(req, res) {
   if (req.method === 'GET') {
-    const { token, uid, choix } = req.query ?? {};
+    const { token, uid } = req.query ?? {};
     if (!token || !uid) {
       return res.status(400).send(page('Lien invalide', 'Ce lien est incomplet ou invalide.'));
     }
-    // Aucune mutation sur GET : on affiche une page de confirmation (boutons → POST).
-    return res.status(200).send(confirmPage(token, uid, choix === 'refuser'));
+    // Aucune mutation sur GET : on affiche une page de confirmation (bouton → POST).
+    return res.status(200).send(confirmPage(token, uid));
   }
 
   if (req.method === 'POST') {
@@ -93,27 +94,23 @@ h1{font-size:22px;color:#1A1A1A;margin:0 0 12px;}
 p{color:#555;font-size:15px;line-height:1.5;margin:0 0 16px;}
 .small{color:#999;font-size:13px;}
 button{background:#1A1A1A;color:#fff;border:0;padding:14px 28px;border-radius:10px;font-weight:600;font-size:15px;cursor:pointer;width:100%;margin:0 0 10px;}
-button.secondaire{background:#F7F7F5;color:#1A1A1A;border:1px solid #DDD;}
 a{color:#1A1A1A;font-weight:600;}`;
 
-function confirmPage(token, uid, refusDemande = false) {
+function confirmPage(token, uid) {
   const t = escapeHtml(token), u = escapeHtml(uid);
-  // Le bouton choisi dans l'email passe en premier, en style principal.
-  const accepter = `<button type="submit" name="decision" value="accepter"${refusDemande ? ' class="secondaire"' : ''}>J'accepte</button>`;
-  const refuser = `<button type="submit" name="decision" value="refuser"${refusDemande ? '' : ' class="secondaire"'}>Je refuse</button>`;
   return `<!DOCTYPE html><html lang="fr"><head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex"><title>Autorisation parentale — Réviz</title>
 <style>${STYLE}</style></head>
 <body><div class="card">
 <h1>Réviz</h1>
-<p>Votre enfant utilise <strong>Réviz</strong>, une application d'aide à la révision scolaire. Acceptez-vous qu'il continue à l'utiliser ?</p>
+<p>Votre enfant utilise <strong>Réviz</strong>, une application d'aide à la révision scolaire. Confirmez votre autorisation pour qu'il continue à l'utiliser.</p>
 <form method="POST" action="/api/approve-consent">
 <input type="hidden" name="token" value="${t}">
 <input type="hidden" name="uid" value="${u}">
-${refusDemande ? refuser + accepter : accepter + refuser}
+<button type="submit" name="decision" value="accepter">Donner mon autorisation</button>
 </form>
-<p class="small" style="margin-top:6px;">En cas de refus, l'accès de votre enfant à Réviz est suspendu.</p>
+<p class="small" style="margin-top:6px;">Sans votre autorisation sous 10 jours, l'accès de votre enfant à Réviz est suspendu.</p>
 </div></body></html>`;
 }
 
