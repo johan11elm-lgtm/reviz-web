@@ -55,6 +55,7 @@ export function ChoixFormule({ className = '' }) {
               <span className="cf-option-detail">{o.detail}</span>
             </span>
             <span className="cf-option-prix">
+              {estFondateur && <s className="cf-option-barre">{prixDe(o.id).montant}</s>}
               {o.prix.montant}<span className="cf-option-cadence">{o.prix.cadence}</span>
             </span>
             {o.badge && <span className="cf-option-badge">{o.badge}</span>}

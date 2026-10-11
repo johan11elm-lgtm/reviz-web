@@ -6,7 +6,7 @@ import { GemIcon, SparkIcon, CameraIcon, ChatIcon, SunIcon } from './Icons';
 import { getScanStatus } from '../services/scanLimitService';
 import { moisInscription, quotaCoachDuJour } from '../utils/revizPlus';
 import { LANCEMENT_CHAT_LIMIT } from '../../api/_lancement.js';
-import { PRIX, PRIX_FONDATEUR } from '../../api/_prix.js';
+import { PRIX, PRIX_FONDATEUR, remiseFondateur } from '../../api/_prix.js';
 import './RevizPlus.css';
 
 /**
@@ -34,6 +34,32 @@ export function FondateurSeal({ className = '' }) {
     <span className={['rp-seal', className].filter(Boolean).join(' ')}>
       <SparkIcon /><span>Membre fondateur</span>
     </span>
+  );
+}
+
+/**
+ * Ticket « prix fondateur » : ce que l'élève du lancement paiera après, face
+ * au prix public barré. Forme de ticket (encoches) : un avantage à garder.
+ */
+export function TicketFondateur({ depuis, className = '' }) {
+  return (
+    <div className={['rp-ticket', className].filter(Boolean).join(' ')}>
+      <div className="rp-ticket-main">
+        <span className="rp-ticket-label">
+          <SparkIcon /><span>Ton prix fondateur</span>
+        </span>
+        <span className="rp-ticket-prix">
+          <span className="rp-ticket-montant">{PRIX_FONDATEUR.annuel.montant}</span>
+          <span className="rp-ticket-cadence">{PRIX_FONDATEUR.annuel.cadence}</span>
+          <s className="rp-ticket-barre" aria-label={`au lieu de ${PRIX.annuel.montant}`}>{PRIX.annuel.montant}</s>
+        </span>
+        <span className="rp-ticket-note">
+          Après le lancement, tant que tu restes abonné.
+          {depuis && <> Membre depuis {depuis}.</>}
+        </span>
+      </div>
+      <span className="rp-ticket-remise" aria-hidden="true">−{remiseFondateur()} %</span>
+    </div>
   );
 }
 
@@ -83,14 +109,12 @@ export function RevizPlusCard({ onTheme, className = '' }) {
 
       <h2 className="rp-card-title" id="rp-card-titre">Tout Réviz+ est à toi</h2>
       <p className="rp-card-sub">
-        {isPremium
-          ? 'Ton abonnement est actif.'
-          : estFondateur
-            ? `Offert pendant le lancement de Réviz. Ensuite, Réviz+ coûtera ${PRIX.annuel.montant} par an : toi, membre fondateur, tu le garderas à ${PRIX_FONDATEUR.annuel.montant}.`
-            : 'Offert pendant le lancement de Réviz. Rien à payer, rien à activer.'}
+        {isPremium ? 'Ton abonnement est actif.' : 'Offert pendant le lancement de Réviz. Rien à payer, rien à activer.'}
       </p>
 
-      {estFondateur && (
+      {estFondateur && !isPremium ? (
+        <TicketFondateur depuis={depuis} />
+      ) : estFondateur && (
         <div className="rp-fondateur">
           <FondateurSeal />
           {depuis && <span className="rp-fondateur-depuis">depuis {depuis}</span>}

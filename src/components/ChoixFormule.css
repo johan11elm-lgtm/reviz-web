@@ -106,3 +106,10 @@
   color: var(--accent-red-ink);
   text-align: center;
 }
+
+.cf-option-barre {
+  margin-right: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-muted);
+}

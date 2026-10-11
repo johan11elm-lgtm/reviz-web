@@ -383,3 +383,79 @@ button.rp-badge:active { transform: scale(0.96); }
   html:not(.native) .rp-card--wide .rp-card-mascot { top: auto; bottom: 10px; right: 14px; }
   html:not(.native) .rp-card--wide .rp-card-head { padding-right: 0; }
 }
+
+/* ── Ticket « prix fondateur » (TicketFondateur) ──
+   Bordure pointillée dorée, deux encoches découpées par un masque : la carte
+   en dégradé reste visible à travers. */
+.rp-ticket {
+  --encoche: 9px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 13px 16px 13px 18px;
+  border: 1.5px dashed rgba(242, 205, 132, 0.55);
+  border-radius: 14px;
+  background: linear-gradient(120deg, rgba(242, 205, 132, 0.16), rgba(242, 205, 132, 0.06));
+  -webkit-mask:
+    radial-gradient(circle var(--encoche) at 0 50%, transparent 96%, #000) left / 51% 100% no-repeat,
+    radial-gradient(circle var(--encoche) at 100% 50%, transparent 96%, #000) right / 51% 100% no-repeat;
+  mask:
+    radial-gradient(circle var(--encoche) at 0 50%, transparent 96%, #000) left / 51% 100% no-repeat,
+    radial-gradient(circle var(--encoche) at 100% 50%, transparent 96%, #000) right / 51% 100% no-repeat;
+}
+.rp-ticket-main {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+  flex: 1;
+}
+.rp-ticket-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--rp-gold-text);
+  font: 700 12px/1.2 'Geist', sans-serif;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+}
+.rp-ticket-label .rv-ico { font-size: 13px; }
+.rp-ticket-prix {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+}
+.rp-ticket-montant {
+  font: 800 30px/1.05 'Geist', sans-serif;
+  letter-spacing: -1px;
+  background: linear-gradient(135deg, var(--rp-gold-1), var(--rp-gold-2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.rp-ticket-cadence {
+  font: 700 14px/1 'Geist', sans-serif;
+  color: var(--rp-gold-text);
+}
+.rp-ticket-barre {
+  margin-left: 6px;
+  font: 600 15px/1 'Geist', sans-serif;
+  color: var(--rp-on-sub);
+  text-decoration-thickness: 1.5px;
+}
+.rp-ticket-note {
+  font-size: 12.5px;
+  line-height: 1.4;
+  color: var(--rp-on-sub);
+}
+.rp-ticket-remise {
+  flex-shrink: 0;
+  padding: 7px 9px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--rp-gold-1), var(--rp-gold-2));
+  color: var(--rp-gold-ink);
+  font: 900 15px/1 'Geist', sans-serif;
+  letter-spacing: -0.3px;
+  transform: rotate(-4deg);
+  box-shadow: 0 4px 12px rgba(227, 169, 79, 0.3);
+}
