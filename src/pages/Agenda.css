@@ -56,7 +56,7 @@
   padding: 8px 20px 6px; /* place pour les pastilles numérotées (top: -6px) */
   display: grid;
   grid-auto-flow: column;
-  grid-auto-columns: 78%;
+  grid-auto-columns: 86%;
   gap: 10px;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
@@ -87,52 +87,16 @@
   font-size: 13px;
   font-weight: 800;
 }
-.agenda-tuto-ecran {
-  height: 92px;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 6px;
-  padding: 10px;
-  background: var(--bg-card);
-  border: 1px solid var(--border-subtle);
+.agenda-tuto-capture {
+  width: 100%;
+  aspect-ratio: 640 / 290;
+  object-fit: cover;
+  object-position: top center;
   border-radius: 12px;
-  font-size: 11.5px;
-  color: var(--text-secondary);
-  overflow: hidden;
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-card);
 }
-.agenda-tuto-onglets { display: flex; gap: 6px; }
-.agenda-tuto-onglet { padding: 3px 7px; border-radius: 6px; white-space: nowrap; }
-.agenda-tuto-onglet.actif, .agenda-tuto-item.actif {
-  background: var(--accent-violet-soft);
-  color: var(--accent-violet);
-  font-weight: 700;
-  box-shadow: inset 0 0 0 1.5px var(--accent-violet);
-}
-.agenda-tuto-menu { display: flex; flex-direction: column; gap: 3px; padding-left: 4px; }
-.agenda-tuto-item { align-self: flex-start; padding: 3px 7px; border-radius: 6px; white-space: nowrap; }
-.agenda-tuto-case { display: flex; align-items: center; gap: 6px; padding-left: 4px; }
-.agenda-tuto-coche {
-  width: 15px;
-  height: 15px;
-  display: grid;
-  place-items: center;
-  border-radius: 4px;
-  background: var(--accent-violet);
-  color: #fff;
-  font-size: 10px;
-  font-weight: 800;
-}
-.agenda-tuto-lien { color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.agenda-tuto-bouton {
-  align-self: flex-start;
-  padding: 5px 10px;
-  border-radius: 99px;
-  background: var(--accent-violet);
-  color: #fff;
-  font-weight: 700;
-}
+.agenda-tuto-note { margin: 0; font-size: 12.5px; line-height: 1.4; color: var(--text-muted); }
 .agenda-tuto-texte { margin: 0; font-size: 13.5px; line-height: 1.4; color: var(--text-secondary); }
 .agenda-tuto-texte b { color: var(--text-primary); font-weight: 700; }
 

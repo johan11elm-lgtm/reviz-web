@@ -1051,8 +1051,8 @@
   html:not(.native) .agenda-bloc.matiere-physique-chimie { border-left-color: #3B82F6; }
   html:not(.native) .agenda-bloc.matiere-technologie { border-left-color: #06B6D4; }
   html:not(.native) .agenda-bloc.matiere-anglais { border-left-color: #EAB308; }
-  /* Tutoriel Pronote : les trois étapes côte à côte */
-  html:not(.native) .agenda-tuto { grid-auto-columns: minmax(0, 1fr); overflow: visible; margin: 0; padding: 8px 0 6px; }
+  /* Tutoriel Pronote : les quatre étapes en deux rangées de deux */
+  html:not(.native) .agenda-tuto { grid-auto-flow: row; grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 16px; overflow: visible; margin: 0; padding: 8px 0 6px; }
   /* La fenêtre d'ajout se centre au lieu de monter du bas */
   html:not(.native) .agenda-overlay { align-items: center; }
   html:not(.native) .agenda-modal { border-radius: var(--radius-card); max-width: 480px; padding-bottom: 22px; }

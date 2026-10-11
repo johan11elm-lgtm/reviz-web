@@ -343,6 +343,13 @@ function salleEnClair(salle) {
   return /^[A-Z]?\d+[A-Z]?$/i.test(salle.trim()) ? `salle ${salle.trim()}` : salle.trim();
 }
 
+const TUTO_PRONOTE = [
+  <>Dans Pronote, ouvre le <b>menu</b> en haut à droite.</>,
+  <>Touche <b>Mes données</b>, puis <b>Compte</b>.</>,
+  <>Choisis <b>Export au format ICal</b>.</>,
+  <>Touche <b>Copier l'adresse</b>, puis reviens ici.</>,
+];
+
 function RelierPronote({ user, onAgenda }) {
   const [saisie, setSaisie] = useState('');
   const [etat, setEtat] = useState('');
@@ -381,39 +388,18 @@ function RelierPronote({ user, onAgenda }) {
       <h2 id="agenda-edt-titre" className="agenda-relier-titre">Relie ton emploi du temps Pronote</h2>
       <p className="agenda-relier-texte">Ta semaine s'affiche ici, toujours à jour. Réviz ne voit que tes horaires de cours, pas tes notes.</p>
 
-      {/* Trois étapes illustrées : on glisse de l'une à l'autre sur téléphone. */}
+      {/* Le vrai parcours, capturé sur le site de démonstration de Pronote
+          (élève fictive) : on glisse d'une étape à l'autre sur téléphone. */}
       <ol className="agenda-tuto">
-        <li className="agenda-tuto-etape">
-          <span className="agenda-tuto-num">1</span>
-          <div className="agenda-tuto-ecran" aria-hidden="true">
-            <div className="agenda-tuto-onglets">
-              <span className="agenda-tuto-onglet actif">Mes données</span>
-              <span className="agenda-tuto-onglet">Notes</span>
-            </div>
-            <div className="agenda-tuto-menu">
-              <span className="agenda-tuto-item actif">Compte</span>
-              <span className="agenda-tuto-item">Documents</span>
-            </div>
-          </div>
-          <p className="agenda-tuto-texte">Dans Pronote, ouvre <b>Mes données</b>, puis <b>Compte</b>.</p>
-        </li>
-        <li className="agenda-tuto-etape">
-          <span className="agenda-tuto-num">2</span>
-          <div className="agenda-tuto-ecran" aria-hidden="true">
-            <span className="agenda-tuto-item actif">Export au format ICal</span>
-            <span className="agenda-tuto-case"><span className="agenda-tuto-coche">✓</span> Votre emploi du temps</span>
-          </div>
-          <p className="agenda-tuto-texte">Choisis <b>Export au format ICal</b>. La case emploi du temps est cochée.</p>
-        </li>
-        <li className="agenda-tuto-etape">
-          <span className="agenda-tuto-num">3</span>
-          <div className="agenda-tuto-ecran" aria-hidden="true">
-            <span className="agenda-tuto-lien">https://….index-education.net/…</span>
-            <span className="agenda-tuto-bouton">Copier l'adresse</span>
-          </div>
-          <p className="agenda-tuto-texte">Touche <b>Copier l'adresse</b>, puis reviens ici.</p>
-        </li>
+        {TUTO_PRONOTE.map((etape, i) => (
+          <li key={i} className="agenda-tuto-etape">
+            <span className="agenda-tuto-num">{i + 1}</span>
+            <img className="agenda-tuto-capture" src={`/agenda/pronote-${i + 1}.webp`} alt="" loading="lazy" />
+            <p className="agenda-tuto-texte">{etape}</p>
+          </li>
+        ))}
       </ol>
+      <p className="agenda-tuto-note">Pas trouvé dans l'app Pronote ? Fais-le depuis le site Pronote de ton établissement, dans ton navigateur.</p>
 
       <button type="button" className="rv-btn-cta rv-btn-cta--ghost agenda-coller" onClick={coller} disabled={etat === 'verif'}>
         {etat === 'verif' ? 'Vérification…' : 'Coller le lien'}
