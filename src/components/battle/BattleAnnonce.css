@@ -69,7 +69,7 @@
   width: 18px;
   height: 18px;
   margin-top: 1px;
-  color: var(--accent-orange);
+  color: var(--text-muted); /* puces neutres, comme dans la page Battle */
 }
 .battle-annonce-actions { display: flex; flex-direction: column; gap: 8px; width: 100%; margin-top: 6px; }
 

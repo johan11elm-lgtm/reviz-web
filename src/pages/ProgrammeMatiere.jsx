@@ -115,7 +115,7 @@ export default function ProgrammeMatiere() {
               </div>
               <div className="rv-card rv-card--padded programme-path-legend">
                 <div className="programme-path-legend-title">Comment ça marche</div>
-                <p>Avance chapitre par chapitre. Une étape devient verte quand toutes ses cartes sont acquises, orange quand des cartes reviennent à revoir.</p>
+                <p>Avance chapitre par chapitre. Une étape devient verte quand toutes ses cartes sont acquises, orange quand des cartes sont à travailler.</p>
                 <p>Tu peux ouvrir n'importe quel chapitre, dans l'ordre que tu veux.</p>
               </div>
             </aside>

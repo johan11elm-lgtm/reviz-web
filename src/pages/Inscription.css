@@ -16,8 +16,10 @@
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  background: var(--bg-subtle);
-  border: none;
+  /* Même bouton rond que les autres pages (.rv-bell-btn) */
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-card);
   cursor: pointer;
   flex-shrink: 0;
   position: relative;
@@ -53,11 +55,10 @@
 }
 
 .auth-label {
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+  /* Libellé de champ en phrase normale, comme sur l'essai (grammaire §2) */
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-secondary);
 }
 
 .auth-input {
@@ -347,8 +348,9 @@
 
 .signup-card:active { transform: scale(0.98); }
 .signup-card.active {
-  border-color: var(--accent-orange);
-  box-shadow: 0 0 0 3px rgba(255, 107, 0, 0.15);
+  /* Un choix fait se marque en encre (grammaire §5) */
+  border-color: var(--accent-violet);
+  box-shadow: 0 0 0 3px var(--accent-violet-soft);
 }
 
 .signup-card-emoji {
@@ -397,8 +399,8 @@
 
 .signup-card-sm:active { transform: scale(0.97); }
 .signup-card-sm.active {
-  border-color: var(--accent-orange);
-  box-shadow: 0 0 0 3px rgba(255, 107, 0, 0.15);
+  border-color: var(--accent-violet);
+  box-shadow: 0 0 0 3px var(--accent-violet-soft);
 }
 
 /* Chips (spés, filière) */
@@ -429,8 +431,8 @@
 }
 
 :root[data-theme="dark"] .signup-chip.active {
-  background: var(--accent-orange);
-  border-color: var(--accent-orange);
+  background: var(--accent-violet);
+  border-color: var(--accent-violet);
 }
 
 /* Footer collant */

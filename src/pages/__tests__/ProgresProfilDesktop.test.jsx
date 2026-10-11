@@ -79,7 +79,7 @@ describe('<Progres /> sur ordinateur', () => {
     seed()
     render(<MemoryRouter><Progres /></MemoryRouter>)
     // Comme sur la tuile de Mon programme : les cartes jamais vues d'un chapitre commencé comptent
-    const maths = await screen.findByRole('button', { name: /^Maths : 1 \/ 2 commencé, 2 cartes à revoir/ })
+    const maths = await screen.findByRole('button', { name: /^Maths : 1 \/ 2 commencé, 2 cartes à travailler/ })
     expect(screen.getByText(/chapitres commencés sur 3/)).toBeInTheDocument()
     // Français : son seul chapitre ouvert a toutes ses cartes en mémoire
     expect(screen.getByRole('button', { name: /^Français : 1 \/ 1 maîtrisé/ })).toBeInTheDocument()
@@ -91,8 +91,8 @@ describe('<Progres /> sur ordinateur', () => {
     seed()
     render(<MemoryRouter><Progres /></MemoryRouter>)
     const memoire = (await screen.findByRole('heading', { name: 'Ta mémoire' })).closest('section')
-    // 5 cartes : 3 en mémoire, 1 à revoir, 1 jamais vue → 2 à revoir aujourd'hui
-    expect(within(memoire).getByText(/cartes à revoir aujourd'hui, sur 5/).previousSibling).toHaveTextContent('2')
+    // 5 cartes : 3 en mémoire, 1 à revoir, 1 jamais vue → 2 à travailler aujourd'hui
+    expect(within(memoire).getByText(/cartes à travailler aujourd'hui, sur 5/).previousSibling).toHaveTextContent('2')
     fireEvent.click(within(memoire).getByRole('button', { name: /Réviser maintenant/ }))
     expect(localStorage.getItem('reviz-current-lesson-id')).toBe('prog-thales')
     expect(nav).toHaveBeenCalledWith('/flashcards')

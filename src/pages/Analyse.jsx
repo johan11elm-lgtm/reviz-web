@@ -431,7 +431,7 @@ export default function Analyse() {
                     />
                   </div>
                   <div className="analyse-avancement-row">
-                    <span>À revoir aujourd'hui</span>
+                    <span>À travailler aujourd'hui</span>
                     <b>{avancement.due} carte{avancement.due > 1 ? 's' : ''}</b>
                   </div>
                   <div className="analyse-avancement-row">

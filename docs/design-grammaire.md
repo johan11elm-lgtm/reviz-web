@@ -45,9 +45,14 @@ L'état d'une chose (chapitre, leçon, carte) s'écrit avec `.rv-pill`, et chaqu
 |---|---|---|
 | Pas commencé | « À découvrir » | neutre (`rv-pill`) |
 | Commencé | « Commencé » | orange |
-| À revoir | « 4 à revoir » | orange |
+| À travailler | « 4 à travailler » | orange |
 | Maîtrisé | « Maîtrisé » | vert |
 | Pas encore prêt | « Bientôt » | neutre |
+
+**« À travailler » ou « à revoir » ?** Le compte des cartes du jour
+(`countDueCards`) inclut les cartes jamais vues : on l'écrit « à travailler ».
+« À revoir » est réservé aux cartes déjà vues revenues à échéance (bouton des
+flashcards, légende de « Ta mémoire », carte « Ta prochaine étape »).
 
 Exception assumée : l'autocollant « Commencer / Continuer » du chemin des
 chapitres (élément de jeu, pas un état).
@@ -106,5 +111,9 @@ acquis. Pas d'étoiles : elles se lisent comme des favoris ou une note.
 | Formats | fait : sous-titre « Carte 1 sur 8 · leçon » sur une ligne, « Généré par IA » et « 3 idées » sans majuscules, « À revoir » des flashcards en orange (plus de rouge) ; le Résumé suivait déjà (couleur de matière sur ses icônes) |
 | Réglages | fait : icônes des rangées neutres, objectif quotidien choisi en encre (plus en orange) ; carte Réviz+ et zone de danger inchangées |
 | Battle | fait : puces des règles neutres |
-| Écrans secondaires (connexion, inscription, onboarding, scan, salon et jeu de la Battle, fin de séance) | à vérifier |
+| Fins de séance | fait : action principale = « Retour à la leçon » (flashcards) ou « Relire le résumé » sous 70 % (quiz) ; plus de mascotte triste |
+| Connexion, inscription | fait : liens et choix en encre, libellés de champ en phrase normale, bouton retour commun |
+| Accueil public, essai | vérifiés, déjà conformes |
+| Vérification de l'email, Battle (annonce, jeu) | fait (relu dans le code) : bouton principal en encre, survol des réponses en encre, puces neutres |
+| Scan, onboarding | relus dans le code : conformes (l'orange y marque une alerte ou une progression) |
 | Toast « Badge débloqué » | surtitre orange à neutraliser ou à classer en exception (célébration) |

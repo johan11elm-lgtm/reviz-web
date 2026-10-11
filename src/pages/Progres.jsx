@@ -696,7 +696,7 @@ function ProgresProgramme({ classe, lessons }) {
               </span>
               <ul className="pg-legend" aria-label="Légende">
                 <li><i className="pg-seg pg-seg--commence" />Commencé</li>
-                <li><i className="pg-seg pg-seg--a-revoir" />À revoir</li>
+                <li><i className="pg-seg pg-seg--a-revoir" />À travailler</li>
                 <li><i className="pg-seg pg-seg--maitrise" />Maîtrisé</li>
               </ul>
             </div>
@@ -712,7 +712,7 @@ function ProgresProgramme({ classe, lessons }) {
                     type="button"
                     className="pg-prog-row"
                     onClick={() => navigate(`/programme/${m.slug}`)}
-                    aria-label={`${m.matiere} : ${detail}${m.aRevoir ? `, ${plural(m.aRevoir, 'carte')} à revoir` : ''}`}
+                    aria-label={`${m.matiere} : ${detail}${m.aRevoir ? `, ${plural(m.aRevoir, 'carte')} à travailler` : ''}`}
                   >
                     {/* <picture> en display: contents : on l'enveloppe pour qu'il reste une seule case de grille */}
                     <span className="pg-prog-mascot"><Mascot pose={subjectMascot(m.matiere)} size={38} alt="" aria-hidden="true" /></span>
@@ -728,7 +728,7 @@ function ProgresProgramme({ classe, lessons }) {
                       </span>
                     </span>
                     <span className="pg-prog-status">
-                      {m.aRevoir > 0 && <span className="rv-pill rv-pill--orange">{plural(m.aRevoir, 'carte')} à revoir</span>}
+                      {m.aRevoir > 0 && <span className="rv-pill rv-pill--orange">{plural(m.aRevoir, 'carte')} à travailler</span>}
                     </span>
                     <span className="pg-prog-arrow" aria-hidden="true">›</span>
                   </button>
@@ -774,7 +774,7 @@ function ProgresMemoire({ lessons }) {
           <>
             <div className="pg-mem-top">
               <span className="pg-desk-big">{s.dues}</span>
-              <span className="pg-desk-big-text">{s.dues > 1 ? 'cartes à revoir' : 'carte à revoir'} aujourd'hui, sur {s.total}</span>
+              <span className="pg-desk-big-text">{s.dues > 1 ? 'cartes à travailler' : 'carte à travailler'} aujourd'hui, sur {s.total}</span>
             </div>
             <div className="pg-mem-bar" aria-hidden="true">
               <span className="pg-mem-bar-seg pg-mem-bar-seg--memoire" style={{ width: pct(s.enMemoire) + '%' }} />
@@ -794,7 +794,7 @@ function ProgresMemoire({ lessons }) {
               </div>
             ) : (
               <>
-                <span className="pg-mem-sub">À revoir en priorité</span>
+                <span className="pg-mem-sub">À travailler en priorité</span>
                 <ul className="pg-mem-list">
                   {prio.map(({ lesson, dues }) => (
                     <li key={lesson.id}>

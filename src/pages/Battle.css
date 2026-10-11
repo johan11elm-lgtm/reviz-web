@@ -316,7 +316,7 @@
 }
 .battle-choix-btn:active:not(:disabled) { transform: scale(0.985); }
 @media (hover: hover) and (pointer: fine) {
-  .battle-choix-btn:hover:not(:disabled) { border-color: var(--accent-orange); background: var(--accent-orange-soft); }
+  .battle-choix-btn:hover:not(:disabled) { border-color: var(--accent-violet); background: var(--accent-violet-soft); }
 }
 .battle-choix-btn:disabled { cursor: default; }
 .battle-choix-btn:disabled:not(.battle-choix-btn--choisi) { opacity: 0.5; }

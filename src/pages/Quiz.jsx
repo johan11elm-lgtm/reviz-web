@@ -39,12 +39,15 @@ function getLessonTitle(fallback = 'Ta leçon') {
   catch { return fallback }
 }
 
+// Sous 70 %, l'action principale est de relire le résumé (le texte le dit) ;
+// au-dessus, retour à la leçon, où « Ta prochaine étape » propose la suite.
+// Jamais de mascotte triste : l'échec n'est pas puni (PRODUCT.md).
 function getEndContent(score, total) {
   const pct = score / total
-  if (pct >= 0.9) return { mascot: 'examen',      title: 'Excellent',      sub: 'Tu maîtrises ce chapitre.' }
-  if (pct >= 0.7) return { mascot: 'celebration', title: 'Très bien',      sub: 'Encore quelques points à revoir.' }
-  if (pct >= 0.5) return { mascot: 'muscu',       title: 'Pas mal',        sub: 'Relis le résumé, puis retente le quiz.' }
-  return           { mascot: 'sad',               title: 'À retravailler', sub: 'Relis la leçon avant de retenter le quiz.' }
+  if (pct >= 0.9) return { mascot: 'examen',      title: 'Excellent',      sub: 'Tu maîtrises ce chapitre.',             relire: false }
+  if (pct >= 0.7) return { mascot: 'celebration', title: 'Très bien',      sub: 'Encore quelques points à revoir.',      relire: false }
+  if (pct >= 0.5) return { mascot: 'muscu',       title: 'Pas mal',        sub: 'Relis le résumé, puis retente le quiz.', relire: true }
+  return           { mascot: 'reading',           title: 'À retravailler', sub: 'Relis le résumé, puis retente le quiz.', relire: true }
 }
 
 /* ── Confetti — utilise les accents DS pour cohérence ── */
@@ -249,17 +252,22 @@ function QuizSession() {
           </div>
           <FormatFeedback format="quiz" question="Ces questions t'ont aidé ?" />
           <div className="rv-end-screen-actions">
-            <button type="button" className="rv-btn-cta rv-btn-cta--full" onClick={restartQuiz}>
-              <span><RefreshIcon /> Recommencer</span>
+            {endContent.relire ? (
+              <Link className="rv-btn-cta rv-btn-cta--full" to="/resume">Relire le résumé</Link>
+            ) : (
+              <Link className="rv-btn-cta rv-btn-cta--full" to="/analyse">Retour à la leçon</Link>
+            )}
+            <button type="button" className="rv-btn-cta rv-btn-cta--full rv-btn-cta--ghost" onClick={restartQuiz}>
+              <span><RefreshIcon /> Recommencer le quiz</span>
             </button>
             {coachLessonId && (
               <button type="button" className="rv-btn-cta rv-btn-cta--full rv-btn-cta--ghost" onClick={() => openCoach()}>
                 <ChatIcon /> Encore un doute ? Demande au coach
               </button>
             )}
-            <Link className="rv-btn-cta rv-btn-cta--full rv-btn-cta--ghost" to="/analyse">
-              ← Retour aux formats
-            </Link>
+            {endContent.relire && (
+              <Link className="rv-btn-cta rv-btn-cta--full rv-btn-cta--ghost" to="/analyse">Retour à la leçon</Link>
+            )}
           </div>
         </div>
       )}

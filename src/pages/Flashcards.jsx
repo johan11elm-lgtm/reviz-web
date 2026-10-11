@@ -202,8 +202,12 @@ function FlashcardsSession() {
           </div>
           <span className="rv-pill rv-pill--orange rv-end-xp">+{xp} XP</span>
           <FormatFeedback format="flashcards" question="Ces cartes t'ont aidé ?" />
+          {/* Les cartes à revoir reviennent toutes seules (répétition espacée) :
+              l'action principale est de revenir à la leçon, où « Ta prochaine
+              étape » propose la suite. */}
           <div className="rv-end-screen-actions">
-            <button type="button" className="rv-btn-cta rv-btn-cta--full" onClick={restartDeck}>
+            <Link className="rv-btn-cta rv-btn-cta--full" to="/analyse">Retour à la leçon</Link>
+            <button type="button" className="rv-btn-cta rv-btn-cta--full rv-btn-cta--ghost" onClick={restartDeck}>
               <span><RefreshIcon /> Recommencer</span>
             </button>
             <button type="button" className="rv-btn-cta rv-btn-cta--full rv-btn-cta--ghost" onClick={handleShare}>
@@ -214,9 +218,6 @@ function FlashcardsSession() {
                 <ChatIcon /> Encore un doute ? Demande au coach
               </button>
             )}
-            <Link className="rv-btn-cta rv-btn-cta--full rv-btn-cta--ghost" to="/analyse">
-              ← Retour aux formats
-            </Link>
           </div>
         </div>
       )}

@@ -17,7 +17,10 @@
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  background: var(--bg-subtle);
+  /* Même bouton rond que les autres pages (.rv-bell-btn) */
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-card);
   flex-shrink: 0;
   position: relative;
 }
@@ -51,11 +54,10 @@
 }
 
 .auth-label {
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+  /* Libellé de champ en phrase normale, comme sur l'essai (grammaire §2) */
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-secondary);
 }
 
 .auth-input {
@@ -73,7 +75,7 @@
 }
 
 .auth-input:focus {
-  border-color: var(--accent-orange);
+  border-color: var(--accent-violet);
 }
 
 .auth-input::placeholder {
@@ -85,7 +87,7 @@
   background: none;
   border: none;
   font-size: 13px;
-  color: var(--accent-orange);
+  color: var(--accent-violet); /* un lien est en encre (grammaire §5) */
   font-weight: 600;
   cursor: pointer;
   padding: 0;
@@ -136,7 +138,7 @@
 }
 
 .auth-link a {
-  color: var(--accent-orange);
+  color: var(--accent-violet);
   font-weight: 600;
   text-decoration: none;
 }

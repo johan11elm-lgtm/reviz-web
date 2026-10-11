@@ -76,10 +76,10 @@ describe('<Programme />', () => {
       'prog-argumentation_0': { interval: 3, reps: 2, ease: 2.5, nextReview: now + 3 * DAY },
     }))
     const { container } = renderPage()
-    expect(await screen.findByText('1 carte à revoir')).toBeInTheDocument()
+    expect(await screen.findByText('1 carte à travailler')).toBeInTheDocument()
     expect(screen.getByText('Tout maîtrisé')).toBeInTheDocument()
     expect(screen.getByText(/3ème · 2 chapitres commencés sur 3/)).toBeInTheDocument()
-    expect(screen.getByRole('button', { name: /^Maths : 2 chapitres · 1 commencé · 1 carte à revoir/ })).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: /^Maths : 2 chapitres · 1 commencé · 1 carte à travailler/ })).toBeInTheDocument()
     expect(container.querySelectorAll('.programme-strip-seg--a-revoir')).toHaveLength(1)
     expect(container.querySelectorAll('.programme-strip-seg--bientot')).toHaveLength(1)
     expect(container.querySelectorAll('.programme-strip-seg--maitrise')).toHaveLength(1)

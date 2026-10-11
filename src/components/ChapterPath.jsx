@@ -148,7 +148,7 @@ function PathStep({ item, offset, isCurrent, isSelected, mascot, onSelect, onOpe
   const { chapter, state, dueCards } = item;
   const pret = !!chapter.pret;
   const icon = stepIcon(state, pret);
-  const status = !pret ? 'Bientôt' : state === 'a-revoir' ? `${dueCards} à revoir` : CHAPTER_STATE_LABEL[state];
+  const status = !pret ? 'Bientôt' : state === 'a-revoir' ? `${dueCards} à travailler` : CHAPTER_STATE_LABEL[state];
   // La bulle part du côté où il reste de la place.
   const side = offset > 0 ? 'left' : 'right';
 
