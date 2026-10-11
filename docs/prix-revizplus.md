@@ -96,7 +96,7 @@ Coûts par payeur et par mois :
   ≈ 2 centimes par scan. Un élève régulier (15 messages par jour d'école,
   20 scans par mois) coûte ≈ 2 €/mois. **Attention au plafond de 200 messages
   par jour prévu dans l'offre** : un élève qui le touche tous les jours coûte
-  ≈ 30 €/mois. Décidé : 60 messages par jour en Réviz+ (≈ 9 €/mois au pire,
+  ≈ 30 €/mois. Décidé le 11/10 (attractivité) : coach et scans **illimités** en Réviz+, avec des garde-fous anti-abus invisibles (coach 200 messages par jour). Avant : 60 messages par jour (≈ 9 €/mois au pire,
   jamais atteint en pratique). Reste à activer le cache du prompt du coach.
 - **Cotisations micro-entreprise** : environ 21 à 25 % du chiffre d'affaires
   selon la catégorie retenue à l'immatriculation.

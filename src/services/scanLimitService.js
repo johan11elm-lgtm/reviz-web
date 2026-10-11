@@ -1,7 +1,7 @@
 // -------------------------------------------------------
 // Réviz — Service de limite de scans hebdomadaire
 // -------------------------------------------------------
-// Free : 5 scans / semaine (lundi → dimanche), 30 pendant le lancement
+// Free : 5 scans / semaine (lundi → dimanche) ; Réviz+ (offert ou payé) : illimité
 // Premium : illimité
 // -------------------------------------------------------
 
@@ -64,7 +64,8 @@ export function getScanStatus() {
   const remaining = Math.max(0, limiteGratuite() - data.count)
   return {
     canScan: data.count < limiteGratuite(),
-    remaining,
+    // Réviz+ offert : illimité à l'affichage, le plafond n'est qu'un garde-fou.
+    remaining: _offert ? Infinity : remaining,
     used: data.count,
     limit: limiteGratuite(),
     isPremium: false,

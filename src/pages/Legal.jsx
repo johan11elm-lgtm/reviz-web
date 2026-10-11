@@ -139,7 +139,7 @@ const PAGES = {
         </Section>
 
         <Section title="Ce que comprend Réviz+">
-          <p>Réviz+ étend le plan gratuit : leçons analysées sans limite hebdomadaire (dans la limite d'un usage normal), coach jusqu'à 60 messages par jour, thèmes de couleur réservés, et les fonctions signalées « Réviz+ » dans l'application. Le contenu de Réviz+ peut s'enrichir ; il n'est jamais réduit sans que tu en sois prévenu et que tu puisses résilier. Le plan gratuit reste disponible sans abonnement.</p>
+          <p>Réviz+ étend le plan gratuit : leçons analysées et messages au coach sans limite (dans la limite d'un usage normal : des garde-fous techniques bloquent les usages automatisés ou abusifs), thèmes de couleur réservés, et les fonctions signalées « Réviz+ » dans l'application. Le contenu de Réviz+ peut s'enrichir ; il n'est jamais réduit sans que tu en sois prévenu et que tu puisses résilier. Le plan gratuit reste disponible sans abonnement.</p>
         </Section>
 
         <Section title="Qui peut s'abonner">

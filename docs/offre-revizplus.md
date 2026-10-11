@@ -24,10 +24,10 @@ Réviz+ », branche `stripe-live`).
 | Agenda : contrôles, compte à rebours, rappel la veille | Tout | — |
 | Agenda : emploi du temps Pronote | Tout | — |
 | Agenda : **plan de révision automatique** | Offert pour le premier contrôle | Inclus pour tous les contrôles |
-| Coach | 10 messages par jour | 60 messages par jour |
+| Coach | 10 messages par jour | Illimité (garde-fou anti-abus : 200 par jour) |
 | Coach : mode « Interroge-moi » | — | Inclus |
 | Coach qui connaît ses contrôles et ses erreurs | — | Inclus |
-| Scan de leçons | 5 par semaine | Illimité (plafond de sécurité) |
+| Scan de leçons | 5 par semaine | Illimité (garde-fou anti-abus pendant l'offre de lancement : 100 par semaine) |
 | Thèmes | Crème, Sombre | Nuit d'encre, Abricot, Sauge, Prune |
 | Progrès | Vue d'ensemble | Bilan détaillé par chapitre |
 

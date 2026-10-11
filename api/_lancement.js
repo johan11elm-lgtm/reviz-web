@@ -32,8 +32,10 @@ export function tarifFondateurOuvert(now = Date.now()) {
 }
 
 // Plafonds pendant le lancement (les vrais abonnés gardent les leurs).
-export const LANCEMENT_SCAN_LIMIT = 30 // leçons analysées par semaine
-export const LANCEMENT_CHAT_LIMIT = 50 // messages au coach par jour
+// Réviz+ est « illimité » : ce sont des garde-fous anti-abus, jamais
+// affichés et très au-dessus d'un usage normal.
+export const LANCEMENT_SCAN_LIMIT = 100 // leçons analysées par semaine
+export const LANCEMENT_CHAT_LIMIT = 200 // messages au coach par jour
 
 // Membres fondateurs (sceau « Membre fondateur ») : comptes créés pendant le
 // lancement. Le tarif fondateur, lui, dépend de la date de l'abonnement.

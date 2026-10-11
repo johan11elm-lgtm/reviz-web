@@ -4,11 +4,10 @@ import { useAuth } from '../context/AuthContext';
 import { useModalA11y } from '../hooks/useModalA11y';
 import { Mascot } from './Mascot';
 import { GemIcon, SparkIcon, CameraIcon, ChatIcon, SunIcon } from './Icons';
-import { getScanStatus } from '../services/scanLimitService';
-import { moisInscription, quotaCoachDuJour, phaseRevizPlus, joursAvant } from '../utils/revizPlus';
+import { moisInscription, phaseRevizPlus, joursAvant } from '../utils/revizPlus';
 import { startCheckout } from '../services/billingService';
 import {
-  LANCEMENT_CHAT_LIMIT, FIN_LANCEMENT, DERNIER_JOUR_OFFERT, PREMIER_PRELEVEMENT, VENTES_OUVERTES, tarifFondateurOuvert,
+  FIN_LANCEMENT, DERNIER_JOUR_OFFERT, PREMIER_PRELEVEMENT, VENTES_OUVERTES, tarifFondateurOuvert,
 } from '../../api/_lancement.js';
 import { PRIX, PRIX_FONDATEUR, remiseFondateur } from '../../api/_prix.js';
 import './RevizPlus.css';
@@ -92,10 +91,6 @@ function Jauge({ icon, label, valeur, detail, pct }) {
 export function RevizPlusCard({ onTheme, className = '' }) {
   const navigate = useNavigate();
   const { currentUser, isPremium, revizPlusOffert, estFondateur } = useAuth();
-  const scans = getScanStatus();
-  const coach = quotaCoachDuJour();
-  const coachLimite = coach?.limit ?? LANCEMENT_CHAT_LIMIT;
-  const scansIllimites = !Number.isFinite(scans.remaining);
   const depuis = moisInscription(currentUser?.metadata?.creationTime);
 
   const choisirTheme = onTheme ?? (() => navigate('/reglages#themes'));
@@ -154,20 +149,9 @@ export function RevizPlusCard({ onTheme, className = '' }) {
       )}
 
       <div className="rp-meters">
-        <Jauge
-          icon={<CameraIcon />}
-          label="Leçons analysées"
-          detail="cette semaine"
-          valeur={scansIllimites ? 'Illimité' : `${scans.remaining} restantes`}
-          pct={scansIllimites ? undefined : (scans.remaining / scans.limit) * 100}
-        />
-        <Jauge
-          icon={<ChatIcon />}
-          label="Coach"
-          detail="aujourd’hui"
-          valeur={coach ? `${coach.remaining} messages` : `${coachLimite} par jour`}
-          pct={coach ? (coach.remaining / coachLimite) * 100 : undefined}
-        />
+        {/* Réviz+ est illimité : pas de compteur (les garde-fous anti-abus ne s'affichent pas). */}
+        <Jauge icon={<CameraIcon />} label="Leçons analysées" detail="autant que tu veux" valeur="Illimité" />
+        <Jauge icon={<ChatIcon />} label="Coach" detail="toutes tes questions" valeur="Illimité" />
         <Jauge icon={<SunIcon />} label="Thèmes" detail="à choisir dans les Réglages" valeur="4 débloqués" />
       </div>
 

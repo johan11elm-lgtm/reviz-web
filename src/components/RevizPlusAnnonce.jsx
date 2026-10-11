@@ -7,7 +7,7 @@ import { track } from '../services/statsService';
 import { startCheckout } from '../services/billingService';
 import { phaseRevizPlus, joursAvant } from '../utils/revizPlus';
 import {
-  LANCEMENT_SCAN_LIMIT, LANCEMENT_CHAT_LIMIT, FIN_LANCEMENT, DERNIER_JOUR_OFFERT, PREMIER_PRELEVEMENT,
+  FIN_LANCEMENT, DERNIER_JOUR_OFFERT, PREMIER_PRELEVEMENT,
   VENTES_OUVERTES, tarifFondateurOuvert,
 } from '../../api/_lancement.js';
 import { PRIX, PRIX_FONDATEUR } from '../../api/_prix.js';
@@ -94,8 +94,8 @@ export function RevizPlusAnnonce({ uid, onClose }) {
         <h2 className="battle-annonce-titre" id="revizplus-annonce-titre">{t.titre}</h2>
         <p className="battle-annonce-sous">{t.sous}</p>
         <ul className="battle-regles">
-          <li><CameraIcon /><span>Jusqu’à {LANCEMENT_SCAN_LIMIT} leçons analysées par semaine, au lieu de 5</span></li>
-          <li><ChatIcon /><span>Le coach, jusqu’à {LANCEMENT_CHAT_LIMIT} messages par jour</span></li>
+          <li><CameraIcon /><span>Leçons analysées en illimité, au lieu de 5 par semaine</span></li>
+          <li><ChatIcon /><span>Le coach en illimité, au lieu de 10 messages par jour</span></li>
           <li><SunIcon /><span>Tous les thèmes de couleur</span></li>
         </ul>
         <div className="battle-annonce-actions">

@@ -1,12 +1,13 @@
 // -------------------------------------------------------
 // Réviz — Quota de messages du coach CÔTÉ SERVEUR (source de vérité)
-// Free : 10 messages / jour (UTC). Premium : 60 / jour (garde-fou coût, ≈ 9 €/mois au pire, docs/prix-revizplus.md).
+// Free : 10 messages / jour (UTC). Réviz+ : illimité, avec un garde-fou
+// anti-abus de 200 / jour (jamais atteint en usage normal, docs/prix-revizplus.md).
 // Même pattern que _quota.js : logique pure (testable) + wrappers transaction.
 // Collection Firestore dédiée `chatUsage` (admin uniquement, aucune règle client).
 // -------------------------------------------------------
 
 export const CHAT_FREE_LIMIT = 10
-export const CHAT_PREMIUM_LIMIT = 60
+export const CHAT_PREMIUM_LIMIT = 200
 
 // Début de journée (00:00 UTC) pour un timestamp donné.
 export function dayStartUTC(nowMs) {
