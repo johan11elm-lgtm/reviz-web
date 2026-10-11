@@ -4,6 +4,7 @@ import { Navigate, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { CYCLES, CLASSES_BY_CYCLE, SPECIALITES_LYCEE, needsSpecialites } from '../utils/levels';
 import { createUserProfile } from '../services/userProfileService';
+import { useIsDesktop } from '../hooks/useMediaQuery';
 import './Inscription.css';
 
 // Écran de complétion de profil pour les nouveaux comptes sans mot de passe
@@ -13,6 +14,7 @@ import './Inscription.css';
 export default function FinishSetup() {
   const { currentUser, setUserLevel, refreshGate, updateDisplayName } = useAuth();
   const navigate = useNavigate();
+  const isDesktop = useIsDesktop();
   const [birthDate, setBirthDate] = useState('');
   const [prenomSaisi, setPrenomSaisi] = useState('');
   const [level, setLevel] = useState({ cycle: null, classe: null, specialites: [] });
@@ -62,12 +64,10 @@ export default function FinishSetup() {
     }
   }
 
-  return (
-    <div className="app">
-      <div className="auth-content signup-content" style={{ overflowY: 'auto' }}>
-        <h1 className="signup-question">{prenom ? `Bienvenue ${prenom}` : 'Bienvenue'}</h1>
-        <p className="signup-hint">Encore quelques infos pour calibrer Réviz à ton profil.</p>
-
+  const titre = <h1 className="signup-question">{prenom ? `Bienvenue ${prenom}` : 'Bienvenue'}</h1>;
+  const intro = <p className="signup-hint">Encore quelques infos pour calibrer Réviz à ton profil.</p>;
+  const champs = (
+    <>
         {demanderPrenom && (
           <div className="auth-field">
             <label className="auth-label" htmlFor="fs-prenom">Ton prénom</label>
@@ -152,12 +152,48 @@ export default function FinishSetup() {
         )}
 
         <p className="auth-error">{error}</p>
+    </>
+  );
+  const bouton = (
+    <button className="auth-btn signup-primary" type="button" onClick={handleSubmit} disabled={loading}>
+      {loading ? 'Enregistrement...' : 'Continuer'}
+    </button>
+  );
+
+  // Ordinateur : l'accueil et ce à quoi servent les réponses à gauche, le
+  // formulaire dans une carte à droite, bouton compris (styles dans desktop.css).
+  if (isDesktop) {
+    return (
+      <div className="app fs-page">
+        <div className="fs-desk">
+          <div className="fs-desk-intro">
+            <span className="fs-desk-mascot"><Mascot pose="hello" size={132} alt="" aria-hidden="true" /></span>
+            {titre}
+            {intro}
+            <ul className="fs-desk-why">
+              <li><strong>Ta classe</strong> choisit le programme et les chapitres qu'on te propose.</li>
+              <li><strong>Ta date de naissance</strong> : sous 15 ans, on demande l'accord d'un parent avant de commencer.</li>
+            </ul>
+          </div>
+          <div className="fs-desk-card">
+            {champs}
+            {bouton}
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="app">
+      <div className="auth-content signup-content" style={{ overflowY: 'auto' }}>
+        {titre}
+        {intro}
+        {champs}
       </div>
 
       <div className="signup-footer">
-        <button className="auth-btn signup-primary" type="button" onClick={handleSubmit} disabled={loading}>
-          {loading ? 'Enregistrement...' : 'Continuer'}
-        </button>
+        {bouton}
       </div>
     </div>
   );
