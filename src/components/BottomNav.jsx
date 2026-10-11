@@ -2,6 +2,7 @@ import { NavLink, useLocation } from 'react-router-dom'
 import { useState, useEffect, useRef } from 'react'
 import { Mascot } from './Mascot'
 import { useAuth } from '../context/AuthContext'
+import { CalendarIcon } from './Icons'
 import './RevizPlus.css'
 
 export const HomeIcon = () => (
@@ -43,7 +44,8 @@ const TABS = [
   { to: '/',        Icon: HomeIcon,  label: 'Accueil' },
   { to: '/cours',   Icon: BookIcon,  label: 'Cours' },
   { to: '/coach',   Icon: CoachTabIcon, label: 'Coach', coach: true },  // compte requis : absent en mode essai
-  { to: '/progres', Icon: StatsIcon, label: 'Progrès' },
+  // Progrès est passé dans Profil : l'Agenda (contrôles, emploi du temps) prend sa place.
+  { to: '/agenda',  Icon: CalendarIcon, label: 'Agenda' },
   { to: '/profil',  Icon: UserIcon,  label: 'Profil' },
 ]
 

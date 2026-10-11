@@ -1,6 +1,10 @@
 // -------------------------------------------------------
 // Réviz — Connexions qui passent par le serveur
-// Une seule route (limite de fonctions Vercel) pour deux usages :
+// Une seule route (limite de fonctions Vercel) pour trois usages :
+//
+// POST /api/auth { action: 'edt', idToken, lien, du?, au? }
+//   Emploi du temps Pronote : le serveur lit le lien iCal de l'élève
+//   (illisible depuis le navigateur, pas de CORS), cf. _pronote.js.
 //
 // POST /api/auth { action: 'natif', idToken }
 //   App iOS, Microsoft : Firebase refuse les jetons Microsoft dans
@@ -16,6 +20,7 @@
 // -------------------------------------------------------
 import { randomBytes, timingSafeEqual } from 'node:crypto'
 import { getAuthAdmin } from './_firebaseAdmin.js'
+import { coursPronote } from './_pronote.js'
 
 export const config = { maxDuration: 30 }
 
@@ -157,8 +162,32 @@ async function tiktokRetour(req, res) {
   }
 }
 
+// --- Emploi du temps Pronote : lien iCal de l'élève → cours en JSON ---
+// Réservé aux comptes connectés (pas de relais ouvert vers Pronote).
+async function emploiDuTemps(req, res) {
+  const { idToken, lien, du, au } = req.body ?? {}
+  if (!idToken) return res.status(401).json({ error: 'Unauthorized' })
+  try {
+    await getAuthAdmin().verifyIdToken(idToken)
+  } catch {
+    return res.status(401).json({ error: 'Unauthorized' })
+  }
+  const jour = v => (typeof v === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(v) ? v : undefined)
+  try {
+    const cours = await coursPronote(lien, { du: jour(du), au: jour(au) })
+    res.setHeader('Cache-Control', 'no-store')
+    return res.status(200).json({ cours })
+  } catch (err) {
+    const code = ['LIEN_INVALIDE', 'LIEN_EXPIRE'].includes(err?.message) ? err.message : 'PRONOTE_INDISPONIBLE'
+    // Jamais le lien dans les journaux : il donne accès à l'emploi du temps.
+    if (code === 'PRONOTE_INDISPONIBLE') console.error('[auth] edt', err?.name, err?.message)
+    return res.status(code === 'LIEN_INVALIDE' ? 400 : 502).json({ error: code })
+  }
+}
+
 export default async function handler(req, res) {
   if (req.method === 'POST' && req.body?.action === 'natif') return sessionNative(req, res)
+  if (req.method === 'POST' && req.body?.action === 'edt') return emploiDuTemps(req, res)
   if (req.method === 'GET') {
     const q = req.query ?? {}
     if (q.code || q.error) return tiktokRetour(req, res)

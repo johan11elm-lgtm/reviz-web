@@ -5,6 +5,7 @@ import { BottomNav } from '../components/BottomNav';
 import { UserHeader } from '../components/UserHeader';
 import { GuestBanner } from '../components/GuestBanner';
 import { ConsentBanner } from '../components/ConsentBanner';
+import { ControleBanner } from '../components/ControleBanner';
 import { HeroCTA } from '../components/HeroCTA';
 import { Mascot } from '../components/Mascot';
 import { getScanStatus } from '../services/scanLimitService';
@@ -467,6 +468,7 @@ export default function Home() {
           {greeting}
 
           <ConsentBanner />
+          <ControleBanner />
 
           <div className="home-desk-top">
             {isGuest ? hero : heroDesk}
@@ -517,6 +519,7 @@ export default function Home() {
 
           <GuestBanner />
           <ConsentBanner />
+          <ControleBanner />
 
           {greeting}
 

@@ -33,6 +33,7 @@ const Reglages       = lazy(() => import('./pages/Reglages'))
 const Scan           = lazy(() => import('./pages/Scan'))
 const Cours          = lazy(() => import('./pages/Cours'))
 const Progres        = lazy(() => import('./pages/Progres'))
+const Agenda         = lazy(() => import('./pages/Agenda'))
 const Analyse        = lazy(() => import('./pages/Analyse'))
 const Flashcards     = lazy(() => import('./pages/Flashcards'))
 const Quiz           = lazy(() => import('./pages/Quiz'))
@@ -99,6 +100,7 @@ function AuthRoutes() {
       <Route path="/onboarding"  element={<PrivateRoute><Onboarding /></PrivateRoute>} />
       <Route path="/cours"       element={<PrivateRoute><Cours /></PrivateRoute>} />
       <Route path="/progres"     element={<PrivateRoute><Progres /></PrivateRoute>} />
+      <Route path="/agenda"      element={<PrivateRoute><Agenda /></PrivateRoute>} />
       <Route path="/profil"      element={<PrivateRoute><Profile /></PrivateRoute>} />
       <Route path="/reglages"    element={<PrivateRoute><Reglages /></PrivateRoute>} />
       <Route path="/scan"        element={<PrivateRoute><Scan /></PrivateRoute>} />

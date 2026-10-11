@@ -963,3 +963,52 @@
   html:not(.native) .auth-desk-page .auth-error:empty { display: none; }
   html:not(.native) .auth-desk-page .signup-primary { margin-top: 6px; }
 }
+
+/* Agenda — contrôles à gauche, la semaine entière en colonnes à droite
+ * (le téléphone n'affiche qu'un jour, choisi dans la rangée de jours). */
+@media (min-width: 1024px) {
+  html:not(.native) .agenda-page .agenda-content {
+    display: grid;
+    grid-template-columns: var(--rail-w) minmax(0, 1fr);
+    grid-auto-rows: max-content;
+    gap: var(--grid-gap);
+    align-items: start;
+    padding-bottom: 48px;
+  }
+  html:not(.native) .agenda-page .agenda-jours { display: none; }
+  html:not(.native) .agenda-page .agenda-grille {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+    grid-auto-flow: column;
+    grid-auto-rows: max-content;
+    gap: 12px;
+  }
+  html:not(.native) .agenda-page .agenda-colonne { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+  html:not(.native) .agenda-page .agenda-colonne-titre {
+    display: block;
+    margin: 0 0 2px;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text-secondary);
+  }
+  html:not(.native) .agenda-page .agenda-colonne-titre::first-letter { text-transform: uppercase; }
+  html:not(.native) .agenda-page .agenda-colonne.aujourdhui .agenda-colonne-titre { color: var(--accent-violet); }
+  html:not(.native) .agenda-page .agenda-cours-item { flex-direction: column; gap: 4px; padding: 10px 12px; border-left: 4px solid var(--border); }
+  html:not(.native) .agenda-page .agenda-cours-heure { width: auto; }
+  html:not(.native) .agenda-page .agenda-cours-heure br { display: none; }
+  html:not(.native) .agenda-page .agenda-cours-heure span::before { content: ' – '; }
+  html:not(.native) .agenda-page .agenda-cours-barre { display: none; }
+  html:not(.native) .agenda-page .agenda-cours-nom { font-size: 14px; }
+  html:not(.native) .agenda-page .agenda-cours-detail { white-space: normal; }
+  html:not(.native) .agenda-page .agenda-cours-item:has(.matiere-maths) { border-left-color: #FF6B00; }
+  html:not(.native) .agenda-page .agenda-cours-item:has(.matiere-francais) { border-left-color: #EC4899; }
+  html:not(.native) .agenda-page .agenda-cours-item:has(.matiere-histoire),
+  html:not(.native) .agenda-page .agenda-cours-item:has(.matiere-geographie) { border-left-color: #6366F1; }
+  html:not(.native) .agenda-page .agenda-cours-item:has(.matiere-svt) { border-left-color: #22C55E; }
+  html:not(.native) .agenda-page .agenda-cours-item:has(.matiere-physique-chimie) { border-left-color: #3B82F6; }
+  html:not(.native) .agenda-page .agenda-cours-item:has(.matiere-technologie) { border-left-color: #06B6D4; }
+  html:not(.native) .agenda-page .agenda-cours-item:has(.matiere-anglais) { border-left-color: #EAB308; }
+  /* La fenêtre d'ajout se centre au lieu de monter du bas */
+  html:not(.native) .agenda-overlay { align-items: center; }
+  html:not(.native) .agenda-modal { border-radius: var(--radius-card); max-width: 480px; padding-bottom: 22px; }
+}

@@ -1,0 +1,237 @@
+/* ─── Agenda : contrôles + emploi du temps Pronote ─────────────── */
+
+.agenda-page .agenda-content {
+  flex: 1;
+  padding: 8px var(--page-gutter) 120px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+.agenda-controles { display: flex; flex-direction: column; gap: 12px; }
+
+/* Rangée de contrôle : la rangée entière ouvre la révision, la croix la retire */
+.agenda-controle { padding: 0; }
+.agenda-controle-main {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 4px 10px 10px;
+  background: none;
+  border: 0;
+  font: inherit;
+  text-align: left;
+  color: inherit;
+  cursor: pointer;
+}
+.agenda-controle-pill { align-self: flex-start; margin-top: 4px; }
+.agenda-controle-suppr {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  margin-right: 4px;
+  display: grid;
+  place-items: center;
+  background: none;
+  border: 0;
+  border-radius: 12px;
+  color: var(--text-light);
+  cursor: pointer;
+}
+.agenda-controle-suppr svg { width: 18px; height: 18px; }
+.agenda-controle-suppr:hover { background: var(--bg-hover); color: var(--text-secondary); }
+.agenda-vide { margin: 0; font-size: 14px; line-height: 1.5; color: var(--text-secondary); }
+.agenda-ajouter { align-self: stretch; }
+
+/* ── Relier Pronote ── */
+.agenda-relier { padding: 20px; display: flex; flex-direction: column; gap: 12px; }
+.agenda-relier-titre { margin: 0; font-size: 15px; font-weight: 700; color: var(--text-primary); }
+.agenda-relier-texte { margin: 0; font-size: 14px; line-height: 1.5; color: var(--text-secondary); }
+.agenda-etapes {
+  margin: 0;
+  padding-left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--text-secondary);
+}
+.agenda-etapes b { color: var(--text-primary); font-weight: 700; }
+.agenda-relier-form { display: flex; flex-direction: column; gap: 8px; }
+.agenda-relier-erreur { margin: 0; font-size: 13px; color: var(--accent-red); }
+
+.agenda-label { font-size: 13px; font-weight: 700; color: var(--text-secondary); padding: 0; }
+.agenda-facultatif { font-weight: 500; color: var(--text-muted); }
+.agenda-input {
+  width: 100%;
+  box-sizing: border-box;
+  background: var(--bg-card);
+  border: 1.5px solid var(--border);
+  border-radius: 14px;
+  padding: 13px 14px;
+  font: inherit;
+  font-size: 15px;
+  color: var(--text-primary);
+  outline: none;
+}
+.agenda-input:focus { border-color: var(--accent-violet); }
+
+/* ── Emploi du temps ── */
+.agenda-edt { display: flex; flex-direction: column; gap: 12px; }
+.agenda-edt-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.agenda-edt-head .rv-section-title { margin: 0; }
+.agenda-semaine { display: flex; align-items: center; gap: 6px; }
+.agenda-semaine-label { font-size: 13px; font-weight: 600; color: var(--text-secondary); }
+.agenda-semaine-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-card);
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--text-primary);
+  cursor: pointer;
+}
+
+.agenda-jours { display: flex; gap: 6px; }
+.agenda-jour-chip {
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 8px 0;
+  border-radius: 14px;
+  border: 1.5px solid var(--border);
+  background: var(--bg-card);
+  font: inherit;
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+.agenda-jour-chip-nom { font-size: 12px; font-weight: 600; }
+.agenda-jour-chip-num { font-size: 16px; font-weight: 800; color: var(--text-primary); }
+.agenda-jour-chip.aujourdhui .agenda-jour-chip-nom { color: var(--accent-violet); }
+.agenda-jour-chip.active { border-color: var(--accent-violet); box-shadow: 0 0 0 3px var(--accent-violet-soft); }
+.agenda-jour-chip-dot {
+  position: absolute;
+  top: 6px;
+  right: 8px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent-orange);
+}
+
+.agenda-chargement, .agenda-pied { margin: 0; font-size: 13px; color: var(--text-muted); }
+.agenda-erreur {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+.agenda-lien {
+  padding: 0;
+  background: none;
+  border: 0;
+  font: inherit;
+  font-weight: 700;
+  color: var(--accent-violet);
+  cursor: pointer;
+}
+
+/* Téléphone : seul le jour choisi est affiché */
+.agenda-colonne { display: none; }
+.agenda-colonne.choisi { display: flex; flex-direction: column; gap: 8px; }
+.agenda-colonne-titre { display: none; }
+.agenda-colonne-controle { margin: 0; }
+.agenda-colonne-vide { margin: 0; padding: 16px 0; font-size: 14px; color: var(--text-muted); }
+
+.agenda-cours { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.agenda-cours-item {
+  width: 100%;
+  display: flex;
+  align-items: stretch;
+  gap: 12px;
+  padding: 12px 14px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 16px;
+  box-shadow: var(--shadow-card);
+  font: inherit;
+  text-align: left;
+  color: inherit;
+  cursor: pointer;
+}
+.agenda-cours-item:hover { border-color: var(--border); }
+.agenda-cours-item.annule { opacity: 0.55; }
+.agenda-cours-item.annule .agenda-cours-nom { text-decoration: line-through; }
+.agenda-cours-heure { flex-shrink: 0; width: 42px; font-size: 14px; font-weight: 700; color: var(--text-primary); line-height: 1.3; }
+.agenda-cours-heure span { font-weight: 500; color: var(--text-muted); font-size: 12px; }
+.agenda-cours-barre { flex-shrink: 0; width: 4px; border-radius: 4px; background: var(--border); }
+.agenda-cours-texte { min-width: 0; display: flex; flex-direction: column; gap: 2px; justify-content: center; }
+.agenda-cours-nom { font-size: 15px; font-weight: 700; color: var(--text-primary); }
+.agenda-cours-detail { font-size: 13px; color: var(--text-muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+/* Couleur de matière : seulement sur la barre (la reconnaître d'un coup d'œil) */
+.agenda-cours-barre.matiere-maths { background: #FF6B00; }
+.agenda-cours-barre.matiere-francais { background: #EC4899; }
+.agenda-cours-barre.matiere-histoire,
+.agenda-cours-barre.matiere-geographie { background: #6366F1; }
+.agenda-cours-barre.matiere-svt { background: #22C55E; }
+.agenda-cours-barre.matiere-physique-chimie { background: #3B82F6; }
+.agenda-cours-barre.matiere-technologie { background: #06B6D4; }
+.agenda-cours-barre.matiere-anglais { background: #EAB308; }
+
+/* ── Fenêtre « Ajouter un contrôle » ── */
+.agenda-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 300; /* au-dessus de la barre du bas (200) */
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  background: rgba(20, 18, 40, 0.42);
+}
+.agenda-modal {
+  width: 100%;
+  max-width: 520px;
+  max-height: 92dvh;
+  overflow-y: auto;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 22px 20px calc(20px + env(safe-area-inset-bottom));
+  background: var(--bg-app);
+  border-radius: 28px 28px 0 0;
+  box-shadow: 0 -8px 30px rgba(0, 0, 0, 0.12);
+}
+.agenda-modal-titre { margin: 0 0 4px; font-size: 20px; font-weight: 800; color: var(--text-primary); }
+.agenda-fieldset { border: 0; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.agenda-matieres { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.agenda-matiere {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 10px 4px;
+  background: var(--bg-card);
+  border: 1.5px solid var(--border);
+  border-radius: 14px;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-primary);
+  cursor: pointer;
+}
+.agenda-matiere.active { border-color: var(--accent-violet); box-shadow: 0 0 0 3px var(--accent-violet-soft); }
+.agenda-modal-btns { display: flex; gap: 10px; margin-top: 8px; }
+.agenda-modal-btns > * { flex: 1; }

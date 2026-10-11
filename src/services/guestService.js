@@ -67,6 +67,7 @@ export function guestUser(guest) {
 const MIGRATED_PREFIXES = [
   'reviz-lessons-', 'reviz-revisions-', 'reviz-srs-',
   'reviz-challenges-', 'reviz-daily-goal-', 'reviz-seen-badges-', 'reviz-onboarded-',
+  'reviz-agenda-',
 ]
 
 /**
