@@ -12,7 +12,7 @@
 // Interrupteur des ventes : true seulement quand Stripe est en réel (clé,
 // prix, webhook). Tant qu'il est false, rien ne se vend et Réviz+ reste
 // offert même après la date (on ne coupe pas la gratuité sans rien à vendre).
-export const VENTES_OUVERTES = false
+export const VENTES_OUVERTES = true
 
 export const FIN_LANCEMENT = '2026-10-26T00:00:00+01:00' // premier jour payant
 export const DERNIER_JOUR_OFFERT = '25\u00a0octobre'
