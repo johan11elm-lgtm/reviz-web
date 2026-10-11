@@ -897,12 +897,13 @@
   html:not(.native) .reglages-page .rg-theme-grid { grid-template-columns: repeat(4, 84px); gap: 14px; }
 }
 
-/* Fin d'inscription (Google, Apple, Microsoft, TikTok) — balisage propre à
- * l'ordinateur (FinishSetup.jsx) : l'accueil et l'usage des réponses à
- * gauche, le formulaire dans une carte à droite, bouton compris. */
+/* Connexion, inscription, fin d'inscription — balisage propre à
+ * l'ordinateur (Connexion.jsx, Inscription.jsx, FinishSetup.jsx) : la
+ * question ou l'accueil à gauche avec la mascotte, les réponses dans une
+ * carte à droite, bouton compris. Les choix passent en rangée. */
 @media (min-width: 1024px) {
-  html:not(.native) .fs-page { overflow-y: auto; }
-  html:not(.native) .fs-page .fs-desk {
+  html:not(.native) .auth-desk-page { overflow-y: auto; }
+  html:not(.native) .auth-desk-page .auth-desk {
     display: grid;
     grid-template-columns: minmax(0, 0.85fr) minmax(0, 1fr);
     grid-auto-rows: max-content;
@@ -914,15 +915,17 @@
     padding: 56px 40px;
     box-sizing: border-box;
   }
-  html:not(.native) .fs-page .fs-desk-intro { display: flex; flex-direction: column; gap: 14px; }
-  html:not(.native) .fs-page .fs-desk-mascot { display: block; margin: 0 0 6px -8px; }
-  html:not(.native) .fs-page .signup-question { font-size: 40px; letter-spacing: -1px; }
-  html:not(.native) .fs-page .signup-hint { font-size: 16px; margin: 0; }
-  html:not(.native) .fs-page .fs-desk-why {
+  html:not(.native) .auth-desk-page .auth-desk-intro { display: flex; flex-direction: column; align-items: flex-start; gap: 14px; }
+  html:not(.native) .auth-desk-page .auth-desk-intro .auth-back { margin-bottom: 18px; cursor: pointer; }
+  html:not(.native) .auth-desk-page .auth-desk-mascot { display: block; margin: 0 0 6px -8px; }
+  html:not(.native) .auth-desk-page .signup-question { font-size: 40px; letter-spacing: -1px; }
+  html:not(.native) .auth-desk-page .signup-hint { font-size: 16px; margin: 0; }
+  html:not(.native) .auth-desk-page .auth-desk-step { margin: 4px 0 0; font-size: 13px; font-weight: 600; color: var(--text-muted); }
+  html:not(.native) .auth-desk-page .auth-desk-why {
     list-style: none;
     margin: 10px 0 0;
     padding: 18px 0 0;
-    border-top: 1px solid var(--border-subtle);
+    border-top: 1px solid var(--border);
     display: flex;
     flex-direction: column;
     gap: 12px;
@@ -930,28 +933,33 @@
     line-height: 1.5;
     color: var(--text-secondary);
   }
-  html:not(.native) .fs-page .fs-desk-why strong { color: var(--text-primary); font-weight: 700; }
-  html:not(.native) .fs-page .fs-desk-card {
+  html:not(.native) .auth-desk-page .auth-desk-why strong { color: var(--text-primary); font-weight: 700; }
+  html:not(.native) .auth-desk-page .auth-desk-card {
     display: flex;
     flex-direction: column;
     gap: 14px;
+    margin: 0;
     background: var(--bg-card);
     border: 1px solid var(--border-subtle);
     border-radius: var(--radius-card);
     box-shadow: var(--shadow-card);
     padding: 32px;
   }
-  /* Dans la carte, les choix restent blancs : un fond crème les détache */
-  html:not(.native) .fs-page .fs-desk-card .auth-input,
-  html:not(.native) .fs-page .fs-desk-card .signup-card,
-  html:not(.native) .fs-page .fs-desk-card .signup-card-sm,
-  html:not(.native) .fs-page .fs-desk-card .signup-chip { background: var(--bg-app); }
-  html:not(.native) .fs-page .signup-card-stack { flex-direction: row; }
-  html:not(.native) .fs-page .signup-card { padding: 14px 16px; }
-  html:not(.native) .fs-page .signup-card:hover,
-  html:not(.native) .fs-page .signup-card-sm:hover { border-color: var(--accent-violet); }
-  html:not(.native) .fs-page .signup-card-grid { grid-template-columns: repeat(auto-fit, minmax(0, 1fr)); grid-auto-flow: column; }
-  html:not(.native) .fs-page .signup-card-sm { padding: 14px 8px; font-size: 16px; }
-  html:not(.native) .fs-page .auth-error:empty { display: none; }
-  html:not(.native) .fs-page .signup-primary { margin-top: 6px; }
+  html:not(.native) .auth-desk-page .auth-desk-body { display: flex; flex-direction: column; gap: 14px; }
+  html:not(.native) .auth-desk-page .auth-desk-card .signup-progress { flex: none; margin: 0 0 6px; }
+  /* Dans la carte, les champs et les choix prennent le fond crème : du blanc
+   * sur du blanc ne se verrait pas. */
+  html:not(.native) .auth-desk-page .auth-desk-card .auth-input,
+  html:not(.native) .auth-desk-page .auth-desk-card .signup-card,
+  html:not(.native) .auth-desk-page .auth-desk-card .signup-card-sm,
+  html:not(.native) .auth-desk-page .auth-desk-card .signup-chip { background: var(--bg-app); }
+  html:not(.native) .auth-desk-page .signup-input-lg { font-size: 16px; padding: 14px 16px; border-radius: 14px; }
+  html:not(.native) .auth-desk-page .signup-card-stack { flex-direction: row; }
+  html:not(.native) .auth-desk-page .signup-card { padding: 14px 16px; }
+  html:not(.native) .auth-desk-page .signup-card:hover,
+  html:not(.native) .auth-desk-page .signup-card-sm:hover { border-color: var(--accent-violet); }
+  html:not(.native) .auth-desk-page .signup-card-grid { grid-template-columns: repeat(auto-fit, minmax(0, 1fr)); grid-auto-flow: column; }
+  html:not(.native) .auth-desk-page .signup-card-sm { padding: 14px 8px; font-size: 16px; }
+  html:not(.native) .auth-desk-page .auth-error:empty { display: none; }
+  html:not(.native) .auth-desk-page .signup-primary { margin-top: 6px; }
 }

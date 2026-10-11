@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import SocialLogin, { erreurConnexionSociale } from '../components/SocialLogin';
+import { Mascot } from '../components/Mascot';
+import { useIsDesktop } from '../hooks/useMediaQuery';
 import './Connexion.css';
 
 function firebaseErrorFr(code) {
@@ -24,6 +26,7 @@ export default function Connexion() {
 
   const { login, loginWithProvider, loginWithCustomToken, resetPassword } = useAuth();
   const navigate = useNavigate();
+  const isDesktop = useIsDesktop();
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -81,16 +84,8 @@ export default function Connexion() {
     }
   }
 
-  return (
-    <div className="app">
-      {/* Header */}
-      <div className="auth-header">
-        <Link to="/welcome" className="auth-back">←</Link>
-        <span className="auth-title">Se connecter</span>
-      </div>
-
-      {/* Formulaire */}
-      <form className="auth-content" onSubmit={handleSubmit} noValidate>
+  const champs = (
+    <>
         <div className="auth-field">
           <label className="auth-label" htmlFor="connexion-email">Email</label>
           <input
@@ -142,6 +137,40 @@ export default function Connexion() {
           Pas encore de compte ?{' '}
           <Link to="/inscription">Créer un compte</Link>
         </p>
+    </>
+  );
+
+  // Ordinateur : l'accueil à gauche, le formulaire dans une carte à droite
+  // (styles communs avec l'inscription dans desktop.css).
+  if (isDesktop) {
+    return (
+      <div className="app auth-desk-page">
+        <div className="auth-desk">
+          <div className="auth-desk-intro">
+            <Link to="/welcome" className="auth-back" aria-label="Retour">←</Link>
+            <span className="auth-desk-mascot"><Mascot pose="retour" size={132} alt="" aria-hidden="true" /></span>
+            <h1 className="signup-question">Se connecter</h1>
+            <p className="signup-hint">Content de te revoir. Tes cours et tes révisions t'attendent.</p>
+          </div>
+          <form className="auth-desk-card" onSubmit={handleSubmit} noValidate>
+            {champs}
+          </form>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="app">
+      {/* Header */}
+      <div className="auth-header">
+        <Link to="/welcome" className="auth-back">←</Link>
+        <span className="auth-title">Se connecter</span>
+      </div>
+
+      {/* Formulaire */}
+      <form className="auth-content" onSubmit={handleSubmit} noValidate>
+        {champs}
       </form>
     </div>
   );

@@ -164,18 +164,18 @@ export default function FinishSetup() {
   // formulaire dans une carte à droite, bouton compris (styles dans desktop.css).
   if (isDesktop) {
     return (
-      <div className="app fs-page">
-        <div className="fs-desk">
-          <div className="fs-desk-intro">
-            <span className="fs-desk-mascot"><Mascot pose="hello" size={132} alt="" aria-hidden="true" /></span>
+      <div className="app auth-desk-page">
+        <div className="auth-desk">
+          <div className="auth-desk-intro">
+            <span className="auth-desk-mascot"><Mascot pose="hello" size={132} alt="" aria-hidden="true" /></span>
             {titre}
             {intro}
-            <ul className="fs-desk-why">
+            <ul className="auth-desk-why">
               <li><strong>Ta classe</strong> choisit le programme et les chapitres qu'on te propose.</li>
               <li><strong>Ta date de naissance</strong> : sous 15 ans, on demande l'accord d'un parent avant de commencer.</li>
             </ul>
           </div>
-          <div className="fs-desk-card">
+          <div className="auth-desk-card">
             {champs}
             {bouton}
           </div>
