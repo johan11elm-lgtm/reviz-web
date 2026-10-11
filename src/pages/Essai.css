@@ -118,3 +118,14 @@
   text-decoration: none;
 }
 .essai-page .essai-link:hover { text-decoration: underline; }
+
+/* Ordinateur : le formulaire dans la carte de droite (auth-desk, desktop.css) */
+@media (min-width: 1024px) {
+  html:not(.native) .essai-page .essai-carte { gap: 0; }
+  html:not(.native) .essai-page .essai-carte .essai-input,
+  html:not(.native) .essai-page .essai-carte .essai-cycles,
+  html:not(.native) .essai-page .essai-carte .essai-classe:not(.essai-classe--active) { background: var(--bg-app); box-shadow: none; }
+  html:not(.native) .essai-page .essai-carte .essai-classes { display: grid; grid-template-columns: repeat(4, 1fr); }
+  /* La colonne de gauche le dit déjà */
+  html:not(.native) .essai-page .essai-carte .essai-hint { display: none; }
+}

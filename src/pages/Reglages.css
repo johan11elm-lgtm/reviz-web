@@ -283,29 +283,6 @@
 .reglages-page .rg-icon { background: var(--bg-subtle); color: var(--text-secondary); }
 
 /* ── Abonnement ── */
-.reglages-page .rg-plan-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 12px 0 10px;
-}
-
-.reglages-page .rg-plan-label {
-  font-size: 12px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  color: var(--text-muted);
-}
-
-.reglages-page .rg-plan-free {
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--text-primary);
-}
-
-.reglages-page .rg-plan-row + .rv-btn-cta { margin-bottom: 12px; }
 .reglages-page .rg-card .rg-error { padding-bottom: 12px; }
 
 /* ── À propos ── */

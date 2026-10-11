@@ -81,3 +81,22 @@
   color: var(--text-primary);
   font-weight: 600;
 }
+
+/* Ordinateur : une colonne de lecture (les lignes faisaient 1 200 px) */
+@media (min-width: 1024px) {
+  html:not(.native) .legal-header,
+  html:not(.native) .legal-content > * {
+    width: 100%;
+    max-width: 720px;
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box;
+  }
+  html:not(.native) .legal-header { padding: 56px 0 20px; }
+  html:not(.native) .legal-title { font-size: 28px; font-weight: 800; letter-spacing: -0.8px; }
+  html:not(.native) .legal-content { padding: 8px 24px 64px; }
+  html:not(.native) .legal-section { margin-bottom: 28px; }
+  html:not(.native) .legal-section-title { font-size: 17px; }
+  html:not(.native) .legal-content p,
+  html:not(.native) .legal-content li { font-size: 15px; line-height: 1.65; }
+}

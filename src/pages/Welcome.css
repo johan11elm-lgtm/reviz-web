@@ -88,6 +88,14 @@
   opacity: 0.9;
 }
 
+/* Groupe de boutons : même espacement que le reste du bloc (téléphone) */
+.wlc-actions {
+  display: flex;
+  flex-direction: column;
+  gap: inherit;
+  width: 100%;
+}
+
 /* CTA centré : surclasse le space-between du DS sans nommer .rv-* */
 .wlc-scroll .wlc-cta-btn { justify-content: center; gap: 8px; }
 
@@ -281,4 +289,71 @@
   .wlc-sub { font-size: 14px; }
   .wlc-section { padding: 10px 22px 24px; }
   .wlc-cta { margin: 4px 22px 0; padding: 24px 20px; }
+}
+
+/* ── Ordinateur : un vrai accueil en largeur, plus le téléphone agrandi ──
+   Hero en deux colonnes (texte à gauche, mascotte à droite), étapes sur
+   trois colonnes, formats sur quatre, boutons à leur taille. */
+@media (min-width: 1024px) {
+  html:not(.native) .wlc-nav {
+    width: 100%;
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 22px 40px;
+    border-bottom: 0;
+    box-sizing: border-box;
+  }
+  html:not(.native) .wlc-scroll main {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 0 40px;
+    box-sizing: border-box;
+  }
+  html:not(.native) .wlc-hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+    grid-template-areas:
+      'badge     mascot'
+      'title     mascot'
+      'sub       mascot'
+      'subjects  mascot'
+      'actions   mascot'
+      'hint      mascot'
+      'installer mascot';
+    grid-auto-rows: max-content;
+    align-content: center;
+    justify-items: start;
+    column-gap: 48px;
+    row-gap: 18px;
+    min-height: min(580px, calc(100vh - 96px));
+    padding: 24px 0 56px;
+    text-align: left;
+  }
+  html:not(.native) .wlc-hero > .wlc-badge { grid-area: badge; }
+  html:not(.native) .wlc-hero > .wlc-headline { grid-area: title; font-size: 64px; letter-spacing: -2.4px; line-height: 1.02; }
+  html:not(.native) .wlc-hero > .wlc-sub { grid-area: sub; font-size: 18px; max-width: 40ch; }
+  html:not(.native) .wlc-hero > .wlc-subjects { grid-area: subjects; justify-content: flex-start; }
+  html:not(.native) .wlc-hero > .wlc-actions { grid-area: actions; flex-direction: row; width: auto; gap: 12px; margin-top: 6px; }
+  html:not(.native) .wlc-hero > .wlc-hint { grid-area: hint; }
+  html:not(.native) .wlc-hero > .wlc-installer { grid-area: installer; margin: -6px 0 0 -12px; }
+  html:not(.native) .wlc-hero-mascot { grid-area: mascot; justify-self: center; align-self: center; }
+  html:not(.native) .wlc-scroll .wlc-actions .wlc-cta-btn { width: auto; padding-left: 26px; padding-right: 26px; }
+
+  html:not(.native) .wlc-section { padding: 32px 0 40px; }
+  html:not(.native) .wlc-section-title { font-size: 30px; letter-spacing: -1px; margin-bottom: 28px; }
+  html:not(.native) .wlc-steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+  html:not(.native) .wlc-step { flex-direction: column; align-items: flex-start; gap: 16px; padding: 22px; }
+  html:not(.native) .wlc-step-title { font-size: 17px; }
+  html:not(.native) .wlc-step-desc { font-size: 14px; }
+  html:not(.native) .wlc-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+  html:not(.native) .wlc-grid-item { padding: 28px 12px; }
+  html:not(.native) .wlc-grid-label { font-size: 15px; }
+
+  html:not(.native) .wlc-cta {
+    max-width: 760px;
+    margin: 24px auto 0;
+    padding: 40px 40px 36px;
+  }
+  html:not(.native) .wlc-cta-title { font-size: 30px; letter-spacing: -1px; }
+  html:not(.native) .wlc-cta .wlc-actions { flex-direction: row; justify-content: center; width: auto; gap: 10px; }
 }

@@ -117,3 +117,5 @@ acquis. Pas d'étoiles : elles se lisent comme des favoris ou une note.
 | Vérification de l'email, Battle (annonce, jeu) | fait (relu dans le code) : bouton principal en encre, survol des réponses en encre, puces neutres |
 | Scan, onboarding | relus dans le code : conformes (l'orange y marque une alerte ou une progression) |
 | Toast « Badge débloqué » | surtitre orange à neutraliser ou à classer en exception (célébration) |
+| Parcours Réviz+ (11/10) | fait : page merci, Réglages › Abonnement et paywall dans la carte encre + or (RevizPlus.css) ; récapitulatif d'abonnement (formule, prix, échéance) |
+| Pages négligées sur ordinateur (11/10) | fait : Prévenir un parent et Essai en composition auth-desk (comme la connexion), Bienvenue en hero deux colonnes, Battle en trois cartes, conseils du scan en rangée, Flashcards plus lisibles, pages légales en colonne de lecture |

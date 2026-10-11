@@ -1,9 +1,11 @@
-import { MailIcon } from '../components/Icons';
 import { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { sendParentalConsent, consentErrorMessage } from '../services/consentService';
+import { useIsDesktop } from '../hooks/useMediaQuery';
+import { Mascot } from '../components/Mascot';
 import './Inscription.css';
+import './ConsentPending.css';
 
 // Écran affiché seulement quand l'accès d'un <15 ans est suspendu :
 // email parent jamais parti, délai de réponse écoulé, ou refus du parent.
@@ -13,18 +15,27 @@ const TEXTES = {
     titre: 'Préviens un parent',
     intro: 'Comme tu as moins de 15 ans, on envoie un email à un de tes parents pour lui dire que tu utilises Réviz. Tu peux réviser tout de suite.',
     bouton: 'Envoyer et commencer',
+    pose: 'retour',
   },
   'sans-reponse': {
     titre: 'Ton parent n\'a pas encore répondu',
     intro: 'Sans son accord, ton accès est en pause. Demande-lui de regarder ses emails (et ses spams), ou renvoie la demande.',
     bouton: 'Renvoyer la demande',
+    pose: 'thinking',
   },
   refuse: {
     titre: 'Ton parent n\'a pas donné son accord',
     intro: 'Ton accès à Réviz est en pause. Si c\'était une erreur, parles-en avec lui puis renvoie la demande.',
     bouton: 'Renvoyer la demande',
+    pose: 'confused',
   },
 };
+
+// Ce qui se passe ensuite, dit simplement (colonne de gauche sur ordinateur).
+const ETAPES = [
+  <>Ton parent reçoit un <strong>email de Réviz</strong> avec un bouton pour accepter.</>,
+  <>Tant qu'il n'a pas répondu, <strong>tu révises normalement</strong>, pendant 10 jours.</>,
+];
 
 export default function ConsentPending() {
   const { state } = useLocation();
@@ -74,56 +85,83 @@ export default function ConsentPending() {
     navigate('/welcome', { replace: true });
   }
 
-  return (
-    <div className="app">
-      <div className="auth-content" style={{ paddingTop: 48, textAlign: 'center' }}>
-        <div style={{ fontSize: 56, marginBottom: 16, color: 'var(--accent-orange)' }}><MailIcon /></div>
-        <h2 style={{ fontSize: 20, fontWeight: 700, marginBottom: 8 }}>{textes.titre}</h2>
+  const isDesktop = useIsDesktop();
 
-        {sent ? (
-          <p style={{ color: 'var(--text-secondary)', fontSize: 15, lineHeight: 1.5, marginBottom: 24 }}>
-            Un email a été envoyé à <strong>{parentEmail}</strong>.<br />
-            Dès qu'il aura accepté, ton accès reprendra.
-          </p>
-        ) : (
-          <>
-            <p style={{ color: 'var(--text-secondary)', fontSize: 15, lineHeight: 1.5, marginBottom: 16 }}>
-              {textes.intro}
-            </p>
-            <div className="auth-field" style={{ textAlign: 'left', marginBottom: 12 }}>
-              <label className="auth-label" htmlFor="consent-parent-email">Email de ton parent</label>
-              <input
-                id="consent-parent-email"
-                className="auth-input"
-                type="email"
-                placeholder="parent@exemple.com"
-                value={parentEmail}
-                onChange={e => setParentEmail(e.target.value)}
-                autoComplete="email"
-              />
-            </div>
-          </>
-        )}
+  const champ = !sent && (
+    <div className="auth-field">
+      <label className="auth-label" htmlFor="consent-parent-email">Email de ton parent</label>
+      <input
+        id="consent-parent-email"
+        className="auth-input"
+        type="email"
+        placeholder="parent@exemple.com"
+        value={parentEmail}
+        onChange={e => setParentEmail(e.target.value)}
+        autoComplete="email"
+      />
+    </div>
+  );
 
-        {msg && <p style={{ color: 'var(--text-secondary)', fontSize: 13, marginBottom: 12 }}>{msg}</p>}
+  const envoye = sent && (
+    <p className="cp-envoye">
+      Un email est parti à <strong>{parentEmail}</strong>. Dès qu'il aura accepté, ton accès reprendra.
+    </p>
+  );
 
-        {!sent ? (
-          <button className="auth-btn" style={{ marginBottom: 12 }} onClick={handleSend} disabled={loading || !parentEmail}>
-            {loading ? 'Envoi...' : textes.bouton}
-          </button>
-        ) : (
-          <button className="auth-btn" style={{ marginBottom: 12 }} onClick={handleCheck} disabled={checking}>
-            {checking ? 'Vérification...' : 'Il a accepté → vérifier'}
-          </button>
-        )}
-
-        <button
-          className="auth-btn"
-          style={{ background: 'var(--bg-muted)', color: 'var(--text-primary)' }}
-          onClick={handleLogout}
-        >
-          Se déconnecter
+  const actions = (
+    <>
+      {msg && <p className="cp-msg" role="status">{msg}</p>}
+      {!sent ? (
+        <button className="auth-btn" onClick={handleSend} disabled={loading || !parentEmail}>
+          {loading ? 'Envoi…' : textes.bouton}
         </button>
+      ) : (
+        <button className="auth-btn" onClick={handleCheck} disabled={checking}>
+          {checking ? 'Vérification…' : 'Il a accepté : vérifier'}
+        </button>
+      )}
+      <button type="button" className="cp-deconnexion" onClick={handleLogout}>
+        Se déconnecter
+      </button>
+    </>
+  );
+
+  // Ordinateur : la même composition que l'inscription (auth-desk, desktop.css).
+  if (isDesktop) {
+    return (
+      <div className="app auth-desk-page">
+        <div className="auth-desk">
+          <div className="auth-desk-intro">
+            <span className="auth-desk-mascot"><Mascot pose={textes.pose} size={132} alt="" aria-hidden="true" /></span>
+            <h1 className="signup-question">{textes.titre}</h1>
+            <p className="signup-hint">{textes.intro}</p>
+            {(consent?.status ?? 'a-demander') === 'a-demander' && (
+              <ul className="auth-desk-why">
+                {ETAPES.map((e, i) => <li key={i}>{e}</li>)}
+              </ul>
+            )}
+          </div>
+          <form className="auth-desk-card" noValidate onSubmit={e => { e.preventDefault(); if (!sent) handleSend(); }}>
+            {champ}
+            {envoye}
+            {actions}
+          </form>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="app cp-page">
+      <div className="auth-content signup-content cp-content">
+        <Mascot pose={textes.pose} size={112} className="cp-mascot" alt="" aria-hidden="true" />
+        <h1 className="signup-question">{textes.titre}</h1>
+        <p className="signup-hint">{textes.intro}</p>
+        {champ}
+        {envoye}
+      </div>
+      <div className="signup-footer">
+        {actions}
       </div>
     </div>
   );

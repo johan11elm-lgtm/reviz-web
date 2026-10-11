@@ -1,0 +1,36 @@
+/* Prévenir un parent (ConsentPending.jsx) : même langage que l'inscription
+   (Inscription.css), composition ordinateur dans desktop.css (auth-desk). */
+.cp-content { padding-top: 40px; gap: 10px; }
+.cp-mascot { display: block; margin: 0 0 6px -8px; }
+
+.cp-envoye {
+  margin: 4px 0 0;
+  padding: 14px 16px;
+  border-radius: 16px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--text-secondary);
+}
+.cp-envoye strong { color: var(--text-primary); word-break: break-all; }
+
+.cp-msg {
+  margin: 0;
+  font-size: 13px;
+  color: var(--text-secondary);
+  text-align: center;
+}
+
+/* Action secondaire : un lien, pas un deuxième bouton plein */
+.cp-deconnexion {
+  align-self: center;
+  padding: 6px 10px;
+  border: 0;
+  background: none;
+  color: var(--text-muted);
+  font: 600 13px/1.3 inherit;
+  font-family: inherit;
+  cursor: pointer;
+}
+.cp-deconnexion:hover { color: var(--text-primary); }

@@ -14,6 +14,7 @@ import {
 import { readGuest } from '../services/guestService';
 import { sendParentalConsent, consentErrorMessage } from '../services/consentService';
 import { useIsDesktop } from '../hooks/useMediaQuery';
+import { nbsp } from '../utils/typography';
 import './Inscription.css';
 
 // Mascotte de chaque étape, sur ordinateur seulement.
@@ -436,7 +437,7 @@ export default function Inscription() {
           <div className="auth-desk-intro">
             <button type="button" className="auth-back" onClick={goPrev} aria-label="Retour">←</button>
             <span className="auth-desk-mascot"><Mascot pose={POSE_ETAPE[stepId] ?? 'hello'} size={132} alt="" aria-hidden="true" /></span>
-            {etape && <h1 className="signup-question">{etape.titre}</h1>}
+            {etape && <h1 className="signup-question">{nbsp(etape.titre)}</h1>}
             {etape?.aide && <p className="signup-hint">{etape.aide}</p>}
             {stepId !== 'parent' && <p className="auth-desk-step">Étape {progressIdx + 1} sur {totalVisible}</p>}
           </div>
@@ -463,7 +464,7 @@ export default function Inscription() {
       </div>
 
       <div className={`auth-content signup-content signup-anim-${animDir}`} key={stepId}>
-        {etape && <h1 className="signup-question">{etape.titre}</h1>}
+        {etape && <h1 className="signup-question">{nbsp(etape.titre)}</h1>}
         {etape?.aide && <p className="signup-hint">{etape.aide}</p>}
         {etape?.corps}
 
