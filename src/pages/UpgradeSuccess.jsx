@@ -1,6 +1,7 @@
 import { CameraIcon, ChatIcon, SunIcon, StarIcon } from '../components/Icons';
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import { prixDe } from '../../api/_prix.js';
 import { useAuth } from '../context/AuthContext';
 import './UpgradeSuccess.css';
 
@@ -29,6 +30,8 @@ const ADVANTAGES = [
 
 export default function UpgradeSuccess() {
   const navigate = useNavigate();
+  const [params] = useSearchParams();
+  const prix = prixDe(params.get('formule'), params.get('fondateur') === '1');
   const { currentUser, refreshPremium, isPremium } = useAuth();
   const [step, setStep] = useState(0);
   const [retriesExhausted, setRetriesExhausted] = useState(false);
@@ -141,7 +144,7 @@ export default function UpgradeSuccess() {
             <span className="ugs-receipt-check">✓</span>
             <div>
               <span className="ugs-receipt-label">Abonnement actif</span>
-              <span className="ugs-receipt-price">4,99 €/mois</span>
+              <span className="ugs-receipt-price">{prix.montant}{prix.cadence}</span>
             </div>
           </div>
           <button className="ugs-cta" onClick={() => navigate('/scan')}>

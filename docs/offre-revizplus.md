@@ -24,7 +24,7 @@ Réviz+ », branche `stripe-live`).
 | Agenda : contrôles, compte à rebours, rappel la veille | Tout | — |
 | Agenda : emploi du temps Pronote | Tout | — |
 | Agenda : **plan de révision automatique** | Offert pour le premier contrôle | Inclus pour tous les contrôles |
-| Coach | 10 messages par jour | 200 messages par jour |
+| Coach | 10 messages par jour | 60 messages par jour |
 | Coach : mode « Interroge-moi » | — | Inclus |
 | Coach qui connaît ses contrôles et ses erreurs | — | Inclus |
 | Scan de leçons | 5 par semaine | Illimité (plafond de sécurité) |
@@ -67,4 +67,6 @@ les deux.
 - Une fois l'offre construite : mettre à jour la landing (tarifs, FAQ,
   comparatif), le paragraphe des CGV, l'annonce `RevizPlusAnnonce` et la fiche
   `RevizPlus`.
-- Prix affiché sur la landing : 4,99 € par mois.
+- Prix validé le 2026-10-11 : 6,99 €/mois, 49 €/an, fondateurs 3,99 €/mois
+  ou 29 €/an (`docs/prix-revizplus.md`, `api/_prix.js`). La transition du
+  gratuit au payant est décrite dans `docs/prix-revizplus.md`.

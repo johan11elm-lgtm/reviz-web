@@ -6,6 +6,7 @@ import { GemIcon, SparkIcon, CameraIcon, ChatIcon, SunIcon } from './Icons';
 import { getScanStatus } from '../services/scanLimitService';
 import { moisInscription, quotaCoachDuJour } from '../utils/revizPlus';
 import { LANCEMENT_CHAT_LIMIT } from '../../api/_lancement.js';
+import { PRIX, PRIX_FONDATEUR } from '../../api/_prix.js';
 import './RevizPlus.css';
 
 /**
@@ -82,7 +83,11 @@ export function RevizPlusCard({ onTheme, className = '' }) {
 
       <h2 className="rp-card-title" id="rp-card-titre">Tout Réviz+ est à toi</h2>
       <p className="rp-card-sub">
-        {isPremium ? 'Ton abonnement est actif.' : 'Offert pendant le lancement de Réviz. Rien à payer, rien à activer.'}
+        {isPremium
+          ? 'Ton abonnement est actif.'
+          : estFondateur
+            ? `Offert pendant le lancement de Réviz. Ensuite, Réviz+ coûtera ${PRIX.annuel.montant} par an : toi, membre fondateur, tu le garderas à ${PRIX_FONDATEUR.annuel.montant}.`
+            : 'Offert pendant le lancement de Réviz. Rien à payer, rien à activer.'}
       </p>
 
       {estFondateur && (

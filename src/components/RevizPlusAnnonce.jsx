@@ -41,7 +41,7 @@ export function RevizPlusAnnonce({ uid, onClose }) {
         </div>
         <span className="rv-pill rv-pill--orange battle-annonce-pill">Offert</span>
         <h2 className="battle-annonce-titre" id="revizplus-annonce-titre">Réviz+ est offert</h2>
-        <p className="battle-annonce-sous">Pendant le lancement de Réviz, tout Réviz+ est gratuit pour toi. Rien à payer, rien à activer.</p>
+        <p className="battle-annonce-sous">Pendant le lancement de Réviz, tout Réviz+ est gratuit pour toi. Rien à payer, rien à activer. Et après, tu garderas un prix de membre fondateur.</p>
         <ul className="battle-regles">
           <li><CameraIcon /><span>Jusqu’à {LANCEMENT_SCAN_LIMIT} leçons analysées par semaine, au lieu de 5</span></li>
           <li><ChatIcon /><span>Le coach, jusqu’à {LANCEMENT_CHAT_LIMIT} messages par jour</span></li>

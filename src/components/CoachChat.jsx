@@ -1,12 +1,11 @@
 import { Fragment, useState, useEffect, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useModalA11y } from '../hooks/useModalA11y';
 import { Mascot } from './Mascot';
 import { nbsp } from '../utils/typography';
 import { BulbIcon, StarIcon, QuizIcon, PencilIcon } from './Icons';
 import { sendCoachMessage, CHAT_MAX_MESSAGE_LENGTH } from '../services/chatService';
-import { startCheckout } from '../services/billingService';
+import { ChoixFormule } from './ChoixFormule';
 import './CoachChat.css';
 import './RevizPlus.css';
 
@@ -185,7 +184,6 @@ export function coachPreview(lessonId) {
 export function CoachConversation({ lessonId, prefill, className = '', variant = 'sheet', lessonTitle = '', onChangeLesson }) {
   const isPage = variant === 'page';
   const { hasRevizPlus, getUserLevel } = useAuth();
-  const navigate = useNavigate();
 
   const [messages, setMessages] = useState(() => loadConversation(lessonId));
   const [input, setInput]             = useState('');
@@ -193,7 +191,6 @@ export function CoachConversation({ lessonId, prefill, className = '', variant =
   const [isStreaming, setIsStreaming] = useState(false);
   const [error, setError]             = useState(null);
   const [quotaOut, setQuotaOut]       = useState(false);
-  const [upgradeLoading, setUpgradeLoading] = useState(false);
   const scrollRef = useRef(null);
 
   // Changement de leçon → conversation de cette leçon.
@@ -248,18 +245,6 @@ export function CoachConversation({ lessonId, prefill, className = '', variant =
     } finally {
       setIsStreaming(false);
       setDraft(null);
-    }
-  }
-
-  async function handleUpgrade() {
-    if (upgradeLoading) return;
-    setUpgradeLoading(true);
-    try {
-      await startCheckout(); // redirection pleine page en cas de succès
-    } catch (err) {
-      setUpgradeLoading(false);
-      if (err.message === 'EMAIL_NOT_VERIFIED') navigate('/verify-email');
-      else setError('Impossible d\'ouvrir le paiement. Réessaie dans un moment.');
     }
   }
 
@@ -337,16 +322,7 @@ export function CoachConversation({ lessonId, prefill, className = '', variant =
                   ? 'Wow, on a beaucoup discuté aujourd\'hui ! On se retrouve demain pour la suite.'
                   : 'Tu as utilisé tous tes messages du jour ! On se retrouve demain, ou passe à Réviz+ pour continuer maintenant.'}
               </CoachRow>
-              {!hasRevizPlus && (
-                <button
-                  type="button"
-                  className="rv-btn-cta coach-upgrade-btn"
-                  onClick={handleUpgrade}
-                  disabled={upgradeLoading}
-                >
-                  <span>{upgradeLoading ? 'Redirection…' : 'Passer à Réviz+'}</span>
-                </button>
-              )}
+              {!hasRevizPlus && <ChoixFormule className="coach-formules" />}
             </div>
           )}
         </div>

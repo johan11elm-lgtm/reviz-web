@@ -1,10 +1,6 @@
-import { MailIcon, GemIcon } from './Icons';
 import { Mascot } from './Mascot';
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
+import { ChoixFormule } from './ChoixFormule';
 import { useModalA11y } from '../hooks/useModalA11y';
-import { apiFetch } from '../services/apiClient.js';
 import { LANCEMENT_OFFERT } from '../../api/_lancement.js';
 import './PremiumModal.css';
 
@@ -12,44 +8,12 @@ import './PremiumModal.css';
  * Modale freemium — affichée quand la limite hebdomadaire de scans est atteinte.
  */
 export function PremiumModal({ onClose, used = 5, limit = 5 }) {
-  const { currentUser } = useAuth();
-  const [loading, setLoading] = useState(false);
-  const [verifyNeeded, setVerifyNeeded] = useState(false);
   const ref = useModalA11y(onClose);
-  const navigate = useNavigate();
 
   const now = new Date();
   const day = now.getDay();
   const daysUntilMonday = day === 0 ? 1 : 8 - day;
   const resetLabel = daysUntilMonday === 1 ? 'demain' : `dans ${daysUntilMonday} jours`;
-
-  async function handleUpgrade() {
-    if (loading) return;
-    setLoading(true);
-    try {
-      const idToken = await currentUser?.getIdToken();
-      const res = await apiFetch('/api/create-checkout', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ idToken }),
-      });
-      const data = await res.json();
-      if (res.status === 403 && data.error === 'EMAIL_NOT_VERIFIED') {
-        setVerifyNeeded(true);
-        setLoading(false);
-      } else if (data.url) {
-        window.location.href = data.url;
-      } else {
-        console.error('[PremiumModal] No URL returned:', data);
-        alert('Erreur lors de la redirection. Réessaie dans quelques instants.');
-        setLoading(false);
-      }
-    } catch (err) {
-      console.error('[PremiumModal] Checkout error:', err);
-      alert('Erreur de connexion. Vérifie ta connexion internet.');
-      setLoading(false);
-    }
-  }
 
   return (
     <div className="premium-overlay" onClick={onClose}>
@@ -80,31 +44,7 @@ export function PremiumModal({ onClose, used = 5, limit = 5 }) {
 
         {!LANCEMENT_OFFERT && <div className="premium-divider" />}
 
-        {verifyNeeded && (
-          <p className="premium-sub">
-            Confirme ton email avant de passer à Réviz+ : clique sur le lien
-            qu'on t'a envoyé, ça prend 10 secondes !
-          </p>
-        )}
-
-        {LANCEMENT_OFFERT ? null : verifyNeeded ? (
-          <button
-            className="premium-btn premium-btn--upgrade"
-            onClick={() => navigate('/verify-email')}
-          >
-            <span className="premium-btn-icon"><MailIcon /></span>
-            Vérifier mon email
-          </button>
-        ) : (
-          <button
-            className="premium-btn premium-btn--upgrade"
-            onClick={handleUpgrade}
-            disabled={loading}
-          >
-            <span className="premium-btn-icon"><GemIcon /></span>
-            {loading ? 'Redirection...' : 'Passer à Réviz+ — 4,99€/mois'}
-          </button>
-        )}
+        {!LANCEMENT_OFFERT && <ChoixFormule />}
 
         <button className="premium-btn premium-btn--close" onClick={onClose}>
           Retour

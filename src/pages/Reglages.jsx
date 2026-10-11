@@ -12,7 +12,8 @@ import { LevelSelector } from '../components/LevelSelector';
 import { THEMES } from '../utils/themes';
 import { RevizPlusBadge, RevizPlusCard } from '../components/RevizPlus';
 import { formatLevelLabel } from '../utils/levels';
-import { openBillingPortal, startCheckout } from '../services/billingService';
+import { openBillingPortal } from '../services/billingService';
+import { ChoixFormule } from '../components/ChoixFormule';
 import { remindersAvailable, isReminderEnabled, enableReminder, disableReminder } from '../services/reminderService';
 import { loadLessons } from '../services/historyService';
 import { countDueCards } from '../services/srsService';
@@ -152,19 +153,6 @@ export default function Reglages() {
   // ── 5. Abonnement ──
   const [billingLoading, setBillingLoading] = useState(false);
   const [billingError, setBillingError]     = useState('');
-
-  async function handleUpgrade() {
-    if (billingLoading) return;
-    setBillingLoading(true); setBillingError('');
-    try {
-      await startCheckout(); // redirige vers Stripe en cas de succès
-    } catch (err) {
-      setBillingLoading(false);
-      setBillingError(err.message === 'EMAIL_NOT_VERIFIED'
-        ? 'Confirme d\'abord ton adresse email, puis réessaie.'
-        : 'Impossible d\'ouvrir le paiement. Réessaie dans un moment.');
-    }
-  }
 
   async function handleManageSubscription() {
     if (billingLoading) return;
@@ -499,14 +487,7 @@ export default function Reglages() {
                 {billingLoading ? 'Ouverture…' : 'Gérer mon abonnement'}
               </button>
             ) : (
-              <button
-                type="button"
-                className="rv-btn-cta rv-btn-cta--full"
-                onClick={handleUpgrade}
-                disabled={billingLoading}
-              >
-                {billingLoading ? 'Ouverture…' : 'Passer à Réviz+'}
-              </button>
+              <ChoixFormule />
             )}
             {billingError && <p className="rg-error" role="alert">{billingError}</p>}
           </div>

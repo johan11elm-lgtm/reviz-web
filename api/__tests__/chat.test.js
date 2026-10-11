@@ -21,7 +21,7 @@ vi.mock('../_firebaseAdmin.js', () => ({
 }))
 vi.mock('../_chatQuota.js', () => ({
   CHAT_FREE_LIMIT: 10,
-  CHAT_PREMIUM_LIMIT: 200,
+  CHAT_PREMIUM_LIMIT: 60,
   consumeChatQuota: (...a) => consumeChatQuota(...a),
   refundChatQuota: (...a) => refundChatQuota(...a),
 }))
@@ -187,7 +187,7 @@ describe('/api/chat', () => {
     anthropicFetch.mockResolvedValue({ ok: true, body: sseBody([]) })
     const res = mockRes()
     await handler({ method: 'POST', body: VALID_BODY }, res)
-    expect(consumeChatQuota).toHaveBeenCalledWith(expect.objectContaining({ limit: 200 }))
+    expect(consumeChatQuota).toHaveBeenCalledWith(expect.objectContaining({ limit: 60 }))
   })
 
   it('streame les deltas de texte puis [DONE] (200)', async () => {

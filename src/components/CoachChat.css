@@ -260,7 +260,7 @@
   flex-direction: column;
   gap: 12px;
 }
-.coach-upgrade-btn { align-self: center; }
+.coach-formules { max-width: 360px; align-self: center; }
 
 /* ── Amorces : rangée défilante sous le fil ── */
 .coach-suggestions {
