@@ -172,7 +172,7 @@ export default function FinishSetup() {
             {intro}
             <ul className="auth-desk-why">
               <li><strong>Ta classe</strong> choisit le programme et les chapitres qu'on te propose.</li>
-              <li><strong>Ta date de naissance</strong> : sous 15 ans, on prévient un de tes parents. Tu commences tout de suite, il a 10 jours pour donner son accord.</li>
+              <li><strong>Ta date de naissance</strong> : sous 15 ans, on prévient un de tes parents. Tu commences tout de suite, il a 10 jours pour donner son autorisation.</li>
             </ul>
           </div>
           <div className="auth-desk-card">
