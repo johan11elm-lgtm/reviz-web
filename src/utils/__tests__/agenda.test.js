@@ -83,6 +83,7 @@ describe('contrôles', () => {
     expect(intituleControle({ matiere: 'maths' })).toBe('Contrôle de maths')
     expect(intituleControle({ matiere: 'anglais' })).toBe("Contrôle d'anglais")
     expect(intituleControle({ matiere: 'histoire' })).toBe("Contrôle d'histoire")
+    expect(intituleControle({ matiere: 'svt' })).toBe('Contrôle de SVT')
     expect(intituleControle({ matiere: 'autre' })).toBe('Contrôle')
   })
 })

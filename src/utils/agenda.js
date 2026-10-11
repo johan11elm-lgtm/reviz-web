@@ -163,6 +163,7 @@ export function compteARebours(date, aujourdhui = jourIso()) {
 export function intituleControle(c) {
   const m = matiereControle(c?.matiere)
   if (m.slug === 'autre') return 'Contrôle'
-  const nom = m.label.toLowerCase()
+  // Les sigles restent en capitales (« Contrôle de SVT »).
+  const nom = m.label === m.label.toUpperCase() ? m.label : m.label.toLowerCase()
   return /^[aeiouyh]/.test(sansAccents(nom)) ? `Contrôle d'${nom}` : `Contrôle de ${nom}`
 }

@@ -27,7 +27,7 @@
    * bandeau dans les pages. Les pages de premier niveau (celles de la barre
    * latérale) n'ont ni flèche retour ni rangée d'en-tête : leur titre
    * tombe au même endroit partout. */
-  html:not(.native) .guest-banner:not(.consent-banner) { display: none; }
+  html:not(.native) .guest-banner:not(.consent-banner):not(.controle-banner) { display: none; }
   html:not(.native) .rv-page-header--racine,
   html:not(.native) .profile-page > .rv-page-header { display: none; }
   /* Titre des pages de premier niveau à 99 px du haut, comme Mes cours et

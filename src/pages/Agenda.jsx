@@ -266,7 +266,7 @@ function EmploiDuTemps({ user, isGuest, lien, controles, onAgenda, onAjout }) {
       )}
 
       <p className="agenda-pied">
-        Touche un cours pour y noter un contrôle.{' '}
+        {isDesktop ? 'Clique sur' : 'Touche'} un cours pour y noter un contrôle.{' '}
         <button type="button" className="agenda-lien" onClick={async () => onAgenda(await delierPronote(user))}>
           Délier Pronote
         </button>

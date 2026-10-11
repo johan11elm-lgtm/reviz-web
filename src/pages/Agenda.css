@@ -41,7 +41,7 @@
   cursor: pointer;
 }
 .agenda-controle-suppr svg { width: 18px; height: 18px; }
-.agenda-controle-suppr:hover { background: var(--bg-hover); color: var(--text-secondary); }
+@media (hover: hover) { .agenda-controle-suppr:hover { background: var(--bg-hover); color: var(--text-secondary); } }
 .agenda-vide { margin: 0; font-size: 14px; line-height: 1.5; color: var(--text-secondary); }
 .agenda-ajouter { align-self: stretch; }
 
@@ -224,7 +224,7 @@
   color: inherit;
   cursor: pointer;
 }
-.agenda-cours-item:hover { border-color: var(--border); }
+@media (hover: hover) { .agenda-cours-item:hover { border-color: var(--border); } }
 .agenda-cours-item.annule { opacity: 0.55; }
 .agenda-cours-item.annule .agenda-cours-nom { text-decoration: line-through; }
 .agenda-cours-heure { flex-shrink: 0; width: 42px; font-size: 14px; font-weight: 700; color: var(--text-primary); line-height: 1.3; }
@@ -283,7 +283,7 @@
   cursor: pointer;
 }
 .agenda-modal-icone svg { width: 20px; height: 20px; }
-button.agenda-modal-icone:hover { background: var(--bg-hover); }
+@media (hover: hover) { button.agenda-modal-icone:hover { background: var(--bg-hover); } }
 .agenda-modal-etapes { display: flex; gap: 6px; }
 .agenda-modal-point { width: 22px; height: 5px; border-radius: 99px; background: var(--border); transition: background .2s; }
 .agenda-modal-point.fait { background: var(--accent-violet); }
@@ -312,7 +312,8 @@ button.agenda-modal-icone:hover { background: var(--bg-hover); }
   transition: border-color .15s, transform .1s;
 }
 .agenda-matiere:active { transform: scale(0.97); }
-.agenda-matiere:hover, .agenda-matiere.active { border-color: var(--accent-violet); }
+.agenda-matiere.active { border-color: var(--accent-violet); }
+@media (hover: hover) { .agenda-matiere:hover { border-color: var(--accent-violet); } }
 
 .agenda-dates { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
 .agenda-date {
@@ -331,7 +332,8 @@ button.agenda-modal-icone:hover { background: var(--bg-hover); }
   transition: border-color .15s, transform .1s;
 }
 .agenda-date:active { transform: scale(0.97); }
-.agenda-date:hover, .agenda-date.active { border-color: var(--accent-violet); }
+.agenda-date.active { border-color: var(--accent-violet); }
+@media (hover: hover) { .agenda-date:hover { border-color: var(--accent-violet); } }
 .agenda-date-jour { font-size: 12px; font-weight: 600; }
 .agenda-date-num { font-size: 22px; font-weight: 800; color: var(--text-primary); line-height: 1.1; }
 .agenda-date-mois { font-size: 11px; color: var(--text-muted); }
