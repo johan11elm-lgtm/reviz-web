@@ -154,12 +154,14 @@ export default function Inscription() {
       return;
     }
 
-    // Étape 'parent' : envoi de la demande de consentement parental
+    // Étape 'parent' : on prévient le parent, l'élève entre aussitôt dans
+    // l'app (le parent accepte ou refuse depuis l'email).
     if (stepId === 'parent') {
       setLoading(true);
       try {
         await sendParentalConsent(parentEmail.trim(), prenom);
-        navigate('/consent-pending', { replace: true, state: { parentEmail: parentEmail.trim() } });
+        await refreshGate?.();
+        navigate('/verify-email', { replace: true });
       } catch (err) {
         setError(consentErrorMessage(err.message));
       } finally {
@@ -220,7 +222,7 @@ export default function Inscription() {
     if (loading && stepId === 'account') return 'Création...';
     if (loading && stepId === 'parent')  return 'Envoi...';
     if (stepId === 'account') return 'Créer mon compte';
-    if (stepId === 'parent')  return 'Envoyer la demande →';
+    if (stepId === 'parent')  return 'Envoyer et commencer →';
     return 'Continuer';
   })();
 
@@ -364,7 +366,7 @@ export default function Inscription() {
             </label>
             {isUnder15(birthDate) && (
               <div className="auth-parent-notice-inline">
-                Un email sera envoyé à ton parent pour confirmer ton inscription.
+                On préviendra un de tes parents par email. Tu pourras réviser tout de suite.
               </div>
             )}
           </>
@@ -377,8 +379,8 @@ export default function Inscription() {
             <div className="auth-parent-info">
               <span className="auth-parent-icon"><UsersIcon /></span>
               <p>
-                Comme tu as moins de 15 ans, nous avons besoin de l'accord d'un de tes parents
-                avant de t'ouvrir l'accès à Réviz. Un email lui sera envoyé avec un lien de confirmation.
+                Comme tu as moins de 15 ans, on envoie un email à un de tes parents pour lui dire
+                que tu utilises Réviz. Tu peux commencer tout de suite : il aura 7 jours pour donner son accord.
               </p>
             </div>
             <div className="auth-field">

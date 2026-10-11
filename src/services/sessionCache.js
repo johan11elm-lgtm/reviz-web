@@ -23,7 +23,7 @@ export const MAX_AGE_MS = 90 * 24 * 60 * 60 * 1000
  * Lit la session mémorisée, ou null (absente, corrompue, périmée).
  * @returns {{uid:string, displayName:string|null, email:string|null,
  *   emailVerified:boolean, providerIds:string[], isPremium:boolean,
- *   consentBlocked:boolean, needsProfileSetup:boolean} | null}
+ *   consentBlocked:boolean, consentStatus:string, needsProfileSetup:boolean} | null}
  */
 export function readSessionCache(now = Date.now()) {
   try {
@@ -41,6 +41,7 @@ export function readSessionCache(now = Date.now()) {
       providerIds: Array.isArray(s.providerIds) ? s.providerIds.filter(p => typeof p === 'string') : [],
       isPremium: s.isPremium === true,
       consentBlocked: s.consentBlocked === true,
+      consentStatus: typeof s.consentStatus === 'string' ? s.consentStatus : 'ok',
       needsProfileSetup: s.needsProfileSetup === true,
     }
   } catch {
@@ -51,7 +52,7 @@ export function readSessionCache(now = Date.now()) {
 /**
  * Mémorise une session confirmée par Firebase et l'état du gate associé.
  * @param {object} user  utilisateur Firebase (uid, displayName, email…)
- * @param {{isPremium?:boolean, consentBlocked?:boolean, needsProfileSetup?:boolean}} gate
+ * @param {{isPremium?:boolean, consentBlocked?:boolean, consentStatus?:string, needsProfileSetup?:boolean}} gate
  */
 export function writeSessionCache(user, gate = {}, now = Date.now()) {
   if (!user?.uid) return
@@ -67,6 +68,7 @@ export function writeSessionCache(user, gate = {}, now = Date.now()) {
     providerIds,
     isPremium: gate.isPremium === true,
     consentBlocked: gate.consentBlocked === true,
+    consentStatus: typeof gate.consentStatus === 'string' ? gate.consentStatus : 'ok',
     needsProfileSetup: gate.needsProfileSetup === true,
     savedAt: now,
   }

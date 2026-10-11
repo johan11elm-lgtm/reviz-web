@@ -89,6 +89,29 @@ describe('send-parental-consent — sécurité', () => {
     expect(emailsSend).toHaveBeenCalledWith(expect.objectContaining({ to: 'parent@test.fr' }))
   })
 
+  it('le délai de réponse démarre au premier envoi et survit aux renvois (même après un refus)', async () => {
+    verifyIdToken.mockResolvedValue({ uid: 'u1', email: 'kid@test.fr' })
+    docGet.mockResolvedValue({ exists: false })
+    await handler({ method: 'POST', body: { idToken: 'ok', parentEmail: 'parent@test.fr', childName: 'Léa' } }, mockRes())
+    expect(docSet.mock.calls[0][0].firstRequestedAt).toEqual(expect.any(Number))
+
+    docSet.mockClear()
+    docGet.mockResolvedValue({ exists: true, data: () => ({ status: 'refused', token: null, createdAt: 1000, firstRequestedAt: 1000 }) })
+    const res = mockRes()
+    await handler({ method: 'POST', body: { idToken: 'ok', parentEmail: 'parent@test.fr', childName: 'Léa' } }, res)
+    expect(res.statusCode).toBe(200)
+    expect(docSet).toHaveBeenCalledWith(expect.objectContaining({ status: 'pending', firstRequestedAt: 1000 }))
+  })
+
+  it('l\'email propose d\'accepter et de refuser', async () => {
+    verifyIdToken.mockResolvedValue({ uid: 'u1', email: 'kid@test.fr' })
+    docGet.mockResolvedValue({ exists: false })
+    await handler({ method: 'POST', body: { idToken: 'ok', parentEmail: 'parent@test.fr', childName: 'Léa' } }, mockRes())
+    const html = emailsSend.mock.calls[0][0].html
+    expect(html).toContain('J\'accepte')
+    expect(html).toMatch(/approve-consent\?token=[^"]+&amp;uid=u1&amp;choix=refuser|approve-consent\?token=[^"]+&uid=u1&choix=refuser/)
+  })
+
   it('échappe childName dans le HTML de l\'email (anti-injection)', async () => {
     verifyIdToken.mockResolvedValue({ uid: 'u1', email: 'kid@test.fr' })
     docGet.mockResolvedValue({ exists: false })

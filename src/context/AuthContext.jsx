@@ -25,6 +25,7 @@ import {
 import { Capacitor } from '@capacitor/core';
 import { auth, db } from '../services/firebaseConfig';
 import { parseLevel, serializeLevel, migrateLegacyClasse, isUnder15 } from '../utils/levels';
+import { consentGate } from '../utils/consent';
 import { createUserProfile } from '../services/userProfileService';
 import { setActiveUser, pushLessonsToFirestore } from '../services/historyService';
 import { setActiveUser as setRevisionUser, pushRevisionsToFirestore } from '../services/revisionService';
@@ -96,8 +97,13 @@ export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser]   = useState(() => (cached ? userFromSessionCache(cached, auth) : guest ? guestUser(guest) : null));
   // true tant que Firebase n'a pas confirmé la session (même si l'app est déjà rendue depuis le cache).
   const [loading, setLoading]           = useState(true);
-  // Mineur <15 ans dont le consentement parental n'est pas (encore) approuvé.
+  // Mineur <15 ans dont l'accès est suspendu : email parent pas encore
+  // parti, refus du parent, ou délai de réponse écoulé (voir utils/consent).
   const [consentBlocked, setConsentBlocked] = useState(cached?.consentBlocked ?? false);
+  // Détail du consentement : { status, parentEmail, joursRestants }.
+  const [consent, setConsent] = useState(() => ({
+    status: cached?.consentStatus ?? 'ok', parentEmail: null, joursRestants: null,
+  }));
   // Compte sans mot de passe (Google, Apple…) sans profil complété (pas encore de date de naissance / niveau).
   const [needsProfileSetup, setNeedsProfileSetup] = useState(cached?.needsProfileSetup ?? false);
   const [isPremium, setIsPremium] = useState(cached?.isPremium ?? false);
@@ -262,6 +268,7 @@ export function AuthProvider({ children }) {
     setPremiumStatus(false);
     setIsPremium(false);
     setConsentBlocked(false);
+    setConsent({ status: 'ok', parentEmail: null, joursRestants: null });
     setNeedsProfileSetup(false);
     setGuest(g);
     setCurrentUser(guestUser(g));
@@ -390,6 +397,7 @@ export function AuthProvider({ children }) {
   async function loadGateState(user) {
     if (!user) {
       setConsentBlocked(false);
+      setConsent({ status: 'ok', parentEmail: null, joursRestants: null });
       setNeedsProfileSetup(false);
       setIsPremium(false);
       setPremiumStatus(false);
@@ -399,13 +407,13 @@ export function AuthProvider({ children }) {
     // Les deux lectures partent en parallèle : un seul aller-retour Firestore
     // au lieu de deux enchaînés. Lecture impossible → on n'élève pas le
     // blocage (fail-open UX).
-    const [profile, approved] = await Promise.all([
+    const [profile, consentDoc] = await Promise.all([
       getDoc(doc(db, 'users', user.uid))
         .then(snap => (snap.exists() ? snap.data() : null))
         .catch(() => null),
       getDoc(doc(db, 'users', user.uid, 'parentalConsent', 'consent'))
-        .then(c => c.exists() && c.data()?.status === 'approved')
-        .catch(() => false),
+        .then(c => (c.exists() ? c.data() : null))
+        .catch(() => null),
     ]);
 
     // Classe retrouvée depuis le profil quand ce navigateur ne la connaît pas
@@ -425,8 +433,11 @@ export function AuthProvider({ children }) {
     setIsPremium(premium);
     setPremiumStatus(premium);
 
-    // Mineur <15 ans non approuvé → accès bloqué (que le doc soit absent OU en attente).
-    setConsentBlocked(isUnder15(profile?.birthDate) && !approved);
+    // Mineur <15 ans : accès ouvert pendant l'attente de la réponse du parent,
+    // suspendu si rien n'est parti, en cas de refus ou sans réponse à temps.
+    const { blocked, ...detail } = consentGate({ under15: isUnder15(profile?.birthDate), consent: consentDoc });
+    setConsentBlocked(blocked);
+    setConsent(detail);
     setGateUid(user.uid);
   }
 
@@ -477,8 +488,8 @@ export function AuthProvider({ children }) {
   // on mémorise l'état pour le prochain démarrage.
   useEffect(() => {
     if (loading || !currentUser || gateUid !== currentUser.uid) return;
-    writeSessionCache(currentUser, { isPremium, consentBlocked, needsProfileSetup });
-  }, [loading, currentUser, gateUid, isPremium, consentBlocked, needsProfileSetup]);
+    writeSessionCache(currentUser, { isPremium, consentBlocked, consentStatus: consent.status, needsProfileSetup });
+  }, [loading, currentUser, gateUid, isPremium, consentBlocked, consent.status, needsProfileSetup]);
 
   // Permet de re-vérifier le statut premium (après retour Stripe)
   async function refreshPremium() {
@@ -503,6 +514,7 @@ export function AuthProvider({ children }) {
     currentUser,
     loading,
     consentBlocked,
+    consent,
     needsProfileSetup,
     isPremium, // abonnement payé (Stripe)
     // Avantages Réviz+ : abonné, ou offert à tous pendant le lancement.
@@ -529,7 +541,7 @@ export function AuthProvider({ children }) {
     updateUserPassword,
     resendVerificationEmail,
     deleteAccount,
-  }), [currentUser, loading, consentBlocked, needsProfileSetup, isPremium, guest, levelTick]);
+  }), [currentUser, loading, consentBlocked, consent, needsProfileSetup, isPremium, guest, levelTick]);
 
   // Enfants rendus dès que Firebase a confirmé la session — ou immédiatement
   // depuis le cache local (démarrage optimiste). Sans cache, on attend :

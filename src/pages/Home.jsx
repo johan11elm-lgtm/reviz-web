@@ -4,6 +4,7 @@ import { useAuth } from '../context/AuthContext';
 import { BottomNav } from '../components/BottomNav';
 import { UserHeader } from '../components/UserHeader';
 import { GuestBanner } from '../components/GuestBanner';
+import { ConsentBanner } from '../components/ConsentBanner';
 import { HeroCTA } from '../components/HeroCTA';
 import { Mascot } from '../components/Mascot';
 import { getScanStatus } from '../services/scanLimitService';
@@ -465,6 +466,8 @@ export default function Home() {
         <div className="content home-desk">
           {greeting}
 
+          <ConsentBanner />
+
           <div className="home-desk-top">
             {isGuest ? hero : heroDesk}
             <div className="home-desk-side">
@@ -513,6 +516,7 @@ export default function Home() {
         <div className="content home-stack">
 
           <GuestBanner />
+          <ConsentBanner />
 
           {greeting}
 

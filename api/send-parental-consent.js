@@ -3,6 +3,8 @@
 // Body: { idToken, parentEmail, childName }
 // L'uid est dérivé du token Firebase vérifié — JAMAIS du body.
 // Génère un token, le stocke dans Firestore, envoie l'email au parent via Resend.
+// L'élève utilise déjà l'app : le parent accepte ou refuse depuis l'email. Sans
+// réponse sous 7 jours (src/utils/consent.js), l'accès est suspendu.
 
 import { Resend } from 'resend';
 import { randomUUID } from 'node:crypto';
@@ -53,9 +55,9 @@ export default async function handler(req, res) {
     const docRef = db.collection('users').doc(uid)
       .collection('parentalConsent').doc('consent');
     const existing = await docRef.get();
+    const d = existing.exists ? existing.data() : null;
 
-    if (existing.exists) {
-      const d = existing.data();
+    if (d) {
       // Déjà approuvé : ne JAMAIS réinitialiser à 'pending' (anti-lockout), ni renvoyer d'email.
       if (d.status === 'approved') {
         return res.status(200).json({ ok: true, alreadyApproved: true });
@@ -70,32 +72,37 @@ export default async function handler(req, res) {
     }
 
     const token = randomUUID();
+    const now = Date.now();
     await docRef.set({
       parentEmail: email,
       status: 'pending',
       token,
-      createdAt: Date.now(),
+      createdAt: now,
+      // Début du délai de réponse : conservé d'un renvoi à l'autre, sinon
+      // chaque renvoi (ou un refus suivi d'un renvoi) rouvrirait 7 jours.
+      firstRequestedAt: d?.firstRequestedAt ?? now,
     });
 
-    const approveUrl = `https://app.revizapp.fr/api/approve-consent?token=${token}&uid=${uid}`;
+    const lien = `https://app.revizapp.fr/api/approve-consent?token=${token}&uid=${uid}`;
     const safeName = escapeHtml(childName);
+    const bouton = 'display: inline-block; padding: 14px 24px; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 15px; margin: 0 8px 8px 0;';
 
     const resend = new Resend(process.env.RESEND_API_KEY);
     await resend.emails.send({
       from: 'Réviz <noreply@revizapp.fr>',
       to: email,
-      subject: 'Votre enfant souhaite utiliser Réviz',
+      subject: 'Votre enfant utilise Réviz : acceptez-vous ?',
       html: `
         <div style="font-family: -apple-system, sans-serif; max-width: 480px; margin: 0 auto; padding: 24px;">
-          <h1 style="font-size: 24px; color: #1A1A1A;">Réviz 🌟</h1>
+          <h1 style="font-size: 24px; color: #1A1A1A;">Réviz</h1>
           <p style="color: #444; font-size: 16px; line-height: 1.5;">
-            <strong>${safeName}</strong> souhaite créer un compte sur <strong>Réviz</strong>,
-            une application d'aide à la révision scolaire par intelligence artificielle.
+            <strong>${safeName}</strong> vient de commencer à utiliser <strong>Réviz</strong>,
+            une application d'aide à la révision pour les collégiens et les lycéens.
           </p>
           <p style="color: #444; font-size: 15px; line-height: 1.5;">
-            Votre enfant a indiqué avoir moins de 15 ans. Conformément à la réglementation française
-            (RGPD et loi Informatique et Libertés), nous avons besoin de votre accord parental avant
-            qu'il puisse accéder à l'application.
+            Votre enfant a indiqué avoir moins de 15 ans. La réglementation française
+            (RGPD et loi Informatique et Libertés) demande l'accord d'un parent.
+            Vous pouvez accepter ou refuser en un clic.
           </p>
           <div style="background: #F7F7F5; border-radius: 12px; padding: 16px; margin: 24px 0;">
             <p style="margin: 0; font-size: 14px; color: #666;">
@@ -104,13 +111,11 @@ export default async function handler(req, res) {
               Battle (quiz à deux en direct) : l'adversaire voit le prénom ou le surnom choisi et les scores de la partie, supprimée sous 48 heures.
             </p>
           </div>
-          <a href="${approveUrl}" style="display: inline-block; background: #1A1A1A; color: white; padding: 14px 28px; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 15px;">
-            ✓ Donner mon autorisation
-          </a>
+          <a href="${lien}" style="${bouton} background: #1A1A1A; color: white;">J'accepte</a>
+          <a href="${lien}&choix=refuser" style="${bouton} background: #F7F7F5; color: #1A1A1A; border: 1px solid #DDD;">Je refuse</a>
           <p style="color: #888; font-size: 13px; margin-top: 24px;">
-            Ce lien est valable 7 jours. Vous devrez confirmer sur la page qui s'ouvre.<br/>
-            Si vous n'avez pas fait cette demande ou si vous refusez, ignorez simplement cet email :
-            le compte de votre enfant ne sera pas activé.<br/><br/>
+            Vous confirmerez votre choix sur la page qui s'ouvre. Ce lien est valable 7 jours.<br/>
+            En cas de refus, ou sans réponse sous 7 jours, l'accès de votre enfant à Réviz est suspendu.<br/><br/>
             <a href="https://app.revizapp.fr/legal/confidentialite" style="color: #888;">Politique de confidentialité</a>
           </p>
         </div>

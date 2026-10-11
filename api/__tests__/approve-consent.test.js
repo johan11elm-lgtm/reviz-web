@@ -50,7 +50,7 @@ describe('approve-consent — POST approuve', () => {
     const res = mockRes()
     await handler({ method: 'POST', body: { token: 'good', uid: 'u' } }, res)
     expect(res.statusCode).toBe(200)
-    expect(res.body).toContain('activé')
+    expect(res.body).toContain('accord est enregistré')
     expect(docUpdate).toHaveBeenCalledWith(expect.objectContaining({ status: 'approved', token: null }))
   })
 
@@ -75,6 +75,33 @@ describe('approve-consent — POST approuve', () => {
     const res = mockRes()
     await handler({ method: 'POST', body: { token: 'whatever', uid: 'u' } }, res)
     expect(res.statusCode).toBe(200)
+    expect(docUpdate).not.toHaveBeenCalled()
+  })
+})
+
+describe('approve-consent — refus du parent', () => {
+  it('GET ?choix=refuser met le refus en premier, sans rien muter', async () => {
+    const res = mockRes()
+    await handler({ method: 'GET', query: { token: 't', uid: 'u', choix: 'refuser' } }, res)
+    expect(res.statusCode).toBe(200)
+    expect(res.body.indexOf('value="refuser"')).toBeLessThan(res.body.indexOf('value="accepter"'))
+    expect(docUpdate).not.toHaveBeenCalled()
+  })
+
+  it('POST decision=refuser → statut refusé + token invalidé', async () => {
+    docGet.mockResolvedValue({ exists: true, data: () => ({ status: 'pending', token: 'good', createdAt: Date.now() }) })
+    const res = mockRes()
+    await handler({ method: 'POST', body: { token: 'good', uid: 'u', decision: 'refuser' } }, res)
+    expect(res.statusCode).toBe(200)
+    expect(res.body).toContain('suspendu')
+    expect(docUpdate).toHaveBeenCalledWith(expect.objectContaining({ status: 'refused', token: null }))
+  })
+
+  it('POST decision=refuser avec mauvais token → 403, pas de mutation', async () => {
+    docGet.mockResolvedValue({ exists: true, data: () => ({ status: 'pending', token: 'good', createdAt: Date.now() }) })
+    const res = mockRes()
+    await handler({ method: 'POST', body: { token: 'WRONG', uid: 'u', decision: 'refuser' } }, res)
+    expect(res.statusCode).toBe(403)
     expect(docUpdate).not.toHaveBeenCalled()
   })
 })

@@ -124,12 +124,30 @@ describe('<AuthProvider /> — démarrage optimiste', () => {
     await waitFor(() => expect(screen.getByTestId('probe')).toHaveTextContent('blocked=false loading=false'))
   })
 
-  it('mineur sans consentement approuvé → bloqué, et mémorisé tel quel', async () => {
+  it('mineur dont le parent n\'a pas encore été prévenu → bloqué, et mémorisé tel quel', async () => {
     mockFirestore({ profile: { plan: 'free', birthDate: '2015-01-01' }, consent: { status: 'pending' } })
     renderProvider()
     await resolveAuth(johan)
     expect(screen.getByTestId('probe')).toHaveTextContent('blocked=true')
-    await waitFor(() => expect(cacheOf().consentBlocked).toBe(true))
+    await waitFor(() => expect(cacheOf()).toMatchObject({ consentBlocked: true, consentStatus: 'a-demander' }))
+  })
+
+  it('mineur dont le parent a reçu l\'email → accès ouvert pendant l\'attente', async () => {
+    mockFirestore({
+      profile: { plan: 'free', birthDate: '2015-01-01' },
+      consent: { status: 'pending', parentEmail: 'p@f.fr', createdAt: Date.now(), firstRequestedAt: Date.now() },
+    })
+    renderProvider()
+    await resolveAuth(johan)
+    expect(screen.getByTestId('probe')).toHaveTextContent('blocked=false')
+    await waitFor(() => expect(cacheOf()).toMatchObject({ consentBlocked: false, consentStatus: 'en-attente' }))
+  })
+
+  it('mineur dont le parent a refusé → bloqué', async () => {
+    mockFirestore({ profile: { plan: 'free', birthDate: '2015-01-01' }, consent: { status: 'refused', parentEmail: 'p@f.fr' } })
+    renderProvider()
+    await resolveAuth(johan)
+    expect(screen.getByTestId('probe')).toHaveTextContent('blocked=true')
   })
 
   it('lecture Firestore en échec → fail-open (pas de blocage), session quand même mémorisée', async () => {
