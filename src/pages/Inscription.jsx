@@ -380,7 +380,7 @@ export default function Inscription() {
               <span className="auth-parent-icon"><UsersIcon /></span>
               <p>
                 Comme tu as moins de 15 ans, on envoie un email à un de tes parents pour lui dire
-                que tu utilises Réviz. Tu peux commencer tout de suite : il aura 10 jours pour donner son accord.
+                que tu utilises Réviz. Tu peux commencer tout de suite : il aura 10 jours pour donner son autorisation.
               </p>
             </div>
             <div className="auth-field">

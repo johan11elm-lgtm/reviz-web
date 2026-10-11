@@ -20,7 +20,7 @@ vi.mock('resend', () => ({
   Resend: class { constructor() { this.emails = { send: emailsSend } } },
 }))
 
-const { default: handler } = await import('../send-parental-consent.js')
+const { default: handler, relancerParents, RELANCE_APRES_MS } = await import('../send-parental-consent.js')
 
 function mockRes() {
   return {
@@ -152,3 +152,69 @@ describe('send-parental-consent — sécurité', () => {
     expect(emailsSend).toHaveBeenCalledWith(expect.objectContaining({ to: 'parent@test.fr' }))
   })
 })
+
+describe('send-parental-consent — relance quotidienne (cron)', () => {
+  const DAY = 24 * 60 * 60 * 1000
+  const now = 1_800_000_000_000
+  // Faux Firestore : demandes (collectionGroup) + profils users/{uid}.
+  function fakeDb(demandes, profils = {}) {
+    const docs = Object.entries(demandes).map(([uid, data]) => ({
+      data: () => data,
+      ref: { parent: { parent: { id: uid } }, update: vi.fn(async () => {}) },
+    }))
+    return {
+      docs,
+      collectionGroup: () => ({ get: async () => ({ docs }) }),
+      collection: () => ({ doc: uid => ({ get: async () => ({ exists: !!profils[uid], data: () => profils[uid] }) }) }),
+    }
+  }
+  const enAttente = (depuis, extra = {}) => ({ status: 'pending', token: 'tok', parentEmail: 'p@f.fr', createdAt: now - depuis, firstRequestedAt: now - depuis, ...extra })
+
+  it('relance une fois les parents sans réponse depuis 7 jours, avec le prénom et le même lien', async () => {
+    const db = fakeDb({ u1: enAttente(RELANCE_APRES_MS + DAY / 2) }, { u1: { prenom: 'Léa' } })
+    const envoyer = vi.fn(async () => {})
+    expect(await relancerParents({ db, envoyer, maintenant: now })).toEqual({ relances: 1 })
+    const mail = envoyer.mock.calls[0][0]
+    expect(mail.to).toBe('p@f.fr')
+    expect(mail.subject).toContain('plus que 3 jours')
+    expect(mail.html).toContain('Léa')
+    expect(mail.html).toContain('approve-consent?token=tok&uid=u1')
+    expect(db.docs[0].ref.update).toHaveBeenCalledWith({ relanceLe: now })
+  })
+
+  it('ne relance pas : trop tôt, déjà relancé, accès déjà suspendu, autorisé, ou rien d\'envoyé', async () => {
+    const db = fakeDb({
+      tot: enAttente(6 * DAY),
+      deja: enAttente(8 * DAY, { relanceLe: now - DAY }),
+      tard: enAttente(10 * DAY),
+      ok: { ...enAttente(8 * DAY), status: 'approved' },
+      vide: { status: 'pending', createdAt: now - 8 * DAY },
+    })
+    const envoyer = vi.fn(async () => {})
+    expect(await relancerParents({ db, envoyer, maintenant: now })).toEqual({ relances: 0 })
+    expect(envoyer).not.toHaveBeenCalled()
+  })
+
+  it('un envoi en échec n\'est pas marqué relancé (réessayé le lendemain)', async () => {
+    const db = fakeDb({ u1: enAttente(8 * DAY) })
+    const envoyer = vi.fn(async () => { throw new Error('resend down') })
+    expect(await relancerParents({ db, envoyer, maintenant: now })).toEqual({ relances: 0 })
+    expect(db.docs[0].ref.update).not.toHaveBeenCalled()
+  })
+
+  it('GET sans le secret du cron → 401', async () => {
+    process.env.CRON_SECRET = 'cron-secret'
+    const res = mockRes()
+    await handler({ method: 'GET', headers: { authorization: 'Bearer faux' } }, res)
+    expect(res.statusCode).toBe(401)
+    delete process.env.CRON_SECRET
+  })
+
+  it('un renvoi par l\'élève garde la trace de la relance', async () => {
+    verifyIdToken.mockResolvedValue({ uid: 'u1', email: 'kid@test.fr' })
+    docGet.mockResolvedValue({ exists: true, data: () => ({ status: 'pending', token: 't', createdAt: 0, firstRequestedAt: 0, relanceLe: 5 }) })
+    await handler({ method: 'POST', body: { idToken: 'ok', parentEmail: 'parent@test.fr', childName: 'Léa' } }, mockRes())
+    expect(docSet).toHaveBeenCalledWith(expect.objectContaining({ relanceLe: 5, firstRequestedAt: 0 }))
+  })
+})
+
