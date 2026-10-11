@@ -77,6 +77,8 @@ export default function Avis() {
   const [manque, setManque] = useState('');
   const [autre, setAutre] = useState('');
   const [email, setEmail] = useState('');
+  const [citation, setCitation] = useState(false);
+  const [signature, setSignature] = useState('');
   const [site, setSite] = useState('');
   const [etat, setEtat] = useState('saisie'); // saisie | envoi | merci
   const [erreur, setErreur] = useState('');
@@ -94,6 +96,7 @@ export default function Avis() {
         body: JSON.stringify({
           profil, discipline: profil === 'enseignant' ? discipline : '', conseil,
           plait, manque, autre, email, site, source, device: device(),
+          citation: citation && Boolean(plait.trim()), signature: citation ? signature : '',
         }),
       });
       if (res.ok) return setEtat('merci');
@@ -236,6 +239,30 @@ export default function Avis() {
                 />
                 <p className="avis-hint">Seulement pour vous répondre. Rien d'autre n'en est fait.</p>
               </div>
+
+              {plait.trim() && (
+                <div className="avis-field">
+                  <label className="avis-case">
+                    <input type="checkbox" checked={citation} onChange={e => setCitation(e.target.checked)} />
+                    <span>J'accepte que « ce qui me plaît » soit cité sur revizapp.fr</span>
+                  </label>
+                  {citation && (
+                    <>
+                      <label className="avis-label" htmlFor="avis-signature">Signature <span>(facultatif)</span></label>
+                      <input
+                        id="avis-signature"
+                        className="avis-input"
+                        type="text"
+                        maxLength={60}
+                        placeholder="Par exemple : Mme D., professeure de SVT"
+                        value={signature}
+                        onChange={e => setSignature(e.target.value)}
+                      />
+                    </>
+                  )}
+                  <p className="avis-hint">Rien n'est publié sans cet accord. Retrait à tout moment sur simple demande à contact@revizapp.fr.</p>
+                </div>
+              )}
 
               {/* Champ piège : invisible pour les humains, rempli par les robots. */}
               <div className="avis-piege" aria-hidden="true">

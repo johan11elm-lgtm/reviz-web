@@ -184,6 +184,22 @@ legend.avis-label { margin-bottom: 8px; }
   font-size: 12px;
   color: var(--text-muted);
 }
+.avis-case {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+  cursor: pointer;
+}
+.avis-case input {
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  margin-top: 1px;
+  accent-color: var(--accent-violet);
+}
 
 /* Champ piège hors écran (pas display:none, que certains robots repèrent) */
 .avis-piege {

@@ -113,4 +113,20 @@ describe('handler', () => {
     await handler({ method: 'POST', body: { profil: 'parent', conseil: 'oui' } }, res)
     expect(res.statusCode).toBe(500)
   })
+
+  it('garde l\'accord de citation et la signature seulement avec un texte à citer', () => {
+    const { avis } = buildAvis({ profil: 'enseignant', plait: 'Les quiz corrigés', citation: true, signature: '  Mme D., SVT  ' })
+    expect(avis).toMatchObject({ citation: true, signature: 'Mme D., SVT' })
+
+    const sansTexte = buildAvis({ profil: 'enseignant', conseil: 'oui', citation: true, signature: 'Mme D.' }).avis
+    expect(sansTexte.citation).toBeUndefined()
+    expect(sansTexte.signature).toBeUndefined()
+
+    const sansAccord = buildAvis({ profil: 'enseignant', plait: 'Bien', citation: 'oui', signature: 'Mme D.' }).avis
+    expect(sansAccord.citation).toBeUndefined()
+    expect(sansAccord.signature).toBeUndefined()
+
+    const longue = buildAvis({ profil: 'parent', plait: 'Top', citation: true, signature: 'x'.repeat(200) }).avis
+    expect(longue.signature).toHaveLength(60)
+  })
 })
