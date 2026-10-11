@@ -35,10 +35,12 @@ export default function Reglages() {
   const navigate = useNavigate();
   const { theme, setTheme, isDark, toggleTheme } = useTheme();
   const location = useLocation();
-  // Arrivée depuis « Choisir mon thème » (fiche Réviz+, accueil) : on descend aux thèmes.
+  // Arrivée depuis « Choisir mon thème » (fiche Réviz+, accueil) ou depuis la
+  // landing (« Réserver mon prix fondateur ») : on descend à la bonne section.
   useEffect(() => {
-    if (location.hash !== '#themes') return;
-    const t = setTimeout(() => document.getElementById('themes')?.scrollIntoView({ block: 'start', behavior: 'smooth' }), 80);
+    const cible = { '#themes': 'themes', '#abonnement': 'abonnement' }[location.hash];
+    if (!cible) return;
+    const t = setTimeout(() => document.getElementById(cible)?.scrollIntoView({ block: 'start', behavior: 'smooth' }), 80);
     return () => clearTimeout(t);
   }, [location.hash]);
   const {
@@ -465,7 +467,7 @@ export default function Reglages() {
 
         {/* ── 5. Abonnement ── */}
         {!isGuest && (
-        <section className="rg-section">
+        <section className="rg-section" id="abonnement">
           <h2 className="rg-section-title">Abonnement</h2>
           {revizPlusOffert ? (
             <RevizPlusCard onTheme={() => document.getElementById('themes')?.scrollIntoView({ block: 'start', behavior: 'smooth' })} />
@@ -549,6 +551,14 @@ export default function Reglages() {
               <span className="rv-icon-square rg-icon" aria-hidden="true"><ClipboardIcon /></span>
               <span className="rg-row-text">
                 <span className="rg-row-label">CGU</span>
+              </span>
+              <span className="rg-row-arrow" aria-hidden="true">›</span>
+            </Link>
+
+            <Link to="/legal/cgv" className="rg-row">
+              <span className="rv-icon-square rg-icon" aria-hidden="true"><ClipboardIcon /></span>
+              <span className="rg-row-text">
+                <span className="rg-row-label">CGV Réviz+</span>
               </span>
               <span className="rg-row-arrow" aria-hidden="true">›</span>
             </Link>

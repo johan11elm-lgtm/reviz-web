@@ -33,7 +33,8 @@ import { readGuest, startGuest, clearGuest, guestUser, isGuestUid, migrateGuestL
 import { setSrsUser } from '../services/srsService';
 import { setChallengeUser } from '../services/challengeService';
 import { setScanLimitUser, setPremiumStatus, setRevizPlusOffert } from '../services/scanLimitService';
-import { estFondateur, revizPlusOffertPour } from '../utils/revizPlus.js';
+import { estFondateur } from '../utils/revizPlus.js';
+import { lancementOffert } from '../../api/_lancement.js';
 import { readSessionCache, writeSessionCache, clearSessionCache, userFromSessionCache } from '../services/sessionCache';
 import { track } from '../services/statsService';
 import { apiFetch, apiUrl } from '../services/apiClient';
@@ -503,9 +504,8 @@ export function AuthProvider({ children }) {
     }
   }
 
-  // Réviz+ offert à ce compte : à tous pendant le lancement, puis aux
-  // fondateurs jusqu'à la fin de la grâce (même règle que l'API).
-  const offert = !isPremium && revizPlusOffertPour(currentUser?.isGuest ? null : currentUser?.metadata?.creationTime);
+  // Réviz+ offert à tous jusqu'au 25 octobre (même règle que l'API).
+  const offert = !isPremium && lancementOffert();
   setRevizPlusOffert(offert); // simple variable de module, réglée avant le rendu des enfants
 
   // Identité stable du value : sans useMemo, chaque render du provider
@@ -522,7 +522,6 @@ export function AuthProvider({ children }) {
     needsProfileSetup,
     isPremium, // abonnement payé (Stripe)
     // Avantages Réviz+ : abonné, ou offert (à tous pendant le lancement).
-    // Après la bascule, les fondateurs le gardent jusqu'à la fin de la grâce.
     hasRevizPlus: isPremium || offert,
     revizPlusOffert: offert,
     // Compte créé pendant le lancement (jamais un invité).

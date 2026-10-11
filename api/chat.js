@@ -70,7 +70,7 @@ export default async function handler(req, res) {
 
   // 3. Quota jour = SOURCE DE VÉRITÉ. Les premium ont aussi un plafond
   //    (généreux) : garde-fou coût, un chat se spamme plus vite qu'un scan.
-  const offert = !isPremium && await revizPlusOffertServeur(uid)
+  const offert = !isPremium && await revizPlusOffertServeur()
   const limit = isPremium ? CHAT_PREMIUM_LIMIT : (offert ? LANCEMENT_CHAT_LIMIT : CHAT_FREE_LIMIT)
   const q = await consumeChatQuota({ db, uid, limit })
   if (!q.allowed) return res.status(429).send('CHAT_LIMIT')

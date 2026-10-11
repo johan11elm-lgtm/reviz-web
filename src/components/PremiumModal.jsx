@@ -2,7 +2,7 @@ import { Mascot } from './Mascot';
 import { ChoixFormule } from './ChoixFormule';
 import { useModalA11y } from '../hooks/useModalA11y';
 import { useAuth } from '../context/AuthContext';
-import { LANCEMENT_OFFERT, DERNIER_JOUR_OFFERT, DERNIER_JOUR_GRACE } from '../../api/_lancement.js';
+import { DERNIER_JOUR_OFFERT, VENTES_OUVERTES } from '../../api/_lancement.js';
 import './PremiumModal.css';
 
 /**
@@ -42,13 +42,13 @@ export function PremiumModal({ onClose, used = 5, limit = 5 }) {
 
         {revizPlusOffert && (
           <p className="premium-sub">
-            Réviz+ t'est offert jusqu'au {LANCEMENT_OFFERT ? DERNIER_JOUR_OFFERT : DERNIER_JOUR_GRACE} : c'est déjà la limite la plus haute.
+            Réviz+ t'est offert jusqu'au {DERNIER_JOUR_OFFERT} : c'est déjà la limite la plus haute.
           </p>
         )}
 
-        {!LANCEMENT_OFFERT && <div className="premium-divider" />}
+        {VENTES_OUVERTES && <div className="premium-divider" />}
 
-        {!LANCEMENT_OFFERT && <ChoixFormule />}
+        {VENTES_OUVERTES && <ChoixFormule />}
 
         <button className="premium-btn premium-btn--close" onClick={onClose}>
           Retour

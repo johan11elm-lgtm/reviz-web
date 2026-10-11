@@ -1,5 +1,17 @@
-import { useParams, useNavigate } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
+import { PRIX, PRIX_FONDATEUR } from '../../api/_prix.js';
 import './Legal.css';
+
+// Identité de l'éditeur, à compléter dès l'immatriculation (micro-entreprise).
+// Tant qu'un champ est vide, la ligne correspondante n'est pas affichée.
+const EDITEUR = {
+  nom: 'Johan El Mesmoudi',
+  statut: 'Entrepreneur individuel',
+  siren: '',      // ex. '123 456 789'
+  adresse: '',    // adresse postale (ou domiciliation)
+  mediateur: '',  // médiateur de la consommation : nom + site
+};
+const CONTACT = 'contact@revizapp.fr';
 
 const PAGES = {
   'mentions-legales': {
@@ -7,8 +19,11 @@ const PAGES = {
     content: () => (
       <>
         <Section title="Éditeur de l'application">
-          <p>Réviz est édité par Johan El Mesmoudi.</p>
-          <p>Email de contact : <a href="mailto:johan11elm@gmail.com">johan11elm@gmail.com</a></p>
+          <p>Réviz est édité par {EDITEUR.nom}, {EDITEUR.statut}{EDITEUR.siren ? '' : ' (immatriculation en cours)'}.</p>
+          {EDITEUR.siren && <p>SIREN : {EDITEUR.siren}<br />TVA non applicable, article 293 B du CGI.</p>}
+          {EDITEUR.adresse && <p>Adresse : {EDITEUR.adresse}</p>}
+          <p>Email de contact : <a href={`mailto:${CONTACT}`}>{CONTACT}</a></p>
+          <p>Directeur de la publication : {EDITEUR.nom}.</p>
         </Section>
 
         <Section title="Hébergement">
@@ -77,6 +92,7 @@ const PAGES = {
             <li><strong>Pronote (Index Education)</strong> — uniquement si tu relies ton emploi du temps : Réviz y lit ton lien d'emploi du temps, sans rien y envoyer d'autre.</li>
             <li><strong>Anthropic</strong> — traitement IA des leçons (le texte envoyé n'est pas conservé après génération).</li>
             <li><strong>Vercel</strong> — hébergement de l'application.</li>
+            <li><strong>Stripe</strong> — paiement de l'abonnement Réviz+. Les coordonnées bancaires sont saisies chez Stripe : Réviz ne les voit ni ne les conserve jamais.</li>
             <li><strong>PostHog</strong> — mesure d'audience anonyme (pages vues, clics), hébergée en Europe, sans cookie ni profil.</li>
           </ul>
         </Section>
@@ -88,6 +104,7 @@ const PAGES = {
             <li>Parties de Battle : supprimées automatiquement au plus tard 48 heures après leur création. Avec un compte, l'aura totale et le nombre de battles restent sur ton profil jusqu'à la suppression du compte.</li>
             <li>Agenda : adresse Pronote jusqu'à ce que tu délies Pronote ou supprimes ton compte ; contrôles jusqu'à ce que tu les retires ou supprimes ton compte (ceux passés depuis plus d'un mois sont effacés quand tu en notes un nouveau).</li>
             <li>Logs serveur : 30 jours maximum.</li>
+            <li>Factures d'abonnement : 10 ans (obligation comptable).</li>
           </ul>
         </Section>
 
@@ -100,12 +117,62 @@ const PAGES = {
             <li><strong>Portabilité</strong> — récupérer tes données dans un format lisible.</li>
             <li><strong>Opposition</strong> — t'opposer au traitement de tes données.</li>
           </ul>
-          <p>Pour exercer ces droits : <a href="mailto:johan11elm@gmail.com">johan11elm@gmail.com</a></p>
+          <p>Pour exercer ces droits : <a href={`mailto:${CONTACT}`}>{CONTACT}</a></p>
           <p>Tu peux aussi contacter la <strong>CNIL</strong> (Commission Nationale de l'Informatique et des Libertés) : <a href="https://www.cnil.fr" target="_blank" rel="noopener noreferrer">www.cnil.fr</a></p>
         </Section>
 
         <Section title="Cookies">
           <p>Réviz utilise uniquement des cookies strictement nécessaires au fonctionnement (authentification Firebase, et un cookie de sécurité de 10 minutes au plus pendant une connexion avec TikTok, supprimé dès la connexion terminée). Aucun cookie publicitaire ou de tracking n'est utilisé. La mesure d'audience (PostHog) fonctionne sans cookie et sans rien enregistrer sur ton appareil : elle compte les visites de façon anonyme, sans savoir qui tu es.</p>
+        </Section>
+      </>
+    ),
+  },
+
+  'cgv': {
+    title: 'Conditions Générales de Vente',
+    content: () => (
+      <>
+        <p className="legal-updated">Dernière mise à jour : 11 octobre 2026</p>
+
+        <Section title="Objet">
+          <p>Les présentes CGV encadrent la souscription à <strong>Réviz+</strong>, l'abonnement payant de l'application Réviz, vendu par {EDITEUR.nom}, {EDITEUR.statut}{EDITEUR.siren ? `, SIREN ${EDITEUR.siren}` : ' (immatriculation en cours)'}. Elles complètent les <Link to="/legal/cgu">CGU</Link>.</p>
+        </Section>
+
+        <Section title="Ce que comprend Réviz+">
+          <p>Réviz+ étend le plan gratuit : leçons analysées sans limite hebdomadaire (dans la limite d'un usage normal), coach jusqu'à 60 messages par jour, thèmes de couleur réservés, et les fonctions signalées « Réviz+ » dans l'application. Le contenu de Réviz+ peut s'enrichir ; il n'est jamais réduit sans que tu en sois prévenu et que tu puisses résilier. Le plan gratuit reste disponible sans abonnement.</p>
+        </Section>
+
+        <Section title="Qui peut s'abonner">
+          <p>L'abonnement est souscrit et payé par une personne majeure titulaire du moyen de paiement, en général un parent pour le compte de son enfant, qui utilise Réviz avec son propre compte.</p>
+        </Section>
+
+        <Section title="Prix">
+          <p>Réviz+ coûte <strong>{PRIX.annuel.montant} TTC par an</strong> ou <strong>{PRIX.mensuel.montant} TTC par mois</strong>{EDITEUR.siren ? ' (TVA non applicable, article 293 B du CGI)' : ''}.</p>
+          <p><strong>Tarif fondateur.</strong> Un abonnement souscrit avant le 26 octobre 2026 à 0 h (heure de Paris) est facturé {PRIX_FONDATEUR.annuel.montant} par an ou {PRIX_FONDATEUR.mensuel.montant} par mois, tant qu'il n'est pas résilié. En cas de résiliation, un nouvel abonnement se fait au prix en vigueur.</p>
+          <p>Toute évolution du prix est annoncée par email au moins 30 jours avant de s'appliquer ; tu peux résilier avant, sans frais.</p>
+        </Section>
+
+        <Section title="Paiement">
+          <p>Le paiement se fait par carte bancaire via Stripe, prestataire de paiement sécurisé. Pour un abonnement souscrit avant le 26 octobre 2026, rien n'est prélevé à la souscription : la carte est enregistrée et le premier prélèvement a lieu le 26 octobre 2026, puis à chaque échéance (chaque année ou chaque mois à cette date). Après cette date, le premier paiement a lieu à la souscription, puis à chaque échéance.</p>
+        </Section>
+
+        <Section title="Durée, renouvellement et résiliation">
+          <p>L'abonnement est annuel ou mensuel et se renouvelle automatiquement. Pour l'abonnement annuel, un email te rappelle l'échéance avant le renouvellement.</p>
+          <p>Tu peux le résilier à tout moment, sans frais, depuis <strong>Réglages → Gérer mon abonnement</strong>, ou par email. Résilié avant le 26 octobre 2026, un abonnement au tarif fondateur n'est jamais prélevé. Sinon, la résiliation prend effet à la fin de la période déjà payée : Réviz+ reste actif jusque-là, puis le compte repasse au plan gratuit sans perdre ses leçons ni sa progression.</p>
+        </Section>
+
+        <Section title="Droit de rétractation">
+          <p>Tu disposes de <strong>14 jours</strong> pour changer d'avis, sans avoir à te justifier, à compter de la souscription ou, si ce prélèvement intervient plus tard, du premier prélèvement : écris à <a href={`mailto:${CONTACT}`}>{CONTACT}</a> et la somme prélevée est remboursée en entier, sous 14 jours, sur la carte utilisée.</p>
+        </Section>
+
+        <Section title="Impayés">
+          <p>Si un prélèvement échoue, Stripe le retente pendant quelques jours et Réviz+ reste actif pendant ce temps. Si le paiement n'aboutit pas, l'abonnement s'arrête et le compte repasse au plan gratuit.</p>
+        </Section>
+
+        <Section title="Réclamations et médiation">
+          <p>Pour toute réclamation : <a href={`mailto:${CONTACT}`}>{CONTACT}</a>. Une réponse est apportée sous 7 jours.</p>
+          {EDITEUR.mediateur && <p>En cas de désaccord persistant, tu peux saisir gratuitement le médiateur de la consommation : {EDITEUR.mediateur}.</p>}
+          <p>Les présentes CGV sont soumises au droit français.</p>
         </Section>
       </>
     ),
@@ -169,7 +236,7 @@ const PAGES = {
         </Section>
 
         <Section title="Contact">
-          <p>Pour toute question : <a href="mailto:johan11elm@gmail.com">johan11elm@gmail.com</a></p>
+          <p>Pour toute question : <a href={`mailto:${CONTACT}`}>{CONTACT}</a></p>
         </Section>
       </>
     ),

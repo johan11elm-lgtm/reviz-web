@@ -1,7 +1,7 @@
 // -------------------------------------------------------
 // Réviz — Réviz+ côté app : membre fondateur, quotas affichés
 // -------------------------------------------------------
-import { LANCEMENT_OFFERT, FONDATEURS_JUSQU_AU, FIN_LANCEMENT, FIN_GRACE_FONDATEURS } from '../../api/_lancement.js'
+import { LANCEMENT_OFFERT, FONDATEURS_JUSQU_AU, FIN_LANCEMENT, VENTES_OUVERTES, lancementOffert } from '../../api/_lancement.js'
 
 const JOUR = 24 * 60 * 60 * 1000
 
@@ -14,28 +14,15 @@ export function estFondateur(creationTime) {
 }
 
 /**
- * Réviz+ offert à ce compte : à tous pendant le lancement, puis aux seuls
- * fondateurs jusqu'à la fin du délai de grâce. Même règle côté serveur
- * (api/_offert.js) et côté app (AuthContext).
- */
-export function revizPlusOffertPour(creationTime, now = Date.now()) {
-  if (LANCEMENT_OFFERT) return true
-  return estFondateur(creationTime) && now < Date.parse(FIN_GRACE_FONDATEURS)
-}
-
-/**
- * Où en est la bascule, pour l'affichage :
- * 'lancement' → 'derniers-jours' (3 derniers jours offerts) → 'grace'
- * (payant, fondateurs encore offerts) → 'payant'. 'prolonge' : la date est
- * passée mais l'interrupteur est resté ouvert (bascule repoussée) ; on
- * n'affiche alors plus de date.
+ * Où en est le lancement, pour l'affichage :
+ * 'lancement' → 'derniers-jours' (3 derniers jours offerts) → 'payant'.
+ * 'prolonge' : la date est passée mais les ventes ne sont pas ouvertes, la
+ * gratuité continue ; on n'affiche alors plus de date.
  */
 export function phaseRevizPlus(now = Date.now()) {
-  if (LANCEMENT_OFFERT) {
-    if (now >= Date.parse(FIN_LANCEMENT)) return 'prolonge'
-    return now >= Date.parse(FIN_LANCEMENT) - 3 * JOUR ? 'derniers-jours' : 'lancement'
-  }
-  return now < Date.parse(FIN_GRACE_FONDATEURS) ? 'grace' : 'payant'
+  if (!lancementOffert(now)) return 'payant'
+  if (now >= Date.parse(FIN_LANCEMENT)) return VENTES_OUVERTES ? 'payant' : 'prolonge'
+  return now >= Date.parse(FIN_LANCEMENT) - 3 * JOUR ? 'derniers-jours' : 'lancement'
 }
 
 // Jour du calendrier à Paris (minuit UTC de ce jour), insensible au

@@ -7,14 +7,15 @@ import { track } from '../services/statsService';
 import { startCheckout } from '../services/billingService';
 import { phaseRevizPlus, joursAvant } from '../utils/revizPlus';
 import {
-  LANCEMENT_SCAN_LIMIT, LANCEMENT_CHAT_LIMIT, FIN_LANCEMENT, DERNIER_JOUR_OFFERT, DERNIER_JOUR_GRACE,
+  LANCEMENT_SCAN_LIMIT, LANCEMENT_CHAT_LIMIT, FIN_LANCEMENT, DERNIER_JOUR_OFFERT, PREMIER_PRELEVEMENT,
+  VENTES_OUVERTES, tarifFondateurOuvert,
 } from '../../api/_lancement.js';
 import { PRIX, PRIX_FONDATEUR } from '../../api/_prix.js';
 import './battle/BattleAnnonce.css';
 
 // Une clé par période : l'élève revoit la popup quand la période change
-// (lancement → trois derniers jours → grâce des fondateurs).
-const cle = (uid, phase) => `reviz-annonce-revizplus-${phase}-${uid}`;
+// (lancement → trois derniers jours), et quand les ventes ouvrent.
+const cle = (uid, phase) => `reviz-annonce-revizplus-${phase}${VENTES_OUVERTES ? '-ventes' : ''}-${uid}`;
 
 /** La popup Réviz+ de la période en cours a-t-elle déjà été vue ? */
 export function annonceRevizPlusVue(uid) {
@@ -28,32 +29,30 @@ function marquerVue(uid) {
 const plusQue = n => `Plus que ${n}\u00a0jour${n > 1 ? 's' : ''}`;
 const fondateur = `${PRIX_FONDATEUR.annuel.montant} par an au lieu de ${PRIX.annuel.montant}`;
 
+const reserve = `Abonne-toi avant le ${PREMIER_PRELEVEMENT} : tu gardes Réviz+ à ${fondateur}, tant que tu restes abonné. Rien n’est prélevé avant le ${PREMIER_PRELEVEMENT}.`;
+
 const TEXTES = {
   lancement: {
     pill: () => 'Offert',
     titre: `Réviz+ offert jusqu’au ${DERNIER_JOUR_OFFERT}`,
-    sous: `Tout Réviz+ est gratuit pour toi jusqu’au ${DERNIER_JOUR_OFFERT}. Ensuite, comme tu t’es inscrit pendant le lancement, tu le gardes à ${fondateur}.`,
+    sous: VENTES_OUVERTES ? reserve : `Tout Réviz+ est gratuit pour toi jusqu’au ${DERNIER_JOUR_OFFERT}. Rien à payer, rien à activer.`,
   },
   'derniers-jours': {
     pill: () => plusQue(joursAvant(FIN_LANCEMENT)),
     titre: `Réviz+ offert jusqu’au ${DERNIER_JOUR_OFFERT}`,
-    sous: `Ensuite Réviz+ devient payant. Toi, tu le gardes offert jusqu’au ${DERNIER_JOUR_GRACE}, puis à ${fondateur} si tu t’abonnes.`,
+    sous: VENTES_OUVERTES ? reserve : `Ensuite, Réviz+ devient payant.`,
   },
   prolonge: {
     pill: () => 'Offert',
     titre: 'Réviz+ est offert',
-    sous: `Pendant le lancement, tout Réviz+ est gratuit pour toi. Ensuite, comme tu t’es inscrit pendant le lancement, tu le gardes à ${fondateur}.`,
-  },
-  grace: {
-    pill: () => 'Membre fondateur',
-    titre: 'Garde ton Réviz+',
-    sous: `Réviz+ est maintenant payant. Pour toi, il reste offert jusqu’au ${DERNIER_JOUR_GRACE}. Ensuite, ${fondateur}, ou ${PRIX_FONDATEUR.mensuel.montant} par mois.`,
+    sous: 'Pendant le lancement, tout Réviz+ est gratuit pour toi. Rien à payer, rien à activer.',
   },
 };
 
 /**
  * Popup Réviz+ sur Home, une fois par période : offert jusqu'à la bascule,
- * rappel des derniers jours, puis grâce des fondateurs avec l'abonnement.
+ * puis rappel des derniers jours ; dès que les ventes sont ouvertes, elle
+ * propose de réserver le tarif fondateur.
  * Même gabarit que la popup de la Battle.
  */
 export function RevizPlusAnnonce({ uid, onClose }) {
@@ -68,7 +67,7 @@ export function RevizPlusAnnonce({ uid, onClose }) {
     if (paiement) return;
     setPaiement(true);
     marquerVue(uid);
-    track('revizplus_grace_cta');
+    track('revizplus_reserver_cta');
     try {
       await startCheckout('annuel'); // redirection pleine page en cas de succès
     } catch (err) {
@@ -100,9 +99,9 @@ export function RevizPlusAnnonce({ uid, onClose }) {
           <li><SunIcon /><span>Tous les thèmes de couleur</span></li>
         </ul>
         <div className="battle-annonce-actions">
-          {phase === 'grace' ? (
+          {VENTES_OUVERTES && tarifFondateurOuvert() ? (
             <button type="button" className="rv-btn-cta rv-btn-cta--full" onClick={garder} disabled={paiement}>
-              <span>{paiement ? 'Ouverture du paiement…' : `Garder Réviz+ à ${PRIX_FONDATEUR.annuel.montant}${PRIX_FONDATEUR.annuel.cadence}`}</span>
+              <span>{paiement ? 'Ouverture du paiement…' : `Réserver à ${PRIX_FONDATEUR.annuel.montant}${PRIX_FONDATEUR.annuel.cadence}`}</span>
               <span className="rv-btn-cta-arrow" aria-hidden="true">→</span>
             </button>
           ) : (

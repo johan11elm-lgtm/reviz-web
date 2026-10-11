@@ -8,7 +8,7 @@ import { getScanStatus } from '../services/scanLimitService';
 import { moisInscription, quotaCoachDuJour, phaseRevizPlus, joursAvant } from '../utils/revizPlus';
 import { startCheckout } from '../services/billingService';
 import {
-  LANCEMENT_CHAT_LIMIT, FIN_LANCEMENT, DERNIER_JOUR_OFFERT, FIN_GRACE_FONDATEURS, DERNIER_JOUR_GRACE,
+  LANCEMENT_CHAT_LIMIT, FIN_LANCEMENT, DERNIER_JOUR_OFFERT, PREMIER_PRELEVEMENT, VENTES_OUVERTES, tarifFondateurOuvert,
 } from '../../api/_lancement.js';
 import { PRIX, PRIX_FONDATEUR, remiseFondateur } from '../../api/_prix.js';
 import './RevizPlus.css';
@@ -42,10 +42,10 @@ export function FondateurSeal({ className = '' }) {
 }
 
 /**
- * Ticket « prix fondateur » : ce que l'élève du lancement paiera après, face
- * au prix public barré. Forme de ticket (encoches) : un avantage à garder.
+ * Ticket « prix fondateur » : le prix d'un abonnement pris avant la bascule,
+ * face au prix public barré. Forme de ticket (encoches) : un avantage à saisir.
  */
-export function TicketFondateur({ depuis, className = '' }) {
+export function TicketFondateur({ className = '' }) {
   return (
     <div className={['rp-ticket', className].filter(Boolean).join(' ')}>
       <div className="rp-ticket-main">
@@ -58,12 +58,8 @@ export function TicketFondateur({ depuis, className = '' }) {
           <s className="rp-ticket-barre" aria-label={`au lieu de ${PRIX.annuel.montant}`}>{PRIX.annuel.montant}</s>
         </span>
         <span className="rp-ticket-note">
-          {phaseRevizPlus() === 'grace' || phaseRevizPlus() === 'payant'
-            ? 'Tant que tu restes abonné.'
-            : phaseRevizPlus() === 'prolonge'
-              ? 'Après le lancement, tant que tu restes abonné.'
-              : `Après le ${DERNIER_JOUR_OFFERT}, tant que tu restes abonné.`}
-          {depuis && <> Membre depuis {depuis}.</>}
+          Si tu t'abonnes avant le {PREMIER_PRELEVEMENT}, tant que tu restes abonné.
+          {VENTES_OUVERTES && <> Rien n'est prélevé avant le {PREMIER_PRELEVEMENT}.</>}
         </span>
       </div>
       <span className="rp-ticket-remise" aria-hidden="true">−{remiseFondateur()} %</span>
@@ -104,21 +100,22 @@ export function RevizPlusCard({ onTheme, className = '' }) {
 
   const choisirTheme = onTheme ?? (() => navigate('/reglages#themes'));
 
-  // Où en est la bascule (lancement → derniers jours → grâce des fondateurs).
+  // Où en est le lancement ; avant le 26, on peut réserver le tarif fondateur.
   const phase = phaseRevizPlus();
-  const enGrace = phase === 'grace' && revizPlusOffert;
+  const fondateurOuvert = tarifFondateurOuvert();
+  const reserver = VENTES_OUVERTES && fondateurOuvert && !isPremium;
   const plusQue = n => `plus que ${n}\u00a0jour${n > 1 ? 's' : ''}`;
   const sousTitre = isPremium
-    ? 'Ton abonnement est actif.'
-    : enGrace
-      ? `Réviz+ est maintenant payant. Pour toi, il reste offert jusqu'au ${DERNIER_JOUR_GRACE} : ${plusQue(joursAvant(FIN_GRACE_FONDATEURS))}.`
-      : phase === 'derniers-jours'
+    ? (fondateurOuvert
+      ? `Ton prix fondateur est réservé. Premier prélèvement le ${PREMIER_PRELEVEMENT}.`
+      : 'Ton abonnement est actif.')
+    : phase === 'derniers-jours'
         ? `Offert jusqu'au ${DERNIER_JOUR_OFFERT} : ${plusQue(joursAvant(FIN_LANCEMENT))}.`
         : phase === 'prolonge'
           ? 'Offert pendant le lancement de Réviz. Rien à payer, rien à activer.'
           : `Offert jusqu'au ${DERNIER_JOUR_OFFERT}. Rien à payer, rien à activer.`;
 
-  // Pendant la grâce : s'abonner au tarif fondateur depuis la carte.
+  // Avant le 26 : réserver le tarif fondateur depuis la carte.
   const [paiement, setPaiement] = useState(null);
   const [erreur, setErreur] = useState('');
   async function garder(formule) {
@@ -141,14 +138,14 @@ export function RevizPlusCard({ onTheme, className = '' }) {
 
       <div className="rp-card-head">
         <span className="rp-wordmark"><GemIcon /><span>Réviz<span className="rp-wordmark-plus">+</span></span></span>
-        <span className="rp-status">{isPremium ? 'Actif' : revizPlusOffert ? 'Offert' : 'Inactif'}</span>
+        <span className="rp-status">{isPremium ? (fondateurOuvert ? 'Réservé' : 'Actif') : revizPlusOffert ? 'Offert' : 'Inactif'}</span>
       </div>
 
-      <h2 className="rp-card-title" id="rp-card-titre">{enGrace ? 'Garde ton Réviz+' : 'Tout Réviz+ est à toi'}</h2>
+      <h2 className="rp-card-title" id="rp-card-titre">Tout Réviz+ est à toi</h2>
       <p className="rp-card-sub">{sousTitre}</p>
 
-      {estFondateur && !isPremium ? (
-        <TicketFondateur depuis={depuis} />
+      {fondateurOuvert && !isPremium ? (
+        <TicketFondateur />
       ) : estFondateur && (
         <div className="rp-fondateur">
           <FondateurSeal />
@@ -174,10 +171,10 @@ export function RevizPlusCard({ onTheme, className = '' }) {
         <Jauge icon={<SunIcon />} label="Thèmes" detail="à choisir dans les Réglages" valeur="4 débloqués" />
       </div>
 
-      {enGrace ? (
+      {reserver ? (
         <>
           <button type="button" className="rp-cta" onClick={() => garder('annuel')} disabled={!!paiement}>
-            {paiement === 'annuel' ? 'Ouverture du paiement…' : `Garder Réviz+ à ${PRIX_FONDATEUR.annuel.montant}${PRIX_FONDATEUR.annuel.cadence}`}
+            {paiement === 'annuel' ? 'Ouverture du paiement…' : `Réserver à ${PRIX_FONDATEUR.annuel.montant}${PRIX_FONDATEUR.annuel.cadence}`}
             <span aria-hidden="true">→</span>
           </button>
           <button type="button" className="rp-cta-lien" onClick={() => garder('mensuel')} disabled={!!paiement}>

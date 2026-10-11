@@ -5,7 +5,7 @@ import Stripe from 'stripe'
 import { getAuthAdmin } from './_firebaseAdmin.js'
 import { compteVerifie } from './_compteVerifie.js'
 import { FORMULES, FORMULE_PAR_DEFAUT, prixDe } from './_prix.js'
-import { estFondateur } from '../src/utils/revizPlus.js'
+import { VENTES_OUVERTES, FIN_LANCEMENT, tarifFondateurOuvert } from './_lancement.js'
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
 
@@ -19,6 +19,8 @@ async function stripePriceId(lookupKey) {
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).end()
+  // Ventes fermées tant que Stripe n'est pas en réel (api/_lancement.js).
+  if (!VENTES_OUVERTES) return res.status(403).json({ error: 'VENTES_FERMEES' })
 
   // Authentification obligatoire : l'uid/email viennent du token vérifié,
   // JAMAIS du body (sinon on peut créer une session sur le compte d'autrui).
@@ -40,10 +42,9 @@ export default async function handler(req, res) {
   }
 
   try {
-    // Tarif fondateur : décidé ici, d'après la date de création du compte
-    // côté Firebase, jamais d'après ce que le client envoie.
-    const user = await getAuthAdmin().getUser(uid)
-    const fondateur = estFondateur(user?.metadata?.creationTime)
+    // Tarif fondateur : abonnement pris avant la bascule, décidé ici d'après
+    // l'heure du serveur, jamais d'après ce que le client envoie.
+    const fondateur = tarifFondateurOuvert()
     const price = await stripePriceId(prixDe(formule, fondateur).lookupKey)
     if (!price) {
       console.error('[create-checkout] prix introuvable', formule, fondateur)
@@ -55,10 +56,27 @@ export default async function handler(req, res) {
       payment_method_types: ['card'],
       customer_email: email || undefined,
       metadata: { firebaseUid: uid },
-      subscription_data: { metadata: { firebaseUid: uid, formule, fondateur: String(fondateur) } },
+      subscription_data: {
+        metadata: { firebaseUid: uid, formule, fondateur: String(fondateur) },
+        // Avant la bascule : carte enregistrée, rien de prélevé avant le
+        // 26 octobre (période d'ici là non facturée), puis à chaque échéance.
+        ...(fondateur && {
+          billing_cycle_anchor: Math.floor(Date.parse(FIN_LANCEMENT) / 1000),
+          proration_behavior: 'none',
+        }),
+      },
       line_items: [{ price, quantity: 1 }],
       allow_promotion_codes: true,
       success_url: `${BASE_URL}/upgrade-success?formule=${formule}${fondateur ? '&fondateur=1' : ''}`,
+      payment_method_collection: 'always',
+      // Rappel des CGV au-dessus du bouton de paiement.
+      custom_text: {
+        submit: {
+          message: fondateur
+            ? `Rien n'est prélevé avant le 26 octobre ; tu peux annuler d'ici là depuis les Réglages. Ensuite, renouvellement automatique, résiliable à tout moment. En validant, tu acceptes les CGV : ${BASE_URL}/legal/cgv`
+            : `Renouvellement automatique, résiliable à tout moment depuis les Réglages. En validant, tu acceptes les CGV : ${BASE_URL}/legal/cgv`,
+        },
+      },
       cancel_url: `${BASE_URL}/scan`,
       locale: 'fr',
     })

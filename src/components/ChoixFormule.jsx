@@ -1,17 +1,18 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
 import { startCheckout } from '../services/billingService';
 import { FORMULE_PAR_DEFAUT, prixDe } from '../../api/_prix.js';
+import { tarifFondateurOuvert, PREMIER_PRELEVEMENT } from '../../api/_lancement.js';
 import './ChoixFormule.css';
 
 /**
  * Choix de la formule Réviz+ (annuel mis en avant, mensuel en ancre) puis
- * passage au paiement Stripe. Le tarif fondateur affiché ici n'est qu'un
- * affichage : le serveur le recalcule (api/_checkout.js).
+ * passage au paiement Stripe. Avant le 26 octobre, c'est le tarif fondateur,
+ * prélevé le 26 ; l'affichage d'ici n'engage rien, le serveur décide
+ * (api/_checkout.js).
  */
 export function ChoixFormule({ className = '' }) {
-  const { estFondateur } = useAuth();
+  const estFondateur = tarifFondateurOuvert();
   const navigate = useNavigate();
   const [formule, setFormule] = useState(FORMULE_PAR_DEFAUT);
   const [loading, setLoading] = useState(false);
@@ -63,9 +64,13 @@ export function ChoixFormule({ className = '' }) {
         ))}
       </div>
       <button type="button" className="rv-btn-cta rv-btn-cta--full cf-cta" onClick={payer} disabled={loading}>
-        {loading ? 'Ouverture du paiement…' : 'Passer à Réviz+'}
+        {loading ? 'Ouverture du paiement…' : estFondateur ? 'Réserver mon prix fondateur' : 'Passer à Réviz+'}
       </button>
-      <p className="cf-note">Paiement sécurisé par Stripe. Résiliable à tout moment.</p>
+      <p className="cf-note">
+        {estFondateur
+          ? `0 € aujourd'hui, premier prélèvement le ${PREMIER_PRELEVEMENT}, annulable d'ici là. Paiement sécurisé par Stripe.`
+          : 'Paiement sécurisé par Stripe. Résiliable à tout moment.'}
+      </p>
       {erreur && <p className="cf-erreur" role="alert">{erreur}</p>}
     </div>
   );

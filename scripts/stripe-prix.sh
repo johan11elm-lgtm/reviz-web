@@ -2,8 +2,9 @@
 # -------------------------------------------------------
 # Réviz — Crée les prix Réviz+ dans Stripe (docs/prix-revizplus.md)
 # Le code les retrouve par lookup_key (api/_prix.js) : lancer ce script avec
-# la clé réelle le jour de la bascule suffit, aucun changement de code.
-# Sans effet sur un prix qui existe déjà (même lookup_key).
+# la clé réelle suffit, aucun changement de code. Sans effet sur un prix qui
+# existe déjà (même lookup_key). Crée aussi le webhook de l'app s'il manque et
+# affiche son secret, à coller dans Vercel (STRIPE_WEBHOOK_SECRET).
 #
 #   STRIPE_SECRET_KEY=sk_live_… bash scripts/stripe-prix.sh prod_XXXX
 #
@@ -35,3 +36,17 @@ creer 399  month revizplus_fondateur_mensuel "Réviz+ fondateur mensuel"
 
 curl -sS "$API/products/$PRODUIT" -u "$STRIPE_SECRET_KEY:" --data-urlencode "name=Réviz+" >/dev/null
 echo "Produit renommé « Réviz+ ». Pense à archiver l'ancien prix à 4,99 € dans le Dashboard."
+
+# Webhook de l'app (api/stripe-webhook.js)
+URL_WEBHOOK=https://app.revizapp.fr/api/stripe-webhook
+if curl -sS -G "$API/webhook_endpoints" -u "$STRIPE_SECRET_KEY:" -d limit=100 | grep -q "\"$URL_WEBHOOK\""; then
+  echo "Webhook déjà là : $URL_WEBHOOK (son secret se lit dans le Dashboard, Développeurs → Webhooks)."
+else
+  curl -sS "$API/webhook_endpoints" -u "$STRIPE_SECRET_KEY:" -d url="$URL_WEBHOOK" \
+    -d "enabled_events[]=checkout.session.completed" \
+    -d "enabled_events[]=customer.subscription.updated" \
+    -d "enabled_events[]=customer.subscription.deleted" \
+    -d "enabled_events[]=invoice.payment_failed" \
+    | grep -E '"(id|secret)"' | tr -d ' ,'
+  echo "Webhook créé. Copie la ligne « secret » (whsec_…) dans Vercel : STRIPE_WEBHOOK_SECRET."
+fi

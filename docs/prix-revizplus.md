@@ -132,24 +132,18 @@ Coûts par payeur et par mois :
 3. **Le papier** : CGV et mentions légales avec SIRET et adresse (branche
    `stripe-live`), Vercel Pro (le plan Hobby interdit l'usage commercial).
 
-### Le calendrier (décidé le 2026-10-11 : payant le lundi 26 octobre)
+### Le calendrier (décidé le 2026-10-11 : ventes ouvertes tout de suite, payant le 26 octobre)
 
-Les dates vivent dans `api/_lancement.js` (app et API) et dans
-`reviz-landing/src/lib/data.ts` (landing). `LANCEMENT_OFFERT` reste
-l'interrupteur manuel : rien ne devient payant tout seul.
+Réglages dans `api/_lancement.js` (app et API) et `reviz-landing/src/lib/data.ts`
+(landing) : `VENTES_OUVERTES` (interrupteur, à passer à true quand Stripe est
+en réel) et `FIN_LANCEMENT` (26 octobre 0 h, heure de Paris).
 
-| Quand | Quoi | État |
-|---|---|---|
-| 11 → 22 octobre | Landing : prix barrés, « offert jusqu'au 25 octobre », compte à rebours, argument « inscris-toi avant le 25 octobre ». App : carte Réviz+ et popup avec la date et le ticket fondateur. Les comptes créés avant le 26 octobre sont fondateurs (`FONDATEURS_JUSQU_AU`). | En place |
-| 23 → 25 octobre | La popup revient une fois (« Plus que 3 jours ») et la carte affiche le compte à rebours. | Automatique |
-| 25 octobre au soir | Vérifier les conditions (cumul, SIRET, CGV). Si une manque : repousser les dates dans les deux fichiers, rien d'autre. | À faire |
-| 26 octobre | `STRIPE_SECRET_KEY=sk_live_… bash scripts/stripe-prix.sh prod_UCEkP56xqL2PYg` ; variables Vercel en réel (clé secrète, nouveau webhook réel → `STRIPE_WEBHOOK_SECRET`) ; portail client en réel ; `LANCEMENT_OFFERT = false` dans `api/_lancement.js` **et** `reviz-landing/src/lib/data.ts` ; CGV en ligne. | À faire |
-| 26 octobre → 8 novembre | Grâce des fondateurs : Réviz+ reste offert (app et API), la carte devient « Garde ton Réviz+ » avec le bouton « Garder Réviz+ à 29 €/an », la popup revient une fois. | Automatique après l'interrupteur |
-| À partir du 9 novembre | Fondateurs non abonnés : gratuit, avec le tarif fondateur toujours proposé. Nouveaux comptes : gratuit, prix public. | Automatique |
-
-Les vacances de la Toussaint (17 octobre → 2 novembre) tombent pendant la
-bascule : la grâce couvre la semaine de la rentrée, quand les contrôles
-reprennent.
+| Quand | Quoi |
+|---|---|
+| Dès l'ouverture des ventes | Réviz+ offert à tous jusqu'au 25 octobre. On peut **réserver le tarif fondateur** : carte enregistrée, 0 € à la souscription, premier prélèvement le 26 octobre (Stripe `billing_cycle_anchor` + `proration_behavior: none`), annulable avant sans rien payer. Fondateur = **abonnement pris avant le 26 octobre**. |
+| 23 → 25 octobre | La popup revient une fois (« Plus que 3 jours »), la carte affiche le compte à rebours. |
+| 26 octobre, 0 h | Automatique : la gratuité s'arrête (l'API recalcule à chaque requête, l'app au rechargement), les réservations sont prélevées, le tarif fondateur n'est plus proposé. **Pas de délai de grâce.** Si les ventes ne sont pas ouvertes à cette date, la gratuité continue (phase « prolonge »). |
+| Après | Nouveaux abonnements au prix public, prélevés à la souscription. |
 
 ### Ce que vit un élève qui ne s'abonne pas
 
@@ -161,12 +155,10 @@ parlent de son contrôle, pas de l'abonnement.
 
 ### Le prix fondateur
 
-Calculé par le serveur à partir de la date de création du compte Firebase
-(`estFondateur`, `api/_checkout.js`), jamais à partir de ce qu'envoie l'app.
-Il est attaché à l'abonnement Stripe : tant que l'abonnement court, le prix
-reste ; un fondateur qui résilie puis revient garde le droit au tarif (son
-compte reste ancien). Pour limiter ce droit dans le temps plus tard, ajouter
-une date limite dans `api/_prix.js`.
+Accordé par le serveur à tout abonnement créé avant le 26 octobre 0 h
+(`tarifFondateurOuvert`, `api/_checkout.js`), jamais d'après ce qu'envoie
+l'app. Il est attaché à l'abonnement Stripe : tant qu'il court, le prix reste ;
+après une résiliation, un nouvel abonnement se fait au prix en vigueur (CGV).
 
 ## Déjà en place (2026-10-11)
 

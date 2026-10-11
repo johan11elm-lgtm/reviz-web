@@ -2,6 +2,7 @@ import { CameraIcon, ChatIcon, SunIcon, StarIcon } from '../components/Icons';
 import { useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { prixDe } from '../../api/_prix.js';
+import { PREMIER_PRELEVEMENT } from '../../api/_lancement.js';
 import { useAuth } from '../context/AuthContext';
 import './UpgradeSuccess.css';
 
@@ -31,7 +32,8 @@ const ADVANTAGES = [
 export default function UpgradeSuccess() {
   const navigate = useNavigate();
   const [params] = useSearchParams();
-  const prix = prixDe(params.get('formule'), params.get('fondateur') === '1');
+  const reserve = params.get('fondateur') === '1';
+  const prix = prixDe(params.get('formule'), reserve);
   const { currentUser, refreshPremium, isPremium } = useAuth();
   const [step, setStep] = useState(0);
   const [retriesExhausted, setRetriesExhausted] = useState(false);
@@ -143,8 +145,10 @@ export default function UpgradeSuccess() {
           <div className="ugs-receipt">
             <span className="ugs-receipt-check">✓</span>
             <div>
-              <span className="ugs-receipt-label">Abonnement actif</span>
-              <span className="ugs-receipt-price">{prix.montant}{prix.cadence}</span>
+              <span className="ugs-receipt-label">{reserve ? 'Prix fondateur réservé' : 'Abonnement actif'}</span>
+              <span className="ugs-receipt-price">
+                {prix.montant}{prix.cadence}{reserve && `, premier prélèvement le ${PREMIER_PRELEVEMENT}`}
+              </span>
             </div>
           </div>
           <button className="ugs-cta" onClick={() => navigate('/scan')}>
@@ -159,7 +163,7 @@ export default function UpgradeSuccess() {
               Vérifier mon abonnement
             </button>
           )}
-          <p className="ugs-hint">Tu peux annuler à tout moment depuis les réglages.</p>
+          <p className="ugs-hint">{reserve ? `Tu peux annuler avant le ${PREMIER_PRELEVEMENT} sans rien payer, depuis les réglages.` : 'Tu peux annuler à tout moment depuis les réglages.'}</p>
         </section>
       </main>
     </div>

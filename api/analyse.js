@@ -41,7 +41,7 @@ export default async function handler(req, res) {
 
   let consumed = false
   if (!isPremium) {
-    const offert = await revizPlusOffertServeur(uid)
+    const offert = await revizPlusOffertServeur()
     const q = await consumeQuota({ db, uid, limit: offert ? LANCEMENT_SCAN_LIMIT : FREE_LIMIT })
     if (!q.allowed) return res.status(429).send('RATE_LIMIT')
     consumed = true

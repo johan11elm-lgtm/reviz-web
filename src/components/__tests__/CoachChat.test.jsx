@@ -105,7 +105,7 @@ describe('<CoachChat />', () => {
     fireEvent.click(screen.getByLabelText('Envoyer la question'))
 
     expect(await screen.findByText(/tous tes messages du jour/)).toBeInTheDocument()
-    const upgrade = screen.getByRole('button', { name: /Passer à Réviz\+/ })
+    const upgrade = screen.getByRole('button', { name: /Passer à Réviz\+|Réserver mon prix fondateur/ })
     fireEvent.click(upgrade)
     expect(startCheckout).toHaveBeenCalledTimes(1)
     // La saisie est désactivée tant que le quota est épuisé
