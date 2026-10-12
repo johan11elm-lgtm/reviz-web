@@ -17,7 +17,7 @@ export function GuestBanner({ className = '' }) {
       <div className={`guest-banner ${className}`.trim()} role="status">
         <Mascot pose="hello" size={30} alt="" aria-hidden="true" className="guest-banner-mascot" />
         <span className="guest-banner-text">
-          <b>Mode découverte</b> · l'app telle que la voient vos élèves.
+          <b>Mode découverte</b><span className="guest-banner-detail"> · l'app telle que la voient vos élèves.</span>
         </span>
         <Link to={AVIS_PROFS_URL} className="guest-banner-link">Donner mon avis</Link>
       </div>
@@ -27,7 +27,7 @@ export function GuestBanner({ className = '' }) {
     <div className={`guest-banner ${className}`.trim()} role="status">
       <Mascot pose="hello" size={30} alt="" aria-hidden="true" className="guest-banner-mascot" />
       <span className="guest-banner-text">
-        <b>Mode essai</b> · progression gardée sur cet appareil.
+        <b>Mode essai</b><span className="guest-banner-detail"> · progression gardée sur cet appareil.</span>
       </span>
       <Link to="/inscription" className="guest-banner-link">Créer mon compte</Link>
     </div>

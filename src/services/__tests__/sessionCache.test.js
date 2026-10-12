@@ -12,11 +12,11 @@ describe('sessionCache', () => {
   beforeEach(() => localStorage.clear())
 
   it('aller-retour : identité + gate, sans champ superflu', () => {
-    writeSessionCache(user, { isPremium: true, consentBlocked: false, needsProfileSetup: false }, 1000)
+    writeSessionCache(user, { isPremium: true, consentBlocked: false, consentStatus: 'en-attente', needsProfileSetup: false }, 1000)
     expect(readSessionCache(2000)).toEqual({
       uid: 'u1', displayName: 'Johan', email: 'j@example.com', emailVerified: true,
       providerIds: ['password', 'google.com'],
-      isPremium: true, consentBlocked: false, needsProfileSetup: false,
+      isPremium: true, consentBlocked: false, consentStatus: 'en-attente', needsProfileSetup: false,
     })
     expect(JSON.parse(localStorage.getItem('reviz-session'))).not.toHaveProperty('photoURL')
   })

@@ -41,7 +41,7 @@ describe('<BottomNav /> — onglets', () => {
   it('le coach a son onglet, au centre', () => {
     setup()
     const labels = screen.getAllByRole('link').map(l => l.getAttribute('aria-label'))
-    expect(labels).toEqual(['Accueil', 'Cours', 'Coach', 'Progrès', 'Profil'])
+    expect(labels).toEqual(['Accueil', 'Cours', 'Coach', 'Agenda', 'Profil'])
     expect(screen.getByRole('link', { name: 'Coach' })).toHaveAttribute('href', '/coach')
   })
 

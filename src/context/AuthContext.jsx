@@ -15,24 +15,29 @@ import {
   sendPasswordResetEmail,
   sendEmailVerification,
   GoogleAuthProvider,
+  OAuthProvider,
   signInWithPopup,
   signInWithCredential,
+  signInWithCustomToken,
+  revokeAccessToken,
   deleteUser,
 } from 'firebase/auth';
 import { Capacitor } from '@capacitor/core';
 import { auth, db } from '../services/firebaseConfig';
 import { parseLevel, serializeLevel, migrateLegacyClasse, isUnder15 } from '../utils/levels';
+import { consentGate } from '../utils/consent';
 import { createUserProfile } from '../services/userProfileService';
 import { setActiveUser, pushLessonsToFirestore } from '../services/historyService';
 import { setActiveUser as setRevisionUser, pushRevisionsToFirestore } from '../services/revisionService';
 import { readGuest, startGuest, clearGuest, guestUser, isGuestUid, migrateGuestLocalData } from '../services/guestService';
 import { setSrsUser } from '../services/srsService';
 import { setChallengeUser } from '../services/challengeService';
-import { setScanLimitUser, setPremiumStatus } from '../services/scanLimitService';
-import { LANCEMENT_OFFERT } from '../../api/_lancement.js';
+import { setScanLimitUser, setPremiumStatus, setRevizPlusOffert } from '../services/scanLimitService';
 import { estFondateur } from '../utils/revizPlus.js';
+import { lancementOffert } from '../../api/_lancement.js';
 import { readSessionCache, writeSessionCache, clearSessionCache, userFromSessionCache } from '../services/sessionCache';
 import { track } from '../services/statsService';
+import { apiFetch, apiUrl } from '../services/apiClient';
 import { collection, getDocs, deleteDoc, doc, getDoc, setDoc } from 'firebase/firestore';
 
 const AuthContext = createContext();
@@ -42,12 +47,42 @@ export function useAuth() {
 }
 
 // Rattache les services locaux (clés localStorage par utilisateur) à un uid.
+/** Champs d'abonnement du profil Firestore (api/stripe-webhook.js). */
+function lireAbonnement(profile) {
+  if (profile?.plan !== 'premium') return null;
+  return {
+    formule: profile.formule ?? null,
+    fondateur: profile.fondateur ?? null,
+    periodeFin: profile.periodeFin ?? null,
+    annuleLe: profile.annuleLe ?? null,
+  };
+}
+
 function bindServicesToUser(uid) {
   setActiveUser(uid);
   setRevisionUser(uid);
   setSrsUser(uid);
   setChallengeUser(uid);
   setScanLimitUser(uid);
+}
+
+// Fournisseur pour la popup web (signInWithPopup).
+function providerWeb(id) {
+  if (id === 'google') return new GoogleAuthProvider();
+  if (id === 'apple') {
+    const p = new OAuthProvider('apple.com');
+    p.addScope('email');
+    p.addScope('name');
+    p.setCustomParameters({ locale: 'fr_FR' });
+    return p;
+  }
+  if (id === 'microsoft') {
+    const p = new OAuthProvider('microsoft.com');
+    // Comptes perso ET scolaires (Office 365 du lycée) ; choix du compte à chaque fois.
+    p.setCustomParameters({ prompt: 'select_account' });
+    return p;
+  }
+  throw new Error(`Fournisseur inconnu : ${id}`);
 }
 
 export function AuthProvider({ children }) {
@@ -73,11 +108,19 @@ export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser]   = useState(() => (cached ? userFromSessionCache(cached, auth) : guest ? guestUser(guest) : null));
   // true tant que Firebase n'a pas confirmé la session (même si l'app est déjà rendue depuis le cache).
   const [loading, setLoading]           = useState(true);
-  // Mineur <15 ans dont le consentement parental n'est pas (encore) approuvé.
+  // Mineur <15 ans dont l'accès est suspendu : email parent pas encore
+  // parti, refus du parent, ou délai de réponse écoulé (voir utils/consent).
   const [consentBlocked, setConsentBlocked] = useState(cached?.consentBlocked ?? false);
-  // Compte Google sans profil complété (pas encore de date de naissance / niveau).
+  // Détail du consentement : { status, parentEmail, joursRestants }.
+  const [consent, setConsent] = useState(() => ({
+    status: cached?.consentStatus ?? 'ok', parentEmail: null, joursRestants: null,
+  }));
+  // Compte sans mot de passe (Google, Apple…) sans profil complété (pas encore de date de naissance / niveau).
   const [needsProfileSetup, setNeedsProfileSetup] = useState(cached?.needsProfileSetup ?? false);
   const [isPremium, setIsPremium] = useState(cached?.isPremium ?? false);
+  // Récapitulatif de l'abonnement écrit par le webhook Stripe (formule,
+  // tarif fondateur, fin de période, annulation programmée) ; null sans abonnement.
+  const [abonnement, setAbonnement] = useState(null);
   // uid pour lequel le gate ci-dessus a été calculé (Firestore) — garde le cache cohérent.
   const [gateUid, setGateUid] = useState(cached?.uid ?? null);
   // Incrémenté quand le niveau change hors d'un setState (localStorage) pour
@@ -128,38 +171,92 @@ export function AuthProvider({ children }) {
     return signInWithEmailAndPassword(auth, email, password);
   }
 
-  // --- Connexion Google ---
+  // --- Connexion Google / Apple / Microsoft / TikTok ---
   // Web : popup Firebase classique. App native (Capacitor) : la popup ne
-  // fonctionne pas dans la WebView — on passe par le SDK Google natif
-  // (@capacitor-firebase/authentication) puis on échange le jeton contre
-  // une session Firebase JS (signInWithCredential) : tout l'aval
-  // (onAuthStateChanged, Firestore, gating) reste identique.
-  async function loginWithGoogle() {
-    if (Capacitor.isNativePlatform()) {
-      const { FirebaseAuthentication } = await import('@capacitor-firebase/authentication');
-      let result;
-      try {
-        result = await FirebaseAuthentication.signInWithGoogle();
-      } catch (err) {
-        // Annulation du sheet natif → même code que la popup web fermée,
-        // déjà ignoré par Connexion/Inscription.
-        const cancelled = /cancel|12501|dismiss/i.test(err?.message ?? '');
-        const e = new Error(err?.message ?? 'Connexion Google impossible');
-        e.code = cancelled ? 'auth/popup-closed-by-user' : 'auth/google-signin-failed';
-        throw e;
-      }
-      const idToken = result?.credential?.idToken;
-      if (!idToken) {
-        const e = new Error('Connexion Google annulée');
-        e.code = 'auth/popup-closed-by-user';
-        throw e;
-      }
-      const credential = GoogleAuthProvider.credential(idToken);
-      const { user } = await signInWithCredential(auth, credential);
-      return user;
+  // fonctionne pas dans la WebView — on passe par le SDK natif
+  // (@capacitor-firebase/authentication) puis on ouvre une session
+  // Firebase JS : tout l'aval (onAuthStateChanged, Firestore, gating)
+  // reste identique quel que soit le fournisseur.
+  async function loginWithProvider(id) {
+    if (id === 'tiktok') {
+      // Redirection complète : /api/auth renvoie sur /connexion avec un
+      // jeton Firebase (cf. loginWithCustomToken).
+      window.location.assign(apiUrl('/api/auth?action=tiktok'));
+      return null;
     }
-    const provider = new GoogleAuthProvider();
-    const { user } = await signInWithPopup(auth, provider);
+    if (Capacitor.isNativePlatform()) return loginNatif(id);
+    const { user } = await signInWithPopup(auth, providerWeb(id));
+    return user;
+  }
+
+  // Compat : anciens appels.
+  function loginWithGoogle() {
+    return loginWithProvider('google');
+  }
+
+  async function loginNatif(id) {
+    const { FirebaseAuthentication } = await import('@capacitor-firebase/authentication');
+    const appel = {
+      google:    () => FirebaseAuthentication.signInWithGoogle(),
+      apple:     () => FirebaseAuthentication.signInWithApple(),
+      // Firebase refuse les jetons Microsoft dans signInWithCredential :
+      // connexion côté natif, puis passage de session via /api/auth.
+      microsoft: () => FirebaseAuthentication.signInWithMicrosoft({ skipNativeAuth: false }),
+    }[id];
+    if (!appel) throw new Error(`Fournisseur inconnu : ${id}`);
+    let result;
+    try {
+      result = await appel();
+    } catch (err) {
+      // Annulation du sheet natif → même code que la popup web fermée,
+      // déjà ignoré par Connexion/Inscription.
+      const cancelled = /cancel|12501|dismiss|1001/i.test(err?.message ?? '');
+      const e = new Error(err?.message ?? 'Connexion impossible');
+      e.code = cancelled ? 'auth/popup-closed-by-user' : 'auth/native-signin-failed';
+      throw e;
+    }
+
+    if (id === 'microsoft') {
+      const { token } = await FirebaseAuthentication.getIdToken();
+      const res = await apiFetch('/api/auth', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'natif', idToken: token }),
+      });
+      const data = await res.json().catch(() => ({}));
+      // La session JS prend le relais : la session native ne sert plus.
+      FirebaseAuthentication.signOut().catch(() => {});
+      if (!res.ok || !data.customToken) {
+        const e = new Error(data.error ?? 'Connexion Microsoft impossible');
+        e.code = 'auth/native-signin-failed';
+        throw e;
+      }
+      return loginWithCustomToken(data.customToken);
+    }
+
+    const idToken = result?.credential?.idToken;
+    if (!idToken) {
+      const e = new Error('Connexion annulée');
+      e.code = 'auth/popup-closed-by-user';
+      throw e;
+    }
+    const credential = id === 'apple'
+      ? new OAuthProvider('apple.com').credential({ idToken, rawNonce: result.credential.nonce })
+      : GoogleAuthProvider.credential(idToken);
+    const { user } = await signInWithCredential(auth, credential);
+    // Apple ne transmet le nom qu'à la toute première connexion, et
+    // seulement au SDK natif : on le recopie sur le compte Firebase.
+    const nomApple = result?.user?.displayName;
+    if (id === 'apple' && nomApple && !user.displayName) {
+      await updateProfile(user, { displayName: nomApple }).catch(() => {});
+      setCurrentUser({ ...auth.currentUser });
+    }
+    return user;
+  }
+
+  // Session ouverte par le serveur (TikTok, Microsoft natif).
+  async function loginWithCustomToken(token) {
+    const { user } = await signInWithCustomToken(auth, token);
     return user;
   }
 
@@ -185,6 +282,7 @@ export function AuthProvider({ children }) {
     setPremiumStatus(false);
     setIsPremium(false);
     setConsentBlocked(false);
+    setConsent({ status: 'ok', parentEmail: null, joursRestants: null });
     setNeedsProfileSetup(false);
     setGuest(g);
     setCurrentUser(guestUser(g));
@@ -225,6 +323,22 @@ export function AuthProvider({ children }) {
     if (password && user.providerData[0]?.providerId === 'password') {
       const cred = EmailAuthProvider.credential(user.email, password);
       await reauthenticateWithCredential(user, cred);
+    }
+    // Compte Apple dans l'app iOS : Apple exige de révoquer l'accès à la
+    // suppression (App Store 5.1.1). Il faut un code tout frais → on
+    // redemande la connexion Apple, qui sert aussi de réauthentification.
+    if (Capacitor.isNativePlatform() && user.providerData?.some(p => p.providerId === 'apple.com')) {
+      const { FirebaseAuthentication } = await import('@capacitor-firebase/authentication');
+      const result = await FirebaseAuthentication.signInWithApple();
+      const { idToken, nonce, authorizationCode } = result?.credential ?? {};
+      await reauthenticateWithCredential(
+        user,
+        new OAuthProvider('apple.com').credential({ idToken, rawNonce: nonce }),
+      );
+      if (authorizationCode) {
+        await revokeAccessToken(auth, authorizationCode)
+          .catch(e => console.warn('[Réviz] Révocation Apple impossible', e));
+      }
     }
     const uid = user.uid;
     // Supprimer les données Firestore (lessons + revisions + consentement parental)
@@ -297,22 +411,24 @@ export function AuthProvider({ children }) {
   async function loadGateState(user) {
     if (!user) {
       setConsentBlocked(false);
+      setConsent({ status: 'ok', parentEmail: null, joursRestants: null });
       setNeedsProfileSetup(false);
       setIsPremium(false);
       setPremiumStatus(false);
+      setAbonnement(null);
       setGateUid(null);
       return;
     }
     // Les deux lectures partent en parallèle : un seul aller-retour Firestore
     // au lieu de deux enchaînés. Lecture impossible → on n'élève pas le
     // blocage (fail-open UX).
-    const [profile, approved] = await Promise.all([
+    const [profile, consentDoc] = await Promise.all([
       getDoc(doc(db, 'users', user.uid))
         .then(snap => (snap.exists() ? snap.data() : null))
         .catch(() => null),
       getDoc(doc(db, 'users', user.uid, 'parentalConsent', 'consent'))
-        .then(c => c.exists() && c.data()?.status === 'approved')
-        .catch(() => false),
+        .then(c => (c.exists() ? c.data() : null))
+        .catch(() => null),
     ]);
 
     // Classe retrouvée depuis le profil quand ce navigateur ne la connaît pas
@@ -323,16 +439,21 @@ export function AuthProvider({ children }) {
       setLevelTick(n => n + 1);
     }
 
-    // Compte Google sans profil complété (pas de date de naissance) → doit finir l'inscription.
-    const isGoogle = user.providerData?.some(p => p.providerId === 'google.com');
-    setNeedsProfileSetup(!!isGoogle && !profile?.birthDate);
+    // Compte sans mot de passe (Google, Apple, Microsoft, TikTok) sans profil
+    // complété (pas de date de naissance) → doit finir l'inscription.
+    const hasPassword = user.providerData?.some(p => p.providerId === 'password');
+    setNeedsProfileSetup(!hasPassword && !user.isAnonymous && !profile?.birthDate);
 
     const premium = profile?.plan === 'premium';
     setIsPremium(premium);
     setPremiumStatus(premium);
+    setAbonnement(lireAbonnement(profile));
 
-    // Mineur <15 ans non approuvé → accès bloqué (que le doc soit absent OU en attente).
-    setConsentBlocked(isUnder15(profile?.birthDate) && !approved);
+    // Mineur <15 ans : accès ouvert pendant l'attente de la réponse du parent,
+    // suspendu si rien n'est parti, en cas de refus ou sans réponse à temps.
+    const { blocked, ...detail } = consentGate({ under15: isUnder15(profile?.birthDate), consent: consentDoc });
+    setConsentBlocked(blocked);
+    setConsent(detail);
     setGateUid(user.uid);
   }
 
@@ -383,8 +504,8 @@ export function AuthProvider({ children }) {
   // on mémorise l'état pour le prochain démarrage.
   useEffect(() => {
     if (loading || !currentUser || gateUid !== currentUser.uid) return;
-    writeSessionCache(currentUser, { isPremium, consentBlocked, needsProfileSetup });
-  }, [loading, currentUser, gateUid, isPremium, consentBlocked, needsProfileSetup]);
+    writeSessionCache(currentUser, { isPremium, consentBlocked, consentStatus: consent.status, needsProfileSetup });
+  }, [loading, currentUser, gateUid, isPremium, consentBlocked, consent.status, needsProfileSetup]);
 
   // Permet de re-vérifier le statut premium (après retour Stripe)
   async function refreshPremium() {
@@ -394,10 +515,15 @@ export function AuthProvider({ children }) {
       const premium = userDoc.exists() && userDoc.data()?.plan === 'premium';
       setIsPremium(premium);
       setPremiumStatus(premium);
+      setAbonnement(lireAbonnement(userDoc.exists() ? userDoc.data() : null));
     } catch {
       // ignore
     }
   }
+
+  // Réviz+ offert à tous jusqu'au 25 octobre (même règle que l'API).
+  const offert = !isPremium && lancementOffert();
+  setRevizPlusOffert(offert); // simple variable de module, réglée avant le rendu des enfants
 
   // Identité stable du value : sans useMemo, chaque render du provider
   // re-rendait tous les consommateurs (~15 pages/composants). Les fonctions
@@ -409,11 +535,13 @@ export function AuthProvider({ children }) {
     currentUser,
     loading,
     consentBlocked,
+    consent,
     needsProfileSetup,
     isPremium, // abonnement payé (Stripe)
-    // Avantages Réviz+ : abonné, ou offert à tous pendant le lancement.
-    hasRevizPlus: isPremium || LANCEMENT_OFFERT,
-    revizPlusOffert: LANCEMENT_OFFERT && !isPremium,
+    abonnement,
+    // Avantages Réviz+ : abonné, ou offert (à tous pendant le lancement).
+    hasRevizPlus: isPremium || offert,
+    revizPlusOffert: offert,
     // Compte créé pendant le lancement (jamais un invité).
     estFondateur: !!currentUser && !currentUser.isGuest && estFondateur(currentUser.metadata?.creationTime),
     isGuest: !!currentUser?.isGuest,
@@ -423,6 +551,8 @@ export function AuthProvider({ children }) {
     signup,
     login,
     loginWithGoogle,
+    loginWithProvider,
+    loginWithCustomToken,
     logout,
     resetPassword,
     getUserClasse,
@@ -433,7 +563,7 @@ export function AuthProvider({ children }) {
     updateUserPassword,
     resendVerificationEmail,
     deleteAccount,
-  }), [currentUser, loading, consentBlocked, needsProfileSetup, isPremium, guest, levelTick]);
+  }), [currentUser, loading, consentBlocked, consent, needsProfileSetup, isPremium, abonnement, offert, guest, levelTick]);
 
   // Enfants rendus dès que Firebase a confirmé la session — ou immédiatement
   // depuis le cache local (démarrage optimiste). Sans cache, on attend :

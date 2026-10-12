@@ -1,22 +1,45 @@
-// Tunnel mineur <15 ans : étape parent obligatoire, compte bloqué tant que le
-// consentement n'est pas approuvé. Exerce pour de vrai les règles Firestore
-// (création du doc parentalConsent 'pending' au signup) via l'émulateur.
+// Tunnel mineur <15 ans : étape parent obligatoire, puis l'élève entre dans
+// l'app pendant que le parent décide. Un refus suspend l'accès. Exerce pour
+// de vrai les règles Firestore (doc parentalConsent 'pending' au signup).
 import { test, expect } from '@playwright/test'
-import { mockApiRoutes, signup } from './helpers'
+import { mockApiRoutes, signup, ecrireConsentementEmulateur } from './helpers'
 
-test.describe('Tunnel consentement parental (<15 ans)', () => {
-  test('un élève de 12 ans passe par l\'étape parent puis reste bloqué en attente', async ({ page }) => {
+// uid de l'élève connecté, lu dans le jeton Firebase de la page.
+async function uidCourant(page) {
+  return page.evaluate(() => {
+    for (let i = 0; i < localStorage.length; i++) {
+      const k = localStorage.key(i)
+      if (k.startsWith('firebase:authUser:')) return JSON.parse(localStorage.getItem(k)).uid
+    }
+    return JSON.parse(localStorage.getItem('reviz-session') ?? '{}').uid
+  })
+}
+
+test.describe('Consentement parental (<15 ans)', () => {
+  test('un élève de 12 ans entre dans l\'app pendant que son parent décide, puis est suspendu s\'il refuse', async ({ page }) => {
     await mockApiRoutes(page)
 
-    // Inscription avec une date de naissance <15 ans → l'étape parent apparaît
     await signup(page, { birthDate: '2014-06-01', parentEmail: 'parent@famille.test' })
 
-    // Redirection vers l'écran d'attente du consentement
-    await expect(page).toHaveURL(/consent-pending/, { timeout: 15_000 })
-
-    // Le gate tient : tenter d'accéder à l'app redirige vers l'attente
+    // Pas de mur : même suite que pour un grand (vérification d'email), puis l'app.
+    await expect(page).toHaveURL(/verify-email/, { timeout: 15_000 })
     await page.goto('/')
-    await expect(page).toHaveURL(/consent-pending/)
+    await expect(page).toHaveURL(/onboarding/, { timeout: 15_000 })
+    await page.getByRole('button', { name: 'Passer' }).click()
+    await expect(page).not.toHaveURL(/consent-pending|onboarding/, { timeout: 15_000 })
+    await expect(page.getByText('Accord parental en attente')).toBeVisible({ timeout: 15_000 })
+
+    // Le parent refuse (ce qu'écrit /api/approve-consent) → accès suspendu.
+    const uid = await uidCourant(page)
+    await ecrireConsentementEmulateur(uid, {
+      status: { stringValue: 'refused' },
+      parentEmail: { stringValue: 'parent@famille.test' },
+      createdAt: { integerValue: String(Date.now()) },
+      firstRequestedAt: { integerValue: String(Date.now()) },
+    })
+    await page.reload()
+    await expect(page).toHaveURL(/consent-pending/, { timeout: 15_000 })
+    await expect(page.getByText('Ton parent n\'a pas donné son accord')).toBeVisible()
     await page.goto('/scan')
     await expect(page).toHaveURL(/consent-pending/)
   })
@@ -41,7 +64,31 @@ test.describe('Tunnel consentement parental (<15 ans)', () => {
     // Étape parent : saisir son propre email → refus immédiat côté client
     await expect(page.getByPlaceholder('parent@exemple.com')).toBeVisible({ timeout: 15_000 })
     await page.getByPlaceholder('parent@exemple.com').fill(email)
-    await page.getByRole('button', { name: /Envoyer la demande/ }).click()
+    await page.getByRole('button', { name: /Envoyer et commencer/ }).click()
     await expect(page.getByText(/pas le tien/)).toBeVisible()
+  })
+
+  test('tunnel abandonné avant l\'étape parent → il faut prévenir un parent pour entrer', async ({ page }) => {
+    await mockApiRoutes(page)
+    await page.goto('/inscription')
+    await page.getByPlaceholder('Lucas').fill('Pressé')
+    await page.getByRole('button', { name: 'Continuer', exact: true }).click()
+    await page.locator('input[type="date"]').fill('2014-06-01')
+    await page.getByRole('button', { name: 'Continuer', exact: true }).click()
+    await page.getByRole('button', { name: /Collège/ }).click()
+    await page.getByRole('button', { name: '6ème', exact: true }).click()
+    await page.locator('#signup-email').fill(`presse-${Date.now()}@e2e.reviz.test`)
+    await page.locator('input[type="password"]').fill('motdepasse123')
+    await page.locator('input[type="checkbox"]').check()
+    await page.getByRole('button', { name: 'Créer mon compte' }).click()
+    await expect(page.getByPlaceholder('parent@exemple.com')).toBeVisible({ timeout: 15_000 })
+
+    // L'élève quitte l'étape parent : l'app le renvoie vers « Préviens un parent ».
+    await page.goto('/')
+    await expect(page).toHaveURL(/consent-pending/, { timeout: 15_000 })
+    await expect(page.getByText('Préviens un parent')).toBeVisible()
+    await page.getByPlaceholder('parent@exemple.com').fill('parent@famille.test')
+    await page.getByRole('button', { name: 'Envoyer et commencer' }).click()
+    await expect(page).not.toHaveURL(/consent-pending/, { timeout: 15_000 })
   })
 })

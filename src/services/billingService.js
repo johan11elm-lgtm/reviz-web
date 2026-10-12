@@ -25,16 +25,17 @@ export async function openBillingPortal() {
 
 /**
  * Lance le checkout Stripe Réviz+ (redirection pleine page).
+ * @param {'annuel'|'mensuel'} [formule] formule choisie (annuel par défaut côté serveur)
  * @throws {Error} 'UNAUTHORIZED' | 'EMAIL_NOT_VERIFIED' | 'HTTP_xxx'
  */
-export async function startCheckout() {
+export async function startCheckout(formule) {
   const idToken = await auth.currentUser?.getIdToken().catch(() => null)
   if (!idToken) throw new Error('UNAUTHORIZED')
 
   const res = await apiFetch('/api/create-checkout', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ idToken }),
+    body: JSON.stringify({ idToken, formule }),
   })
   const data = await res.json().catch(() => ({}))
   if (res.status === 403 && data.error === 'EMAIL_NOT_VERIFIED') throw new Error('EMAIL_NOT_VERIFIED')

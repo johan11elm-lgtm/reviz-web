@@ -50,7 +50,7 @@ describe('approve-consent — POST approuve', () => {
     const res = mockRes()
     await handler({ method: 'POST', body: { token: 'good', uid: 'u' } }, res)
     expect(res.statusCode).toBe(200)
-    expect(res.body).toContain('activé')
+    expect(res.body).toContain('accord est enregistré')
     expect(docUpdate).toHaveBeenCalledWith(expect.objectContaining({ status: 'approved', token: null }))
   })
 
@@ -63,7 +63,7 @@ describe('approve-consent — POST approuve', () => {
   })
 
   it('POST avec token expiré → 410', async () => {
-    docGet.mockResolvedValue({ exists: true, data: () => ({ status: 'pending', token: 'good', createdAt: Date.now() - 8 * DAY }) })
+    docGet.mockResolvedValue({ exists: true, data: () => ({ status: 'pending', token: 'good', createdAt: Date.now() - 11 * DAY }) })
     const res = mockRes()
     await handler({ method: 'POST', body: { token: 'good', uid: 'u' } }, res)
     expect(res.statusCode).toBe(410)
@@ -75,6 +75,32 @@ describe('approve-consent — POST approuve', () => {
     const res = mockRes()
     await handler({ method: 'POST', body: { token: 'whatever', uid: 'u' } }, res)
     expect(res.statusCode).toBe(200)
+    expect(docUpdate).not.toHaveBeenCalled()
+  })
+})
+
+describe('approve-consent — refus (plus proposé, toujours géré)', () => {
+  it('la page de confirmation ne propose pas de refus', async () => {
+    const res = mockRes()
+    await handler({ method: 'GET', query: { token: 't', uid: 'u' } }, res)
+    expect(res.body).toContain('Donner mon autorisation')
+    expect(res.body).not.toContain('value="refuser"')
+  })
+
+  it('POST decision=refuser → statut refusé + token invalidé', async () => {
+    docGet.mockResolvedValue({ exists: true, data: () => ({ status: 'pending', token: 'good', createdAt: Date.now() }) })
+    const res = mockRes()
+    await handler({ method: 'POST', body: { token: 'good', uid: 'u', decision: 'refuser' } }, res)
+    expect(res.statusCode).toBe(200)
+    expect(res.body).toContain('suspendu')
+    expect(docUpdate).toHaveBeenCalledWith(expect.objectContaining({ status: 'refused', token: null }))
+  })
+
+  it('POST decision=refuser avec mauvais token → 403, pas de mutation', async () => {
+    docGet.mockResolvedValue({ exists: true, data: () => ({ status: 'pending', token: 'good', createdAt: Date.now() }) })
+    const res = mockRes()
+    await handler({ method: 'POST', body: { token: 'WRONG', uid: 'u', decision: 'refuser' } }, res)
+    expect(res.statusCode).toBe(403)
     expect(docUpdate).not.toHaveBeenCalled()
   })
 })

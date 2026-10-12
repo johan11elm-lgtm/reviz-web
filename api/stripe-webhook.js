@@ -21,6 +21,20 @@ export function planForStatus(status) {
   return 'free' // unpaid, canceled, incomplete, incomplete_expired, paused…
 }
 
+// Ce que l'app affiche de l'abonnement (Réglages, page de remerciement).
+// Les dates sont en millisecondes ; null quand Stripe n'en donne pas.
+// La fin de période vit sur l'élément d'abonnement depuis l'API 2025-03.
+export function champsAbonnement(sub) {
+  const champs = {}
+  const meta = sub?.metadata ?? {}
+  if (meta.formule) champs.formule = meta.formule
+  if (meta.fondateur) champs.fondateur = meta.fondateur === 'true'
+  const fin = sub?.items?.data?.[0]?.current_period_end ?? sub?.current_period_end
+  champs.periodeFin = fin ? fin * 1000 : null
+  champs.annuleLe = sub?.cancel_at ? sub.cancel_at * 1000 : null
+  return champs
+}
+
 async function getRawBody(req) {
   const chunks = []
   for await (const chunk of req) {
@@ -73,6 +87,9 @@ export default async function handler(req, res) {
             stripeSubscriptionId: session.subscription,
             subscriptionStatus: 'active',
             upgradedAt: Date.now(),
+            ...(session.metadata?.formule && { formule: session.metadata.formule }),
+            ...(session.metadata?.fondateur && { fondateur: session.metadata.fondateur === 'true' }),
+            annuleLe: null,
           },
           { merge: true }
         )
@@ -87,7 +104,7 @@ export default async function handler(req, res) {
       const ref = await userRefByCustomer(db, sub.customer)
       if (ref) {
         const plan = planForStatus(sub.status)
-        await ref.update({ plan, subscriptionStatus: sub.status, planUpdatedAt: Date.now() })
+        await ref.update({ plan, subscriptionStatus: sub.status, planUpdatedAt: Date.now(), ...champsAbonnement(sub) })
         console.log(`[stripe-webhook] customer ${sub.customer} → ${sub.status} → ${plan}`)
       }
       break

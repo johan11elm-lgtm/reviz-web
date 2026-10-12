@@ -1,87 +1,52 @@
-.ve-page {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;  /* vh fallback iOS 15 */
-  min-height: 100dvh;
-  padding: 40px 28px;
-  text-align: center;
-  gap: 0;
-}
+/* Vérification de l'email (VerifyEmail.jsx) : même langage que l'inscription
+   (Inscription.css), composition ordinateur dans desktop.css (auth-desk). */
+.ve-content { padding-top: 40px; gap: 10px; }
+.ve-mascot { display: block; margin: 0 0 6px -8px; }
 
-.ve-icon {
-  font-size: 64px;
-  margin-bottom: 24px;
-}
-
-.ve-title {
-  font-size: 26px;
-  font-weight: 800;
-  letter-spacing: -0.5px;
-  color: var(--text-primary);
-  margin: 0 0 12px;
-}
-
-.ve-sub {
-  font-size: 15px;
+.ve-adresse {
+  margin: 4px 0 0;
+  padding: 14px 16px;
+  border-radius: 16px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  font-size: 14px;
+  line-height: 1.5;
   color: var(--text-secondary);
-  margin: 0 0 16px;
-  line-height: 1.5;
 }
+.ve-adresse strong { color: var(--text-primary); word-break: break-all; }
+.auth-desk-card .ve-adresse { background: var(--bg-app); }
 
-.ve-sub strong {
-  color: var(--text-primary);
-  font-weight: 600;
-}
-
-.ve-hint {
+.ve-pas-encore {
+  margin: 0;
   font-size: 13px;
-  color: var(--text-muted);
-  background: var(--bg-subtle);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 12px 16px;
-  margin: 0 0 32px;
-  line-height: 1.5;
+  line-height: 1.45;
+  color: var(--accent-orange-ink);
+  text-align: center;
 }
-
-.ve-btn-main {
-  width: 100%;
-  padding: 15px;
-  background: var(--bg-cta); /* bouton principal en encre, comme partout */
-  color: white;
-  border: none;
-  border-radius: 14px;
-  font-size: 16px;
-  font-weight: 700;
-  cursor: pointer;
-  margin-bottom: 12px;
-}
-
-.ve-btn-main:disabled { opacity: 0.6; }
 
 .ve-btn-ghost {
   width: 100%;
   padding: 13px;
-  background: var(--bg-card); /* bouton secondaire blanc, comme rv-btn-cta--ghost */
+  background: var(--bg-card);
   color: var(--text-primary);
   border: 1px solid var(--border);
   border-radius: 14px;
+  font: inherit;
   font-size: 15px;
   font-weight: 600;
   cursor: pointer;
-  margin-bottom: 16px;
 }
-
 .ve-btn-ghost:disabled { opacity: 0.6; }
 
 .ve-btn-skip {
+  align-self: center;
   background: none;
   border: none;
   color: var(--text-muted);
+  font: inherit;
   font-size: 13px;
   cursor: pointer;
   text-decoration: underline;
+  text-underline-offset: 3px;
   padding: 4px;
 }

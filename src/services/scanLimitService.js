@@ -1,7 +1,7 @@
 // -------------------------------------------------------
 // Réviz — Service de limite de scans hebdomadaire
 // -------------------------------------------------------
-// Free : 5 scans / semaine (lundi → dimanche), 30 pendant le lancement
+// Free : 5 scans / semaine (lundi → dimanche) ; Réviz+ (offert ou payé) : illimité
 // Premium : illimité
 // -------------------------------------------------------
 
@@ -9,11 +9,15 @@ import { LANCEMENT_OFFERT, LANCEMENT_SCAN_LIMIT } from '../../api/_lancement.js'
 
 let _uid = null
 let _isPremium = false
+// Réviz+ offert à ce compte (lancement, puis grâce des fondateurs) : réglé
+// par AuthContext, comme le statut premium.
+let _offert = LANCEMENT_OFFERT
 
-const FREE_LIMIT = LANCEMENT_OFFERT ? LANCEMENT_SCAN_LIMIT : 5
+const limiteGratuite = () => (_offert ? LANCEMENT_SCAN_LIMIT : 5)
 
 export function setScanLimitUser(uid) { _uid = uid }
 export function setPremiumStatus(isPremium) { _isPremium = isPremium }
+export function setRevizPlusOffert(offert) { _offert = !!offert }
 
 function getKey() {
   return _uid ? `reviz-scan-limit-${_uid}` : 'reviz-scan-limit'
@@ -45,7 +49,7 @@ function saveData(data) {
  */
 export function getScanStatus() {
   if (_isPremium) {
-    return { canScan: true, remaining: Infinity, used: 0, limit: FREE_LIMIT, isPremium: true }
+    return { canScan: true, remaining: Infinity, used: 0, limit: limiteGratuite(), isPremium: true }
   }
 
   const now = Date.now()
@@ -57,12 +61,13 @@ export function getScanStatus() {
     saveData(data)
   }
 
-  const remaining = Math.max(0, FREE_LIMIT - data.count)
+  const remaining = Math.max(0, limiteGratuite() - data.count)
   return {
-    canScan: data.count < FREE_LIMIT,
-    remaining,
+    canScan: data.count < limiteGratuite(),
+    // Réviz+ offert : illimité à l'affichage, le plafond n'est qu'un garde-fou.
+    remaining: _offert ? Infinity : remaining,
     used: data.count,
-    limit: FREE_LIMIT,
+    limit: limiteGratuite(),
     isPremium: false,
   }
 }

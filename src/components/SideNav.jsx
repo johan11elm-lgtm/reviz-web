@@ -3,7 +3,7 @@ import { NavLink, Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { Mascot } from './Mascot';
 import { HomeIcon, BookIcon, StatsIcon, UserIcon } from './BottomNav';
-import { CameraIcon, BookOpenIcon, ChatIcon } from './Icons';
+import { CameraIcon, BookOpenIcon, ChatIcon, CalendarIcon } from './Icons';
 import { isProgrammeLessonId } from '../utils/programme';
 import { AVIS_PROFS_URL, isDecouverte } from '../services/decouverteService';
 import './SideNav.css';
@@ -43,6 +43,7 @@ export function SideNav() {
     { to: '/cours',     label: 'Mes cours',     Icon: BookIcon,     also: lessonSection === '/cours' ? LESSON_PATHS : [] },
     { to: '/programme', label: 'Mon programme', Icon: BookOpenIcon, also: lessonSection === '/programme' ? LESSON_PATHS : [] },
     { to: '/coach',     label: 'Coach',         Icon: ChatIcon },
+    { to: '/agenda',    label: 'Agenda',        Icon: CalendarIcon },
     { to: '/progres',   label: 'Progrès',       Icon: StatsIcon },
     { to: '/profil',    label: 'Profil',        Icon: UserIcon,     also: ['/reglages'] },
   ];

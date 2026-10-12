@@ -1,53 +1,41 @@
-import { CameraIcon, ChatIcon, SunIcon, StarIcon } from '../components/Icons';
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
+import { FORMULES } from '../../api/_prix.js';
+import { PREMIER_PRELEVEMENT } from '../../api/_lancement.js';
 import { useAuth } from '../context/AuthContext';
+import { PageHeader } from '../components/PageHeader';
+import { PageIntro } from '../components/PageIntro';
+import { GemIcon, SunIcon, ChatIcon } from '../components/Icons';
+import { FondateurSeal, RecapAbonnement, RevizPlusJauges } from '../components/RevizPlus';
+import '../components/RevizPlus.css';
 import './UpgradeSuccess.css';
 
-const LogoStar = () => (
-  <svg className="ugs-star" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-    <path
-      d="M8 0 C8.3 2.8 8.8 4.2 10.2 5.6 11.6 7 13 7.5 16 8 13 8.5 11.6 9 10.2 10.4 8.8 11.8 8.3 13.2 8 16 7.7 13.2 7.2 11.8 5.8 10.4 4.4 9 3 8.5 0 8 3 7.5 4.4 7 5.8 5.6 7.2 4.2 7.7 2.8 8 0Z"
-      fill="url(#upgG)"
-    />
-    <defs>
-      <linearGradient id="upgG" x1="0" y1="0" x2="16" y2="16" gradientUnits="userSpaceOnUse">
-        <stop offset="0%" stopColor="#FFB347" />
-        <stop offset="100%" stopColor="#FF6B00" />
-      </linearGradient>
-    </defs>
-  </svg>
-);
+// Paillettes dorées : une seule pluie à l'arrivée, aux couleurs de Réviz+.
+const PAILLETTES = Array.from({ length: 18 }, (_, i) => ({
+  x: (i * 37) % 100,
+  delay: (i % 6) * 0.18,
+  rot: (i * 53) % 360,
+  or: ['#F7DB9C', '#E3A94F', '#F2CD84'][i % 3],
+}));
 
-// Seulement ce que Réviz+ débloque vraiment (api/_quota.js, api/_chatQuota.js, utils/themes.js).
-const ADVANTAGES = [
-  { icon: <CameraIcon />, label: 'Scans illimités',     color: '#FF8A3D', desc: 'Scanne autant de leçons que tu veux' },
-  { icon: <ChatIcon />,   label: 'Coach sans compter',  color: '#2D2B57', desc: 'Jusqu’à 200 questions par jour' },
-  { icon: <SunIcon />,    label: '4 thèmes exclusifs',  color: '#0E7A55', desc: 'Nuit d’encre, Carnet kraft, Violet air, Menthe' },
-  { icon: <StarIcon />,   label: 'Un projet soutenu',   color: '#34C77B', desc: 'Réviz reste sans pub grâce à toi' },
-];
-
+/**
+ * Retour de Stripe après l'abonnement. L'adresse porte la formule et le
+ * tarif fondateur (api/_checkout.js) ; le statut, lui, attend le webhook.
+ */
 export default function UpgradeSuccess() {
   const navigate = useNavigate();
-  const { currentUser, refreshPremium, isPremium } = useAuth();
-  const [step, setStep] = useState(0);
+  const [params] = useSearchParams();
+  const fondateur = params.get('fondateur') === '1';
+  const formule = FORMULES.includes(params.get('formule')) ? params.get('formule') : null;
+  const { currentUser, refreshPremium, isPremium, abonnement } = useAuth();
   const [retriesExhausted, setRetriesExhausted] = useState(false);
-  const prenom = currentUser?.displayName?.split(' ')[0] || 'toi';
-
-  useEffect(() => {
-    refreshPremium();
-    const t1 = setTimeout(() => setStep(1), 200);
-    const t2 = setTimeout(() => setStep(2), 280);
-    const t3 = setTimeout(() => setStep(3), 360);
-    const t4 = setTimeout(() => setStep(4), 440);
-    const t5 = setTimeout(() => setStep(5), 600);
-    return () => { clearTimeout(t1); clearTimeout(t2); clearTimeout(t3); clearTimeout(t4); clearTimeout(t5); };
-  }, []);
+  const prenom = currentUser?.displayName?.split(' ')[0];
 
   // Retry refreshPremium si le webhook Stripe n'a pas encore écrit dans
   // Firestore : backoff 2s/4s/8s/16s (~30s couverts) au lieu d'un seul essai —
   // sinon l'élève qui vient de payer revoit le PremiumModal jusqu'au reload.
   useEffect(() => {
+    refreshPremium();
     if (isPremium) return;
     let cancelled = false;
     let timer = null;
@@ -67,98 +55,84 @@ export default function UpgradeSuccess() {
     return () => { cancelled = true; clearTimeout(timer); };
   }, [isPremium]);
 
+  const statut = !isPremium ? 'Activation…' : fondateur ? 'Réservé' : 'Actif';
+  const sousTitre = fondateur
+    ? `Prix fondateur réservé : rien n'est prélevé avant le ${PREMIER_PRELEVEMENT}.`
+    : 'Ton abonnement est actif : tout est débloqué.';
+
   return (
-    <div className="ugs-root">
-      {/* Confetti */}
-      <div className="ugs-confetti" aria-hidden="true">
-        {Array.from({ length: 30 }).map((_, i) => (
+    <div className="app ugs-page">
+      <div className="ugs-paillettes" aria-hidden="true">
+        {PAILLETTES.map((p, i) => (
           <span
             key={i}
-            className={`ugs-confetti-piece ${i % 3 === 0 ? 'ugs-confetti-rect' : ''}`}
-            style={{
-              '--delay': `${Math.random() * 2}s`,
-              '--x': `${Math.random() * 100}vw`,
-              '--rot': `${Math.random() * 360}deg`,
-              '--sway': `${(Math.random() - 0.5) * 40}px`,
-              '--color': ['#FF8A3D', '#FFB347', '#34C77B', '#3B6FE8', '#FF6B9A'][i % 5],
-            }}
+            className="ugs-paillette"
+            style={{ '--x': `${p.x}%`, '--delay': `${p.delay}s`, '--rot': `${p.rot}deg`, '--or': p.or }}
           />
         ))}
       </div>
 
-      {/* Nav */}
-      <nav className={`ugs-nav ugs-animate ${step >= 1 ? 'visible' : ''}`}>
-        <div className="ugs-logo">
-          <LogoStar />
-          <span>réviz</span>
-        </div>
-      </nav>
+      <PageHeader variant="title-only" />
+      <PageIntro
+        title={prenom ? `Bienvenue dans Réviz+, ${prenom} !` : 'Bienvenue dans Réviz+ !'}
+        sub={sousTitre}
+        mascot="celebration"
+        className="ugs-intro"
+      />
 
-      <main className="ugs-main">
-        {/* Hero */}
-        <section className="ugs-hero">
-          <div className={`ugs-badge ugs-animate ${step >= 2 ? 'visible' : ''}`}>✦ Réviz+</div>
-          <h1 className={`ugs-headline ugs-animate ${step >= 3 ? 'visible' : ''}`}>
-            Félicitations {prenom} !
-          </h1>
-          <p className={`ugs-sub ugs-animate ${step >= 3 ? 'visible' : ''}`}>
-            Tu fais maintenant partie de <strong>Réviz+</strong>.<br />
-            Toutes les fonctionnalités premium sont activées.
-          </p>
+      <div className="content ugs-content">
+        <section className="rp-card ugs-carte" aria-labelledby="ugs-carte-titre">
+          <div className="rp-card-head ugs-carte-head">
+            <span className="rp-wordmark"><GemIcon /><span>Réviz<span className="rp-wordmark-plus">+</span></span></span>
+            <span className={`rp-status${isPremium ? '' : ' ugs-statut-attente'}`}>{statut}</span>
+          </div>
+          <h2 className="rp-card-title ugs-carte-titre" id="ugs-carte-titre">Ce que tu as maintenant</h2>
+          {fondateur && <div className="rp-fondateur"><FondateurSeal /></div>}
+          <RevizPlusJauges />
+          <RecapAbonnement
+            formule={formule ?? abonnement?.formule}
+            fondateur={fondateur}
+            annuleLe={abonnement?.annuleLe}
+            periodeFin={abonnement?.periodeFin}
+          />
         </section>
 
-        <div className={`ugs-divider ugs-animate ${step >= 4 ? 'visible' : ''}`} />
-
-        {/* Avantages */}
-        <section className="ugs-section">
-          <p className={`ugs-label ugs-animate ${step >= 4 ? 'visible' : ''}`}>TES AVANTAGES</p>
-          <h2 className={`ugs-section-title ugs-animate ${step >= 4 ? 'visible' : ''}`}>Tout est débloqué</h2>
-          <div className="ugs-grid">
-            {ADVANTAGES.map((a, i) => (
-              <div
-                key={i}
-                className={`ugs-card ugs-animate ${step >= 4 ? 'visible' : ''}`}
-                style={{ transitionDelay: `${i * 60}ms` }}
-              >
-                <div className="ugs-card-icon" style={{ background: a.color + '15' }}>
-                  <span>{a.icon}</span>
-                </div>
-                <span className="ugs-card-label">{a.label}</span>
-                <p className="ugs-card-desc">{a.desc}</p>
-                <div className="ugs-card-status">
-                  <span className="ugs-check">✓</span> ACTIF
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        <div className={`ugs-divider ugs-animate ${step >= 5 ? 'visible' : ''}`} />
-
-        {/* Confirmation */}
-        <section className={`ugs-section ugs-footer ugs-animate ${step >= 5 ? 'visible' : ''}`}>
-          <div className="ugs-receipt">
-            <span className="ugs-receipt-check">✓</span>
-            <div>
-              <span className="ugs-receipt-label">Abonnement actif</span>
-              <span className="ugs-receipt-price">4,99 €/mois</span>
-            </div>
-          </div>
-          <button className="ugs-cta" onClick={() => navigate('/scan')}>
-            C'est parti →
+        <div className="ugs-suite">
+          <h2 className="rv-section-title">Pour commencer</h2>
+          <button type="button" className="rv-btn-cta rv-btn-cta--full" onClick={() => navigate('/scan')}>
+            Scanner une leçon
           </button>
+          <div className="rv-card rv-rows">
+            <Link to="/reglages#themes" className="rv-row">
+              <span className="rv-row-avatar" aria-hidden="true"><SunIcon /></span>
+              <span className="rv-row-text">
+                <span className="rv-row-title">Choisir mon thème</span>
+                <span className="rv-row-sub">Nuit d’encre, Abricot, Sauge ou Prune</span>
+              </span>
+              <span className="rv-row-arrow" aria-hidden="true">›</span>
+            </Link>
+            <Link to="/coach" className="rv-row">
+              <span className="rv-row-avatar" aria-hidden="true"><ChatIcon /></span>
+              <span className="rv-row-text">
+                <span className="rv-row-title">Poser une question au coach</span>
+                <span className="rv-row-sub">Il connaît tes leçons, sans limite de messages</span>
+              </span>
+              <span className="rv-row-arrow" aria-hidden="true">›</span>
+            </Link>
+          </div>
+
           {!isPremium && retriesExhausted && (
-            <button
-              type="button"
-              className="ugs-cta ugs-cta--verify"
-              onClick={() => refreshPremium()}
-            >
+            <button type="button" className="rv-btn-cta rv-btn-cta--ghost rv-btn-cta--full" onClick={() => refreshPremium()}>
               Vérifier mon abonnement
             </button>
           )}
-          <p className="ugs-hint">Tu peux annuler à tout moment depuis les réglages.</p>
-        </section>
-      </main>
+          <p className="ugs-note">
+            {fondateur
+              ? <>Tu peux annuler avant le {PREMIER_PRELEVEMENT} sans rien payer, depuis les <Link to="/reglages#abonnement">Réglages</Link>.</>
+              : <>Résiliable à tout moment depuis les <Link to="/reglages#abonnement">Réglages</Link>.</>}
+          </p>
+        </div>
+      </div>
     </div>
   );
 }

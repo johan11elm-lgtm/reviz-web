@@ -429,7 +429,6 @@ input, textarea {
 /* Sur fonds violets/sombres, un contour clair pour rester visible. */
 .rv-btn-cta:not(.rv-btn-cta--ghost):focus-visible,
 .auth-btn:focus-visible,
-.ugs-cta:focus-visible,
 .rv-hero-main:focus-visible,
 .rv-hero-secondary:focus-visible {
   outline-color: #FFFFFF;
@@ -720,6 +719,13 @@ html.native .content, html.native .pg-content, html.native .pf-content {
        (un pourcentage se calculerait sur la fenêtre entière, d'où 100vw moins la barre) */
     padding-left: clamp(0px, calc((100vw - var(--sidenav-w) - var(--content-max)) / 2), 240px);
     padding-right: clamp(0px, calc((100vw - var(--sidenav-w) - var(--content-max)) / 2), 240px);
+  }
+  /* Pages sans barre latérale (connexion, inscription, fin d'inscription…) :
+     pas de place réservée à gauche, la colonne se centre dans la fenêtre. */
+  html:not(.native) body:not(:has(.side-nav)) .app {
+    margin-left: 0;
+    padding-left: clamp(0px, calc((100vw - var(--content-max)) / 2), 240px);
+    padding-right: clamp(0px, calc((100vw - var(--content-max)) / 2), 240px);
   }
   /* Le halo couvre toute la largeur de la coquille */
   html:not(.native) .app::before { left: 0; right: 0; }

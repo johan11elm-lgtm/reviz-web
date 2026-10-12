@@ -5,7 +5,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 200;
+  z-index: 300; /* au-dessus de la barre latérale et des onglets */
   padding: 24px;
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
@@ -16,7 +16,9 @@
   border-radius: var(--radius-card);
   padding: 28px 24px 22px;
   width: 100%;
-  max-width: 320px;
+  max-width: 380px;
+  max-height: calc(100dvh - 48px);
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -36,9 +38,8 @@
 }
 
 .premium-title {
-  font-size: 19px;
-  font-weight: 700;
-  letter-spacing: -0.3px;
+  font: 800 21px/1.2 'Geist', sans-serif;
+  letter-spacing: -0.6px;
   color: var(--text-primary);
   text-align: center;
   margin: 0;
@@ -119,6 +120,47 @@
 }
 
 .premium-btn--close {
-  background: var(--bg-subtle, #f0f0f0);
-  color: var(--text-primary);
+  background: transparent;
+  color: var(--text-secondary);
+  padding: 10px 0 4px;
+}
+.premium-btn--close:hover { color: var(--text-primary); }
+
+/* Offre Réviz+ : bloc encre + or dans la fenêtre blanche */
+.premium-plus {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 10px;
+  padding: 18px 16px 16px;
+  border-radius: 22px;
+  border: 1px solid var(--rp-line);
+  background: var(--rp-grad);
+  box-shadow: 0 12px 28px rgba(23, 22, 47, 0.25);
+  color: var(--rp-on);
+}
+.premium-plus::before {
+  content: '';
+  position: absolute;
+  top: -80px;
+  right: -70px;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(242, 205, 132, 0.28) 0%, rgba(242, 205, 132, 0) 70%);
+  pointer-events: none;
+}
+.premium-plus-titre {
+  margin: 6px 0 0;
+  font: 800 21px/1.15 'Geist', sans-serif;
+  letter-spacing: -0.6px;
+}
+.premium-plus-sub {
+  margin: 0 0 6px;
+  font-size: 13.5px;
+  line-height: 1.45;
+  color: var(--rp-on-sub);
 }

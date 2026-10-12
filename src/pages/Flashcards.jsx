@@ -10,6 +10,7 @@ import { MissingLessonState } from '../components/MissingLessonState'
 import { FormatFeedback } from '../components/FormatFeedback'
 import { CoachChat, CoachHeaderButton } from '../components/CoachChat'
 import { nbsp } from '../utils/typography'
+import { useIsDesktop } from '../hooks/useMediaQuery'
 import './Flashcards.css'
 
 // ---- DONNÉES : localStorage (IA) > état vide (mock réservé au dev) ----
@@ -53,6 +54,7 @@ export default function Flashcards() {
 }
 
 function FlashcardsSession() {
+  const isDesktop  = useIsDesktop()
   useEffect(() => { recordRevision('flashcards') }, [])
   const lessonId   = useMemo(() => getLessonId(), [])
   const rawCards   = getFlashcards()
@@ -265,7 +267,7 @@ function FlashcardsSession() {
                 <span className="flashcards-face-tag">Question</span>
                 <span className="flashcards-face-text">{nbsp(card.front)}</span>
                 {!isFlipped && current === 0 && (
-                  <span className="flashcards-face-hint">Appuie pour révéler</span>
+                  <span className="flashcards-face-hint">{isDesktop ? 'Clique ou appuie sur Espace pour révéler' : 'Appuie pour révéler'}</span>
                 )}
               </div>
 

@@ -1,6 +1,6 @@
 import { PageIntro } from '../components/PageIntro';
 import { GuestBanner } from '../components/GuestBanner';
-import { UserIcon, MailIcon, KeyIcon, BellIcon, MoonIcon, LockIcon, GemIcon, CheckIcon, InfoIcon, ScaleIcon, FileTextIcon, ClipboardIcon, LogOutIcon, AlertIcon, InstallIcon } from '../components/Icons';
+import { UserIcon, MailIcon, KeyIcon, BellIcon, MoonIcon, LockIcon, CheckIcon, InfoIcon, ScaleIcon, FileTextIcon, ClipboardIcon, LogOutIcon, AlertIcon, InstallIcon } from '../components/Icons';
 import { InstallerModal } from '../components/InstallerApp';
 import { useInstallation } from '../hooks/useInstallation';
 import { useState, useEffect } from 'react';
@@ -12,7 +12,7 @@ import { LevelSelector } from '../components/LevelSelector';
 import { THEMES } from '../utils/themes';
 import { RevizPlusBadge, RevizPlusCard } from '../components/RevizPlus';
 import { formatLevelLabel } from '../utils/levels';
-import { openBillingPortal, startCheckout } from '../services/billingService';
+import { openBillingPortal } from '../services/billingService';
 import { remindersAvailable, isReminderEnabled, enableReminder, disableReminder } from '../services/reminderService';
 import { loadLessons } from '../services/historyService';
 import { countDueCards } from '../services/srsService';
@@ -34,14 +34,16 @@ export default function Reglages() {
   const navigate = useNavigate();
   const { theme, setTheme, isDark, toggleTheme } = useTheme();
   const location = useLocation();
-  // Arrivée depuis « Choisir mon thème » (fiche Réviz+, accueil) : on descend aux thèmes.
+  // Arrivée depuis « Choisir mon thème » (fiche Réviz+, accueil) ou depuis la
+  // landing (« Réserver mon prix fondateur ») : on descend à la bonne section.
   useEffect(() => {
-    if (location.hash !== '#themes') return;
-    const t = setTimeout(() => document.getElementById('themes')?.scrollIntoView({ block: 'start', behavior: 'smooth' }), 80);
+    const cible = { '#themes': 'themes', '#abonnement': 'abonnement' }[location.hash];
+    if (!cible) return;
+    const t = setTimeout(() => document.getElementById(cible)?.scrollIntoView({ block: 'start', behavior: 'smooth' }), 80);
     return () => clearTimeout(t);
   }, [location.hash]);
   const {
-    currentUser, isPremium, hasRevizPlus, revizPlusOffert, logout, isGuest,
+    currentUser, isPremium, hasRevizPlus, logout, isGuest,
     getUserLevel, setUserLevel, updateDisplayName,
     updateUserEmail, updateUserPassword, deleteAccount,
   } = useAuth();
@@ -153,19 +155,6 @@ export default function Reglages() {
   const [billingLoading, setBillingLoading] = useState(false);
   const [billingError, setBillingError]     = useState('');
 
-  async function handleUpgrade() {
-    if (billingLoading) return;
-    setBillingLoading(true); setBillingError('');
-    try {
-      await startCheckout(); // redirige vers Stripe en cas de succès
-    } catch (err) {
-      setBillingLoading(false);
-      setBillingError(err.message === 'EMAIL_NOT_VERIFIED'
-        ? 'Confirme d\'abord ton adresse email, puis réessaie.'
-        : 'Impossible d\'ouvrir le paiement. Réessaie dans un moment.');
-    }
-  }
-
   async function handleManageSubscription() {
     if (billingLoading) return;
     setBillingLoading(true); setBillingError('');
@@ -194,13 +183,14 @@ export default function Reglages() {
   }
 
   async function handleDeleteAccount() {
-    const isGoogle = currentUser?.providerData[0]?.providerId === 'google.com';
+    // Compte Google / Apple / Microsoft / TikTok : pas de mot de passe à redemander.
+    const sansMotDePasse = !currentUser?.providerData?.some(p => p.providerId === 'password');
     if (deleteStep === 0) { setDeleteStep(1); return; }
-    if (deleteStep === 1 && !isGoogle) { setDeleteStep(2); return; }
-    // Étape 2 (mot de passe) ou étape 1 (Google) → suppression réelle
+    if (deleteStep === 1 && !sansMotDePasse) { setDeleteStep(2); return; }
+    // Étape 2 (mot de passe) ou étape 1 (sans mot de passe) → suppression réelle
     setDeleting(true); setDeleteError('');
     try {
-      await deleteAccount(isGoogle ? null : deletePwd);
+      await deleteAccount(sansMotDePasse ? null : deletePwd);
       navigate('/welcome');
     } catch (err) {
       if (err.code === 'auth/wrong-password' || err.code === 'auth/invalid-credential') {
@@ -476,40 +466,17 @@ export default function Reglages() {
 
         {/* ── 5. Abonnement ── */}
         {!isGuest && (
-        <section className="rg-section">
+        <section className="rg-section" id="abonnement">
           <h2 className="rg-section-title">Abonnement</h2>
-          {revizPlusOffert ? (
-            <RevizPlusCard onTheme={() => document.getElementById('themes')?.scrollIntoView({ block: 'start', behavior: 'smooth' })} />
-          ) : (
-          <div className="rv-card rg-card">
-            <div className="rg-plan-row">
-              <span className="rg-plan-label">Plan actuel</span>
-              {isPremium
-                ? <span className="premium-chip premium-chip--active"><GemIcon /> Réviz+ actif</span>
-                : <span className="rg-plan-free">Gratuit</span>}
-            </div>
-            {isPremium ? (
-              <button
-                type="button"
-                className="rv-btn-cta rv-btn-cta--ghost rv-btn-cta--full"
-                onClick={handleManageSubscription}
-                disabled={billingLoading}
-              >
-                {billingLoading ? 'Ouverture…' : 'Gérer mon abonnement'}
-              </button>
-            ) : (
-              <button
-                type="button"
-                className="rv-btn-cta rv-btn-cta--full"
-                onClick={handleUpgrade}
-                disabled={billingLoading}
-              >
-                {billingLoading ? 'Ouverture…' : 'Passer à Réviz+'}
-              </button>
-            )}
-            {billingError && <p className="rg-error" role="alert">{billingError}</p>}
-          </div>
-          )}
+          {/* Une seule carte pour tous les cas : offert, abonné (récapitulatif
+              et portail Stripe) ou gratuit (choix de la formule). */}
+          <RevizPlusCard
+            details
+            onTheme={() => document.getElementById('themes')?.scrollIntoView({ block: 'start', behavior: 'smooth' })}
+            onGerer={isPremium ? handleManageSubscription : undefined}
+            gererEnCours={billingLoading}
+          />
+          {billingError && <p className="rg-error" role="alert">{billingError}</p>}
         </section>
         )}
 
@@ -567,6 +534,14 @@ export default function Reglages() {
               <span className="rv-icon-square rg-icon" aria-hidden="true"><ClipboardIcon /></span>
               <span className="rg-row-text">
                 <span className="rg-row-label">CGU</span>
+              </span>
+              <span className="rg-row-arrow" aria-hidden="true">›</span>
+            </Link>
+
+            <Link to="/legal/cgv" className="rg-row">
+              <span className="rv-icon-square rg-icon" aria-hidden="true"><ClipboardIcon /></span>
+              <span className="rg-row-text">
+                <span className="rg-row-label">CGV Réviz+</span>
               </span>
               <span className="rg-row-arrow" aria-hidden="true">›</span>
             </Link>

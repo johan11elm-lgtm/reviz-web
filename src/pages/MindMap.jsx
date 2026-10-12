@@ -12,6 +12,7 @@ import { MissingLessonState } from '../components/MissingLessonState'
 import { FormatFeedback } from '../components/FormatFeedback'
 import { CoachChat, CoachHeaderButton } from '../components/CoachChat'
 import { nbsp } from '../utils/typography'
+import { useIsDesktop } from '../hooks/useMediaQuery'
 import './Mindmap.css'
 
 // ── Données ───────────────────────────────────────────────────────
@@ -109,6 +110,7 @@ function MindmapSession() {
   const { theme } = useTheme()
   const isDark = theme === 'dark'
   const navigate = useNavigate()
+  const isDesktop = useIsDesktop()
 
   const canvasRef    = useRef(null)
   const pointerStart = useRef(null)
@@ -345,7 +347,7 @@ function MindmapSession() {
       >
         {!focusBranch && (
           <div className="canvas-hint">
-            <span className="canvas-hint-text">Appuie sur une branche</span>
+            <span className="canvas-hint-text">{isDesktop ? 'Clique sur une branche' : 'Appuie sur une branche'}</span>
           </div>
         )}
         {isViewMoved && (

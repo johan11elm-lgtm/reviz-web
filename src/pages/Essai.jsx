@@ -3,8 +3,11 @@ import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { PageHeader } from '../components/PageHeader';
 import { PageIntro } from '../components/PageIntro';
+import { Mascot } from '../components/Mascot';
+import { useIsDesktop } from '../hooks/useMediaQuery';
 import { CYCLES, CLASSES_BY_CYCLE } from '../utils/levels';
 import { CLASSES_DECOUVERTE, startDecouverte, stopDecouverte } from '../services/decouverteService';
+import './Inscription.css'; // auth-desk : même composition que la connexion
 import './Essai.css';
 
 /**
@@ -30,6 +33,7 @@ export default function Essai() {
   const [cycle, setCycle] = useState('college');
   const [classe, setClasse] = useState(classeFiche);
   const [error, setError] = useState('');
+  const isDesktop = useIsDesktop();
 
   // Déjà connecté avec un vrai compte : rien à essayer, direction l'accueil.
   useEffect(() => {
@@ -57,6 +61,93 @@ export default function Essai() {
 
   if (classeProf) return <div className="app essai-page" />;
 
+  const champs = (
+    <>
+      <label className="essai-label" htmlFor="essai-prenom">Ton prénom</label>
+      <input
+        id="essai-prenom"
+        className="essai-input"
+        type="text"
+        value={prenom}
+        onChange={e => { setPrenom(e.target.value); setError(''); }}
+        placeholder="Lucas"
+        maxLength={30}
+        autoComplete="given-name"
+        autoFocus
+      />
+
+      <div className="essai-label" id="essai-classe-label">Ta classe</div>
+      <div className="essai-cycles" role="tablist" aria-label="Collège ou lycée">
+        {/* Mon programme ne couvre que la 6e à la 3e : le lycée est annoncé, pas encore ouvert. */}
+        {CYCLES.map(c => {
+          const bientot = c.id === 'lycee';
+          return (
+            <button
+              key={c.id}
+              type="button"
+              role="tab"
+              aria-selected={cycle === c.id}
+              disabled={bientot}
+              className={`essai-cycle${cycle === c.id ? ' essai-cycle--active' : ''}${bientot ? ' essai-cycle--bientot' : ''}`}
+              onClick={() => { setCycle(c.id); setClasse(null); setError(''); }}
+            >
+              {c.label}
+              {bientot && <span className="essai-cycle-bientot">à venir</span>}
+            </button>
+          );
+        })}
+      </div>
+      <div className="essai-classes" role="group" aria-labelledby="essai-classe-label">
+        {CLASSES_BY_CYCLE[cycle].map(k => (
+          <button
+            key={k}
+            type="button"
+            aria-pressed={classe === k}
+            className={`essai-classe${classe === k ? ' essai-classe--active' : ''}`}
+            onClick={() => { setClasse(k); setError(''); }}
+          >
+            {k}
+          </button>
+        ))}
+      </div>
+
+      {error && <p className="essai-error" role="alert">{error}</p>}
+
+      <button type="submit" className="rv-btn-cta rv-btn-cta--full essai-submit">
+        <span>C'est parti</span>
+        <span className="rv-btn-cta-arrow" aria-hidden="true">→</span>
+      </button>
+      <p className="essai-hint">
+        Ta progression reste sur cet appareil. Crée un compte quand tu veux pour la retrouver partout.
+      </p>
+      <Link to="/inscription" className="essai-link">Je préfère créer mon compte</Link>
+    </>
+  );
+
+  // Ordinateur : la même composition que la connexion (auth-desk, desktop.css).
+  if (isDesktop) {
+    return (
+      <div className="app essai-page auth-desk-page">
+        <div className="auth-desk">
+          <div className="auth-desk-intro">
+            <Link to="/welcome" className="auth-back" aria-label="Retour">←</Link>
+            <span className="auth-desk-mascot"><Mascot pose="hello" size={132} alt="" aria-hidden="true" /></span>
+            <h1 className="signup-question">Essayer sans compte</h1>
+            <p className="signup-hint">Ton prénom, ta classe, et tu révises ton programme tout de suite.</p>
+            <ul className="auth-desk-why">
+              <li><strong>Tout le programme</strong> de ta classe, chapitre par chapitre : résumés, flashcards, quiz.</li>
+              <li><strong>Pas d'adresse mail</strong> à donner : ta progression reste sur cet appareil.</li>
+              <li>Tu crées un compte <strong>quand tu veux</strong>, et tu gardes ce que tu as déjà révisé.</li>
+            </ul>
+          </div>
+          <form className="auth-desk-card essai-carte" onSubmit={submit} noValidate>
+            {champs}
+          </form>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="app essai-page">
       <PageHeader variant="back" onBack={() => navigate('/welcome')} />
@@ -68,64 +159,7 @@ export default function Essai() {
       />
 
       <form className="content essai-content" onSubmit={submit} noValidate>
-        <label className="essai-label" htmlFor="essai-prenom">Ton prénom</label>
-        <input
-          id="essai-prenom"
-          className="essai-input"
-          type="text"
-          value={prenom}
-          onChange={e => { setPrenom(e.target.value); setError(''); }}
-          placeholder="Lucas"
-          maxLength={30}
-          autoComplete="given-name"
-          autoFocus
-        />
-
-        <div className="essai-label" id="essai-classe-label">Ta classe</div>
-        <div className="essai-cycles" role="tablist" aria-label="Collège ou lycée">
-          {/* Mon programme ne couvre que la 6e à la 3e : le lycée est annoncé, pas encore ouvert. */}
-          {CYCLES.map(c => {
-            const bientot = c.id === 'lycee';
-            return (
-              <button
-                key={c.id}
-                type="button"
-                role="tab"
-                aria-selected={cycle === c.id}
-                disabled={bientot}
-                className={`essai-cycle${cycle === c.id ? ' essai-cycle--active' : ''}${bientot ? ' essai-cycle--bientot' : ''}`}
-                onClick={() => { setCycle(c.id); setClasse(null); setError(''); }}
-              >
-                {c.label}
-                {bientot && <span className="essai-cycle-bientot">à venir</span>}
-              </button>
-            );
-          })}
-        </div>
-        <div className="essai-classes" role="group" aria-labelledby="essai-classe-label">
-          {CLASSES_BY_CYCLE[cycle].map(k => (
-            <button
-              key={k}
-              type="button"
-              aria-pressed={classe === k}
-              className={`essai-classe${classe === k ? ' essai-classe--active' : ''}`}
-              onClick={() => { setClasse(k); setError(''); }}
-            >
-              {k}
-            </button>
-          ))}
-        </div>
-
-        {error && <p className="essai-error" role="alert">{error}</p>}
-
-        <button type="submit" className="rv-btn-cta rv-btn-cta--full essai-submit">
-          <span>C'est parti</span>
-          <span className="rv-btn-cta-arrow" aria-hidden="true">→</span>
-        </button>
-        <p className="essai-hint">
-          Ta progression reste sur cet appareil. Crée un compte quand tu veux pour la retrouver partout.
-        </p>
-        <Link to="/inscription" className="essai-link">Je préfère créer mon compte</Link>
+        {champs}
       </form>
     </div>
   );

@@ -338,8 +338,8 @@ export default function Scan() {
               </button>
             </div>
 
-            {/* Tip trigger — ouvre la bottom sheet */}
-            <button
+            {/* Tip trigger — ouvre la bottom sheet (sur ordinateur, les conseils sont sous les panneaux) */}
+            {!double && <button
               type="button"
               className="scan-tip-trigger"
               onClick={() => setTipOpen(true)}
@@ -347,7 +347,7 @@ export default function Scan() {
               <span className="scan-tip-trigger-icon"><BulbIcon /></span>
               <span className="scan-tip-trigger-label">Conseils pour un bon scan</span>
               <span className="scan-tip-trigger-arrow" aria-hidden="true">›</span>
-            </button>
+            </button>}
           </section>
         )}
         {(double || activeTab === 'texte') && (
@@ -396,6 +396,19 @@ export default function Scan() {
             </button>
           </section>
         )}
+        {double && (
+          <section className="scan-tips-desk" aria-labelledby="scan-tips-desk-titre">
+            <h2 className="rv-eyebrow" id="scan-tips-desk-titre">4 réflexes pour un scan nickel</h2>
+            <ul className="scan-tips-desk-list">
+              {TIPS.map(t => (
+                <li className="scan-tips-desk-item" key={t.titre}>
+                  <span className="rv-row-avatar" aria-hidden="true">{t.icon}</span>
+                  <span className="scan-tips-desk-text"><strong>{t.titre}</strong> {t.texte}</span>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
       </div>
 
       {/* Backdrop pour la sheet tips */}
@@ -426,30 +439,14 @@ export default function Scan() {
           </button>
         </header>
         <ul className="scan-tip-list">
-          <li className="scan-tip-item">
-            <span className="scan-tip-emoji" aria-hidden="true"><FrameIcon /></span>
-            <div className="scan-tip-text">
-              <strong>Cadre droit.</strong> Le texte horizontal, sans angle.
-            </div>
-          </li>
-          <li className="scan-tip-item">
-            <span className="scan-tip-emoji" aria-hidden="true"><SunIcon /></span>
-            <div className="scan-tip-text">
-              <strong>Bien éclairé.</strong> Évite les ombres et les reflets brillants.
-            </div>
-          </li>
-          <li className="scan-tip-item">
-            <span className="scan-tip-emoji" aria-hidden="true"><SearchIcon /></span>
-            <div className="scan-tip-text">
-              <strong>Texte net.</strong> Approche-toi jusqu'à ce que les lettres soient lisibles.
-            </div>
-          </li>
-          <li className="scan-tip-item">
-            <span className="scan-tip-emoji" aria-hidden="true"><FileTextIcon /></span>
-            <div className="scan-tip-text">
-              <strong>Une leçon à la fois.</strong> Pas plusieurs énoncés sur la même photo.
-            </div>
-          </li>
+          {TIPS.map(t => (
+            <li className="scan-tip-item" key={t.titre}>
+              <span className="scan-tip-emoji" aria-hidden="true">{t.icon}</span>
+              <div className="scan-tip-text">
+                <strong>{t.titre}</strong> {t.texte}
+              </div>
+            </li>
+          ))}
         </ul>
       </aside>
 
@@ -507,9 +504,20 @@ export default function Scan() {
   );
 }
 
+// Conseils de prise de vue : feuille du bas (téléphone), rangée sous les
+// deux panneaux (ordinateur).
+const TIPS = [
+  { icon: <FrameIcon />, titre: 'Cadre droit.', texte: 'Le texte horizontal, sans angle.' },
+  { icon: <SunIcon />, titre: 'Bien éclairé.', texte: 'Évite les ombres et les reflets brillants.' },
+  { icon: <SearchIcon />, titre: 'Texte net.', texte: 'Approche-toi jusqu\'à ce que les lettres soient lisibles.' },
+  { icon: <FileTextIcon />, titre: 'Une leçon à la fois.', texte: 'Pas plusieurs énoncés sur la même photo.' },
+];
+
 function ScanQuota({ plus }) {
   const { remaining, limit } = getScanStatus();
-  if (!Number.isFinite(remaining)) {
+  // Réviz+ (payé ou offert) s'affiche illimité : le plafond de l'offre de
+  // lancement est un garde-fou invisible (api/_lancement.js).
+  if (plus || !Number.isFinite(remaining)) {
     return (
       <p className="scan-quota">
         <RevizPlusBadge />

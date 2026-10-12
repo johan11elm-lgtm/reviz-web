@@ -49,8 +49,20 @@ export async function mockApiRoutes(page) {
     route.fulfill({ status: 200, contentType: 'text/plain; charset=utf-8', body: JSON.stringify(MOCK_AI_RESPONSE) }))
   await page.route('**/api/analyse-image', route =>
     route.fulfill({ status: 200, contentType: 'text/plain; charset=utf-8', body: JSON.stringify(MOCK_AI_RESPONSE) }))
-  await page.route('**/api/send-parental-consent', route =>
-    route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ ok: true }) }))
+  // Demande au parent : on pose dans l'émulateur ce qu'écrit le serveur
+  // (email parti, délai de réponse qui démarre), sans envoyer de mail.
+  await page.route('**/api/send-parental-consent', async route => {
+    const { idToken, parentEmail } = route.request().postDataJSON()
+    const jeton = JSON.parse(Buffer.from(idToken.split('.')[1], 'base64url').toString())
+    const maintenant = String(Date.now())
+    await ecrireConsentementEmulateur(jeton.user_id, {
+      status: { stringValue: 'pending' },
+      parentEmail: { stringValue: parentEmail },
+      createdAt: { integerValue: maintenant },
+      firstRequestedAt: { integerValue: maintenant },
+    })
+    return route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ ok: true }) })
+  })
   // Fin de Battle : la vraie route (firebase-admin) ne tourne pas sous Vite. On
   // répond pour l'élève qui appelle (uid lu dans son jeton d'émulateur) : un
   // compte voit son total, rangé sur son profil comme le ferait le serveur ;
@@ -78,6 +90,17 @@ async function rangerAuraEmulateur(uid, aura) {
       aura: { integerValue: String(aura) },
       battles: { mapValue: { fields: { jouees: { integerValue: '1' }, gagnees: { integerValue: '1' } } } },
     } }),
+  })
+  if (!res.ok) throw new Error(`émulateur Firestore : ${res.status} ${await res.text()}`)
+}
+
+// Écrit users/{uid}/parentalConsent/consent dans l'émulateur, comme le serveur
+// (règles contournées : seul l'admin peut poser un email parent ou un refus).
+export async function ecrireConsentementEmulateur(uid, fields) {
+  const res = await fetch(`http://127.0.0.1:8080/v1/projects/demo-reviz/databases/(default)/documents/users/${uid}/parentalConsent/consent`, {
+    method: 'PATCH',
+    headers: { Authorization: 'Bearer owner', 'Content-Type': 'application/json' },
+    body: JSON.stringify({ fields }),
   })
   if (!res.ok) throw new Error(`émulateur Firestore : ${res.status} ${await res.text()}`)
 }
@@ -123,7 +146,7 @@ export async function signup(page, { birthDate, parentEmail, prenom = 'Testeur' 
     // Tunnel mineur : étape parent
     await expect(page.getByPlaceholder('parent@exemple.com')).toBeVisible({ timeout: 15_000 })
     await page.getByPlaceholder('parent@exemple.com').fill(parentEmail)
-    await page.getByRole('button', { name: /Envoyer la demande/ }).click()
+    await page.getByRole('button', { name: /Envoyer et commencer/ }).click()
   }
 
   return email
@@ -143,7 +166,7 @@ export async function verifyEmailViaEmulator(page, email) {
 
 /**
  * Vérifie l'email (via émulateur) puis passe l'onboarding (compte majeur).
- * Les popups de l'accueil (« Réviz+ est offert », puis « Nouveau : la Battle »)
+ * Les popups de l'accueil (« Réviz+ offert jusqu'au … », puis « Nouveau : la Battle »)
  * sont fermées, sauf si la spec veut en tester une (garderAnnonce : true pour
  * la Battle, 'revizplus' pour Réviz+).
  */
@@ -161,9 +184,9 @@ export async function verifyEmailAndOnboard(page, email, { garderAnnonce = false
   else await fermerAnnonceBattle(page)
 }
 
-/** Ferme la popup « Réviz+ est offert » si elle est ouverte (accueil, une fois par élève). */
+/** Ferme la popup Réviz+ (offert, derniers jours ou grâce) si elle est ouverte (accueil, une fois par élève). */
 export async function fermerAnnonceRevizPlus(page) {
-  const plusTard = page.getByRole('dialog', { name: 'Réviz+ est offert' }).getByRole('button', { name: 'Plus tard' })
+  const plusTard = page.getByRole('dialog', { name: /Réviz\+ offert|Garde ton Réviz\+/ }).getByRole('button', { name: 'Plus tard' })
   await plusTard.click({ timeout: 5_000 }).catch(() => {})
 }
 

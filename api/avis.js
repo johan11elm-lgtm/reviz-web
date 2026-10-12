@@ -1,7 +1,8 @@
 // -------------------------------------------------------
 // Réviz — Avis (page publique /avis)
 // Reçoit un avis (profil, « le conseilleriez-vous ? », ce qui plaît, ce
-// qui manque, remarque libre, e-mail facultatif)
+// qui manque, remarque libre, e-mail facultatif, accord pour être cité sur
+// revizapp.fr avec la signature choisie)
 // et l'enregistre dans Firestore (avis/{id}). Écrit par le serveur seul :
 // la règle par défaut refuse tout accès client à cette collection, rien à
 // déployer. Pas d'adresse IP ni d'identifiant : seulement ce que la
@@ -21,6 +22,7 @@ export const SOURCES = ['affiche-profs', 'affiche-cdi', 'profil', 'accueil', 'di
 const DEVICES = ['mobile', 'ordinateur', 'app']
 
 export const MAX_TEXTE = 2000
+export const MAX_SIGNATURE = 60
 const MAX_CORPS = 12000
 
 function texte(v, max = MAX_TEXTE) {
@@ -56,6 +58,14 @@ export function buildAvis(body, now = new Date()) {
   if (email) {
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return { error: 'EMAIL' }
     avis.email = email
+  }
+
+  // Accord explicite pour citer « ce qui plaît » sur le site : seule source
+  // possible des témoignages de la landing. Sans texte à citer, pas d'accord.
+  if (body.citation === true && plait) {
+    avis.citation = true
+    const signature = texte(body.signature, MAX_SIGNATURE)
+    if (signature) avis.signature = signature
   }
 
   avis.source = SOURCES.includes(body.source) ? body.source : 'direct'

@@ -1,7 +1,9 @@
 // -------------------------------------------------------
 // Réviz — Réviz+ côté app : membre fondateur, quotas affichés
 // -------------------------------------------------------
-import { LANCEMENT_OFFERT, FONDATEURS_JUSQU_AU } from '../../api/_lancement.js'
+import { LANCEMENT_OFFERT, FONDATEURS_JUSQU_AU, FIN_LANCEMENT, VENTES_OUVERTES, lancementOffert } from '../../api/_lancement.js'
+
+const JOUR = 24 * 60 * 60 * 1000
 
 /** Compte créé pendant le lancement (date de création Firebase, chaîne ou ms). */
 export function estFondateur(creationTime) {
@@ -9,6 +11,33 @@ export function estFondateur(creationTime) {
   if (!Number.isFinite(t)) return false
   if (FONDATEURS_JUSQU_AU) return t < Date.parse(FONDATEURS_JUSQU_AU)
   return LANCEMENT_OFFERT
+}
+
+/**
+ * Où en est le lancement, pour l'affichage :
+ * 'lancement' → 'derniers-jours' (3 derniers jours offerts) → 'payant'.
+ * 'prolonge' : la date est passée mais les ventes ne sont pas ouvertes, la
+ * gratuité continue ; on n'affiche alors plus de date.
+ */
+export function phaseRevizPlus(now = Date.now()) {
+  if (!lancementOffert(now)) return 'payant'
+  if (now >= Date.parse(FIN_LANCEMENT)) return VENTES_OUVERTES ? 'payant' : 'prolonge'
+  return now >= Date.parse(FIN_LANCEMENT) - 3 * JOUR ? 'derniers-jours' : 'lancement'
+}
+
+// Jour du calendrier à Paris (minuit UTC de ce jour), insensible au
+// changement d'heure du 25 octobre.
+function jourParis(ms) {
+  const [a, m, j] = new Date(ms).toLocaleDateString('en-CA', { timeZone: 'Europe/Paris' }).split('-').map(Number)
+  return Date.UTC(a, m - 1, j)
+}
+
+/**
+ * Jours restants avant une date ISO, en jours du calendrier à Paris, le jour
+ * même compris : 1 le dernier jour, 0 à partir de la date.
+ */
+export function joursAvant(iso, now = Date.now()) {
+  return Math.max(0, Math.round((jourParis(Date.parse(iso)) - jourParis(now)) / JOUR))
 }
 
 /** « octobre 2026 » à partir de la date de création du compte. */
@@ -32,4 +61,10 @@ export function quotaCoachDuJour() {
     const q = JSON.parse(localStorage.getItem(CLE_COACH) || 'null')
     return q && q.jour === jourUTC() ? q : null
   } catch { return null }
+}
+
+/** « 26 octobre » (heure de Paris), espace insécable ; '' si la date manque. */
+export function dateCourte(ms) {
+  if (!Number.isFinite(ms)) return ''
+  return new Date(ms).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', timeZone: 'Europe/Paris' }).replace(' ', ' ')
 }

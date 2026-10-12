@@ -1,5 +1,17 @@
-import { useParams, useNavigate } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
+import { PRIX, PRIX_FONDATEUR } from '../../api/_prix.js';
 import './Legal.css';
+
+// Identité de l'éditeur, à compléter dès l'immatriculation (micro-entreprise).
+// Tant qu'un champ est vide, la ligne correspondante n'est pas affichée.
+const EDITEUR = {
+  nom: 'Johan El Mesmoudi',
+  statut: 'Entrepreneur individuel',
+  siren: '',      // ex. '123 456 789'
+  adresse: '',    // adresse postale (ou domiciliation)
+  mediateur: '',  // médiateur de la consommation : nom + site
+};
+const CONTACT = 'contact@revizapp.fr';
 
 const PAGES = {
   'mentions-legales': {
@@ -7,8 +19,11 @@ const PAGES = {
     content: () => (
       <>
         <Section title="Éditeur de l'application">
-          <p>Réviz est édité par Johan El Mesmoudi.</p>
-          <p>Email de contact : <a href="mailto:johan11elm@gmail.com">johan11elm@gmail.com</a></p>
+          <p>Réviz est édité par {EDITEUR.nom}, {EDITEUR.statut}{EDITEUR.siren ? '' : ' (immatriculation en cours)'}.</p>
+          {EDITEUR.siren && <p>SIREN : {EDITEUR.siren}<br />TVA non applicable, article 293 B du CGI.</p>}
+          {EDITEUR.adresse && <p>Adresse : {EDITEUR.adresse}</p>}
+          <p>Email de contact : <a href={`mailto:${CONTACT}`}>{CONTACT}</a></p>
+          <p>Directeur de la publication : {EDITEUR.nom}.</p>
         </Section>
 
         <Section title="Hébergement">
@@ -35,14 +50,16 @@ const PAGES = {
     title: 'Politique de confidentialité',
     content: () => (
       <>
-        <p className="legal-updated">Dernière mise à jour : 7 octobre 2026</p>
+        <p className="legal-updated">Dernière mise à jour : 11 octobre 2026</p>
 
         <Section title="Données collectées">
           <ul>
             <li><strong>Compte utilisateur</strong> — prénom, adresse email, classe (optionnel), via Firebase Authentication.</li>
+            <li><strong>Connexion avec Google, Apple, Microsoft ou TikTok</strong> — si tu choisis de te connecter avec l'un de ces services, il nous transmet ton nom ou ton pseudo, ton adresse email quand il la fournit (Apple peut la remplacer par une adresse masquée, TikTok ne la fournit pas) et un identifiant technique propre à Réviz. Nous ne recevons jamais ton mot de passe, ni tes contacts, vidéos, publications ou abonnés.</li>
             <li><strong>Date de naissance</strong> — collectée à l'inscription, uniquement pour déterminer si le consentement parental est requis (moins de 15 ans, art. 45 de la loi Informatique et Libertés).</li>
             <li><strong>Leçons scannées</strong> — le texte ou l'image de tes leçons, envoyé à l'IA pour générer les contenus de révision. Ces données ne sont pas conservées côté serveur après traitement.</li>
             <li><strong>Historique</strong> — tes leçons et révisions sont stockées localement sur ton appareil (localStorage) et synchronisées dans ta collection Firestore personnelle.</li>
+            <li><strong>Agenda</strong> — les contrôles que tu notes (matière, date, sujet facultatif), et, si tu relies Pronote, l'adresse de ton emploi du temps, enregistrées sur ton compte. Réviz lit avec cette adresse tes horaires de cours, pour les afficher ; il ne voit ni tes notes, ni tes devoirs, ni tes absences, et ne conserve pas tes cours sur ses serveurs. Tu peux délier Pronote à tout moment depuis l'Agenda.</li>
             <li><strong>Battle</strong> — pour jouer à deux en direct : le prénom ou le surnom que tu choisis, tes réponses et tes temps de réponse. Sans compte, rien d'autre : un identifiant technique anonyme (Firebase) relie tes réponses à la partie, sans email ni date de naissance. Avec un compte, ton total d'aura et ton nombre de battles jouées et gagnées sont ajoutés à ton profil.</li>
             <li><strong>Avis</strong> — ce que tu écris sur la page « Votre avis » (profil, réponses, e-mail facultatif pour recevoir une réponse), sans compte ni identifiant. Conservés 2 ans au plus, supprimés sur simple demande.</li>
             <li><strong>Données techniques</strong> — logs serveur standards (adresse IP, navigateur), conservés maximum 30 jours.</li>
@@ -62,7 +79,8 @@ const PAGES = {
         </Section>
 
         <Section title="Mineurs">
-          <p>Réviz s'adresse aux élèves du système scolaire français, du collège au lycée. Conformément à la réglementation française, les utilisateurs de moins de 15 ans doivent obtenir l'autorisation d'un parent ou représentant légal pour créer un compte.</p>
+          <p>Réviz s'adresse aux élèves du système scolaire français, du collège au lycée. Conformément à la réglementation française, l'utilisation de Réviz par un mineur de moins de 15 ans nécessite l'autorisation d'un parent ou représentant légal, quelle que soit la façon dont il se connecte (email, Google, Apple, Microsoft ou TikTok). Dès l'inscription, un email est envoyé au parent indiqué pour qu'il donne son autorisation. L'élève peut utiliser l'application pendant ce délai ; sans autorisation sous 10 jours, son accès est suspendu jusqu'à ce que le parent la donne.</p>
+          <p>Chaque service de connexion applique aussi ses propres règles d'âge : par exemple, TikTok est réservé aux 13 ans et plus.</p>
         </Section>
 
         <Section title="Partage des données">
@@ -70,18 +88,23 @@ const PAGES = {
           <ul>
             <li><strong>Ton adversaire de Battle</strong> — pendant une partie, il voit ton prénom ou surnom, si tes réponses sont justes, tes temps de réponse et ton aura de la partie. Rien d'autre.</li>
             <li><strong>Google Firebase</strong> — authentification et stockage (hébergé en Europe).</li>
+            <li><strong>Google, Apple, Microsoft, TikTok</strong> — uniquement si tu choisis de te connecter avec l'un d'eux : ce service sait alors que tu utilises Réviz. Nous ne lui envoyons ni tes leçons, ni ta progression, ni aucune autre donnée.</li>
+            <li><strong>Pronote (Index Education)</strong> — uniquement si tu relies ton emploi du temps : Réviz y lit ton lien d'emploi du temps, sans rien y envoyer d'autre.</li>
             <li><strong>Anthropic</strong> — traitement IA des leçons (le texte envoyé n'est pas conservé après génération).</li>
             <li><strong>Vercel</strong> — hébergement de l'application.</li>
+            <li><strong>Stripe</strong> — paiement de l'abonnement Réviz+. Les coordonnées bancaires sont saisies chez Stripe : Réviz ne les voit ni ne les conserve jamais.</li>
             <li><strong>PostHog</strong> — mesure d'audience anonyme (pages vues, clics), hébergée en Europe, sans cookie ni profil.</li>
           </ul>
         </Section>
 
         <Section title="Durée de conservation">
           <ul>
-            <li>Données de compte : jusqu'à suppression du compte.</li>
+            <li>Données de compte (y compris l'identifiant transmis par Google, Apple, Microsoft ou TikTok) : jusqu'à suppression du compte. Si tu as créé ton compte avec Apple dans l'app iPhone, sa suppression retire aussi l'accès que tu avais donné à Réviz chez Apple. Pour les autres services, tu peux retirer cet accès à tout moment depuis les réglages de ton compte Google, Microsoft ou TikTok.</li>
             <li>Leçons et révisions : jusqu'à suppression par l'utilisateur (max 100 leçons conservées).</li>
             <li>Parties de Battle : supprimées automatiquement au plus tard 48 heures après leur création. Avec un compte, l'aura totale et le nombre de battles restent sur ton profil jusqu'à la suppression du compte.</li>
+            <li>Agenda : adresse Pronote jusqu'à ce que tu délies Pronote ou supprimes ton compte ; contrôles jusqu'à ce que tu les retires ou supprimes ton compte (ceux passés depuis plus d'un mois sont effacés quand tu en notes un nouveau).</li>
             <li>Logs serveur : 30 jours maximum.</li>
+            <li>Factures d'abonnement : 10 ans (obligation comptable).</li>
           </ul>
         </Section>
 
@@ -94,12 +117,62 @@ const PAGES = {
             <li><strong>Portabilité</strong> — récupérer tes données dans un format lisible.</li>
             <li><strong>Opposition</strong> — t'opposer au traitement de tes données.</li>
           </ul>
-          <p>Pour exercer ces droits : <a href="mailto:johan11elm@gmail.com">johan11elm@gmail.com</a></p>
+          <p>Pour exercer ces droits : <a href={`mailto:${CONTACT}`}>{CONTACT}</a></p>
           <p>Tu peux aussi contacter la <strong>CNIL</strong> (Commission Nationale de l'Informatique et des Libertés) : <a href="https://www.cnil.fr" target="_blank" rel="noopener noreferrer">www.cnil.fr</a></p>
         </Section>
 
         <Section title="Cookies">
-          <p>Réviz utilise uniquement des cookies strictement nécessaires au fonctionnement (authentification Firebase). Aucun cookie publicitaire ou de tracking n'est utilisé. La mesure d'audience (PostHog) fonctionne sans cookie et sans rien enregistrer sur ton appareil : elle compte les visites de façon anonyme, sans savoir qui tu es.</p>
+          <p>Réviz utilise uniquement des cookies strictement nécessaires au fonctionnement (authentification Firebase, et un cookie de sécurité de 10 minutes au plus pendant une connexion avec TikTok, supprimé dès la connexion terminée). Aucun cookie publicitaire ou de tracking n'est utilisé. La mesure d'audience (PostHog) fonctionne sans cookie et sans rien enregistrer sur ton appareil : elle compte les visites de façon anonyme, sans savoir qui tu es.</p>
+        </Section>
+      </>
+    ),
+  },
+
+  'cgv': {
+    title: 'Conditions Générales de Vente',
+    content: () => (
+      <>
+        <p className="legal-updated">Dernière mise à jour : 11 octobre 2026</p>
+
+        <Section title="Objet">
+          <p>Les présentes CGV encadrent la souscription à <strong>Réviz+</strong>, l'abonnement payant de l'application Réviz, vendu par {EDITEUR.nom}, {EDITEUR.statut}{EDITEUR.siren ? `, SIREN ${EDITEUR.siren}` : ' (immatriculation en cours)'}. Elles complètent les <Link to="/legal/cgu">CGU</Link>.</p>
+        </Section>
+
+        <Section title="Ce que comprend Réviz+">
+          <p>Réviz+ étend le plan gratuit : leçons analysées et messages au coach sans limite (dans la limite d'un usage normal : des garde-fous techniques bloquent les usages automatisés ou abusifs), thèmes de couleur réservés, et les fonctions signalées « Réviz+ » dans l'application. Le contenu de Réviz+ peut s'enrichir ; il n'est jamais réduit sans que tu en sois prévenu et que tu puisses résilier. Le plan gratuit reste disponible sans abonnement.</p>
+        </Section>
+
+        <Section title="Qui peut s'abonner">
+          <p>L'abonnement est souscrit et payé par une personne majeure titulaire du moyen de paiement, en général un parent pour le compte de son enfant, qui utilise Réviz avec son propre compte.</p>
+        </Section>
+
+        <Section title="Prix">
+          <p>Réviz+ coûte <strong>{PRIX.annuel.montant} TTC par an</strong> ou <strong>{PRIX.mensuel.montant} TTC par mois</strong>{EDITEUR.siren ? ' (TVA non applicable, article 293 B du CGI)' : ''}.</p>
+          <p><strong>Tarif fondateur.</strong> Un abonnement souscrit avant le 26 octobre 2026 à 0 h (heure de Paris) est facturé {PRIX_FONDATEUR.annuel.montant} par an ou {PRIX_FONDATEUR.mensuel.montant} par mois, tant qu'il n'est pas résilié. En cas de résiliation, un nouvel abonnement se fait au prix en vigueur.</p>
+          <p>Toute évolution du prix est annoncée par email au moins 30 jours avant de s'appliquer ; tu peux résilier avant, sans frais.</p>
+        </Section>
+
+        <Section title="Paiement">
+          <p>Le paiement se fait par carte bancaire via Stripe, prestataire de paiement sécurisé. Pour un abonnement souscrit avant le 26 octobre 2026, rien n'est prélevé à la souscription : la carte est enregistrée et le premier prélèvement a lieu le 26 octobre 2026, puis à chaque échéance (chaque année ou chaque mois à cette date). Après cette date, le premier paiement a lieu à la souscription, puis à chaque échéance.</p>
+        </Section>
+
+        <Section title="Durée, renouvellement et résiliation">
+          <p>L'abonnement est annuel ou mensuel et se renouvelle automatiquement. Pour l'abonnement annuel, un email te rappelle l'échéance avant le renouvellement.</p>
+          <p>Tu peux le résilier à tout moment, sans frais, depuis <strong>Réglages → Gérer mon abonnement</strong>, ou par email. Résilié avant le 26 octobre 2026, un abonnement au tarif fondateur n'est jamais prélevé. Sinon, la résiliation prend effet à la fin de la période déjà payée : Réviz+ reste actif jusque-là, puis le compte repasse au plan gratuit sans perdre ses leçons ni sa progression.</p>
+        </Section>
+
+        <Section title="Droit de rétractation">
+          <p>Tu disposes de <strong>14 jours</strong> pour changer d'avis, sans avoir à te justifier, à compter de la souscription ou, si ce prélèvement intervient plus tard, du premier prélèvement : écris à <a href={`mailto:${CONTACT}`}>{CONTACT}</a> et la somme prélevée est remboursée en entier, sous 14 jours, sur la carte utilisée.</p>
+        </Section>
+
+        <Section title="Impayés">
+          <p>Si un prélèvement échoue, Stripe le retente pendant quelques jours et Réviz+ reste actif pendant ce temps. Si le paiement n'aboutit pas, l'abonnement s'arrête et le compte repasse au plan gratuit.</p>
+        </Section>
+
+        <Section title="Réclamations et médiation">
+          <p>Pour toute réclamation : <a href={`mailto:${CONTACT}`}>{CONTACT}</a>. Une réponse est apportée sous 7 jours.</p>
+          {EDITEUR.mediateur && <p>En cas de désaccord persistant, tu peux saisir gratuitement le médiateur de la consommation : {EDITEUR.mediateur}.</p>}
+          <p>Les présentes CGV sont soumises au droit français.</p>
         </Section>
       </>
     ),
@@ -109,15 +182,16 @@ const PAGES = {
     title: "Conditions Générales d'Utilisation",
     content: () => (
       <>
-        <p className="legal-updated">Dernière mise à jour : 7 octobre 2026</p>
+        <p className="legal-updated">Dernière mise à jour : 10 octobre 2026</p>
 
         <Section title="Objet">
           <p>Les présentes CGU régissent l'utilisation de l'application Réviz, un outil de révision scolaire assisté par intelligence artificielle, destiné aux collégiens.</p>
         </Section>
 
         <Section title="Inscription">
-          <p>L'inscription est gratuite et nécessite un prénom, une adresse email et un mot de passe. Les utilisateurs de moins de 15 ans doivent disposer de l'autorisation d'un parent ou représentant légal.</p>
-          <p>Tu es responsable de la confidentialité de tes identifiants de connexion.</p>
+          <p>L'inscription est gratuite. Tu peux créer ton compte avec un prénom, une adresse email et un mot de passe, ou te connecter avec un compte Google, Apple, Microsoft ou TikTok. Dans tous les cas, ta date de naissance et ta classe te sont demandées. Les utilisateurs de moins de 15 ans doivent disposer de l'autorisation d'un parent ou représentant légal, demandée par email dès l'inscription (accès suspendu sans autorisation sous 10 jours).</p>
+          <p>Si tu te connectes avec un autre service, ce sont aussi ses conditions d'utilisation qui s'appliquent à ce compte (par exemple l'âge minimum de TikTok).</p>
+          <p>Tu es responsable de la confidentialité de tes identifiants de connexion, y compris ceux du compte Google, Apple, Microsoft ou TikTok que tu utilises pour te connecter.</p>
         </Section>
 
         <Section title="Utilisation du service">
@@ -147,7 +221,7 @@ const PAGES = {
 
         <Section title="Limites d'utilisation">
           <ul>
-            <li>Plan gratuit : 5 leçons analysées par semaine. Pendant le lancement, Réviz+ est offert à tous : 30 leçons par semaine.</li>
+            <li>Plan gratuit : 5 leçons analysées par semaine. Pendant le lancement (jusqu'au 25 octobre 2026), Réviz+ est offert à tous : 30 leçons par semaine.</li>
             <li>Il est interdit de scanner des contenus illicites ou portant atteinte aux droits de tiers.</li>
             <li>Toute utilisation abusive peut entraîner la suspension du compte.</li>
           </ul>
@@ -162,7 +236,7 @@ const PAGES = {
         </Section>
 
         <Section title="Contact">
-          <p>Pour toute question : <a href="mailto:johan11elm@gmail.com">johan11elm@gmail.com</a></p>
+          <p>Pour toute question : <a href={`mailto:${CONTACT}`}>{CONTACT}</a></p>
         </Section>
       </>
     ),

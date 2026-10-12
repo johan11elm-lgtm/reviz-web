@@ -1,0 +1,8 @@
+/* Pile de boutons « Continuer avec … » — le style du bouton lui-même
+   vient de .auth-google-btn (Connexion.css / Inscription.css). */
+.auth-social {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}

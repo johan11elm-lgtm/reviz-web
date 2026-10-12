@@ -3,6 +3,7 @@ import { Mascot } from '../components/Mascot';
 import { useState, useMemo, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import SocialLogin, { erreurConnexionSociale } from '../components/SocialLogin';
 import {
   CYCLES,
   CLASSES_BY_CYCLE,
@@ -12,7 +13,15 @@ import {
 } from '../utils/levels';
 import { readGuest } from '../services/guestService';
 import { sendParentalConsent, consentErrorMessage } from '../services/consentService';
+import { useIsDesktop } from '../hooks/useMediaQuery';
+import { nbsp } from '../utils/typography';
 import './Inscription.css';
+
+// Mascotte de chaque étape, sur ordinateur seulement.
+const POSE_ETAPE = {
+  prenom: 'hello', birthdate: 'thinking', cycle: 'reading', classe: 'graduation',
+  detail: 'search', account: 'writing', parent: 'retour',
+};
 
 function firebaseErrorFr(code) {
   switch (code) {
@@ -44,8 +53,9 @@ export default function Inscription() {
   const [stepIdx, setStepIdx]             = useState(0);
   const [animDir, setAnimDir]             = useState('in');
 
-  const { signup, loginWithGoogle, refreshGate } = useAuth();
+  const { signup, loginWithProvider, refreshGate } = useAuth();
   const navigate                          = useNavigate();
+  const isDesktop                         = useIsDesktop();
 
   // Construction dynamique de la liste des étapes en fonction du profil.
   const steps = useMemo(() => {
@@ -145,12 +155,14 @@ export default function Inscription() {
       return;
     }
 
-    // Étape 'parent' : envoi de la demande de consentement parental
+    // Étape 'parent' : on prévient le parent, l'élève entre aussitôt dans
+    // l'app (le parent accepte ou refuse depuis l'email).
     if (stepId === 'parent') {
       setLoading(true);
       try {
         await sendParentalConsent(parentEmail.trim(), prenom);
-        navigate('/consent-pending', { replace: true, state: { parentEmail: parentEmail.trim() } });
+        await refreshGate?.();
+        navigate('/verify-email', { replace: true });
       } catch (err) {
         setError(consentErrorMessage(err.message));
       } finally {
@@ -162,14 +174,16 @@ export default function Inscription() {
     goNext();
   }
 
-  async function handleGoogle() {
+  async function handleProvider(id) {
     setError('');
     setLoading(true);
     try {
-      await loginWithGoogle();
+      const user = await loginWithProvider(id);
+      if (!user) return; // redirection en cours (TikTok)
       navigate('/');
     } catch (err) {
-      if (err.code !== 'auth/popup-closed-by-user') setError('Connexion Google impossible. Réessaie.');
+      const msg = erreurConnexionSociale(err);
+      if (msg) setError(msg);
     } finally {
       setLoading(false);
     }
@@ -209,24 +223,19 @@ export default function Inscription() {
     if (loading && stepId === 'account') return 'Création...';
     if (loading && stepId === 'parent')  return 'Envoi...';
     if (stepId === 'account') return 'Créer mon compte';
-    if (stepId === 'parent')  return 'Envoyer la demande →';
+    if (stepId === 'parent')  return 'Envoyer et commencer →';
     return 'Continuer';
   })();
 
-  return (
-    <div className="app">
-      <div className="auth-header signup-header">
-        <button type="button" className="auth-back" onClick={goPrev} aria-label="Retour">←</button>
-        <div className="signup-progress">
-          <div className="signup-progress-bar" style={{ width: `${((progressIdx + 1) / totalVisible) * 100}%` }} />
-        </div>
-      </div>
-
-      <div className={`auth-content signup-content signup-anim-${animDir}`} key={stepId}>
-        {stepId === 'prenom' && (
-          <>
-            <h1 className="signup-question">Quel est ton prénom ?</h1>
-            <p className="signup-hint">On l'utilise pour te dire bonjour.</p>
+  // Chaque étape : sa question, son aide, puis ses réponses. Le téléphone
+  // les empile dans la colonne ; l'ordinateur pose la question à gauche et
+  // les réponses dans une carte à droite.
+  const etape = (() => {
+    switch (stepId) {
+      case 'prenom': return {
+        titre: 'Quel est ton prénom ?',
+        aide: "On l'utilise pour te dire bonjour.",
+        corps: (
             <input
               className="auth-input signup-input-lg"
               type="text"
@@ -236,13 +245,12 @@ export default function Inscription() {
               autoComplete="given-name"
               autoFocus
             />
-          </>
-        )}
-
-        {stepId === 'birthdate' && (
-          <>
-            <h1 className="signup-question">Quand es-tu né·e ?</h1>
-            <p className="signup-hint">Pour adapter Réviz à ton âge.</p>
+        ),
+      };
+      case 'birthdate': return {
+        titre: 'Quand es-tu né·e ?',
+        aide: 'Pour adapter Réviz à ton âge.',
+        corps: (
             <div className={`auth-date auth-date--lg${birthDate ? '' : ' auth-date--empty'}`} data-placeholder="JJ / MM / AAAA">
               <input
                 className="auth-input signup-input-lg"
@@ -255,13 +263,12 @@ export default function Inscription() {
                 autoFocus
               />
             </div>
-          </>
-        )}
-
-        {stepId === 'cycle' && (
-          <>
-            <h1 className="signup-question">Où en es-tu ?</h1>
-            <p className="signup-hint">Choisis ton cycle.</p>
+        ),
+      };
+      case 'cycle': return {
+        titre: 'Où en es-tu ?',
+        aide: 'Choisis ton cycle.',
+        corps: (
             <div className="signup-card-stack">
               {CYCLES.map(c => (
                 <button
@@ -278,13 +285,12 @@ export default function Inscription() {
                 </button>
               ))}
             </div>
-          </>
-        )}
-
-        {stepId === 'classe' && (
-          <>
-            <h1 className="signup-question">Quelle classe ?</h1>
-            <p className="signup-hint">{CYCLES.find(c => c.id === level.cycle)?.label}</p>
+        ),
+      };
+      case 'classe': return {
+        titre: 'Quelle classe ?',
+        aide: CYCLES.find(c => c.id === level.cycle)?.label,
+        corps: (
             <div className="signup-card-grid">
               {(CLASSES_BY_CYCLE[level.cycle] ?? []).map(c => (
                 <button
@@ -297,13 +303,12 @@ export default function Inscription() {
                 </button>
               ))}
             </div>
-          </>
-        )}
-
-        {stepId === 'detail' && needsSpecialites(level) && (
-          <>
-            <h1 className="signup-question">Tes spécialités ?</h1>
-            <p className="signup-hint">Sélectionne celles que tu suis (tu peux en choisir plusieurs).</p>
+        ),
+      };
+      case 'detail': return needsSpecialites(level) ? {
+        titre: 'Tes spécialités ?',
+        aide: 'Sélectionne celles que tu suis (tu peux en choisir plusieurs).',
+        corps: (
             <div className="signup-chips">
               {SPECIALITES_LYCEE.map(s => {
                 const active = level.specialites?.includes(s);
@@ -319,13 +324,13 @@ export default function Inscription() {
                 );
               })}
             </div>
-          </>
-        )}
-
-        {stepId === 'account' && (
+        ),
+      } : null;
+      case 'account': return {
+        titre: 'Crée ton compte',
+        aide: `Dernière étape, ${prenom || 'on y est presque'}.`,
+        corps: (
           <>
-            <h1 className="signup-question">Crée ton compte</h1>
-            <p className="signup-hint">Dernière étape, {prenom || 'on y est presque'}.</p>
             <div className="auth-field">
               <label className="auth-label" htmlFor="signup-email">Email</label>
               <input
@@ -362,20 +367,21 @@ export default function Inscription() {
             </label>
             {isUnder15(birthDate) && (
               <div className="auth-parent-notice-inline">
-                Un email sera envoyé à ton parent pour confirmer ton inscription.
+                On préviendra un de tes parents par email. Tu pourras réviser tout de suite.
               </div>
             )}
           </>
-        )}
-
-        {stepId === 'parent' && (
+        ),
+      };
+      case 'parent': return {
+        titre: 'Autorisation parentale',
+        corps: (
           <>
-            <h1 className="signup-question">Autorisation parentale</h1>
             <div className="auth-parent-info">
               <span className="auth-parent-icon"><UsersIcon /></span>
               <p>
-                Comme tu as moins de 15 ans, nous avons besoin de l'accord d'un de tes parents
-                avant de t'ouvrir l'accès à Réviz. Un email lui sera envoyé avec un lien de confirmation.
+                Comme tu as moins de 15 ans, on envoie un email à un de tes parents pour lui dire
+                que tu utilises Réviz. Tu peux commencer tout de suite : il aura 10 jours pour donner son autorisation.
               </p>
             </div>
             <div className="auth-field">
@@ -392,39 +398,83 @@ export default function Inscription() {
               />
             </div>
           </>
-        )}
+        ),
+      };
+      default: return null;
+    }
+  })();
 
-        <p className="auth-error">{error}</p>
-      </div>
-
-      <div className="signup-footer">
+  const bouton = (
         <button
           className="auth-btn signup-primary"
-          type="button"
-          onClick={handlePrimary}
+          type={isDesktop ? 'submit' : 'button'}
+          onClick={isDesktop ? undefined : handlePrimary}
           disabled={loading}
         >
           {primaryLabel}
         </button>
-
-        {stepId === 'prenom' && (
+  );
+  const autresChoix = stepId === 'prenom' && (
           <>
                           <div className="auth-divider"><span>ou</span></div>
-              <button type="button" className="auth-google-btn" onClick={handleGoogle} disabled={loading}>
-                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.258h2.908c1.702-1.567 2.684-3.874 2.684-6.615z" fill="#4285F4"/>
-                  <path d="M9 18c2.43 0 4.467-.806 5.956-2.18l-2.908-2.259c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332A8.997 8.997 0 009 18z" fill="#34A853"/>
-                  <path d="M3.964 10.71A5.41 5.41 0 013.682 9c0-.593.102-1.17.282-1.71V4.958H.957A8.996 8.996 0 000 9c0 1.452.348 2.827.957 4.042l3.007-2.332z" fill="#FBBC05"/>
-                  <path d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0A8.997 8.997 0 00.957 4.958L3.964 7.29C4.672 5.163 6.656 3.58 9 3.58z" fill="#EA4335"/>
-                </svg>
-                Continuer avec Google
-              </button>
+              <SocialLogin onLogin={handleProvider} disabled={loading} />
             <p className="auth-link">
               Déjà un compte ?{' '}
               <Link to="/connexion">Se connecter</Link>
             </p>
           </>
-        )}
+  );
+  const progression = (
+        <div className="signup-progress">
+          <div className="signup-progress-bar" style={{ width: `${((progressIdx + 1) / totalVisible) * 100}%` }} />
+        </div>
+  );
+
+  if (isDesktop) {
+    return (
+      <div className="app auth-desk-page">
+        <div className="auth-desk">
+          <div className="auth-desk-intro">
+            <button type="button" className="auth-back" onClick={goPrev} aria-label="Retour">←</button>
+            <span className="auth-desk-mascot"><Mascot pose={POSE_ETAPE[stepId] ?? 'hello'} size={132} alt="" aria-hidden="true" /></span>
+            {etape && <h1 className="signup-question">{nbsp(etape.titre)}</h1>}
+            {etape?.aide && <p className="signup-hint">{etape.aide}</p>}
+            {stepId !== 'parent' && <p className="auth-desk-step">Étape {progressIdx + 1} sur {totalVisible}</p>}
+          </div>
+          {/* Entrée valide l'étape, comme le bouton */}
+          <form className="auth-desk-card" noValidate onSubmit={e => { e.preventDefault(); handlePrimary(); }}>
+            {progression}
+            <div className={`auth-desk-body signup-anim-${animDir}`} key={stepId}>
+              {etape?.corps}
+            </div>
+            <p className="auth-error">{error}</p>
+            {bouton}
+            {autresChoix}
+          </form>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="app">
+      <div className="auth-header signup-header">
+        <button type="button" className="auth-back" onClick={goPrev} aria-label="Retour">←</button>
+        {progression}
+      </div>
+
+      <div className={`auth-content signup-content signup-anim-${animDir}`} key={stepId}>
+        {etape && <h1 className="signup-question">{nbsp(etape.titre)}</h1>}
+        {etape?.aide && <p className="signup-hint">{etape.aide}</p>}
+        {etape?.corps}
+
+        <p className="auth-error">{error}</p>
+      </div>
+
+      <div className="signup-footer">
+        {bouton}
+
+        {autresChoix}
       </div>
     </div>
   );

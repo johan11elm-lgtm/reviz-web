@@ -120,7 +120,7 @@ function Rejoindre() {
             className="battle-rejoindre-input"
             value={saisie}
             onChange={e => { setSaisie(e.target.value.toUpperCase().slice(0, LONGUEUR_CODE + 1)); setErreur(false); }}
-            placeholder="K7RM"
+            placeholder="CODE"
             autoComplete="off"
             autoCapitalize="characters"
             autoCorrect="off"
@@ -146,7 +146,10 @@ function Rejoindre() {
           </Link>
         </div>
 
-        <BattleRegles partage />
+        <section className="battle-regles-bloc" aria-labelledby="battle-regles-titre">
+          <h2 className="rv-eyebrow" id="battle-regles-titre">Comment ça se joue</h2>
+          <BattleRegles partage />
+        </section>
       </div>
       {currentUser && <BottomNav />}
     </div>

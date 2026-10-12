@@ -4,6 +4,8 @@ import { useAuth } from '../context/AuthContext';
 import { BottomNav } from '../components/BottomNav';
 import { UserHeader } from '../components/UserHeader';
 import { GuestBanner } from '../components/GuestBanner';
+import { ConsentBanner } from '../components/ConsentBanner';
+import { ControleBanner } from '../components/ControleBanner';
 import { HeroCTA } from '../components/HeroCTA';
 import { Mascot } from '../components/Mascot';
 import { getScanStatus } from '../services/scanLimitService';
@@ -465,6 +467,11 @@ export default function Home() {
         <div className="content home-desk">
           {greeting}
 
+          <div className="home-rappels">
+            <ConsentBanner />
+            <ControleBanner />
+          </div>
+
           <div className="home-desk-top">
             {isGuest ? hero : heroDesk}
             <div className="home-desk-side">
@@ -512,7 +519,13 @@ export default function Home() {
       ) : (
         <div className="content home-stack">
 
-          <GuestBanner />
+          {/* Rappels (essai, accord parental, prochain contrôle) : une seule
+              carte de rangées fines, vide → masquée (home-rappels:empty). */}
+          <div className="home-rappels">
+            <GuestBanner />
+            <ConsentBanner />
+            <ControleBanner />
+          </div>
 
           {greeting}
 

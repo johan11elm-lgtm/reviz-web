@@ -4,15 +4,19 @@ import { Navigate, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { CYCLES, CLASSES_BY_CYCLE, SPECIALITES_LYCEE, needsSpecialites } from '../utils/levels';
 import { createUserProfile } from '../services/userProfileService';
+import { useIsDesktop } from '../hooks/useMediaQuery';
 import './Inscription.css';
 
-// Écran de complétion de profil pour les nouveaux comptes Google :
-// collecte date de naissance + niveau. Le gate redirige ensuite les <15 ans
+// Écran de complétion de profil pour les nouveaux comptes sans mot de passe
+// (Google, Apple, Microsoft, TikTok) : collecte date de naissance + niveau,
+// et le prénom quand le fournisseur ne l'a pas transmis (Apple, e-mail masqué). Le gate redirige ensuite les <15 ans
 // vers /consent-pending (consentement parental) automatiquement.
 export default function FinishSetup() {
-  const { currentUser, setUserLevel, refreshGate } = useAuth();
+  const { currentUser, setUserLevel, refreshGate, updateDisplayName } = useAuth();
   const navigate = useNavigate();
+  const isDesktop = useIsDesktop();
   const [birthDate, setBirthDate] = useState('');
+  const [prenomSaisi, setPrenomSaisi] = useState('');
   const [level, setLevel] = useState({ cycle: null, classe: null, specialites: [] });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
@@ -20,6 +24,7 @@ export default function FinishSetup() {
   if (!currentUser) return <Navigate to="/welcome" replace />;
 
   const prenom = currentUser.displayName?.split(' ')[0] ?? '';
+  const demanderPrenom = !currentUser.displayName;
 
   function pickCycle(cycleId) {
     setLevel({ cycle: cycleId, classe: null, specialites: [] });
@@ -33,6 +38,7 @@ export default function FinishSetup() {
   }
 
   async function handleSubmit() {
+    if (demanderPrenom && !prenomSaisi.trim()) return setError('Entre ton prénom.');
     if (!birthDate) return setError('Entre ta date de naissance.');
     const d = new Date(birthDate);
     if (isNaN(d.getTime()) || d > new Date()) return setError('Date invalide.');
@@ -41,8 +47,9 @@ export default function FinishSetup() {
 
     setLoading(true); setError('');
     try {
+      if (demanderPrenom) await updateDisplayName(prenomSaisi.trim());
       await createUserProfile(currentUser.uid, {
-        prenom: currentUser.displayName ?? null,
+        prenom: demanderPrenom ? prenomSaisi.trim() : currentUser.displayName ?? null,
         email: currentUser.email ?? null,
         birthDate,
         level,
@@ -57,11 +64,24 @@ export default function FinishSetup() {
     }
   }
 
-  return (
-    <div className="app">
-      <div className="auth-content signup-content" style={{ overflowY: 'auto' }}>
-        <h1 className="signup-question">Bienvenue {prenom}</h1>
-        <p className="signup-hint">Encore quelques infos pour calibrer Réviz à ton profil.</p>
+  const titre = <h1 className="signup-question">{prenom ? `Bienvenue ${prenom}` : 'Bienvenue'}</h1>;
+  const intro = <p className="signup-hint">Encore quelques infos pour calibrer Réviz à ton profil.</p>;
+  const champs = (
+    <>
+        {demanderPrenom && (
+          <div className="auth-field">
+            <label className="auth-label" htmlFor="fs-prenom">Ton prénom</label>
+            <input
+              id="fs-prenom"
+              className="auth-input"
+              type="text"
+              autoComplete="given-name"
+              value={prenomSaisi}
+              onChange={e => setPrenomSaisi(e.target.value)}
+              maxLength={40}
+            />
+          </div>
+        )}
 
         <div className="auth-field">
           <label className="auth-label" htmlFor="fs-birthdate">Ta date de naissance</label>
@@ -132,12 +152,48 @@ export default function FinishSetup() {
         )}
 
         <p className="auth-error">{error}</p>
+    </>
+  );
+  const bouton = (
+    <button className="auth-btn signup-primary" type="button" onClick={handleSubmit} disabled={loading}>
+      {loading ? 'Enregistrement...' : 'Continuer'}
+    </button>
+  );
+
+  // Ordinateur : l'accueil et ce à quoi servent les réponses à gauche, le
+  // formulaire dans une carte à droite, bouton compris (styles dans desktop.css).
+  if (isDesktop) {
+    return (
+      <div className="app auth-desk-page">
+        <div className="auth-desk">
+          <div className="auth-desk-intro">
+            <span className="auth-desk-mascot"><Mascot pose="hello" size={132} alt="" aria-hidden="true" /></span>
+            {titre}
+            {intro}
+            <ul className="auth-desk-why">
+              <li><strong>Ta classe</strong> choisit le programme et les chapitres qu'on te propose.</li>
+              <li><strong>Ta date de naissance</strong> : sous 15 ans, on prévient un de tes parents. Tu commences tout de suite, il a 10 jours pour donner son autorisation.</li>
+            </ul>
+          </div>
+          <div className="auth-desk-card">
+            {champs}
+            {bouton}
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="app">
+      <div className="auth-content signup-content" style={{ overflowY: 'auto' }}>
+        {titre}
+        {intro}
+        {champs}
       </div>
 
       <div className="signup-footer">
-        <button className="auth-btn signup-primary" type="button" onClick={handleSubmit} disabled={loading}>
-          {loading ? 'Enregistrement...' : 'Continuer'}
-        </button>
+        {bouton}
       </div>
     </div>
   );

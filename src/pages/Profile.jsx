@@ -6,7 +6,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { loadLessons, syncFromFirestore } from '../services/historyService';
 import { loadRevisions, syncRevisionsFromFirestore } from '../services/revisionService';
-import { BottomNav } from '../components/BottomNav';
+import { BottomNav, StatsIcon } from '../components/BottomNav';
 import { LevelSelector } from '../components/LevelSelector';
 import { PageHeader } from '../components/PageHeader';
 import { Mascot } from '../components/Mascot';
@@ -469,6 +469,18 @@ export default function Profile() {
             <span className="pf-stat-label">{allRevisions.length > 1 ? 'révisions' : 'révision'}</span>
           </div>
         </section>
+
+        {/* Progrès a laissé sa place à l'Agenda dans la barre du bas : on y accède d'ici. */}
+        <Link to="/progres" className="rv-card rv-rows pf-progres-link">
+          <span className="rv-row">
+            <span className="rv-row-avatar" aria-hidden="true"><StatsIcon /></span>
+            <span className="rv-row-text">
+              <span className="rv-row-title">Mes progrès</span>
+              <span className="rv-row-sub">Matières, mémoire, jours de révision</span>
+            </span>
+            <span className="rv-row-arrow" aria-hidden="true">›</span>
+          </span>
+        </Link>
 
         {hasRevizPlus && !isGuest && <RevizPlusCard />}
 

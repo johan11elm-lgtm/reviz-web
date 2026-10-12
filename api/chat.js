@@ -1,7 +1,9 @@
 import { MODEL, buildChatSystemPrompt, buildChatLessonContext, CHAT_MAX_MESSAGE_LENGTH, CHAT_MAX_HISTORY, CHAT_MAX_OUTPUT_TOKENS } from './_chatPrompt.js'
 import { getDb, getAuthAdmin } from './_firebaseAdmin.js'
+import { compteVerifie } from './_compteVerifie.js'
 import { consumeChatQuota, refundChatQuota, CHAT_FREE_LIMIT, CHAT_PREMIUM_LIMIT } from './_chatQuota.js'
-import { LANCEMENT_OFFERT, LANCEMENT_CHAT_LIMIT } from './_lancement.js'
+import { LANCEMENT_CHAT_LIMIT } from './_lancement.js'
+import { revizPlusOffertServeur } from './_offert.js'
 
 // Runtime Node (firebase-admin) + streaming SSE : contrairement à /api/analyse
 // (JSON complet à parser → non-streaming), une réponse de chat est du texte
@@ -48,7 +50,7 @@ export default async function handler(req, res) {
     return res.status(401).send('Unauthorized')
   }
   const uid = decoded.uid
-  if (!decoded.email_verified) return res.status(403).send('EMAIL_NOT_VERIFIED')
+  if (!compteVerifie(decoded)) return res.status(403).send('EMAIL_NOT_VERIFIED')
 
   // 2. Contexte = la leçon Firestore de CET élève (le client n'envoie qu'un id,
   //    jamais le contenu du system prompt) + plan pour le quota.
@@ -68,7 +70,8 @@ export default async function handler(req, res) {
 
   // 3. Quota jour = SOURCE DE VÉRITÉ. Les premium ont aussi un plafond
   //    (généreux) : garde-fou coût, un chat se spamme plus vite qu'un scan.
-  const limit = isPremium ? CHAT_PREMIUM_LIMIT : (LANCEMENT_OFFERT ? LANCEMENT_CHAT_LIMIT : CHAT_FREE_LIMIT)
+  const offert = !isPremium && await revizPlusOffertServeur()
+  const limit = isPremium ? CHAT_PREMIUM_LIMIT : (offert ? LANCEMENT_CHAT_LIMIT : CHAT_FREE_LIMIT)
   const q = await consumeChatQuota({ db, uid, limit })
   if (!q.allowed) return res.status(429).send('CHAT_LIMIT')
 

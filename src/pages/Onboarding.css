@@ -252,8 +252,41 @@
 
 /* ── Ordinateur : la page tient dans une colonne centrée ── */
 @media (min-width: 1024px) {
-  html:not(.native) .onboarding-page { padding: 32px 40px; }
+  /* Ordinateur : une carte centrée (progression, contenu, boutons) au lieu
+     d'une colonne de téléphone dont le bouton tombait en bas de l'écran.
+     Les trois blocs se suivent sans espace et forment une seule carte. */
+  html:not(.native) .onboarding-page { padding: 40px; justify-content: center; }
   html:not(.native) .onboarding-page .onb-top,
   html:not(.native) .onboarding-page .onb-body,
-  html:not(.native) .onboarding-page .onb-footer { max-width: 480px; }
+  html:not(.native) .onboarding-page .onb-footer {
+    max-width: 540px;
+    padding-left: 44px;
+    padding-right: 44px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    box-sizing: border-box;
+  }
+  html:not(.native) .onboarding-page .onb-top {
+    padding-top: 26px;
+    border-bottom: 0;
+    border-radius: var(--radius-card) var(--radius-card) 0 0;
+  }
+  html:not(.native) .onboarding-page .onb-body {
+    flex: none;
+    min-height: 430px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    border-top: 0;
+    border-bottom: 0;
+  }
+  html:not(.native) .onboarding-page .onb-footer {
+    padding-top: 18px;
+    padding-bottom: 32px;
+    border-top: 0;
+    border-radius: 0 0 var(--radius-card) var(--radius-card);
+    box-shadow: 0 30px 60px -30px rgba(45, 43, 87, 0.22);
+  }
+  /* Cartes intérieures sur fond crème, pas blanc sur blanc */
+  html:not(.native) .onboarding-page .onb-formats,
+  html:not(.native) .onboarding-page .onb-way { background: var(--bg-app); box-shadow: none; }
 }

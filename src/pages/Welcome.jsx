@@ -2,6 +2,7 @@ import { CameraIcon, SparkIcon, TrophyIcon, ResumeIcon, FlashcardsIcon, MindmapI
 import { Link } from 'react-router-dom';
 import { Mascot } from '../components/Mascot';
 import { BoutonInstaller } from '../components/InstallerApp';
+import { useIsDesktop } from '../hooks/useMediaQuery';
 import './Welcome.css';
 
 const STEPS = [
@@ -21,6 +22,7 @@ const FORMATS = [
 const SUBJECTS = ['maths', 'svt', 'francais', 'physique', 'histgeo', 'technonsi', 'philo', 'arts', 'langues'];
 
 export default function Welcome() {
+  const isDesktop = useIsDesktop();
   return (
     <div className="app">
 
@@ -40,7 +42,7 @@ export default function Welcome() {
           <section className="wlc-hero">
             <Mascot
               pose="hello"
-              size={156}
+              size={isDesktop ? 320 : 156}
               glow
               animate
               priority
@@ -57,13 +59,15 @@ export default function Welcome() {
             <div className="wlc-subjects" aria-hidden="true">
               {SUBJECTS.map(p => <Mascot key={p} pose={p} size={36} alt="" aria-hidden="true" />)}
             </div>
-            <Link to="/inscription" className="rv-btn-cta rv-btn-cta--full wlc-cta-btn">
-              Commencer gratuitement
-              <span className="rv-btn-cta-arrow" aria-hidden="true">→</span>
-            </Link>
-            <Link to="/essai" className="rv-btn-cta rv-btn-cta--ghost rv-btn-cta--full wlc-cta-btn">
-              Essayer sans compte
-            </Link>
+            <div className="wlc-actions">
+              <Link to="/inscription" className="rv-btn-cta rv-btn-cta--full wlc-cta-btn">
+                Commencer gratuitement
+                <span className="rv-btn-cta-arrow" aria-hidden="true">→</span>
+              </Link>
+              <Link to="/essai" className="rv-btn-cta rv-btn-cta--ghost rv-btn-cta--full wlc-cta-btn">
+                Essayer sans compte
+              </Link>
+            </div>
             <p className="wlc-hint">Aucune carte bancaire · Gratuit pour commencer</p>
             <BoutonInstaller className="wlc-installer">Installer l'app sur ton appareil</BoutonInstaller>
           </section>
@@ -113,16 +117,18 @@ export default function Welcome() {
             <p className="wlc-cta-sub">
               Rejoins les élèves qui révisent plus malin avec Réviz.
             </p>
-            <Link to="/inscription" className="rv-btn-cta rv-btn-cta--full wlc-cta-btn">
-              Créer un compte gratuit
-              <span className="rv-btn-cta-arrow" aria-hidden="true">→</span>
-            </Link>
-            <Link to="/connexion" className="rv-btn-cta rv-btn-cta--ghost rv-btn-cta--full wlc-cta-btn">
-              J'ai déjà un compte
-            </Link>
-            <Link to="/essai" className="rv-btn-cta rv-btn-cta--ghost rv-btn-cta--full wlc-cta-btn">
-              Essayer sans compte
-            </Link>
+            <div className="wlc-actions">
+              <Link to="/inscription" className="rv-btn-cta rv-btn-cta--full wlc-cta-btn">
+                Créer un compte gratuit
+                <span className="rv-btn-cta-arrow" aria-hidden="true">→</span>
+              </Link>
+              <Link to="/connexion" className="rv-btn-cta rv-btn-cta--ghost rv-btn-cta--full wlc-cta-btn">
+                J'ai déjà un compte
+              </Link>
+              <Link to="/essai" className="rv-btn-cta rv-btn-cta--ghost rv-btn-cta--full wlc-cta-btn">
+                Essayer sans compte
+              </Link>
+            </div>
           </section>
 
           {/* ── Footer ── */}

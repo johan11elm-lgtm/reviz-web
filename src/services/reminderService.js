@@ -8,6 +8,7 @@
 // -------------------------------------------------------
 import { Capacitor } from '@capacitor/core'
 import { LocalNotifications } from '@capacitor/local-notifications'
+import { intituleControle } from '../utils/agenda'
 
 const PREF_KEY = 'reviz-reminder'
 const NOTIF_ID = 1001
@@ -70,6 +71,45 @@ export async function disableReminder() {
   if (!remindersAvailable()) return
   try { await LocalNotifications.cancel({ notifications: [{ id: NOTIF_ID }] }) }
   catch { /* rien à annuler */ }
+}
+
+// --- Contrôles : un rappel la veille à 18 h 30 (natif seulement) ---
+// Identifiants 2000-2099 réservés, tous annulés puis replanifiés à chaque
+// changement de la liste : pas d'état à tenir à jour.
+const CONTROLE_ID_MIN = 2000
+const CONTROLE_MAX = 100
+
+export function rappelControle(controle, intitule) {
+  return {
+    title: `${intitule} demain`,
+    body: controle.titre
+      ? `${controle.titre}. Dix minutes de révision ce soir ?`
+      : 'Dix minutes de révision ce soir ?',
+  }
+}
+
+/**
+ * Replanifie les rappels de la veille des contrôles à venir. Demande la
+ * permission la première fois (on vient d'ajouter un contrôle).
+ * @param {{ id, date, titre, matiere }[]} controles à venir, triés
+ * @param {(c) => string} nommer « Contrôle de maths »…
+ */
+export async function planifierRappelsControles(controles, nommer = intituleControle) {
+  if (!remindersAvailable()) return
+  await LocalNotifications.cancel({
+    notifications: Array.from({ length: CONTROLE_MAX }, (_, i) => ({ id: CONTROLE_ID_MIN + i })),
+  }).catch(() => {})
+  const maintenant = new Date()
+  const notifications = controles.slice(0, CONTROLE_MAX).map((c, i) => {
+    const [a, m, j] = c.date.split('-').map(Number)
+    const at = new Date(a, m - 1, j - 1, REMINDER_HOUR, REMINDER_MINUTE)
+    return at > maintenant ? { id: CONTROLE_ID_MIN + i, ...rappelControle(c, nommer(c)), schedule: { at, allowWhileIdle: true } } : null
+  }).filter(Boolean)
+  if (!notifications.length) return
+  let perm = await LocalNotifications.checkPermissions()
+  if (perm.display !== 'granted') perm = await LocalNotifications.requestPermissions()
+  if (perm.display !== 'granted') return
+  await LocalNotifications.schedule({ notifications })
 }
 
 /**

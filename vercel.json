@@ -6,7 +6,8 @@
     "api/battle-fin.js": { "includeFiles": "public/programme/**" }
   },
   "crons": [
-    { "path": "/api/battle-nettoyage", "schedule": "0 3 * * *" }
+    { "path": "/api/battle-nettoyage", "schedule": "0 3 * * *" },
+    { "path": "/api/send-parental-consent", "schedule": "0 16 * * *" }
   ],
   "headers": [
     {
@@ -37,6 +38,8 @@
     }
   ],
   "rewrites": [
+    { "source": "/api/create-checkout", "destination": "/api/abonnement?op=checkout" },
+    { "source": "/api/create-billing-portal", "destination": "/api/abonnement?op=portail" },
     { "source": "/((?!api/)(?!sitemap\\.xml)(?!robots\\.txt)(?!googlee9de8164637c0bbf\\.html).*)", "destination": "/index.html" }
   ]
 }

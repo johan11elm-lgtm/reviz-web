@@ -379,7 +379,142 @@ button.rp-badge:active { transform: scale(0.96); }
   html:not(.native) .rp-card--wide .rp-card-sub { grid-area: sub; padding-right: 0; }
   html:not(.native) .rp-card--wide .rp-fondateur { grid-area: fond; }
   html:not(.native) .rp-card--wide .rp-cta { grid-area: cta; justify-self: start; padding: 0 22px; }
+  html:not(.native) .rp-card--wide > .cf { grid-area: cta; }
+  html:not(.native) .rp-card--wide .cf .rp-cta { padding: 0; }
   html:not(.native) .rp-card--wide .rp-meters { grid-area: meters; align-self: center; margin: 0 96px 0 0; }
   html:not(.native) .rp-card--wide .rp-card-mascot { top: auto; bottom: 10px; right: 14px; }
   html:not(.native) .rp-card--wide .rp-card-head { padding-right: 0; }
+}
+
+/* ── Ticket « prix fondateur » (TicketFondateur) ──
+   Bordure pointillée dorée, deux encoches découpées par un masque : la carte
+   en dégradé reste visible à travers. */
+.rp-ticket {
+  --encoche: 9px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 13px 16px 13px 18px;
+  border: 1.5px dashed rgba(242, 205, 132, 0.55);
+  border-radius: 14px;
+  background: linear-gradient(120deg, rgba(242, 205, 132, 0.16), rgba(242, 205, 132, 0.06));
+  -webkit-mask:
+    radial-gradient(circle var(--encoche) at 0 50%, transparent 96%, #000) left / 51% 100% no-repeat,
+    radial-gradient(circle var(--encoche) at 100% 50%, transparent 96%, #000) right / 51% 100% no-repeat;
+  mask:
+    radial-gradient(circle var(--encoche) at 0 50%, transparent 96%, #000) left / 51% 100% no-repeat,
+    radial-gradient(circle var(--encoche) at 100% 50%, transparent 96%, #000) right / 51% 100% no-repeat;
+}
+.rp-ticket-main {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+  flex: 1;
+}
+.rp-ticket-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--rp-gold-text);
+  font: 700 12px/1.2 'Geist', sans-serif;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+}
+.rp-ticket-label .rv-ico { font-size: 13px; }
+.rp-ticket-prix {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+}
+.rp-ticket-montant {
+  font: 800 30px/1.05 'Geist', sans-serif;
+  letter-spacing: -1px;
+  background: linear-gradient(135deg, var(--rp-gold-1), var(--rp-gold-2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.rp-ticket-cadence {
+  font: 700 14px/1 'Geist', sans-serif;
+  color: var(--rp-gold-text);
+}
+.rp-ticket-barre {
+  margin-left: 6px;
+  font: 600 15px/1 'Geist', sans-serif;
+  color: var(--rp-on-sub);
+  text-decoration-thickness: 1.5px;
+}
+.rp-ticket-note {
+  font-size: 12.5px;
+  line-height: 1.4;
+  color: var(--rp-on-sub);
+}
+.rp-ticket-remise {
+  flex-shrink: 0;
+  padding: 7px 9px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--rp-gold-1), var(--rp-gold-2));
+  color: var(--rp-gold-ink);
+  font: 900 15px/1 'Geist', sans-serif;
+  letter-spacing: -0.3px;
+  transform: rotate(-4deg);
+  box-shadow: 0 4px 12px rgba(227, 169, 79, 0.3);
+}
+
+/* Pendant la grâce : formule mensuelle en lien sous le bouton doré */
+.rp-cta-lien {
+  align-self: center;
+  margin-top: -4px;
+  padding: 4px 8px;
+  border: 0;
+  background: none;
+  color: var(--rp-on-sub);
+  font: 600 13px/1.3 'Geist', sans-serif;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+.rp-cta-lien:hover { color: var(--rp-on); }
+.rp-erreur {
+  margin: 0;
+  font-size: 13px;
+  color: #FFB4A8;
+  text-align: center;
+}
+
+/* ── Récapitulatif d'abonnement (RecapAbonnement) ──
+   Même bloc translucide que les jauges, valeurs en or. */
+.rp-recu {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  border-radius: 16px;
+  border: 1px dashed rgba(242, 205, 132, 0.40);
+  background: rgba(242, 205, 132, 0.07);
+}
+.rp-recu-ligne {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 11px 14px;
+}
+.rp-recu-ligne + .rp-recu-ligne { border-top: 1px dashed rgba(242, 205, 132, 0.22); }
+.rp-recu-label {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--rp-on);
+}
+.rp-recu-detail { font-size: 12px; font-weight: 500; color: var(--rp-on-sub); }
+.rp-recu-valeur {
+  margin: 0;
+  font: 800 15px/1.1 'Geist', sans-serif;
+  letter-spacing: -0.2px;
+  color: var(--rp-gold-text);
+  white-space: nowrap;
 }
