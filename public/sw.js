@@ -1,10 +1,12 @@
 // -------------------------------------------------------
 // Réviz — Service Worker (cache offline)
 // -------------------------------------------------------
+// v5 : /ingest (relais PostHog) jamais intercepté ; purge ce qu'un SW
+// précédent aurait pu mettre en cache sous /ingest.
 // v4 : nouvelle icône (mascotte 3D, 8 octobre 2026) — force le rechargement des icônes.
 // v3 : purge les mascottes PNG pré-détourage et adopte
 // stale-while-revalidate pour les images non-hashées.
-const CACHE_NAME = 'reviz-v4';
+const CACHE_NAME = 'reviz-v5';
 const STATIC_ASSETS = [
   '/',
   '/manifest.json',
@@ -38,9 +40,10 @@ self.addEventListener('fetch', (event) => {
   const { request } = event;
   const url = new URL(request.url);
 
-  // Ne pas intercepter les appels API ou Firebase
+  // Ne pas intercepter les appels API, PostHog (/ingest) ou Firebase
   if (
     url.pathname.startsWith('/api/') ||
+    url.pathname.startsWith('/ingest/') ||
     url.hostname.includes('googleapis.com') ||
     url.hostname.includes('firebaseio.com') ||
     url.hostname.includes('firebaseapp.com') ||

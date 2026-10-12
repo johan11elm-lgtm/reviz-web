@@ -96,7 +96,10 @@ const loadMonitoring = () => {
   if (POSTHOG_KEY && !local && !INTERNE) {
     import('posthog-js').then(({ default: posthog }) => {
       posthog.init(POSTHOG_KEY, {
-        api_host: 'https://eu.i.posthog.com',
+        // Web : relais /ingest (vercel.json) pour passer les bloqueurs de pub.
+        // App iOS (capacitor://localhost) : pas de relais, on parle à PostHog.
+        api_host: IS_NATIVE ? 'https://eu.i.posthog.com' : '/ingest',
+        ui_host: 'https://eu.posthog.com',
         cookieless_mode: 'always',
         person_profiles: 'identified_only',
         capture_pageview: 'history_change',
