@@ -269,6 +269,11 @@
       "chemin": "3eme/svt/information-genetique",
       "le": "2026-10-12",
       "corrections": 0
+    },
+    {
+      "chemin": "3eme/svt/mitose-division-cellulaire",
+      "le": "2026-10-12",
+      "corrections": 1
     }
   ]
 }
