@@ -299,6 +299,11 @@
       "chemin": "3eme/svt/reactions-immunitaires",
       "le": "2026-10-13",
       "corrections": 0
+    },
+    {
+      "chemin": "3eme/svt/vaccination",
+      "le": "2026-10-13",
+      "corrections": 1
     }
   ]
 }
