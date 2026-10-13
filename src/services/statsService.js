@@ -6,6 +6,7 @@
 // -------------------------------------------------------
 import { apiFetch, IS_NATIVE } from './apiClient'
 import { GUEST_KEY } from './guestService'
+import { INTERNE } from './interne'
 
 function device() {
   if (IS_NATIVE) return 'app'
@@ -42,7 +43,7 @@ function mode() {
  * @param {object} [props]  classe, matiere, format, source, joueur, issue, plateforme, via (listes fermées côté serveur)
  */
 export function track(event, props = {}) {
-  if (import.meta.env.MODE === 'test') return
+  if (import.meta.env.MODE === 'test' || INTERNE) return
   try {
     const body = JSON.stringify({ event, props: { mode: mode(), device: device(), ...(VIA ? { via: VIA } : {}), ...props } })
     apiFetch('/api/track', {

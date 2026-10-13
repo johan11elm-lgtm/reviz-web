@@ -13,6 +13,7 @@ import App from './App.jsx'
 import { IS_NATIVE } from './services/apiClient.js'
 import { hideSplash } from './services/splash.js'
 import { track } from './services/statsService.js'
+import { INTERNE } from './services/interne.js'
 import { ecouterInstallation, detecterPlateforme } from './utils/installation.js'
 
 // App native (Capacitor) : layout plein écran forcé quelle que soit la
@@ -88,11 +89,17 @@ const loadMonitoring = () => {
   // chaque jour. Pas de profil, pas d'identify, pas de replay : cohérent avec
   // Legal.jsx (« aucun cookie de tracking »). Exige l'option « Cookieless server
   // hash mode » dans les réglages du projet PostHog, sinon les events sont jetés.
+  // Ni en local (dev, preview, e2e), ni sur les appareils de l'équipe
+  // (?interne=1). L'app iOS sert capacitor://localhost : elle reste mesurée.
   const POSTHOG_KEY = import.meta.env.VITE_POSTHOG_KEY?.trim();
-  if (POSTHOG_KEY) {
+  const local = import.meta.env.DEV || (/^https?:$/.test(location.protocol) && /^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname));
+  if (POSTHOG_KEY && !local && !INTERNE) {
     import('posthog-js').then(({ default: posthog }) => {
       posthog.init(POSTHOG_KEY, {
-        api_host: 'https://eu.i.posthog.com',
+        // Web : relais /ingest (vercel.json) pour passer les bloqueurs de pub.
+        // App iOS (capacitor://localhost) : pas de relais, on parle à PostHog.
+        api_host: IS_NATIVE ? 'https://eu.i.posthog.com' : '/ingest',
+        ui_host: 'https://eu.posthog.com',
         cookieless_mode: 'always',
         person_profiles: 'identified_only',
         capture_pageview: 'history_change',
