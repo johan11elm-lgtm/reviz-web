@@ -304,6 +304,11 @@
       "chemin": "3eme/svt/vaccination",
       "le": "2026-10-13",
       "corrections": 1
+    },
+    {
+      "chemin": "3eme/svt/systeme-nerveux-sante",
+      "le": "2026-10-13",
+      "corrections": 0
     }
   ]
 }
