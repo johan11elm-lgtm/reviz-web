@@ -309,6 +309,11 @@
       "chemin": "3eme/svt/systeme-nerveux-sante",
       "le": "2026-10-13",
       "corrections": 0
+    },
+    {
+      "chemin": "3eme/svt/meteo-climat",
+      "le": "2026-10-13",
+      "corrections": 0
     }
   ]
 }
