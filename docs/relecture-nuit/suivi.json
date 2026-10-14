@@ -389,6 +389,11 @@
       "chemin": "3eme/physique-chimie/production-energie-electrique",
       "le": "2026-10-14",
       "corrections": 0
+    },
+    {
+      "chemin": "3eme/physique-chimie/signaux-sonores-et-lumineux",
+      "le": "2026-10-14",
+      "corrections": 0
     }
   ]
 }
