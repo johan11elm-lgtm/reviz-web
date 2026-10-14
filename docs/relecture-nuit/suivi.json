@@ -379,6 +379,11 @@
       "chemin": "3eme/physique-chimie/loi-d-ohm",
       "le": "2026-10-14",
       "corrections": 0
+    },
+    {
+      "chemin": "3eme/physique-chimie/puissance-et-energie-electriques",
+      "le": "2026-10-14",
+      "corrections": 0
     }
   ]
 }
