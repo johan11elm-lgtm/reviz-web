@@ -344,6 +344,11 @@
       "chemin": "3eme/physique-chimie/reactions-acides-metaux",
       "le": "2026-10-14",
       "corrections": 0
+    },
+    {
+      "chemin": "3eme/physique-chimie/tests-identification-ions",
+      "le": "2026-10-14",
+      "corrections": 0
     }
   ]
 }
