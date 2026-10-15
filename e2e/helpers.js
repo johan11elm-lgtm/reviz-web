@@ -129,7 +129,7 @@ export async function signup(page, { birthDate, parentEmail, prenom = 'Testeur' 
   await page.getByRole('button', { name: 'Continuer', exact: true }).click()
 
   // Étape date de naissance
-  await page.locator('input[type="date"]').fill(birthDate)
+  await remplirNaissance(page, birthDate)
   await page.getByRole('button', { name: 'Continuer', exact: true }).click()
 
   // Étape cycle (le clic avance automatiquement) puis classe
@@ -194,4 +194,12 @@ export async function fermerAnnonceRevizPlus(page) {
 export async function fermerAnnonceBattle(page) {
   const plusTard = page.getByRole('dialog', { name: 'La Battle' }).getByRole('button', { name: 'Plus tard' })
   await plusTard.click({ timeout: 5_000 }).catch(() => {})
+}
+
+// Date de naissance en trois listes (jour, mois, année) : 'AAAA-MM-JJ'.
+export async function remplirNaissance(page, date) {
+  const [a, m, j] = date.split('-').map(Number)
+  await page.getByRole('combobox', { name: 'Jour' }).selectOption(String(j))
+  await page.getByRole('combobox', { name: 'Mois' }).selectOption(String(m))
+  await page.getByRole('combobox', { name: 'Année' }).selectOption(String(a))
 }
