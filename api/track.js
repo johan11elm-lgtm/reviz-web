@@ -35,9 +35,9 @@ const ALLOWED = {
   joueur: ['compte', 'invite'],
   issue: ['victoire', 'egalite', 'forfait'],
   plateforme: ['ios', 'android', 'ordinateur'],
-  // Provenance (`?via=` dans le lien de bio, d'une épingle ou d'une affiche) :
-  // d'où vient l'élève, sans rien identifier.
-  via: ['tiktok', 'instagram', 'pinterest', 'youtube', 'affiche', 'landing'],
+  // Provenance (`?via=` dans le lien de bio, d'une épingle, d'une affiche ou
+  // d'une fiche publique du site) : d'où vient l'élève, sans rien identifier.
+  via: ['tiktok', 'instagram', 'pinterest', 'youtube', 'affiche', 'landing', 'fiche'],
 }
 
 /** Date du jour à Paris, au format AAAA-MM-JJ (un document par jour). */
