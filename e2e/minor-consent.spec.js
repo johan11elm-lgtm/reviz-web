@@ -2,7 +2,7 @@
 // l'app pendant que le parent décide. Un refus suspend l'accès. Exerce pour
 // de vrai les règles Firestore (doc parentalConsent 'pending' au signup).
 import { test, expect } from '@playwright/test'
-import { mockApiRoutes, signup, ecrireConsentementEmulateur } from './helpers'
+import { mockApiRoutes, signup, ecrireConsentementEmulateur, remplirNaissance } from './helpers'
 
 // uid de l'élève connecté, lu dans le jeton Firebase de la page.
 async function uidCourant(page) {
@@ -50,7 +50,7 @@ test.describe('Consentement parental (<15 ans)', () => {
 
     await page.getByPlaceholder('Lucas').fill('Petit')
     await page.getByRole('button', { name: 'Continuer', exact: true }).click()
-    await page.locator('input[type="date"]').fill('2014-06-01')
+    await remplirNaissance(page, '2014-06-01')
     await page.getByRole('button', { name: 'Continuer', exact: true }).click()
     await page.getByRole('button', { name: /Collège/ }).click()
     await page.getByRole('button', { name: '6ème', exact: true }).click()
@@ -73,7 +73,7 @@ test.describe('Consentement parental (<15 ans)', () => {
     await page.goto('/inscription')
     await page.getByPlaceholder('Lucas').fill('Pressé')
     await page.getByRole('button', { name: 'Continuer', exact: true }).click()
-    await page.locator('input[type="date"]').fill('2014-06-01')
+    await remplirNaissance(page, '2014-06-01')
     await page.getByRole('button', { name: 'Continuer', exact: true }).click()
     await page.getByRole('button', { name: /Collège/ }).click()
     await page.getByRole('button', { name: '6ème', exact: true }).click()

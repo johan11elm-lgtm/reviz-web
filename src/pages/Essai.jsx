@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { PageHeader } from '../components/PageHeader';
@@ -7,6 +7,7 @@ import { Mascot } from '../components/Mascot';
 import { useIsDesktop } from '../hooks/useMediaQuery';
 import { CYCLES, CLASSES_BY_CYCLE } from '../utils/levels';
 import { CLASSES_DECOUVERTE, startDecouverte, stopDecouverte } from '../services/decouverteService';
+import { loadCatalogue, openChapter } from '../services/programmeService';
 import './Inscription.css'; // auth-desk : même composition que la connexion
 import './Essai.css';
 
@@ -29,16 +30,54 @@ export default function Essai() {
   const classeFiche = !classeProf && CLASSES_BY_CYCLE.college.includes(params.get('classe'))
     ? params.get('classe') : null;
   const matiereFiche = /^[a-z0-9-]{1,40}$/.test(params.get('matiere') ?? '') ? params.get('matiere') : null;
+  // … et avec le chapitre de la fiche (`&chapitre=angles-et-triangles`), le prénom
+  // suffit : on ouvre directement le quiz de ce chapitre.
+  const chapitreFiche = classeFiche && matiereFiche && /^[a-z0-9-]{1,80}$/.test(params.get('chapitre') ?? '')
+    ? params.get('chapitre') : null;
+  // undefined : catalogue en cours de lecture ; null : chapitre introuvable.
+  const [chapitre, setChapitre] = useState(chapitreFiche ? undefined : null);
+  const [ouverture, setOuverture] = useState(false);
+  const ouvert = useRef(false);
   const [prenom, setPrenom] = useState('');
   const [cycle, setCycle] = useState('college');
   const [classe, setClasse] = useState(classeFiche);
   const [error, setError] = useState('');
   const isDesktop = useIsDesktop();
 
-  // Déjà connecté avec un vrai compte : rien à essayer, direction l'accueil.
   useEffect(() => {
-    if (currentUser && !isGuest) navigate('/', { replace: true });
-  }, [currentUser, isGuest, navigate]);
+    if (!chapitreFiche) return;
+    let alive = true;
+    loadCatalogue(classeFiche)
+      .then(c => {
+        const m = c.matieres.find(x => x.slug === matiereFiche);
+        const ch = m?.chapitres.find(x => x.id === chapitreFiche && x.pret);
+        if (alive) setChapitre(ch ? { matiere: m.matiere, ch } : null);
+      })
+      .catch(() => { if (alive) setChapitre(null); });
+    return () => { alive = false; };
+  }, [chapitreFiche, classeFiche, matiereFiche]);
+
+  // Charge le chapitre comme le fait Mon programme, puis lance le quiz.
+  // En cas d'échec (réseau), la liste des chapitres de la matière.
+  function ouvrirChapitre() {
+    if (ouvert.current) return;
+    ouvert.current = true;
+    setOuverture(true);
+    openChapter(classeFiche, chapitre.matiere, chapitre.ch)
+      .then(() => navigate('/quiz', { replace: true }))
+      .catch(() => navigate(`/programme/${matiereFiche}`, { replace: true }));
+  }
+
+  // Déjà connecté (compte, ou essai déjà commencé) et venu d'une fiche : le
+  // quiz du chapitre directement. Un vrai compte sans chapitre : l'accueil.
+  useEffect(() => {
+    if (!currentUser || ouvert.current) return;
+    if (chapitreFiche && chapitre === undefined) return;
+    if (chapitre) ouvrirChapitre();
+    else if (!isGuest) navigate('/', { replace: true });
+    // ouvrirChapitre ne dépend que de ces valeurs.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentUser, isGuest, chapitre, chapitreFiche, navigate]);
 
   useEffect(() => {
     if (!classeProf || (currentUser && !isGuest)) return;
@@ -56,10 +95,17 @@ export default function Essai() {
     if (!classe) { setError('Choisis ta classe.'); return; }
     stopDecouverte();
     loginAsGuest({ prenom: p, level: { cycle, classe, specialites: [] } });
-    navigate(matiereFiche ? `/programme/${matiereFiche}` : '/programme', { replace: true });
+    if (chapitre && classe === classeFiche) ouvrirChapitre();
+    else navigate(matiereFiche ? `/programme/${matiereFiche}` : '/programme', { replace: true });
   }
 
-  if (classeProf) return <div className="app essai-page" />;
+  // Redirection automatique en cours ou à venir (effet ci-dessus) : rien à remplir.
+  const redirige = currentUser && !prenom && ((chapitreFiche && chapitre !== null) || !isGuest);
+  if (classeProf || redirige) return <div className="app essai-page" />;
+
+  // Venu d'une fiche avec un chapitre trouvé : seulement le prénom, la classe est connue.
+  const quiz = chapitre ? chapitre.ch : null;
+  const titre = quiz ? 'Teste-toi sur ce chapitre' : 'Essayer sans compte';
 
   const champs = (
     <>
@@ -76,6 +122,7 @@ export default function Essai() {
         autoFocus
       />
 
+      {!quiz && <>
       <div className="essai-label" id="essai-classe-label">Ta classe</div>
       <div className="essai-cycles" role="tablist" aria-label="Collège ou lycée">
         {/* Mon programme ne couvre que la 6e à la 3e : le lycée est annoncé, pas encore ouvert. */}
@@ -110,11 +157,12 @@ export default function Essai() {
           </button>
         ))}
       </div>
+      </>}
 
       {error && <p className="essai-error" role="alert">{error}</p>}
 
-      <button type="submit" className="rv-btn-cta rv-btn-cta--full essai-submit">
-        <span>C'est parti</span>
+      <button type="submit" className="rv-btn-cta rv-btn-cta--full essai-submit" disabled={ouverture}>
+        <span>{ouverture ? 'Ouverture du quiz…' : quiz ? 'Lancer le quiz' : "C'est parti"}</span>
         <span className="rv-btn-cta-arrow" aria-hidden="true">→</span>
       </button>
       <p className="essai-hint">
@@ -132,8 +180,12 @@ export default function Essai() {
           <div className="auth-desk-intro">
             <Link to="/welcome" className="auth-back" aria-label="Retour">←</Link>
             <span className="auth-desk-mascot"><Mascot pose="hello" size={132} alt="" aria-hidden="true" /></span>
-            <h1 className="signup-question">Essayer sans compte</h1>
-            <p className="signup-hint">Ton prénom, ta classe, et tu révises ton programme tout de suite.</p>
+            <h1 className="signup-question">{titre}</h1>
+            <p className="signup-hint">
+              {quiz
+                ? <><strong>{quiz.titre}</strong> ({classeFiche}) : {quiz.quiz} questions corrigées une à une. Ton prénom, et c'est parti.</>
+                : 'Ton prénom, ta classe, et tu révises ton programme tout de suite.'}
+            </p>
             <ul className="auth-desk-why">
               <li><strong>Tout le programme</strong> de ta classe, chapitre par chapitre : résumés, flashcards, quiz.</li>
               <li><strong>Pas d'adresse mail</strong> à donner : ta progression reste sur cet appareil.</li>
@@ -152,8 +204,10 @@ export default function Essai() {
     <div className="app essai-page">
       <PageHeader variant="back" onBack={() => navigate('/welcome')} />
       <PageIntro
-        title="Essayer sans compte"
-        sub="Ton prénom, ta classe, et tu révises ton programme."
+        title={titre}
+        sub={quiz
+          ? `${quiz.titre} (${classeFiche}) : ${quiz.quiz} questions corrigées une à une.`
+          : 'Ton prénom, ta classe, et tu révises ton programme.'}
         mascot="hello"
         mascotSize={140}
       />

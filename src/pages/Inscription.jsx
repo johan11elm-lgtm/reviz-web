@@ -1,7 +1,7 @@
 import { UsersIcon } from '../components/Icons';
 import { Mascot } from '../components/Mascot';
 import { useState, useMemo, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useSearchParams, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import SocialLogin, { erreurConnexionSociale } from '../components/SocialLogin';
 import {
@@ -15,6 +15,7 @@ import { readGuest } from '../services/guestService';
 import { sendParentalConsent, consentErrorMessage } from '../services/consentService';
 import { useIsDesktop } from '../hooks/useMediaQuery';
 import { nbsp } from '../utils/typography';
+import ChampDateNaissance from '../components/ChampDateNaissance';
 import './Inscription.css';
 
 // Mascotte de chaque étape, sur ordinateur seulement.
@@ -50,12 +51,23 @@ export default function Inscription() {
   const [parentEmail, setParentEmail]     = useState('');
   const [error, setError]                 = useState('');
   const [loading, setLoading]             = useState(false);
-  const [stepIdx, setStepIdx]             = useState(0);
   const [animDir, setAnimDir]             = useState('in');
+  const [voirMdp, setVoirMdp]             = useState(false);
+  const [compteCree, setCompteCree]       = useState(false);
 
   const { signup, loginWithProvider, refreshGate } = useAuth();
   const navigate                          = useNavigate();
+  const location                          = useLocation();
+  const [params, setParams]               = useSearchParams();
   const isDesktop                         = useIsDesktop();
+
+  // L'étape vit dans l'URL (?etape=2) : chaque étape est une entrée
+  // d'historique, donc le retour d'Android (geste ou bouton) revient à
+  // l'étape précédente au lieu de renvoyer sur /welcome en perdant tout.
+  const stepIdx = Math.max(0, Number(params.get('etape')) || 0);
+  function goTo(i, { replace = false } = {}) {
+    setParams(i > 0 ? { etape: String(i) } : {}, { replace });
+  }
 
   // Construction dynamique de la liste des étapes en fonction du profil.
   const steps = useMemo(() => {
@@ -66,32 +78,51 @@ export default function Inscription() {
     return base;
   }, [level, birthDate]);
 
-  // Si l'utilisateur a remonté, et que les steps changent, on clamp stepIdx.
+  // Les réponses ne vivent qu'en mémoire : arrivé au milieu du tunnel sans
+  // elles (page rechargée, lien partagé), on repart du début.
+  // Idem si une étape précédente n'est pas remplie (sinon on pourrait créer
+  // un compte sans date de naissance, donc sans accord parental).
   useEffect(() => {
-    if (stepIdx >= steps.length) setStepIdx(steps.length - 1);
+    const manquante = steps.slice(0, stepIdx).findIndex(id => validate(id));
+    if (manquante >= 0) goTo(manquante, { replace: true });
+    else if (stepIdx >= steps.length) goTo(steps.length - 1, { replace: true });
   }, [steps, stepIdx]);
+
+  // Compte déjà créé (moins de 15 ans) : revenir en arrière recréerait le
+  // compte (« email déjà utilisé »). On reste sur l'étape parent.
+  useEffect(() => {
+    const iParent = steps.indexOf('parent');
+    if (compteCree && iParent >= 0 && stepIdx !== iParent) goTo(iParent, { replace: true });
+  }, [compteCree, stepIdx, steps]);
 
   const stepId = steps[stepIdx];
   const totalVisible = steps.includes('parent') ? steps.length - 1 : steps.length;
   const progressIdx  = Math.min(stepIdx, totalVisible - 1);
 
-  function goNext() {
+  function goNext({ replace = false } = {}) {
     setError('');
     setAnimDir('in');
-    setStepIdx(i => Math.min(i + 1, steps.length - 1));
+    goTo(Math.min(stepIdx + 1, steps.length - 1), { replace });
   }
   function goPrev() {
     setError('');
-    if (stepIdx === 0) {
-      navigate('/welcome');
-      return;
-    }
     setAnimDir('out');
-    setStepIdx(i => Math.max(i - 1, 0));
+    // Même chemin que le retour du téléphone. Arrivé directement sur
+    // /inscription (pas d'historique dans l'app) : accueil, sans empiler.
+    if (location.key !== 'default') navigate(-1);
+    else if (stepIdx > 0) goTo(stepIdx - 1, { replace: true });
+    else navigate('/welcome', { replace: true });
+  }
+  // Le retour du téléphone passe par l'historique, sans goPrev : on règle
+  // le sens de l'animation d'après l'étape qui change.
+  const [etapePrec, setEtapePrec] = useState(stepIdx);
+  if (etapePrec !== stepIdx) {
+    setEtapePrec(stepIdx);
+    setAnimDir(stepIdx > etapePrec ? 'in' : 'out');
   }
 
-  function validateCurrent() {
-    switch (stepId) {
+  function validate(id) {
+    switch (id) {
       case 'prenom':
         if (!prenom.trim()) return 'Entre ton prénom.';
         return null;
@@ -133,7 +164,7 @@ export default function Inscription() {
   }
 
   async function handlePrimary() {
-    const err = validateCurrent();
+    const err = validate(stepId);
     if (err) { setError(err); return; }
 
     // Étape 'account' : on crée le compte Firebase + profil Firestore
@@ -143,7 +174,8 @@ export default function Inscription() {
         await signup(prenom.trim(), email.trim(), password, level, birthDate);
         await refreshGate?.();
         if (isUnder15(birthDate)) {
-          goNext();
+          setCompteCree(true);
+          goNext({ replace: true });
         } else {
           navigate('/verify-email', { replace: true });
         }
@@ -193,19 +225,13 @@ export default function Inscription() {
     setLevel({ cycle: cycleId, classe: null, specialites: [], filiere: null });
     setError('');
     // Auto-advance après un léger délai pour laisser voir la sélection
-    setTimeout(() => {
-      setAnimDir('in');
-      setStepIdx(i => i + 1);
-    }, 180);
+    setTimeout(() => goNext(), 180);
   }
 
   function pickClasse(classe) {
     setLevel(l => ({ ...l, classe, specialites: [], filiere: null }));
     setError('');
-    setTimeout(() => {
-      setAnimDir('in');
-      setStepIdx(i => i + 1);
-    }, 180);
+    setTimeout(() => goNext(), 180);
   }
 
   function toggleSpec(spec) {
@@ -243,6 +269,7 @@ export default function Inscription() {
               value={prenom}
               onChange={e => setPrenom(e.target.value)}
               autoComplete="given-name"
+              enterKeyHint="next"
               autoFocus
             />
         ),
@@ -251,18 +278,7 @@ export default function Inscription() {
         titre: 'Quand es-tu né·e ?',
         aide: 'Pour adapter Réviz à ton âge.',
         corps: (
-            <div className={`auth-date auth-date--lg${birthDate ? '' : ' auth-date--empty'}`} data-placeholder="JJ / MM / AAAA">
-              <input
-                className="auth-input signup-input-lg"
-                type="date"
-                aria-label="Ta date de naissance"
-                value={birthDate}
-                onChange={e => setBirthDate(e.target.value)}
-                autoComplete="bday"
-                max={new Date().toISOString().split('T')[0]}
-                autoFocus
-              />
-            </div>
+            <ChampDateNaissance value={birthDate} onChange={setBirthDate} grand idPrefix="signup-naissance" />
         ),
       };
       case 'cycle': return {
@@ -341,19 +357,33 @@ export default function Inscription() {
                 value={email}
                 onChange={e => setEmail(e.target.value)}
                 autoComplete="email"
+                autoCapitalize="none"
+                enterKeyHint="next"
+                onKeyDown={e => {
+                  // Entrée sur l'email : on passe au mot de passe, sans valider.
+                  if (e.key === 'Enter') { e.preventDefault(); document.getElementById('signup-password')?.focus(); }
+                }}
               />
             </div>
             <div className="auth-field">
               <label className="auth-label" htmlFor="signup-password">Mot de passe</label>
-              <input
-                id="signup-password"
-                className="auth-input"
-                type="password"
-                placeholder="6 caractères minimum"
-                value={password}
-                onChange={e => setPassword(e.target.value)}
-                autoComplete="new-password"
-              />
+              <div className="auth-password">
+                <input
+                  id="signup-password"
+                  className="auth-input"
+                  type={voirMdp ? 'text' : 'password'}
+                  placeholder="6 caractères minimum"
+                  value={password}
+                  onChange={e => setPassword(e.target.value)}
+                  autoComplete="new-password"
+                  enterKeyHint="done"
+                />
+                <button type="button" className="auth-password-toggle" onClick={() => setVoirMdp(v => !v)}
+                  aria-pressed={voirMdp}>
+                  {voirMdp ? 'Masquer' : 'Afficher'}
+                </button>
+              </div>
+              <p className="auth-field-hint">6 caractères minimum, invente-le : ce n'est pas celui de ta messagerie.</p>
             </div>
             <label className="auth-checkbox-row">
               <input
@@ -362,7 +392,8 @@ export default function Inscription() {
                 onChange={e => setAcceptCgu(e.target.checked)}
               />
               <span>
-                J'accepte les <Link to="/legal/cgu">CGU</Link> et la <Link to="/legal/confidentialite">politique de confidentialité</Link>
+                {/* Nouvel onglet : sinon ouvrir les CGU efface tout ce qui est saisi. */}
+                J'accepte les <Link to="/legal/cgu" target="_blank" rel="noopener">CGU</Link> et la <Link to="/legal/confidentialite" target="_blank" rel="noopener">politique de confidentialité</Link>
               </span>
             </label>
             {isUnder15(birthDate) && (
@@ -394,6 +425,8 @@ export default function Inscription() {
                 value={parentEmail}
                 onChange={e => setParentEmail(e.target.value)}
                 autoComplete="email"
+                autoCapitalize="none"
+                enterKeyHint="send"
                 autoFocus
               />
             </div>
@@ -407,8 +440,7 @@ export default function Inscription() {
   const bouton = (
         <button
           className="auth-btn signup-primary"
-          type={isDesktop ? 'submit' : 'button'}
-          onClick={isDesktop ? undefined : handlePrimary}
+          type="submit"
           disabled={loading}
         >
           {primaryLabel}
@@ -447,7 +479,7 @@ export default function Inscription() {
             <div className={`auth-desk-body signup-anim-${animDir}`} key={stepId}>
               {etape?.corps}
             </div>
-            <p className="auth-error">{error}</p>
+            <p className="auth-error" role="alert">{error}</p>
             {bouton}
             {autresChoix}
           </form>
@@ -456,8 +488,10 @@ export default function Inscription() {
     );
   }
 
+  // Formulaire aussi sur téléphone : la touche Entrée / « Suivant » du
+  // clavier valide l'étape, même quand le clavier cache le bouton.
   return (
-    <div className="app">
+    <form className="app" noValidate onSubmit={e => { e.preventDefault(); if (!loading) handlePrimary(); }}>
       <div className="auth-header signup-header">
         <button type="button" className="auth-back" onClick={goPrev} aria-label="Retour">←</button>
         {progression}
@@ -468,7 +502,7 @@ export default function Inscription() {
         {etape?.aide && <p className="signup-hint">{etape.aide}</p>}
         {etape?.corps}
 
-        <p className="auth-error">{error}</p>
+        <p className="auth-error" role="alert">{error}</p>
       </div>
 
       <div className="signup-footer">
@@ -476,6 +510,6 @@ export default function Inscription() {
 
         {autresChoix}
       </div>
-    </div>
+    </form>
   );
 }

@@ -5,6 +5,7 @@ import { useAuth } from '../context/AuthContext';
 import { CYCLES, CLASSES_BY_CYCLE, SPECIALITES_LYCEE, needsSpecialites } from '../utils/levels';
 import { createUserProfile } from '../services/userProfileService';
 import { useIsDesktop } from '../hooks/useMediaQuery';
+import ChampDateNaissance from '../components/ChampDateNaissance';
 import './Inscription.css';
 
 // Écran de complétion de profil pour les nouveaux comptes sans mot de passe
@@ -84,17 +85,8 @@ export default function FinishSetup() {
         )}
 
         <div className="auth-field">
-          <label className="auth-label" htmlFor="fs-birthdate">Ta date de naissance</label>
-          <div className={`auth-date${birthDate ? '' : ' auth-date--empty'}`} data-placeholder="JJ / MM / AAAA">
-            <input
-              id="fs-birthdate"
-              className="auth-input"
-              type="date"
-              value={birthDate}
-              onChange={e => setBirthDate(e.target.value)}
-              max={new Date().toISOString().split('T')[0]}
-            />
-          </div>
+          <label className="auth-label" htmlFor="fs-naissance-jour">Ta date de naissance</label>
+          <ChampDateNaissance value={birthDate} onChange={setBirthDate} idPrefix="fs-naissance" />
         </div>
 
         <label className="auth-label" style={{ marginTop: 8 }}>Ton cycle</label>
