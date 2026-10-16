@@ -12,7 +12,7 @@ import './styles/desktop.css'
 import App from './App.jsx'
 import { IS_NATIVE } from './services/apiClient.js'
 import { hideSplash } from './services/splash.js'
-import { track } from './services/statsService.js'
+import { track, brancherPosthog } from './services/statsService.js'
 import { INTERNE } from './services/interne.js'
 import { ecouterInstallation, detecterPlateforme } from './utils/installation.js'
 
@@ -107,6 +107,8 @@ const loadMonitoring = () => {
         disable_session_recording: true,
         disable_surveys: true,
       });
+      // essai_demarre, quiz_termine… partent aussi vers PostHog (avec via et v).
+      brancherPosthog(posthog);
     });
   }
 }

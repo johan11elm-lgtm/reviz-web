@@ -20,6 +20,7 @@ function ScrollToTop() {
 
 // Pages publiques (pas de Firebase nécessaire)
 import Welcome from './pages/Welcome'
+import CodeVideo from './pages/CodeVideo'
 // Home est le premier écran de tout élève connecté : chargée en dur pour
 // que le démarrage optimiste (cache de session) peigne sans attendre un
 // chunk ni re-rendre l'arbre après une suspension.
@@ -146,6 +147,8 @@ export default function App() {
             <Route path="/avis"        element={<><SplashHider /><Avis /></>} />
             <Route path="/profs"       element={<><SplashHider /><Profs /></>} />
             <Route path="/installer"   element={<><SplashHider /><Installer /></>} />
+            {/* Adresse courte d'une vidéo (revizapp.fr/vf6) → essai sur son chapitre */}
+            <Route path="/v/:code"     element={<CodeVideo />} />
 
             {/* Toutes les autres routes — Firebase via AuthProvider */}
             <Route path="/*" element={

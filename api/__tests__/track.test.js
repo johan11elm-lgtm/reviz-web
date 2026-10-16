@@ -48,6 +48,12 @@ describe('buildUpdate', () => {
     })
     expect(buildUpdate('compte_cree', { via: 'javascript:alert(1)' })).toEqual({ compte_cree: { total: 1 } })
   })
+  it('compte la vidéo d\'origine (?v=) seulement si son code est au tableau', () => {
+    expect(buildUpdate('quiz_termine', { via: 'reseaux', v: 'x0', source: 'programme' })).toEqual({
+      quiz_termine: { total: 1, source: { programme: 1 }, via: { reseaux: 1 }, v: { x0: 1 } },
+    })
+    expect(buildUpdate('essai_demarre', { v: 'zz99' })).toEqual({ essai_demarre: { total: 1 } })
+  })
   it('refuse un événement inconnu', () => {
     expect(buildUpdate('mouchard', {})).toBeNull()
   })
