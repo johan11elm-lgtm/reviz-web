@@ -13,6 +13,7 @@ import {
 } from '../utils/levels';
 import { readGuest } from '../services/guestService';
 import { sendParentalConsent, consentErrorMessage } from '../services/consentService';
+import { track } from '../services/statsService';
 import { useIsDesktop } from '../hooks/useMediaQuery';
 import { nbsp } from '../utils/typography';
 import ChampDateNaissance from '../components/ChampDateNaissance';
@@ -193,6 +194,7 @@ export default function Inscription() {
       setLoading(true);
       try {
         await sendParentalConsent(parentEmail.trim(), prenom);
+        track('consent_envoye');
         await refreshGate?.();
         navigate('/verify-email', { replace: true });
       } catch (err) {
@@ -204,6 +206,16 @@ export default function Inscription() {
     }
 
     goNext();
+  }
+
+  // « Plus tard » : le compte existe déjà, l'élève entre dans l'app et a
+  // 15 jours pour donner l'email d'un parent (bandeau, relances par email).
+  async function plusTard() {
+    setError('');
+    setLoading(true);
+    track('consent_plus_tard');
+    try { await refreshGate?.(); } finally { setLoading(false); }
+    navigate('/verify-email', { replace: true });
   }
 
   async function handleProvider(id) {
@@ -398,21 +410,22 @@ export default function Inscription() {
             </label>
             {isUnder15(birthDate) && (
               <div className="auth-parent-notice-inline">
-                On préviendra un de tes parents par email. Tu pourras réviser tout de suite.
+                Tu pourras réviser tout de suite. Il faudra juste l'email d'un de tes parents, maintenant ou dans les 15 jours.
               </div>
             )}
           </>
         ),
       };
       case 'parent': return {
-        titre: 'Autorisation parentale',
+        titre: 'Ton compte est prêt !',
+        aide: 'Une dernière chose, maintenant ou plus tard.',
         corps: (
           <>
             <div className="auth-parent-info">
               <span className="auth-parent-icon"><UsersIcon /></span>
               <p>
-                Comme tu as moins de 15 ans, on envoie un email à un de tes parents pour lui dire
-                que tu utilises Réviz. Tu peux commencer tout de suite : il aura 10 jours pour donner son autorisation.
+                Comme tu as moins de 15 ans, un de tes parents doit donner son accord par email.
+                Pas son adresse sous la main ? Commence quand même : tu as <strong>15 jours</strong> pour la donner.
               </p>
             </div>
             <div className="auth-field">
@@ -444,6 +457,12 @@ export default function Inscription() {
           disabled={loading}
         >
           {primaryLabel}
+        </button>
+  );
+  const boutonPlusTard = stepId === 'parent' && (
+        <button type="button" className="auth-btn-plus-tard" onClick={plusTard} disabled={loading}>
+          Plus tard, je commence à réviser →
+          <small>Tu as 15 jours pour donner l'email</small>
         </button>
   );
   const autresChoix = stepId === 'prenom' && (
@@ -481,6 +500,7 @@ export default function Inscription() {
             </div>
             <p className="auth-error" role="alert">{error}</p>
             {bouton}
+            {boutonPlusTard}
             {autresChoix}
           </form>
         </div>
@@ -507,6 +527,7 @@ export default function Inscription() {
 
       <div className="signup-footer">
         {bouton}
+        {boutonPlusTard}
 
         {autresChoix}
       </div>

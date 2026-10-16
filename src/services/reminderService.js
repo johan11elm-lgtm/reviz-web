@@ -124,3 +124,38 @@ export async function refreshReminder(dueCount = 0) {
     await scheduleDaily(dueCount)
   } catch { /* le rappel existant reste en place */ }
 }
+
+// --- Email d'un parent pas encore donné (<15 ans, « Plus tard ») ---
+// Identifiants 3000-3009 : rappels à 18 h 30, 12, 5 et 1 jour(s) avant la
+// mise en pause du compte. Tous annulés puis replanifiés à chaque passage ;
+// jamais de demande de permission ici (seulement si déjà accordée).
+const PARENT_ID_MIN = 3000
+const PARENT_JOURS_AVANT = [12, 5, 1]
+
+export function rappelParent(joursAvant) {
+  return joursAvant <= 1
+    ? { title: 'Dernier jour pour ton compte Réviz', body: "Donne l'email d'un de tes parents, sinon ton compte sera mis en pause demain." }
+    : { title: `Plus que ${joursAvant} jours`, body: "Donne l'email d'un de tes parents pour garder ton compte Réviz. 30 secondes." }
+}
+
+/**
+ * @param {number|null} joursRestants  jours avant la mise en pause, null pour tout annuler
+ */
+export async function planifierRappelsParent(joursRestants) {
+  if (!remindersAvailable()) return
+  try {
+    await LocalNotifications.cancel({
+      notifications: PARENT_JOURS_AVANT.map((_, i) => ({ id: PARENT_ID_MIN + i })),
+    }).catch(() => {})
+    if (joursRestants == null) return
+    const perm = await LocalNotifications.checkPermissions()
+    if (perm.display !== 'granted') return
+    const maintenant = new Date()
+    const notifications = PARENT_JOURS_AVANT.map((avant, i) => {
+      const at = new Date(maintenant.getFullYear(), maintenant.getMonth(),
+        maintenant.getDate() + joursRestants - avant, REMINDER_HOUR, REMINDER_MINUTE)
+      return at > maintenant ? { id: PARENT_ID_MIN + i, ...rappelParent(avant), schedule: { at, allowWhileIdle: true } } : null
+    }).filter(Boolean)
+    if (notifications.length) await LocalNotifications.schedule({ notifications })
+  } catch { /* jamais bloquant */ }
+}

@@ -449,9 +449,13 @@ export function AuthProvider({ children }) {
     setPremiumStatus(premium);
     setAbonnement(lireAbonnement(profile));
 
-    // Mineur <15 ans : accès ouvert pendant l'attente de la réponse du parent,
-    // suspendu si rien n'est parti, en cas de refus ou sans réponse à temps.
-    const { blocked, ...detail } = consentGate({ under15: isUnder15(profile?.birthDate), consent: consentDoc });
+    // Mineur <15 ans : accès ouvert le temps de donner l'email d'un parent
+    // puis d'attendre sa réponse ; suspendu à l'issue d'un délai ou en cas de refus.
+    const { blocked, ...detail } = consentGate({
+      under15: isUnder15(profile?.birthDate),
+      consent: consentDoc,
+      inscritLe: Date.parse(user.metadata?.creationTime) || null,
+    });
     setConsentBlocked(blocked);
     setConsent(detail);
     setGateUid(user.uid);

@@ -39,7 +39,7 @@ function mode() {
 /**
  * @param {'essai_demarre'|'compte_cree'|'programme_ouvert'|'chapitre_ouvert'|'revision'|'quiz_termine'
  *   |'battle_creee'|'battle_rejointe'|'battle_terminee'|'battle_revanche'|'battle_compte_propose'|'battle_annonce_cta'
- *   |'installer_ouvert'|'app_installee'} event
+ *   |'installer_ouvert'|'app_installee'|'consent_envoye'|'consent_plus_tard'} event
  * @param {object} [props]  classe, matiere, format, source, joueur, issue, plateforme, via (listes fermées côté serveur)
  */
 export function track(event, props = {}) {

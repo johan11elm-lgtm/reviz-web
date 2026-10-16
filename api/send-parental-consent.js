@@ -7,14 +7,16 @@
 // Sans autorisation sous 10 jours (src/utils/consent.js), l'accès est suspendu.
 //
 // GET /api/send-parental-consent (cron Vercel quotidien, voir vercel.json)
-// Relance une fois les parents qui n'ont pas répondu au bout de 7 jours. Greffé
+// Relance une fois les parents qui n'ont pas répondu au bout de 7 jours, et
+// relance les élèves qui n'ont pas encore donné l'email d'un parent (« Plus
+// tard ») à J+3, J+10 et J+14 avant la mise en pause du compte. Greffé
 // ici plutôt que dans une 13e fonction (limite du plan Vercel Hobby). Seul
 // Vercel peut l'appeler : il envoie CRON_SECRET dans l'en-tête Authorization.
 
 import { Resend } from 'resend';
 import { randomUUID } from 'node:crypto';
 import { getDb, getAuthAdmin } from './_firebaseAdmin.js';
-import { DELAI_REPONSE_MS } from '../src/utils/consent.js';
+import { DELAI_ADRESSE_MS, DELAI_REPONSE_MS } from '../src/utils/consent.js';
 
 export const config = { maxDuration: 60 };
 
@@ -24,6 +26,8 @@ const JOUR_MS = 24 * 60 * 60 * 1000;
 // Relance unique, 3 jours avant la suspension de l'accès.
 export const RELANCE_APRES_MS = 7 * JOUR_MS;
 const EXPEDITEUR = 'Réviz <noreply@revizapp.fr>';
+// Relances de l'élève sans email parent, en jours depuis l'inscription.
+export const PALIERS_ELEVE = [3, 10, 14];
 
 function escapeHtml(s) {
   return String(s).replace(/[&<>"']/g, c => (
@@ -111,14 +115,92 @@ export async function relancerParents({ db, envoyer, maintenant = Date.now() }) 
   return { relances };
 }
 
+/** Email à l'élève qui n'a pas encore donné l'adresse d'un parent. */
+export function mailEleve({ prenom, joursRestants }) {
+  const safeName = escapeHtml(prenom || '');
+  const dernier = joursRestants <= 1;
+  const jours = `${joursRestants} jour${joursRestants > 1 ? 's' : ''}`;
+  return {
+    subject: dernier
+      ? 'Dernier jour : ton compte Réviz sera mis en pause demain'
+      : `Plus que ${jours} pour garder ton compte Réviz`,
+    html: `
+        <div style="font-family: -apple-system, sans-serif; max-width: 480px; margin: 0 auto; padding: 24px;">
+          <h1 style="font-size: 24px; color: #1A1A1A;">Réviz</h1>
+          <p style="color: #444; font-size: 16px; line-height: 1.5;">
+            ${safeName ? `Salut <strong>${safeName}</strong>,` : 'Salut,'}
+          </p>
+          <p style="color: #444; font-size: 16px; line-height: 1.5;">
+            Comme tu as moins de 15 ans, un de tes parents doit donner son accord pour que tu utilises Réviz.
+            ${dernier
+              ? 'C\'est le <strong>dernier jour</strong> pour nous donner son email : sans lui, ton compte sera mis en pause demain.'
+              : `Il te reste <strong>${jours}</strong> pour nous donner son email. Sans lui, ton compte sera mis en pause.`}
+          </p>
+          <p style="color: #444; font-size: 15px; line-height: 1.5;">
+            Ça prend 30 secondes : tu tapes son adresse, il reçoit un email avec un bouton pour accepter. Tu gardes tout ce que tu as révisé.
+          </p>
+          <a href="https://app.revizapp.fr/consent-pending" style="display: inline-block; background: #1A1A1A; color: white; padding: 14px 28px; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 15px;">Donner l'email de mon parent</a>
+          <p style="color: #888; font-size: 13px; margin-top: 24px;">
+            <a href="https://app.revizapp.fr/legal/confidentialite" style="color: #888;">Politique de confidentialité</a>
+          </p>
+        </div>
+      `,
+  };
+}
+
+/**
+ * Relance les élèves de moins de 15 ans qui n'ont pas encore donné l'email
+ * d'un parent : un email par palier (PALIERS_ELEVE) atteint, jamais deux le
+ * même jour (un palier manqué est rattrapé par le suivant, pas en double).
+ * @param {{ db, envoyer, emailDe:(uid:string)=>Promise<string|null>, maintenant?:number }} p
+ * @returns {Promise<{ relancesEleves: number }>}
+ */
+export async function relancerEleves({ db, envoyer, emailDe, maintenant = Date.now() }) {
+  const demandes = await db.collectionGroup('parentalConsent').get();
+  let relancesEleves = 0;
+  for (const doc of demandes.docs) {
+    const d = doc.data();
+    if (d.status !== 'pending' || d.parentEmail || !d.createdAt) continue;
+    const age = maintenant - d.createdAt;
+    if (age >= DELAI_ADRESSE_MS) continue;
+    const faits = Array.isArray(d.relancesEleve) ? d.relancesEleve : [];
+    const atteints = PALIERS_ELEVE.filter(p => age >= p * JOUR_MS);
+    const palier = atteints[atteints.length - 1];
+    if (palier == null || faits.includes(palier)) continue;
+
+    const uid = doc.ref.parent.parent.id;
+    try {
+      const to = await emailDe(uid);
+      if (!to) continue;
+      const profil = await db.collection('users').doc(uid).get().catch(() => null);
+      const mail = mailEleve({
+        prenom: profil?.exists ? profil.data()?.prenom : null,
+        joursRestants: Math.ceil((DELAI_ADRESSE_MS - age) / JOUR_MS),
+      });
+      await envoyer({ from: EXPEDITEUR, to, ...mail });
+      await doc.ref.update({ relancesEleve: [...new Set([...faits, ...atteints])] });
+      relancesEleves++;
+    } catch (err) {
+      console.error('[relance-eleve]', uid, err?.message || err);
+    }
+  }
+  return { relancesEleves };
+}
+
 export default async function handler(req, res) {
   if (req.method === 'GET') {
     const secret = process.env.CRON_SECRET;
     if (!secret || req.headers?.authorization !== `Bearer ${secret}`) return res.status(401).json({ error: 'UNAUTHORIZED' });
     try {
       const resend = new Resend(process.env.RESEND_API_KEY);
-      const resultat = await relancerParents({ db: getDb(), envoyer: m => resend.emails.send(m) });
-      return res.status(200).json(resultat);
+      const envoyer = m => resend.emails.send(m);
+      const db = getDb();
+      const parents = await relancerParents({ db, envoyer });
+      const eleves = await relancerEleves({
+        db, envoyer,
+        emailDe: uid => getAuthAdmin().getUser(uid).then(u => u.email || null, () => null),
+      });
+      return res.status(200).json({ ...parents, ...eleves });
     } catch (err) {
       console.error('[relance-parent]', err?.message || err);
       return res.status(500).json({ error: 'RELANCE_FAILED' });

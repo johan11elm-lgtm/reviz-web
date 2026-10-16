@@ -20,7 +20,7 @@ vi.mock('resend', () => ({
   Resend: class { constructor() { this.emails = { send: emailsSend } } },
 }))
 
-const { default: handler, relancerParents, RELANCE_APRES_MS } = await import('../send-parental-consent.js')
+const { default: handler, relancerParents, relancerEleves, RELANCE_APRES_MS } = await import('../send-parental-consent.js')
 
 function mockRes() {
   return {
@@ -218,3 +218,63 @@ describe('send-parental-consent — relance quotidienne (cron)', () => {
   })
 })
 
+
+describe('send-parental-consent — relance des élèves sans email parent (cron)', () => {
+  const DAY = 24 * 60 * 60 * 1000
+  const now = 1_800_000_000_000
+  function fakeDb(demandes, profils = {}) {
+    const docs = Object.entries(demandes).map(([uid, data]) => ({
+      data: () => data,
+      ref: { parent: { parent: { id: uid } }, update: vi.fn(async () => {}) },
+    }))
+    return {
+      docs,
+      collectionGroup: () => ({ get: async () => ({ docs }) }),
+      collection: () => ({ doc: uid => ({ get: async () => ({ exists: !!profils[uid], data: () => profils[uid] }) }) }),
+    }
+  }
+  const sansAdresse = (depuis, extra = {}) => ({ status: 'pending', createdAt: now - depuis, ...extra })
+  const emailDe = async uid => `${uid}@eleve.fr`
+
+  it('J+3 : un email à l\'élève avec les jours restants et le lien vers l\'écran parent', async () => {
+    const db = fakeDb({ u1: sansAdresse(3 * DAY + DAY / 2) }, { u1: { prenom: 'Léa' } })
+    const envoyer = vi.fn(async () => {})
+    expect(await relancerEleves({ db, envoyer, emailDe, maintenant: now })).toEqual({ relancesEleves: 1 })
+    const mail = envoyer.mock.calls[0][0]
+    expect(mail.to).toBe('u1@eleve.fr')
+    expect(mail.subject).toContain('Plus que 12 jours')
+    expect(mail.html).toContain('Léa')
+    expect(mail.html).toContain('app.revizapp.fr/consent-pending')
+    expect(db.docs[0].ref.update).toHaveBeenCalledWith({ relancesEleve: [3] })
+  })
+
+  it('J+14 : dernier jour ; un palier manqué n\'est pas envoyé en double', async () => {
+    const db = fakeDb({ u1: sansAdresse(14 * DAY + DAY / 2, { relancesEleve: [3] }) })
+    const envoyer = vi.fn(async () => {})
+    expect(await relancerEleves({ db, envoyer, emailDe, maintenant: now })).toEqual({ relancesEleves: 1 })
+    expect(envoyer.mock.calls[0][0].subject).toContain('Dernier jour')
+    expect(db.docs[0].ref.update).toHaveBeenCalledWith({ relancesEleve: [3, 10, 14] })
+  })
+
+  it('ne relance pas : trop tôt, palier déjà fait, délai écoulé, email parent donné, autorisé, sans email', async () => {
+    const db = fakeDb({
+      tot: sansAdresse(2 * DAY),
+      fait: sansAdresse(4 * DAY, { relancesEleve: [3] }),
+      tard: sansAdresse(15 * DAY),
+      parent: sansAdresse(4 * DAY, { parentEmail: 'p@f.fr', token: 't' }),
+      ok: sansAdresse(4 * DAY, { status: 'approved' }),
+      anonyme: sansAdresse(4 * DAY),
+    })
+    const envoyer = vi.fn(async () => {})
+    const emailSauf = async uid => (uid === 'anonyme' ? null : `${uid}@eleve.fr`)
+    expect(await relancerEleves({ db, envoyer, emailDe: emailSauf, maintenant: now })).toEqual({ relancesEleves: 0 })
+    expect(envoyer).not.toHaveBeenCalled()
+  })
+
+  it('un envoi en échec n\'est pas marqué (réessayé le lendemain)', async () => {
+    const db = fakeDb({ u1: sansAdresse(3 * DAY) })
+    const envoyer = vi.fn(async () => { throw new Error('resend down') })
+    expect(await relancerEleves({ db, envoyer, emailDe, maintenant: now })).toEqual({ relancesEleves: 0 })
+    expect(db.docs[0].ref.update).not.toHaveBeenCalled()
+  })
+})
