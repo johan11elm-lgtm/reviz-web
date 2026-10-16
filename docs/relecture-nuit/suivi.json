@@ -514,6 +514,11 @@
       "chemin": "4eme/maths/probabilites",
       "le": "2026-10-16",
       "corrections": 2
+    },
+    {
+      "chemin": "4eme/maths/nombres-premiers",
+      "le": "2026-10-16",
+      "corrections": 0
     }
   ]
 }
