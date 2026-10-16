@@ -489,6 +489,11 @@
       "chemin": "4eme/maths/puissances",
       "le": "2026-10-16",
       "corrections": 0
+    },
+    {
+      "chemin": "4eme/maths/translations-et-rotations",
+      "le": "2026-10-16",
+      "corrections": 0
     }
   ]
 }
