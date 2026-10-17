@@ -116,3 +116,31 @@ describe('refreshReminder', () => {
     expect(mockNotif.schedule).not.toHaveBeenCalled()
   })
 })
+
+describe('planifierRappelLendemain', () => {
+  it('pose une notification le lendemain à 18 h 30, avec le chapitre', async () => {
+    const svc = await loadService()
+    await svc.planifierRappelLendemain({ titre: 'Le théorème de Pythagore' }, new Date(2026, 9, 16, 21, 0))
+    const [{ notifications: [n] }] = mockNotif.schedule.mock.calls[0]
+    expect(n.id).toBe(4000)
+    expect(n.schedule.at).toEqual(new Date(2026, 9, 17, 18, 30))
+    expect(n.body).toContain('Pythagore')
+  })
+
+  it('ne demande jamais la permission, et annule quand l’élève est revenu', async () => {
+    const svc = await loadService()
+    mockNotif.checkPermissions.mockResolvedValue({ display: 'prompt' })
+    await svc.planifierRappelLendemain({ titre: null })
+    expect(mockNotif.requestPermissions).not.toHaveBeenCalled()
+    expect(mockNotif.schedule).not.toHaveBeenCalled()
+    await svc.planifierRappelLendemain(null)
+    expect(mockNotif.cancel).toHaveBeenLastCalledWith({ notifications: [{ id: 4000 }] })
+  })
+
+  it('rien sur le web', async () => {
+    mockIsNative.mockReturnValue(false)
+    const svc = await loadService()
+    await svc.planifierRappelLendemain({ titre: 'x' })
+    expect(mockNotif.cancel).not.toHaveBeenCalled()
+  })
+})

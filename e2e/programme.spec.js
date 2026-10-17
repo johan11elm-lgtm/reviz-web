@@ -17,6 +17,24 @@ async function mockProgramme(page) {
     route.fulfill({ status: 200, contentType: 'application/json', body: fixture('thales.json') }))
 }
 
+// Lecture directe de l'émulateur Firestore (règles contournées) : le profil
+// du compte dont l'email est donné, et ses révisions.
+const EMULATEUR = 'http://127.0.0.1:8080/v1/projects/demo-reviz/databases/(default)/documents'
+async function profilEmulateur(email) {
+  const res = await fetch(`${EMULATEUR}:runQuery`, {
+    method: 'POST',
+    headers: { Authorization: 'Bearer owner', 'Content-Type': 'application/json' },
+    body: JSON.stringify({ structuredQuery: {
+      from: [{ collectionId: 'users' }],
+      where: { fieldFilter: { field: { fieldPath: 'email' }, op: 'EQUAL', value: { stringValue: email } } },
+    } }),
+  })
+  const [hit] = await res.json()
+  if (!hit?.document) return null
+  const revs = await fetch(`${hit.document.name.replace(/^.*\/documents/, EMULATEUR)}/revisions`, { headers: { Authorization: 'Bearer owner' } })
+  return { profil: hit.document.fields, revisions: (await revs.json()).documents ?? [] }
+}
+
 test.describe('Mon programme', () => {
   test('mode essai : prénom + classe, puis un chapitre de 3e révisé sans compte', async ({ page }) => {
     await mockApiRoutes(page)
@@ -103,6 +121,19 @@ test.describe('Mon programme', () => {
     await expect(page.getByText('Le théorème de Thalès').first()).toBeVisible()
     await expect(page.getByRole('button', { name: /^Mon programme Révise chapitre par chapitre/ })).toBeVisible()
     await page.screenshot({ path: test.info().outputPath('cours-avec-chapitre.png') })
+
+    // Une révision du programme est enregistrée sur le compte, avec son
+    // chapitre, et la première session est notée pour le rappel du lendemain.
+    await page.goto('/quiz')
+    await expect(page.getByText('Que faut-il pour appliquer le théorème de Thalès ?')).toBeVisible()
+    await expect.poll(async () => {
+      const r = await profilEmulateur(email)
+      return {
+        chapitre: r?.profil?.premiereSession?.mapValue?.fields?.chapterId?.stringValue,
+        derniere: !!r?.profil?.derniereRevisionAt,
+        revision: r?.revisions.map(d => [d.fields.type.stringValue, d.fields.chapterId?.stringValue, d.fields.source?.stringValue])[0],
+      }
+    }, { timeout: 10_000 }).toEqual({ chapitre: 'theoreme-de-thales', derniere: true, revision: ['quiz', 'theoreme-de-thales', 'programme'] })
   })
 })
 

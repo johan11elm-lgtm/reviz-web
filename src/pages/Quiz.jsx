@@ -2,7 +2,7 @@ import { PageIntro } from '../components/PageIntro'
 import { RefreshIcon, ChatIcon, CheckIcon, XIcon } from '../components/Icons'
 import { useState, useEffect, useMemo } from 'react'
 import { Link } from 'react-router-dom'
-import { recordRevision } from '../services/revisionService'
+import { recordRevision, markRevisionDone } from '../services/revisionService'
 import { PageHeader } from '../components/PageHeader'
 import { Mascot } from '../components/Mascot'
 import { MissingLessonState } from '../components/MissingLessonState'
@@ -166,6 +166,7 @@ function QuizSession() {
   function nextQuestion() {
     if (current + 1 >= questions.length) {
       setShowEnd(true)
+      markRevisionDone('quiz', { score, total: questions.length })
       track('quiz_termine', { source: coachLessonId?.startsWith('prog-') ? 'programme' : 'scan' })
     } else {
       setCurrent(p => p + 1)

@@ -159,3 +159,32 @@ export async function planifierRappelsParent(joursRestants) {
     if (notifications.length) await LocalNotifications.schedule({ notifications })
   } catch { /* jamais bloquant */ }
 }
+
+// --- Lendemain de la première session : identifiant 4000 ---
+// Posé le jour où l'élève révise pour la première fois, pour le lendemain à
+// 18 h 30 ; annulé dès qu'il revient un autre jour. Seulement si la
+// permission est déjà accordée : jamais de demande ici.
+const LENDEMAIN_ID = 4000
+
+export function rappelLendemain(titre) {
+  return titre
+    ? { title: 'Ton chapitre d\'hier t\'attend', body: `${titre}. Cinq minutes de quiz pour vérifier que tu t'en souviens ?` }
+    : { title: 'Ta révision d\'hier t\'attend', body: 'Cinq minutes de quiz pour vérifier que tu t\'en souviens ?' }
+}
+
+/**
+ * @param {{ titre: string|null }|null} premiereSession  null pour annuler
+ */
+export async function planifierRappelLendemain(premiereSession, maintenant = new Date()) {
+  if (!remindersAvailable()) return
+  try {
+    await LocalNotifications.cancel({ notifications: [{ id: LENDEMAIN_ID }] }).catch(() => {})
+    if (!premiereSession) return
+    const perm = await LocalNotifications.checkPermissions()
+    if (perm.display !== 'granted') return
+    const at = new Date(maintenant.getFullYear(), maintenant.getMonth(), maintenant.getDate() + 1, REMINDER_HOUR, REMINDER_MINUTE)
+    await LocalNotifications.schedule({
+      notifications: [{ id: LENDEMAIN_ID, ...rappelLendemain(premiereSession.titre), schedule: { at, allowWhileIdle: true } }],
+    })
+  } catch { /* jamais bloquant */ }
+}

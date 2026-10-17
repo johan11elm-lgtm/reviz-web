@@ -50,7 +50,7 @@ const PAGES = {
     title: 'Politique de confidentialité',
     content: () => (
       <>
-        <p className="legal-updated">Dernière mise à jour : 16 octobre 2026</p>
+        <p className="legal-updated">Dernière mise à jour : 17 octobre 2026</p>
 
         <Section title="Données collectées">
           <ul>
@@ -58,7 +58,8 @@ const PAGES = {
             <li><strong>Connexion avec Google, Apple, Microsoft ou TikTok</strong> — si tu choisis de te connecter avec l'un de ces services, il nous transmet ton nom ou ton pseudo, ton adresse email quand il la fournit (Apple peut la remplacer par une adresse masquée, TikTok ne la fournit pas) et un identifiant technique propre à Réviz. Nous ne recevons jamais ton mot de passe, ni tes contacts, vidéos, publications ou abonnés.</li>
             <li><strong>Date de naissance</strong> — collectée à l'inscription, uniquement pour déterminer si le consentement parental est requis (moins de 15 ans, art. 45 de la loi Informatique et Libertés).</li>
             <li><strong>Leçons scannées</strong> — le texte ou l'image de tes leçons, envoyé à l'IA pour générer les contenus de révision. Ces données ne sont pas conservées côté serveur après traitement.</li>
-            <li><strong>Historique</strong> — tes leçons et révisions sont stockées localement sur ton appareil (localStorage) et synchronisées dans ta collection Firestore personnelle.</li>
+            <li><strong>Historique</strong> — tes leçons et révisions (format, chapitre, date, score d'un quiz terminé) sont stockées localement sur ton appareil (localStorage) et synchronisées dans ta collection Firestore personnelle. La date de ta première et de ta dernière révision est notée sur ton profil.</li>
+            <li><strong>Mode essai (sans compte)</strong> — pour savoir combien d'élèves reviennent réviser, chaque révision est enregistrée avec un identifiant tiré au hasard sur ton appareil : format, chapitre, classe, matière et date, sans prénom ni rien qui permette de savoir qui tu es. Ces données ne servent qu'à des statistiques et sont effacées 13 mois après ta dernière révision. Si tu crées un compte, ta progression d'essai y est reprise.</li>
             <li><strong>Agenda</strong> — les contrôles que tu notes (matière, date, sujet facultatif), et, si tu relies Pronote, l'adresse de ton emploi du temps, enregistrées sur ton compte. Réviz lit avec cette adresse tes horaires de cours, pour les afficher ; il ne voit ni tes notes, ni tes devoirs, ni tes absences, et ne conserve pas tes cours sur ses serveurs. Tu peux délier Pronote à tout moment depuis l'Agenda.</li>
             <li><strong>Battle</strong> — pour jouer à deux en direct : le prénom ou le surnom que tu choisis, tes réponses et tes temps de réponse. Sans compte, rien d'autre : un identifiant technique anonyme (Firebase) relie tes réponses à la partie, sans email ni date de naissance. Avec un compte, ton total d'aura et ton nombre de battles jouées et gagnées sont ajoutés à ton profil.</li>
             <li><strong>Avis</strong> — ce que tu écris sur la page « Votre avis » (profil, réponses, e-mail facultatif pour recevoir une réponse), sans compte ni identifiant. Conservés 2 ans au plus, supprimés sur simple demande.</li>
@@ -70,6 +71,7 @@ const PAGES = {
           <ul>
             <li>Fournir le service de révision (génération IA, suivi de progression).</li>
             <li>Authentifier les utilisateurs.</li>
+            <li>T'envoyer, le lendemain de ta première révision, un seul email de rappel qui te ramène sur ton chapitre (et une notification sur l'application mobile, si tu les as autorisées). Pas d'email de rappel avant 15 ans sans l'autorisation d'un parent. Tu peux t'en désinscrire d'un clic depuis l'email.</li>
             <li>Améliorer l'application.</li>
           </ul>
         </Section>
@@ -101,6 +103,7 @@ const PAGES = {
           <ul>
             <li>Données de compte (y compris l'identifiant transmis par Google, Apple, Microsoft ou TikTok) : jusqu'à suppression du compte. Si tu as créé ton compte avec Apple dans l'app iPhone, sa suppression retire aussi l'accès que tu avais donné à Réviz chez Apple. Pour les autres services, tu peux retirer cet accès à tout moment depuis les réglages de ton compte Google, Microsoft ou TikTok.</li>
             <li>Leçons et révisions : jusqu'à suppression par l'utilisateur (max 100 leçons conservées).</li>
+            <li>Révisions en mode essai : 13 mois après la dernière révision.</li>
             <li>Parties de Battle : supprimées automatiquement au plus tard 48 heures après leur création. Avec un compte, l'aura totale et le nombre de battles restent sur ton profil jusqu'à la suppression du compte.</li>
             <li>Agenda : adresse Pronote jusqu'à ce que tu délies Pronote ou supprimes ton compte ; contrôles jusqu'à ce que tu les retires ou supprimes ton compte (ceux passés depuis plus d'un mois sont effacés quand tu en notes un nouveau).</li>
             <li>Logs serveur : 30 jours maximum.</li>
