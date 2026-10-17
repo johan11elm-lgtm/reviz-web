@@ -17,6 +17,8 @@ export const EVENTS = [
   'battle_creee', 'battle_rejointe', 'battle_terminee', 'battle_revanche', 'battle_compte_propose', 'battle_annonce_cta',
   // Installation de la web app : tutoriel ouvert, installation confirmée par le navigateur.
   'installer_ouvert', 'app_installee',
+  // Autorisation parentale : email du parent envoyé, ou « Plus tard » (15 jours pour le donner).
+  'consent_envoye', 'consent_plus_tard',
   // Lancement : clic « Scanner une leçon » dans la popup « Réviz+ offert ».
   'revizplus_offert_cta',
 ]

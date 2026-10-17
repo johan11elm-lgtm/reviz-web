@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { consentGate, DELAI_REPONSE_MS } from '../consent.js'
+import { consentGate, DELAI_ADRESSE_MS, DELAI_REPONSE_MS } from '../consent.js'
 
 const DAY = 24 * 60 * 60 * 1000
 const now = 1_800_000_000_000
@@ -14,9 +14,23 @@ describe('consentGate', () => {
     expect(gate({ status: 'approved' })).toMatchObject({ status: 'ok', blocked: false })
   })
 
-  it('aucun email parti (doc absent ou trace du signup) → à demander, bloqué', () => {
+  it('pas encore d\'email parent, inscrit aujourd\'hui → à fournir, accès ouvert 15 jours', () => {
+    expect(gate({ status: 'pending', createdAt: now }))
+      .toEqual({ status: 'a-fournir', blocked: false, parentEmail: null, joursRestants: 15 })
+  })
+
+  it('compte Google sans doc : le délai part de la création du compte', () => {
+    expect(consentGate({ under15: true, consent: null, inscritLe: now - 4 * DAY, now }))
+      .toMatchObject({ status: 'a-fournir', blocked: false, joursRestants: 11 })
+  })
+
+  it('pas d\'email parent après 15 jours → à demander, bloqué', () => {
+    expect(gate({ status: 'pending', createdAt: now - DELAI_ADRESSE_MS })).toMatchObject({ status: 'a-demander', blocked: true })
+    expect(consentGate({ under15: true, consent: null, inscritLe: now - 16 * DAY, now })).toMatchObject({ status: 'a-demander', blocked: true })
+  })
+
+  it('aucune date connue → à demander, bloqué', () => {
     expect(gate(null)).toMatchObject({ status: 'a-demander', blocked: true })
-    expect(gate({ status: 'pending', createdAt: now })).toMatchObject({ status: 'a-demander', blocked: true })
   })
 
   it('email parti, délai en cours → accès ouvert avec les jours restants', () => {

@@ -2,7 +2,9 @@ import { Mascot } from '../components/Mascot';
 import { useState } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { CYCLES, CLASSES_BY_CYCLE, SPECIALITES_LYCEE, needsSpecialites } from '../utils/levels';
+import { CYCLES, CLASSES_BY_CYCLE, SPECIALITES_LYCEE, needsSpecialites, isUnder15 } from '../utils/levels';
+import { doc, setDoc } from 'firebase/firestore';
+import { db } from '../services/firebaseConfig';
 import { createUserProfile } from '../services/userProfileService';
 import { useIsDesktop } from '../hooks/useMediaQuery';
 import ChampDateNaissance from '../components/ChampDateNaissance';
@@ -10,8 +12,8 @@ import './Inscription.css';
 
 // Écran de complétion de profil pour les nouveaux comptes sans mot de passe
 // (Google, Apple, Microsoft, TikTok) : collecte date de naissance + niveau,
-// et le prénom quand le fournisseur ne l'a pas transmis (Apple, e-mail masqué). Le gate redirige ensuite les <15 ans
-// vers /consent-pending (consentement parental) automatiquement.
+// et le prénom quand le fournisseur ne l'a pas transmis (Apple, e-mail masqué). Les <15 ans
+// passent ensuite par /consent-pending : email d'un parent maintenant, ou « Plus tard » (15 jours).
 export default function FinishSetup() {
   const { currentUser, setUserLevel, refreshGate, updateDisplayName } = useAuth();
   const navigate = useNavigate();
@@ -55,10 +57,18 @@ export default function FinishSetup() {
         birthDate,
         level,
       });
+      const mineur = isUnder15(birthDate);
+      // Même trace 'pending' que l'inscription par email : date le début des
+      // 15 jours pour donner l'email du parent, et sert aux relances.
+      if (mineur) {
+        await setDoc(doc(db, 'users', currentUser.uid, 'parentalConsent', 'consent'), {
+          status: 'pending',
+          createdAt: Date.now(),
+        }).catch(() => { /* déjà posée : les règles refusent la réécriture */ });
+      }
       setUserLevel(level);
       await refreshGate?.();
-      // Le gate redirige les <15 ans vers /consent-pending automatiquement.
-      navigate('/', { replace: true });
+      navigate(mineur ? '/consent-pending' : '/', { replace: true });
     } catch {
       setError('Une erreur est survenue. Réessaie.');
       setLoading(false);
@@ -164,7 +174,7 @@ export default function FinishSetup() {
             {intro}
             <ul className="auth-desk-why">
               <li><strong>Ta classe</strong> choisit le programme et les chapitres qu'on te propose.</li>
-              <li><strong>Ta date de naissance</strong> : sous 15 ans, on prévient un de tes parents. Tu commences tout de suite, il a 10 jours pour donner son autorisation.</li>
+              <li><strong>Ta date de naissance</strong> : sous 15 ans, il faudra l'email d'un de tes parents, tout de suite ou dans les 15 jours. Tu commences à réviser sans attendre.</li>
             </ul>
           </div>
           <div className="auth-desk-card">

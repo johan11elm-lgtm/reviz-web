@@ -2,19 +2,27 @@ import { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { sendParentalConsent, consentErrorMessage } from '../services/consentService';
+import { track } from '../services/statsService';
 import { useIsDesktop } from '../hooks/useMediaQuery';
 import { Mascot } from '../components/Mascot';
 import './Inscription.css';
 import './ConsentPending.css';
 
-// Écran affiché seulement quand l'accès d'un <15 ans est suspendu :
-// email parent jamais parti, délai de réponse écoulé, ou refus du parent.
-// Pendant l'attente de la réponse, l'élève utilise l'app normalement.
+// Écran de l'email du parent pour un <15 ans. Choisi librement pendant les
+// 15 jours pour le donner (« a-fournir », avec « Plus tard ») ; imposé quand
+// l'accès est suspendu : délai d'adresse écoulé, délai de réponse écoulé, ou
+// refus du parent. Pendant l'attente de la réponse, l'app reste ouverte.
 const TEXTES = {
-  'a-demander': {
-    titre: 'Préviens un parent',
-    intro: 'Comme tu as moins de 15 ans, on envoie un email à un de tes parents pour lui dire que tu utilises Réviz. Tu peux réviser tout de suite.',
+  'a-fournir': {
+    titre: 'Une dernière chose',
+    intro: (jours) => `Comme tu as moins de 15 ans, un de tes parents doit donner son accord par email. Pas son adresse sous la main ? Commence quand même : il te reste ${jours} jour${jours > 1 ? 's' : ''} pour la donner.`,
     bouton: 'Envoyer et commencer',
+    pose: 'retour',
+  },
+  'a-demander': {
+    titre: 'Ton compte est en pause',
+    intro: 'Les 15 jours pour donner l\'email d\'un de tes parents sont passés. Donne-le maintenant : tu retrouves tout dès l\'envoi.',
+    bouton: 'Envoyer et reprendre',
     pose: 'retour',
   },
   'sans-reponse': {
@@ -48,7 +56,11 @@ export default function ConsentPending() {
   const [msg, setMsg]         = useState('');
 
   const prenom = currentUser?.displayName ?? '';
-  const textes = TEXTES[consent?.status] ?? TEXTES['a-demander'];
+  const statut = consent?.status ?? 'a-demander';
+  const textes = TEXTES[statut] ?? TEXTES['a-demander'];
+  const intro = typeof textes.intro === 'function' ? textes.intro(consent?.joursRestants ?? 15) : textes.intro;
+  // Pendant les 15 jours, cet écran est un choix : pas de redirection auto.
+  const plusTardPossible = statut === 'a-fournir';
 
   // L'email du parent arrive avec le gate (Firestore) : pré-remplit le champ.
   useEffect(() => {
@@ -57,14 +69,20 @@ export default function ConsentPending() {
 
   // Accès rouvert (email parti, parent qui accepte) → on entre.
   useEffect(() => {
-    if (currentUser && !consentBlocked) navigate('/', { replace: true });
-  }, [currentUser, consentBlocked, navigate]);
+    if (currentUser && !consentBlocked && consent?.status !== 'a-fournir') navigate('/', { replace: true });
+  }, [currentUser, consentBlocked, consent?.status, navigate]);
+
+  function plusTard() {
+    track('consent_plus_tard');
+    navigate('/', { replace: true });
+  }
 
   async function handleSend() {
     if (!/^\S+@\S+\.\S+$/.test(parentEmail.trim())) { setMsg('Adresse email invalide.'); return; }
     setLoading(true); setMsg('');
     try {
       await sendParentalConsent(parentEmail.trim(), prenom);
+      track('consent_envoye');
       setSent(true);
       // Premier envoi : l'accès s'ouvre, le useEffect ci-dessus redirige.
       await refreshGate?.();
@@ -120,6 +138,12 @@ export default function ConsentPending() {
           {checking ? 'Vérification…' : 'Il a accepté : vérifier'}
         </button>
       )}
+      {plusTardPossible && !sent && (
+        <button type="button" className="auth-btn-plus-tard" onClick={plusTard}>
+          Plus tard, je commence à réviser →
+          <small>Il te reste {consent?.joursRestants ?? 15} jour{(consent?.joursRestants ?? 15) > 1 ? 's' : ''} pour donner l'email</small>
+        </button>
+      )}
       <button type="button" className="cp-deconnexion" onClick={handleLogout}>
         Se déconnecter
       </button>
@@ -134,8 +158,8 @@ export default function ConsentPending() {
           <div className="auth-desk-intro">
             <span className="auth-desk-mascot"><Mascot pose={textes.pose} size={132} alt="" aria-hidden="true" /></span>
             <h1 className="signup-question">{textes.titre}</h1>
-            <p className="signup-hint">{textes.intro}</p>
-            {(consent?.status ?? 'a-demander') === 'a-demander' && (
+            <p className="signup-hint">{intro}</p>
+            {(statut === 'a-demander' || statut === 'a-fournir') && (
               <ul className="auth-desk-why">
                 {ETAPES.map((e, i) => <li key={i}>{e}</li>)}
               </ul>
@@ -156,7 +180,7 @@ export default function ConsentPending() {
       <div className="auth-content signup-content cp-content">
         <Mascot pose={textes.pose} size={112} className="cp-mascot" alt="" aria-hidden="true" />
         <h1 className="signup-question">{textes.titre}</h1>
-        <p className="signup-hint">{textes.intro}</p>
+        <p className="signup-hint">{intro}</p>
         {champ}
         {envoye}
       </div>
