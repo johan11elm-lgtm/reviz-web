@@ -9,7 +9,8 @@
 // GET /api/send-parental-consent (cron Vercel quotidien, voir vercel.json)
 // Relance une fois les parents qui n'ont pas répondu au bout de 7 jours, et
 // relance les élèves qui n'ont pas encore donné l'email d'un parent (« Plus
-// tard ») à J+3, J+10 et J+14 avant la mise en pause du compte. Greffé
+// tard ») à J+3, J+10 et J+14 avant la mise en pause du compte. Envoie aussi
+// le rappel du lendemain de la première session (api/_rappels.js). Greffé
 // ici plutôt que dans une 13e fonction (limite du plan Vercel Hobby). Seul
 // Vercel peut l'appeler : il envoie CRON_SECRET dans l'en-tête Authorization.
 
@@ -17,6 +18,7 @@ import { Resend } from 'resend';
 import { randomUUID } from 'node:crypto';
 import { getDb, getAuthAdmin } from './_firebaseAdmin.js';
 import { DELAI_ADRESSE_MS, DELAI_REPONSE_MS } from '../src/utils/consent.js';
+import { relancerLendemain } from './_rappels.js';
 
 export const config = { maxDuration: 60 };
 
@@ -196,11 +198,12 @@ export default async function handler(req, res) {
       const envoyer = m => resend.emails.send(m);
       const db = getDb();
       const parents = await relancerParents({ db, envoyer });
-      const eleves = await relancerEleves({
-        db, envoyer,
-        emailDe: uid => getAuthAdmin().getUser(uid).then(u => u.email || null, () => null),
-      });
-      return res.status(200).json({ ...parents, ...eleves });
+      const emailDe = uid => getAuthAdmin().getUser(uid).then(u => u.email || null, () => null);
+      const eleves = await relancerEleves({ db, envoyer, emailDe });
+      // Un échec du rappel J+1 ne doit pas masquer les relances déjà faites.
+      const lendemain = await relancerLendemain({ db, envoyer, emailDe })
+        .catch(err => { console.error('[rappel-j1]', err?.message || err); return { rappelsJ1: 0 }; });
+      return res.status(200).json({ ...parents, ...eleves, ...lendemain });
     } catch (err) {
       console.error('[relance-parent]', err?.message || err);
       return res.status(500).json({ error: 'RELANCE_FAILED' });

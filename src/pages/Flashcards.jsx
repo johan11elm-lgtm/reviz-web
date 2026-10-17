@@ -2,7 +2,7 @@ import { PageIntro } from '../components/PageIntro'
 import { RefreshIcon, ChatIcon, FlameIcon } from '../components/Icons'
 import { useState, useEffect, useMemo } from 'react'
 import { Link } from 'react-router-dom'
-import { recordRevision } from '../services/revisionService'
+import { recordRevision, markRevisionDone } from '../services/revisionService'
 import { getDueCards, updateCardState } from '../services/srsService'
 import { PageHeader } from '../components/PageHeader'
 import { Mascot } from '../components/Mascot'
@@ -91,6 +91,7 @@ function FlashcardsSession() {
       const nextIndex = current + 1
       if (nextIndex >= flashcards.length) {
         setShowEnd(true)
+        markRevisionDone('flashcards')
       } else {
         setCurrent(nextIndex)
         setIsFlipped(false)

@@ -28,7 +28,7 @@ import { parseLevel, serializeLevel, migrateLegacyClasse, isUnder15 } from '../u
 import { consentGate } from '../utils/consent';
 import { createUserProfile } from '../services/userProfileService';
 import { setActiveUser, pushLessonsToFirestore } from '../services/historyService';
-import { setActiveUser as setRevisionUser, pushRevisionsToFirestore } from '../services/revisionService';
+import { setActiveUser as setRevisionUser, pushRevisionsToFirestore, lierEssai } from '../services/revisionService';
 import { readGuest, startGuest, clearGuest, guestUser, isGuestUid, migrateGuestLocalData } from '../services/guestService';
 import { setSrsUser } from '../services/srsService';
 import { setChallengeUser } from '../services/challengeService';
@@ -490,6 +490,7 @@ export function AuthProvider({ children }) {
           bindServicesToUser(user.uid);
           pushLessonsToFirestore(lessons);
           pushRevisionsToFirestore(revisions);
+          lierEssai(g.uid);
         }
       }
       bindServicesToUser(user?.uid ?? null);
