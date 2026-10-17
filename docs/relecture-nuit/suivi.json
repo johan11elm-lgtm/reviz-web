@@ -519,6 +519,11 @@
       "chemin": "4eme/maths/nombres-premiers",
       "le": "2026-10-16",
       "corrections": 0
+    },
+    {
+      "chemin": "4eme/maths/algorithmique-et-programmation",
+      "le": "2026-10-17",
+      "corrections": 0
     }
   ]
 }
