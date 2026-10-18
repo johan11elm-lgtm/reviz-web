@@ -1,6 +1,7 @@
-// Tunnel mineur <15 ans : étape parent obligatoire, puis l'élève entre dans
-// l'app pendant que le parent décide. Un refus suspend l'accès. Exerce pour
-// de vrai les règles Firestore (doc parentalConsent 'pending' au signup).
+// Tunnel mineur <15 ans : l'élève entre dans l'app dès l'inscription, avec
+// 15 jours pour donner l'email d'un parent (« Plus tard »), puis pendant que le
+// parent décide. Un refus ou un délai écoulé suspend l'accès. Exerce pour de
+// vrai les règles Firestore (doc parentalConsent 'pending' au signup).
 import { test, expect } from '@playwright/test'
 import { mockApiRoutes, signup, ecrireConsentementEmulateur, remplirNaissance } from './helpers'
 
@@ -13,6 +14,16 @@ async function uidCourant(page) {
     }
     return JSON.parse(localStorage.getItem('reviz-session') ?? '{}').uid
   })
+}
+
+// Les annonces d'accueil (Réviz+ offert, Battle) passent devant le bandeau :
+// on les referme comme un élève pressé.
+async function fermerAnnonces(page) {
+  for (let i = 0; i < 2; i++) {
+    const bouton = page.getByRole('dialog').getByRole('button', { name: 'Plus tard' })
+    if (!(await bouton.isVisible().catch(() => false))) return
+    await bouton.click()
+  }
 }
 
 test.describe('Consentement parental (<15 ans)', () => {
@@ -68,7 +79,7 @@ test.describe('Consentement parental (<15 ans)', () => {
     await expect(page.getByText(/pas le tien/)).toBeVisible()
   })
 
-  test('tunnel abandonné avant l\'étape parent → il faut prévenir un parent pour entrer', async ({ page }) => {
+  test('tunnel abandonné avant l\'étape parent → l\'élève entre quand même, puis le compte se met en pause au bout de 15 jours', async ({ page }) => {
     await mockApiRoutes(page)
     await page.goto('/inscription')
     await page.getByPlaceholder('Lucas').fill('Pressé')
@@ -83,12 +94,40 @@ test.describe('Consentement parental (<15 ans)', () => {
     await page.getByRole('button', { name: 'Créer mon compte' }).click()
     await expect(page.getByPlaceholder('parent@exemple.com')).toBeVisible({ timeout: 15_000 })
 
-    // L'élève quitte l'étape parent : l'app le renvoie vers « Préviens un parent ».
+    // L'élève quitte l'étape parent sans donner d'email : depuis le « Plus tard »
+    // (16/10), il entre quand même et a 15 jours pour le donner (statut a-fournir).
     await page.goto('/')
-    await expect(page).toHaveURL(/consent-pending/, { timeout: 15_000 })
-    await expect(page.getByText('Préviens un parent')).toBeVisible()
-    await page.getByPlaceholder('parent@exemple.com').fill('parent@famille.test')
-    await page.getByRole('button', { name: 'Envoyer et commencer' }).click()
+    await expect(page).toHaveURL(/onboarding/, { timeout: 15_000 })
+    await page.getByRole('button', { name: 'Passer' }).click()
+    await expect(page).not.toHaveURL(/consent-pending|onboarding/, { timeout: 15_000 })
+    await expect(page.getByText("Email d'un parent")).toBeVisible({ timeout: 15_000 })
+
+    // Le lien du bandeau mène à l'écran parent, encore facultatif à ce stade.
+    await fermerAnnonces(page)
+    await page.getByRole('link', { name: 'Le donner' }).click()
+    await expect(page).toHaveURL(/consent-pending/)
+    await expect(page.getByText('Une dernière chose')).toBeVisible()
+    await page.getByRole('button', { name: /Plus tard/ }).click()
     await expect(page).not.toHaveURL(/consent-pending/, { timeout: 15_000 })
+
+    // 15 jours passés sans email (on vieillit le doc pending) → compte en pause,
+    // l'écran parent devient obligatoire.
+    const uid = await uidCourant(page)
+    const ilYA16Jours = Date.now() - 16 * 24 * 60 * 60 * 1000
+    await ecrireConsentementEmulateur(uid, {
+      status: { stringValue: 'pending' },
+      createdAt: { integerValue: String(ilYA16Jours) },
+    })
+    await page.reload()
+    await expect(page).toHaveURL(/consent-pending/, { timeout: 15_000 })
+    await expect(page.getByText('Ton compte est en pause')).toBeVisible()
+    await page.goto('/scan')
+    await expect(page).toHaveURL(/consent-pending/)
+
+    // Il donne enfin l'email : l'accès reprend le temps que le parent réponde.
+    await page.getByPlaceholder('parent@exemple.com').fill('parent@famille.test')
+    await page.getByRole('button', { name: 'Envoyer et reprendre' }).click()
+    await expect(page).not.toHaveURL(/consent-pending/, { timeout: 15_000 })
+    await expect(page.getByText('Accord parental en attente')).toBeVisible({ timeout: 15_000 })
   })
 })
