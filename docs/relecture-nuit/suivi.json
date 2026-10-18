@@ -584,6 +584,11 @@
       "chemin": "4eme/francais/voix-passive-et-forme-impersonnelle",
       "le": "2026-10-18",
       "corrections": 0
+    },
+    {
+      "chemin": "4eme/francais/discours-direct-et-indirect",
+      "le": "2026-10-18",
+      "corrections": 2
     }
   ]
 }
