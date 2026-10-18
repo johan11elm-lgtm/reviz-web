@@ -21,6 +21,8 @@ export const EVENTS = [
   'consent_envoye', 'consent_plus_tard',
   // Lancement : clic « Scanner une leçon » dans la popup « Réviz+ offert ».
   'revizplus_offert_cta',
+  // Scan d'une leçon : analyse réussie, ou écran d'erreur affiché (avec son code).
+  'scan_reussi', 'scan_erreur',
 ]
 
 const ALLOWED = {
@@ -33,14 +35,23 @@ const ALLOWED = {
     'SES', 'NSI', 'Philosophie', 'Autre',
   ],
   format: ['flashcards', 'quiz', 'resume', 'mindmap'],
-  source: ['programme', 'scan'],
+  source: ['programme', 'scan', 'photo', 'texte'],
   joueur: ['compte', 'invite'],
   issue: ['victoire', 'egalite', 'forfait'],
   plateforme: ['ios', 'android', 'ordinateur'],
   // Provenance (`?via=` dans le lien de bio, d'une épingle, d'une affiche ou
   // d'une fiche publique du site) : d'où vient l'élève, sans rien identifier.
   via: ['tiktok', 'instagram', 'pinterest', 'youtube', 'affiche', 'landing', 'fiche'],
+  // Code de l'erreur de scan (jamais le texte de la leçon). Les codes
+  // API_ERROR_<statut HTTP> sont acceptés à part ; tout le reste devient « AUTRE ».
+  code: [
+    'NON_SCOLAIRE', 'RATE_LIMIT', 'NETWORK_ERROR', 'TIMEOUT', 'UNAUTHORIZED', 'EMAIL_NOT_VERIFIED',
+    'TEXT_TOO_LONG', 'IMAGE_TOO_LARGE', 'INVALID_IMAGE', 'INVALID_MEDIA_TYPE', 'INVALID_JSON',
+    'EMPTY_RESPONSE', 'MISSING_API_KEY', 'INVALID_API_KEY', 'MISSING_LEVEL',
+  ],
 }
+
+const API_ERROR = /^API_ERROR_[1-5]\d\d$/
 
 /** Date du jour à Paris, au format AAAA-MM-JJ (un document par jour). */
 export function parisDay(now = new Date()) {
@@ -61,6 +72,7 @@ export function buildUpdate(event, props = {}, increment = n => n) {
     v = String(v)
     if (!values.includes(v)) {
       if (key === 'matiere') v = 'Autre'
+      else if (key === 'code') v = API_ERROR.test(v) ? v : 'AUTRE'
       else continue
     }
     entry[key] = { [v]: increment(1) }
