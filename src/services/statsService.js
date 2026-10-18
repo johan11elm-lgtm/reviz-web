@@ -7,6 +7,7 @@
 import { apiFetch, IS_NATIVE } from './apiClient'
 import { GUEST_KEY } from './guestService'
 import { INTERNE } from './interne'
+import { mesurer } from './mesure'
 
 function device() {
   if (IS_NATIVE) return 'app'
@@ -45,7 +46,10 @@ function mode() {
 export function track(event, props = {}) {
   if (import.meta.env.MODE === 'test' || INTERNE) return
   try {
-    const body = JSON.stringify({ event, props: { mode: mode(), device: device(), ...(VIA ? { via: VIA } : {}), ...props } })
+    const complet = { mode: mode(), device: device(), ...(VIA ? { via: VIA } : {}), ...props }
+    const body = JSON.stringify({ event, props: complet })
+    // Même événement, mêmes valeurs, vers PostHog : sert aux entonnoirs du jour.
+    mesurer(event, complet)
     apiFetch('/api/track', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },

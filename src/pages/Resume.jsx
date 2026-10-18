@@ -16,6 +16,7 @@ import { parseIllustrations } from '../utils/lessonSchema'
 import { illustrationsAJour } from '../services/programmeService'
 import { Illustration } from '../components/Illustration'
 import './Resume.css'
+import { mesurer } from '../services/mesure'
 
 function subjectInfo(s) {
   return sharedSubjectInfo(s);
@@ -105,7 +106,7 @@ export default function Resume() {
 }
 
 function ResumeContent() {
-  useEffect(() => { recordRevision('resume') }, [])
+  useEffect(() => { recordRevision('resume'); mesurer('format_ouvert', { format: 'resume' }) }, [])
   const resumeData = getResumeData()
   const info = subjectInfo(resumeData.subject)
   // Rubriques récentes : absentes des leçons enregistrées avant octobre 2026.

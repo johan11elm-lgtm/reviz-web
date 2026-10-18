@@ -11,6 +11,7 @@ import { CoachChat, CoachHeaderButton } from '../components/CoachChat'
 import { nbsp } from '../utils/typography'
 import { track } from '../services/statsService'
 import './Quiz.css'
+import { mesurer } from '../services/mesure'
 
 // ---- DONNÉES : localStorage (IA) > état vide (mock réservé au dev) ----
 function getQuestions() {
@@ -110,7 +111,7 @@ export default function Quiz() {
 }
 
 function QuizSession() {
-  useEffect(() => { recordRevision('quiz') }, [])
+  useEffect(() => { recordRevision('quiz'); mesurer('format_ouvert', { format: 'quiz' }) }, [])
   const questions = getQuestions()
 
   const [current, setCurrent]             = useState(0)

@@ -4,6 +4,7 @@ import { useAuth } from '../context/AuthContext';
 import { auth } from '../services/firebaseConfig';
 import { useIsDesktop } from '../hooks/useMediaQuery';
 import { Mascot } from '../components/Mascot';
+import { mesurer } from '../services/mesure';
 import './Inscription.css';
 import './VerifyEmail.css';
 
@@ -36,6 +37,7 @@ export default function VerifyEmail() {
         // Force un nouveau idToken : le claim email_verified est vérifié
         // côté serveur (scan, paiement), il doit être à jour dans le token.
         await auth.currentUser.getIdToken(true);
+        mesurer('email_verifie');
         navigate('/onboarding', { replace: true });
       } else {
         setNotYet(true);

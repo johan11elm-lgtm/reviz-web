@@ -93,7 +93,7 @@ const PAGES = {
             <li><strong>Anthropic</strong> — traitement IA des leçons (le texte envoyé n'est pas conservé après génération).</li>
             <li><strong>Vercel</strong> — hébergement de l'application.</li>
             <li><strong>Stripe</strong> — paiement de l'abonnement Réviz+. Les coordonnées bancaires sont saisies chez Stripe : Réviz ne les voit ni ne les conserve jamais.</li>
-            <li><strong>PostHog</strong> — mesure d'audience anonyme (pages vues, clics), hébergée en Europe, sans cookie ni profil.</li>
+            <li><strong>PostHog</strong> — mesure d'audience anonyme (pages vues et grandes étapes comme créer un compte ou terminer un quiz), hébergée en Europe, sans cookie, sans profil et sans rien enregistrer sur ton appareil.</li>
           </ul>
         </Section>
 
