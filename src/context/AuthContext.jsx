@@ -39,6 +39,7 @@ import { readSessionCache, writeSessionCache, clearSessionCache, userFromSession
 import { track } from '../services/statsService';
 import { apiFetch, apiUrl } from '../services/apiClient';
 import { collection, getDocs, deleteDoc, doc, getDoc, setDoc } from 'firebase/firestore';
+import { noterOuverture } from '../services/retourService';
 
 const AuthContext = createContext();
 
@@ -510,6 +511,16 @@ export function AuthProvider({ children }) {
     if (loading || !currentUser || gateUid !== currentUser.uid) return;
     writeSessionCache(currentUser, { isPremium, consentBlocked, consentStatus: consent.status, needsProfileSetup });
   }, [loading, currentUser, gateUid, isPremium, consentBlocked, consent.status, needsProfileSetup]);
+
+  // Jour d'ouverture (mesure des retours) : au démarrage, puis à chaque
+  // retour au premier plan, l'app restant souvent ouverte d'un jour à l'autre.
+  useEffect(() => {
+    if (loading || !currentUser) return;
+    noterOuverture(currentUser);
+    const auPremierPlan = () => { if (document.visibilityState === 'visible') noterOuverture(currentUser); };
+    document.addEventListener('visibilitychange', auPremierPlan);
+    return () => document.removeEventListener('visibilitychange', auPremierPlan);
+  }, [loading, currentUser?.uid]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Permet de re-vérifier le statut premium (après retour Stripe)
   async function refreshPremium() {
