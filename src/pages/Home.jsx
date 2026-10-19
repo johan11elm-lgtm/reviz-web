@@ -5,6 +5,7 @@ import { BottomNav } from '../components/BottomNav';
 import { UserHeader } from '../components/UserHeader';
 import { GuestBanner } from '../components/GuestBanner';
 import { ConsentBanner } from '../components/ConsentBanner';
+import { EmailBanner } from '../components/EmailBanner';
 import { ControleBanner } from '../components/ControleBanner';
 import { HeroCTA } from '../components/HeroCTA';
 import { Mascot } from '../components/Mascot';
@@ -469,6 +470,7 @@ export default function Home() {
 
           <div className="home-rappels">
             <ConsentBanner />
+            <EmailBanner />
             <ControleBanner />
           </div>
 
@@ -524,6 +526,7 @@ export default function Home() {
           <div className="home-rappels">
             <GuestBanner />
             <ConsentBanner />
+            <EmailBanner />
             <ControleBanner />
           </div>
 

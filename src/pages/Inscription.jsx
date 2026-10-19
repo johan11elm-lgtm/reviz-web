@@ -195,7 +195,7 @@ export default function Inscription() {
           setCompteCree(true);
           goNext({ replace: true });
         } else {
-          navigate('/verify-email', { replace: true });
+          navigate('/', { replace: true });
         }
       } catch (err) {
         setError(firebaseErrorFr(err.code));
@@ -213,7 +213,7 @@ export default function Inscription() {
         await sendParentalConsent(parentEmail.trim(), prenom);
         track('consent_envoye');
         await rafraichirGate();
-        navigate('/verify-email', { replace: true });
+        navigate('/', { replace: true });
       } catch (err) {
         setError(consentErrorMessage(err.message));
       } finally {
@@ -233,7 +233,7 @@ export default function Inscription() {
     setPlusTardEnCours(true);
     track('consent_plus_tard');
     await rafraichirGate();
-    navigate('/verify-email', { replace: true });
+    navigate('/', { replace: true });
   }
 
   async function handleProvider(id) {
@@ -500,7 +500,7 @@ export default function Inscription() {
   );
 
   if (dejaInscrit) {
-    return <Navigate to={currentUser.emailVerified ? '/' : '/verify-email'} replace />;
+    return <Navigate to="/" replace />;
   }
 
   if (isDesktop) {

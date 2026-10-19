@@ -171,10 +171,10 @@ export async function verifyEmailViaEmulator(page, email) {
  * la Battle, 'revizplus' pour Réviz+).
  */
 export async function verifyEmailAndOnboard(page, email, { garderAnnonce = false } = {}) {
-  await expect(page).toHaveURL(/verify-email/, { timeout: 15_000 })
-  await verifyEmailViaEmulator(page, email)
-  await page.getByRole('button', { name: /J'ai confirmé mon email/ }).click()
+  // L'élève entre dès l'inscription ; il confirme son email depuis sa boîte
+  // mail, l'app le revoit au retour (rappel de l'accueil).
   await expect(page).toHaveURL(/onboarding/, { timeout: 15_000 })
+  await verifyEmailViaEmulator(page, email)
   await page.getByRole('button', { name: 'Passer' }).click()
   await expect(page).toHaveURL(/\/$/, { timeout: 10_000 })
   if (garderAnnonce === 'revizplus') return

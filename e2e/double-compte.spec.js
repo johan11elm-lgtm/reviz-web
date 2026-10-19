@@ -34,7 +34,7 @@ test.describe('Inscription : pas de second compte', () => {
     await gelerFirestore(page)
 
     await page.getByRole('button', { name: /Plus tard/ }).click()
-    await expect(page).toHaveURL(/verify-email/, { timeout: 8_000 })
+    await expect(page).toHaveURL(/onboarding/, { timeout: 8_000 })
   })
 
   test('recharger /inscription une fois le compte créé ne relance pas le tunnel', async ({ page }) => {
@@ -42,7 +42,7 @@ test.describe('Inscription : pas de second compte', () => {
     await creerCompteMineur(page)
 
     await page.reload()
-    await expect(page).toHaveURL(/verify-email/, { timeout: 15_000 })
+    await expect(page).toHaveURL(/onboarding/, { timeout: 15_000 })
     await expect(page.getByPlaceholder('Lucas')).toHaveCount(0)
   })
 })
