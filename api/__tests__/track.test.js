@@ -48,6 +48,23 @@ describe('buildUpdate', () => {
     })
     expect(buildUpdate('compte_cree', { via: 'javascript:alert(1)' })).toEqual({ compte_cree: { total: 1 } })
   })
+  it("compte les scans réussis et les erreurs de scan par code et par source", () => {
+    expect(buildUpdate('scan_reussi', { source: 'photo', mode: 'compte' })).toEqual({
+      scan_reussi: { total: 1, source: { photo: 1 }, mode: { compte: 1 } },
+    })
+    expect(buildUpdate('scan_erreur', { code: 'IMAGE_TOO_LARGE', source: 'photo' })).toEqual({
+      scan_erreur: { total: 1, source: { photo: 1 }, code: { IMAGE_TOO_LARGE: 1 } },
+    })
+    expect(buildUpdate('scan_erreur', { code: 'API_ERROR_504', source: 'texte' })).toEqual({
+      scan_erreur: { total: 1, source: { texte: 1 }, code: { API_ERROR_504: 1 } },
+    })
+  })
+  it("ramène un code d'erreur inconnu à « AUTRE » (jamais de texte libre)", () => {
+    expect(buildUpdate('scan_erreur', { code: 'La photosynthèse est…', source: 'photo' })).toEqual({
+      scan_erreur: { total: 1, source: { photo: 1 }, code: { AUTRE: 1 } },
+    })
+    expect(buildUpdate('scan_erreur', { code: 'API_ERROR_99999' }).scan_erreur.code).toEqual({ AUTRE: 1 })
+  })
   it('refuse un événement inconnu', () => {
     expect(buildUpdate('mouchard', {})).toBeNull()
   })
@@ -66,6 +83,15 @@ describe('handler', () => {
     expect(res.statusCode).toBe(204)
     expect(docFn).toHaveBeenCalledWith(parisDay())
     expect(set).toHaveBeenCalledWith({ essai_demarre: { total: { inc: 1 }, classe: { '5ème': { inc: 1 } } } }, { merge: true })
+  })
+  it("écrit scan_erreur dans stats/{jour} avec le code et la source", async () => {
+    const res = mockRes()
+    await handler({ method: 'POST', body: JSON.stringify({ event: 'scan_erreur', props: { code: 'TIMEOUT', source: 'photo', mode: 'essai', device: 'mobile' } }) }, res)
+    expect(res.statusCode).toBe(204)
+    expect(docFn).toHaveBeenCalledWith(parisDay())
+    expect(set).toHaveBeenCalledWith({
+      scan_erreur: { total: { inc: 1 }, mode: { essai: { inc: 1 } }, device: { mobile: { inc: 1 } }, source: { photo: { inc: 1 } }, code: { TIMEOUT: { inc: 1 } } },
+    }, { merge: true })
   })
   it('accepte un corps en texte (sendBeacon) et rejette le reste', async () => {
     const ok = mockRes()

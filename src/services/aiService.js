@@ -139,7 +139,9 @@ async function _callProxy(endpoint, payload, onProgress) {
     if (response.status === 413 || body === 'IMAGE_TOO_LARGE') throw new Error('IMAGE_TOO_LARGE')
     if (response.status === 429 || body === 'RATE_LIMIT') throw new Error('RATE_LIMIT')
     if (body === 'INVALID_API_KEY') throw new Error('INVALID_API_KEY')
-    throw new Error(body || `API_ERROR_${response.status}`)
+    // Un code (MAJUSCULES_SOULIGNÉES) renvoyé par notre API, sinon le statut
+    // HTTP : une page d'erreur Vercel (504…) ne doit pas devenir le « code ».
+    throw new Error(/^[A-Z][A-Z0-9_]{2,40}$/.test(body) ? body : `API_ERROR_${response.status}`)
   }
 
   // Le proxy retourne le texte brut (non-streaming)

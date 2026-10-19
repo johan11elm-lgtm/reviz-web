@@ -17,6 +17,7 @@ import { PremiumModal } from '../components/PremiumModal';
 import { MissingLessonState } from '../components/MissingLessonState';
 import { CoachEntryCard } from '../components/CoachChat';
 import { getScanStatus } from '../services/scanLimitService';
+import { track, scanErrorCode } from '../services/statsService';
 import { subjectInfo, subjectMascot } from '../utils/subjects';
 import { resumeReadingMinutes } from '../utils/resume';
 import { nextStep } from '../utils/nextStep';
@@ -173,8 +174,13 @@ export default function Analyse() {
         saveLesson(data.metadata, data);
         setLesson(buildLessonFromAiData(data));
         setIsLoading(false);
+        track('scan_reussi', { source: 'texte' });
       })
-      .catch(err => { setError(err.message); setIsLoading(false); });
+      .catch(err => {
+        setError(err.message);
+        setIsLoading(false);
+        track('scan_erreur', { code: scanErrorCode(err?.message), source: 'texte' });
+      });
   }
 
   function callApiImage(imageDataUrl) {
@@ -192,8 +198,13 @@ export default function Analyse() {
         saveLesson(data.metadata, data);
         setLesson(buildLessonFromAiData(data));
         setIsLoading(false);
+        track('scan_reussi', { source: 'photo' });
       })
-      .catch(err => { setError(err.message); setIsLoading(false); });
+      .catch(err => {
+        setError(err.message);
+        setIsLoading(false);
+        track('scan_erreur', { code: scanErrorCode(err?.message), source: 'photo' });
+      });
   }
 
   function useMockFallback() {

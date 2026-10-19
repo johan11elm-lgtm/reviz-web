@@ -14,6 +14,7 @@ import { CoachChat, CoachHeaderButton } from '../components/CoachChat'
 import { nbsp } from '../utils/typography'
 import { useIsDesktop } from '../hooks/useMediaQuery'
 import './Mindmap.css'
+import { mesurer } from '../services/mesure'
 
 // ── Données ───────────────────────────────────────────────────────
 // Normalisation défensive : aiService._parseResult() garantit déjà cette
@@ -105,7 +106,7 @@ export default function Mindmap() {
 }
 
 function MindmapSession() {
-  useEffect(() => { recordRevision('mindmap') }, [])
+  useEffect(() => { recordRevision('mindmap'); mesurer('format_ouvert', { format: 'mindmap' }) }, [])
   const mindmapData = getMindmapData()
   const { theme } = useTheme()
   const isDark = theme === 'dark'

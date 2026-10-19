@@ -14,6 +14,7 @@ import { IS_NATIVE } from './services/apiClient.js'
 import { hideSplash } from './services/splash.js'
 import { track } from './services/statsService.js'
 import { INTERNE } from './services/interne.js'
+import { brancherPosthog } from './services/mesure.js'
 import { ecouterInstallation, detecterPlateforme } from './utils/installation.js'
 
 // App native (Capacitor) : layout plein écran forcé quelle que soit la
@@ -106,7 +107,14 @@ const loadMonitoring = () => {
         capture_pageleave: true,
         disable_session_recording: true,
         disable_surveys: true,
+        // Plus d'autocapture : ses clics sans nom (« click », « change »,
+        // « submit ») noyaient la mesure. Les étapes qui comptent sont
+        // envoyées nommées, par services/mesure.js.
+        autocapture: false,
+        rageclick: false,
+        capture_dead_clicks: false,
       });
+      brancherPosthog(posthog);
     });
   }
 }

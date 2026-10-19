@@ -7,6 +7,7 @@
 import { apiFetch, IS_NATIVE } from './apiClient'
 import { GUEST_KEY } from './guestService'
 import { INTERNE } from './interne'
+import { mesurer } from './mesure'
 
 function device() {
   if (IS_NATIVE) return 'app'
@@ -39,13 +40,16 @@ function mode() {
 /**
  * @param {'essai_demarre'|'compte_cree'|'programme_ouvert'|'chapitre_ouvert'|'revision'|'quiz_termine'
  *   |'battle_creee'|'battle_rejointe'|'battle_terminee'|'battle_revanche'|'battle_compte_propose'|'battle_annonce_cta'
- *   |'installer_ouvert'|'app_installee'|'consent_envoye'|'consent_plus_tard'} event
- * @param {object} [props]  classe, matiere, format, source, joueur, issue, plateforme, via (listes fermées côté serveur)
+ *   |'installer_ouvert'|'app_installee'|'consent_envoye'|'consent_plus_tard'|'scan_reussi'|'scan_erreur'} event
+ * @param {object} [props]  classe, matiere, format, source, joueur, issue, plateforme, via, code (listes fermées côté serveur)
  */
 export function track(event, props = {}) {
   if (import.meta.env.MODE === 'test' || INTERNE) return
   try {
-    const body = JSON.stringify({ event, props: { mode: mode(), device: device(), ...(VIA ? { via: VIA } : {}), ...props } })
+    const complet = { mode: mode(), device: device(), ...(VIA ? { via: VIA } : {}), ...props }
+    const body = JSON.stringify({ event, props: complet })
+    // Même événement, mêmes valeurs, vers PostHog : sert aux entonnoirs du jour.
+    mesurer(event, complet)
     apiFetch('/api/track', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -53,4 +57,14 @@ export function track(event, props = {}) {
       keepalive: true,
     }).catch(() => {})
   } catch { /* jamais bloquant */ }
+}
+
+/**
+ * Code d'erreur de scan bon à envoyer : seulement un identifiant en
+ * MAJUSCULES_SOULIGNÉES (« IMAGE_TOO_LARGE », « API_ERROR_504 »), jamais un
+ * message libre qui pourrait citer la leçon.
+ * @param {unknown} message
+ */
+export function scanErrorCode(message) {
+  return typeof message === 'string' && /^[A-Z][A-Z0-9_]{2,40}$/.test(message) ? message : 'AUTRE'
 }

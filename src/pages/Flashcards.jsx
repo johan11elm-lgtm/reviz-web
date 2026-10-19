@@ -12,6 +12,7 @@ import { CoachChat, CoachHeaderButton } from '../components/CoachChat'
 import { nbsp } from '../utils/typography'
 import { useIsDesktop } from '../hooks/useMediaQuery'
 import './Flashcards.css'
+import { mesurer } from '../services/mesure'
 
 // ---- DONNÉES : localStorage (IA) > état vide (mock réservé au dev) ----
 function getFlashcards() {
@@ -55,7 +56,7 @@ export default function Flashcards() {
 
 function FlashcardsSession() {
   const isDesktop  = useIsDesktop()
-  useEffect(() => { recordRevision('flashcards') }, [])
+  useEffect(() => { recordRevision('flashcards'); mesurer('format_ouvert', { format: 'flashcards' }) }, [])
   const lessonId   = useMemo(() => getLessonId(), [])
   const rawCards   = getFlashcards()
   const flashcards = useMemo(() => getDueCards(lessonId, rawCards), [lessonId])
