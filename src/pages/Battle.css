@@ -470,3 +470,119 @@
     box-shadow: var(--shadow-card);
   }
 }
+
+/* ─── Battle face à face, refonte du 20/10 (« Reviz Valide ») ────────
+ * L'adversaire en haut sur le lilas, toi en bas sur la pêche, le chrono
+ * en barre encre entre les deux, la question sur une carte blanche. */
+.battle-page--duel { background: #FFC9A8; }
+.battle-page--duel .rv-page-header {
+  position: absolute;
+  top: env(safe-area-inset-top, 0px);
+  left: 0;
+  right: auto;
+  z-index: 5;
+  background: none;
+  padding: 12px 22px;
+}
+.battle-page--duel .rv-page-header .rv-bell-btn,
+.battle-page--duel .rv-page-header button { background: rgba(255,255,255,.6); box-shadow: none; }
+.battle-page--duel .battle-content { padding: 0; position: static; overflow: hidden; }
+.battle-page--duel .battle-jeu--duel { position: static; }
+.battle-page .battle-duel {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  color: #1B1A23;
+  --duel-coupe: calc(270px + env(safe-area-inset-top, 0px));
+}
+.battle-page .battle-duel-haut,
+.battle-page .battle-duel-bas { position: absolute; left: 0; right: 0; overflow: hidden; }
+.battle-page .battle-duel-haut { top: 0; height: var(--duel-coupe); background: #C9C2F2; }
+.battle-page .battle-duel-bas { top: var(--duel-coupe); bottom: 0; background: #FFC9A8; }
+.battle-page .battle-duel-haut::after,
+.battle-page .battle-duel-bas::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.35 0 0 0 0 0.2 0 0 0 0 0.1 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: .3;
+  mix-blend-mode: multiply;
+}
+.battle-page .battle-duel-rond { position: absolute; border-radius: 50%; }
+.battle-page .battle-duel-rond--haut { right: -60px; top: -40px; width: 240px; height: 240px; background: #D8D2F7; }
+.battle-page .battle-duel-rond--bas { left: -80px; bottom: -60px; width: 280px; height: 280px; background: #FFDAC4; }
+.battle-page .battle-duel-chrono { position: absolute; left: 0; right: 0; top: calc(var(--duel-coupe) - 8px); height: 16px; z-index: 2; display: flex; }
+.battle-page .battle-duel-chrono > span { display: block; height: 100%; background: #1B1A23; border-radius: 0 99px 99px 0; transition: width .25s linear; }
+
+.battle-page .battle-duel-contenu {
+  position: relative;
+  z-index: 3;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: calc(12px + env(safe-area-inset-top, 0px)) 22px calc(28px + env(safe-area-inset-bottom, 0px));
+}
+.battle-page .battle-duel-manche { align-self: flex-end; height: 42px; display: flex; align-items: center; font-size: 13px; font-weight: 700; color: #3D3770; }
+.battle-page .battle-duel-joueur { display: flex; align-items: center; gap: 14px; }
+.battle-page .battle-duel-joueur--adv { margin-top: 20px; }
+.battle-page .battle-duel-avatar {
+  width: 72px;
+  height: 72px;
+  flex: none;
+  border-radius: 50%;
+  border: 3px solid #fff;
+  box-shadow: 0 8px 18px -8px rgba(0,0,0,.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.battle-page .battle-duel-avatar--haut { background: #D8D2F7; }
+.battle-page .battle-duel-avatar--bas { background: #FFDAC4; }
+.battle-page .battle-duel-txt { display: flex; flex-direction: column; min-width: 0; }
+.battle-page .battle-duel-etat { font-size: 15px; font-weight: 700; color: #3D3770; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.battle-page .battle-duel-etat--moi { color: #8A3A05; }
+.battle-page .battle-duel-score { font-family: var(--font-display); font-size: 56px; font-weight: 800; letter-spacing: -.6px; line-height: .9; }
+.battle-page .battle-duel-flex { flex: 1; }
+.battle-page .battle-duel-secondes { font-family: var(--font-display); font-size: 40px; font-weight: 800; letter-spacing: -.6px; color: #2D2B57; font-variant-numeric: tabular-nums; }
+.battle-page .battle-duel-question {
+  margin: 28px 0 0;
+  padding: 18px 20px;
+  border-radius: 26px;
+  background: #fff;
+  box-shadow: 0 20px 40px -20px rgba(60,40,120,.45);
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: -.6px;
+  line-height: 1.05;
+  text-wrap: balance;
+}
+.battle-page .battle-duel-choix { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 22px; }
+.battle-page .battle-duel-btn {
+  min-height: 76px;
+  padding: 10px 12px;
+  border: 0;
+  border-radius: 22px;
+  background: rgba(255,255,255,.8);
+  color: #1B1A23;
+  font-family: var(--font-display);
+  font-size: 30px;
+  font-weight: 800;
+  line-height: 1.05;
+  transition: transform .12s, background .2s, color .2s;
+}
+.battle-page .battle-duel-choix--longs .battle-duel-btn { font-family: 'Geist', system-ui, sans-serif; font-size: 16px; font-weight: 700; line-height: 1.25; }
+.battle-page .battle-duel-btn:active:not(:disabled) { transform: scale(.95); }
+.battle-page .battle-duel-btn--choisi { background: #1B1A23; color: #fff; }
+.battle-page .battle-duel-btn:disabled:not(.battle-duel-btn--choisi) { opacity: .6; }
+.battle-page .battle-duel-note { max-width: 140px; text-align: right; font-size: 13.5px; font-weight: 700; line-height: 1.3; color: #8A3A05; }
+
+@media (min-width: 1024px) {
+  html:not(.native) .battle-page .battle-duel { --duel-coupe: 42%; }
+  html:not(.native) .battle-page .battle-duel-contenu { max-width: 760px; margin: 0 auto; padding: 28px 40px 36px; }
+  html:not(.native) .battle-page .battle-duel-question { font-size: 34px; margin-top: 40px; }
+  html:not(.native) .battle-page .battle-duel-btn { min-height: 92px; }
+  html:not(.native) .battle-page .battle-duel-btn:hover:not(:disabled) { background: #fff; }
+  html:not(.native) .battle-page--duel .rv-page-header { left: var(--sidenav-w); }
+}

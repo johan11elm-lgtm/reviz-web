@@ -1,7 +1,8 @@
 import { useEffect } from 'react';
-import { BattleJoueur } from './BattleJoueur';
+import { BattleJoueur, couleurDe } from './BattleJoueur';
+import { BattleMascot } from '../BattleMascot';
 import {
-  CHRONO_MS, ROUNDS, QUESTIONS_PAR_PARTIE, formaterAura, formaterTemps, joueursDe,
+  AURA, CHRONO_MS, ROUNDS, QUESTIONS_PAR_PARTIE, formaterAura, formaterTemps, joueursDe,
 } from '../../utils/battle';
 import { nbsp } from '../../utils/typography';
 
@@ -17,13 +18,15 @@ const nomRound = n => (n === QUESTIONS_PAR_PARTIE ? 'Mort subite' : `Round ${n}`
 export function BattleJeu({ salon, role, uid, phase, partie, maintenant, quiz, mesReponses, onRepondre }) {
   const adversaire = role === 'hote' ? salon.invite : salon.hote;
   return (
-    <div className="battle-jeu">
-      <BattleScore salon={salon} uid={uid} partie={partie} phase={phase} />
+    <div className={`battle-jeu${phase.type === 'question' ? ' battle-jeu--duel' : ''}`}>
+      {/* Pendant la question, le score vit dans le face-à-face (refonte du 20/10). */}
+      {phase.type !== 'question' && <BattleScore salon={salon} uid={uid} partie={partie} phase={phase} />}
       {phase.type === 'annonce' && <Annonce phase={phase} maintenant={maintenant} />}
       {phase.type === 'question' && (
         <Question
           salon={salon} uid={uid} adversaire={adversaire} phase={phase} maintenant={maintenant}
           quiz={quiz} maReponse={mesReponses[phase.n] ?? salon.rounds?.[phase.n]?.reponses?.[uid]?.choix}
+          partie={partie} role={role}
           onRepondre={onRepondre}
         />
       )}
@@ -86,13 +89,20 @@ function Annonce({ phase, maintenant }) {
   );
 }
 
-function Question({ salon, uid, adversaire, phase, maintenant, quiz, maReponse, onRepondre }) {
+/**
+ * La question en face-à-face : l'adversaire en haut sur le lilas, toi en bas
+ * sur la pêche, le chrono entre les deux, la question et quatre réponses.
+ */
+function Question({ salon, uid, adversaire, phase, maintenant, quiz, maReponse, onRepondre, partie, role }) {
   const q = quiz[salon.questions[phase.n - 1]];
   const restant = Math.max(0, phase.fin - maintenant);
   const tempsEcoule = restant === 0;
   const aRepondu = maReponse !== undefined;
   const advARepondu = !!salon.rounds?.[phase.n]?.reponses?.[adversaire.uid];
   const bloque = aRepondu || tempsEcoule;
+  const moi = role === 'hote' ? salon.hote : salon.invite;
+  const scoreDe = id => partie?.scores?.[id] ?? 0;
+  const roleAdv = role === 'hote' ? 'invite' : 'hote';
 
   // Ordinateur : touches 1 à 4.
   useEffect(() => {
@@ -105,36 +115,66 @@ function Question({ salon, uid, adversaire, phase, maintenant, quiz, maReponse, 
     return () => window.removeEventListener('keydown', onKey);
   }, [bloque, q, phase.n, onRepondre]);
 
-  const statut = tempsEcoule && !aRepondu ? 'Temps écoulé'
-    : aRepondu ? (advARepondu ? 'Vous avez répondu tous les deux' : `En attente de ${adversaire.prenom}…`)
-    : advARepondu ? `${adversaire.prenom} a répondu` : '';
+  const etatAdv = advARepondu ? `${adversaire.prenom} a répondu` : `${adversaire.prenom} réfléchit`;
+  const etatMoi = tempsEcoule && !aRepondu ? 'Temps écoulé'
+    : aRepondu ? (advARepondu ? 'Réponses envoyées' : `En attente de ${adversaire.prenom}…`)
+    : `+${AURA.roundGagne} aura si tu es le plus rapide`;
+  const courts = q.choices.every(c => String(c).length <= 14);
 
   return (
-    <div className="battle-question">
-      <div className="battle-chrono" aria-hidden="true">
-        <div className="battle-chrono-barre" style={{ transform: `scaleX(${restant / CHRONO_MS})` }} />
+    <div className="battle-duel">
+      <span className="battle-duel-haut" aria-hidden="true"><span className="battle-duel-rond battle-duel-rond--haut" /></span>
+      <span className="battle-duel-bas" aria-hidden="true"><span className="battle-duel-rond battle-duel-rond--bas" /></span>
+      <div className="battle-duel-chrono" aria-hidden="true">
+        <span style={{ width: `${(restant / CHRONO_MS) * 100}%` }} />
       </div>
-      <div className="battle-question-meta">
-        <span>{nomRound(phase.n)}</span>
-        <span>{Math.ceil(restant / 1000)} s</span>
+
+      <div className="battle-duel-contenu">
+        <span className="battle-duel-manche">{phase.n === QUESTIONS_PAR_PARTIE ? 'Mort subite' : `Manche ${phase.n} / ${ROUNDS}`}</span>
+        <div className="battle-duel-joueur battle-duel-joueur--adv">
+          <span className="battle-duel-avatar battle-duel-avatar--haut">
+            <BattleMascot pose="garde" couleur={couleurDe(roleAdv)} size={64} alt="" aria-hidden="true" />
+          </span>
+          <span className="battle-duel-txt">
+            <span className="battle-duel-etat">{etatAdv}</span>
+            <span className="battle-duel-score" aria-label={`Score de ${adversaire.prenom} : ${scoreDe(adversaire.uid)}`}>{scoreDe(adversaire.uid)}</span>
+          </span>
+          <span className="battle-duel-flex" />
+          <span className="battle-duel-secondes" aria-label={`${Math.ceil(restant / 1000)} secondes`}>{Math.ceil(restant / 1000)} s</span>
+        </div>
+
+        <p className="battle-duel-question">{nbsp(q.question)}</p>
+
+        <div className={`battle-duel-choix${courts ? '' : ' battle-duel-choix--longs'}`}>
+          {q.choices.map((choix, i) => (
+            <button
+              type="button"
+              key={i}
+              className={`battle-duel-btn${maReponse === i ? ' battle-duel-btn--choisi' : ''}`}
+              onClick={() => onRepondre(phase.n, i)}
+              disabled={bloque}
+              aria-pressed={aRepondu ? maReponse === i : undefined}
+              aria-label={`${LETTRES[i]}. ${choix}`}
+            >
+              {nbsp(choix)}
+            </button>
+          ))}
+        </div>
+
+        <span className="battle-duel-flex" />
+
+        <div className="battle-duel-joueur battle-duel-joueur--moi">
+          <span className="battle-duel-avatar battle-duel-avatar--bas">
+            <BattleMascot pose={aRepondu ? 'aura' : 'garde'} couleur={couleurDe(role)} size={64} alt="" aria-hidden="true" />
+          </span>
+          <span className="battle-duel-txt">
+            <span className="battle-duel-etat battle-duel-etat--moi">Toi{moi?.prenom ? ` · ${moi.prenom}` : ''}</span>
+            <span className="battle-duel-score" aria-label={`Ton score : ${scoreDe(uid)}`}>{scoreDe(uid)}</span>
+          </span>
+          <span className="battle-duel-flex" />
+          <span className="battle-duel-note" aria-live="polite">{etatMoi}</span>
+        </div>
       </div>
-      <p className="battle-question-texte">{nbsp(q.question)}</p>
-      <div className="battle-choix">
-        {q.choices.map((choix, i) => (
-          <button
-            type="button"
-            key={i}
-            className={`battle-choix-btn${maReponse === i ? ' battle-choix-btn--choisi' : ''}`}
-            onClick={() => onRepondre(phase.n, i)}
-            disabled={bloque}
-            aria-pressed={aRepondu ? maReponse === i : undefined}
-          >
-            <span className="battle-choix-lettre">{LETTRES[i]}</span>
-            <span className="battle-choix-texte">{nbsp(choix)}</span>
-          </button>
-        ))}
-      </div>
-      <p className="battle-statut" aria-live="polite">{statut}</p>
     </div>
   );
 }

@@ -107,7 +107,7 @@ function Partie({ code }) {
   }
 
   return (
-    <div className={`app battle-page${enJeu ? ' battle-page--jeu' : ''}`}>
+    <div className={`app battle-page${enJeu ? ' battle-page--jeu' : ''}${phase.type === 'question' ? ' battle-page--duel app--no-halo' : ''}`}>
       <PageHeader
         variant="back"
         title={chapitre && !enJeu ? 'Battle' : undefined}
