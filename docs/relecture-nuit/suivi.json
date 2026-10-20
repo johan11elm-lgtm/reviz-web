@@ -729,6 +729,11 @@
       "chemin": "4eme/svt/seismes",
       "le": "2026-10-20",
       "corrections": 0
+    },
+    {
+      "chemin": "4eme/svt/volcanisme",
+      "le": "2026-10-20",
+      "corrections": 0
     }
   ]
 }
