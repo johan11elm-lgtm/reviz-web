@@ -1,292 +1,247 @@
 /* CSS scoped to page wrapper — see scripts/scope-page-css.py */
 /* Wrapper: .onboarding-page */
 
+/* Refonte du 20/10 : aplat pastel avec grain et Réviz animé en haut
+ * (à gauche sur ordinateur), le choix dessous, le bouton en bas. */
+
 .onboarding-page {
-  min-height: 100vh;  /* vh fallback iOS 15 */
-  min-height: 100dvh;
   display: flex;
   flex-direction: column;
-  background: var(--bg-app);
-  color: var(--text-primary);
+  background: #F8EFE7;
+  color: #1B1A23;
   position: relative;
-  /* Encoche iPhone : la page est rendue hors du shell paddé (.app) */
-  padding: calc(16px + env(safe-area-inset-top, 0px)) var(--page-gutter) calc(16px + env(safe-area-inset-bottom, 0px));
+  overflow: hidden;
 }
 
-/* ── Haut : progression segmentée + Passer ── */
-.onboarding-page .onb-top {
+/* ── Scène ── */
+.onboarding-page .onb-scene {
+  position: relative;
+  flex: none;
+  height: calc(390px + env(safe-area-inset-top, 0px));
+  margin-top: calc(-1 * env(safe-area-inset-top, 0px));
+  padding-top: env(safe-area-inset-top, 0px);
+  border-radius: 0 0 50% 50% / 0 0 64px 64px;
+  overflow: hidden;
+  transition: background .6s;
+}
+.onboarding-page .onb-bulle { position: absolute; border-radius: 50%; transition: background .6s; }
+.onboarding-page .onb-bulle--a {
+  right: -60px; top: calc(97px + env(safe-area-inset-top, 0px)); width: 250px; height: 250px;
+  box-shadow: inset 0 -24px 40px rgba(120,60,20,.08), inset 0 16px 30px rgba(255,255,255,.35);
+}
+.onboarding-page .onb-bulle--b { left: -50px; top: calc(242px + env(safe-area-inset-top, 0px)); width: 150px; height: 150px; }
+.onboarding-page .onb-pastille { display: none; }
+.onboarding-page .onb-grain {
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.35 0 0 0 0 0.2 0 0 0 0 0.1 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: .32;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+.onboarding-page .onb-haut {
+  position: relative;
+  z-index: 3;
+  padding: 12px 22px 0;
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  gap: 16px;
-  width: 100%;
-  max-width: 440px;
-  margin: 0 auto;
-  min-height: 36px;
+  align-items: center;
 }
-
-.onboarding-page .onb-progress {
-  list-style: none;
-  margin: 0;
-  padding: 0;
+.onboarding-page .onb-retour,
+.onboarding-page .onb-retour-vide { width: 42px; height: 42px; flex: none; }
+.onboarding-page .onb-retour {
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255,255,255,.7);
+  color: #1B1A23;
   display: flex;
-  gap: 6px;
-  width: 120px;
-}
-
-.onboarding-page .onb-progress-seg {
-  flex: 1;
-  height: 4px;
-  border-radius: 2px;
-  background: var(--bg-toggle);
-  transition: background 0.25s ease;
-}
-
-.onboarding-page .onb-progress-seg--on { background: var(--accent-orange); }
-
-.onboarding-page .onb-skip {
-  background: transparent;
-  border: none;
-  padding: 8px 4px;
-  font-family: inherit;
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--text-secondary);
-  cursor: pointer;
-  transition: color 0.15s ease;
-}
-
-.onboarding-page .onb-skip:hover { color: var(--text-primary); }
-
-/* ── Corps ── */
-.onboarding-page .onb-body {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 18px;
-  text-align: center;
-  width: 100%;
-  max-width: 440px;
-  margin: 0 auto;
-  padding: 12px 0;
+}
+.onboarding-page .onb-passer {
+  min-width: 42px;
+  border: 0;
+  background: none;
+  font: 700 14px 'Geist', system-ui, sans-serif;
+  color: rgba(27,26,35,.7);
+  padding: 10px 0;
+}
+.onboarding-page .onb-points { list-style: none; margin: 0; padding: 0; display: flex; gap: 6px; }
+.onboarding-page .onb-point { width: 8px; height: 8px; border-radius: 99px; background: rgba(27,26,35,.18); transition: width .25s, background .25s; }
+.onboarding-page .onb-point--fait { background: #1B1A23; }
+.onboarding-page .onb-point--actif { width: 22px; background: #1B1A23; }
+.onboarding-page .onb-pantin {
+  position: absolute;
+  left: 50%;
+  bottom: 4px;
+  transform: translateX(-50%);
+  z-index: 2;
 }
 
-.onboarding-page .onb-heading {
+/* ── Panneau ── */
+.onboarding-page .onb-panneau {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 22px 22px calc(28px + env(safe-area-inset-bottom, 0px));
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+.onboarding-page .onb-panneau::-webkit-scrollbar { display: none; }
+.onboarding-page .onb-contenu {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  animation: onbEntre .45s cubic-bezier(.2,.8,.3,1) both;
+}
+@keyframes onbEntre { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+.onboarding-page .onb-titres { display: flex; flex-direction: column; gap: 6px; }
+.onboarding-page .onb-titre {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 31px;
+  font-weight: 800;
+  letter-spacing: -.6px;
+  line-height: 1.05;
+  text-wrap: balance;
+}
+.onboarding-page .onb-sous { margin: 0; font-size: 15px; color: #6B6557; line-height: 1.4; text-wrap: pretty; }
+
+.onboarding-page .onb-classes { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.onboarding-page .onb-classe {
+  position: relative;
+  height: 82px;
+  padding: 0 18px;
+  border-radius: 24px;
+  background: #fff;
+  border: 2.5px solid transparent;
+  box-shadow: 0 10px 24px -14px rgba(120,60,20,.25);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 2px;
+  text-align: left;
+  color: #1B1A23;
+  transition: background .2s, border-color .2s, transform .12s;
+}
+.onboarding-page .onb-classe:active { transform: scale(.97); }
+.onboarding-page .onb-classe--on { background: #FFE6D2; border-color: #C25407; }
+.onboarding-page .onb-classe-nom { font-family: var(--font-display); font-size: 30px; font-weight: 800; letter-spacing: -1px; line-height: 1; }
+.onboarding-page .onb-classe-sous { font-size: 13px; font-weight: 600; color: #6E675B; }
+.onboarding-page .onb-classe--on .onb-classe-sous { color: #B34400; }
+.onboarding-page .onb-classe-ok {
+  position: absolute;
+  right: 14px;
+  top: 14px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #C25407;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.onboarding-page .onb-facons {
+  list-style: none;
+  margin: 0;
+  padding: 4px 16px;
+  background: #fff;
+  border-radius: 26px;
+  box-shadow: 0 12px 30px -14px rgba(120,60,20,.22);
+}
+.onboarding-page .onb-facon { display: flex; align-items: center; gap: 14px; padding: 14px 0; }
+.onboarding-page .onb-facon + .onb-facon { border-top: 1px solid #F2E8D9; }
+.onboarding-page .onb-facon-rond { width: 60px; height: 60px; flex: none; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+.onboarding-page .onb-facon-txt { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.onboarding-page .onb-facon-titre { font-size: 16px; font-weight: 700; }
+.onboarding-page .onb-facon-sous { font-size: 13.5px; color: #6E675B; line-height: 1.4; }
+
+/* ── Bouton ── */
+.onboarding-page .onb-pied {
+  margin-top: auto;
+  padding-top: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
+  gap: 12px;
 }
+.onboarding-page .onb-cta {
+  width: 100%;
+  height: 58px;
+  padding: 0 30px;
+  border: 0;
+  border-radius: 99px;
+  background: #C25407;
+  color: #fff;
+  font: 700 17px 'Geist', system-ui, sans-serif;
+  box-shadow: 0 14px 28px -10px #C25407, inset 0 1px 0 rgba(255,255,255,.25), inset 0 -3px 0 rgba(0,0,0,.18);
+  transition: transform .12s, opacity .2s, box-shadow .12s;
+}
+.onboarding-page .onb-cta:active { transform: scale(.96) translateY(2px); box-shadow: 0 4px 10px -6px rgba(0,0,0,.4); }
+.onboarding-page .onb-cta:disabled { opacity: .45; box-shadow: none; }
+.onboarding-page .onb-cta:focus-visible { outline: 3px solid #1B1A23; outline-offset: 3px; }
+.onboarding-page .onb-lien { border: 0; background: none; font: 700 14px 'Geist', system-ui, sans-serif; color: #C25407; padding: 4px; }
+.onboarding-page .onb-note { font-size: 13px; color: #6E675B; text-align: center; }
 
-.onboarding-page .onb-title {
+/* ── Ordinateur : scène à gauche, choix à droite ── */
+.onboarding-page.onb-desk { flex-direction: row; height: 100dvh; }
+.onboarding-page.onb-desk .onb-scene {
+  width: 640px;
+  height: auto;
   margin: 0;
-  font-family: 'Geist', sans-serif;
+  padding: 0;
+  border-radius: 0;
+}
+.onboarding-page.onb-desk .onb-bulle--a { left: -80px; right: auto; top: 120px; width: 560px; height: 560px; box-shadow: inset 0 -40px 60px rgba(120,60,20,.08), inset 0 24px 40px rgba(255,255,255,.35); }
+.onboarding-page.onb-desk .onb-bulle--b { display: none; }
+.onboarding-page.onb-desk .onb-pastille { display: block; position: absolute; right: 60px; top: 90px; width: 70px; height: 70px; border-radius: 50%; background: #C9C2F2; }
+.onboarding-page.onb-desk .onb-marque {
+  position: absolute;
+  left: 44px;
+  top: 36px;
+  z-index: 3;
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: -.8px;
+}
+.onboarding-page.onb-desk .onb-pantin { top: 50%; bottom: auto; transform: translate(-50%, -48%); }
+.onboarding-page.onb-desk .onb-salut {
+  position: absolute;
+  left: 44px;
+  right: 44px;
+  bottom: 40px;
+  margin: 0;
+  z-index: 3;
+  font-family: var(--font-display);
   font-size: 30px;
   font-weight: 800;
-  letter-spacing: -1px;
-  line-height: 1.08;
-  color: var(--text-primary);
+  letter-spacing: -.8px;
+  line-height: 1.05;
 }
-
-.onboarding-page .onb-level-chip { margin: 2px 0; }
-
-.onboarding-page .onb-sub {
-  margin: 0;
-  font-size: 15px;
-  font-weight: 500;
-  line-height: 1.5;
-  color: var(--text-secondary);
-  max-width: 34ch;
+.onboarding-page.onb-desk .onb-panneau { align-items: center; justify-content: center; padding: 40px; }
+.onboarding-page.onb-desk .onb-contenu { width: 480px; gap: 26px; }
+.onboarding-page.onb-desk .onb-haut-desk { display: flex; align-items: center; gap: 14px; }
+.onboarding-page.onb-desk .onb-haut-desk .onb-retour { background: #fff; box-shadow: 0 6px 16px -10px rgba(120,60,20,.4); }
+.onboarding-page.onb-desk .onb-haut-desk .onb-passer { margin-left: auto; }
+.onboarding-page.onb-desk .onb-titres { gap: 10px; }
+.onboarding-page.onb-desk .onb-titre { font-size: 52px; }
+.onboarding-page.onb-desk .onb-sous { font-size: 17px; line-height: 1.45; }
+.onboarding-page.onb-desk .onb-classe { height: 96px; }
+.onboarding-page.onb-desk .onb-classe:hover { border-color: #F3B98D; }
+.onboarding-page.onb-desk .onb-classe--on:hover { border-color: #C25407; }
+.onboarding-page.onb-desk .onb-actions { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
+.onboarding-page.onb-desk .onb-cta { width: auto; }
+.onboarding-page.onb-desk .onb-cta:not(:disabled):hover { filter: brightness(1.06); }
+.onboarding-page.onb-desk .onb-note { text-align: left; font-size: 14px; }
+@media (max-width: 1180px) {
+  .onboarding-page.onb-desk .onb-scene { width: 46%; }
 }
-
-/* ── Animations ── */
-@keyframes onbSlideIn {
-  from { opacity: 0; transform: translateY(14px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes onbSlideOut {
-  from { opacity: 1; transform: translateY(0); }
-  to   { opacity: 0; transform: translateY(-10px); }
-}
-
-.onboarding-page .onb-anim-in  { animation: onbSlideIn  0.25s ease forwards; }
-.onboarding-page .onb-anim-out { animation: onbSlideOut 0.18s ease forwards; }
-
-/* ── Écran 1 : les quatre supports, une carte, deux colonnes ── */
-.onboarding-page .onb-formats {
-  list-style: none;
-  margin: 4px 0 0;
-  padding: 6px;
-  width: 100%;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2px;
-}
-
-.onboarding-page .onb-format {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 10px 10px;
-  border-radius: var(--radius-callout);
-  text-align: left;
-  animation: onbSlideIn 0.3s ease both;
-}
-
-.onboarding-page .onb-format-text {
-  display: flex;
-  flex-direction: column;
-  gap: 1px;
-  min-width: 0;
-}
-
-.onboarding-page .onb-format-label {
-  font-size: 13.5px;
-  font-weight: 700;
-  letter-spacing: -0.2px;
-  color: var(--text-primary);
-}
-
-.onboarding-page .onb-format-sub {
-  font-size: 12px;
-  line-height: 1.3;
-  color: var(--text-muted);
-}
-
-/* ── Écran 2 : deux façons de réviser ── */
-.onboarding-page .onb-ways {
-  list-style: none;
-  margin: 4px 0 0;
-  padding: 0;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.onboarding-page .onb-way {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  padding: 12px 16px 12px 12px;
-  text-align: left;
-  animation: onbSlideIn 0.3s ease both;
-}
-
-.onboarding-page .onb-way-art {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 64px;
-  height: 64px;
-  border-radius: 20px;
-  flex-shrink: 0;
-}
-.onboarding-page .onb-way-art--orange { background: var(--accent-orange-soft); }
-.onboarding-page .onb-way-art--violet { background: var(--accent-violet-soft); }
-
-.onboarding-page .onb-way-text {
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-  min-width: 0;
-}
-
-.onboarding-page .onb-way-label {
-  font-family: 'Geist', sans-serif;
-  font-size: 16px;
-  font-weight: 800;
-  letter-spacing: -0.3px;
-  color: var(--text-primary);
-}
-
-.onboarding-page .onb-way-sub {
-  font-size: 13px;
-  line-height: 1.4;
-  color: var(--text-secondary);
-}
-
-/* ── Pied : boutons ── */
-.onboarding-page .onb-footer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  width: 100%;
-  max-width: 440px;
-  margin: 0 auto;
-  padding-top: 8px;
-}
-
-.onboarding-page .onb-next { padding: 16px 22px; font-size: 15px; }
-.onboarding-page .onb-next > span:first-child {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-}
-.onboarding-page .onb-secondary {
-  padding: 15px 22px;
-  font-size: 15px;
-  gap: 8px;
-}
-.onboarding-page .onb-cta-ico { width: 18px; height: 18px; }
-.onboarding-page .onb-home { font-size: 14px; }
-
-/* ── Mobile étroit ── */
-@media (max-width: 430px) {
-  .onboarding-page .onb-title { font-size: 26px; letter-spacing: -0.8px; }
-  .onboarding-page .onb-sub { font-size: 14px; }
-}
-
-/* Viewport bas (< 700px) : mascotte réduite */
-@media (max-height: 700px) {
-  .onboarding-page .onb-body { gap: 14px; }
-  .onboarding-page .onb-body > .mascot {
-    width: 110px !important;
-    height: 110px !important;
-  }
-}
-
-/* ── Ordinateur : la page tient dans une colonne centrée ── */
-@media (min-width: 1024px) {
-  /* Ordinateur : une carte centrée (progression, contenu, boutons) au lieu
-     d'une colonne de téléphone dont le bouton tombait en bas de l'écran.
-     Les trois blocs se suivent sans espace et forment une seule carte. */
-  html:not(.native) .onboarding-page { padding: 40px; justify-content: center; }
-  html:not(.native) .onboarding-page .onb-top,
-  html:not(.native) .onboarding-page .onb-body,
-  html:not(.native) .onboarding-page .onb-footer {
-    max-width: 540px;
-    padding-left: 44px;
-    padding-right: 44px;
-    background: var(--bg-card);
-    border: 1px solid var(--border-subtle);
-    box-sizing: border-box;
-  }
-  html:not(.native) .onboarding-page .onb-top {
-    padding-top: 26px;
-    border-bottom: 0;
-    border-radius: var(--radius-card) var(--radius-card) 0 0;
-  }
-  html:not(.native) .onboarding-page .onb-body {
-    flex: none;
-    min-height: 430px;
-    padding-top: 8px;
-    padding-bottom: 8px;
-    border-top: 0;
-    border-bottom: 0;
-  }
-  html:not(.native) .onboarding-page .onb-footer {
-    padding-top: 18px;
-    padding-bottom: 32px;
-    border-top: 0;
-    border-radius: 0 0 var(--radius-card) var(--radius-card);
-    box-shadow: 0 30px 60px -30px rgba(45, 43, 87, 0.22);
-  }
-  /* Cartes intérieures sur fond crème, pas blanc sur blanc */
-  html:not(.native) .onboarding-page .onb-formats,
-  html:not(.native) .onboarding-page .onb-way { background: var(--bg-app); box-shadow: none; }
-}
+/* La coquille centre d'habitude une colonne sur ordinateur : ici, plein écran. */
+html:not(.native) body .app.onboarding-page.onb-desk { padding-left: 0; padding-right: 0; margin-left: 0; }

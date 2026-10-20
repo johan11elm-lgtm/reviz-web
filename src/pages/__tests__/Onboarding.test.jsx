@@ -1,11 +1,12 @@
-// Onboarding : trois écrans (supports, deux façons de réviser, premier geste),
-// « Passer » à tout moment, et le dernier écran mène au programme ou au scan.
+// Onboarding (refonte du 20/10) : bonjour, classe (collège), deux façons de
+// réviser, on commence. « Passer » à tout moment ; le dernier écran mène au
+// programme ou au scan.
 import { describe, it, expect, vi, beforeEach } from 'vitest'
-import { render, screen, fireEvent, act } from '@testing-library/react'
+import { render, screen, fireEvent } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
 
 const nav = vi.hoisted(() => vi.fn())
-const auth = vi.hoisted(() => ({ level: { cycle: 'college', classe: '3ème' } }))
+const auth = vi.hoisted(() => ({ level: { cycle: 'college', classe: '3ème' }, setUserLevel: vi.fn() }))
 vi.mock('react-router-dom', async (importOriginal) => ({
   ...(await importOriginal()),
   useNavigate: () => nav,
@@ -14,18 +15,18 @@ vi.mock('../../context/AuthContext', () => ({
   useAuth: () => ({
     currentUser: { uid: 'u1', displayName: 'Léa Martin' },
     getUserLevel: () => auth.level,
+    setUserLevel: auth.setUserLevel,
   }),
 }))
 
+// Le pantin charge ses calques par le réseau : hors sujet ici.
+vi.mock('../../components/Pantin', () => ({ Pantin: () => null }))
+
 const { default: Onboarding } = await import('../Onboarding')
 
-function allerAuDernierEcran() {
-  vi.useFakeTimers()
-  fireEvent.click(screen.getByRole('button', { name: /Continuer/ }))
-  act(() => { vi.advanceTimersByTime(200) })
-  fireEvent.click(screen.getByRole('button', { name: /Continuer/ }))
-  act(() => { vi.advanceTimersByTime(200) })
-  vi.useRealTimers()
+const continuer = () => fireEvent.click(screen.getByRole('button', { name: 'Continuer' }))
+function allerAuDernierEcran(n = 3) {
+  for (let i = 0; i < n; i++) continuer()
 }
 
 describe('<Onboarding />', () => {
@@ -35,15 +36,22 @@ describe('<Onboarding />', () => {
     auth.level = { cycle: 'college', classe: '3ème' }
   })
 
-  it('salue par le prénom, montre les quatre supports et la classe', () => {
+  it('Réviz se présente et salue par le prénom', () => {
     render(<MemoryRouter><Onboarding /></MemoryRouter>)
-    expect(screen.getByRole('heading', { name: 'Salut Léa' })).toBeInTheDocument()
-    expect(screen.getByText('3ème')).toBeInTheDocument()
-    for (const f of ['Résumé', 'Flashcards', 'Carte mentale', 'Quiz']) {
-      expect(screen.getByText(f)).toBeInTheDocument()
-    }
-    expect(screen.getByLabelText('Étape 1 sur 3')).toBeInTheDocument()
-    expect(screen.queryByText(/coach IA/)).not.toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: "Salut Léa, moi c'est Réviz." })).toBeInTheDocument()
+    expect(screen.getByText(/résumés, flashcards, quiz et cartes mentales/)).toBeInTheDocument()
+    expect(screen.getByLabelText('Étape 1 sur 4')).toBeInTheDocument()
+  })
+
+  it('choix de la classe : la classe actuelle cochée, une autre enregistrée', () => {
+    auth.setUserLevel.mockClear()
+    render(<MemoryRouter><Onboarding /></MemoryRouter>)
+    continuer()
+    expect(screen.getByRole('heading', { name: 'Tu es en quelle classe ?' })).toBeInTheDocument()
+    expect(screen.getByRole('radio', { name: /3e/ })).toHaveAttribute('aria-checked', 'true')
+    fireEvent.click(screen.getByRole('radio', { name: /5e/ }))
+    continuer()
+    expect(auth.setUserLevel).toHaveBeenCalledWith({ cycle: 'college', classe: '5ème' })
   })
 
   it('« Passer » marque l’onboarding vu et renvoie à l’accueil', () => {
@@ -65,11 +73,9 @@ describe('<Onboarding />', () => {
 
   it('le deuxième écran nomme les chapitres de la classe', () => {
     render(<MemoryRouter><Onboarding /></MemoryRouter>)
-    vi.useFakeTimers()
-    fireEvent.click(screen.getByRole('button', { name: /Continuer/ }))
-    act(() => { vi.advanceTimersByTime(200) })
-    vi.useRealTimers()
-    expect(screen.getByText('Mon programme')).toBeInTheDocument()
+    continuer()
+    continuer()
+    expect(screen.getByText('Ton programme')).toBeInTheDocument()
     expect(screen.getByText(/Les chapitres de 3ème, déjà prêts/)).toBeInTheDocument()
     expect(screen.getByText('Scanner une leçon')).toBeInTheDocument()
   })
@@ -77,10 +83,11 @@ describe('<Onboarding />', () => {
   it('au lycée : le scan d’abord, le programme de 3ème en second', () => {
     auth.level = { cycle: 'lycee', classe: 'Terminale', specialites: ['Maths'] }
     render(<MemoryRouter><Onboarding /></MemoryRouter>)
-    allerAuDernierEcran()
+    allerAuDernierEcran(2)  // pas de choix de classe au lycée
+    expect(screen.getByLabelText('Étape 3 sur 3')).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: /voir le programme de 3ème/ })).toBeInTheDocument()
     fireEvent.click(screen.getByRole('button', { name: /Scanner ma première leçon/ }))
     expect(nav).toHaveBeenCalledWith('/scan', { replace: false })
-    expect(screen.getByRole('button', { name: /Voir le programme de 3ème/ })).toBeInTheDocument()
   })
 
   it('déjà vu : renvoie à l’accueil sans rien afficher de plus', () => {
