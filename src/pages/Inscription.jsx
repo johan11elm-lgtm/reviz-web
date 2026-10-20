@@ -1,7 +1,7 @@
 import { UsersIcon } from '../components/Icons';
 import { Mascot } from '../components/Mascot';
 import { useState, useMemo, useEffect } from 'react';
-import { Link, useNavigate, useSearchParams, useLocation } from 'react-router-dom';
+import { Link, Navigate, useNavigate, useSearchParams, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import SocialLogin, { erreurConnexionSociale } from '../components/SocialLogin';
 import {
@@ -36,6 +36,9 @@ function firebaseErrorFr(code) {
 
 // isUnder15 est désormais importé depuis ../utils/levels (source unique).
 
+// Attente maximale de la relecture du gate avant de passer à la suite.
+const ATTENTE_GATE_MS = 2000;
+
 export default function Inscription() {
   const [prenom, setPrenom]               = useState(() => readGuest()?.prenom ?? '');
   const [birthDate, setBirthDate]         = useState('');
@@ -55,8 +58,12 @@ export default function Inscription() {
   const [animDir, setAnimDir]             = useState('in');
   const [voirMdp, setVoirMdp]             = useState(false);
   const [compteCree, setCompteCree]       = useState(false);
+  const [plusTardEnCours, setPlusTardEnCours] = useState(false);
 
-  const { signup, loginWithProvider, refreshGate } = useAuth();
+  const { signup, loginWithProvider, refreshGate, currentUser, isGuest } = useAuth();
+  // Compte déjà ouvert en arrivant ici (page rechargée en plein tunnel,
+  // retour arrière) : refaire le tunnel créerait un second compte (19/10).
+  const [dejaInscrit] = useState(() => !!currentUser && !isGuest);
   const navigate                          = useNavigate();
   const location                          = useLocation();
   const [params, setParams]               = useSearchParams();
@@ -84,6 +91,7 @@ export default function Inscription() {
   // Idem si une étape précédente n'est pas remplie (sinon on pourrait créer
   // un compte sans date de naissance, donc sans accord parental).
   useEffect(() => {
+    if (dejaInscrit) return;
     const manquante = steps.slice(0, stepIdx).findIndex(id => validate(id));
     if (manquante >= 0) goTo(manquante, { replace: true });
     else if (stepIdx >= steps.length) goTo(steps.length - 1, { replace: true });
@@ -92,6 +100,7 @@ export default function Inscription() {
   // Compte déjà créé (moins de 15 ans) : revenir en arrière recréerait le
   // compte (« email déjà utilisé »). On reste sur l'étape parent.
   useEffect(() => {
+    if (dejaInscrit) return;
     const iParent = steps.indexOf('parent');
     if (compteCree && iParent >= 0 && stepIdx !== iParent) goTo(iParent, { replace: true });
   }, [compteCree, stepIdx, steps]);
@@ -164,6 +173,14 @@ export default function Inscription() {
     }
   }
 
+  // La suite ne dépend pas de la relecture du gate (le statut est déjà
+  // calculé, et l'accueil se recale tout seul) : sur Safari iOS, une lecture
+  // Firestore peut rester sans réponse, et l'élève restait bloqué ici (19/10).
+  function rafraichirGate() {
+    const relecture = Promise.resolve(refreshGate?.()).catch(() => {});
+    return Promise.race([relecture, new Promise(r => setTimeout(r, ATTENTE_GATE_MS))]);
+  }
+
   async function handlePrimary() {
     const err = validate(stepId);
     if (err) { setError(err); return; }
@@ -173,12 +190,12 @@ export default function Inscription() {
       setLoading(true);
       try {
         await signup(prenom.trim(), email.trim(), password, level, birthDate);
-        await refreshGate?.();
+        await rafraichirGate();
         if (isUnder15(birthDate)) {
           setCompteCree(true);
           goNext({ replace: true });
         } else {
-          navigate('/verify-email', { replace: true });
+          navigate('/', { replace: true });
         }
       } catch (err) {
         setError(firebaseErrorFr(err.code));
@@ -195,8 +212,8 @@ export default function Inscription() {
       try {
         await sendParentalConsent(parentEmail.trim(), prenom);
         track('consent_envoye');
-        await refreshGate?.();
-        navigate('/verify-email', { replace: true });
+        await rafraichirGate();
+        navigate('/', { replace: true });
       } catch (err) {
         setError(consentErrorMessage(err.message));
       } finally {
@@ -213,9 +230,10 @@ export default function Inscription() {
   async function plusTard() {
     setError('');
     setLoading(true);
+    setPlusTardEnCours(true);
     track('consent_plus_tard');
-    try { await refreshGate?.(); } finally { setLoading(false); }
-    navigate('/verify-email', { replace: true });
+    await rafraichirGate();
+    navigate('/', { replace: true });
   }
 
   async function handleProvider(id) {
@@ -259,7 +277,7 @@ export default function Inscription() {
   const isLast = stepIdx === steps.length - 1;
   const primaryLabel = (() => {
     if (loading && stepId === 'account') return 'Création...';
-    if (loading && stepId === 'parent')  return 'Envoi...';
+    if (loading && stepId === 'parent' && !plusTardEnCours) return 'Envoi...';
     if (stepId === 'account') return 'Créer mon compte';
     if (stepId === 'parent')  return 'Envoyer et commencer →';
     return 'Continuer';
@@ -461,7 +479,7 @@ export default function Inscription() {
   );
   const boutonPlusTard = stepId === 'parent' && (
         <button type="button" className="auth-btn-plus-tard" onClick={plusTard} disabled={loading}>
-          Plus tard, je commence à réviser →
+          {plusTardEnCours ? 'Un instant…' : 'Plus tard, je commence à réviser →'}
           <small>Tu as 15 jours pour donner l'email</small>
         </button>
   );
@@ -480,6 +498,10 @@ export default function Inscription() {
           <div className="signup-progress-bar" style={{ width: `${((progressIdx + 1) / totalVisible) * 100}%` }} />
         </div>
   );
+
+  if (dejaInscrit) {
+    return <Navigate to="/" replace />;
+  }
 
   if (isDesktop) {
     return (

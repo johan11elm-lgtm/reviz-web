@@ -23,6 +23,8 @@ export const EVENTS = [
   'revizplus_offert_cta',
   // Scan d'une leçon : analyse réussie, ou écran d'erreur affiché (avec son code).
   'scan_reussi', 'scan_erreur',
+  // Ouverture de l'app (une fois par jour et par appareil), avec l'ancienneté.
+  'ouverture',
 ]
 
 const ALLOWED = {
@@ -39,6 +41,9 @@ const ALLOWED = {
   joueur: ['compte', 'invite'],
   issue: ['victoire', 'egalite', 'forfait'],
   plateforme: ['ios', 'android', 'ordinateur'],
+  // Jours écoulés depuis le début de l'essai ou la création du compte, par
+  // tranches : « essai_j1 » = un essai rouvert le lendemain de son début.
+  anciennete: ['essai', 'compte'].flatMap(m => ['j0', 'j1', 'j2_7', 'j8_30', 'j31_plus'].map(t => `${m}_${t}`)),
   // Provenance (`?via=` dans le lien de bio, d'une épingle, d'une affiche ou
   // d'une fiche publique du site) : d'où vient l'élève, sans rien identifier.
   via: ['tiktok', 'instagram', 'pinterest', 'youtube', 'affiche', 'landing', 'fiche'],

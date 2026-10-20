@@ -65,6 +65,13 @@ describe('buildUpdate', () => {
     })
     expect(buildUpdate('scan_erreur', { code: 'API_ERROR_99999' }).scan_erreur.code).toEqual({ AUTRE: 1 })
   })
+  it("compte les ouvertures par ancienneté (essai ou compte) et ignore une tranche inconnue", () => {
+    expect(buildUpdate('ouverture', { anciennete: 'essai_j1', mode: 'essai' })).toEqual({
+      ouverture: { total: 1, anciennete: { essai_j1: 1 }, mode: { essai: 1 } },
+    })
+    expect(buildUpdate('ouverture', { anciennete: 'compte_j31_plus' }).ouverture.anciennete).toEqual({ compte_j31_plus: 1 })
+    expect(buildUpdate('ouverture', { anciennete: 'j1' })).toEqual({ ouverture: { total: 1 } })
+  })
   it('refuse un événement inconnu', () => {
     expect(buildUpdate('mouchard', {})).toBeNull()
   })

@@ -17,6 +17,8 @@ vi.mock('firebase/auth', () => ({
   signInWithPopup: vi.fn(), signInWithCredential: vi.fn(), deleteUser: vi.fn(),
   OAuthProvider: class {}, signInWithCustomToken: vi.fn(), revokeAccessToken: vi.fn(),
 }))
+// La mesure des retours est testée à part (retourService.test.js).
+vi.mock('../../services/retourService', () => ({ noterOuverture: () => {} }));
 vi.mock('firebase/firestore', () => ({
   getDoc: (...a) => fb.getDoc(...a),
   doc: (db, ...path) => path.join('/'),

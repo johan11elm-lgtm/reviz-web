@@ -32,8 +32,8 @@ test.describe('Consentement parental (<15 ans)', () => {
 
     await signup(page, { birthDate: '2014-06-01', parentEmail: 'parent@famille.test' })
 
-    // Pas de mur : même suite que pour un grand (vérification d'email), puis l'app.
-    await expect(page).toHaveURL(/verify-email/, { timeout: 15_000 })
+    // Pas de mur : même suite que pour un grand, droit dans l'app.
+    await expect(page).toHaveURL(/onboarding/, { timeout: 15_000 })
     await page.goto('/')
     await expect(page).toHaveURL(/onboarding/, { timeout: 15_000 })
     await page.getByRole('button', { name: 'Passer' }).click()

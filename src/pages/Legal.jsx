@@ -50,7 +50,7 @@ const PAGES = {
     title: 'Politique de confidentialité',
     content: () => (
       <>
-        <p className="legal-updated">Dernière mise à jour : 16 octobre 2026</p>
+        <p className="legal-updated">Dernière mise à jour : 19 octobre 2026</p>
 
         <Section title="Données collectées">
           <ul>
@@ -59,6 +59,7 @@ const PAGES = {
             <li><strong>Date de naissance</strong> — collectée à l'inscription, uniquement pour déterminer si le consentement parental est requis (moins de 15 ans, art. 45 de la loi Informatique et Libertés).</li>
             <li><strong>Leçons scannées</strong> — le texte ou l'image de tes leçons, envoyé à l'IA pour générer les contenus de révision. Ces données ne sont pas conservées côté serveur après traitement.</li>
             <li><strong>Historique</strong> — tes leçons et révisions sont stockées localement sur ton appareil (localStorage) et synchronisées dans ta collection Firestore personnelle.</li>
+            <li><strong>Jours d'ouverture</strong> — avec un compte, les dates (le jour, sans l'heure) où tu ouvres Réviz sont ajoutées à ton profil, pour savoir si les élèves reviennent réviser. Dans ton navigateur, l'app garde seulement la date de ta dernière ouverture, pour ne la compter qu'une fois par jour.</li>
             <li><strong>Agenda</strong> — les contrôles que tu notes (matière, date, sujet facultatif), et, si tu relies Pronote, l'adresse de ton emploi du temps, enregistrées sur ton compte. Réviz lit avec cette adresse tes horaires de cours, pour les afficher ; il ne voit ni tes notes, ni tes devoirs, ni tes absences, et ne conserve pas tes cours sur ses serveurs. Tu peux délier Pronote à tout moment depuis l'Agenda.</li>
             <li><strong>Battle</strong> — pour jouer à deux en direct : le prénom ou le surnom que tu choisis, tes réponses et tes temps de réponse. Sans compte, rien d'autre : un identifiant technique anonyme (Firebase) relie tes réponses à la partie, sans email ni date de naissance. Avec un compte, ton total d'aura et ton nombre de battles jouées et gagnées sont ajoutés à ton profil.</li>
             <li><strong>Avis</strong> — ce que tu écris sur la page « Votre avis » (profil, réponses, e-mail facultatif pour recevoir une réponse), sans compte ni identifiant. Conservés 2 ans au plus, supprimés sur simple demande.</li>
@@ -122,7 +123,7 @@ const PAGES = {
         </Section>
 
         <Section title="Cookies">
-          <p>Réviz utilise uniquement des cookies strictement nécessaires au fonctionnement (authentification Firebase, et un cookie de sécurité de 10 minutes au plus pendant une connexion avec TikTok, supprimé dès la connexion terminée). Aucun cookie publicitaire ou de tracking n'est utilisé. La mesure d'audience (PostHog) fonctionne sans cookie et sans rien enregistrer sur ton appareil : elle compte les visites de façon anonyme, sans savoir qui tu es.</p>
+          <p>Réviz utilise uniquement des cookies strictement nécessaires au fonctionnement (authentification Firebase, et un cookie de sécurité de 10 minutes au plus pendant une connexion avec TikTok, supprimé dès la connexion terminée). Aucun cookie publicitaire ou de tracking n'est utilisé. La mesure d'audience (PostHog) fonctionne sans cookie et sans rien enregistrer sur ton appareil : elle compte les visites de façon anonyme, sans savoir qui tu es. Le compteur des retours se sert seulement de la date de ta dernière ouverture, gardée dans ton navigateur (voir « Jours d'ouverture »).</p>
         </Section>
       </>
     ),
