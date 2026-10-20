@@ -57,14 +57,15 @@ describe('<Programme />', () => {
   it('liste les matières de la classe avec leur nombre de chapitres et ouvre une matière', async () => {
     renderPage()
     expect(await screen.findByText('Maths')).toBeInTheDocument()
-    expect(screen.getByText('2 chapitres')).toBeInTheDocument()
-    expect(screen.getByText('1 chapitre')).toBeInTheDocument()
-    expect(screen.getByText(/3ème · 3 chapitres/)).toBeInTheDocument()
+    expect(screen.getByText(/^0 \/ 2 (chapitres )?maîtrisés$/)).toBeInTheDocument()
+    expect(screen.getByText(/^0 \/ 1 (chapitres )?maîtrisés$/)).toBeInTheDocument()
+    expect(screen.getByText('2 matières · 3 chapitres')).toBeInTheDocument()
+    expect(screen.getAllByText('À découvrir')).toHaveLength(2)
     fireEvent.click(screen.getByRole('button', { name: /^Maths/ }))
     expect(nav).toHaveBeenCalledWith('/programme/maths')
   })
 
-  it('montre l’avancement de chaque matière : cartes à revoir, tout maîtrisé, une encoche par chapitre', async () => {
+  it('montre l’avancement de chaque matière et le chapitre à reprendre', async () => {
     const now = Date.now(), DAY = 86400000
     localStorage.setItem('reviz-lessons', JSON.stringify([
       { id: 'prog-thales', title: 'Le théorème de Thalès', subject: 'Maths', flashcardsCount: 2, source: 'programme' },
@@ -75,16 +76,14 @@ describe('<Programme />', () => {
       'prog-thales_1': { interval: 3, reps: 2, ease: 2.5, nextReview: now + 3 * DAY },
       'prog-argumentation_0': { interval: 3, reps: 2, ease: 2.5, nextReview: now + 3 * DAY },
     }))
-    const { container } = renderPage()
-    expect(await screen.findByText('1 carte à travailler')).toBeInTheDocument()
-    expect(screen.getByText('Tout maîtrisé')).toBeInTheDocument()
-    expect(screen.getByText(/3ème · 2 chapitres commencés sur 3/)).toBeInTheDocument()
-    expect(screen.getByRole('button', { name: /^Maths : 2 chapitres · 1 commencé · 1 carte à travailler/ })).toBeInTheDocument()
-    expect(container.querySelectorAll('.programme-strip-seg--a-revoir')).toHaveLength(1)
-    expect(container.querySelectorAll('.programme-strip-seg--bientot')).toHaveLength(1)
-    expect(container.querySelectorAll('.programme-strip-seg--maitrise')).toHaveLength(1)
-    // Prochaine étape : le premier chapitre prêt et non maîtrisé ; aucune pour une matière finie.
-    expect(screen.getAllByText('Prochaine étape')).toHaveLength(1)
+    renderPage()
+    expect(await screen.findByText('1 à travailler')).toBeInTheDocument()
+    expect(screen.getByText('Maîtrisé')).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: 'Maths : 0 sur 2 chapitres maîtrisés' })).toBeInTheDocument()
+    expect(screen.getByText(/^1 \/ 1 (chapitres )?maîtrisés$/)).toBeInTheDocument()
+    // « À reprendre » : le dernier chapitre ouvert de la classe.
+    expect(screen.getByText('À reprendre')).toBeInTheDocument()
+    expect(screen.getByText('Le théorème de Thalès')).toBeInTheDocument()
   })
 
   it('un lycéen voit le programme de 3e avec une note', async () => {

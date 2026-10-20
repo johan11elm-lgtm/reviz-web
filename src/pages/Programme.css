@@ -147,3 +147,210 @@
   line-height: 1.45;
   color: var(--text-secondary);
 }
+
+/* ─── Programme, refonte du 20/10 (« Reviz Valide ») ─────────────────
+ * Titre en Bricolage, sélecteur de classe, carte « À reprendre » en aplat
+ * orange avec du grain, matières en rangées dans une carte blanche. */
+.prg-page { --prg-encre: #1B1A23; --prg-doux: #6E675B; }
+.prg-page .prg-content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: calc(18px + env(safe-area-inset-top, 0px)) 22px calc(130px + env(safe-area-inset-bottom, 0px));
+  overflow-y: auto;
+  flex: 1;
+  min-height: 0;
+}
+.prg-page .prg-tete { display: flex; justify-content: space-between; align-items: flex-end; gap: 12px; }
+.prg-page .prg-titre {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 40px;
+  font-weight: 800;
+  letter-spacing: -.6px;
+  line-height: 1.05;
+  color: var(--prg-encre);
+}
+.prg-page .prg-choix { position: relative; }
+.prg-page .prg-choix-btn {
+  padding: 8px 14px;
+  border: 0;
+  border-radius: 99px;
+  background: #fff;
+  font: 700 14px 'Geist', system-ui, sans-serif;
+  color: var(--prg-encre);
+  box-shadow: 0 4px 14px rgba(120,60,20,.08);
+}
+.prg-page .prg-choix-liste {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 6px);
+  z-index: 20;
+  list-style: none;
+  margin: 0;
+  padding: 6px;
+  min-width: 170px;
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 18px 40px -12px rgba(120,60,20,.3);
+}
+.prg-page .prg-choix-liste button {
+  width: 100%;
+  padding: 10px 12px;
+  border: 0;
+  border-radius: 12px;
+  background: none;
+  text-align: left;
+  font: 600 14px 'Geist', system-ui, sans-serif;
+  color: var(--prg-encre);
+}
+.prg-page .prg-choix-liste [aria-selected="true"] button { background: #FFE6D2; color: #C25407; }
+.prg-page .prg-classes {
+  display: flex;
+  gap: 4px;
+  padding: 4px;
+  border-radius: 99px;
+  background: #fff;
+  box-shadow: 0 4px 14px rgba(120,60,20,.08);
+}
+.prg-page .prg-classe {
+  padding: 9px 18px;
+  border: 0;
+  border-radius: 99px;
+  background: transparent;
+  font: 700 14px 'Geist', system-ui, sans-serif;
+  color: var(--prg-doux);
+  transition: background .2s, color .2s;
+}
+.prg-page .prg-classe:hover { color: var(--prg-encre); }
+.prg-page .prg-classe--on,
+.prg-page .prg-classe--on:hover { background: #FFE6D2; color: #C25407; }
+
+/* À reprendre */
+.prg-page .prg-reprise {
+  position: relative;
+  min-height: 168px;
+  padding: 18px;
+  border: 0;
+  border-radius: 30px;
+  background: #FFB37A;
+  overflow: hidden;
+  text-align: left;
+  color: var(--prg-encre);
+  flex-shrink: 0;
+}
+.prg-page .prg-reprise-rond { position: absolute; right: -30px; top: -40px; width: 200px; height: 200px; border-radius: 50%; background: #FFC596; }
+.prg-page .prg-grain {
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.35 0 0 0 0 0.2 0 0 0 0 0.1 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: .32;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+.prg-page .prg-reprise-mascotte { position: absolute; right: -6px; bottom: -12px; transition: transform .2s; }
+.prg-page .prg-reprise:active .prg-reprise-mascotte { transform: rotate(-4deg); }
+.prg-page .prg-reprise-txt { position: relative; display: flex; flex-direction: column; gap: 4px; max-width: 190px; }
+.prg-page .prg-surtitre { font-size: 12px; font-weight: 700; letter-spacing: .6px; text-transform: uppercase; color: rgba(27,26,35,.62); }
+.prg-page .prg-reprise-titre { font-family: var(--font-display); font-size: 25px; font-weight: 800; letter-spacing: -.6px; line-height: 1.05; }
+.prg-page .prg-reprise-meta { font-size: 14px; color: #4A3420; }
+.prg-page .prg-reprise-btn {
+  margin-top: 12px;
+  align-self: flex-start;
+  padding: 10px 18px;
+  border-radius: 99px;
+  background: #fff;
+  font-size: 15px;
+  font-weight: 700;
+  color: #C25407;
+}
+
+/* Matières */
+.prg-page .prg-sous-tete { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+.prg-page .prg-titre2 { margin: 0; font-family: var(--font-display); font-size: 23px; font-weight: 800; letter-spacing: -.6px; line-height: 1.05; color: var(--prg-encre); }
+.prg-page .prg-compte { font-size: 13px; color: var(--prg-doux); white-space: nowrap; }
+.prg-page .prg-liste {
+  padding: 4px 16px;
+  background: #fff;
+  border-radius: 26px;
+  box-shadow: 0 12px 30px -14px rgba(120,60,20,.22);
+}
+.prg-page .prg-matiere {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 0;
+  border: 0;
+  background: none;
+  text-align: left;
+  color: var(--prg-encre);
+}
+.prg-page .prg-matiere + .prg-matiere { border-top: 1px solid #F2E8D9; }
+.prg-page .prg-matiere-rond { width: 58px; height: 58px; flex: none; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: transform .15s; }
+.prg-page .prg-matiere:active .prg-matiere-rond { transform: scale(.94); }
+.prg-page .prg-matiere-txt { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 6px; }
+.prg-page .prg-matiere-haut { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.prg-page .prg-matiere-nom { font-size: 16px; font-weight: 700; }
+.prg-page .prg-matiere-haut .rv-pill { flex: none; white-space: nowrap; }
+.prg-page .prg-barre { height: 6px; border-radius: 99px; background: #EFE5D8; overflow: hidden; }
+.prg-page .prg-barre > span { display: block; height: 100%; border-radius: 99px; }
+.prg-page .prg-matiere-meta { font-size: 12.5px; color: var(--prg-doux); }
+
+/* Leçons scannées */
+.prg-page .prg-scans {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 16px;
+  border-radius: 22px;
+  background: #fff;
+  box-shadow: 0 12px 30px -14px rgba(120,60,20,.22);
+  color: var(--prg-encre);
+  text-decoration: none;
+}
+.prg-page .prg-scans-rond { width: 52px; height: 52px; flex: none; border-radius: 50%; background: #E4E0FA; display: flex; align-items: center; justify-content: center; }
+.prg-page .prg-scans-txt { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.prg-page .prg-scans-titre { font-size: 15px; font-weight: 700; }
+.prg-page .prg-scans-meta { font-size: 13px; color: var(--prg-doux); }
+.prg-page .prg-fleche { font-size: 22px; color: var(--prg-doux); }
+
+/* Ordinateur */
+@media (min-width: 1024px) {
+  html:not(.native) .prg-page .prg-content { padding: 36px 44px 48px; gap: 24px; }
+  html:not(.native) .prg-page .prg-titre { font-size: 52px; }
+  html:not(.native) .prg-page .prg-reprise { min-height: 220px; padding: 30px 34px; cursor: pointer; }
+  html:not(.native) .prg-page .prg-reprise-rond { right: 60px; width: 300px; height: 300px; }
+  html:not(.native) .prg-page .prg-reprise-mascotte { right: 80px; }
+  html:not(.native) .prg-page .prg-reprise:hover .prg-reprise-mascotte { transform: rotate(-4deg) translateY(-3px); }
+  html:not(.native) .prg-page .prg-reprise-txt { max-width: 460px; }
+  html:not(.native) .prg-page .prg-reprise-titre { font-size: 40px; }
+  html:not(.native) .prg-page .prg-titre2 { font-size: 26px; }
+  html:not(.native) .prg-page .prg-compte { font-size: 14px; }
+  html:not(.native) .prg-page .prg-liste {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+    padding: 0;
+    background: none;
+    box-shadow: none;
+    border-radius: 0;
+  }
+  html:not(.native) .prg-page .prg-matiere,
+  html:not(.native) .prg-page .prg-matiere + .prg-matiere {
+    padding: 18px;
+    gap: 16px;
+    border: 0;
+    border-radius: 26px;
+    background: #fff;
+    box-shadow: 0 12px 30px -14px rgba(120,60,20,.22);
+    cursor: pointer;
+    transition: transform .15s, box-shadow .15s;
+  }
+  html:not(.native) .prg-page .prg-matiere:hover { transform: translateY(-2px); box-shadow: 0 18px 36px -14px rgba(120,60,20,.3); }
+  html:not(.native) .prg-page .prg-matiere-rond { width: 64px; height: 64px; }
+  html:not(.native) .prg-page .prg-matiere-nom { font-size: 17px; }
+  html:not(.native) .prg-page .prg-matiere-txt { gap: 7px; }
+  html:not(.native) .prg-page .prg-matiere-meta { font-size: 13px; }
+  html:not(.native) .prg-page .prg-scans { align-self: flex-start; min-width: 380px; }
+}

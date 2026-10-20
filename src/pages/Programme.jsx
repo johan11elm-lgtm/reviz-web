@@ -1,34 +1,37 @@
 import { useEffect, useMemo, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { BottomNav } from '../components/BottomNav';
-import { PageHeader } from '../components/PageHeader';
-import { PageIntro } from '../components/PageIntro';
 import { Mascot } from '../components/Mascot';
 import { GuestBanner } from '../components/GuestBanner';
-import { CheckIcon, RefreshIcon } from '../components/Icons';
 import { loadCatalogue, chapterProgress } from '../services/programmeService';
-import { loadLessons } from '../services/historyService';
+import { loadLessons, restoreLesson } from '../services/historyService';
 import { track } from '../services/statsService';
 import { useIsDesktop } from '../hooks/useMediaQuery';
 import { subjectMascot } from '../utils/subjects';
-import { hasProgramme, PROGRAMME_FALLBACK } from '../utils/programme';
+import { hasProgramme, PROGRAMME_CLASSES, PROGRAMME_FALLBACK } from '../utils/programme';
 import './Programme.css';
 
 /**
- * « Mon programme » — réviser sans scan : les matières de la classe de
+ * « Programme » (refonte du 20/10) — réviser sans scan : les matières de la classe de
  * l'élève, avec sa progression chapitre par chapitre. Les contenus sont
  * des fichiers statiques partagés (public/programme), donc disponibles en
  * mode essai comme avec un compte, sans quota ni appel IA.
  */
+const PASTELS = ['#FFD7BE', '#E4E0FA', '#FFE6D2', '#DCF5E6', '#FFD9E4', '#E4E0FA', '#FFE6D2', '#DCF5E6'];
+const court = c => c.replace('ème', 'e');
+
 export default function Programme() {
   const navigate = useNavigate();
   const { getUserLevel, isGuest } = useAuth();
+  const isDesktop = useIsDesktop();
   const level = getUserLevel();
-  // Classe affichée : celle de l'élève si son programme est publié, sinon la
-  // première disponible (un élève de 4e peut parcourir la 3e en attendant).
-  const classe = hasProgramme(level) ? level.classe : PROGRAMME_FALLBACK;
-  const autreClasse = !!level?.classe && classe !== level.classe;
+  // Classe de l'élève si son programme est publié, sinon la 3e (lycée). Il
+  // peut parcourir une autre classe sans changer la sienne.
+  const classeEleve = hasProgramme(level) ? level.classe : PROGRAMME_FALLBACK;
+  const [classe, setClasse] = useState(classeEleve);
+  const autreClasse = !!level?.classe && !hasProgramme(level);
+  const [choix, setChoix] = useState(false);
 
   const [catalogue, setCatalogue] = useState(null);
   const [error, setError] = useState(null);
@@ -46,46 +49,90 @@ export default function Programme() {
     return () => { alive = false; };
   }, [classe]);
 
-  // État de chaque chapitre, calculé une fois par matière (tuiles et sous-titre).
-  const matieres = useMemo(() => (catalogue?.matieres ?? []).map(m => {
+  const matieres = useMemo(() => (catalogue?.matieres ?? []).map((m, i) => {
     const items = m.chapitres.map(ch => ({ chapter: ch, ...chapterProgress(ch, lessons) }));
     return {
       ...m,
       items,
+      fond: PASTELS[i % PASTELS.length],
       commences: items.filter(i => i.state !== 'nouveau').length,
       maitrises: items.filter(i => i.state === 'maitrise').length,
       aRevoir: items.reduce((n, i) => n + (i.state === 'a-revoir' ? i.dueCards : 0), 0),
-      // Même repère que le chemin de la matière : le premier chapitre non maîtrisé.
-      prochain: items.find(i => i.chapter.pret && i.state !== 'maitrise') ?? null,
     };
   }), [catalogue, lessons]);
   const total = matieres.reduce((n, m) => n + m.items.length, 0);
-  const commences = matieres.reduce((n, m) => n + m.commences, 0);
-  // 8 matières → 4 colonnes sur ordinateur, 6 (en 6e) → 3 : jamais de trou en fin de grille.
-  const cols = matieres.length % 4 === 0 ? 4 : matieres.length % 3 === 0 ? 3 : 4;
+
+  // « À reprendre » : le dernier chapitre ouvert de cette classe.
+  const reprise = useMemo(() => {
+    for (const l of lessons) {
+      if (l.source !== 'programme' || (l.classe && l.classe !== classe)) continue;
+      const m = matieres.find(x => x.items.some(it => it.lesson?.id === l.id));
+      if (!m) continue;
+      const it = m.items.find(x => x.lesson?.id === l.id);
+      return { lesson: l, m, it };
+    }
+    return null;
+  }, [lessons, matieres, classe]);
+  const scannees = lessons.filter(l => l.source !== 'programme').length;
+
+  const selecteur = isDesktop ? (
+    <div className="prg-classes" role="radiogroup" aria-label="Classe">
+      {PROGRAMME_CLASSES.map(c => (
+        <button key={c} type="button" role="radio" aria-checked={c === classe}
+          className={`prg-classe${c === classe ? ' prg-classe--on' : ''}`} onClick={() => setClasse(c)}>{court(c)}</button>
+      ))}
+    </div>
+  ) : (
+    <div className="prg-choix">
+      <button type="button" className="prg-choix-btn" aria-expanded={choix} aria-haspopup="listbox" onClick={() => setChoix(v => !v)}>
+        {court(classe)} <span aria-hidden="true">▾</span>
+      </button>
+      {choix && (
+        <ul className="prg-choix-liste" role="listbox" aria-label="Classe">
+          {PROGRAMME_CLASSES.map(c => (
+            <li key={c} role="option" aria-selected={c === classe}>
+              <button type="button" onClick={() => { setClasse(c); setChoix(false); }}>{c}{c === classeEleve ? ' · ta classe' : ''}</button>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
 
   return (
-    <div className="app programme-page">
-      <PageHeader
-        variant="back"
-        onBack={() => (window.history.state?.idx > 0 ? navigate(-1) : navigate('/'))}
-        className="rv-page-header--racine"
-      />
-      <PageIntro
-        title="Mon programme"
-        sub={!catalogue ? classe
-          : commences ? `${classe} · ${commences} chapitre${commences > 1 ? 's' : ''} commencé${commences > 1 ? 's' : ''} sur ${total}`
-          : `${classe} · ${total} chapitres, à réviser sans scanner`}
-        mascot="reading"
-      />
+    <div className="app app--no-halo programme-page prg-page">
+      <div className="content programme-content prg-content">
+        <div className="prg-tete">
+          <h1 className="prg-titre">Programme</h1>
+          {selecteur}
+        </div>
 
-      <div className="content programme-content">
         {isGuest && <GuestBanner />}
 
-        {autreClasse && (
+        {autreClasse && classe === classeEleve && (
           <p className="programme-note">
             Le programme de {level.classe} arrive bientôt. En attendant, voici celui de {classe}.
           </p>
+        )}
+
+        {reprise && (
+          <button
+            type="button"
+            className="prg-reprise"
+            onClick={() => { restoreLesson(reprise.lesson.id); navigate('/analyse'); }}
+          >
+            <span className="prg-reprise-rond" aria-hidden="true" />
+            <span className="prg-grain" aria-hidden="true" />
+            <Mascot pose={subjectMascot(reprise.m.matiere)} size={isDesktop ? 240 : 150} alt="" aria-hidden="true" className="prg-reprise-mascotte" />
+            <span className="prg-reprise-txt">
+              <span className="prg-surtitre">À reprendre</span>
+              <span className="prg-reprise-titre">{reprise.it.chapter.titre}</span>
+              <span className="prg-reprise-meta">
+                {reprise.m.matiere} · {reprise.it.dueCards > 0 ? `${reprise.it.dueCards} carte${reprise.it.dueCards > 1 ? 's' : ''} à travailler` : reprise.it.state === 'maitrise' ? 'Maîtrisé' : 'Commencé'}
+              </span>
+              <span className="prg-reprise-btn">Reprendre</span>
+            </span>
+          </button>
         )}
 
         {error && (
@@ -97,22 +144,38 @@ export default function Programme() {
           </div>
         )}
 
-        {!catalogue && !error && (
-          <div className="programme-grid" role="status" aria-label="Chargement du programme…">
-            {[0, 1, 2, 3].map(i => (
-              <div key={i} className="rv-card programme-matiere programme-matiere--skeleton" aria-hidden="true">
-                <div className="rv-skeleton rv-skeleton--icon" />
-                <div className="rv-skeleton rv-skeleton--title" />
-                <div className="rv-skeleton rv-skeleton--text" />
+        {!error && (
+          <>
+            <div className="prg-sous-tete">
+              <h2 className="prg-titre2">Tes matières</h2>
+              {catalogue && <span className="prg-compte">{matieres.length} matières · {total} chapitres</span>}
+            </div>
+            {!catalogue ? (
+              <div className="prg-liste" role="status" aria-label="Chargement du programme…">
+                {[0, 1, 2, 3].map(i => (
+                  <div key={i} className="prg-matiere" aria-hidden="true">
+                    <div className="rv-skeleton rv-skeleton--icon" />
+                    <div className="rv-skeleton rv-skeleton--title" />
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
+            ) : (
+              <div className="prg-liste">
+                {matieres.map(m => <MatiereRangee key={m.slug} m={m} onOpen={() => navigate(`/programme/${m.slug}`)} isDesktop={isDesktop} />)}
+              </div>
+            )}
+          </>
         )}
 
-        {catalogue && (
-          <div className="programme-grid" style={{ '--programme-cols': cols }}>
-            {matieres.map(m => <MatiereTile key={m.slug} m={m} onOpen={() => navigate(`/programme/${m.slug}`)} />)}
-          </div>
+        {!isGuest && (
+          <Link to="/cours" className="prg-scans">
+            <span className="prg-scans-rond" aria-hidden="true"><Mascot pose="scanphone" size={44} alt="" /></span>
+            <span className="prg-scans-txt">
+              <span className="prg-scans-titre">Tes leçons scannées</span>
+              <span className="prg-scans-meta">{scannees ? `${scannees} leçon${scannees > 1 ? 's' : ''}` : 'Une photo de ton cahier, et Réviz prépare tout'}</span>
+            </span>
+            <span className="prg-fleche" aria-hidden="true">›</span>
+          </Link>
         )}
       </div>
 
@@ -122,56 +185,39 @@ export default function Programme() {
 }
 
 /**
- * Tuile d'une matière : mascotte, avancement en une phrase, une encoche par
- * chapitre (même code couleur que le chemin), et sur ordinateur la
- * prochaine étape. Les cartes à revoir passent devant le reste.
+ * Une matière : mascotte sur son aplat, état en une pastille (grammaire §3),
+ * barre des chapitres maîtrisés.
  */
-function MatiereTile({ m, onOpen }) {
-  const isDesktop = useIsDesktop();
+function MatiereRangee({ m, onOpen, isDesktop }) {
   const total = m.items.length;
   const fini = total > 0 && m.maitrises === total;
-  const label = [
-    `${total} chapitre${total > 1 ? 's' : ''}`,
-    m.commences ? `${m.commences} commencé${m.commences > 1 ? 's' : ''}` : null,
-    m.maitrises ? `${m.maitrises} maîtrisé${m.maitrises > 1 ? 's' : ''}` : null,
-    m.aRevoir ? `${m.aRevoir} carte${m.aRevoir > 1 ? 's' : ''} à travailler` : null,
-  ].filter(Boolean).join(' · ');
-
-  let status;
-  if (m.aRevoir) {
-    status = <span className="programme-matiere-status programme-matiere-status--revoir"><RefreshIcon />{m.aRevoir} carte{m.aRevoir > 1 ? 's' : ''} à travailler</span>;
-  } else if (fini) {
-    status = <span className="programme-matiere-status programme-matiere-status--fini"><CheckIcon />Tout maîtrisé</span>;
-  } else if (m.maitrises) {
-    // Même repère que le rail de la page matière : les chapitres maîtrisés.
-    status = <span className="programme-matiere-status">{m.maitrises} / {total} maîtrisé{m.maitrises > 1 ? 's' : ''}</span>;
-  } else if (m.commences) {
-    status = <span className="programme-matiere-status">{m.commences} / {total} commencé{m.commences > 1 ? 's' : ''}</span>;
-  } else {
-    status = <span className="programme-matiere-status">{total} chapitre{total > 1 ? 's' : ''}</span>;
-  }
+  let pill;
+  if (m.aRevoir) pill = <span className="rv-pill rv-pill--orange">{m.aRevoir} à travailler</span>;
+  else if (fini) pill = <span className="rv-pill rv-pill--green">Maîtrisé</span>;
+  else if (m.maitrises) pill = <span className="rv-pill rv-pill--green">{m.maitrises} maîtrisé{m.maitrises > 1 ? 's' : ''}</span>;
+  else if (m.commences) pill = <span className="rv-pill rv-pill--orange">Commencé</span>;
+  else pill = <span className="rv-pill">À découvrir</span>;
+  const pct = total ? Math.max(4, Math.round((m.maitrises / total) * 100)) : 0;
+  const vert = m.maitrises > 0 && !m.aRevoir && m.commences === m.maitrises;
 
   return (
     <button
       type="button"
-      className="rv-card rv-card--link programme-matiere"
+      className="prg-matiere"
       onClick={onOpen}
-      aria-label={`${m.matiere} : ${label}`}
+      aria-label={`${m.matiere} : ${m.maitrises} sur ${total} chapitres maîtrisés`}
     >
-      <Mascot pose={subjectMascot(m.matiere)} size={isDesktop ? 84 : 64} alt="" aria-hidden="true" className="programme-matiere-mascot" />
-      <span className="programme-matiere-name">{m.matiere}</span>
-      {status}
-      <span className="programme-strip" aria-hidden="true">
-        {m.items.map(it => (
-          <span key={it.chapter.id} className={`programme-strip-seg programme-strip-seg--${it.chapter.pret ? it.state : 'bientot'}`} />
-        ))}
+      <span className="prg-matiere-rond" style={{ background: m.fond }} aria-hidden="true">
+        <Mascot pose={subjectMascot(m.matiere)} size={isDesktop ? 56 : 50} alt="" />
       </span>
-      {m.prochain && (
-        <span className="programme-matiere-next">
-          <span className="programme-matiere-next-label">Prochaine étape</span>
-          <span className="programme-matiere-next-title">{m.prochain.chapter.titre}</span>
+      <span className="prg-matiere-txt">
+        <span className="prg-matiere-haut">
+          <span className="prg-matiere-nom">{m.matiere}</span>
+          {pill}
         </span>
-      )}
+        <span className="prg-barre" aria-hidden="true"><span style={{ width: `${pct}%`, background: vert ? '#34C77B' : '#1B1A23' }} /></span>
+        <span className="prg-matiere-meta">{`${m.maitrises} / ${total} ${isDesktop ? 'maîtrisés' : 'chapitres maîtrisés'}`}</span>
+      </span>
     </button>
   );
 }
