@@ -233,3 +233,173 @@
 
 /* ── Intro (PageIntro) : dans la zone de scroll, qui porte la gouttière ── */
 .analyse-page .analyse-intro { padding: 4px 0 0; }
+
+/* ─── Fiche chapitre, refonte du 20/10 (« Reviz Valide ») ────────────
+ * Le chapitre sur son aplat (couleur de la matière), les quatre formats
+ * avec leur mascotte, l'essentiel à côté sur ordinateur. */
+.analyse-page .anl-content { padding: 0 0 calc(130px + env(safe-area-inset-bottom, 0px)); overflow-y: auto; flex: 1; min-height: 0; }
+.analyse-page .anl-hero {
+  position: relative;
+  height: calc(330px + env(safe-area-inset-top, 0px));
+  margin-top: calc(-1 * env(safe-area-inset-top, 0px));
+  padding-top: env(safe-area-inset-top, 0px);
+  border-radius: 0 0 50% 50% / 0 0 64px 64px;
+  overflow: hidden;
+  color: #1B1A23;
+  flex-shrink: 0;
+}
+.analyse-page .anl-bulle { position: absolute; border-radius: 50%; background: var(--anl-bulle); }
+.analyse-page .anl-bulle--a { right: -60px; top: calc(82px + env(safe-area-inset-top, 0px)); width: 250px; height: 250px; box-shadow: inset 0 -24px 40px rgba(120,60,20,.08), inset 0 16px 30px rgba(255,255,255,.35); }
+.analyse-page .anl-bulle--b { left: -50px; top: calc(205px + env(safe-area-inset-top, 0px)); width: 150px; height: 150px; }
+.analyse-page .anl-grain {
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.35 0 0 0 0 0.2 0 0 0 0 0.1 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: .32;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+.analyse-page .anl-hero-haut { position: relative; z-index: 2; padding: 12px 22px 0; }
+.analyse-page .anl-retour {
+  width: 42px;
+  height: 42px;
+  flex: none;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255,255,255,.7);
+  color: #1B1A23;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.analyse-page .anl-hero-mascotte {
+  position: absolute;
+  right: -10px;
+  top: calc(70px + env(safe-area-inset-top, 0px));
+  object-fit: contain;
+  filter: drop-shadow(0 20px 24px rgba(120,60,20,.22));
+}
+.analyse-page .anl-hero-txt {
+  position: absolute;
+  left: 22px;
+  bottom: 44px;
+  max-width: 220px;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.analyse-page .anl-surtitre { font-size: 12px; font-weight: 700; letter-spacing: .6px; text-transform: uppercase; color: rgba(27,26,35,.62); }
+.analyse-page .anl-titre {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 32px;
+  font-weight: 800;
+  letter-spacing: -.6px;
+  line-height: 1.05;
+  text-wrap: balance;
+}
+.analyse-page .anl-titre--long { font-size: 27px; }
+.analyse-page .anl-etat {
+  align-self: flex-start;
+  padding: 5px 10px;
+  border-radius: 99px;
+  background: rgba(255,255,255,.6);
+  color: #8A3A05;
+  font-size: 12px;
+  font-weight: 700;
+}
+.analyse-page .anl-pile { padding: 20px 22px 0; display: flex; flex-direction: column; gap: 12px; }
+.analyse-page .anl-pile > .rv-next,
+.analyse-page .anl-pile > .rv-card { margin: 8px 0 0; }
+.analyse-page .anl-titre2 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 23px;
+  font-weight: 800;
+  letter-spacing: -.6px;
+  line-height: 1.05;
+  color: #1B1A23;
+}
+.analyse-page .anl-formats { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.analyse-page .anl-format {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 16px;
+  border-radius: 26px;
+  background: #fff;
+  box-shadow: 0 12px 30px -14px rgba(120,60,20,.22);
+  color: #1B1A23;
+  text-decoration: none;
+  transition: transform .15s, box-shadow .15s;
+}
+.analyse-page .anl-format:active { transform: scale(.97); }
+.analyse-page .anl-format-rond { width: 64px; height: 64px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+.analyse-page .anl-format-txt { display: flex; flex-direction: column; }
+.analyse-page .anl-format-nom { font-size: 16px; font-weight: 700; }
+.analyse-page .anl-format-meta { font-size: 13px; color: #6E675B; }
+
+/* Ordinateur */
+.analyse-page .anl-desk { display: grid; grid-template-columns: minmax(0, 1fr) 420px; gap: 28px; padding: 32px 40px 48px; align-items: start; }
+.analyse-page .anl-desk-gauche { display: flex; flex-direction: column; gap: 22px; min-width: 0; }
+.analyse-page .anl-fil { display: flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 600; color: #6E675B; }
+.analyse-page .anl-fil .anl-retour { background: #fff; box-shadow: 0 6px 16px -10px rgba(120,60,20,.4); }
+.analyse-page .anl-desk .anl-hero { height: auto; min-height: 340px; margin: 0; padding: 36px; border-radius: 36px; }
+.analyse-page .anl-desk .anl-bulle--a { right: 40px; top: -60px; width: 380px; height: 380px; box-shadow: inset 0 -40px 60px rgba(120,60,20,.08), inset 0 24px 40px rgba(255,255,255,.35); }
+.analyse-page .anl-desk .anl-bulle--b { display: none; }
+.analyse-page .anl-desk .anl-hero-mascotte { right: 30px; top: auto; bottom: -20px; filter: drop-shadow(0 24px 28px rgba(120,60,20,.22)); }
+.analyse-page .anl-desk .anl-hero-txt { position: relative; left: 0; bottom: 0; max-width: 420px; min-height: 268px; gap: 12px; }
+.analyse-page .anl-desk .anl-surtitre { font-size: 13px; }
+.analyse-page .anl-desk .anl-titre { font-size: 54px; }
+.analyse-page .anl-desk .anl-titre--long { font-size: 42px; }
+.analyse-page .anl-desk .anl-hero-txt > * { flex-shrink: 0; }
+.analyse-page .anl-desk .anl-hero-txt .anl-flex { flex: 1 1 0; min-height: 8px; flex-shrink: 1; }
+.analyse-page .anl-desk .anl-etat { padding: 6px 12px; font-size: 13px; }
+.analyse-page .anl-flex { flex: 1; }
+.analyse-page .anl-cta {
+  align-self: flex-start;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 58px;
+  padding: 0 30px;
+  border-radius: 99px;
+  background: #C25407;
+  color: #fff;
+  font-size: 17px;
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: 0 14px 28px -10px #C25407, inset 0 1px 0 rgba(255,255,255,.25), inset 0 -3px 0 rgba(0,0,0,.18);
+  transition: transform .12s, filter .15s;
+}
+.analyse-page .anl-cta:hover { filter: brightness(1.06); }
+.analyse-page .anl-cta:active { transform: scale(.96) translateY(2px); }
+.analyse-page .anl-desk .anl-titre2 { font-size: 26px; }
+.analyse-page .anl-desk .anl-formats { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+.analyse-page .anl-desk .anl-format:hover { transform: translateY(-2px); box-shadow: 0 18px 36px -14px rgba(120,60,20,.3); }
+.analyse-page .anl-desk .anl-format-rond { width: 84px; height: 84px; }
+.analyse-page .anl-desk-droite { margin-top: 64px; }
+.analyse-page .anl-carte {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 26px;
+  border-radius: 26px;
+  background: #fff;
+  box-shadow: 0 12px 30px -14px rgba(120,60,20,.22);
+}
+.analyse-page .anl-points { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+.analyse-page .anl-points li { position: relative; padding-left: 20px; font-size: 15px; line-height: 1.5; color: #3A362E; }
+.analyse-page .anl-points li::before { content: ''; position: absolute; left: 0; top: 8px; width: 8px; height: 8px; border-radius: 50%; background: #8F8776; }
+.analyse-page .anl-extrait { margin: 0; font-size: 15px; line-height: 1.5; color: #3A362E; }
+.analyse-page .anl-avancement { display: flex; flex-direction: column; gap: 10px; padding-top: 16px; border-top: 1px solid #F2E8D9; }
+.analyse-page .anl-avancement-ligne { display: flex; justify-content: space-between; gap: 12px; font-size: 14px; color: #6E675B; }
+.analyse-page .anl-avancement-ligne b { color: #1B1A23; }
+.analyse-page .anl-barre { display: block; height: 6px; border-radius: 99px; background: #EFE5D8; overflow: hidden; }
+.analyse-page .anl-barre > span { display: block; height: 100%; border-radius: 99px; background: #1B1A23; }
+@media (max-width: 1240px) {
+  .analyse-page .anl-desk { grid-template-columns: minmax(0, 1fr) 340px; }
+  .analyse-page .anl-desk .anl-formats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .analyse-page .anl-desk .anl-hero-mascotte { right: 10px; }
+}

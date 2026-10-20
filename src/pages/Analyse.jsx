@@ -3,8 +3,6 @@ import { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { BottomNav } from '../components/BottomNav';
-import { PageHeader } from '../components/PageHeader';
-import { PageIntro } from '../components/PageIntro';
 import { Mascot } from '../components/Mascot';
 import { analyseLesson, analyseImage, popPendingAnalysis } from '../services/aiService';
 import { LESSON_TEXT_MAX_LABEL } from '../utils/lessonText';
@@ -51,9 +49,6 @@ function buildLessonFromAiData(data) {
   };
 }
 
-// Tons des états (docs/design-grammaire.md §3) : pas commencé = neutre.
-const STATE_TONE = { nouveau: null, commence: 'orange', 'a-revoir': 'orange', maitrise: 'green' };
-
 /** Avancement de l'élève sur la leçon (cartes vues, à revoir, séances). */
 function lessonProgress(lessonId, total) {
   // seenDue : cartes déjà vues et arrivées à échéance (countDueCards compte
@@ -86,12 +81,25 @@ function formatDay(ts) {
 }
 
 // ─── Formats de révision ─────────────────────────────────────────────
+// Refonte du 20/10 : chaque format a sa mascotte sur un aplat pastel.
 const formats = [
-  { id: 'resume',     icon: <ResumeIcon />, name: 'Résumé',        tone: 'green',  to: '/resume',     getCount: l => l.resumeMinutes ?? 2, unit: 'min' },
-  { id: 'flashcards', icon: <FlashcardsIcon />, name: 'Flashcards',    tone: 'violet', to: '/flashcards', getCount: l => l.flashcardsCount, unit: 'cartes' },
-  { id: 'mindmap',    icon: <MindmapIcon />, name: 'Carte mentale', tone: 'pink',   to: '/mindmap',    getCount: () => null,             unit: null },
-  { id: 'quiz',       icon: <QuizIcon />, name: 'Quiz',          tone: 'orange', to: '/quiz',       getCount: l => l.quizCount,       unit: 'questions' },
+  { id: 'resume',     pose: 'reading',   fond: '#DCF5E6', name: 'Résumé',        to: '/resume',     getCount: l => l.resumeMinutes ?? 2, unit: 'min' },
+  { id: 'flashcards', pose: 'flashcard', fond: '#E4E0FA', name: 'Flashcards',    to: '/flashcards', getCount: l => l.flashcardsCount, unit: 'cartes' },
+  { id: 'mindmap',    pose: 'writing',   fond: '#FFE0EA', name: 'Carte mentale', to: '/mindmap',    getCount: () => null,             unit: null },
+  { id: 'quiz',       pose: 'quiz',      fond: '#FFE6D2', name: 'Quiz',          to: '/quiz',       getCount: l => l.quizCount,       unit: 'questions' },
 ];
+
+// Aplat du héros selon la matière (mêmes tons que l'accueil).
+function aplatMatiere(subject = '') {
+  const s = subject.toLowerCase();
+  if (/math/.test(s)) return ['#FFB37A', '#FFC596'];
+  if (/fran|philo/.test(s)) return ['#C9C2F2', '#D8D2F7'];
+  if (/hist|géo|geo|emc/.test(s)) return ['#FFC9A8', '#FFDAC4'];
+  if (/svt|bio|vie/.test(s)) return ['#B9E8C9', '#D3F1DD'];
+  if (/phys|chim|techno|nsi/.test(s)) return ['#FFC2D4', '#FFD6E2'];
+  if (/angl|espa|allem|langue|lv/.test(s)) return ['#C9C2F2', '#D8D2F7'];
+  return ['#FFB37A', '#FFC596'];
+}
 
 // ─── Écran de chargement ─────────────────────────────────────────────
 const STEPS = [
@@ -257,19 +265,18 @@ export default function Analyse() {
     </>
   );
   const formatGrid = (
-    <div className="analyse-format-grid">
+    <div className="anl-formats">
       {formats.map(f => {
         const count = f.getCount(displayLesson);
         return (
-          <Link key={f.id} to={f.to} className="rv-card rv-card--link rv-card--padded analyse-format-card">
-            <div className="analyse-format-card-top">
-              <div className={`rv-icon-square rv-icon-square--xl rv-icon-square--${f.tone}`}>
-                {f.icon}
-              </div>
-              <span className="analyse-format-arrow" aria-hidden="true">›</span>
-            </div>
-            <div className="analyse-format-name">{f.name}</div>
-            <div className="analyse-format-meta">{count !== null ? `${count} ${f.unit}` : 'Vue d\'ensemble'}</div>
+          <Link key={f.id} to={f.to} className="anl-format">
+            <span className="anl-format-rond" style={{ background: f.fond }} aria-hidden="true">
+              <Mascot pose={f.pose} size={isDesktop ? 76 : 58} alt="" />
+            </span>
+            <span className="anl-format-txt">
+              <span className="anl-format-nom">{f.name}</span>
+              <span className="anl-format-meta">{count !== null ? `${count} ${f.unit}` : "Vue d'ensemble"}</span>
+            </span>
           </Link>
         );
       })}
@@ -308,15 +315,47 @@ export default function Analyse() {
   );
   const formatsSection = (
     <>
-      <h2 className="rv-section-title">Tous les formats</h2>
+      <h2 className="anl-titre2">Choisis ton format</h2>
       {formatGrid}
     </>
+  );
+
+  // Héros : aplat de la matière, titre, état, mascotte de la matière.
+  const [aplat, bulle] = aplatMatiere(displayLesson.subject);
+  const etat = avancement
+    ? (avancement.due > 0 && avancement.seen > 0 ? `${avancement.due} à travailler` : CHAPTER_STATE_LABEL[avancement.state])
+    : null;
+  const retour = () => (window.history.state?.idx > 0 ? navigate(-1) : navigate(fromProgramme ? '/programme' : '/cours'));
+  const boutonRetour = (
+    <button type="button" className="anl-retour" onClick={retour} aria-label="Retour">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6" /></svg>
+    </button>
+  );
+  const hero = (
+    <div className="anl-hero" style={{ background: aplat, '--anl-bulle': bulle }}>
+      <span className="anl-bulle anl-bulle--a" aria-hidden="true" />
+      <span className="anl-bulle anl-bulle--b" aria-hidden="true" />
+      <span className="anl-grain" aria-hidden="true" />
+      {!isDesktop && <div className="anl-hero-haut">{boutonRetour}</div>}
+      <Mascot pose={subjectMascot(displayLesson.subject)} size={isDesktop ? 300 : 220} priority alt="" aria-hidden="true" className="anl-hero-mascotte" />
+      <div className="anl-hero-txt">
+        <span className="anl-surtitre">{displayLesson.subject} · {fromProgramme ? 'Programme' : 'Leçon scannée'}</span>
+        <h1 className={`anl-titre${displayLesson.title.length > 24 ? ' anl-titre--long' : ''}`}>{displayLesson.title}</h1>
+        {etat && <span className="anl-etat">{etat}</span>}
+        {isDesktop && (
+          <>
+            <span className="anl-flex" />
+            <Link to={step.to} className="anl-cta">{step.action}</Link>
+          </>
+        )}
+      </div>
+    </div>
   );
 
   if (noLesson) return <MissingLessonState title="Ta leçon" />;
 
   return (
-    <div className="app analyse-page">
+    <div className="app app--no-halo analyse-page">
 
       {/* ── Écran de chargement ── */}
       {isLoading && (
@@ -389,76 +428,48 @@ export default function Analyse() {
         </div>
       )}
 
-      <PageHeader
-        variant="back"
-        // Retour contextuel : jamais vers la caméra quand on consulte une
-        // leçon depuis Home/Cours (Scan démarre getUserMedia au mount).
-        onBack={() => (window.history.state?.idx > 0 ? navigate(-1) : navigate('/cours'))}
-      />
-
-      {/* ── Content ── */}
-      <div className={`content analyse-content${(isLoading || error) ? ' analyse-content--hidden' : ''}`}>
-
-        {/* Intro façon Home — titre de la leçon, matière, mascotte de la matière */}
-        <PageIntro
-          title={displayLesson.title}
-          sub={`${displayLesson.subject} · ${fromProgramme ? 'chapitre du programme' : 'leçon scannée'}`}
-          mascot={subjectMascot(displayLesson.subject)}
-          mascotSize={140}
-          className={`analyse-intro${displayLesson.title.length > 34 ? ' rv-page-intro--long' : ''}`}
-        />
-
+      <div className={`content analyse-content anl-content${(isLoading || error) ? ' analyse-content--hidden' : ''}`}>
         {isDesktop ? (
-          <div className="analyse-desk">
-            <div className="analyse-desk-col">
-              {nextCard}
+          <div className="anl-desk">
+            <div className="anl-desk-gauche">
+              <div className="anl-fil">
+                {boutonRetour}
+                <span>{fromProgramme ? 'Programme' : 'Mes leçons'} › {displayLesson.subject}{fromProgramme && userLevel?.classe ? ` › ${userLevel.classe.replace('ème', 'e')}` : ''}</span>
+              </div>
+              {hero}
               {formatsSection}
               {coachCard}
             </div>
-            <div className="analyse-desk-col">
-              {excerptCard}
-              {displayLesson.keyPoints?.length > 0 && (
-                <div className="rv-card rv-card--padded analyse-retenir">
-                  <span className="rv-eyebrow">À retenir</span>
-                  <ul className="rv-bullets">
+            <aside className="anl-desk-droite">
+              <div className="anl-carte">
+                <h2 className="anl-titre2">L'essentiel</h2>
+                {displayLesson.keyPoints?.length > 0 ? (
+                  <ul className="anl-points">
                     {displayLesson.keyPoints.map(k => <li key={k}>{k}</li>)}
                   </ul>
-                </div>
-              )}
-              {avancement && (
-                <div className="rv-card rv-card--padded analyse-avancement">
-                  <div className="analyse-avancement-head">
-                    <span className="rv-eyebrow">Ton avancement</span>
-                    <span className={`rv-pill${STATE_TONE[avancement.state] ? ` rv-pill--${STATE_TONE[avancement.state]}` : ''}`}>{CHAPTER_STATE_LABEL[avancement.state]}</span>
+                ) : displayLesson.excerpt && <p className="anl-extrait">{displayLesson.excerpt}</p>}
+                {avancement && (
+                  <div className="anl-avancement">
+                    <div className="anl-avancement-ligne"><span>Cartes vues</span><b>{avancement.seen} / {displayLesson.flashcardsCount}</b></div>
+                    <span className="anl-barre" aria-hidden="true">
+                      <span style={{ width: `${displayLesson.flashcardsCount ? Math.round(avancement.seen / displayLesson.flashcardsCount * 100) : 0}%` }} />
+                    </span>
+                    <div className="anl-avancement-ligne"><span>À travailler aujourd'hui</span><b>{avancement.due} carte{avancement.due > 1 ? 's' : ''}</b></div>
+                    <div className="anl-avancement-ligne"><span>Séances</span><b>{avancement.sessions}{avancement.last ? ` · la dernière ${formatDay(avancement.last)}` : ''}</b></div>
                   </div>
-                  <div className="analyse-avancement-row">
-                    <span>Cartes vues</span>
-                    <b>{avancement.seen} / {displayLesson.flashcardsCount}</b>
-                  </div>
-                  <div className="rv-bar rv-bar--neutral-bg" aria-hidden="true">
-                    <div
-                      className="rv-bar-fill rv-bar-fill--orange"
-                      style={{ width: `${displayLesson.flashcardsCount ? Math.round(avancement.seen / displayLesson.flashcardsCount * 100) : 0}%` }}
-                    />
-                  </div>
-                  <div className="analyse-avancement-row">
-                    <span>À travailler aujourd'hui</span>
-                    <b>{avancement.due} carte{avancement.due > 1 ? 's' : ''}</b>
-                  </div>
-                  <div className="analyse-avancement-row">
-                    <span>Séances</span>
-                    <b>{avancement.sessions}{avancement.last ? ` · la dernière ${formatDay(avancement.last)}` : ''}</b>
-                  </div>
-                </div>
-              )}
-            </div>
+                )}
+              </div>
+            </aside>
           </div>
         ) : (
           <>
-            {nextCard}
-            {formatsSection}
-            {coachCard}
-            {excerptCard}
+            {hero}
+            <div className="anl-pile">
+              {formatsSection}
+              {nextCard}
+              {coachCard}
+              {excerptCard}
+            </div>
           </>
         )}
       </div>
