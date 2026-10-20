@@ -1,11 +1,10 @@
-import { PageIntro } from '../components/PageIntro'
 import { RefreshIcon, ChatIcon, FlameIcon } from '../components/Icons'
 import { useState, useEffect, useMemo } from 'react'
 import { Link } from 'react-router-dom'
 import { recordRevision } from '../services/revisionService'
-import { getDueCards, updateCardState } from '../services/srsService'
-import { PageHeader } from '../components/PageHeader'
-import { Mascot } from '../components/Mascot'
+import { getDueCards, updateCardState, joursAvantRetour } from '../services/srsService'
+import { useNavigate } from 'react-router-dom'
+import { Pantin } from '../components/Pantin'
 import { MissingLessonState } from '../components/MissingLessonState'
 import { FormatFeedback } from '../components/FormatFeedback'
 import { CoachChat, CoachHeaderButton } from '../components/CoachChat'
@@ -42,6 +41,16 @@ function getLessonId() {
   return localStorage.getItem('reviz-current-lesson-id') ?? 'default'
 }
 
+function getLessonSubject() {
+  try { return JSON.parse(localStorage.getItem('reviz-ai-data') || 'null')?.metadata?.subject || '' }
+  catch { return '' }
+}
+
+// Taille du texte selon sa longueur : une réponse courte s'affiche en très grand.
+function tailleQuestion(t = '') { return t.length <= 60 ? 'xl' : t.length <= 110 ? 'l' : 'm' }
+function tailleReponse(t = '') { return t.length <= 28 ? 'xxl' : t.length <= 90 ? 'l' : 'm' }
+const quand = j => (j <= 1 ? 'demain' : `dans ${j} jours`)
+
 function getLessonTitle(fallback = 'Ta leçon') {
   try { return JSON.parse(localStorage.getItem('reviz-ai-data') || 'null')?.metadata?.title || fallback }
   catch { return fallback }
@@ -61,6 +70,8 @@ function FlashcardsSession() {
   const rawCards   = getFlashcards()
   const flashcards = useMemo(() => getDueCards(lessonId, rawCards), [lessonId])
   const [current, setCurrent]       = useState(0)
+  const navigate = useNavigate()
+  const [precedente, setPrecedente] = useState(null) // réponse donnée à la carte d'avant
   const [isFlipped, setIsFlipped]   = useState(false)
   const [gotCount, setGotCount]     = useState(0)
   const [againCount, setAgainCount] = useState(0)
@@ -87,6 +98,7 @@ function FlashcardsSession() {
   function flipCard() { setIsFlipped(prev => !prev) }
 
   function nextCard(dir) {
+    setPrecedente(dir === 'got' ? 'Je sais' : 'À revoir')
     setAnimDir(dir)
     setTimeout(() => {
       const nextIndex = current + 1
@@ -114,12 +126,21 @@ function FlashcardsSession() {
     function onKey(e) {
       if (e.target instanceof HTMLElement && ['INPUT', 'TEXTAREA', 'SELECT'].includes(e.target.tagName)) return
       if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); flipCard() }
-      else if (isFlipped && (e.key === 'ArrowLeft' || e.key === '1')) { e.preventDefault(); handleAgain() }
-      else if (isFlipped && (e.key === 'ArrowRight' || e.key === '2')) { e.preventDefault(); handleGot() }
+      else if (e.key === 'ArrowLeft' || e.key === '1') { e.preventDefault(); handleAgain() }
+      else if (isFlipped && (e.key === 'ArrowDown' || e.key === '2')) { e.preventDefault(); handlePresque() }
+      else if (e.key === 'ArrowRight' || e.key === '3') { e.preventDefault(); handleGot() }
     }
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
   })
+
+  function handlePresque() {
+    updateCardState(lessonId, flashcards[current].index ?? current, 'presque')
+    setGotCount(p => p + 1)
+    setStreak(0)
+    setShowStreakBadge(false)
+    nextCard('got')
+  }
 
   function handleAgain() {
     updateCardState(lessonId, flashcards[current].index ?? current, 'again')
@@ -154,32 +175,28 @@ function FlashcardsSession() {
 
   const xp = gotCount * 5
 
-  const dots = (
-    <div className="flashcards-progress-dots">
-      {flashcards.map((_, i) => (
-        <span
-          key={i}
-          className={`flashcards-progress-dot${i < current ? ' done' : i === current ? ' active' : ''}`}
-        />
-      ))}
+  const segments = (
+    <div className="fc-segments" aria-hidden="true">
+      {flashcards.map((_, i) => <span key={i} className={i <= current ? 'fc-seg fc-seg--fait' : 'fc-seg'} />)}
     </div>
   )
+  const matiere = getLessonSubject()
+  const idx = card ? (card.index ?? current) : 0
+  const retour = () => (window.history.state?.idx > 0 ? navigate(-1) : navigate('/analyse'))
 
   return (
-    <div className="app flashcards-page">
+    <div className={`app app--no-halo flashcards-page${isFlipped ? ' fc-page--verso' : ''}`}>
 
       {/* ── Écran de fin ── */}
       {showEnd && (
         <div className="rv-end-screen flashcards-end-screen">
-          <Mascot
-            pose="celebration"
+          {/* Réviz en vrai : fier, il saute quand la série est finie. */}
+          <Pantin
             size={240}
-            glow
-            animate
-            priority
+            expression={againCount === 0 ? 'fier' : 'content'}
+            entree={againCount === 0 ? 'saut' : 'coucou'}
+            repli="celebration"
             className="rv-end-screen-mascot flashcards-end-mascot"
-            alt=""
-            aria-hidden="true"
           />
           <h2 className="rv-end-screen-title">Série terminée</h2>
           <p className="rv-end-screen-sub">
@@ -225,85 +242,84 @@ function FlashcardsSession() {
         </div>
       )}
 
-      <PageHeader
-        variant="back"
-        right={coachLessonId ? <CoachHeaderButton onClick={() => setCoachOpen(true)} /> : undefined}
-      />
-
-      {/* Intro façon Home — la carte, juste dessous, porte la mascotte */}
-      <PageIntro title="Flashcards" sub={`Carte ${current + 1} sur ${flashcards.length} · ${lessonTitle}`} className="flashcards-intro rv-page-intro--format">
-        {dots}
-      </PageIntro>
-
-      <div className="flashcards-ai-row"><span className="ai-badge">✦ Généré par IA</span></div>
-
-      {/* ── Streak badge (animé) ── */}
-      {showStreakBadge && (
-        <div className="flashcards-streak-badge" aria-live="polite">
-          <FlameIcon /> {streak} bonnes d'affilée
-        </div>
-      )}
-
-      {/* ── Zone carte ── */}
-      <div className="flashcards-card-area">
-
-        <div className={`flashcards-stack-wrap${animDir ? ` flashcards-anim-${animDir}` : ''}`}>
-          <div className="flashcards-stack-bg flashcards-stack-bg--s2" />
-          <div className="flashcards-stack-bg flashcards-stack-bg--s1" />
-
-          <div className="flashcards-flip-wrap" onClick={flipCard}>
-            <div className={`flashcards-flip-card${isFlipped ? ' flipped' : ''}`}>
-
-              {/* Recto — Réviz pose la question */}
-              <div className="flashcards-flip-face flashcards-flip-front">
-                <Mascot
-                  pose="flashcard"
-                  size={150}
-                  glow
-                  priority
-                  className="flashcards-face-mascot"
-                  alt=""
-                  aria-hidden="true"
-                />
-                <span className="flashcards-face-tag">Question</span>
-                <span className="flashcards-face-text">{nbsp(card.front)}</span>
-                {!isFlipped && current === 0 && (
-                  <span className="flashcards-face-hint">{isDesktop ? 'Clique ou appuie sur Espace pour révéler' : 'Appuie pour révéler'}</span>
-                )}
-              </div>
-
-              {/* Verso — Réviz donne la réponse */}
-              <div className="flashcards-flip-face flashcards-flip-back">
-                <Mascot
-                  pose="pointing"
-                  size={150}
-                  glow
-                  animate
-                  priority
-                  className="flashcards-face-mascot"
-                  alt=""
-                  aria-hidden="true"
-                />
-                <span className="flashcards-face-tag">Réponse</span>
-                <span className="flashcards-face-text">{nbsp(card.back)}</span>
-              </div>
-
-            </div>
+      {/* Refonte du 20/10 : la carte prend tout l'écran. Recto lilas, verso pêche, sans mascotte. */}
+      <div className={`fc-scene${isFlipped ? ' fc-scene--verso' : ''}${animDir ? ` fc-scene--${animDir}` : ''}`}>
+        <span className="fc-rond" aria-hidden="true" />
+        <span className="fc-grain" aria-hidden="true" />
+        <div className="fc-cadre">
+          <div className="fc-haut">
+            <button type="button" className="fc-rond-btn" onClick={retour} aria-label="Retour">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12" /></svg>
+            </button>
+            {segments}
+            <span className="fc-compte" aria-label={`Carte ${current + 1} sur ${flashcards.length}`}>{current + 1} / {flashcards.length}</span>
+            {coachLessonId && <CoachHeaderButton onClick={() => setCoachOpen(true)} />}
           </div>
-        </div>
 
-        <p className="flashcards-kbd-hint" aria-hidden="true"><kbd>Espace</kbd> retourner · <kbd>←</kbd> encore · <kbd>→</kbd> acquis</p>
-        <div className={`flashcards-actions${isFlipped ? ' visible' : ''}`}>
-          <button type="button" className="flashcards-action-btn flashcards-btn-again" onClick={handleAgain}>
-            <span className="flashcards-btn-icon">✕</span>
-            <span>À revoir</span>
-          </button>
-          <button type="button" className="flashcards-action-btn flashcards-btn-got" onClick={handleGot}>
-            <span className="flashcards-btn-icon">✓</span>
-            <span>Maîtrisé</span>
-          </button>
-        </div>
+          {showStreakBadge && (
+            <div className="flashcards-streak-badge fc-serie" aria-live="polite">
+              <FlameIcon /> {streak} bonnes d'affilée
+            </div>
+          )}
 
+          <button type="button" className="fc-carte" onClick={flipCard} aria-label={isFlipped ? 'Revoir la question' : 'Retourner la carte'} key={`${current}-${isFlipped}`}>
+            {!isFlipped ? (
+              <>
+                <span className="fc-surtitre">{matiere ? `${matiere} · ` : ''}{lessonTitle}</span>
+                <span className={`fc-question fc-taille--${tailleQuestion(card.front)}`}>{nbsp(card.front)}</span>
+                {current === 0 && <span className="fc-astuce">{isDesktop ? 'Clique ou appuie sur Espace pour retourner' : 'Touche la carte pour la retourner'}</span>}
+              </>
+            ) : (
+              <>
+                <span className="fc-surtitre fc-surtitre--verso">Réponse</span>
+                <span className={`fc-reponse fc-taille--${tailleReponse(card.back)}`}>{nbsp(card.back)}</span>
+                {precedente && <span className="fc-precedente">Carte précédente : {precedente === 'Je sais' ? '✓ ' : ''}{precedente}</span>}
+              </>
+            )}
+          </button>
+
+          <span className="ai-badge fc-ia">✦ Généré par IA</span>
+
+          {!isFlipped ? (
+            <div className="fc-recto-actions">
+              <button type="button" className="fc-rond-action" onClick={handleAgain}>
+                <span className="fc-rond-action-btn" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="#C25407" strokeWidth="2.8" strokeLinecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12" /></svg>
+                </span>
+                <span className="fc-rond-action-txt">À revoir</span>
+              </button>
+              <button type="button" className="fc-retourner" onClick={flipCard}>
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 0 1 15.5-6.3L21 8" /><path d="M21 3v5h-5" /><path d="M21 12a9 9 0 0 1-15.5 6.3L3 16" /><path d="M3 21v-5h5" /></svg>
+                Retourner
+              </button>
+              <button type="button" className="fc-rond-action" onClick={handleGot}>
+                <span className="fc-rond-action-btn fc-rond-action-btn--ok" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="#fff" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="m5 12 5 5 9-10" /></svg>
+                </span>
+                <span className="fc-rond-action-txt">Je sais</span>
+              </button>
+            </div>
+          ) : (
+            <div className="fc-verso-actions">
+              <span className="fc-question-courte">Tu la savais ?</span>
+              <div className="fc-notes">
+                <button type="button" className="fc-note" onClick={handleAgain}>
+                  <span className="fc-note-titre fc-note-titre--revoir">À revoir</span>
+                  <span className="fc-note-quand">on repart de zéro</span>
+                </button>
+                <button type="button" className="fc-note" onClick={handlePresque}>
+                  <span className="fc-note-titre">Presque</span>
+                  <span className="fc-note-quand">{quand(joursAvantRetour(lessonId, idx, 'presque'))}</span>
+                </button>
+                <button type="button" className="fc-note fc-note--ok" onClick={handleGot}>
+                  <span className="fc-note-titre">Je sais</span>
+                  <span className="fc-note-quand">{quand(joursAvantRetour(lessonId, idx, 'got'))}</span>
+                </button>
+              </div>
+            </div>
+          )}
+          <p className="fc-clavier" aria-hidden="true"><kbd>Espace</kbd> retourner · <kbd>←</kbd> à revoir · <kbd>↓</kbd> presque · <kbd>→</kbd> je sais</p>
+        </div>
       </div>
 
       {coachOpen && coachLessonId && (

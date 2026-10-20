@@ -34,7 +34,7 @@ describe('<Flashcards /> — clé SRS', () => {
     localStorage.setItem('reviz-current-lesson-id', 'lesson-real-123')
     renderFlashcards()
 
-    fireEvent.click(screen.getByRole('button', { name: /Maîtrisé/i }))
+    fireEvent.click(screen.getByRole('button', { name: /^Je sais/ }))
 
     const srs = JSON.parse(localStorage.getItem('reviz-srs') || '{}')
     expect(Object.keys(srs)).toContain('lesson-real-123_0')
@@ -45,9 +45,22 @@ describe('<Flashcards /> — clé SRS', () => {
     // Pas de reviz-current-lesson-id (navigation directe / état legacy)
     renderFlashcards()
 
-    fireEvent.click(screen.getByRole('button', { name: /Maîtrisé/i }))
+    fireEvent.click(screen.getByRole('button', { name: /^Je sais/ }))
 
     const srs = JSON.parse(localStorage.getItem('reviz-srs') || '{}')
     expect(Object.keys(srs)).toContain('default_0')
+  })
+})
+
+describe('<Flashcards /> — notes', () => {
+  it('« Presque » au verso garde la carte pour demain sans la remettre à zéro', () => {
+    localStorage.setItem('reviz-current-lesson-id', 'l1')
+    renderFlashcards()
+    fireEvent.click(screen.getByRole('button', { name: 'Retourner' }))
+    expect(screen.getByText('R0')).toBeInTheDocument()
+    fireEvent.click(screen.getByRole('button', { name: /^Presque/ }))
+    const etat = JSON.parse(localStorage.getItem('reviz-srs'))['l1_0']
+    expect(etat.interval).toBe(1)
+    expect(etat.nextReview).toBeGreaterThan(Date.now())
   })
 })
