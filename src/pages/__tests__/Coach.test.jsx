@@ -29,7 +29,7 @@ describe('<Coach /> (page)', () => {
       { id: 'l2', metadata: { title: 'Combustion', subject: 'Physique-Chimie' } },
     ]
     renderAt('/coach?lesson=l2')
-    expect(screen.getByRole('heading', { name: 'Combustion' })).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: /^Leçon : Combustion/ })).toBeInTheDocument()
     expect(screen.getByText(/Je connais ta leçon « Combustion »/)).toBeInTheDocument()
     expect(screen.getByLabelText('Ta question sur la leçon')).toBeInTheDocument()
     expect(screen.getByText('Explique-moi ça simplement')).toBeInTheDocument()
@@ -41,29 +41,30 @@ describe('<Coach /> (page)', () => {
       { id: 'l2', metadata: { title: 'Combustion', subject: 'Physique-Chimie' } },
     ]
     renderAt('/coach')
-    expect(screen.getByRole('heading', { name: 'Pythagore' })).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: /^Leçon : Pythagore/ })).toBeInTheDocument()
     expect(screen.getByLabelText('Ta question sur la leçon')).toBeInTheDocument()
   })
 
-  it('téléphone : le titre ouvre le choix de la leçon, un tap change de conversation', () => {
+  it('téléphone : l’horloge ouvre le choix de la leçon, un tap change de conversation', () => {
     lessons.list = [
       { id: 'l1', metadata: { title: 'Pythagore', subject: 'Maths' } },
       { id: 'l2', metadata: { title: 'Combustion', subject: 'Physique-Chimie' } },
     ]
     renderAt('/coach')
-    fireEvent.click(screen.getAllByRole('button', { name: 'Changer de leçon' })[0])
+    fireEvent.click(screen.getByRole('button', { name: 'Tes discussions' }))
     const sheet = screen.getByRole('dialog', { name: 'Changer de leçon' })
     expect(sheet).toBeInTheDocument()
     fireEvent.click(within(sheet).getByRole('button', { name: /Combustion/ }))
     expect(screen.queryByRole('dialog')).toBeNull()
-    expect(screen.getByRole('heading', { name: 'Combustion' })).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: /^Leçon : Combustion/ })).toBeInTheDocument()
     expect(screen.getByText(/Je connais ta leçon « Combustion »/)).toBeInTheDocument()
   })
 
   it('une seule leçon : pas de choix proposé', () => {
     lessons.list = [{ id: 'l1', metadata: { title: 'Pythagore', subject: 'Maths' } }]
     renderAt('/coach')
-    expect(screen.queryByRole('button', { name: 'Changer de leçon' })).toBeNull()
+    expect(screen.queryByRole('button', { name: 'Tes discussions' })).toBeNull()
+    expect(screen.queryByRole('button', { name: /Changer de leçon/ })).toBeNull()
   })
 
   it('sans paramètre (ordinateur) : liste à gauche et dernière leçon ouverte', () => {
@@ -84,12 +85,12 @@ describe('<Coach /> (page)', () => {
       { role: 'assistant', content: 'Un **réactif** est consommé pendant la réaction.' },
     ]))
     renderAt('/coach')
-    fireEvent.click(screen.getAllByRole('button', { name: 'Changer de leçon' })[0])
+    fireEvent.click(screen.getByRole('button', { name: 'Tes discussions' }))
     const sheet = screen.getByRole('dialog', { name: 'Changer de leçon' })
     expect(within(sheet).getByRole('heading', { name: 'Tes discussions' })).toBeInTheDocument()
     const items = within(sheet).getAllByRole('button', { name: /Pythagore|Combustion/ })
     expect(items[0]).toHaveTextContent('Combustion')
-    expect(items[0]).toHaveTextContent('Coach : Un réactif est consommé pendant la réaction.')
+    expect(items[0]).toHaveTextContent('Réviz IA : Un réactif est consommé pendant la réaction.')
   })
 
   it('sans leçon : état vide, programme et scan proposés', () => {

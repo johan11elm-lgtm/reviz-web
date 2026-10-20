@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
-import { Link, useNavigate, useSearchParams } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { GuestWall } from '../components/GuestWall';
-import { BottomNav } from '../components/BottomNav';
+import { BottomNav, EtoileIA } from '../components/BottomNav';
 import { useAuth } from '../context/AuthContext';
 import { PageIntro } from '../components/PageIntro';
 import { CoachConversation, coachPreview } from '../components/CoachChat';
@@ -44,7 +44,7 @@ function CoachThreads({ lessons, activeId, onSelect }) {
           <span className="coach-side-item-title">{l.metadata.title}</span>
           <span className="coach-side-item-sub">
             {preview
-              ? <>{preview.fromCoach ? 'Coach : ' : 'Toi : '}{preview.text}</>
+              ? <>{preview.fromCoach ? 'Réviz IA : ' : 'Toi : '}{preview.text}</>
               : <>{l.metadata.subject}{isProgrammeLessonId(l.id) ? ' · programme' : ''}</>}
           </span>
         </span>
@@ -112,10 +112,6 @@ function LessonPicker({ lessons, activeId, onSelect, onClose }) {
   );
 }
 
-const ChevronDown = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6" /></svg>
-);
-
 /**
  * Page Coach — interface de chat façon assistant IA, à la sauce Réviz.
  * Une conversation par leçon, ouverte directement : la leçon de `?lesson=`,
@@ -124,7 +120,6 @@ const ChevronDown = () => (
  * conversations reste à gauche.
  */
 export default function Coach() {
-  const navigate = useNavigate();
   const isDesktop = useIsDesktop();
   const [params, setParams] = useSearchParams();
   const lessons = useMemo(() => loadLessons(), []);
@@ -139,12 +134,11 @@ export default function Coach() {
 
   const lesson = lessons.find(l => l.id === wanted) ?? lessons[0] ?? null;
   const select = id => { setParams({ lesson: id }, { replace: true }); setPicking(false); };
-  const back = () => (window.history.state?.idx > 0 ? navigate(-1) : navigate('/'));
 
   if (!lesson) {
     return (
       <div className="app coach-page">
-        <PageIntro title="Coach Réviz" sub="Ouvre une leçon pour lui poser tes questions." mascot="coach" mascotSize={140} className="coach-page-intro" />
+        <PageIntro title="Réviz IA" sub="Ouvre une leçon pour lui poser tes questions." mascot="coach" mascotSize={140} className="coach-page-intro" />
         <div className="coach-page-empty">
           <p className="coach-page-empty-text">Le coach répond à partir d'une leçon : scanne la tienne, ou ouvre un chapitre de ton programme.</p>
           <div className="coach-page-empty-actions">
@@ -160,39 +154,28 @@ export default function Coach() {
   const canSwitch = lessons.length > 1;
 
   return (
-    <div className="app coach-page coach-page--chat">
-      {/* Téléphone : barre de conversation ; le titre de la leçon ouvre le choix */}
-      <header className="coach-chat-bar">
-        <button type="button" className="rv-bell-btn coach-chat-back" onClick={back} aria-label="Retour">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6" /></svg>
-        </button>
-        <div className="coach-topic">
-          <span className="coach-topic-avatar" aria-hidden="true">
-            <Mascot pose={subjectMascot(lesson.metadata.subject)} size={34} alt="" />
-          </span>
-          <div className="coach-topic-text">
-            <h1 className="coach-topic-title">{lesson.metadata.title}</h1>
-            <span className="coach-topic-sub">Coach Réviz · {lesson.metadata.subject ?? 'ta leçon'}</span>
-          </div>
-          {canSwitch && (
-            <>
-              <span className="coach-topic-chevron" aria-hidden="true"><ChevronDown /></span>
-              {/* Toute la rangée est cliquable : le bouton la recouvre. */}
-              <button type="button" className="coach-topic-hit" onClick={() => setPicking(true)} aria-haspopup="dialog">
-                <span className="coach-topic-hit-label">Changer de leçon</span>
-              </button>
-            </>
-          )}
-        </div>
+    <div className="app app--no-halo coach-page coach-page--chat coach-page--ia">
+      {/* Téléphone : la marque Réviz IA ; l'horloge ouvre les discussions (une par leçon). */}
+      <span className="coach-ia-halo" aria-hidden="true" />
+      <header className="coach-chat-bar coach-chat-bar--ia">
+        <h1 className="coach-ia-marque">
+          <EtoileIA id="rv-ia-marque" size={22} />
+          Réviz <span className="coach-ia-degrade">IA</span>
+        </h1>
+        {canSwitch && (
+          <button type="button" className="coach-ia-histo" onClick={() => setPicking(true)} aria-haspopup="dialog" aria-label="Tes discussions">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" /></svg>
+          </button>
+        )}
       </header>
 
       <div className="coach-layout">
         <aside className="coach-side" aria-label="Tes conversations">
           <div className="coach-side-head">
-            <Mascot pose="coach" size={40} alt="" aria-hidden="true" />
+            <EtoileIA id="rv-ia-side" size={28} />
             <div>
-              <div className="coach-side-title">Coach Réviz</div>
-              <div className="coach-side-sub">Une conversation par leçon</div>
+              <div className="coach-side-title">Réviz <span className="coach-ia-degrade">IA</span></div>
+              <div className="coach-side-sub">Une discussion par leçon</div>
             </div>
           </div>
           <CoachThreads lessons={lessons} activeId={lesson.id} onSelect={select} />
@@ -203,7 +186,7 @@ export default function Coach() {
             <Mascot pose={subjectMascot(lesson.metadata.subject)} size={36} alt="" aria-hidden="true" />
             <div className="coach-main-head-text">
               <div className="coach-main-head-title">{lesson.metadata.title}</div>
-              <div className="coach-main-head-sub">{lesson.metadata.subject} · le coach connaît cette leçon</div>
+              <div className="coach-main-head-sub">{lesson.metadata.subject} · Réviz IA connaît cette leçon</div>
             </div>
           </div>
           <CoachConversation
