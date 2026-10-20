@@ -579,16 +579,19 @@ html.native .content, html.native .pg-content, html.native .pf-content {
   min-height: 0;
 }
 
-/* ─── Bottom nav ───────────────────────────────────────────────── */
+/* ─── Bottom nav : capsule encre (refonte validée du 20/10) ──────
+ * L'onglet actif devient une pastille crème avec son libellé ; les autres
+ * ne montrent que l'icône. À droite, le bouton Réviz IA (étoile dégradée). */
 .bottom-nav {
   display: flex;
   align-items: center;
+  gap: 2px;
+  height: 66px;
   margin: 0 16px 16px;
-  padding: 8px;
-  background: var(--bg-card);
-  border-radius: var(--radius-pill);
-  box-shadow: var(--shadow-card);
-  border: 1px solid var(--border-subtle);
+  padding: 0 7px 0 8px;
+  background: #1B1A23;
+  border-radius: 33px;
+  box-shadow: 0 14px 34px rgba(27,26,35,.3);
   flex-shrink: 0;
   transform: translateY(0);
   transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -596,59 +599,67 @@ html.native .content, html.native .pg-content, html.native .pf-content {
 
 .bottom-nav--hidden {
   /* Sa hauteur + son décalage bas (12 px + safe-area, cf. position: fixed
-     mobile/native) + une marge pour l'ombre : sinon le haut de la capsule
-     dépassait encore de ~22 pt au-dessus de la barre d'accueil iPhone. */
+     mobile/native) + une marge pour l'ombre. */
   transform: translateY(calc(100% + 40px + env(safe-area-inset-bottom, 0px)));
 }
 
 .nav-item {
   flex: 1;
+  min-width: 0;
+  height: 52px;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 4px;
-  padding: 8px 4px;
-  border-radius: var(--radius-pill);
+  gap: 7px;
+  border-radius: 26px;
   text-decoration: none;
-  color: var(--text-muted);
-  transition: color 0.15s, background 0.15s;
+  color: rgba(248,239,231,.62);
+  transition: color .15s, background .2s, flex .25s;
 }
-
 .nav-item.active {
-  background: var(--accent-violet-soft);
-  color: var(--accent-violet-ink);
+  flex: none;
+  padding: 0 16px;
+  background: #F8EFE7;
+  color: #1B1A23;
 }
+.nav-icon { display: flex; align-items: center; justify-content: center; line-height: 1; }
+.nav-icon svg { width: 23px; height: 23px; }
+.nav-item.active .nav-icon svg { width: 21px; height: 21px; }
+.nav-label { display: none; font-size: 14px; font-weight: 700; white-space: nowrap; }
+.nav-item.active .nav-label { display: inline; }
 
-.nav-icon {
+.nav-sep { width: 1px; height: 28px; background: rgba(255,255,255,.14); margin: 0 4px; flex: none; }
+
+/* Bouton Réviz IA : anneau conique orange → rose, étoile dégradée */
+.nav-ia {
+  position: relative;
+  width: 52px;
+  height: 52px;
+  flex: none;
+  border-radius: 50%;
+  display: block;
+}
+.nav-ia::before,
+.nav-ia-ring {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  background: conic-gradient(from 200deg, #FFC24B, #FF7A2F, #FF4F7B, #FFC24B);
+}
+.nav-ia::before { inset: -3px; filter: blur(6px); opacity: .55; }
+.nav-ia-ring { inset: 0; padding: 2.5px; }
+.nav-ia-core {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: #1B1A23;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 22px;
-  height: 22px;
-  line-height: 1;
 }
-.nav-icon svg { width: 22px; height: 22px; }
-.nav-label { font-size: 12px; font-weight: 600; letter-spacing: -0.2px; }
-
-/* Onglet Coach : la mascotte dans une pastille encre, qui dépasse un peu
- * de la capsule. Actif, la pastille passe à l'orange. */
-.nav-item--coach { position: relative; padding-top: 0; }
-.nav-item--coach .nav-icon {
-  width: 46px;
-  height: 46px;
-  margin-top: -20px;
-  border-radius: 50%;
-  background: var(--accent-violet);
-  border: 3px solid var(--bg-card);
-  box-shadow: 0 6px 14px -4px color-mix(in srgb, var(--accent-violet) 60%, transparent);
-  overflow: hidden;
-  transition: background 0.15s, transform 0.15s;
-}
-.nav-item--coach .nav-icon .mascot { margin-top: 6px; }
-.nav-item--coach.active { background: transparent; }
-.nav-item--coach.active .nav-icon { background: var(--accent-orange); transform: translateY(-2px); }
-.nav-item--coach.active .nav-label { color: var(--accent-violet-ink); font-weight: 800; }
+.nav-ia-core svg { width: 24px; height: 24px; transition: transform .25s; }
+.nav-ia.active .nav-ia-core { background: #2A2833; }
+.nav-ia.active .nav-ia-core svg { transform: rotate(45deg) scale(1.05); }
 
 /* Toggle switch (réutilisé par la page Réglages) */
 .toggle-wrap { position: relative; width: 44px; height: 24px; }
@@ -702,6 +713,8 @@ html.native .content, html.native .pg-content, html.native .pf-content {
  * Sous 1024 px rien ne change ; l'app native garde ses règles plein écran. */
 :root {
   --sidenav-w: 248px;
+  /* Titres de la refonte : Bricolage Grotesque (700/800), texte en Geist. */
+  --font-display: 'Bricolage Grotesque', 'Geist', system-ui, sans-serif;
   --content-max: 1120px;
 }
 @media (min-width: 1024px) {

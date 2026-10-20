@@ -1,165 +1,375 @@
 /* CSS scoped to page wrapper — see scripts/scope-page-css.py */
 /* Wrapper: .home-page */
 
-/* ⚠️ Ce fichier ne contient QUE les overrides et layouts locaux à la page Home.
- * Les patterns visuels (cards, hero, stats, bars, dots, buttons, etc.) sont
- * dans src/styles/components/*.css via les classes .rv-*. */
+/* Accueil, refonte validée du 20/10 (« Reviz Valide ») : aplat pastel avec
+ * du grain, Réviz animé au centre, titres en Bricolage Grotesque. Les
+ * couleurs de l'humeur du jour arrivent en variables (--hm-*) depuis Home.jsx. */
 
-/* ── Content ── */
+.home-page { --hm-fond: #F8EFE7; --hm-encre: #1B1A23; --hm-doux: #6E675B; }
+
 .home-page .content {
   flex: 1;
-  padding: 8px var(--page-gutter) 110px;
   overflow-y: auto;
+  scrollbar-width: none;
 }
+.home-page .content::-webkit-scrollbar { display: none; }
 
-/* Téléphone : une pile, un seul espacement entre les blocs (les marges
- * propres à chaque carte laissaient « Essaie un thème » collée à la suite). */
-.home-page .home-stack { display: flex; flex-direction: column; gap: var(--gap-cards); }
-.home-page .home-stack > * { margin-top: 0; margin-bottom: 0; flex-shrink: 0; }
-
-/* ── Greeting (utilise .rv-greeting du DS) ── */
-.home-page .home-greeting { padding-top: 4px; }
-
-/* ── Hero CTA ── */
-.home-page .home-cta { margin-bottom: var(--gap-cards); }
-
-/* ── Carte série + objectif (compacte : niveau et XP vivent dans l'en-tête) ── */
-.home-page .home-progress-card { margin-bottom: var(--gap-cards); }
-.home-page .home-stats { display: flex; align-items: center; gap: 12px; padding: 14px 16px; }
-.home-page .home-stat { flex: 1; min-width: 0; display: flex; align-items: center; gap: 10px; }
-.home-page .home-stat-text { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
-.home-page .home-stat-value {
-  font-family: 'Geist', sans-serif;
-  font-size: 20px;
-  font-weight: 800;
-  letter-spacing: -0.6px;
-  line-height: 1;
-  color: var(--text-primary);
-}
-.home-page .home-stat-value small { font-size: 13px; font-weight: 600; letter-spacing: 0; color: var(--text-muted); }
-.home-page .home-stat-label { font-size: 12px; color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.home-page .home-stat-sep { width: 1px; height: 34px; background: var(--border-subtle); flex-shrink: 0; }
-.home-page .home-stat-check { margin-left: auto; color: var(--accent-green-strong); font-size: 18px; display: inline-flex; }
-
-/* ── « Ta dernière leçon » : la rangée du haut reprend la leçon ── */
-.home-page .home-featured-card { margin-bottom: var(--gap-cards); padding: 6px 6px 14px; }
-
-.home-page .home-featured-top {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  width: 100%;
-  padding: 8px 10px 8px 8px;
-  border: none;
-  border-radius: 20px;
-  background: transparent;
-  color: inherit;
-  font: inherit;
-  text-align: left;
-  cursor: pointer;
-  -webkit-tap-highlight-color: transparent;
-}
-.home-page .home-featured-top:active { background: var(--bg-hover); }
-
-.home-page .home-featured-mascot {
-  width: 84px;
-  height: 84px;
+/* ── Héros ── */
+.home-page .hm-hero {
+  position: relative;
+  height: calc(540px + env(safe-area-inset-top, 0px));
+  margin-top: calc(-1 * env(safe-area-inset-top, 0px));
+  padding-top: env(safe-area-inset-top, 0px);
+  background: var(--hm-bg);
+  border-radius: 0 0 50% 50% / 0 0 64px 64px;
+  overflow: hidden;
+  transition: background .5s;
   flex-shrink: 0;
-  margin: -6px -2px -6px -4px;
-  filter: drop-shadow(0 10px 20px rgba(232, 101, 26, 0.26));
+}
+.home-page .hm-bulle {
+  position: absolute;
+  border-radius: 50%;
+  background: var(--hm-tint);
+  box-shadow: inset 0 -24px 40px rgba(120,60,20,.08), inset 0 16px 30px rgba(255,255,255,.35);
+  transition: background .6s;
+}
+.home-page .hm-bulle--a { right: -60px; top: calc(120px + env(safe-area-inset-top, 0px)); width: 260px; height: 260px; }
+.home-page .hm-bulle--b { left: -40px; top: calc(330px + env(safe-area-inset-top, 0px)); width: 150px; height: 150px; }
+.home-page .hm-point {
+  position: absolute;
+  left: 30px;
+  top: calc(150px + env(safe-area-inset-top, 0px));
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: var(--hm-dot);
+  box-shadow: inset 0 -8px 14px rgba(0,0,0,.08), 0 8px 16px -6px rgba(120,60,20,.25);
+  transition: background .6s;
+}
+.home-page .hm-grain {
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.35 0 0 0 0 0.2 0 0 0 0 0.1 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: .32;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+.home-page .hm-ombre { display: none; }
+
+.home-page .hm-hero-haut {
+  position: relative;
+  z-index: 1;
+  padding: 18px 22px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.home-page .hm-hero-titres { display: flex; flex-direction: column; }
+.home-page .hm-date {
+  font-size: 13px;
+  font-weight: 700;
+  color: rgba(27,26,35,.62);
+  text-transform: uppercase;
+  letter-spacing: .4px;
+}
+.home-page .hm-auj {
+  font-family: var(--font-display);
+  font-size: 42px;
+  font-weight: 800;
+  letter-spacing: -1.6px;
+  line-height: 1;
+  color: var(--hm-encre);
+}
+.home-page .hm-serie {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 7px 12px;
+  margin-bottom: 6px;
+  border-radius: 99px;
+  background: rgba(255,255,255,.55);
+  font-size: 15px;
+  font-weight: 800;
+  color: #B34400;
+  white-space: nowrap;
+}
+.home-page .hm-pantin-place {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 30px;
+  display: flex;
+  justify-content: center;
+  z-index: 1;
 }
 
-.home-page .home-featured-info {
-  flex: 1;
-  min-width: 0;
+/* ── Ce que dit Réviz ── */
+.home-page .hm-centre { padding: 22px 22px 0; }
+.home-page .hm-parole { display: flex; flex-direction: column; gap: 6px; }
+.home-page .hm-mobile .hm-parole { align-items: center; text-align: center; }
+.home-page .hm-dit {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 31px;
+  font-weight: 800;
+  letter-spacing: -1px;
+  line-height: 1.02;
+  text-wrap: balance;
+  color: var(--hm-encre);
+  animation: hmMonte .5s .15s cubic-bezier(.2,.8,.3,1) both;
+}
+.home-page .hm-sous {
+  margin: 0;
+  font-size: 15px;
+  color: #6B6557;
+  line-height: 1.4;
+  animation: hmMonte .5s .25s cubic-bezier(.2,.8,.3,1) both;
+}
+@keyframes hmMonte { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+
+/* ── Bouton principal ── */
+.home-page .hm-actions {
+  padding: 18px 22px 0;
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  align-items: center;
+  gap: 10px;
 }
+.home-page .hm-cta {
+  width: 100%;
+  height: 58px;
+  padding: 0 24px;
+  border: 0;
+  border-radius: 99px;
+  background: var(--hm-btn);
+  color: #fff;
+  font: 700 17px 'Geist', system-ui, sans-serif;
+  box-shadow: 0 14px 28px -10px var(--hm-btn), inset 0 1px 0 rgba(255,255,255,.25), inset 0 -3px 0 rgba(0,0,0,.18);
+  transition: background .5s, transform .12s, box-shadow .12s;
+}
+.home-page .hm-cta:active {
+  transform: scale(.96) translateY(2px);
+  box-shadow: 0 4px 10px -6px rgba(0,0,0,.4), inset 0 -1px 0 rgba(0,0,0,.18);
+}
+.home-page .hm-cta:focus-visible { outline: 3px solid var(--hm-encre); outline-offset: 3px; }
+.home-page .hm-ou { font-size: 14px; color: var(--hm-doux); }
+.home-page .hm-ou a { color: var(--hm-btn); font-weight: 700; }
 
-.home-page .home-featured-title {
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-  overflow: hidden;
-  font-family: 'Geist', sans-serif;
-  font-size: 18px;
+/* ── Rappels (accord parental, email, essai) : une carte fine, masquée vide ── */
+.home-page .hm-rappels { margin: 22px 22px 0; }
+.home-page .hm-rappels:empty { display: none; }
+
+/* ── Blocs du bas ── */
+.home-page .hm-pad { padding: 30px 22px 0; }
+.home-page .hm-pad--droite { padding: 28px 0 0 22px; }
+.home-page .hm-pad--bas { padding: 28px 22px calc(120px + env(safe-area-inset-bottom, 0px)); }
+.home-page .hm-bloc { display: flex; flex-direction: column; gap: 10px; }
+.home-page .hm-tete { display: flex; justify-content: space-between; align-items: baseline; padding-right: 22px; }
+.home-page .hm-titre {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 23px;
   font-weight: 800;
-  line-height: 1.2;
-  letter-spacing: -0.4px;
-  color: var(--text-primary);
-  text-wrap: balance;
+  letter-spacing: -.6px;
+  color: var(--hm-encre);
 }
+.home-page .hm-voir { font-size: 14px; font-weight: 700; color: var(--hm-btn); }
 
-.home-page .home-featured-subject {
-  font-size: 13px;
-  color: var(--text-muted);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+.home-page .hm-plan {
+  list-style: none;
+  margin: 0;
+  padding: 4px 16px;
+  background: #fff;
+  border-radius: 26px;
+  box-shadow: 0 1px 0 rgba(255,255,255,.8) inset, 0 12px 30px -14px rgba(120,60,20,.22);
 }
-
-.home-page .home-featured-actions { margin: 8px 12px 0; }
-
-/* ── Challenges card ── */
-.home-page .home-challenges-card { margin-bottom: 14px; }
-
-.home-page .home-challenges-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 12px;
-}
-
-.home-page .home-challenges-count {
-  font-size: 13px;
-  color: var(--text-secondary);
-  font-weight: 600;
-}
-
-.home-page .home-challenge-row {
+.home-page .hm-etape { display: flex; align-items: center; gap: 14px; padding: 13px 0; }
+.home-page .hm-etape + .hm-etape { border-top: 1px solid #F2E8D9; }
+.home-page .hm-etape-num {
+  width: 34px;
+  height: 34px;
+  flex: none;
+  border-radius: 50%;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 10px 0;
-  border-top: 1px solid var(--border-subtle);
-  gap: 12px;
-}
-.home-page .home-challenge-row.completed { opacity: 0.55; }
-
-.home-page .home-challenge-info { flex: 1; min-width: 0; }
-
-.home-page .home-challenge-name {
-  display: block;
+  justify-content: center;
   font-size: 14px;
-  font-weight: 600;
-  color: var(--text-primary);
+  font-weight: 800;
 }
+.home-page .hm-etape-txt { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.home-page .hm-etape-titre { font-size: 15px; font-weight: 700; color: var(--hm-encre); }
+.home-page .hm-etape-meta { font-size: 13px; color: var(--hm-doux); }
 
-.home-page .home-challenge-desc {
-  display: block;
-  font-size: 12px;
-  color: var(--text-secondary);
-  margin-top: 2px;
+.home-page .hm-bloc--matieres { gap: 12px; }
+.home-page .hm-matieres {
+  display: flex;
+  gap: 14px;
+  overflow-x: auto;
+  padding-right: 22px;
+  scrollbar-width: none;
 }
-
-.home-page .home-challenge-progress {
+.home-page .hm-matieres::-webkit-scrollbar { display: none; }
+.home-page .hm-matiere {
+  flex: none;
+  width: 76px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+.home-page .hm-matiere-rond {
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
   display: flex;
   align-items: center;
-  gap: 8px;
-  flex-shrink: 0;
+  justify-content: center;
+  transition: transform .15s;
+}
+.home-page .hm-matiere:active .hm-matiere-rond { transform: scale(.94); }
+.home-page .hm-matiere-nom { font-size: 13px; font-weight: 700; color: var(--hm-encre); text-align: center; }
+
+.home-page .hm-battle {
+  position: relative;
+  display: block;
+  min-height: 132px;
+  padding: 20px;
+  border-radius: 28px;
+  background: #C9C2F2;
+  overflow: hidden;
+  color: var(--hm-encre);
+}
+.home-page .hm-battle-rond {
+  position: absolute;
+  right: -30px;
+  bottom: -40px;
+  width: 170px;
+  height: 170px;
+  border-radius: 50%;
+  background: #D8D2F7;
+}
+.home-page .hm-battle-mascotte { position: absolute; right: 4px; bottom: -6px; object-fit: contain; }
+.home-page .hm-battle-txt { position: relative; display: flex; flex-direction: column; gap: 4px; max-width: 190px; }
+.home-page .hm-battle-titre { font-family: var(--font-display); font-size: 23px; font-weight: 800; letter-spacing: -.6px; }
+.home-page .hm-battle-sous { font-size: 14px; color: #3D3770; line-height: 1.4; }
+.home-page .hm-battle-btn {
+  margin-top: 8px;
+  align-self: flex-start;
+  padding: 8px 14px;
+  border-radius: 99px;
+  background: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  color: #2D2B57;
 }
 
-/* Mini bar fixe 60px pour les challenges (override du rv-bar full width) */
-.home-page .home-challenge-bar {
-  width: 60px;
-  margin-top: 0;
+/* ── Barre compacte qui apparaît au défilement ── */
+.home-page .hm-barre {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: calc(50px + env(safe-area-inset-top, 0px));
+  padding-top: env(safe-area-inset-top, 0px);
+  background: var(--hm-bar);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: .5px solid rgba(27,26,35,.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--hm-encre);
+  z-index: 5;
+  pointer-events: none;
 }
 
-.home-page .home-challenge-count {
-  font-size: 12px;
-  color: var(--text-secondary);
-  font-weight: 600;
-  min-width: 32px;
-  text-align: right;
+/* Fondu crème sous la capsule */
+.home-page::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 130px;
+  background: linear-gradient(to bottom, rgba(248,239,231,0), rgba(248,239,231,.95) 55%);
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* ── Ordinateur ── */
+.home-page .hm-desk { display: flex; flex-direction: column; gap: 24px; padding: 24px 32px 48px; }
+.home-page .hm-hero--desk {
+  height: 500px;
+  margin: 0;
+  padding: 0;
+  border-radius: 40px;
+}
+.home-page .hm-hero--desk .hm-bulle--a { right: 120px; top: -80px; width: 520px; height: 520px; box-shadow: inset 0 -40px 60px rgba(120,60,20,.08), inset 0 24px 40px rgba(255,255,255,.35); }
+.home-page .hm-hero--desk .hm-bulle--b { left: auto; right: -60px; top: auto; bottom: -90px; width: 260px; height: 260px; box-shadow: none; }
+.home-page .hm-hero--desk .hm-point { left: auto; right: 560px; top: 60px; width: 56px; height: 56px; }
+.home-page .hm-hero--desk .hm-pantin { position: absolute; right: 120px; top: 40px; z-index: 1; }
+.home-page .hm-hero-txt {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  max-width: 560px;
+  padding: 48px 56px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.home-page .hm-hero--desk .hm-hero-haut { padding: 0; justify-content: flex-start; align-items: center; gap: 14px; }
+.home-page .hm-hero--desk .hm-date { font-size: 14px; letter-spacing: .5px; }
+.home-page .hm-hero--desk .hm-serie { margin: 0; padding: 6px 12px; font-size: 14px; }
+.home-page .hm-desk .hm-parole { gap: 14px; }
+.home-page .hm-desk .hm-dit { font-size: 64px; letter-spacing: -2.4px; line-height: .98; }
+.home-page .hm-desk .hm-sous { font-size: 18px; color: #4A4538; }
+.home-page .hm-flex { flex: 1; }
+.home-page .hm-desk .hm-actions { padding: 0; flex-direction: row; gap: 18px; }
+.home-page .hm-desk .hm-cta { width: auto; height: 60px; padding: 0 32px; font-size: 18px; }
+.home-page .hm-desk .hm-cta:hover { filter: brightness(1.06); }
+.home-page .hm-desk .hm-ou { font-size: 15px; color: var(--hm-encre); }
+.home-page .hm-desk .hm-ou a {
+  color: var(--hm-encre);
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--hm-btn);
+}
+.home-page .hm-desk .hm-rappels { margin: 0; }
+
+.home-page .hm-grille { display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 20px; grid-auto-rows: max-content; }
+.home-page .hm-carte {
+  padding: 20px 22px;
+  border-radius: 28px;
+  background: #fff;
+  box-shadow: 0 12px 30px -14px rgba(120,60,20,.22);
+}
+.home-page .hm-desk .hm-titre { font-size: 22px; letter-spacing: -.5px; }
+.home-page .hm-desk .hm-bloc { gap: 6px; }
+.home-page .hm-desk .hm-plan { padding: 0; background: none; box-shadow: none; border-radius: 0; }
+.home-page .hm-desk .hm-etape { padding: 10px 0; }
+.home-page .hm-desk .hm-bloc--matieres { gap: 14px; }
+.home-page .hm-desk .hm-tete { padding: 0; }
+.home-page .hm-desk .hm-matieres { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px 8px; overflow: visible; padding: 0; }
+.home-page .hm-desk .hm-matiere { width: auto; gap: 4px; }
+.home-page .hm-desk .hm-matiere-rond { width: 62px; height: 62px; }
+.home-page .hm-desk .hm-matiere:hover .hm-matiere-rond { transform: translateY(-2px); }
+.home-page .hm-desk .hm-battle { padding: 22px; min-height: 0; }
+.home-page .hm-desk .hm-battle-rond { right: -40px; bottom: -50px; width: 220px; height: 220px; }
+.home-page .hm-desk .hm-battle-mascotte { right: 0; bottom: -8px; }
+.home-page .hm-desk .hm-battle-titre { font-size: 24px; letter-spacing: -.5px; }
+.home-page .hm-desk .hm-battle-btn { margin-top: 10px; padding: 9px 16px; }
+.home-page .hm-desk .hm-battle:hover .hm-battle-mascotte { transform: rotate(-4deg) scale(1.03); }
+.home-page .hm-battle-mascotte { transition: transform .2s; }
+.home-page:has(.hm-desk)::after { display: none; }
+
+@media (max-width: 1240px) {
+  .home-page .hm-hero--desk .hm-pantin { right: 20px; }
+  .home-page .hm-hero--desk .hm-point { right: 480px; }
+  .home-page .hm-desk .hm-dit { font-size: 52px; }
+  .home-page .hm-grille { grid-template-columns: 1fr 1fr; }
+  .home-page .hm-grille > .hm-battle { grid-column: 1 / -1; min-height: 150px; }
 }

@@ -1,10 +1,7 @@
-import { useRef } from 'react';
 import { NavLink, Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { Mascot } from './Mascot';
-import { HomeIcon, BookIcon, StatsIcon, UserIcon } from './BottomNav';
-import { CameraIcon, BookOpenIcon, ChatIcon, CalendarIcon } from './Icons';
-import { isProgrammeLessonId } from '../utils/programme';
+import { PleinIcon } from './BottomNav';
 import { AVIS_PROFS_URL, isDecouverte } from '../services/decouverteService';
 import './SideNav.css';
 
@@ -13,8 +10,7 @@ const HIDDEN_PREFIXES = [
   '/inscription', '/connexion', '/essai', '/verify-email', '/onboarding',
   '/consent-pending', '/finish-setup', '/welcome', '/legal',
 ];
-// Pages d'une leçon : elles allument « Mes cours » ou « Mon programme »,
-// selon l'entrée d'où l'élève l'a ouverte.
+// Pages d'une leçon : elles allument « Programme » (leçons scannées comprises).
 const LESSON_PATHS = ['/analyse', '/flashcards', '/quiz', '/resume', '/mindmap'];
 
 /**
@@ -23,35 +19,25 @@ const LESSON_PATHS = ['/analyse', '/flashcards', '/quiz', '/resume', '/mindmap']
  * Rendue une fois sous AuthProvider ; invisible en dessous de 1024 px (CSS).
  */
 export function SideNav() {
-  const { currentUser, isGuest } = useAuth();
+  const { currentUser, isGuest, getUserLevel } = useAuth();
   const { pathname } = useLocation();
-  // Dernière entrée parcourue avant d'ouvrir la leçon ; à défaut (lien
-  // direct, accueil), l'origine de la leçon : chapitre du programme ou scan.
-  const origin = useRef(null);
-  const onLesson = LESSON_PATHS.some(p => pathname.startsWith(p));
-  if (pathname.startsWith('/cours')) origin.current = '/cours';
-  else if (pathname.startsWith('/programme')) origin.current = '/programme';
-  else if (!onLesson) origin.current = null;
-  const lessonSection = origin.current
-    ?? (isProgrammeLessonId(localStorage.getItem('reviz-current-lesson-id')) ? '/programme' : '/cours');
-
   if (!currentUser) return null;
   if (HIDDEN_PREFIXES.some(p => pathname.startsWith(p))) return null;
 
+  const prenom = currentUser.displayName || (isGuest ? 'Mode essai' : 'Moi');
+  const niveau = getUserLevel?.()?.classe;
   const items = [
-    { to: '/',          label: 'Accueil',       Icon: HomeIcon,     end: true },
-    { to: '/cours',     label: 'Mes cours',     Icon: BookIcon,     also: lessonSection === '/cours' ? LESSON_PATHS : [] },
-    { to: '/programme', label: 'Mon programme', Icon: BookOpenIcon, also: lessonSection === '/programme' ? LESSON_PATHS : [] },
-    { to: '/coach',     label: 'Coach',         Icon: ChatIcon },
-    { to: '/agenda',    label: 'Agenda',        Icon: CalendarIcon },
-    { to: '/progres',   label: 'Progrès',       Icon: StatsIcon },
-    { to: '/profil',    label: 'Profil',        Icon: UserIcon,     also: ['/reglages'] },
+    { to: '/',          label: "Aujourd'hui", nom: 'accueil',   end: true },
+    { to: '/programme', label: 'Programme',   nom: 'programme', also: ['/cours', ...LESSON_PATHS] },
+    ...(isGuest ? [] : [{ to: '/coach', label: 'Réviz IA', nom: 'ia' }]),
+    { to: '/agenda',    label: 'Agenda',      nom: 'agenda' },
+    { to: '/profil',    label: 'Moi',         nom: 'moi',       also: ['/progres', '/reglages'] },
   ];
 
   return (
     <nav className="side-nav" aria-label="Menu principal">
       <Link to="/" className="side-nav-brand" aria-label="Accueil Réviz">
-        <Mascot pose="hello" size={38} alt="" aria-hidden="true" />
+        <Mascot pose="hello" size={36} alt="" aria-hidden="true" />
         <span className="side-nav-wordmark">réviz</span>
       </Link>
 
@@ -66,7 +52,7 @@ export function SideNav() {
                 return `side-nav-item${active ? ' side-nav-item--active' : ''}`;
               }}
             >
-              <span className="side-nav-icon" aria-hidden="true"><it.Icon /></span>
+              <span className="side-nav-icon" aria-hidden="true"><PleinIcon nom={it.nom} /></span>
               <span>{it.label}</span>
             </NavLink>
           </li>
@@ -89,11 +75,23 @@ export function SideNav() {
             </Link>
           </>
         ) : (
-          <Link to="/scan" className="rv-btn-cta rv-btn-cta--full side-nav-cta">
-            <span className="side-nav-cta-icon" aria-hidden="true"><CameraIcon /></span>
-            <span>Scanner une leçon</span>
+          <Link to="/coach" className="side-nav-ia">
+            <span className="side-nav-ia-grain" aria-hidden="true" />
+            <Mascot pose="coach" size={110} alt="" aria-hidden="true" className="side-nav-ia-mascotte" />
+            <span className="side-nav-ia-txt">
+              <span className="side-nav-ia-titre">Réviz IA</span>
+              <span className="side-nav-ia-sous">Une question sur ta leçon ?</span>
+              <span className="side-nav-ia-btn">Demander</span>
+            </span>
           </Link>
         )}
+        <Link to="/profil" className="side-nav-moi">
+          <span className="side-nav-avatar" aria-hidden="true">{prenom.charAt(0).toUpperCase()}</span>
+          <span className="side-nav-moi-txt">
+            <span className="side-nav-moi-nom">{prenom}</span>
+            {niveau && <span className="side-nav-moi-meta">{niveau}</span>}
+          </span>
+        </Link>
       </div>
     </nav>
   );

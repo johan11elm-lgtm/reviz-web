@@ -1,0 +1,30 @@
+.pantin {
+  position: relative;
+  display: block;
+  flex: none;
+  padding: 0;
+  border: 0;
+  background: none;
+  -webkit-tap-highlight-color: transparent;
+}
+button.pantin { cursor: pointer; }
+button.pantin:focus-visible { outline: 3px solid var(--accent-violet); outline-offset: 4px; border-radius: 32px; }
+
+.pantin-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  opacity: 0;
+  transition: opacity .25s ease;
+}
+.pantin--pret .pantin-svg { opacity: 1; }
+
+.pantin-repli {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}

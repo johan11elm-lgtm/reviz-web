@@ -1,8 +1,6 @@
 import { NavLink, useLocation } from 'react-router-dom'
 import { useState, useEffect, useRef } from 'react'
-import { Mascot } from './Mascot'
 import { useAuth } from '../context/AuthContext'
-import { CalendarIcon } from './Icons'
 import './RevizPlus.css'
 
 export const HomeIcon = () => (
@@ -36,17 +34,38 @@ export const UserIcon = () => (
   </svg>
 )
 
-// Le coach a sa place au centre, porté par sa mascotte (comme dans la
-// barre latérale de l'ordinateur, où il a sa propre entrée).
-const CoachTabIcon = () => <Mascot pose="coach" size={34} alt="" aria-hidden="true" />
+// Icônes pleines de la capsule encre (refonte du 20/10).
+const Plein = ({ d }) => (
+  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d={d} /></svg>
+)
+export const PATHS = {
+  accueil:   'M11.3 2.6a1 1 0 0 1 1.4 0l8.4 7.6c.6.6.2 1.8-.7 1.8H19v8a2 2 0 0 1-2 2h-3v-6h-4v6H7a2 2 0 0 1-2-2v-8H3.6c-.9 0-1.3-1.2-.7-1.8z',
+  programme: 'M6 2h11a2 2 0 0 1 2 2v14H7a1 1 0 0 0 0 2h12v2H7a3 3 0 0 1-3-3V4a2 2 0 0 1 2-2zm3 5v2h7V7zm0 4v2h5v-2z',
+  agenda:    'M7 2h2v2h6V2h2v2h2a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2zm-2 8v9h14v-9zm2 2h4v4H7z',
+  moi:       'M12 2a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 12c4.4 0 8 2.2 8 5v1a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-1c0-2.8 3.6-5 8-5z',
+  ia:        'M4 3h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H9l-5 4v-4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z',
+}
+export const PleinIcon = ({ nom }) => <Plein d={PATHS[nom]} />
+
+// Étoile Réviz IA, dégradé orange → rose. `id` unique par instance (le
+// dégradé SVG est référencé par id dans le document).
+export const EtoileIA = ({ id = 'rv-ia-grad', size = 24 }) => (
+  <svg viewBox="0 0 24 24" width={size} height={size} aria-hidden="true">
+    <defs>
+      <linearGradient id={id} x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stopColor="#FFC24B" /><stop offset=".45" stopColor="#FF7A2F" /><stop offset="1" stopColor="#FF4F7B" />
+      </linearGradient>
+    </defs>
+    <path d="M12 0C12.7 6.3 17.7 11.3 24 12C17.7 12.7 12.7 17.7 12 24C11.3 17.7 6.3 12.7 0 12C6.3 11.3 11.3 6.3 12 0Z" fill={`url(#${id})`} />
+  </svg>
+)
 
 const TABS = [
-  { to: '/',        Icon: HomeIcon,  label: 'Accueil' },
-  { to: '/cours',   Icon: BookIcon,  label: 'Cours' },
-  { to: '/coach',   Icon: CoachTabIcon, label: 'Coach', coach: true },  // compte requis : absent en mode essai
-  // Progrès est passé dans Profil : l'Agenda (contrôles, emploi du temps) prend sa place.
-  { to: '/agenda',  Icon: CalendarIcon, label: 'Agenda' },
-  { to: '/profil',  Icon: UserIcon,  label: 'Profil' },
+  { to: '/',          nom: 'accueil',   label: "Aujourd'hui" },
+  // Une leçon (scannée ou du programme) et « Mes cours » allument Programme.
+  { to: '/programme', nom: 'programme', label: 'Programme', also: ['/cours', '/analyse', '/flashcards', '/quiz', '/resume', '/mindmap'] },
+  { to: '/agenda',    nom: 'agenda',    label: 'Agenda' },
+  { to: '/profil',    nom: 'moi',       label: 'Moi', also: ['/progres', '/reglages'] },
 ]
 
 export function BottomNav() {
@@ -58,8 +77,6 @@ export function BottomNav() {
   const isGuest = auth?.isGuest;
   // Réviz+ : pastille « + » dorée sur l'onglet du coach (RevizPlus.css).
   const hasRevizPlus = !!auth?.hasRevizPlus && !isGuest;
-  const tabs = isGuest ? TABS.filter(t => !t.coach) : TABS;
-
   useEffect(() => {
     setHidden(false);
     lastY.current = 0;
@@ -105,25 +122,32 @@ export function BottomNav() {
   }, [pathname]);
 
   return (
-    <nav className={`bottom-nav${hidden ? ' bottom-nav--hidden' : ''}`}>
-      {tabs.map(tab => (
+    <nav className={`bottom-nav${hidden ? ' bottom-nav--hidden' : ''}`} aria-label="Menu principal">
+      {TABS.map(tab => (
         <NavLink
           key={tab.to}
           to={tab.to}
           end={tab.to === '/'}
-          // Une leçon vit dans « Mes cours » : /analyse et « Mon programme »
-          // allument l'onglet Cours.
           className={({ isActive }) => {
-            const active = isActive || (tab.to === '/cours' && (pathname === '/analyse' || pathname.startsWith('/programme')));
-            return `nav-item${tab.coach ? ' nav-item--coach' : ''}${active ? ' active' : ''}`;
+            const active = isActive || tab.also?.some(p => pathname.startsWith(p));
+            return `nav-item${active ? ' active' : ''}`;
           }}
           aria-label={tab.label}
         >
-          <span className="nav-icon"><tab.Icon /></span>
-          {tab.coach && hasRevizPlus && <span className="rp-coach-tag" aria-hidden="true">+</span>}
+          <span className="nav-icon"><PleinIcon nom={tab.nom} /></span>
           <span className="nav-label">{tab.label}</span>
         </NavLink>
       ))}
+      {/* Le coach passe par une API authentifiée : pas de bouton en mode essai. */}
+      {!isGuest && (
+        <>
+          <span className="nav-sep" aria-hidden="true" />
+          <NavLink to="/coach" className={({ isActive }) => `nav-ia${isActive ? ' active' : ''}`} aria-label="Réviz IA">
+            <span className="nav-ia-ring"><span className="nav-ia-core"><EtoileIA id="rv-ia-nav" /></span></span>
+            {hasRevizPlus && <span className="rp-coach-tag" aria-hidden="true">+</span>}
+          </NavLink>
+        </>
+      )}
     </nav>
   )
 }
