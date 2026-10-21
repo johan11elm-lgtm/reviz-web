@@ -1,0 +1,93 @@
+{
+ "tube": 64.0,
+ "pieces": {
+  "bras-haut": {
+   "taille": [
+    66,
+    144
+   ],
+   "haut": [
+    33.0,
+    32.0
+   ],
+   "bas": [
+    33.0,
+    112.0
+   ]
+  },
+  "avant-bras": {
+   "taille": [
+    66,
+    174
+   ],
+   "haut": [
+    33.0,
+    32.0
+   ],
+   "bas": [
+    33.0,
+    142.0
+   ]
+  },
+  "main-relachee": {
+   "taille": [
+    205,
+    308
+   ],
+   "poignet": [
+    93.5,
+    275.0
+   ]
+  },
+  "main-ouverte": {
+   "taille": [
+    220,
+    237
+   ],
+   "poignet": [
+    103.5,
+    204.0
+   ]
+  },
+  "main-pointe": {
+   "taille": [
+    157,
+    236
+   ],
+   "poignet": [
+    70.5,
+    203.0
+   ]
+  },
+  "main-poing": {
+   "taille": [
+    171,
+    199
+   ],
+   "poignet": [
+    86.0,
+    166.0
+   ]
+  },
+  "main-plate": {
+   "taille": [
+    71,
+    303
+   ],
+   "poignet": [
+    35.5,
+    270.0
+   ]
+  },
+  "main-pouce": {
+   "taille": [
+    175,
+    253
+   ],
+   "poignet": [
+    70.0,
+    220.0
+   ]
+  }
+ }
+}

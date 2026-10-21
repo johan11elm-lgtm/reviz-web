@@ -1,0 +1,24 @@
+{
+ "tube": {
+  "taille": [
+   130,
+   646
+  ],
+  "debut": 56,
+  "longueur": 520,
+  "largeur": 90.0
+ },
+ "main": {
+  "taille": [
+   237,
+   213
+  ],
+  "poignet": [
+   199.1424165173246,
+   174.59499439419625
+  ],
+  "angle": 138.63799809351408
+ },
+ "source": "menton-11-d-plein",
+ "methode": "main : bras_pose.py ; tube : menton_tube.py (profil m\u00e9dian de l'avant-bras)"
+}
