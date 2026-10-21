@@ -270,12 +270,13 @@
       const e = etat.ecrase;
       return e >= 0 ? Math.min(0.1, e * 0.38) : Math.max(-0.04, e * 0.25);
     }
-    function reglagesCorps() {
+    // sansVie : sans la respiration ni le balancement (la hanche des jambes, voir rendreJambe3d).
+    function reglagesCorps(sansVie = false) {
       const [px, py] = GEO.pivotCorps;
-      const e = ecrasement(), resp = etat.respire;
+      const e = ecrasement(), resp = sansVie ? 0 : etat.respire;
       const sx = (1 + e * 0.4) * (1 - 0.005 * resp), sy = (1 - e) * (1 + 0.012 * resp);
       const descente = etat.flechir * 24;
-      return { px, py, sx, sy, tx: px + etat.corpsX, ty: py + etat.corpsY + descente, rot: etat.corpsRot + etat.balance };
+      return { px, py, sx, sy, tx: px + etat.corpsX, ty: py + etat.corpsY + descente, rot: etat.corpsRot + (sansVie ? 0 : etat.balance) };
     }
     function transformCorps() {
       const r = reglagesCorps();
@@ -283,8 +284,8 @@
     }
     // Un point HD du corps au repos -> où le corps l'emmène (même transformation que le calque du corps).
     const deHD = (p) => [p[0] / K + (mx2 - mx3 / K), p[1] / K + (ay - G.pieds / K)];
-    function suitCorps(pHD) {
-      const r = reglagesCorps(), [x, y] = deHD(pHD), c = Math.cos(r.rot * RAD), s_ = Math.sin(r.rot * RAD);
+    function suitCorps(pHD, sansVie = false) {
+      const r = reglagesCorps(sansVie), [x, y] = deHD(pHD), c = Math.cos(r.rot * RAD), s_ = Math.sin(r.rot * RAD);
       const u = (x - r.px) * r.sx, v = (y - r.py) * r.sy;
       return versHD([r.tx + u * c - v * s_, r.ty + u * s_ + v * c]);
     }
@@ -319,12 +320,17 @@
     const REPOS_J = (() => { const r = R2.etatRepos(); return { g: [r.jambeGhanche, r.jambeGgenou], d: [r.jambeDhanche, r.jambeDgenou] }; })();
     function rendreJambe3d(c) {
       const J = JA[c], P = 'jambe' + c.toUpperCase(), s = c === 'g' ? 1 : -1, L = LJ[c].L, o = jambeEl[c];
-      const H = suitCorps(J.H);
+      // La hanche suit le corps (gestes, écrasement, flexion) mais pas la vie (respiration, balancement) :
+      // au repos, les jambes ne bougent pas ; le haut du tube, caché sous le corps, absorbe l'écart.
+      const H = suitCorps(J.H, true);
       let l1 = L, l2 = L;
       let phi1 = s * (etat[P + 'hanche'] - REPOS_J[c][0]) + LJ[c].a0, phi2 = phi1 + s * (etat[P + 'genou'] - REPOS_J[c][1]);
       let ik = etat[P + 'ik'] || 0, cible = ik > 0 ? versHD([etat[P + 'px'], etat[P + 'py']]) : null;
-      // Au sol seulement : en l'air, les jambes pendent selon leurs angles.
-      if (ik <= 0 && etat.hauteur + etat.flotte <= 1 && (etat.flechir > 0.001 || Math.abs(ecrasement()) > 0.001)) { ik = 1; cible = J.A; }
+      // Au sol, pieds toujours posés ; ils décollent en fondu sur les premières unités de hauteur, puis
+      // les jambes pendent selon leurs angles. (Avant : pieds posés seulement si le corps se tassait, d'où
+      // une bascule d'un calcul à l'autre, donc un saut du pied, chaque fois que l'écrasement frôlait 0.)
+      const sol = 1 - lisse01(etat.hauteur + etat.flotte, 0, 24);
+      if (ik <= 0 && sol > 0) { ik = sol; cible = J.A; }
       if (ik > 0) {
         const sensGenou = c === 'g' ? -1 : 1; // de face, le genou part vers l'extérieur
         const tx = cible[0] - H[0], ty = cible[1] - H[1];
