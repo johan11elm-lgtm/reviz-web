@@ -65,7 +65,7 @@ const TABS = [
   // Une leçon (scannée ou du programme) et « Mes cours » allument Programme.
   { to: '/programme', nom: 'programme', label: 'Programme', also: ['/cours', '/analyse', '/flashcards', '/quiz', '/resume', '/mindmap'] },
   { to: '/agenda',    nom: 'agenda',    label: 'Agenda' },
-  { to: '/profil',    nom: 'moi',       label: 'Moi', also: ['/progres', '/reglages'] },
+  { to: '/profil',    nom: 'moi',       label: 'Moi', also: ['/reglages'] },
 ]
 
 export function BottomNav() {

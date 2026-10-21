@@ -45,7 +45,7 @@ describe('<Agenda />', () => {
     expect(screen.getByText('Maths · Puissances')).toBeInTheDocument()
     expect(screen.getByText('Dans 9 jours')).toBeInTheDocument()
     fireEvent.click(screen.getByRole('button', { name: /Réviser/ }))
-    expect(nav).toHaveBeenCalledWith('/programme/maths')
+    expect(nav).toHaveBeenCalledWith('/programme?matiere=maths')
   })
 
   it('la veille : « Demain »', () => {

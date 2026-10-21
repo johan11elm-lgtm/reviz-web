@@ -1,5 +1,5 @@
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { BottomNav } from '../components/BottomNav';
 import { Mascot } from '../components/Mascot';
@@ -81,7 +81,9 @@ export default function Programme() {
   const [catalogue, setCatalogue] = useState(null);
   const [error, setError] = useState(null);
   const lessons = useMemo(() => loadLessons(), []);
-  const [slug, setSlug] = useState(null);
+  // ?matiere=maths (agenda, accueil, lien d'une ancienne adresse) : la matière ouverte d'emblée.
+  const [params] = useSearchParams();
+  const [slug, setSlug] = useState(() => params.get('matiere'));
   const [caseChoisie, setCaseChoisie] = useState(null);
   const [ouverture, setOuverture] = useState(null); // id du chapitre en cours d'ouverture
   const [erreurChapitre, setErreurChapitre] = useState(false);

@@ -33,7 +33,7 @@ export function ControleBanner({ className = '' }) {
   if (loin) return null;
 
   const m = matiereControle(prochain.matiere);
-  const cible = prochain.matiere === 'autre' ? '/cours' : `/programme/${prochain.matiere}`;
+  const cible = prochain.matiere === 'autre' ? '/cours' : `/programme?matiere=${prochain.matiere}`;
   return (
     <div className={`guest-banner controle-banner ${className}`.trim()} role="status">
       <Mascot pose={m.mascot} size={30} alt="" aria-hidden="true" className="guest-banner-mascot" />

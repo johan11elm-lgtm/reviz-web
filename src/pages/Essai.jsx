@@ -65,7 +65,7 @@ export default function Essai() {
     setOuverture(true);
     openChapter(classeFiche, chapitre.matiere, chapitre.ch)
       .then(() => navigate('/quiz', { replace: true }))
-      .catch(() => navigate(`/programme/${matiereFiche}`, { replace: true }));
+      .catch(() => navigate(`/programme?matiere=${matiereFiche}`, { replace: true }));
   }
 
   // Déjà connecté (compte, ou essai déjà commencé) et venu d'une fiche : le
@@ -96,7 +96,7 @@ export default function Essai() {
     stopDecouverte();
     loginAsGuest({ prenom: p, level: { cycle, classe, specialites: [] } });
     if (chapitre && classe === classeFiche) ouvrirChapitre();
-    else navigate(matiereFiche ? `/programme/${matiereFiche}` : '/programme', { replace: true });
+    else navigate(matiereFiche ? `/programme?matiere=${matiereFiche}` : '/programme', { replace: true });
   }
 
   // Redirection automatique en cours ou à venir (effet ci-dessus) : rien à remplir.

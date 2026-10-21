@@ -172,7 +172,7 @@ export default function Home() {
     if (lastLesson) { restoreLesson(lastLesson.id); navigate('/flashcards'); }
     else navigate('/programme');
   };
-  const cibleControle = controle && controle.matiere !== 'autre' ? `/programme/${controle.matiere}` : '/programme';
+  const cibleControle = controle && controle.matiere !== 'autre' ? `/programme?matiere=${controle.matiere}` : '/programme';
 
   // ditLignes : la phrase du jour découpée pour la bulle (une idée par ligne) ; dit : d'un bloc.
   let ditLignes, cta, action;
@@ -398,7 +398,7 @@ export default function Home() {
       </div>
       <div className="hm-matieres">
         {matieres.map(m => (
-          <Link key={m.slug} to={`/programme/${m.slug}`} className="hm-matiere">
+          <Link key={m.slug} to={`/programme?matiere=${m.slug}`} className="hm-matiere">
             <span className="hm-matiere-rond" style={{ background: m.bg }}>
               <Mascot pose={m.pose} size={isDesktop ? 54 : 64} alt="" aria-hidden="true" />
             </span>

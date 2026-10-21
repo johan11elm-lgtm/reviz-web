@@ -100,7 +100,7 @@ export default function Agenda() {
 
   function reviser(ctrl) {
     track('agenda_reviser', { matiere: ctrl.matiere });
-    navigate(ctrl.matiere === 'autre' ? '/cours' : `/programme/${ctrl.matiere}`);
+    navigate(ctrl.matiere === 'autre' ? '/cours' : `/programme?matiere=${ctrl.matiere}`);
   }
   async function retirer(ctrl) {
     setAgenda(await supprimerControle(currentUser, ctrl.id));

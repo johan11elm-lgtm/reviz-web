@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Navigate, useLocation, useParams } from 'react-router-dom'
 import { useEffect, lazy, Suspense } from 'react'
 import { ThemeProvider, useTheme } from './context/ThemeContext'
 import { AuthProvider, useAuth } from './context/AuthContext'
@@ -6,6 +6,13 @@ import { resolveTheme } from './utils/themes'
 import { ErrorBoundary } from './components/ErrorBoundary'
 import { SplashHider } from './components/SplashHider'
 import { NavHaut } from './components/NavHaut'
+
+// Ancienne page « chapitres d'une matière » : Programme montre déjà les matières et leur
+// parcours, il s'ouvre directement sur la matière demandée.
+function VersMatiere() {
+  const { matiere } = useParams()
+  return <Navigate to={`/programme?matiere=${encodeURIComponent(matiere)}`} replace />
+}
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -32,7 +39,6 @@ const Profile        = lazy(() => import('./pages/Profile'))
 const Reglages       = lazy(() => import('./pages/Reglages'))
 const Scan           = lazy(() => import('./pages/Scan'))
 const Cours          = lazy(() => import('./pages/Cours'))
-const Progres        = lazy(() => import('./pages/Progres'))
 const Agenda         = lazy(() => import('./pages/Agenda'))
 const Analyse        = lazy(() => import('./pages/Analyse'))
 const Flashcards     = lazy(() => import('./pages/Flashcards'))
@@ -48,7 +54,6 @@ const NotFound       = lazy(() => import('./pages/NotFound'))
 const UpgradeSuccess = lazy(() => import('./pages/UpgradeSuccess'))
 const Coach          = lazy(() => import('./pages/Coach'))
 const Programme      = lazy(() => import('./pages/Programme'))
-const ProgrammeMatiere = lazy(() => import('./pages/ProgrammeMatiere'))
 const Essai          = lazy(() => import('./pages/Essai'))
 const Avis           = lazy(() => import('./pages/Avis'))
 const Profs          = lazy(() => import('./pages/Profs'))
@@ -99,7 +104,7 @@ function AuthRoutes() {
       <Route path="/"            element={<PrivateRoute><Home /></PrivateRoute>} />
       <Route path="/onboarding"  element={<PrivateRoute><Onboarding /></PrivateRoute>} />
       <Route path="/cours"       element={<PrivateRoute><Cours /></PrivateRoute>} />
-      <Route path="/progres"     element={<PrivateRoute><Progres /></PrivateRoute>} />
+      <Route path="/progres"     element={<Navigate to="/profil" replace />} />
       <Route path="/agenda"      element={<PrivateRoute><Agenda /></PrivateRoute>} />
       <Route path="/profil"      element={<PrivateRoute><Profile /></PrivateRoute>} />
       <Route path="/reglages"    element={<PrivateRoute><Reglages /></PrivateRoute>} />
@@ -112,7 +117,7 @@ function AuthRoutes() {
       <Route path="/upgrade-success" element={<PrivateRoute><UpgradeSuccess /></PrivateRoute>} />
       <Route path="/coach"       element={<PrivateRoute><Coach /></PrivateRoute>} />
       <Route path="/programme"   element={<PrivateRoute><Programme /></PrivateRoute>} />
-      <Route path="/programme/:matiere" element={<PrivateRoute><ProgrammeMatiere /></PrivateRoute>} />
+      <Route path="/programme/:matiere" element={<VersMatiere />} />
       <Route path="/battle"      element={<BattleRoute><BattleAccueil /></BattleRoute>} />
       <Route path="/battle/:code" element={<BattleRoute><Battle /></BattleRoute>} />
       <Route path="*"            element={<NotFound />} />

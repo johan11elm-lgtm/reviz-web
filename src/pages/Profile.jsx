@@ -15,6 +15,8 @@ import { DERNIER_JOUR_OFFERT } from '../../api/_lancement.js';
 import { TEINTES, varsTeinte } from '../utils/teinteMatiere';
 import { useIsDesktop } from '../hooks/useMediaQuery';
 import { useModalA11y } from '../hooks/useModalA11y';
+import { MaSemaine, MaMemoire, MonProgramme } from '../components/moi/MesProgres';
+import { hasProgramme, PROGRAMME_FALLBACK } from '../utils/programme';
 import '../components/reviz/HerosMatiere.css';
 import './Profile.css';
 
@@ -29,9 +31,6 @@ const Engrenage = () => (
 );
 const Coche = ({ taille = 13 }) => (
   <svg viewBox="0 0 24 24" width={taille} height={taille} fill="none" stroke="#fff" strokeWidth="3.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg>
-);
-const Fleche = () => (
-  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
 );
 const Chevron = () => (
   <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6" /></svg>
@@ -197,12 +196,11 @@ export default function Profile() {
       <div className="mo-chiffre mo-chiffre--menthe"><span className="mo-chiffre-icone"><Livre /></span><b>{lecons.length}</b><span>{pluriel(lecons.length, 'leçon')}</span></div>
     </div>
   );
-  const progres = (
-    <button type="button" className="mo-carte mo-progres" onClick={() => navigate('/progres')}>
-      <span><b>Mes progrès</b><span>Matières, mémoire, jours de révision</span></span>
-      <span className="mo-go" aria-hidden="true"><Fleche /></span>
-    </button>
-  );
+  // Mes progrès (ancienne page à part, fusionnée dans Moi le 22/10) : la semaine, la mémoire, le programme.
+  const classeProgramme = hasProgramme(niveauScolaire) ? niveauScolaire.classe : PROGRAMME_FALLBACK;
+  const semaine = <MaSemaine revisions={revisions} />;
+  const memoire = <MaMemoire lecons={lecons} />;
+  const programme = <MonProgramme classe={classeProgramme} lecons={lecons} />;
   const carteProchain = prochain && (() => {
     const c = conseil(prochain);
     return (
@@ -368,7 +366,6 @@ export default function Profile() {
             <div className="mo-carte mo-carte--bloc">
               <h2 className="mo-h3">Mes chiffres</h2>
               {chiffres}
-              {progres}
             </div>
             {carteBattle}
             <div className="mo-carte mo-carte--bloc">
@@ -377,6 +374,7 @@ export default function Profile() {
               {revizPlus}
             </div>
           </div>
+          <div className="mo-rangee mo-rangee--progres">{semaine}{memoire}{programme}</div>
           <section className="mo-section">
             {enTeteBadges}
             <div className={`mo-badges-zone${prochain ? '' : ' mo-badges-zone--seule'}`}>
@@ -397,12 +395,13 @@ export default function Profile() {
         <div className="ch-hero mo-hero">{deco}{identite}{reviz}</div>
         {carteNiveau}
         {essai}
-        <section className="mo-section">{chiffres}{progres}</section>
+        <section className="mo-section">{chiffres}{semaine}{memoire}</section>
         <section className="mo-section">
           {enTeteBadges}
           {carteProchain}
           {grille}
         </section>
+        <section className="mo-section">{programme}</section>
         <section className="mo-section">
           <h2 className="mo-h2">Battle</h2>
           {carteBattle}

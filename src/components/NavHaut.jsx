@@ -17,7 +17,7 @@ const ONGLETS = [
   { to: '/',          label: "Aujourd'hui", nom: 'accueil',   end: true },
   { to: '/programme', label: 'Programme',   nom: 'programme', also: ['/cours', ...LESSON_PATHS] },
   { to: '/agenda',    label: 'Agenda',      nom: 'agenda' },
-  { to: '/profil',    label: 'Moi',         nom: 'moi',       also: ['/progres', '/reglages'] },
+  { to: '/profil',    label: 'Moi',         nom: 'moi',       also: ['/reglages'] },
 ];
 
 /**

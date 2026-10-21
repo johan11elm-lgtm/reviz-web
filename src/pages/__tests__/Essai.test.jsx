@@ -49,7 +49,7 @@ describe('<Essai /> — mode essai', () => {
     fireEvent.change(screen.getByLabelText('Ton prénom'), { target: { value: 'Léa' } })
     fireEvent.click(screen.getByRole('button', { name: /C'est parti/ }))
     expect(auth.loginAsGuest).toHaveBeenCalledWith({ prenom: 'Léa', level: { cycle: 'college', classe: '3ème', specialites: [] } })
-    expect(nav).toHaveBeenCalledWith('/programme/maths', { replace: true })
+    expect(nav).toHaveBeenCalledWith('/programme?matiere=maths', { replace: true })
   })
 
   it('venu d’une fiche avec son chapitre : le prénom suffit, et le quiz du chapitre s’ouvre', async () => {
@@ -71,7 +71,7 @@ describe('<Essai /> — mode essai', () => {
     fireEvent.change(screen.getByLabelText('Ton prénom'), { target: { value: 'Léa' } })
     fireEvent.click(screen.getByRole('button', { name: /C'est parti/ }))
     expect(prog.openChapter).not.toHaveBeenCalled()
-    expect(nav).toHaveBeenCalledWith('/programme/maths', { replace: true })
+    expect(nav).toHaveBeenCalledWith('/programme?matiere=maths', { replace: true })
   })
 
   it('un essai déjà commencé ouvre directement le quiz du chapitre de la fiche', async () => {
