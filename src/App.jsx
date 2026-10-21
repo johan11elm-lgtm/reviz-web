@@ -5,7 +5,7 @@ import { AuthProvider, useAuth } from './context/AuthContext'
 import { resolveTheme } from './utils/themes'
 import { ErrorBoundary } from './components/ErrorBoundary'
 import { SplashHider } from './components/SplashHider'
-import { SideNav } from './components/SideNav'
+import { NavHaut } from './components/NavHaut'
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -88,7 +88,7 @@ function AuthRoutes() {
   return (
     <>
     <SplashHider />
-    <SideNav />
+    <NavHaut />
     <Routes>
       <Route path="/inscription" element={<Inscription />} />
       <Route path="/connexion"   element={<Connexion />} />

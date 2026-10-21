@@ -433,7 +433,7 @@ export default function Home() {
   );
 
   return (
-    <div className="app app--no-halo home-page" style={style}>
+    <div className={`app app--no-halo home-page${isDesktop ? ' app--large' : ''}`} style={style}>
       {newBadge && !annonceBattle && <AchievementToast badge={newBadge} onDone={() => setNewBadge(null)} />}
       {annonceRevizPlus && <RevizPlusAnnonce uid={currentUser.uid} onClose={() => setAnnonceRevizPlus(false)} />}
       {annonceBattle && <BattleAnnonce uid={currentUser.uid} onClose={() => setAnnonceBattle(false)} />}
@@ -450,43 +450,46 @@ export default function Home() {
             <span className="hm-bulle hm-bulle--b" aria-hidden="true" />
             <span className="hm-point" aria-hidden="true" />
             <span className="hm-grain" aria-hidden="true" />
-            <Pantin
-              ref={pantin}
-              size={TAILLE_PANTIN}
-              expression={h.expression}
-              entree={entree}
-              onEntree={aterri}
-              repli={null}
-              className="hm-pantin"
-              onClick={sauter}
-              label="Réviz, ta mascotte"
-            />
-            {/* À gauche, face à Réviz : ce qu'il dit, puis la carte de ce qu'il propose. */}
-            <div className="hm-hero-txt">
-              <div className="hm-hero-haut">
-                <span className="hm-date">{dateTxt}</span>
+            <div className="hm-hero-haut">
+              <span className="hm-date">{dateTxt}</span>
+              <div className="hm-hero-titres">
+                <span className="hm-auj">Aujourd'hui</span>
                 {serie}
               </div>
-              <span className="hm-auj">Aujourd'hui</span>
-              <h1 className="sr-only">{dit}</h1>
-              <BulleReviz key={`${humeurId}-${tour}`} lignes={sugg.lignes} parle={parle} sortie={sortie} onClick={sugg.action} label={sugg.label}
-                pointe="droite" grande className="hm-bulle-parole" />
-              <div className="hm-proposition-place">
-                {parle && <CarteFonction key={tour} carte={sugg.carte} entree sortie={sortie} grande onClick={sugg.action} />}
+            </div>
+            {/* Réviz et ce qu'il dit, ensemble au centre : la bulle à gauche pointe vers sa tête. */}
+            <div className="hm-scene">
+              <div className="hm-hero-txt">
+                <h1 className="sr-only">{dit}</h1>
+                <BulleReviz key={`${humeurId}-${tour}`} lignes={sugg.lignes} parle={parle} sortie={sortie} onClick={sugg.action} label={sugg.label}
+                  pointe="droite" grande className="hm-bulle-parole" />
+                <div className="hm-proposition-place">
+                  {parle && <CarteFonction key={tour} carte={sugg.carte} entree sortie={sortie} grande onClick={sugg.action} />}
+                </div>
+                <div className="hm-points" role="group" aria-label="Ce que Réviz propose">
+                  {suggestions.map((p, i) => (
+                    <button
+                      key={i}
+                      type="button"
+                      className={`hm-point-sugg${i === tour % suggestions.length ? ' hm-point-sugg--la' : ''}`}
+                      onClick={() => allerA(i)}
+                      aria-label={p.carte.titre}
+                      aria-current={i === tour % suggestions.length}
+                    />
+                  ))}
+                </div>
               </div>
-              <div className="hm-flex" />
-              <div className="hm-points" role="group" aria-label="Ce que Réviz propose">
-                {suggestions.map((p, i) => (
-                  <button
-                    key={i}
-                    type="button"
-                    className={`hm-point-sugg${i === tour % suggestions.length ? ' hm-point-sugg--la' : ''}`}
-                    onClick={() => allerA(i)}
-                    aria-label={p.carte.titre}
-                    aria-current={i === tour % suggestions.length}
-                  />
-                ))}
-              </div>
+              <Pantin
+                ref={pantin}
+                size={TAILLE_PANTIN}
+                expression={h.expression}
+                entree={entree}
+                onEntree={aterri}
+                repli={null}
+                className="hm-pantin"
+                onClick={sauter}
+                label="Réviz, ta mascotte"
+              />
             </div>
           </div>
           {rappels}

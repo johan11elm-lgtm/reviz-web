@@ -439,6 +439,8 @@
 
 /* ─── Ordinateur ─── */
 .prg-page--large .prg-hero { margin-top: 0; padding: 32px 56px 120px; border-radius: 0 0 50% 50% / 0 0 80px 80px; }
+/* Le menu (NavHaut) est posé en haut à droite, par-dessus le héros : la rangée du titre le laisse libre. */
+.prg-page--large .prg-hero-haut { min-height: 58px; padding-right: 380px; }
 .prg-page--large .prg-deco--a { width: 220px; height: 220px; top: 170px; left: -70px; }
 .prg-page--large .prg-deco--b { width: 120px; height: 120px; top: 120px; right: 180px; }
 .prg-page--large .prg-deco--c { width: 60px; height: 60px; top: 300px; left: 380px; right: auto; }
@@ -457,7 +459,16 @@
 .prg-page--large .prg-scans:hover { box-shadow: 0 16px 36px rgba(160,80,20,.2); }
 .prg-page--large .prg-note { margin: 20px 56px 0; }
 
-.prg-page--large .prg-grille { display: grid; grid-template-columns: minmax(0, 1fr); gap: 32px; padding: 40px 56px 64px; grid-auto-rows: max-content; }
+.prg-page--large .prg-grille {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 32px;
+  max-width: 1440px;
+  box-sizing: border-box;
+  margin: 0 auto;
+  padding: 48px 56px 64px;
+  grid-auto-rows: max-content;
+}
 .prg-page--large .prg-tete,
 .prg-page--large .prg-bloc--chapitres .prg-tete { margin: 0 0 16px; }
 .prg-page--large .prg-bloc--chapitres .prg-tete { margin-bottom: 8px; }

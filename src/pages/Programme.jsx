@@ -259,7 +259,7 @@ export default function Programme() {
   );
 
   return (
-    <div className={`app app--no-halo prg-page${isDesktop ? ' prg-page--large' : ''}`}>
+    <div className={`app app--no-halo prg-page${isDesktop ? ' app--large prg-page--large' : ''}`}>
       <div className="content prg-defile">
         {hero}
         {carteScans}

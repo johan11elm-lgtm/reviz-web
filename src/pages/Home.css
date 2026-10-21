@@ -373,32 +373,38 @@
   z-index: 2;
 }
 
-/* ── Ordinateur ── */
-.home-page .hm-desk { display: flex; flex-direction: column; gap: 24px; padding: 24px 32px 48px; }
+/* ── Ordinateur : pleine largeur (handoff Programme du 21/10), héros en arc, menu en haut à droite ── */
+.home-page .hm-desk { display: flex; flex-direction: column; padding: 0 0 64px; }
 .home-page .hm-hero--desk {
-  height: 500px;
+  height: auto;
   margin: 0;
-  padding: 0;
-  border-radius: 40px;
+  padding: 32px 56px 72px;
+  border-radius: 0 0 50% 50% / 0 0 80px 80px;
 }
-.home-page .hm-hero--desk .hm-bulle--a { right: 120px; top: -80px; width: 520px; height: 520px; box-shadow: inset 0 -40px 60px rgba(120,60,20,.08), inset 0 24px 40px rgba(255,255,255,.35); }
-.home-page .hm-hero--desk .hm-bulle--b { left: auto; right: -60px; top: auto; bottom: -90px; width: 260px; height: 260px; box-shadow: none; }
-.home-page .hm-hero--desk .hm-point { left: auto; right: 64px; top: 56px; width: 56px; height: 56px; }
-.home-page .hm-hero--desk .hm-pantin { position: absolute; right: 110px; top: 70px; z-index: 1; }
+.home-page .hm-hero--desk .hm-bulle--a { right: 18%; top: -120px; width: 520px; height: 520px; box-shadow: inset 0 -40px 60px rgba(120,60,20,.08), inset 0 24px 40px rgba(255,255,255,.35); }
+.home-page .hm-hero--desk .hm-bulle--b { left: -70px; right: auto; top: 260px; bottom: auto; width: 260px; height: 260px; box-shadow: none; }
+.home-page .hm-hero--desk .hm-point { left: auto; right: 12%; top: 380px; width: 18px; height: 18px; box-shadow: none; }
+/* La rangée du titre laisse libre le coin du menu (NavHaut). */
+.home-page .hm-hero--desk .hm-hero-haut { display: block; max-width: 1328px; margin: 0 auto; padding: 0 380px 0 0; min-height: 58px; }
+.home-page .hm-hero--desk .hm-hero-titres { flex-direction: row; align-items: center; gap: 16px; margin-top: 4px; }
+.home-page .hm-hero--desk .hm-date { font-size: 12px; letter-spacing: .12em; opacity: .7; color: var(--hm-encre); }
+.home-page .hm-hero--desk .hm-auj { font-size: 42px; letter-spacing: -.04em; }
+.home-page .hm-hero--desk .hm-serie { margin: 0; padding: 6px 12px; font-size: 14px; }
+/* Réviz et ce qu'il dit, ensemble au centre */
+.home-page .hm-scene { position: relative; z-index: 1; display: flex; align-items: center; justify-content: center; gap: 12px; margin-top: 4px; }
+.home-page .hm-hero--desk .hm-pantin { position: relative; flex: none; z-index: 1; }
 .home-page .hm-hero-txt {
   position: relative;
   z-index: 2;
-  height: 100%;
-  max-width: 620px;
-  padding: 44px 56px 30px;
+  width: 500px;
   display: flex;
   flex-direction: column;
 }
-.home-page .hm-hero--desk .hm-auj { margin-top: 6px; font-size: 60px; letter-spacing: -2.2px; }
 
-/* Ordinateur : la bulle et la carte à gauche, face à Réviz (pointe à droite, vers sa tête). */
-.home-page .hm-desk .hm-bulle-parole { position: relative; left: auto; right: auto; bottom: auto; margin-top: 34px; }
-.home-page .hm-desk .hm-proposition-place { height: 84px; margin-top: 46px; padding: 0; justify-content: flex-start; }
+/* La bulle et la carte à gauche, face à Réviz (pointe à droite, vers sa tête). */
+.home-page .hm-desk .hm-bulle-parole { position: relative; left: auto; right: auto; bottom: auto; }
+.home-page .hm-desk .hm-proposition-place { height: 84px; margin-top: 28px; padding: 0; justify-content: flex-start; }
+.home-page .hm-desk .hm-points { margin-top: 22px; }
 
 /* Les points : une par proposition, pour y aller directement */
 .home-page .hm-points { display: flex; align-items: center; gap: 8px; }
@@ -415,13 +421,19 @@
 .home-page .hm-point-sugg:hover { background: rgba(27,26,35,.45); }
 .home-page .hm-point-sugg--la { width: 24px; background: var(--hm-encre); }
 .home-page .hm-point-sugg:focus-visible { outline: 2px solid var(--hm-encre); outline-offset: 3px; }
-.home-page .hm-hero--desk .hm-hero-haut { padding: 0; justify-content: flex-start; align-items: center; gap: 14px; }
-.home-page .hm-hero--desk .hm-date { font-size: 14px; letter-spacing: .5px; }
-.home-page .hm-hero--desk .hm-serie { margin: 0; padding: 6px 12px; font-size: 14px; }
-.home-page .hm-flex { flex: 1; }
-.home-page .hm-desk .hm-rappels { margin: 0; }
+.home-page .hm-desk .hm-rappels { max-width: 1328px; margin: 24px auto 0; padding: 0 56px; box-sizing: border-box; width: 100%; }
 
-.home-page .hm-grille { display: grid; grid-template-columns: 1.5fr 1fr; gap: 20px; grid-auto-rows: max-content; }
+.home-page .hm-grille {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 20px;
+  grid-auto-rows: max-content;
+  width: 100%;
+  max-width: 1440px;
+  box-sizing: border-box;
+  margin: 40px auto 0;
+  padding: 0 56px;
+}
 .home-page .hm-grille > .hm-battle { grid-column: 1 / -1; min-height: 150px; }
 .home-page .hm-carte {
   padding: 20px 22px;
@@ -462,11 +474,10 @@
 
 @media (max-width: 1240px) {
   /* Écran étroit : Réviz rapetisse (sa taille est en ligne), bulle et carte se resserrent. */
-  .home-page .hm-hero--desk .hm-pantin { right: 14px; top: 80px; transform: scale(.8); transform-origin: 100% 0; }
-  .home-page .hm-desk .rv-bulle-txt { max-width: 380px; font-size: 30px; }
+  .home-page .hm-hero--desk .hm-pantin { width: 320px !important; height: 320px !important; }
+  .home-page .hm-hero-txt { width: 420px; }
+  .home-page .hm-desk .rv-bulle-txt { max-width: 400px; font-size: 30px; }
   .home-page .hm-desk .rv-bulle-ligne + .rv-bulle-ligne { font-size: 18px; }
-  .home-page .hm-desk .rv-fonction { max-width: 360px; }
-  .home-page .hm-hero--desk .hm-point { right: 30px; }
-  .home-page .hm-hero-txt { max-width: 560px; padding-left: 44px; padding-right: 44px; }
+  .home-page .hm-desk .rv-fonction { max-width: 400px; }
   .home-page .hm-grille { grid-template-columns: 1.3fr 1fr; }
 }

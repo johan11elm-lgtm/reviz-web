@@ -711,11 +711,13 @@ html.native .content, html.native .pg-content, html.native .pf-content {
 }
 
 /* ─── Ordinateur (≥ 1024 px, hors app native) ─────────────────────
- * Plus de « téléphone dans la page » : barre latérale fixe (SideNav),
- * coquille sur toute la hauteur, contenu dans une colonne centrale.
- * Sous 1024 px rien ne change ; l'app native garde ses règles plein écran. */
+ * Plus de « téléphone dans la page » : menu en haut à droite (NavHaut, plus de
+ * barre latérale depuis le 21/10), coquille sur toute la hauteur, contenu dans
+ * une colonne centrale ; les pages refaites (.app--large) prennent toute la
+ * largeur et gèrent leurs marges. Sous 1024 px rien ne change ; l'app native
+ * garde ses règles plein écran. */
 :root {
-  --sidenav-w: 248px;
+  --sidenav-w: 0px;
   /* Titres de la refonte : Bricolage Grotesque (700/800), texte en Geist. */
   --font-display: 'Bricolage Grotesque', 'Geist', system-ui, sans-serif;
   --content-max: 1120px;
@@ -728,24 +730,22 @@ html.native .content, html.native .pg-content, html.native .pf-content {
     max-width: none;
     min-height: 100vh;
     height: 100dvh;
-    margin: 0 0 0 var(--sidenav-w);
+    margin: 0;
     border-radius: 0;
     box-shadow: none;
     /* Colonne centrale : les pages gardent leur gouttière propre à l'intérieur.
-       (un pourcentage se calculerait sur la fenêtre entière, d'où 100vw moins la barre) */
-    padding-left: clamp(0px, calc((100vw - var(--sidenav-w) - var(--content-max)) / 2), 240px);
-    padding-right: clamp(0px, calc((100vw - var(--sidenav-w) - var(--content-max)) / 2), 240px);
-  }
-  /* Pages sans barre latérale (connexion, inscription, fin d'inscription…) :
-     pas de place réservée à gauche, la colonne se centre dans la fenêtre. */
-  html:not(.native) body:not(:has(.side-nav)) .app {
-    margin-left: 0;
+       (un pourcentage se calculerait sur #root, d'où 100vw) */
     padding-left: clamp(0px, calc((100vw - var(--content-max)) / 2), 240px);
     padding-right: clamp(0px, calc((100vw - var(--content-max)) / 2), 240px);
   }
+  /* Pages refaites en pleine largeur (accueil, Programme) : héros bord à bord. */
+  html:not(.native) .app.app--large { padding-left: 0; padding-right: 0; }
+  /* Les autres pages, en attendant d'être refaites, laissent une bande en haut au menu
+     (NavHaut, fixé en haut à droite) pour ne rien glisser dessous. */
+  html:not(.native) body:has(.nav-haut) .app:not(.app--large) { padding-top: 64px; }
   /* Le halo couvre toute la largeur de la coquille */
   html:not(.native) .app::before { left: 0; right: 0; }
-  /* La capsule du bas laisse la place à la barre latérale */
+  /* La capsule du bas laisse la place au menu du haut */
   html:not(.native) .bottom-nav { display: none; }
   html:not(.native) .content,
   html:not(.native) .pg-content,
