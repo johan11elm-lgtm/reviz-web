@@ -579,9 +579,10 @@ html.native .content, html.native .pg-content, html.native .pf-content {
   min-height: 0;
 }
 
-/* ─── Bottom nav : capsule encre (refonte validée du 20/10) ──────
- * L'onglet actif devient une pastille crème avec son libellé ; les autres
- * ne montrent que l'icône. À droite, le bouton Réviz IA (étoile dégradée). */
+/* ─── Bottom nav : capsule claire (refonte du 20/10, éclaircie le 21/10) ──────
+ * Verre crème dépoli, pour rester dans les pastels de l'app ; l'onglet actif
+ * devient une pastille encre avec son libellé, les autres ne montrent que
+ * l'icône. À droite, le bouton Réviz IA (étoile dégradée). */
 .bottom-nav {
   display: flex;
   align-items: center;
@@ -589,9 +590,11 @@ html.native .content, html.native .pg-content, html.native .pf-content {
   height: 66px;
   margin: 0 16px 16px;
   padding: 0 7px 0 8px;
-  background: #1B1A23;
+  background: rgba(255,252,248,.82);
+  -webkit-backdrop-filter: blur(18px) saturate(1.4);
+  backdrop-filter: blur(18px) saturate(1.4);
   border-radius: 33px;
-  box-shadow: 0 14px 34px rgba(27,26,35,.3);
+  box-shadow: inset 0 1px 0 #fff, 0 0 0 1px rgba(120,60,20,.07), 0 14px 32px -10px rgba(120,60,20,.32);
   flex-shrink: 0;
   transform: translateY(0);
   transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -613,14 +616,14 @@ html.native .content, html.native .pg-content, html.native .pf-content {
   gap: 7px;
   border-radius: 26px;
   text-decoration: none;
-  color: rgba(248,239,231,.62);
+  color: #9A8F80;
   transition: color .15s, background .2s, flex .25s;
 }
 .nav-item.active {
   flex: none;
   padding: 0 16px;
-  background: #F8EFE7;
-  color: #1B1A23;
+  background: #1B1A23;
+  color: #F8EFE7;
 }
 .nav-icon { display: flex; align-items: center; justify-content: center; line-height: 1; }
 .nav-icon svg { width: 23px; height: 23px; }
@@ -628,7 +631,7 @@ html.native .content, html.native .pg-content, html.native .pf-content {
 .nav-label { display: none; font-size: 14px; font-weight: 700; white-space: nowrap; }
 .nav-item.active .nav-label { display: inline; }
 
-.nav-sep { width: 1px; height: 28px; background: rgba(255,255,255,.14); margin: 0 4px; flex: none; }
+.nav-sep { width: 1px; height: 28px; background: rgba(27,26,35,.1); margin: 0 4px; flex: none; }
 
 /* Bouton Réviz IA : anneau conique orange → rose, étoile dégradée */
 .nav-ia {
@@ -652,13 +655,13 @@ html.native .content, html.native .pg-content, html.native .pf-content {
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  background: #1B1A23;
+  background: #FFFCF8;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 .nav-ia-core svg { width: 24px; height: 24px; transition: transform .25s; }
-.nav-ia.active .nav-ia-core { background: #2A2833; }
+.nav-ia.active .nav-ia-core { background: #FFF1E6; }
 .nav-ia.active .nav-ia-core svg { transform: rotate(45deg) scale(1.05); }
 
 /* Toggle switch (réutilisé par la page Réglages) */

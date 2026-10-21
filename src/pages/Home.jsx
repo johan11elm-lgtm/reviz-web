@@ -55,12 +55,6 @@ function jourDans(n) {
   return majuscule(d.toLocaleDateString('fr-FR', { weekday: 'long' }));
 }
 
-const Lecture = () => (
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-    <path d="M8 5.6v12.8a1 1 0 0 0 1.5.86l10.4-6.4a1 1 0 0 0 0-1.72L9.5 4.74A1 1 0 0 0 8 5.6z" />
-  </svg>
-);
-
 const Fleche = () => (
   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
     <path d="M5 12h14M13 6l6 6-6 6" />
@@ -141,6 +135,7 @@ export default function Home() {
   const [parle, setParle] = useState(false);
   const [tour, setTour] = useState(0);
   const [sortie, setSortie] = useState(false);
+  const [caseChoisie, setCaseChoisie] = useState(null);
   const pantin = useRef(null);
   const hero = useRef(null);
   const heroVu = useRef(true);
@@ -257,13 +252,27 @@ export default function Home() {
     const quiz = lastLesson?.quizCount ? `${lastLesson.quizCount} questions` : 'Pour te tester';
     const chapitre = controle?.titre ? `${controle.titre} · ` : '';
     return [
-      { titre: `${jour(0)} · Résumé + ${cartes}`, meta: `${chapitre}Environ 6 min`, done: todayRevisions > 0 },
-      { titre: `${jour(1)} · Quiz corrigé`, meta: quiz, done: goalReached },
-      { titre: `${jour(2)} · Battle d'entraînement`, meta: 'Contre un ami', done: false },
-    ].map((p, i) => ({ ...p, ton: TONS_PLAN[i] }));
+      { quoi: `Résumé + ${cartes}`, meta: `${chapitre}Environ 6 min`, done: todayRevisions > 0, pose: 'flashcard' },
+      { quoi: 'Quiz corrigé', meta: quiz, done: goalReached, pose: 'quiz' },
+      { quoi: "Battle d'entraînement", meta: 'Contre un ami', done: false, pose: 'fire' },
+    ].map((p, i) => ({ ...p, jour: jour(i), titre: `${jour(i)} · ${p.quoi}`, ton: TONS_PLAN[i] }));
   }, [controle, dueCards, lastLesson, todayRevisions, goalReached]);
   // L'étape à faire maintenant : la première pas encore faite. C'est elle qui lance l'action du jour.
   const enCours = Math.max(0, plan.findIndex(p => !p.done));
+  // Le chemin (téléphone) : les trois étapes, puis le contrôle au bout s'il y en a un.
+  const lancerQuiz = () => {
+    if (lastLesson) { restoreLesson(lastLesson.id); navigate('/quiz'); }
+    else navigate(cibleControle);
+  };
+  const cases = [
+    ...plan.map((p, i) => ({ ...p, go: i === enCours ? action : [action, lancerQuiz, () => navigate('/battle')][i] })),
+    controle && {
+      jour: jourDans(controle.jours), quoi: `Contrôle de ${controle.m.label.toLowerCase()}`, meta: controle.titre || 'Le jour J',
+      pose: 'examen', arrivee: true, go: () => navigate('/agenda'), label: "Voir l'agenda",
+    },
+  ].filter(Boolean);
+  const choisie = caseChoisie ?? enCours;
+  const detail = cases[choisie];
   const titrePlan = controle
     ? `Ton plan pour ${controle.jours <= 1 ? controle.quand : jourDans(controle.jours).toLowerCase()}`
     : 'Ton plan du jour';
@@ -365,32 +374,56 @@ export default function Home() {
     <section className="hm-bloc" aria-labelledby="hm-plan">
       <h2 id="hm-plan" className="hm-titre">{goalReached ? 'Bravo, étape 1 faite' : titrePlan}</h2>
       <ol className="hm-plan">
-        {plan.map((p, i) => {
-          const contenu = (
-            <>
-              <span
-                className="hm-etape-num"
-                style={p.done ? { background: '#34C77B', color: '#fff' } : { background: p.ton.bg, color: p.ton.fg }}
-                aria-label={p.done ? 'fait' : `étape ${i + 1}`}
-              >{p.done ? '✓' : i + 1}</span>
-              <span className="hm-etape-txt">
-                <span className="hm-etape-titre">{p.titre}</span>
-                <span className="hm-etape-meta">{p.meta}</span>
-              </span>
-            </>
-          );
-          return (
-            <li key={i} className={`hm-etape${!isDesktop && i === enCours ? ' hm-etape--en-cours' : ''}`}>
-              {!isDesktop && i === enCours ? (
-                <button type="button" className="hm-etape-go" onClick={action} aria-label={`${cta} : ${p.titre}`}>
-                  {contenu}
-                  <span className="hm-etape-lecture"><Lecture /></span>
-                </button>
-              ) : contenu}
-            </li>
-          );
-        })}
+        {plan.map((p, i) => (
+          <li key={i} className="hm-etape">
+            <span
+              className="hm-etape-num"
+              style={p.done ? { background: '#34C77B', color: '#fff' } : { background: p.ton.bg, color: p.ton.fg }}
+              aria-label={p.done ? 'fait' : `étape ${i + 1}`}
+            >{p.done ? '✓' : i + 1}</span>
+            <span className="hm-etape-txt">
+              <span className="hm-etape-titre">{p.titre}</span>
+              <span className="hm-etape-meta">{p.meta}</span>
+            </span>
+          </li>
+        ))}
       </ol>
+    </section>
+  );
+
+  // Téléphone : le plan en chemin, façon plateau de jeu. Une case par jour, la case du jour
+  // en grand ; toucher une case montre son détail en dessous, avec de quoi la lancer.
+  const chemin = (
+    <section className="hm-chemin-bloc" aria-labelledby="hm-chemin">
+      <h2 id="hm-chemin" className="hm-titre">{goalReached ? 'Bravo, étape 1 faite' : titrePlan}</h2>
+      <ol className="hm-chemin" style={{ '--n': cases.length }}>
+        {cases.map((c, i) => (
+          <li key={i}>
+            <button
+              type="button"
+              className={`hm-case${i === enCours ? ' hm-case--maintenant' : ''}${i === choisie ? ' hm-case--choisie' : ''}${c.done ? ' hm-case--faite' : ''}${c.arrivee ? ' hm-case--arrivee' : ''}`}
+              onClick={() => setCaseChoisie(i)}
+              aria-pressed={i === choisie}
+              aria-label={`${c.jour} : ${c.quoi}${c.done ? ', fait' : ''}`}
+            >
+              <span className="hm-case-rond" style={c.ton ? { background: c.ton.bg } : undefined}>
+                <Mascot pose={c.pose} size={i === enCours ? 66 : 52} alt="" aria-hidden="true" />
+                {c.done && <span className="hm-case-coche" aria-hidden="true">✓</span>}
+              </span>
+              <span className="hm-case-jour">{c.jour}</span>
+            </button>
+          </li>
+        ))}
+      </ol>
+      <div className="hm-chemin-detail" style={{ '--pointe': `${((choisie + 0.5) / cases.length) * 100}%` }}>
+        <span className="hm-chemin-txt">
+          <span className="hm-chemin-quoi">{detail.quoi}</span>
+          <span className="hm-chemin-meta">{detail.meta}</span>
+        </span>
+        {detail.done
+          ? <span className="hm-chemin-fait">Fait</span>
+          : <button type="button" className="hm-chemin-go" onClick={detail.go}>{detail.label || (choisie === enCours ? "C'est parti" : 'Lancer')}</button>}
+      </div>
     </section>
   );
 
@@ -515,12 +548,7 @@ export default function Home() {
             <h1 className="sr-only">{dit}</h1>
             <Bulle key={`${humeurId}-${tour}`} texte={sugg.texte} parle={parle} sortie={sortie} onClick={sugg.action} label={sugg.label} />
           </div>
-          <div className="hm-pad hm-pad--plan">
-            <div className="hm-carte-plan">{carteplan}</div>
-            {secondaire && (
-              <p className="hm-ou">ou <Link to={secondaire.to}>{secondaire.label}</Link></p>
-            )}
-          </div>
+          <div className="hm-pad hm-pad--chemin">{chemin}</div>
           {rappels}
           {montrerEssai && <div className="hm-pad"><ThemeEssai onClose={() => setEssaiTheme(false)} /></div>}
           <div className="hm-pad hm-pad--droite">{carteMatieres}</div>

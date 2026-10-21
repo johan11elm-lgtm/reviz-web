@@ -17,7 +17,7 @@
 /* ── Héros ── */
 .home-page .hm-hero {
   position: relative;
-  height: calc(430px + env(safe-area-inset-top, 0px));
+  height: calc(400px + env(safe-area-inset-top, 0px));
   margin-top: calc(-1 * env(safe-area-inset-top, 0px));
   padding-top: env(safe-area-inset-top, 0px);
   background: var(--hm-bg);
@@ -97,7 +97,7 @@
   position: absolute;
   left: 0;
   right: 0;
-  bottom: 52px;
+  bottom: 30px;
   display: flex;
   justify-content: center;
   z-index: 1;
@@ -110,7 +110,7 @@
   left: 22px;
   right: 22px;
   /* Posée par le bas, juste au-dessus de la tête : la pointe ne bouge pas quand la phrase change. */
-  bottom: 262px;
+  bottom: 240px;
   display: flex;
   justify-content: center;
   pointer-events: none;
@@ -239,17 +239,6 @@
 
 /* ── Blocs du bas ── */
 .home-page .hm-pad { padding: 30px 22px 0; }
-/* Le plan monte sur le bas du héros : c'est lui qu'on voit en premier sous Réviz. */
-.home-page .hm-pad--plan { position: relative; z-index: 3; margin-top: -40px; padding-top: 0; }
-.home-page .hm-pad--plan .hm-bloc {
-  gap: 2px;
-  padding: 16px 16px 4px;
-  border-radius: 28px;
-  background: #fff;
-  box-shadow: 0 1px 0 rgba(255,255,255,.8) inset, 0 16px 34px -16px rgba(120,60,20,.32);
-}
-.home-page .hm-pad--plan .hm-titre { padding: 0 2px 4px; font-size: 18px; letter-spacing: -.4px; }
-.home-page .hm-pad--plan .hm-plan { padding: 0; background: none; box-shadow: none; border-radius: 0; }
 .home-page .hm-pad--droite { padding: 28px 0 0 22px; }
 .home-page .hm-pad--bas { padding: 28px 22px 8px; } /* .content garde déjà la place de la capsule */
 .home-page .hm-bloc { display: flex; flex-direction: column; gap: 10px; }
@@ -289,42 +278,128 @@
 .home-page .hm-etape-titre { font-size: 15px; font-weight: 700; color: var(--hm-encre); }
 .home-page .hm-etape-meta { font-size: 13px; color: var(--hm-doux); }
 
-/* L'étape à faire maintenant : c'est le bouton du jour. */
-.home-page .hm-etape--en-cours { padding: 8px 0; }
-.home-page .hm-etape--en-cours + .hm-etape { border-top: 0; }
-.home-page .hm-etape-go {
-  flex: 1;
+
+/* ── Le chemin jusqu'au contrôle (téléphone) ── */
+.home-page .hm-pad--chemin { padding-top: 22px; }
+.home-page .hm-chemin-bloc { display: flex; flex-direction: column; gap: 14px; }
+.home-page .hm-chemin {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(var(--n), 1fr);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+/* Le pointillé qui relie les cases, d'un centre à l'autre */
+.home-page .hm-chemin::before {
+  content: '';
+  position: absolute;
+  top: 38px;
+  left: calc(50% / var(--n));
+  right: calc(50% / var(--n));
+  border-top: 3px dotted rgba(110,103,91,.35);
+}
+.home-page .hm-case {
+  width: 100%;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 14px;
-  margin: 0 -8px;
-  padding: 12px 10px 12px 8px;
+  gap: 6px;
+  padding: 0;
   border: 0;
-  border-radius: 20px;
-  background: var(--hm-soft);
-  text-align: left;
+  background: none;
   font: inherit;
   color: inherit;
-  transition: transform .12s, background .5s;
+  -webkit-tap-highlight-color: transparent;
 }
-.home-page .hm-etape-go:active { transform: scale(.98); }
-.home-page .hm-etape-go:focus-visible { outline: 3px solid var(--hm-encre); outline-offset: 2px; }
-.home-page .hm-etape-go .hm-etape-num { background: #fff !important; }
-.home-page .hm-etape-go .hm-etape-titre { font-size: 16px; }
-.home-page .hm-etape-lecture {
-  width: 44px;
-  height: 44px;
-  flex: none;
+.home-page .hm-case-rond {
+  position: relative;
+  width: 58px;
+  height: 58px;
+  margin: 9px 0;
   border-radius: 50%;
+  background: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
+  box-shadow: inset 0 -5px 10px rgba(120,60,20,.08), 0 6px 14px -8px rgba(120,60,20,.4);
+  transition: transform .2s cubic-bezier(.3,1.5,.5,1), box-shadow .2s;
+}
+.home-page .hm-case:active .hm-case-rond { transform: scale(.92); }
+.home-page .hm-case--maintenant .hm-case-rond {
+  width: 76px;
+  height: 76px;
+  margin: 0;
+  box-shadow: 0 0 0 3px var(--hm-fond), 0 0 0 6px var(--hm-btn), 0 10px 20px -8px rgba(120,60,20,.5);
+  animation: hmFlotte 2.6s ease-in-out infinite;
+}
+@keyframes hmFlotte { 50% { transform: translateY(-4px); } }
+.home-page .hm-case--choisie:not(.hm-case--maintenant) .hm-case-rond {
+  box-shadow: 0 0 0 3px var(--hm-fond), 0 0 0 5px var(--hm-encre), 0 6px 14px -8px rgba(120,60,20,.4);
+}
+.home-page .hm-case--arrivee .hm-case-rond { background: #fff; }
+.home-page .hm-case-coche {
+  position: absolute;
+  right: -2px;
+  bottom: -2px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 2px solid var(--hm-fond);
+  background: #34C77B;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.home-page .hm-case-jour { font-size: 13px; font-weight: 700; color: var(--hm-doux); }
+.home-page .hm-case--maintenant .hm-case-jour,
+.home-page .hm-case--choisie .hm-case-jour { color: var(--hm-encre); }
+.home-page .hm-case--faite .hm-case-jour { text-decoration: line-through; text-decoration-thickness: 2px; }
+
+/* Le détail de la case choisie, dont la pointe vise la case */
+.home-page .hm-chemin-detail {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 14px 14px 18px;
+  border-radius: 22px;
+  background: #fff;
+  box-shadow: 0 12px 28px -14px rgba(120,60,20,.3);
+}
+.home-page .hm-chemin-detail::before {
+  content: '';
+  position: absolute;
+  top: -7px;
+  left: var(--pointe);
+  width: 16px;
+  height: 16px;
+  margin-left: -8px;
+  background: #fff;
+  border-radius: 4px 0 0 0;
+  transform: rotate(45deg);
+  transition: left .3s cubic-bezier(.3,1.3,.5,1);
+}
+.home-page .hm-chemin-txt { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.home-page .hm-chemin-quoi { font-size: 16px; font-weight: 700; color: var(--hm-encre); }
+.home-page .hm-chemin-meta { font-size: 13px; color: var(--hm-doux); }
+.home-page .hm-chemin-go {
+  flex: none;
+  height: 42px;
+  padding: 0 18px;
+  border: 0;
+  border-radius: 99px;
   background: var(--hm-btn);
   color: #fff;
+  font: 700 15px 'Geist', system-ui, sans-serif;
   box-shadow: 0 8px 16px -8px var(--hm-btn), inset 0 -2px 0 rgba(0,0,0,.18);
-  transition: background .5s;
+  transition: transform .12s, background .5s;
 }
-.home-page .hm-etape-lecture svg { margin-left: 2px; }
+.home-page .hm-chemin-go:active { transform: scale(.95); }
+.home-page .hm-chemin-fait { flex: none; font-size: 14px; font-weight: 700; color: #137A45; }
 
 .home-page .hm-bloc--matieres { gap: 12px; }
 .home-page .hm-matieres {
