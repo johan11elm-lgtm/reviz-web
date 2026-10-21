@@ -533,7 +533,7 @@
   margin: -10px 0 0;
   border-radius: 0 5px 0 0;
 }
-.home-page .hm-desk .hm-proposition-place { height: 84px; margin-top: 18px; padding: 0; justify-content: flex-start; }
+.home-page .hm-desk .hm-proposition-place { height: 84px; margin-top: 46px; padding: 0; justify-content: flex-start; }
 .home-page .hm-desk .hm-proposition { max-width: 440px; height: 84px; gap: 14px; padding: 0 18px 0 12px; border-radius: 26px; }
 .home-page .hm-desk .hm-proposition-rond { width: 60px; height: 60px; border-radius: 18px; }
 .home-page .hm-desk .hm-proposition-titre { font-size: 19px; }
