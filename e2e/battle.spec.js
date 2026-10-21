@@ -39,10 +39,10 @@ const CONTEXTE = process.env.BATTLE_MOBILE
 // L'affichage pose des espaces insécables (typographie française) : on compare sans.
 const sansInsecables = t => t.replace(/\u00a0/g, ' ').replace(/\u2060/g, '').trim()
 async function repondre(page, juste) {
-  const texte = sansInsecables(await page.locator('.battle-question-texte').textContent())
+  const texte = sansInsecables(await page.locator('.bt-question-texte').textContent())
   const q = chapitre.quiz.find(x => x.question === texte)
   const index = juste ? q.correct : (q.correct + 1) % q.choices.length
-  await page.locator('.battle-choix-btn').nth(index).click()
+  await page.locator('.bt-choix-btn').nth(index).click()
 }
 
 test('deux élèves jouent une battle complète, puis la revanche', async ({ browser }) => {
@@ -73,41 +73,42 @@ test('deux élèves jouent une battle complète, puis la revanche', async ({ bro
     await capture(hote, '01a-accueil')
   }
 
-  // ── Johan lance une battle depuis le chapitre ──
-  await hote.goto('/programme/maths')
+  // ── Johan lance une battle depuis l'accueil de la Battle : Maths, puis le chapitre ──
+  await hote.goto('/battle')
+  await hote.getByRole('button', { name: 'Maths', exact: true }).click()
   await hote.getByRole('button', { name: /Le théorème de Thalès/ }).click()
-  await expect(hote.getByRole('button', { name: 'Lancer une battle' })).toBeVisible()
-  await capture(hote, '01b-chapitre')
-  await hote.getByRole('button', { name: 'Lancer une battle' }).click()
+  await capture(hote, '01b-accueil-battle')
+  await hote.getByRole('button', { name: 'Créer le salon' }).click()
   await expect(hote).toHaveURL(/\/battle\/[A-HJ-NP-Z2-9]{4}$/, { timeout: 15_000 })
   const code = hote.url().split('/').pop()
-  await expect(hote.getByText('Code de la partie')).toBeVisible()
-  await expect(hote.getByRole('button', { name: 'En attente de ton adversaire…' })).toBeDisabled()
+  await expect(hote.getByText('Code du salon')).toBeVisible()
+  await expect(hote.getByText('En attente de ton adversaire…')).toBeVisible()
+  await expect(hote.getByRole('button', { name: 'C’est parti' })).toBeDisabled()
 
   // ── Léa, sans compte : la page /battle, puis le code tapé en minuscules ──
   await invite.goto('/battle')
-  await expect(invite.getByLabel('Rejoindre avec un code')).toBeVisible()
+  await expect(invite.getByLabel('Code de la battle')).toBeVisible()
   await expect(invite.locator('.bottom-nav')).toHaveCount(0)
   await capture(invite, '02-rejoindre')
-  await invite.getByLabel('Rejoindre avec un code').fill(code.toLowerCase())
+  await invite.getByLabel('Code de la battle').fill(code.toLowerCase())
   await invite.getByRole('button', { name: 'Rejoindre', exact: true }).click()
   await expect(invite).toHaveURL(new RegExp(`/battle/${code}$`))
-  await expect(invite.getByRole('heading', { name: 'Johan te défie' })).toBeVisible()
-  const rejoindre = invite.getByRole('button', { name: 'Rejoindre la battle' })
+  await expect(invite.getByRole('heading', { name: `Johan t’invite au salon ${code}.` })).toBeVisible()
+  const rejoindre = invite.getByRole('button', { name: 'Entrer dans le salon' })
   await expect(rejoindre).toBeDisabled()
   await invite.getByLabel('Ton prénom').fill('Léa')
   await capture(invite, '03-invitation')
   await rejoindre.click()
   await expect(invite.getByText('Johan va lancer la partie.')).toBeVisible()
-  await expect(hote.getByRole('button', { name: "C'est parti" })).toBeEnabled()
+  await expect(hote.getByRole('button', { name: 'C’est parti' })).toBeEnabled()
   await capture(hote, '04-salon')
 
   // ── 5 rounds : Johan répond juste, Léa se trompe ──
-  await hote.getByRole('button', { name: "C'est parti" }).click()
-  await expect(invite.getByText('Round 1').first()).toBeVisible()
+  await hote.getByRole('button', { name: 'C’est parti' }).click()
+  await expect(invite.getByText('Prêts ?')).toBeVisible()
   for (let n = 1; n <= 5; n++) {
-    await expect(hote.locator('.battle-question-texte')).toBeVisible({ timeout: 15_000 })
-    await expect(invite.locator('.battle-question-texte')).toBeVisible({ timeout: 15_000 })
+    await expect(hote.locator('.bt-question-texte')).toBeVisible({ timeout: 15_000 })
+    await expect(invite.locator('.bt-question-texte')).toBeVisible({ timeout: 15_000 })
     if (n === 1) await capture(hote, '05-question')
     await repondre(hote, true)
     if (n === 1) {
@@ -118,35 +119,35 @@ test('deux élèves jouent une battle complète, puis la revanche', async ({ bro
     await expect(hote.getByRole('heading', { name: 'Tu gagnes le round' })).toBeVisible()
     await expect(invite.getByRole('heading', { name: 'Johan gagne le round' })).toBeVisible()
     if (n === 1) {
-      await expect(hote.locator('.battle-revelation').getByText('+20 aura')).toBeVisible()
-      await expect(invite.locator('.battle-revelation').getByText('−10 aura')).toBeVisible()
+      await expect(hote.locator('.bt-revelation').getByText('+20 aura')).toBeVisible()
+      await expect(invite.locator('.bt-revelation').getByText('−10 aura')).toBeVisible()
       await capture(hote, '06-revelation-hote')
       await capture(invite, '07-revelation-invite')
     }
   }
 
   // ── Fin : 5–0, aura de la partie, 6-7 de Johan ──
-  await expect(hote.getByRole('heading', { name: 'Tu gagnes la battle' })).toBeVisible({ timeout: 20_000 })
-  await expect(invite.getByRole('heading', { name: 'Johan gagne la battle' })).toBeVisible()
-  await expect(hote.getByText('5 – 0')).toBeVisible()
-  await expect(hote.locator('.battle-fin').getByText('+130 aura')).toBeVisible()
-  await expect(invite.locator('.battle-fin').getByText('−50 aura')).toBeVisible()
-  await expect(hote.locator('.battle-fin .battle-67')).toHaveCount(1)
+  await expect(hote.getByRole('heading', { name: 'Grosse victoire' })).toBeVisible({ timeout: 20_000 })
+  await expect(invite.getByRole('heading', { name: 'GG' })).toBeVisible()
+  await expect(hote.locator('.bt-score')).toHaveText(/5 – 0/)
+  await expect(hote.locator('.bt-aura-partie').getByText('+130')).toBeVisible()
+  await expect(invite.locator('.bt-aura-partie').getByText('−50')).toBeVisible()
+  await expect(hote.locator('.bt-fin .battle-67')).toHaveCount(1)
   // Aura rangée par le serveur pour Johan ; Léa, invitée, est invitée à créer un compte.
   await expect(hote.getByText('Ton aura :')).toBeVisible()
-  await expect(invite.getByText('Sans compte, ton aura n’est pas gardée.')).toBeVisible()
-  await expect(invite.getByRole('link', { name: /Créer mon compte gratuit/ })).toBeVisible()
+  await expect(invite.getByText('Crée ton compte pour garder ton aura')).toBeVisible()
+  await expect(invite.getByRole('link', { name: 'Créer mon compte' })).toBeVisible()
   await capture(hote, '08-fin-hote')
   await capture(invite, '09-fin-invite')
 
   // ── Revanche : Léa suit Johan dans le nouveau salon ──
-  await hote.getByRole('button', { name: 'Revanche' }).click()
+  await hote.getByRole('button', { name: 'Rejouer' }).click()
   await expect(hote).toHaveURL(/\/battle\/[A-HJ-NP-Z2-9]{4}$/)
   await expect.poll(() => hote.url()).not.toContain(code)
   const nouveau = hote.url().split('/').pop()
   await expect(invite).toHaveURL(new RegExp(`/battle/${nouveau}$`), { timeout: 15_000 })
   await expect(invite.getByText('Johan va lancer la partie.')).toBeVisible()
-  await expect(hote.getByRole('button', { name: "C'est parti" })).toBeEnabled()
+  await expect(hote.getByRole('button', { name: 'C’est parti' })).toBeEnabled()
 
   // ── De retour sur l'accueil, l'aura rangée suit la barre d'XP ──
   await hote.goto('/')

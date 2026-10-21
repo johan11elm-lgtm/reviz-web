@@ -30,7 +30,8 @@ export function NavHaut() {
   const { currentUser, isGuest } = useAuth();
   const { pathname } = useLocation();
   if (!currentUser) return null;
-  if (HIDDEN_PREFIXES.some(p => pathname.startsWith(p))) return null;
+  // Une partie de Battle (/battle/:code) est un jeu plein écran, comme les Flashcards et le Quiz.
+  if (HIDDEN_PREFIXES.some(p => pathname.startsWith(p)) || /^\/battle\/./.test(pathname)) return null;
 
   return (
     <nav className="nav-haut" aria-label="Menu principal">

@@ -3,17 +3,17 @@ import { PRENOM_MAX } from '../../utils/battle';
 /** Nom de l'élève qui joue sans compte (prénom ou surnom) : c'est ce que verra son adversaire. */
 export function ChampPrenom({ valeur, onChange }) {
   return (
-    <label className="battle-prenom">
-      <span className="battle-prenom-label">Ton prénom ou un surnom</span>
+    <label className="bt-prenom">
+      <span className="bt-prenom-label">Ton prénom</span>
       <input
-        className="battle-prenom-input"
+        className="bt-prenom-input"
         value={valeur}
         onChange={e => onChange(e.target.value.slice(0, PRENOM_MAX))}
-        placeholder="Lucas"
+        placeholder="Léa"
         autoComplete="nickname"
         maxLength={PRENOM_MAX}
       />
-      <span className="battle-prenom-aide">Pas besoin de compte. Ton adversaire verra seulement ce nom.</span>
+      <span className="bt-prenom-aide">Tu joues sans compte. Ton aura s’affiche pendant la partie, mais n’est pas gardée.</span>
     </label>
   );
 }
