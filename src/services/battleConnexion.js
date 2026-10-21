@@ -16,7 +16,7 @@ import {
 } from 'firebase/auth'
 import { getDatabase, connectDatabaseEmulator } from 'firebase/database'
 import { Capacitor } from '@capacitor/core'
-import { app, auth } from './firebaseConfig'
+import { app, auth, hoteEmulateur } from './firebaseConfig'
 
 const useEmulator = import.meta.env.VITE_FIREBASE_EMULATOR === '1'
 const URL_BASE = useEmulator
@@ -25,7 +25,7 @@ const URL_BASE = useEmulator
 
 function ouvrirBase(appli) {
   const db = getDatabase(appli, URL_BASE)
-  if (useEmulator) connectDatabaseEmulator(db, '127.0.0.1', 9000)
+  if (useEmulator) connectDatabaseEmulator(db, hoteEmulateur, 9000)
   return db
 }
 
@@ -42,7 +42,7 @@ function instanceInvite() {
   const authInvite = Capacitor.isNativePlatform()
     ? initializeAuth(appli, { persistence: indexedDBLocalPersistence })
     : getAuth(appli)
-  if (useEmulator) connectAuthEmulator(authInvite, 'http://127.0.0.1:9099', { disableWarnings: true })
+  if (useEmulator) connectAuthEmulator(authInvite, `http://${hoteEmulateur}:9099`, { disableWarnings: true })
   invite = { auth: authInvite, db: ouvrirBase(appli) }
   return invite
 }
