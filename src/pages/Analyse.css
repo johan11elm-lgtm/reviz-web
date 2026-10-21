@@ -176,230 +176,323 @@
   .analyse-page .analyse-loading-screen { border-radius: 0; }
 }
 
-/* ── Excerpt card ── */
-.analyse-page .analyse-excerpt-card {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+/* ─── Fiche chapitre (handoff Claude Design du 21/10) ─────────────────
+ * Héros dans la teinte de la matière (--ch-* posées par la page), Réviz qui
+ * parle, « Prochaine étape » à cheval, puis Ton parcours (Résumé → Flashcards
+ * → Quiz sur une petite route), la carte mentale, L'essentiel et Réviz IA. */
+.analyse-page.ch-page { --ch-encre: #1B1A23; --ch-doux: #6E675B; background: #F8EFE7; }
+.analyse-page .ch-defile {
+  display: block;
+  padding: 0 0 calc(130px + env(safe-area-inset-bottom, 0px));
+  gap: 0;
+  overflow-x: hidden;
+  scrollbar-width: none;
 }
-.analyse-page .analyse-excerpt-text {
-  font-size: 14px;
-  color: var(--text-secondary);
-  line-height: 1.55;
-  margin: 0;
-}
+.analyse-page .ch-defile::-webkit-scrollbar { display: none; }
 
-/* ── Format grid (utilise .rv-card --link --padded comme base) ── */
-.analyse-page .analyse-format-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-}
-
-.analyse-page .analyse-format-card {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  cursor: pointer;
-  text-decoration: none;
-}
-
-.analyse-page .analyse-format-card-top {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.analyse-page .analyse-format-arrow {
-  font-size: 22px;
-  font-weight: 700;
-  line-height: 1;
-  color: var(--text-light);
-}
-
-.analyse-page .analyse-format-name {
-  font-size: 15px;
-  font-weight: 700;
-  letter-spacing: -0.2px;
-  color: var(--text-primary);
-}
-
-.analyse-page .analyse-format-meta {
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--text-muted);
-  margin-top: -4px;
-}
-
-/* ── Intro (PageIntro) : dans la zone de scroll, qui porte la gouttière ── */
-.analyse-page .analyse-intro { padding: 4px 0 0; }
-
-/* ─── Fiche chapitre, refonte du 20/10 (« Reviz Valide ») ────────────
- * Le chapitre sur son aplat (couleur de la matière), les quatre formats
- * avec leur mascotte, l'essentiel à côté sur ordinateur. */
-.analyse-page .anl-content { padding: 0 0 calc(130px + env(safe-area-inset-bottom, 0px)); overflow-y: auto; flex: 1; min-height: 0; }
-.analyse-page .anl-hero {
+/* ── Héros ── */
+.analyse-page .ch-hero {
   position: relative;
-  height: calc(330px + env(safe-area-inset-top, 0px));
   margin-top: calc(-1 * env(safe-area-inset-top, 0px));
-  padding-top: env(safe-area-inset-top, 0px);
-  border-radius: 0 0 50% 50% / 0 0 64px 64px;
+  padding: calc(env(safe-area-inset-top, 0px) + 12px) 20px 92px;
+  background: var(--ch-fond);
+  border-radius: 0 0 50% 50% / 0 0 44px 44px;
   overflow: hidden;
-  color: #1B1A23;
-  flex-shrink: 0;
 }
-.analyse-page .anl-bulle { position: absolute; border-radius: 50%; background: var(--anl-bulle); }
-.analyse-page .anl-bulle--a { right: -60px; top: calc(82px + env(safe-area-inset-top, 0px)); width: 250px; height: 250px; box-shadow: inset 0 -24px 40px rgba(120,60,20,.08), inset 0 16px 30px rgba(255,255,255,.35); }
-.analyse-page .anl-bulle--b { left: -50px; top: calc(205px + env(safe-area-inset-top, 0px)); width: 150px; height: 150px; }
-.analyse-page .anl-grain {
+.analyse-page .ch-grain {
   position: absolute;
   inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.35 0 0 0 0 0.2 0 0 0 0 0.1 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  opacity: .32;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.45 0 0 0 0 0.25 0 0 0 0 0.1 0 0 0 .32 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: .5;
   mix-blend-mode: multiply;
   pointer-events: none;
 }
-.analyse-page .anl-hero-haut { position: relative; z-index: 2; padding: 12px 22px 0; }
-.analyse-page .anl-retour {
-  width: 42px;
-  height: 42px;
-  flex: none;
+.analyse-page .ch-deco { position: absolute; border-radius: 50%; background: var(--ch-bulle); }
+.analyse-page .ch-deco--a { width: 130px; height: 130px; top: 190px; left: -50px; }
+.analyse-page .ch-deco--b { width: 84px; height: 84px; top: 120px; right: -24px; }
+.analyse-page .ch-deco--c { width: 40px; height: 40px; top: 330px; right: 54px; }
+.analyse-page .ch-point { position: absolute; width: 14px; height: 14px; top: 300px; left: 40px; border-radius: 50%; background: var(--ch-point); }
+.analyse-page .ch-haut { position: relative; z-index: 2; display: flex; justify-content: space-between; align-items: center; }
+.analyse-page .ch-retour {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0 14px 0 8px;
   border: 0;
+  border-radius: 999px;
+  background: #fff;
+  box-shadow: 0 4px 12px var(--ch-ombre);
+  font: 700 14px 'Geist', system-ui, sans-serif;
+  color: var(--ch-encre);
+  cursor: pointer;
+}
+.analyse-page .ch-matiere {
+  width: 64px;
+  height: 64px;
   border-radius: 50%;
-  background: rgba(255,255,255,.7);
-  color: #1B1A23;
+  background: #fff;
+  box-shadow: 0 6px 0 var(--ch-bulle);
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
 }
-.analyse-page .anl-hero-mascotte {
-  position: absolute;
-  right: -10px;
-  top: calc(70px + env(safe-area-inset-top, 0px));
-  object-fit: contain;
-  filter: drop-shadow(0 20px 24px rgba(120,60,20,.22));
-}
-.analyse-page .anl-hero-txt {
-  position: absolute;
-  left: 22px;
-  bottom: 44px;
-  max-width: 220px;
-  z-index: 2;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-.analyse-page .anl-surtitre { font-size: 12px; font-weight: 700; letter-spacing: .6px; text-transform: uppercase; color: rgba(27,26,35,.62); }
-.analyse-page .anl-titre {
-  margin: 0;
-  font-family: var(--font-display);
-  font-size: 32px;
-  font-weight: 800;
-  letter-spacing: -.6px;
-  line-height: 1.05;
-  text-wrap: balance;
-}
-.analyse-page .anl-titre--long { font-size: 27px; }
-.analyse-page .anl-etat {
-  align-self: flex-start;
-  padding: 5px 10px;
-  border-radius: 99px;
-  background: rgba(255,255,255,.6);
-  color: #8A3A05;
+.analyse-page .ch-surtitre {
+  position: relative;
+  z-index: 1;
+  display: block;
+  margin-top: 18px;
   font-size: 12px;
   font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--ch-encre);
+  opacity: .7;
 }
-.analyse-page .anl-pile { padding: 20px 22px 0; display: flex; flex-direction: column; gap: 12px; }
-.analyse-page .anl-pile > .rv-next,
-.analyse-page .anl-pile > .rv-card { margin: 8px 0 0; }
-.analyse-page .anl-titre2 {
-  margin: 0;
+.analyse-page .ch-titre {
+  position: relative;
+  z-index: 1;
+  margin: 6px 0 0;
   font-family: var(--font-display);
-  font-size: 23px;
+  font-size: 36px;
   font-weight: 800;
-  letter-spacing: -.6px;
-  line-height: 1.05;
-  color: #1B1A23;
+  line-height: 1.02;
+  letter-spacing: -.04em;
+  text-wrap: balance;
+  color: var(--ch-encre);
 }
-.analyse-page .anl-formats { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-.analyse-page .anl-format {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  padding: 16px;
+.analyse-page .ch-pastille {
+  position: relative;
+  z-index: 1;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+  padding: 0 12px;
+  border-radius: 999px;
+  background: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ch-encre);
+}
+.analyse-page .ch-pastille i { width: 8px; height: 8px; border-radius: 50%; background: #C9C2F2; }
+.analyse-page .ch-pastille--encours i,
+.analyse-page .ch-pastille--revoir i { background: #C25407; }
+.analyse-page .ch-pastille--maitrise { background: #DCF5E6; color: #1F8A52; }
+.analyse-page .ch-pastille--maitrise i { background: #34C77B; }
+
+/* Réviz et sa bulle */
+.analyse-page .ch-reviz { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; margin-top: 18px; }
+.analyse-page .ch-bulle .rv-bulle-txt { max-width: 280px; padding: 12px 18px; box-shadow: 0 8px 20px var(--ch-ombre); }
+.analyse-page .ch-reviz .pantin { margin-top: 6px; }
+
+/* ── Prochaine étape, à cheval sur le héros ── */
+.analyse-page .ch-etape-place { position: relative; z-index: 3; margin: -64px 20px 0; }
+.analyse-page .ch-etape {
+  display: block;
+  padding: 14px;
   border-radius: 26px;
   background: #fff;
-  box-shadow: 0 12px 30px -14px rgba(120,60,20,.22);
-  color: #1B1A23;
+  box-shadow: 0 12px 30px rgba(160,80,20,.14);
+  color: inherit;
   text-decoration: none;
-  transition: transform .15s, box-shadow .15s;
 }
-.analyse-page .anl-format:active { transform: scale(.97); }
-.analyse-page .anl-format-rond { width: 64px; height: 64px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
-.analyse-page .anl-format-txt { display: flex; flex-direction: column; }
-.analyse-page .anl-format-nom { font-size: 16px; font-weight: 700; }
-.analyse-page .anl-format-meta { font-size: 13px; color: #6E675B; }
+.analyse-page .ch-etape-haut { display: flex; align-items: center; gap: 14px; }
+.analyse-page .ch-etape-rond { width: 60px; height: 60px; flex: none; border-radius: 50%; background: #FFE6D2; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.analyse-page .ch-etape-txt { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.analyse-page .ch-etape-surtitre { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #C25407; }
+.analyse-page .ch-etape-titre { margin-top: 2px; font-family: var(--font-display); font-size: 18px; font-weight: 800; letter-spacing: -.02em; line-height: 1.15; color: var(--ch-encre); }
+.analyse-page .ch-etape-sous { margin-top: 2px; font-size: 13px; color: var(--ch-doux); }
+.analyse-page .ch-etape-go { width: 44px; height: 44px; flex: none; border-radius: 50%; background: #C25407; color: #fff; display: flex; align-items: center; justify-content: center; }
+.analyse-page .ch-segments-bloc { display: block; margin-top: 12px; }
+.analyse-page .ch-segments { display: flex; gap: 4px; }
+.analyse-page .ch-segments i { flex: 1; height: 8px; border-radius: 99px; background: #EADBCB; }
+.analyse-page .ch-segments i.ch-seg--sue, .analyse-page .ch-legende i.ch-seg--sue { background: #34C77B; }
+.analyse-page .ch-segments i.ch-seg--revoir, .analyse-page .ch-legende i.ch-seg--revoir { background: #C25407; }
+.analyse-page .ch-legende { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 8px; font-size: 12px; font-weight: 600; color: var(--ch-doux); }
+.analyse-page .ch-legende span { display: inline-flex; align-items: center; gap: 6px; }
+.analyse-page .ch-legende i { width: 8px; height: 8px; border-radius: 50%; background: #EADBCB; }
 
-/* Ordinateur */
-.analyse-page .anl-desk { display: grid; grid-template-columns: minmax(0, 1fr) 420px; gap: 28px; padding: 32px 40px 48px; align-items: start; }
-.analyse-page .anl-desk-gauche { display: flex; flex-direction: column; gap: 22px; min-width: 0; }
-.analyse-page .anl-fil { display: flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 600; color: #6E675B; }
-.analyse-page .anl-fil .anl-retour { background: #fff; box-shadow: 0 6px 16px -10px rgba(120,60,20,.4); }
-.analyse-page .anl-desk .anl-hero { height: auto; min-height: 340px; margin: 0; padding: 36px; border-radius: 36px; }
-.analyse-page .anl-desk .anl-bulle--a { right: 40px; top: -60px; width: 380px; height: 380px; box-shadow: inset 0 -40px 60px rgba(120,60,20,.08), inset 0 24px 40px rgba(255,255,255,.35); }
-.analyse-page .anl-desk .anl-bulle--b { display: none; }
-.analyse-page .anl-desk .anl-hero-mascotte { right: 30px; top: auto; bottom: -20px; filter: drop-shadow(0 24px 28px rgba(120,60,20,.22)); }
-.analyse-page .anl-desk .anl-hero-txt { position: relative; left: 0; bottom: 0; max-width: 420px; min-height: 268px; gap: 12px; }
-.analyse-page .anl-desk .anl-surtitre { font-size: 13px; }
-.analyse-page .anl-desk .anl-titre { font-size: 54px; }
-.analyse-page .anl-desk .anl-titre--long { font-size: 42px; }
-.analyse-page .anl-desk .anl-hero-txt > * { flex-shrink: 0; }
-.analyse-page .anl-desk .anl-hero-txt .anl-flex { flex: 1 1 0; min-height: 8px; flex-shrink: 1; }
-.analyse-page .anl-desk .anl-etat { padding: 6px 12px; font-size: 13px; }
-.analyse-page .anl-flex { flex: 1; }
-.analyse-page .anl-cta {
-  align-self: flex-start;
+/* ── Sections ── */
+.analyse-page .ch-pile { display: flex; flex-direction: column; gap: 28px; padding: 28px 20px 0; }
+.analyse-page .ch-bloc { display: flex; flex-direction: column; gap: 12px; }
+.analyse-page .ch-tete { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.analyse-page .ch-titre2 { margin: 0; font-family: var(--font-display); font-size: 24px; font-weight: 800; letter-spacing: -.03em; color: var(--ch-encre); }
+.analyse-page .ch-compte { font-size: 13px; font-weight: 600; color: var(--ch-doux); }
+
+/* Ton parcours : la petite route */
+.analyse-page .ch-parcours { position: relative; width: 100%; }
+.analyse-page .ch-route { position: absolute; inset: 0; overflow: visible; }
+.analyse-page .ch-case {
+  position: absolute;
+  box-sizing: border-box;
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 58px;
-  padding: 0 30px;
-  border-radius: 99px;
+  border-radius: 50%;
+  border: 3px solid #fff;
+  background: #FFE6D2;
+  box-shadow: 0 6px 0 rgba(194,84,7,.28);
+  transition: transform .15s;
+}
+.analyse-page .ch-case:active { transform: translateY(3px); }
+.analyse-page .ch-case-rond { display: flex; align-items: center; justify-content: center; border-radius: 50%; overflow: hidden; }
+.analyse-page .ch-case--fait { background: #34C77B; box-shadow: 0 6px 0 #1F8A52; }
+.analyse-page .ch-case--fait .ch-case-rond { width: 79%; height: 79%; background: #fff; }
+.analyse-page .ch-case--cours { background: #fff; border: 4px solid #C25407; box-shadow: 0 6px 0 #8F3E05; }
+.analyse-page .ch-case--cours .ch-case-rond { width: 82%; height: 82%; background: var(--ch-interieur); }
+.analyse-page .ch-case-coche {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  background: #34C77B;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.analyse-page .ch-case-label { position: absolute; display: flex; flex-direction: column; align-items: center; text-align: center; pointer-events: none; }
+.analyse-page .ch-case-nom { font-size: 14px; font-weight: 700; color: var(--ch-encre); }
+.analyse-page .ch-case-meta { margin-top: 1px; font-size: 12px; font-weight: 600; color: var(--ch-doux); }
+.analyse-page .ch-case-meta--cours { color: #C25407; }
+.analyse-page .ch-case-meta--fait { color: #1F8A52; }
+
+/* Pilules : carte mentale, Réviz IA */
+.analyse-page .ch-pilule {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 18px 8px 8px;
+  border-radius: 999px;
+  background: #fff;
+  box-shadow: 0 8px 22px rgba(160,80,20,.10);
+  color: inherit;
+  text-decoration: none;
+}
+.analyse-page .ch-pilule-rond { width: 52px; height: 52px; flex: none; border-radius: 50%; background: #FFE6D2; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.analyse-page .ch-pilule-rond--lavande { background: #E4E0FA; }
+.analyse-page .ch-pilule-txt { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.analyse-page .ch-pilule-titre { font-size: 15px; font-weight: 700; color: var(--ch-encre); }
+.analyse-page .ch-pilule-sous { font-size: 13px; color: var(--ch-doux); }
+.analyse-page .ch-pilule-coche { width: 28px; height: 28px; border-radius: 50%; background: #34C77B; display: flex; align-items: center; justify-content: center; }
+.analyse-page .ch-ia-anneau { width: 50px; height: 50px; flex: none; padding: 3px; box-sizing: border-box; border-radius: 50%; background: conic-gradient(#C25407, #FFD9E4, #C25407); }
+.analyse-page .ch-ia-anneau > span { width: 100%; height: 100%; border-radius: 50%; border: 2px solid #fff; box-sizing: border-box; background: #fff; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.analyse-page .ch-pilule--ia { padding-right: 8px; }
+.analyse-page .ch-ia-go { width: 44px; height: 44px; flex: none; border-radius: 50%; background: var(--ch-encre); display: flex; align-items: center; justify-content: center; }
+
+/* L'essentiel */
+.analyse-page .ch-points { margin: 0; padding: 6px 18px; list-style: none; border-radius: 26px; background: #fff; box-shadow: 0 12px 30px rgba(160,80,20,.10); }
+.analyse-page .ch-points li { display: flex; align-items: flex-start; gap: 12px; padding: 14px 0; }
+.analyse-page .ch-points li + li { border-top: 1.5px dashed #EADBCB; }
+.analyse-page .ch-point-num {
+  width: 28px;
+  height: 28px;
+  flex: none;
+  border-radius: 50%;
+  background: var(--ch-interieur);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--ch-encre);
+}
+.analyse-page .ch-point-txt { font-size: 15px; font-weight: 600; line-height: 1.4; color: var(--ch-encre); }
+
+/* ─── Ordinateur (handoff Chapitre desktop) ─── */
+.ch-page--large .ch-hero { margin-top: 0; padding: 32px 56px 128px; border-radius: 0 0 50% 50% / 0 0 80px 80px; }
+.ch-page--large .ch-hero-int { position: relative; z-index: 1; max-width: 1328px; margin: 0 auto; }
+.ch-page--large .ch-deco--a { width: 240px; height: 240px; top: 200px; left: -80px; }
+.ch-page--large .ch-deco--b { width: 110px; height: 110px; top: 110px; right: 40%; }
+.ch-page--large .ch-deco--c { width: 56px; height: 56px; top: 340px; right: 30%; }
+.ch-page--large .ch-deco--d { width: 280px; height: 280px; top: 260px; right: -70px; }
+.ch-page--large .ch-point { top: 280px; left: 46%; }
+.ch-page--large .ch-haut { min-height: 58px; padding-right: 380px; }
+.ch-page--large .ch-retour { height: 46px; padding: 0 18px 0 12px; font-size: 15px; }
+.ch-page--large .ch-hero-grille { display: grid; grid-template-columns: minmax(0, 1fr) 380px; gap: 32px; align-items: end; margin-top: 12px; }
+.ch-page--large .ch-matiere { width: 104px; height: 104px; }
+.ch-page--large .ch-surtitre { margin-top: 20px; }
+.ch-page--large .ch-titre { max-width: 640px; font-size: 56px; letter-spacing: -.045em; }
+.ch-page--large .ch-pastille { height: 36px; margin-top: 16px; padding: 0 14px; font-size: 14px; }
+.ch-page--large .ch-reviz { margin-top: 0; }
+.ch-page--large .ch-bulle .rv-bulle-txt { max-width: 380px; padding: 14px 22px; border-radius: 24px; font-size: 22px; }
+.ch-page--large .ch-bulle .rv-bulle-ligne + .rv-bulle-ligne { margin-top: 4px; font-size: 15px; }
+
+.ch-page--large .ch-etape-place { max-width: 1328px; margin: -76px auto 0; }
+@media (max-width: 1440px) { .ch-page--large .ch-etape-place { margin-left: 56px; margin-right: 56px; } }
+.ch-page--large .ch-etape { width: 600px; max-width: 100%; box-sizing: border-box; padding: 18px; border-radius: 28px; }
+.ch-page--large .ch-etape-rond { width: 68px; height: 68px; }
+.ch-page--large .ch-etape-titre { font-size: 22px; }
+.ch-page--large .ch-etape-sous { font-size: 14px; }
+.ch-page--large .ch-etape-cta {
+  flex: none;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 20px;
+  border-radius: 999px;
   background: #C25407;
   color: #fff;
-  font-size: 17px;
+  font-size: 15px;
   font-weight: 700;
-  text-decoration: none;
-  box-shadow: 0 14px 28px -10px #C25407, inset 0 1px 0 rgba(255,255,255,.25), inset 0 -3px 0 rgba(0,0,0,.18);
-  transition: transform .12s, filter .15s;
+  transition: background .15s;
 }
-.analyse-page .anl-cta:hover { filter: brightness(1.06); }
-.analyse-page .anl-cta:active { transform: scale(.96) translateY(2px); }
-.analyse-page .anl-desk .anl-titre2 { font-size: 26px; }
-.analyse-page .anl-desk .anl-formats { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
-.analyse-page .anl-desk .anl-format:hover { transform: translateY(-2px); box-shadow: 0 18px 36px -14px rgba(120,60,20,.3); }
-.analyse-page .anl-desk .anl-format-rond { width: 84px; height: 84px; }
-.analyse-page .anl-desk-droite { margin-top: 64px; }
-.analyse-page .anl-carte {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  padding: 26px;
-  border-radius: 26px;
-  background: #fff;
-  box-shadow: 0 12px 30px -14px rgba(120,60,20,.22);
+.ch-page--large .ch-etape:hover .ch-etape-cta { background: #8F3E05; }
+.ch-page--large .ch-segments i { height: 9px; }
+
+.ch-page--large .ch-grille {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 40px;
+  max-width: 1440px;
+  box-sizing: border-box;
+  margin: 0 auto;
+  padding: 48px 56px 64px;
+  grid-auto-rows: max-content;
 }
-.analyse-page .anl-points { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
-.analyse-page .anl-points li { position: relative; padding-left: 20px; font-size: 15px; line-height: 1.5; color: #3A362E; }
-.analyse-page .anl-points li::before { content: ''; position: absolute; left: 0; top: 8px; width: 8px; height: 8px; border-radius: 50%; background: #8F8776; }
-.analyse-page .anl-extrait { margin: 0; font-size: 15px; line-height: 1.5; color: #3A362E; }
-.analyse-page .anl-avancement { display: flex; flex-direction: column; gap: 10px; padding-top: 16px; border-top: 1px solid #F2E8D9; }
-.analyse-page .anl-avancement-ligne { display: flex; justify-content: space-between; gap: 12px; font-size: 14px; color: #6E675B; }
-.analyse-page .anl-avancement-ligne b { color: #1B1A23; }
-.analyse-page .anl-barre { display: block; height: 6px; border-radius: 99px; background: #EFE5D8; overflow: hidden; }
-.analyse-page .anl-barre > span { display: block; height: 100%; border-radius: 99px; background: #1B1A23; }
-@media (max-width: 1240px) {
-  .analyse-page .anl-desk { grid-template-columns: minmax(0, 1fr) 340px; }
-  .analyse-page .anl-desk .anl-formats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .analyse-page .anl-desk .anl-hero-mascotte { right: 10px; }
+.ch-page--large .ch-col { display: flex; flex-direction: column; gap: 36px; min-width: 0; }
+.ch-page--large .ch-case-nom { font-size: 16px; }
+.ch-page--large .ch-case:hover { transform: translateY(-2px); }
+.ch-page--large .ch-pilule:hover { box-shadow: 0 12px 28px rgba(160,80,20,.16); }
+.ch-page--large .ch-points { display: grid; grid-template-columns: 1fr 1fr; column-gap: 40px; padding: 8px 28px; }
+.ch-page--large .ch-points li:nth-child(2) { border-top: 0; }
+.ch-page--large .ch-points li { padding: 16px 0; }
+.ch-page--large .ch-point-num { width: 32px; height: 32px; font-size: 16px; }
+.ch-page--large .ch-point-txt { font-size: 16px; }
+
+/* Réviz IA : une carte avec des suggestions et le champ */
+.ch-page--large .ch-ia-carte { display: flex; flex-direction: column; gap: 16px; padding: 22px; border-radius: 28px; background: #fff; box-shadow: 0 12px 30px rgba(160,80,20,.12); }
+.ch-page--large .ch-ia-tete { display: flex; align-items: center; gap: 14px; }
+.ch-page--large .ch-ia-tete .ch-ia-anneau { width: 58px; height: 58px; }
+.ch-page--large .ch-ia-titre { margin: 0; font-family: var(--font-display); font-size: 22px; font-weight: 800; letter-spacing: -.02em; color: var(--ch-encre); }
+.ch-page--large .ch-ia-sous { font-size: 14px; color: var(--ch-doux); }
+.ch-page--large .ch-ia-suggestions { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; }
+.ch-page--large .ch-ia-suggestion {
+  max-width: 100%;
+  padding: 9px 14px;
+  border: 0;
+  border-radius: 999px;
+  background: #E4E0FA;
+  font: 600 14px 'Geist', system-ui, sans-serif;
+  color: var(--ch-encre);
+  text-align: left;
+  cursor: pointer;
+}
+.ch-page--large .ch-ia-suggestion:hover { background: #D8D2F7; }
+.ch-page--large .ch-ia-champ { display: flex; align-items: center; gap: 8px; height: 52px; padding: 0 6px 0 18px; border-radius: 999px; background: #F8EFE7; }
+.ch-page--large .ch-ia-champ input { flex: 1; min-width: 0; border: 0; background: none; font: 500 15px 'Geist', system-ui, sans-serif; color: var(--ch-encre); outline: none; }
+.ch-page--large .ch-ia-champ button { width: 40px; height: 40px; flex: none; border: 0; border-radius: 50%; background: var(--ch-encre); display: flex; align-items: center; justify-content: center; cursor: pointer; }
+.ch-page--large .ch-ia-champ button:disabled { opacity: .35; cursor: default; }
+
+/* Assez large : contenu à gauche, Réviz IA à droite */
+.ch-page--large .ch-defile { container-type: inline-size; }
+@container (min-width: 1200px) {
+  .ch-page--large .ch-grille--ia { grid-template-columns: minmax(0, 1fr) 400px; gap: 56px; }
 }

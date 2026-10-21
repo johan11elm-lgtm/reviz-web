@@ -1,19 +1,20 @@
 import { ResumeIcon, FlashcardsIcon, MindmapIcon, QuizIcon } from '../components/Icons';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useLayoutEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { BottomNav } from '../components/BottomNav';
 import { Mascot } from '../components/Mascot';
 import { analyseLesson, analyseImage, popPendingAnalysis } from '../services/aiService';
 import { LESSON_TEXT_MAX_LABEL } from '../utils/lessonText';
-import { isProgrammeLessonId, chapterState, CHAPTER_STATE_LABEL } from '../utils/programme';
+import { isProgrammeLessonId, chapterState } from '../utils/programme';
 import { countDueCards, getCardState } from '../services/srsService';
 import { loadRevisions } from '../services/revisionService';
 import { useIsDesktop } from '../hooks/useMediaQuery';
 import { saveLesson } from '../services/historyService';
 import { PremiumModal } from '../components/PremiumModal';
 import { MissingLessonState } from '../components/MissingLessonState';
-import { CoachEntryCard } from '../components/CoachChat';
+import { Pantin } from '../components/Pantin';
+import { BulleReviz } from '../components/reviz/BulleReviz';
 import { getScanStatus } from '../services/scanLimitService';
 import { track, scanErrorCode } from '../services/statsService';
 import { subjectInfo, subjectMascot } from '../utils/subjects';
@@ -73,32 +74,95 @@ function lessonProgress(lessonId, total) {
   };
 }
 
-function formatDay(ts) {
-  const days = Math.floor((Date.now() - ts) / 86400000);
-  if (days <= 0) return "aujourd'hui";
-  if (days === 1) return 'hier';
-  return `il y a ${days} jours`;
+// ─── Teinte du héros selon la matière (handoff Chapitre du 21/10) ─────
+// fond, bulles, point d'accent, rond intérieur (case en cours, numéros de « L'essentiel »)
+// et ombre teintée. Maths en lavande ; pêche comme Programme ; menthe et rose.
+const TEINTES = {
+  lavande: { fond: '#E4E0FA', bulle: '#C9C2F2', point: '#FFB37A', interieur: '#E4E0FA', ombre: 'rgba(90,70,160,.13)' },
+  peche:   { fond: '#FFB37A', bulle: '#FFC596', point: '#C9C2F2', interieur: '#FFE6D2', ombre: 'rgba(150,70,20,.14)' },
+  menthe:  { fond: '#DCF5E6', bulle: '#B9E8C9', point: '#FFB37A', interieur: '#DCF5E6', ombre: 'rgba(30,110,70,.13)' },
+  rose:    { fond: '#FFD9E4', bulle: '#FFC2D4', point: '#C9C2F2', interieur: '#FFD9E4', ombre: 'rgba(160,60,90,.13)' },
+};
+function teinteMatiere(subject = '') {
+  const s = subject.toLowerCase();
+  if (/math/.test(s)) return TEINTES.lavande;
+  if (/fran|philo|angl|espa|allem|langue|lv|latin/.test(s)) return TEINTES.rose;
+  if (/svt|bio|vie|phys|chim|techno|nsi/.test(s)) return TEINTES.menthe;
+  return TEINTES.peche;
 }
 
-// ─── Formats de révision ─────────────────────────────────────────────
-// Refonte du 20/10 : chaque format a sa mascotte sur un aplat pastel.
-const formats = [
-  { id: 'resume',     pose: 'reading',   fond: '#DCF5E6', name: 'Résumé',        to: '/resume',     getCount: l => l.resumeMinutes ?? 2, unit: 'min' },
-  { id: 'flashcards', pose: 'flashcard', fond: '#E4E0FA', name: 'Flashcards',    to: '/flashcards', getCount: l => l.flashcardsCount, unit: 'cartes' },
-  { id: 'mindmap',    pose: 'writing',   fond: '#FFE0EA', name: 'Carte mentale', to: '/mindmap',    getCount: () => null,             unit: null },
-  { id: 'quiz',       pose: 'quiz',      fond: '#FFE6D2', name: 'Quiz',          to: '/quiz',       getCount: l => l.quizCount,       unit: 'questions' },
-];
+const Fleche = ({ taille = 18 }) => (
+  <svg width={taille} height={taille} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+);
+const Coche = ({ taille = 13 }) => (
+  <svg width={taille} height={taille} viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="3.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg>
+);
+const pluriel = (n, mot) => `${n} ${mot}${n > 1 ? 's' : ''}`;
+const POSE_ETAPE = { '/resume': 'reading', '/flashcards': 'flashcard', '/quiz': 'quiz' };
 
-// Aplat du héros selon la matière (mêmes tons que l'accueil).
-function aplatMatiere(subject = '') {
-  const s = subject.toLowerCase();
-  if (/math/.test(s)) return ['#FFB37A', '#FFC596'];
-  if (/fran|philo/.test(s)) return ['#C9C2F2', '#D8D2F7'];
-  if (/hist|géo|geo|emc/.test(s)) return ['#FFC9A8', '#FFDAC4'];
-  if (/svt|bio|vie/.test(s)) return ['#B9E8C9', '#D3F1DD'];
-  if (/phys|chim|techno|nsi/.test(s)) return ['#FFC2D4', '#FFD6E2'];
-  if (/angl|espa|allem|langue|lv/.test(s)) return ['#C9C2F2', '#D8D2F7'];
-  return ['#FFB37A', '#FFC596'];
+// Courbe qui passe par chaque point, points de contrôle à mi-chemin en x (comme Programme).
+function courbe(pts) {
+  let d = `M${pts[0][0]} ${pts[0][1]}`;
+  for (let i = 1; i < pts.length; i++) {
+    const [x0, y0] = pts[i - 1], [x1, y1] = pts[i], m = (x0 + x1) / 2;
+    d += ` C${m} ${y0} ${m} ${y1} ${x1} ${y1}`;
+  }
+  return d;
+}
+
+/**
+ * Ton parcours : Résumé → Flashcards → Quiz sur une petite route, chaque case avec la mascotte
+ * de son format (faite, en cours ou à faire). Chaque case s'ouvre à tout moment.
+ */
+function Parcours({ etapes, grand }) {
+  const boite = useRef(null);
+  const [l, setL] = useState(grand ? 872 : 335);
+  useLayoutEffect(() => {
+    const el = boite.current;
+    if (!el) return;
+    const mesure = () => setL(el.clientWidth);
+    mesure();
+    const ro = new ResizeObserver(mesure);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
+  const D = grand
+    ? { h: 230, ys: [74, 112, 74], route: 36, fait: 76, cours: 100, label: 160 }
+    : { h: 214, ys: [62, 92, 62], route: 30, fait: 66, cours: 88, label: 110 };
+  // Les cases à 15,5 %, 50 % et 84,5 % de la largeur, comme dans la maquette.
+  const pts = etapes.map((_, i) => [Math.round(l * [0.155, 0.5, 0.845][i]), D.ys[i]]);
+  const dernierFait = etapes.reduce((a, e, i) => (e.statut === 'fait' ? i : a), -1);
+  const route = courbe(pts);
+  const faite = dernierFait > 0 ? courbe(pts.slice(0, dernierFait + 1)) : '';
+  return (
+    <div className="ch-parcours" ref={boite} style={{ height: D.h }}>
+      <svg width={l} height={D.h} className="ch-route" aria-hidden="true">
+        <path d={route} transform="translate(0 7)" fill="none" stroke="#A0501A" strokeOpacity=".10" strokeWidth={D.route} strokeLinecap="round" />
+        <path d={route} fill="none" stroke="#fff" strokeWidth={D.route} strokeLinecap="round" />
+        {faite && <path d={faite} fill="none" stroke="#DCF5E6" strokeWidth={D.route} strokeLinecap="round" />}
+        <path d={route} fill="none" stroke="#C25407" strokeOpacity=".45" strokeWidth="3" strokeDasharray="2 10" strokeLinecap="round" />
+      </svg>
+      {etapes.map((e, i) => {
+        const [x, y] = pts[i];
+        const taille = e.statut === 'cours' ? D.cours : D.fait;
+        return (
+          <div key={e.id}>
+            <Link to={e.to} className={`ch-case ch-case--${e.statut}`} style={{ left: x - taille / 2, top: y - taille / 2, width: taille, height: taille }}
+              aria-label={`${e.nom} : ${e.meta}${e.statut === 'fait' ? ', fait' : ''}`}>
+              <span className="ch-case-rond">
+                <Mascot pose={e.pose} size={Math.round(taille * (e.statut === 'cours' ? 0.72 : 0.7))} alt="" aria-hidden="true" />
+              </span>
+              {e.statut === 'fait' && <span className="ch-case-coche"><Coche /></span>}
+            </Link>
+            <span className="ch-case-label" style={{ left: x - D.label / 2, top: y + taille / 2 + 10, width: D.label }} aria-hidden="true">
+              <span className="ch-case-nom">{e.nom}</span>
+              <span className={`ch-case-meta ch-case-meta--${e.statut}`}>{e.meta}</span>
+            </span>
+          </div>
+        );
+      })}
+    </div>
+  );
 }
 
 // ─── Écran de chargement ─────────────────────────────────────────────
@@ -243,119 +307,229 @@ export default function Analyse() {
   };
   const errInfo = errorMessages[error] ?? { title: 'Oups, ça a coincé', sub: 'Vérifie ta connexion et réessaie.' };
 
-  // ── Blocs de la page (le téléphone les empile, l'ordinateur les répartit) ──
-  const excerptCard = (
-    <>
-      {/* Résumé / excerpt */}
-      {displayLesson.excerpt && (
-        <div className="rv-card rv-card--padded analyse-excerpt-card">
-          <span className="rv-eyebrow">{fromProgramme ? "L'essentiel du chapitre" : 'En bref'}</span>
-          <p className="analyse-excerpt-text">{displayLesson.excerpt}</p>
-        </div>
-      )}
-    </>
-  );
-  const coachCard = (
-    <>
-      {/* Coach de révision — chat contextuel sur la leçon (Firestore requis
-          pour le contexte serveur → pas de coach sur le mock dev sans id). */}
-      {lesson && coachLessonId && !isGuest && (
-        <CoachEntryCard onClick={() => navigate(`/coach?lesson=${coachLessonId}`)} />
-      )}
-    </>
-  );
-  const formatGrid = (
-    <div className="anl-formats">
-      {formats.map(f => {
-        const count = f.getCount(displayLesson);
-        return (
-          <Link key={f.id} to={f.to} className="anl-format">
-            <span className="anl-format-rond" style={{ background: f.fond }} aria-hidden="true">
-              <Mascot pose={f.pose} size={isDesktop ? 76 : 58} alt="" />
-            </span>
-            <span className="anl-format-txt">
-              <span className="anl-format-nom">{f.name}</span>
-              <span className="anl-format-meta">{count !== null ? `${count} ${f.unit}` : "Vue d'ensemble"}</span>
-            </span>
-          </Link>
-        );
-      })}
-    </div>
-  );
-
-  // Avancement de l'élève : la carte « Ta prochaine étape » (et, sur
-  // ordinateur, le détail dans « Ton avancement »).
-  const avancement = lesson && coachLessonId
-    ? lessonProgress(coachLessonId, displayLesson.flashcardsCount ?? 0)
-    : null;
-  const lessonRevisions = coachLessonId ? loadRevisions().filter(r => r.lessonId === coachLessonId) : [];
-  const step = nextStep(displayLesson, avancement, type => lessonRevisions.some(r => r.type === type));
+  // ── Où en est l'élève ──
   const total = displayLesson.flashcardsCount ?? 0;
-  const nextCard = (
-    <Link to={step.to} className="rv-next">
-      <span className="rv-eyebrow">Ta prochaine étape</span>
-      <span className="rv-next-title">{step.title}</span>
-      <span className="rv-next-sub">{step.sub}</span>
-      {avancement && avancement.seen > 0 && total > 0 && (
-        <span className="rv-next-progress">
-          <span className="rv-next-progress-row">
-            <span>{avancement.seen} / {total} cartes vues</span>
-            {avancement.seenDue > 0 && <span>{avancement.seenDue} à revoir</span>}
-          </span>
-          <span className="rv-next-bar" aria-hidden="true">
-            <span style={{ width: `${Math.round(avancement.seen / total * 100)}%` }} />
-          </span>
-        </span>
-      )}
-      <span className="rv-next-action">
-        {step.action}
-        <span aria-hidden="true">→</span>
-      </span>
-    </Link>
-  );
-  const formatsSection = (
-    <>
-      <h2 className="anl-titre2">Choisis ton format</h2>
-      {formatGrid}
-    </>
-  );
+  const avancement = lesson && coachLessonId ? lessonProgress(coachLessonId, total) : null;
+  const lessonRevisions = coachLessonId ? loadRevisions().filter(r => r.lessonId === coachLessonId) : [];
+  const aOuvert = type => lessonRevisions.some(r => r.type === type);
+  const step = nextStep(displayLesson, avancement, aOuvert);
+  // À découvrir : rien vu ni ouvert ; maîtrisé : toutes les cartes vues, aucune à revoir.
+  const etat = !avancement || (avancement.seen === 0 && lessonRevisions.length === 0) ? 'decouvrir'
+    : avancement.state === 'maitrise' ? 'maitrise' : 'encours';
+  const sues = avancement ? avancement.seen - avancement.seenDue : 0;
+  const aRevoir = avancement?.seenDue ?? 0;
+  const pastille = etat === 'decouvrir' ? 'À découvrir'
+    : etat === 'maitrise' ? 'Maîtrisé'
+    : aRevoir > 0 ? `${pluriel(aRevoir, 'carte')} à travailler`
+    : avancement.seen < total ? `${avancement.seen} / ${total} cartes vues` : 'Commencé';
 
-  // Héros : aplat de la matière, titre, état, mascotte de la matière.
-  const [aplat, bulle] = aplatMatiere(displayLesson.subject);
-  const etat = avancement
-    ? (avancement.due > 0 && avancement.seen > 0 ? `${avancement.due} à travailler` : CHAPTER_STATE_LABEL[avancement.state])
-    : null;
+  // Ce que dit Réviz : où en est l'élève, et la prochaine action.
+  const suite = { '/resume': 'On commence par le résumé ?', '/flashcards': aRevoir > 0 ? 'On revoit tes cartes ?' : 'On finit les flashcards ?', '/quiz': 'Place au quiz ?' }[step.to];
+  const lignes = etat === 'decouvrir' ? ['Nouveau chapitre.', 'On commence par le résumé ?']
+    : etat === 'maitrise' ? ['Chapitre maîtrisé.', 'Une révision rapide dans une semaine.']
+    : avancement.seen > 0 ? [`${avancement.seen} ${avancement.seen > 1 ? 'cartes' : 'carte'} sur ${total} déjà vues.`, suite]
+    : ['Résumé lu.', suite];
+
+  // Ton parcours : Résumé → Flashcards → Quiz.
+  const cartesFaites = avancement && total > 0 && avancement.seen === total && aRevoir === 0;
+  const faits = { resume: aOuvert('resume') || (avancement?.seen ?? 0) > 0, flashcards: !!cartesFaites, quiz: aOuvert('quiz') };
+  const enCours = ['resume', 'flashcards', 'quiz'].find(id => `/${id}` === step.to && !faits[id]) ?? ['resume', 'flashcards', 'quiz'].find(id => !faits[id]);
+  const statut = id => (faits[id] ? 'fait' : id === enCours ? 'cours' : 'afaire');
+  const etapes = [
+    { id: 'resume', nom: 'Résumé', pose: 'reading', to: '/resume', meta: faits.resume ? 'Lu' : `${displayLesson.resumeMinutes ?? 2} min` },
+    { id: 'flashcards', nom: 'Flashcards', pose: 'flashcard', to: '/flashcards', meta: avancement?.seen ? `${avancement.seen} / ${total} vues` : pluriel(total, 'carte') },
+    { id: 'quiz', nom: 'Quiz corrigé', pose: 'quiz', to: '/quiz', meta: faits.quiz ? 'Fait' : pluriel(displayLesson.quizCount ?? 0, 'question') },
+  ].map(e => ({ ...e, statut: statut(e.id) }));
+  const nbFaites = etapes.filter(e => e.statut === 'fait').length;
+  const carteMentaleVue = aOuvert('mindmap');
+
+  const teinte = teinteMatiere(displayLesson.subject);
+  const varsTeinte = { '--ch-fond': teinte.fond, '--ch-bulle': teinte.bulle, '--ch-point': teinte.point, '--ch-interieur': teinte.interieur, '--ch-ombre': teinte.ombre };
   const retour = () => (window.history.state?.idx > 0 ? navigate(-1) : navigate(fromProgramme ? '/programme' : '/cours'));
+  const points = displayLesson.keyPoints?.length ? displayLesson.keyPoints : (displayLesson.excerpt ? [displayLesson.excerpt] : []);
+  const [parle, setParle] = useState(false);
+  const pantin = useRef(null);
+  const texte = lignes.join('\n');
+  useEffect(() => { if (parle) pantin.current?.dire(texte); }, [texte, parle]);
+  // Si le moteur de Réviz ne charge pas, la bulle s'affiche quand même (page visible seulement).
+  useEffect(() => {
+    let t;
+    const essai = () => { t = setTimeout(() => (document.hidden ? essai() : setParle(true)), 4000); };
+    essai();
+    return () => clearTimeout(t);
+  }, []);
+  const [question, setQuestion] = useState('');
+  const demander = q => navigate(`/coach?lesson=${coachLessonId}`, { state: { question: q } });
+
+  // ── Blocs de la page (le téléphone les empile, l'ordinateur les répartit) ──
   const boutonRetour = (
-    <button type="button" className="anl-retour" onClick={retour} aria-label="Retour">
-      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6" /></svg>
+    <button type="button" className="ch-retour" onClick={retour}>
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7" /></svg>
+      {fromProgramme ? 'Programme' : 'Mes leçons'}
     </button>
   );
-  const hero = (
-    <div className="anl-hero" style={{ background: aplat, '--anl-bulle': bulle }}>
-      <span className="anl-bulle anl-bulle--a" aria-hidden="true" />
-      <span className="anl-bulle anl-bulle--b" aria-hidden="true" />
-      <span className="anl-grain" aria-hidden="true" />
-      {!isDesktop && <div className="anl-hero-haut">{boutonRetour}</div>}
-      <Mascot pose={subjectMascot(displayLesson.subject)} size={isDesktop ? 300 : 220} priority alt="" aria-hidden="true" className="anl-hero-mascotte" />
-      <div className="anl-hero-txt">
-        <span className="anl-surtitre">{displayLesson.subject} · {fromProgramme ? 'Programme' : 'Leçon scannée'}</span>
-        <h1 className={`anl-titre${displayLesson.title.length > 24 ? ' anl-titre--long' : ''}`}>{displayLesson.title}</h1>
-        {etat && <span className="anl-etat">{etat}</span>}
-        {isDesktop && (
-          <>
-            <span className="anl-flex" />
-            <Link to={step.to} className="anl-cta">{step.action}</Link>
-          </>
-        )}
-      </div>
+  const rondMatiere = (
+    <span className="ch-matiere" aria-hidden="true"><Mascot pose={subjectMascot(displayLesson.subject)} size={isDesktop ? 92 : 56} alt="" /></span>
+  );
+  const titres = (
+    <>
+      <span className="ch-surtitre">{displayLesson.subject} · {fromProgramme ? 'Programme' : 'Leçon scannée'}</span>
+      <h1 className="ch-titre">{displayLesson.title}</h1>
+      {avancement && <span className={`ch-pastille ch-pastille--${etat}${etat === 'encours' && aRevoir > 0 ? ' ch-pastille--revoir' : ''}`}><i aria-hidden="true" />{pastille}</span>}
+    </>
+  );
+  const reviz = (
+    <div className="ch-reviz">
+      <BulleReviz key={texte} lignes={lignes} parle={parle} className="ch-bulle" />
+      <Pantin
+        ref={pantin}
+        size={isDesktop ? 240 : 170}
+        expression={etat === 'maitrise' ? 'fier' : etat === 'encours' ? 'determine' : 'content'}
+        repli={null}
+        onEntree={() => setParle(true)}
+        onClick={() => pantin.current?.geste('saut')}
+        label="Réviz, ta mascotte"
+      />
     </div>
   );
+  const deco = (
+    <>
+      <span className="ch-deco ch-deco--a" aria-hidden="true" />
+      <span className="ch-deco ch-deco--b" aria-hidden="true" />
+      <span className="ch-deco ch-deco--c" aria-hidden="true" />
+      {isDesktop && <span className="ch-deco ch-deco--d" aria-hidden="true" />}
+      <span className="ch-point" aria-hidden="true" />
+      <span className="ch-grain" aria-hidden="true" />
+    </>
+  );
+  const hero = isDesktop ? (
+    <div className="ch-hero">
+      {deco}
+      <div className="ch-hero-int">
+        <div className="ch-haut">{boutonRetour}</div>
+        <div className="ch-hero-grille">
+          <div className="ch-hero-gauche">{rondMatiere}{titres}</div>
+          {reviz}
+        </div>
+      </div>
+    </div>
+  ) : (
+    <div className="ch-hero">
+      {deco}
+      <div className="ch-haut">{boutonRetour}{rondMatiere}</div>
+      {titres}
+      {reviz}
+    </div>
+  );
+
+  const prochaine = (
+    <div className="ch-etape-place">
+      <Link to={step.to} className="ch-etape">
+        <span className="ch-etape-haut">
+          <span className="ch-etape-rond" aria-hidden="true"><Mascot pose={POSE_ETAPE[step.to] ?? 'reading'} size={isDesktop ? 60 : 52} alt="" /></span>
+          <span className="ch-etape-txt">
+            <span className="ch-etape-surtitre">Prochaine étape</span>
+            <span className="ch-etape-titre">{step.title}</span>
+            <span className="ch-etape-sous">{step.sub}</span>
+          </span>
+          {isDesktop
+            ? <span className="ch-etape-cta">{step.action}<Fleche /></span>
+            : <span className="ch-etape-go" aria-hidden="true"><Fleche /></span>}
+        </span>
+        {etat === 'encours' && total > 0 && total <= 16 && (
+          <span className="ch-segments-bloc" aria-hidden="true">
+            <span className="ch-segments">
+              {Array.from({ length: total }, (_, i) => (
+                <i key={i} className={i < sues ? 'ch-seg--sue' : i < sues + aRevoir ? 'ch-seg--revoir' : ''} />
+              ))}
+            </span>
+            <span className="ch-legende">
+              {sues > 0 && <span><i className="ch-seg--sue" />{pluriel(sues, 'sue')}</span>}
+              {aRevoir > 0 && <span><i className="ch-seg--revoir" />{aRevoir} à revoir</span>}
+              {total - sues - aRevoir > 0 && <span><i />{total - sues - aRevoir} à voir</span>}
+            </span>
+          </span>
+        )}
+      </Link>
+    </div>
+  );
+
+  const blocParcours = (
+    <section className="ch-bloc" aria-labelledby="ch-parcours">
+      <div className="ch-tete">
+        <h2 id="ch-parcours" className="ch-titre2">Ton parcours</h2>
+        <span className="ch-compte">{nbFaites} / 3</span>
+      </div>
+      <Parcours etapes={etapes} grand={isDesktop} />
+      <Link to="/mindmap" className="ch-pilule">
+        <span className="ch-pilule-rond ch-pilule-rond--lavande" aria-hidden="true"><Mascot pose="thinking" size={46} alt="" /></span>
+        <span className="ch-pilule-txt">
+          <span className="ch-pilule-titre">Carte mentale</span>
+          <span className="ch-pilule-sous">{isDesktop ? 'Tout le chapitre sur une page, à ouvrir quand tu veux' : 'Tout le chapitre sur une page'}</span>
+        </span>
+        {carteMentaleVue
+          ? <span className="ch-pilule-coche" aria-label="vue"><Coche taille={14} /></span>
+          : <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6E675B" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>}
+      </Link>
+    </section>
+  );
+
+  const blocEssentiel = points.length > 0 && (
+    <section className="ch-bloc" aria-labelledby="ch-essentiel">
+      <div className="ch-tete">
+        <h2 id="ch-essentiel" className="ch-titre2">L’essentiel</h2>
+        <span className="ch-pilule-rond" aria-hidden="true"><Mascot pose="writing" size={46} alt="" /></span>
+      </div>
+      <ol className="ch-points">
+        {points.map((pt, i) => (
+          <li key={i}><span className="ch-point-num">{i + 1}</span><span className="ch-point-txt">{pt}</span></li>
+        ))}
+      </ol>
+    </section>
+  );
+
+  // Réviz IA : le coach passe par une API authentifiée, pas d'accès en mode essai.
+  const iaDispo = lesson && coachLessonId && !isGuest;
+  const suggestions = [
+    displayLesson.keyPoints?.[0] && `Explique-moi autrement : ${displayLesson.keyPoints[0].replace(/\.$/, '')}`,
+    'Donne-moi un exemple corrigé',
+  ].filter(Boolean);
+  const blocIA = iaDispo && (isDesktop ? (
+    <section className="ch-ia-carte" aria-labelledby="ch-ia">
+      <div className="ch-ia-tete">
+        <span className="ch-ia-anneau" aria-hidden="true"><span><Mascot pose="coach" size={44} alt="" /></span></span>
+        <span>
+          <h2 id="ch-ia" className="ch-ia-titre">Une question ?</h2>
+          <span className="ch-ia-sous">Réviz IA répond sur ce chapitre.</span>
+        </span>
+      </div>
+      <div className="ch-ia-suggestions">
+        {suggestions.map(q => <button key={q} type="button" className="ch-ia-suggestion" onClick={() => demander(q)}>{q}</button>)}
+      </div>
+      <form className="ch-ia-champ" onSubmit={e => { e.preventDefault(); if (question.trim()) demander(question.trim()); }}>
+        <input value={question} onChange={e => setQuestion(e.target.value)} placeholder="Pose ta question…" aria-label="Ta question à Réviz IA" />
+        <button type="submit" aria-label="Envoyer à Réviz IA" disabled={!question.trim()}>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6" /></svg>
+        </button>
+      </form>
+    </section>
+  ) : (
+    <Link to={`/coach?lesson=${coachLessonId}`} className="ch-pilule ch-pilule--ia">
+      <span className="ch-ia-anneau" aria-hidden="true"><span><Mascot pose="coach" size={38} alt="" /></span></span>
+      <span className="ch-pilule-txt">
+        <span className="ch-pilule-titre">Poser une question à Réviz IA</span>
+        <span className="ch-pilule-sous">Sur ce chapitre</span>
+      </span>
+      <span className="ch-ia-go" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round"><path d="M12 19V5M6 11l6-6 6 6" /></svg>
+      </span>
+    </Link>
+  ));
 
   if (noLesson) return <MissingLessonState title="Ta leçon" />;
 
   return (
-    <div className="app app--no-halo analyse-page">
+    <div className={`app app--no-halo analyse-page ch-page${isDesktop ? ' app--large ch-page--large' : ''}`}>
 
       {/* ── Écran de chargement ── */}
       {isLoading && (
@@ -428,49 +602,20 @@ export default function Analyse() {
         </div>
       )}
 
-      <div className={`content analyse-content anl-content${(isLoading || error) ? ' analyse-content--hidden' : ''}`}>
+      <div className={`content analyse-content ch-defile${(isLoading || error) ? ' analyse-content--hidden' : ''}`} style={varsTeinte}>
+        {hero}
+        {prochaine}
         {isDesktop ? (
-          <div className="anl-desk">
-            <div className="anl-desk-gauche">
-              <div className="anl-fil">
-                {boutonRetour}
-                <span>{fromProgramme ? 'Programme' : 'Mes leçons'} › {displayLesson.subject}{fromProgramme && userLevel?.classe ? ` › ${userLevel.classe.replace('ème', 'e')}` : ''}</span>
-              </div>
-              {hero}
-              {formatsSection}
-              {coachCard}
-            </div>
-            <aside className="anl-desk-droite">
-              <div className="anl-carte">
-                <h2 className="anl-titre2">L'essentiel</h2>
-                {displayLesson.keyPoints?.length > 0 ? (
-                  <ul className="anl-points">
-                    {displayLesson.keyPoints.map(k => <li key={k}>{k}</li>)}
-                  </ul>
-                ) : displayLesson.excerpt && <p className="anl-extrait">{displayLesson.excerpt}</p>}
-                {avancement && (
-                  <div className="anl-avancement">
-                    <div className="anl-avancement-ligne"><span>Cartes vues</span><b>{avancement.seen} / {displayLesson.flashcardsCount}</b></div>
-                    <span className="anl-barre" aria-hidden="true">
-                      <span style={{ width: `${displayLesson.flashcardsCount ? Math.round(avancement.seen / displayLesson.flashcardsCount * 100) : 0}%` }} />
-                    </span>
-                    <div className="anl-avancement-ligne"><span>À travailler aujourd'hui</span><b>{avancement.due} carte{avancement.due > 1 ? 's' : ''}</b></div>
-                    <div className="anl-avancement-ligne"><span>Séances</span><b>{avancement.sessions}{avancement.last ? ` · la dernière ${formatDay(avancement.last)}` : ''}</b></div>
-                  </div>
-                )}
-              </div>
-            </aside>
+          <div className={`ch-grille${blocIA ? ' ch-grille--ia' : ''}`}>
+            <div className="ch-col">{blocParcours}{blocEssentiel}</div>
+            {blocIA && <aside className="ch-col">{blocIA}</aside>}
           </div>
         ) : (
-          <>
-            {hero}
-            <div className="anl-pile">
-              {formatsSection}
-              {nextCard}
-              {coachCard}
-              {excerptCard}
-            </div>
-          </>
+          <div className="ch-pile">
+            {blocParcours}
+            {blocEssentiel}
+            {blocIA}
+          </div>
         )}
       </div>
 

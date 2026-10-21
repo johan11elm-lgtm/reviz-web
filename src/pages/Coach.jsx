@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import { Link, useSearchParams } from 'react-router-dom';
+import { Link, useSearchParams, useLocation } from 'react-router-dom';
 import { GuestWall } from '../components/GuestWall';
 import { BottomNav, EtoileIA } from '../components/BottomNav';
 import { useAuth } from '../context/AuthContext';
@@ -125,6 +125,8 @@ export default function Coach() {
   const lessons = useMemo(() => loadLessons(), []);
   const [picking, setPicking] = useState(false);
   const wanted = params.get('lesson');
+  // Question posée depuis la fiche chapitre (champ ou suggestion) : pré-remplie dans le chat.
+  const location = useLocation();
   const { isGuest } = useAuth();
 
   // Mode essai : le coach passe par une API authentifiée → compte requis.
@@ -193,6 +195,7 @@ export default function Coach() {
             key={lesson.id}
             lessonId={lesson.id}
             lessonTitle={lesson.metadata.title}
+            prefill={location.state?.question}
             variant="page"
             className="coach-page-body"
             onChangeLesson={canSwitch && !isDesktop ? () => setPicking(true) : undefined}
