@@ -804,6 +804,11 @@
       "chemin": "4eme/physique-chimie/combustion-du-carbone",
       "le": "2026-10-21",
       "corrections": 1
+    },
+    {
+      "chemin": "4eme/physique-chimie/combustions-du-methane-et-du-butane",
+      "le": "2026-10-21",
+      "corrections": 0
     }
   ]
 }
