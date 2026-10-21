@@ -56,9 +56,36 @@ const ALIAS = { triste: 'decu', concentre: 'determine', fatigue: 'decu' };
 const versMoteur = nom => ALIAS[nom] || nom || 'content';
 
 // Un geste finit bras au repos : on revient ensuite à l'humeur tenue (fier : mains sur les hanches).
-function jouerGeste(a, nom, humeur) {
-  if (!a || a.calme || !a.GESTES[nom]) return;
-  a.geste(nom)?.eventCallback('onComplete', () => a.expression(versMoteur(humeur())));
+// Une suite de gestes (['chute', 'coucou']) s'enchaîne ; un geste peut porter ses réglages
+// ({ nom: 'chute', depuis: 2600 }). La chute se joue aussi en mouvement réduit (il est déjà posé).
+function jouerGeste(a, gestes, humeur, fini) {
+  const [g, ...suite] = [].concat(gestes);
+  const { nom, ...opts } = typeof g === 'string' ? { nom: g } : g || {};
+  if (!a || !a.GESTES[nom] || (a.calme && nom !== 'chute')) { fini?.(); return; }
+  a.geste(nom, opts)?.eventCallback('onComplete', () => {
+    a.expression(versMoteur(humeur()));
+    if (suite.length) jouerGeste(a, suite, humeur, fini);
+    else fini?.();
+  });
+}
+
+// Texte -> bouche : une forme par lettre qui compte, au rythme de la frappe de la bulle
+// (même minutage que tempsLettres). Les autres lettres gardent la bouche précédente.
+const PAS_LETTRE = 0.045;
+const PAUSE = { ',': 0.18, '.': 0.3, '?': 0.3, '!': 0.3, '…': 0.3 };
+const FORMES = { a: 'A', 'à': 'A', 'â': 'A', e: 'EI', 'é': 'EI', 'è': 'EI', 'ê': 'EI', i: 'EI', y: 'EI', o: 'O', u: 'U', m: 'MBP', b: 'MBP', p: 'MBP', f: 'FV', v: 'FV', l: 'L' };
+export function tempsLettres(texte) {
+  let t = 0;
+  return [...texte].map(c => { const ici = t; t += PAS_LETTRE + (PAUSE[c] || 0); return ici; });
+}
+function minutageTexte(texte) {
+  const temps = tempsLettres(texte);
+  const out = [];
+  [...texte.toLowerCase()].forEach((c, i) => {
+    if (FORMES[c]) out.push({ t: temps[i], v: FORMES[c] });
+    else if (PAUSE[c]) out.push({ t: temps[i], v: 'repos' });
+  });
+  return out;
 }
 
 // Cadrage en px des calques (2508 px) : celui de l'ancien pantin, les pages en dépendent.
@@ -67,22 +94,28 @@ const VUE = '180 330 2148 2148';
 
 /**
  * @param {string} [expression='content']  humeur tenue (voir ALIAS)
- * @param {'coucou'|'saut'|string} [entree]  geste joué à l'apparition
+ * @param {string|object|Array} [entree]  geste(s) joué(s) à l'apparition : 'coucou', 'saut',
+ *   { nom: 'chute', depuis } ou une suite ['chute', 'coucou']
  * @param {number} [size=240]
- * @param {string} [repli='hello'] pose de <Mascot> affichée pendant le chargement
- * ref : { geste(nom), expression(nom) }
+ * @param {string|null} [repli='hello'] pose de <Mascot> affichée pendant le chargement ;
+ *   null : rien tant que le moteur n'est pas prêt (la pose revient si le chargement échoue)
+ * @param {Function} [onEntree] appelé quand l'entrée est finie (ou tout de suite sans entrée)
+ * ref : { geste(nom), expression(nom), dire(texte) }
  */
 export const Pantin = forwardRef(function Pantin(
-  { expression = 'content', entree, size = 240, repli = 'hello', className = '', onClick, label },
+  { expression = 'content', entree, size = 240, repli = 'hello', className = '', onClick, label, onEntree },
   ref,
 ) {
   const hote = useRef(null);
   const boite = useRef(null);
   const anim = useRef(null);
   const [pret, setPret] = useState(false);
+  const [echec, setEchec] = useState(false);
   const exprRef = useRef(expression);
   exprRef.current = expression;
   const entreeRef = useRef(entree);
+  const entreeFinie = useRef(onEntree);
+  entreeFinie.current = onEntree;
 
   useEffect(() => {
     let vivant = true;
@@ -105,9 +138,13 @@ export const Pantin = forwardRef(function Pantin(
         obs.observe(boite.current);
       }
       const g = entreeRef.current;
-      if (g) appels.push(gsap.delayedCall(0.35, () => jouerGeste(a, g, () => exprRef.current)));
+      const fini = () => entreeFinie.current?.();
+      // La chute part tout de suite (il apparaît déjà en l'air) ; les autres gestes attendent un peu.
+      if ([].concat(g)[0]?.nom === 'chute' || [].concat(g)[0] === 'chute') jouerGeste(a, g, () => exprRef.current, fini);
+      else if (g) appels.push(gsap.delayedCall(0.35, () => jouerGeste(a, g, () => exprRef.current, fini)));
+      else fini();
       setPret(true);
-    }).catch(() => {});
+    }).catch(() => { if (vivant) setEchec(true); });
     return () => {
       vivant = false;
       obs?.disconnect();
@@ -125,6 +162,7 @@ export const Pantin = forwardRef(function Pantin(
   useImperativeHandle(ref, () => ({
     geste: nom => jouerGeste(anim.current, nom, () => exprRef.current),
     expression: nom => anim.current?.expression(versMoteur(nom)),
+    dire: texte => anim.current?.parler(minutageTexte(texte)),
   }), []);
 
   const Tag = onClick ? 'button' : 'div';
@@ -141,7 +179,7 @@ export const Pantin = forwardRef(function Pantin(
       <svg viewBox={VUE} className="pantin-svg" aria-hidden="true">
         <g ref={hote} />
       </svg>
-      {!pret && <Mascot pose={repli} size={size} priority alt="" aria-hidden="true" className="pantin-repli" />}
+      {!pret && (repli || echec) && <Mascot pose={repli || 'hello'} size={size} priority alt="" aria-hidden="true" className="pantin-repli" />}
     </Tag>
   );
 });

@@ -17,7 +17,7 @@
 /* ── Héros ── */
 .home-page .hm-hero {
   position: relative;
-  height: calc(540px + env(safe-area-inset-top, 0px));
+  height: calc(430px + env(safe-area-inset-top, 0px));
   margin-top: calc(-1 * env(safe-area-inset-top, 0px));
   padding-top: env(safe-area-inset-top, 0px);
   background: var(--hm-bg);
@@ -33,12 +33,12 @@
   box-shadow: inset 0 -24px 40px rgba(120,60,20,.08), inset 0 16px 30px rgba(255,255,255,.35);
   transition: background .6s;
 }
-.home-page .hm-bulle--a { right: -60px; top: calc(120px + env(safe-area-inset-top, 0px)); width: 260px; height: 260px; }
-.home-page .hm-bulle--b { left: -40px; top: calc(330px + env(safe-area-inset-top, 0px)); width: 150px; height: 150px; }
+.home-page .hm-bulle--a { right: -70px; top: calc(150px + env(safe-area-inset-top, 0px)); width: 240px; height: 240px; }
+.home-page .hm-bulle--b { left: -50px; top: calc(270px + env(safe-area-inset-top, 0px)); width: 140px; height: 140px; }
 .home-page .hm-point {
   position: absolute;
-  left: 30px;
-  top: calc(150px + env(safe-area-inset-top, 0px));
+  left: 26px;
+  top: calc(200px + env(safe-area-inset-top, 0px));
   width: 46px;
   height: 46px;
   border-radius: 50%;
@@ -58,7 +58,7 @@
 
 .home-page .hm-hero-haut {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   padding: 18px 22px 0;
   display: flex;
   justify-content: space-between;
@@ -97,13 +97,61 @@
   position: absolute;
   left: 0;
   right: 0;
-  bottom: 30px;
+  bottom: 52px;
   display: flex;
   justify-content: center;
   z-index: 1;
 }
 
-/* ── Ce que dit Réviz ── */
+/* ── Bulle : ce que dit Réviz, au-dessus de sa tête ── */
+.home-page .hm-bulle-parole {
+  position: absolute;
+  z-index: 3;
+  left: 22px;
+  right: 22px;
+  top: calc(90px + env(safe-area-inset-top, 0px));
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(8px) scale(.9);
+  transform-origin: 50% 100%;
+  transition: opacity .2s ease, transform .35s cubic-bezier(.3,1.5,.5,1);
+}
+.home-page .hm-bulle-parole--la { opacity: 1; transform: none; }
+.home-page .hm-bulle-txt {
+  position: relative;
+  max-width: 290px;
+  margin: 0;
+  padding: 11px 18px 12px;
+  border-radius: 22px;
+  background: #fff;
+  box-shadow: 0 10px 24px -12px rgba(120,60,20,.45);
+  font-family: var(--font-display);
+  font-size: 19px;
+  font-weight: 800;
+  letter-spacing: -.4px;
+  line-height: 1.15;
+  text-align: center;
+  text-wrap: balance;
+  color: var(--hm-encre);
+}
+/* La pointe, vers la tête de Réviz */
+.home-page .hm-bulle-txt::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: -9px;
+  width: 20px;
+  height: 20px;
+  margin-left: -10px;
+  background: #fff;
+  border-radius: 0 0 5px 0;
+  transform: rotate(45deg);
+}
+.home-page .hm-bulle-reste { visibility: hidden; }
+
+/* ── Ce que dit Réviz (ordinateur) ── */
 .home-page .hm-centre { padding: 22px 22px 0; }
 .home-page .hm-parole { display: flex; flex-direction: column; gap: 6px; }
 .home-page .hm-mobile .hm-parole { align-items: center; text-align: center; }
@@ -152,7 +200,7 @@
   box-shadow: 0 4px 10px -6px rgba(0,0,0,.4), inset 0 -1px 0 rgba(0,0,0,.18);
 }
 .home-page .hm-cta:focus-visible { outline: 3px solid var(--hm-encre); outline-offset: 3px; }
-.home-page .hm-ou { font-size: 14px; color: var(--hm-doux); }
+.home-page .hm-ou { margin: 12px 0 0; font-size: 14px; color: var(--hm-doux); text-align: center; }
 .home-page .hm-ou a { color: var(--hm-btn); font-weight: 700; }
 
 /* ── Rappels (accord parental, email, essai) : une carte fine, masquée vide ── */
@@ -161,8 +209,19 @@
 
 /* ── Blocs du bas ── */
 .home-page .hm-pad { padding: 30px 22px 0; }
+/* Le plan monte sur le bas du héros : c'est lui qu'on voit en premier sous Réviz. */
+.home-page .hm-pad--plan { position: relative; z-index: 3; margin-top: -40px; padding-top: 0; }
+.home-page .hm-pad--plan .hm-bloc {
+  gap: 2px;
+  padding: 16px 16px 4px;
+  border-radius: 28px;
+  background: #fff;
+  box-shadow: 0 1px 0 rgba(255,255,255,.8) inset, 0 16px 34px -16px rgba(120,60,20,.32);
+}
+.home-page .hm-pad--plan .hm-titre { padding: 0 2px 4px; font-size: 18px; letter-spacing: -.4px; }
+.home-page .hm-pad--plan .hm-plan { padding: 0; background: none; box-shadow: none; border-radius: 0; }
 .home-page .hm-pad--droite { padding: 28px 0 0 22px; }
-.home-page .hm-pad--bas { padding: 28px 22px calc(120px + env(safe-area-inset-bottom, 0px)); }
+.home-page .hm-pad--bas { padding: 28px 22px 8px; } /* .content garde déjà la place de la capsule */
 .home-page .hm-bloc { display: flex; flex-direction: column; gap: 10px; }
 .home-page .hm-tete { display: flex; justify-content: space-between; align-items: baseline; padding-right: 22px; }
 .home-page .hm-titre {
@@ -199,6 +258,43 @@
 .home-page .hm-etape-txt { flex: 1; min-width: 0; display: flex; flex-direction: column; }
 .home-page .hm-etape-titre { font-size: 15px; font-weight: 700; color: var(--hm-encre); }
 .home-page .hm-etape-meta { font-size: 13px; color: var(--hm-doux); }
+
+/* L'étape à faire maintenant : c'est le bouton du jour. */
+.home-page .hm-etape--en-cours { padding: 8px 0; }
+.home-page .hm-etape--en-cours + .hm-etape { border-top: 0; }
+.home-page .hm-etape-go {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 0 -8px;
+  padding: 12px 10px 12px 8px;
+  border: 0;
+  border-radius: 20px;
+  background: var(--hm-soft);
+  text-align: left;
+  font: inherit;
+  color: inherit;
+  transition: transform .12s, background .5s;
+}
+.home-page .hm-etape-go:active { transform: scale(.98); }
+.home-page .hm-etape-go:focus-visible { outline: 3px solid var(--hm-encre); outline-offset: 2px; }
+.home-page .hm-etape-go .hm-etape-num { background: #fff !important; }
+.home-page .hm-etape-go .hm-etape-titre { font-size: 16px; }
+.home-page .hm-etape-lecture {
+  width: 44px;
+  height: 44px;
+  flex: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--hm-btn);
+  color: #fff;
+  box-shadow: 0 8px 16px -8px var(--hm-btn), inset 0 -2px 0 rgba(0,0,0,.18);
+  transition: background .5s;
+}
+.home-page .hm-etape-lecture svg { margin-left: 2px; }
 
 .home-page .hm-bloc--matieres { gap: 12px; }
 .home-page .hm-matieres {
@@ -271,7 +367,7 @@
   top: 0;
   height: calc(50px + env(safe-area-inset-top, 0px));
   padding-top: env(safe-area-inset-top, 0px);
-  background: var(--hm-bar);
+  background: rgba(248,239,231,.88);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-bottom: .5px solid rgba(27,26,35,.1);

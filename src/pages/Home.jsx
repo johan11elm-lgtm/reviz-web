@@ -6,7 +6,7 @@ import { GuestBanner } from '../components/GuestBanner';
 import { ConsentBanner } from '../components/ConsentBanner';
 import { EmailBanner } from '../components/EmailBanner';
 import { Mascot } from '../components/Mascot';
-import { Pantin } from '../components/Pantin';
+import { Pantin, tempsLettres } from '../components/Pantin';
 import { loadLessons, restoreLesson, syncFromFirestore } from '../services/historyService';
 import { loadRevisions } from '../services/revisionService';
 import { loadCatalogue } from '../services/programmeService';
@@ -55,6 +55,43 @@ function jourDans(n) {
   return majuscule(d.toLocaleDateString('fr-FR', { weekday: 'long' }));
 }
 
+const Lecture = () => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+    <path d="M8 5.6v12.8a1 1 0 0 0 1.5.86l10.4-6.4a1 1 0 0 0 0-1.72L9.5 4.74A1 1 0 0 0 8 5.6z" />
+  </svg>
+);
+
+/* Ce que dit Réviz, tapé lettre par lettre au rythme de sa bouche (tempsLettres). Le texte
+ * entier est posé dès le départ (lettres à venir invisibles) : la bulle ne change pas de taille. */
+function Bulle({ texte, parle }) {
+  const [n, setN] = useState(0);
+  useEffect(() => {
+    if (!parle) return;
+    if (window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) { setN(texte.length); return; }
+    const temps = tempsLettres(texte);
+    const t0 = performance.now();
+    let id;
+    const tic = () => {
+      const t = (performance.now() - t0) / 1000;
+      let i = 0;
+      while (i < temps.length && temps[i] <= t) i++;
+      setN(i);
+      if (i < temps.length) id = requestAnimationFrame(tic);
+    };
+    id = requestAnimationFrame(tic);
+    return () => cancelAnimationFrame(id);
+  }, [texte, parle]);
+  const lettres = [...texte];
+  return (
+    <div className={`hm-bulle-parole${parle ? ' hm-bulle-parole--la' : ''}`}>
+      <h1 className="hm-bulle-txt" aria-label={texte}>
+        <span aria-hidden="true">{lettres.slice(0, n).join('')}</span>
+        <span aria-hidden="true" className="hm-bulle-reste">{lettres.slice(n).join('')}</span>
+      </h1>
+    </div>
+  );
+}
+
 const Flamme = () => (
   <svg width="15" height="15" viewBox="0 0 24 24" fill="#FF8A3D" aria-hidden="true">
     <path d="M12 2c1 3.5 5 6 5 11a5 5 0 0 1-10 0c0-2.2 1-3.8 2.2-5 .2 1.6 1 2.6 2 3 0-3.3.4-6 .8-9z" />
@@ -91,7 +128,9 @@ export default function Home() {
   const [essaiTheme, setEssaiTheme] = useState(() => !essaiThemeVu());
   const montrerEssai = essaiTheme && hasRevizPlus && !isGuest && !themeById(theme)?.premium;
   const [compact, setCompact] = useState(0);
+  const [parle, setParle] = useState(false);
   const pantin = useRef(null);
+  const hero = useRef(null);
   const controle = useProchainControle(currentUser);
 
   useEffect(() => {
@@ -203,12 +242,15 @@ export default function Home() {
     const jour = i => (controle ? jourDans(Math.min(i, ecart - 1)) : ['Maintenant', 'Ensuite', 'Pour finir'][i]);
     const cartes = dueCards > 0 ? `${dueCards} carte${dueCards > 1 ? 's' : ''}` : 'les flashcards';
     const quiz = lastLesson?.quizCount ? `${lastLesson.quizCount} questions` : 'Pour te tester';
+    const chapitre = controle?.titre ? `${controle.titre} · ` : '';
     return [
-      { titre: `${jour(0)} · Résumé + ${cartes}`, meta: 'Environ 6 min', done: todayRevisions > 0 },
+      { titre: `${jour(0)} · Résumé + ${cartes}`, meta: `${chapitre}Environ 6 min`, done: todayRevisions > 0 },
       { titre: `${jour(1)} · Quiz corrigé`, meta: quiz, done: goalReached },
       { titre: `${jour(2)} · Battle d'entraînement`, meta: 'Contre un ami', done: false },
     ].map((p, i) => ({ ...p, ton: TONS_PLAN[i] }));
   }, [controle, dueCards, lastLesson, todayRevisions, goalReached]);
+  // L'étape à faire maintenant : la première pas encore faite. C'est elle qui lance l'action du jour.
+  const enCours = Math.max(0, plan.findIndex(p => !p.done));
   const titrePlan = controle
     ? `Ton plan pour ${controle.jours <= 1 ? controle.quand : jourDans(controle.jours).toLowerCase()}`
     : 'Ton plan du jour';
@@ -220,6 +262,20 @@ export default function Home() {
   const dateTxt = majuscule(new Date().toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' }));
 
   const sauter = () => pantin.current?.geste('saut');
+  // Réviz tombe dans le héros une fois chargé, puis parle (et fait son geste d'humeur).
+  // Distance de chute en unités du pantin (2148 pour sa taille) : il part au-dessus du héros.
+  const TAILLE_PANTIN = 226;
+  const entreeMobile = useMemo(() => [{ nom: 'chute', depuis: Math.round(2148 * 420 / TAILLE_PANTIN) }], []);
+  const aterri = () => {
+    setParle(true);
+    pantin.current?.dire(dit);
+    if (h.entree) pantin.current?.geste(h.entree);
+  };
+  // Si le moteur ne charge pas, la bulle s'affiche quand même.
+  useEffect(() => {
+    const t = setTimeout(() => setParle(true), 4000);
+    return () => clearTimeout(t);
+  }, []);
   const style = { '--hm-bg': h.bg, '--hm-tint': h.tint, '--hm-dot': h.dot, '--hm-bar': h.bar, '--hm-btn': h.btn, '--hm-soft': h.soft };
 
   const serie = streak > 0 && (
@@ -248,19 +304,31 @@ export default function Home() {
     <section className="hm-bloc" aria-labelledby="hm-plan">
       <h2 id="hm-plan" className="hm-titre">{goalReached ? 'Bravo, étape 1 faite' : titrePlan}</h2>
       <ol className="hm-plan">
-        {plan.map((p, i) => (
-          <li key={i} className="hm-etape">
-            <span
-              className="hm-etape-num"
-              style={p.done ? { background: '#34C77B', color: '#fff' } : { background: p.ton.bg, color: p.ton.fg }}
-              aria-label={p.done ? 'fait' : `étape ${i + 1}`}
-            >{p.done ? '✓' : i + 1}</span>
-            <span className="hm-etape-txt">
-              <span className="hm-etape-titre">{p.titre}</span>
-              <span className="hm-etape-meta">{p.meta}</span>
-            </span>
-          </li>
-        ))}
+        {plan.map((p, i) => {
+          const contenu = (
+            <>
+              <span
+                className="hm-etape-num"
+                style={p.done ? { background: '#34C77B', color: '#fff' } : { background: p.ton.bg, color: p.ton.fg }}
+                aria-label={p.done ? 'fait' : `étape ${i + 1}`}
+              >{p.done ? '✓' : i + 1}</span>
+              <span className="hm-etape-txt">
+                <span className="hm-etape-titre">{p.titre}</span>
+                <span className="hm-etape-meta">{p.meta}</span>
+              </span>
+            </>
+          );
+          return (
+            <li key={i} className={`hm-etape${!isDesktop && i === enCours ? ' hm-etape--en-cours' : ''}`}>
+              {!isDesktop && i === enCours ? (
+                <button type="button" className="hm-etape-go" onClick={action} aria-label={`${cta} : ${p.titre}`}>
+                  {contenu}
+                  <span className="hm-etape-lecture"><Lecture /></span>
+                </button>
+              ) : contenu}
+            </li>
+          );
+        })}
       </ol>
     </section>
   );
@@ -352,40 +420,47 @@ export default function Home() {
       ) : (
         <div
           className="content hm-mobile"
-          onScroll={e => setCompact(Math.min(1, Math.max(0, (e.currentTarget.scrollTop - 50) / 30)))}
+          onScroll={e => {
+            // La barre du haut arrive quand le héros a presque fini de passer dessous.
+            const fin = (hero.current?.offsetHeight ?? 400) - 90;
+            setCompact(Math.min(1, Math.max(0, (e.currentTarget.scrollTop - fin) / 30)));
+          }}
         >
-          <div className="hm-hero">
+          <div className="hm-hero" ref={hero}>
             <span className="hm-bulle hm-bulle--a" aria-hidden="true" />
             <span className="hm-bulle hm-bulle--b" aria-hidden="true" />
             <span className="hm-point" aria-hidden="true" />
-            <div className="hm-hero-haut" style={{ opacity: 1 - compact }}>
+            <span className="hm-grain" aria-hidden="true" />
+            <span className="hm-ombre" aria-hidden="true" />
+            <div className="hm-pantin-place">
+              <Pantin
+                ref={pantin}
+                size={TAILLE_PANTIN}
+                expression={h.expression}
+                entree={entreeMobile}
+                onEntree={aterri}
+                repli={null}
+                onClick={sauter}
+                label="Réviz, ta mascotte"
+              />
+            </div>
+            <div className="hm-hero-haut">
               <div className="hm-hero-titres">
                 <span className="hm-date">{dateTxt}</span>
                 <span className="hm-auj">Aujourd'hui</span>
               </div>
               {serie}
             </div>
-            <span className="hm-grain" aria-hidden="true" />
-            <span className="hm-ombre" aria-hidden="true" />
-            <div className="hm-pantin-place">
-              <Pantin
-                ref={pantin}
-                size={330}
-                expression={h.expression}
-                entree={h.entree}
-                repli="hello"
-                onClick={sauter}
-                label="Réviz, ta mascotte"
-              />
-            </div>
+            <Bulle key={humeurId} texte={dit} parle={parle} />
           </div>
-          <div className="hm-centre">{parole}</div>
-          {actions}
+          <div className="hm-pad hm-pad--plan">
+            <div className="hm-carte-plan">{carteplan}</div>
+            {secondaire && (
+              <p className="hm-ou">ou <Link to={secondaire.to}>{secondaire.label}</Link></p>
+            )}
+          </div>
           {rappels}
           {montrerEssai && <div className="hm-pad"><ThemeEssai onClose={() => setEssaiTheme(false)} /></div>}
-          <div className="hm-pad">
-            <div className="hm-carte-plan">{carteplan}</div>
-          </div>
           <div className="hm-pad hm-pad--droite">{carteMatieres}</div>
           <div className="hm-pad hm-pad--bas">{carteBattle}</div>
         </div>
