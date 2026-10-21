@@ -1,7 +1,8 @@
 /* Mes leçons scannées (handoff Claude Design du 21/10) : héros pêche avec Réviz, carte de scan à
  * cheval, « À reprendre », leçons par matière (liste sur téléphone, grille sur ordinateur). */
 .le-page { background: #F8EFE7; color: var(--ch-encre); }
-.le-defile { padding-bottom: calc(120px + env(safe-area-inset-bottom, 0px)); }
+.le-defile { padding-bottom: calc(120px + env(safe-area-inset-bottom, 0px)); flex: 1; min-height: 0; overflow-y: auto; overflow-x: hidden; scrollbar-width: none; }
+.le-defile::-webkit-scrollbar { display: none; }
 
 /* ── Héros ── */
 .le-page .le-hero { padding-bottom: 88px; }

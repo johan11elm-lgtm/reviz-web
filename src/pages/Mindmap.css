@@ -2,6 +2,8 @@
  * panneau de la branche ouverte (du bas sur téléphone, à côté sur ordinateur), écran de fin. */
 .cm-page { background: #F8EFE7; color: var(--ch-encre); }
 .cm-ecran { position: relative; padding-bottom: calc(110px + env(safe-area-inset-bottom, 0px)); }
+.cm-defile, .cm-ecran { flex: 1; min-height: 0; overflow-y: auto; overflow-x: hidden; scrollbar-width: none; }
+.cm-defile::-webkit-scrollbar, .cm-ecran::-webkit-scrollbar { display: none; }
 
 /* ── Héros (téléphone) ── */
 .cm-page .cm-hero { padding-bottom: 76px; }

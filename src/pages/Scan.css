@@ -1,7 +1,8 @@
 /* Scanner une leçon (handoff Claude Design du 21/10) : héros pêche avec Réviz, cartes de choix,
  * viseur arrondi à coins de visée, aperçu, texte collé, quota, quota atteint, mode essai. */
 .sc-page { min-height: 100dvh; background: #F8EFE7; color: var(--ch-encre); }
-.sc-defile { padding-bottom: calc(120px + env(safe-area-inset-bottom, 0px)); }
+.sc-defile { padding-bottom: calc(120px + env(safe-area-inset-bottom, 0px)); flex: 1; min-height: 0; overflow-y: auto; overflow-x: hidden; scrollbar-width: none; }
+.sc-defile::-webkit-scrollbar { display: none; }
 .sc-flex { flex: 1; }
 
 /* ── Héros ── */

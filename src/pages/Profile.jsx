@@ -1,151 +1,106 @@
-import { PageIntro } from '../components/PageIntro';
-import { GuestBanner } from '../components/GuestBanner';
-import { UserIcon, FlameIcon, BookIcon, BoltIcon, ChatIcon, CheckIcon } from '../components/Icons';
-import { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useState, useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { loadLessons, syncFromFirestore } from '../services/historyService';
 import { loadRevisions, syncRevisionsFromFirestore } from '../services/revisionService';
-import { BottomNav, StatsIcon } from '../components/BottomNav';
+import { getUserProfile } from '../services/userProfileService';
+import { BottomNav } from '../components/BottomNav';
 import { LevelSelector } from '../components/LevelSelector';
 import { Mascot } from '../components/Mascot';
 import { Pantin } from '../components/Pantin';
-import { BattleMascot } from '../components/BattleMascot';
-import { getUserProfile } from '../services/userProfileService';
-import { computeStreak, computeLevel, computeBadges, XP_PAR_NIVEAU } from '../utils/gamification';
-import { formatLevelLabel } from '../utils/levels';
+import { BulleReviz } from '../components/reviz/BulleReviz';
+import { computeStreak, computeLevel, computeBadges, XP_PAR_NIVEAU, XP_PAR_LECON } from '../utils/gamification';
+import { phaseRevizPlus } from '../utils/revizPlus';
+import { DERNIER_JOUR_OFFERT } from '../../api/_lancement.js';
+import { TEINTES, varsTeinte } from '../utils/teinteMatiere';
 import { useIsDesktop } from '../hooks/useMediaQuery';
+import { useModalA11y } from '../hooks/useModalA11y';
+import '../components/reviz/HerosMatiere.css';
 import './Profile.css';
-import { RevizPlusCard } from '../components/RevizPlus';
 
-// Mascotte adaptative au niveau / streak / activité — pattern Progres `getHeroNarrative`.
-function getProfileHero(level, streak, lessonsCount) {
-  if (level >= 10)        return 'trophy';
-  if (streak >= 7)        return 'fire';
-  if (level >= 3)         return 'celebration';
-  if (lessonsCount >= 1)  return 'reading';
-  return 'hello';
-}
+const pluriel = (n, mot, motPluriel = `${mot}s`) => `${n > 1 ? motPluriel : mot}`;
+// Pastels des badges, en boucle : fond et tranche (handoff Moi du 21/10).
+const PASTELS = [['#E4E0FA', '#C9C2F2'], ['#FFE6D2', '#FFC596'], ['#DCF5E6', '#A8E3C2'], ['#FFD9E4', '#F4B8CB']];
+const CLASSES_COLLEGE = ['6ème', '5ème', '4ème', '3ème'];
+const classeCourte = c => c?.replace('ème', 'e') ?? '';
 
-// Icône engrenage (réglages) — trait 1.8, cohérente avec PageHeader
-const GearIcon = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-    <circle cx="12" cy="12" r="3.2" />
-    <path d="M19.4 15a1.7 1.7 0 0 0 .34 1.87l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.7 1.7 0 0 0-1.87-.34 1.7 1.7 0 0 0-1.03 1.56V21a2 2 0 1 1-4 0v-.09a1.7 1.7 0 0 0-1.12-1.56 1.7 1.7 0 0 0-1.87.34l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.7 1.7 0 0 0 .34-1.87 1.7 1.7 0 0 0-1.56-1.03H3a2 2 0 1 1 0-4h.09a1.7 1.7 0 0 0 1.56-1.12 1.7 1.7 0 0 0-.34-1.87l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.7 1.7 0 0 0 1.87.34h.08a1.7 1.7 0 0 0 1.03-1.56V3a2 2 0 1 1 4 0v.09a1.7 1.7 0 0 0 1.03 1.56 1.7 1.7 0 0 0 1.87-.34l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.7 1.7 0 0 0-.34 1.87v.08a1.7 1.7 0 0 0 1.56 1.03H21a2 2 0 1 1 0 4h-.09a1.7 1.7 0 0 0-1.56 1.03Z" />
-  </svg>
+const Engrenage = () => (
+  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3.2" /><path d="M19.4 15a1.7 1.7 0 0 0 .34 1.87l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.7 1.7 0 0 0-1.87-.34 1.7 1.7 0 0 0-1.03 1.56V21a2 2 0 1 1-4 0v-.09a1.7 1.7 0 0 0-1.12-1.56 1.7 1.7 0 0 0-1.87.34l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.7 1.7 0 0 0 .34-1.87 1.7 1.7 0 0 0-1.56-1.03H3a2 2 0 1 1 0-4h.09a1.7 1.7 0 0 0 1.56-1.12 1.7 1.7 0 0 0-.34-1.87l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.7 1.7 0 0 0 1.87.34h.08a1.7 1.7 0 0 0 1.03-1.56V3a2 2 0 1 1 4 0v.09a1.7 1.7 0 0 0 1.03 1.56 1.7 1.7 0 0 0 1.87-.34l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.7 1.7 0 0 0-.34 1.87v.08a1.7 1.7 0 0 0 1.56 1.03H21a2 2 0 1 1 0 4h-.09a1.7 1.7 0 0 0-1.56 1.03Z" /></svg>
+);
+const Coche = ({ taille = 13 }) => (
+  <svg viewBox="0 0 24 24" width={taille} height={taille} fill="none" stroke="#fff" strokeWidth="3.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg>
+);
+const Fleche = () => (
+  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+);
+const Chevron = () => (
+  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6" /></svg>
+);
+const Croix = () => (
+  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12" /></svg>
+);
+const Flamme = () => (
+  <svg viewBox="0 0 24 24" width="16" height="16" fill="#C25407" aria-hidden="true"><path d="M12 2c1 3.5 5 5.5 5 11a5 5 0 0 1-10 0c0-2.4 1.1-4 2.3-5.2.2 1.6.9 2.6 1.9 3.2C11 8 11 5 12 2z" /></svg>
+);
+const CocheEncre = () => (
+  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#1B1A23" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg>
+);
+const Livre = () => (
+  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#1B1A23" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 4h11a2 2 0 0 1 2 2v14H7a2 2 0 0 1-2-2zM9 4v16" /></svg>
+);
+const Crayon = () => (
+  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M4 20l4-1L19 8l-3-3L5 16zM14 6l3 3" /></svg>
+);
+const Bulle = () => (
+  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 5h14v10H10l-4 4v-4H5z" /></svg>
 );
 
-// Icônes neutres : ce sont des liens, pas des états (docs/design-grammaire.md §5).
-const ACCOUNT_ITEMS = [
-  { id: 'profil',   icon: <UserIcon />, label: 'Modifier le profil' },
-  { id: 'reglages', icon: <GearIcon />, label: 'Réglages' },
-  { id: 'avis',     icon: <ChatIcon />, label: 'Donner mon avis' },
-];
-
-const SHEET_TITLES = {
-  profil: 'Modifier le profil',
-};
-
-// Badge le plus proche d'être débloqué (part de l'objectif déjà faite,
-// puis ce qu'il reste à faire) ; null quand tout est débloqué.
-function nextBadge(badges) {
-  return badges
-    .filter(b => b.locked)
-    .sort((a, b) => (b.current / b.target - a.current / a.target) || ((a.target - a.current) - (b.target - b.current)))[0] ?? null;
+// Badge le plus proche : le moins d'actions restantes, puis la plus grande part déjà faite.
+function prochainBadge(badges) {
+  return badges.filter(b => b.locked)
+    .sort((a, b) => ((a.target - a.current) - (b.target - b.current)) || (b.current / b.target - a.current / a.target))[0] ?? null;
+}
+// Ce qu'il reste à faire pour un badge, et où aller.
+function conseil(b) {
+  const reste = b.target - b.current;
+  if (b.id === 'lanceur') return { texte: 'Ouvre ta première leçon pour l’obtenir.', action: 'Ouvrir une leçon', to: '/programme' };
+  if (b.id === 'rapide') return { texte: 'Fais ta première révision pour l’obtenir.', action: 'Faire ma première révision', to: '/programme' };
+  if (b.id === 'curieux' || b.id === 'precis') return { texte: 'Essaie un autre format pour l’obtenir.', action: 'Essayer un autre format', to: '/programme' };
+  if (['regulier', '7jours', 'fidele'].includes(b.id)) return { texte: 'Reviens demain pour l’obtenir.', action: 'Réviser aujourd’hui', to: '/' };
+  return { texte: `Encore ${reste} pour l’obtenir.`, action: 'Réviser maintenant', to: '/programme' };
 }
 
-// Tuile de badge : mascotte sur un disque (chaud quand obtenu, neutre sinon),
-// coche verte une fois obtenu, mini-barre de progression tant qu'il manque.
-function BadgeTile({ badge: b, onOpen, desktop }) {
-  const pct = Math.min(100, Math.round(b.current / b.target * 100));
-  const title = b.locked ? `${b.label} : ${b.hint} (${b.current} / ${b.target})` : `${b.label} : obtenu`;
-  const art = (
-    <span className="pf-badge-art" aria-hidden="true">
-      <Mascot pose={b.pose} size={desktop ? 48 : 40} alt="" aria-hidden="true" />
-      {!b.locked && <span className="pf-badge-check"><CheckIcon /></span>}
-    </span>
-  );
-  if (desktop) {
-    return (
-      <li className={`pf-badge pf-desk-badge${b.locked ? ' pf-badge--locked' : ''}`} title={title}>
-        {art}
-        <span className="pf-badge-label pf-desk-badge-label">{b.label}</span>
-        <span className="pf-desk-badge-hint">{b.hint}</span>
-        {b.locked
-          ? <span className="pf-desk-badge-state">{b.current} / {b.target}</span>
-          : <span className="pf-desk-badge-state pf-desk-badge-state--ok"><CheckIcon /> Obtenu</span>}
-        {b.locked && (
-          <span className="rv-bar rv-bar--thin rv-bar--neutral-bg pf-badge-bar" aria-hidden="true">
-            <span className="rv-bar-fill rv-bar-fill--orange" style={{ width: `${pct}%` }} />
-          </span>
-        )}
-      </li>
-    );
-  }
+function Feuille({ titre, onClose, grand, children }) {
+  const ref = useModalA11y(onClose, true);
   return (
-    <button
-      type="button"
-      className={`pf-badge${b.locked ? ' pf-badge--locked' : ''}`}
-      onClick={() => onOpen(b)}
-      aria-label={title}
-    >
-      {art}
-      <span className="pf-badge-label">{b.label}</span>
-      {b.locked && (
-        <span className="rv-bar rv-bar--thin rv-bar--neutral-bg pf-badge-bar" aria-hidden="true">
-          <span className="rv-bar-fill rv-bar-fill--orange" style={{ width: `${pct}%` }} />
-        </span>
-      )}
-    </button>
-  );
-}
-
-function NextBadgeCard({ next }) {
-  const pct = Math.round(next.current / next.target * 100);
-  return (
-    <div className="rv-card rv-card--padded pf-next">
-      <span className="pf-next-mascot"><Mascot pose={next.pose} size={56} glow glowIntensity={0.35} alt="" aria-hidden="true" /></span>
-      <span className="pf-next-text">
-        <span className="pf-desk-label pf-next-kicker">Prochain badge</span>
-        <span className="pf-next-name">{next.label}</span>
-        <span className="pf-next-hint">{next.hint}</span>
-      </span>
-      <div className="pf-next-progress">
-        <div
-          className="rv-bar rv-bar--tall"
-          role="progressbar"
-          aria-label={`${next.label} : ${next.current} sur ${next.target}`}
-          aria-valuemin={0}
-          aria-valuemax={next.target}
-          aria-valuenow={next.current}
-        >
-          <div className="rv-bar-fill rv-bar-fill--orange" style={{ width: `${pct}%` }} />
-        </div>
-        <span className="pf-next-count">{next.current} / {next.target}</span>
+    <div className="mo-voile" onClick={onClose}>
+      <div className={`mo-feuille${grand ? ' mo-feuille--fenetre' : ''}`} ref={ref} role="dialog" aria-modal="true" aria-label={titre} onClick={e => e.stopPropagation()}>
+        {!grand && <span className="mo-poignee" aria-hidden="true" />}
+        <button type="button" className="mo-fermer" onClick={onClose} aria-label="Fermer"><Croix /></button>
+        {children}
       </div>
     </div>
   );
 }
 
+/**
+ * Moi (handoff Claude Design du 21/10) : qui est l'élève, où il en est, ce qu'il a gagné. Héros
+ * lavande avec Réviz fier, carte du niveau à cheval, chiffres, badges (le prochain mis en avant,
+ * détail au toucher), Battle, Réviz+, compte. Débutant et mode essai sans culpabiliser.
+ */
 export default function Profile() {
-  const [showAllBadges, setShowAllBadges] = useState(false);
-  const [badgeDetail, setBadgeDetail] = useState(null);
   const navigate = useNavigate();
   const isDesktop = useIsDesktop();
+  const { currentUser, getUserLevel, setUserLevel, updateDisplayName, isGuest, hasRevizPlus, isPremium } = useAuth();
+  const prenom = currentUser?.displayName?.split(' ')[0] ?? '';
+  const niveauScolaire = getUserLevel();
 
-  const { currentUser, getUserLevel, setUserLevel, updateDisplayName, isGuest, hasRevizPlus } = useAuth();
-  const prenom   = currentUser?.displayName ?? '';
-  const userLevel  = getUserLevel();
-  const levelLabel = formatLevelLabel(userLevel);
-
-  const [allLessons, setAllLessons]     = useState(() => loadLessons());
-  const [allRevisions, setAllRevisions] = useState(() => loadRevisions());
-
+  const [lecons, setLecons] = useState(() => loadLessons());
+  const [revisions, setRevisions] = useState(() => loadRevisions());
   useEffect(() => {
-    syncFromFirestore().then(setAllLessons);
-    syncRevisionsFromFirestore().then(setAllRevisions);
+    syncFromFirestore().then(setLecons);
+    syncRevisionsFromFirestore().then(setRevisions);
   }, []);
-
   // Aura de la Battle : écrite par le serveur sur le profil (api/battle-fin.js).
   const [battle, setBattle] = useState(null);
   useEffect(() => {
@@ -155,363 +110,310 @@ export default function Profile() {
       .catch(() => {});
   }, [isGuest, currentUser?.uid]);
 
-  const streak = computeStreak(allRevisions, 'revisedAt');
-  const { level, xpInLvl, fillPct } = computeLevel(allLessons);
-  const badges = computeBadges(allLessons, allRevisions, streak, level);
-  const unlocked = badges.filter(b => !b.locked).length;
-  const next = nextBadge(badges);
-  const heroPose = getProfileHero(level, streak, allLessons.length);
+  const serie = computeStreak(revisions, 'revisedAt');
+  const { level, xpInLvl, fillPct } = computeLevel(lecons);
+  const badges = computeBadges(lecons, revisions, serie, level);
+  const obtenus = badges.filter(b => !b.locked).length;
+  const prochain = prochainBadge(badges);
+  const debutant = lecons.length === 0 && revisions.length === 0;
 
-
-  const [activeSheet, setActiveSheet] = useState(null);
-  const [editPrenom, setEditPrenom]   = useState('');
-  const [editLevel, setEditLevel]     = useState({ cycle: null, classe: null, specialites: [], filiere: null });
-  const [saving, setSaving]           = useState(false);
-  const [saveError, setSaveError]     = useState('');
-
-  function openSheet(name) {
-    if (name === 'profil') {
-      setEditPrenom(prenom);
-      setEditLevel(userLevel ?? { cycle: null, classe: null, specialites: [], filiere: null });
-      setSaveError('');
-    }
-    setActiveSheet(name);
-  }
-
-  function closeSheet() { setActiveSheet(null); }
-
-  function openBadge(b) {
-    setBadgeDetail(b);
-    setActiveSheet('badge');
-  }
-
-  async function handleSaveProfil() {
-    if (!editPrenom.trim()) return;
-    setSaving(true); setSaveError('');
+  const [detail, setDetail] = useState(null);
+  const [edition, setEdition] = useState(null); // { prenom, niveau }
+  const [enregistrement, setEnregistrement] = useState(false);
+  const [erreur, setErreur] = useState('');
+  async function enregistrer() {
+    if (!edition.prenom.trim()) return;
+    setEnregistrement(true); setErreur('');
     try {
-      await updateDisplayName(editPrenom.trim());
-      if (editLevel?.cycle && editLevel?.classe) {
-        setUserLevel(editLevel);
-      }
-      closeSheet();
-    } catch { setSaveError('Erreur lors de la sauvegarde, réessaie.'); }
-    finally { setSaving(false); }
+      await updateDisplayName(edition.prenom.trim());
+      if (edition.niveau?.cycle && edition.niveau?.classe) setUserLevel(edition.niveau);
+      setEdition(null);
+    } catch { setErreur('Erreur lors de la sauvegarde, réessaie.'); }
+    finally { setEnregistrement(false); }
   }
 
-  function onAccountClick(id) {
-    if (id === 'reglages') return navigate('/reglages');
-    if (id === 'avis') return navigate('/avis?src=profil');
-    openSheet(id);
-  }
+  // Ce que dit Réviz, et sa tête.
+  const reste = XP_PAR_NIVEAU - xpInLvl;
+  const lignes = debutant
+    ? [prenom ? `Bienvenue, ${prenom}.` : 'Bienvenue.', 'Ta première révision te donne un badge.']
+    : [`Niveau ${level}, ${isGuest ? 'bien joué' : 'bravo'}.`, `Encore ${reste} XP pour le niveau ${level + 1}.`];
+  const pantin = useRef(null);
+  const [parle, setParle] = useState(false);
+  const texte = lignes.join('\n');
+  useEffect(() => { if (parle) pantin.current?.dire(texte); }, [texte, parle]);
+  useEffect(() => {
+    let t;
+    const essai = () => { t = setTimeout(() => (document.hidden ? essai() : setParle(true)), 4000); };
+    essai();
+    return () => clearTimeout(t);
+  }, []);
 
-  const sheetTitle = activeSheet === 'badge' ? (badgeDetail?.label ?? '') : (SHEET_TITLES[activeSheet] || '');
-  const sheet = (
-    <>
-      {/* Backdrop sheet — fade in/out */}
-      {activeSheet && (
-        <div
-          className="pf-sheet-backdrop"
-          onClick={closeSheet}
-          aria-hidden="true"
-        />
-      )}
-
-      {/* Bottom sheet unifiée — toujours dans le DOM, transform-slide */}
-      <aside
-        className={`rv-sheet--bottom pf-sheet${activeSheet ? '' : ' rv-sheet--bottom-hidden'}`}
-        aria-hidden={!activeSheet}
-        aria-label={activeSheet ? sheetTitle : undefined}
-      >
-        <div className="rv-sheet-handle" />
-        <header className="pf-sheet-header">
-          <h2 className="pf-sheet-title">{sheetTitle}</h2>
-          <button
-            type="button"
-            className="pf-sheet-close"
-            onClick={closeSheet}
-            aria-label="Fermer"
-          >
-            ×
-          </button>
-        </header>
-        <div className="pf-sheet-body" key={activeSheet || 'closed'}>
-          {activeSheet === 'profil' && (
-            <>
-              <label className="pf-sheet-label" htmlFor="pf-prenom">Prénom</label>
-              <input
-                id="pf-prenom"
-                className="pf-sheet-input"
-                value={editPrenom}
-                onChange={e => setEditPrenom(e.target.value)}
-                placeholder="Ton prénom"
-                maxLength={30}
-              />
-              <label className="pf-sheet-label" style={{ marginTop: 14 }}>Niveau</label>
-              <LevelSelector value={editLevel} onChange={setEditLevel} />
-              {saveError && <p className="pf-sheet-error">{saveError}</p>}
-              <button
-                type="button"
-                className="rv-btn-cta rv-btn-cta--full pf-sheet-save"
-                onClick={handleSaveProfil}
-                disabled={saving || !editPrenom.trim()}
-              >
-                {saving ? 'Sauvegarde…' : 'Sauvegarder'}
-              </button>
-            </>
-          )}
-
-          {activeSheet === 'badge' && badgeDetail && (
-            <div className="pf-badge-detail">
-              <span className={`pf-badge-art pf-badge-art--lg${badgeDetail.locked ? ' pf-badge-art--locked' : ''}`} aria-hidden="true">
-                <Mascot pose={badgeDetail.pose} size={88} glow={!badgeDetail.locked} glowIntensity={0.4} alt="" aria-hidden="true" />
-              </span>
-              <p className="pf-badge-detail-hint">{badgeDetail.hint}</p>
-              {badgeDetail.locked ? (
-                <div className="pf-badge-detail-progress">
-                  <div
-                    className="rv-bar rv-bar--tall rv-bar--neutral-bg"
-                    role="progressbar"
-                    aria-label={`${badgeDetail.label} : ${badgeDetail.current} sur ${badgeDetail.target}`}
-                    aria-valuemin={0}
-                    aria-valuemax={badgeDetail.target}
-                    aria-valuenow={badgeDetail.current}
-                  >
-                    <div className="rv-bar-fill rv-bar-fill--orange" style={{ width: `${Math.min(100, Math.round(badgeDetail.current / badgeDetail.target * 100))}%` }} />
-                  </div>
-                  <span className="pf-badge-detail-count">{badgeDetail.current} / {badgeDetail.target}</span>
-                </div>
-              ) : (
-                <span className="rv-pill rv-pill--green pf-badge-detail-ok"><CheckIcon /> Obtenu</span>
-              )}
-            </div>
-          )}
-
+  // ── Blocs ──
+  const identite = (
+    <div className="mo-identite">
+      <div>
+        <span className="mo-sur">Mon profil</span>
+        <div className="mo-nom-ligne">
+          <h1 className="mo-nom">{prenom || 'Toi'}</h1>
+          {niveauScolaire?.classe && <span className="mo-classe">Classe de {classeCourte(niveauScolaire.classe)}</span>}
+          {isDesktop && <button type="button" className="mo-reglages" onClick={() => navigate('/reglages')} aria-label="Réglages"><Engrenage /></button>}
         </div>
-      </aside>
-    </>
+      </div>
+      {!isDesktop && <button type="button" className="mo-reglages" onClick={() => navigate('/reglages')} aria-label="Réglages"><Engrenage /></button>}
+    </div>
+  );
+  const reviz = (
+    <div className={`mo-reviz${isDesktop ? ' mo-reviz--cote' : ''}`}>
+      <BulleReviz key={texte} lignes={lignes} parle={parle} pointe={isDesktop ? 'droite' : 'bas'} grande={isDesktop} className="mo-bulle" />
+      <Pantin ref={pantin} size={isDesktop ? 340 : 206} expression={debutant ? 'content' : 'fier'} entree={debutant ? 'coucou' : 'saut'} repli={null}
+        onEntree={() => setParle(true)} onClick={() => pantin.current?.geste('saut')} label="Réviz, ta mascotte" />
+    </div>
+  );
+  const carteNiveau = (
+    <div className="mo-carte mo-niveau">
+      <div className="mo-niveau-haut">
+        <span className="mo-piece" aria-hidden="true">{level}</span>
+        <span className="mo-niveau-txt"><b>Niveau {level}</b><span>{reste} XP avant le niveau {level + 1}</span></span>
+        <span className="mo-xp">{xpInLvl} / {XP_PAR_NIVEAU} XP</span>
+      </div>
+      <div className="mo-barre" role="progressbar" aria-label={`${xpInLvl} XP sur ${XP_PAR_NIVEAU} pour passer au niveau ${level + 1}`}
+        aria-valuemin={0} aria-valuemax={XP_PAR_NIVEAU} aria-valuenow={xpInLvl}>
+        <i style={{ width: `${Math.max(fillPct, 2)}%` }} />
+      </div>
+      <p className="mo-astuce">+{XP_PAR_LECON} XP par leçon ouverte</p>
+    </div>
+  );
+  const essai = isGuest && (
+    <div className="mo-carte mo-essai">
+      <Mascot pose="hello" size={40} alt="" aria-hidden="true" />
+      <p><b>Mode essai</b> · ta progression est gardée sur cet appareil.</p>
+      <button type="button" className="mo-lien" onClick={() => navigate('/inscription')}>Créer mon compte</button>
+    </div>
+  );
+  const chiffres = (
+    <div className="mo-chiffres">
+      <div className="mo-chiffre mo-chiffre--peche"><span className="mo-chiffre-icone"><Flamme /></span><b>{serie}</b><span>{pluriel(serie, 'jour de suite', 'jours de suite')}</span></div>
+      <div className="mo-chiffre mo-chiffre--lavande"><span className="mo-chiffre-icone"><CocheEncre /></span><b>{revisions.length}</b><span>{pluriel(revisions.length, 'révision')}</span></div>
+      <div className="mo-chiffre mo-chiffre--menthe"><span className="mo-chiffre-icone"><Livre /></span><b>{lecons.length}</b><span>{pluriel(lecons.length, 'leçon')}</span></div>
+    </div>
+  );
+  const progres = (
+    <button type="button" className="mo-carte mo-progres" onClick={() => navigate('/progres')}>
+      <span><b>Mes progrès</b><span>Matières, mémoire, jours de révision</span></span>
+      <span className="mo-go" aria-hidden="true"><Fleche /></span>
+    </button>
+  );
+  const carteProchain = prochain && (() => {
+    const c = conseil(prochain);
+    return (
+      <div className="mo-prochain">
+        <span className="mo-prochain-rond" aria-hidden="true"><Mascot pose={prochain.pose} size={isDesktop ? 84 : 60} alt="" /></span>
+        <div className="mo-prochain-txt">
+          <span className="mo-sur mo-sur--orange">Prochain badge</span>
+          <b>{prochain.label}</b>
+          <span>{c.texte}</span>
+          <span className="mo-prochain-barre"><span className="mo-minibarre mo-minibarre--large"><i style={{ width: `${Math.round(prochain.current / prochain.target * 100)}%` }} /></span><em>{prochain.current} / {prochain.target}</em></span>
+          {isDesktop && <button type="button" className="mo-btn mo-btn--petit" onClick={() => navigate(c.to)}>{c.action}</button>}
+        </div>
+      </div>
+    );
+  })();
+  const grille = (
+    <ul className="mo-badges">
+      {badges.map((b, i) => {
+        const [fond, tranche] = PASTELS[i % PASTELS.length];
+        return (
+          <li key={b.id}>
+            <button type="button" className={`mo-badge${b.locked ? ' is-verrou' : ''}`} onClick={() => setDetail({ b, i })}
+              aria-label={b.locked ? `${b.label} : ${b.hint} (${b.current} / ${b.target})` : `${b.label} : obtenu`}>
+              <span className="mo-badge-rond" style={{ background: fond, boxShadow: `0 5px 0 ${tranche}` }} aria-hidden="true">
+                <Mascot pose={b.pose} size={isDesktop ? 72 : 64} alt="" />
+                {!b.locked && <span className="mo-badge-coche"><Coche /></span>}
+              </span>
+              <b>{b.label}</b>
+              <span className="mo-badge-hint">{b.hint}</span>
+              {b.locked && <span className="mo-badge-prog"><span className="mo-minibarre"><i style={{ width: `${Math.round(b.current / b.target * 100)}%` }} /></span>{b.current} / {b.target}</span>}
+            </button>
+          </li>
+        );
+      })}
+    </ul>
+  );
+  const carteBattle = (
+    <div className="mo-carte mo-battle">
+      {isDesktop && <h2 className="mo-h3">Battle</h2>}
+      <div className="mo-battle-haut">
+        <span className="mo-battle-rond" aria-hidden="true"><Mascot pose="quiz" size={52} alt="" /></span>
+        {battle?.jouees ? (
+          <span className="mo-battle-txt"><b>{battle.aura} aura</b><span>{battle.jouees} {pluriel(battle.jouees, 'battle')} · {battle.gagnees} {pluriel(battle.gagnees, 'gagnée')}</span></span>
+        ) : (
+          <span className="mo-battle-txt mo-battle-txt--vide"><b>Défie quelqu’un</b><span>En direct, sur un chapitre de ton programme</span></span>
+        )}
+      </div>
+      <button type="button" className="mo-btn" onClick={() => navigate('/battle')}>{battle?.jouees ? 'Lancer une battle' : 'Défier quelqu’un'}</button>
+    </div>
+  );
+  const phase = phaseRevizPlus();
+  const revizPlus = hasRevizPlus && !isGuest && (
+    <button type="button" className="mo-plus" onClick={() => navigate('/reglages')}>
+      <Mascot pose="scanphone" size={40} alt="" aria-hidden="true" />
+      <span className="mo-plus-txt"><b>Ton Réviz+</b><span>Scans et questions illimités</span></span>
+      <span className="mo-plus-fin">{isPremium ? 'Abonnement actif' : phase === 'prolonge' ? 'Offert pendant le lancement' : `Offert jusqu’au ${DERNIER_JOUR_OFFERT}`}</span>
+    </button>
+  );
+  const compte = (
+    <ul className="mo-compte">
+      {!isGuest && (
+        <li><button type="button" onClick={() => { setEdition({ prenom, niveau: niveauScolaire ?? { cycle: null, classe: null, specialites: [], filiere: null } }); setErreur(''); }}>
+          <span className="mo-compte-rond mo-compte-rond--lavande"><Crayon /></span><span className="mo-compte-txt"><b>Modifier le profil</b><span>Prénom et classe</span></span><Chevron />
+        </button></li>
+      )}
+      <li><button type="button" onClick={() => navigate('/reglages')}>
+        <span className="mo-compte-rond mo-compte-rond--peche"><Engrenage /></span><span className="mo-compte-txt"><b>Réglages</b></span><Chevron />
+      </button></li>
+      <li><button type="button" onClick={() => navigate('/avis?src=profil')}>
+        <span className="mo-compte-rond mo-compte-rond--menthe"><Bulle /></span><span className="mo-compte-txt"><b>Donner mon avis</b></span><Chevron />
+      </button></li>
+    </ul>
+  );
+  const enTeteBadges = (
+    <div className="mo-section-tete">
+      <h2 className="mo-h2">Mes badges</h2>
+      <span>{obtenus} sur {badges.length} {pluriel(obtenus, 'obtenu')}</span>
+    </div>
   );
 
-  // Ordinateur : identité en tête, trois cartes (chiffres, Battle, compte),
-  // puis tous les badges avec ce qu'il faut faire pour les obtenir.
-  if (isDesktop) {
-    return (
-      <div className="app profile-page">
-        <div className="pf-content pf-desk">
-          <PageIntro
-            title={prenom || 'Toi'}
-            sub={`Niveau ${level}${levelLabel ? ` · ${levelLabel}` : ''}`}
-            mascot={heroPose}
-            className="pf-intro"
-          >
-            <div className="pf-intro-xp">
-              <div
-                className="rv-bar rv-bar--tall pf-intro-bar"
-                role="progressbar"
-                aria-label={`${xpInLvl} XP sur ${XP_PAR_NIVEAU} pour passer au niveau ${level + 1}`}
-                aria-valuemin={0}
-                aria-valuemax={XP_PAR_NIVEAU}
-                aria-valuenow={xpInLvl}
-              >
-                <div className="rv-bar-fill rv-bar-fill--orange" style={{ width: `${fillPct}%` }} />
-              </div>
-              <p className="pf-xp-sub">{xpInLvl} / {XP_PAR_NIVEAU} XP</p>
+  const fenetres = (
+    <>
+      {detail && (() => {
+        const { b, i } = detail;
+        const [fond, tranche] = PASTELS[i % PASTELS.length];
+        const c = conseil(b);
+        return (
+          <Feuille titre={b.label} onClose={() => setDetail(null)} grand={isDesktop}>
+            <div className="mo-detail">
+              <span className={`mo-detail-rond${b.locked ? ' is-verrou' : ''}`} style={{ background: fond, boxShadow: `0 6px 0 ${tranche}` }} aria-hidden="true"><Mascot pose={b.pose} size={130} alt="" /></span>
+              <span className="mo-sur mo-sur--doux">Badge {i + 1} sur {badges.length}</span>
+              <h2 className="mo-detail-nom">{b.label}</h2>
+              <p className="mo-detail-txt">{b.hint}</p>
+              {b.locked ? (
+                <>
+                  <div className="mo-detail-prog">
+                    <div className="mo-detail-prog-haut"><b>Ta progression</b><b>{b.current} / {b.target}</b></div>
+                    <div className="mo-barre" role="progressbar" aria-label={`${b.label} : ${b.current} sur ${b.target}`} aria-valuemin={0} aria-valuemax={b.target} aria-valuenow={b.current}>
+                      <i style={{ width: `${Math.round(b.current / b.target * 100)}%` }} />
+                    </div>
+                    <span>{c.texte}</span>
+                  </div>
+                  <button type="button" className="mo-btn" onClick={() => navigate(c.to)}>{c.action}</button>
+                </>
+              ) : (
+                <>
+                  <span className="mo-obtenu"><Coche taille={12} />Obtenu</span>
+                  <button type="button" className="mo-btn mo-btn--creme" onClick={() => setDetail(null)}>Fermer</button>
+                </>
+              )}
             </div>
-          </PageIntro>
-
-          <div className="pf-desk-row">
-            <section className="rv-card rv-card--padded pf-desk-card" aria-labelledby="pf-desk-chiffres">
-              <div className="pf-desk-card-head">
-                <h2 id="pf-desk-chiffres" className="pf-desk-label">Tes chiffres</h2>
-                <Link to="/progres" className="pf-desk-more">Mes progrès ›</Link>
-              </div>
-              <div className="pf-desk-stats">
-                <div className="pf-stat">
-                  <span className="pf-stat-icon pf-stat-icon--orange" aria-hidden="true"><FlameIcon /></span>
-                  <span className="pf-stat-value">{streak}</span>
-                  <span className="pf-stat-label">{streak > 1 ? 'jours de suite' : 'jour de suite'}</span>
-                </div>
-                <div className="pf-stat">
-                  <span className="pf-stat-icon pf-stat-icon--violet" aria-hidden="true"><BookIcon /></span>
-                  <span className="pf-stat-value">{allLessons.length}</span>
-                  <span className="pf-stat-label">{allLessons.length > 1 ? 'leçons' : 'leçon'}</span>
-                </div>
-                <div className="pf-stat">
-                  <span className="pf-stat-icon pf-stat-icon--green" aria-hidden="true"><BoltIcon /></span>
-                  <span className="pf-stat-value">{allRevisions.length}</span>
-                  <span className="pf-stat-label">{allRevisions.length > 1 ? 'révisions' : 'révision'}</span>
-                </div>
-              </div>
-            </section>
-
-            <Link
-              to="/battle"
-              className="rv-card rv-card--padded rv-card--link pf-desk-card pf-desk-battle"
-              aria-label={battle ? `Battle : ${battle.aura} aura` : 'Battle : défier quelqu\'un en direct'}
-            >
-              <span className="pf-desk-card-head">
-                <span className="pf-desk-label">Battle</span>
-                <span className="pf-desk-more" aria-hidden="true">›</span>
-              </span>
-              <span className="pf-desk-battle-body">
-                <span className="pf-desk-battle-mascot"><BattleMascot pose={battle ? 'aura' : 'garde'} size={68} glow={!!battle} glowIntensity={0.6} alt="" aria-hidden="true" /></span>
-                <span className="pf-desk-battle-text">
-                  {battle ? (
-                    <>
-                      <span className="pf-desk-battle-value">{battle.aura} <small>aura</small></span>
-                      <span className="pf-desk-battle-sub">
-                        {battle.jouees
-                          ? `${battle.jouees} battle${battle.jouees > 1 ? 's' : ''} · ${battle.gagnees} gagnée${battle.gagnees > 1 ? 's' : ''}`
-                          : 'Pas encore de battle'}
-                      </span>
-                    </>
-                  ) : (
-                    <>
-                      <span className="pf-desk-battle-title">Défie quelqu'un</span>
-                      <span className="pf-desk-battle-sub">En direct, sur un chapitre de ton programme</span>
-                    </>
-                  )}
-                </span>
-              </span>
-            </Link>
-
-            <section className="rv-card rv-card--padded pf-desk-card" aria-labelledby="pf-desk-compte">
-              <div className="pf-desk-card-head">
-                <h2 id="pf-desk-compte" className="pf-desk-label">Compte</h2>
-              </div>
-              <div className="pf-desk-compte">
-                {ACCOUNT_ITEMS.filter(it => !isGuest || it.id !== 'profil').map(it => (
-                  <button key={it.id} type="button" className="pf-desk-compte-row" onClick={() => onAccountClick(it.id)}>
-                    <span className="rv-icon-square pf-account-icon" aria-hidden="true">{it.icon}</span>
-                    <span className="pf-account-label">{it.label}</span>
-                    <span className="pf-account-arrow" aria-hidden="true">›</span>
-                  </button>
+          </Feuille>
+        );
+      })()}
+      {edition && (
+        <Feuille titre="Modifier le profil" onClose={() => setEdition(null)} grand={isDesktop}>
+          <div className="mo-edition">
+            <div className="mo-edition-tete"><span className="mo-edition-rond" aria-hidden="true"><Mascot pose="writing" size={44} alt="" /></span><h2>Modifier le profil</h2></div>
+            <label className="mo-champ-titre" htmlFor="mo-prenom">Ton prénom</label>
+            <input id="mo-prenom" className="mo-input" value={edition.prenom} maxLength={20} placeholder="Ton prénom"
+              onChange={e => setEdition(x => ({ ...x, prenom: e.target.value }))} />
+            <span className="mo-champ-titre">Ta classe</span>
+            {(edition.niveau?.cycle ?? 'college') === 'college' ? (
+              <div className="mo-classes" role="group" aria-label="Ta classe">
+                {CLASSES_COLLEGE.map(c => (
+                  <button key={c} type="button" className={`mo-classe-choix${edition.niveau?.classe === c ? ' is-choisie' : ''}`} aria-pressed={edition.niveau?.classe === c}
+                    onClick={() => setEdition(x => ({ ...x, niveau: { cycle: 'college', classe: c, specialites: [], filiere: null } }))}>{classeCourte(c)}</button>
                 ))}
               </div>
-            </section>
+            ) : <LevelSelector value={edition.niveau} onChange={v => setEdition(x => ({ ...x, niveau: v }))} />}
+            <p className="mo-note">Ton programme suit ta classe. Tes leçons et tes badges restent.</p>
+            {erreur && <p className="mo-erreur" role="alert">{erreur}</p>}
+            <button type="button" className="mo-btn" onClick={enregistrer} disabled={enregistrement || !edition.prenom.trim()}>{enregistrement ? 'Enregistrement…' : 'Enregistrer'}</button>
+            <button type="button" className="mo-lien mo-lien--centre" onClick={() => setEdition(null)}>Annuler</button>
           </div>
+        </Feuille>
+      )}
+    </>
+  );
+  const deco = (
+    <>
+      <span className="ch-deco ch-deco--a" aria-hidden="true" />
+      <span className="ch-deco ch-deco--b" aria-hidden="true" />
+      <span className="ch-point" aria-hidden="true" />
+      <span className="ch-grain" aria-hidden="true" />
+    </>
+  );
+  const racine = `app app--no-halo ch-page mo-page${isDesktop ? ' app--large ch-page--large mo-page--large' : ''}`;
 
-          {hasRevizPlus && !isGuest && <RevizPlusCard className="rp-card--wide" />}
-
-          <section className="pf-desk-section" aria-labelledby="pf-desk-badges">
-            <div className="pf-desk-head">
-              <h2 id="pf-desk-badges" className="pf-desk-title">Badges</h2>
-              <span className="pf-desk-head-note">{unlocked} sur {badges.length} obtenus</span>
+  // ── Ordinateur ──
+  if (isDesktop) {
+    return (
+      <div className={racine} style={varsTeinte(TEINTES.lavande)}>
+        <div className="content mo-defile">
+          <div className="ch-hero mo-hero">
+            {deco}
+            <div className="mo-hero-grille">
+              <div className="mo-hero-gauche">{identite}{carteNiveau}{essai}</div>
+              {reviz}
             </div>
-            {next && <NextBadgeCard next={next} />}
-            <ul className="pf-desk-badges">
-              {badges.map(b => <BadgeTile key={b.id} badge={b} desktop />)}
-            </ul>
+          </div>
+          <div className="mo-rangee">
+            <div className="mo-carte mo-carte--bloc">
+              <h2 className="mo-h3">Mes chiffres</h2>
+              {chiffres}
+              {progres}
+            </div>
+            {carteBattle}
+            <div className="mo-carte mo-carte--bloc">
+              <h2 className="mo-h3">Mon compte</h2>
+              {compte}
+              {revizPlus}
+            </div>
+          </div>
+          <section className="mo-section">
+            {enTeteBadges}
+            <div className={`mo-badges-zone${prochain ? '' : ' mo-badges-zone--seule'}`}>
+              {carteProchain}
+              <div className="mo-carte mo-badges-carte">{grille}</div>
+            </div>
           </section>
         </div>
-
-        {sheet}
+        {fenetres}
       </div>
     );
   }
 
+  // ── Téléphone ──
   return (
-    <div className="app app--no-halo profile-page pf-v2">
-      <div className="pf-content">
-        {/* Refonte validée : aplat lilas, Réviz qui monte de niveau, XP en barre d'encre */}
-        <div className="pf-hero">
-          <span className="pf-hero-rond" aria-hidden="true" />
-          <span className="pf-hero-grain" aria-hidden="true" />
-          <Pantin size={200} expression="fier" entree="saut" repli="hello" className="pf-hero-pantin" label="Réviz" />
-          <button type="button" className="pf-hero-reglages" onClick={() => navigate('/reglages')} aria-label="Réglages">
-            <GearIcon />
-          </button>
-          <div className="pf-hero-txt">
-            <h1 className="pf-hero-nom">{prenom || 'Toi'}</h1>
-            <p className="pf-hero-sub">{levelLabel || 'Collège'}</p>
-          </div>
-          <div className="pf-hero-xp">
-            <div className="pf-hero-niveau"><span>Niveau {level}</span><span>{xpInLvl} / {XP_PAR_NIVEAU} XP</span></div>
-            <div
-              className="pf-hero-barre"
-              role="progressbar"
-              aria-label={`${xpInLvl} XP sur ${XP_PAR_NIVEAU} pour passer au niveau ${level + 1}`}
-              aria-valuemin={0}
-              aria-valuemax={XP_PAR_NIVEAU}
-              aria-valuenow={xpInLvl}
-            >
-              <span style={{ width: `${fillPct}%` }} />
-            </div>
-            <p className="pf-hero-reste">{XP_PAR_NIVEAU - xpInLvl} XP avant le niveau {level + 1}</p>
-          </div>
-        </div>
-
-        <GuestBanner />
-
-        <section className="pf-stats3" aria-label="Tes chiffres">
-          <div className="pf-stat3"><span className="pf-stat3-val"><FlameIcon />{streak}</span><span className="pf-stat3-lab">{streak > 1 ? 'jours de suite' : 'jour de suite'}</span></div>
-          <div className="pf-stat3"><span className="pf-stat3-val">{allRevisions.length}</span><span className="pf-stat3-lab">{allRevisions.length > 1 ? 'révisions' : 'révision'}</span></div>
-          <div className="pf-stat3"><span className="pf-stat3-val">{allLessons.length}</span><span className="pf-stat3-lab">{allLessons.length > 1 ? 'leçons' : 'leçon'}</span></div>
+    <div className={racine} style={varsTeinte(TEINTES.lavande)}>
+      <div className="content mo-defile">
+        <div className="ch-hero mo-hero">{deco}{identite}{reviz}</div>
+        {carteNiveau}
+        {essai}
+        <section className="mo-section">{chiffres}{progres}</section>
+        <section className="mo-section">
+          {enTeteBadges}
+          {carteProchain}
+          {grille}
         </section>
-
-        <Link to="/progres" className="rv-card rv-rows pf-progres-link">
-          <span className="rv-row">
-            <span className="rv-row-avatar" aria-hidden="true"><StatsIcon /></span>
-            <span className="rv-row-text">
-              <span className="rv-row-title">Mes progrès</span>
-              <span className="rv-row-sub">Matières, mémoire, jours de révision</span>
-            </span>
-            <span className="rv-row-arrow" aria-hidden="true">›</span>
-          </span>
-        </Link>
-
-        <section className="pf-section">
-          <header className="pf-section-header">
-            <h2 className="pf-section-title">Badges</h2>
-            <span className="pf-badges-count">{unlocked} sur {badges.length}</span>
-          </header>
-          <div className="pf-badges-rail">
-            {badges.map(b => <BadgeTile key={b.id} badge={b} onOpen={openBadge} />)}
-          </div>
+        <section className="mo-section">
+          <h2 className="mo-h2">Battle</h2>
+          {carteBattle}
+          {revizPlus}
         </section>
-
-        {hasRevizPlus && !isGuest && <RevizPlusCard />}
-
-        {/* Badges */}
-        {battle && (
-          <Link to="/battle" className="rv-card rv-card--link pf-battle-card" aria-label={`Battle : ${battle.aura} aura`}>
-            <BattleMascot pose="aura" size={64} glow glowIntensity={0.6} alt="" aria-hidden="true" />
-            <span className="pf-battle-texte">
-              <span className="pf-battle-aura">{battle.aura} aura</span>
-              <span className="pf-battle-sous">
-                {battle.jouees
-                  ? `${battle.jouees} battle${battle.jouees > 1 ? 's' : ''} · ${battle.gagnees} gagnée${battle.gagnees > 1 ? 's' : ''}`
-                  : 'Pas encore de battle'}
-              </span>
-            </span>
-            <span className="pf-battle-fleche" aria-hidden="true">›</span>
-          </Link>
-        )}
-
-        {next && <NextBadgeCard next={next} />}
-
-        {/* Compte */}
-        <section className="pf-section">
-          <h2 className="pf-section-title">Compte</h2>
-          {/* Des rangées dans une carte blanche (grammaire §4) */}
-          <div className="rv-card rv-rows">
-            {ACCOUNT_ITEMS.filter(it => !isGuest || it.id !== 'profil').map(it => (
-              <button
-                key={it.id}
-                type="button"
-                className="rv-row"
-                onClick={() => onAccountClick(it.id)}
-              >
-                <span className="rv-row-avatar" aria-hidden="true">{it.icon}</span>
-                <span className="rv-row-text"><span className="rv-row-title">{it.label}</span></span>
-                <span className="rv-row-arrow" aria-hidden="true">›</span>
-              </button>
-            ))}
-          </div>
+        <section className="mo-section">
+          <h2 className="mo-h2">Mon compte</h2>
+          <div className="mo-carte">{compte}</div>
         </section>
       </div>
-
-      {sheet}
-
+      {fenetres}
       <BottomNav />
     </div>
   );

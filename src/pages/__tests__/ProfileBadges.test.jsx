@@ -40,40 +40,38 @@ function seed() {
   ]))
 }
 
-describe('<Profile /> badges sur mobile', () => {
+describe('<Profile /> — Moi, badges sur téléphone', () => {
   beforeEach(() => { localStorage.clear(); nav.mockClear() })
 
-  it('sans activité : tout est verrouillé et le prochain badge est annoncé', () => {
+  it('débutant : Réviz accueille, tout est à faire et le prochain badge est annoncé', () => {
     render(<MemoryRouter><Profile /></MemoryRouter>)
-    expect(screen.getByText('0/18')).toBeInTheDocument()
+    expect(screen.getByRole('heading', { level: 1, name: 'Léa' })).toBeInTheDocument()
+    expect(screen.getByText(/^0 sur \d+ obtenu$/)).toBeInTheDocument()
     expect(screen.getByText('Prochain badge')).toBeInTheDocument()
     expect(screen.getByRole('button', { name: 'Lanceur : 1re leçon ouverte (0 / 1)' })).toBeInTheDocument()
-    expect(screen.getByRole('button', { name: /Voir les 10 autres/ })).toBeInTheDocument()
+    expect(screen.getByText(/Mode essai/)).toBeInTheDocument()
   })
 
   it('un badge obtenu se distingue, et le toucher ouvre son détail', () => {
     seed()
     render(<MemoryRouter><Profile /></MemoryRouter>)
-    expect(screen.getByText('2/18')).toBeInTheDocument()
     const lanceur = screen.getByRole('button', { name: 'Lanceur : obtenu' })
-    expect(lanceur.className).not.toContain('pf-badge--locked')
+    expect(lanceur.className).not.toContain('is-verrou')
     fireEvent.click(lanceur)
-    const sheet = screen.getByRole('complementary', { name: 'Lanceur' })
-    expect(within(sheet).getByText('1re leçon ouverte')).toBeInTheDocument()
-    expect(within(sheet).getByText('Obtenu')).toBeInTheDocument()
+    const feuille = screen.getByRole('dialog', { name: 'Lanceur' })
+    expect(within(feuille).getByText('1re leçon ouverte')).toBeInTheDocument()
+    expect(within(feuille).getByText('Obtenu')).toBeInTheDocument()
   })
 
-  it('un badge verrouillé montre sa condition et sa progression', () => {
+  it('un badge pas encore obtenu montre sa condition et sa progression', () => {
     seed()
     render(<MemoryRouter><Profile /></MemoryRouter>)
     const etudiant = screen.getByRole('button', { name: 'Étudiant : 5 leçons ouvertes (3 / 5)' })
-    expect(etudiant.className).toContain('pf-badge--locked')
+    expect(etudiant.className).toContain('is-verrou')
     fireEvent.click(etudiant)
-    const sheet = screen.getByRole('complementary', { name: 'Étudiant' })
-    expect(within(sheet).getByText('5 leçons ouvertes')).toBeInTheDocument()
-    expect(within(sheet).getByRole('progressbar', { name: 'Étudiant : 3 sur 5' })).toHaveAttribute('aria-valuenow', '3')
-    expect(within(sheet).getByText('3 / 5')).toBeInTheDocument()
-    fireEvent.click(within(sheet).getByRole('button', { name: 'Fermer' }))
-    expect(screen.getByRole('complementary', { hidden: true })).toHaveAttribute('aria-hidden', 'true')
+    const feuille = screen.getByRole('dialog', { name: 'Étudiant' })
+    expect(within(feuille).getByRole('progressbar', { name: 'Étudiant : 3 sur 5' })).toHaveAttribute('aria-valuenow', '3')
+    fireEvent.click(within(feuille).getByRole('button', { name: 'Fermer' }))
+    expect(screen.queryByRole('dialog')).toBeNull()
   })
 })
