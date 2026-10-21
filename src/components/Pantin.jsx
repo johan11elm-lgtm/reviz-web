@@ -115,6 +115,7 @@ export const Pantin = forwardRef(function Pantin(
   exprRef.current = expression;
   const entreeRef = useRef(entree);
   const entreeFinie = useRef(onEntree);
+  const enEntree = useRef(false);
   entreeFinie.current = onEntree;
 
   useEffect(() => {
@@ -131,16 +132,20 @@ export const Pantin = forwardRef(function Pantin(
       a = window.RevizAnim.creer(rig, { gsap, calme });
       anim.current = a;
       a.demarrerVie();
-      a.expression(versMoteur(exprRef.current));
+      const g = entreeRef.current;
+      const chute = [].concat(g)[0] === 'chute' || [].concat(g)[0]?.nom === 'chute';
+      // Pendant la chute, pas d'humeur : ses petits sauts (déterminé…) partent de la hauteur
+      // du moment et le feraient remonter après l'atterrissage. Elle arrive à la fin du geste.
+      if (!chute) a.expression(versMoteur(exprRef.current));
       // Hors de l'écran (page qui défile) : le pantin se met en pause, il ne coûte plus rien.
       if ('IntersectionObserver' in window && boite.current) {
         obs = new IntersectionObserver(([v]) => (v.isIntersecting ? a.reprendre() : a.pause()));
         obs.observe(boite.current);
       }
-      const g = entreeRef.current;
-      const fini = () => entreeFinie.current?.();
+      const fini = () => { enEntree.current = false; entreeFinie.current?.(); };
       // La chute part tout de suite (il apparaît déjà en l'air) ; les autres gestes attendent un peu.
-      if ([].concat(g)[0]?.nom === 'chute' || [].concat(g)[0] === 'chute') jouerGeste(a, g, () => exprRef.current, fini);
+      enEntree.current = chute;
+      if (chute) jouerGeste(a, g, () => exprRef.current, fini);
       else if (g) appels.push(gsap.delayedCall(0.35, () => jouerGeste(a, g, () => exprRef.current, fini)));
       else fini();
       setPret(true);
@@ -156,7 +161,7 @@ export const Pantin = forwardRef(function Pantin(
   }, []);
 
   useEffect(() => {
-    if (pret) anim.current?.expression(versMoteur(expression));
+    if (pret && !enEntree.current) anim.current?.expression(versMoteur(expression));
   }, [expression, pret]);
 
   useImperativeHandle(ref, () => ({
