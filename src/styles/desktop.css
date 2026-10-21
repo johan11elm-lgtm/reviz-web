@@ -335,24 +335,6 @@
   }
   html:not(.native) .analyse-page .analyse-avancement-row b { color: var(--text-primary); font-weight: 700; }
 
-  /* ── Résumé : colonne de lecture + rail « à retenir » qui suit ── */
-  html:not(.native) .resume-page .resume-content {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) var(--rail-w);
-    grid-auto-rows: max-content;
-    column-gap: var(--grid-gap);
-    align-items: start;
-    align-content: start;
-  }
-  html:not(.native) .resume-page .resume-content > * { grid-column: 1; }
-  html:not(.native) .resume-page .resume-content > .rv-page-intro { grid-column: 1 / -1; }
-  html:not(.native) .resume-page .resume-retenir {
-    grid-column: 2;
-    grid-row: 2 / span 80;
-    position: sticky;
-    top: 8px;
-  }
-
   /* ── Flashcards et Quiz : scène centrée, choix sur deux colonnes ── */
   html:not(.native) .flashcards-page .flashcards-card-area {
     width: 100%;

@@ -1,5 +1,5 @@
 import { ResumeIcon, FlashcardsIcon, MindmapIcon, QuizIcon } from '../components/Icons';
-import { useState, useEffect, useLayoutEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { BottomNav } from '../components/BottomNav';
@@ -15,11 +15,14 @@ import { PremiumModal } from '../components/PremiumModal';
 import { MissingLessonState } from '../components/MissingLessonState';
 import { Pantin } from '../components/Pantin';
 import { BulleReviz } from '../components/reviz/BulleReviz';
+import { Parcours } from '../components/reviz/Parcours';
+import { teinteMatiere, varsTeinte as variablesTeinte } from '../utils/teinteMatiere';
 import { getScanStatus } from '../services/scanLimitService';
 import { track, scanErrorCode } from '../services/statsService';
 import { subjectInfo, subjectMascot } from '../utils/subjects';
 import { resumeReadingMinutes } from '../utils/resume';
 import { nextStep } from '../utils/nextStep';
+import '../components/reviz/HerosMatiere.css';
 import './Analyse.css';
 
 // ─── Mock de fallback ────────────────────────────────────────────────
@@ -74,23 +77,6 @@ function lessonProgress(lessonId, total) {
   };
 }
 
-// ─── Teinte du héros selon la matière (handoff Chapitre du 21/10) ─────
-// fond, bulles, point d'accent, rond intérieur (case en cours, numéros de « L'essentiel »)
-// et ombre teintée. Maths en lavande ; pêche comme Programme ; menthe et rose.
-const TEINTES = {
-  lavande: { fond: '#E4E0FA', bulle: '#C9C2F2', point: '#FFB37A', interieur: '#E4E0FA', ombre: 'rgba(90,70,160,.13)' },
-  peche:   { fond: '#FFB37A', bulle: '#FFC596', point: '#C9C2F2', interieur: '#FFE6D2', ombre: 'rgba(150,70,20,.14)' },
-  menthe:  { fond: '#DCF5E6', bulle: '#B9E8C9', point: '#FFB37A', interieur: '#DCF5E6', ombre: 'rgba(30,110,70,.13)' },
-  rose:    { fond: '#FFD9E4', bulle: '#FFC2D4', point: '#C9C2F2', interieur: '#FFD9E4', ombre: 'rgba(160,60,90,.13)' },
-};
-function teinteMatiere(subject = '') {
-  const s = subject.toLowerCase();
-  if (/math/.test(s)) return TEINTES.lavande;
-  if (/fran|philo|angl|espa|allem|langue|lv|latin/.test(s)) return TEINTES.rose;
-  if (/svt|bio|vie|phys|chim|techno|nsi/.test(s)) return TEINTES.menthe;
-  return TEINTES.peche;
-}
-
 const Fleche = ({ taille = 18 }) => (
   <svg width={taille} height={taille} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
 );
@@ -99,71 +85,6 @@ const Coche = ({ taille = 13 }) => (
 );
 const pluriel = (n, mot) => `${n} ${mot}${n > 1 ? 's' : ''}`;
 const POSE_ETAPE = { '/resume': 'reading', '/flashcards': 'flashcard', '/quiz': 'quiz' };
-
-// Courbe qui passe par chaque point, points de contrôle à mi-chemin en x (comme Programme).
-function courbe(pts) {
-  let d = `M${pts[0][0]} ${pts[0][1]}`;
-  for (let i = 1; i < pts.length; i++) {
-    const [x0, y0] = pts[i - 1], [x1, y1] = pts[i], m = (x0 + x1) / 2;
-    d += ` C${m} ${y0} ${m} ${y1} ${x1} ${y1}`;
-  }
-  return d;
-}
-
-/**
- * Ton parcours : Résumé → Flashcards → Quiz sur une petite route, chaque case avec la mascotte
- * de son format (faite, en cours ou à faire). Chaque case s'ouvre à tout moment.
- */
-function Parcours({ etapes, grand }) {
-  const boite = useRef(null);
-  const [l, setL] = useState(grand ? 872 : 335);
-  useLayoutEffect(() => {
-    const el = boite.current;
-    if (!el) return;
-    const mesure = () => setL(el.clientWidth);
-    mesure();
-    const ro = new ResizeObserver(mesure);
-    ro.observe(el);
-    return () => ro.disconnect();
-  }, []);
-  const D = grand
-    ? { h: 230, ys: [74, 112, 74], route: 36, fait: 76, cours: 100, label: 160 }
-    : { h: 214, ys: [62, 92, 62], route: 30, fait: 66, cours: 88, label: 110 };
-  // Les cases à 15,5 %, 50 % et 84,5 % de la largeur, comme dans la maquette.
-  const pts = etapes.map((_, i) => [Math.round(l * [0.155, 0.5, 0.845][i]), D.ys[i]]);
-  const dernierFait = etapes.reduce((a, e, i) => (e.statut === 'fait' ? i : a), -1);
-  const route = courbe(pts);
-  const faite = dernierFait > 0 ? courbe(pts.slice(0, dernierFait + 1)) : '';
-  return (
-    <div className="ch-parcours" ref={boite} style={{ height: D.h }}>
-      <svg width={l} height={D.h} className="ch-route" aria-hidden="true">
-        <path d={route} transform="translate(0 7)" fill="none" stroke="#A0501A" strokeOpacity=".10" strokeWidth={D.route} strokeLinecap="round" />
-        <path d={route} fill="none" stroke="#fff" strokeWidth={D.route} strokeLinecap="round" />
-        {faite && <path d={faite} fill="none" stroke="#DCF5E6" strokeWidth={D.route} strokeLinecap="round" />}
-        <path d={route} fill="none" stroke="#C25407" strokeOpacity=".45" strokeWidth="3" strokeDasharray="2 10" strokeLinecap="round" />
-      </svg>
-      {etapes.map((e, i) => {
-        const [x, y] = pts[i];
-        const taille = e.statut === 'cours' ? D.cours : D.fait;
-        return (
-          <div key={e.id}>
-            <Link to={e.to} className={`ch-case ch-case--${e.statut}`} style={{ left: x - taille / 2, top: y - taille / 2, width: taille, height: taille }}
-              aria-label={`${e.nom} : ${e.meta}${e.statut === 'fait' ? ', fait' : ''}`}>
-              <span className="ch-case-rond">
-                <Mascot pose={e.pose} size={Math.round(taille * (e.statut === 'cours' ? 0.72 : 0.7))} alt="" aria-hidden="true" />
-              </span>
-              {e.statut === 'fait' && <span className="ch-case-coche"><Coche /></span>}
-            </Link>
-            <span className="ch-case-label" style={{ left: x - D.label / 2, top: y + taille / 2 + 10, width: D.label }} aria-hidden="true">
-              <span className="ch-case-nom">{e.nom}</span>
-              <span className={`ch-case-meta ch-case-meta--${e.statut}`}>{e.meta}</span>
-            </span>
-          </div>
-        );
-      })}
-    </div>
-  );
-}
 
 // ─── Écran de chargement ─────────────────────────────────────────────
 const STEPS = [
@@ -344,7 +265,7 @@ export default function Analyse() {
   const carteMentaleVue = aOuvert('mindmap');
 
   const teinte = teinteMatiere(displayLesson.subject);
-  const varsTeinte = { '--ch-fond': teinte.fond, '--ch-bulle': teinte.bulle, '--ch-point': teinte.point, '--ch-interieur': teinte.interieur, '--ch-ombre': teinte.ombre };
+  const varsTeinte = variablesTeinte(teinte);
   const retour = () => (window.history.state?.idx > 0 ? navigate(-1) : navigate(fromProgramme ? '/programme' : '/cours'));
   const points = displayLesson.keyPoints?.length ? displayLesson.keyPoints : (displayLesson.excerpt ? [displayLesson.excerpt] : []);
   const [parle, setParle] = useState(false);
