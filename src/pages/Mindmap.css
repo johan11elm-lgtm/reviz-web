@@ -1,445 +1,359 @@
-/* CSS scoped to page wrapper — see scripts/scope-page-css.py */
-/* Wrapper: .mindmap-page */
+/* Carte mentale (handoff Claude Design du 21/10) : héros teinté, branches en ronds de plateau,
+ * panneau de la branche ouverte (du bas sur téléphone, à côté sur ordinateur), écran de fin. */
+.cm-page { background: #F8EFE7; color: var(--ch-encre); }
+.cm-ecran { position: relative; padding-bottom: calc(110px + env(safe-area-inset-bottom, 0px)); }
 
-/* La page vit dans le shell .app comme Flashcards/Quiz/Résumé :
- * PageHeader + ai-badge en haut, canvas explorable au centre (flex:1),
- * bottom sheet de détail par-dessus. */
+/* ── Héros (téléphone) ── */
+.cm-page .cm-hero { padding-bottom: 76px; }
+.cm-ligne-haut { position: relative; z-index: 2; display: flex; align-items: center; gap: 10px; }
+.cm-retour { flex: none; width: 44px; height: 44px; padding: 0; justify-content: center; }
+.cm-etat { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.cm-etat-titre { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; opacity: .7; white-space: nowrap; }
+.cm-etat-ligne { display: flex; align-items: center; gap: 8px; margin-top: 3px; font-size: 13px; font-weight: 700; white-space: nowrap; }
+.cm-segments { display: flex; gap: 4px; }
+.cm-segments i { width: 16px; height: 6px; border-radius: 999px; background: rgba(27,26,35,.15); transition: background .3s; }
+.cm-segments i.is-vue { background: #34C77B; }
 
-.mindmap-page .mindmap-ai-row {
-  display: flex;
-  justify-content: center;
-  padding: 2px 0 8px;
-}
-
-/* ── Scène : la carte explorable et, par-dessus, la vue d'une branche ── */
-.mindmap-page .mindmap-stage {
-  position: relative;
-  flex: 1;
-  min-height: 0;
-}
-
-.mindmap-page .mindmap-canvas {
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
-  touch-action: none;
-}
-
-/* Grille pointillée douce, comme un cahier */
-.mindmap-page .mindmap-canvas::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image: radial-gradient(circle, var(--border) 1px, transparent 1px);
-  background-size: 26px 26px;
-  opacity: 0.32;
-  pointer-events: none;
-}
-
-/* Hint bas */
-.mindmap-page .canvas-hint {
-  position: absolute;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 3;
-  pointer-events: none;
-}
-.mindmap-page .canvas-hint-text {
-  display: inline-block;
-  background: var(--bg-card);
-  border: 1px solid var(--border-subtle);
-  box-shadow: var(--shadow-card);
-  border-radius: var(--radius-pill);
-  padding: 10px 16px;
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--text-secondary);
-  white-space: nowrap;
-  animation: hintFloat 2.6s ease-in-out infinite;
-}
-@keyframes hintFloat {
-  0%, 100% { transform: translateY(0); }
-  50%      { transform: translateY(-4px); }
-}
-
-/* Bouton recentrer — même vocabulaire que les boutons circulaires du header */
-.mindmap-page .mindmap-reset {
-  position: absolute;
-  bottom: 20px;
-  right: 16px;
-  z-index: 10;
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
-  background: var(--bg-card);
-  border: 1px solid var(--border-subtle);
-  box-shadow: var(--shadow-card);
-  font-size: 16px;
+.cm-pilule-teste {
+  flex: none;
+  height: 36px;
   display: flex;
   align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  color: var(--text-primary);
-  font-family: inherit;
-  transition: transform 0.12s ease, background 0.15s ease;
-}
-.mindmap-page .mindmap-reset:active { transform: scale(0.94); }
-
-/* Bouton terminer (slot droit du PageHeader) */
-.mindmap-page .mindmap-done-btn {
-  color: var(--text-muted);
-  transition: background 0.2s ease, color 0.2s ease, transform 0.12s ease;
-}
-.mindmap-page .mindmap-done-btn:disabled {
-  opacity: 0.55;
-  cursor: default;
-}
-.mindmap-page .mindmap-done-btn.ready {
-  background: var(--accent-green-strong);
-  border-color: transparent;
-  color: #fff;
-  box-shadow: 0 4px 14px rgba(23, 143, 82, 0.35);
-}
-
-/* ── Monde transformable ─────────────────────────────────────────── */
-.mindmap-page .mindmap-world {
-  position: absolute;
-  inset: 0;
-  transform-origin: center center;
-  will-change: transform;
-  overflow: visible;
-}
-
-.mindmap-page .mindmap-svg {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-  pointer-events: none;
-  overflow: visible;
-}
-
-/* Halo doux sous chaque connecteur, point d'arrivée sur la carte */
-.mindmap-page .mindmap-link-glow { opacity: 0.12; }
-.mindmap-page .mindmap-link-end  { opacity: 0.95; }
-
-/* Tracé des connecteurs à l'entrée (pathLength=1 posé dans le JSX) */
-.mindmap-page .mindmap-link--draw {
-  stroke-dasharray: 1;
-  stroke-dashoffset: 1;
-  animation: linkDraw 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-}
-@keyframes linkDraw {
-  to { stroke-dashoffset: 0; }
-}
-
-/* ── Nœud central — squircle, mascotte de la matière, titre entier ─ */
-.mindmap-page .center-node {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%) scale(0.85);
-  opacity: 0;
-  background: var(--bg-card);
-  border: 1px solid var(--border-subtle);
-  border-radius: 40px;
-  width: 144px;
-  height: 144px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
-  z-index: 2;
-  text-align: center;
-  box-shadow: var(--shadow-pop);
-  transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease;
-}
-.mindmap-page .center-node.center-in {
-  transform: translate(-50%, -50%) scale(1);
-  opacity: 1;
-}
-/* Anneau qui respire derrière le nœud (coupé par prefers-reduced-motion global) */
-.mindmap-page .cn-ring {
-  position: absolute;
-  inset: -12px;
-  border-radius: 50px;
-  border: 2px solid var(--accent-orange);
-  opacity: 0.22;
-  pointer-events: none;
-  animation: cnPulse 3.2s ease-in-out infinite;
-}
-@keyframes cnPulse {
-  0%, 100% { transform: scale(1);    opacity: 0.22; }
-  50%      { transform: scale(1.06); opacity: 0.08; }
-}
-.mindmap-page .cn-label {
-  font-family: 'Geist', sans-serif;
-  font-size: 12px;
-  font-weight: 800;
-  letter-spacing: -0.3px;
-  line-height: 1.2;
-  color: var(--text-primary);
+  gap: 8px;
   padding: 0 12px;
-  max-width: 140px;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  overflow-wrap: break-word;
-}
-
-/* ── Cartes-branches — numéro, nombre d'idées, libellé sur deux lignes ── */
-.mindmap-page .branch-node {
-  position: absolute;
-  transform: translate(-50%, -50%);
-  opacity: 0;
-  width: 156px;
-  background: var(--bg-card);
-  border: 1.5px solid var(--border-subtle);
-  border-radius: 18px;
-  padding: 10px 12px 11px;
-  font-family: inherit;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 6px;
-  text-align: left;
+  border: 0;
+  border-radius: 999px;
+  background: #fff;
+  box-shadow: 0 4px 12px var(--ch-ombre);
+  font: 700 13px 'Geist', system-ui, sans-serif;
+  color: var(--ch-encre);
   cursor: pointer;
+  transition: background .2s, color .2s;
+}
+.cm-pilule-teste.is-on { background: #1B1A23; color: #fff; }
+.cm-pilule-teste .cm-interrupteur { order: -1; width: 28px; height: 16px; }
+.cm-pilule-teste .cm-interrupteur i { top: 2px; left: 2px; width: 12px; height: 12px; }
+.cm-pilule-teste .cm-interrupteur.is-on i { left: 14px; }
+
+.cm-interrupteur { position: relative; flex: none; width: 46px; height: 28px; border-radius: 999px; background: #EADBCB; transition: background .2s; }
+.cm-interrupteur.is-on { background: #C25407; }
+.cm-interrupteur i { position: absolute; top: 4px; left: 4px; width: 20px; height: 20px; border-radius: 50%; background: #fff; box-shadow: 0 2px 4px rgba(0,0,0,.15); transition: left .2s; }
+.cm-interrupteur.is-on i { left: 22px; }
+
+/* Réviz et sa bulle */
+.cm-reviz { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; margin-top: 14px; }
+.cm-reviz .cm-bulle { position: relative; margin-bottom: 4px; }
+.cm-reviz .rv-bulle-txt { font-size: 18px; padding: 10px 18px 11px; border-radius: 20px; }
+.cm-reviz .rv-bulle-ligne + .rv-bulle-ligne { font-size: 14px; }
+
+/* Carte « Chapitre », à cheval sur le bas du héros */
+.cm-chapitre {
+  position: relative;
   z-index: 2;
-  user-select: none;
-  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.2s ease, opacity 0.2s ease;
-  box-shadow: var(--shadow-card);
+  margin: -58px 47px 0;
+  padding: 14px 16px;
+  border-radius: 26px;
+  background: #fff;
+  box-shadow: 0 12px 30px rgba(160,80,20,.14);
+  text-align: center;
 }
-
-.mindmap-page .branch-node.branch-in {
-  animation: branchIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-}
-@keyframes branchIn {
-  from { opacity: 0; transform: translate(-50%, -50%) scale(0.7); }
-  to   { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-}
-
-.mindmap-page .branch-node:active { transform: translate(-50%, -50%) scale(0.95); }
-.mindmap-page .branch-node.visited { border-color: var(--branch-color); }
-.mindmap-page .branch-node.selected {
-  transform: translate(-50%, -50%) scale(1.06);
-  box-shadow: var(--shadow-pop);
-  border-color: var(--branch-color);
-}
-
-.mindmap-page .bn-top {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  width: 100%;
-}
-.mindmap-page .bn-index {
-  width: 20px;
-  height: 20px;
-  border-radius: 7px;
-  background: var(--branch-bg);
-  color: var(--branch-color);
-  font-family: 'Geist', sans-serif;
-  font-size: 12px;
-  font-weight: 800;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-.mindmap-page .bn-count {
-  /* Méta, pas un surtitre : en phrase normale (docs/design-grammaire.md §2) */
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--text-muted);
-  white-space: nowrap;
-}
-.mindmap-page .bn-check {
-  margin-left: auto;
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  background: var(--branch-color);
-  color: #fff;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-.mindmap-page .bn-check svg { width: 11px; height: 11px; }
-.mindmap-page .bn-label {
-  font-size: 13.5px;
-  font-weight: 700;
-  letter-spacing: -0.2px;
-  line-height: 1.25;
-  color: var(--text-primary);
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  overflow-wrap: anywhere;
-}
-
-/* ── Vue branche — la branche zoome par-dessus la carte ─────────── */
-.mindmap-page .mindmap-focus {
-  position: absolute;
-  inset: 0;
-  z-index: 15;
-  background: var(--bg-app);
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-  overscroll-behavior: contain;
-  padding: 6px var(--page-gutter) calc(24px + env(safe-area-inset-bottom, 0px));
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  animation: focusIn 0.28s cubic-bezier(0.2, 0.9, 0.3, 1);
-}
-@keyframes focusIn {
-  from { opacity: 0; transform: translateY(16px); }
-  to   { opacity: 1; transform: none; }
-}
-
-.mindmap-page .focus-top {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.mindmap-page .focus-back {
-  background: var(--bg-card);
-  border: 1px solid var(--border-subtle);
-  box-shadow: var(--shadow-card);
-  border-radius: var(--radius-pill);
-  padding: 9px 14px;
-  font-family: inherit;
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--text-primary);
-  cursor: pointer;
-}
-.mindmap-page .focus-back:active { transform: scale(0.96); }
-.mindmap-page .focus-pos {
-  font-size: 12px;
-  font-weight: 700;
-  color: var(--text-muted);
-  letter-spacing: 0.3px;
-}
-
-/* La carte de la branche, agrandie */
-.mindmap-page .focus-card {
-  background: var(--bg-card);
-  border: 1.5px solid var(--branch-color);
-  border-radius: 22px;
-  padding: 16px 18px 18px;
-  box-shadow: var(--shadow-pop);
-}
-.mindmap-page .focus-title {
-  font-family: 'Geist', sans-serif;
+.cm-centre-surtitre { display: block; font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--ch-doux); }
+.cm-chapitre-titre {
+  display: block;
+  margin-top: 3px;
+  font-family: var(--font-display);
   font-size: 22px;
   font-weight: 800;
-  letter-spacing: -0.6px;
-  line-height: 1.15;
-  color: var(--text-primary);
-  margin: 10px 0 6px;
-  overflow-wrap: anywhere;
-}
-.mindmap-page .focus-detail {
-  font-size: 14px;
-  line-height: 1.5;
-  color: var(--text-secondary);
-  margin: 0;
+  line-height: 1.08;
+  letter-spacing: -.03em;
+  text-wrap: balance;
 }
 
-/* Les idées : un petit arbre sous la carte (tronc + brindilles) */
-.mindmap-page .focus-tree {
-  list-style: none;
-  margin: 0;
-  padding: 2px 0 0 24px;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-.mindmap-page .focus-tree::before {
-  content: '';
+/* ── Le plateau : routes et ronds ── */
+.cm-plateau { position: relative; margin-top: 50px; }
+.cm-routes { position: absolute; left: 0; top: 0; overflow: visible; pointer-events: none; }
+.cm-branche {
   position: absolute;
-  left: 9px;
-  top: -10px;
-  bottom: 22px;
-  width: 3px;
-  border-radius: 2px;
-  background: var(--branch-color);
-  opacity: 0.35;
-}
-.mindmap-page .focus-leaf {
-  position: relative;
-  background: var(--branch-bg);
-  color: var(--branch-ink);
-  border-radius: 14px;
-  padding: 12px 14px;
-  font-size: 14px;
-  font-weight: 600;
-  line-height: 1.35;
-  animation: leafIn 0.32s both;
-}
-.mindmap-page .focus-leaf::before {
-  content: '';
-  position: absolute;
-  left: -15px;
-  top: 50%;
-  width: 15px;
-  height: 3px;
-  border-radius: 2px;
-  background: var(--branch-color);
-  opacity: 0.5;
-}
-@keyframes leafIn {
-  from { opacity: 0; transform: translateX(-8px); }
-  to   { opacity: 1; transform: none; }
-}
-
-.mindmap-page .focus-actions {
-  margin-top: auto;
-  padding-top: 10px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-/* ── Écran de fin — overlay dans le shell, comme Flashcards ─────── */
-.mindmap-page .mindmap-end-screen {
-  position: absolute;
-  inset: 0;
-  background: var(--bg-app);
-  border-radius: var(--radius-shell);
-  z-index: 30;
-  justify-content: center;
-  overflow-y: auto;
-}
-
-.mindmap-page .mindmap-end-stats {
-  display: flex;
-  align-items: stretch;
-  gap: 16px;
-  padding: 16px 24px;
-  margin-top: 8px;
-}
-.mindmap-page .mindmap-end-stat {
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  padding: 0 14px;
+  border: 4px solid #fff;
+  border-radius: 50%;
+  background: var(--cm-pastel);
+  box-shadow: 0 6px 0 var(--cm-fonce), 0 14px 24px rgba(160,80,20,.12);
+  font-family: inherit;
+  color: var(--ch-encre);
   text-align: center;
-  flex: 1;
+  cursor: pointer;
+  transition: transform .2s, border-color .2s, box-shadow .2s;
+  animation: cmApparait .45s cubic-bezier(.3,1.4,.5,1) both;
+}
+.cm-branche:nth-of-type(2) { animation-delay: .06s; }
+.cm-branche:nth-of-type(3) { animation-delay: .12s; }
+.cm-branche:nth-of-type(4) { animation-delay: .18s; }
+@keyframes cmApparait { from { opacity: 0; transform: scale(.8); } to { opacity: 1; transform: none; } }
+.cm-branche:active { transform: scale(.96); }
+.cm-branche:focus-visible { outline: 3px solid #1B1A23; outline-offset: 4px; }
+.cm-branche.is-ouverte { border-color: #C25407; box-shadow: 0 6px 0 #8F3E05, 0 14px 24px rgba(160,80,20,.12); }
+.cm-branche-num { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; opacity: .6; }
+.cm-branche-nom { font-family: var(--font-display); font-size: 17px; font-weight: 800; line-height: 1.08; letter-spacing: -.02em; text-wrap: balance; }
+.cm-branche-idees { margin-top: 4px; font-size: 12px; font-weight: 600; color: var(--ch-doux); }
+.cm-branche-coche {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  width: 30px;
+  height: 30px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 3px solid #fff;
+  border-radius: 50%;
+  background: #34C77B;
+  box-shadow: 0 3px 0 #1F8A52;
+  color: #fff;
+  animation: cmApparait .35s cubic-bezier(.3,1.6,.5,1) both;
 }
 
+/* ── Détail d'une branche ── */
+.cm-detail { display: flex; flex-direction: column; min-height: 0; flex: 1; }
+.cm-detail-tete { position: relative; padding: 14px 72px 18px 20px; background: var(--cm-pastel); }
+.cm-poignee { display: block; width: 40px; height: 5px; margin: 0 auto 12px; border-radius: 999px; background: rgba(27,26,35,.18); transform: translateX(26px); }
+.cm-detail-surtitre { display: block; font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; opacity: .7; }
+.cm-detail-nom { margin: 4px 0 0; font-family: var(--font-display); font-size: 28px; font-weight: 800; line-height: 1.05; letter-spacing: -.03em; }
+.cm-fermer {
+  position: absolute;
+  right: 20px;
+  bottom: 18px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 50%;
+  background: #fff;
+  color: var(--ch-encre);
+  cursor: pointer;
+}
+.cm-detail-corps { flex: 1; min-height: 0; overflow-y: auto; display: flex; flex-direction: column; padding: 16px 20px 0; }
+.cm-explication { margin: 0; font-size: 17px; font-weight: 500; line-height: 1.55; text-wrap: pretty; }
+.cm-idees-tete { display: flex; justify-content: space-between; align-items: baseline; margin-top: 18px; }
+.cm-idees-titre { font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--ch-doux); }
+.cm-indice { font-size: 12px; font-weight: 700; color: #C25407; }
+.cm-idees { display: flex; flex-direction: column; gap: 8px; margin: 10px 0 0; padding: 0; list-style: none; }
+.cm-idee {
+  width: 100%;
+  min-height: 52px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border: 0;
+  border-radius: 18px;
+  background: #F8EFE7;
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: -.01em;
+  color: var(--ch-encre);
+  text-align: left;
+  cursor: default;
+}
+.cm-idee:disabled { opacity: 1; }
+.cm-idee i { flex: none; width: 12px; height: 12px; border-radius: 50%; background: var(--cm-fonce); }
+.cm-idee span { transition: filter .25s, opacity .25s; }
+.cm-idee.is-cachee { cursor: pointer; }
+.cm-idee.is-cachee span { filter: blur(7px); opacity: .55; user-select: none; }
+.cm-detail-corps > .cm-btn { position: sticky; bottom: 0; margin: auto 0 0; flex: none; }
+.cm-detail-corps > .cm-btn { margin-top: 18px; }
+.cm-rappel { display: flex; align-items: center; gap: 10px; margin-top: 18px; font-size: 14px; font-weight: 600; color: var(--ch-doux); }
 
-@media (max-width: 430px) {
-  .mindmap-page .mindmap-end-screen { border-radius: 0; }
+/* Boutons tranche */
+.cm-btn {
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border: 0;
+  border-radius: 999px;
+  font: 700 16px 'Geist', system-ui, sans-serif;
+  cursor: pointer;
+  transition: transform .12s, box-shadow .12s;
+}
+.cm-btn--orange { background: #C25407; color: #fff; box-shadow: 0 5px 0 #8F3E05; }
+.cm-btn--orange:active { transform: translateY(4px); box-shadow: 0 1px 0 #8F3E05; }
+.cm-btn--blanc { height: 52px; background: #fff; color: var(--ch-encre); font-size: 15px; box-shadow: 0 5px 0 var(--ch-bulle); }
+.cm-btn--blanc:active { transform: translateY(4px); box-shadow: 0 1px 0 var(--ch-bulle); }
+.cm-lien { align-self: center; padding: 6px 14px; border: 0; background: none; font: 700 14px 'Geist', system-ui, sans-serif; color: var(--ch-encre); opacity: .7; cursor: pointer; }
+
+/* Feuille du bas (téléphone) */
+.cm-voile { position: fixed; inset: 0; z-index: 290; background: rgba(27,26,35,.28); opacity: 0; pointer-events: none; transition: opacity .25s; }
+.cm-voile.is-la { opacity: 1; pointer-events: auto; }
+.cm-feuille {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 300;
+  height: min(560px, 82vh);
+  display: flex;
+  flex-direction: column;
+  border-radius: 30px 30px 0 0;
+  background: #fff;
+  box-shadow: 0 -12px 40px rgba(90,70,160,.18);
+  overflow: hidden;
+  transform: translateY(105%);
+  transition: transform .35s cubic-bezier(.2,.8,.2,1);
+}
+.cm-feuille.is-la { transform: none; }
+.cm-feuille .cm-detail-corps > .cm-btn { margin-bottom: calc(26px + env(safe-area-inset-bottom, 0px)); }
+
+/* ── Fin (téléphone) ── */
+.cm-fin { display: flex; flex-direction: column; padding: calc(env(safe-area-inset-top, 0px) + 12px) 20px calc(110px + env(safe-area-inset-bottom, 0px)); background: var(--ch-fond); min-height: 100dvh; box-sizing: border-box; }
+.cm-fin .cm-ligne-haut { align-self: stretch; }
+.cm-surtitre { display: block; margin-top: 16px; font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--ch-doux); text-align: center; }
+.cm-fin-titre { margin: 6px 0 0; font-family: var(--font-display); font-size: 42px; font-weight: 800; line-height: 1; letter-spacing: -.04em; text-align: center; }
+.cm-fin-carte { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin-top: 18px; padding: 16px; border-radius: 26px; background: #fff; box-shadow: 0 12px 30px rgba(160,80,20,.12); }
+.cm-fin-branche {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  border: 0;
+  border-radius: 18px;
+  background: #F8EFE7;
+  font: 700 14px/1.15 'Geist', system-ui, sans-serif;
+  color: var(--ch-encre);
+  text-align: left;
+  cursor: pointer;
+}
+.cm-fin-rond { flex: none; width: 26px; height: 26px; display: flex; align-items: center; justify-content: center; border-radius: 50%; color: #fff; position: relative; }
+.cm-fin-rond::before { content: ''; position: absolute; inset: 0; border-radius: 50%; background: #34C77B; box-shadow: 0 3px 0 #1F8A52; }
+.cm-fin-rond svg { position: relative; }
+.cm-fin-actions { display: flex; flex-direction: column; gap: 10px; margin-top: 20px; }
+
+/* ── Ordinateur ── */
+.cm-page--large { min-height: 100vh; }
+.cm-page--large .cm-hero { height: 220px; box-sizing: border-box; padding: 32px 56px 0; border-radius: 0 0 50% 50% / 0 0 70px 70px; }
+.cm-page--large .ch-deco--a { width: 220px; height: 220px; top: 60px; left: -80px; }
+.cm-page--large .ch-deco--b { width: 120px; height: 120px; top: 120px; left: 640px; right: auto; opacity: .6; }
+.cm-page--large .ch-point { width: 16px; height: 16px; top: 100px; left: 420px; }
+.cm-hero-int { position: relative; z-index: 1; }
+.cm-page--large .ch-haut { padding-right: 0; }
+.cm-page--large .cm-retour { width: auto; }
+.cm-page--large .ch-surtitre { margin-top: 18px; }
+.cm-titre { margin: 6px 0 0; font-family: var(--font-display); font-size: 42px; font-weight: 800; line-height: 1; letter-spacing: -.04em; }
+
+.cm-scene {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 840px) 440px;
+  justify-content: space-between;
+  align-items: start;
+  gap: 32px;
+  max-width: 1440px;
+  box-sizing: border-box;
+  margin: -70px auto 0;
+  padding: 0 56px 48px;
+}
+.cm-carte-zone { padding-top: 80px; }
+.cm-plateau--grand { margin-top: 0; }
+.cm-plateau--grand .cm-branche { padding: 0 18px; }
+.cm-plateau--grand .cm-branche-nom { margin-top: 4px; font-size: 22px; }
+.cm-plateau--grand .cm-branche-idees { margin-top: 6px; font-size: 13px; }
+.cm-plateau--grand .cm-branche-coche { top: 6px; right: 6px; width: 36px; height: 36px; box-shadow: 0 4px 0 #1F8A52; }
+.cm-plateau--grand .cm-branche:hover { transform: scale(1.04); }
+.cm-plateau--grand .cm-branche.is-ouverte { transform: scale(1.04); box-shadow: 0 7px 0 #8F3E05, 0 18px 30px rgba(160,80,20,.16); }
+.cm-centre {
+  position: absolute;
+  width: 220px;
+  height: 220px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0 26px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 7px 0 var(--ch-bulle), 0 18px 36px rgba(90,70,160,.16);
+  text-align: center;
+}
+.cm-centre-titre { margin-top: 4px; font-family: var(--font-display); font-size: 25px; font-weight: 800; line-height: 1.06; letter-spacing: -.03em; text-wrap: balance; }
+
+.cm-panneau {
+  position: sticky;
+  top: 96px;
+  height: 712px;
+  max-height: calc(100vh - 180px);
+  min-height: 560px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 28px;
+  background: #fff;
+  box-shadow: 0 16px 40px rgba(90,70,160,.14);
+  overflow: hidden;
+}
+.cm-panneau .cm-detail { animation: cmEntre .3s ease-out both; }
+@keyframes cmEntre { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+.cm-panneau .cm-detail-tete { padding: 22px 80px 22px 24px; }
+.cm-panneau .cm-detail-nom { margin-top: 6px; font-size: 34px; line-height: 1.04; }
+.cm-panneau .cm-fermer { top: 22px; bottom: auto; right: 24px; width: 42px; height: 42px; }
+.cm-panneau .cm-detail-corps { padding: 20px 24px 0; }
+.cm-panneau .cm-explication { font-size: 18px; }
+.cm-panneau .cm-idees-tete { margin-top: 22px; }
+.cm-panneau .cm-idee { min-height: 58px; gap: 14px; padding: 10px 16px; font-size: 21px; transition: background .15s; }
+.cm-panneau .cm-idee.is-cachee:hover { background: #F3E7DC; }
+.cm-panneau .cm-detail-corps > .cm-btn { height: 58px; margin: 18px 0 24px; box-shadow: 0 6px 0 #8F3E05; }
+.cm-panneau .cm-detail-corps > .cm-btn:active { box-shadow: 0 2px 0 #8F3E05; }
+.cm-panneau .rv-bulle-txt { background: #F8EFE7; box-shadow: none; max-width: 340px; font-size: 23px; padding: 14px 22px; border-radius: 24px; }
+.cm-panneau .rv-bulle-txt::after { background: #F8EFE7; }
+.cm-panneau .rv-bulle-ligne + .rv-bulle-ligne { font-size: 15px; }
+
+.cm-panneau-accueil,
+.cm-panneau-fin { flex: 1; min-height: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 28px; text-align: center; animation: cmEntre .3s ease-out both; }
+.cm-panneau-accueil .cm-reviz { margin-top: 0; }
+.cm-panneau-accueil .cm-segments { margin-top: 18px; gap: 6px; }
+.cm-panneau-accueil .cm-segments i { width: 36px; height: 8px; }
+.cm-compte { margin-top: 10px; font-size: 14px; font-weight: 700; }
+.cm-panneau-fin .cm-surtitre { margin-top: 0; }
+.cm-panneau-fin .cm-reviz { margin-top: 18px; }
+.cm-panneau-fin .cm-fin-actions { align-self: stretch; margin-top: 18px; }
+.cm-panneau-fin .cm-btn { height: 58px; }
+.cm-panneau-fin .cm-btn--blanc { height: 54px; background: #F8EFE7; box-shadow: 0 5px 0 #EADBCB; }
+
+.cm-teste {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 24px;
+  border: 0;
+  border-top: 1.5px dashed #EADBCB;
+  background: #fff;
+  font-family: inherit;
+  color: var(--ch-encre);
+  text-align: left;
+  cursor: pointer;
+}
+.cm-teste-txt { flex: 1; display: flex; flex-direction: column; }
+.cm-teste-txt b { font-size: 15px; font-weight: 700; }
+.cm-teste-txt span { font-size: 13px; font-weight: 500; color: var(--ch-doux); }
+
+@media (max-width: 1240px) {
+  .cm-scene { grid-template-columns: minmax(0, 1fr) 380px; padding: 0 32px 40px; }
 }
 
-/* ── Intro (PageIntro) : hors canvas, points de progression sous le sous-titre ── */
-.mindmap-page .mindmap-intro { padding-top: 4px; padding-bottom: 0; }
-.mindmap-page .mindmap-intro .rv-dots { margin-top: 10px; }
+@media (prefers-reduced-motion: reduce) {
+  .cm-branche, .cm-branche-coche, .cm-panneau .cm-detail, .cm-panneau-accueil, .cm-panneau-fin { animation: none; }
+  .cm-feuille, .cm-voile { transition: none; }
+}
+.cm-plateau-int { position: relative; transform-origin: 0 0; }
