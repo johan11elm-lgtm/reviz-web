@@ -2,8 +2,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { BottomNav } from '../components/BottomNav';
-import { PageHeader } from '../components/PageHeader';
-import { PageIntro } from '../components/PageIntro';
+import { Pantin } from '../components/Pantin';
 import { Mascot } from '../components/Mascot';
 import { AjoutControle } from '../components/AjoutControle';
 import { XIcon } from '../components/Icons';
@@ -26,8 +25,11 @@ import './Agenda.css';
  * Pronote reconstruit semaine par semaine. Pronote n'exporte que l'emploi
  * du temps : les contrôles se saisissent ici.
  */
+const majuscule = t => t.charAt(0).toUpperCase() + t.slice(1);
+
 export default function Agenda() {
   const navigate = useNavigate();
+  const isDesktop = useIsDesktop();
   const { currentUser, isGuest } = useAuth();
   const [agenda, setAgenda] = useState(() => agendaLocal(currentUser?.uid));
   const [ajout, setAjout] = useState(null); // null | { matiere?, date? }
@@ -51,58 +53,73 @@ export default function Agenda() {
     setAgenda(await supprimerControle(currentUser, c.id));
   }
 
-  return (
-    <div className="app agenda-page">
-      <PageHeader
-        variant="back"
-        onBack={() => (window.history.state?.idx > 0 ? navigate(-1) : navigate('/'))}
-        className="rv-page-header--racine"
-      />
-      <PageIntro
-        title="Agenda"
-        sub={aVenir.length
-          ? `${aVenir.length} contrôle${aVenir.length > 1 ? 's' : ''} à venir`
-          : 'Tes contrôles et ton emploi du temps'}
-        mascot="writing"
-      />
+  const [prochain, ...suite] = aVenir;
+  const jours = prochain ? Math.round((new Date(`${prochain.date}T00:00`) - new Date(`${aujourdhui}T00:00`)) / 86_400_000) : 0;
 
+  return (
+    <div className="app app--no-halo agenda-page">
       <div className="content agenda-content">
-        <section className="agenda-controles" aria-labelledby="agenda-controles-titre">
-          <h2 id="agenda-controles-titre" className="rv-section-title">Contrôles à venir</h2>
-          {aVenir.length > 0 ? (
-            <div className="rv-card rv-rows">
-              {aVenir.map(c => {
-                const m = matiereControle(c.matiere);
-                return (
-                  <div key={c.id} className="rv-row agenda-controle">
-                    <button type="button" className="agenda-controle-main" onClick={() => reviser(c)}>
-                      <span className="rv-row-avatar"><Mascot pose={m.mascot} size={36} alt="" aria-hidden="true" /></span>
-                      <span className="rv-row-text">
-                        <span className="rv-row-title">{intituleControle(c)}</span>
-                        <span className="rv-row-sub">{[c.titre, jourEnClair(c.date)].filter(Boolean).join(' · ')}</span>
-                        <span className="rv-pill rv-pill--orange agenda-controle-pill">{compteARebours(c.date, aujourdhui)}</span>
-                      </span>
-                    </button>
-                    <button
-                      type="button"
-                      className="agenda-controle-suppr"
-                      onClick={() => retirer(c)}
-                      aria-label={`Retirer ${intituleControle(c)} du ${jourEnClair(c.date)}`}
-                    >
-                      <XIcon />
-                    </button>
-                  </div>
-                );
-              })}
+        <div className="ag-tete">
+          <h1 className="ag-titre">Agenda</h1>
+          {agenda.pronote && <span className="ag-pronote"><span aria-hidden="true">✓</span> Pronote relié</span>}
+        </div>
+
+        <section className="agenda-controles" aria-label="Contrôles à venir">
+          {prochain && (
+            <div className="ag-hero">
+              <span className="ag-hero-rond" aria-hidden="true" />
+              <span className="ag-grain" aria-hidden="true" />
+              <Pantin size={isDesktop ? 300 : 175} expression={jours <= 3 ? 'determine' : 'content'} repli="hello" className="ag-hero-pantin" label="Réviz" />
+              <button type="button" className="ag-hero-corps" onClick={() => reviser(prochain)}>
+                <span className="ag-surtitre">Prochain contrôle</span>
+                <span className="ag-compte">{jours <= 0 ? 'Aujourd\u2019hui' : `J\u2011${jours}`}</span>
+                <span className="ag-hero-titre">{[matiereControle(prochain.matiere).label, prochain.titre].filter(Boolean).join(' · ')}</span>
+                <span className="ag-hero-date">{majuscule(jourEnClair(prochain.date))}</span>
+                <span className="ag-hero-btn">Réviser</span>
+              </button>
+              <button
+                type="button"
+                className="ag-hero-suppr"
+                onClick={() => retirer(prochain)}
+                aria-label={`Retirer ${intituleControle(prochain)} du ${jourEnClair(prochain.date)}`}
+              >
+                <XIcon />
+              </button>
             </div>
-          ) : (
+          )}
+
+          {suite.map(c => {
+            const m = matiereControle(c.matiere);
+            return (
+              <div key={c.id} className="ag-carte agenda-controle">
+                <button type="button" className="agenda-controle-main" onClick={() => reviser(c)}>
+                  <span className="ag-rond"><Mascot pose={m.mascot} size={40} alt="" aria-hidden="true" /></span>
+                  <span className="ag-carte-txt">
+                    <span className="ag-carte-titre">{intituleControle(c)}</span>
+                    <span className="ag-carte-sub">{[c.titre, jourEnClair(c.date)].filter(Boolean).join(' · ')}</span>
+                  </span>
+                  <span className="ag-pastille">{compteARebours(c.date, aujourdhui)}</span>
+                </button>
+                <button
+                  type="button"
+                  className="agenda-controle-suppr"
+                  onClick={() => retirer(c)}
+                  aria-label={`Retirer ${intituleControle(c)} du ${jourEnClair(c.date)}`}
+                >
+                  <XIcon />
+                </button>
+              </div>
+            );
+          })}
+
+          {!prochain && (
             <p className="agenda-vide">
               Note tes contrôles ici : Réviz te les rappelle sur l'accueil
               {' '}et la veille au soir dans l'app.
             </p>
           )}
-          <button type="button" className="rv-btn-cta agenda-ajouter" onClick={() => setAjout({})}>
-            Ajouter un contrôle
+          <button type="button" className="ag-ajouter" onClick={() => setAjout({})}>
+            <span aria-hidden="true">+</span> Ajouter un contrôle
           </button>
         </section>
 
@@ -177,7 +194,7 @@ function EmploiDuTemps({ user, isGuest, lien, controles, onAgenda, onAjout }) {
   return (
     <section className="agenda-edt" aria-labelledby="agenda-edt-titre">
       <div className="agenda-edt-head">
-        <h2 id="agenda-edt-titre" className="rv-section-title">Emploi du temps</h2>
+        <h2 id="agenda-edt-titre" className="ag-sous-titre">Emploi du temps</h2>
         <div className="agenda-semaine">
           <button type="button" className="agenda-semaine-btn" onClick={() => setLundi(ajouterJours(lundi, -7))} aria-label="Semaine précédente">‹</button>
           <span className="agenda-semaine-label">Semaine du {jourEnClair(lundi).replace(/^lundi /, '')}</span>

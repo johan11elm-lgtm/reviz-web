@@ -8,8 +8,8 @@ import { loadLessons, syncFromFirestore } from '../services/historyService';
 import { loadRevisions, syncRevisionsFromFirestore } from '../services/revisionService';
 import { BottomNav, StatsIcon } from '../components/BottomNav';
 import { LevelSelector } from '../components/LevelSelector';
-import { PageHeader } from '../components/PageHeader';
 import { Mascot } from '../components/Mascot';
+import { Pantin } from '../components/Pantin';
 import { BattleMascot } from '../components/BattleMascot';
 import { getUserProfile } from '../services/userProfileService';
 import { computeStreak, computeLevel, computeBadges, XP_PAR_NIVEAU } from '../utils/gamification';
@@ -410,67 +410,44 @@ export default function Profile() {
   }
 
   return (
-    <div className="app profile-page">
-      <PageHeader
-        variant="title-only"
-        right={
-          <button
-            type="button"
-            className="rv-bell-btn"
-            onClick={() => navigate('/reglages')}
-            aria-label="Réglages"
-          >
+    <div className="app app--no-halo profile-page pf-v2">
+      <div className="pf-content">
+        {/* Refonte validée : aplat lilas, Réviz qui monte de niveau, XP en barre d'encre */}
+        <div className="pf-hero">
+          <span className="pf-hero-rond" aria-hidden="true" />
+          <span className="pf-hero-grain" aria-hidden="true" />
+          <Pantin size={200} expression="fier" entree="saut" repli="hello" className="pf-hero-pantin" label="Réviz" />
+          <button type="button" className="pf-hero-reglages" onClick={() => navigate('/reglages')} aria-label="Réglages">
             <GearIcon />
           </button>
-        }
-      />
-
-      <div className="pf-content">
-        <GuestBanner />
-        {/* Intro façon Home — prénom en titre, niveau · classe, XP, mascotte à droite */}
-        <PageIntro
-          title={prenom || 'Toi'}
-          sub={`Niveau ${level}${levelLabel ? ` · ${levelLabel}` : ''}`}
-          mascot={heroPose}
-          className="pf-intro"
-        >
-          <div className="pf-intro-xp">
+          <div className="pf-hero-txt">
+            <h1 className="pf-hero-nom">{prenom || 'Toi'}</h1>
+            <p className="pf-hero-sub">{levelLabel || 'Collège'}</p>
+          </div>
+          <div className="pf-hero-xp">
+            <div className="pf-hero-niveau"><span>Niveau {level}</span><span>{xpInLvl} / {XP_PAR_NIVEAU} XP</span></div>
             <div
-              className="rv-bar rv-bar--tall pf-intro-bar"
+              className="pf-hero-barre"
               role="progressbar"
               aria-label={`${xpInLvl} XP sur ${XP_PAR_NIVEAU} pour passer au niveau ${level + 1}`}
               aria-valuemin={0}
               aria-valuemax={XP_PAR_NIVEAU}
               aria-valuenow={xpInLvl}
             >
-              <div className="rv-bar-fill rv-bar-fill--orange" style={{ width: `${fillPct}%` }} />
+              <span style={{ width: `${fillPct}%` }} />
             </div>
-            <p className="pf-xp-sub">{xpInLvl} / {XP_PAR_NIVEAU} XP</p>
+            <p className="pf-hero-reste">{XP_PAR_NIVEAU - xpInLvl} XP avant le niveau {level + 1}</p>
           </div>
-        </PageIntro>
+        </div>
 
-        {/* Stats — une seule carte, trois colonnes */}
-        <section className="rv-card rv-card--padded pf-stats-card">
-          <div className="pf-stat">
-            <span className="pf-stat-icon pf-stat-icon--orange" aria-hidden="true"><FlameIcon /></span>
-            <span className="pf-stat-value">{streak}</span>
-            <span className="pf-stat-label">{streak > 1 ? 'jours de suite' : 'jour de suite'}</span>
-          </div>
-          <div className="pf-stat-sep" aria-hidden="true" />
-          <div className="pf-stat">
-            <span className="pf-stat-icon pf-stat-icon--violet" aria-hidden="true"><BookIcon /></span>
-            <span className="pf-stat-value">{allLessons.length}</span>
-            <span className="pf-stat-label">{allLessons.length > 1 ? 'leçons' : 'leçon'}</span>
-          </div>
-          <div className="pf-stat-sep" aria-hidden="true" />
-          <div className="pf-stat">
-            <span className="pf-stat-icon pf-stat-icon--green" aria-hidden="true"><BoltIcon /></span>
-            <span className="pf-stat-value">{allRevisions.length}</span>
-            <span className="pf-stat-label">{allRevisions.length > 1 ? 'révisions' : 'révision'}</span>
-          </div>
+        <GuestBanner />
+
+        <section className="pf-stats3" aria-label="Tes chiffres">
+          <div className="pf-stat3"><span className="pf-stat3-val"><FlameIcon />{streak}</span><span className="pf-stat3-lab">{streak > 1 ? 'jours de suite' : 'jour de suite'}</span></div>
+          <div className="pf-stat3"><span className="pf-stat3-val">{allRevisions.length}</span><span className="pf-stat3-lab">{allRevisions.length > 1 ? 'révisions' : 'révision'}</span></div>
+          <div className="pf-stat3"><span className="pf-stat3-val">{allLessons.length}</span><span className="pf-stat3-lab">{allLessons.length > 1 ? 'leçons' : 'leçon'}</span></div>
         </section>
 
-        {/* Progrès a laissé sa place à l'Agenda dans la barre du bas : on y accède d'ici. */}
         <Link to="/progres" className="rv-card rv-rows pf-progres-link">
           <span className="rv-row">
             <span className="rv-row-avatar" aria-hidden="true"><StatsIcon /></span>
@@ -481,6 +458,16 @@ export default function Profile() {
             <span className="rv-row-arrow" aria-hidden="true">›</span>
           </span>
         </Link>
+
+        <section className="pf-section">
+          <header className="pf-section-header">
+            <h2 className="pf-section-title">Badges</h2>
+            <span className="pf-badges-count">{unlocked} sur {badges.length}</span>
+          </header>
+          <div className="pf-badges-rail">
+            {badges.map(b => <BadgeTile key={b.id} badge={b} onOpen={openBadge} />)}
+          </div>
+        </section>
 
         {hasRevizPlus && !isGuest && <RevizPlusCard />}
 
@@ -500,27 +487,7 @@ export default function Profile() {
           </Link>
         )}
 
-        <section className="pf-section">
-          <header className="pf-section-header">
-            <h2 className="pf-section-title">Badges</h2>
-            <span className="pf-badges-count">{unlocked}/{badges.length}</span>
-          </header>
-          {next && <NextBadgeCard next={next} />}
-          <div className="pf-badges-grid">
-            {(showAllBadges ? badges : badges.slice(0, 8)).map(b => (
-              <BadgeTile key={b.id} badge={b} onOpen={openBadge} />
-            ))}
-          </div>
-          {badges.length > 8 && (
-            <button
-              type="button"
-              className="pf-badges-more"
-              onClick={() => setShowAllBadges(v => !v)}
-            >
-              {showAllBadges ? 'Voir moins' : `Voir les ${badges.length - 8} autres`}
-            </button>
-          )}
-        </section>
+        {next && <NextBadgeCard next={next} />}
 
         {/* Compte */}
         <section className="pf-section">

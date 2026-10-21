@@ -564,3 +564,39 @@
   .scan-page .scan-shutter { width: 64px; height: 64px; }
   .scan-page .scan-shutter-inner { width: 44px; height: 44px; }
 }
+
+/* ─── Refonte validée du 20/10 : Scan (téléphone) ──────────────────
+ * Caméra en plein écran sombre, cadre orange, quota en pastille. La
+ * feuille Texte reste claire. */
+.scan-v2 .scan-haut {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-shrink: 0;
+  padding: calc(14px + env(safe-area-inset-top, 0px)) 18px 8px;
+}
+.scan-v2 .scan-fermer { width: 42px; height: 42px; display: grid; place-items: center; border: 0; border-radius: 50%; background: #fff; color: #1B1A23; cursor: pointer; box-shadow: 0 4px 14px rgba(120,60,20,.08); }
+.scan-v2 .scan-haut .scan-quota { margin: 0; padding: 8px 14px; border-radius: 99px; background: #fff; color: #1B1A23; font-size: 13px; font-weight: 700; box-shadow: 0 4px 14px rgba(120,60,20,.08); }
+.scan-v2 .scan-tabs { background: #fff; border-radius: 99px; box-shadow: 0 4px 14px rgba(120,60,20,.08); }
+.scan-v2 .scan-tab { border-radius: 99px; color: #6E675B; }
+.scan-v2 .scan-tab--active { background: #FFE6D2; color: #C25407; box-shadow: none; }
+
+.scan-v2--photo { background: #2D2B33; }
+.scan-v2--photo .scan-haut .scan-fermer,
+.scan-v2--photo .scan-haut .scan-quota { background: rgba(255,255,255,.16); color: #fff; box-shadow: none; }
+.scan-v2--photo .scan-tabs { background: rgba(255,255,255,.12); box-shadow: none; }
+.scan-v2--photo .scan-tab { color: rgba(255,255,255,.7); }
+.scan-v2--photo .scan-tab--active { background: #fff; color: #1B1A23; }
+.scan-v2--photo .scan-content { padding: 6px 0 calc(24px + env(safe-area-inset-bottom, 0px)); gap: 18px; }
+.scan-v2--photo .scan-viewfinder-shell { background: transparent; box-shadow: none; padding: 0; border-radius: 0; }
+.scan-v2--photo .viewfinder { border-radius: 0; background: #2D2B33; }
+.scan-v2--photo .corner { width: 44px; height: 44px; border-color: #FF9B5C !important; border-width: 4px !important; border-radius: 0; }
+.scan-v2--photo .corner-tl { top: 36px; left: 28px; border-radius: 14px 0 0 0 !important; }
+.scan-v2--photo .corner-tr { top: 36px; right: 28px; border-radius: 0 14px 0 0 !important; }
+.scan-v2--photo .corner-bl { bottom: 36px; left: 28px; border-radius: 0 0 0 14px !important; }
+.scan-v2--photo .corner-br { bottom: 36px; right: 28px; border-radius: 0 0 14px 0 !important; }
+.scan-v2--photo .scan-line { height: 3px; border-radius: 99px; left: 28px; right: 28px; background: linear-gradient(90deg, transparent, #FF9B5C, transparent); box-shadow: 0 0 18px rgba(255,155,92,.85); }
+.scan-v2--photo .scan-placeholder-title { color: #fff; }
+.scan-v2--photo .scan-placeholder-sub { color: rgba(255,255,255,.65); }
+.scan-v2--photo .scan-side-btn { background: rgba(255,255,255,.16); color: #fff; box-shadow: none; }
+.scan-v2--photo .scan-shutter { background: transparent; border-color: #fff; box-shadow: none; }
+.scan-v2--photo .scan-tip-trigger { background: rgba(255,255,255,.12); color: #fff; box-shadow: none; }
+.scan-v2--photo .scan-tip-trigger-label { color: #fff; }
+.scan-v2--photo .scan-tip-trigger { display: flex; width: fit-content; margin: 0 auto; }

@@ -179,15 +179,30 @@ export default function Scan() {
   }
 
   return (
-    <div className="app scan-page">
-      <PageHeader
-        variant="back"
-        title="Scanner"
-        onBack={() => (window.history.state?.idx > 0 ? navigate(-1) : navigate('/'))}
-      />
-
-      {/* Quota de la semaine : ce que Réviz+ apporte, visible là où il sert */}
-      <ScanQuota plus={hasRevizPlus} />
+    <div className={`app app--no-halo scan-page${double ? '' : ` scan-v2${activeTab === 'photo' ? ' scan-v2--photo' : ''}`}`}>
+      {double ? (
+        <>
+          <PageHeader
+            variant="back"
+            title="Scanner"
+            onBack={() => (window.history.state?.idx > 0 ? navigate(-1) : navigate('/'))}
+          />
+          {/* Quota de la semaine : ce que Réviz+ apporte, visible là où il sert */}
+          <ScanQuota plus={hasRevizPlus} />
+        </>
+      ) : (
+        <div className="scan-haut">
+          <button
+            type="button"
+            className="scan-fermer"
+            onClick={() => (window.history.state?.idx > 0 ? navigate(-1) : navigate('/'))}
+            aria-label="Fermer"
+          >
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" /></svg>
+          </button>
+          <ScanQuota plus={hasRevizPlus} />
+        </div>
+      )}
 
       {/* Tabs Photo / Texte (sur ordinateur, les deux panneaux sont visibles) */}
       {!double && (
