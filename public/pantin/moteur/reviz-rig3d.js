@@ -84,10 +84,11 @@
     const centreSourcil = { g: [iris3.g[0], yS], d: [iris3.d[0], yS] };
     // Bras « caoutchouc » : le tube de la maîtresse, en tranches posées le long d'une courbe épaule ->
     // poignet (déformation de maillage) ; au bout, la main de la maîtresse (repos) ou une main générée.
-    const NT = 18; // tranches du tube
+    const NT = 30; // tranches du tube (30 : pas de rayures aux coudes très pliés)
     const pieceSvg = (nom) => { const t = BR.pieces[nom].taille;
       return `<image href="${base}bras/${nom}.webp" width="${t[0]}" height="${t[1]}"/>`; };
     const MAINS_GEN = ['ouverte', 'pointe', 'poing', 'plate', 'pouce'];
+    const MIROIR_MAINS = { poing: true };
     const tranches = (c, t = CA[c].tube, fichier = `tube-${c}.webp`, nt = NT) => {
       const [w, h] = t.taille, out = [];
       // Tranche 0 : le prolongement caché sous le corps (avant l'épaule) ; puis nt tranches du tube ; ce
@@ -127,7 +128,11 @@
         ${MAINS_GEN.map((m) => `<g data-main="${m}" opacity="0">${pieceSvg('main-' + m)}</g>`).join('')}
         ${grandesDe(c).map((n) => `<g data-main="${n}" opacity="0"><image href="${base}bras/grandes/${n}-${c}-main.webp" width="${GM[n][c].main.taille[0]}" height="${GM[n][c].main.taille[1]}"/></g>`).join('')}
       </g>
-      <g class="b-tube">${tranches(c)}</g></g>`;
+      <g class="b-tube">
+        <defs><mask id="${id}-masque-b${c}" maskUnits="userSpaceOnUse" x="0" y="0" width="${T}" height="${T}">
+          <path class="bt-masque" d="" fill="none" stroke="#fff" stroke-width="${f1(CA[c].tube.largeur - 1)}" stroke-linecap="butt"/></mask></defs>
+        <path class="bt-plein" d="" fill="none" stroke="#F1C7A0" stroke-width="${f1(CA[c].tube.largeur - 4)}" stroke-linecap="butt"/>
+        <g mask="url(#${id}-masque-b${c})">${tranches(c)}</g></g></g>`;
     const racine = document.createElementNS(NS, 'g');
     racine.setAttribute('class', 'reviz-3d');
     racine.innerHTML = `
@@ -177,7 +182,7 @@
     const ombreSol = q('.ombre'), perso = q('.perso'), corps2d = q('.corps2d');
     const brasEl = Object.fromEntries(qa('.bras').map((el) => [el.dataset.cote, {
       g: el, tr: [...el.querySelectorAll('.b-tube .tr')].map((t) => ({ el: t, r0: +t.dataset.r0, r1: +t.dataset.r1 })), main: el.querySelector('.b-main'),
-      tube: el.querySelector('.b-tube'),
+      tube: el.querySelector('.b-tube'), traitsTube: [...el.querySelectorAll('.bt-masque, .bt-plein')],
       gm: Object.fromEntries([...el.querySelectorAll('.b-tube-gm')].map((g) => [g.dataset.gm, { g,
         tr: [...g.querySelectorAll('.tr')].map((t) => ({ el: t, r0: +t.dataset.r0, r1: +t.dataset.r1 })), jt: [...g.querySelectorAll('.jt')] }])),
       mains: Object.fromEntries([...el.querySelectorAll('[data-main]')].map((m) => [m.dataset.main, m])), devant: false }]));
@@ -504,6 +509,13 @@
         const ep0 = CA[c].tube.largeur / (coucou ? gm.tube.largeur : CA[c].tube.largeur);
         const sx = (ep0 + (EPAIS_COUCOU - ep0) * epa);
         const sxT = coucou ? sx : 1;
+        // Bras de repos : contour lisse (masque) sur un tube plein, comme les jambes : aux coudes très
+        // pliés, les tranches seules laissaient une frange de rayures côté extérieur.
+        if (!coucou) {
+          const q = (v) => f1(v[0]) + ' ' + f1(v[1]), u0 = dir(ang(tg(0))), u9 = dir(ang(tg(1))), m0 = tube.debut * ech;
+          const d = `M${q([S[0] - u0[0] * m0, S[1] - u0[1] * m0])}L${q(S)}C${q(P1)} ${q(P2)} ${q(W)}L${q([W[0] + u9[0] * 2, W[1] + u9[1] * 2])}`;
+          for (const el of o.traitsTube) el.setAttribute('d', d);
+        }
         for (const s_ of coucou ? og.tr : o.tr) {
           const h = s_.r1 - s_.r0;
           if (s_.r1 <= tube.debut) {
@@ -519,7 +531,7 @@
           const p = dela ? (() => { const q = pt(1), u = dir(phiM); return [q[0] + u[0] * (sm - Lc), q[1] + u[1] * (sm - Lc)]; })() : pt(t);
           // Le tube d'une grande main se plie plus fort : tranches plus chevauchantes, sinon l'extérieur du
           // coude laisse voir des rayures.
-          s_.el.setAttribute('transform', `translate(${f1(p[0])} ${f1(p[1])}) rotate(${f1(aT)}) scale(${sxT.toFixed(3)} ${(ech * (coucou ? 1.6 : 1.18)).toFixed(3)}) translate(${-tube.taille[0] / 2} ${-h / 2})`);
+          s_.el.setAttribute('transform', `translate(${f1(p[0])} ${f1(p[1])}) rotate(${f1(aT)}) scale(${sxT.toFixed(3)} ${(ech * (coucou ? 1.6 : 1.5)).toFixed(3)}) translate(${-tube.taille[0] / 2} ${-h / 2})`);
         }
         let forme = etat[P + 'main'];
         if (forme === 'relachee' && devant) forme = 'plate';
@@ -541,7 +553,9 @@
           o.main.setAttribute('transform', `translate(${f1(W[0])} ${f1(W[1])}) rotate(${f1(phiM - ANGLE0[c])}) translate(${-mm.poignet[0]} ${-mm.poignet[1]})`);
         } else {
           const pm = BR.pieces['main-' + forme].poignet;
-          o.main.setAttribute('transform', `translate(${f1(W[0])} ${f1(W[1])}) rotate(${f1(phiM + 180)}) scale(${sg} 1) translate(${-pm[0]} ${-pm[1]})`);
+          // Le poing généré a le pouce du mauvais côté : miroir inverse (de face, pouces vers l'intérieur).
+          const mir = MIROIR_MAINS[forme] ? -sg : sg;
+          o.main.setAttribute('transform', `translate(${f1(W[0])} ${f1(W[1])}) rotate(${f1(phiM + 180)}) scale(${mir} 1) translate(${-pm[0]} ${-pm[1]})`);
         }
       }
       etat.bouche3d = nom;

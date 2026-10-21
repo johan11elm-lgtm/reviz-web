@@ -96,6 +96,20 @@
     M.to(e, { ecrase: 0.12, visageY: 16, duration: 0.18, ease: 'sine.inOut', yoyo: true, repeat: -1, repeatDelay: 0.35 }, 0);
   };
 
+  // Déterminé (« allez, on y va ! ») : l'original 2D (paupières à 30 %, mains relâchées) donne en 3D un
+  // air blasé qui hausse les épaules. Ici : yeux grands ouverts, sourcils froncés mais remontés, sourire
+  // en coin (bouche « fier »), poings serrés coudes pliés ; un coup de poing, puis un rebond discret.
+  S.determine = (tl, M) => {
+    son('pop', 0.2);
+    tl.to(e, { ecrase: -0.04, visageY: -6, duration: 0.16, ease: 'sine.out' }, 0)
+      .to(e, Object.assign(visageDe('fier'), brasAngles([28, 96], [52, 112]), {
+        paupG: 0, paupD: 0, paupBasG: 0, paupBasD: 0, regardX: 0, regardY: 0, corpsRot: 0,
+        sourcilGrot: 14, sourcilDrot: 14, sourcilGy: 0, sourcilDy: 0, ecrase: 0.05, visageY: 4, duration: 0.18, ease: 'power4.out' }), 0.16)
+      .to(e, { brasDcoude: 124, hauteur: 6, duration: 0.12, ease: 'power2.out', yoyo: true, repeat: 1 }, 0.4);
+    mains(tl, 'poing', 0.16);
+    M.to(e, { hauteur: 3, ecrase: 0.015, duration: 0.45, ease: 'sine.inOut', yoyo: true, repeat: -1, repeatDelay: 0.25 }, 0);
+  };
+
   // Énervé : éclair à côté de la tête, sourcils froncés, il tremble de rage.
   S.enerve = (tl, M) => {
     son('boing', 0.05, 0.6);
