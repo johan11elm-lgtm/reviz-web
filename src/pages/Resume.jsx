@@ -236,7 +236,7 @@ function ResumeContent() {
       <Pantin
         key={fin ? 'fin' : 'lecture'}
         ref={pantin}
-        size={fin ? (isDesktop ? 220 : 170) : (isDesktop ? 200 : 140)}
+        size={isDesktop ? 320 : 220}
         expression={fin ? 'fier' : 'content'}
         entree={fin ? 'saut' : undefined}
         repli={null}
