@@ -162,48 +162,61 @@
 }
 .prg-page .prg-defile::-webkit-scrollbar { display: none; }
 
-/* ── Héros ── */
+/* ── Héros : le même que l'accueil (hauteur, bulles, Réviz qui tombe et parle) ── */
 .prg-page .prg-hero {
   position: relative;
+  height: calc(414px + env(safe-area-inset-top, 0px));
+  box-sizing: border-box;
   margin-top: calc(-1 * env(safe-area-inset-top, 0px));
-  padding: calc(env(safe-area-inset-top, 0px) + 18px) 20px 92px;
+  padding: calc(env(safe-area-inset-top, 0px) + 18px) 22px 0;
   background: #FFB37A;
-  border-radius: 0 0 50% 50% / 0 0 44px 44px;
+  border-radius: 0 0 50% 50% / 0 0 64px 64px;
   overflow: hidden;
 }
 .prg-page .prg-grain {
   position: absolute;
   inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.45 0 0 0 0 0.25 0 0 0 0 0.1 0 0 0 .32 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  opacity: .55;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.35 0 0 0 0 0.2 0 0 0 0 0.1 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: .32;
   mix-blend-mode: multiply;
   pointer-events: none;
 }
-.prg-page .prg-deco { position: absolute; border-radius: 50%; background: #FFC596; }
-.prg-page .prg-deco--a { width: 120px; height: 120px; top: 150px; left: -44px; }
-.prg-page .prg-deco--b { width: 74px; height: 74px; top: 96px; right: -18px; }
-.prg-page .prg-deco--c { width: 36px; height: 36px; top: 250px; right: 58px; }
-.prg-page .prg-deco--d { display: none; }
-.prg-page .prg-point { position: absolute; width: 14px; height: 14px; top: 206px; right: 96px; border-radius: 50%; background: #C9C2F2; }
+.prg-page .prg-deco {
+  position: absolute;
+  border-radius: 50%;
+  background: #FFC596;
+  box-shadow: inset 0 -24px 40px rgba(120,60,20,.08), inset 0 16px 30px rgba(255,255,255,.35);
+}
+.prg-page .prg-deco--a { right: -70px; top: calc(150px + env(safe-area-inset-top, 0px)); width: 240px; height: 240px; }
+.prg-page .prg-deco--b { left: -50px; top: calc(270px + env(safe-area-inset-top, 0px)); width: 140px; height: 140px; }
+.prg-page .prg-point {
+  position: absolute;
+  left: 26px;
+  top: calc(200px + env(safe-area-inset-top, 0px));
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: #C9C2F2;
+  box-shadow: inset 0 -8px 14px rgba(0,0,0,.08), 0 8px 16px -6px rgba(120,60,20,.25);
+}
 
 .prg-page .prg-hero-haut { position: relative; z-index: 2; }
 .prg-page .prg-date {
   display: block;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 700;
-  letter-spacing: .12em;
+  letter-spacing: .4px;
   text-transform: uppercase;
-  color: var(--prg-encre);
-  opacity: .7;
+  color: rgba(27,26,35,.62);
 }
-.prg-page .prg-hero-titre { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 4px; }
+.prg-page .prg-hero-titre { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
 .prg-page .prg-titre {
   margin: 0;
   font-family: var(--font-display);
   font-size: 42px;
   font-weight: 800;
   line-height: 1;
-  letter-spacing: -.04em;
+  letter-spacing: -1.6px;
   color: var(--prg-encre);
 }
 .prg-page .prg-choix { position: relative; }
@@ -244,27 +257,12 @@
 }
 .prg-page .prg-choix-liste [aria-selected="true"] button { background: #FFE6D2; color: #C25407; }
 
-/* Réviz et sa bulle, centrés */
-.prg-page .prg-reviz { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; margin-top: 26px; }
-.prg-page .prg-bulle .rv-bulle-txt { max-width: 320px; padding: 12px 18px; }
-.prg-page .prg-bulle .rv-bulle-ligne + .rv-bulle-ligne { margin-top: 2px; font-size: 13px; color: var(--prg-doux); }
-.prg-page .prg-pantin { margin-top: 10px; }
+/* Réviz en bas du héros, sa bulle posée par le bas juste au-dessus de sa tête */
+.prg-page .prg-pantin-place { position: absolute; left: 0; right: 0; bottom: 44px; z-index: 1; display: flex; justify-content: center; }
+.prg-page .prg-bulle { position: absolute; z-index: 3; left: 22px; right: 22px; bottom: 254px; }
 
-/* ── Mes leçons scannées, à cheval sur le héros ── */
-.prg-page .prg-scans-place { position: relative; z-index: 3; margin: -64px 20px 0; display: flex; justify-content: center; }
-.prg-page .prg-scans.rv-fonction {
-  max-width: none;
-  height: auto;
-  gap: 14px;
-  padding: 14px;
-  border-radius: 26px;
-  box-shadow: 0 12px 30px rgba(160,80,20,.14);
-}
-.prg-page .prg-scans .rv-fonction-rond { width: 60px; height: 60px; border-radius: 50%; }
-.prg-page .prg-scans .rv-fonction-titre { font-size: 18px; letter-spacing: -.02em; }
-.prg-page .prg-scans .rv-fonction-sous { font-weight: 500; margin-top: 1px; }
-.prg-page .prg-scans .rv-fonction-go { width: 44px; height: 44px; }
-.prg-page .prg-scans .rv-fonction-go svg { width: 18px; height: 18px; }
+/* ── Mes leçons scannées, à cheval sur le bas du héros (comme la carte de l'accueil) ── */
+.prg-page .prg-scans-place { position: relative; z-index: 3; height: 70px; margin-top: -36px; padding: 0 22px; display: flex; justify-content: center; }
 
 .prg-page .prg-pad { padding: 16px 20px 0; }
 .prg-page .prg-note { margin: 16px 20px 0; font-size: 13px; line-height: 1.45; color: var(--prg-doux); }
@@ -437,26 +435,27 @@
   cursor: pointer;
 }
 
-/* ─── Ordinateur ─── */
-.prg-page--large .prg-hero { margin-top: 0; padding: 32px 56px 120px; border-radius: 0 0 50% 50% / 0 0 80px 80px; }
-/* Le menu (NavHaut) est posé en haut à droite, par-dessus le héros : la rangée du titre le laisse libre. */
-.prg-page--large .prg-hero-haut { min-height: 58px; padding-right: 380px; }
-.prg-page--large .prg-deco--a { width: 220px; height: 220px; top: 170px; left: -70px; }
-.prg-page--large .prg-deco--b { width: 120px; height: 120px; top: 120px; right: 180px; }
-.prg-page--large .prg-deco--c { width: 60px; height: 60px; top: 300px; left: 380px; right: auto; }
-.prg-page--large .prg-deco--d { display: block; width: 260px; height: 260px; top: 250px; right: -60px; }
-.prg-page--large .prg-point { width: 18px; height: 18px; top: 270px; right: 420px; }
-.prg-page--large .prg-hero-titre { justify-content: flex-start; gap: 16px; }
-.prg-page--large .prg-reviz { margin-top: 8px; }
-.prg-page--large .prg-bulle .rv-bulle-txt { max-width: 380px; padding: 14px 22px; border-radius: 24px; font-size: 22px; }
-.prg-page--large .prg-bulle .rv-bulle-ligne + .rv-bulle-ligne { margin-top: 4px; font-size: 15px; }
-.prg-page--large .prg-pantin { margin-top: 12px; }
-.prg-page--large .prg-scans-place { margin: -72px auto 0; width: 520px; max-width: calc(100% - 40px); }
-.prg-page--large .prg-scans.rv-fonction { max-width: none; padding: 16px; gap: 16px; border-radius: 28px; }
-.prg-page--large .prg-scans .rv-fonction-rond { width: 68px; height: 68px; }
-.prg-page--large .prg-scans .rv-fonction-titre { font-size: 20px; }
-.prg-page--large .prg-scans .rv-fonction-go { width: 48px; height: 48px; }
-.prg-page--large .prg-scans:hover { box-shadow: 0 16px 36px rgba(160,80,20,.2); }
+/* ─── Ordinateur : héros de l'accueil (titre en haut à gauche, Réviz et sa bulle centrés) ─── */
+.prg-page--large .prg-hero { height: auto; margin-top: 0; padding: 32px 56px 72px; border-radius: 0 0 50% 50% / 0 0 80px 80px; }
+.prg-page--large .prg-deco--a { right: 18%; top: -120px; width: 520px; height: 520px; box-shadow: inset 0 -40px 60px rgba(120,60,20,.08), inset 0 24px 40px rgba(255,255,255,.35); }
+.prg-page--large .prg-deco--b { left: -70px; top: 260px; width: 260px; height: 260px; box-shadow: none; }
+.prg-page--large .prg-point { left: auto; right: 12%; top: 380px; width: 18px; height: 18px; box-shadow: none; }
+/* La rangée du titre laisse libre le coin du menu (NavHaut). */
+.prg-page--large .prg-hero-haut { max-width: 1328px; margin: 0 auto; padding-right: 380px; min-height: 58px; }
+.prg-page--large .prg-date { font-size: 12px; letter-spacing: .12em; color: var(--prg-encre); opacity: .7; }
+.prg-page--large .prg-hero-titre { justify-content: flex-start; gap: 16px; margin-top: 4px; }
+.prg-page--large .prg-titre { letter-spacing: -.04em; }
+.prg-page--large .prg-scene { position: relative; z-index: 1; display: flex; align-items: center; justify-content: center; gap: 12px; margin-top: 4px; }
+.prg-page--large .prg-scene-txt { position: relative; z-index: 2; width: 500px; display: flex; flex-direction: column; }
+.prg-page--large .prg-bulle { position: relative; left: auto; right: auto; bottom: auto; }
+.prg-page--large .prg-scans-place { height: 84px; margin: 28px 0 0; padding: 0; justify-content: flex-start; }
+.prg-page--large .prg-pantin { position: relative; flex: none; }
+@media (max-width: 1240px) {
+  .prg-page--large .prg-pantin { width: 320px !important; height: 320px !important; }
+  .prg-page--large .prg-scene-txt { width: 420px; }
+  .prg-page--large .rv-bulle-txt { max-width: 400px; font-size: 30px; }
+  .prg-page--large .rv-bulle-ligne + .rv-bulle-ligne { font-size: 18px; }
+}
 .prg-page--large .prg-note { margin: 20px 56px 0; }
 
 .prg-page--large .prg-grille {

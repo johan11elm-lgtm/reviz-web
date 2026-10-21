@@ -173,14 +173,47 @@ export default function Programme() {
     </div>
   );
 
+  // Comme l'accueil : Réviz tombe dans le héros une fois chargé, puis parle.
+  // Distance de chute en unités du pantin (2148 pour sa taille) : il part au-dessus du héros.
+  const TAILLE_PANTIN = isDesktop ? 400 : 226;
+  const entree = useMemo(() => [{ nom: 'chute', depuis: Math.round(2148 * (isDesktop ? 520 : 420) / TAILLE_PANTIN) }], [isDesktop, TAILLE_PANTIN]);
+
+  const carteScans = (
+    <CarteFonction
+      carte={{
+        pose: 'scanphone', fond: '#FFE6D2', titre: 'Mes leçons scannées',
+        sous: isGuest ? 'Avec un compte gratuit' : scannees ? `${pluriel(scannees, 'leçon')}, prêtes à réviser` : 'Une photo de ton cahier, et Réviz prépare tout',
+      }}
+      grande={isDesktop}
+      onClick={() => navigate(isGuest ? '/scan' : '/cours')}
+    />
+  );
+  const bulle = (
+    <BulleReviz key={`${classe}-${matiere?.slug}`} lignes={lignes} parle={parle} className="prg-bulle"
+      pointe={isDesktop ? 'droite' : 'bas'} grande={isDesktop} />
+  );
+  const reviz = (
+    <Pantin
+      ref={pantin}
+      size={TAILLE_PANTIN}
+      expression="reflechit"
+      entree={entree}
+      repli={null}
+      onEntree={() => setParle(true)}
+      onClick={() => pantin.current?.geste('saut')}
+      label="Réviz, ta mascotte"
+      className="prg-pantin"
+    />
+  );
+
+  // Même héros que l'accueil : titre en haut à gauche ; sur téléphone Réviz en bas, sa bulle
+  // au-dessus de sa tête ; sur ordinateur la bulle et la carte à gauche, face à Réviz.
   const hero = (
     <div className="prg-hero">
-      <span className="prg-grain" aria-hidden="true" />
       <span className="prg-deco prg-deco--a" aria-hidden="true" />
       <span className="prg-deco prg-deco--b" aria-hidden="true" />
-      <span className="prg-deco prg-deco--c" aria-hidden="true" />
-      <span className="prg-deco prg-deco--d" aria-hidden="true" />
       <span className="prg-point" aria-hidden="true" />
+      <span className="prg-grain" aria-hidden="true" />
       <div className="prg-hero-haut">
         <span className="prg-date">{dateTxt}</span>
         <div className="prg-hero-titre">
@@ -188,33 +221,20 @@ export default function Programme() {
           {pastilleClasse}
         </div>
       </div>
-      <div className="prg-reviz">
-        <BulleReviz key={`${classe}-${matiere?.slug}`} lignes={lignes} parle={parle} className="prg-bulle" />
-        <Pantin
-          ref={pantin}
-          size={isDesktop ? 170 : 140}
-          expression="reflechit"
-          repli="thinking"
-          onEntree={() => setParle(true)}
-          onClick={() => pantin.current?.geste('saut')}
-          label="Réviz, ta mascotte"
-          className="prg-pantin"
-        />
-      </div>
-    </div>
-  );
-
-  const carteScans = (
-    <div className="prg-scans-place">
-      <CarteFonction
-        carte={{
-          pose: 'scanphone', fond: '#FFE6D2', titre: 'Mes leçons scannées',
-          sous: isGuest ? 'Avec un compte gratuit' : scannees ? `${pluriel(scannees, 'leçon')}, prêtes à réviser` : 'Une photo de ton cahier, et Réviz prépare tout',
-        }}
-        grande={isDesktop}
-        className="prg-scans"
-        onClick={() => navigate(isGuest ? '/scan' : '/cours')}
-      />
+      {isDesktop ? (
+        <div className="prg-scene">
+          <div className="prg-scene-txt">
+            {bulle}
+            <div className="prg-scans-place">{carteScans}</div>
+          </div>
+          {reviz}
+        </div>
+      ) : (
+        <>
+          <div className="prg-pantin-place">{reviz}</div>
+          {bulle}
+        </>
+      )}
     </div>
   );
 
@@ -262,7 +282,7 @@ export default function Programme() {
     <div className={`app app--no-halo prg-page${isDesktop ? ' app--large prg-page--large' : ''}`}>
       <div className="content prg-defile">
         {hero}
-        {carteScans}
+        {!isDesktop && <div className="prg-scans-place">{carteScans}</div>}
         {isGuest && !isDesktop && <div className="prg-pad"><GuestBanner /></div>}
         {autreClasse && classe === classeEleve && (
           <p className="prg-note">Le programme de {level.classe} arrive bientôt. En attendant, voici celui de {classe}.</p>
