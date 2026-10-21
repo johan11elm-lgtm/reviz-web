@@ -21,159 +21,41 @@
   pointer-events: none;
 }
 
-/* ── Écran de chargement "4 cards unlocking" ── */
-.analyse-page .analyse-loading-screen {
-  position: absolute;
-  inset: 0;
-  background: var(--bg-app);
-  border-radius: var(--radius-shell);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 24px;
-  z-index: 50;
-  padding: 24px;
-}
-
-.analyse-page .analyse-ls-title {
-  font-family: 'Geist', sans-serif;
-  font-size: 22px;
-  font-weight: 800;
-  letter-spacing: -0.6px;
-  line-height: 1.2;
-  text-align: center;
-  color: var(--text-primary);
-}
-
-.analyse-page .analyse-ls-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  width: min(280px, calc(100% - 48px));
-}
-
-.analyse-page .analyse-ls-card {
-  position: relative;
-  overflow: hidden;
-  border-radius: 18px;
-  padding: 14px 12px 12px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 8px;
-  border: 1.5px solid transparent;
-  transition: background 0.35s ease, border-color 0.35s ease, opacity 0.3s ease;
-}
-
-/* States */
-.analyse-page .analyse-ls-card--pending {
-  background: var(--bg-subtle);
-  border-color: var(--border);
-  opacity: 0.4;
-}
-.analyse-page .analyse-ls-card--active,
-.analyse-page .analyse-ls-card--done {
-  opacity: 1;
-}
-.analyse-page .analyse-ls-card--done {
-  animation: analyse-ls-pop 0.3s cubic-bezier(0.22, 1, 0.36, 1) both;
-}
-
-/* Tones (background + border) — utilise les variables DS */
-.analyse-page .analyse-ls-card--active.analyse-ls-card--violet,
-.analyse-page .analyse-ls-card--done.analyse-ls-card--violet {
-  background: var(--accent-violet-soft);
-  border-color: var(--accent-violet);
-}
-.analyse-page .analyse-ls-card--active.analyse-ls-card--orange,
-.analyse-page .analyse-ls-card--done.analyse-ls-card--orange {
-  background: var(--accent-orange-soft);
-  border-color: var(--accent-orange);
-}
-.analyse-page .analyse-ls-card--active.analyse-ls-card--green,
-.analyse-page .analyse-ls-card--done.analyse-ls-card--green {
-  background: var(--accent-green-soft);
-  border-color: var(--accent-green);
-}
-.analyse-page .analyse-ls-card--active.analyse-ls-card--pink,
-.analyse-page .analyse-ls-card--done.analyse-ls-card--pink {
-  background: var(--accent-pink-soft);
-  border-color: var(--accent-pink);
-}
-
-@keyframes analyse-ls-pop {
-  from { transform: scale(0.94); }
-  to   { transform: scale(1); }
-}
-
-.analyse-page .analyse-ls-shimmer {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: linear-gradient(
-    105deg,
-    transparent 35%,
-    rgba(255, 255, 255, 0.45) 50%,
-    transparent 65%
-  );
-  animation: analyse-shimmer 1.4s ease-in-out infinite;
-}
-
-@keyframes analyse-shimmer {
-  from { transform: translateX(-100%); }
-  to   { transform: translateX(200%); }
-}
-
-.analyse-page .analyse-ls-badge {
-  position: absolute;
-  top: 8px;
-  right: 10px;
-  font-size: 12px;
-  font-weight: 800;
-  line-height: 1;
-}
-.analyse-page .analyse-ls-card--violet .analyse-ls-badge { color: var(--accent-violet); }
-.analyse-page .analyse-ls-card--orange .analyse-ls-badge { color: var(--accent-orange); }
-.analyse-page .analyse-ls-card--green  .analyse-ls-badge { color: var(--accent-green); }
-.analyse-page .analyse-ls-card--pink   .analyse-ls-badge { color: var(--accent-pink); }
-
-.analyse-page .analyse-ls-emoji { font-size: 28px; line-height: 1; }
-.analyse-page .analyse-ls-name  {
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--text-primary);
-  letter-spacing: -0.2px;
-}
-
-.analyse-page .analyse-ls-bar {
-  width: min(220px, calc(100% - 48px));
-  height: 4px;
-  background: var(--border);
-  border-radius: 2px;
-  overflow: hidden;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-.analyse-page .analyse-ls-bar--visible { opacity: 1; }
-.analyse-page .analyse-ls-bar-fill {
-  height: 100%;
-  background: var(--accent-orange);
-  border-radius: 2px;
-  transition: width 0.25s ease;
-}
-
-.analyse-page .analyse-error-sub {
-  font-size: 13px;
-  color: var(--text-muted);
-  text-align: center;
-  margin: 0;
-  max-width: 32ch;
-  line-height: 1.4;
-}
-
-@media (max-width: 430px) {
-  .analyse-page .analyse-loading-screen { border-radius: 0; }
+/* ── Préparation et erreur (handoff Scanner du 21/10) : héros pêche avec Réviz, carte à cheval ── */
+.analyse-page .an-etat { position: fixed; inset: 0; z-index: 260; overflow-y: auto; background: #F8EFE7; color: #1B1A23; }
+.analyse-page .an-etat-hero { display: flex; flex-direction: column; align-items: center; padding: calc(env(safe-area-inset-top, 0px) + 22px) 20px 92px; text-align: center; }
+.analyse-page .an-etat-sur { position: relative; z-index: 1; margin: 14px 0 18px; font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+.analyse-page .an-etat-haut { position: relative; z-index: 2; align-self: stretch; display: flex; margin-bottom: 14px; }
+.analyse-page .an-etat-fermer { width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; border: 0; border-radius: 50%; background: #fff; box-shadow: 0 4px 12px rgba(150,70,20,.12); color: #1B1A23; cursor: pointer; }
+.analyse-page .an-etat-bulle { position: relative; z-index: 1; margin-bottom: 6px; }
+.analyse-page .an-etat-hero .mascot, .analyse-page .an-etat-hero img { position: relative; z-index: 1; }
+.analyse-page .an-etat-carte { position: relative; z-index: 2; display: flex; flex-direction: column; gap: 10px; max-width: 520px; margin: -64px 20px 40px; padding: 22px 20px; border-radius: 26px; background: #fff; box-shadow: 0 12px 30px rgba(160,80,20,.14); }
+@media (min-width: 560px) { .analyse-page .an-etat-carte { margin-left: auto; margin-right: auto; } }
+.analyse-page .an-etat-titre { margin: 0 0 4px; font-family: var(--font-display); font-size: 21px; font-weight: 800; line-height: 1.15; letter-spacing: -.02em; }
+.analyse-page .an-etat-txt { margin: 0; font-size: 15px; font-weight: 500; line-height: 1.5; color: #6E675B; }
+.analyse-page .an-formats { display: flex; flex-direction: column; gap: 14px; margin: 6px 0 4px; padding: 0; list-style: none; }
+.analyse-page .an-format { display: flex; align-items: center; gap: 14px; }
+.analyse-page .an-format b { flex: 1; font-size: 16px; font-weight: 700; }
+.analyse-page .an-format > span:last-child { font-size: 13px; font-weight: 600; color: #6E675B; }
+.analyse-page .an-format-rond { flex: none; width: 32px; height: 32px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: #FFE6D2; box-shadow: 0 3px 0 rgba(194,84,7,.2); transition: background .3s; }
+.analyse-page .an-format--afaire b { color: #6E675B; }
+.analyse-page .an-format--cours .an-format-rond { background: #fff; border: 4px solid #C25407; box-shadow: 0 3px 0 #8F3E05; }
+.analyse-page .an-format--pret .an-format-rond { background: #34C77B; box-shadow: 0 3px 0 #1F8A52; animation: anPret .35s cubic-bezier(.3,1.6,.5,1); }
+@keyframes anPret { from { transform: scale(.6); } }
+.analyse-page .an-barre { display: flex; align-items: center; gap: 14px; margin-top: 8px; }
+.analyse-page .an-barre-fond { flex: 1; height: 10px; overflow: hidden; border-radius: 999px; background: #EADBCB; }
+.analyse-page .an-barre-fond i { display: block; height: 100%; border-radius: 999px; background: #C25407; transition: width .8s ease; }
+.analyse-page .an-barre b { min-width: 44px; font-size: 14px; font-weight: 700; text-align: right; }
+.analyse-page .an-etat-btn { height: 56px; margin-top: 6px; border: 0; border-radius: 999px; background: #C25407; box-shadow: 0 5px 0 #8F3E05; font: 700 16px 'Geist', system-ui, sans-serif; color: #fff; cursor: pointer; transition: transform .12s, box-shadow .12s; }
+.analyse-page .an-etat-btn:active { transform: translateY(4px); box-shadow: 0 1px 0 #8F3E05; }
+.analyse-page .an-etat-btn--creme { background: #F8EFE7; box-shadow: 0 5px 0 #EADBCB; color: #1B1A23; }
+.analyse-page .an-etat-btn--creme:active { box-shadow: 0 1px 0 #EADBCB; }
+.analyse-page.ch-page--large .an-etat-hero { padding: 40px 56px 130px; border-radius: 0 0 50% 50% / 0 0 80px 80px; }
+.analyse-page.ch-page--large .an-etat-carte { margin: -96px auto 48px; padding: 28px; }
+.analyse-page.ch-page--large .an-etat-titre { font-size: 26px; }
+@media (prefers-reduced-motion: reduce) {
+  .analyse-page .an-format--pret .an-format-rond { animation: none; }
+  .analyse-page .an-barre-fond i { transition: none; }
 }
 
 /* ─── Fiche chapitre (handoff Claude Design du 21/10) ─────────────────

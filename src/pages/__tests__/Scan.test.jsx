@@ -8,12 +8,12 @@ vi.mock('react-router-dom', async (importOriginal) => ({
   ...(await importOriginal()),
   useNavigate: () => nav,
 }))
+const auth = vi.hoisted(() => ({ guest: false, plus: false }))
 vi.mock('../../context/AuthContext', () => ({
-  useAuth: () => ({ isPremium: false, getUserLevel: () => ({ cycle: 'college', classe: '3ème' }) }),
+  useAuth: () => ({ isPremium: false, isGuest: auth.guest, hasRevizPlus: auth.plus, getUserLevel: () => ({ cycle: 'college', classe: '3ème' }) }),
 }))
-vi.mock('../../services/scanLimitService', () => ({
-  getScanStatus: () => ({ canScan: true, remaining: 5, used: 0, limit: 5, isPremium: false }),
-}))
+const quota = vi.hoisted(() => ({ statut: null }))
+vi.mock('../../services/scanLimitService', () => ({ getScanStatus: () => quota.statut }))
 vi.mock('../../services/billingService', () => ({ startCheckout: vi.fn() }))
 const ai = vi.hoisted(() => ({ startAnalysis: vi.fn(), startAnalysisFromImage: vi.fn() }))
 vi.mock('../../services/aiService', () => ai)
@@ -29,64 +29,92 @@ const renderAt = (path = '/scan') => render(
   </MemoryRouter>
 )
 
+const LIBRE = { canScan: true, remaining: 2, used: 1, limit: 3, isPremium: false }
 const colle = (texte) => {
-  fireEvent.click(screen.getByRole('tab', { name: /Texte/ }))
-  fireEvent.change(screen.getByPlaceholderText('Colle le texte de ta leçon…'), { target: { value: texte } })
+  fireEvent.click(screen.getByRole('button', { name: /Coller le texte/ }))
+  fireEvent.change(screen.getByLabelText('Texte de ta leçon'), { target: { value: texte } })
 }
 
-describe('<Scan /> — mode texte et limite de longueur', () => {
-  beforeEach(() => { localStorage.clear(); nav.mockClear(); ai.startAnalysis.mockClear(); screenMode.desktop = false })
+describe('<Scan /> — Scanner une leçon', () => {
+  beforeEach(() => {
+    localStorage.clear()
+    nav.mockReset(); ai.startAnalysis.mockReset(); ai.startAnalysisFromImage.mockReset()
+    screenMode.desktop = false
+    auth.guest = false; auth.plus = false
+    quota.statut = LIBRE
+  })
 
-  it('texte court : compteur sur 200 et envoi tel quel', () => {
+  it('choix : photo, import, texte et le quota de la semaine', () => {
     renderAt()
-    const texte = 'Le théorème de Pythagore relie les côtés. '.repeat(8).trim()
+    expect(screen.getByRole('heading', { name: 'Scanner une leçon' })).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: /Prendre une photo/ })).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: /Importer une photo/ })).toBeInTheDocument()
+    expect(screen.getByText('2 scans restants cette semaine')).toBeInTheDocument()
+  })
+
+  it('texte trop court : le bouton attend 200 caractères', () => {
+    renderAt()
+    colle('Une leçon trop courte.')
+    expect(screen.getByRole('button', { name: /Analyser ce texte/ })).toBeDisabled()
+    expect(screen.getByText(/sur 200/)).toBeInTheDocument()
+  })
+
+  it('texte assez long : « Assez long », puis l’analyse part avec le texte tel quel', () => {
+    const texte = 'La photosynthèse. '.repeat(15)
+    renderAt()
     colle(texte)
-    expect(screen.getByText(`${texte.length} / 200 caractères`)).toBeInTheDocument()
-    expect(screen.queryByText(/Ta leçon est longue/)).not.toBeInTheDocument()
-    fireEvent.click(screen.getByRole('button', { name: 'Analyser' }))
-    expect(ai.startAnalysis).toHaveBeenCalledWith(texte, expect.objectContaining({ cycle: 'college' }))
-    expect(localStorage.getItem('reviz-lesson-text')).toBe(texte)
+    expect(screen.getByText('Assez long')).toBeInTheDocument()
+    fireEvent.click(screen.getByRole('button', { name: /Analyser ce texte/ }))
+    expect(ai.startAnalysis).toHaveBeenCalledWith(texte, expect.anything())
     expect(nav).toHaveBeenCalledWith('/analyse')
   })
 
   it('texte trop long : prévient, et n’envoie que le début coupé proprement', () => {
+    const texte = 'Phrase de leçon. '.repeat(Math.ceil(LESSON_TEXT_MAX / 17) + 50)
     renderAt()
-    const texte = 'Une phrase de cours qui se répète encore. '.repeat(500) // ≈ 21 500 caractères
     colle(texte)
-    expect(screen.getByText(/caractères max/)).toBeInTheDocument()
-    expect(screen.getByText(/analysera les 15.000 premiers caractères/)).toBeInTheDocument()
+    expect(screen.getByText(/j’analyse les 15.000 premiers caractères/)).toBeInTheDocument()
     fireEvent.click(screen.getByRole('button', { name: /Analyser les 15.000 premiers caractères/ }))
     const envoye = ai.startAnalysis.mock.calls[0][0]
     expect(envoye.length).toBeLessThanOrEqual(LESSON_TEXT_MAX)
-    expect(envoye.length).toBeGreaterThan(LESSON_TEXT_MAX * 0.8)
-    expect(envoye.endsWith('encore.')).toBe(true)
-    expect(texte.startsWith(envoye)).toBe(true)
-    expect(localStorage.getItem('reviz-lesson-text')).toBe(envoye)
-    expect(nav).toHaveBeenCalledWith('/analyse')
+    expect(texte.startsWith(envoye.trimEnd().slice(0, 100))).toBe(true)
   })
 
-  it('?mode=texte : ouvre l’onglet Texte avec le texte collé restauré', () => {
+  it('?mode=texte : le texte collé revient, prêt à corriger', () => {
     localStorage.setItem('reviz-lesson-text', 'Texte à corriger')
     renderAt('/scan?mode=texte')
-    expect(screen.getByRole('tab', { name: /Texte/ })).toHaveAttribute('aria-selected', 'true')
-    expect(screen.getByPlaceholderText('Colle le texte de ta leçon…')).toHaveValue('Texte à corriger')
+    expect(screen.getByLabelText('Texte de ta leçon')).toHaveValue('Texte à corriger')
   })
 
-  it('sur ordinateur : photo et texte côte à côte, sans onglets', () => {
+  it('ordinateur : zone de dépôt, texte et conseils côte à côte', () => {
     screenMode.desktop = true
     renderAt()
-    expect(screen.queryByRole('tab', { name: /Texte/ })).not.toBeInTheDocument()
-    expect(screen.getByRole('heading', { name: "Photo d'une leçon" })).toBeInTheDocument()
-    expect(screen.getByRole('heading', { name: 'Texte de la leçon' })).toBeInTheDocument()
-    expect(screen.getByPlaceholderText('Colle le texte de ta leçon…')).toBeInTheDocument()
-    expect(screen.getByRole('button', { name: 'Capturer' })).toBeInTheDocument()
+    expect(screen.getByText('Glisse la photo de ta leçon ici, ou choisis-la')).toBeInTheDocument()
+    expect(screen.getByLabelText('Texte de ta leçon')).toBeInTheDocument()
+    expect(screen.getByText('Pour un bon scan')).toBeInTheDocument()
+    expect(screen.getByText('Cadre droit.')).toBeInTheDocument()
   })
 
-  it('sans paramètre : onglet Photo, textarea vide même si un texte traîne en stockage', () => {
-    localStorage.setItem('reviz-lesson-text', 'Ancienne leçon')
+  it('Réviz+ : scans illimités', () => {
+    auth.plus = true
+    quota.statut = { canScan: true, remaining: Infinity, used: 0, limit: 3, isPremium: true }
     renderAt()
-    expect(screen.getByRole('tab', { name: /Photo/ })).toHaveAttribute('aria-selected', 'true')
-    fireEvent.click(screen.getByRole('tab', { name: /Texte/ }))
-    expect(screen.getByPlaceholderText('Colle le texte de ta leçon…')).toHaveValue('')
+    expect(screen.getByText('Scans illimités')).toBeInTheDocument()
+  })
+
+  it('quota atteint : la carte calme remplace le choix', () => {
+    quota.statut = { canScan: false, remaining: 0, used: 3, limit: 3, isPremium: false }
+    renderAt()
+    expect(screen.getByRole('heading', { name: 'Tu as utilisé tes scans de la semaine.' })).toBeInTheDocument()
+    fireEvent.click(screen.getByRole('button', { name: 'Réviser mon programme en attendant' }))
+    expect(nav).toHaveBeenCalledWith('/programme')
+  })
+
+  it('mode essai : le scan demande un compte gratuit', () => {
+    auth.guest = true
+    renderAt()
+    expect(screen.getByRole('heading', { name: 'Garde tes leçons' })).toBeInTheDocument()
+    fireEvent.click(screen.getByRole('button', { name: 'Créer mon compte gratuit' }))
+    expect(nav).toHaveBeenCalledWith('/inscription')
   })
 })

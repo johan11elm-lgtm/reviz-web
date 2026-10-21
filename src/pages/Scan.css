@@ -1,602 +1,233 @@
-/* CSS scoped to page wrapper — see scripts/scope-page-css.py */
-/* Wrapper: .scan-page */
+/* Scanner une leçon (handoff Claude Design du 21/10) : héros pêche avec Réviz, cartes de choix,
+ * viseur arrondi à coins de visée, aperçu, texte collé, quota, quota atteint, mode essai. */
+.sc-page { min-height: 100dvh; background: #F8EFE7; color: var(--ch-encre); }
+.sc-defile { padding-bottom: calc(120px + env(safe-area-inset-bottom, 0px)); }
+.sc-flex { flex: 1; }
 
-.scan-page {
+/* ── Héros ── */
+.sc-page .sc-hero { padding-bottom: 72px; }
+.sc-page .ch-surtitre { margin-top: 16px; }
+.sc-titre { margin-top: 4px; font-size: 36px; }
+.sc-reviz { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; margin-top: 12px; }
+.sc-reviz .sc-bulle { margin-bottom: 2px; }
+.sc-reviz .rv-bulle-txt { font-size: 18px; }
+.sc-reviz .rv-bulle-ligne + .rv-bulle-ligne { font-size: 14px; }
+.sc-hero--centre { padding-bottom: 86px; }
+.sc-hero--centre .sc-reviz { margin-top: 18px; }
+
+/* ── Cartes ── */
+.sc-carte {
   position: relative;
-}
-
-/* ── Tabs Photo / Texte ── segmented control aligné DS via tokens. */
-.scan-page .scan-tabs-wrap {
-  padding: 6px var(--page-gutter) 4px;
-  flex-shrink: 0;
-}
-
-/* Quota de la semaine, sous le titre */
-.scan-page .scan-quota {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  margin: -2px 0 4px;
-  padding: 0 var(--page-gutter);
-  flex-shrink: 0;
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--text-muted);
-}
-.scan-page .scan-quota-free {
-  padding: 3px 8px;
-  border-radius: var(--radius-pill);
-  background: var(--bg-subtle);
-  font-size: 11.5px;
-  font-weight: 700;
-}
-
-.scan-page .scan-tabs {
-  display: flex;
-  background: var(--bg-subtle);
-  border-radius: 14px;
-  padding: 4px;
-  gap: 4px;
-}
-
-.scan-page .scan-tab {
-  flex: 1;
-  padding: 9px 0;
-  border: none;
-  border-radius: 10px;
-  background: transparent;
-  color: var(--text-muted);
-  font-family: inherit;
-  font-size: 13px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.15s ease, color 0.15s ease;
-}
-
-.scan-page .scan-tab--active {
-  background: var(--bg-card);
-  color: var(--text-primary);
-  box-shadow: var(--shadow-card);
-}
-
-/* ── Content ── conteneur principal flex column. */
-.scan-page .scan-content {
-  flex: 1;
-  padding: 10px var(--page-gutter) 24px;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  position: relative;
-  overflow: hidden;
-}
-
-/* ── Viewfinder shell ── chrome beige autour de la zone caméra sombre. */
-.scan-page .scan-viewfinder-shell {
-  flex: 1;
-  min-height: 240px;
-  background: var(--bg-card);
-  border-radius: var(--radius-lg);
-  padding: 10px;
-  box-shadow: var(--shadow-card);
-  display: flex;
-}
-
-/* Viewfinder — intérieur sombre (UI caméra). */
-.scan-page .viewfinder {
-  flex: 1;
-  position: relative;
-  background: #15131C;
-  border-radius: 20px;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* Flux vidéo */
-.scan-page .cam-video {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.scan-page .cam-video-hidden { display: none; }
-
-/* Corner brackets (chrome interne caméra, blanc justifié sur fond dark). */
-.scan-page .corner {
-  position: absolute;
-  width: 28px;
-  height: 28px;
-  pointer-events: none;
-}
-
-.scan-page .corner-tl {
-  top: 16px;
-  left: 16px;
-  border-top: 2.5px solid #fff;
-  border-left: 2.5px solid #fff;
-  border-radius: 4px 0 0 0;
-}
-
-.scan-page .corner-tr {
-  top: 16px;
-  right: 16px;
-  border-top: 2.5px solid #fff;
-  border-right: 2.5px solid #fff;
-  border-radius: 0 4px 0 0;
-}
-
-.scan-page .corner-bl {
-  bottom: 16px;
-  left: 16px;
-  border-bottom: 2.5px solid #fff;
-  border-left: 2.5px solid #fff;
-  border-radius: 0 0 0 4px;
-}
-
-.scan-page .corner-br {
-  bottom: 16px;
-  right: 16px;
-  border-bottom: 2.5px solid #fff;
-  border-right: 2.5px solid #fff;
-  border-radius: 0 0 4px 0;
-}
-
-/* Scan line animation — orange DS. */
-.scan-page .scan-line {
-  position: absolute;
-  left: 16px;
-  right: 16px;
-  height: 1.5px;
-  background: linear-gradient(90deg, transparent, var(--accent-orange), transparent);
-  box-shadow: 0 0 8px rgba(255, 138, 61, 0.6);
-  animation: scanMove 2s ease-in-out infinite;
-  pointer-events: none;
-}
-
-@keyframes scanMove {
-  0%   { top: 16px;             opacity: 0; }
-  10%  {                         opacity: 1; }
-  90%  {                         opacity: 1; }
-  100% { top: calc(100% - 16px); opacity: 0; }
-}
-
-/* ── Placeholder caméra (idle / denied / error) avec mascotte intégrée. */
-.scan-page .scan-placeholder {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  gap: 10px;
-  padding: 24px 28px;
-  max-width: 320px;
-}
-
-.scan-page .scan-placeholder-title {
-  margin: 4px 0 0;
-  font-size: 15px;
-  font-weight: 700;
-  color: rgba(255, 255, 255, 0.92);
-  letter-spacing: -0.2px;
-}
-
-.scan-page .scan-placeholder-sub {
-  margin: 0;
-  font-size: 13px;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.62);
-  line-height: 1.45;
-  max-width: 26ch;
-}
-
-.scan-page .scan-retry-btn {
-  margin-top: 6px;
-  padding: 8px 18px;
-  background: transparent;
-  border: 1.5px solid rgba(255, 255, 255, 0.35);
-  border-radius: var(--radius-pill);
-  color: rgba(255, 255, 255, 0.92);
-  font-family: inherit;
-  font-size: 13px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.15s ease, border-color 0.15s ease;
-}
-
-.scan-page .scan-retry-btn:hover {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.55);
-}
-
-/* ── Shutter row ── 3 boutons (galerie / capture / flip). */
-.scan-page .scan-shutter-row {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 32px;
-  flex-shrink: 0;
-  padding: 4px 0 2px;
-}
-
-.scan-page .scan-side-btn {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  border: none;
-  background: var(--bg-card);
-  color: var(--text-secondary);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  box-shadow: var(--shadow-card);
-  transition: background 0.15s ease, transform 0.12s ease;
-  flex-shrink: 0;
-  font-family: inherit;
-}
-
-.scan-page .scan-side-btn:hover { background: var(--bg-hover); }
-.scan-page .scan-side-btn:active { transform: scale(0.94); }
-.scan-page .scan-side-btn--disabled,
-.scan-page .scan-side-btn:disabled {
-  opacity: 0.4;
-  cursor: not-allowed;
-  pointer-events: none;
-}
-
-/* Shutter central — sombre, plus gros, esthétique camera. */
-.scan-page .scan-shutter {
-  width: 68px;
-  height: 68px;
-  border-radius: 50%;
-  background: #15131C;
-  border: 3px solid #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  box-shadow: var(--shadow-card);
-  transition: transform 0.12s ease, filter 0.15s ease;
-  flex-shrink: 0;
-  font-family: inherit;
-  padding: 0;
-}
-
-.scan-page .scan-shutter:hover { transform: scale(1.04); }
-.scan-page .scan-shutter:active { transform: scale(0.96); }
-.scan-page .scan-shutter--disabled,
-.scan-page .scan-shutter:disabled {
-  opacity: 0.4;
-  cursor: not-allowed;
-  pointer-events: none;
-}
-
-.scan-page .scan-shutter-inner {
-  width: 46px;
-  height: 46px;
-  border-radius: 50%;
+  z-index: 2;
+  box-sizing: border-box;
+  border: 0;
+  border-radius: 26px;
   background: #fff;
-  display: block;
-}
-
-/* ── Tip trigger ── pill discret qui ouvre la bottom sheet. */
-.scan-page .scan-tip-trigger {
-  align-self: center;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 10px 14px 10px 16px;
-  border: none;
-  border-radius: var(--radius-pill);
-  background: var(--bg-card);
-  box-shadow: var(--shadow-card);
-  color: var(--text-secondary);
+  box-shadow: 0 12px 30px rgba(160,80,20,.14);
   font-family: inherit;
-  font-size: 13px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.15s ease, transform 0.12s ease;
-  flex-shrink: 0;
+  color: var(--ch-encre);
+  text-align: left;
 }
+button.sc-carte { cursor: pointer; transition: transform .12s; }
+button.sc-carte:active { transform: scale(.98); }
+.sc-photo-carte { width: calc(100% - 40px); display: flex; align-items: center; gap: 14px; margin: -54px 20px 0; padding: 16px; }
+.sc-mini-rond { flex: none; width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: #FFE6D2; color: #C25407; }
+.sc-mini-rond--lavande { width: 46px; height: 46px; background: #E4E0FA; color: #1B1A23; box-shadow: 0 4px 0 #C9C2F2; }
+.sc-mini-rond--menthe { width: 46px; height: 46px; background: #DCF5E6; color: #1B1A23; box-shadow: 0 4px 0 #A8E3C2; }
+.sc-carte-txt2 { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.sc-carte-txt2 b { font-family: var(--font-display); font-size: 20px; font-weight: 800; letter-spacing: -.02em; }
+.sc-carte-txt2 span { font-size: 14px; font-weight: 500; color: var(--ch-doux); }
+.sc-go { flex: none; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: #C25407; box-shadow: 0 5px 0 #8F3E05; color: #fff; }
+.sc-paire { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 14px 20px 0; }
+.sc-petite-carte { display: flex; flex-direction: column; gap: 3px; padding: 16px; box-shadow: 0 10px 24px rgba(160,80,20,.10); }
+.sc-petite-carte .sc-mini-rond { margin-bottom: 12px; }
+.sc-petite-carte b { font-family: var(--font-display); font-size: 17px; font-weight: 800; line-height: 1.15; letter-spacing: -.02em; }
+.sc-petite-carte > span:last-child { font-size: 13px; font-weight: 500; color: var(--ch-doux); }
+.sc-quota-carte { margin: 12px 20px 0; padding: 16px; box-shadow: 0 10px 24px rgba(160,80,20,.10); }
 
-.scan-page .scan-tip-trigger:hover { background: var(--bg-hover); }
-.scan-page .scan-tip-trigger:active { transform: scale(0.97); }
-.scan-page .scan-tip-trigger-icon { font-size: 14px; line-height: 1; }
-.scan-page .scan-tip-trigger-label { color: var(--text-primary); }
-.scan-page .scan-tip-trigger-arrow {
-  font-size: 16px;
-  line-height: 1;
-  color: var(--text-muted);
-  margin-left: 2px;
-}
+/* Quota */
+.sc-quota { display: flex; flex-direction: column; gap: 10px; }
+.sc-quota b { font-size: 15px; font-weight: 700; }
+.sc-segments { display: flex; gap: 6px; }
+.sc-segments i { flex: 1; height: 8px; border-radius: 4px; background: #EADBCB; }
+.sc-segments i.is-reste { background: #C25407; }
+.sc-segments--large { margin: 16px 0 4px; }
+.sc-quota--plus { flex-direction: row; align-items: center; gap: 12px; }
+.sc-quota-plus-txt { display: flex; flex-direction: column; gap: 2px; }
+.sc-quota-plus-txt > span { font-size: 13px; font-weight: 500; color: var(--ch-doux); }
+.sc-sur { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--ch-doux); }
+.sc-lien { display: inline-flex; align-items: center; gap: 4px; align-self: flex-start; padding: 0; border: 0; background: none; font: 700 13px 'Geist', system-ui, sans-serif; color: #C25407; cursor: pointer; }
+.sc-lien--centre { align-self: center; margin-top: 4px; font-size: 15px; }
 
-/* ── Bottom sheet tips ── overrides locaux de .rv-sheet--bottom.
- * `.rv-sheet--bottom` est `position: absolute` (s'ancre au parent positionné).
- * Sur Scan, on veut un sheet plein viewport mobile → fixed. */
-.scan-page .scan-tip-backdrop {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.4);
-  z-index: 79;
-  animation: scanFadeIn 0.18s ease-out;
-}
-
-.scan-page .scan-tip-sheet {
-  position: fixed;
-  z-index: 80;
-  max-height: 75vh;
-  overflow-y: auto;
-}
-
-.scan-page .scan-tip-sheet-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  margin-bottom: 6px;
-}
-
-.scan-page .scan-tip-sheet-title {
-  margin: 0;
-  font-family: 'Geist', sans-serif;
-  font-size: 18px;
-  font-weight: 800;
-  letter-spacing: -0.4px;
-  color: var(--text-primary);
-}
-
-.scan-page .scan-tip-close {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  border: none;
-  background: var(--bg-subtle);
-  color: var(--text-secondary);
-  font-size: 20px;
-  line-height: 1;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  font-family: inherit;
-  transition: background 0.15s ease;
-}
-
-.scan-page .scan-tip-close:hover { background: var(--bg-hover); }
-
-.scan-page .scan-tip-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.scan-page .scan-tip-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 14px;
-  padding: 14px 0;
-  border-top: 1px solid var(--border-subtle);
-}
-
-.scan-page .scan-tip-item:first-child { border-top: none; }
-
-.scan-page .scan-tip-emoji {
-  font-size: 22px;
-  line-height: 1.1;
-  flex-shrink: 0;
-}
-
-.scan-page .scan-tip-text {
-  font-size: 14px;
-  line-height: 1.45;
-  color: var(--text-secondary);
-}
-
-.scan-page .scan-tip-text strong {
-  color: var(--text-primary);
-  font-weight: 700;
-}
-
-/* ── Mode texte ── mascotte writing + textarea + counter + CTA. */
-.scan-page .scan-text-hero {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  gap: 8px;
-  padding: 4px 0 4px;
-  flex-shrink: 0;
-}
-
-.scan-page .scan-text-hint {
-  margin: 0;
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--text-secondary);
-  line-height: 1.45;
-  max-width: 30ch;
-}
-
-.scan-page .scan-text-hint strong {
-  color: var(--text-primary);
-  font-weight: 700;
-}
-
-.scan-page .scan-textarea-wrap {
-  position: relative;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  min-height: 220px;
-}
-
-.scan-page .scan-textarea {
-  flex: 1;
-  min-height: 220px;
-  resize: none;
-  border: 1.5px solid var(--border);
-  border-radius: var(--radius-card);
-  padding: 16px 16px 38px;
-  background: var(--bg-card);
-  color: var(--text-primary);
-  font-family: inherit;
-  font-size: 14px;
-  line-height: 1.65;
-  outline: none;
-  transition: border-color 0.15s ease;
-}
-
-.scan-page .scan-textarea:focus {
-  border-color: var(--accent-violet);
-}
-
-.scan-page .scan-textarea::placeholder {
-  color: var(--text-light);
-}
-
-.scan-page .scan-char-counter {
-  position: absolute;
-  bottom: 12px;
-  right: 14px;
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--text-muted);
-  background: var(--bg-card);
-  padding: 2px 6px;
-  border-radius: 8px;
-  pointer-events: none;
-  transition: color 0.2s ease;
-}
-
-.scan-page .scan-char-counter--ok {
-  color: var(--accent-green-ink);
-}
-
-.scan-page .scan-char-counter--over {
-  color: var(--accent-orange-ink);
-}
-
-/* Leçon au-delà de la limite serveur (15 000 caractères) : on prévient
-   avant l'envoi, le bouton annonce qu'on analyse le début. */
-.scan-page .scan-text-over {
-  margin: 10px 2px 0;
-  font-size: 13px;
-  font-weight: 500;
-  line-height: 1.45;
-  color: var(--accent-orange-ink);
-}
-
-/* ── Modale niveau requis ── overlay + carte centrée DS-aligned. */
-.scan-page .scan-modal-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.4);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-  z-index: 1000;
-  animation: scanFadeIn 0.18s ease-out;
-}
-
-.scan-page .scan-level-modal {
+/* Boutons à tranche */
+.sc-btn {
   width: 100%;
-  max-width: 360px;
+  height: 56px;
+  box-sizing: border-box;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  text-align: center;
-  gap: 12px;
-  animation: scanPopIn 0.22s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.scan-page .scan-level-modal-title {
-  margin: 4px 0 0;
-  font-family: 'Geist', sans-serif;
-  font-size: 20px;
-  font-weight: 800;
-  letter-spacing: -0.5px;
-  color: var(--text-primary);
-  line-height: 1.2;
-}
-
-.scan-page .scan-level-modal-sub {
-  margin: 0;
-  font-size: 14px;
-  color: var(--text-secondary);
-  line-height: 1.5;
-  max-width: 30ch;
-}
-
-.scan-page .scan-level-modal-actions {
-  margin-top: 8px;
-  display: flex;
+  justify-content: center;
   gap: 10px;
-  width: 100%;
+  padding: 0 22px;
+  border: 0;
+  border-radius: 999px;
+  background: #C25407;
+  box-shadow: 0 5px 0 #8F3E05;
+  font: 700 16px 'Geist', system-ui, sans-serif;
+  color: #fff;
+  cursor: pointer;
+  transition: transform .12s, box-shadow .12s;
 }
+.sc-btn:active:not(:disabled) { transform: translateY(4px); box-shadow: 0 1px 0 #8F3E05; }
+.sc-btn:disabled { background: #EADBCB; box-shadow: none; color: #6E675B; cursor: default; }
+.sc-btn--petit { width: auto; height: 50px; }
+.sc-btn--blanc { background: #fff; color: var(--ch-encre); box-shadow: 0 5px 0 #EADBCB; }
+.sc-btn--blanc:active:not(:disabled) { box-shadow: 0 1px 0 #EADBCB; }
+.sc-btn--creme { background: #F8EFE7; color: var(--ch-encre); box-shadow: 0 5px 0 #EADBCB; }
+.sc-btn--creme:active:not(:disabled) { box-shadow: 0 1px 0 #EADBCB; }
+.sc-deux { display: grid; grid-template-columns: 1fr 1.4fr; gap: 12px; align-self: stretch; }
+.sc-note { margin: 0; font-size: 13px; font-weight: 500; color: var(--ch-doux); text-align: center; }
+.sc-note--gauche { text-align: left; margin-top: 6px; }
 
-.scan-page .scan-level-modal-actions .rv-btn-cta {
-  flex: 1;
-  justify-content: center;
+/* ── Pages outil (viseur, aperçu, texte) ── */
+.sc-page--outil { display: flex; flex-direction: column; }
+.sc-barre { display: flex; align-items: center; gap: 12px; padding: calc(env(safe-area-inset-top, 0px) + 12px) 20px 6px; }
+.sc-barre h1 { flex: 1; margin: 0; font-family: var(--font-display); font-size: 22px; font-weight: 800; letter-spacing: -.02em; }
+.sc-rond { flex: none; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; border: 0; border-radius: 50%; background: #fff; box-shadow: 0 4px 12px rgba(150,70,20,.12); color: var(--ch-encre); cursor: pointer; }
+.sc-puce { display: inline-flex; align-items: center; gap: 6px; height: 32px; padding: 0 12px; border-radius: 999px; background: #fff; font-size: 13px; font-weight: 700; }
+.sc-puce i { width: 8px; height: 8px; border-radius: 50%; background: #C25407; }
+.sc-outil { flex: 1; display: flex; flex-direction: column; gap: 16px; width: 100%; max-width: 560px; box-sizing: border-box; margin: 0 auto; padding: 8px 20px calc(24px + env(safe-area-inset-bottom, 0px)); }
+.sc-petit-reviz { display: flex; align-items: center; gap: 6px; }
+.sc-petit-reviz .rv-bulle { justify-content: flex-start; }
+.sc-petit-reviz .rv-bulle-txt { font-size: 16px; padding: 9px 14px 10px; }
+.sc-petit-reviz .rv-bulle-ligne + .rv-bulle-ligne { font-size: 13px; }
+
+/* Viseur */
+.sc-viseur { position: relative; aspect-ratio: 3 / 4; max-height: 50vh; overflow: hidden; border-radius: 28px; background: #D9C7B4; }
+.sc-viseur--starting, .sc-viseur--denied, .sc-viseur--none { background: #EADBCB; }
+.sc-viseur video { width: 100%; height: 100%; object-fit: cover; display: block; }
+.sc-cache { visibility: hidden; position: absolute; }
+.sc-coins i { position: absolute; width: 36px; height: 36px; border: 5px solid #fff; }
+.sc-coins i:nth-child(1) { top: 20px; left: 20px; border-right: 0; border-bottom: 0; border-top-left-radius: 16px; }
+.sc-coins i:nth-child(2) { top: 20px; right: 20px; border-left: 0; border-bottom: 0; border-top-right-radius: 16px; }
+.sc-coins i:nth-child(3) { bottom: 20px; left: 20px; border-right: 0; border-top: 0; border-bottom-left-radius: 16px; }
+.sc-coins i:nth-child(4) { bottom: 20px; right: 20px; border-left: 0; border-top: 0; border-bottom-right-radius: 16px; }
+.sc-viseur-etat { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; margin: 0; font-size: 15px; font-weight: 600; color: var(--ch-doux); }
+.sc-anneau { width: 36px; height: 36px; border: 4px solid rgba(194,84,7,.2); border-top-color: #C25407; border-radius: 50%; animation: scTourne .9s linear infinite; }
+@keyframes scTourne { to { transform: rotate(360deg); } }
+.sc-refus { position: absolute; left: 16px; right: 16px; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; align-items: flex-start; gap: 8px; padding: 18px; border-radius: 22px; background: #fff; }
+.sc-refus b { font-family: var(--font-display); font-size: 19px; font-weight: 800; letter-spacing: -.02em; }
+.sc-refus span { font-size: 14px; font-weight: 500; line-height: 1.45; color: var(--ch-doux); }
+.sc-refus .sc-btn { margin-top: 6px; }
+.sc-conseils.sc-conseils--courts { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 14px; margin: 0; padding: 0; list-style: none; }
+.sc-conseils.sc-conseils--courts li { display: flex; flex-direction: column; gap: 2px; }
+.sc-conseils.sc-conseils--courts b { font-size: 13px; font-weight: 700; }
+.sc-conseils.sc-conseils--courts span { font-size: 12px; font-weight: 500; line-height: 1.35; color: var(--ch-doux); }
+.sc-declencheur-ligne { display: grid; grid-template-columns: 1fr auto 1fr; grid-template-rows: auto auto; align-items: center; justify-items: center; row-gap: 6px; margin-top: auto; }
+.sc-declencheur-ligne .sc-bouton-rond:first-child { grid-column: 1; grid-row: 1; }
+.sc-declencheur-ligne .sc-legende:nth-child(2) { grid-column: 1; grid-row: 2; }
+.sc-declencheur { grid-column: 2; grid-row: 1 / span 2; }
+.sc-declencheur-ligne .sc-bouton-rond:nth-child(4) { grid-column: 3; grid-row: 1; }
+.sc-declencheur-ligne .sc-legende:nth-child(5) { grid-column: 3; grid-row: 2; }
+.sc-bouton-rond { width: 56px; height: 56px; display: flex; align-items: center; justify-content: center; border: 0; border-radius: 50%; background: #fff; color: var(--ch-encre); cursor: pointer; }
+.sc-bouton-rond--lavande { box-shadow: 0 5px 0 #C9C2F2; }
+.sc-bouton-rond--menthe { box-shadow: 0 5px 0 #A8E3C2; }
+.sc-legende { font-size: 13px; font-weight: 600; color: var(--ch-doux); }
+.sc-declencheur {
+  width: 84px;
+  height: 84px;
+  box-sizing: border-box;
+  border: 6px solid #fff;
+  border-radius: 50%;
+  background: #C25407;
+  box-shadow: 0 6px 0 #8F3E05;
+  cursor: pointer;
+  transition: transform .12s, box-shadow .12s;
 }
+.sc-declencheur:active:not(:disabled) { transform: translateY(4px); box-shadow: 0 2px 0 #8F3E05; }
+.sc-declencheur:disabled { background: #EADBCB; box-shadow: 0 6px 0 #DCC9B5; cursor: default; }
 
-@keyframes scanFadeIn {
-  from { opacity: 0; }
-  to   { opacity: 1; }
+/* Aperçu */
+.sc-photo { overflow: hidden; border-radius: 28px; background: #fff; box-shadow: 0 12px 30px rgba(160,80,20,.14); }
+.sc-photo img { display: block; width: 100%; max-height: 54vh; object-fit: contain; background: #fff; }
+
+/* Texte collé */
+.sc-texte { display: flex; flex-direction: column; border: 2px solid #EADBCB; border-radius: 26px; background: #fff; transition: border-color .15s; }
+.sc-texte.is-rempli, .sc-texte:focus-within { border-color: #C25407; }
+.sc-texte textarea { min-height: 260px; padding: 18px 20px 10px; border: 0; outline: 0; resize: vertical; background: transparent; font: 500 16px/1.55 'Geist', system-ui, sans-serif; color: var(--ch-encre); }
+.sc-texte textarea::placeholder { color: var(--ch-doux); }
+.sc-texte-pied { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin: 0 20px; padding: 12px 0 14px; border-top: 1.5px dashed #EADBCB; font-size: 13px; font-weight: 600; color: var(--ch-doux); }
+.sc-pastille { display: inline-flex; align-items: center; gap: 6px; height: 28px; padding: 0 10px; border-radius: 999px; background: #DCF5E6; font-size: 12px; font-weight: 700; color: #1F8A52; }
+.sc-pastille i { width: 7px; height: 7px; border-radius: 50%; background: #34C77B; }
+.sc-pastille--peche { background: #FFE6D2; color: #8F3E05; }
+.sc-pastille--peche i { background: #C25407; }
+.sc-limite { display: flex; flex-direction: column; gap: 2px; margin: 0 20px 16px; padding: 12px 14px; border-radius: 16px; background: #FFE6D2; font-size: 13px; font-weight: 500; color: #8F3E05; }
+.sc-limite b { font-weight: 700; }
+
+/* ── Quota atteint, mode essai ── */
+.sc-carte--etat { display: flex; flex-direction: column; gap: 10px; margin: -60px 20px 0; padding: 22px 20px; }
+.sc-carte-titre { margin: 0; font-family: var(--font-display); font-size: 21px; font-weight: 800; line-height: 1.15; letter-spacing: -.02em; }
+.sc-carte-txt { margin: 0; font-size: 15px; font-weight: 500; line-height: 1.5; color: var(--ch-doux); }
+.sc-carte--etat .sc-btn { margin-top: 6px; }
+
+/* Feuilles */
+.sc-voile { position: fixed; inset: 0; z-index: 400; display: flex; align-items: flex-end; justify-content: center; background: rgba(27,26,35,.32); }
+.sc-feuille { width: 100%; max-width: 560px; max-height: 88vh; overflow-y: auto; box-sizing: border-box; padding: 22px 20px calc(24px + env(safe-area-inset-bottom, 0px)); border-radius: 28px 28px 0 0; background: #F8EFE7; animation: scMonte .3s cubic-bezier(.2,.8,.2,1) both; }
+@keyframes scMonte { from { transform: translateY(100%); } }
+.sc-feuille-tete { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+.sc-feuille-tete h2, .sc-feuille h2 { margin: 0; font-family: var(--font-display); font-size: 24px; font-weight: 800; letter-spacing: -.03em; }
+.sc-feuille--centre { display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center; }
+.sc-feuille--centre .sc-deux { margin-top: 8px; }
+
+/* ── Ordinateur ── */
+.sc-page--large .sc-hero { padding: 32px 56px 120px; border-radius: 0 0 50% 50% / 0 0 80px 80px; }
+.sc-page--large .ch-haut { padding-right: 420px; }
+.sc-hero-grille { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 24px; }
+.sc-page--large .sc-titre { max-width: none; font-size: 56px; }
+.sc-reviz--cote { flex-direction: row; align-items: center; margin: -10px 40px -60px 0; }
+.sc-reviz--cote .sc-bulle { margin: 0 -8px 70px 0; }
+.sc-page--large .sc-reviz .rv-bulle-txt { max-width: 340px; font-size: 26px; letter-spacing: -.6px; }
+.sc-page--large .sc-reviz .rv-bulle-ligne + .rv-bulle-ligne { font-size: 17px; }
+
+.sc-colonnes { position: relative; z-index: 2; display: grid; grid-template-columns: minmax(0, 560fr) minmax(0, 420fr) 300px; gap: 24px; max-width: 1440px; box-sizing: border-box; margin: -80px auto 0; padding: 0 56px; }
+.sc-depot-carte { display: flex; flex-direction: column; padding: 16px; }
+.sc-depot { flex: 1; min-height: 400px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px; padding: 24px; border: 2px dashed #EADBCB; border-radius: 22px; background: #FFFCF8; text-align: center; transition: background .15s, border-color .15s; }
+.sc-depot.is-survol { border-color: #C25407; background: #FFE6D2; }
+.sc-depot b { max-width: 320px; font-family: var(--font-display); font-size: 26px; font-weight: 800; line-height: 1.15; letter-spacing: -.02em; }
+.sc-depot-rond { width: 84px; height: 84px; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: #FFE6D2; box-shadow: 0 5px 0 #FFC596; color: #C25407; }
+.sc-camera { display: flex; align-items: center; gap: 8px; margin: 14px 8px 2px; padding: 0; border: 0; background: none; font: 500 14px 'Geist', system-ui, sans-serif; color: var(--ch-doux); text-align: left; cursor: pointer; }
+.sc-camera b { font-weight: 700; color: var(--ch-encre); }
+.sc-camera--sans { cursor: default; }
+.sc-texte-carte { display: flex; flex-direction: column; gap: 16px; padding: 22px; }
+.sc-texte-tete { display: flex; align-items: center; gap: 12px; }
+.sc-texte-tete > span:last-child { display: flex; flex-direction: column; }
+.sc-texte-tete b { font-family: var(--font-display); font-size: 22px; font-weight: 800; letter-spacing: -.02em; }
+.sc-texte-tete span span { font-size: 14px; font-weight: 500; color: var(--ch-doux); }
+.sc-texte-carte .sc-texte { flex: 1; border-color: transparent; background: #F8EFE7; }
+.sc-texte-carte .sc-texte.is-rempli, .sc-texte-carte .sc-texte:focus-within { border-color: #C25407; background: #fff; }
+.sc-texte-carte textarea { min-height: 280px; resize: none; }
+.sc-texte-action { display: flex; justify-content: flex-end; }
+.sc-texte-action .sc-btn { width: auto; height: 50px; font-size: 15px; }
+.sc-cote { display: flex; flex-direction: column; gap: 16px; }
+.sc-carte--petite { padding: 20px; }
+.sc-conseils { display: flex; flex-direction: column; gap: 14px; margin: 14px 0 0; padding: 0; list-style: none; }
+.sc-conseils li { display: flex; gap: 12px; }
+.sc-conseils i { flex: none; width: 26px; height: 26px; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: #FFE6D2; font-style: normal; font-size: 12px; font-weight: 700; }
+.sc-conseils li > span { display: flex; flex-direction: column; gap: 1px; }
+.sc-conseils b { font-size: 15px; font-weight: 700; }
+.sc-conseils li > span > span { font-size: 13px; font-weight: 500; line-height: 1.4; color: var(--ch-doux); }
+
+.sc-page--large.sc-page--outil .sc-outil { max-width: 620px; padding-top: 24px; }
+.sc-page--large .sc-barre { max-width: 620px; width: 100%; box-sizing: border-box; margin: 0 auto; padding-top: 32px; }
+.sc-page--large .sc-viseur { aspect-ratio: 4 / 3; }
+.sc-page--large.sc-page--carte .sc-hero--centre { padding-bottom: 110px; }
+.sc-page--large .sc-carte--etat { max-width: 520px; margin: -80px auto 0; padding: 28px; }
+.sc-page--large .sc-carte-titre { font-size: 26px; }
+
+@media (max-width: 1240px) {
+  .sc-colonnes { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); padding: 0 32px; }
+  .sc-cote { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr; }
 }
-
-@keyframes scanPopIn {
-  from { opacity: 0; transform: scale(0.94); }
-  to   { opacity: 1; transform: scale(1); }
+@media (prefers-reduced-motion: reduce) {
+  .sc-anneau, .sc-feuille { animation: none; }
 }
-
-/* ── Responsive mobile ── */
-@media (max-width: 430px) {
-  .scan-page .scan-tabs-wrap { padding: 4px 14px 2px; }
-  .scan-page .scan-content { padding: 8px 14px 20px; gap: 12px; }
-  .scan-page .scan-viewfinder-shell { padding: 8px; }
-  .scan-page .scan-shutter-row { gap: 28px; }
-  .scan-page .scan-shutter { width: 64px; height: 64px; }
-  .scan-page .scan-shutter-inner { width: 44px; height: 44px; }
-}
-
-/* ─── Refonte validée du 20/10 : Scan (téléphone) ──────────────────
- * Caméra en plein écran sombre, cadre orange, quota en pastille. La
- * feuille Texte reste claire. */
-.scan-v2 .scan-haut {
-  display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-shrink: 0;
-  padding: calc(14px + env(safe-area-inset-top, 0px)) 18px 8px;
-}
-.scan-v2 .scan-fermer { width: 42px; height: 42px; display: grid; place-items: center; border: 0; border-radius: 50%; background: #fff; color: #1B1A23; cursor: pointer; box-shadow: 0 4px 14px rgba(120,60,20,.08); }
-.scan-v2 .scan-haut .scan-quota { margin: 0; padding: 8px 14px; border-radius: 99px; background: #fff; color: #1B1A23; font-size: 13px; font-weight: 700; box-shadow: 0 4px 14px rgba(120,60,20,.08); }
-.scan-v2 .scan-tabs { background: #fff; border-radius: 99px; box-shadow: 0 4px 14px rgba(120,60,20,.08); }
-.scan-v2 .scan-tab { border-radius: 99px; color: #6E675B; }
-.scan-v2 .scan-tab--active { background: #FFE6D2; color: #C25407; box-shadow: none; }
-
-.scan-v2--photo { background: #2D2B33; }
-.scan-v2--photo .scan-haut .scan-fermer,
-.scan-v2--photo .scan-haut .scan-quota { background: rgba(255,255,255,.16); color: #fff; box-shadow: none; }
-.scan-v2--photo .scan-tabs { background: rgba(255,255,255,.12); box-shadow: none; }
-.scan-v2--photo .scan-tab { color: rgba(255,255,255,.7); }
-.scan-v2--photo .scan-tab--active { background: #fff; color: #1B1A23; }
-.scan-v2--photo .scan-content { padding: 6px 0 calc(24px + env(safe-area-inset-bottom, 0px)); gap: 18px; }
-.scan-v2--photo .scan-viewfinder-shell { background: transparent; box-shadow: none; padding: 0; border-radius: 0; }
-.scan-v2--photo .viewfinder { border-radius: 0; background: #2D2B33; }
-.scan-v2--photo .corner { width: 44px; height: 44px; border-color: #FF9B5C !important; border-width: 4px !important; border-radius: 0; }
-.scan-v2--photo .corner-tl { top: 36px; left: 28px; border-radius: 14px 0 0 0 !important; }
-.scan-v2--photo .corner-tr { top: 36px; right: 28px; border-radius: 0 14px 0 0 !important; }
-.scan-v2--photo .corner-bl { bottom: 36px; left: 28px; border-radius: 0 0 0 14px !important; }
-.scan-v2--photo .corner-br { bottom: 36px; right: 28px; border-radius: 0 0 14px 0 !important; }
-.scan-v2--photo .scan-line { height: 3px; border-radius: 99px; left: 28px; right: 28px; background: linear-gradient(90deg, transparent, #FF9B5C, transparent); box-shadow: 0 0 18px rgba(255,155,92,.85); }
-.scan-v2--photo .scan-placeholder-title { color: #fff; }
-.scan-v2--photo .scan-placeholder-sub { color: rgba(255,255,255,.65); }
-.scan-v2--photo .scan-side-btn { background: rgba(255,255,255,.16); color: #fff; box-shadow: none; }
-.scan-v2--photo .scan-shutter { background: transparent; border-color: #fff; box-shadow: none; }
-.scan-v2--photo .scan-tip-trigger { background: rgba(255,255,255,.12); color: #fff; box-shadow: none; }
-.scan-v2--photo .scan-tip-trigger-label { color: #fff; }
-.scan-v2--photo .scan-tip-trigger { display: flex; width: fit-content; margin: 0 auto; }

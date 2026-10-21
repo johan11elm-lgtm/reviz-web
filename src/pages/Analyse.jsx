@@ -1,4 +1,3 @@
-import { ResumeIcon, FlashcardsIcon, MindmapIcon, QuizIcon } from '../components/Icons';
 import { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
@@ -16,7 +15,7 @@ import { MissingLessonState } from '../components/MissingLessonState';
 import { Pantin } from '../components/Pantin';
 import { BulleReviz } from '../components/reviz/BulleReviz';
 import { Parcours } from '../components/reviz/Parcours';
-import { teinteMatiere, varsTeinte as variablesTeinte } from '../utils/teinteMatiere';
+import { TEINTES, teinteMatiere, varsTeinte as variablesTeinte } from '../utils/teinteMatiere';
 import { getScanStatus } from '../services/scanLimitService';
 import { track, scanErrorCode } from '../services/statsService';
 import { subjectInfo, subjectMascot } from '../utils/subjects';
@@ -86,19 +85,23 @@ const Coche = ({ taille = 13 }) => (
 const pluriel = (n, mot) => `${n} ${mot}${n > 1 ? 's' : ''}`;
 const POSE_ETAPE = { '/resume': 'reading', '/flashcards': 'flashcard', '/quiz': 'quiz' };
 
-// ─── Écran de chargement ─────────────────────────────────────────────
-const STEPS = [
-  { id: 'flashcards', icon: <FlashcardsIcon />, name: 'Flashcards',   tone: 'violet', doneAt: 20 },
-  { id: 'quiz',       icon: <QuizIcon />, name: 'Quiz',          tone: 'orange', doneAt: 47 },
-  { id: 'resume',     icon: <ResumeIcon />, name: 'Résumé',        tone: 'green',  doneAt: 67 },
-  { id: 'mindmap',    icon: <MindmapIcon />, name: 'Carte mentale', tone: 'pink',   doneAt: 85 },
+// ─── Préparation (handoff Scanner du 21/10) ──────────────────────────
+// La progression vient du flux de l'analyse ; phrase et pose changent par palier, et les 4
+// formats se cochent un par un (cosmétique : l'IA les écrit dans la même réponse).
+const PALIERS = [
+  { des: 0, phrase: 'Je lis ta leçon.', pose: 'reading' },
+  { des: 16, phrase: 'Je repère l’essentiel.', pose: 'reading' },
+  { des: 35, phrase: 'Je prépare tes flashcards.', pose: 'flashcard' },
+  { des: 57, phrase: 'J’écris le quiz.', pose: 'writing' },
+  { des: 78, phrase: 'Je trace la carte mentale.', pose: 'thinking' },
+  { des: 95, phrase: 'C’est prêt.', pose: 'celebration' },
 ];
-
-function getStepState(index, progress) {
-  if (progress >= STEPS[index].doneAt) return 'done';
-  const prevDone = index === 0 ? true : progress >= STEPS[index - 1].doneAt;
-  return prevDone ? 'active' : 'pending';
-}
+const FORMATS_PREP = [
+  { nom: 'Résumé', pret: 35 },
+  { nom: 'Flashcards', pret: 57 },
+  { nom: 'Quiz corrigé', pret: 78 },
+  { nom: 'Carte mentale', pret: 95 },
+];
 
 // ─── Composant ────────────────────────────────────────────────────────
 export default function Analyse() {
@@ -227,6 +230,31 @@ export default function Analyse() {
     INVALID_API_KEY: { title: 'Oups, ça a coincé', sub: 'Réessaie dans un moment.' },
   };
   const errInfo = errorMessages[error] ?? { title: 'Oups, ça a coincé', sub: 'Vérifie ta connexion et réessaie.' };
+  // Écran d'erreur (handoff Scanner) : photo illisible, connexion coupée, ou le message du cas.
+  const parPhoto = !!localStorage.getItem('reviz-captured-image');
+  const verScan = () => navigate(parPhoto ? '/scan' : '/scan?mode=texte');
+  const erreur = ['INVALID_JSON', 'EMPTY_RESPONSE', 'IMAGE_TOO_LARGE'].includes(error) ? {
+    pose: 'search',
+    lignes: parPhoto ? ['Je n’arrive pas à lire cette photo.', 'Reprends-la plus droite et mieux éclairée.'] : ['Je n’arrive pas à lire ce texte.', 'Vérifie que c’est bien ta leçon.'],
+    titre: parPhoto ? 'On recommence la photo ?' : 'On réessaie ?',
+    texte: parPhoto ? 'Pose ta feuille à plat, près d’une fenêtre ou sous une lampe, et approche-toi jusqu’à ce que les lettres soient nettes.' : 'Recolle le texte de ta leçon, ou prends-la directement en photo.',
+    action: [parPhoto ? 'Reprendre la photo' : 'Modifier le texte', verScan],
+    autre: [parPhoto ? 'Coller le texte' : 'Prendre une photo', () => navigate(parPhoto ? '/scan?mode=texte' : '/scan')],
+  } : ['NETWORK_ERROR', 'TIMEOUT'].includes(error) ? {
+    pose: 'confused',
+    lignes: ['La connexion s’est coupée.', parPhoto ? 'Ta photo n’est pas perdue.' : 'Ton texte n’est pas perdu.'],
+    titre: 'On réessaie dans un instant ?',
+    texte: 'Vérifie ton Wi-Fi ou tes données mobiles, puis relance l’envoi.',
+    action: ['Réessayer', () => window.location.reload()],
+    autre: ['Plus tard', () => navigate('/cours')],
+  } : {
+    pose: 'confused',
+    lignes: [errInfo.title + (/[.!?]$/.test(errInfo.title) ? '' : '.'), 'Rien de grave, on recommence.'],
+    titre: errInfo.title,
+    texte: errInfo.sub,
+    action: errInfo.cta ? [errInfo.cta.label, () => navigate(errInfo.cta.to)] : ['Retour au scan', verScan],
+    autre: ['Plus tard', () => navigate('/cours')],
+  };
 
   // ── Où en est l'élève ──
   const total = displayLesson.flashcardsCount ?? 0;
@@ -454,74 +482,61 @@ export default function Analyse() {
   return (
     <div className={`app app--no-halo analyse-page ch-page${isDesktop ? ' app--large ch-page--large' : ''}`}>
 
-      {/* ── Écran de chargement ── */}
-      {isLoading && (
-        <div className="analyse-loading-screen">
-          <Mascot
-            pose="thinking"
-            size={180}
-            glow
-            animate
-            priority
-            alt=""
-            aria-hidden="true"
-          />
-          <div className="analyse-ls-title">Réviz prépare<br/>ta séance</div>
-          <div className="analyse-ls-grid">
-            {STEPS.map((step, i) => {
-              const state = getStepState(i, progress);
-              return (
-                <div
-                  key={step.id}
-                  className={`analyse-ls-card analyse-ls-card--${state} analyse-ls-card--${step.tone}`}
-                >
-                  {state === 'active' && <div className="analyse-ls-shimmer" />}
-                  {state === 'done'   && <span className="analyse-ls-badge">✓</span>}
-                  <span className="analyse-ls-emoji">{step.icon}</span>
-                  <span className="analyse-ls-name">{step.name}</span>
-                </div>
-              );
-            })}
+      {/* ── Réviz prépare la leçon ── */}
+      {isLoading && (() => {
+        const palier = [...PALIERS].reverse().find(x => progress >= x.des);
+        const enCours = FORMATS_PREP.findIndex(f => progress < f.pret);
+        return (
+          <div className="an-etat" style={variablesTeinte(TEINTES.peche)}>
+            <div className="ch-hero an-etat-hero">
+              <span className="ch-deco ch-deco--a" aria-hidden="true" />
+              <span className="ch-deco ch-deco--b" aria-hidden="true" />
+              <span className="ch-grain" aria-hidden="true" />
+              <span className="an-etat-sur">Ta leçon est entre de bonnes mains</span>
+              <BulleReviz key={palier.phrase} lignes={[palier.phrase, 'Environ 30 secondes.']} grande={isDesktop} className="an-etat-bulle" />
+              <Mascot pose={palier.pose} size={isDesktop ? 280 : 200} alt="" aria-hidden="true" priority />
+            </div>
+            <div className="an-etat-carte" role="status" aria-label={`${palier.phrase} ${progress} %`}>
+              <h1 className="an-etat-titre">Ta leçon devient</h1>
+              <ul className="an-formats">
+                {FORMATS_PREP.map((f, i) => {
+                  const etat = progress >= f.pret ? 'pret' : i === enCours ? 'cours' : 'afaire';
+                  return (
+                    <li key={f.nom} className={`an-format an-format--${etat}`}>
+                      <span className="an-format-rond" aria-hidden="true">{etat === 'pret' && <Coche />}</span>
+                      <b>{f.nom}</b>
+                      {etat !== 'afaire' && <span>{etat === 'pret' ? 'Prêt' : 'En cours'}</span>}
+                    </li>
+                  );
+                })}
+              </ul>
+              <div className="an-barre"><span className="an-barre-fond"><i style={{ width: `${Math.max(progress, 4)}%` }} /></span><b>{progress}&nbsp;%</b></div>
+            </div>
           </div>
-          <div className={`analyse-ls-bar${progress > 0 ? ' analyse-ls-bar--visible' : ''}`}>
-            <div className="analyse-ls-bar-fill" style={{ width: progress + '%' }} />
-          </div>
-        </div>
-      )}
+        );
+      })()}
 
-      {/* ── Écran d'erreur ── */}
+      {/* ── Erreur, sans dramatiser ── */}
       {error && !isLoading && (
-        <div className="analyse-loading-screen">
-          <Mascot
-            pose="confused"
-            size={200}
-            glow
-            priority
-            alt=""
-            aria-hidden="true"
-          />
-          <div className="analyse-ls-title">
-            {errInfo.title}
+        <div className="an-etat" style={variablesTeinte(TEINTES.peche)}>
+          <div className="ch-hero an-etat-hero">
+            <span className="ch-deco ch-deco--a" aria-hidden="true" />
+            <span className="ch-deco ch-deco--b" aria-hidden="true" />
+            <span className="ch-grain" aria-hidden="true" />
+            <div className="an-etat-haut">
+              <button type="button" className="an-etat-fermer" onClick={() => navigate('/cours')} aria-label="Fermer">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12" /></svg>
+              </button>
+            </div>
+            <BulleReviz lignes={erreur.lignes} grande={isDesktop} className="an-etat-bulle" />
+            <Mascot pose={erreur.pose} size={isDesktop ? 260 : 190} alt="" aria-hidden="true" priority />
           </div>
-          <p className="analyse-error-sub">
-            {errInfo.sub}
-          </p>
-          {errInfo.cta && (
-            <button
-              type="button"
-              className="rv-btn-cta"
-              onClick={() => navigate(errInfo.cta.to)}
-            >
-              {errInfo.cta.label}
-            </button>
-          )}
-          <button
-            type="button"
-            className="rv-btn-cta rv-btn-cta--ghost"
-            onClick={() => navigate('/scan')}
-          >
-            ← Retour au scan
-          </button>
+          <div className="an-etat-carte">
+            <h1 className="an-etat-titre">{erreur.titre}</h1>
+            <p className="an-etat-txt">{erreur.texte}</p>
+            <button type="button" className="an-etat-btn" onClick={erreur.action[1]}>{erreur.action[0]}</button>
+            <button type="button" className="an-etat-btn an-etat-btn--creme" onClick={erreur.autre[1]}>{erreur.autre[0]}</button>
+          </div>
         </div>
       )}
 
