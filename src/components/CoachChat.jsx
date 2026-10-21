@@ -2,11 +2,8 @@ import { Fragment, useState, useEffect, useRef } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { useModalA11y } from '../hooks/useModalA11y';
 import { Mascot } from './Mascot';
-import { nbsp } from '../utils/typography';
-import { BulbIcon, StarIcon, QuizIcon, PencilIcon } from './Icons';
 import { sendCoachMessage, CHAT_MAX_MESSAGE_LENGTH } from '../services/chatService';
 import { ChoixFormule } from './ChoixFormule';
-import { EtoileIA } from './BottomNav';
 import './CoachChat.css';
 import './RevizPlus.css';
 
@@ -17,23 +14,7 @@ const SUGGESTIONS = [
   "C'est quoi le plus important à retenir ?",
 ];
 
-// Page Réviz IA : relances sous la dernière réponse.
-const RELANCES = ['Fais-moi réciter', 'Un exemple', 'Plus simple'];
-const RELANCE_TEXTE = {
-  'Fais-moi réciter': 'Fais-moi réciter : pose-moi une question à la fois.',
-  'Un exemple': 'Donne-moi un exemple concret.',
-  'Plus simple': 'Explique-moi ça plus simplement.',
-};
-
-// Page /coach : cartes d'amorce avec icône et sous-titre (façon assistant IA).
-const PAGE_SUGGESTIONS = [
-  { Icon: BulbIcon,   text: 'Explique-moi ça simplement', sub: 'Avec des mots de tous les jours' },
-  { Icon: PencilIcon, text: 'Donne-moi un exemple concret', sub: 'Pour voir comment ça marche' },
-  { Icon: StarIcon,   text: "C'est quoi le plus important à retenir ?", sub: "L'essentiel pour le contrôle" },
-  { Icon: QuizIcon,   text: 'Pose-moi une question pour vérifier', sub: 'Teste-toi sur la leçon' },
-];
-
-const ERROR_MESSAGES = {
+export const COACH_ERREURS = {
   NETWORK_ERROR:      'Pas de connexion… Vérifie ton réseau et réessaie.',
   TIMEOUT:            'Ça a pris trop de temps. Réessaie dans un instant.',
   RATE_LIMIT:         "Beaucoup de monde d'un coup ! Patiente un petit moment.",
@@ -146,14 +127,11 @@ export function renderCoachMessage(text) {
   return blocks;
 }
 
-/** Une ligne du fil côté coach : avatar + bulle (ou indicateur de frappe).
- * Page Réviz IA (refonte du 20/10) : l'étoile à la place de la mascotte, pas de bulle. */
-function CoachRow({ children, typing = false, ia = false }) {
+/** Une ligne du fil côté coach : avatar + bulle (ou indicateur de frappe). */
+function CoachRow({ children, typing = false }) {
   return (
-    <div className={`coach-row coach-row--coach${ia ? ' coach-row--ia' : ''}`}>
-      {ia
-        ? <span className="coach-avatar coach-avatar--ia" aria-hidden="true"><EtoileIA id="rv-ia-fil" size={22} /></span>
-        : <Mascot pose="coach" size={30} className="coach-avatar" alt="" aria-hidden="true" />}
+    <div className="coach-row coach-row--coach">
+      <Mascot pose="coach" size={30} className="coach-avatar" alt="" aria-hidden="true" />
       {typing ? (
         <div className="coach-bubble coach-bubble--coach coach-bubble--typing" aria-label="Le coach réfléchit">
           <span /><span /><span />
@@ -167,9 +145,15 @@ function CoachRow({ children, typing = false, ia = false }) {
 
 function storageKey(lessonId) { return `reviz-coach-${lessonId}`; }
 
-function loadConversation(lessonId) {
+/** Conversation d'une leçon (sessionStorage : fermée avec l'onglet, jamais côté serveur). */
+export function loadConversation(lessonId) {
   try { return JSON.parse(sessionStorage.getItem(storageKey(lessonId)) || '[]'); }
   catch { return []; }
+}
+
+export function saveConversation(lessonId, messages) {
+  try { sessionStorage.setItem(storageKey(lessonId), JSON.stringify(messages)); }
+  catch { /* stockage plein : la conversation reste en mémoire */ }
 }
 
 /**
@@ -184,19 +168,16 @@ export function coachPreview(lessonId) {
 }
 
 /**
- * Conversation avec le coach — messages, amorces, saisie. Cœur partagé par
- * le bottom sheet (formats de révision) et la page /coach.
+ * Conversation avec le coach (panneau des formats de révision) : messages, amorces, saisie.
+ * La page Réviz IA (pages/Coach.jsx) a sa propre mise en page et reprend la même conversation.
  * La conversation vit en sessionStorage (fermée avec l'onglet, jamais persistée
  * côté serveur — minimisation des données, public mineur).
  * @param {string} lessonId      leçon Firestore (contexte résolu côté serveur)
  * @param {string} [prefill]     question pré-remplie (hook de friction du quiz)
  * @param {string} [className]
- * @param {() => void} [onChangeLesson]  page (téléphone) : lien « Changer de leçon » sur l'accueil du chat
  */
-export function CoachConversation({ lessonId, prefill, className = '', variant = 'sheet', lessonTitle = '', onChangeLesson }) {
-  const isPage = variant === 'page';
-  const { hasRevizPlus, getUserLevel, currentUser } = useAuth();
-  const prenom = currentUser?.displayName?.split(' ')[0];
+export function CoachConversation({ lessonId, prefill, className = '' }) {
+  const { hasRevizPlus, getUserLevel } = useAuth();
 
   const [messages, setMessages] = useState(() => loadConversation(lessonId));
   const [input, setInput]             = useState('');
@@ -215,10 +196,7 @@ export function CoachConversation({ lessonId, prefill, className = '', variant =
     if (prefill) setInput(prefill);
   }, [prefill]);
 
-  useEffect(() => {
-    try { sessionStorage.setItem(storageKey(lessonId), JSON.stringify(messages)); }
-    catch { /* stockage plein : la conversation reste en mémoire */ }
-  }, [messages, lessonId]);
+  useEffect(() => { saveConversation(lessonId, messages); }, [messages, lessonId]);
 
   // Suivre le fil : toujours caler la vue sur le dernier message / delta.
   useEffect(() => {
@@ -249,7 +227,7 @@ export function CoachConversation({ lessonId, prefill, className = '', variant =
       if (err.message === 'CHAT_LIMIT') {
         setQuotaOut(true);
       } else {
-        setError(ERROR_MESSAGES[err.message] ?? 'Oups, ça a coincé. Réessaie dans un instant.');
+        setError(COACH_ERREURS[err.message] ?? 'Oups, ça a coincé. Réessaie dans un instant.');
       }
       // La question reste affichée mais n'est pas comptée comme répondue :
       // on la retire de l'historique envoyé, l'élève peut la reposer.
@@ -266,50 +244,14 @@ export function CoachConversation({ lessonId, prefill, className = '', variant =
     send(input);
   }
 
-  // Page : Entrée envoie, Maj+Entrée va à la ligne ; le champ grandit avec le texte.
-  function handleKeyDown(e) {
-    if (e.key === 'Enter' && !e.shiftKey && !e.nativeEvent.isComposing) {
-      e.preventDefault();
-      send(input);
-    }
-  }
-  const textareaRef = useRef(null);
-  useEffect(() => {
-    const el = textareaRef.current;
-    if (!el) return;
-    el.style.height = 'auto';
-    el.style.height = `${Math.min(el.scrollHeight, 200)}px`;
-  }, [input]);
-
   const empty = messages.length === 0 && !isStreaming && !quotaOut;
 
   return (
-    <div className={['coach-conversation', isPage && 'coach-conversation--page', className].filter(Boolean).join(' ')}>
+    <div className={['coach-conversation', className].filter(Boolean).join(' ')}>
         <div className="coach-messages" ref={scrollRef} role="log" aria-live="polite">
-          {isPage && empty ? (
-            <div className="coach-hero coach-hero--ia">
-              <EtoileIA id="rv-ia-accueil" size={44} />
-              <h2 className="coach-hero-title">
-                {prenom ? `Salut ${prenom}.` : 'Salut.'}<br />
-                On révise quoi {new Date().getHours() >= 17 ? 'ce soir' : "aujourd'hui"}&nbsp;?
-              </h2>
-              {lessonTitle && <p className="coach-hero-sub">Je connais ta leçon « {lessonTitle} ». Demande-moi ce que tu veux.</p>}
-              <ul className="coach-hero-list">
-                {PAGE_SUGGESTIONS.map(s => (
-                  <li key={s.text}>
-                    <button type="button" className="coach-hero-row" onClick={() => send(s.text)}>
-                      <span>{nbsp(s.text)}</span>
-                      <span className="coach-hero-row-arrow" aria-hidden="true">↗</span>
-                    </button>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ) : !isPage && (
-            <CoachRow>
-              Salut ! Un truc pas clair dans cette leçon ? Pose-moi ta question, je t'explique.
-            </CoachRow>
-          )}
+          <CoachRow>
+            Salut ! Un truc pas clair dans cette leçon ? Pose-moi ta question, je t'explique.
+          </CoachRow>
 
           {messages.map((m, i) => (
             m.role === 'user' ? (
@@ -317,21 +259,12 @@ export function CoachConversation({ lessonId, prefill, className = '', variant =
                 <div className="coach-bubble coach-bubble--user">{m.content}</div>
               </div>
             ) : (
-              <CoachRow key={i} ia={isPage}>
-                {renderCoachMessage(m.content)}
-                {isPage && i === messages.length - 1 && !isStreaming && !quotaOut && (
-                  <div className="coach-relances">
-                    {RELANCES.map(r => (
-                      <button type="button" key={r} className="coach-relance" onClick={() => send(RELANCE_TEXTE[r])}>{r}</button>
-                    ))}
-                  </div>
-                )}
-              </CoachRow>
+              <CoachRow key={i}>{renderCoachMessage(m.content)}</CoachRow>
             )
           ))}
 
           {isStreaming && (
-            draft ? <CoachRow ia={isPage}>{renderCoachMessage(draft)}</CoachRow> : <CoachRow typing ia={isPage} />
+            draft ? <CoachRow>{renderCoachMessage(draft)}</CoachRow> : <CoachRow typing />
           )}
 
           {error && (
@@ -340,7 +273,7 @@ export function CoachConversation({ lessonId, prefill, className = '', variant =
 
           {quotaOut && (
             <div className="coach-quota">
-              <CoachRow ia={isPage}>
+              <CoachRow>
                 {hasRevizPlus
                   ? 'Wow, on a beaucoup discuté aujourd\'hui ! On se retrouve demain pour la suite.'
                   : 'Tu as utilisé tous tes messages du jour ! On se retrouve demain, ou passe à Réviz+ pour continuer maintenant.'}
@@ -350,7 +283,7 @@ export function CoachConversation({ lessonId, prefill, className = '', variant =
           )}
         </div>
 
-        {!isPage && empty && (
+        {empty && (
           <div className="coach-suggestions">
             <span className="coach-suggestions-label">Pour commencer</span>
             <div className="coach-suggestions-row">
@@ -366,47 +299,7 @@ export function CoachConversation({ lessonId, prefill, className = '', variant =
           </div>
         )}
 
-        <form className={`coach-input-row${isPage ? ' coach-input-row--ia' : ''}`} onSubmit={handleSubmit}>
-          {isPage ? (
-            <div className="coach-ia-cadre">
-              <div className="coach-ia-champ">
-                <textarea
-                  ref={textareaRef}
-                  className="coach-input coach-input--area"
-                  rows={1}
-                  value={input}
-                  onChange={e => setInput(e.target.value)}
-                  onKeyDown={handleKeyDown}
-                  placeholder="Demande à Réviz IA"
-                  maxLength={CHAT_MAX_MESSAGE_LENGTH}
-                  disabled={isStreaming || quotaOut}
-                  aria-label="Ta question sur la leçon"
-                />
-                <div className="coach-ia-outils">
-                  {lessonTitle && (
-                    onChangeLesson ? (
-                      <button type="button" className="coach-ia-lecon" onClick={onChangeLesson} aria-label={`Leçon : ${lessonTitle}. Changer de leçon`}>
-                        <span className="coach-ia-point" aria-hidden="true" />{lessonTitle}
-                      </button>
-                    ) : (
-                      <span className="coach-ia-lecon"><span className="coach-ia-point" aria-hidden="true" />{lessonTitle}</span>
-                    )
-                  )}
-                  <span className="coach-ia-flex" />
-                  <button
-                    type="submit"
-                    className="coach-send-btn coach-send-btn--ia"
-                    disabled={!input.trim() || isStreaming || quotaOut}
-                    aria-label="Envoyer la question"
-                  >
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                      <path d="M12 19V5" /><path d="m5 12 7-7 7 7" />
-                    </svg>
-                  </button>
-                </div>
-              </div>
-            </div>
-          ) : (
+        <form className="coach-input-row" onSubmit={handleSubmit}>
           <div className="coach-input-pill">
             <input
               className="coach-input"
@@ -429,13 +322,6 @@ export function CoachConversation({ lessonId, prefill, className = '', variant =
               </svg>
             </button>
           </div>
-          )}
-          {isPage && (
-            <p className="coach-input-hint">
-              <span className="coach-input-hint-keys">Entrée pour envoyer · Maj + Entrée pour aller à la ligne · </span>
-              <span>Réviz IA connaît ta leçon et t'aide à trouver, sans faire tes devoirs à ta place. Il peut se tromper.</span>
-            </p>
-          )}
         </form>
     </div>
   );

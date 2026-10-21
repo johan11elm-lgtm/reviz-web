@@ -1,6 +1,6 @@
 import { NavLink, Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { Mascot } from './Mascot';
+import { EtoileIA } from './BottomNav';
 import { PleinIcon } from './BottomNav';
 import { AVIS_PROFS_URL, isDecouverte } from '../services/decouverteService';
 import './NavHaut.css';
@@ -57,7 +57,7 @@ export function NavHaut() {
       </div>
       {!isGuest && (
         <NavLink to="/coach" className={({ isActive }) => `nav-haut-ia${isActive ? ' nav-haut-ia--actif' : ''}`} aria-label="Réviz IA" title="Réviz IA">
-          <span className="nav-haut-ia-rond"><Mascot pose="coach" size={48} alt="" aria-hidden="true" /></span>
+          <span className="nav-haut-ia-rond"><EtoileIA id="rv-ia-nav-haut" size={26} /></span>
         </NavLink>
       )}
     </nav>
