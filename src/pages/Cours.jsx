@@ -5,9 +5,9 @@ import { BottomNav } from '../components/BottomNav';
 import { Mascot } from '../components/Mascot';
 import { Pantin } from '../components/Pantin';
 import { BulleReviz } from '../components/reviz/BulleReviz';
-import { RevizPlusSheet } from '../components/RevizPlus';
+import { RevizPlusSheet, RevizPlusBadge } from '../components/RevizPlus';
 import { loadLessons, restoreLesson, deleteLesson, syncFromFirestore } from '../services/historyService';
-import { loadRevisions } from '../services/revisionService';
+import { loadRevisions, syncRevisionsFromFirestore } from '../services/revisionService';
 import { getScanStatus } from '../services/scanLimitService';
 import { SUBJECT_MAP, subjectKey, subjectMascot } from '../utils/subjects';
 import { TEINTES, teinteMatiere, varsTeinte } from '../utils/teinteMatiere';
@@ -110,6 +110,7 @@ export default function Cours() {
   const { isGuest } = useAuth();
   const isDesktop = useIsDesktop();
   const [toutes, setToutes] = useState(() => loadLessons());
+  const [revisions, setRevisions] = useState(() => loadRevisions());
   const [synchro, setSynchro] = useState(true);
   const [q, setQ] = useState('');
   const [filtre, setFiltre] = useState('all');
@@ -118,17 +119,18 @@ export default function Cours() {
   const [offre, setOffre] = useState(false);
 
   useEffect(() => {
-    syncFromFirestore().then(setToutes).finally(() => setSynchro(false));
+    // Les révisions (dernière ouverture, résumé lu, quiz fait) arrivent avec les leçons.
+    Promise.all([syncFromFirestore().then(setToutes), syncRevisionsFromFirestore().then(setRevisions)])
+      .finally(() => setSynchro(false));
   }, []);
 
   // Les leçons scannées (ou collées), de la plus récente à la plus ancienne ; chacune avec son avancement.
   const lecons = useMemo(() => {
-    const revisions = loadRevisions();
     return toutes
       .filter(l => l.source !== 'programme')
       .sort((a, b) => new Date(b.scannedAt) - new Date(a.scannedAt))
       .map(l => ({ ...l, matiere: l.metadata.subject || 'Autre', titre: l.metadata.title, av: avancementLecon(l, revisions) }));
-  }, [toutes]);
+  }, [toutes, revisions]);
   const ordre = Object.keys(SUBJECT_MAP);
   const matieres = useMemo(() => {
     const m = new Map();
@@ -200,7 +202,12 @@ export default function Cours() {
         onEntree={() => setParle(true)} onClick={() => pantin.current?.geste('saut')} label="Réviz, ta mascotte" />
     </div>
   );
-  const quota = !illimite && (
+  const quota = illimite ? (
+    <div className="le-quota le-quota--illimite">
+      <RevizPlusBadge />
+      <span className="le-quota-txt">Scans illimités</span>
+    </div>
+  ) : (
     <div className="le-quota">
       <span className="le-quota-segments" aria-hidden="true">
         {Array.from({ length: scan.limit }, (_, i) => <i key={i} className={i < scan.used ? 'is-pris' : ''} />)}

@@ -46,6 +46,7 @@
 .le-scan-bouton:active .le-scan-plus { transform: translateY(3px); box-shadow: 0 1px 0 #8F3E05; }
 .le-quota { display: flex; align-items: center; gap: 10px; margin-top: 12px; padding-top: 12px; border-top: 1.5px dashed #EADBCB; }
 .le-quota-segments { display: flex; gap: 4px; }
+.le-quota--illimite .le-quota-txt { flex: 1; }
 .le-quota-segments i { width: 18px; height: 6px; border-radius: 999px; background: #EADBCB; }
 .le-quota-segments i.is-pris { background: #C25407; }
 .le-quota-txt { flex: 1; min-width: 0; font-size: 12px; font-weight: 600; color: var(--ch-doux); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -285,6 +286,7 @@
 
 .le-cartes { position: relative; z-index: 2; display: grid; grid-template-columns: 560px 1fr; gap: 20px; box-sizing: border-box; max-width: 1440px; margin: -76px auto 0; padding: 0 56px; }
 .le-cartes--seule { grid-template-columns: 560px; }
+.le-cartes > .le-carte--scan { display: flex; flex-direction: column; justify-content: space-between; }
 .le-page--large .le-carte { margin: 0; padding: 18px; }
 .le-page--large .le-scan-rond { width: 68px; height: 68px; }
 .le-page--large .le-scan-txt b { font-size: 20px; }
