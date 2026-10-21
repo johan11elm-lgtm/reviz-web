@@ -90,9 +90,24 @@ function Bulle({ texte, parle, sortie, onClick, label }) {
           {lettres.slice(0, n).join('')}
           <span className="hm-bulle-reste">{lettres.slice(n).join('')}</span>
         </span>
-        <span className="hm-bulle-go" aria-hidden="true"><Fleche /></span>
       </button>
     </div>
+  );
+}
+
+/* La carte de ce que Réviz propose : elle monte sous ses pieds pendant qu'il parle. */
+function CarteProposition({ carte, sortie, onClick }) {
+  return (
+    <button type="button" className={`hm-proposition${sortie ? '' : ' hm-proposition--la'}`} onClick={onClick} tabIndex={sortie ? -1 : 0}>
+      <span className="hm-proposition-rond" style={{ background: carte.fond }}>
+        <Mascot pose={carte.pose} size={46} alt="" aria-hidden="true" />
+      </span>
+      <span className="hm-proposition-txt">
+        <span className="hm-proposition-titre">{carte.titre}</span>
+        <span className="hm-proposition-sous">{carte.sous}</span>
+      </span>
+      <span className="hm-proposition-go" aria-hidden="true"><Fleche /></span>
+    </button>
   );
 }
 
@@ -308,13 +323,20 @@ export default function Home() {
   const suggestions = [
     { texte: dit, label: cta, action, expr: h.expression },
     titreLecon && (fcLast > 0
-      ? { texte: `Tes cartes de « ${court(titreLecon)} » t'attendent.`, label: 'Réviser mes cartes', action: ouvrirCartes, expr: 'content', geste: 'coucou' }
+      ? { texte: `Tes cartes de « ${court(titreLecon)} » t'attendent.`, label: 'Réviser mes cartes', action: ouvrirCartes, expr: 'content', geste: 'coucou',
+          carte: { pose: 'flashcard', fond: '#FFE6D2', titre: 'Flashcards', sous: `${fcLast} carte${fcLast > 1 ? 's' : ''} à revoir · ${court(titreLecon, 20)}` } }
       : { texte: `Un petit quiz sur « ${court(titreLecon)} » ?`, label: 'Lancer le quiz', expr: 'emerveille',
-          action: () => { restoreLesson(lastLesson.id); navigate('/quiz'); } }),
-    { texte: 'Une question sur ton cours ? Demande-moi.', label: 'Parler à Réviz IA', action: () => navigate('/coach'), expr: 'reflechit' },
-    humeurId !== 'fete' && { texte: 'Prêt à défier un ami en Battle ?', label: 'Lancer une Battle', action: () => navigate('/battle'), expr: 'determine', geste: 'brasEnLair' },
-    !isGuest && cta !== 'Scanner une leçon' && { texte: 'Une leçon à apprendre ? Prends-la en photo.', label: 'Scanner une leçon', action: () => navigate('/scan'), expr: 'content', geste: 'coucou' },
-    !controle && { texte: 'Un contrôle bientôt ? Dis-moi quand.', label: "Ouvrir l'agenda", action: () => navigate('/agenda'), expr: 'content', geste: 'gratterTete' },
+          action: () => { restoreLesson(lastLesson.id); navigate('/quiz'); },
+          carte: { pose: 'quiz', fond: '#E4E0FA', titre: 'Quiz corrigé', sous: court(titreLecon, 32) } }),
+    // Le coach passe par une API authentifiée : pas de proposition en mode essai (comme la capsule).
+    !isGuest && { texte: 'Une question sur ton cours ? Demande-moi.', label: 'Parler à Réviz IA', action: () => navigate('/coach'), expr: 'reflechit',
+      carte: { pose: 'coach', fond: '#FFD9E4', titre: 'Réviz IA', sous: 'Je t’explique, avec des exemples' } },
+    humeurId !== 'fete' && { texte: 'Prêt à défier un ami en Battle ?', label: 'Lancer une Battle', action: () => navigate('/battle'), expr: 'determine', geste: 'brasEnLair',
+      carte: { pose: 'fire', fond: '#E4E0FA', titre: 'Battle', sous: '5 questions, 15 s, contre un ami' } },
+    !isGuest && cta !== 'Scanner une leçon' && { texte: 'Une leçon à apprendre ? Prends-la en photo.', label: 'Scanner une leçon', action: () => navigate('/scan'), expr: 'content', geste: 'coucou',
+      carte: { pose: 'scanphone', fond: '#DCF5E6', titre: 'Scanner une leçon', sous: 'Résumé, flashcards et quiz' } },
+    !controle && { texte: 'Un contrôle bientôt ? Dis-moi quand.', label: "Ouvrir l'agenda", action: () => navigate('/agenda'), expr: 'content', geste: 'gratterTete',
+      carte: { pose: 'writing', fond: '#FFE6D2', titre: 'Agenda', sous: 'Tes contrôles, et le plan pour chacun' } },
   ].filter(Boolean);
   const sugg = suggestions[tour % suggestions.length];
 
@@ -547,6 +569,10 @@ export default function Home() {
             </div>
             <h1 className="sr-only">{dit}</h1>
             <Bulle key={`${humeurId}-${tour}`} texte={sugg.texte} parle={parle} sortie={sortie} onClick={sugg.action} label={sugg.label} />
+          </div>
+          {/* Place réservée : la carte chevauche le bas du héros, rien ne saute quand elle arrive. */}
+          <div className="hm-proposition-place">
+            {parle && sugg.carte && <CarteProposition key={tour} carte={sugg.carte} sortie={sortie} onClick={sugg.action} />}
           </div>
           <div className="hm-pad hm-pad--chemin">{chemin}</div>
           {rappels}

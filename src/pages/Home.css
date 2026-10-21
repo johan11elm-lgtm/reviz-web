@@ -17,7 +17,7 @@
 /* ── Héros ── */
 .home-page .hm-hero {
   position: relative;
-  height: calc(400px + env(safe-area-inset-top, 0px));
+  height: calc(414px + env(safe-area-inset-top, 0px));
   margin-top: calc(-1 * env(safe-area-inset-top, 0px));
   padding-top: env(safe-area-inset-top, 0px);
   background: var(--hm-bg);
@@ -97,7 +97,7 @@
   position: absolute;
   left: 0;
   right: 0;
-  bottom: 30px;
+  bottom: 44px;
   display: flex;
   justify-content: center;
   z-index: 1;
@@ -110,7 +110,7 @@
   left: 22px;
   right: 22px;
   /* Posée par le bas, juste au-dessus de la tête : la pointe ne bouge pas quand la phrase change. */
-  bottom: 240px;
+  bottom: 254px;
   display: flex;
   justify-content: center;
   pointer-events: none;
@@ -128,7 +128,7 @@
   gap: 12px;
   max-width: 300px;
   margin: 0;
-  padding: 11px 11px 12px 18px;
+  padding: 11px 18px 12px;
   border: 0;
   border-radius: 22px;
   background: #fff;
@@ -138,7 +138,7 @@
   font-weight: 800;
   letter-spacing: -.4px;
   line-height: 1.15;
-  text-align: left;
+  text-align: center;
   text-wrap: balance;
   color: var(--hm-encre);
   transition: transform .12s;
@@ -146,17 +146,6 @@
 .home-page .hm-bulle-txt:active { transform: scale(.97); }
 .home-page .hm-bulle-txt:focus-visible { outline: 3px solid var(--hm-encre); outline-offset: 3px; }
 .home-page .hm-bulle-mots { flex: 1; min-width: 0; }
-.home-page .hm-bulle-go {
-  width: 30px;
-  height: 30px;
-  flex: none;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--hm-btn);
-  color: #fff;
-}
 /* La pointe, vers la tête de Réviz */
 .home-page .hm-bulle-txt::after {
   content: '';
@@ -280,7 +269,68 @@
 
 
 /* ── Le chemin jusqu'au contrôle (téléphone) ── */
-.home-page .hm-pad--chemin { padding-top: 22px; }
+.home-page .hm-pad--chemin { padding-top: 12px; }
+
+/* ── La carte de ce que Réviz propose, à cheval sur le bas du héros ── */
+.home-page .hm-proposition-place {
+  position: relative;
+  z-index: 3;
+  height: 70px;
+  margin-top: -36px;
+  padding: 0 22px;
+  display: flex;
+  justify-content: center;
+}
+.home-page .hm-proposition {
+  width: 100%;
+  max-width: 330px;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 14px 0 10px;
+  border: 0;
+  border-radius: 24px;
+  background: #fff;
+  box-shadow: 0 14px 30px -14px rgba(120,60,20,.45), 0 0 0 1px rgba(120,60,20,.05);
+  font: inherit;
+  color: inherit;
+  text-align: left;
+  opacity: 0;
+  transform: translateY(10px) scale(.96);
+  transition: opacity .18s ease, transform .2s ease;
+}
+.home-page .hm-proposition--la { animation: hmProposition .45s .3s cubic-bezier(.3,1.4,.5,1) both; }
+@keyframes hmProposition {
+  from { opacity: 0; transform: translateY(22px) scale(.92); }
+  to { opacity: 1; transform: none; }
+}
+.home-page .hm-proposition:active { transform: scale(.97); }
+.home-page .hm-proposition:focus-visible { outline: 3px solid var(--hm-encre); outline-offset: 3px; }
+.home-page .hm-proposition-rond {
+  width: 50px;
+  height: 50px;
+  flex: none;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.home-page .hm-proposition-txt { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 1px; }
+.home-page .hm-proposition-titre { font-family: var(--font-display); font-size: 17px; font-weight: 800; letter-spacing: -.3px; color: var(--hm-encre); }
+.home-page .hm-proposition-sous { font-size: 13px; color: var(--hm-doux); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.home-page .hm-proposition-go {
+  width: 32px;
+  height: 32px;
+  flex: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--hm-btn);
+  color: #fff;
+}
 .home-page .hm-chemin-bloc { display: flex; flex-direction: column; gap: 14px; }
 .home-page .hm-chemin {
   position: relative;
