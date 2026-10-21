@@ -1,419 +1,483 @@
-import { PageIntro } from '../components/PageIntro';
-import { SearchIcon } from '../components/Icons';
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { BottomNav } from '../components/BottomNav';
-import { ConfirmModal } from '../components/ConfirmModal';
-import { PageHeader } from '../components/PageHeader';
 import { Mascot } from '../components/Mascot';
+import { Pantin } from '../components/Pantin';
+import { BulleReviz } from '../components/reviz/BulleReviz';
+import { RevizPlusSheet } from '../components/RevizPlus';
 import { loadLessons, restoreLesson, deleteLesson, syncFromFirestore } from '../services/historyService';
-import { countDueCards } from '../services/srsService';
-import { subjectInfo, subjectKey, subjectMascot } from '../utils/subjects';
+import { loadRevisions } from '../services/revisionService';
+import { getScanStatus } from '../services/scanLimitService';
+import { SUBJECT_MAP, subjectKey, subjectMascot } from '../utils/subjects';
+import { TEINTES, teinteMatiere, varsTeinte } from '../utils/teinteMatiere';
+import { avancementLecon } from '../utils/avancementLecon';
 import { useIsDesktop } from '../hooks/useMediaQuery';
+import '../components/reviz/HerosMatiere.css';
 import './Cours.css';
 
-// Map subject.color → DS tone (5 available: violet/orange/green/pink/red)
-const SUBJECT_TONE = {
-  orange: 'orange',
-  yellow: 'orange',
-  indigo: 'violet',
-  blue:   'violet',
-  purple: 'violet',
-  green:  'green',
-  cyan:   'green',
-  pink:   'pink',
-  red:    'red',
-};
+const pluriel = (n, mot) => `${n} ${mot}${n > 1 ? 's' : ''}`;
 
-function formatDate(ts) {
-  const d = new Date(ts), now = new Date();
-  const diffDays = Math.floor((now - d) / 86400000);
-  if (diffDays === 0) return "Aujourd'hui";
-  if (diffDays === 1) return 'Hier';
-  return d.toLocaleDateString('fr-FR', { day: 'numeric', month: 'short' });
+// Pastel et tranche de chaque matière (handoff Mes leçons du 21/10).
+const PASTELS = new Map([
+  [TEINTES.lavande, { pastel: '#E4E0FA', fonce: '#C9C2F2', pointille: '#9F97D9' }],
+  [TEINTES.peche, { pastel: '#FFE6D2', fonce: '#FFC596', pointille: '#E8A877' }],
+  [TEINTES.rose, { pastel: '#FFD9E4', fonce: '#F4B8CB', pointille: '#E39AB1' }],
+  [TEINTES.menthe, { pastel: '#DCF5E6', fonce: '#A8E3C2', pointille: '#7FCB9F' }],
+]);
+const couleurs = matiere => PASTELS.get(teinteMatiere(matiere)) ?? PASTELS.get(TEINTES.peche);
+
+const dateCourte = ts => new Date(ts).toLocaleDateString('fr-FR', { day: 'numeric', month: 'short' });
+function ilYa(ts) {
+  const jours = Math.floor((new Date().setHours(0, 0, 0, 0) - new Date(ts).setHours(0, 0, 0, 0)) / 86400000);
+  if (jours <= 0) return "aujourd'hui";
+  if (jours === 1) return 'hier';
+  if (jours < 7) return `il y a ${jours} jours`;
+  return `le ${dateCourte(ts)}`;
 }
 
-function buildSubjectsFromHistory(rawLessons) {
-  if (rawLessons.length === 0) return [];
-  const map = {};
-  rawLessons.forEach(l => {
-    const name  = l.metadata.subject || 'Autre';
-    const key   = subjectKey(name) || name.toLowerCase().replace(/\s+/g, '-');
-    const info  = subjectInfo(name);
-    if (!map[name]) map[name] = { id: key, name, ...info, lessons: [] };
-    map[name].lessons.push(l);
-  });
-  return Object.values(map);
+// Recherche insensible aux accents et à la casse ; renvoie [avant, trouvé, après] ou null.
+const plat = c => c.normalize('NFD').replace(/\p{M}/gu, '').toLowerCase();
+function trouver(titre, q) {
+  if (!q) return [titre, '', ''];
+  const chars = [...titre];
+  const norm = chars.map(c => plat(c).slice(0, 1) || c).join('');
+  const i = norm.indexOf([...q].map(c => plat(c).slice(0, 1) || c).join(''));
+  if (i < 0) return null;
+  const n = [...q].length;
+  return [chars.slice(0, i).join(''), chars.slice(i, i + n).join(''), chars.slice(i + n).join('')];
 }
 
+const Chevron = () => (
+  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7" /></svg>
+);
+const Plus = ({ taille = 22 }) => (
+  <svg viewBox="0 0 24 24" width={taille} height={taille} fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14" /></svg>
+);
+const Loupe = () => (
+  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>
+);
+const Croix = () => (
+  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12" /></svg>
+);
+const Points = () => (
+  <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><circle cx="5" cy="12" r="2" /><circle cx="12" cy="12" r="2" /><circle cx="19" cy="12" r="2" /></svg>
+);
+const Corbeille = () => (
+  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l1-12M9 7V4h6v3" /></svg>
+);
+const Fleche = ({ taille = 18 }) => (
+  <svg viewBox="0 0 24 24" width={taille} height={taille} fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+);
+const Coche = ({ taille = 11 }) => (
+  <svg viewBox="0 0 24 24" width={taille} height={taille} fill="none" stroke="#fff" strokeWidth="3.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg>
+);
+const Grille = () => (
+  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinejoin="round" aria-hidden="true"><rect x="4" y="4" width="7" height="7" rx="2" /><rect x="13" y="4" width="7" height="7" rx="2" /><rect x="4" y="13" width="7" height="7" rx="2" /><rect x="13" y="13" width="7" height="7" rx="2" /></svg>
+);
+
+const NOMS_ETAPES = ['Résumé', 'Flashcards', 'Quiz'];
+/** Les 3 cases du parcours Résumé → Flashcards → Quiz. */
+function Cases({ etapes, grand = false, pointille }) {
+  return (
+    <span className={`le-cases${grand ? ' le-cases--grand' : ''}`} role="img"
+      aria-label={etapes.map((s, i) => `${NOMS_ETAPES[i]} ${s === 'fait' ? 'fait' : s === 'cours' ? 'en cours' : 'à faire'}`).join(', ')}>
+      {etapes.map((s, i) => (
+        <span key={i} className="le-cases-pas">
+          {grand && i > 0 && <i className="le-cases-trait" style={{ borderColor: pointille }} />}
+          <span className={`le-case le-case--${s}`}>{grand && s === 'fait' && <Coche />}</span>
+        </span>
+      ))}
+    </span>
+  );
+}
+const Pastille = ({ a }) => <span className={`le-pastille le-pastille--${a.etat === 'encours' && a.aRevoir > 0 ? 'travailler' : a.etat}`}><i />{a.pastille}</span>;
+
+const FORMATS = [
+  { nom: 'Résumé', meta: '5 min de lecture', pose: 'reading', fond: '#E4E0FA' },
+  { nom: 'Flashcards', meta: '8 cartes', pose: 'flashcard', fond: '#FFE6D2' },
+  { nom: 'Quiz corrigé', meta: '7 questions', pose: 'quiz', fond: '#DCF5E6' },
+  { nom: 'Carte mentale', meta: "Vue d'ensemble", pose: 'thinking', fond: '#FFD9E4' },
+];
+
+/**
+ * Mes leçons scannées (handoff Claude Design du 21/10) : héros pêche avec Réviz, carte « Scanner
+ * une leçon » et son quota, « À reprendre », puis les leçons par matière avec recherche, filtre,
+ * état, parcours en 3 cases et suppression confirmée. État vide et mode essai.
+ */
 export default function Cours() {
-  const [activeFilter, setActiveFilter]     = useState('toutes');
-  const [searchQuery, setSearchQuery]       = useState('');
-  const [allLessons, setAllLessons]         = useState(() => loadLessons());
-  const [lessonToDelete, setLessonToDelete] = useState(null);
-  const [isSyncing, setIsSyncing]           = useState(true);
   const navigate = useNavigate();
   const { isGuest } = useAuth();
+  const isDesktop = useIsDesktop();
+  const [toutes, setToutes] = useState(() => loadLessons());
+  const [synchro, setSynchro] = useState(true);
+  const [q, setQ] = useState('');
+  const [filtre, setFiltre] = useState('all');
+  const [menu, setMenu] = useState(null);
+  const [aSupprimer, setASupprimer] = useState(null);
+  const [offre, setOffre] = useState(false);
 
   useEffect(() => {
-    syncFromFirestore()
-      .then(lessons => setAllLessons(lessons))
-      .finally(() => setIsSyncing(false));
+    syncFromFirestore().then(setToutes).finally(() => setSynchro(false));
   }, []);
 
-  function handleDelete(id) {
-    deleteLesson(id);
-    setAllLessons(loadLessons());
-    setActiveFilter('toutes');
-  }
-
-  const subjects = buildSubjectsFromHistory(allLessons);
-  const filters  = [
-    { id: 'toutes', label: 'Toutes' },
-    ...subjects.map(s => ({ id: s.id, label: s.name })),
-  ];
-
-  const q = searchQuery.toLowerCase().trim();
-
-  const visibleSubjects = subjects
-    .filter(s => activeFilter === 'toutes' || s.id === activeFilter)
-    .map(s => ({
-      ...s,
-      visibleLessons: s.lessons.filter(l =>
-        !q ||
-        l.metadata.title.toLowerCase().includes(q) ||
-        (l.metadata.excerpt || '').toLowerCase().includes(q)
-      ),
-    }))
-    .filter(s => s.visibleLessons.length > 0);
-
-  const totalVisible = visibleSubjects.reduce((acc, s) => acc + s.visibleLessons.length, 0);
-  const hasLessons = allLessons.length > 0;
-  const isDesktop = useIsDesktop();
-  // « Pas encore synchronisé » ≠ « vraiment vide » : sur un nouvel appareil le
-  // cache local est vide alors que Firestore a des leçons → skeleton, pas empty-state.
-  const showSkeleton = isSyncing && !hasLessons;
-
-  // Compte total de cartes à revoir (toutes matières)
-  const dueCards = useMemo(() => {
-    return allLessons.reduce((sum, l) => sum + countDueCards(l.id, l.flashcardsCount ?? 0), 0);
-  }, [allLessons]);
-
-  // Featured "À reprendre" — dernière leçon récente (< 14 jours)
-  const lastLesson = allLessons[0] ?? null;
-  const lastLessonAge = lastLesson
-    ? (Date.now() - new Date(lastLesson.scannedAt).getTime()) / 86400000
-    : Infinity;
-  const showResume = lastLesson && lastLessonAge < 14;
-  const lastDue = lastLesson ? countDueCards(lastLesson.id, lastLesson.flashcardsCount ?? 0) : 0;
-
-  // Hero narratif — le coach parle toujours : cartes dues, sinon félicitations
-  const heroPhrase = dueCards > 0
-    ? `${dueCards} carte${dueCards > 1 ? 's' : ''} t'attend${dueCards > 1 ? 'ent' : ''}`
-    : 'Tout est révisé, tu gères.';
-
-  // Collapse/expand par matière — tout fermé par défaut, l'user ouvre ce qu'il veut
-  const [expandedSubjects, setExpandedSubjects] = useState(new Set());
-  function toggleSubject(id) {
-    setExpandedSubjects(prev => {
-      const next = new Set(prev);
-      if (next.has(id)) next.delete(id);
-      else next.add(id);
-      return next;
+  // Les leçons scannées (ou collées), de la plus récente à la plus ancienne ; chacune avec son avancement.
+  const lecons = useMemo(() => {
+    const revisions = loadRevisions();
+    return toutes
+      .filter(l => l.source !== 'programme')
+      .sort((a, b) => new Date(b.scannedAt) - new Date(a.scannedAt))
+      .map(l => ({ ...l, matiere: l.metadata.subject || 'Autre', titre: l.metadata.title, av: avancementLecon(l, revisions) }));
+  }, [toutes]);
+  const ordre = Object.keys(SUBJECT_MAP);
+  const matieres = useMemo(() => {
+    const m = new Map();
+    lecons.forEach(l => {
+      const id = subjectKey(l.matiere) ?? l.matiere.toLowerCase();
+      if (!m.has(id)) m.set(id, { id, nom: l.matiere, pose: subjectMascot(l.matiere), ...couleurs(l.matiere), lecons: [] });
+      m.get(id).lecons.push(l);
     });
+    return [...m.values()].sort((a, b) => (ordre.indexOf(a.id) + 1 || 99) - (ordre.indexOf(b.id) + 1 || 99));
+  }, [lecons]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const recherche = q.trim();
+  const groupes = matieres
+    .filter(m => filtre === 'all' || m.id === filtre)
+    .map(m => ({ ...m, visibles: m.lecons.map(l => ({ ...l, morceaux: trouver(l.titre, recherche) })).filter(l => l.morceaux) }))
+    .filter(m => m.visibles.length);
+  const nbTrouvees = groupes.reduce((s, m) => s + m.visibles.length, 0);
+  const aTravailler = lecons.reduce((s, l) => s + l.av.aRevoir, 0);
+  const aLecons = lecons.length > 0;
+  const chargement = synchro && !aLecons && !isGuest;
+
+  // À reprendre : la dernière leçon ouverte (sinon la dernière scannée), hors recherche et filtre.
+  const reprendre = useMemo(() => {
+    const ouverte = [...lecons].filter(l => l.av.ouverteLe).sort((a, b) => b.av.ouverteLe - a.av.ouverteLe)[0];
+    return ouverte ?? lecons[0] ?? null;
+  }, [lecons]);
+  const voirReprendre = reprendre && !recherche && filtre === 'all';
+
+  const scan = getScanStatus();
+  const illimite = !Number.isFinite(scan.remaining);
+
+  // Ce que dit Réviz.
+  const lignes = isGuest ? ['Tes cours deviennent des révisions.', 'Il te faut juste un compte gratuit.']
+    : !aLecons ? ['Aucune leçon pour l’instant.', 'Scanne ton cours, je prépare le reste.']
+    : [`${pluriel(lecons.length, 'leçon')} ${lecons.length > 1 ? 'scannées' : 'scannée'}.`,
+       aTravailler ? `${pluriel(aTravailler, 'carte')} ${aTravailler > 1 ? 't’attendent' : 't’attend'} aujourd’hui.` : 'Tout est à jour, bravo.'];
+  const pantin = useRef(null);
+  const [parle, setParle] = useState(false);
+  const texte = lignes.join('\n');
+  useEffect(() => { if (parle) pantin.current?.dire(texte); }, [texte, parle]);
+  useEffect(() => {
+    let t;
+    const essai = () => { t = setTimeout(() => (document.hidden ? essai() : setParle(true)), 4000); };
+    essai();
+    return () => clearTimeout(t);
+  }, []);
+
+  function ouvrir(l) { restoreLesson(l.id); navigate('/analyse'); }
+  function reprendreLecon(l) { restoreLesson(l.id); navigate(l.av.etat === 'decouvrir' ? '/resume' : l.av.step.to); }
+  function supprimer() {
+    deleteLesson(aSupprimer.id);
+    setToutes(loadLessons());
+    setASupprimer(null);
+    setFiltre(f => (matieres.find(m => m.id === f)?.lecons.length > 1 ? f : 'all'));
   }
+  useEffect(() => {
+    if (!aSupprimer && menu === null) return;
+    const echap = e => { if (e.key === 'Escape') { setASupprimer(null); setMenu(null); } };
+    window.addEventListener('keydown', echap);
+    return () => window.removeEventListener('keydown', echap);
+  }, [aSupprimer, menu]);
 
-  return (
-    <div className="app cours-page">
-
-      {/* Sans leçon : simple en-tête titre (l'état vide porte la mascotte).
-          Avec leçons : intro façon Home, titre + phrase du coach + mascotte.
-          Sur ordinateur, toujours l'intro : le titre tombe au même endroit
-          que sur les autres pages. */}
-      {!hasLessons && !isDesktop && (
-        <PageHeader variant="title-only" title="Mes cours" />
-      )}
-
-      {!hasLessons && isDesktop && (
-        <PageIntro title="Mes cours" sub="Les chapitres et les leçons que tu révises." />
-      )}
-
-      {hasLessons && (
-        <PageIntro title="Mes cours" sub={heroPhrase} mascot="reading" />
-      )}
-
-      {/* Contenu défilant — seul PageIntro (titre + mascotte) reste fixe */}
-      <div className="content cours-content">
-        {/* Rail : « À reprendre » puis Mon programme (colonne de droite sur
-            ordinateur ; display: contents sur téléphone, où ils s'empilent) */}
-        <div className="cours-rail">
-        {/* Featured "À reprendre" — Réviz propose la dernière leçon */}
-        {showResume && (
-          <div className="cours-resume-wrap">
-            <div className="rv-card rv-card--padded cours-resume-card">
-              <div className="cours-resume-top">
-                <Mascot
-                  pose={subjectMascot(lastLesson.metadata.subject)}
-                  size={96}
-                  glow
-                  priority
-                  className="cours-resume-mascot"
-                  alt=""
-                  aria-hidden="true"
-                />
-                <div className="cours-resume-body">
-                  <span className="rv-eyebrow">À reprendre</span>
-                  <h2 className="cours-resume-title">{lastLesson.metadata.title}</h2>
-                  <span className="cours-resume-meta">
-                    {lastLesson.metadata.subject} · {formatDate(lastLesson.scannedAt)}
-                  </span>
-                  {lastDue > 0 && (
-                    <span className="rv-pill rv-pill--orange cours-resume-due">{lastDue} carte{lastDue > 1 ? 's' : ''} à travailler</span>
-                  )}
-                </div>
-              </div>
-              <button
-                type="button"
-                className="rv-btn-cta rv-btn-cta--full rv-btn-cta--center cours-resume-cta"
-                onClick={() => { restoreLesson(lastLesson.id); navigate('/analyse'); }}
-              >
-                <span>Continuer</span>
-                <span className="rv-btn-cta-arrow" aria-hidden="true">→</span>
-              </button>
-            </div>
-          </div>
-        )}
-
-        {/* Réviser sans scan : les chapitres du programme, en rangée (grammaire §4) */}
-        {hasLessons && !showSkeleton && (
-          <div className="rv-card rv-rows cours-programme-link">
-            <button type="button" className="rv-row" onClick={() => navigate('/programme')}>
-              <span className="rv-row-avatar" aria-hidden="true"><Mascot pose="reading" size={40} alt="" /></span>
-              <span className="rv-row-text">
-                <span className="rv-row-title">Mon programme</span>
-                <span className="rv-row-sub">Révise chapitre par chapitre, sans scanner</span>
-              </span>
-              <span className="rv-row-arrow" aria-hidden="true">›</span>
-            </button>
-          </div>
-        )}
-
+  // ── Blocs ──
+  const surtitre = isGuest ? 'Mode essai' : aLecons ? `${pluriel(lecons.length, 'leçon')} · ${pluriel(matieres.length, 'matière')}` : 'Bibliothèque';
+  const reviz = (
+    <div className="le-reviz">
+      <BulleReviz key={texte} lignes={lignes} parle={parle} grande={isDesktop} className="le-bulle" />
+      <Pantin ref={pantin} size={isDesktop ? 240 : 170} expression="content" entree="coucou" repli={null}
+        onEntree={() => setParle(true)} onClick={() => pantin.current?.geste('saut')} label="Réviz, ta mascotte" />
+    </div>
+  );
+  const quota = !illimite && (
+    <div className="le-quota">
+      <span className="le-quota-segments" aria-hidden="true">
+        {Array.from({ length: scan.limit }, (_, i) => <i key={i} className={i < scan.used ? 'is-pris' : ''} />)}
+      </span>
+      <span className="le-quota-txt">{scan.remaining > 0 ? `${pluriel(scan.remaining, 'scan')} ${scan.remaining > 1 ? 'restants' : 'restant'}${isDesktop ? ' cette semaine' : ''}` : 'Plus de scan cette semaine'}</span>
+      <button type="button" className="le-quota-plus" onClick={() => setOffre(true)}>Illimité avec Réviz+</button>
+    </div>
+  );
+  const carteScan = isGuest ? (
+    <div className="le-carte le-carte--scan le-carte--essai">
+      <div className="le-scan-haut">
+        <span className="le-scan-rond" aria-hidden="true"><Mascot pose="scanphone" size={isDesktop ? 68 : 60} alt="" /></span>
+        <span className="le-scan-txt">
+          <b>Garde tes leçons</b>
+          <span>Pour scanner, il faut un compte. Il est gratuit.</span>
+        </span>
+      </div>
+      <button type="button" className="le-btn le-btn--orange" onClick={() => navigate('/inscription')}>Créer mon compte gratuit</button>
+      <p className="le-essai-note">Tu peux continuer à explorer l’appli sans compte.</p>
+    </div>
+  ) : (
+    <div className="le-carte le-carte--scan">
+      <button type="button" className="le-scan-haut le-scan-bouton" onClick={() => navigate('/scan')}>
+        <span className="le-scan-rond" aria-hidden="true"><Mascot pose="scanphone" size={isDesktop ? 68 : 60} alt="" /></span>
+        <span className="le-scan-txt">
+          <b>Scanner une leçon</b>
+          <span>Photo ou texte collé</span>
+        </span>
+        <span className="le-scan-plus" aria-hidden="true"><Plus taille={isDesktop ? 24 : 22} /></span>
+      </button>
+      {quota}
+    </div>
+  );
+  const carteReprendre = voirReprendre && (() => {
+    const c = couleurs(reprendre.matiere);
+    const quand = reprendre.av.ouverteLe ? `ouverte ${ilYa(reprendre.av.ouverteLe)}` : `scannée ${ilYa(reprendre.scannedAt)}`;
+    return (
+      <div className="le-reprendre" style={{ '--le-pastel': c.pastel, '--le-fonce': c.fonce }}>
+        <div className="le-reprendre-haut">
+          <span className="le-rond-matiere" aria-hidden="true"><Mascot pose={subjectMascot(reprendre.matiere)} size={isDesktop ? 56 : 48} alt="" /></span>
+          <span className="le-reprendre-txt">
+            <span className="le-reprendre-sur">{isDesktop ? 'À reprendre · ' : ''}{reprendre.matiere} · {quand}</span>
+            <span className="le-reprendre-titre">{reprendre.titre}</span>
+          </span>
         </div>
-
-        {/* La liste et ses outils (colonne principale sur ordinateur) */}
-        <div className="cours-main">
-        {/* Recherche et filtres : les outils de la liste, juste au-dessus d'elle */}
-        {!showSkeleton && (
-        <div className="cours-search-wrap">
-          <div className="rv-card rv-card--tight cours-search">
-            <span className="cours-search-icon" aria-hidden="true"><SearchIcon /></span>
-            <input
-              className="cours-search-input"
-              type="text"
-              placeholder="Rechercher une leçon..."
-              value={searchQuery}
-              onChange={e => setSearchQuery(e.target.value)}
-              aria-label="Rechercher une leçon"
-            />
-            {searchQuery && (
-              <button
-                type="button"
-                className="cours-search-clear"
-                onClick={() => setSearchQuery('')}
-                aria-label="Effacer la recherche"
-              >✕</button>
-            )}
-          </div>
-        </div>
-        )}
-
-        {/* Filters */}
-        {subjects.length > 1 && (
-          <div className="cours-filters-wrap">
-            <div className="cours-filters">
-              {filters.map(f => (
-                <button
-                  type="button"
-                  key={f.id}
-                  className={`cours-filter-chip${activeFilter === f.id ? ' cours-filter-chip--active' : ''}`}
-                  onClick={() => setActiveFilter(f.id)}
-                >
-                  {f.label}
-                </button>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {showSkeleton ? (
-          <div className="cours-skeleton" role="status" aria-label="Synchronisation de tes leçons…">
-            {[0, 1].map(i => (
-              <div key={i} className="cours-skeleton-section" aria-hidden="true">
-                <div className="cours-skeleton-header">
-                  <div className="rv-skeleton rv-skeleton--icon" />
-                  <div className="cours-skeleton-lines">
-                    <div className="rv-skeleton rv-skeleton--title" />
-                    <div className="rv-skeleton rv-skeleton--text" />
-                  </div>
-                </div>
-                <div className="rv-card rv-card--padded cours-skeleton-card">
-                  <div className="rv-skeleton rv-skeleton--icon" />
-                  <div className="cours-skeleton-lines">
-                    <div className="rv-skeleton rv-skeleton--title" />
-                    <div className="rv-skeleton rv-skeleton--text" />
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        ) : visibleSubjects.length === 0 ? (
-          <div className="rv-empty-state cours-empty-state">
-            <Mascot
-              pose={q ? 'search' : 'reading'}
-              size={q ? 180 : 220}
-              glow
-              animate={!q}
-              priority
-              className="rv-empty-state-mascot"
-              alt=""
-              aria-hidden="true"
-            />
-            <h2 className="rv-empty-state-title">
-              {q
-                ? 'Aucun résultat'
-                : hasLessons
-                  ? 'Rien dans cette matière'
-                  : isGuest
-                    ? 'Tes chapitres apparaîtront ici'
-                    : 'Allez, on scanne ?'}
-            </h2>
-            <div className="rv-speech-bubble rv-speech-bubble--pointer-top-center cours-empty-bubble">
-              {q
-                ? "Essaie un autre mot-clé — ou efface la recherche."
-                : hasLessons
-                  ? "Choisis une autre matière, je suis prêt·e."
-                  : isGuest
-                    ? "Ouvre un chapitre de ton programme : il s'ajoute ici avec ta progression."
-                    : "Ta première leçon est à un scan d'ici. Je m'occupe du reste."}
-            </div>
-            {!hasLessons && (
-              <div className="cours-empty-actions">
-                {!isGuest && (
-                  <button type="button" className="rv-btn-cta" onClick={() => navigate('/scan')}>
-                    <span>Scanner une leçon</span>
-                    <span className="rv-btn-cta-arrow" aria-hidden="true">→</span>
-                  </button>
-                )}
-                <button
-                  type="button"
-                  className={`rv-btn-cta${isGuest ? '' : ' rv-btn-cta--ghost'}`}
-                  onClick={() => navigate('/programme')}
-                >
-                  <span>Réviser mon programme</span>
-                  {isGuest && <span className="rv-btn-cta-arrow" aria-hidden="true">→</span>}
-                </button>
-              </div>
-            )}
-          </div>
-        ) : (
-          visibleSubjects.map(subject => {
-            const tone = SUBJECT_TONE[subject.color] ?? 'violet';
-            const subjectDue = subject.visibleLessons.reduce(
-              (sum, l) => sum + countDueCards(l.id, l.flashcardsCount ?? 0),
-              0
-            );
-            const isCollapsed = !expandedSubjects.has(subject.id);
-            return (
-              <div
-                key={subject.id}
-                className={`rv-card cours-subject-section${isCollapsed ? ' cours-subject-section--collapsed' : ''}`}
-              >
-
-                <button
-                  type="button"
-                  className="cours-subject-header"
-                  onClick={() => toggleSubject(subject.id)}
-                  aria-expanded={!isCollapsed}
-                  aria-controls={`cours-subject-list-${subject.id}`}
-                >
-                  <div className={`rv-icon-square rv-icon-square--xl rv-icon-square--${tone} cours-subject-icon`}>
-                    <Mascot pose={subject.mascot ?? 'reading'} size={40} alt="" aria-hidden="true" />
-                  </div>
-                  <div className="cours-subject-info">
-                    <span className="cours-subject-name">{subject.name}</span>
-                    <span className="cours-subject-meta">
-                      {subject.visibleLessons.length} leçon{subject.visibleLessons.length > 1 ? 's' : ''}
-                    </span>
-                  </div>
-                  {subjectDue > 0 && (
-                    <span className="rv-pill rv-pill--orange cours-subject-due-pill">{subjectDue} à travailler</span>
-                  )}
-                  <svg
-                    className="cours-subject-chevron"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2.2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    aria-hidden="true"
-                  >
-                    <path d="M6 9l6 6 6-6" />
-                  </svg>
-                </button>
-
-                <ul
-                  id={`cours-subject-list-${subject.id}`}
-                  className={`cours-subject-list${isCollapsed ? ' cours-subject-list--hidden' : ''}`}
-                >
-                {subject.visibleLessons.map(lesson => {
-                  const fcTotal = lesson.flashcardsCount ?? 0;
-                  const fcDue   = fcTotal > 0 ? countDueCards(lesson.id, fcTotal) : 0;
-                  const qzTotal = lesson.quizCount ?? 0;
-                  const meta = [
-                    formatDate(lesson.scannedAt),
-                    fcTotal > 0 && `${fcTotal} carte${fcTotal > 1 ? 's' : ''}`,
-                    qzTotal > 0 && `${qzTotal} question${qzTotal > 1 ? 's' : ''}`,
-                  ].filter(Boolean).join(' · ');
-                  return (
-                    <li key={lesson.id} className="cours-lesson-row">
-                      <button
-                        type="button"
-                        className="cours-lesson-open"
-                        onClick={() => { restoreLesson(lesson.id); navigate('/analyse'); }}
-                      >
-                        <span className="cours-lesson-title">{lesson.metadata.title}</span>
-                        <span className="cours-lesson-meta">
-                          {meta}
-                          {fcDue > 0 && <span className="rv-pill rv-pill--orange cours-lesson-due-pill">{fcDue} à travailler</span>}
-                        </span>
-                      </button>
-                      <button
-                        type="button"
-                        className="cours-delete-btn"
-                        onClick={() => setLessonToDelete(lesson)}
-                        aria-label={`Supprimer la leçon ${lesson.metadata.title}`}
-                      >✕</button>
-                    </li>
-                  );
-                })}
-                </ul>
-              </div>
-            );
-          })
-        )}
+        <div className="le-reprendre-bas">
+          <span className="le-reprendre-etat">
+            <Cases etapes={reprendre.av.etapes} grand pointille={c.pointille} />
+            <span className="le-reprendre-pastille">{isDesktop && reprendre.av.etat !== 'decouvrir' ? `${NOMS_ETAPES[Math.max(0, reprendre.av.etapes.indexOf('cours'))]} · ` : ''}{reprendre.av.pastille}</span>
+          </span>
+          <button type="button" className="le-btn le-btn--orange le-btn--petit" onClick={() => reprendreLecon(reprendre)}>
+            Reprendre<Fleche />
+          </button>
         </div>
       </div>
+    );
+  })();
 
-      <BottomNav />
-      {lessonToDelete && (
-        <ConfirmModal
-          lessonTitle={lessonToDelete.metadata.title}
-          onConfirm={() => { handleDelete(lessonToDelete.id); setLessonToDelete(null); }}
-          onCancel={() => setLessonToDelete(null)}
-        />
+  const champ = (
+    <div className={`le-recherche${recherche ? ' is-rempli' : ''}`}>
+      <Loupe />
+      <input type="search" value={q} onChange={e => setQ(e.target.value)} placeholder={isDesktop ? 'Chercher une leçon par son titre' : 'Chercher une leçon'} aria-label="Chercher une leçon" />
+      {q && (isDesktop
+        ? <button type="button" className="le-effacer-txt" onClick={() => setQ('')}>Effacer</button>
+        : <button type="button" className="le-effacer" onClick={() => setQ('')} aria-label="Effacer la recherche"><Croix /></button>)}
+    </div>
+  );
+  const ligneResultat = recherche && (
+    <p className="le-resultat" role="status">{pluriel(nbTrouvees, 'résultat')} pour « {recherche} »</p>
+  );
+  const titreLecon = l => <>{l.morceaux[0]}{l.morceaux[1] && <mark>{l.morceaux[1]}</mark>}{l.morceaux[2]}</>;
+  const menuLecon = l => (
+    <>
+      <button type="button" className={`le-points${menu === l.id ? ' is-ouvert' : ''}`} aria-label={`Options de ${l.titre}`} aria-expanded={menu === l.id}
+        onClick={e => { e.stopPropagation(); setMenu(m => (m === l.id ? null : l.id)); }}><Points /></button>
+      {menu === l.id && (
+        <button type="button" className="le-menu" onClick={e => { e.stopPropagation(); setMenu(null); setASupprimer(l); }}>
+          <Corbeille />{isDesktop ? 'Supprimer la leçon' : 'Supprimer'}
+        </button>
       )}
+    </>
+  );
+  const listeGroupes = groupes.map(m => (
+    <section key={m.id} className="le-groupe" style={{ '--le-pastel': m.pastel, '--le-fonce': m.fonce }}>
+      <div className="le-groupe-tete">
+        <span className="le-rond-matiere le-rond-matiere--petit" aria-hidden="true"><Mascot pose={m.pose} size={isDesktop ? 40 : 36} alt="" /></span>
+        <h3>{m.nom}</h3>
+        <span className="le-groupe-nb">{pluriel(m.visibles.length, 'leçon')}</span>
+      </div>
+      {isDesktop ? (
+        <ul className="le-grille">
+          {m.visibles.map((l, i) => (
+            <li key={l.id} className="le-tuile">
+              <button type="button" className="le-tuile-ouvrir" onClick={() => ouvrir(l)} aria-label={`Ouvrir ${l.titre}`} />
+              <span className="le-miniature" style={{ transform: `rotate(${i % 2 ? 3 : -3}deg)` }} aria-hidden="true"><i /><i /><i /><i /></span>
+              {menuLecon(l)}
+              <span className="le-tuile-titre">{titreLecon(l)}</span>
+              <span className="le-date">Scannée le {dateCourte(l.scannedAt)}</span>
+              <span className="le-tuile-bas"><Pastille a={l.av} /><Cases etapes={l.av.etapes} /></span>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <ul className="le-liste">
+          {m.visibles.map(l => (
+            <li key={l.id} className="le-ligne">
+              <button type="button" className="le-ligne-ouvrir" onClick={() => ouvrir(l)}>
+                <span className="le-ligne-titre">{titreLecon(l)}</span>
+                <span className="le-date">Scannée le {dateCourte(l.scannedAt)}</span>
+                <span className="le-ligne-etat"><Pastille a={l.av} /><Cases etapes={l.av.etapes} /></span>
+              </button>
+              {menuLecon(l)}
+            </li>
+          ))}
+        </ul>
+      )}
+    </section>
+  ));
+  const aucun = (
+    <div className="le-aucun">
+      <b>Aucune leçon ne correspond.</b>
+      <span>Essaie un autre mot, ou change de matière.</span>
+    </div>
+  );
+  const exemple = (
+    <section className="le-exemple">
+      <h2 className="le-h2">Ce que Réviz prépare</h2>
+      <p className="le-exemple-sous">Exemple avec une leçon de SVT, « Le cycle de l’eau ».</p>
+      <div className="le-exemple-carte">
+        <div className="le-exemple-haut">
+          <span className="le-miniature le-miniature--exemple" aria-hidden="true"><i /><i /><i /><i /></span>
+          <span className="le-exemple-fleche" aria-hidden="true"><Fleche taille={22} /></span>
+          <p>Une photo de ton cahier suffit. Réviz en tire 4 façons de réviser.</p>
+        </div>
+        <ul className="le-formats">
+          {FORMATS.map(f => (
+            <li key={f.nom}>
+              <span className="le-format-rond" style={{ background: f.fond }} aria-hidden="true"><Mascot pose={f.pose} size={isDesktop ? 56 : 40} alt="" /></span>
+              <span><b>{f.nom}</b><span>{f.meta}</span></span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  );
+  const squelette = (
+    <div className="le-squelette" role="status" aria-label="Synchronisation de tes leçons…">
+      <div className="rv-skeleton rv-skeleton--title" />
+      <div className="le-squelette-carte" />
+      <div className="le-squelette-carte" />
+    </div>
+  );
+  const fenetre = aSupprimer && (
+    <>
+      <div className="le-voile" onClick={() => setASupprimer(null)} aria-hidden="true" />
+      <div className="le-dialogue" role="dialog" aria-modal="true" aria-labelledby="le-dialogue-titre">
+        <h2 id="le-dialogue-titre">Supprimer cette leçon ?</h2>
+        <p className="le-dialogue-lecon">« {aSupprimer.titre} »</p>
+        <p className="le-dialogue-txt">Le résumé, les flashcards, le quiz et la carte mentale de cette leçon seront supprimés.</p>
+        <div className="le-dialogue-btns">
+          <button type="button" className="le-btn le-btn--creme" onClick={() => setASupprimer(null)} autoFocus>Annuler</button>
+          <button type="button" className="le-btn le-btn--orange" onClick={supprimer}>Supprimer</button>
+        </div>
+      </div>
+    </>
+  );
+  const fermeMenu = menu !== null && <div className="le-attrape" onClick={() => setMenu(null)} aria-hidden="true" />;
+  const retour = <button type="button" className="ch-retour" onClick={() => navigate('/programme')}><Chevron />Programme</button>;
+  const racine = `app app--no-halo ch-page le-page${isDesktop ? ' app--large ch-page--large le-page--large' : ''}`;
+  const deco = (
+    <>
+      <span className="ch-deco ch-deco--a" aria-hidden="true" />
+      <span className="ch-deco ch-deco--b" aria-hidden="true" />
+      <span className="ch-deco ch-deco--c" aria-hidden="true" />
+      <span className="ch-point" aria-hidden="true" />
+      <span className="ch-grain" aria-hidden="true" />
+    </>
+  );
+
+  // ── Ordinateur ──
+  if (isDesktop) {
+    return (
+      <div className={racine} style={varsTeinte(TEINTES.peche)}>
+        <div className="content le-defile">
+          <div className="ch-hero le-hero">
+            {deco}
+            <div className="ch-haut">{retour}</div>
+            <div className="le-hero-grille">
+              <div>
+                <span className="ch-surtitre">{surtitre}</span>
+                <h1 className="ch-titre le-titre">Mes leçons scannées</h1>
+              </div>
+              {reviz}
+            </div>
+          </div>
+          <div className={`le-cartes${carteReprendre ? '' : ' le-cartes--seule'}`}>
+            {carteScan}
+            {carteReprendre}
+          </div>
+          {chargement ? <div className="le-corps">{squelette}</div> : aLecons ? (
+            <div className="le-corps le-corps--deux">
+              <aside className="le-matieres">
+                <h2 className="le-matieres-titre">Matières</h2>
+                <ul>
+                  {[{ id: 'all', nom: 'Toutes', n: lecons.length }, ...matieres.map(m => ({ ...m, n: m.lecons.length }))].map(m => (
+                    <li key={m.id}>
+                      <button type="button" className={`le-matiere${filtre === m.id ? ' is-active' : ''}`} aria-pressed={filtre === m.id} onClick={() => setFiltre(m.id)}>
+                        <span className="le-matiere-rond" style={{ background: m.pastel ?? '#F8EFE7' }} aria-hidden="true">
+                          {m.id === 'all' ? <Grille /> : <Mascot pose={m.pose} size={36} alt="" />}
+                        </span>
+                        <span className="le-matiere-nom">{m.nom}</span>
+                        <span className="le-matiere-n">{m.n}</span>
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              </aside>
+              <div className="le-droite">
+                <div className="le-recherche-ligne">{champ}{ligneResultat}</div>
+                {groupes.length ? listeGroupes : aucun}
+              </div>
+            </div>
+          ) : <div className="le-corps">{exemple}</div>}
+        </div>
+        {fermeMenu}
+        {fenetre}
+        {offre && <RevizPlusSheet onClose={() => setOffre(false)} />}
+      </div>
+    );
+  }
+
+  // ── Téléphone ──
+  return (
+    <div className={racine} style={varsTeinte(TEINTES.peche)}>
+      <div className="content le-defile">
+        <div className="ch-hero le-hero">
+          {deco}
+          <div className="ch-haut">{retour}</div>
+          <span className="ch-surtitre">{surtitre}</span>
+          <h1 className="ch-titre le-titre">Mes leçons</h1>
+          {reviz}
+        </div>
+        {carteScan}
+        {chargement ? squelette : aLecons ? (
+          <>
+            {carteReprendre && (
+              <section className="le-section">
+                <h2 className="le-h2">À reprendre</h2>
+                {carteReprendre}
+              </section>
+            )}
+            <section className="le-section">
+              <div className="le-section-tete">
+                <h2 className="le-h2 le-h2--grand">Toutes mes leçons</h2>
+                <span>{pluriel(lecons.length, 'leçon')}</span>
+              </div>
+              {champ}
+              {matieres.length > 1 && (
+                <div className="le-filtres" role="group" aria-label="Filtrer par matière">
+                  {[{ id: 'all', nom: 'Toutes', n: lecons.length }, ...matieres.map(m => ({ ...m, n: m.lecons.length }))].map(m => (
+                    <button key={m.id} type="button" className={`le-filtre${filtre === m.id ? ' is-active' : ''}${m.pastel ? ' le-filtre--rond' : ''}`}
+                      aria-pressed={filtre === m.id} onClick={() => setFiltre(m.id)}>
+                      {m.pastel && <i style={{ background: m.pastel }} />}{m.nom}<span>{m.n}</span>
+                    </button>
+                  ))}
+                </div>
+              )}
+              {ligneResultat}
+              {groupes.length ? listeGroupes : aucun}
+            </section>
+          </>
+        ) : exemple}
+      </div>
+      {fermeMenu}
+      {fenetre}
+      {offre && <RevizPlusSheet onClose={() => setOffre(false)} />}
+      <BottomNav />
     </div>
   );
 }
