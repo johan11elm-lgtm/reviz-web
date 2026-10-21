@@ -64,7 +64,8 @@ const Fleche = () => (
 /* Ce que dit Réviz, tapé lettre par lettre au rythme de sa bouche (tempsLettres). Le texte
  * entier est posé dès le départ (lettres à venir invisibles) : la bulle ne change pas de taille.
  * Toucher la bulle lance ce qu'il propose. */
-function Bulle({ texte, parle, sortie, onClick, label }) {
+function Bulle({ lignes, parle, sortie, onClick, label }) {
+  const texte = lignes.join('\n');
   const [n, setN] = useState(0);
   useEffect(() => {
     if (!parle) return;
@@ -82,14 +83,22 @@ function Bulle({ texte, parle, sortie, onClick, label }) {
     id = requestAnimationFrame(tic);
     return () => cancelAnimationFrame(id);
   }, [texte, parle]);
-  const lettres = [...texte];
+  // Chaque ligne avance avec la frappe ; le saut de ligne compte pour une lettre (son temps de pause).
+  let debut = 0;
   return (
     <div className={`hm-bulle-parole${parle && !sortie ? ' hm-bulle-parole--la' : ''}`}>
-      <button type="button" className="hm-bulle-txt" onClick={onClick} aria-label={`${texte} ${label}`} tabIndex={parle ? 0 : -1}>
-        <span className="hm-bulle-mots" aria-hidden="true">
-          {lettres.slice(0, n).join('')}
-          <span className="hm-bulle-reste">{lettres.slice(n).join('')}</span>
-        </span>
+      <button type="button" className="hm-bulle-txt" onClick={onClick} aria-label={`${lignes.join(' ')} ${label}`} tabIndex={parle ? 0 : -1}>
+        {lignes.map((l, i) => {
+          const lettres = [...l];
+          const vues = Math.max(0, Math.min(lettres.length, n - debut));
+          debut += lettres.length + 1;
+          return (
+            <span key={i} className="hm-bulle-ligne" aria-hidden="true">
+              {lettres.slice(0, vues).join('')}
+              <span className="hm-bulle-reste">{lettres.slice(vues).join('')}</span>
+            </span>
+          );
+        })}
       </button>
     </div>
   );
@@ -227,24 +236,25 @@ export default function Home() {
   };
   const cibleControle = controle && controle.matiere !== 'autre' ? `/programme/${controle.matiere}` : '/programme';
 
-  let dit, sous, cta, action;
+  // ditLignes : la phrase du jour découpée pour la bulle (une idée par ligne) ; dit : d'un bloc.
+  let ditLignes, sous, cta, action;
   if (humeurId === 'fete') {
-    dit = 'Objectif du jour atteint !';
+    ditLignes = ['Objectif du jour atteint !', 'On fête ça ?'];
     sous = `${todayRevisions} révision${todayRevisions > 1 ? 's' : ''}${streak > 1 ? ` · ${streak} jours de suite` : ''}`;
     cta = 'Lancer une Battle bonus';
     action = () => navigate('/battle');
   } else if (humeurId === 'soir') {
-    dit = 'Je m’endors… Une carte et dodo ?';
+    ditLignes = ['Je m’endors…', 'Une carte et dodo ?'];
     sous = streak > 0 ? `2 minutes pour garder tes ${streak} jour${streak > 1 ? 's' : ''}` : '2 minutes, et au lit';
     cta = 'Réveiller Réviz · 1 carte';
     action = ouvrirCartes;
   } else if (humeurId === 'controle') {
-    dit = `${controle.m.label} ${controle.quand}. On s'y met ${heure >= 17 ? 'ce soir' : "aujourd'hui"} ?`;
+    ditLignes = [`${controle.m.label} ${controle.quand}.`, `On s'y met ${heure >= 17 ? 'ce soir' : "aujourd'hui"} ?`];
     sous = controle.titre || (dueCards > 0 ? `${dueCards} carte${dueCards > 1 ? 's' : ''} à travailler` : 'Résumé, flashcards et quiz du chapitre');
     cta = 'Réviser avec Réviz';
     action = () => navigate(cibleControle);
   } else {
-    dit = 'Envie de réviser ?';
+    ditLignes = ['Envie de réviser ?'];
     if (dueCards > 0) {
       sous = `${dueCards} carte${dueCards > 1 ? 's' : ''} à travailler aujourd'hui`;
       cta = 'Réviser mes cartes';
@@ -255,6 +265,7 @@ export default function Home() {
       action = () => navigate(isGuest ? '/programme' : '/scan');
     }
   }
+  const dit = ditLignes.join(' ');
   // Lien secondaire : scanner, sauf si c'est déjà l'action principale.
   const secondaire = cta === 'Scanner une leçon' ? { to: '/programme', label: 'réviser mon programme' }
     : isGuest ? null : { to: '/scan', label: 'scanner une leçon' };
@@ -305,7 +316,7 @@ export default function Home() {
   const entreeMobile = useMemo(() => [{ nom: 'chute', depuis: Math.round(2148 * 420 / TAILLE_PANTIN) }], []);
   const aterri = () => {
     setParle(true);
-    pantin.current?.dire(dit);
+    pantin.current?.dire(ditLignes.join('\n'));
     if (h.entree) pantin.current?.geste(h.entree);
   };
   // Si le moteur ne charge pas, la bulle s'affiche quand même.
@@ -341,30 +352,31 @@ export default function Home() {
             : { id: 'programme', pose: 'reading', fond: '#FFE6D2', titre: 'Mon programme', sous: 'Les chapitres de ta classe' };
 
   const suggestions = [
-    { texte: dit, label: cta, action, expr: h.expression, carte: carteDuJour },
+    { lignes: ditLignes, label: cta, action, expr: h.expression, carte: carteDuJour },
     titreLecon && (fcLast > 0
-      ? { texte: `Tes cartes de « ${court(titreLecon)} » t'attendent.`, label: 'Réviser mes cartes', action: ouvrirCartes, expr: 'content', geste: 'coucou',
+      ? { lignes: ['Tes cartes t’attendent.', 'On les revoit ?'], label: 'Réviser mes cartes', action: ouvrirCartes, expr: 'content', geste: 'coucou',
           carte: { id: 'cartes', pose: 'flashcard', fond: '#FFE6D2', titre: 'Flashcards', sous: `${pluriel(fcLast, 'carte')} à revoir · ${court(titreLecon, 20)}` } }
-      : { texte: `Un petit quiz sur « ${court(titreLecon)} » ?`, label: 'Lancer le quiz', expr: 'emerveille',
+      : { lignes: ['Un petit quiz ?', 'Pour voir où tu en es.'], label: 'Lancer le quiz', expr: 'emerveille',
           action: () => { restoreLesson(lastLesson.id); navigate('/quiz'); },
           carte: { id: 'quiz', pose: 'quiz', fond: '#E4E0FA', titre: 'Quiz corrigé', sous: court(titreLecon, 32) } }),
-    { texte: 'Un autre chapitre ? Tout ton programme est là.', label: 'Réviser mon programme', action: lancerProgramme, expr: 'content', geste: 'coucou',
+    { lignes: ['Un autre chapitre ?', 'Tout ton programme est là.'], label: 'Réviser mon programme', action: lancerProgramme, expr: 'content', geste: 'coucou',
       carte: { id: 'programme', pose: 'reading', fond: '#FFE6D2', titre: 'Réviser', sous: `Tout le programme de ${classe}` } },
-    { texte: 'Une leçon à apprendre ? Prends-la en photo.', label: 'Scanner une leçon', action: lancerScan, expr: 'emerveille',
+    { lignes: ['Une leçon à apprendre ?', 'Prends-la en photo.'], label: 'Scanner une leçon', action: lancerScan, expr: 'emerveille',
       carte: { id: 'scan', pose: 'scanphone', fond: '#DCF5E6', titre: 'Scanner une leçon', sous: avecCompte || 'Résumé, flashcards et quiz' } },
-    { texte: 'Une question sur ton cours ? Demande-moi.', label: 'Parler à Réviz IA', action: () => navigate('/coach'), expr: 'reflechit',
+    { lignes: ['Une question ?', 'Je t’explique ton cours.'], label: 'Parler à Réviz IA', action: () => navigate('/coach'), expr: 'reflechit',
       carte: { id: 'ia', pose: 'coach', fond: '#FFD9E4', titre: 'Réviz IA', sous: avecCompte || 'Je t’explique, avec des exemples' } },
-    { texte: 'Prêt à défier un ami en Battle ?', label: 'Lancer une Battle', action: () => navigate('/battle'), expr: 'determine', geste: 'brasEnLair',
+    { lignes: ['Prêt pour une Battle ?', 'Défie un ami en direct.'], label: 'Lancer une Battle', action: () => navigate('/battle'), expr: 'determine', geste: 'brasEnLair',
       carte: { id: 'battle', pose: 'fire', fond: '#E4E0FA', titre: 'Battle', sous: '5 questions, 15 s, contre un ami' } },
     !isGuest && allLessons.length > 0 && {
-      texte: `${allLessons.length > 1 ? `Tes ${allLessons.length} leçons sont rangées` : 'Ta leçon est rangée'} ici.`, label: 'Voir mes leçons',
+      lignes: [allLessons.length > 1 ? 'Tes leçons scannées ?' : 'Ta leçon scannée ?', allLessons.length > 1 ? 'Elles sont toutes ici.' : 'Elle est rangée ici.'], label: 'Voir mes leçons',
       action: () => navigate('/cours'), expr: 'fier',
       carte: { id: 'cours', pose: 'writing', fond: '#DCF5E6', titre: 'Mes leçons', sous: `${pluriel(allLessons.length, 'leçon')} scannée${allLessons.length > 1 ? 's' : ''}` } },
-    { texte: controle ? 'Un autre contrôle à noter ?' : 'Un contrôle bientôt ? Dis-moi quand.', label: "Ouvrir l'agenda",
+    { lignes: controle ? ['Un autre contrôle ?', 'Note-le dans l’agenda.'] : ['Un contrôle bientôt ?', 'Dis-moi quand.'], label: "Ouvrir l'agenda",
       action: () => navigate('/agenda'), expr: 'content', geste: 'gratterTete',
-      carte: { id: 'agenda', pose: 'thinking', fond: '#FFE6D2', titre: 'Agenda', sous: 'Tes contrôles, et le plan pour chacun' } },
+      carte: { id: 'agenda', pose: 'thinking', fond: '#FFE6D2', titre: 'Agenda', sous: 'Tes contrôles et leurs plans' } },
   ].filter((p, i) => p && (i === 0 || p.carte.id !== carteDuJour.id));
   const sugg = suggestions[tour % suggestions.length];
+  const texteSugg = sugg.lignes.join('\n');
 
   // Le héros hors de l'écran ou l'onglet caché : Réviz attend avant de changer de phrase.
   useEffect(() => {
@@ -381,9 +393,9 @@ export default function Home() {
     if (tour > 0) {
       pantin.current?.expression(sugg.expr);
       if (sugg.geste) pantin.current?.geste(sugg.geste);
-      pantin.current?.dire(sugg.texte);
+      pantin.current?.dire(texteSugg);
     }
-    const temps = tempsLettres(sugg.texte);
+    const temps = tempsLettres(texteSugg);
     let t1, t2;
     const suivante = () => {
       if (document.hidden || !heroVu.current) { t1 = setTimeout(suivante, 1500); return; }
@@ -594,7 +606,7 @@ export default function Home() {
               {serie}
             </div>
             <h1 className="sr-only">{dit}</h1>
-            <Bulle key={`${humeurId}-${tour}`} texte={sugg.texte} parle={parle} sortie={sortie} onClick={sugg.action} label={sugg.label} />
+            <Bulle key={`${humeurId}-${tour}`} lignes={sugg.lignes} parle={parle} sortie={sortie} onClick={sugg.action} label={sugg.label} />
           </div>
           {/* Place réservée : la carte chevauche le bas du héros, rien ne saute quand elle arrive. */}
           <div className="hm-proposition-place">
