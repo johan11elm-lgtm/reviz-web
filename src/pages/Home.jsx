@@ -163,6 +163,7 @@ export default function Home() {
   const pantin = useRef(null);
   const hero = useRef(null);
   const heroVu = useRef(true);
+  const survol = useRef(false);
   const controle = useProchainControle(currentUser);
 
   useEffect(() => {
@@ -237,38 +238,30 @@ export default function Home() {
   const cibleControle = controle && controle.matiere !== 'autre' ? `/programme/${controle.matiere}` : '/programme';
 
   // ditLignes : la phrase du jour découpée pour la bulle (une idée par ligne) ; dit : d'un bloc.
-  let ditLignes, sous, cta, action;
+  let ditLignes, cta, action;
   if (humeurId === 'fete') {
     ditLignes = ['Objectif du jour atteint !', 'On fête ça ?'];
-    sous = `${todayRevisions} révision${todayRevisions > 1 ? 's' : ''}${streak > 1 ? ` · ${streak} jours de suite` : ''}`;
     cta = 'Lancer une Battle bonus';
     action = () => navigate('/battle');
   } else if (humeurId === 'soir') {
     ditLignes = ['Je m’endors…', 'Une carte et dodo ?'];
-    sous = streak > 0 ? `2 minutes pour garder tes ${streak} jour${streak > 1 ? 's' : ''}` : '2 minutes, et au lit';
     cta = 'Réveiller Réviz · 1 carte';
     action = ouvrirCartes;
   } else if (humeurId === 'controle') {
     ditLignes = [`${controle.m.label} ${controle.quand}.`, `On s'y met ${heure >= 17 ? 'ce soir' : "aujourd'hui"} ?`];
-    sous = controle.titre || (dueCards > 0 ? `${dueCards} carte${dueCards > 1 ? 's' : ''} à travailler` : 'Résumé, flashcards et quiz du chapitre');
     cta = 'Réviser avec Réviz';
     action = () => navigate(cibleControle);
   } else {
     ditLignes = ['Envie de réviser ?'];
     if (dueCards > 0) {
-      sous = `${dueCards} carte${dueCards > 1 ? 's' : ''} à travailler aujourd'hui`;
       cta = 'Réviser mes cartes';
       action = ouvrirCartes;
     } else {
-      sous = isGuest ? 'Les chapitres de ta classe, prêts à réviser' : 'Une photo de ta leçon, et Réviz prépare tout';
       cta = isGuest ? 'Réviser mon programme' : 'Scanner une leçon';
       action = () => navigate(isGuest ? '/programme' : '/scan');
     }
   }
   const dit = ditLignes.join(' ');
-  // Lien secondaire : scanner, sauf si c'est déjà l'action principale.
-  const secondaire = cta === 'Scanner une leçon' ? { to: '/programme', label: 'réviser mon programme' }
-    : isGuest ? null : { to: '/scan', label: 'scanner une leçon' };
 
   // ── Ton plan : trois étapes jusqu'au contrôle, ou les trois de la journée ──
   const plan = useMemo(() => {
@@ -312,16 +305,19 @@ export default function Home() {
   const sauter = () => pantin.current?.geste('saut');
   // Réviz tombe dans le héros une fois chargé, puis parle (et fait son geste d'humeur).
   // Distance de chute en unités du pantin (2148 pour sa taille) : il part au-dessus du héros.
-  const TAILLE_PANTIN = 226;
-  const entreeMobile = useMemo(() => [{ nom: 'chute', depuis: Math.round(2148 * 420 / TAILLE_PANTIN) }], []);
+  const TAILLE_PANTIN = isDesktop ? 400 : 226;
+  const entree = useMemo(() => [{ nom: 'chute', depuis: Math.round(2148 * (isDesktop ? 520 : 420) / TAILLE_PANTIN) }], [isDesktop, TAILLE_PANTIN]);
   const aterri = () => {
     setParle(true);
     pantin.current?.dire(ditLignes.join('\n'));
     if (h.entree) pantin.current?.geste(h.entree);
   };
-  // Si le moteur ne charge pas, la bulle s'affiche quand même.
+  // Si le moteur ne charge pas, la bulle s'affiche quand même. Onglet en arrière-plan : les
+  // animations sont gelées, Réviz n'a pas encore pu tomber ; on attend que la page soit visible.
   useEffect(() => {
-    const t = setTimeout(() => setParle(true), 4000);
+    let t;
+    const essai = () => { t = setTimeout(() => (document.hidden ? essai() : setParle(true)), 4000); };
+    essai();
     return () => clearTimeout(t);
   }, []);
 
@@ -387,8 +383,7 @@ export default function Home() {
   }, [isDesktop]);
 
   useEffect(() => {
-    // Sur ordinateur, pas de bulle : Réviz garde la phrase du jour.
-    if (!parle || isDesktop) return;
+    if (!parle) return;
     // La première phrase est dite à l'atterrissage (aterri) ; les suivantes ici, avec leur pose.
     if (tour > 0) {
       pantin.current?.expression(sugg.expr);
@@ -398,14 +393,22 @@ export default function Home() {
     const temps = tempsLettres(texteSugg);
     let t1, t2;
     const suivante = () => {
-      if (document.hidden || !heroVu.current) { t1 = setTimeout(suivante, 1500); return; }
+      // Héros hors de l'écran, onglet caché ou souris dessus (ordinateur) : il attend.
+      if (document.hidden || !heroVu.current || survol.current) { t1 = setTimeout(suivante, 1500); return; }
       setSortie(true);
       t2 = setTimeout(() => { setSortie(false); setTour(t => t + 1); }, 220);
     };
     // Le temps de dire la phrase, puis de la lire.
     t1 = setTimeout(suivante, (temps[temps.length - 1] || 0) * 1000 + 5500);
     return () => { clearTimeout(t1); clearTimeout(t2); };
-  }, [parle, tour, isDesktop]);
+  }, [parle, tour]);
+  // Ordinateur : les points sous la carte mènent directement à une proposition.
+  const allerA = i => {
+    const n = suggestions.length, ici = tour % n;
+    if (i === ici) return;
+    setSortie(false);
+    setTour(t => t - ici + i + (i < ici ? n : 0));
+  };
   const style = { '--hm-bg': h.bg, '--hm-tint': h.tint, '--hm-dot': h.dot, '--hm-bar': h.bar, '--hm-btn': h.btn, '--hm-soft': h.soft };
 
   const serie = streak > 0 && (
@@ -414,44 +417,7 @@ export default function Home() {
     </span>
   );
 
-  const parole = (
-    <div className="hm-parole" key={humeurId}>
-      <h1 className="hm-dit">{dit}</h1>
-      <p className="hm-sous">{sous}</p>
-    </div>
-  );
-
-  const actions = (
-    <div className="hm-actions">
-      <button type="button" className="hm-cta" onClick={action}>{cta}</button>
-      {secondaire && (
-        <span className="hm-ou">ou <Link to={secondaire.to}>{secondaire.label}</Link></span>
-      )}
-    </div>
-  );
-
-  const carteplan = (
-    <section className="hm-bloc" aria-labelledby="hm-plan">
-      <h2 id="hm-plan" className="hm-titre">{goalReached ? 'Bravo, étape 1 faite' : titrePlan}</h2>
-      <ol className="hm-plan">
-        {plan.map((p, i) => (
-          <li key={i} className="hm-etape">
-            <span
-              className="hm-etape-num"
-              style={p.done ? { background: '#34C77B', color: '#fff' } : { background: p.ton.bg, color: p.ton.fg }}
-              aria-label={p.done ? 'fait' : `étape ${i + 1}`}
-            >{p.done ? '✓' : i + 1}</span>
-            <span className="hm-etape-txt">
-              <span className="hm-etape-titre">{p.titre}</span>
-              <span className="hm-etape-meta">{p.meta}</span>
-            </span>
-          </li>
-        ))}
-      </ol>
-    </section>
-  );
-
-  // Téléphone : le plan en chemin, façon plateau de jeu. Une case par jour, la case du jour
+  // Le plan en chemin, façon plateau de jeu. Une case par jour, la case du jour
   // en grand ; toucher une case montre son détail en dessous, avec de quoi la lancer.
   const chemin = (
     <section className="hm-chemin-bloc" aria-labelledby="hm-chemin">
@@ -467,7 +433,7 @@ export default function Home() {
               aria-label={`${c.jour} : ${c.quoi}${c.done ? ', fait' : ''}`}
             >
               <span className="hm-case-rond" style={c.ton ? { background: c.ton.bg } : undefined}>
-                <Mascot pose={c.pose} size={i === enCours ? 66 : 52} alt="" aria-hidden="true" />
+                <Mascot pose={c.pose} size={i === enCours ? (isDesktop ? 74 : 66) : (isDesktop ? 58 : 52)} alt="" aria-hidden="true" />
                 {c.done && <span className="hm-case-coche" aria-hidden="true">✓</span>}
               </span>
               <span className="hm-case-jour">{c.jour}</span>
@@ -537,36 +503,58 @@ export default function Home() {
 
       {isDesktop ? (
         <div className="content hm-desk">
-          <div className="hm-hero hm-hero--desk">
+          <div
+            className="hm-hero hm-hero--desk"
+            ref={hero}
+            onMouseEnter={() => { survol.current = true; }}
+            onMouseLeave={() => { survol.current = false; }}
+          >
             <span className="hm-bulle hm-bulle--a" aria-hidden="true" />
             <span className="hm-bulle hm-bulle--b" aria-hidden="true" />
             <span className="hm-point" aria-hidden="true" />
             <span className="hm-grain" aria-hidden="true" />
-            <span className="hm-ombre" aria-hidden="true" />
             <Pantin
               ref={pantin}
-              size={440}
+              size={TAILLE_PANTIN}
               expression={h.expression}
-              entree={h.entree}
-              repli="hello"
+              entree={entree}
+              onEntree={aterri}
+              repli={null}
               className="hm-pantin"
               onClick={sauter}
               label="Réviz, ta mascotte"
             />
+            {/* À gauche, face à Réviz : ce qu'il dit, puis la carte de ce qu'il propose. */}
             <div className="hm-hero-txt">
               <div className="hm-hero-haut">
                 <span className="hm-date">{dateTxt}</span>
                 {serie}
               </div>
-              {parole}
+              <span className="hm-auj">Aujourd'hui</span>
+              <h1 className="sr-only">{dit}</h1>
+              <Bulle key={`${humeurId}-${tour}`} lignes={sugg.lignes} parle={parle} sortie={sortie} onClick={sugg.action} label={sugg.label} />
+              <div className="hm-proposition-place">
+                {parle && <CarteProposition key={tour} carte={sugg.carte} sortie={sortie} onClick={sugg.action} />}
+              </div>
               <div className="hm-flex" />
-              {actions}
+              <div className="hm-points" role="group" aria-label="Ce que Réviz propose">
+                {suggestions.map((p, i) => (
+                  <button
+                    key={i}
+                    type="button"
+                    className={`hm-point-sugg${i === tour % suggestions.length ? ' hm-point-sugg--la' : ''}`}
+                    onClick={() => allerA(i)}
+                    aria-label={p.carte.titre}
+                    aria-current={i === tour % suggestions.length}
+                  />
+                ))}
+              </div>
             </div>
           </div>
           {rappels}
           {montrerEssai && <ThemeEssai onClose={() => setEssaiTheme(false)} />}
           <div className="hm-grille">
-            <div className="hm-carte">{carteplan}</div>
+            <div className="hm-carte hm-carte--chemin">{chemin}</div>
             <div className="hm-carte">{carteMatieres}</div>
             {carteBattle}
           </div>
@@ -591,7 +579,7 @@ export default function Home() {
                 ref={pantin}
                 size={TAILLE_PANTIN}
                 expression={h.expression}
-                entree={entreeMobile}
+                entree={entree}
                 onEntree={aterri}
                 repli={null}
                 onClick={sauter}

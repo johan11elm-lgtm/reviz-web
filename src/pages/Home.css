@@ -178,59 +178,6 @@
   clip: rect(0 0 0 0);
   white-space: nowrap;
 }
-
-/* ── Ce que dit Réviz (ordinateur) ── */
-.home-page .hm-centre { padding: 22px 22px 0; }
-.home-page .hm-parole { display: flex; flex-direction: column; gap: 6px; }
-.home-page .hm-mobile .hm-parole { align-items: center; text-align: center; }
-.home-page .hm-dit {
-  margin: 0;
-  font-family: var(--font-display);
-  font-size: 31px;
-  font-weight: 800;
-  letter-spacing: -1px;
-  line-height: 1.02;
-  text-wrap: balance;
-  color: var(--hm-encre);
-  animation: hmMonte .5s .15s cubic-bezier(.2,.8,.3,1) both;
-}
-.home-page .hm-sous {
-  margin: 0;
-  font-size: 15px;
-  color: #6B6557;
-  line-height: 1.4;
-  animation: hmMonte .5s .25s cubic-bezier(.2,.8,.3,1) both;
-}
-@keyframes hmMonte { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
-
-/* ── Bouton principal ── */
-.home-page .hm-actions {
-  padding: 18px 22px 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-}
-.home-page .hm-cta {
-  width: 100%;
-  height: 58px;
-  padding: 0 24px;
-  border: 0;
-  border-radius: 99px;
-  background: var(--hm-btn);
-  color: #fff;
-  font: 700 17px 'Geist', system-ui, sans-serif;
-  box-shadow: 0 14px 28px -10px var(--hm-btn), inset 0 1px 0 rgba(255,255,255,.25), inset 0 -3px 0 rgba(0,0,0,.18);
-  transition: background .5s, transform .12s, box-shadow .12s;
-}
-.home-page .hm-cta:active {
-  transform: scale(.96) translateY(2px);
-  box-shadow: 0 4px 10px -6px rgba(0,0,0,.4), inset 0 -1px 0 rgba(0,0,0,.18);
-}
-.home-page .hm-cta:focus-visible { outline: 3px solid var(--hm-encre); outline-offset: 3px; }
-.home-page .hm-ou { margin: 12px 0 0; font-size: 14px; color: var(--hm-doux); text-align: center; }
-.home-page .hm-ou a { color: var(--hm-btn); font-weight: 700; }
-
 /* ── Rappels (accord parental, email, essai) : une carte fine, masquée vide ── */
 .home-page .hm-rappels { margin: 22px 22px 0; }
 .home-page .hm-rappels:empty { display: none; }
@@ -251,33 +198,8 @@
 }
 .home-page .hm-voir { font-size: 14px; font-weight: 700; color: var(--hm-btn); }
 
-.home-page .hm-plan {
-  list-style: none;
-  margin: 0;
-  padding: 4px 16px;
-  background: #fff;
-  border-radius: 26px;
-  box-shadow: 0 1px 0 rgba(255,255,255,.8) inset, 0 12px 30px -14px rgba(120,60,20,.22);
-}
-.home-page .hm-etape { display: flex; align-items: center; gap: 14px; padding: 13px 0; }
-.home-page .hm-etape + .hm-etape { border-top: 1px solid #F2E8D9; }
-.home-page .hm-etape-num {
-  width: 34px;
-  height: 34px;
-  flex: none;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 14px;
-  font-weight: 800;
-}
-.home-page .hm-etape-txt { flex: 1; min-width: 0; display: flex; flex-direction: column; }
-.home-page .hm-etape-titre { font-size: 15px; font-weight: 700; color: var(--hm-encre); }
-.home-page .hm-etape-meta { font-size: 13px; color: var(--hm-doux); }
 
-
-/* ── Le chemin jusqu'au contrôle (téléphone) ── */
+/* ── Le chemin jusqu'au contrôle ── */
 .home-page .hm-pad--chemin { padding-top: 12px; }
 
 /* ── La carte de ce que Réviz propose, à cheval sur le bas du héros ── */
@@ -568,39 +490,80 @@
 }
 .home-page .hm-hero--desk .hm-bulle--a { right: 120px; top: -80px; width: 520px; height: 520px; box-shadow: inset 0 -40px 60px rgba(120,60,20,.08), inset 0 24px 40px rgba(255,255,255,.35); }
 .home-page .hm-hero--desk .hm-bulle--b { left: auto; right: -60px; top: auto; bottom: -90px; width: 260px; height: 260px; box-shadow: none; }
-.home-page .hm-hero--desk .hm-point { left: auto; right: 560px; top: 60px; width: 56px; height: 56px; }
-.home-page .hm-hero--desk .hm-pantin { position: absolute; right: 120px; top: 40px; z-index: 1; }
+.home-page .hm-hero--desk .hm-point { left: auto; right: 64px; top: 56px; width: 56px; height: 56px; }
+.home-page .hm-hero--desk .hm-pantin { position: absolute; right: 110px; top: 70px; z-index: 1; }
 .home-page .hm-hero-txt {
   position: relative;
   z-index: 2;
   height: 100%;
-  max-width: 560px;
-  padding: 48px 56px;
+  max-width: 620px;
+  padding: 44px 56px 30px;
   display: flex;
   flex-direction: column;
-  gap: 18px;
 }
+.home-page .hm-hero--desk .hm-auj { margin-top: 6px; font-size: 60px; letter-spacing: -2.2px; }
+
+/* Ordinateur : la bulle et la carte à gauche, face à Réviz ; la pointe vise sa tête. */
+.home-page .hm-desk .hm-bulle-parole {
+  position: relative;
+  left: auto;
+  right: auto;
+  bottom: auto;
+  margin-top: 34px;
+  justify-content: flex-start;
+  transform-origin: 100% 50%;
+}
+.home-page .hm-desk .hm-bulle-txt {
+  max-width: 500px;
+  align-items: flex-start;
+  gap: 4px;
+  padding: 20px 28px 22px;
+  border-radius: 30px;
+  font-size: 34px;
+  letter-spacing: -1px;
+  line-height: 1.05;
+  text-align: left;
+}
+.home-page .hm-desk .hm-bulle-ligne + .hm-bulle-ligne { font-size: 20px; letter-spacing: -.2px; }
+.home-page .hm-desk .hm-bulle-txt::after {
+  left: auto;
+  right: -9px;
+  bottom: auto;
+  top: 50%;
+  margin: -10px 0 0;
+  border-radius: 0 5px 0 0;
+}
+.home-page .hm-desk .hm-proposition-place { height: 84px; margin-top: 18px; padding: 0; justify-content: flex-start; }
+.home-page .hm-desk .hm-proposition { max-width: 440px; height: 84px; gap: 14px; padding: 0 18px 0 12px; border-radius: 26px; }
+.home-page .hm-desk .hm-proposition-rond { width: 60px; height: 60px; border-radius: 18px; }
+.home-page .hm-desk .hm-proposition-titre { font-size: 19px; }
+.home-page .hm-desk .hm-proposition-sous { font-size: 14px; }
+.home-page .hm-desk .hm-proposition-go { width: 36px; height: 36px; }
+.home-page .hm-desk .hm-proposition:hover { transform: translateY(-2px); box-shadow: 0 18px 34px -14px rgba(120,60,20,.5), 0 0 0 1px rgba(120,60,20,.05); }
+
+/* Les points : une par proposition, pour y aller directement */
+.home-page .hm-points { display: flex; align-items: center; gap: 8px; }
+.home-page .hm-point-sugg {
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  border: 0;
+  border-radius: 99px;
+  background: rgba(27,26,35,.22);
+  cursor: pointer;
+  transition: width .25s, background .2s;
+}
+.home-page .hm-point-sugg:hover { background: rgba(27,26,35,.45); }
+.home-page .hm-point-sugg--la { width: 24px; background: var(--hm-encre); }
+.home-page .hm-point-sugg:focus-visible { outline: 2px solid var(--hm-encre); outline-offset: 3px; }
 .home-page .hm-hero--desk .hm-hero-haut { padding: 0; justify-content: flex-start; align-items: center; gap: 14px; }
 .home-page .hm-hero--desk .hm-date { font-size: 14px; letter-spacing: .5px; }
 .home-page .hm-hero--desk .hm-serie { margin: 0; padding: 6px 12px; font-size: 14px; }
-.home-page .hm-desk .hm-parole { gap: 14px; }
-.home-page .hm-desk .hm-dit { font-size: 64px; letter-spacing: -2.4px; line-height: .98; }
-.home-page .hm-desk .hm-sous { font-size: 18px; color: #4A4538; }
 .home-page .hm-flex { flex: 1; }
-.home-page .hm-desk .hm-actions { padding: 0; flex-direction: row; gap: 18px; }
-.home-page .hm-desk .hm-cta { width: auto; height: 60px; padding: 0 32px; font-size: 18px; }
-.home-page .hm-desk .hm-cta:hover { filter: brightness(1.06); }
-.home-page .hm-desk .hm-ou { font-size: 15px; color: var(--hm-encre); }
-.home-page .hm-desk .hm-ou a {
-  color: var(--hm-encre);
-  text-decoration: underline;
-  text-decoration-thickness: 2px;
-  text-underline-offset: 3px;
-  text-decoration-color: var(--hm-btn);
-}
 .home-page .hm-desk .hm-rappels { margin: 0; }
 
-.home-page .hm-grille { display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 20px; grid-auto-rows: max-content; }
+.home-page .hm-grille { display: grid; grid-template-columns: 1.5fr 1fr; gap: 20px; grid-auto-rows: max-content; }
+.home-page .hm-grille > .hm-battle { grid-column: 1 / -1; min-height: 150px; }
 .home-page .hm-carte {
   padding: 20px 22px;
   border-radius: 28px;
@@ -609,8 +572,20 @@
 }
 .home-page .hm-desk .hm-titre { font-size: 22px; letter-spacing: -.5px; }
 .home-page .hm-desk .hm-bloc { gap: 6px; }
-.home-page .hm-desk .hm-plan { padding: 0; background: none; box-shadow: none; border-radius: 0; }
-.home-page .hm-desk .hm-etape { padding: 10px 0; }
+
+/* Le chemin dans sa carte : cases plus grandes, détail teinté (la carte est déjà blanche) */
+.home-page .hm-desk .hm-chemin-bloc { gap: 16px; }
+.home-page .hm-desk .hm-chemin::before { top: 42px; }
+.home-page .hm-desk .hm-case-rond { width: 66px; height: 66px; margin: 9px 0; }
+.home-page .hm-desk .hm-case--maintenant .hm-case-rond { width: 84px; height: 84px; margin: 0; }
+.home-page .hm-desk .hm-case-jour { font-size: 14px; }
+.home-page .hm-desk .hm-case:hover .hm-case-rond { transform: translateY(-3px); }
+.home-page .hm-desk .hm-case { cursor: pointer; }
+.home-page .hm-desk .hm-chemin-detail { background: var(--hm-soft); box-shadow: none; padding: 16px 16px 16px 20px; }
+.home-page .hm-desk .hm-chemin-detail::before { background: var(--hm-soft); }
+.home-page .hm-desk .hm-chemin-quoi { font-size: 17px; }
+.home-page .hm-desk .hm-chemin-go { cursor: pointer; }
+.home-page .hm-desk .hm-chemin-go:hover { filter: brightness(1.08); }
 .home-page .hm-desk .hm-bloc--matieres { gap: 14px; }
 .home-page .hm-desk .hm-tete { padding: 0; }
 .home-page .hm-desk .hm-matieres { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px 8px; overflow: visible; padding: 0; }
@@ -627,9 +602,12 @@
 .home-page:has(.hm-desk)::after { display: none; }
 
 @media (max-width: 1240px) {
-  .home-page .hm-hero--desk .hm-pantin { right: 20px; }
-  .home-page .hm-hero--desk .hm-point { right: 480px; }
-  .home-page .hm-desk .hm-dit { font-size: 52px; }
-  .home-page .hm-grille { grid-template-columns: 1fr 1fr; }
-  .home-page .hm-grille > .hm-battle { grid-column: 1 / -1; min-height: 150px; }
+  /* Écran étroit : Réviz rapetisse (sa taille est en ligne), bulle et carte se resserrent. */
+  .home-page .hm-hero--desk .hm-pantin { right: 14px; top: 80px; transform: scale(.8); transform-origin: 100% 0; }
+  .home-page .hm-desk .hm-bulle-txt { max-width: 380px; font-size: 30px; }
+  .home-page .hm-desk .hm-bulle-ligne + .hm-bulle-ligne { font-size: 18px; }
+  .home-page .hm-desk .hm-proposition { max-width: 360px; }
+  .home-page .hm-hero--desk .hm-point { right: 30px; }
+  .home-page .hm-hero-txt { max-width: 560px; padding-left: 44px; padding-right: 44px; }
+  .home-page .hm-grille { grid-template-columns: 1.3fr 1fr; }
 }
