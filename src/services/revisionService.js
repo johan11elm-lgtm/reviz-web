@@ -34,13 +34,14 @@ function track(promise) {
 }
 
 /**
- * Enregistre une session de révision (ouverture d'un format).
+ * Enregistre une session de révision (ouverture d'un format, résumé lu, quiz terminé…).
  * @param {'flashcards'|'quiz'|'resume'|'mindmap'} type
+ * @param {object} [details] champs en plus, ex. { score, total } pour un quiz terminé
  */
-export function recordRevision(type) {
+export function recordRevision(type, details = {}) {
   const lessonId  = localStorage.getItem('reviz-current-lesson-id') ?? null
   const revisions = loadRevisions()
-  const entry = { id: String(Date.now()), type, lessonId, revisedAt: Date.now() }
+  const entry = { ...details, id: String(Date.now()), type, lessonId, revisedAt: Date.now() }
   trackStat('revision', { format: type, source: lessonId?.startsWith('prog-') ? 'programme' : 'scan' })
   revisions.unshift(entry)
   if (revisions.length > MAX_REVISIONS) revisions.splice(MAX_REVISIONS)
@@ -59,6 +60,16 @@ export function recordRevision(type) {
   if (canSync()) {
     track(setDoc(doc(db, 'users', _uid, 'revisions', entry.id), entry))
   }
+}
+
+/**
+ * Dernier et meilleur score au quiz d'une leçon : { dernier: {score, total}, meilleur } ou null.
+ */
+export function quizScore(lessonId) {
+  const faits = loadRevisions().filter(r => r.lessonId === lessonId && r.type === 'quiz' && Number.isFinite(r.score) && r.total)
+  if (!faits.length) return null
+  const meilleur = faits.reduce((m, r) => (r.score / r.total > m.score / m.total ? r : m), faits[0])
+  return { dernier: { score: faits[0].score, total: faits[0].total }, meilleur: { score: meilleur.score, total: meilleur.total } }
 }
 
 /**

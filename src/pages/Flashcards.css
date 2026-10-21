@@ -91,6 +91,10 @@
 .fc-page .fc-case--revoir { background: #C25407; color: #fff; box-shadow: 0 4px 0 #8F3E05; }
 .fc-page .fc-case--presque { background: #fff; border-color: #C9C2F2; box-shadow: 0 4px 0 #C9C2F2; }
 .fc-page .fc-case--presque i { width: 8px; height: 8px; border-radius: 50%; background: var(--ch-encre); }
+.fc-page .fc-case--juste { background: #34C77B; color: #fff; box-shadow: 0 4px 0 #1F8A52; }
+.fc-page .fc-case--faux { background: #C25407; color: #fff; box-shadow: 0 4px 0 #8F3E05; }
+.fc-page .fc-case--cours-juste { border-color: #34C77B; color: #1F8A52; box-shadow: 0 4px 0 #1F8A52; }
+.fc-page .fc-case--cours-faux { border-color: #8F3E05; color: #8F3E05; }
 .fc-page .fc-route--recap { height: 32px; margin: 18px 0 0; }
 .fc-page .fc-route--recap .fc-case { width: 28px; height: 28px; }
 

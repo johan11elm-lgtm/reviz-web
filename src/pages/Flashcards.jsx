@@ -4,6 +4,7 @@ import { recordRevision, loadRevisions } from '../services/revisionService'
 import { getDueCards, updateCardState } from '../services/srsService'
 import { Pantin } from '../components/Pantin'
 import { BulleReviz } from '../components/reviz/BulleReviz'
+import { RouteSerie as Route } from '../components/reviz/RouteSerie'
 import { MissingLessonState } from '../components/MissingLessonState'
 import { FormatFeedback } from '../components/FormatFeedback'
 import { nbsp } from '../utils/typography'
@@ -74,9 +75,6 @@ const SORTIE = { sais: 'droite', revoir: 'gauche', presque: 'bas' }
 const Croix = ({ taille = 20 }) => (
   <svg viewBox="0 0 24 24" width={taille} height={taille} fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12" /></svg>
 )
-const Coche = ({ taille = 14 }) => (
-  <svg viewBox="0 0 24 24" width={taille} height={taille} fill="none" stroke="currentColor" strokeWidth="3.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg>
-)
 const RetourFleche = ({ taille = 14 }) => (
   <svg viewBox="0 0 24 24" width={taille} height={taille} fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M9 14 4 9l5-5" /><path d="M4 9h10a6 6 0 0 1 0 12h-3" /></svg>
 )
@@ -89,25 +87,6 @@ const Fleche = () => (
 const Etoile = () => (
   <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 16.8 5.8 21.3l2.4-7.4L2 9.4h7.6z" /></svg>
 )
-
-/** La route de la série : une case par carte (faite selon sa note, en cours, à venir). */
-function Route({ notes, idx, grand, recap = false }) {
-  return (
-    <ol className={`fc-route${grand ? ' fc-route--grand' : ''}${recap ? ' fc-route--recap' : ''}`} aria-hidden="true">
-      {notes.map((n, i) => {
-        const etat = n ? `fait fc-case--${n}` : i === idx && !recap ? 'cours' : 'avenir'
-        return (
-          <li key={i} className={`fc-case fc-case--${etat}`}>
-            {n === 'sais' && <Coche />}
-            {n === 'revoir' && <RetourFleche />}
-            {n === 'presque' && <i />}
-            {!n && <span>{i + 1}</span>}
-          </li>
-        )
-      })}
-    </ol>
-  )
-}
 
 /**
  * Série de flashcards (handoff Claude Design du 21/10) : un jeu en plein écran. La série du jour

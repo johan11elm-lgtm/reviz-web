@@ -5,10 +5,10 @@ import { PleinIcon } from './BottomNav';
 import { AVIS_PROFS_URL, isDecouverte } from '../services/decouverteService';
 import './NavHaut.css';
 
-// Pages du tunnel (inscription, connexion, essai…) et jeux en plein écran (flashcards) : pas de menu.
+// Pages du tunnel (inscription, connexion, essai…) et jeux en plein écran (flashcards, quiz) : pas de menu.
 const HIDDEN_PREFIXES = [
   '/inscription', '/connexion', '/essai', '/verify-email', '/onboarding',
-  '/consent-pending', '/finish-setup', '/welcome', '/legal', '/flashcards',
+  '/consent-pending', '/finish-setup', '/welcome', '/legal', '/flashcards', '/quiz',
 ];
 // Pages d'une leçon : elles allument « Programme » (leçons scannées comprises).
 const LESSON_PATHS = ['/analyse', '/flashcards', '/quiz', '/resume', '/mindmap'];

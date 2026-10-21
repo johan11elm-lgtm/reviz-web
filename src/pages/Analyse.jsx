@@ -8,7 +8,7 @@ import { analyseLesson, analyseImage, popPendingAnalysis } from '../services/aiS
 import { LESSON_TEXT_MAX_LABEL } from '../utils/lessonText';
 import { isProgrammeLessonId, chapterState } from '../utils/programme';
 import { countDueCards, getCardState } from '../services/srsService';
-import { loadRevisions } from '../services/revisionService';
+import { loadRevisions, quizScore } from '../services/revisionService';
 import { useIsDesktop } from '../hooks/useMediaQuery';
 import { saveLesson } from '../services/historyService';
 import { PremiumModal } from '../components/PremiumModal';
@@ -244,10 +244,12 @@ export default function Analyse() {
     : aRevoir > 0 ? `${pluriel(aRevoir, 'carte')} à travailler`
     : avancement.seen < total ? `${avancement.seen} / ${total} cartes vues` : 'Commencé';
 
+  // Score au quiz (enregistré à la fin du quiz depuis le 21/10).
+  const scoreQuiz = coachLessonId ? quizScore(coachLessonId) : null;
   // Ce que dit Réviz : où en est l'élève, et la prochaine action.
   const suite = { '/resume': 'On commence par le résumé ?', '/flashcards': aRevoir > 0 ? 'On revoit tes cartes ?' : 'On finit les flashcards ?', '/quiz': 'Place au quiz ?' }[step.to];
   const lignes = etat === 'decouvrir' ? ['Nouveau chapitre.', 'On commence par le résumé ?']
-    : etat === 'maitrise' ? ['Chapitre maîtrisé.', 'Une révision rapide dans une semaine.']
+    : etat === 'maitrise' ? [scoreQuiz ? `${scoreQuiz.dernier.score} sur ${scoreQuiz.dernier.total} au quiz corrigé.` : 'Chapitre maîtrisé.', 'Une révision rapide dans une semaine.']
     : avancement.seen > 0 ? [`${avancement.seen} ${avancement.seen > 1 ? 'cartes' : 'carte'} sur ${total} déjà vues.`, suite]
     : ['Résumé lu.', suite];
 
@@ -259,7 +261,7 @@ export default function Analyse() {
   const etapes = [
     { id: 'resume', nom: 'Résumé', pose: 'reading', to: '/resume', meta: faits.resume ? 'Lu' : `${displayLesson.resumeMinutes ?? 2} min` },
     { id: 'flashcards', nom: 'Flashcards', pose: 'flashcard', to: '/flashcards', meta: avancement?.seen ? `${avancement.seen} / ${total} vues` : pluriel(total, 'carte') },
-    { id: 'quiz', nom: 'Quiz corrigé', pose: 'quiz', to: '/quiz', meta: faits.quiz ? 'Fait' : pluriel(displayLesson.quizCount ?? 0, 'question') },
+    { id: 'quiz', nom: 'Quiz corrigé', pose: 'quiz', to: '/quiz', meta: scoreQuiz ? `${scoreQuiz.dernier.score} / ${scoreQuiz.dernier.total}` : faits.quiz ? 'Fait' : pluriel(displayLesson.quizCount ?? 0, 'question') },
   ].map(e => ({ ...e, statut: statut(e.id) }));
   const nbFaites = etapes.filter(e => e.statut === 'fait').length;
   const carteMentaleVue = aOuvert('mindmap');
