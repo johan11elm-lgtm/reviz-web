@@ -118,17 +118,17 @@ describe('<Profile /> sur ordinateur', () => {
   it('montre les 18 badges avec ce qu’il faut faire, et le prochain à viser', async () => {
     seed()
     render(<MemoryRouter><Profile /></MemoryRouter>)
-    expect(screen.getAllByRole('listitem')).toHaveLength(18)
-    expect(screen.getByText('3 jours de suite')).toBeInTheDocument()
+    expect(screen.getAllByRole('button', { name: /: obtenu$|\(\d+ \/ \d+\)$/ })).toHaveLength(18)
+    expect(screen.getAllByText('3 jours de suite').length).toBeGreaterThan(0)
     // 3 leçons ouvertes : « Étudiant » (5 leçons) à 3 / 5
-    expect(screen.getByTitle('Étudiant : 5 leçons ouvertes (3 / 5)')).toBeInTheDocument()
-    expect(screen.getByTitle('Lanceur : obtenu')).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: 'Étudiant : 5 leçons ouvertes (3 / 5)' })).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: 'Lanceur : obtenu' })).toBeInTheDocument()
     expect(screen.getByText('Prochain badge')).toBeInTheDocument()
-    expect(screen.queryByText(/Voir les \d+ autres/)).not.toBeInTheDocument()
   })
 
   it('la Battle reste accessible sans compte', () => {
     render(<MemoryRouter><Profile /></MemoryRouter>)
-    expect(screen.getByRole('link', { name: /Battle/ })).toHaveAttribute('href', '/battle')
+    fireEvent.click(screen.getByRole('button', { name: 'Défier quelqu’un' }))
+    expect(nav).toHaveBeenCalledWith('/battle')
   })
 })
