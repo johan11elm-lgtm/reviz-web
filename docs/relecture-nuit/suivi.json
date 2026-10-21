@@ -774,6 +774,11 @@
       "chemin": "4eme/svt/relations-alimentaires",
       "le": "2026-10-21",
       "corrections": 1
+    },
+    {
+      "chemin": "4eme/svt/decomposeurs-recyclage-matiere",
+      "le": "2026-10-21",
+      "corrections": 0
     }
   ]
 }
