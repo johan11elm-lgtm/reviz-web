@@ -383,7 +383,7 @@ export default function Analyse() {
       <BulleReviz key={texte} lignes={lignes} parle={parle} className="ch-bulle" />
       <Pantin
         ref={pantin}
-        size={isDesktop ? 240 : 170}
+        size={isDesktop ? 320 : 220}
         expression={etat === 'maitrise' ? 'fier' : etat === 'encours' ? 'determine' : 'content'}
         repli={null}
         onEntree={() => setParle(true)}
