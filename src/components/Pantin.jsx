@@ -24,10 +24,12 @@ function chargerManifeste() {
   return manifeste;
 }
 
-const BOUCHES = ['repos', 'A', 'EI', 'O', 'U', 'MBP', 'rire'];
+const BOUCHES = ['repos', 'A', 'EI', 'O', 'U', 'rire'];
 const PAUPIERES = ['p25', 'p50', 'p75', 'p100'];
-// Bouches sans image fiable : la plus proche (comme anim.html).
-const ALIAS = { FV: 'EI', L: 'A', cri: 'O', choc: 'O', triste: 'MBP' };
+// Bouches sans image fiable : la plus proche (comme anim.html). bouche-MBP.webp
+// est un morceau de bouche mal découpé (il restait invisible : « elle a pas de
+// bouche ») ; lèvres fermées = le trait de repos.
+const ALIAS = { FV: 'EI', L: 'A', cri: 'O', choc: 'O', triste: 'repos', MBP: 'repos' };
 
 // Humeurs : la pose tenue, la vie tourne par-dessus.
 const EXPRESSIONS = {
