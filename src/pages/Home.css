@@ -103,7 +103,7 @@
   z-index: 1;
 }
 
-/* ── Bulle : ce que dit Réviz, au-dessus de sa tête ── */
+/* ── Bulle de Réviz (components/reviz/BulleReviz) : ici, sa place ── */
 .home-page .hm-bulle-parole {
   position: absolute;
   z-index: 3;
@@ -111,64 +111,7 @@
   right: 22px;
   /* Posée par le bas, juste au-dessus de la tête : la pointe ne bouge pas quand la phrase change. */
   bottom: 254px;
-  display: flex;
-  justify-content: center;
-  pointer-events: none;
-  opacity: 0;
-  transform: translateY(8px) scale(.9);
-  transform-origin: 50% 100%;
-  transition: opacity .2s ease, transform .35s cubic-bezier(.3,1.5,.5,1);
 }
-.home-page .hm-bulle-parole--la { opacity: 1; transform: none; pointer-events: auto; animation: hmBulle .35s cubic-bezier(.3,1.5,.5,1) both; }
-@keyframes hmBulle { from { opacity: 0; transform: translateY(8px) scale(.9); } to { opacity: 1; transform: none; } }
-.home-page .hm-bulle-txt {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1px;
-  max-width: 310px;
-  margin: 0;
-  padding: 11px 18px 12px;
-  border: 0;
-  border-radius: 22px;
-  background: #fff;
-  box-shadow: 0 10px 24px -12px rgba(120,60,20,.45);
-  font-family: var(--font-display);
-  font-size: 19px;
-  font-weight: 800;
-  letter-spacing: -.4px;
-  line-height: 1.15;
-  text-align: center;
-  text-wrap: balance;
-  color: var(--hm-encre);
-  transition: transform .12s;
-}
-.home-page .hm-bulle-txt:active { transform: scale(.97); }
-.home-page .hm-bulle-txt:focus-visible { outline: 3px solid var(--hm-encre); outline-offset: 3px; }
-/* Une idée par ligne : la première porte la phrase, la suivante la complète, plus doucement. */
-.home-page .hm-bulle-ligne { display: block; }
-.home-page .hm-bulle-ligne + .hm-bulle-ligne {
-  font-family: 'Geist', system-ui, sans-serif;
-  font-size: 16px;
-  font-weight: 600;
-  letter-spacing: -.1px;
-  color: #5B5446;
-}
-/* La pointe, vers la tête de Réviz */
-.home-page .hm-bulle-txt::after {
-  content: '';
-  position: absolute;
-  left: 50%;
-  bottom: -9px;
-  width: 20px;
-  height: 20px;
-  margin-left: -10px;
-  background: #fff;
-  border-radius: 0 0 5px 0;
-  transform: rotate(45deg);
-}
-.home-page .hm-bulle-reste { visibility: hidden; }
 
 .home-page .sr-only {
   position: absolute;
@@ -211,56 +154,6 @@
   padding: 0 22px;
   display: flex;
   justify-content: center;
-}
-.home-page .hm-proposition {
-  width: 100%;
-  max-width: 330px;
-  height: 70px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 0 14px 0 10px;
-  border: 0;
-  border-radius: 24px;
-  background: #fff;
-  box-shadow: 0 14px 30px -14px rgba(120,60,20,.45), 0 0 0 1px rgba(120,60,20,.05);
-  font: inherit;
-  color: inherit;
-  text-align: left;
-  opacity: 0;
-  transform: translateY(10px) scale(.96);
-  transition: opacity .18s ease, transform .2s ease;
-}
-.home-page .hm-proposition--la { animation: hmProposition .45s .3s cubic-bezier(.3,1.4,.5,1) both; }
-@keyframes hmProposition {
-  from { opacity: 0; transform: translateY(22px) scale(.92); }
-  to { opacity: 1; transform: none; }
-}
-.home-page .hm-proposition:active { transform: scale(.97); }
-.home-page .hm-proposition:focus-visible { outline: 3px solid var(--hm-encre); outline-offset: 3px; }
-.home-page .hm-proposition-rond {
-  width: 50px;
-  height: 50px;
-  flex: none;
-  border-radius: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-}
-.home-page .hm-proposition-txt { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 1px; }
-.home-page .hm-proposition-titre { font-family: var(--font-display); font-size: 17px; font-weight: 800; letter-spacing: -.3px; color: var(--hm-encre); }
-.home-page .hm-proposition-sous { font-size: 13px; color: var(--hm-doux); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.home-page .hm-proposition-go {
-  width: 32px;
-  height: 32px;
-  flex: none;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--hm-btn);
-  color: #fff;
 }
 .home-page .hm-chemin-bloc { display: flex; flex-direction: column; gap: 14px; }
 .home-page .hm-chemin {
@@ -503,43 +396,9 @@
 }
 .home-page .hm-hero--desk .hm-auj { margin-top: 6px; font-size: 60px; letter-spacing: -2.2px; }
 
-/* Ordinateur : la bulle et la carte à gauche, face à Réviz ; la pointe vise sa tête. */
-.home-page .hm-desk .hm-bulle-parole {
-  position: relative;
-  left: auto;
-  right: auto;
-  bottom: auto;
-  margin-top: 34px;
-  justify-content: flex-start;
-  transform-origin: 100% 50%;
-}
-.home-page .hm-desk .hm-bulle-txt {
-  max-width: 500px;
-  align-items: flex-start;
-  gap: 4px;
-  padding: 20px 28px 22px;
-  border-radius: 30px;
-  font-size: 34px;
-  letter-spacing: -1px;
-  line-height: 1.05;
-  text-align: left;
-}
-.home-page .hm-desk .hm-bulle-ligne + .hm-bulle-ligne { font-size: 20px; letter-spacing: -.2px; }
-.home-page .hm-desk .hm-bulle-txt::after {
-  left: auto;
-  right: -9px;
-  bottom: auto;
-  top: 50%;
-  margin: -10px 0 0;
-  border-radius: 0 5px 0 0;
-}
+/* Ordinateur : la bulle et la carte à gauche, face à Réviz (pointe à droite, vers sa tête). */
+.home-page .hm-desk .hm-bulle-parole { position: relative; left: auto; right: auto; bottom: auto; margin-top: 34px; }
 .home-page .hm-desk .hm-proposition-place { height: 84px; margin-top: 46px; padding: 0; justify-content: flex-start; }
-.home-page .hm-desk .hm-proposition { max-width: 440px; height: 84px; gap: 14px; padding: 0 18px 0 12px; border-radius: 26px; }
-.home-page .hm-desk .hm-proposition-rond { width: 60px; height: 60px; border-radius: 18px; }
-.home-page .hm-desk .hm-proposition-titre { font-size: 19px; }
-.home-page .hm-desk .hm-proposition-sous { font-size: 14px; }
-.home-page .hm-desk .hm-proposition-go { width: 36px; height: 36px; }
-.home-page .hm-desk .hm-proposition:hover { transform: translateY(-2px); box-shadow: 0 18px 34px -14px rgba(120,60,20,.5), 0 0 0 1px rgba(120,60,20,.05); }
 
 /* Les points : une par proposition, pour y aller directement */
 .home-page .hm-points { display: flex; align-items: center; gap: 8px; }
@@ -604,9 +463,9 @@
 @media (max-width: 1240px) {
   /* Écran étroit : Réviz rapetisse (sa taille est en ligne), bulle et carte se resserrent. */
   .home-page .hm-hero--desk .hm-pantin { right: 14px; top: 80px; transform: scale(.8); transform-origin: 100% 0; }
-  .home-page .hm-desk .hm-bulle-txt { max-width: 380px; font-size: 30px; }
-  .home-page .hm-desk .hm-bulle-ligne + .hm-bulle-ligne { font-size: 18px; }
-  .home-page .hm-desk .hm-proposition { max-width: 360px; }
+  .home-page .hm-desk .rv-bulle-txt { max-width: 380px; font-size: 30px; }
+  .home-page .hm-desk .rv-bulle-ligne + .rv-bulle-ligne { font-size: 18px; }
+  .home-page .hm-desk .rv-fonction { max-width: 360px; }
   .home-page .hm-hero--desk .hm-point { right: 30px; }
   .home-page .hm-hero-txt { max-width: 560px; padding-left: 44px; padding-right: 44px; }
   .home-page .hm-grille { grid-template-columns: 1.3fr 1fr; }

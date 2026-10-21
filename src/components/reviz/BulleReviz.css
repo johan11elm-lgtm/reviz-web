@@ -1,0 +1,93 @@
+/* Bulle de Réviz (accueil, Programme…). La page place la bulle (.rv-bulle) ; ici, son allure. */
+.rv-bulle {
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(8px) scale(.9);
+  transform-origin: 50% 100%;
+  transition: opacity .2s ease, transform .35s cubic-bezier(.3,1.5,.5,1);
+}
+.rv-bulle--la { opacity: 1; transform: none; pointer-events: auto; animation: rvBulle .35s cubic-bezier(.3,1.5,.5,1) both; }
+@keyframes rvBulle { from { opacity: 0; transform: translateY(8px) scale(.9); } to { opacity: 1; transform: none; } }
+
+.rv-bulle-txt {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+  max-width: 310px;
+  margin: 0;
+  padding: 11px 18px 12px;
+  border: 0;
+  border-radius: 22px;
+  background: #fff;
+  box-shadow: 0 10px 24px -12px rgba(120,60,20,.45);
+  font-family: var(--font-display);
+  font-size: 19px;
+  font-weight: 800;
+  letter-spacing: -.4px;
+  line-height: 1.15;
+  text-align: center;
+  text-wrap: balance;
+  color: #1B1A23;
+  transition: transform .12s;
+}
+button.rv-bulle-txt:active { transform: scale(.97); }
+button.rv-bulle-txt:focus-visible { outline: 3px solid #1B1A23; outline-offset: 3px; }
+
+/* Une idée par ligne : la première porte la phrase, la suivante la complète, plus doucement. */
+.rv-bulle-ligne { display: block; }
+.rv-bulle-ligne + .rv-bulle-ligne {
+  font-family: 'Geist', system-ui, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: -.1px;
+  color: #5B5446;
+}
+.rv-bulle-reste { visibility: hidden; }
+.rv-bulle-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* La pointe, vers Réviz : en bas (il est dessous) ou à droite (il est à côté). */
+.rv-bulle-txt::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: -9px;
+  width: 20px;
+  height: 20px;
+  margin-left: -10px;
+  background: #fff;
+  border-radius: 0 0 5px 0;
+  transform: rotate(45deg);
+}
+.rv-bulle--droite { justify-content: flex-start; transform-origin: 100% 50%; }
+.rv-bulle--droite .rv-bulle-txt { align-items: flex-start; text-align: left; }
+.rv-bulle--droite .rv-bulle-txt::after {
+  left: auto;
+  right: -9px;
+  bottom: auto;
+  top: 50%;
+  margin: -10px 0 0;
+  border-radius: 0 5px 0 0;
+}
+
+/* Ordinateur : la phrase en grand */
+.rv-bulle--grande .rv-bulle-txt {
+  max-width: 500px;
+  gap: 4px;
+  padding: 20px 28px 22px;
+  border-radius: 30px;
+  font-size: 34px;
+  letter-spacing: -1px;
+  line-height: 1.05;
+}
+.rv-bulle--grande .rv-bulle-ligne + .rv-bulle-ligne { font-size: 20px; letter-spacing: -.2px; }

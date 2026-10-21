@@ -7,6 +7,8 @@ import { ConsentBanner } from '../components/ConsentBanner';
 import { EmailBanner } from '../components/EmailBanner';
 import { Mascot } from '../components/Mascot';
 import { Pantin, tempsLettres } from '../components/Pantin';
+import { BulleReviz } from '../components/reviz/BulleReviz';
+import { CarteFonction } from '../components/reviz/CarteFonction';
 import { loadLessons, restoreLesson, syncFromFirestore } from '../services/historyService';
 import { loadRevisions } from '../services/revisionService';
 import { loadCatalogue } from '../services/programmeService';
@@ -53,71 +55,6 @@ function jourDans(n) {
   const d = new Date();
   d.setDate(d.getDate() + n);
   return majuscule(d.toLocaleDateString('fr-FR', { weekday: 'long' }));
-}
-
-const Fleche = () => (
-  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-    <path d="M5 12h14M13 6l6 6-6 6" />
-  </svg>
-);
-
-/* Ce que dit Réviz, tapé lettre par lettre au rythme de sa bouche (tempsLettres). Le texte
- * entier est posé dès le départ (lettres à venir invisibles) : la bulle ne change pas de taille.
- * Toucher la bulle lance ce qu'il propose. */
-function Bulle({ lignes, parle, sortie, onClick, label }) {
-  const texte = lignes.join('\n');
-  const [n, setN] = useState(0);
-  useEffect(() => {
-    if (!parle) return;
-    if (window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) { setN(texte.length); return; }
-    const temps = tempsLettres(texte);
-    const t0 = performance.now();
-    let id;
-    const tic = () => {
-      const t = (performance.now() - t0) / 1000;
-      let i = 0;
-      while (i < temps.length && temps[i] <= t) i++;
-      setN(i);
-      if (i < temps.length) id = requestAnimationFrame(tic);
-    };
-    id = requestAnimationFrame(tic);
-    return () => cancelAnimationFrame(id);
-  }, [texte, parle]);
-  // Chaque ligne avance avec la frappe ; le saut de ligne compte pour une lettre (son temps de pause).
-  let debut = 0;
-  return (
-    <div className={`hm-bulle-parole${parle && !sortie ? ' hm-bulle-parole--la' : ''}`}>
-      <button type="button" className="hm-bulle-txt" onClick={onClick} aria-label={`${lignes.join(' ')} ${label}`} tabIndex={parle ? 0 : -1}>
-        {lignes.map((l, i) => {
-          const lettres = [...l];
-          const vues = Math.max(0, Math.min(lettres.length, n - debut));
-          debut += lettres.length + 1;
-          return (
-            <span key={i} className="hm-bulle-ligne" aria-hidden="true">
-              {lettres.slice(0, vues).join('')}
-              <span className="hm-bulle-reste">{lettres.slice(vues).join('')}</span>
-            </span>
-          );
-        })}
-      </button>
-    </div>
-  );
-}
-
-/* La carte de ce que Réviz propose : elle monte sous ses pieds pendant qu'il parle. */
-function CarteProposition({ carte, sortie, onClick }) {
-  return (
-    <button type="button" className={`hm-proposition${sortie ? '' : ' hm-proposition--la'}`} onClick={onClick} tabIndex={sortie ? -1 : 0}>
-      <span className="hm-proposition-rond" style={{ background: carte.fond }}>
-        <Mascot pose={carte.pose} size={46} alt="" aria-hidden="true" />
-      </span>
-      <span className="hm-proposition-txt">
-        <span className="hm-proposition-titre">{carte.titre}</span>
-        <span className="hm-proposition-sous">{carte.sous}</span>
-      </span>
-      <span className="hm-proposition-go" aria-hidden="true"><Fleche /></span>
-    </button>
-  );
 }
 
 const Flamme = () => (
@@ -409,7 +346,7 @@ export default function Home() {
     setSortie(false);
     setTour(t => t - ici + i + (i < ici ? n : 0));
   };
-  const style = { '--hm-bg': h.bg, '--hm-tint': h.tint, '--hm-dot': h.dot, '--hm-bar': h.bar, '--hm-btn': h.btn, '--hm-soft': h.soft };
+  const style = { '--hm-bg': h.bg, '--hm-tint': h.tint, '--hm-dot': h.dot, '--hm-bar': h.bar, '--hm-btn': h.btn, '--hm-soft': h.soft, '--rv-accent': h.btn };
 
   const serie = streak > 0 && (
     <span className="hm-serie" aria-label={`${streak} jour${streak > 1 ? 's' : ''} de suite`}>
@@ -532,9 +469,10 @@ export default function Home() {
               </div>
               <span className="hm-auj">Aujourd'hui</span>
               <h1 className="sr-only">{dit}</h1>
-              <Bulle key={`${humeurId}-${tour}`} lignes={sugg.lignes} parle={parle} sortie={sortie} onClick={sugg.action} label={sugg.label} />
+              <BulleReviz key={`${humeurId}-${tour}`} lignes={sugg.lignes} parle={parle} sortie={sortie} onClick={sugg.action} label={sugg.label}
+                pointe="droite" grande className="hm-bulle-parole" />
               <div className="hm-proposition-place">
-                {parle && <CarteProposition key={tour} carte={sugg.carte} sortie={sortie} onClick={sugg.action} />}
+                {parle && <CarteFonction key={tour} carte={sugg.carte} entree sortie={sortie} grande onClick={sugg.action} />}
               </div>
               <div className="hm-flex" />
               <div className="hm-points" role="group" aria-label="Ce que Réviz propose">
@@ -594,11 +532,11 @@ export default function Home() {
               {serie}
             </div>
             <h1 className="sr-only">{dit}</h1>
-            <Bulle key={`${humeurId}-${tour}`} lignes={sugg.lignes} parle={parle} sortie={sortie} onClick={sugg.action} label={sugg.label} />
+            <BulleReviz key={`${humeurId}-${tour}`} lignes={sugg.lignes} parle={parle} sortie={sortie} onClick={sugg.action} label={sugg.label} className="hm-bulle-parole" />
           </div>
           {/* Place réservée : la carte chevauche le bas du héros, rien ne saute quand elle arrive. */}
           <div className="hm-proposition-place">
-            {parle && <CarteProposition key={tour} carte={sugg.carte} sortie={sortie} onClick={sugg.action} />}
+            {parle && <CarteFonction key={tour} carte={sugg.carte} entree sortie={sortie} onClick={sugg.action} />}
           </div>
           <div className="hm-pad hm-pad--chemin">{chemin}</div>
           {rappels}
