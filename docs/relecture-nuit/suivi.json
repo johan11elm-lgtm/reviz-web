@@ -794,6 +794,11 @@
       "chemin": "4eme/physique-chimie/transformation-physique-ou-chimique",
       "le": "2026-10-21",
       "corrections": 1
+    },
+    {
+      "chemin": "4eme/physique-chimie/tests-d-identification",
+      "le": "2026-10-21",
+      "corrections": 0
     }
   ]
 }
