@@ -315,29 +315,55 @@ export default function Home() {
   }, []);
 
   // ── Ce que Réviz propose, à tour de rôle : la phrase du jour d'abord, puis le reste de l'app.
-  // Chaque proposition a sa pose (humeur ou réaction du moteur), parfois un geste, et son action.
+  // Chaque proposition a sa pose (humeur ou réaction du moteur), parfois un geste, son action et sa
+  // carte : depuis l'accueil, on peut aller partout.
   // Pas de réaction dont l'effet flotte au-dessus de la tête (ampoule, point d'interrogation) :
   // la bulle le cacherait.
   const court = (t, max = 24) => (t.length > max ? `${t.slice(0, max - 1).trimEnd()}…` : t);
   const titreLecon = lastLesson?.metadata?.title;
+  const pluriel = (n, mot) => `${n} ${mot}${n > 1 ? 's' : ''}`;
+  const avecCompte = isGuest ? 'Avec un compte gratuit' : null;
+  const lancerProgramme = () => navigate('/programme');
+  const lancerScan = () => navigate('/scan');
+
+  // La carte de la phrase du jour : ce que lance l'action principale (id : pour ne pas la reproposer).
+  const carteDuJour = humeurId === 'fete'
+    ? { id: 'battle', pose: 'fire', fond: '#E4E0FA', titre: 'Battle bonus', sous: 'Objectif atteint, on joue ?' }
+    : humeurId === 'soir'
+      ? { id: 'cartes', pose: 'soir', fond: '#E4E0FA', titre: 'Une flashcard', sous: '2 minutes, et au lit' }
+      : humeurId === 'controle'
+        ? { id: 'controle', pose: subjectMascot(controle.m.label), fond: '#FFE6D2', titre: `Contrôle de ${controle.m.label.toLowerCase()}`,
+            sous: `${majuscule(controle.quand)}${controle.titre ? ` · ${controle.titre}` : ''}` }
+        : cta === 'Réviser mes cartes'
+          ? { id: 'cartes', pose: 'flashcard', fond: '#FFE6D2', titre: 'Mes cartes du jour', sous: `${pluriel(dueCards, 'carte')} à revoir` }
+          : cta === 'Scanner une leçon'
+            ? { id: 'scan', pose: 'scanphone', fond: '#DCF5E6', titre: 'Scanner une leçon', sous: 'Résumé, flashcards et quiz' }
+            : { id: 'programme', pose: 'reading', fond: '#FFE6D2', titre: 'Mon programme', sous: 'Les chapitres de ta classe' };
+
   const suggestions = [
-    { texte: dit, label: cta, action, expr: h.expression },
+    { texte: dit, label: cta, action, expr: h.expression, carte: carteDuJour },
     titreLecon && (fcLast > 0
       ? { texte: `Tes cartes de « ${court(titreLecon)} » t'attendent.`, label: 'Réviser mes cartes', action: ouvrirCartes, expr: 'content', geste: 'coucou',
-          carte: { pose: 'flashcard', fond: '#FFE6D2', titre: 'Flashcards', sous: `${fcLast} carte${fcLast > 1 ? 's' : ''} à revoir · ${court(titreLecon, 20)}` } }
+          carte: { id: 'cartes', pose: 'flashcard', fond: '#FFE6D2', titre: 'Flashcards', sous: `${pluriel(fcLast, 'carte')} à revoir · ${court(titreLecon, 20)}` } }
       : { texte: `Un petit quiz sur « ${court(titreLecon)} » ?`, label: 'Lancer le quiz', expr: 'emerveille',
           action: () => { restoreLesson(lastLesson.id); navigate('/quiz'); },
-          carte: { pose: 'quiz', fond: '#E4E0FA', titre: 'Quiz corrigé', sous: court(titreLecon, 32) } }),
-    // Le coach passe par une API authentifiée : pas de proposition en mode essai (comme la capsule).
-    !isGuest && { texte: 'Une question sur ton cours ? Demande-moi.', label: 'Parler à Réviz IA', action: () => navigate('/coach'), expr: 'reflechit',
-      carte: { pose: 'coach', fond: '#FFD9E4', titre: 'Réviz IA', sous: 'Je t’explique, avec des exemples' } },
-    humeurId !== 'fete' && { texte: 'Prêt à défier un ami en Battle ?', label: 'Lancer une Battle', action: () => navigate('/battle'), expr: 'determine', geste: 'brasEnLair',
-      carte: { pose: 'fire', fond: '#E4E0FA', titre: 'Battle', sous: '5 questions, 15 s, contre un ami' } },
-    !isGuest && cta !== 'Scanner une leçon' && { texte: 'Une leçon à apprendre ? Prends-la en photo.', label: 'Scanner une leçon', action: () => navigate('/scan'), expr: 'content', geste: 'coucou',
-      carte: { pose: 'scanphone', fond: '#DCF5E6', titre: 'Scanner une leçon', sous: 'Résumé, flashcards et quiz' } },
-    !controle && { texte: 'Un contrôle bientôt ? Dis-moi quand.', label: "Ouvrir l'agenda", action: () => navigate('/agenda'), expr: 'content', geste: 'gratterTete',
-      carte: { pose: 'writing', fond: '#FFE6D2', titre: 'Agenda', sous: 'Tes contrôles, et le plan pour chacun' } },
-  ].filter(Boolean);
+          carte: { id: 'quiz', pose: 'quiz', fond: '#E4E0FA', titre: 'Quiz corrigé', sous: court(titreLecon, 32) } }),
+    { texte: 'Un autre chapitre ? Tout ton programme est là.', label: 'Réviser mon programme', action: lancerProgramme, expr: 'content', geste: 'coucou',
+      carte: { id: 'programme', pose: 'reading', fond: '#FFE6D2', titre: 'Réviser', sous: `Tout le programme de ${classe}` } },
+    { texte: 'Une leçon à apprendre ? Prends-la en photo.', label: 'Scanner une leçon', action: lancerScan, expr: 'emerveille',
+      carte: { id: 'scan', pose: 'scanphone', fond: '#DCF5E6', titre: 'Scanner une leçon', sous: avecCompte || 'Résumé, flashcards et quiz' } },
+    { texte: 'Une question sur ton cours ? Demande-moi.', label: 'Parler à Réviz IA', action: () => navigate('/coach'), expr: 'reflechit',
+      carte: { id: 'ia', pose: 'coach', fond: '#FFD9E4', titre: 'Réviz IA', sous: avecCompte || 'Je t’explique, avec des exemples' } },
+    { texte: 'Prêt à défier un ami en Battle ?', label: 'Lancer une Battle', action: () => navigate('/battle'), expr: 'determine', geste: 'brasEnLair',
+      carte: { id: 'battle', pose: 'fire', fond: '#E4E0FA', titre: 'Battle', sous: '5 questions, 15 s, contre un ami' } },
+    !isGuest && allLessons.length > 0 && {
+      texte: `${allLessons.length > 1 ? `Tes ${allLessons.length} leçons sont rangées` : 'Ta leçon est rangée'} ici.`, label: 'Voir mes leçons',
+      action: () => navigate('/cours'), expr: 'fier',
+      carte: { id: 'cours', pose: 'writing', fond: '#DCF5E6', titre: 'Mes leçons', sous: `${pluriel(allLessons.length, 'leçon')} scannée${allLessons.length > 1 ? 's' : ''}` } },
+    { texte: controle ? 'Un autre contrôle à noter ?' : 'Un contrôle bientôt ? Dis-moi quand.', label: "Ouvrir l'agenda",
+      action: () => navigate('/agenda'), expr: 'content', geste: 'gratterTete',
+      carte: { id: 'agenda', pose: 'thinking', fond: '#FFE6D2', titre: 'Agenda', sous: 'Tes contrôles, et le plan pour chacun' } },
+  ].filter((p, i) => p && (i === 0 || p.carte.id !== carteDuJour.id));
   const sugg = suggestions[tour % suggestions.length];
 
   // Le héros hors de l'écran ou l'onglet caché : Réviz attend avant de changer de phrase.
@@ -572,7 +598,7 @@ export default function Home() {
           </div>
           {/* Place réservée : la carte chevauche le bas du héros, rien ne saute quand elle arrive. */}
           <div className="hm-proposition-place">
-            {parle && sugg.carte && <CarteProposition key={tour} carte={sugg.carte} sortie={sortie} onClick={sugg.action} />}
+            {parle && <CarteProposition key={tour} carte={sugg.carte} sortie={sortie} onClick={sugg.action} />}
           </div>
           <div className="hm-pad hm-pad--chemin">{chemin}</div>
           {rappels}
