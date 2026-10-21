@@ -61,9 +61,16 @@ const Lecture = () => (
   </svg>
 );
 
+const Fleche = () => (
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <path d="M5 12h14M13 6l6 6-6 6" />
+  </svg>
+);
+
 /* Ce que dit Réviz, tapé lettre par lettre au rythme de sa bouche (tempsLettres). Le texte
- * entier est posé dès le départ (lettres à venir invisibles) : la bulle ne change pas de taille. */
-function Bulle({ texte, parle }) {
+ * entier est posé dès le départ (lettres à venir invisibles) : la bulle ne change pas de taille.
+ * Toucher la bulle lance ce qu'il propose. */
+function Bulle({ texte, parle, sortie, onClick, label }) {
   const [n, setN] = useState(0);
   useEffect(() => {
     if (!parle) return;
@@ -83,11 +90,14 @@ function Bulle({ texte, parle }) {
   }, [texte, parle]);
   const lettres = [...texte];
   return (
-    <div className={`hm-bulle-parole${parle ? ' hm-bulle-parole--la' : ''}`}>
-      <h1 className="hm-bulle-txt" aria-label={texte}>
-        <span aria-hidden="true">{lettres.slice(0, n).join('')}</span>
-        <span aria-hidden="true" className="hm-bulle-reste">{lettres.slice(n).join('')}</span>
-      </h1>
+    <div className={`hm-bulle-parole${parle && !sortie ? ' hm-bulle-parole--la' : ''}`}>
+      <button type="button" className="hm-bulle-txt" onClick={onClick} aria-label={`${texte} ${label}`} tabIndex={parle ? 0 : -1}>
+        <span className="hm-bulle-mots" aria-hidden="true">
+          {lettres.slice(0, n).join('')}
+          <span className="hm-bulle-reste">{lettres.slice(n).join('')}</span>
+        </span>
+        <span className="hm-bulle-go" aria-hidden="true"><Fleche /></span>
+      </button>
     </div>
   );
 }
@@ -129,8 +139,11 @@ export default function Home() {
   const montrerEssai = essaiTheme && hasRevizPlus && !isGuest && !themeById(theme)?.premium;
   const [compact, setCompact] = useState(0);
   const [parle, setParle] = useState(false);
+  const [tour, setTour] = useState(0);
+  const [sortie, setSortie] = useState(false);
   const pantin = useRef(null);
   const hero = useRef(null);
+  const heroVu = useRef(true);
   const controle = useProchainControle(currentUser);
 
   useEffect(() => {
@@ -276,6 +289,54 @@ export default function Home() {
     const t = setTimeout(() => setParle(true), 4000);
     return () => clearTimeout(t);
   }, []);
+
+  // ── Ce que Réviz propose, à tour de rôle : la phrase du jour d'abord, puis le reste de l'app.
+  // Chaque proposition a sa pose (humeur ou réaction du moteur), parfois un geste, et son action.
+  // Pas de réaction dont l'effet flotte au-dessus de la tête (ampoule, point d'interrogation) :
+  // la bulle le cacherait.
+  const court = (t, max = 24) => (t.length > max ? `${t.slice(0, max - 1).trimEnd()}…` : t);
+  const titreLecon = lastLesson?.metadata?.title;
+  const suggestions = [
+    { texte: dit, label: cta, action, expr: h.expression },
+    titreLecon && (fcLast > 0
+      ? { texte: `Tes cartes de « ${court(titreLecon)} » t'attendent.`, label: 'Réviser mes cartes', action: ouvrirCartes, expr: 'content', geste: 'coucou' }
+      : { texte: `Un petit quiz sur « ${court(titreLecon)} » ?`, label: 'Lancer le quiz', expr: 'emerveille',
+          action: () => { restoreLesson(lastLesson.id); navigate('/quiz'); } }),
+    { texte: 'Une question sur ton cours ? Demande-moi.', label: 'Parler à Réviz IA', action: () => navigate('/coach'), expr: 'reflechit' },
+    humeurId !== 'fete' && { texte: 'Prêt à défier un ami en Battle ?', label: 'Lancer une Battle', action: () => navigate('/battle'), expr: 'determine', geste: 'brasEnLair' },
+    !isGuest && cta !== 'Scanner une leçon' && { texte: 'Une leçon à apprendre ? Prends-la en photo.', label: 'Scanner une leçon', action: () => navigate('/scan'), expr: 'content', geste: 'coucou' },
+    !controle && { texte: 'Un contrôle bientôt ? Dis-moi quand.', label: "Ouvrir l'agenda", action: () => navigate('/agenda'), expr: 'content', geste: 'gratterTete' },
+  ].filter(Boolean);
+  const sugg = suggestions[tour % suggestions.length];
+
+  // Le héros hors de l'écran ou l'onglet caché : Réviz attend avant de changer de phrase.
+  useEffect(() => {
+    if (!hero.current || !('IntersectionObserver' in window)) return;
+    const obs = new IntersectionObserver(([v]) => { heroVu.current = v.isIntersecting; });
+    obs.observe(hero.current);
+    return () => obs.disconnect();
+  }, [isDesktop]);
+
+  useEffect(() => {
+    // Sur ordinateur, pas de bulle : Réviz garde la phrase du jour.
+    if (!parle || isDesktop) return;
+    // La première phrase est dite à l'atterrissage (aterri) ; les suivantes ici, avec leur pose.
+    if (tour > 0) {
+      pantin.current?.expression(sugg.expr);
+      if (sugg.geste) pantin.current?.geste(sugg.geste);
+      pantin.current?.dire(sugg.texte);
+    }
+    const temps = tempsLettres(sugg.texte);
+    let t1, t2;
+    const suivante = () => {
+      if (document.hidden || !heroVu.current) { t1 = setTimeout(suivante, 1500); return; }
+      setSortie(true);
+      t2 = setTimeout(() => { setSortie(false); setTour(t => t + 1); }, 220);
+    };
+    // Le temps de dire la phrase, puis de la lire.
+    t1 = setTimeout(suivante, (temps[temps.length - 1] || 0) * 1000 + 5500);
+    return () => { clearTimeout(t1); clearTimeout(t2); };
+  }, [parle, tour, isDesktop]);
   const style = { '--hm-bg': h.bg, '--hm-tint': h.tint, '--hm-dot': h.dot, '--hm-bar': h.bar, '--hm-btn': h.btn, '--hm-soft': h.soft };
 
   const serie = streak > 0 && (
@@ -451,7 +512,8 @@ export default function Home() {
               </div>
               {serie}
             </div>
-            <Bulle key={humeurId} texte={dit} parle={parle} />
+            <h1 className="sr-only">{dit}</h1>
+            <Bulle key={`${humeurId}-${tour}`} texte={sugg.texte} parle={parle} sortie={sortie} onClick={sugg.action} label={sugg.label} />
           </div>
           <div className="hm-pad hm-pad--plan">
             <div className="hm-carte-plan">{carteplan}</div>

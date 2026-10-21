@@ -109,7 +109,8 @@
   z-index: 3;
   left: 22px;
   right: 22px;
-  top: calc(90px + env(safe-area-inset-top, 0px));
+  /* Posée par le bas, juste au-dessus de la tête : la pointe ne bouge pas quand la phrase change. */
+  bottom: 262px;
   display: flex;
   justify-content: center;
   pointer-events: none;
@@ -118,12 +119,17 @@
   transform-origin: 50% 100%;
   transition: opacity .2s ease, transform .35s cubic-bezier(.3,1.5,.5,1);
 }
-.home-page .hm-bulle-parole--la { opacity: 1; transform: none; }
+.home-page .hm-bulle-parole--la { opacity: 1; transform: none; pointer-events: auto; animation: hmBulle .35s cubic-bezier(.3,1.5,.5,1) both; }
+@keyframes hmBulle { from { opacity: 0; transform: translateY(8px) scale(.9); } to { opacity: 1; transform: none; } }
 .home-page .hm-bulle-txt {
   position: relative;
-  max-width: 290px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  max-width: 300px;
   margin: 0;
-  padding: 11px 18px 12px;
+  padding: 11px 11px 12px 18px;
+  border: 0;
   border-radius: 22px;
   background: #fff;
   box-shadow: 0 10px 24px -12px rgba(120,60,20,.45);
@@ -132,9 +138,24 @@
   font-weight: 800;
   letter-spacing: -.4px;
   line-height: 1.15;
-  text-align: center;
+  text-align: left;
   text-wrap: balance;
   color: var(--hm-encre);
+  transition: transform .12s;
+}
+.home-page .hm-bulle-txt:active { transform: scale(.97); }
+.home-page .hm-bulle-txt:focus-visible { outline: 3px solid var(--hm-encre); outline-offset: 3px; }
+.home-page .hm-bulle-mots { flex: 1; min-width: 0; }
+.home-page .hm-bulle-go {
+  width: 30px;
+  height: 30px;
+  flex: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--hm-btn);
+  color: #fff;
 }
 /* La pointe, vers la tête de Réviz */
 .home-page .hm-bulle-txt::after {
@@ -150,6 +171,15 @@
   transform: rotate(45deg);
 }
 .home-page .hm-bulle-reste { visibility: hidden; }
+
+.home-page .sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
 
 /* ── Ce que dit Réviz (ordinateur) ── */
 .home-page .hm-centre { padding: 22px 22px 0; }
