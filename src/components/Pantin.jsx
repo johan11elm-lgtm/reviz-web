@@ -24,21 +24,23 @@ function chargerManifeste() {
   return manifeste;
 }
 
-const BOUCHES = ['repos', 'A', 'EI', 'O', 'U', 'rire'];
+const BOUCHES = ['repos', 'A', 'EI', 'O', 'U', 'rire', 'MBP', 'triste', 'moue', 'fier'];
 const PAUPIERES = ['p25', 'p50', 'p75', 'p100'];
-// Bouches sans image fiable : la plus proche (comme anim.html). bouche-MBP.webp
-// est un morceau de bouche mal découpé (il restait invisible : « elle a pas de
-// bouche ») ; lèvres fermées = le trait de repos.
-const ALIAS = { FV: 'EI', L: 'A', cri: 'O', choc: 'O', triste: 'repos', MBP: 'repos' };
+// Bouches sans image propre : la plus proche (comme anim.html).
+const ALIAS = { FV: 'EI', L: 'A', cri: 'O', choc: 'O' };
 
 // Humeurs : la pose tenue, la vie tourne par-dessus.
 const EXPRESSIONS = {
   neutre:    { sourcil: 0,    bouche: 'repos', ferme: 0,   penche: 0,  rx: 0,    ry: 0 },
   content:   { sourcil: 0.25, bouche: 'repos', ferme: 0,   penche: 0,  rx: 0,    ry: 0 },
-  fier:      { sourcil: 0.7,  bouche: 'rire',  ferme: 0,   penche: -2, rx: 0,    ry: 0 },
+  fier:      { sourcil: 0.7,  bouche: 'fier',  ferme: 0,   penche: -2, rx: 0,    ry: 0 },
   determine: { sourcil: -0.45, bouche: 'MBP',  ferme: 0.1, penche: 1,  rx: 0,    ry: 0 },
-  reflechit: { sourcil: 0.5,  bouche: 'MBP',   ferme: 0,   penche: 2,  rx: -0.4, ry: -0.8 },
+  reflechit: { sourcil: 0.5,  bouche: 'moue',   ferme: 0,   penche: 2,  rx: -0.4, ry: -0.8 },
   inquiet:   { sourcil: 0.6,  bouche: 'U',     ferme: 0,   penche: -1, rx: 0,    ry: 0.2 },
+  triste:    { sourcil: 0.35, bouche: 'triste', ferme: 0.15, penche: -3, rx: 0,   ry: 0.5 },
+  surpris:   { sourcil: 1,    bouche: 'O',     ferme: 0,   penche: 0,  rx: 0,    ry: 0 },
+  concentre: { sourcil: -0.5, bouche: 'MBP',   ferme: 0.1, penche: 1,  rx: 0,    ry: 0.1 },
+  fatigue:   { sourcil: -0.1, bouche: 'moue',  ferme: 0.5, penche: 3,  rx: 0,    ry: 0.4 },
   endormi:   { sourcil: -0.2, bouche: 'repos', ferme: 1,   penche: 5,  rx: 0,    ry: 0.3 },
 };
 
