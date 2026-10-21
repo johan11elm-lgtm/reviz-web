@@ -89,12 +89,12 @@ const POSE_ETAPE = { '/resume': 'reading', '/flashcards': 'flashcard', '/quiz': 
 // La progression vient du flux de l'analyse ; phrase et pose changent par palier, et les 4
 // formats se cochent un par un (cosmétique : l'IA les écrit dans la même réponse).
 const PALIERS = [
-  { des: 0, phrase: 'Je lis ta leçon.', pose: 'reading' },
-  { des: 16, phrase: 'Je repère l’essentiel.', pose: 'reading' },
-  { des: 35, phrase: 'Je prépare tes flashcards.', pose: 'flashcard' },
-  { des: 57, phrase: 'J’écris le quiz.', pose: 'writing' },
-  { des: 78, phrase: 'Je trace la carte mentale.', pose: 'thinking' },
-  { des: 95, phrase: 'C’est prêt.', pose: 'celebration' },
+  { des: 0, phrase: 'Je lis ta leçon.', humeur: 'reflechit' },
+  { des: 16, phrase: 'Je repère l’essentiel.', humeur: 'reflechit' },
+  { des: 35, phrase: 'Je prépare tes flashcards.', humeur: 'determine' },
+  { des: 57, phrase: 'J’écris le quiz.', humeur: 'determine' },
+  { des: 78, phrase: 'Je trace la carte mentale.', humeur: 'reflechit' },
+  { des: 95, phrase: 'C’est prêt.', humeur: 'fier' },
 ];
 const FORMATS_PREP = [
   { nom: 'Résumé', pret: 35 },
@@ -234,21 +234,21 @@ export default function Analyse() {
   const parPhoto = !!localStorage.getItem('reviz-captured-image');
   const verScan = () => navigate(parPhoto ? '/scan' : '/scan?mode=texte');
   const erreur = ['INVALID_JSON', 'EMPTY_RESPONSE', 'IMAGE_TOO_LARGE'].includes(error) ? {
-    pose: 'search',
+    humeur: 'reflechit', geste: 'gratterTete',
     lignes: parPhoto ? ['Je n’arrive pas à lire cette photo.', 'Reprends-la plus droite et mieux éclairée.'] : ['Je n’arrive pas à lire ce texte.', 'Vérifie que c’est bien ta leçon.'],
     titre: parPhoto ? 'On recommence la photo ?' : 'On réessaie ?',
     texte: parPhoto ? 'Pose ta feuille à plat, près d’une fenêtre ou sous une lampe, et approche-toi jusqu’à ce que les lettres soient nettes.' : 'Recolle le texte de ta leçon, ou prends-la directement en photo.',
     action: [parPhoto ? 'Reprendre la photo' : 'Modifier le texte', verScan],
     autre: [parPhoto ? 'Coller le texte' : 'Prendre une photo', () => navigate(parPhoto ? '/scan?mode=texte' : '/scan')],
   } : ['NETWORK_ERROR', 'TIMEOUT'].includes(error) ? {
-    pose: 'confused',
+    humeur: 'inquiet',
     lignes: ['La connexion s’est coupée.', parPhoto ? 'Ta photo n’est pas perdue.' : 'Ton texte n’est pas perdu.'],
     titre: 'On réessaie dans un instant ?',
     texte: 'Vérifie ton Wi-Fi ou tes données mobiles, puis relance l’envoi.',
     action: ['Réessayer', () => window.location.reload()],
     autre: ['Plus tard', () => navigate('/cours')],
   } : {
-    pose: 'confused',
+    humeur: 'inquiet', geste: 'gratterTete',
     lignes: [errInfo.title + (/[.!?]$/.test(errInfo.title) ? '' : '.'), 'Rien de grave, on recommence.'],
     titre: errInfo.title,
     texte: errInfo.sub,
@@ -494,7 +494,7 @@ export default function Analyse() {
               <span className="ch-grain" aria-hidden="true" />
               <span className="an-etat-sur">Ta leçon est entre de bonnes mains</span>
               <BulleReviz key={palier.phrase} lignes={[palier.phrase, 'Environ 30 secondes.']} grande={isDesktop} className="an-etat-bulle" />
-              <Mascot pose={palier.pose} size={isDesktop ? 280 : 200} alt="" aria-hidden="true" priority />
+              <Pantin size={isDesktop ? 320 : 220} expression={palier.humeur} entree="coucou" repli={null} label="Réviz, ta mascotte" />
             </div>
             <div className="an-etat-carte" role="status" aria-label={`${palier.phrase} ${progress} %`}>
               <h1 className="an-etat-titre">Ta leçon devient</h1>
@@ -529,7 +529,7 @@ export default function Analyse() {
               </button>
             </div>
             <BulleReviz lignes={erreur.lignes} grande={isDesktop} className="an-etat-bulle" />
-            <Mascot pose={erreur.pose} size={isDesktop ? 260 : 190} alt="" aria-hidden="true" priority />
+            <Pantin size={isDesktop ? 300 : 210} expression={erreur.humeur} entree={erreur.geste} repli={null} label="Réviz, ta mascotte" />
           </div>
           <div className="an-etat-carte">
             <h1 className="an-etat-titre">{erreur.titre}</h1>

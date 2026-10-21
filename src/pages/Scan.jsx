@@ -3,7 +3,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useIsDesktop } from '../hooks/useMediaQuery';
 import { useModalA11y } from '../hooks/useModalA11y';
-import { Mascot } from '../components/Mascot';
+import { Pantin } from '../components/Pantin';
 import { BulleReviz } from '../components/reviz/BulleReviz';
 import { ChoixFormule } from '../components/ChoixFormule';
 import { RevizPlusBadge } from '../components/RevizPlus';
@@ -213,7 +213,7 @@ export default function Scan() {
         <div className="ch-hero sc-hero sc-hero--centre">
           {deco}
           <div className="ch-haut"><button type="button" className="ch-retour" onClick={retour}><Chevron />Mes leçons</button></div>
-          <Reviz pose="sleeping" lignes={['Belle semaine de travail.', 'Je fais une pause jusqu’à lundi.']} grand={isDesktop} />
+          <Reviz expression="endormi" lignes={['Belle semaine de travail.', 'Je fais une pause jusqu’à lundi.']} grand={isDesktop} />
         </div>
         <div className="sc-carte sc-carte--etat">
           <h1 className="sc-carte-titre">Tu as utilisé tes scans de la semaine.</h1>
@@ -239,7 +239,7 @@ export default function Scan() {
             : null}
         </div>
         <div className="sc-outil">
-          <PetitReviz pose="scanphone" lignes={['Cadre toute la page.', isDesktop ? 'Tiens la page bien à plat.' : 'Entre les quatre coins.']} />
+          <PetitReviz expression="determine" lignes={['Cadre toute la page.', isDesktop ? 'Tiens la page bien à plat.' : 'Entre les quatre coins.']} />
           <div className={`sc-viseur sc-viseur--${camera}`}>
             <video ref={video} autoPlay playsInline muted className={camera === 'active' ? '' : 'sc-cache'} />
             {camera === 'active' && <span className="sc-coins" aria-hidden="true"><i /><i /><i /><i /></span>}
@@ -281,7 +281,7 @@ export default function Scan() {
         </div>
         <div className="sc-outil">
           <div className="sc-photo"><img src={photo} alt="La photo de ta leçon" /></div>
-          <PetitReviz pose="reading" lignes={['Tout est bien lisible ?', 'Sinon, reprends-la.']} />
+          <PetitReviz expression="reflechit" lignes={['Tout est bien lisible ?', 'Sinon, reprends-la.']} />
           <div className="sc-deux">
             <button type="button" className="sc-btn sc-btn--blanc" onClick={() => { setPhoto(null); setEcran(aCamera ? 'viseur' : 'choix'); }}>Reprendre</button>
             <button type="button" className="sc-btn" onClick={analyserPhoto}>C’est bon, analyse</button>
@@ -329,7 +329,7 @@ export default function Scan() {
           <h1>Coller le texte</h1>
         </div>
         <div className="sc-outil">
-          <PetitReviz pose="writing" lignes={['Colle ta leçon ici.', `${MIN} caractères au moins.`]} />
+          <PetitReviz expression="content" lignes={['Colle ta leçon ici.', `${MIN} caractères au moins.`]} />
           {champTexte}
           {boutonAnalyser}
           <button type="button" className="sc-lien sc-lien--centre" onClick={() => setEcran('viseur')}>Prendre une photo plutôt</button>
@@ -353,7 +353,7 @@ export default function Scan() {
                 <span className="ch-surtitre">Nouvelle leçon</span>
                 <h1 className="ch-titre sc-titre">Scanner une leçon</h1>
               </div>
-              <Reviz pose="scanphone" lignes={['Une photo de ta leçon.', 'Je m’occupe du reste.']} grand pointe="droite" />
+              <Reviz expression="content" entree="coucou" lignes={['Une photo de ta leçon.', 'Je m’occupe du reste.']} grand pointe="droite" />
             </div>
           </div>
           <div className="sc-colonnes">
@@ -406,7 +406,7 @@ export default function Scan() {
           <div className="ch-haut"><button type="button" className="ch-retour" onClick={retour}><Chevron />Mes leçons</button></div>
           <span className="ch-surtitre">Nouvelle leçon</span>
           <h1 className="ch-titre sc-titre">Scanner une leçon</h1>
-          <Reviz pose="scanphone" lignes={['Une photo de ta leçon.', 'Je m’occupe du reste.']} />
+          <Reviz expression="content" entree="coucou" lignes={['Une photo de ta leçon.', 'Je m’occupe du reste.']} />
         </div>
         <button type="button" className="sc-carte sc-photo-carte" onClick={() => setEcran('viseur')}>
           <span className="sc-mini-rond" aria-hidden="true"><Appareil /></span>
@@ -432,21 +432,33 @@ export default function Scan() {
   );
 }
 
-/** Réviz en grand dans le héros, avec sa bulle. */
-function Reviz({ pose, lignes, grand, pointe = 'bas' }) {
+/** Réviz, la mascotte animée, en grand dans le héros : il arrive, puis parle dans sa bulle. */
+function Reviz({ expression, entree, lignes, grand, pointe = 'bas' }) {
+  const pantin = useRef(null);
+  const [parle, setParle] = useState(false);
+  const texte = lignes.join('\n');
+  useEffect(() => { if (parle) pantin.current?.dire(texte); }, [texte, parle]);
+  // Si le moteur ne charge pas, la bulle s'affiche quand même (page visible seulement).
+  useEffect(() => {
+    let t;
+    const essai = () => { t = setTimeout(() => (document.hidden ? essai() : setParle(true)), 4000); };
+    essai();
+    return () => clearTimeout(t);
+  }, []);
   return (
     <div className={`sc-reviz${pointe === 'droite' ? ' sc-reviz--cote' : ''}`}>
-      <BulleReviz lignes={lignes} pointe={pointe} grande={grand} className="sc-bulle" />
-      <Mascot pose={pose} size={grand ? 260 : 190} alt="" aria-hidden="true" priority />
+      <BulleReviz key={texte} lignes={lignes} parle={parle} pointe={pointe} grande={grand} className="sc-bulle" />
+      <Pantin ref={pantin} size={grand ? 300 : 210} expression={expression} entree={entree} repli={null}
+        onEntree={() => setParle(true)} onClick={() => pantin.current?.geste('saut')} label="Réviz, ta mascotte" />
     </div>
   );
 }
 
 /** Réviz en petit à côté de sa bulle (viseur, aperçu, texte). */
-function PetitReviz({ pose, lignes }) {
+function PetitReviz({ expression, lignes }) {
   return (
     <div className="sc-petit-reviz">
-      <Mascot pose={pose} size={64} alt="" aria-hidden="true" />
+      <Pantin size={76} expression={expression} repli={null} label="Réviz" />
       <BulleReviz lignes={lignes} pointe="gauche" className="sc-bulle" />
     </div>
   );
@@ -460,7 +472,7 @@ function Essai({ onCompte, onConnexion, onProgramme, grand }) {
         <span className="ch-deco ch-deco--a" aria-hidden="true" />
         <span className="ch-deco ch-deco--b" aria-hidden="true" />
         <span className="ch-grain" aria-hidden="true" />
-        <Reviz pose="hello" lignes={['Donne-moi tes leçons.', 'Il te faut juste un compte gratuit.']} grand={grand} />
+        <Reviz expression="content" entree="coucou" lignes={['Donne-moi tes leçons.', 'Il te faut juste un compte gratuit.']} grand={grand} />
       </div>
       <div className="sc-carte sc-carte--etat">
         <h1 className="sc-carte-titre">Garde tes leçons</h1>
@@ -478,7 +490,7 @@ function NiveauManquant({ onClose, onProfil }) {
   return (
     <div className="sc-voile" onClick={onClose}>
       <div className="sc-feuille sc-feuille--centre" ref={ref} role="dialog" aria-modal="true" aria-labelledby="sc-niveau" onClick={e => e.stopPropagation()}>
-        <Mascot pose="graduation" size={110} alt="" aria-hidden="true" />
+        <Pantin size={130} expression="reflechit" repli={null} label="Réviz" />
         <h2 id="sc-niveau">Dis-moi d’abord ta classe</h2>
         <p className="sc-carte-txt">J’adapte tes révisions à ta classe. Ça se règle en 10 secondes.</p>
         <div className="sc-deux">
