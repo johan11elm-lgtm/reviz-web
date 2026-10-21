@@ -12,7 +12,7 @@ import './BulleReviz.css';
  * @param {boolean} [parle=true]  false : bulle cachée (Réviz n'est pas encore là)
  * @param {boolean} [sortie]  la bulle s'efface avant la phrase suivante
  * @param {Function} [onClick] la bulle devient un bouton (label : ce qu'il lance)
- * @param {'bas'|'droite'} [pointe='bas'] côté de la pointe, vers Réviz
+ * @param {'bas'|'droite'|'gauche'} [pointe='bas'] côté de la pointe, vers Réviz
  * @param {boolean} [grande]  version ordinateur, en grand
  */
 export function BulleReviz({ lignes, parle = true, sortie = false, onClick, label = '', pointe = 'bas', grande = false, className = '' }) {
@@ -49,7 +49,7 @@ export function BulleReviz({ lignes, parle = true, sortie = false, onClick, labe
       </span>
     );
   });
-  const classes = ['rv-bulle', parle && !sortie && 'rv-bulle--la', pointe === 'droite' && 'rv-bulle--droite', grande && 'rv-bulle--grande', className]
+  const classes = ['rv-bulle', parle && !sortie && 'rv-bulle--la', pointe === 'droite' && 'rv-bulle--droite', pointe === 'gauche' && 'rv-bulle--gauche', grande && 'rv-bulle--grande', className]
     .filter(Boolean).join(' ');
   return (
     <div className={classes}>

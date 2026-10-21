@@ -1,464 +1,351 @@
-/* CSS scoped to page wrapper — see scripts/scope-page-css.py */
-/* Wrapper: .flashcards-page */
-
-/* ⚠️ Ce fichier ne contient QUE les overrides et layouts locaux à Flashcards.
- * Les patterns (cards, buttons, end-screen, header, etc.) sont dans
- * src/styles/components/*.css via les classes .rv-*. */
-
-/* ── Progress dots (sub du PageHeader) ── */
-.flashcards-page .flashcards-progress-dots {
-  display: flex;
-  gap: 5px;
-  align-items: center;
-  flex-wrap: wrap;
-  margin-top: 4px;
-}
-.flashcards-page .flashcards-progress-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--bg-muted);
-  transition: background 0.25s ease, transform 0.2s ease, width 0.25s ease;
-}
-.flashcards-page .flashcards-progress-dot.done   { background: var(--accent-orange-soft); }
-.flashcards-page .flashcards-progress-dot.active {
-  background: var(--accent-orange);
-  width: 16px;
-  border-radius: 3px;
-}
-
-/* ── Counter (right slot) ── */
-
-/* ── AI badge row ── */
-.flashcards-page .flashcards-ai-row {
-  text-align: center;
-  padding: 4px 0 0;
-}
-
-/* ── Streak badge (animé, temporaire) ── */
-.flashcards-page .flashcards-streak-badge {
-  position: absolute;
-  top: 80px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: linear-gradient(135deg, var(--accent-orange), #FF6B00);
-  color: #fff;
-  padding: 8px 16px;
-  border-radius: var(--radius-pill);
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: -0.2px;
-  box-shadow: 0 8px 20px rgba(255, 117, 30, 0.32);
-  z-index: 15;
-  animation: flashcards-streak-pop 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
-}
-@keyframes flashcards-streak-pop {
-  from { transform: translate(-50%, -8px); opacity: 0; }
-  to   { transform: translate(-50%, 0);    opacity: 1; }
-}
-
-/* ── Zone carte ── */
-.flashcards-page .flashcards-card-area {
-  flex: 1;
-  padding: 8px var(--page-gutter) 32px;
-  display: flex;
-  flex-direction: column;
-  gap: var(--gap-cards);
-}
-
-/* Stack de cartes */
-.flashcards-page .flashcards-stack-wrap {
+/* ─── Flashcards (handoff Claude Design du 21/10) : un jeu en plein écran ──────
+ * Fond dans la teinte de la matière (--ch-*, utils/teinteMatiere), route de la série, pile de
+ * cartes qui pivotent, Réviz qui réagit, notes à tranche. Pas de barre du bas ni de menu. */
+.fc-page {
+  --ch-encre: #1B1A23;
+  --ch-doux: #6E675B;
   position: relative;
-  flex: 1;
-  min-height: 0;
-}
-
-.flashcards-page .flashcards-stack-bg {
-  position: absolute;
-  inset: 0;
-  border-radius: var(--radius-lg);
-  background: var(--bg-card);
-  border: 1px solid var(--border-subtle);
-}
-.flashcards-page .flashcards-stack-bg--s1 { transform: rotate(2.5deg) translateY(6px);  opacity: 0.55; }
-.flashcards-page .flashcards-stack-bg--s2 { transform: rotate(-1.8deg) translateY(12px); opacity: 0.3; }
-
-/* Animation au swipe */
-@keyframes flashcards-slide-got   { to { transform: translateX(120%) rotate(15deg);  opacity: 0; } }
-@keyframes flashcards-slide-again { to { transform: translateX(-120%) rotate(-15deg); opacity: 0; } }
-.flashcards-page .flashcards-anim-got   .flashcards-flip-wrap { animation: flashcards-slide-got   0.28s ease-in forwards; }
-.flashcards-page .flashcards-anim-again .flashcards-flip-wrap { animation: flashcards-slide-again 0.28s ease-in forwards; }
-
-/* Flip wrap */
-.flashcards-page .flashcards-flip-wrap {
-  position: absolute;
-  inset: 0;
-  perspective: 1400px;
-  cursor: pointer;
-  z-index: 2;
-}
-
-.flashcards-page .flashcards-flip-card {
-  width: 100%;
-  height: 100%;
-  position: relative;
-  transform-style: preserve-3d;
-  transition: transform 0.52s cubic-bezier(0.4, 0, 0.2, 1);
-}
-.flashcards-page .flashcards-flip-card.flipped { transform: rotateY(180deg); }
-
-/* Faces — la mascotte domine, texte resserré sous elle */
-.flashcards-page .flashcards-flip-face {
-  position: absolute;
-  inset: 0;
-  border-radius: var(--radius-lg);
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 16px 24px 22px;
-  gap: 8px;
-}
-
-/* Mascot dans la face — Réviz est le hero visuel */
-.flashcards-page .flashcards-face-mascot {
-  flex-shrink: 0;
-  margin-bottom: -4px;
-  filter: drop-shadow(0 14px 26px rgba(232, 101, 26, 0.32));
-}
-.flashcards-page .flashcards-flip-back .flashcards-face-mascot {
-  filter: drop-shadow(0 14px 28px rgba(45, 43, 87, 0.34));
-}
-
-@media (max-width: 430px) {
-  .flashcards-page .flashcards-flip-face { padding: 12px 18px 18px; gap: 6px; }
-}
-
-/* Recto — chrome de .rv-card */
-.flashcards-page .flashcards-flip-front {
-  background: var(--bg-card);
-  box-shadow: var(--shadow-card);
-}
-
-/* Verso — variant tonale violet (rv-callout esprit) */
-.flashcards-page .flashcards-flip-back {
-  background: var(--accent-violet-soft);
-  color: var(--accent-violet-ink);
-  transform: rotateY(180deg);
-  box-shadow: 0 8px 28px rgba(45, 43, 87, 0.22);
-}
-
-/* Tag "Question" / "Réponse" */
-.flashcards-page .flashcards-face-tag {
-  font-size: 12px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 1.2px;
-}
-.flashcards-page .flashcards-flip-front .flashcards-face-tag { color: var(--text-muted); }
-.flashcards-page .flashcards-flip-back  .flashcards-face-tag {
-  color: var(--accent-violet);
-  opacity: 0.75;
-}
-
-/* Texte */
-.flashcards-page .flashcards-face-text {
-  font-family: 'Geist', sans-serif;
-  font-size: 21px;
-  font-weight: 700;
-  letter-spacing: -0.4px;
-  text-align: center;
-  line-height: 1.35;
-  text-wrap: balance;
-  max-width: 30ch;
-}
-.flashcards-page .flashcards-flip-front .flashcards-face-text { color: var(--text-primary); }
-.flashcards-page .flashcards-flip-back  .flashcards-face-text { color: var(--accent-violet-ink); }
-
-/* Hint */
-.flashcards-page .flashcards-face-hint {
-  font-size: 12px;
-  color: var(--text-muted);
-  margin-top: 4px;
-}
-
-
-/* ── Boutons d'action (large tones soft, local) ── */
-.flashcards-page .flashcards-actions {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  flex-shrink: 0;
-  transform: translateY(16px);
-  opacity: 0;
-  pointer-events: none;
-  transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.28s ease;
-}
-.flashcards-page .flashcards-actions.visible {
-  transform: translateY(0);
-  opacity: 1;
-  pointer-events: auto;
-}
-
-.flashcards-page .flashcards-action-btn {
-  padding: 18px 16px;
-  border-radius: 18px;
-  border: none;
-  font-family: inherit;
-  font-size: 14px;
-  font-weight: 700;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  transition: transform 0.12s ease, filter 0.15s ease;
-}
-.flashcards-page .flashcards-action-btn:active { transform: scale(0.96); }
-
-.flashcards-page .flashcards-btn-icon {
-  font-size: 16px;
-  font-weight: 800;
-}
-
-.flashcards-page .flashcards-btn-again {
-  /* « À revoir » attend l'élève : orange, jamais rouge (l'échec n'est pas puni) */
-  background: var(--accent-orange-soft);
-  color: var(--accent-orange-ink);
-}
-.flashcards-page .flashcards-btn-got {
-  background: var(--accent-green-soft);
-  color: var(--accent-green-ink);
-}
-@media (hover: hover) and (pointer: fine) {
-  .flashcards-page .flashcards-btn-again:hover,
-  .flashcards-page .flashcards-btn-got:hover { filter: brightness(1.04); }
-}
-
-/* ── End screen (utilise .rv-end-screen) ── */
-.flashcards-page .flashcards-end-screen {
-  position: absolute;
-  inset: 0;
-  background: var(--bg-app);
-  border-radius: var(--radius-shell);
-  z-index: 20;
-  justify-content: center;
-  overflow-y: auto;
-}
-.flashcards-page .flashcards-end-stats {
-  display: flex;
-  align-items: stretch;
-  gap: 16px;
-  padding: 16px 24px;
-  margin-top: 8px;
-}
-.flashcards-page .flashcards-end-stat {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4px;
-}
-
-@media (max-width: 430px) {
-  .flashcards-page .flashcards-end-screen { border-radius: 0; }
-}
-
-/* ── Intro (PageIntro) : hors zone de scroll, points de progression sous le sous-titre ── */
-.flashcards-page .flashcards-intro { padding-top: 4px; padding-bottom: 0; }
-.flashcards-page .flashcards-intro .flashcards-progress-dots { margin-top: 10px; }
-
-/* ─── Flashcards, refonte du 20/10 (« Reviz Valide ») ────────────────
- * La carte prend l'écran : recto lilas, verso pêche, grain, sans mascotte.
- * Le texte est très grand ; on note dès le recto (À revoir / Je sais) ou
- * après avoir retourné (À revoir / Presque / Je sais). */
-.flashcards-page { background: #C9C2F2; transition: background .45s; }
-.flashcards-page.fc-page--verso { background: #FFC9A8; }
-.flashcards-page .fc-scene {
-  position: relative;
-  flex: 1;
-  min-height: 0;
-  display: flex;
   overflow: hidden;
-  color: #1B1A23;
-  --fc-encre2: #3D3770;
-  --fc-rond: #D8D2F7;
+  background: var(--ch-fond);
+  color: var(--ch-encre);
 }
-.flashcards-page .fc-scene--verso { --fc-encre2: #8A3A05; --fc-rond: #FFDAC4; }
-.flashcards-page .fc-rond {
-  position: absolute;
-  right: -120px;
-  top: 240px;
-  width: 380px;
-  height: 380px;
-  border-radius: 50%;
-  background: var(--fc-rond);
-  transition: background .45s, transform .6s cubic-bezier(.2,.8,.3,1);
-}
-.flashcards-page .fc-scene--verso .fc-rond { transform: translate(-260px, 60px) scale(.95); }
-.flashcards-page .fc-grain {
+.fc-page .fc-grain {
   position: absolute;
   inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.35 0 0 0 0 0.2 0 0 0 0 0.1 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  opacity: .3;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.45 0 0 0 0 0.25 0 0 0 0 0.1 0 0 0 .32 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: .5;
   mix-blend-mode: multiply;
   pointer-events: none;
 }
-.flashcards-page .fc-cadre {
+.fc-page .fc-deco { position: absolute; border-radius: 50%; background: var(--ch-bulle); pointer-events: none; }
+.fc-page .fc-deco--a { width: 150px; height: 150px; top: 230px; left: -70px; }
+.fc-page .fc-deco--b { width: 90px; height: 90px; top: 110px; right: -30px; }
+.fc-page .fc-deco--c { width: 44px; height: 44px; bottom: 210px; right: 30px; }
+.fc-page .fc-point { position: absolute; width: 14px; height: 14px; top: 170px; left: 34px; border-radius: 50%; background: var(--ch-point); pointer-events: none; }
+
+.fc-page .fc-ecran {
   position: relative;
   z-index: 1;
-  flex: 1;
-  min-width: 0;
+  height: 100%;
+  min-height: 0;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  padding: calc(12px + env(safe-area-inset-top, 0px)) 24px calc(28px + env(safe-area-inset-bottom, 0px));
+  padding: calc(env(safe-area-inset-top, 0px) + 12px) 20px calc(env(safe-area-inset-bottom, 0px) + 14px);
 }
-.flashcards-page .fc-haut { display: flex; align-items: center; gap: 14px; }
-.flashcards-page .fc-rond-btn {
-  width: 42px;
-  height: 42px;
+
+/* ── En-tête ── */
+.fc-page .fc-ligne-haut { display: flex; align-items: center; gap: 12px; }
+.fc-page .fc-fermer {
+  width: 44px;
+  height: 44px;
   flex: none;
-  border: 0;
-  border-radius: 50%;
-  background: rgba(255,255,255,.6);
-  color: #1B1A23;
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 6px;
+  border: 0;
+  border-radius: 50%;
+  background: #fff;
+  color: var(--ch-encre);
+  box-shadow: 0 4px 12px var(--ch-ombre);
+  font: 700 15px 'Geist', system-ui, sans-serif;
+  cursor: pointer;
 }
-.flashcards-page .fc-segments { flex: 1; display: flex; gap: 4px; }
-.flashcards-page .fc-seg { flex: 1; height: 5px; border-radius: 99px; background: rgba(27,26,35,.16); transition: background .3s; }
-.flashcards-page .fc-seg--fait { background: #1B1A23; }
-.flashcards-page .fc-compte { font-size: 14px; font-weight: 700; white-space: nowrap; }
-.flashcards-page .fc-haut .coach-header-btn { background: rgba(255,255,255,.6); }
-.flashcards-page .fc-serie { position: absolute; top: calc(70px + env(safe-area-inset-top, 0px)); left: 50%; transform: translateX(-50%); z-index: 3; }
+.fc-page .fc-fermer--pilule { width: auto; height: 46px; padding: 0 18px 0 14px; border-radius: 999px; }
+.fc-page .fc-tete { min-width: 0; display: flex; flex-direction: column; }
+.fc-page .fc-tete-titre { font-size: 12px; font-weight: 700; opacity: .7; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.fc-page .fc-tete-compte { font-family: var(--font-display); font-size: 20px; font-weight: 800; letter-spacing: -.02em; }
 
-.flashcards-page .fc-carte {
+/* ── Route de la série ── */
+.fc-page .fc-route {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 40px;
+  margin: 14px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.fc-page .fc-route::before { content: ''; position: absolute; left: 14px; right: 14px; top: 50%; border-top: 3px dotted #9F97D9; }
+.fc-page .fc-case {
+  position: relative;
+  width: 30px;
+  height: 30px;
+  flex: none;
+  box-sizing: border-box;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 800;
+  transition: transform .25s cubic-bezier(.3,1.5,.5,1);
+}
+.fc-page .fc-case--avenir { background: #FFE6D2; color: var(--ch-doux); box-shadow: 0 4px 0 rgba(194,84,7,.28); }
+.fc-page .fc-case--cours { width: 40px; height: 40px; border: 4px solid #C25407; background: #fff; color: #C25407; box-shadow: 0 4px 0 #8F3E05; font-size: 15px; }
+.fc-page .fc-case--sais { background: #34C77B; color: #fff; box-shadow: 0 4px 0 #1F8A52; }
+.fc-page .fc-case--revoir { background: #C25407; color: #fff; box-shadow: 0 4px 0 #8F3E05; }
+.fc-page .fc-case--presque { background: #fff; border-color: #C9C2F2; box-shadow: 0 4px 0 #C9C2F2; }
+.fc-page .fc-case--presque i { width: 8px; height: 8px; border-radius: 50%; background: var(--ch-encre); }
+.fc-page .fc-route--recap { height: 32px; margin: 18px 0 0; }
+.fc-page .fc-route--recap .fc-case { width: 28px; height: 28px; }
+
+/* ── Pile et carte ── */
+.fc-page .fc-scene {
+  position: relative;
   flex: 1;
   min-height: 0;
+  max-height: 380px;
+  width: 100%;
+  max-width: 300px;
+  margin: 22px auto 0;
+  perspective: 1200px;
+}
+.fc-page .fc-pile, .fc-page .fc-carte { position: absolute; inset: 0; border-radius: 28px; }
+.fc-page .fc-pile { background: #fff; box-shadow: 0 10px 24px var(--ch-ombre); }
+.fc-page .fc-pile--2 { transform: translate(10px,14px) rotate(5deg) scale(.96); }
+.fc-page .fc-pile--1 { transform: translate(-8px,8px) rotate(-3.5deg) scale(.98); }
+.fc-page .fc-carte { z-index: 1; touch-action: pan-y; transition: transform .32s cubic-bezier(.2,.8,.2,1); cursor: pointer; user-select: none; -webkit-user-select: none; }
+.fc-page .fc-carte--glisse, .fc-page .fc-carte--arrivee { transition: none; }
+.fc-page .fc-carte-int {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  transition: transform .55s cubic-bezier(.3,1.3,.5,1);
+}
+.fc-page .fc-carte-int.is-verso { transform: rotateY(180deg); }
+.fc-page .fc-face {
+  position: absolute;
+  inset: 0;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  padding: 56px 0 16px;
+  padding: 18px 20px;
   border: 0;
-  background: none;
-  text-align: left;
+  border-radius: 28px;
+  background: #fff;
+  box-shadow: 0 16px 34px var(--ch-ombre);
+  font: inherit;
   color: inherit;
-  cursor: pointer;
-  overflow-y: auto;
-  -webkit-tap-highlight-color: transparent;
-  animation: fcEntre .42s cubic-bezier(.2,.8,.3,1) both;
+  text-align: center;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transition: opacity 0s .2s;
 }
-.flashcards-page .fc-carte:focus-visible { outline: 3px solid #1B1A23; outline-offset: 6px; border-radius: 18px; }
-@keyframes fcEntre {
-  from { opacity: 0; transform: perspective(900px) rotateY(-14deg) translateX(18px); }
-  to   { opacity: 1; transform: none; }
-}
-.flashcards-page .fc-scene--got .fc-carte { animation: fcSort .28s ease-in both; }
-.flashcards-page .fc-scene--again .fc-carte { animation: fcSortG .28s ease-in both; }
-@keyframes fcSort  { to { opacity: 0; transform: translateX(60px) rotate(3deg); } }
-@keyframes fcSortG { to { opacity: 0; transform: translateX(-60px) rotate(-3deg); } }
-
-.flashcards-page .fc-surtitre { font-size: 13px; font-weight: 700; letter-spacing: .6px; text-transform: uppercase; color: var(--fc-encre2); }
-.flashcards-page .fc-question,
-.flashcards-page .fc-reponse {
-  margin-top: 14px;
+.fc-page .fc-face--verso { transform: rotateY(180deg); opacity: 0; }
+.fc-page .is-verso .fc-face--verso { opacity: 1; }
+.fc-page .is-verso .fc-face--recto { opacity: 0; }
+.fc-page .fc-face:focus-visible { outline: 3px solid var(--ch-encre); outline-offset: 3px; }
+.fc-page .fc-face-haut, .fc-page .fc-face-bas { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.fc-page .fc-etiquette { flex: none; padding: 5px 10px; border-radius: 999px; background: #FFE6D2; font-size: 12px; font-weight: 700; color: #8F3E05; }
+.fc-page .fc-etiquette--nouvelle { background: #E4E0FA; color: var(--ch-encre); }
+.fc-page .fc-face-coin { min-width: 0; font-size: 12px; font-weight: 600; color: var(--ch-doux); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.fc-page .fc-question, .fc-page .fc-reponse {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-family: var(--font-display);
   font-weight: 800;
+  letter-spacing: -.02em;
+  line-height: 1.12;
   text-wrap: balance;
+  overflow-wrap: anywhere;
 }
-.flashcards-page .fc-question.fc-taille--xl { font-size: 44px; letter-spacing: -1.6px; line-height: 1; }
-.flashcards-page .fc-question.fc-taille--l  { font-size: 34px; letter-spacing: -1px; line-height: 1.05; }
-.flashcards-page .fc-question.fc-taille--m  { font-size: 26px; letter-spacing: -.6px; line-height: 1.12; }
-.flashcards-page .fc-reponse.fc-taille--xxl { font-size: 58px; letter-spacing: -2.4px; line-height: .95; }
-.flashcards-page .fc-reponse.fc-taille--l   { font-size: 32px; letter-spacing: -1px; line-height: 1.08; }
-.flashcards-page .fc-reponse.fc-taille--m   { font-size: 22px; letter-spacing: -.3px; line-height: 1.25; font-family: 'Geist', system-ui, sans-serif; font-weight: 700; text-wrap: pretty; }
-.flashcards-page .fc-astuce { margin-top: 18px; font-size: 14px; font-weight: 600; color: var(--fc-encre2); opacity: .8; }
-.flashcards-page .fc-precedente {
-  margin-top: 18px;
-  padding: 6px 11px;
-  border-radius: 99px;
-  background: rgba(255,255,255,.55);
-  font-size: 13px;
-  color: #4A3420;
+.fc-page .fc-taille--xxl { font-size: 38px; }
+.fc-page .fc-taille--xl { font-size: 30px; }
+.fc-page .fc-taille--l { font-size: 23px; }
+.fc-page .fc-taille--m { font-size: 18px; line-height: 1.3; }
+.fc-page .fc-reponse.fc-taille--l, .fc-page .fc-reponse.fc-taille--m { font-family: 'Geist', system-ui, sans-serif; font-weight: 600; letter-spacing: 0; }
+.fc-page .fc-ia { display: inline-flex; align-items: center; gap: 4px; font-size: 11px; color: var(--ch-doux); }
+.fc-page .fc-astuce { font-size: 12px; font-weight: 700; color: #C25407; }
+.fc-page .fc-astuce--doux { font-weight: 600; color: var(--ch-doux); }
+.fc-page .fc-tampon {
+  position: absolute;
+  top: 26px;
+  z-index: 2;
+  padding: 6px 12px;
+  border: 3px solid;
+  border-radius: 12px;
+  background: rgba(255,255,255,.9);
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 800;
+  pointer-events: none;
 }
-.flashcards-page .fc-ia { align-self: flex-start; margin: 0 0 14px; background: rgba(255,255,255,.5); }
+.fc-page .fc-tampon--sais { left: 18px; color: #1F8A52; border-color: #34C77B; transform: rotate(-10deg); }
+.fc-page .fc-tampon--revoir { right: 18px; color: #C25407; border-color: #C25407; transform: rotate(10deg); }
 
-/* Recto : deux ronds et « Retourner » */
-.flashcards-page .fc-recto-actions { display: flex; justify-content: space-between; align-items: flex-end; padding: 0 6px 16px; }
-.flashcards-page .fc-rond-action { display: flex; flex-direction: column; align-items: center; gap: 6px; border: 0; background: none; padding: 0; }
-.flashcards-page .fc-rond-action-btn {
-  width: 68px;
-  height: 68px;
-  border-radius: 50%;
-  background: #fff;
+/* ── Réviz qui réagit ── */
+.fc-page .fc-reviz { display: flex; align-items: center; justify-content: center; }
+.fc-page .fc-reviz--gauche { gap: 6px; margin-top: 14px; }
+.fc-page .fc-reviz--gauche .fc-bulle .rv-bulle-txt { max-width: 230px; padding: 9px 14px; border-radius: 18px; font-size: 16px; }
+.fc-page .fc-reviz--gauche .fc-bulle .rv-bulle-ligne + .rv-bulle-ligne { font-size: 12px; color: var(--ch-doux); }
+.fc-page .fc-reviz--bas { flex-direction: column; }
+.fc-page .fc-reviz--bas .fc-bulle .rv-bulle-txt { max-width: 300px; box-shadow: 0 8px 20px var(--ch-ombre); }
+
+/* ── Boutons à tranche ── */
+.fc-page .fc-actions { margin-top: 12px; }
+.fc-page .fc-notes { display: flex; gap: 8px; }
+.fc-page .fc-btn {
+  width: 100%;
+  height: 56px;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 10px 24px -10px rgba(0,0,0,.25);
-  transition: transform .12s;
-}
-.flashcards-page .fc-rond-action:active .fc-rond-action-btn { transform: scale(.92); }
-.flashcards-page .fc-rond-action-btn--ok { background: #137A45; }
-.flashcards-page .fc-rond-action-txt { font-size: 13px; font-weight: 700; color: var(--fc-encre2); }
-.flashcards-page .fc-retourner {
-  display: flex;
-  align-items: center;
   gap: 8px;
-  height: 52px;
-  margin-bottom: 26px;
-  padding: 0 20px;
+  padding: 0 14px;
   border: 0;
-  border-radius: 99px;
-  background: #fff;
+  border-radius: 999px;
   font: 700 15px 'Geist', system-ui, sans-serif;
-  color: #2D2B57;
+  cursor: pointer;
+  transition: transform .1s, box-shadow .1s;
 }
-.flashcards-page .fc-retourner:active { transform: scale(.96); }
-
-/* Verso : trois notes */
-.flashcards-page .fc-verso-actions { display: flex; flex-direction: column; gap: 12px; padding-bottom: 16px; }
-.flashcards-page .fc-question-courte { font-size: 14px; font-weight: 600; color: #4A3420; text-align: center; }
-.flashcards-page .fc-notes { display: flex; gap: 10px; }
-.flashcards-page .fc-note {
-  flex: 1;
-  height: 66px;
-  border: 0;
-  border-radius: 24px;
-  background: #fff;
-  display: flex;
-  flex-direction: column;
+.fc-page .fc-btn:active { transform: translateY(4px); }
+.fc-page .fc-btn--encre { background: var(--ch-encre); color: #fff; box-shadow: 0 5px 0 #000; }
+.fc-page .fc-btn--encre:active { box-shadow: 0 1px 0 #000; }
+.fc-page .fc-btn--orange { background: #C25407; color: #fff; box-shadow: 0 5px 0 #8F3E05; }
+.fc-page .fc-btn--orange:active { box-shadow: 0 1px 0 #8F3E05; }
+.fc-page .fc-btn--blanc { background: #fff; color: var(--ch-encre); box-shadow: 0 5px 0 #C9C2F2; }
+.fc-page .fc-btn--blanc:active { box-shadow: 0 1px 0 #C9C2F2; }
+.fc-page .fc-btn--vert { background: #34C77B; color: var(--ch-encre); box-shadow: 0 5px 0 #1F8A52; }
+.fc-page .fc-btn--vert:active { box-shadow: 0 1px 0 #1F8A52; }
+.fc-page .fc-notes .fc-btn { flex: 1; padding: 0 8px; }
+.fc-page .fc-btn kbd {
+  min-width: 26px;
+  height: 24px;
+  padding: 0 6px;
+  box-sizing: border-box;
+  border-radius: 7px;
+  background: rgba(255,255,255,.22);
+  font: 700 12px 'Geist', system-ui, sans-serif;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 1px;
-  transition: transform .12s;
 }
-.flashcards-page .fc-note:active { transform: scale(.95); }
-.flashcards-page .fc-note--ok { background: #137A45; box-shadow: inset 0 -3px 0 rgba(0,0,0,.18); }
-.flashcards-page .fc-note-titre { font: 700 16px 'Geist', system-ui, sans-serif; color: #1B1A23; }
-.flashcards-page .fc-note-titre--revoir { color: #8A3A05; }
-.flashcards-page .fc-note--ok .fc-note-titre { color: #fff; }
-.flashcards-page .fc-note-quand { font-size: 12.5px; color: #6E675B; }
-.flashcards-page .fc-note--ok .fc-note-quand { color: rgba(255,255,255,.85); }
-.flashcards-page .fc-clavier { display: none; }
+.fc-page .fc-btn--blanc kbd, .fc-page .fc-btn--vert kbd { background: rgba(27,26,35,.08); }
+.fc-page .fc-precedente { display: flex; align-items: center; justify-content: center; gap: 6px; height: 18px; margin: 10px 0 0; font-size: 12px; font-weight: 600; color: var(--ch-doux); }
+.fc-page .fc-precedente-point { width: 8px; height: 8px; border-radius: 50%; }
+.fc-page .fc-precedente-point--sais { background: #34C77B; }
+.fc-page .fc-precedente-point--revoir { background: #C25407; }
+.fc-page .fc-precedente-point--presque { background: #C9C2F2; }
 
-/* Ordinateur : la même scène, le texte dans une colonne centrale */
-@media (min-width: 1024px) {
-  html:not(.native) .flashcards-page .fc-cadre { max-width: 860px; margin: 0 auto; width: 100%; padding: 36px 40px 32px; }
-  html:not(.native) .flashcards-page .fc-rond { right: 8%; top: 18%; width: 520px; height: 520px; }
-  html:not(.native) .flashcards-page .fc-scene--verso .fc-rond { transform: translate(-50vw, 80px); }
-  html:not(.native) .flashcards-page .fc-carte { padding-top: 80px; }
-  html:not(.native) .flashcards-page .fc-question.fc-taille--xl { font-size: 64px; letter-spacing: -2.4px; }
-  html:not(.native) .flashcards-page .fc-question.fc-taille--l { font-size: 46px; }
-  html:not(.native) .flashcards-page .fc-question.fc-taille--m { font-size: 34px; }
-  html:not(.native) .flashcards-page .fc-reponse.fc-taille--xxl { font-size: 84px; letter-spacing: -3px; }
-  html:not(.native) .flashcards-page .fc-reponse.fc-taille--l { font-size: 44px; }
-  html:not(.native) .flashcards-page .fc-reponse.fc-taille--m { font-size: 26px; }
-  html:not(.native) .flashcards-page .fc-recto-actions { justify-content: center; gap: 40px; }
-  html:not(.native) .flashcards-page .fc-notes { max-width: 560px; margin: 0 auto; width: 100%; }
-  html:not(.native) .flashcards-page .fc-note:hover,
-  html:not(.native) .flashcards-page .fc-retourner:hover { filter: brightness(.97); }
-  html:not(.native) .flashcards-page .fc-clavier { display: block; margin: 6px 0 0; text-align: center; font-size: 12.5px; color: var(--fc-encre2); opacity: .8; }
-  html:not(.native) .flashcards-page .fc-clavier kbd { font: 600 12px 'Geist', sans-serif; padding: 2px 6px; border-radius: 6px; background: rgba(255,255,255,.6); }
+/* ── Fin de série et « rien à revoir » ── */
+.fc-page--fin .fc-ecran, .fc-page--calme .fc-ecran { overflow-y: auto; scrollbar-width: none; }
+.fc-page .fc-haut-gauche { align-self: flex-start; }
+.fc-page .fc-fin-tete { display: flex; flex-direction: column; align-items: flex-start; margin-top: 14px; }
+.fc-page .fc-surtitre { font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; opacity: .7; }
+.fc-page .fc-fin-titre { margin: 4px 0 0; font-family: var(--font-display); font-size: 42px; font-weight: 800; letter-spacing: -.04em; line-height: 1; }
+.fc-page .fc-xp { margin-top: 12px; padding: 6px 14px; border-radius: 999px; background: #fff; font-family: var(--font-display); font-size: 16px; font-weight: 800; color: #C25407; }
+.fc-page--fin .fc-reviz { margin-top: 16px; }
+.fc-page .fc-stats { margin-top: 18px; padding: 18px; border-radius: 26px; background: #fff; box-shadow: 0 12px 30px var(--ch-ombre); }
+.fc-page .fc-stats-ligne { display: grid; grid-template-columns: repeat(3, 1fr); }
+.fc-page .fc-stats-ligne span { display: flex; flex-direction: column; align-items: center; font-size: 12px; font-weight: 600; color: var(--ch-doux); }
+.fc-page .fc-stats-ligne span + span { border-left: 1.5px dashed #EADBCB; }
+.fc-page .fc-stats-ligne b { font-family: var(--font-display); font-size: 30px; font-weight: 800; color: var(--ch-encre); }
+.fc-page .fc-stats-ligne b.fc-vert { color: #1F8A52; }
+.fc-page .fc-stats-ligne b.fc-orange { color: #C25407; }
+.fc-page .fc-priorite { display: flex; align-items: center; justify-content: center; gap: 8px; margin: 14px 0 0; font-size: 13px; font-weight: 600; color: var(--ch-doux); }
+.fc-page .fc-priorite svg { color: #C25407; }
+.fc-page .fc-fin-actions { display: flex; flex-direction: column; gap: 12px; margin-top: 20px; }
+.fc-page .fc-fin-actions .fc-btn--blanc { height: 52px; }
+.fc-page .fc-lien { align-self: center; margin-top: 10px; padding: 8px; border: 0; background: none; font: 700 14px 'Geist', system-ui, sans-serif; color: var(--ch-doux); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+
+.fc-page--calme .fc-ecran--centre { align-items: center; }
+.fc-page--calme .fc-reviz { margin-top: auto; }
+.fc-page .fc-date-carte { display: flex; align-items: center; gap: 14px; width: 100%; max-width: 335px; margin-top: 22px; padding: 14px; box-sizing: border-box; border-radius: 26px; background: #fff; box-shadow: 0 12px 30px var(--ch-ombre); }
+.fc-page .fc-date-rond { width: 60px; height: 60px; flex: none; border-radius: 50%; background: #FFE6D2; box-shadow: 0 4px 0 rgba(194,84,7,.28); display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: var(--ch-doux); line-height: 1; }
+.fc-page .fc-date-rond b { font-family: var(--font-display); font-size: 22px; font-weight: 800; color: var(--ch-encre); }
+.fc-page .fc-date-txt { display: flex; flex-direction: column; font-size: 13px; color: var(--ch-doux); }
+.fc-page .fc-date-txt b { font-size: 17px; color: var(--ch-encre); }
+.fc-page .fc-date-surtitre { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+.fc-page--calme .fc-fin-actions { width: 100%; max-width: 335px; margin-top: auto; }
+
+/* ─── Ordinateur (1440 × 900) ─── */
+.fc-page--large .fc-ecran { padding: 32px 56px 32px; }
+.fc-page--large .fc-haut-gauche { position: absolute; top: 32px; left: 56px; }
+.fc-page--large .fc-ecran--serie { align-items: center; }
+.fc-page--large .fc-tete { align-items: center; text-align: center; }
+.fc-page--large .fc-tete-titre { font-size: 13px; }
+.fc-page--large .fc-tete-compte { font-size: 26px; }
+.fc-page--large .fc-route--grand { width: 440px; height: 52px; margin-top: 14px; }
+.fc-page--large .fc-route--grand .fc-case { width: 36px; height: 36px; }
+.fc-page--large .fc-route--grand .fc-case--cours { width: 46px; height: 46px; }
+.fc-page--large .fc-plateau {
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+  max-width: 1328px;
+  display: grid;
+  grid-template-columns: 300px minmax(0, 560px) 300px;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 18px;
 }
+.fc-page--large .fc-col-centre { display: flex; flex-direction: column; align-items: center; min-height: 0; height: 100%; }
+.fc-page--large .fc-scene { max-width: 560px; max-height: 400px; margin-top: 8px; }
+.fc-page--large .fc-face { padding: 22px 26px; }
+.fc-page--large .fc-taille--xxl { font-size: 56px; }
+.fc-page--large .fc-taille--xl { font-size: 46px; }
+.fc-page--large .fc-taille--l { font-size: 30px; }
+.fc-page--large .fc-taille--m { font-size: 22px; }
+.fc-page--large .fc-actions { width: 100%; margin-top: 22px; display: flex; flex-direction: column; align-items: center; }
+.fc-page--large .fc-btn--encre { width: 360px; height: 60px; }
+.fc-page--large .fc-notes { gap: 14px; }
+.fc-page--large .fc-notes .fc-btn { width: 200px; flex: none; height: 60px; }
+.fc-page--large .fc-btn--orange, .fc-page--large .fc-btn--orange:hover { box-shadow: 0 6px 0 #8F3E05; }
+.fc-page--large .fc-btn--vert { box-shadow: 0 6px 0 #1F8A52; }
+.fc-page--large .fc-btn--blanc { box-shadow: 0 6px 0 #C9C2F2; }
+.fc-page--large .fc-btn:active { transform: translateY(4px); box-shadow: 0 2px 0 rgba(0,0,0,.25); }
+.fc-page--large .fc-col-gauche .fc-bulle .rv-bulle-txt { max-width: 300px; font-size: 21px; }
+.fc-page--large .fc-col-gauche .fc-bulle .rv-bulle-ligne + .rv-bulle-ligne { font-size: 15px; }
+.fc-page--large .fc-infos { display: flex; flex-direction: column; gap: 10px; padding: 20px; border-radius: 26px; background: #fff; box-shadow: 0 12px 30px var(--ch-ombre); }
+.fc-page--large .fc-infos-titre { font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--ch-doux); }
+.fc-page--large .fc-infos-titre--2 { margin-top: 10px; }
+.fc-page--large .fc-infos-ligne { display: flex; align-items: center; gap: 10px; font-size: 15px; font-weight: 600; }
+.fc-page--large .fc-pt { width: 10px; height: 10px; border-radius: 50%; }
+.fc-page--large .fc-pt--peche { background: #FFB37A; }
+.fc-page--large .fc-pt--lavande { background: #C9C2F2; }
+.fc-page--large .fc-touche { display: flex; align-items: center; gap: 12px; font-size: 14px; font-weight: 600; color: var(--ch-doux); }
+.fc-page--large .fc-touche kbd {
+  min-width: 34px;
+  height: 30px;
+  padding: 0 8px;
+  box-sizing: border-box;
+  border-radius: 8px;
+  background: #F8EFE7;
+  box-shadow: 0 3px 0 #EADBCB;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font: 700 13px 'Geist', system-ui, sans-serif;
+  color: var(--ch-encre);
+}
+.fc-page--large .fc-deco--a { width: 260px; height: 260px; top: 360px; left: -90px; }
+.fc-page--large .fc-deco--b { width: 140px; height: 140px; top: 90px; right: 8%; }
+.fc-page--large .fc-deco--c { width: 70px; height: 70px; bottom: 120px; right: 22%; }
+.fc-page--large .fc-point { top: 200px; left: 24%; }
+
+/* Fin et « rien à revoir » sur ordinateur : tout centré */
+.fc-page--large .fc-ecran--fin, .fc-page--large .fc-ecran--centre { align-items: center; }
+.fc-page--large .fc-fin-tete { align-items: center; text-align: center; margin-top: 8px; }
+.fc-page--large .fc-fin-titre { font-size: 56px; }
+.fc-page--large .fc-stats { width: 680px; box-sizing: border-box; }
+.fc-page--large .fc-stats-ligne b { font-size: 36px; }
+.fc-page--large .fc-fin-actions--deux { width: 680px; display: grid; grid-template-columns: 1fr 1fr; }
+.fc-page--large .fc-date-carte { max-width: 460px; }
+.fc-page--large.fc-page--calme .fc-fin-actions { max-width: 460px; margin-top: 24px; }
+.fc-page--large.fc-page--calme .fc-reviz { margin-top: 60px; }
+
+/* Ajustements après captures : la carte et ses boutons centrés sur ordinateur, Réviz et les
+   boutons posés en bas sur téléphone, pied de carte lisible. */
+.fc-page .fc-ecran--serie .fc-reviz--gauche { margin-top: auto; padding-top: 14px; }
+.fc-page .fc-ia { flex: none; white-space: nowrap; }
+.fc-page .fc-face-bas .fc-astuce { text-align: right; }
+.fc-page--large .fc-col-centre { justify-content: center; }
+.fc-page--large .fc-scene { flex: 0 0 400px; }
+.fc-page--large .fc-actions { margin-top: 40px; }

@@ -80,6 +80,16 @@ button.rv-bulle-txt:focus-visible { outline: 3px solid #1B1A23; outline-offset: 
   border-radius: 0 5px 0 0;
 }
 
+.rv-bulle--gauche { justify-content: flex-start; transform-origin: 0 50%; }
+.rv-bulle--gauche .rv-bulle-txt { align-items: flex-start; text-align: left; }
+.rv-bulle--gauche .rv-bulle-txt::after {
+  left: -9px;
+  bottom: auto;
+  top: 50%;
+  margin: -10px 0 0;
+  border-radius: 0 0 0 5px;
+}
+
 /* Ordinateur : la phrase en grand */
 .rv-bulle--grande .rv-bulle-txt {
   max-width: 500px;
