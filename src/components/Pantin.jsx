@@ -115,6 +115,10 @@ const ACCESSOIRES = {
   // Réviz Games, le tour de magie : haut-de-forme et baguette du magicien.
   chapeau: { x: 578, y: -277, w: 1365, h: 802 },
   baguette: { main: 'g', bras: { epaule: -20, coude: -30 }, prise: [104, 150], ancre: [0.47, 0.8], w: 300, h: 849, angle: -25 },
+  // Réviz lance : bandeau de sport en éponge (calé par les yeux sur Réviz généré coiffé) et boule
+  // de papier tenue bras levé, prête à partir (le lancer part de cette pose : Pantin.lancer).
+  bandeau: { x: 451, y: 480, w: 1621, h: 349 },
+  boule: { main: 'g', bras: { epaule: 140, coude: 55, etire: 1.3 }, prise: [110, 120], ancre: [0.5, 0.5], w: 460, h: 463 },
 };
 const NS = 'http://www.w3.org/2000/svg';
 function imageSvg(href, { x, y, w, h }) {
@@ -181,7 +185,7 @@ export const Pantin = forwardRef(function Pantin(
         if (!t?.k) { rendre(); return; }
         const e = rig.etat, P = 'bras' + t.p.main.toUpperCase();
         const garde = {};
-        const pose = { epaule: t.p.bras.epaule, coude: t.p.bras.coude, poignet: 0, etire: 1 };
+        const pose = { epaule: t.pose.epaule, coude: t.pose.coude, poignet: 0, etire: t.pose.etire ?? 1 };
         for (const [n, v] of Object.entries(pose)) { garde[P + n] = e[P + n]; e[P + n] = (e[P + n] ?? v) + (v - (e[P + n] ?? v)) * t.k; }
         for (const n of ['devant', 'main', 'epais']) garde[P + n] = e[P + n];
         Object.assign(e, { [P + 'devant']: t.k, [P + 'main']: 'tient', [P + 'epais']: 0 });
@@ -274,7 +278,7 @@ export const Pantin = forwardRef(function Pantin(
         const main = bras.mains.relachee;
         main.insertBefore(el, main.firstChild);
         bras.g.appendChild(bras.main);
-        const t = { p, el, k: anime ? 0 : 1 };
+        const t = { p, el, k: anime ? 0 : 1, pose: { ...p.bras } };
         tenu.current = t;
         const origine = `${p.prise[0]} ${p.prise[1]}`;
         if (anime) {
@@ -321,7 +325,36 @@ export const Pantin = forwardRef(function Pantin(
     geste: nom => jouerGeste(anim.current, nom, () => exprRef.current),
     expression: nom => anim.current?.expression(versMoteur(nom)),
     dire: texte => anim.current?.parler(minutageTexte(texte)),
+    // Réviz lance : l'objet tenu (la boule de papier), sa place à l'écran, le lancer, une nouvelle boule.
+    objet: () => tenu.current?.el.getBoundingClientRect() ?? null,
+    lancer: ({ lacher, sens = 0 } = {}) => lancer(sens, lacher),
+    montrerObjet: () => {
+      const t = tenu.current, gsap = gsapRef.current;
+      if (!t || !gsap) return;
+      t.el.style.opacity = '';
+      if (!anim.current?.calme) gsap.fromTo(t.el, { scale: 0 }, { scale: 1, svgOrigin: `${t.p.prise[0]} ${t.p.prise[1]}`, duration: 0.3, ease: 'back.out(2.2)' });
+    },
   }), []);
+
+  // Le lancer, bras armé au-dessus de la tête (pose de l'objet tenu) : le coude se replie en arrière
+  // pendant que le corps se tasse, puis l'avant-bras fouette vers l'avant ; la boule part au sommet du
+  // fouet (lacher), le bras accompagne vers la cible (sens : -1 à gauche, 0 au centre, 1 à droite)
+  // puis revient armé, la main vide. Chaque étape repart de la vitesse de la précédente : pas d'à-coup.
+  function lancer(sens, lacher) {
+    const t = tenu.current, gsap = gsapRef.current, a = anim.current;
+    if (!t || !gsap || !a || a.calme) { if (t) t.el.style.opacity = '0'; lacher?.(); return; }
+    const p = t.p.bras, e = a.etat;
+    gsap.killTweensOf(t.pose);
+    gsap.timeline()
+      .to(t.pose, { epaule: p.epaule - 12, coude: p.coude + 38, duration: 0.1, ease: 'sine.inOut' }, 0)
+      .to(e, { ecrase: 0.08, corpsRot: -4, duration: 0.1, ease: 'sine.inOut' }, 0)
+      .to(t.pose, { epaule: p.epaule + 18, coude: -12, duration: 0.1, ease: 'power2.in' }, 0.1)
+      .to(e, { ecrase: -0.05, corpsRot: 3 + 3 * sens, duration: 0.12, ease: 'power2.out' }, 0.1)
+      .call(() => { t.el.style.opacity = '0'; lacher?.(); }, null, 0.2)
+      .to(t.pose, { epaule: 95 - 25 * sens, coude: -8, duration: 0.2, ease: 'power2.out' }, 0.2)
+      .to(e, { ecrase: 0, corpsRot: 0, duration: 0.35, ease: 'power2.inOut' }, 0.22)
+      .to(t.pose, { epaule: p.epaule, coude: p.coude, duration: 0.32, ease: 'power2.inOut' }, 0.46);
+  }
 
   const Tag = onClick ? 'button' : 'div';
   return (

@@ -75,6 +75,20 @@ const SONS = {
     [523, 659, 784, 1046].forEach((f, i) => note(a, { f, t: i * 0.09, d: 0.4, type: 'triangle', vol: 0.09 }));
     for (let i = 0; i < 26; i++) souffle(a, { t: 0.15 + i * 0.045 + Math.random() * 0.03, d: 0.05, f: 1500 + Math.random() * 1500, q: 1.2, vol: 0.05 + Math.random() * 0.04 });
   },
+  // Réviz lance : le bras qui fouette l'air.
+  lance: a => souffle(a, { d: 0.22, f: 500, f2: 2600, q: 0.9, vol: 0.1 }),
+  // La boule passe dans le filet de laine : un « chhh » qui descend.
+  swish: a => souffle(a, { d: 0.32, f: 5200, f2: 2200, q: 0.7, vol: 0.12, type: 'highpass' }),
+  // La boule heurte le cercle en pâte à modeler : un « bonk » mou qui rebondit.
+  bonk: a => {
+    note(a, { f: 210, f2: 120, d: 0.2, type: 'triangle', vol: 0.2 });
+    souffle(a, { d: 0.08, f: 500, q: 0.6, vol: 0.12, type: 'lowpass' });
+    note(a, { f: 330, f2: 520, t: 0.12, d: 0.16, vol: 0.06 });
+  },
+  // La craie qui écrit la question suivante : quelques petits grincements secs.
+  craie: a => [0, 0.05, 0.11, 0.16, 0.23].forEach((t, i) => souffle(a, { t, d: 0.045, f: 2600 + i * 350, q: 4, vol: 0.05 })),
+  // Une nouvelle boule de papier froissé dans la main.
+  froisse: a => { for (let i = 0; i < 9; i++) souffle(a, { t: 0.05 + i * 0.022 + Math.random() * 0.015, d: 0.03, f: 3000 + Math.random() * 3000, q: 1.5, vol: 0.04 }); },
 };
 
 export function jouer(nom) {
