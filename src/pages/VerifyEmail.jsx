@@ -1,21 +1,26 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { auth } from '../services/firebaseConfig';
-import { useIsDesktop } from '../hooks/useMediaQuery';
-import { Mascot } from '../components/Mascot';
 import { mesurer } from '../services/mesure';
-import './Inscription.css';
-import './VerifyEmail.css';
+import { EntreeEcran, Encart, RetourAction, LienTexte } from '../components/entree/Entree';
 
+// Vérifie ton e-mail (handoff Claude Design du 22/10, écran 7) : demandé avant de scanner ou de
+// prendre Réviz+. « Plus tard » comme la réussite ramènent à la page d'où l'élève vient.
 export default function VerifyEmail() {
   const { currentUser, resendVerificationEmail } = useAuth();
-  const [sent, setSent]       = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [sent, setSent]         = useState(false);
+  const [loading, setLoading]   = useState(false);
   const [checking, setChecking] = useState(false);
-  const [notYet, setNotYet]   = useState(false);
+  const [notYet, setNotYet]     = useState(false);
   const navigate = useNavigate();
-  const isDesktop = useIsDesktop();
+  const location = useLocation();
+
+  // Retour à la page précédente (scan, Réviz+, réglages) ; arrivée directe → accueil.
+  function revenir() {
+    if (location.key !== 'default') navigate(-1);
+    else navigate('/', { replace: true });
+  }
 
   async function handleResend() {
     setLoading(true);
@@ -38,7 +43,7 @@ export default function VerifyEmail() {
         // côté serveur (scan, paiement), il doit être à jour dans le token.
         await auth.currentUser.getIdToken(true);
         mesurer('email_verifie');
-        navigate('/onboarding', { replace: true });
+        revenir();
       } else {
         setNotYet(true);
         setTimeout(() => setNotYet(false), 5000);
@@ -48,65 +53,23 @@ export default function VerifyEmail() {
     }
   }
 
-  const adresse = (
-    <p className="ve-adresse">
-      Lien envoyé à <strong>{currentUser?.email}</strong>. Pense à regarder dans les spams.
-    </p>
-  );
-
-  const actions = (
-    <>
-      <button className="auth-btn" onClick={handleContinue} disabled={checking}>
-        {checking ? 'Vérification…' : "J'ai confirmé mon email"}
-      </button>
-      {notYet && (
-        <p className="ve-pas-encore" role="alert">
-          Ton email n'est pas encore confirmé. Clique sur le lien dans l'email, puis reviens ici.
-        </p>
-      )}
-      <button className="ve-btn-ghost" onClick={handleResend} disabled={loading || sent}>
-        {sent ? '✓ Email renvoyé' : loading ? 'Envoi…' : 'Renvoyer l\'email'}
-      </button>
-      <button className="ve-btn-skip" onClick={() => navigate('/onboarding')}>
-        Explorer sans vérifier (scan et Réviz+ bloqués)
-      </button>
-    </>
-  );
-
-  // Ordinateur : la même composition que l'inscription (auth-desk, desktop.css).
-  if (isDesktop) {
-    return (
-      <div className="app auth-desk-page">
-        <div className="auth-desk">
-          <div className="auth-desk-intro">
-            <span className="auth-desk-mascot"><Mascot pose="pointing" size={132} alt="" aria-hidden="true" /></span>
-            <h1 className="signup-question">Vérifie ton email</h1>
-            <p className="signup-hint">Un clic sur le lien reçu, et ton compte est activé.</p>
-            <ul className="auth-desk-why">
-              <li>Le lien confirme que l'adresse est bien <strong>la tienne</strong> : c'est elle qui permet de retrouver ton compte.</li>
-              <li>Le scan de leçons et Réviz+ s'ouvrent <strong>une fois l'email confirmé</strong>.</li>
-            </ul>
-          </div>
-          <div className="auth-desk-card">
-            {adresse}
-            {actions}
-          </div>
-        </div>
-      </div>
-    );
-  }
-
   return (
-    <div className="app ve-page">
-      <div className="auth-content signup-content ve-content">
-        <Mascot pose="pointing" size={112} className="ve-mascot" alt="" aria-hidden="true" />
-        <h1 className="signup-question">Vérifie ton email</h1>
-        <p className="signup-hint">Un clic sur le lien reçu, et ton compte est activé.</p>
-        {adresse}
-      </div>
-      <div className="signup-footer">
-        {actions}
-      </div>
-    </div>
+    <EntreeEcran
+      bulle={['Vérifie ton e-mail.', 'Un clic sur le lien reçu, et c’est bon.']}
+      expression="determine"
+      dessous={<LienTexte onClick={revenir}>Plus tard</LienTexte>}
+    >
+      <Encart icone="enveloppe" teinte="peche">
+        Lien envoyé à <b>{currentUser?.email}</b>. Pense à regarder dans les spams.
+      </Encart>
+      <button type="button" className="en-btn" onClick={handleContinue} disabled={checking}>
+        {checking ? 'Vérification…' : 'J’ai confirmé mon e-mail'}
+      </button>
+      {notYet && <RetourAction ok={false}>Pas encore confirmé. Clique sur le lien dans l’e-mail, puis reviens ici.</RetourAction>}
+      <button type="button" className="en-btn-second" onClick={handleResend} disabled={loading || sent}>
+        {loading ? 'Envoi…' : 'Renvoyer l’e-mail'}
+      </button>
+      {sent && <RetourAction>E-mail renvoyé</RetourAction>}
+    </EntreeEcran>
   );
 }

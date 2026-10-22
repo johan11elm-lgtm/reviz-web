@@ -13,7 +13,7 @@ const renderWelcome = () =>
 describe('<Welcome />', () => {
   it('renders the main heading', () => {
     renderWelcome()
-    expect(screen.getByText(/Révise mieux/i)).toBeInTheDocument()
+    expect(screen.getAllByText(/Révise mieux/i).length).toBeGreaterThan(0)
   })
 
   it('shows the primary CTA pointing to /inscription', () => {
@@ -23,10 +23,13 @@ describe('<Welcome />', () => {
     expect(cta).toHaveAttribute('href', '/inscription')
   })
 
-  it('shows login links pointing to /connexion', () => {
+  it('shows the « J’ai déjà un compte » link pointing to /connexion', () => {
     renderWelcome()
-    const loginLinks = screen.getAllByRole('link', { name: /Se connecter/i })
-    expect(loginLinks.length).toBeGreaterThan(0)
-    loginLinks.forEach((link) => expect(link).toHaveAttribute('href', '/connexion'))
+    expect(screen.getByRole('link', { name: /J.ai déjà un compte/i })).toHaveAttribute('href', '/connexion')
+  })
+
+  it('shows the « Essayer sans compte » link pointing to /essai', () => {
+    renderWelcome()
+    expect(screen.getByRole('link', { name: /Essayer sans compte/i })).toHaveAttribute('href', '/essai')
   })
 })

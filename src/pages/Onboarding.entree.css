@@ -1,0 +1,6 @@
+/* Découverte : compléments au kit du parcours d'entrée (components/entree/Entree.css). */
+.onb-texte { color: var(--en-doux); }
+.onb-texte b { color: var(--en-encre); }
+.onb-facons { margin: 0; padding: 0; list-style: none; }
+/* Première façon (programme) sur fond pêche, la seconde garde le lavande du kit. */
+.onb-facons .en-facon:first-child img { background: #FFE6D2; }
