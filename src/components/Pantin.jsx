@@ -112,6 +112,9 @@ const ACCESSOIRES = {
   carte: { main: 'g', bras: { epaule: -20, coude: -30 }, prise: [104, 150], ancre: [0.1, 0.62], w: 580, h: 415, angle: -6 },
   ordi: { main: 'g', bras: { epaule: -5, coude: -35 }, prise: [104, 150], ancre: [0.1, 0.6], w: 470, h: 442, angle: -6 },
   drapeau: { main: 'g', bras: { epaule: -20, coude: -30 }, prise: [104, 150], ancre: [0.951, 0.85], w: 500, h: 760, angle: -20, balance: 6 },
+  // Réviz Games, le tour de magie : haut-de-forme et baguette du magicien.
+  chapeau: { x: 578, y: -277, w: 1365, h: 802 },
+  baguette: { main: 'g', bras: { epaule: -20, coude: -30 }, prise: [104, 150], ancre: [0.47, 0.8], w: 300, h: 849, angle: -25 },
 };
 const NS = 'http://www.w3.org/2000/svg';
 function imageSvg(href, { x, y, w, h }) {
@@ -129,7 +132,7 @@ function imageSvg(href, { x, y, w, h }) {
  * @param {string|null} [repli='hello'] pose de <Mascot> affichée pendant le chargement ;
  *   null : rien tant que le moteur n'est pas prêt (la pose revient si le chargement échoue)
  * @param {Function} [onEntree] appelé quand l'entrée est finie (ou tout de suite sans entrée)
- * @param {string|null} [accessoire] nom dans ACCESSOIRES ; en changer le fait tomber sur la tête
+ * @param {string|string[]|null} [accessoire] nom(s) dans ACCESSOIRES ; en changer le fait tomber sur la tête
  * ref : { geste(nom), expression(nom), dire(texte) }
  */
 export const Pantin = forwardRef(function Pantin(
@@ -144,7 +147,7 @@ export const Pantin = forwardRef(function Pantin(
   const calqueAcc = useRef(null);
   const calqueDerriere = useRef(null);
   const accPose = useRef(false);
-  const accActuel = useRef(null); // { nom, retirer(anime) }
+  const accActuel = useRef(null); // { cle, items: [{ retirer(anime) }] }
   const tenu = useRef(null); // objet tenu : { p, el, k } (k : 0 -> 1, bras plié)
   const [pret, setPret] = useState(false);
   const [echec, setEchec] = useState(false);
@@ -243,72 +246,76 @@ export const Pantin = forwardRef(function Pantin(
 
   // Le premier accessoire est déjà là ; ensuite l'ancien s'en va et le nouveau arrive : un chapeau
   // s'envole et tombe (son ombre n'apparaît sur le front qu'à l'atterrissage), un objet tenu
-  // rapetisse pendant que le bras retombe, ou surgit dans la main qui se plie.
+  // rapetisse pendant que le bras retombe, ou surgit dans la main qui se plie. Une liste en pose
+  // plusieurs à la fois (le haut-de-forme et la baguette du magicien).
+  const cleAcc = [].concat(accessoire ?? []).filter(n => ACCESSOIRES[n]).join('+');
   useEffect(() => {
     const g = calqueAcc.current, gsap = gsapRef.current, rig = rigRef.current;
     if (!pret || !g || !rig) return;
     const anime = accPose.current && !anim.current?.calme;
     accPose.current = true;
-    const ancien = accActuel.current;
-    if ((ancien?.nom ?? null) === (accessoire ?? null)) return;
-    ancien?.retirer(anime);
+    const anciens = accActuel.current;
+    if ((anciens?.cle ?? '') === cleAcc) return;
+    anciens?.items.forEach(a => a.retirer(anime));
     accActuel.current = null;
-    const p = ACCESSOIRES[accessoire];
-    if (!p) return;
-    const delai = ancien ? 0.15 : 0;
-    const objet = imageSvg(`${BASE}accessoires/${accessoire}.webp`, p.main
-      ? { x: p.prise[0] - p.ancre[0] * p.w, y: p.prise[1] - p.ancre[1] * p.h, w: p.w, h: p.h } : p);
+    if (!cleAcc) return;
+    const delai = anciens ? 0.15 : 0;
+    const placer = accessoire => {
+      const p = ACCESSOIRES[accessoire];
+      const objet = imageSvg(`${BASE}accessoires/${accessoire}.webp`, p.main
+        ? { x: p.prise[0] - p.ancre[0] * p.w, y: p.prise[1] - p.ancre[1] * p.h, w: p.w, h: p.h } : p);
 
-    if (p.main) {
-      // Sous les doigts : premier enfant de la main relâchée (même repère, même visibilité). La main
-      // passe au-dessus du tube du bras, sinon le haut du bras recouvre l'objet (le drapeau).
-      const el = document.createElementNS(NS, 'g');
-      el.appendChild(objet);
-      const bras = rig.brasEl[p.main];
-      const main = bras.mains.relachee;
-      main.insertBefore(el, main.firstChild);
-      bras.g.appendChild(bras.main);
-      const t = { p, el, k: anime ? 0 : 1 };
-      tenu.current = t;
-      const origine = `${p.prise[0]} ${p.prise[1]}`;
-      if (anime) {
-        gsap.to(t, { k: 1, duration: 0.35, delay: delai, ease: 'power2.out' });
-        gsap.from(objet, { scale: 0, svgOrigin: origine, duration: 0.45, delay: delai + 0.15, ease: 'back.out(2)' });
+      if (p.main) {
+        // Sous les doigts : premier enfant de la main relâchée (même repère, même visibilité). La main
+        // passe au-dessus du tube du bras, sinon le haut du bras recouvre l'objet (le drapeau).
+        const el = document.createElementNS(NS, 'g');
+        el.appendChild(objet);
+        const bras = rig.brasEl[p.main];
+        const main = bras.mains.relachee;
+        main.insertBefore(el, main.firstChild);
+        bras.g.appendChild(bras.main);
+        const t = { p, el, k: anime ? 0 : 1 };
+        tenu.current = t;
+        const origine = `${p.prise[0]} ${p.prise[1]}`;
+        if (anime) {
+          gsap.to(t, { k: 1, duration: 0.35, delay: delai, ease: 'power2.out' });
+          gsap.from(objet, { scale: 0, svgOrigin: origine, duration: 0.45, delay: delai + 0.15, ease: 'back.out(2)' });
+        }
+        return { retirer: (an) => {
+          const fin = () => {
+            el.remove();
+            if (tenu.current !== t) return; // un autre objet a déjà pris la main
+            tenu.current = null;
+            bras.g.insertBefore(bras.main, bras.g.querySelector('.b-tube'));
+          };
+          if (!an) { fin(); return; }
+          gsap.to(objet, { scale: 0, svgOrigin: origine, duration: 0.2, ease: 'power2.in' });
+          gsap.to(t, { k: 0, duration: 0.3, delay: 0.1, ease: 'power2.inOut', onComplete: fin });
+        } };
       }
-      accActuel.current = { nom: accessoire, retirer: (an) => {
-        const fin = () => {
-          el.remove();
-          if (tenu.current !== t) return; // un autre objet a déjà pris la main
-          tenu.current = null;
-          bras.g.insertBefore(bras.main, bras.g.querySelector('.b-tube'));
-        };
-        if (!an) { fin(); return; }
-        gsap.to(objet, { scale: 0, svgOrigin: origine, duration: 0.2, ease: 'power2.in' });
-        gsap.to(t, { k: 0, duration: 0.3, delay: 0.1, ease: 'power2.inOut', onComplete: fin });
-      } };
-      return;
-    }
 
-    const acc = document.createElementNS(NS, 'g');
-    const ombre = p.ombre && imageSvg(`${BASE}accessoires/${accessoire}-ombre.webp`, p.ombre);
-    const fond = p.derriere && calqueDerriere.current && imageSvg(`${BASE}accessoires/${accessoire}-derriere.webp`, p);
-    if (ombre) acc.appendChild(ombre);
-    acc.appendChild(objet);
-    g.appendChild(acc);
-    if (fond) calqueDerriere.current.appendChild(fond);
-    const pieces = fond ? [objet, fond] : [objet];
-    if (anime) {
-      if (p.enfile) gsap.from(objet, { scale: 1.4, opacity: 0, svgOrigin: `${p.x + p.w / 2} ${p.y + p.h / 2}`, duration: 0.35, delay: delai, ease: 'back.out(1.6)' });
-      else gsap.from(pieces, { y: -700, opacity: 0, duration: 0.6, delay: delai, ease: 'bounce.out' });
-      if (ombre) gsap.from(ombre, { opacity: 0, duration: 0.25, delay: delai + 0.3 });
-    }
-    accActuel.current = { nom: accessoire, retirer: (an) => {
-      const fin = () => { acc.remove(); fond?.remove(); };
-      if (!an) { fin(); return; }
-      if (ombre) gsap.to(ombre, { opacity: 0, duration: 0.1 });
-      gsap.to(pieces, { y: -500, opacity: 0, duration: 0.25, ease: 'power2.in', onComplete: fin });
-    } };
-  }, [accessoire, pret]);
+      const acc = document.createElementNS(NS, 'g');
+      const ombre = p.ombre && imageSvg(`${BASE}accessoires/${accessoire}-ombre.webp`, p.ombre);
+      const fond = p.derriere && calqueDerriere.current && imageSvg(`${BASE}accessoires/${accessoire}-derriere.webp`, p);
+      if (ombre) acc.appendChild(ombre);
+      acc.appendChild(objet);
+      g.appendChild(acc);
+      if (fond) calqueDerriere.current.appendChild(fond);
+      const pieces = fond ? [objet, fond] : [objet];
+      if (anime) {
+        if (p.enfile) gsap.from(objet, { scale: 1.4, opacity: 0, svgOrigin: `${p.x + p.w / 2} ${p.y + p.h / 2}`, duration: 0.35, delay: delai, ease: 'back.out(1.6)' });
+        else gsap.from(pieces, { y: -700, opacity: 0, duration: 0.6, delay: delai, ease: 'bounce.out' });
+        if (ombre) gsap.from(ombre, { opacity: 0, duration: 0.25, delay: delai + 0.3 });
+      }
+      return { retirer: (an) => {
+        const fin = () => { acc.remove(); fond?.remove(); };
+        if (!an) { fin(); return; }
+        if (ombre) gsap.to(ombre, { opacity: 0, duration: 0.1 });
+        gsap.to(pieces, { y: -500, opacity: 0, duration: 0.25, ease: 'power2.in', onComplete: fin });
+      } };
+    };
+    accActuel.current = { cle: cleAcc, items: cleAcc.split('+').map(placer) };
+  }, [cleAcc, pret]);
 
   useImperativeHandle(ref, () => ({
     geste: nom => jouerGeste(anim.current, nom, () => exprRef.current),

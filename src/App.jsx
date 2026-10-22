@@ -54,6 +54,7 @@ const NotFound       = lazy(() => import('./pages/NotFound'))
 const UpgradeSuccess = lazy(() => import('./pages/UpgradeSuccess'))
 const Coach          = lazy(() => import('./pages/Coach'))
 const Programme      = lazy(() => import('./pages/Programme'))
+const Jeux           = lazy(() => import('./pages/Jeux'))
 const Essai          = lazy(() => import('./pages/Essai'))
 const Avis           = lazy(() => import('./pages/Avis'))
 const Profs          = lazy(() => import('./pages/Profs'))
@@ -117,6 +118,7 @@ function AuthRoutes() {
       <Route path="/upgrade-success" element={<PrivateRoute><UpgradeSuccess /></PrivateRoute>} />
       <Route path="/coach"       element={<PrivateRoute><Coach /></PrivateRoute>} />
       <Route path="/programme"   element={<PrivateRoute><Programme /></PrivateRoute>} />
+      <Route path="/jeux"        element={<PrivateRoute><Jeux /></PrivateRoute>} />
       <Route path="/programme/:matiere" element={<VersMatiere />} />
       <Route path="/battle"      element={<BattleRoute><BattleAccueil /></BattleRoute>} />
       <Route path="/battle/:code" element={<BattleRoute><Battle /></BattleRoute>} />

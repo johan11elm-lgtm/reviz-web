@@ -12,6 +12,7 @@ import { loadLessons } from '../services/historyService';
 import { track } from '../services/statsService';
 import { useIsDesktop } from '../hooks/useMediaQuery';
 import { subjectMascot } from '../utils/subjects';
+import { accessoireMatiere } from '../utils/accessoireMatiere';
 import { hasProgramme, PROGRAMME_CLASSES, PROGRAMME_FALLBACK } from '../utils/programme';
 import './Programme.css';
 
@@ -30,11 +31,6 @@ const majuscule = s => s.charAt(0).toUpperCase() + s.slice(1);
 const minuscule = s => s.charAt(0).toLowerCase() + s.slice(1);
 const enMatiere = m => (m === m.toUpperCase() ? `en ${m}` : `en ${m.toLowerCase()}`);
 const pluriel = (n, mot) => `${n} ${mot}${n > 1 ? 's' : ''}`;
-// Accessoire de Réviz selon la matière choisie (clé : pose de l'icône de matière, cf. subjects.js).
-const ACCESSOIRE_MATIERE = {
-  maths: 'equerre', francais: 'lunettes', histgeo: 'explorateur', geo: 'carte', svt: 'plante',
-  physique: 'labo', technonsi: 'ordi', langues: 'drapeau',
-};
 
 const ETIQUETTE = { done: 'Fait', current: 'En cours', commence: 'Commencé', 'a-revoir': 'À travailler', todo: 'À venir' };
 // La case en cours qui n'a encore jamais été ouverte : c'est la prochaine, pas une case « en cours ».
@@ -206,7 +202,7 @@ export default function Programme() {
       expression="reflechit"
       entree={entree}
       repli={null}
-      accessoire={matiere ? ACCESSOIRE_MATIERE[subjectMascot(matiere.matiere)] : null}
+      accessoire={accessoireMatiere(matiere?.matiere)}
       onEntree={() => setParle(true)}
       onClick={() => pantin.current?.geste('saut')}
       label="Réviz, ta mascotte"
