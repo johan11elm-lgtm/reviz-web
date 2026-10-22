@@ -5,7 +5,7 @@ import { EtoileIA } from '../components/BottomNav';
 import { useAuth } from '../context/AuthContext';
 import { Mascot } from '../components/Mascot';
 import { BulleReviz } from '../components/reviz/BulleReviz';
-import { ChoixFormule } from '../components/ChoixFormule';
+import { DecouvrirRevizPlus } from '../components/revizplus/RevizPlusOffre';
 import { coachPreview, loadConversation, saveConversation, renderCoachMessage, COACH_ERREURS } from '../components/CoachChat';
 import { sendCoachMessage, CHAT_MAX_MESSAGE_LENGTH } from '../services/chatService';
 import { loadLessons } from '../services/historyService';
@@ -411,14 +411,7 @@ export default function Coach() {
     <>
       {choix && <ChoixLecon lecons={lecons} activeId={leconId} onSelect={choisir} onClose={() => setChoix(false)} grand={isDesktop} />}
       {histo && <Discussions recents={recents} activeId={leconId} onSelect={choisir} onNouvelle={nouvelle} onClose={() => setHisto(false)} />}
-      {offre && (
-        <div className="ia-voile" onClick={() => setOffre(false)}>
-          <div className="ia-choix ia-choix--offre" role="dialog" aria-modal="true" aria-label="Réviz+" onClick={e => e.stopPropagation()}>
-            <div className="ia-choix-tete"><h2>Questions illimitées</h2><button type="button" className="ia-fermer" onClick={() => setOffre(false)} aria-label="Fermer"><Croix /></button></div>
-            <ChoixFormule />
-          </div>
-        </div>
-      )}
+      {offre && <DecouvrirRevizPlus onClose={() => setOffre(false)} />}
     </>
   );
 

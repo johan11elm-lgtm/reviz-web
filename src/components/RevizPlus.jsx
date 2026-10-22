@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { useModalA11y } from '../hooks/useModalA11y';
+import { DecouvrirRevizPlus } from './revizplus/RevizPlusOffre';
 import { Mascot } from './Mascot';
 import { GemIcon, SparkIcon, CameraIcon, ChatIcon, SunIcon } from './Icons';
 import { moisInscription, phaseRevizPlus, joursAvant, dateCourte } from '../utils/revizPlus';
@@ -235,22 +235,7 @@ export function RevizPlusCard({ onTheme, onGerer, gererEnCours = false, details 
   );
 }
 
-/** Fiche « Ton Réviz+ » : panneau du bas sur téléphone, fenêtre centrée sur ordinateur. */
+/** « Découvrir Réviz+ » (handoff du 22/10) : comparatif, formule, paiement. */
 export function RevizPlusSheet({ onClose }) {
-  const ref = useModalA11y(onClose);
-  return (
-    <div className="rp-sheet-fond" onClick={onClose}>
-      <div
-        className="rp-sheet"
-        ref={ref}
-        role="dialog"
-        aria-modal="true"
-        aria-label="Ton Réviz+"
-        onClick={e => e.stopPropagation()}
-      >
-        <button type="button" className="rp-sheet-close" onClick={onClose} aria-label="Fermer">✕</button>
-        <RevizPlusCard />
-      </div>
-    </div>
-  );
+  return <DecouvrirRevizPlus onClose={onClose} />;
 }

@@ -79,7 +79,7 @@ export default async function handler(req, res) {
             : `Renouvellement automatique, résiliable à tout moment depuis les Réglages. En validant, tu acceptes les CGV : ${BASE_URL}/legal/cgv`,
         },
       },
-      cancel_url: `${BASE_URL}/scan`,
+      cancel_url: `${BASE_URL}/scan?revizplus=annule`,
       locale: 'fr',
     })
 

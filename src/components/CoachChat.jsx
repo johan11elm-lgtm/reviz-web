@@ -3,7 +3,7 @@ import { useAuth } from '../context/AuthContext';
 import { useModalA11y } from '../hooks/useModalA11y';
 import { Mascot } from './Mascot';
 import { sendCoachMessage, CHAT_MAX_MESSAGE_LENGTH } from '../services/chatService';
-import { ChoixFormule } from './ChoixFormule';
+import { LimiteAtteinte } from './revizplus/RevizPlusOffre';
 import './CoachChat.css';
 import './RevizPlus.css';
 
@@ -278,7 +278,7 @@ export function CoachConversation({ lessonId, prefill, className = '' }) {
                   ? 'Wow, on a beaucoup discuté aujourd\'hui ! On se retrouve demain pour la suite.'
                   : 'Tu as utilisé tous tes messages du jour ! On se retrouve demain, ou passe à Réviz+ pour continuer maintenant.'}
               </CoachRow>
-              {!hasRevizPlus && <ChoixFormule className="coach-formules" />}
+              {!hasRevizPlus && <LimiteAtteinteBouton />}
             </div>
           )}
         </div>
@@ -363,5 +363,16 @@ export function CoachChat({ isOpen, onClose, lessonId, lessonTitle, prefill }) {
         <CoachConversation lessonId={lessonId} prefill={prefill} />
       </div>
     </div>
+  );
+}
+
+/** Quota du coach atteint : la limite Réviz IA (et, de là, Réviz+), sans quitter la leçon. */
+function LimiteAtteinteBouton() {
+  const [ouvert, setOuvert] = useState(false);
+  return (
+    <>
+      <button type="button" className="rv-btn-cta rv-btn-cta--full coach-formules" onClick={() => setOuvert(true)}>Questions illimitées avec Réviz+</button>
+      {ouvert && <LimiteAtteinte type="ia" onClose={() => setOuvert(false)} />}
+    </>
   );
 }

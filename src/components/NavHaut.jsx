@@ -8,7 +8,7 @@ import './NavHaut.css';
 // Pages du tunnel (inscription, connexion, essai…) et jeux en plein écran (flashcards, quiz) : pas de menu.
 const HIDDEN_PREFIXES = [
   '/inscription', '/connexion', '/essai', '/verify-email', '/onboarding',
-  '/consent-pending', '/finish-setup', '/welcome', '/legal', '/flashcards', '/quiz',
+  '/consent-pending', '/finish-setup', '/welcome', '/legal', '/flashcards', '/quiz', '/upgrade-success',
 ];
 // Pages d'une leçon : elles allument « Programme » (leçons scannées comprises).
 const LESSON_PATHS = ['/analyse', '/flashcards', '/quiz', '/resume', '/mindmap'];

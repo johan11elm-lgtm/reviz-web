@@ -1,11 +1,11 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useIsDesktop } from '../hooks/useMediaQuery';
 import { useModalA11y } from '../hooks/useModalA11y';
 import { Pantin } from '../components/Pantin';
 import { BulleReviz } from '../components/reviz/BulleReviz';
-import { ChoixFormule } from '../components/ChoixFormule';
+import { DecouvrirRevizPlus, ToastPaiementAnnule } from '../components/revizplus/RevizPlusOffre';
 import { RevizPlusBadge } from '../components/RevizPlus';
 import { BottomNav } from '../components/BottomNav';
 import { startAnalysis, startAnalysisFromImage } from '../services/aiService';
@@ -74,17 +74,6 @@ function Quota({ statut, plus, onOffre, grand }) {
   );
 }
 
-function Offre({ onClose }) {
-  const ref = useModalA11y(onClose, true);
-  return (
-    <div className="sc-voile" onClick={onClose}>
-      <div className="sc-feuille" ref={ref} role="dialog" aria-modal="true" aria-label="Réviz+" onClick={e => e.stopPropagation()}>
-        <div className="sc-feuille-tete"><h2>Scans illimités</h2><button type="button" className="sc-rond" onClick={onClose} aria-label="Fermer"><Croix /></button></div>
-        <ChoixFormule />
-      </div>
-    </div>
-  );
-}
 
 /**
  * Scanner une leçon (handoff Claude Design du 21/10) : choisir comment donner sa leçon (photo,
@@ -107,6 +96,12 @@ export default function Scan() {
   const [aCamera, setACamera] = useState(!isDesktop);
   const [depot, setDepot] = useState(false);
   const [offre, setOffre] = useState(false);
+  // Retour de Stripe sans payer (api/_checkout.js) : un petit mot, puis l'adresse redevient propre.
+  const [annule, setAnnule] = useState(() => params.get('revizplus') === 'annule');
+  const fermerAnnule = useCallback(() => setAnnule(false), []);
+  useEffect(() => {
+    if (params.get('revizplus') === 'annule') window.history.replaceState(window.history.state, '', window.location.pathname);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
   const [niveauManquant, setNiveauManquant] = useState(false);
   const video = useRef(null);
   const flux = useRef(null);
@@ -192,7 +187,8 @@ export default function Scan() {
   const inputFichier = <input ref={fichier} type="file" accept="image/*" hidden onChange={e => importer(e.target.files?.[0])} />;
   const fenetres = (
     <>
-      {offre && <Offre onClose={() => setOffre(false)} />}
+      {offre && <DecouvrirRevizPlus onClose={() => setOffre(false)} />}
+      {annule && <ToastPaiementAnnule onClose={fermerAnnule} />}
       {niveauManquant && <NiveauManquant onClose={() => setNiveauManquant(false)} onProfil={() => navigate('/profil')} />}
     </>
   );
