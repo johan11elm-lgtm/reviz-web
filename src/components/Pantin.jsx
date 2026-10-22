@@ -119,6 +119,9 @@ const ACCESSOIRES = {
   // de papier tenue bras levé, prête à partir (le lancer part de cette pose : Pantin.lancer).
   bandeau: { x: 451, y: 480, w: 1621, h: 349 },
   boule: { main: 'g', bras: { epaule: 140, coude: 55, etire: 1.3 }, prise: [110, 120], ancre: [0.5, 0.5], w: 460, h: 463 },
+  // Réviz se trompe ? : le présentateur, micro levé vers la bouche et nœud papillon sous le sourire.
+  micro: { main: 'g', bras: { epaule: 20, coude: -70 }, prise: [104, 150], ancre: [0.5, 0.72], w: 282, h: 600, angle: 15 },
+  noeud: { x: 1018, y: 1344, w: 520, h: 315, enfile: true },
 };
 const NS = 'http://www.w3.org/2000/svg';
 function imageSvg(href, { x, y, w, h }) {

@@ -12,7 +12,9 @@ import { themesDePartie, tourDeTheme } from '../data/themesJeux';
 import { jouer, sonActif, bruitagesActifs } from '../utils/bruitages';
 import { musiqueMagie } from '../utils/musiqueMagie';
 import { musiqueLance } from '../utils/musiqueLance';
-import { JeuLance, partieLance } from './JeuLance';
+import { JeuLance, partieLance, mancheLance } from './JeuLance';
+import { musiqueBuzzer } from '../utils/musiqueBuzzer';
+import { PlateauBuzzer, mancheBuzzer, partieBuzzer, TEMPO_BUZZER } from './jeux/RevizSeTrompe';
 import { useIsDesktop } from '../hooks/useMediaQuery';
 import './Jeux.css';
 
@@ -27,8 +29,11 @@ import './Jeux.css';
  * Le tour de magie (22/10) est le premier jeu produit pour de vrai : un monde en pâte à modeler
  * (calques générés, public/jeux/magie/), Réviz magicien au centre. C'est le mode par défaut ;
  * ?jeu=prototype rejoue les 3 essais du matin (pêche, valise, paires).
- * Réviz lance (22/10, JeuLance.jsx) est le deuxième : la Partie rapide propose les deux jeux ;
- * ?rapide=magie ou ?rapide=lance lance directement l'un des deux.
+ * Réviz lance (22/10, JeuLance.jsx) : la boule à lancer dans le bon panier.
+ * Réviz se trompe ? (23/10, pages/jeux/RevizSeTrompe.jsx) : vrai ou faux au buzzer, plateau télé.
+ * L'écran de choix propose les 3 jeux séparément, plus une Partie rapide qui les mélange (6 tours,
+ * deux passages des 3 jeux dans un ordre au hasard, de plus en plus rapides).
+ * ?rapide=melange|magie|lance|buzzer lance directement (?jeu=buzzer reste accepté).
  * ?classe=5ème&matiere=Histoire&chapitre=<id> lance directement un chapitre.
  */
 
@@ -56,15 +61,30 @@ function pairesCourtes(data, branches) {
   // Repli : la carte mentale (une catégorie ↔ un de ses éléments), toujours courte.
   return branches.map(br => ({ a: br.label, b: auHasard(br.children) }));
 }
-// Partie rapide : 3 thèmes faciles (tables, capitales…), un par tour, sans lien avec une leçon.
+// Partie rapide : des thèmes faciles (tables, capitales…), un par tour, sans lien avec une leçon.
+// Les jeux s'enchaînent (magie, buzzer, magie…), chacun de plus en plus rapide (niveau 0, 1, 2) ;
+// six thèmes tous différents.
 const SOUS_RAPIDE = ['Mémorise, puis retourne-les deux par deux', 'Attention, il mélange !', 'Mélange express !'];
-export function partieRapide() {
-  const themes = themesDePartie(TOURS_MAGIE.length);
-  return TOURS_MAGIE.map((t, i) => {
-    const tour = tourDeTheme(themes[i]);
-    return { ...t, type: 'magie', paires: tour.paires, titre: tour.titre, annonce: tour.titre, sous: SOUS_RAPIDE[i], apercu: t.voir + 0.6 + t.echanges * t.pas };
-  });
+export function mancheMagie(theme, niveau) {
+  const t = TOURS_MAGIE[niveau], tour = tourDeTheme(theme);
+  return { ...t, type: 'magie', niveau, paires: tour.paires, titre: tour.titre, annonce: tour.titre, sous: SOUS_RAPIDE[niveau], apercu: t.voir + 0.6 + t.echanges * t.pas };
 }
+/** Le tour de magie seul : 3 thèmes, 3 tours qui accélèrent. */
+export const partieMagieSeule = () => themesDePartie(TOURS_MAGIE.length).map((theme, i) => mancheMagie(theme, i));
+/**
+ * Partie rapide : les 3 jeux mélangés, 6 tours. Deux passages des 3 jeux, chacun dans un ordre au
+ * hasard (sans le même jeu deux fois de suite), au niveau 0 puis 1, puis le dernier tour au niveau 2 ;
+ * six thèmes tous différents.
+ */
+const JEUX = { magie: mancheMagie, lance: mancheLance, buzzer: mancheBuzzer };
+export function partieMelangee() {
+  const themes = themesDePartie(6);
+  let ordre;
+  do { ordre = [...melange(Object.keys(JEUX)), ...melange(Object.keys(JEUX))]; } while (ordre[2] === ordre[3]);
+  const niveaux = [0, 0, 1, 1, 2, 2];
+  return ordre.map((jeu, i) => JEUX[jeu](themes[i], niveaux[i]));
+}
+const ACCESSOIRES_JEU = { magie: ['chapeau', 'baguette'], lance: ['bandeau', 'boule'], buzzer: ['micro', 'noeud'] };
 function partieMagie(data, branches) {
   const paires = pairesCourtes(data, branches);
   if (paires.length < 2) return [];
@@ -97,7 +117,7 @@ export function construirePartie(data, mode = 'magie') {
       return { type: 'paires', paires };
     },
   };
-  if (mode === 'magie') return partieMagie(data, branches);
+  if (mode !== 'prototype') return partieMagie(data, branches);
   const ordre = carte ? ['peche', 'paires', 'valise', 'peche', 'paires', 'valise'] : ['paires', 'paires', 'paires'];
   return ordre.map((type, i) => ({ ...manche[type](), duree: DUREES[i] ?? 11 })).filter(m => m.type !== 'paires' || m.paires.length >= 2);
 }
@@ -392,7 +412,8 @@ export default function Jeux() {
   const { getUserLevel } = useAuth();
   const level = getUserLevel?.();
   const [params] = useSearchParams();
-  const mode = params.get('jeu') ?? 'magie';
+  // ?jeu=prototype rejoue les essais du matin ; tout le reste est le mode jeux (?jeu=buzzer : voir RAPIDES).
+  const mode = params.get('jeu') === 'prototype' ? 'prototype' : 'magie';
   const [classe, setClasse] = useState(() => params.get('classe') || (hasProgramme(level) ? level.classe : PROGRAMME_FALLBACK));
   const [catalogue, setCatalogue] = useState(null);
   const [matiereChoisie, setMatiereChoisie] = useState(() => params.get('matiere'));
@@ -433,13 +454,18 @@ export default function Jeux() {
     } catch { setPhase('choix'); }
   }, [classe, mode]);
   const nouvellePartie = () => { setIdx(0); setScore(0); setBonnes(0); setErreurs([]); setExpire(-1); finie.current = -1; setPhase('consigne'); };
-  const RAPIDES = { magie: partieRapide, lance: partieLance };
-  const lancerRapide = (jeu = 'magie') => {
-    setChapitre({ matiere: 'Réviz Games', titre: 'Partie rapide', rapide: jeu });
+  // Les 3 jeux séparément, et la Partie rapide qui les mélange.
+  const RAPIDES = { melange: partieMelangee, magie: partieMagieSeule, lance: partieLance, buzzer: partieBuzzer };
+  const TITRES = { melange: 'Partie rapide', magie: 'Le tour de magie', lance: 'Réviz lance', buzzer: 'Réviz se trompe ?' };
+  const lancerRapide = (jeu = 'melange') => {
+    setChapitre({ matiere: 'Réviz Games', titre: TITRES[jeu], rapide: jeu });
     setPartie(RAPIDES[jeu]());
     nouvellePartie();
   };
-  useEffect(() => { const r = params.get('rapide'); if (r) lancerRapide(RAPIDES[r] ? r : 'magie'); }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  useEffect(() => {
+    const r = params.get('rapide') ?? (params.get('jeu') === 'buzzer' ? 'buzzer' : null);
+    if (r) lancerRapide(RAPIDES[r] ? r : 'melange');
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Lien direct vers un chapitre.
   const direct = params.get('chapitre');
@@ -454,16 +480,21 @@ export default function Jeux() {
 
   // Musique d'un jeu : une seule boucle, de la première annonce jusqu'à l'écran de fin ; chaque
   // tour la joue un peu plus vite (8 % de plus à chaque tour).
-  const MUSIQUES = { magie: { m: musiqueMagie, bpm: 116 }, lance: { m: musiqueLance, bpm: 126 } };
+  // Le niveau du tour (0, 1, 2) règle la vitesse : dans la Partie rapide, chaque jeu revient deux fois.
+  const MUSIQUES = {
+    magie: { m: musiqueMagie, tempo: n => Math.round(116 * (1 + n * 0.08)) },
+    lance: { m: musiqueLance, tempo: n => Math.round(126 * (1 + n * 0.08)) },
+    buzzer: { m: musiqueBuzzer, tempo: TEMPO_BUZZER },
+  };
   const musique = (phase === 'consigne' || phase === 'jeu') ? MUSIQUES[manche?.type] : null;
-  const tempoTour = musique ? Math.round(musique.bpm * (1 + idx * 0.08)) : 0;
+  const tempoTour = musique ? musique.tempo(manche.niveau ?? idx) : 0;
   useEffect(() => {
     for (const x of Object.values(MUSIQUES)) if (x !== musique || !son) x.m.arreter();
     if (!musique || !son) return;
     musique.m.regler({ bpm: tempoTour });
     musique.m.demarrer();
   }, [musique?.m, tempoTour, son]); // eslint-disable-line react-hooks/exhaustive-deps
-  useEffect(() => () => { musiqueMagie.arreter(); musiqueLance.arreter(); }, []);
+  useEffect(() => () => { musiqueMagie.arreter(); musiqueLance.arreter(); musiqueBuzzer.arreter(); }, []);
 
   // Consigne : 1,7 s (ou une touche), puis le chrono part.
   useEffect(() => {
@@ -533,21 +564,31 @@ export default function Jeux() {
       <>
         <div className="jx-ligne-haut">{fermer}<span className="jx-surtitre">Prototype</span></div>
         <h1 className="jx-titre">Réviz Games</h1>
-        <p className="jx-intro">{mode === 'magie' ? 'Deux jeux, 3 tours de plus en plus rapides.' : '6 mini-jeux de 10 à 15 secondes sur un chapitre : pêche, valise, paires.'}</p>
+        <p className="jx-intro">{mode === 'magie' ? 'Trois jeux de 10 à 15 secondes, sur des thèmes faciles : tables, capitales, anglais…' : '6 mini-jeux de 10 à 15 secondes sur un chapitre : pêche, valise, paires.'}</p>
         {mode === 'magie' && (
           <>
-            <span className="jx-surtitre">Partie rapide · tables, capitales, anglais… 3 thèmes au hasard</span>
-            <button type="button" className="jx-rapide" onClick={() => lancerRapide('magie')}>
-              <span className="jx-rapide-txt"><b>Le tour de magie</b><span>Retrouve les paires, il mélange de plus en plus</span></span>
+            <button type="button" className="jx-rapide jx-rapide--melange" onClick={() => lancerRapide('melange')}>
+              <span className="jx-rapide-txt"><b>Partie rapide</b><span>Les 3 jeux mélangés, 6 tours de plus en plus rapides</span></span>
               <span className="jx-jouer" aria-hidden="true">Jouer</span>
             </button>
-            <button type="button" className="jx-rapide jx-rapide--lance" onClick={() => lancerRapide('lance')}>
-              <span className="jx-rapide-txt"><b>Réviz lance</b><span>Lance la boule dans le bon panier</span></span>
-              <span className="jx-jouer" aria-hidden="true">Jouer</span>
-            </button>
+            <span className="jx-surtitre jx-ou">Ou un seul jeu, 3 tours</span>
+            <div className="jx-jeux">
+              <button type="button" className="jx-rapide" onClick={() => lancerRapide('magie')}>
+                <span className="jx-rapide-txt"><b>Le tour de magie</b><span>Retrouve les paires, il mélange de plus en plus</span></span>
+                <span className="jx-jouer" aria-hidden="true">Jouer</span>
+              </button>
+              <button type="button" className="jx-rapide jx-rapide--lance" onClick={() => lancerRapide('lance')}>
+                <span className="jx-rapide-txt"><b>Réviz lance</b><span>Lance la boule dans le bon panier</span></span>
+                <span className="jx-jouer" aria-hidden="true">Jouer</span>
+              </button>
+              <button type="button" className="jx-rapide jx-rapide--buzzer" onClick={() => lancerRapide('buzzer')}>
+                <span className="jx-rapide-txt"><b>Réviz se trompe ?</b><span>Vrai ou faux : buzze quand il dit une bêtise</span></span>
+                <span className="jx-jouer" aria-hidden="true">Jouer</span>
+              </button>
+            </div>
           </>
         )}
-        {mode === 'magie' && <span className="jx-surtitre jx-ou">Ou sur un chapitre de ton programme</span>}
+        {mode !== 'prototype' && <span className="jx-surtitre jx-ou">Ou sur un chapitre de ton programme</span>}
         <div className="jx-puces" role="radiogroup" aria-label="Classe">
           {PROGRAMME_CLASSES.map(c => (
             <button key={c} type="button" role="radio" aria-checked={c === classe} className={`jx-puce${c === classe ? ' jx-puce--on' : ''}`} onClick={() => setClasse(c)}>{c}</button>
@@ -583,7 +624,7 @@ export default function Jeux() {
           <span className="jx-fin-score">{score}</span>
           <span className="jx-fin-sous">{bonnes} bonne{bonnes > 1 ? 's' : ''} réponse{bonnes > 1 ? 's' : ''}{total ? ` sur ${total}` : ''}</span>
         </div>
-        <Pantin size={isDesktop ? 200 : 150} expression={fier ? 'fier' : 'content'} entree={fier ? 'saut' : 'coucou'} accessoire={chapitre.rapide === 'lance' ? ['bandeau', 'boule'] : mode === 'magie' ? ['chapeau', 'baguette'] : accessoire} className="jx-pantin-fin" />
+        <Pantin size={isDesktop ? 200 : 150} expression={fier ? 'fier' : 'content'} entree={fier ? 'saut' : 'coucou'} accessoire={ACCESSOIRES_JEU[partie.at(-1)?.type] ?? accessoire} className="jx-pantin-fin" />
         {recap.length > 0 && (
           <div className="jx-recap">
             <span className="jx-recap-titre">À retenir</span>
@@ -622,6 +663,15 @@ export default function Jeux() {
       </svg>
     </button>
   );
+
+  // ── Réviz se trompe ? : le plateau télé occupe tout l'écran, Réviz présentateur au micro ──
+  if (manche.type === 'buzzer') {
+    return (
+      <PlateauBuzzer manche={manche} idx={idx} total={partie.length} phase={phase} expire={expire === idx} score={score}
+        onBon={onBon} onFaux={onFaux} onTermine={onTermine} onDemarrer={() => setPhase('jeu')}
+        fermer={fermer} boutonSon={boutonSon} isDesktop={isDesktop} hauteurEcran={hauteurEcran} />
+    );
+  }
 
   // ── Le tour de magie : le monde occupe tout l'écran, Réviz magicien derrière sa table ──
   if (manche.type === 'magie') {

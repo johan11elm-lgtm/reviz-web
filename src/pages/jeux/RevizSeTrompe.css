@@ -1,0 +1,216 @@
+/* ─── Réviz se trompe ? : un plateau de jeu télé en feutrine (calques générés, public/jeux/buzzer/) ──
+ * Reprend l'ossature du tour de magie (.mg-page : HUD, chrono, titre, page figée en 100svh, overflow
+ * clip). Le décor garde ses proportions (2:3) pour que les ampoules de l'étoile tombent juste : sur
+ * téléphone il couvre l'écran, sur ordinateur il se tient au centre, flouté sur les côtés. */
+.bz-page { background: #1A1030; container-type: size; }
+.bz-page .bz-monde {
+  position: absolute; top: 0; left: 50%;
+  width: max(100%, 66.667cqh); aspect-ratio: 2 / 3; /* 100 % : la page a une marge intérieure sur ordinateur */
+  transform: translateX(-50%);
+}
+.jx-page--large.bz-page .bz-monde { width: max(100%, 150cqh); aspect-ratio: 3 / 2; }
+.bz-page .bz-fond { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.bz-page .bz-monde::after {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(120% 70% at 50% 40%, transparent 55%, rgba(20, 8, 30, .45) 100%);
+}
+
+/* Les petites ampoules de l'étoile luisent l'une après l'autre, doucement (un monde mat, en
+   feutrine : pas de scintillement) ; le chenillard s'anime un peu quand Réviz réagit. */
+.bz-page .bz-ampoule {
+  position: absolute; width: 4.6%; aspect-ratio: 1; translate: -50% -50%; border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(255, 240, 200, .8), rgba(255, 200, 110, .35) 50%, transparent);
+  mix-blend-mode: soft-light; opacity: 0; will-change: opacity;
+  animation: bz-chenillard 3.6s ease-in-out infinite;
+  animation-delay: calc(var(--k) * -.24s);
+}
+@keyframes bz-chenillard { 0%, 100% { opacity: 0; } 12% { opacity: .9; } 30% { opacity: 0; } }
+.bz-page .bz-monde--bravo .bz-ampoule, .bz-page .bz-monde--grille .bz-ampoule, .bz-page .bz-monde--triomphe .bz-ampoule { animation-duration: 1.4s; }
+
+/* Le plateau s'illumine : vert pour une bonne réponse, rouge quand Réviz gagne. */
+.bz-page .bz-flash { position: absolute; inset: 0; z-index: 4; pointer-events: none; opacity: 0; animation: bz-flash .7s ease-out; }
+.bz-page .bz-flash--vert { background: radial-gradient(90% 60% at 50% 62%, rgba(90, 210, 120, .3), transparent 70%); }
+.bz-page .bz-flash--rouge { background: radial-gradient(90% 60% at 50% 62%, rgba(230, 70, 80, .32), transparent 70%); }
+@keyframes bz-flash { 0% { opacity: 0; } 15% { opacity: 1; } 100% { opacity: 0; } }
+
+.bz-page .bz-titre h1 { font-size: 30px; }
+/* Le surtitre passe sur la frange dorée du rideau : une ombre plus franche pour rester lisible. */
+.bz-page .bz-titre .mg-titre-num { opacity: 1; text-shadow: 0 1px 0 rgba(60, 10, 20, .7), 0 0 8px rgba(40, 6, 20, .85); }
+
+/* ── La bulle : l'affirmation, puis la correction (mauvaise réponse barrée, la bonne surlignée) ── */
+.bz-page .bz-bulle-zone {
+  /* Hauteur fixe : une bulle plus haute grandit vers le haut, Réviz ne bouge jamais. */
+  position: relative; z-index: 3; width: 100%; height: 108px; flex: none; margin-top: auto;
+  display: flex; align-items: flex-end; justify-content: center;
+}
+.bz-page .bz-bulle-cadre { position: relative; display: grid; width: fit-content; max-width: min(340px, 100%); }
+/* Toutes les bulles dans la même case : la copie invisible de la correction donne la taille. */
+.bz-page .bz-bulle-cadre > .rv-bulle { grid-area: 1 / 1; }
+.bz-page .bz-bulle--gabarit { visibility: hidden; }
+.bz-page .bz-bulle .rv-bulle-txt {
+  width: 100%; height: 100%; max-width: none; box-sizing: border-box; padding: 12px 18px 13px;
+  justify-content: center;
+  font-size: 22px; line-height: 1.14;
+}
+.bz-page .bz-bulle--corrigee { opacity: 1; transform: none; animation: none; }
+.bz-page .bz-barre { color: #9A93A6; text-decoration: line-through 3px #E2364B; }
+.bz-page .bz-juste { padding: 0 4px; border-radius: 6px; background: #B9F2C6; color: inherit; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+
+/* Le tampon, plaqué sur la bulle d'un coup sec. */
+.bz-page .bz-tampon {
+  position: absolute; right: -12px; top: -38px; z-index: 1;
+  padding: 3px 12px 4px; border: 3px solid currentColor; border-radius: 10px;
+  font-family: var(--font-display); font-size: 21px; font-weight: 900; letter-spacing: .04em; text-transform: uppercase;
+  box-shadow: 0 4px 10px rgba(20, 8, 30, .3);
+  rotate: -10deg; will-change: transform;
+  animation: bz-tampon .32s cubic-bezier(.25, .9, .35, 1) both;
+}
+.bz-page .bz-tampon--vrai { color: #17914C; background: #EBFFF1; }
+.bz-page .bz-tampon--faux { color: #D3263E; background: #FFF0F2; }
+@keyframes bz-tampon { from { transform: scale(2.1); opacity: 0; } 55% { opacity: 1; } to { transform: scale(1); opacity: 1; } }
+
+/* ── Réviz présentateur ── */
+.bz-page .bz-reviz { position: relative; z-index: 1; margin-top: -4px; display: flex; justify-content: center; }
+.bz-page .bz-reaction {
+  position: absolute; right: -36px; top: 22%; z-index: 3; pointer-events: none;
+  padding: 6px 14px; border-radius: 14px; white-space: nowrap;
+  font-family: var(--font-display); font-size: 22px; font-weight: 900; letter-spacing: -.02em; color: #fff;
+  box-shadow: 0 4px 0 rgba(0, 0, 0, .22), 0 10px 18px rgba(20, 8, 30, .35);
+  rotate: 6deg;
+  animation: bz-reaction 1.25s cubic-bezier(.2, 1.4, .4, 1) forwards;
+}
+.bz-page .bz-reaction--bravo { background: #23A85E; }
+.bz-page .bz-reaction--grille { background: #FF7A2E; }
+.bz-page .bz-reaction--triomphe { left: -36px; right: auto; rotate: -6deg; background: #E2364B; }
+.bz-page .bz-reaction--temps { background: #2A2140; }
+@keyframes bz-reaction {
+  0% { transform: translateY(16px) scale(.5); opacity: 0; }
+  18% { transform: translateY(-4px) scale(1.06); opacity: 1; }
+  32% { transform: none; }
+  80% { opacity: 1; }
+  100% { transform: translateY(-14px); opacity: 0; }
+}
+/* Grillé : un petit nuage de fumée lui sort de la tête. */
+.bz-page .bz-fumee { position: absolute; left: 33%; top: -26%; width: 34%; z-index: 0; pointer-events: none; animation: mg-pouf 1.3s ease-out forwards; }
+
+/* ── Le pupitre, vu d'en haut, et ses deux gros buzzers posés sur le dessus ──
+ * Le dessus en feutrine occupe les deux tiers haut de l'image ; la façade et ses ampoules dépassent
+ * en bas de l'écran. Réviz se tient derrière : le pupitre cache ses jambes. */
+.bz-page .bz-pupitre {
+  position: relative; z-index: 2; flex: none;
+  width: calc(100% + 28px); max-width: 560px; margin: -96px 0 -52px;
+}
+.bz-page .bz-pupitre-img { display: block; width: 100%; height: auto; pointer-events: none; filter: drop-shadow(0 -6px 14px rgba(10, 4, 20, .35)); }
+.bz-page .bz-buzzers {
+  position: absolute; left: 7%; right: 7%; bottom: 37%;
+  display: flex; justify-content: space-between; align-items: flex-end;
+}
+.bz-page .bz-buzzer {
+  position: relative; width: 43%; aspect-ratio: 480 / 494; padding: 0; border: 0; background: none;
+  cursor: pointer; isolation: isolate; touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent; -webkit-touch-callout: none; user-select: none; outline: none;
+}
+.bz-page .bz-buzzer:disabled { cursor: default; }
+.bz-page .bz-buzzer:focus-visible { outline: 3px solid #FFD25A; outline-offset: 2px; border-radius: 40%; }
+.bz-page .bz-socle { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+/* Ombre de contact sur la feutrine : le buzzer est posé, pas collé. */
+.bz-page .bz-buzzer::after {
+  content: ''; position: absolute; left: 4%; right: 2%; bottom: -5%; height: 26%; z-index: -2; border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(8, 6, 30, .55), rgba(8, 6, 30, .25) 60%, transparent);
+}
+/* Vu d'en haut, le dôme s'enfonce dans son anneau (il s'éloigne : il rapetisse vers le bas de son
+   creux, 77,9 % de l'image, et le creux sombre apparaît autour) puis remonte en rebondissant.
+   Chaque étape part de l'arrêt et s'y termine (le fond de course, le haut du rebond) : aucun
+   départ en flèche, le mouvement reste continu d'une étape à l'autre (relevé image par image). */
+.bz-page .bz-dome {
+  position: absolute; inset: 0; display: block;
+  transform-origin: 50% 77.9%; will-change: transform;
+}
+.bz-page .bz-dome img { display: block; width: 100%; height: 100%; }
+.bz-page .bz-buzzer--presse .bz-dome { animation: bz-appui .56s both; }
+@keyframes bz-appui {
+  0% { transform: scale(1); animation-timing-function: cubic-bezier(.37, 0, .63, 1); }
+  15% { transform: scale(.93, .87); animation-timing-function: linear; }
+  34% { transform: scale(.93, .87); animation-timing-function: cubic-bezier(.37, 0, .63, 1); }
+  60% { transform: scale(1.02, 1.035); animation-timing-function: cubic-bezier(.37, 0, .63, 1); }
+  80% { transform: scale(.995, .99); animation-timing-function: cubic-bezier(.37, 0, .63, 1); }
+  100% { transform: scale(1); }
+}
+.bz-page .bz-libelle {
+  position: absolute; left: 0; right: 0; top: 41%; translate: 0 -50%; scale: 1 .86; /* peint sur le dôme vu d'en haut */
+  font-family: var(--font-display); font-size: clamp(26px, 9.5cqw, 40px); font-weight: 900; letter-spacing: -.02em; line-height: 1;
+  color: #FFF8EC; text-align: center; pointer-events: none;
+}
+.bz-page .bz-buzzer--vrai .bz-libelle { text-shadow: 0 3px 0 #1B7A2C, 0 5px 10px rgba(0, 50, 10, .35); }
+.bz-page .bz-buzzer--faux .bz-libelle { text-shadow: 0 3px 0 #9A1424, 0 5px 10px rgba(60, 0, 10, .35); }
+/* Après le verdict : le bon buzzer rayonne, l'autre s'éteint. */
+.bz-page .bz-buzzer--juste::before {
+  content: ''; position: absolute; inset: -14% -10% -4%; z-index: -1; border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(255, 228, 160, .6), rgba(255, 210, 120, .2) 60%, transparent);
+  will-change: opacity; animation: bz-halo .6s ease-in-out infinite alternate;
+}
+@keyframes bz-halo { from { opacity: .4; } to { opacity: .85; } }
+.bz-page .bz-buzzer--eteint .bz-dome img { filter: saturate(.55) brightness(.95); }
+.bz-page .bz-plus {
+  position: absolute; left: 50%; top: -12%; translate: -50% 0; pointer-events: none;
+  font-family: var(--font-display); font-size: 26px; font-weight: 900; color: #FFD25A;
+  -webkit-text-stroke: 5px #5E3708; paint-order: stroke fill; /* lisible sur le corps clair de Réviz */
+  text-shadow: 0 3px 0 #5E3708, 0 6px 12px rgba(20, 8, 30, .4);
+  animation: bz-plus .9s cubic-bezier(.2, .8, .4, 1) forwards;
+}
+@keyframes bz-plus { from { transform: translateY(14px) scale(.6); opacity: 0; } 25% { transform: translateY(-4px) scale(1); opacity: 1; } 75% { opacity: 1; } to { transform: translateY(-30px); opacity: 0; } }
+
+/* Annonce du tour, dans la bulle avant que le chrono parte. */
+.bz-page .bz-annonce {
+  width: min(310px, 88%); padding: 16px 16px 17px; border: 0; border-radius: 22px;
+  background: #FFF6E8; color: #2A2140; cursor: pointer;
+  display: flex; flex-direction: column; gap: 4px; align-items: center;
+  box-shadow: 0 6px 0 #D9B26B, 0 14px 26px rgba(10, 5, 25, .45);
+  animation: jx-pop .35s cubic-bezier(.2, 1.4, .4, 1) both;
+}
+.bz-page .bz-annonce-titre { font-family: var(--font-display); font-size: 27px; font-weight: 900; letter-spacing: -.02em; }
+.bz-page .bz-annonce-sous { font-size: 13px; font-weight: 700; opacity: .7; }
+
+/* Ordinateur, plein écran : la scène prend toute la largeur. Réviz au centre (la moitié de la
+ * hauteur), sa bulle à sa droite, pointe vers lui ; le pupitre long devant lui, ses deux buzzers
+ * bien écartés. Tailles en hauteur d'écran (cqh) : la scène garde ses proportions de 720 à 1200 px. */
+.jx-page--large.bz-page .bz-scene { width: 100%; max-width: none; padding-left: 32px; padding-right: 32px; }
+.jx-page--large.bz-page .mg-hud { max-width: 1100px; }
+.jx-page--large.bz-page .bz-titre h1 { font-size: clamp(36px, 4.6cqh, 56px); }
+.jx-page--large.bz-page .bz-bulle-zone {
+  position: absolute; top: 34cqh; left: calc(50% + 18cqh); width: min(56cqh, calc(50% - 18cqh - 40px)); height: auto;
+  justify-content: flex-start; align-items: center; margin: 0;
+}
+.jx-page--large.bz-page .bz-bulle-cadre { width: max-content; max-width: 100%; }
+.jx-page--large.bz-page .bz-bulle .rv-bulle-txt { font-size: clamp(26px, 3.4cqh, 40px); padding: 18px 26px 20px; border-radius: 28px; }
+.jx-page--large.bz-page .bz-annonce { width: min(380px, 100%); }
+.jx-page--large.bz-page .bz-reviz { margin-top: auto; }
+/* Les réactions de Réviz passent à sa gauche : sa droite est à la bulle. */
+.jx-page--large.bz-page .bz-reaction { left: -4%; right: auto; top: 30%; rotate: -6deg; font-size: 26px; }
+/* Le pupitre long : seul son dessus se voit (galon avant compris, 66 % du haut de l'image), la
+   façade passe sous le bord de l'écran. Image 1200 × 459 : à 128cqh de large, il fait 49cqh de
+   haut, dont 32,3 visibles. Il recouvre le bas de Réviz (54cqh) sur 21,6cqh. Les buzzers
+   tiennent entièrement dans la profondeur du dessus (la feutrine va de 8 à 57 % de l'image). */
+.jx-page--large.bz-page .bz-pupitre { width: 128cqh; max-width: none; margin: -21.6cqh 0 -18.8cqh; }
+.jx-page--large.bz-page .bz-buzzers { left: 19%; right: 19%; bottom: 45%; }
+.jx-page--large.bz-page .bz-buzzer { width: 29%; }
+.jx-page--large.bz-page .bz-libelle { font-size: 4.7cqh; }
+
+/* iPhone 12 ou SE dans Safari (barres affichées) : titre et bulle plus serrés. */
+@media (max-width: 430px) and (max-height: 760px) {
+  .bz-page .bz-titre h1 { font-size: 25px; }
+  .bz-page .bz-bulle-zone { height: 92px; }
+  .bz-page .bz-bulle .rv-bulle-txt { font-size: 20px; padding: 10px 16px 11px; }
+}
+
+/* iPhone SE (moins de 600 px de haut) : un pupitre moins large, qui descend un peu sous l'écran,
+   pour que Réviz garde son nœud papillon visible. */
+@media (max-width: 430px) and (max-height: 600px) {
+  .bz-page .bz-pupitre { width: 100%; margin: -84px 0 -78px; }
+  .bz-page .bz-bulle-zone { height: 84px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bz-page .bz-ampoule, .bz-page .bz-buzzer--juste::before { animation: none; }
+  .bz-page .bz-tampon, .bz-page .bz-reaction, .bz-page .bz-plus, .bz-page .bz-flash { animation-duration: .01s; }
+}

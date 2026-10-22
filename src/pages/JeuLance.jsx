@@ -28,13 +28,11 @@ const N_PANIERS = 2;
 const PANIERS = [...Array(N_PANIERS).keys()];
 
 /** Partie rapide de Réviz lance : 3 thèmes faciles au hasard, un par tour. */
-export function partieLance() {
-  const themes = themesDePartie(TOURS_LANCE.length).map(t => (t.lancer ? t : THEMES_JEUX[0]));
-  return TOURS_LANCE.map((t, i) => {
-    const tour = tourDeLancer(themes[i], N_QUESTIONS, N_PANIERS);
-    return { ...t, type: 'lance', titre: tour.titre, aide: tour.aide, questions: tour.questions, apercu: 0 };
-  });
+export function mancheLance(theme, niveau) {
+  const t = TOURS_LANCE[niveau], tour = tourDeLancer(theme.lancer ? theme : THEMES_JEUX[0], N_QUESTIONS, N_PANIERS);
+  return { ...t, type: 'lance', niveau, titre: tour.titre, aide: tour.aide, questions: tour.questions, apercu: 0 };
 }
+export const partieLance = () => themesDePartie(TOURS_LANCE.length).map((theme, i) => mancheLance(theme, i));
 
 // Le panier (panier.webp, 560 × 565) : centre du cercle et demi-largeur, en fractions de l'image ;
 // le cercle est coupé en deux à sa mi-hauteur (COUPE) : la moitié du fond passe derrière la boule,
