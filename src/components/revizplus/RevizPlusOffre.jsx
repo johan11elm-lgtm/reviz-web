@@ -29,7 +29,7 @@ const Cadenas = () => (
 );
 
 /** Feuille (téléphone) ou fenêtre (ordinateur), Réviz qui dépasse en haut à droite. */
-function Fenetre({ label, pose, onClose, children }) {
+export function Fenetre({ label, pose, onClose, children }) {
   const isDesktop = useIsDesktop();
   const ref = useModalA11y(onClose, true);
   return createPortal(
@@ -124,8 +124,11 @@ const LIMITES = {
   },
 };
 
-/** Limite atteinte (scan de la semaine ou questions du jour) ; le programme reste accessible. */
-export function LimiteAtteinte({ type = 'scan', limite, onClose }) {
+/**
+ * Limite atteinte (scan de la semaine ou questions du jour) ; le programme reste accessible.
+ * abonne : l'élève a déjà Réviz+ (ou l'a offert), on ne lui propose pas de l'acheter.
+ */
+export function LimiteAtteinte({ type = 'scan', limite, abonne = false, offertJusquau, onClose }) {
   const navigate = useNavigate();
   const [offre, setOffre] = useState(false);
   const l = LIMITES[type];
@@ -140,13 +143,16 @@ export function LimiteAtteinte({ type = 'scan', limite, onClose }) {
       </div>
       <div className="rpo-carte">
         <p>{l.texte.replace(/\b(5|10)\b/, String(n))}</p>
-        <div className="rpo-points-ligne">
-          <span className={`rpo-points rpo-points--${type}`} aria-hidden="true">{Array.from({ length: n }, (_, i) => <i key={i} />)}</span>
-          <b>{n} sur {n}</b>
-        </div>
+        {n <= 10 ? (
+          <div className="rpo-points-ligne">
+            <span className={`rpo-points rpo-points--${type}`} aria-hidden="true">{Array.from({ length: n }, (_, i) => <i key={i} />)}</span>
+            <b>{n} sur {n}</b>
+          </div>
+        ) : <b className="rpo-points-total">{n} sur {n}</b>}
+        {abonne && offertJusquau && <p className="rpo-carte-note">Réviz+ t’est offert jusqu’au {offertJusquau} : c’est déjà la limite la plus haute.</p>}
       </div>
-      <button type="button" className="rpo-btn" onClick={() => setOffre(true)}>{l.action}</button>
-      <button type="button" className="rpo-btn rpo-btn--second" onClick={() => { onClose?.(); navigate('/programme'); }}>Réviser mon programme en attendant</button>
+      {!abonne && <button type="button" className="rpo-btn" onClick={() => setOffre(true)}>{l.action}</button>}
+      <button type="button" className={`rpo-btn${abonne ? '' : ' rpo-btn--second'}`} onClick={() => { onClose?.(); navigate('/programme'); }}>{abonne ? 'Réviser mon programme' : 'Réviser mon programme en attendant'}</button>
       <button type="button" className="rpo-lien" onClick={onClose}>Plus tard</button>
     </Fenetre>
   );

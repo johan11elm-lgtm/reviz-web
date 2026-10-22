@@ -23,7 +23,7 @@ export function FormatFeedback({ format, question = 'Ce contenu t\'a aidé ?' })
   if (done === 'thanks') {
     return (
       <div className="format-feedback format-feedback--thanks" role="status">
-        Merci pour ton retour !
+        Merci pour ton retour.
       </div>
     );
   }
@@ -37,7 +37,7 @@ export function FormatFeedback({ format, question = 'Ce contenu t\'a aidé ?' })
           <button
             key={o.rating}
             type="button"
-            className="format-feedback-btn"
+            className={`format-feedback-btn format-feedback-btn--${o.rating}`}
             aria-label={o.label}
             title={o.label}
             onClick={() => { sendFormatFeedback(format, o.rating); setDone('thanks'); }}

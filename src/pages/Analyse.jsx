@@ -10,8 +10,8 @@ import { countDueCards, getCardState } from '../services/srsService';
 import { loadRevisions, quizScore } from '../services/revisionService';
 import { useIsDesktop } from '../hooks/useMediaQuery';
 import { saveLesson } from '../services/historyService';
-import { PremiumModal } from '../components/PremiumModal';
 import { LimiteAtteinte } from '../components/revizplus/RevizPlusOffre';
+import { DERNIER_JOUR_OFFERT } from '../../api/_lancement.js';
 import { MissingLessonState } from '../components/MissingLessonState';
 import { Pantin } from '../components/Pantin';
 import { BulleReviz } from '../components/reviz/BulleReviz';
@@ -114,7 +114,7 @@ export default function Analyse() {
   const [noLesson, setNoLesson]       = useState(false);
   const navigate   = useNavigate();
   const isDesktop  = useIsDesktop();
-  const { getUserLevel, isGuest, hasRevizPlus } = useAuth();
+  const { getUserLevel, isGuest, hasRevizPlus, revizPlusOffert } = useAuth();
   const userLevel  = getUserLevel();
   const calledRef  = useRef(false);
 
@@ -559,8 +559,8 @@ export default function Analyse() {
       </div>
 
       <BottomNav />
-      {/* Réviz+ (ou offert) a déjà la limite la plus haute : l'ancienne fenêtre le dit ; sinon, la limite et Réviz+. */}
-      {showPremium && (hasRevizPlus ? <PremiumModal onClose={() => navigate('/scan')} /> : <LimiteAtteinte type="scan" onClose={() => navigate('/scan')} />)}
+      {/* Réviz+ (ou offert) a déjà la limite la plus haute : la fenêtre ne le propose pas. */}
+      {showPremium && <LimiteAtteinte type="scan" abonne={hasRevizPlus} offertJusquau={revizPlusOffert ? DERNIER_JOUR_OFFERT : null} onClose={() => navigate('/scan')} />}
     </div>
   );
 }

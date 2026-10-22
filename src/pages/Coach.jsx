@@ -233,7 +233,7 @@ export default function Coach() {
 
   const dictee = useDictee(t => setSaisie(s => (s ? `${s} ${t}` : t)));
   if (isGuest) {
-    return <GuestWall pose="coach" action="parler à Réviz IA" text="Réviz IA demande un compte. C'est gratuit, et tout ce que tu as révisé en mode essai te suit." />;
+    return <GuestWall action={"parler à Réviz\u00a0IA"} text="Réviz IA demande un compte. C'est gratuit, et tout ce que tu as révisé en mode essai te suit." />;
   }
 
   const limite = quotaOut || (!hasRevizPlus && quota?.remaining === 0);

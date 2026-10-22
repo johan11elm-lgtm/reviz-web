@@ -1,5 +1,4 @@
-/* Popup « Nouveau : la Battle » (handoff Claude Design du 22/10). Les classes battle-annonce-*
- * de BattleAnnonce.css restent pour la popup Réviz+ (RevizPlusAnnonce). */
+/* Popup « Nouveau : la Battle » (handoff Claude Design du 22/10). */
 .ban-voile { position: fixed; inset: 0; z-index: 400; display: flex; align-items: flex-end; justify-content: center; background: rgba(27,26,35,.45); animation: banFondu .2s both; }
 @keyframes banFondu { from { opacity: 0; } }
 .ban-feuille {

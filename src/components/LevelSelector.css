@@ -1,140 +1,27 @@
-/* -----------------------------------------------------
-   Réviz — LevelSelector
-   ----------------------------------------------------- */
+/* LevelSelector : cycle, classe et spécialités (comptes lycée encore ouverts ; le collège passe
+ * par le choix de classe des Réglages et de Moi). Mêmes tuiles : blanches à tranche, orange choisie. */
+.level-selector { display: flex; flex-direction: column; gap: 18px; }
+.level-section-label { margin-bottom: 8px; font-size: 14px; font-weight: 700; color: #1B1A23; }
+.level-section-hint { font-weight: 500; font-size: 13px; color: #6E675B; }
 
-.level-selector {
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
+.level-cycle-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.level-cycle-btn, .level-classe-btn, .level-chip {
+  border: 2px solid #EADBCB; background: #fff; box-shadow: 0 4px 0 #EADBCB; color: #1B1A23;
+  font-family: 'Geist', sans-serif; cursor: pointer; transition: transform .08s, box-shadow .08s;
 }
+.level-cycle-btn:active, .level-classe-btn:active, .level-chip:active { transform: translateY(3px); box-shadow: 0 1px 0 #EADBCB; }
+.level-cycle-btn:focus-visible, .level-classe-btn:focus-visible, .level-chip:focus-visible { outline: 3px solid #1B1A23; outline-offset: 3px; }
+.level-cycle-btn.active, .level-classe-btn.active, .level-chip.active { border-color: #C25407; background: #C25407; box-shadow: 0 4px 0 #8F3E05; color: #fff; }
 
-.level-section-label {
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--text-secondary);
-  margin-bottom: 8px;
-}
+.level-cycle-btn { display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 12px 8px; border-radius: 20px; }
+.level-cycle-emoji { display: flex; width: 44px; height: 44px; align-items: center; justify-content: center; border-radius: 50%; background: #FFE6D2; overflow: hidden; }
+.level-cycle-label { font-size: 14px; font-weight: 700; }
+.level-cycle-desc { font-size: 12px; font-weight: 500; color: #6E675B; text-align: center; }
+.level-cycle-btn.active .level-cycle-desc { color: rgba(255,255,255,.85); }
 
-.level-section-hint {
-  font-weight: 400;
-  color: var(--text-muted);
-  font-size: 12px;
-}
+.level-classe-grid, .level-chips-grid { display: flex; flex-wrap: wrap; gap: 10px; }
+.level-classe-btn { min-height: 48px; padding: 0 18px; border-radius: 999px; font-family: var(--font-display); font-size: 17px; font-weight: 800; }
+.level-chip { min-height: 40px; padding: 0 14px; border-radius: 999px; font-size: 14px; font-weight: 600; }
 
-/* --- Cycle (3 grosses cartes) --- */
-.level-cycle-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 8px;
-}
-
-.level-cycle-btn {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4px;
-  padding: 14px 8px;
-  background: var(--bg-card);
-  border: 1.5px solid var(--border);
-  border-radius: 12px;
-  cursor: pointer;
-  transition: all .15s ease;
-}
-
-.level-cycle-btn:hover {
-  border-color: var(--border-hover);
-}
-
-.level-cycle-btn.active {
-  border-color: var(--accent-orange);
-  background: var(--bg-icon-orange);
-}
-
-.level-cycle-emoji {
-  font-size: 22px;
-  line-height: 1;
-}
-
-.level-cycle-label {
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--text-primary);
-}
-
-.level-cycle-desc {
-  font-size: 12px;
-  color: var(--text-muted);
-  text-align: center;
-}
-
-/* --- Classes (boutons) --- */
-.level-classe-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-}
-
-.level-classe-btn {
-  padding: 8px 14px;
-  background: var(--bg-card);
-  border: 1.5px solid var(--border);
-  border-radius: 10px;
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--text-primary);
-  cursor: pointer;
-  transition: all .15s ease;
-}
-
-.level-classe-btn:hover {
-  border-color: var(--border-hover);
-}
-
-.level-classe-btn.active {
-  background: var(--bg-cta);
-  border-color: var(--bg-cta);
-  color: var(--text-cta);
-}
-
-/* --- Chips (spécialités / filières) --- */
-.level-chips-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-}
-
-.level-chip {
-  padding: 7px 12px;
-  background: var(--bg-subtle);
-  border: 1.5px solid transparent;
-  border-radius: 999px;
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--text-primary);
-  cursor: pointer;
-  transition: all .15s ease;
-}
-
-.level-chip:hover {
-  background: var(--bg-hover);
-  border-color: var(--border);
-}
-
-.level-chip.active {
-  background: var(--bg-icon-orange);
-  border-color: var(--accent-orange);
-  color: #C04F00;
-}
-
-/* --- Variante compacte (drawer / sheets) --- */
-.level-selector--compact .level-cycle-btn {
-  padding: 10px 6px;
-}
-
-.level-selector--compact .level-cycle-emoji {
-  font-size: 18px;
-}
-
-.level-selector--compact .level-cycle-label {
-  font-size: 12px;
-}
+.level-selector--compact .level-cycle-btn { padding: 10px 6px; }
+.level-selector--compact .level-cycle-emoji { width: 36px; height: 36px; }

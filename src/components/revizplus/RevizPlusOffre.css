@@ -84,6 +84,8 @@
 .rpo-carte p { margin: 0 0 14px; padding-bottom: 14px; border-bottom: 1.5px dashed #EADBCB; font-size: 16px; font-weight: 600; line-height: 1.4; }
 .rpo-points-ligne { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
 .rpo-points-ligne b { font-size: 14px; }
+.rpo-points-total { font-size: 14px; }
+.rpo-carte .rpo-carte-note { margin: 14px 0 0; padding: 14px 0 0; border-top: 1.5px dashed #EADBCB; border-bottom: 0; font-size: 14px; font-weight: 500; color: #6E675B; }
 .rpo-points { display: flex; gap: 10px; }
 .rpo-points i { width: 18px; height: 18px; border-radius: 50%; background: #C25407; box-shadow: 0 3px 0 #8F3E05; }
 .rpo-points--ia { gap: 7px; }
