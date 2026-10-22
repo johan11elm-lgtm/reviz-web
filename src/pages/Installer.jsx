@@ -1,54 +1,69 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { Mascot } from '../components/Mascot';
-import { InstallerGuide } from '../components/InstallerApp';
+import { Pantin } from '../components/Pantin';
+import { InstallerGuide, CarteEtat, INTRO_INSTALLER } from '../components/InstallerApp';
+import { CheckIcon } from '../components/Icons';
 import { useInstallation } from '../hooks/useInstallation';
+import { useIsDesktop } from '../hooks/useMediaQuery';
 import { track } from '../services/statsService';
+import '../components/reviz/HerosMatiere.css';
 import './Installer.css';
 
 /**
  * Page publique du tutoriel d'installation (app.revizapp.fr/installer) :
  * le lien à donner depuis la landing, TikTok ou une affiche, tant que
  * Réviz n'est pas sur les stores. Sans Firebase côté client.
+ * Handoff Claude Design du 22/10 : héros menthe à grain, Réviz à droite du titre,
+ * puis le même contenu que la popup (sans « Fermer »).
  */
 export default function Installer() {
   const { plateforme, installee } = useInstallation();
+  const isDesktop = useIsDesktop();
+  const pantin = useRef(null);
   useEffect(() => { track('installer_ouvert', { plateforme }); }, [plateforme]);
 
   return (
-    <div className="app inst-page">
-      <nav className="inst-page-nav" aria-label="Navigation">
-        <Link to="/" className="inst-page-logo" aria-label="Réviz, accueil">
-          <Mascot pose="hello" size={28} priority alt="" aria-hidden="true" />
-          <span>réviz</span>
-        </Link>
-      </nav>
-
-      <div className="inst-page-scroll">
-        <main className="inst-page-main">
-          <div className="rv-page-intro inst-page-intro">
-            <div className="rv-page-intro-text">
-              <h1 className="rv-greeting-title rv-page-intro-title">Installer Réviz</h1>
-              <p className="rv-greeting-sub rv-page-intro-sub">
-                Réviz n'est pas encore sur les stores : elle s'installe depuis ton navigateur,
-                puis s'ouvre en plein écran depuis son icône.
-              </p>
+    <div className={`app app--no-halo app--large inst-page${isDesktop ? ' inst-page--large' : ''}`}>
+      <div className="inst-page-defile">
+        <header className="inst-hero">
+          <div className="inst-hero-fond" aria-hidden="true">
+            <span className="inst-hero-bulle" />
+            <span className="inst-hero-point" />
+            <span className="ch-grain" />
+          </div>
+          <Link to="/" className="inst-page-logo" aria-label="Réviz, accueil">Réviz</Link>
+          <div className="inst-hero-corps">
+            <h1 className="inst-page-titre">Installer Réviz</h1>
+            <p className="inst-page-sous">{INTRO_INSTALLER}</p>
+            <div className="inst-page-reviz">
+              <Pantin
+                ref={pantin}
+                size={isDesktop ? 340 : 150}
+                expression="content"
+                entree={installee ? 'saut' : 'coucou'}
+                repli={null}
+                label="Réviz, ta mascotte"
+                onClick={() => pantin.current?.geste('coucou')}
+              />
             </div>
-            <Mascot pose="pointing" size={140} priority className="rv-page-intro-mascot" alt="" aria-hidden="true" />
           </div>
+        </header>
 
-          <section className="rv-card inst-page-carte" aria-label="Étapes d'installation">
-            {installee
-              ? <p className="inst-page-deja">Réviz est déjà installée sur cet appareil : tu l'utilises en ce moment.</p>
-              : <InstallerGuide />}
+        <main className="inst-page-main">
+          <section className="inst-page-carte" aria-label={installee ? 'Réviz est installée' : "Étapes d'installation"}>
+            {installee ? (
+              <div className="inst-page-deja">
+                <CarteEtat teinte="menthe" rond={<CheckIcon />}>
+                  <p className="inst-etat-phrase">
+                    Réviz est déjà installée sur cet appareil : <span className="inst-etat-vert">tu l'utilises en ce moment.</span>
+                  </p>
+                </CarteEtat>
+                <Link to="/" className="inst-btn">Ouvrir Réviz</Link>
+              </div>
+            ) : (
+              <InstallerGuide />
+            )}
           </section>
-
-          <div className="inst-page-actions">
-            <Link to="/" className="rv-btn-cta rv-btn-cta--full">
-              <span>Ouvrir Réviz</span>
-              <span className="rv-btn-cta-arrow" aria-hidden="true">→</span>
-            </Link>
-          </div>
         </main>
       </div>
     </div>

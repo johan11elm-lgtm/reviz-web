@@ -1,12 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useModalA11y } from '../hooks/useModalA11y';
 import { useInstallation } from '../hooks/useInstallation';
 import { installerDirectement } from '../utils/installation';
 import { track } from '../services/statsService';
 import { Mascot } from './Mascot';
 import {
-  ShareIcon, PlusSquareIcon, DotsVerticalIcon, DotsIcon, InstallIcon,
-  PhoneIcon, MonitorIcon, ExternalIcon, CheckIcon,
+  ShareIcon, PlusSquareIcon, DotsVerticalIcon, DotsIcon, InstallIcon, CheckIcon, XIcon,
 } from './Icons';
 import './InstallerApp.css';
 
@@ -14,9 +13,9 @@ import './InstallerApp.css';
 const ADRESSE = 'app.revizapp.fr';
 
 const ONGLETS = [
-  { id: 'ios', label: 'iPhone, iPad', Icone: PhoneIcon },
-  { id: 'android', label: 'Android', Icone: PhoneIcon },
-  { id: 'ordinateur', label: 'Ordinateur', Icone: MonitorIcon },
+  { id: 'ios', label: 'iPhone, iPad' },
+  { id: 'android', label: 'Android' },
+  { id: 'ordinateur', label: 'Ordinateur' },
 ];
 
 /** Bouton du navigateur à toucher, dessiné comme à l'écran. */
@@ -51,6 +50,16 @@ const NOTES = {
   ordinateur: 'Sur Mac avec Safari : menu Fichier, puis « Ajouter au Dock ».',
 };
 
+/** Carte d'état (menthe : installée ; pêche : navigateur intégré) avec son rond à tranche. */
+export function CarteEtat({ teinte, rond, role, children, className = '' }) {
+  return (
+    <div className={`inst-etat inst-etat--${teinte} ${className}`} role={role}>
+      <span className="inst-etat-rond" aria-hidden="true">{rond}</span>
+      <div className="inst-etat-texte">{children}</div>
+    </div>
+  );
+}
+
 /**
  * Tutoriel d'installation (popup et page /installer) : l'onglet de
  * l'appareil de l'élève est ouvert d'office, et Chrome / Edge permettent
@@ -67,21 +76,37 @@ export function InstallerGuide() {
 
   // Le bouton direct n'a de sens que sur l'appareil qu'on est en train d'utiliser.
   const directIci = directe && onglet === plateforme && onglet !== 'ios';
+  // Navigateur intégré d'une autre app (TikTok…) : rien à installer d'ici, on l'explique seul.
+  const bloque = Boolean(integre) && plateforme !== 'ordinateur';
+
+  if (installee) {
+    return (
+      <div className="inst-guide">
+        <CarteEtat teinte="menthe" rond={<CheckIcon />} role="status">
+          <b className="inst-etat-titre">Réviz est installée.</b>
+          <span className="inst-etat-vert">Retrouve-la avec tes applis.</span>
+        </CarteEtat>
+      </div>
+    );
+  }
+
+  if (bloque) {
+    return (
+      <div className="inst-guide">
+        <CarteEtat teinte="peche" rond={<DotsIcon />} role="note">
+          <p className="inst-etat-phrase">
+            <b>Tu es dans le navigateur de {integre} : il ne peut pas installer d'app.</b>{' '}
+            <span>Touche <Touche Icone={DotsIcon} /> puis « Ouvrir dans le navigateur », et reviens ici.</span>
+          </p>
+        </CarteEtat>
+      </div>
+    );
+  }
 
   return (
     <div className="inst-guide">
-      {integre && plateforme !== 'ordinateur' && (
-        <p className="inst-alerte" role="note">
-          <ExternalIcon />
-          <span>
-            Tu es dans le navigateur de {integre} : il ne peut pas installer d'app.
-            Touche <Touche Icone={DotsIcon} /> puis « Ouvrir dans le navigateur », et reviens ici.
-          </span>
-        </p>
-      )}
-
       <div className="inst-onglets" role="tablist" aria-label="Ton appareil">
-        {ONGLETS.map(({ id, label, Icone }) => (
+        {ONGLETS.map(({ id, label }) => (
           <button
             key={id}
             type="button"
@@ -92,20 +117,15 @@ export function InstallerGuide() {
             className={`inst-onglet${onglet === id ? ' inst-onglet--actif' : ''}`}
             onClick={() => setOnglet(id)}
           >
-            <Icone /> {label}
+            {label}
           </button>
         ))}
       </div>
 
-      {installee ? (
-        <p className="inst-fait" role="status"><CheckIcon /> Réviz est installée. Retrouve-la avec tes applis.</p>
-      ) : directIci && (
+      {directIci && (
         <div className="inst-direct">
-          <button type="button" className="rv-btn-cta rv-btn-cta--full rv-btn-cta--center" onClick={installer}>
-            <InstallIcon />
-            <span>Installer Réviz</span>
-          </button>
-          <p className="inst-direct-ou">ou à la main :</p>
+          <button type="button" className="inst-btn" onClick={installer}>Installer Réviz</button>
+          <p className="inst-ou"><span>ou</span></p>
         </div>
       )}
 
@@ -125,31 +145,73 @@ export function InstallerGuide() {
   );
 }
 
-/** Popup « Installer Réviz », même gabarit que l'annonce de la Battle. */
+/** Texte d'introduction, commun à la popup et à la page /installer. */
+export const INTRO_INSTALLER = "Réviz n'est pas encore sur les stores : elle s'installe depuis ton navigateur. Ensuite, elle s'ouvre en plein écran depuis son icône.";
+
+/**
+ * Popup « Installer Réviz » : feuille du bas sur téléphone (glissable vers le bas),
+ * fenêtre centrée de 540 px sur ordinateur. Fermeture : voile, Échap, croix ou « Fermer ».
+ */
 export function InstallerModal({ onClose }) {
   const ref = useModalA11y(onClose);
   const { plateforme } = useInstallation();
   useEffect(() => { track('installer_ouvert', { plateforme }); }, [plateforme]);
 
+  // Glisser la poignée vers le bas referme la feuille (au-delà de 90 px).
+  const depart = useRef(null);
+  const [decale, setDecale] = useState(0);
+  const poser = e => {
+    depart.current = e.clientY;
+    e.currentTarget.setPointerCapture?.(e.pointerId);
+  };
+  const glisser = e => {
+    if (depart.current === null) return;
+    setDecale(Math.max(0, e.clientY - depart.current));
+  };
+  const lacher = () => {
+    if (depart.current === null) return;
+    depart.current = null;
+    if (decale > 90) onClose();
+    else setDecale(0);
+  };
+
   return (
     <div className="inst-fond" onClick={onClose}>
       <div
-        className="inst-carte"
+        className={`inst-carte${decale ? ' is-glisse' : ''}`}
         ref={ref}
         role="dialog"
         aria-modal="true"
         aria-labelledby="inst-titre"
+        style={decale ? { transform: `translateY(${decale}px)` } : undefined}
         onClick={e => e.stopPropagation()}
       >
-        <Mascot pose="pointing" size={96} priority alt="" aria-hidden="true" />
-        <h2 className="inst-titre" id="inst-titre">Installer Réviz</h2>
-        <p className="inst-sous">
-          Réviz n'est pas encore sur les stores : elle s'installe depuis ton navigateur.
-          Ensuite, elle s'ouvre en plein écran depuis son icône.
-        </p>
-        <InstallerGuide />
-        <button type="button" className="rv-btn-cta rv-btn-cta--full rv-btn-cta--ghost rv-btn-cta--center inst-fermer" onClick={onClose}>
-          Fermer
+        <div
+          className="inst-poignee"
+          aria-hidden="true"
+          onPointerDown={poser}
+          onPointerMove={glisser}
+          onPointerUp={lacher}
+          onPointerCancel={lacher}
+        ><span /></div>
+        <div className="inst-tete">
+          <h2 className="inst-titre" id="inst-titre">Installer Réviz</h2>
+          <span className="inst-tete-reviz">
+            <Mascot pose="scan" size={104} priority alt="" aria-hidden="true" />
+          </span>
+        </div>
+        <p className="inst-sous">{INTRO_INSTALLER}</p>
+        <div className="inst-boite">
+          <InstallerGuide />
+        </div>
+        <div className="inst-pied">
+          <button type="button" className="inst-btn inst-btn--blanc inst-fermer" onClick={onClose}>
+            Fermer
+          </button>
+        </div>
+        {/* Croix (ordinateur) : en dernier dans le DOM, le focus d'ouverture va aux onglets. */}
+        <button type="button" className="inst-croix" onClick={onClose} aria-label="Fermer la fenêtre">
+          <XIcon />
         </button>
       </div>
     </div>

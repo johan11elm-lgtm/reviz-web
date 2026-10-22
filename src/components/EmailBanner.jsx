@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { auth } from '../services/firebaseConfig';
-import { Mascot } from './Mascot';
+import { Bandeau } from './Bandeau';
 import { mesurer } from '../services/mesure';
-import './guest.css';
 
 /**
  * Rappel d'accueil pour un compte email pas encore confirmé : l'élève entre
@@ -51,18 +50,7 @@ export function EmailBanner({ className = '' }) {
   }
 
   return (
-    <div className={`guest-banner email-banner ${className}`.trim()} role="status">
-      <Mascot pose="pointing" size={30} alt="" aria-hidden="true" className="guest-banner-mascot" />
-      <span className="guest-banner-text">
-        <b>Confirme ton email</b> · lien envoyé<span className="guest-banner-detail"> (regarde aussi dans les spams)</span>
-      </span>
-      {etat === 'envoye' ? (
-        <span className="guest-banner-link">Renvoyé</span>
-      ) : (
-        <button type="button" className="guest-banner-link guest-banner-btn" onClick={renvoyer} disabled={etat === 'envoi'}>
-          {etat === 'envoi' ? 'Envoi…' : 'Renvoyer'}
-        </button>
-      )}
-    </div>
+    <Bandeau teinte="peche" titre="Confirme ton e-mail" suite="lien envoyé (regarde aussi dans les spams)"
+      action={{ onClick: renvoyer, label: 'Renvoyer', etat }} className={`email-banner ${className}`.trim()} />
   );
 }

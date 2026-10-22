@@ -425,8 +425,8 @@ export default function Home() {
   );
 
   const rappels = (
-    <div className="home-rappels hm-rappels">
-      {!isDesktop && <GuestBanner />}
+    <div className="hm-rappels">
+      <GuestBanner />
       <ConsentBanner />
       <EmailBanner />
     </div>
@@ -527,6 +527,8 @@ export default function Home() {
                 label="Réviz, ta mascotte"
               />
             </div>
+            {/* Bandeau (essai, e-mail, accord parental) : tout en haut, dans l'aplat du héros. */}
+            {rappels}
             <div className="hm-hero-haut">
               <div className="hm-hero-titres">
                 <span className="hm-date">{dateTxt}</span>
@@ -542,7 +544,6 @@ export default function Home() {
             {parle && <CarteFonction key={tour} carte={sugg.carte} entree sortie={sortie} onClick={sugg.action} />}
           </div>
           <div className="hm-pad hm-pad--chemin">{chemin}</div>
-          {rappels}
           {montrerEssai && <div className="hm-pad"><ThemeEssai onClose={() => setEssaiTheme(false)} /></div>}
           <div className="hm-pad hm-pad--droite">{carteMatieres}</div>
           <div className="hm-pad hm-pad--bas">{carteBattle}</div>

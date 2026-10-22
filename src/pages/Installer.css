@@ -1,54 +1,160 @@
 /* ─── Page publique du tutoriel d'installation (/installer) ──────
- * Même langage que /profs : logo en haut, intro avec mascotte, une carte.
- * Sur ordinateur, la page reste centrée (pas de barre latérale). */
+ * Handoff Claude Design du 22/10 : héros menthe à grain (bas en arc, bulle en tranche),
+ * logotype, titre avec Réviz à droite, puis une carte blanche qui chevauche le héros.
+ * Sur ordinateur : colonne de 640 px dans un conteneur de 1040 px, Réviz à droite. */
 
-.inst-page-nav {
-  display: flex;
-  align-items: center;
-  padding: 16px 20px;
-  flex-shrink: 0;
+.inst-page {
+  background: #F8EFE7;
+  color: #1B1A23;
+}
+.inst-page-defile {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: calc(32px + env(safe-area-inset-bottom, 0px));
+  scrollbar-width: none;
+}
+.inst-page-defile::-webkit-scrollbar { display: none; }
+
+/* ── Héros ── */
+.inst-hero {
+  position: relative;
+  margin-top: calc(-1 * env(safe-area-inset-top, 0px));
+  padding: calc(env(safe-area-inset-top, 0px) + 28px) 24px 96px;
+}
+.inst-hero-fond {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: 0 0 50% 50% / 0 0 44px 44px;
+  background: #DCF5E6;
+  pointer-events: none;
+}
+.inst-hero-bulle {
+  position: absolute;
+  top: -60px;
+  right: -70px;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  background: #A8E3C2;
+  opacity: .8;
+}
+.inst-hero-point {
+  position: absolute;
+  top: calc(env(safe-area-inset-top, 0px) + 96px);
+  left: 28px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #C9C2F2;
 }
 .inst-page-logo {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 18px;
+  position: relative;
+  display: inline-block;
+  font-family: var(--font-display);
+  font-size: 22px;
   font-weight: 800;
-  letter-spacing: -0.5px;
-  color: var(--text-primary);
+  line-height: 1;
+  letter-spacing: -.03em;
+  color: #1B1A23;
   text-decoration: none;
 }
+.inst-page-logo:focus-visible { outline: 3px solid #1B1A23; outline-offset: 4px; border-radius: 6px; }
 
-.inst-page-scroll {
-  flex: 1;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
+.inst-hero-corps {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas:
+    "titre reviz"
+    "sous  sous";
+  align-items: end;
+  margin-top: 30px;
 }
-.inst-page-main {
-  display: flex;
-  flex-direction: column;
-  gap: var(--gap-cards);
-  padding-bottom: calc(40px + env(safe-area-inset-bottom, 0px));
+.inst-page-titre {
+  grid-area: titre;
+  max-width: 200px;
+  margin: 0;
+  padding-bottom: 6px;
+  font-family: var(--font-display);
+  font-size: 40px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -.04em;
+  color: #1B1A23;
 }
-.inst-page-intro { padding-top: 6px; }
+.inst-page-reviz { grid-area: reviz; display: flex; margin: 0 -16px -10px 0; }
+.inst-page-sous {
+  grid-area: sous;
+  margin: 16px 0 0;
+  font-size: 15.5px;
+  font-weight: 500;
+  line-height: 1.45;
+  color: #3E4A42;
+  text-wrap: pretty;
+}
 
+/* ── Carte du tutoriel ── */
+.inst-page-main { position: relative; z-index: 1; }
 .inst-page-carte {
-  margin: 0 var(--page-gutter);
-  padding: 16px;
+  margin: -64px 16px 0;
+  padding: 18px;
+  border-radius: 26px;
+  background: #fff;
+  box-shadow: 0 12px 30px rgba(160, 80, 20, .12);
 }
-.inst-page-deja { margin: 0; font-size: 14px; line-height: 1.45; color: var(--text-secondary); }
+.inst-page-deja { display: flex; flex-direction: column; gap: 18px; padding: 18px; margin: -6px; border-radius: 22px; background: #DCF5E6; }
+.inst-page-deja .inst-etat { padding: 0; }
+.inst-page-deja .inst-etat-phrase { font-size: 15.5px; font-weight: 700; line-height: 1.4; }
+.inst-page-deja .inst-etat-vert { font-size: inherit; font-weight: 700; }
 
-.inst-page-actions { padding: 0 var(--page-gutter); }
-
+/* ── Ordinateur ── */
 @media (min-width: 1024px) {
-  html:not(.native) .inst-page {
-    margin-left: 0;
-    padding-left: max(24px, calc((100vw - 640px) / 2));
-    padding-right: max(24px, calc((100vw - 640px) / 2));
+  html:not(.native) .inst-page-defile { padding-bottom: 64px; }
+  html:not(.native) .inst-hero {
+    min-height: 420px;
+    box-sizing: border-box;
+    margin-top: 0;
+    padding: 36px 56px 0;
   }
-  html:not(.native) .inst-page-nav { padding: 22px var(--page-gutter) 6px; }
-  html:not(.native) .inst-page-main { padding-top: 28px; gap: 24px; }
-  html:not(.native) .inst-page-intro .rv-greeting-title { font-size: 44px; letter-spacing: -1.8px; }
-  html:not(.native) .inst-page-intro .rv-greeting-sub { font-size: 16px; max-width: 40ch; }
-  html:not(.native) .inst-page-carte { padding: 24px; }
+  html:not(.native) .inst-hero-fond { border-radius: 0 0 50% 50% / 0 0 80px 80px; }
+  html:not(.native) .inst-hero-bulle {
+    top: -160px;
+    right: 140px;
+    width: 460px;
+    height: 460px;
+    opacity: .6;
+  }
+  html:not(.native) .inst-hero-point { top: 300px; left: calc(50% + 140px); width: 22px; height: 22px; }
+  html:not(.native) .inst-page-logo { font-size: 26px; }
+  html:not(.native) .inst-hero-corps {
+    grid-template-columns: 640px minmax(0, 1fr);
+    grid-template-areas:
+      "titre reviz"
+      "sous  reviz";
+    align-items: start;
+    column-gap: 40px;
+    max-width: 1040px;
+    margin: 48px auto 0;
+  }
+  html:not(.native) .inst-page-titre { max-width: none; padding: 0; font-size: 56px; }
+  html:not(.native) .inst-page-sous { max-width: 580px; margin-top: 14px; font-size: 18px; }
+  /* Réviz déborde sous le héros sans pousser le texte : boîte de hauteur nulle. */
+  html:not(.native) .inst-page-reviz { height: 0; justify-content: flex-start; margin: -40px 0 0; overflow: visible; }
+  html:not(.native) .inst-page-main { max-width: 1040px; margin: 0 auto; padding: 0 56px; box-sizing: content-box; }
+  html:not(.native) .inst-page-carte {
+    width: 640px;
+    max-width: 100%;
+    box-sizing: border-box;
+    margin: -110px 0 0;
+    padding: 24px;
+    border-radius: 28px;
+  }
+}
+@media (min-width: 1024px) and (max-width: 1200px) {
+  html:not(.native) .inst-hero-corps { grid-template-columns: minmax(0, 560px) minmax(0, 1fr); }
+  html:not(.native) .inst-page-carte { width: 560px; }
 }

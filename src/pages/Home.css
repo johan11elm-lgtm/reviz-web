@@ -121,9 +121,13 @@
   clip: rect(0 0 0 0);
   white-space: nowrap;
 }
-/* ── Rappels (accord parental, email, essai) : une carte fine, masquée vide ── */
-.home-page .hm-rappels { margin: 22px 22px 0; }
+/* ── Bandeau (essai, e-mail, accord parental) : un seul à la fois, en haut du héros ── */
+.home-page .hm-rappels { position: relative; z-index: 3; margin: 12px 16px 0; }
+/* Un bandeau en haut du héros : le héros grandit d'autant, Réviz (calé en bas) descend avec. */
+.home-page .hm-hero:has(.hm-rappels .bd) { height: calc(476px + env(safe-area-inset-top, 0px)); }
+.home-page .hm-hero .hm-rappels + .hm-hero-haut { margin-top: 0; }
 .home-page .hm-rappels:empty { display: none; }
+.home-page .hm-rappels > .bd ~ .bd { display: none; }
 
 /* ── Blocs du bas ── */
 .home-page .hm-pad { padding: 30px 22px 0; }
@@ -422,6 +426,7 @@
 .home-page .hm-point-sugg--la { width: 24px; background: var(--hm-encre); }
 .home-page .hm-point-sugg:focus-visible { outline: 2px solid var(--hm-encre); outline-offset: 3px; }
 .home-page .hm-desk .hm-rappels { max-width: 1328px; margin: 24px auto 0; padding: 0 56px; box-sizing: border-box; width: 100%; }
+.home-page .hm-desk .hm-rappels > .bd { max-width: 680px; }
 
 .home-page .hm-grille {
   display: grid;
