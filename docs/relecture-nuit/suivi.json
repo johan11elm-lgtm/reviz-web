@@ -824,6 +824,11 @@
       "chemin": "4eme/physique-chimie/intensite-du-courant",
       "le": "2026-10-22",
       "corrections": 0
+    },
+    {
+      "chemin": "4eme/physique-chimie/lois-de-l-intensite",
+      "le": "2026-10-22",
+      "corrections": 0
     }
   ]
 }
