@@ -92,6 +92,35 @@ function minutageTexte(texte) {
 // Les effets au-dessus de la tête débordent (overflow visible).
 const VUE = '180 330 2148 2148';
 
+// Accessoires portés sur la tête, en px des calques. Le calque vit dans le corps, juste sous
+// les bras de devant : il suit sauts, écrasements et chute. Sources : assets-src/accessoires/
+// (Réviz généré coiffé, chapeau découpé puis calé sur la largeur de la tête et les sourcils).
+// ombre : celle que l'accessoire jette sur le front (<nom>-ombre.webp, déjà découpée à la tête).
+// Objets tenus (main) : le bras se plie devant le ventre (bras : angles du moteur) et l'objet se
+// glisse sous les doigts de la main relâchée, dans son repère : prise = point tenu (px de la main),
+// ancre = ce point dans l'image de l'objet (fractions). Redressé à chaque image, il reste droit
+// (ou penché de angle degrés, et balancé de ± balance degrés : le drapeau qu'on agite).
+// derriere : une seconde image (<nom>-derriere.webp, même cadre) passe sous le corps (l'arceau du
+// casque : on n'en voit que ce qui dépasse de la tête). enfile : posé sur le visage au lieu de tomber.
+const ACCESSOIRES = {
+  explorateur: { x: 301, y: -38, w: 1919, h: 948, ombre: { x: 358, y: 370, w: 1804, h: 712 } },
+  casque: { x: 53, y: 264, w: 2414, h: 1015, derriere: true },
+  lunettes: { x: 622, y: 809, w: 1297, h: 512, enfile: true },
+  labo: { x: 484, y: 671, w: 1572, h: 704, enfile: true },
+  plante: { main: 'g', bras: { epaule: -20, coude: -30 }, prise: [110, 160], ancre: [0.49, 0.57], w: 512, h: 696 },
+  equerre: { main: 'g', bras: { epaule: -20, coude: -30 }, prise: [104, 150], ancre: [0.09, 0.75], w: 640, h: 634, angle: -12 },
+  carte: { main: 'g', bras: { epaule: -20, coude: -30 }, prise: [104, 150], ancre: [0.1, 0.62], w: 580, h: 415, angle: -6 },
+  ordi: { main: 'g', bras: { epaule: -5, coude: -35 }, prise: [104, 150], ancre: [0.1, 0.6], w: 470, h: 442, angle: -6 },
+  drapeau: { main: 'g', bras: { epaule: -20, coude: -30 }, prise: [104, 150], ancre: [0.951, 0.85], w: 500, h: 760, angle: -20, balance: 6 },
+};
+const NS = 'http://www.w3.org/2000/svg';
+function imageSvg(href, { x, y, w, h }) {
+  const im = document.createElementNS(NS, 'image');
+  im.setAttribute('href', href);
+  Object.entries({ x, y, width: w, height: h }).forEach(([k, v]) => im.setAttribute(k, v));
+  return im;
+}
+
 /**
  * @param {string} [expression='content']  humeur tenue (voir ALIAS)
  * @param {string|object|Array} [entree]  geste(s) joué(s) à l'apparition : 'coucou', 'saut',
@@ -100,15 +129,23 @@ const VUE = '180 330 2148 2148';
  * @param {string|null} [repli='hello'] pose de <Mascot> affichée pendant le chargement ;
  *   null : rien tant que le moteur n'est pas prêt (la pose revient si le chargement échoue)
  * @param {Function} [onEntree] appelé quand l'entrée est finie (ou tout de suite sans entrée)
+ * @param {string|null} [accessoire] nom dans ACCESSOIRES ; en changer le fait tomber sur la tête
  * ref : { geste(nom), expression(nom), dire(texte) }
  */
 export const Pantin = forwardRef(function Pantin(
-  { expression = 'content', entree, size = 240, repli = 'hello', className = '', onClick, label, onEntree },
+  { expression = 'content', entree, size = 240, repli = 'hello', className = '', onClick, label, onEntree, accessoire = null },
   ref,
 ) {
   const hote = useRef(null);
   const boite = useRef(null);
   const anim = useRef(null);
+  const gsapRef = useRef(null);
+  const rigRef = useRef(null);
+  const calqueAcc = useRef(null);
+  const calqueDerriere = useRef(null);
+  const accPose = useRef(false);
+  const accActuel = useRef(null); // { nom, retirer(anime) }
+  const tenu = useRef(null); // objet tenu : { p, el, k } (k : 0 -> 1, bras plié)
   const [pret, setPret] = useState(false);
   const [echec, setEchec] = useState(false);
   const exprRef = useRef(expression);
@@ -131,6 +168,40 @@ export const Pantin = forwardRef(function Pantin(
       if (!vivant) { h.replaceChildren(); return; }
       a = window.RevizAnim.creer(rig, { gsap, calme });
       anim.current = a;
+      gsapRef.current = gsap;
+      rigRef.current = rig;
+      // Objet tenu : le temps de dessiner l'image, le bras qui tient prend sa pose (dosée par k),
+      // puis on rend au moteur ses propres valeurs ; l'objet est ensuite redressé.
+      const rendre = rig.rendre;
+      rig.rendre = () => {
+        const t = tenu.current;
+        if (!t?.k) { rendre(); return; }
+        const e = rig.etat, P = 'bras' + t.p.main.toUpperCase();
+        const garde = {};
+        const pose = { epaule: t.p.bras.epaule, coude: t.p.bras.coude, poignet: 0, etire: 1 };
+        for (const [n, v] of Object.entries(pose)) { garde[P + n] = e[P + n]; e[P + n] = (e[P + n] ?? v) + (v - (e[P + n] ?? v)) * t.k; }
+        for (const n of ['devant', 'main', 'epais']) garde[P + n] = e[P + n];
+        Object.assign(e, { [P + 'devant']: t.k, [P + 'main']: 'tient', [P + 'epais']: 0 });
+        rendre();
+        Object.assign(e, garde);
+        const r = rig.brasEl[t.p.main].main.getAttribute('transform')?.match(/rotate\(([-\d.]+)/);
+        const balance = t.p.balance && !anim.current?.calme ? t.p.balance * Math.sin(performance.now() / 260) : 0;
+        if (r) t.el.setAttribute('transform', `rotate(${(t.p.angle || 0) + balance - r[1]} ${t.p.prise[0]} ${t.p.prise[1]})`);
+      };
+      const devant = h.querySelector('.bras-devant');
+      if (devant) {
+        const g = document.createElementNS(NS, 'g');
+        g.setAttribute('class', 'accessoire');
+        devant.parentNode.insertBefore(g, devant);
+        calqueAcc.current = g;
+      }
+      const corps = h.querySelector(`.corps2d image[href="${BASE}corps.webp"]`);
+      if (corps) {
+        const g = document.createElementNS(NS, 'g');
+        g.setAttribute('class', 'accessoire-derriere');
+        corps.parentNode.insertBefore(g, corps);
+        calqueDerriere.current = g;
+      }
       a.demarrerVie();
       const g = entreeRef.current;
       const chute = [].concat(g)[0] === 'chute' || [].concat(g)[0]?.nom === 'chute';
@@ -156,6 +227,12 @@ export const Pantin = forwardRef(function Pantin(
       appels.forEach(c => c.kill());
       a?.detruire();
       anim.current = null;
+      rigRef.current = null;
+      calqueAcc.current = null;
+      calqueDerriere.current = null;
+      accPose.current = false;
+      accActuel.current = null;
+      tenu.current = null;
       h?.replaceChildren();
     };
   }, []);
@@ -163,6 +240,75 @@ export const Pantin = forwardRef(function Pantin(
   useEffect(() => {
     if (pret && !enEntree.current) anim.current?.expression(versMoteur(expression));
   }, [expression, pret]);
+
+  // Le premier accessoire est déjà là ; ensuite l'ancien s'en va et le nouveau arrive : un chapeau
+  // s'envole et tombe (son ombre n'apparaît sur le front qu'à l'atterrissage), un objet tenu
+  // rapetisse pendant que le bras retombe, ou surgit dans la main qui se plie.
+  useEffect(() => {
+    const g = calqueAcc.current, gsap = gsapRef.current, rig = rigRef.current;
+    if (!pret || !g || !rig) return;
+    const anime = accPose.current && !anim.current?.calme;
+    accPose.current = true;
+    const ancien = accActuel.current;
+    if ((ancien?.nom ?? null) === (accessoire ?? null)) return;
+    ancien?.retirer(anime);
+    accActuel.current = null;
+    const p = ACCESSOIRES[accessoire];
+    if (!p) return;
+    const delai = ancien ? 0.15 : 0;
+    const objet = imageSvg(`${BASE}accessoires/${accessoire}.webp`, p.main
+      ? { x: p.prise[0] - p.ancre[0] * p.w, y: p.prise[1] - p.ancre[1] * p.h, w: p.w, h: p.h } : p);
+
+    if (p.main) {
+      // Sous les doigts : premier enfant de la main relâchée (même repère, même visibilité). La main
+      // passe au-dessus du tube du bras, sinon le haut du bras recouvre l'objet (le drapeau).
+      const el = document.createElementNS(NS, 'g');
+      el.appendChild(objet);
+      const bras = rig.brasEl[p.main];
+      const main = bras.mains.relachee;
+      main.insertBefore(el, main.firstChild);
+      bras.g.appendChild(bras.main);
+      const t = { p, el, k: anime ? 0 : 1 };
+      tenu.current = t;
+      const origine = `${p.prise[0]} ${p.prise[1]}`;
+      if (anime) {
+        gsap.to(t, { k: 1, duration: 0.35, delay: delai, ease: 'power2.out' });
+        gsap.from(objet, { scale: 0, svgOrigin: origine, duration: 0.45, delay: delai + 0.15, ease: 'back.out(2)' });
+      }
+      accActuel.current = { nom: accessoire, retirer: (an) => {
+        const fin = () => {
+          el.remove();
+          if (tenu.current !== t) return; // un autre objet a déjà pris la main
+          tenu.current = null;
+          bras.g.insertBefore(bras.main, bras.g.querySelector('.b-tube'));
+        };
+        if (!an) { fin(); return; }
+        gsap.to(objet, { scale: 0, svgOrigin: origine, duration: 0.2, ease: 'power2.in' });
+        gsap.to(t, { k: 0, duration: 0.3, delay: 0.1, ease: 'power2.inOut', onComplete: fin });
+      } };
+      return;
+    }
+
+    const acc = document.createElementNS(NS, 'g');
+    const ombre = p.ombre && imageSvg(`${BASE}accessoires/${accessoire}-ombre.webp`, p.ombre);
+    const fond = p.derriere && calqueDerriere.current && imageSvg(`${BASE}accessoires/${accessoire}-derriere.webp`, p);
+    if (ombre) acc.appendChild(ombre);
+    acc.appendChild(objet);
+    g.appendChild(acc);
+    if (fond) calqueDerriere.current.appendChild(fond);
+    const pieces = fond ? [objet, fond] : [objet];
+    if (anime) {
+      if (p.enfile) gsap.from(objet, { scale: 1.4, opacity: 0, svgOrigin: `${p.x + p.w / 2} ${p.y + p.h / 2}`, duration: 0.35, delay: delai, ease: 'back.out(1.6)' });
+      else gsap.from(pieces, { y: -700, opacity: 0, duration: 0.6, delay: delai, ease: 'bounce.out' });
+      if (ombre) gsap.from(ombre, { opacity: 0, duration: 0.25, delay: delai + 0.3 });
+    }
+    accActuel.current = { nom: accessoire, retirer: (an) => {
+      const fin = () => { acc.remove(); fond?.remove(); };
+      if (!an) { fin(); return; }
+      if (ombre) gsap.to(ombre, { opacity: 0, duration: 0.1 });
+      gsap.to(pieces, { y: -500, opacity: 0, duration: 0.25, ease: 'power2.in', onComplete: fin });
+    } };
+  }, [accessoire, pret]);
 
   useImperativeHandle(ref, () => ({
     geste: nom => jouerGeste(anim.current, nom, () => exprRef.current),

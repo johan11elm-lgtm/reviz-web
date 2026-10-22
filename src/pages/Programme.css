@@ -257,9 +257,10 @@
 }
 .prg-page .prg-choix-liste [aria-selected="true"] button { background: #FFE6D2; color: #C25407; }
 
-/* Réviz en bas du héros, sa bulle posée par le bas juste au-dessus de sa tête */
-.prg-page .prg-pantin-place { position: absolute; left: 0; right: 0; bottom: 44px; z-index: 1; display: flex; justify-content: center; }
-.prg-page .prg-bulle { position: absolute; z-index: 3; left: 22px; right: 22px; bottom: 254px; }
+/* Réviz en bas du héros, sa bulle posée par le bas juste au-dessus de sa tête
+   (assez haut pour laisser voir l'accessoire de la matière sur sa tête) */
+.prg-page .prg-pantin-place { position: absolute; left: 0; right: 0; bottom: 28px; z-index: 1; display: flex; justify-content: center; }
+.prg-page .prg-bulle { position: absolute; z-index: 3; left: 22px; right: 22px; bottom: 268px; }
 
 /* ── Mes leçons scannées, à cheval sur le bas du héros (comme la carte de l'accueil) ── */
 .prg-page .prg-scans-place { position: relative; z-index: 3; height: 70px; margin-top: -36px; padding: 0 22px; display: flex; justify-content: center; }

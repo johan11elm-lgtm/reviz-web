@@ -722,7 +722,10 @@
         son('whoosh', 0.25); son('boing', 1.03, 0.8); son('pas', 1.03, 1.4);
         const pointes = e.jambeGpointe !== undefined;
         // Appel : 8 images de descente (genoux qui plient), 2 de pose, 4 de poussée.
-        tl.to(e, { ecrase: 0.16, flechir: 1, brasGepaule: 30, brasDepaule: 30, visageY: 6, duration: 0.133, ease: 'power2.inOut' }, 0)
+        // Bras relâchés d'abord : une main posée (menton, joue) laisse un bras étiré et passé devant,
+        // qui resterait démesuré une fois levé.
+        tl.to(e, { ecrase: 0.16, flechir: 1, brasGepaule: 30, brasDepaule: 30, visageY: 6, brasGetire: 1, brasDetire: 1,
+          brasGdevant: 0, brasDdevant: 0, brasGpoignet: 0, brasDpoignet: 0, duration: 0.133, ease: 'power2.inOut' }, 0)
           .add(clignerTl(), 0.05)
           .set(e, cibleExpression('content'), 0.12)
           .to(e, { ecrase: -0.12, flechir: 0, hauteur: 30, brasGepaule: 120, brasDepaule: 120, visageY: 4, duration: 0.067, ease: 'power2.out' }, 0.166)
