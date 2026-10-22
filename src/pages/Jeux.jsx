@@ -11,6 +11,8 @@ import { PAIRES_JEUX } from '../data/pairesJeux';
 import { themesDePartie, tourDeTheme } from '../data/themesJeux';
 import { jouer, sonActif, bruitagesActifs } from '../utils/bruitages';
 import { musiqueMagie } from '../utils/musiqueMagie';
+import { musiqueBuzzer } from '../utils/musiqueBuzzer';
+import { PlateauBuzzer, mancheBuzzer, partieBuzzer, TEMPO_BUZZER } from './jeux/RevizSeTrompe';
 import { useIsDesktop } from '../hooks/useMediaQuery';
 import './Jeux.css';
 
@@ -25,6 +27,10 @@ import './Jeux.css';
  * Le tour de magie (22/10) est le premier jeu produit pour de vrai : un monde en pâte à modeler
  * (calques générés, public/jeux/magie/), Réviz magicien au centre. C'est le mode par défaut ;
  * ?jeu=prototype rejoue les 3 essais du matin (pêche, valise, paires).
+ *
+ * Réviz se trompe ? (23/10, pages/jeux/RevizSeTrompe.jsx) : vrai ou faux au buzzer sur un plateau
+ * de jeu télé. La Partie rapide enchaîne les deux jeux, tour après tour (magie, buzzer, magie…) ;
+ * ?jeu=buzzer lance une partie de Réviz se trompe ? seul.
  * ?classe=5ème&matiere=Histoire&chapitre=<id> lance directement un chapitre.
  */
 
@@ -52,13 +58,18 @@ function pairesCourtes(data, branches) {
   // Repli : la carte mentale (une catégorie ↔ un de ses éléments), toujours courte.
   return branches.map(br => ({ a: br.label, b: auHasard(br.children) }));
 }
-// Partie rapide : 3 thèmes faciles (tables, capitales…), un par tour, sans lien avec une leçon.
+// Partie rapide : des thèmes faciles (tables, capitales…), un par tour, sans lien avec une leçon.
+// Les jeux s'enchaînent (magie, buzzer, magie…), chacun de plus en plus rapide (niveau 0, 1, 2) ;
+// six thèmes tous différents.
 const SOUS_RAPIDE = ['Mémorise, puis retourne-les deux par deux', 'Attention, il mélange !', 'Mélange express !'];
 export function partieRapide() {
-  const themes = themesDePartie(TOURS_MAGIE.length);
-  return TOURS_MAGIE.map((t, i) => {
-    const tour = tourDeTheme(themes[i]);
-    return { ...t, type: 'magie', paires: tour.paires, titre: tour.titre, annonce: tour.titre, sous: SOUS_RAPIDE[i], apercu: t.voir + 0.6 + t.echanges * t.pas };
+  const themes = themesDePartie(TOURS_MAGIE.length * 2);
+  return TOURS_MAGIE.flatMap((t, i) => {
+    const tour = tourDeTheme(themes[2 * i]);
+    return [
+      { ...t, type: 'magie', paires: tour.paires, titre: tour.titre, annonce: tour.titre, sous: SOUS_RAPIDE[i], apercu: t.voir + 0.6 + t.echanges * t.pas },
+      mancheBuzzer(themes[2 * i + 1], i),
+    ];
   });
 }
 function partieMagie(data, branches) {
@@ -93,7 +104,7 @@ export function construirePartie(data, mode = 'magie') {
       return { type: 'paires', paires };
     },
   };
-  if (mode === 'magie') return partieMagie(data, branches);
+  if (mode !== 'prototype') return partieMagie(data, branches);
   const ordre = carte ? ['peche', 'paires', 'valise', 'peche', 'paires', 'valise'] : ['paires', 'paires', 'paires'];
   return ordre.map((type, i) => ({ ...manche[type](), duree: DUREES[i] ?? 11 })).filter(m => m.type !== 'paires' || m.paires.length >= 2);
 }
@@ -429,11 +440,11 @@ export default function Jeux() {
   }, [classe, mode]);
   const nouvellePartie = () => { setIdx(0); setScore(0); setBonnes(0); setErreurs([]); setExpire(-1); finie.current = -1; setPhase('consigne'); };
   const lancerRapide = () => {
-    setChapitre({ matiere: 'Réviz Games', titre: 'Partie rapide', rapide: true });
-    setPartie(partieRapide());
+    setChapitre({ matiere: 'Réviz Games', titre: mode === 'buzzer' ? 'Réviz se trompe ?' : 'Partie rapide', rapide: true });
+    setPartie(mode === 'buzzer' ? partieBuzzer() : partieRapide());
     nouvellePartie();
   };
-  useEffect(() => { if (params.get('rapide')) lancerRapide(); }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  useEffect(() => { if (params.get('rapide') || mode === 'buzzer') lancerRapide(); }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Lien direct vers un chapitre.
   const direct = params.get('chapitre');
@@ -455,7 +466,15 @@ export default function Jeux() {
     musiqueMagie.regler({ bpm: tempoTour });
     musiqueMagie.demarrer();
   }, [enMagie, tempoTour, son]);
-  useEffect(() => () => musiqueMagie.arreter(), []);
+  // Réviz se trompe ? : son générique de jeu télé, plus rapide à chaque tour.
+  const enBuzzer = manche?.type === 'buzzer' && (phase === 'consigne' || phase === 'jeu');
+  const tempoBuzzer = TEMPO_BUZZER(manche?.niveau ?? 0);
+  useEffect(() => {
+    if (!enBuzzer || !son) { musiqueBuzzer.arreter(); return; }
+    musiqueBuzzer.regler({ bpm: tempoBuzzer });
+    musiqueBuzzer.demarrer();
+  }, [enBuzzer, tempoBuzzer, son]);
+  useEffect(() => () => { musiqueMagie.arreter(); musiqueBuzzer.arreter(); }, []);
 
   // Consigne : 1,7 s (ou une touche), puis le chrono part.
   useEffect(() => {
@@ -525,14 +544,14 @@ export default function Jeux() {
       <>
         <div className="jx-ligne-haut">{fermer}<span className="jx-surtitre">Prototype</span></div>
         <h1 className="jx-titre">Réviz Games</h1>
-        <p className="jx-intro">{mode === 'magie' ? 'Le tour de magie : 3 tours de plus en plus rapides.' : '6 mini-jeux de 10 à 15 secondes sur un chapitre : pêche, valise, paires.'}</p>
-        {mode === 'magie' && (
+        <p className="jx-intro">{mode !== 'prototype' ? 'Le tour de magie : 3 tours de plus en plus rapides.' : '6 mini-jeux de 10 à 15 secondes sur un chapitre : pêche, valise, paires.'}</p>
+        {mode !== 'prototype' && (
           <button type="button" className="jx-rapide" onClick={lancerRapide}>
-            <span className="jx-rapide-txt"><b>Partie rapide</b><span>Tables, capitales, anglais… 3 thèmes au hasard</span></span>
+            <span className="jx-rapide-txt"><b>Partie rapide</b><span>Le tour de magie et Réviz se trompe ?, 6 tours au hasard</span></span>
             <span className="jx-jouer" aria-hidden="true">Jouer</span>
           </button>
         )}
-        {mode === 'magie' && <span className="jx-surtitre jx-ou">Ou sur un chapitre de ton programme</span>}
+        {mode !== 'prototype' && <span className="jx-surtitre jx-ou">Ou sur un chapitre de ton programme</span>}
         <div className="jx-puces" role="radiogroup" aria-label="Classe">
           {PROGRAMME_CLASSES.map(c => (
             <button key={c} type="button" role="radio" aria-checked={c === classe} className={`jx-puce${c === classe ? ' jx-puce--on' : ''}`} onClick={() => setClasse(c)}>{c}</button>
@@ -568,7 +587,7 @@ export default function Jeux() {
           <span className="jx-fin-score">{score}</span>
           <span className="jx-fin-sous">{bonnes} bonne{bonnes > 1 ? 's' : ''} réponse{bonnes > 1 ? 's' : ''}{total ? ` sur ${total}` : ''}</span>
         </div>
-        <Pantin size={isDesktop ? 200 : 150} expression={fier ? 'fier' : 'content'} entree={fier ? 'saut' : 'coucou'} accessoire={mode === 'magie' ? ['chapeau', 'baguette'] : accessoire} className="jx-pantin-fin" />
+        <Pantin size={isDesktop ? 200 : 150} expression={fier ? 'fier' : 'content'} entree={fier ? 'saut' : 'coucou'} accessoire={mode === 'buzzer' ? ['micro', 'noeud'] : mode === 'magie' ? ['chapeau', 'baguette'] : accessoire} className="jx-pantin-fin" />
         {recap.length > 0 && (
           <div className="jx-recap">
             <span className="jx-recap-titre">À retenir</span>
@@ -606,6 +625,15 @@ export default function Jeux() {
       </svg>
     </button>
   );
+
+  // ── Réviz se trompe ? : le plateau télé occupe tout l'écran, Réviz présentateur au micro ──
+  if (manche.type === 'buzzer') {
+    return (
+      <PlateauBuzzer manche={manche} idx={idx} total={partie.length} phase={phase} expire={expire === idx} score={score}
+        onBon={onBon} onFaux={onFaux} onTermine={onTermine} onDemarrer={() => setPhase('jeu')}
+        fermer={fermer} boutonSon={boutonSon} isDesktop={isDesktop} hauteurEcran={hauteurEcran} />
+    );
+  }
 
   // ── Le tour de magie : le monde occupe tout l'écran, Réviz magicien derrière sa table ──
   if (manche.type === 'magie') {

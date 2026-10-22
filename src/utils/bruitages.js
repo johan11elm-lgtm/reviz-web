@@ -75,6 +75,51 @@ const SONS = {
     [523, 659, 784, 1046].forEach((f, i) => note(a, { f, t: i * 0.09, d: 0.4, type: 'triangle', vol: 0.09 }));
     for (let i = 0; i < 26; i++) souffle(a, { t: 0.15 + i * 0.045 + Math.random() * 0.03, d: 0.05, f: 1500 + Math.random() * 1500, q: 1.2, vol: 0.05 + Math.random() * 0.04 });
   },
+  // ── Réviz se trompe ? (jeu télé) ──
+  // Le gros bouton qu'on écrase : un « clonk » de plastique sur ressort.
+  appui: a => { note(a, { f: 180, f2: 90, d: 0.09, type: 'triangle', vol: 0.2 }); souffle(a, { d: 0.04, f: 2600, q: 2, vol: 0.12 }); },
+  // Bonne réponse : la cloche du plateau, deux coups clairs.
+  ding: a => {
+    [[1318, 0], [1760, 0.13]].forEach(([f, t]) => {
+      note(a, { f, t, d: 0.9, vol: 0.14 });
+      note(a, { f: f * 2.76, t, d: 0.25, vol: 0.03 }); // partiel de cloche
+    });
+  },
+  // Mauvaise réponse : le buzzer grave du jeu télé, deux dents de scie qui battent entre elles.
+  buzzer: a => {
+    note(a, { f: 98, d: 0.55, type: 'sawtooth', vol: 0.11 });
+    note(a, { f: 104, d: 0.55, type: 'square', vol: 0.06 });
+    note(a, { f: 49, d: 0.55, type: 'square', vol: 0.05 });
+  },
+  // Réviz grillé : le trombone triste (wah wah wah waaah), la dernière note tremble.
+  trombone: a => {
+    const notes = [[466, 0, 0.24], [440, 0.26, 0.24], [415, 0.52, 0.24], [392, 0.78, 0.7]];
+    for (const [f, t, d] of notes) {
+      const o = a.createOscillator(), fl = a.createBiquadFilter(), g = a.createGain(), t0 = a.currentTime + t;
+      o.type = 'sawtooth';
+      o.frequency.setValueAtTime(f / 2, t0);
+      if (d > 0.5) { // vibrato qui s'élargit, et la note qui s'affaisse
+        const lfo = a.createOscillator(), prof = a.createGain();
+        lfo.frequency.value = 6; prof.gain.setValueAtTime(0, t0); prof.gain.linearRampToValueAtTime(9, t0 + d);
+        lfo.connect(prof).connect(o.frequency); lfo.start(t0); lfo.stop(t0 + d + 0.05);
+        o.frequency.linearRampToValueAtTime(f / 2 * 0.94, t0 + d);
+      }
+      fl.type = 'lowpass'; fl.Q.value = 4;
+      fl.frequency.setValueAtTime(500, t0); fl.frequency.linearRampToValueAtTime(1300, t0 + 0.08); fl.frequency.linearRampToValueAtTime(600, t0 + d);
+      g.gain.setValueAtTime(0.0001, t0);
+      g.gain.exponentialRampToValueAtTime(0.13, t0 + 0.04);
+      g.gain.setValueAtTime(0.13, t0 + d - 0.06);
+      g.gain.exponentialRampToValueAtTime(0.0001, t0 + d);
+      o.connect(fl).connect(g).connect(a.destination);
+      o.start(t0); o.stop(t0 + d + 0.05);
+    }
+  },
+  // Réviz triomphe : petite fanfare moqueuse (ta-da !) et le public qui rit.
+  tada: a => {
+    note(a, { f: 784, d: 0.12, type: 'square', vol: 0.05 });
+    note(a, { f: 1046, t: 0.12, d: 0.5, type: 'square', vol: 0.06 });
+    note(a, { f: 1318, t: 0.12, d: 0.5, type: 'triangle', vol: 0.06 });
+  },
 };
 
 export function jouer(nom) {

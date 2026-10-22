@@ -115,6 +115,9 @@ const ACCESSOIRES = {
   // Réviz Games, le tour de magie : haut-de-forme et baguette du magicien.
   chapeau: { x: 578, y: -277, w: 1365, h: 802 },
   baguette: { main: 'g', bras: { epaule: -20, coude: -30 }, prise: [104, 150], ancre: [0.47, 0.8], w: 300, h: 849, angle: -25 },
+  // Réviz se trompe ? : le présentateur, micro levé vers la bouche et nœud papillon sous le sourire.
+  micro: { main: 'g', bras: { epaule: 20, coude: -70 }, prise: [104, 150], ancre: [0.5, 0.72], w: 282, h: 600, angle: 15 },
+  noeud: { x: 1018, y: 1344, w: 520, h: 315, enfile: true },
 };
 const NS = 'http://www.w3.org/2000/svg';
 function imageSvg(href, { x, y, w, h }) {
