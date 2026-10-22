@@ -78,14 +78,39 @@ describe.each(CASES)('$name — email vérifié obligatoire', ({ handler, body }
     expect(anthropicFetch).not.toHaveBeenCalled()
   })
 
-  it('refuse (403 EMAIL_NOT_VERIFIED) si l’email n’est pas vérifié', async () => {
+  it('email non vérifié : le scan d’essai passe, compté comme tel', async () => {
     verifyIdToken.mockResolvedValue({ uid: 'u1', email_verified: false })
+    consumeQuota.mockResolvedValue({ allowed: true })
+    anthropicFetch.mockResolvedValue({
+      ok: true,
+      json: async () => ({ content: [{ text: 'RESULT' }] }),
+    })
+    const res = mockRes()
+    await handler({ method: 'POST', body: { ...body, idToken: 'good' } }, res)
+    expect(res.statusCode).toBe(200)
+    expect(consumeQuota).toHaveBeenCalledWith(expect.objectContaining({ uid: 'u1', sansEmail: true }))
+  })
+
+  it('refuse (403 EMAIL_NOT_VERIFIED) une fois le scan d’essai utilisé', async () => {
+    verifyIdToken.mockResolvedValue({ uid: 'u1', email_verified: false })
+    consumeQuota.mockResolvedValue({ allowed: false, sansEmail: true })
     const res = mockRes()
     await handler({ method: 'POST', body: { ...body, idToken: 'good' } }, res)
     expect(res.statusCode).toBe(403)
     expect(res.payload).toBe('EMAIL_NOT_VERIFIED')
-    expect(consumeQuota).not.toHaveBeenCalled()
     expect(anthropicFetch).not.toHaveBeenCalled()
+  })
+
+  it('rembourse et répond TIMEOUT (504) si l’IA dépasse le délai', async () => {
+    verifyIdToken.mockResolvedValue({ uid: 'u1', email_verified: false })
+    consumeQuota.mockResolvedValue({ allowed: true })
+    refundQuota.mockResolvedValue()
+    anthropicFetch.mockRejectedValue(Object.assign(new Error('timeout'), { name: 'TimeoutError' }))
+    const res = mockRes()
+    await handler({ method: 'POST', body: { ...body, idToken: 'good' } }, res)
+    expect(res.statusCode).toBe(504)
+    expect(res.payload).toBe('TIMEOUT')
+    expect(refundQuota).toHaveBeenCalledWith(expect.objectContaining({ uid: 'u1', sansEmail: true }))
   })
 
   it('laisse passer (200) quand l’email est vérifié', async () => {

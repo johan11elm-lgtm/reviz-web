@@ -11,6 +11,12 @@ import { downscaleDataUrl } from '../utils/downscaleImage.js'
 import { parseLessonJson } from '../utils/lessonSchema.js'
 
 const API_URL   = 'https://api.anthropic.com/v1/messages'
+
+// Délai d'abandon d'une analyse. Une leçon complète (flashcards, quiz, résumé
+// enrichi, carte mentale) prend souvent plus de 30 s à générer : à 30 s, l'élève
+// voyait « trop de temps » alors que le serveur finissait (scan décompté, leçon
+// perdue). On attend un peu moins que la durée max de la fonction (api/analyse*.js).
+export const ANALYSE_TIMEOUT_MS = 110000
 const USE_PROXY = !import.meta.env.VITE_ANTHROPIC_API_KEY ||
                   import.meta.env.VITE_ANTHROPIC_API_KEY.includes('REMPLACER')
 
@@ -104,19 +110,21 @@ async function _callProxy(endpoint, payload, onProgress) {
     onProgress = (v) => { if (v > max) { max = v; raw(v) } }
   }
 
-  // Simule la progression pendant l'attente (mode non-streaming)
+  // Simule la progression pendant l'attente (mode non-streaming) : vite au
+  // début, puis de plus en plus lentement sans jamais atteindre la fin
+  // (l'analyse peut durer plus d'une minute, la barre ne doit pas se figer).
   let ticker = null
   if (onProgress) {
-    const milestones = [200, 600, 1200, 1800, 2400]
-    let i = 0
+    let simule = 0
     ticker = setInterval(() => {
-      if (i < milestones.length) onProgress(milestones[i++])
+      simule += Math.max(6, (2850 - simule) * 0.06)
+      onProgress(Math.min(2850, Math.round(simule)))
     }, 800)
   }
 
   let response
   const controller = new AbortController()
-  const fetchTimeout = setTimeout(() => controller.abort(), 30000)
+  const fetchTimeout = setTimeout(() => controller.abort(), ANALYSE_TIMEOUT_MS)
   try {
     response = await apiFetch(endpoint, {
       method: 'POST',
@@ -165,7 +173,7 @@ export async function analyseLesson(text, onProgress, level) {
   // Appel API direct (dev local uniquement)
   let response
   const controller = new AbortController()
-  const fetchTimeout = setTimeout(() => controller.abort(), 30000)
+  const fetchTimeout = setTimeout(() => controller.abort(), ANALYSE_TIMEOUT_MS)
   try {
     response = await fetch(API_URL, {
       method: 'POST',
@@ -221,7 +229,7 @@ export async function analyseImage(imageDataUrl, onProgress, level) {
 
   let response
   const controller = new AbortController()
-  const fetchTimeout = setTimeout(() => controller.abort(), 30000)
+  const fetchTimeout = setTimeout(() => controller.abort(), ANALYSE_TIMEOUT_MS)
   try {
     response = await fetch(API_URL, {
       method: 'POST',
