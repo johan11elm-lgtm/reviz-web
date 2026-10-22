@@ -834,6 +834,11 @@
       "chemin": "4eme/physique-chimie/tension-electrique",
       "le": "2026-10-22",
       "corrections": 0
+    },
+    {
+      "chemin": "4eme/physique-chimie/lois-des-tensions",
+      "le": "2026-10-22",
+      "corrections": 0
     }
   ]
 }
