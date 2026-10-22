@@ -7,6 +7,14 @@
  *
  * Même séquenceur que la musique du tour de magie : toutes les 25 ms, on programme les croches des
  * 120 prochaines ms sur l'horloge audio. La musique suit le bouton son des bruitages.
+ *
+ * Deuxième version (23/10), par défaut : une piste générée sur Google Flow Music (« Clay Showdown
+ * (Alt) », 120 BPM), montée en boucle par assets-src/jeux/buzzer/boucle.py : 8 mesures de 16 s
+ * exactement, fin fondue dans le début, deux périodes par fichier (on boucle une fenêtre d'une
+ * période au milieu, ce qui absorbe le décalage de l'encodeur MP3). Elle est accélérée à chaque
+ * tour (le tempo du tour / 128) ; le tic-tac des dernières secondes reste synthétisé par-dessus.
+ * ?musique=code rejoue la version composée en code. Attention : piste faite sur un compte Flow
+ * gratuit, sans usage commercial, à regénérer avant le lancement (comme celle de la magie).
  */
 import { sonActif } from './bruitages';
 
@@ -143,7 +151,7 @@ function boucle() {
   }
 }
 
-export const musiqueBuzzer = {
+const musiqueCode = {
   demarrer() {
     if (minuterie || !sonActif()) return;
     if (!contexte()) return;
@@ -173,3 +181,66 @@ export const musiqueBuzzer = {
   },
   joue: () => !!minuterie,
 };
+
+// ── Version Flow Music : la boucle, jouée de plus en plus vite ──
+const BOUCLE = '/jeux/buzzer/boucle.mp3';
+const PERIODE = 16; // secondes, exactement (8 mesures à 120 BPM)
+const BASE = 128; // tempo du premier tour : vitesse 1
+let tampon = null, chargement = null, minuterieTic = null, prochainTic = 0, numTic = 0;
+function charger() {
+  chargement ??= fetch(BOUCLE).then(r => r.arrayBuffer()).then(b => ctx.decodeAudioData(b)).then(t => { tampon = t; })
+    .catch(e => { chargement = null; throw e; });
+  return chargement;
+}
+const flux = { source: null, bpm: BASE, actif: false };
+const vitesse = () => flux.bpm / BASE;
+// Tic-tac des dernières secondes, calé sur la noire de la piste (120 BPM à vitesse 1).
+function tictac() {
+  const noire = 60 / (120 * vitesse());
+  while (prochainTic < ctx.currentTime + 0.12) {
+    if (tension) tic(prochainTic, numTic % 2 === 0);
+    prochainTic += noire; numTic += 1;
+  }
+}
+const musiqueFlow = {
+  async demarrer() {
+    if (flux.actif || !sonActif() || !contexte()) return;
+    flux.actif = true;
+    sortie = ctx.createGain();
+    sortie.gain.setValueAtTime(0.0001, ctx.currentTime);
+    sortie.gain.exponentialRampToValueAtTime(0.55, ctx.currentTime + 0.6);
+    sortie.connect(ctx.destination);
+    try { await charger(); } catch { flux.actif = false; musiqueCode.demarrer(); return; }
+    if (!flux.actif) return; // arrêtée pendant le chargement
+    const s = ctx.createBufferSource();
+    s.buffer = tampon; s.loop = true; s.loopStart = 0.5; s.loopEnd = 0.5 + PERIODE;
+    s.playbackRate.value = vitesse();
+    s.connect(sortie);
+    s.start(ctx.currentTime + 0.05, 0.5);
+    flux.source = s;
+    prochainTic = ctx.currentTime + 0.05; numTic = 0;
+    minuterieTic = setInterval(tictac, 25);
+  },
+  arreter() {
+    musiqueCode.arreter();
+    if (!flux.actif) return;
+    flux.actif = false;
+    tension = false;
+    clearInterval(minuterieTic); minuterieTic = null;
+    const out = sortie, s = flux.source;
+    flux.source = null;
+    out.gain.cancelScheduledValues(ctx.currentTime);
+    out.gain.setValueAtTime(out.gain.value, ctx.currentTime);
+    out.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.4);
+    setTimeout(() => { s?.stop(); out.disconnect(); }, 500);
+  },
+  regler({ bpm, enTension } = {}) {
+    if (bpm) flux.bpm = bpm;
+    if (enTension !== undefined) tension = enTension;
+    flux.source?.playbackRate.setTargetAtTime(vitesse(), ctx.currentTime, 0.3);
+  },
+  joue: () => flux.actif,
+};
+
+const versionCode = typeof location !== 'undefined' && new URLSearchParams(location.search).get('musique') === 'code';
+export const musiqueBuzzer = versionCode ? musiqueCode : musiqueFlow;
