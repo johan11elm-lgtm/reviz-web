@@ -48,6 +48,8 @@ function chargerMoteur() {
   }
   return moteur;
 }
+/** Charge le moteur à l'avance (carte de début des Réviz Games) : le premier pantin s'affiche aussitôt. */
+export const prechargerMoteurPantin = () => chargerMoteur();
 
 // Humeurs de l'app -> expressions du moteur (les autres noms passent tels quels :
 // content, fier, determine, reflechit, inquiet, endormi, et les réactions emerveille,
