@@ -26,6 +26,7 @@ import { RevizPlusAnnonce, annonceRevizPlusVue } from '../components/RevizPlusAn
 import { ThemeEssai, essaiThemeVu } from '../components/ThemeEssai';
 import { useTheme } from '../context/ThemeContext';
 import { themeById } from '../utils/themes';
+import { etatDuJour } from '../services/partieDuJourService';
 import './Home.css';
 
 /*
@@ -120,7 +121,9 @@ export default function Home() {
     });
   }, []);
 
-  const streak = useMemo(() => computeStreak(loadRevisions(), 'revisedAt'), [allLessons]);
+  // La partie du jour des Réviz Games compte aussi pour la série (jouer, c'est réviser).
+  const jourJeux = useMemo(() => etatDuJour(currentUser?.uid ?? null), [currentUser?.uid]);
+  const streak = useMemo(() => computeStreak([...loadRevisions(), ...jourJeux.jours.map(j => ({ revisedAt: `${j}T12:00:00` }))], 'revisedAt'), [allLessons, jourJeux]);
   const { level } = useMemo(() => computeLevel(allLessons), [allLessons]);
   const lastLesson = allLessons[0] ?? null;
   const dailyGoal = parseInt(localStorage.getItem(`reviz-daily-goal-${currentUser?.uid}`) || '3');
@@ -286,6 +289,8 @@ export default function Home() {
 
   const suggestions = [
     { lignes: ditLignes, label: cta, action, expr: h.expression, carte: carteDuJour },
+    !jourJeux.faite && { lignes: ['La partie du jour est prête.', '6 mini-jeux, 2 minutes.'], label: 'Jouer', action: () => navigate('/jeux'), expr: 'emerveille', geste: 'brasEnLair',
+      carte: { id: 'jeux', pose: 'celebration', fond: '#FFE3C7', titre: 'Partie du jour', sous: 'Réviz Games · 6 mini-jeux' } },
     titreLecon && (fcLast > 0
       ? { lignes: ['Tes cartes t’attendent.', 'On les revoit ?'], label: 'Réviser mes cartes', action: ouvrirCartes, expr: 'content', geste: 'coucou',
           carte: { id: 'cartes', pose: 'flashcard', fond: '#FFE6D2', titre: 'Flashcards', sous: `${pluriel(fcLast, 'carte')} à revoir · ${court(titreLecon, 20)}` } }
@@ -409,6 +414,24 @@ export default function Home() {
     </section>
   );
 
+  // Réviz Games : la partie du jour, avec la série et le record (la même partie pour tout le monde).
+  const carteJeux = (
+    <Link to="/jeux" className={`hm-jeux${jourJeux.faite ? ' hm-jeux--faite' : ''}`}>
+      <img className="hm-jeux-image" src="/jeux/hub/partie-du-jour.webp" alt="" />
+      <span className="hm-jeux-voile" aria-hidden="true" />
+      <span className="hm-jeux-txt">
+        <span className="hm-jeux-surtitre">Réviz Games</span>
+        <span className="hm-jeux-titre">La partie du jour</span>
+        <span className="hm-jeux-sous">
+          {jourJeux.faite
+            ? `Faite ! ${jourJeux.score?.toLocaleString('fr-FR') ?? ''} points. Rejoue ou essaie les 6 jeux.`
+            : '6 mini-jeux de 15 secondes, la même partie pour tout le monde.'}
+        </span>
+        <span className="hm-jeux-btn">{jourJeux.faite ? 'Voir les jeux' : 'Jouer'}</span>
+      </span>
+    </Link>
+  );
+
   const carteBattle = (
     <Link to="/battle" className="hm-battle">
       <span className="hm-grain" aria-hidden="true" />
@@ -497,6 +520,7 @@ export default function Home() {
           <div className="hm-grille">
             <div className="hm-carte hm-carte--chemin">{chemin}</div>
             <div className="hm-carte">{carteMatieres}</div>
+            {carteJeux}
             {carteBattle}
           </div>
         </div>
@@ -544,6 +568,7 @@ export default function Home() {
             {parle && <CarteFonction key={tour} carte={sugg.carte} entree sortie={sortie} onClick={sugg.action} />}
           </div>
           <div className="hm-pad hm-pad--chemin">{chemin}</div>
+          <div className="hm-pad">{carteJeux}</div>
           {montrerEssai && <div className="hm-pad"><ThemeEssai onClose={() => setEssaiTheme(false)} /></div>}
           <div className="hm-pad hm-pad--droite">{carteMatieres}</div>
           <div className="hm-pad hm-pad--bas">{carteBattle}</div>

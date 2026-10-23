@@ -27,6 +27,8 @@ import { musiqueFin } from '../utils/musiqueFin';
 import { PlateauTaupe, mancheTaupe, partieTaupe, TEMPO_TAUPE } from './jeux/Taupe';
 import { useIsDesktop } from '../hooks/useMediaQuery';
 import { TransitionJeux, DUREES_TRANSITION } from './jeux/TransitionJeux';
+import { HubJeux } from './jeux/HubJeux';
+import { avecHasardDuJour, etatDuJour, enregistrerPartieDuJour, synchroniserStats } from '../services/partieDuJourService';
 import './Jeux.css';
 
 /**
@@ -449,7 +451,15 @@ const MINI_JEUX = { peche: Peche, valise: Valise, paires: Paires, magie: TourDeM
 export default function Jeux() {
   const navigate = useNavigate();
   const isDesktop = useIsDesktop();
-  const { getUserLevel } = useAuth();
+  const { getUserLevel, currentUser } = useAuth();
+  const uid = currentUser?.uid ?? null;
+  // La partie du jour : faite ? série, record (sur l'appareil, repris du compte au démarrage).
+  const [jour, setJour] = useState(() => etatDuJour(uid));
+  useEffect(() => {
+    let vivant = true;
+    synchroniserStats(uid).then(() => { if (vivant) setJour(etatDuJour(uid)); });
+    return () => { vivant = false; };
+  }, [uid]);
   const level = getUserLevel?.();
   const [params] = useSearchParams();
   // ?jeu=prototype rejoue les essais du matin ; tout le reste est le mode jeux (?jeu=buzzer : voir RAPIDES).
@@ -469,8 +479,9 @@ export default function Jeux() {
   const [erreurs, setErreurs] = useState([]);
   const [gag, setGag] = useState(null);
   const [bulle, setBulle] = useState(null); // ce que dit Réviz pendant le tour de magie
-  const [transition, setTransition] = useState(null);
-  const pretRef = useRef(null); // « Je suis prêt » sur la carte de transition // null | 'enroule' | 'carte' | 'deroule'
+  const [transition, setTransition] = useState(null); // null | 'enroule' | 'carte' | 'deroule'
+  const pretRef = useRef(null); // « Je suis prêt » sur la carte de transition
+  const jourEnregistre = useRef(null); // la partie du jour déjà comptée
   const [effets, setEffets] = useState([]); // { id, type, n } : combo, fumée, bravo
   const [son, setSon] = useState(sonActif);
   const [hauteurEcran] = useState(() => (typeof window !== 'undefined' ? window.innerHeight : 844));
@@ -527,12 +538,12 @@ export default function Jeux() {
   }, [classe, mode]);
   const nouvellePartie = () => { setIdx(0); setScore(0); setBonnes(0); setErreurs([]); setExpire(-1); finie.current = -1; setPhase('consigne'); };
   // Les 3 jeux séparément, et la Partie rapide qui les mélange.
-  const RAPIDES = { melange: partieMelangee, magie: partieMagieSeule, lance: partieLance, buzzer: partieBuzzer, pizzeria: partiePizzeria, ninja: partieNinja, taupe: partieTaupe };
-  const TITRES = { melange: 'Partie rapide', magie: 'Le tour de magie', lance: 'Réviz lance', buzzer: 'Réviz se trompe ?', pizzeria: 'La pizzeria !', ninja: 'Le ninja des fautes', taupe: 'Tape-taupe !' };
+  const RAPIDES = { jour: () => avecHasardDuJour(partieMelangee), melange: partieMelangee, magie: partieMagieSeule, lance: partieLance, buzzer: partieBuzzer, pizzeria: partiePizzeria, ninja: partieNinja, taupe: partieTaupe };
+  const TITRES = { jour: 'La partie du jour', melange: 'Partie rapide', magie: 'Le tour de magie', lance: 'Réviz lance', buzzer: 'Réviz se trompe ?', pizzeria: 'La pizzeria !', ninja: 'Le ninja des fautes', taupe: 'Tape-taupe !' };
   const lancerRapide = (jeu = 'melange') => {
     setChapitre({ matiere: 'Réviz Games', titre: TITRES[jeu], rapide: jeu });
     setPartie(RAPIDES[jeu]());
-    setMusiquePartie(jeu === 'melange' ? musiqueSuivante() : null);
+    setMusiquePartie(jeu === 'melange' || jeu === 'jour' ? musiqueSuivante() : null);
     nouvellePartie();
   };
   useEffect(() => {
@@ -581,6 +592,15 @@ export default function Jeux() {
     musique.m.demarrer();
   }, [musique?.m, tempoTour, son]); // eslint-disable-line react-hooks/exhaustive-deps
   useEffect(() => () => { musiqueMagie.arreter(); musiqueLance.arreter(); musiqueBuzzer.arreter(); musiquePizzeria.arreter(); musiqueNinja.arreter(); musiqueTaupe.arreter(); musiqueFin.arreter(); }, []);
+
+  // Fin de la partie du jour : elle compte pour la série et le record (une fois par partie jouée).
+  useEffect(() => {
+    if (phase !== 'fin' || chapitre?.rapide !== 'jour' || jourEnregistre.current === partie) return;
+    jourEnregistre.current = partie;
+    setJour(enregistrerPartieDuJour(uid, score));
+  }, [phase]); // eslint-disable-line react-hooks/exhaustive-deps
+  // De retour sur l'écran des jeux : l'état du jour à jour (on a pu changer de jour).
+  useEffect(() => { if (phase === 'choix') setJour(etatDuJour(uid)); }, [phase, uid]);
 
   // Consigne : 1,7 s (ou une touche), puis le chrono part.
   useEffect(() => {
@@ -669,50 +689,18 @@ export default function Jeux() {
     </div>
   );
 
-  // ── Choix du chapitre ──
+  // ── L'écran des jeux : la partie du jour, la Partie rapide, les jeux en vignettes ──
+  if ((phase === 'choix' || phase === 'charge') && mode !== 'prototype') {
+    return <HubJeux jour={jour} onJouer={lancerRapide} onFermer={() => navigate(-1)} isDesktop={isDesktop} />;
+  }
+  // ── Prototype (?jeu=prototype) : les mini-jeux sur un chapitre du programme ──
   if (phase === 'choix' || phase === 'charge') {
     const m = catalogue?.matieres.find(x => x.matiere === matiereChoisie) ?? catalogue?.matieres[0];
     return page(
       <>
         <div className="jx-ligne-haut">{fermer}<span className="jx-surtitre">Prototype</span></div>
         <h1 className="jx-titre">Réviz Games</h1>
-        <p className="jx-intro">{mode === 'magie' ? 'Des jeux de 10 à 15 secondes, sur des thèmes faciles : tables, capitales, anglais…' : '6 mini-jeux de 10 à 15 secondes sur un chapitre : pêche, valise, paires.'}</p>
-        {mode === 'magie' && (
-          <>
-            <button type="button" className="jx-rapide jx-rapide--melange" onClick={() => lancerRapide('melange')}>
-              <span className="jx-rapide-txt"><b>Partie rapide</b><span>Les jeux mélangés, 6 tours de plus en plus rapides</span></span>
-              <span className="jx-jouer" aria-hidden="true">Jouer</span>
-            </button>
-            <span className="jx-surtitre jx-ou">Ou un seul jeu, 3 tours</span>
-            <div className="jx-jeux">
-              <button type="button" className="jx-rapide" onClick={() => lancerRapide('magie')}>
-                <span className="jx-rapide-txt"><b>Le tour de magie</b><span>Retrouve les paires, il mélange de plus en plus</span></span>
-                <span className="jx-jouer" aria-hidden="true">Jouer</span>
-              </button>
-              <button type="button" className="jx-rapide jx-rapide--lance" onClick={() => lancerRapide('lance')}>
-                <span className="jx-rapide-txt"><b>Réviz lance</b><span>Lance la boule dans le bon panier</span></span>
-                <span className="jx-jouer" aria-hidden="true">Jouer</span>
-              </button>
-              <button type="button" className="jx-rapide jx-rapide--buzzer" onClick={() => lancerRapide('buzzer')}>
-                <span className="jx-rapide-txt"><b>Réviz se trompe ?</b><span>Vrai ou faux : buzze quand il dit une bêtise</span></span>
-                <span className="jx-jouer" aria-hidden="true">Jouer</span>
-              </button>
-              <button type="button" className="jx-rapide jx-rapide--pizzeria" onClick={() => lancerRapide('pizzeria')}>
-                <span className="jx-rapide-txt"><b>La pizzeria !</b><span>Sers la bonne fraction de pizza</span></span>
-                <span className="jx-jouer" aria-hidden="true">Jouer</span>
-              </button>
-              <button type="button" className="jx-rapide jx-rapide--ninja" onClick={() => lancerRapide('ninja')}>
-                <span className="jx-rapide-txt"><b>Le ninja des fautes</b><span>Tranche les mots mal écrits</span></span>
-                <span className="jx-jouer" aria-hidden="true">Jouer</span>
-              </button>
-              <button type="button" className="jx-rapide jx-rapide--taupe" onClick={() => lancerRapide('taupe')}>
-                <span className="jx-rapide-txt"><b>Tape-taupe !</b><span>Calcul mental : tape les bonnes taupes</span></span>
-                <span className="jx-jouer" aria-hidden="true">Jouer</span>
-              </button>
-            </div>
-          </>
-        )}
-        {mode !== 'prototype' && <span className="jx-surtitre jx-ou">Ou sur un chapitre de ton programme</span>}
+        <p className="jx-intro">6 mini-jeux de 10 à 15 secondes sur un chapitre : pêche, valise, paires.</p>
         <div className="jx-puces" role="radiogroup" aria-label="Classe">
           {PROGRAMME_CLASSES.map(c => (
             <button key={c} type="button" role="radio" aria-checked={c === classe} className={`jx-puce${c === classe ? ' jx-puce--on' : ''}`} onClick={() => setClasse(c)}>{c}</button>
@@ -738,9 +726,10 @@ export default function Jeux() {
 
   // ── Fin de partie : le score sur le podium, puis le récap (une carte par erreur) ──
   if (phase === 'fin') {
+
     const rejouer = () => {
       setPartie(chapitre.rapide ? RAPIDES[chapitre.rapide]() : construirePartie(chapitre.data, mode));
-      if (chapitre.rapide === 'melange') setMusiquePartie(musiqueSuivante());
+      if (chapitre.rapide === 'melange' || chapitre.rapide === 'jour') setMusiquePartie(musiqueSuivante());
       nouvellePartie();
     };
     const tours = partie.length;

@@ -342,6 +342,30 @@
   color: #2D2B57;
 }
 
+/* ── Réviz Games : la partie du jour (image générée, texte sur un voile chaud) ── */
+.home-page .hm-jeux {
+  position: relative; display: block; overflow: hidden; isolation: isolate;
+  min-height: 176px; border-radius: 28px; background: #3A1D0C; color: #FFF6E8; text-decoration: none;
+  box-shadow: 0 14px 28px -14px rgba(120, 50, 0, .5);
+}
+.home-page .hm-jeux-image { position: absolute; top: 0; right: 0; width: 66%; height: 100%; object-fit: cover; object-position: 50% 32%; }
+.home-page .hm-jeux-voile { position: absolute; inset: 0; background: linear-gradient(90deg, #3A1D0C 0%, #3A1D0C 36%, rgba(58, 29, 12, .6) 46%, rgba(58, 29, 12, 0) 62%); }
+.home-page .hm-jeux-txt { position: relative; display: flex; flex-direction: column; gap: 4px; max-width: 54%; padding: 18px 0 20px 20px; }
+.home-page .hm-jeux-surtitre { font-size: 12px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: #FFB27A; }
+.home-page .hm-jeux-titre { font-family: var(--font-display); font-size: 22px; font-weight: 900; letter-spacing: -.6px; line-height: 1.05; text-wrap: balance; }
+.home-page .hm-jeux-sous { font-size: 13.5px; line-height: 1.35; opacity: .88; }
+.home-page .hm-jeux-btn {
+  margin-top: 8px; align-self: flex-start; padding: 9px 18px; border-radius: 99px;
+  background: #F2701E; color: #fff; font-family: var(--font-display); font-size: 16px; font-weight: 900;
+  box-shadow: 0 4px 0 #B24A0C;
+}
+.home-page .hm-jeux--faite .hm-jeux-btn { background: #FFF6E8; color: #1B1A23; box-shadow: 0 4px 0 #D8C7A6; }
+.home-page .hm-jeux:active { transform: scale(.985); }
+.home-page .hm-grille > .hm-jeux { grid-column: 1 / -1; min-height: 190px; }
+.home-page .hm-desk .hm-jeux-image { width: 62%; }
+.home-page .hm-desk .hm-jeux-txt { max-width: 42%; padding: 24px 28px; }
+.home-page .hm-desk .hm-jeux-titre { font-size: 28px; }
+
 /* ── Barre compacte qui apparaît au défilement ── */
 .home-page .hm-barre {
   position: absolute;
