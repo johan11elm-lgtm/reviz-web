@@ -447,6 +447,7 @@
 .jx-page .jx-jeux { display: flex; flex-direction: column; gap: 10px; }
 .jx-page .jx-rapide--lance { background: #8A5A2B; box-shadow: 0 6px 0 #5E3B17, 0 12px 24px var(--ch-ombre); }
 .jx-page .jx-rapide--buzzer { background: #A8243A; box-shadow: 0 6px 0 #6E1424, 0 12px 24px var(--ch-ombre); }
+.jx-page .jx-rapide--pizzeria { background: #D9621E; box-shadow: 0 6px 0 #8E3A0C, 0 12px 24px var(--ch-ombre); }
 .jx-page .jx-ou { margin-top: 6px; }
 
 /* Petits écrans (iPhone 12 ou SE dans Safari) : la table descend (on ne voit plus que les cartes et
