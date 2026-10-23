@@ -9,14 +9,16 @@
  * Même séquenceur que Réviz lance (musiqueLance.js) : toutes les 25 ms, on programme les croches
  * des 120 prochaines ms sur l'horloge audio. Elle suit le bouton son.
  *
- * Emplacement prêt pour une piste Flow Music (comme le ninja) : poser le fichier dans
- * public/jeux/taupe/musique.mp3 et renseigner PISTE ({ url, bpm : son tempo d'origine }). Elle devient
- * la version par défaut, jouée entière en boucle et accélérée à chaque tour ; ?musique=code rejoue
- * la version en code, qui sert aussi de repli si le fichier ne se charge pas.
+ * Deuxième version (23/10) : la piste « Whack Attack » choisie par Johan sur Google Flow Music
+ * (polka à 138 BPM, public/jeux/taupe/musique.mp3, 2 min 02, fin fondue), jouée entière en boucle,
+ * sans montage, accélérée à chaque tour (tempo du tour / 138) et de 20 % dans les dernières secondes.
+ * C'est la version par défaut ; ?musique=code rejoue la version composée en code, qui sert aussi de
+ * repli si le fichier ne se charge pas. Piste faite sur un compte Flow gratuit, sans usage
+ * commercial : à regénérer avant le lancement.
  */
 import { sonActif } from './bruitages';
 
-const PISTE = null; // { url: '/jeux/taupe/musique.mp3', bpm: 140 }
+const PISTE = { url: '/jeux/taupe/musique.mp3', bpm: 138 };
 
 const NOTES = { C: 0, D: 2, E: 4, F: 5, 'F#': 6, G: 7, A: 9, B: 11 };
 const freq = n => {
@@ -150,7 +152,7 @@ const musiqueCode = {
   joue: () => !!minuterie,
 };
 
-// ── Version Flow Music (quand PISTE est renseignée) : la piste entière en boucle, à bpm / PISTE.bpm ──
+// ── Version Flow Music : la piste entière en boucle, jouée à bpm / 138 ──
 let tampon = null, chargement = null;
 function charger() {
   chargement ??= fetch(PISTE.url).then(r => r.arrayBuffer()).then(b => ctx.decodeAudioData(b)).then(t => { tampon = t; })
