@@ -28,6 +28,7 @@ import { PlateauTaupe, mancheTaupe, partieTaupe, TEMPO_TAUPE } from './jeux/Taup
 import { useIsDesktop } from '../hooks/useMediaQuery';
 import { TransitionJeux, DUREES_TRANSITION } from './jeux/TransitionJeux';
 import { HubJeux } from './jeux/HubJeux';
+import { CarteDebut } from './jeux/CarteDebut';
 import { mesurer } from '../services/mesure';
 import { avecHasardDuJour, etatDuJour, enregistrerPartieDuJour, synchroniserStats } from '../services/partieDuJourService';
 import './Jeux.css';
@@ -471,6 +472,7 @@ export default function Jeux() {
   const [chapitre, setChapitre] = useState(null); // { matiere, titre, data }
   const [phase, setPhase] = useState('choix'); // choix | charge | consigne | jeu | fin
   const [partie, setPartie] = useState([]);
+  const [avant, setAvant] = useState(null); // carte de début : { cle, partie, musique } tirés, en attente de « Démarrer »
   // Partie rapide : une seule musique pour toute la partie (celle d'un des jeux, à tour de rôle d'une partie à l'autre).
   const [musiquePartie, setMusiquePartie] = useState(null);
   const [idx, setIdx] = useState(0);
@@ -543,11 +545,13 @@ export default function Jeux() {
   const TITRES = { jour: 'La partie du jour', melange: 'Partie rapide', magie: 'Le tour de magie', lance: 'Réviz lance', buzzer: 'Réviz se trompe ?', pizzeria: 'La pizzeria !', ninja: 'Le ninja des fautes', taupe: 'Tape-taupe !' };
   // Mesure (PostHog, sans identifiant) : d'où vient l'élève, ce qu'il lance, ce qu'il finit.
   const depuisRef = useRef(params.get('depuis') ?? (params.get('rapide') ? 'lien' : 'direct'));
-  const lancerRapide = (jeu = 'melange', depuis = 'hub') => {
+  // prete : ce que la carte de début a déjà tiré (les manches, elle annonce le premier jeu de la Partie
+  // rapide ; la musique, qui joue déjà).
+  const lancerRapide = (jeu = 'melange', depuis = 'hub', prete = null) => {
     mesurer('partie_lancee', { mode: jeu, depuis });
     setChapitre({ matiere: 'Réviz Games', titre: TITRES[jeu], rapide: jeu });
-    setPartie(RAPIDES[jeu]());
-    setMusiquePartie(jeu === 'melange' || jeu === 'jour' ? musiqueSuivante() : null);
+    setPartie(prete?.partie ?? RAPIDES[jeu]());
+    setMusiquePartie(jeu === 'melange' || jeu === 'jour' ? (prete?.musique ?? musiqueSuivante()) : null);
     nouvellePartie();
   };
   useEffect(() => {
@@ -587,8 +591,11 @@ export default function Jeux() {
     ninja: { m: musiqueNinja, tempo: TEMPO_NINJA },
     taupe: { m: musiqueTaupe, tempo: TEMPO_TAUPE },
   };
-  const musique = (phase === 'consigne' || phase === 'jeu') ? MUSIQUES[musiquePartie ?? manche?.type] : null;
-  const tempoTour = musique ? musique.tempo(manche.niveau ?? idx) : 0;
+  // La carte de début lance déjà la musique de la partie, au tempo du premier tour : au « Démarrer »,
+  // c'est la même musique au même tempo, elle continue sans reprendre.
+  const enJeu = phase === 'consigne' || phase === 'jeu';
+  const musique = enJeu ? MUSIQUES[musiquePartie ?? manche?.type] : avant ? MUSIQUES[avant.musique] : null;
+  const tempoTour = !musique ? 0 : enJeu ? musique.tempo(manche.niveau ?? idx) : musique.tempo(avant.partie[0]?.niveau ?? 0);
   useEffect(() => {
     for (const x of Object.values(MUSIQUES)) if (x !== musique || !son) x.m.arreter();
     if (!musique || !son) return;
@@ -713,7 +720,30 @@ export default function Jeux() {
 
   // ── L'écran des jeux : la partie du jour, la Partie rapide, les jeux en vignettes ──
   if ((phase === 'choix' || phase === 'charge') && mode !== 'prototype') {
-    return <HubJeux jour={jour} onJouer={lancerRapide} onFermer={() => navigate(-1)} isDesktop={isDesktop} />;
+    // Toucher un jeu ouvre d'abord sa carte de début (la règle, les tours, le record) ; il part sur « Démarrer ».
+    // La partie est tirée tout de suite (la carte précharge ce qu'elle affichera) et sa musique démarre ici,
+    // dans le geste de l'élève (Safari sur iPhone ne laisse jouer le son qu'à la suite d'un toucher).
+    const ouvrirCarte = cle => {
+      const p = RAPIDES[cle]();
+      const m = cle === 'melange' || cle === 'jour' ? musiqueSuivante() : p[0]?.type;
+      const x = MUSIQUES[m];
+      if (x && son) { x.m.regler({ bpm: x.tempo(p[0]?.niveau ?? 0) }); x.m.demarrer(); }
+      setAvant({ cle, partie: p, musique: m });
+    };
+    const recordDe = cle => {
+      if (cle === 'jour') return jour.record ?? 0;
+      try { return Number(localStorage.getItem(`reviz-jeux-record-${cle}`)) || 0; } catch { return 0; }
+    };
+    return (
+      <>
+        <HubJeux jour={jour} onJouer={ouvrirCarte} onFermer={() => navigate(-1)} isDesktop={isDesktop} />
+        {avant && (
+          <CarteDebut cle={avant.cle} partie={avant.partie} record={recordDe(avant.cle)}
+            large={isDesktop} accessoiresDe={type => ACCESSOIRES_JEU[type] ?? []}
+            onDemarrer={() => { lancerRapide(avant.cle, 'hub', avant); setAvant(null); }} onRetour={() => setAvant(null)} />
+        )}
+      </>
+    );
   }
   // ── Prototype (?jeu=prototype) : les mini-jeux sur un chapitre du programme ──
   if (phase === 'choix' || phase === 'charge') {

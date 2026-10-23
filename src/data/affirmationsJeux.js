@@ -75,12 +75,13 @@ const GABARITS = {
     famille: p => SCIENCES[p.a]?.famille,
   },
   tables: {
-    // 7 × 8 = 63 : le résultat d'une case voisine de la même table, l'erreur qu'on fait vraiment.
+    // 7 × 8 = 63 : le résultat d'une case voisine de la même table, l'erreur qu'on fait vraiment ; si les
+    // deux voisines servent déjà dans le tour, une case à deux crans (7 × 8 = 70).
     paires: (theme, n) => theme.preparer(Math.min(n, 8)),
     dire: (p, r) => `${p.a} = ${r}\u00a0!`,
     leurre: p => {
       const [t, m] = p.a.split(' × ').map(Number);
-      return melange([m - 1, m + 1]).filter(k => k >= 1 && k <= 10).map(k => String(t * k));
+      return [...melange([m - 1, m + 1]), ...melange([m - 2, m + 2])].filter(k => k >= 1 && k <= 10).map(k => String(t * k));
     },
     corrige: p => `${p.a} = ${p.b}`,
   },
@@ -105,21 +106,32 @@ export function tourDeBuzzer(theme, n = 4) {
   const { titre, paires: toutes } = g.paires(theme, n);
   const choisies = melange(toutes).slice(0, n);
   const nVraies = Math.floor(n / 2) + (n % 2 && Math.random() < 0.5 ? 1 : 0);
-  let verdicts;
-  do verdicts = melange(choisies.map((_, i) => i < nVraies));
-  while (verdicts.some((v, i) => i >= 2 && v === verdicts[i - 1] && v === verdicts[i - 2]));
+  // Fausse réponse : un autre élément du thème (même famille d'abord), jamais deux fois la même dans
+  // un tour. Les verdicts sont retirés tant qu'une affirmation prévue fausse n'a plus de leurre libre
+  // (sinon elle devenait vraie, et pouvait faire trois « vrai » d'affilée) ; au pire, après 50 essais,
+  // elle reste vraie.
+  const plans = choisies.map(p => ({
+    bonne: g.reponse(p),
+    leurres: g.leurre ? g.leurre(p) : [...melange(toutes.filter(x => g.famille(x) === g.famille(p))), ...melange(toutes)].map(g.reponse),
+  }));
+  let fausses;
+  for (let essai = 0; essai < 50; essai++) {
+    let verdicts;
+    do verdicts = melange(choisies.map((_, i) => i < nVraies));
+    while (verdicts.some((v, i) => i >= 2 && v === verdicts[i - 1] && v === verdicts[i - 2]));
+    const deja = new Set();
+    fausses = plans.map(({ bonne, leurres }, i) => {
+      if (verdicts[i]) return null;
+      const f = leurres.find(r => r !== bonne && !deja.has(r)) ?? null;
+      if (f) deja.add(f);
+      return f;
+    });
+    if (fausses.every((f, i) => f || verdicts[i])) break;
+  }
   const corrige = g.corrige ?? (p => g.dire(p, g.reponse(p)).replace(/\u00a0!$/, ''));
-  const deja = new Set();
   const affirmations = choisies.map((p, i) => {
-    const bonne = g.reponse(p);
-    const vrai = verdicts[i];
-    // Fausse réponse : un autre élément du thème (même famille d'abord), jamais deux fois la même
-    // dans un tour ; sans leurre possible, l'affirmation reste vraie.
-    const leurres = g.leurre ? g.leurre(p) : [
-      ...melange(toutes.filter(x => g.famille(x) === g.famille(p))), ...melange(toutes),
-    ].map(g.reponse);
-    const fausse = vrai ? null : leurres.find(r => r !== bonne && !deja.has(r)) ?? null;
-    if (fausse) deja.add(fausse);
+    const { bonne } = plans[i];
+    const fausse = fausses[i];
     const dit = fausse ?? bonne;
     const [avant, apres = ''] = g.dire(p, '\u0001').split('\u0001');
     return { texte: g.dire(p, dit), vrai: !fausse, correction: corrige(p), avant, dit, bonne, apres, paire: p };
