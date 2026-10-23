@@ -2,22 +2,16 @@
 /* Importée dans index.html */
 
 /* ─── Design System (rv-*) ─────────────────────────────────────── */
-/* Patterns extraits de Home — voir docs dans chaque fichier.
+/* Il ne reste que ce que l'app emploie encore (cartes, boutons, en-têtes, états).
  * Convention: les classes .rv-* sont GLOBALES. Elles ne doivent JAMAIS
  * apparaître dans src/pages/*.css (sinon scope-page-css.py les préfixerait
  * en .page-name .rv-*, cassant la sémantique globale). */
 @import './components/cards.css';
 @import './components/hero.css';
-@import './components/stats.css';
-@import './components/bars.css';
-@import './components/pills.css';
 @import './components/buttons.css';
-@import './components/bubble.css';
 @import './components/headers.css';
 @import './components/icons.css';
 @import './components/states.css';
-@import './components/dots.css';
-@import './components/type.css';
 
 /* ─── Variables Light ──────────────────────────────────────────── */
 :root {
@@ -27,17 +21,10 @@
   --bg-subtle:      #F4EBE0;
   --bg-muted:       #EFE5D8;
   --bg-hover:       #FBF5EE;
-  --bg-avatar:      #EFE3D2;
-  --bg-toggle:      #E6D9C7;
-  --bg-cta:         #2D2B57;
   --bg-tip:         #FBF5EE;
-  --bg-flip-back:   #EAE8F2;
 
   --border:         #EBDFCF;
   --border-subtle:  #F2E8D9;
-  --border-hover:   #D6C7B0;
-  --border-tip:     #EBDFCF;
-  --border-formula: #C9C6DC;
 
   --text-primary:   #1B1A23;
   --text-secondary: #6B6557;
@@ -46,23 +33,8 @@
   --text-muted:     #6E675B;
   /* light/xlight : hints & placeholders uniquement — jamais de texte porteur de sens. */
   --text-light:     #8F8776;
-  --text-xlight:    #B8B0A0;
-  --text-avatar:    #6B6557;
   --text-cta:       #FFFFFF;
-  --text-cta-sub:   rgba(255,255,255,0.78);
-  --text-tip:       #6B6557;
-  --text-flip-back: #2D2B57;
-  --text-formula:   #2D2B57;
-
-  --bg-intro:       #FFF1E0;
-  --border-intro:   #FFD9B0;
   --text-intro:     #B36400;
-  --bg-formula:     #EAE8F2;
-
-  --bg-icon-orange: #FFE6D2;
-  --bg-icon-indigo: #EAE8F2;
-  --bg-icon-green:  #DCF5E6;
-  --bg-danger:      #FFE0E5;
 
   /* Accents. Accent principal « encre » (bleu-noir profond) : l'orange de la
      mascotte et le halo portent la couleur, les actions restent sobres.
@@ -72,47 +44,20 @@
   --accent-violet-soft:   #EAE8F2;
   --accent-violet-ink:    #2D2B57;
   --accent-orange:        #FF8A3D;
-  --accent-orange-hover:  #F0772A;
-  --accent-orange-soft:   #FFE6D2;
-  --accent-orange-ink:    #B34400;
-  --accent-green:         #34C77B;
-  --accent-green-soft:    #DCF5E6;
-  --accent-green-ink:     #0F6B3A;
-  --accent-pink:          #FF6B9A;
-  --accent-pink-soft:     #FFE0EA;
-  --accent-pink-ink:      #A8235E;
-  --accent-red:           #FF5470;
   --accent-red-soft:      #FFE0E5;
-  --accent-red-ink:       #A81F36;
 
   /* Variantes "strong" : fonds d'accent portant du TEXTE BLANC.
      Contraste vérifié ≥ 4.5:1 (WCAG AA) — les accents de base ne passent pas. */
   --accent-red-strong:    #D32F4D;  /* 4.90:1 vs blanc */
-  --accent-orange-strong: #C25407;  /* 4.60:1 vs blanc */
-  --accent-green-strong:  #178F52;  /* 4.13:1 vs blanc — glyphes/icônes (≥3:1) */
 
   /* Radii */
   --radius-card:   24px;
   --radius-lg:     28px;
   --radius-pill:   999px;
   --radius-shell:  40px;
-  --radius-callout: 18px;  /* encarts internes aux cartes (tips, callouts) */
-  --radius-btn:    14px;   /* boutons rectangulaires */
-  --radius-chip:   10px;   /* chips, petits contrôles */
-
-  /* Spacing — échelle 4px + gabarits de page */
-  --space-1: 4px;
-  --space-2: 8px;
-  --space-3: 12px;
-  --space-4: 16px;
-  --space-5: 20px;
-  --space-6: 24px;
-  --page-gutter: 24px;     /* gouttière horizontale de toutes les pages */
-  --gap-cards:   16px;     /* espacement vertical entre cartes d'une page */
 
   /* Shadows */
   --shadow-card:   0 4px 14px rgba(45,43,87,0.07), 0 1px 3px rgba(0,0,0,0.04);
-  --shadow-pop:    0 12px 32px rgba(45,43,87,0.18);
   --shadow-shell:  0 32px 80px rgba(45,43,87,0.12);
 
   /* Halo de page (deux taches radiales derrière le haut de chaque écran,
@@ -122,10 +67,6 @@
 
   /* Skeleton (rv-skeleton) */
   --skeleton-shimmer: rgba(255, 255, 255, 0.6);
-
-  /* Dégradé des cartes héros (HeroCTA, héros narrateur de Cours).
-     Redéfini par les thèmes Réviz+ — cf. src/utils/themes.js. */
-  --grad-hero: linear-gradient(135deg, #3F3C78 0%, #2D2B57 55%, #1E1C3F 100%);
 }
 
 /* ─── Variables Dark ───────────────────────────────────────────── */
@@ -136,17 +77,10 @@
   --bg-subtle:      #25223A;
   --bg-muted:       #25223A;
   --bg-hover:       #2A2640;
-  --bg-avatar:      #2A2640;
-  --bg-toggle:      #3A3550;
-  --bg-cta:         #3B6FE8;
   --bg-tip:         #1E1B2A;
-  --bg-flip-back:   #1F2A4A;
 
   --border:         #2A2640;
   --border-subtle:  #24213A;
-  --border-hover:   #4A4470;
-  --border-tip:     #2A2640;
-  --border-formula: #2F4788;
   --skeleton-shimmer: rgba(255, 255, 255, 0.07);
   --halo-a: rgba(255, 138, 61, 0.16);
   --halo-b: rgba(255, 201, 130, 0.14);
@@ -155,23 +89,8 @@
   --text-secondary: #B5AECC;
   --text-muted:     #8B83A8;
   --text-light:     #5E5780;
-  --text-xlight:    #3A3550;
-  --text-avatar:    #B5AECC;
   --text-cta:       #FFFFFF;
-  --text-cta-sub:   rgba(255,255,255,0.7);
-  --text-tip:       #B5AECC;
-  --text-flip-back: #BFD0FF;
-  --text-formula:   #BFD0FF;
-
-  --bg-intro:       #2D1F0A;
-  --border-intro:   #5C3D15;
   --text-intro:     #FFB870;
-  --bg-formula:     #1F2A4A;
-
-  --bg-icon-orange: #3A2410;
-  --bg-icon-indigo: #1F2A4A;
-  --bg-icon-green:  #102E1F;
-  --bg-danger:      #3A1A22;
 
   /* Accents. En sombre, l'encre ne se voit pas : accent principal bleu
      (4,5:1 avec du texte blanc, 4:1 sur le fond). */
@@ -180,23 +99,10 @@
   --accent-violet-soft:   #1F2A4A;
   --accent-violet-ink:    #BFD0FF;
   --accent-orange:        #FFA866;
-  --accent-orange-hover:  #FFB680;
-  --accent-orange-soft:   #3A2410;
-  --accent-orange-ink:    #FFD5B0;
-  --accent-green:         #5BD89A;
-  --accent-green-soft:    #102E1F;
-  --accent-green-ink:     #A6F2C7;
-  --accent-pink:          #FF8FB3;
-  --accent-pink-soft:     #3A1A26;
-  --accent-pink-ink:      #FFC6D8;
-  --accent-red:           #FF7A8E;
   --accent-red-soft:      #3A1A22;
-  --accent-red-ink:       #FFC0CC;
 
   --shadow-card:   0 4px 14px rgba(0,0,0,0.35), 0 1px 2px rgba(0,0,0,0.25);
-  --shadow-pop:    0 12px 32px rgba(0,0,0,0.45);
   --shadow-shell:  0 32px 80px rgba(0,0,0,0.5);
-  --grad-hero: linear-gradient(135deg, #4A7CF6 0%, #3B6FE8 55%, #2A54C4 100%);
 }
 
 /* ─── Thèmes Réviz+ (avantage abonnement) ──────────────────────────
@@ -213,17 +119,10 @@
   --bg-subtle:      #202334;
   --bg-muted:       #202334;
   --bg-hover:       #252839;
-  --bg-avatar:      #252839;
-  --bg-toggle:      #33374D;
-  --bg-cta:         #4F5FD8;
   --bg-tip:         #191B29;
-  --bg-flip-back:   #1E2340;
 
   --border:         #262A3C;
   --border-subtle:  #202334;
-  --border-hover:   #40455F;
-  --border-tip:     #262A3C;
-  --border-formula: #343C70;
   --skeleton-shimmer: rgba(255, 255, 255, 0.06);
   --halo-a: rgba(232, 180, 90, 0.13);
   --halo-b: rgba(120, 132, 230, 0.12);
@@ -232,45 +131,18 @@
   --text-secondary: #BCB7AB;
   --text-muted:     #948F84;
   --text-light:     #6A665E;
-  --text-xlight:    #3D3C44;
-  --text-avatar:    #BCB7AB;
   --text-cta:       #FFFFFF;
-  --text-cta-sub:   rgba(255,255,255,0.72);
-  --text-tip:       #BCB7AB;
-  --text-flip-back: #D3D9FF;
-  --text-formula:   #D3D9FF;
-
-  --bg-intro:       #2A2110;
-  --border-intro:   #57431C;
   --text-intro:     #F1CB82;
-  --bg-formula:     #1E2340;
-  --bg-icon-orange: #2E2512;
-  --bg-icon-indigo: #1E2340;
-  --bg-icon-green:  #12291E;
-  --bg-danger:      #36191F;
 
   --accent-violet:        #4F5FD8;
   --accent-violet-hover:  #6170E6;
   --accent-violet-soft:   #1E2340;
   --accent-violet-ink:    #C9D0FF;
   --accent-orange:        #E8B45A;
-  --accent-orange-hover:  #F0C273;
-  --accent-orange-soft:   #2E2512;
-  --accent-orange-ink:    #F6D9A1;
-  --accent-green:         #5BD89A;
-  --accent-green-soft:    #12291E;
-  --accent-green-ink:     #A6F2C7;
-  --accent-pink:          #F08FB0;
-  --accent-pink-soft:     #351A26;
-  --accent-pink-ink:      #FFC6D8;
-  --accent-red:           #FF7A8E;
   --accent-red-soft:      #36191F;
-  --accent-red-ink:       #FFC0CC;
 
   --shadow-card:   0 4px 16px rgba(0,0,0,0.38), 0 1px 2px rgba(0,0,0,0.3);
-  --shadow-pop:    0 12px 32px rgba(0,0,0,0.5);
   --shadow-shell:  0 32px 80px rgba(0,0,0,0.55);
-  --grad-hero: linear-gradient(135deg, #2A3058 0%, #1D2140 55%, #131629 100%);
 }
 
 /* Abricot — pêche douce, accent terre cuite, au plus près de la mascotte */
@@ -281,22 +153,13 @@
   --bg-subtle:      #FBEFE4;
   --bg-muted:       #F4E1CF;
   --bg-hover:       #FDF4EC;
-  --bg-avatar:      #F4E1CF;
-  --bg-toggle:      #EACCB0;
-  --bg-cta:         #8A3B1F;
-  --bg-flip-back:   #F7E3D8;
 
   --border:         #F0D8C2;
   --border-subtle:  #F6E6D6;
-  --border-hover:   #DDB896;
 
   --text-primary:   #2A1A12;
   --text-secondary: #72574A;
   --text-muted:     #745749;
-  --text-flip-back: #6E2C14;
-  --text-formula:   #6E2C14;
-  --bg-formula:     #F7E3D8;
-  --border-formula: #E5C2AF;
 
   --accent-violet:        #8A3B1F;
   --accent-violet-hover:  #A04727;
@@ -306,7 +169,6 @@
   --halo-a: rgba(255, 138, 61, 0.34);
   --halo-b: rgba(255, 186, 140, 0.38);
   --shadow-card:   0 4px 14px rgba(120,60,30,0.08), 0 1px 3px rgba(120,60,30,0.05);
-  --grad-hero: linear-gradient(135deg, #A9502F 0%, #8A3B1F 55%, #5E2410 100%);
 }
 
 /* Sauge — vert gris apaisé, accent forêt */
@@ -317,22 +179,13 @@
   --bg-subtle:      #F1F4EC;
   --bg-muted:       #E3E9DB;
   --bg-hover:       #F6F8F2;
-  --bg-avatar:      #E3E9DB;
-  --bg-toggle:      #C8D3BC;
-  --bg-cta:         #2F5D46;
-  --bg-flip-back:   #DFEAE2;
 
   --border:         #DBE2D1;
   --border-subtle:  #E6EBDF;
-  --border-hover:   #B8C5A9;
 
   --text-primary:   #172019;
   --text-secondary: #4D5B4E;
   --text-muted:     #505F51;
-  --text-flip-back: #1F4232;
-  --text-formula:   #1F4232;
-  --bg-formula:     #DFEAE2;
-  --border-formula: #B5CDBD;
 
   --accent-violet:        #2F5D46;
   --accent-violet-hover:  #3A6E54;
@@ -342,7 +195,6 @@
   --halo-a: rgba(255, 160, 90, 0.24);
   --halo-b: rgba(140, 170, 120, 0.30);
   --shadow-card:   0 4px 14px rgba(40,70,50,0.08), 0 1px 3px rgba(40,70,50,0.05);
-  --grad-hero: linear-gradient(135deg, #43775C 0%, #2F5D46 55%, #1E3E2E 100%);
 }
 
 /* Prune — mauve poudré, accent prune profond */
@@ -353,22 +205,13 @@
   --bg-subtle:      #F6F1F6;
   --bg-muted:       #EBE2EC;
   --bg-hover:       #F9F6F9;
-  --bg-avatar:      #EBE2EC;
-  --bg-toggle:      #D5C6D7;
-  --bg-cta:         #5B2E5E;
-  --bg-flip-back:   #F0E3F0;
 
   --border:         #E5DAE6;
   --border-subtle:  #EEE6EF;
-  --border-hover:   #C8B4CA;
 
   --text-primary:   #1F1522;
   --text-secondary: #5D4A61;
   --text-muted:     #5F4C63;
-  --text-flip-back: #4A244D;
-  --text-formula:   #4A244D;
-  --bg-formula:     #F0E3F0;
-  --border-formula: #D3BCD5;
 
   --accent-violet:        #5B2E5E;
   --accent-violet-hover:  #6E3A72;
@@ -378,7 +221,6 @@
   --halo-a: rgba(255, 150, 110, 0.26);
   --halo-b: rgba(180, 120, 175, 0.24);
   --shadow-card:   0 4px 14px rgba(70,30,70,0.08), 0 1px 3px rgba(70,30,70,0.05);
-  --grad-hero: linear-gradient(135deg, #7A4580 0%, #5B2E5E 55%, #3D1C40 100%);
 }
 
 /* ─── Reset ────────────────────────────────────────────────────── */
@@ -664,33 +506,6 @@ html.native .content, html.native .pg-content, html.native .pf-content {
 .nav-ia.active .nav-ia-core { background: #FFF1E6; }
 .nav-ia.active .nav-ia-core svg { transform: rotate(45deg) scale(1.05); }
 
-/* Toggle switch (réutilisé par la page Réglages) */
-.toggle-wrap { position: relative; width: 44px; height: 24px; }
-.toggle-wrap input { opacity: 0; width: 0; height: 0; position: absolute; }
-.toggle-slider {
-  position: absolute; inset: 0;
-  background: var(--bg-toggle); border-radius: 12px;
-  cursor: pointer; transition: background 0.2s;
-}
-.toggle-slider::before {
-  content: '';
-  position: absolute; left: 3px; top: 3px;
-  width: 18px; height: 18px; border-radius: 50%;
-  background: white; transition: transform 0.2s;
-}
-.toggle-wrap input:checked + .toggle-slider { background: var(--accent-violet); }
-.toggle-wrap input:checked + .toggle-slider::before { transform: translateX(20px); }
-
-/* Premium chip (réutilisé par la page Réglages) */
-.premium-chip {
-  background: linear-gradient(135deg, #FF6B00, #FF9500);
-  color: white; font-size: 12px; font-weight: 700;
-  padding: 4px 10px; border-radius: 20px; align-self: flex-start;
-}
-.premium-chip--active {
-  background: linear-gradient(135deg, #22C55E, #16A34A);
-}
-
 /* Spinner animation (code splitting fallback) */
 @keyframes spin {
   to { transform: rotate(360deg); }
@@ -717,7 +532,6 @@ html.native .content, html.native .pg-content, html.native .pf-content {
  * largeur et gèrent leurs marges. Sous 1024 px rien ne change ; l'app native
  * garde ses règles plein écran. */
 :root {
-  --sidenav-w: 0px;
   /* Titres de la refonte : Bricolage Grotesque (700/800), texte en Geist. */
   --font-display: 'Bricolage Grotesque', 'Geist', system-ui, sans-serif;
   --content-max: 1120px;
@@ -752,13 +566,4 @@ html.native .content, html.native .pg-content, html.native .pf-content {
   html:not(.native) .pf-content,
   html:not(.native) .cours-content,
   html:not(.native) .programme-content { padding-bottom: 48px; }
-}
-@media (min-width: 1024px) {
-  /* Feuilles du bas (coach, formats) : centrées dans la coquille, largeur bornée */
-  html:not(.native) .rv-sheet--bottom {
-    left: 0;
-    right: 0;
-    max-width: 560px;
-    margin: 0 auto;
-  }
 }

@@ -52,11 +52,6 @@
 .mo-chiffre--menthe .mo-chiffre-icone { background: #DCF5E6; }
 .mo-chiffre b { font-family: var(--font-display); font-size: 26px; font-weight: 800; line-height: 1; }
 .mo-chiffre span:last-child { font-size: 12px; font-weight: 600; line-height: 1.25; color: #6E675B; }
-.mo-progres { width: 100%; display: flex; align-items: center; gap: 12px; padding: 16px 16px 16px 18px; border: 0; font-family: inherit; color: inherit; text-align: left; cursor: pointer; box-shadow: 0 6px 18px rgba(160,80,20,.08); }
-.mo-progres > span:first-child { flex: 1; display: flex; flex-direction: column; gap: 2px; }
-.mo-progres b { font-size: 16px; font-weight: 700; }
-.mo-progres > span:first-child > span { font-size: 13px; font-weight: 500; color: #6E675B; }
-.mo-go { flex: none; width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: #C25407; color: #fff; }
 
 /* Prochain badge */
 .mo-prochain { display: flex; align-items: center; gap: 14px; padding: 16px; border-radius: 24px; background: #FFE6D2; }
@@ -134,7 +129,6 @@
 .mo-btn:disabled { background: #EADBCB; box-shadow: none; color: #6E675B; cursor: default; }
 .mo-btn--creme { background: #fff; color: #1B1A23; box-shadow: 0 5px 0 #EADBCB; }
 .mo-btn--petit { width: auto; height: 46px; margin-top: 14px; align-self: flex-start; font-size: 15px; }
-
 
 /* Mes progrès (fusionné dans Moi le 22/10) : la semaine, la mémoire, le programme */
 .mo-bloc { display: flex; flex-direction: column; gap: 14px; padding: 18px; }
@@ -243,7 +237,6 @@
 .mo-carte--bloc .mo-chiffre--lavande { background: #E4E0FA; }
 .mo-carte--bloc .mo-chiffre--menthe { background: #DCF5E6; }
 .mo-carte--bloc .mo-chiffre .mo-chiffre-icone { background: none; width: auto; height: auto; justify-content: flex-start; }
-.mo-carte--bloc .mo-progres { margin-top: auto; background: #F8EFE7; box-shadow: none; }
 .mo-page--large .mo-battle { padding: 22px; border-radius: 28px; }
 .mo-page--large .mo-battle .mo-btn { margin-top: auto; }
 .mo-page--large .mo-section { max-width: 1440px; box-sizing: border-box; margin: 40px auto 0; padding: 0 56px; }

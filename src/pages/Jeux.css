@@ -418,26 +418,6 @@
   :is(.mg-page, .ln-page) .mg-combo, .mg-page .mg-fumee, :is(.mg-page, .ln-page) .mg-bravo i { animation-duration: .01s; }
 }
 
-/* Partie rapide (thèmes faciles), en tête de l'écran de choix. */
-.jx-page .jx-rapide {
-  display: flex; align-items: center; justify-content: space-between; gap: 12px;
-  padding: 18px 18px; border: 0; border-radius: 22px;
-  background: #2A2140; color: #FFF6E8; text-align: left; cursor: pointer;
-  box-shadow: 0 6px 0 #15102A, 0 12px 24px var(--ch-ombre);
-}
-.jx-page .jx-rapide-txt { display: flex; flex-direction: column; gap: 3px; }
-.jx-page .jx-rapide-txt b { font-family: var(--font-display); font-size: 22px; font-weight: 900; letter-spacing: -.02em; }
-.jx-page .jx-rapide-txt span { font-size: 14px; opacity: .8; }
-.jx-page .jx-rapide .jx-jouer { background: #FFD25A; color: #2A2140; }
-/* La Partie rapide (les 3 jeux mélangés) en tête, plus grande ; puis un bouton par jeu, à sa couleur. */
-.jx-page .jx-rapide--melange { padding: 22px 20px; background: linear-gradient(135deg, #2A2140, #4B2E6E); }
-.jx-page .jx-rapide--melange .jx-rapide-txt b { font-size: 26px; }
-.jx-page .jx-jeux { display: flex; flex-direction: column; gap: 10px; }
-.jx-page .jx-rapide--lance { background: #8A5A2B; box-shadow: 0 6px 0 #5E3B17, 0 12px 24px var(--ch-ombre); }
-.jx-page .jx-rapide--buzzer { background: #A8243A; box-shadow: 0 6px 0 #6E1424, 0 12px 24px var(--ch-ombre); }
-.jx-page .jx-rapide--pizzeria { background: #D9621E; box-shadow: 0 6px 0 #8E3A0C, 0 12px 24px var(--ch-ombre); }
-.jx-page .jx-ou { margin-top: 6px; }
-
 /* Petits écrans (iPhone 12 ou SE dans Safari) : la table descend (on ne voit plus que les cartes et
    le haut de la nappe), le titre rapetisse et la bulle passe à côté de Réviz pour ne pas couvrir
    son chapeau ni le titre. */

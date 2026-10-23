@@ -2,7 +2,7 @@
  * héros lavande + grain, Réviz qui fait coucou, deux cartes (découvrir une classe, donner son
  * avis). Ordinateur : colonne de 640 px dans un conteneur de 1040 px, Réviz à droite. */
 .pr-page {
-  --pr-bord: #EADBCB; --pr-orange: #C25407; --pr-tranche: #8F3E05;
+  --pr-orange: #C25407; --pr-tranche: #8F3E05;
   min-height: 100dvh;
   background: #F8EFE7;
   color: var(--ch-encre);

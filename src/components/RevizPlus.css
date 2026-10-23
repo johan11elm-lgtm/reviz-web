@@ -4,12 +4,7 @@
 :root {
   --rp-gold-1: #F7DB9C;
   --rp-gold-2: #E3A94F;
-  --rp-gold-text: #F2CD84;
   --rp-gold-ink: #2B1D05;
-  --rp-on: #FBF6EC;
-  --rp-on-sub: rgba(251, 246, 236, 0.72);
-  --rp-grad: linear-gradient(155deg, #3C3973 0%, #2A2853 46%, #17162F 100%);
-  --rp-line: rgba(242, 205, 132, 0.24);
 }
 
 /* ── Badge doré ── */

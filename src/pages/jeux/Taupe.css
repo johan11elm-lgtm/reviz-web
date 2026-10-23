@@ -180,9 +180,6 @@
   .mg-page.tp-page .tp-compteur i { width: 20px; height: 20px; }
 }
 
-/* Le bouton du jeu sur l'écran de choix (Jeux.jsx). */
-.jx-page .jx-rapide.jx-rapide--taupe { background: #6B4423; box-shadow: 0 6px 0 #3F2511, 0 12px 24px var(--ch-ombre); }
-
 @media (prefers-reduced-motion: reduce) {
   .mg-page.tp-page :is(.tp-verdict, .tp-flash, .tp-decompte, .tp-choc img, .tp-choc b, .tp-compteur i, .tp-compteur--perd) { animation-duration: .01s; }
   .tp-page--urgent .mg-chrono { animation: none; box-shadow: 0 0 0 4px rgba(255, 84, 112, .55); }

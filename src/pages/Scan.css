@@ -3,7 +3,6 @@
 .sc-page { min-height: 100dvh; background: #F8EFE7; color: var(--ch-encre); }
 .sc-defile { padding-bottom: calc(120px + env(safe-area-inset-bottom, 0px)); flex: 1; min-height: 0; overflow-y: auto; overflow-x: hidden; scrollbar-width: none; }
 .sc-defile::-webkit-scrollbar { display: none; }
-.sc-flex { flex: 1; }
 
 /* ── Héros ── */
 .sc-page .sc-hero { padding-bottom: 72px; }
@@ -175,7 +174,6 @@ button.sc-carte:active { transform: scale(.98); }
 .sc-voile { position: fixed; inset: 0; z-index: 400; display: flex; align-items: flex-end; justify-content: center; background: rgba(27,26,35,.32); }
 .sc-feuille { width: 100%; max-width: 560px; max-height: 88vh; overflow-y: auto; box-sizing: border-box; padding: 22px 20px calc(24px + env(safe-area-inset-bottom, 0px)); border-radius: 28px 28px 0 0; background: #F8EFE7; animation: scMonte .3s cubic-bezier(.2,.8,.2,1) both; }
 @keyframes scMonte { from { transform: translateY(100%); } }
-.sc-feuille-tete { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
 .sc-feuille-tete h2, .sc-feuille h2 { margin: 0; font-family: var(--font-display); font-size: 24px; font-weight: 800; letter-spacing: -.03em; }
 .sc-feuille--centre { display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center; }
 .sc-feuille--centre .sc-deux { margin-top: 8px; }

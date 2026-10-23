@@ -156,9 +156,6 @@
   .mg-page.nj-page .nj-milieu { margin-top: 12px; }
 }
 
-/* Le bouton du jeu sur l'écran de choix (Jeux.jsx). */
-.jx-page .jx-rapide--ninja { background: #1E2752; box-shadow: 0 6px 0 #0E1430, 0 12px 24px var(--ch-ombre); }
-
 @media (prefers-reduced-motion: reduce) {
   .mg-page.nj-page .nj-verdict, .mg-page.nj-page .nj-flash, .mg-page.nj-page .nj-decompte, .mg-page.nj-page .nj-lune { animation-duration: .01s; }
   .nj-page--urgent .mg-chrono { animation: none; box-shadow: 0 0 0 4px rgba(255, 84, 112, .55); }
