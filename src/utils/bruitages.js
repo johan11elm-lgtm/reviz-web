@@ -14,13 +14,27 @@ export function bruitagesActifs(oui) {
   try { localStorage.setItem(CLE, oui ? '1' : '0'); } catch { /* stockage indisponible */ }
 }
 
-function audio() {
-  if (!actif) return null;
-  const AC = window.AudioContext || window.webkitAudioContext;
+/**
+ * Le contexte audio, partagé par les bruitages et toutes les musiques des jeux. Un seul pour toute
+ * la page : Safari sur iPhone limite le nombre de contextes, et les derniers créés restaient muets
+ * (la musique du ninja, 23/10). Il est réveillé au premier geste de l'élève, seul moment où iOS
+ * accepte de le démarrer.
+ */
+export function contexteAudio() {
+  const AC = typeof window !== 'undefined' && (window.AudioContext || window.webkitAudioContext);
   if (!AC) return null;
   ctx ??= new AC();
   if (ctx.state === 'suspended') ctx.resume().catch(() => {});
   return ctx;
+}
+if (typeof window !== 'undefined') {
+  const reveiller = () => { if (ctx?.state === 'suspended') ctx.resume().catch(() => {}); };
+  for (const ev of ['pointerdown', 'touchend', 'keydown']) window.addEventListener(ev, reveiller, { capture: true, passive: true });
+}
+
+function audio() {
+  if (!actif) return null;
+  return contexteAudio();
 }
 
 // Une note : oscillateur + enveloppe (attaque courte, chute exponentielle).
@@ -133,6 +147,13 @@ const SONS = {
     note(a, { f: 784, d: 0.12, type: 'square', vol: 0.05 });
     note(a, { f: 1046, t: 0.12, d: 0.5, type: 'square', vol: 0.06 });
     note(a, { f: 1318, t: 0.12, d: 0.5, type: 'triangle', vol: 0.06 });
+  },
+  // Transition entre deux jeux : petit jingle de boîte à musique (sol do mi sol, puis un carillon), court
+  // pour ne pas couvrir la musique de la partie.
+  jingle: a => {
+    [[784, 0], [1046, 0.09], [1318, 0.18], [1568, 0.27]].forEach(([f, t], i) => note(a, { f, t, d: i === 3 ? 0.6 : 0.16, type: 'triangle', vol: 0.08 }));
+    note(a, { f: 2093, t: 0.36, d: 0.7, vol: 0.05 }); note(a, { f: 3136, t: 0.4, d: 0.5, vol: 0.025 });
+    souffle(a, { t: 0.3, d: 0.35, f: 5000, q: 0.8, vol: 0.03, type: 'highpass' });
   },
   // ── La pizzeria ! ──
   // Une part qu'on décolle : le fromage qui file (petit « plop » mou qui monte).

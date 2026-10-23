@@ -113,17 +113,28 @@ export function PlateauNinja({ manche, idx, total, phase, expire, onBon, onFaux,
   const restantes = sauf => fruits.filter(f => f.faute && f.id !== sauf && !M.fruits.get(f.id)?.tranche)
     .map(f => erreurNinja(f, null));
 
-  // Une faute retombe sans avoir été tranchée : le tour est perdu.
+  // Les fautes réglées (tranchées ou retombées) : quand il n'en reste plus, le tour est fini.
+  const toutesReglees = () => fruits.filter(x => x.faute).every(x => M.fruits.get(x.id)?.tranche || jeu.current.echappees.has(x.id));
+  // Le chrono est écoulé pendant que des fautes étaient encore en l'air : on les laisse finir (on
+  // peut encore les trancher), puis le tour se termine. Voir l'effet « Chrono écoulé ».
+  const finSiPlusRien = () => { if (jeu.current.prolonge && toutesReglees()) finChrono.current?.(); };
+
+  // Une faute retombe sans avoir été tranchée : une erreur, mais le tour continue (Johan, 23/10 :
+  // frustrant que le jeu s'arrête alors qu'on avait les réponses suivantes).
   const echappee = useCallback(f => {
     const j = jeu.current;
-    if (j.fini) return;
+    if (j.fini || j.echappees.has(f.id)) return;
+    j.echappees.add(f.id);
     jouer('ploc');
     plus(90, () => jouer('buzzer'));
     setFlash({ couleur: 'rouge', id: Date.now() });
     setVerdict({ type: 'echappe', titre: 'Une faute t’a échappé !', sous: { barre: f.faux, juste: f.bon }, id: Date.now() });
+    plus(1300, () => setVerdict(v => (v?.type === 'echappe' ? null : v)));
     onFaux(erreurNinja(f, 'Pas tranché'));
     pantin.current?.expression('decu');
-    terminer(restantes(f.id), 1300);
+    plus(700, () => { if (!jeu.current.fini) pantin.current?.expression('content'); });
+    if (j.prolonge) finSiPlusRien();
+    else if (toutesReglees()) terminer([], 1300);
   }, [fruits, onFaux, terminer]); // eslint-disable-line react-hooks/exhaustive-deps
   const echappeeRef = useRef(echappee);
   echappeeRef.current = echappee;
@@ -224,7 +235,7 @@ export function PlateauNinja({ manche, idx, total, phase, expire, onBon, onFaux,
       pantin.current?.expression('content');
       return undefined;
     }
-    jeu.current = { fini: false, debut: performance.now(), tranchees: 0 };
+    jeu.current = { fini: false, debut: performance.now(), tranchees: 0, echappees: new Set(), prolonge: false };
     const montre = setInterval(() => setReste(Math.max(0, Math.ceil(manche.duree - (performance.now() - jeu.current.debut) / 1000))), 200);
     plus((manche.duree - 3) * 1000, () => { if (!jeu.current.fini) musiqueNinja.regler({ enTension: true }); });
     [3, 2, 1].forEach(n => plus((manche.duree - n) * 1000, () => { if (!jeu.current.fini) { setDecompte(n); jouer('tic'); } }));
@@ -232,16 +243,29 @@ export function PlateauNinja({ manche, idx, total, phase, expire, onBon, onFaux,
   }, [phase, idx]); // eslint-disable-line react-hooks/exhaustive-deps
   useEffect(() => () => vider(), []);
 
-  // Chrono écoulé : des fautes encore en l'air (ou pas parties) ; distinct d'une erreur.
+  // Chrono écoulé : distinct d'une erreur. Si des fautes sont encore en l'air, on les laisse retomber
+  // (on peut encore les trancher) : jamais de coupure pendant qu'on avait la réponse sous le doigt.
+  const finChrono = useRef(null);
   useEffect(() => {
     if (!expire) return;
     const j = jeu.current;
     if (j.fini) return;
-    const manques = restantes();
-    jouer('gong');
-    setVerdict({ type: 'temps', titre: 'Temps écoulé !', sous: manques.length ? { barre: manques[0].question, juste: manques[0].bonne } : null, id: Date.now() });
-    pantin.current?.expression('panique');
-    terminer(manques, 1100);
+    finChrono.current = () => {
+      if (jeu.current.fini) return;
+      finChrono.current = null;
+      const manques = restantes().filter(e => !jeu.current.echappees.has(fruits.find(f => f.faux === e.question)?.id));
+      jouer('gong');
+      setVerdict({ type: 'temps', titre: 'Temps écoulé !', sous: manques.length ? { barre: manques[0].question, juste: manques[0].bonne } : null, id: Date.now() });
+      pantin.current?.expression('panique');
+      terminer(manques, 1100);
+    };
+    const tau = (performance.now() - j.debut) / 1000;
+    const enVol = fruits.filter(f => f.faute && !M.fruits.get(f.id)?.tranche && !j.echappees.has(f.id) && f.t <= tau && f.t + f.vol > tau);
+    if (!enVol.length) { finChrono.current(); return; }
+    j.prolonge = true;
+    // Ceinture : au plus tard quand la dernière retombe.
+    const dernier = Math.max(...enVol.map(f => f.t + f.vol)) - tau;
+    plus(Math.min(3, dernier) * 1000 + 150, () => finChrono.current?.());
   }, [expire]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // ── Trancher ──
@@ -278,8 +302,10 @@ export function PlateauNinja({ manche, idx, total, phase, expire, onBon, onFaux,
       setCorrections(l => [...l.slice(-3), { id: `${f.id}-${Date.now()}`, x: F.x, y: F.y, faux: f.faux, bon: f.bon }]);
       r?.expression('fier');
       plus(650, () => { if (!jeu.current.fini) r?.expression('content'); });
-      if (j.tranchees === fruits.filter(x => x.faute).length) {
-        // Toutes les fautes tranchées : gagné, tout de suite.
+      if (j.prolonge) { finSiPlusRien(); return; }
+      if (toutesReglees()) {
+        // Toutes les fautes réglées : fini tout de suite (« Toutes tranchées » si aucune n'a échappé).
+        if (j.echappees.size) { terminer([], 900); return; }
         plus(120, () => jouer('ding'));
         setVerdict({ type: 'gagne', titre: 'Toutes tranchées !', sous: null, id: Date.now() });
         setFete(Date.now());
@@ -288,13 +314,14 @@ export function PlateauNinja({ manche, idx, total, phase, expire, onBon, onFaux,
       }
       return;
     }
-    // Un bon mot tranché : le tour est perdu.
+    // Un bon mot tranché : une erreur, mais le tour continue.
     plus(60, () => jouer('buzzer'));
     setFlash({ couleur: 'rouge', id: Date.now() });
     setVerdict({ type: 'bon', titre: 'Bon mot tranché !', sous: { juste: f.bon, suite: ' était bien écrit' }, id: Date.now() });
+    plus(1300, () => setVerdict(v => (v?.type === 'bon' ? null : v)));
     onFaux(erreurNinja(f, 'Tranché', true));
     r?.expression('panique');
-    terminer(restantes(), 1300);
+    plus(700, () => { if (!jeu.current.fini) r?.expression('content'); });
   };
 
   // Le geste : chaque bout de trajet du doigt (du point précédent au nouveau) coupe les fruits qu'il

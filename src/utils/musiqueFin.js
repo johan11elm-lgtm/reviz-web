@@ -7,16 +7,14 @@
  * Elle suit le bouton son des bruitages. Piste faite sur un compte Flow gratuit, sans usage
  * commercial : à regénérer avant le lancement.
  */
-import { sonActif } from './bruitages';
+import { sonActif, contexteAudio } from './bruitages';
 
 const URL_PISTE = '/jeux/fin/musique.mp3';
 let ctx = null, tampon = null, chargement = null, sortie = null, source = null, actif = false;
 
+// Le contexte audio partagé avec les bruitages (un seul pour la page, voir bruitages.js).
 function contexte() {
-  const AC = window.AudioContext || window.webkitAudioContext;
-  if (!AC) return null;
-  ctx ??= new AC();
-  if (ctx.state === 'suspended') ctx.resume().catch(() => {});
+  ctx = contexteAudio();
   return ctx;
 }
 function charger() {

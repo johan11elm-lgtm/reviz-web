@@ -17,7 +17,7 @@
  * rejoue la version composée en code (aussi le repli si la piste ne se charge pas). Piste faite sur
  * un compte Flow gratuit, sans usage commercial : à regénérer avant le lancement.
  */
-import { sonActif } from './bruitages';
+import { sonActif, contexteAudio } from './bruitages';
 
 const NOTES = { C: 0, 'C#': 1, D: 2, 'D#': 3, E: 4, F: 5, 'F#': 6, G: 7, 'G#': 8, A: 9, 'A#': 10, B: 11 };
 const freq = n => {
@@ -46,11 +46,9 @@ const ACCORDS = [
 let ctx = null, sortie = null, minuterie = null, bruit = null;
 let pas = 0, prochaine = 0, tempo = 116, tension = false;
 
+// Le contexte audio partagé avec les bruitages (un seul pour la page, voir bruitages.js).
 function contexte() {
-  const AC = window.AudioContext || window.webkitAudioContext;
-  if (!AC) return null;
-  ctx ??= new AC();
-  if (ctx.state === 'suspended') ctx.resume().catch(() => {});
+  ctx = contexteAudio();
   return ctx;
 }
 

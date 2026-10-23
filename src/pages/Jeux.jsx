@@ -91,6 +91,15 @@ export const partieMagieSeule = () => themesDePartie(TOURS_MAGIE.length).map((th
  * 2, 2 ; six thèmes tous différents.
  */
 const JEUX = { magie: mancheMagie, lance: mancheLance, buzzer: mancheBuzzer, pizzeria: manchePizzeria, ninja: mancheNinja, taupe: mancheTaupe };
+// La musique de la Partie rapide, à tour de rôle d'une partie à l'autre (mémorisé sur l'appareil).
+const ORDRE_MUSIQUES = ['magie', 'lance', 'buzzer', 'pizzeria', 'ninja', 'taupe'];
+function musiqueSuivante() {
+  let i = 0;
+  try { i = Number(localStorage.getItem('reviz-jeux-musique')) || 0; } catch { /* stockage indisponible */ }
+  try { localStorage.setItem('reviz-jeux-musique', String((i + 1) % ORDRE_MUSIQUES.length)); } catch { /* idem */ }
+  return ORDRE_MUSIQUES[i % ORDRE_MUSIQUES.length];
+}
+
 export function partieMelangee() {
   const themes = themesDePartie(6);
   const jeux = Object.keys(JEUX);
@@ -451,6 +460,8 @@ export default function Jeux() {
   const [chapitre, setChapitre] = useState(null); // { matiere, titre, data }
   const [phase, setPhase] = useState('choix'); // choix | charge | consigne | jeu | fin
   const [partie, setPartie] = useState([]);
+  // Partie rapide : une seule musique pour toute la partie (celle d'un des jeux, à tour de rôle d'une partie à l'autre).
+  const [musiquePartie, setMusiquePartie] = useState(null);
   const [idx, setIdx] = useState(0);
   const [expire, setExpire] = useState(-1); // numéro du jeu dont le chrono est écoulé
   const [score, setScore] = useState(0);
@@ -458,7 +469,8 @@ export default function Jeux() {
   const [erreurs, setErreurs] = useState([]);
   const [gag, setGag] = useState(null);
   const [bulle, setBulle] = useState(null); // ce que dit Réviz pendant le tour de magie
-  const [transition, setTransition] = useState(null); // null | 'enroule' | 'carte' | 'deroule'
+  const [transition, setTransition] = useState(null);
+  const pretRef = useRef(null); // « Je suis prêt » sur la carte de transition // null | 'enroule' | 'carte' | 'deroule'
   const [effets, setEffets] = useState([]); // { id, type, n } : combo, fumée, bravo
   const [son, setSon] = useState(sonActif);
   const [hauteurEcran] = useState(() => (typeof window !== 'undefined' ? window.innerHeight : 844));
@@ -492,6 +504,7 @@ export default function Jeux() {
   const lancerRapide = (jeu = 'melange') => {
     setChapitre({ matiere: 'Réviz Games', titre: TITRES[jeu], rapide: jeu });
     setPartie(RAPIDES[jeu]());
+    setMusiquePartie(jeu === 'melange' ? musiqueSuivante() : null);
     nouvellePartie();
   };
   useEffect(() => {
@@ -520,8 +533,9 @@ export default function Jeux() {
   const manche = partie[idx];
 
   // Musique d'un jeu : une seule boucle, de la première annonce jusqu'à l'écran de fin ; chaque
-  // tour la joue un peu plus vite (8 % de plus à chaque tour).
-  // Le niveau du tour (0, 1, 2) règle la vitesse : dans la Partie rapide, chaque jeu revient deux fois.
+  // tour la joue un peu plus vite (8 % de plus à chaque tour). Le niveau du tour (0, 1, 2) règle la
+  // vitesse. Dans la Partie rapide, une seule musique tient toute la partie (Johan, 23/10 : six
+  // musiques différentes, c'était trop chargé), qui accélère avec les niveaux 0, 0, 1, 1, 2, 2.
   const MUSIQUES = {
     magie: { m: musiqueMagie, tempo: n => Math.round(116 * (1 + n * 0.08)) },
     lance: { m: musiqueLance, tempo: n => Math.round(126 * (1 + n * 0.08)) },
@@ -530,7 +544,7 @@ export default function Jeux() {
     ninja: { m: musiqueNinja, tempo: TEMPO_NINJA },
     taupe: { m: musiqueTaupe, tempo: TEMPO_TAUPE },
   };
-  const musique = (phase === 'consigne' || phase === 'jeu') ? MUSIQUES[manche?.type] : null;
+  const musique = (phase === 'consigne' || phase === 'jeu') ? MUSIQUES[musiquePartie ?? manche?.type] : null;
   const tempoTour = musique ? musique.tempo(manche.niveau ?? idx) : 0;
   useEffect(() => {
     for (const x of Object.values(MUSIQUES)) if (x !== musique || !son) x.m.arreter();
@@ -578,11 +592,26 @@ export default function Jeux() {
       if (idx + 1 >= partie.length) { setPhase('fin'); return; }
       // Transition B : le décor s'enroule, la carte du jeu suivant, le nouveau décor se déroule.
       // Le tour suivant ne démarre qu'au déroulement (ses minuteries partent à ce moment-là).
+      // La carte explique le jeu qui arrive : elle attend « Je suis prêt » (pas avant la fin de son
+      // retournement), et passe toute seule au bout de quelques secondes.
       const d = DUREES_TRANSITION;
       setTransition('enroule'); jouer('glisse');
-      setTimeout(() => { setTransition('carte'); jouer('carte'); }, d.enroule);
-      setTimeout(() => { setIdx(i => i + 1); setPhase('consigne'); setTransition('deroule'); jouer('glisse'); }, d.enroule + d.carte);
-      setTimeout(() => setTransition(null), d.enroule + d.carte + d.deroule);
+      setTimeout(() => { setTransition('carte'); jouer('jingle'); }, d.enroule);
+      let pret = false, parti = false;
+      const derouler = () => {
+        if (parti) return;
+        parti = true; pretRef.current = null; clearTimeout(auto);
+        setIdx(i => i + 1); setPhase('consigne'); setTransition('deroule'); jouer('glisse');
+        setTimeout(() => setTransition(null), d.deroule);
+      };
+      setTimeout(() => { if (pret) derouler(); }, d.enroule + d.carte);
+      const auto = setTimeout(derouler, d.enroule + d.carte + d.attente);
+      pretRef.current = () => {
+        if (pret) return;
+        pret = true; jouer('appui');
+        if (performance.now() >= tCarte + d.carte) derouler();
+      };
+      const tCarte = performance.now() + d.enroule;
     }, 650);
   }, [manche, idx, partie.length]);
 
@@ -676,7 +705,11 @@ export default function Jeux() {
 
   // ── Fin de partie : le score sur le podium, puis le récap (une carte par erreur) ──
   if (phase === 'fin') {
-    const rejouer = () => { setPartie(chapitre.rapide ? RAPIDES[chapitre.rapide]() : construirePartie(chapitre.data, mode)); nouvellePartie(); };
+    const rejouer = () => {
+      setPartie(chapitre.rapide ? RAPIDES[chapitre.rapide]() : construirePartie(chapitre.data, mode));
+      if (chapitre.rapide === 'melange') setMusiquePartie(musiqueSuivante());
+      nouvellePartie();
+    };
     const tours = partie.length;
     return (
       <FinDePartie surtitre={`${chapitre.titre} · ${tours} tour${tours > 1 ? 's' : ''}`}
@@ -715,7 +748,7 @@ export default function Jeux() {
   const suivante = transition === 'deroule' ? manche : partie[idx + 1];
   const transitionEl = (
     <TransitionJeux etape={transition} suivante={suivante} numero={(transition === 'deroule' ? idx : idx + 1) + 1}
-      total={partie.length} score={score} />
+      total={partie.length} score={score} onPret={() => pretRef.current?.()} />
   );
 
   if (manche.type === 'buzzer') {

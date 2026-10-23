@@ -16,7 +16,7 @@
  * repli si le fichier ne se charge pas. Piste faite sur un compte Flow gratuit, sans usage
  * commercial : à regénérer avant le lancement.
  */
-import { sonActif } from './bruitages';
+import { sonActif, contexteAudio } from './bruitages';
 
 const PISTE = { url: '/jeux/taupe/musique.mp3', bpm: 138 };
 
@@ -43,11 +43,9 @@ const BASSE = [['G2', 'D3'], ['C3', 'G2'], ['D3', 'A2'], ['G2', 'D3'], ['G2', 'D
 let ctx = null, sortie = null, minuterie = null, bruit = null;
 let pas = 0, prochaine = 0, tempo = 132, tension = false;
 
+// Le contexte audio partagé avec les bruitages (un seul pour la page, voir bruitages.js).
 function contexte() {
-  const AC = window.AudioContext || window.webkitAudioContext;
-  if (!AC) return null;
-  ctx ??= new AC();
-  if (ctx.state === 'suspended') ctx.resume().catch(() => {});
+  ctx = contexteAudio();
   return ctx;
 }
 

@@ -232,6 +232,7 @@ export function PlateauPizzeria({ manche, idx, total, phase, expire, onBon, onFa
   const suivante = useCallback(() => {
     const j = jeu.current;
     if (j.fini) return;
+    if (j.apresChrono) { plus(200, () => terminer([])); return; } // servie juste après le chrono
     if (j.k + 1 >= commandes.length) {
       if (j.justes === commandes.length) { setFete(Date.now()); jouer('bravo'); pantin.current?.geste('saut'); }
       plus(500 * r, () => terminer([]));
@@ -326,6 +327,14 @@ export function PlateauPizzeria({ manche, idx, total, phase, expire, onBon, onFa
     const j = jeu.current;
     if (j.fini) return;
     const cmd = commandes[j.k];
+    // La bonne commande était prête dans l'assiette : on la sert pour l'élève, elle compte (Johan,
+    // 23/10 : pas de coupure alors qu'on avait la réponse). Le tour finit après le « Juste ! ».
+    if (j.libre && !j.servie && dansLAssiette().length === cmd.attendu) {
+      j.apresChrono = true;
+      setDecompte(null);
+      servir();
+      return;
+    }
     const manque = !j.servie;
     // Temps écoulé : pas une erreur de calcul, et ça doit se voir. La sonnerie du minuteur de cuisine
     // (pas le buzzer), un bandeau sombre « Temps écoulé ! », la pizza brûle.

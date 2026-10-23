@@ -69,15 +69,23 @@ export function JeuLance({ manche, numero, total, enJeu, expire, onBon, onFaux, 
   const geste = useRef(null);
   const question = manche.questions[q];
 
-  const terminer = useCallback(() => {
+  const terminer = useCallback((sansEnCours = false) => {
     if (fini.current) return;
     fini.current = true;
     finJeu.current = performance.now();
-    // Seule la question affichée compte (les suivantes, jamais vues, ne sont pas des erreurs).
-    const enCours = manche.questions[reponses.current.length];
+    // Seule la question affichée compte (les suivantes, jamais vues, ne sont pas des erreurs) ; si la
+    // dernière boule est arrivée après le chrono, la question suivante n'a jamais été montrée.
+    const enCours = sansEnCours ? null : manche.questions[reponses.current.length];
     onTermine(enCours ? [erreurLance(manche, enCours, null)] : []);
   }, [manche, onTermine]);
-  useEffect(() => { if (expire) terminer(); }, [expire]); // eslint-disable-line react-hooks/exhaustive-deps
+  // Chrono écoulé pendant qu'une boule vole : on la laisse arriver, elle compte (Johan, 23/10 : pas de
+  // coupure alors qu'on avait la réponse). Le tour se termine juste après son arrivée.
+  const attendreBoule = useRef(false);
+  useEffect(() => {
+    if (!expire) return;
+    if (vol.current && !vol.current.arrive) { attendreBoule.current = true; return; }
+    terminer();
+  }, [expire]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     if (!enJeu || manche.mouvement) return;
@@ -195,7 +203,7 @@ export function JeuLance({ manche, numero, total, enJeu, expire, onBon, onFaux, 
   const arriveeRef = useRef(null);
   arriveeRef.current = arrivee;
   function arrivee(v) {
-    if (fini.current) return; // chrono écoulé pendant le vol : la question compte déjà comme manquée
+    if (fini.current) return;
     const qu = manche.questions[q];
     reponses.current = [...reponses.current, q];
     setResultat({ i: v.i, bon: v.bon });
@@ -214,6 +222,7 @@ export function JeuLance({ manche, numero, total, enJeu, expire, onBon, onFaux, 
     const derniere = reponses.current.length >= manche.questions.length;
     setTimeout(() => {
       if (fini.current) return;
+      if (attendreBoule.current) { terminer(true); return; }
       if (derniere) {
         if (reponses.current.length && serie.current >= manche.questions.length) { reviz.geste('brasEnLair'); reviz.effet('bravo'); jouer('bravo'); setTimeout(terminer, 1300); }
         else setTimeout(terminer, 300);
