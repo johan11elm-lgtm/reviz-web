@@ -51,6 +51,60 @@ export const TOURS_NINJA = [
   { duree: 12, n: 8, fautes: 4, vol: 2.5, fin: 1.7, salves: [1, 2, 1, 2, 2], titre: 'Les accords', sous: 'Plus vite, ninja !' },
 ];
 
+// ── L'explication de Réviz au récap (format commun de src/data/erreursJeux.js) ──────────────
+// Le mot qui change entre la bonne et la mauvaise écriture (« a » / « à », « chantons » / « chantont »).
+const motQuiChange = ([bon, faux]) => {
+  const b = bon.split(' '), f = faux.split(' ');
+  const i = b.findIndex((m, k) => m !== f[k]);
+  return i < 0 ? b.at(-1) : b[i];
+};
+const SEPT_OU = 'bijou, caillou, chou, genou, hibou, joujou, pou';
+function reglePluriel(bon) {
+  if (/yaux$/.test(bon)) return `Les mots en -au prennent un x au pluriel : des ${bon}.`;
+  if (/eaux$/.test(bon)) return `Les mots en -eau prennent un x au pluriel : des ${bon}.`;
+  if (/aux$/.test(bon)) return `Les mots en -al font -aux au pluriel : des ${bon}.`;
+  if (/eux$/.test(bon)) return `Les mots en -eu prennent un x au pluriel : des ${bon}.`;
+  if (/oux$/.test(bon)) return `Sept mots en -ou prennent un x : ${SEPT_OU}.`;
+  return `Les mots en -ou prennent un s, sauf ${SEPT_OU} : des ${bon}.`;
+}
+const HOMOS = {
+  a: '« a », c’est le verbe avoir : on peut dire « avait ».',
+  à: '« à » n’est pas le verbe avoir : on ne peut pas dire « avait ».',
+  est: '« est », c’est le verbe être : on peut dire « était ».',
+  et: '« et » relie deux mots : on peut dire « et puis ».',
+  sont: '« sont », c’est le verbe être : on peut dire « étaient ».',
+  son: '« son », c’est « le sien » : on peut dire « mon ».',
+  on: '« on » se remplace par « il ».',
+  ont: '« ont », c’est le verbe avoir : on peut dire « avaient ».',
+  ce: '« ce » va devant un nom : ce chien, ces chiens.',
+  se: '« se » va devant un verbe : il se lave, je me lave.',
+  ça: '« ça », c’est « cela ».',
+  sa: '« sa », c’est « la sienne » : on peut dire « ma ».',
+  'c’est': '« c’est », c’est « cela est ».',
+  's’est': '« s’est » va avec un verbe : il s’est levé, je me suis levé.',
+};
+function regleAccord([bon, faux]) {
+  const [sujet] = bon.split(' ');
+  const mot = motQuiChange([bon, faux]);
+  if (/^vous (êtes|dites|faites)$/.test(bon)) return 'Vous êtes, vous dites, vous faites : trois exceptions à retenir.';
+  if (/^(je peux|tu veux)$/.test(bon)) return `${bon[0].toUpperCase()}${bon.slice(1)} : avec je et tu, pouvoir et vouloir finissent par x.`;
+  if (sujet === 'nous') return `Avec « nous », le verbe finit par -ons : ${bon}.`;
+  if (sujet === 'ils') return `Avec « ils », le verbe finit par -ent : ${bon}.`;
+  if (bon === 'tu es grand') return 'Avec « tu », le verbe être s’écrit « es » : tu es.';
+  if (sujet === 'tu') return `Avec « tu », le verbe finit par -s : ${bon}.`;
+  if (sujet === 'je') return `Avec « je », finir s’écrit -is : ${bon}.`;
+  if (sujet === 'il') return `Avec « il », pas de s : ${bon}.`;
+  if (/^(des|les|trois)$/.test(sujet)) return `Au pluriel, le nom et l’adjectif prennent un s : ${bon}.`;
+  if (faux.endsWith('s') && !mot.endsWith('s')) return `Une seule, donc pas de s : ${bon}.`;
+  return `Tout le groupe est au féminin : ${bon}.`;
+}
+/** La règle d'une paire [bien écrit, mal écrit] du niveau 0, 1 ou 2, en une phrase de Réviz. */
+export function regleNinja(niveau, paire) {
+  if (niveau === 0) return reglePluriel(paire[0]);
+  if (niveau === 1) return HOMOS[motQuiChange(paire)] ?? `On écrit « ${paire[0]} ».`;
+  return regleAccord(paire);
+}
+
 export const FRUITS_NINJA = ['pasteque', 'orange', 'pomme', 'citron'];
 const melange = liste => {
   const a = [...liste];
@@ -86,7 +140,7 @@ export function voleeNinja(niveau) {
       avant = fruit;
       const x0 = 0.5 + cote * entre(0.12, 0.3);
       fruits.push({
-        id: k, mot: faute ? faux : bon, faute, bon, faux, fruit,
+        id: k, mot: faute ? faux : bon, faute, bon, faux, fruit, regle: regleNinja(niveau, paires[k]), niveau,
         t: t + j * 0.18, vol: tour.vol * entre(0.95, 1.05),
         x0, x1: 0.5 - cote * entre(0.02, 0.2), haut: taille === 2 && j === 1 ? entre(0.36, 0.44) : entre(0.24, 0.34),
         tourne: (Math.random() < 0.5 ? -1 : 1) * entre(25, 70),

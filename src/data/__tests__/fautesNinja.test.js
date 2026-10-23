@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { BANQUES_NINJA, TOURS_NINJA, FRUITS_NINJA, voleeNinja } from '../fautesNinja';
+import { BANQUES_NINJA, TOURS_NINJA, FRUITS_NINJA, voleeNinja, regleNinja } from '../fautesNinja';
 
 describe('Le ninja des fautes : la banque', () => {
   it.each(BANQUES_NINJA.map((b, i) => [i, b]))('niveau %i : assez de paires, toutes distinctes', (niveau, banque) => {
@@ -61,5 +61,20 @@ describe('Le ninja des fautes : voleeNinja', () => {
       }
       fruits.slice(1).forEach((f, i) => expect(f.fruit).not.toBe(fruits[i].fruit));
     }
+  });
+});
+
+describe('Le ninja des fautes : les explications du récap', () => {
+  it.each(BANQUES_NINJA.map((b, i) => [i, b]))('niveau %i : une règle courte pour chaque paire', (niveau, banque) => {
+    for (const paire of banque) {
+      const r = regleNinja(niveau, paire);
+      expect(r).not.toMatch(/undefined|null/);
+      // Le cas le plus long au récap : « « mot » était bien écrit. » + la règle.
+      expect(`« ${paire[0]} » était bien écrit. ${r}`.length).toBeLessThanOrEqual(150);
+      expect(r.split(/[.!?](\s|$)/).filter(x => x && x.trim()).length).toBeLessThanOrEqual(2);
+    }
+  });
+  it('les homophones ont tous leur truc (pas la phrase de repli)', () => {
+    for (const paire of BANQUES_NINJA[1]) expect(regleNinja(1, paire)).not.toMatch(/^On écrit/);
   });
 });

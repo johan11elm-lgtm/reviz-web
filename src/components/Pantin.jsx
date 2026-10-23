@@ -131,6 +131,10 @@ const ACCESSOIRES = {
   // bandeau de sport), et sabre en carton tenu en garde, pointe en l'air (le coup : Pantin.trancher).
   ninja: { x: -64, y: 423, w: 2111, h: 562 },
   sabre: { main: 'g', bras: { epaule: 40, coude: 80 }, prise: [104, 150], ancre: [0.5, 0.79], w: 245, h: 1400, angle: 8 },
+  // Fin de partie : la médaille d'or (ruban en U coupé sur le contour du corps, ses brins passent derrière :
+  // assets-src/jeux/fin/medaille.py), ou la coupe du sans-faute brandie bras levé.
+  medaille: { x: 358, y: 1246, w: 1798, h: 790, enfile: true },
+  coupe: { main: 'g', bras: { epaule: 150, coude: 40, etire: 1.3 }, prise: [110, 120], ancre: [0.5, 0.8], w: 600, h: 513, angle: -6 },
 };
 const NS = 'http://www.w3.org/2000/svg';
 function imageSvg(href, { x, y, w, h }) {

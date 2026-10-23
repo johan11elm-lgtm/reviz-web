@@ -32,6 +32,16 @@ export function mancheNinja(theme, niveau) {
   return { ...t, type: 'ninja', niveau, fruits: voleeNinja(niveau), annonce: `${t.titre} !`, apercu: 0 };
 }
 /** Le ninja seul : 3 tours qui accélèrent. */
+/**
+ * Une erreur du ninja pour le récap (format de src/data/erreursJeux.js). Faute ratée : la question est
+ * le mot mal écrit du fruit et la bonne réponse son orthographe ; bon mot tranché : il était bien écrit.
+ */
+function erreurNinja(f, donnee, bonTranche = false) {
+  const theme = TOURS_NINJA[f.niveau ?? 0]?.titre ?? '';
+  return bonTranche
+    ? { jeu: 'ninja', theme, question: f.bon, donnee, bonne: 'Bien écrit', explication: `« ${f.bon} » était bien écrit. ${f.regle}` }
+    : { jeu: 'ninja', theme, question: f.faux, donnee, bonne: f.bon, explication: f.regle };
+}
 export const partieNinja = () => TOURS_NINJA.map((_, i) => mancheNinja(null, i));
 export const TEMPO_NINJA = niveau => TEMPOS[niveau] ?? TEMPOS.at(-1);
 
@@ -101,7 +111,7 @@ export function PlateauNinja({ manche, idx, total, phase, expire, onBon, onFaux,
 
   // Les fautes pas encore tranchées (sauf `sauf`) : au récap.
   const restantes = sauf => fruits.filter(f => f.faute && f.id !== sauf && !M.fruits.get(f.id)?.tranche)
-    .map(f => ({ texte: f.bon, detail: `et pas « ${f.faux} »` }));
+    .map(f => erreurNinja(f, null));
 
   // Une faute retombe sans avoir été tranchée : le tour est perdu.
   const echappee = useCallback(f => {
@@ -111,7 +121,7 @@ export function PlateauNinja({ manche, idx, total, phase, expire, onBon, onFaux,
     plus(90, () => jouer('buzzer'));
     setFlash({ couleur: 'rouge', id: Date.now() });
     setVerdict({ type: 'echappe', titre: 'Une faute t’a échappé !', sous: { barre: f.faux, juste: f.bon }, id: Date.now() });
-    onFaux({ texte: f.bon, detail: `et pas « ${f.faux} »` });
+    onFaux(erreurNinja(f, 'Pas tranché'));
     pantin.current?.expression('decu');
     terminer(restantes(f.id), 1300);
   }, [fruits, onFaux, terminer]); // eslint-disable-line react-hooks/exhaustive-deps
@@ -229,7 +239,7 @@ export function PlateauNinja({ manche, idx, total, phase, expire, onBon, onFaux,
     if (j.fini) return;
     const manques = restantes();
     jouer('gong');
-    setVerdict({ type: 'temps', titre: 'Temps écoulé !', sous: manques.length ? { barre: fruits.find(f => f.faute && f.bon === manques[0].texte).faux, juste: manques[0].texte } : null, id: Date.now() });
+    setVerdict({ type: 'temps', titre: 'Temps écoulé !', sous: manques.length ? { barre: manques[0].question, juste: manques[0].bonne } : null, id: Date.now() });
     pantin.current?.expression('panique');
     terminer(manques, 1100);
   }, [expire]); // eslint-disable-line react-hooks/exhaustive-deps
@@ -282,7 +292,7 @@ export function PlateauNinja({ manche, idx, total, phase, expire, onBon, onFaux,
     plus(60, () => jouer('buzzer'));
     setFlash({ couleur: 'rouge', id: Date.now() });
     setVerdict({ type: 'bon', titre: 'Bon mot tranché !', sous: { juste: f.bon, suite: ' était bien écrit' }, id: Date.now() });
-    onFaux({ texte: f.bon, detail: 'Était bien écrit : il ne fallait pas le trancher' });
+    onFaux(erreurNinja(f, 'Tranché', true));
     r?.expression('panique');
     terminer(restantes(), 1300);
   };

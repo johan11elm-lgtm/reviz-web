@@ -290,7 +290,7 @@ export function PlateauPizzeria({ manche, idx, total, phase, expire, onBon, onFa
     // Raté : le buzzer grave, éclair rouge, bandeau « Pas assez ! » ou « Trop ! » avec ce qu'il fallait.
     jouer('buzzer');
     setVerdict({ type: n < cmd.attendu ? 'peu' : 'trop', titre: n < cmd.attendu ? 'Pas assez\u00a0!' : 'Trop\u00a0!', sous: parts, id: ici });
-    onFaux({ texte: cmd.recap.texte, detail: cmd.recap.detail });
+    onFaux(cmd.erreur(n));
     setServi({ juste: false, id: ici });
     mainEntre('pointe');
     if (n < cmd.attendu) {
@@ -343,7 +343,7 @@ export function PlateauPizzeria({ manche, idx, total, phase, expire, onBon, onFa
       });
       plus(200, () => setBulle({ texte: 'Alors ?!', id: Date.now() }));
     }
-    terminer(manque ? [{ texte: cmd.recap.texte, detail: cmd.recap.detail }] : []);
+    terminer(manque ? [cmd.erreur(null)] : []);
   }, [expire]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // ── Le geste : toucher une part (elle saute dans l'assiette ou en revient), ou la glisser ──

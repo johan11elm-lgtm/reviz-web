@@ -202,19 +202,7 @@
 }
 .jx-page .jx-jouer { flex: none; padding: 6px 12px; border-radius: 999px; background: var(--ch-fond); font-size: 13px; font-weight: 800; }
 
-/* ── Fin de partie ── */
-.jx-page .jx-fin-tete { display: flex; flex-direction: column; align-items: center; gap: 2px; margin-top: 8px; }
-.jx-page .jx-fin-score { font-family: var(--font-display); font-size: 64px; font-weight: 900; letter-spacing: -.04em; line-height: 1; }
-.jx-page .jx-fin-sous { font-size: 15px; font-weight: 700; color: var(--ch-doux); }
-.jx-page .jx-pantin-fin { align-self: center; margin-top: 70px; } /* le chapeau dépasse au-dessus */
-.jx-page .jx-recap { display: flex; flex-direction: column; gap: 8px; padding: 16px; border-radius: 22px; background: #fff; box-shadow: 0 8px 20px var(--ch-ombre); }
-.jx-page .jx-recap-titre { font-size: 12px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; opacity: .55; }
-.jx-page .jx-recap-ligne { margin: 0; display: flex; flex-direction: column; gap: 2px; font-size: 14px; line-height: 1.35; }
-.jx-page .jx-recap-ligne span { color: var(--ch-doux); }
-.jx-page .jx-fin-actions { display: flex; flex-direction: column; gap: 10px; margin-top: auto; }
-.jx-page .jx-btn { height: 54px; border: 0; border-radius: 999px; font: 800 16px 'Geist', system-ui, sans-serif; cursor: pointer; }
-.jx-page .jx-btn--encre { background: var(--ch-encre); color: #fff; box-shadow: 0 5px 0 rgba(0,0,0,.25); }
-.jx-page .jx-btn--blanc { background: #fff; color: var(--ch-encre); box-shadow: 0 5px 0 var(--ch-ombre); }
+/* La fin de partie et le récap : jeux/FinDePartie.css. */
 
 /* Mouvement réduit : les mots ne nagent plus, ils attendent en rangées. */
 @media (prefers-reduced-motion: reduce) {

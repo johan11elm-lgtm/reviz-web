@@ -27,8 +27,14 @@ describe('La pizzeria : les commandes', () => {
         expect(c.coupe).toBeGreaterThanOrEqual(3);
         expect(c.coupe).toBeLessThanOrEqual(c.pizzas > 1 ? 8 : 12);
         expect(valeur(c.ticket)).toBeCloseTo(c.attendu / c.coupe, 9);
-        expect(c.recap.texte).not.toMatch(/undefined|NaN/);
-        expect(c.recap.detail).not.toMatch(/undefined|NaN/);
+        for (const servies of [null, 0, c.attendu + 1]) {
+          const e = c.erreur(servies);
+          expect(Object.keys(e).sort()).toEqual(['bonne', 'donnee', 'explication', 'jeu', 'question', 'theme']);
+          expect(e.jeu).toBe('pizzeria');
+          expect(JSON.stringify(e)).not.toMatch(/undefined|NaN/);
+          expect(e.explication.length).toBeLessThanOrEqual(150);
+          expect(e.donnee === null).toBe(servies === null);
+        }
       }
     }
   });

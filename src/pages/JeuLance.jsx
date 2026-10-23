@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { themesDePartie, tourDeLancer, THEMES_JEUX } from '../data/themesJeux';
+import { erreurJeu } from '../data/erreursJeux';
 import { jouer } from '../utils/bruitages';
 import './JeuLance.css';
 
@@ -30,7 +31,7 @@ const PANIERS = [...Array(N_PANIERS).keys()];
 /** Partie rapide de Réviz lance : 3 thèmes faciles au hasard, un par tour. */
 export function mancheLance(theme, niveau) {
   const t = TOURS_LANCE[niveau], tour = tourDeLancer(theme.lancer ? theme : THEMES_JEUX[0], N_QUESTIONS, N_PANIERS);
-  return { ...t, type: 'lance', niveau, titre: tour.titre, aide: tour.aide, questions: tour.questions, apercu: 0 };
+  return { ...t, type: 'lance', niveau, theme: tour.theme, titre: tour.titre, aide: tour.aide, questions: tour.questions, apercu: 0 };
 }
 export const partieLance = () => themesDePartie(TOURS_LANCE.length).map((theme, i) => mancheLance(theme, i));
 
@@ -45,6 +46,12 @@ const melange = liste => {
   return a;
 };
 const borne = (v, a, b) => Math.max(a, Math.min(b, v));
+// Une question ratée, au format du récap : « 7 × 8 = ? », « dog : en français ? ». donnee : le panier
+// visé, ou null si le temps s'est écoulé.
+const erreurLance = (manche, qu, donnee) => erreurJeu({
+  jeu: 'lance', tour: manche, paire: qu.paire, donnee, bonne: qu.reponse,
+  question: manche.aide ? `${qu.question} : ${manche.aide.charAt(0).toLowerCase()}${manche.aide.slice(1)}` : qu.question,
+});
 
 export function JeuLance({ manche, numero, total, enJeu, expire, onBon, onFaux, onTermine, onCommencer, reviz, pantin, scene }) {
   const [q, setQ] = useState(0); // question en cours
@@ -66,7 +73,9 @@ export function JeuLance({ manche, numero, total, enJeu, expire, onBon, onFaux, 
     if (fini.current) return;
     fini.current = true;
     finJeu.current = performance.now();
-    onTermine(manche.questions.filter((_, k) => !reponses.current.includes(k)).map(x => ({ texte: x.texte, detail: x.reponse })));
+    // Seule la question affichée compte (les suivantes, jamais vues, ne sont pas des erreurs).
+    const enCours = manche.questions[reponses.current.length];
+    onTermine(enCours ? [erreurLance(manche, enCours, null)] : []);
   }, [manche, onTermine]);
   useEffect(() => { if (expire) terminer(); }, [expire]); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -200,7 +209,7 @@ export function JeuLance({ manche, numero, total, enJeu, expire, onBon, onFaux, 
       serie.current = 0;
       tremble.current[v.i] = 7;
       jouer('bonk');
-      onFaux({ texte: qu.texte, detail: qu.reponse });
+      onFaux(erreurLance(manche, qu, qu.choix[v.i]));
     }
     const derniere = reponses.current.length >= manche.questions.length;
     setTimeout(() => {

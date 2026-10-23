@@ -85,8 +85,9 @@ const FABRIQUES = {
   },
 };
 
-/** Une commande complète : ce qu'il faut servir, la note du pizzaïolo et la ligne du récap. */
-function commande(f, id) {
+/** Une commande complète : ce qu'il faut servir, la note du pizzaïolo et l'erreur du récap. */
+const THEMES_PIZZERIA = ['Les fractions', 'Les fractions égales', 'Plus d’une pizza'];
+function commande(f, id, niveau) {
   const c = { ...f, id };
   // La note écrite au stylo sur le ticket une fois servi : les parts qu'il fallait.
   c.note = ['=', [c.attendu, c.coupe]];
@@ -96,10 +97,17 @@ function commande(f, id) {
   // Plus d'une pizza : 7/4 = 1 pizza + 3/4.
   const plus = c.attendu > c.coupe ? ` = 1 pizza + ${c.attendu - c.coupe}/${c.coupe}` : '';
   const direct = c.ticket.length === 1 && Array.isArray(c.ticket[0]) && c.ticket[0][1] === c.coupe;
-  c.recap = {
-    texte: `${ticket} de pizza`,
-    detail: direct ? `${parts}, ${coupee}${plus && ` (${ticket}${plus})`}` : `${ticket} = ${c.attendu}/${c.coupe}${plus} : ${parts}, ${coupee}`,
-  };
+  // L'erreur du récap (format de src/data/erreursJeux.js) : servies = parts servies, null si le temps
+  // s'est écoulé ; « pas assez » ou « trop », jamais « faux ».
+  const regle = direct
+    ? `${ticket}, c’est ${parts} d’${c.pizzas > 1 ? 'pizzas coupées' : 'une pizza coupée'} en ${c.coupe}${plus}.`
+    : `${ticket} = ${c.attendu}/${c.coupe}${plus} : ${parts}, ${coupee}.`;
+  c.erreur = servies => ({
+    jeu: 'pizzeria', theme: THEMES_PIZZERIA[niveau] ?? '', question: `${ticket} de pizza`,
+    donnee: servies == null ? null : `${servies} part${servies > 1 ? 's' : ''}`,
+    bonne: `${c.attendu}/${c.coupe}`,
+    explication: servies == null ? regle : `${regle} Tu en as servi ${servies} : ${servies < c.attendu ? 'pas assez' : 'un peu trop'}.`,
+  });
   return c;
 }
 
@@ -120,7 +128,7 @@ export function commandesPizzeria(niveau, n) {
     // Pas deux fois la même commande, ni deux fois de suite le même nombre de parts.
     if (f.attendu > maxi || vues.has(cle) || (liste.length && liste.at(-1).attendu === f.attendu && essais < 100)) continue;
     vues.add(cle);
-    liste.push(commande(f, k));
+    liste.push(commande(f, k, niveau));
     k += 1;
   }
   return liste;
