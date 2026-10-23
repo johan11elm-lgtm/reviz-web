@@ -134,6 +134,28 @@ const SONS = {
     note(a, { f: 1046, t: 0.12, d: 0.5, type: 'square', vol: 0.06 });
     note(a, { f: 1318, t: 0.12, d: 0.5, type: 'triangle', vol: 0.06 });
   },
+  // ── Le ninja des fautes ──
+  // Le sabre fend l'air : un souffle bref qui monte.
+  whoosh: a => souffle(a, { d: 0.16, f: 700, f2: 3200, q: 1.1, vol: 0.13 }),
+  // La lame entre dans le fruit : un « tchac » sec (attaque claire) sur un petit choc mat.
+  tchac: a => {
+    souffle(a, { d: 0.05, f: 4200, q: 1.4, vol: 0.2 });
+    note(a, { f: 260, f2: 120, d: 0.09, type: 'triangle', vol: 0.18 });
+  },
+  // Le jus gicle : un « splash » mouillé qui retombe, et quelques gouttes.
+  splash: a => {
+    souffle(a, { t: 0.02, d: 0.3, f: 2200, f2: 500, q: 0.7, vol: 0.13, type: 'lowpass' });
+    [0.06, 0.11, 0.17, 0.24].forEach((t, i) => note(a, { f: 1500 - i * 180, f2: 700 - i * 60, t, d: 0.06, vol: 0.05 }));
+  },
+  // Une faute retombe au sol sans avoir été tranchée : un « ploc » mou qui descend.
+  ploc: a => { note(a, { f: 330, f2: 110, d: 0.22, type: 'triangle', vol: 0.18 }); souffle(a, { d: 0.12, f: 600, q: 0.6, vol: 0.08, type: 'lowpass' }); },
+  // Les 3 dernières secondes : un tic de bloc de bois, sec et bien présent (au-dessus de la musique).
+  tic: a => { note(a, { f: 1250, d: 0.07, type: 'triangle', vol: 0.22 }); souffle(a, { d: 0.03, f: 3000, q: 3, vol: 0.12 }); },
+  // Temps écoulé : le gong du dojo, grave et qui tremble (pas le buzzer d'une erreur).
+  gong: a => {
+    [[110, 0.2, 2.2], [165.5, 0.08, 1.6], [262, 0.05, 1.1], [393, 0.03, 0.7]].forEach(([f, vol, d]) => note(a, { f, f2: f * 0.985, d, vol }));
+    souffle(a, { d: 0.12, f: 400, q: 0.6, vol: 0.1, type: 'lowpass' });
+  },
 };
 
 export function jouer(nom) {
