@@ -57,4 +57,23 @@ describe('Réviz se trompe ? : les affirmations', () => {
       }
     }
   });
+
+  // 23/10 : quand les deux cases voisines servaient déjà dans le tour, une affirmation prévue fausse
+  // devenait vraie et pouvait faire trois « vrai » d'affilée (environ 1 tour de tables sur 1 000).
+  it('tables : sur des milliers de tours, jamais trois verdicts pareils, fausses toujours dans la table', () => {
+    const tables = themeJeux('tables');
+    for (let k = 0; k < 4000; k++) {
+      const { affirmations: a } = tourDeBuzzer(tables, k % 2 ? 5 : 4);
+      a.forEach((x, i) => {
+        if (i >= 2) expect(x.vrai === a[i - 1].vrai && x.vrai === a[i - 2].vrai).toBe(false);
+        const [t, m] = x.paire.a.split(' × ').map(Number);
+        if (!x.vrai) {
+          expect(x.dit).not.toBe(x.bonne);
+          expect(Number(x.dit) % t).toBe(0);
+          expect(Math.abs(Number(x.dit) / t - m)).toBeLessThanOrEqual(2);
+        }
+      });
+      expect(new Set(a.filter(x => !x.vrai).map(x => x.dit)).size).toBe(a.filter(x => !x.vrai).length);
+    }
+  });
 });
