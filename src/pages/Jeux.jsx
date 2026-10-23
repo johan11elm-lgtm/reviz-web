@@ -16,6 +16,7 @@ import { JeuLance, partieLance, mancheLance } from './JeuLance';
 import { musiqueBuzzer } from '../utils/musiqueBuzzer';
 import { PlateauBuzzer, mancheBuzzer, partieBuzzer, TEMPO_BUZZER } from './jeux/RevizSeTrompe';
 import { useIsDesktop } from '../hooks/useMediaQuery';
+import { TransitionJeux, DUREES_TRANSITION } from './jeux/TransitionJeux';
 import './Jeux.css';
 
 /**
@@ -427,6 +428,7 @@ export default function Jeux() {
   const [erreurs, setErreurs] = useState([]);
   const [gag, setGag] = useState(null);
   const [bulle, setBulle] = useState(null); // ce que dit Réviz pendant le tour de magie
+  const [transition, setTransition] = useState(null); // null | 'enroule' | 'carte' | 'deroule'
   const [effets, setEffets] = useState([]); // { id, type, n } : combo, fumée, bravo
   const [son, setSon] = useState(sonActif);
   const [hauteurEcran] = useState(() => (typeof window !== 'undefined' ? window.innerHeight : 844));
@@ -499,7 +501,7 @@ export default function Jeux() {
   // Consigne : 1,7 s (ou une touche), puis le chrono part.
   useEffect(() => {
     if (phase !== 'consigne') return;
-    const t = setTimeout(() => setPhase('jeu'), 1700);
+    const t = setTimeout(() => setPhase('jeu'), 1700 + DUREES_TRANSITION.deroule);
     return () => clearTimeout(t);
   }, [phase, idx]);
   useEffect(() => {
@@ -531,8 +533,14 @@ export default function Jeux() {
     if (!manques.length && reste > 0.5) setScore(s => s + Math.round(reste) * 20);
     if (manques.length) setErreurs(e => [...e, ...manques]);
     setTimeout(() => {
-      if (idx + 1 < partie.length) { setIdx(i => i + 1); setPhase('consigne'); }
-      else setPhase('fin');
+      if (idx + 1 >= partie.length) { setPhase('fin'); return; }
+      // Transition B : le décor s'enroule, la carte du jeu suivant, le nouveau décor se déroule.
+      // Le tour suivant ne démarre qu'au déroulement (ses minuteries partent à ce moment-là).
+      const d = DUREES_TRANSITION;
+      setTransition('enroule'); jouer('glisse');
+      setTimeout(() => { setTransition('carte'); jouer('carte'); }, d.enroule);
+      setTimeout(() => { setIdx(i => i + 1); setPhase('consigne'); setTransition('deroule'); jouer('glisse'); }, d.enroule + d.carte);
+      setTimeout(() => setTransition(null), d.enroule + d.carte + d.deroule);
     }, 650);
   }, [manche, idx, partie.length]);
 
@@ -665,17 +673,30 @@ export default function Jeux() {
   );
 
   // ── Réviz se trompe ? : le plateau télé occupe tout l'écran, Réviz présentateur au micro ──
+  // Pendant l'enroulement et la carte, la manche affichée est encore l'ancienne : la carte annonce la
+  // suivante ; au déroulement, idx est déjà passé à la nouvelle.
+  const suivante = transition === 'deroule' ? manche : partie[idx + 1];
+  const transitionEl = (
+    <TransitionJeux etape={transition} suivante={suivante} numero={(transition === 'deroule' ? idx : idx + 1) + 1}
+      total={partie.length} score={score} />
+  );
+
   if (manche.type === 'buzzer') {
     return (
+      <>
+        {transitionEl}
       <PlateauBuzzer manche={manche} idx={idx} total={partie.length} phase={phase} expire={expire === idx} score={score}
         onBon={onBon} onFaux={onFaux} onTermine={onTermine} onDemarrer={() => setPhase('jeu')}
         fermer={fermer} boutonSon={boutonSon} isDesktop={isDesktop} hauteurEcran={hauteurEcran} />
+      </>
     );
   }
 
   // ── Le tour de magie : le monde occupe tout l'écran, Réviz magicien derrière sa table ──
   if (manche.type === 'magie') {
     return (
+      <>
+        {transitionEl}
       <div className={`app app--no-halo jx-page mg-page${isDesktop ? ' jx-page--large' : ''}`}>
         <div className="mg-monde" aria-hidden="true" />
         {effets.some(e => e.type === 'bravo') && (
@@ -720,12 +741,15 @@ export default function Jeux() {
           </div>
         </div>
       </div>
+      </>
     );
   }
 
   // ── Réviz lance : la salle de classe occupe tout l'écran ; tableau, paniers, Réviz et pupitre ──
   if (manche.type === 'lance') {
     return (
+      <>
+        {transitionEl}
       <div className={`app app--no-halo jx-page ln-page${isDesktop ? ' jx-page--large' : ''}`}>
         <div className="ln-monde" aria-hidden="true" />
         {effets.some(e => e.type === 'bravo') && (
@@ -754,6 +778,7 @@ export default function Jeux() {
           </div>
         </div>
       </div>
+      </>
     );
   }
 

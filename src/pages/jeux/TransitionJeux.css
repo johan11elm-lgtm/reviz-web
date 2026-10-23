@@ -1,0 +1,122 @@
+/* ─── Transition entre deux tours (storyboard B, version du 23/10) ──────────────────────────
+ * Couche plein écran au-dessus du jeu. Le décor s'enroule EN DIAGONALE : le bord est une ligne
+ * penchée (≈ 18°, décalage --pente en haut et en bas) qui traverse l'écran, et le rouleau de
+ * feutrine, penché du même angle, suit ce bord avec la même courbe et la même durée.
+ * Éléments générés (public/jeux/transition/) : fond en papier découpé, rouleau, étoile. */
+.tj {
+  position: fixed; inset: 0; z-index: 1000;
+  pointer-events: auto;
+  overflow: clip;
+  --courbe: cubic-bezier(.45, 0, .25, 1);
+  --pente: 16svh; /* moitié du décalage horizontal du bord entre le haut et le bas de l'écran */
+}
+.tj-fond {
+  position: absolute; inset: 0;
+  background: #F2701E;
+  will-change: clip-path;
+}
+/* Le fond en papier découpé glisse doucement en diagonale pendant toute la transition. */
+.tj-bandes {
+  position: absolute; inset: -80px;
+  background: #F2701E url('/jeux/transition/fond.webp') center / cover no-repeat;
+  animation: tj-bandes 3s linear both;
+  will-change: transform;
+}
+@keyframes tj-bandes { from { transform: translate(30px, 30px); } to { transform: translate(-30px, -30px); } }
+
+/* Le rouleau de feutrine : penché du même angle que le bord, centré sur lui. */
+.tj-rouleau {
+  position: absolute; left: 0; top: 50%;
+  width: 70px; height: 125svh; margin: -62.5svh 0 0 -35px;
+  background: url('/jeux/transition/rouleau.webp') center / 100% 100% no-repeat;
+  filter: drop-shadow(12px 0 14px rgba(40, 10, 20, .4));
+  will-change: transform;
+}
+/* Volume du cylindre : ombre sur les bords, reflet au milieu. */
+.tj-rouleau::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(90deg, rgba(40, 0, 10, .55) 0%, rgba(40, 0, 10, 0) 30%, rgba(255, 230, 230, .22) 46%, rgba(40, 0, 10, 0) 62%, rgba(40, 0, 10, .5) 100%);
+  mix-blend-mode: multiply;
+}
+
+/* 1. Le décor s'enroule vers la gauche : le fond gagne depuis la droite. */
+.tj--enroule .tj-fond { animation: tj-enroule-fond .5s var(--courbe) both; }
+.tj--enroule .tj-rouleau { animation: tj-rouleau .5s var(--courbe) both; }
+@keyframes tj-enroule-fond {
+  from { clip-path: polygon(calc(100% + 2 * var(--pente)) 0, calc(100% + 2 * var(--pente)) 0, calc(100% + 2 * var(--pente)) 100%, 100% 100%); }
+  to { clip-path: polygon(0 0, calc(100% + 2 * var(--pente)) 0, calc(100% + 2 * var(--pente)) 100%, calc(-2 * var(--pente)) 100%); }
+}
+@keyframes tj-rouleau {
+  from { transform: translateX(calc(100vw + var(--pente))) rotate(18deg); }
+  to { transform: translateX(calc(-1 * var(--pente))) rotate(18deg); }
+}
+.tj--carte .tj-rouleau { opacity: 0; }
+
+/* 2. La carte en carton se retourne, puis flotte doucement le temps qu'on la lise. */
+.tj-carte {
+  position: absolute; left: 50%; top: 50%;
+  width: min(250px, 66vw); aspect-ratio: 622 / 905;
+  margin-left: calc(min(250px, 66vw) / -2); translate: 0 -50%;
+  opacity: 0;
+  will-change: transform, opacity;
+}
+.tj--carte .tj-carte, .tj--deroule .tj-carte { opacity: 1; }
+.tj--carte .tj-carte { animation: tj-carte .6s cubic-bezier(.2, .8, .2, 1) both; }
+@keyframes tj-carte {
+  from { transform: perspective(900px) rotateY(-80deg) scale(.9); opacity: 0; }
+  35% { opacity: 1; }
+  to { transform: perspective(900px) rotateY(0) scale(1); opacity: 1; }
+}
+.tj-carte-int {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px;
+  padding: 14% 10%; box-sizing: border-box; text-align: center; color: #2A2140;
+  background: url('/jeux/magie/carte-face.webp') center / 100% 100% no-repeat;
+  filter: drop-shadow(0 18px 22px rgba(90, 30, 0, .35));
+  will-change: transform;
+}
+.tj--carte .tj-carte-int, .tj--deroule .tj-carte-int { animation: tj-flotte 1.6s ease-in-out .5s infinite alternate; }
+@keyframes tj-flotte { from { transform: translateY(0) rotate(0); } to { transform: translateY(-6px) rotate(-1.2deg); } }
+
+/* Étoiles en papier autour de la carte : elles apparaissent l'une après l'autre, puis scintillent. */
+.tj-etoile {
+  position: absolute; width: 54px; height: 54px; margin: -27px 0 0 -27px;
+  background: url('/jeux/transition/etoile.webp') center / contain no-repeat;
+  filter: drop-shadow(0 4px 4px rgba(90, 30, 0, .3));
+  opacity: 0; transform: scale(.3);
+  will-change: transform, opacity;
+}
+.tj--carte .tj-etoile, .tj--deroule .tj-etoile {
+  animation: tj-etoile .45s cubic-bezier(.2, .8, .2, 1) calc(.35s + var(--k) * .09s) forwards, tj-scintille 1.1s ease-in-out calc(.8s + var(--k) * .09s) infinite alternate;
+}
+@keyframes tj-etoile { to { opacity: 1; transform: scale(var(--t, 1)) rotate(var(--r, 0deg)); } }
+@keyframes tj-scintille { from { transform: scale(var(--t, 1)) rotate(var(--r, 0deg)); } to { transform: scale(calc(var(--t, 1) * 1.12)) rotate(calc(var(--r, 0deg) + 14deg)); opacity: 1; } }
+
+.tj-image { width: 38%; aspect-ratio: 1; object-fit: contain; filter: drop-shadow(0 6px 6px rgba(60, 20, 0, .25)); }
+.tj-tour { font: 800 11px 'Geist', system-ui, sans-serif; letter-spacing: .12em; text-transform: uppercase; opacity: .6; margin-top: 4px; }
+.tj-nom { font-family: var(--font-display, 'Bricolage Grotesque', system-ui); font-size: 26px; font-weight: 900; letter-spacing: -.03em; line-height: 1.02; }
+.tj-theme { font: 700 14px 'Geist', system-ui, sans-serif; color: #B34400; }
+.tj-score {
+  margin-top: 6px; padding: 5px 16px; border-radius: 999px;
+  background: #2A2140; color: #FFF6E8;
+  font-family: var(--font-display, 'Bricolage Grotesque', system-ui); font-size: 20px; font-weight: 900; font-variant-numeric: tabular-nums;
+}
+
+/* 3. Le nouveau décor se déroule depuis la droite : le fond se retire vers la gauche, la carte et
+      les étoiles partent avec lui (elles sont dans le fond, donc recouvertes par le décor). */
+.tj--deroule .tj-fond { animation: tj-deroule-fond .55s var(--courbe) both; }
+.tj--deroule .tj-rouleau { opacity: 1; animation: tj-rouleau .55s var(--courbe) both; }
+@keyframes tj-deroule-fond {
+  from { clip-path: polygon(calc(-2 * var(--pente)) 0, calc(100% + 2 * var(--pente)) 0, 100% 100%, calc(-2 * var(--pente)) 100%); }
+  to { clip-path: polygon(calc(-2 * var(--pente)) 0, 0 0, calc(-2 * var(--pente)) 100%, calc(-2 * var(--pente)) 100%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tj-bandes, .tj-carte-int, .tj-etoile { animation: none !important; }
+  .tj-etoile { opacity: 1; transform: none; }
+  .tj-rouleau { display: none; }
+  .tj--enroule .tj-fond { animation: tj-fondu .2s both; }
+  .tj--deroule .tj-fond { animation: tj-fondu .25s reverse both; }
+  .tj--carte .tj-carte { animation: none; }
+}
+@keyframes tj-fondu { from { opacity: 0; } to { opacity: 1; } }
