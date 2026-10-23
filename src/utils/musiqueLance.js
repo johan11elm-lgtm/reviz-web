@@ -8,11 +8,11 @@
  * Même séquenceur que la version code du tour de magie (musiqueMagie.js) : toutes les 25 ms, on
  * programme les croches des 120 prochaines ms sur l'horloge audio. Elle suit le bouton son.
  *
- * Deuxième version (23/10) : une piste générée sur Google Flow Music (« Réviz lance »), montée en
- * boucle sans couture (public/jeux/lance/boucle.mp3, deux périodes par fichier : on boucle une
- * fenêtre d'une période, ce qui absorbe le silence d'encodage du MP3), accélérée à chaque tour.
- * C'est la version par défaut ; ?musique=code rejoue la version composée en code. Piste faite sur
- * un compte Flow gratuit, sans usage commercial : à regénérer avant le lancement.
+ * Deuxième version (23/10, refaite le soir) : la piste Google Flow Music « Clay Brain Hoops »
+ * choisie par Johan, jouée entière en boucle, sans montage (public/jeux/lance/musique.mp3, 2 min 56 ;
+ * source WAV dans refonte-2026-11/games-mondes/lance/musique/), accélérée à chaque tour. C'est la
+ * version par défaut ; ?musique=code rejoue la version composée en code. Piste faite sur un compte
+ * Flow gratuit, sans usage commercial : à regénérer avant le lancement.
  */
 import { sonActif } from './bruitages';
 
@@ -142,10 +142,9 @@ const musiqueCode = {
   joue: () => !!minuterie,
 };
 
-// ── Version Flow Music : la boucle, jouée à bpm / tempo d'origine ──
-// Piste à 123 BPM ; la boucle fait 8 mesures (32 temps = 15,61 s), coupée sur un temps fort avec un
-// fondu de 60 ms au raccord (refonte-2026-11/games-mondes/lance/musique/). Jouée à bpm / 123.
-const BOUCLE = { url: '/jeux/lance/boucle.mp3', bpm: 123, debut: 0.5, periode: 32 * 60 / 123 };
+// ── Version Flow Music : la piste entière en boucle, jouée à bpm / tempo d'origine ──
+// Piste demandée à 126 BPM ; au tour 1 elle joue à sa vitesse d'origine, puis +8 % par tour.
+const BOUCLE = { url: '/jeux/lance/musique.mp3', bpm: 126 };
 let tampon = null, chargement = null;
 function charger() {
   chargement ??= fetch(BOUCLE.url).then(r => r.arrayBuffer()).then(b => ctx.decodeAudioData(b)).then(t => { tampon = t; })
@@ -165,10 +164,10 @@ const musiqueFlow = {
     try { await charger(); } catch { flux.actif = false; musiqueCode.demarrer(); return; }
     if (!flux.actif) return; // arrêtée pendant le chargement
     const s = ctx.createBufferSource();
-    s.buffer = tampon; s.loop = true; s.loopStart = BOUCLE.debut; s.loopEnd = BOUCLE.debut + BOUCLE.periode;
+    s.buffer = tampon; s.loop = true;
     s.playbackRate.value = vitesse();
     s.connect(sortie);
-    s.start(ctx.currentTime + 0.05, BOUCLE.debut);
+    s.start(ctx.currentTime + 0.05);
     flux.source = s;
   },
   arreter() {
