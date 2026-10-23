@@ -2,69 +2,36 @@
 """
 Réviz — Icône de l'app, déclinée dans toutes les tailles.
 
-Mascotte actuelle (pose « hello », assets-src/mascot/pose-9-hello.png) sur
-un fond orange en dégradé avec un halo crème, choisi par Johan le 8 octobre
-2026. Un seul dessin, quatre usages :
+Cerveau en 3D sur fond orange (assets-src/icone/source-cerveau.png, image
+pleine page carrée), choisi par Johan le 23 octobre 2026. Une seule image,
+quatre usages :
   - pleine page opaque, sans coins : iPhone (apple-touch-icon) et app iOS
     native (AppIcon 1024, sans transparence comme l'exige Apple) — c'est
     l'appareil qui arrondit ;
   - coins arrondis transparents : icônes « any » du manifest (Chrome, Edge
     sur ordinateur) et favicons ;
-  - « maskable » : pleine page, mascotte réduite dans la zone sûre (cercle
-    de 80 %) pour les masques ronds ou en goutte d'Android.
+  - écran de lancement iOS : l'icône arrondie au centre d'un fond crème ;
+  - « maskable » : la même pleine page, le visage tient déjà dans la zone
+    sûre (cercle de 80 %) des masques ronds ou en goutte d'Android.
 
 Usage : python3 scripts/generer-icones.py  (depuis reviz-web/)
 Écrit aussi les icônes de reviz-landing si le dossier voisin existe.
 """
-import math
 import os
-from PIL import Image, ImageDraw, ImageFilter
+from PIL import Image, ImageDraw
 
 ICI = os.path.dirname(os.path.abspath(__file__))
 WEB = os.path.dirname(ICI)
 LANDING = os.path.join(os.path.dirname(WEB), 'reviz-landing')
 S = 1024
 
-ORANGE_CLAIR = (0xFF, 0x8A, 0x4C)
-ORANGE = (0xF4, 0x5A, 0x1C)
-HALO = (255, 236, 214, 110)
 
-
-def fond():
-    """Dégradé radial, plus clair au-dessus du centre."""
-    petit = 256
-    im = Image.new('RGB', (petit, petit))
-    px = im.load()
-    for y in range(petit):
-        for x in range(petit):
-            t = min(1.0, math.hypot(x / petit - 0.5, y / petit - 0.45) / 0.75)
-            px[x, y] = tuple(round(ORANGE_CLAIR[i] * (1 - t) + ORANGE[i] * t) for i in range(3))
-    return im.resize((S, S), Image.BICUBIC).convert('RGBA')
-
-
-def dessin(echelle):
-    """Fond + halo + ombre douce + mascotte, mascotte à `echelle` de la largeur."""
-    im = fond()
-    m = Image.open(os.path.join(WEB, 'assets-src/mascot/pose-9-hello.png')).convert('RGBA')
-    m = m.crop(m.getbbox())
-    w = int(S * echelle)
-    h = int(m.height * w / m.width)
-    m = m.resize((w, h), Image.LANCZOS)
-    dy = int(S * 0.03 * echelle / 0.80)
-    x, y = (S - w) // 2, (S - h) // 2 + dy
-
-    halo = Image.new('RGBA', (S, S), (0, 0, 0, 0))
-    r = int(S * 0.36 * echelle / 0.80)
-    cx, cy = S // 2, S // 2 + dy
-    ImageDraw.Draw(halo).ellipse((cx - r, cy - r, cx + r, cy + r), fill=HALO)
-    im.alpha_composite(halo.filter(ImageFilter.GaussianBlur(S * 0.08)))
-
-    ombre = Image.new('RGBA', (S, S), (0, 0, 0, 0))
-    ombre.paste((0, 0, 0, 70), (x, y + int(S * 0.02)), m.split()[3])
-    im.alpha_composite(ombre.filter(ImageFilter.GaussianBlur(S * 0.02)))
-
-    im.alpha_composite(m, (x, y))
-    return im.convert('RGB')
+def dessin():
+    """L'image source, carrée et opaque, à 1024 px."""
+    im = Image.open(os.path.join(WEB, 'assets-src/icone/source-cerveau.png')).convert('RGB')
+    c = min(im.size)
+    x, y = (im.width - c) // 2, (im.height - c) // 2
+    return im.crop((x, y, x + c, y + c)).resize((S, S), Image.LANCZOS)
 
 
 def arrondi(im):
@@ -83,15 +50,26 @@ def ecrire(im, chemin, taille):
     print(f'  {os.path.relpath(chemin, os.path.dirname(WEB))} ({taille} px)')
 
 
+def splash(rond):
+    """Écran de lancement iOS : icône arrondie de 512 px au centre, fond crème."""
+    fond = Image.new('RGBA', (2732, 2732), (0xF8, 0xEF, 0xE7, 255))  # = ios.backgroundColor
+    icone = rond.resize((512, 512), Image.LANCZOS)
+    fond.alpha_composite(icone, ((2732 - 512) // 2, (2732 - 512) // 2))
+    return fond.convert('RGB')
+
+
 def main():
-    plein = dessin(0.80)
+    plein = dessin()
     rond = arrondi(plein)
-    maskable = dessin(0.62)
+    maskable = plein
 
     pub = os.path.join(WEB, 'public')
     print('reviz-web')
     ecrire(plein, os.path.join(WEB, 'assets-src/icone/icone-1024.png'), 1024)
     ecrire(plein, os.path.join(WEB, 'ios/App/App/Assets.xcassets/AppIcon.appiconset/AppIcon-512@2x.png'), 1024)
+    lancement = splash(rond)
+    for nom in ('splash-2732x2732.png', 'splash-2732x2732-1.png', 'splash-2732x2732-2.png'):
+        ecrire(lancement, os.path.join(WEB, 'ios/App/App/Assets.xcassets/Splash.imageset', nom), 2732)
     ecrire(plein, os.path.join(pub, 'apple-touch-icon.png'), 180)
     ecrire(rond, os.path.join(pub, 'icon-512.png'), 512)
     ecrire(rond, os.path.join(pub, 'icon-192.png'), 192)

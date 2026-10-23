@@ -1,6 +1,7 @@
 // -------------------------------------------------------
 // Réviz — Écran de lancement iOS + icône App Store
 //
+// ANCIEN (remplacé par scripts/generer-icones.py, qui fait icône et splash).
 // Source : assets-src/icon-source.png (master 1024, coins arrondis cuits
 // sur fond BLANC) et public/icon-512-maskable.png (même icône, plein cadre).
 //
