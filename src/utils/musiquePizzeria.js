@@ -9,7 +9,13 @@
  *
  * Même séquenceur que les autres musiques des jeux : toutes les 25 ms, on programme les croches
  * des 120 prochaines ms sur l'horloge audio. La musique suit le bouton son des bruitages.
- * Une piste Flow Music pourra la remplacer (comme pour le buzzer : public/jeux/pizzeria/boucle.mp3).
+ *
+ * Deuxième version (23/10), par défaut : la piste Google Flow Music « Clay Pizzeria Rush » choisie
+ * par Johan (tarentelle demandée à 140 BPM), jouée entière en boucle, sans montage
+ * (public/jeux/pizzeria/musique.mp3, 2 min 00 ; source WAV dans refonte-2026-11/games-mondes/pizzeria/
+ * musique/), accélérée à chaque tour et un peu plus dans les 3 dernières secondes. ?musique=code
+ * rejoue la version composée en code (aussi le repli si la piste ne se charge pas). Piste faite sur
+ * un compte Flow gratuit, sans usage commercial : à regénérer avant le lancement.
  */
 import { sonActif } from './bruitages';
 
@@ -133,7 +139,7 @@ function boucle() {
   }
 }
 
-export const musiquePizzeria = {
+const musiqueCode = {
   demarrer() {
     if (minuterie || !sonActif()) return;
     if (!contexte()) return;
@@ -163,3 +169,58 @@ export const musiquePizzeria = {
   },
   joue: () => !!minuterie,
 };
+
+// ── Version Flow Music : la piste entière en boucle, jouée de plus en plus vite ──
+// Au tour 1 (tempo 112 de la version en code), elle joue à sa vitesse d'origine (140 BPM) ; ensuite
+// vitesse = tempo du tour / 112 (+9 %, puis +18 %) ; les 3 dernières secondes, encore +12 %.
+const BOUCLE = { url: '/jeux/pizzeria/musique.mp3', tempo: 112 };
+const EMBALLE = 1.12;
+let tampon = null, chargement = null;
+function charger() {
+  chargement ??= fetch(BOUCLE.url).then(r => r.arrayBuffer()).then(b => ctx.decodeAudioData(b)).then(t => { tampon = t; })
+    .catch(e => { chargement = null; throw e; });
+  return chargement;
+}
+const flux = { source: null, bpm: BOUCLE.tempo, tension: false, actif: false };
+const vitesse = () => (flux.bpm / BOUCLE.tempo) * (flux.tension ? EMBALLE : 1);
+const musiqueFlow = {
+  async demarrer() {
+    if (flux.actif || !sonActif() || !contexte()) return;
+    flux.actif = true;
+    sortie = ctx.createGain();
+    sortie.gain.setValueAtTime(0.0001, ctx.currentTime);
+    sortie.gain.exponentialRampToValueAtTime(0.6, ctx.currentTime + 0.8);
+    sortie.connect(ctx.destination);
+    try { await charger(); } catch { flux.actif = false; musiqueCode.demarrer(); return; }
+    if (!flux.actif) return; // arrêtée pendant le chargement
+    const s = ctx.createBufferSource();
+    s.buffer = tampon; s.loop = true;
+    s.playbackRate.value = vitesse();
+    s.connect(sortie);
+    s.start(ctx.currentTime + 0.05);
+    flux.source = s;
+  },
+  arreter() {
+    musiqueCode.arreter();
+    flux.tension = false;
+    if (!flux.actif) return;
+    flux.actif = false;
+    const out = sortie, s = flux.source;
+    flux.source = null;
+    out.gain.cancelScheduledValues(ctx.currentTime);
+    out.gain.setValueAtTime(out.gain.value, ctx.currentTime);
+    out.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.5);
+    setTimeout(() => { s?.stop(); out.disconnect(); }, 600);
+  },
+  /** bpm : tempo du tour ; enTension : les 3 dernières secondes, elle s'emballe. */
+  regler({ bpm, enTension } = {}) {
+    if (bpm) flux.bpm = bpm;
+    if (enTension !== undefined) flux.tension = enTension;
+    musiqueCode.regler({ bpm, enTension });
+    flux.source?.playbackRate.setTargetAtTime(vitesse(), ctx.currentTime, 0.25);
+  },
+  joue: () => flux.actif || musiqueCode.joue(),
+};
+
+const versionCode = typeof location !== 'undefined' && new URLSearchParams(location.search).get('musique') === 'code';
+export const musiquePizzeria = versionCode ? musiqueCode : musiqueFlow;
