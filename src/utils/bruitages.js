@@ -190,6 +190,29 @@ const SONS = {
   record: a => { note(a, { f: 1046, d: 0.5, vol: 0.1 }); note(a, { f: 1568, t: 0.14, d: 0.8, vol: 0.1 }); note(a, { f: 2093, t: 0.28, d: 0.9, vol: 0.05 }); },
   // Une carte du récap qui glisse sur le bureau (carton sur bois).
   page: a => { souffle(a, { d: 0.2, f: 1400, f2: 600, q: 0.9, vol: 0.12 }); souffle(a, { t: 0.15, d: 0.05, f: 500, q: 1, vol: 0.06, type: 'lowpass' }); },
+  // ── Tape-taupe ! ──
+  // Une taupe sort de son trou : un « pop » de bouchon qui monte, sur un peu de terre qui s'éboule.
+  pop: a => {
+    note(a, { f: 260, f2: 720, d: 0.09, vol: 0.13 });
+    souffle(a, { d: 0.07, f: 900, q: 0.7, vol: 0.05, type: 'lowpass' });
+  },
+  // Le maillet en mousse s'écrase sur la taupe : un « pouf » mou et grave, puis un petit rebond.
+  maillet: a => {
+    note(a, { f: 150, f2: 70, d: 0.16, type: 'triangle', vol: 0.26 });
+    souffle(a, { d: 0.11, f: 650, f2: 250, q: 0.6, vol: 0.2, type: 'lowpass' });
+    note(a, { f: 420, f2: 640, t: 0.09, d: 0.12, vol: 0.06 });
+  },
+  // La mauvaise taupe tapée : son petit cri vexé (« couic ! »), aigu, qui monte puis retombe.
+  couic: a => {
+    note(a, { f: 900, f2: 1500, d: 0.08, type: 'triangle', vol: 0.11 });
+    note(a, { f: 1500, f2: 820, t: 0.08, d: 0.14, type: 'triangle', vol: 0.1 });
+  },
+  // Une bonne taupe ratée redescend en ricanant : trois « hi » aigus qui descendent.
+  hihi: a => [1180, 1080, 960].forEach((f, i) => note(a, { f, f2: f * 1.12, t: i * 0.085, d: 0.07, type: 'triangle', vol: 0.07 })),
+  // Temps écoulé : la cloche de la ferme, deux coups graves qui résonnent (pas le buzzer d'une erreur).
+  cloche: a => {
+    [0, 0.32].forEach(t => [[392, 0.16, 1.3], [940, 0.05, 0.8], [1520, 0.03, 0.5]].forEach(([f, vol, d]) => note(a, { f, f2: f * 0.99, t, d, vol })));
+  },
 };
 
 export function jouer(nom) {

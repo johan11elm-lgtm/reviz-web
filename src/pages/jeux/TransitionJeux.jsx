@@ -22,6 +22,7 @@ const JEUX = {
   buzzer: { nom: 'Réviz se trompe\u00a0?', image: '/jeux/buzzer/buzzer-rouge-dome.webp' },
   pizzeria: { nom: 'La pizzeria\u00a0!', image: '/jeux/pizzeria/pizza.webp' },
   ninja: { nom: 'Le ninja des fautes', image: '/jeux/ninja/pasteque.webp' },
+  taupe: { nom: 'Tape-taupe\u00a0!', image: '/jeux/taupe/taupe.webp' },
 };
 
 // Étoiles autour de la carte : position (en % de la carte), taille relative, angle.
