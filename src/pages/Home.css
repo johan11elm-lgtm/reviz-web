@@ -459,8 +459,9 @@
 .home-page .hm-point-sugg:hover { background: rgba(27,26,35,.45); }
 .home-page .hm-point-sugg--la { width: 24px; background: var(--hm-encre); }
 .home-page .hm-point-sugg:focus-visible { outline: 2px solid var(--hm-encre); outline-offset: 3px; }
-.home-page .hm-desk .hm-rappels { max-width: 1328px; margin: 24px auto 0; padding: 0 56px; box-sizing: border-box; width: 100%; }
-.home-page .hm-desk .hm-rappels > .bd { max-width: 680px; }
+/* Bandeau et carte « thème » : même colonne que la grille des cartes en dessous (1440 px, 56 px de marge). */
+.home-page .hm-desk .hm-rappels { max-width: 1440px; margin: 24px auto 0; padding: 0 56px; box-sizing: border-box; width: 100%; }
+.home-page .hm-essai-desk { max-width: 1440px; margin: 16px auto 0; padding: 0 56px; box-sizing: border-box; width: 100%; }
 
 .home-page .hm-grille {
   display: grid;

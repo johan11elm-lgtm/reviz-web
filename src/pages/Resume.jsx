@@ -347,7 +347,7 @@ function ResumeContent() {
           <h2 id="rs-titre-verifie" className="rs-titre2">Vérifie-toi</h2>
           <p className="rs-sous">Réponds dans ta tête, puis regarde.</p>
           <div className="rs-checks">
-            {checks.map((card, i) => <CheckCard key={card.index} n={i + 1} card={card} lessonId={coachLessonId} />)}
+            {checks.map((card, i) => <CheckCard key={card.index ?? i} n={i + 1} card={card} lessonId={coachLessonId} />)}
           </div>
         </section>
       )}

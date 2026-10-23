@@ -220,10 +220,12 @@ function FlashcardsSession() {
     : <button type="button" className="fc-fermer" onClick={fermer} aria-label="Fermer"><Croix /></button>
   const deco = (
     <>
-      <span className="fc-deco fc-deco--a" aria-hidden="true" />
-      <span className="fc-deco fc-deco--b" aria-hidden="true" />
-      <span className="fc-deco fc-deco--c" aria-hidden="true" />
-      <span className="fc-point" aria-hidden="true" />
+      <span className="fc-decors" aria-hidden="true">
+        <span className="fc-deco fc-deco--a" />
+        <span className="fc-deco fc-deco--b" />
+        <span className="fc-deco fc-deco--c" />
+        <span className="fc-point" />
+      </span>
       <span className="fc-grain" aria-hidden="true" />
     </>
   )

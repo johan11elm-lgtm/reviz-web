@@ -445,7 +445,8 @@ button.bt-choix-btn:active:not(:disabled) { transform: translateY(3px); box-shad
 .bt-page--large .bt-hero { height: 520px; box-sizing: border-box; padding: 28px 56px 0; border-radius: 0 0 50% 50% / 0 0 80px 80px; }
 .bt-page--large .bt-hero-titre { display: block; margin-top: 30px; }
 .bt-page--large .bt-titre { font-size: 56px; }
-.bt-page--large .bt-bulle { position: absolute; z-index: 3; left: 44%; top: 34px; margin: 0; }
+/* Elle finit avant la ligne médiane : les mascottes (moitié droite) ne la recouvrent plus. */
+.bt-page--large .bt-bulle { position: absolute; z-index: 3; left: auto; right: calc(50% + 24px); top: 34px; margin: 0; }
 .bt-page--large .bt-bulle .rv-bulle-txt { max-width: 260px; font-size: 20px; }
 .bt-page--large .bt-face { position: absolute; left: 50%; right: 0; top: 112px; margin: 0; }
 .bt-page--large .bt-vs { width: 56px; height: 56px; margin: 0 -22px; font-size: 20px; }

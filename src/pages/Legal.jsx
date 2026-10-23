@@ -2,6 +2,7 @@ import { Children, cloneElement, isValidElement, useCallback, useEffect, useRef,
 import { Link, useParams, useNavigate, useLocation } from 'react-router-dom';
 import { PRIX, PRIX_FONDATEUR } from '../../api/_prix.js';
 import { useIsDesktop } from '../hooks/useMediaQuery';
+import NotFound from './NotFound';
 import './Legal.css';
 
 // Identité de l'éditeur, à compléter dès l'immatriculation (micro-entreprise).
@@ -335,7 +336,7 @@ export default function Legal() {
     else navigate('/');
   };
 
-  if (!data) return <div className="app"><p style={{ padding: 24 }}>Page introuvable.</p></div>;
+  if (!data) return <NotFound />;
 
   const autres = ORDRE.filter(slug => slug !== page);
   const lienSection = (n, contenu, className) => (

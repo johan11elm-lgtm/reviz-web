@@ -17,6 +17,8 @@
   mix-blend-mode: multiply;
   pointer-events: none;
 }
+/* Les ronds débordent exprès du bord : ce calque les rogne, ils n'élargissent pas la page. */
+.fc-page .fc-decors { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
 .fc-page .fc-deco { position: absolute; border-radius: 50%; background: var(--ch-bulle); pointer-events: none; }
 .fc-page .fc-deco--a { width: 150px; height: 150px; top: 230px; left: -70px; }
 .fc-page .fc-deco--b { width: 90px; height: 90px; top: 110px; right: -30px; }

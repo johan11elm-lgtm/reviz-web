@@ -528,7 +528,7 @@ export default function Home() {
             </div>
           </div>
           {rappels}
-          {montrerEssai && <ThemeEssai onClose={() => setEssaiTheme(false)} />}
+          {montrerEssai && <div className="hm-essai-desk"><ThemeEssai onClose={() => setEssaiTheme(false)} /></div>}
           <div className="hm-grille">
             <div className="hm-carte hm-carte--chemin">{chemin}</div>
             <div className="hm-carte">{carteMatieres}</div>

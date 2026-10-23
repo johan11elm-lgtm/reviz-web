@@ -33,9 +33,15 @@
 .fp-page .fp-ecran {
   position: relative; z-index: 1;
   height: 100%; box-sizing: border-box;
-  max-width: 520px; margin: 0 auto;
+  /* width: 100% : .app est une colonne flex, et les marges auto retirent l'étirement ; sans ça l'écran prenait la
+     largeur de son contenu le plus long (une étiquette en nowrap) et passait sous le bord droit. */
+  width: 100%; max-width: 520px; margin: 0 auto;
   padding: calc(env(safe-area-inset-top, 0px) + 12px) 16px calc(env(safe-area-inset-bottom, 0px) + 14px);
 }
+/* Téléphone : l'écran fait toute la largeur ; ce qui dépasse (dos de la pile, penchés) est rogné ici et
+   n'élargit pas la page. Sur ordinateur la colonne est plus étroite que l'écran : pas de rognage (les cartes
+   qui partent sur le côté sortent librement). */
+@media (max-width: 520px) { .fp-page .fp-ecran { overflow-x: clip; } }
 .fp-page .fp-fin, .fp-page .fp-recap { height: 100%; display: flex; flex-direction: column; align-items: center; }
 
 .fp-page .fp-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
@@ -56,8 +62,15 @@
 .fp-page .fp-rond:active { transform: translateY(2px) scale(.96); }
 .fp-page .fp-rond:disabled { opacity: .45; cursor: default; }
 .fp-page .fp-tete { display: flex; flex-direction: column; align-items: center; text-align: center; margin-top: 2px; }
-.fp-page .fp-haut .fp-surtitre { flex: 1; min-width: 0; margin-right: 56px; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.fp-page .fp-surtitre { font-size: 12px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; opacity: .9; text-shadow: 0 2px 0 rgba(40, 10, 40, .4); }
+/* Le surtitre, comme « Meilleur : » plus bas : une pastille sombre, lisible sur les fanions et les rideaux.
+   Centré sur l'écran (la pastille du haut à gauche est compensée par le ::after de même largeur). */
+.fp-page .fp-fin .fp-haut::after { content: ''; flex: none; width: 44px; }
+.fp-page .fp-haut .fp-surtitre { flex: 0 1 auto; min-width: 0; margin: 0 auto; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.fp-page .fp-surtitre {
+  padding: 5px 14px; border-radius: 999px;
+  background: rgba(20, 14, 40, .78); border: 1.5px solid rgba(255, 246, 232, .25);
+  font-size: 12px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase;
+}
 .fp-page .fp-titre {
   margin: 2px 0 0;
   font-family: var(--font-display); font-size: 46px; font-weight: 900; letter-spacing: -.03em; line-height: 1;
@@ -376,6 +389,10 @@
 .fp-page--large .fp-reponse-nom { font-size: 17px; }
 .fp-page--large .fp-etiquette { font-size: 15px; }
 .fp-page--large .fp-bulle .rv-bulle-txt { font-size: 18px; }
+/* Réviz sort de la carte, à sa gauche, sur le bureau : son chapeau (magie, toque), son bandeau ou son
+   nœud ne recouvrent plus « La bonne réponse » ni la réponse donnée ; la bulle reprend la place laissée. */
+.fp-page--large .fp-prof { left: calc(var(--taille) * -.5 - 14px); }
+.fp-page--large .fp-explication { margin-left: calc(var(--taille) * .1); }
 
 /* ── Mouvement réduit : rien ne tombe, rien ne vole ; les cartes changent sur place ── */
 @media (prefers-reduced-motion: reduce) {

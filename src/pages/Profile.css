@@ -229,7 +229,7 @@
 .mo-reviz--cote .mo-bulle { margin: 0 -14px 90px 0; }
 .mo-page--large .mo-reviz .rv-bulle-txt { max-width: 320px; font-size: 28px; letter-spacing: -.6px; }
 .mo-page--large .mo-reviz .rv-bulle-ligne + .rv-bulle-ligne { font-size: 17px; }
-.mo-rangee { position: relative; z-index: 2; display: grid; grid-template-columns: 1.25fr 1fr 1fr; gap: 24px; max-width: 1440px; box-sizing: border-box; margin: -64px auto 0; padding: 0 56px; align-items: stretch; }
+.mo-rangee { position: relative; z-index: 2; display: grid; grid-template-columns: 1.25fr 1fr 1fr; gap: 24px; max-width: 1440px; box-sizing: border-box; margin: -64px auto 0; padding: 0 56px; align-items: start; }
 .mo-carte--bloc { display: flex; flex-direction: column; gap: 14px; padding: 22px; border-radius: 28px; }
 .mo-carte--bloc .mo-h3 { margin: 0; }
 .mo-carte--bloc .mo-chiffre { box-shadow: none; }
