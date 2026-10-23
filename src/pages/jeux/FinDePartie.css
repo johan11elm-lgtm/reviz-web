@@ -1,0 +1,381 @@
+/* ─── Réviz Games, fin de partie : la remise des prix (scène de feutrine) et le récap (le bureau) ──
+ * Calques générés : public/jeux/fin/. Page figée en 100svh (barres de Safari affichées) et
+ * overflow: clip (un conteneur « hidden » reste défilable : la scène sautait sur iPhone). Pas de 3D
+ * imbriquée : les cartes ne bougent que par translate / rotate / scale à plat. */
+.fp-page {
+  --fp-creme: #FFF6E8;
+  --fp-encre: #1F1C33;
+  --fp-orange: #F2852E;
+  --fp-orange-fonce: #C25A12;
+  position: relative;
+  overflow: clip;
+  background: #2A1748;
+  color: var(--fp-creme);
+  container-type: size;
+}
+.fp-page .fp-fond {
+  position: absolute; inset: 0;
+  background: center / cover no-repeat;
+  transition: opacity .45s ease;
+}
+.fp-page .fp-fond--scene { background-image: url('/jeux/fin/scene.webp'); background-position: center top; }
+.fp-page .fp-fond--bureau { background-image: url('/jeux/fin/bureau.webp'); opacity: 0; }
+.fp-page--large .fp-fond--scene { background-image: url('/jeux/fin/scene-paysage.webp'); }
+.fp-page--large .fp-fond--bureau { background-image: url('/jeux/fin/bureau-paysage.webp'); }
+.fp-page--recap .fp-fond--scene { opacity: 0; }
+.fp-page--recap .fp-fond--bureau { opacity: 1; }
+.fp-page .fp-fond::after {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(120% 75% at 50% 42%, transparent 50%, rgba(25, 10, 35, .5) 100%);
+}
+.fp-page--recap .fp-fond::after { background: radial-gradient(120% 80% at 50% 45%, transparent 55%, rgba(60, 30, 10, .35) 100%); }
+
+.fp-page .fp-ecran {
+  position: relative; z-index: 1;
+  height: 100%; box-sizing: border-box;
+  max-width: 520px; margin: 0 auto;
+  padding: calc(env(safe-area-inset-top, 0px) + 12px) 16px calc(env(safe-area-inset-bottom, 0px) + 14px);
+}
+.fp-page .fp-fin, .fp-page .fp-recap { height: 100%; display: flex; flex-direction: column; align-items: center; }
+
+.fp-page .fp-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.fp-page button { font-family: inherit; -webkit-tap-highlight-color: transparent; }
+.fp-page button:focus-visible { outline: 3px solid #FFE08A; outline-offset: 3px; }
+
+/* ── En-tête ── */
+.fp-page .fp-haut { align-self: stretch; display: flex; align-items: center; gap: 12px; min-height: 44px; }
+.fp-page .fp-rond {
+  width: 44px; height: 44px; flex: none;
+  display: flex; align-items: center; justify-content: center;
+  border: 0; border-radius: 50%; padding: 0;
+  background: #fff; color: var(--fp-encre);
+  box-shadow: 0 4px 0 rgba(0, 0, 0, .18), 0 8px 18px rgba(20, 8, 30, .3);
+  cursor: pointer;
+  transition: transform .12s;
+}
+.fp-page .fp-rond:active { transform: translateY(2px) scale(.96); }
+.fp-page .fp-rond:disabled { opacity: .45; cursor: default; }
+.fp-page .fp-tete { display: flex; flex-direction: column; align-items: center; text-align: center; margin-top: 2px; }
+.fp-page .fp-haut .fp-surtitre { flex: 1; min-width: 0; margin-right: 56px; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.fp-page .fp-surtitre { font-size: 12px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; opacity: .9; text-shadow: 0 2px 0 rgba(40, 10, 40, .4); }
+.fp-page .fp-titre {
+  margin: 2px 0 0;
+  font-family: var(--font-display); font-size: 46px; font-weight: 900; letter-spacing: -.03em; line-height: 1;
+  color: var(--fp-creme);
+  text-shadow: 0 3px 0 #C9A27A, 0 6px 0 rgba(60, 20, 10, .35), 0 10px 18px rgba(30, 10, 30, .35);
+  animation: fp-tampon .5s cubic-bezier(.3, 1.6, .5, 1) both;
+}
+.fp-page .fp-titre:focus { outline: none; }
+@keyframes fp-tampon { from { opacity: 0; transform: scale(1.5) rotate(-4deg); } to { opacity: 1; transform: none; } }
+
+/* ── Les étoiles, en arc au-dessus de Réviz : elles tombent une à une, la vide reste en creux ── */
+.fp-page .fp-etoiles { position: relative; z-index: 2; display: flex; align-items: flex-end; gap: 6px; margin-top: 10px; }
+.fp-page .fp-etoile { position: relative; width: 60px; aspect-ratio: 200 / 191; }
+.fp-page .fp-etoile--1 { width: 72px; margin-bottom: 14px; }
+.fp-page .fp-etoile img { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.fp-page .fp-etoile-vide { filter: grayscale(1) brightness(.42) contrast(.9); opacity: .55; }
+.fp-page .fp-etoile-or { filter: drop-shadow(0 4px 6px rgba(80, 40, 0, .35)); opacity: 0; transform: scale(2.2) rotate(-40deg); }
+.fp-page .fp-etoile--la .fp-etoile-or { animation: fp-etoile .45s cubic-bezier(.3, 1.5, .5, 1) calc(.12s + var(--k) * .26s) forwards; }
+@keyframes fp-etoile { to { opacity: 1; transform: none; } }
+
+/* ── Réviz sur son podium ── */
+.fp-page .fp-heros {
+  position: relative; flex: 1 1 auto; min-height: 0;
+  display: flex; flex-direction: column; align-items: center; justify-content: flex-end;
+  margin-top: -6px;
+}
+.fp-page .fp-pantin { position: relative; z-index: 1; flex: none; margin-bottom: calc(var(--taille) * -.3); }
+.fp-page .fp-podium {
+  position: relative; z-index: 0; flex: none;
+  width: calc(var(--taille) * .9); height: auto;
+  filter: drop-shadow(0 10px 14px rgba(20, 5, 25, .45));
+  pointer-events: none;
+}
+
+/* ── Le score ── */
+.fp-page .fp-score-bloc { display: flex; flex-direction: column; align-items: center; gap: 6px; margin-top: 6px; }
+.fp-page .fp-score-ligne { position: relative; }
+.fp-page .fp-score {
+  display: block;
+  font-family: var(--font-display); font-size: 64px; font-weight: 900; letter-spacing: -.04em; line-height: .95;
+  font-variant-numeric: tabular-nums;
+  color: var(--fp-creme);
+  text-shadow: 0 3px 0 #C9A27A, 0 6px 0 rgba(60, 20, 10, .4), 0 10px 20px rgba(20, 5, 25, .4);
+}
+.fp-page .fp-record {
+  position: absolute; left: 100%; top: -14px; margin-left: 4px;
+  padding: 5px 10px; border-radius: 12px;
+  background: #FFD84A; color: var(--fp-encre);
+  font-family: var(--font-display); font-size: 14px; font-weight: 900; line-height: 1.05; white-space: nowrap;
+  box-shadow: 0 3px 0 #C9951A, 0 8px 14px rgba(20, 5, 25, .3);
+  rotate: 8deg;
+  animation: fp-tampon .45s cubic-bezier(.3, 1.6, .5, 1) .8s both;
+}
+.fp-page .fp-meilleur {
+  padding: 5px 14px; border-radius: 999px;
+  background: rgba(20, 14, 40, .78); border: 1.5px solid rgba(255, 246, 232, .25);
+  font-size: 14px; font-weight: 600;
+}
+.fp-page .fp-meilleur b { font-weight: 800; }
+.fp-page .fp-bonnes { font-size: 15px; font-weight: 700; text-shadow: 0 2px 4px rgba(20, 5, 25, .6); }
+
+/* ── Les boutons, en pâte à modeler ── */
+.fp-page .fp-actions { align-self: stretch; display: flex; flex-direction: column; gap: 12px; margin-top: 14px; }
+.fp-page .fp-actions-ligne { display: flex; gap: 12px; }
+.fp-page .fp-actions-ligne > * { flex: 1; }
+.fp-page .fp-btn {
+  height: 54px; padding: 0 18px; border: 0; border-radius: 999px;
+  font-family: var(--font-display); font-size: 19px; font-weight: 800; letter-spacing: -.01em;
+  cursor: pointer;
+  transition: transform .12s, box-shadow .12s;
+}
+.fp-page .fp-btn:active { transform: translateY(3px); }
+.fp-page .fp-btn--large { height: 58px; font-size: 20px; }
+.fp-page .fp-btn--orange {
+  background: linear-gradient(#F79A45, var(--fp-orange) 55%, #E37421);
+  color: #fff; text-shadow: 0 2px 0 rgba(150, 60, 0, .4);
+  box-shadow: inset 0 2px 0 rgba(255, 255, 255, .35), inset 0 -3px 0 rgba(160, 60, 0, .25), 0 5px 0 var(--fp-orange-fonce), 0 10px 18px rgba(20, 5, 25, .35);
+}
+.fp-page .fp-btn--orange:active { box-shadow: inset 0 2px 0 rgba(255, 255, 255, .35), 0 2px 0 var(--fp-orange-fonce); }
+.fp-page .fp-btn--encre {
+  background: linear-gradient(#34305A, #23203F);
+  color: #fff;
+  box-shadow: inset 0 2px 0 rgba(255, 255, 255, .12), 0 5px 0 #0F0D1E, 0 10px 18px rgba(20, 5, 25, .35);
+}
+.fp-page .fp-btn--blanc {
+  background: linear-gradient(#FFFBF3, #F3E9D8);
+  color: var(--fp-encre);
+  box-shadow: inset 0 2px 0 #fff, 0 5px 0 #C9B89C, 0 10px 18px rgba(20, 5, 25, .3);
+}
+.fp-page .fp-ruban {
+  align-self: center; position: relative;
+  padding: 9px 28px 10px;
+  background: linear-gradient(#7DD488, #58B866);
+  color: #17401F; font-family: var(--font-display); font-size: 18px; font-weight: 800;
+  border-radius: 6px;
+  box-shadow: 0 4px 0 #3E8A4A, 0 10px 16px rgba(20, 5, 25, .3);
+  rotate: -2deg;
+  animation: fp-tampon .45s cubic-bezier(.3, 1.6, .5, 1) 1s both;
+}
+.fp-page .fp-ruban::before, .fp-page .fp-ruban::after {
+  content: ''; position: absolute; top: 8px; width: 22px; height: 100%;
+  background: #4FA45C; z-index: -1;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 35% 50%);
+}
+.fp-page .fp-ruban::before { left: -16px; }
+.fp-page .fp-ruban::after { right: -16px; transform: scaleX(-1); }
+
+/* ── Les confettis en papier ── */
+.fp-page .fp-confettis { position: absolute; inset: 0; overflow: clip; pointer-events: none; z-index: 0; }
+.fp-page .fp-confettis i {
+  position: absolute; top: -20px; border-radius: 2px;
+  animation: fp-confetti var(--d) linear var(--t) infinite;
+  box-shadow: inset 0 -2px 0 rgba(0, 0, 0, .15);
+}
+@keyframes fp-confetti {
+  from { transform: translateY(0) rotate(var(--r)) rotateY(0); }
+  to { transform: translateY(calc(100cqh + 40px)) rotate(calc(var(--r) + 540deg)); }
+}
+
+/* ─── Le récap ─────────────────────────────────────────────────────────────────────────────── */
+.fp-page .fp-haut--recap { justify-content: space-between; }
+.fp-page .fp-titre--recap { font-size: 38px; animation: none; }
+.fp-page .fp-compteur {
+  min-width: 56px; padding: 8px 12px; border-radius: 999px; box-sizing: border-box;
+  background: var(--fp-encre); color: #fff; text-align: center;
+  font-family: var(--font-display); font-size: 17px; font-weight: 800; font-variant-numeric: tabular-nums;
+  box-shadow: 0 4px 12px rgba(40, 20, 0, .3);
+}
+
+/* La pile : la carte du dessus, deux dos décalés dessous ; Réviz reste devant, en bas à gauche.
+   touch-action: none : glisser la carte ne fait jamais défiler la page. */
+.fp-page .fp-pile {
+  position: relative; align-self: stretch; flex: 1 1 auto; min-height: 0;
+  margin: 14px 4px 0;
+  display: grid;
+  touch-action: none; user-select: none; -webkit-user-select: none;
+}
+.fp-page .fp-pile > .fp-carte, .fp-page .fp-pile > .fp-dos { grid-area: 1 / 1; }
+.fp-page .fp-dos, .fp-page .fp-carte {
+  border: solid transparent;
+  border-width: 64px 50px 52px;
+  border-image: url('/jeux/fin/carte.webp') 135 105 110 105 fill / 64px 50px 52px stretch;
+  margin-bottom: calc(var(--taille) * .42);
+}
+.fp-page .fp-dos { filter: brightness(.93) drop-shadow(0 6px 10px rgba(60, 30, 0, .25)); }
+.fp-page .fp-dos--1 { transform: translate(7px, 9px) rotate(3.5deg); }
+.fp-page .fp-dos--2 { transform: translate(-8px, 15px) rotate(-4deg); filter: brightness(.86) drop-shadow(0 6px 10px rgba(60, 30, 0, .25)); }
+
+.fp-page .fp-carte {
+  --dx: 0px;
+  position: relative; z-index: 2; min-height: 0; box-sizing: border-box;
+  display: flex; flex-direction: column; gap: 8px;
+  margin-left: 0; margin-right: 0;
+  padding: 0;
+  color: var(--fp-encre);
+  filter: drop-shadow(0 12px 16px rgba(60, 30, 0, .3));
+  transform: translateX(var(--dx)) rotate(calc(var(--dx) * .06deg));
+  transition: transform .35s cubic-bezier(.3, 1.3, .5, 1);
+  will-change: transform;
+}
+/* Le trombone, au milieu du bord du haut (gardé à part pour ne pas être étiré). */
+.fp-page .fp-carte::before {
+  content: ''; position: absolute; left: 50%; top: -58px; width: 27px; height: 50px; margin-left: -14px;
+  background: url('/jeux/fin/trombone.webp') center / contain no-repeat;
+}
+.fp-page .fp-carte--tenue { transition: none; }
+.fp-page .fp-carte--monte { animation: fp-monte .42s cubic-bezier(.3, 1.2, .5, 1) both; }
+.fp-page .fp-carte--revient { z-index: 3; animation: fp-revient .42s cubic-bezier(.3, 1.1, .5, 1) both; }
+.fp-page .fp-carte--part { z-index: 3; pointer-events: none; animation: fp-part .42s cubic-bezier(.5, 0, .7, .4) forwards; }
+.fp-page .fp-carte--rentre { z-index: 1; pointer-events: none; animation: fp-rentre .42s ease-in forwards; }
+.fp-page .fp-carte--butee { animation: fp-butee .38s ease; }
+.fp-page .fp-carte--butee-b { animation: fp-butee-b .38s ease; }
+@keyframes fp-monte { from { transform: translate(7px, 9px) rotate(3.5deg) scale(.97); filter: brightness(.93); } }
+@keyframes fp-revient { from { transform: translateX(-120%) rotate(-14deg); } }
+@keyframes fp-part {
+  from { transform: translateX(var(--dx0)) rotate(var(--r0)); }
+  to { transform: translateX(-135%) rotate(-16deg); opacity: .4; }
+}
+@keyframes fp-rentre {
+  from { transform: translateX(var(--dx0)) rotate(var(--r0)); }
+  to { transform: translate(7px, 9px) rotate(3.5deg) scale(.97); opacity: 0; }
+}
+@keyframes fp-butee { 30% { transform: translateX(-14px) rotate(-1deg); } 65% { transform: translateX(6px); } }
+@keyframes fp-butee-b { 30% { transform: translateX(14px) rotate(1deg); } 65% { transform: translateX(-6px); } }
+
+.fp-page .fp-etiquette {
+  align-self: center; max-width: 100%; box-sizing: border-box;
+  margin-top: -4px;
+  padding: 5px 12px; border-radius: 8px;
+  background: #F7D98A; color: #4A3510;
+  font-size: 13px; font-weight: 800; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  box-shadow: 0 2px 0 #D9B45A;
+}
+.fp-page .fp-question {
+  margin: 2px 0 0; text-align: center;
+  font-family: var(--font-display); font-size: 40px; font-weight: 900; letter-spacing: -.03em; line-height: 1.05;
+  text-wrap: balance; overflow-wrap: anywhere;
+}
+.fp-page .fp-question--moyenne { font-size: 28px; }
+.fp-page .fp-question--longue { font-size: 21px; line-height: 1.15; }
+.fp-page .fp-question--phrase { font-style: normal; }
+
+.fp-page .fp-reponses { display: flex; flex-direction: column; gap: 8px; margin-top: 4px; }
+.fp-page .fp-reponse {
+  margin: 0; min-height: 52px; box-sizing: border-box;
+  display: flex; align-items: center; justify-content: space-between; gap: 10px;
+  padding: 4px 14px; border-radius: 12px;
+  background: rgba(214, 190, 150, .22);
+}
+.fp-page .fp-reponse-nom { flex: none; font-size: 15px; font-weight: 700; color: #6E5C40; }
+.fp-page .fp-valeur {
+  position: relative; min-width: 0; text-align: right;
+  font-family: var(--font-display); font-size: 30px; font-weight: 900; letter-spacing: -.02em; line-height: 1.1;
+  overflow-wrap: anywhere;
+}
+.fp-page .fp-valeur--fausse { text-decoration: none; color: #3A3550; }
+.fp-page .fp-valeur--bonne { padding: 2px 6px; color: var(--fp-encre); }
+.fp-page .fp-temps { font-size: 15px; font-weight: 800; color: #B0563A; }
+/* Les traits de feutre, tracés à l'apparition de la carte. */
+.fp-page .fp-feutre { position: absolute; overflow: visible; pointer-events: none; fill: none; stroke-linecap: round; }
+.fp-page .fp-feutre path { stroke-dasharray: 1; stroke-dashoffset: 1; animation: fp-trace .35s ease-out forwards; }
+.fp-page .fp-feutre--barre { left: -6px; right: -6px; top: 42%; height: 14px; width: calc(100% + 12px); stroke: #E23B3B; stroke-width: 4.5px; }
+.fp-page .fp-feutre--rond { left: -10px; top: -9px; width: calc(100% + 20px); height: calc(100% + 18px); stroke: #2FA84F; stroke-width: 3.5px; }
+.fp-page .fp-feutre--barre path { animation-delay: .25s; }
+.fp-page .fp-feutre--rond path { animation-delay: .55s; animation-duration: .5s; }
+.fp-page .fp-feutre path { vector-effect: non-scaling-stroke; }
+@keyframes fp-trace { to { stroke-dashoffset: 0; } }
+
+/* La bulle de Réviz, en bas de la carte ; Réviz est devant, à sa gauche (hors de la carte). */
+.fp-page .fp-explication {
+  position: relative; flex: 1 1 auto; min-height: 0;
+  display: flex; align-items: flex-end;
+  margin: 4px -30px -22px calc(var(--taille) * .6);
+}
+.fp-page .fp-bulle { width: 100%; }
+.fp-page .fp-bulle .rv-bulle-txt {
+  max-width: none; width: 100%; box-sizing: border-box;
+  padding: 10px 14px 11px;
+  font-family: 'Geist', system-ui, sans-serif; font-size: 16.5px; font-weight: 650; letter-spacing: -.1px; line-height: 1.3;
+  text-wrap: pretty;
+  box-shadow: 0 6px 16px -6px rgba(90, 50, 10, .45), 0 0 0 1.5px rgba(120, 80, 30, .12);
+}
+.fp-page .fp-bulle.rv-bulle--gauche .rv-bulle-txt::after { top: auto; bottom: 26px; }
+.fp-page .fp-prof {
+  position: absolute; left: -14px; bottom: calc(var(--taille) * .02); z-index: 4;
+  pointer-events: none;
+}
+
+.fp-page .fp-recap { position: relative; }
+.fp-page .fp-nav { align-self: stretch; display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 8px; }
+.fp-page .fp-fleche { width: 52px; height: 52px; }
+.fp-page .fp-points { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
+.fp-page .fp-point { width: 10px; height: 10px; border-radius: 50%; background: rgba(255, 246, 232, .55); box-shadow: 0 1px 3px rgba(60, 30, 0, .35); transition: transform .2s, background .2s; }
+.fp-page .fp-point--la { background: #fff; transform: scale(1.35); }
+.fp-page .fp-points-txt { font-weight: 800; text-shadow: 0 1px 3px rgba(60, 30, 0, .5); }
+.fp-page .fp-actions-ligne--recap { align-self: stretch; margin-top: 12px; }
+
+/* ── Téléphone : page figée sur le petit viewport ; petits écrans (iPhone SE dans Safari) ── */
+@media (max-width: 430px) {
+  .app.fp-page { height: 100svh; }
+}
+@media (max-height: 700px) {
+  .fp-page .fp-titre { font-size: 38px; }
+  .fp-page .fp-titre--recap { font-size: 32px; }
+  .fp-page .fp-etoile { width: 48px; }
+  .fp-page .fp-etoile--1 { width: 58px; margin-bottom: 10px; }
+  .fp-page .fp-score { font-size: 52px; }
+  .fp-page .fp-actions { gap: 10px; margin-top: 10px; }
+  .fp-page .fp-btn { height: 48px; font-size: 17px; }
+  .fp-page .fp-btn--large { height: 52px; font-size: 18px; }
+  .fp-page .fp-question { font-size: 32px; }
+  .fp-page .fp-question--moyenne { font-size: 24px; }
+  .fp-page .fp-question--longue { font-size: 18px; }
+  .fp-page .fp-valeur { font-size: 24px; }
+  .fp-page .fp-reponse { min-height: 42px; }
+  .fp-page .fp-fleche { width: 46px; height: 46px; }
+  .fp-page .fp-bulle .rv-bulle-txt { font-size: 15px; padding: 8px 12px 9px; }
+}
+@media (max-height: 600px) {
+  .fp-page .fp-etoiles { margin-top: 4px; }
+  .fp-page .fp-score-bloc { gap: 4px; }
+  /* Récap : les flèches passent sur les bords de la carte (dans le carton, hors du texte), les
+     points s'effacent (le compteur 2 / 5 reste en haut) ; la carte prend toute la hauteur. */
+  .fp-page .fp-nav { position: absolute; left: -12px; right: -12px; top: 46%; margin: 0; z-index: 5; pointer-events: none; }
+  .fp-page .fp-nav .fp-fleche { pointer-events: auto; width: 40px; height: 40px; }
+  .fp-page .fp-nav .fp-fleche:disabled { visibility: hidden; }
+  .fp-page .fp-points, .fp-page .fp-points-txt { display: none; }
+  .fp-page .fp-pile { margin-top: 10px; }
+  .fp-page .fp-dos, .fp-page .fp-carte { border-width: 54px 40px 44px; border-image-width: 54px 40px 44px; }
+  .fp-page .fp-carte { gap: 6px; }
+  .fp-page .fp-question { font-size: 28px; }
+  .fp-page .fp-question--moyenne { font-size: 22px; }
+  .fp-page .fp-question--longue { font-size: 17px; }
+  .fp-page .fp-reponse { min-height: 38px; }
+  .fp-page .fp-valeur { font-size: 22px; }
+  .fp-page .fp-explication { margin: 2px -22px -18px calc(var(--taille) * .58); }
+}
+
+/* ── Ordinateur : la scène en paysage, la colonne un peu plus grande ── */
+.fp-page--large .fp-ecran { max-width: 560px; }
+.fp-page--large .fp-titre { font-size: 56px; }
+.fp-page--large .fp-score { font-size: 72px; }
+.fp-page--large .fp-pile { flex: 0 0 auto; height: min(560px, 66cqh); margin-top: auto; }
+.fp-page--large .fp-nav { margin-top: 16px; }
+.fp-page--large .fp-actions-ligne--recap { margin-top: 16px; margin-bottom: auto; }
+.fp-page--large .fp-question { font-size: 46px; }
+.fp-page--large .fp-question--moyenne { font-size: 32px; }
+.fp-page--large .fp-question--longue { font-size: 25px; }
+.fp-page--large .fp-reponse-nom { font-size: 17px; }
+.fp-page--large .fp-etiquette { font-size: 15px; }
+.fp-page--large .fp-bulle .rv-bulle-txt { font-size: 18px; }
+
+/* ── Mouvement réduit : rien ne tombe, rien ne vole ; les cartes changent sur place ── */
+@media (prefers-reduced-motion: reduce) {
+  .fp-page .fp-titre, .fp-page .fp-record, .fp-page .fp-ruban { animation: none; }
+  .fp-page .fp-etoile-or { transform: none; opacity: 1; animation: none !important; }
+  .fp-page .fp-carte, .fp-page .fp-carte--monte, .fp-page .fp-carte--revient, .fp-page .fp-carte--butee, .fp-page .fp-carte--butee-b { animation: none; transition: none; }
+  .fp-page .fp-carte--part, .fp-page .fp-carte--rentre { display: none; }
+  .fp-page .fp-feutre path { animation: none; stroke-dashoffset: 0; }
+  .fp-page .fp-fond { transition: none; }
+}

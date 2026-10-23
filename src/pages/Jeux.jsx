@@ -9,12 +9,15 @@ import { teinteMatiere, varsTeinte } from '../utils/teinteMatiere';
 import { accessoireMatiere } from '../utils/accessoireMatiere';
 import { PAIRES_JEUX } from '../data/pairesJeux';
 import { themesDePartie, tourDeTheme } from '../data/themesJeux';
+import { erreurJeu, erreursUniques } from '../data/erreursJeux';
 import { jouer, sonActif, bruitagesActifs } from '../utils/bruitages';
 import { musiqueMagie } from '../utils/musiqueMagie';
 import { musiqueLance } from '../utils/musiqueLance';
 import { JeuLance, partieLance, mancheLance } from './JeuLance';
 import { musiqueBuzzer } from '../utils/musiqueBuzzer';
 import { PlateauBuzzer, mancheBuzzer, partieBuzzer, TEMPO_BUZZER } from './jeux/RevizSeTrompe';
+import { FinDePartie } from './jeux/FinDePartie';
+import { finDeDemo } from './jeux/demoFin';
 import { useIsDesktop } from '../hooks/useMediaQuery';
 import './Jeux.css';
 
@@ -67,7 +70,7 @@ function pairesCourtes(data, branches) {
 const SOUS_RAPIDE = ['Mémorise, puis retourne-les deux par deux', 'Attention, il mélange !', 'Mélange express !'];
 export function mancheMagie(theme, niveau) {
   const t = TOURS_MAGIE[niveau], tour = tourDeTheme(theme);
-  return { ...t, type: 'magie', niveau, paires: tour.paires, titre: tour.titre, annonce: tour.titre, sous: SOUS_RAPIDE[niveau], apercu: t.voir + 0.6 + t.echanges * t.pas };
+  return { ...t, type: 'magie', niveau, theme: tour.theme, paires: tour.paires, titre: tour.titre, annonce: tour.titre, sous: SOUS_RAPIDE[niveau], apercu: t.voir + 0.6 + t.echanges * t.pas };
 }
 /** Le tour de magie seul : 3 thèmes, 3 tours qui accélèrent. */
 export const partieMagieSeule = () => themesDePartie(TOURS_MAGIE.length).map((theme, i) => mancheMagie(theme, i));
@@ -128,6 +131,24 @@ const CONSIGNES = {
   paires: () => ({ titre: 'Relie !', sous: 'Chaque mot à sa définition' }),
 };
 
+// ── Les erreurs, au format commun du récap (data/erreursJeux.js) ─────────────────────────
+// Pêche et valise (essais du 22/10) : le mot, la catégorie où l'élève l'a mis, la bonne.
+const erreurCategorie = (jeu, mot, donnee, bonne) => ({
+  jeu, theme: bonne, question: `«\u00a0${mot}\u00a0» va avec…`, donnee, bonne,
+  explication: donnee ? `«\u00a0${mot}\u00a0» fait partie de «\u00a0${bonne}\u00a0», pas de «\u00a0${donnee}\u00a0».` : `«\u00a0${mot}\u00a0» fait partie de «\u00a0${bonne}\u00a0».`,
+});
+const erreurDefinition = (p, donnee) => ({
+  jeu: 'paires', theme: 'Définitions', question: `«\u00a0${p.term}\u00a0», c'est…`, donnee, bonne: p.def,
+  explication: `«\u00a0${p.term}\u00a0» : ${p.def.charAt(0).toLowerCase()}${p.def.slice(1).replace(/\.?$/, '.')}`,
+});
+// Le tour de magie : la carte retournée en premier, celle retournée avec (null : paire pas trouvée
+// à temps) et sa vraie partenaire. Les tables se lisent en calcul : « 7 × 8 = ? », « ? = 56 ».
+function erreurMagie(manche, p, premiere, seconde) {
+  const terme = premiere === p.a;
+  const question = manche.theme === 'tables' ? (terme ? `${p.a} = ?` : `? = ${p.b}`) : `«\u00a0${premiere}\u00a0» va avec…`;
+  return erreurJeu({ jeu: 'magie', tour: manche, paire: p, question, donnee: seconde, bonne: terme ? p.b : p.a });
+}
+
 // ── La pêche : les mots passent dans l'eau, on ne pêche que ceux de la catégorie ──────────
 function Peche({ manche, expire, onBon, onFaux, onTermine }) {
   const [etats, setEtats] = useState({}); // id -> 'peche' | 'faux'
@@ -136,7 +157,7 @@ function Peche({ manche, expire, onBon, onFaux, onTermine }) {
   const terminer = useCallback(et => {
     if (fini.current) return;
     fini.current = true;
-    onTermine(bons.filter(b => et[b.id] !== 'peche').map(b => ({ texte: b.texte, detail: `Allait dans « ${manche.cible} »` })));
+    onTermine(bons.filter(b => et[b.id] !== 'peche').map(b => erreurCategorie('peche', b.texte, null, manche.cible)));
   }, [bons, manche.cible, onTermine]);
   useEffect(() => { if (expire) terminer(etats); }, [expire]); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -147,7 +168,7 @@ function Peche({ manche, expire, onBon, onFaux, onTermine }) {
     if (it.bon) {
       onBon();
       if (bons.every(b => suite[b.id] === 'peche')) setTimeout(() => terminer(suite), 450);
-    } else onFaux({ texte: it.texte, detail: `C'est dans « ${it.de} », pas dans « ${manche.cible} »` });
+    } else onFaux(erreurCategorie('peche', it.texte, manche.cible, it.de));
   };
 
   // 3 couloirs ; dans chaque couloir, les mots sont répartis sur le trajet (délais négatifs).
@@ -187,7 +208,7 @@ function Valise({ manche, expire, onBon, onFaux, onTermine }) {
   const terminer = useCallback(et => {
     if (fini.current) return;
     fini.current = true;
-    onTermine(bons.filter(b => et[b.id] !== 'range').map(b => ({ texte: b.texte, detail: `Allait avec « ${manche.cible} »` })));
+    onTermine(bons.filter(b => et[b.id] !== 'range').map(b => erreurCategorie('valise', b.texte, null, manche.cible)));
   }, [bons, manche.cible, onTermine]);
   useEffect(() => { if (expire) terminer(etats); }, [expire]); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -199,7 +220,7 @@ function Valise({ manche, expire, onBon, onFaux, onTermine }) {
       onBon();
       setSecousse(s => s + 1);
       if (bons.every(b => suite[b.id] === 'range')) setTimeout(() => terminer(suite), 500);
-    } else onFaux({ texte: it.texte, detail: `C'est dans « ${it.de} », pas avec « ${manche.cible} »` });
+    } else onFaux(erreurCategorie('valise', it.texte, manche.cible, it.de));
   };
 
   return (
@@ -230,7 +251,7 @@ function Paires({ manche, expire, onBon, onFaux, onTermine }) {
   const terminer = useCallback(r => {
     if (fini.current) return;
     fini.current = true;
-    onTermine(manche.paires.filter(p => !r.includes(p.term)).map(p => ({ texte: p.term, detail: p.def })));
+    onTermine(manche.paires.filter(p => !r.includes(p.term)).map(p => erreurDefinition(p, null)));
   }, [manche, onTermine]);
   useEffect(() => { if (expire) terminer(relies); }, [expire]); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -245,8 +266,7 @@ function Paires({ manche, expire, onBon, onFaux, onTermine }) {
     } else {
       setFaux({ terme: choisi, def: p.term });
       setTimeout(() => setFaux(null), 500);
-      const juste = manche.paires.find(x => x.term === choisi);
-      onFaux({ texte: choisi, detail: juste.def });
+      onFaux(erreurDefinition(manche.paires.find(x => x.term === choisi), p.def));
       setChoisi(null);
     }
   };
@@ -304,7 +324,7 @@ function TourDeMagie({ manche, expire, onBon, onFaux, onTermine, reviz }) {
   const terminer = useCallback(tr => {
     if (fini.current) return;
     fini.current = true;
-    onTermine(manche.paires.filter((_, i) => !tr.includes(i)).map(p => ({ texte: p.a, detail: p.b })));
+    onTermine(manche.paires.filter((_, i) => !tr.includes(i)).map(p => erreurMagie(manche, p, p.a, null)));
   }, [manche, onTermine]);
   useEffect(() => { if (expire) terminer(trouvees); }, [expire]); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -367,9 +387,8 @@ function TourDeMagie({ manche, expire, onBon, onFaux, onTermine, reviz }) {
           setTimeout(() => terminer(tr), 1500);
         }
       } else {
-        const p = manche.paires[a.paire];
         serie.current = 0;
-        onFaux({ texte: p.a, detail: p.b });
+        onFaux(erreurMagie(manche, manche.paires[a.paire], a.texte, b.texte));
         reviz.effet('rate');
         jouer('rate');
         setRate(true);
@@ -463,6 +482,15 @@ export default function Jeux() {
     nouvellePartie();
   };
   useEffect(() => {
+    // Développement : ?fin=0|1|6 ouvre directement la fin d'une Partie rapide avec autant d'erreurs.
+    if (import.meta.env.DEV && params.get('fin') !== null) {
+      const d = finDeDemo(Number(params.get('fin')) || 0);
+      setChapitre({ matiere: 'Réviz Games', titre: TITRES.melange, rapide: 'melange' });
+      setPartie(RAPIDES.melange());
+      setScore(d.score); setBonnes(d.bonnes); setErreurs(d.erreurs);
+      setPhase('fin');
+      return;
+    }
     const r = params.get('rapide') ?? (params.get('jeu') === 'buzzer' ? 'buzzer' : null);
     if (r) lancerRapide(RAPIDES[r] ? r : 'melange');
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
@@ -612,32 +640,15 @@ export default function Jeux() {
     );
   }
 
-  // ── Fin de partie ──
+  // ── Fin de partie : le score sur le podium, puis le récap (une carte par erreur) ──
   if (phase === 'fin') {
-    const recap = erreurs.filter((e, i) => erreurs.findIndex(x => x.texte === e.texte) === i);
-    const total = bonnes + recap.length;
-    const fier = recap.length <= 2;
-    return page(
-      <>
-        <div className="jx-ligne-haut">{fermer}<span className="jx-surtitre">{chapitre.matiere} · {chapitre.titre}</span></div>
-        <div className="jx-fin-tete">
-          <span className="jx-fin-score">{score}</span>
-          <span className="jx-fin-sous">{bonnes} bonne{bonnes > 1 ? 's' : ''} réponse{bonnes > 1 ? 's' : ''}{total ? ` sur ${total}` : ''}</span>
-        </div>
-        <Pantin size={isDesktop ? 200 : 150} expression={fier ? 'fier' : 'content'} entree={fier ? 'saut' : 'coucou'} accessoire={ACCESSOIRES_JEU[partie.at(-1)?.type] ?? accessoire} className="jx-pantin-fin" />
-        {recap.length > 0 && (
-          <div className="jx-recap">
-            <span className="jx-recap-titre">À retenir</span>
-            {recap.slice(0, 8).map(e => (
-              <p key={e.texte} className="jx-recap-ligne"><b>{e.texte}</b><span>{e.detail}</span></p>
-            ))}
-          </div>
-        )}
-        <div className="jx-fin-actions">
-          <button type="button" className="jx-btn jx-btn--encre" onClick={() => { setPartie(chapitre.rapide ? RAPIDES[chapitre.rapide]() : construirePartie(chapitre.data, mode)); nouvellePartie(); }}>Rejouer</button>
-          <button type="button" className="jx-btn jx-btn--blanc" onClick={() => setPhase('choix')}>{chapitre.rapide ? 'Choisir un autre jeu' : 'Changer de chapitre'}</button>
-        </div>
-      </>,
+    const rejouer = () => { setPartie(chapitre.rapide ? RAPIDES[chapitre.rapide]() : construirePartie(chapitre.data, mode)); nouvellePartie(); };
+    const tours = partie.length;
+    return (
+      <FinDePartie surtitre={`${chapitre.titre} · ${tours} tour${tours > 1 ? 's' : ''}`}
+        score={score} bonnes={bonnes} erreurs={erreursUniques(erreurs)}
+        cleRecord={`reviz-jeux-record-${chapitre.rapide ?? `chapitre-${chapitre.titre}`}`}
+        onRejouer={rejouer} onQuitter={() => setPhase('choix')} isDesktop={isDesktop} hauteurEcran={hauteurEcran} />
     );
   }
 

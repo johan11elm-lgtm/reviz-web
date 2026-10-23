@@ -134,6 +134,19 @@ const SONS = {
     note(a, { f: 1046, t: 0.12, d: 0.5, type: 'square', vol: 0.06 });
     note(a, { f: 1318, t: 0.12, d: 0.5, type: 'triangle', vol: 0.06 });
   },
+
+  // Fin de partie : petite fanfare de boîte à musique (do mi sol do), plus longue pour un sans-faute ;
+  // le compteur du score (tic de bois), chaque étoile (carillon qui monte), le record (deux cloches).
+  fin: a => [523, 659, 784, 1046].forEach((f, i) => note(a, { f, t: i * 0.11, d: i === 3 ? 0.7 : 0.22, type: 'triangle', vol: 0.09 })),
+  sansFaute: a => {
+    [523, 659, 784, 1046, 1318, 1568].forEach((f, i) => note(a, { f, t: i * 0.09, d: i === 5 ? 0.9 : 0.2, type: 'triangle', vol: 0.08 }));
+    for (let i = 0; i < 14; i++) souffle(a, { t: 0.5 + i * 0.045 + Math.random() * 0.03, d: 0.04, f: 1800 + Math.random() * 1600, q: 1.2, vol: 0.05 });
+  },
+  compte: a => note(a, { f: 1500 + Math.random() * 200, d: 0.03, type: 'triangle', vol: 0.035 }),
+  etoile: a => { note(a, { f: 1318, d: 0.3, vol: 0.09 }); note(a, { f: 1976, t: 0.06, d: 0.45, vol: 0.07 }); note(a, { f: 2637, t: 0.12, d: 0.5, vol: 0.04 }); },
+  record: a => { note(a, { f: 1046, d: 0.5, vol: 0.1 }); note(a, { f: 1568, t: 0.14, d: 0.8, vol: 0.1 }); note(a, { f: 2093, t: 0.28, d: 0.9, vol: 0.05 }); },
+  // Une carte du récap qui glisse sur le bureau (carton sur bois).
+  page: a => { souffle(a, { d: 0.2, f: 1400, f2: 600, q: 0.9, vol: 0.12 }); souffle(a, { t: 0.15, d: 0.05, f: 500, q: 1, vol: 0.06, type: 'lowpass' }); },
 };
 
 export function jouer(nom) {

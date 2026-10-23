@@ -3,6 +3,7 @@ import { Pantin } from '../../components/Pantin';
 import { BulleReviz } from '../../components/reviz/BulleReviz';
 import { themesDePartie } from '../../data/themesJeux';
 import { tourDeBuzzer } from '../../data/affirmationsJeux';
+import { erreurJeu } from '../../data/erreursJeux';
 import { jouer } from '../../utils/bruitages';
 import { musiqueBuzzer } from '../../utils/musiqueBuzzer';
 import './RevizSeTrompe.css';
@@ -28,7 +29,7 @@ const MOQUERIES = ['Hé hé !', 'Je t’ai eu !', 'Piégé !'];
 export function mancheBuzzer(theme, niveau) {
   const t = TOURS_BUZZER[niveau];
   const tour = tourDeBuzzer(theme, t.n);
-  return { ...t, type: 'buzzer', niveau, titre: tour.titre, annonce: tour.titre, affirmations: tour.affirmations, apercu: 0 };
+  return { ...t, type: 'buzzer', niveau, theme: tour.theme, titre: tour.titre, annonce: tour.titre, affirmations: tour.affirmations, apercu: 0 };
 }
 /** Une partie de Réviz se trompe ? seul : 3 thèmes, 3 tours qui accélèrent. */
 export const partieBuzzer = () => themesDePartie(TOURS_BUZZER.length).map((theme, i) => mancheBuzzer(theme, i));
@@ -59,7 +60,12 @@ function BulleCorrigee({ a, gabarit = false, pointe = 'bas' }) {
   );
 }
 
-const detailErreur = a => (a.vrai ? 'C’était vrai !' : `Réviz disait : « ${a.dit} »`);
+// Une affirmation ratée, au format du récap. choix : true (Vrai), false (Faux), null (temps écoulé).
+// Quand Réviz mentait, sa fausse réponse sert à expliquer la confusion (« Paris, c'est la France »).
+const erreurBuzzer = (manche, a, choix) => erreurJeu({
+  jeu: 'buzzer', tour: manche, paire: a.paire, question: a.texte,
+  donnee: choix === null ? null : choix ? 'Vrai' : 'Faux', bonne: a.vrai ? 'Vrai' : 'Faux', autre: a.vrai ? null : a.dit,
+});
 
 export function PlateauBuzzer({ manche, idx, total, phase, expire, onBon, onFaux, onTermine, onDemarrer, fermer, boutonSon, score, isDesktop, hauteurEcran }) {
   const pantin = useRef(null);
@@ -112,7 +118,7 @@ export function PlateauBuzzer({ manche, idx, total, phase, expire, onBon, onFaux
     const a = affs[j.i];
     pantin.current?.expression('surpris');
     setReaction({ type: 'temps', texte: 'Temps écoulé !', id: Date.now() });
-    terminer(a && !j.repondu ? [{ texte: a.correction, detail: detailErreur(a) }] : []);
+    terminer(a && !j.repondu ? [erreurBuzzer(manche, a, null)] : []);
   }, [expire]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const repondre = useCallback(choix => {
@@ -143,7 +149,7 @@ export function PlateauBuzzer({ manche, idx, total, phase, expire, onBon, onFaux
         }
       } else {
         jouer('buzzer');
-        onFaux({ texte: a.correction, detail: detailErreur(a) });
+        onFaux(erreurBuzzer(manche, a, choix));
         r?.expression('mortDeRire');
         r?.geste('brasEnLair');
         setReaction({ type: 'triomphe', texte: MOQUERIES[Math.floor(Math.random() * MOQUERIES.length)], id: Date.now() });
@@ -160,7 +166,7 @@ export function PlateauBuzzer({ manche, idx, total, phase, expire, onBon, onFaux
       }
       terminer([]);
     });
-  }, [affs, annoncer, manche.pause, onBon, onFaux, terminer]);
+  }, [affs, annoncer, manche, onBon, onFaux, terminer]);
 
   useEffect(() => () => vider(), []);
   // Au clavier : flèche gauche ou V pour Vrai, flèche droite ou F pour Faux.

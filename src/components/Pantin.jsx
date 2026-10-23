@@ -122,6 +122,10 @@ const ACCESSOIRES = {
   // Réviz se trompe ? : le présentateur, micro levé vers la bouche et nœud papillon sous le sourire.
   micro: { main: 'g', bras: { epaule: 20, coude: -70 }, prise: [104, 150], ancre: [0.5, 0.72], w: 282, h: 600, angle: 15 },
   noeud: { x: 1018, y: 1344, w: 520, h: 315, enfile: true },
+  // Fin de partie : la médaille d'or (ruban en U coupé sur le contour du corps, ses brins passent derrière :
+  // assets-src/jeux/fin/medaille.py), ou la coupe du sans-faute brandie bras levé.
+  medaille: { x: 358, y: 1246, w: 1798, h: 790, enfile: true },
+  coupe: { main: 'g', bras: { epaule: 150, coude: 40, etire: 1.3 }, prise: [110, 120], ancre: [0.5, 0.8], w: 600, h: 513, angle: -6 },
 };
 const NS = 'http://www.w3.org/2000/svg';
 function imageSvg(href, { x, y, w, h }) {

@@ -78,10 +78,10 @@ export function tourDeLancer(theme, n = 6, nChoix = 2) {
   const forme = t => /[\d₀-₉]/.test(t);
   return {
     theme: theme.id, matiere: theme.matiere, titre, aide,
-    questions: cotes.slice(0, n).map(([q, r]) => {
+    questions: cotes.slice(0, n).map(([q, r], k) => {
       const autres = melange(cotes.map(c => c[1]).filter(x => x !== r));
       const leurres = [...autres.filter(x => forme(x) === forme(r)), ...autres.filter(x => forme(x) !== forme(r))].slice(0, nChoix - 1);
-      return { question: question(q), texte: q, reponse: r, choix: melange([r, ...leurres]) };
+      return { question: question(q), texte: q, reponse: r, choix: melange([r, ...leurres]), paire: paires[k] };
     }),
   };
 }

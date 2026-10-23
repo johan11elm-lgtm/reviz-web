@@ -18,7 +18,7 @@ const minuscule = t => t.charAt(0).toLowerCase() + t.slice(1);
 // point d'exclamation ne se retrouvent jamais seuls en bout de ligne dans la bulle).
 
 // « de la France », « du Portugal », « des Pays-Bas » : le pays avec son article.
-const DE_PAYS = {
+export const DE_PAYS = {
   France: 'de la France', Italie: "de l'Italie", Espagne: "de l'Espagne", Allemagne: "de l'Allemagne", Portugal: 'du Portugal',
   Belgique: 'de la Belgique', 'Royaume-Uni': 'du Royaume-Uni', Grèce: 'de la Grèce', 'Pays-Bas': 'des Pays-Bas',
   Autriche: "de l'Autriche", Pologne: 'de la Pologne', Irlande: "de l'Irlande", Suède: 'de la Suède', Suisse: 'de la Suisse',
@@ -122,7 +122,7 @@ export function tourDeBuzzer(theme, n = 4) {
     if (fausse) deja.add(fausse);
     const dit = fausse ?? bonne;
     const [avant, apres = ''] = g.dire(p, '\u0001').split('\u0001');
-    return { texte: g.dire(p, dit), vrai: !fausse, correction: corrige(p), avant, dit, bonne, apres };
+    return { texte: g.dire(p, dit), vrai: !fausse, correction: corrige(p), avant, dit, bonne, apres, paire: p };
   });
   return { theme: theme.id, matiere: theme.matiere, titre, affirmations };
 }
