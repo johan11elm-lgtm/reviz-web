@@ -20,16 +20,24 @@ export function bruitagesActifs(oui) {
  * (la musique du ninja, 23/10). Il est réveillé au premier geste de l'élève, seul moment où iOS
  * accepte de le démarrer.
  */
+// Un contexte à reprendre : suspendu (avant le premier geste, ou mis en veille), ou « interrupted »
+// (Safari sur iPhone : un appel, le verrouillage de l'écran, une autre appli qui prend le son). Un
+// contexte fermé ne revient pas.
+const aReprendre = () => !!ctx && ctx.state !== 'running' && ctx.state !== 'closed';
+const reprendre = () => { if (aReprendre()) ctx.resume().catch(() => {}); };
+
 export function contexteAudio() {
   const AC = typeof window !== 'undefined' && (window.AudioContext || window.webkitAudioContext);
   if (!AC) return null;
   ctx ??= new AC();
-  if (ctx.state === 'suspended') ctx.resume().catch(() => {});
+  reprendre();
   return ctx;
 }
 if (typeof window !== 'undefined') {
-  const reveiller = () => { if (ctx?.state === 'suspended') ctx.resume().catch(() => {}); };
-  for (const ev of ['pointerdown', 'touchend', 'keydown']) window.addEventListener(ev, reveiller, { capture: true, passive: true });
+  // Les gestes de l'élève, et le retour au premier plan : iOS coupe le son quand la page passe en
+  // arrière-plan et ne le rend pas tout seul (la musique restait muette jusqu'au prochain toucher).
+  for (const ev of ['pointerdown', 'touchend', 'keydown']) window.addEventListener(ev, reprendre, { capture: true, passive: true });
+  document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') reprendre(); });
 }
 
 function audio() {

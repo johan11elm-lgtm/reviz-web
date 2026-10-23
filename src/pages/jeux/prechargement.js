@@ -19,6 +19,11 @@ export const DECORS = {
   ninja: ['citron-d.webp', 'citron-g.webp', 'citron.webp', 'etiquette.webp', 'fond-paysage.webp', 'fond.webp', 'jus-citron.webp', 'jus-orange.webp', 'jus-pasteque.webp', 'jus-pomme.webp', 'orange-d.webp', 'orange-g.webp', 'orange.webp', 'pasteque-d.webp', 'pasteque-g.webp', 'pasteque.webp', 'pomme-d.webp', 'pomme-g.webp', 'pomme.webp'],
   taupe: ['etoile.webp', 'fond-paysage.webp', 'fond.webp', 'pancarte.webp', 'taupe-moqueuse.webp', 'taupe-sonnee.webp', 'taupe.webp', 'trou-avant.webp', 'trou.webp'],
 };
+// L'écran de fin (public/jeux/fin/, la musique en est exclue : elle se charge en démarrant) et la transition
+// entre deux jeux (public/jeux/transition/) : sans eux, le podium et la carte du jeu suivant arrivaient
+// avec leur décor encore en train de se charger.
+export const FIN = ['bureau-paysage.webp', 'bureau.webp', 'carte.webp', 'etoile.webp', 'podium.webp', 'scene-paysage.webp', 'scene.webp', 'trombone.webp'];
+export const TRANSITION = ['etoile.webp', 'fond.webp', 'rouleau.webp'];
 export const PIECES_PANTIN = [
   'bouche-A.webp', 'bouche-EI.webp', 'bouche-MBP.webp', 'bouche-O.webp', 'bouche-U.webp', 'bouche-fier.webp',
   'bouche-moue.webp', 'bouche-repos.webp', 'bouche-rire.webp', 'bouche-triste.webp',
@@ -46,13 +51,19 @@ export const DONNEES_PANTIN = [
 ];
 
 const enPaysage = f => /-(paysage|long)\.webp$/.test(f);
-const aSaVersionPaysage = (j, f) => DECORS[j].includes(f.replace(/\.webp$/, '-paysage.webp')) || DECORS[j].includes(f.replace(/\.webp$/, '-long.webp'));
+const aSaVersionPaysage = (liste, f) => liste.includes(f.replace(/\.webp$/, '-paysage.webp')) || liste.includes(f.replace(/\.webp$/, '-long.webp'));
+// Ce qui sert à cet écran dans une liste : la version paysage (ordinateur) ou portrait (téléphone).
+const pourEcran = (liste, large) => liste.filter(f => (large ? !aSaVersionPaysage(liste, f) : !enPaysage(f)));
 
 /** Les images d'un jeu pour cet écran : son décor (portrait ou paysage) et le costume de Réviz. */
 export function imagesDuJeu(jeu, { large = false, accessoires = [] } = {}) {
-  const decor = (DECORS[jeu] ?? []).filter(f => (large ? !aSaVersionPaysage(jeu, f) : !enPaysage(f)));
+  const decor = pourEcran(DECORS[jeu] ?? [], large);
   return [...decor.map(f => `/jeux/${jeu}/${f}`), ...accessoires.map(a => `/pantin/accessoires/${a}.webp`)];
 }
+
+/** Les images de la transition entre deux jeux, et celles de l'écran de fin pour cet écran. */
+export const imagesTransition = () => TRANSITION.map(f => `/jeux/transition/${f}`);
+export const imagesFin = ({ large = false } = {}) => pourEcran(FIN, large).map(f => `/jeux/fin/${f}`);
 
 const gardees = new Set(); // les images en cours de chargement restent référencées
 const chargerDonnee = url => fetch(url).then(r => r.blob()).catch(() => {});
@@ -69,7 +80,8 @@ function chargerImage(url) {
 
 /**
  * Charge la partie : d'abord tout ce qu'il faut pour la première manche (progression comptée sur
- * cette part, onProgres(0 → 1)), puis le décor des manches suivantes, en arrière-plan.
+ * cette part, onProgres(0 → 1)), puis, en arrière-plan, la transition entre deux jeux, le décor des manches
+ * suivantes et l'écran de fin.
  * accessoiresDe(type) : le costume de Réviz pour ce jeu. Renvoie une fonction qui arrête le décompte.
  */
 export function prechargerPartie(partie, { large = false, accessoiresDe = () => [], onProgres = () => {} } = {}) {
@@ -83,9 +95,14 @@ export function prechargerPartie(partie, { large = false, accessoiresDe = () => 
   const un = () => { faits += 1; if (vivant) onProgres(Math.min(1, faits / total)); };
   onProgres(0);
   Promise.all([prechargerMoteurPantin().then(un, un), ...donnees.map(u => chargerDonnee(u).then(un)), ...urgent.map(u => chargerImage(u).then(un))]).then(async () => {
-    for (const t of suivants) {
+    const apres = [
+      ...(partie.length > 1 ? [imagesTransition()] : []), // entre deux tours, même d'un seul jeu
+      ...suivants.map(t => imagesDuJeu(t, { large, accessoires: accessoiresDe(t) })),
+      imagesFin({ large }),
+    ];
+    for (const images of apres) {
       if (!vivant) return;
-      await Promise.all(imagesDuJeu(t, { large, accessoires: accessoiresDe(t) }).map(chargerImage));
+      await Promise.all(images.map(chargerImage));
     }
   });
   return () => { vivant = false; };

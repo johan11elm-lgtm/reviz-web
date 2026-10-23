@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { themesDePartie, tourDeLancer, THEMES_JEUX } from '../data/themesJeux';
 import { erreurJeu } from '../data/erreursJeux';
 import { jouer } from '../utils/bruitages';
+import { minuterie, annuler, tempsJeu } from './jeux/tempsDeJeu';
 import './JeuLance.css';
 
 /**
@@ -67,12 +68,17 @@ export function JeuLance({ manche, numero, total, enJeu, expire, onBon, onFaux, 
   const vol = useRef(null);
   const tremble = useRef(PANIERS.map(() => 0)); // secousse de chaque panier touché (degrés, amortie)
   const geste = useRef(null);
+  // Les enchaînements temporisés du tour (verdict, question suivante, fin) : annulés au démontage (la croix
+  // ne laisse pas un tour se terminer après coup) et gelés en arrière-plan (tempsDeJeu.js).
+  const minuteurs = useRef([]);
+  const plus = (ms, f) => minuteurs.current.push(minuterie(f, ms));
+  useEffect(() => () => { minuteurs.current.forEach(annuler); minuteurs.current = []; }, []);
   const question = manche.questions[q];
 
   const terminer = useCallback((sansEnCours = false) => {
     if (fini.current) return;
     fini.current = true;
-    finJeu.current = performance.now();
+    finJeu.current = tempsJeu();
     // Seule la question affichée compte (les suivantes, jamais vues, ne sont pas des erreurs) ; si la
     // dernière boule est arrivée après le chrono, la question suivante n'a jamais été montrée.
     const enCours = sansEnCours ? null : manche.questions[reponses.current.length];
@@ -105,13 +111,14 @@ export function JeuLance({ manche, numero, total, enJeu, expire, onBon, onFaux, 
   // Les paniers démarrent à l'arrêt quand le chrono part et s'y remettent quand le tour finit
   // (le tour suivant repart de là) : leur amplitude monte et descend en douceur.
   const debutJeu = useRef(null), finJeu = useRef(null);
-  useEffect(() => { if (enJeu) debutJeu.current = performance.now(); }, [enJeu]);
+  useEffect(() => { if (enJeu) debutJeu.current = tempsJeu(); }, [enJeu]);
   const lisse = x => { const k = borne(x, 0, 1); return k * k * (3 - 2 * k); };
 
   // Une seule boucle par image : les paniers (glissement, secousse) puis la boule.
   useEffect(() => {
     let id = 0;
-    const image = maintenant => {
+    const image = horodatage => {
+      const maintenant = tempsJeu(horodatage); // le temps de jeu : sans les absences
       const t = debutJeu.current === null ? 0 : (maintenant - debutJeu.current) / 1000;
       const env = lisse(t / 0.9) * (finJeu.current === null ? 1 : 1 - lisse((maintenant - finJeu.current) / 400));
       for (const i of PANIERS) {
@@ -193,8 +200,8 @@ export function JeuLance({ manche, numero, total, enJeu, expire, onBon, onFaux, 
         el.style.opacity = '1';
         // Hauteur de la cloche : le sommet passe au-dessus du cercle, quelle que soit la distance.
         const c = cercle(i);
-        vol.current = { i, bon, cote: x0 < c.x ? -1 : 1, t0: performance.now() - 1000 / 60, duree: manche.vol, x0, y0, taille, s1: borne((c.demi * 0.85) / taille, 0.45, 0.8), haut: Math.max(90, (y0 - c.y) * 0.55 + 70) };
-        bougerBoule(performance.now());
+        vol.current = { i, bon, cote: x0 < c.x ? -1 : 1, t0: tempsJeu() - 1000 / 60, duree: manche.vol, x0, y0, taille, s1: borne((c.demi * 0.85) / taille, 0.45, 0.8), haut: Math.max(90, (y0 - c.y) * 0.55 + 70) };
+        bougerBoule(tempsJeu());
       },
     });
   };
@@ -212,7 +219,7 @@ export function JeuLance({ manche, numero, total, enJeu, expire, onBon, onFaux, 
     if (v.bon) {
       serie.current += 1;
       jouer('swish');
-      setTimeout(() => jouer(serie.current > 1 ? 'combo' : 'paire'), 60);
+      plus(60, () => jouer(serie.current > 1 ? 'combo' : 'paire'));
       onBon('fier');
       reviz.effet('panier', serie.current);
     } else {
@@ -222,12 +229,12 @@ export function JeuLance({ manche, numero, total, enJeu, expire, onBon, onFaux, 
       onFaux(erreurLance(manche, qu, qu.choix[v.i]));
     }
     const derniere = reponses.current.length >= manche.questions.length;
-    setTimeout(() => {
+    plus(v.bon ? 460 : 660, () => {
       if (fini.current) return;
       if (attendreBoule.current) { terminer(true); return; }
       if (derniere) {
-        if (reponses.current.length && serie.current >= manche.questions.length) { reviz.geste('brasEnLair'); reviz.effet('bravo'); jouer('bravo'); setTimeout(terminer, 1300); }
-        else setTimeout(terminer, 300);
+        if (reponses.current.length && serie.current >= manche.questions.length) { reviz.geste('brasEnLair'); reviz.effet('bravo'); jouer('bravo'); plus(1300, terminer); }
+        else plus(300, terminer);
         return;
       }
       setResultat(null);
@@ -236,8 +243,8 @@ export function JeuLance({ manche, numero, total, enJeu, expire, onBon, onFaux, 
       jouer('craie');
       pantin.current?.montrerObjet();
       jouer('froisse');
-      setTimeout(() => { setEtat('vise'); horloge?.reprise(); }, 200);
-    }, v.bon ? 460 : 660);
+      plus(200, () => { setEtat('vise'); horloge?.reprise(); });
+    });
   }
 
   // Le geste : on pose le doigt n'importe où sous les paniers et on glisse vers le haut. Le panier

@@ -17,6 +17,7 @@
  * gratuit, sans usage commercial, à regénérer avant le lancement (comme celle de la magie).
  */
 import { sonActif, contexteAudio } from './bruitages';
+import { pisteDecodee, sansRattrapage } from './musiqueCommun';
 
 const NOTES = { C: 0, 'C#': 1, D: 2, 'D#': 3, E: 4, F: 5, 'F#': 6, G: 7, 'G#': 8, A: 9, 'A#': 10, B: 11 };
 const freq = n => {
@@ -143,6 +144,7 @@ function jouerPas(t, croche) {
 
 function boucle() {
   const croche = 60 / tempo / 2;
+  prochaine = sansRattrapage(prochaine, ctx.currentTime); // réveil après une veille : pas de salve de notes
   while (prochaine < ctx.currentTime + 0.12) {
     jouerPas(prochaine, croche);
     prochaine += croche;
@@ -178,23 +180,22 @@ const musiqueCode = {
     if (enTension !== undefined) tension = enTension;
   },
   joue: () => !!minuterie,
+  liberer() { /* rien de décodé en version code */ },
 };
 
 // ── Version Flow Music : la boucle, jouée de plus en plus vite ──
 const BOUCLE = '/jeux/buzzer/boucle.mp3';
 const PERIODE = 16; // secondes, exactement (8 mesures à 120 BPM)
 const BASE = 128; // tempo du premier tour : vitesse 1
-let tampon = null, chargement = null, minuterieTic = null, prochainTic = 0, numTic = 0;
-function charger() {
-  chargement ??= fetch(BOUCLE).then(r => r.arrayBuffer()).then(b => ctx.decodeAudioData(b)).then(t => { tampon = t; })
-    .catch(e => { chargement = null; throw e; });
-  return chargement;
-}
+const piste = pisteDecodee(BOUCLE);
+let generation = 0; // chaque démarrage et chaque arrêt change de génération : un chargement périmé ne joue rien
+let minuterieTic = null, prochainTic = 0, numTic = 0;
 const flux = { source: null, bpm: BASE, actif: false };
 const vitesse = () => flux.bpm / BASE;
 // Tic-tac des dernières secondes, calé sur la noire de la piste (120 BPM à vitesse 1).
 function tictac() {
   const noire = 60 / (120 * vitesse());
+  prochainTic = sansRattrapage(prochainTic, ctx.currentTime); // réveil après une veille : pas de salve de tic
   while (prochainTic < ctx.currentTime + 0.12) {
     if (tension) tic(prochainTic, numTic % 2 === 0);
     prochainTic += noire; numTic += 1;
@@ -204,16 +205,18 @@ const musiqueFlow = {
   async demarrer() {
     if (flux.actif || !sonActif() || !contexte()) return;
     flux.actif = true;
-    sortie = ctx.createGain();
-    sortie.gain.setValueAtTime(0.0001, ctx.currentTime);
-    sortie.gain.exponentialRampToValueAtTime(0.55, ctx.currentTime + 0.6);
-    sortie.connect(ctx.destination);
-    try { await charger(); } catch { flux.actif = false; musiqueCode.demarrer(); return; }
-    if (!flux.actif) return; // arrêtée pendant le chargement
+    const mien = ++generation;
+    const out = sortie = ctx.createGain();
+    out.gain.setValueAtTime(0.0001, ctx.currentTime);
+    out.gain.exponentialRampToValueAtTime(0.55, ctx.currentTime + 0.6);
+    out.connect(ctx.destination);
+    let tampon;
+    try { tampon = await piste.charger(ctx); } catch { if (mien === generation) { flux.actif = false; out.disconnect(); musiqueCode.demarrer(); } return; }
+    if (mien !== generation) return; // arrêtée (ou relancée) pendant le chargement : pas de source orpheline
     const s = ctx.createBufferSource();
     s.buffer = tampon; s.loop = true; s.loopStart = 0.5; s.loopEnd = 0.5 + PERIODE;
     s.playbackRate.value = vitesse();
-    s.connect(sortie);
+    s.connect(out);
     s.start(ctx.currentTime + 0.05, 0.5);
     flux.source = s;
     prochainTic = ctx.currentTime + 0.05; numTic = 0;
@@ -223,6 +226,7 @@ const musiqueFlow = {
     musiqueCode.arreter();
     if (!flux.actif) return;
     flux.actif = false;
+    generation += 1;
     tension = false;
     clearInterval(minuterieTic); minuterieTic = null;
     const out = sortie, s = flux.source;
@@ -238,6 +242,8 @@ const musiqueFlow = {
     flux.source?.playbackRate.setTargetAtTime(vitesse(), ctx.currentTime, 0.3);
   },
   joue: () => flux.actif,
+  /** Relâche le morceau décodé (à appeler une fois la musique arrêtée, en quittant les jeux). */
+  liberer: () => piste.liberer(),
 };
 
 const versionCode = typeof location !== 'undefined' && new URLSearchParams(location.search).get('musique') === 'code';

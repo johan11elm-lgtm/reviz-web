@@ -4,6 +4,7 @@ import { BulleReviz } from '../../components/reviz/BulleReviz';
 import { jouer } from '../../utils/bruitages';
 import { musiqueFin } from '../../utils/musiqueFin';
 import { mesurer } from '../../services/mesure';
+import { minuterie, annuler } from './tempsDeJeu';
 import './FinDePartie.css';
 
 /**
@@ -98,15 +99,20 @@ function Podium({ surtitre, score, bonnes, erreurs, record, onRecap, onRejouer, 
   const etoiles = etoilesDe(bonnes, n);
   const pantin = useRef(null);
   const [fini, setFini] = useState(false);
+  // Les sons et le geste du podium, après le défilement du score : annulés si on quitte avant (la croix, rejouer),
+  // et gelés en arrière-plan.
+  const suite = useRef([]);
+  const plus = (ms, f) => suite.current.push(minuterie(f, ms));
+  useEffect(() => () => { suite.current.forEach(annuler); suite.current = []; }, []);
   const affiche = useDefile(score, () => {
     setFini(true);
     if (calme()) return;
-    [0, 1, 2].forEach(k => { if (etoiles > k) setTimeout(() => jouer('etoile'), 120 + k * 260); });
-    setTimeout(() => {
+    [0, 1, 2].forEach(k => { if (etoiles > k) plus(120 + k * 260, () => jouer('etoile')); });
+    plus(120 + 3 * 260, () => {
       if (record.nouveau) jouer('record');
       if (etoiles >= 1.5) pantin.current?.geste('brasEnLair');
       else pantin.current?.geste('coucou');
-    }, 120 + 3 * 260);
+    });
   });
   useEffect(() => { jouer(n ? 'fin' : 'sansFaute'); }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -332,15 +338,18 @@ function Recap({ erreurs, onRetour, onRejouer, onQuitter, isDesktop, hauteurEcra
  * @param {number} score, bonnes
  * @param {object[]} erreurs  format commun, déjà dédoublonnées
  * @param {string} cleRecord  clé du meilleur score sur l'appareil (un par mode)
+ * @param {number} [recordAvant]  le meilleur score d'avant cette partie, quand il est connu d'ailleurs que de cleRecord
  */
-export function FinDePartie({ surtitre, score, bonnes, erreurs, cleRecord, onRejouer, onQuitter, isDesktop, hauteurEcran, mode }) {
+export function FinDePartie({ surtitre, score, bonnes, erreurs, cleRecord, recordAvant, onRejouer, onQuitter, isDesktop, hauteurEcran, mode }) {
   const [vue, setVue] = useState('fin');
   const [record] = useState(() => {
-    const avant = lire(cleRecord);
+    const avant = recordAvant ?? lire(cleRecord);
     return { meilleur: Math.max(avant, score), nouveau: avant > 0 && score > avant };
   });
   useEffect(() => {
-    if (score > lire(cleRecord)) try { localStorage.setItem(cleRecord, String(score)); } catch { /* stockage indisponible */ }
+    // recordAvant : le record vient d'ailleurs (la partie du jour : le même que sur l'écran des jeux, repris du
+    // compte), il n'y a rien à garder ici.
+    if (recordAvant === undefined && score > lire(cleRecord)) try { localStorage.setItem(cleRecord, String(score)); } catch { /* stockage indisponible */ }
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
   // La musique de fin part après la fanfare du podium et continue pendant le récap.
   useEffect(() => {

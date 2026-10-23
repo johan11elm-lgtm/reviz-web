@@ -15,6 +15,7 @@
  * pistes faites sur un compte Flow gratuit, sans usage commercial, à regénérer avant le lancement.
  */
 import { sonActif, contexteAudio } from './bruitages';
+import { pisteDecodee, sansRattrapage } from './musiqueCommun';
 
 const NOTES = { C: 0, 'C#': 1, D: 2, 'D#': 3, E: 4, F: 5, 'F#': 6, G: 7, 'G#': 8, A: 9, 'A#': 10, B: 11 };
 const freq = n => {
@@ -115,6 +116,7 @@ function jouerPas(t) {
 
 function boucle() {
   const croche = 60 / tempo / 2;
+  prochaine = sansRattrapage(prochaine, ctx.currentTime); // réveil après une veille : pas de salve de notes
   while (prochaine < ctx.currentTime + 0.12) {
     jouerPas(prochaine);
     prochaine += croche * (pas % 2 === 0 ? 0.92 : 1.08); // léger swing de cabaret
@@ -149,33 +151,32 @@ const musiqueCode = {
     if (enMelange !== undefined) melange = enMelange;
   },
   joue: () => !!minuterie,
+  liberer() { /* rien de décodé en version code */ },
 };
 
 // ── Version Flow Music : une seule boucle, la variation « mélange » (la plus vive), accélérée ──
 // Son tempo d'origine est ~110 à la noire : on la joue à bpm / 110 (×1,05 au 1er tour, puis +8 %).
 const BOUCLE = '/jeux/magie/boucle-melange.mp3';
-let tampon = null, chargement = null;
-function charger() {
-  chargement ??= fetch(BOUCLE).then(r => r.arrayBuffer()).then(b => ctx.decodeAudioData(b)).then(t => { tampon = t; })
-    .catch(e => { chargement = null; throw e; });
-  return chargement;
-}
+const piste = pisteDecodee(BOUCLE);
+let generation = 0; // chaque démarrage et chaque arrêt change de génération : un chargement périmé ne joue rien
 const flux = { source: null, bpm: 116, actif: false };
 const vitesse = () => flux.bpm / 110;
 const musiqueFlow = {
   async demarrer() {
     if (flux.actif || !sonActif() || !contexte()) return;
     flux.actif = true;
-    sortie = ctx.createGain();
-    sortie.gain.setValueAtTime(0.0001, ctx.currentTime);
-    sortie.gain.exponentialRampToValueAtTime(0.6, ctx.currentTime + 0.8);
-    sortie.connect(ctx.destination);
-    try { await charger(); } catch { flux.actif = false; musiqueCode.demarrer(); return; }
-    if (!flux.actif) return; // arrêtée pendant le chargement
+    const mien = ++generation;
+    const out = sortie = ctx.createGain();
+    out.gain.setValueAtTime(0.0001, ctx.currentTime);
+    out.gain.exponentialRampToValueAtTime(0.6, ctx.currentTime + 0.8);
+    out.connect(ctx.destination);
+    let tampon;
+    try { tampon = await piste.charger(ctx); } catch { if (mien === generation) { flux.actif = false; out.disconnect(); musiqueCode.demarrer(); } return; }
+    if (mien !== generation) return; // arrêtée (ou relancée) pendant le chargement : pas de source orpheline
     const s = ctx.createBufferSource();
     s.buffer = tampon; s.loop = true; s.loopStart = 0.5; s.loopEnd = 0.5 + tampon.duration / 2;
     s.playbackRate.value = vitesse();
-    s.connect(sortie);
+    s.connect(out);
     s.start(ctx.currentTime + 0.05, 0.5);
     flux.source = s;
   },
@@ -183,6 +184,7 @@ const musiqueFlow = {
     musiqueCode.arreter();
     if (!flux.actif) return;
     flux.actif = false;
+    generation += 1;
     const out = sortie, s = flux.source;
     flux.source = null;
     out.gain.cancelScheduledValues(ctx.currentTime);
@@ -195,6 +197,8 @@ const musiqueFlow = {
     flux.source?.playbackRate.setTargetAtTime(vitesse(), ctx.currentTime, 0.3);
   },
   joue: () => flux.actif,
+  /** Relâche le morceau décodé (à appeler une fois la musique arrêtée, en quittant les jeux). */
+  liberer: () => piste.liberer(),
 };
 
 const versionCode = typeof location !== 'undefined' && new URLSearchParams(location.search).get('musique') === 'code';

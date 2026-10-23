@@ -6,6 +6,7 @@ import { tourDeBuzzer } from '../../data/affirmationsJeux';
 import { erreurJeu } from '../../data/erreursJeux';
 import { jouer } from '../../utils/bruitages';
 import { musiqueBuzzer } from '../../utils/musiqueBuzzer';
+import { minuterie, annuler } from './tempsDeJeu';
 import './RevizSeTrompe.css';
 
 /**
@@ -76,8 +77,8 @@ export function PlateauBuzzer({ manche, idx, total, phase, expire, onBon, onFaux
   const [fete, setFete] = useState(null); // tour sans faute : pluie d'étoiles
   const jeu = useRef({ i: -1, repondu: false, fini: true, justes: 0 });
   const minuteurs = useRef([]);
-  const plus = (ms, f) => minuteurs.current.push(setTimeout(f, ms));
-  const vider = () => { minuteurs.current.forEach(clearTimeout); minuteurs.current = []; };
+  const plus = (ms, f) => minuteurs.current.push(minuterie(f, ms)); // gelées en arrière-plan (tempsDeJeu.js)
+  const vider = () => { minuteurs.current.forEach(annuler); minuteurs.current = []; };
   const affs = manche.affirmations;
 
   const annoncer = useCallback(k => {

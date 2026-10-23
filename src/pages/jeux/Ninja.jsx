@@ -3,6 +3,7 @@ import { Pantin } from '../../components/Pantin';
 import { TOURS_NINJA, voleeNinja } from '../../data/fautesNinja';
 import { jouer } from '../../utils/bruitages';
 import { musiqueNinja } from '../../utils/musiqueNinja';
+import { minuterie, annuler, tempsJeu } from './tempsDeJeu';
 import './Ninja.css';
 
 /**
@@ -68,8 +69,8 @@ export function PlateauNinja({ manche, idx, total, phase, expire, onBon, onFaux,
   const [taille, setTaille] = useState(110); // diamètre d'un fruit (px)
   const jeu = useRef({ fini: true, debut: 0, tranchees: 0 });
   const minuteurs = useRef([]);
-  const plus = (ms, f) => minuteurs.current.push(setTimeout(f, ms));
-  const vider = () => { minuteurs.current.forEach(clearTimeout); minuteurs.current = []; };
+  const plus = (ms, f) => minuteurs.current.push(minuterie(f, ms)); // gelées en arrière-plan (tempsDeJeu.js)
+  const vider = () => { minuteurs.current.forEach(annuler); minuteurs.current = []; };
 
   // ── Le moteur ──
   const m = useRef(null);
@@ -144,7 +145,7 @@ export function PlateauNinja({ manche, idx, total, phase, expire, onBon, onFaux,
     let id = 0;
     const image = maintenant => {
       const j = jeu.current;
-      const t = (maintenant - j.debut) / 1000;
+      const t = (tempsJeu(maintenant) - j.debut) / 1000; // le temps de jeu : sans les absences
       for (const [cle, F] of M.fruits) {
         const f = fruits[cle];
         if (!F.el || !f) continue;
@@ -235,8 +236,8 @@ export function PlateauNinja({ manche, idx, total, phase, expire, onBon, onFaux,
       pantin.current?.expression('content');
       return undefined;
     }
-    jeu.current = { fini: false, debut: performance.now(), tranchees: 0, echappees: new Set(), prolonge: false };
-    const montre = setInterval(() => setReste(Math.max(0, Math.ceil(manche.duree - (performance.now() - jeu.current.debut) / 1000))), 200);
+    jeu.current = { fini: false, debut: tempsJeu(), tranchees: 0, echappees: new Set(), prolonge: false };
+    const montre = setInterval(() => setReste(Math.max(0, Math.ceil(manche.duree - (tempsJeu() - jeu.current.debut) / 1000))), 200);
     plus((manche.duree - 3) * 1000, () => { if (!jeu.current.fini) musiqueNinja.regler({ enTension: true }); });
     [3, 2, 1].forEach(n => plus((manche.duree - n) * 1000, () => { if (!jeu.current.fini) { setDecompte(n); jouer('tic'); } }));
     return () => { vider(); clearInterval(montre); musiqueNinja.regler({ enTension: false }); };
@@ -259,7 +260,7 @@ export function PlateauNinja({ manche, idx, total, phase, expire, onBon, onFaux,
       pantin.current?.expression('panique');
       terminer(manques, 1100);
     };
-    const tau = (performance.now() - j.debut) / 1000;
+    const tau = (tempsJeu() - j.debut) / 1000;
     const enVol = fruits.filter(f => f.faute && !M.fruits.get(f.id)?.tranche && !j.echappees.has(f.id) && f.t <= tau && f.t + f.vol > tau);
     if (!enVol.length) { finChrono.current(); return; }
     j.prolonge = true;
@@ -280,7 +281,7 @@ export function PlateauNinja({ manche, idx, total, phase, expire, onBon, onFaux,
     if (angle < 0) angle += Math.PI;
     const nx = Math.sin(angle), ny = -Math.cos(angle); // la moitié g part vers (-nx, -ny)
     const rot = (angle * 180) / Math.PI - 90;
-    const tau = (performance.now() - j.debut) / 1000 - f.t;
+    const tau = (tempsJeu() - j.debut) / 1000 - f.t;
     const vyFruit = (position(f, tau + 0.02).y - position(f, tau).y) / 0.02;
     ['g', 'd'].forEach((cote, k) => {
       const el = F[cote];

@@ -18,6 +18,7 @@
  * un compte Flow gratuit, sans usage commercial : à regénérer avant le lancement.
  */
 import { sonActif, contexteAudio } from './bruitages';
+import { pisteDecodee, sansRattrapage } from './musiqueCommun';
 
 const NOTES = { C: 0, 'C#': 1, D: 2, 'D#': 3, E: 4, F: 5, 'F#': 6, G: 7, 'G#': 8, A: 9, 'A#': 10, B: 11 };
 const freq = n => {
@@ -131,6 +132,7 @@ function jouerPas(t, croche) {
 
 function boucle() {
   const croche = 60 / (tension ? tempo * 1.2 : tempo) / 3; // le tempo compte les temps pointés (trois croches)
+  prochaine = sansRattrapage(prochaine, ctx.currentTime); // réveil après une veille : pas de salve de notes
   while (prochaine < ctx.currentTime + 0.12) {
     jouerPas(prochaine, croche);
     prochaine += croche;
@@ -166,6 +168,7 @@ const musiqueCode = {
     if (enTension !== undefined) tension = enTension;
   },
   joue: () => !!minuterie,
+  liberer() { /* rien de décodé en version code */ },
 };
 
 // ── Version Flow Music : la piste entière en boucle, jouée de plus en plus vite ──
@@ -173,28 +176,26 @@ const musiqueCode = {
 // vitesse = tempo du tour / 112 (+9 %, puis +18 %) ; les 3 dernières secondes, encore +12 %.
 const BOUCLE = { url: '/jeux/pizzeria/musique.mp3', tempo: 112 };
 const EMBALLE = 1.12;
-let tampon = null, chargement = null;
-function charger() {
-  chargement ??= fetch(BOUCLE.url).then(r => r.arrayBuffer()).then(b => ctx.decodeAudioData(b)).then(t => { tampon = t; })
-    .catch(e => { chargement = null; throw e; });
-  return chargement;
-}
+const piste = pisteDecodee(BOUCLE.url);
+let generation = 0; // chaque démarrage et chaque arrêt change de génération : un chargement périmé ne joue rien
 const flux = { source: null, bpm: BOUCLE.tempo, tension: false, actif: false };
 const vitesse = () => (flux.bpm / BOUCLE.tempo) * (flux.tension ? EMBALLE : 1);
 const musiqueFlow = {
   async demarrer() {
     if (flux.actif || !sonActif() || !contexte()) return;
     flux.actif = true;
-    sortie = ctx.createGain();
-    sortie.gain.setValueAtTime(0.0001, ctx.currentTime);
-    sortie.gain.exponentialRampToValueAtTime(0.6, ctx.currentTime + 0.8);
-    sortie.connect(ctx.destination);
-    try { await charger(); } catch { flux.actif = false; musiqueCode.demarrer(); return; }
-    if (!flux.actif) return; // arrêtée pendant le chargement
+    const mien = ++generation;
+    const out = sortie = ctx.createGain();
+    out.gain.setValueAtTime(0.0001, ctx.currentTime);
+    out.gain.exponentialRampToValueAtTime(0.6, ctx.currentTime + 0.8);
+    out.connect(ctx.destination);
+    let tampon;
+    try { tampon = await piste.charger(ctx); } catch { if (mien === generation) { flux.actif = false; out.disconnect(); musiqueCode.demarrer(); } return; }
+    if (mien !== generation) return; // arrêtée (ou relancée) pendant le chargement : pas de source orpheline
     const s = ctx.createBufferSource();
     s.buffer = tampon; s.loop = true;
     s.playbackRate.value = vitesse();
-    s.connect(sortie);
+    s.connect(out);
     s.start(ctx.currentTime + 0.05);
     flux.source = s;
   },
@@ -203,6 +204,7 @@ const musiqueFlow = {
     flux.tension = false;
     if (!flux.actif) return;
     flux.actif = false;
+    generation += 1;
     const out = sortie, s = flux.source;
     flux.source = null;
     out.gain.cancelScheduledValues(ctx.currentTime);
@@ -218,6 +220,8 @@ const musiqueFlow = {
     flux.source?.playbackRate.setTargetAtTime(vitesse(), ctx.currentTime, 0.25);
   },
   joue: () => flux.actif || musiqueCode.joue(),
+  /** Relâche le morceau décodé (à appeler une fois la musique arrêtée, en quittant les jeux). */
+  liberer: () => piste.liberer(),
 };
 
 const versionCode = typeof location !== 'undefined' && new URLSearchParams(location.search).get('musique') === 'code';

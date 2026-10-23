@@ -8,39 +8,40 @@
  * commercial : à regénérer avant le lancement.
  */
 import { sonActif, contexteAudio } from './bruitages';
+import { pisteDecodee } from './musiqueCommun';
 
 const URL_PISTE = '/jeux/fin/musique.mp3';
-let ctx = null, tampon = null, chargement = null, sortie = null, source = null, actif = false;
+let ctx = null, sortie = null, source = null, actif = false;
+let generation = 0; // chaque démarrage et chaque arrêt change de génération : un chargement périmé ne joue rien
 
 // Le contexte audio partagé avec les bruitages (un seul pour la page, voir bruitages.js).
 function contexte() {
   ctx = contexteAudio();
   return ctx;
 }
-function charger() {
-  chargement ??= fetch(URL_PISTE).then(r => r.arrayBuffer()).then(b => ctx.decodeAudioData(b)).then(t => { tampon = t; })
-    .catch(e => { chargement = null; throw e; });
-  return chargement;
-}
+const piste = pisteDecodee(URL_PISTE);
 
 export const musiqueFin = {
   async demarrer() {
     if (actif || !sonActif() || !contexte()) return;
     actif = true;
-    sortie = ctx.createGain();
-    sortie.gain.setValueAtTime(0.0001, ctx.currentTime);
-    sortie.gain.exponentialRampToValueAtTime(0.5, ctx.currentTime + 1.2);
-    sortie.connect(ctx.destination);
-    try { await charger(); } catch { actif = false; return; } // sans la piste, la fin reste en silence
-    if (!actif) return; // arrêtée pendant le chargement
+    const mien = ++generation;
+    const out = sortie = ctx.createGain();
+    out.gain.setValueAtTime(0.0001, ctx.currentTime);
+    out.gain.exponentialRampToValueAtTime(0.5, ctx.currentTime + 1.2);
+    out.connect(ctx.destination);
+    let tampon;
+    try { tampon = await piste.charger(ctx); } catch { if (mien === generation) { actif = false; out.disconnect(); } return; } // sans la piste, la fin reste en silence
+    if (mien !== generation) return; // arrêtée (ou relancée) pendant le chargement : pas de source orpheline
     source = ctx.createBufferSource();
     source.buffer = tampon; source.loop = true;
-    source.connect(sortie);
+    source.connect(out);
     source.start(ctx.currentTime + 0.05);
   },
   arreter() {
     if (!actif) return;
     actif = false;
+    generation += 1;
     const out = sortie, s = source;
     source = null;
     out.gain.cancelScheduledValues(ctx.currentTime);
@@ -49,4 +50,6 @@ export const musiqueFin = {
     setTimeout(() => { s?.stop(); out.disconnect(); }, 600);
   },
   joue: () => actif,
+  /** Relâche le morceau décodé (à appeler une fois la musique arrêtée, en quittant les jeux). */
+  liberer: () => piste.liberer(),
 };

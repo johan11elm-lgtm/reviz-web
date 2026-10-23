@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import { Pantin } from '../components/Pantin';
 import { BulleReviz } from '../components/reviz/BulleReviz';
 import { useAuth } from '../context/AuthContext';
@@ -31,6 +31,8 @@ import { HubJeux } from './jeux/HubJeux';
 import { CarteDebut } from './jeux/CarteDebut';
 import { mesurer } from '../services/mesure';
 import { avecHasardDuJour, etatDuJour, enregistrerPartieDuJour, synchroniserStats } from '../services/partieDuJourService';
+import { jourParis } from '../services/retourService';
+import { minuterie, annuler, surArrierePlan, enArrierePlan, tempsJeu } from './jeux/tempsDeJeu';
 import './Jeux.css';
 
 /**
@@ -174,9 +176,21 @@ function erreurMagie(manche, p, premiere, seconde) {
   return erreurJeu({ jeu: 'magie', tour: manche, paire: p, question, donnee: seconde, bonne: terme ? p.b : p.a });
 }
 
+// Les minuteries d'un mini-jeu : gelées quand la page passe en arrière-plan (tempsDeJeu.js), toutes
+// annulées au démontage (un tour fermé par la croix ne se termine pas après coup). Renvoie
+// [plus(ms, f), vider()].
+function useMinuteries() {
+  const liste = useRef([]);
+  const vider = useCallback(() => { liste.current.forEach(annuler); liste.current = []; }, []);
+  useEffect(() => vider, [vider]);
+  const plus = useCallback((ms, f) => { const m = minuterie(f, ms); liste.current.push(m); return m; }, []);
+  return [plus, vider];
+}
+
 // ── La pêche : les mots passent dans l'eau, on ne pêche que ceux de la catégorie ──────────
 function Peche({ manche, expire, onBon, onFaux, onTermine }) {
   const [etats, setEtats] = useState({}); // id -> 'peche' | 'faux'
+  const [plus] = useMinuteries();
   const fini = useRef(false);
   const bons = manche.items.filter(i => i.bon);
   const terminer = useCallback(et => {
@@ -192,7 +206,7 @@ function Peche({ manche, expire, onBon, onFaux, onTermine }) {
     setEtats(suite);
     if (it.bon) {
       onBon();
-      if (bons.every(b => suite[b.id] === 'peche')) setTimeout(() => terminer(suite), 450);
+      if (bons.every(b => suite[b.id] === 'peche')) plus(450, () => terminer(suite));
     } else onFaux(erreurCategorie('peche', it.texte, manche.cible, it.de));
   };
 
@@ -227,6 +241,7 @@ function Peche({ manche, expire, onBon, onFaux, onTermine }) {
 function Valise({ manche, expire, onBon, onFaux, onTermine }) {
   const [etats, setEtats] = useState({}); // id -> 'range' | 'rejet'
   const [secousse, setSecousse] = useState(0);
+  const [plus] = useMinuteries();
   const fini = useRef(false);
   const bons = manche.items.filter(i => i.bon);
   const ranges = bons.filter(b => etats[b.id] === 'range').length;
@@ -244,7 +259,7 @@ function Valise({ manche, expire, onBon, onFaux, onTermine }) {
     if (it.bon) {
       onBon();
       setSecousse(s => s + 1);
-      if (bons.every(b => suite[b.id] === 'range')) setTimeout(() => terminer(suite), 500);
+      if (bons.every(b => suite[b.id] === 'range')) plus(500, () => terminer(suite));
     } else onFaux(erreurCategorie('valise', it.texte, manche.cible, it.de));
   };
 
@@ -272,6 +287,7 @@ function Paires({ manche, expire, onBon, onFaux, onTermine }) {
   const [choisi, setChoisi] = useState(null); // terme sélectionné
   const [relies, setRelies] = useState([]); // termes reliés, dans l'ordre (couleur)
   const [faux, setFaux] = useState(null); // { terme, def } secoués un instant
+  const [plus] = useMinuteries();
   const fini = useRef(false);
   const terminer = useCallback(r => {
     if (fini.current) return;
@@ -287,10 +303,10 @@ function Paires({ manche, expire, onBon, onFaux, onTermine }) {
       setRelies(suite);
       setChoisi(null);
       onBon();
-      if (suite.length === manche.paires.length) setTimeout(() => terminer(suite), 450);
+      if (suite.length === manche.paires.length) plus(450, () => terminer(suite));
     } else {
       setFaux({ terme: choisi, def: p.term });
-      setTimeout(() => setFaux(null), 500);
+      plus(500, () => setFaux(null));
       onFaux(erreurDefinition(manche.paires.find(x => x.term === choisi), p.def));
       setChoisi(null);
     }
@@ -344,6 +360,7 @@ function TourDeMagie({ manche, expire, onBon, onFaux, onTermine, reviz }) {
   const [ouvertes, setOuvertes] = useState([]);
   const [trouvees, setTrouvees] = useState([]);
   const [rate, setRate] = useState(false);
+  const [plus] = useMinuteries();
   const fini = useRef(false);
   const serie = useRef(0); // paires trouvées d'affilée (combo)
   const terminer = useCallback(tr => {
@@ -356,7 +373,7 @@ function TourDeMagie({ manche, expire, onBon, onFaux, onTermine, reviz }) {
   // Le spectacle : montrer, retourner, mélanger.
   useEffect(() => {
     const t = [];
-    const a = ms => new Promise(ok => t.push(setTimeout(ok, ms)));
+    const a = ms => new Promise(ok => t.push(minuterie(ok, ms))); // gelées en arrière-plan
     let vivant = true;
     (async () => {
       reviz.bulle(['Regarde bien !', 'Mémorise les paires.']);
@@ -387,7 +404,7 @@ function TourDeMagie({ manche, expire, onBon, onFaux, onTermine, reviz }) {
       await a(1400);
       reviz.bulle(null);
     })();
-    return () => { vivant = false; t.forEach(clearTimeout); };
+    return () => { vivant = false; t.forEach(annuler); };
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const retourner = i => {
@@ -398,7 +415,7 @@ function TourDeMagie({ manche, expire, onBon, onFaux, onTermine, reviz }) {
     jouer('carte');
     if (suite.length < 2) return;
     const [a, b] = suite.map(k => cartes[k]);
-    setTimeout(() => {
+    plus(380, () => {
       if (a.paire === b.paire) {
         const tr = [...trouvees, a.paire];
         setTrouvees(tr);
@@ -408,8 +425,8 @@ function TourDeMagie({ manche, expire, onBon, onFaux, onTermine, reviz }) {
         reviz.effet('paire', serie.current);
         jouer(serie.current > 1 ? 'combo' : 'paire');
         if (tr.length === manche.paires.length) {
-          setTimeout(() => { reviz.geste('saut'); reviz.effet('bravo'); jouer('bravo'); }, 450);
-          setTimeout(() => terminer(tr), 1500);
+          plus(450, () => { reviz.geste('saut'); reviz.effet('bravo'); jouer('bravo'); });
+          plus(1500, () => terminer(tr));
         }
       } else {
         serie.current = 0;
@@ -417,9 +434,9 @@ function TourDeMagie({ manche, expire, onBon, onFaux, onTermine, reviz }) {
         reviz.effet('rate');
         jouer('rate');
         setRate(true);
-        setTimeout(() => { setOuvertes([]); setRate(false); }, 800);
+        plus(800, () => { setOuvertes([]); setRate(false); });
       }
-    }, 380);
+    });
   };
 
   return (
@@ -452,6 +469,14 @@ const MINI_JEUX = { peche: Peche, valise: Valise, paires: Paires, magie: TourDeM
 // ── La page ──────────────────────────────────────────────────────────────────────────────
 export default function Jeux() {
   const navigate = useNavigate();
+  const location = useLocation();
+  // La croix de l'écran des jeux revient à la page d'avant. Arrivé par un lien direct (rien avant dans
+  // l'app : react-router numérote l'historique, 0 pour la première page), -1 ferait quitter l'app :
+  // on va à l'accueil.
+  const quitter = () => {
+    if (window.history.state?.idx === 0 || location.key === 'default') navigate('/', { replace: true });
+    else navigate(-1);
+  };
   const isDesktop = useIsDesktop();
   const { getUserLevel, currentUser } = useAuth();
   const uid = currentUser?.uid ?? null;
@@ -462,6 +487,9 @@ export default function Jeux() {
     synchroniserStats(uid).then(() => { if (vivant) setJour(etatDuJour(uid)); });
     return () => { vivant = false; };
   }, [uid]);
+  // Le jour (Paris) où la partie du jour en cours a été tirée : elle compte pour ce jour-là, même finie
+  // après minuit.
+  const jourPartie = useRef(null);
   const level = getUserLevel?.();
   const [params] = useSearchParams();
   // ?jeu=prototype rejoue les essais du matin ; tout le reste est le mode jeux (?jeu=buzzer : voir RAPIDES).
@@ -497,20 +525,25 @@ export default function Jeux() {
   // qu'à répondre. Les barres de chrono (animation CSS) s'arrêtent avec lui (classe sur <html>).
   const chrono = useRef(null);
   chrono.current ??= {
-    fin: 0, pauseDepuis: null, minuterie: null, idx: -1,
+    fin: 0, pauseDepuis: null, minuterie: null, idx: -1, raisons: new Set(),
     armer() {
       clearTimeout(this.minuterie);
       const i = this.idx;
       this.minuterie = setTimeout(() => setExpire(i), Math.max(0, this.fin - performance.now()));
     },
-    pause() {
-      if (this.pauseDepuis !== null || !this.minuterie) return;
+    // Plusieurs raisons peuvent geler le chrono à la fois : la réaction de Réviz ('reaction', par défaut) et
+    // la page en arrière-plan ('fond'). Il repart quand plus aucune ne le retient.
+    pause(raison = 'reaction') {
+      if (!this.minuterie) return;
+      this.raisons.add(raison);
+      if (this.pauseDepuis !== null) return;
       this.pauseDepuis = performance.now();
       clearTimeout(this.minuterie);
       document.documentElement.classList.add('jx-chrono-en-pause');
     },
-    reprise() {
-      if (this.pauseDepuis === null) return;
+    reprise(raison = 'reaction') {
+      this.raisons.delete(raison);
+      if (this.pauseDepuis === null || this.raisons.size) return;
       this.fin += performance.now() - this.pauseDepuis;
       this.pauseDepuis = null;
       document.documentElement.classList.remove('jx-chrono-en-pause');
@@ -521,6 +554,18 @@ export default function Jeux() {
   };
   const horloge = chrono.current;
   const finie = useRef(-1); // numéro du dernier jeu terminé
+  // Les enchaînements de fin de manche (verdict, transition, tour suivant) : gelés en arrière-plan et
+  // annulés quand on ferme (la croix) ou qu'on quitte la page : un écran de fin ou un tour suivant ne
+  // réapparaît jamais après coup, et une partie abandonnée ne compte pas.
+  const [plus, viderMinuteries] = useMinuteries();
+  const viderSuite = () => { viderMinuteries(); pretRef.current = null; setTransition(null); };
+  // La page passe en arrière-plan : le chrono s'arrête et repart au retour avec le temps qui lui restait.
+  // Au retour, l'état du jour est recalculé (on a pu changer de jour pendant l'absence).
+  useEffect(() => surArrierePlan(fond => {
+    if (fond) { horloge.pause('fond'); return; }
+    horloge.reprise('fond');
+    setJour(etatDuJour(uid));
+  }), [uid]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     let vivant = true;
@@ -539,18 +584,19 @@ export default function Jeux() {
       setPhase('consigne');
     } catch { setPhase('choix'); }
   }, [classe, mode]);
-  const nouvellePartie = () => { setIdx(0); setScore(0); setBonnes(0); setErreurs([]); setExpire(-1); finie.current = -1; setPhase('consigne'); };
+  const nouvellePartie = () => { viderSuite(); setIdx(0); setScore(0); setBonnes(0); setErreurs([]); setExpire(-1); finie.current = -1; setPhase('consigne'); };
   // Les 3 jeux séparément, et la Partie rapide qui les mélange.
-  const RAPIDES = { jour: () => avecHasardDuJour(partieMelangee), melange: partieMelangee, magie: partieMagieSeule, lance: partieLance, buzzer: partieBuzzer, pizzeria: partiePizzeria, ninja: partieNinja, taupe: partieTaupe };
+  const RAPIDES = { jour: (j = jourParis()) => avecHasardDuJour(partieMelangee, j), melange: partieMelangee, magie: partieMagieSeule, lance: partieLance, buzzer: partieBuzzer, pizzeria: partiePizzeria, ninja: partieNinja, taupe: partieTaupe };
   const TITRES = { jour: 'La partie du jour', melange: 'Partie rapide', magie: 'Le tour de magie', lance: 'Réviz lance', buzzer: 'Réviz se trompe ?', pizzeria: 'La pizzeria !', ninja: 'Le ninja des fautes', taupe: 'Tape-taupe !' };
   // Mesure (PostHog, sans identifiant) : d'où vient l'élève, ce qu'il lance, ce qu'il finit.
   const depuisRef = useRef(params.get('depuis') ?? (params.get('rapide') ? 'lien' : 'direct'));
   // prete : ce que la carte de début a déjà tiré (les manches, elle annonce le premier jeu de la Partie
-  // rapide ; la musique, qui joue déjà).
+  // rapide ; la musique, qui joue déjà ; le jour de la partie du jour).
   const lancerRapide = (jeu = 'melange', depuis = 'hub', prete = null) => {
     mesurer('partie_lancee', { mode: jeu, depuis });
     setChapitre({ matiere: 'Réviz Games', titre: TITRES[jeu], rapide: jeu });
-    setPartie(prete?.partie ?? RAPIDES[jeu]());
+    jourPartie.current = jeu === 'jour' ? (prete?.jour ?? jourParis()) : null;
+    setPartie(prete?.partie ?? RAPIDES[jeu](jourPartie.current ?? undefined));
     setMusiquePartie(jeu === 'melange' || jeu === 'jour' ? (prete?.musique ?? musiqueSuivante()) : null);
     nouvellePartie();
   };
@@ -602,13 +648,19 @@ export default function Jeux() {
     musique.m.regler({ bpm: tempoTour });
     musique.m.demarrer();
   }, [musique?.m, tempoTour, son]); // eslint-disable-line react-hooks/exhaustive-deps
-  useEffect(() => () => { musiqueMagie.arreter(); musiqueLance.arreter(); musiqueBuzzer.arreter(); musiquePizzeria.arreter(); musiqueNinja.arreter(); musiqueTaupe.arreter(); musiqueFin.arreter(); }, []);
+  // En quittant les jeux : les musiques s'arrêtent et relâchent leur morceau décodé (~290 Mo en tout), le
+  // chrono ne laisse pas sa pause sur la page, la réaction de Réviz en cours s'éteint.
+  useEffect(() => () => {
+    for (const x of [musiqueMagie, musiqueLance, musiqueBuzzer, musiquePizzeria, musiqueNinja, musiqueTaupe, musiqueFin]) { x.arreter(); x.liberer(); }
+    clearTimeout(retourHumeur.current);
+    document.documentElement.classList.remove('jx-chrono-en-pause');
+  }, []);
 
   // Fin de la partie du jour : elle compte pour la série et le record (une fois par partie jouée).
   useEffect(() => {
     if (phase !== 'fin' || jourEnregistre.current === partie) return;
     jourEnregistre.current = partie;
-    const nouveau = chapitre?.rapide === 'jour' ? enregistrerPartieDuJour(uid, score) : null;
+    const nouveau = chapitre?.rapide === 'jour' ? enregistrerPartieDuJour(uid, score, jourPartie.current ?? undefined) : null;
     if (nouveau) setJour(nouveau);
     if (chapitre?.rapide) {
       mesurer('partie_terminee', {
@@ -630,16 +682,17 @@ export default function Jeux() {
   // Consigne : 1,7 s (ou une touche), puis le chrono part.
   useEffect(() => {
     if (phase !== 'consigne') return;
-    const t = setTimeout(() => setPhase('jeu'), 1700 + DUREES_TRANSITION.deroule);
-    return () => clearTimeout(t);
+    const t = minuterie(() => setPhase('jeu'), 1700 + DUREES_TRANSITION.deroule); // gelée en arrière-plan
+    return () => annuler(t);
   }, [phase, idx]);
   useEffect(() => {
     if (phase !== 'jeu' || !manche) return;
     debutManche.current = performance.now();
     const c = chrono.current;
-    c.idx = idx; c.pauseDepuis = null; c.fin = performance.now() + ((manche.apercu ?? 0) + manche.duree) * 1000;
+    c.idx = idx; c.pauseDepuis = null; c.raisons.clear(); c.fin = performance.now() + ((manche.apercu ?? 0) + manche.duree) * 1000;
     document.documentElement.classList.remove('jx-chrono-en-pause');
     c.armer();
+    if (enArrierePlan()) c.pause('fond'); // le tour a démarré pendant une absence : il attend le retour
     return () => { clearTimeout(c.minuterie); c.minuterie = null; document.documentElement.classList.remove('jx-chrono-en-pause'); };
   }, [phase, idx]); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -666,7 +719,7 @@ export default function Jeux() {
     document.documentElement.classList.remove('jx-chrono-en-pause');
     if (!manques.length && reste > 0.5) setScore(s => s + Math.round(reste) * 20);
     if (manques.length) setErreurs(e => [...e, ...manques]);
-    setTimeout(() => {
+    plus(650, () => {
       if (idx + 1 >= partie.length) { setPhase('fin'); return; }
       // Transition B : le décor s'enroule, la carte du jeu suivant, le nouveau décor se déroule.
       // Le tour suivant ne démarre qu'au déroulement (ses minuteries partent à ce moment-là).
@@ -674,24 +727,24 @@ export default function Jeux() {
       // retournement), et passe toute seule au bout de quelques secondes.
       const d = DUREES_TRANSITION;
       setTransition('enroule'); jouer('glisse');
-      setTimeout(() => { setTransition('carte'); jouer('jingle'); }, d.enroule);
+      plus(d.enroule, () => { setTransition('carte'); jouer('jingle'); });
       let pret = false, parti = false;
       const derouler = () => {
         if (parti) return;
-        parti = true; pretRef.current = null; clearTimeout(auto);
+        parti = true; pretRef.current = null; annuler(auto);
         setIdx(i => i + 1); setPhase('consigne'); setTransition('deroule'); jouer('glisse');
-        setTimeout(() => setTransition(null), d.deroule);
+        plus(d.deroule, () => setTransition(null));
       };
-      setTimeout(() => { if (pret) derouler(); }, d.enroule + d.carte);
-      const auto = setTimeout(derouler, d.enroule + d.carte + d.attente);
+      plus(d.enroule + d.carte, () => { if (pret) derouler(); });
+      const auto = plus(d.enroule + d.carte + d.attente, derouler);
       pretRef.current = () => {
         if (pret) return;
         pret = true; jouer('appui');
-        if (performance.now() >= tCarte + d.carte) derouler();
+        if (tempsJeu() >= tCarte + d.carte) derouler();
       };
-      const tCarte = performance.now() + d.enroule;
-    }, 650);
-  }, [manche, idx, partie.length]);
+      const tCarte = tempsJeu() + d.enroule;
+    });
+  }, [manche, idx, partie.length]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const teinte = teinteMatiere(chapitre?.matiere ?? matiereChoisie ?? '');
   const accessoire = accessoireMatiere(chapitre?.matiere);
@@ -704,8 +757,9 @@ export default function Jeux() {
   );
   const fermer = (
     <button type="button" className="jx-rond" aria-label="Fermer" onClick={() => {
-      if (phase === 'choix') { navigate(-1); return; }
+      if (phase === 'choix') { quitter(); return; }
       if (chapitre?.rapide && phase !== 'fin') mesurer('partie_abandonnee', { mode: chapitre.rapide, tour: idx + 1, tours: partie.length });
+      viderSuite();
       setPhase('choix');
     }}>
       <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" /></svg>
@@ -724,11 +778,12 @@ export default function Jeux() {
     // La partie est tirée tout de suite (la carte précharge ce qu'elle affichera) et sa musique démarre ici,
     // dans le geste de l'élève (Safari sur iPhone ne laisse jouer le son qu'à la suite d'un toucher).
     const ouvrirCarte = cle => {
-      const p = RAPIDES[cle]();
+      const jourTire = cle === 'jour' ? jourParis() : null; // la partie du jour compte pour le jour où elle est tirée
+      const p = RAPIDES[cle](jourTire ?? undefined);
       const m = cle === 'melange' || cle === 'jour' ? musiqueSuivante() : p[0]?.type;
       const x = MUSIQUES[m];
       if (x && son) { x.m.regler({ bpm: x.tempo(p[0]?.niveau ?? 0) }); x.m.demarrer(); }
-      setAvant({ cle, partie: p, musique: m });
+      setAvant({ cle, partie: p, musique: m, jour: jourTire });
     };
     const recordDe = cle => {
       if (cle === 'jour') return jour.record ?? 0;
@@ -736,7 +791,7 @@ export default function Jeux() {
     };
     return (
       <>
-        <HubJeux jour={jour} onJouer={ouvrirCarte} onFermer={() => navigate(-1)} isDesktop={isDesktop} />
+        <HubJeux jour={jour} onJouer={ouvrirCarte} onFermer={quitter} isDesktop={isDesktop} />
         {avant && (
           <CarteDebut cle={avant.cle} partie={avant.partie} record={recordDe(avant.cle)}
             large={isDesktop} accessoiresDe={type => ACCESSOIRES_JEU[type] ?? []}
@@ -781,7 +836,8 @@ export default function Jeux() {
 
     const rejouer = () => {
       if (chapitre.rapide) mesurer('partie_lancee', { mode: chapitre.rapide, depuis: 'rejouer' });
-      setPartie(chapitre.rapide ? RAPIDES[chapitre.rapide]() : construirePartie(chapitre.data, mode));
+      jourPartie.current = chapitre.rapide === 'jour' ? jourParis() : null;
+      setPartie(chapitre.rapide ? RAPIDES[chapitre.rapide](jourPartie.current ?? undefined) : construirePartie(chapitre.data, mode));
       if (chapitre.rapide === 'melange' || chapitre.rapide === 'jour') setMusiquePartie(musiqueSuivante());
       nouvellePartie();
     };
@@ -790,6 +846,7 @@ export default function Jeux() {
       <FinDePartie surtitre={`${chapitre.titre} · ${tours} tour${tours > 1 ? 's' : ''}`}
         score={score} bonnes={bonnes} erreurs={erreursUniques(erreurs)}
         cleRecord={`reviz-jeux-record-${chapitre.rapide ?? `chapitre-${chapitre.titre}`}`} mode={chapitre.rapide ?? 'chapitre'}
+        recordAvant={chapitre.rapide === 'jour' ? jour.record : undefined}
         onRejouer={rejouer} onQuitter={() => setPhase('choix')} isDesktop={isDesktop} hauteurEcran={hauteurEcran} />
     );
   }

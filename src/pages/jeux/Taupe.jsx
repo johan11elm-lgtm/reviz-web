@@ -3,6 +3,7 @@ import { Pantin } from '../../components/Pantin';
 import { TOURS_TAUPE, N_TROUS, tourDeTaupe } from '../../data/taupes';
 import { jouer } from '../../utils/bruitages';
 import { musiqueTaupe } from '../../utils/musiqueTaupe';
+import { minuterie, annuler, tempsJeu } from './tempsDeJeu';
 import './Taupe.css';
 
 /**
@@ -79,8 +80,8 @@ export function PlateauTaupe({ manche, idx, total, phase, expire, onBon, onFaux,
   const [decompte, setDecompte] = useState(null);
   const jeu = useRef({ fini: true, debut: 0, compte: 0 });
   const minuteurs = useRef([]);
-  const plus = (ms, f) => minuteurs.current.push(setTimeout(f, ms));
-  const vider = () => { minuteurs.current.forEach(clearTimeout); minuteurs.current = []; };
+  const plus = (ms, f) => minuteurs.current.push(minuterie(f, ms)); // gelées en arrière-plan (tempsDeJeu.js)
+  const vider = () => { minuteurs.current.forEach(annuler); minuteurs.current = []; };
 
   // ── Le moteur : l'état de chaque taupe (tapée, à quel instant), ses éléments ──
   const m = useRef(null);
@@ -135,7 +136,8 @@ export function PlateauTaupe({ manche, idx, total, phase, expire, onBon, onFaux,
     let id = 0;
     const image = maintenant => {
       const j = jeu.current;
-      const t = j.debut ? (maintenant - j.debut) / 1000 : -1;
+      const tj = tempsJeu(maintenant); // le temps de jeu : sans les absences
+      const t = j.debut ? (tj - j.debut) / 1000 : -1;
       for (const x of taupes) {
         const E = M.taupes.get(x.id);
         if (!E?.el) continue;
@@ -154,7 +156,7 @@ export function PlateauTaupe({ manche, idx, total, phase, expire, onBon, onFaux,
       // devant la taupe) ; au repos, derrière (les taupes du haut sortent devant ses pieds).
       const R = M.reviz, el = reviz.current;
       if (el) {
-        const u = (maintenant - R.t0) / 1000;
+        const u = (tj - R.t0) / 1000;
         const aller = lisse(u / 0.1), retour = lisse((u - 0.42) / 0.3);
         R.x = R.de[0] + (R.vers[0] - R.de[0]) * aller - R.vers[0] * retour;
         R.y = R.de[1] + (R.vers[1] - R.de[1]) * aller - R.vers[1] * retour;
@@ -179,8 +181,8 @@ export function PlateauTaupe({ manche, idx, total, phase, expire, onBon, onFaux,
       pantin.current?.expression('content');
       return undefined;
     }
-    jeu.current = { fini: false, debut: performance.now(), compte: 0 };
-    const montre = setInterval(() => setReste(Math.max(0, Math.ceil(manche.duree - (performance.now() - jeu.current.debut) / 1000))), 200);
+    jeu.current = { fini: false, debut: tempsJeu(), compte: 0 };
+    const montre = setInterval(() => setReste(Math.max(0, Math.ceil(manche.duree - (tempsJeu() - jeu.current.debut) / 1000))), 200);
     plus((manche.duree - 3) * 1000, () => { if (!jeu.current.fini) musiqueTaupe.regler({ enTension: true }); });
     [3, 2, 1].forEach(n => plus((manche.duree - n) * 1000, () => { if (!jeu.current.fini) { setDecompte(n); jouer('tic'); } }));
     return () => { vider(); clearInterval(montre); musiqueTaupe.regler({ enTension: false }); };
@@ -201,7 +203,7 @@ export function PlateauTaupe({ manche, idx, total, phase, expire, onBon, onFaux,
   // ── Taper ──
   const taper = (x, E, trou) => {
     const j = jeu.current;
-    const t = (performance.now() - j.debut) / 1000;
+    const t = (tempsJeu() - j.debut) / 1000;
     E.tapee = t;
     E.partie = true;
     // Réviz bondit pour que son maillet tombe sur la taupe ; l'impact sonne tout de suite (le doigt
@@ -254,7 +256,7 @@ export function PlateauTaupe({ manche, idx, total, phase, expire, onBon, onFaux,
     const W = window.innerWidth;
     const x = borne(px - (cx + tx * taille), taille * 0.2 - cx, W - taille * 0.2 - cx);
     const y = Math.max(0, py - (haut + ty * taille));
-    R.de = [R.x, R.y]; R.vers = [x, y]; R.t0 = performance.now(); R.devant = true;
+    R.de = [R.x, R.y]; R.vers = [x, y]; R.t0 = tempsJeu(); R.devant = true;
     pantin.current?.frapper({ vers });
   };
 
@@ -265,7 +267,7 @@ export function PlateauTaupe({ manche, idx, total, phase, expire, onBon, onFaux,
     if (j.fini || !j.debut || (e.button ?? 0) !== 0) return;
     e.preventDefault();
     const px = e.clientX, py = e.clientY;
-    const t = (performance.now() - j.debut) / 1000;
+    const t = (tempsJeu() - j.debut) / 1000;
     let meilleur = null;
     for (const x of taupes) {
       const E = M.taupes.get(x.id);

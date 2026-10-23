@@ -3,6 +3,7 @@ import { Pantin } from '../../components/Pantin';
 import { commandesPizzeria } from '../../data/commandesPizzeria';
 import { jouer } from '../../utils/bruitages';
 import { musiquePizzeria } from '../../utils/musiquePizzeria';
+import { minuterie, annuler, tempsJeu } from './tempsDeJeu';
 import './Pizzeria.css';
 
 /**
@@ -91,8 +92,8 @@ export function PlateauPizzeria({ manche, idx, total, phase, expire, onBon, onFa
   const rotation = useMemo(() => commandes.map(() => Math.random() * 360), [commandes]); // la garniture tourne d'une pizza à l'autre
   const jeu = useRef({ k: 0, libre: false, fini: true, servie: false, justes: 0 });
   const minuteurs = useRef([]);
-  const plus = (ms, f) => minuteurs.current.push(setTimeout(f, ms));
-  const vider = () => { minuteurs.current.forEach(clearTimeout); minuteurs.current = []; };
+  const plus = (ms, f) => minuteurs.current.push(minuterie(f, ms)); // gelées en arrière-plan (tempsDeJeu.js)
+  const vider = () => { minuteurs.current.forEach(annuler); minuteurs.current = []; };
   const r = manche.rythme;
   const kc = Math.min(k, commandes.length - 1); // k revient à 0 au tour suivant
   const c = commandes[kc];
@@ -104,7 +105,7 @@ export function PlateauPizzeria({ manche, idx, total, phase, expire, onBon, onFa
   const M = m.current;
   M.parBas = isDesktop;
   const sortie = () => (M.parBas ? { y: DEHORS.bas } : { x: DEHORS.droite }); // où part l'assiette
-  const animer = (duree, maj, fin, ease = enDouceur) => M.anims.push({ t0: performance.now(), duree: duree * 1000, maj, fin, ease });
+  const animer = (duree, maj, fin, ease = enDouceur) => M.anims.push({ t0: tempsJeu(), duree: duree * 1000, maj, fin, ease });
   const tween = (obj, vers, duree, fin) => {
     const de = { ...obj };
     animer(duree, u => { for (const cle of Object.keys(vers)) obj[cle] = de[cle] + (vers[cle] - de[cle]) * u; }, fin);
@@ -123,13 +124,14 @@ export function PlateauPizzeria({ manche, idx, total, phase, expire, onBon, onFa
   const dansLAssiette = () => [...M.parts.values()].filter(pt => pt.place !== null && !pt.mangee);
   const placeLibre = () => { const prises = new Set(dansLAssiette().map(pt => pt.place)); let p = 0; while (prises.has(p)) p += 1; return p; };
   const voler = (pt, vers, duree, { haut = 70, fin } = {}) => {
-    pt.vol = { de: { ...(pt.tire ?? pt.pos) }, vers, t0: performance.now(), duree: duree * 1000, haut, fin };
+    pt.vol = { de: { ...(pt.tire ?? pt.pos) }, vers, t0: tempsJeu(), duree: duree * 1000, haut, fin };
     pt.tire = null;
   };
 
   useEffect(() => {
     let id = 0;
-    const image = maintenant => {
+    const image = horodatage => {
+      const maintenant = tempsJeu(horodatage); // le temps de jeu : sans les absences
       M.anims = M.anims.filter(a => {
         const u = borne((maintenant - a.t0) / a.duree, 0, 1);
         a.maj(a.ease(u));
@@ -220,8 +222,8 @@ export function PlateauPizzeria({ manche, idx, total, phase, expire, onBon, onFa
     // Le temps se voit (les secondes dans le chrono) et s'entend : les 3 dernières secondes, la musique
     // accélère, un tic par seconde et le chiffre en grand au milieu de l'écran.
     // Tout se lit sur le chrono du tour, qui s'arrête pendant les réactions (le client, Réviz).
-    const debut = performance.now();
-    const resteTour = () => (horloge ? horloge.reste() : Math.max(0, manche.duree - (performance.now() - debut) / 1000));
+    const debut = tempsJeu();
+    const resteTour = () => (horloge ? horloge.reste() : Math.max(0, manche.duree - (tempsJeu() - debut) / 1000));
     let dernier = null;
     const montre = setInterval(() => {
       const t = resteTour(), j = jeu.current;
