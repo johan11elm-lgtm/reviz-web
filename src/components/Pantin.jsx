@@ -127,6 +127,10 @@ const ACCESSOIRES = {
   toque: { x: 677, y: -238, w: 1162, h: 725 },
   tablier: { x: 738, y: 1485, w: 1038, h: 568, enfile: true },
   part: { main: 'g', bras: { epaule: 60, coude: -125 }, prise: [104, 150], ancre: [0.5, 0.16], w: 620, h: 705, angle: 160 },
+  // Le ninja des fautes : bandeau noir noué, les pans flottent à gauche (calé par les yeux, comme le
+  // bandeau de sport), et sabre en carton tenu en garde, pointe en l'air (le coup : Pantin.trancher).
+  ninja: { x: -64, y: 423, w: 2111, h: 562 },
+  sabre: { main: 'g', bras: { epaule: 40, coude: 80 }, prise: [104, 150], ancre: [0.5, 0.79], w: 245, h: 1400, angle: 8 },
 };
 const NS = 'http://www.w3.org/2000/svg';
 function imageSvg(href, { x, y, w, h }) {
@@ -201,7 +205,8 @@ export const Pantin = forwardRef(function Pantin(
         Object.assign(e, garde);
         const r = rig.brasEl[t.p.main].main.getAttribute('transform')?.match(/rotate\(([-\d.]+)/);
         const balance = t.p.balance && !anim.current?.calme ? t.p.balance * Math.sin(performance.now() / 260) : 0;
-        if (r) t.el.setAttribute('transform', `rotate(${(t.p.angle || 0) + balance - r[1]} ${t.p.prise[0]} ${t.p.prise[1]})`);
+        // t.tourne : le sabre suit le coup (Pantin.trancher) au lieu de rester droit.
+        if (r) t.el.setAttribute('transform', `rotate(${(t.p.angle || 0) + balance + (t.tourne || 0) - r[1]} ${t.p.prise[0]} ${t.p.prise[1]})`);
       };
       const devant = h.querySelector('.bras-devant');
       if (devant) {
@@ -336,6 +341,8 @@ export const Pantin = forwardRef(function Pantin(
     // Réviz lance : l'objet tenu (la boule de papier), sa place à l'écran, le lancer, une nouvelle boule.
     objet: () => tenu.current?.el.getBoundingClientRect() ?? null,
     lancer: ({ lacher, sens = 0 } = {}) => lancer(sens, lacher),
+    // Le ninja des fautes : un coup de sabre, de haut en bas (vers = 1) ou de bas en haut (-1).
+    trancher: (vers = 1) => trancher(vers),
     montrerObjet: () => {
       const t = tenu.current, gsap = gsapRef.current;
       if (!t || !gsap) return;
@@ -400,6 +407,29 @@ export const Pantin = forwardRef(function Pantin(
       .to(t.pose, { epaule: 95 - 25 * sens, coude: -8, duration: 0.2, ease: 'power2.out' }, 0.2)
       .to(e, { ecrase: 0, corpsRot: 0, duration: 0.35, ease: 'power2.inOut' }, 0.22)
       .to(t.pose, { epaule: p.epaule, coude: p.coude, duration: 0.32, ease: 'power2.inOut' }, 0.46);
+  }
+
+  // Le coup de sabre, depuis la garde (pose de l'objet tenu) : le bras s'arme d'un côté pendant que le
+  // corps se tasse, puis fend l'air de l'autre côté ; la lame tourne avec le poignet (t.tourne) et le
+  // corps suit le coup, puis tout revient en garde. Un coup en cours est repris là où il en est.
+  function trancher(vers) {
+    const t = tenu.current, gsap = gsapRef.current, a = anim.current;
+    if (!t || !gsap || !a || a.calme) return;
+    const p = t.p.bras, e = a.etat;
+    const haut = { epaule: 135, coude: 25, tourne: -35 }, bas = { epaule: -35, coude: -15, tourne: 110 };
+    const [arme, fin] = vers > 0 ? [haut, bas] : [bas, haut];
+    gsap.killTweensOf(t);
+    gsap.killTweensOf(t.pose);
+    gsap.timeline()
+      .to(t.pose, { epaule: arme.epaule, coude: arme.coude, duration: 0.07, ease: 'power2.out' }, 0)
+      .to(t, { tourne: arme.tourne, duration: 0.07, ease: 'power2.out' }, 0)
+      .to(e, { ecrase: 0.06, corpsRot: -5 * vers, duration: 0.07, ease: 'power2.out' }, 0)
+      .to(t.pose, { epaule: fin.epaule, coude: fin.coude, duration: 0.11, ease: 'power3.in' }, 0.07)
+      .to(t, { tourne: fin.tourne, duration: 0.11, ease: 'power3.in' }, 0.07)
+      .to(e, { ecrase: -0.05, corpsRot: 7 * vers, duration: 0.11, ease: 'power2.in' }, 0.07)
+      .to(t.pose, { epaule: p.epaule, coude: p.coude, duration: 0.34, ease: 'power2.inOut' }, 0.26)
+      .to(t, { tourne: 0, duration: 0.34, ease: 'power2.inOut' }, 0.26)
+      .to(e, { ecrase: 0, corpsRot: 0, duration: 0.4, ease: 'power2.inOut' }, 0.22);
   }
 
   const Tag = onClick ? 'button' : 'div';

@@ -17,6 +17,8 @@ import { musiqueBuzzer } from '../utils/musiqueBuzzer';
 import { PlateauBuzzer, mancheBuzzer, partieBuzzer, TEMPO_BUZZER } from './jeux/RevizSeTrompe';
 import { musiquePizzeria } from '../utils/musiquePizzeria';
 import { PlateauPizzeria, manchePizzeria, partiePizzeria, TEMPO_PIZZERIA } from './jeux/Pizzeria';
+import { musiqueNinja } from '../utils/musiqueNinja';
+import { PlateauNinja, mancheNinja, partieNinja, TEMPO_NINJA } from './jeux/Ninja';
 import { useIsDesktop } from '../hooks/useMediaQuery';
 import { TransitionJeux, DUREES_TRANSITION } from './jeux/TransitionJeux';
 import './Jeux.css';
@@ -35,9 +37,10 @@ import './Jeux.css';
  * Réviz lance (22/10, JeuLance.jsx) : la boule à lancer dans le bon panier.
  * Réviz se trompe ? (23/10, pages/jeux/RevizSeTrompe.jsx) : vrai ou faux au buzzer, plateau télé.
  * La pizzeria ! (23/10, pages/jeux/Pizzeria.jsx) : servir la fraction de pizza du ticket.
- * L'écran de choix propose les 4 jeux séparément, plus une Partie rapide qui les mélange (6 tours,
- * chaque jeu au moins une fois, dans un ordre au hasard, de plus en plus rapides).
- * ?rapide=melange|magie|lance|buzzer|pizzeria lance directement (?jeu=buzzer reste accepté).
+ * Le ninja des fautes (23/10, pages/jeux/Ninja.jsx) : trancher les mots mal écrits, dojo la nuit.
+ * L'écran de choix propose les jeux séparément, plus une Partie rapide qui les mélange (6 tours,
+ * chaque jeu au moins une fois, jamais deux fois de suite, de plus en plus rapides).
+ * ?rapide=melange|magie|lance|buzzer|pizzeria|ninja lance directement (?jeu=buzzer reste accepté).
  * ?classe=5ème&matiere=Histoire&chapitre=<id> lance directement un chapitre.
  */
 
@@ -76,19 +79,20 @@ export function mancheMagie(theme, niveau) {
 /** Le tour de magie seul : 3 thèmes, 3 tours qui accélèrent. */
 export const partieMagieSeule = () => themesDePartie(TOURS_MAGIE.length).map((theme, i) => mancheMagie(theme, i));
 /**
- * Partie rapide : les 4 jeux mélangés, 6 tours. Les 4 jeux dans un ordre au hasard, puis 2 d'entre
- * eux une seconde fois (jamais le même jeu deux fois de suite), aux niveaux 0, 0, 1, 1, 2, 2 ;
- * six thèmes tous différents.
+ * Partie rapide : les jeux mélangés, 6 tours. Chaque jeu au moins une fois (tous, dans un ordre au
+ * hasard, puis de quoi compléter les 6), jamais le même jeu deux fois de suite ; niveaux 0, 0, 1, 1,
+ * 2, 2 ; six thèmes tous différents.
  */
-const JEUX = { magie: mancheMagie, lance: mancheLance, buzzer: mancheBuzzer, pizzeria: manchePizzeria };
+const JEUX = { magie: mancheMagie, lance: mancheLance, buzzer: mancheBuzzer, pizzeria: manchePizzeria, ninja: mancheNinja };
 export function partieMelangee() {
   const themes = themesDePartie(6);
+  const jeux = Object.keys(JEUX);
   let ordre;
-  do { ordre = [...melange(Object.keys(JEUX)), ...melange(Object.keys(JEUX))].slice(0, 6); } while (ordre.some((j, i) => j === ordre[i + 1]));
+  do { ordre = [...melange(jeux), ...melange(jeux)].slice(0, 6); } while (ordre.some((j, i) => j === ordre[i + 1]));
   const niveaux = [0, 0, 1, 1, 2, 2];
   return ordre.map((jeu, i) => JEUX[jeu](themes[i], niveaux[i]));
 }
-const ACCESSOIRES_JEU = { magie: ['chapeau', 'baguette'], lance: ['bandeau', 'boule'], buzzer: ['micro', 'noeud'], pizzeria: ['toque', 'tablier'] };
+const ACCESSOIRES_JEU = { magie: ['chapeau', 'baguette'], lance: ['bandeau', 'boule'], buzzer: ['micro', 'noeud'], pizzeria: ['toque', 'tablier'], ninja: ['ninja', 'sabre'] };
 function partieMagie(data, branches) {
   const paires = pairesCourtes(data, branches);
   if (paires.length < 2) return [];
@@ -460,8 +464,8 @@ export default function Jeux() {
   }, [classe, mode]);
   const nouvellePartie = () => { setIdx(0); setScore(0); setBonnes(0); setErreurs([]); setExpire(-1); finie.current = -1; setPhase('consigne'); };
   // Les 3 jeux séparément, et la Partie rapide qui les mélange.
-  const RAPIDES = { melange: partieMelangee, magie: partieMagieSeule, lance: partieLance, buzzer: partieBuzzer, pizzeria: partiePizzeria };
-  const TITRES = { melange: 'Partie rapide', magie: 'Le tour de magie', lance: 'Réviz lance', buzzer: 'Réviz se trompe ?', pizzeria: 'La pizzeria !' };
+  const RAPIDES = { melange: partieMelangee, magie: partieMagieSeule, lance: partieLance, buzzer: partieBuzzer, pizzeria: partiePizzeria, ninja: partieNinja };
+  const TITRES = { melange: 'Partie rapide', magie: 'Le tour de magie', lance: 'Réviz lance', buzzer: 'Réviz se trompe ?', pizzeria: 'La pizzeria !', ninja: 'Le ninja des fautes' };
   const lancerRapide = (jeu = 'melange') => {
     setChapitre({ matiere: 'Réviz Games', titre: TITRES[jeu], rapide: jeu });
     setPartie(RAPIDES[jeu]());
@@ -491,6 +495,7 @@ export default function Jeux() {
     lance: { m: musiqueLance, tempo: n => Math.round(126 * (1 + n * 0.08)) },
     buzzer: { m: musiqueBuzzer, tempo: TEMPO_BUZZER },
     pizzeria: { m: musiquePizzeria, tempo: TEMPO_PIZZERIA },
+    ninja: { m: musiqueNinja, tempo: TEMPO_NINJA },
   };
   const musique = (phase === 'consigne' || phase === 'jeu') ? MUSIQUES[manche?.type] : null;
   const tempoTour = musique ? musique.tempo(manche.niveau ?? idx) : 0;
@@ -500,7 +505,7 @@ export default function Jeux() {
     musique.m.regler({ bpm: tempoTour });
     musique.m.demarrer();
   }, [musique?.m, tempoTour, son]); // eslint-disable-line react-hooks/exhaustive-deps
-  useEffect(() => () => { musiqueMagie.arreter(); musiqueLance.arreter(); musiqueBuzzer.arreter(); musiquePizzeria.arreter(); }, []);
+  useEffect(() => () => { musiqueMagie.arreter(); musiqueLance.arreter(); musiqueBuzzer.arreter(); musiquePizzeria.arreter(); musiqueNinja.arreter(); }, []);
 
   // Consigne : 1,7 s (ou une touche), puis le chrono part.
   useEffect(() => {
@@ -576,11 +581,11 @@ export default function Jeux() {
       <>
         <div className="jx-ligne-haut">{fermer}<span className="jx-surtitre">Prototype</span></div>
         <h1 className="jx-titre">Réviz Games</h1>
-        <p className="jx-intro">{mode === 'magie' ? 'Trois jeux de 10 à 15 secondes, sur des thèmes faciles : tables, capitales, anglais…' : '6 mini-jeux de 10 à 15 secondes sur un chapitre : pêche, valise, paires.'}</p>
+        <p className="jx-intro">{mode === 'magie' ? 'Des jeux de 10 à 15 secondes, sur des thèmes faciles : tables, capitales, anglais…' : '6 mini-jeux de 10 à 15 secondes sur un chapitre : pêche, valise, paires.'}</p>
         {mode === 'magie' && (
           <>
             <button type="button" className="jx-rapide jx-rapide--melange" onClick={() => lancerRapide('melange')}>
-              <span className="jx-rapide-txt"><b>Partie rapide</b><span>Les 4 jeux mélangés, 6 tours de plus en plus rapides</span></span>
+              <span className="jx-rapide-txt"><b>Partie rapide</b><span>Les jeux mélangés, 6 tours de plus en plus rapides</span></span>
               <span className="jx-jouer" aria-hidden="true">Jouer</span>
             </button>
             <span className="jx-surtitre jx-ou">Ou un seul jeu, 3 tours</span>
@@ -599,6 +604,10 @@ export default function Jeux() {
               </button>
               <button type="button" className="jx-rapide jx-rapide--pizzeria" onClick={() => lancerRapide('pizzeria')}>
                 <span className="jx-rapide-txt"><b>La pizzeria !</b><span>Sers la bonne fraction de pizza</span></span>
+                <span className="jx-jouer" aria-hidden="true">Jouer</span>
+              </button>
+              <button type="button" className="jx-rapide jx-rapide--ninja" onClick={() => lancerRapide('ninja')}>
+                <span className="jx-rapide-txt"><b>Le ninja des fautes</b><span>Tranche les mots mal écrits</span></span>
                 <span className="jx-jouer" aria-hidden="true">Jouer</span>
               </button>
             </div>
@@ -706,6 +715,18 @@ export default function Jeux() {
       <>
         {transitionEl}
       <PlateauPizzeria manche={manche} idx={idx} total={partie.length} phase={phase} expire={expire === idx} score={score}
+        onBon={onBon} onFaux={onFaux} onTermine={onTermine} onDemarrer={() => setPhase('jeu')}
+        fermer={fermer} boutonSon={boutonSon} isDesktop={isDesktop} hauteurEcran={hauteurEcran} />
+      </>
+    );
+  }
+
+  // ── Le ninja des fautes : le dojo occupe tout l'écran, Réviz ninja au milieu des fruits ──
+  if (manche.type === 'ninja') {
+    return (
+      <>
+        {transitionEl}
+      <PlateauNinja manche={manche} idx={idx} total={partie.length} phase={phase} expire={expire === idx} score={score}
         onBon={onBon} onFaux={onFaux} onTermine={onTermine} onDemarrer={() => setPhase('jeu')}
         fermer={fermer} boutonSon={boutonSon} isDesktop={isDesktop} hauteurEcran={hauteurEcran} />
       </>
