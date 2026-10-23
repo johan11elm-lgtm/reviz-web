@@ -1,6 +1,11 @@
 // Helpers partagés des specs e2e — parcours contre l'Emulator Suite Firebase,
 // appels IA et endpoints Vercel (/api/*) mockés au niveau de Playwright.
 import { expect } from '@playwright/test'
+import { readFileSync } from 'node:fs'
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
+// Le texte affiché passe par la typographie (insécables) : on cherche avec la même transformation.
+import { nbsp } from '../src/utils/typography.js'
 
 // Payload IA valide au sens de aiService._parseResult (4 branches, correct:int…).
 // Quiz volontairement court (3 questions) pour un parcours de fin rapide.
@@ -402,4 +407,118 @@ export async function compteRapide(page, {
   }
 
   return { uid, email, motDePasse, prenom, classe, idToken: compte.idToken }
+}
+
+// ── Scanner : saisie du texte (lot B1) ──────────────────────────────────────
+
+/** Ordinateur = écran d'au moins 1024 px (même seuil que useIsDesktop). */
+export function estOrdinateur(page) {
+  return (page.viewportSize()?.width ?? 0) >= 1024
+}
+
+/**
+ * Sur /scan, rend le champ « Texte de ta leçon » prêt à remplir : sur ordinateur il est déjà là
+ * (deux panneaux), sur téléphone il faut d'abord « Coller le texte ». Renvoie le champ.
+ */
+export async function ouvrirSaisieTexte(page) {
+  if (!estOrdinateur(page)) await page.getByRole('button', { name: /Coller le texte/ }).click()
+  const champ = page.getByLabel('Texte de ta leçon')
+  await expect(champ).toBeVisible()
+  return champ
+}
+
+/** Pas de débordement horizontal : la page ne défile pas de côté. */
+export async function sansDebordement(page, contexte = '') {
+  const { sw, iw } = await page.evaluate(() => ({ sw: document.documentElement.scrollWidth, iw: window.innerWidth }))
+  expect(sw, `débordement horizontal ${contexte}`.trim()).toBeLessThanOrEqual(iw)
+}
+
+// ── Mon programme : catalogue et chapitre servis par des fixtures (lot B1) ───
+
+const dossierFixtures = path.join(path.dirname(fileURLToPath(import.meta.url)), 'fixtures/programme')
+const fixture = nom => readFileSync(path.join(dossierFixtures, nom), 'utf8')
+
+/**
+ * Sert le catalogue de 3e (Maths : « Le théorème de Thalès » prêt + « Trigonométrie » bientôt ;
+ * Français : « L'argumentation » bientôt) et le chapitre Thalès (6 flashcards, quiz de 5 questions)
+ * depuis e2e/fixtures/programme : le parcours ne dépend pas des contenus générés dans public/.
+ */
+export async function mockProgramme(page) {
+  await page.route('**/programme/3eme/index.json', route =>
+    route.fulfill({ status: 200, contentType: 'application/json', body: fixture('index.json') }))
+  await page.route('**/programme/3eme/maths/theoreme-de-thales.json', route =>
+    route.fulfill({ status: 200, contentType: 'application/json', body: fixture('thales.json') }))
+}
+
+/** Le contenu du chapitre Thalès des fixtures (pour lire ses questions, bonnes réponses, etc.). */
+export function chapitreThales() {
+  return JSON.parse(fixture('thales.json'))
+}
+
+/** Mode essai : /essai, prénom + classe, puis « C'est parti » → /programme. */
+export async function entrerEnEssai(page, { prenom = 'Léa', classe = '3ème' } = {}) {
+  await page.goto('/essai')
+  await page.getByLabel('Ton prénom').fill(prenom)
+  await page.getByRole('radio', { name: classeCourte(classe), exact: true }).click()
+  await page.getByRole('button', { name: /C'est parti/ }).click()
+  await expect(page).toHaveURL(/\/programme$/)
+}
+
+/**
+ * Sur /programme : ouvre la fiche du chapitre (case choisie → bouton d'action du détail) puis
+ * arrive sur la fiche du chapitre (/analyse). `titre` : le chapitre, par son titre.
+ */
+export async function ouvrirChapitreDuProgramme(page, { titre = 'Le théorème de Thalès', matiere = 'Maths' } = {}) {
+  await page.getByRole('radio', { name: new RegExp(`^${matiere}`) }).click()
+  const caseChapitre = page.getByRole('button', { name: new RegExp(`^Chapitre \\d+ : ${titre}`) })
+  await caseChapitre.evaluate(el => el.scrollIntoView({ block: 'center' }))
+  await caseChapitre.click()
+  await expect(page.getByRole('heading', { name: titre, level: 3 })).toBeVisible()
+  await page.getByRole('button', { name: /^(C'est parti|Reprendre|Réviser|Découvrir)$/ }).click()
+  await expect(page).toHaveURL(/\/analyse/)
+}
+
+/**
+ * Joue un quiz jusqu'à l'écran de fin. `bonnes` : nombre de bonnes réponses voulues (les premières
+ * questions sont justes, les suivantes fausses) ; par défaut, tout juste. Renvoie le nombre de questions.
+ */
+export async function jouerQuiz(page, questions, { bonnes = questions.length } = {}) {
+  for (const [i, q] of questions.entries()) {
+    await expect(page.getByRole('heading', { name: nbsp(q.question) })).toBeVisible()
+    const voulue = i < bonnes ? q.correct : (q.correct + 1) % q.choices.length
+    await page.getByRole('button', { name: new RegExp(`^[A-D] : ${q.choices[voulue].replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}$`) }).click()
+    await page.getByRole('button', { name: /Question suivante|Voir mon score/ }).click()
+  }
+  await expect(page.getByText('Quiz terminé')).toBeVisible()
+  return questions.length
+}
+
+/** Les ids des leçons rangées dans users/{uid}/lessons de l'émulateur Firestore (la synchro a eu lieu). */
+export async function lireLeconsEmulateur(uid) {
+  const res = await fetch(`${FIRESTORE}/users/${uid}/lessons`, { headers: { Authorization: 'Bearer owner' } })
+  if (!res.ok) throw new Error(`émulateur (lecture leçons ${uid}) : ${res.status} ${await res.text()}`)
+  const { documents = [] } = await res.json()
+  return documents.map(d => d.name.split('/').pop())
+}
+
+// ── Horloge figée : l'offre de lancement dépend de la date (lot B1) ─────────
+
+// L'offre de lancement change le 26/10/2026 à minuit, heure de Paris (api/_lancement.js : FIN_LANCEMENT).
+// Les trois moments que voit un élève, avec ce qui s'affiche à chacun (src/utils/revizPlus.js : phaseRevizPlus) :
+export const MOMENTS = {
+  // Réviz+ offert, tarif fondateur à réserver : phase « lancement » (jusqu'à 3 jours avant la fin).
+  lancement: { iso: '2026-10-20T10:00:00Z', libelle: 'mardi 20 octobre 2026, 12 h à Paris' },
+  // Les 3 derniers jours offerts : phase « derniers-jours » (les Réglages comptent les jours restants).
+  derniersJours: { iso: '2026-10-24T10:00:00Z', libelle: 'samedi 24 octobre 2026, 12 h à Paris' },
+  // La rentrée du lundi 2/11 : l'offre est finie, Réviz+ est payant (phase « payant »), plus de tarif fondateur.
+  rentree: { iso: '2026-11-02T08:00:00Z', libelle: 'lundi 2 novembre 2026, 9 h à Paris' },
+}
+
+/**
+ * Fige l'heure du navigateur (Date.now et new Date) ; les minuteries continuent de tourner. À appeler
+ * avant d'ouvrir l'app (avant compteRapide) : l'app lit la date au chargement (LANCEMENT_OFFERT).
+ * Le jeton de l'émulateur Auth reste accepté : il n'est jamais vérifié côté navigateur.
+ */
+export async function figerHeure(page, moment) {
+  await page.clock.setFixedTime(new Date(moment.iso))
 }

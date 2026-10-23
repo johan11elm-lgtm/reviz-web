@@ -1,168 +1,243 @@
-// « Mon programme » : réviser sans scan, en mode essai (prénom + classe) et
-// avec un compte. Le catalogue et le chapitre viennent de fixtures servies par
-// Playwright : le parcours ne dépend pas des contenus générés dans public/.
+// « Mon programme » : réviser sans scan, en mode essai (prénom + classe) et avec un compte.
+// Le catalogue et le chapitre viennent de fixtures servies par Playwright : le parcours ne dépend
+// pas des contenus générés dans public/. Chaque parcours tourne à 1280 px (barre du haut) et à
+// 390 px (capsule du bas) quand l'écran change de composition.
 import { test, expect } from '@playwright/test'
-import { readFileSync } from 'node:fs'
-import path from 'node:path'
-import { fileURLToPath } from 'node:url'
-import { mockApiRoutes, signup, verifyEmailAndOnboard, fermerAnnonceBattle } from './helpers'
+import {
+  mockApiRoutes, mockProgramme, compteRapide, entrerEnEssai, ouvrirChapitreDuProgramme,
+  jouerQuiz, chapitreThales, lireLeconsEmulateur, sansDebordement, estOrdinateur, fermerAnnonceBattle,
+} from './helpers'
 
-const here = path.dirname(fileURLToPath(import.meta.url))
-const fixture = name => readFileSync(path.join(here, 'fixtures/programme', name), 'utf8')
+const APPAREILS = [
+  ['ordinateur', { width: 1280, height: 800 }],
+  ['téléphone', { width: 390, height: 844 }],
+]
 
-async function mockProgramme(page) {
-  await page.route('**/programme/3eme/index.json', route =>
-    route.fulfill({ status: 200, contentType: 'application/json', body: fixture('index.json') }))
-  await page.route('**/programme/3eme/maths/theoreme-de-thales.json', route =>
-    route.fulfill({ status: 200, contentType: 'application/json', body: fixture('thales.json') }))
+/** Le rappel du mode essai : un bandeau sur téléphone, le lien « Créer mon compte » du menu du haut sur ordinateur. */
+async function verifierModeEssai(page) {
+  if (estOrdinateur(page)) await expect(page.getByRole('navigation', { name: 'Menu principal' }).getByRole('link', { name: 'Créer mon compte' })).toBeVisible()
+  else await expect(page.getByRole('status').getByText('Mode essai')).toBeVisible()
 }
 
 test.describe('Mon programme', () => {
-  test('mode essai : prénom + classe, puis un chapitre de 3e révisé sans compte', async ({ page }) => {
-    await mockApiRoutes(page)
-    await mockProgramme(page)
+  for (const [appareil, viewport] of APPAREILS) {
+    test(`mode essai : prénom + classe, puis un chapitre de 3e révisé sans compte (${appareil})`, async ({ page }) => {
+      await page.setViewportSize(viewport)
+      await mockApiRoutes(page)
+      await mockProgramme(page)
 
-    // ── Welcome → essai ──
-    await page.goto('/welcome')
-    await page.getByRole('link', { name: 'Essayer sans compte' }).first().click()
-    await expect(page).toHaveURL(/\/essai/)
-    await page.getByLabel('Ton prénom').fill('Léa')
-    await page.getByRole('button', { name: '3ème', exact: true }).click()
-    await page.getByRole('button', { name: /C'est parti/ }).click()
+      // ── Welcome → essai ──
+      await page.goto('/welcome')
+      await page.getByRole('link', { name: 'Essayer sans compte' }).first().click()
+      await expect(page).toHaveURL(/\/essai/)
+      await page.getByLabel('Ton prénom').fill('Léa')
+      await page.getByRole('radio', { name: '3e', exact: true }).click()
+      await page.getByRole('button', { name: /C'est parti/ }).click()
 
-    // ── Mon programme : matières, bandeau du mode essai ──
-    await expect(page).toHaveURL(/\/programme$/)
-    // Sur ordinateur (1280 px), le mode essai est rappelé dans la barre latérale.
-    await expect(page.locator('.guest-banner:visible, .side-nav-note:visible').getByText('Mode essai')).toBeVisible()
-    await expect(page.getByRole('button', { name: /^Maths/ })).toBeVisible()
-    await page.screenshot({ path: test.info().outputPath('programme.png') })
+      // ── Programme : matières, rappel du mode essai ──
+      await expect(page).toHaveURL(/\/programme$/)
+      await expect(page.getByRole('heading', { name: 'Programme', level: 1 })).toBeVisible()
+      await verifierModeEssai(page)
+      const maths = page.getByRole('radio', { name: /^Maths/ })
+      await expect(maths).toBeVisible()
+      await expect(maths).toHaveAttribute('aria-checked', 'true') // la première matière est ouverte
+      await sansDebordement(page, `programme ${appareil}`)
+      await page.screenshot({ path: test.info().outputPath('programme.png') })
 
-    // ── Chapitres de maths : un prêt, un « Bientôt » ──
-    await page.getByRole('button', { name: /^Maths/ }).click()
-    await expect(page).toHaveURL(/\/programme\/maths/)
-    await expect(page.getByText('Trigonométrie')).toBeVisible()
-    await expect(page.getByRole('button', { name: /Trigonométrie — Bientôt/ })).toBeDisabled()
-    await page.screenshot({ path: test.info().outputPath('programme-maths.png') })
+      // ── Autre matière puis retour à Maths : les chapitres suivent la matière choisie ──
+      await page.getByRole('radio', { name: /^Français/ }).click()
+      await expect(page.getByRole('heading', { name: /^Chapitres · Français/ })).toBeVisible()
+      await expect(page.getByRole('button', { name: /^Chapitre 1 : L'argumentation/ })).toBeVisible()
+      await page.getByRole('radio', { name: /^Maths/ }).click()
+      await expect(page.getByRole('heading', { name: /^Chapitres · Maths/ })).toBeVisible()
 
-    // ── Ouvrir un chapitre = la page des formats, sans coach en mode essai ──
-    await page.getByRole('button', { name: /Le théorème de Thalès/ }).click()
-    await page.getByRole('button', { name: /chapitre$/ }).click()
-    await expect(page).toHaveURL(/\/analyse/)
-    await expect(page.getByText("L'essentiel du chapitre")).toBeVisible()
-    await expect(page.getByRole('link', { name: /Quiz/ })).toBeVisible()
-    await expect(page.locator('.analyse-page a[href^="/coach"]')).toHaveCount(0)
-    await page.waitForTimeout(700)  // fin du fondu d'entrée, pour la capture seulement
-    await page.screenshot({ path: test.info().outputPath('analyse-chapitre.png') })
+      // ── Chapitres de maths : un prêt, un « Bientôt » ──
+      const trigo = page.getByRole('button', { name: /^Chapitre 2 : Trigonométrie, à venir/ })
+      await trigo.evaluate(el => el.scrollIntoView({ block: 'center' }))
+      await trigo.click()
+      await expect(page.getByRole('heading', { name: 'Trigonométrie', level: 3 })).toBeVisible()
+      await expect(page.getByText('Ce chapitre arrive bientôt.')).toBeVisible()
+      await expect(page.getByRole('button', { name: 'Bientôt' })).toBeDisabled()
+      await page.screenshot({ path: test.info().outputPath('programme-maths.png') })
 
-    // ── Le quiz tourne sur le contenu du chapitre ──
-    await page.getByRole('link', { name: /Quiz/ }).click()
-    await expect(page).toHaveURL(/\/quiz/)
-    await expect(page.getByText('Que faut-il pour appliquer le théorème de Thalès ?')).toBeVisible()
+      // ── Ouvrir un chapitre = la fiche du chapitre, sans Réviz IA en mode essai ──
+      await ouvrirChapitreDuProgramme(page)
+      await expect(page.getByRole('heading', { name: 'L’essentiel' })).toBeVisible()
+      await expect(page.getByRole('heading', { name: 'Le théorème de Thalès', level: 1 })).toBeVisible()
+      const quiz = page.getByRole('link', { name: /^Quiz corrigé/ })
+      await expect(quiz).toBeVisible()
+      await expect(page.locator('a[href^="/coach"]')).toHaveCount(0)
+      await sansDebordement(page, `fiche du chapitre ${appareil}`)
+      await page.screenshot({ path: test.info().outputPath('analyse-chapitre.png') })
 
-    // ── Accueil : héros vers le programme, bandeau, et le chapitre devient « commencé » ──
-    await page.goto('/')
-    await expect(page.getByRole('link', { name: 'Réviser mon programme' })).toBeVisible()
-    await expect(page.locator('.guest-banner:visible, .side-nav-note:visible').getByText('Mode essai')).toBeVisible()
-    await page.goto('/programme/maths')
-    await expect(page.getByRole('button', { name: /Le théorème de Thalès — Commencé/ })).toBeVisible()
+      // ── Le quiz tourne sur le contenu du chapitre ──
+      await quiz.evaluate(el => el.scrollIntoView({ block: 'center' }))
+      await quiz.click()
+      await expect(page).toHaveURL(/\/quiz/)
+      await expect(page.getByRole('heading', { name: 'Que faut-il pour appliquer le théorème de Thalès ?' })).toBeVisible()
 
-    // ── Le scan demande un compte ──
-    await page.goto('/scan')
-    await expect(page.getByText('Crée ton compte pour scanner tes leçons')).toBeVisible()
-    await page.screenshot({ path: test.info().outputPath('scan-mode-essai.png') })
+      // ── Accueil : le rappel du mode essai, les matières du programme ; le chapitre devient « en cours » ──
+      await page.goto('/')
+      await expect(page.getByRole('status').getByText('Mode essai')).toBeVisible()
+      await expect(page.getByRole('link', { name: 'Maths', exact: true })).toHaveAttribute('href', '/programme?matiere=maths')
+      await page.goto('/programme?matiere=maths')
+      await expect(page.getByRole('button', { name: /^Chapitre 1 : Le théorème de Thalès, en cours/ })).toBeVisible()
 
-    // ── L'inscription repart avec le prénom et la classe de l'essai ──
-    await page.getByRole('link', { name: /Créer mon compte gratuit/ }).click()
-    await expect(page).toHaveURL(/\/inscription/)
-    await expect(page.getByPlaceholder('Lucas')).toHaveValue('Léa')
-  })
+      // ── Le scan demande un compte ──
+      await page.goto('/scan')
+      await expect(page.getByRole('heading', { name: 'Garde tes leçons' })).toBeVisible()
+      await page.screenshot({ path: test.info().outputPath('scan-mode-essai.png') })
 
-  test('avec un compte : entrée depuis l’accueil, le chapitre rejoint Mes cours', async ({ page }) => {
-    await mockApiRoutes(page)
-    await mockProgramme(page)
+      // ── L'inscription repart avec le prénom de l'essai ──
+      await page.getByRole('button', { name: /Créer mon compte/ }).first().click()
+      await expect(page).toHaveURL(/\/inscription/)
+      await expect(page.getByLabel('Ton prénom')).toHaveValue('Léa')
+    })
 
-    const email = await signup(page, { birthDate: '2004-03-15' })  // le tunnel choisit la 3ème
-    await verifyEmailAndOnboard(page, email)
+    test(`avec un compte : entrée depuis l’accueil, le chapitre reste dans le programme (${appareil})`, async ({ page }) => {
+      await page.setViewportSize(viewport)
+      await mockApiRoutes(page)
+      await mockProgramme(page)
+      const { uid } = await compteRapide(page)
 
-    // Accueil sur ordinateur : la section « Mon programme » mène au programme.
-    await page.locator('.home-desk-more', { hasText: 'chapitres' }).click()
-    await expect(page).toHaveURL(/\/programme$/)
-    await expect(page.locator('.guest-banner, .side-nav-note')).toHaveCount(0)
+      // Accueil : « Tes matières » → « Tout voir » mène au programme.
+      await page.getByRole('link', { name: 'Tout voir' }).click()
+      await expect(page).toHaveURL(/\/programme$/)
+      await expect(page.getByRole('status').getByText('Mode essai')).toHaveCount(0)
+      await expect(page.getByRole('navigation', { name: 'Menu principal' }).getByRole('link', { name: 'Créer mon compte' })).toHaveCount(0)
 
-    await page.getByRole('button', { name: /^Maths/ }).click()
-    await page.getByRole('button', { name: /Le théorème de Thalès/ }).click()
-    await page.getByRole('button', { name: /chapitre$/ }).click()
-    await expect(page).toHaveURL(/\/analyse/)
-    await expect(page.getByText('Le théorème de Thalès').first()).toBeVisible()
+      await ouvrirChapitreDuProgramme(page)
+      await expect(page.getByRole('heading', { name: 'Le théorème de Thalès', level: 1 })).toBeVisible()
+      // Avec un compte, Réviz IA répond sur le chapitre.
+      if (estOrdinateur(page)) await expect(page.getByRole('heading', { name: 'Une question ?' })).toBeVisible()
+      else await expect(page.getByRole('link', { name: /Poser une question à Réviz IA/ })).toBeVisible()
 
-    await page.goto('/cours')
-    await expect(page.getByText('Le théorème de Thalès').first()).toBeVisible()
-    // La synchro Firestore ne doit pas écraser le chapitre qui vient d'être ouvert
-    await page.waitForTimeout(1200)
-    await expect(page.getByText('Allez, on scanne ?')).toHaveCount(0)
-    await expect(page.getByText('Le théorème de Thalès').first()).toBeVisible()
-    await expect(page.getByRole('button', { name: /^Mon programme Révise chapitre par chapitre/ })).toBeVisible()
-    await page.screenshot({ path: test.info().outputPath('cours-avec-chapitre.png') })
-  })
+      // La synchro Firestore ne doit pas écraser le chapitre qui vient d'être ouvert : il est bien
+      // rangé sur le compte, et l'accueil (qui relit les leçons du compte) ne le fait pas disparaître.
+      await expect.poll(() => lireLeconsEmulateur(uid), { timeout: 10_000 }).toContain('prog-theoreme-de-thales')
+      await page.goto('/')
+      await expect(page.locator('a[href^="/jeux"]').first()).toBeVisible()
+      await page.goto('/programme?matiere=maths')
+      await expect(page.getByRole('button', { name: /^Chapitre 1 : Le théorème de Thalès, en cours/ })).toBeVisible()
+      expect(await lireLeconsEmulateur(uid)).toContain('prog-theoreme-de-thales')
+
+      // « Mes leçons » ne garde que les leçons scannées : le chapitre du programme n'y est pas.
+      await page.goto('/cours')
+      await expect(page.getByText('Ce que Réviz prépare')).toBeVisible()
+      await expect(page.getByText('Le théorème de Thalès')).toHaveCount(0)
+      await sansDebordement(page, `cours ${appareil}`)
+      await page.screenshot({ path: test.info().outputPath('cours-sans-scan.png') })
+    })
+
+    // Le parcours demandé de bout en bout : programme → matière → chapitre → fiche → quiz → fin.
+    test(`programme → matière → chapitre → fiche → quiz du chapitre joué jusqu’à la fin (${appareil})`, async ({ page }) => {
+      await page.setViewportSize(viewport)
+      await mockApiRoutes(page)
+      await mockProgramme(page)
+      await compteRapide(page, { aller: '/programme' })
+
+      await expect(page.getByRole('heading', { name: 'Programme', level: 1 })).toBeVisible()
+      await sansDebordement(page, `programme ${appareil}`)
+      if (estOrdinateur(page)) {
+        await expect(page.getByRole('navigation', { name: 'Menu principal' }).getByRole('link', { name: 'Programme' })).toBeVisible()
+        await expect(page.locator('.bottom-nav')).toBeHidden()
+      } else {
+        await expect(page.locator('.bottom-nav')).toBeVisible()
+      }
+
+      // Matière → chapitre → fiche du chapitre
+      await page.getByRole('radio', { name: /^Maths/ }).click()
+      await expect(page.getByRole('heading', { name: /^Chapitres · Maths/ })).toBeVisible()
+      await ouvrirChapitreDuProgramme(page)
+      await expect(page.getByRole('heading', { name: 'Le théorème de Thalès', level: 1 })).toBeVisible()
+      await expect(page.getByText('À découvrir')).toBeVisible()
+      await sansDebordement(page, `fiche du chapitre ${appareil}`)
+
+      // Quiz du chapitre, joué jusqu'à l'écran de fin (une erreur, pour voir « À revoir »)
+      const quiz = chapitreThales().quiz
+      await page.goto('/quiz')
+      await sansDebordement(page, `quiz ${appareil}`)
+      await jouerQuiz(page, quiz, { bonnes: quiz.length - 1 })
+      await expect(page.getByText(new RegExp(`^${quiz.length - 1}\\s*/\\s*${quiz.length}$`)).first()).toBeVisible()
+      await expect(page.getByText(/Score enregistré/)).toBeVisible()
+      await expect(page.getByRole('heading', { name: 'À revoir' })).toBeVisible()
+      await expect(page.getByRole('button', { name: 'Refaire le quiz' })).toBeVisible()
+      await sansDebordement(page, `fin du quiz ${appareil}`)
+      await page.screenshot({ path: test.info().outputPath('quiz-fin.png') })
+
+      // De retour sur la fiche du chapitre : le score est inscrit au parcours
+      await page.getByRole('button', { name: 'Retour au chapitre' }).click()
+      await expect(page).toHaveURL(/\/analyse/)
+      await expect(page.getByRole('link', { name: new RegExp(`^Quiz corrigé : ${quiz.length - 1} / ${quiz.length}`) })).toBeVisible()
+    })
+  }
 })
 
-// La flèche retour de Mon programme n'existe que sur téléphone (sur ordinateur,
-// la page s'ouvre depuis la barre latérale).
+// La fiche d'un chapitre n'a plus de flèche « Retour » dans Programme : on remonte par la capsule
+// du bas, le bouton « Programme » de la fiche et l'historique du navigateur.
 test.describe('Téléphone (390 px)', () => {
   test.use({ viewport: { width: 390, height: 844 } })
 
-  test('le retour depuis une matière remonte jusqu’à l’accueil sans boucler', async ({ page }) => {
+  test('le retour depuis une matière puis une fiche remonte jusqu’à l’accueil sans boucler', async ({ page }) => {
     await mockApiRoutes(page)
     await mockProgramme(page)
-    await page.goto('/essai')
-    await page.getByLabel('Ton prénom').fill('Léa')
-    await page.getByRole('button', { name: '3ème', exact: true }).click()
-    await page.getByRole('button', { name: /C'est parti/ }).click()
-    await expect(page).toHaveURL(/\/programme$/)
+    await entrerEnEssai(page)
     await page.goto('/')
     await fermerAnnonceBattle(page)
-    await page.getByRole('link', { name: 'Réviser mon programme' }).first().click()
+    await page.getByRole('link', { name: 'Tout voir' }).click()
     await expect(page).toHaveURL(/\/programme$/)
-    await page.getByRole('button', { name: /^Maths/ }).click()
-    await expect(page).toHaveURL(/\/programme\/maths/)
-    await page.getByRole('button', { name: 'Retour' }).first().click()
+    // Changer de matière ne pousse rien dans l'historique
+    await page.getByRole('radio', { name: /^Français/ }).click()
+    await page.getByRole('radio', { name: /^Maths/ }).click()
+    // Fiche du chapitre → bouton « Programme » de la fiche → programme
+    await ouvrirChapitreDuProgramme(page)
+    await page.getByRole('button', { name: 'Programme', exact: true }).click()
     await expect(page).toHaveURL(/\/programme$/)
-    await page.getByRole('button', { name: 'Retour' }).first().click()
+    // Le bouton « Programme » de la fiche revient en arrière dans l'historique (il ne l'allonge pas) :
+    // le retour du navigateur ne boucle donc pas sur la fiche, il remonte directement à l'accueil.
+    await page.goBack()
+    await expect(page).toHaveURL(/\/$/)
+    // La capsule du bas revient au programme et à l'accueil
+    await page.locator('.bottom-nav').getByRole('link', { name: 'Programme' }).click()
+    await expect(page).toHaveURL(/\/programme$/)
+    await page.locator('.bottom-nav').getByRole('link', { name: "Aujourd'hui" }).click()
     await expect(page).toHaveURL(/\/$/)
   })
 
-  test('la fiche d’un chapitre reste dans l’écran, de chaque côté du zigzag', async ({ page }) => {
+  test('le détail d’un chapitre reste dans l’écran, de chaque côté du zigzag', async ({ page }) => {
     await mockApiRoutes(page)
-    // Huit chapitres prêts : toutes les positions du zigzag (décalages 0, ±1, ±1,6).
-    const index = JSON.parse(fixture('index.json'))
+    // Huit chapitres prêts : toutes les positions du zigzag.
+    const index = JSON.parse(await (await import('node:fs/promises')).readFile(new URL('./fixtures/programme/index.json', import.meta.url), 'utf8'))
     const maths = index.matieres.find(m => m.slug === 'maths')
     maths.chapitres = Array.from({ length: 8 }, (_, i) => ({
       ...maths.chapitres[0], id: `chapitre-${i + 1}`, titre: `Chapitre de test numéro ${i + 1}`, ordre: i + 1,
     }))
     await page.route('**/programme/3eme/index.json', route =>
       route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify(index) }))
-    await page.goto('/essai')
-    await page.getByLabel('Ton prénom').fill('Léa')
-    await page.getByRole('button', { name: '3ème', exact: true }).click()
-    await page.getByRole('button', { name: /C'est parti/ }).click()
-    await page.getByRole('button', { name: /^Maths/ }).click()
-    await expect(page).toHaveURL(/\/programme\/maths/)
+    await entrerEnEssai(page)
+    await page.getByRole('radio', { name: /^Maths/ }).click()
+    await expect(page.getByRole('heading', { name: /^Chapitres · Maths/ })).toBeVisible()
 
-    const content = page.locator('.programme-content')
     for (let i = 1; i <= 8; i++) {
-      const step = page.getByRole('button', { name: new RegExp(`^${i}\\. `) })
-      // Rond centré à l'écran : caché sous la barre d'onglets, Playwright le
-      // recentrerait aussi à l'horizontale (le halo rend .app défilable) et
-      // décalerait toute la page, ce qui fausserait la mesure.
-      await step.evaluate(el => el.scrollIntoView({ block: 'center' }))
-      await step.click()
-      const card = page.getByRole('dialog', { name: `Chapitre de test numéro ${i}` })
-      await card.evaluate(el => Promise.all(el.getAnimations().map(a => a.finished)))
-      const box = await card.boundingBox()
-      expect(box.x, `chapitre ${i}, bord gauche`).toBeGreaterThanOrEqual(16)
-      expect(box.x + box.width, `chapitre ${i}, bord droit`).toBeLessThanOrEqual(390 - 16)
-      // L'étape décalée ne doit pas non plus faire défiler la page de côté.
-      expect(await content.evaluate(el => el.scrollWidth - el.clientWidth), `chapitre ${i}`).toBe(0)
+      const etape = page.getByRole('button', { name: new RegExp(`^Chapitre ${i} : `) })
+      // Rond centré à l'écran : caché sous la barre d'onglets, Playwright le recentrerait aussi à
+      // l'horizontale (le halo rend .app défilable) et décalerait toute la page, ce qui fausserait la mesure.
+      await etape.evaluate(el => el.scrollIntoView({ block: 'center' }))
+      await etape.click()
+      const titre = page.getByRole('heading', { name: `Chapitre de test numéro ${i}`, level: 3 })
+      await expect(titre).toBeVisible()
+      const action = page.getByRole('button', { name: /^(C'est parti|Découvrir)$/ })
+      for (const [nom, el] of [['titre', titre], ['bouton', action]]) {
+        const box = await el.boundingBox()
+        expect(box.x, `chapitre ${i}, ${nom}, bord gauche`).toBeGreaterThanOrEqual(16)
+        expect(box.x + box.width, `chapitre ${i}, ${nom}, bord droit`).toBeLessThanOrEqual(390 - 16)
+      }
+      // La case choisie est à l'écran (la route défile : son bord peut dépasser de quelques pixels,
+      // pas son centre), et la page ne défile pas de côté.
+      const caseBox = await etape.boundingBox()
+      expect(caseBox.x + caseBox.width / 2, `chapitre ${i}, centre de la case`).toBeGreaterThan(0)
+      expect(caseBox.x + caseBox.width / 2, `chapitre ${i}, centre de la case`).toBeLessThan(390)
+      await sansDebordement(page, `chapitre ${i}`)
     }
   })
 })

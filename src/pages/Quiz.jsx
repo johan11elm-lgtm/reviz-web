@@ -276,7 +276,7 @@ function QuizSession() {
           {isDesktop ? (
             <div className="qz-fin-grille">
               <div className="qz-fin-gauche">{score}{reviz(220, 'fier', 'saut')}{pastilles}</div>
-              <div className="qz-fin-droite">{parcours}{aRevoir}{boutons}<button type="button" className="fc-lien" onClick={fermer}>Retour au chapitre</button></div>
+              <div className="qz-fin-droite">{parcours}{aRevoir}{boutons}<FormatFeedback format="quiz" question="Ce quiz t'a aidé ?" /><button type="button" className="fc-lien" onClick={fermer}>Retour au chapitre</button></div>
             </div>
           ) : (
             <>
