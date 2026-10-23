@@ -6,6 +6,10 @@ import { defineConfig, devices } from '@playwright/test'
 // L'appel IA (/api/analyse) est mocké par Playwright dans les specs.
 // Java (émulateur Firestore) : installé via `brew install openjdk` (keg-only,
 // d'où le PATH explicite ci-dessous).
+// E2E_PORT : un port Vite par run, pour que deux runs (deux worktrees ou deux
+// sessions) ne réutilisent pas le serveur de l'autre. 5199 par défaut.
+const PORT = Number(process.env.E2E_PORT) || 5199
+
 export default defineConfig({
   testDir: './e2e',
   fullyParallel: false, // l'état de l'émulateur (comptes) est partagé entre specs
@@ -14,7 +18,7 @@ export default defineConfig({
   workers: 1,
   reporter: process.env.CI ? 'github' : 'list',
   use: {
-    baseURL: 'http://localhost:5199',
+    baseURL: `http://localhost:${PORT}`,
     trace: 'on-first-retry',
   },
   projects: [
@@ -32,8 +36,8 @@ export default defineConfig({
       timeout: 120_000,
     },
     {
-      command: 'VITE_FIREBASE_EMULATOR=1 VITE_ANTHROPIC_API_KEY= npx vite --port 5199 --strictPort',
-      url: 'http://localhost:5199',
+      command: `VITE_FIREBASE_EMULATOR=1 VITE_ANTHROPIC_API_KEY= npx vite --port ${PORT} --strictPort`,
+      url: `http://localhost:${PORT}`,
       reuseExistingServer: !process.env.CI,
       timeout: 60_000,
     },
