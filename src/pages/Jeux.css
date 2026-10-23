@@ -446,3 +446,5 @@
   .mg-page .mg-titre h1 { font-size: 26px; }
   .mg-page .mg-bulle { left: 60%; right: auto; bottom: 74%; display: block; width: max-content; max-width: 160px; }
 }
+/* Chrono en pause pendant une réaction de Réviz (Réviz lance, buzzer, pizzeria) : la barre s'arrête. */
+.jx-chrono-en-pause .mg-chrono-barre, .jx-chrono-en-pause .jx-chrono-barre { animation-play-state: paused; }

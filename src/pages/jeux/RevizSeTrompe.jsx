@@ -67,7 +67,7 @@ const erreurBuzzer = (manche, a, choix) => erreurJeu({
   donnee: choix === null ? null : choix ? 'Vrai' : 'Faux', bonne: a.vrai ? 'Vrai' : 'Faux', autre: a.vrai ? null : a.dit,
 });
 
-export function PlateauBuzzer({ manche, idx, total, phase, expire, onBon, onFaux, onTermine, onDemarrer, fermer, boutonSon, score, isDesktop, hauteurEcran }) {
+export function PlateauBuzzer({ manche, idx, total, phase, expire, onBon, onFaux, onTermine, onDemarrer, fermer, boutonSon, score, isDesktop, hauteurEcran, horloge }) {
   const pantin = useRef(null);
   const [i, setI] = useState(-1); // affirmation en cours
   const [verdict, setVerdict] = useState(null); // { choix, juste }
@@ -81,6 +81,7 @@ export function PlateauBuzzer({ manche, idx, total, phase, expire, onBon, onFaux
   const affs = manche.affirmations;
 
   const annoncer = useCallback(k => {
+    horloge?.reprise(); // la réaction est finie : le chrono repart pour l'affirmation suivante
     jeu.current.i = k;
     jeu.current.repondu = false;
     setI(k);
@@ -105,9 +106,13 @@ export function PlateauBuzzer({ manche, idx, total, phase, expire, onBon, onFaux
     setI(-1); setVerdict(null); setReaction(null); setPresse(null);
     if (phase !== 'jeu') return undefined;
     plus(250, () => annoncer(0));
-    // Les trois dernières secondes : tic-tac dans la musique.
-    plus((manche.duree - 3) * 1000, () => musiqueBuzzer.regler({ enTension: true }));
-    return () => { vider(); musiqueBuzzer.regler({ enTension: false }); };
+    // Les trois dernières secondes : tic-tac dans la musique (lues sur le chrono, qui s'arrête pendant
+    // les réactions de Réviz).
+    const veille = setInterval(() => {
+      const j = jeu.current;
+      if (!j.fini && !j.tension && (horloge ? horloge.reste() : manche.duree) <= 3) { j.tension = true; musiqueBuzzer.regler({ enTension: true }); }
+    }, 150);
+    return () => { vider(); clearInterval(veille); musiqueBuzzer.regler({ enTension: false }); };
   }, [phase, idx]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Chrono écoulé : l'affirmation affichée sans réponse va dans le récap.
@@ -125,6 +130,7 @@ export function PlateauBuzzer({ manche, idx, total, phase, expire, onBon, onFaux
     const j = jeu.current;
     if (j.fini || j.repondu || j.i < 0) return;
     j.repondu = true;
+    horloge?.pause(); // pendant la réaction de Réviz, le temps ne compte pas
     const a = affs[j.i];
     const juste = choix === a.vrai;
     setPresse(choix);
@@ -166,7 +172,7 @@ export function PlateauBuzzer({ manche, idx, total, phase, expire, onBon, onFaux
       }
       terminer([]);
     });
-  }, [affs, annoncer, manche, onBon, onFaux, terminer]);
+  }, [affs, annoncer, manche, onBon, onFaux, terminer, horloge]);
 
   useEffect(() => () => vider(), []);
   // Au clavier : flèche gauche ou V pour Vrai, flèche droite ou F pour Faux.

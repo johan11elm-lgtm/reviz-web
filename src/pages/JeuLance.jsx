@@ -53,7 +53,7 @@ const erreurLance = (manche, qu, donnee) => erreurJeu({
   question: manche.aide ? `${qu.question} : ${manche.aide.charAt(0).toLowerCase()}${manche.aide.slice(1)}` : qu.question,
 });
 
-export function JeuLance({ manche, numero, total, enJeu, expire, onBon, onFaux, onTermine, onCommencer, reviz, pantin, scene }) {
+export function JeuLance({ manche, numero, total, enJeu, expire, onBon, onFaux, onTermine, onCommencer, reviz, pantin, scene, horloge }) {
   const [q, setQ] = useState(0); // question en cours
   const [etat, setEtat] = useState('vise'); // vise | vol | suite
   const [resultat, setResultat] = useState(null); // { i, bon } : panier touché
@@ -204,6 +204,8 @@ export function JeuLance({ manche, numero, total, enJeu, expire, onBon, onFaux, 
   arriveeRef.current = arrivee;
   function arrivee(v) {
     if (fini.current) return;
+    // La boule est arrivée : pendant le verdict et la question suivante à la craie, le chrono s'arrête.
+    if (!attendreBoule.current) horloge?.pause();
     const qu = manche.questions[q];
     reponses.current = [...reponses.current, q];
     setResultat({ i: v.i, bon: v.bon });
@@ -234,7 +236,7 @@ export function JeuLance({ manche, numero, total, enJeu, expire, onBon, onFaux, 
       jouer('craie');
       pantin.current?.montrerObjet();
       jouer('froisse');
-      setTimeout(() => setEtat('vise'), 200);
+      setTimeout(() => { setEtat('vise'); horloge?.reprise(); }, 200);
     }, v.bon ? 460 : 660);
   }
 

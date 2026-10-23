@@ -478,6 +478,34 @@ export default function Jeux() {
   const scene = useRef(null); // Réviz lance : le repère de la boule et des paniers
   const retourHumeur = useRef(null);
   const debutManche = useRef(0);
+  // Le chrono du tour, qui se met en pause pendant les réactions de Réviz dans les jeux au tour par
+  // tour (Réviz lance, le buzzer, la pizzeria : Johan, 23/10, « ça uniformise ») : le temps ne sert
+  // qu'à répondre. Les barres de chrono (animation CSS) s'arrêtent avec lui (classe sur <html>).
+  const chrono = useRef(null);
+  chrono.current ??= {
+    fin: 0, pauseDepuis: null, minuterie: null, idx: -1,
+    armer() {
+      clearTimeout(this.minuterie);
+      const i = this.idx;
+      this.minuterie = setTimeout(() => setExpire(i), Math.max(0, this.fin - performance.now()));
+    },
+    pause() {
+      if (this.pauseDepuis !== null || !this.minuterie) return;
+      this.pauseDepuis = performance.now();
+      clearTimeout(this.minuterie);
+      document.documentElement.classList.add('jx-chrono-en-pause');
+    },
+    reprise() {
+      if (this.pauseDepuis === null) return;
+      this.fin += performance.now() - this.pauseDepuis;
+      this.pauseDepuis = null;
+      document.documentElement.classList.remove('jx-chrono-en-pause');
+      this.armer();
+    },
+    /** Secondes qui restent (le temps de pause n'est pas compté). */
+    reste() { return Math.max(0, (this.fin - (this.pauseDepuis ?? performance.now())) / 1000); },
+  };
+  const horloge = chrono.current;
   const finie = useRef(-1); // numéro du dernier jeu terminé
 
   useEffect(() => {
@@ -563,8 +591,11 @@ export default function Jeux() {
   useEffect(() => {
     if (phase !== 'jeu' || !manche) return;
     debutManche.current = performance.now();
-    const t = setTimeout(() => setExpire(idx), ((manche.apercu ?? 0) + manche.duree) * 1000);
-    return () => clearTimeout(t);
+    const c = chrono.current;
+    c.idx = idx; c.pauseDepuis = null; c.fin = performance.now() + ((manche.apercu ?? 0) + manche.duree) * 1000;
+    document.documentElement.classList.remove('jx-chrono-en-pause');
+    c.armer();
+    return () => { clearTimeout(c.minuterie); c.minuterie = null; document.documentElement.classList.remove('jx-chrono-en-pause'); };
   }, [phase, idx]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const humeur = (nom, ms) => {
@@ -585,7 +616,9 @@ export default function Jeux() {
   const onTermine = useCallback(manques => {
     if (finie.current === idx) return;
     finie.current = idx;
-    const reste = Math.max(0, manche.duree + (manche.apercu ?? 0) - (performance.now() - debutManche.current) / 1000);
+    const reste = horloge.reste();
+    clearTimeout(horloge.minuterie); horloge.minuterie = null;
+    document.documentElement.classList.remove('jx-chrono-en-pause');
     if (!manques.length && reste > 0.5) setScore(s => s + Math.round(reste) * 20);
     if (manques.length) setErreurs(e => [...e, ...manques]);
     setTimeout(() => {
@@ -756,7 +789,7 @@ export default function Jeux() {
       <>
         {transitionEl}
       <PlateauBuzzer manche={manche} idx={idx} total={partie.length} phase={phase} expire={expire === idx} score={score}
-        onBon={onBon} onFaux={onFaux} onTermine={onTermine} onDemarrer={() => setPhase('jeu')}
+        onBon={onBon} onFaux={onFaux} onTermine={onTermine} onDemarrer={() => setPhase('jeu')} horloge={horloge}
         fermer={fermer} boutonSon={boutonSon} isDesktop={isDesktop} hauteurEcran={hauteurEcran} />
       </>
     );
@@ -768,7 +801,7 @@ export default function Jeux() {
       <>
         {transitionEl}
       <PlateauPizzeria manche={manche} idx={idx} total={partie.length} phase={phase} expire={expire === idx} score={score}
-        onBon={onBon} onFaux={onFaux} onTermine={onTermine} onDemarrer={() => setPhase('jeu')}
+        onBon={onBon} onFaux={onFaux} onTermine={onTermine} onDemarrer={() => setPhase('jeu')} horloge={horloge}
         fermer={fermer} boutonSon={boutonSon} isDesktop={isDesktop} hauteurEcran={hauteurEcran} />
       </>
     );
@@ -873,7 +906,7 @@ export default function Jeux() {
             <span className="jx-score" aria-live="polite">{score}</span>
             {boutonSon}
           </div>
-          <JeuLance key={idx} manche={manche} numero={idx + 1} total={partie.length} enJeu={phase === 'jeu'} expire={expire === idx}
+          <JeuLance key={idx} manche={manche} numero={idx + 1} total={partie.length} enJeu={phase === 'jeu'} expire={expire === idx} horloge={horloge}
             onBon={onBon} onFaux={onFaux} onTermine={onTermine} onCommencer={() => setPhase('jeu')} reviz={reviz} pantin={pantin} scene={scene} />
           <div className="ln-reviz" style={{ '--taille': `${isDesktop ? 300 : tailleLance}px` }}>
             {bulle && phase === 'jeu' && <BulleReviz key={bulle.join()} lignes={bulle} className="mg-bulle ln-bulle" />}

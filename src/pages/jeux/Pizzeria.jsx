@@ -73,7 +73,7 @@ function Morceaux({ m }) {
     : <span key={i} className={x.length > 6 ? 'pz-mots' : 'pz-signe'}>{x}</span>));
 }
 
-export function PlateauPizzeria({ manche, idx, total, phase, expire, onBon, onFaux, onTermine, onDemarrer, fermer, boutonSon, score, isDesktop, hauteurEcran }) {
+export function PlateauPizzeria({ manche, idx, total, phase, expire, onBon, onFaux, onTermine, onDemarrer, fermer, boutonSon, score, isDesktop, hauteurEcran, horloge }) {
   const pantin = useRef(null);
   const plan = useRef(null), comptoir = useRef(null), revizEl = useRef(null), mainEl = useRef(null);
   const commandes = manche.commandes;
@@ -219,10 +219,18 @@ export function PlateauPizzeria({ manche, idx, total, phase, expire, onBon, onFa
     jeu.current.libre = true;
     // Le temps se voit (les secondes dans le chrono) et s'entend : les 3 dernières secondes, la musique
     // accélère, un tic par seconde et le chiffre en grand au milieu de l'écran.
+    // Tout se lit sur le chrono du tour, qui s'arrête pendant les réactions (le client, Réviz).
     const debut = performance.now();
-    const montre = setInterval(() => setReste(Math.max(0, Math.ceil(manche.duree - (performance.now() - debut) / 1000))), 200);
-    plus((manche.duree - 3) * 1000, () => musiquePizzeria.regler({ enTension: true }));
-    [3, 2, 1].forEach(n => plus((manche.duree - n) * 1000, () => { if (!jeu.current.fini) { setDecompte(n); jouer('tic'); } }));
+    const resteTour = () => (horloge ? horloge.reste() : Math.max(0, manche.duree - (performance.now() - debut) / 1000));
+    let dernier = null;
+    const montre = setInterval(() => {
+      const t = resteTour(), j = jeu.current;
+      setReste(Math.ceil(t));
+      if (j.fini) return;
+      if (t <= 3 && !j.tension) { j.tension = true; musiquePizzeria.regler({ enTension: true }); }
+      const n = Math.ceil(t);
+      if (t > 0 && n <= 3 && n !== dernier) { dernier = n; setDecompte(n); jouer('tic'); }
+    }, 100);
     return () => { vider(); clearInterval(montre); musiquePizzeria.regler({ enTension: false }); };
   }, [phase, idx]); // eslint-disable-line react-hooks/exhaustive-deps
   useEffect(() => () => vider(), []);
@@ -242,6 +250,7 @@ export function PlateauPizzeria({ manche, idx, total, phase, expire, onBon, onFa
     plus(250 * r, () => {
       if (j.fini) return;
       j.k += 1; j.servie = false;
+      horloge?.reprise(); // la commande suivante arrive : le chrono repart
       M.planches.forEach(pl => { pl.x = DEHORS.gauche; });
       Object.assign(M.assiette, { x: 0, y: 0 }, sortie());
       setK(j.k); setServi(null); setBulle(null); setBrule(false); setVerdict(null);
@@ -263,6 +272,7 @@ export function PlateauPizzeria({ manche, idx, total, phase, expire, onBon, onFa
     const j = jeu.current;
     if (!j.libre || j.fini) return;
     j.libre = false; j.servie = true;
+    if (!j.apresChrono) horloge?.pause(); // pendant la réaction du client et de Réviz, le temps ne compte pas
     const cmd = commandes[j.k];
     const servies = dansLAssiette();
     const n = servies.length;
