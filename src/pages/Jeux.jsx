@@ -23,6 +23,7 @@ import { PlateauNinja, mancheNinja, partieNinja, TEMPO_NINJA } from './jeux/Ninj
 import { FinDePartie } from './jeux/FinDePartie';
 import { finDeDemo } from './jeux/demoFin';
 import { musiqueTaupe } from '../utils/musiqueTaupe';
+import { musiqueFin } from '../utils/musiqueFin';
 import { PlateauTaupe, mancheTaupe, partieTaupe, TEMPO_TAUPE } from './jeux/Taupe';
 import { useIsDesktop } from '../hooks/useMediaQuery';
 import { TransitionJeux, DUREES_TRANSITION } from './jeux/TransitionJeux';
@@ -537,7 +538,7 @@ export default function Jeux() {
     musique.m.regler({ bpm: tempoTour });
     musique.m.demarrer();
   }, [musique?.m, tempoTour, son]); // eslint-disable-line react-hooks/exhaustive-deps
-  useEffect(() => () => { musiqueMagie.arreter(); musiqueLance.arreter(); musiqueBuzzer.arreter(); musiquePizzeria.arreter(); musiqueNinja.arreter(); musiqueTaupe.arreter(); }, []);
+  useEffect(() => () => { musiqueMagie.arreter(); musiqueLance.arreter(); musiqueBuzzer.arreter(); musiquePizzeria.arreter(); musiqueNinja.arreter(); musiqueTaupe.arreter(); musiqueFin.arreter(); }, []);
 
   // Consigne : 1,7 s (ou une touche), puis le chrono part.
   useEffect(() => {

@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { Pantin } from '../../components/Pantin';
 import { BulleReviz } from '../../components/reviz/BulleReviz';
 import { jouer } from '../../utils/bruitages';
+import { musiqueFin } from '../../utils/musiqueFin';
 import './FinDePartie.css';
 
 /**
@@ -336,6 +337,11 @@ export function FinDePartie({ surtitre, score, bonnes, erreurs, cleRecord, onRej
   useEffect(() => {
     if (score > lire(cleRecord)) try { localStorage.setItem(cleRecord, String(score)); } catch { /* stockage indisponible */ }
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  // La musique de fin part après la fanfare du podium et continue pendant le récap.
+  useEffect(() => {
+    const t = setTimeout(() => musiqueFin.demarrer(), 1200);
+    return () => { clearTimeout(t); musiqueFin.arreter(); };
+  }, []);
   const retour = useCallback(() => setVue('fin'), []);
 
   return (
