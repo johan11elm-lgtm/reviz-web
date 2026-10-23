@@ -361,10 +361,20 @@
 }
 .home-page .hm-jeux--faite .hm-jeux-btn { background: #FFF6E8; color: #1B1A23; box-shadow: 0 4px 0 #D8C7A6; }
 .home-page .hm-jeux:active { transform: scale(.985); }
-.home-page .hm-grille > .hm-jeux { grid-column: 1 / -1; min-height: 190px; }
-.home-page .hm-desk .hm-jeux-image { width: 62%; }
-.home-page .hm-desk .hm-jeux-txt { max-width: 42%; padding: 24px 28px; }
-.home-page .hm-desk .hm-jeux-titre { font-size: 28px; }
+/* Ordinateur : à côté de la Battle (colonne large) ; l'image garde son format 3:2, collée à droite,
+   et se fond dans l'aplat (masque), au lieu d'être agrandie sur toute la largeur. */
+.home-page .hm-grille > .hm-jeux { min-height: 250px; }
+.home-page .hm-desk .hm-jeux-image {
+  width: auto; height: 100%; aspect-ratio: 3 / 2; max-width: 68%; object-position: 50% 40%;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 34%); mask-image: linear-gradient(90deg, transparent 0, #000 34%);
+}
+.home-page .hm-desk .hm-jeux-voile { display: none; }
+.home-page .hm-desk .hm-jeux { display: flex; align-items: center; }
+.home-page .hm-desk .hm-jeux-txt { max-width: 48%; box-sizing: border-box; padding: 28px 30px; }
+.home-page .hm-desk .hm-jeux-titre { font-size: 32px; }
+.home-page .hm-desk .hm-jeux-sous { font-size: 15px; }
+.home-page .hm-desk .hm-jeux-btn { padding: 11px 22px; font-size: 17px; }
+.home-page .hm-desk .hm-jeux:hover .hm-jeux-btn { filter: brightness(1.06); }
 
 /* ── Barre compacte qui apparaît au défilement ── */
 .home-page .hm-barre {
@@ -463,7 +473,7 @@
   margin: 40px auto 0;
   padding: 0 56px;
 }
-.home-page .hm-grille > .hm-battle { grid-column: 1 / -1; min-height: 150px; }
+.home-page .hm-grille > .hm-battle { min-height: 150px; }
 .home-page .hm-carte {
   padding: 20px 22px;
   border-radius: 28px;
