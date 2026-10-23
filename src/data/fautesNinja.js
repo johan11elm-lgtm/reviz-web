@@ -58,14 +58,15 @@ const motQuiChange = ([bon, faux]) => {
   const i = b.findIndex((m, k) => m !== f[k]);
   return i < 0 ? b.at(-1) : b[i];
 };
+// Les terminaisons (‑al, ‑aux…) portent un trait d'union insécable : jamais coupées en fin de ligne.
 const SEPT_OU = 'bijou, caillou, chou, genou, hibou, joujou, pou';
 function reglePluriel(bon) {
-  if (/yaux$/.test(bon)) return `Les mots en -au prennent un x au pluriel : des ${bon}.`;
-  if (/eaux$/.test(bon)) return `Les mots en -eau prennent un x au pluriel : des ${bon}.`;
-  if (/aux$/.test(bon)) return `Les mots en -al font -aux au pluriel : des ${bon}.`;
-  if (/eux$/.test(bon)) return `Les mots en -eu prennent un x au pluriel : des ${bon}.`;
-  if (/oux$/.test(bon)) return `Sept mots en -ou prennent un x : ${SEPT_OU}.`;
-  return `Les mots en -ou prennent un s, sauf ${SEPT_OU} : des ${bon}.`;
+  if (/yaux$/.test(bon)) return `Les mots en ‑au prennent un x au pluriel : des ${bon}.`;
+  if (/eaux$/.test(bon)) return `Les mots en ‑eau prennent un x au pluriel : des ${bon}.`;
+  if (/aux$/.test(bon)) return `Les mots en ‑al font ‑aux au pluriel : des ${bon}.`;
+  if (/eux$/.test(bon)) return `Les mots en ‑eu prennent un x au pluriel : des ${bon}.`;
+  if (/oux$/.test(bon)) return `Sept mots en ‑ou prennent un x : ${SEPT_OU}.`;
+  return `Les mots en ‑ou prennent un s, sauf ${SEPT_OU} : des ${bon}.`;
 }
 const HOMOS = {
   a: '« a », c’est le verbe avoir : on peut dire « avait ».',
@@ -88,11 +89,11 @@ function regleAccord([bon, faux]) {
   const mot = motQuiChange([bon, faux]);
   if (/^vous (êtes|dites|faites)$/.test(bon)) return 'Vous êtes, vous dites, vous faites : trois exceptions à retenir.';
   if (/^(je peux|tu veux)$/.test(bon)) return `${bon[0].toUpperCase()}${bon.slice(1)} : avec je et tu, pouvoir et vouloir finissent par x.`;
-  if (sujet === 'nous') return `Avec « nous », le verbe finit par -ons : ${bon}.`;
-  if (sujet === 'ils') return `Avec « ils », le verbe finit par -ent : ${bon}.`;
+  if (sujet === 'nous') return `Avec « nous », le verbe finit par ‑ons : ${bon}.`;
+  if (sujet === 'ils') return `Avec « ils », le verbe finit par ‑ent : ${bon}.`;
   if (bon === 'tu es grand') return 'Avec « tu », le verbe être s’écrit « es » : tu es.';
-  if (sujet === 'tu') return `Avec « tu », le verbe finit par -s : ${bon}.`;
-  if (sujet === 'je') return `Avec « je », finir s’écrit -is : ${bon}.`;
+  if (sujet === 'tu') return `Avec « tu », le verbe finit par ‑s : ${bon}.`;
+  if (sujet === 'je') return `Avec « je », finir s’écrit ‑is : ${bon}.`;
   if (sujet === 'il') return `Avec « il », pas de s : ${bon}.`;
   if (/^(des|les|trois)$/.test(sujet)) return `Au pluriel, le nom et l’adjectif prennent un s : ${bon}.`;
   if (faux.endsWith('s') && !mot.endsWith('s')) return `Une seule, donc pas de s : ${bon}.`;

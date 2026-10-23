@@ -12,10 +12,20 @@ const ERREURS = [
   { jeu: 'magie', tour: { theme: 'animaux', titre: 'Animals !' }, paire: { a: 'duck', b: 'canard' }, question: '« duck » va avec…', donnee: 'cochon', bonne: 'canard' },
   { jeu: 'buzzer', tour: { theme: 'sciences', titre: 'Sciences !' }, paire: { a: 'Lune', b: 'Un satellite' }, question: 'La Lune est un satellite !', donnee: 'Faux', bonne: 'Vrai', autre: null },
 ];
-const SCORES = { 0: [2340, 18], 1: [2120, 17], 6: [1480, 12] };
+// Les jeux qui écrivent leur erreur eux-mêmes (pizzeria, ninja, taupe) : déjà au format commun.
+const ERREURS_DIRECTES = [
+  { jeu: 'pizzeria', theme: 'Les fractions égales', question: '3/4 de pizza', donnee: '5/8', bonne: '6/8', libelles: { donnee: 'Tu as servi', bonne: 'Il fallait' }, explication: '3/4 = 6/8 : 6 parts, pizza coupée en 8. Tu en as servi 5 : pas assez.' },
+  { jeu: 'ninja', theme: 'Les pluriels', question: 'chevals', donnee: 'laissé passer', bonne: 'chevaux', libelles: { donnee: 'Tu l’as', bonne: 'Ça s’écrit' }, explication: 'Les mots en -al font -aux au pluriel : des chevaux.' },
+  { jeu: 'ninja', theme: 'Les homophones', question: 'il a faim', donnee: 'tranché', bonne: 'le laisser', libelles: { donnee: 'Tu l’as', bonne: 'Il fallait' }, explication: '« il a faim » était bien écrit. « a », c’est le verbe avoir : on peut dire « avait ».' },
+  { jeu: 'taupe', theme: 'Que les multiples de 3', question: '14', donnee: 'tapée', bonne: 'la laisser', libelles: { donnee: 'Tu l’as', bonne: 'Il fallait' }, explication: '14 n’est pas dans la table de 3 : il fallait la laisser.' },
+  { jeu: 'taupe', theme: 'Que les calculs = 12', question: '3 × 4', donnee: 'laissée filer', bonne: 'la taper', libelles: { donnee: 'Tu l’as', bonne: 'Il fallait' }, explication: '3 × 4 = 12 : il fallait la taper.' },
+];
+const SCORES = { 0: [2340, 18], 1: [2120, 17], 6: [1480, 12], 11: [1120, 9] };
 
 export function finDeDemo(n) {
-  const k = Math.max(0, Math.min(ERREURS.length, n));
+  const toutes = [...ERREURS.map(erreurJeu), ...ERREURS_DIRECTES];
+  const k = Math.max(0, Math.min(toutes.length, n));
   const [score, bonnes] = SCORES[k] ?? [1800, 18 - k];
-  return { score, bonnes, erreurs: ERREURS.slice(0, k).map(erreurJeu) };
+  // ?fin=11 : toutes, les nouveaux jeux d'abord (pour les voir sans faire défiler).
+  return { score, bonnes, erreurs: k > ERREURS.length ? [...ERREURS_DIRECTES, ...ERREURS.map(erreurJeu)].slice(0, k) : toutes.slice(0, k) };
 }

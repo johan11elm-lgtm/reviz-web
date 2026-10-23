@@ -29,7 +29,7 @@ describe('La pizzeria : les commandes', () => {
         expect(valeur(c.ticket)).toBeCloseTo(c.attendu / c.coupe, 9);
         for (const servies of [null, 0, c.attendu + 1]) {
           const e = c.erreur(servies);
-          expect(Object.keys(e).sort()).toEqual(['bonne', 'donnee', 'explication', 'jeu', 'question', 'theme']);
+          expect(Object.keys(e).sort()).toEqual(['bonne', 'donnee', 'explication', 'jeu', 'libelles', 'question', 'theme']);
           expect(e.jeu).toBe('pizzeria');
           expect(JSON.stringify(e)).not.toMatch(/undefined|NaN/);
           expect(e.explication.length).toBeLessThanOrEqual(150);

@@ -104,8 +104,8 @@ function commande(f, id, niveau) {
     : `${ticket} = ${c.attendu}/${c.coupe}${plus} : ${parts}, ${coupee}.`;
   c.erreur = servies => ({
     jeu: 'pizzeria', theme: THEMES_PIZZERIA[niveau] ?? '', question: `${ticket} de pizza`,
-    donnee: servies == null ? null : `${servies} part${servies > 1 ? 's' : ''}`,
-    bonne: `${c.attendu}/${c.coupe}`,
+    donnee: servies == null ? null : `${servies}/${c.coupe}`,
+    bonne: `${c.attendu}/${c.coupe}`, libelles: { donnee: 'Tu as servi', bonne: 'Il fallait' },
     explication: servies == null ? regle : `${regle} Tu en as servi ${servies} : ${servies < c.attendu ? 'pas assez' : 'un peu trop'}.`,
   });
   return c;

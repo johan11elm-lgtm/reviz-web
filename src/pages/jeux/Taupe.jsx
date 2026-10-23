@@ -51,8 +51,8 @@ export function mancheTaupe(theme, niveau) {
 function erreurTaupe(manche, x, donnee) {
   const tapee = donnee !== null;
   return {
-    jeu: 'taupe', theme: manche.regle.texte, question: x.texte, donnee,
-    bonne: tapee ? 'À laisser' : 'À taper',
+    jeu: 'taupe', theme: manche.regle.texte, question: x.texte, donnee: tapee ? 'tapée' : 'laissée filer',
+    bonne: tapee ? 'la laisser' : 'la taper', libelles: { donnee: 'Tu l’as', bonne: 'Il fallait' },
     explication: `${manche.pourquoi(x)} : il fallait ${tapee ? 'la laisser' : 'la taper'}.`,
   };
 }
@@ -236,7 +236,7 @@ export function PlateauTaupe({ manche, idx, total, phase, expire, onBon, onFaux,
     if (j.compte > 0) { j.compte -= 1; setCompte(j.compte); setPerdue(Date.now()); }
     setVerdict({ type: 'faux', titre: manche.pourquoi(x), sous: null, id: Date.now() });
     plus(1300, () => setVerdict(v => (v?.type === 'faux' ? null : v)));
-    onFaux(erreurTaupe(manche, x, 'Tapée'));
+    onFaux(erreurTaupe(manche, x, 'tapée'));
     r?.expression('panique');
     plus(700, () => { if (!jeu.current.fini) r?.expression('content'); });
   };

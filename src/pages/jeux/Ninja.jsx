@@ -39,8 +39,8 @@ export function mancheNinja(theme, niveau) {
 function erreurNinja(f, donnee, bonTranche = false) {
   const theme = TOURS_NINJA[f.niveau ?? 0]?.titre ?? '';
   return bonTranche
-    ? { jeu: 'ninja', theme, question: f.bon, donnee, bonne: 'Bien écrit', explication: `« ${f.bon} » était bien écrit. ${f.regle}` }
-    : { jeu: 'ninja', theme, question: f.faux, donnee, bonne: f.bon, explication: f.regle };
+    ? { jeu: 'ninja', theme, question: f.bon, donnee, bonne: 'le laisser', libelles: { donnee: 'Tu l’as', bonne: 'Il fallait' }, explication: `« ${f.bon} » était bien écrit. ${f.regle}` }
+    : { jeu: 'ninja', theme, question: f.faux, donnee, bonne: f.bon, libelles: { donnee: 'Tu l’as', bonne: 'Ça s’écrit' }, explication: f.regle };
 }
 export const partieNinja = () => TOURS_NINJA.map((_, i) => mancheNinja(null, i));
 export const TEMPO_NINJA = niveau => TEMPOS[niveau] ?? TEMPOS.at(-1);
@@ -130,7 +130,7 @@ export function PlateauNinja({ manche, idx, total, phase, expire, onBon, onFaux,
     setFlash({ couleur: 'rouge', id: Date.now() });
     setVerdict({ type: 'echappe', titre: 'Une faute t’a échappé !', sous: { barre: f.faux, juste: f.bon }, id: Date.now() });
     plus(1300, () => setVerdict(v => (v?.type === 'echappe' ? null : v)));
-    onFaux(erreurNinja(f, 'Pas tranché'));
+    onFaux(erreurNinja(f, 'laissé passer'));
     pantin.current?.expression('decu');
     plus(700, () => { if (!jeu.current.fini) pantin.current?.expression('content'); });
     if (j.prolonge) finSiPlusRien();
@@ -319,7 +319,7 @@ export function PlateauNinja({ manche, idx, total, phase, expire, onBon, onFaux,
     setFlash({ couleur: 'rouge', id: Date.now() });
     setVerdict({ type: 'bon', titre: 'Bon mot tranché !', sous: { juste: f.bon, suite: ' était bien écrit' }, id: Date.now() });
     plus(1300, () => setVerdict(v => (v?.type === 'bon' ? null : v)));
-    onFaux(erreurNinja(f, 'Tranché', true));
+    onFaux(erreurNinja(f, 'tranché', true));
     r?.expression('panique');
     plus(700, () => { if (!jeu.current.fini) r?.expression('content'); });
   };

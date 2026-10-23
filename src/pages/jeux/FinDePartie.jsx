@@ -166,6 +166,10 @@ const Rond = () => (
   </svg>
 );
 
+// Taille d'une valeur selon sa longueur : un mot ou deux tiennent toujours sur une ligne, sans être
+// coupés au milieu (« chevaux », « laissé passer »).
+const tailleValeur = v => (String(v ?? '').length > 11 ? ' fp-valeur--longue' : String(v ?? '').length > 6 ? ' fp-valeur--moyenne' : '');
+
 function Carte({ e, classe = '', style, refCarte, active }) {
   const phrase = e.jeu === 'buzzer';
   const q = phrase ? `« ${e.question} »` : e.question;
@@ -180,14 +184,14 @@ function Carte({ e, classe = '', style, refCarte, active }) {
       </p>
       <div className="fp-reponses">
         <p className="fp-reponse fp-reponse--toi">
-          <span className="fp-reponse-nom">Ta réponse</span>
+          <span className="fp-reponse-nom">{(e.donnee !== null && e.libelles?.donnee) || 'Ta réponse'}</span>
           {e.donnee === null
             ? <span className="fp-temps">Temps écoulé</span>
-            : <s className="fp-valeur fp-valeur--fausse">{e.donnee}{active && <Barre />}</s>}
+            : <s className={`fp-valeur fp-valeur--fausse${tailleValeur(e.donnee)}`}>{e.donnee}{active && <Barre />}</s>}
         </p>
         <p className="fp-reponse fp-reponse--bonne">
-          <span className="fp-reponse-nom">La bonne réponse</span>
-          <b className="fp-valeur fp-valeur--bonne">{e.bonne}{active && <Rond />}</b>
+          <span className="fp-reponse-nom">{e.libelles?.bonne ?? 'La bonne réponse'}</span>
+          <b className={`fp-valeur fp-valeur--bonne${tailleValeur(e.bonne)}`}>{e.bonne}{active && <Rond />}</b>
         </p>
       </div>
       <div className="fp-explication">

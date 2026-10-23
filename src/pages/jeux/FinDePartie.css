@@ -271,8 +271,11 @@
 .fp-page .fp-valeur {
   position: relative; min-width: 0; text-align: right;
   font-family: var(--font-display); font-size: 30px; font-weight: 900; letter-spacing: -.02em; line-height: 1.1;
-  overflow-wrap: anywhere;
+  white-space: nowrap;
 }
+/* Plus long qu'un nombre : plus petit, jamais coupé au milieu d'un mot. */
+.fp-page .fp-valeur--moyenne { font-size: 22px; }
+.fp-page .fp-valeur--longue { font-size: 18px; white-space: normal; text-wrap: balance; }
 .fp-page .fp-valeur--fausse { text-decoration: none; color: #3A3550; }
 .fp-page .fp-valeur--bonne { padding: 2px 6px; color: var(--fp-encre); }
 .fp-page .fp-temps { font-size: 15px; font-weight: 800; color: #B0563A; }
@@ -332,6 +335,8 @@
   .fp-page .fp-question--moyenne { font-size: 24px; }
   .fp-page .fp-question--longue { font-size: 18px; }
   .fp-page .fp-valeur { font-size: 24px; }
+  .fp-page .fp-valeur--moyenne { font-size: 19px; }
+  .fp-page .fp-valeur--longue { font-size: 16px; }
   .fp-page .fp-reponse { min-height: 42px; }
   .fp-page .fp-fleche { width: 46px; height: 46px; }
   .fp-page .fp-bulle .rv-bulle-txt { font-size: 15px; padding: 8px 12px 9px; }
@@ -353,6 +358,8 @@
   .fp-page .fp-question--longue { font-size: 17px; }
   .fp-page .fp-reponse { min-height: 38px; }
   .fp-page .fp-valeur { font-size: 22px; }
+  .fp-page .fp-valeur--moyenne { font-size: 18px; }
+  .fp-page .fp-valeur--longue { font-size: 15px; }
   .fp-page .fp-explication { margin: 2px -22px -18px calc(var(--taille) * .58); }
 }
 
