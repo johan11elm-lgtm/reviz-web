@@ -122,6 +122,12 @@ const ACCESSOIRES = {
   // Réviz se trompe ? : le présentateur, micro levé vers la bouche et nœud papillon sous le sourire.
   micro: { main: 'g', bras: { epaule: 20, coude: -70 }, prise: [104, 150], ancre: [0.5, 0.72], w: 282, h: 600, angle: 15 },
   noeud: { x: 1018, y: 1344, w: 520, h: 315, enfile: true },
+  // Tape-taupe ! : le jardinier, chapeau de paille et salopette découpés sur Réviz généré en
+  // jardinier et calés par les pupilles (assets-src/jeux/taupe/decouper.py), et le gros maillet en
+  // mousse brandi au-dessus de la tête (le coup : Pantin.frapper).
+  paille: { x: 234, y: -28, w: 2085, h: 941 },
+  salopette: { x: 622, y: 1377, w: 1300, h: 600, enfile: true },
+  maillet: { main: 'g', bras: { epaule: 130, coude: 40 }, prise: [104, 150], ancre: [0.5, 0.86], w: 652, h: 1050, angle: -10 },
 };
 const NS = 'http://www.w3.org/2000/svg';
 function imageSvg(href, { x, y, w, h }) {
@@ -196,7 +202,8 @@ export const Pantin = forwardRef(function Pantin(
         Object.assign(e, garde);
         const r = rig.brasEl[t.p.main].main.getAttribute('transform')?.match(/rotate\(([-\d.]+)/);
         const balance = t.p.balance && !anim.current?.calme ? t.p.balance * Math.sin(performance.now() / 260) : 0;
-        if (r) t.el.setAttribute('transform', `rotate(${(t.p.angle || 0) + balance - r[1]} ${t.p.prise[0]} ${t.p.prise[1]})`);
+        // t.tourne : le maillet suit le coup (Pantin.frapper) au lieu de rester droit.
+        if (r) t.el.setAttribute('transform', `rotate(${(t.p.angle || 0) + balance + (t.tourne || 0) - r[1]} ${t.p.prise[0]} ${t.p.prise[1]})`);
       };
       const devant = h.querySelector('.bras-devant');
       if (devant) {
@@ -331,6 +338,8 @@ export const Pantin = forwardRef(function Pantin(
     // Réviz lance : l'objet tenu (la boule de papier), sa place à l'écran, le lancer, une nouvelle boule.
     objet: () => tenu.current?.el.getBoundingClientRect() ?? null,
     lancer: ({ lacher, sens = 0 } = {}) => lancer(sens, lacher),
+    // Tape-taupe ! : un coup de maillet, à gauche ou devant ; impact quand la tête du maillet touche.
+    frapper: ({ vers = 'devant', impact } = {}) => frapper(vers, impact),
     montrerObjet: () => {
       const t = tenu.current, gsap = gsapRef.current;
       if (!t || !gsap) return;
@@ -357,6 +366,34 @@ export const Pantin = forwardRef(function Pantin(
       .to(t.pose, { epaule: 95 - 25 * sens, coude: -8, duration: 0.2, ease: 'power2.out' }, 0.2)
       .to(e, { ecrase: 0, corpsRot: 0, duration: 0.35, ease: 'power2.inOut' }, 0.22)
       .to(t.pose, { epaule: p.epaule, coude: p.coude, duration: 0.32, ease: 'power2.inOut' }, 0.46);
+  }
+
+  // Le coup de maillet, depuis la pose brandie (pose de l'objet tenu) : le bras s'arme un peu plus en
+  // arrière pendant que le corps se tasse, puis s'abat d'un coup, le maillet tourne avec le poignet
+  // (t.tourne) et le corps plonge avec lui ; impact au bout du coup, puis tout revient brandi. Deux
+  // coups : à gauche (le bras le long du corps, la tête du maillet au sol à côté de lui) ou devant (le
+  // bras en travers, la tête du maillet à ses pieds). Un coup en cours est repris là où il en est.
+  const COUPS = {
+    gauche: { epaule: 10, coude: -10, tourne: -140, rot: -5, arme: 25 },
+    devant: { epaule: -30, coude: -15, tourne: 140, rot: 3, arme: -25 },
+  };
+  function frapper(vers, impact) {
+    const t = tenu.current, gsap = gsapRef.current, a = anim.current;
+    if (!t || !gsap || !a || a.calme) { impact?.(); return; }
+    const p = t.p.bras, e = a.etat, c = COUPS[vers] ?? COUPS.devant;
+    gsap.killTweensOf(t);
+    gsap.killTweensOf(t.pose);
+    gsap.timeline()
+      .to(t.pose, { epaule: p.epaule + 15, coude: p.coude + 20, duration: 0.06, ease: 'power2.out' }, 0)
+      .to(t, { tourne: c.arme, duration: 0.06, ease: 'power2.out' }, 0)
+      .to(e, { ecrase: 0.07, corpsRot: -c.rot / 2, duration: 0.06, ease: 'power2.out' }, 0)
+      .to(t.pose, { epaule: c.epaule, coude: c.coude, duration: 0.09, ease: 'power3.in' }, 0.06)
+      .to(t, { tourne: c.tourne, duration: 0.09, ease: 'power3.in' }, 0.06)
+      .to(e, { ecrase: -0.06, corpsRot: c.rot, duration: 0.09, ease: 'power2.in' }, 0.06)
+      .call(() => impact?.(), null, 0.15)
+      .to(t.pose, { epaule: p.epaule, coude: p.coude, duration: 0.3, ease: 'power2.inOut' }, 0.26)
+      .to(t, { tourne: 0, duration: 0.3, ease: 'power2.inOut' }, 0.26)
+      .to(e, { ecrase: 0, corpsRot: 0, duration: 0.34, ease: 'power2.inOut' }, 0.22);
   }
 
   const Tag = onClick ? 'button' : 'div';
