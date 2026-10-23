@@ -32,7 +32,9 @@ function chargerScript(src) {
     s.async = false;
     s.dataset.pantin = src;
     s.onload = () => { s.dataset.charge = '1'; ok(); };
-    s.onerror = ko;
+    // Échec : on retire la balise, sinon un nouvel essai la retrouverait morte (ses écouteurs
+    // ne se redéclencheraient jamais) et attendrait indéfiniment au lieu de retélécharger.
+    s.onerror = () => { s.remove(); ko(new Error(`Pantin : ${src} n'a pas pu être chargé`)); };
     document.head.appendChild(s);
   });
 }

@@ -1,12 +1,13 @@
 import { Mascot } from './Mascot';
 import { Component } from 'react';
 import { hideSplash } from '../services/splash';
+import { estErreurDeChunk, rechargerUneFois, rechargementEnCours } from '../utils/rechargement';
 import './ErrorBoundary.css';
 
 export class ErrorBoundary extends Component {
   constructor(props) {
     super(props);
-    this.state = { hasError: false, error: null };
+    this.state = { hasError: false, error: null, rechargement: false };
   }
 
   static getDerivedStateFromError(error) {
@@ -15,17 +16,26 @@ export class ErrorBoundary extends Component {
 
   componentDidCatch(error, info) {
     console.error('[Réviz] Erreur capturée :', error, info.componentStack);
+    // Chunk disparu après une mise à jour : un rechargement (une seule fois) récupère la
+    // nouvelle version, sans passer par l'écran d'erreur. Déjà tenté : « Oups » s'affiche.
+    if (estErreurDeChunk(error)) {
+      const rechargement = rechargerUneFois();
+      this.setState({ rechargement });
+      if (rechargement) return;
+    }
     // L'écran d'erreur doit être visible même si le plantage précède le premier rendu.
     hideSplash();
   }
 
   handleReload = () => {
-    this.setState({ hasError: false, error: null });
+    this.setState({ hasError: false, error: null, rechargement: false });
     window.location.href = '/';
   };
 
   render() {
     if (!this.state.hasError) return this.props.children;
+    // Rechargement en cours (ou déjà lancé par vite:preloadError) : rien à montrer entre-temps.
+    if (this.state.rechargement || (estErreurDeChunk(this.state.error) && rechargementEnCours())) return null;
 
     // Écran statique (pas de Pantin ni de dépendance chargée à la demande) : l'app vient de planter.
     return (

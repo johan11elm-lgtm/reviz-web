@@ -18,6 +18,7 @@ import { track } from './services/statsService.js'
 import { INTERNE } from './services/interne.js'
 import { brancherPosthog } from './services/mesure.js'
 import { ecouterInstallation, detecterPlateforme } from './utils/installation.js'
+import { ecouterErreurDeChunk } from './utils/rechargement.js'
 
 // App native (Capacitor) : layout plein écran forcé quelle que soit la
 // largeur (les iPhone Pro Max à 440 pt et les iPad tomberaient sinon dans
@@ -43,6 +44,11 @@ if (IS_NATIVE) {
 if (typeof history !== 'undefined' && 'scrollRestoration' in history) {
   history.scrollRestoration = 'manual';
 }
+
+// Mise à jour pendant qu'un onglet ou une PWA est ouvert : un chunk paresseux de l'ancienne
+// version n'existe plus, un rechargement unique récupère la nouvelle (voir utils/rechargement.js).
+// Branché avant le render : la première navigation paresseuse en a déjà besoin.
+ecouterErreurDeChunk();
 
 // ── Render first, load monitoring after ─────────────────────────────
 createRoot(document.getElementById('root')).render(
@@ -83,6 +89,13 @@ const loadMonitoring = () => {
       window.removeEventListener('error', bufferEarlyError);
       window.removeEventListener('unhandledrejection', bufferEarlyError);
       earlyErrors.splice(0).forEach(err => Sentry.captureException(err));
+    }).catch(() => {
+      // Chargement de Sentry impossible (réseau coupé à cet instant) : la surveillance
+      // reste muette, sans bruit. Le tampon ne servirait plus à rien : on le vide et on
+      // le débranche pour qu'il ne grossisse pas indéfiniment.
+      earlyErrors.length = 0;
+      window.removeEventListener('error', bufferEarlyError);
+      window.removeEventListener('unhandledrejection', bufferEarlyError);
     });
   }
 

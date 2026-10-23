@@ -1,12 +1,15 @@
 // -------------------------------------------------------
 // Réviz — Service Worker (cache offline)
 // -------------------------------------------------------
+// v6 : plus de HTML en cache pour un script/style/police/image (Vercel répond index.html en
+// 200 pour un fichier haché disparu : le chunk manquant restait figé) ; seuls les /assets/
+// hachés restent cache-first, le reste (moteur du pantin…) passe par le réseau d'abord.
 // v5 : /ingest (relais PostHog) jamais intercepté ; purge ce qu'un SW
 // précédent aurait pu mettre en cache sous /ingest.
 // v4 : nouvelle icône (mascotte 3D, 8 octobre 2026) — force le rechargement des icônes.
 // v3 : purge les mascottes PNG pré-détourage et adopte
 // stale-while-revalidate pour les images non-hashées.
-const CACHE_NAME = 'reviz-v5';
+const CACHE_NAME = 'reviz-v6';
 const STATIC_ASSETS = [
   '/',
   '/manifest.json',
@@ -16,6 +19,17 @@ const STATIC_ASSETS = [
   '/icon-192.png',
   '/icon-512.png',
 ];
+
+// Une réponse ne va au cache que si elle est valide ET du bon type : pour un script, un style,
+// une police ou une image, une page HTML n'est jamais la bonne réponse (c'est la réécriture
+// vers index.html d'un fichier disparu), la mémoriser figerait l'erreur.
+function peutEtreMisEnCache(request, response) {
+  if (!response.ok) return false;
+  if (['script', 'style', 'font', 'image'].includes(request.destination) || new URL(request.url).pathname.startsWith('/assets/')) {
+    return !(response.headers.get('content-type') || '').includes('text/html');
+  }
+  return true;
+}
 
 // Install: cache le shell de l'app
 self.addEventListener('install', (event) => {
@@ -55,18 +69,35 @@ self.addEventListener('fetch', (event) => {
   // Bundles Vite hashés (/assets/xxx-<hash>.js|css|woff2) : contenu immuable
   // → cache-first strict, jamais périmé par construction.
   const isHashedAsset = url.pathname.startsWith('/assets/');
-  if (isHashedAsset || request.destination === 'script' || request.destination === 'style' || request.destination === 'font') {
+  if (isHashedAsset) {
     event.respondWith(
       caches.match(request).then((cached) => {
         if (cached) return cached;
         return fetch(request).then((response) => {
-          if (response.ok) {
+          if (peutEtreMisEnCache(request, response)) {
             const clone = response.clone();
             caches.open(CACHE_NAME).then((cache) => cache.put(request, clone));
           }
           return response;
         });
       })
+    );
+    return;
+  }
+
+  // Scripts, styles et polices non hachés (moteur du pantin /pantin/moteur/*.js…) : réseau
+  // d'abord, pour que le moteur reste au diapason de l'app ; le cache ne sert qu'hors ligne.
+  if (request.destination === 'script' || request.destination === 'style' || request.destination === 'font') {
+    event.respondWith(
+      fetch(request)
+        .then((response) => {
+          if (peutEtreMisEnCache(request, response)) {
+            const clone = response.clone();
+            caches.open(CACHE_NAME).then((cache) => cache.put(request, clone));
+          }
+          return response;
+        })
+        .catch(() => caches.match(request).then((cached) => cached || Response.error()))
     );
     return;
   }
@@ -80,7 +111,7 @@ self.addEventListener('fetch', (event) => {
         const cached = await cache.match(request);
         const refresh = fetch(request)
           .then((response) => {
-            if (response.ok) cache.put(request, response.clone());
+            if (peutEtreMisEnCache(request, response)) cache.put(request, response.clone());
             return response;
           })
           .catch(() => cached);
@@ -95,8 +126,10 @@ self.addEventListener('fetch', (event) => {
     event.respondWith(
       fetch(request)
         .then((response) => {
-          const clone = response.clone();
-          caches.open(CACHE_NAME).then((cache) => cache.put(request, clone));
+          if (response.ok) {
+            const clone = response.clone();
+            caches.open(CACHE_NAME).then((cache) => cache.put(request, clone));
+          }
           return response;
         })
         .catch(() => caches.match('/') || caches.match(request))
