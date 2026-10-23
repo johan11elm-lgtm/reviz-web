@@ -20,6 +20,7 @@ const JEUX = {
   magie: { nom: 'Le tour de magie', image: '/jeux/magie/carte-dos.webp' },
   lance: { nom: 'Réviz lance', image: '/pantin/accessoires/boule.webp' },
   buzzer: { nom: 'Réviz se trompe\u00a0?', image: '/jeux/buzzer/buzzer-rouge-dome.webp' },
+  pizzeria: { nom: 'La pizzeria\u00a0!', image: '/jeux/pizzeria/pizza.webp' },
 };
 
 // Étoiles autour de la carte : position (en % de la carte), taille relative, angle.

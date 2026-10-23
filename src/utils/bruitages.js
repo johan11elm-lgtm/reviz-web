@@ -134,6 +134,29 @@ const SONS = {
     note(a, { f: 1046, t: 0.12, d: 0.5, type: 'square', vol: 0.06 });
     note(a, { f: 1318, t: 0.12, d: 0.5, type: 'triangle', vol: 0.06 });
   },
+  // ── La pizzeria ! ──
+  // Une part qu'on décolle : le fromage qui file (petit « plop » mou qui monte).
+  part: a => { note(a, { f: 380, f2: 620, d: 0.09, type: 'triangle', vol: 0.12 }); souffle(a, { d: 0.06, f: 1400, q: 1, vol: 0.05 }); },
+  // Elle se pose dans l'assiette : un petit choc de céramique, mat.
+  assiette: a => { note(a, { f: 1650, d: 0.12, vol: 0.05 }); note(a, { f: 2480, d: 0.06, vol: 0.025 }); souffle(a, { d: 0.04, f: 900, q: 0.8, vol: 0.06, type: 'lowpass' }); },
+  // Une part qui retourne sur la pizza : le plop à l'envers.
+  retour: a => note(a, { f: 560, f2: 330, d: 0.09, type: 'triangle', vol: 0.1 }),
+  // Servir : la sonnette du comptoir (ding !), un seul coup bien clair qui résonne.
+  sonnette: a => { note(a, { f: 2093, d: 1.1, vol: 0.13 }); note(a, { f: 2093 * 2.4, d: 0.3, vol: 0.03 }); note(a, { f: 2100, d: 1.1, vol: 0.05 }); },
+  // Le client emporte l'assiette : un glissement sur le bois.
+  emporte: a => souffle(a, { d: 0.3, f: 500, f2: 1600, q: 0.8, vol: 0.08 }),
+  // La nouvelle pizza arrive sur sa planche.
+  planche: a => { note(a, { f: 150, f2: 110, d: 0.12, type: 'triangle', vol: 0.16 }); souffle(a, { d: 0.25, f: 700, f2: 300, q: 0.7, vol: 0.06 }); },
+  // Réviz croque : un « crounch » de croûte (bruit sec, grave).
+  croque: a => { souffle(a, { d: 0.09, f: 1100, q: 0.9, vol: 0.18 }); souffle(a, { t: 0.04, d: 0.07, f: 2400, q: 1.2, vol: 0.08 }); note(a, { f: 140, f2: 90, d: 0.07, type: 'triangle', vol: 0.1 }); },
+  // Le baiser du chef : un petit « mwah » (bruit court + note qui monte).
+  bisou: a => { souffle(a, { d: 0.06, f: 2200, q: 2, vol: 0.06 }); note(a, { f: 700, f2: 1300, t: 0.03, d: 0.16, vol: 0.07 }); },
+  // Les 3 dernières secondes : un tic de bloc de bois, sec et bien présent (au-dessus de la musique).
+  tic: a => { note(a, { f: 1250, d: 0.07, type: 'triangle', vol: 0.22 }); souffle(a, { d: 0.03, f: 3000, q: 3, vol: 0.12 }); },
+  // Temps écoulé : la sonnerie du minuteur de cuisine (une clochette frappée très vite), pas le buzzer.
+  minuteur: a => { for (let i = 0; i < 12; i++) { note(a, { f: 2350, t: i * 0.055, d: 0.09, vol: 0.09 }); note(a, { f: 3520, t: i * 0.055, d: 0.05, vol: 0.03 }); } },
+  // Le client tapote le comptoir, impatient.
+  tapote: a => [0, 0.12, 0.24].forEach(t => note(a, { f: 230, f2: 170, t, d: 0.06, type: 'triangle', vol: 0.12 })),
 };
 
 export function jouer(nom) {

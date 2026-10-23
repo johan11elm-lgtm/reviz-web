@@ -15,6 +15,8 @@ import { musiqueLance } from '../utils/musiqueLance';
 import { JeuLance, partieLance, mancheLance } from './JeuLance';
 import { musiqueBuzzer } from '../utils/musiqueBuzzer';
 import { PlateauBuzzer, mancheBuzzer, partieBuzzer, TEMPO_BUZZER } from './jeux/RevizSeTrompe';
+import { musiquePizzeria } from '../utils/musiquePizzeria';
+import { PlateauPizzeria, manchePizzeria, partiePizzeria, TEMPO_PIZZERIA } from './jeux/Pizzeria';
 import { useIsDesktop } from '../hooks/useMediaQuery';
 import { TransitionJeux, DUREES_TRANSITION } from './jeux/TransitionJeux';
 import './Jeux.css';
@@ -32,9 +34,10 @@ import './Jeux.css';
  * ?jeu=prototype rejoue les 3 essais du matin (pêche, valise, paires).
  * Réviz lance (22/10, JeuLance.jsx) : la boule à lancer dans le bon panier.
  * Réviz se trompe ? (23/10, pages/jeux/RevizSeTrompe.jsx) : vrai ou faux au buzzer, plateau télé.
- * L'écran de choix propose les 3 jeux séparément, plus une Partie rapide qui les mélange (6 tours,
- * deux passages des 3 jeux dans un ordre au hasard, de plus en plus rapides).
- * ?rapide=melange|magie|lance|buzzer lance directement (?jeu=buzzer reste accepté).
+ * La pizzeria ! (23/10, pages/jeux/Pizzeria.jsx) : servir la fraction de pizza du ticket.
+ * L'écran de choix propose les 4 jeux séparément, plus une Partie rapide qui les mélange (6 tours,
+ * chaque jeu au moins une fois, dans un ordre au hasard, de plus en plus rapides).
+ * ?rapide=melange|magie|lance|buzzer|pizzeria lance directement (?jeu=buzzer reste accepté).
  * ?classe=5ème&matiere=Histoire&chapitre=<id> lance directement un chapitre.
  */
 
@@ -73,19 +76,19 @@ export function mancheMagie(theme, niveau) {
 /** Le tour de magie seul : 3 thèmes, 3 tours qui accélèrent. */
 export const partieMagieSeule = () => themesDePartie(TOURS_MAGIE.length).map((theme, i) => mancheMagie(theme, i));
 /**
- * Partie rapide : les 3 jeux mélangés, 6 tours. Deux passages des 3 jeux, chacun dans un ordre au
- * hasard (sans le même jeu deux fois de suite), au niveau 0 puis 1, puis le dernier tour au niveau 2 ;
+ * Partie rapide : les 4 jeux mélangés, 6 tours. Les 4 jeux dans un ordre au hasard, puis 2 d'entre
+ * eux une seconde fois (jamais le même jeu deux fois de suite), aux niveaux 0, 0, 1, 1, 2, 2 ;
  * six thèmes tous différents.
  */
-const JEUX = { magie: mancheMagie, lance: mancheLance, buzzer: mancheBuzzer };
+const JEUX = { magie: mancheMagie, lance: mancheLance, buzzer: mancheBuzzer, pizzeria: manchePizzeria };
 export function partieMelangee() {
   const themes = themesDePartie(6);
   let ordre;
-  do { ordre = [...melange(Object.keys(JEUX)), ...melange(Object.keys(JEUX))]; } while (ordre[2] === ordre[3]);
+  do { ordre = [...melange(Object.keys(JEUX)), ...melange(Object.keys(JEUX))].slice(0, 6); } while (ordre.some((j, i) => j === ordre[i + 1]));
   const niveaux = [0, 0, 1, 1, 2, 2];
   return ordre.map((jeu, i) => JEUX[jeu](themes[i], niveaux[i]));
 }
-const ACCESSOIRES_JEU = { magie: ['chapeau', 'baguette'], lance: ['bandeau', 'boule'], buzzer: ['micro', 'noeud'] };
+const ACCESSOIRES_JEU = { magie: ['chapeau', 'baguette'], lance: ['bandeau', 'boule'], buzzer: ['micro', 'noeud'], pizzeria: ['toque', 'tablier'] };
 function partieMagie(data, branches) {
   const paires = pairesCourtes(data, branches);
   if (paires.length < 2) return [];
@@ -457,15 +460,15 @@ export default function Jeux() {
   }, [classe, mode]);
   const nouvellePartie = () => { setIdx(0); setScore(0); setBonnes(0); setErreurs([]); setExpire(-1); finie.current = -1; setPhase('consigne'); };
   // Les 3 jeux séparément, et la Partie rapide qui les mélange.
-  const RAPIDES = { melange: partieMelangee, magie: partieMagieSeule, lance: partieLance, buzzer: partieBuzzer };
-  const TITRES = { melange: 'Partie rapide', magie: 'Le tour de magie', lance: 'Réviz lance', buzzer: 'Réviz se trompe ?' };
+  const RAPIDES = { melange: partieMelangee, magie: partieMagieSeule, lance: partieLance, buzzer: partieBuzzer, pizzeria: partiePizzeria };
+  const TITRES = { melange: 'Partie rapide', magie: 'Le tour de magie', lance: 'Réviz lance', buzzer: 'Réviz se trompe ?', pizzeria: 'La pizzeria !' };
   const lancerRapide = (jeu = 'melange') => {
     setChapitre({ matiere: 'Réviz Games', titre: TITRES[jeu], rapide: jeu });
     setPartie(RAPIDES[jeu]());
     nouvellePartie();
   };
   useEffect(() => {
-    const r = params.get('rapide') ?? (params.get('jeu') === 'buzzer' ? 'buzzer' : null);
+    const r = params.get('rapide') ?? (['buzzer', 'pizzeria'].includes(params.get('jeu')) ? params.get('jeu') : null);
     if (r) lancerRapide(RAPIDES[r] ? r : 'melange');
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -487,6 +490,7 @@ export default function Jeux() {
     magie: { m: musiqueMagie, tempo: n => Math.round(116 * (1 + n * 0.08)) },
     lance: { m: musiqueLance, tempo: n => Math.round(126 * (1 + n * 0.08)) },
     buzzer: { m: musiqueBuzzer, tempo: TEMPO_BUZZER },
+    pizzeria: { m: musiquePizzeria, tempo: TEMPO_PIZZERIA },
   };
   const musique = (phase === 'consigne' || phase === 'jeu') ? MUSIQUES[manche?.type] : null;
   const tempoTour = musique ? musique.tempo(manche.niveau ?? idx) : 0;
@@ -496,7 +500,7 @@ export default function Jeux() {
     musique.m.regler({ bpm: tempoTour });
     musique.m.demarrer();
   }, [musique?.m, tempoTour, son]); // eslint-disable-line react-hooks/exhaustive-deps
-  useEffect(() => () => { musiqueMagie.arreter(); musiqueLance.arreter(); musiqueBuzzer.arreter(); }, []);
+  useEffect(() => () => { musiqueMagie.arreter(); musiqueLance.arreter(); musiqueBuzzer.arreter(); musiquePizzeria.arreter(); }, []);
 
   // Consigne : 1,7 s (ou une touche), puis le chrono part.
   useEffect(() => {
@@ -576,7 +580,7 @@ export default function Jeux() {
         {mode === 'magie' && (
           <>
             <button type="button" className="jx-rapide jx-rapide--melange" onClick={() => lancerRapide('melange')}>
-              <span className="jx-rapide-txt"><b>Partie rapide</b><span>Les 3 jeux mélangés, 6 tours de plus en plus rapides</span></span>
+              <span className="jx-rapide-txt"><b>Partie rapide</b><span>Les 4 jeux mélangés, 6 tours de plus en plus rapides</span></span>
               <span className="jx-jouer" aria-hidden="true">Jouer</span>
             </button>
             <span className="jx-surtitre jx-ou">Ou un seul jeu, 3 tours</span>
@@ -591,6 +595,10 @@ export default function Jeux() {
               </button>
               <button type="button" className="jx-rapide jx-rapide--buzzer" onClick={() => lancerRapide('buzzer')}>
                 <span className="jx-rapide-txt"><b>Réviz se trompe ?</b><span>Vrai ou faux : buzze quand il dit une bêtise</span></span>
+                <span className="jx-jouer" aria-hidden="true">Jouer</span>
+              </button>
+              <button type="button" className="jx-rapide jx-rapide--pizzeria" onClick={() => lancerRapide('pizzeria')}>
+                <span className="jx-rapide-txt"><b>La pizzeria !</b><span>Sers la bonne fraction de pizza</span></span>
                 <span className="jx-jouer" aria-hidden="true">Jouer</span>
               </button>
             </div>
@@ -686,6 +694,18 @@ export default function Jeux() {
       <>
         {transitionEl}
       <PlateauBuzzer manche={manche} idx={idx} total={partie.length} phase={phase} expire={expire === idx} score={score}
+        onBon={onBon} onFaux={onFaux} onTermine={onTermine} onDemarrer={() => setPhase('jeu')}
+        fermer={fermer} boutonSon={boutonSon} isDesktop={isDesktop} hauteurEcran={hauteurEcran} />
+      </>
+    );
+  }
+
+  // ── La pizzeria ! : le comptoir de Réviz pizzaïolo, la pizza coupée, le ticket de commande ──
+  if (manche.type === 'pizzeria') {
+    return (
+      <>
+        {transitionEl}
+      <PlateauPizzeria manche={manche} idx={idx} total={partie.length} phase={phase} expire={expire === idx} score={score}
         onBon={onBon} onFaux={onFaux} onTermine={onTermine} onDemarrer={() => setPhase('jeu')}
         fermer={fermer} boutonSon={boutonSon} isDesktop={isDesktop} hauteurEcran={hauteurEcran} />
       </>

@@ -122,6 +122,11 @@ const ACCESSOIRES = {
   // Réviz se trompe ? : le présentateur, micro levé vers la bouche et nœud papillon sous le sourire.
   micro: { main: 'g', bras: { epaule: 20, coude: -70 }, prise: [104, 150], ancre: [0.5, 0.72], w: 282, h: 600, angle: 15 },
   noeud: { x: 1018, y: 1344, w: 520, h: 315, enfile: true },
+  // La pizzeria : toque et tablier à bavette, découpés sur Réviz généré en pizzaïolo et calés par
+  // les pupilles (assets-src/jeux/pizzeria/decouper.py) ; la part de pizza qu'il croque (Pantin.croquer).
+  toque: { x: 677, y: -238, w: 1162, h: 725 },
+  tablier: { x: 738, y: 1485, w: 1038, h: 568, enfile: true },
+  part: { main: 'g', bras: { epaule: 60, coude: -125 }, prise: [104, 150], ancre: [0.5, 0.16], w: 620, h: 705, angle: 160 },
 };
 const NS = 'http://www.w3.org/2000/svg';
 function imageSvg(href, { x, y, w, h }) {
@@ -337,7 +342,45 @@ export const Pantin = forwardRef(function Pantin(
       t.el.style.opacity = '';
       if (!anim.current?.calme) gsap.fromTo(t.el, { scale: 0 }, { scale: 1, svgOrigin: `${t.p.prise[0]} ${t.p.prise[1]}`, duration: 0.3, ease: 'back.out(2.2)' });
     },
+    // La pizzeria : la part en trop qu'il croque en cachette (bouchee : à chaque coup de dents).
+    croquer: ({ bouchee, fini } = {}) => aLaBouche('part', { bouchee, fini }),
   }), []);
+
+  // Un objet porté à la bouche le temps d'un geste (la part de pizza) : le bras prend la pose de
+  // l'objet (dosée par k), l'objet rapetisse à chaque bouchée pendant qu'il mâche, puis le bras
+  // retombe. Chaque étape part de l'arrêt et s'y termine (inOut) : pas d'à-coup.
+  function aLaBouche(nom, { bouchee, fini } = {}) {
+    const gsap = gsapRef.current, a = anim.current, rig = rigRef.current;
+    if (!gsap || !a || !rig || tenu.current || a.calme) { fini?.(); return; }
+    const p = ACCESSOIRES[nom];
+    const el = document.createElementNS(NS, 'g');
+    const objet = imageSvg(`${BASE}accessoires/${nom}.webp`, { x: p.prise[0] - p.ancre[0] * p.w, y: p.prise[1] - p.ancre[1] * p.h, w: p.w, h: p.h });
+    el.appendChild(objet);
+    const bras = rig.brasEl[p.main];
+    const main = bras.mains.relachee;
+    main.insertBefore(el, main.firstChild);
+    bras.g.appendChild(bras.main);
+    const t = { p, el, k: 0, pose: { ...p.bras } };
+    tenu.current = t;
+    const origine = `${p.prise[0]} ${p.prise[1]}`;
+    const tl = gsap.timeline({ onComplete: () => {
+      el.remove();
+      if (tenu.current === t) { tenu.current = null; bras.g.insertBefore(bras.main, bras.g.querySelector('.b-tube')); }
+      fini?.();
+    } });
+    tl.to(t, { k: 1, duration: 0.24, ease: 'power2.inOut' }, 0);
+    tl.fromTo(objet, { scale: 0 }, { scale: 1, svgOrigin: origine, duration: 0.24, ease: 'power2.out' }, 0);
+    // Trois bouchées : la main pousse la part vers la bouche, il mâche, elle a rapetissé.
+    [0.62, 0.32, 0].forEach((reste, i) => {
+      const t0 = 0.3 + i * 0.34;
+      tl.to(t.pose, { coude: p.bras.coude - 12, duration: 0.12, ease: 'sine.inOut' }, t0)
+        .to(t.pose, { coude: p.bras.coude, duration: 0.16, ease: 'sine.inOut' }, t0 + 0.12)
+        .to(objet, { scale: reste, svgOrigin: origine, duration: 0.1, ease: 'power2.inOut' }, t0 + 0.1)
+        .to(a.etat, { ecrase: 0.05, duration: 0.12, ease: 'sine.inOut', yoyo: true, repeat: 1 }, t0 + 0.06)
+        .call(() => { bouchee?.(i); a.parler(minutageTexte('mmm')); }, null, t0 + 0.1);
+    });
+    tl.to(t, { k: 0, duration: 0.34, ease: 'power2.inOut' }, 1.38);
+  }
 
   // Le lancer, bras armé au-dessus de la tête (pose de l'objet tenu) : le coude se replie en arrière
   // pendant que le corps se tasse, puis l'avant-bras fouette vers l'avant ; la boule part au sommet du
