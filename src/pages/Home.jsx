@@ -26,7 +26,7 @@ import { RevizPlusAnnonce, annonceRevizPlusVue } from '../components/RevizPlusAn
 import { ThemeEssai, essaiThemeVu } from '../components/ThemeEssai';
 import { useTheme } from '../context/ThemeContext';
 import { themeById } from '../utils/themes';
-import { etatDuJour } from '../services/partieDuJourService';
+import { etatDuJour, synchroniserStats } from '../services/partieDuJourService';
 import './Home.css';
 
 /*
@@ -122,7 +122,19 @@ export default function Home() {
   }, []);
 
   // La partie du jour des Réviz Games compte aussi pour la série (jouer, c'est réviser).
-  const jourJeux = useMemo(() => etatDuJour(currentUser?.uid ?? null), [currentUser?.uid]);
+  const uidJeux = currentUser?.uid ?? null;
+  const [jourJeux, setJourJeux] = useState(() => etatDuJour(uidJeux));
+  useEffect(() => {
+    // Reprend la série et le score d'un autre appareil sans passer par /jeux (aucune autre lecture de
+    // users/{uid} ici : AuthContext ne garde pas le champ jeux).
+    let vivant = true;
+    setJourJeux(etatDuJour(uidJeux));
+    synchroniserStats(uidJeux).then(() => { if (vivant) setJourJeux(etatDuJour(uidJeux)); });
+    // Un accueil resté ouvert après minuit : au retour au premier plan on recalcule le jour.
+    const maj = () => { if (document.visibilityState === 'visible') setJourJeux(etatDuJour(uidJeux)); };
+    document.addEventListener('visibilitychange', maj);
+    return () => { vivant = false; document.removeEventListener('visibilitychange', maj); };
+  }, [uidJeux]);
   const streak = useMemo(() => computeStreak([...loadRevisions(), ...jourJeux.jours.map(j => ({ revisedAt: `${j}T12:00:00` }))], 'revisedAt'), [allLessons, jourJeux]);
   const { level } = useMemo(() => computeLevel(allLessons), [allLessons]);
   const lastLesson = allLessons[0] ?? null;
@@ -424,7 +436,7 @@ export default function Home() {
         <span className="hm-jeux-titre">La partie du jour</span>
         <span className="hm-jeux-sous">
           {jourJeux.faite
-            ? `Faite ! ${jourJeux.score?.toLocaleString('fr-FR') ?? ''} points. Rejoue ou essaie les 6 jeux.`
+            ? `Faite !${jourJeux.score != null ? ` ${jourJeux.score.toLocaleString('fr-FR')} points.` : ''} Rejoue ou essaie les 6 jeux.`
             : '6 mini-jeux de 15 secondes, la même partie pour tout le monde.'}
         </span>
         <span className="hm-jeux-btn">{jourJeux.faite ? 'Voir les jeux' : 'Jouer'}</span>

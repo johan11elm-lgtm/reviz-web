@@ -75,6 +75,17 @@ export function etatDuJour(uid, aujourdhui = jourParis()) {
   }
 }
 
+/**
+ * L'état du jour recalculé pour un autre jour à partir d'un état déjà lu (sans relire le stockage) :
+ * un accueil ou un hub restés ouverts après minuit ne gardent pas « Faite ! ». Le score du nouveau jour
+ * n'est connu que s'il est déjà dans l'état (sinon null : l'affichage tient sans le score).
+ */
+export function etatPourLeJour(etat, aujourdhui = jourParis()) {
+  if (!etat || etat.jour === aujourdhui) return etat
+  const jours = etat.jours ?? []
+  return { ...etat, jour: aujourdhui, faite: jours.includes(aujourdhui), score: null, serie: serieDe(jours, aujourdhui) }
+}
+
 /** Fin de la partie du jour : le jour compte pour la série, le meilleur score du jour et le record. */
 export function enregistrerPartieDuJour(uid, score, aujourdhui = jourParis()) {
   const s = lireStats(uid)
@@ -85,24 +96,46 @@ export function enregistrerPartieDuJour(uid, score, aujourdhui = jourParis()) {
   const nouveauRecord = score > s.record
   s.record = Math.max(s.record, score)
   ecrire(uid, s)
-  if (uid && !isGuestUid(uid)) {
-    updateDoc(doc(db, 'users', uid), { 'jeux.jours': arrayUnion(aujourdhui), 'jeux.record': s.record }).catch(() => {})
-  }
+  // Vers le compte : on relit d'abord ce qu'il a (un autre appareil a pu jouer), on n'écrit que ce qui
+  // lui manque et jamais un record ou un score plus petit. Raté (hors ligne) : repart à la prochaine synchro.
+  if (uid && !isGuestUid(uid)) fusionnerAvecCompte(uid, aujourdhui).catch(() => {})
   return { ...etatDuJour(uid, aujourdhui), nouveauRecord }
 }
 
-/** Au démarrage : on reprend les jours et le record gardés sur le compte (autre appareil). */
-export async function synchroniserStats(uid) {
+const nombreOk = n => (typeof n === 'number' && Number.isFinite(n) && n >= 0 ? n : 0)
+
+/**
+ * Fusionne le local et users/{uid}.jeux dans les deux sens : l'appareil reprend les jours, le record
+ * et les scores des 60 derniers jours du compte ; le compte reçoit les jours, le score et le record
+ * qu'il n'a pas encore (arrayUnion et maximum, jamais plus petit que ce qu'il a). Lance si la lecture échoue.
+ */
+async function fusionnerAvecCompte(uid, aujourdhui = jourParis()) {
+  const snap = await getDoc(doc(db, 'users', uid))
+  const j = snap.data()?.jeux ?? {}
+  const compte = { jours: Array.isArray(j.jours) ? j.jours : [], record: nombreOk(j.record), scores: j.scores && typeof j.scores === 'object' ? j.scores : {} }
+  const s = lireStats(uid)
+  s.jours = [...new Set([...s.jours, ...compte.jours])].sort().slice(-400)
+  s.record = Math.max(s.record, compte.record)
+  const scores = { ...s.scores }
+  for (const [jour, v] of Object.entries(compte.scores)) scores[jour] = Math.max(nombreOk(v), scores[jour] ?? 0)
+  for (const jour of Object.keys(scores)) if (ecartJours(jour, aujourdhui) > 60) delete scores[jour]
+  s.scores = scores
+  ecrire(uid, s)
+
+  const maj = {}
+  const joursManquants = s.jours.filter(x => !compte.jours.includes(x))
+  if (joursManquants.length) maj['jeux.jours'] = arrayUnion(...joursManquants)
+  if (s.record > compte.record) maj['jeux.record'] = s.record
+  for (const [jour, v] of Object.entries(scores)) if (v > nombreOk(compte.scores[jour]) || !(jour in compte.scores)) maj[`jeux.scores.${jour}`] = v
+  if (Object.keys(maj).length) await updateDoc(doc(db, 'users', uid), maj)
+  return s
+}
+
+/** Au démarrage : on reprend les jours, le record et les scores du compte (autre appareil), et on lui renvoie les nôtres. */
+export async function synchroniserStats(uid, aujourdhui = jourParis()) {
   if (!uid || isGuestUid(uid)) return lireStats(uid)
   try {
-    const snap = await getDoc(doc(db, 'users', uid))
-    const j = snap.data()?.jeux
-    if (!j) return lireStats(uid)
-    const s = lireStats(uid)
-    s.jours = [...new Set([...s.jours, ...(j.jours ?? [])])].sort().slice(-400)
-    s.record = Math.max(s.record, j.record ?? 0)
-    ecrire(uid, s)
-    return s
+    return await fusionnerAvecCompte(uid, aujourdhui)
   } catch {
     return lireStats(uid)
   }

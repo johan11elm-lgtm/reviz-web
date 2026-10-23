@@ -1,3 +1,6 @@
+import { useEffect, useMemo, useState } from 'react';
+import { etatPourLeJour } from '../../services/partieDuJourService';
+import { jourParis } from '../../services/retourService';
 import './HubJeux.css';
 
 /**
@@ -34,7 +37,16 @@ const Fleche = () => (
 const nombre = n => n.toLocaleString('fr-FR');
 const dateDuJour = () => new Intl.DateTimeFormat('fr-FR', { weekday: 'long', day: 'numeric', month: 'long', timeZone: 'Europe/Paris' }).format(new Date());
 
-export function HubJeux({ jour, onJouer, onFermer, isDesktop }) {
+export function HubJeux({ jour: jourRecu, onJouer, onFermer, isDesktop }) {
+  // Un hub resté ouvert après minuit ne garde pas « Faite ! » : au retour au premier plan on recalcule le jour.
+  const [aujourdhui, setAujourdhui] = useState(() => jourParis());
+  useEffect(() => {
+    const maj = () => { if (document.visibilityState === 'visible') setAujourdhui(jourParis()); };
+    document.addEventListener('visibilitychange', maj);
+    return () => document.removeEventListener('visibilitychange', maj);
+  }, []);
+  // Le plus récent des deux jours : un état reçu déjà calculé pour le lendemain n'est pas ramené à la veille.
+  const jour = useMemo(() => etatPourLeJour(jourRecu, jourRecu?.jour > aujourdhui ? jourRecu.jour : aujourdhui), [jourRecu, aujourdhui]);
   const { faite, score, serie, record } = jour;
   return (
     <div className={`app app--no-halo hb-page${isDesktop ? ' hb-page--large' : ''}`}>
@@ -65,7 +77,9 @@ export function HubJeux({ jour, onJouer, onFermer, isDesktop }) {
             <h2 id="hb-jour-titre" className="hb-jour-titre">La partie du jour</h2>
             <p className="hb-jour-sous">
               {faite
-                ? <>Ton score&nbsp;: <b>{nombre(score ?? 0)}</b>. Reviens demain pour ta série&nbsp;!</>
+                ? (score != null
+                  ? <>Ton score&nbsp;: <b>{nombre(score)}</b>. Reviens demain pour ta série&nbsp;!</>
+                  : 'Partie du jour faite. Reviens demain pour ta série\u00a0!')
                 : 'Les 6 jeux, la même partie pour tout le monde aujourd’hui.'}
             </p>
             <button type="button" className={`hb-jouer${faite ? ' hb-jouer--doux' : ''}`} onClick={() => onJouer('jour')}>
