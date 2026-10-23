@@ -5,21 +5,13 @@
 // Ici, Firestore « gèle » juste après la création du compte (requêtes sans
 // réponse, comme un flux WebChannel bloqué sur Safari).
 import { test, expect } from '@playwright/test'
-import { mockApiRoutes, remplirNaissance } from './helpers'
+import { mockApiRoutes, remplirTunnelInscription, uniqueEmail } from './helpers'
 
 async function creerCompteMineur(page) {
   await page.goto('/inscription')
-  await page.getByPlaceholder('Lucas').fill('Pressé')
-  await page.getByRole('button', { name: 'Continuer', exact: true }).click()
-  await remplirNaissance(page, '2012-03-01')
-  await page.getByRole('button', { name: 'Continuer', exact: true }).click()
-  await page.getByRole('button', { name: /Collège/ }).click()
-  await page.getByRole('button', { name: '3ème', exact: true }).click()
-  await page.locator('#signup-email').fill(`double-${Date.now()}@e2e.reviz.test`)
-  await page.locator('input[type="password"]').fill('motdepasse123')
-  await page.locator('input[type="checkbox"]').check()
-  await page.getByRole('button', { name: 'Créer mon compte' }).click()
-  await expect(page.getByPlaceholder('parent@exemple.com')).toBeVisible({ timeout: 15_000 })
+  await remplirTunnelInscription(page, { birthDate: '2012-03-01', prenom: 'Pressé', classe: '3ème', email: uniqueEmail('double') })
+  // Compte créé : l'écran parent attend l'e-mail d'un parent.
+  await expect(page.getByLabel('E-mail de ton parent')).toBeVisible({ timeout: 15_000 })
 }
 
 // Firestore ne répond plus : chaque requête vers l'émulateur reste en suspens.
@@ -43,6 +35,6 @@ test.describe('Inscription : pas de second compte', () => {
 
     await page.reload()
     await expect(page).toHaveURL(/onboarding/, { timeout: 15_000 })
-    await expect(page.getByPlaceholder('Lucas')).toHaveCount(0)
+    await expect(page.getByLabel('Ton prénom')).toHaveCount(0)
   })
 })

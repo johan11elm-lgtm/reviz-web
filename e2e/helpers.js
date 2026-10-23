@@ -113,43 +113,77 @@ export function uniqueEmail(prefix = 'eleve') {
 }
 
 /**
- * Déroule le tunnel d'inscription email/mot de passe.
+ * Ce que dit Réviz dans sa bulle (écrans d'entrée, accueil, réglages). Le texte est tapé lettre par
+ * lettre à l'écran ; la version complète vit dans un `.rv-bulle-sr`, seul stable à lire en test.
+ */
+export function bulleReviz(page, texte) {
+  return page.locator('.rv-bulle-sr').filter({ hasText: texte })
+}
+
+/** « 3ème » → « 3e » : nom des boutons radio du sélecteur de classe. */
+export const classeCourte = classe => classe.replace('ème', 'e')
+
+/**
+ * Déroule le tunnel d'inscription email/mot de passe (/inscription, une question par écran :
+ * prénom, naissance, classe, compte, puis e-mail d'un parent si moins de 15 ans).
  * @param {object} opts
  * @param {string} opts.birthDate  format YYYY-MM-DD (pilote le tunnel <15 ans)
- * @param {string} [opts.parentEmail]  requis si <15 ans
+ * @param {string} [opts.parentEmail]  si <15 ans : l'e-mail du parent est saisi à l'étape parent.
+ *   Sans lui, le tunnel s'arrête sur l'écran parent (l'élève n'a pas encore choisi « Plus tard »).
  * @param {string} [opts.prenom='Testeur']
+ * @param {string} [opts.classe='3ème']  6ème, 5ème, 4ème ou 3ème
  * @returns l'email du compte créé
  */
-export async function signup(page, { birthDate, parentEmail, prenom = 'Testeur' } = {}) {
+export async function signup(page, { birthDate, parentEmail, prenom = 'Testeur', classe = '3ème' } = {}) {
   const email = uniqueEmail()
   await page.goto('/inscription')
-
-  // Étape prénom
-  await page.getByPlaceholder('Lucas').fill(prenom)
-  await page.getByRole('button', { name: 'Continuer', exact: true }).click()
-
-  // Étape date de naissance
-  await remplirNaissance(page, birthDate)
-  await page.getByRole('button', { name: 'Continuer', exact: true }).click()
-
-  // Étape cycle (le clic avance automatiquement) puis classe
-  await page.getByRole('button', { name: /Collège/ }).click()
-  await page.getByRole('button', { name: '3ème', exact: true }).click()
-
-  // Étape compte
-  await page.locator('#signup-email').fill(email)
-  await page.locator('input[type="password"]').fill('motdepasse123')
-  await page.locator('input[type="checkbox"]').check()
-  await page.getByRole('button', { name: 'Créer mon compte' }).click()
+  await remplirTunnelInscription(page, { birthDate, prenom, classe, email })
 
   if (parentEmail) {
     // Tunnel mineur : étape parent
-    await expect(page.getByPlaceholder('parent@exemple.com')).toBeVisible({ timeout: 15_000 })
-    await page.getByPlaceholder('parent@exemple.com').fill(parentEmail)
+    await page.getByLabel('E-mail de ton parent').fill(parentEmail)
     await page.getByRole('button', { name: /Envoyer et commencer/ }).click()
   }
 
   return email
+}
+
+/**
+ * Les quatre premiers écrans de /inscription (prénom, naissance, classe, compte), jusqu'au clic
+ * sur « Créer mon compte » ; pour un moins de 15 ans, attend ensuite l'écran « parent ».
+ * Partagé par signup() et par les specs qui doivent s'arrêter avant/pendant l'étape parent.
+ */
+export async function remplirTunnelInscription(page, { birthDate, prenom = 'Testeur', classe = '3ème', email, motDePasse = 'motdepasse123' }) {
+  // Écran prénom
+  await page.getByLabel('Ton prénom').fill(prenom)
+  await page.getByRole('button', { name: 'Continuer', exact: true }).click()
+
+  // Écran date de naissance
+  await remplirNaissance(page, birthDate)
+  await page.getByRole('button', { name: 'Continuer', exact: true }).click()
+
+  // Écran classe : le choix n'avance plus tout seul, il faut « Continuer ».
+  await page.getByRole('radio', { name: classeCourte(classe), exact: true }).click()
+  await page.getByRole('button', { name: 'Continuer', exact: true }).click()
+
+  // Écran compte
+  await page.getByLabel('E-mail', { exact: true }).fill(email)
+  await page.getByLabel('Mot de passe', { exact: true }).fill(motDePasse)
+  await page.getByRole('checkbox').check({ force: true })
+  await page.getByRole('button', { name: 'Créer mon compte' }).click()
+
+  if (anneesDepuis(birthDate) < 15) {
+    await expect(page.getByLabel('E-mail de ton parent')).toBeVisible({ timeout: 15_000 })
+  }
+}
+
+// Âge en années pleines à la date du jour (même règle que isUnder15).
+function anneesDepuis(birthDate) {
+  const n = new Date(birthDate)
+  const t = new Date()
+  let age = t.getFullYear() - n.getFullYear()
+  if (t.getMonth() < n.getMonth() || (t.getMonth() === n.getMonth() && t.getDate() < n.getDate())) age -= 1
+  return age
 }
 
 /**
@@ -165,18 +199,17 @@ export async function verifyEmailViaEmulator(page, email) {
 }
 
 /**
- * Vérifie l'email (via émulateur) puis passe l'onboarding (compte majeur).
- * Les popups de l'accueil (« Réviz+ offert jusqu'au … », puis « Nouveau : la Battle »)
- * sont fermées, sauf si la spec veut en tester une (garderAnnonce : true pour
- * la Battle, 'revizplus' pour Réviz+).
+ * Après signup() d'un majeur : confirme l'email (via l'émulateur), passe la découverte
+ * (« Passer » sur l'écran d'accueil de Réviz) et arrive sur l'accueil. Les popups de l'accueil
+ * (« Réviz+ offert jusqu'au … », puis « Nouveau : la Battle ») sont fermées, sauf si la spec veut
+ * en tester une (garderAnnonce : true pour la Battle, 'revizplus' pour Réviz+).
  */
 export async function verifyEmailAndOnboard(page, email, { garderAnnonce = false } = {}) {
-  // L'élève entre dès l'inscription ; il confirme son email depuis sa boîte
-  // mail, l'app le revoit au retour (rappel de l'accueil).
+  // L'élève entre dès l'inscription : l'accueil l'envoie à la découverte (une fois), et il
+  // confirme son email depuis sa boîte mail pendant ce temps.
   await expect(page).toHaveURL(/onboarding/, { timeout: 15_000 })
   await verifyEmailViaEmulator(page, email)
-  await page.getByRole('button', { name: 'Passer' }).click()
-  await expect(page).toHaveURL(/\/$/, { timeout: 10_000 })
+  await passerDecouverte(page)
   if (garderAnnonce === 'revizplus') return
   // Lancement : « Réviz+ offert » passe en premier, la Battle à la visite suivante.
   await fermerAnnonceRevizPlus(page)
@@ -184,9 +217,15 @@ export async function verifyEmailAndOnboard(page, email, { garderAnnonce = false
   else await fermerAnnonceBattle(page)
 }
 
+/** Sur /onboarding (découverte de Réviz, trois écrans) : « Passer » mène à l'accueil. */
+export async function passerDecouverte(page) {
+  await page.getByRole('button', { name: 'Passer' }).click()
+  await expect(page).toHaveURL(/\/$/, { timeout: 10_000 })
+}
+
 /** Ferme la popup Réviz+ (offert, derniers jours ou grâce) si elle est ouverte (accueil, une fois par élève). */
 export async function fermerAnnonceRevizPlus(page) {
-  const plusTard = page.getByRole('dialog', { name: /Réviz\+ offert|Garde ton Réviz\+/ }).getByRole('button', { name: 'Plus tard' })
+  const plusTard = page.getByRole('dialog', { name: /Réviz\+ offert|Réviz\+ est offert|Garde ton Réviz\+/ }).getByRole('button', { name: 'Plus tard' })
   await plusTard.click({ timeout: 5_000 }).catch(() => {})
 }
 
@@ -196,10 +235,171 @@ export async function fermerAnnonceBattle(page) {
   await plusTard.click({ timeout: 5_000 }).catch(() => {})
 }
 
+/**
+ * Ferme, dans l'ordre, toutes les popups d'accueil qui peuvent s'ouvrir sur un compte neuf
+ * (Réviz+ offert, puis la Battle). Il n'y a pas d'annonce Réviz Games : la partie du jour est
+ * une carte de l'accueil, pas une popup. La carte « Essaie un thème Réviz+ » n'est pas modale.
+ */
+export async function fermerAnnonces(page) {
+  await fermerAnnonceRevizPlus(page)
+  await fermerAnnonceBattle(page)
+}
+
 // Date de naissance en trois listes (jour, mois, année) : 'AAAA-MM-JJ'.
 export async function remplirNaissance(page, date) {
   const [a, m, j] = date.split('-').map(Number)
   await page.getByRole('combobox', { name: 'Jour' }).selectOption(String(j))
   await page.getByRole('combobox', { name: 'Mois' }).selectOption(String(m))
   await page.getByRole('combobox', { name: 'Année' }).selectOption(String(a))
+}
+
+// ── Compte prêt à l'emploi, sans passer par l'interface ─────────────────────
+
+const AUTH = 'http://127.0.0.1:9099'
+const FIRESTORE = 'http://127.0.0.1:8080/v1/projects/demo-reviz/databases/(default)/documents'
+
+// Valeur JS → valeur Firestore (REST) : chaînes, nombres, booléens, null, tableaux, objets.
+// Les entiers deviennent integerValue, les autres nombres doubleValue ; un objet
+// { __timestamp: ms } devient un timestampValue.
+function versFirestore(v) {
+  if (v === null || v === undefined) return { nullValue: null }
+  if (typeof v === 'string') return { stringValue: v }
+  if (typeof v === 'boolean') return { booleanValue: v }
+  if (typeof v === 'number') return Number.isInteger(v) ? { integerValue: String(v) } : { doubleValue: v }
+  if (Array.isArray(v)) return { arrayValue: { values: v.map(versFirestore) } }
+  if (typeof v === 'object' && '__timestamp' in v) return { timestampValue: new Date(v.__timestamp).toISOString() }
+  return { mapValue: { fields: Object.fromEntries(Object.entries(v).map(([k, x]) => [k, versFirestore(x)])) } }
+}
+
+async function appelEmulateur(url, options, contexte) {
+  const res = await fetch(url, options)
+  const texte = await res.text()
+  if (!res.ok) throw new Error(`émulateur (${contexte}) : ${res.status} ${texte}`)
+  return texte ? JSON.parse(texte) : {}
+}
+
+/** Écrit (fusionne) des champs du profil users/{uid} dans l'émulateur Firestore, règles contournées. */
+export async function ecrireProfilEmulateur(uid, champs) {
+  const masque = Object.keys(champs).map(c => `updateMask.fieldPaths=${encodeURIComponent(c)}`).join('&')
+  await appelEmulateur(`${FIRESTORE}/users/${uid}?${masque}`, {
+    method: 'PATCH',
+    headers: { Authorization: 'Bearer owner', 'Content-Type': 'application/json' },
+    body: JSON.stringify({ fields: Object.fromEntries(Object.entries(champs).map(([k, v]) => [k, versFirestore(v)])) }),
+  }, `profil ${uid}`)
+}
+
+/** Lit users/{uid} dans l'émulateur Firestore : l'objet des champs (valeurs Firestore en JS simple), ou null. */
+export async function lireProfilEmulateur(uid) {
+  const res = await fetch(`${FIRESTORE}/users/${uid}`, { headers: { Authorization: 'Bearer owner' } })
+  if (res.status === 404) return null
+  if (!res.ok) throw new Error(`émulateur (lecture profil ${uid}) : ${res.status} ${await res.text()}`)
+  const { fields = {} } = await res.json()
+  const depuis = v => {
+    if ('stringValue' in v) return v.stringValue
+    if ('integerValue' in v) return Number(v.integerValue)
+    if ('doubleValue' in v) return v.doubleValue
+    if ('booleanValue' in v) return v.booleanValue
+    if ('timestampValue' in v) return v.timestampValue
+    if ('arrayValue' in v) return (v.arrayValue.values ?? []).map(depuis)
+    if ('mapValue' in v) return Object.fromEntries(Object.entries(v.mapValue.fields ?? {}).map(([k, x]) => [k, depuis(x)]))
+    return null
+  }
+  return Object.fromEntries(Object.entries(fields).map(([k, v]) => [k, depuis(v)]))
+}
+
+/**
+ * Crée un compte élève complet SANS passer par l'interface, puis le connecte par /connexion.
+ * Pour que les specs qui ne testent pas l'entrée de l'app démarrent vite (une seconde, pas vingt).
+ *
+ * Ce qui est fait, dans l'ordre :
+ *  1. Auth (émulateur) : `accounts:signUp` (e-mail + mot de passe + prénom), puis `accounts:update`
+ *     avec `Authorization: Bearer owner` pour marquer l'e-mail comme vérifié (désactivable).
+ *  2. Firestore (émulateur) : `users/{uid}` avec les champs d'un vrai compte après l'inscription
+ *     (createUserProfile) : prenom, email, birthDate, level { cycle: 'college', classe, specialites: [] },
+ *     plan: 'free', createdAt. Pour un moins de 15 ans, `users/{uid}/parentalConsent/consent`
+ *     (voir `consentement`).
+ *  3. Navigateur : /connexion, puis dans le localStorage les mémos par élève que la vraie
+ *     inscription et l'accueil posent (niveau `reviz-level-{uid}`, découverte passée
+ *     `reviz-onboarded-{uid}`, popups Réviz+ et Battle déjà vues, carte « Essaie un thème »
+ *     vue), puis connexion avec le formulaire, et arrivée sur l'accueil (ou `aller`).
+ *
+ * @param {import('@playwright/test').Page} page
+ * @param {object} [opts]
+ * @param {string} [opts.prenom='Testeur']
+ * @param {string} [opts.classe='3ème']        6ème, 5ème, 4ème ou 3ème
+ * @param {string} [opts.birthDate='2009-05-01'] majeur au sens « plus de 15 ans » ; mettre une date <15 ans pour un mineur
+ * @param {string} [opts.email]                par défaut uniqueEmail()
+ * @param {string} [opts.motDePasse='motdepasse123']
+ * @param {boolean} [opts.emailVerifie=true]   false : le rappel « Confirme ton e-mail » reste à l'accueil
+ * @param {boolean} [opts.onboarde=true]       false : l'accueil renvoie vers la découverte (/onboarding)
+ * @param {boolean} [opts.annoncesVues=true]   false : les popups Réviz+ / Battle s'ouvriront sur l'accueil
+ * @param {object|null} [opts.consentement]    mineur : champs Firestore (valeurs JS) du doc parentalConsent/consent.
+ *   Défaut pour un <15 ans : { status: 'pending', parentEmail: 'parent@famille.test', createdAt, firstRequestedAt } = accès ouvert
+ *   en attendant le parent. `null` : pas de doc.
+ * @param {object} [opts.profil]               champs en plus sur users/{uid} (aura, jeux, plan: 'premium'…)
+ * @param {Record<string,string|null>} [opts.stockage]  clés localStorage en plus, posées avant la connexion
+ *   (une valeur `null` retire la clé : ex. { 'reviz-essai-theme-vu': null } pour revoir la carte « Essaie un thème »)
+ * @param {boolean} [opts.connecte=true]       false : crée seulement le compte (pas de navigation)
+ * @param {string|null} [opts.aller='/']       page où atterrir après la connexion (null : reste où l'on arrive)
+ * @returns {Promise<{ uid:string, email:string, motDePasse:string, prenom:string, classe:string, idToken:string }>}
+ */
+export async function compteRapide(page, {
+  prenom = 'Testeur', classe = '3ème', birthDate = '2009-05-01', email = uniqueEmail('rapide'),
+  motDePasse = 'motdepasse123', emailVerifie = true, onboarde = true, annoncesVues = true,
+  consentement, profil = {}, stockage = {}, connecte = true, aller = '/',
+} = {}) {
+  const compte = await appelEmulateur(`${AUTH}/identitytoolkit.googleapis.com/v1/accounts:signUp?key=fake`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email, password: motDePasse, displayName: prenom, returnSecureToken: true }),
+  }, 'signUp')
+  const uid = compte.localId
+
+  if (emailVerifie) {
+    await appelEmulateur(`${AUTH}/identitytoolkit.googleapis.com/v1/projects/demo-reviz/accounts:update`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Authorization: 'Bearer owner' },
+      body: JSON.stringify({ localId: uid, emailVerified: true }),
+    }, 'emailVerified')
+  }
+
+  const level = { cycle: 'college', classe, specialites: [] }
+  await ecrireProfilEmulateur(uid, {
+    prenom, email, birthDate, level, plan: 'free', createdAt: { __timestamp: Date.now() }, ...profil,
+  })
+
+  const mineur = anneesDepuis(birthDate) < 15
+  const doc = consentement === undefined && mineur
+    ? { status: 'pending', parentEmail: 'parent@famille.test', createdAt: Date.now(), firstRequestedAt: Date.now() }
+    : consentement
+  if (doc) await ecrireConsentementEmulateur(uid, Object.fromEntries(Object.entries(doc).map(([k, v]) => [k, versFirestore(v)])))
+
+  if (connecte) {
+    // Le localStorage est par origine : on charge une page de l'app d'abord.
+    await page.goto('/connexion')
+    await page.evaluate(({ uid, level, onboarde, annoncesVues, stockage }) => {
+      localStorage.setItem(`reviz-level-${uid}`, JSON.stringify(level))
+      if (onboarde) localStorage.setItem(`reviz-onboarded-${uid}`, '1')
+      if (annoncesVues) {
+        // Une clé par période (lancement, derniers jours, prolongé) et par état des ventes.
+        for (const phase of ['lancement', 'derniers-jours', 'prolonge', 'payant']) {
+          for (const ventes of ['', '-ventes']) localStorage.setItem(`reviz-annonce-revizplus-${phase}${ventes}-${uid}`, '1')
+        }
+        localStorage.setItem(`reviz-annonce-battle-${uid}`, '1')
+        localStorage.setItem('reviz-essai-theme-vu', '1')
+      }
+      for (const [k, v] of Object.entries(stockage)) {
+        if (v === null) localStorage.removeItem(k)
+        else localStorage.setItem(k, v)
+      }
+    }, { uid, level, onboarde, annoncesVues, stockage })
+
+    await page.getByLabel('E-mail', { exact: true }).fill(email)
+    await page.getByLabel('Mot de passe', { exact: true }).fill(motDePasse)
+    await page.getByRole('button', { name: 'Se connecter' }).click()
+    await expect(page).not.toHaveURL(/connexion/, { timeout: 15_000 })
+    if (aller && aller !== '/') await page.goto(aller)
+  }
+
+  return { uid, email, motDePasse, prenom, classe, idToken: compte.idToken }
 }
