@@ -289,7 +289,7 @@ export default function Home() {
 
   const suggestions = [
     { lignes: ditLignes, label: cta, action, expr: h.expression, carte: carteDuJour },
-    !jourJeux.faite && { lignes: ['La partie du jour est prête.', '6 mini-jeux, 2 minutes.'], label: 'Jouer', action: () => navigate('/jeux'), expr: 'emerveille', geste: 'brasEnLair',
+    !jourJeux.faite && { lignes: ['La partie du jour est prête.', '6 mini-jeux, 2 minutes.'], label: 'Jouer', action: () => navigate('/jeux?depuis=suggestion'), expr: 'emerveille', geste: 'brasEnLair',
       carte: { id: 'jeux', pose: 'celebration', fond: '#FFE3C7', titre: 'Partie du jour', sous: 'Réviz Games · 6 mini-jeux' } },
     titreLecon && (fcLast > 0
       ? { lignes: ['Tes cartes t’attendent.', 'On les revoit ?'], label: 'Réviser mes cartes', action: ouvrirCartes, expr: 'content', geste: 'coucou',
@@ -416,7 +416,7 @@ export default function Home() {
 
   // Réviz Games : la partie du jour, avec la série et le record (la même partie pour tout le monde).
   const carteJeux = (
-    <Link to="/jeux" className={`hm-jeux${jourJeux.faite ? ' hm-jeux--faite' : ''}`}>
+    <Link to="/jeux?depuis=accueil" className={`hm-jeux${jourJeux.faite ? ' hm-jeux--faite' : ''}`}>
       <img className="hm-jeux-image" src="/jeux/hub/partie-du-jour.webp" alt="" />
       <span className="hm-jeux-voile" aria-hidden="true" />
       <span className="hm-jeux-txt">

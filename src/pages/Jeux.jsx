@@ -28,6 +28,7 @@ import { PlateauTaupe, mancheTaupe, partieTaupe, TEMPO_TAUPE } from './jeux/Taup
 import { useIsDesktop } from '../hooks/useMediaQuery';
 import { TransitionJeux, DUREES_TRANSITION } from './jeux/TransitionJeux';
 import { HubJeux } from './jeux/HubJeux';
+import { mesurer } from '../services/mesure';
 import { avecHasardDuJour, etatDuJour, enregistrerPartieDuJour, synchroniserStats } from '../services/partieDuJourService';
 import './Jeux.css';
 
@@ -540,7 +541,10 @@ export default function Jeux() {
   // Les 3 jeux séparément, et la Partie rapide qui les mélange.
   const RAPIDES = { jour: () => avecHasardDuJour(partieMelangee), melange: partieMelangee, magie: partieMagieSeule, lance: partieLance, buzzer: partieBuzzer, pizzeria: partiePizzeria, ninja: partieNinja, taupe: partieTaupe };
   const TITRES = { jour: 'La partie du jour', melange: 'Partie rapide', magie: 'Le tour de magie', lance: 'Réviz lance', buzzer: 'Réviz se trompe ?', pizzeria: 'La pizzeria !', ninja: 'Le ninja des fautes', taupe: 'Tape-taupe !' };
-  const lancerRapide = (jeu = 'melange') => {
+  // Mesure (PostHog, sans identifiant) : d'où vient l'élève, ce qu'il lance, ce qu'il finit.
+  const depuisRef = useRef(params.get('depuis') ?? (params.get('rapide') ? 'lien' : 'direct'));
+  const lancerRapide = (jeu = 'melange', depuis = 'hub') => {
+    mesurer('partie_lancee', { mode: jeu, depuis });
     setChapitre({ matiere: 'Réviz Games', titre: TITRES[jeu], rapide: jeu });
     setPartie(RAPIDES[jeu]());
     setMusiquePartie(jeu === 'melange' || jeu === 'jour' ? musiqueSuivante() : null);
@@ -557,7 +561,7 @@ export default function Jeux() {
       return;
     }
     const r = params.get('rapide') ?? (['buzzer', 'pizzeria'].includes(params.get('jeu')) ? params.get('jeu') : null);
-    if (r) lancerRapide(RAPIDES[r] ? r : 'melange');
+    if (r) lancerRapide(RAPIDES[r] ? r : 'melange', 'lien');
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Lien direct vers un chapitre.
@@ -595,9 +599,23 @@ export default function Jeux() {
 
   // Fin de la partie du jour : elle compte pour la série et le record (une fois par partie jouée).
   useEffect(() => {
-    if (phase !== 'fin' || chapitre?.rapide !== 'jour' || jourEnregistre.current === partie) return;
+    if (phase !== 'fin' || jourEnregistre.current === partie) return;
     jourEnregistre.current = partie;
-    setJour(enregistrerPartieDuJour(uid, score));
+    const nouveau = chapitre?.rapide === 'jour' ? enregistrerPartieDuJour(uid, score) : null;
+    if (nouveau) setJour(nouveau);
+    if (chapitre?.rapide) {
+      mesurer('partie_terminee', {
+        mode: chapitre.rapide, score, bonnes, erreurs: erreursUniques(erreurs).length, tours: partie.length,
+        ...(nouveau ? { serie: nouveau.serie, record: nouveau.nouveauRecord } : {}),
+      });
+    }
+  }, [phase]); // eslint-disable-line react-hooks/exhaustive-deps
+  // L'écran des jeux vu (une fois par visite) : d'où vient l'élève, sa série, partie du jour faite ou non.
+  const hubVu = useRef(false);
+  useEffect(() => {
+    if (phase !== 'choix' || mode === 'prototype' || hubVu.current || params.get('rapide') || params.get('fin') !== null) return;
+    hubVu.current = true;
+    mesurer('jeux_ouvert', { depuis: depuisRef.current, serie: jour.serie, partie_du_jour_faite: jour.faite });
   }, [phase]); // eslint-disable-line react-hooks/exhaustive-deps
   // De retour sur l'écran des jeux : l'état du jour à jour (on a pu changer de jour).
   useEffect(() => { if (phase === 'choix') setJour(etatDuJour(uid)); }, [phase, uid]);
@@ -678,7 +696,11 @@ export default function Jeux() {
     </>
   );
   const fermer = (
-    <button type="button" className="jx-rond" onClick={() => (phase === 'choix' ? navigate(-1) : setPhase('choix'))} aria-label="Fermer">
+    <button type="button" className="jx-rond" aria-label="Fermer" onClick={() => {
+      if (phase === 'choix') { navigate(-1); return; }
+      if (chapitre?.rapide && phase !== 'fin') mesurer('partie_abandonnee', { mode: chapitre.rapide, tour: idx + 1, tours: partie.length });
+      setPhase('choix');
+    }}>
       <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" /></svg>
     </button>
   );
@@ -728,6 +750,7 @@ export default function Jeux() {
   if (phase === 'fin') {
 
     const rejouer = () => {
+      if (chapitre.rapide) mesurer('partie_lancee', { mode: chapitre.rapide, depuis: 'rejouer' });
       setPartie(chapitre.rapide ? RAPIDES[chapitre.rapide]() : construirePartie(chapitre.data, mode));
       if (chapitre.rapide === 'melange' || chapitre.rapide === 'jour') setMusiquePartie(musiqueSuivante());
       nouvellePartie();
@@ -736,7 +759,7 @@ export default function Jeux() {
     return (
       <FinDePartie surtitre={`${chapitre.titre} · ${tours} tour${tours > 1 ? 's' : ''}`}
         score={score} bonnes={bonnes} erreurs={erreursUniques(erreurs)}
-        cleRecord={`reviz-jeux-record-${chapitre.rapide ?? `chapitre-${chapitre.titre}`}`}
+        cleRecord={`reviz-jeux-record-${chapitre.rapide ?? `chapitre-${chapitre.titre}`}`} mode={chapitre.rapide ?? 'chapitre'}
         onRejouer={rejouer} onQuitter={() => setPhase('choix')} isDesktop={isDesktop} hauteurEcran={hauteurEcran} />
     );
   }

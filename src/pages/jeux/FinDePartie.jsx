@@ -3,6 +3,7 @@ import { Pantin } from '../../components/Pantin';
 import { BulleReviz } from '../../components/reviz/BulleReviz';
 import { jouer } from '../../utils/bruitages';
 import { musiqueFin } from '../../utils/musiqueFin';
+import { mesurer } from '../../services/mesure';
 import './FinDePartie.css';
 
 /**
@@ -332,7 +333,7 @@ function Recap({ erreurs, onRetour, onRejouer, onQuitter, isDesktop, hauteurEcra
  * @param {object[]} erreurs  format commun, déjà dédoublonnées
  * @param {string} cleRecord  clé du meilleur score sur l'appareil (un par mode)
  */
-export function FinDePartie({ surtitre, score, bonnes, erreurs, cleRecord, onRejouer, onQuitter, isDesktop, hauteurEcran }) {
+export function FinDePartie({ surtitre, score, bonnes, erreurs, cleRecord, onRejouer, onQuitter, isDesktop, hauteurEcran, mode }) {
   const [vue, setVue] = useState('fin');
   const [record] = useState(() => {
     const avant = lire(cleRecord);
@@ -356,7 +357,7 @@ export function FinDePartie({ surtitre, score, bonnes, erreurs, cleRecord, onRej
       <div className="fp-ecran">
         {vue === 'fin' ? (
           <Podium surtitre={surtitre} score={score} bonnes={bonnes} erreurs={erreurs} record={record}
-            onRecap={() => { jouer('page'); setVue('recap'); }} onRejouer={onRejouer} onQuitter={onQuitter}
+            onRecap={() => { jouer('page'); setVue('recap'); mesurer('recap_ouvert', { mode, erreurs: erreurs.length }); }} onRejouer={onRejouer} onQuitter={onQuitter}
             isDesktop={isDesktop} hauteurEcran={hauteurEcran} />
         ) : (
           <Recap erreurs={erreurs} onRetour={retour} onRejouer={onRejouer} onQuitter={onQuitter} isDesktop={isDesktop} hauteurEcran={hauteurEcran} />
