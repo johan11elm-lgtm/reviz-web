@@ -37,6 +37,19 @@ test.describe('Réviz IA — téléphone (390 px)', () => {
     const champ = page.locator('.ia-champ-cadre')
     await expect.poll(async () => (await fin.boundingBox()).y + (await fin.boundingBox()).height <= (await champ.boundingBox()).y).toBe(true)
 
+    // Clavier ouvert (simulé : Chromium n'a pas de clavier à l'écran) : la page prend la zone visible
+    // laissée par le clavier, et la barre de saisie tient dedans, juste au-dessus.
+    await page.evaluate(() => {
+      const p = document.querySelector('.ia-page')
+      p.style.setProperty('--ia-hauteur', '400px'); p.setAttribute('data-clavier', '')
+    })
+    await expect.poll(async () => { const b = await champ.boundingBox(); return b.y + b.height <= 400 && b.y > 200 }).toBe(true)
+    await page.screenshot({ path: test.info().outputPath('coach-clavier-ouvert.png') })
+    await page.evaluate(() => {
+      const p = document.querySelector('.ia-page')
+      p.style.setProperty('--ia-hauteur', `${innerHeight}px`); p.removeAttribute('data-clavier')
+    })
+
     // Toujours utilisable : une deuxième question part et reçoit sa réponse.
     await repondre(page, 'Deuxième réponse de Réviz.')
     const saisie = page.getByLabel('Ta question sur la leçon')

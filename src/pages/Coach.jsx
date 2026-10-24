@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { Link, useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import { GuestWall } from '../components/GuestWall';
 import { EtoileIA } from '../components/BottomNav';
@@ -215,20 +215,6 @@ export default function Coach() {
   const [offre, setOffre] = useState(false);
   const fil = useRef(null);
   const champ = useRef(null);
-  // Téléphone : la barre de saisie est fixée en bas et sa hauteur varie (pastille de la leçon, champ qui
-  // grandit, encart de limite, zone de sécurité) ; le fil réserve exactement sa hauteur (--ia-pied) pour
-  // que la fin de la réponse ne passe jamais dessous.
-  const observateurPied = useRef(null);
-  const refPied = useCallback(el => {
-    observateurPied.current?.disconnect();
-    observateurPied.current = null;
-    if (!el || typeof ResizeObserver === 'undefined') return;
-    const page = el.closest('.ia-page');
-    const poser = () => page?.style.setProperty('--ia-pied', `${el.offsetHeight}px`);
-    observateurPied.current = new ResizeObserver(poser);
-    observateurPied.current.observe(el);
-    poser();
-  }, []);
   const enCours = brouillon !== null;
 
   useEffect(() => { if (leconId) { setMessages(loadConversation(leconId)); setErreur(null); } }, [leconId]);
@@ -257,18 +243,23 @@ export default function Coach() {
     // décalé après la fermeture du clavier, et plus aucun toucher ne tombait au bon endroit (Johan, 24/10).
     if (!isDesktop && !telephone()) window.scrollTo({ top: document.documentElement.scrollHeight });
   }, [messages, brouillon, erreur, isDesktop]);
-  // Téléphone, clavier ouvert : Safari ne réduit pas la page, la barre de saisie fixée en bas restait derrière
-  // le clavier. On mesure le clavier (ce que la zone visible ne montre plus du bas de la page) dans
-  // --ia-clavier : la barre remonte d'autant, le fil aussi. Clavier fermé : la page est remise en place.
+  // Téléphone : la page prend exactement la zone visible (visualViewport), clavier ouvert ou non. Safari ne
+  // réduit pas la page quand le clavier s'ouvre : une barre de saisie fixée en bas restait derrière le
+  // clavier. Ici la barre est en bas de la page, dans le flux, donc toujours juste au-dessus du clavier.
+  // Clavier fermé : la page est remise en place (voir remettreLaPage).
   useEffect(() => {
     const vv = window.visualViewport;
     if (!vv || !telephone()) return;
     const maj = () => {
-      const clavier = Math.max(0, Math.round(window.innerHeight - vv.height - vv.offsetTop));
-      fil.current?.closest('.ia-page')?.style.setProperty('--ia-clavier', `${clavier}px`);
-      if (clavier < 40) remettreLaPage();
-      else if (colle.current && fil.current) fil.current.scrollTop = fil.current.scrollHeight;
+      const page = fil.current?.closest('.ia-page');
+      const clavier = window.innerHeight - vv.height - vv.offsetTop > 40;
+      page?.style.setProperty('--ia-hauteur', `${Math.round(vv.height)}px`);
+      page?.style.setProperty('--ia-haut', `${Math.round(vv.offsetTop)}px`);
+      page?.toggleAttribute('data-clavier', clavier);
+      if (!clavier) remettreLaPage();
+      if (colle.current && fil.current) fil.current.scrollTop = fil.current.scrollHeight;
     };
+    maj();
     vv.addEventListener('resize', maj);
     vv.addEventListener('scroll', maj);
     return () => { vv.removeEventListener('resize', maj); vv.removeEventListener('scroll', maj); };
@@ -496,7 +487,7 @@ export default function Coach() {
 
   // ── Téléphone ──
   return (
-    <div className="app app--large app--no-halo ia-page">
+    <div className="app app--large app--no-halo ia-page ia-page--tel">
       <span className="ia-halo" aria-hidden="true" />
       <header className="ia-tete">
         <button type="button" className="ia-rond" onClick={retour} aria-label="Retour"><Retour /></button>
@@ -505,7 +496,7 @@ export default function Coach() {
         <button type="button" className="ia-rond" onClick={() => setHisto(true)} aria-haspopup="dialog" aria-label="Tes discussions"><Horloge /></button>
       </header>
       <main className="ia-fil ia-fil--tel" ref={fil}>{vide ? accueil : conversation}</main>
-      <div ref={refPied} className={`ia-pied ia-pied--tel${limite ? ' ia-pied--limite' : ''}`}>{composeur}</div>
+      <div className={`ia-pied ia-pied--tel${limite ? ' ia-pied--limite' : ''}`}>{composeur}</div>
       {fenetres}
     </div>
   );

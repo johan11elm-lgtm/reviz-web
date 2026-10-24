@@ -53,7 +53,6 @@
 
 /* ── Fil ── */
 .ia-fil { position: relative; z-index: 1; }
-/* --ia-pied : hauteur mesurée de la barre de saisie fixée en bas (Coach.jsx), zone de sécurité comprise. */
 /* Téléphone : .app est figé à la hauteur de l'écran (global.css), c'est donc le fil qui défile. */
 .ia-fil--tel {
   flex: 1;
@@ -61,7 +60,7 @@
   overflow-y: auto;
   overscroll-behavior: contain;
   -webkit-overflow-scrolling: touch;
-  padding: 6px 20px calc(var(--ia-pied, calc(190px + env(safe-area-inset-bottom, 0px))) + var(--ia-clavier, 0px) + 16px);
+  padding: 6px 20px calc(190px + env(safe-area-inset-bottom, 0px));
 }
 .ia-fil-int { display: flex; flex-direction: column; gap: 24px; }
 
@@ -153,10 +152,26 @@
   position: fixed;
   left: 0;
   right: 0;
-  /* Clavier ouvert : posée juste au-dessus (--ia-clavier, mesuré dans Coach.jsx). */
-  bottom: var(--ia-clavier, 0px);
+  bottom: 0;
   padding: 18px 14px calc(14px + env(safe-area-inset-bottom, 0px));
   background: linear-gradient(rgba(248,239,231,0), #F8EFE7 30%);
+}
+/* Téléphone : la page est la zone visible (--ia-hauteur, --ia-haut posées par Coach.jsx d'après
+   visualViewport) et la barre de saisie est dans le flux, en bas : clavier ouvert, elle reste juste
+   au-dessus. Le fil défile seul et n'a plus à réserver la place de la barre. */
+@media (max-width: 430px) {
+  .app.ia-page--tel {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: var(--ia-haut, 0px);
+    height: var(--ia-hauteur, 100dvh);
+    min-height: 0;
+  }
+  .ia-page--tel .ia-fil--tel { padding-bottom: 16px; }
+  .ia-page--tel .ia-pied--tel { position: relative; flex: none; margin-top: -18px; }
+  /* Clavier ouvert : plus de barre d'accueil de l'iPhone sous le champ. */
+  .ia-page--tel[data-clavier] .ia-pied--tel { padding-bottom: 8px; }
 }
 .ia-champ-cadre { padding: 2px; border-radius: 28px; background: var(--ia-degrade); box-shadow: 0 14px 36px -12px rgba(255,90,60,.4); }
 .ia-champ { display: flex; flex-direction: column; gap: 10px; padding: 16px 12px 12px 16px; border-radius: 26px; background: #fff; }

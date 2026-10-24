@@ -38,26 +38,7 @@ describe('<Coach /> — Réviz IA', () => {
     lessons.list = DEUX
   })
 
-  it('téléphone : le fil réserve la hauteur réelle de la barre de saisie (la fin de la réponse ne passe pas dessous)', () => {
-    const observes = []
-    const RO = globalThis.ResizeObserver
-    globalThis.ResizeObserver = class { constructor(f) { this.f = f } observe(el) { observes.push({ el, f: this.f }) } disconnect() {} }
-    const hauteur = vi.spyOn(HTMLElement.prototype, 'offsetHeight', 'get').mockReturnValue(236)
-    try {
-      const { container } = renderAt('/coach?lesson=l1')
-      const pied = container.querySelector('.ia-pied--tel')
-      expect(observes.some(o => o.el === pied)).toBe(true)
-      expect(container.querySelector('.ia-page').style.getPropertyValue('--ia-pied')).toBe('236px')
-      hauteur.mockReturnValue(310) // le champ grandit
-      act(() => observes.find(o => o.el === pied).f())
-      expect(container.querySelector('.ia-page').style.getPropertyValue('--ia-pied')).toBe('310px')
-    } finally {
-      hauteur.mockRestore()
-      globalThis.ResizeObserver = RO
-    }
-  })
-
-  it('téléphone, clavier ouvert : la barre de saisie remonte au-dessus du clavier, puis redescend', () => {
+  it('téléphone, clavier ouvert : la page prend la zone visible, la barre de saisie reste au-dessus du clavier', () => {
     const ecouteurs = {}
     const vv = { height: 844, offsetTop: 0, addEventListener: (t, f) => { ecouteurs[t] = f }, removeEventListener: () => {} }
     const avant = { vv: window.visualViewport, mm: window.matchMedia, h: window.innerHeight }
@@ -67,12 +48,20 @@ describe('<Coach /> — Réviz IA', () => {
     try {
       const { container } = renderAt('/coach?lesson=l1')
       const page = container.querySelector('.ia-page')
-      vv.height = 500 // le clavier prend 344 px
+      expect(page.style.getPropertyValue('--ia-hauteur')).toBe('844px')
+      expect(page.hasAttribute('data-clavier')).toBe(false)
+      // Le clavier s'ouvre : Safari décale la zone visible de 120 px et n'en montre plus que 380.
+      Object.assign(vv, { height: 380, offsetTop: 120 })
       act(() => ecouteurs.resize())
-      expect(page.style.getPropertyValue('--ia-clavier')).toBe('344px')
-      vv.height = 844 // clavier fermé
+      expect(page.style.getPropertyValue('--ia-hauteur')).toBe('380px')
+      expect(page.style.getPropertyValue('--ia-haut')).toBe('120px')
+      expect(page.hasAttribute('data-clavier')).toBe(true)
+      // La barre de saisie est dans la page (dans le flux), pas fixée ailleurs.
+      expect(page.contains(container.querySelector('.ia-pied--tel'))).toBe(true)
+      Object.assign(vv, { height: 844, offsetTop: 0 }) // clavier fermé
       act(() => ecouteurs.resize())
-      expect(page.style.getPropertyValue('--ia-clavier')).toBe('0px')
+      expect(page.style.getPropertyValue('--ia-hauteur')).toBe('844px')
+      expect(page.hasAttribute('data-clavier')).toBe(false)
     } finally {
       Object.defineProperty(window, 'visualViewport', { configurable: true, value: avant.vv })
       Object.defineProperty(window, 'innerHeight', { configurable: true, value: avant.h })
