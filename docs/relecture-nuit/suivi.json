@@ -964,6 +964,11 @@
       "chemin": "5eme/maths/aires-et-volumes",
       "le": "2026-10-24",
       "corrections": 0
+    },
+    {
+      "chemin": "5eme/maths/statistiques-et-probabilites",
+      "le": "2026-10-24",
+      "corrections": 1
     }
   ]
 }
