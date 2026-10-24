@@ -53,7 +53,8 @@
 
 /* ── Fil ── */
 .ia-fil { position: relative; z-index: 1; }
-.ia-fil--tel { padding: 6px 20px calc(190px + env(safe-area-inset-bottom, 0px)); }
+/* --ia-pied : hauteur mesurée de la barre de saisie fixée en bas (Coach.jsx), zone de sécurité comprise. */
+.ia-fil--tel { padding: 6px 20px calc(var(--ia-pied, calc(190px + env(safe-area-inset-bottom, 0px))) + 16px); }
 .ia-fil-int { display: flex; flex-direction: column; gap: 24px; }
 
 /* Accueil */

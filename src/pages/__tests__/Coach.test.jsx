@@ -38,6 +38,25 @@ describe('<Coach /> — Réviz IA', () => {
     lessons.list = DEUX
   })
 
+  it('téléphone : le fil réserve la hauteur réelle de la barre de saisie (la fin de la réponse ne passe pas dessous)', () => {
+    const observes = []
+    const RO = globalThis.ResizeObserver
+    globalThis.ResizeObserver = class { constructor(f) { this.f = f } observe(el) { observes.push({ el, f: this.f }) } disconnect() {} }
+    const hauteur = vi.spyOn(HTMLElement.prototype, 'offsetHeight', 'get').mockReturnValue(236)
+    try {
+      const { container } = renderAt('/coach?lesson=l1')
+      const pied = container.querySelector('.ia-pied--tel')
+      expect(observes.some(o => o.el === pied)).toBe(true)
+      expect(container.querySelector('.ia-page').style.getPropertyValue('--ia-pied')).toBe('236px')
+      hauteur.mockReturnValue(310) // le champ grandit
+      act(() => observes.find(o => o.el === pied).f())
+      expect(container.querySelector('.ia-page').style.getPropertyValue('--ia-pied')).toBe('310px')
+    } finally {
+      hauteur.mockRestore()
+      globalThis.ResizeObserver = RO
+    }
+  })
+
   it('accueil : salut, les 4 cartes de départ et la leçon attachée', () => {
     renderAt('/coach?lesson=l2')
     expect(screen.getByRole('heading', { name: /Salut Léa\. On révise quoi/ })).toBeInTheDocument()

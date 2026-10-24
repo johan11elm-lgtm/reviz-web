@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Link, useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import { GuestWall } from '../components/GuestWall';
 import { EtoileIA } from '../components/BottomNav';
@@ -215,6 +215,20 @@ export default function Coach() {
   const [offre, setOffre] = useState(false);
   const fil = useRef(null);
   const champ = useRef(null);
+  // Téléphone : la barre de saisie est fixée en bas et sa hauteur varie (pastille de la leçon, champ qui
+  // grandit, encart de limite, zone de sécurité) ; le fil réserve exactement sa hauteur (--ia-pied) pour
+  // que la fin de la réponse ne passe jamais dessous.
+  const observateurPied = useRef(null);
+  const refPied = useCallback(el => {
+    observateurPied.current?.disconnect();
+    observateurPied.current = null;
+    if (!el || typeof ResizeObserver === 'undefined') return;
+    const page = el.closest('.ia-page');
+    const poser = () => page?.style.setProperty('--ia-pied', `${el.offsetHeight}px`);
+    observateurPied.current = new ResizeObserver(poser);
+    observateurPied.current.observe(el);
+    poser();
+  }, []);
   const enCours = brouillon !== null;
 
   useEffect(() => { if (leconId) { setMessages(loadConversation(leconId)); setErreur(null); } }, [leconId]);
@@ -471,7 +485,7 @@ export default function Coach() {
         <button type="button" className="ia-rond" onClick={() => setHisto(true)} aria-haspopup="dialog" aria-label="Tes discussions"><Horloge /></button>
       </header>
       <main className="ia-fil ia-fil--tel">{vide ? accueil : conversation}</main>
-      <div className={`ia-pied ia-pied--tel${limite ? ' ia-pied--limite' : ''}`}>{composeur}</div>
+      <div ref={refPied} className={`ia-pied ia-pied--tel${limite ? ' ia-pied--limite' : ''}`}>{composeur}</div>
       {fenetres}
     </div>
   );
