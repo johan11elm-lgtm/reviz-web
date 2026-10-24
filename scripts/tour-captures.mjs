@@ -32,6 +32,9 @@ const HAUTEURS = { 390: 844, 1280: 800 }
 const ETATS = (args.etats || 'invite,essai,neuf,lecon,jeux').split(',')
 const DATE_FIGEE = args.date || '2026-10-23T10:00:00+02:00'
 const SANS_HORLOGE = args['sans-horloge'] === 'true'
+// --encoche 59 : simule l'encoche et la barre d'accueil d'un iPhone (env(safe-area-inset-*)), sur téléphone,
+// comme dans l'app installée sur l'écran d'accueil où la page passe sous l'heure.
+const ENCOCHE = Number(args.encoche) || 0
 fs.mkdirSync(OUT, { recursive: true })
 
 const AUTH = 'http://127.0.0.1:9099'
@@ -331,6 +334,10 @@ async function ouvrir(browser, etat, largeur, classe, compte = null) {
     await context.addInitScript(([uid, level]) => { try { localStorage.setItem(`reviz-level-${uid}`, level) } catch { /* idem */ } }, [compte.uid, JSON.stringify(compte.level)])
   }
   const page = await context.newPage()
+  if (ENCOCHE && largeur < 1024) {
+    const cdp = await context.newCDPSession(page)
+    await cdp.send('Emulation.setSafeAreaInsetsOverride', { insets: { top: ENCOCHE, bottom: 34, left: 0, right: 0 } })
+  }
   page.setDefaultTimeout(8000)
   await simulerApi(page, apiAppelees)
   return { context, page, suivi: new Suivi(page), etat, largeur, classe }

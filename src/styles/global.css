@@ -357,9 +357,9 @@ input, textarea {
     border-radius: 0;
     box-shadow: none;
     overflow: hidden;
-    /* Encoche iPhone (viewport-fit=cover) : le contenu démarre sous la
-       barre de statut ; 0 partout ailleurs. */
-    padding-top: env(safe-area-inset-top, 0px);
+    /* Encoche iPhone (viewport-fit=cover) : pas de marge ici. Chaque page la prend dans son
+       en-tête (env(safe-area-inset-top)), pour que la couleur de son bandeau passe sous l'heure ;
+       une marge ici laissait une bande crème sous l'heure et décalait les en-têtes (24/10). */
   }
 
   /* Nav fixée en bas du viewport sur mobile, en capsule flottante */
@@ -404,9 +404,7 @@ html.native .app {
   border-radius: 0;
   box-shadow: none;
   overflow: hidden;
-  /* Encoche iPhone (viewport-fit=cover) : le contenu démarre sous la
-     barre de statut ; 0 partout ailleurs. */
-  padding-top: env(safe-area-inset-top, 0px);
+  /* Encoche : prise par l'en-tête de chaque page (voir le bloc téléphone ci-dessus). */
 }
 html.native .bottom-nav {
   position: fixed;

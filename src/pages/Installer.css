@@ -21,7 +21,6 @@
 /* ── Héros ── */
 .inst-hero {
   position: relative;
-  margin-top: calc(-1 * env(safe-area-inset-top, 0px));
   padding: calc(env(safe-area-inset-top, 0px) + 28px) 24px 96px;
 }
 .inst-hero-fond {

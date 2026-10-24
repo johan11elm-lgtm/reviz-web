@@ -32,8 +32,7 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  /* Pas de env(safe-area-inset-top) ici : .app le compte déjà sur téléphone (global.css). */
-  padding: 6px 16px 10px;
+  padding: calc(env(safe-area-inset-top, 0px) + 6px) 16px 10px;
   background: linear-gradient(#F8EFE7 70%, rgba(248,239,231,0));
 }
 .ia-rond {

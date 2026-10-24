@@ -17,7 +17,6 @@
   position: relative;
   height: calc(414px + env(safe-area-inset-top, 0px));
   box-sizing: border-box;
-  margin-top: calc(-1 * env(safe-area-inset-top, 0px));
   padding: calc(env(safe-area-inset-top, 0px) + 18px) 22px 0;
   background: #FFB37A;
   border-radius: 0 0 50% 50% / 0 0 64px 64px;

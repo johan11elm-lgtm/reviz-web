@@ -4,7 +4,6 @@
 /* ── Héros ── */
 .ch-hero {
   position: relative;
-  margin-top: calc(-1 * env(safe-area-inset-top, 0px));
   padding: calc(env(safe-area-inset-top, 0px) + 12px) 20px 92px;
   background: var(--ch-fond);
   border-radius: 0 0 50% 50% / 0 0 44px 44px;
