@@ -234,20 +234,21 @@ export default function Coach() {
   useEffect(() => { if (leconId) { setMessages(loadConversation(leconId)); setErreur(null); } }, [leconId]);
   useEffect(() => { if (leconId) saveConversation(leconId, messages); }, [messages, leconId]);
   // Le fil suit la réponse qui s'écrit seulement si l'élève est déjà en bas : remonté pour relire le
-  // début, il n'est plus ramené en bas à chaque morceau reçu (téléphone : la page défile ; ordinateur :
-  // le fil). Envoyer une question le recolle en bas.
+  // début, il n'est plus ramené en bas à chaque morceau reçu. Envoyer une question le recolle en bas.
+  // C'est le fil qui défile (téléphone : .app est figé à la hauteur de l'écran) ; sur tablette, où
+  // .app grandit avec son contenu, c'est la page.
   const colle = useRef(true);
   useEffect(() => {
     // En capture sur le document : on entend aussi le défilement du fil (qui ne remonte pas).
     const mesurer = () => {
-      const el = isDesktop ? fil.current : null;
-      const reste = el ? el.scrollHeight - el.scrollTop - el.clientHeight
+      const el = fil.current;
+      const reste = el && el.scrollHeight > el.clientHeight + 1 ? el.scrollHeight - el.scrollTop - el.clientHeight
         : document.documentElement.scrollHeight - window.scrollY - window.innerHeight;
       colle.current = reste < 80;
     };
     document.addEventListener('scroll', mesurer, { capture: true, passive: true });
     return () => document.removeEventListener('scroll', mesurer, { capture: true });
-  }, [isDesktop]);
+  }, []);
   useEffect(() => {
     if (!colle.current) return;
     const el = fil.current;
@@ -484,7 +485,7 @@ export default function Coach() {
         <span className="ia-flex" />
         <button type="button" className="ia-rond" onClick={() => setHisto(true)} aria-haspopup="dialog" aria-label="Tes discussions"><Horloge /></button>
       </header>
-      <main className="ia-fil ia-fil--tel">{vide ? accueil : conversation}</main>
+      <main className="ia-fil ia-fil--tel" ref={fil}>{vide ? accueil : conversation}</main>
       <div ref={refPied} className={`ia-pied ia-pied--tel${limite ? ' ia-pied--limite' : ''}`}>{composeur}</div>
       {fenetres}
     </div>

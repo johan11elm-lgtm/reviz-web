@@ -54,7 +54,15 @@
 /* ── Fil ── */
 .ia-fil { position: relative; z-index: 1; }
 /* --ia-pied : hauteur mesurée de la barre de saisie fixée en bas (Coach.jsx), zone de sécurité comprise. */
-.ia-fil--tel { padding: 6px 20px calc(var(--ia-pied, calc(190px + env(safe-area-inset-bottom, 0px))) + 16px); }
+/* Téléphone : .app est figé à la hauteur de l'écran (global.css), c'est donc le fil qui défile. */
+.ia-fil--tel {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  padding: 6px 20px calc(var(--ia-pied, calc(190px + env(safe-area-inset-bottom, 0px))) + 16px);
+}
 .ia-fil-int { display: flex; flex-direction: column; gap: 24px; }
 
 /* Accueil */
