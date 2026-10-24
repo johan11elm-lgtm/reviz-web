@@ -333,7 +333,7 @@
 
 /* ── Téléphone : page figée sur le petit viewport ; petits écrans (iPhone SE dans Safari) ── */
 @media (max-width: 430px) {
-  .app.fp-page { height: 100svh; }
+  .app.fp-page { height: var(--hauteur-ecran, 100svh); }
 }
 @media (max-height: 700px) {
   .fp-page .fp-titre { font-size: 38px; }

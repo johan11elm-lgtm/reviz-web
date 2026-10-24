@@ -3,7 +3,7 @@
  * son pupitre. Paniers et boule sont placés par transform à chaque image (JeuLance.jsx). */
 .ln-page { background: #C98A4E; overflow: clip; }
 @media (max-width: 430px) {
-  .app.ln-page { height: 100svh; }
+  .app.ln-page { height: var(--hauteur-ecran, 100svh); }
 }
 .ln-page .ln-monde {
   position: absolute; inset: 0;

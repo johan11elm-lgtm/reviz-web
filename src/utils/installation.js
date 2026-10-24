@@ -39,6 +39,27 @@ export function estInstallee(win = typeof window !== 'undefined' ? window : unde
   }
 }
 
+/**
+ * App installée sur iPhone (barre d'état translucide) : 100svh y vaut l'écran moins la barre d'état,
+ * et les écrans figés à cette hauteur (jeux, carte de début, fin de partie) laissaient voir une bande
+ * de la page du dessous en bas (Johan, 24/10). On pose la vraie hauteur dans --hauteur-ecran, que ces
+ * écrans préfèrent à 100svh ; dans le navigateur, rien ne change (pas de variable, 100svh).
+ */
+export function brancherHauteurEcran(win = typeof window !== 'undefined' ? window : undefined) {
+  if (!win || !estInstallee(win)) return () => {};
+  const poser = () => {
+    // Téléphone en portrait : l'app installée occupe tout l'écran, sa hauteur est celle de l'écran
+    // (pas sur iPad, où l'écran partagé la rend plus petite que l'écran).
+    const telephone = win.innerHeight >= win.innerWidth && win.innerWidth <= 430;
+    const h = telephone ? Math.max(win.innerHeight, win.screen?.height ?? 0) : win.innerHeight;
+    win.document.documentElement.style.setProperty('--hauteur-ecran', `${h}px`);
+  };
+  poser();
+  win.addEventListener('resize', poser);
+  win.addEventListener('orientationchange', poser);
+  return () => { win.removeEventListener('resize', poser); win.removeEventListener('orientationchange', poser); };
+}
+
 // ── Invitation d'installation de Chrome / Edge ──
 let invitation = null;
 const abonnes = new Set();

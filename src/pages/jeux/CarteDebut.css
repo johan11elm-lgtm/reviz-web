@@ -10,7 +10,7 @@
   --courbe: cubic-bezier(.45, 0, .25, 1);
   --pente: 16svh;
   position: fixed; inset: 0; z-index: 1000;
-  height: 100svh; box-sizing: border-box;
+  height: var(--hauteur-ecran, 100svh); box-sizing: border-box;
   display: grid; grid-template-rows: auto 1fr auto; justify-items: center;
   padding: calc(env(safe-area-inset-top, 0px) + 12px) 16px calc(env(safe-area-inset-bottom, 0px) + 18px);
   background: var(--cd-orange);

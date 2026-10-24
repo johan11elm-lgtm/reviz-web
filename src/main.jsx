@@ -17,7 +17,7 @@ import { hideSplash } from './services/splash.js'
 import { track } from './services/statsService.js'
 import { INTERNE } from './services/interne.js'
 import { brancherPosthog } from './services/mesure.js'
-import { ecouterInstallation, detecterPlateforme } from './utils/installation.js'
+import { ecouterInstallation, detecterPlateforme, brancherHauteurEcran } from './utils/installation.js'
 import { ecouterErreurDeChunk } from './utils/rechargement.js'
 
 // App native (Capacitor) : layout plein écran forcé quelle que soit la
@@ -49,6 +49,9 @@ if (typeof history !== 'undefined' && 'scrollRestoration' in history) {
 // version n'existe plus, un rechargement unique récupère la nouvelle (voir utils/rechargement.js).
 // Branché avant le render : la première navigation paresseuse en a déjà besoin.
 ecouterErreurDeChunk();
+
+// App installée sur iPhone : la vraie hauteur de l'écran pour les écrans figés (voir utils/installation.js).
+brancherHauteurEcran();
 
 // ── Render first, load monitoring after ─────────────────────────────
 createRoot(document.getElementById('root')).render(

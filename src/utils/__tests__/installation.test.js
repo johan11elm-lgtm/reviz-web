@@ -3,6 +3,7 @@ import {
   detecterPlateforme,
   navigateurIntegre,
   estInstallee,
+  brancherHauteurEcran,
   ecouterInstallation,
   installationDirectePossible,
   installerDirectement,
@@ -49,6 +50,34 @@ describe('estInstallee', () => {
   it('faux dans un onglet de navigateur', () => {
     expect(estInstallee(fenetre(undefined, false))).toBe(false)
     expect(estInstallee(undefined)).toBe(false)
+  })
+})
+
+describe('brancherHauteurEcran', () => {
+  const fenetre = ({ standalone, innerWidth = 390, innerHeight = 797, ecran = 844 }) => {
+    const style = new Map()
+    return {
+      navigator: { standalone }, matchMedia: () => ({ matches: false }),
+      innerWidth, innerHeight, screen: { height: ecran },
+      document: { documentElement: { style: { setProperty: (k, v) => style.set(k, v) } } },
+      addEventListener: () => {}, removeEventListener: () => {},
+      style,
+    }
+  }
+  it("app installée sur téléphone : la hauteur de l'écran entier, barre d'état comprise", () => {
+    const w = fenetre({ standalone: true })
+    brancherHauteurEcran(w)
+    expect(w.style.get('--hauteur-ecran')).toBe('844px')
+  })
+  it("dans le navigateur : rien n'est posé (les écrans gardent 100svh)", () => {
+    const w = fenetre({ standalone: undefined })
+    brancherHauteurEcran(w)
+    expect(w.style.has('--hauteur-ecran')).toBe(false)
+  })
+  it("sur iPad (plus large qu'un téléphone) : la hauteur de la fenêtre, pas celle de l'écran", () => {
+    const w = fenetre({ standalone: true, innerWidth: 820, innerHeight: 1000, ecran: 1180 })
+    brancherHauteurEcran(w)
+    expect(w.style.get('--hauteur-ecran')).toBe('1000px')
   })
 })
 

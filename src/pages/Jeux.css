@@ -254,7 +254,7 @@
    de hauteur quand la barre de Safari se repliait ou revenait (souvent en touchant le bas de
    l'écran) et toute la scène se recalait d'un coup. */
 @media (max-width: 430px) {
-  .app.mg-page { height: 100svh; }
+  .app.mg-page { height: var(--hauteur-ecran, 100svh); }
 }
 
 .mg-page .mg-bulle { position: absolute; left: -40px; right: -40px; bottom: 90%; z-index: 3; display: flex; justify-content: center; }
