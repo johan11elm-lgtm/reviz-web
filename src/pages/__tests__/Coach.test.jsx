@@ -50,7 +50,10 @@ describe('<Coach /> — Réviz IA', () => {
       const page = container.querySelector('.ia-page')
       expect(page.style.getPropertyValue('--ia-hauteur')).toBe('844px')
       expect(page.hasAttribute('data-clavier')).toBe(false)
-      // Le clavier s'ouvre : Safari décale la zone visible de 120 px et n'en montre plus que 380.
+      // Le clavier s'ouvre : Safari décale la zone visible de 120 px et n'en montre plus que 380 ; comme sur
+      // iPhone, window.innerHeight rétrécit aussi (seule la racine garde la hauteur de la page).
+      Object.defineProperty(document.documentElement, 'clientHeight', { configurable: true, value: 844 })
+      Object.defineProperty(window, 'innerHeight', { configurable: true, value: 380 })
       Object.assign(vv, { height: 380, offsetTop: 120 })
       act(() => ecouteurs.resize())
       expect(page.style.getPropertyValue('--ia-hauteur')).toBe('380px')
@@ -58,6 +61,7 @@ describe('<Coach /> — Réviz IA', () => {
       expect(page.hasAttribute('data-clavier')).toBe(true)
       // La barre de saisie est dans la page (dans le flux), pas fixée ailleurs.
       expect(page.contains(container.querySelector('.ia-pied--tel'))).toBe(true)
+      Object.defineProperty(window, 'innerHeight', { configurable: true, value: 844 })
       Object.assign(vv, { height: 844, offsetTop: 0 }) // clavier fermé
       act(() => ecouteurs.resize())
       expect(page.style.getPropertyValue('--ia-hauteur')).toBe('844px')
@@ -66,6 +70,7 @@ describe('<Coach /> — Réviz IA', () => {
       Object.defineProperty(window, 'visualViewport', { configurable: true, value: avant.vv })
       Object.defineProperty(window, 'innerHeight', { configurable: true, value: avant.h })
       window.matchMedia = avant.mm
+      delete document.documentElement.clientHeight
     }
   })
 

@@ -252,7 +252,7 @@ export default function Coach() {
     if (!vv || !telephone()) return;
     const maj = () => {
       const page = fil.current?.closest('.ia-page');
-      const clavier = window.innerHeight - vv.height - vv.offsetTop > 40;
+      const clavier = hauteurPage() - vv.height - vv.offsetTop > 40;
       page?.style.setProperty('--ia-hauteur', `${Math.round(vv.height)}px`);
       page?.style.setProperty('--ia-haut', `${Math.round(vv.offsetTop)}px`);
       page?.toggleAttribute('data-clavier', clavier);
@@ -504,6 +504,9 @@ export default function Coach() {
 
 // Téléphone : .app est figé à la hauteur de l'écran (global.css, max-width 430 px), la fenêtre ne défile pas.
 const telephone = () => typeof window !== 'undefined' && window.matchMedia?.('(max-width: 430px)').matches;
+// La hauteur de la page sans le clavier : sur iPhone, window.innerHeight rétrécit avec le clavier (c'est la
+// zone visible), pas la hauteur de l'élément racine.
+const hauteurPage = () => Math.max(window.innerHeight, document.documentElement.clientHeight);
 // Safari iOS décale la page pour montrer le champ sous le clavier et peut la laisser décalée une fois le
 // clavier fermé (le champ se désactive pendant la réponse) : les touchers ne tombent alors plus sur ce qu'on
 // voit. Sur téléphone, la page n'a aucune raison d'être défilée : on la remet en place.
@@ -511,7 +514,7 @@ function remettreLaPage() {
   if (!telephone()) return;
   setTimeout(() => {
     const vv = window.visualViewport;
-    const clavierOuvert = vv && window.innerHeight - vv.height - vv.offsetTop > 40;
+    const clavierOuvert = vv && hauteurPage() - vv.height - vv.offsetTop > 40;
     if (!clavierOuvert && (window.scrollY || document.documentElement.scrollTop)) window.scrollTo(0, 0);
   }, 60);
 }
