@@ -253,8 +253,17 @@ export default function Coach() {
     if (!colle.current) return;
     const el = fil.current;
     if (el) el.scrollTop = el.scrollHeight;
-    if (!isDesktop) window.scrollTo({ top: document.documentElement.scrollHeight });
+    // Tablette seulement : sur téléphone, faire défiler la fenêtre (qui ne défile pas) laissait Safari iOS
+    // décalé après la fermeture du clavier, et plus aucun toucher ne tombait au bon endroit (Johan, 24/10).
+    if (!isDesktop && !telephone()) window.scrollTo({ top: document.documentElement.scrollHeight });
   }, [messages, brouillon, erreur, isDesktop]);
+  // Le clavier se ferme (zone visible qui retrouve sa hauteur) : la page est remise en place (voir remettreLaPage).
+  useEffect(() => {
+    const vv = window.visualViewport;
+    if (!vv) return;
+    vv.addEventListener('resize', remettreLaPage);
+    return () => vv.removeEventListener('resize', remettreLaPage);
+  }, []);
   useEffect(() => {
     const el = champ.current;
     if (!el) return;
@@ -404,6 +413,7 @@ export default function Coach() {
             rows={1}
             value={saisie}
             onChange={e => setSaisie(e.target.value)}
+            onBlur={remettreLaPage}
             onKeyDown={e => { if (e.key === 'Enter' && !e.shiftKey && !e.nativeEvent.isComposing) { e.preventDefault(); envoyer(saisie); } }}
             placeholder={isDesktop && vide ? 'Demande à Réviz IA, ou dépose une photo de ta leçon' : 'Demande à Réviz IA'}
             maxLength={CHAT_MAX_MESSAGE_LENGTH}
@@ -490,6 +500,16 @@ export default function Coach() {
       {fenetres}
     </div>
   );
+}
+
+// Téléphone : .app est figé à la hauteur de l'écran (global.css, max-width 430 px), la fenêtre ne défile pas.
+const telephone = () => typeof window !== 'undefined' && window.matchMedia?.('(max-width: 430px)').matches;
+// Safari iOS décale la page pour montrer le champ sous le clavier et peut la laisser décalée une fois le
+// clavier fermé (le champ se désactive pendant la réponse) : les touchers ne tombent alors plus sur ce qu'on
+// voit. Sur téléphone, la page n'a aucune raison d'être défilée : on la remet en place.
+function remettreLaPage() {
+  if (!telephone()) return;
+  setTimeout(() => { if (window.scrollY || document.documentElement.scrollTop) window.scrollTo(0, 0); }, 60);
 }
 
 function Marque() {
