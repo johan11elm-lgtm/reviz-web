@@ -61,7 +61,7 @@
   overflow-y: auto;
   overscroll-behavior: contain;
   -webkit-overflow-scrolling: touch;
-  padding: 6px 20px calc(var(--ia-pied, calc(190px + env(safe-area-inset-bottom, 0px))) + 16px);
+  padding: 6px 20px calc(var(--ia-pied, calc(190px + env(safe-area-inset-bottom, 0px))) + var(--ia-clavier, 0px) + 16px);
 }
 .ia-fil-int { display: flex; flex-direction: column; gap: 24px; }
 
@@ -153,7 +153,8 @@
   position: fixed;
   left: 0;
   right: 0;
-  bottom: 0;
+  /* Clavier ouvert : posée juste au-dessus (--ia-clavier, mesuré dans Coach.jsx). */
+  bottom: var(--ia-clavier, 0px);
   padding: 18px 14px calc(14px + env(safe-area-inset-bottom, 0px));
   background: linear-gradient(rgba(248,239,231,0), #F8EFE7 30%);
 }

@@ -57,6 +57,29 @@ describe('<Coach /> — Réviz IA', () => {
     }
   })
 
+  it('téléphone, clavier ouvert : la barre de saisie remonte au-dessus du clavier, puis redescend', () => {
+    const ecouteurs = {}
+    const vv = { height: 844, offsetTop: 0, addEventListener: (t, f) => { ecouteurs[t] = f }, removeEventListener: () => {} }
+    const avant = { vv: window.visualViewport, mm: window.matchMedia, h: window.innerHeight }
+    Object.defineProperty(window, 'visualViewport', { configurable: true, value: vv })
+    Object.defineProperty(window, 'innerHeight', { configurable: true, value: 844 })
+    window.matchMedia = q => ({ matches: q.includes('max-width: 430px'), media: q, addEventListener() {}, removeEventListener() {} })
+    try {
+      const { container } = renderAt('/coach?lesson=l1')
+      const page = container.querySelector('.ia-page')
+      vv.height = 500 // le clavier prend 344 px
+      act(() => ecouteurs.resize())
+      expect(page.style.getPropertyValue('--ia-clavier')).toBe('344px')
+      vv.height = 844 // clavier fermé
+      act(() => ecouteurs.resize())
+      expect(page.style.getPropertyValue('--ia-clavier')).toBe('0px')
+    } finally {
+      Object.defineProperty(window, 'visualViewport', { configurable: true, value: avant.vv })
+      Object.defineProperty(window, 'innerHeight', { configurable: true, value: avant.h })
+      window.matchMedia = avant.mm
+    }
+  })
+
   it('accueil : salut, les 4 cartes de départ et la leçon attachée', () => {
     renderAt('/coach?lesson=l2')
     expect(screen.getByRole('heading', { name: /Salut Léa\. On révise quoi/ })).toBeInTheDocument()

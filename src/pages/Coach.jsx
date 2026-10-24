@@ -257,12 +257,21 @@ export default function Coach() {
     // décalé après la fermeture du clavier, et plus aucun toucher ne tombait au bon endroit (Johan, 24/10).
     if (!isDesktop && !telephone()) window.scrollTo({ top: document.documentElement.scrollHeight });
   }, [messages, brouillon, erreur, isDesktop]);
-  // Le clavier se ferme (zone visible qui retrouve sa hauteur) : la page est remise en place (voir remettreLaPage).
+  // Téléphone, clavier ouvert : Safari ne réduit pas la page, la barre de saisie fixée en bas restait derrière
+  // le clavier. On mesure le clavier (ce que la zone visible ne montre plus du bas de la page) dans
+  // --ia-clavier : la barre remonte d'autant, le fil aussi. Clavier fermé : la page est remise en place.
   useEffect(() => {
     const vv = window.visualViewport;
-    if (!vv) return;
-    vv.addEventListener('resize', remettreLaPage);
-    return () => vv.removeEventListener('resize', remettreLaPage);
+    if (!vv || !telephone()) return;
+    const maj = () => {
+      const clavier = Math.max(0, Math.round(window.innerHeight - vv.height - vv.offsetTop));
+      fil.current?.closest('.ia-page')?.style.setProperty('--ia-clavier', `${clavier}px`);
+      if (clavier < 40) remettreLaPage();
+      else if (colle.current && fil.current) fil.current.scrollTop = fil.current.scrollHeight;
+    };
+    vv.addEventListener('resize', maj);
+    vv.addEventListener('scroll', maj);
+    return () => { vv.removeEventListener('resize', maj); vv.removeEventListener('scroll', maj); };
   }, []);
   useEffect(() => {
     const el = champ.current;
@@ -509,7 +518,11 @@ const telephone = () => typeof window !== 'undefined' && window.matchMedia?.('(m
 // voit. Sur téléphone, la page n'a aucune raison d'être défilée : on la remet en place.
 function remettreLaPage() {
   if (!telephone()) return;
-  setTimeout(() => { if (window.scrollY || document.documentElement.scrollTop) window.scrollTo(0, 0); }, 60);
+  setTimeout(() => {
+    const vv = window.visualViewport;
+    const clavierOuvert = vv && window.innerHeight - vv.height - vv.offsetTop > 40;
+    if (!clavierOuvert && (window.scrollY || document.documentElement.scrollTop)) window.scrollTo(0, 0);
+  }, 60);
 }
 
 function Marque() {
