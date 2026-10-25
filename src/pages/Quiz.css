@@ -215,3 +215,16 @@
 .qz-page--large .qz-fin-actions .fc-btn { flex: 1; height: 58px; }
 /* Le point décoratif reste hors des zones de contenu */
 .qz-page--large .fc-point { top: auto; bottom: 90px; left: 30%; }
+
+/* Petit ordinateur et tablette en paysage (1024 à 1240 px) : avec Réviz (320 px) et le score
+   (290 px) en colonnes fixes, la question passait sur six lignes et les réponses étaient coupées. */
+@media (max-width: 1240px) {
+  .qz-page--large .qz-plateau { grid-template-columns: 200px minmax(0, 1fr) 220px; gap: 24px; }
+  .qz-page--large .qz-col-gauche .pantin { width: 180px !important; height: 180px !important; }
+  .qz-page--large .qz-col-gauche .qz-bulle .rv-bulle-txt { max-width: 200px; font-size: 17px; }
+  .qz-page--large .qz-question { font-size: 32px; }
+  .qz-page--large .qz-choix-btn { min-height: 64px; font-size: 18px; }
+  .qz-page--large .qz-suivante { width: 100%; max-width: 360px; }
+  .qz-page--large .qz-fin-grille { grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); gap: 32px; }
+  .qz-page--large .qz-score-grand { font-size: 88px; }
+}

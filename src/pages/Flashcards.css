@@ -355,3 +355,18 @@
 .fc-page--large .fc-col-centre { justify-content: center; }
 .fc-page--large .fc-scene { flex: 0 0 400px; }
 .fc-page--large .fc-actions { margin-top: 40px; }
+
+/* Petit ordinateur et tablette en paysage (1024 à 1240 px) : les colonnes fixes de Réviz et des
+   infos (300 px chacune) ne laissaient qu'environ 300 px à la carte, écrasée contre le panneau. */
+@media (max-width: 1240px) {
+  .fc-page--large .fc-ecran { padding-left: 32px; padding-right: 32px; }
+  .fc-page--large .fc-haut-gauche { left: 32px; }
+  .fc-page--large .fc-plateau { grid-template-columns: 200px minmax(0, 1fr) 220px; gap: 24px; }
+  .fc-page--large .fc-col-gauche .pantin { width: 180px !important; height: 180px !important; }
+  .fc-page--large .fc-col-gauche .fc-bulle .rv-bulle-txt { max-width: 200px; font-size: 17px; }
+  .fc-page--large .fc-taille--xxl { font-size: 44px; }
+  .fc-page--large .fc-taille--xl { font-size: 38px; }
+  .fc-page--large .fc-notes { width: 100%; }
+  .fc-page--large .fc-notes .fc-btn { width: auto; flex: 1; }
+  .fc-page--large .fc-btn--encre { width: 100%; max-width: 360px; }
+}
