@@ -5,7 +5,7 @@
 import { test, expect } from '@playwright/test'
 import {
   mockApiRoutes, mockProgramme, compteRapide, entrerEnEssai, ouvrirChapitreDuProgramme,
-  jouerQuiz, chapitreThales, lireLeconsEmulateur, sansDebordement, estOrdinateur, fermerAnnonceBattle,
+  jouerQuiz, chapitreThales, lireLeconsEmulateur, lireRevisionsEmulateur, lireProfilEmulateur, sansDebordement, estOrdinateur, fermerAnnonceBattle,
 } from './helpers'
 
 const APPAREILS = [
@@ -134,7 +134,7 @@ test.describe('Mon programme', () => {
       await page.setViewportSize(viewport)
       await mockApiRoutes(page)
       await mockProgramme(page)
-      await compteRapide(page, { aller: '/programme' })
+      const { uid } = await compteRapide(page, { aller: '/programme' })
 
       await expect(page.getByRole('heading', { name: 'Programme', level: 1 })).toBeVisible()
       await sansDebordement(page, `programme ${appareil}`)
@@ -164,6 +164,14 @@ test.describe('Mon programme', () => {
       await expect(page.getByRole('button', { name: 'Refaire le quiz' })).toBeVisible()
       await sansDebordement(page, `fin du quiz ${appareil}`)
       await page.screenshot({ path: test.info().outputPath('quiz-fin.png') })
+
+      // Sur le compte : la révision du quiz, terminée, avec son chapitre, et la première session notée
+      // pour le rappel du lendemain.
+      await expect.poll(() => lireRevisionsEmulateur(uid), { timeout: 10_000 }).toContainEqual(['quiz', 'theoreme-de-thales', 'programme', true])
+      await expect.poll(async () => {
+        const p = await lireProfilEmulateur(uid)
+        return { chapitre: p?.premiereSession?.chapterId, derniere: !!p?.derniereRevisionAt }
+      }, { timeout: 10_000 }).toEqual({ chapitre: 'theoreme-de-thales', derniere: true })
 
       // De retour sur la fiche du chapitre : le score est inscrit au parcours
       await page.getByRole('button', { name: 'Retour au chapitre' }).click()

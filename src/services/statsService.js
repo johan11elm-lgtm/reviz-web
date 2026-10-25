@@ -1,8 +1,10 @@
 // -------------------------------------------------------
 // Réviz — Compteur d'usage anonyme (côté client)
 // Envoie un événement à /api/track, qui n'additionne que des totaux par
-// jour : aucun identifiant, rien n'est stocké sur l'appareil. Ne lève
-// jamais d'erreur et n'attend jamais : un compteur perdu est sans gravité.
+// jour : aucun identifiant, rien n'est stocké sur l'appareil. Seule
+// exception, les révisions faites en mode essai portent l'identifiant
+// d'essai (voir revisionService) pour compter les élèves qui reviennent.
+// Ne lève jamais d'erreur et n'attend jamais : un compteur perdu est sans gravité.
 // -------------------------------------------------------
 import { apiFetch, IS_NATIVE } from './apiClient'
 import { GUEST_KEY } from './guestService'
@@ -55,16 +57,17 @@ function mode() {
 }
 
 /**
- * @param {'essai_demarre'|'compte_cree'|'programme_ouvert'|'chapitre_ouvert'|'revision'|'quiz_termine'
+ * @param {'essai_demarre'|'compte_cree'|'programme_ouvert'|'chapitre_ouvert'|'revision'|'revision_terminee'|'quiz_termine'
  *   |'battle_creee'|'battle_rejointe'|'battle_terminee'|'battle_revanche'|'battle_compte_propose'|'battle_annonce_cta'
  *   |'installer_ouvert'|'app_installee'|'consent_envoye'|'consent_plus_tard'|'scan_reussi'|'scan_erreur'|'ouverture'} event
  * @param {object} [props]  classe, matiere, format, source, joueur, issue, plateforme, via, v, code, anciennete (listes fermées côté serveur)
+ * @param {object} [extra]  champs ajoutés au corps de la requête ({ essai } pour une révision d'essai)
  */
-export function track(event, props = {}) {
+export function track(event, props = {}, extra = {}) {
   if (import.meta.env.MODE === 'test' || INTERNE) return
   try {
     const complet = { mode: mode(), device: device(), ...(VIA ? { via: VIA } : {}), ...(CODE ? { v: CODE } : {}), ...props }
-    const body = JSON.stringify({ event, props: complet })
+    const body = JSON.stringify({ ...extra, event, props: complet })
     // Même événement, mêmes valeurs, vers PostHog : sert aux entonnoirs du jour.
     mesurer(event, complet)
     apiFetch('/api/track', {

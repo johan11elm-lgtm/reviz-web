@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { recordRevision, loadRevisions } from '../services/revisionService'
+import { recordRevision, markRevisionDone, loadRevisions } from '../services/revisionService'
 import { getCardState, countDueCards } from '../services/srsService'
 import { Pantin } from '../components/Pantin'
 import { Mascot } from '../components/Mascot'
@@ -110,6 +110,7 @@ function QuizSession() {
     if (derniere) {
       // Le quiz terminé compte comme fait, avec son score (fiche chapitre : « 6 / 7 au quiz »).
       recordRevision('quiz', { score: nbJustes, total: questions.length })
+      markRevisionDone('quiz', { score: nbJustes, total: questions.length })
       track('quiz_termine', { source: coachLessonId?.startsWith('prog-') ? 'programme' : 'scan' })
       setFin(true)
       return

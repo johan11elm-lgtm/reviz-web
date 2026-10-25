@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { recordRevision, loadRevisions } from '../services/revisionService'
+import { recordRevision, markRevisionDone, loadRevisions } from '../services/revisionService'
 import { getDueCards, updateCardState } from '../services/srsService'
 import { Pantin } from '../components/Pantin'
 import { BulleReviz } from '../components/reviz/BulleReviz'
@@ -144,7 +144,7 @@ function FlashcardsSession() {
     setDx(0)
     setTimeout(() => {
       setSortie(null)
-      if (idx + 1 >= serie.length) { setEcran('fin'); return }
+      if (idx + 1 >= serie.length) { setEcran('fin'); markRevisionDone('flashcards'); return }
       // La carte suivante part de la pile, sans transition, puis vient au centre.
       setArrivee(true)
       setFlipped(false)

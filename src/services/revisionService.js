@@ -2,10 +2,14 @@
 // Réviz — Service de tracking des révisions
 // -------------------------------------------------------
 import { db } from './firebaseConfig'
-import { doc, setDoc, collection, getDocs, query, orderBy } from 'firebase/firestore'
+import { doc, setDoc, getDoc, collection, getDocs, query, orderBy } from 'firebase/firestore'
 import { updateChallengeProgress } from './challengeService'
 import { isGuestUid } from './guestService'
+import { isDecouverte } from './decouverteService'
+import { loadLessons } from './historyService'
+import { planifierRappelLendemain } from './reminderService'
 import { track as trackStat } from './statsService'
+import { jourParis } from '../utils/retour'
 
 let _uid = null
 const MAX_REVISIONS = 500
@@ -33,6 +37,67 @@ function track(promise) {
   return p
 }
 
+// Leçon de la révision : d'où elle vient et, pour un chapitre du programme,
+// de quoi le rouvrir (rappel du lendemain, pilotage).
+function contexteLecon(lessonId) {
+  const source = lessonId?.startsWith('prog-') ? 'programme' : 'scan'
+  const lesson = lessonId ? loadLessons().find(l => l.id === lessonId) : null
+  const ctx = { source }
+  if (lesson?.chapterId) ctx.chapterId = lesson.chapterId
+  if (lesson?.classe) ctx.classe = lesson.classe
+  if (lesson?.matiere) ctx.matiere = lesson.matiere
+  const titre = lesson?.metadata?.title
+  if (titre) ctx.titre = String(titre).slice(0, 120)
+  return ctx
+}
+
+// Mode essai (hors découverte prof) : la révision part aussi, avec
+// l'identifiant d'essai, vers essais/{id} (api/track.js). Pas de prénom.
+function essaiPayload(entry) {
+  if (!isGuestUid(_uid) || isDecouverte()) return {}
+  const { id, type, source, chapterId, classe, matiere } = entry
+  return { essai: { id: _uid, revision: { id, type, source, chapterId, classe, matiere } } }
+}
+
+const premiereKey = () => `reviz-premiere-session-${_uid}`
+
+/**
+ * Profil d'un vrai compte : date de la dernière révision, et première
+ * session (jour, chapitre) notée une seule fois — le cron du lendemain
+ * s'en sert pour le rappel J+1. Fire-and-forget.
+ */
+async function noterActivite(entry) {
+  const ref = doc(db, 'users', _uid)
+  const maj = { derniereRevisionAt: entry.revisedAt }
+  let premiere = null
+  try { premiere = localStorage.getItem(premiereKey()) } catch { /* stockage indispo */ }
+  if (!premiere) {
+    const snap = await getDoc(ref)
+    const deja = snap.exists() ? snap.data()?.premiereSession : null
+    if (deja?.jour) premiere = deja.jour
+    else {
+      premiere = jourParis(new Date(entry.revisedAt))
+      const { lessonId, source, chapterId, classe, matiere, titre } = entry
+      maj.premiereSession = Object.fromEntries(Object.entries({
+        jour: premiere, at: entry.revisedAt, lessonId, source, chapterId, classe, matiere, titre,
+      }).filter(([, v]) => v != null))
+    }
+    try { localStorage.setItem(premiereKey(), premiere) } catch { /* stockage indispo */ }
+  }
+  await setDoc(ref, maj, { merge: true })
+  return premiere
+}
+
+// Jour de la première session sur cet appareil (essai compris), pour la
+// notification locale du lendemain.
+function premierJourLocal() {
+  try {
+    let j = localStorage.getItem(premiereKey())
+    if (!j) { j = jourParis(); localStorage.setItem(premiereKey(), j) }
+    return j
+  } catch { return null }
+}
+
 /**
  * Enregistre une session de révision (ouverture d'un format, résumé lu, quiz terminé…).
  * @param {'flashcards'|'quiz'|'resume'|'mindmap'} type
@@ -41,8 +106,9 @@ function track(promise) {
 export function recordRevision(type, details = {}) {
   const lessonId  = localStorage.getItem('reviz-current-lesson-id') ?? null
   const revisions = loadRevisions()
-  const entry = { ...details, id: String(Date.now()), type, lessonId, revisedAt: Date.now() }
-  trackStat('revision', { format: type, source: lessonId?.startsWith('prog-') ? 'programme' : 'scan' })
+  const { titre, ...ctx } = contexteLecon(lessonId)
+  const entry = { ...details, id: String(Date.now()), type, lessonId, revisedAt: Date.now(), ...ctx }
+  trackStat('revision', { format: type, source: ctx.source, classe: ctx.classe, matiere: ctx.matiere }, essaiPayload(entry))
   revisions.unshift(entry)
   if (revisions.length > MAX_REVISIONS) revisions.splice(MAX_REVISIONS)
   localStorage.setItem(getKey(), JSON.stringify(revisions))
@@ -56,10 +122,53 @@ export function recordRevision(type, details = {}) {
   ).map(r => r.type));
   updateChallengeProgress(type, { dailyCount: todayRevisions, formatsUsed });
 
+  // Notification du lendemain (app native, permission déjà donnée) : posée
+  // le jour de la première session, annulée dès que l'élève revient.
+  const rappel = premierJour => planifierRappelLendemain(
+    premierJour === jourParis(new Date(entry.revisedAt)) ? { titre: titre ?? null } : null,
+  ).catch(() => {})
+
   // Firestore write-through (fire-and-forget)
   if (canSync()) {
     track(setDoc(doc(db, 'users', _uid, 'revisions', entry.id), entry))
+    track(noterActivite({ ...entry, titre }).then(rappel))
+  } else if (_uid) {
+    rappel(premierJourLocal())
   }
+  return entry
+}
+
+/**
+ * Révision menée jusqu'au bout (dernière question du quiz, dernière carte) :
+ * complète l'entrée ouverte par recordRevision() pour ce format.
+ * @param {'flashcards'|'quiz'} type
+ * @param {{ score?: number, total?: number }} [resultat]
+ */
+export function markRevisionDone(type, resultat = {}) {
+  const lessonId = localStorage.getItem('reviz-current-lesson-id') ?? null
+  const revisions = loadRevisions()
+  const entry = revisions.find(r => r.type === type && r.lessonId === lessonId && !r.termineAt)
+  if (!entry || Date.now() - entry.revisedAt > 3 * 60 * 60 * 1000) return null
+  entry.termineAt = Date.now()
+  if (Number.isFinite(resultat.score) && Number.isFinite(resultat.total)) {
+    entry.score = resultat.score
+    entry.total = resultat.total
+  }
+  localStorage.setItem(getKey(), JSON.stringify(revisions))
+  trackStat('revision_terminee', { format: type, source: entry.source ?? 'scan' }, essaiPayload(entry))
+  if (canSync()) {
+    track(setDoc(doc(db, 'users', _uid, 'revisions', entry.id), entry))
+  }
+  return entry
+}
+
+/**
+ * Essai devenu compte : l'identifiant d'essai est noté sur le profil, pour
+ * que le pilotage ne compte pas deux fois le même élève. Fire-and-forget.
+ */
+export function lierEssai(essaiId) {
+  if (!canSync() || !isGuestUid(essaiId)) return
+  track(setDoc(doc(db, 'users', _uid), { essaiId }, { merge: true }))
 }
 
 /**

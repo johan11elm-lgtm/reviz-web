@@ -501,6 +501,14 @@ export async function lireLeconsEmulateur(uid) {
   return documents.map(d => d.name.split('/').pop())
 }
 
+/** Les révisions rangées dans users/{uid}/revisions de l'émulateur Firestore : [type, chapterId, source, terminée]. */
+export async function lireRevisionsEmulateur(uid) {
+  const res = await fetch(`${FIRESTORE}/users/${uid}/revisions`, { headers: { Authorization: 'Bearer owner' } })
+  if (!res.ok) throw new Error(`émulateur (lecture révisions ${uid}) : ${res.status} ${await res.text()}`)
+  const { documents = [] } = await res.json()
+  return documents.map(({ fields: f }) => [f.type?.stringValue, f.chapterId?.stringValue, f.source?.stringValue, 'termineAt' in f])
+}
+
 // ── Horloge figée : l'offre de lancement dépend de la date (lot B1) ─────────
 
 // L'offre de lancement change le 26/10/2026 à minuit, heure de Paris (api/_lancement.js : FIN_LANCEMENT).

@@ -25,7 +25,14 @@ describe('nettoyage des Battles (émulateurs)', () => {
     await db.collection('battlesComptees').doc('VIEU-1').set({ compteLe: Timestamp.fromMillis(maintenant - 72 * HEURE) })
     await db.collection('battlesComptees').doc('JEUX-2').set({ compteLe: Timestamp.fromMillis(maintenant - HEURE) })
 
-    expect(await nettoyer({ rtdb, db, maintenant })).toEqual({ salons: 2, marques: 1 })
+    const JOUR = 24 * HEURE
+    await db.collection('essais').doc('invite-vieux').set({ derniereRevisionAt: maintenant - 400 * JOUR })
+    await db.collection('essais').doc('invite-vieux').collection('revisions').doc('1').set({ type: 'quiz' })
+    await db.collection('essais').doc('invite-actif').set({ derniereRevisionAt: maintenant - JOUR })
+
+    expect(await nettoyer({ rtdb, db, maintenant })).toEqual({ salons: 2, marques: 1, essais: 1 })
+    expect((await db.collection('essais').get()).docs.map(d => d.id)).toEqual(['invite-actif'])
+    expect((await db.collection('essais').doc('invite-vieux').collection('revisions').get()).size).toBe(0)
     expect(Object.keys((await rtdb.ref('battles').get()).val())).toEqual(['JEUX'])
     expect((await db.collection('battlesComptees').get()).docs.map(d => d.id)).toEqual(['JEUX-2'])
   })
