@@ -167,7 +167,7 @@ export default function ConsentPending() {
         <>
           {plusTardPossible && (
             <button type="button" className="en-btn-second" onClick={plusTard}>
-              Plus tard, je commence à réviser
+              Plus tard, je révise d’abord
               <small>Il te reste {jours(joursRestants)}</small>
             </button>
           )}

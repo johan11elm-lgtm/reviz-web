@@ -50,6 +50,19 @@ test.describe('Consentement parental (<15 ans)', () => {
     await expect(page).toHaveURL(/consent-pending/)
   })
 
+  test('petit Android : l’étape parent n’ouvre pas le clavier, et « Plus tard » se voit sans défiler', async ({ page }) => {
+    // Un élève sur cinq s'arrêtait sur cet écran (25/10) : le clavier ouvert tout seul cachait « Plus tard ».
+    await page.setViewportSize({ width: 360, height: 640 })
+    await mockApiRoutes(page)
+    await page.goto('/inscription')
+    await remplirTunnelInscription(page, { birthDate: '2013-04-10', email: uniqueEmail('android') })
+    await expect(page.getByLabel('E-mail de ton parent')).toBeVisible()
+    await expect(page.getByLabel('E-mail de ton parent')).not.toBeFocused()
+    await expect(page.getByRole('button', { name: /Plus tard, je révise d’abord/ })).toBeInViewport()
+    await page.getByRole('button', { name: /Plus tard, je révise d’abord/ }).click()
+    await expect(page).not.toHaveURL(/\/inscription/)
+  })
+
   test('l\'email du parent ne peut pas être celui de l\'élève', async ({ page }) => {
     await mockApiRoutes(page)
     await page.goto('/inscription')

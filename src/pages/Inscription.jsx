@@ -334,23 +334,26 @@ export default function Inscription() {
           </>
         ),
       };
+      // Un élève sur cinq s'arrêtait ici (25/10) : le champ prenait le focus, le clavier d'Android
+      // cachait « Plus tard » et il ne voyait qu'une demande d'e-mail de ses parents. Plus de focus
+      // automatique, et « Plus tard » juste sous l'envoi, dans la carte, toujours visible.
       case 'parent': return {
-        bulle: ['Ton compte est prêt.', 'Plus qu’un petit oui de ton parent.'],
+        bulle: ['Ton compte est prêt.', 'Tu peux réviser tout de suite.'],
         corps: (
           <>
             <p className="en-texte">
-              Comme tu as moins de 15 ans, un de tes parents doit donner son accord par e-mail.
-              Pas son adresse sous la main ? Commence quand même : <b>tu as 15 jours</b>.
+              Comme tu as moins de 15 ans, un parent doit dire oui par e-mail. Donne son adresse maintenant,
+              ou <b>dans les 15 jours</b>.
             </p>
             <Champ id="signup-parent-email" label="E-mail de ton parent" type="email" placeholder="parent@exemple.com"
               value={parentEmail} erreur={erreurs.parent}
               onChange={e => { setParentEmail(e.target.value); effacer('parent'); }}
-              autoComplete="email" autoCapitalize="none" enterKeyHint="send" autoFocus />
+              autoComplete="email" autoCapitalize="none" enterKeyHint="send" />
           </>
         ),
-        dessous: (
+        apres: (
           <button type="button" className="en-btn-second" onClick={plusTard} disabled={loading}>
-            {plusTardEnCours ? 'Un instant…' : 'Plus tard, je commence à réviser'}
+            {plusTardEnCours ? 'Un instant…' : 'Plus tard, je révise d’abord'}
             <small>Il te reste 15 jours</small>
           </button>
         ),
@@ -378,6 +381,7 @@ export default function Inscription() {
         {etape.corps}
         <Erreur>{erreurs.general}</Erreur>
         <button className="en-btn" type="submit" disabled={loading}>{primaryLabel}</button>
+        {etape.apres}
       </form>
     </EntreeEcran>
   );
