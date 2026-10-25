@@ -8,6 +8,7 @@ import { apiFetch, IS_NATIVE } from './apiClient'
 import { GUEST_KEY } from './guestService'
 import { INTERNE } from './interne'
 import { mesurer } from './mesure'
+import { normaliserCode } from '../utils/codesVideo'
 
 function device() {
   if (IS_NATIVE) return 'app'
@@ -30,7 +31,23 @@ export function readVia(search) {
   } catch { return null }
 }
 
-const VIA = readVia()
+/** Code de la vidéo d'origine (`&v=vf6`, voir utils/codesVideo.js), ou null. */
+export function readCodeVideo(search) {
+  try { return normaliserCode(new URLSearchParams(search ?? window.location.search).get('v')) }
+  catch { return null }
+}
+
+let VIA = readVia()
+let CODE = readCodeVideo()
+
+/**
+ * Provenance fixée en cours de route : l'adresse courte /v/<code> la connaît
+ * avant de rediriger vers l'essai (la page n'est pas rechargée).
+ */
+export function setProvenance(via, code) {
+  VIA = via || null
+  CODE = normaliserCode(code)
+}
 
 function mode() {
   try { return localStorage.getItem(GUEST_KEY) ? 'essai' : 'compte' }
@@ -41,12 +58,12 @@ function mode() {
  * @param {'essai_demarre'|'compte_cree'|'programme_ouvert'|'chapitre_ouvert'|'revision'|'quiz_termine'
  *   |'battle_creee'|'battle_rejointe'|'battle_terminee'|'battle_revanche'|'battle_compte_propose'|'battle_annonce_cta'
  *   |'installer_ouvert'|'app_installee'|'consent_envoye'|'consent_plus_tard'|'scan_reussi'|'scan_erreur'|'ouverture'} event
- * @param {object} [props]  classe, matiere, format, source, joueur, issue, plateforme, via, code, anciennete (listes fermées côté serveur)
+ * @param {object} [props]  classe, matiere, format, source, joueur, issue, plateforme, via, v, code, anciennete (listes fermées côté serveur)
  */
 export function track(event, props = {}) {
   if (import.meta.env.MODE === 'test' || INTERNE) return
   try {
-    const complet = { mode: mode(), device: device(), ...(VIA ? { via: VIA } : {}), ...props }
+    const complet = { mode: mode(), device: device(), ...(VIA ? { via: VIA } : {}), ...(CODE ? { v: CODE } : {}), ...props }
     const body = JSON.stringify({ event, props: complet })
     // Même événement, mêmes valeurs, vers PostHog : sert aux entonnoirs du jour.
     mesurer(event, complet)

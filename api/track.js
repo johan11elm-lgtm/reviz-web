@@ -9,6 +9,7 @@
 // -------------------------------------------------------
 import { FieldValue } from 'firebase-admin/firestore'
 import { getDb } from './_firebaseAdmin.js'
+import { CODES_VIDEO } from '../src/utils/codesVideo.js'
 
 export const EVENTS = [
   'essai_demarre', 'compte_cree', 'programme_ouvert', 'chapitre_ouvert', 'revision', 'quiz_termine',
@@ -45,8 +46,12 @@ const ALLOWED = {
   // tranches : « essai_j1 » = un essai rouvert le lendemain de son début.
   anciennete: ['essai', 'compte'].flatMap(m => ['j0', 'j1', 'j2_7', 'j8_30', 'j31_plus'].map(t => `${m}_${t}`)),
   // Provenance (`?via=` dans le lien de bio, d'une épingle, d'une affiche ou
-  // d'une fiche publique du site) : d'où vient l'élève, sans rien identifier.
-  via: ['tiktok', 'instagram', 'pinterest', 'youtube', 'affiche', 'landing', 'fiche'],
+  // d'une fiche publique du site, d'une vidéo) : d'où vient l'élève, sans rien
+  // identifier. « reseaux » : vidéo publiée à la fois sur TikTok et Instagram.
+  via: ['tiktok', 'instagram', 'reseaux', 'pinterest', 'youtube', 'affiche', 'landing', 'fiche'],
+  // Vidéo d'origine (adresse courte revizapp.fr/<code>) : seulement les codes
+  // du tableau src/utils/codesVideo.js.
+  v: Object.keys(CODES_VIDEO),
   // Code de l'erreur de scan (jamais le texte de la leçon). Les codes
   // API_ERROR_<statut HTTP> sont acceptés à part ; tout le reste devient « AUTRE ».
   code: [
