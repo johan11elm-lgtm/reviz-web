@@ -13,7 +13,7 @@ import { Mascot } from '../components/Mascot';
 import { Pantin } from '../components/Pantin';
 import { BulleReviz } from '../components/reviz/BulleReviz';
 import { RevizPlusSheet } from '../components/RevizPlus';
-import { THEMES } from '../utils/themes';
+import { THEMES_PROPOSES, SOMBRE_DISPONIBLE, themeAffiche } from '../utils/themes';
 import { TEINTES, varsTeinte } from '../utils/teinteMatiere';
 import { phaseRevizPlus, joursAvant, dateCourte } from '../utils/revizPlus';
 import { openBillingPortal, startCheckout } from '../services/billingService';
@@ -337,7 +337,7 @@ export default function Reglages() {
 
   const tuile = t => {
     const verrou = t.premium && !hasRevizPlus;
-    const actif = theme === t.id;
+    const actif = themeAffiche(theme) === t.id;
     const p = t.preview;
     return (
       <button key={t.id} type="button" role="radio" aria-checked={actif}
@@ -362,11 +362,11 @@ export default function Reglages() {
   const apparence = (
     <section className="rg-carte" id="themes" aria-labelledby="rg-apparence">
       <h2 id="rg-apparence" className="rg-h2">Apparence</h2>
-      {ligne({ icone: <MoonIcon />, teinte: 'lavande', label: 'Mode sombre', droite: <Interrupteur checked={isDark} onChange={toggleTheme} label="Activer le mode sombre" /> })}
+      {SOMBRE_DISPONIBLE && ligne({ icone: <MoonIcon />, teinte: 'lavande', label: 'Mode sombre', droite: <Interrupteur checked={isDark} onChange={toggleTheme} label="Activer le mode sombre" /> })}
       <span className="rg-sur">Classiques</span>
-      <div className="rg-themes" role="radiogroup" aria-label="Thèmes classiques">{THEMES.filter(t => !t.premium).map(tuile)}</div>
-      <span className="rg-sur">Réviz+ <em>{hasRevizPlus ? `${THEMES.filter(t => t.premium).length} thèmes débloqués` : 'Avec Réviz+'}</em></span>
-      <div className="rg-themes" role="radiogroup" aria-label="Thèmes Réviz+">{THEMES.filter(t => t.premium).map(tuile)}</div>
+      <div className="rg-themes" role="radiogroup" aria-label="Thèmes classiques">{THEMES_PROPOSES.filter(t => !t.premium).map(tuile)}</div>
+      <span className="rg-sur">Réviz+ <em>{hasRevizPlus ? `${THEMES_PROPOSES.filter(t => t.premium).length} thèmes débloqués` : 'Avec Réviz+'}</em></span>
+      <div className="rg-themes" role="radiogroup" aria-label="Thèmes Réviz+">{THEMES_PROPOSES.filter(t => t.premium).map(tuile)}</div>
       {themeVerrouille && (
         <div className="rg-verrou" role="status">
           <b>{themeVerrouille} fait partie de Réviz+.</b>
@@ -437,7 +437,7 @@ export default function Reglages() {
           <ul className="rg-avantages">
             <li><CheckIcon />Scans de leçons illimités</li>
             <li><CheckIcon />Questions à Réviz IA illimitées</li>
-            <li><CheckIcon />Les 4 thèmes Réviz+</li>
+            <li><CheckIcon />Les {THEMES_PROPOSES.filter(t => t.premium).length} thèmes Réviz+</li>
           </ul>
           {VENTES_OUVERTES && <button type="button" className="rg-btn" onClick={() => setRevizPlusOuvert(true)}>Découvrir Réviz+</button>}
         </>

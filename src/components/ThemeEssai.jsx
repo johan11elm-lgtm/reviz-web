@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { THEMES } from '../utils/themes';
+import { THEMES_PROPOSES } from '../utils/themes';
 import './ThemeEssai.css';
 
 const CLE = 'reviz-essai-theme-vu';
@@ -30,7 +30,7 @@ export function ThemeVignette({ preview, className = '' }) {
  * Disparaît au premier clic (lien ou croix).
  */
 export function ThemeEssai({ onClose }) {
-  const premium = THEMES.filter(t => t.premium);
+  const premium = THEMES_PROPOSES.filter(t => t.premium);
   const fermer = () => { marquerVu(); onClose(); };
   return (
     <div className="te-carte">

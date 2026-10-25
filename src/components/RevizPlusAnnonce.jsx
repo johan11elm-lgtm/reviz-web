@@ -53,7 +53,7 @@ const TEXTES = {
 const AVANTAGES = [
   { icone: <CameraIcon />, teinte: 'lavande', titre: 'Scans illimités', detail: 'au lieu de 5 par semaine' },
   { icone: <ChatIcon />, teinte: 'peche', titre: 'Réviz IA illimitée', detail: 'au lieu de 10 questions par jour' },
-  { icone: <SunIcon />, teinte: 'menthe', titre: 'Tous les thèmes', detail: '6 au lieu de 2' },
+  { icone: <SunIcon />, teinte: 'menthe', titre: 'Tous les thèmes', detail: '4 au lieu de 1' }, // sombre suspendu (SOMBRE_DISPONIBLE)
 ];
 
 /**

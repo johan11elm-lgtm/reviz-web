@@ -31,7 +31,7 @@ for (const [appareil, viewport] of APPAREILS) {
     await essai.click()
     await expect(page).toHaveURL(/\/reglages#themes/)
     await expect(page.getByRole('radiogroup', { name: 'Thèmes Réviz+' })).toBeVisible()
-    await expect(page.getByText('4 thèmes débloqués')).toBeVisible()
+    await expect(page.getByText('3 thèmes débloqués')).toBeVisible()
     await capture('02-themes')
 
     // Choisir Prune : appliqué tout de suite, et gardé après rechargement.
@@ -43,12 +43,16 @@ for (const [appareil, viewport] of APPAREILS) {
     await capture('03-themes-prune')
 
     // Accueil dans chaque thème Réviz+ (le thème tient, pas de repli sur Crème pendant l'offre).
-    for (const t of ['prune', 'abricot', 'sauge', 'nuit-encre']) {
+    for (const t of ['prune', 'abricot', 'sauge']) {
       await page.evaluate(id => localStorage.setItem('reviz-theme', id), t)
       await page.goto('/')
       await expect(page.locator('html')).toHaveAttribute('data-theme', t)
       await capture(`04-accueil-${t}`)
     }
+    // Nuit d'encre (sombre) n'est plus appliqué tant que la refonte n'a pas sa version sombre.
+    await page.evaluate(() => localStorage.setItem('reviz-theme', 'nuit-encre'))
+    await page.goto('/')
+    await expect(page.locator('html')).toHaveAttribute('data-theme', 'light')
     // Retour à Crème : la carte d'essai, déjà ouverte une fois, ne revient pas.
     await page.evaluate(() => localStorage.setItem('reviz-theme', 'light'))
     await page.goto('/')
@@ -105,7 +109,7 @@ for (const [appareil, viewport] of APPAREILS) {
     await page.goto('/reglages#themes')
     await expect(page.getByRole('radiogroup', { name: 'Thèmes Réviz+' })).toBeVisible()
     await expect(page.getByText('Avec Réviz+', { exact: true })).toBeVisible()
-    await expect(page.getByText('4 thèmes débloqués')).toHaveCount(0)
+    await expect(page.getByText('3 thèmes débloqués')).toHaveCount(0)
     const prune = page.getByRole('radio', { name: /Thème Prune \(Réviz\+\), verrouillé/ })
     await prune.evaluate(el => el.scrollIntoView({ block: 'center' }))
     await prune.click()

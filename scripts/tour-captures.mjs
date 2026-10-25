@@ -35,6 +35,10 @@ const SANS_HORLOGE = args['sans-horloge'] === 'true'
 // --encoche 59 : simule l'encoche et la barre d'accueil d'un iPhone (env(safe-area-inset-*)), sur téléphone,
 // comme dans l'app installée sur l'écran d'accueil où la page passe sous l'heure.
 const ENCOCHE = Number(args.encoche) || 0
+// --theme dark : thème posé dans localStorage (reviz-theme) avant chaque page ; préfixe les fichiers.
+// --sans-liens true : saute la vérification des liens internes (plus rapide).
+const THEME = args.theme || ''
+const SANS_LIENS = args['sans-liens'] === 'true'
 fs.mkdirSync(OUT, { recursive: true })
 
 const AUTH = 'http://127.0.0.1:9099'
@@ -275,7 +279,7 @@ async function capturer(ctx, nom, { route, note = '' } = {}) {
     await page.waitForTimeout(300)
     agrandi = true
   }
-  const fichier = `${etat}__${nom}__${largeur}.png`
+  const fichier = `${THEME ? THEME + '__' : ''}${etat}__${nom}__${largeur}.png`
   await page.screenshot({ path: path.join(OUT, fichier) }).catch(e => suivi.pageerrors.push(`capture : ${e.message}`))
   if (agrandi) await page.setViewportSize({ width: largeur, height: base })
   const liens = await page.evaluate(LIENS).catch(() => [])
@@ -330,6 +334,7 @@ async function ouvrir(browser, etat, largeur, classe, compte = null) {
     if (document.documentElement) ajouter()
     document.addEventListener('DOMContentLoaded', ajouter)
   }, CSS_FIGE)
+  if (THEME) await context.addInitScript(t => { try { localStorage.setItem('reviz-theme', t) } catch { /* idem */ } }, THEME)
   if (compte?.sansProfil) {
     await context.addInitScript(([uid, level]) => { try { localStorage.setItem(`reviz-level-${uid}`, level) } catch { /* idem */ } }, [compte.uid, JSON.stringify(compte.level)])
   }
@@ -367,6 +372,7 @@ async function fermerAnnonces(page) {
 
 // ── Vérification des liens internes ─────────────────────────────────────────────────────
 async function verifierLiens(ctx) {
+  if (SANS_LIENS) return
   const carte = liensVus.get(ctx.classe)
   if (!carte) return
   const faits = liensDejaVerifies.get(ctx.classe) ?? new Set()

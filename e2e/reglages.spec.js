@@ -44,13 +44,16 @@ for (const [appareil, viewport] of APPAREILS) {
       await page.screenshot({ path: test.info().outputPath(`${appareil}-reglages.png`), animations: 'disabled' })
     })
 
-    test('mode sombre et objectif du jour sont retrouvés après un rechargement', async ({ page }) => {
+    test('thème et objectif du jour sont retrouvés après un rechargement', async ({ page }) => {
       await ouvrirReglages(page)
-      const sombre = page.getByRole('checkbox', { name: 'Activer le mode sombre' })
       await expect(page.locator('html')).toHaveAttribute('data-theme', 'light')
+      // Pas de mode sombre tant que la refonte n'a pas sa version sombre (SOMBRE_DISPONIBLE).
+      await expect(page.getByRole('checkbox', { name: 'Activer le mode sombre' })).toHaveCount(0)
+      await expect(page.getByRole('radio', { name: /Thème Sombre/ })).toHaveCount(0)
 
-      await sombre.setChecked(true, { force: true })
-      await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark')
+      const sauge = page.getByRole('radio', { name: /Thème Sauge/ })
+      await cliquerAuCentre(sauge)
+      await expect(page.locator('html')).toHaveAttribute('data-theme', 'sauge')
 
       const objectif5 = page.getByRole('radio', { name: '5 révisions par jour' })
       await cliquerAuCentre(objectif5)
@@ -58,13 +61,20 @@ for (const [appareil, viewport] of APPAREILS) {
 
       await page.reload()
       await expect(page.getByRole('heading', { level: 1, name: 'Réglages' })).toBeVisible()
-      await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark')
-      await expect(page.getByRole('checkbox', { name: 'Activer le mode sombre' })).toBeChecked()
+      await expect(page.locator('html')).toHaveAttribute('data-theme', 'sauge')
+      await expect(page.getByRole('radio', { name: /Thème Sauge/ })).toHaveAttribute('aria-checked', 'true')
       await expect(page.getByRole('radio', { name: '5 révisions par jour' })).toHaveAttribute('aria-checked', 'true')
       await expect(page.getByRole('radio', { name: '3 révisions par jour' })).toHaveAttribute('aria-checked', 'false')
 
-      // Et on revient en clair comme on est venu.
-      await page.getByRole('checkbox', { name: 'Activer le mode sombre' }).setChecked(false, { force: true })
+      // Un mode sombre mémorisé avant la refonte s'affiche en Crème.
+      await page.evaluate(() => localStorage.setItem('reviz-theme', 'dark'))
+      await page.reload()
+      await expect(page.getByRole('heading', { level: 1, name: 'Réglages' })).toBeVisible()
+      await expect(page.locator('html')).toHaveAttribute('data-theme', 'light')
+      await expect(page.getByRole('radio', { name: /Thème Crème/ })).toHaveAttribute('aria-checked', 'true')
+
+      // Et on revient en Crème comme on est venu.
+      await cliquerAuCentre(page.getByRole('radio', { name: /Thème Crème/ }))
       await expect(page.locator('html')).toHaveAttribute('data-theme', 'light')
     })
 

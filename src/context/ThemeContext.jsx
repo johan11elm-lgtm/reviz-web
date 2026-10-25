@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useEffect } from 'react'
-import { DARK_THEMES } from '../utils/themes'
+import { DARK_THEMES, themeAffiche } from '../utils/themes'
 
 const ThemeContext = createContext()
 
@@ -9,14 +9,14 @@ export function ThemeProvider({ children }) {
   )
 
   useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme)
+    document.documentElement.setAttribute('data-theme', themeAffiche(theme))
     localStorage.setItem('reviz-theme', theme)
   }, [theme])
 
   // Bascule clair/sombre de base : quitte volontairement un éventuel
   // thème Réviz+ (comportement documenté du toggle « Mode sombre »).
   const toggleTheme = () => setTheme(t => DARK_THEMES.includes(t) ? 'light' : 'dark')
-  const isDark = DARK_THEMES.includes(theme)
+  const isDark = DARK_THEMES.includes(themeAffiche(theme))
 
   return (
     <ThemeContext.Provider value={{ theme, setTheme, toggleTheme, isDark }}>
