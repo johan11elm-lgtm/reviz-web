@@ -6,7 +6,8 @@ import { LANCEMENT_SCAN_LIMIT } from './_lancement.js'
 import { revizPlusOffertServeur } from './_offert.js'
 
 // Runtime Node (pas edge) : nécessaire pour firebase-admin (quota + auth).
-export const config = { maxDuration: 60 }
+export const config = { maxDuration: 120 }
+const ANTHROPIC_TIMEOUT_MS = 100000
 
 const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/gif', 'image/webp']
 
@@ -39,8 +40,9 @@ export default async function handler(req, res) {
   }
   const uid = decoded.uid
 
-  // Compte vérifié obligatoire pour consommer un scan (cf. _compteVerifie.js).
-  if (!compteVerifie(decoded)) return res.status(403).send('EMAIL_NOT_VERIFIED')
+  // Email pas encore confirmé (cf. _compteVerifie.js) : un scan d'essai,
+  // ensuite EMAIL_NOT_VERIFIED (_quota.js, SCANS_SANS_EMAIL).
+  const sansEmail = !compteVerifie(decoded)
 
   // 2. Quota serveur (source de vérité)
   const db = getDb()
@@ -51,10 +53,10 @@ export default async function handler(req, res) {
   } catch { /* quota free par prudence */ }
 
   let consumed = false
-  if (!isPremium) {
+  if (!isPremium || sansEmail) {
     const offert = await revizPlusOffertServeur()
-    const q = await consumeQuota({ db, uid, limit: offert ? LANCEMENT_SCAN_LIMIT : FREE_LIMIT })
-    if (!q.allowed) return res.status(429).send('RATE_LIMIT')
+    const q = await consumeQuota({ db, uid, limit: offert ? LANCEMENT_SCAN_LIMIT : FREE_LIMIT, sansEmail })
+    if (!q.allowed) return q.sansEmail ? res.status(403).send('EMAIL_NOT_VERIFIED') : res.status(429).send('RATE_LIMIT')
     consumed = true
   }
 
@@ -63,6 +65,9 @@ export default async function handler(req, res) {
   try {
     anthropicResp = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
+      // Abandon avant la fin de la fonction (maxDuration) et avant le client
+      // (ANALYSE_TIMEOUT_MS) : le scan est remboursé et l'élève voit TIMEOUT.
+      signal: AbortSignal.timeout(ANTHROPIC_TIMEOUT_MS),
       headers: {
         'Content-Type': 'application/json',
         'x-api-key': process.env.ANTHROPIC_API_KEY,
@@ -84,13 +89,14 @@ export default async function handler(req, res) {
         ],
       }),
     })
-  } catch {
-    if (consumed) await refundQuota({ db, uid }).catch(() => {})
+  } catch (err) {
+    if (consumed) await refundQuota({ db, uid, sansEmail }).catch(() => {})
+    if (err?.name === 'TimeoutError') return res.status(504).send('TIMEOUT')
     return res.status(502).send('NETWORK_ERROR')
   }
 
   if (!anthropicResp.ok) {
-    if (consumed) await refundQuota({ db, uid }).catch(() => {})
+    if (consumed) await refundQuota({ db, uid, sansEmail }).catch(() => {})
     if (anthropicResp.status === 401 || anthropicResp.status === 403) return res.status(502).send('INVALID_API_KEY')
     if (anthropicResp.status === 429) return res.status(429).send('RATE_LIMIT')
     return res.status(502).send(`API_ERROR_${anthropicResp.status}`)
@@ -101,7 +107,7 @@ export default async function handler(req, res) {
 
   // Refus de sûreté (contenu non scolaire) : on ne facture pas un scan à l'élève.
   if (consumed && /"error"\s*:\s*"NON_SCOLAIRE"/.test(text_content)) {
-    await refundQuota({ db, uid }).catch(() => {})
+    await refundQuota({ db, uid, sansEmail }).catch(() => {})
   }
 
   res.setHeader('Content-Type', 'text/plain; charset=utf-8')
