@@ -253,9 +253,16 @@
 @media (max-width: 1240px) {
   .mo-rangee { grid-template-columns: 1fr 1fr; padding: 0 32px; }
   .mo-rangee > :last-child { grid-column: 1 / -1; }
+  /* La rangée « semaine, mémoire, programme » garde sinon ses trois colonnes : le programme passe
+     dessous en pleine largeur et laisse un trou à droite de la mémoire. */
+  .mo-rangee.mo-rangee--progres { grid-template-columns: 1fr 1fr; }
   .mo-page--large .mo-section { padding: 0 32px; }
   .mo-page--large .mo-hero { padding-left: 32px; padding-right: 32px; }
   .mo-hero-grille { grid-template-columns: 460px 1fr; }
+  /* Réviz (340 px) et sa bulle ne tiennent pas dans la colonne de droite : il passait sous le menu
+     du haut et sa main sortait de l'écran. */
+  .mo-reviz--cote .pantin { width: 280px !important; height: 280px !important; }
+  .mo-reviz--cote { margin-top: 56px; }
   .mo-page--large .mo-badges { grid-template-columns: repeat(4, 1fr); }
 }
 @media (prefers-reduced-motion: reduce) {

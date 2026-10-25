@@ -225,7 +225,8 @@ button.sc-carte:active { transform: scale(.98); }
 
 @media (max-width: 1240px) {
   .sc-colonnes { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); padding: 0 32px; }
-  .sc-cote { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr; }
+  /* Côte à côte, chaque carte garde sa hauteur : sinon la petite carte Réviz+ s'étire en grand vide. */
+  .sc-cote { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: start; }
 }
 @media (prefers-reduced-motion: reduce) {
   .sc-anneau, .sc-feuille { animation: none; }
