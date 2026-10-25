@@ -207,7 +207,7 @@ export async function verifyEmailViaEmulator(page, email) {
  * Après signup() d'un majeur : confirme l'email (via l'émulateur), passe la découverte
  * (« Passer » sur l'écran d'accueil de Réviz) et arrive sur l'accueil. Les popups de l'accueil
  * (« Réviz+ offert jusqu'au … », puis « Nouveau : la Battle ») sont fermées, sauf si la spec veut
- * en tester une (garderAnnonce : true pour la Battle, 'revizplus' pour Réviz+).
+ * en tester une (garderAnnonce : true pour Réviz Games, 'revizplus' pour Réviz+).
  */
 export async function verifyEmailAndOnboard(page, email, { garderAnnonce = false } = {}) {
   // L'élève entre dès l'inscription : l'accueil l'envoie à la découverte (une fois), et il
@@ -216,10 +216,10 @@ export async function verifyEmailAndOnboard(page, email, { garderAnnonce = false
   await verifyEmailViaEmulator(page, email)
   await passerDecouverte(page)
   if (garderAnnonce === 'revizplus') return
-  // Lancement : « Réviz+ offert » passe en premier, la Battle à la visite suivante.
+  // Lancement : « Réviz+ offert » passe en premier, Réviz Games à la visite suivante.
   await fermerAnnonceRevizPlus(page)
   if (garderAnnonce) await page.goto('/')
-  else await fermerAnnonceBattle(page)
+  else await fermerAnnonceJeux(page)
 }
 
 /** Sur /onboarding (découverte de Réviz, trois écrans) : « Passer » mène à l'accueil. */
@@ -234,20 +234,19 @@ export async function fermerAnnonceRevizPlus(page) {
   await plusTard.click({ timeout: 5_000 }).catch(() => {})
 }
 
-/** Ferme la popup « Nouveau : la Battle » si elle est ouverte (accueil, une fois par élève). */
-export async function fermerAnnonceBattle(page) {
-  const plusTard = page.getByRole('dialog', { name: 'La Battle' }).getByRole('button', { name: 'Plus tard' })
+/** Ferme la popup « Nouveau : Réviz Games » si elle est ouverte (accueil, une fois par élève). */
+export async function fermerAnnonceJeux(page) {
+  const plusTard = page.getByRole('dialog', { name: 'Réviz Games' }).getByRole('button', { name: 'Plus tard' })
   await plusTard.click({ timeout: 5_000 }).catch(() => {})
 }
 
 /**
  * Ferme, dans l'ordre, toutes les popups d'accueil qui peuvent s'ouvrir sur un compte neuf
- * (Réviz+ offert, puis la Battle). Il n'y a pas d'annonce Réviz Games : la partie du jour est
- * une carte de l'accueil, pas une popup. La carte « Essaie un thème Réviz+ » n'est pas modale.
+ * (Réviz+ offert, puis Réviz Games). La carte « Essaie un thème Réviz+ » n'est pas modale.
  */
 export async function fermerAnnonces(page) {
   await fermerAnnonceRevizPlus(page)
-  await fermerAnnonceBattle(page)
+  await fermerAnnonceJeux(page)
 }
 
 // Date de naissance en trois listes (jour, mois, année) : 'AAAA-MM-JJ'.
@@ -390,7 +389,7 @@ export async function compteRapide(page, {
         for (const phase of ['lancement', 'derniers-jours', 'prolonge', 'payant']) {
           for (const ventes of ['', '-ventes']) localStorage.setItem(`reviz-annonce-revizplus-${phase}${ventes}-${uid}`, '1')
         }
-        localStorage.setItem(`reviz-annonce-battle-${uid}`, '1')
+        localStorage.setItem(`reviz-annonce-jeux-${uid}`, '1')
         localStorage.setItem('reviz-essai-theme-vu', '1')
       }
       for (const [k, v] of Object.entries(stockage)) {

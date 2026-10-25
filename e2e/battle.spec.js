@@ -122,27 +122,6 @@ async function jouerCinqRounds(hote, autre, { nomHote, nomAutre }) {
 test.describe('Battle', () => {
   test.setTimeout(240_000)
 
-  test('la popup de lancement mène à la Battle, une seule fois', async ({ page }) => {
-    const erreurs = []
-    page.on('pageerror', e => erreurs.push(e.message))
-    await mockApiRoutes(page)
-    await compteRapide(page, { annoncesVues: false, aller: null })
-    // Réviz+ passe en premier ; la Battle s'ouvre à la visite suivante de l'accueil.
-    await fermerAnnonceRevizPlus(page)
-    await page.goto('/')
-    const annonce = page.getByRole('dialog', { name: 'La Battle' })
-    await expect(annonce).toBeVisible()
-    await expect(annonce.getByText('Nouveau')).toBeVisible()
-    await annonce.getByRole('button', { name: 'Lancer une battle' }).click()
-    await expect(page).toHaveURL(/\/battle$/)
-    await expect(page.getByRole('heading', { name: 'Lancer une battle' })).toBeVisible()
-    // Vue une fois : à la visite suivante de l'accueil, plus de popup, mais la carte Battle.
-    await page.goto('/')
-    await expect(page.getByRole('link', { name: /Battle/ }).first()).toBeVisible()
-    await expect(page.getByRole('dialog', { name: 'La Battle' })).toHaveCount(0)
-    expect(erreurs).toEqual([])
-  })
-
   test('deux comptes (téléphone et ordinateur) jouent une battle complète, puis la revanche', async ({ browser }) => {
     const erreurs = []
     const hote = await ouvrirPage(browser, TELEPHONE, erreurs, 'Johan')

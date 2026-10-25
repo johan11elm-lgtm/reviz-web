@@ -5,7 +5,7 @@
 import { test, expect } from '@playwright/test'
 import {
   mockApiRoutes, mockProgramme, compteRapide, entrerEnEssai, ouvrirChapitreDuProgramme,
-  jouerQuiz, chapitreThales, lireLeconsEmulateur, lireRevisionsEmulateur, lireProfilEmulateur, sansDebordement, estOrdinateur, fermerAnnonceBattle,
+  jouerQuiz, chapitreThales, lireLeconsEmulateur, lireRevisionsEmulateur, lireProfilEmulateur, sansDebordement, estOrdinateur, fermerAnnonceJeux,
 } from './helpers'
 
 const APPAREILS = [
@@ -191,7 +191,7 @@ test.describe('Téléphone (390 px)', () => {
     await mockProgramme(page)
     await entrerEnEssai(page)
     await page.goto('/')
-    await fermerAnnonceBattle(page)
+    await fermerAnnonceJeux(page)
     await page.getByRole('link', { name: 'Tout voir' }).click()
     await expect(page).toHaveURL(/\/programme$/)
     // Changer de matière ne pousse rien dans l'historique

@@ -21,7 +21,7 @@ import { computeStreak, computeLevel, computeBadges } from '../utils/gamificatio
 import { subjectMascot } from '../utils/subjects';
 import { refreshReminder } from '../services/reminderService';
 import { AchievementToast } from '../components/AchievementToast';
-import { BattleAnnonce, annonceBattleVue } from '../components/battle/BattleAnnonce';
+import { JeuxAnnonce, annonceJeuxVue } from '../components/jeux/JeuxAnnonce';
 import { RevizPlusAnnonce, annonceRevizPlusVue } from '../components/RevizPlusAnnonce';
 import { ThemeEssai, essaiThemeVu } from '../components/ThemeEssai';
 import { useTheme } from '../context/ThemeContext';
@@ -90,7 +90,8 @@ export default function Home() {
   const [allLessons, setAllLessons] = useState(() => loadLessons());
   const [newBadge, setNewBadge] = useState(null);
   const [annonceRevizPlus, setAnnonceRevizPlus] = useState(() => revizPlusOffert && !isGuest && !!currentUser?.uid && !annonceRevizPlusVue(currentUser.uid));
-  const [annonceBattle, setAnnonceBattle] = useState(() => !annonceRevizPlus && !!currentUser?.uid && !annonceBattleVue(currentUser.uid));
+  // Annonce de la sortie : Réviz Games (celle de la Battle, du 22/10, n'est plus montrée).
+  const [annonceJeux, setAnnonceJeux] = useState(() => !annonceRevizPlus && !!currentUser?.uid && !annonceJeuxVue(currentUser.uid));
   const { theme } = useTheme();
   const [essaiTheme, setEssaiTheme] = useState(() => !essaiThemeVu());
   const montrerEssai = essaiTheme && hasRevizPlus && !isGuest && !themeById(theme)?.premium;
@@ -443,7 +444,7 @@ export default function Home() {
         <span className="hm-jeux-titre">La partie du jour</span>
         <span className="hm-jeux-sous">
           {jourJeux.faite
-            ? `Faite !${jourJeux.score != null ? ` ${jourJeux.score.toLocaleString('fr-FR')} points.` : ''} Rejoue ou essaie les 6 jeux.`
+            ? `Faite !${jourJeux.score != null ? ` ${jourJeux.score.toLocaleString('fr-FR')} points.` : ''} Reviens demain, ou fais une Partie rapide.`
             : '6 mini-jeux de 15 secondes, la même partie pour tout le monde.'}
         </span>
         <span className="hm-jeux-btn">{jourJeux.faite ? 'Voir les jeux' : 'Jouer'}</span>
@@ -476,9 +477,9 @@ export default function Home() {
 
   return (
     <div className={`app app--no-halo home-page${isDesktop ? ' app--large' : ''}`} style={style}>
-      {newBadge && !annonceBattle && <AchievementToast badge={newBadge} onDone={() => setNewBadge(null)} />}
+      {newBadge && !annonceJeux && <AchievementToast badge={newBadge} onDone={() => setNewBadge(null)} />}
       {annonceRevizPlus && <RevizPlusAnnonce uid={currentUser.uid} onClose={() => setAnnonceRevizPlus(false)} />}
-      {annonceBattle && <BattleAnnonce uid={currentUser.uid} onClose={() => setAnnonceBattle(false)} />}
+      {annonceJeux && <JeuxAnnonce uid={currentUser.uid} onClose={() => setAnnonceJeux(false)} />}
 
       {isDesktop ? (
         <div className="content hm-desk">

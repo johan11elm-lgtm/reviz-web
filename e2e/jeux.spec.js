@@ -13,7 +13,7 @@
 // les specs lisent le score affiché à l'écran et le comparent à l'accueil, au hub et à l'émulateur.
 // Le son est coupé (réglage reviz-jeux-son) : pas de musique de 290 Mo à décoder.
 import { test, expect } from '@playwright/test'
-import { compteRapide, lireProfilEmulateur, mockApiRoutes } from './helpers'
+import { compteRapide, fermerAnnonceRevizPlus, lireProfilEmulateur, mockApiRoutes } from './helpers'
 
 const TELEPHONE = { nom: '390×844', viewport: { width: 390, height: 844 }, deviceScaleFactor: 2, isMobile: true, hasTouch: true }
 const ORDINATEUR = { nom: '1280×800', viewport: { width: 1280, height: 800 } }
@@ -386,3 +386,32 @@ for (const profil of [TELEPHONE, ORDINATEUR]) {
     })
   })
 }
+
+test.describe('Annonce de la sortie', () => {
+  test.use({ viewport: { width: 390, height: 844 } })
+
+  test('la popup « Nouveau : Réviz Games » mène aux jeux, une seule fois', async ({ page }) => {
+    const erreurs = []
+    page.on('pageerror', e => erreurs.push(e.message))
+    await mockApiRoutes(page)
+    await compteRapide(page, { annoncesVues: false, aller: null, stockage: { 'reviz-jeux-son': '0' } })
+    // Réviz+ (s'il est encore offert) passe en premier ; Réviz Games à la visite suivante.
+    await fermerAnnonceRevizPlus(page)
+    await page.goto('/')
+    const annonce = page.getByRole('dialog', { name: 'Réviz Games' })
+    await expect(annonce).toBeVisible()
+    await expect(annonce.getByText('Nouveau')).toBeVisible()
+    await expect(page.getByRole('dialog', { name: 'La Battle' })).toHaveCount(0)
+    // La scène de la partie du jour est chargée et remplit l'encadré.
+    await expect.poll(() => annonce.locator('img').evaluate(img => img.complete && img.naturalWidth > 0)).toBe(true)
+    await page.screenshot({ path: test.info().outputPath('annonce-jeux.png'), animations: 'disabled' })
+    await annonce.getByRole('button', { name: 'Jouer à la partie du jour' }).click()
+    await expect(page).toHaveURL(/\/jeux/)
+    await expect(page.getByRole('heading', { name: /On joue/ })).toBeVisible()
+    // Vue une fois : plus de popup à la visite suivante.
+    await page.goto('/')
+    await expect(page.locator('a[href^="/jeux"]').first()).toBeVisible()
+    await expect(page.getByRole('dialog', { name: 'Réviz Games' })).toHaveCount(0)
+    expect(erreurs).toEqual([])
+  })
+})

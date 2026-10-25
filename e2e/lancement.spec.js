@@ -9,7 +9,7 @@ import { mockApiRoutes, compteRapide, figerHeure, MOMENTS } from './helpers'
 test.use({ viewport: { width: 390, height: 844 } })
 
 const annonceOffert = page => page.getByRole('dialog', { name: /Réviz\+ offert jusqu’au 25 octobre/ })
-const annonceBattle = page => page.getByRole('dialog', { name: 'La Battle' })
+const annonceJeux = page => page.getByRole('dialog', { name: 'Réviz Games' })
 
 async function parcoursOffert(page, moment, { bulle }) {
   await figerHeure(page, moment)
@@ -32,11 +32,11 @@ async function parcoursOffert(page, moment, { bulle }) {
   await capture('01-annonce')
   await annonce.getByRole('button', { name: 'Plus tard' }).click()
 
-  // Revisite : plus de popup Réviz+, la Battle prend son tour.
+  // Revisite : plus de popup Réviz+, Réviz Games prend son tour.
   await page.goto('/')
-  await expect(annonceBattle(page)).toBeVisible()
+  await expect(annonceJeux(page)).toBeVisible()
   await expect(annonceOffert(page)).toHaveCount(0)
-  await annonceBattle(page).getByRole('button', { name: 'Plus tard' }).click()
+  await annonceJeux(page).getByRole('button', { name: 'Plus tard' }).click()
 
   // Encore une visite : plus aucune popup.
   await page.goto('/')
@@ -72,11 +72,11 @@ test.describe('Lancement : Réviz+ offert, puis payant', () => {
     const capture = nom => page.screenshot({ path: test.info().outputPath(`${nom}.png`), animations: 'disabled' })
 
     // Un élève qui entre à la rentrée sans avoir rien vu : plus de popup Réviz+ (rien n'est offert),
-    // la Battle s'annonce toute seule.
+    // Réviz Games s'annonce tout seul.
     await compteRapide(page, { prenom: 'Léa', birthDate: '1990-05-01', annoncesVues: false })
-    await expect(annonceBattle(page)).toBeVisible()
+    await expect(annonceJeux(page)).toBeVisible()
     await expect(page.getByRole('dialog', { name: /Réviz\+ offert|Réviz\+ est offert/ })).toHaveCount(0)
-    await annonceBattle(page).getByRole('button', { name: 'Plus tard' }).click()
+    await annonceJeux(page).getByRole('button', { name: 'Plus tard' }).click()
     await expect(page.getByRole('dialog')).toHaveCount(0)
 
     // Réglages : Réviz+ n'est plus offert, on propose de le découvrir (jamais « Passer à Réviz+ » d'emblée)

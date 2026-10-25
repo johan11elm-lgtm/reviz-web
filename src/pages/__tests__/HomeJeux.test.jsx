@@ -32,6 +32,7 @@ const rendre = () => render(<MemoryRouter><Home /></MemoryRouter>)
 
 beforeEach(() => {
   localStorage.clear()
+  localStorage.setItem('reviz-annonce-jeux-abc', '1') // la popup « Nouveau : Réviz Games » reprend les mêmes mots que la carte
   localStorage.setItem('reviz-onboarded-abc', '1')
   compte = null
   getDoc.mockClear()
@@ -43,8 +44,8 @@ describe('<Home /> — carte Réviz Games', () => {
     const auj = jourParis()
     compte = { jeux: { jours: [auj], record: 700 } } // faite ailleurs, score non transmis
     rendre()
-    await waitFor(() => expect(screen.getByText(/Rejoue ou essaie les 6 jeux/)).toBeInTheDocument())
-    const texte = screen.getByText(/Rejoue ou essaie les 6 jeux/).textContent
+    await waitFor(() => expect(screen.getByText(/Reviens demain, ou fais une Partie rapide/)).toBeInTheDocument())
+    const texte = screen.getByText(/Reviens demain, ou fais une Partie rapide/).textContent
     expect(texte).not.toMatch(/points/)
     expect(texte).not.toMatch(/Faite\s*!\s{2}/)
     expect(getDoc).toHaveBeenCalledWith('users/abc')

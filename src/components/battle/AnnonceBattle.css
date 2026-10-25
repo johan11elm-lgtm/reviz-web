@@ -1,4 +1,4 @@
-/* Popup « Nouveau : la Battle » (handoff Claude Design du 22/10). */
+/* Popup « Nouveau » de l'accueil (gabarit du 22/10, d'abord pour la Battle) : sert à l'annonce de Réviz Games (components/jeux/JeuxAnnonce.jsx). */
 .ban-voile { position: fixed; inset: 0; z-index: 400; display: flex; align-items: flex-end; justify-content: center; background: rgba(27,26,35,.45); animation: banFondu .2s both; }
 @keyframes banFondu { from { opacity: 0; } }
 .ban-feuille {
