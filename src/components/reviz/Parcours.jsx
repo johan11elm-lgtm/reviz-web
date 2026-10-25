@@ -21,8 +21,10 @@ function courbe(pts) {
  * Ton parcours : Résumé → Flashcards → Quiz sur une petite route (fiche chapitre, fin du
  * Résumé…), chaque case avec la mascotte de son format (faite, en cours ou à faire). Chaque case
  * s'ouvre à tout moment. etapes : [{ id, nom, pose, to, meta, statut: 'fait'|'cours'|'afaire' }].
+ * etat : l'état de navigation des liens (DEPUIS_FICHE) ; remplacer : depuis un exercice, la case
+ * remplace l'écran au lieu de l'empiler (voir utils/navigation).
  */
-export function Parcours({ etapes, grand, cases = [0.155, 0.5, 0.845] }) {
+export function Parcours({ etapes, grand, cases = [0.155, 0.5, 0.845], etat, remplacer = false }) {
   const boite = useRef(null);
   const [l, setL] = useState(grand ? 872 : 335);
   useLayoutEffect(() => {
@@ -55,7 +57,7 @@ export function Parcours({ etapes, grand, cases = [0.155, 0.5, 0.845] }) {
         const taille = e.statut === 'cours' ? D.cours : D.fait;
         return (
           <div key={e.id}>
-            <Link to={e.to} className={`ch-case ch-case--${e.statut}`} style={{ left: x - taille / 2, top: y - taille / 2, width: taille, height: taille }}
+            <Link to={e.to} replace={remplacer} state={etat} className={`ch-case ch-case--${e.statut}`} style={{ left: x - taille / 2, top: y - taille / 2, width: taille, height: taille }}
               aria-label={`${e.nom} : ${e.meta}${e.statut === 'fait' ? ', fait' : ''}`}>
               <span className="ch-case-rond">
                 <Mascot pose={e.pose} size={Math.round(taille * (e.statut === 'cours' ? 0.72 : 0.7))} alt="" aria-hidden="true" />

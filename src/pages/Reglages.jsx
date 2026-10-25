@@ -24,6 +24,7 @@ import { FIN_LANCEMENT, DERNIER_JOUR_OFFERT, PREMIER_PRELEVEMENT, VENTES_OUVERTE
 import { PRIX_FONDATEUR, prixDe } from '../../api/_prix.js';
 import '../components/reviz/HerosMatiere.css';
 import './Reglages.css';
+import { revenir } from '../utils/navigation';
 
 const CLASSES_COLLEGE = ['6ème', '5ème', '4ème', '3ème'];
 const classeCourte = c => c?.replace(/ème$/, 'e') ?? '';
@@ -493,7 +494,7 @@ export default function Reglages() {
       <span className="ch-point" aria-hidden="true" />
       <span className="ch-grain" aria-hidden="true" />
       <div className="rg-hero-haut">
-        <button type="button" className="rg-retour" onClick={() => navigate('/profil')} aria-label="Retour à Moi"><Chevron sens="gauche" /></button>
+        <button type="button" className="rg-retour" onClick={() => revenir(navigate, '/profil')} aria-label="Retour à Moi"><Chevron sens="gauche" /></button>
       </div>
       <div className="rg-hero-corps">
         <div className="rg-hero-titres">

@@ -1,5 +1,6 @@
 import { useState, useEffect, useMemo, useRef } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
+import { fermerVersFiche, versExercice } from '../utils/navigation'
 import { recordRevision, markRevisionDone, loadRevisions } from '../services/revisionService'
 import { getDueCards, updateCardState } from '../services/srsService'
 import { Pantin } from '../components/Pantin'
@@ -97,6 +98,7 @@ const Etoile = () => (
 function FlashcardsSession() {
   const isDesktop = useIsDesktop()
   const navigate = useNavigate()
+  const location = useLocation()
   useEffect(() => { recordRevision('flashcards'); mesurer('format_ouvert', { format: 'flashcards' }) }, [])
   const lessonId = useMemo(() => getLessonId(), [])
   const lessonTitle = useMemo(() => getLessonTitle(), [])
@@ -214,7 +216,7 @@ function FlashcardsSession() {
     return () => clearTimeout(t)
   }, [])
 
-  const fermer = () => navigate('/analyse')
+  const fermer = () => fermerVersFiche(navigate, location)
   const boutonFermer = isDesktop
     ? <button type="button" className="fc-fermer fc-fermer--pilule" onClick={fermer}><Croix taille={18} />Fermer</button>
     : <button type="button" className="fc-fermer" onClick={fermer} aria-label="Fermer"><Croix /></button>
@@ -304,7 +306,7 @@ function FlashcardsSession() {
             {aRevoir.length > 0 && <p className="fc-priorite"><RetourFleche taille={16} />Les cartes à revoir reviendront en priorité.</p>}
           </div>
           <div className="fc-fin-actions fc-fin-actions--deux">
-            <button type="button" className="fc-btn fc-btn--orange" onClick={() => navigate('/quiz')}>
+            <button type="button" className="fc-btn fc-btn--orange" onClick={() => versExercice(navigate, location, '/quiz')}>
               {quizFait ? 'Refaire le quiz' : 'Passer au quiz'}{nbQuestions ? ` · ${pluriel(nbQuestions, 'question')}` : ''}<Fleche />
             </button>
             {aRevoir.length > 0 && (

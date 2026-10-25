@@ -113,7 +113,7 @@ export default function UpgradeSuccess() {
         {echeance && <div><span>{echeance[0]}</span><b>{echeance[1]}</b></div>}
       </div>
       <h2 className="ugs-h2">Pour commencer</h2>
-      <button type="button" className="ugs-btn" onClick={() => navigate('/scan')}><Icone d={APPAREIL} />Scanner une leçon</button>
+      <button type="button" className="ugs-btn" onClick={() => navigate('/scan', { replace: true })}><Icone d={APPAREIL} />Scanner une leçon</button>
       <div className="ugs-carte ugs-liens">
         <Link to="/reglages#themes"><span className="ugs-rond ugs-rond--menthe"><Icone d={PALETTE} /></span><span><b>Choisir mon thème</b><span>Nuit d’encre, Abricot, Sauge ou Prune</span></span><Chevron /></Link>
         <Link to="/coach"><span className="ugs-rond ugs-rond--peche"><Icone d={BULLE} /></span><span><b>Poser une question à Réviz IA</b></span><Chevron /></Link>

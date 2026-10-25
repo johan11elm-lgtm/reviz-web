@@ -48,6 +48,11 @@ test.describe('Parcours cœur : inscription → scan → révision', () => {
       await expect(page.getByRole('heading', { name: MOCK_AI_RESPONSE.metadata.title })).toBeVisible()
       await sansDebordement(page, `fiche ${appareil}`)
 
+      // Juste après le scan, « Mes leçons » mène aux leçons scannées, pas au viseur du scan (la fiche a
+      // remplacé le scan dans l'historique).
+      await page.locator('.ch-retour').filter({ hasText: 'Mes leçons' }).first().click()
+      await expect(page).toHaveURL(/\/cours$/)
+
       // ── Résumé ──
       await page.goto('/resume')
       await expect(page.getByText('Chloroplaste').first()).toBeVisible()

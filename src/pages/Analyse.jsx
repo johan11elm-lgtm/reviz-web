@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { BottomNav } from '../components/BottomNav';
 import { Mascot } from '../components/Mascot';
@@ -22,6 +22,7 @@ import { track, scanErrorCode } from '../services/statsService';
 import { subjectInfo, subjectMascot } from '../utils/subjects';
 import { resumeReadingMinutes } from '../utils/resume';
 import { nextStep } from '../utils/nextStep';
+import { DEPUIS_FICHE } from '../utils/navigation';
 import '../components/reviz/HerosMatiere.css';
 import './Analyse.css';
 
@@ -113,6 +114,7 @@ export default function Analyse() {
   const [showPremium, setShowPremium] = useState(false);
   const [noLesson, setNoLesson]       = useState(false);
   const navigate   = useNavigate();
+  const location   = useLocation();
   const isDesktop  = useIsDesktop();
   const { getUserLevel, isGuest, hasRevizPlus, revizPlusOffert } = useAuth();
   const userLevel  = getUserLevel();
@@ -233,28 +235,29 @@ export default function Analyse() {
   const errInfo = errorMessages[error] ?? { title: 'Oups, ça a coincé', sub: 'Vérifie ta connexion et réessaie.' };
   // Écran d'erreur (handoff Scanner) : photo illisible, connexion coupée, ou le message du cas.
   const parPhoto = !!localStorage.getItem('reviz-captured-image');
-  const verScan = () => navigate(parPhoto ? '/scan' : '/scan?mode=texte');
+  // Les sorties de l'écran d'erreur remplacent l'analyse : revenir dessus relancerait l'appel à l'IA.
+  const verScan = () => navigate(parPhoto ? '/scan' : '/scan?mode=texte', { replace: true });
   const erreur = ['INVALID_JSON', 'EMPTY_RESPONSE', 'IMAGE_TOO_LARGE'].includes(error) ? {
     humeur: 'reflechit', geste: 'gratterTete',
     lignes: parPhoto ? ['Je n’arrive pas à lire cette photo.', 'Reprends-la plus droite et mieux éclairée.'] : ['Je n’arrive pas à lire ce texte.', 'Vérifie que c’est bien ta leçon.'],
     titre: parPhoto ? 'On recommence la photo ?' : 'On réessaie ?',
     texte: parPhoto ? 'Pose ta feuille à plat, près d’une fenêtre ou sous une lampe, et approche-toi jusqu’à ce que les lettres soient nettes.' : 'Recolle le texte de ta leçon, ou prends-la directement en photo.',
     action: [parPhoto ? 'Reprendre la photo' : 'Modifier le texte', verScan],
-    autre: [parPhoto ? 'Coller le texte' : 'Prendre une photo', () => navigate(parPhoto ? '/scan?mode=texte' : '/scan')],
+    autre: [parPhoto ? 'Coller le texte' : 'Prendre une photo', () => navigate(parPhoto ? '/scan?mode=texte' : '/scan', { replace: true })],
   } : ['NETWORK_ERROR', 'TIMEOUT'].includes(error) ? {
     humeur: 'inquiet',
     lignes: ['La connexion s’est coupée.', parPhoto ? 'Ta photo n’est pas perdue.' : 'Ton texte n’est pas perdu.'],
     titre: 'On réessaie dans un instant ?',
     texte: 'Vérifie ton Wi-Fi ou tes données mobiles, puis relance l’envoi.',
     action: ['Réessayer', () => window.location.reload()],
-    autre: ['Plus tard', () => navigate('/cours')],
+    autre: ['Plus tard', () => navigate('/cours', { replace: true })],
   } : {
     humeur: 'inquiet', geste: 'gratterTete',
     lignes: [errInfo.title + (/[.!?]$/.test(errInfo.title) ? '' : '.'), 'Rien de grave, on recommence.'],
     titre: errInfo.title,
     texte: errInfo.sub,
-    action: errInfo.cta ? [errInfo.cta.label, () => navigate(errInfo.cta.to)] : ['Retour au scan', verScan],
-    autre: ['Plus tard', () => navigate('/cours')],
+    action: errInfo.cta ? [errInfo.cta.label, () => navigate(errInfo.cta.to, { replace: true })] : ['Retour au scan', verScan],
+    autre: ['Plus tard', () => navigate('/cours', { replace: true })],
   };
 
   // ── Où en est l'élève ──
@@ -297,7 +300,9 @@ export default function Analyse() {
 
   const teinte = teinteMatiere(displayLesson.subject);
   const varsTeinte = variablesTeinte(teinte);
-  const retour = () => (window.history.state?.idx > 0 ? navigate(-1) : navigate(fromProgramme ? '/programme' : '/cours'));
+  // Juste après un scan, la fiche a remplacé le scan : « Mes leçons » mène aux leçons scannées.
+  const retour = () => (location.state?.depuisScan ? navigate('/cours', { replace: true })
+    : window.history.state?.idx > 0 ? navigate(-1) : navigate(fromProgramme ? '/programme' : '/cours'));
   const points = displayLesson.keyPoints?.length ? displayLesson.keyPoints : (displayLesson.excerpt ? [displayLesson.excerpt] : []);
   const [parle, setParle] = useState(false);
   const pantin = useRef(null);
@@ -376,7 +381,7 @@ export default function Analyse() {
 
   const prochaine = (
     <div className="ch-etape-place">
-      <Link to={step.to} className="ch-etape">
+      <Link to={step.to} state={DEPUIS_FICHE} className="ch-etape">
         <span className="ch-etape-haut">
           <span className="ch-etape-rond" aria-hidden="true"><Mascot pose={POSE_ETAPE[step.to] ?? 'reading'} size={isDesktop ? 60 : 52} alt="" /></span>
           <span className="ch-etape-txt">
@@ -412,8 +417,8 @@ export default function Analyse() {
         <h2 id="ch-parcours" className="ch-titre2">Ton parcours</h2>
         <span className="ch-compte">{nbFaites} / 3</span>
       </div>
-      <Parcours etapes={etapes} grand={isDesktop} />
-      <Link to="/mindmap" className="ch-pilule">
+      <Parcours etapes={etapes} grand={isDesktop} etat={DEPUIS_FICHE} />
+      <Link to="/mindmap" state={DEPUIS_FICHE} className="ch-pilule">
         <span className="ch-pilule-rond ch-pilule-rond--lavande" aria-hidden="true"><Mascot pose="thinking" size={46} alt="" /></span>
         <span className="ch-pilule-txt">
           <span className="ch-pilule-titre">Carte mentale</span>
@@ -525,7 +530,7 @@ export default function Analyse() {
             <span className="ch-deco ch-deco--b" aria-hidden="true" />
             <span className="ch-grain" aria-hidden="true" />
             <div className="an-etat-haut">
-              <button type="button" className="an-etat-fermer" onClick={() => navigate('/cours')} aria-label="Fermer">
+              <button type="button" className="an-etat-fermer" onClick={() => navigate('/cours', { replace: true })} aria-label="Fermer">
                 <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12" /></svg>
               </button>
             </div>
@@ -560,7 +565,7 @@ export default function Analyse() {
 
       <BottomNav />
       {/* Réviz+ (ou offert) a déjà la limite la plus haute : la fenêtre ne le propose pas. */}
-      {showPremium && <LimiteAtteinte type="scan" abonne={hasRevizPlus} offertJusquau={revizPlusOffert ? DERNIER_JOUR_OFFERT : null} onClose={() => navigate('/scan')} />}
+      {showPremium && <LimiteAtteinte type="scan" abonne={hasRevizPlus} offertJusquau={revizPlusOffert ? DERNIER_JOUR_OFFERT : null} onClose={() => navigate('/scan', { replace: true })} />}
     </div>
   );
 }

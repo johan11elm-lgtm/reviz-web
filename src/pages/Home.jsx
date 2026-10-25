@@ -27,6 +27,7 @@ import { ThemeEssai, essaiThemeVu } from '../components/ThemeEssai';
 import { useTheme } from '../context/ThemeContext';
 import { themeById } from '../utils/themes';
 import { etatDuJour, synchroniserStats } from '../services/partieDuJourService';
+import { battleFaiteAujourdhui } from '../services/battleDuJour';
 import './Home.css';
 
 /*
@@ -107,7 +108,9 @@ export default function Home() {
   useEffect(() => {
     const onboardedKey = `reviz-onboarded-${currentUser?.uid}`;
     if (currentUser && !localStorage.getItem(onboardedKey)) {
-      navigate('/onboarding');
+      // En remplaçant l'accueil : un retour depuis la présentation ne retombe pas sur l'accueil, qui
+      // l'y renverrait aussitôt.
+      navigate('/onboarding', { replace: true });
       return;
     }
     syncFromFirestore().then(lessons => {
@@ -225,18 +228,22 @@ export default function Home() {
     return [
       { quoi: `Résumé + ${cartes}`, meta: `${chapitre}Environ 6 min`, done: todayRevisions > 0, pose: 'flashcard' },
       { quoi: 'Quiz corrigé', meta: quiz, done: goalReached, pose: 'quiz' },
-      { quoi: "Battle d'entraînement", meta: 'Contre un ami', done: false, pose: 'fire' },
+      { quoi: "Battle d'entraînement", meta: 'Contre un ami', done: battleFaiteAujourdhui(), pose: 'fire' },
     ].map((p, i) => ({ ...p, jour: jour(i), titre: `${jour(i)} · ${p.quoi}`, ton: TONS_PLAN[i] }));
   }, [controle, dueCards, lastLesson, todayRevisions, goalReached]);
-  // L'étape à faire maintenant : la première pas encore faite. C'est elle qui lance l'action du jour.
+  // L'étape à faire maintenant : la première pas encore faite.
   const enCours = Math.max(0, plan.findIndex(p => !p.done));
-  // Le chemin (téléphone) : les trois étapes, puis le contrôle au bout s'il y en a un.
+  // Un contrôle noté : son programme d'abord ; sinon les cartes de la dernière leçon, ou le programme.
+  const lancerCartes = () => (controle || !lastLesson ? navigate(cibleControle) : ouvrirCartes());
   const lancerQuiz = () => {
     if (lastLesson) { restoreLesson(lastLesson.id); navigate('/quiz'); }
     else navigate(cibleControle);
   };
+  // Le chemin (téléphone) : les trois étapes, puis le contrôle au bout s'il y en a un.
   const cases = [
-    ...plan.map((p, i) => ({ ...p, go: i === enCours ? action : [action, lancerQuiz, () => navigate('/battle')][i] })),
+    // Chaque étape fait ce qu'elle annonce (pas l'action du héros, qui peut être « Scanner une leçon ») :
+    // les cartes de la dernière leçon (ou le programme du contrôle), le quiz, la Battle.
+    ...plan.map((p, i) => ({ ...p, go: [lancerCartes, lancerQuiz, () => navigate('/battle')][i] })),
     controle && {
       jour: jourDans(controle.jours), quoi: `Contrôle de ${controle.m.label.toLowerCase()}`, meta: controle.titre || 'Le jour J',
       pose: 'examen', arrivee: true, go: () => navigate('/agenda'), label: "Voir l'agenda",

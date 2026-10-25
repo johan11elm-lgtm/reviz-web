@@ -74,7 +74,7 @@ describe('<Onboarding />', () => {
     expect(screen.queryByRole('button', { name: 'Passer' })).not.toBeInTheDocument()
     fireEvent.click(screen.getByRole('button', { name: /Ouvrir mon programme/ }))
     expect(localStorage.getItem('reviz-onboarded-u1')).toBe('1')
-    expect(nav).toHaveBeenCalledWith('/programme', { replace: false })
+    expect(nav).toHaveBeenCalledWith('/programme', { replace: true })
   })
 
   it('le deuxième écran nomme les chapitres de la classe', () => {
@@ -92,7 +92,7 @@ describe('<Onboarding />', () => {
     expect(screen.getByLabelText('Étape 3 sur 3')).toBeInTheDocument()
     expect(screen.getByRole('button', { name: /voir le programme de 3e/ })).toBeInTheDocument()
     fireEvent.click(screen.getByRole('button', { name: /Scanner ma première leçon/ }))
-    expect(nav).toHaveBeenCalledWith('/scan', { replace: false })
+    expect(nav).toHaveBeenCalledWith('/scan', { replace: true })
   })
 
   it('déjà vu : renvoie à l’accueil sans rien afficher de plus', () => {

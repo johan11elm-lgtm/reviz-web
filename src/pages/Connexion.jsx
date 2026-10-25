@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { erreurConnexionSociale } from '../components/SocialLogin';
 import { EntreeEcran, Champ, ChampMotDePasse, RetourAction, Ou, BoutonsSociaux, LienTexte } from '../components/entree/Entree';
+import { revenir } from '../utils/navigation';
 
 function firebaseErrorFr(code) {
   switch (code) {
@@ -86,7 +87,7 @@ export default function Connexion() {
     <EntreeEcran
       bulle={['Content de te revoir.', 'Tes leçons t’attendent.']}
       expression="content" geste="coucou" taille="dense"
-      onRetour={() => navigate('/welcome')}
+      onRetour={() => revenir(navigate, '/welcome')}
       dessous={(
         <>
           <Ou />

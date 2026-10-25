@@ -1,6 +1,6 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, afterEach } from 'vitest'
 import { render, screen } from '@testing-library/react'
-import { MemoryRouter } from 'react-router-dom'
+import { MemoryRouter, Routes, Route } from 'react-router-dom'
 import Welcome from '../Welcome'
 
 const renderWelcome = () =>
@@ -31,5 +31,20 @@ describe('<Welcome />', () => {
   it('shows the « Essayer sans compte » link pointing to /essai', () => {
     renderWelcome()
     expect(screen.getByRole('link', { name: /Essayer sans compte/i })).toHaveAttribute('href', '/essai')
+  })
+
+  afterEach(() => localStorage.clear())
+
+  it('un essai déjà commencé sur l’appareil est repris : direction l’app, pas un nouvel essai', () => {
+    localStorage.setItem('reviz-guest', JSON.stringify({ uid: 'invite-abc', prenom: 'Léa', level: { cycle: 'college', classe: '3ème' } }))
+    render(
+      <MemoryRouter initialEntries={['/welcome']}>
+        <Routes>
+          <Route path="/welcome" element={<Welcome />} />
+          <Route path="/" element={<p>APP</p>} />
+        </Routes>
+      </MemoryRouter>
+    )
+    expect(screen.getByText('APP')).toBeInTheDocument()
   })
 })

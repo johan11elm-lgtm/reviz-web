@@ -5,7 +5,7 @@ import { isUnder15 } from '../utils/levels';
 import { doc, setDoc } from 'firebase/firestore';
 import { db } from '../services/firebaseConfig';
 import { createUserProfile } from '../services/userProfileService';
-import { EntreeEcran, Champ, ChampDate, ChoixClasse, CaseCGU, Erreur } from '../components/entree/Entree';
+import { EntreeEcran, Champ, ChampDate, ChoixClasse, CaseCGU, Erreur, LienTexte } from '../components/entree/Entree';
 
 // Fin d'inscription pour les nouveaux comptes sans mot de passe (Google,
 // Apple, Microsoft, TikTok) : seulement ce que le fournisseur ne donne pas.
@@ -13,7 +13,7 @@ import { EntreeEcran, Champ, ChampDate, ChoixClasse, CaseCGU, Erreur } from '../
 // masqué). Étape 2 : classe (collège) et CGU. Les moins de 15 ans passent
 // ensuite par /consent-pending : e-mail d'un parent maintenant, ou « Plus tard » (15 jours).
 export default function FinishSetup() {
-  const { currentUser, setUserLevel, refreshGate, updateDisplayName } = useAuth();
+  const { currentUser, setUserLevel, refreshGate, updateDisplayName, logout } = useAuth();
   const navigate = useNavigate();
   const [etape, setEtape] = useState(1);
   const [birthDate, setBirthDate] = useState('');
@@ -86,6 +86,13 @@ export default function FinishSetup() {
     }
   }
 
+  // Connecté avec le mauvais compte (celui d'un parent…) : toutes les pages ramènent ici, il faut
+  // donc une sortie, comme sur /consent-pending.
+  async function deconnecter() {
+    await logout();
+    navigate('/welcome', { replace: true });
+  }
+
   function retour() {
     setErreurs({});
     setEtape(1);
@@ -101,6 +108,7 @@ export default function FinishSetup() {
       expression={premiere ? 'fier' : 'content'} geste={premiere ? 'brasEnLair' : undefined}
       onRetour={premiere ? undefined : retour}
       etape={{ n: etape, total: 2 }}
+      dessous={<LienTexte avant="Ce n’est pas ton compte ?" onClick={deconnecter}>Me déconnecter</LienTexte>}
     >
       <form className="en-pile" key={etape} noValidate
         onSubmit={e => { e.preventDefault(); if (loading) return; if (premiere) continuer(); else handleSubmit(); }}>

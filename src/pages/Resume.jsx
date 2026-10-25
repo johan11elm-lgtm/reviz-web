@@ -1,6 +1,7 @@
 import { RefreshIcon, CheckIcon, XIcon } from '../components/Icons'
 import { useState, useRef, useEffect, useMemo } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
+import { fermerVersFiche, versExercice } from '../utils/navigation'
 import { recordRevision, loadRevisions } from '../services/revisionService'
 import { updateCardState, getCardState, countDueCards } from '../services/srsService'
 import { Mascot } from '../components/Mascot'
@@ -134,6 +135,7 @@ const Exclamation = () => (
  */
 function ResumeContent() {
   const navigate = useNavigate()
+  const location = useLocation()
   const isDesktop = useIsDesktop()
   const { isGuest } = useAuth()
   useEffect(() => { mesurer('format_ouvert', { format: 'resume' }) }, [])
@@ -226,7 +228,7 @@ function ResumeContent() {
     return () => clearTimeout(t)
   }, [])
 
-  const retourFiche = () => navigate('/analyse')
+  const retourFiche = () => fermerVersFiche(navigate, location)
   const boutonRetour = (
     <button type="button" className="rs-retour" onClick={retourFiche}><Chevron />Fiche chapitre</button>
   )
@@ -391,10 +393,10 @@ function ResumeContent() {
           <h2 id="rs-titre-parcours" className="rs-titre2">Ton parcours</h2>
           <span className="rs-compte">{etapes.filter(e => e.statut === 'fait').length} / 3</span>
         </div>
-        <Parcours etapes={etapes} grand={isDesktop} cases={isDesktop ? [0.145, 0.5, 0.855] : undefined} />
+        <Parcours etapes={etapes} grand={isDesktop} cases={isDesktop ? [0.145, 0.5, 0.855] : undefined} remplacer etat={location.state} />
       </section>
       <div className="rs-fin-actions">
-        <button type="button" className="rs-cta rs-cta--grand" onClick={() => navigate(suite.to)}>{suite.label}<Fleche /></button>
+        <button type="button" className="rs-cta rs-cta--grand" onClick={() => versExercice(navigate, location, suite.to)}>{suite.label}<Fleche /></button>
         {iaDispo && (
           <button type="button" className="rs-ia" onClick={() => setCoachOpen(true)}>
             <span className="rs-ia-anneau" aria-hidden="true"><span><Mascot pose="coach" size={36} alt="" /></span></span>

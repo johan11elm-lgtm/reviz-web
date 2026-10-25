@@ -1,5 +1,6 @@
 import { useState, useEffect, useMemo, useRef } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
+import { fermerVersFiche, versExercice } from '../utils/navigation'
 import { recordRevision, markRevisionDone, loadRevisions } from '../services/revisionService'
 import { getCardState, countDueCards } from '../services/srsService'
 import { Pantin } from '../components/Pantin'
@@ -77,6 +78,7 @@ export default function Quiz() {
 function QuizSession() {
   const isDesktop = useIsDesktop()
   const navigate = useNavigate()
+  const location = useLocation()
   const { isGuest } = useAuth()
   useEffect(() => { mesurer('format_ouvert', { format: 'quiz' }) }, [])
   const questions = useMemo(() => getQuestions(), [])
@@ -164,7 +166,7 @@ function QuizSession() {
     return () => clearTimeout(t)
   }, [])
 
-  const fermer = () => navigate('/analyse')
+  const fermer = () => fermerVersFiche(navigate, location)
   const boutonFermer = isDesktop
     ? <button type="button" className="fc-fermer fc-fermer--pilule" onClick={fermer}><Croix taille={18} />Fermer</button>
     : <button type="button" className="fc-fermer" onClick={fermer} aria-label="Fermer"><Croix /></button>
@@ -267,7 +269,7 @@ function QuizSession() {
       <div className="qz-fin-actions">
         <button type="button" className="fc-btn fc-btn--orange" onClick={refaire}>Refaire le quiz</button>
         {erreurs.length > 0 && total > 0 && (
-          <button type="button" className="fc-btn fc-btn--blanc" onClick={() => navigate('/flashcards')}>Revoir les cartes</button>
+          <button type="button" className="fc-btn fc-btn--blanc" onClick={() => versExercice(navigate, location, '/flashcards')}>Revoir les cartes</button>
         )}
       </div>
     )

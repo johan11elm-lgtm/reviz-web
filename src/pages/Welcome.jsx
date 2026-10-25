@@ -1,11 +1,16 @@
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import { BoutonInstaller } from '../components/InstallerApp';
 import { EntreeEcran, LienTexte } from '../components/entree/Entree';
+import { readGuest } from '../services/guestService';
+import { readSessionCache } from '../services/sessionCache';
 import './Welcome.entree.css';
 
 // Bienvenue (handoff Claude Design du 22/10) : un écran court, plus une page vitrine.
 // La présentation détaillée vit sur la landing (revizapp.fr).
 export default function Welcome() {
+  // Essai déjà commencé sur cet appareil (sans compte connecté) : on le reprend, au lieu de proposer
+  // un nouvel essai qui repartirait de zéro (retour depuis Connexion, retour du téléphone…).
+  if (readGuest() && !readSessionCache()) return <Navigate to="/" replace />;
   return (
     <EntreeEcran
       bulle={['Révise mieux.', 'Retiens plus.']}

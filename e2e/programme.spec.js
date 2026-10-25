@@ -212,6 +212,40 @@ test.describe('Téléphone (390 px)', () => {
     await expect(page).toHaveURL(/\/$/)
   })
 
+  test('la fiche et ses exercices ne se renvoient pas l’élève : exercice → fermer → fiche → Programme', async ({ page }) => {
+    await mockApiRoutes(page)
+    await mockProgramme(page)
+    await entrerEnEssai(page)
+    // Pour chaque exercice : la case du parcours, puis son bouton de fermeture.
+    for (const [exercice, url, fermer] of [
+      [/^Quiz corrigé/, /\/quiz$/, page.getByRole('button', { name: 'Fermer' })],
+      [/^Flashcards/, /\/flashcards$/, page.getByRole('button', { name: 'Fermer' })],
+      [/^Résumé/, /\/resume$/, page.locator('.rs-retour')],
+    ]) {
+      await ouvrirChapitreDuProgramme(page)
+      await page.getByRole('link', { name: exercice }).first().click()
+      await expect(page).toHaveURL(url)
+      await fermer.first().click()
+      await expect(page).toHaveURL(/\/analyse/)
+      // « Programme » revient d'un cran : le programme, et non l'exercice qu'on vient de fermer.
+      await page.getByRole('button', { name: 'Programme', exact: true }).click()
+      await expect(page).toHaveURL(/\/programme/)
+    }
+  })
+
+  test('un essai déjà commencé ne repart pas de zéro en repassant par la bienvenue', async ({ page }) => {
+    await mockApiRoutes(page)
+    await mockProgramme(page)
+    await entrerEnEssai(page, { prenom: 'Inès' })
+    const essai = await page.evaluate(() => JSON.parse(localStorage.getItem('reviz-guest')).uid)
+    // Retour depuis « J'ai déjà un compte », ou lien « Essayer sans compte » : on reprend l'essai.
+    await page.goto('/welcome')
+    await expect(page).not.toHaveURL(/\/welcome/)
+    await page.goto('/essai')
+    await expect(page).toHaveURL(/\/programme/)
+    expect(await page.evaluate(() => JSON.parse(localStorage.getItem('reviz-guest')))).toMatchObject({ uid: essai, prenom: 'Inès' })
+  })
+
   test('le détail d’un chapitre reste dans l’écran, de chaque côté du zigzag', async ({ page }) => {
     await mockApiRoutes(page)
     // Huit chapitres prêts : toutes les positions du zigzag.

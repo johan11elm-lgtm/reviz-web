@@ -50,7 +50,8 @@ export default function Onboarding() {
   }
   function finir(to) {
     if (currentUser) localStorage.setItem(`reviz-onboarded-${currentUser.uid}`, '1');
-    navigate(to, { replace: to === '/' });
+    // La présentation ne reste pas dans l'historique : « Mes leçons » ou un retour ne la rouvrent pas.
+    navigate(to, { replace: true });
   }
 
   let bulle, carte;

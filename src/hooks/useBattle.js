@@ -10,6 +10,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { contexteBattle } from '../services/battleConnexion'
 import { apiFetch } from '../services/apiClient'
 import { track } from '../services/statsService'
+import { noterBattleDuJour } from '../services/battleDuJour'
 import {
   ecouterBattle, ecouterHorloge, tenirPresence, rejoindreBattle, lancerPartie, repondre,
   avancer, declarerAbandon, quitterBattle, lancerRevanche, marquerAbsent,
@@ -193,6 +194,7 @@ export function useBattle(code, { prenom, onRevanche }) {
     if (!joue || !issue || finComptee.current) return
     finComptee.current = true
     track('battle_terminee', { issue, joueur: ctx.avecCompte ? 'compte' : 'invite' })
+    noterBattleDuJour()
   }, [ctx, joue, issue])
 
   // --- Actions ---

@@ -116,6 +116,22 @@ describe('<Essai /> — mode essai', () => {
     expect(localStorage.getItem('reviz-decouverte-prof')).toBeNull()
   })
 
+  it('un essai déjà commencé, sans fiche : on le reprend (son programme), pas de nouvel essai vide', () => {
+    auth.currentUser = { uid: 'invite-1' }
+    auth.isGuest = true
+    renderPage()
+    expect(nav).toHaveBeenCalledWith('/programme', { replace: true })
+    expect(screen.queryByLabelText('Ton prénom')).toBeNull()
+    expect(auth.loginAsGuest).not.toHaveBeenCalled()
+  })
+
+  it('un essai déjà commencé venu d’une fiche sans chapitre : sa matière', () => {
+    auth.currentUser = { uid: 'invite-1' }
+    auth.isGuest = true
+    renderPage('/essai?classe=3%C3%A8me&matiere=maths')
+    expect(nav).toHaveBeenCalledWith('/programme?matiere=maths', { replace: true })
+  })
+
   it('un utilisateur déjà connecté est renvoyé à l’accueil', () => {
     auth.currentUser = { uid: 'u1' }
     renderPage()

@@ -171,7 +171,8 @@ export default function Scan() {
     localStorage.removeItem('reviz-lesson-text');
     localStorage.setItem('reviz-captured-image', photo);
     startAnalysisFromImage(photo, niveau); // l'appel part tout de suite ; la fiche affiche la préparation
-    navigate('/analyse');
+    // La fiche remplace le scan : « Mes leçons » de la fiche ne retombe pas sur le viseur.
+    navigate('/analyse', { replace: true, state: { depuisScan: true } });
   }
   const long = isLessonTextTooLong(texte);
   const assez = texte.trim().length >= MIN;
@@ -181,7 +182,7 @@ export default function Scan() {
     localStorage.removeItem('reviz-ai-data');
     localStorage.setItem('reviz-lesson-text', t);
     startAnalysis(t, niveau);
-    navigate('/analyse');
+    navigate('/analyse', { replace: true, state: { depuisScan: true } });
   }
 
   const inputFichier = <input ref={fichier} type="file" accept="image/*" hidden onChange={e => importer(e.target.files?.[0])} />;

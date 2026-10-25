@@ -3,9 +3,10 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { Mascot } from '../components/Mascot';
 import { CLASSES_BY_CYCLE } from '../utils/levels';
-import { CLASSES_DECOUVERTE, startDecouverte, stopDecouverte } from '../services/decouverteService';
+import { CLASSES_DECOUVERTE, isDecouverte, startDecouverte, stopDecouverte } from '../services/decouverteService';
 import { loadCatalogue, openChapter } from '../services/programmeService';
 import { EntreeEcran, Champ, ChoixClasse, Encart, LienTexte } from '../components/entree/Entree';
+import { revenir } from '../utils/navigation';
 
 /**
  * Mode essai (« sans compte ») : prénom + classe, et l'élève révise son
@@ -35,6 +36,10 @@ export default function Essai() {
   const [chapitre, setChapitre] = useState(chapitreFiche ? undefined : null);
   const [ouverture, setOuverture] = useState(false);
   const ouvert = useRef(false);
+  // Essai déjà commencé à l'arrivée (hors visite d'un enseignant) : on le reprend. Refaire le formulaire
+  // créerait un nouvel essai vide, et la progression du premier ne serait plus affichée. Pour changer
+  // d'élève sur un poste partagé : Réglages → quitter l'essai.
+  const dejaInvite = useRef(isGuest && !isDecouverte());
   const [prenom, setPrenom] = useState('');
   const [classe, setClasse] = useState(classeFiche);
   const [erreurPrenom, setErreurPrenom] = useState('');
@@ -65,12 +70,14 @@ export default function Essai() {
   }
 
   // Déjà connecté (compte, ou essai déjà commencé) et venu d'une fiche : le
-  // quiz du chapitre directement. Un vrai compte sans chapitre : l'accueil.
+  // quiz du chapitre directement. Un vrai compte sans chapitre : l'accueil ;
+  // un essai déjà commencé : son programme.
   useEffect(() => {
     if (!currentUser || ouvert.current) return;
     if (chapitreFiche && chapitre === undefined) return;
     if (chapitre) ouvrirChapitre();
     else if (!isGuest) navigate('/', { replace: true });
+    else if (dejaInvite.current) navigate(matiereFiche ? `/programme?matiere=${matiereFiche}` : '/programme', { replace: true });
     // ouvrirChapitre ne dépend que de ces valeurs.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentUser, isGuest, chapitre, chapitreFiche, navigate]);
@@ -96,7 +103,7 @@ export default function Essai() {
   }
 
   // Redirection automatique en cours ou à venir (effet ci-dessus) : rien à remplir.
-  const redirige = currentUser && !prenom && ((chapitreFiche && chapitre !== null) || !isGuest);
+  const redirige = currentUser && !prenom && ((chapitreFiche && chapitre !== null) || !isGuest || dejaInvite.current);
   if (classeProf || redirige) return <div className="app app--no-halo en-page" />;
 
   // Venu d'une fiche avec un chapitre trouvé : seulement le prénom, la classe est connue.
@@ -106,7 +113,7 @@ export default function Essai() {
     <EntreeEcran
       bulle={quiz ? ['Teste-toi sur ce chapitre.', 'Juste ton prénom avant.'] : ['Essaie sans compte.', "Deux infos, et c'est parti."]}
       expression="content" geste="coucou"
-      onRetour={() => navigate('/welcome')}
+      onRetour={() => revenir(navigate, '/welcome')}
       dessous={(
         <>
           <Encart icone="horloge" teinte="lavande">

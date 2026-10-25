@@ -66,7 +66,7 @@ describe('<Scan /> — Scanner une leçon', () => {
     expect(screen.getByText('Assez long')).toBeInTheDocument()
     fireEvent.click(screen.getByRole('button', { name: /Analyser ce texte/ }))
     expect(ai.startAnalysis).toHaveBeenCalledWith(texte, expect.anything())
-    expect(nav).toHaveBeenCalledWith('/analyse')
+    expect(nav).toHaveBeenCalledWith('/analyse', { replace: true, state: { depuisScan: true } })
   })
 
   it('texte trop long : prévient, et n’envoie que le début coupé proprement', () => {

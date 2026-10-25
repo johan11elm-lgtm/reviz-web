@@ -1,5 +1,6 @@
 import { useState, useEffect, useMemo, useRef, useLayoutEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
+import { fermerVersFiche, versExercice } from '../utils/navigation'
 import { recordRevision } from '../services/revisionService'
 import { BRANCH_COLORS, BRANCH_POSITIONS } from '../utils/aiPrompts'
 import { Pantin } from '../components/Pantin'
@@ -157,6 +158,7 @@ function MindmapSession() {
   useEffect(() => { recordRevision('mindmap'); mesurer('format_ouvert', { format: 'mindmap' }) }, [])
   const data = useMemo(() => getMindmapData(), [])
   const navigate = useNavigate()
+  const location = useLocation()
   const isDesktop = useIsDesktop()
   const branches = data.branches
   const n = branches.length
@@ -320,15 +322,15 @@ function MindmapSession() {
   )
   const actionsFin = (
     <div className="cm-fin-actions">
-      {nbCartes > 0 && <button type="button" className="cm-btn cm-btn--orange" onClick={() => navigate('/flashcards')}>Passer aux flashcards · {pluriel(nbCartes, 'carte')}<Fleche /></button>}
+      {nbCartes > 0 && <button type="button" className="cm-btn cm-btn--orange" onClick={() => versExercice(navigate, location, '/flashcards')}>Passer aux flashcards · {pluriel(nbCartes, 'carte')}<Fleche /></button>}
       <button type="button" className="cm-btn cm-btn--blanc" onClick={revoir}>Revoir la carte</button>
-      <button type="button" className="cm-lien" onClick={() => navigate('/analyse')}>Retour au chapitre</button>
+      <button type="button" className="cm-lien" onClick={() => fermerVersFiche(navigate, location)}>Retour au chapitre</button>
     </div>
   )
   const segments = (
     <span className="cm-segments" aria-hidden="true">{vues.map((v, i) => <i key={i} className={v ? 'is-vue' : ''} />)}</span>
   )
-  const retour = <button type="button" className="ch-retour cm-retour" onClick={() => navigate('/analyse')}><Chevron />{isDesktop ? 'Fiche chapitre' : ''}</button>
+  const retour = <button type="button" className="ch-retour cm-retour" onClick={() => fermerVersFiche(navigate, location)}><Chevron />{isDesktop ? 'Fiche chapitre' : ''}</button>
   const racine = `app app--no-halo ch-page mindmap-page cm-page${isDesktop ? ' app--large ch-page--large cm-page--large' : ''}`
 
   // ── Ordinateur ──

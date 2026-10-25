@@ -15,6 +15,7 @@ import { avancementLecon } from '../utils/avancementLecon';
 import { useIsDesktop } from '../hooks/useMediaQuery';
 import '../components/reviz/HerosMatiere.css';
 import './Cours.css';
+import { revenir } from '../utils/navigation';
 
 const pluriel = (n, mot) => `${n} ${mot}${n > 1 ? 's' : ''}`;
 
@@ -375,7 +376,7 @@ export default function Cours() {
     </>
   );
   const fermeMenu = menu !== null && <div className="le-attrape" onClick={() => setMenu(null)} aria-hidden="true" />;
-  const retour = <button type="button" className="ch-retour" onClick={() => navigate('/programme')}><Chevron />Programme</button>;
+  const retour = <button type="button" className="ch-retour" onClick={() => revenir(navigate, '/programme')}><Chevron />Programme</button>;
   const racine = `app app--no-halo ch-page le-page${isDesktop ? ' app--large ch-page--large le-page--large' : ''}`;
   const deco = (
     <>
