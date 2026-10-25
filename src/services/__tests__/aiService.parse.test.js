@@ -58,6 +58,20 @@ describe('_parseResult — parsing & robustesse', () => {
     expect(() => _parseResult('{"error":"NON_SCOLAIRE"}')).toThrow('NON_SCOLAIRE')
   })
 
+  it('un refus garde sa raison quand elle est dans la liste fermée, rien sinon', () => {
+    const erreurDe = raw => { try { _parseResult(raw) } catch (e) { return e } }
+    const floue = erreurDe('{"error":"ILLISIBLE","raison":"floue"}')
+    expect(floue.message).toBe('ILLISIBLE')
+    expect(floue.raison).toBe('floue')
+    expect(erreurDe('{"error":"NON_SCOLAIRE","raison":"message_prive"}').raison).toBe('message_prive')
+    // Une raison inventée (ou un texte qui recopierait la photo) n'est jamais gardée.
+    const libre = erreurDe('{"error":"ILLISIBLE","raison":"Le cours de Léa sur Thalès"}')
+    expect(libre.message).toBe('ILLISIBLE')
+    expect(libre.raison).toBeUndefined()
+    // Une raison d'un autre refus non plus.
+    expect(erreurDe('{"error":"NON_SCOLAIRE","raison":"floue"}').raison).toBeUndefined()
+  })
+
   it('lève INVALID_JSON sur un autre champ error', () => {
     expect(() => _parseResult('{"error":"AUTRE"}')).toThrow('INVALID_JSON')
   })

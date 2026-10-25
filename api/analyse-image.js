@@ -105,8 +105,8 @@ export default async function handler(req, res) {
   const result = await anthropicResp.json()
   const text_content = result.content?.[0]?.text ?? ''
 
-  // Refus de sûreté (contenu non scolaire) : on ne facture pas un scan à l'élève.
-  if (consumed && /"error"\s*:\s*"NON_SCOLAIRE"/.test(text_content)) {
+  // Refus (contenu non scolaire, ou photo d'une leçon trop difficile à lire) : on ne facture pas un scan à l'élève.
+  if (consumed && /"error"\s*:\s*"(NON_SCOLAIRE|ILLISIBLE)"/.test(text_content)) {
     await refundQuota({ db, uid, sansEmail }).catch(() => {})
   }
 

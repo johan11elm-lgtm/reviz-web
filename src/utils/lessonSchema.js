@@ -3,11 +3,12 @@
 // Source unique : aiService (scan) et scripts/programme (catalogue)
 // partagent exactement les mêmes règles.
 // -------------------------------------------------------
-import { BRANCH_COLORS, BRANCH_POSITIONS } from './aiPrompts.js'
+import { BRANCH_COLORS, BRANCH_POSITIONS, RAISONS_ILLISIBLE, RAISONS_NON_SCOLAIRE } from './aiPrompts.js'
 
 /**
  * Parse et normalise la réponse brute du modèle.
- * Lève Error('INVALID_JSON') ou Error('NON_SCOLAIRE').
+ * Lève Error('INVALID_JSON'), Error('NON_SCOLAIRE') ou Error('ILLISIBLE') ; un refus porte sa raison
+ * (`err.raison`, liste fermée de aiPrompts.js) quand le modèle en donne une valide.
  */
 export function parseLessonJson(raw) {
   let parsed
@@ -31,8 +32,11 @@ export function parseLessonJson(raw) {
 
   // Refus de sûreté renvoyé par le modèle (contenu non scolaire / inapproprié).
   if (typeof parsed.error === 'string') {
-    if (parsed.error === 'NON_SCOLAIRE') throw new Error('NON_SCOLAIRE')
-    throw new Error('INVALID_JSON')
+    const raisons = { NON_SCOLAIRE: RAISONS_NON_SCOLAIRE, ILLISIBLE: RAISONS_ILLISIBLE }[parsed.error]
+    if (!raisons) throw new Error('INVALID_JSON')
+    const err = new Error(parsed.error)
+    if (raisons.includes(parsed.raison)) err.raison = parsed.raison
+    throw err
   }
 
   // Présence des blocs principaux

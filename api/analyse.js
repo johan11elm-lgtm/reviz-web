@@ -92,7 +92,7 @@ export default async function handler(req, res) {
   const text_content = result.content?.[0]?.text ?? ''
 
   // Refus de sûreté (contenu non scolaire) : on ne facture pas un scan à l'élève.
-  if (consumed && /"error"\s*:\s*"NON_SCOLAIRE"/.test(text_content)) {
+  if (consumed && /"error"\s*:\s*"(NON_SCOLAIRE|ILLISIBLE)"/.test(text_content)) {
     await refundQuota({ db, uid, sansEmail }).catch(() => {})
   }
 

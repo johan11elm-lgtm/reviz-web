@@ -20,6 +20,7 @@
 import { FieldValue } from 'firebase-admin/firestore'
 import { getDb } from './_firebaseAdmin.js'
 import { CODES_VIDEO } from '../src/utils/codesVideo.js'
+import { RAISONS_ILLISIBLE, RAISONS_NON_SCOLAIRE } from '../src/utils/aiPrompts.js'
 import { signatureValide } from './_rappels.js'
 import { ESSAI_ID_RE, CHAPITRE_ID_RE } from '../src/utils/retour.js'
 
@@ -70,10 +71,13 @@ const ALLOWED = {
   // Code de l'erreur de scan (jamais le texte de la leçon). Les codes
   // API_ERROR_<statut HTTP> sont acceptés à part ; tout le reste devient « AUTRE ».
   code: [
-    'NON_SCOLAIRE', 'RATE_LIMIT', 'NETWORK_ERROR', 'TIMEOUT', 'UNAUTHORIZED', 'EMAIL_NOT_VERIFIED',
+    'NON_SCOLAIRE', 'ILLISIBLE', 'RATE_LIMIT', 'NETWORK_ERROR', 'TIMEOUT', 'UNAUTHORIZED', 'EMAIL_NOT_VERIFIED',
     'TEXT_TOO_LONG', 'IMAGE_TOO_LARGE', 'INVALID_IMAGE', 'INVALID_MEDIA_TYPE', 'INVALID_JSON',
     'EMPTY_RESPONSE', 'MISSING_API_KEY', 'INVALID_API_KEY', 'MISSING_LEVEL',
   ],
+  // Raison d'un refus du scan (photo illisible ou contenu non scolaire), donnée par le modèle dans
+  // une liste fermée : jamais rien de la photo ni de la leçon.
+  raison: [...RAISONS_ILLISIBLE, ...RAISONS_NON_SCOLAIRE],
 }
 
 const API_ERROR = /^API_ERROR_[1-5]\d\d$/

@@ -85,6 +85,16 @@ const Coche = ({ taille = 13 }) => (
   <svg width={taille} height={taille} viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="3.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg>
 );
 const pluriel = (n, mot) => `${n} ${mot}${n > 1 ? 's' : ''}`;
+// Photo d'une leçon trop difficile à lire (refus ILLISIBLE) : un conseil par raison donnée par le modèle.
+const CONSEILS_ILLISIBLE = {
+  floue: { lignes: ['Ta photo est un peu floue.', 'Tiens le téléphone bien immobile.'], texte: 'Touche le texte sur l’écran pour faire la mise au point, puis attends une seconde avant de prendre la photo.' },
+  coupee: { lignes: ['Il manque un bout de ta leçon.', 'Recule un peu pour tout cadrer.'], texte: 'Fais entrer toute la page dans le cadre, bords compris. Pour une leçon longue, fais deux photos.' },
+  sombre: { lignes: ['Ta photo est trop sombre.', 'Mets-toi près d’une fenêtre.'], texte: 'Pose ta feuille à plat sous une bonne lumière, sans ton ombre dessus.' },
+  reflets: { lignes: ['Il y a des reflets sur la page.', 'Penche un peu le téléphone.'], texte: 'Évite la lumière d’une lampe juste au-dessus d’une page brillante : décale-toi un peu.' },
+  trop_loin: { lignes: ['Ta photo est prise de trop loin.', 'Rapproche-toi du texte.'], texte: 'Approche le téléphone jusqu’à ce que les lettres soient bien nettes à l’écran.' },
+  ecriture: { lignes: ['J’ai du mal à lire l’écriture.', 'Tu peux aussi coller le texte.'], texte: 'Reprends la photo bien à plat et de près, ou tape les points importants dans « Coller le texte ».' },
+};
+
 const POSE_ETAPE = { '/resume': 'reading', '/flashcards': 'flashcard', '/quiz': 'quiz' };
 
 // ─── Préparation (handoff Scanner du 21/10) ──────────────────────────
@@ -109,6 +119,7 @@ const FORMATS_PREP = [
 export default function Analyse() {
   const [isLoading, setIsLoading]     = useState(true);
   const [error, setError]             = useState(null);
+  const [raison, setRaison]           = useState(null); // raison d'un refus du scan (liste fermée)
   const [lesson, setLesson]           = useState(null);
   const [progress, setProgress]       = useState(0);
   const [showPremium, setShowPremium] = useState(false);
@@ -178,7 +189,7 @@ export default function Analyse() {
       .catch(err => {
         setError(err.message);
         setIsLoading(false);
-        track('scan_erreur', { code: scanErrorCode(err?.message), source: 'texte' });
+        track('scan_erreur', { code: scanErrorCode(err?.message), source: 'texte', ...(err?.raison ? { raison: err.raison } : {}) });
       });
   }
 
@@ -202,7 +213,8 @@ export default function Analyse() {
       .catch(err => {
         setError(err.message);
         setIsLoading(false);
-        track('scan_erreur', { code: scanErrorCode(err?.message), source: 'photo' });
+        setRaison(err?.raison ?? null);
+        track('scan_erreur', { code: scanErrorCode(err?.message), source: 'photo', ...(err?.raison ? { raison: err.raison } : {}) });
       });
   }
 
@@ -219,7 +231,7 @@ export default function Analyse() {
   const fromProgramme = isProgrammeLessonId(coachLessonId);
 
   const errorMessages = {
-    NON_SCOLAIRE:    { title: "Ça n'a pas l'air d'une leçon", sub: "Réviz ne marche qu'avec des cours et des leçons. Scanne une vraie leçon pour lancer ta séance." },
+    NON_SCOLAIRE:    { title: "Ça n'a pas l'air d'une leçon", sub: "Je n'y trouve pas de cours. Si c'est bien ta leçon, reprends la photo en cadrant tout le texte, bien à plat." },
     RATE_LIMIT:      { title: 'Trop de scans d\'un coup', sub: 'Patiente un petit moment, puis réessaie.' },
     NETWORK_ERROR:   { title: 'Pas de connexion', sub: 'Vérifie ta connexion internet et réessaie.' },
     TIMEOUT:         { title: 'Ça a pris trop de temps', sub: 'Vérifie ta connexion et réessaie.' },
@@ -237,11 +249,13 @@ export default function Analyse() {
   const parPhoto = !!localStorage.getItem('reviz-captured-image');
   // Les sorties de l'écran d'erreur remplacent l'analyse : revenir dessus relancerait l'appel à l'IA.
   const verScan = () => navigate(parPhoto ? '/scan' : '/scan?mode=texte', { replace: true });
-  const erreur = ['INVALID_JSON', 'EMPTY_RESPONSE', 'IMAGE_TOO_LARGE'].includes(error) ? {
+  // Photo illisible : le conseil qui correspond à ce que le modèle a vu (floue, coupée…).
+  const conseil = error === 'ILLISIBLE' ? CONSEILS_ILLISIBLE[raison] : null;
+  const erreur = ['INVALID_JSON', 'EMPTY_RESPONSE', 'IMAGE_TOO_LARGE', 'ILLISIBLE'].includes(error) ? {
     humeur: 'reflechit', geste: 'gratterTete',
-    lignes: parPhoto ? ['Je n’arrive pas à lire cette photo.', 'Reprends-la plus droite et mieux éclairée.'] : ['Je n’arrive pas à lire ce texte.', 'Vérifie que c’est bien ta leçon.'],
+    lignes: conseil ? conseil.lignes : parPhoto ? ['Je n’arrive pas à lire cette photo.', 'Reprends-la plus droite et mieux éclairée.'] : ['Je n’arrive pas à lire ce texte.', 'Vérifie que c’est bien ta leçon.'],
     titre: parPhoto ? 'On recommence la photo ?' : 'On réessaie ?',
-    texte: parPhoto ? 'Pose ta feuille à plat, près d’une fenêtre ou sous une lampe, et approche-toi jusqu’à ce que les lettres soient nettes.' : 'Recolle le texte de ta leçon, ou prends-la directement en photo.',
+    texte: conseil ? conseil.texte : parPhoto ? 'Pose ta feuille à plat, près d’une fenêtre ou sous une lampe, et approche-toi jusqu’à ce que les lettres soient nettes.' : 'Recolle le texte de ta leçon, ou prends-la directement en photo.',
     action: [parPhoto ? 'Reprendre la photo' : 'Modifier le texte', verScan],
     autre: [parPhoto ? 'Coller le texte' : 'Prendre une photo', () => navigate(parPhoto ? '/scan?mode=texte' : '/scan', { replace: true })],
   } : ['NETWORK_ERROR', 'TIMEOUT'].includes(error) ? {

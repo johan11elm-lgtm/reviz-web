@@ -78,6 +78,14 @@ describe('buildUpdate', () => {
     })
     expect(buildUpdate('essai_demarre', { v: 'zz99' })).toEqual({ essai_demarre: { total: 1 } })
   })
+  it('compte un refus du scan par code et par raison, seulement les raisons de la liste fermée', () => {
+    expect(buildUpdate('scan_erreur', { code: 'ILLISIBLE', raison: 'floue', source: 'photo' })).toEqual({
+      scan_erreur: { total: 1, source: { photo: 1 }, code: { ILLISIBLE: 1 }, raison: { floue: 1 } },
+    })
+    expect(buildUpdate('scan_erreur', { code: 'NON_SCOLAIRE', raison: 'un selfie de Léa' })).toEqual({
+      scan_erreur: { total: 1, code: { NON_SCOLAIRE: 1 } },
+    })
+  })
   it('refuse un événement inconnu', () => {
     expect(buildUpdate('mouchard', {})).toBeNull()
   })
