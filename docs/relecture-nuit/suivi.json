@@ -1034,6 +1034,11 @@
       "chemin": "5eme/francais/attribut-du-sujet-et-accords",
       "le": "2026-10-25",
       "corrections": 0
+    },
+    {
+      "chemin": "5eme/francais/paroles-rapportees-et-registres",
+      "le": "2026-10-25",
+      "corrections": 1
     }
   ]
 }
