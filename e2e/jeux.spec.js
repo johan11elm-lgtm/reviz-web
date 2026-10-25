@@ -146,6 +146,14 @@ for (const profil of [TELEPHONE, ORDINATEUR]) {
       await expect(pastilleRecord(page)).toHaveCount(0)
 
       await expect(page.getByRole('button', { name: /Partie rapide/ })).toBeVisible()
+      // Le son se remet et se coupe en haut à droite, dès l'écran des jeux (coupé au départ des tests).
+      const son = page.locator('.hb-haut').getByRole('button', { name: /le son$/ })
+      await expect(son).toHaveAccessibleName('Remettre le son')
+      await son.click()
+      await expect(son).toHaveAccessibleName('Couper le son')
+      await expect(son).toHaveAttribute('aria-pressed', 'false')
+      await son.click()
+      await expect(son).toHaveAccessibleName('Remettre le son')
       await expect(page.getByRole('heading', { name: 'Les jeux' })).toBeVisible()
       for (const nom of ['Le tour de magie', 'Réviz lance', 'Réviz se trompe ?', 'La pizzeria !', 'Le ninja des fautes', 'Tape-taupe !']) {
         await expect(page.locator('.hb-jeu').filter({ hasText: nom })).toBeVisible()
@@ -178,6 +186,7 @@ for (const profil of [TELEPHONE, ORDINATEUR]) {
       const carte = page.getByRole('dialog', { name: 'La partie du jour' })
       await expect(carte).toBeVisible()
       await expect(carte.getByText('Défi du jour')).toBeVisible()
+      await expect(carte.locator('.cd-haut').getByRole('button', { name: /le son$/ })).toBeVisible()
       await expect(carte.getByText('La même partie pour tout le monde aujourd’hui.')).toBeVisible()
       await expect(carte.getByText(/6\stours\sde\s\d+\ss/)).toBeVisible()
       await expect(carte.getByText(/Ton record/)).toContainText(/1\s240/)
@@ -210,7 +219,7 @@ for (const profil of [TELEPHONE, ORDINATEUR]) {
       expect(erreurs).toEqual([])
     })
 
-    test('la partie du jour jusqu’au bout : fin, récap, hub, accueil, profil, puis rejouée sans compter deux jours', async ({ page }) => {
+    test('la partie du jour jusqu’au bout : fin, récap, hub, accueil, profil, puis plus rejouable (Partie rapide)', async ({ page }) => {
       const erreurs = []
       surveiller(page, erreurs)
       await preparer(page)
@@ -226,6 +235,10 @@ for (const profil of [TELEPHONE, ORDINATEUR]) {
       await expect(page.locator('.fp-titre')).toHaveText(/Sans faute|Bravo|Bien joué|Bel effort/)
       expect(nombreDe(await page.locator('.fp-meilleur').textContent())).toBe(score)
       await expect(page.getByText(/bonnes? réponses? sur/)).toBeVisible()
+      // Une seule partie du jour : la fin propose une Partie rapide, pas de la rejouer.
+      await expect(page.locator('button.fp-btn', { hasText: 'Partie rapide' })).toBeVisible()
+      await expect(page.locator('.fp-haut').getByRole('button', { name: /le son$/ })).toBeVisible()
+      await expect(page.locator('button.fp-btn', { hasText: 'Rejouer' })).toHaveCount(0)
       await page.screenshot({ path: test.info().outputPath('fin.png'), animations: 'disabled' })
 
       // Le récap (s'il y a des erreurs : toute partie jouée au chrono en a).
@@ -246,7 +259,8 @@ for (const profil of [TELEPHONE, ORDINATEUR]) {
       expect(nombreDe(await page.locator('.hb-jour-sous').textContent())).toBe(score)
       await expect(pastilleSerie(page)).toHaveText('1 jour de suite')
       expect(nombreDe(await pastilleRecord(page).getAttribute('aria-label'))).toBe(score)
-      await expect(page.getByRole('button', { name: /^Rejouer/ }).first()).toBeVisible()
+      await expect(page.locator('.hb-jour').getByRole('button', { name: /^Partie rapide/ })).toBeVisible()
+      await expect(page.getByRole('button', { name: /^Rejouer/ })).toHaveCount(0)
 
       // Dans l'émulateur : le jour de Paris et le record, écrits de façon asynchrone.
       await expect.poll(async () => (await lireProfilEmulateur(uid))?.jeux?.jours ?? [], { timeout: 15_000 }).toEqual([jour])
@@ -261,19 +275,34 @@ for (const profil of [TELEPHONE, ORDINATEUR]) {
       expect(nombreDe((await carte.locator('.hm-jeux-sous').textContent()).match(/Faite\s*!\s*([\d\s\u00a0\u202f]+) points/)[1])).toBe(score)
       await expect(carte.getByText('Voir les jeux')).toBeVisible()
 
-      // Rejouer le même jour : la série reste à 1 jour, jeux.jours sans doublon, record = le meilleur des deux.
+      // Plus rejouable le même jour : le bouton de la partie du jour ouvre une Partie rapide (le lien
+      // direct ?rapide=jour aussi : test unitaire de la page). Série, score du jour et record ne bougent pas.
       await page.getByRole('link', { name: /La partie du jour/ }).click()
       await expect(page.getByRole('heading', { name: /On joue/ })).toBeVisible()
-      const score2 = await jouerLaPartieDuJour(page)
-      await revenirAuHub(page)
+      await page.locator('.hb-jour').getByRole('button', { name: /^Partie rapide/ }).click()
+      await expect(page.getByRole('dialog', { name: 'Partie rapide' })).toBeVisible()
+      await expect(page.getByRole('dialog', { name: 'La partie du jour' })).toHaveCount(0)
+      await page.goto('/jeux')
       await expect(pastilleSerie(page)).toHaveText('1 jour de suite')
-      const meilleur = Math.max(score, score2)
-      expect(nombreDe(await pastilleRecord(page).getAttribute('aria-label'))).toBe(meilleur)
-      await expect.poll(async () => (await lireProfilEmulateur(uid))?.jeux?.record, { timeout: 15_000 }).toBe(meilleur)
+      expect(nombreDe(await pastilleRecord(page).getAttribute('aria-label'))).toBe(score)
       const profil2 = await lireProfilEmulateur(uid)
       expect(profil2.jeux.jours).toEqual([jour])
+      expect(profil2.jeux.scores[jour]).toBe(score)
 
       expect(erreurs).toEqual([])
+    })
+
+    test('la partie du jour arrêtée à la croix compte quand même : plus rejouable, série lancée', async ({ page }) => {
+      await preparer(page)
+      await ouvrirCompte(page, { aller: null })
+      await ouvrirAvecHorloge(page, '/jeux')
+      await page.getByRole('button', { name: /^Jouer/ }).first().click()
+      await page.getByRole('dialog', { name: 'La partie du jour' }).getByRole('button', { name: /Démarrer/ }).click()
+      await page.clock.runFor(100)
+      await page.getByRole('button', { name: 'Fermer' }).first().click()
+      await expect(page.getByRole('heading', { name: /On joue/ })).toBeVisible()
+      await expect(pastilleSerie(page)).toHaveText('1 jour de suite')
+      await expect(page.locator('.hb-jour').getByRole('button', { name: /^Partie rapide/ })).toBeVisible()
     })
 
     test('une série en cours : 2 jours repris du compte, 3 jours après la partie du jour', async ({ page }) => {

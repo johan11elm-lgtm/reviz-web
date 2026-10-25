@@ -168,7 +168,7 @@ describe('Réviz Games — la page', () => {
       expect(document.querySelector('.tj')).toBeNull()
     })
 
-    it('la partie du jour abandonnée après la dernière réponse n’est pas enregistrée', () => {
+    it('la partie du jour arrêtée à la croix compte quand même, avec les points déjà gagnés, sans écran de fin', () => {
       rendre()
       jouer('Jouer la partie du jour')
       cliquer('bonne')
@@ -176,18 +176,35 @@ describe('Réviz Games — la page', () => {
       avancer(200)
       cliquer('Fermer')
       avancer(30_000)
-      expect(enregistrerPartieDuJour).not.toHaveBeenCalled()
+      expect(enregistrerPartieDuJour.mock.calls.map(c => c.slice(0, 2))).toEqual([['u1', 0], ['u1', 100]])
       expect(screen.getByTestId('hub')).toBeInTheDocument()
     })
 
-    it('au contraire, finie jusqu’au bout, elle est enregistrée une fois', () => {
+    it('finie jusqu’au bout : comptée dès le départ (0), puis avec son score à la fin', () => {
       rendre()
       jouer('Jouer la partie du jour')
       cliquer('bonne'); cliquer('bonne')
       cliquer('terminer')
       avancer(700)
-      expect(enregistrerPartieDuJour).toHaveBeenCalledTimes(1)
-      expect(enregistrerPartieDuJour.mock.calls[0].slice(0, 2)).toEqual(['u1', 200])
+      expect(enregistrerPartieDuJour.mock.calls.map(c => c.slice(0, 2))).toEqual([['u1', 0], ['u1', 200]])
+    })
+
+    it('le lien direct ?rapide=jour, partie du jour déjà faite : une Partie rapide, rien d’enregistré', () => {
+      localStorage.setItem('reviz-jeux-jour-u1', JSON.stringify({ jours: ['2026-10-23'], record: 300, scores: { '2026-10-23': 300 } }))
+      rendre({ entrees: ['/jeux?rapide=jour'] })
+      expect(avecHasardDuJour).not.toHaveBeenCalled()
+      expect(enregistrerPartieDuJour).not.toHaveBeenCalled()
+      expect(mesurer).toHaveBeenCalledWith('partie_lancee', { mode: 'melange', depuis: 'lien' })
+    })
+
+    it('une seule partie du jour : faite, elle ouvre une Partie rapide, pas un nouveau tirage', () => {
+      rendre()
+      jouer('Jouer la partie du jour')
+      cliquer('Fermer') // entamée : elle compte déjà
+      avecHasardDuJour.mockClear()
+      expect(screen.getByTestId('hub')).toBeInTheDocument()
+      cliquer('Jouer la partie du jour')
+      expect(avecHasardDuJour).not.toHaveBeenCalled()
     })
   })
 

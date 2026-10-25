@@ -592,10 +592,15 @@ export default function Jeux() {
   const depuisRef = useRef(params.get('depuis') ?? (params.get('rapide') ? 'lien' : 'direct'));
   // prete : ce que la carte de début a déjà tiré (les manches, elle annonce le premier jeu de la Partie
   // rapide ; la musique, qui joue déjà ; le jour de la partie du jour).
-  const lancerRapide = (jeu = 'melange', depuis = 'hub', prete = null) => {
+  // La partie du jour ne se joue qu'une fois : déjà faite (ou entamée), on lance une Partie rapide.
+  // Elle compte dès qu'elle démarre (score 0, puis le vrai score à la fin) : fermer l'app ou toucher
+  // la croix ne permet pas de la relancer en connaissant les réponses.
+  const lancerRapide = (demande = 'melange', depuis = 'hub', prete = null) => {
+    const jeu = demande === 'jour' && !prete && etatDuJour(uid).faite ? 'melange' : demande;
     mesurer('partie_lancee', { mode: jeu, depuis });
     setChapitre({ matiere: 'Réviz Games', titre: TITRES[jeu], rapide: jeu });
     jourPartie.current = jeu === 'jour' ? (prete?.jour ?? jourParis()) : null;
+    if (jeu === 'jour') setJour(enregistrerPartieDuJour(uid, 0, jourPartie.current));
     setPartie(prete?.partie ?? RAPIDES[jeu](jourPartie.current ?? undefined));
     setMusiquePartie(jeu === 'melange' || jeu === 'jour' ? (prete?.musique ?? musiqueSuivante()) : null);
     nouvellePartie();
@@ -759,6 +764,8 @@ export default function Jeux() {
     <button type="button" className="jx-rond" aria-label="Fermer" onClick={() => {
       if (phase === 'choix') { quitter(); return; }
       if (chapitre?.rapide && phase !== 'fin') mesurer('partie_abandonnee', { mode: chapitre.rapide, tour: idx + 1, tours: partie.length });
+      // La partie du jour arrêtée en route compte pour le jour, avec les points déjà gagnés.
+      if (chapitre?.rapide === 'jour' && phase !== 'fin') setJour(enregistrerPartieDuJour(uid, score, jourPartie.current ?? undefined));
       viderSuite();
       setPhase('choix');
     }}>
@@ -772,12 +779,26 @@ export default function Jeux() {
     </div>
   );
 
+  // Le son, en haut à droite de chaque écran des jeux (écran des jeux, carte de début, partie, fin) :
+  // coupé, il coupe aussi la musique de fin. Le mode silencieux de l'iPhone reste respecté.
+  const basculerSon = () => { bruitagesActifs(!son); setSon(!son); if (son) musiqueFin.arreter(); };
+  const boutonSon = (classe = 'jx-rond mg-son') => (
+    <button type="button" className={classe} onClick={basculerSon}
+      aria-label={son ? 'Couper le son' : 'Remettre le son'} aria-pressed={!son}>
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        <path d="M4 9h4l5-4v14l-5-4H4z" />
+        {son ? <path d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12" /> : <path d="M17 9l5 6M22 9l-5 6" />}
+      </svg>
+    </button>
+  );
+
   // ── L'écran des jeux : la partie du jour, la Partie rapide, les jeux en vignettes ──
   if ((phase === 'choix' || phase === 'charge') && mode !== 'prototype') {
     // Toucher un jeu ouvre d'abord sa carte de début (la règle, les tours, le record) ; il part sur « Démarrer ».
     // La partie est tirée tout de suite (la carte précharge ce qu'elle affichera) et sa musique démarre ici,
     // dans le geste de l'élève (Safari sur iPhone ne laisse jouer le son qu'à la suite d'un toucher).
-    const ouvrirCarte = cle => {
+    const ouvrirCarte = demande => {
+      const cle = demande === 'jour' && etatDuJour(uid).faite ? 'melange' : demande;
       const jourTire = cle === 'jour' ? jourParis() : null; // la partie du jour compte pour le jour où elle est tirée
       const p = RAPIDES[cle](jourTire ?? undefined);
       const m = cle === 'melange' || cle === 'jour' ? musiqueSuivante() : p[0]?.type;
@@ -791,10 +812,10 @@ export default function Jeux() {
     };
     return (
       <>
-        <HubJeux jour={jour} onJouer={ouvrirCarte} onFermer={quitter} isDesktop={isDesktop} />
+        <HubJeux jour={jour} onJouer={ouvrirCarte} onFermer={quitter} isDesktop={isDesktop} boutonSon={boutonSon('hb-rond hb-son')} />
         {avant && (
           <CarteDebut cle={avant.cle} partie={avant.partie} record={recordDe(avant.cle)}
-            large={isDesktop} accessoiresDe={type => ACCESSOIRES_JEU[type] ?? []}
+            large={isDesktop} accessoiresDe={type => ACCESSOIRES_JEU[type] ?? []} boutonSon={boutonSon('cd-rond cd-son')}
             onDemarrer={() => { lancerRapide(avant.cle, 'hub', avant); setAvant(null); }} onRetour={() => setAvant(null)} />
         )}
       </>
@@ -835,6 +856,7 @@ export default function Jeux() {
   if (phase === 'fin') {
 
     const rejouer = () => {
+      if (chapitre.rapide === 'jour') { lancerRapide('melange', 'rejouer'); return; }
       if (chapitre.rapide) mesurer('partie_lancee', { mode: chapitre.rapide, depuis: 'rejouer' });
       jourPartie.current = chapitre.rapide === 'jour' ? jourParis() : null;
       setPartie(chapitre.rapide ? RAPIDES[chapitre.rapide](jourPartie.current ?? undefined) : construirePartie(chapitre.data, mode));
@@ -847,7 +869,7 @@ export default function Jeux() {
         score={score} bonnes={bonnes} erreurs={erreursUniques(erreurs)}
         cleRecord={`reviz-jeux-record-${chapitre.rapide ?? `chapitre-${chapitre.titre}`}`} mode={chapitre.rapide ?? 'chapitre'}
         recordAvant={chapitre.rapide === 'jour' ? jour.record : undefined}
-        onRejouer={rejouer} onQuitter={() => setPhase('choix')} isDesktop={isDesktop} hauteurEcran={hauteurEcran} />
+        onRejouer={rejouer} libelleRejouer={chapitre.rapide === 'jour' ? 'Partie rapide' : 'Rejouer'} boutonSon={boutonSon('fp-rond fp-son')} onQuitter={() => setPhase('choix')} isDesktop={isDesktop} hauteurEcran={hauteurEcran} />
     );
   }
 
@@ -864,15 +886,6 @@ export default function Jeux() {
   const reviz = {
     geste: nom => pantin.current?.geste(nom), bulle: setBulle, effet,
   };
-  const boutonSon = (
-    <button type="button" className="jx-rond mg-son" onClick={() => { bruitagesActifs(!son); setSon(!son); }}
-      aria-label={son ? 'Couper le son' : 'Remettre le son'} aria-pressed={!son}>
-      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-        <path d="M4 9h4l5-4v14l-5-4H4z" />
-        {son ? <path d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12" /> : <path d="M17 9l5 6M22 9l-5 6" />}
-      </svg>
-    </button>
-  );
 
   // ── Réviz se trompe ? : le plateau télé occupe tout l'écran, Réviz présentateur au micro ──
   // Pendant l'enroulement et la carte, la manche affichée est encore l'ancienne : la carte annonce la
@@ -889,7 +902,7 @@ export default function Jeux() {
         {transitionEl}
       <PlateauBuzzer manche={manche} idx={idx} total={partie.length} phase={phase} expire={expire === idx} score={score}
         onBon={onBon} onFaux={onFaux} onTermine={onTermine} onDemarrer={() => setPhase('jeu')} horloge={horloge}
-        fermer={fermer} boutonSon={boutonSon} isDesktop={isDesktop} hauteurEcran={hauteurEcran} />
+        fermer={fermer} boutonSon={boutonSon()} isDesktop={isDesktop} hauteurEcran={hauteurEcran} />
       </>
     );
   }
@@ -901,7 +914,7 @@ export default function Jeux() {
         {transitionEl}
       <PlateauPizzeria manche={manche} idx={idx} total={partie.length} phase={phase} expire={expire === idx} score={score}
         onBon={onBon} onFaux={onFaux} onTermine={onTermine} onDemarrer={() => setPhase('jeu')} horloge={horloge}
-        fermer={fermer} boutonSon={boutonSon} isDesktop={isDesktop} hauteurEcran={hauteurEcran} />
+        fermer={fermer} boutonSon={boutonSon()} isDesktop={isDesktop} hauteurEcran={hauteurEcran} />
       </>
     );
   }
@@ -913,7 +926,7 @@ export default function Jeux() {
         {transitionEl}
       <PlateauNinja manche={manche} idx={idx} total={partie.length} phase={phase} expire={expire === idx} score={score}
         onBon={onBon} onFaux={onFaux} onTermine={onTermine} onDemarrer={() => setPhase('jeu')}
-        fermer={fermer} boutonSon={boutonSon} isDesktop={isDesktop} hauteurEcran={hauteurEcran} />
+        fermer={fermer} boutonSon={boutonSon()} isDesktop={isDesktop} hauteurEcran={hauteurEcran} />
       </>
     );
   }
@@ -925,7 +938,7 @@ export default function Jeux() {
         {transitionEl}
       <PlateauTaupe manche={manche} idx={idx} total={partie.length} phase={phase} expire={expire === idx} score={score}
         onBon={onBon} onFaux={onFaux} onTermine={onTermine} onDemarrer={() => setPhase('jeu')}
-        fermer={fermer} boutonSon={boutonSon} isDesktop={isDesktop} hauteurEcran={hauteurEcran} />
+        fermer={fermer} boutonSon={boutonSon()} isDesktop={isDesktop} hauteurEcran={hauteurEcran} />
       </>
     );
   }
@@ -950,7 +963,7 @@ export default function Jeux() {
               {phase === 'jeu' && <span key={idx} className="mg-chrono-barre" style={{ '--duree': `${manche.duree}s`, '--attente': `${manche.apercu}s` }} />}
             </div>
             <span className="jx-score" aria-live="polite">{score}</span>
-            {boutonSon}
+            {boutonSon()}
           </div>
           <div className="mg-titre">
             <span className="mg-titre-num">Tour {idx + 1} sur {partie.length}</span>
@@ -1003,7 +1016,7 @@ export default function Jeux() {
               {phase === 'jeu' && <span key={idx} className="mg-chrono-barre" style={{ '--duree': `${manche.duree}s`, '--attente': '0s' }} />}
             </div>
             <span className="jx-score" aria-live="polite">{score}</span>
-            {boutonSon}
+            {boutonSon()}
           </div>
           <JeuLance key={idx} manche={manche} numero={idx + 1} total={partie.length} enJeu={phase === 'jeu'} expire={expire === idx} horloge={horloge}
             onBon={onBon} onFaux={onFaux} onTermine={onTermine} onCommencer={() => setPhase('jeu')} reviz={reviz} pantin={pantin} scene={scene} />

@@ -168,3 +168,6 @@
 @media (prefers-reduced-motion: reduce) {
   .hb-page .hb-jeu-image img, .hb-page .hb-jeu, .hb-page .hb-rapide, .hb-page .hb-jouer { transition: none; }
 }
+
+/* Le son, en haut à droite (le même bouton que pendant les jeux). */
+.hb-page .hb-son { margin-left: auto; }

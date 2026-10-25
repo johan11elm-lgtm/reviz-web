@@ -37,7 +37,7 @@ const Fleche = () => (
 const nombre = n => n.toLocaleString('fr-FR');
 const dateDuJour = () => new Intl.DateTimeFormat('fr-FR', { weekday: 'long', day: 'numeric', month: 'long', timeZone: 'Europe/Paris' }).format(new Date());
 
-export function HubJeux({ jour: jourRecu, onJouer, onFermer, isDesktop }) {
+export function HubJeux({ jour: jourRecu, onJouer, onFermer, isDesktop, boutonSon }) {
   // Un hub resté ouvert après minuit ne garde pas « Faite ! » : au retour au premier plan on recalcule le jour.
   const [aujourdhui, setAujourdhui] = useState(() => jourParis());
   useEffect(() => {
@@ -60,6 +60,7 @@ export function HubJeux({ jour: jourRecu, onJouer, onFermer, isDesktop }) {
             <span className="hb-surtitre">Réviz Games</span>
             <h1 className="hb-titre">On joue&nbsp;?</h1>
           </div>
+          {boutonSon}
         </header>
 
         {/* La partie du jour : la même pour tout le monde aujourd'hui. */}
@@ -82,8 +83,9 @@ export function HubJeux({ jour: jourRecu, onJouer, onFermer, isDesktop }) {
                   : 'Partie du jour faite. Reviens demain pour ta série\u00a0!')
                 : 'Les 6 jeux, la même partie pour tout le monde aujourd’hui.'}
             </p>
-            <button type="button" className={`hb-jouer${faite ? ' hb-jouer--doux' : ''}`} onClick={() => onJouer('jour')}>
-              {faite ? 'Rejouer' : 'Jouer'}<Fleche />
+            {/* Une seule fois par jour : faite, elle laisse la place à une Partie rapide. */}
+            <button type="button" className={`hb-jouer${faite ? ' hb-jouer--doux' : ''}`} onClick={() => onJouer(faite ? 'melange' : 'jour')}>
+              {faite ? 'Partie rapide' : 'Jouer'}<Fleche />
             </button>
           </div>
         </section>

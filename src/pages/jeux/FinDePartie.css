@@ -65,6 +65,8 @@
 /* Le surtitre, comme « Meilleur : » plus bas : une pastille sombre, lisible sur les fanions et les rideaux.
    Centré sur l'écran (la pastille du haut à gauche est compensée par le ::after de même largeur). */
 .fp-page .fp-fin .fp-haut::after { content: ''; flex: none; width: 44px; }
+/* Le bouton son prend la place de la cale qui centre le surtitre. */
+.fp-page .fp-fin .fp-haut:has(.fp-son)::after { content: none; }
 .fp-page .fp-haut .fp-surtitre { flex: 0 1 auto; min-width: 0; margin: 0 auto; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .fp-page .fp-surtitre {
   padding: 5px 14px; border-radius: 999px;

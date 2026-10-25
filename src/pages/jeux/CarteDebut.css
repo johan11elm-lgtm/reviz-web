@@ -181,3 +181,6 @@
   .cd-etapes li { transform: none; }
 }
 @keyframes cd-fondu { from { opacity: 0; } to { opacity: 1; } }
+
+/* Le son, en haut à droite de la carte (la musique de la partie démarre ici). */
+.cd-haut { justify-content: space-between; }

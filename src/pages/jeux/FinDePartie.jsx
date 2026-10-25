@@ -94,7 +94,7 @@ function Etoile({ remplie, rang, visible }) {
 }
 
 // ── L'écran de fin ──────────────────────────────────────────────────────────────────────────
-function Podium({ surtitre, score, bonnes, erreurs, record, onRecap, onRejouer, onQuitter, isDesktop, hauteurEcran }) {
+function Podium({ surtitre, score, bonnes, erreurs, record, onRecap, onRejouer, libelleRejouer, boutonSon, onQuitter, isDesktop, hauteurEcran }) {
   const n = erreurs.length;
   const etoiles = etoilesDe(bonnes, n);
   const pantin = useRef(null);
@@ -127,6 +127,7 @@ function Podium({ surtitre, score, bonnes, erreurs, record, onRecap, onRejouer, 
           <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" /></svg>
         </button>
         <span className="fp-surtitre">{surtitre}</span>
+        {boutonSon}
       </div>
       <div className="fp-tete">
         <h1 id="fp-titre" className="fp-titre">{titreDe(etoiles, n)}</h1>
@@ -152,7 +153,7 @@ function Podium({ surtitre, score, bonnes, erreurs, record, onRecap, onRejouer, 
           ? <button type="button" className="fp-btn fp-btn--orange fp-btn--large" onClick={onRecap}>Voir le récap · {n} erreur{n > 1 ? 's' : ''}</button>
           : <span className="fp-ruban">0 erreur, rien à revoir</span>}
         <div className="fp-actions-ligne">
-          <button type="button" className={`fp-btn ${n ? 'fp-btn--encre' : 'fp-btn--orange'}`} onClick={onRejouer}>Rejouer</button>
+          <button type="button" className={`fp-btn ${n ? 'fp-btn--encre' : 'fp-btn--orange'}`} onClick={onRejouer}>{libelleRejouer}</button>
           <button type="button" className="fp-btn fp-btn--blanc" onClick={onQuitter}>Quitter</button>
         </div>
       </div>
@@ -210,7 +211,7 @@ function Carte({ e, classe = '', style, refCarte, active }) {
   );
 }
 
-function Recap({ erreurs, onRetour, onRejouer, onQuitter, isDesktop, hauteurEcran }) {
+function Recap({ erreurs, onRetour, onRejouer, libelleRejouer, onQuitter, isDesktop, hauteurEcran }) {
   const n = erreurs.length;
   const [i, setI] = useState(0);
   const [sortante, setSortante] = useState(null); // { e, sens, depart, r }
@@ -326,7 +327,7 @@ function Recap({ erreurs, onRetour, onRejouer, onQuitter, isDesktop, hauteurEcra
       </div>
 
       <div className="fp-actions-ligne fp-actions-ligne--recap">
-        <button type="button" className="fp-btn fp-btn--orange" onClick={onRejouer}>Rejouer</button>
+        <button type="button" className="fp-btn fp-btn--orange" onClick={onRejouer}>{libelleRejouer}</button>
         <button type="button" className="fp-btn fp-btn--blanc" onClick={onQuitter}>Quitter</button>
       </div>
     </section>
@@ -340,7 +341,7 @@ function Recap({ erreurs, onRetour, onRejouer, onQuitter, isDesktop, hauteurEcra
  * @param {string} cleRecord  clé du meilleur score sur l'appareil (un par mode)
  * @param {number} [recordAvant]  le meilleur score d'avant cette partie, quand il est connu d'ailleurs que de cleRecord
  */
-export function FinDePartie({ surtitre, score, bonnes, erreurs, cleRecord, recordAvant, onRejouer, onQuitter, isDesktop, hauteurEcran, mode }) {
+export function FinDePartie({ surtitre, score, bonnes, erreurs, cleRecord, recordAvant, onRejouer, libelleRejouer = 'Rejouer', boutonSon, onQuitter, isDesktop, hauteurEcran, mode }) {
   const [vue, setVue] = useState('fin');
   const [record] = useState(() => {
     const avant = recordAvant ?? lire(cleRecord);
@@ -366,10 +367,10 @@ export function FinDePartie({ surtitre, score, bonnes, erreurs, cleRecord, recor
       <div className="fp-ecran">
         {vue === 'fin' ? (
           <Podium surtitre={surtitre} score={score} bonnes={bonnes} erreurs={erreurs} record={record}
-            onRecap={() => { jouer('page'); setVue('recap'); mesurer('recap_ouvert', { mode, erreurs: erreurs.length }); }} onRejouer={onRejouer} onQuitter={onQuitter}
+            onRecap={() => { jouer('page'); setVue('recap'); mesurer('recap_ouvert', { mode, erreurs: erreurs.length }); }} onRejouer={onRejouer} libelleRejouer={libelleRejouer} boutonSon={boutonSon} onQuitter={onQuitter}
             isDesktop={isDesktop} hauteurEcran={hauteurEcran} />
         ) : (
-          <Recap erreurs={erreurs} onRetour={retour} onRejouer={onRejouer} onQuitter={onQuitter} isDesktop={isDesktop} hauteurEcran={hauteurEcran} />
+          <Recap erreurs={erreurs} onRetour={retour} onRejouer={onRejouer} libelleRejouer={libelleRejouer} onQuitter={onQuitter} isDesktop={isDesktop} hauteurEcran={hauteurEcran} />
         )}
       </div>
     </div>

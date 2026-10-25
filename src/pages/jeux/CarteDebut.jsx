@@ -37,7 +37,7 @@ const ETOILES = [[-8, 6, 1, -14], [106, 14, .8, 10], [-6, 78, .7, 20], [108, 70,
 const nombre = n => String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
 const calme = () => typeof window !== 'undefined' && !!window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
 
-export function CarteDebut({ cle, partie, record = 0, large = false, accessoiresDe, onDemarrer, onRetour }) {
+export function CarteDebut({ cle, partie, record = 0, large = false, accessoiresDe, boutonSon, onDemarrer, onRetour }) {
   const jeu = JEUX_HUB.find(j => j.cle === cle);
   const melange = MELANGES[cle];
   const premier = melange && JEUX_HUB.find(j => j.cle === partie[0]?.type);
@@ -67,6 +67,7 @@ export function CarteDebut({ cle, partie, record = 0, large = false, accessoires
         <button type="button" className="cd-rond" onClick={onRetour} aria-label="Retour aux jeux">
           <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6" /></svg>
         </button>
+        {boutonSon}
       </div>
       <div className="cd-scene">
         <div className="cd-carte">
