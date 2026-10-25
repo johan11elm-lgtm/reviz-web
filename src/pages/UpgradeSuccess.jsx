@@ -104,7 +104,7 @@ export default function UpgradeSuccess() {
       <ul className="ugs-carte ugs-liste">
         <li><span className="ugs-rond ugs-rond--lavande"><Icone d={APPAREIL} /></span><b>Scans de leçons illimités</b></li>
         <li><span className="ugs-rond ugs-rond--peche"><Icone d={BULLE} /></span><b>Questions à Réviz IA illimitées</b></li>
-        <li><span className="ugs-rond ugs-rond--menthe"><Icone d={PALETTE} /></span><b>4 thèmes de couleur en plus</b>
+        <li><span className="ugs-rond ugs-rond--menthe"><Icone d={PALETTE} /></span><b>3 thèmes de couleur en plus</b>
           <span className="ugs-themes" aria-hidden="true">{THEMES.map(c => <i key={c} style={{ background: c }} />)}</span></li>
       </ul>
       <div className="ugs-carte ugs-formule">
@@ -115,7 +115,7 @@ export default function UpgradeSuccess() {
       <h2 className="ugs-h2">Pour commencer</h2>
       <button type="button" className="ugs-btn" onClick={() => navigate('/scan', { replace: true })}><Icone d={APPAREIL} />Scanner une leçon</button>
       <div className="ugs-carte ugs-liens">
-        <Link to="/reglages#themes"><span className="ugs-rond ugs-rond--menthe"><Icone d={PALETTE} /></span><span><b>Choisir mon thème</b><span>Nuit d’encre, Abricot, Sauge ou Prune</span></span><Chevron /></Link>
+        <Link to="/reglages#themes"><span className="ugs-rond ugs-rond--menthe"><Icone d={PALETTE} /></span><span><b>Choisir mon thème</b><span>Abricot, Sauge ou Prune</span></span><Chevron /></Link>
         <Link to="/coach"><span className="ugs-rond ugs-rond--peche"><Icone d={BULLE} /></span><span><b>Poser une question à Réviz IA</b></span><Chevron /></Link>
       </div>
       <p className="ugs-note">{fondateur
