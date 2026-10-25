@@ -5,6 +5,9 @@
 // -------------------------------------------------------
 
 export const MODEL = 'claude-haiku-4-5-20251001';
+// Seconde lecture d'une photo que MODEL a refusée (NON_SCOLAIRE ou ILLISIBLE) :
+// un modèle qui lit mieux l'écriture manuscrite, payé seulement sur les refus.
+export const MODEL_RELECTURE = 'claude-sonnet-5-5';
 
 // Palette injectée côté client dans les branches mindmap.
 // Source unique (importée par aiService.js ET MindMap.jsx) — les `color`

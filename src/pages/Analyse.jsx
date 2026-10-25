@@ -271,7 +271,10 @@ export default function Analyse() {
     titre: errInfo.title,
     texte: errInfo.sub,
     action: errInfo.cta ? [errInfo.cta.label, () => navigate(errInfo.cta.to, { replace: true })] : ['Retour au scan', verScan],
-    autre: ['Plus tard', () => navigate('/cours', { replace: true })],
+    // Refus « pas une leçon » : la même leçon existe souvent déjà dans le programme, l'élève révise quand même.
+    autre: error === 'NON_SCOLAIRE'
+      ? ['Trouver mon chapitre', () => navigate('/programme', { replace: true })]
+      : ['Plus tard', () => navigate('/cours', { replace: true })],
   };
 
   // ── Où en est l'élève ──

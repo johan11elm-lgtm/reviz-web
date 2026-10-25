@@ -37,5 +37,8 @@ test.describe('Scan refusé (390 px)', () => {
     await scannerUnePhoto(page, { error: 'NON_SCOLAIRE', raison: 'photo_sans_texte' })
     await expect(page.getByText("Ça n'a pas l'air d'une leçon").first()).toBeVisible({ timeout: 15_000 })
     await expect(page.getByText(/Si c'est bien ta leçon, reprends la photo/)).toBeVisible()
+    // L'élève peut réviser le même chapitre depuis le programme au lieu de repartir.
+    await page.getByRole('button', { name: 'Trouver mon chapitre' }).click()
+    await expect(page).toHaveURL(/\/programme/)
   })
 })

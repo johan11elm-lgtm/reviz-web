@@ -21,6 +21,7 @@ vi.mock('../_quota.js', () => ({
 }))
 vi.mock('../_systemPrompt.js', () => ({
   MODEL: 'test-model',
+  MODEL_RELECTURE: 'relecture-model',
   buildSystemPrompt: () => 'sys',
   buildLessonUserMessage: (t) => t,
   LESSON_IMAGE_INSTRUCTION: 'img',
@@ -88,5 +89,68 @@ describe('analyse-image — garde de taille d’image', () => {
     expect(res.statusCode).toBe(400)
     expect(res.payload).toBe('INVALID_MEDIA_TYPE')
     expect(anthropicFetch).not.toHaveBeenCalled()
+  })
+})
+
+describe('analyse-image — seconde lecture des refus', () => {
+  const refus = JSON.stringify({ error: 'NON_SCOLAIRE', raison: 'hors_cours' })
+  const reponse = (content, extra = {}) => ({ ok: true, json: async () => ({ content, ...extra }) })
+  const modeleAppele = i => JSON.parse(anthropicFetch.mock.calls[i][1].body).model
+
+  beforeEach(() => {
+    verifyIdToken.mockReset().mockResolvedValue({ uid: 'u1', email_verified: true })
+    refundQuota.mockReset()
+    anthropicFetch.mockReset()
+    vi.stubGlobal('fetch', anthropicFetch)
+    vi.spyOn(console, 'info').mockImplementation(() => {})
+  })
+
+  async function scanner() {
+    const res = mockRes()
+    await handler({ method: 'POST', body: { ...base, imageData: 'a'.repeat(1000) } }, res)
+    return res
+  }
+
+  it('une leçon lue du premier coup : un seul appel', async () => {
+    anthropicFetch.mockResolvedValueOnce(reponse([{ type: 'text', text: 'LECON' }]))
+    const res = await scanner()
+    expect(res.payload).toBe('LECON')
+    expect(anthropicFetch).toHaveBeenCalledTimes(1)
+  })
+
+  it('un refus est relu par le second modèle, qui rend la leçon (bloc de réflexion ignoré)', async () => {
+    anthropicFetch
+      .mockResolvedValueOnce(reponse([{ type: 'text', text: refus }]))
+      .mockResolvedValueOnce(reponse([{ type: 'thinking', thinking: '' }, { type: 'text', text: 'LECON RELUE' }]))
+    const res = await scanner()
+    expect(res.statusCode).toBe(200)
+    expect(res.payload).toBe('LECON RELUE')
+    expect(modeleAppele(0)).toBe('test-model')
+    expect(modeleAppele(1)).toBe('relecture-model')
+    expect(JSON.parse(anthropicFetch.mock.calls[1][1].body).output_config).toEqual({ effort: 'low' })
+  })
+
+  it('si la seconde lecture refuse aussi, l’élève reçoit le premier refus', async () => {
+    const illisible = JSON.stringify({ error: 'ILLISIBLE', raison: 'floue' })
+    anthropicFetch
+      .mockResolvedValueOnce(reponse([{ type: 'text', text: refus }]))
+      .mockResolvedValueOnce(reponse([{ type: 'text', text: illisible }]))
+    const res = await scanner()
+    expect(res.payload).toBe(refus)
+  })
+
+  it('si la seconde lecture échoue (erreur, refus de sûreté, réseau), on garde le premier refus', async () => {
+    for (const second of [
+      () => anthropicFetch.mockResolvedValueOnce({ ok: false, status: 500 }),
+      () => anthropicFetch.mockResolvedValueOnce(reponse([], { stop_reason: 'refusal' })),
+      () => anthropicFetch.mockRejectedValueOnce(new Error('réseau')),
+    ]) {
+      anthropicFetch.mockReset()
+      anthropicFetch.mockResolvedValueOnce(reponse([{ type: 'text', text: refus }]))
+      second()
+      const res = await scanner()
+      expect(res.statusCode).toBe(200)
+      expect(res.payload).toBe(refus)
+    }
   })
 })

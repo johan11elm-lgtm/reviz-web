@@ -1,4 +1,4 @@
-import { buildSystemPrompt, LESSON_IMAGE_INSTRUCTION, MODEL } from './_systemPrompt.js'
+import { buildSystemPrompt, LESSON_IMAGE_INSTRUCTION, MODEL, MODEL_RELECTURE } from './_systemPrompt.js'
 import { getDb, getAuthAdmin } from './_firebaseAdmin.js'
 import { compteVerifie } from './_compteVerifie.js'
 import { consumeQuota, refundQuota, FREE_LIMIT } from './_quota.js'
@@ -8,6 +8,12 @@ import { revizPlusOffertServeur } from './_offert.js'
 // Runtime Node (pas edge) : nécessaire pour firebase-admin (quota + auth).
 export const config = { maxDuration: 120 }
 const ANTHROPIC_TIMEOUT_MS = 100000
+
+const REFUS = /"error"\s*:\s*"(NON_SCOLAIRE|ILLISIBLE)"/
+
+// Texte de la réponse : le premier bloc texte (avec la réflexion activée, le premier bloc
+// est un bloc « thinking »).
+const texteDe = data => data?.content?.find(b => b.type === 'text' || b.type == null)?.text ?? ''
 
 const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/gif', 'image/webp']
 
@@ -60,35 +66,39 @@ export default async function handler(req, res) {
     consumed = true
   }
 
-  // 3. Appel Anthropic vision (non-streaming)
+  // 3. Appel Anthropic vision (non-streaming). Un délai commun aux deux lectures : abandon
+  // avant la fin de la fonction (maxDuration) et avant le client (ANALYSE_TIMEOUT_MS),
+  // le scan est alors remboursé et l'élève voit TIMEOUT.
+  const echeance = Date.now() + ANTHROPIC_TIMEOUT_MS
+  const lire = (model, extra = {}) => fetch('https://api.anthropic.com/v1/messages', {
+    method: 'POST',
+    signal: AbortSignal.timeout(Math.max(1000, echeance - Date.now())),
+    headers: {
+      'Content-Type': 'application/json',
+      'x-api-key': process.env.ANTHROPIC_API_KEY,
+      'anthropic-version': '2023-06-01',
+    },
+    body: JSON.stringify({
+      model,
+      max_tokens: 8192,
+      stream: false,
+      system: buildSystemPrompt(level),
+      messages: [
+        {
+          role: 'user',
+          content: [
+            { type: 'image', source: { type: 'base64', media_type: mediaType, data: imageData } },
+            { type: 'text', text: LESSON_IMAGE_INSTRUCTION },
+          ],
+        },
+      ],
+      ...extra,
+    }),
+  })
+
   let anthropicResp
   try {
-    anthropicResp = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      // Abandon avant la fin de la fonction (maxDuration) et avant le client
-      // (ANALYSE_TIMEOUT_MS) : le scan est remboursé et l'élève voit TIMEOUT.
-      signal: AbortSignal.timeout(ANTHROPIC_TIMEOUT_MS),
-      headers: {
-        'Content-Type': 'application/json',
-        'x-api-key': process.env.ANTHROPIC_API_KEY,
-        'anthropic-version': '2023-06-01',
-      },
-      body: JSON.stringify({
-        model: MODEL,
-        max_tokens: 8192,
-        stream: false,
-        system: buildSystemPrompt(level),
-        messages: [
-          {
-            role: 'user',
-            content: [
-              { type: 'image', source: { type: 'base64', media_type: mediaType, data: imageData } },
-              { type: 'text', text: LESSON_IMAGE_INSTRUCTION },
-            ],
-          },
-        ],
-      }),
-    })
+    anthropicResp = await lire(MODEL)
   } catch (err) {
     if (consumed) await refundQuota({ db, uid, sansEmail }).catch(() => {})
     if (err?.name === 'TimeoutError') return res.status(504).send('TIMEOUT')
@@ -102,11 +112,29 @@ export default async function handler(req, res) {
     return res.status(502).send(`API_ERROR_${anthropicResp.status}`)
   }
 
-  const result = await anthropicResp.json()
-  const text_content = result.content?.[0]?.text ?? ''
+  let text_content = texteDe(await anthropicResp.json())
+
+  // Refus de la première lecture : la moitié des refus étaient de vraies leçons mal lues
+  // (écriture manuscrite surtout). Seconde lecture par MODEL_RELECTURE ; si elle échoue
+  // ou refuse aussi, l'élève reçoit le premier refus, comme avant.
+  if (REFUS.test(text_content)) {
+    const premier = text_content.match(REFUS)[1]
+    let issue = 'echec'
+    try {
+      // Effort bas : la consigne est fixe, il s'agit surtout de lire la photo.
+      const r = await lire(MODEL_RELECTURE, { output_config: { effort: 'low' } })
+      if (r.ok) {
+        const data = await r.json()
+        const relu = data.stop_reason === 'refusal' ? '' : texteDe(data)
+        if (relu && !REFUS.test(relu)) { text_content = relu; issue = 'lecon' } else if (relu) issue = 'refus'
+      }
+    } catch { /* délai dépassé ou réseau : on garde le premier refus */ }
+    // Journal Vercel : codes seulement, jamais rien de la photo.
+    console.info('scan relecture', JSON.stringify({ premier, issue }))
+  }
 
   // Refus (contenu non scolaire, ou photo d'une leçon trop difficile à lire) : on ne facture pas un scan à l'élève.
-  if (consumed && /"error"\s*:\s*"(NON_SCOLAIRE|ILLISIBLE)"/.test(text_content)) {
+  if (consumed && REFUS.test(text_content)) {
     await refundQuota({ db, uid, sansEmail }).catch(() => {})
   }
 
