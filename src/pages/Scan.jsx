@@ -460,8 +460,19 @@ function PetitReviz({ expression, lignes }) {
   );
 }
 
+// Ce que Réviz fait d'une leçon scannée (mode essai sur ordinateur, à côté de la carte du compte).
+const FORMATS_ESSAI = [
+  { titre: 'Un résumé.', texte: 'L’essentiel du chapitre, avec la méthode et les pièges.' },
+  { titre: 'Des flashcards.', texte: 'Elles reviennent au bon moment pour ne rien oublier.' },
+  { titre: 'Un quiz.', texte: 'Corrigé question par question, avec ton score.' },
+  { titre: 'Une carte mentale.', texte: 'Tout le chapitre d’un coup d’œil.' },
+];
+
 /** Mode essai : le scan demande un compte gratuit, sans culpabiliser. */
 function Essai({ onCompte, onConnexion, onProgramme, grand }) {
+  // Ordinateur : la composition du vrai scan (titre et Réviz en haut, trois colonnes), pas une carte
+  // seule au milieu d'un grand vide.
+  if (grand) return <EssaiLarge onCompte={onCompte} onConnexion={onConnexion} onProgramme={onProgramme} />;
   return (
     <div className={`app app--no-halo ch-page sc-page sc-page--carte${grand ? ' app--large ch-page--large sc-page--large' : ''}`} style={varsTeinte(TEINTES.peche)}>
       <div className="ch-hero sc-hero sc-hero--centre">
@@ -476,6 +487,54 @@ function Essai({ onCompte, onConnexion, onProgramme, grand }) {
         <button type="button" className="sc-btn" onClick={onCompte}>Créer mon compte gratuit</button>
         <button type="button" className="sc-btn sc-btn--creme" onClick={onConnexion}>J’ai déjà un compte</button>
         <p className="sc-note sc-note--gauche">Sans compte, tu peux réviser tout le programme de ta classe. <button type="button" className="sc-lien" onClick={onProgramme}>Voir le programme<PetitChevron /></button></p>
+      </div>
+    </div>
+  );
+}
+
+function EssaiLarge({ onCompte, onConnexion, onProgramme }) {
+  return (
+    <div className="app app--no-halo ch-page sc-page app--large ch-page--large sc-page--large sc-page--essai" style={varsTeinte(TEINTES.peche)}>
+      <div className="content sc-defile">
+        <div className="ch-hero sc-hero">
+          <span className="ch-deco ch-deco--a" aria-hidden="true" />
+          <span className="ch-deco ch-deco--b" aria-hidden="true" />
+          <span className="ch-grain" aria-hidden="true" />
+          <div className="sc-hero-grille">
+            <div>
+              <span className="ch-surtitre">Nouvelle leçon</span>
+              <h1 className="ch-titre sc-titre">Scanner une leçon</h1>
+            </div>
+            <Reviz expression="content" entree="coucou" lignes={['Donne-moi tes leçons.', 'Il te faut juste un compte gratuit.']} grand pointe="droite" />
+          </div>
+        </div>
+        <div className="sc-colonnes">
+          <section className="sc-carte sc-essai-compte" aria-labelledby="sc-essai-titre">
+            <h2 id="sc-essai-titre" className="sc-carte-titre">Garde tes leçons</h2>
+            <p className="sc-carte-txt">Ton compte garde tes leçons scannées, tes flashcards et tes quiz, sur ton téléphone comme sur l’ordinateur.</p>
+            <button type="button" className="sc-btn" onClick={onCompte}>Créer mon compte gratuit</button>
+            <button type="button" className="sc-btn sc-btn--creme" onClick={onConnexion}>J’ai déjà un compte</button>
+          </section>
+          <section className="sc-carte sc-carte--petite sc-essai-formats" aria-labelledby="sc-essai-formats">
+            <span id="sc-essai-formats" className="sc-sur">Ce que je fais de ta leçon</span>
+            <ol className="sc-conseils">
+              {FORMATS_ESSAI.map((f, i) => <li key={f.titre}><i>{i + 1}</i><span><b>{f.titre}</b><span>{f.texte}</span></span></li>)}
+            </ol>
+          </section>
+          <aside className="sc-cote">
+            <div className="sc-carte sc-carte--petite">
+              <span className="sc-sur">Sans compte</span>
+              <p className="sc-carte-txt sc-essai-txt">Tu peux déjà réviser tout le programme de ta classe.</p>
+              <button type="button" className="sc-lien" onClick={onProgramme}>Voir le programme<PetitChevron /></button>
+            </div>
+            <div className="sc-carte sc-carte--petite">
+              <span className="sc-sur">Pour un bon scan</span>
+              <ol className="sc-conseils">
+                {CONSEILS.map((c, i) => <li key={c.titre}><i>{i + 1}</i><span><b>{c.titre}</b><span>{c.texte}</span></span></li>)}
+              </ol>
+            </div>
+          </aside>
+        </div>
       </div>
     </div>
   );

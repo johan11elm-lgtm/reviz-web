@@ -230,3 +230,12 @@ button.sc-carte:active { transform: scale(.98); }
 @media (prefers-reduced-motion: reduce) {
   .sc-anneau, .sc-feuille { animation: none; }
 }
+
+/* Mode essai sur ordinateur : la carte du compte, ce que Réviz fait d'une leçon, puis le programme et
+   les conseils, sur les colonnes du vrai scan. */
+.sc-page--essai .sc-colonnes { align-items: start; }
+.sc-essai-compte { display: flex; flex-direction: column; gap: 10px; padding: 28px; }
+.sc-essai-compte .sc-btn { margin-top: 6px; }
+.sc-essai-txt { margin: 10px 0 8px; }
+/* Pas de « Mes leçons » en mode essai : le héros garde la hauteur de sa rangée, Réviz reste sous le menu. */
+.sc-page--large.sc-page--essai .sc-hero { padding-top: 100px; }
