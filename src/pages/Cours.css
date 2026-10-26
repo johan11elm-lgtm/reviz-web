@@ -251,7 +251,7 @@
 @keyframes lePulse { 50% { opacity: .5; } }
 
 /* Confirmation de suppression */
-.le-voile { position: fixed; inset: 0; z-index: 400; background: rgba(var(--rv-encre-rgb),.35); animation: leFondu .2s ease-out both; }
+.le-voile { position: fixed; inset: 0; z-index: 400; background: rgba(var(--rv-voile-rgb),.35); animation: leFondu .2s ease-out both; }
 @keyframes leFondu { from { opacity: 0; } }
 .le-dialogue {
   position: fixed;

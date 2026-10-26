@@ -416,7 +416,7 @@ button.bt-choix-btn:active:not(:disabled) { transform: translateY(3px); box-shad
 .bt-correction-r { margin: 4px 0 0; font-size: 14.5px; font-weight: 600; color: var(--bt-vert-texte); }
 
 /* ── Feuille du bas ── */
-.bt-voile { position: fixed; inset: 0; z-index: 300; display: flex; align-items: flex-end; justify-content: center; background: rgba(var(--rv-encre-rgb),.28); animation: btFondu .2s both; }
+.bt-voile { position: fixed; inset: 0; z-index: 300; display: flex; align-items: flex-end; justify-content: center; background: rgba(var(--rv-voile-rgb),.28); animation: btFondu .2s both; }
 @keyframes btFondu { from { opacity: 0; } }
 .bt-feuille {
   display: flex; flex-direction: column; align-items: center; gap: 8px;

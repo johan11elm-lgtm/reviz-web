@@ -29,7 +29,7 @@
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  background: rgba(var(--rv-encre-rgb), .45);
+  background: rgba(var(--rv-voile-rgb), .45);
   animation: inst-fondu .2s both;
 }
 @keyframes inst-fondu { from { opacity: 0; } }

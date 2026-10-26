@@ -1,5 +1,5 @@
 /* Popup « Nouveau : la Battle » (handoff Claude Design du 22/10). */
-.ban-voile { position: fixed; inset: 0; z-index: 400; display: flex; align-items: flex-end; justify-content: center; background: rgba(var(--rv-encre-rgb),.45); animation: banFondu .2s both; }
+.ban-voile { position: fixed; inset: 0; z-index: 400; display: flex; align-items: flex-end; justify-content: center; background: rgba(var(--rv-voile-rgb),.45); animation: banFondu .2s both; }
 @keyframes banFondu { from { opacity: 0; } }
 .ban-feuille {
   position: relative; display: flex; flex-direction: column; gap: 14px;

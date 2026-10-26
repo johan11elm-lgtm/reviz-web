@@ -32,11 +32,10 @@ export const MODES = [
 ];
 export const MODE_PAR_DEFAUT = 'clair';
 
-// La refonte d'octobre 2026 (« Reviz Valide ») pose ses couleurs page par page, en clair seulement ;
-// sa version sombre (fond sombre, pastels gardés, héros en halo) se construit page par page. Tant
-// qu'elle n'est pas finie, le sombre n'est ni proposé ni appliqué : un choix déjà mémorisé reste en
-// mémoire mais s'affiche en clair. VITE_SOMBRE=1 l'active pour le développement et les captures.
-export const SOMBRE_DISPONIBLE = import.meta.env.VITE_SOMBRE === '1';
+// Le sombre de la refonte (« pastels allumés » : fond sombre, pastels gardés, héros en halo de leur
+// couleur) couvre toutes les pages depuis le 26/10. Suspendu du 25 au 26/10 faute de version sombre ;
+// à false, il n'est ni proposé ni appliqué (un choix mémorisé s'affiche alors en clair).
+export const SOMBRE_DISPONIBLE = true;
 
 /** Thèmes proposés dans les sélecteurs (Réglages, carte d'essai de l'accueil) : le sombre est un mode, pas un thème. */
 export const THEMES_PROPOSES = THEMES.filter(t => !DARK_THEMES.includes(t.id));

@@ -262,7 +262,7 @@
 .ia-btn--blanc:active { box-shadow: 0 1px 0 var(--rv-ligne); }
 
 /* ── Feuilles et fenêtres ── */
-.ia-voile { position: fixed; inset: 0; z-index: 400; background: rgba(var(--rv-encre-rgb),.32); animation: iaFondu .2s ease-out both; }
+.ia-voile { position: fixed; inset: 0; z-index: 400; background: rgba(var(--rv-voile-rgb),.32); animation: iaFondu .2s ease-out both; }
 @keyframes iaFondu { from { opacity: 0; } }
 .ia-choix {
   position: fixed;

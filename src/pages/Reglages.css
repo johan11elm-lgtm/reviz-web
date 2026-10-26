@@ -205,7 +205,7 @@
 .rg-message--erreur .rg-message-rond { background: #F4B8CB; }
 
 /* ── Feuilles ── */
-.rg-voile { position: fixed; inset: 0; z-index: 300; display: flex; align-items: flex-end; justify-content: center; background: rgba(var(--rv-encre-rgb),.38); animation: rgFondu .2s both; }
+.rg-voile { position: fixed; inset: 0; z-index: 300; display: flex; align-items: flex-end; justify-content: center; background: rgba(var(--rv-voile-rgb),.38); animation: rgFondu .2s both; }
 @keyframes rgFondu { from { opacity: 0; } }
 .rg-feuille {
   position: relative; width: 100%; max-width: 520px; max-height: calc(100dvh - 60px); overflow-y: auto; box-sizing: border-box;

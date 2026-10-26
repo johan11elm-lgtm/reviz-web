@@ -140,7 +140,7 @@
 @keyframes agToast { from { opacity: 0; transform: translate(-50%, 8px); } }
 
 /* ── Ajouter un contrôle ── */
-.ag-voile { position: fixed; inset: 0; z-index: 400; display: flex; align-items: flex-end; justify-content: center; background: rgba(var(--rv-encre-rgb),.36); }
+.ag-voile { position: fixed; inset: 0; z-index: 400; display: flex; align-items: flex-end; justify-content: center; background: rgba(var(--rv-voile-rgb),.36); }
 .ag-feuille { width: 100%; max-height: 94vh; overflow-y: auto; box-sizing: border-box; padding: 10px 20px calc(20px + env(safe-area-inset-bottom, 0px)); border-radius: 28px 28px 0 0; background: var(--rv-fond); animation: agMonte .3s cubic-bezier(.2,.8,.2,1) both; }
 @keyframes agMonte { from { transform: translateY(100%); } }
 .ag-poignee { display: block; width: 40px; height: 5px; margin: 0 auto 12px; border-radius: 999px; background: var(--rv-ligne); }

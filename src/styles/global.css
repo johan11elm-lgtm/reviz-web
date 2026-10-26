@@ -91,6 +91,7 @@
   --rv-inverse:        #1B1A23;  /* pilule ou bouton plein, texte --rv-sur-inverse */
   --rv-sur-inverse:    #fff;
   --rv-ombre:          120,60,20;  /* ombres brunes : rgba(var(--rv-ombre), .3) */
+  --rv-voile-rgb:      27,26,35;   /* voile derrière une feuille ou une fenêtre */
   --rv-ombre-2:        160,80,20;
 }
 
@@ -158,6 +159,7 @@
   --rv-inverse:        #F3F0F7;
   --rv-sur-inverse:    #1B1A23;
   --rv-ombre:          0,0,0;
+  --rv-voile-rgb:      0,0,0;
   --rv-ombre-2:        0,0,0;
 
   /* Barre du bas */

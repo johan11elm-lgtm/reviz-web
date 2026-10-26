@@ -171,7 +171,7 @@ button.sc-carte:active { transform: scale(.98); }
 .sc-carte--etat .sc-btn { margin-top: 6px; }
 
 /* Feuilles */
-.sc-voile { position: fixed; inset: 0; z-index: 400; display: flex; align-items: flex-end; justify-content: center; background: rgba(var(--rv-encre-rgb),.32); }
+.sc-voile { position: fixed; inset: 0; z-index: 400; display: flex; align-items: flex-end; justify-content: center; background: rgba(var(--rv-voile-rgb),.32); }
 .sc-feuille { width: 100%; max-width: 560px; max-height: 88vh; overflow-y: auto; box-sizing: border-box; padding: 22px 20px calc(24px + env(safe-area-inset-bottom, 0px)); border-radius: 28px 28px 0 0; background: var(--rv-fond); animation: scMonte .3s cubic-bezier(.2,.8,.2,1) both; }
 @keyframes scMonte { from { transform: translateY(100%); } }
 .sc-feuille-tete h2, .sc-feuille h2 { margin: 0; font-family: var(--font-display); font-size: 24px; font-weight: 800; letter-spacing: -.03em; }

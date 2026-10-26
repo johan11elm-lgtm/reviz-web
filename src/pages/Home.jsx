@@ -91,9 +91,10 @@ export default function Home() {
   const [newBadge, setNewBadge] = useState(null);
   const [annonceRevizPlus, setAnnonceRevizPlus] = useState(() => revizPlusOffert && !isGuest && !!currentUser?.uid && !annonceRevizPlusVue(currentUser.uid));
   const [annonceBattle, setAnnonceBattle] = useState(() => !annonceRevizPlus && !!currentUser?.uid && !annonceBattleVue(currentUser.uid));
-  const { theme } = useTheme();
+  const { theme, isDark } = useTheme();
   const [essaiTheme, setEssaiTheme] = useState(() => !essaiThemeVu());
-  const montrerEssai = essaiTheme && hasRevizPlus && !isGuest && !themeById(theme)?.premium;
+  // Les thèmes Réviz+ sont des thèmes clairs : pas d'invitation à les essayer en sombre.
+  const montrerEssai = essaiTheme && hasRevizPlus && !isGuest && !isDark && !themeById(theme)?.premium;
   const [compact, setCompact] = useState(0);
   const [parle, setParle] = useState(false);
   const [tour, setTour] = useState(0);

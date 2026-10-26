@@ -53,7 +53,7 @@
   position: fixed;
   inset: 0;
   z-index: 1000;
-  background: rgba(var(--rv-encre-rgb), 0.45);
+  background: rgba(var(--rv-voile-rgb), 0.45);
   display: flex;
   align-items: flex-end;
   justify-content: center;

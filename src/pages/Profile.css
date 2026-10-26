@@ -185,7 +185,7 @@
 .mo-rangee--progres .mo-bloc { padding: 22px; border-radius: 28px; }
 
 /* ── Feuilles ── */
-.mo-voile { position: fixed; inset: 0; z-index: 400; display: flex; align-items: flex-end; justify-content: center; background: rgba(var(--rv-encre-rgb),.38); animation: moFondu .2s ease-out both; }
+.mo-voile { position: fixed; inset: 0; z-index: 400; display: flex; align-items: flex-end; justify-content: center; background: rgba(var(--rv-voile-rgb),.38); animation: moFondu .2s ease-out both; }
 @keyframes moFondu { from { opacity: 0; } }
 .mo-feuille { position: relative; width: 100%; max-height: 92vh; overflow-y: auto; box-sizing: border-box; padding: 10px 20px calc(24px + env(safe-area-inset-bottom, 0px)); border-radius: 28px 28px 0 0; background: var(--rv-fond); animation: moMonte .3s cubic-bezier(.2,.8,.2,1) both; }
 @keyframes moMonte { from { transform: translateY(100%); } }

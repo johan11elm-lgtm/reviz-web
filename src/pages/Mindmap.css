@@ -196,7 +196,7 @@
 .cm-lien { align-self: center; padding: 6px 14px; border: 0; background: none; font: 700 14px 'Geist', system-ui, sans-serif; color: var(--ch-encre); opacity: .7; cursor: pointer; }
 
 /* Feuille du bas (téléphone) */
-.cm-voile { position: fixed; inset: 0; z-index: 290; background: rgba(var(--rv-encre-rgb),.28); opacity: 0; pointer-events: none; transition: opacity .25s; }
+.cm-voile { position: fixed; inset: 0; z-index: 290; background: rgba(var(--rv-voile-rgb),.28); opacity: 0; pointer-events: none; transition: opacity .25s; }
 .cm-voile.is-la { opacity: 1; pointer-events: auto; }
 .cm-feuille {
   position: fixed;

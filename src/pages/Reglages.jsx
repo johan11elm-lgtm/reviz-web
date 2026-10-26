@@ -91,7 +91,7 @@ function Interrupteur({ checked, onChange, label, disabled }) {
 export default function Reglages() {
   const navigate = useNavigate();
   const isDesktop = useIsDesktop();
-  const { theme, setTheme, mode, setMode } = useTheme();
+  const { theme, setTheme, mode, setMode, isDark } = useTheme();
   const location = useLocation();
   // Arrivée depuis « Choisir mon thème » (fiche Réviz+, accueil) ou depuis la
   // landing (« Réserver mon prix fondateur ») : on descend à la bonne section.
@@ -372,6 +372,7 @@ export default function Reglages() {
             ))}
           </div>
           {mode === 'auto' && <p className="rg-sous rg-mode-note">Comme ton appareil : clair le jour, sombre s’il est en mode sombre.</p>}
+          {isDark && <p className="rg-sous rg-mode-note">Les thèmes ci-dessous habillent le mode clair.</p>}
         </>
       )}
       <span className="rg-sur">Classiques</span>
