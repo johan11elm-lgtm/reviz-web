@@ -1,0 +1,186 @@
+/* ─── Tape-taupe ! : un potager en pâte à modeler (calques générés, public/jeux/taupe/) ──
+ * Reprend l'ossature du tour de magie (.mg-page : HUD, chrono, titre, page figée en 100svh,
+ * overflow clip). Le décor couvre l'écran ; de haut en bas : le HUD, le titre, la règle sur sa
+ * pancarte en bois et le compteur d'étoiles, Réviz jardinier, puis le champ de 6 trous.
+ * Ce fichier est chargé avant Jeux.css (import de Taupe.jsx) : les sélecteurs portent
+ * .mg-page.tp-page pour l'emporter sur ceux du tour de magie qu'ils remplacent. */
+.mg-page.tp-page { background: #5B3A22; container-type: size; }
+.mg-page.tp-page .tp-monde { position: absolute; inset: 0; overflow: hidden; }
+.mg-page.tp-page .tp-fond { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 40%; display: block; }
+.mg-page.tp-page .tp-monde::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(rgba(30, 60, 110, .18), transparent 22%), radial-gradient(120% 70% at 50% 55%, transparent 60%, rgba(40, 20, 6, .35) 100%);
+}
+
+.mg-page.tp-page .tp-scene { width: 100%; padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 10px); }
+.mg-page.tp-page .tp-titre { margin-top: 8px; }
+.mg-page.tp-page .tp-titre h1 { font-size: 32px; text-shadow: 0 3px 0 rgba(70, 35, 10, .55), 0 6px 14px rgba(40, 20, 6, .35); }
+.mg-page.tp-page .tp-titre .mg-titre-num { opacity: 1; text-shadow: 0 1px 0 rgba(40, 20, 6, .7), 0 0 8px rgba(40, 20, 6, .6); }
+
+/* La règle, écrite au feutre sur la pancarte en bois du potager. */
+.mg-page.tp-page .tp-regle {
+  position: relative; z-index: 3; margin-top: 4px; min-width: 250px; max-width: 100%;
+  padding: 10px 13% 12px; box-sizing: border-box; text-align: center;
+  background: url('/jeux/taupe/pancarte.webp') center / 100% 100% no-repeat;
+  filter: drop-shadow(0 6px 8px rgba(40, 20, 6, .35));
+}
+.mg-page.tp-page .tp-regle span {
+  font-family: var(--font-display); font-size: 21px; font-weight: 900; letter-spacing: -.02em; white-space: nowrap;
+  color: #3A2210; text-shadow: 0 1px 0 rgba(255, 240, 210, .6);
+}
+
+/* Le compteur : une étoile par bonne taupe à taper ; une erreur en éteint une (elle tremble). */
+.mg-page.tp-page .tp-compteur { position: relative; z-index: 3; display: flex; gap: 5px; margin-top: 4px; }
+.mg-page.tp-page .tp-compteur i {
+  width: 22px; height: 22px; border-radius: 50%;
+  background: rgba(40, 20, 6, .35); box-shadow: inset 0 2px 3px rgba(0, 0, 0, .3), 0 1px 0 rgba(255, 255, 255, .35);
+}
+.mg-page.tp-page .tp-compteur i.tp-plein {
+  background: url('/jeux/taupe/etoile.webp') center / 118% no-repeat; box-shadow: none;
+  filter: drop-shadow(0 2px 2px rgba(60, 30, 0, .45)); animation: tp-plein .35s cubic-bezier(.2, 1.6, .4, 1);
+}
+@keyframes tp-plein { from { transform: scale(.2) rotate(-40deg); } to { transform: scale(1) rotate(0); } }
+.mg-page.tp-page .tp-compteur--perd { animation: tp-tremble .35s ease-in-out; }
+@keyframes tp-tremble { 0%, 100% { translate: 0; } 20% { translate: -6px; } 40% { translate: 6px; } 60% { translate: -4px; } 80% { translate: 3px; } }
+
+/* ── Le chrono, épais, les secondes écrites dessus ; les 3 dernières il bat en rouge ── */
+.mg-page.tp-page .mg-chrono { position: relative; height: 22px; box-shadow: inset 0 2px 0 rgba(0, 0, 0, .12), 0 2px 0 rgba(40, 20, 6, .3); }
+.mg-page.tp-page .tp-secondes {
+  position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display); font-size: 15px; font-weight: 900; color: #1A1430;
+  text-shadow: 0 0 4px rgba(255, 255, 255, .9); font-variant-numeric: tabular-nums; pointer-events: none;
+}
+.tp-page--urgent .mg-chrono { animation: tp-urgent .5s ease-in-out infinite alternate; }
+@keyframes tp-urgent { from { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 84, 112, 0); } to { transform: scale(1.04); box-shadow: 0 0 0 4px rgba(255, 84, 112, .55); } }
+
+/* ── Le milieu : Réviz jardinier, et par-dessus lui l'annonce, le 3-2-1 et le verdict ── */
+.mg-page.tp-page .tp-milieu { position: relative; flex: 1; width: 100%; min-height: 0; }
+.mg-page.tp-page .tp-reviz-place { position: absolute; left: 50%; z-index: 1; translate: -50% 0; pointer-events: none; }
+/* Le temps d'un coup, il passe devant les trous : le maillet tombe devant la taupe. */
+.mg-page.tp-page .tp-reviz-place--devant { z-index: 3; }
+.mg-page.tp-page .tp-reviz { width: var(--taille); height: var(--taille); will-change: transform; }
+.mg-page.tp-page .tp-reviz::after { /* son ombre sur la terre */
+  content: ''; position: absolute; left: 24%; right: 24%; bottom: 6%; height: 8%; z-index: -1; border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(40, 14, 4, .5), transparent);
+}
+.mg-page.tp-page .tp-messages { position: absolute; inset: 10px 0 auto; display: flex; justify-content: center; z-index: 4; pointer-events: none; }
+.mg-page.tp-page .tp-annonce {
+  pointer-events: auto; width: min(340px, 92%); padding: 14px 16px 15px; border: 0; border-radius: 22px;
+  background: #FFF6E8; color: #2A1A10; cursor: pointer;
+  display: flex; flex-direction: column; gap: 4px; align-items: center;
+  box-shadow: 0 6px 0 #B98A4E, 0 14px 26px rgba(40, 20, 6, .45);
+  animation: jx-pop .35s cubic-bezier(.2, 1.4, .4, 1) both;
+}
+.mg-page.tp-page .tp-annonce-titre { font-family: var(--font-display); font-size: 24px; white-space: nowrap; font-weight: 900; letter-spacing: -.02em; }
+.mg-page.tp-page .tp-annonce-sous { font-size: 13px; font-weight: 700; opacity: .7; white-space: nowrap; }
+.mg-page.tp-page .tp-decompte {
+  position: absolute; left: 50%; top: 0; translate: -50% 0; pointer-events: none;
+  font-family: var(--font-display); font-size: 84px; font-weight: 900; line-height: 1; color: #FFF6E8;
+  -webkit-text-stroke: 8px #C8283E; paint-order: stroke fill; text-shadow: 0 6px 0 #7A1020, 0 12px 24px rgba(10, 4, 20, .5);
+  animation: tp-decompte 1s cubic-bezier(.2, 1.3, .4, 1) forwards;
+}
+@keyframes tp-decompte { 0% { transform: scale(.4); opacity: 0; } 18% { transform: scale(1.08); opacity: 1; } 30% { transform: scale(1); } 80% { opacity: 1; } 100% { transform: scale(.9); opacity: 0; } }
+
+/* Le verdict : un éclair de couleur sur tout l'écran et un gros bandeau, d'un coup. */
+.mg-page.tp-page .tp-flash { position: absolute; inset: 0; z-index: 3; pointer-events: none; opacity: 0; animation: tp-flash .5s ease-out; }
+.mg-page.tp-page .tp-flash--vert { background: radial-gradient(90% 50% at 50% 75%, rgba(80, 210, 110, .32), transparent 72%); }
+.mg-page.tp-page .tp-flash--rouge { background: radial-gradient(90% 60% at 50% 70%, rgba(230, 60, 70, .5), transparent 72%); }
+@keyframes tp-flash { 0% { opacity: 0; } 12% { opacity: 1; } 100% { opacity: 0; } }
+.mg-page.tp-page .tp-verdict {
+  position: absolute; left: 50%; top: 0; translate: -50% 0; pointer-events: none;
+  display: flex; align-items: center; gap: 10px; padding: 9px 18px 10px 12px; border-radius: 20px; white-space: nowrap;
+  color: #fff; box-shadow: 0 5px 0 rgba(0, 0, 0, .25), 0 12px 24px rgba(10, 4, 20, .45);
+  will-change: transform; animation: tp-verdict .3s cubic-bezier(.2, 1.4, .4, 1) both;
+}
+.mg-page.tp-page .tp-verdict svg { width: 34px; height: 34px; flex: none; padding: 5px; border-radius: 50%; background: rgba(255, 255, 255, .22); fill: none; stroke: currentColor; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+.mg-page.tp-page .tp-verdict > span { display: flex; flex-direction: column; line-height: 1.05; }
+.mg-page.tp-page .tp-verdict b { font-family: var(--font-display); font-size: 25px; font-weight: 900; letter-spacing: -.02em; }
+.mg-page.tp-page .tp-verdict small { font-size: 17px; font-weight: 800; margin-top: 3px; }
+.mg-page.tp-page .tp-verdict--gagne { background: #1F9A4D; }
+.mg-page.tp-page .tp-verdict--faux { background: #D3263E; }
+.mg-page.tp-page .tp-verdict--temps { background: #2A2140; }
+@keyframes tp-verdict { from { transform: scale(.4); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+/* ── Le champ : 2 rangées de 3 trous. Chaque trou : le fond (ouverture noire), la taupe qui en sort
+ * (coupée net au bas de l'ouverture), le bourrelet de terre de devant par-dessus. ── */
+.mg-page.tp-page .tp-champ {
+  position: relative; z-index: 2; flex: none; width: 100%;
+  display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(2, 1fr); align-items: end; justify-items: center;
+  touch-action: manipulation; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; -webkit-tap-highlight-color: transparent;
+}
+.mg-page.tp-page .tp-champ--jeu { cursor: pointer; }
+.mg-page.tp-page .tp-trou { position: relative; width: var(--l); height: var(--h); }
+.mg-page.tp-page .tp-trou:nth-child(n + 4) { translate: 0 -4px; }
+.mg-page.tp-page .tp-trou img { display: block; pointer-events: none; }
+.mg-page.tp-page .tp-trou-fond, .mg-page.tp-page .tp-trou-avant { position: absolute; inset: 0; width: 100%; height: 100%; }
+.mg-page.tp-page .tp-trou-avant { z-index: 2; }
+.mg-page.tp-page .tp-sortie {
+  position: absolute; left: 50%; width: calc(var(--tl) * 1.12); height: calc(var(--th) * 1.2); translate: -50% 0;
+  overflow: clip; z-index: 1; pointer-events: none;
+}
+.mg-page.tp-page .tp-taupe {
+  position: absolute; left: calc(var(--tl) * .06); bottom: 0; width: var(--tl); height: var(--th);
+  will-change: transform; pointer-events: none;
+}
+.mg-page.tp-page .tp-taupe img { width: 100%; height: 100%; filter: drop-shadow(0 4px 4px rgba(30, 12, 4, .35)); }
+/* Le nombre (ou le calcul) écrit au feutre sur la pancarte crème. */
+.mg-page.tp-page .tp-pancarte {
+  position: absolute; translate: -50% -50%; display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display); font-size: calc(var(--tl) * .32); font-weight: 900; line-height: 1; letter-spacing: -.02em;
+  color: #2A1A10; white-space: nowrap; font-variant-numeric: tabular-nums;
+}
+/* Un calcul est plus long qu'un nombre : il s'écrit plus petit sur une bande de carton crème qui
+ * déborde un peu de la pancarte, pour rester lisible sur un petit écran. */
+.mg-page.tp-page .tp-pancarte--calcul {
+  width: auto !important; min-width: calc(var(--tl) * .68); height: auto !important; padding: .18em .3em .22em; box-sizing: border-box;
+  font-size: calc(var(--tl) * .24); letter-spacing: -.03em; border-radius: .3em;
+  background: #F4E2C4; box-shadow: inset 0 -2px 0 rgba(120, 80, 40, .18), 0 2px 3px rgba(40, 20, 6, .3);
+}
+/* Mauvaise taupe tapée : la pancarte cerclée de rouge. Taupe tapée : écrasée un instant. */
+.mg-page.tp-page .tp-taupe--rate .tp-pancarte { border-radius: 8px; box-shadow: 0 0 0 3px #E0303F, 0 0 10px rgba(224, 48, 63, .8); color: #B3172A; }
+.mg-page.tp-page .tp-taupe--sonnee img, .mg-page.tp-page .tp-taupe--rate img { animation: tp-ecrase .3s ease-out; transform-origin: 50% 100%; }
+@keyframes tp-ecrase { 0% { transform: scale(1.12, .72); } 45% { transform: scale(.94, 1.06); } 100% { transform: scale(1); } }
+
+/* L'impact : 5 étoiles en pâte à modeler qui giclent du haut de la taupe, et +100. */
+.mg-page.tp-page .tp-choc { position: absolute; left: 50%; top: calc(var(--h) * .62 - var(--th) * .95); z-index: 3; pointer-events: none; }
+.mg-page.tp-page .tp-choc img {
+  position: absolute; width: calc(var(--tl) * .26); translate: -50% -50%;
+  animation: tp-etoile .6s cubic-bezier(.15, .8, .3, 1) forwards; --a: calc(var(--k) * 72deg - 90deg);
+}
+@keyframes tp-etoile {
+  0% { transform: rotate(var(--a)) translateX(0) rotate(calc(-1 * var(--a))) scale(.3); opacity: 1; }
+  70% { opacity: 1; }
+  100% { transform: rotate(var(--a)) translateX(calc(var(--tl) * .7)) rotate(calc(-1 * var(--a) + 120deg)) scale(1); opacity: 0; }
+}
+.mg-page.tp-page .tp-choc--faux img { filter: hue-rotate(-50deg) saturate(1.4); }
+.mg-page.tp-page .tp-choc b {
+  position: absolute; translate: -50% -100%; font-family: var(--font-display); font-size: 22px; font-weight: 900; color: #FFE27A;
+  -webkit-text-stroke: 5px #6B3A0E; paint-order: stroke fill; animation: tp-plus .8s ease-out forwards;
+}
+@keyframes tp-plus { 0% { transform: translateY(6px) scale(.6); opacity: 0; } 20% { transform: translateY(0) scale(1.1); opacity: 1; } 75% { opacity: 1; } 100% { transform: translateY(-36px) scale(1); opacity: 0; } }
+
+/* ── Ordinateur, plein écran : le potager en paysage, le champ au centre ── */
+.jx-page--large.mg-page.tp-page .tp-scene { max-width: 900px; padding-left: 32px; padding-right: 32px; }
+.jx-page--large.mg-page.tp-page .tp-titre h1 { font-size: clamp(36px, 4.6cqh, 52px); }
+.jx-page--large.mg-page.tp-page .tp-regle span { font-size: 26px; }
+.jx-page--large.mg-page.tp-page .tp-champ { width: min(760px, 100%); }
+.jx-page--large.mg-page.tp-page .tp-verdict b { font-size: 32px; }
+.jx-page--large.mg-page.tp-page .tp-verdict small { font-size: 20px; }
+.jx-page--large.mg-page.tp-page .tp-decompte { font-size: 110px; }
+.jx-page--large.mg-page.tp-page .mg-chrono { height: 30px; }
+.jx-page--large.mg-page.tp-page .tp-secondes { font-size: 20px; }
+.jx-page--large.mg-page.tp-page .tp-annonce { width: min(380px, 100%); }
+
+/* iPhone 12 ou SE dans Safari (barres affichées) : tout plus serré. */
+@media (max-width: 430px) and (max-height: 760px) {
+  .mg-page.tp-page .tp-titre { margin-top: 4px; }
+  .mg-page.tp-page .tp-titre h1 { font-size: 28px; }
+  .mg-page.tp-page .tp-regle { padding: 8px 12% 10px; }
+  .mg-page.tp-page .tp-regle span { font-size: 18px; }
+  .mg-page.tp-page .tp-compteur i { width: 20px; height: 20px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mg-page.tp-page :is(.tp-verdict, .tp-flash, .tp-decompte, .tp-choc img, .tp-choc b, .tp-compteur i, .tp-compteur--perd) { animation-duration: .01s; }
+  .tp-page--urgent .mg-chrono { animation: none; box-shadow: 0 0 0 4px rgba(255, 84, 112, .55); }
+}

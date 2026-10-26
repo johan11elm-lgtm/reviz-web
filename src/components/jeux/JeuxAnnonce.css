@@ -1,0 +1,4 @@
+/* Popup « Nouveau : Réviz Games » : la scène de la partie du jour remplit l'arène de la Battle. */
+.jan-arene { background: #3A1D0C; }
+.jan-arene::after { display: none; }
+.jan-arene .jan-image { position: absolute; inset: 0; z-index: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; }

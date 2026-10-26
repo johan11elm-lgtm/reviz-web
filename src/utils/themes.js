@@ -23,6 +23,21 @@ const ALIASES = { 'carnet-kraft': 'abricot', 'violet-air': 'prune', 'menthe-focu
 // Thèmes à interface sombre (pilote isDark : status bar, images, etc.)
 export const DARK_THEMES = ['dark', 'nuit-encre'];
 
+// La refonte d'octobre 2026 (« Reviz Valide ») pose ses couleurs page par page, en clair seulement :
+// sous un thème sombre, seul le fond de l'app passait au noir et les textes restaient noirs dessus
+// (accueil illisible), le reste demeurait crème. Tant que la refonte n'a pas sa version sombre, les
+// thèmes sombres ne sont ni proposés ni appliqués : un choix déjà mémorisé reste en mémoire
+// (localStorage reviz-theme) mais s'affiche en Crème. Passer à true quand le sombre existera.
+export const SOMBRE_DISPONIBLE = false;
+
+/** Thèmes proposés dans les sélecteurs (Réglages, carte d'essai de l'accueil). */
+export const THEMES_PROPOSES = SOMBRE_DISPONIBLE ? THEMES : THEMES.filter(t => !DARK_THEMES.includes(t.id));
+
+/** Thème réellement posé sur <html data-theme> pour un thème choisi. */
+export function themeAffiche(id) {
+  return !SOMBRE_DISPONIBLE && DARK_THEMES.includes(id) ? 'light' : id;
+}
+
 export function themeById(id) {
   return THEMES.find(t => t.id === id) ?? null;
 }

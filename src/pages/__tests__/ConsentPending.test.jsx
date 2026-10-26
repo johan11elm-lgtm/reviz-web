@@ -35,7 +35,8 @@ describe('Écran de l\'email du parent', () => {
   it('pendant les 15 jours : reste affiché et propose « Plus tard »', () => {
     auth.current = connecte({ status: 'a-fournir', parentEmail: null, joursRestants: 12 })
     monter(<ConsentPending />)
-    expect(screen.getByText(/il te reste 12 jours pour la donner/i)).toBeInTheDocument()
+    // Dans le texte de la carte et sous « Plus tard ».
+    expect(screen.getAllByText(/il te reste 12 jours/i)).toHaveLength(2)
     fireEvent.click(screen.getByRole('button', { name: /plus tard/i }))
     expect(screen.getByText('Accueil')).toBeInTheDocument()
   })
@@ -43,7 +44,8 @@ describe('Écran de l\'email du parent', () => {
   it('délai écoulé : compte en pause, sans « Plus tard »', () => {
     auth.current = connecte({ status: 'a-demander', parentEmail: null, joursRestants: null }, true)
     monter(<ConsentPending />)
-    expect(screen.getByText(/ton compte est en pause/i)).toBeInTheDocument()
+    // La phrase est dans la bulle de Réviz (texte lu + lettres tapées).
+    expect(screen.getAllByText(/ton compte est en pause/i).length).toBeGreaterThan(0)
     expect(screen.queryByRole('button', { name: /plus tard/i })).toBeNull()
   })
 

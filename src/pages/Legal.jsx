@@ -1,5 +1,8 @@
-import { Link, useParams, useNavigate } from 'react-router-dom';
+import { Children, cloneElement, isValidElement, useCallback, useEffect, useRef, useState } from 'react';
+import { Link, useParams, useNavigate, useLocation } from 'react-router-dom';
 import { PRIX, PRIX_FONDATEUR } from '../../api/_prix.js';
+import { useIsDesktop } from '../hooks/useMediaQuery';
+import NotFound from './NotFound';
 import './Legal.css';
 
 // Identité de l'éditeur, à compléter dès l'immatriculation (micro-entreprise).
@@ -16,6 +19,7 @@ const CONTACT = 'contact@revizapp.fr';
 const PAGES = {
   'mentions-legales': {
     title: 'Mentions légales',
+    court: 'Mentions légales',
     content: () => (
       <>
         <Section title="Éditeur de l'application">
@@ -48,18 +52,19 @@ const PAGES = {
 
   'confidentialite': {
     title: 'Politique de confidentialité',
+    court: 'Confidentialité',
+    maj: '25 octobre 2026',
     content: () => (
       <>
-        <p className="legal-updated">Dernière mise à jour : 19 octobre 2026</p>
-
         <Section title="Données collectées">
           <ul>
             <li><strong>Compte utilisateur</strong> — prénom, adresse email, classe (optionnel), via Firebase Authentication.</li>
             <li><strong>Connexion avec Google, Apple, Microsoft ou TikTok</strong> — si tu choisis de te connecter avec l'un de ces services, il nous transmet ton nom ou ton pseudo, ton adresse email quand il la fournit (Apple peut la remplacer par une adresse masquée, TikTok ne la fournit pas) et un identifiant technique propre à Réviz. Nous ne recevons jamais ton mot de passe, ni tes contacts, vidéos, publications ou abonnés.</li>
             <li><strong>Date de naissance</strong> — collectée à l'inscription, uniquement pour déterminer si le consentement parental est requis (moins de 15 ans, art. 45 de la loi Informatique et Libertés).</li>
             <li><strong>Leçons scannées</strong> — le texte ou l'image de tes leçons, envoyé à l'IA pour générer les contenus de révision. Ces données ne sont pas conservées côté serveur après traitement.</li>
-            <li><strong>Historique</strong> — tes leçons et révisions sont stockées localement sur ton appareil (localStorage) et synchronisées dans ta collection Firestore personnelle.</li>
+            <li><strong>Historique</strong> — tes leçons et révisions (format, chapitre, date, score d'un quiz terminé) sont stockées localement sur ton appareil (localStorage) et synchronisées dans ta collection Firestore personnelle. La date de ta première et de ta dernière révision est notée sur ton profil.</li>
             <li><strong>Jours d'ouverture</strong> — avec un compte, les dates (le jour, sans l'heure) où tu ouvres Réviz sont ajoutées à ton profil, pour savoir si les élèves reviennent réviser. Dans ton navigateur, l'app garde seulement la date de ta dernière ouverture, pour ne la compter qu'une fois par jour.</li>
+            <li><strong>Mode essai (sans compte)</strong> — pour savoir combien d'élèves reviennent réviser, chaque révision est enregistrée avec un identifiant tiré au hasard sur ton appareil : format, chapitre, classe, matière et date, sans prénom ni rien qui permette de savoir qui tu es. Ces données ne servent qu'à des statistiques et sont effacées 13 mois après ta dernière révision. Si tu crées un compte, ta progression d'essai y est reprise.</li>
             <li><strong>Agenda</strong> — les contrôles que tu notes (matière, date, sujet facultatif), et, si tu relies Pronote, l'adresse de ton emploi du temps, enregistrées sur ton compte. Réviz lit avec cette adresse tes horaires de cours, pour les afficher ; il ne voit ni tes notes, ni tes devoirs, ni tes absences, et ne conserve pas tes cours sur ses serveurs. Tu peux délier Pronote à tout moment depuis l'Agenda.</li>
             <li><strong>Battle</strong> — pour jouer à deux en direct : le prénom ou le surnom que tu choisis, tes réponses et tes temps de réponse. Sans compte, rien d'autre : un identifiant technique anonyme (Firebase) relie tes réponses à la partie, sans email ni date de naissance. Avec un compte, ton total d'aura et ton nombre de battles jouées et gagnées sont ajoutés à ton profil.</li>
             <li><strong>Avis</strong> — ce que tu écris sur la page « Votre avis » (profil, réponses, e-mail facultatif pour recevoir une réponse), sans compte ni identifiant. Conservés 2 ans au plus, supprimés sur simple demande.</li>
@@ -71,6 +76,7 @@ const PAGES = {
           <ul>
             <li>Fournir le service de révision (génération IA, suivi de progression).</li>
             <li>Authentifier les utilisateurs.</li>
+            <li>T'envoyer, le lendemain de ta première révision, un seul email de rappel qui te ramène sur ton chapitre (et une notification sur l'application mobile, si tu les as autorisées). Pas d'email de rappel avant 15 ans sans l'autorisation d'un parent. Tu peux t'en désinscrire d'un clic depuis l'email.</li>
             <li>Améliorer l'application.</li>
           </ul>
         </Section>
@@ -102,6 +108,7 @@ const PAGES = {
           <ul>
             <li>Données de compte (y compris l'identifiant transmis par Google, Apple, Microsoft ou TikTok) : jusqu'à suppression du compte. Si tu as créé ton compte avec Apple dans l'app iPhone, sa suppression retire aussi l'accès que tu avais donné à Réviz chez Apple. Pour les autres services, tu peux retirer cet accès à tout moment depuis les réglages de ton compte Google, Microsoft ou TikTok.</li>
             <li>Leçons et révisions : jusqu'à suppression par l'utilisateur (max 100 leçons conservées).</li>
+            <li>Révisions en mode essai : 13 mois après la dernière révision.</li>
             <li>Parties de Battle : supprimées automatiquement au plus tard 48 heures après leur création. Avec un compte, l'aura totale et le nombre de battles restent sur ton profil jusqu'à la suppression du compte.</li>
             <li>Agenda : adresse Pronote jusqu'à ce que tu délies Pronote ou supprimes ton compte ; contrôles jusqu'à ce que tu les retires ou supprimes ton compte (ceux passés depuis plus d'un mois sont effacés quand tu en notes un nouveau).</li>
             <li>Logs serveur : 30 jours maximum.</li>
@@ -131,10 +138,10 @@ const PAGES = {
 
   'cgv': {
     title: 'Conditions Générales de Vente',
+    court: 'CGV Réviz+',
+    maj: '11 octobre 2026',
     content: () => (
       <>
-        <p className="legal-updated">Dernière mise à jour : 11 octobre 2026</p>
-
         <Section title="Objet">
           <p>Les présentes CGV encadrent la souscription à <strong>Réviz+</strong>, l'abonnement payant de l'application Réviz, vendu par {EDITEUR.nom}, {EDITEUR.statut}{EDITEUR.siren ? `, SIREN ${EDITEUR.siren}` : ' (immatriculation en cours)'}. Elles complètent les <Link to="/legal/cgu">CGU</Link>.</p>
         </Section>
@@ -181,10 +188,10 @@ const PAGES = {
 
   'cgu': {
     title: "Conditions Générales d'Utilisation",
+    court: 'CGU',
+    maj: '16 octobre 2026',
     content: () => (
       <>
-        <p className="legal-updated">Dernière mise à jour : 16 octobre 2026</p>
-
         <Section title="Objet">
           <p>Les présentes CGU régissent l'utilisation de l'application Réviz, un outil de révision scolaire assisté par intelligence artificielle, destiné aux collégiens.</p>
         </Section>
@@ -244,30 +251,193 @@ const PAGES = {
   },
 };
 
-function Section({ title, children }) {
+// Ordre des pastilles et de « Les autres textes ».
+const ORDRE = ['mentions-legales', 'confidentialite', 'cgu', 'cgv'];
+
+const Fleche = ({ d, taille = 14 }) => (
+  <svg viewBox="0 0 14 14" width={taille} height={taille} fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <path d={d} />
+  </svg>
+);
+const GAUCHE = 'M9 2.5L4.5 7 9 11.5';
+const DROITE = 'M5 3l4 4-4 4';
+const HAUT = 'M3 9l4-4 4 4';
+
+/** Section numérotée (rond lavande + titre) ; `n` est posé par la page. */
+function Section({ n, title, children }) {
   return (
-    <div className="legal-section">
-      <h2 className="legal-section-title">{title}</h2>
+    <section className="legal-section" id={`section-${n}`} aria-labelledby={`section-${n}-titre`}>
+      <h2 className="legal-section-title" id={`section-${n}-titre`}>
+        <span className="legal-rond" aria-hidden="true">{n}</span>
+        <span>{title}</span>
+      </h2>
       {children}
-    </div>
+    </section>
   );
 }
 
+const calme = () => typeof window !== 'undefined' && window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+
+/**
+ * Textes légaux (handoff Claude Design du 22/10) : retour rond, surtitre, titre, date de mise
+ * à jour, pastilles vers les autres textes (téléphone), sommaire numéroté, sections numérotées,
+ * « Retour en haut ». Sur ordinateur : sommaire collé à gauche (section en cours sur fond blanc),
+ * texte dans une carte blanche de 680 px, « Retour en haut » flottant après un écran.
+ */
 export default function Legal() {
   const { page } = useParams();
+  const { hash } = useLocation();
   const navigate = useNavigate();
+  const isDesktop = useIsDesktop();
+  const defile = useRef(null);
+  const [actif, setActif] = useState(1);
+  const [loin, setLoin] = useState(false);
   const data = PAGES[page];
 
-  if (!data) return <div className="app"><p style={{ padding: 24 }}>Page introuvable.</p></div>;
+  // Sections numérotées, tirées du contenu tel qu'il est écrit (les textes restent intacts).
+  const sections = data
+    ? Children.toArray(data.content().props.children)
+        .filter(el => isValidElement(el) && el.type === Section)
+        .map((el, i) => cloneElement(el, { n: i + 1 }))
+    : [];
+
+  const allerA = useCallback((cible, doux = true) => {
+    const el = typeof cible === 'number' ? document.getElementById(`section-${cible}`) : null;
+    const zone = defile.current;
+    if (!zone) return;
+    const comportement = doux && !calme() ? 'smooth' : 'auto';
+    if (el) el.scrollIntoView({ behavior: comportement, block: 'start' });
+    else zone.scrollTo?.({ top: 0, behavior: comportement });
+  }, []);
+
+  // Nouveau texte : en haut, ou sur la section demandée (/legal/cgu#section-3).
+  useEffect(() => {
+    const n = Number(/^#section-(\d+)$/.exec(hash || '')?.[1]);
+    if (n) allerA(n, false);
+    else if (defile.current) defile.current.scrollTop = 0;
+    setActif(n || 1);
+  }, [page, hash, allerA]);
+
+  // Section en cours (sommaire collé) et « Retour en haut » flottant après un écran.
+  const suivre = () => {
+    const zone = defile.current;
+    if (!zone) return;
+    setLoin(zone.scrollTop > zone.clientHeight);
+    if (!isDesktop) return;
+    const haut = zone.getBoundingClientRect().top + 140;
+    let courant = 1;
+    sections.forEach((_, i) => {
+      const el = document.getElementById(`section-${i + 1}`);
+      if (el && el.getBoundingClientRect().top <= haut) courant = i + 1;
+    });
+    if (zone.scrollTop + zone.clientHeight >= zone.scrollHeight - 4) courant = sections.length;
+    setActif(courant);
+  };
+
+  const retour = () => {
+    if ((window.history.state?.idx ?? 0) > 0) navigate(-1);
+    else navigate('/');
+  };
+
+  if (!data) return <NotFound />;
+
+  const autres = ORDRE.filter(slug => slug !== page);
+  const lienSection = (n, contenu, className) => (
+    <a
+      key={n}
+      href={`#section-${n}`}
+      className={className}
+      aria-current={isDesktop && actif === n ? 'location' : undefined}
+      onClick={e => { e.preventDefault(); setActif(n); allerA(n); }}
+    >
+      {contenu}
+    </a>
+  );
+  const titreSection = el => el.props.title;
+
+  const sommaire = (
+    <nav className="legal-sommaire" aria-label="Sommaire">
+      <span className="legal-sur">Sommaire</span>
+      <ol>
+        {sections.map((el, i) => (
+          <li key={i}>
+            {lienSection(i + 1, (
+              <>
+                <span className="legal-rond legal-rond--petit" aria-hidden="true">{i + 1}</span>
+                <span className="legal-sommaire-txt">{titreSection(el)}</span>
+                {!isDesktop && <Fleche d={DROITE} />}
+              </>
+            ), `legal-sommaire-lien${isDesktop && actif === i + 1 ? ' is-actif' : ''}`)}
+          </li>
+        ))}
+      </ol>
+    </nav>
+  );
 
   return (
-    <div className="app">
-      <div className="legal-header">
-        <button className="legal-back" onClick={() => navigate(-1)}>←</button>
-        <span className="legal-title">{data.title}</span>
-      </div>
-      <div className="legal-content">
-        {data.content()}
+    <div className={`app app--no-halo app--large legal-page${isDesktop ? ' legal-page--large' : ''}`}>
+      <div className="legal-defile" ref={defile} onScroll={suivre}>
+        <div className="legal-header">
+          <button type="button" className="legal-back" onClick={retour} aria-label="Retour">
+            <Fleche d={GAUCHE} taille={18} />
+          </button>
+          {isDesktop && <span className="legal-logo">Réviz</span>}
+        </div>
+
+        <div className="legal-grille">
+          {isDesktop && (
+            <aside className="legal-cote">
+              {sommaire}
+              <nav className="legal-autres" aria-label="Les autres textes">
+                <span className="legal-sur">Les autres textes</span>
+                {autres.map(slug => (
+                  <Link key={slug} to={`/legal/${slug}`} replace>{PAGES[slug].title}</Link>
+                ))}
+              </nav>
+            </aside>
+          )}
+
+          <main className="legal-corps">
+            <span className="legal-sur legal-sur--titre">Textes légaux</span>
+            <h1 className="legal-title">{data.title}</h1>
+            {data.maj && <p className="legal-updated"><i aria-hidden="true" />Mise à jour le {data.maj}</p>}
+
+            {!isDesktop && (
+              <>
+                <nav className="legal-docs" aria-label="Les autres textes">
+                  {ORDRE.map(slug => (
+                    <Link
+                      key={slug}
+                      to={`/legal/${slug}`}
+                      replace
+                      className={`legal-doc${slug === page ? ' is-actif' : ''}`}
+                      aria-current={slug === page ? 'page' : undefined}
+                    >
+                      {PAGES[slug].court}
+                    </Link>
+                  ))}
+                </nav>
+                {sommaire}
+              </>
+            )}
+
+            <div className="legal-content">
+              {sections}
+            </div>
+
+            {!isDesktop && (
+              <button type="button" className="legal-haut" onClick={() => allerA(null)}>
+                <Fleche d={HAUT} />Retour en haut
+              </button>
+            )}
+          </main>
+        </div>
+
+        {isDesktop && loin && (
+          <button type="button" className="legal-haut legal-haut--flottant" onClick={() => allerA(null)}>
+            <Fleche d={HAUT} />Retour en haut
+          </button>
+        )}
       </div>
     </div>
   );

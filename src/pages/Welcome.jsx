@@ -1,150 +1,42 @@
-import { CameraIcon, SparkIcon, TrophyIcon, ResumeIcon, FlashcardsIcon, MindmapIcon, QuizIcon } from '../components/Icons';
-import { Link } from 'react-router-dom';
-import { Mascot } from '../components/Mascot';
+import { Link, Navigate } from 'react-router-dom';
 import { BoutonInstaller } from '../components/InstallerApp';
-import { useIsDesktop } from '../hooks/useMediaQuery';
-import './Welcome.css';
+import { EntreeEcran, LienTexte } from '../components/entree/Entree';
+import { readGuest } from '../services/guestService';
+import { readSessionCache } from '../services/sessionCache';
+import './Welcome.entree.css';
 
-const STEPS = [
-  { icon: <CameraIcon />, tone: 'orange', num: '1', title: 'Scanne',        desc: 'Photo ou texte de ta leçon — ça suffit.' },
-  { icon: <SparkIcon />,  tone: 'violet', num: '2', title: "L'IA analyse",  desc: 'Flashcards, quiz, résumé et carte mentale en quelques secondes.' },
-  { icon: <TrophyIcon />, tone: 'green',  num: '3', title: 'Révise',        desc: 'Retiens vraiment. Progresse. Bats tes records.' },
-];
-
-const FORMATS = [
-  { icon: <ResumeIcon />,     tone: 'green',  label: 'Résumé' },
-  { icon: <FlashcardsIcon />, tone: 'violet', label: 'Flashcards' },
-  { icon: <MindmapIcon />,    tone: 'pink',   label: 'Carte mentale' },
-  { icon: <QuizIcon />,       tone: 'orange', label: 'Quiz' },
-];
-
-// Mascottes par matière (cf. utils/subjects.js) — bandeau décoratif.
-const SUBJECTS = ['maths', 'svt', 'francais', 'physique', 'histgeo', 'technonsi', 'philo', 'arts', 'langues'];
-
+// Bienvenue (handoff Claude Design du 22/10) : un écran court, plus une page vitrine.
+// La présentation détaillée vit sur la landing (revizapp.fr).
 export default function Welcome() {
-  const isDesktop = useIsDesktop();
+  // Essai déjà commencé sur cet appareil (sans compte connecté) : on le reprend, au lieu de proposer
+  // un nouvel essai qui repartirait de zéro (retour depuis Connexion, retour du téléphone…).
+  if (readGuest() && !readSessionCache()) return <Navigate to="/" replace />;
   return (
-    <div className="app">
-
-      {/* ── Nav ── */}
-      <nav className="wlc-nav" aria-label="Navigation principale">
-        <div className="wlc-logo">
-          <Mascot pose="reading" size={28} priority alt="" aria-hidden="true" />
-          <span>réviz</span>
-        </div>
-        <Link to="/connexion" className="wlc-nav-link">Se connecter</Link>
-      </nav>
-
-      <div className="wlc-scroll">
-        <main>
-
-          {/* ── Hero ── */}
-          <section className="wlc-hero">
-            <Mascot
-              pose="hello"
-              size={isDesktop ? 320 : 156}
-              glow
-              animate
-              priority
-              className="wlc-hero-mascot"
-            />
-            <span className="rv-pill rv-pill--orange wlc-badge">✦ Collège · Lycée à venir</span>
-            <h1 className="wlc-headline">
-              Révise mieux.<br />Retiens plus.
-            </h1>
-            <p className="wlc-sub">
-              L'IA transforme tes leçons en flashcards, quiz et résumés,
-              et ton programme de la 6e à la 3e t'attend déjà.
-            </p>
-            <div className="wlc-subjects" aria-hidden="true">
-              {SUBJECTS.map(p => <Mascot key={p} pose={p} size={36} alt="" aria-hidden="true" />)}
-            </div>
-            <div className="wlc-actions">
-              <Link to="/inscription" className="rv-btn-cta rv-btn-cta--full wlc-cta-btn">
-                Commencer gratuitement
-                <span className="rv-btn-cta-arrow" aria-hidden="true">→</span>
-              </Link>
-              <Link to="/essai" className="rv-btn-cta rv-btn-cta--ghost rv-btn-cta--full wlc-cta-btn">
-                Essayer sans compte
-              </Link>
-            </div>
-            <p className="wlc-hint">Aucune carte bancaire · Gratuit pour commencer</p>
-            <BoutonInstaller className="wlc-installer">Installer l'app sur ton appareil</BoutonInstaller>
-          </section>
-
-          {/* ── Comment ça marche ── */}
-          <section className="wlc-section">
-            <p className="wlc-label">COMMENT ÇA MARCHE</p>
-            <h2 className="wlc-section-title">Simple comme bonjour</h2>
-            <ul className="wlc-steps">
-              {STEPS.map((s) => (
-                <li key={s.num} className="wlc-step">
-                  <span className={`rv-icon-square rv-icon-square--xl rv-icon-square--${s.tone}`} aria-hidden="true">
-                    {s.icon}
-                  </span>
-                  <div className="wlc-step-text">
-                    <span className="wlc-step-title">
-                      <span className="wlc-step-num">{s.num}</span>
-                      {s.title}
-                    </span>
-                    <span className="wlc-step-desc">{s.desc}</span>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </section>
-
-          {/* ── 4 formats ── */}
-          <section className="wlc-section">
-            <p className="wlc-label">LES FORMATS</p>
-            <h2 className="wlc-section-title">4 outils en 1 scan</h2>
-            <div className="wlc-grid">
-              {FORMATS.map((f) => (
-                <div key={f.label} className="wlc-grid-item">
-                  <span className={`rv-icon-square rv-icon-square--xl rv-icon-square--${f.tone}`} aria-hidden="true">
-                    {f.icon}
-                  </span>
-                  <span className="wlc-grid-label">{f.label}</span>
-                </div>
-              ))}
-            </div>
-          </section>
-
-          {/* ── CTA final ── */}
-          <section className="wlc-cta">
-            <Mascot pose="fire" size={120} glow animate className="wlc-cta-mascot" />
-            <h2 className="wlc-cta-title">Prêt à réviser autrement ?</h2>
-            <p className="wlc-cta-sub">
-              Rejoins les élèves qui révisent plus malin avec Réviz.
-            </p>
-            <div className="wlc-actions">
-              <Link to="/inscription" className="rv-btn-cta rv-btn-cta--full wlc-cta-btn">
-                Créer un compte gratuit
-                <span className="rv-btn-cta-arrow" aria-hidden="true">→</span>
-              </Link>
-              <Link to="/connexion" className="rv-btn-cta rv-btn-cta--ghost rv-btn-cta--full wlc-cta-btn">
-                J'ai déjà un compte
-              </Link>
-              <Link to="/essai" className="rv-btn-cta rv-btn-cta--ghost rv-btn-cta--full wlc-cta-btn">
-                Essayer sans compte
-              </Link>
-            </div>
-          </section>
-
-          {/* ── Footer ── */}
-          <footer className="wlc-footer">
+    <EntreeEcran
+      bulle={['Révise mieux.', 'Retiens plus.']}
+      expression="content" geste="coucou" taille="grand" logo
+      dessous={(
+        <>
+          <LienTexte to="/connexion">J’ai déjà un compte</LienTexte>
+          <p className="en-mention">Gratuit pour commencer, sans carte bancaire.</p>
+          <BoutonInstaller className="wlc-installer">Installer l’app sur ton appareil</BoutonInstaller>
+          <p className="en-mention wlc-legal">
             <Link to="/legal/mentions-legales">Mentions légales</Link>
-            <span aria-hidden="true">·</span>
+            <span aria-hidden="true"> · </span>
             <Link to="/legal/cgu">CGU</Link>
-            <span aria-hidden="true">·</span>
+            <span aria-hidden="true"> · </span>
             <Link to="/legal/confidentialite">Confidentialité</Link>
-            <span aria-hidden="true">·</span>
+            <span aria-hidden="true"> · </span>
             <Link to="/avis?src=accueil">Donner un avis</Link>
-          </footer>
-
-        </main>
-      </div>
-
-    </div>
+          </p>
+        </>
+      )}
+    >
+      <p className="en-texte en-texte--doux">
+        Tes leçons deviennent des flashcards, des quiz et des résumés. Et le programme de la 6e à la 3e t’attend déjà.
+      </p>
+      <Link to="/inscription" className="en-btn">Commencer gratuitement</Link>
+      <Link to="/essai" className="en-btn-second">Essayer sans compte</Link>
+    </EntreeEcran>
   );
 }

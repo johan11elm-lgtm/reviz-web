@@ -1,26 +1,29 @@
-import { ResumeIcon, FlashcardsIcon, MindmapIcon, QuizIcon } from '../components/Icons';
 import { useState, useEffect, useRef } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { BottomNav } from '../components/BottomNav';
-import { PageHeader } from '../components/PageHeader';
-import { PageIntro } from '../components/PageIntro';
 import { Mascot } from '../components/Mascot';
 import { analyseLesson, analyseImage, popPendingAnalysis } from '../services/aiService';
 import { LESSON_TEXT_MAX_LABEL } from '../utils/lessonText';
-import { isProgrammeLessonId, chapterState, CHAPTER_STATE_LABEL } from '../utils/programme';
+import { isProgrammeLessonId, chapterState } from '../utils/programme';
 import { countDueCards, getCardState } from '../services/srsService';
-import { loadRevisions } from '../services/revisionService';
+import { loadRevisions, quizScore } from '../services/revisionService';
 import { useIsDesktop } from '../hooks/useMediaQuery';
 import { saveLesson } from '../services/historyService';
-import { PremiumModal } from '../components/PremiumModal';
+import { LimiteAtteinte } from '../components/revizplus/RevizPlusOffre';
+import { DERNIER_JOUR_OFFERT } from '../../api/_lancement.js';
 import { MissingLessonState } from '../components/MissingLessonState';
-import { CoachEntryCard } from '../components/CoachChat';
+import { Pantin } from '../components/Pantin';
+import { BulleReviz } from '../components/reviz/BulleReviz';
+import { Parcours } from '../components/reviz/Parcours';
+import { TEINTES, teinteMatiere, varsTeinte as variablesTeinte } from '../utils/teinteMatiere';
 import { getScanStatus } from '../services/scanLimitService';
 import { track, scanErrorCode } from '../services/statsService';
 import { subjectInfo, subjectMascot } from '../utils/subjects';
 import { resumeReadingMinutes } from '../utils/resume';
 import { nextStep } from '../utils/nextStep';
+import { DEPUIS_FICHE } from '../utils/navigation';
+import '../components/reviz/HerosMatiere.css';
 import './Analyse.css';
 
 // ─── Mock de fallback ────────────────────────────────────────────────
@@ -51,9 +54,6 @@ function buildLessonFromAiData(data) {
   };
 }
 
-// Tons des états (docs/design-grammaire.md §3) : pas commencé = neutre.
-const STATE_TONE = { nouveau: null, commence: 'orange', 'a-revoir': 'orange', maitrise: 'green' };
-
 /** Avancement de l'élève sur la leçon (cartes vues, à revoir, séances). */
 function lessonProgress(lessonId, total) {
   // seenDue : cartes déjà vues et arrivées à échéance (countDueCards compte
@@ -78,46 +78,56 @@ function lessonProgress(lessonId, total) {
   };
 }
 
-function formatDay(ts) {
-  const days = Math.floor((Date.now() - ts) / 86400000);
-  if (days <= 0) return "aujourd'hui";
-  if (days === 1) return 'hier';
-  return `il y a ${days} jours`;
-}
+const Fleche = ({ taille = 18 }) => (
+  <svg width={taille} height={taille} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+);
+const Coche = ({ taille = 13 }) => (
+  <svg width={taille} height={taille} viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="3.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg>
+);
+const pluriel = (n, mot) => `${n} ${mot}${n > 1 ? 's' : ''}`;
+// Photo d'une leçon trop difficile à lire (refus ILLISIBLE) : un conseil par raison donnée par le modèle.
+const CONSEILS_ILLISIBLE = {
+  floue: { lignes: ['Ta photo est un peu floue.', 'Tiens le téléphone bien immobile.'], texte: 'Touche le texte sur l’écran pour faire la mise au point, puis attends une seconde avant de prendre la photo.' },
+  coupee: { lignes: ['Il manque un bout de ta leçon.', 'Recule un peu pour tout cadrer.'], texte: 'Fais entrer toute la page dans le cadre, bords compris. Pour une leçon longue, fais deux photos.' },
+  sombre: { lignes: ['Ta photo est trop sombre.', 'Mets-toi près d’une fenêtre.'], texte: 'Pose ta feuille à plat sous une bonne lumière, sans ton ombre dessus.' },
+  reflets: { lignes: ['Il y a des reflets sur la page.', 'Penche un peu le téléphone.'], texte: 'Évite la lumière d’une lampe juste au-dessus d’une page brillante : décale-toi un peu.' },
+  trop_loin: { lignes: ['Ta photo est prise de trop loin.', 'Rapproche-toi du texte.'], texte: 'Approche le téléphone jusqu’à ce que les lettres soient bien nettes à l’écran.' },
+  ecriture: { lignes: ['J’ai du mal à lire l’écriture.', 'Tu peux aussi coller le texte.'], texte: 'Reprends la photo bien à plat et de près, ou tape les points importants dans « Coller le texte ».' },
+};
 
-// ─── Formats de révision ─────────────────────────────────────────────
-const formats = [
-  { id: 'resume',     icon: <ResumeIcon />, name: 'Résumé',        tone: 'green',  to: '/resume',     getCount: l => l.resumeMinutes ?? 2, unit: 'min' },
-  { id: 'flashcards', icon: <FlashcardsIcon />, name: 'Flashcards',    tone: 'violet', to: '/flashcards', getCount: l => l.flashcardsCount, unit: 'cartes' },
-  { id: 'mindmap',    icon: <MindmapIcon />, name: 'Carte mentale', tone: 'pink',   to: '/mindmap',    getCount: () => null,             unit: null },
-  { id: 'quiz',       icon: <QuizIcon />, name: 'Quiz',          tone: 'orange', to: '/quiz',       getCount: l => l.quizCount,       unit: 'questions' },
+const POSE_ETAPE = { '/resume': 'reading', '/flashcards': 'flashcard', '/quiz': 'quiz' };
+
+// ─── Préparation (handoff Scanner du 21/10) ──────────────────────────
+// La progression vient du flux de l'analyse ; phrase et pose changent par palier, et les 4
+// formats se cochent un par un (cosmétique : l'IA les écrit dans la même réponse).
+const PALIERS = [
+  { des: 0, phrase: 'Je lis ta leçon.', humeur: 'reflechit' },
+  { des: 16, phrase: 'Je repère l’essentiel.', humeur: 'reflechit' },
+  { des: 35, phrase: 'Je prépare tes flashcards.', humeur: 'determine' },
+  { des: 57, phrase: 'J’écris le quiz.', humeur: 'determine' },
+  { des: 78, phrase: 'Je trace la carte mentale.', humeur: 'reflechit' },
+  { des: 95, phrase: 'C’est prêt.', humeur: 'fier' },
 ];
-
-// ─── Écran de chargement ─────────────────────────────────────────────
-const STEPS = [
-  { id: 'flashcards', icon: <FlashcardsIcon />, name: 'Flashcards',   tone: 'violet', doneAt: 20 },
-  { id: 'quiz',       icon: <QuizIcon />, name: 'Quiz',          tone: 'orange', doneAt: 47 },
-  { id: 'resume',     icon: <ResumeIcon />, name: 'Résumé',        tone: 'green',  doneAt: 67 },
-  { id: 'mindmap',    icon: <MindmapIcon />, name: 'Carte mentale', tone: 'pink',   doneAt: 85 },
+const FORMATS_PREP = [
+  { nom: 'Résumé', pret: 35 },
+  { nom: 'Flashcards', pret: 57 },
+  { nom: 'Quiz corrigé', pret: 78 },
+  { nom: 'Carte mentale', pret: 95 },
 ];
-
-function getStepState(index, progress) {
-  if (progress >= STEPS[index].doneAt) return 'done';
-  const prevDone = index === 0 ? true : progress >= STEPS[index - 1].doneAt;
-  return prevDone ? 'active' : 'pending';
-}
 
 // ─── Composant ────────────────────────────────────────────────────────
 export default function Analyse() {
   const [isLoading, setIsLoading]     = useState(true);
   const [error, setError]             = useState(null);
+  const [raison, setRaison]           = useState(null); // raison d'un refus du scan (liste fermée)
   const [lesson, setLesson]           = useState(null);
   const [progress, setProgress]       = useState(0);
   const [showPremium, setShowPremium] = useState(false);
   const [noLesson, setNoLesson]       = useState(false);
   const navigate   = useNavigate();
+  const location   = useLocation();
   const isDesktop  = useIsDesktop();
-  const { getUserLevel, isGuest } = useAuth();
+  const { getUserLevel, isGuest, hasRevizPlus, revizPlusOffert } = useAuth();
   const userLevel  = getUserLevel();
   const calledRef  = useRef(false);
 
@@ -179,7 +189,7 @@ export default function Analyse() {
       .catch(err => {
         setError(err.message);
         setIsLoading(false);
-        track('scan_erreur', { code: scanErrorCode(err?.message), source: 'texte' });
+        track('scan_erreur', { code: scanErrorCode(err?.message), source: 'texte', ...(err?.raison ? { raison: err.raison } : {}) });
       });
   }
 
@@ -203,7 +213,8 @@ export default function Analyse() {
       .catch(err => {
         setError(err.message);
         setIsLoading(false);
-        track('scan_erreur', { code: scanErrorCode(err?.message), source: 'photo' });
+        setRaison(err?.raison ?? null);
+        track('scan_erreur', { code: scanErrorCode(err?.message), source: 'photo', ...(err?.raison ? { raison: err.raison } : {}) });
       });
   }
 
@@ -220,7 +231,7 @@ export default function Analyse() {
   const fromProgramme = isProgrammeLessonId(coachLessonId);
 
   const errorMessages = {
-    NON_SCOLAIRE:    { title: "Ça n'a pas l'air d'une leçon", sub: "Réviz ne marche qu'avec des cours et des leçons. Scanne une vraie leçon pour lancer ta séance." },
+    NON_SCOLAIRE:    { title: "Ça n'a pas l'air d'une leçon", sub: "Je n'y trouve pas de cours. Si c'est bien ta leçon, reprends la photo en cadrant tout le texte, bien à plat." },
     RATE_LIMIT:      { title: 'Trop de scans d\'un coup', sub: 'Patiente un petit moment, puis réessaie.' },
     NETWORK_ERROR:   { title: 'Pas de connexion', sub: 'Vérifie ta connexion internet et réessaie.' },
     TIMEOUT:         { title: 'Ça a pris trop de temps', sub: 'Vérifie ta connexion et réessaie.' },
@@ -234,237 +245,344 @@ export default function Analyse() {
     INVALID_API_KEY: { title: 'Oups, ça a coincé', sub: 'Réessaie dans un moment.' },
   };
   const errInfo = errorMessages[error] ?? { title: 'Oups, ça a coincé', sub: 'Vérifie ta connexion et réessaie.' };
+  // Écran d'erreur (handoff Scanner) : photo illisible, connexion coupée, ou le message du cas.
+  const parPhoto = !!localStorage.getItem('reviz-captured-image');
+  // Les sorties de l'écran d'erreur remplacent l'analyse : revenir dessus relancerait l'appel à l'IA.
+  const verScan = () => navigate(parPhoto ? '/scan' : '/scan?mode=texte', { replace: true });
+  // Photo illisible : le conseil qui correspond à ce que le modèle a vu (floue, coupée…).
+  const conseil = error === 'ILLISIBLE' ? CONSEILS_ILLISIBLE[raison] : null;
+  const erreur = ['INVALID_JSON', 'EMPTY_RESPONSE', 'IMAGE_TOO_LARGE', 'ILLISIBLE'].includes(error) ? {
+    humeur: 'reflechit', geste: 'gratterTete',
+    lignes: conseil ? conseil.lignes : parPhoto ? ['Je n’arrive pas à lire cette photo.', 'Reprends-la plus droite et mieux éclairée.'] : ['Je n’arrive pas à lire ce texte.', 'Vérifie que c’est bien ta leçon.'],
+    titre: parPhoto ? 'On recommence la photo ?' : 'On réessaie ?',
+    texte: conseil ? conseil.texte : parPhoto ? 'Pose ta feuille à plat, près d’une fenêtre ou sous une lampe, et approche-toi jusqu’à ce que les lettres soient nettes.' : 'Recolle le texte de ta leçon, ou prends-la directement en photo.',
+    action: [parPhoto ? 'Reprendre la photo' : 'Modifier le texte', verScan],
+    autre: [parPhoto ? 'Coller le texte' : 'Prendre une photo', () => navigate(parPhoto ? '/scan?mode=texte' : '/scan', { replace: true })],
+  } : ['NETWORK_ERROR', 'TIMEOUT'].includes(error) ? {
+    humeur: 'inquiet',
+    lignes: ['La connexion s’est coupée.', parPhoto ? 'Ta photo n’est pas perdue.' : 'Ton texte n’est pas perdu.'],
+    titre: 'On réessaie dans un instant ?',
+    texte: 'Vérifie ton Wi-Fi ou tes données mobiles, puis relance l’envoi.',
+    action: ['Réessayer', () => window.location.reload()],
+    autre: ['Plus tard', () => navigate('/cours', { replace: true })],
+  } : {
+    humeur: 'inquiet', geste: 'gratterTete',
+    lignes: [errInfo.title + (/[.!?]$/.test(errInfo.title) ? '' : '.'), 'Rien de grave, on recommence.'],
+    titre: errInfo.title,
+    texte: errInfo.sub,
+    action: errInfo.cta ? [errInfo.cta.label, () => navigate(errInfo.cta.to, { replace: true })] : ['Retour au scan', verScan],
+    // Refus « pas une leçon » : la même leçon existe souvent déjà dans le programme, l'élève révise quand même.
+    autre: error === 'NON_SCOLAIRE'
+      ? ['Trouver mon chapitre', () => navigate('/programme', { replace: true })]
+      : ['Plus tard', () => navigate('/cours', { replace: true })],
+  };
+
+  // ── Où en est l'élève ──
+  const total = displayLesson.flashcardsCount ?? 0;
+  const avancement = lesson && coachLessonId ? lessonProgress(coachLessonId, total) : null;
+  const lessonRevisions = coachLessonId ? loadRevisions().filter(r => r.lessonId === coachLessonId) : [];
+  const aOuvert = type => lessonRevisions.some(r => r.type === type);
+  const step = nextStep(displayLesson, avancement, aOuvert);
+  // À découvrir : rien vu ni ouvert ; maîtrisé : toutes les cartes vues, aucune à revoir.
+  const etat = !avancement || (avancement.seen === 0 && lessonRevisions.length === 0) ? 'decouvrir'
+    : avancement.state === 'maitrise' ? 'maitrise' : 'encours';
+  const sues = avancement ? avancement.seen - avancement.seenDue : 0;
+  const aRevoir = avancement?.seenDue ?? 0;
+  const pastille = etat === 'decouvrir' ? 'À découvrir'
+    : etat === 'maitrise' ? 'Maîtrisé'
+    : aRevoir > 0 ? `${pluriel(aRevoir, 'carte')} à travailler`
+    : avancement.seen < total ? `${avancement.seen} / ${total} cartes vues` : 'Commencé';
+
+  // Score au quiz (enregistré à la fin du quiz depuis le 21/10).
+  const scoreQuiz = coachLessonId ? quizScore(coachLessonId) : null;
+  // Ce que dit Réviz : où en est l'élève, et la prochaine action.
+  const suite = { '/resume': 'On commence par le résumé ?', '/flashcards': aRevoir > 0 ? 'On revoit tes cartes ?' : 'On finit les flashcards ?', '/quiz': 'Place au quiz ?' }[step.to];
+  const lignes = etat === 'decouvrir' ? ['Nouveau chapitre.', 'On commence par le résumé ?']
+    : etat === 'maitrise' ? [scoreQuiz ? `${scoreQuiz.dernier.score} sur ${scoreQuiz.dernier.total} au quiz corrigé.` : 'Chapitre maîtrisé.', 'Une révision rapide dans une semaine.']
+    : avancement.seen > 0 ? [`${avancement.seen} ${avancement.seen > 1 ? 'cartes' : 'carte'} sur ${total} déjà vues.`, suite]
+    : ['Résumé lu.', suite];
+
+  // Ton parcours : Résumé → Flashcards → Quiz.
+  const cartesFaites = avancement && total > 0 && avancement.seen === total && aRevoir === 0;
+  const faits = { resume: aOuvert('resume') || (avancement?.seen ?? 0) > 0, flashcards: !!cartesFaites, quiz: aOuvert('quiz') };
+  const enCours = ['resume', 'flashcards', 'quiz'].find(id => `/${id}` === step.to && !faits[id]) ?? ['resume', 'flashcards', 'quiz'].find(id => !faits[id]);
+  const statut = id => (faits[id] ? 'fait' : id === enCours ? 'cours' : 'afaire');
+  const etapes = [
+    { id: 'resume', nom: 'Résumé', pose: 'reading', to: '/resume', meta: faits.resume ? 'Lu' : `${displayLesson.resumeMinutes ?? 2} min` },
+    { id: 'flashcards', nom: 'Flashcards', pose: 'flashcard', to: '/flashcards', meta: avancement?.seen ? `${avancement.seen} / ${total} vues` : pluriel(total, 'carte') },
+    { id: 'quiz', nom: 'Quiz corrigé', pose: 'quiz', to: '/quiz', meta: scoreQuiz ? `${scoreQuiz.dernier.score} / ${scoreQuiz.dernier.total}` : faits.quiz ? 'Fait' : pluriel(displayLesson.quizCount ?? 0, 'question') },
+  ].map(e => ({ ...e, statut: statut(e.id) }));
+  const nbFaites = etapes.filter(e => e.statut === 'fait').length;
+  const carteMentaleVue = aOuvert('mindmap');
+
+  const teinte = teinteMatiere(displayLesson.subject);
+  const varsTeinte = variablesTeinte(teinte);
+  // Juste après un scan, la fiche a remplacé le scan : « Mes leçons » mène aux leçons scannées.
+  const retour = () => (location.state?.depuisScan ? navigate('/cours', { replace: true })
+    : window.history.state?.idx > 0 ? navigate(-1) : navigate(fromProgramme ? '/programme' : '/cours'));
+  const points = displayLesson.keyPoints?.length ? displayLesson.keyPoints : (displayLesson.excerpt ? [displayLesson.excerpt] : []);
+  const [parle, setParle] = useState(false);
+  const pantin = useRef(null);
+  const texte = lignes.join('\n');
+  useEffect(() => { if (parle) pantin.current?.dire(texte); }, [texte, parle]);
+  // Si le moteur de Réviz ne charge pas, la bulle s'affiche quand même (page visible seulement).
+  useEffect(() => {
+    let t;
+    const essai = () => { t = setTimeout(() => (document.hidden ? essai() : setParle(true)), 4000); };
+    essai();
+    return () => clearTimeout(t);
+  }, []);
+  const [question, setQuestion] = useState('');
+  const demander = q => navigate(`/coach?lesson=${coachLessonId}`, { state: { question: q } });
 
   // ── Blocs de la page (le téléphone les empile, l'ordinateur les répartit) ──
-  const excerptCard = (
+  const boutonRetour = (
+    <button type="button" className="ch-retour" onClick={retour}>
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7" /></svg>
+      {fromProgramme ? 'Programme' : 'Mes leçons'}
+    </button>
+  );
+  const rondMatiere = (
+    <span className="ch-matiere" aria-hidden="true"><Mascot pose={subjectMascot(displayLesson.subject)} size={isDesktop ? 92 : 56} alt="" /></span>
+  );
+  const titres = (
     <>
-      {/* Résumé / excerpt */}
-      {displayLesson.excerpt && (
-        <div className="rv-card rv-card--padded analyse-excerpt-card">
-          <span className="rv-eyebrow">{fromProgramme ? "L'essentiel du chapitre" : 'En bref'}</span>
-          <p className="analyse-excerpt-text">{displayLesson.excerpt}</p>
+      <span className="ch-surtitre">{displayLesson.subject} · {fromProgramme ? 'Programme' : 'Leçon scannée'}</span>
+      <h1 className="ch-titre">{displayLesson.title}</h1>
+      {avancement && <span className={`ch-pastille ch-pastille--${etat}${etat === 'encours' && aRevoir > 0 ? ' ch-pastille--revoir' : ''}`}><i aria-hidden="true" />{pastille}</span>}
+    </>
+  );
+  const reviz = (
+    <div className="ch-reviz">
+      <BulleReviz key={texte} lignes={lignes} parle={parle} className="ch-bulle" />
+      <Pantin
+        ref={pantin}
+        size={isDesktop ? 320 : 220}
+        expression={etat === 'maitrise' ? 'fier' : etat === 'encours' ? 'determine' : 'content'}
+        repli={null}
+        onEntree={() => setParle(true)}
+        onClick={() => pantin.current?.geste('saut')}
+        label="Réviz, ta mascotte"
+      />
+    </div>
+  );
+  const deco = (
+    <>
+      <span className="ch-deco ch-deco--a" aria-hidden="true" />
+      <span className="ch-deco ch-deco--b" aria-hidden="true" />
+      <span className="ch-deco ch-deco--c" aria-hidden="true" />
+      {isDesktop && <span className="ch-deco ch-deco--d" aria-hidden="true" />}
+      <span className="ch-point" aria-hidden="true" />
+      <span className="ch-grain" aria-hidden="true" />
+    </>
+  );
+  const hero = isDesktop ? (
+    <div className="ch-hero">
+      {deco}
+      <div className="ch-hero-int">
+        <div className="ch-haut">{boutonRetour}</div>
+        <div className="ch-hero-grille">
+          <div className="ch-hero-gauche">{rondMatiere}{titres}</div>
+          {reviz}
         </div>
-      )}
-    </>
-  );
-  const coachCard = (
-    <>
-      {/* Coach de révision — chat contextuel sur la leçon (Firestore requis
-          pour le contexte serveur → pas de coach sur le mock dev sans id). */}
-      {lesson && coachLessonId && !isGuest && (
-        <CoachEntryCard onClick={() => navigate(`/coach?lesson=${coachLessonId}`)} />
-      )}
-    </>
-  );
-  const formatGrid = (
-    <div className="analyse-format-grid">
-      {formats.map(f => {
-        const count = f.getCount(displayLesson);
-        return (
-          <Link key={f.id} to={f.to} className="rv-card rv-card--link rv-card--padded analyse-format-card">
-            <div className="analyse-format-card-top">
-              <div className={`rv-icon-square rv-icon-square--xl rv-icon-square--${f.tone}`}>
-                {f.icon}
-              </div>
-              <span className="analyse-format-arrow" aria-hidden="true">›</span>
-            </div>
-            <div className="analyse-format-name">{f.name}</div>
-            <div className="analyse-format-meta">{count !== null ? `${count} ${f.unit}` : 'Vue d\'ensemble'}</div>
-          </Link>
-        );
-      })}
+      </div>
+    </div>
+  ) : (
+    <div className="ch-hero">
+      {deco}
+      <div className="ch-haut">{boutonRetour}{rondMatiere}</div>
+      {titres}
+      {reviz}
     </div>
   );
 
-  // Avancement de l'élève : la carte « Ta prochaine étape » (et, sur
-  // ordinateur, le détail dans « Ton avancement »).
-  const avancement = lesson && coachLessonId
-    ? lessonProgress(coachLessonId, displayLesson.flashcardsCount ?? 0)
-    : null;
-  const lessonRevisions = coachLessonId ? loadRevisions().filter(r => r.lessonId === coachLessonId) : [];
-  const step = nextStep(displayLesson, avancement, type => lessonRevisions.some(r => r.type === type));
-  const total = displayLesson.flashcardsCount ?? 0;
-  const nextCard = (
-    <Link to={step.to} className="rv-next">
-      <span className="rv-eyebrow">Ta prochaine étape</span>
-      <span className="rv-next-title">{step.title}</span>
-      <span className="rv-next-sub">{step.sub}</span>
-      {avancement && avancement.seen > 0 && total > 0 && (
-        <span className="rv-next-progress">
-          <span className="rv-next-progress-row">
-            <span>{avancement.seen} / {total} cartes vues</span>
-            {avancement.seenDue > 0 && <span>{avancement.seenDue} à revoir</span>}
+  const prochaine = (
+    <div className="ch-etape-place">
+      <Link to={step.to} state={DEPUIS_FICHE} className="ch-etape">
+        <span className="ch-etape-haut">
+          <span className="ch-etape-rond" aria-hidden="true"><Mascot pose={POSE_ETAPE[step.to] ?? 'reading'} size={isDesktop ? 60 : 52} alt="" /></span>
+          <span className="ch-etape-txt">
+            <span className="ch-etape-surtitre">Prochaine étape</span>
+            <span className="ch-etape-titre">{step.title}</span>
+            <span className="ch-etape-sous">{step.sub}</span>
           </span>
-          <span className="rv-next-bar" aria-hidden="true">
-            <span style={{ width: `${Math.round(avancement.seen / total * 100)}%` }} />
-          </span>
+          {isDesktop
+            ? <span className="ch-etape-cta">{step.action}<Fleche /></span>
+            : <span className="ch-etape-go" aria-hidden="true"><Fleche /></span>}
         </span>
-      )}
-      <span className="rv-next-action">
-        {step.action}
-        <span aria-hidden="true">→</span>
+        {etat === 'encours' && total > 0 && total <= 16 && (
+          <span className="ch-segments-bloc" aria-hidden="true">
+            <span className="ch-segments">
+              {Array.from({ length: total }, (_, i) => (
+                <i key={i} className={i < sues ? 'ch-seg--sue' : i < sues + aRevoir ? 'ch-seg--revoir' : ''} />
+              ))}
+            </span>
+            <span className="ch-legende">
+              {sues > 0 && <span><i className="ch-seg--sue" />{pluriel(sues, 'sue')}</span>}
+              {aRevoir > 0 && <span><i className="ch-seg--revoir" />{aRevoir} à revoir</span>}
+              {total - sues - aRevoir > 0 && <span><i />{total - sues - aRevoir} à voir</span>}
+            </span>
+          </span>
+        )}
+      </Link>
+    </div>
+  );
+
+  const blocParcours = (
+    <section className="ch-bloc" aria-labelledby="ch-parcours">
+      <div className="ch-tete">
+        <h2 id="ch-parcours" className="ch-titre2">Ton parcours</h2>
+        <span className="ch-compte">{nbFaites} / 3</span>
+      </div>
+      <Parcours etapes={etapes} grand={isDesktop} etat={DEPUIS_FICHE} />
+      <Link to="/mindmap" state={DEPUIS_FICHE} className="ch-pilule">
+        <span className="ch-pilule-rond ch-pilule-rond--lavande" aria-hidden="true"><Mascot pose="thinking" size={46} alt="" /></span>
+        <span className="ch-pilule-txt">
+          <span className="ch-pilule-titre">Carte mentale</span>
+          <span className="ch-pilule-sous">{isDesktop ? 'Tout le chapitre sur une page, à ouvrir quand tu veux' : 'Tout le chapitre sur une page'}</span>
+        </span>
+        {carteMentaleVue
+          ? <span className="ch-pilule-coche" aria-label="vue"><Coche taille={14} /></span>
+          : <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6E675B" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>}
+      </Link>
+    </section>
+  );
+
+  const blocEssentiel = points.length > 0 && (
+    <section className="ch-bloc" aria-labelledby="ch-essentiel">
+      <div className="ch-tete">
+        <h2 id="ch-essentiel" className="ch-titre2">L’essentiel</h2>
+        <span className="ch-pilule-rond" aria-hidden="true"><Mascot pose="writing" size={46} alt="" /></span>
+      </div>
+      <ol className="ch-points">
+        {points.map((pt, i) => (
+          <li key={i}><span className="ch-point-num">{i + 1}</span><span className="ch-point-txt">{pt}</span></li>
+        ))}
+      </ol>
+    </section>
+  );
+
+  // Réviz IA : le coach passe par une API authentifiée, pas d'accès en mode essai.
+  const iaDispo = lesson && coachLessonId && !isGuest;
+  const suggestions = [
+    displayLesson.keyPoints?.[0] && `Explique-moi autrement : ${displayLesson.keyPoints[0].replace(/\.$/, '')}`,
+    'Donne-moi un exemple corrigé',
+  ].filter(Boolean);
+  const blocIA = iaDispo && (isDesktop ? (
+    <section className="ch-ia-carte" aria-labelledby="ch-ia">
+      <div className="ch-ia-tete">
+        <span className="ch-ia-anneau" aria-hidden="true"><span><Mascot pose="coach" size={44} alt="" /></span></span>
+        <span>
+          <h2 id="ch-ia" className="ch-ia-titre">Une question ?</h2>
+          <span className="ch-ia-sous">Réviz IA répond sur ce chapitre.</span>
+        </span>
+      </div>
+      <div className="ch-ia-suggestions">
+        {suggestions.map(q => <button key={q} type="button" className="ch-ia-suggestion" onClick={() => demander(q)}>{q}</button>)}
+      </div>
+      <form className="ch-ia-champ" onSubmit={e => { e.preventDefault(); if (question.trim()) demander(question.trim()); }}>
+        <input value={question} onChange={e => setQuestion(e.target.value)} placeholder="Pose ta question…" aria-label="Ta question à Réviz IA" />
+        <button type="submit" aria-label="Envoyer à Réviz IA" disabled={!question.trim()}>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6" /></svg>
+        </button>
+      </form>
+    </section>
+  ) : (
+    <Link to={`/coach?lesson=${coachLessonId}`} className="ch-pilule ch-pilule--ia">
+      <span className="ch-ia-anneau" aria-hidden="true"><span><Mascot pose="coach" size={38} alt="" /></span></span>
+      <span className="ch-pilule-txt">
+        <span className="ch-pilule-titre">Poser une question à Réviz IA</span>
+        <span className="ch-pilule-sous">Sur ce chapitre</span>
+      </span>
+      <span className="ch-ia-go" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round"><path d="M12 19V5M6 11l6-6 6 6" /></svg>
       </span>
     </Link>
-  );
-  const formatsSection = (
-    <>
-      <h2 className="rv-section-title">Tous les formats</h2>
-      {formatGrid}
-    </>
-  );
+  ));
 
   if (noLesson) return <MissingLessonState title="Ta leçon" />;
 
   return (
-    <div className="app analyse-page">
+    <div className={`app app--no-halo analyse-page ch-page${isDesktop ? ' app--large ch-page--large' : ''}`}>
 
-      {/* ── Écran de chargement ── */}
-      {isLoading && (
-        <div className="analyse-loading-screen">
-          <Mascot
-            pose="thinking"
-            size={180}
-            glow
-            animate
-            priority
-            alt=""
-            aria-hidden="true"
-          />
-          <div className="analyse-ls-title">Réviz prépare<br/>ta séance</div>
-          <div className="analyse-ls-grid">
-            {STEPS.map((step, i) => {
-              const state = getStepState(i, progress);
-              return (
-                <div
-                  key={step.id}
-                  className={`analyse-ls-card analyse-ls-card--${state} analyse-ls-card--${step.tone}`}
-                >
-                  {state === 'active' && <div className="analyse-ls-shimmer" />}
-                  {state === 'done'   && <span className="analyse-ls-badge">✓</span>}
-                  <span className="analyse-ls-emoji">{step.icon}</span>
-                  <span className="analyse-ls-name">{step.name}</span>
-                </div>
-              );
-            })}
+      {/* ── Réviz prépare la leçon ── */}
+      {isLoading && (() => {
+        const palier = [...PALIERS].reverse().find(x => progress >= x.des);
+        const enCours = FORMATS_PREP.findIndex(f => progress < f.pret);
+        return (
+          <div className="an-etat" style={variablesTeinte(TEINTES.peche)}>
+            <div className="ch-hero an-etat-hero">
+              <span className="ch-deco ch-deco--a" aria-hidden="true" />
+              <span className="ch-deco ch-deco--b" aria-hidden="true" />
+              <span className="ch-grain" aria-hidden="true" />
+              <span className="an-etat-sur">Ta leçon est entre de bonnes mains</span>
+              <BulleReviz key={palier.phrase} lignes={[palier.phrase, 'Environ 30 secondes.']} grande={isDesktop} className="an-etat-bulle" />
+              <Pantin size={isDesktop ? 320 : 220} expression={palier.humeur} entree="coucou" repli={null} label="Réviz, ta mascotte" />
+            </div>
+            <div className="an-etat-carte" role="status" aria-label={`${palier.phrase} ${progress} %`}>
+              <h1 className="an-etat-titre">Ta leçon devient</h1>
+              <ul className="an-formats">
+                {FORMATS_PREP.map((f, i) => {
+                  const etat = progress >= f.pret ? 'pret' : i === enCours ? 'cours' : 'afaire';
+                  return (
+                    <li key={f.nom} className={`an-format an-format--${etat}`}>
+                      <span className="an-format-rond" aria-hidden="true">{etat === 'pret' && <Coche />}</span>
+                      <b>{f.nom}</b>
+                      {etat !== 'afaire' && <span>{etat === 'pret' ? 'Prêt' : 'En cours'}</span>}
+                    </li>
+                  );
+                })}
+              </ul>
+              <div className="an-barre"><span className="an-barre-fond"><i style={{ width: `${Math.max(progress, 4)}%` }} /></span><b>{progress}&nbsp;%</b></div>
+            </div>
           </div>
-          <div className={`analyse-ls-bar${progress > 0 ? ' analyse-ls-bar--visible' : ''}`}>
-            <div className="analyse-ls-bar-fill" style={{ width: progress + '%' }} />
-          </div>
-        </div>
-      )}
+        );
+      })()}
 
-      {/* ── Écran d'erreur ── */}
+      {/* ── Erreur, sans dramatiser ── */}
       {error && !isLoading && (
-        <div className="analyse-loading-screen">
-          <Mascot
-            pose="confused"
-            size={200}
-            glow
-            priority
-            alt=""
-            aria-hidden="true"
-          />
-          <div className="analyse-ls-title">
-            {errInfo.title}
+        <div className="an-etat" style={variablesTeinte(TEINTES.peche)}>
+          <div className="ch-hero an-etat-hero">
+            <span className="ch-deco ch-deco--a" aria-hidden="true" />
+            <span className="ch-deco ch-deco--b" aria-hidden="true" />
+            <span className="ch-grain" aria-hidden="true" />
+            <div className="an-etat-haut">
+              <button type="button" className="an-etat-fermer" onClick={() => navigate('/cours', { replace: true })} aria-label="Fermer">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12" /></svg>
+              </button>
+            </div>
+            <BulleReviz lignes={erreur.lignes} grande={isDesktop} className="an-etat-bulle" />
+            <Pantin size={isDesktop ? 300 : 210} expression={erreur.humeur} entree={erreur.geste} repli={null} label="Réviz, ta mascotte" />
           </div>
-          <p className="analyse-error-sub">
-            {errInfo.sub}
-          </p>
-          {errInfo.cta && (
-            <button
-              type="button"
-              className="rv-btn-cta"
-              onClick={() => navigate(errInfo.cta.to)}
-            >
-              {errInfo.cta.label}
-            </button>
-          )}
-          <button
-            type="button"
-            className="rv-btn-cta rv-btn-cta--ghost"
-            onClick={() => navigate('/scan')}
-          >
-            ← Retour au scan
-          </button>
+          <div className="an-etat-carte">
+            <h1 className="an-etat-titre">{erreur.titre}</h1>
+            <p className="an-etat-txt">{erreur.texte}</p>
+            <button type="button" className="an-etat-btn" onClick={erreur.action[1]}>{erreur.action[0]}</button>
+            <button type="button" className="an-etat-btn an-etat-btn--creme" onClick={erreur.autre[1]}>{erreur.autre[0]}</button>
+          </div>
         </div>
       )}
 
-      <PageHeader
-        variant="back"
-        // Retour contextuel : jamais vers la caméra quand on consulte une
-        // leçon depuis Home/Cours (Scan démarre getUserMedia au mount).
-        onBack={() => (window.history.state?.idx > 0 ? navigate(-1) : navigate('/cours'))}
-      />
-
-      {/* ── Content ── */}
-      <div className={`content analyse-content${(isLoading || error) ? ' analyse-content--hidden' : ''}`}>
-
-        {/* Intro façon Home — titre de la leçon, matière, mascotte de la matière */}
-        <PageIntro
-          title={displayLesson.title}
-          sub={`${displayLesson.subject} · ${fromProgramme ? 'chapitre du programme' : 'leçon scannée'}`}
-          mascot={subjectMascot(displayLesson.subject)}
-          mascotSize={140}
-          className={`analyse-intro${displayLesson.title.length > 34 ? ' rv-page-intro--long' : ''}`}
-        />
-
+      <div className={`content analyse-content ch-defile${(isLoading || error) ? ' analyse-content--hidden' : ''}`} style={varsTeinte}>
+        {hero}
+        {prochaine}
         {isDesktop ? (
-          <div className="analyse-desk">
-            <div className="analyse-desk-col">
-              {nextCard}
-              {formatsSection}
-              {coachCard}
-            </div>
-            <div className="analyse-desk-col">
-              {excerptCard}
-              {displayLesson.keyPoints?.length > 0 && (
-                <div className="rv-card rv-card--padded analyse-retenir">
-                  <span className="rv-eyebrow">À retenir</span>
-                  <ul className="rv-bullets">
-                    {displayLesson.keyPoints.map(k => <li key={k}>{k}</li>)}
-                  </ul>
-                </div>
-              )}
-              {avancement && (
-                <div className="rv-card rv-card--padded analyse-avancement">
-                  <div className="analyse-avancement-head">
-                    <span className="rv-eyebrow">Ton avancement</span>
-                    <span className={`rv-pill${STATE_TONE[avancement.state] ? ` rv-pill--${STATE_TONE[avancement.state]}` : ''}`}>{CHAPTER_STATE_LABEL[avancement.state]}</span>
-                  </div>
-                  <div className="analyse-avancement-row">
-                    <span>Cartes vues</span>
-                    <b>{avancement.seen} / {displayLesson.flashcardsCount}</b>
-                  </div>
-                  <div className="rv-bar rv-bar--neutral-bg" aria-hidden="true">
-                    <div
-                      className="rv-bar-fill rv-bar-fill--orange"
-                      style={{ width: `${displayLesson.flashcardsCount ? Math.round(avancement.seen / displayLesson.flashcardsCount * 100) : 0}%` }}
-                    />
-                  </div>
-                  <div className="analyse-avancement-row">
-                    <span>À travailler aujourd'hui</span>
-                    <b>{avancement.due} carte{avancement.due > 1 ? 's' : ''}</b>
-                  </div>
-                  <div className="analyse-avancement-row">
-                    <span>Séances</span>
-                    <b>{avancement.sessions}{avancement.last ? ` · la dernière ${formatDay(avancement.last)}` : ''}</b>
-                  </div>
-                </div>
-              )}
-            </div>
+          <div className={`ch-grille${blocIA ? ' ch-grille--ia' : ''}`}>
+            <div className="ch-col">{blocParcours}{blocEssentiel}</div>
+            {blocIA && <aside className="ch-col">{blocIA}</aside>}
           </div>
         ) : (
-          <>
-            {nextCard}
-            {formatsSection}
-            {coachCard}
-            {excerptCard}
-          </>
+          <div className="ch-pile">
+            {blocParcours}
+            {blocEssentiel}
+            {blocIA}
+          </div>
         )}
       </div>
 
       <BottomNav />
-      {showPremium && <PremiumModal onClose={() => navigate('/scan')} />}
+      {/* Réviz+ (ou offert) a déjà la limite la plus haute : la fenêtre ne le propose pas. */}
+      {showPremium && <LimiteAtteinte type="scan" abonne={hasRevizPlus} offertJusquau={revizPlusOffert ? DERNIER_JOUR_OFFERT : null} onClose={() => navigate('/scan', { replace: true })} />}
     </div>
   );
 }

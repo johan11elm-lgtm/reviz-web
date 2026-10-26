@@ -1,0 +1,76 @@
+/* Page d'état (gabarit de la 404, handoff Claude Design du 22/10) : héros pastel + grain, Réviz.
+ * Téléphone : texte et boutons sous le héros ; ordinateur : tout dans le héros (64 px). */
+.pe-page {
+  --pe-orange: #C25407; --pe-tranche: #8F3E05;
+  min-height: 100dvh;
+  background: #F8EFE7;
+  color: var(--ch-encre);
+}
+.pe-page .pe-defile {
+  flex: 1; min-height: 0;
+  overflow-y: auto; overflow-x: hidden;
+  padding-bottom: calc(32px + env(safe-area-inset-bottom, 0px));
+  scrollbar-width: none;
+}
+.pe-defile::-webkit-scrollbar { display: none; }
+
+/* ── Héros ── */
+.pe-page .pe-hero { padding: calc(env(safe-area-inset-top, 0px) + 22px) 24px 26px; }
+.pe-hero > :not(.ch-grain):not(.pe-deco):not(.pe-point) { position: relative; z-index: 1; }
+.pe-deco { position: absolute; border-radius: 50%; background: var(--ch-bulle); }
+.pe-deco--a { width: 200px; height: 200px; right: -90px; top: 200px; }
+.pe-deco--b { width: 150px; height: 150px; left: -80px; top: 380px; }
+.pe-point { position: absolute; width: 22px; height: 22px; left: 52px; top: 278px; border-radius: 50%; background: var(--ch-point); }
+.pe-logo {
+  display: inline-block;
+  font-family: var(--font-display); font-size: 22px; font-weight: 800; letter-spacing: -.03em;
+  color: var(--ch-encre); text-decoration: none;
+}
+.pe-logo:focus-visible, .pe-btn:focus-visible, .pe-retour:focus-visible { outline: 3px solid var(--ch-encre); outline-offset: 3px; border-radius: 8px; }
+.pe-retour { position: relative; z-index: 2; }
+.pe-corps { display: flex; flex-direction: column; align-items: center; margin-top: 40px; }
+.pe-textes { align-self: stretch; }
+.pe-sur { display: block; font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--ch-doux); }
+.pe-titre { margin: 6px 0 0; font-family: var(--font-display); font-size: 38px; font-weight: 800; line-height: 1.02; letter-spacing: -.04em; color: var(--ch-encre); }
+.pe-reviz { margin-top: 26px; }
+
+/* ── Dessous (téléphone) ── */
+.pe-bas { display: flex; flex-direction: column; align-items: center; gap: 28px; padding: 40px 24px 0; }
+.pe-actions { display: flex; flex-direction: column; align-items: stretch; gap: 14px; width: 100%; }
+.pe-texte { margin: 0; max-width: 300px; font-size: 17px; font-weight: 500; line-height: 1.5; text-align: center; color: var(--ch-doux); }
+.pe-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 100%; min-height: 56px; box-sizing: border-box; padding: 0 28px;
+  border-radius: 999px; background: var(--pe-orange); box-shadow: 0 5px 0 var(--pe-tranche);
+  border: 0; font-family: 'Geist', sans-serif; font-size: 17px; font-weight: 700; color: #fff; text-decoration: none;
+  cursor: pointer; transition: transform .08s, box-shadow .08s;
+}
+.pe-btn--second { background: #fff; box-shadow: 0 5px 0 var(--ch-bulle); color: var(--ch-encre); }
+.pe-btn:focus-visible { border-radius: 999px; }
+.pe-btn:active { transform: translateY(4px); box-shadow: 0 1px 0 var(--pe-tranche); }
+.pe-btn--second:active { box-shadow: 0 1px 0 var(--ch-bulle); }
+
+/* ── Ordinateur ── */
+.pe-page--large .pe-defile { padding-bottom: 48px; }
+.pe-page.pe-page--large .pe-hero { min-height: 640px; box-sizing: border-box; padding: 32px 56px 110px; }
+.pe-page--large .pe-deco--a { width: 520px; height: 520px; right: 120px; top: -260px; }
+.pe-page--large .pe-deco--b { width: 300px; height: 300px; left: -120px; top: 300px; }
+.pe-page--large .pe-point { left: auto; right: calc(50% - 142px); top: 420px; }
+.pe-page--large .pe-logo { font-size: 26px; }
+.pe-page--large .pe-corps {
+  display: grid; grid-template-columns: minmax(0, 1fr) 430px; align-items: center; gap: 40px;
+  max-width: 1040px; margin: 70px auto 0;
+}
+.pe-page--large .pe-sur { font-size: 12px; }
+.pe-page--large .pe-titre { font-size: 64px; letter-spacing: -.045em; }
+.pe-page--large .pe-texte { max-width: none; margin-top: 18px; font-size: 19px; text-align: left; }
+.pe-page--large .pe-actions { flex-direction: row; flex-wrap: wrap; width: auto; margin-top: 34px; }
+.pe-page--large .pe-btn { width: auto; min-height: 56px; }
+.pe-page--large .pe-reviz { margin: 0; }
+
+@media (max-width: 1180px) {
+  .pe-page.pe-page--large .pe-hero { padding-left: 40px; padding-right: 40px; }
+}
+
+/* Page hors parcours : pas de menu de l'app (NavHaut, affiché aux connectés sur ordinateur). */
+body:has(.pe-page--seule) .nav-haut { display: none; }

@@ -10,6 +10,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { contexteBattle } from '../services/battleConnexion'
 import { apiFetch } from '../services/apiClient'
 import { track } from '../services/statsService'
+import { noterBattleDuJour } from '../services/battleDuJour'
 import {
   ecouterBattle, ecouterHorloge, tenirPresence, rejoindreBattle, lancerPartie, repondre,
   avancer, declarerAbandon, quitterBattle, lancerRevanche, marquerAbsent,
@@ -193,6 +194,7 @@ export function useBattle(code, { prenom, onRevanche }) {
     if (!joue || !issue || finComptee.current) return
     finComptee.current = true
     track('battle_terminee', { issue, joueur: ctx.avecCompte ? 'compte' : 'invite' })
+    noterBattleDuJour()
   }, [ctx, joue, issue])
 
   // --- Actions ---
@@ -229,8 +231,12 @@ export function useBattle(code, { prenom, onRevanche }) {
     : contenu?.erreur ? 'chapitre'
     : 'pret'
 
+  // Adversaire parti : le temps qu'il lui reste pour revenir avant le forfait (ms), sinon null.
+  const retourDans = adversaire?.present === false && absentDepuis.current !== null
+    ? Math.max(0, RETOUR_MS - (maintenantLocal - absentDepuis.current)) : null
+
   return {
-    etat, salon, role, uid, adversaire, phase, partie, maintenant,
+    etat, salon, role, uid, adversaire, phase, partie, maintenant, retourDans,
     avecCompte: !!ctx?.avecCompte,
     // Ce que le serveur a rangé : { [uid]: { delta, aura?, comptee, sansCompte? } }
     compte: salon?.compte ?? compte,

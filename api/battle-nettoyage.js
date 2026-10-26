@@ -5,7 +5,8 @@
 // (une partie dure quelques minutes) et les marques de comptage Firestore
 // (battlesComptees) de plus de 48 heures. C'est la promesse de la politique
 // de confidentialité : une partie disparaît au plus tard 48 heures après sa
-// création. Seul Vercel peut l'appeler : il envoie CRON_SECRET dans
+// création. Purge aussi les essais sans révision depuis 13 mois (essais/,
+// voir api/track.js). Seul Vercel peut l'appeler : il envoie CRON_SECRET dans
 // l'en-tête Authorization de ses appels de cron.
 // -------------------------------------------------------
 import { getDb, getRtdb } from './_firebaseAdmin.js'
@@ -15,8 +16,10 @@ export const config = { maxDuration: 60 }
 export const AGE_SALON_MS = 60 * 60 * 1000
 export const AGE_MARQUE_MS = 48 * 60 * 60 * 1000
 const LOT_FIRESTORE = 400
+// Durée de vie d'un identifiant de mesure d'audience selon la CNIL : 13 mois.
+export const AGE_ESSAI_MS = 395 * 24 * 60 * 60 * 1000
 
-/** @returns {Promise<{ salons: number, marques: number }>} ce qui a été supprimé */
+/** @returns {Promise<{ salons: number, marques: number, essais: number }>} ce qui a été supprimé */
 export async function nettoyer({ rtdb, db, maintenant = Date.now() }) {
   // Index sur creeLe : database.rules.json (.indexOn).
   const vieux = await rtdb.ref('battles').orderByChild('creeLe').endAt(maintenant - AGE_SALON_MS).get()
@@ -32,7 +35,11 @@ export async function nettoyer({ rtdb, db, maintenant = Date.now() }) {
     marques.docs.slice(i, i + LOT_FIRESTORE).forEach(doc => lot.delete(doc.ref))
     await lot.commit()
   }
-  return { salons, marques: marques.docs.length }
+
+  const essais = await db.collection('essais')
+    .where('derniereRevisionAt', '<', maintenant - AGE_ESSAI_MS).limit(LOT_FIRESTORE).get()
+  for (const doc of essais.docs) await db.recursiveDelete(doc.ref)
+  return { salons, marques: marques.docs.length, essais: essais.docs.length }
 }
 
 export default async function handler(req, res) {

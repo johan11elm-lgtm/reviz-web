@@ -37,7 +37,7 @@ describe('<Essai /> — mode essai', () => {
   it('démarre la session d’essai et ouvre Mon programme', () => {
     renderPage()
     fireEvent.change(screen.getByLabelText('Ton prénom'), { target: { value: 'Léa' } })
-    fireEvent.click(screen.getByRole('button', { name: '3ème' }))
+    fireEvent.click(screen.getByRole('radio', { name: '3e' }))
     fireEvent.click(screen.getByRole('button', { name: /C'est parti/ }))
     expect(auth.loginAsGuest).toHaveBeenCalledWith({ prenom: 'Léa', level: { cycle: 'college', classe: '3ème', specialites: [] } })
     expect(nav).toHaveBeenCalledWith('/programme', { replace: true })
@@ -45,18 +45,18 @@ describe('<Essai /> — mode essai', () => {
 
   it('un élève venu d’une fiche publique sans chapitre a sa classe cochée et ouvre la matière', () => {
     renderPage('/essai?classe=3%C3%A8me&matiere=maths&via=pinterest')
-    expect(screen.getByRole('button', { name: '3ème' })).toHaveAttribute('aria-pressed', 'true')
+    expect(screen.getByRole('radio', { name: '3e' })).toHaveAttribute('aria-checked', 'true')
     fireEvent.change(screen.getByLabelText('Ton prénom'), { target: { value: 'Léa' } })
     fireEvent.click(screen.getByRole('button', { name: /C'est parti/ }))
     expect(auth.loginAsGuest).toHaveBeenCalledWith({ prenom: 'Léa', level: { cycle: 'college', classe: '3ème', specialites: [] } })
-    expect(nav).toHaveBeenCalledWith('/programme/maths', { replace: true })
+    expect(nav).toHaveBeenCalledWith('/programme?matiere=maths', { replace: true })
   })
 
   it('venu d’une fiche avec son chapitre : le prénom suffit, et le quiz du chapitre s’ouvre', async () => {
     renderPage('/essai?classe=3%C3%A8me&matiere=maths&chapitre=theoreme-de-thales&via=fiche')
-    expect(await screen.findByRole('heading', { name: 'Teste-toi sur ce chapitre' })).toBeInTheDocument()
-    expect(screen.getByText('Théorème de Thalès')).toBeInTheDocument()
-    expect(screen.queryByRole('button', { name: '3ème' })).not.toBeInTheDocument()
+    expect(await screen.findByText('Teste-toi sur ce chapitre. Juste ton prénom avant.')).toBeInTheDocument()
+    expect(screen.getByText('Théorème de Thalès (3e)')).toBeInTheDocument()
+    expect(screen.queryByRole('radio', { name: '3e' })).not.toBeInTheDocument()
     fireEvent.change(screen.getByLabelText('Ton prénom'), { target: { value: 'Léa' } })
     fireEvent.click(screen.getByRole('button', { name: /Lancer le quiz/ }))
     expect(auth.loginAsGuest).toHaveBeenCalledWith({ prenom: 'Léa', level: { cycle: 'college', classe: '3ème', specialites: [] } })
@@ -67,11 +67,11 @@ describe('<Essai /> — mode essai', () => {
   it('un chapitre inconnu retombe sur le formulaire habituel et la matière', async () => {
     renderPage('/essai?classe=3%C3%A8me&matiere=maths&chapitre=inconnu')
     await waitFor(() => expect(prog.loadCatalogue).toHaveBeenCalled())
-    expect(await screen.findByRole('button', { name: '3ème' })).toHaveAttribute('aria-pressed', 'true')
+    expect(await screen.findByRole('radio', { name: '3e' })).toHaveAttribute('aria-checked', 'true')
     fireEvent.change(screen.getByLabelText('Ton prénom'), { target: { value: 'Léa' } })
     fireEvent.click(screen.getByRole('button', { name: /C'est parti/ }))
     expect(prog.openChapter).not.toHaveBeenCalled()
-    expect(nav).toHaveBeenCalledWith('/programme/maths', { replace: true })
+    expect(nav).toHaveBeenCalledWith('/programme?matiere=maths', { replace: true })
   })
 
   it('un essai déjà commencé ouvre directement le quiz du chapitre de la fiche', async () => {
@@ -85,21 +85,17 @@ describe('<Essai /> — mode essai', () => {
 
   it('une matière mal formée ou une classe de lycée dans le lien sont ignorées', () => {
     renderPage('/essai?classe=Terminale&matiere=../hack')
-    expect(screen.getByRole('button', { name: '3ème' })).toHaveAttribute('aria-pressed', 'false')
+    expect(screen.getByRole('radio', { name: '3e' })).toHaveAttribute('aria-checked', 'false')
     fireEvent.change(screen.getByLabelText('Ton prénom'), { target: { value: 'Léa' } })
-    fireEvent.click(screen.getByRole('button', { name: '4ème' }))
+    fireEvent.click(screen.getByRole('radio', { name: '4e' }))
     fireEvent.click(screen.getByRole('button', { name: /C'est parti/ }))
     expect(nav).toHaveBeenCalledWith('/programme', { replace: true })
   })
 
-  it('annonce le lycée « à venir » sans l’ouvrir : Mon programme s’arrête en 3e', () => {
+  it('seulement les classes du collège : Mon programme s’arrête en 3e', () => {
     renderPage()
-    const lycee = screen.getByRole('tab', { name: /Lycée/ })
-    expect(lycee).toBeDisabled()
-    expect(lycee).toHaveTextContent('à venir')
-    fireEvent.click(lycee)
-    expect(screen.getByRole('button', { name: '3ème' })).toBeInTheDocument()
-    expect(screen.queryByRole('button', { name: 'Terminale' })).not.toBeInTheDocument()
+    expect(screen.getAllByRole('radio').map(r => r.textContent)).toEqual(['6e', '5e', '4e', '3e'])
+    expect(screen.queryByRole('tab', { name: /Lycée/ })).not.toBeInTheDocument()
   })
 
   it('un enseignant venu de /profs ouvre directement le programme de la classe choisie', () => {
@@ -115,9 +111,25 @@ describe('<Essai /> — mode essai', () => {
     renderPage('/essai?prof=1&classe=CM2')
     expect(auth.loginAsGuest).not.toHaveBeenCalled()
     fireEvent.change(screen.getByLabelText('Ton prénom'), { target: { value: 'Léa' } })
-    fireEvent.click(screen.getByRole('button', { name: '5ème' }))
+    fireEvent.click(screen.getByRole('radio', { name: '5e' }))
     fireEvent.click(screen.getByRole('button', { name: /C'est parti/ }))
     expect(localStorage.getItem('reviz-decouverte-prof')).toBeNull()
+  })
+
+  it('un essai déjà commencé, sans fiche : on le reprend (son programme), pas de nouvel essai vide', () => {
+    auth.currentUser = { uid: 'invite-1' }
+    auth.isGuest = true
+    renderPage()
+    expect(nav).toHaveBeenCalledWith('/programme', { replace: true })
+    expect(screen.queryByLabelText('Ton prénom')).toBeNull()
+    expect(auth.loginAsGuest).not.toHaveBeenCalled()
+  })
+
+  it('un essai déjà commencé venu d’une fiche sans chapitre : sa matière', () => {
+    auth.currentUser = { uid: 'invite-1' }
+    auth.isGuest = true
+    renderPage('/essai?classe=3%C3%A8me&matiere=maths')
+    expect(nav).toHaveBeenCalledWith('/programme?matiere=maths', { replace: true })
   })
 
   it('un utilisateur déjà connecté est renvoyé à l’accueil', () => {

@@ -14,7 +14,7 @@ export function nextStep(lesson, progress, didFormat) {
     return { title: 'Lis le résumé', sub: `${lesson.resumeMinutes ?? 2} min pour découvrir l'essentiel, avant les cartes.`, to: '/resume', action: 'Lire le résumé' };
   }
   if (progress.seenDue > 0) {
-    return { title: `Revois tes ${progress.seenDue} carte${progress.seenDue > 1 ? 's' : ''}`, sub: "C'est le bon moment : elles commencent à s'effacer.", to: '/flashcards', action: 'Réviser les cartes' };
+    return { title: progress.seenDue > 1 ? `Revois tes ${progress.seenDue} cartes` : 'Revois ta carte', sub: "C'est le bon moment : elles commencent à s'effacer.", to: '/flashcards', action: 'Réviser les cartes' };
   }
   if (progress.seen < total) {
     const left = total - progress.seen;

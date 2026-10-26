@@ -1,0 +1,109 @@
+/* Héros teinté par la matière (fiche chapitre, Résumé…) : aplat --ch-fond, bulles, grain,
+ * retour, surtitre, titre, pastille d'état. La page pose les variables (utils/teinteMatiere). */
+.ch-page { --ch-encre: #1B1A23; --ch-doux: #6E675B; }
+/* ── Héros ── */
+.ch-hero {
+  position: relative;
+  padding: calc(env(safe-area-inset-top, 0px) + 12px) 20px 92px;
+  background: var(--ch-fond);
+  border-radius: 0 0 50% 50% / 0 0 44px 44px;
+  overflow: hidden;
+}
+.ch-grain {
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.45 0 0 0 0 0.25 0 0 0 0 0.1 0 0 0 .32 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: .5;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+.ch-deco { position: absolute; border-radius: 50%; background: var(--ch-bulle); }
+.ch-deco--a { width: 130px; height: 130px; top: 190px; left: -50px; }
+.ch-deco--b { width: 84px; height: 84px; top: 120px; right: -24px; }
+.ch-deco--c { width: 40px; height: 40px; top: 330px; right: 54px; }
+.ch-point { position: absolute; width: 14px; height: 14px; top: 300px; left: 40px; border-radius: 50%; background: var(--ch-point); }
+.ch-haut { position: relative; z-index: 2; display: flex; justify-content: space-between; align-items: center; }
+.ch-retour {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0 14px 0 8px;
+  border: 0;
+  border-radius: 999px;
+  background: #fff;
+  box-shadow: 0 4px 12px var(--ch-ombre);
+  font: 700 14px 'Geist', system-ui, sans-serif;
+  color: var(--ch-encre);
+  cursor: pointer;
+}
+.ch-matiere {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 6px 0 var(--ch-bulle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.ch-surtitre {
+  position: relative;
+  z-index: 1;
+  display: block;
+  margin-top: 18px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--ch-encre);
+  opacity: .7;
+}
+.ch-titre {
+  position: relative;
+  z-index: 1;
+  margin: 6px 0 0;
+  font-family: var(--font-display);
+  font-size: 36px;
+  font-weight: 800;
+  line-height: 1.02;
+  letter-spacing: -.04em;
+  text-wrap: balance;
+  color: var(--ch-encre);
+}
+.ch-pastille {
+  position: relative;
+  z-index: 1;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+  padding: 0 12px;
+  border-radius: 999px;
+  background: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ch-encre);
+}
+.ch-pastille i { width: 8px; height: 8px; border-radius: 50%; background: #C9C2F2; }
+.ch-pastille--encours i,
+.ch-pastille--revoir i { background: #C25407; }
+.ch-pastille--maitrise { background: #DCF5E6; color: #1F8A52; }
+.ch-pastille--maitrise i { background: #34C77B; }
+
+
+/* Ordinateur */
+.ch-page--large .ch-hero { margin-top: 0; padding: 32px 56px 128px; border-radius: 0 0 50% 50% / 0 0 80px 80px; }
+.ch-page--large .ch-deco--a { width: 240px; height: 240px; top: 200px; left: -80px; }
+.ch-page--large .ch-deco--b { width: 110px; height: 110px; top: 110px; right: 40%; }
+.ch-page--large .ch-deco--c { width: 56px; height: 56px; top: 340px; right: 30%; }
+.ch-page--large .ch-deco--d { width: 280px; height: 280px; top: 260px; right: -70px; }
+.ch-page--large .ch-point { top: 280px; left: 46%; }
+.ch-page--large .ch-haut { min-height: 58px; padding-right: 380px; }
+.ch-page--large .ch-retour { height: 46px; padding: 0 18px 0 12px; font-size: 15px; }
+.ch-page--large .ch-matiere { width: 104px; height: 104px; }
+.ch-page--large .ch-surtitre { margin-top: 20px; }
+.ch-page--large .ch-titre { max-width: 640px; font-size: 56px; letter-spacing: -.045em; }
+.ch-page--large .ch-pastille { height: 36px; margin-top: 16px; padding: 0 14px; font-size: 14px; }

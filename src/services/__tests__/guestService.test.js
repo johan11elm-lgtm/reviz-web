@@ -81,4 +81,28 @@ describe('mode essai — reprise sur un vrai compte', () => {
     expect(migrateGuestLocalData('u0', 'u1')).toEqual({ lessons: [], revisions: [] })
     expect(localStorage.getItem('reviz-lessons-u1')).toBeNull()
   })
+
+  it('1 — la série et le record des jeux suivent l’invité sur son compte', () => {
+    const g = startGuest({ prenom: 'Léa', level })
+    localStorage.setItem(`reviz-jeux-jour-${g.uid}`, JSON.stringify({ jours: ['2026-10-22', '2026-10-23'], record: 1500, scores: { '2026-10-23': 1500 } }))
+
+    migrateGuestLocalData(g.uid, 'u1')
+
+    expect(JSON.parse(localStorage.getItem('reviz-jeux-jour-u1'))).toEqual({ jours: ['2026-10-22', '2026-10-23'], record: 1500, scores: { '2026-10-23': 1500 } })
+    expect(localStorage.getItem(`reviz-jeux-jour-${g.uid}`)).toBeNull()
+  })
+
+  it('1 — si le compte a déjà des stats de jeux : jours réunis, plus grand record, meilleur score de chaque jour', () => {
+    const g = startGuest({ prenom: 'Léa', level })
+    localStorage.setItem(`reviz-jeux-jour-${g.uid}`, JSON.stringify({ jours: ['2026-10-22', '2026-10-23'], record: 1500, scores: { '2026-10-22': 800, '2026-10-23': 1500 } }))
+    localStorage.setItem('reviz-jeux-jour-u1', JSON.stringify({ jours: ['2026-10-21', '2026-10-23'], record: 2000, scores: { '2026-10-21': 2000, '2026-10-23': 900 } }))
+
+    migrateGuestLocalData(g.uid, 'u1')
+
+    expect(JSON.parse(localStorage.getItem('reviz-jeux-jour-u1'))).toEqual({
+      jours: ['2026-10-21', '2026-10-22', '2026-10-23'],
+      record: 2000,
+      scores: { '2026-10-21': 2000, '2026-10-22': 800, '2026-10-23': 1500 },
+    })
+  })
 })

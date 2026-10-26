@@ -1,338 +1,250 @@
-/* CSS scoped to page wrapper — see scripts/scope-page-css.py */
-/* Wrapper: .reglages-page */
-
-/* ⚠️ Ce fichier ne contient QUE les overrides et layouts locaux à la page
- * Réglages. Les patterns visuels (cards, boutons, toggles, callouts…) sont
- * dans src/styles/components/*.css et global.css via les classes .rv-*. */
-
-.reglages-page .rg-content {
-  flex: 1;
-  overflow-y: auto;
-  padding: 8px 24px calc(32px + env(safe-area-inset-bottom, 0px));
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
+/* Réglages (handoff Claude Design du 22/10) : héros court lavande, famille Moi ; cartes de
+ * lignes, interrupteurs et choix ronds à tranche ; feuilles du bas (fenêtre sur ordinateur). */
+.rg-page {
+  --rg-bord: #EADBCB; --rg-orange: #C25407; --rg-tranche: #8F3E05;
+  --rg-vert: #34C77B; --rg-vert-texte: #1F8A52; --rg-vert-fond: #DCF5E6;
+  min-height: 100dvh;
+  background: #F8EFE7;
+  color: var(--ch-encre);
 }
-
-/* ── Intro (PageIntro) : dans la zone de scroll, qui porte la gouttière ── */
-.reglages-page .rg-intro { padding: 0 0 2px; }
-
-/* ── Sections ── */
-.reglages-page .rg-section {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+.rg-defile {
+  flex: 1; min-height: 0;
+  overflow-y: auto; overflow-x: hidden;
+  padding-bottom: calc(130px + env(safe-area-inset-bottom, 0px));
+  scrollbar-width: none;
 }
+.rg-defile::-webkit-scrollbar { display: none; }
 
-.reglages-page .rg-section-title {
-  margin: 0;
-  font-family: 'Geist', sans-serif;
-  font-size: 16px;
-  font-weight: 800;
-  letter-spacing: -0.4px;
-  color: var(--text-primary);
+/* ── Héros ── */
+.rg-page .rg-hero { padding: calc(env(safe-area-inset-top, 0px) + 14px) 20px 74px; }
+.rg-hero .ch-deco--a { top: 150px; }
+.rg-hero .ch-point { top: 250px; left: 52%; }
+.rg-hero-haut { position: relative; z-index: 2; }
+.rg-retour {
+  display: flex; align-items: center; justify-content: center;
+  width: 44px; height: 44px;
+  border: 0; border-radius: 50%; background: #fff; box-shadow: 0 4px 0 #C9C2F2;
+  color: var(--ch-encre); cursor: pointer;
 }
+.rg-hero-corps { position: relative; z-index: 1; display: flex; align-items: flex-end; justify-content: space-between; gap: 4px; margin-top: 14px; }
+.rg-hero-titres { flex: 1; min-width: 0; }
+.rg-sur { display: block; font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--ch-doux); }
+.rg-sur em { margin-left: 6px; font-style: normal; font-weight: 600; letter-spacing: 0; text-transform: none; }
+.rg-titre { margin: 2px 0 0; font-family: var(--font-display); font-size: 40px; font-weight: 800; line-height: 1; letter-spacing: -.035em; }
+.rg-bulle { justify-content: flex-start; margin-top: 12px; }
+.rg-bulle .rv-bulle-txt { max-width: 215px; align-items: flex-start; padding: 10px 16px 12px; font-size: 17px; text-align: left; }
+.rg-bulle .rv-bulle-ligne + .rv-bulle-ligne { font-size: 13px; font-family: 'Geist', sans-serif; font-weight: 600; color: var(--ch-doux); }
+.rg-hero-corps > :last-child { flex: none; margin: 0 -14px -30px 0; }
 
-.reglages-page .rg-section-title--danger {
-  color: var(--accent-red-ink);
-}
-
-.reglages-page .rg-card {
-  padding: 6px 16px;
-}
-
-/* ── Rangées (boutons dépliants + liens) ── */
-.reglages-page .rg-row {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  width: 100%;
-  padding: 12px 0;
-  background: none;
-  border: none;
-  border-bottom: 1px solid var(--border-subtle);
-  text-align: left;
+/* ── Cartes et lignes ── */
+.rg-colonne { position: relative; z-index: 2; display: flex; flex-direction: column; gap: 16px; margin: -52px 16px 0; }
+.rg-carte { box-sizing: border-box; padding: 20px; border-radius: 26px; background: #fff; box-shadow: 0 10px 28px rgba(160,80,20,.12); scroll-margin-top: 20px; }
+.rg-carte-tete { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.rg-h2 { margin: 0 0 6px; font-family: var(--font-display); font-size: 20px; font-weight: 800; letter-spacing: -.02em; }
+.rg-sous { margin: 0; font-size: 14px; font-weight: 500; line-height: 1.45; color: var(--ch-doux); }
+.rg-note { margin: 10px 0 0; padding: 12px 14px; border-radius: 16px; background: #F8EFE7; font-size: 13px; font-weight: 500; line-height: 1.45; color: var(--ch-doux); }
+.rg-note--centre { padding: 0; background: none; text-align: center; }
+.rg-ligne {
+  display: flex; align-items: center; gap: 14px;
+  width: 100%; box-sizing: border-box; padding: 12px 0;
+  border: 0; background: none;
+  font-family: inherit; text-align: left; text-decoration: none; color: var(--ch-encre);
   cursor: pointer;
-  font-family: inherit;
-  color: var(--text-primary);
-  text-decoration: none;
 }
-.reglages-page .rg-row:last-child { border-bottom: none; }
+.rg-ligne--fixe { cursor: default; }
+.rg-ligne + .rg-ligne { border-top: 1.5px dashed var(--rg-bord); }
+.rg-ligne > svg { flex: none; color: var(--ch-doux); }
+.rg-rond { flex: none; display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; color: var(--ch-encre); }
+.rg-rond svg { width: 18px; height: 18px; }
+.rg-rond--lavande { background: #E4E0FA; }
+.rg-rond--peche { background: #FFE6D2; }
+.rg-rond--menthe { background: #DCF5E6; }
+.rg-ligne-txt { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 1px; }
+.rg-ligne-txt b { font-size: 15px; font-weight: 600; }
+.rg-ligne-txt span { font-size: 13px; font-weight: 500; color: var(--ch-doux); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
-.reglages-page .rg-row-text {
-  flex: 1;
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
+/* Interrupteur à tranche */
+.rg-inter { position: relative; flex: none; width: 54px; height: 32px; cursor: pointer; }
+.rg-inter input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: pointer; z-index: 1; }
+.rg-inter span { position: absolute; inset: 0; border-radius: 999px; background: var(--rg-bord); box-shadow: 0 3px 0 #D8C3AE; transition: background .2s, box-shadow .2s; }
+.rg-inter span::after { content: ''; position: absolute; top: 3px; left: 3px; width: 26px; height: 26px; border-radius: 50%; background: #fff; box-shadow: 0 2px 4px rgba(27,26,35,.18); transition: transform .2s; }
+.rg-inter input:checked + span { background: var(--rg-vert); box-shadow: 0 3px 0 var(--rg-vert-texte); }
+.rg-inter input:checked + span::after { transform: translateX(22px); }
+.rg-inter input:focus-visible + span { outline: 3px solid var(--ch-encre); outline-offset: 3px; }
+.rg-inter input:disabled + span { opacity: .5; }
 
-.reglages-page .rg-row-label {
-  font-size: 14px;
-  font-weight: 600;
-  letter-spacing: -0.1px;
+/* Objectif du jour : choix ronds */
+.rg-objectifs { display: flex; gap: 14px; margin-top: 14px; }
+.rg-objectif {
+  width: 60px; height: 60px; border: 1.5px solid var(--rg-bord); border-radius: 50%;
+  background: #fff; box-shadow: 0 5px 0 var(--rg-bord);
+  font-family: var(--font-display); font-size: 22px; font-weight: 800; color: var(--ch-encre);
+  cursor: pointer; transition: transform .1s;
 }
+.rg-objectif:active { transform: translateY(3px); box-shadow: 0 2px 0 var(--rg-bord); }
+.rg-objectif.is-choisi { border-color: var(--rg-orange); background: var(--rg-orange); box-shadow: 0 5px 0 var(--rg-tranche); color: #fff; }
 
-.reglages-page .rg-row-sub {
-  font-size: 12px;
-  color: var(--text-muted);
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+/* Apparence : aperçus de thèmes */
+.rg-carte > .rg-sur { margin: 14px 0 10px; }
+.rg-carte > .rg-ligne + .rg-sur { margin-top: 6px; padding-top: 14px; border-top: 1.5px dashed var(--rg-bord); }
+.rg-themes { display: grid; grid-template-columns: repeat(4, minmax(0, 92px)); gap: 12px; }
+.rg-theme { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 0; border: 0; background: none; font-family: inherit; color: var(--ch-encre); cursor: pointer; }
+.rg-theme-apercu {
+  position: relative; display: flex; flex-direction: column; gap: 5px;
+  width: 100%; aspect-ratio: 3 / 4; box-sizing: border-box; padding: 7px;
+  border-radius: 16px; box-shadow: 0 4px 0 var(--rg-bord); overflow: hidden;
 }
+.rg-theme-apercu > i { display: block; border-radius: 7px; }
+.rg-theme-hero { height: 34%; }
+.rg-theme-carte { display: flex; align-items: center; height: 14%; padding-left: 6px; }
+.rg-theme-carte > i { width: 6px; height: 6px; border-radius: 50%; }
+.rg-theme-carte--court { width: 62%; }
+.rg-theme.is-actif .rg-theme-apercu { outline: 3px solid var(--ch-encre); outline-offset: 2px; }
+.rg-theme-coche {
+  position: absolute; right: 4px; bottom: 4px;
+  display: flex; align-items: center; justify-content: center;
+  width: 24px; height: 24px; border-radius: 50%; background: var(--ch-encre); color: #fff;
+}
+.rg-theme-coche svg { width: 13px; height: 13px; }
+.rg-theme.is-verrou .rg-theme-apercu::after { content: ''; position: absolute; inset: 0; background: rgba(248,239,231,.42); }
+.rg-theme-cadenas {
+  position: absolute; z-index: 1; left: 50%; top: 50%; transform: translate(-50%, -50%);
+  display: flex; align-items: center; justify-content: center;
+  width: 30px; height: 30px; border-radius: 50%; background: #fff; color: var(--ch-encre);
+}
+.rg-theme-cadenas svg { width: 14px; height: 14px; }
+.rg-theme-nom { font-size: 12.5px; font-weight: 600; line-height: 1.2; text-align: center; }
+.rg-verrou { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; margin-top: 16px; padding: 16px; border-radius: 18px; background: #FFE6D2; }
+.rg-verrou b { font-size: 14.5px; font-weight: 700; }
+.rg-verrou span { font-size: 13.5px; color: var(--ch-doux); }
+.rg-verrou .rg-btn { margin-top: 8px; }
 
-.reglages-page .rg-row-arrow {
-  font-size: 16px;
-  color: var(--text-muted);
-  line-height: 1;
-  flex-shrink: 0;
-}
+/* Réviz+ */
+.rg-etat { display: inline-flex; align-items: center; gap: 6px; height: 28px; padding: 0 12px; border-radius: 999px; font-size: 13px; font-weight: 700; }
+.rg-etat::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+.rg-etat--actif { background: var(--rg-vert-fond); color: var(--rg-vert-texte); }
+.rg-etat--offert { background: #FFE6D2; color: var(--rg-tranche); }
+.rg-plus-formule { display: flex; align-items: center; gap: 14px; margin: 10px 0 14px; }
+.rg-plus-formule > img, .rg-plus-formule > picture > img { flex: none; width: 60px; height: 60px; border-radius: 50%; background: #FFE6D2; }
+.rg-plus-formule > span { display: flex; flex-direction: column; gap: 2px; }
+.rg-plus-formule b { font-family: var(--font-display); font-size: 19px; font-weight: 800; letter-spacing: -.02em; }
+.rg-plus-formule span span { font-size: 14px; font-weight: 500; line-height: 1.4; color: var(--ch-doux); }
+.rg-plus-echeance { display: flex; justify-content: space-between; gap: 10px; margin-bottom: 14px; padding: 12px 14px; border-radius: 14px; background: #F8EFE7; font-size: 13.5px; color: var(--ch-doux); }
+.rg-plus-echeance b { color: var(--ch-encre); }
+.rg-avantages { display: flex; flex-direction: column; gap: 10px; margin: 0 0 16px; padding: 0; list-style: none; }
+.rg-avantages li { display: flex; align-items: center; gap: 10px; font-size: 14.5px; font-weight: 600; }
+.rg-avantages svg { flex: none; width: 22px; height: 22px; padding: 4px; box-sizing: border-box; border-radius: 50%; background: var(--rg-vert-fond); color: var(--rg-vert-texte); }
+#abonnement .rg-btn + .rg-note--centre { margin-top: 12px; }
 
-/* ── Panneaux dépliants (formulaires du compte) ── */
-.reglages-page .rg-panel {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  padding: 4px 0 16px;
-  border-bottom: 1px solid var(--border-subtle);
-}
+/* Informations */
+.rg-apropos { margin-top: 10px; padding: 14px 16px; border-radius: 18px; background: #F8EFE7; }
+.rg-apropos div { display: flex; justify-content: space-between; gap: 10px; }
+.rg-apropos b { font-size: 14.5px; font-weight: 700; }
+.rg-apropos span { font-size: 12.5px; font-weight: 600; color: var(--ch-doux); }
+.rg-apropos p { margin: 6px 0 0; font-size: 13.5px; line-height: 1.5; color: var(--ch-doux); }
+.rg-legal { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.rg-legal a { padding: 8px 14px; border: 1.5px solid var(--rg-bord); border-radius: 999px; font-size: 13px; font-weight: 600; text-decoration: none; color: var(--ch-encre); }
 
-.reglages-page .rg-label {
-  font-size: 12px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  color: var(--text-muted);
-  margin-top: 6px;
-}
+/* Mode essai */
+.rg-essai-haut { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+.rg-essai-haut img { flex: none; border-radius: 50%; background: #E4E0FA; }
+.rg-essai-haut span { display: flex; flex-direction: column; gap: 2px; font-size: 14px; line-height: 1.4; color: var(--ch-doux); }
+.rg-essai-haut b { font-family: var(--font-display); font-size: 19px; font-weight: 800; color: var(--ch-encre); }
 
-.reglages-page .rg-input {
-  background: var(--bg-subtle);
-  border: 1.5px solid var(--border);
-  border-radius: var(--radius-chip);
-  padding: 10px 12px;
-  font-size: 14px;
-  color: var(--text-primary);
-  font-family: inherit;
-  outline: none;
-  transition: border-color 0.15s;
-  width: 100%;
-  box-sizing: border-box;
+/* ── Boutons ── */
+.rg-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  width: 100%; min-height: 52px; box-sizing: border-box; padding: 0 20px;
+  border: 0; border-radius: 999px; background: var(--rg-orange); box-shadow: 0 5px 0 var(--rg-tranche);
+  font-family: 'Geist', sans-serif; font-size: 16px; font-weight: 700; color: #fff; text-decoration: none;
+  cursor: pointer; transition: transform .1s, box-shadow .1s;
 }
-.reglages-page .rg-input:focus { border-color: var(--accent-violet); }
-.reglages-page .rg-input::placeholder { color: var(--text-muted); }
+.rg-btn:active:not(:disabled) { transform: translateY(4px); box-shadow: 0 1px 0 var(--rg-tranche); }
+.rg-btn:disabled { opacity: .55; cursor: default; }
+.rg-btn:focus-visible { outline: 3px solid var(--ch-encre); outline-offset: 3px; }
+.rg-btn svg { width: 18px; height: 18px; }
+.rg-btn--blanc { background: #fff; color: var(--ch-encre); box-shadow: 0 5px 0 var(--rg-bord); }
+#abonnement .rg-btn--blanc { border: 1.5px solid var(--rg-bord); }
+.rg-btn--blanc:active:not(:disabled) { box-shadow: 0 1px 0 var(--rg-bord); }
+.rg-btn--encre { background: var(--ch-encre); box-shadow: 0 5px 0 #000; }
+.rg-btn--encre:active:not(:disabled) { box-shadow: 0 1px 0 #000; }
+.rg-btn--encre:disabled { opacity: .85; }
+.rg-btn--petit { width: auto; min-height: 42px; padding: 0 18px; font-size: 14.5px; }
+.rg-lien { align-self: center; padding: 8px; border: 0; background: none; font-family: inherit; font-size: 14.5px; font-weight: 600; color: var(--ch-doux); cursor: pointer; }
+.rg-lien:disabled { opacity: .5; }
+.rg-carte .rg-lien { display: block; margin: 6px auto 0; }
+.rg-anneau { width: 18px; height: 18px; box-sizing: border-box; border: 2.5px solid rgba(255,255,255,.35); border-top-color: #fff; border-radius: 50%; animation: rgTourne .8s linear infinite; }
+@keyframes rgTourne { to { transform: rotate(360deg); } }
 
-.reglages-page .rg-error   { font-size: 12px; color: var(--accent-red); margin: 0; }
-.reglages-page .rg-success { font-size: 12px; color: var(--accent-green); margin: 0; }
-.reglages-page .rg-hint {
-  font-size: 12px;
-  color: var(--text-secondary);
-  line-height: 1.5;
-  margin: 0;
-  padding: 0 0 12px;
-}
+.rg-pied { display: flex; flex-direction: column; align-items: center; gap: 18px; margin: 24px 16px 0; }
+.rg-supprimer { padding: 16px 8px 4px; width: 100%; border: 0; border-top: 1.5px dashed var(--rg-bord); background: none; font-family: inherit; font-size: 14px; font-weight: 600; text-decoration: underline; text-underline-offset: 3px; color: var(--ch-doux); cursor: pointer; }
 
-/* ── Notifications / Apparence — rangée avec toggle ── */
-.reglages-page .rg-toggle-row {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 12px 0;
-}
+/* ── Messages ── */
+.rg-message { display: flex; align-items: flex-start; gap: 12px; margin-top: 12px; padding: 14px; border-radius: 16px; font-size: 13.5px; line-height: 1.45; }
+.rg-message > span:last-child { display: flex; flex-direction: column; }
+.rg-message b { font-size: 14px; font-weight: 700; }
+.rg-message-rond { flex: none; display: flex; align-items: center; justify-content: center; width: 26px; height: 26px; border-radius: 50%; color: #fff; }
+.rg-message-rond svg { width: 14px; height: 14px; }
+.rg-message--reussite { background: var(--rg-vert-fond); }
+.rg-message--reussite .rg-message-rond { background: var(--rg-vert); }
+.rg-message--reussite b { color: var(--rg-vert-texte); }
+.rg-message--erreur { background: #FFD9E4; color: var(--ch-encre); }
+.rg-message--erreur .rg-message-rond { background: #F4B8CB; }
 
-/* Rappel indisponible sur le web : toggle visiblement inactif */
-.reglages-page .toggle-wrap input:disabled + .toggle-slider {
-  opacity: 0.55;
-  cursor: default;
+/* ── Feuilles ── */
+.rg-voile { position: fixed; inset: 0; z-index: 300; display: flex; align-items: flex-end; justify-content: center; background: rgba(27,26,35,.38); animation: rgFondu .2s both; }
+@keyframes rgFondu { from { opacity: 0; } }
+.rg-feuille {
+  position: relative; width: 100%; max-width: 520px; max-height: calc(100dvh - 60px); overflow-y: auto; box-sizing: border-box;
+  padding: 12px 20px calc(24px + env(safe-area-inset-bottom, 0px));
+  border-radius: 30px 30px 0 0; background: #F8EFE7;
+  animation: rgMonte .3s cubic-bezier(.3,1.2,.5,1) both;
 }
+@keyframes rgMonte { from { transform: translateY(100%); } }
+.rg-poignee { display: block; width: 40px; height: 5px; margin: 0 auto 10px; border-radius: 999px; background: var(--rg-bord); }
+.rg-feuille-reviz { position: absolute; top: -54px; right: 16px; pointer-events: none; }
+.rg-feuille { overflow: visible; }
+.rg-form { display: flex; flex-direction: column; gap: 8px; }
+.rg-form .rg-btn { margin-top: 8px; }
+.rg-form .rg-sur { margin-top: 6px; }
+.rg-feuille-titre { margin: 4px 0 4px; max-width: calc(100% - 110px); font-family: var(--font-display); font-size: 24px; font-weight: 800; line-height: 1.15; letter-spacing: -.03em; }
+.rg-label { margin-top: 8px; font-size: 14px; font-weight: 700; }
+.rg-input {
+  width: 100%; height: 52px; box-sizing: border-box; padding: 0 16px;
+  border: 2px solid var(--rg-bord); border-radius: 16px; background: #fff;
+  font-family: 'Geist', sans-serif; font-size: 16px; font-weight: 500; color: var(--ch-encre); outline: none;
+}
+.rg-input:focus { border-color: var(--rg-orange); }
+.rg-classes { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 2px; }
+.rg-classe {
+  height: 52px; border: 1.5px solid var(--rg-bord); border-radius: 999px; background: #fff; box-shadow: 0 4px 0 var(--rg-bord);
+  font-family: var(--font-display); font-size: 18px; font-weight: 800; color: var(--ch-encre); cursor: pointer;
+}
+.rg-classe.is-choisie { border-color: var(--rg-orange); background: var(--rg-orange); box-shadow: 0 4px 0 var(--rg-tranche); color: #fff; }
 
-/* ── Sélecteur de thèmes — vignettes « mini-app », groupe Réviz+ ── */
-.reglages-page .rg-theme-group { padding: 12px 0 2px; }
-.reglages-page .rg-theme-group + .rg-theme-group { border-top: 1px solid var(--border-subtle); }
-.reglages-page .rg-theme-group-head {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  min-height: 22px;
-  margin-bottom: 10px;
-}
-.reglages-page .rg-theme-group-title {
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.4px;
-  text-transform: uppercase;
-  color: var(--text-muted);
-}
-.reglages-page .rg-theme-group-note { font-size: 12.5px; font-weight: 600; color: var(--text-muted); }
+/* ── Ordinateur ── */
+.rg-page--large .rg-defile { padding-bottom: 60px; }
+.rg-page--large .rg-hero { height: 360px; box-sizing: border-box; padding: 32px 56px 0; border-radius: 0 0 50% 50% / 0 0 76px 76px; }
+.rg-page--large .rg-hero-corps { align-items: center; max-width: 1328px; margin: 26px auto 0; justify-content: flex-start; gap: 0; }
+.rg-page--large .rg-hero-titres { flex: 0 0 auto; margin-right: auto; }
+.rg-page--large .rg-hero-haut { max-width: 1328px; margin: 0 auto; }
+.rg-page--large .rg-sur--hero { font-size: 12px; }
+.rg-page--large .rg-titre { font-size: 56px; letter-spacing: -.04em; }
+.rg-page--large .rg-bulle { margin: 0 -10px 40px 0; }
+.rg-page--large .rg-bulle .rv-bulle-txt { max-width: 280px; font-size: 19px; }
+.rg-page--large .rg-bulle .rv-bulle-ligne + .rv-bulle-ligne { font-size: 15px; }
+.rg-page--large .rg-hero-corps > :last-child { margin: -20px 12% 0 0; }
+.rg-colonnes { position: relative; z-index: 2; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 24px; align-items: start; max-width: 1440px; box-sizing: border-box; margin: -64px auto 0; padding: 0 56px; }
+.rg-colonnes .rg-colonne { margin: 0; gap: 24px; }
+.rg-page--large .rg-pied { width: 360px; margin: 32px auto 0; }
+.rg-page--large .rg-voile { align-items: center; }
+.rg-page--large .rg-feuille { max-width: 480px; border-radius: 30px; padding: 24px 28px 28px; box-shadow: 0 30px 80px -20px rgba(27,26,35,.35); }
+.rg-page--large .rg-poignee { display: none; }
 
-.reglages-page .rg-theme-grid {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 10px;
-  padding-bottom: 12px;
+@media (max-width: 1240px) {
+  .rg-page--large .rg-hero { padding-left: 32px; padding-right: 32px; }
+  .rg-colonnes { padding: 0 32px; }
 }
-
-.reglages-page .rg-theme-tile {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 7px;
-  padding: 0;
-  border: 0;
-  background: none;
-  cursor: pointer;
-  -webkit-tap-highlight-color: transparent;
-}
-.reglages-page .rg-theme-preview {
-  position: relative;
-  display: block;
-  width: 100%;
-  aspect-ratio: 3 / 4;
-  border-radius: 14px;
-  overflow: hidden;
-  box-shadow: 0 0 0 1px var(--border), 0 3px 10px rgba(0, 0, 0, 0.08);
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
-}
-.reglages-page .rg-theme-tile:active .rg-theme-preview { transform: scale(0.96); }
-.reglages-page .rg-theme-tile--active .rg-theme-preview {
-  box-shadow: 0 0 0 2px var(--bg-card), 0 0 0 4px var(--accent-violet), 0 6px 16px rgba(0, 0, 0, 0.12);
-}
-.reglages-page .rg-theme-tile--locked .rg-theme-preview { filter: saturate(0.6); opacity: 0.7; }
-.reglages-page .rg-theme-tile:focus-visible { outline: none; }
-.reglages-page .rg-theme-tile:focus-visible .rg-theme-preview { box-shadow: 0 0 0 2px var(--bg-card), 0 0 0 4px var(--accent-orange); }
-
-.reglages-page .rg-theme-preview-hero {
-  position: absolute;
-  left: 9%; right: 9%; top: 9%;
-  height: 34%;
-  border-radius: 7px;
-}
-.reglages-page .rg-theme-preview-card {
-  position: absolute;
-  left: 9%; right: 9%; top: 49%;
-  height: 17%;
-  border-radius: 5px;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
-}
-.reglages-page .rg-theme-preview-card--short { top: 70%; right: 34%; height: 13%; }
-.reglages-page .rg-theme-preview-dot {
-  position: absolute;
-  left: 7px; top: 50%;
-  width: 7px; height: 7px;
-  margin-top: -3.5px;
-  border-radius: 50%;
-}
-.reglages-page .rg-theme-check,
-.reglages-page .rg-theme-lock {
-  position: absolute;
-  right: 6px;
-  bottom: 6px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  font-size: 12px;
-}
-.reglages-page .rg-theme-check { background: var(--accent-violet); color: #fff; }
-.reglages-page .rg-theme-check .rv-ico { stroke-width: 3; }
-.reglages-page .rg-theme-lock { background: rgba(0, 0, 0, 0.55); color: #fff; }
-
-.reglages-page .rg-theme-name {
-  font-size: 12px;
-  font-weight: 600;
-  line-height: 1.2;
-  color: var(--text-secondary);
-  text-align: center;
-}
-.reglages-page .rg-theme-tile--active .rg-theme-name { color: var(--text-primary); font-weight: 800; }
-
-/* ── Objectif quotidien ── */
-.reglages-page .rg-goal-hint { padding: 12px 0 0; }
-
-.reglages-page .rg-goal-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 8px;
-  padding: 10px 0 14px;
-}
-
-.reglages-page .rg-goal-btn {
-  padding: 14px 0;
-  background: var(--bg-card);
-  border: 1.5px solid var(--border);
-  border-radius: var(--radius-card);
-  font-family: inherit;
-  font-size: 16px;
-  font-weight: 700;
-  color: var(--text-secondary);
-  cursor: pointer;
-  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
-}
-.reglages-page .rg-goal-btn:hover { border-color: var(--border-hover); }
-.reglages-page .rg-goal-btn--active {
-  /* Un choix fait se marque en encre, comme le filtre actif de Mes cours */
-  background: var(--accent-violet);
-  border-color: var(--accent-violet);
-  color: #fff;
-}
-
-/* Icônes des rangées : neutres, ce sont des liens et des réglages, pas des
- * états (docs/design-grammaire.md §5) */
-.reglages-page .rg-icon { background: var(--bg-subtle); color: var(--text-secondary); }
-
-/* ── Abonnement ── */
-.reglages-page .rg-card .rg-error { padding-bottom: 12px; }
-
-/* ── À propos ── */
-.reglages-page .rg-about {
-  padding: 4px 0 14px;
-  border-bottom: 1px solid var(--border-subtle);
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-.reglages-page .rg-about p {
-  font-size: 12px;
-  color: var(--text-secondary);
-  line-height: 1.6;
-  margin: 0;
-}
-.reglages-page .rg-about-logo {
-  font-size: 15px;
-  font-weight: 700;
-  color: var(--text-primary);
-}
-.reglages-page .rg-about-version {
-  font-size: 12px;
-  color: var(--text-muted) !important;
-}
-
-/* ── Déconnexion + zone de danger ── */
-.reglages-page .rg-logout { justify-content: center; }
-
-.reglages-page .rg-danger {
-  margin-top: 12px;
-  padding-top: 16px;
-  border-top: 1px solid var(--border-subtle);
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.reglages-page .rg-delete-trigger {
-  color: var(--accent-red-ink);
-  justify-content: center;
-}
-
-.reglages-page .rg-delete-confirm {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-/* ── Responsive mobile (≤430px) — gouttière 24px conservée ── */
-@media (max-width: 430px) {
-  .reglages-page .rg-content { padding-top: 6px; }
+@media (prefers-reduced-motion: reduce) {
+  .rg-voile, .rg-feuille, .rg-anneau { animation: none; }
 }

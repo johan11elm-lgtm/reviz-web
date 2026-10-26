@@ -1,58 +1,21 @@
-/* ------------------------------------------------------------
-   FormatFeedback — micro-sondage 👍/😐/👎 sur un format IA.
-   Discret : une ligne, pas de carte lourde, cohérent .rv-*.
-   ------------------------------------------------------------ */
-
-.format-feedback {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  padding: 6px 0;
-}
-
-.format-feedback-question {
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--text-secondary);
-}
-
-.format-feedback-options {
-  display: flex;
-  gap: 8px;
-}
-
+/* FormatFeedback : micro-sondage utile / moyen / pas terrible sur un format IA.
+ * Discret : une ligne, trois ronds blancs à tranche pastel (menthe, pêche, rose). */
+.format-feedback { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 10px 14px; padding: 8px 0; }
+.format-feedback-question { font-size: 14px; font-weight: 600; color: #6E675B; }
+.format-feedback-options { display: flex; gap: 10px; }
 .format-feedback-btn {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  border: 1px solid var(--border-subtle);
-  background: var(--bg-card);
-  box-shadow: var(--shadow-card);
-  font-size: 18px;
-  line-height: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  font-family: inherit;
-  position: relative;
-  transition: transform 0.12s ease, background 0.15s ease;
+  --ff-tranche: #EADBCB;
+  position: relative; display: flex; align-items: center; justify-content: center;
+  width: 44px; height: 44px; padding: 0; border: 0; border-radius: 50%;
+  background: #fff; box-shadow: 0 4px 0 var(--ff-tranche); color: #1B1A23;
+  font-family: inherit; cursor: pointer;
+  transition: transform .08s, box-shadow .08s;
 }
-/* Zone tactile 44×44 (WCAG 2.5.5) sans changer le visuel */
-.format-feedback-btn::after {
-  content: '';
-  position: absolute;
-  inset: -3px;
-  border-radius: 50%;
-}
-@media (hover: hover) and (pointer: fine) {
-  .format-feedback-btn:hover { background: var(--bg-hover); transform: translateY(-1px); }
-}
-.format-feedback-btn:active { transform: scale(0.92); }
-
-.format-feedback--thanks {
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--text-secondary);
-}
+.format-feedback-btn svg { width: 20px; height: 20px; }
+.format-feedback-btn--up { --ff-tranche: #A8E3C2; }
+.format-feedback-btn--meh { --ff-tranche: #FFC596; }
+.format-feedback-btn--down { --ff-tranche: #F4B8CB; }
+.format-feedback-btn:active { transform: translateY(3px); box-shadow: 0 1px 0 var(--ff-tranche); }
+.format-feedback-btn:focus-visible { outline: 3px solid #1B1A23; outline-offset: 3px; }
+.format-feedback--thanks { display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; color: #1F8A52; }
+.format-feedback--thanks::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: #34C77B; }

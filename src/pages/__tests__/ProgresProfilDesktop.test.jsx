@@ -1,5 +1,5 @@
-// Progrès et Profil sur ordinateur (happy-dom fait 1024 px : useIsDesktop
-// est vrai) — tableau de bord de progression, badges avec leur condition.
+// Moi sur ordinateur (happy-dom fait 1024 px : useIsDesktop est vrai) : les progrès
+// (fusionnés dans Moi le 22/10) et les badges avec leur condition.
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 import { render, screen, fireEvent, within } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
@@ -27,7 +27,6 @@ vi.mock('../../services/userProfileService', () => ({ getUserProfile: vi.fn(() =
 vi.mock('../../services/scanLimitService', () => ({ incrementScanCount: vi.fn() }))
 vi.mock('../../services/challengeService', () => ({ updateChallengeProgress: vi.fn() }))
 
-const { default: Progres } = await import('../Progres')
 const { default: Profile } = await import('../Profile')
 const { _resetProgrammeCache } = await import('../../services/programmeService')
 
@@ -74,43 +73,33 @@ beforeEach(() => {
 })
 afterEach(() => vi.unstubAllGlobals())
 
-describe('<Progres /> sur ordinateur', () => {
-  it('montre l’avancement du programme, matière par matière, et ouvre une matière', async () => {
+describe('<Profile /> — mes progrès', () => {
+  it('Mon programme : l’avancement matière par matière, et ouvre une matière', async () => {
     seed()
-    render(<MemoryRouter><Progres /></MemoryRouter>)
+    render(<MemoryRouter><Profile /></MemoryRouter>)
     // Comme sur la tuile de Mon programme : les cartes jamais vues d'un chapitre commencé comptent
-    const maths = await screen.findByRole('button', { name: /^Maths : 1 \/ 2 commencé, 2 cartes à travailler/ })
-    expect(screen.getByText(/chapitres commencés sur 3/)).toBeInTheDocument()
-    // Français : son seul chapitre ouvert a toutes ses cartes en mémoire
+    const maths = await screen.findByRole('button', { name: /^Maths : 1 \/ 2 commencé, 2 cartes à revoir/ })
     expect(screen.getByRole('button', { name: /^Français : 1 \/ 1 maîtrisé/ })).toBeInTheDocument()
     fireEvent.click(maths)
-    expect(nav).toHaveBeenCalledWith('/programme/maths')
+    expect(nav).toHaveBeenCalledWith('/programme?matiere=maths')
   })
 
-  it('« Ta mémoire » compte les cartes comme l’accueil et reprend la leçon prioritaire', async () => {
+  it('« Ma mémoire » compte les cartes comme l’accueil et reprend la leçon prioritaire', async () => {
     seed()
-    render(<MemoryRouter><Progres /></MemoryRouter>)
-    const memoire = (await screen.findByRole('heading', { name: 'Ta mémoire' })).closest('section')
-    // 5 cartes : 3 en mémoire, 1 à revoir, 1 jamais vue → 2 à travailler aujourd'hui
-    expect(within(memoire).getByText(/cartes à travailler aujourd'hui, sur 5/).previousSibling).toHaveTextContent('2')
-    fireEvent.click(within(memoire).getByRole('button', { name: /Réviser maintenant/ }))
+    render(<MemoryRouter><Profile /></MemoryRouter>)
+    const memoire = (await screen.findByRole('heading', { name: 'Ma mémoire' })).closest('section')
+    // 5 cartes : 3 en mémoire, 1 à revoir, 1 jamais vue → 2 à revoir aujourd'hui
+    expect(within(memoire).getByText(/aujourd’hui, sur 5/)).toHaveTextContent('2cartes à revoir')
+    fireEvent.click(within(memoire).getByRole('button', { name: 'Réviser maintenant' }))
     expect(localStorage.getItem('reviz-current-lesson-id')).toBe('prog-thales')
     expect(nav).toHaveBeenCalledWith('/flashcards')
   })
 
-  it('compte les leçons scannées à part et répartit les révisions par matière', async () => {
-    seed()
-    render(<MemoryRouter><Progres /></MemoryRouter>)
-    expect(await screen.findByText('leçons ouvertes, dont 1 scannée')).toBeInTheDocument()
-    const parMatiere = screen.getByRole('heading', { name: 'Révisions par matière' }).closest('section')
-    expect(within(parMatiere).getByText('Maths')).toBeInTheDocument()
-    expect(within(parMatiere).getByText('Français')).toBeInTheDocument()
-  })
-
   it('sans leçon : la mémoire invite à ouvrir un chapitre', async () => {
-    render(<MemoryRouter><Progres /></MemoryRouter>)
+    render(<MemoryRouter><Profile /></MemoryRouter>)
     expect(await screen.findByText('Pas encore de flashcards')).toBeInTheDocument()
-    expect(screen.getByRole('link', { name: 'Mon programme' })).toHaveAttribute('href', '/programme')
+    fireEvent.click(screen.getByRole('button', { name: 'Mon programme' }))
+    expect(nav).toHaveBeenCalledWith('/programme')
   })
 })
 
@@ -118,17 +107,17 @@ describe('<Profile /> sur ordinateur', () => {
   it('montre les 18 badges avec ce qu’il faut faire, et le prochain à viser', async () => {
     seed()
     render(<MemoryRouter><Profile /></MemoryRouter>)
-    expect(screen.getAllByRole('listitem')).toHaveLength(18)
-    expect(screen.getByText('3 jours de suite')).toBeInTheDocument()
+    expect(screen.getAllByRole('button', { name: /: obtenu$|\(\d+ \/ \d+\)$/ })).toHaveLength(18)
+    expect(screen.getAllByText('3 jours de suite').length).toBeGreaterThan(0)
     // 3 leçons ouvertes : « Étudiant » (5 leçons) à 3 / 5
-    expect(screen.getByTitle('Étudiant : 5 leçons ouvertes (3 / 5)')).toBeInTheDocument()
-    expect(screen.getByTitle('Lanceur : obtenu')).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: 'Étudiant : 5 leçons ouvertes (3 / 5)' })).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: 'Lanceur : obtenu' })).toBeInTheDocument()
     expect(screen.getByText('Prochain badge')).toBeInTheDocument()
-    expect(screen.queryByText(/Voir les \d+ autres/)).not.toBeInTheDocument()
   })
 
   it('la Battle reste accessible sans compte', () => {
     render(<MemoryRouter><Profile /></MemoryRouter>)
-    expect(screen.getByRole('link', { name: /Battle/ })).toHaveAttribute('href', '/battle')
+    fireEvent.click(screen.getByRole('button', { name: 'Défier quelqu’un' }))
+    expect(nav).toHaveBeenCalledWith('/battle')
   })
 })

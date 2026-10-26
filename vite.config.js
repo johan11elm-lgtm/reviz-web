@@ -3,22 +3,26 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import { sentryVitePlugin } from '@sentry/vite-plugin'
 
+// Source maps : envoyées à Sentry pour des stack traces lisibles, jamais publiées. Elles ne sont
+// générées que si l'envoi est possible (SENTRY_AUTH_TOKEN), en « hidden » (aucun lien dans les
+// fichiers), puis effacées de dist/ juste après l'envoi : rien ne part en ligne. Jamais en mode ios :
+// elles embarqueraient tout le source dans l'IPA.
+const ENVOI_SENTRY = !!process.env.SENTRY_AUTH_TOKEN
+
 export default defineConfig(({ mode }) => ({
   plugins: [
     react(),
-    // Upload source maps to Sentry on production builds
-    process.env.SENTRY_AUTH_TOKEN && sentryVitePlugin({
+    ENVOI_SENTRY && mode !== 'ios' && sentryVitePlugin({
       org: process.env.SENTRY_ORG,
       project: process.env.SENTRY_PROJECT,
       authToken: process.env.SENTRY_AUTH_TOKEN,
+      sourcemaps: { filesToDeleteAfterUpload: ['./dist/**/*.map'] },
     }),
   ].filter(Boolean),
   server: { allowedHosts: true },
   build: {
     target: ['chrome87', 'firefox78', 'safari14', 'edge88'],
-    // Sourcemaps requises pour des stack traces Sentry lisibles (web) —
-    // jamais en mode ios : elles embarqueraient tout le source dans l'IPA.
-    sourcemap: mode !== 'ios',
+    sourcemap: ENVOI_SENTRY && mode !== 'ios' ? 'hidden' : false,
     // Polices jamais inlinées en data: URI (les petits sous-ensembles Geist
     // passeraient sous la limite de 4 Ko) : la CSP de vercel.json
     // (font-src 'self') les bloquerait. Les autres assets gardent le défaut.

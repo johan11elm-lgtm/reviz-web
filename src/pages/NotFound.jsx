@@ -1,21 +1,15 @@
-import { Mascot } from '../components/Mascot';
-import { Link } from 'react-router-dom';
-import './NotFound.css';
+import { PageEtat } from '../components/reviz/PageEtat';
 
+/** Page introuvable (handoff Claude Design du 22/10) : héros lavande avec grain, Réviz inquiet. */
 export default function NotFound() {
   return (
-    <div className="app notfound-page">
-      <div className="notfound">
-        <Mascot pose="confused" size={160} glow priority className="notfound-mascot" alt="" aria-hidden="true" />
-        <h1 className="notfound-title">Page introuvable</h1>
-        <p className="notfound-text">
-          Cette page n'existe pas ou a été déplacée.
-        </p>
-        <Link to="/" className="rv-btn-cta notfound-btn">
-          <span>Retour à l'accueil</span>
-          <span className="rv-btn-cta-arrow" aria-hidden="true">→</span>
-        </Link>
-      </div>
-    </div>
+    <PageEtat
+      className="pe-page--seule"
+      sur="Erreur 404"
+      titre="Page introuvable"
+      texte="Cette page n'existe pas ou a changé d'adresse."
+      expression="inquiet"
+      actions={[{ label: "Retour à l'accueil", to: '/' }]}
+    />
   );
 }

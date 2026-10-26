@@ -10,6 +10,7 @@ describe('<App />', () => {
 
   it('renders the welcome page at /welcome', () => {
     render(<App />)
-    expect(screen.getByText(/Révise mieux/i)).toBeInTheDocument()
+    // La phrase est dans la bulle de Réviz (texte lu + lettres tapées) : plusieurs nœuds.
+    expect(screen.getAllByText(/Révise mieux/i).length).toBeGreaterThan(0)
   })
 })

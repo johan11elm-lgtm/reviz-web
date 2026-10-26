@@ -1,18 +1,17 @@
 import { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import SocialLogin, { erreurConnexionSociale } from '../components/SocialLogin';
-import { Mascot } from '../components/Mascot';
-import { useIsDesktop } from '../hooks/useMediaQuery';
-import './Connexion.css';
+import { erreurConnexionSociale } from '../components/SocialLogin';
+import { EntreeEcran, Champ, ChampMotDePasse, RetourAction, Ou, BoutonsSociaux, LienTexte } from '../components/entree/Entree';
+import { revenir } from '../utils/navigation';
 
 function firebaseErrorFr(code) {
   switch (code) {
-    case 'auth/invalid-email':      return 'Adresse email invalide.';
+    case 'auth/invalid-email':      return 'Adresse e-mail invalide.';
     case 'auth/user-not-found':
     case 'auth/wrong-password':
-    case 'auth/invalid-credential': return 'Email ou mot de passe incorrect.';
-    case 'auth/too-many-requests':  return 'Trop de tentatives. Réessaie plus tard.';
+    case 'auth/invalid-credential': return 'E-mail ou mot de passe incorrect.';
+    case 'auth/too-many-requests':  return 'Trop de tentatives. Réessaie dans un moment.';
     default:                        return 'Une erreur est survenue. Réessaie.';
   }
 }
@@ -26,7 +25,6 @@ export default function Connexion() {
 
   const { login, loginWithProvider, loginWithCustomToken, resetPassword } = useAuth();
   const navigate = useNavigate();
-  const isDesktop = useIsDesktop();
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -74,7 +72,7 @@ export default function Connexion() {
 
   async function handleReset(e) {
     e.preventDefault();
-    if (!email) { setError('Entre ton email pour réinitialiser ton mot de passe.'); return; }
+    if (!email) { setError('Entre ton e-mail pour recevoir le lien.'); return; }
     try {
       await resetPassword(email);
       setResetSent(true);
@@ -84,94 +82,28 @@ export default function Connexion() {
     }
   }
 
-  const champs = (
-    <>
-        <div className="auth-field">
-          <label className="auth-label" htmlFor="connexion-email">Email</label>
-          <input
-            id="connexion-email"
-            className="auth-input"
-            type="email"
-            placeholder="lucas@exemple.com"
-            value={email}
-            onChange={e => setEmail(e.target.value)}
-            autoComplete="email"
-            required
-          />
-        </div>
-
-        <div className="auth-field">
-          <label className="auth-label" htmlFor="connexion-password">Mot de passe</label>
-          <input
-            id="connexion-password"
-            className="auth-input"
-            type="password"
-            placeholder="••••••••"
-            value={password}
-            onChange={e => setPassword(e.target.value)}
-            autoComplete="current-password"
-            required
-          />
-        </div>
-
-        {/* Mot de passe oublié */}
-        <button type="button" className="auth-forgot" onClick={handleReset}>
-          Mot de passe oublié ?
-        </button>
-
-        {resetSent && (
-          <p className="auth-reset-sent">Email de réinitialisation envoyé !</p>
-        )}
-
-        <p className="auth-error">{error}</p>
-
-        <button className="auth-btn" type="submit" disabled={!!loading}>
-          {loading ? 'Connexion...' : 'Se connecter'}
-        </button>
-
-                  <div className="auth-divider"><span>ou</span></div>
-
-          <SocialLogin onLogin={handleProvider} disabled={!!loading} />
-
-        <p className="auth-link">
-          Pas encore de compte ?{' '}
-          <Link to="/inscription">Créer un compte</Link>
-        </p>
-    </>
-  );
-
-  // Ordinateur : l'accueil à gauche, le formulaire dans une carte à droite
-  // (styles communs avec l'inscription dans desktop.css).
-  if (isDesktop) {
-    return (
-      <div className="app auth-desk-page">
-        <div className="auth-desk">
-          <div className="auth-desk-intro">
-            <Link to="/welcome" className="auth-back" aria-label="Retour">←</Link>
-            <span className="auth-desk-mascot"><Mascot pose="retour" size={132} alt="" aria-hidden="true" /></span>
-            <h1 className="signup-question">Se connecter</h1>
-            <p className="signup-hint">Content de te revoir. Tes cours et tes révisions t'attendent.</p>
-          </div>
-          <form className="auth-desk-card" onSubmit={handleSubmit} noValidate>
-            {champs}
-          </form>
-        </div>
-      </div>
-    );
-  }
-
+  const oublie = <button type="button" onClick={handleReset}>Mot de passe oublié ?</button>;
   return (
-    <div className="app">
-      {/* Header */}
-      <div className="auth-header">
-        <Link to="/welcome" className="auth-back">←</Link>
-        <span className="auth-title">Se connecter</span>
-      </div>
-
-      {/* Formulaire */}
-      <form className="auth-content" onSubmit={handleSubmit} noValidate>
-        {champs}
+    <EntreeEcran
+      bulle={['Content de te revoir.', 'Tes leçons t’attendent.']}
+      expression="content" geste="coucou" taille="dense"
+      onRetour={() => revenir(navigate, '/welcome')}
+      dessous={(
+        <>
+          <Ou />
+          <BoutonsSociaux onLogin={handleProvider} disabled={!!loading} />
+          <LienTexte avant="Pas encore de compte ?" to="/inscription">Créer un compte</LienTexte>
+        </>
+      )}
+    >
+      <form className="en-pile" onSubmit={handleSubmit} noValidate>
+        <Champ id="connexion-email" label="E-mail" type="email" placeholder="lucas@exemple.com" value={email}
+          onChange={e => { setEmail(e.target.value); setError(''); }} autoComplete="email" required />
+        <ChampMotDePasse id="connexion-password" lien={oublie} value={password} erreur={error}
+          onChange={e => { setPassword(e.target.value); setError(''); }} autoComplete="current-password" required />
+        {resetSent && <RetourAction>E-mail envoyé. Regarde aussi dans les spams.</RetourAction>}
+        <button className="en-btn" type="submit" disabled={!!loading}>{loading ? 'Connexion…' : 'Se connecter'}</button>
       </form>
-    </div>
+    </EntreeEcran>
   );
 }

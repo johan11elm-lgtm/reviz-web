@@ -1,35 +1,17 @@
+/* Badge débloqué : petite carte blanche qui descend du haut, rond pêche avec la pose du badge
+ * (même famille que le toast de Réviz+). */
 .achievement-toast {
-  position: fixed;
-  top: -90px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-card);
-  padding: 10px 18px 10px 10px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  z-index: 9999;
-  box-shadow: var(--shadow-pop);
-  transition: top 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-  min-width: 240px;
-  max-width: calc(100vw - 32px);
+  position: fixed; z-index: 450; top: 0; left: 50%;
+  display: flex; align-items: center; gap: 12px;
+  width: max-content; min-width: 240px; max-width: calc(100vw - 32px); box-sizing: border-box;
+  padding: 10px 20px 10px 10px; border-radius: 24px; background: #fff;
+  box-shadow: 0 14px 36px rgba(160,80,20,.22);
+  transform: translate(-50%, -120%);
+  transition: transform .4s cubic-bezier(.3,1.4,.5,1);
 }
-.achievement-toast--visible {
-  /* Sous l'encoche iPhone (0 sur web) */
-  top: calc(16px + env(safe-area-inset-top, 0px));
-}
-.achievement-emoji {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 52px;
-  height: 52px;
-  border-radius: 50%;
-  background: var(--accent-orange-soft);
-  flex-shrink: 0;
-}
-.achievement-info { display: flex; flex-direction: column; gap: 1px; }
-.achievement-label { font-size: 12px; color: var(--accent-orange-ink); font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
-.achievement-name { font-family: 'Geist', sans-serif; font-size: 16px; font-weight: 800; letter-spacing: -0.3px; color: var(--text-primary); }
+.achievement-toast--visible { transform: translate(-50%, calc(16px + env(safe-area-inset-top, 0px))); }
+.achievement-rond { flex: none; display: flex; align-items: center; justify-content: center; width: 58px; height: 58px; overflow: hidden; border-radius: 50%; background: #FFE6D2; box-shadow: 0 3px 0 #FFC596; }
+.achievement-info { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
+.achievement-label { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #C25407; }
+.achievement-name { font-family: var(--font-display); font-size: 18px; font-weight: 800; letter-spacing: -.02em; line-height: 1.15; color: #1B1A23; }
+@media (prefers-reduced-motion: reduce) { .achievement-toast { transition: none; } }

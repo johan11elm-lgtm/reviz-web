@@ -1,7 +1,11 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 import { render, screen, fireEvent, within } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
-import Resume from '../Resume'
+
+vi.mock('../../context/AuthContext', () => ({
+  useAuth: () => ({ isGuest: false, hasRevizPlus: false, getUserLevel: () => null }),
+}))
+const { default: Resume } = await import('../Resume')
 
 const AI_DATA = {
   metadata: { title: 'La Révolution française', subject: 'Histoire' },
@@ -36,23 +40,24 @@ beforeEach(() => {
 })
 
 describe('<Resume /> — fiche enrichie', () => {
-  it('affiche exemple, méthode et pièges, avec le numéro des sections en pastille', () => {
+  it('affiche exemple, méthode et pièges, avec le numéro des sections en surtitre', () => {
     renderResume()
     expect(screen.getByText('Serment du Jeu de paume, 20 juin 1789.')).toBeInTheDocument()
     expect(screen.getByText('Comment construire une frise')).toBeInTheDocument()
     expect(screen.getByText('Placer les dates')).toBeInTheDocument()
     expect(screen.getByText('La prise de la Bastille ne met pas fin à la monarchie.')).toBeInTheDocument()
-    // « 1. 1789 » → titre « 1789 », le numéro passe dans la pastille
+    // « 1. 1789 » → titre « 1789 », le numéro passe dans le surtitre « Partie 1 »
     expect(screen.getByRole('heading', { name: '1789' })).toBeInTheDocument()
+    expect(screen.getByText('Partie 1')).toBeInTheDocument()
   })
 
   it('reste lisible sur une leçon ancienne, sans les nouvelles rubriques', () => {
     const { methode, pieges, ...ancien } = AI_DATA.resume
     localStorage.setItem('reviz-ai-data', JSON.stringify({ ...AI_DATA, resume: ancien }))
     renderResume()
-    expect(screen.queryByText('La méthode')).not.toBeInTheDocument()
+    expect(screen.queryByText('Méthode')).not.toBeInTheDocument()
     expect(screen.queryByText('Pièges à éviter')).not.toBeInTheDocument()
-    expect(screen.getByText('Le cours')).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: 'La République' })).toBeInTheDocument()
   })
 
   it('un terme du cours se touche et montre sa définition', () => {
@@ -63,16 +68,28 @@ describe('<Resume /> — fiche enrichie', () => {
     expect(screen.queryByRole('status')).not.toBeInTheDocument()
   })
 
-  it('« Me tester » masque les points à retenir et les définitions jusqu\'au toucher', () => {
+  it('« Teste-toi » masque les points à retenir et les définitions jusqu\'au toucher', () => {
     renderResume()
-    fireEvent.click(screen.getAllByRole('button', { name: 'Me tester' })[0])
+    fireEvent.click(screen.getAllByRole('switch', { name: 'Teste-toi' })[0])
     const point = screen.getByRole('button', { name: /Point 1 : masqué/ })
     expect(screen.getByRole('button', { name: /Définition de tiers état : masqué/ })).toBeInTheDocument()
     fireEvent.click(point)
     expect(screen.queryByRole('button', { name: /Point 1 : masqué/ })).not.toBeInTheDocument()
     expect(screen.getByRole('button', { name: /Point 2 : masqué/ })).toBeInTheDocument()
-    fireEvent.click(screen.getAllByRole('button', { name: 'Tout afficher' })[0])
+    fireEvent.click(screen.getAllByRole('switch', { name: 'Teste-toi' })[0])
     expect(screen.queryByRole('button', { name: /masqué/ })).not.toBeInTheDocument()
+  })
+
+  it('« J’ai fini le résumé » le marque comme lu et ouvre l’écran de fin', () => {
+    renderResume()
+    expect(JSON.parse(localStorage.getItem('reviz-revisions') || '[]')).toHaveLength(0)
+    fireEvent.click(screen.getByRole('button', { name: 'J’ai fini le résumé' }))
+    expect(screen.getByRole('heading', { level: 1, name: 'Résumé lu' })).toBeInTheDocument()
+    expect(screen.getByText('+30 XP')).toBeInTheDocument()
+    expect(JSON.parse(localStorage.getItem('reviz-revisions'))[0]).toMatchObject({ type: 'resume', lessonId: 'prog-revolution' })
+    expect(screen.getByRole('button', { name: /Passer aux flashcards · 4 cartes/ })).toBeInTheDocument()
+    fireEvent.click(screen.getByRole('button', { name: /Relire le résumé/ }))
+    expect(screen.getByRole('heading', { level: 1, name: 'La Révolution française' })).toBeInTheDocument()
   })
 
   it('« Vérifie-toi » nourrit la répétition espacée des flashcards', () => {
@@ -103,7 +120,7 @@ describe('<Resume /> — illustrations', () => {
     }])
     renderResume()
     const img = screen.getByRole('img', { name: 'Le Sacre de Napoléon' })
-    const section = img.closest('.resume-section-card')
+    const section = img.closest('.rs-partie')
     expect(within(section).getByText('La République est proclamée en 1792.')).toBeInTheDocument()
     expect(within(section).getByText('Jacques-Louis David, 1807, musée du Louvre')).toBeInTheDocument()
   })
@@ -121,12 +138,12 @@ describe('<Resume /> — illustrations', () => {
     }])
     renderResume()
     await screen.findByRole('img', { name: 'Le cœur' })
-    fireEvent.click(screen.getAllByRole('button', { name: 'Me tester' })[0])
+    fireEvent.click(screen.getAllByRole('switch', { name: 'Teste-toi' })[0])
     const legende = screen.getByRole('button', { name: /Légende masquée/ })
     expect(screen.getByText(/Retrouve chaque légende/)).toBeInTheDocument()
     fireEvent.click(legende.querySelector('text'))
     expect(legende).toHaveClass('is-revealed')
-    fireEvent.click(screen.getAllByRole('button', { name: 'Tout afficher' })[0])
+    fireEvent.click(screen.getAllByRole('switch', { name: 'Teste-toi' })[0])
     expect(legende).not.toHaveClass('is-revealed')
     expect(screen.queryByRole('button', { name: /Légende masquée/ })).not.toBeInTheDocument()
   })

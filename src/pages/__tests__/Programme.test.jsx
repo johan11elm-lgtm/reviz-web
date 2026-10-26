@@ -54,17 +54,26 @@ beforeEach(() => {
 afterEach(() => vi.unstubAllGlobals())
 
 describe('<Programme />', () => {
-  it('liste les matières de la classe avec leur nombre de chapitres et ouvre une matière', async () => {
+  it('montre les matières en anneaux et les chapitres de la matière choisie sur la route', async () => {
     renderPage()
-    expect(await screen.findByText('Maths')).toBeInTheDocument()
-    expect(screen.getByText('2 chapitres')).toBeInTheDocument()
-    expect(screen.getByText('1 chapitre')).toBeInTheDocument()
-    expect(screen.getByText(/3ème · 3 chapitres/)).toBeInTheDocument()
-    fireEvent.click(screen.getByRole('button', { name: /^Maths/ }))
-    expect(nav).toHaveBeenCalledWith('/programme/maths')
+    expect(await screen.findByRole('radio', { name: 'Maths : 0 sur 2 chapitres faits' })).toBeInTheDocument()
+    expect(screen.getByRole('radio', { name: 'Français : 0 sur 1 chapitres faits' })).toBeInTheDocument()
+    expect(screen.getByText('0 % du programme')).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: 'Chapitres · Maths' })).toBeInTheDocument()
+    // Rien d'ouvert : la case en cours est le premier chapitre, annoncé comme le prochain.
+    expect(screen.getByRole('heading', { level: 3, name: 'Le théorème de Thalès' })).toBeInTheDocument()
+    expect(screen.getByText('2 chapitres en maths. On commence par le premier ?')).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: "C'est parti" })).toBeEnabled()
+    // Un chapitre pas encore prêt ne se lance pas.
+    fireEvent.click(screen.getByRole('button', { name: /^Chapitre 2 : Trigonométrie/ }))
+    expect(screen.getByRole('button', { name: 'Bientôt' })).toBeDisabled()
+    // Changer de matière remet la case choisie sur le chapitre en cours.
+    fireEvent.click(screen.getByRole('radio', { name: /^Français/ }))
+    expect(screen.getByRole('heading', { name: 'Chapitres · Français' })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { level: 3, name: "L'argumentation" })).toBeInTheDocument()
   })
 
-  it('montre l’avancement de chaque matière : cartes à revoir, tout maîtrisé, une encoche par chapitre', async () => {
+  it('montre l’avancement de chaque matière et le chapitre en cours', async () => {
     const now = Date.now(), DAY = 86400000
     localStorage.setItem('reviz-lessons', JSON.stringify([
       { id: 'prog-thales', title: 'Le théorème de Thalès', subject: 'Maths', flashcardsCount: 2, source: 'programme' },
@@ -75,16 +84,17 @@ describe('<Programme />', () => {
       'prog-thales_1': { interval: 3, reps: 2, ease: 2.5, nextReview: now + 3 * DAY },
       'prog-argumentation_0': { interval: 3, reps: 2, ease: 2.5, nextReview: now + 3 * DAY },
     }))
-    const { container } = renderPage()
-    expect(await screen.findByText('1 carte à travailler')).toBeInTheDocument()
-    expect(screen.getByText('Tout maîtrisé')).toBeInTheDocument()
-    expect(screen.getByText(/3ème · 2 chapitres commencés sur 3/)).toBeInTheDocument()
-    expect(screen.getByRole('button', { name: /^Maths : 2 chapitres · 1 commencé · 1 carte à travailler/ })).toBeInTheDocument()
-    expect(container.querySelectorAll('.programme-strip-seg--a-revoir')).toHaveLength(1)
-    expect(container.querySelectorAll('.programme-strip-seg--bientot')).toHaveLength(1)
-    expect(container.querySelectorAll('.programme-strip-seg--maitrise')).toHaveLength(1)
-    // Prochaine étape : le premier chapitre prêt et non maîtrisé ; aucune pour une matière finie.
-    expect(screen.getAllByText('Prochaine étape')).toHaveLength(1)
+    renderPage()
+    expect(await screen.findByRole('radio', { name: 'Français : 1 sur 1 chapitres faits' })).toBeInTheDocument()
+    expect(screen.getByRole('radio', { name: 'Maths : 0 sur 2 chapitres faits' })).toBeInTheDocument()
+    // Thalès compte pour moitié (ouvert, pas maîtrisé), l'argumentation en entier : 1,5 sur 3.
+    expect(screen.getByText('50 % du programme')).toBeInTheDocument()
+    expect(screen.getByText('0 chapitre sur 2 en maths. Prochain : le théorème de Thalès.')).toBeInTheDocument()
+    expect(screen.getAllByText('En cours')).toHaveLength(2) // sous la case et dans le détail
+    expect(screen.getByText('1 carte à revoir')).toBeInTheDocument()
+    fireEvent.click(screen.getByRole('radio', { name: /^Français/ }))
+    expect(screen.getByText('Tout est fait en français. On révise pour garder ça ?')).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: 'Réviser' })).toBeInTheDocument()
   })
 
   it('un lycéen voit le programme de 3e avec une note', async () => {
@@ -94,12 +104,13 @@ describe('<Programme />', () => {
     expect(screen.getByText(/Le programme de 2nde arrive bientôt/)).toBeInTheDocument()
   })
 
-  it('en mode essai, le bandeau rappelle que la progression reste sur l’appareil', async () => {
+  it('en mode essai, les leçons scannées demandent un compte gratuit', async () => {
     authState.isGuest = true
     renderPage()
     expect(await screen.findByText('Maths')).toBeInTheDocument()
-    expect(screen.getByText('Mode essai')).toBeInTheDocument()
-    expect(screen.getByRole('link', { name: 'Créer mon compte' })).toHaveAttribute('href', '/inscription')
+    expect(screen.getByText('Avec un compte gratuit')).toBeInTheDocument()
+    fireEvent.click(screen.getByRole('button', { name: /Mes leçons scannées/ }))
+    expect(nav).toHaveBeenCalledWith('/scan')
   })
 
   it('affiche un état d’erreur si le catalogue ne charge pas', async () => {

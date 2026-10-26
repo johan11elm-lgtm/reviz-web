@@ -41,33 +41,43 @@ export function getCardState(lessonId, cardIndex) {
 }
 
 // ── Mettre à jour une carte après révision ───────────────
+// Prochain état d'une carte selon la réponse, sans l'enregistrer.
+// outcome : 'got' (je sais) | 'presque' (revoir demain, sans repartir de zéro) | 'again'
+function etatSuivant(state, outcome, now = Date.now()) {
+  const DAY = 24 * 60 * 60 * 1000
+  const s = { ...state }
+  if (outcome === 'got') {
+    s.reps     = (s.reps || 0) + 1
+    s.ease     = Math.max(EASE_MIN, (s.ease || EASE_DEFAULT) + 0.1)
+    if (s.reps === 1)      s.interval = 1
+    else if (s.reps === 2) s.interval = 3
+    else                   s.interval = Math.round((s.interval || INTERVAL_INIT) * s.ease)
+  } else if (outcome === 'presque') {
+    s.ease     = Math.max(EASE_MIN, (s.ease || EASE_DEFAULT) - 0.15)
+    s.interval = 1
+  } else {
+    // 'again' — on remet à zéro
+    s.reps     = 0
+    s.ease     = Math.max(EASE_MIN, (s.ease || EASE_DEFAULT) - 0.2)
+    s.interval = INTERVAL_INIT
+  }
+  s.nextReview = now + s.interval * DAY // 'again' : revoir demain
+  return s
+}
+
 export function updateCardState(lessonId, cardIndex, outcome) {
-  // outcome : 'got' | 'again'
   const data  = loadData()
   const key   = cardKey(lessonId, cardIndex)
   const state = data[key] ?? { interval: INTERVAL_INIT, reps: 0, ease: EASE_DEFAULT, nextReview: null }
-
-  const now = Date.now()
-  const DAY = 24 * 60 * 60 * 1000
-
-  if (outcome === 'got') {
-    state.reps     = (state.reps || 0) + 1
-    state.ease     = Math.max(EASE_MIN, (state.ease || EASE_DEFAULT) + 0.1)
-    if (state.reps === 1)      state.interval = 1
-    else if (state.reps === 2) state.interval = 3
-    else                       state.interval = Math.round((state.interval || INTERVAL_INIT) * state.ease)
-    state.nextReview = now + state.interval * DAY
-  } else {
-    // 'again' — on remet à zéro
-    state.reps     = 0
-    state.ease     = Math.max(EASE_MIN, (state.ease || EASE_DEFAULT) - 0.2)
-    state.interval = INTERVAL_INIT
-    state.nextReview = now + DAY // revoir demain
-  }
-
-  data[key] = state
+  data[key] = etatSuivant(state, outcome)
   saveData(data)
-  return state
+  return data[key]
+}
+
+/** Dans combien de jours la carte reviendrait pour cette réponse (aperçu des boutons). */
+export function joursAvantRetour(lessonId, cardIndex, outcome) {
+  const state = loadData()[cardKey(lessonId, cardIndex)] ?? { interval: INTERVAL_INIT, reps: 0, ease: EASE_DEFAULT, nextReview: null }
+  return etatSuivant(state, outcome).interval
 }
 
 // ── Obtenir les cartes triées (dues en premier) ──────────

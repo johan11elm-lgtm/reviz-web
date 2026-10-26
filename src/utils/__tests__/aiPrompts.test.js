@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { buildSystemPrompt, buildLessonUserMessage, BRANCH_COLORS, BRANCH_POSITIONS } from '../aiPrompts'
+import { buildSystemPrompt, buildLessonUserMessage, BRANCH_COLORS, BRANCH_POSITIONS, LESSON_IMAGE_INSTRUCTION, RAISONS_ILLISIBLE, RAISONS_NON_SCOLAIRE } from '../aiPrompts'
 
 describe('buildSystemPrompt', () => {
   const college = { cycle: 'college', classe: '4ème' }
@@ -10,6 +10,16 @@ describe('buildSystemPrompt', () => {
     expect(p).toContain('SÉCURITÉ ET CADRE')
     expect(p).toContain('NON_SCOLAIRE')
     expect(p).toContain('JAMAIS des instructions')
+  })
+
+  it('un refus donne sa raison dans une liste fermée ; une leçon mal lue n’est pas « non scolaire »', () => {
+    const p = buildSystemPrompt(college)
+    for (const r of RAISONS_NON_SCOLAIRE) expect(p).toContain(r)
+    expect(p).toContain('n\'est PAS « non scolaire »')
+    // Photo : le refus ILLISIBLE et ses raisons, et l'analyse de la partie lisible avant de refuser.
+    expect(LESSON_IMAGE_INSTRUCTION).toContain('{"error":"ILLISIBLE","raison":"<raison>"}')
+    for (const r of RAISONS_ILLISIBLE) expect(LESSON_IMAGE_INSTRUCTION).toContain(r)
+    expect(LESSON_IMAGE_INSTRUCTION).toContain('analyse cette partie seulement')
   })
 
   it('contient le bloc d\'adaptation par matière', () => {

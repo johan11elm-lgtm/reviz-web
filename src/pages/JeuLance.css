@@ -1,0 +1,178 @@
+/* ─── Réviz lance : une salle de classe en carton (calques générés, public/jeux/lance/) ───────────
+ * Le mur du fond occupe tout l'écran ; de haut en bas : le tableau, les trois paniers, Réviz derrière
+ * son pupitre. Paniers et boule sont placés par transform à chaque image (JeuLance.jsx). */
+.ln-page { background: #C98A4E; overflow: clip; }
+@media (max-width: 430px) {
+  .app.ln-page { height: var(--hauteur-ecran, 100svh); }
+}
+.ln-page .ln-monde {
+  position: absolute; inset: 0;
+  background: url('/jeux/lance/fond.webp') center bottom / cover no-repeat;
+}
+.ln-page .ln-monde::after {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(120% 75% at 50% 42%, transparent 55%, rgba(60,30,10,.32) 100%);
+}
+/* La scène est le repère de tout ce qui bouge : elle ne défile ni ne change de taille. */
+.ln-page .ln-scene {
+  position: relative; z-index: 1;
+  width: 100%; height: 100%; box-sizing: border-box;
+  max-width: 520px; margin: 0 auto;
+  display: flex; flex-direction: column; align-items: center;
+  padding: calc(env(safe-area-inset-top, 0px) + 12px) 14px 0;
+}
+.ln-page .ln-hud { width: 100%; position: relative; z-index: 10; }
+
+/* ── Le tableau : l'image est découpée en 9 (cadre, rigole) pour prendre la hauteur voulue ── */
+.ln-page .ln-tableau {
+  --k: .4; /* échelle du cadre (tableau.webp : 900 px de large) */
+  position: relative; z-index: 1; flex: none;
+  width: min(100%, 380px); height: clamp(100px, 21svh, 168px); margin-top: clamp(6px, 3svh, 34px);
+  box-sizing: border-box; padding: 0; background: none; color: #FDFBF4; cursor: default;
+  border-style: solid; border-color: transparent;
+  border-width: calc(50px * var(--k)) calc(58px * var(--k)) calc(56px * var(--k)) calc(56px * var(--k));
+  border-image: url('/jeux/lance/tableau.webp') 50 58 56 56 fill / calc(50px * var(--k)) calc(58px * var(--k)) calc(56px * var(--k)) calc(56px * var(--k)) stretch;
+  filter: drop-shadow(0 8px 10px rgba(60,30,10,.35));
+  -webkit-tap-highlight-color: transparent;
+}
+.ln-page .ln-tableau--annonce { cursor: pointer; }
+/* Craie : blanc cassé un peu poudreux (grain en masque), écrite de gauche à droite. */
+.ln-page .ln-craie {
+  position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
+  text-align: center; padding: 0 8px;
+  text-shadow: 0 0 1px rgba(255,255,255,.6), 0 0 6px rgba(255,255,255,.18);
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.1' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 -1.6 1.9'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.1' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 -1.6 1.9'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.ln-page .ln-craie > span { animation: ln-ecrit .34s steps(9, end) backwards; }
+.ln-page .ln-craie > span:nth-child(2) { animation-delay: .08s; }
+.ln-page .ln-craie > span:nth-child(3) { animation-delay: .2s; }
+@keyframes ln-ecrit { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+.ln-page .ln-craie-titre { font-size: 13px; font-weight: 700; letter-spacing: .02em; opacity: .8; border-bottom: 1.5px solid rgba(255,255,255,.45); padding-bottom: 1px; }
+.ln-page .ln-craie-question { font-family: var(--font-display); font-size: 40px; font-weight: 800; letter-spacing: -.02em; line-height: 1.02; }
+.ln-page .ln-craie-question--long { font-size: 26px; }
+.ln-page .ln-craie-aide { font-size: 14px; font-weight: 700; opacity: .85; }
+.ln-page .ln-craie--annonce .ln-craie-question { font-size: 34px; }
+.ln-page .ln-craie--annonce .ln-craie-question--long { font-size: 27px; }
+.ln-page .ln-craie--annonce .ln-craie-aide { font-size: 13px; }
+
+/* ── Les paniers : chacun en deux calques (le haut du cercle derrière la boule, le devant et le
+   filet devant), déplacés ensemble à chaque image. L'étiquette pend devant le filet. ── */
+.ln-page .ln-paniers {
+  position: relative; flex: none; width: min(100%, 360px); margin-top: clamp(4px, 2.4svh, 28px);
+  display: flex; justify-content: space-between;
+}
+.ln-page .ln-case { position: relative; width: 40%; aspect-ratio: 560 / 565; margin-bottom: 17%; }
+.ln-page .ln-panier-fond, .ln-page .ln-panier-avant {
+  position: absolute; inset: 0; display: block; will-change: transform; transform-origin: 50% 8%;
+}
+.ln-page .ln-panier-fond { z-index: 2; clip-path: inset(0 0 47% 0); filter: drop-shadow(0 6px 6px rgba(60,30,10,.3)); pointer-events: none; }
+.ln-page .ln-panier-fond img, .ln-page .ln-filet { display: block; width: 100%; height: auto; pointer-events: none; -webkit-user-drag: none; user-select: none; }
+.ln-page .ln-panier-avant { z-index: 7; padding: 0; border: 0; background: none; color: inherit; cursor: pointer; pointer-events: none; }
+.ln-page .ln-filet { clip-path: inset(53% 0 0 0); transform-origin: 50% 53%; }
+.ln-page .ln-panier--marque .ln-filet { animation: ln-filet .5s ease-out; }
+@keyframes ln-filet { 30% { transform: scaleY(1.12) scaleX(.95); } 60% { transform: scaleY(.97); } }
+
+.ln-page .ln-etiquette {
+  position: absolute; left: 4%; right: 4%; top: 64%; aspect-ratio: 480 / 410;
+  background: url('/jeux/lance/etiquette.webp') center / 100% 100% no-repeat;
+  display: flex; align-items: flex-start; justify-content: center;
+  padding-top: 36%; box-sizing: border-box;
+  transform-origin: 50% 8%;
+  animation: ln-retourne .3s cubic-bezier(.3, 1.4, .5, 1) backwards;
+  filter: drop-shadow(0 4px 4px rgba(60,30,10,.3));
+}
+.ln-page .ln-etiquette > span {
+  display: flex; align-items: center; justify-content: center; height: 48px; width: 90%;
+  font-family: var(--font-display); font-size: 25px; font-weight: 800; letter-spacing: -.02em; line-height: 1;
+  color: #2B1E14; text-align: center; overflow-wrap: anywhere;
+}
+.ln-page .ln-etiquette--long > span { font-size: 19px; }
+.ln-page .ln-etiquette--tres-long > span { font-size: 16px; }
+/* Un nombre, un mot très court (48, Rome, Eau) : en grand. */
+.ln-page .ln-etiquette--court > span { font-size: 31px; font-weight: 900; }
+/* L'étiquette se retourne quand la question change : un tour sur sa ficelle, en 2D. */
+@keyframes ln-retourne { from { transform: scaleX(0) rotate(-6deg); } }
+.ln-page .ln-panier--vise .ln-etiquette { transform: translateY(-4px) scale(1.06); transition: transform .12s ease-out; }
+.ln-page .ln-panier--marque .ln-etiquette { animation: ln-hop .45s cubic-bezier(.3, 1.6, .5, 1); }
+.ln-page .ln-panier--marque .ln-etiquette > span { color: #12793F; }
+.ln-page .ln-panier--rate .ln-etiquette { animation: ln-non .4s ease-in-out; }
+.ln-page .ln-panier--rate .ln-etiquette > span { color: #C2361F; }
+.ln-page .ln-panier--juste .ln-etiquette { animation: ln-hop .45s .15s cubic-bezier(.3, 1.6, .5, 1) backwards; }
+.ln-page .ln-panier--juste .ln-etiquette > span { color: #12793F; }
+@keyframes ln-hop { 40% { transform: translateY(-10px) scale(1.12); } }
+@keyframes ln-non { 20%, 60% { transform: rotate(-7deg); } 40%, 80% { transform: rotate(7deg); } }
+.ln-page .ln-plus {
+  position: absolute; left: 0; right: 0; top: 18%; text-align: center; pointer-events: none;
+  font-family: var(--font-display); font-size: 22px; font-weight: 900; color: #FFF6E8;
+  text-shadow: 0 3px 0 #12793F, 0 6px 10px rgba(20,60,30,.4);
+  animation: ln-plus .8s ease-out forwards;
+}
+@keyframes ln-plus { from { transform: translateY(10px) scale(.6); opacity: 0; } 25% { transform: translateY(-4px) scale(1.1); opacity: 1; } to { transform: translateY(-34px); opacity: 0; } }
+
+/* ── La boule qui vole : un calque fixe, placé par transform ── */
+.ln-page .ln-boule {
+  position: absolute; left: 0; top: 0; z-index: 9; width: 52px; height: 52px; opacity: 0;
+  will-change: transform; pointer-events: none;
+  filter: drop-shadow(0 6px 5px rgba(40,20,10,.3));
+}
+
+/* ── Réviz derrière son pupitre ── */
+.ln-page .ln-reviz {
+  position: relative; margin-top: auto; margin-bottom: calc(var(--taille) * -.1); z-index: 4;
+  align-self: center; display: flex; justify-content: center;
+}
+.ln-page .ln-reviz .mg-combo { left: 84%; top: 14%; }
+.ln-page .ln-bulle { position: absolute; left: 60%; bottom: 62%; z-index: 3; width: max-content; max-width: 160px; }
+/* Le pupitre suit Réviz (même proportion à toutes les tailles) : son plateau passe à 64 % de sa
+   hauteur, sous le ventre (le plateau commence à 24 % de la hauteur du pupitre) ; il déborde de l'écran sur les côtés et en bas. */
+.ln-page .ln-pupitre {
+  position: absolute; z-index: 5; left: 50%; top: 40%; translate: -50% 0;
+  width: 260%; max-width: none; height: auto; pointer-events: none;
+  filter: drop-shadow(0 -4px 14px rgba(60,30,10,.25));
+}
+
+/* Toute la scène sous le haut de l'écran reçoit le geste (glisser vers un panier, ou toucher). */
+.ln-page .ln-zone { position: absolute; left: 0; right: 0; top: 64px; bottom: 0; z-index: 8; touch-action: none; -webkit-tap-highlight-color: transparent; }
+/* Le geste montré : un doigt qui part de la boule et monte vers les paniers ; la consigne à la
+   craie sur le pupitre. */
+.ln-page .ln-aide {
+  position: absolute; left: 0; right: 0; bottom: 3%; z-index: 1; pointer-events: none; text-align: center;
+  font-family: var(--font-display); font-size: 16px; font-weight: 800; color: #3A2616; white-space: nowrap;
+}
+.ln-page .ln-aide i {
+  position: absolute; left: 22%; bottom: calc(100% + 110px); width: 34px; height: 34px; border-radius: 50%;
+  background: rgba(255,255,255,.6); box-shadow: 0 0 0 3px rgba(255,255,255,.35), 0 4px 10px rgba(60,30,10,.25);
+  animation: ln-doigt 1.3s cubic-bezier(.5, 0, .3, 1) infinite;
+}
+@keyframes ln-doigt { 0% { transform: translate(0, 30px); opacity: 0; } 20% { opacity: 1; } 70% { transform: translate(-6px, -90px); opacity: .9; } 100% { transform: translate(-8px, -105px); opacity: 0; } }
+
+/* ── Ordinateur : la scène au centre, plus grande ── */
+.jx-page--large.ln-page .ln-tableau { --k: .48; width: 460px; height: 190px; margin-top: 18px; }
+.jx-page--large.ln-page .ln-paniers { width: 420px; margin-top: 10px; }
+.jx-page--large.ln-page .ln-craie-question { font-size: 52px; }
+.jx-page--large.ln-page .ln-craie-question--long { font-size: 34px; }
+.jx-page--large.ln-page .ln-etiquette > span { font-size: 28px; }
+.jx-page--large.ln-page .ln-etiquette--long > span { font-size: 21px; }
+
+/* Petits écrans (iPhone 12 ou SE dans Safari, barres affichées) : tableau plus bas, paniers plus serrés. */
+@media (max-width: 430px) and (max-height: 700px) {
+  .ln-page .ln-craie-question { font-size: 34px; }
+  .ln-page .ln-craie-question--long { font-size: 22px; }
+  .ln-page .ln-craie--annonce .ln-craie-question { font-size: 30px; }
+  .ln-page .ln-craie--annonce .ln-craie-question--long { font-size: 24px; }
+  .ln-page .ln-case { width: 37%; }
+  .ln-page .ln-etiquette > span { font-size: 23px; }
+  .ln-page .ln-etiquette--long > span { font-size: 17px; }
+  .ln-page .ln-etiquette--tres-long > span { font-size: 14.5px; }
+}
+@media (max-width: 430px) and (max-height: 600px) {
+  .ln-page .ln-craie-aide { display: none; }
+  .ln-page .ln-bulle { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ln-page .ln-craie > span, .ln-page .ln-etiquette, .ln-page .ln-aide i, .ln-page .ln-filet { animation-duration: .01s !important; }
+}
+/* Ordinateur : le fond est bien plus large que haut, on montre le mur plutôt que le plancher. */
+.jx-page--large.ln-page .ln-monde { background-position: center 62%; }

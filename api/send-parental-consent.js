@@ -9,7 +9,8 @@
 // GET /api/send-parental-consent (cron Vercel quotidien, voir vercel.json)
 // Relance une fois les parents qui n'ont pas répondu au bout de 7 jours, et
 // relance les élèves qui n'ont pas encore donné l'email d'un parent (« Plus
-// tard ») à J+3, J+10 et J+14 avant la mise en pause du compte. Greffé
+// tard ») à J+3, J+10 et J+14 avant la mise en pause du compte. Envoie aussi
+// le rappel du lendemain de la première session (api/_rappels.js). Greffé
 // ici plutôt que dans une 13e fonction (limite du plan Vercel Hobby). Seul
 // Vercel peut l'appeler : il envoie CRON_SECRET dans l'en-tête Authorization.
 
@@ -17,6 +18,7 @@ import { Resend } from 'resend';
 import { randomUUID } from 'node:crypto';
 import { getDb, getAuthAdmin } from './_firebaseAdmin.js';
 import { DELAI_ADRESSE_MS, DELAI_REPONSE_MS } from '../src/utils/consent.js';
+import { relancerLendemain } from './_rappels.js';
 
 export const config = { maxDuration: 60 };
 
@@ -35,11 +37,25 @@ function escapeHtml(s) {
   ));
 }
 
+/**
+ * Prénom affiché dans les e-mails : il vient du client (corps de la requête
+ * ou profil users/{uid}, modifiable par l'élève), donc on n'en
+ * garde que des lettres, espaces, tirets et apostrophes, 20 caractères au plus.
+ * Sinon n'importe quel compte enverrait le texte de son choix (lien compris)
+ * signé noreply@revizapp.fr.
+ */
+export function prenomPourEmail(brut) {
+  const propre = String(brut ?? '').normalize('NFC')
+    .replace(/[^\p{L}\p{M} '’-]/gu, '')
+    .replace(/\s+/g, ' ').trim().slice(0, 20).trim();
+  return propre || null;
+}
+
 const lienAutorisation = (token, uid) => `https://app.revizapp.fr/api/approve-consent?token=${token}&uid=${uid}`;
 
 /** Email au parent : première demande, ou relance (avec les jours restants). */
 export function mailParent({ prenom, lien, joursRestants = null }) {
-  const safeName = escapeHtml(prenom || 'Votre enfant');
+  const safeName = escapeHtml(prenomPourEmail(prenom) || 'Votre enfant');
   const relance = joursRestants != null;
   const jours = `${joursRestants} jour${joursRestants > 1 ? 's' : ''}`;
   return {
@@ -117,7 +133,7 @@ export async function relancerParents({ db, envoyer, maintenant = Date.now() }) 
 
 /** Email à l'élève qui n'a pas encore donné l'adresse d'un parent. */
 export function mailEleve({ prenom, joursRestants }) {
-  const safeName = escapeHtml(prenom || '');
+  const safeName = escapeHtml(prenomPourEmail(prenom) || '');
   const dernier = joursRestants <= 1;
   const jours = `${joursRestants} jour${joursRestants > 1 ? 's' : ''}`;
   return {
@@ -196,11 +212,12 @@ export default async function handler(req, res) {
       const envoyer = m => resend.emails.send(m);
       const db = getDb();
       const parents = await relancerParents({ db, envoyer });
-      const eleves = await relancerEleves({
-        db, envoyer,
-        emailDe: uid => getAuthAdmin().getUser(uid).then(u => u.email || null, () => null),
-      });
-      return res.status(200).json({ ...parents, ...eleves });
+      const emailDe = uid => getAuthAdmin().getUser(uid).then(u => u.email || null, () => null);
+      const eleves = await relancerEleves({ db, envoyer, emailDe });
+      // Un échec du rappel J+1 ne doit pas masquer les relances déjà faites.
+      const lendemain = await relancerLendemain({ db, envoyer, emailDe })
+        .catch(err => { console.error('[rappel-j1]', err?.message || err); return { rappelsJ1: 0 }; });
+      return res.status(200).json({ ...parents, ...eleves, ...lendemain });
     } catch (err) {
       console.error('[relance-parent]', err?.message || err);
       return res.status(500).json({ error: 'RELANCE_FAILED' });

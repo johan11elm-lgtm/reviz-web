@@ -1,0 +1,430 @@
+/* ─── Réviz Games, prototype du 22/10 : plein écran dans la teinte de la matière ──────────
+ * Même famille que les flashcards (fond --ch-*, grain, bulles), sans barre du bas. */
+.jx-page {
+  --ch-encre: #1B1A23;
+  --ch-doux: #6E675B;
+  --jx-eau: #9FD3EE;
+  --jx-eau-fonce: #6BB8E0;
+  position: relative;
+  overflow: hidden;
+  background: var(--ch-fond);
+  color: var(--ch-encre);
+}
+.jx-page .jx-grain {
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.45 0 0 0 0 0.25 0 0 0 0 0.1 0 0 0 .32 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: .5;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+.jx-page .jx-deco { position: absolute; border-radius: 50%; background: var(--ch-bulle); pointer-events: none; }
+.jx-page .jx-deco--a { width: 160px; height: 160px; top: 260px; left: -80px; }
+.jx-page .jx-deco--b { width: 96px; height: 96px; top: 96px; right: -34px; }
+
+.jx-page .jx-ecran {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  min-height: 0;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  max-width: 560px;
+  margin: 0 auto;
+  padding: calc(env(safe-area-inset-top, 0px) + 12px) 18px calc(env(safe-area-inset-bottom, 0px) + 16px);
+  overflow-y: auto;
+}
+
+/* ── En-tête ── */
+.jx-page .jx-ligne-haut { display: flex; align-items: center; gap: 12px; }
+.jx-page .jx-rond {
+  width: 44px; height: 44px; flex: none;
+  display: flex; align-items: center; justify-content: center;
+  border: 0; border-radius: 50%;
+  background: #fff; color: var(--ch-encre);
+  box-shadow: 0 4px 12px var(--ch-ombre);
+  cursor: pointer;
+}
+.jx-page .jx-surtitre { font-size: 13px; font-weight: 700; opacity: .7; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.jx-page .jx-tete { min-width: 0; flex: 1; display: flex; flex-direction: column; }
+.jx-page .jx-tete-titre { font-size: 12px; font-weight: 700; opacity: .7; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.jx-page .jx-tete-compte { font-family: var(--font-display); font-size: 20px; font-weight: 800; letter-spacing: -.02em; }
+.jx-page .jx-score {
+  flex: none; min-width: 64px; padding: 8px 14px; border-radius: 999px;
+  background: var(--ch-encre); color: #fff; text-align: center;
+  font-family: var(--font-display); font-size: 18px; font-weight: 800; font-variant-numeric: tabular-nums;
+}
+
+/* ── Chrono : une barre qui se vide, rouge sur la fin ── */
+.jx-page .jx-chrono { height: 10px; border-radius: 999px; background: rgba(255,255,255,.55); overflow: hidden; flex: none; }
+.jx-page .jx-chrono-barre {
+  display: block; height: 100%; border-radius: inherit;
+  background: var(--ch-encre);
+  transform-origin: left center;
+  animation: jx-chrono var(--duree) linear forwards, jx-chrono-teinte var(--duree) steps(1, end) forwards;
+}
+@keyframes jx-chrono { from { transform: scaleX(1); } to { transform: scaleX(0); } }
+@keyframes jx-chrono-teinte { 0% { background: var(--ch-encre); } 75% { background: #FF5470; } }
+
+/* ── Consigne au-dessus du jeu, Réviz à droite ── */
+.jx-page .jx-scene-haut { display: flex; align-items: center; gap: 8px; min-height: 92px; }
+.jx-page .jx-consigne-ligne { flex: 1; margin: 0; font-size: 15px; line-height: 1.35; }
+.jx-page .jx-consigne-ligne b:first-child { font-family: var(--font-display); font-size: 19px; font-weight: 800; display: block; }
+.jx-page .jx-reviz { position: relative; flex: none; }
+.jx-page .jx-gag {
+  position: absolute; left: -54px; top: 6px; z-index: 2;
+  padding: 6px 10px; border-radius: 14px 14px 4px 14px;
+  background: #fff; box-shadow: 0 6px 14px var(--ch-ombre);
+  font-family: var(--font-display); font-size: 15px; font-weight: 800; color: #D32F4D; white-space: nowrap;
+  animation: jx-gag .95s ease-out forwards;
+}
+@keyframes jx-gag { 0% { transform: scale(.4) rotate(-8deg); opacity: 0; } 15% { transform: scale(1.1) rotate(3deg); opacity: 1; } 25% { transform: scale(1) rotate(0); } 80% { opacity: 1; } 100% { opacity: 0; transform: translateY(-10px); } }
+
+.jx-page .jx-aire { flex: 1; min-height: 330px; display: flex; flex-direction: column; }
+
+/* ── Écran de consigne ── */
+.jx-page .jx-consigne {
+  flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px;
+  border: 0; border-radius: 28px; background: #fff; color: var(--ch-encre);
+  box-shadow: 0 10px 26px var(--ch-ombre); cursor: pointer; padding: 24px;
+  animation: jx-pop .35s cubic-bezier(.2, 1.4, .4, 1) both;
+}
+.jx-page .jx-consigne-num { font-size: 13px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; opacity: .55; }
+.jx-page .jx-consigne-titre { font-family: var(--font-display); font-size: 44px; font-weight: 900; letter-spacing: -.03em; line-height: 1; }
+.jx-page .jx-consigne-sous { font-size: 17px; text-align: center; line-height: 1.35; max-width: 300px; }
+.jx-page .jx-consigne-temps { margin-top: 6px; padding: 6px 14px; border-radius: 999px; background: var(--ch-fond); font-size: 13px; font-weight: 800; }
+@keyframes jx-pop { from { transform: scale(.7); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+/* ── La pêche ── */
+.jx-page .jx-bassin {
+  position: relative; flex: 1;
+  container-type: inline-size;
+  display: flex; flex-direction: column; justify-content: space-around;
+  border-radius: 28px; overflow: hidden;
+  background: linear-gradient(180deg, var(--jx-eau) 0%, var(--jx-eau-fonce) 100%);
+  box-shadow: inset 0 6px 0 rgba(255,255,255,.35), 0 10px 26px var(--ch-ombre);
+}
+.jx-page .jx-vague { position: absolute; left: -10%; right: -10%; height: 22px; border-radius: 50%; border-top: 3px solid rgba(255,255,255,.45); pointer-events: none; }
+.jx-page .jx-vague--a { top: 30%; }
+.jx-page .jx-vague--b { top: 64%; }
+.jx-page .jx-couloir { position: relative; height: 64px; }
+.jx-page .jx-nage {
+  position: absolute; top: 8px; left: 0;
+  animation: jx-nage var(--duree) linear var(--delai) infinite;
+}
+.jx-page .jx-couloir--1 .jx-nage { animation-direction: reverse; }
+.jx-page .jx-nage--stop { animation-play-state: paused; }
+@keyframes jx-nage { from { transform: translateX(-100%); } to { transform: translateX(100cqw); } }
+.jx-page .jx-poisson {
+  position: relative;
+  max-width: 190px; padding: 11px 16px; border: 0; border-radius: 999px;
+  background: #fff; color: var(--ch-encre);
+  font: 700 15px/1.2 'Geist', system-ui, sans-serif; white-space: nowrap; overflow: visible;
+  box-shadow: 0 4px 0 rgba(20,60,90,.18);
+  cursor: pointer;
+  animation: jx-flotte 1.6s ease-in-out infinite alternate;
+}
+@keyframes jx-flotte { from { transform: translateY(-3px); } to { transform: translateY(3px); } }
+.jx-page .jx-poisson--peche { background: #34C77B; color: #fff; animation: jx-attrape .55s ease-in forwards; }
+.jx-page .jx-poisson--faux { background: #FF5470; color: #fff; animation: jx-plouf .6s ease-in forwards; }
+@keyframes jx-attrape { 0% { transform: scale(1.12); } 100% { transform: translateY(-140px) scale(.6); opacity: 0; } }
+@keyframes jx-plouf { 0%, 40% { transform: translateX(0); } 10%, 30% { transform: translateX(-6px); } 20% { transform: translateX(6px); } 100% { transform: translateY(40px); opacity: 0; } }
+.jx-page .jx-plus { position: absolute; left: 50%; top: -22px; transform: translateX(-50%); font-family: var(--font-display); font-size: 14px; font-weight: 900; color: #fff; text-shadow: 0 2px 0 rgba(0,0,0,.15); }
+
+/* ── La valise ── */
+.jx-page .jx-valise-aire { flex: 1; display: flex; flex-direction: column; gap: 10px; }
+.jx-page .jx-cartes { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.jx-page .jx-carte {
+  min-height: 58px; padding: 10px 12px; border: 0; border-radius: 18px;
+  background: #fff; color: var(--ch-encre);
+  font: 700 15px/1.25 'Geist', system-ui, sans-serif; text-align: center;
+  box-shadow: 0 4px 0 var(--ch-ombre), 0 8px 18px var(--ch-ombre);
+  cursor: pointer;
+  transition: transform .12s;
+}
+.jx-page .jx-carte:active { transform: scale(.96); }
+.jx-page .jx-carte--range { animation: jx-range .45s ease-in forwards; }
+.jx-page .jx-carte--rejet { background: #FFE0E5; color: #A81F36; animation: jx-rejet .7s ease-out forwards; }
+@keyframes jx-range { to { transform: translateY(170px) scale(.3); opacity: 0; } }
+@keyframes jx-rejet { 0% { transform: translateY(0); } 35% { transform: translateY(110px) scale(.6) rotate(8deg); } 65% { transform: translateY(-14px) rotate(-6deg); } 100% { transform: translateY(0) rotate(0); opacity: .45; } }
+.jx-page .jx-valise { position: relative; align-self: center; width: min(62%, 230px); margin-top: auto; }
+.jx-page .jx-valise--hop { animation: jx-hop .35s cubic-bezier(.3, 1.6, .5, 1); }
+@keyframes jx-hop { 0% { transform: scale(1, 1); } 40% { transform: scale(1.06, .92); } 100% { transform: scale(1, 1); } }
+.jx-page .jx-valise-img { display: block; width: 100%; height: auto; filter: drop-shadow(0 10px 14px var(--ch-ombre)); }
+.jx-page .jx-valise-compte {
+  position: absolute; left: 50%; top: 58%; transform: translate(-50%, -50%);
+  padding: 4px 12px; border-radius: 999px; background: rgba(255,255,255,.9);
+  font-family: var(--font-display); font-size: 18px; font-weight: 900;
+}
+
+/* ── Les paires ── */
+.jx-page .jx-paires { flex: 1; display: flex; flex-direction: column; gap: 12px; }
+.jx-page .jx-termes { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+.jx-page .jx-terme {
+  padding: 11px 16px; border: 3px solid transparent; border-radius: 999px;
+  background: #fff; color: var(--ch-encre);
+  font: 800 16px/1.15 'Geist', system-ui, sans-serif;
+  box-shadow: 0 4px 0 var(--ch-ombre); cursor: pointer;
+}
+.jx-page .jx-terme--choisi { border-color: var(--ch-encre); transform: translateY(-3px); }
+.jx-page .jx-defs { display: flex; flex-direction: column; gap: 8px; }
+.jx-page .jx-def {
+  padding: 12px 14px; border: 3px solid transparent; border-radius: 18px;
+  background: rgba(255,255,255,.7); color: var(--ch-encre);
+  font: 600 14px/1.35 'Geist', system-ui, sans-serif; text-align: left;
+  cursor: pointer; transition: background .15s;
+}
+.jx-page .jx-def:disabled { cursor: default; }
+.jx-page .jx-def--actif { background: #fff; box-shadow: 0 4px 0 var(--ch-ombre); }
+.jx-page .jx-relie { color: #fff; border-color: transparent; }
+.jx-page .jx-relie--0 { background: #7C6CF0; }
+.jx-page .jx-relie--1 { background: #FF8A3D; }
+.jx-page .jx-relie--2 { background: #34C77B; }
+.jx-page .jx-secoue { background: #FF5470 !important; color: #fff; animation: jx-secoue .45s; }
+@keyframes jx-secoue { 0%, 100% { transform: translateX(0); } 20%, 60% { transform: translateX(-7px); } 40%, 80% { transform: translateX(7px); } }
+.jx-page .jx-aide { margin: auto 0 0; text-align: center; font-size: 13px; font-weight: 700; opacity: .6; }
+
+/* ── Choix du chapitre ── */
+.jx-page .jx-titre { margin: 4px 0 0; font-family: var(--font-display); font-size: 38px; font-weight: 900; letter-spacing: -.03em; }
+.jx-page .jx-intro { margin: 0; font-size: 15px; color: var(--ch-doux); }
+.jx-page .jx-puces { display: flex; flex-wrap: wrap; gap: 8px; }
+.jx-page .jx-puce { padding: 8px 14px; border: 0; border-radius: 999px; background: rgba(255,255,255,.65); color: var(--ch-encre); font: 700 14px 'Geist', system-ui, sans-serif; cursor: pointer; }
+.jx-page .jx-puce--on { background: var(--ch-encre); color: #fff; }
+.jx-page .jx-chapitres { display: flex; flex-direction: column; gap: 8px; }
+.jx-page .jx-chapitre {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: 14px 16px; border: 0; border-radius: 18px; background: #fff; color: var(--ch-encre);
+  font: 700 15px/1.3 'Geist', system-ui, sans-serif; text-align: left;
+  box-shadow: 0 4px 0 var(--ch-ombre); cursor: pointer;
+}
+.jx-page .jx-jouer { flex: none; padding: 6px 12px; border-radius: 999px; background: var(--ch-fond); font-size: 13px; font-weight: 800; }
+
+/* La fin de partie et le récap : jeux/FinDePartie.css. */
+
+/* Mouvement réduit : les mots ne nagent plus, ils attendent en rangées. */
+@media (prefers-reduced-motion: reduce) {
+  .jx-page .jx-couloir { height: auto; display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; padding: 6px; }
+  .jx-page .jx-nage { position: static; animation: none; }
+  .jx-page .jx-poisson { animation: none; }
+}
+
+/* ─── Le tour de magie : une scène de théâtre en feutrine (calques générés, public/jeux/magie/) ──
+ * Le fond occupe tout l'écran ; Réviz magicien se tient derrière sa table, les cartes posées dessus. */
+.mg-page { background: #1E1A3A; }
+.mg-page .mg-monde {
+  position: absolute; inset: 0;
+  background: url('/jeux/magie/fond.webp') center top / cover no-repeat;
+}
+.mg-page .mg-monde::after {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(120% 70% at 50% 38%, transparent 55%, rgba(20,12,30,.45) 100%);
+}
+.mg-page .mg-scene {
+  position: relative; z-index: 1;
+  height: 100%; box-sizing: border-box;
+  max-width: 520px; margin: 0 auto;
+  display: flex; flex-direction: column; align-items: center;
+  padding: calc(env(safe-area-inset-top, 0px) + 12px) 16px calc(env(safe-area-inset-bottom, 0px) + 8px);
+}
+:is(.mg-page, .ln-page) .mg-hud { width: 100%; }
+:is(.mg-page, .ln-page) .mg-chrono {
+  flex: 1; height: 14px; border-radius: 999px; overflow: hidden;
+  background: rgba(255,255,255,.85); box-shadow: inset 0 2px 0 rgba(0,0,0,.12);
+}
+:is(.mg-page, .ln-page) .mg-chrono-barre {
+  display: block; height: 100%; border-radius: inherit; background: #7C6CF0;
+  transform-origin: left center;
+  animation: jx-chrono var(--duree) linear var(--attente) forwards, mg-chrono-teinte var(--duree) steps(1, end) var(--attente) forwards;
+}
+@keyframes mg-chrono-teinte { 0% { background: #7C6CF0; } 70% { background: #FF5470; } }
+
+.mg-page .mg-titre { position: relative; z-index: 3; margin-top: 10px; display: flex; flex-direction: column; align-items: center; color: #FFF6E8; text-align: center; text-shadow: 0 3px 0 rgba(60,20,10,.35); }
+.mg-page .mg-titre-num { font-size: 12px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; opacity: .85; }
+.mg-page .mg-titre h1 { margin: 2px 0 0; font-family: var(--font-display); font-size: 32px; font-weight: 900; letter-spacing: -.03em; line-height: 1; }
+
+/* Réviz au centre, sous le projecteur ; la table passe devant ses jambes. */
+.mg-page .mg-reviz { position: relative; margin-top: auto; z-index: 1; align-self: center; display: flex; justify-content: center; }
+/* clip et non hidden : un conteneur « hidden » reste défilable par le navigateur, qui le faisait
+   glisser de quelques dizaines de pixels pour montrer la carte touchée (le petit saut de la scène). */
+.mg-page { overflow: clip; }
+/* Hauteur figée sur le petit viewport (barres de Safari affichées) : avec 100dvh, la page changeait
+   de hauteur quand la barre de Safari se repliait ou revenait (souvent en touchant le bas de
+   l'écran) et toute la scène se recalait d'un coup. */
+@media (max-width: 430px) {
+  .app.mg-page { height: var(--hauteur-ecran, 100svh); }
+}
+
+.mg-page .mg-bulle { position: absolute; left: -40px; right: -40px; bottom: 90%; z-index: 3; display: flex; justify-content: center; }
+.jx-page--large.mg-page .mg-bulle { left: 66%; right: auto; bottom: 74%; width: max-content; max-width: 220px; }
+:is(.mg-page, .ln-page) .mg-gag { left: auto; right: -40px; top: 10px; }
+
+/* Grande table au premier plan : elle déborde de l'écran et cache le bas de Réviz. */
+.mg-page .mg-table { position: relative; z-index: 2; flex: none; width: calc(100% + 400px); margin: -124px 0 -60px; perspective: 900px; }
+.mg-page .mg-table-img { display: block; width: 100%; height: auto; filter: drop-shadow(0 12px 18px rgba(10,5,25,.45)); pointer-events: none; }
+
+/* Les cartes, posées sur la nappe : 3 × 2, dos en feutrine, face en carton crème. */
+.mg-page .mg-cartes {
+  position: absolute; left: 0; right: 0; top: 1%; margin: 0 auto;
+  width: min(330px, 42%);
+  /* 2 rangées de 3 cases ; chaque carte est placée sur sa case (--col, --rang) et glisse quand
+     Réviz l'échange avec une autre. Carte : 30 % de large, 6 % d'écart. */
+  aspect-ratio: 1 / .908;
+  /* posées sur la nappe, un peu couchées vers l'arrière (assez peu pour rester lisibles) */
+  transform: rotateX(22deg); transform-origin: 50% 0;
+  will-change: transform; /* toujours sur son propre calque : il ne se recompose pas en cours de partie */
+}
+/* Position par transform (et non left/top) : le navigateur fait glisser la carte sans la
+   redessiner, d'où plus de sursaut d'un pixel quand elle se recale sur la table. Les décalages
+   sont en % de la carte : 35 % / 30 % = 116,7 % en largeur ; 0,504 / 0,4085 = 123,4 % en hauteur. */
+.mg-page .mg-carte {
+  position: absolute; left: 0; top: 0; width: 30%; aspect-ratio: 636 / 866;
+  padding: 0; border: 0; background: none; cursor: pointer;
+  transform: translate(calc(var(--col) * 116.67%), calc(var(--rang) * 123.4%)) rotate(var(--r, 0deg)) scale(var(--s, 1));
+  transition: transform var(--pas, .6s) cubic-bezier(.5, 0, .3, 1);
+  will-change: transform;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none; user-select: none; outline: none;
+}
+/* Pendant un échange, les deux cartes se soulèvent et passent au-dessus des autres. */
+.mg-page .mg-carte--bouge { z-index: 2; --s: 1.1; }
+/* Les animations (distribution, envol) vivent sur un calque à part, pour ne pas écraser la
+   position de la carte. */
+.mg-page .mg-carte-anim { position: absolute; inset: 0; display: block; will-change: transform; }
+.mg-page .mg-cartes--apercu .mg-carte-anim { animation: mg-distribue .5s cubic-bezier(.2, 1.3, .4, 1) backwards; animation-delay: calc(var(--i) * 80ms); }
+@keyframes mg-distribue { from { transform: translate(0, -220px) rotate(-25deg) scale(.4); opacity: 0; } }
+/* Retournement en 2D (la carte se rétrécit sur sa largeur, change de face, se rouvre), comme dans
+   les jeux de cartes mobiles. Aucune 3D imbriquée dans la table inclinée : sur iPhone, une carte qui
+   passait en 3D forçait Safari à recomposer toute la table, et les cartes se recalaient d'un coup
+   (le petit sursaut au retournement et à la paire validée). */
+.mg-page .mg-carte-int {
+  position: absolute; inset: 0; display: block;
+  transform: scaleX(1);
+  transition: transform .4s cubic-bezier(.45, 0, .25, 1);
+  will-change: transform;
+}
+.mg-page .mg-carte--face .mg-carte-int { transform: scaleX(-1); }
+.mg-page .mg-face {
+  position: absolute; inset: 0;
+  background: center / 100% 100% no-repeat; border-radius: 9px;
+  box-shadow: 0 6px 8px rgba(10,5,25,.38);
+}
+.mg-page .mg-carte--bouge .mg-face { box-shadow: 0 14px 14px rgba(10,5,25,.42); }
+/* Chaque face s'efface pile au moment où la carte est de profil (0,2 s sur 0,4 s). */
+.mg-page .mg-face--avant { opacity: 0; transition: opacity 0s .2s; }
+.mg-page .mg-face--dos { transition: opacity 0s .2s; }
+.mg-page .mg-carte--face .mg-face--avant { opacity: 1; }
+.mg-page .mg-carte--face .mg-face--dos { opacity: 0; }
+.mg-page .mg-face--dos { background-image: url('/jeux/magie/carte-dos.webp'); }
+.mg-page .mg-face--avant {
+  transform: scaleX(-1); /* annule le miroir de la carte retournée */
+  background-image: url('/jeux/magie/carte-face.webp');
+  display: flex; align-items: center; justify-content: center;
+  padding: 14% 8%; box-sizing: border-box; text-align: center; color: #1B1235;
+}
+.mg-page .mg-face--terme span { font-family: var(--font-display); font-size: 21px; font-weight: 900; letter-spacing: -.02em; line-height: 1.05; hyphens: manual; }
+.mg-page .mg-face--indice span { font: 800 14.5px/1.18 'Geist', system-ui, sans-serif; }
+.mg-page .mg-face--terme.mg-face--long span { font-size: 16.5px; }
+.mg-page .mg-face--indice.mg-face--long span { font-size: 12.5px; }
+/* Un nombre, un mot très court : en grand, quelle que soit la carte (27, Eau, Rome). */
+.mg-page .mg-face--court span { font: 900 26px/1 var(--font-display); letter-spacing: -.02em; }
+
+/* Paire trouvée : les deux cartes, cerclées d'or, se soulèvent doucement puis s'envolent vers le
+   chapeau de Réviz en un seul mouvement continu. Chaque étape a sa propre courbe et la suivante
+   repart à la même vitesse : pas de grossissement brusque ni de cassure dans la trajectoire (ce qui
+   faisait sursauter l'ancien envol). L'envol attend la fin du retournement (0,4 s). */
+.mg-page .mg-carte--trouvee { pointer-events: none; z-index: 3; }
+.mg-page .mg-carte--trouvee .mg-face--avant { box-shadow: 0 0 0 4px #FFD25A inset, 0 0 14px 2px rgba(255,210,90,.75), 0 6px 8px rgba(10,5,25,.38); }
+.mg-page .mg-carte--trouvee .mg-carte-anim { animation: mg-envol 1.1s .45s both; }
+@keyframes mg-envol {
+  0% { transform: translateY(0) scale(1); opacity: 1; animation-timing-function: cubic-bezier(.33, 0, .67, 1); }
+  30% { transform: translateY(-16px) scale(1.05); opacity: 1; animation-timing-function: cubic-bezier(.4, 0, .9, .55); }
+  75% { opacity: 1; }
+  100% { transform: translateY(-320px) scale(.3) rotate(8deg); opacity: 0; }
+}
+.mg-page .mg-etincelles {
+  position: absolute; left: 50%; top: 50%; width: 8px; height: 8px; margin: -4px; border-radius: 50%;
+  background: #FFD25A;
+  box-shadow: 0 -46px 0 #FFD25A, 40px -24px 0 #FFF2B8, 44px 22px 0 #FFD25A, 0 48px 0 #FFF2B8, -42px 24px 0 #FFD25A, -40px -24px 0 #FFF2B8;
+  animation: mg-etincelles .7s ease-out forwards;
+}
+@keyframes mg-etincelles { from { transform: scale(.2); opacity: 1; } to { transform: scale(1.5) rotate(40deg); opacity: 0; } }
+/* Erreur : les cartes restent posées, seul un liseré rouge les signale. */
+.mg-page .mg-carte--rate .mg-face--avant { box-shadow: 0 0 0 4px #FF5470 inset, 0 6px 8px rgba(10,5,25,.38); }
+
+/* Annonce du tour, posée sur la table. */
+.mg-page .mg-annonce {
+  position: absolute; left: 0; right: 0; top: 10%; margin: 0 auto;
+  width: min(300px, 82%); padding: 18px 16px; border: 0; border-radius: 22px;
+  background: #FFF6E8; color: #2A2140; cursor: pointer;
+  display: flex; flex-direction: column; gap: 4px; align-items: center;
+  box-shadow: 0 6px 0 #D9B26B, 0 14px 26px rgba(10,5,25,.4);
+  animation: jx-pop .35s cubic-bezier(.2, 1.4, .4, 1) both;
+}
+.mg-page .mg-annonce-titre { font-family: var(--font-display); font-size: 26px; font-weight: 900; letter-spacing: -.02em; }
+.mg-page .mg-annonce-sous { font-size: 13px; font-weight: 700; opacity: .7; }
+
+.jx-page--large.mg-page .mg-table { width: 940px; margin: -120px 0 -70px; }
+.jx-page--large.mg-page .mg-cartes { width: 400px; }
+.jx-page--large.mg-page .mg-face--terme span { font-size: 26px; }
+.jx-page--large.mg-page .mg-face--terme.mg-face--long span { font-size: 19px; }
+.jx-page--large.mg-page .mg-face--indice span { font-size: 18px; }
+
+/* ── Les effets du tour de magie ── */
+:is(.mg-page, .ln-page) .mg-son { flex: none; }
+/* Paires enchaînées : « Combo ×n » jaillit au-dessus du chapeau. */
+:is(.mg-page, .ln-page) .mg-combo {
+  position: absolute; left: 50%; top: -30%; z-index: 3; translate: -50% 0; pointer-events: none;
+  padding: 5px 12px; border-radius: 999px; white-space: nowrap;
+  animation: mg-combo 1.3s cubic-bezier(.2, 1.4, .4, 1) forwards;
+  background: #FFD25A; color: #2A2140; box-shadow: 0 3px 0 #C8901F;
+  font-family: var(--font-display); font-size: 15px; font-weight: 900;
+}
+@keyframes mg-combo { 0% { transform: translateY(20px) scale(.4); opacity: 0; } 20% { transform: translateY(-6px) scale(1.12); opacity: 1; } 35% { transform: none; } 80% { opacity: 1; } 100% { transform: translateY(-24px); opacity: 0; } }
+/* Raté : pouf, un nuage de fumée devant la tête. */
+.mg-page .mg-fumee {
+  position: absolute; left: 10%; top: 2%; width: 80%; z-index: 2; pointer-events: none;
+  animation: mg-pouf 1.3s ease-out forwards;
+}
+@keyframes mg-pouf {
+  0% { transform: scale(.3); opacity: 0; }
+  18% { transform: scale(1.08); opacity: 1; }
+  60% { transform: scale(1) translateY(-6%); opacity: .95; }
+  100% { transform: scale(1.25) translateY(-22%); opacity: 0; }
+}
+/* Tour réussi : étoiles en papier qui pleuvent + « Bravo ! ». */
+:is(.mg-page, .ln-page) .mg-bravo { position: absolute; inset: 0; z-index: 5; pointer-events: none; overflow: hidden; }
+:is(.mg-page, .ln-page) .mg-bravo i {
+  position: absolute; top: -40px; left: calc(var(--k) * 5.6% + 1%);
+  width: 18px; height: 18px; background: #FFD25A;
+  clip-path: polygon(50% 0, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+  animation: mg-pluie 1.8s cubic-bezier(.3, .2, .6, 1) forwards;
+  animation-delay: calc(mod(var(--k) * 7, 9) * 60ms);
+}
+:is(.mg-page, .ln-page) .mg-bravo i:nth-child(3n) { background: #FFF2B8; width: 12px; height: 12px; }
+:is(.mg-page, .ln-page) .mg-bravo i:nth-child(4n) { background: #FF8A3D; }
+@keyframes mg-pluie { to { transform: translateY(110vh) rotate(540deg); } }
+:is(.mg-page, .ln-page) .mg-bravo span {
+  position: absolute; left: 0; right: 0; top: 30%; text-align: center;
+  font-family: var(--font-display); font-size: 56px; font-weight: 900; letter-spacing: -.03em; color: #FFF6E8;
+  text-shadow: 0 5px 0 #C8901F, 0 12px 24px rgba(20,10,40,.5);
+  animation: mg-bravo 1.8s cubic-bezier(.2, 1.5, .4, 1) forwards;
+}
+@keyframes mg-bravo { 0% { transform: scale(.3) rotate(-8deg); opacity: 0; } 20% { transform: scale(1.1) rotate(3deg); opacity: 1; } 30% { transform: scale(1) rotate(0); } 80% { opacity: 1; } 100% { opacity: 0; transform: translateY(-20px); } }
+
+@media (prefers-reduced-motion: reduce) {
+  :is(.mg-page, .ln-page) .mg-combo, .mg-page .mg-fumee, :is(.mg-page, .ln-page) .mg-bravo i { animation-duration: .01s; }
+}
+
+/* Petits écrans (iPhone 12 ou SE dans Safari) : la table descend (on ne voit plus que les cartes et
+   le haut de la nappe), le titre rapetisse et la bulle passe à côté de Réviz pour ne pas couvrir
+   son chapeau ni le titre. */
+@media (max-width: 430px) and (max-height: 760px) {
+  .mg-page .mg-table { margin-bottom: -150px; }
+  .mg-page .mg-titre h1 { font-size: 26px; }
+  .mg-page .mg-bulle { left: 60%; right: auto; bottom: 74%; display: block; width: max-content; max-width: 160px; }
+}
+/* Chrono en pause pendant une réaction de Réviz (Réviz lance, buzzer, pizzeria) : la barre s'arrête. */
+.jx-chrono-en-pause .mg-chrono-barre, .jx-chrono-en-pause .jx-chrono-barre { animation-play-state: paused; }

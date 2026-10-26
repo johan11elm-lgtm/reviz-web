@@ -67,8 +67,21 @@ export function guestUser(guest) {
 const MIGRATED_PREFIXES = [
   'reviz-lessons-', 'reviz-revisions-', 'reviz-srs-',
   'reviz-challenges-', 'reviz-daily-goal-', 'reviz-seen-badges-', 'reviz-onboarded-',
-  'reviz-agenda-',
+  'reviz-agenda-', 'reviz-jeux-jour-',
 ]
+
+// Les stats de la partie du jour des Réviz Games ({ jours, record, scores }) : si le compte en a déjà,
+// on garde tous les jours, le plus grand record et le meilleur score de chaque jour.
+function fusionnerJeux(a, b) {
+  const nb = n => (typeof n === 'number' && Number.isFinite(n) ? n : 0)
+  const scores = { ...(a?.scores ?? {}) }
+  for (const [jour, v] of Object.entries(b?.scores ?? {})) scores[jour] = Math.max(nb(v), nb(scores[jour]))
+  return {
+    jours: [...new Set([...(a?.jours ?? []), ...(b?.jours ?? [])])].sort().slice(-400),
+    record: Math.max(nb(a?.record), nb(b?.record)),
+    scores,
+  }
+}
 
 /**
  * Recopie les données locales de l'invité vers le nouvel uid (sans écraser
@@ -91,6 +104,8 @@ export function migrateGuestLocalData(guestUid, uid) {
       const known = new Set(existing.map(e => e.id))
       const merged = [...existing, ...incoming.filter(e => !known.has(e.id))]
       localStorage.setItem(targetKey, JSON.stringify(merged))
+    } else if (prefix === 'reviz-jeux-jour-') {
+      localStorage.setItem(targetKey, JSON.stringify(fusionnerJeux(read(targetKey), read(`${prefix}${guestUid}`))))
     }
   }
   if (!localStorage.getItem(`reviz-level-${uid}`)) {

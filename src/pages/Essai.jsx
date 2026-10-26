@@ -1,21 +1,19 @@
 import { useEffect, useRef, useState } from 'react';
-import { Link, useNavigate, useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { PageHeader } from '../components/PageHeader';
-import { PageIntro } from '../components/PageIntro';
 import { Mascot } from '../components/Mascot';
-import { useIsDesktop } from '../hooks/useMediaQuery';
-import { CYCLES, CLASSES_BY_CYCLE } from '../utils/levels';
-import { CLASSES_DECOUVERTE, startDecouverte, stopDecouverte } from '../services/decouverteService';
+import { CLASSES_BY_CYCLE } from '../utils/levels';
+import { CLASSES_DECOUVERTE, isDecouverte, startDecouverte, stopDecouverte } from '../services/decouverteService';
 import { loadCatalogue, openChapter } from '../services/programmeService';
-import './Inscription.css'; // auth-desk : même composition que la connexion
-import './Essai.css';
+import { EntreeEcran, Champ, ChoixClasse, Encart, LienTexte } from '../components/entree/Entree';
+import { revenir } from '../utils/navigation';
 
 /**
  * Mode essai (« sans compte ») : prénom + classe, et l'élève révise son
  * programme tout de suite. Pensé pour le CDI : un poste partagé, pas de
  * cahier, pas d'adresse mail sous la main. La progression reste dans le
  * navigateur et suit l'élève s'il crée un compte plus tard.
+ * Design : parcours d'entrée (handoff Claude Design du 22/10), écran 2.
  */
 export default function Essai() {
   const navigate = useNavigate();
@@ -38,11 +36,14 @@ export default function Essai() {
   const [chapitre, setChapitre] = useState(chapitreFiche ? undefined : null);
   const [ouverture, setOuverture] = useState(false);
   const ouvert = useRef(false);
+  // Essai déjà commencé à l'arrivée (hors visite d'un enseignant) : on le reprend. Refaire le formulaire
+  // créerait un nouvel essai vide, et la progression du premier ne serait plus affichée. Pour changer
+  // d'élève sur un poste partagé : Réglages → quitter l'essai.
+  const dejaInvite = useRef(isGuest && !isDecouverte());
   const [prenom, setPrenom] = useState('');
-  const [cycle, setCycle] = useState('college');
   const [classe, setClasse] = useState(classeFiche);
-  const [error, setError] = useState('');
-  const isDesktop = useIsDesktop();
+  const [erreurPrenom, setErreurPrenom] = useState('');
+  const [erreurClasse, setErreurClasse] = useState('');
 
   useEffect(() => {
     if (!chapitreFiche) return;
@@ -65,16 +66,18 @@ export default function Essai() {
     setOuverture(true);
     openChapter(classeFiche, chapitre.matiere, chapitre.ch)
       .then(() => navigate('/quiz', { replace: true }))
-      .catch(() => navigate(`/programme/${matiereFiche}`, { replace: true }));
+      .catch(() => navigate(`/programme?matiere=${matiereFiche}`, { replace: true }));
   }
 
   // Déjà connecté (compte, ou essai déjà commencé) et venu d'une fiche : le
-  // quiz du chapitre directement. Un vrai compte sans chapitre : l'accueil.
+  // quiz du chapitre directement. Un vrai compte sans chapitre : l'accueil ;
+  // un essai déjà commencé : son programme.
   useEffect(() => {
     if (!currentUser || ouvert.current) return;
     if (chapitreFiche && chapitre === undefined) return;
     if (chapitre) ouvrirChapitre();
     else if (!isGuest) navigate('/', { replace: true });
+    else if (dejaInvite.current) navigate(matiereFiche ? `/programme?matiere=${matiereFiche}` : '/programme', { replace: true });
     // ouvrirChapitre ne dépend que de ces valeurs.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentUser, isGuest, chapitre, chapitreFiche, navigate]);
@@ -91,130 +94,56 @@ export default function Essai() {
   function submit(e) {
     e.preventDefault();
     const p = prenom.trim();
-    if (!p) { setError('Entre ton prénom.'); return; }
-    if (!classe) { setError('Choisis ta classe.'); return; }
+    if (!p) { setErreurPrenom('Entre ton prénom.'); return; }
+    if (!classe) { setErreurClasse('Choisis ta classe.'); return; }
     stopDecouverte();
-    loginAsGuest({ prenom: p, level: { cycle, classe, specialites: [] } });
+    loginAsGuest({ prenom: p, level: { cycle: 'college', classe, specialites: [] } });
     if (chapitre && classe === classeFiche) ouvrirChapitre();
-    else navigate(matiereFiche ? `/programme/${matiereFiche}` : '/programme', { replace: true });
+    else navigate(matiereFiche ? `/programme?matiere=${matiereFiche}` : '/programme', { replace: true });
   }
 
   // Redirection automatique en cours ou à venir (effet ci-dessus) : rien à remplir.
-  const redirige = currentUser && !prenom && ((chapitreFiche && chapitre !== null) || !isGuest);
-  if (classeProf || redirige) return <div className="app essai-page" />;
+  const redirige = currentUser && !prenom && ((chapitreFiche && chapitre !== null) || !isGuest || dejaInvite.current);
+  if (classeProf || redirige) return <div className="app app--no-halo en-page" />;
 
   // Venu d'une fiche avec un chapitre trouvé : seulement le prénom, la classe est connue.
   const quiz = chapitre ? chapitre.ch : null;
-  const titre = quiz ? 'Teste-toi sur ce chapitre' : 'Essayer sans compte';
-
-  const champs = (
-    <>
-      <label className="essai-label" htmlFor="essai-prenom">Ton prénom</label>
-      <input
-        id="essai-prenom"
-        className="essai-input"
-        type="text"
-        value={prenom}
-        onChange={e => { setPrenom(e.target.value); setError(''); }}
-        placeholder="Lucas"
-        maxLength={30}
-        autoComplete="given-name"
-        autoFocus
-      />
-
-      {!quiz && <>
-      <div className="essai-label" id="essai-classe-label">Ta classe</div>
-      <div className="essai-cycles" role="tablist" aria-label="Collège ou lycée">
-        {/* Mon programme ne couvre que la 6e à la 3e : le lycée est annoncé, pas encore ouvert. */}
-        {CYCLES.map(c => {
-          const bientot = c.id === 'lycee';
-          return (
-            <button
-              key={c.id}
-              type="button"
-              role="tab"
-              aria-selected={cycle === c.id}
-              disabled={bientot}
-              className={`essai-cycle${cycle === c.id ? ' essai-cycle--active' : ''}${bientot ? ' essai-cycle--bientot' : ''}`}
-              onClick={() => { setCycle(c.id); setClasse(null); setError(''); }}
-            >
-              {c.label}
-              {bientot && <span className="essai-cycle-bientot">à venir</span>}
-            </button>
-          );
-        })}
-      </div>
-      <div className="essai-classes" role="group" aria-labelledby="essai-classe-label">
-        {CLASSES_BY_CYCLE[cycle].map(k => (
-          <button
-            key={k}
-            type="button"
-            aria-pressed={classe === k}
-            className={`essai-classe${classe === k ? ' essai-classe--active' : ''}`}
-            onClick={() => { setClasse(k); setError(''); }}
-          >
-            {k}
-          </button>
-        ))}
-      </div>
-      </>}
-
-      {error && <p className="essai-error" role="alert">{error}</p>}
-
-      <button type="submit" className="rv-btn-cta rv-btn-cta--full essai-submit" disabled={ouverture}>
-        <span>{ouverture ? 'Ouverture du quiz…' : quiz ? 'Lancer le quiz' : "C'est parti"}</span>
-        <span className="rv-btn-cta-arrow" aria-hidden="true">→</span>
-      </button>
-      <p className="essai-hint">
-        Ta progression reste sur cet appareil. Crée un compte quand tu veux pour la retrouver partout.
-      </p>
-      <Link to="/inscription" className="essai-link">Je préfère créer mon compte</Link>
-    </>
-  );
-
-  // Ordinateur : la même composition que la connexion (auth-desk, desktop.css).
-  if (isDesktop) {
-    return (
-      <div className="app essai-page auth-desk-page">
-        <div className="auth-desk">
-          <div className="auth-desk-intro">
-            <Link to="/welcome" className="auth-back" aria-label="Retour">←</Link>
-            <span className="auth-desk-mascot"><Mascot pose="hello" size={132} alt="" aria-hidden="true" /></span>
-            <h1 className="signup-question">{titre}</h1>
-            <p className="signup-hint">
-              {quiz
-                ? <><strong>{quiz.titre}</strong> ({classeFiche}) : {quiz.quiz} questions corrigées une à une. Ton prénom, et c'est parti.</>
-                : 'Ton prénom, ta classe, et tu révises ton programme tout de suite.'}
-            </p>
-            <ul className="auth-desk-why">
-              <li><strong>Tout le programme</strong> de ta classe, chapitre par chapitre : résumés, flashcards, quiz.</li>
-              <li><strong>Pas d'adresse mail</strong> à donner : ta progression reste sur cet appareil.</li>
-              <li>Tu crées un compte <strong>quand tu veux</strong>, et tu gardes ce que tu as déjà révisé.</li>
-            </ul>
-          </div>
-          <form className="auth-desk-card essai-carte" onSubmit={submit} noValidate>
-            {champs}
-          </form>
-        </div>
-      </div>
-    );
-  }
 
   return (
-    <div className="app essai-page">
-      <PageHeader variant="back" onBack={() => navigate('/welcome')} />
-      <PageIntro
-        title={titre}
-        sub={quiz
-          ? `${quiz.titre} (${classeFiche}) : ${quiz.quiz} questions corrigées une à une.`
-          : 'Ton prénom, ta classe, et tu révises ton programme.'}
-        mascot="hello"
-        mascotSize={140}
-      />
-
-      <form className="content essai-content" onSubmit={submit} noValidate>
-        {champs}
+    <EntreeEcran
+      bulle={quiz ? ['Teste-toi sur ce chapitre.', 'Juste ton prénom avant.'] : ['Essaie sans compte.', "Deux infos, et c'est parti."]}
+      expression="content" geste="coucou"
+      onRetour={() => revenir(navigate, '/welcome')}
+      dessous={(
+        <>
+          <Encart icone="horloge" teinte="lavande">
+            Ta progression reste sur cet appareil. Crée un compte quand tu veux pour la retrouver partout.
+          </Encart>
+          <LienTexte to="/inscription">Je préfère créer mon compte</LienTexte>
+        </>
+      )}
+    >
+      <form className="en-pile" onSubmit={submit} noValidate>
+        {quiz && (
+          <div className="en-tuile">
+            <Mascot pose="quiz" size={52} alt="" aria-hidden="true" />
+            <div>
+              <b>{quiz.titre} ({classeFiche.replace('ème', 'e')})</b>
+              <span>{quiz.quiz} questions corrigées une à une.</span>
+            </div>
+          </div>
+        )}
+        <Champ id="essai-prenom" label="Ton prénom" type="text" placeholder="Lucas" value={prenom}
+          erreur={erreurPrenom} maxLength={30} autoComplete="given-name" autoFocus
+          onChange={e => { setPrenom(e.target.value); setErreurPrenom(''); }} />
+        {!quiz && (
+          <ChoixClasse valeur={classe} erreur={erreurClasse}
+            onChange={c => { setClasse(c); setErreurClasse(''); }} />
+        )}
+        <button type="submit" className="en-btn" disabled={ouverture}>
+          {ouverture ? 'Ouverture du quiz…' : quiz ? 'Lancer le quiz' : "C'est parti"}
+        </button>
       </form>
-    </div>
+    </EntreeEcran>
   );
 }

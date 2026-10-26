@@ -1,36 +1,79 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { BottomNav } from '../components/BottomNav';
-import { PageHeader } from '../components/PageHeader';
-import { PageIntro } from '../components/PageIntro';
+import { Pantin } from '../components/Pantin';
 import { Mascot } from '../components/Mascot';
-import { AjoutControle } from '../components/AjoutControle';
-import { XIcon } from '../components/Icons';
+import { BulleReviz } from '../components/reviz/BulleReviz';
+import { AjoutControle, couleursMatiere } from '../components/AjoutControle';
 import { useIsDesktop } from '../hooks/useMediaQuery';
 import { track } from '../services/statsService';
 import {
-  agendaLocal, chargerAgenda, supprimerControle, relierPronote, delierPronote,
+  agendaLocal, chargerAgenda, ajouterControle, supprimerControle, relierPronote, delierPronote,
   chargerCours, coursEnCache, messageErreurPronote,
 } from '../services/agendaService';
 import {
-  controlesAVenir, compteARebours, intituleControle, matiereControle, matiereDuCours,
-  nomDuCours, detailDuCours, jourIso, lundiDe, ajouterJours, joursDeLaSemaine,
-  jourEnClair, jourCourt, heure,
+  controlesAVenir, matiereControle, matiereDuCours, nomDuCours, detailDuCours,
+  jourIso, lundiDe, ajouterJours, joursDeLaSemaine, joursEntre, jourEnClair, jourCourt, heure,
 } from '../utils/agenda';
+import { varsTeinte } from '../utils/teinteMatiere';
+import { estLienDemo } from '../utils/edtDemo';
+import '../components/reviz/HerosMatiere.css';
 import './Agenda.css';
 
+const majuscule = t => t.charAt(0).toUpperCase() + t.slice(1);
+const heureEnClair = debut => heure(debut).replace(/^0/, '').replace('h', ' h ').replace(/ 00$/, '').replace(/ h $/, ' h');
+
+const Plus = ({ taille = 20 }) => (
+  <svg viewBox="0 0 24 24" width={taille} height={taille} fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14" /></svg>
+);
+const Croix = ({ taille = 16 }) => (
+  <svg viewBox="0 0 24 24" width={taille} height={taille} fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12" /></svg>
+);
+const Fleche = () => (
+  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+);
+const Chevron = ({ sens = 'g' }) => (
+  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d={sens === 'g' ? 'M15 5l-7 7 7 7' : 'M9 5l7 7-7 7'} /></svg>
+);
+const Cloche = () => (
+  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M6 16V11a6 6 0 0 1 12 0v5l1.5 2h-15zM10 20a2 2 0 0 0 4 0" /></svg>
+);
+
+/** Compte à rebours : « J-3 », « Demain », « Aujourd'hui » (héros) ; « Dans 9 jours » (liste). */
+const rebours = (n, court) => (n <= 0 ? 'Aujourd’hui' : n === 1 ? 'Demain' : court ? `J-${n}` : `Dans ${n} jours`);
+const titreControle = c => [matiereControle(c.matiere).slug === 'autre' ? 'Contrôle' : matiereControle(c.matiere).label, c.titre].filter(Boolean).join(' · ');
+const deMatiere = c => {
+  const m = matiereControle(c.matiere);
+  if (m.slug === 'autre') return 'Contrôle';
+  const nom = m.label === m.label.toUpperCase() ? m.label : m.label.toLowerCase();
+  return /^[aeiouyhé]/i.test(nom) ? `Contrôle d’${nom}` : `Contrôle de ${nom}`;
+};
+
+/** Ce que dit Réviz selon l'urgence du prochain contrôle. */
+function bulle(prochain, n) {
+  if (!prochain) return { lignes: ['Note tes contrôles ici.', 'Je te les rappelle la veille.'], humeur: 'content' };
+  if (n <= 0) return { lignes: ['C’est aujourd’hui.', 'Un dernier coup d’œil ?'], humeur: 'determine' };
+  if (n === 1) return { lignes: ['C’est demain.', 'Une dernière révision rapide ?'], humeur: 'reflechit' };
+  const quand = n <= 6 ? jourEnClair(prochain.date).split(' ')[0] : `le ${jourEnClair(prochain.date).split(' ').slice(1).join(' ')}`;
+  return { lignes: [`${deMatiere(prochain)} ${quand}.`, 'On s’y met ce soir ?'], humeur: 'content' };
+}
+
 /**
- * Agenda — les contrôles que l'élève note lui-même (compte à rebours,
- * rappel la veille dans l'app iOS) et, s'il le relie, son emploi du temps
- * Pronote reconstruit semaine par semaine. Pronote n'exporte que l'emploi
- * du temps : les contrôles se saisissent ici.
+ * Agenda (handoff Claude Design du 21/10) : ne pas se faire surprendre par un contrôle. Le
+ * prochain contrôle dans le héros (teinte de sa matière) avec Réviz et le compte à rebours,
+ * les contrôles suivants, puis l'emploi du temps Pronote semaine par semaine (un jour à la
+ * fois sur téléphone, la semaine en grille horaire sur ordinateur). Pronote n'exporte que
+ * l'emploi du temps : les contrôles, c'est l'élève qui les note.
  */
 export default function Agenda() {
   const navigate = useNavigate();
+  const isDesktop = useIsDesktop();
   const { currentUser, isGuest } = useAuth();
   const [agenda, setAgenda] = useState(() => agendaLocal(currentUser?.uid));
   const [ajout, setAjout] = useState(null); // null | { matiere?, date? }
+  const [toast, setToast] = useState(null); // { texte, annuler? }
+  const minuteur = useRef(null);
 
   useEffect(() => { track('agenda_ouvert'); }, []);
   useEffect(() => {
@@ -38,98 +81,184 @@ export default function Agenda() {
     chargerAgenda(currentUser).then(a => { if (vivant) setAgenda(a); });
     return () => { vivant = false; };
   }, [currentUser]);
+  const montrer = (texte, annuler) => {
+    clearTimeout(minuteur.current);
+    setToast({ texte, annuler });
+    minuteur.current = setTimeout(() => setToast(null), 4000);
+  };
+  useEffect(() => () => clearTimeout(minuteur.current), []);
 
   const aujourdhui = jourIso();
   const aVenir = controlesAVenir(agenda.controles, aujourdhui);
+  const [prochain, ...suite] = aVenir;
+  const n = prochain ? joursEntre(aujourdhui, prochain.date) : 0;
+  const { lignes, humeur } = bulle(prochain, n);
+  const c = prochain ? couleursMatiere(prochain.matiere) : null;
+  const teinte = c
+    ? { fond: c.fond, bulle: c.tranche, point: '#FFB37A', interieur: c.fond, ombre: 'rgba(160,80,20,.12)' }
+    : { fond: '#FFB37A', bulle: '#FFC596', point: '#C9C2F2', interieur: '#FFE6D2', ombre: 'rgba(150,70,20,.14)' };
 
-  function reviser(c) {
-    track('agenda_reviser', { matiere: c.matiere });
-    navigate(c.matiere === 'autre' ? '/cours' : `/programme/${c.matiere}`);
+  function reviser(ctrl) {
+    track('agenda_reviser', { matiere: ctrl.matiere });
+    navigate(ctrl.matiere === 'autre' ? '/cours' : `/programme?matiere=${ctrl.matiere}`);
+  }
+  async function retirer(ctrl) {
+    setAgenda(await supprimerControle(currentUser, ctrl.id));
+    montrer('Contrôle retiré.', async () => {
+      setAgenda(await ajouterControle(currentUser, { matiere: ctrl.matiere, titre: ctrl.titre ?? '', date: ctrl.date }));
+      setToast(null);
+    });
   }
 
-  async function retirer(c) {
-    setAgenda(await supprimerControle(currentUser, c.id));
-  }
+  // Réviz parle une fois arrivé (ou au bout de 4 s si le moteur ne charge pas).
+  const pantin = useRef(null);
+  const [parle, setParle] = useState(false);
+  const texte = lignes.join('\n');
+  useEffect(() => { if (parle) pantin.current?.dire(texte); }, [texte, parle]);
+  useEffect(() => {
+    let t;
+    const essai = () => { t = setTimeout(() => (document.hidden ? essai() : setParle(true)), 4000); };
+    essai();
+    return () => clearTimeout(t);
+  }, []);
+
+  const reviz = (
+    <div className={`ag-reviz${isDesktop ? ' ag-reviz--cote' : ''}`}>
+      <BulleReviz key={texte} lignes={lignes} parle={parle} pointe={isDesktop ? 'droite' : 'bas'} grande={isDesktop} className="ag-bulle" />
+      <Pantin ref={pantin} size={isDesktop ? 260 : 206} expression={humeur} entree="coucou" repli={null}
+        onEntree={() => setParle(true)} onClick={() => pantin.current?.geste('saut')} label="Réviz, ta mascotte" />
+    </div>
+  );
+  const carteProchain = prochain ? (
+    <div className="ag-carte ag-prochain">
+      <div className="ag-prochain-haut">
+        <span className="ag-rond ag-rond--grand" style={{ background: c.fond }} aria-hidden="true"><Mascot pose={matiereControle(prochain.matiere).mascot} size={isDesktop ? 60 : 48} alt="" /></span>
+        <span className="ag-prochain-txt">
+          <span className="ag-sur">Prochain contrôle</span>
+          <b>{titreControle(prochain)}</b>
+          <span>{majuscule(jourEnClair(prochain.date))}</span>
+        </span>
+        <span className={`ag-rebours${n <= 1 ? ' ag-rebours--mot' : ''}`} style={{ background: c.fond, boxShadow: `0 5px 0 ${c.tranche}` }}>{rebours(n, true)}</span>
+      </div>
+      <div className="ag-prochain-bas">
+        <button type="button" className="ag-btn" onClick={() => reviser(prochain)}>Réviser<Fleche /></button>
+        {isDesktop && <p className="ag-rappel"><Cloche />Rappel sur l’accueil, et la veille au soir sur iPhone.</p>}
+      </div>
+      <button type="button" className="ag-retirer ag-retirer--coin" onClick={() => retirer(prochain)} aria-label="Retirer ce contrôle"><Croix taille={14} /></button>
+    </div>
+  ) : (
+    <div className="ag-carte ag-vide">
+      <button type="button" className="ag-btn" onClick={() => setAjout({})}><Plus />Ajouter un contrôle</button>
+      {isGuest && <p className="ag-note">Mode essai · tes contrôles restent sur cet appareil.</p>}
+    </div>
+  );
+  const listeSuite = prochain && (
+    <section className="ag-section" aria-labelledby="ag-suivants">
+      <div className="ag-section-tete">
+        <h2 id="ag-suivants" className="ag-h2">Contrôles suivants</h2>
+        <button type="button" className="ag-pilule" onClick={() => setAjout({})}><Plus taille={16} />{isDesktop ? 'Ajouter un contrôle' : 'Ajouter'}</button>
+      </div>
+      {suite.length ? (
+        <ul className="ag-liste">
+          {suite.map(x => {
+            const k = couleursMatiere(x.matiere);
+            const j = joursEntre(aujourdhui, x.date);
+            return (
+              <li key={x.id} className="ag-ligne">
+                <button type="button" className="ag-ligne-ouvrir" onClick={() => reviser(x)}>
+                  <span className="ag-rond" style={{ background: k.fond }} aria-hidden="true"><Mascot pose={matiereControle(x.matiere).mascot} size={isDesktop ? 40 : 42} alt="" /></span>
+                  <span className="ag-ligne-txt">
+                    <b>{titreControle(x)}</b>
+                    <span>{majuscule(jourEnClair(x.date))}</span>
+                  </span>
+                  <span className={`ag-dans${j <= 7 ? ' is-proche' : ''}`}><i />{rebours(j)}</span>
+                </button>
+                <button type="button" className="ag-retirer" onClick={() => retirer(x)} aria-label="Retirer ce contrôle"><Croix /></button>
+              </li>
+            );
+          })}
+        </ul>
+      ) : <p className="ag-rien">Rien d’autre de noté pour l’instant.</p>}
+    </section>
+  );
+  const edt = (
+    <EmploiDuTemps
+      user={currentUser}
+      isGuest={isGuest}
+      lien={agenda.pronote}
+      controles={aVenir}
+      onAgenda={(a, message) => { setAgenda(a); if (message) montrer(message); }}
+      onAjout={setAjout}
+      onReviser={reviser}
+      onCompte={() => navigate('/inscription')}
+    />
+  );
+  const tete = (
+    <>
+      <span className="ag-date">{majuscule(jourEnClair(aujourdhui))}</span>
+      <h1 className="ag-titre">Agenda</h1>
+    </>
+  );
+  const deco = (
+    <>
+      <span className="ch-deco ch-deco--a" aria-hidden="true" />
+      <span className="ch-deco ch-deco--b" aria-hidden="true" />
+      <span className="ch-point" aria-hidden="true" />
+      <span className="ch-grain" aria-hidden="true" />
+    </>
+  );
 
   return (
-    <div className="app agenda-page">
-      <PageHeader
-        variant="back"
-        onBack={() => (window.history.state?.idx > 0 ? navigate(-1) : navigate('/'))}
-        className="rv-page-header--racine"
-      />
-      <PageIntro
-        title="Agenda"
-        sub={aVenir.length
-          ? `${aVenir.length} contrôle${aVenir.length > 1 ? 's' : ''} à venir`
-          : 'Tes contrôles et ton emploi du temps'}
-        mascot="writing"
-      />
-
-      <div className="content agenda-content">
-        <section className="agenda-controles" aria-labelledby="agenda-controles-titre">
-          <h2 id="agenda-controles-titre" className="rv-section-title">Contrôles à venir</h2>
-          {aVenir.length > 0 ? (
-            <div className="rv-card rv-rows">
-              {aVenir.map(c => {
-                const m = matiereControle(c.matiere);
-                return (
-                  <div key={c.id} className="rv-row agenda-controle">
-                    <button type="button" className="agenda-controle-main" onClick={() => reviser(c)}>
-                      <span className="rv-row-avatar"><Mascot pose={m.mascot} size={36} alt="" aria-hidden="true" /></span>
-                      <span className="rv-row-text">
-                        <span className="rv-row-title">{intituleControle(c)}</span>
-                        <span className="rv-row-sub">{[c.titre, jourEnClair(c.date)].filter(Boolean).join(' · ')}</span>
-                        <span className="rv-pill rv-pill--orange agenda-controle-pill">{compteARebours(c.date, aujourdhui)}</span>
-                      </span>
-                    </button>
-                    <button
-                      type="button"
-                      className="agenda-controle-suppr"
-                      onClick={() => retirer(c)}
-                      aria-label={`Retirer ${intituleControle(c)} du ${jourEnClair(c.date)}`}
-                    >
-                      <XIcon />
-                    </button>
-                  </div>
-                );
-              })}
+    <div className={`app app--no-halo ch-page ag-page${isDesktop ? ' app--large ch-page--large ag-page--large' : ''}`} style={varsTeinte(teinte)}>
+      <div className="content ag-defile">
+        {isDesktop ? (
+          <>
+            <div className="ch-hero ag-hero">{deco}{tete}</div>
+            <div className="ag-grille">
+              <div className="ag-gauche">
+                {reviz}
+                {carteProchain}
+                {listeSuite}
+              </div>
+              <div className="ag-droite">{edt}</div>
             </div>
-          ) : (
-            <p className="agenda-vide">
-              Note tes contrôles ici : Réviz te les rappelle sur l'accueil
-              {' '}et la veille au soir dans l'app.
-            </p>
-          )}
-          <button type="button" className="rv-btn-cta agenda-ajouter" onClick={() => setAjout({})}>
-            Ajouter un contrôle
-          </button>
-        </section>
-
-        <EmploiDuTemps
-          user={currentUser}
-          isGuest={isGuest}
-          lien={agenda.pronote}
-          controles={agenda.controles}
-          onAgenda={setAgenda}
-          onAjout={setAjout}
-        />
+          </>
+        ) : (
+          <>
+            <div className="ch-hero ag-hero">
+              {deco}
+              <div className="ag-hero-haut">
+                <div>{tete}</div>
+                <button type="button" className="ag-ajouter-rond" onClick={() => setAjout({})} aria-label="Ajouter un contrôle"><Plus /></button>
+              </div>
+              {reviz}
+            </div>
+            {carteProchain}
+            {prochain && <p className="ag-rappel ag-rappel--tel"><Cloche />Rappel sur l’accueil, et la veille au soir sur iPhone.</p>}
+            {listeSuite}
+            {edt}
+          </>
+        )}
       </div>
-
       {ajout && (
         <AjoutControle
           initial={ajout}
           onClose={() => setAjout(null)}
-          onSaved={a => { setAgenda(a); setAjout(null); }}
+          onSaved={a => { setAgenda(a); setAjout(null); montrer('Contrôle ajouté.'); }}
         />
       )}
-
+      {toast && (
+        <div className="ag-toast" role="status">
+          <span>{toast.texte}</span>
+          {toast.annuler && <button type="button" onClick={toast.annuler}>Annuler</button>}
+        </div>
+      )}
       <BottomNav />
     </div>
   );
 }
 
-function EmploiDuTemps({ user, isGuest, lien, controles, onAgenda, onAjout }) {
+function EmploiDuTemps({ user, isGuest, lien, controles, onAgenda, onAjout, onReviser, onCompte }) {
   const isDesktop = useIsDesktop();
   const aujourdhui = jourIso();
   // Le week-end, on montre déjà la semaine qui vient.
@@ -155,271 +284,233 @@ function EmploiDuTemps({ user, isGuest, lien, controles, onAgenda, onAjout }) {
       setErreur(messageErreurPronote(err.message));
     }
   }, [lien, user, lundi]);
-
   useEffect(() => { setCours(null); charger(); }, [charger]);
 
   if (isGuest) {
     return (
-      <section className="rv-card agenda-relier" aria-labelledby="agenda-edt-titre">
-        <h2 id="agenda-edt-titre" className="agenda-relier-titre">Ton emploi du temps Pronote</h2>
-        <p className="agenda-relier-texte">Crée ton compte pour relier Pronote : ta semaine s'affichera ici.</p>
-        <Link to="/inscription" className="rv-btn-cta rv-btn-cta--ghost">Créer mon compte</Link>
+      <section className="ag-carte ag-relier ag-relier--essai" aria-labelledby="ag-edt">
+        <h2 id="ag-edt" className="ag-relier-titre">Ton emploi du temps Pronote</h2>
+        <p className="ag-relier-txt">Pour le relier ici, il te faut un compte gratuit.</p>
+        <button type="button" className="ag-btn" onClick={onCompte}>Créer mon compte gratuit</button>
+        <p className="ag-note">Tes contrôles, tu peux déjà les noter sur cet appareil.</p>
+      </section>
+    );
+  }
+  if (!lien) return <RelierPronote user={user} onAgenda={onAgenda} grand={isDesktop} />;
+
+  const jours = joursDeLaSemaine(lundi, cours ?? []);
+  const choisi = jours.includes(jourChoisi) ? jourChoisi : jours[0];
+  const duJour = j => controles.filter(x => x.date === j);
+  const delier = async () => onAgenda(await delierPronote(user), 'Pronote délié.');
+  const semaine = (
+    <div className="ag-semaine">
+      <button type="button" className="ag-semaine-btn" onClick={() => setLundi(ajouterJours(lundi, -7))} aria-label="Semaine précédente"><Chevron /></button>
+      <span>Semaine du {jourEnClair(lundi).replace(/^lundi /, '')}</span>
+      <button type="button" className="ag-semaine-btn" onClick={() => setLundi(ajouterJours(lundi, 7))} aria-label="Semaine suivante"><Chevron sens="d" /></button>
+    </div>
+  );
+  const etat = erreur ? (
+    <div className="ag-edt-etat" role="alert">
+      <b>Ta semaine n’a pas pu se charger.</b>
+      <span>{erreur}</span>
+      <button type="button" className="ag-pilule" onClick={charger}>Réessayer</button>
+    </div>
+  ) : !cours ? (
+    <div className="ag-edt-etat ag-edt-etat--charge" role="status"><span className="ag-anneau" aria-hidden="true" />Chargement de ta semaine…</div>
+  ) : null;
+
+  // ── Ordinateur : la semaine entière en grille horaire ──
+  if (isDesktop) {
+    return (
+      <section className="ag-carte ag-edt ag-edt--grand" aria-labelledby="ag-edt">
+        <div className="ag-edt-tete">
+          <h2 id="ag-edt" className="ag-h2">Emploi du temps</h2>
+          <span className="ag-relie"><i />Pronote relié</span>
+          <button type="button" className="ag-delier" onClick={delier}>Délier</button>
+          <span className="ag-flex" />
+          {semaine}
+        </div>
+        {etat ?? <GrilleSemaine jours={jours} cours={cours} controles={controles} aujourdhui={aujourdhui} onAjout={onAjout} />}
       </section>
     );
   }
 
-  if (!lien) return <RelierPronote user={user} onAgenda={onAgenda} />;
-
-  const jours = joursDeLaSemaine(lundi, cours ?? []);
-  const choisi = jours.includes(jourChoisi) ? jourChoisi : jours[0];
-  const controlesDuJour = jour => controles.filter(c => c.date === jour);
-
+  // ── Téléphone : un jour à la fois ──
+  const coursDuJour = (cours ?? []).filter(x => x.debut.startsWith(choisi));
+  const apresMidi = coursDuJour.length > 0 && coursDuJour.every(x => Number(x.debut.slice(11, 13)) < 13);
   return (
-    <section className="agenda-edt" aria-labelledby="agenda-edt-titre">
-      <div className="agenda-edt-head">
-        <h2 id="agenda-edt-titre" className="rv-section-title">Emploi du temps</h2>
-        <div className="agenda-semaine">
-          <button type="button" className="agenda-semaine-btn" onClick={() => setLundi(ajouterJours(lundi, -7))} aria-label="Semaine précédente">‹</button>
-          <span className="agenda-semaine-label">Semaine du {jourEnClair(lundi).replace(/^lundi /, '')}</span>
-          <button type="button" className="agenda-semaine-btn" onClick={() => setLundi(ajouterJours(lundi, 7))} aria-label="Semaine suivante">›</button>
-        </div>
+    <section className="ag-section ag-edt" aria-labelledby="ag-edt">
+      <div className="ag-section-tete">
+        <h2 id="ag-edt" className="ag-h2">Emploi du temps</h2>
+        <span className="ag-relie"><i />Pronote relié</span>
       </div>
-
-      {/* Téléphone : un jour à la fois, choisi ici. Ordinateur : toute la semaine en colonnes. */}
-      <div className="agenda-jours" role="tablist" aria-label="Jour">
+      {semaine}
+      <div className="ag-jours" role="tablist" aria-label="Jour">
         {jours.map(j => (
-          <button
-            key={j}
-            type="button"
-            role="tab"
-            aria-selected={j === choisi}
-            aria-label={`${jourEnClair(j)}${controlesDuJour(j).length ? ', contrôle ce jour-là' : ''}`}
-            className={`agenda-jour-chip${j === choisi ? ' active' : ''}${j === aujourdhui ? ' aujourdhui' : ''}`}
-            onClick={() => setJourChoisi(j)}
-          >
-            <span className="agenda-jour-chip-nom">{jourCourt(j)}</span>
-            <span className="agenda-jour-chip-num">{Number(j.slice(8))}</span>
-            {controlesDuJour(j).length > 0 && <span className="agenda-jour-chip-dot" aria-hidden="true" />}
+          <button key={j} type="button" role="tab" aria-selected={j === choisi}
+            aria-label={`${jourEnClair(j)}${duJour(j).length ? ', contrôle ce jour-là' : ''}`}
+            className={`ag-jour${j === choisi ? ' is-choisi' : ''}${j === aujourdhui ? ' is-auj' : ''}`} onClick={() => setJourChoisi(j)}>
+            <span>{majuscule(jourCourt(j).replace('.', ''))}</span>
+            <b>{Number(j.slice(8))}</b>
+            {duJour(j).length > 0 && <i aria-hidden="true" />}
           </button>
         ))}
       </div>
-
-      {erreur && (
-        <div className="agenda-erreur" role="alert">
-          <span>{erreur}</span>
-          <button type="button" className="agenda-lien" onClick={charger}>Réessayer</button>
+      {etat ?? (
+        <div className="ag-carte ag-jour-carte">
+          <span className="ag-sur ag-sur--doux">{jourEnClair(choisi).toUpperCase()}{choisi === aujourdhui ? ' · AUJOURD’HUI' : ''}</span>
+          {duJour(choisi).map(x => (
+            <div key={x.id} className="ag-ctrl-jour" style={{ background: couleursMatiere(x.matiere).fond }}>
+              <span className="ag-ctrl-jour-txt"><span className="ag-sur">Contrôle noté</span><b>{titreControle(x)}</b></span>
+              <button type="button" className="ag-pilule ag-pilule--orange" onClick={() => onReviser(x)}>Réviser</button>
+            </div>
+          ))}
+          {coursDuJour.length ? (
+            <ol className="ag-cours">
+              {coursDuJour.map((x, i) => {
+                const m = matiereDuCours(x.titre);
+                const detail = [salleEnClair(x.salle), detailDuCours(x.titre)].filter(Boolean).join(' · ');
+                return (
+                  <li key={`${x.debut}-${i}`}>
+                    <button type="button" className={`ag-cours-ligne${x.annule ? ' is-annule' : ''}`} onClick={() => onAjout({ matiere: m ?? 'autre', date: choisi })}
+                      aria-label={`${nomDuCours(x.titre)} à ${heure(x.debut)}. Noter un contrôle ce jour-là`}>
+                      <span className="ag-heure"><b>{heureEnClair(x.debut)}</b><span>{heureEnClair(x.fin)}</span></span>
+                      <span className="ag-rond ag-rond--petit" style={{ background: couleursMatiere(m ?? 'autre').fond }} aria-hidden="true">{m && <Mascot pose={matiereControle(m).mascot} size={34} alt="" />}</span>
+                      <span className="ag-cours-txt"><b>{nomDuCours(x.titre)}</b><span>{x.annule ? 'Annulé' : detail}</span></span>
+                    </button>
+                  </li>
+                );
+              })}
+            </ol>
+          ) : <p className="ag-pas-cours">Pas de cours</p>}
+          {apresMidi && <p className="ag-pas-cours ag-pas-cours--pointe">Pas de cours cet après-midi.</p>}
         </div>
       )}
-
-      {!cours && !erreur && <p className="agenda-chargement" role="status">Chargement de ta semaine…</p>}
-
-      {cours && isDesktop && (
-        <GrilleSemaine jours={jours} cours={cours} controles={controles} aujourdhui={aujourdhui} onAjout={onAjout} />
-      )}
-
-      {cours && !isDesktop && (
-        <div className="agenda-grille">
-          {jours.map(j => {
-            const duJour = cours.filter(c => c.debut.startsWith(j));
-            const ctrl = controlesDuJour(j);
-            return (
-              <div key={j} className={`agenda-colonne${j === choisi ? ' choisi' : ''}${j === aujourdhui ? ' aujourdhui' : ''}`}>
-                <h3 className="agenda-colonne-titre">{jourEnClair(j)}</h3>
-                {ctrl.map(c => (
-                  <p key={c.id} className="agenda-colonne-controle">
-                    <span className="rv-pill rv-pill--orange">{intituleControle(c)}</span>
-                  </p>
-                ))}
-                {duJour.length === 0 ? (
-                  <p className="agenda-colonne-vide">Pas de cours</p>
-                ) : (
-                  <ol className="agenda-cours">
-                    {duJour.map((c, i) => {
-                      const matiere = matiereDuCours(c.titre);
-                      const detail = [detailDuCours(c.titre), salleEnClair(c.salle)].filter(Boolean).join(' · ');
-                      return (
-                        <li key={`${c.debut}-${i}`}>
-                          <button
-                            type="button"
-                            className={`agenda-cours-item${c.annule ? ' annule' : ''}`}
-                            onClick={() => onAjout({ matiere: matiere ?? 'autre', date: j })}
-                            aria-label={`${nomDuCours(c.titre)} à ${heure(c.debut)}. Ajouter un contrôle ce jour-là`}
-                          >
-                            <span className="agenda-cours-heure">{heure(c.debut)}<br /><span>{heure(c.fin)}</span></span>
-                            <span className={`agenda-cours-barre matiere-${matiere ?? 'autre'}`} aria-hidden="true" />
-                            <span className="agenda-cours-texte">
-                              <span className="agenda-cours-nom">{nomDuCours(c.titre)}</span>
-                              {(detail || c.annule) && (
-                                <span className="agenda-cours-detail">{c.annule ? 'Annulé' : detail}</span>
-                              )}
-                            </span>
-                          </button>
-                        </li>
-                      );
-                    })}
-                  </ol>
-                )}
-              </div>
-            );
-          })}
-        </div>
-      )}
-
-      <p className="agenda-pied">
-        {isDesktop ? 'Clique sur' : 'Touche'} un cours pour y noter un contrôle.{' '}
-        <button type="button" className="agenda-lien" onClick={async () => onAgenda(await delierPronote(user))}>
-          Délier Pronote
-        </button>
-      </p>
+      <p className="ag-pied">Touche un cours pour y noter un contrôle. <button type="button" className="ag-delier" onClick={delier}>Délier Pronote</button></p>
     </section>
   );
 }
 
 const minutes = debut => Number(debut.slice(11, 13)) * 60 + Number(debut.slice(14, 16));
-const PAS = 15; // une rangée de grille = 15 minutes
 
 /**
- * Ordinateur : la semaine en vraie grille horaire. Chaque cours est placé
- * selon son début et sa fin, donc tous les jours s'alignent heure par heure.
- * Les contrôles vivent dans l'en-tête du jour (hauteur fixe).
+ * Ordinateur : la semaine en grille horaire, 1 px par minute. Chaque cours est placé selon son
+ * début et sa fin ; un contrôle se voit sous l'en-tête du jour et sur les cours de sa matière.
  */
 function GrilleSemaine({ jours, cours, controles, aujourdhui, onAjout }) {
-  const enMinutes = cours.flatMap(c => [minutes(c.debut), minutes(c.fin)]);
+  const enMinutes = cours.flatMap(x => [minutes(x.debut), minutes(x.fin)]);
   const debut = Math.floor(Math.min(8 * 60, ...enMinutes) / 60) * 60;
   const fin = Math.ceil(Math.max(17 * 60, ...enMinutes) / 60) * 60;
-  const rangees = (fin - debut) / PAS;
-  const heures = Array.from({ length: (fin - debut) / 60 }, (_, i) => debut / 60 + i);
-  const colonnes = { '--agenda-jours': jours.length, '--agenda-rangees': rangees };
-
+  const heures = Array.from({ length: (fin - debut) / 60 + 1 }, (_, i) => debut / 60 + i);
   return (
-    <div className="agenda-semaine-grille" style={colonnes}>
-      <div className="agenda-semaine-tetes">
-        <span aria-hidden="true" />
+    <div className="ag-grille-semaine" style={{ '--ag-jours': jours.length }}>
+      <div className="ag-gs-tetes">
+        <span />
         {jours.map(j => {
-          const ctrl = controles.filter(c => c.date === j);
+          const ctrl = controles.filter(x => x.date === j);
           return (
-            <div key={j} className={`agenda-tete${j === aujourdhui ? ' aujourdhui' : ''}`}>
-              <span className="agenda-tete-jour">{jourCourt(j)} {Number(j.slice(8))}</span>
-              <span className="agenda-tete-controle">
-                {ctrl.length > 0 && (
-                  <><span className="agenda-tete-point" aria-hidden="true" />{ctrl.map(intituleControle).join(', ')}</>
-                )}
-              </span>
+            <div key={j} className="ag-gs-tete-col">
+              <span className={`ag-gs-tete${j === aujourdhui ? ' is-auj' : ''}`}>{majuscule(jourCourt(j).replace('.', ''))} <b>{Number(j.slice(8))}</b></span>
+              {ctrl.map(x => <span key={x.id} className="ag-gs-ctrl"><i />Contrôle · {matiereControle(x.matiere).slug === 'autre' ? (x.titre || 'Autre') : matiereControle(x.matiere).label}</span>)}
             </div>
           );
         })}
       </div>
-      <div className="agenda-semaine-corps">
-        {heures.map((h, i) => (
-          <span key={h} className="agenda-heure" style={{ gridRow: `${i * 4 + 1} / span 4` }}>{h}h</span>
-        ))}
-        {jours.map((j, col) => cours.filter(c => c.debut.startsWith(j)).map((c, i) => {
-          const matiere = matiereDuCours(c.titre);
-          const de = (minutes(c.debut) - debut) / PAS + 1;
-          const a = Math.max(de + 1, (minutes(c.fin) - debut) / PAS + 1);
-          const detail = [detailDuCours(c.titre), salleEnClair(c.salle)].filter(Boolean).join(' · ');
+      <div className="ag-gs-corps" style={{ height: fin - debut }}>
+        <div className="ag-gs-heures">
+          {heures.map(h => <span key={h} style={{ top: (h * 60 - debut) }}>{h} h</span>)}
+        </div>
+        {jours.map(j => {
+          const ctrl = controles.filter(x => x.date === j).map(x => x.matiere);
+          const leurs = cours.filter(x => x.debut.startsWith(j));
           return (
-            <button
-              key={`${j}-${i}`}
-              type="button"
-              className={`agenda-bloc matiere-${matiere ?? 'autre'}${c.annule ? ' annule' : ''}`}
-              style={{ gridColumn: col + 2, gridRow: `${de} / ${a}` }}
-              onClick={() => onAjout({ matiere: matiere ?? 'autre', date: j })}
-              aria-label={`${jourEnClair(j)}, ${nomDuCours(c.titre)} de ${heure(c.debut)} à ${heure(c.fin)}${c.annule ? ', annulé' : ''}. Ajouter un contrôle ce jour-là`}
-            >
-              <span className="agenda-bloc-nom">{nomDuCours(c.titre)}</span>
-              <span className="agenda-bloc-detail">{c.annule ? 'Annulé' : `${heure(c.debut)}${detail ? ` · ${detail}` : ''}`}</span>
-            </button>
+            <div key={j} className={`ag-gs-col${j === aujourdhui ? ' is-auj' : ''}`}>
+              {leurs.length === 0 && <span className="ag-gs-vide">Pas de cours</span>}
+              {leurs.map((x, i) => {
+                const m = matiereDuCours(x.titre);
+                const k = couleursMatiere(m ?? 'autre');
+                const estCtrl = m && ctrl.includes(m);
+                const detail = salleEnClair(x.salle);
+                return (
+                  <button key={i} type="button" className={`ag-bloc${estCtrl ? ' is-ctrl' : ''}${x.annule ? ' is-annule' : ''}`}
+                    style={{ top: minutes(x.debut) - debut, height: Math.max(26, minutes(x.fin) - minutes(x.debut) - 4), background: k.fond }}
+                    onClick={() => onAjout({ matiere: m ?? 'autre', date: j })}
+                    aria-label={`${jourEnClair(j)}, ${nomDuCours(x.titre)} de ${heure(x.debut)} à ${heure(x.fin)}${x.annule ? ', annulé' : ''}. Noter un contrôle ce jour-là`}>
+                    <b>{nomDuCours(x.titre)}{estCtrl && <em>Contrôle</em>}</b>
+                    <span>{x.annule ? 'Annulé' : [heureEnClair(x.debut), detail].filter(Boolean).join(' · ')}</span>
+                    <span className="ag-bloc-noter"><Plus taille={12} />Noter un contrôle</span>
+                  </button>
+                );
+              })}
+            </div>
           );
-        }))}
+        })}
       </div>
     </div>
   );
 }
 
-// « 105 » → « salle 105 » ; « Salle de musique », « Labo 2 », « Piscine » restent tels quels.
+// « 105 » → « Salle 105 » ; « Salle de musique », « Labo 2 », « Piscine » restent tels quels.
 function salleEnClair(salle) {
   if (!salle) return '';
-  return /^[A-Z]?\d+[A-Z]?$/i.test(salle.trim()) ? `salle ${salle.trim()}` : salle.trim();
+  return /^[A-Z]?\d+[A-Z]?$/i.test(salle.trim()) ? `Salle ${salle.trim()}` : salle.trim();
 }
 
-const TUTO_PRONOTE = [
-  <>Dans Pronote, ouvre le <b>menu</b> en haut à droite.</>,
-  <>Touche <b>Mes données</b>, puis <b>Compte</b>.</>,
-  <>Choisis <b>Export au format ICal</b>.</>,
-  <>Touche <b>Copier l'adresse</b>, puis reviens ici.</>,
-];
-
-function RelierPronote({ user, onAgenda }) {
+/** Relier Pronote : l'intérêt, les 4 étapes, « Coller le lien » ou le champ. */
+function RelierPronote({ user, onAgenda, grand }) {
   const [saisie, setSaisie] = useState('');
-  const [etat, setEtat] = useState('');
+  const [verif, setVerif] = useState(false);
   const [erreur, setErreur] = useState('');
-  const lien = useMemo(() => saisie.trim(), [saisie]);
+  const geste = grand ? 'Clique sur' : 'Touche';
+  const ETAPES = [
+    <>Dans Pronote, ouvre le menu de ton profil en haut à droite.</>,
+    <>{geste} <b>Mes données</b>, puis <b>Compte</b>.</>,
+    <>Choisis <b>Export au format iCal</b>.</>,
+    <>{geste} <b>Copier l’adresse</b>, puis reviens ici.</>,
+  ];
 
   async function verifier(valeur) {
+    if (!/^(https?|webcal):\/\//i.test(valeur) && !estLienDemo(valeur)) { setErreur('Ce lien ne ressemble pas à une adresse iCal Pronote.'); return; }
     setErreur('');
-    setEtat('verif');
+    setVerif(true);
     try {
       // On vérifie que Pronote répond avant d'enregistrer le lien.
       const lundi = lundiDe(jourIso());
       await chargerCours(user, valeur, { du: lundi, au: ajouterJours(lundi, 6) });
       track('agenda_pronote_relie');
-      onAgenda(await relierPronote(user, valeur));
+      onAgenda(await relierPronote(user, valeur), 'Pronote relié.');
     } catch (err) {
       setErreur(messageErreurPronote(err.message));
-      setEtat('');
+      setVerif(false);
     }
   }
-
-  // Le plus simple après « Copier l'adresse » dans Pronote : un seul bouton.
   async function coller() {
     try {
       const texte = (await navigator.clipboard.readText()).trim();
-      if (!texte) return setErreur("Le presse-papiers est vide : copie d'abord l'adresse dans Pronote.");
+      if (!texte) { setErreur('Le presse-papiers est vide. Copie l’adresse dans Pronote, puis reviens.'); return; }
       setSaisie(texte);
       verifier(texte);
     } catch {
-      setErreur('Colle le lien dans le champ ci-dessous.');
+      setErreur('Je n’ai pas pu lire le presse-papiers. Colle le lien ci-dessous.');
     }
   }
 
   return (
-    <section className="rv-card agenda-relier" aria-labelledby="agenda-edt-titre">
-      <h2 id="agenda-edt-titre" className="agenda-relier-titre">Relie ton emploi du temps Pronote</h2>
-      <p className="agenda-relier-texte">Ta semaine s'affiche ici, toujours à jour. Réviz ne voit que tes horaires de cours, pas tes notes.</p>
-
-      {/* Le vrai parcours, capturé sur le site de démonstration de Pronote
-          (élève fictive) : on glisse d'une étape à l'autre sur téléphone. */}
-      <ol className="agenda-tuto">
-        {TUTO_PRONOTE.map((etape, i) => (
-          <li key={i} className="agenda-tuto-etape">
-            <span className="agenda-tuto-num">{i + 1}</span>
-            <img className="agenda-tuto-capture" src={`/agenda/pronote-${i + 1}.webp`} alt="" loading="lazy" />
-            <p className="agenda-tuto-texte">{etape}</p>
-          </li>
-        ))}
+    <section className={`ag-carte ag-relier${grand ? ' ag-relier--grand' : ''}`} aria-labelledby="ag-edt">
+      <h2 id="ag-edt" className="ag-relier-titre">{grand ? 'Relie ton emploi du temps Pronote' : 'Relie Pronote'}</h2>
+      <p className="ag-relier-txt">Ton emploi du temps s’affiche ici, semaine par semaine.</p>
+      <p className="ag-relier-info">Pronote ne partage que l’emploi du temps. Tes contrôles, c’est toi qui les notes.</p>
+      <ol className="ag-etapes">
+        {ETAPES.map((e, i) => <li key={i}><i>{i + 1}</i><span>{e}</span></li>)}
       </ol>
-      <p className="agenda-tuto-note">Pas trouvé dans l'app Pronote ? Fais-le depuis le site Pronote de ton établissement, dans ton navigateur.</p>
-
-      <button type="button" className="rv-btn-cta rv-btn-cta--ghost agenda-coller" onClick={coller} disabled={etat === 'verif'}>
-        {etat === 'verif' ? 'Vérification…' : 'Coller le lien'}
-      </button>
-      <form className="agenda-relier-form" onSubmit={e => { e.preventDefault(); if (lien) verifier(lien); }} noValidate>
-        <label className="agenda-label" htmlFor="agenda-lien">Ou colle-le toi-même</label>
-        <div className="agenda-relier-ligne">
-          <input
-            id="agenda-lien"
-            className="agenda-input"
-            type="url"
-            inputMode="url"
-            autoComplete="off"
-            placeholder="https://….index-education.net/pronote/ical/…"
-            value={saisie}
-            onChange={e => setSaisie(e.target.value)}
-          />
-          <button type="submit" className="agenda-relier-ok" disabled={!lien || etat === 'verif'} aria-label="Relier Pronote">›</button>
+      <button type="button" className="ag-btn" onClick={coller} disabled={verif}>{verif ? 'Vérification…' : 'Coller le lien'}</button>
+      <form className="ag-relier-form" onSubmit={e => { e.preventDefault(); if (saisie.trim()) verifier(saisie.trim()); }} noValidate>
+        <label htmlFor="ag-lien">Ou colle-le toi-même</label>
+        <div className="ag-relier-ligne">
+          <input id="ag-lien" type="url" inputMode="url" autoComplete="off" placeholder="https://…/ical/…" value={saisie} onChange={e => setSaisie(e.target.value)} />
+          <button type="submit" className="ag-pilule" disabled={!saisie.trim() || verif}>Relier</button>
         </div>
-        {erreur && <p className="agenda-relier-erreur" role="alert">{erreur}</p>}
+        {erreur && <p className="ag-erreur" role="alert">{erreur}</p>}
       </form>
     </section>
   );

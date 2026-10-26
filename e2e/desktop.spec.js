@@ -1,117 +1,115 @@
-// Réviz sur ordinateur : à partir de 1024 px, barre latérale et colonne
-// centrale ; en dessous, rien ne change (capsule du bas). Parcours en mode
-// essai, catalogue et chapitre servis par les fixtures.
+// Réviz sur ordinateur : à partir de 1024 px, le menu passe en haut (capsule en verre + bouton
+// Réviz IA rond) et chaque page se compose pour la largeur ; en dessous, la capsule du bas.
+// Parcours en mode essai (catalogue et chapitre servis par les fixtures), puis avec un compte.
 import { test, expect } from '@playwright/test'
-import { readFileSync } from 'node:fs'
-import path from 'node:path'
-import { fileURLToPath } from 'node:url'
-import { mockApiRoutes } from './helpers'
+import {
+  mockApiRoutes, mockProgramme, entrerEnEssai, ouvrirChapitreDuProgramme, compteRapide,
+  sansDebordement, estOrdinateur, ouvrirSaisieTexte,
+} from './helpers'
 
-const here = path.dirname(fileURLToPath(import.meta.url))
-const fixture = name => readFileSync(path.join(here, 'fixtures/programme', name), 'utf8')
+const APPAREILS = [
+  ['ordinateur', { width: 1280, height: 800 }],
+  ['téléphone', { width: 390, height: 844 }],
+]
 
-async function mockProgramme(page) {
-  await page.route('**/programme/3eme/index.json', route =>
-    route.fulfill({ status: 200, contentType: 'application/json', body: fixture('index.json') }))
-  await page.route('**/programme/3eme/maths/theoreme-de-thales.json', route =>
-    route.fulfill({ status: 200, contentType: 'application/json', body: fixture('thales.json') }))
-}
-
-async function entrerEnEssai(page) {
-  await page.goto('/essai')
-  await page.getByLabel('Ton prénom').fill('Léa')
-  await page.getByRole('button', { name: '3ème', exact: true }).click()
-  await page.getByRole('button', { name: /C'est parti/ }).click()
-  await expect(page).toHaveURL(/\/programme$/)
-}
+const menuHaut = page => page.getByRole('navigation', { name: 'Menu principal' })
 
 test.describe('Ordinateur (1280 px)', () => {
   test.use({ viewport: { width: 1280, height: 800 } })
 
-  test('barre latérale, colonne centrale, pas de capsule du bas', async ({ page }) => {
+  test('menu du haut, colonne centrale, pas de capsule du bas', async ({ page }) => {
     await mockApiRoutes(page)
     await mockProgramme(page)
     await entrerEnEssai(page)
 
-    const sideNav = page.locator('.side-nav')
-    await expect(sideNav).toBeVisible()
+    // Le menu est en haut à droite : quatre entrées, « Créer mon compte » (mode essai), pas de Réviz IA.
+    await expect(page.locator('.nav-haut')).toBeVisible()
     await expect(page.locator('.bottom-nav')).toBeHidden()
-    await expect(sideNav.getByRole('link', { name: 'Mon programme' })).toBeVisible()
-    await page.waitForTimeout(600)
+    for (const nom of ["Aujourd'hui", 'Programme', 'Agenda', 'Moi']) {
+      await expect(menuHaut(page).getByRole('link', { name: nom, exact: true })).toBeVisible()
+    }
+    await expect(menuHaut(page).getByRole('link', { name: 'Programme', exact: true })).toHaveAttribute('aria-current', 'page')
+    await expect(menuHaut(page).getByRole('link', { name: 'Créer mon compte' })).toBeVisible()
+    await expect(menuHaut(page).getByRole('link', { name: 'Réviz IA' })).toHaveCount(0)
+    await sansDebordement(page, 'programme')
     await page.screenshot({ path: test.info().outputPath('desktop-programme.png') })
 
-    // La colonne de contenu reste lisible
-    const box = await page.locator('.programme-content').boundingBox()
-    expect(box.width).toBeLessThanOrEqual(1140)
+    // Le programme se compose pour la largeur : les matières à gauche, la route des chapitres à droite
+    // (sur téléphone, l'une sous l'autre).
+    const matieres = await page.getByRole('region', { name: 'Mes matières' }).boundingBox()
+    const chapitres = await page.getByRole('region', { name: /^Chapitres/ }).boundingBox()
+    expect(chapitres.x).toBeGreaterThanOrEqual(matieres.x + matieres.width)
+    expect(chapitres.width).toBeGreaterThan(matieres.width)
+    expect(chapitres.x + chapitres.width).toBeLessThanOrEqual(1280)
 
-    await page.getByRole('button', { name: /^Maths/ }).click()
-    await expect(page).toHaveURL(/\/programme\/maths/)
-    await page.waitForTimeout(500)
-    await page.screenshot({ path: test.info().outputPath('desktop-programme-maths.png') })
-    await page.getByRole('button', { name: /Le théorème de Thalès/ }).click()
-    await page.waitForTimeout(300)
+    await page.getByRole('radio', { name: /^Maths/ }).click()
+    const thales = page.getByRole('button', { name: /^Chapitre 1 : Le théorème de Thalès/ })
+    await thales.click()
+    await expect(page.getByRole('heading', { name: 'Le théorème de Thalès', level: 3 })).toBeVisible()
     await page.screenshot({ path: test.info().outputPath('desktop-chemin-fiche.png') })
-    await page.getByRole('button', { name: /Le théorème de Thalès/ }).click()
 
-    await page.getByRole('button', { name: /Le théorème de Thalès/ }).click()
-    await page.getByRole('button', { name: /chapitre$/ }).click()
-    await expect(page).toHaveURL(/\/analyse/)
-    // Ouvert depuis Mon programme : c'est cette entrée qui reste allumée
-    await expect(page.locator('.side-nav-item--active')).toHaveText(/Mon programme/)
-    await expect(page.getByText('À retenir')).toBeVisible()
-    await expect(page.getByText('Ton avancement')).toBeVisible()
-    await page.waitForTimeout(700)
+    await ouvrirChapitreDuProgramme(page)
+    // Ouvert depuis le Programme : c'est cette entrée qui reste allumée
+    await expect(menuHaut(page).getByRole('link', { name: 'Programme', exact: true })).toHaveClass(/nav-haut-onglet--actif/)
+    await expect(page.getByRole('heading', { name: 'L’essentiel' })).toBeVisible()
+    await expect(page.getByRole('heading', { name: 'Ton parcours' })).toBeVisible()
+    await expect(page.getByText('À découvrir')).toBeVisible()
+    await sansDebordement(page, 'fiche du chapitre')
     await page.screenshot({ path: test.info().outputPath('desktop-analyse.png') })
 
-    await page.getByRole('link', { name: /Quiz/ }).click()
-    await expect(page.getByText('Que faut-il pour appliquer le théorème de Thalès ?')).toBeVisible()
-    await page.waitForTimeout(500)
+    // Quiz et flashcards : jeux plein écran, sans menu
+    await page.getByRole('link', { name: /^Quiz corrigé/ }).click()
+    await expect(page.getByRole('heading', { name: 'Que faut-il pour appliquer le théorème de Thalès ?' })).toBeVisible()
+    await expect(page.locator('.nav-haut')).toBeHidden()
+    await sansDebordement(page, 'quiz')
     await page.screenshot({ path: test.info().outputPath('desktop-quiz.png') })
 
     await page.goto('/resume')
+    await expect(page.getByRole('heading', { name: 'À retenir' })).toBeVisible()
     await expect(page.getByText('Sécantes').first()).toBeVisible()
-    await page.waitForTimeout(500)
+    await sansDebordement(page, 'résumé')
     await page.screenshot({ path: test.info().outputPath('desktop-resume.png') })
 
     await page.goto('/flashcards')
-    await page.waitForTimeout(600)
+    await expect(page.getByText('Que faut-il pour appliquer le théorème de Thalès ?').first()).toBeVisible()
+    await sansDebordement(page, 'flashcards')
     await page.screenshot({ path: test.info().outputPath('desktop-flashcards.png') })
 
+    // Accueil du mode essai : le rappel, le plan, les matières du programme et la partie du jour
     await page.goto('/')
-    await expect(page.getByRole('link', { name: 'Réviser mon programme' })).toBeVisible()
-    await expect(page.getByRole('heading', { name: 'À reprendre' })).toBeVisible()
-    await expect(page.getByRole('button', { name: /Le théorème de Thalès/ })).toBeVisible()
-    // Le mode essai n'est rappelé que dans la barre latérale
-    await expect(page.locator('.guest-banner')).toBeHidden()
-    await expect(page.locator('.side-nav-note')).toBeVisible()
-    await page.waitForTimeout(500)
+    await expect(page.getByRole('status').getByText('Mode essai')).toBeVisible()
+    await expect(page.getByRole('heading', { name: 'Tes matières' })).toBeVisible()
+    await expect(page.getByRole('link', { name: 'Maths', exact: true })).toHaveAttribute('href', '/programme?matiere=maths')
+    await sansDebordement(page, 'accueil')
     await page.screenshot({ path: test.info().outputPath('desktop-home.png') })
 
+    // Mes leçons : le mode essai propose de créer un compte pour scanner
     await page.goto('/cours')
-    await expect(page.getByText('Le théorème de Thalès').first()).toBeVisible()
-    await page.waitForTimeout(500)
+    await expect(page.getByText('Garde tes leçons')).toBeVisible()
+    await sansDebordement(page, 'cours')
     await page.screenshot({ path: test.info().outputPath('desktop-cours.png') })
 
+    // Moi : les progrès ont rejoint le profil (/progres y renvoie) — programme, mémoire, semaine, badges
     await page.goto('/progres')
-    // Tableau de bord : le programme (une rangée par matière) et la mémoire
+    await expect(page).toHaveURL(/\/profil$/)
     await expect(page.getByRole('heading', { name: 'Mon programme' })).toBeVisible()
     await expect(page.getByRole('button', { name: /^Maths : 1 \/ \d+ commencé/ })).toBeVisible()
-    await expect(page.getByRole('heading', { name: 'Ta mémoire' })).toBeVisible()
-    await expect(page.getByRole('button', { name: /Réviser maintenant/ })).toBeVisible()
-    await expect(page.getByRole('heading', { name: 'Ton activité' })).toBeVisible()
-    await page.waitForTimeout(1600)  // fin des animations d'entrée des cartes
-    await page.screenshot({ path: test.info().outputPath('desktop-progres.png') })
+    await expect(page.getByRole('heading', { name: 'Ma mémoire' })).toBeVisible()
+    await expect(page.getByRole('heading', { name: 'Ma semaine' })).toBeVisible()
+    await page.waitForTimeout(1600) // fin des animations d'entrée des cartes, pour la capture seulement
+    await page.screenshot({ path: test.info().outputPath('desktop-profil-progres.png') })
     // « Réviser maintenant » ouvre les flashcards de la leçon la plus en retard
     await page.getByRole('button', { name: /Réviser maintenant/ }).click()
     await expect(page).toHaveURL(/\/flashcards/)
 
     await page.goto('/profil')
     // Tous les badges d'un coup, avec ce qu'il faut faire pour les obtenir
-    await expect(page.locator('.pf-desk-badges > li')).toHaveCount(18)
+    await expect(page.getByRole('heading', { name: 'Mes badges' })).toBeVisible()
+    await expect(page.getByText(/sur 18 obtenu/)).toBeVisible()
     await expect(page.getByText('Prochain badge')).toBeVisible()
-    await expect(page.locator('.pf-desk-badges').getByText('3 jours de suite')).toBeVisible()
-    await expect(page.getByRole('link', { name: /^Battle/ })).toHaveAttribute('href', '/battle')
-    await page.waitForTimeout(500)
+    await expect(page.getByRole('button', { name: /3 jours de suite/ })).toBeVisible()
+    await expect(page.getByRole('button', { name: 'Défier quelqu’un' })).toBeVisible()
+    await sansDebordement(page, 'profil')
     await page.screenshot({ path: test.info().outputPath('desktop-profil.png') })
   })
 })
@@ -119,78 +117,137 @@ test.describe('Ordinateur (1280 px)', () => {
 test.describe('Mobile (390 px)', () => {
   test.use({ viewport: { width: 390, height: 844 } })
 
-  test('rien ne change : capsule du bas visible, pas de barre latérale', async ({ page }) => {
+  test('rien ne change : capsule du bas visible, pas de menu du haut', async ({ page }) => {
     await mockApiRoutes(page)
     await mockProgramme(page)
     await entrerEnEssai(page)
-    await expect(page.locator('.side-nav')).toBeHidden()
+    await expect(page.locator('.nav-haut')).toBeHidden()
     await expect(page.locator('.bottom-nav')).toBeVisible()
+    await expect(page.locator('.bottom-nav').getByRole('link', { name: 'Programme' })).toHaveAttribute('aria-current', 'page')
+    await expect(page.getByRole('status').getByText('Mode essai')).toBeVisible()
+    await sansDebordement(page, 'programme')
     await page.screenshot({ path: test.info().outputPath('mobile-programme.png') })
-    await page.getByRole('button', { name: /^Maths/ }).click()
-    await page.waitForTimeout(500)
+    await page.getByRole('radio', { name: /^Maths/ }).click()
+    await expect(page.getByRole('heading', { name: /^Chapitres · Maths/ })).toBeVisible()
     await page.screenshot({ path: test.info().outputPath('mobile-chemin.png') })
     await page.goto('/')
-    await expect(page.locator('.home-desk')).toHaveCount(0)
-    await expect(page.locator('.guest-banner')).toBeVisible()
-    await page.waitForTimeout(500)
+    await expect(page.locator('.nav-haut')).toBeHidden()
+    await expect(page.getByRole('status').getByText('Mode essai')).toBeVisible()
+    await sansDebordement(page, 'accueil')
     await page.screenshot({ path: test.info().outputPath('mobile-home.png') })
   })
+})
+
+// L'accueil d'un compte, à chaque largeur : la partie du jour (Réviz Games), le programme, la Battle.
+test.describe('Accueil avec un compte', () => {
+  for (const [appareil, viewport] of APPAREILS) {
+    test(`carte Réviz Games, entrée vers le programme, Battle (${appareil})`, async ({ page }) => {
+      await page.setViewportSize(viewport)
+      await mockApiRoutes(page)
+      await mockProgramme(page)
+      await compteRapide(page, { prenom: 'Léa' })
+
+      // Le menu : en haut avec le bouton Réviz IA (ordinateur), capsule du bas sinon. Pas de rappel de mode essai.
+      if (estOrdinateur(page)) {
+        await expect(page.locator('.nav-haut')).toBeVisible()
+        await expect(page.locator('.bottom-nav')).toBeHidden()
+        await expect(menuHaut(page).getByRole('link', { name: 'Réviz IA' })).toBeVisible()
+      } else {
+        await expect(page.locator('.bottom-nav')).toBeVisible()
+        await expect(page.locator('.nav-haut')).toBeHidden()
+        await expect(page.locator('.bottom-nav').getByRole('link', { name: 'Réviz IA' })).toBeVisible()
+      }
+      await expect(page.getByRole('status').getByText('Mode essai')).toHaveCount(0)
+      await expect(page.getByRole('heading', { level: 1 }).first()).toBeAttached() // la phrase du jour (lue par les lecteurs d'écran)
+      await expect(page.getByRole('heading', { name: 'Ton plan du jour' })).toBeVisible()
+
+      // Réviz Games : la partie du jour est une carte de l'accueil, qui mène au hub
+      const jeux = page.getByRole('link', { name: /Réviz Games.*La partie du jour/ })
+      await jeux.evaluate(el => el.scrollIntoView({ block: 'center' }))
+      await expect(jeux).toBeVisible()
+      await expect(jeux).toContainText('6 mini-jeux')
+      await sansDebordement(page, `accueil ${appareil}`)
+      await page.screenshot({ path: test.info().outputPath(`accueil-${appareil}.png`) })
+
+      // La Battle : la carte mène à /battle
+      const battle = page.getByRole('link', { name: /^Battle/ })
+      await battle.evaluate(el => el.scrollIntoView({ block: 'center' }))
+      await expect(battle).toHaveAttribute('href', '/battle')
+
+      // Entrée vers le programme : les matières, puis « Tout voir »
+      await expect(page.getByRole('heading', { name: 'Tes matières' })).toBeVisible()
+      await expect(page.getByRole('link', { name: 'Maths', exact: true })).toHaveAttribute('href', '/programme?matiere=maths')
+      const toutVoir = page.getByRole('link', { name: 'Tout voir' })
+      await toutVoir.evaluate(el => el.scrollIntoView({ block: 'center' }))
+      await toutVoir.click()
+      await expect(page).toHaveURL(/\/programme$/)
+
+      // Retour à l'accueil, puis la carte Réviz Games mène à /jeux
+      await page.goto('/')
+      const carteJeux = page.getByRole('link', { name: /Réviz Games.*La partie du jour/ })
+      await carteJeux.evaluate(el => el.scrollIntoView({ block: 'center' }))
+      await carteJeux.click()
+      await expect(page).toHaveURL(/\/jeux/)
+      await expect(page.getByRole('heading', { name: /On joue/ })).toBeVisible()
+      await sansDebordement(page, `hub des jeux ${appareil}`)
+
+      // Le prénom n'est plus dit sur l'accueil : il vit sur le profil et dans Réviz IA.
+      await page.goto('/profil')
+      await expect(page.getByRole('heading', { name: 'Léa', level: 1 })).toBeVisible()
+    })
+  }
 })
 
 test.describe('Ordinateur (1280 px) — avec un compte', () => {
   test.use({ viewport: { width: 1280, height: 800 } })
 
-  test('accueil en tableau de bord, scanner en deux panneaux, cours avec rail', async ({ page }) => {
-    const { signup, verifyEmailAndOnboard } = await import('./helpers')
+  test('accueil en tableau de bord, scanner en deux panneaux, profil, Réviz IA', async ({ page }) => {
     await mockApiRoutes(page)
     await mockProgramme(page)
-    const email = await signup(page, { birthDate: '2004-03-15' })
-    await verifyEmailAndOnboard(page, email)
+    await compteRapide(page, { prenom: 'Léa' })
 
-    await expect(page.locator('.side-nav')).toBeVisible()
-    await page.waitForTimeout(600)
+    await expect(page.locator('.nav-haut')).toBeVisible()
     await page.screenshot({ path: test.info().outputPath('desktop-compte-home.png') })
 
+    // Scanner : les deux panneaux côte à côte, pas d'onglets
     await page.goto('/scan')
-    await expect(page.locator('.scan-panel--photo')).toBeVisible()
-    await expect(page.locator('.scan-panel--texte')).toBeVisible()
-    await expect(page.getByRole('tab', { name: /Texte/ })).toHaveCount(0)
-    await page.waitForTimeout(800)
+    await expect(page.getByRole('button', { name: 'Choisir une photo' })).toBeVisible()
+    await ouvrirSaisieTexte(page)
+    await expect(page.getByRole('tab')).toHaveCount(0)
+    await sansDebordement(page, 'scan')
     await page.screenshot({ path: test.info().outputPath('desktop-compte-scan.png') })
 
     // Un chapitre ouvert, puis l'accueil et Mes cours composés avec la leçon
-    await page.goto('/programme/maths')
-    await page.getByRole('button', { name: /Le théorème de Thalès/ }).click()
-    await page.getByRole('button', { name: /chapitre$/ }).click()
-    await expect(page).toHaveURL(/\/analyse/)
+    await page.goto('/programme?matiere=maths')
+    await ouvrirChapitreDuProgramme(page)
     await page.goto('/')
-    await page.waitForTimeout(600)
+    await expect(page.getByRole('heading', { name: 'Ton plan du jour' })).toBeVisible()
     await page.screenshot({ path: test.info().outputPath('desktop-compte-home-lecon.png') })
     await page.goto('/cours')
-    await expect(page.getByText('Le théorème de Thalès').first()).toBeVisible()
-    await page.waitForTimeout(1200)
+    await expect(page.getByRole('heading', { name: 'Mes leçons scannées' })).toBeVisible()
+    await sansDebordement(page, 'cours')
     await page.screenshot({ path: test.info().outputPath('desktop-compte-cours.png') })
-    // Profil d'un compte : l'aura de la Battle, et « Modifier le profil » en
-    // fenêtre centrée dans la colonne (plus de feuille collée en bas)
+
+    // Profil d'un compte : « Modifier le profil » en fenêtre centrée dans la page (plus de feuille collée en bas)
     await page.goto('/profil')
-    await expect(page.getByRole('link', { name: /^Battle : 0 aura/ })).toBeVisible()
+    await expect(page.getByRole('button', { name: 'Défier quelqu’un' })).toBeVisible()
     await page.getByRole('button', { name: 'Modifier le profil' }).click()
-    const fenetre = page.getByRole('complementary', { name: 'Modifier le profil' })
+    const fenetre = page.getByRole('dialog', { name: 'Modifier le profil' })
     await expect(fenetre).toBeVisible()
-    await page.waitForTimeout(300)
+    await fenetre.evaluate(el => Promise.all(el.getAnimations().map(a => a.finished)))
     const box = await fenetre.boundingBox()
-    expect(Math.abs(box.x + box.width / 2 - (248 + (1280 - 248) / 2))).toBeLessThan(4)
+    expect(Math.abs(box.x + box.width / 2 - 640)).toBeLessThan(4)
     expect(box.y).toBeGreaterThan(20)
     expect(box.y + box.height).toBeLessThan(800 - 20)
     await page.screenshot({ path: test.info().outputPath('desktop-compte-profil-modifier.png') })
-    await page.getByRole('button', { name: 'Fermer' }).click()
+    await fenetre.getByRole('button', { name: 'Fermer' }).click()
     await expect(fenetre).toBeHidden()
 
-    await page.goto('/coach')
-    await expect(page.getByText(/Qu'est-ce que tu veux comprendre/)).toBeVisible()
-    await expect(page.locator('.coach-side')).toBeVisible()
-    await expect(page.locator('.side-nav').getByRole('link', { name: 'Coach' })).toBeVisible()
-    await page.waitForTimeout(600)
+    // Réviz IA : accueil « Salut Léa », colonne des discussions, menu du haut
+    await menuHaut(page).getByRole('link', { name: 'Réviz IA' }).click()
+    await expect(page).toHaveURL(/\/coach/)
+    await expect(page.getByRole('heading', { level: 1 })).toContainText('Salut Léa.')
+    await expect(page.getByRole('complementary', { name: 'Tes conversations' })).toBeVisible()
     await page.screenshot({ path: test.info().outputPath('desktop-coach.png') })
     // Une réponse simulée du coach (flux SSE comme api/chat.js)
     const reponse = "Bonne question ! Le théorème de Thalès sert à **calculer une longueur** quand deux droites parallèles coupent deux droites sécantes.\n\nPour l'utiliser :\n- vérifie que les droites sont bien **parallèles** ;\n- écris l'égalité des rapports AM/AB = AN/AC = MN/BC ;\n- fais un produit en croix.\n\nTu veux qu'on essaie sur un exemple ?"
@@ -202,10 +259,11 @@ test.describe('Ordinateur (1280 px) — avec un compte', () => {
     await page.getByLabel('Ta question sur la leçon').fill('À quoi sert le théorème de Thalès ?')
     await page.keyboard.press('Enter')
     await expect(page.getByText('Tu veux qu\'on essaie sur un exemple ?')).toBeVisible({ timeout: 10_000 })
-    await page.waitForTimeout(500)
     await page.screenshot({ path: test.info().outputPath('desktop-coach-conversation.png') })
+
     await page.goto('/reglages')
-    await page.waitForTimeout(500)
+    await expect(page.getByRole('heading', { name: 'Réglages' }).first()).toBeVisible()
+    await sansDebordement(page, 'réglages')
     await page.screenshot({ path: test.info().outputPath('desktop-compte-reglages.png') })
   })
 })

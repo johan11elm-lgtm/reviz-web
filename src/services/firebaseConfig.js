@@ -10,6 +10,10 @@ import { getFirestore, connectFirestoreEmulator } from 'firebase/firestore';
 import { Capacitor } from '@capacitor/core';
 
 const useEmulator = import.meta.env.VITE_FIREBASE_EMULATOR === '1';
+// Émulateur sur la même machine que la page : un téléphone du réseau local qui ouvre
+// http://<ip du Mac>:5389 le joint donc sur cette ip, pas sur son propre 127.0.0.1.
+export const hoteEmulateur = typeof location !== 'undefined' && location.hostname && location.hostname !== 'localhost'
+  ? location.hostname : '127.0.0.1';
 
 const firebaseConfig = useEmulator
   ? {
@@ -40,6 +44,6 @@ export const auth = Capacitor.isNativePlatform()
 export const db   = getFirestore(app);
 
 if (useEmulator) {
-  connectAuthEmulator(auth, 'http://127.0.0.1:9099', { disableWarnings: true });
-  connectFirestoreEmulator(db, '127.0.0.1', 8080);
+  connectAuthEmulator(auth, `http://${hoteEmulateur}:9099`, { disableWarnings: true });
+  connectFirestoreEmulator(db, hoteEmulateur, 8080);
 }

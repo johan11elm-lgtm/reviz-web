@@ -1,411 +1,379 @@
-/* CSS scoped to page wrapper — see scripts/scope-page-css.py */
-/* Wrapper: .cours-page */
+/* Mes leçons scannées (handoff Claude Design du 21/10) : héros pêche avec Réviz, carte de scan à
+ * cheval, « À reprendre », leçons par matière (liste sur téléphone, grille sur ordinateur). */
+.le-page { background: #F8EFE7; color: var(--ch-encre); }
+.le-defile { padding-bottom: calc(120px + env(safe-area-inset-bottom, 0px)); flex: 1; min-height: 0; overflow-y: auto; overflow-x: hidden; scrollbar-width: none; }
+.le-defile::-webkit-scrollbar { display: none; }
 
-/* ⚠️ Ce fichier ne contient QUE les overrides et layouts locaux à la page Cours.
- * Les patterns visuels (cards, hero, chips, icons, etc.) sont dans
- * src/styles/components/*.css via les classes .rv-*. */
+/* ── Héros ── */
+.le-page .le-hero { padding-bottom: 88px; }
+.le-page .ch-surtitre { margin-top: 14px; }
+.le-page .le-titre { margin-top: 4px; font-size: 38px; }
+.le-reviz { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; margin-top: 10px; }
+.le-reviz .le-bulle { position: relative; margin-bottom: 2px; }
+.le-reviz .rv-bulle-txt { font-size: 18px; }
+.le-reviz .rv-bulle-ligne + .rv-bulle-ligne { font-size: 14px; }
 
-/* ── Featured "À reprendre" — Réviz propose la dernière leçon ── */
-/* Ces trois blocs vivent maintenant DANS .cours-content (cf. Cours.jsx) :
-   la gouttière et le rythme vertical viennent du conteneur (padding +
-   gap), donc plus de padding propre ici — sinon il se cumulerait.
-   `flex-shrink: 0` est indispensable : .cours-content est une colonne
-   flex scrollable, ses enfants se feraient écraser par défaut (même
-   piège que .rv-card et .pg-streak-card, déjà corrigé ailleurs). */
-.cours-page .cours-resume-wrap {
-  padding: 0;
-  flex-shrink: 0;
-}
-
-.cours-page .cours-resume-card {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
-
-/* Top row : mascotte de la matière + la leçon. Le titre est l'élément
- * fort (deux lignes au besoin), l'étiquette « À reprendre » reste discrète. */
-.cours-page .cours-resume-top {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.cours-page .cours-resume-mascot {
-  flex-shrink: 0;
-  filter: drop-shadow(0 10px 22px rgba(232, 101, 26, 0.3));
-  margin: -6px -2px -6px -8px;
-}
-
-.cours-page .cours-resume-body {
-  flex: 1;
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 3px;
-}
-
-.cours-page .cours-resume-title {
-  margin: 0;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-  overflow: hidden;
-  font-family: 'Geist', sans-serif;
-  font-size: 18px;
-  font-weight: 800;
-  line-height: 1.2;
-  letter-spacing: -0.4px;
-  color: var(--text-primary);
-  text-wrap: balance;
-}
-
-.cours-page .cours-resume-meta {
-  font-size: 13px;
-  color: var(--text-muted);
-  font-weight: 500;
-}
-
-.cours-page .cours-resume-due { margin-top: 5px; }
-
-/* CTA bouton — la mascotte le pointe */
-.cours-page .cours-resume-cta {
-  width: 100%;
-}
-
-
-/* ── Search bar ── */
-.cours-page .cours-search-wrap {
-  padding: 0;
-  flex-shrink: 0;
-}
-
-.cours-page .cours-search {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 10px 14px;
-  transition: box-shadow 0.15s ease;
-}
-.cours-page .cours-search:focus-within {
-  box-shadow: var(--shadow-card), 0 0 0 2px var(--accent-violet-soft);
-}
-
-.cours-page .cours-search-icon {
-  font-size: 14px;
-  flex-shrink: 0;
-  line-height: 1;
-}
-
-.cours-page .cours-search-input {
-  border: none;
-  outline: none;
-  font-family: inherit;
-  font-size: 14px;
-  color: var(--text-primary);
-  background: transparent;
-  width: 100%;
-}
-.cours-page .cours-search-input::placeholder { color: var(--text-light); }
-
-.cours-page .cours-search-clear {
-  background: var(--bg-subtle);
-  border: none;
-  border-radius: 50%;
-  width: 20px;
-  height: 20px;
-  font-size: 12px;
-  color: var(--text-muted);
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  padding: 0;
-  line-height: 1;
-  font-family: inherit;
-}
-
-/* ── Filter chips (scrollable horizontal) ── */
-.cours-page .cours-filters-wrap {
-  /* La rangée file jusqu'aux bords de l'écran malgré la gouttière du
-     conteneur : marge négative exactement compensée par un padding égal,
-     donc la largeur reste celle de la boîte de padding. */
-  margin-inline: calc(-1 * var(--page-gutter));
-  padding: 0 var(--page-gutter);
-  flex-shrink: 0;
-  overflow-x: auto;
-  scrollbar-width: none;
-}
-.cours-page .cours-filters-wrap::-webkit-scrollbar { display: none; }
-
-.cours-page .cours-filters {
-  display: flex;
-  gap: 7px;
-  width: max-content;
-}
-
-.cours-page .cours-filter-chip {
-  padding: 7px 14px;
-  border-radius: var(--radius-pill);
-  font-family: inherit;
-  font-size: 12px;
-  font-weight: 600;
-  cursor: pointer;
-  border: 1.5px solid var(--border-subtle);
-  background: var(--bg-card);
-  color: var(--text-secondary);
-  white-space: nowrap;
-  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-}
-@media (hover: hover) and (pointer: fine) {
-  .cours-page .cours-filter-chip:hover { border-color: var(--border-hover); }
-}
-.cours-page .cours-filter-chip--active {
-  background: var(--accent-violet);
-  color: #fff;
-  border-color: var(--accent-violet);
-}
-.cours-page .cours-chip-emoji { font-size: 13px; line-height: 1; }
-
-/* ── Content ── */
-.cours-page .cours-content {
-  flex: 1;
-  padding: 8px var(--page-gutter) 110px;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  gap: var(--gap-cards);
-}
-
-/* ── Une carte blanche par matière : l'en-tête (ouvre/ferme), puis ses
- * leçons en rangées séparées d'un filet (docs/design-grammaire.md §4) ── */
-.cours-page .cours-subject-section {
-  display: flex;
-  flex-direction: column;
-  padding: 4px;
-}
-
-.cours-page .cours-subject-header {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 8px 10px 8px 8px;
-  width: 100%;
-  background: transparent;
-  border: none;
-  font-family: inherit;
-  cursor: pointer;
-  color: inherit;
-  text-align: left;
-  border-radius: 20px;
-  transition: background 0.15s ease;
-}
-@media (hover: hover) and (pointer: fine) {
-  .cours-page .cours-subject-header:hover { background: var(--bg-hover); }
-}
-.cours-page .cours-subject-header:active { background: var(--bg-hover); }
-
-/* Chevron — tourné quand la matière est fermée */
-.cours-page .cours-subject-chevron {
-  width: 20px;
-  height: 20px;
-  color: var(--text-light);
-  flex-shrink: 0;
-  transition: transform 0.2s ease;
-}
-.cours-page .cours-subject-section--collapsed .cours-subject-chevron {
-  transform: rotate(-90deg);
-}
-
-.cours-page .cours-subject-icon { flex-shrink: 0; }
-
-.cours-page .cours-subject-info {
-  flex: 1;
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.cours-page .cours-subject-name {
-  font-family: 'Geist', sans-serif;
-  font-size: 17px;
-  font-weight: 800;
-  letter-spacing: -0.3px;
-  color: var(--text-primary);
-}
-
-.cours-page .cours-subject-meta {
-  font-size: 13px;
-  color: var(--text-muted);
-}
-
-.cours-page .cours-subject-due-pill { flex-shrink: 0; }
-
-/* Leçons de la matière */
-.cours-page .cours-subject-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  border-top: 1px solid var(--border-subtle);
-  margin-top: 4px;
-}
-.cours-page .cours-subject-list--hidden { display: none; }
-
-.cours-page .cours-lesson-row {
+/* ── Cartes blanches ── */
+.le-carte {
   position: relative;
-  display: flex;
-  align-items: center;
-  gap: 4px;
+  z-index: 2;
+  margin: -64px 20px 0;
+  padding: 14px;
+  border-radius: 26px;
+  background: #fff;
+  box-shadow: 0 12px 30px rgba(160,80,20,.14);
 }
-.cours-page .cours-lesson-row + .cours-lesson-row::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 12px;
-  right: 12px;
-  height: 1px;
-  background: var(--border-subtle);
-}
-
-.cours-page .cours-lesson-open {
-  flex: 1;
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  padding: 12px 8px 12px 12px;
-  border: none;
-  border-radius: 18px;
-  background: transparent;
-  color: inherit;
-  font: inherit;
-  text-align: left;
-  cursor: pointer;
-  -webkit-tap-highlight-color: transparent;
-}
-.cours-page .cours-lesson-open:active { background: var(--bg-hover); }
-@media (hover: hover) and (pointer: fine) {
-  .cours-page .cours-lesson-open:hover { background: var(--bg-hover); }
-}
-
-.cours-page .cours-lesson-title {
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-  overflow: hidden;
-  font-size: 15px;
-  font-weight: 700;
-  line-height: 1.3;
-  letter-spacing: -0.2px;
-  color: var(--text-primary);
-}
-
-.cours-page .cours-lesson-meta {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 4px 10px;
-  font-size: 13px;
-  color: var(--text-muted);
-}
-
-/* Empty state — ajustements pour mascotte agressive + bulle */
-.cours-page .cours-empty-state {
-  padding: 24px 20px 32px;
-  gap: 14px;
-}
-.cours-page .cours-empty-bubble {
-  max-width: 32ch;
-  margin-top: 12px;
-  font-size: 14px;
-  line-height: 1.5;
-  text-align: left;
-}
-
-/* Bouton supprimer — discret, rouge au tap */
-.cours-page .cours-delete-btn {
-  width: 36px;
-  height: 36px;
-  margin-right: 6px;
-  border-radius: 50%;
-  border: none;
-  background: transparent;
-  color: var(--text-light);
-  font-size: 13px;
+.le-carte--essai { padding: 16px; }
+.le-scan-haut { display: flex; align-items: center; gap: 14px; }
+.le-scan-bouton { width: 100%; padding: 0; border: 0; background: none; font: inherit; color: inherit; text-align: left; cursor: pointer; }
+.le-scan-bouton:focus-visible { outline: 3px solid #1B1A23; outline-offset: 6px; border-radius: 18px; }
+.le-scan-rond { flex: none; width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: #FFE6D2; overflow: hidden; }
+.le-scan-txt { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.le-scan-txt b { font-family: var(--font-display); font-size: 18px; font-weight: 800; letter-spacing: -.02em; }
+.le-scan-txt span { margin-top: 2px; font-size: 13px; font-weight: 500; line-height: 1.35; color: var(--ch-doux); }
+.le-scan-plus {
+  flex: none;
+  width: 46px;
+  height: 46px;
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
-  padding: 0;
-  line-height: 1;
-  font-family: inherit;
-  flex-shrink: 0;
-  transition: background 0.15s ease, color 0.15s ease;
+  border-radius: 50%;
+  background: #C25407;
+  box-shadow: 0 4px 0 #8F3E05;
+  color: #fff;
+  transition: transform .12s, box-shadow .12s;
 }
-@media (hover: hover) and (pointer: fine) {
-  .cours-page .cours-delete-btn:hover {
-    background: var(--accent-red-soft);
-    color: var(--accent-red);
-  }
-}
-.cours-page .cours-delete-btn:active {
-  background: var(--accent-red-soft);
-  color: var(--accent-red);
-}
+.le-scan-bouton:active .le-scan-plus { transform: translateY(3px); box-shadow: 0 1px 0 #8F3E05; }
+.le-quota { display: flex; align-items: center; gap: 10px; margin-top: 12px; padding-top: 12px; border-top: 1.5px dashed #EADBCB; }
+.le-quota-segments { display: flex; gap: 4px; }
+.le-quota--illimite .le-quota-txt { flex: 1; }
+.le-quota-segments i { width: 18px; height: 6px; border-radius: 999px; background: #EADBCB; }
+.le-quota-segments i.is-pris { background: #C25407; }
+.le-quota-txt { flex: 1; min-width: 0; font-size: 12px; font-weight: 600; color: var(--ch-doux); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.le-quota-plus { flex: none; padding: 4px 0; border: 0; background: none; font: 700 12px 'Geist', system-ui, sans-serif; color: #C25407; cursor: pointer; white-space: nowrap; }
+.le-essai-note { margin: 10px 0 0; font-size: 13px; font-weight: 600; color: var(--ch-doux); text-align: center; }
 
-/* ── Skeleton de synchro — nouvel appareil : cache vide, Firestore en cours ── */
-.cours-page .cours-skeleton {
-  display: flex;
-  flex-direction: column;
-  gap: 22px;
-}
-.cours-page .cours-skeleton-section {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-.cours-page .cours-skeleton-header {
+/* Boutons tranche */
+.le-btn {
+  height: 50px;
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 6px 4px;
-}
-.cours-page .cours-skeleton-card {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-.cours-page .cours-skeleton-lines {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
+  justify-content: center;
   gap: 8px;
+  padding: 0 18px;
+  border: 0;
+  border-radius: 999px;
+  font: 700 15px 'Geist', system-ui, sans-serif;
+  cursor: pointer;
+  transition: transform .12s, box-shadow .12s;
 }
-.cours-page .cours-skeleton-header .rv-skeleton--title { width: 45%; }
-.cours-page .cours-skeleton-header .rv-skeleton--text  { width: 28%; }
-.cours-page .cours-skeleton-card .rv-skeleton--title   { width: 70%; }
-.cours-page .cours-skeleton-card .rv-skeleton--text    { width: 45%; }
+.le-carte--essai .le-btn { width: 100%; margin-top: 14px; }
+.le-btn--orange { background: #C25407; color: #fff; box-shadow: 0 5px 0 #8F3E05; }
+.le-btn--orange:active { transform: translateY(4px); box-shadow: 0 1px 0 #8F3E05; }
+.le-btn--creme { background: #F8EFE7; color: var(--ch-encre); }
+.le-btn--petit { flex: none; height: 46px; box-shadow: 0 4px 0 #8F3E05; }
 
-/* ── Mon programme : raccourci en tête de liste et état vide ── */
-/* Rail et liste : deux colonnes sur ordinateur (desktop.css), une seule
- * pile sur téléphone */
-.cours-page .cours-rail,
-.cours-page .cours-main { display: contents; }
+/* ── Sections ── */
+.le-section { margin: 26px 20px 0; }
+.le-h2 { margin: 0 0 10px; font-family: var(--font-display); font-size: 22px; font-weight: 800; letter-spacing: -.03em; }
+.le-h2--grand { margin: 0; font-size: 24px; }
+.le-section-tete { display: flex; justify-content: space-between; align-items: baseline; }
+.le-section-tete > span { font-size: 13px; font-weight: 600; color: var(--ch-doux); }
 
-/* Mon programme : carte de rangées (.rv-rows), rien de propre à la page */
-.cours-page .cours-programme-link { flex-shrink: 0; }
+/* À reprendre */
+.le-reprendre { padding: 16px; border-radius: 26px; background: var(--le-pastel); box-shadow: 0 10px 24px rgba(90,70,160,.12); }
+.le-reprendre-haut { display: flex; align-items: center; gap: 12px; }
+.le-rond-matiere { flex: none; width: 52px; height: 52px; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: #fff; box-shadow: 0 4px 0 var(--le-fonce); overflow: hidden; }
+.le-rond-matiere--petit { width: 40px; height: 40px; background: var(--le-pastel); box-shadow: 0 3px 0 var(--le-fonce); }
+.le-reprendre-txt { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.le-reprendre-sur { font-size: 12px; font-weight: 700; opacity: .7; }
+.le-reprendre-titre { margin-top: 2px; font-family: var(--font-display); font-size: 19px; font-weight: 800; line-height: 1.1; letter-spacing: -.02em; text-wrap: balance; }
+.le-reprendre-bas { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 14px; }
+.le-reprendre-etat { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.le-reprendre-pastille { font-size: 13px; font-weight: 700; color: #8F3E05; }
 
-.cours-page .cours-empty-actions {
+/* Cases du parcours */
+.le-cases { display: flex; align-items: center; gap: 3px; }
+.le-cases-pas { display: flex; align-items: center; gap: 6px; }
+.le-cases--grand { gap: 6px; }
+.le-cases-trait { width: 10px; border-top: 2px dotted; }
+.le-case {
+  width: 16px;
+  height: 16px;
+  box-sizing: border-box;
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #fff;
+  border-radius: 50%;
+}
+.le-cases--grand .le-case { width: 24px; height: 24px; }
+.le-case--fait { background: #34C77B; box-shadow: 0 2px 0 #1F8A52; }
+.le-case--cours { background: #fff; border: 3px solid #C25407; box-shadow: 0 2px 0 #8F3E05; }
+.le-case--afaire { background: #FFE6D2; box-shadow: 0 2px 0 rgba(194,84,7,.28); }
+.le-cases--grand .le-case--fait { box-shadow: 0 3px 0 #1F8A52; }
+.le-cases--grand .le-case--cours { box-shadow: 0 3px 0 #8F3E05; }
+.le-cases--grand .le-case--afaire { box-shadow: 0 3px 0 rgba(194,84,7,.28); }
+
+/* Pastille d'état */
+.le-pastille { flex: none; height: 26px; display: inline-flex; align-items: center; gap: 6px; padding: 0 10px; border-radius: 999px; font-size: 12px; font-weight: 700; white-space: nowrap; }
+.le-pastille i { width: 7px; height: 7px; border-radius: 50%; }
+.le-pastille--travailler { background: #FFE6D2; color: #8F3E05; }
+.le-pastille--travailler i { background: #C25407; }
+.le-pastille--decouvrir,
+.le-pastille--encours { background: #F8EFE7; color: var(--ch-encre); }
+.le-pastille--decouvrir i,
+.le-pastille--encours i { background: #C9C2F2; }
+.le-pastille--maitrise { background: #DCF5E6; color: #1F8A52; }
+.le-pastille--maitrise i { background: #34C77B; }
+
+/* Recherche et filtres */
+.le-recherche {
+  height: 50px;
+  box-sizing: border-box;
+  display: flex;
   align-items: center;
   gap: 10px;
+  margin-top: 12px;
+  padding: 0 8px 0 16px;
+  border: 2px solid transparent;
+  border-radius: 999px;
+  background: #fff;
+  box-shadow: 0 6px 16px rgba(160,80,20,.08);
+  color: var(--ch-doux);
+}
+.le-recherche.is-rempli { border-color: #C25407; }
+.le-recherche:focus-within { border-color: #C25407; }
+.le-recherche input { flex: 1; min-width: 0; border: 0; outline: 0; background: transparent; font: 600 16px 'Geist', system-ui, sans-serif; color: var(--ch-encre); }
+.le-recherche input::-webkit-search-cancel-button { display: none; }
+.le-effacer { flex: none; width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; border: 0; border-radius: 50%; background: #F8EFE7; color: var(--ch-encre); cursor: pointer; }
+.le-filtres { display: flex; gap: 8px; margin: 0 -20px; padding: 12px 20px 4px; overflow-x: auto; scrollbar-width: none; }
+.le-filtres::-webkit-scrollbar { display: none; }
+.le-filtre {
+  flex: none;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 14px;
+  border: 0;
+  border-radius: 999px;
+  background: #fff;
+  box-shadow: 0 4px 10px rgba(160,80,20,.08);
+  font: 700 14px 'Geist', system-ui, sans-serif;
+  color: var(--ch-encre);
+  cursor: pointer;
+}
+.le-filtre--rond { padding-left: 6px; }
+.le-filtre i { width: 26px; height: 26px; border-radius: 50%; }
+.le-filtre span { font-size: 12px; opacity: .7; }
+.le-filtre.is-active { background: #1B1A23; color: #fff; box-shadow: none; }
+.le-resultat { margin: 12px 0 0; font-size: 14px; font-weight: 600; color: var(--ch-doux); }
+
+/* Groupes par matière */
+.le-groupe { margin-top: 20px; }
+.le-groupe-tete { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+.le-groupe-tete h3 { flex: 1; margin: 0; font-family: var(--font-display); font-size: 19px; font-weight: 800; letter-spacing: -.02em; }
+.le-groupe-nb { font-size: 13px; font-weight: 600; color: var(--ch-doux); }
+.le-liste { margin: 0; padding: 4px 16px; list-style: none; border-radius: 24px; background: #fff; box-shadow: 0 10px 24px rgba(160,80,20,.08); }
+.le-ligne { position: relative; display: flex; gap: 8px; }
+.le-ligne + .le-ligne { border-top: 1.5px dashed #EADBCB; }
+.le-ligne-ouvrir { flex: 1; min-width: 0; display: flex; flex-direction: column; padding: 14px 0; border: 0; background: none; font: inherit; color: inherit; text-align: left; cursor: pointer; }
+.le-ligne-titre { font-size: 16px; font-weight: 700; line-height: 1.3; }
+.le-page mark { padding: 0 1px; border-radius: 4px; background: #FFC596; color: inherit; }
+.le-date { margin-top: 3px; font-size: 12px; font-weight: 600; color: var(--ch-doux); }
+.le-ligne-etat { display: flex; align-items: center; gap: 10px; margin-top: 10px; }
+.le-points { flex: none; align-self: flex-start; width: 36px; height: 36px; margin-top: 10px; display: flex; align-items: center; justify-content: center; border: 0; border-radius: 50%; background: none; color: var(--ch-doux); cursor: pointer; }
+.le-points:hover, .le-points.is-ouvert { background: #F8EFE7; color: var(--ch-encre); }
+.le-menu {
+  position: absolute;
+  right: 0;
+  top: 48px;
+  z-index: 40;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 16px;
+  border: 0;
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 10px 30px rgba(120,60,20,.22);
+  font: 700 14px 'Geist', system-ui, sans-serif;
+  color: #C25407;
+  cursor: pointer;
+  animation: leMenu .18s ease-out both;
+}
+@keyframes leMenu { from { opacity: 0; transform: translateY(-4px) scale(.96); } to { opacity: 1; transform: none; } }
+.le-attrape { position: fixed; inset: 0; z-index: 30; }
+.le-aucun { display: flex; flex-direction: column; gap: 4px; margin-top: 24px; padding: 20px; border-radius: 24px; background: #fff; text-align: center; }
+.le-aucun b { font-family: var(--font-display); font-size: 18px; font-weight: 800; }
+.le-aucun span { font-size: 14px; font-weight: 500; color: var(--ch-doux); }
+
+/* État vide : l'exemple */
+.le-exemple { margin: 28px 20px 0; }
+.le-exemple .le-h2 { margin: 0; }
+.le-exemple-sous { margin: 4px 0 0; font-size: 14px; font-weight: 500; color: var(--ch-doux); }
+.le-exemple-carte { margin-top: 14px; padding: 16px; border-radius: 26px; background: #fff; box-shadow: 0 12px 30px rgba(160,80,20,.10); }
+.le-exemple-haut { display: flex; align-items: center; gap: 12px; padding-bottom: 14px; border-bottom: 1.5px dashed #EADBCB; }
+.le-exemple-haut p { flex: 1; margin: 0; font-size: 14px; font-weight: 600; line-height: 1.4; }
+.le-exemple-fleche { flex: none; color: #C25407; }
+.le-miniature {
+  flex: none;
+  width: 62px;
+  height: 80px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 10px 8px;
+  border-radius: 10px;
+  background: #F8EFE7;
+  box-shadow: 0 4px 10px rgba(160,80,20,.12);
+}
+.le-miniature--exemple { transform: rotate(-4deg); }
+.le-miniature i { height: 3px; border-radius: 2px; background: rgba(27,26,35,.14); }
+.le-miniature i:nth-child(1) { height: 4px; width: 70%; background: rgba(194,84,7,.55); }
+.le-miniature i:nth-child(2) { width: 92%; }
+.le-miniature i:nth-child(3) { width: 80%; }
+.le-miniature i:nth-child(4) { width: 60%; }
+.le-formats { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 14px 0 0; padding: 0; list-style: none; }
+.le-formats li { display: flex; align-items: center; gap: 10px; padding: 10px; border-radius: 18px; background: #F8EFE7; }
+.le-format-rond { flex: none; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; border-radius: 50%; overflow: hidden; }
+.le-formats li > span:last-child { display: flex; flex-direction: column; min-width: 0; }
+.le-formats b { font-size: 14px; font-weight: 700; }
+.le-formats li > span:last-child > span { font-size: 12px; font-weight: 500; color: var(--ch-doux); }
+
+/* Chargement */
+.le-squelette { display: flex; flex-direction: column; gap: 12px; margin: 26px 20px 0; }
+.le-squelette-carte { height: 120px; border-radius: 24px; background: rgba(255,255,255,.6); animation: lePulse 1.4s ease-in-out infinite; }
+@keyframes lePulse { 50% { opacity: .5; } }
+
+/* Confirmation de suppression */
+.le-voile { position: fixed; inset: 0; z-index: 400; background: rgba(27,26,35,.35); animation: leFondu .2s ease-out both; }
+@keyframes leFondu { from { opacity: 0; } }
+.le-dialogue {
+  position: fixed;
+  left: 20px;
+  right: 20px;
+  top: 50%;
+  z-index: 401;
+  max-width: 440px;
+  margin: 0 auto;
+  padding: 22px;
+  border-radius: 28px;
+  background: #fff;
+  box-shadow: 0 20px 50px rgba(27,26,35,.25);
+  transform: translateY(-50%);
+  animation: leDialogue .28s cubic-bezier(.3,1.4,.5,1) both;
+}
+@keyframes leDialogue { from { opacity: 0; transform: translateY(-46%) scale(.96); } to { opacity: 1; transform: translateY(-50%); } }
+.le-dialogue h2 { margin: 0; font-family: var(--font-display); font-size: 22px; font-weight: 800; line-height: 1.15; letter-spacing: -.02em; }
+.le-dialogue-lecon { margin: 8px 0 0; font-size: 15px; font-weight: 700; }
+.le-dialogue-txt { margin: 6px 0 0; font-size: 14px; font-weight: 500; line-height: 1.45; color: var(--ch-doux); }
+.le-dialogue-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 18px; }
+
+/* ── Ordinateur ── */
+.le-page--large .le-hero { padding: 32px 56px 120px; border-radius: 0 0 50% 50% / 0 0 80px 80px; }
+.le-page--large .ch-haut { padding-right: 420px; }
+.le-hero-grille { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr 560px; align-items: end; gap: 24px; }
+.le-page--large .ch-surtitre { margin-top: 0; }
+.le-page--large .le-titre { max-width: none; font-size: 56px; }
+.le-page--large .le-reviz { flex-direction: row; align-items: center; justify-content: flex-end; gap: 0; margin: 24px 0 -40px; }
+.le-page--large .le-reviz .le-bulle { margin: 0 -10px 40px 0; }
+.le-page--large .le-reviz .rv-bulle-txt { max-width: 320px; padding: 14px 20px 15px; font-size: 22px; letter-spacing: -.5px; }
+.le-page--large .le-reviz .rv-bulle-ligne + .rv-bulle-ligne { font-size: 15px; }
+
+.le-cartes { position: relative; z-index: 2; display: grid; grid-template-columns: 560px 1fr; gap: 20px; box-sizing: border-box; max-width: 1440px; margin: -76px auto 0; padding: 0 56px; }
+.le-cartes--seule { grid-template-columns: 560px; }
+.le-cartes > .le-carte--scan { display: flex; flex-direction: column; justify-content: space-between; }
+.le-page--large .le-carte { margin: 0; padding: 18px; }
+.le-page--large .le-scan-rond { width: 68px; height: 68px; }
+.le-page--large .le-scan-txt b { font-size: 20px; }
+.le-page--large .le-scan-txt span { font-size: 14px; }
+.le-page--large .le-scan-plus { width: 52px; height: 52px; box-shadow: 0 5px 0 #8F3E05; }
+.le-page--large .le-quota-txt { font-size: 13px; }
+.le-page--large .le-quota-plus { font-size: 13px; }
+.le-page--large .le-carte--essai { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 4px 20px; }
+.le-page--large .le-carte--essai .le-btn { width: auto; margin: 0; grid-row: 1; grid-column: 2; }
+.le-page--large .le-carte--essai .le-essai-note { grid-column: 1 / -1; text-align: left; }
+.le-page--large .le-reprendre { padding: 18px 20px; display: flex; flex-direction: column; justify-content: space-between; }
+.le-page--large .le-rond-matiere:not(.le-rond-matiere--petit) { width: 60px; height: 60px; }
+.le-page--large .le-reprendre-titre { font-size: 22px; }
+.le-page--large .le-reprendre-etat { flex-direction: row; align-items: center; gap: 14px; }
+
+.le-corps { max-width: 1440px; box-sizing: border-box; margin: 40px auto 0; padding: 0 56px; }
+.le-corps .le-exemple, .le-corps .le-squelette { margin: 0; }
+.le-corps--deux { display: grid; grid-template-columns: 280px 1fr; gap: 40px; align-items: start; }
+.le-matieres { position: sticky; top: 104px; padding: 18px 10px 10px; border-radius: 24px; background: #fff; box-shadow: 0 10px 24px rgba(160,80,20,.08); }
+.le-matieres-titre { margin: 0 0 8px 10px; font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--ch-doux); }
+.le-matieres ul { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 2px; }
+.le-matiere {
+  width: 100%;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 14px 0 8px;
+  border: 0;
+  border-radius: 16px;
+  background: none;
+  font: 700 15px 'Geist', system-ui, sans-serif;
+  color: var(--ch-encre);
+  text-align: left;
+  cursor: pointer;
+  transition: background .15s;
+}
+.le-matiere:hover { background: #F8EFE7; }
+.le-matiere.is-active { background: #1B1A23; color: #fff; }
+.le-matiere-rond { flex: none; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; overflow: hidden; color: var(--ch-encre); }
+.le-matiere-nom { flex: 1; min-width: 0; }
+.le-matiere-n { font-size: 13px; opacity: .7; }
+
+.le-recherche-ligne { display: flex; align-items: center; gap: 16px; }
+.le-page--large .le-recherche { flex: 0 1 560px; height: 56px; margin: 0; padding: 0 10px 0 20px; }
+.le-page--large .le-resultat { margin: 0; }
+.le-effacer-txt { flex: none; height: 36px; padding: 0 14px; border: 0; border-radius: 999px; background: #F8EFE7; font: 700 13px 'Geist', system-ui, sans-serif; color: var(--ch-encre); cursor: pointer; }
+.le-page--large .le-groupe { margin-top: 28px; }
+.le-page--large .le-groupe-tete h3 { flex: none; font-size: 22px; }
+.le-grille { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin: 0; padding: 0; list-style: none; }
+.le-tuile {
+  position: relative;
+  min-height: 196px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  padding: 18px;
+  border-radius: 24px;
+  background: #fff;
+  box-shadow: 0 10px 24px rgba(160,80,20,.08);
+  transition: box-shadow .2s, transform .2s;
+}
+.le-tuile:hover { box-shadow: 0 16px 34px rgba(160,80,20,.16); transform: translateY(-2px); }
+.le-tuile-ouvrir { position: absolute; inset: 0; z-index: 1; border: 0; border-radius: 24px; background: none; cursor: pointer; }
+.le-tuile-ouvrir:focus-visible { outline: 3px solid #1B1A23; outline-offset: 3px; }
+.le-tuile .le-miniature { width: 48px; height: 60px; gap: 5px; padding: 8px 7px; border-left: 4px solid var(--le-fonce); border-radius: 8px; }
+.le-tuile .le-points { position: absolute; top: 12px; right: 12px; z-index: 2; margin: 0; }
+.le-tuile .le-menu { top: 52px; right: 12px; white-space: nowrap; }
+.le-tuile-titre { margin-top: 14px; font-family: var(--font-display); font-size: 19px; font-weight: 800; line-height: 1.12; letter-spacing: -.02em; text-wrap: balance; }
+.le-tuile-bas { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: auto; padding-top: 14px; }
+.le-tuile .le-case { width: 18px; height: 18px; }
+
+.le-page--large .le-exemple-carte { display: grid; grid-template-columns: 340px 1fr; align-items: center; gap: 28px; padding: 24px; }
+.le-page--large .le-exemple-haut { padding: 0 28px 0 0; border-bottom: 0; border-right: 1.5px dashed #EADBCB; }
+.le-page--large .le-exemple .le-h2 { font-size: 28px; }
+.le-page--large .le-formats { grid-template-columns: repeat(4, 1fr); margin: 0; }
+.le-page--large .le-formats li { flex-direction: column; text-align: center; padding: 16px 10px; }
+.le-page--large .le-format-rond { width: 64px; height: 64px; }
+
+@media (max-width: 1240px) {
+  .le-page--large .le-hero, .le-cartes, .le-corps { padding-left: 32px; padding-right: 32px; }
+  .le-cartes { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .le-grille { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .le-corps--deux { grid-template-columns: 240px 1fr; gap: 28px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .le-menu, .le-voile, .le-dialogue, .le-squelette-carte { animation: none; }
 }

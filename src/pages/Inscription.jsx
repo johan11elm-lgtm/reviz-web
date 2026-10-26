@@ -1,43 +1,39 @@
-import { UsersIcon } from '../components/Icons';
-import { Mascot } from '../components/Mascot';
 import { useState, useMemo, useEffect } from 'react';
-import { Link, Navigate, useNavigate, useSearchParams, useLocation } from 'react-router-dom';
+import { Navigate, useNavigate, useSearchParams, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import SocialLogin, { erreurConnexionSociale } from '../components/SocialLogin';
-import {
-  CYCLES,
-  CLASSES_BY_CYCLE,
-  SPECIALITES_LYCEE,
-  needsSpecialites,
-  isUnder15,
-} from '../utils/levels';
+import { erreurConnexionSociale } from '../components/SocialLogin';
+import { isUnder15 } from '../utils/levels';
 import { readGuest } from '../services/guestService';
 import { sendParentalConsent, consentErrorMessage } from '../services/consentService';
 import { track } from '../services/statsService';
-import { useIsDesktop } from '../hooks/useMediaQuery';
-import { nbsp } from '../utils/typography';
-import ChampDateNaissance from '../components/ChampDateNaissance';
-import './Inscription.css';
+import {
+  EntreeEcran, Champ, ChampMotDePasse, ChampDate, ChoixClasse, CaseCGU,
+  Encart, Ou, BoutonsSociaux, LienTexte, Erreur,
+} from '../components/entree/Entree';
 
-// Mascotte de chaque étape, sur ordinateur seulement.
-const POSE_ETAPE = {
-  prenom: 'hello', birthdate: 'thinking', cycle: 'reading', classe: 'graduation',
-  detail: 'search', account: 'writing', parent: 'retour',
-};
-
-function firebaseErrorFr(code) {
+// Erreur Firebase → champ concerné et message.
+function firebaseErreur(code) {
   switch (code) {
-    case 'auth/email-already-in-use': return 'Cet email est déjà utilisé.';
-    case 'auth/invalid-email':        return 'Adresse email invalide.';
-    case 'auth/weak-password':        return 'Mot de passe trop court (6 caractères min).';
-    default:                          return 'Une erreur est survenue. Réessaie.';
+    case 'auth/email-already-in-use': return { email: 'Cet e-mail est déjà utilisé.', emailPris: true };
+    case 'auth/invalid-email':        return { email: 'Adresse e-mail invalide.' };
+    case 'auth/weak-password':        return { password: '6 caractères au moins.' };
+    default:                          return { general: 'Une erreur est survenue. Réessaie.' };
   }
 }
 
-// isUnder15 est désormais importé depuis ../utils/levels (source unique).
+const EMAIL_RE = /^\S+@\S+\.\S+$/;
 
 // Attente maximale de la relecture du gate avant de passer à la suite.
 const ATTENTE_GATE_MS = 2000;
+
+// Ce que dit Réviz à chaque étape, et comment il se tient.
+const ECRAN = {
+  prenom:    { expression: 'content',   geste: 'coucou',    taille: 'normal' },
+  birthdate: { expression: 'reflechit',                     taille: 'normal' },
+  classe:    { expression: 'content',                       taille: 'normal' },
+  account:   { expression: 'determine',                     taille: 'dense' },
+  parent:    { expression: 'fier',      geste: 'brasEnLair', taille: 'dense' },
+};
 
 export default function Inscription() {
   const [prenom, setPrenom]               = useState(() => readGuest()?.prenom ?? '');
@@ -49,14 +45,15 @@ export default function Inscription() {
       ? { cycle: g.cycle, classe: g.classe, specialites: g.specialites ?? [] }
       : { cycle: null, classe: null, specialites: [] };
   });
+  // Classe donnée en mode essai : on ne la redemande jamais (handoff, § 7).
+  const [classeConnue]                    = useState(() => !!level.classe);
   const [email, setEmail]                 = useState('');
   const [password, setPassword]           = useState('');
   const [acceptCgu, setAcceptCgu]         = useState(false);
   const [parentEmail, setParentEmail]     = useState('');
-  const [error, setError]                 = useState('');
+  // Erreurs sur place, champ par champ ; effacées dès que l'élève corrige.
+  const [erreurs, setErreurs]             = useState({});
   const [loading, setLoading]             = useState(false);
-  const [animDir, setAnimDir]             = useState('in');
-  const [voirMdp, setVoirMdp]             = useState(false);
   const [compteCree, setCompteCree]       = useState(false);
   const [plusTardEnCours, setPlusTardEnCours] = useState(false);
 
@@ -67,7 +64,6 @@ export default function Inscription() {
   const navigate                          = useNavigate();
   const location                          = useLocation();
   const [params, setParams]               = useSearchParams();
-  const isDesktop                         = useIsDesktop();
 
   // L'étape vit dans l'URL (?etape=2) : chaque étape est une entrée
   // d'historique, donc le retour d'Android (geste ou bouton) revient à
@@ -77,14 +73,15 @@ export default function Inscription() {
     setParams(i > 0 ? { etape: String(i) } : {}, { replace });
   }
 
-  // Construction dynamique de la liste des étapes en fonction du profil.
+  // Une question par écran : prénom, naissance, classe (sauf si connue),
+  // compte, puis l'e-mail d'un parent pour les moins de 15 ans.
   const steps = useMemo(() => {
-    const base = ['prenom', 'birthdate', 'cycle', 'classe'];
-    if (needsSpecialites(level)) base.push('detail');
+    const base = ['prenom', 'birthdate'];
+    if (!classeConnue) base.push('classe');
     base.push('account');
     if (isUnder15(birthDate)) base.push('parent');
     return base;
-  }, [level, birthDate]);
+  }, [classeConnue, birthDate]);
 
   // Les réponses ne vivent qu'en mémoire : arrivé au milieu du tunnel sans
   // elles (page rechargée, lien partagé), on repart du début.
@@ -95,82 +92,88 @@ export default function Inscription() {
     const manquante = steps.slice(0, stepIdx).findIndex(id => validate(id));
     if (manquante >= 0) goTo(manquante, { replace: true });
     else if (stepIdx >= steps.length) goTo(steps.length - 1, { replace: true });
-  }, [steps, stepIdx]);
+  }, [steps, stepIdx]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Compte déjà créé (moins de 15 ans) : revenir en arrière recréerait le
-  // compte (« email déjà utilisé »). On reste sur l'étape parent.
+  // compte (« e-mail déjà utilisé »). On reste sur l'étape parent.
   useEffect(() => {
     if (dejaInscrit) return;
     const iParent = steps.indexOf('parent');
     if (compteCree && iParent >= 0 && stepIdx !== iParent) goTo(iParent, { replace: true });
-  }, [compteCree, stepIdx, steps]);
+  }, [compteCree, stepIdx, steps]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // Les erreurs d'une étape ne suivent pas l'élève sur la suivante (y compris
+  // par le retour du téléphone, qui passe par l'historique).
+  const [etapePrec, setEtapePrec] = useState(stepIdx);
+  if (etapePrec !== stepIdx) {
+    setEtapePrec(stepIdx);
+    setErreurs({});
+  }
 
   const stepId = steps[stepIdx];
-  const totalVisible = steps.includes('parent') ? steps.length - 1 : steps.length;
-  const progressIdx  = Math.min(stepIdx, totalVisible - 1);
 
   function goNext({ replace = false } = {}) {
-    setError('');
-    setAnimDir('in');
+    setErreurs({});
     goTo(Math.min(stepIdx + 1, steps.length - 1), { replace });
   }
   function goPrev() {
-    setError('');
-    setAnimDir('out');
+    setErreurs({});
     // Même chemin que le retour du téléphone. Arrivé directement sur
     // /inscription (pas d'historique dans l'app) : accueil, sans empiler.
     if (location.key !== 'default') navigate(-1);
     else if (stepIdx > 0) goTo(stepIdx - 1, { replace: true });
     else navigate('/welcome', { replace: true });
   }
-  // Le retour du téléphone passe par l'historique, sans goPrev : on règle
-  // le sens de l'animation d'après l'étape qui change.
-  const [etapePrec, setEtapePrec] = useState(stepIdx);
-  if (etapePrec !== stepIdx) {
-    setEtapePrec(stepIdx);
-    setAnimDir(stepIdx > etapePrec ? 'in' : 'out');
-  }
 
-  function validate(id) {
+  // Toutes les erreurs d'une étape, par champ (l'écran compte peut en
+  // montrer plusieurs à la fois : e-mail et CGU).
+  function erreursEtape(id) {
+    const e = {};
     switch (id) {
       case 'prenom':
-        if (!prenom.trim()) return 'Entre ton prénom.';
-        return null;
+        if (!prenom.trim()) e.prenom = 'Entre ton prénom.';
+        break;
       case 'birthdate': {
-        if (!birthDate) return 'Entre ta date de naissance.';
+        if (!birthDate) { e.naissance = 'Entre ta date de naissance.'; break; }
         const d = new Date(birthDate);
-        if (isNaN(d.getTime())) return 'Date invalide.';
-        if (d > new Date()) return 'La date ne peut pas être dans le futur.';
-        if (d < new Date('1950-01-01')) return 'Date invalide.';
-        return null;
+        if (isNaN(d.getTime())) e.naissance = 'Date invalide.';
+        else if (d > new Date()) e.naissance = 'La date ne peut pas être dans le futur.';
+        else if (d < new Date('1950-01-01')) e.naissance = 'Date invalide.';
+        break;
       }
-      case 'cycle':
-        if (!level.cycle) return 'Choisis ton cycle.';
-        return null;
       case 'classe':
-        if (!level.classe) return 'Choisis ta classe.';
-        return null;
-      case 'detail':
-        // Spés optionnelles : on n'oblige pas un minimum (l'utilisateur peut être en 1ère sans choix défini)
-        return null;
+        if (!level.classe) e.classe = 'Choisis ta classe.';
+        break;
       case 'account':
-        if (!email.trim()) return 'Entre ton email.';
-        if (!/^\S+@\S+\.\S+$/.test(email.trim())) return 'Adresse email invalide.';
-        if (password.length < 6) return 'Mot de passe trop court (6 caractères min).';
-        if (!acceptCgu) return 'Tu dois accepter les CGU pour continuer.';
-        return null;
+        if (!email.trim()) e.email = 'Entre ton e-mail.';
+        else if (!EMAIL_RE.test(email.trim())) e.email = 'Adresse e-mail invalide.';
+        if (password.length < 6) e.password = '6 caractères au moins.';
+        if (!acceptCgu) e.cgu = 'Tu dois accepter les CGU pour continuer.';
+        break;
       case 'parent':
-        if (!parentEmail.trim()) return 'Entre l\'email de ton parent.';
-        if (!/^\S+@\S+\.\S+$/.test(parentEmail.trim())) return 'Adresse email invalide.';
+        if (!parentEmail.trim()) e.parent = 'Entre l’e-mail de ton parent.';
+        else if (!EMAIL_RE.test(parentEmail.trim())) e.parent = 'Adresse e-mail invalide.';
         // Le serveur refuse aussi (PARENT_EMAIL_IS_CHILD) — on échoue tôt ici
         // avec un message clair plutôt qu'après l'aller-retour API.
-        if (parentEmail.trim().toLowerCase() === email.trim().toLowerCase()) {
-          return 'Entre l\'email de ton parent, pas le tien.';
+        else if (parentEmail.trim().toLowerCase() === email.trim().toLowerCase()) {
+          e.parent = 'Entre l’e-mail de ton parent, pas le tien.';
         }
-        return null;
+        break;
       default:
-        return null;
     }
+    return e;
+  }
+  function validate(id) {
+    return Object.values(erreursEtape(id))[0] ?? null;
+  }
+  // L'élève corrige un champ : son erreur (et l'erreur générale) s'efface.
+  function effacer(...champs) {
+    setErreurs(e => {
+      if (!champs.some(c => e[c]) && !e.general) return e;
+      const n = { ...e, general: undefined };
+      champs.forEach(c => { n[c] = undefined; });
+      return n;
+    });
   }
 
   // La suite ne dépend pas de la relecture du gate (le statut est déjà
@@ -182,8 +185,8 @@ export default function Inscription() {
   }
 
   async function handlePrimary() {
-    const err = validate(stepId);
-    if (err) { setError(err); return; }
+    const e = erreursEtape(stepId);
+    if (Object.keys(e).length) { setErreurs(e); return; }
 
     // Étape 'account' : on crée le compte Firebase + profil Firestore
     if (stepId === 'account') {
@@ -198,7 +201,7 @@ export default function Inscription() {
           navigate('/', { replace: true });
         }
       } catch (err) {
-        setError(firebaseErrorFr(err.code));
+        setErreurs(firebaseErreur(err.code));
       } finally {
         setLoading(false);
       }
@@ -206,7 +209,7 @@ export default function Inscription() {
     }
 
     // Étape 'parent' : on prévient le parent, l'élève entre aussitôt dans
-    // l'app (le parent accepte ou refuse depuis l'email).
+    // l'app (le parent accepte ou refuse depuis l'e-mail).
     if (stepId === 'parent') {
       setLoading(true);
       try {
@@ -215,7 +218,7 @@ export default function Inscription() {
         await rafraichirGate();
         navigate('/', { replace: true });
       } catch (err) {
-        setError(consentErrorMessage(err.message));
+        setErreurs({ parent: consentErrorMessage(err.message).replace(/\bemail\b/g, 'e-mail') });
       } finally {
         setLoading(false);
       }
@@ -226,9 +229,9 @@ export default function Inscription() {
   }
 
   // « Plus tard » : le compte existe déjà, l'élève entre dans l'app et a
-  // 15 jours pour donner l'email d'un parent (bandeau, relances par email).
+  // 15 jours pour donner l'e-mail d'un parent (bandeau, relances par e-mail).
   async function plusTard() {
-    setError('');
+    setErreurs({});
     setLoading(true);
     setPlusTardEnCours(true);
     track('consent_plus_tard');
@@ -237,7 +240,7 @@ export default function Inscription() {
   }
 
   async function handleProvider(id) {
-    setError('');
+    setErreurs({});
     setLoading(true);
     try {
       const user = await loginWithProvider(id);
@@ -245,314 +248,141 @@ export default function Inscription() {
       navigate('/');
     } catch (err) {
       const msg = erreurConnexionSociale(err);
-      if (msg) setError(msg);
+      if (msg) setErreurs({ general: msg });
     } finally {
       setLoading(false);
     }
   }
 
-  function pickCycle(cycleId) {
-    setLevel({ cycle: cycleId, classe: null, specialites: [], filiere: null });
-    setError('');
-    // Auto-advance après un léger délai pour laisser voir la sélection
-    setTimeout(() => goNext(), 180);
+  function choisirClasse(classe) {
+    // Collège seulement : le niveau s'enregistre comme avant, cycle 'college'.
+    setLevel({ cycle: 'college', classe, specialites: [], filiere: null });
+    effacer('classe');
   }
 
-  function pickClasse(classe) {
-    setLevel(l => ({ ...l, classe, specialites: [], filiere: null }));
-    setError('');
-    setTimeout(() => goNext(), 180);
+  if (dejaInscrit) {
+    return <Navigate to="/" replace />;
   }
 
-  function toggleSpec(spec) {
-    setLevel(l => {
-      const cur = l.specialites ?? [];
-      return {
-        ...l,
-        specialites: cur.includes(spec) ? cur.filter(s => s !== spec) : [...cur, spec],
-      };
-    });
-  }
-
-  const isLast = stepIdx === steps.length - 1;
   const primaryLabel = (() => {
-    if (loading && stepId === 'account') return 'Création...';
-    if (loading && stepId === 'parent' && !plusTardEnCours) return 'Envoi...';
+    if (loading && stepId === 'account') return 'Création…';
+    if (loading && stepId === 'parent' && !plusTardEnCours) return 'Envoi…';
     if (stepId === 'account') return 'Créer mon compte';
-    if (stepId === 'parent')  return 'Envoyer et commencer →';
+    if (stepId === 'parent')  return 'Envoyer et commencer';
     return 'Continuer';
   })();
 
-  // Chaque étape : sa question, son aide, puis ses réponses. Le téléphone
-  // les empile dans la colonne ; l'ordinateur pose la question à gauche et
-  // les réponses dans une carte à droite.
+  const lienConnexion = <LienTexte avant="Déjà un compte ?" to="/connexion">Se connecter</LienTexte>;
+
+  // Chaque étape : ce que dit Réviz, la question (dans la carte) et ce qui
+  // vient dessous.
   const etape = (() => {
     switch (stepId) {
       case 'prenom': return {
-        titre: 'Quel est ton prénom ?',
-        aide: "On l'utilise pour te dire bonjour.",
+        bulle: ['Quel est ton prénom ?', 'On l’utilise pour te dire bonjour.'],
         corps: (
-            <input
-              className="auth-input signup-input-lg"
-              type="text"
-              placeholder="Lucas"
-              value={prenom}
-              onChange={e => setPrenom(e.target.value)}
-              autoComplete="given-name"
-              enterKeyHint="next"
-              autoFocus
-            />
+          <Champ id="signup-prenom" label="Ton prénom" type="text" placeholder="Lucas" value={prenom}
+            erreur={erreurs.prenom} onChange={e => { setPrenom(e.target.value); effacer('prenom'); }}
+            autoComplete="given-name" enterKeyHint="next" autoFocus />
+        ),
+        dessous: (
+          <>
+            <Ou />
+            <BoutonsSociaux onLogin={handleProvider} disabled={loading} />
+            {lienConnexion}
+          </>
         ),
       };
       case 'birthdate': return {
-        titre: 'Quand es-tu né·e ?',
-        aide: 'Pour adapter Réviz à ton âge.',
+        bulle: ['Quand es-tu né·e ?', 'Pour adapter Réviz à ton âge.'],
         corps: (
-            <ChampDateNaissance value={birthDate} onChange={setBirthDate} grand idPrefix="signup-naissance" />
-        ),
-      };
-      case 'cycle': return {
-        titre: 'Où en es-tu ?',
-        aide: 'Choisis ton cycle.',
-        corps: (
-            <div className="signup-card-stack">
-              {CYCLES.map(c => (
-                <button
-                  type="button"
-                  key={c.id}
-                  className={`signup-card${level.cycle === c.id ? ' active' : ''}`}
-                  onClick={() => pickCycle(c.id)}
-                >
-                  <span className="signup-card-emoji"><Mascot pose={c.pose} size={40} alt="" aria-hidden="true" /></span>
-                  <span className="signup-card-body">
-                    <span className="signup-card-label">{c.label}</span>
-                    <span className="signup-card-desc">{c.desc}</span>
-                  </span>
-                </button>
-              ))}
-            </div>
+          <ChampDate value={birthDate} onChange={v => { setBirthDate(v); effacer('naissance'); }}
+            erreur={erreurs.naissance} idPrefix="signup-naissance" />
         ),
       };
       case 'classe': return {
-        titre: 'Quelle classe ?',
-        aide: CYCLES.find(c => c.id === level.cycle)?.label,
-        corps: (
-            <div className="signup-card-grid">
-              {(CLASSES_BY_CYCLE[level.cycle] ?? []).map(c => (
-                <button
-                  type="button"
-                  key={c}
-                  className={`signup-card-sm${level.classe === c ? ' active' : ''}`}
-                  onClick={() => pickClasse(c)}
-                >
-                  {c}
-                </button>
-              ))}
-            </div>
-        ),
+        bulle: ['Quelle classe ?', 'Ton programme suit ta classe.'],
+        corps: <ChoixClasse valeur={level.classe} onChange={choisirClasse} erreur={erreurs.classe} />,
       };
-      case 'detail': return needsSpecialites(level) ? {
-        titre: 'Tes spécialités ?',
-        aide: 'Sélectionne celles que tu suis (tu peux en choisir plusieurs).',
-        corps: (
-            <div className="signup-chips">
-              {SPECIALITES_LYCEE.map(s => {
-                const active = level.specialites?.includes(s);
-                return (
-                  <button
-                    type="button"
-                    key={s}
-                    className={`signup-chip${active ? ' active' : ''}`}
-                    onClick={() => toggleSpec(s)}
-                  >
-                    {s}
-                  </button>
-                );
-              })}
-            </div>
-        ),
-      } : null;
       case 'account': return {
-        titre: 'Crée ton compte',
-        aide: `Dernière étape, ${prenom || 'on y est presque'}.`,
+        bulle: ['Crée ton compte', `Dernière étape, ${prenom.trim()}.`],
         corps: (
           <>
-            <div className="auth-field">
-              <label className="auth-label" htmlFor="signup-email">Email</label>
-              <input
-                id="signup-email"
-                className="auth-input"
-                type="email"
-                placeholder="lucas@exemple.com"
-                value={email}
-                onChange={e => setEmail(e.target.value)}
-                autoComplete="email"
-                autoCapitalize="none"
-                enterKeyHint="next"
-                onKeyDown={e => {
-                  // Entrée sur l'email : on passe au mot de passe, sans valider.
-                  if (e.key === 'Enter') { e.preventDefault(); document.getElementById('signup-password')?.focus(); }
-                }}
-              />
-            </div>
-            <div className="auth-field">
-              <label className="auth-label" htmlFor="signup-password">Mot de passe</label>
-              <div className="auth-password">
-                <input
-                  id="signup-password"
-                  className="auth-input"
-                  type={voirMdp ? 'text' : 'password'}
-                  placeholder="6 caractères minimum"
-                  value={password}
-                  onChange={e => setPassword(e.target.value)}
-                  autoComplete="new-password"
-                  enterKeyHint="done"
-                />
-                <button type="button" className="auth-password-toggle" onClick={() => setVoirMdp(v => !v)}
-                  aria-pressed={voirMdp}>
-                  {voirMdp ? 'Masquer' : 'Afficher'}
-                </button>
-              </div>
-              <p className="auth-field-hint">6 caractères minimum, invente-le : ce n'est pas celui de ta messagerie.</p>
-            </div>
-            <label className="auth-checkbox-row">
-              <input
-                type="checkbox"
-                checked={acceptCgu}
-                onChange={e => setAcceptCgu(e.target.checked)}
-              />
-              <span>
-                {/* Nouvel onglet : sinon ouvrir les CGU efface tout ce qui est saisi. */}
-                J'accepte les <Link to="/legal/cgu" target="_blank" rel="noopener">CGU</Link> et la <Link to="/legal/confidentialite" target="_blank" rel="noopener">politique de confidentialité</Link>
-              </span>
-            </label>
+            <Champ id="signup-email" label="E-mail" type="email" placeholder="lucas@exemple.com" value={email}
+              erreur={erreurs.email} onChange={e => { setEmail(e.target.value); effacer('email', 'emailPris'); }}
+              autoComplete="email" autoCapitalize="none" enterKeyHint="next"
+              onKeyDown={e => {
+                // Entrée sur l'e-mail : on passe au mot de passe, sans valider.
+                if (e.key === 'Enter') { e.preventDefault(); document.getElementById('signup-password')?.focus(); }
+              }} />
+            <ChampMotDePasse id="signup-password" value={password} erreur={erreurs.password}
+              aide={erreurs.password ? null : '6 caractères au moins. Invente-le : ce n’est pas celui de ta messagerie.'}
+              onChange={e => { setPassword(e.target.value); effacer('password'); }}
+              autoComplete="new-password" enterKeyHint="done" />
+            <CaseCGU checked={acceptCgu} erreur={erreurs.cgu}
+              onChange={v => { setAcceptCgu(v); effacer('cgu'); }} />
+          </>
+        ),
+        dessous: (isUnder15(birthDate) || erreurs.emailPris) && (
+          <>
             {isUnder15(birthDate) && (
-              <div className="auth-parent-notice-inline">
-                Tu pourras réviser tout de suite. Il faudra juste l'email d'un de tes parents, maintenant ou dans les 15 jours.
-              </div>
+              <Encart icone="horloge">
+                Tu pourras réviser tout de suite. <b>Il faudra juste l’e-mail d’un de tes parents</b>, maintenant ou dans les 15 jours.
+              </Encart>
             )}
+            {erreurs.emailPris && lienConnexion}
           </>
         ),
       };
+      // Un élève sur cinq s'arrêtait ici (25/10) : le champ prenait le focus, le clavier d'Android
+      // cachait « Plus tard » et il ne voyait qu'une demande d'e-mail de ses parents. Plus de focus
+      // automatique, et « Plus tard » juste sous l'envoi, dans la carte, toujours visible.
       case 'parent': return {
-        titre: 'Ton compte est prêt !',
-        aide: 'Une dernière chose, maintenant ou plus tard.',
+        bulle: ['Ton compte est prêt.', 'Tu peux réviser tout de suite.'],
         corps: (
           <>
-            <div className="auth-parent-info">
-              <span className="auth-parent-icon"><UsersIcon /></span>
-              <p>
-                Comme tu as moins de 15 ans, un de tes parents doit donner son accord par email.
-                Pas son adresse sous la main ? Commence quand même : tu as <strong>15 jours</strong> pour la donner.
-              </p>
-            </div>
-            <div className="auth-field">
-              <label className="auth-label" htmlFor="signup-parent-email">Email de ton parent</label>
-              <input
-                id="signup-parent-email"
-                className="auth-input"
-                type="email"
-                placeholder="parent@exemple.com"
-                value={parentEmail}
-                onChange={e => setParentEmail(e.target.value)}
-                autoComplete="email"
-                autoCapitalize="none"
-                enterKeyHint="send"
-                autoFocus
-              />
-            </div>
+            <p className="en-texte">
+              Comme tu as moins de 15 ans, un parent doit dire oui par e-mail. Donne son adresse maintenant,
+              ou <b>dans les 15 jours</b>.
+            </p>
+            <Champ id="signup-parent-email" label="E-mail de ton parent" type="email" placeholder="parent@exemple.com"
+              value={parentEmail} erreur={erreurs.parent}
+              onChange={e => { setParentEmail(e.target.value); effacer('parent'); }}
+              autoComplete="email" autoCapitalize="none" enterKeyHint="send" />
           </>
+        ),
+        apres: (
+          <button type="button" className="en-btn-second" onClick={plusTard} disabled={loading}>
+            {plusTardEnCours ? 'Un instant…' : 'Plus tard, je révise d’abord'}
+            <small>Il te reste 15 jours</small>
+          </button>
         ),
       };
       default: return null;
     }
   })();
 
-  const bouton = (
-        <button
-          className="auth-btn signup-primary"
-          type="submit"
-          disabled={loading}
-        >
-          {primaryLabel}
-        </button>
-  );
-  const boutonPlusTard = stepId === 'parent' && (
-        <button type="button" className="auth-btn-plus-tard" onClick={plusTard} disabled={loading}>
-          {plusTardEnCours ? 'Un instant…' : 'Plus tard, je commence à réviser →'}
-          <small>Tu as 15 jours pour donner l'email</small>
-        </button>
-  );
-  const autresChoix = stepId === 'prenom' && (
-          <>
-                          <div className="auth-divider"><span>ou</span></div>
-              <SocialLogin onLogin={handleProvider} disabled={loading} />
-            <p className="auth-link">
-              Déjà un compte ?{' '}
-              <Link to="/connexion">Se connecter</Link>
-            </p>
-          </>
-  );
-  const progression = (
-        <div className="signup-progress">
-          <div className="signup-progress-bar" style={{ width: `${((progressIdx + 1) / totalVisible) * 100}%` }} />
-        </div>
-  );
+  if (!etape) return null;
+  const pose = ECRAN[stepId];
 
-  if (dejaInscrit) {
-    return <Navigate to="/" replace />;
-  }
-
-  if (isDesktop) {
-    return (
-      <div className="app auth-desk-page">
-        <div className="auth-desk">
-          <div className="auth-desk-intro">
-            <button type="button" className="auth-back" onClick={goPrev} aria-label="Retour">←</button>
-            <span className="auth-desk-mascot"><Mascot pose={POSE_ETAPE[stepId] ?? 'hello'} size={132} alt="" aria-hidden="true" /></span>
-            {etape && <h1 className="signup-question">{nbsp(etape.titre)}</h1>}
-            {etape?.aide && <p className="signup-hint">{etape.aide}</p>}
-            {stepId !== 'parent' && <p className="auth-desk-step">Étape {progressIdx + 1} sur {totalVisible}</p>}
-          </div>
-          {/* Entrée valide l'étape, comme le bouton */}
-          <form className="auth-desk-card" noValidate onSubmit={e => { e.preventDefault(); handlePrimary(); }}>
-            {progression}
-            <div className={`auth-desk-body signup-anim-${animDir}`} key={stepId}>
-              {etape?.corps}
-            </div>
-            <p className="auth-error" role="alert">{error}</p>
-            {bouton}
-            {boutonPlusTard}
-            {autresChoix}
-          </form>
-        </div>
-      </div>
-    );
-  }
-
-  // Formulaire aussi sur téléphone : la touche Entrée / « Suivant » du
-  // clavier valide l'étape, même quand le clavier cache le bouton.
   return (
-    <form className="app" noValidate onSubmit={e => { e.preventDefault(); if (!loading) handlePrimary(); }}>
-      <div className="auth-header signup-header">
-        <button type="button" className="auth-back" onClick={goPrev} aria-label="Retour">←</button>
-        {progression}
-      </div>
-
-      <div className={`auth-content signup-content signup-anim-${animDir}`} key={stepId}>
-        {etape && <h1 className="signup-question">{nbsp(etape.titre)}</h1>}
-        {etape?.aide && <p className="signup-hint">{etape.aide}</p>}
-        {etape?.corps}
-
-        <p className="auth-error" role="alert">{error}</p>
-      </div>
-
-      <div className="signup-footer">
-        {bouton}
-        {boutonPlusTard}
-
-        {autresChoix}
-      </div>
-    </form>
+    <EntreeEcran
+      bulle={etape.bulle}
+      expression={pose.expression} geste={pose.geste} taille={pose.taille}
+      // Pas de retour une fois le compte créé (écran parent).
+      onRetour={stepId === 'parent' ? undefined : goPrev}
+      // Tant que l'âge n'est pas connu, on compte l'étape parent : le total ne baisse qu'à 15 ans ou plus.
+      etape={{ n: stepIdx + 1, total: steps.length + (birthDate ? 0 : 1) }}
+      dessous={etape.dessous || undefined}
+    >
+      {/* Formulaire : la touche Entrée / « Suivant » du clavier valide
+          l'étape, même quand le clavier cache le bouton. */}
+      <form className="en-pile" key={stepId} noValidate onSubmit={e => { e.preventDefault(); if (!loading) handlePrimary(); }}>
+        {etape.corps}
+        <Erreur>{erreurs.general}</Erreur>
+        <button className="en-btn" type="submit" disabled={loading}>{primaryLabel}</button>
+        {etape.apres}
+      </form>
+    </EntreeEcran>
   );
 }

@@ -1,0 +1,186 @@
+/* ─── La carte de début de jeu (23/10) : l'univers des transitions (TransitionJeux.css) ──────────
+ * Couche plein écran au-dessus de l'écran des jeux (portail). Le fond orange en papier découpé arrive
+ * en diagonale, la carte en carton (celle du tour de magie, tendue en 9 morceaux pour garder ses bords
+ * et ses étoiles à n'importe quelle hauteur) se retourne, puis la règle s'écrit étape par étape.
+ * 100svh, overflow: clip, une seule transformation 3D (le retournement), rien n'est imbriqué. */
+.cd {
+  --cd-encre: #2A2140;
+  --cd-creme: #FFF6E8;
+  --cd-orange: #F2701E;
+  --courbe: cubic-bezier(.45, 0, .25, 1);
+  --pente: 16svh;
+  position: fixed; inset: 0; z-index: 1000;
+  height: var(--hauteur-ecran, 100svh); box-sizing: border-box;
+  display: grid; grid-template-rows: auto 1fr auto; justify-items: center;
+  padding: calc(env(safe-area-inset-top, 0px) + 12px) 16px calc(env(safe-area-inset-bottom, 0px) + 18px);
+  background: var(--cd-orange);
+  overflow: clip;
+  color: var(--cd-encre);
+  animation: cd-arrive .5s var(--courbe) both;
+}
+@keyframes cd-arrive {
+  from { clip-path: polygon(calc(100% + 2 * var(--pente)) 0, calc(100% + 2 * var(--pente)) 0, calc(100% + 2 * var(--pente)) 100%, 100% 100%); }
+  to { clip-path: polygon(calc(-2 * var(--pente)) 0, calc(100% + 2 * var(--pente)) 0, calc(100% + 2 * var(--pente)) 100%, calc(-2 * var(--pente)) 100%); }
+}
+.cd-bandes {
+  position: absolute; inset: -80px; pointer-events: none;
+  background: var(--cd-orange) url('/jeux/transition/fond.webp') center / cover no-repeat;
+  animation: cd-bandes 14s linear infinite alternate;
+  will-change: transform;
+}
+@keyframes cd-bandes { from { transform: translate(30px, 30px); } to { transform: translate(-30px, -30px); } }
+
+.cd-haut { position: relative; z-index: 2; justify-self: stretch; display: flex; max-width: 560px; width: 100%; margin: 0 auto; }
+.cd-rond {
+  width: 44px; height: 44px; border: 0; border-radius: 50%; padding: 0;
+  display: grid; place-items: center; cursor: pointer;
+  background: #fff; color: var(--cd-encre);
+  box-shadow: 0 4px 0 rgba(120, 40, 0, .25), 0 8px 18px rgba(90, 30, 0, .25);
+  -webkit-tap-highlight-color: transparent;
+}
+.cd-rond:active { transform: translateY(2px); }
+
+/* La scène : la carte au centre de l'espace libre, jamais plus haute que lui. */
+.cd-scene { position: relative; z-index: 1; min-height: 0; width: 100%; display: grid; place-items: center; padding: 10px 0; }
+.cd-carte {
+  position: relative; width: min(340px, 100%);
+  animation: cd-retourne .6s cubic-bezier(.2, .8, .2, 1) .3s both;
+  will-change: transform, opacity;
+}
+@keyframes cd-retourne {
+  from { transform: perspective(900px) rotateY(-80deg) scale(.9); opacity: 0; }
+  35% { opacity: 1; }
+  to { transform: perspective(900px) rotateY(0) scale(1); opacity: 1; }
+}
+.cd-carte-int {
+  position: relative; box-sizing: border-box;
+  display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center;
+  border: solid transparent; border-width: 34px 26px 30px;
+  border-image: url('/jeux/magie/carte-face.webp') 70 60 70 60 fill / 34px 26px 30px stretch;
+  filter: drop-shadow(0 18px 22px rgba(90, 30, 0, .35));
+  animation: cd-flotte 2.2s ease-in-out 1s infinite alternate;
+}
+@keyframes cd-flotte { from { transform: translateY(0) rotate(0); } to { transform: translateY(-5px) rotate(-.8deg); } }
+
+/* Étoiles en papier autour de la carte : elles apparaissent l'une après l'autre, puis scintillent. */
+.cd-etoile {
+  position: absolute; z-index: 2; width: 50px; height: 50px; margin: -25px 0 0 -25px;
+  background: url('/jeux/transition/etoile.webp') center / contain no-repeat;
+  filter: drop-shadow(0 4px 4px rgba(90, 30, 0, .3));
+  opacity: 0; transform: scale(.3);
+  animation: cd-etoile .45s cubic-bezier(.2, .8, .2, 1) calc(.7s + var(--k) * .09s) forwards, cd-scintille 1.3s ease-in-out calc(1.2s + var(--k) * .09s) infinite alternate;
+}
+@keyframes cd-etoile { to { opacity: 1; transform: scale(var(--t, 1)) rotate(var(--r, 0deg)); } }
+@keyframes cd-scintille { from { opacity: 1; transform: scale(var(--t, 1)) rotate(var(--r, 0deg)); } to { opacity: 1; transform: scale(calc(var(--t, 1) * 1.12)) rotate(calc(var(--r, 0deg) + 14deg)); } }
+
+/* L'image du jeu (Réviz en costume dans son monde, celle de la vignette). */
+.cd-image {
+  position: relative; display: block; width: 100%; margin-top: -8px;
+  aspect-ratio: 3 / 2; border-radius: 16px; overflow: hidden;
+  background: var(--teinte);
+  box-shadow: inset 0 0 0 2px rgba(90, 50, 10, .18), 0 4px 0 rgba(150, 100, 40, .25);
+}
+.cd-image img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.cd-premier {
+  position: absolute; left: 8px; bottom: 8px; max-width: calc(100% - 16px); box-sizing: border-box;
+  padding: 4px 10px; border-radius: 999px;
+  background: rgba(27, 26, 35, .78); color: #fff;
+  font: 800 12.5px 'Geist', system-ui, sans-serif; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.cd-premier sup { font-size: .7em; }
+.cd-tag {
+  margin-top: 4px; padding: 3px 10px; border-radius: 8px;
+  background: #F7D98A; color: #5A3A08; box-shadow: 0 2px 0 #D9B45A;
+  font: 800 12px 'Geist', system-ui, sans-serif; letter-spacing: .04em; text-transform: uppercase;
+}
+.cd-nom {
+  margin: 2px 0 0;
+  font-family: var(--font-display, 'Bricolage Grotesque', system-ui); font-size: 30px; font-weight: 900; letter-spacing: -.03em; line-height: 1;
+}
+
+/* La règle, en trois étapes numérotées (pastilles en pâte à modeler), qui arrivent l'une après l'autre. */
+.cd-etapes { list-style: none; margin: 6px 0 0; padding: 0; display: flex; flex-direction: column; gap: 7px; width: 100%; text-align: left; }
+.cd-etapes li {
+  display: flex; align-items: center; gap: 10px;
+  font: 600 15px/1.3 'Geist', system-ui, sans-serif;
+  opacity: 0; transform: translateY(6px);
+  animation: cd-etape .35s ease-out calc(.85s + var(--k) * .14s) forwards;
+}
+@keyframes cd-etape { to { opacity: 1; transform: none; } }
+.cd-num {
+  flex: none; width: 28px; height: 28px; border-radius: 50%;
+  display: grid; place-items: center;
+  background: linear-gradient(#F79A45, var(--cd-orange) 60%, #E06418); color: #fff;
+  font: 900 15px var(--font-display, 'Bricolage Grotesque', system-ui);
+  box-shadow: inset 0 2px 0 rgba(255, 255, 255, .35), 0 2px 0 #B8500F;
+}
+.cd-infos {
+  margin: 8px 0 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 12px;
+  font: 700 13px 'Geist', system-ui, sans-serif; color: #7A5A30;
+}
+.cd-record b { color: var(--cd-encre); }
+
+/* Démarrer : le gros bouton encre des transitions, sans jauge (rien ne part tout seul). */
+.cd-demarrer {
+  position: relative; z-index: 2;
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  min-width: min(300px, 100%); padding: 15px 28px; border: 0; border-radius: 999px;
+  background: var(--cd-encre); color: var(--cd-creme);
+  box-shadow: 0 6px 0 #140F22, 0 14px 24px rgba(60, 20, 0, .3);
+  font: 900 20px var(--font-display, 'Bricolage Grotesque', system-ui); letter-spacing: -.01em;
+  cursor: pointer; -webkit-tap-highlight-color: transparent;
+  animation: cd-bouton .35s ease-out 1.2s both;
+}
+@keyframes cd-bouton { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+/* La jauge de chargement, dans le bouton : elle se remplit pendant que le jeu se charge, puis s'efface
+   (le bouton reste toujours touchable ; le jeu finit de charger tout seul si on part avant). */
+.cd-demarrer { overflow: hidden; isolation: isolate; }
+.cd-demarrer > svg { position: relative; }
+.cd-jauge {
+  position: absolute; inset: 0; z-index: -1;
+  background: var(--cd-orange); opacity: .45;
+  transform-origin: left; transform: scaleX(0);
+  transition: transform .35s ease-out, opacity .4s ease .3s;
+}
+.cd-demarrer--pret .cd-jauge { opacity: 0; }
+.cd-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.cd-demarrer:active { transform: translateY(3px); box-shadow: 0 3px 0 #140F22, 0 8px 16px rgba(60, 20, 0, .3); }
+.cd-demarrer:focus-visible, .cd-rond:focus-visible { outline: 3px solid var(--cd-creme); outline-offset: 3px; }
+
+/* Petits écrans (iPhone SE dans Safari) : image moins haute, texte un peu plus petit. */
+@media (max-height: 700px) {
+  .cd-image { aspect-ratio: 2 / 1; }
+  .cd-nom { font-size: 26px; }
+  .cd-etapes { gap: 5px; }
+  .cd-etapes li { font-size: 14px; }
+  .cd-num { width: 24px; height: 24px; font-size: 13px; }
+  .cd-demarrer { padding: 13px 26px; font-size: 19px; }
+}
+@media (max-height: 600px) {
+  .cd-image { aspect-ratio: 2.4 / 1; }
+  .cd-carte-int { gap: 4px; border-width: 28px 22px 24px; border-image-width: 28px 22px 24px; }
+  .cd-etapes li { font-size: 13.5px; line-height: 1.25; }
+  .cd-scene { padding: 6px 0; }
+}
+@media (min-width: 1024px) and (min-height: 760px) {
+  .cd-carte { width: 440px; }
+  .cd-nom { font-size: 38px; }
+  .cd-tag { font-size: 13px; }
+  .cd-etapes { gap: 10px; }
+  .cd-etapes li { font-size: 17px; }
+  .cd-num { width: 32px; height: 32px; font-size: 17px; }
+  .cd-infos { font-size: 14px; }
+  .cd-etoile { width: 62px; height: 62px; margin: -31px 0 0 -31px; }
+  .cd-demarrer { min-width: 340px; font-size: 22px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cd { animation: cd-fondu .2s both; }
+  .cd-bandes, .cd-carte, .cd-carte-int, .cd-etoile, .cd-etapes li, .cd-demarrer { animation: none !important; }
+  .cd-etoile, .cd-etapes li { opacity: 1; transform: scale(var(--t, 1)) rotate(var(--r, 0deg)); }
+  .cd-etapes li { transform: none; }
+}
+@keyframes cd-fondu { from { opacity: 0; } to { opacity: 1; } }
+
+/* Le son, en haut à droite de la carte (la musique de la partie démarre ici). */
+.cd-haut { justify-content: space-between; }

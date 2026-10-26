@@ -1,0 +1,92 @@
+/* Menu des grands écrans : capsule en verre en haut à droite, bouton Réviz IA à côté.
+ * Masqué sur téléphone et dans l'app native (la capsule du bas fait ce travail). */
+.nav-haut { display: none; }
+
+@media (min-width: 1024px) {
+  html:not(.native) .nav-haut {
+    position: fixed;
+    top: 24px;
+    right: 32px;
+    z-index: 300;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+}
+
+.nav-haut-capsule {
+  height: 58px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0 6px;
+  border: 1px solid rgba(255,255,255,.7);
+  border-radius: 999px;
+  background: rgba(248,239,231,.78);
+  -webkit-backdrop-filter: blur(18px) saturate(1.4);
+  backdrop-filter: blur(18px) saturate(1.4);
+  box-shadow: 0 10px 30px rgba(120,60,20,.16);
+}
+.nav-haut-onglet {
+  height: 46px;
+  min-width: 46px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: 999px;
+  color: #1B1A23;
+  text-decoration: none;
+  transition: background .15s;
+}
+.nav-haut-onglet svg { width: 22px; height: 22px; }
+.nav-haut-onglet:hover { background: rgba(255,255,255,.7); }
+.nav-haut-libelle { display: none; font-size: 14px; font-weight: 700; white-space: nowrap; }
+.nav-haut-onglet--actif,
+.nav-haut-onglet--actif:hover { padding: 0 16px; background: #1B1A23; color: #fff; }
+.nav-haut-onglet--actif svg { width: 20px; height: 20px; }
+.nav-haut-onglet--actif .nav-haut-libelle { display: inline; }
+.nav-haut-onglet:focus-visible { outline: 3px solid #1B1A23; outline-offset: 2px; }
+
+/* Réviz IA : rond blanc avec la mascotte coach, anneau conique orange → rose */
+.nav-haut-ia {
+  flex: none;
+  width: 56px;
+  height: 56px;
+  padding: 3px;
+  box-sizing: border-box;
+  border-radius: 50%;
+  background: conic-gradient(#FFC24B, #FF7A2F, #FF4F7B, #FFC24B);
+  box-shadow: 0 0 22px rgba(255,110,80,.45);
+  transition: transform .15s;
+}
+.nav-haut-ia:hover { transform: translateY(-2px); }
+.nav-haut-ia-rond {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  border-radius: 50%;
+  background: #FFF8F1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.nav-haut-ia--actif .nav-haut-ia-rond { background: #FFE6D2; }
+
+/* Mode essai : créer son compte, juste avant la capsule */
+.nav-haut-compte {
+  height: 46px;
+  display: flex;
+  align-items: center;
+  padding: 0 18px;
+  border-radius: 999px;
+  background: #1B1A23;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+  box-shadow: 0 10px 24px rgba(27,26,35,.2);
+}
+.nav-haut-compte:hover { background: #2D2B57; }

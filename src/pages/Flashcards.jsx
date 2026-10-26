@@ -1,16 +1,16 @@
-import { PageIntro } from '../components/PageIntro'
-import { RefreshIcon, ChatIcon, FlameIcon } from '../components/Icons'
-import { useState, useEffect, useMemo } from 'react'
-import { Link } from 'react-router-dom'
-import { recordRevision } from '../services/revisionService'
+import { useState, useEffect, useMemo, useRef } from 'react'
+import { useNavigate, useLocation } from 'react-router-dom'
+import { fermerVersFiche, versExercice } from '../utils/navigation'
+import { recordRevision, markRevisionDone, loadRevisions } from '../services/revisionService'
 import { getDueCards, updateCardState } from '../services/srsService'
-import { PageHeader } from '../components/PageHeader'
-import { Mascot } from '../components/Mascot'
+import { Pantin } from '../components/Pantin'
+import { BulleReviz } from '../components/reviz/BulleReviz'
+import { RouteSerie as Route } from '../components/reviz/RouteSerie'
 import { MissingLessonState } from '../components/MissingLessonState'
 import { FormatFeedback } from '../components/FormatFeedback'
-import { CoachChat, CoachHeaderButton } from '../components/CoachChat'
 import { nbsp } from '../utils/typography'
 import { useIsDesktop } from '../hooks/useMediaQuery'
+import { teinteMatiere, varsTeinte } from '../utils/teinteMatiere'
 import './Flashcards.css'
 import { mesurer } from '../services/mesure'
 
@@ -42,6 +42,15 @@ function getLessonId() {
   return localStorage.getItem('reviz-current-lesson-id') ?? 'default'
 }
 
+function getLessonSubject() {
+  try { return JSON.parse(localStorage.getItem('reviz-ai-data') || 'null')?.metadata?.subject || '' }
+  catch { return '' }
+}
+
+// Taille du texte selon sa longueur : une question ou une réponse courte s'affiche en très grand.
+function tailleQuestion(t = '') { return t.length <= 50 ? 'xl' : t.length <= 100 ? 'l' : 'm' }
+function tailleReponse(t = '') { return t.length <= 24 ? 'xxl' : t.length <= 70 ? 'xl' : t.length <= 140 ? 'l' : 'm' }
+
 function getLessonTitle(fallback = 'Ta leçon') {
   try { return JSON.parse(localStorage.getItem('reviz-ai-data') || 'null')?.metadata?.title || fallback }
   catch { return fallback }
@@ -54,265 +63,373 @@ export default function Flashcards() {
   return <FlashcardsSession />
 }
 
+const pluriel = (n, mot) => `${n} ${mot}${n > 1 ? 's' : ''}`
+const NOTE_SRS = { sais: 'got', presque: 'presque', revoir: 'again' }
+const NOTE_TXT = { sais: 'Je sais', presque: 'Presque', revoir: 'À revoir' }
+const REACTION = {
+  sais: ['Bien vu.', 'Celle-là, tu la tiens.'],
+  presque: ['Presque.', 'Elle revient dans quelques jours.'],
+  revoir: ['Pas grave.', 'Elle revient demain, en priorité.'],
+}
+const SORTIE = { sais: 'droite', revoir: 'gauche', presque: 'bas' }
+
+const Croix = ({ taille = 20 }) => (
+  <svg viewBox="0 0 24 24" width={taille} height={taille} fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12" /></svg>
+)
+const RetourFleche = ({ taille = 14 }) => (
+  <svg viewBox="0 0 24 24" width={taille} height={taille} fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M9 14 4 9l5-5" /><path d="M4 9h10a6 6 0 0 1 0 12h-3" /></svg>
+)
+const Rotation = () => (
+  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 0 1 15.5-6.3L21 8" /><path d="M21 3v5h-5" /><path d="M21 12a9 9 0 0 1-15.5 6.3L3 16" /><path d="M3 21v-5h5" /></svg>
+)
+const Fleche = () => (
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+)
+const Etoile = () => (
+  <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 16.8 5.8 21.3l2.4-7.4L2 9.4h7.6z" /></svg>
+)
+
+/**
+ * Série de flashcards (handoff Claude Design du 21/10) : un jeu en plein écran. La série du jour
+ * mélange les cartes à revoir aujourd'hui et les nouvelles (répétition espacée) ; on retourne la
+ * carte, puis on se note (À revoir / Presque / Je sais), au bouton, en glissant la carte ou au
+ * clavier. Fin de série, et un écran calme quand il n'y a rien à revoir.
+ */
 function FlashcardsSession() {
-  const isDesktop  = useIsDesktop()
+  const isDesktop = useIsDesktop()
+  const navigate = useNavigate()
+  const location = useLocation()
   useEffect(() => { recordRevision('flashcards'); mesurer('format_ouvert', { format: 'flashcards' }) }, [])
-  const lessonId   = useMemo(() => getLessonId(), [])
-  const rawCards   = getFlashcards()
-  const flashcards = useMemo(() => getDueCards(lessonId, rawCards), [lessonId])
-  const [current, setCurrent]       = useState(0)
-  const [isFlipped, setIsFlipped]   = useState(false)
-  const [gotCount, setGotCount]     = useState(0)
-  const [againCount, setAgainCount] = useState(0)
-  const [showEnd, setShowEnd]       = useState(false)
-  const [animDir, setAnimDir]       = useState(null)  // 'got' | 'again'
-  const [streak, setStreak]         = useState(0)     // bonnes réponses consécutives
-  const [showStreakBadge, setShowStreakBadge] = useState(false)
+  const lessonId = useMemo(() => getLessonId(), [])
+  const lessonTitle = useMemo(() => getLessonTitle(), [])
+  const matiere = useMemo(() => getLessonSubject(), [])
+  const toutes = useMemo(() => getDueCards(lessonId, getFlashcards()), [lessonId])
+  const nbQuestions = useMemo(() => {
+    try { return JSON.parse(localStorage.getItem('reviz-ai-data') || 'null')?.quiz?.length ?? 0 } catch { return 0 }
+  }, [])
+  const teinte = teinteMatiere(matiere)
 
-  // Coach — uniquement sur une vraie leçon (le contexte serveur exige son id).
-  const coachLessonId = useMemo(() => localStorage.getItem('reviz-current-lesson-id'), [])
-  const lessonTitle   = useMemo(() => getLessonTitle(), [])
-  const [coachOpen, setCoachOpen] = useState(false)
+  // La série du jour : cartes dues aujourd'hui et nouvelles (isDue compte aussi les jamais vues).
+  const duJour = useMemo(() => toutes.filter(c => c.isDue).map(c => ({ ...c, nouvelle: !c.reps && !c.nextReview })), [toutes])
+  const [serie, setSerie] = useState(duJour)
+  const [ecran, setEcran] = useState(duJour.length ? 'serie' : 'rien')
+  const [idx, setIdx] = useState(0)
+  const [flipped, setFlipped] = useState(false)
+  const [notes, setNotes] = useState(() => duJour.map(() => null))
+  const [reaction, setReaction] = useState(null)
+  const [sortie, setSortie] = useState(null)
+  const [arrivee, setArrivee] = useState(false)
+  const [dx, setDx] = useState(0)
+  const [glisse, setGlisse] = useState(false)
+  const depart = useRef(null)
 
-  const card = flashcards[current]
+  const carte = serie[idx]
+  const nbDues = serie.filter(c => !c.nouvelle).length
+  const nbNouvelles = serie.length - nbDues
+  const precedente = idx > 0 ? notes[idx - 1] : null
 
-  // Auto-hide streak badge après 1.6s
-  useEffect(() => {
-    if (showStreakBadge) {
-      const t = setTimeout(() => setShowStreakBadge(false), 1600)
-      return () => clearTimeout(t)
-    }
-  }, [showStreakBadge, streak])
+  function lancer(cartes) {
+    setSerie(cartes)
+    setNotes(cartes.map(() => null))
+    setIdx(0)
+    setFlipped(false)
+    setReaction(null)
+    setEcran('serie')
+  }
 
-  function flipCard() { setIsFlipped(prev => !prev) }
-
-  function nextCard(dir) {
-    setAnimDir(dir)
+  function noter(note) {
+    if (!flipped || sortie || !carte) return
+    updateCardState(lessonId, carte.index, NOTE_SRS[note])
+    setNotes(n => n.map((x, i) => (i === idx ? note : x)))
+    setReaction(note)
+    setSortie(SORTIE[note])
+    setDx(0)
     setTimeout(() => {
-      const nextIndex = current + 1
-      if (nextIndex >= flashcards.length) {
-        setShowEnd(true)
-      } else {
-        setCurrent(nextIndex)
-        setIsFlipped(false)
-      }
-      setAnimDir(null)
-    }, 280)
+      setSortie(null)
+      if (idx + 1 >= serie.length) { setEcran('fin'); markRevisionDone('flashcards'); return }
+      // La carte suivante part de la pile, sans transition, puis vient au centre.
+      setArrivee(true)
+      setFlipped(false)
+      setIdx(i => i + 1)
+      requestAnimationFrame(() => requestAnimationFrame(() => setArrivee(false)))
+    }, 320)
   }
+  const retourner = () => { if (!sortie) setFlipped(f => !f) }
 
-  function handleGot() {
-    updateCardState(lessonId, flashcards[current].index ?? current, 'got')
-    setGotCount(p => p + 1)
-    const newStreak = streak + 1
-    setStreak(newStreak)
-    if (newStreak >= 2) setShowStreakBadge(true)
-    nextCard('got')
-  }
-  // Clavier (ordinateur) : Espace / Entrée retourne, ← « encore », → « acquis ».
+  // Clavier (ordinateur) : Espace retourne ; ←, ↓, → notent quand le verso est visible.
   useEffect(() => {
-    if (showEnd || coachOpen) return undefined
+    if (ecran !== 'serie') return undefined
     function onKey(e) {
       if (e.target instanceof HTMLElement && ['INPUT', 'TEXTAREA', 'SELECT'].includes(e.target.tagName)) return
-      if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); flipCard() }
-      else if (isFlipped && (e.key === 'ArrowLeft' || e.key === '1')) { e.preventDefault(); handleAgain() }
-      else if (isFlipped && (e.key === 'ArrowRight' || e.key === '2')) { e.preventDefault(); handleGot() }
+      if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); retourner() }
+      else if (flipped && e.key === 'ArrowLeft') { e.preventDefault(); noter('revoir') }
+      else if (flipped && e.key === 'ArrowDown') { e.preventDefault(); noter('presque') }
+      else if (flipped && e.key === 'ArrowRight') { e.preventDefault(); noter('sais') }
     }
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
   })
 
-  function handleAgain() {
-    updateCardState(lessonId, flashcards[current].index ?? current, 'again')
-    setAgainCount(p => p + 1)
-    setStreak(0)
-    setShowStreakBadge(false)
-    nextCard('again')
+  // Glisser la carte (verso visible) : à gauche « À revoir », à droite « Je sais ».
+  const seuil = isDesktop ? 120 : 90
+  const onPointerDown = e => {
+    depart.current = { x: e.clientX, moved: false }
+    if (flipped) { setGlisse(true); e.currentTarget.setPointerCapture?.(e.pointerId) }
+  }
+  const onPointerMove = e => {
+    if (!depart.current || !flipped) return
+    const d = e.clientX - depart.current.x
+    if (Math.abs(d) > 5) depart.current.moved = true
+    setDx(d)
+  }
+  const onPointerUp = () => {
+    const d = dx, bouge = depart.current?.moved
+    depart.current = null
+    setGlisse(false)
+    if (flipped && Math.abs(d) > seuil) { noter(d > 0 ? 'sais' : 'revoir'); return }
+    setDx(0)
+    if (!bouge) retourner()
   }
 
-  function restartDeck() {
-    setCurrent(0); setIsFlipped(false)
-    setGotCount(0); setAgainCount(0)
-    setShowEnd(false); setAnimDir(null)
-    setStreak(0); setShowStreakBadge(false)
+  // Ce que dit Réviz.
+  const lignes = ecran === 'fin'
+    ? (() => {
+        const sues = notes.filter(n => n === 'sais').length, autres = notes.length - sues
+        return [`${sues} ${sues > 1 ? 'cartes sues' : 'carte sue'} sur ${notes.length}.`, autres ? `${autres > 1 ? `Les ${autres} autres reviennent` : 'L’autre revient'} bientôt.` : 'Tout est su, bravo.']
+      })()
+    : ecran === 'rien' ? ['Rien à revoir aujourd’hui.', 'Tu es à jour sur ce chapitre.']
+    : reaction ? REACTION[reaction]
+    : [nbDues && nbNouvelles ? `${nbDues} à revoir, ${pluriel(nbNouvelles, 'nouvelle')}.` : nbDues ? `${pluriel(nbDues, 'carte')} à revoir.` : `${pluriel(nbNouvelles, 'nouvelle carte')}.`,
+       'Prends ton temps sur chaque carte.']
+  const pantin = useRef(null)
+  const [parle, setParle] = useState(false)
+  const texte = lignes.join('\n')
+  useEffect(() => { if (parle) pantin.current?.dire(texte) }, [texte, parle])
+  useEffect(() => {
+    if (reaction === 'sais') pantin.current?.expression('fier')
+    else if (reaction === 'revoir') pantin.current?.expression('content')
+  }, [reaction, idx])
+  useEffect(() => {
+    let t
+    const essai = () => { t = setTimeout(() => (document.hidden ? essai() : setParle(true)), 4000) }
+    essai()
+    return () => clearTimeout(t)
+  }, [])
+
+  const fermer = () => fermerVersFiche(navigate, location)
+  const boutonFermer = isDesktop
+    ? <button type="button" className="fc-fermer fc-fermer--pilule" onClick={fermer}><Croix taille={18} />Fermer</button>
+    : <button type="button" className="fc-fermer" onClick={fermer} aria-label="Fermer"><Croix /></button>
+  const deco = (
+    <>
+      <span className="fc-decors" aria-hidden="true">
+        <span className="fc-deco fc-deco--a" />
+        <span className="fc-deco fc-deco--b" />
+        <span className="fc-deco fc-deco--c" />
+        <span className="fc-point" />
+      </span>
+      <span className="fc-grain" aria-hidden="true" />
+    </>
+  )
+  const reviz = (taille, pointe = 'bas', expression = 'content', entree) => (
+    <div className={`fc-reviz fc-reviz--${pointe}`}>
+      {pointe === 'bas' && <BulleReviz key={texte} lignes={lignes} parle={parle} className="fc-bulle" pointe="bas" />}
+      <Pantin
+        ref={pantin}
+        size={taille}
+        expression={expression}
+        entree={entree}
+        repli={null}
+        onEntree={() => setParle(true)}
+        onClick={() => pantin.current?.geste('saut')}
+        label="Réviz, ta mascotte"
+      />
+      {pointe === 'gauche' && <BulleReviz key={texte} lignes={lignes} parle={parle} className="fc-bulle" pointe="gauche" />}
+    </div>
+  )
+
+  // ── Rien à revoir ──
+  if (ecran === 'rien') {
+    const prochaine = toutes.reduce((m, c) => (c.nextReview && (!m || c.nextReview < m) ? c.nextReview : m), null)
+    const jour = prochaine ? new Date(prochaine) : null
+    const memeJour = jour ? toutes.filter(c => c.nextReview && new Date(c.nextReview).toDateString() === jour.toDateString()).length : 0
+    return (
+      <div className={`app app--no-halo flashcards-page fc-page fc-page--calme${isDesktop ? ' app--large fc-page--large' : ''}`} style={varsTeinte(teinte)}>
+        {deco}
+        <div className="fc-ecran fc-ecran--centre">
+          <div className="fc-haut-gauche">{boutonFermer}</div>
+          {reviz(isDesktop ? 260 : 200, 'bas', 'reflechit')}
+          {jour && (
+            <div className="fc-date-carte">
+              <span className="fc-date-rond"><b>{jour.getDate()}</b>{jour.toLocaleDateString('fr-FR', { month: 'short' })}</span>
+              <span className="fc-date-txt">
+                <span className="fc-date-surtitre">Prochaine révision</span>
+                <b>{jour.toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' }).replace(/^./, c => c.toUpperCase())}</b>
+                <span>{pluriel(memeJour, 'carte')} prévue{memeJour > 1 ? 's' : ''}</span>
+              </span>
+            </div>
+          )}
+          <div className="fc-fin-actions">
+            <button type="button" className="fc-btn fc-btn--blanc" onClick={() => lancer(toutes.map(c => ({ ...c, nouvelle: false })))}>Revoir quand même</button>
+            <button type="button" className="fc-lien" onClick={fermer}>Retour au chapitre</button>
+          </div>
+        </div>
+      </div>
+    )
   }
 
-  const [shareDone, setShareDone] = useState(false)
-  async function handleShare() {
-    const title = getLessonTitle('Flashcards')
-    const text = flashcards.map((c, i) => `${i + 1}. ${c.front}\n→ ${c.back}`).join('\n\n')
-      + '\n\n---\nGénéré avec Réviz'
-    try {
-      if (navigator.share) {
-        await navigator.share({ title, text })
-      } else {
-        await navigator.clipboard.writeText(text)
-        setShareDone(true)
-        setTimeout(() => setShareDone(false), 2500)
-      }
-    } catch { /* annulé */ }
+  // ── Fin de série ──
+  if (ecran === 'fin') {
+    const sues = notes.filter(n => n === 'sais').length
+    const aRevoir = serie.filter((_, i) => notes[i] !== 'sais')
+    const nouvelles = serie.filter(c => c.nouvelle).length
+    const xp = notes.filter(n => n !== 'revoir').length * 5
+    const quizFait = loadRevisions().some(r => r.lessonId === lessonId && r.type === 'quiz')
+    return (
+      <div className={`app app--no-halo flashcards-page fc-page fc-page--fin${isDesktop ? ' app--large fc-page--large' : ''}`} style={varsTeinte(teinte)}>
+        {deco}
+        <div className="fc-ecran fc-ecran--fin">
+          <div className="fc-haut-gauche">{boutonFermer}</div>
+          <div className="fc-fin-tete">
+            <span className="fc-surtitre">{matiere ? `${matiere} · ` : ''}Flashcards</span>
+            <h1 className="fc-fin-titre">Série terminée</h1>
+            <span className="fc-xp">+{xp} XP</span>
+          </div>
+          {reviz(isDesktop ? 220 : 170, 'bas', aRevoir.length ? 'content' : 'fier', aRevoir.length ? 'coucou' : 'saut')}
+          <div className="fc-stats">
+            <div className="fc-stats-ligne">
+              <span><b className="fc-vert">{sues}</b>sues</span>
+              <span><b className="fc-orange">{aRevoir.length}</b>à revoir</span>
+              <span><b>{nouvelles}</b>{nouvelles > 1 ? 'nouvelles' : 'nouvelle'}</span>
+            </div>
+            <Route notes={notes} idx={-1} grand={isDesktop} recap />
+            {aRevoir.length > 0 && <p className="fc-priorite"><RetourFleche taille={16} />Les cartes à revoir reviendront en priorité.</p>}
+          </div>
+          <div className="fc-fin-actions fc-fin-actions--deux">
+            <button type="button" className="fc-btn fc-btn--orange" onClick={() => versExercice(navigate, location, '/quiz')}>
+              {quizFait ? 'Refaire le quiz' : 'Passer au quiz'}{nbQuestions ? ` · ${pluriel(nbQuestions, 'question')}` : ''}<Fleche />
+            </button>
+            {aRevoir.length > 0 && (
+              <button type="button" className="fc-btn fc-btn--blanc" onClick={() => lancer(aRevoir.map(c => ({ ...c, nouvelle: false })))}>
+                Refaire les cartes à revoir ({aRevoir.length})
+              </button>
+            )}
+          </div>
+          <FormatFeedback format="flashcards" question="Ces cartes t'ont aidé ?" />
+          <button type="button" className="fc-lien" onClick={fermer}>Retour au chapitre</button>
+        </div>
+      </div>
+    )
   }
 
-  const xp = gotCount * 5
-
-  const dots = (
-    <div className="flashcards-progress-dots">
-      {flashcards.map((_, i) => (
-        <span
-          key={i}
-          className={`flashcards-progress-dot${i < current ? ' done' : i === current ? ' active' : ''}`}
-        />
-      ))}
+  // ── Série ──
+  const pile = Math.min(2, serie.length - idx - 1)
+  const transform = sortie === 'droite' ? 'translateX(480px) rotate(20deg)'
+    : sortie === 'gauche' ? 'translateX(-480px) rotate(-20deg)'
+    : sortie === 'bas' ? 'translateY(520px) rotate(4deg)'
+    : arrivee ? 'translate(10px,14px) rotate(5deg) scale(.96)'
+    : dx ? `translateX(${dx}px) rotate(${dx / 18}deg)` : 'none'
+  const tampon = Math.max(0, Math.min(1, (Math.abs(dx) - 20) / 70))
+  const enTete = (
+    <div className="fc-tete">
+      <span className="fc-tete-titre">{isDesktop && matiere ? `${matiere} · ` : ''}{lessonTitle}</span>
+      <span className="fc-tete-compte" aria-live="polite">Carte {idx + 1} sur {serie.length}</span>
+    </div>
+  )
+  const scene = (
+    <div className="fc-scene">
+      {pile >= 2 && <span className="fc-pile fc-pile--2" aria-hidden="true" />}
+      {pile >= 1 && <span className="fc-pile fc-pile--1" aria-hidden="true" />}
+      <div
+        className={`fc-carte${glisse ? ' fc-carte--glisse' : ''}${arrivee ? ' fc-carte--arrivee' : ''}${sortie ? ' fc-carte--sortie' : ''}`}
+        style={{ transform }}
+        onPointerDown={onPointerDown}
+        onPointerMove={onPointerMove}
+        onPointerUp={onPointerUp}
+        onPointerCancel={() => { depart.current = null; setGlisse(false); setDx(0) }}
+      >
+        <div className={`fc-carte-int${flipped ? ' is-verso' : ''}`}>
+          <button type="button" className="fc-face fc-face--recto" onClick={e => e.preventDefault()} aria-label={`${carte.front}. Retourner la carte`} tabIndex={flipped ? -1 : 0}
+            onKeyDown={e => { if (e.key === 'Enter') { e.preventDefault(); retourner() } }}>
+            <span className="fc-face-haut">
+              <span className={`fc-etiquette${carte.nouvelle ? ' fc-etiquette--nouvelle' : ''}`}>{carte.nouvelle ? 'Nouvelle' : 'À revoir aujourd’hui'}</span>
+              <span className="fc-face-coin">Question</span>
+            </span>
+            <span className={`fc-question fc-taille--${tailleQuestion(carte.front)}`}>{nbsp(carte.front)}</span>
+            <span className="fc-face-bas">
+              <span className="fc-ia"><Etoile />Généré par IA</span>
+              <span className="fc-astuce">{isDesktop ? 'Clique ou appuie sur Espace' : 'Touche pour retourner'}</span>
+            </span>
+          </button>
+          <div className="fc-face fc-face--verso" aria-hidden={!flipped}>
+            <span className="fc-face-haut">
+              <span className="fc-etiquette fc-etiquette--nouvelle">Réponse</span>
+              <span className="fc-face-coin fc-face-coin--rappel">{carte.front}</span>
+            </span>
+            <span className={`fc-reponse fc-taille--${tailleReponse(carte.back)}`}>{nbsp(carte.back)}</span>
+            <span className="fc-face-bas">
+              <span className="fc-ia"><Etoile />Généré par IA</span>
+              <span className="fc-astuce fc-astuce--doux">{isDesktop ? '← à revoir · ↓ presque · → je sais' : 'Glisse à gauche : à revoir · à droite : je sais'}</span>
+            </span>
+          </div>
+        </div>
+        {flipped && <span className="fc-tampon fc-tampon--sais" style={{ opacity: dx > 0 ? tampon : 0 }} aria-hidden="true">Je sais</span>}
+        {flipped && <span className="fc-tampon fc-tampon--revoir" style={{ opacity: dx < 0 ? tampon : 0 }} aria-hidden="true">À revoir</span>}
+      </div>
+    </div>
+  )
+  const actions = (
+    <div className="fc-actions">
+      {!flipped ? (
+        <button type="button" className="fc-btn fc-btn--encre" onClick={retourner}>
+          <Rotation />Voir la réponse{isDesktop && <kbd>Espace</kbd>}
+        </button>
+      ) : (
+        <div className="fc-notes">
+          <button type="button" className="fc-btn fc-btn--orange" onClick={() => noter('revoir')}>{isDesktop && <kbd>←</kbd>}À revoir</button>
+          <button type="button" className="fc-btn fc-btn--blanc" onClick={() => noter('presque')}>{isDesktop && <kbd>↓</kbd>}Presque</button>
+          <button type="button" className="fc-btn fc-btn--vert" onClick={() => noter('sais')}>{isDesktop && <kbd>→</kbd>}Je sais</button>
+        </div>
+      )}
+      <p className={`fc-precedente${precedente ? '' : ' fc-precedente--vide'}`}>
+        {precedente && <><i className={`fc-precedente-point fc-precedente-point--${precedente}`} />Carte précédente : {NOTE_TXT[precedente]}</>}
+      </p>
     </div>
   )
 
   return (
-    <div className="app flashcards-page">
-
-      {/* ── Écran de fin ── */}
-      {showEnd && (
-        <div className="rv-end-screen flashcards-end-screen">
-          <Mascot
-            pose="celebration"
-            size={240}
-            glow
-            animate
-            priority
-            className="rv-end-screen-mascot flashcards-end-mascot"
-            alt=""
-            aria-hidden="true"
-          />
-          <h2 className="rv-end-screen-title">Série terminée</h2>
-          <p className="rv-end-screen-sub">
-            {againCount === 0
-              ? 'Toutes les cartes sont maîtrisées.'
-              : `${againCount} carte${againCount > 1 ? 's' : ''} à revoir, elles reviendront en priorité.`}
-          </p>
-          <div className="flashcards-end-stats rv-card rv-card--padded">
-            <div className="flashcards-end-stat">
-              <span className="rv-stat-value rv-stat-value--md" style={{ color: 'var(--accent-green)' }}>{gotCount}</span>
-              <span className="rv-stat-label">Maîtrisées</span>
-            </div>
-            <div className="rv-stat-separator" />
-            <div className="flashcards-end-stat">
-              <span className="rv-stat-value rv-stat-value--md" style={{ color: 'var(--accent-orange-ink)' }}>{againCount}</span>
-              <span className="rv-stat-label">À revoir</span>
-            </div>
-            <div className="rv-stat-separator" />
-            <div className="flashcards-end-stat">
-              <span className="rv-stat-value rv-stat-value--md">{flashcards.length}</span>
-              <span className="rv-stat-label">Total</span>
-            </div>
-          </div>
-          <span className="rv-pill rv-pill--orange rv-end-xp">+{xp} XP</span>
-          <FormatFeedback format="flashcards" question="Ces cartes t'ont aidé ?" />
-          {/* Les cartes à revoir reviennent toutes seules (répétition espacée) :
-              l'action principale est de revenir à la leçon, où « Ta prochaine
-              étape » propose la suite. */}
-          <div className="rv-end-screen-actions">
-            <Link className="rv-btn-cta rv-btn-cta--full" to="/analyse">Retour à la leçon</Link>
-            <button type="button" className="rv-btn-cta rv-btn-cta--full rv-btn-cta--ghost" onClick={restartDeck}>
-              <span><RefreshIcon /> Recommencer</span>
-            </button>
-            <button type="button" className="rv-btn-cta rv-btn-cta--full rv-btn-cta--ghost" onClick={handleShare}>
-              {shareDone ? '✓ Copié !' : '↗ Partager les cartes'}
-            </button>
-            {coachLessonId && (
-              <button type="button" className="rv-btn-cta rv-btn-cta--full rv-btn-cta--ghost" onClick={() => setCoachOpen(true)}>
-                <ChatIcon /> Encore un doute ? Demande au coach
-              </button>
-            )}
-          </div>
-        </div>
-      )}
-
-      <PageHeader
-        variant="back"
-        right={coachLessonId ? <CoachHeaderButton onClick={() => setCoachOpen(true)} /> : undefined}
-      />
-
-      {/* Intro façon Home — la carte, juste dessous, porte la mascotte */}
-      <PageIntro title="Flashcards" sub={`Carte ${current + 1} sur ${flashcards.length} · ${lessonTitle}`} className="flashcards-intro rv-page-intro--format">
-        {dots}
-      </PageIntro>
-
-      <div className="flashcards-ai-row"><span className="ai-badge">✦ Généré par IA</span></div>
-
-      {/* ── Streak badge (animé) ── */}
-      {showStreakBadge && (
-        <div className="flashcards-streak-badge" aria-live="polite">
-          <FlameIcon /> {streak} bonnes d'affilée
-        </div>
-      )}
-
-      {/* ── Zone carte ── */}
-      <div className="flashcards-card-area">
-
-        <div className={`flashcards-stack-wrap${animDir ? ` flashcards-anim-${animDir}` : ''}`}>
-          <div className="flashcards-stack-bg flashcards-stack-bg--s2" />
-          <div className="flashcards-stack-bg flashcards-stack-bg--s1" />
-
-          <div className="flashcards-flip-wrap" onClick={flipCard}>
-            <div className={`flashcards-flip-card${isFlipped ? ' flipped' : ''}`}>
-
-              {/* Recto — Réviz pose la question */}
-              <div className="flashcards-flip-face flashcards-flip-front">
-                <Mascot
-                  pose="flashcard"
-                  size={150}
-                  glow
-                  priority
-                  className="flashcards-face-mascot"
-                  alt=""
-                  aria-hidden="true"
-                />
-                <span className="flashcards-face-tag">Question</span>
-                <span className="flashcards-face-text">{nbsp(card.front)}</span>
-                {!isFlipped && current === 0 && (
-                  <span className="flashcards-face-hint">{isDesktop ? 'Clique ou appuie sur Espace pour révéler' : 'Appuie pour révéler'}</span>
-                )}
+    <div className={`app app--no-halo flashcards-page fc-page${isDesktop ? ' app--large fc-page--large' : ''}`} style={varsTeinte(teinte)}>
+      {deco}
+      {isDesktop ? (
+        <div className="fc-ecran fc-ecran--serie">
+          <div className="fc-haut-gauche">{boutonFermer}</div>
+          {enTete}
+          <Route notes={notes} idx={idx} grand />
+          <div className="fc-plateau">
+            <div className="fc-col-gauche">{reviz(220, 'bas', 'content')}</div>
+            <div className="fc-col-centre">{scene}{actions}</div>
+            <aside className="fc-col-droite">
+              <div className="fc-infos">
+                <span className="fc-infos-titre">Cette série</span>
+                {nbDues > 0 && <span className="fc-infos-ligne"><i className="fc-pt fc-pt--peche" />{nbDues} à revoir aujourd’hui</span>}
+                {nbNouvelles > 0 && <span className="fc-infos-ligne"><i className="fc-pt fc-pt--lavande" />{pluriel(nbNouvelles, 'nouvelle')}</span>}
+                <span className="fc-infos-titre fc-infos-titre--2">Raccourcis</span>
+                <span className="fc-touche"><kbd>Espace</kbd>Retourner</span>
+                <span className="fc-touche"><kbd>←</kbd>À revoir</span>
+                <span className="fc-touche"><kbd>↓</kbd>Presque</span>
+                <span className="fc-touche"><kbd>→</kbd>Je sais</span>
               </div>
-
-              {/* Verso — Réviz donne la réponse */}
-              <div className="flashcards-flip-face flashcards-flip-back">
-                <Mascot
-                  pose="pointing"
-                  size={150}
-                  glow
-                  animate
-                  priority
-                  className="flashcards-face-mascot"
-                  alt=""
-                  aria-hidden="true"
-                />
-                <span className="flashcards-face-tag">Réponse</span>
-                <span className="flashcards-face-text">{nbsp(card.back)}</span>
-              </div>
-
-            </div>
+            </aside>
           </div>
         </div>
-
-        <p className="flashcards-kbd-hint" aria-hidden="true"><kbd>Espace</kbd> retourner · <kbd>←</kbd> encore · <kbd>→</kbd> acquis</p>
-        <div className={`flashcards-actions${isFlipped ? ' visible' : ''}`}>
-          <button type="button" className="flashcards-action-btn flashcards-btn-again" onClick={handleAgain}>
-            <span className="flashcards-btn-icon">✕</span>
-            <span>À revoir</span>
-          </button>
-          <button type="button" className="flashcards-action-btn flashcards-btn-got" onClick={handleGot}>
-            <span className="flashcards-btn-icon">✓</span>
-            <span>Maîtrisé</span>
-          </button>
+      ) : (
+        <div className="fc-ecran fc-ecran--serie">
+          <div className="fc-ligne-haut">{boutonFermer}{enTete}</div>
+          <Route notes={notes} idx={idx} />
+          {scene}
+          {reviz(96, 'gauche', 'content')}
+          {actions}
         </div>
-
-      </div>
-
-      {coachOpen && coachLessonId && (
-        <CoachChat
-          isOpen
-          onClose={() => setCoachOpen(false)}
-          lessonId={coachLessonId}
-          lessonTitle={lessonTitle}
-        />
       )}
     </div>
   )

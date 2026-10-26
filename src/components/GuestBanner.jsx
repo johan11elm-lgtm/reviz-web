@@ -1,8 +1,6 @@
-import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { Mascot } from './Mascot';
+import { Bandeau } from './Bandeau';
 import { AVIS_PROFS_URL, isDecouverte } from '../services/decouverteService';
-import './guest.css';
 
 /**
  * Bandeau discret du mode essai : rappelle que la progression reste sur cet
@@ -13,23 +11,7 @@ export function GuestBanner({ className = '' }) {
   const auth = useAuth();
   if (!auth?.isGuest) return null;
   if (isDecouverte()) {
-    return (
-      <div className={`guest-banner ${className}`.trim()} role="status">
-        <Mascot pose="hello" size={30} alt="" aria-hidden="true" className="guest-banner-mascot" />
-        <span className="guest-banner-text">
-          <b>Mode découverte</b><span className="guest-banner-detail"> · l'app telle que la voient vos élèves.</span>
-        </span>
-        <Link to={AVIS_PROFS_URL} className="guest-banner-link">Donner mon avis</Link>
-      </div>
-    );
+    return <Bandeau teinte="lavande" titre="Mode découverte" suite="l’app telle que la voient vos élèves." action={{ to: AVIS_PROFS_URL, label: 'Donner mon avis' }} className={className} />;
   }
-  return (
-    <div className={`guest-banner ${className}`.trim()} role="status">
-      <Mascot pose="hello" size={30} alt="" aria-hidden="true" className="guest-banner-mascot" />
-      <span className="guest-banner-text">
-        <b>Mode essai</b><span className="guest-banner-detail"> · progression gardée sur cet appareil.</span>
-      </span>
-      <Link to="/inscription" className="guest-banner-link">Créer mon compte</Link>
-    </div>
-  );
+  return <Bandeau teinte="menthe" titre="Mode essai" suite="ta progression est gardée sur cet appareil." action={{ to: '/inscription', label: 'Créer mon compte' }} className={className} />;
 }

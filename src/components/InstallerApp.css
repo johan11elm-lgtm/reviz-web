@@ -1,180 +1,351 @@
-/* Tutoriel « Installer Réviz » : popup (même gabarit que l'annonce de la
- * Battle) et contenu partagé avec la page /installer. */
+/* Tutoriel « Installer Réviz » (handoff Claude Design du 22/10) : feuille du bas sur
+ * téléphone, fenêtre centrée de 540 px sur ordinateur, et contenu partagé avec la page
+ * /installer (onglets en pilule, étapes en ronds lavande, cartes d'état menthe et pêche). */
 
+.inst-fond,
+.inst-guide,
+.inst-page {
+  --inst-encre: #1B1A23;
+  --inst-doux: #6E675B;
+  --inst-creme: #F8EFE7;
+  --inst-bord: #EADBCB;
+  --inst-orange: #C25407;
+  --inst-tranche: #8F3E05;
+  --inst-lavande: #E4E0FA;
+  --inst-lavande-tranche: #C9C2F2;
+  --inst-menthe: #DCF5E6;
+  --inst-peche: #FFE6D2;
+  --inst-peche-tranche: #FFC596;
+  --inst-vert: #34C77B;
+  --inst-vert-texte: #1F8A52;
+}
+
+/* ── Voile et feuille (téléphone) ── */
 .inst-fond {
   position: fixed;
   inset: 0;
   /* Au-dessus de la barre d'onglets (z-index 200), qu'elle soit voilée elle aussi. */
   z-index: 300;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: center;
-  padding: 24px 16px;
-  background: rgba(0, 0, 0, 0.55);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
+  background: rgba(27, 26, 35, .45);
+  animation: inst-fondu .2s both;
 }
+@keyframes inst-fondu { from { opacity: 0; } }
 
 .inst-carte {
+  position: relative;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 10px;
+  gap: 18px;
   width: 100%;
-  max-width: 400px;
-  max-height: calc(100dvh - 48px);
+  max-width: 520px;
+  max-height: calc(100dvh - 40px);
   overflow-y: auto;
-  padding: 18px 20px 20px;
-  border-radius: var(--radius-card);
-  background: var(--bg-card);
-  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.25);
-  text-align: center;
-  animation: inst-in 0.25s cubic-bezier(0.22, 1, 0.36, 1) both;
+  box-sizing: border-box;
+  padding: 0 20px calc(28px + env(safe-area-inset-bottom, 0px));
+  border-radius: 32px 32px 0 0;
+  background: var(--inst-creme);
+  box-shadow: 0 -10px 40px rgba(27, 26, 35, .18);
+  color: var(--inst-encre);
+  font-family: 'Geist', system-ui, sans-serif;
+  text-align: left;
+  scrollbar-width: none;
+  transition: transform .25s cubic-bezier(.3, 1.2, .5, 1);
+  animation: inst-monte .3s cubic-bezier(.3, 1.2, .5, 1) backwards;
 }
-@keyframes inst-in {
-  from { transform: scale(0.9) translateY(12px); opacity: 0; }
-  to   { transform: none; opacity: 1; }
-}
+.inst-carte::-webkit-scrollbar { display: none; }
+.inst-carte.is-glisse { transition: none; }
+@keyframes inst-monte { from { transform: translateY(100%); } }
 
+.inst-poignee {
+  display: flex;
+  justify-content: center;
+  margin: 0 -20px -14px;
+  padding: 10px 0 8px;
+  cursor: grab;
+  touch-action: none;
+}
+.inst-poignee span { width: 40px; height: 5px; border-radius: 3px; background: var(--inst-bord); }
+
+.inst-tete { display: flex; align-items: flex-end; justify-content: space-between; gap: 8px; }
 .inst-titre {
   margin: 0;
-  font-family: 'Geist', sans-serif;
-  font-size: 26px;
+  padding-bottom: 8px;
+  font-family: var(--font-display);
+  font-size: 30px;
   font-weight: 800;
-  letter-spacing: -1px;
-  color: var(--text-primary);
+  line-height: 1.02;
+  letter-spacing: -.035em;
+  color: var(--inst-encre);
 }
-.inst-sous { margin: 0 0 4px; font-size: 14px; line-height: 1.45; color: var(--text-secondary); }
-.inst-fermer { margin-top: 4px; }
+.inst-tete-reviz { flex: none; display: flex; margin: -18px -8px -6px 0; pointer-events: none; }
+.inst-sous {
+  margin: -6px 0 0;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.45;
+  color: var(--inst-doux);
+  text-wrap: pretty;
+}
+.inst-boite {
+  padding: 16px;
+  border-radius: 24px;
+  background: #fff;
+  box-shadow: 0 8px 20px rgba(160, 80, 20, .08);
+}
+.inst-pied { display: flex; }
+.inst-fermer { width: 100%; }
+.inst-croix { display: none; }
+
+/* ── Boutons à tranche ── */
+.inst-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 56px;
+  box-sizing: border-box;
+  padding: 0 24px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--inst-orange);
+  box-shadow: 0 5px 0 var(--inst-tranche);
+  font-family: 'Geist', system-ui, sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  color: #fff;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 80ms, box-shadow 80ms;
+}
+.inst-btn:active { transform: translateY(4px); box-shadow: 0 1px 0 var(--inst-tranche); }
+.inst-btn:focus-visible { outline: 3px solid var(--inst-encre); outline-offset: 3px; }
+.inst-btn--blanc { min-height: 52px; font-size: 16px; background: #fff; color: var(--inst-encre); box-shadow: 0 5px 0 var(--inst-bord); }
+.inst-btn--blanc:active { box-shadow: 0 1px 0 var(--inst-bord); }
 
 /* ── Contenu du tutoriel ── */
 .inst-guide {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 18px;
   width: 100%;
+  color: var(--inst-encre);
+  font-family: 'Geist', system-ui, sans-serif;
   text-align: left;
 }
 
-.inst-alerte {
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  margin: 0;
-  padding: 12px 14px;
-  border-radius: 14px;
-  background: var(--bg-subtle);
-  font-size: 13px;
-  line-height: 1.45;
-  color: var(--text-primary);
-}
-.inst-alerte > .rv-ico {
-  flex-shrink: 0;
-  width: 18px;
-  height: 18px;
-  margin-top: 1px;
-  color: var(--accent-orange);
-}
-
-/* Onglets iPhone / Android / Ordinateur (segmented control, comme le scanner) */
+/* Onglets iPhone / Android / Ordinateur : pilule active blanche à tranche */
 .inst-onglets {
   display: flex;
   gap: 4px;
   padding: 4px;
-  border-radius: 14px;
-  background: var(--bg-subtle);
+  border-radius: 999px;
+  background: rgba(234, 219, 203, .55);
 }
 .inst-onglet {
   flex: 1;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 5px;
   min-width: 0;
-  padding: 9px 4px;
-  border: none;
-  border-radius: 10px;
+  height: 40px;
+  padding: 0 6px;
+  border: 0;
+  border-radius: 999px;
   background: transparent;
-  color: var(--text-muted);
   font-family: inherit;
-  font-size: 12.5px;
-  font-weight: 600;
-  white-space: nowrap;
-  cursor: pointer;
-  transition: background 0.15s ease, color 0.15s ease;
-}
-.inst-onglet .rv-ico { flex-shrink: 0; font-size: 15px; }
-.inst-onglet--actif {
-  background: var(--bg-card);
-  color: var(--text-primary);
-  box-shadow: var(--shadow-card);
-}
-
-.inst-direct { display: flex; flex-direction: column; gap: 6px; }
-.inst-direct .rv-btn-cta .rv-ico { font-size: 18px; }
-.inst-direct-ou { margin: 2px 0 0; font-size: 12px; color: var(--text-muted); text-align: center; }
-
-.inst-fait {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin: 0;
-  padding: 12px 14px;
-  border-radius: 14px;
-  background: var(--bg-subtle);
   font-size: 14px;
   font-weight: 600;
-  color: var(--text-primary);
+  color: var(--inst-doux);
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background .15s, color .15s;
 }
-.inst-fait .rv-ico { color: var(--accent-green); font-size: 18px; }
+.inst-onglet:hover { color: var(--inst-encre); }
+.inst-onglet:focus-visible { outline: 2px solid var(--inst-encre); outline-offset: 1px; }
+.inst-onglet--actif {
+  background: #fff;
+  box-shadow: 0 3px 0 var(--inst-bord);
+  font-weight: 700;
+  color: var(--inst-encre);
+}
 
-.inst-etapes {
+/* Installation en un geste (Chrome, Edge) */
+.inst-direct { display: flex; flex-direction: column; gap: 14px; }
+.inst-direct .inst-btn { width: 100%; }
+.inst-ou {
   display: flex;
-  flex-direction: column;
+  align-items: center;
   gap: 12px;
   margin: 0;
-  padding: 14px;
-  border-radius: 16px;
-  background: var(--bg-subtle);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--inst-doux);
+}
+.inst-ou::before,
+.inst-ou::after { content: ''; flex: 1; border-top: 2px dashed var(--inst-bord); }
+
+/* Étapes : ronds lavande à tranche, reliés par un pointillé */
+.inst-etapes {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin: 0;
+  padding: 0;
   list-style: none;
 }
-.inst-etape { display: flex; align-items: flex-start; gap: 12px; }
+.inst-etapes::before {
+  content: '';
+  position: absolute;
+  left: 17px;
+  top: 18px;
+  bottom: 18px;
+  border-left: 2px dashed var(--inst-bord);
+}
+.inst-etape { position: relative; display: flex; align-items: flex-start; gap: 14px; min-height: 40px; }
 .inst-num {
-  flex-shrink: 0;
-  display: inline-flex;
+  flex: none;
+  display: flex;
   align-items: center;
   justify-content: center;
-  width: 24px;
-  height: 24px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
-  background: var(--accent-violet);
-  color: #fff;
-  font-size: 12px;
+  background: var(--inst-lavande);
+  box-shadow: 0 3px 0 var(--inst-lavande-tranche);
+  font-family: var(--font-display);
+  font-size: 16px;
   font-weight: 800;
+  color: var(--inst-encre);
 }
-.inst-etape-texte { display: flex; flex-direction: column; gap: 3px; min-width: 0; padding-top: 2px; }
-.inst-etape-titre { font-size: 14px; font-weight: 600; line-height: 1.5; color: var(--text-primary); }
+.inst-etape-texte { display: flex; flex-direction: column; gap: 3px; min-width: 0; padding-top: 7px; }
+.inst-etape-titre { font-size: 15.5px; font-weight: 600; line-height: 1.4; text-wrap: pretty; }
 .inst-etape-titre strong { font-weight: 800; }
-.inst-etape-detail { font-size: 12.5px; line-height: 1.45; color: var(--text-secondary); }
+.inst-etape-detail { font-size: 13.5px; font-weight: 500; line-height: 1.45; color: var(--inst-doux); text-wrap: pretty; }
 
 /* Le bouton du navigateur à toucher, dessiné comme une petite touche */
 .inst-touche {
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  padding: 1px 7px;
-  border: 1px solid var(--border);
-  border-radius: 7px;
-  background: var(--bg-card);
+  margin: 0 2px;
+  padding: 1px 8px;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 0 0 1.5px var(--inst-bord), 0 2px 0 1.5px var(--inst-bord);
   font-weight: 700;
-  line-height: 1.5;
+  line-height: 1.45;
   white-space: nowrap;
   vertical-align: baseline;
+  color: var(--inst-encre);
 }
-.inst-touche .rv-ico { font-size: 1.05em; color: var(--accent-violet); }
+.inst-touche .rv-ico { font-size: 1.05em; color: var(--inst-orange); }
 
-.inst-note { margin: 0; font-size: 12.5px; line-height: 1.45; color: var(--text-muted); }
+.inst-note {
+  margin: 0;
+  padding: 12px 14px;
+  border-radius: 16px;
+  background: var(--inst-creme);
+  font-size: 13.5px;
+  font-weight: 500;
+  line-height: 1.45;
+  color: var(--inst-doux);
+}
+
+/* ── Cartes d'état : installée (menthe), navigateur intégré (pêche) ── */
+.inst-etat {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px;
+  border-radius: 22px;
+}
+.inst-etat--menthe { background: var(--inst-menthe); }
+.inst-etat--peche { align-items: flex-start; background: var(--inst-peche); }
+.inst-etat-rond {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+}
+.inst-etat-rond .rv-ico { width: 22px; height: 22px; stroke-width: 3; }
+.inst-etat--menthe .inst-etat-rond { background: var(--inst-vert); box-shadow: 0 4px 0 var(--inst-vert-texte); color: #fff; }
+.inst-etat--peche .inst-etat-rond { background: #fff; box-shadow: 0 4px 0 var(--inst-peche-tranche); color: var(--inst-orange); }
+.inst-etat--peche .inst-etat-rond .rv-ico { width: 24px; height: 24px; }
+.inst-etat-texte { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+.inst-etat-titre {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -.02em;
+}
+.inst-etat-vert { font-size: 14.5px; font-weight: 600; line-height: 1.35; color: var(--inst-vert-texte); }
+.inst-etat-phrase { margin: 0; font-size: 15px; font-weight: 600; line-height: 1.45; text-wrap: pretty; }
+.inst-etat-phrase b { font-weight: 700; }
+.inst-etat-phrase > span { color: var(--inst-doux); }
+
+/* ── Ordinateur : fenêtre centrée ── */
+@media (min-width: 1024px) {
+  html:not(.native) .inst-fond { align-items: center; padding: 24px; }
+  html:not(.native) .inst-carte {
+    width: 540px;
+    max-width: 100%;
+    max-height: calc(100dvh - 48px);
+    padding: 28px;
+    border-radius: 28px;
+    box-shadow: 0 30px 80px rgba(27, 26, 35, .3);
+    animation: inst-pop .25s cubic-bezier(.22, 1, .36, 1) backwards;
+  }
+  html:not(.native) .inst-poignee { display: none; }
+  html:not(.native) .inst-tete { align-items: center; gap: 16px; padding-right: 52px; }
+  html:not(.native) .inst-titre { flex: 1; order: 2; padding: 0; font-size: 34px; }
+  html:not(.native) .inst-tete-reviz {
+    order: 1;
+    align-items: center;
+    justify-content: center;
+    width: 72px;
+    height: 72px;
+    margin: 0;
+    border-radius: 22px;
+    background: var(--inst-menthe);
+    overflow: hidden;
+  }
+  html:not(.native) .inst-tete-reviz img { width: 88px; height: 88px; }
+  html:not(.native) .inst-sous { margin: 0; font-size: 15.5px; }
+  html:not(.native) .inst-boite { padding: 18px; }
+  html:not(.native) .inst-pied { justify-content: flex-end; }
+  html:not(.native) .inst-fermer { width: auto; min-height: 50px; padding: 0 28px; }
+  html:not(.native) .inst-croix {
+    position: absolute;
+    top: 28px;
+    right: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 3px 0 var(--inst-bord);
+    color: var(--inst-encre);
+    cursor: pointer;
+    transition: transform 80ms, box-shadow 80ms;
+  }
+  html:not(.native) .inst-croix:active { transform: translateY(3px); box-shadow: 0 0 0 var(--inst-bord); }
+  html:not(.native) .inst-croix .rv-ico { width: 16px; height: 16px; stroke-width: 2.4; }
+}
+@keyframes inst-pop {
+  from { transform: scale(.94) translateY(12px); opacity: 0; }
+  to   { transform: none; opacity: 1; }
+}
 
 @media (prefers-reduced-motion: reduce) {
-  .inst-carte { animation: none; }
+  .inst-fond, .inst-carte, html:not(.native) .inst-carte { animation: none; }
+  .inst-carte { transition: none; }
 }

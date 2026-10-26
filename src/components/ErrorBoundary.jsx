@@ -1,11 +1,13 @@
 import { Mascot } from './Mascot';
 import { Component } from 'react';
 import { hideSplash } from '../services/splash';
+import { estErreurDeChunk, rechargerUneFois, rechargementEnCours } from '../utils/rechargement';
+import './ErrorBoundary.css';
 
 export class ErrorBoundary extends Component {
   constructor(props) {
     super(props);
-    this.state = { hasError: false, error: null };
+    this.state = { hasError: false, error: null, rechargement: false };
   }
 
   static getDerivedStateFromError(error) {
@@ -14,41 +16,41 @@ export class ErrorBoundary extends Component {
 
   componentDidCatch(error, info) {
     console.error('[Réviz] Erreur capturée :', error, info.componentStack);
+    // Chunk disparu après une mise à jour : un rechargement (une seule fois) récupère la
+    // nouvelle version, sans passer par l'écran d'erreur. Déjà tenté : « Oups » s'affiche.
+    if (estErreurDeChunk(error)) {
+      const rechargement = rechargerUneFois();
+      this.setState({ rechargement });
+      if (rechargement) return;
+    }
     // L'écran d'erreur doit être visible même si le plantage précède le premier rendu.
     hideSplash();
   }
 
   handleReload = () => {
-    this.setState({ hasError: false, error: null });
+    this.setState({ hasError: false, error: null, rechargement: false });
     window.location.href = '/';
   };
 
   render() {
     if (!this.state.hasError) return this.props.children;
+    // Rechargement en cours (ou déjà lancé par vite:preloadError) : rien à montrer entre-temps.
+    if (this.state.rechargement || (estErreurDeChunk(this.state.error) && rechargementEnCours())) return null;
 
+    // Écran statique (pas de Pantin ni de dépendance chargée à la demande) : l'app vient de planter.
     return (
-      <div className="app" style={{
-        display: 'flex', flexDirection: 'column', alignItems: 'center',
-        justifyContent: 'center', padding: 32, textAlign: 'center', gap: 16,
-      }}>
-        <Mascot pose="confused" size={120} alt="" aria-hidden="true" />
-        <h2 style={{ fontSize: 20, fontWeight: 700, margin: 0, color: 'var(--text-primary)' }}>
-          Oups, quelque chose a planté
-        </h2>
-        <p style={{ fontSize: 14, color: 'var(--text-secondary)', margin: 0, lineHeight: 1.5 }}>
-          Pas de panique, ça arrive. Essaie de recharger la page.
-        </p>
-        <button
-          onClick={this.handleReload}
-          style={{
-            marginTop: 8, padding: '14px 32px', borderRadius: 14,
-            background: 'var(--bg-cta)', color: 'var(--text-cta)',
-            border: 'none', fontSize: 15, fontWeight: 700, cursor: 'pointer',
-            fontFamily: 'inherit',
-          }}
-        >
-          Retour à l'accueil
-        </button>
+      <div className="app app--no-halo eb-page" role="alert">
+        <div className="eb-hero">
+          <span className="eb-deco eb-deco--a" aria-hidden="true" />
+          <span className="eb-deco eb-deco--b" aria-hidden="true" />
+          <Mascot pose="confused" size={170} priority alt="" aria-hidden="true" className="eb-reviz" />
+        </div>
+        <div className="eb-bas">
+          <span className="eb-sur">Petit souci</span>
+          <h1 className="eb-titre">Oups, quelque chose a planté</h1>
+          <p className="eb-texte">Pas de panique, ça arrive. Ta progression est gardée.</p>
+          <button type="button" className="eb-btn" onClick={this.handleReload}>Retour à l'accueil</button>
+        </div>
       </div>
     );
   }

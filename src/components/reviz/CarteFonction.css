@@ -1,0 +1,64 @@
+/* Carte d'une fonction (accueil, Programme…). La page la place ; ici, son allure. */
+.rv-fonction {
+  width: 100%;
+  max-width: 330px;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 14px 0 10px;
+  border: 0;
+  border-radius: 24px;
+  background: #fff;
+  box-shadow: 0 14px 30px -14px rgba(120,60,20,.45), 0 0 0 1px rgba(120,60,20,.05);
+  font: inherit;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.rv-fonction:active { transform: scale(.97); }
+.rv-fonction:focus-visible { outline: 3px solid #1B1A23; outline-offset: 3px; }
+
+/* Accueil : elle monte sous Réviz quand il la propose, s'efface avant la suivante. */
+.rv-fonction--entree { opacity: 0; transform: translateY(10px) scale(.96); transition: opacity .18s ease, transform .2s ease; }
+.rv-fonction--la { animation: rvFonction .45s .3s cubic-bezier(.3,1.4,.5,1) both; }
+@keyframes rvFonction {
+  from { opacity: 0; transform: translateY(22px) scale(.92); }
+  to { opacity: 1; transform: none; }
+}
+
+.rv-fonction-rond {
+  width: 50px;
+  height: 50px;
+  flex: none;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.rv-fonction-txt { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 1px; }
+.rv-fonction-titre { font-family: var(--font-display); font-size: 17px; font-weight: 800; letter-spacing: -.3px; color: #1B1A23; }
+.rv-fonction-sous { font-size: 13px; color: #6E675B; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.rv-fonction-go {
+  width: 32px;
+  height: 32px;
+  flex: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--rv-accent, #C25407); /* la page peut donner sa couleur d'action */
+  color: #fff;
+}
+
+/* Ordinateur */
+.rv-fonction--grande { max-width: 440px; height: 84px; gap: 14px; padding: 0 18px 0 12px; border-radius: 26px; }
+.rv-fonction--grande .rv-fonction-rond { width: 60px; height: 60px; border-radius: 18px; }
+.rv-fonction--grande .rv-fonction-titre { font-size: 19px; }
+.rv-fonction--grande .rv-fonction-sous { font-size: 14px; }
+.rv-fonction--grande .rv-fonction-go { width: 36px; height: 36px; }
+@media (hover: hover) {
+  .rv-fonction--grande:hover { transform: translateY(-2px); box-shadow: 0 18px 34px -14px rgba(120,60,20,.5), 0 0 0 1px rgba(120,60,20,.05); }
+}

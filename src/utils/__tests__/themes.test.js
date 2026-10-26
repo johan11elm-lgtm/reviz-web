@@ -2,7 +2,7 @@
 // Réviz — Tests du catalogue de thèmes (gating Réviz+)
 // -------------------------------------------------------
 import { describe, it, expect } from 'vitest'
-import { THEMES, DARK_THEMES, themeById, resolveTheme } from '../themes'
+import { THEMES, DARK_THEMES, themeById, resolveTheme, SOMBRE_DISPONIBLE, THEMES_PROPOSES, themeAffiche } from '../themes'
 
 describe('catalogue', () => {
   it('expose les deux thèmes gratuits et au moins 4 premium', () => {
@@ -54,5 +54,14 @@ describe('resolveTheme (repli abonnement)', () => {
   it('themeById retourne null pour un id inconnu', () => {
     expect(themeById('nuit-encre')?.premium).toBe(true)
     expect(themeById('nope')).toBeNull()
+  })
+
+  it('sans version sombre de la refonte, les thèmes sombres ne sont ni proposés ni appliqués', () => {
+    if (SOMBRE_DISPONIBLE) return
+    expect(THEMES_PROPOSES.map(t => t.id)).toEqual(['light', 'abricot', 'sauge', 'prune'])
+    expect(themeAffiche('dark')).toBe('light')
+    expect(themeAffiche('nuit-encre')).toBe('light')
+    expect(themeAffiche('sauge')).toBe('sauge')
+    expect(themeAffiche('light')).toBe('light')
   })
 })

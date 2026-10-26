@@ -1,535 +1,560 @@
-import { CameraIcon, PencilIcon, BulbIcon, FrameIcon, SunIcon, SearchIcon, FileTextIcon } from '../components/Icons';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { PremiumModal } from '../components/PremiumModal';
-import { PageHeader } from '../components/PageHeader';
-import { GuestWall } from '../components/GuestWall';
 import { useIsDesktop } from '../hooks/useMediaQuery';
-import { Mascot } from '../components/Mascot';
+import { useModalA11y } from '../hooks/useModalA11y';
+import { Pantin } from '../components/Pantin';
+import { BulleReviz } from '../components/reviz/BulleReviz';
+import { DecouvrirRevizPlus, ToastPaiementAnnule } from '../components/revizplus/RevizPlusOffre';
+import { RevizPlusBadge } from '../components/RevizPlus';
+import { BottomNav } from '../components/BottomNav';
 import { startAnalysis, startAnalysisFromImage } from '../services/aiService';
 import { getScanStatus } from '../services/scanLimitService';
 import { LESSON_TEXT_MAX_LABEL, isLessonTextTooLong, truncateLessonText } from '../utils/lessonText';
-import { RevizPlusBadge } from '../components/RevizPlus';
+import { TEINTES, varsTeinte } from '../utils/teinteMatiere';
+import '../components/reviz/HerosMatiere.css';
 import './Scan.css';
 
-export default function Scan() {
-  // `?mode=texte` (retour depuis une erreur d'Analyse) : onglet Texte ouvert
-  // et texte collé restauré, pour corriger sans tout recoller.
-  const [searchParams] = useSearchParams();
-  const restoreText = searchParams.get('mode') === 'texte';
-  const [activeTab, setActiveTab]     = useState(restoreText ? 'texte' : 'photo');
-  const [lessonText, setLessonText]   = useState(() => (restoreText && localStorage.getItem('reviz-lesson-text')) || '');
-  const [showLimit, setShowLimit]     = useState(false);
-  const [showLevelRequired, setShowLevelRequired] = useState(false);
-  const [tipOpen, setTipOpen]         = useState(false);
-  const [camStatus, setCamStatus]     = useState('idle'); // 'idle' | 'active' | 'denied' | 'error'
-  const videoRef      = useRef(null);
-  const streamRef     = useRef(null);
-  const fileInputRef  = useRef(null);
-  const facingModeRef = useRef('environment');
-  const navigate  = useNavigate();
-  const { getUserLevel, isGuest, hasRevizPlus } = useAuth();
-  const userLevel = getUserLevel();
-  // Ordinateur : les deux panneaux (photo, texte) côte à côte, sans onglets.
-  const double = useIsDesktop();
-  const [dropping, setDropping] = useState(false);
+const MIN = 200;
+const pluriel = (n, mot) => `${n} ${mot}${n > 1 ? 's' : ''}`;
+const nombre = n => n.toLocaleString('fr-FR');
 
-  // Démarrer la caméra quand on est sur l'onglet photo
-  useEffect(() => {
-    if ((activeTab !== 'photo' && !double) || isGuest) {
-      stopCamera();
-      return;
-    }
-    startCamera();
-    return () => stopCamera();
-  }, [activeTab, isGuest, double]);
+const Chevron = () => (
+  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7" /></svg>
+);
+const Croix = () => (
+  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12" /></svg>
+);
+const Fleche = ({ taille = 18 }) => (
+  <svg viewBox="0 0 24 24" width={taille} height={taille} fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+);
+const PetitChevron = () => (
+  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6" /></svg>
+);
+const Appareil = ({ taille = 24 }) => (
+  <svg viewBox="0 0 24 24" width={taille} height={taille} fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M4 8h3l2-3h6l2 3h3v11H4z" /><circle cx="12" cy="13" r="3.5" /></svg>
+);
+const Image = ({ taille = 22 }) => (
+  <svg viewBox="0 0 24 24" width={taille} height={taille} fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="4" /><circle cx="9" cy="9" r="1.8" /><path d="m20 15-4.5-4.5L6 20" /></svg>
+);
+const Lignes = ({ taille = 22 }) => (
+  <svg viewBox="0 0 24 24" width={taille} height={taille} fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" aria-hidden="true"><path d="M5 7h14M5 12h14M5 17h9" /></svg>
+);
+const SansCamera = () => (
+  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M4 8h3l2-3h6l2 3h3v11H4z" /><path d="M3 3l18 18" /></svg>
+);
 
-  // Poste sans caméra (ordinateur du CDI) : on ouvre directement l'onglet Texte.
-  useEffect(() => {
-    if (isGuest) return;
-    navigator.mediaDevices?.enumerateDevices?.()
-      .then(list => { if (!list.some(d => d.kind === 'videoinput')) setActiveTab('texte'); })
-      .catch(() => {});
-  }, [isGuest]);
+// Conseils de prise de vue : version longue (ordinateur) et courte (sous le viseur).
+const CONSEILS = [
+  { titre: 'Cadre droit.', texte: 'Le texte horizontal, sans angle.', court: 'Texte horizontal, sans angle.' },
+  { titre: 'Bien éclairé.', texte: 'Évite les ombres et les reflets.', court: 'Évite ombres et reflets.' },
+  { titre: 'Texte net.', texte: 'Approche-toi jusqu’à ce que les lettres soient lisibles.', court: 'Approche-toi jusqu’à bien lire.' },
+  { titre: 'Une leçon à la fois.', texte: 'Pas plusieurs énoncés sur la même photo.', court: 'Pas plusieurs énoncés.' },
+];
 
-  async function startCamera() {
-    try {
-      const constraints = { video: { facingMode: facingModeRef.current } }
-      let stream
-      try {
-        stream = await navigator.mediaDevices.getUserMedia(constraints)
-      } catch {
-        // Fallback : sans contrainte de caméra (iOS compatibility)
-        stream = await navigator.mediaDevices.getUserMedia({ video: true })
-      }
-      streamRef.current = stream;
-      setCamStatus('active');
-    } catch (err) {
-      if (err.name === 'NotAllowedError' || err.name === 'PermissionDeniedError') {
-        setCamStatus('denied');
-      } else {
-        setCamStatus('error');
-      }
-    }
+/** Le quota de la semaine : segments, ou Réviz+ et scans illimités. */
+function Quota({ statut, plus, onOffre, grand }) {
+  if (plus || !Number.isFinite(statut.remaining)) {
+    return (
+      <div className="sc-quota sc-quota--plus">
+        <RevizPlusBadge />
+        <span className="sc-quota-plus-txt"><b>Scans illimités</b>{grand && <span>Scanne autant de leçons que tu veux.</span>}</span>
+      </div>
+    );
   }
-
-  // Assigner le stream à la vidéo après que camStatus passe à 'active'
-  useEffect(() => {
-    if (camStatus === 'active' && videoRef.current && streamRef.current) {
-      videoRef.current.srcObject = streamRef.current;
-    }
-  }, [camStatus]);
-
-  function stopCamera() {
-    if (streamRef.current) {
-      streamRef.current.getTracks().forEach(t => t.stop());
-      streamRef.current = null;
-    }
-    setCamStatus('idle');
-  }
-
-  // Vérifie que le niveau scolaire est configuré (l'IA en a besoin pour adapter).
-  function checkLevel() {
-    if (!userLevel?.cycle) {
-      setShowLevelRequired(true);
-      return false;
-    }
-    return true;
-  }
-
-  // Vérifie la limite de scans avant de lancer l'analyse
-  function checkLimit() {
-    const status = getScanStatus();
-    if (!status.canScan) {
-      setShowLimit(true);
-      return false;
-    }
-    return true;
-  }
-
-  // Capturer une frame et l'envoyer à l'analyse (via canvas → base64)
-  function handleCapture() {
-    if (!videoRef.current || camStatus !== 'active') return;
-    if (!checkLevel()) return;
-    if (!checkLimit()) return;
-    const canvas = document.createElement('canvas');
-    canvas.width  = videoRef.current.videoWidth;
-    canvas.height = videoRef.current.videoHeight;
-    canvas.getContext('2d').drawImage(videoRef.current, 0, 0);
-    const imageData = canvas.toDataURL('image/jpeg', 0.9);
-    localStorage.removeItem('reviz-ai-data');
-    localStorage.removeItem('reviz-lesson-text');
-    localStorage.setItem('reviz-captured-image', imageData);
-    startAnalysisFromImage(imageData, userLevel);   // pré-lancer l'appel API immédiatement
-    navigate('/analyse');
-  }
-
-  async function handleFlipCamera() {
-    stopCamera();
-    facingModeRef.current = facingModeRef.current === 'environment' ? 'user' : 'environment';
-    await startCamera();
-  }
-
-  function handleMediaImport(e) {
-    importFile(e.target.files?.[0]);
-  }
-
-  // Glisser-déposer d'une image (ordinateur)
-  function handleDrop(e) {
-    e.preventDefault();
-    setDropping(false);
-    const file = Array.from(e.dataTransfer?.files ?? []).find(f => f.type.startsWith('image/'));
-    if (file) importFile(file);
-  }
-
-  function importFile(file) {
-    if (!file) return;
-    if (!checkLevel()) return;
-    if (!checkLimit()) return;
-    const reader = new FileReader();
-    reader.onload = (ev) => {
-      const imageData = ev.target.result;
-      localStorage.removeItem('reviz-ai-data');
-      localStorage.removeItem('reviz-lesson-text');
-      localStorage.setItem('reviz-captured-image', imageData);
-      startAnalysisFromImage(imageData, userLevel);
-      navigate('/analyse');
-    };
-    reader.readAsDataURL(file);
-  }
-
-  const textTooLong = isLessonTextTooLong(lessonText);
-
-  const handleAnalyse = () => {
-    if (!checkLevel()) return;
-    if (!checkLimit()) return;
-    // Au-delà de la limite serveur, le bouton annonce qu'on analyse le début :
-    // on envoie le texte coupé proprement plutôt que d'essuyer un TEXT_TOO_LONG.
-    const text = textTooLong ? truncateLessonText(lessonText) : lessonText;
-    localStorage.removeItem('reviz-ai-data');
-    localStorage.setItem('reviz-lesson-text', text);
-    startAnalysis(text, userLevel);
-    navigate('/analyse');
-  };
-
-  // Mode essai : le scan passe par une API authentifiée → compte requis.
-  if (isGuest) {
-    return <GuestWall pose="scanphone" action="scanner tes leçons" text="Le scan de leçons demande un compte. C'est gratuit, et tout ce que tu as révisé en mode essai te suit." />;
-  }
-
   return (
-    <div className="app scan-page">
-      <PageHeader
-        variant="back"
-        title="Scanner"
-        onBack={() => (window.history.state?.idx > 0 ? navigate(-1) : navigate('/'))}
-      />
-
-      {/* Quota de la semaine : ce que Réviz+ apporte, visible là où il sert */}
-      <ScanQuota plus={hasRevizPlus} />
-
-      {/* Tabs Photo / Texte (sur ordinateur, les deux panneaux sont visibles) */}
-      {!double && (
-      <div className="scan-tabs-wrap">
-        <div className="scan-tabs" role="tablist" aria-label="Mode de scan">
-          <button
-            type="button"
-            role="tab"
-            aria-selected={activeTab === 'photo'}
-            className={`scan-tab${activeTab === 'photo' ? ' scan-tab--active' : ''}`}
-            onClick={() => setActiveTab('photo')}
-          >
-            <CameraIcon /> Photo
-          </button>
-          <button
-            type="button"
-            role="tab"
-            aria-selected={activeTab === 'texte'}
-            className={`scan-tab${activeTab === 'texte' ? ' scan-tab--active' : ''}`}
-            onClick={() => setActiveTab('texte')}
-          >
-            <PencilIcon /> Texte
-          </button>
-        </div>
-      </div>
-      )}
-
-      {/* Content */}
-      <div className={`scan-content${double ? ' scan-content--double' : ''}`}>
-        {(double || activeTab === 'photo') && (
-          <section className="scan-panel scan-panel--photo" aria-label="Photo d'une leçon">
-            {double && <h2 className="scan-panel-title">Photo d'une leçon</h2>}
-            {/* Viewfinder — chrome beige autour, intérieur sombre */}
-            <div
-              className={`scan-viewfinder-shell${dropping ? ' scan-viewfinder-shell--drop' : ''}`}
-              onDragOver={e => { e.preventDefault(); if (!dropping) setDropping(true); }}
-              onDragLeave={() => setDropping(false)}
-              onDrop={handleDrop}
-            >
-              <div className="viewfinder">
-                {/* Flux vidéo — toujours dans le DOM pour que le ref soit dispo */}
-                <video
-                  ref={videoRef}
-                  autoPlay
-                  playsInline
-                  muted
-                  className={`cam-video${camStatus === 'active' ? '' : ' cam-video-hidden'}`}
-                />
-
-                {camStatus === 'active' && (
-                  <>
-                    <div className="corner corner-tl" />
-                    <div className="corner corner-tr" />
-                    <div className="corner corner-bl" />
-                    <div className="corner corner-br" />
-                    <div className="scan-line" />
-                  </>
-                )}
-
-                {camStatus !== 'active' && (
-                  <div className="scan-placeholder">
-                    {camStatus === 'idle' && (
-                      <>
-                        <Mascot pose="scanphone" size={140} glow animate priority />
-                        <p className="scan-placeholder-title">J'allume la caméra…</p>
-                      </>
-                    )}
-                    {camStatus === 'denied' && (
-                      <>
-                        <Mascot pose="confused" size={120} glow />
-                        <p className="scan-placeholder-title">Accès caméra refusé</p>
-                        <p className="scan-placeholder-sub">
-                          Pour scanner, j'ai besoin de la caméra. Active-la dans les réglages
-                          du navigateur, ou importe une photo.
-                        </p>
-                        <button type="button" className="scan-retry-btn" onClick={startCamera}>
-                          Réessayer
-                        </button>
-                        <button type="button" className="scan-retry-btn" onClick={() => fileInputRef.current?.click()}>
-                          Importer une photo
-                        </button>
-                      </>
-                    )}
-                    {camStatus === 'error' && (
-                      <>
-                        <Mascot pose="scanphone" size={120} glow />
-                        <p className="scan-placeholder-title">Pas de caméra ici</p>
-                        <p className="scan-placeholder-sub">Importe la photo de ta leçon, ou colle son texte.</p>
-                        <button type="button" className="scan-retry-btn" onClick={() => fileInputRef.current?.click()}>
-                          Importer une photo
-                        </button>
-                        <button type="button" className="scan-retry-btn" onClick={startCamera}>
-                          Réessayer la caméra
-                        </button>
-                      </>
-                    )}
-                  </div>
-                )}
-              </div>
-            </div>
-
-            <p className="scan-drop-hint">Tu peux aussi glisser une photo ici.</p>
-
-            {/* Shutter row */}
-            <div className="scan-shutter-row">
-              <button
-                type="button"
-                className="scan-side-btn"
-                onClick={() => fileInputRef.current?.click()}
-                aria-label="Importer depuis la galerie"
-              >
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <rect x="3" y="3" width="18" height="18" rx="2"/>
-                  <circle cx="8.5" cy="8.5" r="1.5"/>
-                  <polyline points="21 15 16 10 5 21"/>
-                </svg>
-              </button>
-              <input
-                ref={fileInputRef}
-                type="file"
-                accept="image/*"
-                hidden
-                onChange={handleMediaImport}
-              />
-
-              <button
-                type="button"
-                className={`scan-shutter${camStatus !== 'active' ? ' scan-shutter--disabled' : ''}`}
-                onClick={handleCapture}
-                disabled={camStatus !== 'active'}
-                aria-label="Capturer"
-              >
-                <span className="scan-shutter-inner" />
-              </button>
-
-              <button
-                type="button"
-                className={`scan-side-btn${camStatus !== 'active' ? ' scan-side-btn--disabled' : ''}`}
-                onClick={handleFlipCamera}
-                disabled={camStatus !== 'active'}
-                aria-label="Retourner la caméra"
-              >
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M1 4v6h6"/>
-                  <path d="M23 20v-6h-6"/>
-                  <path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4-4.64 4.36A9 9 0 0 1 3.51 15"/>
-                </svg>
-              </button>
-            </div>
-
-            {/* Tip trigger — ouvre la bottom sheet (sur ordinateur, les conseils sont sous les panneaux) */}
-            {!double && <button
-              type="button"
-              className="scan-tip-trigger"
-              onClick={() => setTipOpen(true)}
-            >
-              <span className="scan-tip-trigger-icon"><BulbIcon /></span>
-              <span className="scan-tip-trigger-label">Conseils pour un bon scan</span>
-              <span className="scan-tip-trigger-arrow" aria-hidden="true">›</span>
-            </button>}
-          </section>
-        )}
-        {(double || activeTab === 'texte') && (
-          <section className="scan-panel scan-panel--texte" aria-label="Texte de la leçon">
-            {double && <h2 className="scan-panel-title">Texte de la leçon</h2>}
-            {/* Mode texte — mascotte writing + textarea + counter + CTA */}
-            <div className="scan-text-hero">
-              <Mascot pose="writing" size={120} glow priority />
-              <p className="scan-text-hint">
-                Colle ton énoncé ci-dessous. À partir de <strong>200&nbsp;caractères</strong>,
-                je fais du bon boulot.
-              </p>
-            </div>
-
-            <div className="scan-textarea-wrap">
-              <textarea
-                className="scan-textarea"
-                value={lessonText}
-                onChange={e => setLessonText(e.target.value)}
-                placeholder="Colle le texte de ta leçon…"
-                autoFocus
-              />
-              <div
-                className={`scan-char-counter${textTooLong ? ' scan-char-counter--over' : lessonText.length >= 200 ? ' scan-char-counter--ok' : ''}`}
-                aria-live="polite"
-              >
-                {textTooLong
-                  ? `${lessonText.length.toLocaleString('fr-FR')} / ${LESSON_TEXT_MAX_LABEL} caractères max`
-                  : `${lessonText.length} / 200 caractères`}
-              </div>
-            </div>
-
-            {textTooLong && (
-              <p className="scan-text-over">
-                {`Ta leçon est longue : Réviz analysera les ${LESSON_TEXT_MAX_LABEL} premiers caractères. Scanne la suite dans une seconde leçon.`}
-              </p>
-            )}
-
-            <button
-              type="button"
-              className="rv-btn-cta rv-btn-cta--full"
-              disabled={!lessonText.trim()}
-              onClick={handleAnalyse}
-            >
-              {textTooLong ? `Analyser les ${LESSON_TEXT_MAX_LABEL} premiers caractères` : 'Analyser'}
-            </button>
-          </section>
-        )}
-        {double && (
-          <section className="scan-tips-desk" aria-labelledby="scan-tips-desk-titre">
-            <h2 className="rv-eyebrow" id="scan-tips-desk-titre">4 réflexes pour un scan nickel</h2>
-            <ul className="scan-tips-desk-list">
-              {TIPS.map(t => (
-                <li className="scan-tips-desk-item" key={t.titre}>
-                  <span className="rv-row-avatar" aria-hidden="true">{t.icon}</span>
-                  <span className="scan-tips-desk-text"><strong>{t.titre}</strong> {t.texte}</span>
-                </li>
-              ))}
-            </ul>
-          </section>
-        )}
-      </div>
-
-      {/* Backdrop pour la sheet tips */}
-      {tipOpen && (
-        <div
-          className="scan-tip-backdrop"
-          onClick={() => setTipOpen(false)}
-          aria-hidden="true"
-        />
-      )}
-
-      {/* Bottom sheet — toujours dans le DOM pour l'animation slide */}
-      <aside
-        className={`rv-sheet--bottom scan-tip-sheet${tipOpen ? '' : ' rv-sheet--bottom-hidden'}`}
-        aria-hidden={!tipOpen}
-        aria-label="Conseils pour un bon scan"
-      >
-        <div className="rv-sheet-handle" />
-        <header className="scan-tip-sheet-header">
-          <h2 className="scan-tip-sheet-title">4 réflexes pour un scan nickel</h2>
-          <button
-            type="button"
-            className="scan-tip-close"
-            onClick={() => setTipOpen(false)}
-            aria-label="Fermer"
-          >
-            ×
-          </button>
-        </header>
-        <ul className="scan-tip-list">
-          {TIPS.map(t => (
-            <li className="scan-tip-item" key={t.titre}>
-              <span className="scan-tip-emoji" aria-hidden="true">{t.icon}</span>
-              <div className="scan-tip-text">
-                <strong>{t.titre}</strong> {t.texte}
-              </div>
-            </li>
-          ))}
-        </ul>
-      </aside>
-
-      {showLimit && (
-        <PremiumModal
-          onClose={() => setShowLimit(false)}
-          used={getScanStatus().used}
-          limit={getScanStatus().limit}
-        />
-      )}
-
-      {/* Modale niveau requis — restylée DS-aligned */}
-      {showLevelRequired && (
-        <div
-          className="scan-modal-overlay"
-          onClick={() => setShowLevelRequired(false)}
-        >
-          <div
-            className="rv-card rv-card--modal scan-level-modal"
-            onClick={e => e.stopPropagation()}
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="scan-level-modal-title"
-          >
-            <Mascot pose="graduation" size={120} glow />
-            <h2 id="scan-level-modal-title" className="scan-level-modal-title">
-              Dis-moi d'abord ton niveau
-            </h2>
-            <p className="scan-level-modal-sub">
-              J'adapte tes révisions à ta classe — ça se règle en 10 secondes.
-            </p>
-            <div className="scan-level-modal-actions">
-              <button
-                type="button"
-                className="rv-btn-cta rv-btn-cta--ghost"
-                onClick={() => setShowLevelRequired(false)}
-              >
-                Plus tard
-              </button>
-              <button
-                type="button"
-                className="rv-btn-cta"
-                onClick={() => {
-                  setShowLevelRequired(false);
-                  navigate('/profil');
-                }}
-              >
-                Aller au profil
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+    <div className="sc-quota">
+      {grand && <span className="sc-sur">Cette semaine</span>}
+      <b>{statut.remaining > 0 ? `${pluriel(statut.remaining, 'scan')} ${statut.remaining > 1 ? 'restants' : 'restant'} cette semaine` : 'Plus de scan cette semaine'}</b>
+      <span className="sc-segments" aria-hidden="true">
+        {Array.from({ length: statut.limit }, (_, i) => <i key={i} className={i < statut.remaining ? 'is-reste' : ''} />)}
+      </span>
+      <button type="button" className="sc-lien" onClick={onOffre}>Illimité avec Réviz+<PetitChevron /></button>
     </div>
   );
 }
 
-// Conseils de prise de vue : feuille du bas (téléphone), rangée sous les
-// deux panneaux (ordinateur).
-const TIPS = [
-  { icon: <FrameIcon />, titre: 'Cadre droit.', texte: 'Le texte horizontal, sans angle.' },
-  { icon: <SunIcon />, titre: 'Bien éclairé.', texte: 'Évite les ombres et les reflets brillants.' },
-  { icon: <SearchIcon />, titre: 'Texte net.', texte: 'Approche-toi jusqu\'à ce que les lettres soient lisibles.' },
-  { icon: <FileTextIcon />, titre: 'Une leçon à la fois.', texte: 'Pas plusieurs énoncés sur la même photo.' },
-];
 
-function ScanQuota({ plus }) {
-  const { remaining, limit } = getScanStatus();
-  // Réviz+ (payé ou offert) s'affiche illimité : le plafond de l'offre de
-  // lancement est un garde-fou invisible (api/_lancement.js).
-  if (plus || !Number.isFinite(remaining)) {
+/**
+ * Scanner une leçon (handoff Claude Design du 21/10) : choisir comment donner sa leçon (photo,
+ * import, texte collé), viser, vérifier la photo, puis l'analyse part et la fiche du chapitre
+ * prend le relais (préparation et erreurs). Quota atteint et mode essai remplacent le choix.
+ * Ordinateur : zone de dépôt, texte et conseils côte à côte ; la caméra seulement si elle existe.
+ */
+export default function Scan() {
+  // `?mode=texte` (retour depuis une erreur d'Analyse) : texte collé restauré, pour corriger sans tout recoller.
+  const [params] = useSearchParams();
+  const restaure = params.get('mode') === 'texte';
+  const navigate = useNavigate();
+  const isDesktop = useIsDesktop();
+  const { getUserLevel, isGuest, hasRevizPlus } = useAuth();
+  const niveau = getUserLevel();
+  const [ecran, setEcran] = useState(restaure && !isDesktop ? 'texte' : 'choix'); // choix | viseur | apercu | texte
+  const [texte, setTexte] = useState(() => (restaure && localStorage.getItem('reviz-lesson-text')) || '');
+  const [photo, setPhoto] = useState(null);
+  const [camera, setCamera] = useState('starting'); // starting | active | denied | none
+  const [aCamera, setACamera] = useState(!isDesktop);
+  const [depot, setDepot] = useState(false);
+  const [offre, setOffre] = useState(false);
+  // Retour de Stripe sans payer (api/_checkout.js) : un petit mot, puis l'adresse redevient propre.
+  const [annule, setAnnule] = useState(() => params.get('revizplus') === 'annule');
+  const fermerAnnule = useCallback(() => setAnnule(false), []);
+  useEffect(() => {
+    if (params.get('revizplus') === 'annule') window.history.replaceState(window.history.state, '', window.location.pathname);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  const [niveauManquant, setNiveauManquant] = useState(false);
+  const video = useRef(null);
+  const flux = useRef(null);
+  const fichier = useRef(null);
+  const statut = getScanStatus();
+
+  // Ordinateur : la caméra n'est proposée que si le poste en a une.
+  useEffect(() => {
+    if (!isDesktop) return;
+    navigator.mediaDevices?.enumerateDevices?.()
+      .then(l => setACamera(l.some(d => d.kind === 'videoinput')))
+      .catch(() => {});
+  }, [isDesktop]);
+
+  // Le viseur allume la caméra, et l'éteint en le quittant.
+  useEffect(() => {
+    if (ecran !== 'viseur') return;
+    let annule = false;
+    setCamera('starting');
+    (async () => {
+      try {
+        let s;
+        try { s = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } }); }
+        catch (e) { if (e?.name === 'NotAllowedError' || e?.name === 'PermissionDeniedError') throw e; s = await navigator.mediaDevices.getUserMedia({ video: true }); }
+        if (annule) { s.getTracks().forEach(t => t.stop()); return; }
+        flux.current = s;
+        setCamera('active');
+      } catch (e) {
+        if (!annule) setCamera(e?.name === 'NotAllowedError' || e?.name === 'PermissionDeniedError' ? 'denied' : 'none');
+      }
+    })();
+    return () => {
+      annule = true;
+      flux.current?.getTracks().forEach(t => t.stop());
+      flux.current = null;
+    };
+  }, [ecran]);
+  useEffect(() => {
+    if (camera === 'active' && video.current && flux.current) video.current.srcObject = flux.current;
+  }, [camera]);
+
+  if (isGuest) return <Essai onCompte={() => navigate('/inscription')} onConnexion={() => navigate('/connexion')} onProgramme={() => navigate('/programme')} grand={isDesktop} />;
+
+  const retour = () => (window.history.state?.idx > 0 ? navigate(-1) : navigate('/cours'));
+  const pret = () => {
+    if (!niveau?.cycle) { setNiveauManquant(true); return false; }
+    return true;
+  };
+  function declencher() {
+    if (camera !== 'active' || !video.current) return;
+    const c = document.createElement('canvas');
+    c.width = video.current.videoWidth;
+    c.height = video.current.videoHeight;
+    c.getContext('2d').drawImage(video.current, 0, 0);
+    setPhoto(c.toDataURL('image/jpeg', 0.9));
+    setEcran('apercu');
+  }
+  function importer(f) {
+    if (!f || !f.type?.startsWith('image/')) return;
+    const r = new FileReader();
+    r.onload = ev => { setPhoto(ev.target.result); setEcran('apercu'); };
+    r.readAsDataURL(f);
+  }
+  function analyserPhoto() {
+    if (!pret()) return;
+    localStorage.removeItem('reviz-ai-data');
+    localStorage.removeItem('reviz-lesson-text');
+    localStorage.setItem('reviz-captured-image', photo);
+    startAnalysisFromImage(photo, niveau); // l'appel part tout de suite ; la fiche affiche la préparation
+    // La fiche remplace le scan : « Mes leçons » de la fiche ne retombe pas sur le viseur.
+    navigate('/analyse', { replace: true, state: { depuisScan: true } });
+  }
+  const long = isLessonTextTooLong(texte);
+  const assez = texte.trim().length >= MIN;
+  function analyserTexte() {
+    if (!assez || !pret()) return;
+    const t = long ? truncateLessonText(texte) : texte;
+    localStorage.removeItem('reviz-ai-data');
+    localStorage.setItem('reviz-lesson-text', t);
+    startAnalysis(t, niveau);
+    navigate('/analyse', { replace: true, state: { depuisScan: true } });
+  }
+
+  const inputFichier = <input ref={fichier} type="file" accept="image/*" hidden onChange={e => importer(e.target.files?.[0])} />;
+  const fenetres = (
+    <>
+      {offre && <DecouvrirRevizPlus onClose={() => setOffre(false)} />}
+      {annule && <ToastPaiementAnnule onClose={fermerAnnule} />}
+      {niveauManquant && <NiveauManquant onClose={() => setNiveauManquant(false)} onProfil={() => navigate('/profil')} />}
+    </>
+  );
+  const racine = `app app--no-halo ch-page sc-page${isDesktop ? ' app--large ch-page--large sc-page--large' : ''}`;
+  const deco = (
+    <>
+      <span className="ch-deco ch-deco--a" aria-hidden="true" />
+      <span className="ch-deco ch-deco--b" aria-hidden="true" />
+      <span className="ch-point" aria-hidden="true" />
+      <span className="ch-grain" aria-hidden="true" />
+    </>
+  );
+
+  // ── Quota atteint : la carte remplace le choix ──
+  if (!statut.canScan && !hasRevizPlus) {
     return (
-      <p className="scan-quota">
-        <RevizPlusBadge />
-        <span>Leçons illimitées</span>
-      </p>
+      <div className={`${racine} sc-page--carte`} style={varsTeinte(TEINTES.peche)}>
+        <div className="ch-hero sc-hero sc-hero--centre">
+          {deco}
+          <div className="ch-haut"><button type="button" className="ch-retour" onClick={retour}><Chevron />Mes leçons</button></div>
+          <Reviz expression="endormi" lignes={['Belle semaine de travail.', 'Je fais une pause jusqu’à lundi.']} grand={isDesktop} />
+        </div>
+        <div className="sc-carte sc-carte--etat">
+          <h1 className="sc-carte-titre">Tu as utilisé tes scans de la semaine.</h1>
+          <p className="sc-carte-txt">Ils reviennent lundi.</p>
+          <span className="sc-segments sc-segments--large" aria-hidden="true">{Array.from({ length: statut.limit }, (_, i) => <i key={i} />)}</span>
+          <button type="button" className="sc-btn" onClick={() => setOffre(true)}>Scans illimités avec Réviz+</button>
+          <button type="button" className="sc-btn sc-btn--creme" onClick={() => navigate('/programme')}>Réviser mon programme en attendant</button>
+        </div>
+        {fenetres}
+      </div>
     );
   }
-  const texte = `${remaining} leçon${remaining > 1 ? 's' : ''} sur ${limit} cette semaine`;
+
+  // ── Viseur ──
+  if (ecran === 'viseur') {
+    return (
+      <div className={`${racine} sc-page--outil`}>
+        <div className="sc-barre">
+          <button type="button" className="sc-rond" onClick={() => setEcran('choix')} aria-label="Fermer la caméra"><Croix /></button>
+          <h1>Ta leçon en photo</h1>
+          {Number.isFinite(statut.remaining) && !hasRevizPlus
+            ? <span className="sc-puce"><i />{statut.remaining} {statut.remaining > 1 ? 'restants' : 'restant'}</span>
+            : null}
+        </div>
+        <div className="sc-outil">
+          <PetitReviz expression="determine" lignes={['Cadre toute la page.', isDesktop ? 'Tiens la page bien à plat.' : 'Entre les quatre coins.']} />
+          <div className={`sc-viseur sc-viseur--${camera}`}>
+            <video ref={video} autoPlay playsInline muted className={camera === 'active' ? '' : 'sc-cache'} />
+            {camera === 'active' && <span className="sc-coins" aria-hidden="true"><i /><i /><i /><i /></span>}
+            {camera === 'starting' && <p className="sc-viseur-etat"><span className="sc-anneau" aria-hidden="true" />J’allume la caméra…</p>}
+            {(camera === 'denied' || camera === 'none') && (
+              <div className="sc-refus">
+                <b>{camera === 'denied' ? 'Accès caméra refusé' : 'Pas de caméra ici'}</b>
+                <span>{camera === 'denied'
+                  ? 'Pour l’autoriser, ouvre les réglages de ton téléphone (ou de ton navigateur), puis active l’appareil photo pour Réviz. Tu peux aussi importer une photo.'
+                  : 'Importe une photo ou colle le texte de ta leçon.'}</span>
+                <button type="button" className="sc-btn sc-btn--petit" onClick={() => fichier.current?.click()}>Importer une photo</button>
+              </div>
+            )}
+          </div>
+          <ul className="sc-conseils sc-conseils--courts">
+            {CONSEILS.map(c => <li key={c.titre}><b>{c.titre}</b><span>{c.court}</span></li>)}
+          </ul>
+          <div className="sc-declencheur-ligne">
+            <button type="button" className="sc-bouton-rond sc-bouton-rond--lavande" onClick={() => fichier.current?.click()} aria-label="Importer une photo"><Image /></button>
+            <span className="sc-legende">Importer</span>
+            <button type="button" className="sc-declencheur" onClick={declencher} disabled={camera !== 'active'} aria-label="Prendre la photo" />
+            <button type="button" className="sc-bouton-rond sc-bouton-rond--menthe" onClick={() => setEcran('texte')} aria-label="Coller le texte"><Lignes /></button>
+            <span className="sc-legende">Texte</span>
+          </div>
+        </div>
+        {inputFichier}
+        {fenetres}
+      </div>
+    );
+  }
+
+  // ── Aperçu ──
+  if (ecran === 'apercu' && photo) {
+    return (
+      <div className={`${racine} sc-page--outil`}>
+        <div className="sc-barre">
+          <button type="button" className="sc-rond" onClick={() => setEcran(aCamera ? 'viseur' : 'choix')} aria-label="Retour"><Chevron /></button>
+          <h1>Vérifie ta photo</h1>
+        </div>
+        <div className="sc-outil">
+          <div className="sc-photo"><img src={photo} alt="La photo de ta leçon" /></div>
+          <PetitReviz expression="reflechit" lignes={['Tout est bien lisible ?', 'Sinon, reprends-la.']} />
+          <div className="sc-deux">
+            <button type="button" className="sc-btn sc-btn--blanc" onClick={() => { setPhoto(null); setEcran(aCamera ? 'viseur' : 'choix'); }}>Reprendre</button>
+            <button type="button" className="sc-btn" onClick={analyserPhoto}>C’est bon, analyse</button>
+          </div>
+          {Number.isFinite(statut.remaining) && !hasRevizPlus && (
+            <p className="sc-note">Ce scan utilise 1 de tes {pluriel(statut.remaining, 'scan')} {statut.remaining > 1 ? 'restants' : 'restant'}.</p>
+          )}
+        </div>
+        {fenetres}
+      </div>
+    );
+  }
+
+  // Le champ du texte collé : compteur, « Assez long », et la limite au-delà de laquelle on coupe.
+  const champTexte = (
+    <div className={`sc-texte${texte ? ' is-rempli' : ''}`}>
+      <textarea
+        className="scan-textarea"
+        value={texte}
+        onChange={e => setTexte(e.target.value)}
+        placeholder="Colle ici le texte de ta leçon…"
+        aria-label="Texte de ta leçon"
+        autoFocus={ecran === 'texte'}
+      />
+      <div className="sc-texte-pied" aria-live="polite">
+        <span>{texte.length ? `${nombre(texte.length)} caractères` : '0 caractère'}{!assez && texte.length > 0 ? ` sur ${MIN}` : ''}</span>
+        {long ? <span className="sc-pastille sc-pastille--peche"><i />Analyse du début</span>
+          : assez ? <span className="sc-pastille"><i />Assez long</span> : null}
+      </div>
+      {long && <p className="sc-limite"><b>J’analyse jusqu’ici</b>Ton texte est long : j’analyse les {LESSON_TEXT_MAX_LABEL} premiers caractères.</p>}
+    </div>
+  );
+  const boutonAnalyser = (
+    <button type="button" className="sc-btn" disabled={!assez} onClick={analyserTexte}>
+      {long ? `Analyser les ${LESSON_TEXT_MAX_LABEL} premiers caractères` : 'Analyser ce texte'}{assez && !long && <Fleche />}
+    </button>
+  );
+
+  // ── Texte collé (téléphone) ──
+  if (ecran === 'texte' && !isDesktop) {
+    return (
+      <div className={`${racine} sc-page--outil`}>
+        <div className="sc-barre">
+          <button type="button" className="sc-rond" onClick={() => setEcran('choix')} aria-label="Retour"><Chevron /></button>
+          <h1>Coller le texte</h1>
+        </div>
+        <div className="sc-outil">
+          <PetitReviz expression="content" lignes={['Colle ta leçon ici.', `${MIN} caractères au moins.`]} />
+          {champTexte}
+          {boutonAnalyser}
+          <button type="button" className="sc-lien sc-lien--centre" onClick={() => setEcran('viseur')}>Prendre une photo plutôt</button>
+        </div>
+        {fenetres}
+      </div>
+    );
+  }
+
+  // ── Choix ──
+  const quota = <Quota statut={statut} plus={hasRevizPlus} onOffre={() => setOffre(true)} grand={isDesktop} />;
+  if (isDesktop) {
+    return (
+      <div className={racine} style={varsTeinte(TEINTES.peche)}>
+        <div className="content sc-defile">
+          <div className="ch-hero sc-hero">
+            {deco}
+            <div className="ch-haut"><button type="button" className="ch-retour" onClick={retour}><Chevron />Mes leçons</button></div>
+            <div className="sc-hero-grille">
+              <div>
+                <span className="ch-surtitre">Nouvelle leçon</span>
+                <h1 className="ch-titre sc-titre">Scanner une leçon</h1>
+              </div>
+              <Reviz expression="content" entree="coucou" lignes={['Une photo de ta leçon.', 'Je m’occupe du reste.']} grand pointe="droite" />
+            </div>
+          </div>
+          <div className="sc-colonnes">
+            <section className="sc-carte sc-depot-carte" aria-label="Photo de ta leçon">
+              <div
+                className={`sc-depot${depot ? ' is-survol' : ''}`}
+                onDragOver={e => { e.preventDefault(); setDepot(true); }}
+                onDragLeave={() => setDepot(false)}
+                onDrop={e => { e.preventDefault(); setDepot(false); importer([...(e.dataTransfer?.files ?? [])].find(f => f.type.startsWith('image/'))); }}
+              >
+                <span className="sc-depot-rond" aria-hidden="true"><Image taille={26} /></span>
+                <b>Glisse la photo de ta leçon ici, ou choisis-la</b>
+                <button type="button" className="sc-btn sc-btn--petit" onClick={() => fichier.current?.click()}>Choisir une photo</button>
+              </div>
+              {aCamera ? (
+                <button type="button" className="sc-camera" onClick={() => setEcran('viseur')}><Appareil taille={18} /><b>Ta leçon est devant toi ?</b> Utiliser la caméra<PetitChevron /></button>
+              ) : (
+                <p className="sc-camera sc-camera--sans"><SansCamera /><b>Pas de caméra ici.</b> Importe une photo ou colle le texte.</p>
+              )}
+            </section>
+            <section className="sc-carte sc-texte-carte" aria-label="Coller le texte">
+              <div className="sc-texte-tete">
+                <span className="sc-mini-rond sc-mini-rond--menthe" aria-hidden="true"><Lignes taille={20} /></span>
+                <span><b>Coller le texte</b><span>Au moins {MIN} caractères.</span></span>
+              </div>
+              {champTexte}
+              <div className="sc-texte-action">{boutonAnalyser}</div>
+            </section>
+            <aside className="sc-cote">
+              <div className="sc-carte sc-carte--petite">{quota}</div>
+              <div className="sc-carte sc-carte--petite">
+                <span className="sc-sur">Pour un bon scan</span>
+                <ol className="sc-conseils">
+                  {CONSEILS.map((c, i) => <li key={c.titre}><i>{i + 1}</i><span><b>{c.titre}</b><span>{c.texte}</span></span></li>)}
+                </ol>
+              </div>
+            </aside>
+          </div>
+        </div>
+        {inputFichier}
+        {fenetres}
+      </div>
+    );
+  }
   return (
-    <p className="scan-quota">
-      {plus ? <RevizPlusBadge /> : <span className="scan-quota-free">Gratuit</span>}
-      <span>{texte}</span>
-    </p>
+    <div className={racine} style={varsTeinte(TEINTES.peche)}>
+      <div className="content sc-defile">
+        <div className="ch-hero sc-hero">
+          {deco}
+          <div className="ch-haut"><button type="button" className="ch-retour" onClick={retour}><Chevron />Mes leçons</button></div>
+          <span className="ch-surtitre">Nouvelle leçon</span>
+          <h1 className="ch-titre sc-titre">Scanner une leçon</h1>
+          <Reviz expression="content" entree="coucou" lignes={['Une photo de ta leçon.', 'Je m’occupe du reste.']} />
+        </div>
+        <button type="button" className="sc-carte sc-photo-carte" onClick={() => setEcran('viseur')}>
+          <span className="sc-mini-rond" aria-hidden="true"><Appareil /></span>
+          <span className="sc-carte-txt2"><b>Prendre une photo</b><span>Avec la caméra du téléphone</span></span>
+          <span className="sc-go" aria-hidden="true"><Fleche /></span>
+        </button>
+        <div className="sc-paire">
+          <button type="button" className="sc-carte sc-petite-carte" onClick={() => fichier.current?.click()}>
+            <span className="sc-mini-rond sc-mini-rond--lavande" aria-hidden="true"><Image /></span>
+            <b>Importer une photo</b><span>Depuis ta pellicule</span>
+          </button>
+          <button type="button" className="sc-carte sc-petite-carte" onClick={() => setEcran('texte')}>
+            <span className="sc-mini-rond sc-mini-rond--menthe" aria-hidden="true"><Lignes /></span>
+            <b>Coller le texte</b><span>{MIN} caractères minimum</span>
+          </button>
+        </div>
+        <div className="sc-carte sc-quota-carte">{quota}</div>
+      </div>
+      {inputFichier}
+      {fenetres}
+      <BottomNav />
+    </div>
   );
 }
+
+/** Réviz, la mascotte animée, en grand dans le héros : il arrive, puis parle dans sa bulle. */
+function Reviz({ expression, entree, lignes, grand, pointe = 'bas' }) {
+  const pantin = useRef(null);
+  const [parle, setParle] = useState(false);
+  const texte = lignes.join('\n');
+  useEffect(() => { if (parle) pantin.current?.dire(texte); }, [texte, parle]);
+  // Si le moteur ne charge pas, la bulle s'affiche quand même (page visible seulement).
+  useEffect(() => {
+    let t;
+    const essai = () => { t = setTimeout(() => (document.hidden ? essai() : setParle(true)), 4000); };
+    essai();
+    return () => clearTimeout(t);
+  }, []);
+  return (
+    <div className={`sc-reviz${pointe === 'droite' ? ' sc-reviz--cote' : ''}`}>
+      <BulleReviz key={texte} lignes={lignes} parle={parle} pointe={pointe} grande={grand} className="sc-bulle" />
+      <Pantin ref={pantin} size={grand ? 300 : 210} expression={expression} entree={entree} repli={null}
+        onEntree={() => setParle(true)} onClick={() => pantin.current?.geste('saut')} label="Réviz, ta mascotte" />
+    </div>
+  );
+}
+
+/** Réviz en petit à côté de sa bulle (viseur, aperçu, texte). */
+function PetitReviz({ expression, lignes }) {
+  return (
+    <div className="sc-petit-reviz">
+      <Pantin size={76} expression={expression} repli={null} label="Réviz" />
+      <BulleReviz lignes={lignes} pointe="gauche" className="sc-bulle" />
+    </div>
+  );
+}
+
+// Ce que Réviz fait d'une leçon scannée (mode essai sur ordinateur, à côté de la carte du compte).
+const FORMATS_ESSAI = [
+  { titre: 'Un résumé.', texte: 'L’essentiel du chapitre, avec la méthode et les pièges.' },
+  { titre: 'Des flashcards.', texte: 'Elles reviennent au bon moment pour ne rien oublier.' },
+  { titre: 'Un quiz.', texte: 'Corrigé question par question, avec ton score.' },
+  { titre: 'Une carte mentale.', texte: 'Tout le chapitre d’un coup d’œil.' },
+];
+
+/** Mode essai : le scan demande un compte gratuit, sans culpabiliser. */
+function Essai({ onCompte, onConnexion, onProgramme, grand }) {
+  // Ordinateur : la composition du vrai scan (titre et Réviz en haut, trois colonnes), pas une carte
+  // seule au milieu d'un grand vide.
+  if (grand) return <EssaiLarge onCompte={onCompte} onConnexion={onConnexion} onProgramme={onProgramme} />;
+  return (
+    <div className={`app app--no-halo ch-page sc-page sc-page--carte${grand ? ' app--large ch-page--large sc-page--large' : ''}`} style={varsTeinte(TEINTES.peche)}>
+      <div className="ch-hero sc-hero sc-hero--centre">
+        <span className="ch-deco ch-deco--a" aria-hidden="true" />
+        <span className="ch-deco ch-deco--b" aria-hidden="true" />
+        <span className="ch-grain" aria-hidden="true" />
+        <Reviz expression="content" entree="coucou" lignes={['Donne-moi tes leçons.', 'Il te faut juste un compte gratuit.']} grand={grand} />
+      </div>
+      <div className="sc-carte sc-carte--etat">
+        <h1 className="sc-carte-titre">Garde tes leçons</h1>
+        <p className="sc-carte-txt">Ton compte garde tes leçons scannées, tes flashcards et tes quiz.</p>
+        <button type="button" className="sc-btn" onClick={onCompte}>Créer mon compte gratuit</button>
+        <button type="button" className="sc-btn sc-btn--creme" onClick={onConnexion}>J’ai déjà un compte</button>
+        <p className="sc-note sc-note--gauche">Sans compte, tu peux réviser tout le programme de ta classe. <button type="button" className="sc-lien" onClick={onProgramme}>Voir le programme<PetitChevron /></button></p>
+      </div>
+    </div>
+  );
+}
+
+function EssaiLarge({ onCompte, onConnexion, onProgramme }) {
+  return (
+    <div className="app app--no-halo ch-page sc-page app--large ch-page--large sc-page--large sc-page--essai" style={varsTeinte(TEINTES.peche)}>
+      <div className="content sc-defile">
+        <div className="ch-hero sc-hero">
+          <span className="ch-deco ch-deco--a" aria-hidden="true" />
+          <span className="ch-deco ch-deco--b" aria-hidden="true" />
+          <span className="ch-grain" aria-hidden="true" />
+          <div className="sc-hero-grille">
+            <div>
+              <span className="ch-surtitre">Nouvelle leçon</span>
+              <h1 className="ch-titre sc-titre">Scanner une leçon</h1>
+            </div>
+            <Reviz expression="content" entree="coucou" lignes={['Donne-moi tes leçons.', 'Il te faut juste un compte gratuit.']} grand pointe="droite" />
+          </div>
+        </div>
+        <div className="sc-colonnes">
+          <section className="sc-carte sc-essai-compte" aria-labelledby="sc-essai-titre">
+            <h2 id="sc-essai-titre" className="sc-carte-titre">Garde tes leçons</h2>
+            <p className="sc-carte-txt">Ton compte garde tes leçons scannées, tes flashcards et tes quiz, sur ton téléphone comme sur l’ordinateur.</p>
+            <button type="button" className="sc-btn" onClick={onCompte}>Créer mon compte gratuit</button>
+            <button type="button" className="sc-btn sc-btn--creme" onClick={onConnexion}>J’ai déjà un compte</button>
+          </section>
+          <section className="sc-carte sc-carte--petite sc-essai-formats" aria-labelledby="sc-essai-formats">
+            <span id="sc-essai-formats" className="sc-sur">Ce que je fais de ta leçon</span>
+            <ol className="sc-conseils">
+              {FORMATS_ESSAI.map((f, i) => <li key={f.titre}><i>{i + 1}</i><span><b>{f.titre}</b><span>{f.texte}</span></span></li>)}
+            </ol>
+          </section>
+          <aside className="sc-cote">
+            <div className="sc-carte sc-carte--petite">
+              <span className="sc-sur">Sans compte</span>
+              <p className="sc-carte-txt sc-essai-txt">Tu peux déjà réviser tout le programme de ta classe.</p>
+              <button type="button" className="sc-lien" onClick={onProgramme}>Voir le programme<PetitChevron /></button>
+            </div>
+            <div className="sc-carte sc-carte--petite">
+              <span className="sc-sur">Pour un bon scan</span>
+              <ol className="sc-conseils">
+                {CONSEILS.map((c, i) => <li key={c.titre}><i>{i + 1}</i><span><b>{c.titre}</b><span>{c.texte}</span></span></li>)}
+              </ol>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function NiveauManquant({ onClose, onProfil }) {
+  const ref = useModalA11y(onClose, true);
+  return (
+    <div className="sc-voile" onClick={onClose}>
+      <div className="sc-feuille sc-feuille--centre" ref={ref} role="dialog" aria-modal="true" aria-labelledby="sc-niveau" onClick={e => e.stopPropagation()}>
+        <Pantin size={130} expression="reflechit" repli={null} label="Réviz" />
+        <h2 id="sc-niveau">Dis-moi d’abord ta classe</h2>
+        <p className="sc-carte-txt">J’adapte tes révisions à ta classe. Ça se règle en 10 secondes.</p>
+        <div className="sc-deux">
+          <button type="button" className="sc-btn sc-btn--creme" onClick={onClose}>Plus tard</button>
+          <button type="button" className="sc-btn" onClick={onProfil}>Aller au profil</button>
+        </div>
+      </div>
+    </div>
+  );
+}
+

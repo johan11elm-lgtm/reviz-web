@@ -28,6 +28,9 @@ export default async function handler(req, res) {
     return res.status(401).send('Unauthorized')
   }
   const uid = decoded.uid
+  // Comptes anonymes (invités de la Battle) : créés à volonté sans e-mail,
+  // chacun aurait son scan d'essai → appels IA gratuits illimités.
+  if (decoded.firebase?.sign_in_provider === 'anonymous') return res.status(401).send('Unauthorized')
 
   // Email pas encore confirmé (cf. _compteVerifie.js) : un scan d'essai,
   // ensuite EMAIL_NOT_VERIFIED (_quota.js, SCANS_SANS_EMAIL).
@@ -92,7 +95,7 @@ export default async function handler(req, res) {
   const text_content = result.content?.[0]?.text ?? ''
 
   // Refus de sûreté (contenu non scolaire) : on ne facture pas un scan à l'élève.
-  if (consumed && /"error"\s*:\s*"NON_SCOLAIRE"/.test(text_content)) {
+  if (consumed && /"error"\s*:\s*"(NON_SCOLAIRE|ILLISIBLE)"/.test(text_content)) {
     await refundQuota({ db, uid, sansEmail }).catch(() => {})
   }
 

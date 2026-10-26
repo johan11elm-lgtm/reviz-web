@@ -72,6 +72,20 @@ describe('buildUpdate', () => {
     expect(buildUpdate('ouverture', { anciennete: 'compte_j31_plus' }).ouverture.anciennete).toEqual({ compte_j31_plus: 1 })
     expect(buildUpdate('ouverture', { anciennete: 'j1' })).toEqual({ ouverture: { total: 1 } })
   })
+  it('compte la vidéo d\'origine (?v=) seulement si son code est au tableau', () => {
+    expect(buildUpdate('quiz_termine', { via: 'reseaux', v: 'x0', source: 'programme' })).toEqual({
+      quiz_termine: { total: 1, source: { programme: 1 }, via: { reseaux: 1 }, v: { x0: 1 } },
+    })
+    expect(buildUpdate('essai_demarre', { v: 'zz99' })).toEqual({ essai_demarre: { total: 1 } })
+  })
+  it('compte un refus du scan par code et par raison, seulement les raisons de la liste fermée', () => {
+    expect(buildUpdate('scan_erreur', { code: 'ILLISIBLE', raison: 'floue', source: 'photo' })).toEqual({
+      scan_erreur: { total: 1, source: { photo: 1 }, code: { ILLISIBLE: 1 }, raison: { floue: 1 } },
+    })
+    expect(buildUpdate('scan_erreur', { code: 'NON_SCOLAIRE', raison: 'un selfie de Léa' })).toEqual({
+      scan_erreur: { total: 1, code: { NON_SCOLAIRE: 1 } },
+    })
+  })
   it('refuse un événement inconnu', () => {
     expect(buildUpdate('mouchard', {})).toBeNull()
   })

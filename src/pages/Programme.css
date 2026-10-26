@@ -1,149 +1,375 @@
-/* ─── Mon programme (liste des matières et page d'une matière) ──────
- * Même langage que Cours : cartes blanches arrondies, halo de page,
- * mascottes de matière. Les tuiles sont des <button> : on neutralise
- * les styles natifs et on hérite de .rv-card / .rv-card--link. */
-
-.programme-page .programme-content {
+/* ─── Programme (handoff Claude Design du 21/10) ─────────────────────
+ * Héros pêche avec Réviz qui parle, carte des leçons scannées à cheval,
+ * matières en anneaux, chapitres sur une route en vague. Bulle et carte
+ * viennent de components/reviz ; ici, leur place et le reste de la page. */
+.prg-page { --prg-encre: #1B1A23; --prg-doux: #6E675B; --prg-fond: #F8EFE7; background: var(--prg-fond); }
+.prg-page .prg-defile {
   flex: 1;
-  padding: 8px var(--page-gutter) 110px;
   overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  gap: var(--gap-cards);
+  overflow-x: hidden;
+  scrollbar-width: none;
+  container-type: inline-size;
+}
+.prg-page .prg-defile::-webkit-scrollbar { display: none; }
+
+/* ── Héros : le même que l'accueil (hauteur, bulles, Réviz qui tombe et parle) ── */
+.prg-page .prg-hero {
+  position: relative;
+  height: calc(414px + env(safe-area-inset-top, 0px));
+  box-sizing: border-box;
+  padding: calc(env(safe-area-inset-top, 0px) + 18px) 22px 0;
+  background: #FFB37A;
+  border-radius: 0 0 50% 50% / 0 0 64px 64px;
+  overflow: hidden;
+}
+.prg-page .prg-grain {
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.35 0 0 0 0 0.2 0 0 0 0 0.1 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: .32;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+.prg-page .prg-deco {
+  position: absolute;
+  border-radius: 50%;
+  background: #FFC596;
+  box-shadow: inset 0 -24px 40px rgba(120,60,20,.08), inset 0 16px 30px rgba(255,255,255,.35);
+}
+.prg-page .prg-deco--a { right: -70px; top: calc(150px + env(safe-area-inset-top, 0px)); width: 240px; height: 240px; }
+.prg-page .prg-deco--b { left: -50px; top: calc(270px + env(safe-area-inset-top, 0px)); width: 140px; height: 140px; }
+.prg-page .prg-point {
+  position: absolute;
+  left: 26px;
+  top: calc(200px + env(safe-area-inset-top, 0px));
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: #C9C2F2;
+  box-shadow: inset 0 -8px 14px rgba(0,0,0,.08), 0 8px 16px -6px rgba(120,60,20,.25);
 }
 
-.programme-page .programme-note {
+.prg-page .prg-hero-haut { position: relative; z-index: 2; }
+.prg-page .prg-date {
+  display: block;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: .4px;
+  text-transform: uppercase;
+  color: rgba(27,26,35,.62);
+}
+.prg-page .prg-hero-titre { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.prg-page .prg-titre {
   margin: 0;
-  font-size: 13px;
-  line-height: 1.45;
-  color: var(--text-secondary);
+  font-family: var(--font-display);
+  font-size: 42px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -1.6px;
+  color: var(--prg-encre);
 }
-
-.programme-page .programme-callout {
-  flex-shrink: 0;
-  font-size: 13px;
+.prg-page .prg-choix { position: relative; }
+.prg-page .prg-classe {
+  padding: 8px 12px;
+  border: 0;
+  border-radius: 999px;
+  background: #fff;
+  box-shadow: 0 4px 12px rgba(150,70,20,.12);
+  font: 700 13px 'Geist', system-ui, sans-serif;
+  color: var(--prg-encre);
+  cursor: pointer;
+  white-space: nowrap;
 }
-
-/* ── Tuiles matières : deux colonnes sur téléphone ── */
-.programme-page .programme-grid {
-  flex-shrink: 0;
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px;
+.prg-page .prg-choix-liste {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 8px);
+  z-index: 10;
+  min-width: 170px;
+  margin: 0;
+  padding: 6px;
+  list-style: none;
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: 0 16px 36px rgba(120,60,20,.22);
 }
+.prg-page .prg-choix-liste button {
+  width: 100%;
+  padding: 10px 12px;
+  border: 0;
+  border-radius: 12px;
+  background: none;
+  text-align: left;
+  font: 600 14px 'Geist', system-ui, sans-serif;
+  color: var(--prg-encre);
+  cursor: pointer;
+}
+.prg-page .prg-choix-liste [aria-selected="true"] button { background: #FFE6D2; color: #C25407; }
 
-.programme-page .programme-matiere {
+/* Réviz en bas du héros, sa bulle posée par le bas juste au-dessus de sa tête
+   (assez haut pour laisser voir l'accessoire de la matière sur sa tête) */
+.prg-page .prg-pantin-place { position: absolute; left: 0; right: 0; bottom: 28px; z-index: 1; display: flex; justify-content: center; }
+.prg-page .prg-bulle { position: absolute; z-index: 3; left: 22px; right: 22px; bottom: 268px; }
+
+/* ── Mes leçons scannées, à cheval sur le bas du héros (comme la carte de l'accueil) ── */
+.prg-page .prg-scans-place { position: relative; z-index: 3; height: 70px; margin-top: -36px; padding: 0 22px; display: flex; justify-content: center; }
+
+.prg-page .prg-pad { padding: 16px 20px 0; }
+.prg-page .prg-note { margin: 16px 20px 0; font-size: 13px; line-height: 1.45; color: var(--prg-doux); }
+.prg-page .prg-erreur { margin: 28px 20px 0; }
+
+/* ── Sections ── */
+.prg-page .prg-grille { display: flex; flex-direction: column; }
+.prg-page .prg-tete { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin: 28px 20px 12px; }
+.prg-page .prg-bloc--chapitres .prg-tete { margin: 18px 20px 0; }
+.prg-page .prg-titre2 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: -.03em;
+  line-height: 1.05;
+  color: var(--prg-encre);
+}
+.prg-page .prg-compte { font-size: 13px; font-weight: 600; color: var(--prg-doux); white-space: nowrap; }
+
+/* ── Matières : anneaux de progression ── */
+.prg-page .prg-matieres {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  padding: 4px 14px 10px;
+  scrollbar-width: none;
+}
+.prg-page .prg-matieres::-webkit-scrollbar { display: none; }
+.prg-page .prg-matiere {
+  flex: none;
+  width: 80px;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  min-width: 0;
-  width: 100%;
-  padding: 12px 14px 16px;
-  text-align: left;
-  font-family: inherit;
-  color: inherit;
-  border: none;
+  align-items: center;
+  gap: 6px;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.prg-page .prg-anneau { position: relative; display: block; width: 76px; height: 76px; }
+.prg-page .prg-anneau svg { position: absolute; inset: 0; transform: rotate(-90deg); }
+.prg-page .prg-anneau-rond {
+  position: absolute;
+  inset: 7px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 4px 10px rgba(160,80,20,.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition: background .2s, box-shadow .2s, transform .15s;
+}
+.prg-page .prg-matiere--on .prg-anneau-rond { background: #FFE6D2; box-shadow: 0 0 0 2px #fff, 0 6px 14px rgba(160,80,20,.18); }
+.prg-page .prg-matiere:active .prg-anneau-rond { transform: scale(.94); }
+.prg-page .prg-matiere-nom { font-size: 13px; font-weight: 700; line-height: 1.1; text-align: center; color: var(--prg-doux); }
+.prg-page .prg-matiere--on .prg-matiere-nom { color: var(--prg-encre); }
+.prg-page .prg-matiere-pct { margin-top: -4px; font-size: 12px; font-weight: 600; color: var(--prg-doux); }
+.prg-page .prg-matiere--vide .prg-anneau { border-radius: 50%; background: #EFE5D8; }
+.prg-page .prg-matiere:focus-visible { outline: none; }
+.prg-page .prg-matiere:focus-visible .prg-anneau-rond { box-shadow: 0 0 0 3px var(--prg-encre); }
+
+/* ── Chapitres : la route en vague ── */
+.prg-page .prg-piste {
+  position: relative;
+  margin-top: 8px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+  scroll-behavior: smooth;
+}
+.prg-page .prg-piste::-webkit-scrollbar { display: none; }
+.prg-page .prg-piste-int { position: relative; }
+.prg-page .prg-route { position: absolute; inset: 0; overflow: visible; }
+.prg-page .prg-case {
+  position: absolute;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border-radius: 50%;
+  border: 3px solid #fff;
+  background: #FFE6D2;
+  box-shadow: 0 6px 0 rgba(194,84,7,.28);
+  cursor: pointer;
+  transition: transform .15s;
+  -webkit-tap-highlight-color: transparent;
+}
+.prg-page .prg-case:active { transform: translateY(3px); box-shadow: 0 3px 0 rgba(194,84,7,.28); }
+.prg-page .prg-case--done { background: #34C77B; box-shadow: 0 6px 0 #1F8A52; }
+.prg-page .prg-case--current { background: #fff; border: 4px solid #C25407; box-shadow: 0 6px 0 #8F3E05; }
+.prg-page .prg-case--choisie:not(.prg-case--current) { border: 3px solid var(--prg-encre); }
+.prg-page .prg-case:focus-visible { outline: 3px solid var(--prg-encre); outline-offset: 3px; }
+.prg-page .prg-case-rond { display: flex; align-items: center; justify-content: center; border-radius: 50%; background: #FFE6D2; overflow: hidden; }
+.prg-page .prg-case-num { font-family: var(--font-display); font-size: 20px; font-weight: 800; color: var(--prg-doux); }
+.prg-page .prg-case--commence .prg-case-num,
+.prg-page .prg-case--a-revoir .prg-case-num { color: #C25407; }
+.prg-page .prg-case-label { position: absolute; display: flex; flex-direction: column; align-items: center; text-align: center; pointer-events: none; }
+.prg-page .prg-case-etat { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+.prg-page .prg-case-nom {
+  margin-top: 2px;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--prg-encre);
+  text-wrap: pretty;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.prg-page .prg-case-nom--todo { color: var(--prg-doux); }
+.prg-page .prg-trophee { position: absolute; width: 120px; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.prg-page .prg-trophee-rond { width: 68px; height: 68px; border-radius: 50%; background: #FFE6D2; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+.prg-page .prg-trophee-txt { font-size: 13px; font-weight: 700; color: var(--prg-doux); }
+
+/* ── Détail de la case choisie ── */
+.prg-page .prg-detail-place { position: relative; margin: 6px 20px 0; }
+.prg-page .prg-detail {
+  position: relative;
+  padding: 16px;
+  border-radius: 24px;
+  background: #fff;
+  box-shadow: 0 12px 30px rgba(160,80,20,.14);
+}
+.prg-page .prg-detail-haut { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+.prg-page .prg-detail-etat { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+.prg-page .prg-detail-meta { font-size: 12px; font-weight: 600; color: var(--prg-doux); }
+.prg-page .prg-detail-nom {
+  margin: 4px 0 0;
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: -.02em;
+  line-height: 1.15;
+  color: var(--prg-encre);
+}
+.prg-page .prg-detail-contenu { margin: 6px 0 0; font-size: 13px; font-weight: 500; color: var(--prg-doux); }
+.prg-page .prg-detail-actions { display: flex; gap: 8px; margin-top: 14px; }
+.prg-page .prg-go {
+  flex: 1;
+  height: 46px;
+  border: 0;
+  border-radius: 999px;
+  background: #C25407;
+  color: #fff;
+  font: 700 15px 'Geist', system-ui, sans-serif;
+  cursor: pointer;
+  transition: background .15s, transform .12s;
+}
+.prg-page .prg-go:active { transform: scale(.97); }
+.prg-page .prg-go:disabled { background: #D9C9B8; cursor: default; }
+.prg-page .prg-scanner {
+  flex: none;
+  height: 46px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 16px;
+  border: 0;
+  border-radius: 999px;
+  background: #FFE6D2;
+  color: var(--prg-encre);
+  font: 700 14px 'Geist', system-ui, sans-serif;
   cursor: pointer;
 }
 
-/* Les poses ont une marge transparente : on recale la mascotte sur le texte */
-.programme-page .programme-matiere-mascot {
-  flex-shrink: 0;
-  margin: 0 0 6px -6px;
+/* ─── Ordinateur : héros de l'accueil (titre en haut à gauche, Réviz et sa bulle centrés) ─── */
+.prg-page--large .prg-hero { height: auto; margin-top: 0; padding: 32px 56px 72px; border-radius: 0 0 50% 50% / 0 0 80px 80px; }
+.prg-page--large .prg-deco--a { right: 18%; top: -120px; width: 520px; height: 520px; box-shadow: inset 0 -40px 60px rgba(120,60,20,.08), inset 0 24px 40px rgba(255,255,255,.35); }
+.prg-page--large .prg-deco--b { left: -70px; top: 260px; width: 260px; height: 260px; box-shadow: none; }
+.prg-page--large .prg-point { left: auto; right: 12%; top: 380px; width: 18px; height: 18px; box-shadow: none; }
+/* La rangée du titre laisse libre le coin du menu (NavHaut). */
+.prg-page--large .prg-hero-haut { max-width: 1328px; margin: 0 auto; padding-right: 380px; min-height: 58px; }
+.prg-page--large .prg-date { font-size: 12px; letter-spacing: .12em; color: var(--prg-encre); opacity: .7; }
+.prg-page--large .prg-hero-titre { justify-content: flex-start; gap: 16px; margin-top: 4px; }
+.prg-page--large .prg-titre { letter-spacing: -.04em; }
+.prg-page--large .prg-scene { position: relative; z-index: 1; display: flex; align-items: center; justify-content: center; gap: 12px; margin-top: 4px; }
+.prg-page--large .prg-scene-txt { position: relative; z-index: 2; width: 500px; display: flex; flex-direction: column; }
+.prg-page--large .prg-bulle { position: relative; left: auto; right: auto; bottom: auto; }
+.prg-page--large .prg-scans-place { height: 84px; margin: 28px 0 0; padding: 0; justify-content: flex-start; }
+.prg-page--large .prg-pantin { position: relative; flex: none; }
+@media (max-width: 1240px) {
+  .prg-page--large .prg-pantin { width: 320px !important; height: 320px !important; }
+  .prg-page--large .prg-scene-txt { width: 420px; }
+  .prg-page--large .rv-bulle-txt { max-width: 400px; font-size: 30px; }
+  .prg-page--large .rv-bulle-ligne + .rv-bulle-ligne { font-size: 18px; }
 }
+.prg-page--large .prg-note { margin: 20px 56px 0; }
 
-.programme-page .programme-matiere-name {
-  font-family: 'Geist', sans-serif;
-  font-size: 16px;
-  font-weight: 800;
-  letter-spacing: -0.3px;
-  line-height: 1.2;
-  color: var(--text-primary);
+.prg-page--large .prg-grille {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 32px;
+  max-width: 1440px;
+  box-sizing: border-box;
+  margin: 0 auto;
+  padding: 48px 56px 64px;
+  grid-auto-rows: max-content;
 }
+.prg-page--large .prg-tete,
+.prg-page--large .prg-bloc--chapitres .prg-tete { margin: 0 0 16px; }
+.prg-page--large .prg-bloc--chapitres .prg-tete { margin-bottom: 8px; }
+.prg-page--large .prg-titre2 { font-size: 26px; }
+.prg-page--large .prg-compte { font-size: 14px; }
+.prg-page--large .prg-matieres {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
+  gap: 20px 8px;
+  overflow: visible;
+  padding: 24px 12px;
+  border-radius: 28px;
+  background: #fff;
+  box-shadow: 0 12px 30px rgba(160,80,20,.10);
+}
+.prg-page--large .prg-matiere { width: auto; gap: 8px; }
+.prg-page--large .prg-anneau-rond { inset: 8px; background: var(--prg-fond); box-shadow: none; }
+.prg-page--large .prg-matiere--on .prg-anneau-rond { background: #FFE6D2; box-shadow: 0 0 0 2px #fff, 0 6px 14px rgba(160,80,20,.18); }
+.prg-page--large .prg-matiere-nom { font-size: 14px; }
+.prg-page--large .prg-matiere-pct { font-size: 13px; }
+.prg-page--large .prg-matiere:hover .prg-anneau-rond { transform: translateY(-2px); }
+.prg-page--large .prg-piste { margin-top: 0; }
+.prg-page--large .prg-case:hover { transform: translateY(-2px); }
+.prg-page--large .prg-trophee-rond { width: 72px; height: 72px; }
 
-.programme-page .programme-matiere-status {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  margin: 4px 0 14px;
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--text-muted);
-}
-.programme-page .programme-matiere-status .rv-ico { font-size: 13px; }
-.programme-page .programme-matiere-status--revoir { color: var(--accent-orange-ink); }
-.programme-page .programme-matiere-status--fini { color: var(--accent-green-ink); }
-
-/* Une encoche par chapitre, dans l'ordre de l'année : mêmes couleurs que
- * les étapes du chemin (orange = commencé ou à revoir, vert = maîtrisé).
- * Poussée en bas de tuile pour rester alignée d'une tuile à l'autre. */
-.programme-page .programme-strip {
-  display: flex;
-  gap: 3px;
-  width: 100%;
-  margin-top: auto;
-}
-.programme-page .programme-strip-seg {
-  flex: 1;
-  height: 6px;
+/* Bulle de détail : pointe vers la case choisie */
+.prg-page--large .prg-detail-place { margin: 10px 0 0; }
+.prg-page--large .prg-detail { padding: 22px; border-radius: 28px; }
+.prg-page--large .prg-detail::before {
+  content: '';
+  position: absolute;
+  top: -9px;
+  left: calc(var(--pointe) - 10px);
+  width: 20px;
+  height: 20px;
+  background: #fff;
   border-radius: 3px;
-  background: var(--bg-muted);
+  transform: rotate(45deg);
+  transition: left .25s cubic-bezier(.3,1.3,.5,1);
 }
-.programme-page .programme-strip-seg--commence {
-  background: color-mix(in srgb, var(--accent-orange) 45%, var(--bg-muted));
-}
-.programme-page .programme-strip-seg--a-revoir { background: var(--accent-orange); }
-.programme-page .programme-strip-seg--maitrise { background: var(--accent-green); }
-.programme-page .programme-strip-seg--bientot { opacity: 0.45; }
+.prg-page--large .prg-detail-haut { justify-content: flex-start; gap: 12px; }
+.prg-page--large .prg-detail-etat { font-size: 12px; }
+.prg-page--large .prg-detail-meta { font-size: 13px; }
+.prg-page--large .prg-detail-nom { font-size: 26px; }
+.prg-page--large .prg-detail-contenu { font-size: 14px; }
+.prg-page--large .prg-detail-actions { margin-top: 16px; gap: 10px; }
+.prg-page--large .prg-go { flex: none; height: 48px; padding: 0 28px; }
+.prg-page--large .prg-go:not(:disabled):hover { background: #8F3E05; }
+.prg-page--large .prg-scanner { height: 48px; padding: 0 18px; }
 
-/* Prochaine étape : seulement sur ordinateur (desktop.css), la tuile de
- * téléphone reste compacte. */
-.programme-page .programme-matiere-next { display: none; }
-
-/* ── Squelette ── */
-.programme-page .programme-matiere--skeleton {
-  gap: 10px;
-  min-height: 150px;
-  cursor: default;
-}
-.programme-page .programme-matiere--skeleton .rv-skeleton--icon { width: 56px; height: 56px; }
-.programme-page .programme-matiere--skeleton .rv-skeleton--title { width: 70%; }
-.programme-page .programme-matiere--skeleton .rv-skeleton--text { width: 45%; }
-
-.programme-page .programme-empty {
-  flex-shrink: 0;
-}
-
-/* ── Page matière : chemin des chapitres + rail de progression ── */
-.programme-page .programme-path-layout {
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-}
-.programme-page .programme-path-rail { display: none; }
-.programme-page .programme-path-summary {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-}
-.programme-page .programme-path-summary-text { flex: 1; min-width: 0; }
-.programme-page .programme-path-summary-title {
-  font-family: 'Geist', sans-serif;
-  font-size: 17px;
-  font-weight: 800;
-  color: var(--text-primary);
-}
-.programme-page .programme-path-summary-sub { font-size: 12.5px; color: var(--text-muted); margin: 2px 0 4px; }
-.programme-page .programme-path-legend-title {
-  font-family: 'Geist', sans-serif;
-  font-size: 14px;
-  font-weight: 800;
-  color: var(--text-primary);
-  margin-bottom: 6px;
-}
-.programme-page .programme-path-legend p {
-  margin: 0 0 8px;
-  font-size: 12.5px;
-  line-height: 1.45;
-  color: var(--text-secondary);
+/* Assez large : matières à gauche, chapitres à droite */
+@container (min-width: 1150px) {
+  .prg-page--large .prg-grille { grid-template-columns: 360px minmax(0, 1fr); gap: 48px; }
+  .prg-page--large .prg-matieres { grid-template-columns: repeat(3, 1fr); }
 }

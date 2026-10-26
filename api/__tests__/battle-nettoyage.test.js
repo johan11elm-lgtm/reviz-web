@@ -23,17 +23,24 @@ const fausseRtdb = {
   }),
 }
 
-// Firestore : where('compteLe', '<', date) puis suppression par lots.
+// Firestore : where('compteLe', '<', date) puis suppression par lots ;
+// essais : where('derniereRevisionAt', '<', ms).limit(n) puis suppression récursive.
 let marques
+let essais
 const supprimees = []
+const essaisSupprimes = []
 const fauxDb = {
-  collection: () => ({
-    where: (_champ, _op, date) => ({
-      get: async () => ({
-        docs: Object.entries(marques).filter(([, m]) => m.compteLe < date).map(([id]) => ({ ref: id })),
-      }),
-    }),
+  collection: nom => ({
+    where: (_champ, _op, limite) => {
+      const source = nom === 'essais' ? essais : marques
+      const cle = nom === 'essais' ? 'derniereRevisionAt' : 'compteLe'
+      const get = async () => ({
+        docs: Object.entries(source).filter(([, m]) => m[cle] < limite).map(([id]) => ({ ref: id })),
+      })
+      return { get, limit: () => ({ get }) }
+    },
   }),
+  recursiveDelete: async ref => { essaisSupprimes.push(ref) },
   batch: () => {
     const lot = []
     return { delete: ref => lot.push(ref), commit: async () => { supprimees.push(...lot) } }
@@ -57,7 +64,12 @@ beforeEach(() => {
     'VIEU-1': { compteLe: new Date(MAINTENANT - 72 * HEURE) },
     'JEUX-2': { compteLe: new Date(MAINTENANT - 2 * HEURE) },
   }
+  essais = {
+    'invite-vieux': { derniereRevisionAt: MAINTENANT - 400 * 24 * HEURE },
+    'invite-actif': { derniereRevisionAt: MAINTENANT - 30 * 24 * HEURE },
+  }
   supprimees.length = 0
+  essaisSupprimes.length = 0
   update.mockClear()
   vi.stubEnv('CRON_SECRET', 'secret-test')
 })
@@ -66,15 +78,21 @@ afterEach(() => vi.unstubAllEnvs())
 describe('nettoyage des Battles', () => {
   it('supprime les salons de plus d’une heure et les marques de plus de 48 heures', async () => {
     const r = await nettoyer({ rtdb: fausseRtdb, db: fauxDb, maintenant: MAINTENANT })
-    expect(r).toEqual({ salons: 2, marques: 1 })
+    expect(r).toEqual({ salons: 2, marques: 1, essais: 1 })
     expect(Object.keys(salons)).toEqual(['JEUX'])
     expect(supprimees).toEqual(['VIEU-1'])
+  })
+
+  it('purge les essais sans révision depuis 13 mois, et eux seulement', async () => {
+    await nettoyer({ rtdb: fausseRtdb, db: fauxDb, maintenant: MAINTENANT })
+    expect(essaisSupprimes).toEqual(['invite-vieux'])
   })
 
   it('ne touche à rien quand tout est récent', async () => {
     salons = { JEUX: { creeLe: MAINTENANT - 60_000 } }
     marques = {}
-    expect(await nettoyer({ rtdb: fausseRtdb, db: fauxDb, maintenant: MAINTENANT })).toEqual({ salons: 0, marques: 0 })
+    essais = {}
+    expect(await nettoyer({ rtdb: fausseRtdb, db: fauxDb, maintenant: MAINTENANT })).toEqual({ salons: 0, marques: 0, essais: 0 })
     expect(update).not.toHaveBeenCalled()
   })
 
@@ -91,6 +109,6 @@ describe('nettoyage des Battles', () => {
     const res = await appel({ authorization: 'Bearer secret-test' })
     vi.useRealTimers()
     expect(res.statusCode).toBe(200)
-    expect(res.body).toEqual({ salons: 2, marques: 1 })
+    expect(res.body).toEqual({ salons: 2, marques: 1, essais: 1 })
   })
 })

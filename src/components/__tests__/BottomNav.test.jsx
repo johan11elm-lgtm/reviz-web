@@ -38,17 +38,17 @@ afterEach(() => {
 })
 
 describe('<BottomNav /> — onglets', () => {
-  it('le coach a son onglet, au centre', () => {
+  it('quatre onglets, puis le bouton Réviz IA à droite', () => {
     setup()
     const labels = screen.getAllByRole('link').map(l => l.getAttribute('aria-label'))
-    expect(labels).toEqual(['Accueil', 'Cours', 'Coach', 'Agenda', 'Profil'])
-    expect(screen.getByRole('link', { name: 'Coach' })).toHaveAttribute('href', '/coach')
+    expect(labels).toEqual(["Aujourd'hui", 'Programme', 'Agenda', 'Moi', 'Réviz IA'])
+    expect(screen.getByRole('link', { name: 'Réviz IA' })).toHaveAttribute('href', '/coach')
   })
 
-  it('pas d’onglet Coach en mode essai (compte requis)', () => {
+  it('pas de bouton Réviz IA en mode essai (compte requis)', () => {
     auth.isGuest = true
     setup()
-    expect(screen.queryByRole('link', { name: 'Coach' })).toBeNull()
+    expect(screen.queryByRole('link', { name: 'Réviz IA' })).toBeNull()
     expect(screen.getAllByRole('link')).toHaveLength(4)
   })
 })

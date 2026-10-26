@@ -1,0 +1,22 @@
+/* Carte « Essaie un thème Réviz+ » de l'accueil : carte blanche, vignettes en éventail,
+ * rond orange à tranche (comme la carte à cheval), croix discrète en haut à droite. */
+.te-carte { position: relative; border-radius: 24px; background: #fff; box-shadow: 0 14px 30px -14px rgba(120,60,20,.45), 0 0 0 1px rgba(120,60,20,.05); }
+.te-lien { display: flex; align-items: center; gap: 14px; min-height: 76px; padding: 12px 14px 12px 16px; border-radius: inherit; color: #1B1A23; text-decoration: none; }
+.te-lien:focus-visible { outline: 3px solid #1B1A23; outline-offset: 3px; }
+.te-vignettes { flex: none; display: flex; padding-right: 6px; }
+.te-vignettes .te-vignette + .te-vignette { margin-left: -12px; }
+.te-vignettes .te-vignette:nth-child(odd) { transform: rotate(-6deg); }
+.te-vignettes .te-vignette:nth-child(even) { transform: rotate(5deg) translateY(2px); }
+.te-texte { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.te-titre { font-family: var(--font-display); font-size: 17px; font-weight: 800; letter-spacing: -.02em; line-height: 1.15; }
+.te-sous { font-size: 13px; font-weight: 600; color: #6E675B; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.te-fleche { flex: none; display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; background: #C25407; box-shadow: 0 3px 0 #8F3E05; color: #fff; }
+.te-fermer { position: absolute; top: -10px; right: -6px; display: flex; align-items: center; justify-content: center; width: 30px; height: 30px; border: 0; border-radius: 50%; background: #fff; box-shadow: 0 3px 0 #EADBCB, 0 4px 12px rgba(120,60,20,.12); color: #6E675B; cursor: pointer; }
+.te-fermer::after { content: ''; position: absolute; inset: -7px; border-radius: 50%; }
+.te-fermer:hover { color: #1B1A23; }
+.te-fermer:focus-visible { outline: 3px solid #1B1A23; outline-offset: 1px; }
+
+.te-vignette { position: relative; display: block; width: 30px; height: 42px; border-radius: 9px; overflow: hidden; border: 2px solid #fff; box-shadow: 0 3px 8px rgba(120,60,20,.18); }
+.te-vignette-hero { position: absolute; left: 3px; right: 3px; top: 4px; height: 14px; border-radius: 4px; }
+.te-vignette-carte { position: absolute; left: 3px; right: 3px; top: 21px; height: 10px; border-radius: 3px; }
+.te-vignette-point { position: absolute; left: 3px; top: 3px; width: 4px; height: 4px; border-radius: 50%; }

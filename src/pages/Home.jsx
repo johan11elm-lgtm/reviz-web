@@ -1,175 +1,122 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { BottomNav } from '../components/BottomNav';
-import { UserHeader } from '../components/UserHeader';
 import { GuestBanner } from '../components/GuestBanner';
 import { ConsentBanner } from '../components/ConsentBanner';
 import { EmailBanner } from '../components/EmailBanner';
-import { ControleBanner } from '../components/ControleBanner';
-import { HeroCTA } from '../components/HeroCTA';
 import { Mascot } from '../components/Mascot';
-import { getScanStatus } from '../services/scanLimitService';
+import { Pantin, tempsLettres } from '../components/Pantin';
+import { BulleReviz } from '../components/reviz/BulleReviz';
+import { CarteFonction } from '../components/reviz/CarteFonction';
 import { loadLessons, restoreLesson, syncFromFirestore } from '../services/historyService';
 import { loadRevisions } from '../services/revisionService';
-import { loadCatalogue, matiereProgress } from '../services/programmeService';
+import { loadCatalogue } from '../services/programmeService';
+import { agendaLocal, chargerAgenda } from '../services/agendaService';
+import { controlesAVenir, compteARebours, matiereControle } from '../utils/agenda';
 import { hasProgramme, PROGRAMME_FALLBACK } from '../utils/programme';
 import { useIsDesktop } from '../hooks/useMediaQuery';
-import { useAuraCompte } from '../hooks/useAuraCompte';
 import { countDueCards } from '../services/srsService';
-import { getWeeklyChallenges } from '../services/challengeService';
-import { computeStreak, computeLevel, computeBadges, XP_PAR_NIVEAU } from '../utils/gamification';
+import { computeStreak, computeLevel, computeBadges } from '../utils/gamification';
 import { subjectMascot } from '../utils/subjects';
 import { refreshReminder } from '../services/reminderService';
 import { AchievementToast } from '../components/AchievementToast';
-import { BattleMascot } from '../components/BattleMascot';
-import { BattleAnnonce, annonceBattleVue } from '../components/battle/BattleAnnonce';
+import { JeuxAnnonce, annonceJeuxVue } from '../components/jeux/JeuxAnnonce';
 import { RevizPlusAnnonce, annonceRevizPlusVue } from '../components/RevizPlusAnnonce';
-import { RevizPlusSheet } from '../components/RevizPlus';
 import { ThemeEssai, essaiThemeVu } from '../components/ThemeEssai';
 import { useTheme } from '../context/ThemeContext';
 import { themeById } from '../utils/themes';
-import { FlameIcon, TargetIcon, CheckIcon, CircleIcon, FlashcardsIcon, QuizIcon, ResumeIcon, MindmapIcon, CameraIcon, PencilIcon } from '../components/Icons';
+import { etatDuJour, synchroniserStats } from '../services/partieDuJourService';
+import { battleFaiteAujourdhui } from '../services/battleDuJour';
 import './Home.css';
 
-function formatDate(ts) {
-  const d = new Date(ts), now = new Date();
-  const diffDays = Math.floor((now - d) / 86400000);
-  if (diffDays === 0) return "Aujourd'hui";
-  if (diffDays === 1) return 'Hier';
-  return d.toLocaleDateString('fr-FR', { day: 'numeric', month: 'short' });
-}
-
-// Sous-titre du greeting : d'abord l'information utile (cartes dues,
-// objectif, série), sinon une phrase calme selon le moment. Ton sobre —
-// pas de blague forcée. Rotation stable par jour (pas de variance render-to-render).
-const SUB_POOLS = {
-  done: [
-    "Objectif du jour atteint.",
-    "C'est fait pour aujourd'hui.",
-    'La séance du jour est bouclée.',
-  ],
-  morning: [
-    'Quelques cartes pour bien commencer la journée.',
-    'Une séance courte, et la journée est lancée.',
-    'Le matin, quelques minutes suffisent.',
-  ],
-  afternoon: [
-    'Cinq minutes suffisent pour avancer.',
-    'Une petite séance avant ce soir ?',
-    'Le bon moment pour revoir une leçon.',
-  ],
-  evening: [
-    'Une dernière révision avant de dormir ?',
-    'Le soir, une courte séance suffit.',
-    'Revoir ses cartes le soir aide à retenir.',
-  ],
+/*
+ * Accueil (refonte validée du 20/10, « Reviz Valide » sur claude.ai/design) :
+ * la mascotte d'abord. Réviz (le pantin D1 animé) et la couleur du héros
+ * changent selon la journée de l'élève : contrôle proche, soir sans
+ * révision, objectif atteint, ou journée ordinaire.
+ */
+const HUMEURS = {
+  normal:   { bg: '#FFB37A', tint: '#FFC596', dot: '#C9C2F2', bar: 'rgba(255,179,122,.94)', btn: '#C25407', soft: '#FFE6D2', expression: 'content',   entree: 'coucou' },
+  controle: { bg: '#FFB37A', tint: '#FFC596', dot: '#C9C2F2', bar: 'rgba(255,179,122,.94)', btn: '#C25407', soft: '#FFE6D2', expression: 'determine', entree: 'coucou' },
+  soir:     { bg: '#C9C2F2', tint: '#D8D2F7', dot: '#FFC9A8', bar: 'rgba(201,194,242,.94)', btn: '#5B4FC7', soft: '#E4E0FA', expression: 'endormi' },
+  fete:     { bg: '#FFC9A8', tint: '#FFDAC4', dot: '#B9E8C9', bar: 'rgba(255,201,168,.94)', btn: '#137A45', soft: '#DCF5E6', expression: 'fier',      entree: 'saut' },
 };
 
-/**
- * Ordinateur : les matières du programme en tuiles compactes sur l'accueil
- * (même catalogue et même progression que la page Mon programme).
- */
-function HomeProgramme({ classe }) {
-  const navigate = useNavigate();
-  const [catalogue, setCatalogue] = useState(null);
-  const lessons = useMemo(() => loadLessons(), []);
+// Pastilles des matières : aplats pastel, dans l'ordre du design.
+const PASTELS = ['#FFD7BE', '#E4E0FA', '#FFE6D2', '#DCF5E6', '#FFD9E4', '#E4E0FA'];
+const TONS_PLAN = [
+  { bg: '#FFE6D2', fg: '#B34400' },
+  { bg: '#E4E0FA', fg: '#3D3770' },
+  { bg: '#DCF5E6', fg: '#0F6B3A' },
+];
 
+const majuscule = s => s.charAt(0).toUpperCase() + s.slice(1);
+function jourDans(n) {
+  if (n === 0) return "Aujourd'hui";
+  const d = new Date();
+  d.setDate(d.getDate() + n);
+  return majuscule(d.toLocaleDateString('fr-FR', { weekday: 'long' }));
+}
+
+const Flamme = () => (
+  <svg width="15" height="15" viewBox="0 0 24 24" fill="#FF8A3D" aria-hidden="true">
+    <path d="M12 2c1 3.5 5 6 5 11a5 5 0 0 1-10 0c0-2.2 1-3.8 2.2-5 .2 1.6 1 2.6 2 3 0-3.3.4-6 .8-9z" />
+  </svg>
+);
+
+function useProchainControle(currentUser) {
+  const uid = currentUser?.uid;
+  const [agenda, setAgenda] = useState(() => agendaLocal(uid));
   useEffect(() => {
-    let alive = true;
-    loadCatalogue(classe).then(c => { if (alive) setCatalogue(c); }).catch(() => {});
-    return () => { alive = false; };
-  }, [classe]);
-
-  if (!catalogue) return null;
-  const total = catalogue.matieres.reduce((n, m) => n + m.chapitres.length, 0);
-
-  return (
-    <section className="home-desk-section" aria-labelledby="home-desk-programme">
-      <div className="home-desk-head">
-        <h2 id="home-desk-programme" className="home-desk-title">Mon programme</h2>
-        <Link to="/programme" className="home-desk-more">{classe} · {total} chapitres ›</Link>
-      </div>
-      <div className="home-desk-matieres">
-        {catalogue.matieres.map(m => {
-          const p = matiereProgress(m, lessons);
-          const pct = p.total ? Math.round((p.commences / p.total) * 100) : 0;
-          const meta = p.commences
-            ? `${p.commences} commencé${p.commences > 1 ? 's' : ''} sur ${p.total}`
-            : `${p.total} chapitres`;
-          return (
-            <button
-              key={m.slug}
-              type="button"
-              className="rv-card rv-card--link home-desk-matiere"
-              onClick={() => navigate(`/programme/${m.slug}`)}
-              aria-label={`${m.matiere} : ${meta}`}
-            >
-              <Mascot pose={subjectMascot(m.matiere)} size={44} alt="" aria-hidden="true" />
-              <span className="home-desk-matiere-text">
-                <span className="home-desk-matiere-name">{m.matiere}</span>
-                <span className="home-desk-matiere-meta">{meta}</span>
-                <span className="rv-bar rv-bar--neutral-bg home-desk-matiere-bar" aria-hidden="true">
-                  <span className="rv-bar-fill rv-bar-fill--orange" style={{ width: `${pct}%` }} />
-                </span>
-              </span>
-            </button>
-          );
-        })}
-      </div>
-    </section>
-  );
-}
-
-function pickStable(pool, dayHash) {
-  return pool[dayHash % pool.length];
-}
-
-function getGreetingSub({ dueCards, streak, todayRevisions, dailyGoal }) {
-  const dayHash = Math.floor(Date.now() / 86400000);
-  const h = new Date().getHours();
-
-  if (dailyGoal > 0 && todayRevisions >= dailyGoal) return pickStable(SUB_POOLS.done, dayHash);
-  if (dueCards > 0) return dueCards === 1 ? '1 carte à travailler aujourd\'hui.' : `${dueCards} cartes à travailler aujourd'hui.`;
-  if (streak >= 2) return `${streak} jours de suite. Continue comme ça.`;
-  if (todayRevisions > 0) return 'Tu as déjà révisé aujourd\'hui, bien joué.';
-  if (h < 12)  return pickStable(SUB_POOLS.morning, dayHash);
-  if (h < 18)  return pickStable(SUB_POOLS.afternoon, dayHash);
-  return pickStable(SUB_POOLS.evening, dayHash);
+    let vivant = true;
+    const relire = () => { if (vivant) setAgenda(agendaLocal(uid)); };
+    window.addEventListener('reviz-agenda', relire);
+    chargerAgenda(currentUser).then(a => { if (vivant) setAgenda(a); });
+    return () => { vivant = false; window.removeEventListener('reviz-agenda', relire); };
+  }, [uid, currentUser]);
+  const prochain = controlesAVenir(agenda.controles)[0];
+  if (!prochain) return null;
+  // Au-delà de 14 jours, le contrôle reste dans l'Agenda, pas sur l'accueil.
+  const jours = Math.round((new Date(`${prochain.date}T00:00`) - new Date(new Date().toDateString())) / 86_400_000);
+  if (jours > 14) return null;
+  return { ...prochain, jours, quand: compteARebours(prochain.date), m: matiereControle(prochain.matiere) };
 }
 
 export default function Home() {
-  const { currentUser, hasRevizPlus, revizPlusOffert, isGuest, getUserLevel } = useAuth();
-  const prenom = currentUser?.displayName ?? 'toi';
-
+  const { currentUser, isGuest, getUserLevel, hasRevizPlus, revizPlusOffert } = useAuth();
   const navigate = useNavigate();
   const isDesktop = useIsDesktop();
-  // Aura de la Battle dans l'en-tête, dès la première partie comptée.
-  const auraCompte = useAuraCompte(isGuest ? null : currentUser?.uid);
-  const aura = auraCompte && (auraCompte.jouees > 0 || auraCompte.aura > 0) ? auraCompte.aura : undefined;
   const [allLessons, setAllLessons] = useState(() => loadLessons());
-  const [challenges] = useState(() => getWeeklyChallenges());
   const [newBadge, setNewBadge] = useState(null);
-  // Popup « Nouveau : la Battle », une fois par élève (compte ou mode essai).
-  // Une seule popup à la fois : « Réviz+ offert » d'abord, la Battle à la visite suivante.
   const [annonceRevizPlus, setAnnonceRevizPlus] = useState(() => revizPlusOffert && !isGuest && !!currentUser?.uid && !annonceRevizPlusVue(currentUser.uid));
-  const [annonceBattle, setAnnonceBattle] = useState(() => !annonceRevizPlus && !!currentUser?.uid && !annonceBattleVue(currentUser.uid));
-  const [ficheRevizPlus, setFicheRevizPlus] = useState(false);
+  // Annonce de la sortie : Réviz Games (celle de la Battle, du 22/10, n'est plus montrée).
+  const [annonceJeux, setAnnonceJeux] = useState(() => !annonceRevizPlus && !!currentUser?.uid && !annonceJeuxVue(currentUser.uid));
   const { theme } = useTheme();
-  // « Essaie un thème Réviz+ » : une fois, tant qu'aucun thème Réviz+ n'est choisi.
   const [essaiTheme, setEssaiTheme] = useState(() => !essaiThemeVu());
   const montrerEssai = essaiTheme && hasRevizPlus && !isGuest && !themeById(theme)?.premium;
+  const [compact, setCompact] = useState(0);
+  const [parle, setParle] = useState(false);
+  const [tour, setTour] = useState(0);
+  const [sortie, setSortie] = useState(false);
+  const [caseChoisie, setCaseChoisie] = useState(null);
+  const pantin = useRef(null);
+  const hero = useRef(null);
+  const heroVu = useRef(true);
+  const survol = useRef(false);
+  const controle = useProchainControle(currentUser);
 
   useEffect(() => {
     const onboardedKey = `reviz-onboarded-${currentUser?.uid}`;
     if (currentUser && !localStorage.getItem(onboardedKey)) {
-      navigate('/onboarding');
+      // En remplaçant l'accueil : un retour depuis la présentation ne retombe pas sur l'accueil, qui
+      // l'y renverrait aussitôt.
+      navigate('/onboarding', { replace: true });
       return;
     }
     syncFromFirestore().then(lessons => {
       setAllLessons(lessons);
-      // App native : re-planifie le rappel quotidien avec un texte à jour
-      // (nombre de cartes dues). No-op sur web ou si le rappel est désactivé.
+      // App native : re-planifie le rappel quotidien avec un texte à jour.
       const due = lessons.reduce(
         (sum, l) => sum + countDueCards(l.id, l.flashcardsCount ?? l.aiData?.flashcards?.length ?? 0),
         0
@@ -178,18 +125,32 @@ export default function Home() {
     });
   }, []);
 
-  // Dérivés gamification mémoïsés : sans useMemo, chaque render (toast de
-  // badge, ouverture du coach…) re-parcourait toutes les leçons + relisait
-  // le JSON des révisions depuis localStorage.
-  // Série basée sur les RÉVISIONS (pas les scans) — même règle que Progres.
-  const streak = useMemo(() => computeStreak(loadRevisions(), 'revisedAt'), [allLessons]);
-  const { level, xpInLvl, fillPct } = useMemo(() => computeLevel(allLessons), [allLessons]);
+  // La partie du jour des Réviz Games compte aussi pour la série (jouer, c'est réviser).
+  const uidJeux = currentUser?.uid ?? null;
+  const [jourJeux, setJourJeux] = useState(() => etatDuJour(uidJeux));
+  useEffect(() => {
+    // Reprend la série et le score d'un autre appareil sans passer par /jeux (aucune autre lecture de
+    // users/{uid} ici : AuthContext ne garde pas le champ jeux).
+    let vivant = true;
+    setJourJeux(etatDuJour(uidJeux));
+    synchroniserStats(uidJeux).then(() => { if (vivant) setJourJeux(etatDuJour(uidJeux)); });
+    // Un accueil resté ouvert après minuit : au retour au premier plan on recalcule le jour.
+    const maj = () => { if (document.visibilityState === 'visible') setJourJeux(etatDuJour(uidJeux)); };
+    document.addEventListener('visibilitychange', maj);
+    return () => { vivant = false; document.removeEventListener('visibilitychange', maj); };
+  }, [uidJeux]);
+  const streak = useMemo(() => computeStreak([...loadRevisions(), ...jourJeux.jours.map(j => ({ revisedAt: `${j}T12:00:00` }))], 'revisedAt'), [allLessons, jourJeux]);
+  const { level } = useMemo(() => computeLevel(allLessons), [allLessons]);
   const lastLesson = allLessons[0] ?? null;
-
   const dailyGoal = parseInt(localStorage.getItem(`reviz-daily-goal-${currentUser?.uid}`) || '3');
   const todayRevisions = useMemo(() => loadRevisions().filter(r =>
     new Date(r.revisedAt).toDateString() === new Date().toDateString()
   ).length, [allLessons]);
+  const goalReached = dailyGoal > 0 && todayRevisions >= dailyGoal;
+  const dueCards = useMemo(() => allLessons.reduce(
+    (sum, l) => sum + countDueCards(l.id, l.flashcardsCount ?? l.aiData?.flashcards?.length ?? 0),
+    0
+  ), [allLessons]);
 
   useEffect(() => {
     if (!currentUser) return;
@@ -206,351 +167,434 @@ export default function Home() {
     }
   }, [allLessons, streak, level, currentUser]);
 
-  const remaining = dailyGoal - todayRevisions;
-  const goalReached = todayRevisions >= dailyGoal;
-  // Cartes dues toutes leçons confondues (même règle que le rappel quotidien).
-  const dueCards = useMemo(() => allLessons.reduce(
-    (sum, l) => sum + countDueCards(l.id, l.flashcardsCount ?? l.aiData?.flashcards?.length ?? 0),
-    0
-  ), [allLessons]);
-  const greetingSub = getGreetingSub({ dueCards, streak, todayRevisions, dailyGoal });
+  const classe = hasProgramme(getUserLevel()) ? getUserLevel().classe : PROGRAMME_FALLBACK;
+  const [catalogue, setCatalogue] = useState(null);
+  useEffect(() => {
+    let vivant = true;
+    loadCatalogue(classe).then(c => { if (vivant) setCatalogue(c); }).catch(() => {});
+    return () => { vivant = false; };
+  }, [classe]);
 
-  const greeting = (
-    <div className="rv-greeting home-greeting">
-      <h2 className="rv-greeting-title">Envie de réviser ?</h2>
-      <p className="rv-greeting-sub">{greetingSub}</p>
-    </div>
+  // ── L'humeur du jour ──
+  const heure = new Date().getHours();
+  // En développement, ?humeur=soir|fete|controle|normal force l'humeur du héros.
+  const forcee = import.meta.env.DEV ? new URLSearchParams(window.location.search).get('humeur') : null;
+  const humeurId = HUMEURS[forcee] && (forcee !== 'controle' || controle) ? forcee
+    : goalReached ? 'fete'
+    : heure >= 20 && todayRevisions === 0 && streak > 0 ? 'soir'
+    : controle ? 'controle'
+    : 'normal';
+  const h = HUMEURS[humeurId];
+
+  const fcLast = lastLesson ? countDueCards(lastLesson.id, lastLesson.flashcardsCount ?? 0) : 0;
+  const ouvrirCartes = () => {
+    if (lastLesson) { restoreLesson(lastLesson.id); navigate('/flashcards'); }
+    else navigate('/programme');
+  };
+  const cibleControle = controle && controle.matiere !== 'autre' ? `/programme?matiere=${controle.matiere}` : '/programme';
+
+  // ditLignes : la phrase du jour découpée pour la bulle (une idée par ligne) ; dit : d'un bloc.
+  let ditLignes, cta, action;
+  if (humeurId === 'fete') {
+    ditLignes = ['Objectif du jour atteint !', 'On fête ça ?'];
+    cta = 'Lancer une Battle bonus';
+    action = () => navigate('/battle');
+  } else if (humeurId === 'soir') {
+    ditLignes = ['Je m’endors…', 'Une carte et dodo ?'];
+    cta = 'Réveiller Réviz · 1 carte';
+    action = ouvrirCartes;
+  } else if (humeurId === 'controle') {
+    ditLignes = [`${controle.m.label} ${controle.quand}.`, `On s'y met ${heure >= 17 ? 'ce soir' : "aujourd'hui"} ?`];
+    cta = 'Réviser avec Réviz';
+    action = () => navigate(cibleControle);
+  } else {
+    ditLignes = ['Envie de réviser ?'];
+    if (dueCards > 0) {
+      cta = 'Réviser mes cartes';
+      action = ouvrirCartes;
+    } else {
+      cta = isGuest ? 'Réviser mon programme' : 'Scanner une leçon';
+      action = () => navigate(isGuest ? '/programme' : '/scan');
+    }
+  }
+  const dit = ditLignes.join(' ');
+
+  // ── Ton plan : trois étapes jusqu'au contrôle, ou les trois de la journée ──
+  const plan = useMemo(() => {
+    const ecart = controle ? Math.max(1, controle.jours) : 3;
+    const jour = i => (controle ? jourDans(Math.min(i, ecart - 1)) : ['Maintenant', 'Ensuite', 'Pour finir'][i]);
+    const cartes = dueCards > 0 ? `${dueCards} carte${dueCards > 1 ? 's' : ''}` : 'les flashcards';
+    const quiz = lastLesson?.quizCount ? `${lastLesson.quizCount} questions` : 'Pour te tester';
+    const chapitre = controle?.titre ? `${controle.titre} · ` : '';
+    return [
+      { quoi: `Résumé + ${cartes}`, meta: `${chapitre}Environ 6 min`, done: todayRevisions > 0, pose: 'flashcard' },
+      { quoi: 'Quiz corrigé', meta: quiz, done: goalReached, pose: 'quiz' },
+      { quoi: "Battle d'entraînement", meta: 'Contre un ami', done: battleFaiteAujourdhui(), pose: 'fire' },
+    ].map((p, i) => ({ ...p, jour: jour(i), titre: `${jour(i)} · ${p.quoi}`, ton: TONS_PLAN[i] }));
+  }, [controle, dueCards, lastLesson, todayRevisions, goalReached]);
+  // L'étape à faire maintenant : la première pas encore faite.
+  const enCours = Math.max(0, plan.findIndex(p => !p.done));
+  // Un contrôle noté : son programme d'abord ; sinon les cartes de la dernière leçon, ou le programme.
+  const lancerCartes = () => (controle || !lastLesson ? navigate(cibleControle) : ouvrirCartes());
+  const lancerQuiz = () => {
+    if (lastLesson) { restoreLesson(lastLesson.id); navigate('/quiz'); }
+    else navigate(cibleControle);
+  };
+  // Le chemin (téléphone) : les trois étapes, puis le contrôle au bout s'il y en a un.
+  const cases = [
+    // Chaque étape fait ce qu'elle annonce (pas l'action du héros, qui peut être « Scanner une leçon ») :
+    // les cartes de la dernière leçon (ou le programme du contrôle), le quiz, la Battle.
+    ...plan.map((p, i) => ({ ...p, go: [lancerCartes, lancerQuiz, () => navigate('/battle')][i] })),
+    controle && {
+      jour: jourDans(controle.jours), quoi: `Contrôle de ${controle.m.label.toLowerCase()}`, meta: controle.titre || 'Le jour J',
+      pose: 'examen', arrivee: true, go: () => navigate('/agenda'), label: "Voir l'agenda",
+    },
+  ].filter(Boolean);
+  const choisie = caseChoisie ?? enCours;
+  const detail = cases[choisie];
+  const titrePlan = controle
+    ? `Ton plan pour ${controle.jours <= 1 ? controle.quand : jourDans(controle.jours).toLowerCase()}`
+    : 'Ton plan du jour';
+
+  const matieres = (catalogue?.matieres ?? []).slice(0, 6).map((m, i) => ({
+    slug: m.slug, nom: m.matiere, pose: subjectMascot(m.matiere), bg: PASTELS[i % PASTELS.length],
+  }));
+  const sujetBattle = lastLesson?.metadata?.title;
+  const dateTxt = majuscule(new Date().toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' }));
+
+  const sauter = () => pantin.current?.geste('saut');
+  // Réviz tombe dans le héros une fois chargé, puis parle (et fait son geste d'humeur).
+  // Distance de chute en unités du pantin (2148 pour sa taille) : il part au-dessus du héros.
+  const TAILLE_PANTIN = isDesktop ? 400 : 226;
+  const entree = useMemo(() => [{ nom: 'chute', depuis: Math.round(2148 * (isDesktop ? 520 : 420) / TAILLE_PANTIN) }], [isDesktop, TAILLE_PANTIN]);
+  const aterri = () => {
+    setParle(true);
+    pantin.current?.dire(ditLignes.join('\n'));
+    if (h.entree) pantin.current?.geste(h.entree);
+  };
+  // Si le moteur ne charge pas, la bulle s'affiche quand même. Onglet en arrière-plan : les
+  // animations sont gelées, Réviz n'a pas encore pu tomber ; on attend que la page soit visible.
+  useEffect(() => {
+    let t;
+    const essai = () => { t = setTimeout(() => (document.hidden ? essai() : setParle(true)), 4000); };
+    essai();
+    return () => clearTimeout(t);
+  }, []);
+
+  // ── Ce que Réviz propose, à tour de rôle : la phrase du jour d'abord, puis le reste de l'app.
+  // Chaque proposition a sa pose (humeur ou réaction du moteur), parfois un geste, son action et sa
+  // carte : depuis l'accueil, on peut aller partout.
+  // Pas de réaction dont l'effet flotte au-dessus de la tête (ampoule, point d'interrogation) :
+  // la bulle le cacherait.
+  const court = (t, max = 24) => (t.length > max ? `${t.slice(0, max - 1).trimEnd()}…` : t);
+  const titreLecon = lastLesson?.metadata?.title;
+  const pluriel = (n, mot) => `${n} ${mot}${n > 1 ? 's' : ''}`;
+  const avecCompte = isGuest ? 'Avec un compte gratuit' : null;
+  const lancerProgramme = () => navigate('/programme');
+  const lancerScan = () => navigate('/scan');
+
+  // La carte de la phrase du jour : ce que lance l'action principale (id : pour ne pas la reproposer).
+  const carteDuJour = humeurId === 'fete'
+    ? { id: 'battle', pose: 'fire', fond: '#E4E0FA', titre: 'Battle bonus', sous: 'Objectif atteint, on joue ?' }
+    : humeurId === 'soir'
+      ? { id: 'cartes', pose: 'soir', fond: '#E4E0FA', titre: 'Une flashcard', sous: '2 minutes, et au lit' }
+      : humeurId === 'controle'
+        ? { id: 'controle', pose: subjectMascot(controle.m.label), fond: '#FFE6D2', titre: `Contrôle de ${controle.m.label.toLowerCase()}`,
+            sous: `${majuscule(controle.quand)}${controle.titre ? ` · ${controle.titre}` : ''}` }
+        : cta === 'Réviser mes cartes'
+          ? { id: 'cartes', pose: 'flashcard', fond: '#FFE6D2', titre: 'Mes cartes du jour', sous: `${pluriel(dueCards, 'carte')} à revoir` }
+          : cta === 'Scanner une leçon'
+            ? { id: 'scan', pose: 'scanphone', fond: '#DCF5E6', titre: 'Scanner une leçon', sous: 'Résumé, flashcards et quiz' }
+            : { id: 'programme', pose: 'reading', fond: '#FFE6D2', titre: 'Mon programme', sous: 'Les chapitres de ta classe' };
+
+  const suggestions = [
+    { lignes: ditLignes, label: cta, action, expr: h.expression, carte: carteDuJour },
+    !jourJeux.faite && { lignes: ['La partie du jour est prête.', '6 mini-jeux, 2 minutes.'], label: 'Jouer', action: () => navigate('/jeux?depuis=suggestion'), expr: 'emerveille', geste: 'brasEnLair',
+      carte: { id: 'jeux', pose: 'celebration', fond: '#FFE3C7', titre: 'Partie du jour', sous: 'Réviz Games · 6 mini-jeux' } },
+    titreLecon && (fcLast > 0
+      ? { lignes: ['Tes cartes t’attendent.', 'On les revoit ?'], label: 'Réviser mes cartes', action: ouvrirCartes, expr: 'content', geste: 'coucou',
+          carte: { id: 'cartes', pose: 'flashcard', fond: '#FFE6D2', titre: 'Flashcards', sous: `${pluriel(fcLast, 'carte')} à revoir · ${court(titreLecon, 20)}` } }
+      : { lignes: ['Un petit quiz ?', 'Pour voir où tu en es.'], label: 'Lancer le quiz', expr: 'emerveille',
+          action: () => { restoreLesson(lastLesson.id); navigate('/quiz'); },
+          carte: { id: 'quiz', pose: 'quiz', fond: '#E4E0FA', titre: 'Quiz corrigé', sous: court(titreLecon, 32) } }),
+    { lignes: ['Un autre chapitre ?', 'Tout ton programme est là.'], label: 'Réviser mon programme', action: lancerProgramme, expr: 'content', geste: 'coucou',
+      carte: { id: 'programme', pose: 'reading', fond: '#FFE6D2', titre: 'Réviser', sous: `Tout le programme de ${classe}` } },
+    { lignes: ['Une leçon à apprendre ?', 'Prends-la en photo.'], label: 'Scanner une leçon', action: lancerScan, expr: 'emerveille',
+      carte: { id: 'scan', pose: 'scanphone', fond: '#DCF5E6', titre: 'Scanner une leçon', sous: avecCompte || 'Résumé, flashcards et quiz' } },
+    { lignes: ['Une question ?', 'Je t’explique ton cours.'], label: 'Parler à Réviz IA', action: () => navigate('/coach'), expr: 'reflechit',
+      carte: { id: 'ia', pose: 'coach', fond: '#FFD9E4', titre: 'Réviz IA', sous: avecCompte || 'Je t’explique, avec des exemples' } },
+    { lignes: ['Prêt pour une Battle ?', 'Défie un ami en direct.'], label: 'Lancer une Battle', action: () => navigate('/battle'), expr: 'determine', geste: 'brasEnLair',
+      carte: { id: 'battle', pose: 'fire', fond: '#E4E0FA', titre: 'Battle', sous: '5 questions, 15 s, contre un ami' } },
+    !isGuest && allLessons.length > 0 && {
+      lignes: [allLessons.length > 1 ? 'Tes leçons scannées ?' : 'Ta leçon scannée ?', allLessons.length > 1 ? 'Elles sont toutes ici.' : 'Elle est rangée ici.'], label: 'Voir mes leçons',
+      action: () => navigate('/cours'), expr: 'fier',
+      carte: { id: 'cours', pose: 'writing', fond: '#DCF5E6', titre: 'Mes leçons', sous: `${pluriel(allLessons.length, 'leçon')} scannée${allLessons.length > 1 ? 's' : ''}` } },
+    { lignes: controle ? ['Un autre contrôle ?', 'Note-le dans l’agenda.'] : ['Un contrôle bientôt ?', 'Dis-moi quand.'], label: "Ouvrir l'agenda",
+      action: () => navigate('/agenda'), expr: 'content', geste: 'gratterTete',
+      carte: { id: 'agenda', pose: 'thinking', fond: '#FFE6D2', titre: 'Agenda', sous: 'Tes contrôles et leurs plans' } },
+  ].filter((p, i) => p && (i === 0 || p.carte.id !== carteDuJour.id));
+  const sugg = suggestions[tour % suggestions.length];
+  const texteSugg = sugg.lignes.join('\n');
+
+  // Le héros hors de l'écran ou l'onglet caché : Réviz attend avant de changer de phrase.
+  useEffect(() => {
+    if (!hero.current || !('IntersectionObserver' in window)) return;
+    const obs = new IntersectionObserver(([v]) => { heroVu.current = v.isIntersecting; });
+    obs.observe(hero.current);
+    return () => obs.disconnect();
+  }, [isDesktop]);
+
+  useEffect(() => {
+    if (!parle) return;
+    // La première phrase est dite à l'atterrissage (aterri) ; les suivantes ici, avec leur pose.
+    if (tour > 0) {
+      pantin.current?.expression(sugg.expr);
+      if (sugg.geste) pantin.current?.geste(sugg.geste);
+      pantin.current?.dire(texteSugg);
+    }
+    const temps = tempsLettres(texteSugg);
+    let t1, t2;
+    const suivante = () => {
+      // Héros hors de l'écran, onglet caché ou souris dessus (ordinateur) : il attend.
+      if (document.hidden || !heroVu.current || survol.current) { t1 = setTimeout(suivante, 1500); return; }
+      setSortie(true);
+      t2 = setTimeout(() => { setSortie(false); setTour(t => t + 1); }, 220);
+    };
+    // Le temps de dire la phrase, puis de la lire.
+    t1 = setTimeout(suivante, (temps[temps.length - 1] || 0) * 1000 + 5500);
+    return () => { clearTimeout(t1); clearTimeout(t2); };
+  }, [parle, tour]);
+  // Ordinateur : les points sous la carte mènent directement à une proposition.
+  const allerA = i => {
+    const n = suggestions.length, ici = tour % n;
+    if (i === ici) return;
+    setSortie(false);
+    setTour(t => t - ici + i + (i < ici ? n : 0));
+  };
+  const style = { '--hm-bg': h.bg, '--hm-tint': h.tint, '--hm-dot': h.dot, '--hm-bar': h.bar, '--hm-btn': h.btn, '--hm-soft': h.soft, '--rv-accent': h.btn };
+
+  const serie = streak > 0 && (
+    <span className="hm-serie" aria-label={`${streak} jour${streak > 1 ? 's' : ''} de suite`}>
+      <Flamme />{streak}{isDesktop ? ` jour${streak > 1 ? 's' : ''}` : ''}
+    </span>
   );
 
-  // Une seule action dans le héros : « Reprendre » vit dans la carte « Ta
-  // dernière leçon » (téléphone) ou la rangée « À reprendre » (ordinateur).
-  const hero = (
-    <HeroCTA
-      to={isGuest ? '/programme' : '/scan'}
-      tone="violet"
-      mascot={isGuest ? 'reading' : new Date().getHours() >= 19 ? 'soir' : 'scanphone'}
-      title={isGuest ? 'Révise ton programme' : 'Scanne une leçon'}
-      sub={!isDesktop ? undefined : isGuest
-        ? 'Les chapitres de ta classe, prêts à réviser : résumé, flashcards, quiz et carte mentale.'
-        : 'Une photo ou un texte, et Réviz prépare ton résumé, tes flashcards, ton quiz et ta carte mentale.'}
-      action="Commencer"
-      overlap
-      ariaLabel={isGuest ? 'Réviser mon programme' : 'Scanner une leçon'}
-      className="home-cta"
-    />
-  );
-
-  // Ordinateur (compte) : le héros est aussi haut que la colonne d'à côté ;
-  // on le remplit de ce que Réviz prépare et des deux façons de commencer.
-  const SCAN_FORMATS = [
-    { Icon: ResumeIcon,     name: 'Résumé',        sub: "L'essentiel à relire" },
-    { Icon: FlashcardsIcon, name: 'Flashcards',    sub: 'Pour mémoriser' },
-    { Icon: QuizIcon,       name: 'Quiz',          sub: 'Pour te tester' },
-    { Icon: MindmapIcon,    name: 'Carte mentale', sub: 'Pour tout relier' },
-  ];
-  const scanStatus = isDesktop && !isGuest ? getScanStatus() : null;
-  const scanQuota = !scanStatus ? null : Number.isFinite(scanStatus.remaining)
-    ? (scanStatus.remaining >= scanStatus.limit
-      ? `${scanStatus.limit} leçons à scanner cette semaine.`
-      : `Encore ${scanStatus.remaining} leçon${scanStatus.remaining > 1 ? 's' : ''} à scanner cette semaine, sur ${scanStatus.limit}.`)
-    : 'Leçons illimitées avec Réviz+.';
-  const heroDesk = (
-    <div className="rv-hero-cta rv-hero-cta--violet home-cta home-scan-desk">
-      <div className="rv-hero-glow" aria-hidden="true" />
-      <div className="home-scan-desk-text">
-        <h2 className="rv-hero-title">Scanne une leçon</h2>
-        <p className="rv-hero-sub">Une photo de ton cahier ou un texte copié, et Réviz prépare en quelques secondes&nbsp;:</p>
-        <ul className="home-scan-formats">
-          {SCAN_FORMATS.map(f => (
-            <li key={f.name}>
-              <span className="home-scan-format-icon" aria-hidden="true"><f.Icon /></span>
-              <span className="home-scan-format-text">
-                <span className="home-scan-format-name">{f.name}</span>
-                <span className="home-scan-format-sub">{f.sub}</span>
-              </span>
-            </li>
-          ))}
-        </ul>
-        <p className="home-scan-quota">{scanQuota}</p>
-        <div className="home-scan-actions">
-          <Link to="/scan" className="rv-hero-action">
-            <CameraIcon /> Prendre une photo
-          </Link>
-          <Link to="/scan?mode=texte" className="home-scan-ghost">
-            <PencilIcon /> Coller un texte
-          </Link>
-        </div>
-      </div>
-      <Mascot
-        pose={new Date().getHours() >= 19 ? 'soir' : 'scanphone'}
-        size={220}
-        priority
-        className="rv-hero-mascot home-scan-desk-mascot"
-        alt=""
-        aria-hidden="true"
-      />
-    </div>
-  );
-
-  // Série + objectif du jour — compact : le niveau et l'XP sont dans l'en-tête.
-  const statsCard = (
-    <Link
-      to="/progres"
-      className="rv-card rv-card--link home-progress-card"
-      aria-label="Voir mes progrès"
-    >
-      <div className="home-stats">
-        <div className="home-stat">
-          <span className="rv-icon-square rv-icon-square--orange" aria-hidden="true"><FlameIcon /></span>
-          <div className="home-stat-text">
-            <span className="home-stat-value">{streak} <small>{streak === 1 ? 'jour' : 'jours'}</small></span>
-            <span className="home-stat-label">de suite</span>
-          </div>
-        </div>
-        <div className="home-stat-sep" aria-hidden="true" />
-        <div className="home-stat">
-          <span className="rv-icon-square rv-icon-square--violet" aria-hidden="true"><TargetIcon /></span>
-          <div className="home-stat-text">
-            <span className="home-stat-value">{todayRevisions} <small>/ {dailyGoal}</small></span>
-            <span className="home-stat-label">cartes aujourd'hui</span>
-          </div>
-          {goalReached && <span className="home-stat-check" aria-label="objectif atteint"><CheckIcon /></span>}
-        </div>
-      </div>
-    </Link>
-  );
-
-  const challengesCard = (
-    <div className="rv-card rv-card--padded home-challenges-card">
-      <div className="home-challenges-header">
-        <span className="rv-eyebrow">Défis de la semaine</span>
-        <span className="home-challenges-count">
-          {challenges.challenges?.filter(c => c.completed).length ?? 0}/3
-        </span>
-      </div>
-      {challenges.challenges?.map(c => (
-        <div key={c.id} className={`home-challenge-row${c.completed ? ' completed' : ''}`}>
-          <div className="home-challenge-info">
-            <span className="home-challenge-name">{c.completed ? <CheckIcon /> : <CircleIcon />} {c.title}</span>
-          </div>
-          <div className="home-challenge-progress">
-            <div className="rv-bar home-challenge-bar">
-              <div
-                className="rv-bar-fill rv-bar-fill--gradient"
-                style={{ width: Math.min(100, Math.round(c.current / c.target * 100)) + '%' }}
-              />
-            </div>
-            <span className="home-challenge-count">{c.current}/{c.target}</span>
-          </div>
-        </div>
-      ))}
-    </div>
-  );
-
-  const recentLessons = allLessons.slice(0, 3);
-  const programmeClasse = hasProgramme(getUserLevel()) ? getUserLevel().classe : PROGRAMME_FALLBACK;
-
-  // « Réviser autrement » : des rangées dans une carte blanche (grammaire §4).
-  const programmeRow = (
-    <Link to="/programme" className="rv-row" aria-label="Réviser mon programme">
-      <span className="rv-row-avatar" aria-hidden="true"><Mascot pose="reading" size={40} alt="" /></span>
-      <span className="rv-row-text">
-        <span className="rv-row-title">Mon programme</span>
-        <span className="rv-row-sub">
-          {getUserLevel()?.classe ? `${getUserLevel().classe} · ` : ''}révise chapitre par chapitre, sans scanner
-        </span>
-      </span>
-      <span className="rv-row-arrow" aria-hidden="true">›</span>
-    </Link>
-  );
-  const battleRow = (
-    <Link to="/battle" className="rv-row" aria-label="Battle : défier quelqu'un en direct">
-      <span className="rv-row-avatar" aria-hidden="true"><BattleMascot pose="garde" size={40} alt="" /></span>
-      <span className="rv-row-text">
-        <span className="rv-row-title">Battle</span>
-        <span className="rv-row-sub">Défie quelqu'un en direct sur un chapitre</span>
-      </span>
-      <span className="rv-row-arrow" aria-hidden="true">›</span>
-    </Link>
-  );
-  const battleCard = <div className="rv-card rv-rows home-battle-card">{battleRow}</div>;
-
-  // Ta dernière leçon : la reprendre (rangée du haut), ou filer droit aux
-  // flashcards ou au quiz. Le coach a son onglet.
-  const fcTotal = lastLesson?.flashcardsCount ?? 0;
-  const fcDue   = lastLesson && fcTotal > 0 ? countDueCards(lastLesson.id, fcTotal) : 0;
-  const qzTotal = lastLesson?.quizCount ?? 0;
-  const lastLessonCard = lastLesson && (
-    <div className="rv-card home-featured-card">
-      <button
-        type="button"
-        className="home-featured-top"
-        onClick={() => { restoreLesson(lastLesson.id); navigate('/analyse'); }}
-        aria-label={`Reprendre la leçon ${lastLesson.metadata.title}`}
-      >
-        <Mascot
-          pose={subjectMascot(lastLesson.metadata.subject)}
-          size={84}
-          glow
-          priority
-          className="home-featured-mascot"
-          alt=""
-          aria-hidden="true"
-        />
-        <span className="home-featured-info">
-          <span className="rv-eyebrow">Ta dernière leçon</span>
-          <span className="home-featured-title">{lastLesson.metadata.title}</span>
-          <span className="home-featured-subject">
-            {lastLesson.metadata.subject} · {formatDate(lastLesson.scannedAt)}
-          </span>
-        </span>
-        <span className="rv-row-arrow" aria-hidden="true">›</span>
-      </button>
-      {(fcTotal > 0 || qzTotal > 0) && (
-        <div className="rv-btn-action-row home-featured-actions">
-          {fcTotal > 0 && (
+  // Le plan en chemin, façon plateau de jeu. Une case par jour, la case du jour
+  // en grand ; toucher une case montre son détail en dessous, avec de quoi la lancer.
+  const chemin = (
+    <section className="hm-chemin-bloc" aria-labelledby="hm-chemin">
+      <h2 id="hm-chemin" className="hm-titre">{goalReached ? 'Bravo, étape 1 faite' : titrePlan}</h2>
+      <ol className="hm-chemin" style={{ '--n': cases.length }}>
+        {cases.map((c, i) => (
+          <li key={i}>
             <button
-              className="rv-btn-action"
-              onClick={() => { restoreLesson(lastLesson.id); navigate('/flashcards'); }}
+              type="button"
+              className={`hm-case${i === enCours ? ' hm-case--maintenant' : ''}${i === choisie ? ' hm-case--choisie' : ''}${c.done ? ' hm-case--faite' : ''}${c.arrivee ? ' hm-case--arrivee' : ''}`}
+              onClick={() => setCaseChoisie(i)}
+              aria-pressed={i === choisie}
+              aria-label={`${c.jour} : ${c.quoi}${c.done ? ', fait' : ''}`}
             >
-              <span className="rv-icon-square rv-icon-square--violet"><FlashcardsIcon /></span>
-              <span className="rv-btn-action-text">
-                <span className="rv-btn-action-label">Flashcards</span>
-                <span className="rv-btn-action-sub">
-                  {fcDue > 0 ? `${fcDue} à travailler` : `${fcTotal} carte${fcTotal > 1 ? 's' : ''}`}
-                </span>
+              <span className="hm-case-rond" style={c.ton ? { background: c.ton.bg } : undefined}>
+                <Mascot pose={c.pose} size={i === enCours ? (isDesktop ? 74 : 66) : (isDesktop ? 58 : 52)} alt="" aria-hidden="true" />
+                {c.done && <span className="hm-case-coche" aria-hidden="true">✓</span>}
               </span>
-              {fcDue > 0 && <span className="rv-notif-dot" aria-hidden="true" />}
+              <span className="hm-case-jour">{c.jour}</span>
             </button>
-          )}
-          {qzTotal > 0 && (
-            <button
-              className="rv-btn-action"
-              onClick={() => { restoreLesson(lastLesson.id); navigate('/quiz'); }}
-            >
-              <span className="rv-icon-square rv-icon-square--orange"><QuizIcon /></span>
-              <span className="rv-btn-action-text">
-                <span className="rv-btn-action-label">Quiz</span>
-                <span className="rv-btn-action-sub">{qzTotal} question{qzTotal > 1 ? 's' : ''}</span>
-              </span>
-            </button>
-          )}
-        </div>
-      )}
+          </li>
+        ))}
+      </ol>
+      <div className="hm-chemin-detail" style={{ '--pointe': `${((choisie + 0.5) / cases.length) * 100}%` }}>
+        <span className="hm-chemin-txt">
+          <span className="hm-chemin-quoi">{detail.quoi}</span>
+          <span className="hm-chemin-meta">{detail.meta}</span>
+        </span>
+        {detail.done
+          ? <span className="hm-chemin-fait">Fait</span>
+          : <button type="button" className="hm-chemin-go" onClick={detail.go}>{detail.label || (choisie === enCours ? "C'est parti" : 'Lancer')}</button>}
+      </div>
+    </section>
+  );
+
+  const carteMatieres = matieres.length > 0 && (
+    <section className="hm-bloc hm-bloc--matieres" aria-labelledby="hm-matieres">
+      <div className="hm-tete">
+        <h2 id="hm-matieres" className="hm-titre">Tes matières</h2>
+        <Link to="/programme" className="hm-voir">Tout voir</Link>
+      </div>
+      <div className="hm-matieres">
+        {matieres.map(m => (
+          <Link key={m.slug} to={`/programme?matiere=${m.slug}`} className="hm-matiere">
+            <span className="hm-matiere-rond" style={{ background: m.bg }}>
+              <Mascot pose={m.pose} size={isDesktop ? 54 : 64} alt="" aria-hidden="true" />
+            </span>
+            <span className="hm-matiere-nom">{m.nom}</span>
+          </Link>
+        ))}
+      </div>
+    </section>
+  );
+
+  // Réviz Games : la partie du jour, avec la série et le record (la même partie pour tout le monde).
+  const carteJeux = (
+    <Link to="/jeux?depuis=accueil" className={`hm-jeux${jourJeux.faite ? ' hm-jeux--faite' : ''}`}>
+      <img className="hm-jeux-image" src="/jeux/hub/partie-du-jour.webp" alt="" />
+      <span className="hm-jeux-voile" aria-hidden="true" />
+      <span className="hm-jeux-txt">
+        <span className="hm-jeux-surtitre">Réviz Games</span>
+        <span className="hm-jeux-titre">La partie du jour</span>
+        <span className="hm-jeux-sous">
+          {jourJeux.faite
+            ? `Faite !${jourJeux.score != null ? ` ${jourJeux.score.toLocaleString('fr-FR')} points.` : ''} Reviens demain, ou fais une Partie rapide.`
+            : '6 mini-jeux de 15 secondes, la même partie pour tout le monde.'}
+        </span>
+        <span className="hm-jeux-btn">{jourJeux.faite ? 'Voir les jeux' : 'Jouer'}</span>
+      </span>
+    </Link>
+  );
+
+  const carteBattle = (
+    <Link to="/battle" className="hm-battle">
+      <span className="hm-grain" aria-hidden="true" />
+      <span className="hm-battle-rond" aria-hidden="true" />
+      <Mascot pose="fire" size={isDesktop ? 170 : 130} alt="" aria-hidden="true" className="hm-battle-mascotte" />
+      <span className="hm-battle-txt">
+        <span className="hm-battle-titre">Battle</span>
+        <span className="hm-battle-sous">
+          {sujetBattle ? `Défie un ami sur ${sujetBattle}. 5 questions, 15 s.` : 'Défie un ami en direct sur un chapitre. 5 questions, 15 s.'}
+        </span>
+        <span className="hm-battle-btn">Envoyer un code</span>
+      </span>
+    </Link>
+  );
+
+  const rappels = (
+    <div className="hm-rappels">
+      <GuestBanner />
+      <ConsentBanner />
+      <EmailBanner />
     </div>
   );
 
   return (
-    <div className="app home-page">
-      {/* Le toast attend que la popup Battle soit fermée : deux calques en même temps se chevauchaient */}
-      {newBadge && !annonceBattle && (
-        <AchievementToast badge={newBadge} onDone={() => setNewBadge(null)} />
-      )}
+    <div className={`app app--no-halo home-page${isDesktop ? ' app--large' : ''}`} style={style}>
+      {newBadge && !annonceJeux && <AchievementToast badge={newBadge} onDone={() => setNewBadge(null)} />}
       {annonceRevizPlus && <RevizPlusAnnonce uid={currentUser.uid} onClose={() => setAnnonceRevizPlus(false)} />}
-      {annonceBattle && <BattleAnnonce uid={currentUser.uid} onClose={() => setAnnonceBattle(false)} />}
-      {ficheRevizPlus && <RevizPlusSheet onClose={() => setFicheRevizPlus(false)} />}
+      {annonceJeux && <JeuxAnnonce uid={currentUser.uid} onClose={() => setAnnonceJeux(false)} />}
 
-      <UserHeader
-        prenom={prenom}
-        level={level}
-        xpInLvl={xpInLvl}
-        fillPct={fillPct}
-        aura={aura}
-        isPremium={hasRevizPlus && !isGuest}
-        offert={revizPlusOffert}
-        onRevizPlus={isGuest ? undefined : () => setFicheRevizPlus(true)}
-      />
-
-      {/* Ordinateur : tableau de bord. Le bandeau d'essai vit dans la barre
-          latérale ; la dernière leçon devient une rangée « À reprendre » et
-          Mon programme des tuiles par matière. */}
       {isDesktop ? (
-        <div className="content home-desk">
-          {greeting}
-
-          <div className="home-rappels">
-            <ConsentBanner />
-            <EmailBanner />
-            <ControleBanner />
-          </div>
-
-          <div className="home-desk-top">
-            {isGuest ? hero : heroDesk}
-            <div className="home-desk-side">
-              {statsCard}
-              {montrerEssai && <ThemeEssai onClose={() => setEssaiTheme(false)} />}
-              {challengesCard}
-              {battleCard}
+        <div className="content hm-desk">
+          <div
+            className="hm-hero hm-hero--desk"
+            ref={hero}
+            onMouseEnter={() => { survol.current = true; }}
+            onMouseLeave={() => { survol.current = false; }}
+          >
+            <span className="hm-bulle hm-bulle--a" aria-hidden="true" />
+            <span className="hm-bulle hm-bulle--b" aria-hidden="true" />
+            <span className="hm-point" aria-hidden="true" />
+            <span className="hm-grain" aria-hidden="true" />
+            <div className="hm-hero-haut">
+              <span className="hm-date">{dateTxt}</span>
+              <div className="hm-hero-titres">
+                <span className="hm-auj">Aujourd'hui</span>
+                {serie}
+              </div>
+            </div>
+            {/* Réviz et ce qu'il dit, ensemble au centre : la bulle à gauche pointe vers sa tête. */}
+            <div className="hm-scene">
+              <div className="hm-hero-txt">
+                <h1 className="sr-only">{dit}</h1>
+                <BulleReviz key={`${humeurId}-${tour}`} lignes={sugg.lignes} parle={parle} sortie={sortie} onClick={sugg.action} label={sugg.label}
+                  pointe="droite" grande className="hm-bulle-parole" />
+                <div className="hm-proposition-place">
+                  {parle && <CarteFonction key={tour} carte={sugg.carte} entree sortie={sortie} grande onClick={sugg.action} />}
+                </div>
+                <div className="hm-points" role="group" aria-label="Ce que Réviz propose">
+                  {suggestions.map((p, i) => (
+                    <button
+                      key={i}
+                      type="button"
+                      className={`hm-point-sugg${i === tour % suggestions.length ? ' hm-point-sugg--la' : ''}`}
+                      onClick={() => allerA(i)}
+                      aria-label={p.carte.titre}
+                      aria-current={i === tour % suggestions.length}
+                    />
+                  ))}
+                </div>
+              </div>
+              <Pantin
+                ref={pantin}
+                size={TAILLE_PANTIN}
+                expression={h.expression}
+                entree={entree}
+                onEntree={aterri}
+                repli={null}
+                className="hm-pantin"
+                onClick={sauter}
+                label="Réviz, ta mascotte"
+              />
             </div>
           </div>
-
-          {recentLessons.length > 0 && (
-            <section className="home-desk-section" aria-labelledby="home-desk-recent">
-              <div className="home-desk-head">
-                <h2 id="home-desk-recent" className="home-desk-title">À reprendre</h2>
-                <Link to="/cours" className="home-desk-more">Mes cours ›</Link>
-              </div>
-              <div className="home-desk-recent">
-                {recentLessons.map(l => {
-                  const due = countDueCards(l.id, l.flashcardsCount ?? l.aiData?.flashcards?.length ?? 0);
-                  return (
-                    <button
-                      key={l.id}
-                      type="button"
-                      className="rv-card rv-card--link home-desk-lesson"
-                      onClick={() => { restoreLesson(l.id); navigate('/analyse'); }}
-                      aria-label={`Reprendre la leçon ${l.metadata.title}`}
-                    >
-                      <Mascot pose={subjectMascot(l.metadata.subject)} size={64} alt="" aria-hidden="true" className="home-desk-lesson-mascot" />
-                      <span className="home-desk-lesson-text">
-                        <span className="home-desk-lesson-meta">{l.metadata.subject} · {formatDate(l.scannedAt)}</span>
-                        <span className="home-desk-lesson-title">{l.metadata.title}</span>
-                        <span className={`rv-pill rv-pill--${due > 0 ? 'orange' : 'green'} home-desk-lesson-pill`}>
-                          {due > 0 ? `${due} carte${due > 1 ? 's' : ''} à travailler` : 'À jour'}
-                        </span>
-                      </span>
-                    </button>
-                  );
-                })}
-              </div>
-            </section>
-          )}
-
-          <HomeProgramme classe={programmeClasse} />
+          {rappels}
+          {montrerEssai && <div className="hm-essai-desk"><ThemeEssai onClose={() => setEssaiTheme(false)} /></div>}
+          <div className="hm-grille">
+            <div className="hm-carte hm-carte--chemin">{chemin}</div>
+            <div className="hm-carte">{carteMatieres}</div>
+            {carteJeux}
+            {carteBattle}
+          </div>
         </div>
       ) : (
-        <div className="content home-stack">
-
-          {/* Rappels (essai, accord parental, prochain contrôle) : une seule
-              carte de rangées fines, vide → masquée (home-rappels:empty). */}
-          <div className="home-rappels">
-            <GuestBanner />
-            <ConsentBanner />
-            <EmailBanner />
-            <ControleBanner />
+        <div
+          className="content hm-mobile"
+          onScroll={e => {
+            // La barre du haut arrive quand le héros a presque fini de passer dessous.
+            const fin = (hero.current?.offsetHeight ?? 400) - 90;
+            setCompact(Math.min(1, Math.max(0, (e.currentTarget.scrollTop - fin) / 30)));
+          }}
+        >
+          <div className="hm-hero" ref={hero}>
+            <span className="hm-bulle hm-bulle--a" aria-hidden="true" />
+            <span className="hm-bulle hm-bulle--b" aria-hidden="true" />
+            <span className="hm-point" aria-hidden="true" />
+            <span className="hm-grain" aria-hidden="true" />
+            <span className="hm-ombre" aria-hidden="true" />
+            <div className="hm-pantin-place">
+              <Pantin
+                ref={pantin}
+                size={TAILLE_PANTIN}
+                expression={h.expression}
+                entree={entree}
+                onEntree={aterri}
+                repli={null}
+                onClick={sauter}
+                label="Réviz, ta mascotte"
+              />
+            </div>
+            {/* Bandeau (essai, e-mail, accord parental) : tout en haut, dans l'aplat du héros. */}
+            {rappels}
+            <div className="hm-hero-haut">
+              <div className="hm-hero-titres">
+                <span className="hm-date">{dateTxt}</span>
+                <span className="hm-auj">Aujourd'hui</span>
+              </div>
+              {serie}
+            </div>
+            <h1 className="sr-only">{dit}</h1>
+            <BulleReviz key={`${humeurId}-${tour}`} lignes={sugg.lignes} parle={parle} sortie={sortie} onClick={sugg.action} label={sugg.label} className="hm-bulle-parole" />
           </div>
-
-          {greeting}
-
-          {hero}
-
-          {statsCard}
-
-          {montrerEssai && <ThemeEssai onClose={() => setEssaiTheme(false)} />}
-
-          {lastLessonCard}
-
-          {/* Réviser sans scan (programme de sa classe) ou en duel. En mode
-              essai, le héros pointe déjà sur le programme. */}
-          <div className="rv-card rv-rows">
-            {!isGuest && programmeRow}
-            {battleRow}
+          {/* Place réservée : la carte chevauche le bas du héros, rien ne saute quand elle arrive. */}
+          <div className="hm-proposition-place">
+            {parle && <CarteFonction key={tour} carte={sugg.carte} entree sortie={sortie} onClick={sugg.action} />}
           </div>
-
-          {challengesCard}
-
+          <div className="hm-pad hm-pad--chemin">{chemin}</div>
+          <div className="hm-pad">{carteJeux}</div>
+          {montrerEssai && <div className="hm-pad"><ThemeEssai onClose={() => setEssaiTheme(false)} /></div>}
+          <div className="hm-pad hm-pad--droite">{carteMatieres}</div>
+          <div className="hm-pad hm-pad--bas">{carteBattle}</div>
         </div>
       )}
+      {!isDesktop && <div className="hm-barre" style={{ opacity: compact }} aria-hidden="true">Aujourd'hui</div>}
 
       <BottomNav />
     </div>
