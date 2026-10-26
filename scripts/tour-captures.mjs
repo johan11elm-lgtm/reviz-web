@@ -39,6 +39,9 @@ const ENCOCHE = Number(args.encoche) || 0
 // --sans-liens true : saute la vérification des liens internes (plus rapide).
 const THEME = args.theme || ''
 const SANS_LIENS = args['sans-liens'] === 'true'
+// --injecter <fichier.js> : script ajouté à chaque page avant le sien (maquettes, prototypes) ; --piste X le paramètre (window.__PISTE__).
+const INJECTION = args.injecter ? fs.readFileSync(path.resolve(args.injecter), 'utf8') : ''
+const PISTE = args.piste || ''
 fs.mkdirSync(OUT, { recursive: true })
 
 const AUTH = 'http://127.0.0.1:9099'
@@ -334,6 +337,7 @@ async function ouvrir(browser, etat, largeur, classe, compte = null) {
     if (document.documentElement) ajouter()
     document.addEventListener('DOMContentLoaded', ajouter)
   }, CSS_FIGE)
+  if (INJECTION) await context.addInitScript(`window.__PISTE__ = ${JSON.stringify(PISTE)};\n${INJECTION}`)
   if (THEME) await context.addInitScript(t => { try { localStorage.setItem('reviz-theme', t) } catch { /* idem */ } }, THEME)
   if (compte?.sansProfil) {
     await context.addInitScript(([uid, level]) => { try { localStorage.setItem(`reviz-level-${uid}`, level) } catch { /* idem */ } }, [compte.uid, JSON.stringify(compte.level)])

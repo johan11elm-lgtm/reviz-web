@@ -23,19 +23,52 @@ const ALIASES = { 'carnet-kraft': 'abricot', 'violet-air': 'prune', 'menthe-focu
 // Thèmes à interface sombre (pilote isDark : status bar, images, etc.)
 export const DARK_THEMES = ['dark', 'nuit-encre'];
 
-// La refonte d'octobre 2026 (« Reviz Valide ») pose ses couleurs page par page, en clair seulement :
-// sous un thème sombre, seul le fond de l'app passait au noir et les textes restaient noirs dessus
-// (accueil illisible), le reste demeurait crème. Tant que la refonte n'a pas sa version sombre, les
-// thèmes sombres ne sont ni proposés ni appliqués : un choix déjà mémorisé reste en mémoire
-// (localStorage reviz-theme) mais s'affiche en Crème. Passer à true quand le sombre existera.
-export const SOMBRE_DISPONIBLE = false;
+// Mode d'affichage, à part du thème : Clair, Sombre, ou Auto (suit le réglage de l'appareil).
+// Gratuit pour tous. Mémorisé dans localStorage reviz-mode.
+export const MODES = [
+  { id: 'clair',  label: 'Clair' },
+  { id: 'sombre', label: 'Sombre' },
+  { id: 'auto',   label: 'Auto' },
+];
+export const MODE_PAR_DEFAUT = 'clair';
 
-/** Thèmes proposés dans les sélecteurs (Réglages, carte d'essai de l'accueil). */
-export const THEMES_PROPOSES = SOMBRE_DISPONIBLE ? THEMES : THEMES.filter(t => !DARK_THEMES.includes(t.id));
+// Le sombre de la refonte (« pastels allumés » : fond sombre, pastels gardés, héros en halo de leur
+// couleur) couvre toutes les pages depuis le 26/10. Suspendu du 25 au 26/10 faute de version sombre ;
+// à false, il n'est ni proposé ni appliqué (un choix mémorisé s'affiche alors en clair).
+export const SOMBRE_DISPONIBLE = true;
 
-/** Thème réellement posé sur <html data-theme> pour un thème choisi. */
-export function themeAffiche(id) {
-  return !SOMBRE_DISPONIBLE && DARK_THEMES.includes(id) ? 'light' : id;
+/** Thèmes proposés dans les sélecteurs (Réglages, carte d'essai de l'accueil) : le sombre est un mode, pas un thème. */
+export const THEMES_PROPOSES = THEMES.filter(t => !DARK_THEMES.includes(t.id));
+
+/** Mode lu au démarrage : un ancien choix de thème sombre devient le mode Sombre. */
+export function modeInitial(modeStocke, themeStocke) {
+  if (MODES.some(m => m.id === modeStocke)) return modeStocke;
+  return DARK_THEMES.includes(themeStocke) ? 'sombre' : MODE_PAR_DEFAUT;
+}
+
+/** L'app s'affiche-t-elle en sombre ? */
+export function estSombre(mode, appareilSombre) {
+  if (!SOMBRE_DISPONIBLE) return false;
+  return mode === 'sombre' || (mode === 'auto' && appareilSombre);
+}
+
+/**
+ * Au démarrage, avant le premier rendu : pose le sombre tout de suite s'il est choisi (pas de flash
+ * clair), y compris sur les pages publiques (bienvenue…) que ThemeProvider n'enveloppe pas.
+ */
+export function sombreAuDemarrage() {
+  try {
+    const mode = modeInitial(localStorage.getItem('reviz-mode'), localStorage.getItem('reviz-theme'));
+    if (estSombre(mode, !!window.matchMedia?.('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    }
+  } catch { /* stockage indisponible : clair */ }
+}
+
+/** Thème réellement posé sur <html data-theme>. */
+export function themeAffiche(id, sombre = false) {
+  if (sombre) return 'dark';
+  return DARK_THEMES.includes(id) ? 'light' : id;
 }
 
 export function themeById(id) {

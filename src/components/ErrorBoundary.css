@@ -1,6 +1,6 @@
 /* Écran « quelque chose a planté » : héros lavande en arc, Réviz perplexe, un bouton orange.
  * Couleurs posées en dur : le thème ou les variables ont pu ne pas se charger. */
-.eb-page { min-height: 100dvh; display: flex; flex-direction: column; background: #F8EFE7; color: #1B1A23; text-align: center; }
+.eb-page { min-height: 100dvh; display: flex; flex-direction: column; background: var(--rv-fond); color: var(--rv-encre); text-align: center; }
 .eb-hero {
   position: relative; overflow: hidden; display: flex; align-items: flex-end; justify-content: center;
   min-height: 300px; padding-top: env(safe-area-inset-top, 0px);
@@ -11,18 +11,25 @@
 .eb-deco--b { width: 110px; height: 110px; left: -50px; top: 150px; }
 .eb-reviz { position: relative; z-index: 1; margin-bottom: 24px; }
 .eb-bas { display: flex; flex-direction: column; align-items: center; gap: 12px; width: 100%; max-width: 420px; margin: 0 auto; padding: 32px 24px 40px; box-sizing: border-box; }
-.eb-sur { font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #6E675B; }
+.eb-sur { font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--rv-doux); }
 .eb-titre { margin: 0; font-family: 'Bricolage Grotesque', var(--font-display, sans-serif); font-size: 32px; font-weight: 800; line-height: 1.05; letter-spacing: -.035em; }
-.eb-texte { margin: 0; font-size: 16px; font-weight: 500; line-height: 1.5; color: #6E675B; }
+.eb-texte { margin: 0; font-size: 16px; font-weight: 500; line-height: 1.5; color: var(--rv-doux); }
 .eb-btn {
   width: 100%; min-height: 56px; margin-top: 14px; border: 0; border-radius: 999px;
-  background: #C25407; box-shadow: 0 5px 0 #8F3E05;
+  background: var(--rv-orange); box-shadow: 0 5px 0 var(--rv-orange-tranche);
   font-family: 'Geist', sans-serif; font-size: 17px; font-weight: 700; color: #fff; cursor: pointer;
 }
-.eb-btn:active { transform: translateY(4px); box-shadow: 0 1px 0 #8F3E05; }
-.eb-btn:focus-visible { outline: 3px solid #1B1A23; outline-offset: 3px; }
+.eb-btn:active { transform: translateY(4px); box-shadow: 0 1px 0 var(--rv-orange-tranche); }
+.eb-btn:focus-visible { outline: 3px solid var(--rv-encre); outline-offset: 3px; }
 @media (min-width: 1024px) {
   .eb-hero { min-height: 380px; border-radius: 0 0 50% 50% / 0 0 80px 80px; }
   .eb-titre { font-size: 44px; }
   .eb-btn { width: auto; padding: 0 32px; }
 }
+
+/* ── Sombre : héros en halo lavande (cf. accueil) ── */
+:root[data-theme="dark"] .eb-hero {
+  background: var(--rv-carte);
+  background: radial-gradient(70% 60% at 50% 60%, color-mix(in srgb, #C9C2F2 40%, transparent) 0%, color-mix(in srgb, #C9C2F2 14%, transparent) 55%, transparent 85%), var(--rv-carte);
+}
+:root[data-theme="dark"] .eb-deco { background: color-mix(in srgb, #C9C2F2 10%, transparent); }

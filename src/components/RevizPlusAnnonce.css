@@ -1,14 +1,26 @@
 /* Popup Réviz+ de l'accueil : la feuille de RevizPlusOffre.css, un titre et trois avantages. */
 .rpa-titre { margin: 6px 0 0; font-family: var(--font-display); font-size: 28px; font-weight: 800; line-height: 1.05; letter-spacing: -.03em; }
 .rpo-feuille--fenetre .rpa-titre { font-size: 32px; }
-.rpa-texte { margin: -2px 0 0; font-size: 15.5px; line-height: 1.45; color: #6E675B; }
-.rpa-liste { margin: 2px 0 4px; padding: 4px 16px; border-radius: 22px; background: #fff; box-shadow: 0 12px 30px rgba(160,80,20,.08); list-style: none; }
+.rpa-texte { margin: -2px 0 0; font-size: 15.5px; line-height: 1.45; color: var(--rv-doux); }
+.rpa-liste { margin: 2px 0 4px; padding: 4px 16px; border-radius: 22px; background: var(--rv-carte); box-shadow: 0 12px 30px rgba(var(--rv-ombre-2),.08); list-style: none; }
 .rpa-liste li { display: grid; grid-template-columns: 34px 1fr; column-gap: 12px; align-items: center; padding: 11px 0; }
-.rpa-liste li + li { border-top: 1.5px dashed #EADBCB; }
+.rpa-liste li + li { border-top: 1.5px dashed var(--rv-ligne); }
 .rpa-liste b { font-size: 15px; font-weight: 700; }
-.rpa-liste li > span:last-child { grid-column: 2; font-size: 13.5px; font-weight: 500; color: #6E675B; }
-.rpa-rond { grid-row: span 2; display: flex; align-items: center; justify-content: center; width: 34px; height: 34px; border-radius: 50%; color: #1B1A23; }
+.rpa-liste li > span:last-child { grid-column: 2; font-size: 13.5px; font-weight: 500; color: var(--rv-doux); }
+.rpa-rond { grid-row: span 2; display: flex; align-items: center; justify-content: center; width: 34px; height: 34px; border-radius: 50%; color: var(--rv-encre); }
 .rpa-rond svg { width: 17px; height: 17px; }
 .rpa-rond--lavande { background: #E4E0FA; box-shadow: 0 3px 0 #C9C2F2; }
 .rpa-rond--peche { background: #FFE6D2; box-shadow: 0 3px 0 #FFC596; }
 .rpa-rond--menthe { background: #DCF5E6; box-shadow: 0 3px 0 #A8E3C2; }
+
+/* ── Sombre : ces pastels gardent leur texte sombre (cf. rv-ilot dans global.css) ── */
+:root[data-theme="dark"] .rpa-rond--lavande,
+:root[data-theme="dark"] .rpa-rond--peche,
+:root[data-theme="dark"] .rpa-rond--menthe {
+  --rv-encre: #1B1A23; --rv-encre-rgb: 27,26,35; --rv-doux: #6E675B; --rv-doux-rgb: 110,103,91;
+  --rv-carte: #fff; --rv-carte-rgb: 255,255,255; --rv-carte-haute: #fff; --rv-ligne: #EADBCB; --rv-piste: #F3E6D8;
+  --rv-orange-texte: #C25407; --rv-vert-texte: #1F8A52; --rv-brun-texte: #8F3E05;
+  --ch-encre: #1B1A23; --ch-doux: #6E675B; --bt-encre: #1B1A23; --bt-doux: #6E675B; --en-encre: #1B1A23; --en-doux: #6E675B; --hb-encre: #1B1A23; --hb-doux: #6E675B;
+  --hm-encre: #1B1A23; --hm-doux: #6E675B; --inst-encre: #1B1A23; --inst-doux: #6E675B; --lg-encre: #1B1A23; --lg-doux: #6E675B; --prg-encre: #1B1A23; --prg-doux: #6E675B;
+  color: #1B1A23;
+}

@@ -246,7 +246,7 @@ export default function Cours() {
     const c = couleurs(reprendre.matiere);
     const quand = reprendre.av.ouverteLe ? `ouverte ${ilYa(reprendre.av.ouverteLe)}` : `scannée ${ilYa(reprendre.scannedAt)}`;
     return (
-      <div className="le-reprendre" style={{ '--le-pastel': c.pastel, '--le-fonce': c.fonce }}>
+      <div className="le-reprendre rv-ilot" style={{ '--le-pastel': c.pastel, '--le-fonce': c.fonce }}>
         <div className="le-reprendre-haut">
           <span className="le-rond-matiere" aria-hidden="true"><Mascot pose={subjectMascot(reprendre.matiere)} size={isDesktop ? 56 : 48} alt="" /></span>
           <span className="le-reprendre-txt">
@@ -416,7 +416,7 @@ export default function Cours() {
                   {[{ id: 'all', nom: 'Toutes', n: lecons.length }, ...matieres.map(m => ({ ...m, n: m.lecons.length }))].map(m => (
                     <li key={m.id}>
                       <button type="button" className={`le-matiere${filtre === m.id ? ' is-active' : ''}`} aria-pressed={filtre === m.id} onClick={() => setFiltre(m.id)}>
-                        <span className="le-matiere-rond" style={{ background: m.pastel ?? '#F8EFE7' }} aria-hidden="true">
+                        <span className="le-matiere-rond" style={{ background: m.pastel ?? 'var(--rv-fond)' }} aria-hidden="true">
                           {m.id === 'all' ? <Grille /> : <Mascot pose={m.pose} size={36} alt="" />}
                         </span>
                         <span className="le-matiere-nom">{m.nom}</span>

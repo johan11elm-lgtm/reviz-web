@@ -9,7 +9,7 @@
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  border: 3px solid #fff;
+  border: 3px solid var(--rv-carte);
   background: #FFE6D2;
   box-shadow: 0 6px 0 rgba(194,84,7,.28);
   transition: transform .15s;
@@ -17,8 +17,8 @@
 .ch-case:active { transform: translateY(3px); }
 .ch-case-rond { display: flex; align-items: center; justify-content: center; border-radius: 50%; overflow: hidden; }
 .ch-case--fait { background: #34C77B; box-shadow: 0 6px 0 #1F8A52; }
-.ch-case--fait .ch-case-rond { width: 79%; height: 79%; background: #fff; }
-.ch-case--cours { background: #fff; border: 4px solid #C25407; box-shadow: 0 6px 0 #8F3E05; }
+.ch-case--fait .ch-case-rond { width: 79%; height: 79%; background: var(--rv-carte); }
+.ch-case--cours { background: var(--rv-carte); border: 4px solid var(--rv-orange); box-shadow: 0 6px 0 var(--rv-orange-tranche); }
 .ch-case--cours .ch-case-rond { width: 82%; height: 82%; background: var(--ch-interieur); }
 .ch-case-coche {
   position: absolute;
@@ -27,7 +27,7 @@
   width: 24px;
   height: 24px;
   border-radius: 50%;
-  border: 2px solid #fff;
+  border: 2px solid var(--rv-carte);
   background: #34C77B;
   display: flex;
   align-items: center;
@@ -36,8 +36,19 @@
 .ch-case-label { position: absolute; display: flex; flex-direction: column; align-items: center; text-align: center; pointer-events: none; }
 .ch-case-nom { font-size: 14px; font-weight: 700; color: var(--ch-encre); }
 .ch-case-meta { margin-top: 1px; font-size: 12px; font-weight: 600; color: var(--ch-doux); }
-.ch-case-meta--cours { color: #C25407; }
-.ch-case-meta--fait { color: #1F8A52; }
+.ch-case-meta--cours { color: var(--rv-orange-texte); }
+.ch-case-meta--fait { color: var(--rv-vert-texte); }
 
 .ch-parcours--grand .ch-case-nom { font-size: 16px; }
 @media (hover: hover) { .ch-parcours--grand .ch-case:hover { transform: translateY(-2px); } }
+
+/* ── Sombre : ces pastels gardent leur texte sombre (cf. rv-ilot dans global.css) ── */
+:root[data-theme="dark"] .ch-case,
+:root[data-theme="dark"] .ch-case--cours .ch-case-rond {
+  --rv-encre: #1B1A23; --rv-encre-rgb: 27,26,35; --rv-doux: #6E675B; --rv-doux-rgb: 110,103,91;
+  --rv-carte: #fff; --rv-carte-rgb: 255,255,255; --rv-carte-haute: #fff; --rv-ligne: #EADBCB; --rv-piste: #F3E6D8;
+  --rv-orange-texte: #C25407; --rv-vert-texte: #1F8A52; --rv-brun-texte: #8F3E05;
+  --ch-encre: #1B1A23; --ch-doux: #6E675B; --bt-encre: #1B1A23; --bt-doux: #6E675B; --en-encre: #1B1A23; --en-doux: #6E675B; --hb-encre: #1B1A23; --hb-doux: #6E675B;
+  --hm-encre: #1B1A23; --hm-doux: #6E675B; --inst-encre: #1B1A23; --inst-doux: #6E675B; --lg-encre: #1B1A23; --lg-doux: #6E675B; --prg-encre: #1B1A23; --prg-doux: #6E675B;
+  color: #1B1A23;
+}

@@ -433,7 +433,7 @@ export default function Coach() {
                 </>
               )}
             </span>
-            <button type="button" className="ia-pastille" style={{ background: c.pastel }} onClick={() => setChoix(true)} disabled={lecons.length < 2}
+            <button type="button" className="ia-pastille rv-ilot" style={{ background: c.pastel }} onClick={() => setChoix(true)} disabled={lecons.length < 2}
               aria-label={`Leçon : ${titre}${lecons.length > 1 ? '. Changer de leçon' : ''}`}>
               <i style={{ background: c.point }} aria-hidden="true" /><span>{titreCourt[0].toUpperCase() + titreCourt.slice(1)}</span>
             </button>

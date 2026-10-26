@@ -22,34 +22,34 @@
 }
 
 /* ── Préparation et erreur (handoff Scanner du 21/10) : héros pêche avec Réviz, carte à cheval ── */
-.analyse-page .an-etat { position: fixed; inset: 0; z-index: 260; overflow-y: auto; background: #F8EFE7; color: #1B1A23; }
+.analyse-page .an-etat { position: fixed; inset: 0; z-index: 260; overflow-y: auto; background: var(--rv-fond); color: var(--rv-encre); }
 .analyse-page .an-etat-hero { display: flex; flex-direction: column; align-items: center; padding: calc(env(safe-area-inset-top, 0px) + 22px) 20px 92px; text-align: center; }
 .analyse-page .an-etat-sur { position: relative; z-index: 1; margin: 14px 0 18px; font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
 .analyse-page .an-etat-haut { position: relative; z-index: 2; align-self: stretch; display: flex; margin-bottom: 14px; }
-.analyse-page .an-etat-fermer { width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; border: 0; border-radius: 50%; background: #fff; box-shadow: 0 4px 12px rgba(150,70,20,.12); color: #1B1A23; cursor: pointer; }
+.analyse-page .an-etat-fermer { width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; border: 0; border-radius: 50%; background: var(--rv-carte); box-shadow: 0 4px 12px rgba(150,70,20,.12); color: var(--rv-encre); cursor: pointer; }
 .analyse-page .an-etat-bulle { position: relative; z-index: 1; margin-bottom: 6px; }
 .analyse-page .an-etat-hero .mascot, .analyse-page .an-etat-hero img { position: relative; z-index: 1; }
-.analyse-page .an-etat-carte { position: relative; z-index: 2; display: flex; flex-direction: column; gap: 10px; max-width: 520px; margin: -64px 20px 40px; padding: 22px 20px; border-radius: 26px; background: #fff; box-shadow: 0 12px 30px rgba(160,80,20,.14); }
+.analyse-page .an-etat-carte { position: relative; z-index: 2; display: flex; flex-direction: column; gap: 10px; max-width: 520px; margin: -64px 20px 40px; padding: 22px 20px; border-radius: 26px; background: var(--rv-carte); box-shadow: 0 12px 30px rgba(var(--rv-ombre-2),.14); }
 @media (min-width: 560px) { .analyse-page .an-etat-carte { margin-left: auto; margin-right: auto; } }
 .analyse-page .an-etat-titre { margin: 0 0 4px; font-family: var(--font-display); font-size: 21px; font-weight: 800; line-height: 1.15; letter-spacing: -.02em; }
-.analyse-page .an-etat-txt { margin: 0; font-size: 15px; font-weight: 500; line-height: 1.5; color: #6E675B; }
+.analyse-page .an-etat-txt { margin: 0; font-size: 15px; font-weight: 500; line-height: 1.5; color: var(--rv-doux); }
 .analyse-page .an-formats { display: flex; flex-direction: column; gap: 14px; margin: 6px 0 4px; padding: 0; list-style: none; }
 .analyse-page .an-format { display: flex; align-items: center; gap: 14px; }
 .analyse-page .an-format b { flex: 1; font-size: 16px; font-weight: 700; }
-.analyse-page .an-format > span:last-child { font-size: 13px; font-weight: 600; color: #6E675B; }
+.analyse-page .an-format > span:last-child { font-size: 13px; font-weight: 600; color: var(--rv-doux); }
 .analyse-page .an-format-rond { flex: none; width: 32px; height: 32px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: #FFE6D2; box-shadow: 0 3px 0 rgba(194,84,7,.2); transition: background .3s; }
-.analyse-page .an-format--afaire b { color: #6E675B; }
-.analyse-page .an-format--cours .an-format-rond { background: #fff; border: 4px solid #C25407; box-shadow: 0 3px 0 #8F3E05; }
+.analyse-page .an-format--afaire b { color: var(--rv-doux); }
+.analyse-page .an-format--cours .an-format-rond { background: var(--rv-carte); border: 4px solid var(--rv-orange); box-shadow: 0 3px 0 var(--rv-orange-tranche); }
 .analyse-page .an-format--pret .an-format-rond { background: #34C77B; box-shadow: 0 3px 0 #1F8A52; animation: anPret .35s cubic-bezier(.3,1.6,.5,1); }
 @keyframes anPret { from { transform: scale(.6); } }
 .analyse-page .an-barre { display: flex; align-items: center; gap: 14px; margin-top: 8px; }
-.analyse-page .an-barre-fond { flex: 1; height: 10px; overflow: hidden; border-radius: 999px; background: #EADBCB; }
-.analyse-page .an-barre-fond i { display: block; height: 100%; border-radius: 999px; background: #C25407; transition: width .8s ease; }
+.analyse-page .an-barre-fond { flex: 1; height: 10px; overflow: hidden; border-radius: 999px; background: var(--rv-ligne); }
+.analyse-page .an-barre-fond i { display: block; height: 100%; border-radius: 999px; background: var(--rv-orange); transition: width .8s ease; }
 .analyse-page .an-barre b { min-width: 44px; font-size: 14px; font-weight: 700; text-align: right; }
-.analyse-page .an-etat-btn { height: 56px; margin-top: 6px; border: 0; border-radius: 999px; background: #C25407; box-shadow: 0 5px 0 #8F3E05; font: 700 16px 'Geist', system-ui, sans-serif; color: #fff; cursor: pointer; transition: transform .12s, box-shadow .12s; }
-.analyse-page .an-etat-btn:active { transform: translateY(4px); box-shadow: 0 1px 0 #8F3E05; }
-.analyse-page .an-etat-btn--creme { background: #F8EFE7; box-shadow: 0 5px 0 #EADBCB; color: #1B1A23; }
-.analyse-page .an-etat-btn--creme:active { box-shadow: 0 1px 0 #EADBCB; }
+.analyse-page .an-etat-btn { height: 56px; margin-top: 6px; border: 0; border-radius: 999px; background: var(--rv-orange); box-shadow: 0 5px 0 var(--rv-orange-tranche); font: 700 16px 'Geist', system-ui, sans-serif; color: #fff; cursor: pointer; transition: transform .12s, box-shadow .12s; }
+.analyse-page .an-etat-btn:active { transform: translateY(4px); box-shadow: 0 1px 0 var(--rv-orange-tranche); }
+.analyse-page .an-etat-btn--creme { background: var(--rv-fond); box-shadow: 0 5px 0 var(--rv-ligne); color: var(--rv-encre); }
+.analyse-page .an-etat-btn--creme:active { box-shadow: 0 1px 0 var(--rv-ligne); }
 .analyse-page.ch-page--large .an-etat-hero { padding: 40px 56px 130px; border-radius: 0 0 50% 50% / 0 0 80px 80px; }
 .analyse-page.ch-page--large .an-etat-carte { margin: -96px auto 48px; padding: 28px; }
 .analyse-page.ch-page--large .an-etat-titre { font-size: 26px; }
@@ -62,7 +62,7 @@
  * Héros dans la teinte de la matière (--ch-* posées par la page), Réviz qui
  * parle, « Prochaine étape » à cheval, puis Ton parcours (Résumé → Flashcards
  * → Quiz sur une petite route), la carte mentale, L'essentiel et Réviz IA. */
-.analyse-page.ch-page { background: #F8EFE7; }
+.analyse-page.ch-page { background: var(--rv-fond); }
 .analyse-page .ch-defile {
   display: block;
   padding: 0 0 calc(130px + env(safe-area-inset-bottom, 0px));
@@ -83,26 +83,26 @@
   display: block;
   padding: 14px;
   border-radius: 26px;
-  background: #fff;
-  box-shadow: 0 12px 30px rgba(160,80,20,.14);
+  background: var(--rv-carte);
+  box-shadow: 0 12px 30px rgba(var(--rv-ombre-2),.14);
   color: inherit;
   text-decoration: none;
 }
 .analyse-page .ch-etape-haut { display: flex; align-items: center; gap: 14px; }
 .analyse-page .ch-etape-rond { width: 60px; height: 60px; flex: none; border-radius: 50%; background: #FFE6D2; display: flex; align-items: center; justify-content: center; overflow: hidden; }
 .analyse-page .ch-etape-txt { flex: 1; min-width: 0; display: flex; flex-direction: column; }
-.analyse-page .ch-etape-surtitre { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #C25407; }
+.analyse-page .ch-etape-surtitre { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--rv-orange-texte); }
 .analyse-page .ch-etape-titre { margin-top: 2px; font-family: var(--font-display); font-size: 18px; font-weight: 800; letter-spacing: -.02em; line-height: 1.15; color: var(--ch-encre); }
 .analyse-page .ch-etape-sous { margin-top: 2px; font-size: 13px; color: var(--ch-doux); }
-.analyse-page .ch-etape-go { width: 44px; height: 44px; flex: none; border-radius: 50%; background: #C25407; color: #fff; display: flex; align-items: center; justify-content: center; }
+.analyse-page .ch-etape-go { width: 44px; height: 44px; flex: none; border-radius: 50%; background: var(--rv-orange); color: #fff; display: flex; align-items: center; justify-content: center; }
 .analyse-page .ch-segments-bloc { display: block; margin-top: 12px; }
 .analyse-page .ch-segments { display: flex; gap: 4px; }
-.analyse-page .ch-segments i { flex: 1; height: 8px; border-radius: 99px; background: #EADBCB; }
+.analyse-page .ch-segments i { flex: 1; height: 8px; border-radius: 99px; background: var(--rv-ligne); }
 .analyse-page .ch-segments i.ch-seg--sue, .analyse-page .ch-legende i.ch-seg--sue { background: #34C77B; }
-.analyse-page .ch-segments i.ch-seg--revoir, .analyse-page .ch-legende i.ch-seg--revoir { background: #C25407; }
+.analyse-page .ch-segments i.ch-seg--revoir, .analyse-page .ch-legende i.ch-seg--revoir { background: var(--rv-orange); }
 .analyse-page .ch-legende { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 8px; font-size: 12px; font-weight: 600; color: var(--ch-doux); }
 .analyse-page .ch-legende span { display: inline-flex; align-items: center; gap: 6px; }
-.analyse-page .ch-legende i { width: 8px; height: 8px; border-radius: 50%; background: #EADBCB; }
+.analyse-page .ch-legende i { width: 8px; height: 8px; border-radius: 50%; background: var(--rv-ligne); }
 
 /* ── Sections ── */
 .analyse-page .ch-pile { display: flex; flex-direction: column; gap: 28px; padding: 28px 20px 0; }
@@ -118,8 +118,8 @@
   gap: 12px;
   padding: 8px 18px 8px 8px;
   border-radius: 999px;
-  background: #fff;
-  box-shadow: 0 8px 22px rgba(160,80,20,.10);
+  background: var(--rv-carte);
+  box-shadow: 0 8px 22px rgba(var(--rv-ombre-2),.10);
   color: inherit;
   text-decoration: none;
 }
@@ -129,15 +129,15 @@
 .analyse-page .ch-pilule-titre { font-size: 15px; font-weight: 700; color: var(--ch-encre); }
 .analyse-page .ch-pilule-sous { font-size: 13px; color: var(--ch-doux); }
 .analyse-page .ch-pilule-coche { width: 28px; height: 28px; border-radius: 50%; background: #34C77B; display: flex; align-items: center; justify-content: center; }
-.analyse-page .ch-ia-anneau { width: 50px; height: 50px; flex: none; padding: 3px; box-sizing: border-box; border-radius: 50%; background: conic-gradient(#C25407, #FFD9E4, #C25407); }
-.analyse-page .ch-ia-anneau > span { width: 100%; height: 100%; border-radius: 50%; border: 2px solid #fff; box-sizing: border-box; background: #fff; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.analyse-page .ch-ia-anneau { width: 50px; height: 50px; flex: none; padding: 3px; box-sizing: border-box; border-radius: 50%; background: conic-gradient(var(--rv-orange), #FFD9E4, var(--rv-orange)); }
+.analyse-page .ch-ia-anneau > span { width: 100%; height: 100%; border-radius: 50%; border: 2px solid var(--rv-carte); box-sizing: border-box; background: var(--rv-carte); display: flex; align-items: center; justify-content: center; overflow: hidden; }
 .analyse-page .ch-pilule--ia { padding-right: 8px; }
-.analyse-page .ch-ia-go { width: 44px; height: 44px; flex: none; border-radius: 50%; background: var(--ch-encre); display: flex; align-items: center; justify-content: center; }
+.analyse-page .ch-ia-go { width: 44px; height: 44px; flex: none; border-radius: 50%; background: var(--rv-inverse); display: flex; align-items: center; justify-content: center; }
 
 /* L'essentiel */
-.analyse-page .ch-points { margin: 0; padding: 6px 18px; list-style: none; border-radius: 26px; background: #fff; box-shadow: 0 12px 30px rgba(160,80,20,.10); }
+.analyse-page .ch-points { margin: 0; padding: 6px 18px; list-style: none; border-radius: 26px; background: var(--rv-carte); box-shadow: 0 12px 30px rgba(var(--rv-ombre-2),.10); }
 .analyse-page .ch-points li { display: flex; align-items: flex-start; gap: 12px; padding: 14px 0; }
-.analyse-page .ch-points li + li { border-top: 1.5px dashed #EADBCB; }
+.analyse-page .ch-points li + li { border-top: 1.5px dashed var(--rv-ligne); }
 .analyse-page .ch-point-num {
   width: 28px;
   height: 28px;
@@ -150,7 +150,7 @@
   font-family: var(--font-display);
   font-size: 15px;
   font-weight: 800;
-  color: var(--ch-encre);
+  color: #1B1A23;
 }
 .analyse-page .ch-point-txt { font-size: 15px; font-weight: 600; line-height: 1.4; color: var(--ch-encre); }
 
@@ -175,13 +175,13 @@
   gap: 8px;
   padding: 0 20px;
   border-radius: 999px;
-  background: #C25407;
+  background: var(--rv-orange);
   color: #fff;
   font-size: 15px;
   font-weight: 700;
   transition: background .15s;
 }
-.ch-page--large .ch-etape:hover .ch-etape-cta { background: #8F3E05; }
+.ch-page--large .ch-etape:hover .ch-etape-cta { background: var(--rv-orange-tranche); }
 .ch-page--large .ch-segments i { height: 9px; }
 
 .ch-page--large .ch-grille {
@@ -195,7 +195,7 @@
   grid-auto-rows: max-content;
 }
 .ch-page--large .ch-col { display: flex; flex-direction: column; gap: 36px; min-width: 0; }
-.ch-page--large .ch-pilule:hover { box-shadow: 0 12px 28px rgba(160,80,20,.16); }
+.ch-page--large .ch-pilule:hover { box-shadow: 0 12px 28px rgba(var(--rv-ombre-2),.16); }
 .ch-page--large .ch-points { display: grid; grid-template-columns: 1fr 1fr; column-gap: 40px; padding: 8px 28px; }
 .ch-page--large .ch-points li:nth-child(2) { border-top: 0; }
 .ch-page--large .ch-points li { padding: 16px 0; }
@@ -203,7 +203,7 @@
 .ch-page--large .ch-point-txt { font-size: 16px; }
 
 /* Réviz IA : une carte avec des suggestions et le champ */
-.ch-page--large .ch-ia-carte { display: flex; flex-direction: column; gap: 16px; padding: 22px; border-radius: 28px; background: #fff; box-shadow: 0 12px 30px rgba(160,80,20,.12); }
+.ch-page--large .ch-ia-carte { display: flex; flex-direction: column; gap: 16px; padding: 22px; border-radius: 28px; background: var(--rv-carte); box-shadow: 0 12px 30px rgba(var(--rv-ombre-2),.12); }
 .ch-page--large .ch-ia-tete { display: flex; align-items: center; gap: 14px; }
 .ch-page--large .ch-ia-tete .ch-ia-anneau { width: 58px; height: 58px; }
 .ch-page--large .ch-ia-titre { margin: 0; font-family: var(--font-display); font-size: 22px; font-weight: 800; letter-spacing: -.02em; color: var(--ch-encre); }
@@ -216,18 +216,32 @@
   border-radius: 999px;
   background: #E4E0FA;
   font: 600 14px 'Geist', system-ui, sans-serif;
-  color: var(--ch-encre);
+  color: #1B1A23;
   text-align: left;
   cursor: pointer;
 }
 .ch-page--large .ch-ia-suggestion:hover { background: #D8D2F7; }
-.ch-page--large .ch-ia-champ { display: flex; align-items: center; gap: 8px; height: 52px; padding: 0 6px 0 18px; border-radius: 999px; background: #F8EFE7; }
+.ch-page--large .ch-ia-champ { display: flex; align-items: center; gap: 8px; height: 52px; padding: 0 6px 0 18px; border-radius: 999px; background: var(--rv-fond); }
 .ch-page--large .ch-ia-champ input { flex: 1; min-width: 0; border: 0; background: none; font: 500 15px 'Geist', system-ui, sans-serif; color: var(--ch-encre); outline: none; }
-.ch-page--large .ch-ia-champ button { width: 40px; height: 40px; flex: none; border: 0; border-radius: 50%; background: var(--ch-encre); display: flex; align-items: center; justify-content: center; cursor: pointer; }
+.ch-page--large .ch-ia-champ button { width: 40px; height: 40px; flex: none; border: 0; border-radius: 50%; background: var(--rv-inverse); display: flex; align-items: center; justify-content: center; cursor: pointer; }
 .ch-page--large .ch-ia-champ button:disabled { opacity: .35; cursor: default; }
 
 /* Assez large : contenu à gauche, Réviz IA à droite */
 .ch-page--large .ch-defile { container-type: inline-size; }
 @container (min-width: 1200px) {
   .ch-page--large .ch-grille--ia { grid-template-columns: minmax(0, 1fr) 400px; gap: 56px; }
+}
+
+/* ── Sombre : ces pastels gardent leur texte sombre (cf. rv-ilot dans global.css) ── */
+:root[data-theme="dark"] .analyse-page .an-format-rond,
+:root[data-theme="dark"] .analyse-page .ch-etape-rond,
+:root[data-theme="dark"] .analyse-page .ch-pilule-rond,
+:root[data-theme="dark"] .analyse-page .ch-pilule-rond--lavande,
+:root[data-theme="dark"] .ch-page--large .ch-ia-suggestion:hover {
+  --rv-encre: #1B1A23; --rv-encre-rgb: 27,26,35; --rv-doux: #6E675B; --rv-doux-rgb: 110,103,91;
+  --rv-carte: #fff; --rv-carte-rgb: 255,255,255; --rv-carte-haute: #fff; --rv-ligne: #EADBCB; --rv-piste: #F3E6D8;
+  --rv-orange-texte: #C25407; --rv-vert-texte: #1F8A52; --rv-brun-texte: #8F3E05;
+  --ch-encre: #1B1A23; --ch-doux: #6E675B; --bt-encre: #1B1A23; --bt-doux: #6E675B; --en-encre: #1B1A23; --en-doux: #6E675B; --hb-encre: #1B1A23; --hb-doux: #6E675B;
+  --hm-encre: #1B1A23; --hm-doux: #6E675B; --inst-encre: #1B1A23; --inst-doux: #6E675B; --lg-encre: #1B1A23; --lg-doux: #6E675B; --prg-encre: #1B1A23; --prg-doux: #6E675B;
+  color: #1B1A23;
 }

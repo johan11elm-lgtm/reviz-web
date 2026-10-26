@@ -1,10 +1,10 @@
 /* Réglages (handoff Claude Design du 22/10) : héros court lavande, famille Moi ; cartes de
  * lignes, interrupteurs et choix ronds à tranche ; feuilles du bas (fenêtre sur ordinateur). */
 .rg-page {
-  --rg-bord: #EADBCB; --rg-orange: #C25407; --rg-tranche: #8F3E05;
+  --rg-bord: var(--rv-ligne); --rg-orange: var(--rv-orange); --rg-tranche: var(--rv-orange-tranche);
   --rg-vert: #34C77B; --rg-vert-texte: #1F8A52; --rg-vert-fond: #DCF5E6;
   min-height: 100dvh;
-  background: #F8EFE7;
+  background: var(--rv-fond);
   color: var(--ch-encre);
 }
 .rg-defile {
@@ -23,7 +23,7 @@
 .rg-retour {
   display: flex; align-items: center; justify-content: center;
   width: 44px; height: 44px;
-  border: 0; border-radius: 50%; background: #fff; box-shadow: 0 4px 0 #C9C2F2;
+  border: 0; border-radius: 50%; background: var(--rv-carte); box-shadow: 0 4px 0 #C9C2F2;
   color: var(--ch-encre); cursor: pointer;
 }
 .rg-hero-corps { position: relative; z-index: 1; display: flex; align-items: flex-end; justify-content: space-between; gap: 4px; margin-top: 14px; }
@@ -38,11 +38,11 @@
 
 /* ── Cartes et lignes ── */
 .rg-colonne { position: relative; z-index: 2; display: flex; flex-direction: column; gap: 16px; margin: -52px 16px 0; }
-.rg-carte { box-sizing: border-box; padding: 20px; border-radius: 26px; background: #fff; box-shadow: 0 10px 28px rgba(160,80,20,.12); scroll-margin-top: 20px; }
+.rg-carte { box-sizing: border-box; padding: 20px; border-radius: 26px; background: var(--rv-carte); box-shadow: 0 10px 28px rgba(var(--rv-ombre-2),.12); scroll-margin-top: 20px; }
 .rg-carte-tete { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
 .rg-h2 { margin: 0 0 6px; font-family: var(--font-display); font-size: 20px; font-weight: 800; letter-spacing: -.02em; }
 .rg-sous { margin: 0; font-size: 14px; font-weight: 500; line-height: 1.45; color: var(--ch-doux); }
-.rg-note { margin: 10px 0 0; padding: 12px 14px; border-radius: 16px; background: #F8EFE7; font-size: 13px; font-weight: 500; line-height: 1.45; color: var(--ch-doux); }
+.rg-note { margin: 10px 0 0; padding: 12px 14px; border-radius: 16px; background: var(--rv-fond); font-size: 13px; font-weight: 500; line-height: 1.45; color: var(--ch-doux); }
 .rg-note--centre { padding: 0; background: none; text-align: center; }
 .rg-ligne {
   display: flex; align-items: center; gap: 14px;
@@ -54,7 +54,7 @@
 .rg-ligne--fixe { cursor: default; }
 .rg-ligne + .rg-ligne { border-top: 1.5px dashed var(--rg-bord); }
 .rg-ligne > svg { flex: none; color: var(--ch-doux); }
-.rg-rond { flex: none; display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; color: var(--ch-encre); }
+.rg-rond { flex: none; display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; color: #1B1A23; }
 .rg-rond svg { width: 18px; height: 18px; }
 .rg-rond--lavande { background: #E4E0FA; }
 .rg-rond--peche { background: #FFE6D2; }
@@ -67,7 +67,7 @@
 .rg-inter { position: relative; flex: none; width: 54px; height: 32px; cursor: pointer; }
 .rg-inter input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: pointer; z-index: 1; }
 .rg-inter span { position: absolute; inset: 0; border-radius: 999px; background: var(--rg-bord); box-shadow: 0 3px 0 #D8C3AE; transition: background .2s, box-shadow .2s; }
-.rg-inter span::after { content: ''; position: absolute; top: 3px; left: 3px; width: 26px; height: 26px; border-radius: 50%; background: #fff; box-shadow: 0 2px 4px rgba(27,26,35,.18); transition: transform .2s; }
+.rg-inter span::after { content: ''; position: absolute; top: 3px; left: 3px; width: 26px; height: 26px; border-radius: 50%; background: var(--rv-carte); box-shadow: 0 2px 4px rgba(var(--rv-encre-rgb),.18); transition: transform .2s; }
 .rg-inter input:checked + span { background: var(--rg-vert); box-shadow: 0 3px 0 var(--rg-vert-texte); }
 .rg-inter input:checked + span::after { transform: translateX(22px); }
 .rg-inter input:focus-visible + span { outline: 3px solid var(--ch-encre); outline-offset: 3px; }
@@ -77,12 +77,25 @@
 .rg-objectifs { display: flex; gap: 14px; margin-top: 14px; }
 .rg-objectif {
   width: 60px; height: 60px; border: 1.5px solid var(--rg-bord); border-radius: 50%;
-  background: #fff; box-shadow: 0 5px 0 var(--rg-bord);
+  background: var(--rv-carte); box-shadow: 0 5px 0 var(--rg-bord);
   font-family: var(--font-display); font-size: 22px; font-weight: 800; color: var(--ch-encre);
   cursor: pointer; transition: transform .1s;
 }
 .rg-objectif:active { transform: translateY(3px); box-shadow: 0 2px 0 var(--rg-bord); }
 .rg-objectif.is-choisi { border-color: var(--rg-orange); background: var(--rg-orange); box-shadow: 0 5px 0 var(--rg-tranche); color: #fff; }
+
+/* Apparence : Clair / Sombre / Auto, même tranche que les choix ronds */
+.rg-modes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.rg-mode {
+  height: 46px; border: 1.5px solid var(--rg-bord); border-radius: 999px;
+  background: var(--rv-carte); box-shadow: 0 4px 0 var(--rg-bord);
+  font-family: inherit; font-size: 15px; font-weight: 700; color: var(--ch-encre);
+  cursor: pointer; transition: transform .1s;
+}
+.rg-mode:active { transform: translateY(3px); box-shadow: 0 1px 0 var(--rg-bord); }
+.rg-mode.is-choisi { border-color: var(--rg-orange); background: var(--rg-orange); box-shadow: 0 4px 0 var(--rg-tranche); color: #fff; }
+.rg-mode:focus-visible { outline: 3px solid var(--ch-encre); outline-offset: 3px; }
+.rg-mode-note { margin-top: 10px; font-size: 13px; }
 
 /* Apparence : aperçus de thèmes */
 .rg-carte > .rg-sur { margin: 14px 0 10px; }
@@ -103,14 +116,14 @@
 .rg-theme-coche {
   position: absolute; right: 4px; bottom: 4px;
   display: flex; align-items: center; justify-content: center;
-  width: 24px; height: 24px; border-radius: 50%; background: var(--ch-encre); color: #fff;
+  width: 24px; height: 24px; border-radius: 50%; background: var(--rv-inverse); color: var(--rv-sur-inverse);
 }
 .rg-theme-coche svg { width: 13px; height: 13px; }
-.rg-theme.is-verrou .rg-theme-apercu::after { content: ''; position: absolute; inset: 0; background: rgba(248,239,231,.42); }
+.rg-theme.is-verrou .rg-theme-apercu::after { content: ''; position: absolute; inset: 0; background: rgba(var(--rv-fond-rgb),.42); }
 .rg-theme-cadenas {
   position: absolute; z-index: 1; left: 50%; top: 50%; transform: translate(-50%, -50%);
   display: flex; align-items: center; justify-content: center;
-  width: 30px; height: 30px; border-radius: 50%; background: #fff; color: var(--ch-encre);
+  width: 30px; height: 30px; border-radius: 50%; background: var(--rv-carte); color: var(--ch-encre);
 }
 .rg-theme-cadenas svg { width: 14px; height: 14px; }
 .rg-theme-nom { font-size: 12.5px; font-weight: 600; line-height: 1.2; text-align: center; }
@@ -123,13 +136,13 @@
 .rg-etat { display: inline-flex; align-items: center; gap: 6px; height: 28px; padding: 0 12px; border-radius: 999px; font-size: 13px; font-weight: 700; }
 .rg-etat::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
 .rg-etat--actif { background: var(--rg-vert-fond); color: var(--rg-vert-texte); }
-.rg-etat--offert { background: #FFE6D2; color: var(--rg-tranche); }
+.rg-etat--offert { background: #FFE6D2; color: #8F3E05; }
 .rg-plus-formule { display: flex; align-items: center; gap: 14px; margin: 10px 0 14px; }
 .rg-plus-formule > img, .rg-plus-formule > picture > img { flex: none; width: 60px; height: 60px; border-radius: 50%; background: #FFE6D2; }
 .rg-plus-formule > span { display: flex; flex-direction: column; gap: 2px; }
 .rg-plus-formule b { font-family: var(--font-display); font-size: 19px; font-weight: 800; letter-spacing: -.02em; }
 .rg-plus-formule span span { font-size: 14px; font-weight: 500; line-height: 1.4; color: var(--ch-doux); }
-.rg-plus-echeance { display: flex; justify-content: space-between; gap: 10px; margin-bottom: 14px; padding: 12px 14px; border-radius: 14px; background: #F8EFE7; font-size: 13.5px; color: var(--ch-doux); }
+.rg-plus-echeance { display: flex; justify-content: space-between; gap: 10px; margin-bottom: 14px; padding: 12px 14px; border-radius: 14px; background: var(--rv-fond); font-size: 13.5px; color: var(--ch-doux); }
 .rg-plus-echeance b { color: var(--ch-encre); }
 .rg-avantages { display: flex; flex-direction: column; gap: 10px; margin: 0 0 16px; padding: 0; list-style: none; }
 .rg-avantages li { display: flex; align-items: center; gap: 10px; font-size: 14.5px; font-weight: 600; }
@@ -137,7 +150,7 @@
 #abonnement .rg-btn + .rg-note--centre { margin-top: 12px; }
 
 /* Informations */
-.rg-apropos { margin-top: 10px; padding: 14px 16px; border-radius: 18px; background: #F8EFE7; }
+.rg-apropos { margin-top: 10px; padding: 14px 16px; border-radius: 18px; background: var(--rv-fond); }
 .rg-apropos div { display: flex; justify-content: space-between; gap: 10px; }
 .rg-apropos b { font-size: 14.5px; font-weight: 700; }
 .rg-apropos span { font-size: 12.5px; font-weight: 600; color: var(--ch-doux); }
@@ -163,10 +176,10 @@
 .rg-btn:disabled { opacity: .55; cursor: default; }
 .rg-btn:focus-visible { outline: 3px solid var(--ch-encre); outline-offset: 3px; }
 .rg-btn svg { width: 18px; height: 18px; }
-.rg-btn--blanc { background: #fff; color: var(--ch-encre); box-shadow: 0 5px 0 var(--rg-bord); }
+.rg-btn--blanc { background: var(--rv-carte); color: var(--ch-encre); box-shadow: 0 5px 0 var(--rg-bord); }
 #abonnement .rg-btn--blanc { border: 1.5px solid var(--rg-bord); }
 .rg-btn--blanc:active:not(:disabled) { box-shadow: 0 1px 0 var(--rg-bord); }
-.rg-btn--encre { background: var(--ch-encre); box-shadow: 0 5px 0 #000; }
+.rg-btn--encre { background: var(--rv-inverse); color: var(--rv-sur-inverse); box-shadow: 0 5px 0 #000; }
 .rg-btn--encre:active:not(:disabled) { box-shadow: 0 1px 0 #000; }
 .rg-btn--encre:disabled { opacity: .85; }
 .rg-btn--petit { width: auto; min-height: 42px; padding: 0 18px; font-size: 14.5px; }
@@ -188,16 +201,16 @@
 .rg-message--reussite { background: var(--rg-vert-fond); }
 .rg-message--reussite .rg-message-rond { background: var(--rg-vert); }
 .rg-message--reussite b { color: var(--rg-vert-texte); }
-.rg-message--erreur { background: #FFD9E4; color: var(--ch-encre); }
+.rg-message--erreur { background: #FFD9E4; color: #1B1A23; }
 .rg-message--erreur .rg-message-rond { background: #F4B8CB; }
 
 /* ── Feuilles ── */
-.rg-voile { position: fixed; inset: 0; z-index: 300; display: flex; align-items: flex-end; justify-content: center; background: rgba(27,26,35,.38); animation: rgFondu .2s both; }
+.rg-voile { position: fixed; inset: 0; z-index: 300; display: flex; align-items: flex-end; justify-content: center; background: rgba(var(--rv-voile-rgb),.38); animation: rgFondu .2s both; }
 @keyframes rgFondu { from { opacity: 0; } }
 .rg-feuille {
   position: relative; width: 100%; max-width: 520px; max-height: calc(100dvh - 60px); overflow-y: auto; box-sizing: border-box;
   padding: 12px 20px calc(24px + env(safe-area-inset-bottom, 0px));
-  border-radius: 30px 30px 0 0; background: #F8EFE7;
+  border-radius: 30px 30px 0 0; background: var(--rv-fond);
   animation: rgMonte .3s cubic-bezier(.3,1.2,.5,1) both;
 }
 @keyframes rgMonte { from { transform: translateY(100%); } }
@@ -211,13 +224,13 @@
 .rg-label { margin-top: 8px; font-size: 14px; font-weight: 700; }
 .rg-input {
   width: 100%; height: 52px; box-sizing: border-box; padding: 0 16px;
-  border: 2px solid var(--rg-bord); border-radius: 16px; background: #fff;
+  border: 2px solid var(--rg-bord); border-radius: 16px; background: var(--rv-carte);
   font-family: 'Geist', sans-serif; font-size: 16px; font-weight: 500; color: var(--ch-encre); outline: none;
 }
 .rg-input:focus { border-color: var(--rg-orange); }
 .rg-classes { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 2px; }
 .rg-classe {
-  height: 52px; border: 1.5px solid var(--rg-bord); border-radius: 999px; background: #fff; box-shadow: 0 4px 0 var(--rg-bord);
+  height: 52px; border: 1.5px solid var(--rg-bord); border-radius: 999px; background: var(--rv-carte); box-shadow: 0 4px 0 var(--rg-bord);
   font-family: var(--font-display); font-size: 18px; font-weight: 800; color: var(--ch-encre); cursor: pointer;
 }
 .rg-classe.is-choisie { border-color: var(--rg-orange); background: var(--rg-orange); box-shadow: 0 4px 0 var(--rg-tranche); color: #fff; }
@@ -238,7 +251,7 @@
 .rg-colonnes .rg-colonne { margin: 0; gap: 24px; }
 .rg-page--large .rg-pied { width: 360px; margin: 32px auto 0; }
 .rg-page--large .rg-voile { align-items: center; }
-.rg-page--large .rg-feuille { max-width: 480px; border-radius: 30px; padding: 24px 28px 28px; box-shadow: 0 30px 80px -20px rgba(27,26,35,.35); }
+.rg-page--large .rg-feuille { max-width: 480px; border-radius: 30px; padding: 24px 28px 28px; box-shadow: 0 30px 80px -20px rgba(var(--rv-encre-rgb),.35); }
 .rg-page--large .rg-poignee { display: none; }
 
 @media (max-width: 1240px) {
@@ -247,4 +260,28 @@
 }
 @media (prefers-reduced-motion: reduce) {
   .rg-voile, .rg-feuille, .rg-anneau { animation: none; }
+}
+
+/* ── Sombre : ces pastels gardent leur texte sombre (cf. rv-ilot dans global.css) ── */
+:root[data-theme="dark"] .rg-rond--lavande,
+:root[data-theme="dark"] .rg-rond--peche,
+:root[data-theme="dark"] .rg-rond--menthe,
+:root[data-theme="dark"] .rg-verrou,
+:root[data-theme="dark"] .rg-message--erreur .rg-message-rond {
+  --rv-encre: #1B1A23; --rv-encre-rgb: 27,26,35; --rv-doux: #6E675B; --rv-doux-rgb: 110,103,91;
+  --rv-carte: #fff; --rv-carte-rgb: 255,255,255; --rv-carte-haute: #fff; --rv-ligne: #EADBCB; --rv-piste: #F3E6D8;
+  --rv-orange-texte: #C25407; --rv-vert-texte: #1F8A52; --rv-brun-texte: #8F3E05;
+  --ch-encre: #1B1A23; --ch-doux: #6E675B; --bt-encre: #1B1A23; --bt-doux: #6E675B; --en-encre: #1B1A23; --en-doux: #6E675B; --hb-encre: #1B1A23; --hb-doux: #6E675B;
+  --hm-encre: #1B1A23; --hm-doux: #6E675B; --inst-encre: #1B1A23; --inst-doux: #6E675B; --lg-encre: #1B1A23; --lg-doux: #6E675B; --prg-encre: #1B1A23; --prg-doux: #6E675B;
+  color: #1B1A23;
+}
+
+/* ── Sombre : ces pastels gardent leur texte sombre (cf. rv-ilot dans global.css) ── */
+:root[data-theme="dark"] .rg-message--reussite {
+  --rv-encre: #1B1A23; --rv-encre-rgb: 27,26,35; --rv-doux: #6E675B; --rv-doux-rgb: 110,103,91;
+  --rv-carte: #fff; --rv-carte-rgb: 255,255,255; --rv-carte-haute: #fff; --rv-ligne: #EADBCB; --rv-piste: #F3E6D8;
+  --rv-orange-texte: #C25407; --rv-vert-texte: #1F8A52; --rv-brun-texte: #8F3E05;
+  --ch-encre: #1B1A23; --ch-doux: #6E675B; --bt-encre: #1B1A23; --bt-doux: #6E675B; --en-encre: #1B1A23; --en-doux: #6E675B; --hb-encre: #1B1A23; --hb-doux: #6E675B;
+  --hm-encre: #1B1A23; --hm-doux: #6E675B; --inst-encre: #1B1A23; --inst-doux: #6E675B; --lg-encre: #1B1A23; --lg-doux: #6E675B; --prg-encre: #1B1A23; --prg-doux: #6E675B;
+  color: #1B1A23;
 }

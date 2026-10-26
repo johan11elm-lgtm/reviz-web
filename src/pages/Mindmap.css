@@ -1,6 +1,6 @@
 /* Carte mentale (handoff Claude Design du 21/10) : héros teinté, branches en ronds de plateau,
  * panneau de la branche ouverte (du bas sur téléphone, à côté sur ordinateur), écran de fin. */
-.cm-page { background: #F8EFE7; color: var(--ch-encre); }
+.cm-page { background: var(--rv-fond); color: var(--ch-encre); }
 .cm-ecran { position: relative; padding-bottom: calc(110px + env(safe-area-inset-bottom, 0px)); }
 .cm-defile, .cm-ecran { flex: 1; min-height: 0; overflow-y: auto; overflow-x: hidden; scrollbar-width: none; }
 .cm-defile::-webkit-scrollbar, .cm-ecran::-webkit-scrollbar { display: none; }
@@ -13,7 +13,7 @@
 .cm-etat-titre { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; opacity: .7; white-space: nowrap; }
 .cm-etat-ligne { display: flex; align-items: center; gap: 8px; margin-top: 3px; font-size: 13px; font-weight: 700; white-space: nowrap; }
 .cm-segments { display: flex; gap: 4px; }
-.cm-segments i { width: 16px; height: 6px; border-radius: 999px; background: rgba(27,26,35,.15); transition: background .3s; }
+.cm-segments i { width: 16px; height: 6px; border-radius: 999px; background: rgba(var(--rv-encre-rgb),.15); transition: background .3s; }
 .cm-segments i.is-vue { background: #34C77B; }
 
 .cm-pilule-teste {
@@ -25,21 +25,21 @@
   padding: 0 12px;
   border: 0;
   border-radius: 999px;
-  background: #fff;
+  background: var(--rv-carte);
   box-shadow: 0 4px 12px var(--ch-ombre);
   font: 700 13px 'Geist', system-ui, sans-serif;
   color: var(--ch-encre);
   cursor: pointer;
   transition: background .2s, color .2s;
 }
-.cm-pilule-teste.is-on { background: #1B1A23; color: #fff; }
+.cm-pilule-teste.is-on { background: var(--rv-inverse); color:var(--rv-sur-inverse); }
 .cm-pilule-teste .cm-interrupteur { order: -1; width: 28px; height: 16px; }
 .cm-pilule-teste .cm-interrupteur i { top: 2px; left: 2px; width: 12px; height: 12px; }
 .cm-pilule-teste .cm-interrupteur.is-on i { left: 14px; }
 
-.cm-interrupteur { position: relative; flex: none; width: 46px; height: 28px; border-radius: 999px; background: #EADBCB; transition: background .2s; }
-.cm-interrupteur.is-on { background: #C25407; }
-.cm-interrupteur i { position: absolute; top: 4px; left: 4px; width: 20px; height: 20px; border-radius: 50%; background: #fff; box-shadow: 0 2px 4px rgba(0,0,0,.15); transition: left .2s; }
+.cm-interrupteur { position: relative; flex: none; width: 46px; height: 28px; border-radius: 999px; background: var(--rv-ligne); transition: background .2s; }
+.cm-interrupteur.is-on { background: var(--rv-orange); }
+.cm-interrupteur i { position: absolute; top: 4px; left: 4px; width: 20px; height: 20px; border-radius: 50%; background: var(--rv-carte); box-shadow: 0 2px 4px rgba(0,0,0,.15); transition: left .2s; }
 .cm-interrupteur.is-on i { left: 22px; }
 
 /* Réviz et sa bulle */
@@ -55,8 +55,8 @@
   margin: -58px 47px 0;
   padding: 14px 16px;
   border-radius: 26px;
-  background: #fff;
-  box-shadow: 0 12px 30px rgba(160,80,20,.14);
+  background: var(--rv-carte);
+  box-shadow: 0 12px 30px rgba(var(--rv-ombre-2),.14);
   text-align: center;
 }
 .cm-centre-surtitre { display: block; font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--ch-doux); }
@@ -82,12 +82,12 @@
   align-items: center;
   justify-content: center;
   padding: 0 14px;
-  border: 4px solid #fff;
+  border: 4px solid var(--rv-carte);
   border-radius: 50%;
   background: var(--cm-pastel);
-  box-shadow: 0 6px 0 var(--cm-fonce), 0 14px 24px rgba(160,80,20,.12);
+  box-shadow: 0 6px 0 var(--cm-fonce), 0 14px 24px rgba(var(--rv-ombre-2),.12);
   font-family: inherit;
-  color: var(--ch-encre);
+  color: #1B1A23;
   text-align: center;
   cursor: pointer;
   transition: transform .2s, border-color .2s, box-shadow .2s;
@@ -98,8 +98,8 @@
 .cm-branche:nth-of-type(4) { animation-delay: .18s; }
 @keyframes cmApparait { from { opacity: 0; transform: scale(.8); } to { opacity: 1; transform: none; } }
 .cm-branche:active { transform: scale(.96); }
-.cm-branche:focus-visible { outline: 3px solid #1B1A23; outline-offset: 4px; }
-.cm-branche.is-ouverte { border-color: #C25407; box-shadow: 0 6px 0 #8F3E05, 0 14px 24px rgba(160,80,20,.12); }
+.cm-branche:focus-visible { outline: 3px solid var(--rv-encre); outline-offset: 4px; }
+.cm-branche.is-ouverte { border-color: var(--rv-orange); box-shadow: 0 6px 0 var(--rv-orange-tranche), 0 14px 24px rgba(var(--rv-ombre-2),.12); }
 .cm-branche-num { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; opacity: .6; }
 .cm-branche-nom { font-family: var(--font-display); font-size: 17px; font-weight: 800; line-height: 1.08; letter-spacing: -.02em; text-wrap: balance; }
 .cm-branche-idees { margin-top: 4px; font-size: 12px; font-weight: 600; color: var(--ch-doux); }
@@ -113,7 +113,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 3px solid #fff;
+  border: 3px solid var(--rv-carte);
   border-radius: 50%;
   background: #34C77B;
   box-shadow: 0 3px 0 #1F8A52;
@@ -124,7 +124,7 @@
 /* ── Détail d'une branche ── */
 .cm-detail { display: flex; flex-direction: column; min-height: 0; flex: 1; }
 .cm-detail-tete { position: relative; padding: 14px 72px 18px 20px; background: var(--cm-pastel); }
-.cm-poignee { display: block; width: 40px; height: 5px; margin: 0 auto 12px; border-radius: 999px; background: rgba(27,26,35,.18); transform: translateX(26px); }
+.cm-poignee { display: block; width: 40px; height: 5px; margin: 0 auto 12px; border-radius: 999px; background: rgba(var(--rv-encre-rgb),.18); transform: translateX(26px); }
 .cm-detail-surtitre { display: block; font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; opacity: .7; }
 .cm-detail-nom { margin: 4px 0 0; font-family: var(--font-display); font-size: 28px; font-weight: 800; line-height: 1.05; letter-spacing: -.03em; }
 .cm-fermer {
@@ -138,7 +138,7 @@
   justify-content: center;
   border: 0;
   border-radius: 50%;
-  background: #fff;
+  background: var(--rv-carte);
   color: var(--ch-encre);
   cursor: pointer;
 }
@@ -146,7 +146,7 @@
 .cm-explication { margin: 0; font-size: 17px; font-weight: 500; line-height: 1.55; text-wrap: pretty; }
 .cm-idees-tete { display: flex; justify-content: space-between; align-items: baseline; margin-top: 18px; }
 .cm-idees-titre { font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--ch-doux); }
-.cm-indice { font-size: 12px; font-weight: 700; color: #C25407; }
+.cm-indice { font-size: 12px; font-weight: 700; color: var(--rv-orange-texte); }
 .cm-idees { display: flex; flex-direction: column; gap: 8px; margin: 10px 0 0; padding: 0; list-style: none; }
 .cm-idee {
   width: 100%;
@@ -158,7 +158,7 @@
   padding: 10px 14px;
   border: 0;
   border-radius: 18px;
-  background: #F8EFE7;
+  background: var(--rv-fond);
   font-family: var(--font-display);
   font-size: 18px;
   font-weight: 800;
@@ -189,14 +189,14 @@
   cursor: pointer;
   transition: transform .12s, box-shadow .12s;
 }
-.cm-btn--orange { background: #C25407; color: #fff; box-shadow: 0 5px 0 #8F3E05; }
-.cm-btn--orange:active { transform: translateY(4px); box-shadow: 0 1px 0 #8F3E05; }
-.cm-btn--blanc { height: 52px; background: #fff; color: var(--ch-encre); font-size: 15px; box-shadow: 0 5px 0 var(--ch-bulle); }
+.cm-btn--orange { background: var(--rv-orange); color: #fff; box-shadow: 0 5px 0 var(--rv-orange-tranche); }
+.cm-btn--orange:active { transform: translateY(4px); box-shadow: 0 1px 0 var(--rv-orange-tranche); }
+.cm-btn--blanc { height: 52px; background: var(--rv-carte); color: var(--ch-encre); font-size: 15px; box-shadow: 0 5px 0 var(--ch-bulle); }
 .cm-btn--blanc:active { transform: translateY(4px); box-shadow: 0 1px 0 var(--ch-bulle); }
 .cm-lien { align-self: center; padding: 6px 14px; border: 0; background: none; font: 700 14px 'Geist', system-ui, sans-serif; color: var(--ch-encre); opacity: .7; cursor: pointer; }
 
 /* Feuille du bas (téléphone) */
-.cm-voile { position: fixed; inset: 0; z-index: 290; background: rgba(27,26,35,.28); opacity: 0; pointer-events: none; transition: opacity .25s; }
+.cm-voile { position: fixed; inset: 0; z-index: 290; background: rgba(var(--rv-voile-rgb),.28); opacity: 0; pointer-events: none; transition: opacity .25s; }
 .cm-voile.is-la { opacity: 1; pointer-events: auto; }
 .cm-feuille {
   position: fixed;
@@ -208,7 +208,7 @@
   display: flex;
   flex-direction: column;
   border-radius: 30px 30px 0 0;
-  background: #fff;
+  background: var(--rv-carte);
   box-shadow: 0 -12px 40px rgba(90,70,160,.18);
   overflow: hidden;
   transform: translateY(105%);
@@ -222,7 +222,7 @@
 .cm-fin .cm-ligne-haut { align-self: stretch; }
 .cm-surtitre { display: block; margin-top: 16px; font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--ch-doux); text-align: center; }
 .cm-fin-titre { margin: 6px 0 0; font-family: var(--font-display); font-size: 42px; font-weight: 800; line-height: 1; letter-spacing: -.04em; text-align: center; }
-.cm-fin-carte { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin-top: 18px; padding: 16px; border-radius: 26px; background: #fff; box-shadow: 0 12px 30px rgba(160,80,20,.12); }
+.cm-fin-carte { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin-top: 18px; padding: 16px; border-radius: 26px; background: var(--rv-carte); box-shadow: 0 12px 30px rgba(var(--rv-ombre-2),.12); }
 .cm-fin-branche {
   display: flex;
   align-items: center;
@@ -230,7 +230,7 @@
   padding: 10px;
   border: 0;
   border-radius: 18px;
-  background: #F8EFE7;
+  background: var(--rv-fond);
   font: 700 14px/1.15 'Geist', system-ui, sans-serif;
   color: var(--ch-encre);
   text-align: left;
@@ -273,7 +273,7 @@
 .cm-plateau--grand .cm-branche-idees { margin-top: 6px; font-size: 13px; }
 .cm-plateau--grand .cm-branche-coche { top: 6px; right: 6px; width: 36px; height: 36px; box-shadow: 0 4px 0 #1F8A52; }
 .cm-plateau--grand .cm-branche:hover { transform: scale(1.04); }
-.cm-plateau--grand .cm-branche.is-ouverte { transform: scale(1.04); box-shadow: 0 7px 0 #8F3E05, 0 18px 30px rgba(160,80,20,.16); }
+.cm-plateau--grand .cm-branche.is-ouverte { transform: scale(1.04); box-shadow: 0 7px 0 var(--rv-orange-tranche), 0 18px 30px rgba(var(--rv-ombre-2),.16); }
 .cm-centre {
   position: absolute;
   width: 220px;
@@ -285,7 +285,7 @@
   justify-content: center;
   padding: 0 26px;
   border-radius: 50%;
-  background: #fff;
+  background: var(--rv-carte);
   box-shadow: 0 7px 0 var(--ch-bulle), 0 18px 36px rgba(90,70,160,.16);
   text-align: center;
 }
@@ -300,7 +300,7 @@
   display: flex;
   flex-direction: column;
   border-radius: 28px;
-  background: #fff;
+  background: var(--rv-carte);
   box-shadow: 0 16px 40px rgba(90,70,160,.14);
   overflow: hidden;
 }
@@ -313,11 +313,11 @@
 .cm-panneau .cm-explication { font-size: 18px; }
 .cm-panneau .cm-idees-tete { margin-top: 22px; }
 .cm-panneau .cm-idee { min-height: 58px; gap: 14px; padding: 10px 16px; font-size: 21px; transition: background .15s; }
-.cm-panneau .cm-idee.is-cachee:hover { background: #F3E7DC; }
-.cm-panneau .cm-detail-corps > .cm-btn { height: 58px; margin: 18px 0 24px; box-shadow: 0 6px 0 #8F3E05; }
-.cm-panneau .cm-detail-corps > .cm-btn:active { box-shadow: 0 2px 0 #8F3E05; }
-.cm-panneau .rv-bulle-txt { background: #F8EFE7; box-shadow: none; max-width: 340px; font-size: 23px; padding: 14px 22px; border-radius: 24px; }
-.cm-panneau .rv-bulle-txt::after { background: #F8EFE7; }
+.cm-panneau .cm-idee.is-cachee:hover { background: var(--rv-survol, #F3E7DC); }
+.cm-panneau .cm-detail-corps > .cm-btn { height: 58px; margin: 18px 0 24px; box-shadow: 0 6px 0 var(--rv-orange-tranche); }
+.cm-panneau .cm-detail-corps > .cm-btn:active { box-shadow: 0 2px 0 var(--rv-orange-tranche); }
+.cm-panneau .rv-bulle-txt { background: var(--rv-fond); box-shadow: none; max-width: 340px; font-size: 23px; padding: 14px 22px; border-radius: 24px; }
+.cm-panneau .rv-bulle-txt::after { background: var(--rv-fond); }
 .cm-panneau .rv-bulle-ligne + .rv-bulle-ligne { font-size: 15px; }
 
 .cm-panneau-accueil,
@@ -330,7 +330,7 @@
 .cm-panneau-fin .cm-reviz { margin-top: 18px; }
 .cm-panneau-fin .cm-fin-actions { align-self: stretch; margin-top: 18px; }
 .cm-panneau-fin .cm-btn { height: 58px; }
-.cm-panneau-fin .cm-btn--blanc { height: 54px; background: #F8EFE7; box-shadow: 0 5px 0 #EADBCB; }
+.cm-panneau-fin .cm-btn--blanc { height: 54px; background: var(--rv-fond); box-shadow: 0 5px 0 var(--rv-ligne); }
 
 .cm-teste {
   flex: none;
@@ -339,8 +339,8 @@
   gap: 12px;
   padding: 14px 24px;
   border: 0;
-  border-top: 1.5px dashed #EADBCB;
-  background: #fff;
+  border-top: 1.5px dashed var(--rv-ligne);
+  background: var(--rv-carte);
   font-family: inherit;
   color: var(--ch-encre);
   text-align: left;
@@ -359,3 +359,19 @@
   .cm-feuille, .cm-voile { transition: none; }
 }
 .cm-plateau-int { position: relative; transform-origin: 0 0; }
+
+/* ── Sombre : l'écran de fin passe sur le fond sombre, halo de la matière en haut ── */
+:root[data-theme="dark"] .cm-fin {
+  background: var(--rv-fond);
+  background: radial-gradient(90% 46% at 50% 20%, color-mix(in srgb, var(--ch-bulle) 30%, transparent) 0%, color-mix(in srgb, var(--ch-bulle) 10%, transparent) 55%, transparent 85%), var(--rv-fond);
+}
+
+/* ── Sombre : ces pastels gardent leur texte sombre (cf. rv-ilot dans global.css) ── */
+:root[data-theme="dark"] .cm-detail-tete {
+  --rv-encre: #1B1A23; --rv-encre-rgb: 27,26,35; --rv-doux: #6E675B; --rv-doux-rgb: 110,103,91;
+  --rv-carte: #fff; --rv-carte-rgb: 255,255,255; --rv-carte-haute: #fff; --rv-ligne: #EADBCB; --rv-piste: #F3E6D8;
+  --rv-orange-texte: #C25407; --rv-vert-texte: #1F8A52; --rv-brun-texte: #8F3E05;
+  --ch-encre: #1B1A23; --ch-doux: #6E675B; --bt-encre: #1B1A23; --bt-doux: #6E675B; --en-encre: #1B1A23; --en-doux: #6E675B; --hb-encre: #1B1A23; --hb-doux: #6E675B;
+  --hm-encre: #1B1A23; --hm-doux: #6E675B; --inst-encre: #1B1A23; --inst-doux: #6E675B; --lg-encre: #1B1A23; --lg-doux: #6E675B; --prg-encre: #1B1A23; --prg-doux: #6E675B;
+  color: #1B1A23;
+}

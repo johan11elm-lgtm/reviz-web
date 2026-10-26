@@ -115,7 +115,7 @@ export function AjoutControle({ initial = {}, onClose, onSaved }) {
           const choisie = matiere === x.slug;
           return (
             <button key={x.slug} type="button" className={`ag-matiere${choisie ? ' is-choisie' : ''}`} aria-pressed={choisie} onClick={() => setMatiere(x.slug)}
-              style={{ background: k.fond, boxShadow: choisie ? `0 0 0 2px #1B1A23, 0 4px 0 ${k.tranche}` : `0 4px 0 ${k.tranche}` }}>
+              style={{ background: k.fond, boxShadow: choisie ? `0 0 0 2px var(--rv-encre), 0 4px 0 ${k.tranche}` : `0 4px 0 ${k.tranche}` }}>
               <span className="ag-matiere-rond" aria-hidden="true"><Mascot pose={x.mascot} size={30} alt="" /></span>
               {x.slug === 'autre' ? 'Autre' : x.label}
             </button>

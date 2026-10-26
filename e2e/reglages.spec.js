@@ -44,11 +44,12 @@ for (const [appareil, viewport] of APPAREILS) {
       await page.screenshot({ path: test.info().outputPath(`${appareil}-reglages.png`), animations: 'disabled' })
     })
 
-    test('thème et objectif du jour sont retrouvés après un rechargement', async ({ page }) => {
-      await ouvrirReglages(page)
+    test('thème, affichage et objectif du jour sont retrouvés après un rechargement', async ({ page }) => {
+      // Abonné : depuis la fin du lancement offert (26/10), Sauge est verrouillé sans Réviz+.
+      await ouvrirReglages(page, { profil: { plan: 'premium' } })
       await expect(page.locator('html')).toHaveAttribute('data-theme', 'light')
-      // Pas de mode sombre tant que la refonte n'a pas sa version sombre (SOMBRE_DISPONIBLE).
-      await expect(page.getByRole('checkbox', { name: 'Activer le mode sombre' })).toHaveCount(0)
+      // Le sombre est un mode (Clair par défaut), pas un thème : pas de tuile « Sombre ».
+      await expect(page.getByRole('radio', { name: 'Clair', exact: true })).toHaveAttribute('aria-checked', 'true')
       await expect(page.getByRole('radio', { name: /Thème Sombre/ })).toHaveCount(0)
 
       const sauge = page.getByRole('radio', { name: /Thème Sauge/ })
@@ -66,14 +67,36 @@ for (const [appareil, viewport] of APPAREILS) {
       await expect(page.getByRole('radio', { name: '5 révisions par jour' })).toHaveAttribute('aria-checked', 'true')
       await expect(page.getByRole('radio', { name: '3 révisions par jour' })).toHaveAttribute('aria-checked', 'false')
 
-      // Un mode sombre mémorisé avant la refonte s'affiche en Crème.
-      await page.evaluate(() => localStorage.setItem('reviz-theme', 'dark'))
+      // Mode Sombre : l'app passe en sombre, le thème Sauge reste choisi pour le clair ; gardé après rechargement.
+      await cliquerAuCentre(page.getByRole('radio', { name: 'Sombre', exact: true }))
+      await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark')
+      await expect(page.getByText('Les thèmes ci-dessous habillent le mode clair.')).toBeVisible()
       await page.reload()
       await expect(page.getByRole('heading', { level: 1, name: 'Réglages' })).toBeVisible()
-      await expect(page.locator('html')).toHaveAttribute('data-theme', 'light')
-      await expect(page.getByRole('radio', { name: /Thème Crème/ })).toHaveAttribute('aria-checked', 'true')
+      await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark')
+      await expect(page.getByRole('radio', { name: 'Sombre', exact: true })).toHaveAttribute('aria-checked', 'true')
+      await expect(page.getByRole('radio', { name: /Thème Sauge/ })).toHaveAttribute('aria-checked', 'true')
+      await page.screenshot({ path: test.info().outputPath(`${appareil}-reglages-sombre.png`), animations: 'disabled' })
 
-      // Et on revient en Crème comme on est venu.
+      // Auto suit l'appareil.
+      await cliquerAuCentre(page.getByRole('radio', { name: 'Auto', exact: true }))
+      await page.emulateMedia({ colorScheme: 'light' })
+      await expect(page.locator('html')).toHaveAttribute('data-theme', 'sauge')
+      await page.emulateMedia({ colorScheme: 'dark' })
+      await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark')
+      await page.emulateMedia({ colorScheme: 'light' })
+      // L'app réécrit son choix dans le stockage en suivant l'appareil : on attend qu'elle ait fini.
+      await expect(page.locator('html')).toHaveAttribute('data-theme', 'sauge')
+
+      // Un thème sombre mémorisé avant le mode (sans reviz-mode) devient le mode Sombre.
+      await page.evaluate(() => { localStorage.removeItem('reviz-mode'); localStorage.setItem('reviz-theme', 'dark') })
+      await page.reload()
+      await expect(page.getByRole('heading', { level: 1, name: 'Réglages' })).toBeVisible()
+      await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark')
+      await expect(page.getByRole('radio', { name: 'Sombre', exact: true })).toHaveAttribute('aria-checked', 'true')
+
+      // Et on revient en Clair et en Crème comme on est venu.
+      await cliquerAuCentre(page.getByRole('radio', { name: 'Clair', exact: true }))
       await cliquerAuCentre(page.getByRole('radio', { name: /Thème Crème/ }))
       await expect(page.locator('html')).toHaveAttribute('data-theme', 'light')
     })

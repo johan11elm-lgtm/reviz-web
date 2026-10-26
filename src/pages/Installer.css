@@ -4,8 +4,8 @@
  * Sur ordinateur : colonne de 640 px dans un conteneur de 1040 px, Réviz à droite. */
 
 .inst-page {
-  background: #F8EFE7;
-  color: #1B1A23;
+  background: var(--rv-fond);
+  color: var(--rv-encre);
 }
 .inst-page-defile {
   flex: 1;
@@ -58,10 +58,10 @@
   font-weight: 800;
   line-height: 1;
   letter-spacing: -.03em;
-  color: #1B1A23;
+  color: var(--rv-encre);
   text-decoration: none;
 }
-.inst-page-logo:focus-visible { outline: 3px solid #1B1A23; outline-offset: 4px; border-radius: 6px; }
+.inst-page-logo:focus-visible { outline: 3px solid var(--rv-encre); outline-offset: 4px; border-radius: 6px; }
 
 .inst-hero-corps {
   position: relative;
@@ -83,7 +83,7 @@
   font-weight: 800;
   line-height: 1;
   letter-spacing: -.04em;
-  color: #1B1A23;
+  color: var(--rv-encre);
 }
 .inst-page-reviz { grid-area: reviz; display: flex; margin: 0 -16px -10px 0; }
 .inst-page-sous {
@@ -92,7 +92,7 @@
   font-size: 15.5px;
   font-weight: 500;
   line-height: 1.45;
-  color: #3E4A42;
+  color: var(--rv-texte-menthe, #3E4A42);
   text-wrap: pretty;
 }
 
@@ -102,8 +102,8 @@
   margin: -64px 16px 0;
   padding: 18px;
   border-radius: 26px;
-  background: #fff;
-  box-shadow: 0 12px 30px rgba(160, 80, 20, .12);
+  background: var(--rv-carte);
+  box-shadow: 0 12px 30px rgba(var(--rv-ombre-2), .12);
 }
 .inst-page-deja { display: flex; flex-direction: column; gap: 18px; padding: 18px; margin: -6px; border-radius: 22px; background: #DCF5E6; }
 .inst-page-deja .inst-etat { padding: 0; }
@@ -157,3 +157,21 @@
   html:not(.native) .inst-hero-corps { grid-template-columns: minmax(0, 560px) minmax(0, 1fr); }
   html:not(.native) .inst-page-carte { width: 560px; }
 }
+
+/* ── Sombre : ces pastels gardent leur texte sombre (cf. rv-ilot dans global.css) ── */
+:root[data-theme="dark"] .inst-page-deja {
+  --rv-encre: #1B1A23; --rv-encre-rgb: 27,26,35; --rv-doux: #6E675B; --rv-doux-rgb: 110,103,91;
+  --rv-carte: #fff; --rv-carte-rgb: 255,255,255; --rv-carte-haute: #fff; --rv-ligne: #EADBCB; --rv-piste: #F3E6D8;
+  --rv-orange-texte: #C25407; --rv-vert-texte: #1F8A52; --rv-brun-texte: #8F3E05;
+  --ch-encre: #1B1A23; --ch-doux: #6E675B; --bt-encre: #1B1A23; --bt-doux: #6E675B; --en-encre: #1B1A23; --en-doux: #6E675B; --hb-encre: #1B1A23; --hb-doux: #6E675B;
+  --hm-encre: #1B1A23; --hm-doux: #6E675B; --inst-encre: #1B1A23; --inst-doux: #6E675B; --lg-encre: #1B1A23; --lg-doux: #6E675B; --prg-encre: #1B1A23; --prg-doux: #6E675B;
+  color: #1B1A23;
+}
+
+/* ── Sombre : héros en halo menthe (cf. accueil) ── */
+:root[data-theme="dark"] .inst-hero-fond {
+  background: var(--rv-carte);
+  background: radial-gradient(70% 60% at 50% 56%, color-mix(in srgb, #A8E3C2 36%, transparent) 0%, color-mix(in srgb, #A8E3C2 12%, transparent) 55%, transparent 85%), var(--rv-carte);
+}
+:root[data-theme="dark"] .inst-hero-bulle { background: color-mix(in srgb, #A8E3C2 12%, transparent); }
+:root[data-theme="dark"] .inst-hero-point { background: color-mix(in srgb, #C9C2F2 30%, transparent); }

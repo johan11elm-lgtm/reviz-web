@@ -49,7 +49,7 @@ for (const [appareil, viewport] of APPAREILS) {
       await expect(page.locator('html')).toHaveAttribute('data-theme', t)
       await capture(`04-accueil-${t}`)
     }
-    // Nuit d'encre (sombre) n'est plus appliqué tant que la refonte n'a pas sa version sombre.
+    // Nuit d'encre (ancien thème sombre) n'est plus proposé : avec le mode Clair déjà mémorisé, il s'affiche en Crème.
     await page.evaluate(() => localStorage.setItem('reviz-theme', 'nuit-encre'))
     await page.goto('/')
     await expect(page.locator('html')).toHaveAttribute('data-theme', 'light')

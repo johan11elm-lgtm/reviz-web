@@ -1,22 +1,22 @@
 /* LevelSelector : cycle, classe et spécialités (comptes lycée encore ouverts ; le collège passe
  * par le choix de classe des Réglages et de Moi). Mêmes tuiles : blanches à tranche, orange choisie. */
 .level-selector { display: flex; flex-direction: column; gap: 18px; }
-.level-section-label { margin-bottom: 8px; font-size: 14px; font-weight: 700; color: #1B1A23; }
-.level-section-hint { font-weight: 500; font-size: 13px; color: #6E675B; }
+.level-section-label { margin-bottom: 8px; font-size: 14px; font-weight: 700; color: var(--rv-encre); }
+.level-section-hint { font-weight: 500; font-size: 13px; color: var(--rv-doux); }
 
 .level-cycle-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
 .level-cycle-btn, .level-classe-btn, .level-chip {
-  border: 2px solid #EADBCB; background: #fff; box-shadow: 0 4px 0 #EADBCB; color: #1B1A23;
+  border: 2px solid var(--rv-ligne); background: var(--rv-carte); box-shadow: 0 4px 0 var(--rv-ligne); color: var(--rv-encre);
   font-family: 'Geist', sans-serif; cursor: pointer; transition: transform .08s, box-shadow .08s;
 }
-.level-cycle-btn:active, .level-classe-btn:active, .level-chip:active { transform: translateY(3px); box-shadow: 0 1px 0 #EADBCB; }
-.level-cycle-btn:focus-visible, .level-classe-btn:focus-visible, .level-chip:focus-visible { outline: 3px solid #1B1A23; outline-offset: 3px; }
-.level-cycle-btn.active, .level-classe-btn.active, .level-chip.active { border-color: #C25407; background: #C25407; box-shadow: 0 4px 0 #8F3E05; color: #fff; }
+.level-cycle-btn:active, .level-classe-btn:active, .level-chip:active { transform: translateY(3px); box-shadow: 0 1px 0 var(--rv-ligne); }
+.level-cycle-btn:focus-visible, .level-classe-btn:focus-visible, .level-chip:focus-visible { outline: 3px solid var(--rv-encre); outline-offset: 3px; }
+.level-cycle-btn.active, .level-classe-btn.active, .level-chip.active { border-color: var(--rv-orange); background: var(--rv-orange); box-shadow: 0 4px 0 var(--rv-orange-tranche); color: #fff; }
 
 .level-cycle-btn { display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 12px 8px; border-radius: 20px; }
 .level-cycle-emoji { display: flex; width: 44px; height: 44px; align-items: center; justify-content: center; border-radius: 50%; background: #FFE6D2; overflow: hidden; }
 .level-cycle-label { font-size: 14px; font-weight: 700; }
-.level-cycle-desc { font-size: 12px; font-weight: 500; color: #6E675B; text-align: center; }
+.level-cycle-desc { font-size: 12px; font-weight: 500; color: var(--rv-doux); text-align: center; }
 .level-cycle-btn.active .level-cycle-desc { color: rgba(255,255,255,.85); }
 
 .level-classe-grid, .level-chips-grid { display: flex; flex-wrap: wrap; gap: 10px; }
@@ -25,3 +25,13 @@
 
 .level-selector--compact .level-cycle-btn { padding: 10px 6px; }
 .level-selector--compact .level-cycle-emoji { width: 36px; height: 36px; }
+
+/* ── Sombre : ces pastels gardent leur texte sombre (cf. rv-ilot dans global.css) ── */
+:root[data-theme="dark"] .level-cycle-emoji {
+  --rv-encre: #1B1A23; --rv-encre-rgb: 27,26,35; --rv-doux: #6E675B; --rv-doux-rgb: 110,103,91;
+  --rv-carte: #fff; --rv-carte-rgb: 255,255,255; --rv-carte-haute: #fff; --rv-ligne: #EADBCB; --rv-piste: #F3E6D8;
+  --rv-orange-texte: #C25407; --rv-vert-texte: #1F8A52; --rv-brun-texte: #8F3E05;
+  --ch-encre: #1B1A23; --ch-doux: #6E675B; --bt-encre: #1B1A23; --bt-doux: #6E675B; --en-encre: #1B1A23; --en-doux: #6E675B; --hb-encre: #1B1A23; --hb-doux: #6E675B;
+  --hm-encre: #1B1A23; --hm-doux: #6E675B; --inst-encre: #1B1A23; --inst-doux: #6E675B; --lg-encre: #1B1A23; --lg-doux: #6E675B; --prg-encre: #1B1A23; --prg-doux: #6E675B;
+  color: #1B1A23;
+}

@@ -1,12 +1,12 @@
 /* Battle (handoff Claude Design du 22/10) : duel de révision en plein écran. L'hôte est
  * toujours lavande (bandeau encre), l'invité toujours pêche (bandeau rouge), sur tous les écrans. */
 .bt-page {
-  --bt-encre: #1B1A23; --bt-doux: #6E675B; --bt-bord: #EADBCB;
-  --bt-orange: #C25407; --bt-tranche: #8F3E05;
+  --bt-encre: var(--rv-encre); --bt-doux: var(--rv-doux); --bt-bord: var(--rv-ligne);
+  --bt-orange: var(--rv-orange); --bt-tranche: var(--rv-orange-tranche);
   --bt-vert: #34C77B; --bt-vert-fond: #DCF5E6; --bt-vert-texte: #1F8A52;
   --bt-lavande: #E4E0FA; --bt-lavande-t: #C9C2F2; --bt-peche: #FFE6D2; --bt-peche-t: #FFC596;
   min-height: 100dvh;
-  background: #F8EFE7;
+  background: var(--rv-fond);
   color: var(--bt-encre);
 }
 .bt-defile {
@@ -27,14 +27,14 @@
 .bt-txt { margin: 0; font-size: 14px; font-weight: 500; line-height: 1.45; color: var(--bt-doux); }
 .bt-note { margin: 10px 0 0; font-size: 13px; font-weight: 600; text-align: center; color: var(--bt-doux); }
 .bt-note b { color: var(--bt-encre); }
-.bt-note--carte { margin: 0; padding: 14px 16px; border-radius: 18px; background: #fff; line-height: 1.4; }
+.bt-note--carte { margin: 0; padding: 14px 16px; border-radius: 18px; background: var(--rv-carte); line-height: 1.4; }
 .bt-erreur { margin: 0; font-size: 13px; font-weight: 600; color: var(--bt-orange); }
 .bt-carte {
   position: relative;
   box-sizing: border-box;
   border-radius: 26px;
-  background: #fff;
-  box-shadow: 0 12px 30px rgba(160,80,20,.10);
+  background: var(--rv-carte);
+  box-shadow: 0 12px 30px rgba(var(--rv-ombre-2),.10);
 }
 .bt-milieu { margin: auto; }
 
@@ -53,11 +53,11 @@
 .bt-btn:active:not(:disabled) { transform: translateY(4px); box-shadow: 0 1px 0 var(--bt-tranche); }
 .bt-btn:disabled { background: var(--bt-bord); box-shadow: none; color: var(--bt-doux); cursor: default; }
 .bt-btn:focus-visible { outline: 3px solid var(--bt-encre); outline-offset: 3px; }
-.bt-btn--blanc { background: #fff; color: var(--bt-encre); box-shadow: 0 4px 0 var(--bt-bord); }
+.bt-btn--blanc { background: var(--rv-carte); color: var(--bt-encre); box-shadow: 0 4px 0 var(--bt-bord); }
 .bt-btn--blanc:active:not(:disabled) { box-shadow: 0 1px 0 var(--bt-bord); }
-.bt-btn--peche { background: var(--bt-peche); color: var(--bt-encre); box-shadow: 0 4px 0 var(--bt-peche-t); }
+.bt-btn--peche { background: var(--bt-peche); color: #1B1A23; box-shadow: 0 4px 0 var(--bt-peche-t); }
 .bt-btn--peche:active:not(:disabled) { box-shadow: 0 1px 0 var(--bt-peche-t); }
-.bt-btn--encre { background: var(--bt-encre); box-shadow: none; }
+.bt-btn--encre { background: var(--rv-inverse); box-shadow: none; }
 .bt-btn--encre:active { box-shadow: none; }
 .bt-btn--petit { width: auto; min-height: 46px; padding: 0 18px; font-size: 15px; }
 
@@ -91,7 +91,7 @@
   display: inline-flex; align-items: center; gap: 4px;
   height: 42px; padding: 0 16px 0 12px;
   border: 0; border-radius: 999px;
-  background: #fff; box-shadow: 0 4px 0 rgba(27,26,35,.08);
+  background: var(--rv-carte); box-shadow: 0 4px 0 rgba(var(--rv-encre-rgb),.08);
   font-family: 'Geist', sans-serif; font-size: 15px; font-weight: 700; color: var(--bt-encre);
   cursor: pointer;
 }
@@ -107,7 +107,7 @@
   flex: none; z-index: 1;
   display: flex; align-items: center; justify-content: center;
   width: 46px; height: 46px; margin: 0 -14px;
-  border-radius: 50%; background: #fff; box-shadow: 0 6px 16px rgba(27,26,35,.12);
+  border-radius: 50%; background: var(--rv-carte); box-shadow: 0 6px 16px rgba(var(--rv-encre-rgb),.12);
   font-family: var(--font-display); font-size: 17px; font-weight: 800; letter-spacing: -.02em;
 }
 .bt-aura { display: flex; align-items: center; gap: 14px; margin: -64px 20px 0; padding: 16px 18px; z-index: 2; }
@@ -123,23 +123,23 @@
 .bt-matiere {
   flex: none; display: inline-flex; align-items: center; gap: 8px;
   height: 40px; padding: 0 16px 0 8px;
-  border: 0; border-radius: 999px; background: #F8EFE7;
+  border: 0; border-radius: 999px; background: var(--rv-fond);
   font-family: 'Geist', sans-serif; font-size: 14.5px; font-weight: 700; color: var(--bt-encre);
   cursor: pointer;
 }
 .bt-matiere i { width: 24px; height: 24px; border-radius: 50%; }
-.bt-matiere.is-choisie { background: var(--bt-encre); color: #fff; }
+.bt-matiere.is-choisie { background: var(--rv-inverse); color: var(--rv-sur-inverse); }
 .bt-chapitres { display: flex; flex-direction: column; gap: 8px; max-height: 300px; margin: 0; padding: 0; overflow-y: auto; list-style: none; scrollbar-width: thin; }
 .bt-chapitre {
   display: flex; align-items: center; gap: 12px;
   width: 100%; min-height: 50px; padding: 10px 14px;
   border: 2px solid transparent; border-radius: 18px;
-  background: #F8EFE7;
+  background: var(--rv-fond);
   font-family: 'Geist', sans-serif; font-size: 15px; font-weight: 600; line-height: 1.25; text-align: left; color: var(--bt-encre);
   cursor: pointer;
 }
 .bt-chapitre.is-choisi { border-color: var(--bt-orange); font-weight: 700; }
-.bt-radio { flex: none; width: 20px; height: 20px; box-sizing: border-box; border: 2px solid var(--bt-bord); border-radius: 50%; background: #fff; }
+.bt-radio { flex: none; width: 20px; height: 20px; box-sizing: border-box; border: 2px solid var(--bt-bord); border-radius: 50%; background: var(--rv-carte); }
 .bt-chapitre.is-choisi .bt-radio { border: 6px solid var(--bt-orange); }
 .bt-lancer .bt-btn { margin-top: 4px; }
 
@@ -154,11 +154,11 @@
 .bt-cases i {
   display: flex; align-items: center; justify-content: center;
   height: 66px; border-radius: 18px;
-  background: #F8EFE7; box-shadow: inset 0 0 0 2px var(--bt-bord);
+  background: var(--rv-fond); box-shadow: inset 0 0 0 2px var(--bt-bord);
   font-family: var(--font-display); font-size: 30px; font-style: normal; font-weight: 800; color: var(--bt-encre);
 }
-.bt-cases i.is-rempli { background: #fff; box-shadow: inset 0 0 0 2px var(--bt-orange); }
-.bt-code-saisie:focus-within .bt-cases i.is-focus { background: #fff; box-shadow: inset 0 0 0 2px var(--bt-orange); }
+.bt-cases i.is-rempli { background: var(--rv-carte); box-shadow: inset 0 0 0 2px var(--bt-orange); }
+.bt-code-saisie:focus-within .bt-cases i.is-focus { background: var(--rv-carte); box-shadow: inset 0 0 0 2px var(--bt-orange); }
 .bt-code-saisie:focus-within .bt-cases i.is-focus::after { content: ''; width: 2px; height: 30px; background: var(--bt-orange); animation: btCurseur 1s steps(1) infinite; }
 @keyframes btCurseur { 50% { opacity: 0; } }
 
@@ -167,7 +167,7 @@
 .bt-regles li + li { border-top: 1px dashed var(--bt-bord); }
 .bt-regles b {
   flex: none; min-width: 48px; padding: 5px 0; border-radius: 999px;
-  background: #F8EFE7; text-align: center;
+  background: var(--rv-fond); text-align: center;
   font-family: var(--font-display); font-size: 15px; font-weight: 800;
 }
 .bt-regles b.is-plus { background: var(--bt-vert-fond); color: var(--bt-vert-texte); }
@@ -182,14 +182,14 @@
 .bt-croix {
   display: flex; align-items: center; justify-content: center;
   width: 44px; height: 44px;
-  border: 0; border-radius: 50%; background: #fff; box-shadow: 0 4px 0 rgba(27,26,35,.08);
+  border: 0; border-radius: 50%; background: var(--rv-carte); box-shadow: 0 4px 0 rgba(var(--rv-encre-rgb),.08);
   color: var(--bt-encre); cursor: pointer;
 }
 .bt-puce {
   justify-self: center;
   display: inline-flex; align-items: center; gap: 8px;
   max-width: 100%; min-width: 0; box-sizing: border-box;
-  padding: 8px 14px; border-radius: 999px; background: #fff;
+  padding: 8px 14px; border-radius: 999px; background: var(--rv-carte);
   font-size: 13px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
 .bt-puce > i { flex: none; width: 16px; height: 16px; border-radius: 50%; background: var(--bt-lavande); }
@@ -201,7 +201,7 @@
 .bt-points li.is-invite { background: var(--bt-peche-t); box-shadow: inset 0 0 0 2px var(--bt-encre); }
 .bt-points li.is-egal { background: linear-gradient(90deg, var(--bt-lavande-t) 50%, var(--bt-peche-t) 50%); box-shadow: inset 0 0 0 2px var(--bt-encre); }
 .bt-points li.is-nul { box-shadow: inset 0 0 0 2px var(--bt-doux); }
-.bt-points li.is-encours { background: #fff; box-shadow: inset 0 0 0 3px var(--bt-orange); }
+.bt-points li.is-encours { background: var(--rv-carte); box-shadow: inset 0 0 0 3px var(--bt-orange); }
 .bt-points li.is-mort { width: 13px; height: 13px; }
 
 /* ── Invitation ── */
@@ -212,10 +212,10 @@
 .bt-invitation-haut { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; margin-top: 4px; }
 .bt-bulle-invitation {
   position: relative; display: flex; flex-direction: column; align-items: center; gap: 2px;
-  padding: 12px 20px 14px; border-radius: 22px; background: #fff; box-shadow: 0 10px 24px -12px rgba(120,60,20,.45);
+  padding: 12px 20px 14px; border-radius: 22px; background: var(--rv-carte); box-shadow: 0 10px 24px -12px rgba(var(--rv-ombre),.45);
   text-align: center;
 }
-.bt-bulle-invitation::after { content: ''; position: absolute; bottom: -7px; left: 50%; width: 16px; height: 16px; background: #fff; transform: translateX(-50%) rotate(45deg); }
+.bt-bulle-invitation::after { content: ''; position: absolute; bottom: -7px; left: 50%; width: 16px; height: 16px; background: var(--rv-carte); transform: translateX(-50%) rotate(45deg); }
 .bt-bulle-invitation h1 { margin: 0; font-family: var(--font-display); font-size: 19px; font-weight: 800; letter-spacing: -.02em; line-height: 1.15; }
 .bt-bulle-invitation span { font-size: 13.5px; font-weight: 600; color: var(--bt-doux); }
 .bt-invitation-haut > :last-child { margin-bottom: -46px; }
@@ -227,7 +227,7 @@
 .bt-prenom-label { font-family: var(--font-display); font-size: 20px; font-weight: 800; letter-spacing: -.02em; }
 .bt-prenom-input {
   box-sizing: border-box; width: 100%; height: 56px; padding: 0 20px;
-  border: 2px solid var(--bt-bord); border-radius: 999px; background: #fff;
+  border: 2px solid var(--bt-bord); border-radius: 999px; background: var(--rv-carte);
   font-family: 'Geist', sans-serif; font-size: 18px; font-weight: 600; color: var(--bt-encre);
   outline: none;
 }
@@ -240,21 +240,21 @@
 .bt-code-carte { z-index: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 22px 20px 20px; }
 .bt-code { margin: 0 0 12px; font-family: var(--font-display); font-size: 92px; font-weight: 800; line-height: .9; letter-spacing: .04em; }
 .bt-lien { display: flex; align-items: center; gap: 10px; width: 100%; }
-.bt-lien-url { flex: 1; min-width: 0; padding: 13px 16px; border-radius: 999px; background: #F8EFE7; font-size: 14.5px; font-weight: 600; color: var(--bt-doux); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.bt-lien-url { flex: 1; min-width: 0; padding: 13px 16px; border-radius: 999px; background: var(--rv-fond); font-size: 14.5px; font-weight: 600; color: var(--bt-doux); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .bt-salon-face { position: relative; display: grid; grid-template-columns: 1fr 1fr; overflow: hidden; border-radius: 28px; }
 .bt-salon-face > .bt-vs { position: absolute; left: 50%; top: 44%; margin: 0; transform: translate(-50%, -50%); }
 .bt-salon-joueur { position: relative; display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 24px 10px 20px; text-align: center; overflow: hidden; }
 .bt-salon-joueur > *, .bt-salon-joueur img { position: relative; z-index: 1; }
 .bt-salon-joueur--hote { background: var(--bt-lavande); }
 .bt-salon-joueur--invite { background: var(--bt-peche); }
-.bt-salon-joueur--invite.is-vide { background: #FFF4EA; justify-content: center; }
+.bt-salon-joueur--invite.is-vide { background: var(--rv-sourdine, #FFF4EA); justify-content: center; }
 .bt-salon-joueur b { margin-top: 8px; font-family: var(--font-display); font-size: 22px; font-weight: 800; letter-spacing: -.02em; }
 .bt-salon-joueur > span:last-child { font-size: 13px; font-weight: 600; color: var(--bt-doux); }
 .bt-pret { display: inline-flex; align-items: center; gap: 6px; color: var(--bt-vert-texte) !important; }
 .bt-pret::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: var(--bt-vert); }
 .bt-salon-place { box-sizing: border-box; border: 2.5px dashed var(--bt-peche-t); border-radius: 50%; animation: btTourne 14s linear infinite; }
 .bt-salon-attente { margin-top: 10px; max-width: 140px; font-size: 13px; font-weight: 600; line-height: 1.35; color: var(--bt-doux); }
-.bt-attente-hote { margin: 0; padding: 16px; border-radius: 999px; background: #fff; font-size: 15.5px; font-weight: 700; text-align: center; }
+.bt-attente-hote { margin: 0; padding: 16px; border-radius: 999px; background: var(--rv-carte); font-size: 15.5px; font-weight: 700; text-align: center; }
 .bt-salon > .bt-note { margin-top: -4px; }
 
 /* ── Décompte et annonce des rounds ── */
@@ -265,13 +265,13 @@
 .bt-annonce-rond {
   display: flex; align-items: center; justify-content: center;
   width: 220px; height: 220px; margin-top: 28px;
-  border-radius: 50%; background: #fff; box-shadow: 0 10px 0 rgba(160,80,20,.12), 0 20px 40px rgba(160,80,20,.12);
+  border-radius: 50%; background: var(--rv-carte); box-shadow: 0 10px 0 rgba(var(--rv-ombre-2),.12), 0 20px 40px rgba(var(--rv-ombre-2),.12);
   font-family: var(--font-display); font-size: 150px; font-weight: 800; line-height: 1; letter-spacing: -.04em; color: var(--bt-orange);
   animation: btPop .45s cubic-bezier(.3,1.6,.5,1) both;
 }
 @keyframes btPop { from { transform: scale(.6); opacity: 0; } to { transform: none; opacity: 1; } }
 .bt-annonce-progres { display: flex; gap: 6px; margin-top: 26px; }
-.bt-annonce-progres i { width: 8px; height: 8px; border-radius: 999px; background: #fff; transition: width .2s; }
+.bt-annonce-progres i { width: 8px; height: 8px; border-radius: 999px; background: var(--rv-carte); transition: width .2s; }
 .bt-annonce-progres i.is-actif { width: 28px; background: var(--bt-orange); }
 .bt-annonce-joueurs { display: grid; grid-template-columns: 1fr 1fr; width: 100%; margin-top: auto; padding-top: 16px; }
 .bt-annonce-joueurs span { display: flex; flex-direction: column; align-items: center; }
@@ -287,7 +287,7 @@
 .bt-puce-joueur b { font-size: 15px; font-weight: 700; color: var(--bt-encre); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .bt-mort-texte { margin: -4px 0 0; text-align: center; font-weight: 600; }
 .bt-question { padding: 20px 22px 24px; }
-.bt-question.is-mort { box-shadow: inset 0 0 0 3px var(--bt-orange), 0 12px 30px rgba(160,80,20,.10); }
+.bt-question.is-mort { box-shadow: inset 0 0 0 3px var(--bt-orange), 0 12px 30px rgba(var(--rv-ombre-2),.10); }
 .bt-question.is-mort .bt-sur { color: var(--bt-orange); }
 .bt-question-texte { margin: 6px 0 0; font-family: var(--font-display); font-size: 30px; font-weight: 800; line-height: 1.1; letter-spacing: -.03em; text-wrap: pretty; }
 .bt-question.is-longue .bt-question-texte { font-size: 24px; }
@@ -301,7 +301,7 @@
   display: flex; align-items: center; gap: 14px;
   box-sizing: border-box; width: 100%; min-height: 62px; padding: 10px 16px;
   border: 0; border-radius: 20px;
-  background: #fff; box-shadow: 0 4px 0 var(--bt-bord);
+  background: var(--rv-carte); box-shadow: 0 4px 0 var(--bt-bord);
   font-family: 'Geist', sans-serif; font-size: 19px; font-weight: 600; text-align: left; color: var(--bt-encre);
   cursor: pointer;
   transition: transform .1s, box-shadow .1s, opacity .2s;
@@ -310,14 +310,14 @@ button.bt-choix-btn:active:not(:disabled) { transform: translateY(3px); box-shad
 .bt-choix-btn:disabled { cursor: default; }
 .bt-choix-num {
   flex: none; display: flex; align-items: center; justify-content: center;
-  width: 30px; height: 30px; border-radius: 50%; background: #F8EFE7;
+  width: 30px; height: 30px; border-radius: 50%; background: var(--rv-fond);
   font-size: 13px; font-weight: 700; color: var(--bt-doux);
 }
 .bt-choix-txt { flex: 1; min-width: 0; line-height: 1.25; }
 .bt-choix-ta { flex: none; display: inline-flex; align-items: center; gap: 5px; font-size: 13px; font-weight: 700; }
 .bt-choix.is-repondu .bt-choix-btn:not(.is-choisi) { opacity: .45; }
 .bt-choix-btn.is-choisi { background: var(--bt-lavande); box-shadow: inset 0 0 0 2.5px var(--bt-encre), 0 4px 0 var(--bt-encre); }
-.bt-choix-btn.is-choisi .bt-choix-num { background: var(--bt-encre); color: #fff; }
+.bt-choix-btn.is-choisi .bt-choix-num { background: var(--rv-inverse); color: var(--rv-sur-inverse); }
 .bt-page--est-invite .bt-choix-btn.is-choisi { background: var(--bt-peche); }
 .bt-choix:not(.is-repondu) .bt-choix-btn:disabled { opacity: .55; }
 .bt-jeu-pied { margin-top: auto; padding-top: 8px; }
@@ -350,7 +350,7 @@ button.bt-choix-btn:active:not(:disabled) { transform: translateY(3px); box-shad
 }
 .bt-rev-joueur b { margin-top: 6px; font-family: var(--font-display); font-size: 20px; font-weight: 800; }
 .bt-rev-detail { font-size: 12.5px; font-weight: 600; line-height: 1.3; color: var(--bt-doux); }
-.bt-pastille-aura { margin-top: 8px; padding: 6px 14px; border-radius: 999px; background: #fff; font-size: 14px; font-weight: 800; }
+.bt-pastille-aura { margin-top: 8px; padding: 6px 14px; border-radius: 999px; background: var(--rv-carte); font-size: 14px; font-weight: 800; }
 .bt-pastille-aura.is-plus { background: var(--bt-vert-fond); color: var(--bt-vert-texte); }
 .bt-pastille-aura.is-moins { color: var(--bt-orange); }
 .bt-bonne { display: flex; gap: 14px; margin-top: 22px; padding: 18px; }
@@ -416,13 +416,13 @@ button.bt-choix-btn:active:not(:disabled) { transform: translateY(3px); box-shad
 .bt-correction-r { margin: 4px 0 0; font-size: 14.5px; font-weight: 600; color: var(--bt-vert-texte); }
 
 /* ── Feuille du bas ── */
-.bt-voile { position: fixed; inset: 0; z-index: 300; display: flex; align-items: flex-end; justify-content: center; background: rgba(27,26,35,.28); animation: btFondu .2s both; }
+.bt-voile { position: fixed; inset: 0; z-index: 300; display: flex; align-items: flex-end; justify-content: center; background: rgba(var(--rv-voile-rgb),.28); animation: btFondu .2s both; }
 @keyframes btFondu { from { opacity: 0; } }
 .bt-feuille {
   display: flex; flex-direction: column; align-items: center; gap: 8px;
   box-sizing: border-box; width: 100%; max-width: 520px;
   padding: 12px 22px calc(26px + env(safe-area-inset-bottom, 0px));
-  border-radius: 30px 30px 0 0; background: #F8EFE7; text-align: center;
+  border-radius: 30px 30px 0 0; background: var(--rv-fond); text-align: center;
   animation: btMonte .3s cubic-bezier(.3,1.2,.5,1) both;
 }
 @keyframes btMonte { from { transform: translateY(100%); } }
@@ -461,7 +461,7 @@ button.bt-choix-btn:active:not(:disabled) { transform: translateY(3px); box-shad
 
 .bt-page--large .bt-barre { grid-template-columns: 48px 1fr 48px; padding: 24px 32px 0; }
 .bt-page--large .bt-croix { width: 48px; height: 48px; }
-.bt-page--large .bt-puce--round { padding: 8px 16px; background: #fff; font-size: 13px; }
+.bt-page--large .bt-puce--round { padding: 8px 16px; background: var(--rv-carte); font-size: 13px; }
 
 .bt-salon--large { flex: 1; display: grid; grid-template-columns: minmax(260px, 1fr) minmax(0, 500px) minmax(260px, 1fr); gap: 28px; align-items: stretch; padding: 24px 32px 0; }
 .bt-salon--large .bt-salon-joueur { justify-content: center; border-radius: 32px; padding: 30px 16px; }
@@ -489,7 +489,7 @@ button.bt-choix-btn:active:not(:disabled) { transform: translateY(3px); box-shad
 .bt-panneau b { margin-top: 8px; font-family: var(--font-display); font-size: 28px; font-weight: 800; letter-spacing: -.02em; }
 .bt-panneau-role { font-size: 13.5px; font-weight: 600; color: var(--bt-doux); }
 .bt-panneau-etat { margin-top: 12px; font-size: 13.5px; font-weight: 600; color: var(--bt-doux); }
-.bt-panneau-etat.is-repondu { display: inline-flex; align-items: center; gap: 6px; padding: 7px 14px; border-radius: 999px; background: var(--bt-encre); color: #fff; }
+.bt-panneau-etat.is-repondu { display: inline-flex; align-items: center; gap: 6px; padding: 7px 14px; border-radius: 999px; background: var(--rv-inverse); color: var(--rv-sur-inverse); }
 .bt-panneau-etat.is-repondu::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--bt-vert); }
 .bt-page--large .bt-question { padding: 26px 30px 30px; }
 .bt-page--large .bt-question-texte { font-size: 48px; }
@@ -558,4 +558,34 @@ button.bt-choix-btn:active:not(:disabled) { transform: translateY(3px); box-shad
 
 @media (prefers-reduced-motion: reduce) {
   .bt-annonce-rond, .bt-voile, .bt-feuille, .bt-salon-place, .bt-points-attente i { animation: none; }
+}
+
+/* ── Sombre : les deux moitiés du héros (hôte lavande, invité pêche) deviennent des halos de leur
+ * couleur sur la carte sombre, comme les autres héros. ── */
+:root[data-theme="dark"] .bt-hero-moitie--g { background: var(--rv-carte); background: radial-gradient(90% 70% at 70% 55%, color-mix(in srgb, var(--bt-lavande-t) 34%, transparent), transparent 80%), var(--rv-carte); }
+:root[data-theme="dark"] .bt-hero-moitie--d { background: var(--rv-carte); background: radial-gradient(90% 70% at 30% 55%, color-mix(in srgb, var(--bt-peche-t) 34%, transparent), transparent 80%), var(--rv-carte); }
+
+/* ── Sombre : ces pastels gardent leur texte sombre (cf. rv-ilot dans global.css) ── */
+:root[data-theme="dark"] .bt-aura-rond,
+:root[data-theme="dark"] .bt-puce > i,
+:root[data-theme="dark"] .bt-salon-joueur--hote,
+:root[data-theme="dark"] .bt-salon-joueur--invite,
+:root[data-theme="dark"] .bt-puce-joueur--hote,
+:root[data-theme="dark"] .bt-puce-joueur--invite,
+:root[data-theme="dark"] .bt-choix-btn.is-choisi,
+:root[data-theme="dark"] .bt-page--est-invite .bt-choix-btn.is-choisi,
+:root[data-theme="dark"] .bt-rev-joueur--hote,
+:root[data-theme="dark"] .bt-rev-joueur--invite,
+:root[data-theme="dark"] .bt-fin-scene--hote,
+:root[data-theme="dark"] .bt-fin-scene--invite,
+:root[data-theme="dark"] .bt-compte,
+:root[data-theme="dark"] .bt-panneau--hote,
+:root[data-theme="dark"] .bt-panneau--invite,
+:root[data-theme="dark"] .bt-choix--rev .bt-choix-btn.is-juste {
+  --rv-encre: #1B1A23; --rv-encre-rgb: 27,26,35; --rv-doux: #6E675B; --rv-doux-rgb: 110,103,91;
+  --rv-carte: #fff; --rv-carte-rgb: 255,255,255; --rv-carte-haute: #fff; --rv-ligne: #EADBCB; --rv-piste: #F3E6D8;
+  --rv-orange-texte: #C25407; --rv-vert-texte: #1F8A52; --rv-brun-texte: #8F3E05;
+  --ch-encre: #1B1A23; --ch-doux: #6E675B; --bt-encre: #1B1A23; --bt-doux: #6E675B; --en-encre: #1B1A23; --en-doux: #6E675B; --hb-encre: #1B1A23; --hb-doux: #6E675B;
+  --hm-encre: #1B1A23; --hm-doux: #6E675B; --inst-encre: #1B1A23; --inst-doux: #6E675B; --lg-encre: #1B1A23; --lg-doux: #6E675B; --prg-encre: #1B1A23; --prg-doux: #6E675B;
+  color: #1B1A23;
 }

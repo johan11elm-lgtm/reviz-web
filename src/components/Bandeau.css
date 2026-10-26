@@ -2,8 +2,8 @@
 .bd {
   display: flex; align-items: center; gap: 10px;
   min-height: 44px; box-sizing: border-box; padding: 7px 7px 7px 9px;
-  border-radius: 18px; background: rgba(255,255,255,.88); box-shadow: 0 8px 20px rgba(160,80,20,.12);
-  font-family: 'Geist', sans-serif; font-size: 12.5px; font-weight: 600; line-height: 1.35; color: #6E675B;
+  border-radius: 18px; background: rgba(var(--rv-carte-rgb),.88); box-shadow: 0 8px 20px rgba(var(--rv-ombre-2),.12);
+  font-family: 'Geist', sans-serif; font-size: 12.5px; font-weight: 600; line-height: 1.35; color: var(--rv-doux);
 }
 .bd-rond { flex: none; display: flex; align-items: center; justify-content: center; width: 26px; height: 26px; border-radius: 50%; }
 .bd-rond i { width: 8px; height: 8px; border-radius: 50%; }
@@ -12,16 +12,29 @@
 .bd--peche .bd-rond { background: #FFE6D2; } .bd--peche .bd-rond i { background: #C25407; }
 .bd--rose .bd-rond { background: #FFD9E4; } .bd--rose .bd-rond i { background: #C25407; }
 .bd-texte { flex: 1; min-width: 0; }
-.bd-texte b { font-weight: 700; color: #1B1A23; }
+.bd-texte b { font-weight: 700; color: var(--rv-encre); }
 .bd-action {
   flex: none; display: inline-flex; align-items: center; gap: 5px;
-  height: 30px; padding: 0 12px; border: 0; border-radius: 999px; background: #1B1A23;
-  font-family: 'Geist', sans-serif; font-size: 12.5px; font-weight: 700; color: #fff; text-decoration: none; white-space: nowrap; cursor: pointer;
+  height: 30px; padding: 0 12px; border: 0; border-radius: 999px; background: var(--rv-inverse);
+  font-family: 'Geist', sans-serif; font-size: 12.5px; font-weight: 700; color: var(--rv-sur-inverse); text-decoration: none; white-space: nowrap; cursor: pointer;
 }
-.bd-action--envoi { background: #EADBCB; color: #6E675B; cursor: default; }
+.bd-action--envoi { background: var(--rv-ligne); color: var(--rv-doux); cursor: default; }
 .bd-action--fait { background: #DCF5E6; color: #1F8A52; }
 .bd-action--fait > span { display: flex; align-items: center; justify-content: center; width: 16px; height: 16px; border-radius: 50%; background: #34C77B; color: #fff; }
 @media (min-width: 1024px) {
   .bd { font-size: 13px; }
   .bd-texte { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+}
+
+/* ── Sombre : ces pastels gardent leur texte sombre (cf. rv-ilot dans global.css) ── */
+:root[data-theme="dark"] .bd--menthe .bd-rond,
+:root[data-theme="dark"] .bd--lavande .bd-rond,
+:root[data-theme="dark"] .bd--peche .bd-rond,
+:root[data-theme="dark"] .bd--rose .bd-rond {
+  --rv-encre: #1B1A23; --rv-encre-rgb: 27,26,35; --rv-doux: #6E675B; --rv-doux-rgb: 110,103,91;
+  --rv-carte: #fff; --rv-carte-rgb: 255,255,255; --rv-carte-haute: #fff; --rv-ligne: #EADBCB; --rv-piste: #F3E6D8;
+  --rv-orange-texte: #C25407; --rv-vert-texte: #1F8A52; --rv-brun-texte: #8F3E05;
+  --ch-encre: #1B1A23; --ch-doux: #6E675B; --bt-encre: #1B1A23; --bt-doux: #6E675B; --en-encre: #1B1A23; --en-doux: #6E675B; --hb-encre: #1B1A23; --hb-doux: #6E675B;
+  --hm-encre: #1B1A23; --hm-doux: #6E675B; --inst-encre: #1B1A23; --inst-doux: #6E675B; --lg-encre: #1B1A23; --lg-doux: #6E675B; --prg-encre: #1B1A23; --prg-doux: #6E675B;
+  color: #1B1A23;
 }

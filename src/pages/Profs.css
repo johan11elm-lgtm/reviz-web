@@ -2,9 +2,9 @@
  * héros lavande + grain, Réviz qui fait coucou, deux cartes (découvrir une classe, donner son
  * avis). Ordinateur : colonne de 640 px dans un conteneur de 1040 px, Réviz à droite. */
 .pr-page {
-  --pr-orange: #C25407; --pr-tranche: #8F3E05;
+  --pr-orange: var(--rv-orange); --pr-tranche: var(--rv-orange-tranche);
   min-height: 100dvh;
-  background: #F8EFE7;
+  background: var(--rv-fond);
   color: var(--ch-encre);
 }
 .pr-page .pr-defile {
@@ -39,7 +39,7 @@
 .pr-carte {
   display: grid; grid-template-columns: 60px minmax(0, 1fr); grid-template-areas: 'icone titre' 'texte texte' 'action action';
   align-items: center; column-gap: 14px;
-  padding: 20px; border-radius: 26px; background: #fff; box-shadow: 0 12px 30px rgba(160,80,20,.1);
+  padding: 20px; border-radius: 26px; background: var(--rv-carte); box-shadow: 0 12px 30px rgba(var(--rv-ombre-2),.1);
 }
 .pr-icone {
   grid-area: icone;
@@ -118,4 +118,19 @@
 }
 @media (max-width: 360px) {
   .pr-classe { height: 54px; font-size: 20px; }
+}
+
+/* ── Sombre : ces pastels gardent leur texte sombre (cf. rv-ilot dans global.css) ── */
+:root[data-theme="dark"] .pr-icone--peche,
+:root[data-theme="dark"] .pr-icone--lavande,
+:root[data-theme="dark"] .pr-classe--lavande,
+:root[data-theme="dark"] .pr-classe--peche,
+:root[data-theme="dark"] .pr-classe--rose,
+:root[data-theme="dark"] .pr-classe--menthe {
+  --rv-encre: #1B1A23; --rv-encre-rgb: 27,26,35; --rv-doux: #6E675B; --rv-doux-rgb: 110,103,91;
+  --rv-carte: #fff; --rv-carte-rgb: 255,255,255; --rv-carte-haute: #fff; --rv-ligne: #EADBCB; --rv-piste: #F3E6D8;
+  --rv-orange-texte: #C25407; --rv-vert-texte: #1F8A52; --rv-brun-texte: #8F3E05;
+  --ch-encre: #1B1A23; --ch-doux: #6E675B; --bt-encre: #1B1A23; --bt-doux: #6E675B; --en-encre: #1B1A23; --en-doux: #6E675B; --hb-encre: #1B1A23; --hb-doux: #6E675B;
+  --hm-encre: #1B1A23; --hm-doux: #6E675B; --inst-encre: #1B1A23; --inst-doux: #6E675B; --lg-encre: #1B1A23; --lg-doux: #6E675B; --prg-encre: #1B1A23; --prg-doux: #6E675B;
+  color: #1B1A23;
 }

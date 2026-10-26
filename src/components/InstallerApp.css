@@ -5,12 +5,12 @@
 .inst-fond,
 .inst-guide,
 .inst-page {
-  --inst-encre: #1B1A23;
-  --inst-doux: #6E675B;
-  --inst-creme: #F8EFE7;
-  --inst-bord: #EADBCB;
-  --inst-orange: #C25407;
-  --inst-tranche: #8F3E05;
+  --inst-encre: var(--rv-encre);
+  --inst-doux: var(--rv-doux);
+  --inst-creme: var(--rv-fond);
+  --inst-bord: var(--rv-ligne);
+  --inst-orange: var(--rv-orange);
+  --inst-tranche: var(--rv-orange-tranche);
   --inst-lavande: #E4E0FA;
   --inst-lavande-tranche: #C9C2F2;
   --inst-menthe: #DCF5E6;
@@ -29,7 +29,7 @@
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  background: rgba(27, 26, 35, .45);
+  background: rgba(var(--rv-voile-rgb), .45);
   animation: inst-fondu .2s both;
 }
 @keyframes inst-fondu { from { opacity: 0; } }
@@ -47,7 +47,7 @@
   padding: 0 20px calc(28px + env(safe-area-inset-bottom, 0px));
   border-radius: 32px 32px 0 0;
   background: var(--inst-creme);
-  box-shadow: 0 -10px 40px rgba(27, 26, 35, .18);
+  box-shadow: 0 -10px 40px rgba(var(--rv-encre-rgb), .18);
   color: var(--inst-encre);
   font-family: 'Geist', system-ui, sans-serif;
   text-align: left;
@@ -92,8 +92,8 @@
 .inst-boite {
   padding: 16px;
   border-radius: 24px;
-  background: #fff;
-  box-shadow: 0 8px 20px rgba(160, 80, 20, .08);
+  background: var(--rv-carte);
+  box-shadow: 0 8px 20px rgba(var(--rv-ombre-2), .08);
 }
 .inst-pied { display: flex; }
 .inst-fermer { width: 100%; }
@@ -122,7 +122,7 @@
 }
 .inst-btn:active { transform: translateY(4px); box-shadow: 0 1px 0 var(--inst-tranche); }
 .inst-btn:focus-visible { outline: 3px solid var(--inst-encre); outline-offset: 3px; }
-.inst-btn--blanc { min-height: 52px; font-size: 16px; background: #fff; color: var(--inst-encre); box-shadow: 0 5px 0 var(--inst-bord); }
+.inst-btn--blanc { min-height: 52px; font-size: 16px; background: var(--rv-carte); color: var(--inst-encre); box-shadow: 0 5px 0 var(--inst-bord); }
 .inst-btn--blanc:active { box-shadow: 0 1px 0 var(--inst-bord); }
 
 /* ── Contenu du tutoriel ── */
@@ -163,7 +163,7 @@
 .inst-onglet:hover { color: var(--inst-encre); }
 .inst-onglet:focus-visible { outline: 2px solid var(--inst-encre); outline-offset: 1px; }
 .inst-onglet--actif {
-  background: #fff;
+  background: var(--rv-carte);
   box-shadow: 0 3px 0 var(--inst-bord);
   font-weight: 700;
   color: var(--inst-encre);
@@ -216,7 +216,7 @@
   font-family: var(--font-display);
   font-size: 16px;
   font-weight: 800;
-  color: var(--inst-encre);
+  color: #1B1A23;
 }
 .inst-etape-texte { display: flex; flex-direction: column; gap: 3px; min-width: 0; padding-top: 7px; }
 .inst-etape-titre { font-size: 15.5px; font-weight: 600; line-height: 1.4; text-wrap: pretty; }
@@ -231,7 +231,7 @@
   margin: 0 2px;
   padding: 1px 8px;
   border-radius: 8px;
-  background: #fff;
+  background: var(--rv-carte);
   box-shadow: 0 0 0 1.5px var(--inst-bord), 0 2px 0 1.5px var(--inst-bord);
   font-weight: 700;
   line-height: 1.45;
@@ -273,7 +273,7 @@
 }
 .inst-etat-rond .rv-ico { width: 22px; height: 22px; stroke-width: 3; }
 .inst-etat--menthe .inst-etat-rond { background: var(--inst-vert); box-shadow: 0 4px 0 var(--inst-vert-texte); color: #fff; }
-.inst-etat--peche .inst-etat-rond { background: #fff; box-shadow: 0 4px 0 var(--inst-peche-tranche); color: var(--inst-orange); }
+.inst-etat--peche .inst-etat-rond { background: var(--rv-carte); box-shadow: 0 4px 0 var(--inst-peche-tranche); color: var(--inst-orange); }
 .inst-etat--peche .inst-etat-rond .rv-ico { width: 24px; height: 24px; }
 .inst-etat-texte { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
 .inst-etat-titre {
@@ -297,7 +297,7 @@
     max-height: calc(100dvh - 48px);
     padding: 28px;
     border-radius: 28px;
-    box-shadow: 0 30px 80px rgba(27, 26, 35, .3);
+    box-shadow: 0 30px 80px rgba(var(--rv-encre-rgb), .3);
     animation: inst-pop .25s cubic-bezier(.22, 1, .36, 1) backwards;
   }
   html:not(.native) .inst-poignee { display: none; }
@@ -331,7 +331,7 @@
     padding: 0;
     border: 0;
     border-radius: 50%;
-    background: #fff;
+    background: var(--rv-carte);
     box-shadow: 0 3px 0 var(--inst-bord);
     color: var(--inst-encre);
     cursor: pointer;
@@ -348,4 +348,16 @@
 @media (prefers-reduced-motion: reduce) {
   .inst-fond, .inst-carte, html:not(.native) .inst-carte { animation: none; }
   .inst-carte { transition: none; }
+}
+
+/* ── Sombre : ces pastels gardent leur texte sombre (cf. rv-ilot dans global.css) ── */
+:root[data-theme="dark"] .inst-etat--menthe,
+:root[data-theme="dark"] .inst-etat--peche,
+:root[data-theme="dark"] html:not(.native) .inst-tete-reviz {
+  --rv-encre: #1B1A23; --rv-encre-rgb: 27,26,35; --rv-doux: #6E675B; --rv-doux-rgb: 110,103,91;
+  --rv-carte: #fff; --rv-carte-rgb: 255,255,255; --rv-carte-haute: #fff; --rv-ligne: #EADBCB; --rv-piste: #F3E6D8;
+  --rv-orange-texte: #C25407; --rv-vert-texte: #1F8A52; --rv-brun-texte: #8F3E05;
+  --ch-encre: #1B1A23; --ch-doux: #6E675B; --bt-encre: #1B1A23; --bt-doux: #6E675B; --en-encre: #1B1A23; --en-doux: #6E675B; --hb-encre: #1B1A23; --hb-doux: #6E675B;
+  --hm-encre: #1B1A23; --hm-doux: #6E675B; --inst-encre: #1B1A23; --inst-doux: #6E675B; --lg-encre: #1B1A23; --lg-doux: #6E675B; --prg-encre: #1B1A23; --prg-doux: #6E675B;
+  color: #1B1A23;
 }

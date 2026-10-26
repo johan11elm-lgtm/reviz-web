@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
-import { UserIcon, MailIcon, KeyIcon, BellIcon, MoonIcon, LockIcon, CheckIcon, LogOutIcon, InstallIcon, ChatIcon } from '../components/Icons';
+import { UserIcon, MailIcon, KeyIcon, BellIcon, LockIcon, CheckIcon, LogOutIcon, InstallIcon, ChatIcon } from '../components/Icons';
 import { InstallerModal } from '../components/InstallerApp';
 import { useInstallation } from '../hooks/useInstallation';
 import { useAuth } from '../context/AuthContext';
@@ -13,7 +13,7 @@ import { Mascot } from '../components/Mascot';
 import { Pantin } from '../components/Pantin';
 import { BulleReviz } from '../components/reviz/BulleReviz';
 import { RevizPlusSheet } from '../components/RevizPlus';
-import { THEMES_PROPOSES, SOMBRE_DISPONIBLE, themeAffiche } from '../utils/themes';
+import { THEMES_PROPOSES, SOMBRE_DISPONIBLE, MODES, themeAffiche } from '../utils/themes';
 import { TEINTES, varsTeinte } from '../utils/teinteMatiere';
 import { phaseRevizPlus, joursAvant, dateCourte } from '../utils/revizPlus';
 import { openBillingPortal, startCheckout } from '../services/billingService';
@@ -91,7 +91,7 @@ function Interrupteur({ checked, onChange, label, disabled }) {
 export default function Reglages() {
   const navigate = useNavigate();
   const isDesktop = useIsDesktop();
-  const { theme, setTheme, isDark, toggleTheme } = useTheme();
+  const { theme, setTheme, mode, setMode, isDark } = useTheme();
   const location = useLocation();
   // Arrivée depuis « Choisir mon thème » (fiche Réviz+, accueil) ou depuis la
   // landing (« Réserver mon prix fondateur ») : on descend à la bonne section.
@@ -362,7 +362,19 @@ export default function Reglages() {
   const apparence = (
     <section className="rg-carte" id="themes" aria-labelledby="rg-apparence">
       <h2 id="rg-apparence" className="rg-h2">Apparence</h2>
-      {SOMBRE_DISPONIBLE && ligne({ icone: <MoonIcon />, teinte: 'lavande', label: 'Mode sombre', droite: <Interrupteur checked={isDark} onChange={toggleTheme} label="Activer le mode sombre" /> })}
+      {SOMBRE_DISPONIBLE && (
+        <>
+          <span className="rg-sur">Affichage</span>
+          <div className="rg-modes" role="radiogroup" aria-label="Affichage clair ou sombre">
+            {MODES.map(m => (
+              <button key={m.id} type="button" role="radio" aria-checked={mode === m.id}
+                className={`rg-mode${mode === m.id ? ' is-choisi' : ''}`} onClick={() => setMode(m.id)}>{m.label}</button>
+            ))}
+          </div>
+          {mode === 'auto' && <p className="rg-sous rg-mode-note">Comme ton appareil : clair le jour, sombre s’il est en mode sombre.</p>}
+          {isDark && <p className="rg-sous rg-mode-note">Les thèmes ci-dessous habillent le mode clair.</p>}
+        </>
+      )}
       <span className="rg-sur">Classiques</span>
       <div className="rg-themes" role="radiogroup" aria-label="Thèmes classiques">{THEMES_PROPOSES.filter(t => !t.premium).map(tuile)}</div>
       <span className="rg-sur">Réviz+ <em>{hasRevizPlus ? `${THEMES_PROPOSES.filter(t => t.premium).length} thèmes débloqués` : 'Avec Réviz+'}</em></span>

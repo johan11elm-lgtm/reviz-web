@@ -12,7 +12,7 @@
   gap: 6px;
   padding: 0 12px 0 9px;
   border-radius: 999px;
-  background: #fff;
+  background: var(--rv-carte);
   font-family: var(--font-display);
   font-size: 16px;
   font-weight: 800;
@@ -37,7 +37,7 @@
 .qz-page .qz-anneaux i {
   position: absolute;
   inset: 0;
-  border: 3px solid #fff;
+  border: 3px solid var(--rv-carte);
   border-radius: 50%;
   opacity: 0;
   animation: qzAnneau 2.4s ease-out infinite;
@@ -69,7 +69,7 @@
   box-sizing: border-box;
   border: 0;
   border-radius: 20px;
-  background: #fff;
+  background: var(--rv-carte);
   box-shadow: 0 5px 0 #C9C2F2;
   font: 700 18px 'Geist', system-ui, sans-serif;
   color: var(--ch-encre);
@@ -85,7 +85,7 @@
   height: 32px;
   flex: none;
   border-radius: 50%;
-  background: #F8EFE7;
+  background: var(--rv-fond);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -96,9 +96,9 @@
 .qz-page .qz-choix-txt { flex: 1; min-width: 0; }
 .qz-page .qz-choix-mention { flex: none; font-size: 12px; font-weight: 700; opacity: .85; }
 .qz-page .qz-choix-btn.is-juste { background: #34C77B; box-shadow: 0 5px 0 #1F8A52; }
-.qz-page .qz-choix-btn.is-juste .qz-lettre { background: #fff; color: #1F8A52; }
-.qz-page .qz-choix-btn.is-faux { background: #C25407; color: #fff; box-shadow: 0 5px 0 #8F3E05; }
-.qz-page .qz-choix-btn.is-faux .qz-lettre { background: #fff; color: #C25407; }
+.qz-page .qz-choix-btn.is-juste .qz-lettre { background: var(--rv-carte); color: #1F8A52; }
+.qz-page .qz-choix-btn.is-faux { background: var(--rv-orange); color: #fff; box-shadow: 0 5px 0 var(--rv-orange-tranche); }
+.qz-page .qz-choix-btn.is-faux .qz-lettre { background: var(--rv-carte); color: var(--rv-orange-texte); }
 /* Les autres réponses se replient pour laisser la place à la correction */
 .qz-page .qz-ecran .qz-choix-btn.is-autre { max-height: 0; min-height: 0; padding-top: 0; padding-bottom: 0; margin-top: -8px; opacity: 0; box-shadow: none; }
 
@@ -106,7 +106,7 @@
   margin-top: 14px;
   padding: 16px;
   border-radius: 24px;
-  background: #fff;
+  background: var(--rv-carte);
   box-shadow: 0 12px 30px var(--ch-ombre);
   animation: qzCorrection .35s cubic-bezier(.3,1.4,.5,1) both;
 }
@@ -125,13 +125,13 @@
   padding: 0 14px 0 6px;
   border: 0;
   border-radius: 999px;
-  background: #F8EFE7;
+  background: var(--rv-fond);
   font: 700 14px 'Geist', system-ui, sans-serif;
   color: var(--ch-encre);
   cursor: pointer;
 }
-.qz-page .qz-ia-anneau { width: 38px; height: 38px; flex: none; padding: 2px; box-sizing: border-box; border-radius: 50%; background: conic-gradient(#C25407, #FFD9E4, #C25407); }
-.qz-page .qz-ia-anneau > span { width: 100%; height: 100%; box-sizing: border-box; border: 2px solid #fff; border-radius: 50%; background: #fff; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.qz-page .qz-ia-anneau { width: 38px; height: 38px; flex: none; padding: 2px; box-sizing: border-box; border-radius: 50%; background: conic-gradient(var(--rv-orange), #FFD9E4, var(--rv-orange)); }
+.qz-page .qz-ia-anneau > span { width: 100%; height: 100%; box-sizing: border-box; border: 2px solid var(--rv-carte); border-radius: 50%; background: var(--rv-carte); display: flex; align-items: center; justify-content: center; overflow: hidden; }
 .qz-page .qz-suivante { flex: none; margin-top: 16px; }
 
 /* ── Fin ── */
@@ -142,27 +142,27 @@
 .qz-page .qz-score-grand small { font-size: .5em; color: var(--ch-doux); }
 .qz-page .qz-score-legende { font-size: 15px; font-weight: 600; color: var(--ch-doux); }
 .qz-page .qz-pastilles { display: flex; justify-content: center; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
-.qz-page .qz-xp, .qz-page .qz-enregistre { display: inline-flex; align-items: center; gap: 6px; padding: 7px 14px; border-radius: 999px; background: #fff; font-size: 14px; font-weight: 700; }
-.qz-page .qz-xp { font-family: var(--font-display); font-size: 16px; font-weight: 800; color: #C25407; }
-.qz-page .qz-carte { padding: 18px; border-radius: 26px; background: #fff; box-shadow: 0 12px 30px var(--ch-ombre); }
+.qz-page .qz-xp, .qz-page .qz-enregistre { display: inline-flex; align-items: center; gap: 6px; padding: 7px 14px; border-radius: 999px; background: var(--rv-carte); font-size: 14px; font-weight: 700; }
+.qz-page .qz-xp { font-family: var(--font-display); font-size: 16px; font-weight: 800; color: var(--rv-orange-texte); }
+.qz-page .qz-carte { padding: 18px; border-radius: 26px; background: var(--rv-carte); box-shadow: 0 12px 30px var(--ch-ombre); }
 .qz-page--fin .fc-ecran > .qz-carte, .qz-page--fin .fc-ecran > .qz-revoir { margin-top: 20px; }
 .qz-page .qz-carte-tete { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; }
 .qz-page .qz-titre2 { margin: 0; font-family: var(--font-display); font-size: 22px; font-weight: 800; letter-spacing: -.02em; }
 .qz-page .qz-parcours-compte { font-size: 13px; font-weight: 700; color: var(--ch-doux); }
-.qz-page .qz-parcours-compte.is-fini { color: #1F8A52; }
+.qz-page .qz-parcours-compte.is-fini { color: var(--rv-vert-texte); }
 .qz-page .qz-etapes { position: relative; display: flex; justify-content: space-between; margin: 16px 0 0; padding: 0 10px; list-style: none; }
 .qz-page .qz-etapes::before { content: ''; position: absolute; left: 40px; right: 40px; top: 22px; height: 18px; border-radius: 99px; background: #DCF5E6; }
 .qz-page .qz-etapes li { position: relative; display: flex; flex-direction: column; align-items: center; gap: 6px; width: 70px; }
-.qz-page .qz-etape-rond { width: 46px; height: 46px; box-sizing: border-box; border: 3px solid #fff; border-radius: 50%; background: #FFE6D2; box-shadow: 0 5px 0 rgba(194,84,7,.28); display: flex; align-items: center; justify-content: center; color: #fff; }
+.qz-page .qz-etape-rond { width: 46px; height: 46px; box-sizing: border-box; border: 3px solid var(--rv-carte); border-radius: 50%; background: #FFE6D2; box-shadow: 0 5px 0 rgba(194,84,7,.28); display: flex; align-items: center; justify-content: center; color: #fff; }
 .qz-page .qz-etapes li.is-fait .qz-etape-rond { background: #34C77B; box-shadow: 0 5px 0 #1F8A52; }
 .qz-page .qz-etape-nom { font-size: 13px; font-weight: 700; }
-.qz-page .qz-sep { display: block; margin: 16px 0 12px; border-top: 1.5px dashed #EADBCB; }
+.qz-page .qz-sep { display: block; margin: 16px 0 12px; border-top: 1.5px dashed var(--rv-ligne); }
 .qz-page .qz-reponses-titre { font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--ch-doux); }
 .qz-page .qz-carte .fc-route--recap { margin-top: 8px; }
 .qz-page .qz-revoir { display: flex; flex-direction: column; gap: 10px; }
 .qz-page .qz-revoir-liste { display: flex; flex-direction: column; gap: 10px; }
 .qz-page .qz-erreur { padding: 16px; }
-.qz-page .qz-erreur-num { font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #C25407; }
+.qz-page .qz-erreur-num { font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--rv-orange-texte); }
 .qz-page .qz-erreur-q { margin: 6px 0 0; font-size: 16px; font-weight: 700; line-height: 1.4; }
 .qz-page .qz-erreur-pastilles { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
 .qz-page .qz-pill { padding: 5px 10px; border-radius: 999px; font-size: 13px; font-weight: 600; }
@@ -190,7 +190,7 @@
 .qz-page--large .qz-choix-btn { min-height: 76px; border-radius: 22px; font-size: 22px; }
 .qz-page--large .qz-choix-btn:not(:disabled):hover { transform: translateY(-2px); }
 .qz-page--large .qz-choix-btn.is-autre { opacity: .45; }
-.qz-page--large .qz-lettre { width: 40px; height: 40px; box-shadow: 0 3px 0 #EADBCB; font-size: 17px; }
+.qz-page--large .qz-lettre { width: 40px; height: 40px; box-shadow: 0 3px 0 var(--rv-ligne); font-size: 17px; }
 .qz-page--large .qz-correction { display: flex; align-items: center; gap: 18px; margin-top: 18px; padding: 18px 20px; }
 .qz-page--large .qz-correction-txt { flex: 1; }
 .qz-page--large .qz-correction p { font-size: 18px; }
@@ -201,9 +201,9 @@
 .qz-page--large .qz-score-cours { font-family: var(--font-display); font-size: 44px; font-weight: 800; line-height: 1; }
 .qz-page--large .qz-score-sous { font-size: 13px; color: var(--ch-doux); }
 .qz-page--large .qz-segments { display: flex; gap: 4px; margin: 4px 0; }
-.qz-page--large .qz-segments i { flex: 1; height: 8px; border-radius: 99px; background: #EADBCB; }
+.qz-page--large .qz-segments i { flex: 1; height: 8px; border-radius: 99px; background: var(--rv-ligne); }
 .qz-page--large .qz-segments i.is-juste { background: #34C77B; }
-.qz-page--large .qz-segments i.is-faux { background: #C25407; }
+.qz-page--large .qz-segments i.is-faux { background: var(--rv-orange); }
 
 .qz-page--large .qz-ecran-fin { align-items: center; justify-content: center; }
 .qz-page--large .qz-fin-grille { width: 100%; max-width: 1128px; display: grid; grid-template-columns: 480px 600px; justify-content: space-between; align-items: center; }
