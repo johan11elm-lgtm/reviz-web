@@ -81,7 +81,7 @@ export function DecouvrirRevizPlus({ onClose }) {
         <tbody>
           <tr><th scope="row">Scans de leçons</th><td>5 par semaine</td><td>Illimités</td></tr>
           <tr><th scope="row">Questions à Réviz IA</th><td>10 par jour</td><td>Illimitées</td></tr>
-          <tr><th scope="row">Thèmes</th><td>2</td><td>6</td></tr>
+          <tr><th scope="row">Thèmes</th><td>1</td><td>4</td></tr>
         </tbody>
       </table>
       <span className="rpo-sur rpo-sur--bloc">Ta formule</span>

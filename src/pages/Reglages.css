@@ -2,7 +2,7 @@
  * lignes, interrupteurs et choix ronds à tranche ; feuilles du bas (fenêtre sur ordinateur). */
 .rg-page {
   --rg-bord: var(--rv-ligne); --rg-orange: var(--rv-orange); --rg-tranche: var(--rv-orange-tranche);
-  --rg-vert: #34C77B; --rg-vert-texte: #1F8A52; --rg-vert-fond: #DCF5E6;
+  --rg-vert: #34C77B; --rg-vert-texte: #1F8A52; --rg-vert-fond: var(--rv-vert-pale);
   min-height: 100dvh;
   background: var(--rv-fond);
   color: var(--ch-encre);
@@ -23,7 +23,7 @@
 .rg-retour {
   display: flex; align-items: center; justify-content: center;
   width: 44px; height: 44px;
-  border: 0; border-radius: 50%; background: var(--rv-carte); box-shadow: 0 4px 0 #C9C2F2;
+  border: 0; border-radius: 50%; background: var(--rv-carte); box-shadow: 0 4px 0 var(--rv-lavande-bulle);
   color: var(--ch-encre); cursor: pointer;
 }
 .rg-hero-corps { position: relative; z-index: 1; display: flex; align-items: flex-end; justify-content: space-between; gap: 4px; margin-top: 14px; }
@@ -56,9 +56,9 @@
 .rg-ligne > svg { flex: none; color: var(--ch-doux); }
 .rg-rond { flex: none; display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; color: #1B1A23; }
 .rg-rond svg { width: 18px; height: 18px; }
-.rg-rond--lavande { background: #E4E0FA; }
-.rg-rond--peche { background: #FFE6D2; }
-.rg-rond--menthe { background: #DCF5E6; }
+.rg-rond--lavande { background: var(--rv-lavande); }
+.rg-rond--peche { background: var(--rv-peche-pale); }
+.rg-rond--menthe { background: var(--rv-menthe); }
 .rg-ligne-txt { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 1px; }
 .rg-ligne-txt b { font-size: 15px; font-weight: 600; }
 .rg-ligne-txt span { font-size: 13px; font-weight: 500; color: var(--ch-doux); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
@@ -127,7 +127,7 @@
 }
 .rg-theme-cadenas svg { width: 14px; height: 14px; }
 .rg-theme-nom { font-size: 12.5px; font-weight: 600; line-height: 1.2; text-align: center; }
-.rg-verrou { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; margin-top: 16px; padding: 16px; border-radius: 18px; background: #FFE6D2; }
+.rg-verrou { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; margin-top: 16px; padding: 16px; border-radius: 18px; background: var(--rv-peche-pale); }
 .rg-verrou b { font-size: 14.5px; font-weight: 700; }
 .rg-verrou span { font-size: 13.5px; color: var(--ch-doux); }
 .rg-verrou .rg-btn { margin-top: 8px; }
@@ -136,9 +136,9 @@
 .rg-etat { display: inline-flex; align-items: center; gap: 6px; height: 28px; padding: 0 12px; border-radius: 999px; font-size: 13px; font-weight: 700; }
 .rg-etat::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
 .rg-etat--actif { background: var(--rg-vert-fond); color: var(--rg-vert-texte); }
-.rg-etat--offert { background: #FFE6D2; color: #8F3E05; }
+.rg-etat--offert { background: var(--rv-peche-pale); color: var(--rv-marque-fonce); }
 .rg-plus-formule { display: flex; align-items: center; gap: 14px; margin: 10px 0 14px; }
-.rg-plus-formule > img, .rg-plus-formule > picture > img { flex: none; width: 60px; height: 60px; border-radius: 50%; background: #FFE6D2; }
+.rg-plus-formule > img, .rg-plus-formule > picture > img { flex: none; width: 60px; height: 60px; border-radius: 50%; background: var(--rv-peche-pale); }
 .rg-plus-formule > span { display: flex; flex-direction: column; gap: 2px; }
 .rg-plus-formule b { font-family: var(--font-display); font-size: 19px; font-weight: 800; letter-spacing: -.02em; }
 .rg-plus-formule span span { font-size: 14px; font-weight: 500; line-height: 1.4; color: var(--ch-doux); }
@@ -160,7 +160,7 @@
 
 /* Mode essai */
 .rg-essai-haut { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
-.rg-essai-haut img { flex: none; border-radius: 50%; background: #E4E0FA; }
+.rg-essai-haut img { flex: none; border-radius: 50%; background: var(--rv-lavande); }
 .rg-essai-haut span { display: flex; flex-direction: column; gap: 2px; font-size: 14px; line-height: 1.4; color: var(--ch-doux); }
 .rg-essai-haut b { font-family: var(--font-display); font-size: 19px; font-weight: 800; color: var(--ch-encre); }
 
@@ -201,8 +201,8 @@
 .rg-message--reussite { background: var(--rg-vert-fond); }
 .rg-message--reussite .rg-message-rond { background: var(--rg-vert); }
 .rg-message--reussite b { color: var(--rg-vert-texte); }
-.rg-message--erreur { background: #FFD9E4; color: #1B1A23; }
-.rg-message--erreur .rg-message-rond { background: #F4B8CB; }
+.rg-message--erreur { background: var(--rv-rose); color: #1B1A23; }
+.rg-message--erreur .rg-message-rond { background: var(--rv-rose-tranche); }
 
 /* ── Feuilles ── */
 .rg-voile { position: fixed; inset: 0; z-index: 300; display: flex; align-items: flex-end; justify-content: center; background: rgba(var(--rv-voile-rgb),.38); animation: rgFondu .2s both; }

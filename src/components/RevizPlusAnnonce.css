@@ -9,9 +9,9 @@
 .rpa-liste li > span:last-child { grid-column: 2; font-size: 13.5px; font-weight: 500; color: var(--rv-doux); }
 .rpa-rond { grid-row: span 2; display: flex; align-items: center; justify-content: center; width: 34px; height: 34px; border-radius: 50%; color: var(--rv-encre); }
 .rpa-rond svg { width: 17px; height: 17px; }
-.rpa-rond--lavande { background: #E4E0FA; box-shadow: 0 3px 0 #C9C2F2; }
-.rpa-rond--peche { background: #FFE6D2; box-shadow: 0 3px 0 #FFC596; }
-.rpa-rond--menthe { background: #DCF5E6; box-shadow: 0 3px 0 #A8E3C2; }
+.rpa-rond--lavande { background: var(--rv-lavande); box-shadow: 0 3px 0 var(--rv-lavande-bulle); }
+.rpa-rond--peche { background: var(--rv-peche-pale); box-shadow: 0 3px 0 var(--rv-peche-bulle); }
+.rpa-rond--menthe { background: var(--rv-menthe); box-shadow: 0 3px 0 var(--rv-menthe-tranche); }
 
 /* ── Sombre : ces pastels gardent leur texte sombre (cf. rv-ilot dans global.css) ── */
 :root[data-theme="dark"] .rpa-rond--lavande,

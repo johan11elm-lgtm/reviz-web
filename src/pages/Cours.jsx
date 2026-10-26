@@ -21,10 +21,10 @@ const pluriel = (n, mot) => `${n} ${mot}${n > 1 ? 's' : ''}`;
 
 // Pastel et tranche de chaque matière (handoff Mes leçons du 21/10).
 const PASTELS = new Map([
-  [TEINTES.lavande, { pastel: '#E4E0FA', fonce: '#C9C2F2', pointille: '#9F97D9' }],
-  [TEINTES.peche, { pastel: '#FFE6D2', fonce: '#FFC596', pointille: '#E8A877' }],
-  [TEINTES.rose, { pastel: '#FFD9E4', fonce: '#F4B8CB', pointille: '#E39AB1' }],
-  [TEINTES.menthe, { pastel: '#DCF5E6', fonce: '#A8E3C2', pointille: '#7FCB9F' }],
+  [TEINTES.lavande, { pastel: 'var(--rv-lavande)', fonce: 'var(--rv-lavande-bulle)', pointille: 'var(--rv-lavande-pointille)' }],
+  [TEINTES.peche, { pastel: 'var(--rv-peche-pale)', fonce: 'var(--rv-peche-bulle)', pointille: 'var(--rv-peche-pointille)' }],
+  [TEINTES.rose, { pastel: 'var(--rv-rose)', fonce: 'var(--rv-rose-tranche)', pointille: 'var(--rv-rose-pointille)' }],
+  [TEINTES.menthe, { pastel: 'var(--rv-menthe)', fonce: 'var(--rv-menthe-tranche)', pointille: 'var(--rv-menthe-pointille)' }],
 ]);
 const couleurs = matiere => PASTELS.get(teinteMatiere(matiere)) ?? PASTELS.get(TEINTES.peche);
 
@@ -95,10 +95,10 @@ function Cases({ etapes, grand = false, pointille }) {
 const Pastille = ({ a }) => <span className={`le-pastille le-pastille--${a.etat === 'encours' && a.aRevoir > 0 ? 'travailler' : a.etat}`}><i />{a.pastille}</span>;
 
 const FORMATS = [
-  { nom: 'Résumé', meta: '5 min de lecture', pose: 'reading', fond: '#E4E0FA' },
-  { nom: 'Flashcards', meta: '8 cartes', pose: 'flashcard', fond: '#FFE6D2' },
-  { nom: 'Quiz corrigé', meta: '7 questions', pose: 'quiz', fond: '#DCF5E6' },
-  { nom: 'Carte mentale', meta: "Vue d'ensemble", pose: 'thinking', fond: '#FFD9E4' },
+  { nom: 'Résumé', meta: '5 min de lecture', pose: 'reading', fond: 'var(--rv-lavande)' },
+  { nom: 'Flashcards', meta: '8 cartes', pose: 'flashcard', fond: 'var(--rv-peche-pale)' },
+  { nom: 'Quiz corrigé', meta: '7 questions', pose: 'quiz', fond: 'var(--rv-menthe)' },
+  { nom: 'Carte mentale', meta: "Vue d'ensemble", pose: 'thinking', fond: 'var(--rv-rose)' },
 ];
 
 /**

@@ -70,7 +70,7 @@
   padding: 0;
   list-style: none;
 }
-.fc-page .fc-route::before { content: ''; position: absolute; left: 14px; right: 14px; top: 50%; border-top: 3px dotted #9F97D9; }
+.fc-page .fc-route::before { content: ''; position: absolute; left: 14px; right: 14px; top: 50%; border-top: 3px dotted var(--rv-lavande-pointille); }
 .fc-page .fc-case {
   position: relative;
   width: 30px;
@@ -87,11 +87,11 @@
   font-weight: 800;
   transition: transform .25s cubic-bezier(.3,1.5,.5,1);
 }
-.fc-page .fc-case--avenir { background: #FFE6D2; color: #6E675B; box-shadow: 0 4px 0 rgba(194,84,7,.28); }
+.fc-page .fc-case--avenir { background: var(--rv-peche-pale); color: #6E675B; box-shadow: 0 4px 0 rgba(194,84,7,.28); }
 .fc-page .fc-case--cours { width: 40px; height: 40px; border: 4px solid var(--rv-orange); background: var(--rv-carte); color: var(--rv-orange-texte); box-shadow: 0 4px 0 var(--rv-orange-tranche); font-size: 15px; }
 .fc-page .fc-case--sais { background: #34C77B; color: #fff; box-shadow: 0 4px 0 #1F8A52; }
 .fc-page .fc-case--revoir { background: var(--rv-orange); color: #fff; box-shadow: 0 4px 0 var(--rv-orange-tranche); }
-.fc-page .fc-case--presque { background: var(--rv-carte); border-color: #C9C2F2; box-shadow: 0 4px 0 #C9C2F2; }
+.fc-page .fc-case--presque { background: var(--rv-carte); border-color: var(--rv-lavande-bulle); box-shadow: 0 4px 0 var(--rv-lavande-bulle); }
 .fc-page .fc-case--presque i { width: 8px; height: 8px; border-radius: 50%; background: var(--rv-inverse); }
 .fc-page .fc-case--juste { background: #34C77B; color: #fff; box-shadow: 0 4px 0 #1F8A52; }
 .fc-page .fc-case--faux { background: var(--rv-orange); color: #fff; box-shadow: 0 4px 0 var(--rv-orange-tranche); }
@@ -147,8 +147,8 @@
 .fc-page .is-verso .fc-face--recto { opacity: 0; }
 .fc-page .fc-face:focus-visible { outline: 3px solid var(--ch-encre); outline-offset: 3px; }
 .fc-page .fc-face-haut, .fc-page .fc-face-bas { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
-.fc-page .fc-etiquette { flex: none; padding: 5px 10px; border-radius: 999px; background: #FFE6D2; font-size: 12px; font-weight: 700; color: #8F3E05; }
-.fc-page .fc-etiquette--nouvelle { background: #E4E0FA; color: #1B1A23; }
+.fc-page .fc-etiquette { flex: none; padding: 5px 10px; border-radius: 999px; background: var(--rv-peche-pale); font-size: 12px; font-weight: 700; color: var(--rv-marque-fonce); }
+.fc-page .fc-etiquette--nouvelle { background: var(--rv-lavande); color: #1B1A23; }
 .fc-page .fc-face-coin { min-width: 0; font-size: 12px; font-weight: 600; color: var(--ch-doux); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .fc-page .fc-question, .fc-page .fc-reponse {
   flex: 1;
@@ -216,8 +216,8 @@
 .fc-page .fc-btn--encre:active { box-shadow: 0 1px 0 #000; }
 .fc-page .fc-btn--orange { background: var(--rv-orange); color: #fff; box-shadow: 0 5px 0 var(--rv-orange-tranche); }
 .fc-page .fc-btn--orange:active { box-shadow: 0 1px 0 var(--rv-orange-tranche); }
-.fc-page .fc-btn--blanc { background: var(--rv-carte); color: var(--ch-encre); box-shadow: 0 5px 0 #C9C2F2; }
-.fc-page .fc-btn--blanc:active { box-shadow: 0 1px 0 #C9C2F2; }
+.fc-page .fc-btn--blanc { background: var(--rv-carte); color: var(--ch-encre); box-shadow: 0 5px 0 var(--rv-lavande-bulle); }
+.fc-page .fc-btn--blanc:active { box-shadow: 0 1px 0 var(--rv-lavande-bulle); }
 .fc-page .fc-btn--vert { background: #34C77B; color: #1B1A23; box-shadow: 0 5px 0 #1F8A52; }
 .fc-page .fc-btn--vert:active { box-shadow: 0 1px 0 #1F8A52; }
 .fc-page .fc-notes .fc-btn { flex: 1; padding: 0 8px; }
@@ -238,7 +238,7 @@
 .fc-page .fc-precedente-point { width: 8px; height: 8px; border-radius: 50%; }
 .fc-page .fc-precedente-point--sais { background: #34C77B; }
 .fc-page .fc-precedente-point--revoir { background: var(--rv-orange); }
-.fc-page .fc-precedente-point--presque { background: #C9C2F2; }
+.fc-page .fc-precedente-point--presque { background: var(--rv-lavande-bulle); }
 
 /* ── Fin de série et « rien à revoir » ── */
 .fc-page--fin .fc-ecran, .fc-page--calme .fc-ecran { overflow-y: auto; scrollbar-width: none; }
@@ -264,7 +264,7 @@
 .fc-page--calme .fc-ecran--centre { align-items: center; }
 .fc-page--calme .fc-reviz { margin-top: auto; }
 .fc-page .fc-date-carte { display: flex; align-items: center; gap: 14px; width: 100%; max-width: 335px; margin-top: 22px; padding: 14px; box-sizing: border-box; border-radius: 26px; background: var(--rv-carte); box-shadow: 0 12px 30px var(--ch-ombre); }
-.fc-page .fc-date-rond { width: 60px; height: 60px; flex: none; border-radius: 50%; background: #FFE6D2; box-shadow: 0 4px 0 rgba(194,84,7,.28); display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: #6E675B; line-height: 1; }
+.fc-page .fc-date-rond { width: 60px; height: 60px; flex: none; border-radius: 50%; background: var(--rv-peche-pale); box-shadow: 0 4px 0 rgba(194,84,7,.28); display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: #6E675B; line-height: 1; }
 .fc-page .fc-date-rond b { font-family: var(--font-display); font-size: 22px; font-weight: 800; color: var(--ch-encre); }
 .fc-page .fc-date-txt { display: flex; flex-direction: column; font-size: 13px; color: var(--ch-doux); }
 .fc-page .fc-date-txt b { font-size: 17px; color: var(--ch-encre); }
@@ -305,7 +305,7 @@
 .fc-page--large .fc-notes .fc-btn { width: 200px; flex: none; height: 60px; }
 .fc-page--large .fc-btn--orange, .fc-page--large .fc-btn--orange:hover { box-shadow: 0 6px 0 var(--rv-orange-tranche); }
 .fc-page--large .fc-btn--vert { box-shadow: 0 6px 0 #1F8A52; }
-.fc-page--large .fc-btn--blanc { box-shadow: 0 6px 0 #C9C2F2; }
+.fc-page--large .fc-btn--blanc { box-shadow: 0 6px 0 var(--rv-lavande-bulle); }
 .fc-page--large .fc-btn:active { transform: translateY(4px); box-shadow: 0 2px 0 rgba(0,0,0,.25); }
 .fc-page--large .fc-col-gauche .fc-bulle .rv-bulle-txt { max-width: 300px; font-size: 21px; }
 .fc-page--large .fc-col-gauche .fc-bulle .rv-bulle-ligne + .rv-bulle-ligne { font-size: 15px; }
@@ -314,8 +314,8 @@
 .fc-page--large .fc-infos-titre--2 { margin-top: 10px; }
 .fc-page--large .fc-infos-ligne { display: flex; align-items: center; gap: 10px; font-size: 15px; font-weight: 600; }
 .fc-page--large .fc-pt { width: 10px; height: 10px; border-radius: 50%; }
-.fc-page--large .fc-pt--peche { background: #FFB37A; }
-.fc-page--large .fc-pt--lavande { background: #C9C2F2; }
+.fc-page--large .fc-pt--peche { background: var(--rv-peche); }
+.fc-page--large .fc-pt--lavande { background: var(--rv-lavande-bulle); }
 .fc-page--large .fc-touche { display: flex; align-items: center; gap: 12px; font-size: 14px; font-weight: 600; color: var(--ch-doux); }
 .fc-page--large .fc-touche kbd {
   min-width: 34px;

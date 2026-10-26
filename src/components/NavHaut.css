@@ -72,7 +72,7 @@
   justify-content: center;
   overflow: hidden;
 }
-.nav-haut-ia--actif .nav-haut-ia-rond { background: var(--rv-nav-ia-actif, #FFE6D2); }
+.nav-haut-ia--actif .nav-haut-ia-rond { background: var(--rv-nav-ia-actif, var(--rv-peche-pale)); }
 
 /* Mode essai : créer son compte, juste avant la capsule */
 .nav-haut-compte {

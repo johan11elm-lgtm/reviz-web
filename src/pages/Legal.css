@@ -8,8 +8,8 @@
   --lg-doux: var(--rv-doux);
   --lg-bord: var(--rv-ligne);
   --lg-orange: var(--rv-orange);
-  --lg-lavande: #E4E0FA;
-  --lg-lavande-tranche: #C9C2F2;
+  --lg-lavande: var(--rv-lavande);
+  --lg-lavande-tranche: var(--rv-lavande-bulle);
   background: var(--rv-fond);
   color: var(--lg-encre);
   font-family: 'Geist', system-ui, sans-serif;

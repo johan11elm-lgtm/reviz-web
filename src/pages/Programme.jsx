@@ -184,7 +184,7 @@ export default function Programme() {
   const carteScans = (
     <CarteFonction
       carte={{
-        pose: 'scanphone', fond: '#FFE6D2', titre: 'Mes leçons scannées',
+        pose: 'scanphone', fond: 'var(--rv-peche-pale)', titre: 'Mes leçons scannées',
         sous: isGuest ? 'Avec un compte gratuit' : scannees ? `${pluriel(scannees, 'leçon')}, prêtes à réviser` : 'Une photo de ton cahier, et Réviz prépare tout',
       }}
       grande={isDesktop}
@@ -321,7 +321,7 @@ function Anneau({ m, on, grand, onClick }) {
         <svg viewBox="0 0 76 76" width={taille} height={taille} aria-hidden="true">
           <circle cx="38" cy="38" r={r} fill="none" style={{ stroke: 'var(--rv-ligne)' }} strokeWidth="4" />
           {m.pct > 0 && (
-            <circle cx="38" cy="38" r={r} fill="none" stroke={m.pct === 100 ? '#34C77B' : '#C25407'} strokeWidth="4"
+            <circle cx="38" cy="38" r={r} fill="none" style={{ stroke: m.pct === 100 ? '#34C77B' : 'var(--rv-marque)' }} strokeWidth="4"
               strokeLinecap="round" strokeDasharray={`${(m.pct / 100) * C} ${C}`} />
           )}
         </svg>
@@ -398,8 +398,8 @@ function Vague({ matiere, choisie, onChoisir, grand, detail }) {
           <svg width={largeurPiste} height={D.h} className="prg-route" aria-hidden="true">
             <path d={route} transform="translate(0 7)" fill="none" stroke="#A0501A" strokeOpacity=".10" strokeWidth={D.route} strokeLinecap="round" />
             <path d={route} fill="none" style={{ stroke: 'var(--rv-carte)' }} strokeWidth={D.route} strokeLinecap="round" />
-            {routeFaite && <path d={routeFaite} fill="none" stroke="#DCF5E6" strokeWidth={D.route} strokeLinecap="round" />}
-            <path d={route} fill="none" stroke="#C25407" strokeOpacity=".45" strokeWidth="3" strokeDasharray="2 10" strokeLinecap="round" />
+            {routeFaite && <path d={routeFaite} fill="none" style={{ stroke: 'var(--rv-menthe)' }} strokeWidth={D.route} strokeLinecap="round" />}
+            <path d={route} fill="none" style={{ stroke: 'var(--rv-marque)' }} strokeOpacity=".45" strokeWidth="3" strokeDasharray="2 10" strokeLinecap="round" />
           </svg>
           {matiere.items.map((it, i) => {
             const [x, y] = pts[i];

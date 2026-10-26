@@ -87,10 +87,10 @@
   font-weight: 700;
   color: var(--ch-encre);
 }
-.ch-pastille i { width: 8px; height: 8px; border-radius: 50%; background: #C9C2F2; }
+.ch-pastille i { width: 8px; height: 8px; border-radius: 50%; background: var(--rv-lavande-bulle); }
 .ch-pastille--encours i,
 .ch-pastille--revoir i { background: var(--rv-orange); }
-.ch-pastille--maitrise { background: #DCF5E6; color: #1F8A52; }
+.ch-pastille--maitrise { background: var(--rv-vert-pale); color: #1F8A52; }
 .ch-pastille--maitrise i { background: #34C77B; }
 
 

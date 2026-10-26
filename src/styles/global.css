@@ -93,6 +93,40 @@
   --rv-ombre:          120,60,20;  /* ombres brunes : rgba(var(--rv-ombre), .3) */
   --rv-voile-rgb:      27,26,35;   /* voile derrière une feuille ou une fenêtre */
   --rv-ombre-2:        160,80,20;
+
+  /* Palette des pastels (héros, matières, pastilles) et accent : les thèmes Réviz+ la redéfinissent.
+     --rv-marque et --rv-marque-fonce valent l'orange du Crème aussi en sombre (sur un pastel). */
+  --rv-peche: #FFB37A;
+  --rv-peche-bulle: #FFC596;
+  --rv-peche-pale: #FFE6D2;
+  --rv-peche-clair: #FFD7BE;
+  --rv-peche-rose: #FFC9A8;
+  --rv-peche-rose-pale: #FFDAC4;
+  --rv-peche-point: #E07A2E;
+  --rv-peche-pointille: #E8A877;
+  --rv-peche-encre: #B34400;
+  --rv-lavande: #E4E0FA;
+  --rv-lavande-bulle: #C9C2F2;
+  --rv-lavande-clair: #D8D2F7;
+  --rv-lavande-point: #7B6FD6;
+  --rv-lavande-pointille: #9F97D9;
+  --rv-lavande-encre: #3D3770;
+  --rv-lavande-vif: #5B4FC7;
+  --rv-lavande-vif-texte: #B3AAF5;
+  --rv-menthe: #DCF5E6;
+  --rv-menthe-bulle: #B9E8C9;
+  --rv-menthe-tranche: #A8E3C2;
+  --rv-menthe-point: #34A86A;
+  --rv-menthe-pointille: #7FCB9F;
+  --rv-menthe-encre: #0F6B3A;
+  --rv-rose: #FFD9E4;
+  --rv-rose-bulle: #FFC2D4;
+  --rv-rose-tranche: #F4B8CB;
+  --rv-rose-point: #D9628A;
+  --rv-rose-pointille: #E39AB1;
+  --rv-vert-pale:      #DCF5E6;  /* fond d'une réussite (bonne réponse, maîtrisé) : vert dans tous les thèmes */
+  --rv-marque:         #C25407;
+  --rv-marque-fonce:   #8F3E05;
 }
 
 /* ─── Variables Dark ───────────────────────────────────────────── */
@@ -175,121 +209,238 @@
 }
 
 /* ─── Thèmes Réviz+ (avantage abonnement) ──────────────────────────
- * Catalogue et verrouillage : src/utils/themes.js (+ alias des anciens ids).
- * Même famille que Crème : fonds désaturés, cartes blanches, halo chaud qui
- * reste accordé à la mascotte, un accent profond par thème et des cartes
- * héros en dégradé tonal (jamais néon). « Nuit d'encre » étend le sombre. */
+ * Catalogue et verrouillage : src/utils/themes.js (+ alias des anciens ids). Clair seulement : en
+ * sombre, <html> porte data-theme="dark". Un thème redéfinit la palette des pastels (chaque
+ * famille du Crème a son équivalent, les matières restent distinctes), le fond, l'accent et les
+ * ombres. Tons validés par Johan le 26/10 (piste A) ; les tons secondaires gardent la clarté
+ * de leur équivalent Crème avec la teinte de leur famille. */
 
-/* Nuit d'encre — marine profond, blancs chauds, or à la place de l'orange */
-:root[data-theme="nuit-encre"] {
-  --bg-body:        #090A13;
-  --bg-app:         #10121D;
-  --bg-card:        #191B29;
-  --bg-subtle:      #202334;
-  --bg-muted:       #202334;
-  --bg-hover:       #252839;
-  --bg-tip:         #191B29;
-
-  --border:         #262A3C;
-  --border-subtle:  #202334;
-  --skeleton-shimmer: rgba(255, 255, 255, 0.06);
-  --halo-a: rgba(232, 180, 90, 0.13);
-  --halo-b: rgba(120, 132, 230, 0.12);
-
-  --text-primary:   #F4F1EA;
-  --text-secondary: #BCB7AB;
-  --text-muted:     #948F84;
-  --text-light:     #6A665E;
-  --text-cta:       #FFFFFF;
-  --text-intro:     #F1CB82;
-
-  --accent-violet:        #4F5FD8;
-  --accent-violet-hover:  #6170E6;
-  --accent-violet-soft:   #1E2340;
-  --accent-violet-ink:    #C9D0FF;
-  --accent-orange:        #E8B45A;
-  --accent-red-soft:      #36191F;
-
-  --shadow-card:   0 4px 16px rgba(0,0,0,0.38), 0 1px 2px rgba(0,0,0,0.3);
-  --shadow-shell:  0 32px 80px rgba(0,0,0,0.55);
+/* Océan */
+:root[data-theme="ocean"] {
+  --rv-peche: #8EC5F2;
+  --rv-peche-bulle: #A9D3F6;
+  --rv-peche-pale: #DCEDFB;
+  --rv-peche-clair: #C6E1F8;
+  --rv-peche-rose: #B7D9F7;
+  --rv-peche-rose-pale: #CFE5F9;
+  --rv-lavande: #D3F1EE;
+  --rv-lavande-bulle: #A9E2DB;
+  --rv-lavande-clair: #BFEAE4;
+  --rv-menthe: #F6ECD6;
+  --rv-menthe-bulle: #EBD9B4;
+  --rv-menthe-tranche: #E2CDA0;
+  --rv-rose: #E2E4FB;
+  --rv-rose-bulle: #C7CCF4;
+  --rv-rose-tranche: #BFC5F2;
+  --rv-peche-point: #2BA1EF;
+  --rv-peche-pointille: #7FBFF3;
+  --rv-peche-encre: #0072BF;
+  --rv-lavande-point: #009B93;
+  --rv-lavande-pointille: #4DB4AD;
+  --rv-lavande-encre: #004F4B;
+  --rv-lavande-vif: #00827B;
+  --rv-lavande-vif-texte: #55CBC3;
+  --rv-menthe-point: #B58800;
+  --rv-menthe-pointille: #D3B36B;
+  --rv-menthe-encre: #755300;
+  --rv-rose-point: #8281EB;
+  --rv-rose-pointille: #A9ACEC;
+  --rv-fond: #EEF4FA;
+  --rv-fond-rgb: 238,244,250;
+  --rv-ligne: #D3E0EC;
+  --rv-piste: #DCE7F2;
+  --rv-orange: #1F5FBF;
+  --rv-orange-tranche: #154489;
+  --rv-orange-texte: #1F5FBF;
+  --rv-brun-texte: #154489;
+  --rv-marque: #1F5FBF;
+  --rv-marque-fonce: #154489;
+  --rv-doux: #5C6776;
+  --rv-doux-rgb: 92,103,118;
+  --rv-ombre: 20,60,120;
+  --rv-ombre-2: 20,80,150;
+  --rv-sourdine: #E8F0F8;
+  --rv-bord-doux: #D3E0EC;
+  --rv-fond-jeux: #EEF4FA;
+  --rv-colonne-auj: rgba(220,237,251,.35);
+  --rv-nav-ia-actif: #DCEDFB;
+  --rv-nav-actif-texte: #EEF4FA;
+  --rv-nav-rgb: 251,253,255;
+  --rv-nav-ia: #F5FAFF;
+  --rv-nav-icone: #8593A0;
+  --rv-pale: #8A959F;
+  --rv-survol: #DCE9F5;
+  --rv-viseur: #BACDDF;
+  --rv-bulle-doux: #4B5662;
+  --bg-body: #E2EBF4;
+  --bg-app: #EEF4FA;
+  --bg-subtle: #E8F0F8;
+  --bg-muted: #DCE7F2;
+  --bg-hover: #F5F9FD;
+  --bg-tip: #F5F9FD;
+  --border: #D3E0EC;
+  --border-subtle: #DCE7F2;
+  --text-muted: #5C6776;
+  --text-secondary: #5C6776;
+  --accent-violet: #1F5FBF;
+  --accent-violet-hover: #2E74D6;
+  --accent-violet-soft: #DCEDFB;
+  --accent-violet-ink: #154489;
+  --halo-a: rgba(142,197,242, 0.30);
+  --halo-b: rgba(169,211,246, 0.32);
+  --shadow-card: 0 4px 14px rgba(20,60,120,0.08), 0 1px 3px rgba(20,60,120,0.05);
 }
 
-/* Abricot — pêche douce, accent terre cuite, au plus près de la mascotte */
-:root[data-theme="abricot"] {
-  --bg-body:        #F1D9C4;
-  --bg-app:         #F9EADC;
-  --bg-card:        #FFFFFF;
-  --bg-subtle:      #FBEFE4;
-  --bg-muted:       #F4E1CF;
-  --bg-hover:       #FDF4EC;
-
-  --border:         #F0D8C2;
-  --border-subtle:  #F6E6D6;
-
-  --text-primary:   #2A1A12;
-  --text-secondary: #72574A;
-  --text-muted:     #745749;
-
-  --accent-violet:        #8A3B1F;
-  --accent-violet-hover:  #A04727;
-  --accent-violet-soft:   #F7E3D8;
-  --accent-violet-ink:    #6E2C14;
-
-  --halo-a: rgba(255, 138, 61, 0.34);
-  --halo-b: rgba(255, 186, 140, 0.38);
-  --shadow-card:   0 4px 14px rgba(120,60,30,0.08), 0 1px 3px rgba(120,60,30,0.05);
+/* Forêt */
+:root[data-theme="foret"] {
+  --rv-peche: #9ED3A8;
+  --rv-peche-bulle: #B6DEBC;
+  --rv-peche-pale: #E1F2E3;
+  --rv-peche-clair: #CDEAD1;
+  --rv-peche-rose: #C0E4C6;
+  --rv-peche-rose-pale: #D5ECD8;
+  --rv-lavande: #F3E9C8;
+  --rv-lavande-bulle: #E6D49E;
+  --rv-lavande-clair: #EDDDB2;
+  --rv-menthe: #D6EEF0;
+  --rv-menthe-bulle: #ADDADF;
+  --rv-menthe-tranche: #9CD1D7;
+  --rv-rose: #F6DFD3;
+  --rv-rose-bulle: #EDC3AF;
+  --rv-rose-tranche: #E8B7A0;
+  --rv-peche-point: #43B264;
+  --rv-peche-pointille: #89CA96;
+  --rv-peche-encre: #008435;
+  --rv-lavande-point: #A07C00;
+  --rv-lavande-pointille: #B5A058;
+  --rv-lavande-encre: #523E00;
+  --rv-lavande-vif: #895E00;
+  --rv-lavande-vif-texte: #CCB462;
+  --rv-menthe-point: #00A7B5;
+  --rv-menthe-pointille: #5FCAD3;
+  --rv-menthe-encre: #006A75;
+  --rv-rose-point: #D86E29;
+  --rv-rose-pointille: #E2A17E;
+  --rv-fond: #F0F3EA;
+  --rv-fond-rgb: 240,243,234;
+  --rv-ligne: #D5DECA;
+  --rv-piste: #E0E7D6;
+  --rv-orange: #2F7A4A;
+  --rv-orange-tranche: #1F5634;
+  --rv-orange-texte: #2F7A4A;
+  --rv-brun-texte: #1F5634;
+  --rv-marque: #2F7A4A;
+  --rv-marque-fonce: #1F5634;
+  --rv-doux: #5D6A5C;
+  --rv-doux-rgb: 93,106,92;
+  --rv-ombre: 40,90,50;
+  --rv-ombre-2: 50,110,60;
+  --rv-sourdine: #E9EEE1;
+  --rv-bord-doux: #D5DECA;
+  --rv-fond-jeux: #F0F3EA;
+  --rv-colonne-auj: rgba(225,242,227,.35);
+  --rv-nav-ia-actif: #E1F2E3;
+  --rv-nav-actif-texte: #F0F3EA;
+  --rv-nav-rgb: 252,253,249;
+  --rv-nav-ia: #F8FBF2;
+  --rv-nav-icone: #8E9383;
+  --rv-pale: #919588;
+  --rv-survol: #E5EADA;
+  --rv-viseur: #C7CEB7;
+  --rv-bulle-doux: #525749;
+  --bg-body: #E4E9DB;
+  --bg-app: #F0F3EA;
+  --bg-subtle: #E9EEE1;
+  --bg-muted: #E0E7D6;
+  --bg-hover: #F6F8F2;
+  --bg-tip: #F6F8F2;
+  --border: #D5DECA;
+  --border-subtle: #E0E7D6;
+  --text-muted: #5D6A5C;
+  --text-secondary: #5D6A5C;
+  --accent-violet: #2F7A4A;
+  --accent-violet-hover: #3A8C57;
+  --accent-violet-soft: #E1F2E3;
+  --accent-violet-ink: #1F5634;
+  --halo-a: rgba(158,211,168, 0.30);
+  --halo-b: rgba(182,222,188, 0.32);
+  --shadow-card: 0 4px 14px rgba(40,90,50,0.08), 0 1px 3px rgba(40,90,50,0.05);
 }
 
-/* Sauge — vert gris apaisé, accent forêt */
-:root[data-theme="sauge"] {
-  --bg-body:        #DAE1D2;
-  --bg-app:         #EAEEE3;
-  --bg-card:        #FFFFFF;
-  --bg-subtle:      #F1F4EC;
-  --bg-muted:       #E3E9DB;
-  --bg-hover:       #F6F8F2;
-
-  --border:         #DBE2D1;
-  --border-subtle:  #E6EBDF;
-
-  --text-primary:   #172019;
-  --text-secondary: #4D5B4E;
-  --text-muted:     #505F51;
-
-  --accent-violet:        #2F5D46;
-  --accent-violet-hover:  #3A6E54;
-  --accent-violet-soft:   #DFEAE2;
-  --accent-violet-ink:    #1F4232;
-
-  --halo-a: rgba(255, 160, 90, 0.24);
-  --halo-b: rgba(140, 170, 120, 0.30);
-  --shadow-card:   0 4px 14px rgba(40,70,50,0.08), 0 1px 3px rgba(40,70,50,0.05);
-}
-
-/* Prune — mauve poudré, accent prune profond */
-:root[data-theme="prune"] {
-  --bg-body:        #E3D9E4;
-  --bg-app:         #F1EBF1;
-  --bg-card:        #FFFFFF;
-  --bg-subtle:      #F6F1F6;
-  --bg-muted:       #EBE2EC;
-  --bg-hover:       #F9F6F9;
-
-  --border:         #E5DAE6;
-  --border-subtle:  #EEE6EF;
-
-  --text-primary:   #1F1522;
-  --text-secondary: #5D4A61;
-  --text-muted:     #5F4C63;
-
-  --accent-violet:        #5B2E5E;
-  --accent-violet-hover:  #6E3A72;
-  --accent-violet-soft:   #F0E3F0;
-  --accent-violet-ink:    #4A244D;
-
-  --halo-a: rgba(255, 150, 110, 0.26);
-  --halo-b: rgba(180, 120, 175, 0.24);
-  --shadow-card:   0 4px 14px rgba(70,30,70,0.08), 0 1px 3px rgba(70,30,70,0.05);
+/* Fraise */
+:root[data-theme="fraise"] {
+  --rv-peche: #FFA3B5;
+  --rv-peche-bulle: #FFBCC9;
+  --rv-peche-pale: #FFE3E9;
+  --rv-peche-clair: #FFD0DA;
+  --rv-peche-rose: #FFC2CF;
+  --rv-peche-rose-pale: #FFD9E1;
+  --rv-lavande: #EADFFA;
+  --rv-lavande-bulle: #D3C2F2;
+  --rv-lavande-clair: #DED0F7;
+  --rv-menthe: #FFF0D2;
+  --rv-menthe-bulle: #FFE0A8;
+  --rv-menthe-tranche: #FFD994;
+  --rv-rose: #FFE4D6;
+  --rv-rose-bulle: #FFCCB4;
+  --rv-rose-tranche: #FFC0A4;
+  --rv-peche-point: #E56C88;
+  --rv-peche-pointille: #EF9DAD;
+  --rv-peche-encre: #B33A5C;
+  --rv-lavande-point: #9566C9;
+  --rv-lavande-pointille: #AE92D2;
+  --rv-lavande-encre: #4C3269;
+  --rv-lavande-vif: #7D41B7;
+  --rv-lavande-vif-texte: #C4A4ED;
+  --rv-menthe-point: #B78700;
+  --rv-menthe-pointille: #D5B36B;
+  --rv-menthe-encre: #765200;
+  --rv-rose-point: #D86E2A;
+  --rv-rose-pointille: #E3A17E;
+  --rv-fond: #FBF0F2;
+  --rv-fond-rgb: 251,240,242;
+  --rv-ligne: #EBD3D9;
+  --rv-piste: #F3E1E6;
+  --rv-orange: #C2234F;
+  --rv-orange-tranche: #8C1636;
+  --rv-orange-texte: #C2234F;
+  --rv-brun-texte: #8C1636;
+  --rv-marque: #C2234F;
+  --rv-marque-fonce: #8C1636;
+  --rv-doux: #76606A;
+  --rv-doux-rgb: 118,96,106;
+  --rv-ombre: 140,40,70;
+  --rv-ombre-2: 160,50,80;
+  --rv-sourdine: #F6E8EB;
+  --rv-bord-doux: #EBD3D9;
+  --rv-fond-jeux: #FBF0F2;
+  --rv-colonne-auj: rgba(255,227,233,.35);
+  --rv-nav-ia-actif: #FFE3E9;
+  --rv-nav-actif-texte: #FBF0F2;
+  --rv-nav-rgb: 255,251,252;
+  --rv-nav-ia: #FFF7F8;
+  --rv-nav-icone: #9F8B8F;
+  --rv-pale: #9F8E91;
+  --rv-survol: #F5E1E5;
+  --rv-viseur: #DEC2C7;
+  --rv-bulle-doux: #615053;
+  --bg-body: #F4E3E7;
+  --bg-app: #FBF0F2;
+  --bg-subtle: #F6E8EB;
+  --bg-muted: #F3E1E6;
+  --bg-hover: #FDF6F7;
+  --bg-tip: #FDF6F7;
+  --border: #EBD3D9;
+  --border-subtle: #F3E1E6;
+  --text-muted: #76606A;
+  --text-secondary: #76606A;
+  --accent-violet: #C2234F;
+  --accent-violet-hover: #D93A65;
+  --accent-violet-soft: #FFE3E9;
+  --accent-violet-ink: #8C1636;
+  --halo-a: rgba(255,163,181, 0.30);
+  --halo-b: rgba(255,188,201, 0.32);
+  --shadow-card: 0 4px 14px rgba(140,40,70,0.08), 0 1px 3px rgba(140,40,70,0.05);
 }
 
 /* ─── Reset ────────────────────────────────────────────────────── */

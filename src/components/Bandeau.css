@@ -7,10 +7,10 @@
 }
 .bd-rond { flex: none; display: flex; align-items: center; justify-content: center; width: 26px; height: 26px; border-radius: 50%; }
 .bd-rond i { width: 8px; height: 8px; border-radius: 50%; }
-.bd--menthe .bd-rond { background: #DCF5E6; } .bd--menthe .bd-rond i { background: #34C77B; }
-.bd--lavande .bd-rond { background: #E4E0FA; } .bd--lavande .bd-rond i { background: #1B1A23; }
-.bd--peche .bd-rond { background: #FFE6D2; } .bd--peche .bd-rond i { background: #C25407; }
-.bd--rose .bd-rond { background: #FFD9E4; } .bd--rose .bd-rond i { background: #C25407; }
+.bd--menthe .bd-rond { background: var(--rv-menthe); } .bd--menthe .bd-rond i { background: #34C77B; }
+.bd--lavande .bd-rond { background: var(--rv-lavande); } .bd--lavande .bd-rond i { background: #1B1A23; }
+.bd--peche .bd-rond { background: var(--rv-peche-pale); } .bd--peche .bd-rond i { background: var(--rv-marque); }
+.bd--rose .bd-rond { background: var(--rv-rose); } .bd--rose .bd-rond i { background: var(--rv-marque); }
 .bd-texte { flex: 1; min-width: 0; }
 .bd-texte b { font-weight: 700; color: var(--rv-encre); }
 .bd-action {
@@ -19,7 +19,7 @@
   font-family: 'Geist', sans-serif; font-size: 12.5px; font-weight: 700; color: var(--rv-sur-inverse); text-decoration: none; white-space: nowrap; cursor: pointer;
 }
 .bd-action--envoi { background: var(--rv-ligne); color: var(--rv-doux); cursor: default; }
-.bd-action--fait { background: #DCF5E6; color: #1F8A52; }
+.bd-action--fait { background: var(--rv-vert-pale); color: #1F8A52; }
 .bd-action--fait > span { display: flex; align-items: center; justify-content: center; width: 16px; height: 16px; border-radius: 50%; background: #34C77B; color: #fff; }
 @media (min-width: 1024px) {
   .bd { font-size: 13px; }

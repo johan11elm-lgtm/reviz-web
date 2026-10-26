@@ -49,7 +49,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--rv-accent, #C25407); /* la page peut donner sa couleur d'action */
+  background: var(--rv-accent, var(--rv-marque)); /* la page peut donner sa couleur d'action */
   color: #fff;
 }
 

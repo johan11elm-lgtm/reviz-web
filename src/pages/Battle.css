@@ -3,8 +3,8 @@
 .bt-page {
   --bt-encre: var(--rv-encre); --bt-doux: var(--rv-doux); --bt-bord: var(--rv-ligne);
   --bt-orange: var(--rv-orange); --bt-tranche: var(--rv-orange-tranche);
-  --bt-vert: #34C77B; --bt-vert-fond: #DCF5E6; --bt-vert-texte: #1F8A52;
-  --bt-lavande: #E4E0FA; --bt-lavande-t: #C9C2F2; --bt-peche: #FFE6D2; --bt-peche-t: #FFC596;
+  --bt-vert: #34C77B; --bt-vert-fond: var(--rv-vert-pale); --bt-vert-texte: #1F8A52;
+  --bt-lavande: var(--rv-lavande); --bt-lavande-t: var(--rv-lavande-bulle); --bt-peche: var(--rv-peche-pale); --bt-peche-t: var(--rv-peche-bulle);
   min-height: 100dvh;
   background: var(--rv-fond);
   color: var(--bt-encre);

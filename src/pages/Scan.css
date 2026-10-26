@@ -31,9 +31,9 @@
 button.sc-carte { cursor: pointer; transition: transform .12s; }
 button.sc-carte:active { transform: scale(.98); }
 .sc-photo-carte { width: calc(100% - 40px); display: flex; align-items: center; gap: 14px; margin: -54px 20px 0; padding: 16px; }
-.sc-mini-rond { flex: none; width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: #FFE6D2; color: #C25407; }
-.sc-mini-rond--lavande { width: 46px; height: 46px; background: #E4E0FA; color: #1B1A23; box-shadow: 0 4px 0 #C9C2F2; }
-.sc-mini-rond--menthe { width: 46px; height: 46px; background: #DCF5E6; color: #1B1A23; box-shadow: 0 4px 0 #A8E3C2; }
+.sc-mini-rond { flex: none; width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: var(--rv-peche-pale); color: var(--rv-marque); }
+.sc-mini-rond--lavande { width: 46px; height: 46px; background: var(--rv-lavande); color: #1B1A23; box-shadow: 0 4px 0 var(--rv-lavande-bulle); }
+.sc-mini-rond--menthe { width: 46px; height: 46px; background: var(--rv-menthe); color: #1B1A23; box-shadow: 0 4px 0 var(--rv-menthe-tranche); }
 .sc-carte-txt2 { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
 .sc-carte-txt2 b { font-family: var(--font-display); font-size: 20px; font-weight: 800; letter-spacing: -.02em; }
 .sc-carte-txt2 span { font-size: 14px; font-weight: 500; color: var(--ch-doux); }
@@ -130,8 +130,8 @@ button.sc-carte:active { transform: scale(.98); }
 .sc-declencheur-ligne .sc-bouton-rond:nth-child(4) { grid-column: 3; grid-row: 1; }
 .sc-declencheur-ligne .sc-legende:nth-child(5) { grid-column: 3; grid-row: 2; }
 .sc-bouton-rond { width: 56px; height: 56px; display: flex; align-items: center; justify-content: center; border: 0; border-radius: 50%; background: var(--rv-carte); color: var(--ch-encre); cursor: pointer; }
-.sc-bouton-rond--lavande { box-shadow: 0 5px 0 #C9C2F2; }
-.sc-bouton-rond--menthe { box-shadow: 0 5px 0 #A8E3C2; }
+.sc-bouton-rond--lavande { box-shadow: 0 5px 0 var(--rv-lavande-bulle); }
+.sc-bouton-rond--menthe { box-shadow: 0 5px 0 var(--rv-menthe-tranche); }
 .sc-legende { font-size: 13px; font-weight: 600; color: var(--ch-doux); }
 .sc-declencheur {
   width: 84px;
@@ -157,11 +157,11 @@ button.sc-carte:active { transform: scale(.98); }
 .sc-texte textarea { min-height: 260px; padding: 18px 20px 10px; border: 0; outline: 0; resize: vertical; background: transparent; font: 500 16px/1.55 'Geist', system-ui, sans-serif; color: var(--ch-encre); }
 .sc-texte textarea::placeholder { color: var(--ch-doux); }
 .sc-texte-pied { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin: 0 20px; padding: 12px 0 14px; border-top: 1.5px dashed var(--rv-ligne); font-size: 13px; font-weight: 600; color: var(--ch-doux); }
-.sc-pastille { display: inline-flex; align-items: center; gap: 6px; height: 28px; padding: 0 10px; border-radius: 999px; background: #DCF5E6; font-size: 12px; font-weight: 700; color: #1F8A52; }
+.sc-pastille { display: inline-flex; align-items: center; gap: 6px; height: 28px; padding: 0 10px; border-radius: 999px; background: var(--rv-vert-pale); font-size: 12px; font-weight: 700; color: #1F8A52; }
 .sc-pastille i { width: 7px; height: 7px; border-radius: 50%; background: #34C77B; }
-.sc-pastille--peche { background: #FFE6D2; color: #8F3E05; }
+.sc-pastille--peche { background: var(--rv-peche-pale); color: var(--rv-marque-fonce); }
 .sc-pastille--peche i { background: var(--rv-orange); }
-.sc-limite { display: flex; flex-direction: column; gap: 2px; margin: 0 20px 16px; padding: 12px 14px; border-radius: 16px; background: #FFE6D2; font-size: 13px; font-weight: 500; color: #8F3E05; }
+.sc-limite { display: flex; flex-direction: column; gap: 2px; margin: 0 20px 16px; padding: 12px 14px; border-radius: 16px; background: var(--rv-peche-pale); font-size: 13px; font-weight: 500; color: var(--rv-marque-fonce); }
 .sc-limite b { font-weight: 700; }
 
 /* ── Quota atteint, mode essai ── */
@@ -191,9 +191,9 @@ button.sc-carte:active { transform: scale(.98); }
 .sc-colonnes { position: relative; z-index: 2; display: grid; grid-template-columns: minmax(0, 560fr) minmax(0, 420fr) 300px; gap: 24px; max-width: 1440px; box-sizing: border-box; margin: -80px auto 0; padding: 0 56px; }
 .sc-depot-carte { display: flex; flex-direction: column; padding: 16px; }
 .sc-depot { flex: 1; min-height: 400px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px; padding: 24px; border: 2px dashed var(--rv-ligne); border-radius: 22px; background: var(--rv-nav-ia, #FFFCF8); text-align: center; transition: background .15s, border-color .15s; }
-.sc-depot.is-survol { border-color: var(--rv-orange); background: #FFE6D2; }
+.sc-depot.is-survol { border-color: var(--rv-orange); background: var(--rv-peche-pale); }
 .sc-depot b { max-width: 320px; font-family: var(--font-display); font-size: 26px; font-weight: 800; line-height: 1.15; letter-spacing: -.02em; }
-.sc-depot-rond { width: 84px; height: 84px; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: #FFE6D2; box-shadow: 0 5px 0 #FFC596; color: #C25407; }
+.sc-depot-rond { width: 84px; height: 84px; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: var(--rv-peche-pale); box-shadow: 0 5px 0 var(--rv-peche-bulle); color: var(--rv-marque); }
 .sc-camera { display: flex; align-items: center; gap: 8px; margin: 14px 8px 2px; padding: 0; border: 0; background: none; font: 500 14px 'Geist', system-ui, sans-serif; color: var(--ch-doux); text-align: left; cursor: pointer; }
 .sc-camera b { font-weight: 700; color: var(--ch-encre); }
 .sc-camera--sans { cursor: default; }
@@ -211,7 +211,7 @@ button.sc-carte:active { transform: scale(.98); }
 .sc-carte--petite { padding: 20px; }
 .sc-conseils { display: flex; flex-direction: column; gap: 14px; margin: 14px 0 0; padding: 0; list-style: none; }
 .sc-conseils li { display: flex; gap: 12px; }
-.sc-conseils i { flex: none; width: 26px; height: 26px; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: #FFE6D2; font-style: normal; font-size: 12px; font-weight: 700; }
+.sc-conseils i { flex: none; width: 26px; height: 26px; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: var(--rv-peche-pale); font-style: normal; font-size: 12px; font-weight: 700; }
 .sc-conseils li > span { display: flex; flex-direction: column; gap: 1px; }
 .sc-conseils b { font-size: 15px; font-weight: 700; }
 .sc-conseils li > span > span { font-size: 13px; font-weight: 500; line-height: 1.4; color: var(--ch-doux); }

@@ -11,11 +11,11 @@
   --inst-bord: var(--rv-ligne);
   --inst-orange: var(--rv-orange);
   --inst-tranche: var(--rv-orange-tranche);
-  --inst-lavande: #E4E0FA;
-  --inst-lavande-tranche: #C9C2F2;
-  --inst-menthe: #DCF5E6;
-  --inst-peche: #FFE6D2;
-  --inst-peche-tranche: #FFC596;
+  --inst-lavande: var(--rv-lavande);
+  --inst-lavande-tranche: var(--rv-lavande-bulle);
+  --inst-menthe: var(--rv-menthe);
+  --inst-peche: var(--rv-peche-pale);
+  --inst-peche-tranche: var(--rv-peche-bulle);
   --inst-vert: #34C77B;
   --inst-vert-texte: #1F8A52;
 }

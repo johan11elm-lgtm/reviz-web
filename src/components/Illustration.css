@@ -122,8 +122,8 @@
 }
 .ill-svg.is-test .ill-legende.is-revealed text { opacity: 1; }
 .ill-svg.is-test .ill-legende.is-revealed .ill-fond {
-  fill: #DCF5E6;
-  stroke: #0F6B3A;
+  fill: var(--rv-menthe);
+  stroke: var(--rv-menthe-encre);
   stroke-dasharray: none;
 }
 .ill-svg.is-test .ill-legende:focus-visible .ill-fond {

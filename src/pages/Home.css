@@ -89,7 +89,7 @@
   background: rgba(255,255,255,.55);
   font-size: 15px;
   font-weight: 800;
-  color: #B34400;
+  color: var(--rv-peche-encre);
   white-space: nowrap;
 }
 .home-page .hm-pantin-place {
@@ -313,7 +313,7 @@
   min-height: 132px;
   padding: 20px;
   border-radius: 28px;
-  background: #C9C2F2;
+  background: var(--rv-lavande-bulle);
   overflow: hidden;
   color: #1B1A23;
 }
@@ -324,12 +324,12 @@
   width: 170px;
   height: 170px;
   border-radius: 50%;
-  background: #D8D2F7;
+  background: var(--rv-lavande-clair);
 }
 .home-page .hm-battle-mascotte { position: absolute; right: 4px; bottom: -6px; object-fit: contain; }
 .home-page .hm-battle-txt { position: relative; display: flex; flex-direction: column; gap: 4px; max-width: 190px; }
 .home-page .hm-battle-titre { font-family: var(--font-display); font-size: 23px; font-weight: 800; letter-spacing: -.6px; }
-.home-page .hm-battle-sous { font-size: 14px; color: #3D3770; line-height: 1.4; }
+.home-page .hm-battle-sous { font-size: 14px; color: var(--rv-lavande-encre); line-height: 1.4; }
 .home-page .hm-battle-btn {
   margin-top: 8px;
   align-self: flex-start;

@@ -34,21 +34,25 @@ for (const [appareil, viewport] of APPAREILS) {
     await expect(page.getByText('3 thèmes débloqués')).toBeVisible()
     await capture('02-themes')
 
-    // Choisir Prune : appliqué tout de suite, et gardé après rechargement.
-    await page.getByRole('radio', { name: /Thème Prune/ }).click()
-    await expect(page.locator('html')).toHaveAttribute('data-theme', 'prune')
+    // Choisir Océan : appliqué tout de suite, et gardé après rechargement.
+    await page.getByRole('radio', { name: /Thème Océan/ }).click()
+    await expect(page.locator('html')).toHaveAttribute('data-theme', 'ocean')
     await page.reload()
-    await expect(page.locator('html')).toHaveAttribute('data-theme', 'prune')
-    await expect(page.getByRole('radio', { name: /Thème Prune/ })).toHaveAttribute('aria-checked', 'true')
-    await capture('03-themes-prune')
+    await expect(page.locator('html')).toHaveAttribute('data-theme', 'ocean')
+    await expect(page.getByRole('radio', { name: /Thème Océan/ })).toHaveAttribute('aria-checked', 'true')
+    await capture('03-themes-ocean')
 
     // Accueil dans chaque thème Réviz+ (le thème tient, pas de repli sur Crème pendant l'offre).
-    for (const t of ['prune', 'abricot', 'sauge']) {
+    for (const t of ['ocean', 'foret', 'fraise']) {
       await page.evaluate(id => localStorage.setItem('reviz-theme', id), t)
       await page.goto('/')
       await expect(page.locator('html')).toHaveAttribute('data-theme', t)
       await capture(`04-accueil-${t}`)
     }
+    // Un ancien thème Réviz+ (Sauge, jusqu'au 26/10) passe à son remplaçant.
+    await page.evaluate(() => localStorage.setItem('reviz-theme', 'sauge'))
+    await page.goto('/')
+    await expect(page.locator('html')).toHaveAttribute('data-theme', 'foret')
     // Nuit d'encre (ancien thème sombre) n'est plus proposé : avec le mode Clair déjà mémorisé, il s'affiche en Crème.
     await page.evaluate(() => localStorage.setItem('reviz-theme', 'nuit-encre'))
     await page.goto('/')
@@ -110,11 +114,11 @@ for (const [appareil, viewport] of APPAREILS) {
     await expect(page.getByRole('radiogroup', { name: 'Thèmes Réviz+' })).toBeVisible()
     await expect(page.getByText('Avec Réviz+', { exact: true })).toBeVisible()
     await expect(page.getByText('3 thèmes débloqués')).toHaveCount(0)
-    const prune = page.getByRole('radio', { name: /Thème Prune \(Réviz\+\), verrouillé/ })
-    await prune.evaluate(el => el.scrollIntoView({ block: 'center' }))
-    await prune.click()
-    await expect(page.getByText('Prune fait partie de Réviz+.')).toBeVisible()
-    await expect(page.locator('html')).not.toHaveAttribute('data-theme', 'prune')
+    const fraise = page.getByRole('radio', { name: /Thème Fraise \(Réviz\+\), verrouillé/ })
+    await fraise.evaluate(el => el.scrollIntoView({ block: 'center' }))
+    await fraise.click()
+    await expect(page.getByText('Fraise fait partie de Réviz+.')).toBeVisible()
+    await expect(page.locator('html')).not.toHaveAttribute('data-theme', 'fraise')
     await expect(page.getByRole('button', { name: 'Voir Réviz+' })).toBeVisible()
     await capture('02-themes-verrouilles')
 

@@ -10,7 +10,7 @@
   justify-content: center;
   border-radius: 50%;
   border: 3px solid var(--rv-carte);
-  background: #FFE6D2;
+  background: var(--rv-peche-pale);
   box-shadow: 0 6px 0 rgba(194,84,7,.28);
   transition: transform .15s;
 }

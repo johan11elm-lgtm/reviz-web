@@ -22,10 +22,10 @@ const pluriel = (n, mot) => `${n} ${mot}${n > 1 ? 's' : ''}`;
 
 // Pastel de la matière et point de la pastille leçon (handoff Réviz IA du 21/10).
 const COULEURS = new Map([
-  [TEINTES.lavande, { pastel: '#E4E0FA', point: '#7B6FD6' }],
-  [TEINTES.peche, { pastel: '#FFE6D2', point: '#E07A2E' }],
-  [TEINTES.rose, { pastel: '#FFD9E4', point: '#D9628A' }],
-  [TEINTES.menthe, { pastel: '#DCF5E6', point: '#34A86A' }],
+  [TEINTES.lavande, { pastel: 'var(--rv-lavande)', point: 'var(--rv-lavande-point)' }],
+  [TEINTES.peche, { pastel: 'var(--rv-peche-pale)', point: 'var(--rv-peche-point)' }],
+  [TEINTES.rose, { pastel: 'var(--rv-rose)', point: 'var(--rv-rose-point)' }],
+  [TEINTES.menthe, { pastel: 'var(--rv-menthe)', point: 'var(--rv-menthe-point)' }],
 ]);
 const couleurs = matiere => COULEURS.get(teinteMatiere(matiere ?? '')) ?? COULEURS.get(TEINTES.peche);
 

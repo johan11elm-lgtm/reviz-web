@@ -3,7 +3,7 @@
  * Ordinateur : formulaire en colonne de 640 px, Réviz et l'encadré dans la colonne de droite.
  * Merci : bulle blanche, Réviz fier bras en l'air au milieu des confettis. */
 .av-page {
-  --av-bord: var(--rv-ligne); --av-orange: var(--rv-orange); --av-tranche: var(--rv-orange-tranche); --av-peche: #FFE6D2;
+  --av-bord: var(--rv-ligne); --av-orange: var(--rv-orange); --av-tranche: var(--rv-orange-tranche); --av-peche: var(--rv-peche-pale);
   min-height: 100dvh;
   background: var(--rv-fond);
   color: var(--ch-encre);
@@ -29,7 +29,7 @@
 }
 .av-barre-lien {
   display: inline-flex; align-items: center; height: 36px; padding: 0 14px;
-  border-radius: 999px; background: rgba(var(--rv-carte-rgb),.75); box-shadow: 0 3px 0 #C9C2F2;
+  border-radius: 999px; background: rgba(var(--rv-carte-rgb),.75); box-shadow: 0 3px 0 var(--rv-lavande-bulle);
   font-size: 13.5px; font-weight: 700; color: var(--ch-encre); text-decoration: none; white-space: nowrap;
 }
 .av-hero-corps { display: flex; align-items: flex-end; justify-content: space-between; gap: 8px; margin-top: 36px; }
@@ -46,7 +46,7 @@
 .av-aide ul { display: flex; flex-direction: column; gap: 10px; margin: 0; padding: 0; list-style: none; }
 .av-aide li { position: relative; padding-left: 18px; font-size: 14.5px; font-weight: 600; line-height: 1.4; color: var(--ch-encre); }
 .av-aide li::before { content: ''; position: absolute; left: 0; top: .45em; width: 7px; height: 7px; border-radius: 50%; background: var(--av-orange); }
-.av-aide-note { margin: 14px 0 0; padding-top: 12px; border-top: 1.5px dashed #FFC596; font-size: 12.5px; font-weight: 500; line-height: 1.45; color: var(--ch-doux); }
+.av-aide-note { margin: 14px 0 0; padding-top: 12px; border-top: 1.5px dashed var(--rv-peche-bulle); font-size: 12.5px; font-weight: 500; line-height: 1.45; color: var(--ch-doux); }
 
 /* ── Formulaire ── */
 .av-carte { display: flex; flex-direction: column; gap: 22px; padding: 22px 18px 24px; border-radius: 26px; background: var(--rv-carte); box-shadow: 0 12px 30px rgba(var(--rv-ombre-2),.1); }
@@ -200,8 +200,8 @@
 .av-page--large .av-bulle-sous { font-size: 16.5px; }
 .av-page--large .av-merci-boutons { flex-direction: row; flex-wrap: wrap; gap: 14px; margin-top: 38px; }
 .av-page--large .av-merci-boutons .av-btn { width: auto; }
-.av-page--large .av-merci-boutons .av-btn--blanc { box-shadow: 0 5px 0 #C9C2F2; }
-.av-page--large .av-merci-boutons .av-btn--blanc:active { box-shadow: 0 1px 0 #C9C2F2; }
+.av-page--large .av-merci-boutons .av-btn--blanc { box-shadow: 0 5px 0 var(--rv-lavande-bulle); }
+.av-page--large .av-merci-boutons .av-btn--blanc:active { box-shadow: 0 1px 0 var(--rv-lavande-bulle); }
 .av-page--large .av-fete { margin: 0; }
 .av-page--large.av-page--merci .av-deco--b { width: 300px; height: 300px; left: -130px; top: 340px; }
 .av-page--large.av-page--merci .av-deco--a { width: 520px; height: 520px; right: 130px; top: -180px; }

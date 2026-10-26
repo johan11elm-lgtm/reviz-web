@@ -3,4 +3,4 @@
 .onb-texte b { color: var(--en-encre); }
 .onb-facons { margin: 0; padding: 0; list-style: none; }
 /* Première façon (programme) sur fond pêche, la seconde garde le lavande du kit. */
-.onb-facons .en-facon:first-child img { background: #FFE6D2; }
+.onb-facons .en-facon:first-child img { background: var(--rv-peche-pale); }

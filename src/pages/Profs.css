@@ -46,8 +46,8 @@
   display: flex; align-items: center; justify-content: center;
   width: 60px; height: 60px; border-radius: 18px; overflow: hidden;
 }
-.pr-icone--peche { background: #FFE6D2; }
-.pr-icone--lavande { background: #E4E0FA; }
+.pr-icone--peche { background: var(--rv-peche-pale); }
+.pr-icone--lavande { background: var(--rv-lavande); }
 .pr-carte-titre { grid-area: titre; margin: 0; font-family: var(--font-display); font-size: 20px; font-weight: 800; letter-spacing: -.02em; color: var(--ch-encre); }
 .pr-carte-texte { grid-area: texte; margin: 14px 0 0; font-size: 15px; font-weight: 500; line-height: 1.5; color: var(--ch-doux); }
 .pr-action { grid-area: action; margin-top: 18px; }
@@ -60,10 +60,10 @@
   font-family: var(--font-display); font-size: 22px; font-weight: 800; color: var(--ch-encre); text-decoration: none;
   transition: transform .08s, box-shadow .08s;
 }
-.pr-classe--lavande { background: #E4E0FA; --pr-t: #C9C2F2; }
-.pr-classe--peche { background: #FFE6D2; --pr-t: #FFC596; }
-.pr-classe--rose { background: #FFD9E4; --pr-t: #F4B8CB; }
-.pr-classe--menthe { background: #DCF5E6; --pr-t: #A8E3C2; }
+.pr-classe--lavande { background: var(--rv-lavande); --pr-t: var(--rv-lavande-bulle); }
+.pr-classe--peche { background: var(--rv-peche-pale); --pr-t: var(--rv-peche-bulle); }
+.pr-classe--rose { background: var(--rv-rose); --pr-t: var(--rv-rose-tranche); }
+.pr-classe--menthe { background: var(--rv-menthe); --pr-t: var(--rv-menthe-tranche); }
 .pr-classe { box-shadow: 0 5px 0 var(--pr-t); }
 .pr-classe:active { transform: translateY(4px); box-shadow: 0 1px 0 var(--pr-t); }
 .pr-classe:focus-visible, .pr-btn:focus-visible { outline: 3px solid var(--ch-encre); outline-offset: 3px; }
@@ -78,7 +78,7 @@
 .pr-btn:active { transform: translateY(4px); box-shadow: 0 1px 0 var(--pr-tranche); }
 
 .pr-note { display: flex; align-items: flex-start; gap: 10px; margin: 4px 8px 0; font-size: 13.5px; font-weight: 600; line-height: 1.45; color: var(--ch-doux); }
-.pr-note::before { content: ''; flex: none; width: 8px; height: 8px; margin-top: 6px; border-radius: 50%; background: #C9C2F2; }
+.pr-note::before { content: ''; flex: none; width: 8px; height: 8px; margin-top: 6px; border-radius: 50%; background: var(--rv-lavande-bulle); }
 
 /* ── Ordinateur ── */
 .pr-page--large .pr-defile { padding-bottom: 64px; }

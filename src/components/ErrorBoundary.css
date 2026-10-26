@@ -4,9 +4,9 @@
 .eb-hero {
   position: relative; overflow: hidden; display: flex; align-items: flex-end; justify-content: center;
   min-height: 300px; padding-top: env(safe-area-inset-top, 0px);
-  background: #E4E0FA; border-radius: 0 0 50% 50% / 0 0 44px 44px;
+  background: var(--rv-lavande); border-radius: 0 0 50% 50% / 0 0 44px 44px;
 }
-.eb-deco { position: absolute; border-radius: 50%; background: #C9C2F2; }
+.eb-deco { position: absolute; border-radius: 50%; background: var(--rv-lavande-bulle); }
 .eb-deco--a { width: 180px; height: 180px; right: -70px; top: 40px; }
 .eb-deco--b { width: 110px; height: 110px; left: -50px; top: 150px; }
 .eb-reviz { position: relative; z-index: 1; margin-bottom: 24px; }
@@ -30,6 +30,6 @@
 /* ── Sombre : héros en halo lavande (cf. accueil) ── */
 :root[data-theme="dark"] .eb-hero {
   background: var(--rv-carte);
-  background: radial-gradient(70% 60% at 50% 60%, color-mix(in srgb, #C9C2F2 40%, transparent) 0%, color-mix(in srgb, #C9C2F2 14%, transparent) 55%, transparent 85%), var(--rv-carte);
+  background: radial-gradient(70% 60% at 50% 60%, color-mix(in srgb, var(--rv-lavande-bulle) 40%, transparent) 0%, color-mix(in srgb, var(--rv-lavande-bulle) 14%, transparent) 55%, transparent 85%), var(--rv-carte);
 }
-:root[data-theme="dark"] .eb-deco { background: color-mix(in srgb, #C9C2F2 10%, transparent); }
+:root[data-theme="dark"] .eb-deco { background: color-mix(in srgb, var(--rv-lavande-bulle) 10%, transparent); }

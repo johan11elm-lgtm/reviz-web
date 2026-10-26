@@ -18,7 +18,7 @@
   height: calc(414px + env(safe-area-inset-top, 0px));
   box-sizing: border-box;
   padding: calc(env(safe-area-inset-top, 0px) + 18px) 22px 0;
-  background: #FFB37A;
+  background: var(--rv-peche);
   border-radius: 0 0 50% 50% / 0 0 64px 64px;
   overflow: hidden;
 }
@@ -33,7 +33,7 @@
 .prg-page .prg-deco {
   position: absolute;
   border-radius: 50%;
-  background: #FFC596;
+  background: var(--rv-peche-bulle);
   box-shadow: inset 0 -24px 40px rgba(var(--rv-ombre),.08), inset 0 16px 30px rgba(255,255,255,.35);
 }
 .prg-page .prg-deco--a { right: -70px; top: calc(150px + env(safe-area-inset-top, 0px)); width: 240px; height: 240px; }
@@ -45,7 +45,7 @@
   width: 46px;
   height: 46px;
   border-radius: 50%;
-  background: #C9C2F2;
+  background: var(--rv-lavande-bulle);
   box-shadow: inset 0 -8px 14px rgba(0,0,0,.08), 0 8px 16px -6px rgba(var(--rv-ombre),.25);
 }
 
@@ -104,7 +104,7 @@
   color: var(--prg-encre);
   cursor: pointer;
 }
-.prg-page .prg-choix-liste [aria-selected="true"] button { background: #FFE6D2; color: #C25407; }
+.prg-page .prg-choix-liste [aria-selected="true"] button { background: var(--rv-peche-pale); color: var(--rv-marque); }
 
 /* Réviz en bas du héros, sa bulle posée par le bas juste au-dessus de sa tête
    (assez haut pour laisser voir l'accessoire de la matière sur sa tête) */
@@ -170,7 +170,7 @@
   overflow: hidden;
   transition: background .2s, box-shadow .2s, transform .15s;
 }
-.prg-page .prg-matiere--on .prg-anneau-rond { background: #FFE6D2; box-shadow: 0 0 0 2px var(--rv-carte), 0 6px 14px rgba(var(--rv-ombre-2),.18); }
+.prg-page .prg-matiere--on .prg-anneau-rond { background: var(--rv-peche-pale); box-shadow: 0 0 0 2px var(--rv-carte), 0 6px 14px rgba(var(--rv-ombre-2),.18); }
 .prg-page .prg-matiere:active .prg-anneau-rond { transform: scale(.94); }
 .prg-page .prg-matiere-nom { font-size: 13px; font-weight: 700; line-height: 1.1; text-align: center; color: var(--prg-doux); }
 .prg-page .prg-matiere--on .prg-matiere-nom { color: var(--prg-encre); }
@@ -200,7 +200,7 @@
   padding: 0;
   border-radius: 50%;
   border: 3px solid var(--rv-carte);
-  background: #FFE6D2;
+  background: var(--rv-peche-pale);
   box-shadow: 0 6px 0 rgba(194,84,7,.28);
   cursor: pointer;
   transition: transform .15s;
@@ -211,10 +211,10 @@
 .prg-page .prg-case--current { background: var(--rv-carte); border: 4px solid var(--rv-orange); box-shadow: 0 6px 0 var(--rv-orange-tranche); }
 .prg-page .prg-case--choisie:not(.prg-case--current) { border: 3px solid var(--prg-encre); }
 .prg-page .prg-case:focus-visible { outline: 3px solid var(--prg-encre); outline-offset: 3px; }
-.prg-page .prg-case-rond { display: flex; align-items: center; justify-content: center; border-radius: 50%; background: #FFE6D2; overflow: hidden; }
+.prg-page .prg-case-rond { display: flex; align-items: center; justify-content: center; border-radius: 50%; background: var(--rv-peche-pale); overflow: hidden; }
 .prg-page .prg-case-num { font-family: var(--font-display); font-size: 20px; font-weight: 800; color: #6E675B; }
 .prg-page .prg-case--commence .prg-case-num,
-.prg-page .prg-case--a-revoir .prg-case-num { color: #C25407; }
+.prg-page .prg-case--a-revoir .prg-case-num { color: var(--rv-marque); }
 .prg-page .prg-case-label { position: absolute; display: flex; flex-direction: column; align-items: center; text-align: center; pointer-events: none; }
 .prg-page .prg-case-etat { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
 .prg-page .prg-case-nom {
@@ -231,7 +231,7 @@
 }
 .prg-page .prg-case-nom--todo { color: var(--prg-doux); }
 .prg-page .prg-trophee { position: absolute; width: 120px; display: flex; flex-direction: column; align-items: center; gap: 6px; }
-.prg-page .prg-trophee-rond { width: 68px; height: 68px; border-radius: 50%; background: #FFE6D2; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+.prg-page .prg-trophee-rond { width: 68px; height: 68px; border-radius: 50%; background: var(--rv-peche-pale); overflow: hidden; display: flex; align-items: center; justify-content: center; }
 .prg-page .prg-trophee-txt { font-size: 13px; font-weight: 700; color: var(--prg-doux); }
 
 /* ── Détail de la case choisie ── */
@@ -279,7 +279,7 @@
   padding: 0 16px;
   border: 0;
   border-radius: 999px;
-  background: #FFE6D2;
+  background: var(--rv-peche-pale);
   color: #1B1A23;
   font: 700 14px 'Geist', system-ui, sans-serif;
   cursor: pointer;
@@ -335,7 +335,7 @@
 }
 .prg-page--large .prg-matiere { width: auto; gap: 8px; }
 .prg-page--large .prg-anneau-rond { inset: 8px; background: var(--prg-fond); box-shadow: none; }
-.prg-page--large .prg-matiere--on .prg-anneau-rond { background: #FFE6D2; box-shadow: 0 0 0 2px var(--rv-carte), 0 6px 14px rgba(var(--rv-ombre-2),.18); }
+.prg-page--large .prg-matiere--on .prg-anneau-rond { background: var(--rv-peche-pale); box-shadow: 0 0 0 2px var(--rv-carte), 0 6px 14px rgba(var(--rv-ombre-2),.18); }
 .prg-page--large .prg-matiere-nom { font-size: 14px; }
 .prg-page--large .prg-matiere-pct { font-size: 13px; }
 .prg-page--large .prg-matiere:hover .prg-anneau-rond { transform: translateY(-2px); }
@@ -377,10 +377,10 @@
 /* ── Sombre : héros en halo pêche (cf. accueil) ── */
 :root[data-theme="dark"] .prg-page .prg-hero {
   background: var(--rv-carte);
-  background: radial-gradient(62% 52% at 50% 60%, color-mix(in srgb, #FFB37A 46%, transparent) 0%, color-mix(in srgb, #FFB37A 16%, transparent) 55%, transparent 82%), var(--rv-carte);
+  background: radial-gradient(62% 52% at 50% 60%, color-mix(in srgb, var(--rv-peche) 46%, transparent) 0%, color-mix(in srgb, var(--rv-peche) 16%, transparent) 55%, transparent 82%), var(--rv-carte);
 }
-:root[data-theme="dark"] .prg-page .prg-deco { background: color-mix(in srgb, #FFC596 10%, transparent); box-shadow: none; }
-:root[data-theme="dark"] .prg-page .prg-point { background: color-mix(in srgb, #C9C2F2 22%, transparent); box-shadow: none; }
+:root[data-theme="dark"] .prg-page .prg-deco { background: color-mix(in srgb, var(--rv-peche-bulle) 10%, transparent); box-shadow: none; }
+:root[data-theme="dark"] .prg-page .prg-point { background: color-mix(in srgb, var(--rv-lavande-bulle) 22%, transparent); box-shadow: none; }
 :root[data-theme="dark"] .prg-page .prg-grain { opacity: .5; mix-blend-mode: soft-light; }
 
 /* ── Sombre : ces pastels gardent leur texte sombre (cf. rv-ilot dans global.css) ── */

@@ -12,9 +12,9 @@
   transition: transform .08s, box-shadow .08s;
 }
 .format-feedback-btn svg { width: 20px; height: 20px; }
-.format-feedback-btn--up { --ff-tranche: #A8E3C2; }
-.format-feedback-btn--meh { --ff-tranche: #FFC596; }
-.format-feedback-btn--down { --ff-tranche: #F4B8CB; }
+.format-feedback-btn--up { --ff-tranche: var(--rv-menthe-tranche); }
+.format-feedback-btn--meh { --ff-tranche: var(--rv-peche-bulle); }
+.format-feedback-btn--down { --ff-tranche: var(--rv-rose-tranche); }
 .format-feedback-btn:active { transform: translateY(3px); box-shadow: 0 1px 0 var(--ff-tranche); }
 .format-feedback-btn:focus-visible { outline: 3px solid var(--rv-encre); outline-offset: 3px; }
 .format-feedback--thanks { display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; color: var(--rv-vert-texte); }

@@ -144,7 +144,7 @@
   animation: iaCurseur 1s steps(2, start) infinite;
 }
 @keyframes iaCurseur { to { visibility: hidden; } }
-.ia-erreur { margin: 0; padding: 12px 16px; border-radius: 18px; background: #FFE6D2; font-size: 14px; font-weight: 600; color: #8F3E05; }
+.ia-erreur { margin: 0; padding: 12px 16px; border-radius: 18px; background: var(--rv-peche-pale); font-size: 14px; font-weight: 600; color: var(--rv-marque-fonce); }
 
 /* ── Champ ── */
 .ia-pied { position: relative; z-index: 4; }
@@ -225,7 +225,7 @@
 .ia-pastille i { flex: none; width: 8px; height: 8px; border-radius: 50%; }
 .ia-pastille span { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; max-width: 150px; }
 .ia-micro { flex: none; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border: 0; border-radius: 50%; background: none; color: var(--rv-encre); cursor: pointer; }
-.ia-micro.is-ecoute { background: #FFE6D2; color: #C25407; }
+.ia-micro.is-ecoute { background: var(--rv-peche-pale); color: var(--rv-marque); }
 .ia-envoyer { flex: none; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border: 0; border-radius: 50%; background: var(--rv-inverse); color:var(--rv-sur-inverse); cursor: pointer; transition: opacity .15s; }
 .ia-envoyer:disabled { opacity: .35; cursor: default; }
 .ia-note { margin: 10px 0 0; font-size: 12px; font-weight: 500; color: var(--rv-doux); text-align: center; }
@@ -233,7 +233,7 @@
 /* Limite gratuite : la carte prend la place du champ. */
 .ia-limite { padding: 16px; border: 1px solid var(--ia-bord); border-radius: 28px; background: var(--rv-carte); box-shadow: 0 14px 36px -16px rgba(var(--rv-ombre-2),.22); }
 .ia-limite-haut { display: flex; align-items: center; gap: 14px; }
-.ia-limite-rond { flex: none; width: 64px; height: 64px; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: #FFE6D2; overflow: hidden; }
+.ia-limite-rond { flex: none; width: 64px; height: 64px; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: var(--rv-peche-pale); overflow: hidden; }
 .ia-limite-txt { display: flex; flex-direction: column; gap: 4px; }
 .ia-limite-txt b { font-family: var(--font-display); font-size: 18px; font-weight: 800; line-height: 1.15; letter-spacing: -.02em; }
 .ia-limite-txt span { font-size: 14px; font-weight: 600; color: var(--rv-doux); }

@@ -13,8 +13,8 @@
 @keyframes banFenetre { from { opacity: 0; transform: scale(.96); } }
 .ban-poignee { align-self: center; width: 40px; height: 5px; border-radius: 3px; background: var(--rv-ligne); }
 .ban-fermer { position: absolute; top: 20px; right: 20px; z-index: 3; display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border: 0; border-radius: 50%; background: var(--rv-carte); box-shadow: 0 3px 0 var(--rv-ligne); color: var(--rv-encre); cursor: pointer; }
-.ban-arene { position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; height: 176px; margin-top: 6px; border-radius: 24px; background: #E4E0FA; }
-.ban-arene::after { content: ''; position: absolute; right: -40px; top: -40px; width: 140px; height: 140px; border-radius: 50%; background: #C9C2F2; opacity: .6; }
+.ban-arene { position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; height: 176px; margin-top: 6px; border-radius: 24px; background: var(--rv-lavande); }
+.ban-arene::after { content: ''; position: absolute; right: -40px; top: -40px; width: 140px; height: 140px; border-radius: 50%; background: var(--rv-lavande-bulle); opacity: .6; }
 .ban-arene > * { position: relative; z-index: 1; }
 .ban-feuille--fenetre .ban-arene { height: 208px; margin-top: 44px; border-radius: 26px; }
 .ban-miroir { transform: scaleX(-1); }
@@ -29,7 +29,7 @@
 .ban-regles li { display: flex; align-items: flex-start; gap: 12px; padding: 12px 0; font-size: 14.5px; font-weight: 600; line-height: 1.4; }
 .ban-regles li + li { border-top: 1.5px dashed var(--rv-ligne); }
 .ban-num { flex: none; display: flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 50%; font-size: 13px; font-weight: 800; }
-.ban-num--0 { background: #E4E0FA; } .ban-num--1 { background: #FFE6D2; } .ban-num--2 { background: #DCF5E6; }
+.ban-num--0 { background: var(--rv-lavande); } .ban-num--1 { background: var(--rv-peche-pale); } .ban-num--2 { background: var(--rv-menthe); }
 .ban-actions { display: flex; flex-direction: column; align-items: center; gap: 6px; margin-top: 4px; }
 .ban-feuille--fenetre .ban-actions { flex-direction: row-reverse; justify-content: flex-start; gap: 16px; }
 .ban-btn {

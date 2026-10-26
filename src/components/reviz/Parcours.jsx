@@ -49,8 +49,8 @@ export function Parcours({ etapes, grand, cases = [0.155, 0.5, 0.845], etat, rem
       <svg width={l} height={D.h} className="ch-route" aria-hidden="true">
         <path d={route} transform="translate(0 7)" fill="none" stroke="#A0501A" strokeOpacity=".10" strokeWidth={D.route} strokeLinecap="round" />
         <path d={route} fill="none" style={{ stroke: 'var(--rv-carte)' }} strokeWidth={D.route} strokeLinecap="round" />
-        {faite && <path d={faite} fill="none" stroke="#DCF5E6" strokeWidth={D.route} strokeLinecap="round" />}
-        <path d={route} fill="none" stroke="#C25407" strokeOpacity=".45" strokeWidth="3" strokeDasharray="2 10" strokeLinecap="round" />
+        {faite && <path d={faite} fill="none" style={{ stroke: 'var(--rv-menthe)' }} strokeWidth={D.route} strokeLinecap="round" />}
+        <path d={route} fill="none" style={{ stroke: 'var(--rv-marque)' }} strokeOpacity=".45" strokeWidth="3" strokeDasharray="2 10" strokeLinecap="round" />
       </svg>
       {etapes.map((e, i) => {
         const [x, y] = pts[i];

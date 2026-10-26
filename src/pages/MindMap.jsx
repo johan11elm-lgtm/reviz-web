@@ -106,10 +106,10 @@ export default function Mindmap() {
 
 // Couleur de chaque branche : pastel, et teinte plus foncée pour la tranche et le pointillé.
 const COULEURS = [
-  { pastel: '#E4E0FA', fonce: '#C9C2F2' },
-  { pastel: '#FFE6D2', fonce: '#FFC596' },
-  { pastel: '#DCF5E6', fonce: '#A8E3C2' },
-  { pastel: '#FFD9E4', fonce: '#F4B8CB' },
+  { pastel: 'var(--rv-lavande)', fonce: 'var(--rv-lavande-bulle)' },
+  { pastel: 'var(--rv-peche-pale)', fonce: 'var(--rv-peche-bulle)' },
+  { pastel: 'var(--rv-menthe)', fonce: 'var(--rv-menthe-tranche)' },
+  { pastel: 'var(--rv-rose)', fonce: 'var(--rv-rose-tranche)' },
 ]
 const pluriel = (n, mot) => `${n} ${mot}${n > 1 ? 's' : ''}`
 
@@ -243,7 +243,7 @@ function MindmapSession() {
           <g key={i}>
             <path d={P.route(x, y)} transform="translate(0 6)" fill="none" stroke="rgba(160,80,20,.08)" strokeWidth={isDesktop ? 30 : 22} strokeLinecap="round" />
             <path d={P.route(x, y)} fill="none" style={{ stroke: 'var(--rv-carte)' }} strokeWidth={isDesktop ? 30 : 22} strokeLinecap="round" />
-            <path d={P.route(x, y)} fill="none" stroke={ouverte === i && isDesktop ? '#C25407' : COULEURS[i].fonce} strokeWidth={isDesktop ? 3.5 : 3}
+            <path d={P.route(x, y)} fill="none" style={{ stroke: ouverte === i && isDesktop ? 'var(--rv-marque)' : COULEURS[i].fonce }} strokeWidth={isDesktop ? 3.5 : 3}
               strokeDasharray={isDesktop ? '2 11' : '2 9'} strokeLinecap="round" />
           </g>
         ))}

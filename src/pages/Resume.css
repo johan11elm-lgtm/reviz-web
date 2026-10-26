@@ -112,7 +112,7 @@
   font: inherit;
   cursor: pointer;
 }
-.rs-page .rs-teste-rond { width: 56px; height: 56px; flex: none; border-radius: 50%; background: #FFE6D2; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.rs-page .rs-teste-rond { width: 56px; height: 56px; flex: none; border-radius: 50%; background: var(--rv-peche-pale); display: flex; align-items: center; justify-content: center; overflow: hidden; }
 .rs-page .rs-teste-txt { flex: 1; min-width: 0; display: flex; flex-direction: column; }
 .rs-page .rs-teste-titre { font-family: var(--font-display); font-size: 18px; font-weight: 800; letter-spacing: -.02em; color: var(--ch-encre); }
 .rs-page .rs-teste-sous { font-size: 13px; color: var(--ch-doux); }
@@ -147,7 +147,7 @@
   font-weight: 600;
   color: inherit;
   text-decoration: underline;
-  text-decoration-color: #C9C2F2;
+  text-decoration-color: var(--rv-lavande-bulle);
   text-decoration-thickness: 3px;
   text-underline-offset: 3px;
   cursor: pointer;
@@ -168,7 +168,7 @@
 .rs-page .rs-terme-def button { width: 28px; height: 28px; flex: none; border: 0; border-radius: 50%; background: var(--rv-fond); display: flex; align-items: center; justify-content: center; cursor: pointer; }
 
 .rs-page .rs-exemple { padding: 16px 18px; border-radius: 22px; background: var(--rv-carte); box-shadow: 0 8px 22px rgba(var(--rv-ombre-2),.08); }
-.rs-page .rs-exemple-etiquette { display: inline-block; padding: 4px 10px; border-radius: 999px; background: #E4E0FA; font-size: 12px; font-weight: 700; color: #1B1A23; }
+.rs-page .rs-exemple-etiquette { display: inline-block; padding: 4px 10px; border-radius: 999px; background: var(--rv-lavande); font-size: 12px; font-weight: 700; color: #1B1A23; }
 .rs-page .rs-exemple-txt { margin-top: 8px; font-size: 17px; font-weight: 600; line-height: 1.55; color: var(--ch-encre); white-space: pre-line; }
 .rs-page .rs-formule { padding: 20px; border-radius: 22px; background: var(--rv-carte); text-align: center; box-shadow: 0 8px 22px rgba(var(--rv-ombre-2),.08); }
 .rs-page .rs-formule-txt { font-family: var(--font-display); font-size: 34px; font-weight: 800; letter-spacing: -.02em; line-height: 1.25; color: var(--ch-encre); white-space: pre-line; }
@@ -219,7 +219,7 @@
   height: 30px;
   flex: none;
   border-radius: 50%;
-  background: #FFE6D2;
+  background: var(--rv-peche-pale);
   box-shadow: 0 3px 0 rgba(194,84,7,.28);
   display: flex;
   align-items: center;
@@ -236,7 +236,7 @@
 .rs-page .rs-sous { margin: -6px 0 0; font-size: 15px; color: var(--ch-doux); }
 .rs-page .rs-pieges { display: flex; flex-direction: column; gap: 10px; }
 .rs-page .rs-piege { display: flex; align-items: flex-start; gap: 12px; padding: 14px 16px; border-radius: 20px; background: var(--rv-carte); box-shadow: 0 8px 22px rgba(var(--rv-ombre-2),.08); }
-.rs-page .rs-piege-rond { width: 34px; height: 34px; flex: none; border-radius: 50%; background: #FFE6D2; display: flex; align-items: center; justify-content: center; }
+.rs-page .rs-piege-rond { width: 34px; height: 34px; flex: none; border-radius: 50%; background: var(--rv-peche-pale); display: flex; align-items: center; justify-content: center; }
 .rs-page .rs-piege-txt { font-size: 16px; font-weight: 600; line-height: 1.45; color: var(--ch-encre); }
 
 .rs-page .rs-mots-liste { margin: 6px 0 0; }
@@ -261,7 +261,7 @@
   cursor: pointer;
   flex-basis: 100%;
 }
-.rs-page .rs-check-reponse { margin-top: 12px; padding: 14px; border-radius: 16px; background: #DCF5E6; }
+.rs-page .rs-check-reponse { margin-top: 12px; padding: 14px; border-radius: 16px; background: var(--rv-menthe); }
 .rs-page .rs-check-reponse-txt { font-size: 16px; line-height: 1.5; color: var(--ch-encre); }
 .rs-page .rs-check-notes { display: flex; gap: 8px; margin-top: 12px; }
 .rs-page .rs-check-note {
@@ -338,7 +338,7 @@
   font: inherit;
   cursor: pointer;
 }
-.rs-page .rs-ia-anneau { width: 48px; height: 48px; flex: none; padding: 3px; box-sizing: border-box; border-radius: 50%; background: conic-gradient(var(--rv-orange), #FFD9E4, var(--rv-orange)); }
+.rs-page .rs-ia-anneau { width: 48px; height: 48px; flex: none; padding: 3px; box-sizing: border-box; border-radius: 50%; background: conic-gradient(var(--rv-orange), var(--rv-rose), var(--rv-orange)); }
 .rs-page .rs-ia-anneau > span { width: 100%; height: 100%; box-sizing: border-box; border: 2px solid var(--rv-carte); border-radius: 50%; background: var(--rv-carte); display: flex; align-items: center; justify-content: center; overflow: hidden; }
 .rs-page .rs-ia-txt { display: flex; flex-direction: column; font-size: 13px; color: var(--ch-doux); }
 .rs-page .rs-ia-txt b { font-size: 15px; color: var(--ch-encre); }
@@ -418,7 +418,7 @@
   flex: none;
   box-sizing: border-box;
   border-radius: 50%;
-  background: #FFE6D2;
+  background: var(--rv-peche-pale);
   box-shadow: 0 3px 0 rgba(194,84,7,.28);
   display: flex;
   align-items: center;

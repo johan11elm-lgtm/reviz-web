@@ -27,7 +27,7 @@
 .le-scan-haut { display: flex; align-items: center; gap: 14px; }
 .le-scan-bouton { width: 100%; padding: 0; border: 0; background: none; font: inherit; color: inherit; text-align: left; cursor: pointer; }
 .le-scan-bouton:focus-visible { outline: 3px solid var(--rv-encre); outline-offset: 6px; border-radius: 18px; }
-.le-scan-rond { flex: none; width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: #FFE6D2; overflow: hidden; }
+.le-scan-rond { flex: none; width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: var(--rv-peche-pale); overflow: hidden; }
 .le-scan-txt { flex: 1; min-width: 0; display: flex; flex-direction: column; }
 .le-scan-txt b { font-family: var(--font-display); font-size: 18px; font-weight: 800; letter-spacing: -.02em; }
 .le-scan-txt span { margin-top: 2px; font-size: 13px; font-weight: 500; line-height: 1.35; color: var(--ch-doux); }
@@ -91,7 +91,7 @@
 .le-reprendre-titre { margin-top: 2px; font-family: var(--font-display); font-size: 19px; font-weight: 800; line-height: 1.1; letter-spacing: -.02em; text-wrap: balance; }
 .le-reprendre-bas { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 14px; }
 .le-reprendre-etat { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
-.le-reprendre-pastille { font-size: 13px; font-weight: 700; color: #8F3E05; }
+.le-reprendre-pastille { font-size: 13px; font-weight: 700; color: var(--rv-marque-fonce); }
 
 /* Cases du parcours */
 .le-cases { display: flex; align-items: center; gap: 3px; }
@@ -111,7 +111,7 @@
 .le-cases--grand .le-case { width: 24px; height: 24px; }
 .le-case--fait { background: #34C77B; box-shadow: 0 2px 0 #1F8A52; }
 .le-case--cours { background: var(--rv-carte); border: 3px solid var(--rv-orange); box-shadow: 0 2px 0 var(--rv-orange-tranche); }
-.le-case--afaire { background: #FFE6D2; box-shadow: 0 2px 0 rgba(194,84,7,.28); }
+.le-case--afaire { background: var(--rv-peche-pale); box-shadow: 0 2px 0 rgba(194,84,7,.28); }
 .le-cases--grand .le-case--fait { box-shadow: 0 3px 0 #1F8A52; }
 .le-cases--grand .le-case--cours { box-shadow: 0 3px 0 var(--rv-orange-tranche); }
 .le-cases--grand .le-case--afaire { box-shadow: 0 3px 0 rgba(194,84,7,.28); }
@@ -119,13 +119,13 @@
 /* Pastille d'état */
 .le-pastille { flex: none; height: 26px; display: inline-flex; align-items: center; gap: 6px; padding: 0 10px; border-radius: 999px; font-size: 12px; font-weight: 700; white-space: nowrap; }
 .le-pastille i { width: 7px; height: 7px; border-radius: 50%; }
-.le-pastille--travailler { background: #FFE6D2; color: #8F3E05; }
+.le-pastille--travailler { background: var(--rv-peche-pale); color: var(--rv-marque-fonce); }
 .le-pastille--travailler i { background: var(--rv-orange); }
 .le-pastille--decouvrir,
 .le-pastille--encours { background: var(--rv-fond); color: var(--ch-encre); }
 .le-pastille--decouvrir i,
-.le-pastille--encours i { background: #C9C2F2; }
-.le-pastille--maitrise { background: #DCF5E6; color: #1F8A52; }
+.le-pastille--encours i { background: var(--rv-lavande-bulle); }
+.le-pastille--maitrise { background: var(--rv-vert-pale); color: #1F8A52; }
 .le-pastille--maitrise i { background: #34C77B; }
 
 /* Recherche et filtres */
@@ -181,7 +181,7 @@
 .le-ligne + .le-ligne { border-top: 1.5px dashed var(--rv-ligne); }
 .le-ligne-ouvrir { flex: 1; min-width: 0; display: flex; flex-direction: column; padding: 14px 0; border: 0; background: none; font: inherit; color: inherit; text-align: left; cursor: pointer; }
 .le-ligne-titre { font-size: 16px; font-weight: 700; line-height: 1.3; }
-.le-page mark { padding: 0 1px; border-radius: 4px; background: #FFC596; color: inherit; }
+.le-page mark { padding: 0 1px; border-radius: 4px; background: var(--rv-peche-bulle); color: inherit; }
 .le-date { margin-top: 3px; font-size: 12px; font-weight: 600; color: var(--ch-doux); }
 .le-ligne-etat { display: flex; align-items: center; gap: 10px; margin-top: 10px; }
 .le-points { flex: none; align-self: flex-start; width: 36px; height: 36px; margin-top: 10px; display: flex; align-items: center; justify-content: center; border: 0; border-radius: 50%; background: none; color: var(--ch-doux); cursor: pointer; }

@@ -122,10 +122,10 @@
 .ag-relier { margin: 28px 16px 0; padding: 22px 18px; display: flex; flex-direction: column; gap: 12px; }
 .ag-relier-titre { margin: 0; font-family: var(--font-display); font-size: 22px; font-weight: 800; letter-spacing: -.03em; }
 .ag-relier-txt { margin: 0; font-size: 15px; font-weight: 500; line-height: 1.45; color: var(--rv-doux); }
-.ag-relier-info { margin: 0; padding: 10px 12px; border-radius: 14px; background: #FFE6D2; font-size: 13px; font-weight: 600; line-height: 1.4; color: #8F3E05; }
+.ag-relier-info { margin: 0; padding: 10px 12px; border-radius: 14px; background: var(--rv-peche-pale); font-size: 13px; font-weight: 600; line-height: 1.4; color: var(--rv-marque-fonce); }
 .ag-etapes { display: flex; flex-direction: column; gap: 12px; margin: 4px 0; padding: 0; list-style: none; }
 .ag-etapes li { display: flex; align-items: flex-start; gap: 12px; font-size: 14px; font-weight: 500; line-height: 1.4; }
-.ag-etapes i { flex: none; width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: #FFE6D2; box-shadow: 0 3px 0 #FFC596; font-style: normal; font-size: 13px; font-weight: 700; }
+.ag-etapes i { flex: none; width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: var(--rv-peche-pale); box-shadow: 0 3px 0 var(--rv-peche-bulle); font-style: normal; font-size: 13px; font-weight: 700; }
 .ag-relier-form { display: flex; flex-direction: column; gap: 8px; }
 .ag-relier-form label { font-size: 13px; font-weight: 600; color: var(--rv-doux); }
 .ag-relier-ligne { display: flex; gap: 8px; }
@@ -136,7 +136,7 @@
 
 /* Toast */
 .ag-toast { position: fixed; left: 50%; bottom: calc(104px + env(safe-area-inset-bottom, 0px)); z-index: 450; display: flex; align-items: center; gap: 14px; padding: 12px 18px; border-radius: 999px; background: var(--rv-inverse); color:var(--rv-sur-inverse); font-size: 14px; font-weight: 600; transform: translateX(-50%); animation: agToast .25s ease-out both; }
-.ag-toast button { padding: 0; border: 0; background: none; font: 700 14px 'Geist', system-ui, sans-serif; color: #FFC596; cursor: pointer; }
+.ag-toast button { padding: 0; border: 0; background: none; font: 700 14px 'Geist', system-ui, sans-serif; color: var(--rv-peche-bulle); cursor: pointer; }
 @keyframes agToast { from { opacity: 0; transform: translate(-50%, 8px); } }
 
 /* ── Ajouter un contrôle ── */
@@ -209,7 +209,7 @@
 .ag-gs-tete { height: 50px; display: flex; align-items: center; justify-content: center; gap: 6px; border-radius: 16px; background: var(--rv-fond); box-shadow: 0 4px 0 var(--rv-ligne); font-size: 14px; font-weight: 600; }
 .ag-gs-tete b { font-family: var(--font-display); font-size: 20px; font-weight: 800; }
 .ag-gs-tete.is-auj { background: var(--rv-inverse); color:var(--rv-sur-inverse); box-shadow: 0 4px 0 #000; }
-.ag-gs-ctrl { display: flex; align-items: center; gap: 6px; height: 26px; padding: 0 10px; border-radius: 999px; background: #FFE6D2; font-size: 12px; font-weight: 700; color: #8F3E05; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.ag-gs-ctrl { display: flex; align-items: center; gap: 6px; height: 26px; padding: 0 10px; border-radius: 999px; background: var(--rv-peche-pale); font-size: 12px; font-weight: 700; color: var(--rv-marque-fonce); overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
 .ag-gs-ctrl i { flex: none; width: 6px; height: 6px; border-radius: 50%; background: var(--rv-orange); }
 .ag-gs-corps { position: relative; margin-top: 18px; }
 .ag-gs-heures { position: relative; }
