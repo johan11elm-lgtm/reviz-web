@@ -3,9 +3,9 @@
  * Ordinateur : formulaire en colonne de 640 px, Réviz et l'encadré dans la colonne de droite.
  * Merci : bulle blanche, Réviz fier bras en l'air au milieu des confettis. */
 .av-page {
-  --av-bord: #EADBCB; --av-orange: #C25407; --av-tranche: #8F3E05; --av-peche: #FFE6D2;
+  --av-bord: var(--rv-ligne); --av-orange: var(--rv-orange); --av-tranche: var(--rv-orange-tranche); --av-peche: #FFE6D2;
   min-height: 100dvh;
-  background: #F8EFE7;
+  background: var(--rv-fond);
   color: var(--ch-encre);
 }
 .av-page .av-defile {
@@ -29,7 +29,7 @@
 }
 .av-barre-lien {
   display: inline-flex; align-items: center; height: 36px; padding: 0 14px;
-  border-radius: 999px; background: rgba(255,255,255,.75); box-shadow: 0 3px 0 #C9C2F2;
+  border-radius: 999px; background: rgba(var(--rv-carte-rgb),.75); box-shadow: 0 3px 0 #C9C2F2;
   font-size: 13.5px; font-weight: 700; color: var(--ch-encre); text-decoration: none; white-space: nowrap;
 }
 .av-hero-corps { display: flex; align-items: flex-end; justify-content: space-between; gap: 8px; margin-top: 36px; }
@@ -41,7 +41,7 @@
 
 /* ── Encadré « Ce qui aide le plus » ── */
 .av-colonne { position: relative; z-index: 2; display: flex; flex-direction: column; gap: 16px; margin: -40px 16px 0; }
-.av-aide { padding: 18px 20px 20px; border-radius: 22px; background: var(--av-peche); box-shadow: 0 12px 30px rgba(160,80,20,.08); }
+.av-aide { padding: 18px 20px 20px; border-radius: 22px; background: var(--av-peche); box-shadow: 0 12px 30px rgba(var(--rv-ombre-2),.08); }
 .av-aide-titre { margin: 0 0 10px; font-family: var(--font-display); font-size: 18px; font-weight: 800; letter-spacing: -.02em; color: var(--ch-encre); }
 .av-aide ul { display: flex; flex-direction: column; gap: 10px; margin: 0; padding: 0; list-style: none; }
 .av-aide li { position: relative; padding-left: 18px; font-size: 14.5px; font-weight: 600; line-height: 1.4; color: var(--ch-encre); }
@@ -49,7 +49,7 @@
 .av-aide-note { margin: 14px 0 0; padding-top: 12px; border-top: 1.5px dashed #FFC596; font-size: 12.5px; font-weight: 500; line-height: 1.45; color: var(--ch-doux); }
 
 /* ── Formulaire ── */
-.av-carte { display: flex; flex-direction: column; gap: 22px; padding: 22px 18px 24px; border-radius: 26px; background: #fff; box-shadow: 0 12px 30px rgba(160,80,20,.1); }
+.av-carte { display: flex; flex-direction: column; gap: 22px; padding: 22px 18px 24px; border-radius: 26px; background: var(--rv-carte); box-shadow: 0 12px 30px rgba(var(--rv-ombre-2),.1); }
 .av-champ { display: flex; flex-direction: column; gap: 10px; min-width: 0; margin: 0; padding: 0; border: 0; }
 .av-label { padding: 0; font-size: 15px; font-weight: 700; color: var(--ch-encre); }
 
@@ -57,18 +57,18 @@
 .av-pastille {
   position: relative; display: inline-flex; align-items: center;
   height: 42px; padding: 0 16px; margin-bottom: 3px;
-  border-radius: 999px; background: #F8EFE7; box-shadow: 0 3px 0 var(--av-bord);
+  border-radius: 999px; background: var(--rv-fond); box-shadow: 0 3px 0 var(--av-bord);
   font-size: 14.5px; font-weight: 700; color: var(--ch-encre);
   cursor: pointer; user-select: none; transition: transform .08s, box-shadow .08s;
 }
 .av-pastille input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: pointer; }
 .av-pastille:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--av-bord); }
-.av-pastille.is-choisie { background: var(--ch-encre); box-shadow: 0 3px 0 #000; color: #fff; }
+.av-pastille.is-choisie { background: var(--rv-inverse); box-shadow: 0 3px 0 #000; color: var(--rv-sur-inverse); }
 .av-pastille:has(input:focus-visible) { outline: 3px solid var(--av-orange); outline-offset: 2px; }
 
 .av-input {
   width: 100%; min-height: 52px; box-sizing: border-box; padding: 14px 16px;
-  border: 1.5px solid var(--av-bord); border-radius: 16px; background: #fff;
+  border: 1.5px solid var(--av-bord); border-radius: 16px; background: var(--rv-carte);
   font-family: 'Geist', sans-serif; font-size: 16px; font-weight: 500; line-height: 1.4; color: var(--ch-encre);
   outline: none; transition: border-color .15s, box-shadow .15s;
 }
@@ -87,13 +87,13 @@
 .av-aide-champ { margin: 0; font-size: 13px; font-weight: 500; line-height: 1.45; color: var(--ch-doux); }
 
 /* Accord de citation : case orange */
-.av-accord { display: flex; flex-direction: column; gap: 12px; padding: 16px; border-radius: 18px; background: #F8EFE7; }
+.av-accord { display: flex; flex-direction: column; gap: 12px; padding: 16px; border-radius: 18px; background: var(--rv-fond); }
 .av-case { position: relative; display: flex; align-items: flex-start; gap: 12px; cursor: pointer; }
 .av-case input { position: absolute; top: 0; left: 0; width: 24px; height: 24px; margin: 0; opacity: 0; cursor: pointer; }
 .av-case-boite {
   flex: none; display: flex; align-items: center; justify-content: center;
   width: 24px; height: 24px; box-sizing: border-box;
-  border: 1.5px solid var(--av-bord); border-radius: 8px; background: #fff; color: transparent;
+  border: 1.5px solid var(--av-bord); border-radius: 8px; background: var(--rv-carte); color: transparent;
   transition: background .12s, border-color .12s;
 }
 .av-case-boite svg { width: 14px; height: 14px; stroke-width: 3; }
@@ -127,7 +127,7 @@
 }
 .av-btn:active:not(:disabled) { transform: translateY(4px); box-shadow: 0 1px 0 var(--av-tranche); }
 .av-btn:disabled { opacity: .6; cursor: default; }
-.av-btn--blanc { background: #fff; color: var(--ch-encre); box-shadow: 0 5px 0 var(--av-bord); }
+.av-btn--blanc { background: var(--rv-carte); color: var(--ch-encre); box-shadow: 0 5px 0 var(--av-bord); }
 .av-btn--blanc:active:not(:disabled) { box-shadow: 0 1px 0 var(--av-bord); }
 .av-legal { margin: -6px 0 0; font-size: 12.5px; font-weight: 500; text-align: center; color: var(--ch-doux); }
 .av-legal a { color: var(--ch-doux); text-underline-offset: 2px; }
@@ -141,12 +141,12 @@
 .av-bulle {
   position: relative; align-self: center;
   margin-top: 26px; padding: 14px 22px 16px; max-width: 290px;
-  border-radius: 22px; background: #fff; box-shadow: 0 10px 26px rgba(90,70,160,.12);
+  border-radius: 22px; background: var(--rv-carte); box-shadow: 0 10px 26px rgba(90,70,160,.12);
   text-align: center;
 }
 .av-bulle::after {
   content: ''; position: absolute; left: 50%; bottom: -9px; width: 18px; height: 18px;
-  background: #fff; border-radius: 3px; transform: translateX(-50%) rotate(45deg);
+  background: var(--rv-carte); border-radius: 3px; transform: translateX(-50%) rotate(45deg);
 }
 .av-bulle-titre { margin: 0; font-family: var(--font-display); font-size: 19px; font-weight: 800; letter-spacing: -.02em; color: var(--ch-encre); }
 .av-bulle-sous { margin: 4px 0 0; font-size: 14.5px; font-weight: 600; line-height: 1.4; color: var(--ch-doux); }
@@ -212,4 +212,14 @@
 }
 @media (max-width: 360px) {
   .av-pastille { padding: 0 13px; font-size: 14px; }
+}
+
+/* ── Sombre : ces pastels gardent leur texte sombre (cf. rv-ilot dans global.css) ── */
+:root[data-theme="dark"] .av-aide {
+  --rv-encre: #1B1A23; --rv-encre-rgb: 27,26,35; --rv-doux: #6E675B; --rv-doux-rgb: 110,103,91;
+  --rv-carte: #fff; --rv-carte-rgb: 255,255,255; --rv-carte-haute: #fff; --rv-ligne: #EADBCB; --rv-piste: #F3E6D8;
+  --rv-orange-texte: #C25407; --rv-vert-texte: #1F8A52; --rv-brun-texte: #8F3E05;
+  --ch-encre: #1B1A23; --ch-doux: #6E675B; --bt-encre: #1B1A23; --bt-doux: #6E675B; --en-encre: #1B1A23; --en-doux: #6E675B; --hb-encre: #1B1A23; --hb-doux: #6E675B;
+  --hm-encre: #1B1A23; --hm-doux: #6E675B; --inst-encre: #1B1A23; --inst-doux: #6E675B; --lg-encre: #1B1A23; --lg-doux: #6E675B; --prg-encre: #1B1A23; --prg-doux: #6E675B;
+  color: #1B1A23;
 }

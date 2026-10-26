@@ -55,7 +55,7 @@
 .bt-btn:focus-visible { outline: 3px solid var(--bt-encre); outline-offset: 3px; }
 .bt-btn--blanc { background: var(--rv-carte); color: var(--bt-encre); box-shadow: 0 4px 0 var(--bt-bord); }
 .bt-btn--blanc:active:not(:disabled) { box-shadow: 0 1px 0 var(--bt-bord); }
-.bt-btn--peche { background: var(--bt-peche); color: var(--bt-encre); box-shadow: 0 4px 0 var(--bt-peche-t); }
+.bt-btn--peche { background: var(--bt-peche); color: #1B1A23; box-shadow: 0 4px 0 var(--bt-peche-t); }
 .bt-btn--peche:active:not(:disabled) { box-shadow: 0 1px 0 var(--bt-peche-t); }
 .bt-btn--encre { background: var(--rv-inverse); box-shadow: none; }
 .bt-btn--encre:active { box-shadow: none; }
@@ -564,3 +564,28 @@ button.bt-choix-btn:active:not(:disabled) { transform: translateY(3px); box-shad
  * couleur sur la carte sombre, comme les autres héros. ── */
 :root[data-theme="dark"] .bt-hero-moitie--g { background: var(--rv-carte); background: radial-gradient(90% 70% at 70% 55%, color-mix(in srgb, var(--bt-lavande-t) 34%, transparent), transparent 80%), var(--rv-carte); }
 :root[data-theme="dark"] .bt-hero-moitie--d { background: var(--rv-carte); background: radial-gradient(90% 70% at 30% 55%, color-mix(in srgb, var(--bt-peche-t) 34%, transparent), transparent 80%), var(--rv-carte); }
+
+/* ── Sombre : ces pastels gardent leur texte sombre (cf. rv-ilot dans global.css) ── */
+:root[data-theme="dark"] .bt-aura-rond,
+:root[data-theme="dark"] .bt-puce > i,
+:root[data-theme="dark"] .bt-salon-joueur--hote,
+:root[data-theme="dark"] .bt-salon-joueur--invite,
+:root[data-theme="dark"] .bt-puce-joueur--hote,
+:root[data-theme="dark"] .bt-puce-joueur--invite,
+:root[data-theme="dark"] .bt-choix-btn.is-choisi,
+:root[data-theme="dark"] .bt-page--est-invite .bt-choix-btn.is-choisi,
+:root[data-theme="dark"] .bt-rev-joueur--hote,
+:root[data-theme="dark"] .bt-rev-joueur--invite,
+:root[data-theme="dark"] .bt-fin-scene--hote,
+:root[data-theme="dark"] .bt-fin-scene--invite,
+:root[data-theme="dark"] .bt-compte,
+:root[data-theme="dark"] .bt-panneau--hote,
+:root[data-theme="dark"] .bt-panneau--invite,
+:root[data-theme="dark"] .bt-choix--rev .bt-choix-btn.is-juste {
+  --rv-encre: #1B1A23; --rv-encre-rgb: 27,26,35; --rv-doux: #6E675B; --rv-doux-rgb: 110,103,91;
+  --rv-carte: #fff; --rv-carte-rgb: 255,255,255; --rv-carte-haute: #fff; --rv-ligne: #EADBCB; --rv-piste: #F3E6D8;
+  --rv-orange-texte: #C25407; --rv-vert-texte: #1F8A52; --rv-brun-texte: #8F3E05;
+  --ch-encre: #1B1A23; --ch-doux: #6E675B; --bt-encre: #1B1A23; --bt-doux: #6E675B; --en-encre: #1B1A23; --en-doux: #6E675B; --hb-encre: #1B1A23; --hb-doux: #6E675B;
+  --hm-encre: #1B1A23; --hm-doux: #6E675B; --inst-encre: #1B1A23; --inst-doux: #6E675B; --lg-encre: #1B1A23; --lg-doux: #6E675B; --prg-encre: #1B1A23; --prg-doux: #6E675B;
+  color: #1B1A23;
+}

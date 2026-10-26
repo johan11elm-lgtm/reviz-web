@@ -153,6 +153,7 @@
   --rv-viseur:         #2A2730;
   --rv-sourdine:       #2A2730;
   --rv-fond-jeux:      #16141A;
+  --rv-texte-menthe:   #C4BFCC;
   --rv-bord-doux:      #36333D;
   --rv-inverse:        #F3F0F7;
   --rv-sur-inverse:    #1B1A23;
@@ -641,6 +642,7 @@ html.native .content, html.native .pg-content, html.native .pf-content {
   --rv-carte: #fff; --rv-carte-rgb: 255,255,255; --rv-carte-haute: #fff; --rv-ligne: #EADBCB; --rv-piste: #F3E6D8;
   --rv-orange-texte: #C25407; --rv-vert-texte: #1F8A52; --rv-brun-texte: #8F3E05;
   --rv-inverse: #1B1A23; --rv-sur-inverse: #fff;
-  --ch-encre: #1B1A23; --ch-doux: #6E675B;
+  --ch-encre: #1B1A23; --ch-doux: #6E675B; --bt-encre: #1B1A23; --bt-doux: #6E675B; --en-encre: #1B1A23; --en-doux: #6E675B; --hb-encre: #1B1A23; --hb-doux: #6E675B;
+  --hm-encre: #1B1A23; --hm-doux: #6E675B; --inst-encre: #1B1A23; --inst-doux: #6E675B; --lg-encre: #1B1A23; --lg-doux: #6E675B; --prg-encre: #1B1A23; --prg-doux: #6E675B;
   color: #1B1A23;
 }

@@ -41,3 +41,14 @@
 
 .ch-parcours--grand .ch-case-nom { font-size: 16px; }
 @media (hover: hover) { .ch-parcours--grand .ch-case:hover { transform: translateY(-2px); } }
+
+/* ── Sombre : ces pastels gardent leur texte sombre (cf. rv-ilot dans global.css) ── */
+:root[data-theme="dark"] .ch-case,
+:root[data-theme="dark"] .ch-case--cours .ch-case-rond {
+  --rv-encre: #1B1A23; --rv-encre-rgb: 27,26,35; --rv-doux: #6E675B; --rv-doux-rgb: 110,103,91;
+  --rv-carte: #fff; --rv-carte-rgb: 255,255,255; --rv-carte-haute: #fff; --rv-ligne: #EADBCB; --rv-piste: #F3E6D8;
+  --rv-orange-texte: #C25407; --rv-vert-texte: #1F8A52; --rv-brun-texte: #8F3E05;
+  --ch-encre: #1B1A23; --ch-doux: #6E675B; --bt-encre: #1B1A23; --bt-doux: #6E675B; --en-encre: #1B1A23; --en-doux: #6E675B; --hb-encre: #1B1A23; --hb-doux: #6E675B;
+  --hm-encre: #1B1A23; --hm-doux: #6E675B; --inst-encre: #1B1A23; --inst-doux: #6E675B; --lg-encre: #1B1A23; --lg-doux: #6E675B; --prg-encre: #1B1A23; --prg-doux: #6E675B;
+  color: #1B1A23;
+}
