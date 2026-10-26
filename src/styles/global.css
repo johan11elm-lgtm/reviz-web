@@ -147,6 +147,12 @@
   --rv-vert-texte:     #6BDA9B;
   --rv-brun-texte:     #FFB37A;
   --rv-survol:         rgba(255,255,255,.06);
+  --rv-sur-inverse-doux: rgba(27,26,35,.65);
+  --rv-pale:           #8E8898;
+  --rv-colonne-auj:    rgba(255,230,210,.06);
+  --rv-viseur:         #2A2730;
+  --rv-sourdine:       #2A2730;
+  --rv-bord-doux:      #36333D;
   --rv-inverse:        #F3F0F7;
   --rv-sur-inverse:    #1B1A23;
   --rv-ombre:          0,0,0;

@@ -382,3 +382,16 @@
 :root[data-theme="dark"] .prg-page .prg-deco { background: color-mix(in srgb, #FFC596 10%, transparent); box-shadow: none; }
 :root[data-theme="dark"] .prg-page .prg-point { background: color-mix(in srgb, #C9C2F2 22%, transparent); box-shadow: none; }
 :root[data-theme="dark"] .prg-page .prg-grain { opacity: .5; mix-blend-mode: soft-light; }
+
+/* ── Sombre : ces pastels gardent leur texte sombre (cf. rv-ilot dans global.css) ── */
+:root[data-theme="dark"] .prg-page .prg-matiere--on .prg-anneau-rond,
+:root[data-theme="dark"] .prg-page .prg-case,
+:root[data-theme="dark"] .prg-page .prg-case-rond,
+:root[data-theme="dark"] .prg-page .prg-trophee-rond,
+:root[data-theme="dark"] .prg-page--large .prg-matiere--on .prg-anneau-rond {
+  --rv-encre: #1B1A23; --rv-encre-rgb: 27,26,35; --rv-doux: #6E675B; --rv-doux-rgb: 110,103,91;
+  --rv-carte: #fff; --rv-carte-rgb: 255,255,255; --rv-carte-haute: #fff; --rv-ligne: #EADBCB; --rv-piste: #F3E6D8;
+  --rv-orange-texte: #C25407; --rv-vert-texte: #1F8A52; --rv-brun-texte: #8F3E05;
+  --ch-encre: #1B1A23; --ch-doux: #6E675B;
+  color: #1B1A23;
+}
