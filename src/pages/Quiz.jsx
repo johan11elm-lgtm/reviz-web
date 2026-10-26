@@ -19,6 +19,7 @@ import { track } from '../services/statsService'
 import './Flashcards.css'
 import './Quiz.css'
 import { mesurer } from '../services/mesure'
+import { questionsPremiere } from '../utils/premiereRevision'
 
 // ---- DONNÉES : localStorage (IA) > état vide (mock réservé au dev) ----
 function getQuestions() {
@@ -81,7 +82,9 @@ function QuizSession() {
   const location = useLocation()
   const { isGuest } = useAuth()
   useEffect(() => { mesurer('format_ouvert', { format: 'quiz' }) }, [])
-  const questions = useMemo(() => getQuestions(), [])
+  // Première révision guidée (fin de la découverte) : 5 questions, puis l'accueil.
+  const [premiere] = useState(() => new URLSearchParams(location.search).get('premiere') === '1')
+  const questions = useMemo(() => (premiere ? questionsPremiere(getQuestions()) : getQuestions()), [premiere])
   const ai = useMemo(() => lireAi(), [])
   const lessonTitle = useMemo(() => getLessonTitle(), [])
   const matiere = ai.metadata?.subject || ''
@@ -114,6 +117,7 @@ function QuizSession() {
       recordRevision('quiz', { score: nbJustes, total: questions.length })
       markRevisionDone('quiz', { score: nbJustes, total: questions.length })
       track('quiz_termine', { source: coachLessonId?.startsWith('prog-') ? 'programme' : 'scan' })
+      if (premiere) mesurer('premiere_revision', { etape: 'terminee', score: nbJustes, total: questions.length })
       setFin(true)
       return
     }
@@ -145,7 +149,9 @@ function QuizSession() {
 
   // Ce que dit Réviz.
   const pct = nbJustes / questions.length
-  const lignes = fin
+  const lignes = fin && premiere
+    ? ['Ta première révision est faite.', pct >= 0.6 ? 'Tu pars avec une longueur d’avance.' : 'Les erreurs, on les revoit ensemble.']
+    : fin
     ? pct >= 0.8 ? ['Très beau score.', 'Ce chapitre est presque maîtrisé.']
       : pct >= 0.5 ? ['C’est un bon début.', 'Revois les erreurs, puis retente.']
       : ['On reprend ensemble.', 'Revois les erreurs, puis retente.']
@@ -166,7 +172,7 @@ function QuizSession() {
     return () => clearTimeout(t)
   }, [])
 
-  const fermer = () => fermerVersFiche(navigate, location)
+  const fermer = () => (premiere ? navigate('/', { replace: true }) : fermerVersFiche(navigate, location))
   const boutonFermer = isDesktop
     ? <button type="button" className="fc-fermer fc-fermer--pilule" onClick={fermer}><Croix taille={18} />Fermer</button>
     : <button type="button" className="fc-fermer" onClick={fermer} aria-label="Fermer"><Croix /></button>
@@ -265,7 +271,12 @@ function QuizSession() {
         </div>
       </section>
     )
-    const boutons = (
+    const boutons = premiere ? (
+      <div className="qz-fin-actions">
+        <button type="button" className="fc-btn fc-btn--orange" onClick={fermer}>Continuer</button>
+        <button type="button" className="fc-btn fc-btn--blanc" onClick={() => fermerVersFiche(navigate, location)}>Voir tout le chapitre</button>
+      </div>
+    ) : (
       <div className="qz-fin-actions">
         <button type="button" className="fc-btn fc-btn--orange" onClick={refaire}>Refaire le quiz</button>
         {erreurs.length > 0 && total > 0 && (
@@ -281,18 +292,22 @@ function QuizSession() {
           {isDesktop ? (
             <div className="qz-fin-grille">
               <div className="qz-fin-gauche">{score}{reviz(220, 'fier', 'saut')}{pastilles}</div>
-              <div className="qz-fin-droite">{parcours}{aRevoir}{boutons}<FormatFeedback format="quiz" question="Ce quiz t'a aidé ?" /><button type="button" className="fc-lien" onClick={fermer}>Retour au chapitre</button></div>
+              <div className="qz-fin-droite">{premiere ? <>{boutons}{aRevoir}</> : <>{parcours}{aRevoir}{boutons}<FormatFeedback format="quiz" question="Ce quiz t'a aidé ?" /><button type="button" className="fc-lien" onClick={fermer}>Retour au chapitre</button></>}</div>
             </div>
           ) : (
             <>
               {score}
               {reviz(170, 'fier', 'saut')}
               {pastilles}
-              {parcours}
-              {aRevoir}
-              {boutons}
-              <FormatFeedback format="quiz" question="Ce quiz t'a aidé ?" />
-              <button type="button" className="fc-lien" onClick={fermer}>Retour au chapitre</button>
+              {premiere ? <>{boutons}{aRevoir}</> : (
+                <>
+                  {parcours}
+                  {aRevoir}
+                  {boutons}
+                  <FormatFeedback format="quiz" question="Ce quiz t'a aidé ?" />
+                  <button type="button" className="fc-lien" onClick={fermer}>Retour au chapitre</button>
+                </>
+              )}
             </>
           )}
         </div>
