@@ -440,7 +440,7 @@ export default function Analyse() {
         </span>
         {carteMentaleVue
           ? <span className="ch-pilule-coche" aria-label="vue"><Coche taille={14} /></span>
-          : <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6E675B" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>}
+          : <svg width="20" height="20" viewBox="0 0 24 24" fill="none" style={{ stroke: 'var(--rv-doux)' }} strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>}
       </Link>
     </section>
   );
@@ -480,7 +480,7 @@ export default function Analyse() {
       <form className="ch-ia-champ" onSubmit={e => { e.preventDefault(); if (question.trim()) demander(question.trim()); }}>
         <input value={question} onChange={e => setQuestion(e.target.value)} placeholder="Pose ta question…" aria-label="Ta question à Réviz IA" />
         <button type="submit" aria-label="Envoyer à Réviz IA" disabled={!question.trim()}>
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6" /></svg>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" style={{ stroke: 'var(--rv-sur-inverse)' }} strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6" /></svg>
         </button>
       </form>
     </section>
@@ -492,7 +492,7 @@ export default function Analyse() {
         <span className="ch-pilule-sous">Sur ce chapitre</span>
       </span>
       <span className="ch-ia-go" aria-hidden="true">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round"><path d="M12 19V5M6 11l6-6 6 6" /></svg>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" style={{ stroke: 'var(--rv-sur-inverse)' }} strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round"><path d="M12 19V5M6 11l6-6 6 6" /></svg>
       </span>
     </Link>
   ));

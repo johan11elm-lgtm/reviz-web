@@ -242,7 +242,7 @@ function MindmapSession() {
         {P.centres.map(([x, y], i) => (
           <g key={i}>
             <path d={P.route(x, y)} transform="translate(0 6)" fill="none" stroke="rgba(160,80,20,.08)" strokeWidth={isDesktop ? 30 : 22} strokeLinecap="round" />
-            <path d={P.route(x, y)} fill="none" stroke="#fff" strokeWidth={isDesktop ? 30 : 22} strokeLinecap="round" />
+            <path d={P.route(x, y)} fill="none" style={{ stroke: 'var(--rv-carte)' }} strokeWidth={isDesktop ? 30 : 22} strokeLinecap="round" />
             <path d={P.route(x, y)} fill="none" stroke={ouverte === i && isDesktop ? '#C25407' : COULEURS[i].fonce} strokeWidth={isDesktop ? 3.5 : 3}
               strokeDasharray={isDesktop ? '2 11' : '2 9'} strokeLinecap="round" />
           </g>
@@ -257,7 +257,7 @@ function MindmapSession() {
       {branches.map((b, i) => {
         const [x, y] = P.centres[i]
         return (
-          <button key={b.id} type="button" className={`cm-branche${ouverte === i ? ' is-ouverte' : ''}${vues[i] ? ' is-vue' : ''}`}
+          <button key={b.id} type="button" className={`cm-branche rv-ilot${ouverte === i ? ' is-ouverte' : ''}${vues[i] ? ' is-vue' : ''}`}
             style={{ left: x - taille / 2, top: y - taille / 2, width: taille, height: taille, '--cm-pastel': COULEURS[i].pastel, '--cm-fonce': COULEURS[i].fonce }}
             onClick={() => ouvrir(i)} aria-label={`${b.label}, ${pluriel(b.children.length, 'idée')}${vues[i] ? ', explorée' : ''}`}>
             {isDesktop && <span className="cm-branche-num">Branche {i + 1}</span>}
@@ -275,7 +275,7 @@ function MindmapSession() {
   const b = ouverte !== null ? branches[ouverte] : null
   const detail = b && (
     <div className="cm-detail" style={{ '--cm-pastel': COULEURS[ouverte].pastel, '--cm-fonce': COULEURS[ouverte].fonce }}>
-      <div className="cm-detail-tete">
+      <div className="cm-detail-tete rv-ilot">
         {!isDesktop && <span className="cm-poignee" aria-hidden="true" />}
         <span className="cm-detail-surtitre">Branche {ouverte + 1} sur {n}{isDesktop ? ` · ${nbVues} / ${n} explorées` : ''}</span>
         <h2 className="cm-detail-nom">{b.label}</h2>

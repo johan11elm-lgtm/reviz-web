@@ -2,8 +2,8 @@
  * Fond dans la teinte de la matière (--ch-*, utils/teinteMatiere), route de la série, pile de
  * cartes qui pivotent, Réviz qui réagit, notes à tranche. Pas de barre du bas ni de menu. */
 .fc-page {
-  --ch-encre: #1B1A23;
-  --ch-doux: #6E675B;
+  --ch-encre: var(--rv-encre);
+  --ch-doux: var(--rv-doux);
   position: relative;
   overflow: hidden;
   background: var(--ch-fond);
@@ -48,7 +48,7 @@
   gap: 6px;
   border: 0;
   border-radius: 50%;
-  background: #fff;
+  background: var(--rv-carte);
   color: var(--ch-encre);
   box-shadow: 0 4px 12px var(--ch-ombre);
   font: 700 15px 'Geist', system-ui, sans-serif;
@@ -78,7 +78,7 @@
   flex: none;
   box-sizing: border-box;
   border-radius: 50%;
-  border: 2px solid #fff;
+  border: 2px solid var(--rv-carte);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -87,16 +87,16 @@
   font-weight: 800;
   transition: transform .25s cubic-bezier(.3,1.5,.5,1);
 }
-.fc-page .fc-case--avenir { background: #FFE6D2; color: var(--ch-doux); box-shadow: 0 4px 0 rgba(194,84,7,.28); }
-.fc-page .fc-case--cours { width: 40px; height: 40px; border: 4px solid #C25407; background: #fff; color: #C25407; box-shadow: 0 4px 0 #8F3E05; font-size: 15px; }
+.fc-page .fc-case--avenir { background: #FFE6D2; color: #6E675B; box-shadow: 0 4px 0 rgba(194,84,7,.28); }
+.fc-page .fc-case--cours { width: 40px; height: 40px; border: 4px solid var(--rv-orange); background: var(--rv-carte); color: var(--rv-orange-texte); box-shadow: 0 4px 0 var(--rv-orange-tranche); font-size: 15px; }
 .fc-page .fc-case--sais { background: #34C77B; color: #fff; box-shadow: 0 4px 0 #1F8A52; }
-.fc-page .fc-case--revoir { background: #C25407; color: #fff; box-shadow: 0 4px 0 #8F3E05; }
-.fc-page .fc-case--presque { background: #fff; border-color: #C9C2F2; box-shadow: 0 4px 0 #C9C2F2; }
-.fc-page .fc-case--presque i { width: 8px; height: 8px; border-radius: 50%; background: var(--ch-encre); }
+.fc-page .fc-case--revoir { background: var(--rv-orange); color: #fff; box-shadow: 0 4px 0 var(--rv-orange-tranche); }
+.fc-page .fc-case--presque { background: var(--rv-carte); border-color: #C9C2F2; box-shadow: 0 4px 0 #C9C2F2; }
+.fc-page .fc-case--presque i { width: 8px; height: 8px; border-radius: 50%; background: var(--rv-inverse); }
 .fc-page .fc-case--juste { background: #34C77B; color: #fff; box-shadow: 0 4px 0 #1F8A52; }
-.fc-page .fc-case--faux { background: #C25407; color: #fff; box-shadow: 0 4px 0 #8F3E05; }
-.fc-page .fc-case--cours-juste { border-color: #34C77B; color: #1F8A52; box-shadow: 0 4px 0 #1F8A52; }
-.fc-page .fc-case--cours-faux { border-color: #8F3E05; color: #8F3E05; }
+.fc-page .fc-case--faux { background: var(--rv-orange); color: #fff; box-shadow: 0 4px 0 var(--rv-orange-tranche); }
+.fc-page .fc-case--cours-juste { border-color: #34C77B; color: var(--rv-vert-texte); box-shadow: 0 4px 0 #1F8A52; }
+.fc-page .fc-case--cours-faux { border-color: var(--rv-orange-tranche); color: var(--rv-brun-texte); }
 .fc-page .fc-route--recap { height: 32px; margin: 18px 0 0; }
 .fc-page .fc-route--recap .fc-case { width: 28px; height: 28px; }
 
@@ -112,7 +112,7 @@
   perspective: 1200px;
 }
 .fc-page .fc-pile, .fc-page .fc-carte { position: absolute; inset: 0; border-radius: 28px; }
-.fc-page .fc-pile { background: #fff; box-shadow: 0 10px 24px var(--ch-ombre); }
+.fc-page .fc-pile { background: var(--rv-carte); box-shadow: 0 10px 24px var(--ch-ombre); }
 .fc-page .fc-pile--2 { transform: translate(10px,14px) rotate(5deg) scale(.96); }
 .fc-page .fc-pile--1 { transform: translate(-8px,8px) rotate(-3.5deg) scale(.98); }
 .fc-page .fc-carte { z-index: 1; touch-action: pan-y; transition: transform .32s cubic-bezier(.2,.8,.2,1); cursor: pointer; user-select: none; -webkit-user-select: none; }
@@ -133,7 +133,7 @@
   padding: 18px 20px;
   border: 0;
   border-radius: 28px;
-  background: #fff;
+  background: var(--rv-carte);
   box-shadow: 0 16px 34px var(--ch-ombre);
   font: inherit;
   color: inherit;
@@ -148,7 +148,7 @@
 .fc-page .fc-face:focus-visible { outline: 3px solid var(--ch-encre); outline-offset: 3px; }
 .fc-page .fc-face-haut, .fc-page .fc-face-bas { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
 .fc-page .fc-etiquette { flex: none; padding: 5px 10px; border-radius: 999px; background: #FFE6D2; font-size: 12px; font-weight: 700; color: #8F3E05; }
-.fc-page .fc-etiquette--nouvelle { background: #E4E0FA; color: var(--ch-encre); }
+.fc-page .fc-etiquette--nouvelle { background: #E4E0FA; color: #1B1A23; }
 .fc-page .fc-face-coin { min-width: 0; font-size: 12px; font-weight: 600; color: var(--ch-doux); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .fc-page .fc-question, .fc-page .fc-reponse {
   flex: 1;
@@ -168,7 +168,7 @@
 .fc-page .fc-taille--m { font-size: 18px; line-height: 1.3; }
 .fc-page .fc-reponse.fc-taille--l, .fc-page .fc-reponse.fc-taille--m { font-family: 'Geist', system-ui, sans-serif; font-weight: 600; letter-spacing: 0; }
 .fc-page .fc-ia { display: inline-flex; align-items: center; gap: 4px; font-size: 11px; color: var(--ch-doux); }
-.fc-page .fc-astuce { font-size: 12px; font-weight: 700; color: #C25407; }
+.fc-page .fc-astuce { font-size: 12px; font-weight: 700; color: var(--rv-orange-texte); }
 .fc-page .fc-astuce--doux { font-weight: 600; color: var(--ch-doux); }
 .fc-page .fc-tampon {
   position: absolute;
@@ -183,8 +183,8 @@
   font-weight: 800;
   pointer-events: none;
 }
-.fc-page .fc-tampon--sais { left: 18px; color: #1F8A52; border-color: #34C77B; transform: rotate(-10deg); }
-.fc-page .fc-tampon--revoir { right: 18px; color: #C25407; border-color: #C25407; transform: rotate(10deg); }
+.fc-page .fc-tampon--sais { left: 18px; color: var(--rv-vert-texte); border-color: #34C77B; transform: rotate(-10deg); }
+.fc-page .fc-tampon--revoir { right: 18px; color: var(--rv-orange-texte); border-color: var(--rv-orange); transform: rotate(10deg); }
 
 /* ── Réviz qui réagit ── */
 .fc-page .fc-reviz { display: flex; align-items: center; justify-content: center; }
@@ -212,13 +212,13 @@
   transition: transform .1s, box-shadow .1s;
 }
 .fc-page .fc-btn:active { transform: translateY(4px); }
-.fc-page .fc-btn--encre { background: var(--ch-encre); color: #fff; box-shadow: 0 5px 0 #000; }
+.fc-page .fc-btn--encre { background: var(--rv-inverse); color: var(--rv-sur-inverse); box-shadow: 0 5px 0 #000; }
 .fc-page .fc-btn--encre:active { box-shadow: 0 1px 0 #000; }
-.fc-page .fc-btn--orange { background: #C25407; color: #fff; box-shadow: 0 5px 0 #8F3E05; }
-.fc-page .fc-btn--orange:active { box-shadow: 0 1px 0 #8F3E05; }
-.fc-page .fc-btn--blanc { background: #fff; color: var(--ch-encre); box-shadow: 0 5px 0 #C9C2F2; }
+.fc-page .fc-btn--orange { background: var(--rv-orange); color: #fff; box-shadow: 0 5px 0 var(--rv-orange-tranche); }
+.fc-page .fc-btn--orange:active { box-shadow: 0 1px 0 var(--rv-orange-tranche); }
+.fc-page .fc-btn--blanc { background: var(--rv-carte); color: var(--ch-encre); box-shadow: 0 5px 0 #C9C2F2; }
 .fc-page .fc-btn--blanc:active { box-shadow: 0 1px 0 #C9C2F2; }
-.fc-page .fc-btn--vert { background: #34C77B; color: var(--ch-encre); box-shadow: 0 5px 0 #1F8A52; }
+.fc-page .fc-btn--vert { background: #34C77B; color: #1B1A23; box-shadow: 0 5px 0 #1F8A52; }
 .fc-page .fc-btn--vert:active { box-shadow: 0 1px 0 #1F8A52; }
 .fc-page .fc-notes .fc-btn { flex: 1; padding: 0 8px; }
 .fc-page .fc-btn kbd {
@@ -233,11 +233,11 @@
   align-items: center;
   justify-content: center;
 }
-.fc-page .fc-btn--blanc kbd, .fc-page .fc-btn--vert kbd { background: rgba(27,26,35,.08); }
+.fc-page .fc-btn--blanc kbd, .fc-page .fc-btn--vert kbd { background: rgba(var(--rv-encre-rgb),.08); }
 .fc-page .fc-precedente { display: flex; align-items: center; justify-content: center; gap: 6px; height: 18px; margin: 10px 0 0; font-size: 12px; font-weight: 600; color: var(--ch-doux); }
 .fc-page .fc-precedente-point { width: 8px; height: 8px; border-radius: 50%; }
 .fc-page .fc-precedente-point--sais { background: #34C77B; }
-.fc-page .fc-precedente-point--revoir { background: #C25407; }
+.fc-page .fc-precedente-point--revoir { background: var(--rv-orange); }
 .fc-page .fc-precedente-point--presque { background: #C9C2F2; }
 
 /* ── Fin de série et « rien à revoir » ── */
@@ -246,25 +246,25 @@
 .fc-page .fc-fin-tete { display: flex; flex-direction: column; align-items: flex-start; margin-top: 14px; }
 .fc-page .fc-surtitre { font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; opacity: .7; }
 .fc-page .fc-fin-titre { margin: 4px 0 0; font-family: var(--font-display); font-size: 42px; font-weight: 800; letter-spacing: -.04em; line-height: 1; }
-.fc-page .fc-xp { margin-top: 12px; padding: 6px 14px; border-radius: 999px; background: #fff; font-family: var(--font-display); font-size: 16px; font-weight: 800; color: #C25407; }
+.fc-page .fc-xp { margin-top: 12px; padding: 6px 14px; border-radius: 999px; background: var(--rv-carte); font-family: var(--font-display); font-size: 16px; font-weight: 800; color: var(--rv-orange-texte); }
 .fc-page--fin .fc-reviz { margin-top: 16px; }
-.fc-page .fc-stats { margin-top: 18px; padding: 18px; border-radius: 26px; background: #fff; box-shadow: 0 12px 30px var(--ch-ombre); }
+.fc-page .fc-stats { margin-top: 18px; padding: 18px; border-radius: 26px; background: var(--rv-carte); box-shadow: 0 12px 30px var(--ch-ombre); }
 .fc-page .fc-stats-ligne { display: grid; grid-template-columns: repeat(3, 1fr); }
 .fc-page .fc-stats-ligne span { display: flex; flex-direction: column; align-items: center; font-size: 12px; font-weight: 600; color: var(--ch-doux); }
-.fc-page .fc-stats-ligne span + span { border-left: 1.5px dashed #EADBCB; }
+.fc-page .fc-stats-ligne span + span { border-left: 1.5px dashed var(--rv-ligne); }
 .fc-page .fc-stats-ligne b { font-family: var(--font-display); font-size: 30px; font-weight: 800; color: var(--ch-encre); }
-.fc-page .fc-stats-ligne b.fc-vert { color: #1F8A52; }
-.fc-page .fc-stats-ligne b.fc-orange { color: #C25407; }
+.fc-page .fc-stats-ligne b.fc-vert { color: var(--rv-vert-texte); }
+.fc-page .fc-stats-ligne b.fc-orange { color: var(--rv-orange-texte); }
 .fc-page .fc-priorite { display: flex; align-items: center; justify-content: center; gap: 8px; margin: 14px 0 0; font-size: 13px; font-weight: 600; color: var(--ch-doux); }
-.fc-page .fc-priorite svg { color: #C25407; }
+.fc-page .fc-priorite svg { color: var(--rv-orange-texte); }
 .fc-page .fc-fin-actions { display: flex; flex-direction: column; gap: 12px; margin-top: 20px; }
 .fc-page .fc-fin-actions .fc-btn--blanc { height: 52px; }
 .fc-page .fc-lien { align-self: center; margin-top: 10px; padding: 8px; border: 0; background: none; font: 700 14px 'Geist', system-ui, sans-serif; color: var(--ch-doux); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
 
 .fc-page--calme .fc-ecran--centre { align-items: center; }
 .fc-page--calme .fc-reviz { margin-top: auto; }
-.fc-page .fc-date-carte { display: flex; align-items: center; gap: 14px; width: 100%; max-width: 335px; margin-top: 22px; padding: 14px; box-sizing: border-box; border-radius: 26px; background: #fff; box-shadow: 0 12px 30px var(--ch-ombre); }
-.fc-page .fc-date-rond { width: 60px; height: 60px; flex: none; border-radius: 50%; background: #FFE6D2; box-shadow: 0 4px 0 rgba(194,84,7,.28); display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: var(--ch-doux); line-height: 1; }
+.fc-page .fc-date-carte { display: flex; align-items: center; gap: 14px; width: 100%; max-width: 335px; margin-top: 22px; padding: 14px; box-sizing: border-box; border-radius: 26px; background: var(--rv-carte); box-shadow: 0 12px 30px var(--ch-ombre); }
+.fc-page .fc-date-rond { width: 60px; height: 60px; flex: none; border-radius: 50%; background: #FFE6D2; box-shadow: 0 4px 0 rgba(194,84,7,.28); display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: #6E675B; line-height: 1; }
 .fc-page .fc-date-rond b { font-family: var(--font-display); font-size: 22px; font-weight: 800; color: var(--ch-encre); }
 .fc-page .fc-date-txt { display: flex; flex-direction: column; font-size: 13px; color: var(--ch-doux); }
 .fc-page .fc-date-txt b { font-size: 17px; color: var(--ch-encre); }
@@ -303,13 +303,13 @@
 .fc-page--large .fc-btn--encre { width: 360px; height: 60px; }
 .fc-page--large .fc-notes { gap: 14px; }
 .fc-page--large .fc-notes .fc-btn { width: 200px; flex: none; height: 60px; }
-.fc-page--large .fc-btn--orange, .fc-page--large .fc-btn--orange:hover { box-shadow: 0 6px 0 #8F3E05; }
+.fc-page--large .fc-btn--orange, .fc-page--large .fc-btn--orange:hover { box-shadow: 0 6px 0 var(--rv-orange-tranche); }
 .fc-page--large .fc-btn--vert { box-shadow: 0 6px 0 #1F8A52; }
 .fc-page--large .fc-btn--blanc { box-shadow: 0 6px 0 #C9C2F2; }
 .fc-page--large .fc-btn:active { transform: translateY(4px); box-shadow: 0 2px 0 rgba(0,0,0,.25); }
 .fc-page--large .fc-col-gauche .fc-bulle .rv-bulle-txt { max-width: 300px; font-size: 21px; }
 .fc-page--large .fc-col-gauche .fc-bulle .rv-bulle-ligne + .rv-bulle-ligne { font-size: 15px; }
-.fc-page--large .fc-infos { display: flex; flex-direction: column; gap: 10px; padding: 20px; border-radius: 26px; background: #fff; box-shadow: 0 12px 30px var(--ch-ombre); }
+.fc-page--large .fc-infos { display: flex; flex-direction: column; gap: 10px; padding: 20px; border-radius: 26px; background: var(--rv-carte); box-shadow: 0 12px 30px var(--ch-ombre); }
 .fc-page--large .fc-infos-titre { font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--ch-doux); }
 .fc-page--large .fc-infos-titre--2 { margin-top: 10px; }
 .fc-page--large .fc-infos-ligne { display: flex; align-items: center; gap: 10px; font-size: 15px; font-weight: 600; }
@@ -323,8 +323,8 @@
   padding: 0 8px;
   box-sizing: border-box;
   border-radius: 8px;
-  background: #F8EFE7;
-  box-shadow: 0 3px 0 #EADBCB;
+  background: var(--rv-fond);
+  box-shadow: 0 3px 0 var(--rv-ligne);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -370,3 +370,13 @@
   .fc-page--large .fc-notes .fc-btn { width: auto; flex: 1; }
   .fc-page--large .fc-btn--encre { width: 100%; max-width: 360px; }
 }
+
+/* ── Sombre : l'écran de jeu (flashcards, quiz) passe sur le fond sombre, avec un halo de la
+ * teinte de la matière en haut, derrière Réviz (cf. héros de l'accueil). ── */
+:root[data-theme="dark"] .fc-page {
+  background: var(--rv-fond);
+  background: radial-gradient(90% 46% at 50% 18%, color-mix(in srgb, var(--ch-bulle) 30%, transparent) 0%, color-mix(in srgb, var(--ch-bulle) 10%, transparent) 55%, transparent 85%), var(--rv-fond);
+}
+:root[data-theme="dark"] .fc-page .fc-deco { background: color-mix(in srgb, var(--ch-bulle) 10%, transparent); }
+:root[data-theme="dark"] .fc-page .fc-point { background: color-mix(in srgb, var(--ch-point) 30%, transparent); }
+:root[data-theme="dark"] .fc-page .fc-grain { opacity: .6; mix-blend-mode: soft-light; }

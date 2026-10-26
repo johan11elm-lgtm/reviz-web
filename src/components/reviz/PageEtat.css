@@ -1,9 +1,9 @@
 /* Page d'état (gabarit de la 404, handoff Claude Design du 22/10) : héros pastel + grain, Réviz.
  * Téléphone : texte et boutons sous le héros ; ordinateur : tout dans le héros (64 px). */
 .pe-page {
-  --pe-orange: #C25407; --pe-tranche: #8F3E05;
+  --pe-orange: var(--rv-orange); --pe-tranche: var(--rv-orange-tranche);
   min-height: 100dvh;
-  background: #F8EFE7;
+  background: var(--rv-fond);
   color: var(--ch-encre);
 }
 .pe-page .pe-defile {
@@ -45,7 +45,7 @@
   border: 0; font-family: 'Geist', sans-serif; font-size: 17px; font-weight: 700; color: #fff; text-decoration: none;
   cursor: pointer; transition: transform .08s, box-shadow .08s;
 }
-.pe-btn--second { background: #fff; box-shadow: 0 5px 0 var(--ch-bulle); color: var(--ch-encre); }
+.pe-btn--second { background: var(--rv-carte); box-shadow: 0 5px 0 var(--ch-bulle); color: var(--ch-encre); }
 .pe-btn:focus-visible { border-radius: 999px; }
 .pe-btn:active { transform: translateY(4px); box-shadow: 0 1px 0 var(--pe-tranche); }
 .pe-btn--second:active { box-shadow: 0 1px 0 var(--ch-bulle); }

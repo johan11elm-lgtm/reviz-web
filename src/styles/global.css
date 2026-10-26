@@ -87,6 +87,7 @@
   --rv-orange-tranche: #8F3E05;
   --rv-orange-texte:   #C25407;  /* orange écrit sur le fond ou une carte */
   --rv-vert-texte:     #1F8A52;
+  --rv-brun-texte:     #8F3E05;  /* orange foncé écrit (pas sur un pastel) */
   --rv-inverse:        #1B1A23;  /* pilule ou bouton plein, texte --rv-sur-inverse */
   --rv-sur-inverse:    #fff;
   --rv-ombre:          120,60,20;  /* ombres brunes : rgba(var(--rv-ombre), .3) */
@@ -144,6 +145,8 @@
   --rv-orange-tranche: #7A3404;
   --rv-orange-texte:   #FF9A55;
   --rv-vert-texte:     #6BDA9B;
+  --rv-brun-texte:     #FFB37A;
+  --rv-survol:         rgba(255,255,255,.06);
   --rv-inverse:        #F3F0F7;
   --rv-sur-inverse:    #1B1A23;
   --rv-ombre:          0,0,0;
@@ -620,4 +623,17 @@ html.native .content, html.native .pg-content, html.native .pf-content {
   html:not(.native) .pf-content,
   html:not(.native) .cours-content,
   html:not(.native) .programme-content { padding-bottom: 48px; }
+}
+
+/* ─── Îlot pastel en sombre ────────────────────────────────────────
+ * Un bloc qui garde son fond pastel en sombre (carte « à reprendre », branche de carte mentale…)
+ * reprend les encres du clair : son texte et ses cartes blanches restent comme en clair.
+ * À poser en classe (rv-ilot) sur le bloc ; sans effet en clair. */
+:root[data-theme="dark"] .rv-ilot {
+  --rv-encre: #1B1A23; --rv-encre-rgb: 27,26,35; --rv-doux: #6E675B; --rv-doux-rgb: 110,103,91;
+  --rv-carte: #fff; --rv-carte-rgb: 255,255,255; --rv-carte-haute: #fff; --rv-ligne: #EADBCB; --rv-piste: #F3E6D8;
+  --rv-orange-texte: #C25407; --rv-vert-texte: #1F8A52; --rv-brun-texte: #8F3E05;
+  --rv-inverse: #1B1A23; --rv-sur-inverse: #fff;
+  --ch-encre: #1B1A23; --ch-doux: #6E675B;
+  color: #1B1A23;
 }

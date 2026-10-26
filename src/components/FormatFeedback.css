@@ -1,13 +1,13 @@
 /* FormatFeedback : micro-sondage utile / moyen / pas terrible sur un format IA.
  * Discret : une ligne, trois ronds blancs à tranche pastel (menthe, pêche, rose). */
 .format-feedback { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 10px 14px; padding: 8px 0; }
-.format-feedback-question { font-size: 14px; font-weight: 600; color: #6E675B; }
+.format-feedback-question { font-size: 14px; font-weight: 600; color: var(--rv-doux); }
 .format-feedback-options { display: flex; gap: 10px; }
 .format-feedback-btn {
-  --ff-tranche: #EADBCB;
+  --ff-tranche: var(--rv-ligne);
   position: relative; display: flex; align-items: center; justify-content: center;
   width: 44px; height: 44px; padding: 0; border: 0; border-radius: 50%;
-  background: #fff; box-shadow: 0 4px 0 var(--ff-tranche); color: #1B1A23;
+  background: var(--rv-carte); box-shadow: 0 4px 0 var(--ff-tranche); color: var(--rv-encre);
   font-family: inherit; cursor: pointer;
   transition: transform .08s, box-shadow .08s;
 }
@@ -16,6 +16,6 @@
 .format-feedback-btn--meh { --ff-tranche: #FFC596; }
 .format-feedback-btn--down { --ff-tranche: #F4B8CB; }
 .format-feedback-btn:active { transform: translateY(3px); box-shadow: 0 1px 0 var(--ff-tranche); }
-.format-feedback-btn:focus-visible { outline: 3px solid #1B1A23; outline-offset: 3px; }
-.format-feedback--thanks { display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; color: #1F8A52; }
+.format-feedback-btn:focus-visible { outline: 3px solid var(--rv-encre); outline-offset: 3px; }
+.format-feedback--thanks { display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; color: var(--rv-vert-texte); }
 .format-feedback--thanks::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: #34C77B; }
