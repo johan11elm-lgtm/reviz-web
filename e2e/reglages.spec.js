@@ -85,6 +85,8 @@ for (const [appareil, viewport] of APPAREILS) {
       await page.emulateMedia({ colorScheme: 'dark' })
       await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark')
       await page.emulateMedia({ colorScheme: 'light' })
+      // L'app réécrit son choix dans le stockage en suivant l'appareil : on attend qu'elle ait fini.
+      await expect(page.locator('html')).toHaveAttribute('data-theme', 'sauge')
 
       // Un thème sombre mémorisé avant le mode (sans reviz-mode) devient le mode Sombre.
       await page.evaluate(() => { localStorage.removeItem('reviz-mode'); localStorage.setItem('reviz-theme', 'dark') })
