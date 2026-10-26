@@ -34,6 +34,11 @@ test.describe('Mon programme', () => {
       await page.getByRole('radio', { name: '3e', exact: true }).click()
       await page.getByRole('button', { name: /C'est parti/ }).click()
 
+      // ── Accueil : la popup Réviz Games, puis « Tout voir » → le programme ──
+      await expect(page).toHaveURL(/\/$/)
+      await fermerAnnonceJeux(page)
+      await page.getByRole('link', { name: 'Tout voir' }).click()
+
       // ── Programme : matières, rappel du mode essai ──
       await expect(page).toHaveURL(/\/programme$/)
       await expect(page.getByRole('heading', { name: 'Programme', level: 1 })).toBeVisible()
@@ -242,7 +247,7 @@ test.describe('Téléphone (390 px)', () => {
     await page.goto('/welcome')
     await expect(page).not.toHaveURL(/\/welcome/)
     await page.goto('/essai')
-    await expect(page).toHaveURL(/\/programme/)
+    await expect(page).toHaveURL(/\/$/)
     expect(await page.evaluate(() => JSON.parse(localStorage.getItem('reviz-guest')))).toMatchObject({ uid: essai, prenom: 'Inès' })
   })
 

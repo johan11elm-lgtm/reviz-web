@@ -71,13 +71,13 @@ export default function Essai() {
 
   // Déjà connecté (compte, ou essai déjà commencé) et venu d'une fiche : le
   // quiz du chapitre directement. Un vrai compte sans chapitre : l'accueil ;
-  // un essai déjà commencé : son programme.
+  // un essai déjà commencé : l'accueil aussi (la matière de la fiche s'il en vient une).
   useEffect(() => {
     if (!currentUser || ouvert.current) return;
     if (chapitreFiche && chapitre === undefined) return;
     if (chapitre) ouvrirChapitre();
     else if (!isGuest) navigate('/', { replace: true });
-    else if (dejaInvite.current) navigate(matiereFiche ? `/programme?matiere=${matiereFiche}` : '/programme', { replace: true });
+    else if (dejaInvite.current) navigate(matiereFiche ? `/programme?matiere=${matiereFiche}` : '/', { replace: true });
     // ouvrirChapitre ne dépend que de ces valeurs.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentUser, isGuest, chapitre, chapitreFiche, navigate]);
@@ -99,7 +99,7 @@ export default function Essai() {
     stopDecouverte();
     loginAsGuest({ prenom: p, level: { cycle: 'college', classe, specialites: [] } });
     if (chapitre && classe === classeFiche) ouvrirChapitre();
-    else navigate(matiereFiche ? `/programme?matiere=${matiereFiche}` : '/programme', { replace: true });
+    else navigate(matiereFiche ? `/programme?matiere=${matiereFiche}` : '/', { replace: true });
   }
 
   // Redirection automatique en cours ou à venir (effet ci-dessus) : rien à remplir.

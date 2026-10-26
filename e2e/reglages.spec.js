@@ -216,7 +216,7 @@ test.describe('Réglages : suppression et mode essai', () => {
     await page.getByLabel('Ton prénom').fill('Invité')
     await page.getByRole('radio', { name: '6e', exact: true }).click()
     await page.getByRole('button', { name: 'C\'est parti' }).click()
-    await expect(page).toHaveURL(/\/programme/, { timeout: 15_000 })
+    await expect(page).toHaveURL(/\/$/, { timeout: 15_000 })
 
     await page.goto('/reglages')
     await expect(page.getByText('Mode essai', { exact: true })).toBeVisible()

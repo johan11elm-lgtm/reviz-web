@@ -34,13 +34,13 @@ describe('<Essai /> — mode essai', () => {
     expect(auth.loginAsGuest).not.toHaveBeenCalled()
   })
 
-  it('démarre la session d’essai et ouvre Mon programme', () => {
+  it('démarre la session d’essai et ouvre l’accueil', () => {
     renderPage()
     fireEvent.change(screen.getByLabelText('Ton prénom'), { target: { value: 'Léa' } })
     fireEvent.click(screen.getByRole('radio', { name: '3e' }))
     fireEvent.click(screen.getByRole('button', { name: /C'est parti/ }))
     expect(auth.loginAsGuest).toHaveBeenCalledWith({ prenom: 'Léa', level: { cycle: 'college', classe: '3ème', specialites: [] } })
-    expect(nav).toHaveBeenCalledWith('/programme', { replace: true })
+    expect(nav).toHaveBeenCalledWith('/', { replace: true })
   })
 
   it('un élève venu d’une fiche publique sans chapitre a sa classe cochée et ouvre la matière', () => {
@@ -89,7 +89,7 @@ describe('<Essai /> — mode essai', () => {
     fireEvent.change(screen.getByLabelText('Ton prénom'), { target: { value: 'Léa' } })
     fireEvent.click(screen.getByRole('radio', { name: '4e' }))
     fireEvent.click(screen.getByRole('button', { name: /C'est parti/ }))
-    expect(nav).toHaveBeenCalledWith('/programme', { replace: true })
+    expect(nav).toHaveBeenCalledWith('/', { replace: true })
   })
 
   it('seulement les classes du collège : Mon programme s’arrête en 3e', () => {
@@ -116,11 +116,11 @@ describe('<Essai /> — mode essai', () => {
     expect(localStorage.getItem('reviz-decouverte-prof')).toBeNull()
   })
 
-  it('un essai déjà commencé, sans fiche : on le reprend (son programme), pas de nouvel essai vide', () => {
+  it('un essai déjà commencé, sans fiche : on le reprend (l’accueil), pas de nouvel essai vide', () => {
     auth.currentUser = { uid: 'invite-1' }
     auth.isGuest = true
     renderPage()
-    expect(nav).toHaveBeenCalledWith('/programme', { replace: true })
+    expect(nav).toHaveBeenCalledWith('/', { replace: true })
     expect(screen.queryByLabelText('Ton prénom')).toBeNull()
     expect(auth.loginAsGuest).not.toHaveBeenCalled()
   })
