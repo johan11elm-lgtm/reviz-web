@@ -37,10 +37,10 @@ import './Home.css';
  * révision, objectif atteint, ou journée ordinaire.
  */
 const HUMEURS = {
-  normal:   { bg: '#FFB37A', tint: '#FFC596', dot: '#C9C2F2', bar: 'rgba(255,179,122,.94)', btn: '#C25407', soft: '#FFE6D2', expression: 'content',   entree: 'coucou' },
-  controle: { bg: '#FFB37A', tint: '#FFC596', dot: '#C9C2F2', bar: 'rgba(255,179,122,.94)', btn: '#C25407', soft: '#FFE6D2', expression: 'determine', entree: 'coucou' },
-  soir:     { bg: '#C9C2F2', tint: '#D8D2F7', dot: '#FFC9A8', bar: 'rgba(201,194,242,.94)', btn: '#5B4FC7', soft: '#E4E0FA', expression: 'endormi' },
-  fete:     { bg: '#FFC9A8', tint: '#FFDAC4', dot: '#B9E8C9', bar: 'rgba(255,201,168,.94)', btn: '#137A45', soft: '#DCF5E6', expression: 'fier',      entree: 'saut' },
+  normal:   { bg: '#FFB37A', tint: '#FFC596', dot: '#C9C2F2', bar: 'rgba(255,179,122,.94)', btn: '#C25407', btnTexte: '#FF9A55', soft: '#FFE6D2', expression: 'content',   entree: 'coucou' },
+  controle: { bg: '#FFB37A', tint: '#FFC596', dot: '#C9C2F2', bar: 'rgba(255,179,122,.94)', btn: '#C25407', btnTexte: '#FF9A55', soft: '#FFE6D2', expression: 'determine', entree: 'coucou' },
+  soir:     { bg: '#C9C2F2', tint: '#D8D2F7', dot: '#FFC9A8', bar: 'rgba(201,194,242,.94)', btn: '#5B4FC7', btnTexte: '#B3AAF5', soft: '#E4E0FA', expression: 'endormi' },
+  fete:     { bg: '#FFC9A8', tint: '#FFDAC4', dot: '#B9E8C9', bar: 'rgba(255,201,168,.94)', btn: '#137A45', btnTexte: '#6BDA9B', soft: '#DCF5E6', expression: 'fier',      entree: 'saut' },
 };
 
 // Pastilles des matières : aplats pastel, dans l'ordre du design.
@@ -370,7 +370,7 @@ export default function Home() {
     setSortie(false);
     setTour(t => t - ici + i + (i < ici ? n : 0));
   };
-  const style = { '--hm-bg': h.bg, '--hm-tint': h.tint, '--hm-dot': h.dot, '--hm-bar': h.bar, '--hm-btn': h.btn, '--hm-soft': h.soft, '--rv-accent': h.btn };
+  const style = { '--hm-bg': h.bg, '--hm-tint': h.tint, '--hm-dot': h.dot, '--hm-bar': h.bar, '--hm-btn': h.btn, '--hm-soft': h.soft, '--hm-btn-texte': h.btnTexte, '--rv-accent': h.btn };
 
   const serie = streak > 0 && (
     <span className="hm-serie" aria-label={`${streak} jour${streak > 1 ? 's' : ''} de suite`}>

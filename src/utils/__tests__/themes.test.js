@@ -2,7 +2,7 @@
 // Réviz — Tests du catalogue de thèmes (gating Réviz+)
 // -------------------------------------------------------
 import { describe, it, expect } from 'vitest'
-import { THEMES, DARK_THEMES, themeById, resolveTheme, SOMBRE_DISPONIBLE, THEMES_PROPOSES, themeAffiche } from '../themes'
+import { THEMES, DARK_THEMES, themeById, resolveTheme, SOMBRE_DISPONIBLE, THEMES_PROPOSES, themeAffiche, MODES, modeInitial, estSombre } from '../themes'
 
 describe('catalogue', () => {
   it('expose les deux thèmes gratuits et au moins 4 premium', () => {
@@ -56,12 +56,40 @@ describe('resolveTheme (repli abonnement)', () => {
     expect(themeById('nope')).toBeNull()
   })
 
-  it('sans version sombre de la refonte, les thèmes sombres ne sont ni proposés ni appliqués', () => {
-    if (SOMBRE_DISPONIBLE) return
+  it('le sombre est un mode : aucun thème sombre dans les sélecteurs', () => {
     expect(THEMES_PROPOSES.map(t => t.id)).toEqual(['light', 'abricot', 'sauge', 'prune'])
+  })
+})
+
+describe('mode Clair / Sombre / Auto', () => {
+  it('propose les trois modes', () => {
+    expect(MODES.map(m => m.id)).toEqual(['clair', 'sombre', 'auto'])
+  })
+
+  it('garde un mode mémorisé, sinon reprend un ancien thème sombre, sinon clair', () => {
+    expect(modeInitial('auto', 'light')).toBe('auto')
+    expect(modeInitial(null, 'dark')).toBe('sombre')
+    expect(modeInitial(null, 'nuit-encre')).toBe('sombre')
+    expect(modeInitial(null, 'sauge')).toBe('clair')
+    expect(modeInitial('nimporte', null)).toBe('clair')
+  })
+
+  it('Auto suit l’appareil, Sombre force, Clair jamais (quand le sombre est disponible)', () => {
+    if (!SOMBRE_DISPONIBLE) {
+      expect(estSombre('sombre', true)).toBe(false)
+      return
+    }
+    expect(estSombre('sombre', false)).toBe(true)
+    expect(estSombre('auto', true)).toBe(true)
+    expect(estSombre('auto', false)).toBe(false)
+    expect(estSombre('clair', true)).toBe(false)
+  })
+
+  it('pose « dark » en sombre, garde le thème en clair, ramène un ancien thème sombre au clair', () => {
+    expect(themeAffiche('sauge', true)).toBe('dark')
+    expect(themeAffiche('sauge')).toBe('sauge')
     expect(themeAffiche('dark')).toBe('light')
     expect(themeAffiche('nuit-encre')).toBe('light')
-    expect(themeAffiche('sauge')).toBe('sauge')
     expect(themeAffiche('light')).toBe('light')
   })
 })

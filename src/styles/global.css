@@ -67,42 +67,94 @@
 
   /* Skeleton (rv-skeleton) */
   --skeleton-shimmer: rgba(255, 255, 255, 0.6);
+
+  /* Couleurs de la refonte (« Reviz Valide ») : les pages les écrivaient en dur. Mêmes valeurs
+     qu'avant en clair ; le sombre les redéfinit plus bas. Les pastels (pêche, lavande, menthe…)
+     ne changent pas en sombre, et le texte posé dessus reste en encre fixe (#1B1A23).
+     Les -rgb servent aux transparences : rgba(var(--rv-encre-rgb), .1). */
+  --rv-fond:           #F8EFE7;
+  --rv-fond-rgb:       248,239,231;
+  --rv-carte:          #fff;
+  --rv-carte-rgb:      255,255,255;
+  --rv-carte-haute:    #fff;  /* carte posée sur un héros (bulle de Réviz, carte du jour) */
+  --rv-encre:          #1B1A23;
+  --rv-encre-rgb:      27,26,35;
+  --rv-doux:           #6E675B;
+  --rv-doux-rgb:       110,103,91;
+  --rv-ligne:          #EADBCB;
+  --rv-orange:         #C25407;  /* fond des boutons d'action (texte blanc) */
+  --rv-orange-tranche: #8F3E05;
+  --rv-orange-texte:   #C25407;  /* orange écrit sur le fond ou une carte */
+  --rv-inverse:        #1B1A23;  /* pilule ou bouton plein, texte --rv-sur-inverse */
+  --rv-sur-inverse:    #fff;
+  --rv-ombre:          120,60,20;  /* ombres brunes : rgba(var(--rv-ombre), .3) */
+  --rv-ombre-2:        160,80,20;
 }
 
 /* ─── Variables Dark ───────────────────────────────────────────── */
+/* Sombre de la refonte (piste « pastels allumés » validée le 26/10) : fond sombre neutre, cartes
+ * un ton au-dessus, pastels gardés tels quels, héros en halo de leur couleur (cf. chaque page). */
 :root[data-theme="dark"] {
-  --bg-body:        #0B0A10;
-  --bg-app:         #14121C;
-  --bg-card:        #1E1B2A;
-  --bg-subtle:      #25223A;
-  --bg-muted:       #25223A;
-  --bg-hover:       #2A2640;
-  --bg-tip:         #1E1B2A;
+  color-scheme: dark;
+  --bg-body:        #0E0D12;
+  --bg-app:         #16141A;
+  --bg-card:        #222027;
+  --bg-subtle:      #2A2730;
+  --bg-muted:       #2A2730;
+  --bg-hover:       #2A2730;
+  --bg-tip:         #222027;
 
-  --border:         #2A2640;
-  --border-subtle:  #24213A;
+  --border:         #36333D;
+  --border-subtle:  #2C2A33;
   --skeleton-shimmer: rgba(255, 255, 255, 0.07);
-  --halo-a: rgba(255, 138, 61, 0.16);
-  --halo-b: rgba(255, 201, 130, 0.14);
+  --halo-a: rgba(255, 138, 61, 0.12);
+  --halo-b: rgba(255, 201, 130, 0.08);
 
-  --text-primary:   #F2EFFA;
-  --text-secondary: #B5AECC;
-  --text-muted:     #8B83A8;
-  --text-light:     #5E5780;
+  --text-primary:   #F3F0F7;
+  --text-secondary: #C4BFCC;
+  --text-muted:     #ADA7B6;
+  --text-light:     #6F6A78;
   --text-cta:       #FFFFFF;
   --text-intro:     #FFB870;
 
-  /* Accents. En sombre, l'encre ne se voit pas : accent principal bleu
-     (4,5:1 avec du texte blanc, 4:1 sur le fond). */
-  --accent-violet:        #3B6FE8;
-  --accent-violet-hover:  #5583F0;
-  --accent-violet-soft:   #1F2A4A;
-  --accent-violet-ink:    #BFD0FF;
-  --accent-orange:        #FFA866;
+  --accent-violet:        #5B57B0;
+  --accent-violet-hover:  #6A66C0;
+  --accent-violet-soft:   #2A2740;
+  --accent-violet-ink:    #D5CFF7;
+  --accent-orange:        #FF8A3D;
   --accent-red-soft:      #3A1A22;
 
   --shadow-card:   0 4px 14px rgba(0,0,0,0.35), 0 1px 2px rgba(0,0,0,0.25);
   --shadow-shell:  0 32px 80px rgba(0,0,0,0.5);
+
+  --rv-fond:           #16141A;
+  --rv-fond-rgb:       22,20,26;
+  --rv-carte:          #222027;
+  --rv-carte-rgb:      34,32,39;
+  --rv-carte-haute:    #312E38;
+  --rv-encre:          #F3F0F7;
+  --rv-encre-rgb:      243,240,247;
+  --rv-doux:           #ADA7B6;
+  --rv-doux-rgb:       173,167,182;
+  --rv-ligne:          #36333D;
+  --rv-orange:         #C25407;
+  --rv-orange-tranche: #7A3404;
+  --rv-orange-texte:   #FF9A55;
+  --rv-inverse:        #F3F0F7;
+  --rv-sur-inverse:    #1B1A23;
+  --rv-ombre:          0,0,0;
+  --rv-ombre-2:        0,0,0;
+
+  /* Barre du bas */
+  --rv-nav-rgb:          34,32,39;
+  --rv-nav-reflet:       rgba(255,255,255,.06);
+  --rv-nav-actif-texte:  #1B1A23;
+  --rv-nav-icone:        #8E8898;
+  --rv-nav-ia:           #2A2730;
+  --rv-nav-ia-actif:     #3A2A22;
+  --rv-nav-bord:         rgba(255,255,255,.08);
+  --rv-nav-survol:       rgba(255,255,255,.08);
+  --rv-bulle-doux:       #C4BFCC;
 }
 
 /* ─── Thèmes Réviz+ (avantage abonnement) ──────────────────────────
@@ -430,11 +482,11 @@ html.native .content, html.native .pg-content, html.native .pf-content {
   height: 66px;
   margin: 0 16px 16px;
   padding: 0 7px 0 8px;
-  background: rgba(255,252,248,.82);
+  background: rgba(var(--rv-nav-rgb, 255,252,248), .82);
   -webkit-backdrop-filter: blur(18px) saturate(1.4);
   backdrop-filter: blur(18px) saturate(1.4);
   border-radius: 33px;
-  box-shadow: inset 0 1px 0 #fff, 0 0 0 1px rgba(120,60,20,.07), 0 14px 32px -10px rgba(120,60,20,.32);
+  box-shadow: inset 0 1px 0 var(--rv-nav-reflet, #fff), 0 0 0 1px rgba(var(--rv-ombre),.07), 0 14px 32px -10px rgba(var(--rv-ombre),.32);
   flex-shrink: 0;
   transform: translateY(0);
   transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -456,14 +508,14 @@ html.native .content, html.native .pg-content, html.native .pf-content {
   gap: 7px;
   border-radius: 26px;
   text-decoration: none;
-  color: #9A8F80;
+  color: var(--rv-nav-icone, #9A8F80);
   transition: color .15s, background .2s, flex .25s;
 }
 .nav-item.active {
   flex: none;
   padding: 0 16px;
-  background: #1B1A23;
-  color: #F8EFE7;
+  background: var(--rv-inverse);
+  color: var(--rv-nav-actif-texte, #F8EFE7);
 }
 .nav-icon { display: flex; align-items: center; justify-content: center; line-height: 1; }
 .nav-icon svg { width: 23px; height: 23px; }
@@ -471,7 +523,7 @@ html.native .content, html.native .pg-content, html.native .pf-content {
 .nav-label { display: none; font-size: 14px; font-weight: 700; white-space: nowrap; }
 .nav-item.active .nav-label { display: inline; }
 
-.nav-sep { width: 1px; height: 28px; background: rgba(27,26,35,.1); margin: 0 4px; flex: none; }
+.nav-sep { width: 1px; height: 28px; background: rgba(var(--rv-encre-rgb),.1); margin: 0 4px; flex: none; }
 
 /* Bouton Réviz IA : anneau conique orange → rose, étoile dégradée */
 .nav-ia {
@@ -495,13 +547,13 @@ html.native .content, html.native .pg-content, html.native .pf-content {
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  background: #FFFCF8;
+  background: var(--rv-nav-ia, #FFFCF8);
   display: flex;
   align-items: center;
   justify-content: center;
 }
 .nav-ia-core svg { width: 24px; height: 24px; transition: transform .25s; }
-.nav-ia.active .nav-ia-core { background: #FFF1E6; }
+.nav-ia.active .nav-ia-core { background: var(--rv-nav-ia-actif, #FFF1E6); }
 .nav-ia.active .nav-ia-core svg { transform: rotate(45deg) scale(1.05); }
 
 /* Spinner animation (code splitting fallback) */

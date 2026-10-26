@@ -84,6 +84,19 @@
 .rg-objectif:active { transform: translateY(3px); box-shadow: 0 2px 0 var(--rg-bord); }
 .rg-objectif.is-choisi { border-color: var(--rg-orange); background: var(--rg-orange); box-shadow: 0 5px 0 var(--rg-tranche); color: #fff; }
 
+/* Apparence : Clair / Sombre / Auto, même tranche que les choix ronds */
+.rg-modes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.rg-mode {
+  height: 46px; border: 1.5px solid var(--rg-bord); border-radius: 999px;
+  background: #fff; box-shadow: 0 4px 0 var(--rg-bord);
+  font-family: inherit; font-size: 15px; font-weight: 700; color: var(--ch-encre);
+  cursor: pointer; transition: transform .1s;
+}
+.rg-mode:active { transform: translateY(3px); box-shadow: 0 1px 0 var(--rg-bord); }
+.rg-mode.is-choisi { border-color: var(--rg-orange); background: var(--rg-orange); box-shadow: 0 4px 0 var(--rg-tranche); color: #fff; }
+.rg-mode:focus-visible { outline: 3px solid var(--ch-encre); outline-offset: 3px; }
+.rg-mode-note { margin-top: 10px; font-size: 13px; }
+
 /* Apparence : aperçus de thèmes */
 .rg-carte > .rg-sur { margin: 14px 0 10px; }
 .rg-carte > .rg-ligne + .rg-sur { margin-top: 6px; padding-top: 14px; border-top: 1.5px dashed var(--rg-bord); }
