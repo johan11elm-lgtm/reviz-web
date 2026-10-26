@@ -2,7 +2,7 @@
 // Réviz — Tests du catalogue de thèmes (gating Réviz+)
 // -------------------------------------------------------
 import { describe, it, expect } from 'vitest'
-import { THEMES, DARK_THEMES, themeById, resolveTheme, SOMBRE_DISPONIBLE, THEMES_PROPOSES, themeAffiche, MODES, modeInitial, estSombre } from '../themes'
+import { THEMES, DARK_THEMES, themeById, resolveTheme, SOMBRE_DISPONIBLE, THEMES_PROPOSES, themeAffiche, MODES, modeInitial, estSombre, sombreAuDemarrage } from '../themes'
 
 describe('catalogue', () => {
   it('expose les deux thèmes gratuits et au moins 4 premium', () => {
@@ -91,5 +91,19 @@ describe('mode Clair / Sombre / Auto', () => {
     expect(themeAffiche('dark')).toBe('light')
     expect(themeAffiche('nuit-encre')).toBe('light')
     expect(themeAffiche('light')).toBe('light')
+  })
+})
+
+describe('sombreAuDemarrage', () => {
+  it('pose « dark » avant le rendu quand le mode Sombre est choisi (si le sombre est disponible)', () => {
+    document.documentElement.removeAttribute('data-theme')
+    localStorage.setItem('reviz-mode', 'sombre')
+    sombreAuDemarrage()
+    expect(document.documentElement.getAttribute('data-theme')).toBe(SOMBRE_DISPONIBLE ? 'dark' : null)
+    localStorage.setItem('reviz-mode', 'clair')
+    document.documentElement.removeAttribute('data-theme')
+    sombreAuDemarrage()
+    expect(document.documentElement.getAttribute('data-theme')).toBeNull()
+    localStorage.removeItem('reviz-mode')
   })
 })

@@ -53,6 +53,19 @@ export function estSombre(mode, appareilSombre) {
   return mode === 'sombre' || (mode === 'auto' && appareilSombre);
 }
 
+/**
+ * Au démarrage, avant le premier rendu : pose le sombre tout de suite s'il est choisi (pas de flash
+ * clair), y compris sur les pages publiques (bienvenue…) que ThemeProvider n'enveloppe pas.
+ */
+export function sombreAuDemarrage() {
+  try {
+    const mode = modeInitial(localStorage.getItem('reviz-mode'), localStorage.getItem('reviz-theme'));
+    if (estSombre(mode, !!window.matchMedia?.('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    }
+  } catch { /* stockage indisponible : clair */ }
+}
+
 /** Thème réellement posé sur <html data-theme>. */
 export function themeAffiche(id, sombre = false) {
   if (sombre) return 'dark';

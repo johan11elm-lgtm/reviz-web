@@ -19,6 +19,9 @@ import { INTERNE } from './services/interne.js'
 import { brancherPosthog } from './services/mesure.js'
 import { ecouterInstallation, detecterPlateforme, brancherHauteurEcran } from './utils/installation.js'
 import { ecouterErreurDeChunk } from './utils/rechargement.js'
+import { sombreAuDemarrage } from './utils/themes.js'
+
+sombreAuDemarrage()
 
 // App native (Capacitor) : layout plein écran forcé quelle que soit la
 // largeur (les iPhone Pro Max à 440 pt et les iPad tomberaient sinon dans
