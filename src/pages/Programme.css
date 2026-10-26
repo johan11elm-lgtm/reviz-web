@@ -2,7 +2,7 @@
  * Héros pêche avec Réviz qui parle, carte des leçons scannées à cheval,
  * matières en anneaux, chapitres sur une route en vague. Bulle et carte
  * viennent de components/reviz ; ici, leur place et le reste de la page. */
-.prg-page { --prg-encre: #1B1A23; --prg-doux: #6E675B; --prg-fond: #F8EFE7; background: var(--prg-fond); }
+.prg-page { --prg-encre: var(--rv-encre); --prg-doux: var(--rv-doux); --prg-fond: var(--rv-fond); background: var(--prg-fond); }
 .prg-page .prg-defile {
   flex: 1;
   overflow-y: auto;
@@ -34,7 +34,7 @@
   position: absolute;
   border-radius: 50%;
   background: #FFC596;
-  box-shadow: inset 0 -24px 40px rgba(120,60,20,.08), inset 0 16px 30px rgba(255,255,255,.35);
+  box-shadow: inset 0 -24px 40px rgba(var(--rv-ombre),.08), inset 0 16px 30px rgba(255,255,255,.35);
 }
 .prg-page .prg-deco--a { right: -70px; top: calc(150px + env(safe-area-inset-top, 0px)); width: 240px; height: 240px; }
 .prg-page .prg-deco--b { left: -50px; top: calc(270px + env(safe-area-inset-top, 0px)); width: 140px; height: 140px; }
@@ -46,7 +46,7 @@
   height: 46px;
   border-radius: 50%;
   background: #C9C2F2;
-  box-shadow: inset 0 -8px 14px rgba(0,0,0,.08), 0 8px 16px -6px rgba(120,60,20,.25);
+  box-shadow: inset 0 -8px 14px rgba(0,0,0,.08), 0 8px 16px -6px rgba(var(--rv-ombre),.25);
 }
 
 .prg-page .prg-hero-haut { position: relative; z-index: 2; }
@@ -56,7 +56,7 @@
   font-weight: 700;
   letter-spacing: .4px;
   text-transform: uppercase;
-  color: rgba(27,26,35,.62);
+  color: rgba(var(--rv-encre-rgb),.62);
 }
 .prg-page .prg-hero-titre { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
 .prg-page .prg-titre {
@@ -73,7 +73,7 @@
   padding: 8px 12px;
   border: 0;
   border-radius: 999px;
-  background: #fff;
+  background: var(--rv-carte);
   box-shadow: 0 4px 12px rgba(150,70,20,.12);
   font: 700 13px 'Geist', system-ui, sans-serif;
   color: var(--prg-encre);
@@ -90,8 +90,8 @@
   padding: 6px;
   list-style: none;
   border-radius: 18px;
-  background: #fff;
-  box-shadow: 0 16px 36px rgba(120,60,20,.22);
+  background: var(--rv-carte);
+  box-shadow: 0 16px 36px rgba(var(--rv-ombre),.22);
 }
 .prg-page .prg-choix-liste button {
   width: 100%;
@@ -162,15 +162,15 @@
   position: absolute;
   inset: 7px;
   border-radius: 50%;
-  background: #fff;
-  box-shadow: 0 4px 10px rgba(160,80,20,.08);
+  background: var(--rv-carte);
+  box-shadow: 0 4px 10px rgba(var(--rv-ombre-2),.08);
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
   transition: background .2s, box-shadow .2s, transform .15s;
 }
-.prg-page .prg-matiere--on .prg-anneau-rond { background: #FFE6D2; box-shadow: 0 0 0 2px #fff, 0 6px 14px rgba(160,80,20,.18); }
+.prg-page .prg-matiere--on .prg-anneau-rond { background: #FFE6D2; box-shadow: 0 0 0 2px var(--rv-carte), 0 6px 14px rgba(var(--rv-ombre-2),.18); }
 .prg-page .prg-matiere:active .prg-anneau-rond { transform: scale(.94); }
 .prg-page .prg-matiere-nom { font-size: 13px; font-weight: 700; line-height: 1.1; text-align: center; color: var(--prg-doux); }
 .prg-page .prg-matiere--on .prg-matiere-nom { color: var(--prg-encre); }
@@ -199,7 +199,7 @@
   justify-content: center;
   padding: 0;
   border-radius: 50%;
-  border: 3px solid #fff;
+  border: 3px solid var(--rv-carte);
   background: #FFE6D2;
   box-shadow: 0 6px 0 rgba(194,84,7,.28);
   cursor: pointer;
@@ -208,11 +208,11 @@
 }
 .prg-page .prg-case:active { transform: translateY(3px); box-shadow: 0 3px 0 rgba(194,84,7,.28); }
 .prg-page .prg-case--done { background: #34C77B; box-shadow: 0 6px 0 #1F8A52; }
-.prg-page .prg-case--current { background: #fff; border: 4px solid #C25407; box-shadow: 0 6px 0 #8F3E05; }
+.prg-page .prg-case--current { background: var(--rv-carte); border: 4px solid var(--rv-orange); box-shadow: 0 6px 0 var(--rv-orange-tranche); }
 .prg-page .prg-case--choisie:not(.prg-case--current) { border: 3px solid var(--prg-encre); }
 .prg-page .prg-case:focus-visible { outline: 3px solid var(--prg-encre); outline-offset: 3px; }
 .prg-page .prg-case-rond { display: flex; align-items: center; justify-content: center; border-radius: 50%; background: #FFE6D2; overflow: hidden; }
-.prg-page .prg-case-num { font-family: var(--font-display); font-size: 20px; font-weight: 800; color: var(--prg-doux); }
+.prg-page .prg-case-num { font-family: var(--font-display); font-size: 20px; font-weight: 800; color: #6E675B; }
 .prg-page .prg-case--commence .prg-case-num,
 .prg-page .prg-case--a-revoir .prg-case-num { color: #C25407; }
 .prg-page .prg-case-label { position: absolute; display: flex; flex-direction: column; align-items: center; text-align: center; pointer-events: none; }
@@ -240,8 +240,8 @@
   position: relative;
   padding: 16px;
   border-radius: 24px;
-  background: #fff;
-  box-shadow: 0 12px 30px rgba(160,80,20,.14);
+  background: var(--rv-carte);
+  box-shadow: 0 12px 30px rgba(var(--rv-ombre-2),.14);
 }
 .prg-page .prg-detail-haut { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
 .prg-page .prg-detail-etat { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
@@ -262,7 +262,7 @@
   height: 46px;
   border: 0;
   border-radius: 999px;
-  background: #C25407;
+  background: var(--rv-orange);
   color: #fff;
   font: 700 15px 'Geist', system-ui, sans-serif;
   cursor: pointer;
@@ -280,14 +280,14 @@
   border: 0;
   border-radius: 999px;
   background: #FFE6D2;
-  color: var(--prg-encre);
+  color: #1B1A23;
   font: 700 14px 'Geist', system-ui, sans-serif;
   cursor: pointer;
 }
 
 /* ─── Ordinateur : héros de l'accueil (titre en haut à gauche, Réviz et sa bulle centrés) ─── */
 .prg-page--large .prg-hero { height: auto; margin-top: 0; padding: 32px 56px 72px; border-radius: 0 0 50% 50% / 0 0 80px 80px; }
-.prg-page--large .prg-deco--a { right: 18%; top: -120px; width: 520px; height: 520px; box-shadow: inset 0 -40px 60px rgba(120,60,20,.08), inset 0 24px 40px rgba(255,255,255,.35); }
+.prg-page--large .prg-deco--a { right: 18%; top: -120px; width: 520px; height: 520px; box-shadow: inset 0 -40px 60px rgba(var(--rv-ombre),.08), inset 0 24px 40px rgba(255,255,255,.35); }
 .prg-page--large .prg-deco--b { left: -70px; top: 260px; width: 260px; height: 260px; box-shadow: none; }
 .prg-page--large .prg-point { left: auto; right: 12%; top: 380px; width: 18px; height: 18px; box-shadow: none; }
 /* La rangée du titre laisse libre le coin du menu (NavHaut). */
@@ -330,12 +330,12 @@
   overflow: visible;
   padding: 24px 12px;
   border-radius: 28px;
-  background: #fff;
-  box-shadow: 0 12px 30px rgba(160,80,20,.10);
+  background: var(--rv-carte);
+  box-shadow: 0 12px 30px rgba(var(--rv-ombre-2),.10);
 }
 .prg-page--large .prg-matiere { width: auto; gap: 8px; }
 .prg-page--large .prg-anneau-rond { inset: 8px; background: var(--prg-fond); box-shadow: none; }
-.prg-page--large .prg-matiere--on .prg-anneau-rond { background: #FFE6D2; box-shadow: 0 0 0 2px #fff, 0 6px 14px rgba(160,80,20,.18); }
+.prg-page--large .prg-matiere--on .prg-anneau-rond { background: #FFE6D2; box-shadow: 0 0 0 2px var(--rv-carte), 0 6px 14px rgba(var(--rv-ombre-2),.18); }
 .prg-page--large .prg-matiere-nom { font-size: 14px; }
 .prg-page--large .prg-matiere-pct { font-size: 13px; }
 .prg-page--large .prg-matiere:hover .prg-anneau-rond { transform: translateY(-2px); }
@@ -353,7 +353,7 @@
   left: calc(var(--pointe) - 10px);
   width: 20px;
   height: 20px;
-  background: #fff;
+  background: var(--rv-carte);
   border-radius: 3px;
   transform: rotate(45deg);
   transition: left .25s cubic-bezier(.3,1.3,.5,1);
@@ -365,7 +365,7 @@
 .prg-page--large .prg-detail-contenu { font-size: 14px; }
 .prg-page--large .prg-detail-actions { margin-top: 16px; gap: 10px; }
 .prg-page--large .prg-go { flex: none; height: 48px; padding: 0 28px; }
-.prg-page--large .prg-go:not(:disabled):hover { background: #8F3E05; }
+.prg-page--large .prg-go:not(:disabled):hover { background: var(--rv-orange-tranche); }
 .prg-page--large .prg-scanner { height: 48px; padding: 0 18px; }
 
 /* Assez large : matières à gauche, chapitres à droite */
@@ -373,3 +373,12 @@
   .prg-page--large .prg-grille { grid-template-columns: 360px minmax(0, 1fr); gap: 48px; }
   .prg-page--large .prg-matieres { grid-template-columns: repeat(3, 1fr); }
 }
+
+/* ── Sombre : héros en halo pêche (cf. accueil) ── */
+:root[data-theme="dark"] .prg-page .prg-hero {
+  background: var(--rv-carte);
+  background: radial-gradient(62% 52% at 50% 60%, color-mix(in srgb, #FFB37A 46%, transparent) 0%, color-mix(in srgb, #FFB37A 16%, transparent) 55%, transparent 82%), var(--rv-carte);
+}
+:root[data-theme="dark"] .prg-page .prg-deco { background: color-mix(in srgb, #FFC596 10%, transparent); box-shadow: none; }
+:root[data-theme="dark"] .prg-page .prg-point { background: color-mix(in srgb, #C9C2F2 22%, transparent); box-shadow: none; }
+:root[data-theme="dark"] .prg-page .prg-grain { opacity: .5; mix-blend-mode: soft-light; }

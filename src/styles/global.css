@@ -82,9 +82,11 @@
   --rv-doux:           #6E675B;
   --rv-doux-rgb:       110,103,91;
   --rv-ligne:          #EADBCB;
+  --rv-piste:          #F3E6D8;  /* rail vide d'une barre de progression */
   --rv-orange:         #C25407;  /* fond des boutons d'action (texte blanc) */
   --rv-orange-tranche: #8F3E05;
   --rv-orange-texte:   #C25407;  /* orange écrit sur le fond ou une carte */
+  --rv-vert-texte:     #1F8A52;
   --rv-inverse:        #1B1A23;  /* pilule ou bouton plein, texte --rv-sur-inverse */
   --rv-sur-inverse:    #fff;
   --rv-ombre:          120,60,20;  /* ombres brunes : rgba(var(--rv-ombre), .3) */
@@ -137,9 +139,11 @@
   --rv-doux:           #ADA7B6;
   --rv-doux-rgb:       173,167,182;
   --rv-ligne:          #36333D;
+  --rv-piste:          #34313B;
   --rv-orange:         #C25407;
   --rv-orange-tranche: #7A3404;
   --rv-orange-texte:   #FF9A55;
+  --rv-vert-texte:     #6BDA9B;
   --rv-inverse:        #F3F0F7;
   --rv-sur-inverse:    #1B1A23;
   --rv-ombre:          0,0,0;
