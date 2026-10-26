@@ -78,6 +78,15 @@ describe.each(CASES)('$name — email vérifié obligatoire', ({ handler, body }
     expect(anthropicFetch).not.toHaveBeenCalled()
   })
 
+  it('refuse (401) un compte anonyme (invité de la Battle), sans quota ni appel IA', async () => {
+    verifyIdToken.mockResolvedValue({ uid: 'anon1', firebase: { sign_in_provider: 'anonymous' } })
+    const res = mockRes()
+    await handler({ method: 'POST', body: { ...body, idToken: 'good' } }, res)
+    expect(res.statusCode).toBe(401)
+    expect(consumeQuota).not.toHaveBeenCalled()
+    expect(anthropicFetch).not.toHaveBeenCalled()
+  })
+
   it('email non vérifié : le scan d’essai passe, compté comme tel', async () => {
     verifyIdToken.mockResolvedValue({ uid: 'u1', email_verified: false })
     consumeQuota.mockResolvedValue({ allowed: true })

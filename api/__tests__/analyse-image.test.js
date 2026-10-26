@@ -64,6 +64,15 @@ describe('analyse-image — garde de taille d’image', () => {
     expect(anthropicFetch).not.toHaveBeenCalled()
   })
 
+  it('refuse (401) un compte anonyme (invité de la Battle), sans quota ni appel IA', async () => {
+    verifyIdToken.mockResolvedValue({ uid: 'anon1', firebase: { sign_in_provider: 'anonymous' } })
+    const res = mockRes()
+    await handler({ method: 'POST', body: { ...base, imageData: 'a'.repeat(1000) } }, res)
+    expect(res.statusCode).toBe(401)
+    expect(consumeQuota).not.toHaveBeenCalled()
+    expect(anthropicFetch).not.toHaveBeenCalled()
+  })
+
   it('laisse passer (200) une image normale (bien sous le plafond)', async () => {
     verifyIdToken.mockResolvedValue({ uid: 'u1', email_verified: true })
     anthropicFetch.mockResolvedValue({

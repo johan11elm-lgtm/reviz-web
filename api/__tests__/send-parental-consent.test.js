@@ -20,7 +20,7 @@ vi.mock('resend', () => ({
   Resend: class { constructor() { this.emails = { send: emailsSend } } },
 }))
 
-const { default: handler, relancerParents, relancerEleves, RELANCE_APRES_MS } = await import('../send-parental-consent.js')
+const { default: handler, relancerParents, relancerEleves, RELANCE_APRES_MS, prenomPourEmail } = await import('../send-parental-consent.js')
 
 function mockRes() {
   return {
@@ -120,7 +120,19 @@ describe('send-parental-consent — sécurité', () => {
     await handler({ method: 'POST', body: { idToken: 'ok', parentEmail: 'parent@test.fr', childName: '<img src=x onerror=alert(1)>' } }, res)
     const html = emailsSend.mock.calls[0][0].html
     expect(html).not.toContain('<img src=x')
-    expect(html).toContain('&lt;img')
+    expect(html).not.toContain('onerror=')
+  })
+
+  it('ne laisse pas un texte libre (lien, phrase) passer pour un prénom', async () => {
+    verifyIdToken.mockResolvedValue({ uid: 'u1', email: 'kid@test.fr' })
+    docGet.mockResolvedValue({ exists: false })
+    const res = mockRes()
+    const childName = 'Votre compte est bloqué, allez sur https://arnaque.example/login'
+    await handler({ method: 'POST', body: { idToken: 'ok', parentEmail: 'parent@test.fr', childName } }, res)
+    const html = emailsSend.mock.calls[0][0].html
+    expect(html).not.toContain('arnaque')
+    expect(html).not.toContain('https://arnaque')
+    expect(html).toContain('<strong>Votre compte est blo</strong>')
   })
 
   it('ne réinitialise pas un consentement déjà approuvé (anti-lockout)', async () => {
@@ -276,5 +288,20 @@ describe('send-parental-consent — relance des élèves sans email parent (cron
     const envoyer = vi.fn(async () => { throw new Error('resend down') })
     expect(await relancerEleves({ db, envoyer, emailDe, maintenant: now })).toEqual({ relancesEleves: 0 })
     expect(db.docs[0].ref.update).not.toHaveBeenCalled()
+  })
+})
+
+describe('prenomPourEmail', () => {
+  it('garde un prénom composé avec accents, tiret et apostrophe', () => {
+    expect(prenomPourEmail('  Marie-Ève  ')).toBe('Marie-Ève')
+    expect(prenomPourEmail("N'Golo")).toBe("N'Golo")
+  })
+  it('retire chiffres, ponctuation, liens et coupe à 20 caractères', () => {
+    expect(prenomPourEmail('www.arnaque.fr')).toBe('wwwarnaquefr')
+    expect(prenomPourEmail('a'.repeat(50))).toHaveLength(20)
+  })
+  it('renvoie null quand il ne reste rien', () => {
+    expect(prenomPourEmail('<>123')).toBeNull()
+    expect(prenomPourEmail(undefined)).toBeNull()
   })
 })

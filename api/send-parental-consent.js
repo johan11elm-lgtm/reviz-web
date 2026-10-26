@@ -37,11 +37,25 @@ function escapeHtml(s) {
   ));
 }
 
+/**
+ * Prénom affiché dans les e-mails : il vient du client (corps de la requête
+ * ou profil users/{uid}, modifiable par l'élève), donc on n'en
+ * garde que des lettres, espaces, tirets et apostrophes, 20 caractères au plus.
+ * Sinon n'importe quel compte enverrait le texte de son choix (lien compris)
+ * signé noreply@revizapp.fr.
+ */
+export function prenomPourEmail(brut) {
+  const propre = String(brut ?? '').normalize('NFC')
+    .replace(/[^\p{L}\p{M} '’-]/gu, '')
+    .replace(/\s+/g, ' ').trim().slice(0, 20).trim();
+  return propre || null;
+}
+
 const lienAutorisation = (token, uid) => `https://app.revizapp.fr/api/approve-consent?token=${token}&uid=${uid}`;
 
 /** Email au parent : première demande, ou relance (avec les jours restants). */
 export function mailParent({ prenom, lien, joursRestants = null }) {
-  const safeName = escapeHtml(prenom || 'Votre enfant');
+  const safeName = escapeHtml(prenomPourEmail(prenom) || 'Votre enfant');
   const relance = joursRestants != null;
   const jours = `${joursRestants} jour${joursRestants > 1 ? 's' : ''}`;
   return {
@@ -119,7 +133,7 @@ export async function relancerParents({ db, envoyer, maintenant = Date.now() }) 
 
 /** Email à l'élève qui n'a pas encore donné l'adresse d'un parent. */
 export function mailEleve({ prenom, joursRestants }) {
-  const safeName = escapeHtml(prenom || '');
+  const safeName = escapeHtml(prenomPourEmail(prenom) || '');
   const dernier = joursRestants <= 1;
   const jours = `${joursRestants} jour${joursRestants > 1 ? 's' : ''}`;
   return {
