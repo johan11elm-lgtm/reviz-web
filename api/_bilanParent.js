@@ -45,6 +45,17 @@ export function lienDesaboParent(uid, secret = process.env.CRON_SECRET) {
   return t ? `${APP}/api/track?op=desabonner&qui=parent&uid=${encodeURIComponent(uid)}&t=${t}` : null
 }
 
+/**
+ * Date en millisecondes. users/{uid}.createdAt est un Timestamp Firestore
+ * (serverTimestamp, src/services/userProfileService.js) ; d'anciens comptes
+ * gardent un nombre (Date.now()).
+ */
+export function enMs(v) {
+  if (Number.isFinite(v)) return v
+  const ms = typeof v?.toMillis === 'function' ? v.toMillis() : NaN
+  return Number.isFinite(ms) ? ms : null
+}
+
 const FORMATS = { quiz: 'quiz', flashcards: 'flashcards', resume: 'résumé', mindmap: 'carte mentale' }
 
 /**
@@ -263,8 +274,8 @@ export async function envoyerBilansParent({ db, envoyer, lienAutorisation, auth 
       if (!profil.exists) continue
       const u = profil.data() ?? {}
       if (u.bilanParentLe || u.bilansParent === false) continue
-      const depuis = u.createdAt
-      if (!Number.isFinite(depuis)) continue
+      const depuis = enMs(u.createdAt)
+      if (depuis == null) continue
       const age = maintenant - depuis
       if (age < AGE_MIN_MS || age >= AGE_MAX_MS) continue
       if (auth?.getUser) {
