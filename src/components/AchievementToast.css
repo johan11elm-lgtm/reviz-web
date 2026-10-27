@@ -4,14 +4,24 @@
   position: fixed; z-index: 450; top: 0; left: 50%;
   display: flex; align-items: center; gap: 12px;
   width: max-content; min-width: 240px; max-width: calc(100vw - 32px); box-sizing: border-box;
-  padding: 10px 20px 10px 10px; border-radius: 24px; background: #fff;
-  box-shadow: 0 14px 36px rgba(160,80,20,.22);
+  padding: 10px 20px 10px 10px; border-radius: 24px; background: var(--rv-carte);
+  box-shadow: 0 14px 36px rgba(var(--rv-ombre-2),.22);
   transform: translate(-50%, -120%);
   transition: transform .4s cubic-bezier(.3,1.4,.5,1);
 }
 .achievement-toast--visible { transform: translate(-50%, calc(16px + env(safe-area-inset-top, 0px))); }
-.achievement-rond { flex: none; display: flex; align-items: center; justify-content: center; width: 58px; height: 58px; overflow: hidden; border-radius: 50%; background: #FFE6D2; box-shadow: 0 3px 0 #FFC596; }
+.achievement-rond { flex: none; display: flex; align-items: center; justify-content: center; width: 58px; height: 58px; overflow: hidden; border-radius: 50%; background: var(--rv-peche-pale); box-shadow: 0 3px 0 var(--rv-peche-bulle); }
 .achievement-info { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
-.achievement-label { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #C25407; }
-.achievement-name { font-family: var(--font-display); font-size: 18px; font-weight: 800; letter-spacing: -.02em; line-height: 1.15; color: #1B1A23; }
+.achievement-label { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--rv-orange-texte); }
+.achievement-name { font-family: var(--font-display); font-size: 18px; font-weight: 800; letter-spacing: -.02em; line-height: 1.15; color: var(--rv-encre); }
 @media (prefers-reduced-motion: reduce) { .achievement-toast { transition: none; } }
+
+/* ── Sombre : ces pastels gardent leur texte sombre (cf. rv-ilot dans global.css) ── */
+:root[data-theme="dark"] .achievement-rond {
+  --rv-encre: #1B1A23; --rv-encre-rgb: 27,26,35; --rv-doux: #6E675B; --rv-doux-rgb: 110,103,91;
+  --rv-carte: #fff; --rv-carte-rgb: 255,255,255; --rv-carte-haute: #fff; --rv-ligne: #EADBCB; --rv-piste: #F3E6D8;
+  --rv-orange-texte: #C25407; --rv-vert-texte: #1F8A52; --rv-brun-texte: #8F3E05;
+  --ch-encre: #1B1A23; --ch-doux: #6E675B; --bt-encre: #1B1A23; --bt-doux: #6E675B; --en-encre: #1B1A23; --en-doux: #6E675B; --hb-encre: #1B1A23; --hb-doux: #6E675B;
+  --hm-encre: #1B1A23; --hm-doux: #6E675B; --inst-encre: #1B1A23; --inst-doux: #6E675B; --lg-encre: #1B1A23; --lg-doux: #6E675B; --prg-encre: #1B1A23; --prg-doux: #6E675B;
+  color: #1B1A23;
+}

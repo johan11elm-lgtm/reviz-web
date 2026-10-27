@@ -15,14 +15,19 @@
 //   servent qu'aux statistiques (mesure d'audience exemptée de consentement,
 //   CNIL) et sont purgées après 13 mois sans révision (api/battle-nettoyage.js).
 // - ?op=desabonner&uid=…&t=… (GET depuis l'e-mail, POST en un clic depuis la
-//   messagerie) : plus de rappel par e-mail pour ce compte (api/_rappels.js).
+//   messagerie) : plus de rappel par e-mail pour ce compte (api/_rappels.js) ;
+//   avec &qui=parent, plus de bilan au parent (api/_bilanParent.js).
+// - ?op=push (POST / DELETE, jeton Firebase) : abonnement aux notifications web
+//   de ce navigateur (api/_push.js).
 // -------------------------------------------------------
 import { FieldValue } from 'firebase-admin/firestore'
-import { getDb } from './_firebaseAdmin.js'
+import { getDb, getAuthAdmin } from './_firebaseAdmin.js'
 import { CODES_VIDEO } from '../src/utils/codesVideo.js'
 import { RAISONS_ILLISIBLE, RAISONS_NON_SCOLAIRE } from '../src/utils/aiPrompts.js'
 import { signatureValide } from './_rappels.js'
+import { PORTEE_DESABO } from './_bilanParent.js'
 import { ESSAI_ID_RE, CHAPITRE_ID_RE } from '../src/utils/retour.js'
+import { routeAbonnement } from './_push.js'
 
 export const EVENTS = [
   'essai_demarre', 'compte_cree', 'programme_ouvert', 'chapitre_ouvert', 'revision', 'quiz_termine',
@@ -64,7 +69,7 @@ const ALLOWED = {
   // d'une fiche publique du site, d'une vidéo) : d'où vient l'élève, sans rien
   // identifier. « reseaux » : vidéo publiée à la fois sur TikTok et Instagram ;
   // « rappel » : e-mail du lendemain de la première session.
-  via: ['tiktok', 'instagram', 'reseaux', 'pinterest', 'youtube', 'affiche', 'landing', 'fiche', 'rappel'],
+  via: ['tiktok', 'instagram', 'reseaux', 'pinterest', 'youtube', 'affiche', 'landing', 'fiche', 'rappel', 'push'],
   // Vidéo d'origine (adresse courte revizapp.fr/<code>) : seulement les codes
   // du tableau src/utils/codesVideo.js.
   v: Object.keys(CODES_VIDEO),
@@ -144,32 +149,52 @@ const page = corps => `<!doctype html><html lang="fr"><head><meta charset="utf-8
 
 const escAttr = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]))
 
+// Ce que coupe le lien : les rappels à l'élève, ou (qui=parent) le bilan au parent.
+// Chaque lien est signé pour sa portée : l'un ne désinscrit jamais de l'autre.
+const DESABO = {
+  eleve: {
+    portee: 'rappels', champ: { rappels: false }, suffixe: '',
+    question: 'Tu ne veux plus recevoir de rappel de révision par e-mail ?', bouton: 'Ne plus recevoir de rappels',
+    fait: 'C\'est noté : tu ne recevras plus de rappel de révision par e-mail.</p>\n<p><a href="https://app.revizapp.fr/" style="color:#1A1A1A">Ouvrir Réviz</a>',
+  },
+  parent: {
+    portee: PORTEE_DESABO, champ: { bilansParent: false }, suffixe: '&qui=parent',
+    question: 'Vous ne voulez plus recevoir le bilan de révision de votre enfant ?', bouton: 'Ne plus recevoir de bilan',
+    fait: 'C\'est noté : vous ne recevrez plus de bilan de révision par e-mail. Votre enfant garde son compte Réviz.',
+  },
+}
+
 // GET : page de confirmation qui NE MODIFIE RIEN (les messageries ouvrent
 // les liens d'un e-mail pour les analyser) ; POST : désinscription, depuis
 // le bouton de la page ou le désabonnement en un clic de la messagerie (RFC 8058).
 async function desabonner(req, res) {
   const uid = req.query?.uid
   const t = req.query?.t
-  if (typeof uid !== 'string' || !/^[A-Za-z0-9]{10,128}$/.test(uid) || !signatureValide(uid, t)) {
+  const d = req.query?.qui === 'parent' ? DESABO.parent : DESABO.eleve
+  if (typeof uid !== 'string' || !/^[A-Za-z0-9]{10,128}$/.test(uid) || !signatureValide(uid, t, undefined, d.portee)) {
     return res.status(400).send('Lien invalide')
   }
   res.setHeader?.('Content-Type', 'text/html; charset=utf-8')
   if (req.method === 'GET') {
-    const action = `/api/track?op=desabonner&uid=${encodeURIComponent(uid)}&t=${escAttr(t)}`
-    return res.status(200).send(page(`<p style="font-size:16px;line-height:1.5;color:#444">Tu ne veux plus recevoir de rappel de révision par e-mail ?</p>
-<form method="post" action="${action}"><button type="submit" style="background:#1A1A1A;color:#fff;border:0;padding:14px 28px;border-radius:10px;font-weight:600;font-size:15px">Ne plus recevoir de rappels</button></form>`))
+    const action = `/api/track?op=desabonner${d.suffixe}&uid=${encodeURIComponent(uid)}&t=${escAttr(t)}`
+    return res.status(200).send(page(`<p style="font-size:16px;line-height:1.5;color:#444">${d.question}</p>
+<form method="post" action="${action}"><button type="submit" style="background:#1A1A1A;color:#fff;border:0;padding:14px 28px;border-radius:10px;font-weight:600;font-size:15px">${d.bouton}</button></form>`))
   }
   try {
-    await getDb().collection('users').doc(uid).set({ rappels: false }, { merge: true })
+    await getDb().collection('users').doc(uid).set(d.champ, { merge: true })
   } catch {
     return res.status(500).send('Error')
   }
-  return res.status(200).send(page(`<p style="font-size:16px;line-height:1.5;color:#444">C'est noté : tu ne recevras plus de rappel de révision par e-mail.</p>
-<p><a href="https://app.revizapp.fr/" style="color:#1A1A1A">Ouvrir Réviz</a></p>`))
+  return res.status(200).send(page(`<p style="font-size:16px;line-height:1.5;color:#444">${d.fait}</p>`))
 }
 
 export default async function handler(req, res) {
   if (req.query?.op === 'desabonner' && (req.method === 'GET' || req.method === 'POST')) return desabonner(req, res)
+  // Notifications web : abonnement (POST) ou désabonnement (DELETE) d'un navigateur (api/_push.js).
+  if (req.query?.op === 'push' && (req.method === 'POST' || req.method === 'DELETE')) {
+    try { return await routeAbonnement(req, res, { db: getDb(), auth: getAuthAdmin() }) }
+    catch (err) { console.error('[push]', err?.message || err); return res.status(500).json({ error: 'INTERNAL' }) }
+  }
   if (req.method !== 'POST') return res.status(405).send('Method not allowed')
   let body = req.body
   if (typeof body === 'string') {

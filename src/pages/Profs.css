@@ -2,9 +2,9 @@
  * héros lavande + grain, Réviz qui fait coucou, deux cartes (découvrir une classe, donner son
  * avis). Ordinateur : colonne de 640 px dans un conteneur de 1040 px, Réviz à droite. */
 .pr-page {
-  --pr-orange: #C25407; --pr-tranche: #8F3E05;
+  --pr-orange: var(--rv-orange); --pr-tranche: var(--rv-orange-tranche);
   min-height: 100dvh;
-  background: #F8EFE7;
+  background: var(--rv-fond);
   color: var(--ch-encre);
 }
 .pr-page .pr-defile {
@@ -39,15 +39,15 @@
 .pr-carte {
   display: grid; grid-template-columns: 60px minmax(0, 1fr); grid-template-areas: 'icone titre' 'texte texte' 'action action';
   align-items: center; column-gap: 14px;
-  padding: 20px; border-radius: 26px; background: #fff; box-shadow: 0 12px 30px rgba(160,80,20,.1);
+  padding: 20px; border-radius: 26px; background: var(--rv-carte); box-shadow: 0 12px 30px rgba(var(--rv-ombre-2),.1);
 }
 .pr-icone {
   grid-area: icone;
   display: flex; align-items: center; justify-content: center;
   width: 60px; height: 60px; border-radius: 18px; overflow: hidden;
 }
-.pr-icone--peche { background: #FFE6D2; }
-.pr-icone--lavande { background: #E4E0FA; }
+.pr-icone--peche { background: var(--rv-peche-pale); }
+.pr-icone--lavande { background: var(--rv-lavande); }
 .pr-carte-titre { grid-area: titre; margin: 0; font-family: var(--font-display); font-size: 20px; font-weight: 800; letter-spacing: -.02em; color: var(--ch-encre); }
 .pr-carte-texte { grid-area: texte; margin: 14px 0 0; font-size: 15px; font-weight: 500; line-height: 1.5; color: var(--ch-doux); }
 .pr-action { grid-area: action; margin-top: 18px; }
@@ -60,10 +60,10 @@
   font-family: var(--font-display); font-size: 22px; font-weight: 800; color: var(--ch-encre); text-decoration: none;
   transition: transform .08s, box-shadow .08s;
 }
-.pr-classe--lavande { background: #E4E0FA; --pr-t: #C9C2F2; }
-.pr-classe--peche { background: #FFE6D2; --pr-t: #FFC596; }
-.pr-classe--rose { background: #FFD9E4; --pr-t: #F4B8CB; }
-.pr-classe--menthe { background: #DCF5E6; --pr-t: #A8E3C2; }
+.pr-classe--lavande { background: var(--rv-lavande); --pr-t: var(--rv-lavande-bulle); }
+.pr-classe--peche { background: var(--rv-peche-pale); --pr-t: var(--rv-peche-bulle); }
+.pr-classe--rose { background: var(--rv-rose); --pr-t: var(--rv-rose-tranche); }
+.pr-classe--menthe { background: var(--rv-menthe); --pr-t: var(--rv-menthe-tranche); }
 .pr-classe { box-shadow: 0 5px 0 var(--pr-t); }
 .pr-classe:active { transform: translateY(4px); box-shadow: 0 1px 0 var(--pr-t); }
 .pr-classe:focus-visible, .pr-btn:focus-visible { outline: 3px solid var(--ch-encre); outline-offset: 3px; }
@@ -78,7 +78,7 @@
 .pr-btn:active { transform: translateY(4px); box-shadow: 0 1px 0 var(--pr-tranche); }
 
 .pr-note { display: flex; align-items: flex-start; gap: 10px; margin: 4px 8px 0; font-size: 13.5px; font-weight: 600; line-height: 1.45; color: var(--ch-doux); }
-.pr-note::before { content: ''; flex: none; width: 8px; height: 8px; margin-top: 6px; border-radius: 50%; background: #C9C2F2; }
+.pr-note::before { content: ''; flex: none; width: 8px; height: 8px; margin-top: 6px; border-radius: 50%; background: var(--rv-lavande-bulle); }
 
 /* ── Ordinateur ── */
 .pr-page--large .pr-defile { padding-bottom: 64px; }
@@ -118,4 +118,19 @@
 }
 @media (max-width: 360px) {
   .pr-classe { height: 54px; font-size: 20px; }
+}
+
+/* ── Sombre : ces pastels gardent leur texte sombre (cf. rv-ilot dans global.css) ── */
+:root[data-theme="dark"] .pr-icone--peche,
+:root[data-theme="dark"] .pr-icone--lavande,
+:root[data-theme="dark"] .pr-classe--lavande,
+:root[data-theme="dark"] .pr-classe--peche,
+:root[data-theme="dark"] .pr-classe--rose,
+:root[data-theme="dark"] .pr-classe--menthe {
+  --rv-encre: #1B1A23; --rv-encre-rgb: 27,26,35; --rv-doux: #6E675B; --rv-doux-rgb: 110,103,91;
+  --rv-carte: #fff; --rv-carte-rgb: 255,255,255; --rv-carte-haute: #fff; --rv-ligne: #EADBCB; --rv-piste: #F3E6D8;
+  --rv-orange-texte: #C25407; --rv-vert-texte: #1F8A52; --rv-brun-texte: #8F3E05;
+  --ch-encre: #1B1A23; --ch-doux: #6E675B; --bt-encre: #1B1A23; --bt-doux: #6E675B; --en-encre: #1B1A23; --en-doux: #6E675B; --hb-encre: #1B1A23; --hb-doux: #6E675B;
+  --hm-encre: #1B1A23; --hm-doux: #6E675B; --inst-encre: #1B1A23; --inst-doux: #6E675B; --lg-encre: #1B1A23; --lg-doux: #6E675B; --prg-encre: #1B1A23; --prg-doux: #6E675B;
+  color: #1B1A23;
 }

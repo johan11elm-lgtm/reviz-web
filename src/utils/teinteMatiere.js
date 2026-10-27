@@ -4,10 +4,10 @@
  * et ombre teintée. Maths en lavande ; pêche comme Programme ; menthe et rose.
  */
 export const TEINTES = {
-  lavande: { fond: '#E4E0FA', bulle: '#C9C2F2', point: '#FFB37A', interieur: '#E4E0FA', ombre: 'rgba(90,70,160,.13)' },
-  peche:   { fond: '#FFB37A', bulle: '#FFC596', point: '#C9C2F2', interieur: '#FFE6D2', ombre: 'rgba(150,70,20,.14)' },
-  menthe:  { fond: '#DCF5E6', bulle: '#B9E8C9', point: '#FFB37A', interieur: '#DCF5E6', ombre: 'rgba(30,110,70,.13)' },
-  rose:    { fond: '#FFD9E4', bulle: '#FFC2D4', point: '#C9C2F2', interieur: '#FFD9E4', ombre: 'rgba(160,60,90,.13)' },
+  lavande: { fond: 'var(--rv-lavande)', bulle: 'var(--rv-lavande-bulle)', point: 'var(--rv-peche)', interieur: 'var(--rv-lavande)', ombre: 'rgba(90,70,160,.13)' },
+  peche:   { fond: 'var(--rv-peche)', bulle: 'var(--rv-peche-bulle)', point: 'var(--rv-lavande-bulle)', interieur: 'var(--rv-peche-pale)', ombre: 'rgba(150,70,20,.14)' },
+  menthe:  { fond: 'var(--rv-menthe)', bulle: 'var(--rv-menthe-bulle)', point: 'var(--rv-peche)', interieur: 'var(--rv-menthe)', ombre: 'rgba(30,110,70,.13)' },
+  rose:    { fond: 'var(--rv-rose)', bulle: 'var(--rv-rose-bulle)', point: 'var(--rv-lavande-bulle)', interieur: 'var(--rv-rose)', ombre: 'rgba(160,60,90,.13)' },
 };
 
 export function teinteMatiere(subject = '') {

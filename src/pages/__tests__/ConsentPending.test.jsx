@@ -61,6 +61,7 @@ describe('Bandeau de l\'accueil', () => {
     auth.current = connecte({ status: 'a-fournir', parentEmail: null, joursRestants: 1 })
     render(<MemoryRouter><ConsentBanner /></MemoryRouter>)
     expect(screen.getByText(/plus que 1 jour/i)).toBeInTheDocument()
-    expect(screen.getByRole('link', { name: /le donner/i })).toHaveAttribute('href', '/consent-pending')
+    expect(screen.getByText(/montre tes révisions à un parent/i)).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: /le faire/i })).toHaveAttribute('href', '/consent-pending')
   })
 })

@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
-import { UserIcon, MailIcon, KeyIcon, BellIcon, MoonIcon, LockIcon, CheckIcon, LogOutIcon, InstallIcon, ChatIcon } from '../components/Icons';
+import { UserIcon, MailIcon, KeyIcon, BellIcon, LockIcon, CheckIcon, LogOutIcon, InstallIcon, ChatIcon } from '../components/Icons';
 import { InstallerModal } from '../components/InstallerApp';
 import { useInstallation } from '../hooks/useInstallation';
 import { useAuth } from '../context/AuthContext';
@@ -13,11 +13,13 @@ import { Mascot } from '../components/Mascot';
 import { Pantin } from '../components/Pantin';
 import { BulleReviz } from '../components/reviz/BulleReviz';
 import { RevizPlusSheet } from '../components/RevizPlus';
-import { THEMES_PROPOSES, SOMBRE_DISPONIBLE, themeAffiche } from '../utils/themes';
+import { THEMES_PROPOSES, SOMBRE_DISPONIBLE, MODES, themeAffiche } from '../utils/themes';
 import { TEINTES, varsTeinte } from '../utils/teinteMatiere';
 import { phaseRevizPlus, joursAvant, dateCourte } from '../utils/revizPlus';
 import { openBillingPortal, startCheckout } from '../services/billingService';
 import { remindersAvailable, isReminderEnabled, enableReminder, disableReminder } from '../services/reminderService';
+import { etatPush, activerPush, desactiverPush, pushActif } from '../services/pushService';
+import { HEURE_RAPPEL } from '../utils/push';
 import { loadLessons } from '../services/historyService';
 import { countDueCards } from '../services/srsService';
 import { FIN_LANCEMENT, DERNIER_JOUR_OFFERT, PREMIER_PRELEVEMENT, VENTES_OUVERTES, tarifFondateurOuvert } from '../../api/_lancement.js';
@@ -91,7 +93,7 @@ function Interrupteur({ checked, onChange, label, disabled }) {
 export default function Reglages() {
   const navigate = useNavigate();
   const isDesktop = useIsDesktop();
-  const { theme, setTheme, isDark, toggleTheme } = useTheme();
+  const { theme, setTheme, mode, setMode, isDark } = useTheme();
   const location = useLocation();
   // Arrivée depuis « Choisir mon thème » (fiche Réviz+, accueil) ou depuis la
   // landing (« Réserver mon prix fondateur ») : on descend à la bonne section.
@@ -180,20 +182,41 @@ export default function Reglages() {
     } finally { setLoading(false); }
   }
 
-  // ── 2. Rappels : rappel quotidien (app native uniquement) ──
-  const notifsAvailable = remindersAvailable();
-  const [reminderOn, setReminderOn]         = useState(isReminderEnabled());
+  // ── 2. Rappels : notifications locales dans l'app native, notifications web ailleurs ──
+  const natif = remindersAvailable();
+  const [push, setPush] = useState(() => etatPush());
+  const notifsAvailable = natif || push === 'proposables' || push === 'autorisees';
+  const [reminderOn, setReminderOn]         = useState(natif ? isReminderEnabled() : false);
   const [reminderDenied, setReminderDenied] = useState(false);
+  const [reminderErreur, setReminderErreur] = useState(false);
+
+  // Web : l'interrupteur suit l'abonnement réel du navigateur.
+  useEffect(() => {
+    if (natif || isGuest) return;
+    let vivant = true;
+    pushActif().then(actif => { if (vivant) setReminderOn(actif); });
+    return () => { vivant = false; };
+  }, [natif, isGuest]);
 
   async function handleReminderToggle(e) {
     const wanted = e.target.checked;
     setReminderDenied(false);
+    setReminderErreur(false);
     if (!wanted) {
       setReminderOn(false);
-      await disableReminder();
+      if (natif) await disableReminder(); else await desactiverPush();
       return;
     }
     setReminderOn(true); // optimiste, reverti si refus
+    if (!natif) {
+      const res = await activerPush('reglages');
+      setPush(etatPush());
+      if (!res.ok) {
+        setReminderOn(false);
+        if (res.raison === 'refusees') setReminderDenied(true); else setReminderErreur(true);
+      }
+      return;
+    }
     const due = loadLessons().reduce(
       (sum, l) => sum + countDueCards(l.id, l.flashcardsCount ?? l.aiData?.flashcards?.length ?? 0),
       0
@@ -313,11 +336,16 @@ export default function Reglages() {
     <section className="rg-carte" aria-labelledby="rg-rappels">
       <h2 id="rg-rappels" className="rg-h2">Rappels</h2>
       {ligne({
-        icone: <BellIcon />, teinte: 'peche', label: 'Rappel quotidien', sous: 'Tous les jours à 18 h 30',
-        droite: notifsAvailable ? <Interrupteur checked={reminderOn} onChange={handleReminderToggle} label="Activer le rappel de révision quotidien à 18 h 30" /> : null,
+        icone: <BellIcon />, teinte: 'peche', label: 'Rappel quotidien',
+        sous: natif ? 'Tous les jours à 18 h 30' : `À ${HEURE_RAPPEL}, les jours où tu n’as pas encore révisé`,
+        droite: notifsAvailable && !isGuest ? <Interrupteur checked={reminderOn} onChange={handleReminderToggle} label={natif ? 'Activer le rappel de révision quotidien à 18 h 30' : `Activer le rappel de révision à ${HEURE_RAPPEL}`} /> : null,
       })}
-      {!notifsAvailable && <p className="rg-note">Les rappels sont disponibles dans l’app mobile Réviz.</p>}
-      {reminderDenied && <Message type="erreur" texte="Notifications refusées : autorise Réviz dans Réglages, puis Notifications." />}
+      {!natif && isGuest && <p className="rg-note">Crée ton compte pour recevoir un rappel à {HEURE_RAPPEL}.</p>}
+      {!natif && !isGuest && push === 'installer' && <p className="rg-note">Sur iPhone, les rappels arrivent une fois Réviz sur ton écran d’accueil. <Link to="/installer">Voir comment l’installer</Link></p>}
+      {!natif && !isGuest && push === 'indisponible' && <p className="rg-note">Ce navigateur n’affiche pas de notifications. Les rappels marchent dans Chrome, Edge, Firefox, Safari et l’app mobile Réviz.</p>}
+      {!natif && !isGuest && push === 'refusees' && !reminderDenied && <p className="rg-note">Notifications bloquées pour Réviz dans ce navigateur : rouvre-les dans ses réglages du site, puis reviens ici.</p>}
+      {reminderDenied && <Message type="erreur" texte={natif ? 'Notifications refusées : autorise Réviz dans Réglages, puis Notifications.' : 'Notifications refusées : rouvre-les dans les réglages du site de ton navigateur.'} />}
+      {reminderErreur && <Message type="erreur" texte="Le rappel n’a pas pu s’activer. Vérifie ta connexion et réessaie." />}
     </section>
   );
 
@@ -362,7 +390,19 @@ export default function Reglages() {
   const apparence = (
     <section className="rg-carte" id="themes" aria-labelledby="rg-apparence">
       <h2 id="rg-apparence" className="rg-h2">Apparence</h2>
-      {SOMBRE_DISPONIBLE && ligne({ icone: <MoonIcon />, teinte: 'lavande', label: 'Mode sombre', droite: <Interrupteur checked={isDark} onChange={toggleTheme} label="Activer le mode sombre" /> })}
+      {SOMBRE_DISPONIBLE && (
+        <>
+          <span className="rg-sur">Affichage</span>
+          <div className="rg-modes" role="radiogroup" aria-label="Affichage clair ou sombre">
+            {MODES.map(m => (
+              <button key={m.id} type="button" role="radio" aria-checked={mode === m.id}
+                className={`rg-mode${mode === m.id ? ' is-choisi' : ''}`} onClick={() => setMode(m.id)}>{m.label}</button>
+            ))}
+          </div>
+          {mode === 'auto' && <p className="rg-sous rg-mode-note">Comme ton appareil : clair le jour, sombre s’il est en mode sombre.</p>}
+          {isDark && <p className="rg-sous rg-mode-note">Les thèmes ci-dessous habillent le mode clair.</p>}
+        </>
+      )}
       <span className="rg-sur">Classiques</span>
       <div className="rg-themes" role="radiogroup" aria-label="Thèmes classiques">{THEMES_PROPOSES.filter(t => !t.premium).map(tuile)}</div>
       <span className="rg-sur">Réviz+ <em>{hasRevizPlus ? `${THEMES_PROPOSES.filter(t => t.premium).length} thèmes débloqués` : 'Avec Réviz+'}</em></span>

@@ -1,6 +1,6 @@
 // Vercel Serverless Function (Node runtime)
 // POST /api/send-parental-consent
-// Body: { idToken, parentEmail, childName }
+// Body: { idToken, parentEmail, childName, resultat? } (resultat : score d'un quiz que l'élève montre)
 // L'uid est dérivé du token Firebase vérifié — JAMAIS du body.
 // Génère un token, le stocke dans Firestore, envoie l'email au parent via Resend.
 // L'élève utilise déjà l'app : le parent donne son autorisation depuis l'email.
@@ -10,7 +10,9 @@
 // Relance une fois les parents qui n'ont pas répondu au bout de 7 jours, et
 // relance les élèves qui n'ont pas encore donné l'email d'un parent (« Plus
 // tard ») à J+3, J+10 et J+14 avant la mise en pause du compte. Envoie aussi
-// le rappel du lendemain de la première session (api/_rappels.js). Greffé
+// le rappel du lendemain : première session ou compte créé la veille
+// (api/_rappels.js), et le bilan des premiers jours au parent, à J+3
+// (api/_bilanParent.js). Greffé
 // ici plutôt que dans une 13e fonction (limite du plan Vercel Hobby). Seul
 // Vercel peut l'appeler : il envoie CRON_SECRET dans l'en-tête Authorization.
 
@@ -19,6 +21,8 @@ import { randomUUID } from 'node:crypto';
 import { getDb, getAuthAdmin } from './_firebaseAdmin.js';
 import { DELAI_ADRESSE_MS, DELAI_REPONSE_MS } from '../src/utils/consent.js';
 import { relancerLendemain } from './_rappels.js';
+import { envoyerBilansParent } from './_bilanParent.js';
+import { envoyerNotifs, preparerEnvoi } from './_push.js';
 
 export const config = { maxDuration: 60 };
 
@@ -51,20 +55,66 @@ export function prenomPourEmail(brut) {
   return propre || null;
 }
 
+const CLASSE_RE = /^(6|5|4|3)ème$/;
+const ID_RE = /^[a-z0-9-]{1,80}$/;
+
+/**
+ * Score de quiz envoyé par l'app ({ score, total, chapitre?: { classe, matiere, id } }),
+ * validé. Le titre du chapitre est relu dans le catalogue public, jamais pris dans
+ * la requête : personne ne fait écrire son propre texte dans un e-mail signé Réviz.
+ * @returns {Promise<{ score:number, total:number, titre:string|null }|null>}
+ */
+export async function resultatQuiz(brut, lireCatalogue = lireCatalogueEnLigne) {
+  const score = Number(brut?.score), total = Number(brut?.total);
+  if (!Number.isInteger(score) || !Number.isInteger(total) || total < 1 || total > 50 || score < 0 || score > total) return null;
+  let titre = null;
+  const ch = brut?.chapitre;
+  if (ch && CLASSE_RE.test(ch.classe ?? '') && ID_RE.test(ch.matiere ?? '') && ID_RE.test(ch.id ?? '')) {
+    try {
+      const cat = await lireCatalogue(ch.classe);
+      const m = cat?.matieres?.find(x => x.slug === ch.matiere);
+      titre = m?.chapitres?.find(x => x.id === ch.id)?.titre ?? null;
+    } catch { titre = null; }
+  }
+  return { score, total, titre: titre ? String(titre).slice(0, 100) : null };
+}
+
+async function lireCatalogueEnLigne(classe) {
+  const slug = classe.replace('ème', 'eme');
+  const res = await fetch(`https://app.revizapp.fr/programme/${slug}/index.json`, { signal: AbortSignal.timeout(3000) });
+  return res.ok ? res.json() : null;
+}
+
 const lienAutorisation = (token, uid) => `https://app.revizapp.fr/api/approve-consent?token=${token}&uid=${uid}`;
 
-/** Email au parent : première demande, ou relance (avec les jours restants). */
-export function mailParent({ prenom, lien, joursRestants = null }) {
-  const safeName = escapeHtml(prenomPourEmail(prenom) || 'Votre enfant');
+/**
+ * Email au parent : première demande, ou relance (avec les jours restants).
+ * Avec `resultat` ({ score, total, titre? }), l'élève envoie aussi son score de
+ * quiz (carte « Montre ça à tes parents ») : il ouvre le mail, la demande
+ * d'autorisation suit, inchangée.
+ */
+export function mailParent({ prenom, lien, joursRestants = null, resultat = null }) {
+  const prenomPropre = prenomPourEmail(prenom);
+  const safeName = escapeHtml(prenomPropre || 'Votre enfant');
   const relance = joursRestants != null;
   const jours = `${joursRestants} jour${joursRestants > 1 ? 's' : ''}`;
+  const score = !relance && resultat ? resultat : null;
+  const titre = score?.titre ? escapeHtml(score.titre) : null;
   return {
     subject: relance
       ? `Rappel : votre autorisation pour Réviz (plus que ${jours})`
-      : 'Votre enfant utilise Réviz : votre autorisation',
+      : score
+        ? `${prenomPropre || 'Votre enfant'} vient d'avoir ${score.score}/${score.total} à un quiz sur Réviz`
+        : 'Votre enfant utilise Réviz : votre autorisation',
     html: `
         <div style="font-family: -apple-system, sans-serif; max-width: 480px; margin: 0 auto; padding: 24px;">
           <h1 style="font-size: 24px; color: #1A1A1A;">Réviz</h1>
+          ${score ? `
+          <div style="background: #FFE6D2; border-radius: 14px; padding: 18px 20px; margin: 8px 0 20px;">
+            <p style="margin: 0 0 6px; font-size: 13px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; color: #8A5A36;">${safeName} voulait vous montrer ça</p>
+            <p style="margin: 0; font-size: 30px; font-weight: 800; color: #1B1A23;">${score.score} / ${score.total}</p>
+            <p style="margin: 4px 0 0; font-size: 15px; color: #444;">${titre ? `au quiz sur <strong>${titre}</strong>` : 'à son quiz'}, juste maintenant.</p>
+          </div>` : ''}
           <p style="color: #444; font-size: 16px; line-height: 1.5;">
             ${relance
               ? `<strong>${safeName}</strong> utilise <strong>Réviz</strong>, une application d'aide à la révision pour les collégiens et les lycéens, et attend toujours votre autorisation.`
@@ -215,9 +265,17 @@ export default async function handler(req, res) {
       const emailDe = uid => getAuthAdmin().getUser(uid).then(u => u.email || null, () => null);
       const eleves = await relancerEleves({ db, envoyer, emailDe });
       // Un échec du rappel J+1 ne doit pas masquer les relances déjà faites.
-      const lendemain = await relancerLendemain({ db, envoyer, emailDe })
+      const lendemain = await relancerLendemain({ db, envoyer, emailDe, auth: getAuthAdmin() })
         .catch(err => { console.error('[rappel-j1]', err?.message || err); return { rappelsJ1: 0 }; });
-      return res.status(200).json({ ...parents, ...eleves, ...lendemain });
+      // Après les relances : un parent relancé aujourd'hui n'a pas son bilan le même jour.
+      const bilans = await envoyerBilansParent({ db, envoyer, lienAutorisation, auth: getAuthAdmin() })
+        .catch(err => { console.error('[bilan-parent]', err?.message || err); return { bilansParent: 0 }; });
+      // En dernier : pas de notification à qui a reçu le rappel par e-mail aujourd'hui.
+      const pousser = await preparerEnvoi();
+      const push = pousser
+        ? await envoyerNotifs({ db, envoyer: pousser }).catch(err => { console.error('[push]', err?.message || err); return { notifs: 0 }; })
+        : { notifs: 0, pushSansCle: true };
+      return res.status(200).json({ ...parents, ...eleves, ...lendemain, ...bilans, ...push });
     } catch (err) {
       console.error('[relance-parent]', err?.message || err);
       return res.status(500).json({ error: 'RELANCE_FAILED' });
@@ -225,7 +283,7 @@ export default async function handler(req, res) {
   }
   if (req.method !== 'POST') return res.status(405).json({ error: 'METHOD_NOT_ALLOWED' });
 
-  const { idToken, parentEmail, childName } = req.body ?? {};
+  const { idToken, parentEmail, childName, resultat: resultatBrut } = req.body ?? {};
   if (!idToken) return res.status(401).json({ error: 'UNAUTHORIZED' });
   if (!parentEmail || !childName) return res.status(400).json({ error: 'MISSING_FIELDS' });
 
@@ -290,7 +348,7 @@ export default async function handler(req, res) {
     await resend.emails.send({
       from: EXPEDITEUR,
       to: email,
-      ...mailParent({ prenom: childName, lien: lienAutorisation(token, uid) }),
+      ...mailParent({ prenom: childName, lien: lienAutorisation(token, uid), resultat: await resultatQuiz(resultatBrut) }),
     });
 
     return res.status(200).json({ ok: true });

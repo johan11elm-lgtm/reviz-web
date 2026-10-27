@@ -20,12 +20,12 @@
   align-items: center;
   gap: 4px;
   padding: 0 6px;
-  border: 1px solid rgba(255,255,255,.7);
+  border: 1px solid var(--rv-nav-bord, rgba(255,255,255,.7));
   border-radius: 999px;
-  background: rgba(248,239,231,.78);
+  background: rgba(var(--rv-nav-rgb, 248,239,231),.78);
   -webkit-backdrop-filter: blur(18px) saturate(1.4);
   backdrop-filter: blur(18px) saturate(1.4);
-  box-shadow: 0 10px 30px rgba(120,60,20,.16);
+  box-shadow: 0 10px 30px rgba(var(--rv-ombre),.16);
 }
 .nav-haut-onglet {
   height: 46px;
@@ -35,18 +35,18 @@
   justify-content: center;
   gap: 8px;
   border-radius: 999px;
-  color: #1B1A23;
+  color: var(--rv-encre);
   text-decoration: none;
   transition: background .15s;
 }
 .nav-haut-onglet svg { width: 22px; height: 22px; }
-.nav-haut-onglet:hover { background: rgba(255,255,255,.7); }
+.nav-haut-onglet:hover { background: var(--rv-nav-survol, rgba(255,255,255,.7)); }
 .nav-haut-libelle { display: none; font-size: 14px; font-weight: 700; white-space: nowrap; }
 .nav-haut-onglet--actif,
-.nav-haut-onglet--actif:hover { padding: 0 16px; background: #1B1A23; color: #fff; }
+.nav-haut-onglet--actif:hover { padding: 0 16px; background: var(--rv-inverse); color: var(--rv-sur-inverse); }
 .nav-haut-onglet--actif svg { width: 20px; height: 20px; }
 .nav-haut-onglet--actif .nav-haut-libelle { display: inline; }
-.nav-haut-onglet:focus-visible { outline: 3px solid #1B1A23; outline-offset: 2px; }
+.nav-haut-onglet:focus-visible { outline: 3px solid var(--rv-encre); outline-offset: 2px; }
 
 /* Réviz IA : rond blanc avec la mascotte coach, anneau conique orange → rose */
 .nav-haut-ia {
@@ -66,13 +66,13 @@
   height: 100%;
   box-sizing: border-box;
   border-radius: 50%;
-  background: #FFF8F1;
+  background: var(--rv-nav-ia, #FFF8F1);
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
 }
-.nav-haut-ia--actif .nav-haut-ia-rond { background: #FFE6D2; }
+.nav-haut-ia--actif .nav-haut-ia-rond { background: var(--rv-nav-ia-actif, var(--rv-peche-pale)); }
 
 /* Mode essai : créer son compte, juste avant la capsule */
 .nav-haut-compte {
@@ -81,8 +81,8 @@
   align-items: center;
   padding: 0 18px;
   border-radius: 999px;
-  background: #1B1A23;
-  color: #fff;
+  background: var(--rv-inverse);
+  color: var(--rv-sur-inverse);
   font-size: 14px;
   font-weight: 700;
   text-decoration: none;

@@ -5,6 +5,7 @@ import { BottomNav } from '../components/BottomNav';
 import { GuestBanner } from '../components/GuestBanner';
 import { ConsentBanner } from '../components/ConsentBanner';
 import { EmailBanner } from '../components/EmailBanner';
+import { PushBanner } from '../components/PushBanner';
 import { Mascot } from '../components/Mascot';
 import { Pantin, tempsLettres } from '../components/Pantin';
 import { BulleReviz } from '../components/reviz/BulleReviz';
@@ -37,18 +38,18 @@ import './Home.css';
  * révision, objectif atteint, ou journée ordinaire.
  */
 const HUMEURS = {
-  normal:   { bg: '#FFB37A', tint: '#FFC596', dot: '#C9C2F2', bar: 'rgba(255,179,122,.94)', btn: '#C25407', soft: '#FFE6D2', expression: 'content',   entree: 'coucou' },
-  controle: { bg: '#FFB37A', tint: '#FFC596', dot: '#C9C2F2', bar: 'rgba(255,179,122,.94)', btn: '#C25407', soft: '#FFE6D2', expression: 'determine', entree: 'coucou' },
-  soir:     { bg: '#C9C2F2', tint: '#D8D2F7', dot: '#FFC9A8', bar: 'rgba(201,194,242,.94)', btn: '#5B4FC7', soft: '#E4E0FA', expression: 'endormi' },
-  fete:     { bg: '#FFC9A8', tint: '#FFDAC4', dot: '#B9E8C9', bar: 'rgba(255,201,168,.94)', btn: '#137A45', soft: '#DCF5E6', expression: 'fier',      entree: 'saut' },
+  normal:   { bg: 'var(--rv-peche)', tint: 'var(--rv-peche-bulle)', dot: 'var(--rv-lavande-bulle)', bar: 'color-mix(in srgb, var(--rv-peche) 94%, transparent)', btn: 'var(--rv-orange)', btnTexte: '#FF9A55', soft: 'var(--rv-peche-pale)', expression: 'content',   entree: 'coucou' },
+  controle: { bg: 'var(--rv-peche)', tint: 'var(--rv-peche-bulle)', dot: 'var(--rv-lavande-bulle)', bar: 'color-mix(in srgb, var(--rv-peche) 94%, transparent)', btn: 'var(--rv-orange)', btnTexte: '#FF9A55', soft: 'var(--rv-peche-pale)', expression: 'determine', entree: 'coucou' },
+  soir:     { bg: 'var(--rv-lavande-bulle)', tint: 'var(--rv-lavande-clair)', dot: 'var(--rv-peche-rose)', bar: 'color-mix(in srgb, var(--rv-lavande-bulle) 94%, transparent)', btn: 'var(--rv-lavande-vif)', btnTexte: '#B3AAF5', soft: 'var(--rv-lavande)', expression: 'endormi' },
+  fete:     { bg: 'var(--rv-peche-rose)', tint: 'var(--rv-peche-rose-pale)', dot: 'var(--rv-menthe-bulle)', bar: 'color-mix(in srgb, var(--rv-peche-rose) 94%, transparent)', btn: '#137A45', btnTexte: '#6BDA9B', soft: 'var(--rv-menthe)', expression: 'fier',      entree: 'saut' },
 };
 
 // Pastilles des matières : aplats pastel, dans l'ordre du design.
-const PASTELS = ['#FFD7BE', '#E4E0FA', '#FFE6D2', '#DCF5E6', '#FFD9E4', '#E4E0FA'];
+const PASTELS = ['var(--rv-peche-clair)', 'var(--rv-lavande)', 'var(--rv-peche-pale)', 'var(--rv-menthe)', 'var(--rv-rose)', 'var(--rv-lavande)'];
 const TONS_PLAN = [
-  { bg: '#FFE6D2', fg: '#B34400' },
-  { bg: '#E4E0FA', fg: '#3D3770' },
-  { bg: '#DCF5E6', fg: '#0F6B3A' },
+  { bg: 'var(--rv-peche-pale)', fg: 'var(--rv-peche-encre)' },
+  { bg: 'var(--rv-lavande)', fg: 'var(--rv-lavande-encre)' },
+  { bg: 'var(--rv-menthe)', fg: 'var(--rv-menthe-encre)' },
 ];
 
 const majuscule = s => s.charAt(0).toUpperCase() + s.slice(1);
@@ -92,9 +93,10 @@ export default function Home() {
   const [annonceRevizPlus, setAnnonceRevizPlus] = useState(() => revizPlusOffert && !isGuest && !!currentUser?.uid && !annonceRevizPlusVue(currentUser.uid));
   // Annonce de la sortie : Réviz Games (celle de la Battle, du 22/10, n'est plus montrée).
   const [annonceJeux, setAnnonceJeux] = useState(() => !annonceRevizPlus && !!currentUser?.uid && !annonceJeuxVue(currentUser.uid));
-  const { theme } = useTheme();
+  const { theme, isDark } = useTheme();
   const [essaiTheme, setEssaiTheme] = useState(() => !essaiThemeVu());
-  const montrerEssai = essaiTheme && hasRevizPlus && !isGuest && !themeById(theme)?.premium;
+  // Les thèmes Réviz+ sont des thèmes clairs : pas d'invitation à les essayer en sombre.
+  const montrerEssai = essaiTheme && hasRevizPlus && !isGuest && !isDark && !themeById(theme)?.premium;
   const [compact, setCompact] = useState(0);
   const [parle, setParle] = useState(false);
   const [tour, setTour] = useState(0);
@@ -295,17 +297,17 @@ export default function Home() {
 
   // La carte de la phrase du jour : ce que lance l'action principale (id : pour ne pas la reproposer).
   const carteDuJour = humeurId === 'fete'
-    ? { id: 'battle', pose: 'fire', fond: '#E4E0FA', titre: 'Battle bonus', sous: 'Objectif atteint, on joue ?' }
+    ? { id: 'battle', pose: 'fire', fond: 'var(--rv-lavande)', titre: 'Battle bonus', sous: 'Objectif atteint, on joue ?' }
     : humeurId === 'soir'
-      ? { id: 'cartes', pose: 'soir', fond: '#E4E0FA', titre: 'Une flashcard', sous: '2 minutes, et au lit' }
+      ? { id: 'cartes', pose: 'soir', fond: 'var(--rv-lavande)', titre: 'Une flashcard', sous: '2 minutes, et au lit' }
       : humeurId === 'controle'
-        ? { id: 'controle', pose: subjectMascot(controle.m.label), fond: '#FFE6D2', titre: `Contrôle de ${controle.m.label.toLowerCase()}`,
+        ? { id: 'controle', pose: subjectMascot(controle.m.label), fond: 'var(--rv-peche-pale)', titre: `Contrôle de ${controle.m.label.toLowerCase()}`,
             sous: `${majuscule(controle.quand)}${controle.titre ? ` · ${controle.titre}` : ''}` }
         : cta === 'Réviser mes cartes'
-          ? { id: 'cartes', pose: 'flashcard', fond: '#FFE6D2', titre: 'Mes cartes du jour', sous: `${pluriel(dueCards, 'carte')} à revoir` }
+          ? { id: 'cartes', pose: 'flashcard', fond: 'var(--rv-peche-pale)', titre: 'Mes cartes du jour', sous: `${pluriel(dueCards, 'carte')} à revoir` }
           : cta === 'Scanner une leçon'
-            ? { id: 'scan', pose: 'scanphone', fond: '#DCF5E6', titre: 'Scanner une leçon', sous: 'Résumé, flashcards et quiz' }
-            : { id: 'programme', pose: 'reading', fond: '#FFE6D2', titre: 'Mon programme', sous: 'Les chapitres de ta classe' };
+            ? { id: 'scan', pose: 'scanphone', fond: 'var(--rv-menthe)', titre: 'Scanner une leçon', sous: 'Résumé, flashcards et quiz' }
+            : { id: 'programme', pose: 'reading', fond: 'var(--rv-peche-pale)', titre: 'Mon programme', sous: 'Les chapitres de ta classe' };
 
   const suggestions = [
     { lignes: ditLignes, label: cta, action, expr: h.expression, carte: carteDuJour },
@@ -313,25 +315,25 @@ export default function Home() {
       carte: { id: 'jeux', pose: 'celebration', fond: '#FFE3C7', titre: 'Partie du jour', sous: 'Réviz Games · 6 mini-jeux' } },
     titreLecon && (fcLast > 0
       ? { lignes: ['Tes cartes t’attendent.', 'On les revoit ?'], label: 'Réviser mes cartes', action: ouvrirCartes, expr: 'content', geste: 'coucou',
-          carte: { id: 'cartes', pose: 'flashcard', fond: '#FFE6D2', titre: 'Flashcards', sous: `${pluriel(fcLast, 'carte')} à revoir · ${court(titreLecon, 20)}` } }
+          carte: { id: 'cartes', pose: 'flashcard', fond: 'var(--rv-peche-pale)', titre: 'Flashcards', sous: `${pluriel(fcLast, 'carte')} à revoir · ${court(titreLecon, 20)}` } }
       : { lignes: ['Un petit quiz ?', 'Pour voir où tu en es.'], label: 'Lancer le quiz', expr: 'emerveille',
           action: () => { restoreLesson(lastLesson.id); navigate('/quiz'); },
-          carte: { id: 'quiz', pose: 'quiz', fond: '#E4E0FA', titre: 'Quiz corrigé', sous: court(titreLecon, 32) } }),
+          carte: { id: 'quiz', pose: 'quiz', fond: 'var(--rv-lavande)', titre: 'Quiz corrigé', sous: court(titreLecon, 32) } }),
     { lignes: ['Un autre chapitre ?', 'Tout ton programme est là.'], label: 'Réviser mon programme', action: lancerProgramme, expr: 'content', geste: 'coucou',
-      carte: { id: 'programme', pose: 'reading', fond: '#FFE6D2', titre: 'Réviser', sous: `Tout le programme de ${classe}` } },
+      carte: { id: 'programme', pose: 'reading', fond: 'var(--rv-peche-pale)', titre: 'Réviser', sous: `Tout le programme de ${classe}` } },
     { lignes: ['Une leçon à apprendre ?', 'Prends-la en photo.'], label: 'Scanner une leçon', action: lancerScan, expr: 'emerveille',
-      carte: { id: 'scan', pose: 'scanphone', fond: '#DCF5E6', titre: 'Scanner une leçon', sous: avecCompte || 'Résumé, flashcards et quiz' } },
+      carte: { id: 'scan', pose: 'scanphone', fond: 'var(--rv-menthe)', titre: 'Scanner une leçon', sous: avecCompte || 'Résumé, flashcards et quiz' } },
     { lignes: ['Une question ?', 'Je t’explique ton cours.'], label: 'Parler à Réviz IA', action: () => navigate('/coach'), expr: 'reflechit',
-      carte: { id: 'ia', pose: 'coach', fond: '#FFD9E4', titre: 'Réviz IA', sous: avecCompte || 'Je t’explique, avec des exemples' } },
+      carte: { id: 'ia', pose: 'coach', fond: 'var(--rv-rose)', titre: 'Réviz IA', sous: avecCompte || 'Je t’explique, avec des exemples' } },
     { lignes: ['Prêt pour une Battle ?', 'Défie un ami en direct.'], label: 'Lancer une Battle', action: () => navigate('/battle'), expr: 'determine', geste: 'brasEnLair',
-      carte: { id: 'battle', pose: 'fire', fond: '#E4E0FA', titre: 'Battle', sous: '5 questions, 15 s, contre un ami' } },
+      carte: { id: 'battle', pose: 'fire', fond: 'var(--rv-lavande)', titre: 'Battle', sous: '5 questions, 15 s, contre un ami' } },
     !isGuest && allLessons.length > 0 && {
       lignes: [allLessons.length > 1 ? 'Tes leçons scannées ?' : 'Ta leçon scannée ?', allLessons.length > 1 ? 'Elles sont toutes ici.' : 'Elle est rangée ici.'], label: 'Voir mes leçons',
       action: () => navigate('/cours'), expr: 'fier',
-      carte: { id: 'cours', pose: 'writing', fond: '#DCF5E6', titre: 'Mes leçons', sous: `${pluriel(allLessons.length, 'leçon')} scannée${allLessons.length > 1 ? 's' : ''}` } },
+      carte: { id: 'cours', pose: 'writing', fond: 'var(--rv-menthe)', titre: 'Mes leçons', sous: `${pluriel(allLessons.length, 'leçon')} scannée${allLessons.length > 1 ? 's' : ''}` } },
     { lignes: controle ? ['Un autre contrôle ?', 'Note-le dans l’agenda.'] : ['Un contrôle bientôt ?', 'Dis-moi quand.'], label: "Ouvrir l'agenda",
       action: () => navigate('/agenda'), expr: 'content', geste: 'gratterTete',
-      carte: { id: 'agenda', pose: 'thinking', fond: '#FFE6D2', titre: 'Agenda', sous: 'Tes contrôles et leurs plans' } },
+      carte: { id: 'agenda', pose: 'thinking', fond: 'var(--rv-peche-pale)', titre: 'Agenda', sous: 'Tes contrôles et leurs plans' } },
   ].filter((p, i) => p && (i === 0 || p.carte.id !== carteDuJour.id));
   const sugg = suggestions[tour % suggestions.length];
   const texteSugg = sugg.lignes.join('\n');
@@ -371,7 +373,7 @@ export default function Home() {
     setSortie(false);
     setTour(t => t - ici + i + (i < ici ? n : 0));
   };
-  const style = { '--hm-bg': h.bg, '--hm-tint': h.tint, '--hm-dot': h.dot, '--hm-bar': h.bar, '--hm-btn': h.btn, '--hm-soft': h.soft, '--rv-accent': h.btn };
+  const style = { '--hm-bg': h.bg, '--hm-tint': h.tint, '--hm-dot': h.dot, '--hm-bar': h.bar, '--hm-btn': h.btn, '--hm-soft': h.soft, '--hm-btn-texte': h.btnTexte, '--rv-accent': h.btn };
 
   const serie = streak > 0 && (
     <span className="hm-serie" aria-label={`${streak} jour${streak > 1 ? 's' : ''} de suite`}>
@@ -472,6 +474,7 @@ export default function Home() {
       <GuestBanner />
       <ConsentBanner />
       <EmailBanner />
+      <PushBanner />
     </div>
   );
 

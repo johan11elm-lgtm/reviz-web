@@ -22,7 +22,7 @@ import './Profile.css';
 
 const pluriel = (n, mot, motPluriel = `${mot}s`) => `${n > 1 ? motPluriel : mot}`;
 // Pastels des badges, en boucle : fond et tranche (handoff Moi du 21/10).
-const PASTELS = [['#E4E0FA', '#C9C2F2'], ['#FFE6D2', '#FFC596'], ['#DCF5E6', '#A8E3C2'], ['#FFD9E4', '#F4B8CB']];
+const PASTELS = [['var(--rv-lavande)', 'var(--rv-lavande-bulle)'], ['var(--rv-peche-pale)', 'var(--rv-peche-bulle)'], ['var(--rv-menthe)', 'var(--rv-menthe-tranche)'], ['var(--rv-rose)', 'var(--rv-rose-tranche)']];
 const CLASSES_COLLEGE = ['6ème', '5ème', '4ème', '3ème'];
 const classeCourte = c => c?.replace('ème', 'e') ?? '';
 
@@ -39,7 +39,7 @@ const Croix = () => (
   <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12" /></svg>
 );
 const Flamme = () => (
-  <svg viewBox="0 0 24 24" width="16" height="16" fill="#C25407" aria-hidden="true"><path d="M12 2c1 3.5 5 5.5 5 11a5 5 0 0 1-10 0c0-2.4 1.1-4 2.3-5.2.2 1.6.9 2.6 1.9 3.2C11 8 11 5 12 2z" /></svg>
+  <svg viewBox="0 0 24 24" width="16" height="16" style={{ fill: 'var(--rv-marque)' }} aria-hidden="true"><path d="M12 2c1 3.5 5 5.5 5 11a5 5 0 0 1-10 0c0-2.4 1.1-4 2.3-5.2.2 1.6.9 2.6 1.9 3.2C11 8 11 5 12 2z" /></svg>
 );
 const CocheEncre = () => (
   <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#1B1A23" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg>

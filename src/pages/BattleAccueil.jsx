@@ -20,8 +20,8 @@ import './Battle.css';
 const Chevron = () => (
   <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7" /></svg>
 );
-const PASTEL = new Map([[TEINTES.lavande, '#E4E0FA'], [TEINTES.peche, '#FFE6D2'], [TEINTES.menthe, '#DCF5E6'], [TEINTES.rose, '#FFD9E4']]);
-const pastel = matiere => PASTEL.get(teinteMatiere(matiere)) ?? '#FFE6D2';
+const PASTEL = new Map([[TEINTES.lavande, 'var(--rv-lavande)'], [TEINTES.peche, 'var(--rv-peche-pale)'], [TEINTES.menthe, 'var(--rv-menthe)'], [TEINTES.rose, 'var(--rv-rose)']]);
+const pastel = matiere => PASTEL.get(teinteMatiere(matiere)) ?? 'var(--rv-peche-pale)';
 
 /**
  * /battle : l'accueil (lancer une battle en choisissant un chapitre, rejoindre avec un code,

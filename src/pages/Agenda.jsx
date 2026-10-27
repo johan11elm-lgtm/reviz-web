@@ -95,8 +95,8 @@ export default function Agenda() {
   const { lignes, humeur } = bulle(prochain, n);
   const c = prochain ? couleursMatiere(prochain.matiere) : null;
   const teinte = c
-    ? { fond: c.fond, bulle: c.tranche, point: '#FFB37A', interieur: c.fond, ombre: 'rgba(160,80,20,.12)' }
-    : { fond: '#FFB37A', bulle: '#FFC596', point: '#C9C2F2', interieur: '#FFE6D2', ombre: 'rgba(150,70,20,.14)' };
+    ? { fond: c.fond, bulle: c.tranche, point: 'var(--rv-peche)', interieur: c.fond, ombre: 'rgba(160,80,20,.12)' }
+    : { fond: 'var(--rv-peche)', bulle: 'var(--rv-peche-bulle)', point: 'var(--rv-lavande-bulle)', interieur: 'var(--rv-peche-pale)', ombre: 'rgba(150,70,20,.14)' };
 
   function reviser(ctrl) {
     track('agenda_reviser', { matiere: ctrl.matiere });

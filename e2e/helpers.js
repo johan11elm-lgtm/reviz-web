@@ -454,13 +454,20 @@ export function chapitreThales() {
   return JSON.parse(fixture('thales.json'))
 }
 
-/** Mode essai : /essai, prénom + classe, puis « C'est parti » → /programme. */
-export async function entrerEnEssai(page, { prenom = 'Léa', classe = '3ème' } = {}) {
+/**
+ * Mode essai : /essai, prénom + classe, puis « C'est parti » → l'accueil (popup Réviz Games fermée).
+ * `aller` : la page où finir ensuite (/programme par défaut, `null` pour rester sur l'accueil).
+ */
+export async function entrerEnEssai(page, { prenom = 'Léa', classe = '3ème', aller = '/programme' } = {}) {
   await page.goto('/essai')
   await page.getByLabel('Ton prénom').fill(prenom)
   await page.getByRole('radio', { name: classeCourte(classe), exact: true }).click()
   await page.getByRole('button', { name: /C'est parti/ }).click()
-  await expect(page).toHaveURL(/\/programme$/)
+  await expect(page).toHaveURL(/\/$/)
+  await fermerAnnonceJeux(page)
+  if (!aller) return
+  await page.goto(aller)
+  await expect(page).toHaveURL(new RegExp(`${aller.replace(/[?]/g, '\\?')}$`))
 }
 
 /**

@@ -10,14 +10,14 @@ import '../pages/Agenda.css';
 
 // Fond et tranche de chaque matière (handoff Agenda du 21/10).
 const COULEURS = {
-  maths: ['#E4E0FA', '#C9C2F2'],
-  francais: ['#FFD9E4', '#F4B8CB'],
-  histoire: ['#FFE6D2', '#FFC596'],
-  geographie: ['#FFE6D2', '#FFC596'],
-  svt: ['#DCF5E6', '#A8E3C2'],
-  'physique-chimie': ['#E4E0FA', '#C9C2F2'],
-  technologie: ['#DCF5E6', '#A8E3C2'],
-  anglais: ['#DCF5E6', '#A8E3C2'],
+  maths: ['var(--rv-lavande)', 'var(--rv-lavande-bulle)'],
+  francais: ['var(--rv-rose)', 'var(--rv-rose-tranche)'],
+  histoire: ['var(--rv-peche-pale)', 'var(--rv-peche-bulle)'],
+  geographie: ['var(--rv-peche-pale)', 'var(--rv-peche-bulle)'],
+  svt: ['var(--rv-menthe)', 'var(--rv-menthe-tranche)'],
+  'physique-chimie': ['var(--rv-lavande)', 'var(--rv-lavande-bulle)'],
+  technologie: ['var(--rv-menthe)', 'var(--rv-menthe-tranche)'],
+  anglais: ['var(--rv-menthe)', 'var(--rv-menthe-tranche)'],
   autre: ['#F3E6DA', '#EADBCB'],
 };
 export const couleursMatiere = slug => {
@@ -115,7 +115,7 @@ export function AjoutControle({ initial = {}, onClose, onSaved }) {
           const choisie = matiere === x.slug;
           return (
             <button key={x.slug} type="button" className={`ag-matiere${choisie ? ' is-choisie' : ''}`} aria-pressed={choisie} onClick={() => setMatiere(x.slug)}
-              style={{ background: k.fond, boxShadow: choisie ? `0 0 0 2px #1B1A23, 0 4px 0 ${k.tranche}` : `0 4px 0 ${k.tranche}` }}>
+              style={{ background: k.fond, boxShadow: choisie ? `0 0 0 2px var(--rv-encre), 0 4px 0 ${k.tranche}` : `0 4px 0 ${k.tranche}` }}>
               <span className="ag-matiere-rond" aria-hidden="true"><Mascot pose={x.mascot} size={30} alt="" /></span>
               {x.slug === 'autre' ? 'Autre' : x.label}
             </button>

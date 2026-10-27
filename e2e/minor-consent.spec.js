@@ -85,11 +85,11 @@ test.describe('Consentement parental (<15 ans)', () => {
     await page.goto('/')
     await expect(page).toHaveURL(/onboarding/, { timeout: 15_000 })
     await passerDecouverte(page)
-    await expect(page.getByText('E-mail d’un parent')).toBeVisible({ timeout: 15_000 })
+    await expect(page.getByText('Montre tes révisions à un parent')).toBeVisible({ timeout: 15_000 })
 
     // Le lien du bandeau mène à l'écran parent, encore facultatif à ce stade.
     await fermerAnnonces(page)
-    await page.getByRole('link', { name: 'Le donner' }).click()
+    await page.getByRole('link', { name: 'Le faire' }).click()
     await expect(page).toHaveURL(/consent-pending/)
     await expect(bulleReviz(page, 'Ton compte est prêt.')).toBeAttached()
     await page.getByRole('button', { name: /Plus tard/ }).click()

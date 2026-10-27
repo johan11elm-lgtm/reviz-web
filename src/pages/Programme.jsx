@@ -35,7 +35,7 @@ const pluriel = (n, mot) => `${n} ${mot}${n > 1 ? 's' : ''}`;
 const ETIQUETTE = { done: 'Fait', current: 'En cours', commence: 'Commencé', 'a-revoir': 'À travailler', todo: 'À venir' };
 // La case en cours qui n'a encore jamais été ouverte : c'est la prochaine, pas une case « en cours ».
 const etiquette = it => (it.statut === 'current' && !it.lesson ? 'Prochain' : ETIQUETTE[it.statut]);
-const COULEUR = { done: '#1F8A52', current: '#C25407', commence: '#C25407', 'a-revoir': '#C25407', todo: '#6E675B' };
+const COULEUR = { done: 'var(--rv-vert-texte)', current: 'var(--rv-orange-texte)', commence: 'var(--rv-orange-texte)', 'a-revoir': 'var(--rv-orange-texte)', todo: 'var(--rv-doux)' };
 const ACTION = { done: 'Réviser', current: "C'est parti", commence: 'Reprendre', 'a-revoir': 'Reprendre', todo: 'Découvrir' };
 
 const Coche = ({ taille = 24 }) => (
@@ -184,7 +184,7 @@ export default function Programme() {
   const carteScans = (
     <CarteFonction
       carte={{
-        pose: 'scanphone', fond: '#FFE6D2', titre: 'Mes leçons scannées',
+        pose: 'scanphone', fond: 'var(--rv-peche-pale)', titre: 'Mes leçons scannées',
         sous: isGuest ? 'Avec un compte gratuit' : scannees ? `${pluriel(scannees, 'leçon')}, prêtes à réviser` : 'Une photo de ton cahier, et Réviz prépare tout',
       }}
       grande={isDesktop}
@@ -319,9 +319,9 @@ function Anneau({ m, on, grand, onClick }) {
       aria-label={`${m.matiere} : ${m.faits} sur ${m.items.length} chapitres faits`}>
       <span className="prg-anneau" style={{ width: taille, height: taille }}>
         <svg viewBox="0 0 76 76" width={taille} height={taille} aria-hidden="true">
-          <circle cx="38" cy="38" r={r} fill="none" stroke="#EADBCB" strokeWidth="4" />
+          <circle cx="38" cy="38" r={r} fill="none" style={{ stroke: 'var(--rv-ligne)' }} strokeWidth="4" />
           {m.pct > 0 && (
-            <circle cx="38" cy="38" r={r} fill="none" stroke={m.pct === 100 ? '#34C77B' : '#C25407'} strokeWidth="4"
+            <circle cx="38" cy="38" r={r} fill="none" style={{ stroke: m.pct === 100 ? '#34C77B' : 'var(--rv-marque)' }} strokeWidth="4"
               strokeLinecap="round" strokeDasharray={`${(m.pct / 100) * C} ${C}`} />
           )}
         </svg>
@@ -397,9 +397,9 @@ function Vague({ matiere, choisie, onChoisir, grand, detail }) {
         <div className="prg-piste-int" style={{ width: largeurPiste, height: D.h, margin: `0 ${marge}px` }}>
           <svg width={largeurPiste} height={D.h} className="prg-route" aria-hidden="true">
             <path d={route} transform="translate(0 7)" fill="none" stroke="#A0501A" strokeOpacity=".10" strokeWidth={D.route} strokeLinecap="round" />
-            <path d={route} fill="none" stroke="#fff" strokeWidth={D.route} strokeLinecap="round" />
-            {routeFaite && <path d={routeFaite} fill="none" stroke="#DCF5E6" strokeWidth={D.route} strokeLinecap="round" />}
-            <path d={route} fill="none" stroke="#C25407" strokeOpacity=".45" strokeWidth="3" strokeDasharray="2 10" strokeLinecap="round" />
+            <path d={route} fill="none" style={{ stroke: 'var(--rv-carte)' }} strokeWidth={D.route} strokeLinecap="round" />
+            {routeFaite && <path d={routeFaite} fill="none" style={{ stroke: 'var(--rv-menthe)' }} strokeWidth={D.route} strokeLinecap="round" />}
+            <path d={route} fill="none" style={{ stroke: 'var(--rv-marque)' }} strokeOpacity=".45" strokeWidth="3" strokeDasharray="2 10" strokeLinecap="round" />
           </svg>
           {matiere.items.map((it, i) => {
             const [x, y] = pts[i];
