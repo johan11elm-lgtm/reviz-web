@@ -17,14 +17,17 @@
 // - ?op=desabonner&uid=…&t=… (GET depuis l'e-mail, POST en un clic depuis la
 //   messagerie) : plus de rappel par e-mail pour ce compte (api/_rappels.js) ;
 //   avec &qui=parent, plus de bilan au parent (api/_bilanParent.js).
+// - ?op=push (POST / DELETE, jeton Firebase) : abonnement aux notifications web
+//   de ce navigateur (api/_push.js).
 // -------------------------------------------------------
 import { FieldValue } from 'firebase-admin/firestore'
-import { getDb } from './_firebaseAdmin.js'
+import { getDb, getAuthAdmin } from './_firebaseAdmin.js'
 import { CODES_VIDEO } from '../src/utils/codesVideo.js'
 import { RAISONS_ILLISIBLE, RAISONS_NON_SCOLAIRE } from '../src/utils/aiPrompts.js'
 import { signatureValide } from './_rappels.js'
 import { PORTEE_DESABO } from './_bilanParent.js'
 import { ESSAI_ID_RE, CHAPITRE_ID_RE } from '../src/utils/retour.js'
+import { routeAbonnement } from './_push.js'
 
 export const EVENTS = [
   'essai_demarre', 'compte_cree', 'programme_ouvert', 'chapitre_ouvert', 'revision', 'quiz_termine',
@@ -66,7 +69,7 @@ const ALLOWED = {
   // d'une fiche publique du site, d'une vidéo) : d'où vient l'élève, sans rien
   // identifier. « reseaux » : vidéo publiée à la fois sur TikTok et Instagram ;
   // « rappel » : e-mail du lendemain de la première session.
-  via: ['tiktok', 'instagram', 'reseaux', 'pinterest', 'youtube', 'affiche', 'landing', 'fiche', 'rappel'],
+  via: ['tiktok', 'instagram', 'reseaux', 'pinterest', 'youtube', 'affiche', 'landing', 'fiche', 'rappel', 'push'],
   // Vidéo d'origine (adresse courte revizapp.fr/<code>) : seulement les codes
   // du tableau src/utils/codesVideo.js.
   v: Object.keys(CODES_VIDEO),
@@ -187,6 +190,11 @@ async function desabonner(req, res) {
 
 export default async function handler(req, res) {
   if (req.query?.op === 'desabonner' && (req.method === 'GET' || req.method === 'POST')) return desabonner(req, res)
+  // Notifications web : abonnement (POST) ou désabonnement (DELETE) d'un navigateur (api/_push.js).
+  if (req.query?.op === 'push' && (req.method === 'POST' || req.method === 'DELETE')) {
+    try { return await routeAbonnement(req, res, { db: getDb(), auth: getAuthAdmin() }) }
+    catch (err) { console.error('[push]', err?.message || err); return res.status(500).json({ error: 'INTERNAL' }) }
+  }
   if (req.method !== 'POST') return res.status(405).send('Method not allowed')
   let body = req.body
   if (typeof body === 'string') {

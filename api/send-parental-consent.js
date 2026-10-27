@@ -22,6 +22,7 @@ import { getDb, getAuthAdmin } from './_firebaseAdmin.js';
 import { DELAI_ADRESSE_MS, DELAI_REPONSE_MS } from '../src/utils/consent.js';
 import { relancerLendemain } from './_rappels.js';
 import { envoyerBilansParent } from './_bilanParent.js';
+import { envoyerNotifs, preparerEnvoi } from './_push.js';
 
 export const config = { maxDuration: 60 };
 
@@ -223,7 +224,12 @@ export default async function handler(req, res) {
       // Après les relances : un parent relancé aujourd'hui n'a pas son bilan le même jour.
       const bilans = await envoyerBilansParent({ db, envoyer, lienAutorisation, auth: getAuthAdmin() })
         .catch(err => { console.error('[bilan-parent]', err?.message || err); return { bilansParent: 0 }; });
-      return res.status(200).json({ ...parents, ...eleves, ...lendemain, ...bilans });
+      // En dernier : pas de notification à qui a reçu le rappel par e-mail aujourd'hui.
+      const pousser = await preparerEnvoi();
+      const push = pousser
+        ? await envoyerNotifs({ db, envoyer: pousser }).catch(err => { console.error('[push]', err?.message || err); return { notifs: 0 }; })
+        : { notifs: 0, pushSansCle: true };
+      return res.status(200).json({ ...parents, ...eleves, ...lendemain, ...bilans, ...push });
     } catch (err) {
       console.error('[relance-parent]', err?.message || err);
       return res.status(500).json({ error: 'RELANCE_FAILED' });

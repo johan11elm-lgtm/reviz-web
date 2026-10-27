@@ -1,5 +1,5 @@
 // -------------------------------------------------------
-// Réviz — Service Worker (cache offline)
+// Réviz — Service Worker (cache offline, notifications web)
 // -------------------------------------------------------
 // v6 : plus de HTML en cache pour un script/style/police/image (Vercel répond index.html en
 // 200 pour un fichier haché disparu : le chunk manquant restait figé) ; seuls les /assets/
@@ -136,4 +136,39 @@ self.addEventListener('fetch', (event) => {
     );
     return;
   }
+});
+
+// Notifications web (rappel de 17 h, api/_push.js) : la charge est un JSON
+// { title, body, url, tag }. Une seule notification Réviz à la fois (tag).
+self.addEventListener('push', (event) => {
+  let n = {};
+  try { n = event.data ? event.data.json() : {}; } catch { n = {}; }
+  const title = n.title || 'Réviz';
+  event.waitUntil(self.registration.showNotification(title, {
+    body: n.body || '',
+    icon: '/icon-192.png',
+    badge: '/favicon-64.png',
+    tag: n.tag || 'reviz',
+    data: { url: n.url || '/?via=push' },
+  }));
+});
+
+// Toucher la notification : l'app déjà ouverte va à la bonne page, sinon on l'ouvre.
+self.addEventListener('notificationclick', (event) => {
+  event.notification.close();
+  const cible = new URL(event.notification.data?.url || '/?via=push', self.location.origin);
+  // Jamais vers un autre site : seulement une page de l'app (adresse de prod ou celle-ci).
+  const chezNous = cible.origin === self.location.origin || cible.hostname === 'app.revizapp.fr';
+  const url = new URL(chezNous ? cible.pathname + cible.search : '/?via=push', self.location.origin).href;
+  event.waitUntil((async () => {
+    const fenetres = await self.clients.matchAll({ type: 'window', includeUncontrolled: true });
+    for (const f of fenetres) {
+      if (new URL(f.url).origin === self.location.origin && 'focus' in f) {
+        await f.focus();
+        if ('navigate' in f) return f.navigate(url);
+        return;
+      }
+    }
+    return self.clients.openWindow(url);
+  })());
 });

@@ -5,6 +5,7 @@ import { BottomNav } from '../components/BottomNav';
 import { GuestBanner } from '../components/GuestBanner';
 import { ConsentBanner } from '../components/ConsentBanner';
 import { EmailBanner } from '../components/EmailBanner';
+import { PushBanner } from '../components/PushBanner';
 import { Mascot } from '../components/Mascot';
 import { Pantin, tempsLettres } from '../components/Pantin';
 import { BulleReviz } from '../components/reviz/BulleReviz';
@@ -473,6 +474,7 @@ export default function Home() {
       <GuestBanner />
       <ConsentBanner />
       <EmailBanner />
+      <PushBanner />
     </div>
   );
 

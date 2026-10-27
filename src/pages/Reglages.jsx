@@ -18,6 +18,8 @@ import { TEINTES, varsTeinte } from '../utils/teinteMatiere';
 import { phaseRevizPlus, joursAvant, dateCourte } from '../utils/revizPlus';
 import { openBillingPortal, startCheckout } from '../services/billingService';
 import { remindersAvailable, isReminderEnabled, enableReminder, disableReminder } from '../services/reminderService';
+import { etatPush, activerPush, desactiverPush, pushActif } from '../services/pushService';
+import { HEURE_RAPPEL } from '../utils/push';
 import { loadLessons } from '../services/historyService';
 import { countDueCards } from '../services/srsService';
 import { FIN_LANCEMENT, DERNIER_JOUR_OFFERT, PREMIER_PRELEVEMENT, VENTES_OUVERTES, tarifFondateurOuvert } from '../../api/_lancement.js';
@@ -180,20 +182,41 @@ export default function Reglages() {
     } finally { setLoading(false); }
   }
 
-  // ── 2. Rappels : rappel quotidien (app native uniquement) ──
-  const notifsAvailable = remindersAvailable();
-  const [reminderOn, setReminderOn]         = useState(isReminderEnabled());
+  // ── 2. Rappels : notifications locales dans l'app native, notifications web ailleurs ──
+  const natif = remindersAvailable();
+  const [push, setPush] = useState(() => etatPush());
+  const notifsAvailable = natif || push === 'proposables' || push === 'autorisees';
+  const [reminderOn, setReminderOn]         = useState(natif ? isReminderEnabled() : false);
   const [reminderDenied, setReminderDenied] = useState(false);
+  const [reminderErreur, setReminderErreur] = useState(false);
+
+  // Web : l'interrupteur suit l'abonnement réel du navigateur.
+  useEffect(() => {
+    if (natif || isGuest) return;
+    let vivant = true;
+    pushActif().then(actif => { if (vivant) setReminderOn(actif); });
+    return () => { vivant = false; };
+  }, [natif, isGuest]);
 
   async function handleReminderToggle(e) {
     const wanted = e.target.checked;
     setReminderDenied(false);
+    setReminderErreur(false);
     if (!wanted) {
       setReminderOn(false);
-      await disableReminder();
+      if (natif) await disableReminder(); else await desactiverPush();
       return;
     }
     setReminderOn(true); // optimiste, reverti si refus
+    if (!natif) {
+      const res = await activerPush('reglages');
+      setPush(etatPush());
+      if (!res.ok) {
+        setReminderOn(false);
+        if (res.raison === 'refusees') setReminderDenied(true); else setReminderErreur(true);
+      }
+      return;
+    }
     const due = loadLessons().reduce(
       (sum, l) => sum + countDueCards(l.id, l.flashcardsCount ?? l.aiData?.flashcards?.length ?? 0),
       0
@@ -313,11 +336,16 @@ export default function Reglages() {
     <section className="rg-carte" aria-labelledby="rg-rappels">
       <h2 id="rg-rappels" className="rg-h2">Rappels</h2>
       {ligne({
-        icone: <BellIcon />, teinte: 'peche', label: 'Rappel quotidien', sous: 'Tous les jours à 18 h 30',
-        droite: notifsAvailable ? <Interrupteur checked={reminderOn} onChange={handleReminderToggle} label="Activer le rappel de révision quotidien à 18 h 30" /> : null,
+        icone: <BellIcon />, teinte: 'peche', label: 'Rappel quotidien',
+        sous: natif ? 'Tous les jours à 18 h 30' : `À ${HEURE_RAPPEL}, les jours où tu n’as pas encore révisé`,
+        droite: notifsAvailable && !isGuest ? <Interrupteur checked={reminderOn} onChange={handleReminderToggle} label={natif ? 'Activer le rappel de révision quotidien à 18 h 30' : `Activer le rappel de révision à ${HEURE_RAPPEL}`} /> : null,
       })}
-      {!notifsAvailable && <p className="rg-note">Les rappels sont disponibles dans l’app mobile Réviz.</p>}
-      {reminderDenied && <Message type="erreur" texte="Notifications refusées : autorise Réviz dans Réglages, puis Notifications." />}
+      {!natif && isGuest && <p className="rg-note">Crée ton compte pour recevoir un rappel à {HEURE_RAPPEL}.</p>}
+      {!natif && !isGuest && push === 'installer' && <p className="rg-note">Sur iPhone, les rappels arrivent une fois Réviz sur ton écran d’accueil. <Link to="/installer">Voir comment l’installer</Link></p>}
+      {!natif && !isGuest && push === 'indisponible' && <p className="rg-note">Ce navigateur n’affiche pas de notifications. Les rappels marchent dans Chrome, Edge, Firefox, Safari et l’app mobile Réviz.</p>}
+      {!natif && !isGuest && push === 'refusees' && !reminderDenied && <p className="rg-note">Notifications bloquées pour Réviz dans ce navigateur : rouvre-les dans ses réglages du site, puis reviens ici.</p>}
+      {reminderDenied && <Message type="erreur" texte={natif ? 'Notifications refusées : autorise Réviz dans Réglages, puis Notifications.' : 'Notifications refusées : rouvre-les dans les réglages du site de ton navigateur.'} />}
+      {reminderErreur && <Message type="erreur" texte="Le rappel n’a pas pu s’activer. Vérifie ta connexion et réessaie." />}
     </section>
   );
 
