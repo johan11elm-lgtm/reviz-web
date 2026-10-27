@@ -96,3 +96,33 @@ describe('handler — désinscription des rappels', () => {
     expect(ecritures).toEqual([])
   })
 })
+
+describe('handler — désinscription du bilan au parent', () => {
+  const uid = 'AbCdEf1234567890'
+  const signeParent = u => signatureDesabo(u, undefined, 'bilans-parent')
+  const query = t => ({ op: 'desabonner', qui: 'parent', uid, t })
+
+  it('GET parle au parent et garde qui=parent dans le formulaire', async () => {
+    const res = mockRes()
+    await handler({ method: 'GET', query: query(signeParent(uid)) }, res)
+    expect(res.statusCode).toBe(200)
+    expect(res.payload).toContain('Ne plus recevoir de bilan')
+    expect(res.payload).toContain('op=desabonner&qui=parent&uid=')
+    expect(ecritures).toEqual([])
+  })
+  it('POST coupe le bilan, pas les rappels de l’élève', async () => {
+    const res = mockRes()
+    await handler({ method: 'POST', query: query(signeParent(uid)), body: 'List-Unsubscribe=One-Click' }, res)
+    expect(res.statusCode).toBe(200)
+    expect(ecritures).toEqual([{ chemin: `users/${uid}`, data: { bilansParent: false }, opts: { merge: true } }])
+  })
+  it('un lien de l’un ne vaut pas pour l’autre', async () => {
+    const res = mockRes()
+    await handler({ method: 'POST', query: query(signatureDesabo(uid)) }, res)
+    expect(res.statusCode).toBe(400)
+    const res2 = mockRes()
+    await handler({ method: 'POST', query: { op: 'desabonner', uid, t: signeParent(uid) } }, res2)
+    expect(res2.statusCode).toBe(400)
+    expect(ecritures).toEqual([])
+  })
+})

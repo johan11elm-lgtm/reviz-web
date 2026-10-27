@@ -25,20 +25,24 @@ export const AGE_MAX_MS = 48 * HEURE_MS
 const APP = 'https://app.revizapp.fr'
 const EXPEDITEUR = 'Réviz <noreply@revizapp.fr>'
 
-function escapeHtml(s) {
+export function escapeHtml(s) {
   return String(s).replace(/[&<>"']/g, c => (
     { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]
   ))
 }
 
-/** Signature du lien de désinscription d'un compte (clé : CRON_SECRET). */
-export function signatureDesabo(uid, secret = process.env.CRON_SECRET) {
+/**
+ * Signature du lien de désinscription d'un compte (clé : CRON_SECRET).
+ * portee : 'rappels' (rappels à l'élève) ou 'bilans-parent' (api/_bilanParent.js) ;
+ * un lien de l'un ne désinscrit jamais de l'autre.
+ */
+export function signatureDesabo(uid, secret = process.env.CRON_SECRET, portee = 'rappels') {
   if (!secret) return null
-  return createHmac('sha256', secret).update(`rappels:${uid}`).digest('hex').slice(0, 32)
+  return createHmac('sha256', secret).update(`${portee}:${uid}`).digest('hex').slice(0, 32)
 }
 
-export function signatureValide(uid, t, secret = process.env.CRON_SECRET) {
-  const attendu = signatureDesabo(uid, secret)
+export function signatureValide(uid, t, secret = process.env.CRON_SECRET, portee = 'rappels') {
+  const attendu = signatureDesabo(uid, secret, portee)
   if (!attendu || typeof t !== 'string' || t.length !== attendu.length) return false
   return timingSafeEqual(Buffer.from(attendu), Buffer.from(t))
 }
@@ -57,7 +61,7 @@ export function prenomPropre(brut) {
 }
 
 /** Titre de chapitre ou de leçon : une ligne, 80 caractères. */
-function titrePropre(brut) {
+export function titrePropre(brut) {
   const t = String(brut ?? '').replace(/\s+/g, ' ').trim().slice(0, 80).trim()
   return t || null
 }
@@ -79,8 +83,8 @@ export function sujetRappel(session, lecon = null) {
 }
 
 // Couleurs de l'app (src/styles/global.css) : crème, carte blanche, encre, orange.
-const C = { fond: '#F2E7DA', carte: '#FFFFFF', encre: '#2D2B57', texte: '#1B1A23', second: '#6B6557', muet: '#8A826F', filet: '#EADFD0', surligneur: '#FFE6D2' }
-const POLICE = "'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
+export const C = { fond: '#F2E7DA', carte: '#FFFFFF', encre: '#2D2B57', texte: '#1B1A23', second: '#6B6557', muet: '#8A826F', filet: '#EADFD0', surligneur: '#FFE6D2' }
+export const POLICE ="'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
 // Réviz qui accueille à bras ouverts (pose « retour », servie par l'app).
 const MASCOTTE = `${APP}/mascot/pose-s4-retour@256.png`
 

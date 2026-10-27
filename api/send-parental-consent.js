@@ -11,7 +11,8 @@
 // relance les élèves qui n'ont pas encore donné l'email d'un parent (« Plus
 // tard ») à J+3, J+10 et J+14 avant la mise en pause du compte. Envoie aussi
 // le rappel du lendemain : première session ou compte créé la veille
-// (api/_rappels.js). Greffé
+// (api/_rappels.js), et le bilan des premiers jours au parent, à J+3
+// (api/_bilanParent.js). Greffé
 // ici plutôt que dans une 13e fonction (limite du plan Vercel Hobby). Seul
 // Vercel peut l'appeler : il envoie CRON_SECRET dans l'en-tête Authorization.
 
@@ -20,6 +21,7 @@ import { randomUUID } from 'node:crypto';
 import { getDb, getAuthAdmin } from './_firebaseAdmin.js';
 import { DELAI_ADRESSE_MS, DELAI_REPONSE_MS } from '../src/utils/consent.js';
 import { relancerLendemain } from './_rappels.js';
+import { envoyerBilansParent } from './_bilanParent.js';
 
 export const config = { maxDuration: 60 };
 
@@ -218,7 +220,10 @@ export default async function handler(req, res) {
       // Un échec du rappel J+1 ne doit pas masquer les relances déjà faites.
       const lendemain = await relancerLendemain({ db, envoyer, emailDe, auth: getAuthAdmin() })
         .catch(err => { console.error('[rappel-j1]', err?.message || err); return { rappelsJ1: 0 }; });
-      return res.status(200).json({ ...parents, ...eleves, ...lendemain });
+      // Après les relances : un parent relancé aujourd'hui n'a pas son bilan le même jour.
+      const bilans = await envoyerBilansParent({ db, envoyer, lienAutorisation, auth: getAuthAdmin() })
+        .catch(err => { console.error('[bilan-parent]', err?.message || err); return { bilansParent: 0 }; });
+      return res.status(200).json({ ...parents, ...eleves, ...lendemain, ...bilans });
     } catch (err) {
       console.error('[relance-parent]', err?.message || err);
       return res.status(500).json({ error: 'RELANCE_FAILED' });

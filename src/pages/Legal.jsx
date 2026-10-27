@@ -77,6 +77,7 @@ const PAGES = {
             <li>Fournir le service de révision (génération IA, suivi de progression).</li>
             <li>Authentifier les utilisateurs.</li>
             <li>T'envoyer, le lendemain de ta première révision, un seul email de rappel qui te ramène sur ton chapitre (et une notification sur l'application mobile, si tu les as autorisées). Pas d'email de rappel avant 15 ans sans l'autorisation d'un parent. Tu peux t'en désinscrire d'un clic depuis l'email.</li>
+            <li>Envoyer au parent dont tu as donné l'adresse (moins de 15 ans), quelques jours après ton arrivée, un seul email de bilan : les chapitres et les formats que tu as révisés, sans tes scores et sans publicité. Il peut s'en désinscrire d'un clic depuis l'email.</li>
             <li>Améliorer l'application.</li>
           </ul>
         </Section>
