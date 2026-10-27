@@ -39,8 +39,9 @@ for (const [appareil, viewport] of APPAREILS) {
       // Le compte dit qui l'on est.
       await expect(page.getByRole('button', { name: /Prénom et classe/ })).toContainText('Camille · 5e')
       await expect(page.getByRole('button', { name: /Adresse e-mail/ })).toContainText(email)
-      // Sur navigateur, pas de rappel quotidien : une note le dit.
-      await expect(page.getByText('Les rappels sont disponibles dans l’app mobile Réviz.')).toBeVisible()
+      // Sur navigateur, le rappel quotidien passe par les notifications web (le Chromium
+      // des tests les refuse : une note remplace alors l'interrupteur).
+      await expect(page.getByText('À 17 h, les jours où tu n’as pas encore révisé')).toBeVisible()
       await page.screenshot({ path: test.info().outputPath(`${appareil}-reglages.png`), animations: 'disabled' })
     })
 
