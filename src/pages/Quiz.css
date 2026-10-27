@@ -172,6 +172,17 @@
 .qz-page .qz-fin-actions { display: flex; flex-direction: column; gap: 12px; margin-top: 22px; }
 .qz-page .qz-fin-actions .fc-btn--blanc { height: 52px; }
 
+/* « Montre ça à tes parents » (fin de quiz, moins de 15 ans sans adresse de parent). */
+.qz-page--fin .fc-ecran > .qz-parent { margin-top: 20px; }
+.qz-page .qz-parent { border: 2px solid var(--rv-peche-pale); }
+.qz-page .qz-parent-texte { margin: 8px 0 0; font-size: 15px; line-height: 1.5; color: var(--ch-doux); }
+.qz-page .qz-parent-form { display: flex; gap: 10px; margin-top: 14px; }
+.qz-page .qz-parent-input { flex: 1; min-width: 0; height: 52px; padding: 0 16px; border: 2px solid var(--rv-ligne); border-radius: 16px; background: var(--rv-carte); color: var(--rv-encre); font: inherit; font-size: 16px; }
+.qz-page .qz-parent-input:focus-visible { outline: none; border-color: var(--rv-orange); }
+.qz-page .qz-parent-btn { flex: none; width: auto; height: 52px; padding: 0 20px; }
+.qz-page .qz-parent-erreur { margin: 10px 0 0; font-size: 14px; font-weight: 600; color: var(--rv-marque-fonce); }
+.qz-page .qz-parent--fait { border-color: var(--rv-vert-pale); }
+
 /* ─── Ordinateur (1440 × 900) ─── */
 .qz-page--large .qz-plateau {
   flex: 1;

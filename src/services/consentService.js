@@ -17,18 +17,20 @@ export function consentErrorMessage(code) {
 }
 
 /**
- * Envoie la demande de consentement parental.
+ * Envoie la demande de consentement parental. Avec `resultat`
+ * ({ score, total, chapitre?: { classe, matiere (slug), id } }), le mail montre
+ * aussi au parent le score d'un quiz (carte « Montre ça à tes parents »).
  * @returns {Promise<{ok:boolean, alreadyApproved?:boolean}>}
  * @throws {Error} avec un code serveur (PARENT_EMAIL_IS_CHILD, RATE_LIMITED, …)
  */
-export async function sendParentalConsent(parentEmail, childName) {
+export async function sendParentalConsent(parentEmail, childName, resultat = null) {
   const idToken = await auth.currentUser?.getIdToken().catch(() => null)
   if (!idToken) throw new Error('UNAUTHORIZED')
 
   const res = await apiFetch('/api/send-parental-consent', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ idToken, parentEmail, childName }),
+    body: JSON.stringify({ idToken, parentEmail, childName, ...(resultat ? { resultat } : {}) }),
   })
 
   if (!res.ok) {

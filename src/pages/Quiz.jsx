@@ -2,6 +2,7 @@ import { useState, useEffect, useMemo, useRef } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { fermerVersFiche, versExercice } from '../utils/navigation'
 import { recordRevision, markRevisionDone, loadRevisions } from '../services/revisionService'
+import { loadLessons } from '../services/historyService'
 import { getCardState, countDueCards } from '../services/srsService'
 import { Pantin } from '../components/Pantin'
 import { Mascot } from '../components/Mascot'
@@ -9,6 +10,7 @@ import { BulleReviz } from '../components/reviz/BulleReviz'
 import { RouteSerie } from '../components/reviz/RouteSerie'
 import { MissingLessonState } from '../components/MissingLessonState'
 import { FormatFeedback } from '../components/FormatFeedback'
+import { MontreParent } from '../components/MontreParent'
 import { CoachChat } from '../components/CoachChat'
 import { useAuth } from '../context/AuthContext'
 import { useIsDesktop } from '../hooks/useMediaQuery'
@@ -271,6 +273,8 @@ function QuizSession() {
         </div>
       </section>
     )
+    const lecon = coachLessonId ? loadLessons().find(l => l.id === coachLessonId) ?? null : null
+    const montre = <MontreParent score={nbJustes} total={questions.length} lecon={lecon} />
     const boutons = premiere ? (
       <div className="qz-fin-actions">
         <button type="button" className="fc-btn fc-btn--orange" onClick={fermer}>Continuer</button>
@@ -292,13 +296,14 @@ function QuizSession() {
           {isDesktop ? (
             <div className="qz-fin-grille">
               <div className="qz-fin-gauche">{score}{reviz(220, 'fier', 'saut')}{pastilles}</div>
-              <div className="qz-fin-droite">{premiere ? <>{boutons}{aRevoir}</> : <>{parcours}{aRevoir}{boutons}<FormatFeedback format="quiz" question="Ce quiz t'a aidé ?" /><button type="button" className="fc-lien" onClick={fermer}>Retour au chapitre</button></>}</div>
+              <div className="qz-fin-droite">{montre}{premiere ? <>{boutons}{aRevoir}</> : <>{parcours}{aRevoir}{boutons}<FormatFeedback format="quiz" question="Ce quiz t'a aidé ?" /><button type="button" className="fc-lien" onClick={fermer}>Retour au chapitre</button></>}</div>
             </div>
           ) : (
             <>
               {score}
               {reviz(170, 'fier', 'saut')}
               {pastilles}
+              {montre}
               {premiere ? <>{boutons}{aRevoir}</> : (
                 <>
                   {parcours}

@@ -24,8 +24,8 @@ export function ConsentBanner({ className = '' }) {
   if (consent?.status === 'a-fournir') {
     const j = consent.joursRestants;
     return (
-      <Bandeau teinte="rose" titre="E-mail d’un parent" suite={`plus que ${j} jour${j > 1 ? 's' : ''} avant la mise en pause de ton compte.`}
-        action={{ to: '/consent-pending', label: 'Le donner' }} className={`consent-banner ${className}`.trim()} />
+      <Bandeau teinte="rose" titre="Montre tes révisions à un parent" suite={`son accord garde ton compte, plus que ${j} jour${j > 1 ? 's' : ''}.`}
+        action={{ to: '/consent-pending', label: 'Le faire' }} className={`consent-banner ${className}`.trim()} />
     );
   }
 
