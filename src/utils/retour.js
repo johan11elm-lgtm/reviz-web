@@ -14,6 +14,22 @@ export function jourParis(date = new Date()) {
   return new Intl.DateTimeFormat('fr-CA', { timeZone: 'Europe/Paris', year: 'numeric', month: '2-digit', day: '2-digit' }).format(date)
 }
 
+// Liens envoyés à des élèves qui ont déjà un compte : e-mail du lendemain,
+// notification. Sur iPhone, le lien d'un e-mail s'ouvre dans Safari, où
+// l'élève n'est souvent pas connecté (l'app installée garde sa session à part).
+const VIA_COMPTE = ['rappel', 'push']
+
+/**
+ * Où envoyer un visiteur sans session qui ouvre une page réservée aux comptes :
+ * l'accueil des nouveaux, ou, venu d'un rappel, la connexion qui le ramène
+ * ensuite sur la page du lien (même chemin que « J'ai déjà un compte » de /essai).
+ * @param {{ pathname: string, search: string }} location
+ */
+export function entreeSansSession({ pathname, search }) {
+  const via = new URLSearchParams(search).get('via')
+  return VIA_COMPTE.includes(via) ? `/connexion?next=${encodeURIComponent(pathname + search)}` : '/welcome'
+}
+
 /**
  * Lien qui rouvre directement le quiz d'un chapitre du programme (le même que
  * celui des fiches publiques, voir pages/Essai.jsx). null hors programme.
