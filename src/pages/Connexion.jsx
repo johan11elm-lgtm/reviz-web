@@ -16,6 +16,16 @@ function firebaseErrorFr(code) {
   }
 }
 
+// Page à rouvrir après la connexion (`?next=/essai?…`, posé par un lien d'e-mail
+// quand l'élève n'était pas connecté) : seulement un chemin de l'app, jamais
+// une adresse extérieure.
+export function suiteApresConnexion(search) {
+  try {
+    const next = new URLSearchParams(search).get('next') ?? '';
+    return /^\/(?!\/)[\p{L}\p{N}\/?&=%._-]{0,300}$/u.test(next) ? next : '/';
+  } catch { return '/'; }
+}
+
 export default function Connexion() {
   const [email, setEmail]       = useState('');
   const [password, setPassword] = useState('');
@@ -25,6 +35,7 @@ export default function Connexion() {
 
   const { login, loginWithProvider, loginWithCustomToken, resetPassword } = useAuth();
   const navigate = useNavigate();
+  const suite = suiteApresConnexion(window.location.search);
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -32,7 +43,7 @@ export default function Connexion() {
     setLoading(true);
     try {
       await login(email, password);
-      navigate('/', { replace: true });
+      navigate(suite, { replace: true });
     } catch (err) {
       setError(firebaseErrorFr(err.code));
     } finally {
@@ -51,7 +62,7 @@ export default function Connexion() {
     if (echec) { setError('Connexion TikTok impossible. Réessaie.'); return; }
     setLoading(true);
     loginWithCustomToken(token)
-      .then(() => navigate('/', { replace: true }))
+      .then(() => navigate(suite, { replace: true }))
       .catch(() => { setError('Connexion TikTok impossible. Réessaie.'); setLoading(false); });
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -61,7 +72,7 @@ export default function Connexion() {
     try {
       const user = await loginWithProvider(id);
       if (!user) return; // redirection en cours (TikTok)
-      navigate('/', { replace: true });
+      navigate(suite, { replace: true });
     } catch (err) {
       const msg = erreurConnexionSociale(err);
       if (msg) setError(msg);

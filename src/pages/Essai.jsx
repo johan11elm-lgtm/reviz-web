@@ -119,7 +119,11 @@ export default function Essai() {
           <Encart icone="horloge" teinte="lavande">
             Ta progression reste sur cet appareil. Crée un compte quand tu veux pour la retrouver partout.
           </Encart>
-          <LienTexte to="/inscription">Je préfère créer mon compte</LienTexte>
+          {params.get('via') === 'rappel'
+            // Venu d'un e-mail de Réviz sans être connecté sur cet appareil : son
+            // compte existe déjà, la connexion le ramène sur ce quiz.
+            ? <LienTexte to={`/connexion?next=${encodeURIComponent(window.location.pathname + window.location.search)}`}>J'ai déjà un compte, je me connecte</LienTexte>
+            : <LienTexte to="/inscription">Je préfère créer mon compte</LienTexte>}
         </>
       )}
     >
