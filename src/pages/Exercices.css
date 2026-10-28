@@ -1,0 +1,395 @@
+/* ─── Exercices en jeu (29/10) ───────────────────────────────────────────────
+ * Le fond, la barre du haut, la feuille de correction et l'écran de fin viennent du quiz
+ * (Quiz.css, classes qn-* et qz-*). Ici : le cadre commun et la zone de chaque format.
+ * Couleurs de l'app façon Nomad : cartes blanches à ombre légère, lavande pour le choix en
+ * cours, turquoise pour le juste, rose pour le faux. */
+.ex-page {
+  --ex-encre: #042A65;
+  --ex-ombre: 0 1px 3px rgba(4,42,101,.1), 0 1px 2px rgba(4,42,101,.06);
+  --ex-lavande: #F2EBFF;
+  --ex-lavande-fort: #7B6FD6;
+  --ex-juste: #04ADB3;
+  --ex-juste-pale: #DDF5F4;
+  --ex-juste-texte: #035E62;
+  --ex-faux: #E0364D;
+  --ex-faux-pale: #FFE5E8;
+  --ex-faux-texte: #A3172B;
+}
+
+/* ── Le cadre ── */
+.ex-page .ex-cadre { display: flex; flex-direction: column; gap: 14px; animation: exEntre .35s cubic-bezier(.2,.9,.3,1) both; }
+@keyframes exEntre { from { transform: translateX(24px); opacity: 0; } }
+.ex-page .ex-consigne { margin: 2px 0 0; font: 800 22px/1.2 'Poppins', system-ui, sans-serif; text-align: center; text-wrap: balance; color: var(--ex-encre); }
+.ex-page .ex-reviz { display: flex; align-items: center; gap: 10px; }
+.ex-page .ex-reviz-emote { width: 60px; height: 60px; flex: none; border-radius: 18px; background: var(--ex-lavande); display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.ex-page .ex-bulle {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+  padding: 12px 14px;
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: var(--ex-ombre);
+  font: 600 16px/1.4 'Poppins', system-ui, sans-serif;
+  color: var(--ex-encre);
+  text-wrap: pretty;
+}
+.ex-page .ex-bulle::before { content: ''; position: absolute; left: -6px; top: 50%; width: 12px; height: 12px; margin-top: -6px; background: #fff; transform: rotate(45deg); border-radius: 2px; }
+.ex-page .ex-zone { display: flex; flex-direction: column; gap: 12px; }
+.ex-page .ex-valider {
+  height: 54px;
+  border: 0;
+  border-radius: 14px;
+  background: var(--ex-encre);
+  box-shadow: 0 4px 0 #001330;
+  font: 700 16px 'Poppins', system-ui, sans-serif;
+  color: #fff;
+  cursor: pointer;
+}
+.ex-page .ex-valider:disabled { opacity: .35; box-shadow: none; cursor: default; }
+.ex-page .ex-valider:not(:disabled):active { transform: translateY(3px); box-shadow: none; }
+.ex-page .ex-valider:focus-visible, .ex-page .ex-cadre button:focus-visible { outline: 3px solid var(--ex-encre); outline-offset: 2px; }
+.ex-page .ex-aide { margin: 0; font-size: 13px; font-weight: 600; text-align: center; color: var(--rv-doux); }
+.ex-page .ex-bonne { margin: 10px 0 0; font-size: 15px; font-weight: 500; color: var(--ex-encre); }
+.ex-page .ex-bonne b { font-weight: 700; }
+
+/* États communs d'une case : choisie, juste, fausse, ternie après correction */
+.ex-page .ex-cadre button { font-family: 'Poppins', system-ui, sans-serif; color: var(--ex-encre); -webkit-tap-highlight-color: transparent; }
+.ex-page .ex-cadre .ex-valider { color: #fff; }
+.ex-page .ex-cadre button:disabled { cursor: default; }
+
+/* ── Liste de réponses (Quiz, Trois indices) ── */
+.ex-page .ex-choix { display: flex; flex-direction: column; overflow: hidden; border-radius: 20px; background: #fff; box-shadow: var(--ex-ombre); }
+.ex-page .ex-choix-btn {
+  min-height: 60px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 16px 12px 14px;
+  border: 0;
+  background: #fff;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.35;
+  text-align: left;
+  cursor: pointer;
+  transition: background .2s;
+}
+.ex-page .ex-choix-btn + .ex-choix-btn { border-top: 1px solid var(--rv-ligne); }
+.ex-page .ex-choix-btn:not(:disabled):not(.is-choisi):hover { background: #FBF8F5; }
+.ex-page .ex-lettre { width: 34px; height: 34px; flex: none; border-radius: 10px; background: var(--ex-lavande); display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; }
+.ex-page .ex-choix-txt { flex: 1; min-width: 0; }
+.ex-page .ex-choix-btn.is-choisi { background: var(--ex-lavande); }
+.ex-page .ex-choix-btn.is-choisi .ex-lettre { background: var(--ex-lavande-fort); color: #fff; }
+.ex-page .ex-choix-btn.is-juste { background: var(--ex-juste-pale); color: var(--ex-juste-texte); }
+.ex-page .ex-choix-btn.is-juste .ex-lettre { background: var(--ex-juste); color: #fff; }
+.ex-page .ex-choix-btn.is-faux { background: var(--ex-faux-pale); color: var(--ex-faux-texte); }
+.ex-page .ex-choix-btn.is-faux .ex-lettre { background: var(--ex-faux); color: #fff; }
+.ex-page .ex-choix-btn.is-terne { opacity: .55; }
+
+/* Définition : deux grandes tuiles côte à côte */
+.ex-page .ex-choix--duo { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; overflow: visible; background: none; box-shadow: none; }
+.ex-page .ex-choix--duo .ex-choix-btn {
+  min-height: 120px;
+  justify-content: center;
+  padding: 16px 12px;
+  border: 0;
+  border-radius: 20px;
+  box-shadow: var(--ex-ombre);
+  font-size: 17px;
+  font-weight: 700;
+  text-align: center;
+  transition: transform .15s, background .2s;
+}
+.ex-page .ex-choix--duo .ex-choix-btn + .ex-choix-btn { border-top: 0; }
+.ex-page .ex-choix--duo .ex-choix-btn.is-choisi { box-shadow: inset 0 0 0 2px var(--ex-lavande-fort); transform: translateY(-3px); }
+
+/* ── Trois indices : les indices reliés à la case du thème ── */
+.ex-page .ex-arbre { position: relative; display: flex; flex-direction: column; align-items: center; }
+.ex-page .ex-arbre-tete {
+  position: relative;
+  z-index: 1;
+  min-width: 180px;
+  max-width: 100%;
+  min-height: 50px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 18px;
+  border: 2px dashed var(--ex-lavande-fort);
+  border-radius: 999px;
+  background: var(--ex-lavande);
+  font-size: 16px;
+  font-weight: 700;
+  text-align: center;
+  color: var(--ex-encre);
+  transition: background .2s, border-color .2s;
+}
+.ex-page .ex-arbre-tete.is-pose { border-style: solid; background: #fff; }
+.ex-page .ex-arbre-tete.is-juste { border: 2px solid var(--ex-juste); background: var(--ex-juste-pale); color: var(--ex-juste-texte); }
+.ex-page .ex-arbre-tete.is-faux { border: 2px solid var(--ex-faux); background: var(--ex-faux-pale); color: var(--ex-faux-texte); }
+.ex-page .ex-arbre-tronc { width: 4px; height: 14px; background: #D8D2F7; }
+.ex-page .ex-arbre-indices { position: relative; width: 100%; display: flex; flex-direction: column; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.ex-page .ex-arbre-indices::before { content: ''; position: absolute; left: 50%; top: -2px; bottom: 20px; width: 4px; margin-left: -2px; background: #D8D2F7; }
+.ex-page .ex-arbre-indices li {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: var(--ex-ombre);
+  font-size: 15px;
+  font-weight: 600;
+}
+.ex-page .ex-indice-num { width: 26px; height: 26px; flex: none; border-radius: 50%; background: var(--ex-encre); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; }
+
+/* ── 4 coins : la carte au centre, à poser dans un coin ── */
+.ex-page .ex-coins { position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.ex-page .ex-coin {
+  min-height: 140px;
+  display: flex;
+  padding: 12px;
+  border: 0;
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: var(--ex-ombre);
+  cursor: pointer;
+  transition: background .2s, box-shadow .2s;
+}
+.ex-page .ex-coin--0 { align-items: flex-start; justify-content: flex-start; text-align: left; }
+.ex-page .ex-coin--1 { align-items: flex-start; justify-content: flex-end; text-align: right; }
+.ex-page .ex-coin--2 { align-items: flex-end; justify-content: flex-start; text-align: left; }
+.ex-page .ex-coin--3 { align-items: flex-end; justify-content: flex-end; text-align: right; }
+.ex-page .ex-coin-nom { max-width: 92%; font-size: 14px; font-weight: 700; line-height: 1.25; }
+.ex-page .ex-coin.is-choisi, .ex-page .ex-coin.is-survol { background: var(--ex-lavande); box-shadow: inset 0 0 0 2px var(--ex-lavande-fort); }
+.ex-page .ex-coin.is-juste { background: var(--ex-juste-pale); box-shadow: inset 0 0 0 2px var(--ex-juste); color: var(--ex-juste-texte); }
+.ex-page .ex-coin.is-faux { background: var(--ex-faux-pale); box-shadow: inset 0 0 0 2px var(--ex-faux); color: var(--ex-faux-texte); }
+.ex-page .ex-coin.is-terne { opacity: .55; }
+.ex-page .ex-carte-coin {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 2;
+  width: 44%;
+  min-height: 72px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 12px;
+  border-radius: 16px;
+  background: var(--ex-encre);
+  box-shadow: 0 10px 24px rgba(4,42,101,.28);
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.25;
+  text-align: center;
+  color: #fff;
+  pointer-events: none;
+  transform: translate(-50%, -50%) rotate(-3deg);
+  transition: left .3s cubic-bezier(.3,1.3,.5,1), top .3s cubic-bezier(.3,1.3,.5,1), transform .3s cubic-bezier(.3,1.3,.5,1), background .2s;
+}
+.ex-page .ex-carte-coin[draggable='true'] { pointer-events: auto; cursor: grab; }
+.ex-page .ex-carte-coin[draggable='true']:active { cursor: grabbing; }
+/* Posée, la carte rapetisse dans la moitié de sa tuile côté centre : le nom du coin reste lisible. */
+.ex-page .ex-carte-coin.is-pose { transform: translate(-50%, -50%) scale(.78); }
+.ex-page .ex-carte-coin.is-pose--0 { left: 25%; top: 34%; }
+.ex-page .ex-carte-coin.is-pose--1 { left: 75%; top: 34%; }
+.ex-page .ex-carte-coin.is-pose--2 { left: 25%; top: 66%; }
+.ex-page .ex-carte-coin.is-pose--3 { left: 75%; top: 66%; }
+.ex-page .ex-carte-coin.is-juste { background: var(--ex-juste); }
+.ex-page .ex-carte-coin.is-faux { background: var(--ex-faux); }
+
+/* ── Intrus : quatre cartes, la choisie se soulève ── */
+.ex-page .ex-cartes { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.ex-page .ex-carte {
+  position: relative;
+  min-height: 112px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px 12px 14px;
+  border: 0;
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: var(--ex-ombre);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.3;
+  text-align: center;
+  cursor: pointer;
+  transition: transform .25s cubic-bezier(.3,1.4,.5,1), background .2s, box-shadow .2s;
+}
+.ex-page .ex-carte:nth-child(odd).is-choisi { transform: translateY(-6px) rotate(-2.5deg); }
+.ex-page .ex-carte:nth-child(even).is-choisi { transform: translateY(-6px) rotate(2.5deg); }
+.ex-page .ex-carte.is-choisi { background: var(--ex-lavande); box-shadow: inset 0 0 0 2px var(--ex-lavande-fort), 0 10px 20px rgba(4,42,101,.12); }
+.ex-page .ex-carte.is-juste { background: var(--ex-juste-pale); box-shadow: inset 0 0 0 2px var(--ex-juste); color: var(--ex-juste-texte); }
+.ex-page .ex-carte.is-faux { background: var(--ex-faux-pale); box-shadow: inset 0 0 0 2px var(--ex-faux); color: var(--ex-faux-texte); }
+.ex-page .ex-carte.is-terne { opacity: .55; }
+.ex-page .ex-carte-tag {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: var(--rv-vif);
+  font-size: 12px;
+  font-weight: 700;
+  color: #fff;
+  transform: translateX(-50%);
+  animation: exTag .3s cubic-bezier(.3,1.6,.5,1) both;
+}
+.ex-page .ex-carte.is-juste .ex-carte-tag { background: var(--ex-juste); }
+.ex-page .ex-carte.is-faux .ex-carte-tag { background: var(--ex-faux); }
+@keyframes exTag { from { transform: translateX(-50%) scale(.4); opacity: 0; } }
+
+/* ── Paires : les mots à gauche, les définitions à droite ── */
+.ex-page .ex-paires { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); gap: 10px; }
+.ex-page .ex-paires-col { display: flex; flex-direction: column; gap: 10px; }
+.ex-page .ex-paire {
+  flex: 1;
+  min-height: 64px;
+  padding: 10px 12px;
+  border: 0;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: var(--ex-ombre);
+  text-align: left;
+  cursor: pointer;
+  transition: background .2s, box-shadow .2s, opacity .3s;
+}
+.ex-page .ex-paire--mot { font-size: 15px; font-weight: 700; line-height: 1.25; }
+.ex-page .ex-paire--def { font-size: 13px; font-weight: 500; line-height: 1.35; }
+.ex-page .ex-paire.is-choisi { background: var(--ex-lavande); box-shadow: inset 0 0 0 2px var(--ex-lavande-fort); }
+.ex-page .ex-paire.is-juste { position: relative; padding-left: 38px; background: var(--ex-juste-pale); box-shadow: none; color: var(--ex-juste-texte); }
+.ex-page .ex-paire-num { position: absolute; left: 10px; top: 50%; width: 20px; height: 20px; margin-top: -10px; border-radius: 50%; background: var(--ex-juste); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; color: #fff; }
+.ex-page .ex-paire.is-faux { background: var(--ex-faux-pale); box-shadow: inset 0 0 0 2px var(--ex-faux); color: var(--ex-faux-texte); animation: exNon .35s; }
+@keyframes exNon { 20%, 60% { transform: translateX(-5px); } 40%, 80% { transform: translateX(5px); } }
+
+/* ── Chronologie : toucher dans l'ordre, les rangs s'inscrivent ── */
+.ex-page .ex-frise { display: flex; flex-direction: column; gap: 10px; margin: 0; padding: 0; list-style: none; }
+.ex-page .ex-evenement {
+  width: 100%;
+  min-height: 60px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px 10px 12px;
+  border: 0;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: var(--ex-ombre);
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.3;
+  text-align: left;
+  cursor: pointer;
+  transition: background .2s, box-shadow .2s;
+}
+.ex-page .ex-rang {
+  width: 34px;
+  height: 34px;
+  flex: none;
+  box-sizing: border-box;
+  border: 2px dashed #C9C2F2;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  font-weight: 800;
+}
+.ex-page .ex-evenement-txt { flex: 1; min-width: 0; }
+.ex-page .ex-evenement-date { flex: none; padding: 4px 9px; border-radius: 8px; background: #fff; font-size: 13px; font-weight: 700; }
+.ex-page .ex-evenement.is-choisi { background: var(--ex-lavande); }
+.ex-page .ex-evenement.is-choisi .ex-rang { border: 0; background: var(--ex-encre); color: #fff; animation: exTag .25s cubic-bezier(.3,1.6,.5,1) both; }
+.ex-page .ex-evenement.is-juste { background: var(--ex-juste-pale); color: var(--ex-juste-texte); }
+.ex-page .ex-evenement.is-juste .ex-rang { border: 0; background: var(--ex-juste); color: #fff; }
+.ex-page .ex-evenement.is-faux { background: var(--ex-faux-pale); color: var(--ex-faux-texte); }
+.ex-page .ex-evenement.is-faux .ex-rang { border: 0; background: var(--ex-faux); color: #fff; }
+.ex-page .ex-effacer { align-self: center; padding: 6px 12px; border: 0; background: none; font-size: 14px; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+
+/* ── Année : curseur sur une frise de 60 ans ── */
+.ex-page .ex-annee { display: flex; flex-direction: column; gap: 10px; padding: 18px 16px 14px; border-radius: 20px; background: #fff; box-shadow: var(--ex-ombre); }
+.ex-page .ex-annee-valeur { font: 800 52px/1 'Poppins', system-ui, sans-serif; font-variant-numeric: tabular-nums; letter-spacing: -.02em; text-align: center; color: var(--ex-encre); }
+.ex-page .ex-annee.is-juste .ex-annee-valeur { color: var(--ex-juste-texte); }
+.ex-page .ex-annee.is-faux .ex-annee-valeur { color: var(--ex-faux-texte); text-decoration: line-through; text-decoration-thickness: 3px; }
+.ex-page .ex-annee-reglage { display: flex; align-items: center; gap: 10px; }
+.ex-page .ex-annee-pas {
+  width: 44px;
+  height: 44px;
+  flex: none;
+  border: 0;
+  border-radius: 50%;
+  background: var(--ex-lavande);
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1;
+  cursor: pointer;
+}
+.ex-page .ex-annee-pas:disabled { opacity: .4; }
+.ex-page .ex-annee-piste { position: relative; flex: 1; min-width: 0; padding-top: 22px; }
+.ex-page .ex-annee-piste input[type='range'] {
+  width: 100%;
+  height: 28px;
+  margin: 0;
+  background: transparent;
+  -webkit-appearance: none;
+  appearance: none;
+  cursor: pointer;
+}
+.ex-page .ex-annee-piste input[type='range']::-webkit-slider-runnable-track { height: 10px; border-radius: 999px; background: linear-gradient(to right, var(--rv-vif) var(--pct), #E8DFD7 var(--pct)); }
+.ex-page .ex-annee-piste input[type='range']::-moz-range-track { height: 10px; border-radius: 999px; background: linear-gradient(to right, var(--rv-vif) var(--pct), #E8DFD7 var(--pct)); }
+.ex-page .ex-annee-piste input[type='range']::-webkit-slider-thumb { width: 28px; height: 28px; margin-top: -9px; border: 3px solid var(--ex-encre); border-radius: 50%; background: #fff; box-shadow: 0 2px 6px rgba(4,42,101,.25); -webkit-appearance: none; }
+.ex-page .ex-annee-piste input[type='range']::-moz-range-thumb { width: 22px; height: 22px; border: 3px solid var(--ex-encre); border-radius: 50%; background: #fff; }
+.ex-page .ex-annee-piste input[type='range']:disabled { cursor: default; }
+.ex-page .ex-annee-repere { position: absolute; top: 0; display: flex; flex-direction: column; align-items: center; font-size: 12px; font-weight: 800; color: var(--ex-juste-texte); transform: translateX(-50%); pointer-events: none; }
+.ex-page .ex-annee-repere i { order: 2; width: 4px; height: 26px; margin-top: 2px; border-radius: 2px; background: var(--ex-juste); }
+.ex-page .ex-annee-bornes { display: flex; justify-content: space-between; padding: 0 54px; font-size: 12px; font-weight: 600; color: var(--rv-doux); }
+
+/* ── Correction et fin ── */
+.ex-page .ex-correction .qz-verdict { font-size: 19px; }
+.ex-page .ex-fin-reviz { display: flex; flex-direction: column; align-items: center; gap: 8px; margin-top: 10px; }
+.ex-page .ex-fin-emote { display: flex; width: 132px; height: 132px; border-radius: 36px; background: var(--ex-lavande); align-items: center; justify-content: center; overflow: hidden; }
+.ex-page .ex-fin-phrase { max-width: 300px; margin: 0; font-size: 16px; font-weight: 600; line-height: 1.4; text-align: center; color: #042A65; }
+.ex-page .qz-carte .qz-segments { display: flex; gap: 4px; margin: 14px 0 0; }
+.ex-page .qz-carte .qz-segments i { flex: 1; height: 8px; border-radius: 99px; background: #E8DFD7; }
+.ex-page .qz-carte .qz-segments i.is-juste { background: #04ADB3; }
+.ex-page .qz-carte .qz-segments i.is-faux { background: #E0364D; }
+.ex-page .ex-recap-formats { display: flex; flex-wrap: wrap; gap: 6px; margin: 14px 0 0; padding: 0; list-style: none; }
+.ex-page .ex-recap-formats li { display: inline-flex; align-items: center; gap: 6px; padding: 5px 10px 5px 6px; border-radius: 8px; font-size: 13px; font-weight: 600; }
+.ex-page .ex-recap-formats li i { width: 18px; height: 18px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; color: #fff; }
+.ex-page .ex-recap-formats li.is-juste { background: var(--ex-juste-pale); color: var(--ex-juste-texte); }
+.ex-page .ex-recap-formats li.is-juste i { background: var(--ex-juste); }
+.ex-page .ex-recap-formats li.is-faux { background: var(--ex-faux-pale); color: var(--ex-faux-texte); }
+.ex-page .ex-recap-formats li.is-faux i { background: var(--ex-faux); }
+
+/* ── Ordinateur : la colonne centrale du quiz, des zones plus grandes ── */
+.ex-page.qn-page--large .ex-consigne { font-size: 26px; }
+.ex-page.qn-page--large .ex-bulle { font-size: 17px; padding: 14px 18px; }
+.ex-page.qn-page--large .ex-reviz-emote { width: 72px; height: 72px; }
+.ex-page.qn-page--large .ex-coin { min-height: 170px; padding: 16px; }
+.ex-page.qn-page--large .ex-coin-nom { font-size: 16px; }
+.ex-page.qn-page--large .ex-coin:not(:disabled):not(.is-choisi):not(.is-survol):hover { background: #FBF8F5; }
+.ex-page.qn-page--large .ex-carte-coin { width: 38%; min-height: 84px; font-size: 17px; }
+.ex-page.qn-page--large .ex-carte { min-height: 140px; font-size: 17px; }
+.ex-page.qn-page--large .ex-carte:not(:disabled):not(.is-choisi):hover { transform: translateY(-3px); }
+.ex-page.qn-page--large .ex-paire--mot { font-size: 16px; }
+.ex-page.qn-page--large .ex-paire--def { font-size: 14.5px; }
+.ex-page.qn-page--large .ex-paire:not(:disabled):not(.is-choisi):not(.is-faux):hover { background: #FBF8F5; }
+.ex-page.qn-page--large .ex-choix--duo .ex-choix-btn { min-height: 150px; font-size: 20px; }
+.ex-page.qn-page--large .ex-evenement:not(:disabled):not(.is-choisi):hover { background: #FBF8F5; }
+.ex-page.qn-page--large .ex-annee-valeur { font-size: 64px; }
+.ex-page.qn-page--large .ex-valider { align-self: center; width: 360px; height: 58px; }
+.ex-page.qn-page--large .ex-valider:not(:disabled):hover { transform: translateY(-1px); }
+.ex-page .qn-cote .qz-segments { display: flex; gap: 4px; margin: 4px 0; }
+.ex-page.qz-page--large .ex-fin-emote { width: 180px; height: 180px; border-radius: 48px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .ex-page .ex-cadre, .ex-page .ex-carte-tag, .ex-page .ex-paire.is-faux, .ex-page .ex-evenement.is-choisi .ex-rang { animation: none; }
+  .ex-page .ex-carte-coin, .ex-page .ex-carte { transition: none; }
+}

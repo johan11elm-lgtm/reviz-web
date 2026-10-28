@@ -12,7 +12,7 @@ import './EspaceParent.css';
  * (jours, chapitres, formats), les contrôles à venir et la préparation, pas les notes.
  */
 
-const FORMATS = { quiz: 'Quiz', flashcards: 'Flashcards', resume: 'Résumé', mindmap: 'Carte mentale' };
+const FORMATS = { quiz: 'Quiz', flashcards: 'Flashcards', resume: 'Résumé', mindmap: 'Carte mentale', exercices: 'Exercices en jeu' };
 const majuscule = s => s.charAt(0).toUpperCase() + s.slice(1);
 const jourEnClair = j => majuscule(new Date(`${j}T12:00`).toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' }));
 const classeLisible = c => String(c ?? '').replace(/^(\d)ème$/, '$1e');

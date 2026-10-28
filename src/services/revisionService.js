@@ -100,7 +100,7 @@ function premierJourLocal() {
 
 /**
  * Enregistre une session de révision (ouverture d'un format, résumé lu, quiz terminé…).
- * @param {'flashcards'|'quiz'|'resume'|'mindmap'} type
+ * @param {'flashcards'|'quiz'|'resume'|'mindmap'|'exercices'} type
  * @param {object} [details] champs en plus, ex. { score, total } pour un quiz terminé
  */
 export function recordRevision(type, details = {}) {
@@ -142,7 +142,7 @@ export function recordRevision(type, details = {}) {
 /**
  * Révision menée jusqu'au bout (dernière question du quiz, dernière carte) :
  * complète l'entrée ouverte par recordRevision() pour ce format.
- * @param {'flashcards'|'quiz'} type
+ * @param {'flashcards'|'quiz'|'exercices'} type
  * @param {{ score?: number, total?: number }} [resultat]
  */
 export function markRevisionDone(type, resultat = {}) {
@@ -174,9 +174,10 @@ export function lierEssai(essaiId) {
 
 /**
  * Dernier et meilleur score au quiz d'une leçon : { dernier: {score, total}, meilleur } ou null.
+ * `type` : 'exercices' pour le score des exercices en jeu.
  */
-export function quizScore(lessonId) {
-  const faits = loadRevisions().filter(r => r.lessonId === lessonId && r.type === 'quiz' && Number.isFinite(r.score) && r.total)
+export function quizScore(lessonId, type = 'quiz') {
+  const faits = loadRevisions().filter(r => r.lessonId === lessonId && r.type === type && Number.isFinite(r.score) && r.total)
   if (!faits.length) return null
   const meilleur = faits.reduce((m, r) => (r.score / r.total > m.score / m.total ? r : m), faits[0])
   return { dernier: { score: faits[0].score, total: faits[0].total }, meilleur: { score: meilleur.score, total: meilleur.total } }
