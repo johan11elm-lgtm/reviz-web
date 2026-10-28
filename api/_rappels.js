@@ -88,11 +88,21 @@ export function sujetRappel(session, lecon = null) {
   return { titre, matiere, source: s.source ?? null, lien: `${APP}/?via=rappel` }
 }
 
-// Couleurs de l'app (src/styles/global.css) : crème, carte blanche, encre, orange.
+// Ancienne palette (crème, encre, Geist) : encore celle du bilan au parent (api/_bilanParent.js).
 export const C = { fond: '#F2E7DA', carte: '#FFFFFF', encre: '#2D2B57', texte: '#1B1A23', second: '#6B6557', muet: '#8A826F', filet: '#EADFD0', surligneur: '#FFE6D2' }
 export const POLICE ="'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
-// Réviz qui accueille à bras ouverts (pose « retour », servie par l'app).
-const MASCOTTE = `${APP}/mascot/pose-s4-retour@256.png`
+
+// Nouvelle DA de l'app (28/10, src/styles/global.css) : fond sable, carte blanche, marine,
+// orange vif, lavande, Poppins (Gmail ne charge pas la police : repli système).
+export const DA = {
+  fond: '#F5EFEB', carte: '#FFFFFF', encre: '#042A65', tranche: '#001330', doux: '#4A5B78', ligne: '#E6DFD8',
+  vif: '#FF4B0A', orange: '#D8400A', orangeTexte: '#B83706', lavande: '#E4E0FA', peche: '#FFE6D2',
+}
+const POPPINS = "'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
+// Réviz qui accueille à bras ouverts (pose « retour »), et la tête du logo : servies par l'app.
+const MASCOTTE = `${APP}/mascot/pose-s4-retour@512.png`
+const EMOTE = `${APP}/mascot/pose-9-hello@256.png`
+const PASTILLE = `${APP}/logo/pastille.png`
 
 /**
  * Le mail : sujet et HTML (styles en ligne, tableau : les clients mail n'aiment rien d'autre).
@@ -106,14 +116,14 @@ export function mailRappelJ1({ prenom, titre = null, matiere = null, source = nu
   const safeTitre = titre ? escapeHtml(titre) : null
   const safeMatiere = matiere ? escapeHtml(matiere) : null
   const scan = source === 'scan'
-  const surligne = safeTitre ? `<span style="background:${C.surligneur}; padding:0 5px; border-radius:4px; box-decoration-break:clone; -webkit-box-decoration-break:clone;">${safeTitre}</span>` : null
 
   const subject = !titre ? 'Ton premier chapitre t\'attend'
     : scan ? `Ta leçon « ${titre} » t'attend`
     : `${titre} : tu t'en souviens ?`
-  const accroche = !safeTitre ? 'Hier, tu as créé ton compte. Aujourd\'hui, premier chapitre.'
-    : scan ? `Hier, tu as scanné ${surligne}. Ta leçon est prête, elle n'attend plus que toi.`
-    : `Hier, tu as commencé ${surligne}. Aujourd'hui, on vérifie que c'est resté.`
+  // Titre à deux couleurs, comme l'accueil de l'app : marine, puis orange.
+  const [haut, bas, sous] = !safeTitre ? ['Hier, tu as créé ton compte.', 'Aujourd\'hui, premier chapitre.', null]
+    : scan ? ['Hier, tu as scanné', `${safeTitre}.`, 'Ta leçon est prête, elle n\'attend plus que toi.']
+    : ['Hier, tu as commencé', `${safeTitre}.`, 'Aujourd\'hui, on vérifie que c\'est resté.']
   const detail = !safeTitre
     ? 'Choisis un chapitre de ton programme : trois minutes, quelques questions, et ton cerveau fait le reste.'
     : scan
@@ -121,65 +131,81 @@ export function mailRappelJ1({ prenom, titre = null, matiere = null, source = nu
       : `Le quiz prend trois minutes : quelques questions${safeMatiere ? ` de ${safeMatiere}` : ''}, et ton cerveau fait le reste.`
   const bouton = !safeTitre ? 'Choisir un chapitre' : scan ? 'Reprendre ma leçon' : 'Faire le quiz'
   const demandeAdresse = accord === 'adresse' && !!lienAccord
+  const surtitre = `Le lendemain${safeMatiere ? ` · ${safeMatiere}` : ''}`
 
-  const p = (txt, extra = '') => `<p style="margin:0 0 14px; font-family:${POLICE}; font-size:16px; line-height:1.55; color:${C.texte};${extra}">${txt}</p>`
+  const p = (txt, extra = '') => `<p style="margin:0 0 16px; font-family:${POPPINS}; font-size:16px; line-height:1.6; color:${DA.doux};${extra}">${txt}</p>`
+  // Bouton plein marine en relief (tranche foncée dessous), comme les boutons de l'app.
   const gros = (href, texte) => `
-          <table role="presentation" cellpadding="0" cellspacing="0" style="margin:6px 0 22px;"><tr><td style="background:${C.encre}; border-radius:12px;">
-            <a href="${href}" style="display:inline-block; padding:15px 26px; font-family:${POLICE}; font-size:16px; font-weight:700; color:#FFFFFF; text-decoration:none;">${texte} →</a>
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:4px 0 20px;"><tr><td align="center" style="background:${DA.encre}; border-radius:14px; border-bottom:4px solid ${DA.tranche};">
+            <a href="${href}" style="display:block; padding:16px 20px; font-family:${POPPINS}; font-size:17px; font-weight:700; line-height:1.2; color:#FFFFFF; text-decoration:none;">${texte} →</a>
           </td></tr></table>`
-  const encadre = txt => `
-          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:0 0 18px;"><tr><td style="background:${C.surligneur}; border-radius:12px; padding:12px 14px; font-family:${POLICE}; font-size:14px; line-height:1.5; color:${C.texte};">
+  const encadre = (txt, fond = DA.lavande) => `
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:0 0 18px;"><tr><td style="background:${fond}; border-radius:18px; padding:14px 16px; font-family:${POPPINS}; font-size:14px; line-height:1.55; color:${DA.encre};">
             ${txt}
           </td></tr></table>`
   // Le lien de vérification d'adresse porte toujours sur le bouton principal.
-  const verification = verifieAdresse ? encadre('Ce lien confirme aussi ton adresse e-mail : pas besoin de chercher l\'autre mail.') : ''
+  // Une ligne discrète sous le bouton, pas un deuxième encadré.
+  const verification = verifieAdresse ? p('Ce lien confirme aussi ton adresse e&#8209;mail : pas besoin de chercher l\'autre mail.', ' margin:-8px 0 18px; text-align:center; font-size:13px; line-height:1.5;') : ''
   const corps = demandeAdresse
     ? `
-          ${p('Une chose d\'abord : comme tu as moins de 15 ans, un parent doit dire oui pour que tu gardes ton compte. Tu tapes son adresse, il reçoit un mail avec un bouton. Trente secondes, et tout ce que tu as révisé reste à toi.')}
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:0 0 18px;"><tr>
+            <td width="64" style="background:${DA.lavande}; border-radius:18px 0 0 18px; padding:14px 0 14px 14px; vertical-align:top;">
+              <img src="${EMOTE}" width="50" height="50" alt="" style="display:block; width:50px; height:auto; border:0;">
+            </td>
+            <td style="background:${DA.lavande}; border-radius:0 18px 18px 0; padding:14px 16px 14px 10px; font-family:${POPPINS}; font-size:15px; line-height:1.55; color:${DA.encre};">
+              <strong>Une chose d'abord :</strong> comme tu as moins de 15 ans, un parent doit dire oui pour que tu gardes ton compte. Tu tapes son adresse, il reçoit un mail avec un bouton. Trente secondes, et tout ce que tu as révisé reste à toi.
+            </td>
+          </tr></table>
           ${gros(lienAccord, 'Prévenir un parent')}
           ${verification}
-          ${p(`<a href="${lien}" style="color:${C.encre}; font-weight:700;">${!safeTitre ? 'Ou choisis un chapitre' : scan ? 'Ou reprends ta leçon' : 'Ou fais le quiz'} tout de suite</a>`, ` font-size:15px;`)}`
+          ${p(`<a href="${lien}" style="color:${DA.orangeTexte}; font-weight:700; text-decoration:underline;">${!safeTitre ? 'Ou choisis un chapitre' : scan ? 'Ou reprends ta leçon' : 'Ou fais le quiz'} tout de suite</a>`, ' text-align:center; font-size:15px;')}`
     : `
           ${p(detail)}
           ${gros(lien, bouton)}
           ${verification}
-          ${accord === 'attente' ? encadre('Ton parent n\'a pas encore dit oui. Il a reçu un mail de Réviz avec le bouton « Donner mon autorisation » : montre-le-lui (et regardez dans ses spams s\'il ne le trouve pas). Sans son accord, ton compte sera mis en pause.') : ''}`
+          ${accord === 'attente' ? encadre('<strong>Ton parent n\'a pas encore dit oui.</strong> Il a reçu un mail de Réviz avec le bouton «&nbsp;Donner mon autorisation&nbsp;» : montre-le-lui (et regardez dans ses spams s\'il ne le trouve pas). Sans son accord, ton compte sera mis en pause.', DA.peche) : ''}`
   return {
     subject,
     html: `
 <!doctype html>
-<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>${escapeHtml(subject)}</title></head>
-<body style="margin:0; padding:0; background:${C.fond};">
-  <div style="display:none; max-height:0; overflow:hidden; color:${C.fond};">${escapeHtml(subject)}. Trois minutes, et c'est dans la boîte.</div>
-  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:${C.fond}; padding:28px 12px;">
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width">
+<meta name="color-scheme" content="light only"><meta name="supported-color-schemes" content="light only">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+<title>${escapeHtml(subject)}</title></head>
+<body style="margin:0; padding:0; background:${DA.fond};">
+  <div style="display:none; max-height:0; overflow:hidden; color:${DA.fond};">${escapeHtml(subject)}. Trois minutes, et c'est dans la boîte.</div>
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:${DA.fond}; padding:22px 12px 28px;">
     <tr><td align="center">
-      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:520px; background:${C.carte}; border-radius:20px; overflow:hidden;">
-        <tr><td style="padding:28px 28px 8px;">
-          <table role="presentation" cellpadding="0" cellspacing="0" width="100%"><tr>
-            <td style="vertical-align:middle;">
-              <div style="font-family:${POLICE}; font-size:12px; font-weight:700; letter-spacing:0.6px; text-transform:uppercase; color:${C.muet};">Réviz · le lendemain</div>
-              <h1 style="margin:10px 0 0; font-family:${POLICE}; font-size:24px; line-height:1.25; font-weight:800; color:${C.texte};">${accroche}</h1>
-            </td>
-            <td width="96" style="vertical-align:top; padding-left:12px;">
-              <img src="${MASCOTTE}" width="88" height="88" alt="Réviz, le cerveau, qui t'accueille à bras ouverts" style="display:block; width:88px; height:auto; border:0;">
-            </td>
-          </tr></table>
+      <table role="presentation" cellpadding="0" cellspacing="0" style="margin:0 auto 14px;"><tr>
+        <td style="font-family:${POPPINS}; font-size:28px; font-weight:800; letter-spacing:-0.5px; color:${DA.encre}; vertical-align:middle;">réviz</td>
+        <td style="padding-left:3px; vertical-align:middle;"><img src="${PASTILLE}" width="34" height="34" alt="" style="display:block; width:34px; height:34px; border:0;"></td>
+      </tr></table>
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:520px; background:${DA.carte}; border-radius:28px; box-shadow:0 4px 14px rgba(4,42,101,0.07), 0 1px 3px rgba(0,0,0,0.04);">
+        <tr><td style="padding:16px 16px 0;">
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr><td align="center" style="background:${DA.vif}; border-radius:22px; padding:20px 0 0; line-height:0;">
+            <img src="${MASCOTTE}" width="170" height="170" alt="Réviz, le cerveau, qui t'accueille à bras ouverts" style="display:block; margin:0 auto; width:170px; height:auto; border:0;">
+          </td></tr></table>
         </td></tr>
-        <tr><td style="padding:12px 28px 0;">
-          ${p(safeName ? `Salut <strong>${safeName}</strong>,` : 'Salut,')}
+        <tr><td style="padding:22px 26px 0;">
+          <div style="font-family:${POPPINS}; font-size:12px; font-weight:700; letter-spacing:0.8px; text-transform:uppercase; color:${DA.orangeTexte};">${surtitre}</div>
+          <h1 style="margin:8px 0 0; font-family:${POPPINS}; font-size:27px; line-height:1.18; font-weight:800; letter-spacing:-0.4px; color:${DA.encre};">${haut}<br><span style="color:${DA.orange};">${bas}</span></h1>
+          ${sous ? `<p style="margin:10px 0 0; font-family:${POPPINS}; font-size:17px; line-height:1.45; color:${DA.doux};">${sous}</p>` : ''}
+        </td></tr>
+        <tr><td style="padding:20px 26px 0;">
+          ${p(safeName ? `Salut <strong style="color:${DA.encre};">${safeName}</strong>,` : 'Salut,')}
           ${corps}
         </td></tr>
-        <tr><td style="padding:0 28px 26px;">
-          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-top:1px solid ${C.filet};"><tr><td style="padding-top:16px;">
-            <div style="font-family:${POLICE}; font-size:12px; font-weight:700; letter-spacing:0.6px; text-transform:uppercase; color:${C.muet};">Pourquoi maintenant</div>
-            ${p('Ce qu\'on revoit le lendemain reste. Ce qu\'on laisse filer s\'efface. C\'est toute la méthode de Réviz : un peu, souvent, et jamais la veille à 23 h.', ` margin:8px 0 0; font-size:14px; color:${C.second};`)}
-            ${p('— Réviz, le cerveau (pas l\'appli, le cerveau)', ` margin:14px 0 0; font-size:14px; font-weight:700; color:${C.encre};`)}
+        <tr><td style="padding:2px 26px 26px;">
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-top:1px solid ${DA.ligne};"><tr><td style="padding-top:18px;">
+            <div style="font-family:${POPPINS}; font-size:15px; font-weight:800; color:${DA.encre};">Pourquoi maintenant ?</div>
+            ${p('Ce qu\'on revoit le lendemain reste. Ce qu\'on laisse filer s\'efface. C\'est toute la méthode de Réviz : un peu, souvent, et jamais la veille à 23&nbsp;h.', ' margin:6px 0 0; font-size:14px;')}
+            ${p('— Réviz, le cerveau (pas l\'appli, le cerveau)', ` margin:12px 0 0; font-size:14px; font-weight:700; color:${DA.encre};`)}
           </td></tr></table>
         </td></tr>
       </table>
-      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:520px;"><tr><td style="padding:16px 20px 0; font-family:${POLICE}; font-size:12px; line-height:1.6; color:${C.muet};">
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:520px;"><tr><td align="center" style="padding:18px 20px 0; font-family:${POPPINS}; font-size:12px; line-height:1.7; color:${DA.doux};">
         Tu reçois ce message une seule fois, le lendemain de ton arrivée sur Réviz.<br/>
-        ${desabo ? `<a href="${desabo}" style="color:${C.muet};">Ne plus recevoir de rappels</a> · ` : ''}<a href="${APP}/legal/confidentialite" style="color:${C.muet};">Politique de confidentialité</a> · <a href="${APP}" style="color:${C.muet};">app.revizapp.fr</a>
+        ${desabo ? `<a href="${desabo}" style="color:${DA.doux};">Ne plus recevoir de rappels</a> · ` : ''}<a href="${APP}/legal/confidentialite" style="color:${DA.doux};">Politique de confidentialité</a> · <a href="${APP}" style="color:${DA.doux};">app.revizapp.fr</a>
       </td></tr></table>
     </td></tr>
   </table>

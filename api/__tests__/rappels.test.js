@@ -86,7 +86,7 @@ describe('rappel du lendemain (J+1) — première session', () => {
     expect(m.subject).toBe('Le théorème de Pythagore : tu t\'en souviens ?')
     expect(m.html).toContain(LIEN_PYTHAGORE)
     expect(m.html).toContain('Hier, tu as commencé')
-    expect(m.html).toContain('Salut <strong>Léa</strong>')
+    expect(m.html).toMatch(/Salut <strong[^>]*>Léa<\/strong>/)
     expect(m.html).toContain('quelques questions de Maths')
     expect(m.html).not.toContain('confirme aussi ton adresse')
     expect(m.headers['List-Unsubscribe']).toContain('op=desabonner')
