@@ -349,3 +349,57 @@
 .ag-puce-chapitre { padding: 6px 10px; border: 0; border-radius: 8px; background: #F2EBFF; font: 600 12.5px 'Poppins', system-ui, sans-serif; color: #042A65; text-align: left; cursor: pointer; }
 .ag-puce-chapitre:hover { background: #E7DEFF; }
 .ag-puce-chapitre:focus-visible { outline: 3px solid var(--rv-vif); outline-offset: 1px; }
+
+/* ═══ Feuille « Ajouter un contrôle » façon app Nomad (29/10) : fond crème, matières en tuiles
+ * blanches (choix entouré d'orange) comme dans le Programme, dates et calendrier blancs, jour
+ * choisi en marine, libellés en gras plutôt qu'en capitales. ═══ */
+.ag-feuille { background: var(--rv-fond); color: #042A65; }
+.ag-feuille-tete h2 { font-family: inherit; font-size: 22px; letter-spacing: -.01em; color: #042A65; }
+.ag-fermer { border-radius: 12px; background: #fff; box-shadow: 0 1px 3px rgba(4,42,101,.12); color: #042A65; }
+.ag-feuille .ag-champ-titre { margin: 18px 2px 10px; font-size: 15px; font-weight: 700; letter-spacing: 0; text-transform: none; color: #042A65; }
+.ag-feuille .ag-champ-titre span { font-size: 13px; color: var(--rv-doux); }
+.ag-matieres { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+.ag-matiere {
+  width: 100%; height: 54px; justify-content: flex-start; gap: 10px; padding: 0 10px 0 8px;
+  border-radius: 14px; background: #fff; color: #042A65; font-size: 14.5px; font-weight: 600;
+  text-align: left; line-height: 1.2;
+  box-shadow: 0 1px 3px rgba(4,42,101,.1), 0 1px 2px rgba(4,42,101,.06);
+}
+.ag-matiere.is-choisie { box-shadow: 0 0 0 2px var(--rv-vif-plein), 0 4px 12px rgba(216,64,10,.14); }
+.ag-matiere-rond { flex: none; width: 38px; height: 38px; border-radius: 10px; background: #F2EBFF; }
+.ag-matiere.is-choisie .ag-matiere-rond { background: #FFE9DF; }
+.ag-matiere:focus-visible { outline: 3px solid #042A65; outline-offset: 2px; }
+.ag-date-tuile { border-radius: 14px; background: #fff; box-shadow: 0 1px 3px rgba(4,42,101,.1); color: #042A65; }
+.ag-date-tuile b { font-family: inherit; }
+.ag-date-tuile.is-choisie { background: #042A65; color: #fff; box-shadow: none; }
+.ag-date-choisie { color: #042A65; }
+.ag-cal { border-radius: 18px; background: #fff; box-shadow: 0 1px 3px rgba(4,42,101,.1); }
+.ag-cal-tete button { border-radius: 10px; }
+.ag-cal-jour { border-radius: 10px; color: #042A65; }
+.ag-cal-jour.is-auj { box-shadow: inset 0 0 0 2px var(--rv-vif); }
+.ag-cal-jour.is-choisi { background: #042A65; color: #fff; }
+.ag-feuille .ag-input { border-radius: 12px; border-color: #E6DFD8; background: #fff; }
+.ag-feuille .ag-input:focus { border-color: var(--rv-vif); }
+.ag-feuille .ag-btn { border-radius: 14px; background: var(--rv-vif-plein); box-shadow: 0 4px 0 #B83706; }
+.ag-feuille .ag-btn:disabled { background: #E0D6CD; box-shadow: none; color: #fff; }
+.ag-feuille .ag-btn--creme { background: #fff; color: #042A65; box-shadow: 0 1px 3px rgba(4,42,101,.12), 0 3px 0 #E6DFD8; }
+@media (min-width: 1024px) {
+  .ag-feuille--fenetre { width: 940px; max-height: calc(100vh - 48px); }
+  .ag-feuille--fenetre .ag-feuille-deux { grid-template-columns: minmax(0, 1fr) 340px; }
+  .ag-feuille--fenetre .ag-matieres { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .ag-feuille--fenetre .ag-matiere { height: 50px; gap: 8px; padding-left: 6px; font-size: 13.5px; }
+  .ag-feuille--fenetre .ag-matiere-rond { width: 34px; height: 34px; }
+}
+
+/* Carte du prochain contrôle façon Nomad (29/10) : émotes dans un carré lavande comme les tuiles
+ * du Programme, compte à rebours à plat, libellés en gras plutôt qu'en capitales espacées. */
+.na-page .ag-rond { border-radius: 14px; background: #F2EBFF; }
+.na-page .ag-rond--petit { border-radius: 12px; }
+.na-page .ag-sur { font-size: 13px; letter-spacing: 0; text-transform: none; }
+.na-page .ag-sur--doux { font-size: 12px; letter-spacing: .04em; }
+.na-page .ag-prochain-txt b { font-size: 17px; letter-spacing: -.01em; }
+.na-page .ag-rebours { min-width: 60px; height: 60px; background: #F2EBFF; color: #042A65; box-shadow: none; font-size: 24px; }
+.na-page .ag-rebours--mot { font-size: 14px; }
+.na-page .ag-ctrl-jour { background: #F2EBFF; }
+.na-page .ag-ligne .ag-rond { width: 46px; height: 46px; }
+.na-page.ag-page--large .ag-rebours--mot { font-size: 18px; }

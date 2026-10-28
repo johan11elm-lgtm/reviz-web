@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { useAuth } from '../context/AuthContext';
 import { useModalA11y } from '../hooks/useModalA11y';
 import { useIsDesktop } from '../hooks/useMediaQuery';
@@ -164,11 +165,9 @@ export function AjoutControle({ initial = {}, onClose, onSaved }) {
       <span className="ag-champ-titre">Matière</span>
       <div className="ag-matieres">
         {MATIERES_CONTROLE.map(x => {
-          const k = couleursMatiere(x.slug);
           const choisie = matiere === x.slug;
           return (
-            <button key={x.slug} type="button" className={`ag-matiere${choisie ? ' is-choisie' : ''}`} aria-pressed={choisie} onClick={() => { if (x.slug !== matiere) setChapitres([]); setMatiere(x.slug); }}
-              style={{ background: k.fond, boxShadow: choisie ? `0 0 0 2px var(--rv-encre), 0 4px 0 ${k.tranche}` : `0 4px 0 ${k.tranche}` }}>
+            <button key={x.slug} type="button" className={`ag-matiere${choisie ? ' is-choisie' : ''}`} aria-pressed={choisie} onClick={() => { if (x.slug !== matiere) setChapitres([]); setMatiere(x.slug); }}>
               <span className="ag-matiere-rond" aria-hidden="true"><Mascot pose={x.mascot} size={30} alt="" /></span>
               {x.slug === 'autre' ? 'Autre' : x.label}
             </button>
@@ -196,7 +195,8 @@ export function AjoutControle({ initial = {}, onClose, onSaved }) {
     </>
   );
 
-  return (
+  // Portail : la fenêtre passe au-dessus de la barre du haut, comme l'offre Réviz+.
+  return createPortal(
     <div className="ag-voile" onClick={onClose}>
       <form className={`ag-feuille${isDesktop ? ' ag-feuille--fenetre' : ''}`} ref={ref} role="dialog" aria-modal="true" aria-labelledby="ajout-controle-titre"
         onClick={e => e.stopPropagation()} onSubmit={enregistrer} noValidate>
@@ -218,6 +218,7 @@ export function AjoutControle({ initial = {}, onClose, onSaved }) {
           <button type="submit" className="ag-btn" disabled={envoi || !matiere || !date}>{envoi ? 'Enregistrement…' : 'Ajouter'}</button>
         </div>
       </form>
-    </div>
+    </div>,
+    document.body,
   );
 }

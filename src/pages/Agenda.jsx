@@ -94,7 +94,6 @@ export default function Agenda() {
   const [prochain, ...suite] = aVenir;
   const n = prochain ? joursEntre(aujourdhui, prochain.date) : 0;
   const { lignes } = bulle(prochain, n);
-  const c = prochain ? couleursMatiere(prochain.matiere) : null;
 
   // « Réviser » : la fiche du chapitre du contrôle à travailler (chapitres cochés à l'ajout),
   // sinon le programme de la matière.
@@ -149,13 +148,13 @@ export default function Agenda() {
   const carteProchain = prochain ? (
     <div className="ag-carte ag-prochain">
       <div className="ag-prochain-haut">
-        <span className="ag-rond ag-rond--grand" style={{ background: c.fond }} aria-hidden="true"><Mascot pose={matiereControle(prochain.matiere).mascot} size={isDesktop ? 60 : 48} alt="" /></span>
+        <span className="ag-rond ag-rond--grand" aria-hidden="true"><Mascot pose={matiereControle(prochain.matiere).mascot} size={isDesktop ? 60 : 48} alt="" /></span>
         <span className="ag-prochain-txt">
           <span className="ag-sur">Prochain contrôle</span>
           <b>{titreControle(prochain)}</b>
           <span>{majuscule(jourEnClair(prochain.date))}</span>
         </span>
-        <span className={`ag-rebours${n <= 1 ? ' ag-rebours--mot' : ''}`} style={{ background: c.fond, boxShadow: `0 5px 0 ${c.tranche}` }}>{rebours(n, true)}</span>
+        <span className={`ag-rebours${n <= 1 ? ' ag-rebours--mot' : ''}`}>{rebours(n, true)}</span>
       </div>
       {prochain.chapitres?.length > 0 && (
         <div className="ag-chapitres-du" aria-label="Chapitres du contrôle">
@@ -185,12 +184,11 @@ export default function Agenda() {
       {suite.length ? (
         <ul className="ag-liste">
           {suite.map(x => {
-            const k = couleursMatiere(x.matiere);
             const j = joursEntre(aujourdhui, x.date);
             return (
               <li key={x.id} className="ag-ligne">
                 <button type="button" className="ag-ligne-ouvrir" onClick={() => reviser(x)}>
-                  <span className="ag-rond" style={{ background: k.fond }} aria-hidden="true"><Mascot pose={matiereControle(x.matiere).mascot} size={isDesktop ? 40 : 42} alt="" /></span>
+                  <span className="ag-rond" aria-hidden="true"><Mascot pose={matiereControle(x.matiere).mascot} size={isDesktop ? 40 : 42} alt="" /></span>
                   <span className="ag-ligne-txt">
                     <b>{titreControle(x)}</b>
                     <span>{majuscule(jourEnClair(x.date))}</span>
@@ -374,7 +372,7 @@ function EmploiDuTemps({ user, isGuest, lien, controles, onAgenda, onAjout, onRe
         <div className="ag-carte ag-jour-carte">
           <span className="ag-sur ag-sur--doux">{jourEnClair(choisi).toUpperCase()}{choisi === aujourdhui ? ' · AUJOURD’HUI' : ''}</span>
           {duJour(choisi).map(x => (
-            <div key={x.id} className="ag-ctrl-jour" style={{ background: couleursMatiere(x.matiere).fond }}>
+            <div key={x.id} className="ag-ctrl-jour">
               <span className="ag-ctrl-jour-txt"><span className="ag-sur">Contrôle noté</span><b>{titreControle(x)}</b></span>
               <button type="button" className="ag-pilule ag-pilule--orange" onClick={() => onReviser(x)}>Réviser</button>
             </div>
@@ -389,7 +387,7 @@ function EmploiDuTemps({ user, isGuest, lien, controles, onAgenda, onAjout, onRe
                     <button type="button" className={`ag-cours-ligne${x.annule ? ' is-annule' : ''}`} onClick={() => onAjout({ matiere: m ?? 'autre', date: choisi })}
                       aria-label={`${nomDuCours(x.titre)} à ${heure(x.debut)}. Noter un contrôle ce jour-là`}>
                       <span className="ag-heure"><b>{heureEnClair(x.debut)}</b><span>{heureEnClair(x.fin)}</span></span>
-                      <span className="ag-rond ag-rond--petit" style={{ background: couleursMatiere(m ?? 'autre').fond }} aria-hidden="true">{m && <Mascot pose={matiereControle(m).mascot} size={34} alt="" />}</span>
+                      <span className="ag-rond ag-rond--petit" aria-hidden="true">{m && <Mascot pose={matiereControle(m).mascot} size={34} alt="" />}</span>
                       <span className="ag-cours-txt"><b>{nomDuCours(x.titre)}</b><span>{x.annule ? 'Annulé' : detail}</span></span>
                     </button>
                   </li>

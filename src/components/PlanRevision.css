@@ -86,3 +86,16 @@
   font: 700 14px 'Poppins', system-ui, sans-serif;
   cursor: pointer;
 }
+
+/* Façon app Nomad (29/10) : titre en gras plutôt qu'en capitales, étapes en tuiles crème sans
+ * contour épais, boutons en rectangle arrondi, état de préparation en étiquette. */
+.pr-titre { font-size: 16px; font-weight: 700; letter-spacing: 0; text-transform: none; color: #042A65; }
+.pr-etat { border-radius: 8px; }
+.pr-etape { border-radius: 16px; background: #F7F2EE; }
+.pr-etape--aujourdhui { background: #F7F2EE; box-shadow: none; }
+.pr-rond { border-radius: 12px; background: #fff; }
+.pr-coche { background: #04ADB3; }
+.pr-txt b { color: #042A65; }
+.pr-go { height: 40px; border-radius: 12px; }
+.pr-debloquer { border-radius: 12px; background: var(--rv-vif-plein); }
+.pr-txt b { line-height: 1.25; }
