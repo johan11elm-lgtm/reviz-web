@@ -40,6 +40,7 @@ import { track } from '../services/statsService';
 import { apiFetch, apiUrl } from '../services/apiClient';
 import { collection, getDocs, deleteDoc, doc, getDoc, setDoc } from 'firebase/firestore';
 import { noterOuverture } from '../services/retourService';
+import { reprendreAvatarDuProfil } from '../services/avatarService';
 
 const AuthContext = createContext();
 
@@ -444,6 +445,8 @@ export function AuthProvider({ children }) {
     // complété (pas de date de naissance) → doit finir l'inscription.
     const hasPassword = user.providerData?.some(p => p.providerId === 'password');
     setNeedsProfileSetup(!hasPassword && !user.isAnonymous && !profile?.birthDate);
+    // Photo de profil choisie sur un autre appareil.
+    reprendreAvatarDuProfil(user.uid, profile?.avatar);
 
     const premium = profile?.plan === 'premium';
     setIsPremium(premium);

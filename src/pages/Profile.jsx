@@ -7,6 +7,8 @@ import { getUserProfile } from '../services/userProfileService';
 import { BottomNav } from '../components/BottomNav';
 import { LevelSelector } from '../components/LevelSelector';
 import { Mascot } from '../components/Mascot';
+import { Avatar } from '../components/Avatar';
+import { ChoixAvatar } from '../components/ChoixAvatar';
 import { computeStreak, computeLevel, computeBadges, XP_PAR_NIVEAU, XP_PAR_LECON } from '../utils/gamification';
 import { phaseRevizPlus } from '../utils/revizPlus';
 import { DERNIER_JOUR_OFFERT } from '../../api/_lancement.js';
@@ -116,6 +118,7 @@ export default function Profile() {
 
   const [detail, setDetail] = useState(null);
   const [edition, setEdition] = useState(null); // { prenom, niveau }
+  const [choixAvatar, setChoixAvatar] = useState(false);
   const [enregistrement, setEnregistrement] = useState(false);
   const [erreur, setErreur] = useState('');
   async function enregistrer() {
@@ -139,7 +142,10 @@ export default function Profile() {
   // dit Réviz dans le bloc lavande de l'accueil.
   const identite = (
     <header className="mn-identite">
-      <span className="mn-avatar" aria-hidden="true"><Mascot pose="hello" size={isDesktop ? 64 : 52} alt="" /></span>
+      <button type="button" className="mn-avatar" onClick={() => setChoixAvatar(true)} aria-label="Changer ma photo de profil">
+        <Avatar size={isDesktop ? 68 : 56} />
+        <span className="mn-avatar-crayon" aria-hidden="true"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="M4 20l4.5-1L19 8.5a2.1 2.1 0 0 0-3-3L5.5 16 4 20Z" /></svg></span>
+      </button>
       <div className="mn-identite-txt">
         <span className="mo-sur">Mon profil</span>
         <div className="mo-nom-ligne">
@@ -303,6 +309,7 @@ export default function Profile() {
           </Feuille>
         );
       })()}
+      {choixAvatar && <ChoixAvatar onClose={() => setChoixAvatar(false)} />}
       {edition && (
         <Feuille titre="Modifier le profil" onClose={() => setEdition(null)} grand={isDesktop}>
           <div className="mo-edition">

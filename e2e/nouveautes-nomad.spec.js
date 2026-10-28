@@ -271,6 +271,22 @@ for (const [appareil, viewport] of APPAREILS) {
       await expect(page.getByText('Maths · Second degré')).toBeVisible()
     })
 
+    test('la photo de profil se choisit dans Moi, s’affiche dans le menu et se garde sur le compte', async ({ page }) => {
+      await mockApiRoutes(page)
+      await mockProgramme(page)
+      const { uid } = await compteRapide(page, { aller: '/profil' })
+      await page.getByRole('button', { name: 'Changer ma photo de profil' }).click()
+      const choix = page.getByRole('dialog', { name: 'Ta photo de profil' })
+      await choix.getByRole('button', { name: 'Casquette' }).click()
+      await expect(choix.getByRole('button', { name: 'Casquette' })).toHaveAttribute('aria-pressed', 'true')
+      await choix.getByRole('button', { name: 'Fermer' }).click()
+      await expect(page.locator('.mn-avatar img')).toHaveAttribute('src', '/avatars/jaune.png')
+      await expect.poll(async () => (await lireProfilEmulateur(uid))?.avatar).toBe('jaune')
+      // Ailleurs dans l'app : le menu du haut (ordinateur) ou l'accueil (téléphone).
+      await page.goto('/')
+      await expect(page.locator(viewport.width >= 1024 ? '.nav-haut-avatar img' : '.nm-tete-avatar img')).toHaveAttribute('src', '/avatars/jaune.png')
+    })
+
     test('le mode dyslexie change la police des écrans de lecture, et reste choisi', async ({ page }) => {
       await mockApiRoutes(page)
       await mockProgramme(page)

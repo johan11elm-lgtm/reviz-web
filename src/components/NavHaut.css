@@ -132,11 +132,9 @@
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  background: var(--sk-peche, #FFE4CF);
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
 }
 
 @media (min-width: 1024px) and (max-width: 1240px) {

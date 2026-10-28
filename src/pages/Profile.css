@@ -302,7 +302,10 @@
  * cartes blanches à ombre légère, titres à barre orange. */
 .mn-page .mn-haut { display: flex; flex-direction: column; gap: 16px; padding: calc(env(safe-area-inset-top, 0px) + 14px) 16px 0; }
 .mn-page .mn-identite { display: flex; align-items: center; gap: 14px; }
-.mn-page .mn-avatar { width: 60px; height: 60px; flex: none; border-radius: 50%; background: #fff; display: flex; align-items: center; justify-content: center; overflow: hidden; box-shadow: 0 1px 3px rgba(4,42,101,.12); }
+.mn-page .mn-avatar { position: relative; width: 60px; height: 60px; flex: none; padding: 0; border: 0; border-radius: 50%; background: none; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+.mn-page .mn-avatar:focus-visible { outline: 3px solid #042A65; outline-offset: 3px; }
+/* Le crayon : la photo se change en la touchant. */
+.mn-page .mn-avatar-crayon { position: absolute; right: -4px; bottom: -2px; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: #042A65; color: #fff; box-shadow: 0 0 0 2px var(--rv-fond); }
 .mn-page .mn-identite-txt { flex: 1; min-width: 0; }
 .mn-page .mo-sur { font-size: 13px; font-weight: 600; letter-spacing: 0; text-transform: none; opacity: 1; color: var(--rv-doux); }
 .mn-page .mo-sur--orange { color: var(--rv-vif-plein); font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }

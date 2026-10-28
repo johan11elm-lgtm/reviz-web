@@ -1,7 +1,7 @@
 import { NavLink, Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { EtoileIA } from './BottomNav';
-import { Mascot } from './Mascot';
+import { Avatar } from './Avatar';
 import { LogoReviz } from './skin/Skin';
 import { AVIS_PROFS_URL, isDecouverte } from '../services/decouverteService';
 import './NavHaut.css';
@@ -77,7 +77,7 @@ export function NavHaut() {
           </Link>
         )}
         <Link to="/profil" className="nav-haut-profil" aria-label={`Mon profil, ${prenom}`}>
-          <span className="nav-haut-avatar" aria-hidden="true"><Mascot pose="hello" size={30} alt="" /></span>
+          <span className="nav-haut-avatar" aria-hidden="true"><Avatar size={32} /></span>
           <span className="nav-haut-prenom">{prenom}</span>
         </Link>
       </div>
