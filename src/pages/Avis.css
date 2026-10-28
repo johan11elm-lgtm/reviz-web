@@ -41,7 +41,7 @@
 
 /* ── Encadré « Ce qui aide le plus » ── */
 .av-colonne { position: relative; z-index: 2; display: flex; flex-direction: column; gap: 16px; margin: -40px 16px 0; }
-.av-aide { padding: 18px 20px 20px; border-radius: 22px; background: var(--av-peche); box-shadow: 0 12px 30px rgba(var(--rv-ombre-2),.08); }
+.av-aide { padding: 18px 20px 20px; border-radius: 22px; background: var(--av-peche); box-shadow: 0 1px 3px rgba(4,42,101,.1), 0 1px 2px rgba(4,42,101,.06); }
 .av-aide-titre { margin: 0 0 10px; font-family: var(--font-display); font-size: 18px; font-weight: 800; letter-spacing: -.02em; color: var(--ch-encre); }
 .av-aide ul { display: flex; flex-direction: column; gap: 10px; margin: 0; padding: 0; list-style: none; }
 .av-aide li { position: relative; padding-left: 18px; font-size: 14.5px; font-weight: 600; line-height: 1.4; color: var(--ch-encre); }
@@ -49,7 +49,7 @@
 .av-aide-note { margin: 14px 0 0; padding-top: 12px; border-top: 1.5px dashed var(--rv-peche-bulle); font-size: 12.5px; font-weight: 500; line-height: 1.45; color: var(--ch-doux); }
 
 /* ── Formulaire ── */
-.av-carte { display: flex; flex-direction: column; gap: 22px; padding: 22px 18px 24px; border-radius: 26px; background: var(--rv-carte); box-shadow: 0 12px 30px rgba(var(--rv-ombre-2),.1); }
+.av-carte { display: flex; flex-direction: column; gap: 22px; padding: 22px 18px 24px; border-radius: 26px; background: var(--rv-carte); box-shadow: 0 1px 3px rgba(4,42,101,.1), 0 1px 2px rgba(4,42,101,.06); }
 .av-champ { display: flex; flex-direction: column; gap: 10px; min-width: 0; margin: 0; padding: 0; border: 0; }
 .av-label { padding: 0; font-size: 15px; font-weight: 700; color: var(--ch-encre); }
 

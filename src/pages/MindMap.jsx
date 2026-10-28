@@ -3,14 +3,11 @@ import { useNavigate, useLocation } from 'react-router-dom'
 import { fermerVersFiche, versExercice } from '../utils/navigation'
 import { recordRevision } from '../services/revisionService'
 import { BRANCH_COLORS, BRANCH_POSITIONS } from '../utils/aiPrompts'
-import { Pantin } from '../components/Pantin'
 import { Mascot } from '../components/Mascot'
-import { BulleReviz } from '../components/reviz/BulleReviz'
 import { MissingLessonState } from '../components/MissingLessonState'
 import { FormatFeedback } from '../components/FormatFeedback'
 import { nbsp } from '../utils/typography'
 import { useIsDesktop } from '../hooks/useMediaQuery'
-import { teinteMatiere, varsTeinte } from '../utils/teinteMatiere'
 import '../components/reviz/HerosMatiere.css'
 import './Mindmap.css'
 import { mesurer } from '../services/mesure'
@@ -162,7 +159,6 @@ function MindmapSession() {
   const isDesktop = useIsDesktop()
   const branches = data.branches
   const n = branches.length
-  const teinte = teinteMatiere(data.subject)
   const nbCartes = useMemo(() => {
     try { return JSON.parse(localStorage.getItem('reviz-ai-data') || 'null')?.flashcards?.length ?? 0 } catch { return 0 }
   }, [])
@@ -191,30 +187,11 @@ function MindmapSession() {
   const lignes = fin ? ['Tu as fait le tour du chapitre.', 'Reviens-y avant ton contrôle.']
     : [nbVues === 0 ? `${pluriel(n, 'branche')} à explorer.` : nbVues === n ? 'Tout est exploré.' : `Encore ${pluriel(n - nbVues, 'branche')}.`,
        teste ? 'Les idées sont cachées : retrouve-les.' : 'Commence par celle que tu veux.']
-  const pantin = useRef(null)
-  const [parle, setParle] = useState(false)
-  const texte = lignes.join('\n')
-  useEffect(() => { if (parle) pantin.current?.dire(texte) }, [texte, parle])
-  useEffect(() => {
-    let t
-    const essai = () => { t = setTimeout(() => (document.hidden ? essai() : setParle(true)), 4000) }
-    essai()
-    return () => clearTimeout(t)
-  }, [])
-  const reviz = taille => (
-    <div className="cm-reviz">
-      <BulleReviz key={texte} lignes={lignes} parle={parle} className="cm-bulle" />
-      <Pantin
-        key={fin ? 'fin' : 'carte'}
-        ref={pantin}
-        size={taille}
-        expression={fin ? 'fier' : 'reflechit'}
-        entree={fin ? 'saut' : undefined}
-        repli={null}
-        onEntree={() => setParle(true)}
-        onClick={() => pantin.current?.geste('saut')}
-        label="Réviz, ta mascotte"
-      />
+  // Façon app Nomad (29/10) : ce que dit Réviz dans le bloc lavande, avec son émote (plus de pantin).
+  const reviz = () => (
+    <div className="cm-bloc">
+      <span className="cm-bloc-reviz" aria-hidden="true"><Mascot pose={fin ? 'celebration' : 'thinking'} size={isDesktop ? 84 : 70} alt="" /></span>
+      <p className="cm-bloc-txt">{lignes.join(' ').replace(/ ([?!:;])/g, '\u00a0$1')}</p>
     </div>
   )
 
@@ -331,18 +308,14 @@ function MindmapSession() {
     <span className="cm-segments" aria-hidden="true">{vues.map((v, i) => <i key={i} className={v ? 'is-vue' : ''} />)}</span>
   )
   const retour = <button type="button" className="ch-retour cm-retour" onClick={() => fermerVersFiche(navigate, location)}><Chevron />{isDesktop ? 'Fiche chapitre' : ''}</button>
-  const racine = `app app--no-halo ch-page mindmap-page cm-page${isDesktop ? ' app--large ch-page--large cm-page--large' : ''}`
+  const racine = `app app--no-halo ch-page mindmap-page cm-page cn-page${isDesktop ? ' app--large ch-page--large cm-page--large' : ''}`
 
   // ── Ordinateur ──
   if (isDesktop) {
     return (
-      <div className={racine} style={varsTeinte(teinte)}>
+      <div className={racine}>
         <div className="content cm-defile">
           <div className="ch-hero cm-hero">
-            <span className="ch-deco ch-deco--a" aria-hidden="true" />
-            <span className="ch-deco ch-deco--b" aria-hidden="true" />
-            <span className="ch-point" aria-hidden="true" />
-            <span className="ch-grain" aria-hidden="true" />
             <div className="cm-hero-int">
               <div className="ch-haut">{retour}</div>
               <span className="ch-surtitre">{data.subject ? `${data.subject} · ` : ''}Carte mentale</span>
@@ -356,12 +329,12 @@ function MindmapSession() {
                 <div className="cm-panneau-fin">
                   <span className="cm-surtitre">{nbVues} / {n} branches</span>
                   <h2 className="cm-fin-titre">Carte explorée</h2>
-                  {reviz(170)}
+                  {reviz()}
                   {actionsFin}
                 </div>
               ) : b ? detail : (
                 <div className="cm-panneau-accueil">
-                  {reviz(190)}
+                  {reviz()}
                   {segments}
                   <span className="cm-compte">{nbVues} / {n} explorées</span>
                 </div>
@@ -383,12 +356,12 @@ function MindmapSession() {
   // ── Téléphone ──
   if (fin) {
     return (
-      <div className={`${racine} cm-page--fin`} style={varsTeinte(teinte)}>
+      <div className={`${racine} cm-page--fin`}>
         <div className="content cm-defile cm-fin">
           <div className="cm-ligne-haut">{retour}</div>
           <span className="cm-surtitre">{data.subject ? `${data.subject} · ` : ''}Carte mentale</span>
           <h1 className="cm-fin-titre">Carte explorée</h1>
-          {reviz(150)}
+          {reviz()}
           <div className="cm-fin-carte">
             {branches.map((br, i) => (
               <button key={br.id} type="button" className="cm-fin-branche" onClick={() => { setFin(false); ouvrir(i) }}>
@@ -404,13 +377,9 @@ function MindmapSession() {
     )
   }
   return (
-    <div className={racine} style={varsTeinte(teinte)}>
+    <div className={racine}>
       <div className="cm-ecran">
         <div className="ch-hero cm-hero">
-          <span className="ch-deco ch-deco--a" aria-hidden="true" />
-          <span className="ch-deco ch-deco--b" aria-hidden="true" />
-          <span className="ch-point" aria-hidden="true" />
-          <span className="ch-grain" aria-hidden="true" />
           <div className="cm-ligne-haut">
             {retour}
             <span className="cm-etat">
@@ -421,7 +390,7 @@ function MindmapSession() {
               Teste-toi{interrupteur}
             </button>
           </div>
-          {reviz(170)}
+          {reviz()}
         </div>
         <div className="cm-chapitre">
           <span className="cm-centre-surtitre">Chapitre</span>

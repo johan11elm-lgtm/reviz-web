@@ -18,7 +18,7 @@
 .ag-reviz .rv-bulle-ligne + .rv-bulle-ligne { font-size: 16px; }
 
 /* ── Cartes ── */
-.ag-carte { position: relative; box-sizing: border-box; border-radius: 26px; background: var(--rv-carte); box-shadow: 0 12px 30px rgba(var(--rv-ombre-2),.12); }
+.ag-carte { position: relative; box-sizing: border-box; border-radius: 26px; background: var(--rv-carte); box-shadow: 0 1px 3px rgba(4,42,101,.1), 0 1px 2px rgba(4,42,101,.06); }
 .ag-prochain { z-index: 2; margin: -72px 16px 0; padding: 16px; }
 .ag-prochain-haut { display: flex; align-items: center; gap: 14px; padding-right: 22px; }
 /* Le plan de révision du prochain contrôle (components/PlanRevision), sous son titre */
@@ -73,7 +73,7 @@
 .ag-section-tete { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin: 0 6px 12px; }
 .ag-h2 { margin: 0; font-family: var(--font-display); font-size: 22px; font-weight: 800; letter-spacing: -.03em; }
 .ag-liste { display: flex; flex-direction: column; gap: 10px; margin: 0; padding: 0; list-style: none; }
-.ag-ligne { display: flex; align-items: center; gap: 4px; padding: 0 4px 0 0; border-radius: 22px; background: var(--rv-carte); box-shadow: 0 6px 18px rgba(var(--rv-ombre-2),.08); }
+.ag-ligne { display: flex; align-items: center; gap: 4px; padding: 0 4px 0 0; border-radius: 22px; background: var(--rv-carte); box-shadow: 0 1px 3px rgba(4,42,101,.1), 0 1px 2px rgba(4,42,101,.06); }
 .ag-ligne-ouvrir { flex: 1; min-width: 0; display: flex; align-items: center; gap: 12px; padding: 12px 0 12px 12px; border: 0; background: none; font-family: inherit; color: inherit; text-align: left; cursor: pointer; flex-wrap: wrap; }
 .ag-ligne-txt { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
 .ag-ligne-txt b { font-size: 15px; font-weight: 700; line-height: 1.25; }

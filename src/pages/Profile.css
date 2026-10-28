@@ -20,7 +20,7 @@
 .mo-reviz .rv-bulle-ligne + .rv-bulle-ligne { font-size: 15px; }
 
 /* ── Cartes ── */
-.mo-carte { position: relative; box-sizing: border-box; border-radius: 26px; background: var(--rv-carte); box-shadow: 0 12px 30px rgba(var(--rv-ombre-2),.10); }
+.mo-carte { position: relative; box-sizing: border-box; border-radius: 26px; background: var(--rv-carte); box-shadow: 0 1px 3px rgba(4,42,101,.1), 0 1px 2px rgba(4,42,101,.06); }
 .mo-niveau { z-index: 2; margin: -68px 20px 0; padding: 18px; }
 .mo-niveau-haut { display: flex; align-items: center; gap: 14px; }
 .mo-piece { flex: none; width: 52px; height: 52px; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: var(--rv-lavande); box-shadow: 0 5px 0 var(--rv-lavande-bulle); font-family: var(--font-display); font-size: 24px; font-weight: 800; color: #042A65; }
@@ -45,7 +45,7 @@
 
 /* Chiffres */
 .mo-chiffres { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
-.mo-chiffre { display: flex; flex-direction: column; gap: 4px; padding: 14px 12px; border-radius: 22px; background: var(--rv-carte); box-shadow: 0 6px 18px rgba(var(--rv-ombre-2),.08); }
+.mo-chiffre { display: flex; flex-direction: column; gap: 4px; padding: 14px 12px; border-radius: 22px; background: var(--rv-carte); box-shadow: 0 1px 3px rgba(4,42,101,.1), 0 1px 2px rgba(4,42,101,.06); }
 .mo-chiffre-icone { width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; border-radius: 50%; margin-bottom: 4px; }
 .mo-chiffre--peche .mo-chiffre-icone { background: var(--rv-peche-pale); }
 .mo-chiffre--lavande .mo-chiffre-icone { background: var(--rv-lavande); }

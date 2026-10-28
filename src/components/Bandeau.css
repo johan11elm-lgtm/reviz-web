@@ -2,7 +2,7 @@
 .bd {
   display: flex; align-items: center; gap: 10px;
   min-height: 44px; box-sizing: border-box; padding: 7px 7px 7px 9px;
-  border-radius: 18px; background: rgba(var(--rv-carte-rgb),.88); box-shadow: 0 8px 20px rgba(var(--rv-ombre-2),.12);
+  border-radius: 18px; background: rgba(var(--rv-carte-rgb),.88); box-shadow: 0 1px 3px rgba(4,42,101,.1), 0 1px 2px rgba(4,42,101,.06);
   font-family: 'Poppins', sans-serif; font-size: 12.5px; font-weight: 600; line-height: 1.35; color: var(--rv-doux);
 }
 .bd-rond { flex: none; display: flex; align-items: center; justify-content: center; width: 26px; height: 26px; border-radius: 50%; }

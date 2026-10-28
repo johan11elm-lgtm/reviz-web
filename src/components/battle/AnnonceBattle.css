@@ -25,7 +25,7 @@
 .ban-titre { margin: 6px 0 0; font-family: var(--font-display); font-size: 32px; font-weight: 800; letter-spacing: -.03em; }
 .ban-feuille--fenetre .ban-titre { font-size: 36px; }
 .ban-texte { margin: -4px 0 0; font-size: 15.5px; line-height: 1.45; color: var(--rv-doux); }
-.ban-regles { margin: 0; padding: 4px 16px; border-radius: 22px; background: var(--rv-carte); box-shadow: 0 12px 30px rgba(var(--rv-ombre-2),.08); list-style: none; }
+.ban-regles { margin: 0; padding: 4px 16px; border-radius: 22px; background: var(--rv-carte); box-shadow: 0 1px 3px rgba(4,42,101,.1), 0 1px 2px rgba(4,42,101,.06); list-style: none; }
 .ban-regles li { display: flex; align-items: flex-start; gap: 12px; padding: 12px 0; font-size: 14.5px; font-weight: 600; line-height: 1.4; }
 .ban-regles li + li { border-top: 1.5px dashed var(--rv-ligne); }
 .ban-num { flex: none; display: flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 50%; font-size: 13px; font-weight: 800; }

@@ -23,7 +23,7 @@
   border: 0;
   border-radius: 26px;
   background: var(--rv-carte);
-  box-shadow: 0 12px 30px rgba(var(--rv-ombre-2),.14);
+  box-shadow: 0 1px 3px rgba(4,42,101,.1), 0 1px 2px rgba(4,42,101,.06);
   font-family: inherit;
   color: var(--ch-encre);
   text-align: left;
@@ -39,11 +39,11 @@ button.sc-carte:active { transform: scale(.98); }
 .sc-carte-txt2 span { font-size: 14px; font-weight: 500; color: var(--ch-doux); }
 .sc-go { flex: none; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: var(--rv-orange); box-shadow: 0 5px 0 var(--rv-orange-tranche); color: #fff; }
 .sc-paire { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 14px 20px 0; }
-.sc-petite-carte { display: flex; flex-direction: column; gap: 3px; padding: 16px; box-shadow: 0 10px 24px rgba(var(--rv-ombre-2),.10); }
+.sc-petite-carte { display: flex; flex-direction: column; gap: 3px; padding: 16px; box-shadow: 0 1px 3px rgba(4,42,101,.1), 0 1px 2px rgba(4,42,101,.06); }
 .sc-petite-carte .sc-mini-rond { margin-bottom: 12px; }
 .sc-petite-carte b { font-family: var(--font-display); font-size: 17px; font-weight: 800; line-height: 1.15; letter-spacing: -.02em; }
 .sc-petite-carte > span:last-child { font-size: 13px; font-weight: 500; color: var(--ch-doux); }
-.sc-quota-carte { margin: 12px 20px 0; padding: 16px; box-shadow: 0 10px 24px rgba(var(--rv-ombre-2),.10); }
+.sc-quota-carte { margin: 12px 20px 0; padding: 16px; box-shadow: 0 1px 3px rgba(4,42,101,.1), 0 1px 2px rgba(4,42,101,.06); }
 
 /* Quota */
 .sc-quota { display: flex; flex-direction: column; gap: 10px; }
@@ -148,7 +148,7 @@ button.sc-carte:active { transform: scale(.98); }
 .sc-declencheur:disabled { background: var(--rv-ligne); box-shadow: 0 6px 0 #DCC9B5; cursor: default; }
 
 /* Aperçu */
-.sc-photo { overflow: hidden; border-radius: 28px; background: var(--rv-carte); box-shadow: 0 12px 30px rgba(var(--rv-ombre-2),.14); }
+.sc-photo { overflow: hidden; border-radius: 28px; background: var(--rv-carte); box-shadow: 0 1px 3px rgba(4,42,101,.1), 0 1px 2px rgba(4,42,101,.06); }
 .sc-photo img { display: block; width: 100%; max-height: 54vh; object-fit: contain; background: var(--rv-carte); }
 
 /* Texte collé */

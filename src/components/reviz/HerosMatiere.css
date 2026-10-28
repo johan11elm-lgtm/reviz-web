@@ -132,3 +132,11 @@
   --hm-encre: #042A65; --hm-doux: #6E675B; --inst-encre: #042A65; --inst-doux: #6E675B; --lg-encre: #042A65; --lg-doux: #6E675B; --prg-encre: #042A65; --prg-doux: #6E675B;
   color: #042A65;
 }
+
+/* ═══ Façon app Nomad (29/10) : le héros devient le bloc lavande de l'accueil, à plat
+ * (sans bulles décoratives ni grain), quelle que soit la teinte posée par la page. Le pantin
+ * y reste, comme la mascotte costumée dans le bloc « On fait quoi aujourd'hui ? » de Nomad. */
+.ch-hero { background: #B9A6FB; border-radius: 24px; --ch-encre: #042A65; --ch-doux: #3A3F7A; color: #042A65; }
+.ch-hero .ch-deco, .ch-hero .ch-point, .ch-hero .ch-grain { display: none; }
+.ch-retour { border-radius: 12px; box-shadow: 0 1px 3px rgba(4,42,101,.12); color: #042A65; }
+.ch-surtitre { letter-spacing: .06em; }
