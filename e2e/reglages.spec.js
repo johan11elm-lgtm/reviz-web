@@ -4,6 +4,7 @@
 // doit ramener à l'écran d'entrée. Deux compositions : une colonne sur téléphone, deux sur ordinateur.
 import { test, expect } from '@playwright/test'
 import { mockApiRoutes, compteRapide, lireProfilEmulateur, uniqueEmail } from './helpers'
+import { SOMBRE_DISPONIBLE } from '../src/utils/themes.js'
 
 const APPAREILS = [
   ['téléphone', { width: 390, height: 844 }],
@@ -49,8 +50,10 @@ for (const [appareil, viewport] of APPAREILS) {
       // Abonné : depuis la fin du lancement offert (26/10), Forêt est verrouillé sans Réviz+.
       await ouvrirReglages(page, { profil: { plan: 'premium' } })
       await expect(page.locator('html')).toHaveAttribute('data-theme', 'light')
-      // Le sombre est un mode (Clair par défaut), pas un thème : pas de tuile « Sombre ».
-      await expect(page.getByRole('radio', { name: 'Clair', exact: true })).toHaveAttribute('aria-checked', 'true')
+      // Le sombre est un mode (Clair par défaut), pas un thème : pas de tuile « Sombre ». Suspendu
+      // (SOMBRE_DISPONIBLE), le choix Clair / Sombre / Auto n'est pas proposé.
+      if (SOMBRE_DISPONIBLE) await expect(page.getByRole('radio', { name: 'Clair', exact: true })).toHaveAttribute('aria-checked', 'true')
+      else await expect(page.getByRole('radiogroup', { name: 'Affichage clair ou sombre' })).toHaveCount(0)
       await expect(page.getByRole('radio', { name: /Thème Sombre/ })).toHaveCount(0)
 
       const foret = page.getByRole('radio', { name: /Thème Forêt/ })
@@ -67,6 +70,15 @@ for (const [appareil, viewport] of APPAREILS) {
       await expect(page.getByRole('radio', { name: /Thème Forêt/ })).toHaveAttribute('aria-checked', 'true')
       await expect(page.getByRole('radio', { name: '5 révisions par jour' })).toHaveAttribute('aria-checked', 'true')
       await expect(page.getByRole('radio', { name: '3 révisions par jour' })).toHaveAttribute('aria-checked', 'false')
+
+      if (!SOMBRE_DISPONIBLE) {
+        // Sombre suspendu : un thème sombre mémorisé s'affiche en clair, avec le thème choisi.
+        await page.evaluate(() => { localStorage.removeItem('reviz-mode'); localStorage.setItem('reviz-theme', 'dark') })
+        await page.reload()
+        await expect(page.getByRole('heading', { level: 1, name: 'Réglages' })).toBeVisible()
+        await expect(page.locator('html')).not.toHaveAttribute('data-theme', 'dark')
+        return
+      }
 
       // Mode Sombre : l'app passe en sombre, le thème Forêt reste choisi pour le clair ; gardé après rechargement.
       await cliquerAuCentre(page.getByRole('radio', { name: 'Sombre', exact: true }))

@@ -125,3 +125,6 @@
 .sb-page--large .sb-carte { padding: 24px; }
 .sb-page--large .sb-cote { position: sticky; top: 0; }
 .sb-page--large .sb-champs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+/* Façon app Nomad (29/10) : l'en-tête dans le bloc lavande de l'app. */
+.sb-entete.sk-bloc--lavande { background: #B9A6FB; }
+.sb-entete.sk-bloc--lavande .sb-surtitre { color: #042A65; opacity: .8; }

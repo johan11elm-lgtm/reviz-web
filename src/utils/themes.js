@@ -35,10 +35,11 @@ export const MODES = [
 ];
 export const MODE_PAR_DEFAUT = 'clair';
 
-// Le sombre de la refonte (« pastels allumés » : fond sombre, pastels gardés, héros en halo de leur
-// couleur) couvre toutes les pages depuis le 26/10. Suspendu du 25 au 26/10 faute de version sombre ;
-// à false, il n'est ni proposé ni appliqué (un choix mémorisé s'affiche alors en clair).
-export const SOMBRE_DISPONIBLE = true;
+// Le sombre de la refonte (« pastels allumés ») couvrait toutes les pages depuis le 26/10. Suspendu du
+// 25 au 26/10 faute de version sombre, puis de nouveau le 28/10 : les écrans façon app Nomad posent
+// leurs cartes blanches et leur marine en dur, sans version sombre pour l'instant. À false, il n'est
+// ni proposé ni appliqué (un choix mémorisé s'affiche alors en clair, et revient s'il est rallumé).
+export const SOMBRE_DISPONIBLE = false;
 
 /** Thèmes proposés dans les sélecteurs (Réglages, carte d'essai de l'accueil) : le sombre est un mode, pas un thème. */
 export const THEMES_PROPOSES = THEMES.filter(t => !DARK_THEMES.includes(t.id));

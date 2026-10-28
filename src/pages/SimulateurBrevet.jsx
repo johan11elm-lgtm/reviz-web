@@ -119,7 +119,7 @@ export default function SimulateurBrevet() {
           <div className="sb-entete-txt">
             <span className="sb-surtitre">Brevet 2027</span>
             <TitreDeux as="h1" leger="Simulateur de" fort="notes du brevet" />
-            <p className="sb-chapo">Le contrôle continu compte pour 40 %, les épreuves de juin pour 60 %. Il faut 10 sur 20 pour l’avoir.</p>
+            <p className="sb-chapo">Le contrôle continu compte pour 40 %, les épreuves de juin pour 60 %. Il faut 10 sur 20 pour l’avoir.</p>
           </div>
           <Mascot pose="graduation" size={isDesktop ? 190 : 120} alt="" aria-hidden="true" className="sb-mascotte" priority />
         </Bloc>
