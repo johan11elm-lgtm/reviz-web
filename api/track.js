@@ -19,6 +19,8 @@
 //   avec &qui=parent, plus de bilan au parent (api/_bilanParent.js).
 // - ?op=push (POST / DELETE, jeton Firebase) : abonnement aux notifications web
 //   de ce navigateur (api/_push.js).
+// - ?op=parent (GET, lien signé) et ?op=lien-parent (POST, jeton Firebase) :
+//   l'espace parent, ce que l'enfant a révisé et ses contrôles (api/_espaceParent.js).
 // -------------------------------------------------------
 import { FieldValue } from 'firebase-admin/firestore'
 import { getDb, getAuthAdmin } from './_firebaseAdmin.js'
@@ -28,6 +30,7 @@ import { signatureValide } from './_rappels.js'
 import { PORTEE_DESABO } from './_bilanParent.js'
 import { ESSAI_ID_RE, CHAPITRE_ID_RE } from '../src/utils/retour.js'
 import { routeAbonnement } from './_push.js'
+import { routeEspaceParent } from './_espaceParent.js'
 
 export const EVENTS = [
   'essai_demarre', 'compte_cree', 'programme_ouvert', 'chapitre_ouvert', 'revision', 'quiz_termine',
@@ -194,6 +197,11 @@ export default async function handler(req, res) {
   if (req.query?.op === 'push' && (req.method === 'POST' || req.method === 'DELETE')) {
     try { return await routeAbonnement(req, res, { db: getDb(), auth: getAuthAdmin() }) }
     catch (err) { console.error('[push]', err?.message || err); return res.status(500).json({ error: 'INTERNAL' }) }
+  }
+  // Espace parent : la page /parent (GET, lien signé) et le lien que l'élève partage (POST).
+  if ((req.query?.op === 'parent' && req.method === 'GET') || (req.query?.op === 'lien-parent' && req.method === 'POST')) {
+    try { return await routeEspaceParent(req, res, { db: getDb(), auth: getAuthAdmin() }) }
+    catch (err) { console.error('[espace-parent]', err?.message || err); return res.status(500).json({ error: 'INTERNAL' }) }
   }
   if (req.method !== 'POST') return res.status(405).send('Method not allowed')
   let body = req.body

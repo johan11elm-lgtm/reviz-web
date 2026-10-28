@@ -64,6 +64,7 @@ const Installer      = lazy(() => import('./pages/Installer'))
 const BattleAccueil  = lazy(() => import('./pages/BattleAccueil'))
 const Battle         = lazy(() => import('./pages/Battle'))
 const SimulateurBrevet = lazy(() => import('./pages/SimulateurBrevet'))
+const EspaceParent   = lazy(() => import('./pages/EspaceParent'))
 
 // Fallback minimal pendant le chargement
 function LoadingFallback() {
@@ -158,6 +159,8 @@ export default function App() {
             <Route path="/avis"        element={<><SplashHider /><Avis /></>} />
             <Route path="/profs"       element={<><SplashHider /><Profs /></>} />
             <Route path="/installer"   element={<><SplashHider /><Installer /></>} />
+            {/* Espace parent : lien signé partagé par l'élève (api/_espaceParent.js), sans compte */}
+            <Route path="/parent"      element={<><SplashHider /><EspaceParent /></>} />
             {/* Adresse courte d'une vidéo (revizapp.fr/vf6) → essai sur son chapitre */}
             <Route path="/v/:code"     element={<CodeVideo />} />
 

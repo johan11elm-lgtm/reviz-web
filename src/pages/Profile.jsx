@@ -16,6 +16,7 @@ import { TEINTES, varsTeinte } from '../utils/teinteMatiere';
 import { useIsDesktop } from '../hooks/useMediaQuery';
 import { useModalA11y } from '../hooks/useModalA11y';
 import { MaSemaine, MaMemoire, MonProgramme } from '../components/moi/MesProgres';
+import { PartageParent } from '../components/moi/PartageParent';
 import { hasProgramme, PROGRAMME_FALLBACK } from '../utils/programme';
 import '../components/reviz/HerosMatiere.css';
 import './Profile.css';
@@ -372,6 +373,7 @@ export default function Profile() {
               <h2 className="mo-h3">Mon compte</h2>
               {compte}
               {revizPlus}
+              <PartageParent />
             </div>
           </div>
           <div className="mo-rangee mo-rangee--progres">{semaine}{memoire}{programme}</div>
@@ -410,6 +412,7 @@ export default function Profile() {
         <section className="mo-section">
           <h2 className="mo-h2">Mon compte</h2>
           <div className="mo-carte">{compte}</div>
+          <PartageParent />
         </section>
       </div>
       {fenetres}

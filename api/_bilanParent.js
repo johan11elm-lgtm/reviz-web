@@ -227,7 +227,7 @@ export function mailBilanParent({ prenom = null, classe = null, depuis, maintena
 }
 
 /** Titres des chapitres affichés, lus dans users/{uid}/lessons (sinon : « Une leçon de … »). */
-async function avecTitres(ref, chapitres) {
+export async function avecTitres(ref, chapitres) {
   return Promise.all(chapitres.slice(0, MAX_CHAPITRES).map(async ch => {
     if (!LECON_ID_OK.test(ch.lessonId)) return ch
     const lecon = await ref.collection('lessons').doc(ch.lessonId).get().catch(() => null)
