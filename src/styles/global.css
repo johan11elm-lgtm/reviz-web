@@ -799,3 +799,18 @@ html.native .content, html.native .pg-content, html.native .pf-content {
   --hm-encre: #1B1A23; --hm-doux: #6E675B; --inst-encre: #1B1A23; --inst-doux: #6E675B; --lg-encre: #1B1A23; --lg-doux: #6E675B; --prg-encre: #1B1A23; --prg-doux: #6E675B;
   color: #1B1A23;
 }
+
+
+/* ─── Mode dyslexie (Réglages → Lecture, utils/lecture.js) ─────────
+ * OpenDyslexic (public/fonts/opendyslexic, licence OFL) sur ce qu'on lit (cours, questions,
+ * réponses, bulles), avec plus d'espace entre les mots et les lignes. Les titres de page (h1)
+ * et les menus gardent Geist : en grand, cette police déborde. */
+@font-face { font-family: 'OpenDyslexic'; font-weight: 400; font-style: normal; font-display: swap; src: url('/fonts/opendyslexic/opendyslexic-latin-400-normal.woff2') format('woff2'); }
+@font-face { font-family: 'OpenDyslexic'; font-weight: 700; font-style: normal; font-display: swap; src: url('/fonts/opendyslexic/opendyslexic-latin-700-normal.woff2') format('woff2'); }
+html.lecture-dys :is(.analyse-page, .rs-page, .fc-page, .ia-page) :is(p, li, span, b, strong, em, button, h2, h3, h4, label, td, th):not(:is(.bottom-nav, .nav-haut, h1) *) {
+  font-family: 'OpenDyslexic', 'Geist', system-ui, sans-serif !important;
+  letter-spacing: normal !important;
+  font-style: normal !important;
+  overflow-wrap: anywhere;
+}
+html.lecture-dys :is(.analyse-page, .rs-page, .fc-page, .ia-page) :is(p, li) { line-height: 1.7 !important; word-spacing: .08em; }

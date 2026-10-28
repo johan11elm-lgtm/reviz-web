@@ -27,6 +27,8 @@ import { PRIX_FONDATEUR, prixDe } from '../../api/_prix.js';
 import '../components/reviz/HerosMatiere.css';
 import './Reglages.css';
 import { revenir } from '../utils/navigation';
+import { lireEspaceParent, reglerEspaceParent, couperLiensParent } from '../services/espaceParentService';
+import { lectureDysActive, appliquerLecture } from '../utils/lecture';
 
 const CLASSES_COLLEGE = ['6ème', '5ème', '4ème', '3ème'];
 const classeCourte = c => c?.replace(/ème$/, 'e') ?? '';
@@ -299,6 +301,36 @@ export default function Reglages() {
   }
   function fermerSuppression() { if (!deleting) { setDeleteStep(0); setDeletePwd(''); setDeleteError(''); } }
 
+  // ── Espace parent (api/_espaceParent.js) et lecture ──
+  const [espaceParent, setEspaceParent] = useState(null); // null : chargement
+  const [espaceMessage, setEspaceMessage] = useState(null); // { type, texte }
+  const [lectureDys, setLectureDys] = useState(lectureDysActive);
+  useEffect(() => {
+    if (isGuest || !currentUser?.uid) return;
+    let vivant = true;
+    lireEspaceParent(currentUser.uid).then(v => { if (vivant) setEspaceParent(v); }).catch(() => { if (vivant) setEspaceParent(true); });
+    return () => { vivant = false; };
+  }, [isGuest, currentUser?.uid]);
+  async function basculerEspace() {
+    const actif = !espaceParent;
+    setEspaceParent(actif);
+    setEspaceMessage(null);
+    try { await reglerEspaceParent(currentUser.uid, actif); }
+    catch { setEspaceParent(!actif); setEspaceMessage({ type: 'erreur', texte: 'Le réglage n’a pas pu s’enregistrer. Réessaie.' }); }
+  }
+  async function couperLiens() {
+    setEspaceMessage(null);
+    try {
+      await couperLiensParent(currentUser.uid);
+      setEspaceMessage({ type: 'reussite', texte: 'Les liens déjà envoyés ne s’ouvrent plus. Tu peux en envoyer un nouveau depuis Moi.' });
+    } catch { setEspaceMessage({ type: 'erreur', texte: 'Les liens n’ont pas pu être coupés. Réessaie.' }); }
+  }
+  function basculerLecture() {
+    const actif = !lectureDys;
+    setLectureDys(actif);
+    appliquerLecture(actif);
+  }
+
   // ── Blocs ──
   const ligne = ({ icone, teinte, label, sous, onClick, to, droite }) => {
     const contenu = (
@@ -346,6 +378,30 @@ export default function Reglages() {
       {!natif && !isGuest && push === 'refusees' && !reminderDenied && <p className="rg-note">Notifications bloquées pour Réviz dans ce navigateur : rouvre-les dans ses réglages du site, puis reviens ici.</p>}
       {reminderDenied && <Message type="erreur" texte={natif ? 'Notifications refusées : autorise Réviz dans Réglages, puis Notifications.' : 'Notifications refusées : rouvre-les dans les réglages du site de ton navigateur.'} />}
       {reminderErreur && <Message type="erreur" texte="Le rappel n’a pas pu s’activer. Vérifie ta connexion et réessaie." />}
+    </section>
+  );
+
+  const espace = !isGuest && (
+    <section className="rg-carte" aria-labelledby="rg-parent">
+      <h2 id="rg-parent" className="rg-h2">Espace parent</h2>
+      {ligne({
+        icone: <UserIcon />, teinte: 'peche', label: 'Mes parents voient mes révisions',
+        sous: 'Avec le lien que tu leur envoies depuis Moi : tes révisions et tes contrôles, jamais tes notes.',
+        droite: <Interrupteur checked={espaceParent !== false} onChange={basculerEspace} disabled={espaceParent === null} label="Laisser mes parents voir mes révisions" />,
+      })}
+      <button type="button" className="rg-btn rg-btn--blanc rg-btn--petit rg-espace-couper" onClick={couperLiens}>Couper les liens déjà envoyés</button>
+      {espaceMessage && <Message type={espaceMessage.type} texte={espaceMessage.texte} />}
+    </section>
+  );
+
+  const lecture = (
+    <section className="rg-carte" aria-labelledby="rg-lecture">
+      <h2 id="rg-lecture" className="rg-h2">Lecture</h2>
+      {ligne({
+        icone: <ChatIcon />, teinte: 'menthe', label: 'Mode dyslexie',
+        sous: 'Police OpenDyslexic et plus d’espace sur les fiches, les résumés, les quiz et les flashcards.',
+        droite: <Interrupteur checked={lectureDys} onChange={basculerLecture} label="Activer le mode dyslexie" />,
+      })}
     </section>
   );
 
@@ -663,11 +719,11 @@ export default function Reglages() {
         {hero}
         {isDesktop ? (
           <div className="rg-colonnes">
-            <div className="rg-colonne">{essai}{compte}{rappels}{objectif}</div>
-            <div className="rg-colonne">{apparence}{revizPlus}{informations}</div>
+            <div className="rg-colonne">{essai}{compte}{rappels}{espace}{objectif}</div>
+            <div className="rg-colonne">{apparence}{lecture}{revizPlus}{informations}</div>
           </div>
         ) : (
-          <div className="rg-colonne">{essai}{compte}{rappels}{objectif}{apparence}{revizPlus}{informations}</div>
+          <div className="rg-colonne">{essai}{compte}{rappels}{espace}{objectif}{apparence}{lecture}{revizPlus}{informations}</div>
         )}
         {pied}
       </div>

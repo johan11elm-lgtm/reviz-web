@@ -7,9 +7,13 @@
 // a révisé ces 30 derniers jours, ses contrôles à venir et sa préparation,
 // et s'il a Réviz+. Comme le bilan J+3 (api/_bilanParent.js) : l'effort, les
 // chapitres et les formats, pas les notes ; rien ne s'y modifie.
-// Le lien est signé (HMAC, CRON_SECRET) avec sa date d'expiration (60 jours) :
-// pas de compte parent, pas de mot de passe, rien de stocké. Un nouveau lien
-// ne révoque pas l'ancien ; il expire seul.
+// Le lien est signé (HMAC, CRON_SECRET) avec sa date d'expiration (60 jours) et
+// la version des liens de l'élève : pas de compte parent, pas de mot de passe.
+// C'est l'élève qui décide, dans ses réglages (comme le « Partager mes
+// résultats avec ma famille » de Nomad) :
+//   users/{uid}.espaceParent = false        → plus aucun lien ne s'ouvre ;
+//   users/{uid}.espaceParentVersion (+1)     → les liens déjà envoyés ne marchent
+//                                              plus, les nouveaux oui.
 // -------------------------------------------------------
 import { signatureDesabo, signatureValide, prenomPropre, titrePropre } from './_rappels.js'
 import { resumeActivite, avecTitres } from './_bilanParent.js'
@@ -25,21 +29,24 @@ const APP = 'https://app.revizapp.fr'
 const UID_OK = /^[A-Za-z0-9]{10,128}$/
 const MAX_CHAPITRES = 8
 
-const portee = exp => `${PORTEE_ESPACE}:${exp}`
+const portee = (exp, version) => `${PORTEE_ESPACE}:${exp}:${version}`
+/** Version des liens de l'élève (0 tant qu'il n'a jamais coupé les liens envoyés). */
+export const versionLiens = u => (Number.isInteger(u?.espaceParentVersion) && u.espaceParentVersion > 0 ? u.espaceParentVersion : 0)
 
 /** Lien de l'espace parent, valable 60 jours (null sans secret). */
-export function lienEspaceParent(uid, { maintenant = Date.now(), secret = process.env.CRON_SECRET } = {}) {
+export function lienEspaceParent(uid, { maintenant = Date.now(), secret = process.env.CRON_SECRET, version = 0 } = {}) {
   const exp = Math.floor((maintenant + DUREE_LIEN_MS) / 1000)
-  const t = signatureDesabo(uid, secret, portee(exp))
-  return t ? `${APP}/parent?u=${encodeURIComponent(uid)}&e=${exp}&t=${t}` : null
+  const t = signatureDesabo(uid, secret, portee(exp, version))
+  return t ? `${APP}/parent?u=${encodeURIComponent(uid)}&e=${exp}&v=${version}&t=${t}` : null
 }
 
-/** Le lien est-il authentique et encore valable ? */
-export function lienParentValide(uid, exp, t, { maintenant = Date.now(), secret = process.env.CRON_SECRET } = {}) {
+/** Le lien est-il authentique et encore valable ? (la version est comparée ensuite au profil) */
+export function lienParentValide(uid, exp, t, { maintenant = Date.now(), secret = process.env.CRON_SECRET, version = 0 } = {}) {
   if (typeof uid !== 'string' || !UID_OK.test(uid)) return false
   const e = Number(exp)
-  if (!Number.isInteger(e) || e * 1000 < maintenant) return false
-  return signatureValide(uid, t, secret, portee(e))
+  const v = Number(version)
+  if (!Number.isInteger(e) || e * 1000 < maintenant || !Number.isInteger(v) || v < 0) return false
+  return signatureValide(uid, t, secret, portee(e, v))
 }
 
 /** Abonnement Réviz+ en cours (users/{uid}, champs posés par api/stripe-webhook.js). */
@@ -55,11 +62,13 @@ export function aRevizPlus(u) {
  *   controles: { matiere, titre, date, etat, etapesFaites, etapes }[], revizPlus: boolean,
  * }>}
  */
-export async function donneesEspaceParent({ db, uid, maintenant = Date.now() }) {
+export async function donneesEspaceParent({ db, uid, maintenant = Date.now(), version = null }) {
   const ref = db.collection('users').doc(uid)
   const profil = await ref.get()
   if (!profil.exists) return null
   const u = profil.data() ?? {}
+  // L'élève a coupé l'espace parent, ou les liens envoyés avant la dernière coupure.
+  if (version !== null && (u.espaceParent === false || versionLiens(u) !== Number(version))) return { coupe: true }
   const depuis = maintenant - FENETRE_MS
   const revs = (await ref.collection('revisions').where('revisedAt', '>=', depuis).get()).docs.map(r => r.data())
   const resume = resumeActivite({ revisions: revs, jeux: u.jeux, depuis, maintenant })
@@ -112,10 +121,11 @@ export async function donneesEspaceParent({ db, uid, maintenant = Date.now() }) 
 export async function routeEspaceParent(req, res, { db, auth, maintenant = Date.now(), secret = process.env.CRON_SECRET }) {
   res.setHeader?.('Cache-Control', 'no-store')
   if (req.query?.op === 'parent') {
-    const { u, e, t } = req.query ?? {}
-    if (!lienParentValide(u, e, t, { maintenant, secret })) return res.status(403).json({ error: 'LIEN_INVALIDE' })
-    const donnees = await donneesEspaceParent({ db, uid: u, maintenant })
+    const { u, e, t, v = '0' } = req.query ?? {}
+    if (!lienParentValide(u, e, t, { maintenant, secret, version: v })) return res.status(403).json({ error: 'LIEN_INVALIDE' })
+    const donnees = await donneesEspaceParent({ db, uid: u, maintenant, version: Number(v) })
     if (!donnees) return res.status(404).json({ error: 'INTROUVABLE' })
+    if (donnees.coupe) return res.status(403).json({ error: 'LIEN_COUPE' })
     return res.status(200).json(donnees)
   }
   let body = req.body ?? {}
@@ -124,7 +134,10 @@ export async function routeEspaceParent(req, res, { db, auth, maintenant = Date.
   let decoded
   try { decoded = await auth.verifyIdToken(body.idToken) } catch { return res.status(401).json({ error: 'UNAUTHORIZED' }) }
   if (decoded.firebase?.sign_in_provider === 'anonymous') return res.status(403).json({ error: 'ANONYMOUS' })
-  const lien = lienEspaceParent(decoded.uid, { maintenant, secret })
+  const profil = await db.collection('users').doc(decoded.uid).get()
+  const u = profil.exists ? profil.data() ?? {} : {}
+  if (u.espaceParent === false) return res.status(409).json({ error: 'ESPACE_COUPE' })
+  const lien = lienEspaceParent(decoded.uid, { maintenant, secret, version: versionLiens(u) })
   if (!lien) return res.status(500).json({ error: 'INTERNAL' })
   return res.status(200).json({ lien, jusquau: maintenant + DUREE_LIEN_MS })
 }

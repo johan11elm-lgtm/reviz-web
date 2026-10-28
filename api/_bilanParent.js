@@ -256,7 +256,7 @@ export async function avecTitres(ref, chapitres) {
  * Parcourt les demandes d'autorisation parentale et envoie le bilan à ceux qui y ont droit.
  * @param {{
  *   db, envoyer, lienAutorisation: (token:string, uid:string) => string,
- *   lienEspace?: (uid:string) => string|null (espace parent, api/_espaceParent.js),
+ *   lienEspace?: (uid:string, profil:object) => string|null (espace parent, api/_espaceParent.js),
  *   auth?: { getUser }|null, maintenant?: number, secret?: string, journal?: (m:string)=>void,
  * }} p
  *   envoyer : ({ from, to, replyTo, subject, html, headers }) => Promise ; une réponse
@@ -303,7 +303,7 @@ export async function envoyerBilansParent({ db, envoyer, lienAutorisation, lienE
       const desabo = lienDesaboParent(uid, secret)
       const mail = mailBilanParent({
         prenom: u.prenom, classe: u.level?.classe ?? null, depuis, maintenant, resume, desabo,
-        espace: lienEspace ? lienEspace(uid) : null,
+        espace: lienEspace && u.espaceParent !== false ? lienEspace(uid, u) : null,
         autorisation: enAttente
           ? { lien: lienAutorisation(d.token, uid), jusquau: (d.firstRequestedAt ?? d.createdAt) + DELAI_REPONSE_MS }
           : null,

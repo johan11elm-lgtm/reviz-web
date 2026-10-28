@@ -1,7 +1,7 @@
 // Les nouveautés du 28/10 (comparatif Nomad, priorité 1) : le plan de révision d'un contrôle,
 // le simulateur de notes du brevet et l'espace parent. Téléphone et ordinateur.
 import { test, expect } from '@playwright/test'
-import { mockApiRoutes, mockProgramme, entrerEnEssai, sansDebordement } from './helpers'
+import { mockApiRoutes, mockProgramme, entrerEnEssai, sansDebordement, compteRapide, lireProfilEmulateur } from './helpers'
 
 const APPAREILS = [
   ['ordinateur', { width: 1280, height: 800 }],
@@ -81,6 +81,39 @@ for (const [appareil, viewport] of APPAREILS) {
 
       await page.goto(`/parent?u=abcdefghij1234&e=${exp}&t=mauvais`)
       await expect(page.getByRole('heading', { name: 'Ce lien n’est plus valable' })).toBeVisible()
+    })
+
+    test('l’élève coupe l’espace parent et ses liens ; le parent voit que l’accès est en pause', async ({ page }) => {
+      await mockApiRoutes(page)
+      const { uid } = await compteRapide(page, { prenom: 'Léa', aller: '/reglages' })
+      const carte = page.getByRole('region', { name: 'Espace parent' })
+      const inter = carte.getByRole('checkbox', { name: 'Laisser mes parents voir mes révisions' })
+      await inter.evaluate(el => el.scrollIntoView({ block: 'center' }))
+      await expect(inter).toBeChecked()
+      await inter.click({ force: true })
+      await expect(inter).not.toBeChecked()
+      await expect.poll(async () => (await lireProfilEmulateur(uid))?.espaceParent).toBe(false)
+      await carte.getByRole('button', { name: 'Couper les liens déjà envoyés' }).click()
+      await expect(carte.getByText('Les liens déjà envoyés ne s’ouvrent plus.', { exact: false })).toBeVisible()
+      await expect.poll(async () => (await lireProfilEmulateur(uid))?.espaceParentVersion).toBe(1)
+      await sansDebordement(page, `réglages ${appareil}`)
+
+      // Côté parent : le serveur répond « coupé »
+      await page.route('**/api/track?op=parent*', route => route.fulfill({ status: 403, contentType: 'application/json', body: '{"error":"LIEN_COUPE"}' }))
+      await page.goto(`/parent?u=abcdefghij1234&e=${Math.floor(Date.now() / 1000) + 86400}&v=0&t=x`)
+      await expect(page.getByRole('heading', { name: 'L’accès est en pause' })).toBeVisible()
+    })
+
+    test('le mode dyslexie change la police des écrans de lecture, et reste choisi', async ({ page }) => {
+      await mockApiRoutes(page)
+      await mockProgramme(page)
+      await entrerEnEssai(page, { aller: '/reglages' })
+      const inter = page.getByRole('checkbox', { name: 'Activer le mode dyslexie' })
+      await inter.evaluate(el => el.scrollIntoView({ block: 'center' }))
+      await inter.click({ force: true })
+      await expect(page.locator('html')).toHaveClass(/lecture-dys/)
+      await page.reload()
+      await expect(page.locator('html')).toHaveClass(/lecture-dys/)
     })
   })
 }

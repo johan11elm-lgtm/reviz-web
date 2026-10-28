@@ -31,22 +31,26 @@ function trenteJours() {
 export default function EspaceParent() {
   const [etat, setEtat] = useState({ statut: 'chargement' });
   const params = new URLSearchParams(window.location.search);
-  const u = params.get('u'), e = params.get('e'), t = params.get('t');
+  const u = params.get('u'), e = params.get('e'), t = params.get('t'), v = params.get('v') ?? '0';
 
   useEffect(() => {
     document.title = 'Espace parent · Réviz';
     if (!u || !e || !t) { setEtat({ statut: 'invalide' }); return; }
     let vivant = true;
-    apiFetch(`/api/track?op=parent&u=${encodeURIComponent(u)}&e=${encodeURIComponent(e)}&t=${encodeURIComponent(t)}`)
+    apiFetch(`/api/track?op=parent&u=${encodeURIComponent(u)}&e=${encodeURIComponent(e)}&v=${encodeURIComponent(v)}&t=${encodeURIComponent(t)}`)
       .then(async r => {
         if (!vivant) return;
-        if (r.status === 403 || r.status === 404) { setEtat({ statut: 'invalide' }); return; }
+        if (r.status === 403 || r.status === 404) {
+          const { error } = await r.json().catch(() => ({}));
+          setEtat({ statut: error === 'LIEN_COUPE' ? 'coupe' : 'invalide' });
+          return;
+        }
         if (!r.ok) throw new Error(String(r.status));
         setEtat({ statut: 'ok', d: await r.json() });
       })
       .catch(() => { if (vivant) setEtat({ statut: 'erreur' }); });
     return () => { vivant = false; };
-  }, [u, e, t]);
+  }, [u, e, t, v]);
 
   const tete = (
     <header className="ep-tete">
@@ -60,6 +64,8 @@ export default function EspaceParent() {
       ? { titre: 'Un instant…', texte: 'On récupère les révisions.' }
       : etat.statut === 'invalide'
         ? { titre: 'Ce lien n’est plus valable', texte: 'Il a expiré ou il est incomplet. Votre enfant peut vous en envoyer un nouveau depuis Réviz : onglet « Moi », puis « Espace parent ».' }
+        : etat.statut === 'coupe'
+          ? { titre: 'L’accès est en pause', texte: 'Votre enfant a coupé l’accès à son espace parent depuis ses réglages Réviz. Il peut vous envoyer un nouveau lien quand il le souhaite.' }
         : { titre: 'La page n’a pas pu se charger', texte: 'Vérifiez votre connexion, puis rechargez la page.' };
     return (
       <div className="ep-page">

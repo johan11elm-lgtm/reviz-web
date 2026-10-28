@@ -18,6 +18,10 @@ import { brancherPosthog } from './services/mesure.js'
 import { ecouterInstallation, detecterPlateforme, brancherHauteurEcran } from './utils/installation.js'
 import { ecouterErreurDeChunk } from './utils/rechargement.js'
 import { sombreAuDemarrage } from './utils/themes.js'
+import { appliquerLecture, lectureDysActive } from './utils/lecture'
+
+// Mode dyslexie choisi dans les Réglages : avant le premier affichage.
+appliquerLecture(lectureDysActive())
 
 sombreAuDemarrage()
 

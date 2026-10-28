@@ -12,7 +12,7 @@ import './PartageParent.css';
  */
 export function PartageParent() {
   const { currentUser, isGuest } = useAuth();
-  const [etat, setEtat] = useState(''); // '' | 'creation' | 'pret' | 'copie' | 'erreur'
+  const [etat, setEtat] = useState(''); // '' | 'creation' | 'pret' | 'copie' | 'erreur' | 'coupe'
   const [lien, setLien] = useState(null);
   if (isGuest || !currentUser) return null;
   const peutPartager = typeof navigator !== 'undefined' && typeof navigator.share === 'function';
@@ -32,6 +32,7 @@ export function PartageParent() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ idToken }),
       });
+      if (res.status === 409) { setEtat('coupe'); return; }
       if (!res.ok) throw new Error(`API_${res.status}`);
       const { lien: url } = await res.json();
       setLien(url);
@@ -72,6 +73,7 @@ export function PartageParent() {
         </div>
       )}
       {etat === 'erreur' && <p className="pp-erreur" role="alert">Le lien n’a pas pu être créé. Réessaie dans un instant.</p>}
+      {etat === 'coupe' && <p className="pp-erreur" role="alert">Tu as coupé l’espace parent. Rouvre-le dans Réglages, puis crée ton lien.</p>}
     </div>
   );
 }
