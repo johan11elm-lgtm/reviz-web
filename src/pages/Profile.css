@@ -296,3 +296,63 @@
   --hm-encre: #042A65; --hm-doux: #6E675B; --inst-encre: #042A65; --inst-doux: #6E675B; --lg-encre: #042A65; --lg-doux: #6E675B; --prg-encre: #042A65; --prg-doux: #6E675B;
   color: #042A65;
 }
+
+/* ═══ Moi façon app Nomad (29/10) ═════════════════════════════════════════════
+ * Plus de héros : avatar, prénom et classe, réglages ; le bloc lavande de Réviz ;
+ * cartes blanches à ombre légère, titres à barre orange. */
+.mn-page .mn-haut { display: flex; flex-direction: column; gap: 16px; padding: calc(env(safe-area-inset-top, 0px) + 14px) 16px 0; }
+.mn-page .mn-identite { display: flex; align-items: center; gap: 14px; }
+.mn-page .mn-avatar { width: 60px; height: 60px; flex: none; border-radius: 50%; background: #fff; display: flex; align-items: center; justify-content: center; overflow: hidden; box-shadow: 0 1px 3px rgba(4,42,101,.12); }
+.mn-page .mn-identite-txt { flex: 1; min-width: 0; }
+.mn-page .mo-sur { font-size: 13px; font-weight: 600; letter-spacing: 0; text-transform: none; opacity: 1; color: var(--rv-doux); }
+.mn-page .mo-sur--orange { color: var(--rv-vif-plein); font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+.mn-page .mo-nom-ligne { margin-top: 2px; gap: 8px; }
+.mn-page .mo-nom { font-family: inherit; font-size: 28px; letter-spacing: -.01em; color: #042A65; }
+.mn-page .mo-classe { height: 28px; border-radius: 8px; background: #042A65; color: #fff; font-size: 12.5px; }
+.mn-page .mo-reglages { width: 46px; height: 46px; border-radius: 14px; background: #fff; color: #042A65; box-shadow: 0 1px 3px rgba(4,42,101,.12); }
+.mn-page .mo-reglages:focus-visible { outline: 3px solid #042A65; outline-offset: 2px; }
+
+.mn-page .mn-bloc { position: relative; padding: 18px 14px; border-radius: 24px; background: #B9A6FB; color: #042A65; }
+.mn-page .mn-bloc-reviz { position: absolute; top: -12px; right: 8px; pointer-events: none; }
+.mn-page .mn-bloc-txt { max-width: 64%; min-height: 56px; margin: 0; font-size: 19px; font-weight: 700; line-height: 1.3; }
+
+.mn-page .mo-carte { border-radius: 20px; background: #fff; box-shadow: 0 1px 3px rgba(4,42,101,.1), 0 1px 2px rgba(4,42,101,.06); }
+.mn-page .mo-niveau { margin: 16px 16px 0; }
+.mn-page .mo-piece { border-radius: 14px; background: #042A65; color: #fff; box-shadow: none; font-family: inherit; }
+.mn-page .mo-niveau-txt b { font-family: inherit; }
+.mn-page .mo-barre { background: #E8DFD7; }
+.mn-page .mo-barre i { background: var(--rv-vif); box-shadow: none; }
+.mn-page .mo-essai { margin: 12px 16px 0; }
+.mn-page .mo-section { margin: 26px 16px 0; }
+.mn-page .mo-h2 { padding-left: 12px; border-left: 4px solid var(--rv-vif); font-family: inherit; font-size: 21px; letter-spacing: 0; line-height: 1.2; color: #042A65; }
+.mn-page .mo-h3 { font-family: inherit; font-size: 18px; letter-spacing: 0; color: #042A65; }
+.mn-page .mo-chiffre { border-radius: 16px; background: #fff; box-shadow: 0 1px 3px rgba(4,42,101,.1), 0 1px 2px rgba(4,42,101,.06); }
+.mn-page .mo-chiffre b { font-family: inherit; }
+.mn-page .mo-chiffre--peche .mo-chiffre-icone { background: #FFE9DF; color: var(--rv-vif-plein); }
+.mn-page .mo-chiffre--lavande .mo-chiffre-icone { background: #F2EBFF; }
+.mn-page .mo-chiffre--menthe .mo-chiffre-icone { background: #DDF5F4; }
+.mn-page .mo-prochain { border-radius: 20px; background: #fff; box-shadow: 0 0 0 2px var(--rv-vif-plein), 0 4px 14px rgba(216,64,10,.12); }
+.mn-page .mo-prochain-rond { background: #FFE9DF; box-shadow: none; }
+.mn-page .mo-prochain-txt > b, .mn-page .mo-battle-txt b { font-family: inherit; }
+.mn-page .mo-minibarre i { background: var(--rv-vif); }
+.mn-page .mo-minibarre--large { background: #EFE7E0; }
+.mn-page .mo-battle-rond { box-shadow: none; }
+.mn-page .mo-compte li + li { border-top: 1px solid var(--rv-ligne); }
+.mn-page .mo-compte-rond--lavande { background: #F2EBFF; }
+.mn-page .mo-compte-rond--peche { background: #FFE9DF; }
+.mn-page .mo-compte-rond--menthe { background: #DDF5F4; }
+
+/* Ordinateur */
+.mn-page.mo-page--large .mn-haut { max-width: 1240px; box-sizing: border-box; margin: 0 auto; padding: 12px 32px 0; gap: 22px; }
+.mn-page.mo-page--large .mo-nom { font-size: 34px; }
+.mn-page.mo-page--large .mn-avatar { width: 72px; height: 72px; }
+.mn-page .mn-haut-grille { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 24px; align-items: stretch; }
+.mn-page .mn-haut-droite { display: flex; flex-direction: column; justify-content: center; }
+.mn-page.mo-page--large .mn-bloc { display: flex; align-items: center; min-height: 150px; padding: 24px; border-radius: 26px; }
+.mn-page.mo-page--large .mn-bloc-txt { font-size: 22px; }
+.mn-page.mo-page--large .mn-bloc-reviz { top: auto; bottom: 10px; right: 20px; }
+.mn-page.mo-page--large .mo-niveau { margin: 0; padding: 22px; }
+.mn-page.mo-page--large .mo-essai { margin: 12px 0 0; }
+.mn-page.mo-page--large .mo-rangee { max-width: 1240px; margin: 28px auto 0; padding: 0 32px; }
+.mn-page.mo-page--large .mo-section { max-width: 1240px; box-sizing: border-box; margin: 32px auto 0; padding: 0 32px; }
+.mn-page .mo-carte--bloc .mo-chiffre .mo-chiffre-icone { width: 32px; height: 32px; justify-content: center; }

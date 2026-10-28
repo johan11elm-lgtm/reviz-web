@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { loadLessons, syncFromFirestore } from '../services/historyService';
@@ -7,12 +7,9 @@ import { getUserProfile } from '../services/userProfileService';
 import { BottomNav } from '../components/BottomNav';
 import { LevelSelector } from '../components/LevelSelector';
 import { Mascot } from '../components/Mascot';
-import { Pantin } from '../components/Pantin';
-import { BulleReviz } from '../components/reviz/BulleReviz';
 import { computeStreak, computeLevel, computeBadges, XP_PAR_NIVEAU, XP_PAR_LECON } from '../utils/gamification';
 import { phaseRevizPlus } from '../utils/revizPlus';
 import { DERNIER_JOUR_OFFERT } from '../../api/_lancement.js';
-import { TEINTES, varsTeinte } from '../utils/teinteMatiere';
 import { useIsDesktop } from '../hooks/useMediaQuery';
 import { useModalA11y } from '../hooks/useModalA11y';
 import { MaSemaine, MaMemoire, MonProgramme } from '../components/moi/MesProgres';
@@ -137,37 +134,27 @@ export default function Profile() {
   const lignes = debutant
     ? [prenom ? `Bienvenue, ${prenom}.` : 'Bienvenue.', 'Ta première révision te donne un badge.']
     : [`Niveau ${level}, ${isGuest ? 'bien joué' : 'bravo'}.`, `Encore ${reste} XP pour le niveau ${level + 1}.`];
-  const pantin = useRef(null);
-  const [parle, setParle] = useState(false);
-  const texte = lignes.join('\n');
-  useEffect(() => { if (parle) pantin.current?.dire(texte); }, [texte, parle]);
-  useEffect(() => {
-    let t;
-    const essai = () => { t = setTimeout(() => (document.hidden ? essai() : setParle(true)), 4000); };
-    essai();
-    return () => clearTimeout(t);
-  }, []);
-
   // ── Blocs ──
+  // En-tête façon profil de l'app Nomad (29/10) : avatar, prénom, classe, réglages ; puis ce que
+  // dit Réviz dans le bloc lavande de l'accueil.
   const identite = (
-    <div className="mo-identite">
-      <div>
+    <header className="mn-identite">
+      <span className="mn-avatar" aria-hidden="true"><Mascot pose="hello" size={isDesktop ? 64 : 52} alt="" /></span>
+      <div className="mn-identite-txt">
         <span className="mo-sur">Mon profil</span>
         <div className="mo-nom-ligne">
           <h1 className="mo-nom">{prenom || 'Toi'}</h1>
           {niveauScolaire?.classe && <span className="mo-classe">Classe de {classeCourte(niveauScolaire.classe)}</span>}
-          {isDesktop && <button type="button" className="mo-reglages" onClick={() => navigate('/reglages')} aria-label="Réglages"><Engrenage /></button>}
         </div>
       </div>
-      {!isDesktop && <button type="button" className="mo-reglages" onClick={() => navigate('/reglages')} aria-label="Réglages"><Engrenage /></button>}
-    </div>
+      <button type="button" className="mo-reglages" onClick={() => navigate('/reglages')} aria-label="Réglages"><Engrenage /></button>
+    </header>
   );
   const reviz = (
-    <div className={`mo-reviz${isDesktop ? ' mo-reviz--cote' : ''}`}>
-      <BulleReviz key={texte} lignes={lignes} parle={parle} pointe={isDesktop ? 'droite' : 'bas'} grande={isDesktop} className="mo-bulle" />
-      <Pantin ref={pantin} size={isDesktop ? 340 : 206} expression={debutant ? 'content' : 'fier'} entree={debutant ? 'coucou' : 'saut'} repli={null}
-        onEntree={() => setParle(true)} onClick={() => pantin.current?.geste('saut')} label="Réviz, ta mascotte" />
-    </div>
+    <section className="mn-bloc" aria-label="Réviz">
+      <span className="mn-bloc-reviz" aria-hidden="true"><Mascot pose={debutant ? 'pointing' : 'trophy'} size={isDesktop ? 104 : 84} alt="" /></span>
+      <p className="mn-bloc-txt">{lignes.join(' ')}</p>
+    </section>
   );
   const carteNiveau = (
     <div className="mo-carte mo-niveau">
@@ -341,26 +328,18 @@ export default function Profile() {
       )}
     </>
   );
-  const deco = (
-    <>
-      <span className="ch-deco ch-deco--a" aria-hidden="true" />
-      <span className="ch-deco ch-deco--b" aria-hidden="true" />
-      <span className="ch-point" aria-hidden="true" />
-      <span className="ch-grain" aria-hidden="true" />
-    </>
-  );
-  const racine = `app app--no-halo ch-page mo-page${isDesktop ? ' app--large ch-page--large mo-page--large' : ''}`;
+  const racine = `app app--no-halo mo-page mn-page${isDesktop ? ' app--large mo-page--large' : ''}`;
 
   // ── Ordinateur ──
   if (isDesktop) {
     return (
-      <div className={racine} style={varsTeinte(TEINTES.lavande)}>
+      <div className={racine}>
         <div className="content mo-defile">
-          <div className="ch-hero mo-hero">
-            {deco}
-            <div className="mo-hero-grille">
-              <div className="mo-hero-gauche">{identite}{carteNiveau}{essai}</div>
+          <div className="mn-haut">
+            {identite}
+            <div className="mn-haut-grille">
               {reviz}
+              <div className="mn-haut-droite">{carteNiveau}{essai}</div>
             </div>
           </div>
           <div className="mo-rangee">
@@ -392,9 +371,9 @@ export default function Profile() {
 
   // ── Téléphone ──
   return (
-    <div className={racine} style={varsTeinte(TEINTES.lavande)}>
+    <div className={racine}>
       <div className="content mo-defile">
-        <div className="ch-hero mo-hero">{deco}{identite}{reviz}</div>
+        <div className="mn-haut">{identite}{reviz}</div>
         {carteNiveau}
         {essai}
         <section className="mo-section">{chiffres}{semaine}{memoire}</section>
