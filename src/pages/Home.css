@@ -298,9 +298,9 @@
   background: var(--rv-carte);
   box-shadow: 0 4px 14px rgba(4,42,101,.07), 0 1px 3px rgba(0,0,0,.04);
   text-decoration: none;
-  transition: transform .15s;
+  transition: transform .5s var(--rv-ressort);
 }
-.home-page .hm-matiere:active { transform: scale(.97); }
+.home-page .hm-matiere:active { transform: scale(.95); transition-duration: .08s; }
 .home-page .hm-matiere-rond {
   width: 48px;
   height: 48px;
@@ -678,8 +678,8 @@
 .home-page .nm-recherche:focus-visible { outline: 3px solid var(--rv-encre); outline-offset: 2px; }
 .home-page .nm-ronds { display: flex; justify-content: center; gap: 20px; }
 .home-page .nm-rond { display: flex; flex-direction: column; align-items: center; gap: 8px; text-decoration: none; color: var(--rv-encre); }
-.home-page .nm-rond-icone { width: 76px; height: 76px; border-radius: 50%; background: #fff; display: flex; align-items: center; justify-content: center; box-shadow: 0 1px 3px rgba(4,42,101,.1), 0 4px 14px rgba(4,42,101,.06); transition: transform .15s; }
-.home-page .nm-rond:active .nm-rond-icone { transform: scale(.95); }
+.home-page .nm-rond-icone { width: 76px; height: 76px; border-radius: 50%; background: #fff; display: flex; align-items: center; justify-content: center; box-shadow: 0 1px 3px rgba(4,42,101,.1), 0 4px 14px rgba(4,42,101,.06); transition: transform .5s var(--rv-ressort); }
+.home-page .nm-rond:active .nm-rond-icone { transform: scale(.9); transition-duration: .08s; }
 .home-page .nm-rond-label { font-size: 15px; font-weight: 700; }
 
 /* Bloc lavande « On fait quoi aujourd'hui ? » */
@@ -692,9 +692,9 @@
 .home-page .nm-ligne {
   display: flex; align-items: center; gap: 14px; width: 100%; min-height: 66px; padding: 9px 12px 9px 9px;
   border: 0; border-radius: 14px; background: #fff; color: #042A65; font: inherit; text-align: left; cursor: pointer;
-  transition: transform .15s;
+  transition: transform .5s var(--rv-ressort);
 }
-.home-page .nm-ligne:active { transform: scale(.985); }
+.home-page .nm-ligne:active { transform: scale(.97); transition-duration: .08s; }
 .home-page .nm-ligne:focus-visible { outline: 3px solid #042A65; outline-offset: 2px; }
 .home-page .nm-ligne-icone { width: 50px; height: 50px; flex: none; border-radius: 12px; background: #F2EBFF; display: flex; align-items: center; justify-content: center; }
 .home-page .nm-ligne-txt { flex: 1; min-width: 0; display: flex; flex-direction: column; }
@@ -746,9 +746,17 @@
 .home-page .nm-rail-btn:hover { background: var(--rv-encre); color: #fff; }
 .home-page .nm-indis { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; }
 .home-page .nm-indis-item { display: flex; flex-direction: column; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; color: var(--rv-encre); text-decoration: none; text-align: center; }
-.home-page .nm-indis-rond { width: 52px; height: 52px; border-radius: 50%; background: var(--rv-fond); display: flex; align-items: center; justify-content: center; transition: transform .15s; }
-.home-page .nm-indis-item:hover .nm-indis-rond { transform: translateY(-2px); }
+.home-page .nm-indis-rond { width: 52px; height: 52px; border-radius: 50%; background: var(--rv-fond); display: flex; align-items: center; justify-content: center; transition: transform .5s var(--rv-ressort); }
+.home-page .nm-indis-item:hover .nm-indis-rond { transform: translateY(-3px); }
+.home-page .nm-indis-item:active .nm-indis-rond { transform: scale(.9); transition-duration: .08s; }
+
+/* L'émote se hisse un peu au survol de sa tuile, et retombe en ressort. */
+.home-page :is(.hm-matiere-rond, .nm-rond-icone) img { transition: translate .45s var(--rv-ressort); }
+@media (hover: hover) and (pointer: fine) {
+  .home-page :is(.hm-matiere:hover .hm-matiere-rond, .nm-rond:hover .nm-rond-icone) img { translate: 0 -4px; }
+}
 
 @media (prefers-reduced-motion: reduce) {
   .home-page .nm-ligne, .home-page .nm-rond-icone, .home-page .nm-indis-rond { transition: none; }
+  .home-page :is(.hm-matiere-rond, .nm-rond-icone) img, .home-page .hm-matiere { transition: none; }
 }

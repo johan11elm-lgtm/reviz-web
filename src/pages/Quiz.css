@@ -263,7 +263,7 @@
 .qn-page .qn-haut { display: flex; align-items: center; gap: 12px; }
 .qn-page .fc-fermer { box-shadow: 0 1px 3px rgba(4,42,101,.12); color: #042A65; }
 .qn-page .qn-barre { flex: 1; height: 12px; overflow: hidden; border-radius: 999px; background: #E8DFD7; }
-.qn-page .qn-barre i { display: block; height: 100%; border-radius: 999px; background: var(--rv-vif); transition: width .4s ease; }
+.qn-page .qn-barre i { display: block; height: 100%; border-radius: 999px; background: var(--rv-vif); transition: width .6s var(--rv-ressort); }
 .qn-page .qz-pastille-score { height: 34px; font-family: inherit; font-size: 14px; color: #042A65; box-shadow: 0 1px 3px rgba(4,42,101,.1); }
 .qn-page .qz-pastille-score i { background: #04ADB3; }
 .qn-page .qn-tete { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
@@ -315,6 +315,7 @@
 .qn-page .qz-correction.is-juste { background: #CDEFEE; }
 .qn-page .qz-correction.is-faux { background: #FFDDE2; }
 .qn-page .qz-correction-haut { display: flex; align-items: center; gap: 10px; }
+.qn-page .qz-correction-perso { position: relative; display: flex; flex: none; }
 .qn-page .qz-correction-reviz { width: 56px; height: 56px; flex: none; border-radius: 50%; background: #fff; display: flex; align-items: center; justify-content: center; overflow: hidden; }
 .qn-page .qz-verdict { padding: 0; border-radius: 0; background: none; font-size: 20px; font-weight: 800; }
 .qn-page .qz-correction.is-juste .qz-verdict { background: none; color: #035E62; }

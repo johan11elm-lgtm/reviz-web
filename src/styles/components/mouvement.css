@@ -1,0 +1,117 @@
+/* ============================================================================
+ * RV MOUVEMENT — les animations de l'app, d'après celles de Nomad (relevé REA
+ * du 28/10 : site et app), à la sauce Réviz : nos émotes, l'orange vif, la
+ * lavande et l'encre marine. Rien que transform et opacity (le compositeur s'en
+ * charge, le défilement reste fluide) et tout s'arrête en mouvement réduit.
+ * ========================================================================== */
+
+:root {
+  /* Sortie franche qui se pose (leurs entrées de mascotte, .16,1,.3,1). */
+  --rv-sortie: cubic-bezier(.16, 1, .3, 1);
+  /* Glisse douce des bandes de couleur (leur « smooth-ease »). */
+  --rv-glisse: cubic-bezier(.32, .72, 0, 1);
+  /* Ressort : dépasse un peu puis revient (leur « elastic-ease-out »). */
+  --rv-ressort: cubic-bezier(.34, 1.56, .64, 1);
+}
+@supports (transition-timing-function: linear(0, 1)) {
+  :root { --rv-ressort: linear(0,.5737 7.6%,.8382 11.87%,.9463 14.19%,1.0292 16.54%,1.0886 18.97%,1.1258 21.53%,1.137 22.97%,1.1424 24.48%,1.1423 26.1%,1.1366 27.86%,1.1165 31.01%,1.0507 38.62%,1.0219 42.57%,.9995 46.99%,.9872 51.63%,.9842 58.77%,1.0011 81.26%,1); }
+}
+
+/* ── L'émote surgit du bas de sa pastille (leurs mascottes de matière) ──
+ * Sur la pastille : class="rv-surgit" et style --i (son rang, pour l'échelonner).
+ * <Mascot> pose son <img> dans un <picture> en display: contents. */
+.rv-surgit { overflow: hidden; }
+.rv-surgit > :is(img, svg),
+.rv-surgit > picture > img { animation: rv-surgit .55s var(--rv-sortie) calc(var(--i, 0) * 50ms + 60ms) backwards; }
+@keyframes rv-surgit { from { transform: translateY(125%); } }
+
+/* ── Saut de joie, écrasé puis étiré (leur petite mascotte « is-happy ») ── */
+.rv-saut { transform-origin: 50% 100%; animation: rv-saut 1s linear both; }
+@keyframes rv-saut {
+  0%   { transform: none; }
+  6%   { transform: translateY(2px) scale(1.1, .88); animation-timing-function: cubic-bezier(.215, .61, .355, 1); }
+  22%  { transform: translateY(-16px) scale(.94, 1.07); animation-timing-function: cubic-bezier(.55, .055, .675, .19); }
+  38%  { transform: translateY(0) scale(1.12, .86); animation-timing-function: cubic-bezier(.215, .61, .355, 1); }
+  54%  { transform: translateY(-8px) scale(.96, 1.04); animation-timing-function: cubic-bezier(.55, .055, .675, .19); }
+  70%  { transform: translateY(0) scale(1.06, .94); animation-timing-function: ease-out; }
+  85%  { transform: scale(.98, 1.02); }
+  100% { transform: none; }
+}
+
+/* ── Secousse quand c'est raté : elle tremble, les yeux grossissent
+ *    (leur « is-sad » façon Tex Avery, ici sur toute l'émote) ── */
+.rv-secousse { animation: rv-secousse .7s cubic-bezier(.36, .07, .19, .97) both; }
+@keyframes rv-secousse {
+  0%, 100% { transform: none; }
+  12% { transform: translateX(-4px) rotate(-6deg) scale(1.12); }
+  28% { transform: translateX(4px) rotate(5deg) scale(1.12); }
+  44% { transform: translateX(-3px) rotate(-3deg) scale(1.06); }
+  60% { transform: translateX(2px) rotate(2deg); }
+  76% { transform: translateX(-1px); }
+}
+
+/* ── Rebond d'une pastille qu'on choisit ── */
+.rv-rebond { animation: rv-rebond .5s var(--rv-sortie) both; }
+@keyframes rv-rebond {
+  0%   { transform: none; }
+  30%  { transform: scale(.86); }
+  65%  { transform: scale(1.08); }
+  100% { transform: none; }
+}
+
+/* ── Lévitation lente des émotes posées dans les blocs (leurs cartes « levitate ») ── */
+.rv-levite > :is(img, svg),
+.rv-levite > picture > img { animation: rv-levite 6s cubic-bezier(.45, 0, .55, 1) infinite; }
+@keyframes rv-levite {
+  0%, 100% { transform: none; }
+  50% { transform: translateY(-6px) rotate(1deg); }
+}
+
+/* ── Entrée d'une question : elle arrive de la droite (leur « content-next ») ── */
+.rv-entre { animation: rv-entre .5s var(--rv-sortie) calc(var(--i, 0) * 40ms) backwards; }
+@keyframes rv-entre { from { opacity: 0; transform: translateX(24px); } }
+
+/* ── Étincelles autour d'une bonne réponse (leur « shine ») ──
+ * <Etincelles /> se pose au centre de son parent (position: relative). */
+.rv-etincelles { position: absolute; top: 50%; left: 50%; width: 0; height: 0; pointer-events: none; }
+.rv-etincelles i {
+  position: absolute; top: 0; left: -1.5px; width: 3px; height: 9px; border-radius: 3px;
+  background: var(--rv-vif); transform-origin: 50% 0; rotate: var(--a);
+  animation: rv-etincelle .75s var(--rv-sortie) calc(var(--i) * 30ms + 120ms) both;
+}
+.rv-etincelles i:nth-child(even) { height: 6px; background: #042A65; }
+@keyframes rv-etincelle {
+  0%   { opacity: 0; transform: translateY(calc(var(--r0, 22px) * -1)) scaleY(.4); }
+  35%  { opacity: 1; transform: translateY(calc(var(--r1, 36px) * -1)) scaleY(1); }
+  100% { opacity: 0; transform: translateY(calc((var(--r1, 36px) + 8px) * -1)) scaleY(.3); }
+}
+
+/* ── Bandes de couleur au survol des boutons (leurs boutons « ButtonMain ») ──
+ * Deux bandes inclinées montent l'une après l'autre sous le texte. Par défaut
+ * sur un bouton orange : lavande puis encre ; --clair sur un bouton blanc :
+ * orange puis encre, et le texte passe en blanc. */
+@media (hover: hover) and (pointer: fine) {
+  .rv-bandes { position: relative; isolation: isolate; overflow: hidden; transition: color .2s ease .1s; }
+  .rv-bandes::before,
+  .rv-bandes::after {
+    content: ''; position: absolute; z-index: -1; inset: 0 auto 0 0; width: 120%;
+    transform-origin: 100% 0; translate: -10% 102%; rotate: -12deg;
+    transition: translate .6s var(--rv-glisse), rotate .5s var(--rv-glisse);
+    pointer-events: none;
+  }
+  .rv-bandes::before { background: #B9A6FB; transition-delay: 42ms; }
+  .rv-bandes::after { background: #042A65; transition-delay: 0s; }
+  .rv-bandes--clair::before { background: var(--rv-vif-plein); }
+  .rv-bandes:is(:hover, :focus-visible):not(:disabled)::before,
+  .rv-bandes:is(:hover, :focus-visible):not(:disabled)::after { translate: -10% 0; rotate: 0deg; }
+  .rv-bandes:is(:hover, :focus-visible):not(:disabled)::before { transition-delay: 0s; }
+  .rv-bandes:is(:hover, :focus-visible):not(:disabled)::after { transition-delay: 64ms; }
+  .rv-bandes--clair:is(:hover, :focus-visible):not(:disabled) { color: #fff; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rv-surgit > :is(img, svg), .rv-surgit > picture > img, .rv-saut, .rv-secousse, .rv-rebond,
+  .rv-levite > :is(img, svg), .rv-levite > picture > img, .rv-entre { animation: none; }
+  .rv-etincelles { display: none; }
+  .rv-bandes::before, .rv-bandes::after { display: none; }
+}

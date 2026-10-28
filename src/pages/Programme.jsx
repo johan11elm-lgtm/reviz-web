@@ -198,8 +198,8 @@ export default function Programme() {
       </div>
       <div className="pn-tuiles" role="radiogroup" aria-label="Matière">
         {!catalogue && [0, 1, 2, 3].map(i => <span key={i} className="pn-tuile pn-tuile--vide" aria-hidden="true" />)}
-        {matieres.map(m => (
-          <Tuile key={m.slug} m={m} on={m.slug === matiere?.slug} onClick={() => choisirMatiere(m.slug)} />
+        {matieres.map((m, i) => (
+          <Tuile key={m.slug} m={m} rang={i} on={m.slug === matiere?.slug} onClick={() => choisirMatiere(m.slug)} />
         ))}
       </div>
     </section>
@@ -274,11 +274,11 @@ export default function Programme() {
 }
 
 /** Une matière, en tuile blanche comme chez Nomad : l'émote, le nom, l'avancement. */
-function Tuile({ m, on, onClick }) {
+function Tuile({ m, rang, on, onClick }) {
   return (
     <button type="button" role="radio" aria-checked={on} className={`pn-tuile${on ? ' pn-tuile--on' : ''}`} onClick={onClick}
       aria-label={`${m.matiere} : ${m.faits} sur ${m.items.length} chapitres faits`}>
-      <span className="pn-tuile-ico"><Mascot pose={subjectMascot(m.matiere)} size={44} alt="" aria-hidden="true" /></span>
+      <span className={`pn-tuile-ico rv-surgit${on ? ' rv-rebond' : ''}`} style={{ '--i': rang }}><Mascot pose={subjectMascot(m.matiere)} size={44} alt="" aria-hidden="true" /></span>
       <span className="pn-tuile-txt">
         <span className="pn-tuile-nom">{m.matiere}</span>
         <span className="pn-tuile-pct">{m.pct} %</span>

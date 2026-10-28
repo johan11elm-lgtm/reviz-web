@@ -342,9 +342,9 @@ export default function Home() {
         <Link to="/programme" className="hm-voir">Tout voir</Link>
       </div>
       <div className="hm-matieres">
-        {matieres.map(m => (
+        {matieres.map((m, i) => (
           <Link key={m.slug} to={`/programme?matiere=${m.slug}`} className="hm-matiere">
-            <span className="hm-matiere-rond" style={{ background: m.bg }}>
+            <span className="hm-matiere-rond rv-surgit" style={{ background: m.bg, '--i': i }}>
               <Mascot pose={m.pose} size={38} alt="" aria-hidden="true" />
             </span>
             <span className="hm-matiere-nom">{m.nom}</span>
@@ -446,9 +446,9 @@ export default function Home() {
         { to: '/scan', pose: 'scanphone', label: 'Scanner' },
         { to: '/programme', pose: 'reading', label: 'Réviser' },
         { to: '/battle', pose: 'fire', label: 'Défier' },
-      ].map(r => (
+      ].map((r, i) => (
         <Link key={r.to} to={r.to} className="nm-rond">
-          <span className="nm-rond-icone"><Mascot pose={r.pose} size={isDesktop ? 58 : 52} alt="" aria-hidden="true" /></span>
+          <span className="nm-rond-icone rv-surgit" style={{ '--i': i }}><Mascot pose={r.pose} size={isDesktop ? 58 : 52} alt="" aria-hidden="true" /></span>
           <span className="nm-rond-label">{r.label}</span>
         </Link>
       ))}
@@ -487,13 +487,13 @@ export default function Home() {
             <>
               <span className="nm-rail-ctrl-ico"><Mascot pose={subjectMascot(controle.m.label)} size={40} alt="" aria-hidden="true" /></span>
               <span className="nm-rail-ctrl-txt"><b>{`Contrôle de ${controle.m.label.toLowerCase()}`}</b><span>{majuscule(controle.quand)}{controle.titre ? ` · ${controle.titre}` : ''}</span></span>
-              <Link to="/agenda" className="nm-rail-btn">Voir le plan</Link>
+              <Link to="/agenda" className="nm-rail-btn rv-bandes rv-bandes--clair">Voir le plan</Link>
             </>
           ) : (
             <>
               <span className="nm-rail-ctrl-ico"><Mascot pose="examen" size={40} alt="" aria-hidden="true" /></span>
               <span className="nm-rail-ctrl-txt"><b>Aucun contrôle noté</b><span>Note-le : Réviz prépare ton plan de révision.</span></span>
-              <Link to="/agenda" className="nm-rail-btn">Ajouter un contrôle</Link>
+              <Link to="/agenda" className="nm-rail-btn rv-bandes rv-bandes--clair">Ajouter un contrôle</Link>
             </>
           )}
         </div>
@@ -507,9 +507,9 @@ export default function Home() {
             classe === '3ème' && { to: '/simulateur-brevet', pose: 'graduation', label: 'Simulateur' },
             { to: '/jeux?depuis=accueil', pose: 'celebration', label: 'Jeux' },
             !estInstallee() && { to: '/installer', pose: 'pointing', label: 'Installer' },
-          ].filter(Boolean).slice(0, 4).map(r => (
+          ].filter(Boolean).slice(0, 4).map((r, i) => (
             <Link key={r.to} to={r.to} className="nm-indis-item">
-              <span className="nm-indis-rond">{r.etoile ? <EtoileIA id="rv-ia-indis" size={26} /> : <Mascot pose={r.pose} size={40} alt="" aria-hidden="true" />}</span>
+              <span className="nm-indis-rond rv-surgit" style={{ '--i': i }}>{r.etoile ? <EtoileIA id="rv-ia-indis" size={26} /> : <Mascot pose={r.pose} size={40} alt="" aria-hidden="true" />}</span>
               <span>{r.label}</span>
             </Link>
           ))}

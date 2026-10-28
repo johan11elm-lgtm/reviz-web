@@ -426,7 +426,7 @@ function Reviz({ expression, lignes, grand }) {
   return (
     <div className={`sn-bloc${grand ? ' sn-bloc--grand' : ''}`}>
       <p className="sn-bloc-txt">{lignes.join(' ')}</p>
-      <span className="sn-bloc-reviz" aria-hidden="true"><Mascot pose={EMOTE[expression] ?? 'hello'} size={grand ? 104 : 84} alt="" /></span>
+      <span className="sn-bloc-reviz rv-levite" aria-hidden="true"><Mascot pose={EMOTE[expression] ?? 'hello'} size={grand ? 104 : 84} alt="" /></span>
     </div>
   );
 }

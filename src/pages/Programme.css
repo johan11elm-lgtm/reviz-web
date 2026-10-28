@@ -176,9 +176,9 @@
   text-align: left;
   cursor: pointer;
   box-shadow: 0 1px 3px rgba(4,42,101,.1), 0 1px 2px rgba(4,42,101,.06);
-  transition: transform .15s, box-shadow .15s;
+  transition: transform .5s var(--rv-ressort), box-shadow .15s;
 }
-.prg-page .pn-tuile:active { transform: scale(.97); }
+.prg-page .pn-tuile:active { transform: scale(.95); transition-duration: .08s; }
 .prg-page .pn-tuile:focus-visible { outline: 3px solid var(--rv-encre); outline-offset: 2px; }
 .prg-page .pn-tuile--on { box-shadow: 0 0 0 2px var(--rv-vif-plein), 0 4px 14px rgba(216,64,10,.16); }
 .prg-page .pn-tuile--vide { height: 68px; background: rgba(255,255,255,.6); box-shadow: none; }

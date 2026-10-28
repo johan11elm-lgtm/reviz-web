@@ -6,6 +6,7 @@ import { loadLessons } from '../services/historyService'
 import { getCardState, countDueCards } from '../services/srsService'
 import { Pantin } from '../components/Pantin'
 import { Mascot } from '../components/Mascot'
+import { Etincelles } from '../components/Etincelles'
 import { BulleReviz } from '../components/reviz/BulleReviz'
 import { RouteSerie } from '../components/reviz/RouteSerie'
 import { MissingLessonState } from '../components/MissingLessonState'
@@ -293,17 +294,17 @@ function QuizSession() {
     const montre = <MontreParent score={nbJustes} total={questions.length} lecon={lecon} />
     const boutons = premiere ? (
       <div className="qz-fin-actions">
-        <button type="button" className="fc-btn fc-btn--orange" onClick={fermer}>Continuer</button>
-        <button type="button" className="fc-btn fc-btn--blanc" onClick={() => fermerVersFiche(navigate, location)}>Voir tout le chapitre</button>
+        <button type="button" className="fc-btn fc-btn--orange rv-bandes" onClick={fermer}>Continuer</button>
+        <button type="button" className="fc-btn fc-btn--blanc rv-bandes rv-bandes--clair" onClick={() => fermerVersFiche(navigate, location)}>Voir tout le chapitre</button>
       </div>
     ) : (
       <div className="qz-fin-actions">
         {erreurs.length > 0
-          ? <button type="button" className="fc-btn fc-btn--orange" onClick={() => navigate(`/quiz?erreurs=1`, { replace: true, state: location.state })}>Refaire mes erreurs</button>
-          : <button type="button" className="fc-btn fc-btn--orange" onClick={refaire}>Refaire le quiz</button>}
-        {erreurs.length > 0 && <button type="button" className="fc-btn fc-btn--blanc" onClick={refaire}>Tout le quiz</button>}
+          ? <button type="button" className="fc-btn fc-btn--orange rv-bandes" onClick={() => navigate(`/quiz?erreurs=1`, { replace: true, state: location.state })}>Refaire mes erreurs</button>
+          : <button type="button" className="fc-btn fc-btn--orange rv-bandes" onClick={refaire}>Refaire le quiz</button>}
+        {erreurs.length > 0 && <button type="button" className="fc-btn fc-btn--blanc rv-bandes rv-bandes--clair" onClick={refaire}>Tout le quiz</button>}
         {erreurs.length > 0 && total > 0 && (
-          <button type="button" className="fc-btn fc-btn--blanc" onClick={() => versExercice(navigate, location, '/flashcards')}>Revoir les cartes</button>
+          <button type="button" className="fc-btn fc-btn--blanc rv-bandes rv-bandes--clair" onClick={() => versExercice(navigate, location, '/flashcards')}>Revoir les cartes</button>
         )}
       </div>
     )
@@ -343,9 +344,9 @@ function QuizSession() {
   // ── Question et correction ──
   const classeChoix = i => (!repondu ? '' : i === q.correct ? ' is-juste' : i === choix ? ' is-faux' : ' is-autre')
   const reponsesBloc = (
-    <div className="qz-choix" role="group" aria-label="Réponses">
+    <div className="qz-choix" role="group" aria-label="Réponses" key={`reponses-${idx}`}>
       {q.choices.map((c, i) => (
-        <button key={i} type="button" className={`qz-choix-btn${classeChoix(i)}`} onClick={() => repondre(i)} disabled={repondu}
+        <button key={i} type="button" className={`qz-choix-btn rv-entre${classeChoix(i)}`} style={{ '--i': i + 1 }} onClick={() => repondre(i)} disabled={repondu}
           aria-label={`${LETTRES[i]} : ${c}${repondu && i === q.correct ? ', bonne réponse' : ''}${repondu && i === choix && i !== q.correct ? ', ta réponse' : ''}`}>
           <span className="qz-lettre" aria-hidden="true">
             {repondu && i === q.correct ? <Coche /> : repondu && i === choix ? <Croix taille={16} /> : isDesktop ? i + 1 : LETTRES[i]}
@@ -363,7 +364,10 @@ function QuizSession() {
   const correction = repondu && (
     <div className={`qz-correction${juste ? ' is-juste' : ' is-faux'}`} role="status">
       <div className="qz-correction-haut">
-        <span className="qz-correction-reviz" aria-hidden="true"><Mascot pose={juste ? 'celebration' : 'confused'} size={isDesktop ? 60 : 52} alt="" /></span>
+        <span className="qz-correction-perso" aria-hidden="true">
+          <span className={`qz-correction-reviz ${juste ? 'rv-saut' : 'rv-secousse'}`}><Mascot pose={juste ? 'celebration' : 'confused'} size={isDesktop ? 60 : 52} alt="" /></span>
+          {juste && <Etincelles r0={32} r1={46} />}
+        </span>
         <span className="qz-verdict">{juste ? 'Bonne réponse' : 'Pas tout à fait'}</span>
       </div>
       {q.explanation && <p className="qz-correction-txt">{nbsp(q.explanation)}</p>}
@@ -373,7 +377,7 @@ function QuizSession() {
           Pourquoi ? Demande à Réviz IA
         </button>
       )}
-      <button type="button" className="qz-suivante" onClick={suivante}>
+      <button type="button" className="qz-suivante rv-bandes" onClick={suivante}>
         {derniere ? 'Voir mon score' : 'Question suivante'}<Fleche />{isDesktop && <kbd>Entrée</kbd>}
       </button>
     </div>
@@ -395,7 +399,7 @@ function QuizSession() {
     </div>
   )
   const carteQuestion = (
-    <div className="qn-question-carte">
+    <div className="qn-question-carte rv-entre" key={`question-${idx}`}>
       <h1 className="qz-question">{nbsp(q.question)}</h1>
     </div>
   )

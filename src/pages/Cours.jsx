@@ -188,7 +188,7 @@ export default function Cours() {
   const reviz = (
     <div className="lc-bloc">
       <p className="lc-bloc-txt">{lignes.join(' ')}</p>
-      <span className="lc-bloc-reviz" aria-hidden="true"><Mascot pose={aLecons ? 'reading' : 'scanphone'} size={isDesktop ? 100 : 80} alt="" /></span>
+      <span className="lc-bloc-reviz rv-levite" aria-hidden="true"><Mascot pose={aLecons ? 'reading' : 'scanphone'} size={isDesktop ? 100 : 80} alt="" /></span>
     </div>
   );
   const quota = illimite ? (
