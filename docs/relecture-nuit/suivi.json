@@ -1204,6 +1204,11 @@
       "chemin": "5eme/svt/circulation-sanguine",
       "le": "2026-10-28",
       "corrections": 0
+    },
+    {
+      "chemin": "5eme/svt/digestion-absorption",
+      "le": "2026-10-28",
+      "corrections": 1
     }
   ]
 }
