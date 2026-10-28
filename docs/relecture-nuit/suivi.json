@@ -1224,6 +1224,11 @@
       "chemin": "5eme/physique-chimie/changements-d-etat",
       "le": "2026-10-28",
       "corrections": 1
+    },
+    {
+      "chemin": "5eme/physique-chimie/masse-volume-masse-volumique",
+      "le": "2026-10-28",
+      "corrections": 0
     }
   ]
 }
