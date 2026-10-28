@@ -1,92 +1,131 @@
-/* Menu des grands écrans : capsule en verre en haut à droite, bouton Réviz IA à côté.
+/* Menu des grands écrans (28/10) : bande du haut sur toute la largeur, logo au bord gauche,
+ * capsule des onglets au centre, Réviz IA et compte au bord droit.
  * Masqué sur téléphone et dans l'app native (la capsule du bas fait ce travail). */
 .nav-haut { display: none; }
 
 @media (min-width: 1024px) {
   html:not(.native) .nav-haut {
     position: fixed;
-    top: 24px;
-    right: 32px;
+    inset: 0 0 auto 0;
     z-index: 300;
-    display: flex;
+    height: var(--nav-haut-h, 84px);
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
     align-items: center;
-    gap: 10px;
+    gap: 16px;
+    padding: 0 28px;
+    background: rgba(var(--rv-fond-rgb), .86);
+    -webkit-backdrop-filter: blur(16px) saturate(1.3);
+    backdrop-filter: blur(16px) saturate(1.3);
   }
 }
 
+.nav-haut-logo {
+  justify-self: start;
+  display: inline-flex;
+  border-radius: 14px;
+  text-decoration: none;
+  transition: transform .15s;
+}
+.nav-haut-logo:hover { transform: rotate(-2deg) scale(1.03); }
+.nav-haut-logo:focus-visible { outline: 3px solid var(--rv-encre); outline-offset: 4px; }
+
 .nav-haut-capsule {
-  height: 58px;
+  height: 54px;
   display: flex;
   align-items: center;
-  gap: 4px;
-  padding: 0 6px;
-  border: 1px solid var(--rv-nav-bord, rgba(255,255,255,.7));
+  gap: 2px;
+  padding: 0 5px;
   border-radius: 999px;
-  background: rgba(var(--rv-nav-rgb, 248,239,231),.78);
-  -webkit-backdrop-filter: blur(18px) saturate(1.4);
-  backdrop-filter: blur(18px) saturate(1.4);
-  box-shadow: 0 10px 30px rgba(var(--rv-ombre),.16);
+  background: var(--rv-carte);
+  box-shadow: 0 6px 22px rgba(var(--rv-ombre),.12), 0 1px 3px rgba(0,0,0,.04);
 }
 .nav-haut-onglet {
-  height: 46px;
-  min-width: 46px;
+  height: 44px;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
+  padding: 0 16px;
   border-radius: 999px;
   color: var(--rv-encre);
   text-decoration: none;
   transition: background .15s;
 }
-.nav-haut-onglet svg { width: 22px; height: 22px; }
-.nav-haut-onglet:hover { background: var(--rv-nav-survol, rgba(255,255,255,.7)); }
-.nav-haut-libelle { display: none; font-size: 14px; font-weight: 700; white-space: nowrap; }
+.nav-haut-onglet svg { width: 19px; height: 19px; }
+.nav-haut-onglet:hover { background: rgba(var(--rv-encre-rgb),.06); }
+.nav-haut-libelle { font-size: 15px; font-weight: 600; white-space: nowrap; }
 .nav-haut-onglet--actif,
-.nav-haut-onglet--actif:hover { padding: 0 16px; background: var(--rv-inverse); color: var(--rv-sur-inverse); }
-.nav-haut-onglet--actif svg { width: 20px; height: 20px; }
-.nav-haut-onglet--actif .nav-haut-libelle { display: inline; }
+.nav-haut-onglet--actif:hover { background: var(--rv-inverse); color: var(--rv-sur-inverse); }
+.nav-haut-onglet--actif .nav-haut-libelle { font-weight: 700; }
 .nav-haut-onglet:focus-visible { outline: 3px solid var(--rv-encre); outline-offset: 2px; }
 
-/* Réviz IA : rond blanc avec la mascotte coach, anneau conique orange → rose */
+.nav-haut-droite {
+  justify-self: end;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Réviz IA : pilule blanche, l'étoile dans un anneau conique orange → rose */
 .nav-haut-ia {
-  flex: none;
-  width: 56px;
-  height: 56px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 18px 0 5px;
+  border-radius: 999px;
+  background: var(--rv-carte);
+  color: var(--rv-encre);
+  font-size: 15px;
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: 0 6px 22px rgba(var(--rv-ombre),.12), 0 1px 3px rgba(0,0,0,.04);
+  transition: transform .15s;
+}
+.nav-haut-ia:hover { transform: translateY(-1px); }
+.nav-haut-ia:focus-visible { outline: 3px solid var(--rv-encre); outline-offset: 2px; }
+.nav-haut-ia-rond {
+  width: 38px;
+  height: 38px;
   padding: 3px;
   box-sizing: border-box;
   border-radius: 50%;
   background: conic-gradient(#FFC24B, #FF7A2F, #FF4F7B, #FFC24B);
-  box-shadow: 0 0 22px rgba(255,110,80,.45);
-  transition: transform .15s;
-}
-.nav-haut-ia:hover { transform: translateY(-2px); }
-.nav-haut-ia-rond {
-  width: 100%;
-  height: 100%;
-  box-sizing: border-box;
-  border-radius: 50%;
-  background: var(--rv-nav-ia, #FFF8F1);
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
 }
-.nav-haut-ia--actif .nav-haut-ia-rond { background: var(--rv-nav-ia-actif, var(--rv-peche-pale)); }
+.nav-haut-ia-rond svg {
+  width: 100%;
+  height: 100%;
+  padding: 5px;
+  box-sizing: border-box;
+  border-radius: 50%;
+  background: var(--rv-nav-ia, #FFF8F1);
+}
+.nav-haut-ia--actif { background: var(--rv-inverse); color: var(--rv-sur-inverse); }
 
-/* Mode essai : créer son compte, juste avant la capsule */
+/* Mode essai : créer son compte */
 .nav-haut-compte {
-  height: 46px;
+  height: 48px;
   display: flex;
   align-items: center;
-  padding: 0 18px;
+  padding: 0 20px;
   border-radius: 999px;
-  background: var(--rv-inverse);
-  color: var(--rv-sur-inverse);
-  font-size: 14px;
+  background: #2D2B57;
+  color: #fff;
+  font-size: 15px;
   font-weight: 700;
   text-decoration: none;
   white-space: nowrap;
-  box-shadow: 0 10px 24px rgba(27,26,35,.2);
+  box-shadow: 0 10px 24px rgba(45,43,87,.22);
 }
-.nav-haut-compte:hover { background: #2D2B57; }
+.nav-haut-compte:hover { background: #3B3970; }
+.nav-haut-compte:focus-visible { outline: 3px solid var(--rv-encre); outline-offset: 2px; }
+
+@media (min-width: 1024px) and (max-width: 1180px) {
+  .nav-haut-ia-libelle { display: none; }
+  .nav-haut-ia { padding-right: 5px; }
+  .nav-haut-onglet { padding: 0 12px; }
+}

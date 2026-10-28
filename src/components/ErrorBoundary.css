@@ -12,7 +12,7 @@
 .eb-reviz { position: relative; z-index: 1; margin-bottom: 24px; }
 .eb-bas { display: flex; flex-direction: column; align-items: center; gap: 12px; width: 100%; max-width: 420px; margin: 0 auto; padding: 32px 24px 40px; box-sizing: border-box; }
 .eb-sur { font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--rv-doux); }
-.eb-titre { margin: 0; font-family: 'Bricolage Grotesque', var(--font-display, sans-serif); font-size: 32px; font-weight: 800; line-height: 1.05; letter-spacing: -.035em; }
+.eb-titre { margin: 0; font-family: var(--font-display, sans-serif); font-size: 32px; font-weight: 800; line-height: 1.05; letter-spacing: -.035em; }
 .eb-texte { margin: 0; font-size: 16px; font-weight: 500; line-height: 1.5; color: var(--rv-doux); }
 .eb-btn {
   width: 100%; min-height: 56px; margin-top: 14px; border: 0; border-radius: 999px;

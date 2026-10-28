@@ -2,6 +2,7 @@ import { NavLink, Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { EtoileIA } from './BottomNav';
 import { PleinIcon } from './BottomNav';
+import { LogoReviz } from './skin/Skin';
 import { AVIS_PROFS_URL, isDecouverte } from '../services/decouverteService';
 import './NavHaut.css';
 
@@ -21,9 +22,10 @@ const ONGLETS = [
 ];
 
 /**
- * Menu des grands écrans (≥ 1024 px, hors app native) : la capsule en verre de la barre du
- * bas, posée en haut à droite (handoff Programme du 21/10), puis le bouton Réviz IA rond.
- * En mode essai, « Créer mon compte » remplace Réviz IA (le coach demande un compte).
+ * Menu des grands écrans (≥ 1024 px, hors app native), refait le 28/10 comme la landing :
+ * le logo autocollant au bord gauche, la capsule des onglets au centre (libellés visibles),
+ * Réviz IA et le compte au bord droit. En mode essai, « Créer mon compte » remplace
+ * Réviz IA (le coach demande un compte).
  * Rendue une fois sous AuthProvider ; invisible en dessous de 1024 px (CSS).
  */
 export function NavHaut() {
@@ -35,16 +37,15 @@ export function NavHaut() {
 
   return (
     <nav className="nav-haut" aria-label="Menu principal">
-      {isGuest && (isDecouverte()
-        ? <Link to={AVIS_PROFS_URL} className="nav-haut-compte">Donner mon avis</Link>
-        : <Link to="/inscription" className="nav-haut-compte">Créer mon compte</Link>)}
+      <Link to="/" className="nav-haut-logo" aria-label="Réviz, aujourd'hui">
+        <LogoReviz />
+      </Link>
       <div className="nav-haut-capsule">
         {ONGLETS.map(o => (
           <NavLink
             key={o.to}
             to={o.to}
             end={o.end}
-            title={o.label}
             aria-label={o.label}
             className={({ isActive }) => {
               const actif = isActive || o.also?.some(p => pathname.startsWith(p));
@@ -56,11 +57,17 @@ export function NavHaut() {
           </NavLink>
         ))}
       </div>
-      {!isGuest && (
-        <NavLink to="/coach" className={({ isActive }) => `nav-haut-ia${isActive ? ' nav-haut-ia--actif' : ''}`} aria-label="Réviz IA" title="Réviz IA">
-          <span className="nav-haut-ia-rond"><EtoileIA id="rv-ia-nav-haut" size={26} /></span>
-        </NavLink>
-      )}
+      <div className="nav-haut-droite">
+        {isGuest && (isDecouverte()
+          ? <Link to={AVIS_PROFS_URL} className="nav-haut-compte">Donner mon avis</Link>
+          : <Link to="/inscription" className="nav-haut-compte">Créer mon compte</Link>)}
+        {!isGuest && (
+          <NavLink to="/coach" className={({ isActive }) => `nav-haut-ia${isActive ? ' nav-haut-ia--actif' : ''}`} aria-label="Réviz IA" title="Réviz IA">
+            <span className="nav-haut-ia-rond"><EtoileIA id="rv-ia-nav-haut" size={22} /></span>
+            <span className="nav-haut-ia-libelle">Réviz IA</span>
+          </NavLink>
+        )}
+      </div>
     </nav>
   );
 }

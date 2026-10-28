@@ -9,7 +9,6 @@ import { PushBanner } from '../components/PushBanner';
 import { Mascot } from '../components/Mascot';
 import { Pantin, tempsLettres } from '../components/Pantin';
 import { BulleReviz } from '../components/reviz/BulleReviz';
-import { CarteFonction } from '../components/reviz/CarteFonction';
 import { loadLessons, restoreLesson, syncFromFirestore } from '../services/historyService';
 import { loadRevisions } from '../services/revisionService';
 import { loadCatalogue } from '../services/programmeService';
@@ -38,10 +37,10 @@ import './Home.css';
  * révision, objectif atteint, ou journée ordinaire.
  */
 const HUMEURS = {
-  normal:   { bg: 'var(--rv-peche)', tint: 'var(--rv-peche-bulle)', dot: 'var(--rv-lavande-bulle)', bar: 'color-mix(in srgb, var(--rv-peche) 94%, transparent)', btn: 'var(--rv-orange)', btnTexte: '#FF9A55', soft: 'var(--rv-peche-pale)', expression: 'content',   entree: 'coucou' },
-  controle: { bg: 'var(--rv-peche)', tint: 'var(--rv-peche-bulle)', dot: 'var(--rv-lavande-bulle)', bar: 'color-mix(in srgb, var(--rv-peche) 94%, transparent)', btn: 'var(--rv-orange)', btnTexte: '#FF9A55', soft: 'var(--rv-peche-pale)', expression: 'determine', entree: 'coucou' },
-  soir:     { bg: 'var(--rv-lavande-bulle)', tint: 'var(--rv-lavande-clair)', dot: 'var(--rv-peche-rose)', bar: 'color-mix(in srgb, var(--rv-lavande-bulle) 94%, transparent)', btn: 'var(--rv-lavande-vif)', btnTexte: '#B3AAF5', soft: 'var(--rv-lavande)', expression: 'endormi' },
-  fete:     { bg: 'var(--rv-peche-rose)', tint: 'var(--rv-peche-rose-pale)', dot: 'var(--rv-menthe-bulle)', bar: 'color-mix(in srgb, var(--rv-peche-rose) 94%, transparent)', btn: '#137A45', btnTexte: '#6BDA9B', soft: 'var(--rv-menthe)', expression: 'fier',      entree: 'saut' },
+  normal:   { bg: 'var(--sk-lavande)', tint: '#DCD6F7', dot: 'var(--rv-peche-clair)', bar: 'color-mix(in srgb, var(--rv-peche) 94%, transparent)', btn: 'var(--rv-orange)', btnTexte: '#FF9A55', soft: 'var(--rv-peche-pale)', expression: 'content',   entree: 'coucou' },
+  controle: { bg: 'var(--sk-peche)', tint: '#FFD6B8', dot: 'var(--rv-lavande-bulle)', bar: 'color-mix(in srgb, var(--rv-peche) 94%, transparent)', btn: 'var(--rv-orange)', btnTexte: '#FF9A55', soft: 'var(--rv-peche-pale)', expression: 'determine', entree: 'coucou' },
+  soir:     { bg: 'var(--sk-ciel)', tint: '#CBDDFA', dot: 'var(--rv-peche-rose)', bar: 'color-mix(in srgb, var(--rv-lavande-bulle) 94%, transparent)', btn: 'var(--rv-lavande-vif)', btnTexte: '#B3AAF5', soft: 'var(--rv-lavande)', expression: 'endormi' },
+  fete:     { bg: 'var(--sk-menthe)', tint: '#C8EBD5', dot: 'var(--rv-peche-clair)', bar: 'color-mix(in srgb, var(--rv-peche-rose) 94%, transparent)', btn: '#137A45', btnTexte: '#6BDA9B', soft: 'var(--rv-menthe)', expression: 'fier',      entree: 'saut' },
 };
 
 // Pastilles des matières : aplats pastel, dans l'ordre du design.
@@ -336,6 +335,36 @@ export default function Home() {
       carte: { id: 'agenda', pose: 'thinking', fond: 'var(--rv-peche-pale)', titre: 'Agenda', sous: 'Tes contrôles et leurs plans' } },
   ].filter((p, i) => p && (i === 0 || p.carte.id !== carteDuJour.id));
   const sugg = suggestions[tour % suggestions.length];
+
+  // « Démarre en un clic » (grammaire Nomad, 28/10) : trois raccourcis fixes sous la bulle. L'action du
+  // jour, la préparation d'un contrôle (le plan de révision de l'agenda), puis le programme ou le scan.
+  const raccourcis = [
+    { ...carteDuJour, go: action },
+    controle && carteDuJour.id !== 'controle'
+      ? { id: 'plan', pose: 'examen', fond: 'var(--sk-peche)', titre: 'Mon plan de révision', sous: `${controle.m.label} ${controle.quand}`, go: () => navigate('/agenda') }
+      : { id: 'plan', pose: 'examen', fond: 'var(--sk-peche)', titre: 'Préparer un contrôle', sous: 'Ton plan jusqu’au jour J', go: () => navigate('/agenda') },
+    carteDuJour.id === 'programme'
+      ? { id: 'scan', pose: 'scanphone', fond: 'var(--sk-menthe)', titre: 'Scanner une leçon', sous: avecCompte || 'Résumé, flashcards et quiz', go: lancerScan }
+      : { id: 'programme', pose: 'reading', fond: 'var(--sk-lavande)', titre: 'Mon programme', sous: `Tout le programme de ${classe}`, go: lancerProgramme },
+  ];
+  const blocRaccourcis = (
+    <div className="hm-raccourcis" role="group" aria-label="Démarre en un clic">
+      {raccourcis.map(r => (
+        <button key={r.id} type="button" className="hm-raccourci" onClick={r.go}>
+          <span className="hm-raccourci-rond" style={{ background: r.fond }}>
+            <Mascot pose={r.pose} size={isDesktop ? 54 : 48} alt="" aria-hidden="true" />
+          </span>
+          <span className="hm-raccourci-txt">
+            <span className="hm-raccourci-titre">{r.titre}</span>
+            <span className="hm-raccourci-sous">{r.sous}</span>
+          </span>
+          <span className="hm-raccourci-fleche" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+          </span>
+        </button>
+      ))}
+    </div>
+  );
   const texteSugg = sugg.lignes.join('\n');
 
   // Le héros hors de l'écran ou l'onglet caché : Réviz attend avant de changer de phrase.
@@ -427,7 +456,7 @@ export default function Home() {
         {matieres.map(m => (
           <Link key={m.slug} to={`/programme?matiere=${m.slug}`} className="hm-matiere">
             <span className="hm-matiere-rond" style={{ background: m.bg }}>
-              <Mascot pose={m.pose} size={isDesktop ? 54 : 64} alt="" aria-hidden="true" />
+              <Mascot pose={m.pose} size={44} alt="" aria-hidden="true" />
             </span>
             <span className="hm-matiere-nom">{m.nom}</span>
           </Link>
@@ -496,22 +525,20 @@ export default function Home() {
             <span className="hm-bulle hm-bulle--b" aria-hidden="true" />
             <span className="hm-point" aria-hidden="true" />
             <span className="hm-grain" aria-hidden="true" />
-            <div className="hm-hero-haut">
-              <span className="hm-date">{dateTxt}</span>
-              <div className="hm-hero-titres">
-                <span className="hm-auj">Aujourd'hui</span>
-                {serie}
-              </div>
-            </div>
-            {/* Réviz et ce qu'il dit, ensemble au centre : la bulle à gauche pointe vers sa tête. */}
+            {/* Bloc de couleur (28/10) : à gauche le titre, la bulle de Réviz et les raccourcis ;
+                à droite Réviz, vers qui pointe la bulle. */}
             <div className="hm-scene">
               <div className="hm-hero-txt">
+                <div className="hm-hero-haut">
+                  <span className="hm-date">{dateTxt}</span>
+                  <div className="hm-hero-titres">
+                    <span className="hm-auj">Aujourd'hui</span>
+                    {serie}
+                  </div>
+                </div>
                 <h1 className="sr-only">{dit}</h1>
                 <BulleReviz key={`${humeurId}-${tour}`} lignes={sugg.lignes} parle={parle} sortie={sortie} onClick={sugg.action} label={sugg.label}
                   pointe="droite" grande className="hm-bulle-parole" />
-                <div className="hm-proposition-place">
-                  {parle && <CarteFonction key={tour} carte={sugg.carte} entree sortie={sortie} grande onClick={sugg.action} />}
-                </div>
                 <div className="hm-points" role="group" aria-label="Ce que Réviz propose">
                   {suggestions.map((p, i) => (
                     <button
@@ -524,6 +551,7 @@ export default function Home() {
                     />
                   ))}
                 </div>
+                {blocRaccourcis}
               </div>
               <Pantin
                 ref={pantin}
@@ -586,10 +614,7 @@ export default function Home() {
             <h1 className="sr-only">{dit}</h1>
             <BulleReviz key={`${humeurId}-${tour}`} lignes={sugg.lignes} parle={parle} sortie={sortie} onClick={sugg.action} label={sugg.label} className="hm-bulle-parole" />
           </div>
-          {/* Place réservée : la carte chevauche le bas du héros, rien ne saute quand elle arrive. */}
-          <div className="hm-proposition-place">
-            {parle && <CarteFonction key={tour} carte={sugg.carte} entree sortie={sortie} onClick={sugg.action} />}
-          </div>
+          <div className="hm-pad hm-pad--raccourcis">{blocRaccourcis}</div>
           <div className="hm-pad hm-pad--chemin">{chemin}</div>
           <div className="hm-pad">{carteJeux}</div>
           {montrerEssai && <div className="hm-pad"><ThemeEssai onClose={() => setEssaiTheme(false)} /></div>}

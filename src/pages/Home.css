@@ -1,9 +1,10 @@
 /* CSS scoped to page wrapper — see scripts/scope-page-css.py */
 /* Wrapper: .home-page */
 
-/* Accueil, refonte validée du 20/10 (« Reviz Valide ») : aplat pastel avec
- * du grain, Réviz animé au centre, titres en Bricolage Grotesque. Les
- * couleurs de l'humeur du jour arrivent en variables (--hm-*) depuis Home.jsx. */
+/* Accueil : refonte du 20/10 (« Reviz Valide »), remise dans le skin du 28/10 (landing façon
+ * Nomad) : le héros devient un bloc de couleur arrondi posé sur le crème, avec trois raccourcis
+ * « Démarre en un clic » ; les matières en tuiles blanches. Les couleurs de l'humeur du jour
+ * arrivent en variables (--hm-*) depuis Home.jsx. */
 
 .home-page { --hm-fond: var(--rv-fond); --hm-encre: var(--rv-encre); --hm-doux: var(--rv-doux); }
 
@@ -17,10 +18,10 @@
 /* ── Héros ── */
 .home-page .hm-hero {
   position: relative;
-  height: calc(414px + env(safe-area-inset-top, 0px));
-  padding-top: env(safe-area-inset-top, 0px);
+  height: 384px;
+  margin: calc(10px + env(safe-area-inset-top, 0px)) 12px 0;
   background: var(--hm-bg);
-  border-radius: 0 0 50% 50% / 0 0 64px 64px;
+  border-radius: 32px;
   overflow: hidden;
   transition: background .5s;
   flex-shrink: 0;
@@ -32,12 +33,12 @@
   box-shadow: inset 0 -24px 40px rgba(120,60,20,.08), inset 0 16px 30px rgba(255,255,255,.35);
   transition: background .6s;
 }
-.home-page .hm-bulle--a { right: -70px; top: calc(150px + env(safe-area-inset-top, 0px)); width: 240px; height: 240px; }
-.home-page .hm-bulle--b { left: -50px; top: calc(270px + env(safe-area-inset-top, 0px)); width: 140px; height: 140px; }
+.home-page .hm-bulle--a { right: -70px; top: 150px; width: 240px; height: 240px; }
+.home-page .hm-bulle--b { left: -50px; top: 270px; width: 140px; height: 140px; }
 .home-page .hm-point {
   position: absolute;
   left: 26px;
-  top: calc(200px + env(safe-area-inset-top, 0px));
+  top: 200px;
   width: 46px;
   height: 46px;
   border-radius: 50%;
@@ -96,7 +97,7 @@
   position: absolute;
   left: 0;
   right: 0;
-  bottom: 44px;
+  bottom: 18px;
   display: flex;
   justify-content: center;
   z-index: 1;
@@ -109,7 +110,7 @@
   left: 22px;
   right: 22px;
   /* Posée par le bas, juste au-dessus de la tête : la pointe ne bouge pas quand la phrase change. */
-  bottom: 254px;
+  bottom: 228px;
 }
 
 .home-page .sr-only {
@@ -123,17 +124,18 @@
 /* ── Bandeau (essai, e-mail, accord parental) : un seul à la fois, en haut du héros ── */
 .home-page .hm-rappels { position: relative; z-index: 3; margin: 12px 16px 0; }
 /* Un bandeau en haut du héros : le héros grandit d'autant, Réviz (calé en bas) descend avec. */
-.home-page .hm-hero:has(.hm-rappels .bd) { height: calc(476px + env(safe-area-inset-top, 0px)); }
+.home-page .hm-hero:has(.hm-rappels .bd) { height: 446px; }
 .home-page .hm-hero .hm-rappels + .hm-hero-haut { margin-top: 0; }
 .home-page .hm-rappels:empty { display: none; }
 .home-page .hm-rappels > .bd ~ .bd { display: none; }
 
 /* ── Blocs du bas ── */
-.home-page .hm-pad { padding: 30px 22px 0; }
-.home-page .hm-pad--droite { padding: 28px 0 0 22px; }
+.home-page .hm-pad { padding: 30px 16px 0; }
+.home-page .hm-pad--droite { padding: 28px 16px 0; }
+.home-page .hm-pad--raccourcis { padding: 14px 16px 0; }
 .home-page .hm-pad--bas { padding: 28px 22px 8px; } /* .content garde déjà la place de la capsule */
 .home-page .hm-bloc { display: flex; flex-direction: column; gap: 10px; }
-.home-page .hm-tete { display: flex; justify-content: space-between; align-items: baseline; padding-right: 22px; }
+.home-page .hm-tete { display: flex; justify-content: space-between; align-items: baseline; }
 .home-page .hm-titre {
   margin: 0;
   font-family: var(--font-display);
@@ -280,32 +282,81 @@
 
 .home-page .hm-bloc--matieres { gap: 12px; }
 .home-page .hm-matieres {
-  display: flex;
-  gap: 14px;
-  overflow-x: auto;
-  padding-right: 22px;
-  scrollbar-width: none;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
 }
-.home-page .hm-matieres::-webkit-scrollbar { display: none; }
+/* Une tuile par matière, comme les tuiles de Nomad : l'émote dans un carré pastel, le nom à côté. */
 .home-page .hm-matiere {
-  flex: none;
-  width: 76px;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: 6px;
+  gap: 10px;
+  min-width: 0;
+  padding: 9px 12px 9px 9px;
+  border-radius: 20px;
+  background: var(--rv-carte);
+  box-shadow: 0 4px 14px rgba(45,43,87,.07), 0 1px 3px rgba(0,0,0,.04);
+  text-decoration: none;
+  transition: transform .15s;
 }
+.home-page .hm-matiere:active { transform: scale(.97); }
 .home-page .hm-matiere-rond {
-  width: 76px;
-  height: 76px;
-  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  flex: none;
+  border-radius: 15px;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform .15s;
 }
-.home-page .hm-matiere:active .hm-matiere-rond { transform: scale(.94); }
-.home-page .hm-matiere-nom { font-size: 13px; font-weight: 700; color: var(--hm-encre); text-align: center; }
+.home-page .hm-matiere-nom { min-width: 0; font-size: 15px; font-weight: 700; color: var(--hm-encre); overflow-wrap: anywhere; }
+
+/* ── « Démarre en un clic » : trois raccourcis blancs, émote, titre, flèche ── */
+.home-page .hm-raccourcis { display: flex; flex-direction: column; gap: 10px; }
+.home-page .hm-raccourci {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  padding: 10px 14px 10px 10px;
+  border: 0;
+  border-radius: 22px;
+  background: var(--rv-carte);
+  box-shadow: 0 4px 14px rgba(45,43,87,.07), 0 1px 3px rgba(0,0,0,.04);
+  font: inherit;
+  color: var(--hm-encre);
+  text-align: left;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform .15s, box-shadow .15s;
+}
+.home-page .hm-raccourci:active { transform: scale(.98); }
+.home-page .hm-raccourci:focus-visible { outline: 3px solid var(--hm-encre); outline-offset: 2px; }
+.home-page .hm-raccourci-rond {
+  width: 56px;
+  height: 56px;
+  flex: none;
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.home-page .hm-raccourci-txt { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.home-page .hm-raccourci-titre { font-size: 16px; font-weight: 700; line-height: 1.2; }
+.home-page .hm-raccourci-sous { font-size: 13px; color: var(--hm-doux); line-height: 1.3; }
+.home-page .hm-raccourci-fleche {
+  width: 34px;
+  height: 34px;
+  flex: none;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--sk-lavande);
+  color: #2D2B57;
+  transition: transform .2s;
+}
+.home-page .hm-raccourci:hover .hm-raccourci-fleche { transform: translateX(3px); }
 
 .home-page .hm-battle {
   position: relative;
@@ -411,37 +462,40 @@
 }
 
 /* ── Ordinateur : pleine largeur (handoff Programme du 21/10), héros en arc, menu en haut à droite ── */
-.home-page .hm-desk { display: flex; flex-direction: column; padding: 0 0 64px; }
+.home-page .hm-desk { display: flex; flex-direction: column; padding: 4px 0 64px; }
 .home-page .hm-hero--desk {
   height: auto;
-  margin: 0;
-  padding: 32px 56px 72px;
-  border-radius: 0 0 50% 50% / 0 0 80px 80px;
+  width: min(1376px, calc(100% - 64px));
+  box-sizing: border-box;
+  margin: 0 auto;
+  padding: 40px 48px;
+  border-radius: 40px;
 }
 .home-page .hm-hero--desk .hm-bulle--a { right: 18%; top: -120px; width: 520px; height: 520px; box-shadow: inset 0 -40px 60px rgba(120,60,20,.08), inset 0 24px 40px rgba(255,255,255,.35); }
 .home-page .hm-hero--desk .hm-bulle--b { left: -70px; right: auto; top: 260px; bottom: auto; width: 260px; height: 260px; box-shadow: none; }
 .home-page .hm-hero--desk .hm-point { left: auto; right: 12%; top: 380px; width: 18px; height: 18px; box-shadow: none; }
-/* La rangée du titre laisse libre le coin du menu (NavHaut). */
-.home-page .hm-hero--desk .hm-hero-haut { display: block; max-width: 1328px; margin: 0 auto; padding: 0 380px 0 0; min-height: 58px; }
+/* Le titre, en haut de la colonne de gauche du bloc */
+.home-page .hm-hero--desk .hm-hero-haut { display: block; margin: 0 0 22px; padding: 0; }
 .home-page .hm-hero--desk .hm-hero-titres { flex-direction: row; align-items: center; gap: 16px; margin-top: 4px; }
 .home-page .hm-hero--desk .hm-date { font-size: 12px; letter-spacing: .12em; opacity: .7; color: var(--hm-encre); }
 .home-page .hm-hero--desk .hm-auj { font-size: 42px; letter-spacing: -.04em; }
 .home-page .hm-hero--desk .hm-serie { margin: 0; padding: 6px 12px; font-size: 14px; }
-/* Réviz et ce qu'il dit, ensemble au centre */
-.home-page .hm-scene { position: relative; z-index: 1; display: flex; align-items: center; justify-content: center; gap: 12px; margin-top: 4px; }
+/* Deux colonnes : le texte et les raccourcis, puis Réviz */
+.home-page .hm-scene { position: relative; z-index: 1; display: grid; grid-template-columns: minmax(0, 620px) auto; align-items: center; justify-content: space-between; gap: 32px; }
 .home-page .hm-hero--desk .hm-pantin { position: relative; flex: none; z-index: 1; }
 .home-page .hm-hero-txt {
   position: relative;
   z-index: 2;
-  width: 500px;
+  min-width: 0;
   display: flex;
   flex-direction: column;
 }
 
 /* La bulle et la carte à gauche, face à Réviz (pointe à droite, vers sa tête). */
 .home-page .hm-desk .hm-bulle-parole { position: relative; left: auto; right: auto; bottom: auto; }
-.home-page .hm-desk .hm-proposition-place { height: 84px; margin-top: 28px; padding: 0; justify-content: flex-start; }
-.home-page .hm-desk .hm-points { margin-top: 22px; }
+.home-page .hm-desk .hm-points { margin-top: 18px; }
+.home-page .hm-desk .hm-raccourcis { margin-top: 24px; }
+.home-page .hm-desk .hm-raccourci:hover { box-shadow: 0 14px 30px -12px rgba(45,43,87,.25); }
 
 /* Les points : une par proposition, pour y aller directement */
 .home-page .hm-points { display: flex; align-items: center; gap: 8px; }
@@ -459,8 +513,8 @@
 .home-page .hm-point-sugg--la { width: 24px; background: var(--hm-encre); }
 .home-page .hm-point-sugg:focus-visible { outline: 2px solid var(--hm-encre); outline-offset: 3px; }
 /* Bandeau et carte « thème » : même colonne que la grille des cartes en dessous (1440 px, 56 px de marge). */
-.home-page .hm-desk .hm-rappels { max-width: 1440px; margin: 24px auto 0; padding: 0 56px; box-sizing: border-box; width: 100%; }
-.home-page .hm-essai-desk { max-width: 1440px; margin: 16px auto 0; padding: 0 56px; box-sizing: border-box; width: 100%; }
+.home-page .hm-desk .hm-rappels { max-width: 1440px; margin: 24px auto 0; padding: 0 32px; box-sizing: border-box; width: 100%; }
+.home-page .hm-essai-desk { max-width: 1440px; margin: 16px auto 0; padding: 0 32px; box-sizing: border-box; width: 100%; }
 
 .home-page .hm-grille {
   display: grid;
@@ -470,8 +524,8 @@
   width: 100%;
   max-width: 1440px;
   box-sizing: border-box;
-  margin: 40px auto 0;
-  padding: 0 56px;
+  margin: 28px auto 0;
+  padding: 0 32px;
 }
 .home-page .hm-grille > .hm-battle { min-height: 150px; }
 .home-page .hm-carte {
@@ -498,10 +552,9 @@
 .home-page .hm-desk .hm-chemin-go:hover { filter: brightness(1.08); }
 .home-page .hm-desk .hm-bloc--matieres { gap: 14px; }
 .home-page .hm-desk .hm-tete { padding: 0; }
-.home-page .hm-desk .hm-matieres { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px 8px; overflow: visible; padding: 0; }
-.home-page .hm-desk .hm-matiere { width: auto; gap: 4px; }
-.home-page .hm-desk .hm-matiere-rond { width: 62px; height: 62px; }
-.home-page .hm-desk .hm-matiere:hover .hm-matiere-rond { transform: translateY(-2px); }
+/* Dans la carte blanche : les tuiles sur le crème */
+.home-page .hm-desk .hm-matiere { background: var(--rv-fond); box-shadow: none; }
+.home-page .hm-desk .hm-matiere:hover { transform: translateY(-2px); }
 .home-page .hm-desk .hm-battle { padding: 22px; min-height: 0; }
 .home-page .hm-desk .hm-battle-rond { right: -40px; bottom: -50px; width: 220px; height: 220px; }
 .home-page .hm-desk .hm-battle-mascotte { right: 0; bottom: -8px; }
@@ -514,10 +567,8 @@
 @media (max-width: 1240px) {
   /* Écran étroit : Réviz rapetisse (sa taille est en ligne), bulle et carte se resserrent. */
   .home-page .hm-hero--desk .hm-pantin { width: 320px !important; height: 320px !important; }
-  .home-page .hm-hero-txt { width: 420px; }
   .home-page .hm-desk .rv-bulle-txt { max-width: 400px; font-size: 30px; }
   .home-page .hm-desk .rv-bulle-ligne + .rv-bulle-ligne { font-size: 18px; }
-  .home-page .hm-desk .rv-fonction { max-width: 400px; }
   .home-page .hm-grille { grid-template-columns: 1.3fr 1fr; }
 }
 

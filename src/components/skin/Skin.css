@@ -1,0 +1,128 @@
+/* Briques du skin (28/10) : mêmes couleurs que les blocs de la landing.
+ * Les pastels restent clairs en thème sombre ; le texte posé dessus reste en encre fixe. */
+:root {
+  --sk-lavande: #E7E3FA;
+  --sk-peche:   #FFE4CF;
+  --sk-ciel:    #DCEAFD;
+  --sk-menthe:  #DCF3E4;
+  --sk-encre:   #1E1C3F;
+  --sk-marque:  linear-gradient(135deg, #FF5A1F 0%, #FFA033 100%);
+  --sk-ombre:   0 4px 14px rgba(45,43,87,0.07), 0 1px 3px rgba(0,0,0,0.04);
+  --sk-ombre-haute: 0 18px 40px rgba(45,43,87,0.14);
+}
+
+/* ── Logo autocollant ── */
+.sk-logo {
+  display: inline-flex;
+  align-items: center;
+  filter: drop-shadow(0 2px 4px rgba(45,43,87,0.18));
+  text-decoration: none;
+}
+.sk-logo-mot {
+  font-size: 1.6rem;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: #2D2B57;
+}
+.sk-logo-pastille {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  margin-left: -2px;
+  flex: none;
+  border: 3px solid #fff;
+  border-radius: 50%;
+  background: #fff;
+}
+
+/* ── Blocs de couleur ── */
+.sk-bloc {
+  position: relative;
+  border-radius: 28px;
+  padding: 22px 20px;
+  color: #1B1A23;
+  overflow: hidden;
+}
+.sk-bloc--lavande { background: var(--sk-lavande); }
+.sk-bloc--peche   { background: var(--sk-peche); }
+.sk-bloc--ciel    { background: var(--sk-ciel); }
+.sk-bloc--menthe  { background: var(--sk-menthe); }
+.sk-bloc--blanc   { background: var(--rv-carte); color: var(--rv-encre); box-shadow: var(--sk-ombre); }
+.sk-bloc--encre   { background: var(--sk-encre); color: #fff; }
+@media (min-width: 1024px) {
+  .sk-bloc { border-radius: 36px; padding: 32px; }
+}
+
+/* ── Titres à deux graisses ── */
+.sk-titre {
+  margin: 0;
+  font-size: 1.75rem;
+  line-height: 1.08;
+  letter-spacing: -0.025em;
+  color: inherit;
+  text-wrap: balance;
+}
+.sk-titre-leger { font-weight: 400; }
+.sk-titre-fort  { font-weight: 800; }
+@media (min-width: 1024px) {
+  .sk-titre { font-size: 2.4rem; }
+}
+
+/* ── Intertitre « ↓ Contenus gratuits » ── */
+.sk-surtitre {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--rv-encre);
+}
+
+/* ── Bouton pilule à pastille fléchée ── */
+.sk-bouton {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  height: 48px;
+  padding: 0 6px 0 22px;
+  border: 0;
+  border-radius: 999px;
+  font: inherit;
+  font-size: 15px;
+  font-weight: 700;
+  white-space: nowrap;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: var(--sk-ombre);
+  transition: background .15s, transform .15s;
+}
+.sk-bouton:active { transform: scale(.98); }
+.sk-bouton:focus-visible { outline: 3px solid var(--rv-encre); outline-offset: 2px; }
+.sk-bouton-pastille {
+  width: 36px;
+  height: 36px;
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--sk-marque);
+  color: #fff;
+  transition: transform .2s;
+}
+.sk-bouton:hover .sk-bouton-pastille { transform: rotate(45deg); }
+.sk-bouton--encre   { background: #2D2B57; color: #fff; }
+.sk-bouton--encre:hover { background: #3B3970; }
+.sk-bouton--blanc   { background: #fff; color: #2D2B57; }
+.sk-bouton--contour { background: var(--rv-carte); color: var(--rv-encre); border: 1px solid var(--rv-ligne); }
+.sk-bouton--contour .sk-bouton-pastille { background: #EAE8F2; color: #2D2B57; }
+.sk-bouton--compact { height: 40px; padding-left: 16px; gap: 10px; font-size: 14px; }
+.sk-bouton--compact .sk-bouton-pastille { width: 32px; height: 32px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .sk-bouton, .sk-bouton-pastille { transition: none; }
+}

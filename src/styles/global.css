@@ -750,8 +750,8 @@ html.native .content, html.native .pg-content, html.native .pf-content {
  * largeur et gèrent leurs marges. Sous 1024 px rien ne change ; l'app native
  * garde ses règles plein écran. */
 :root {
-  /* Titres de la refonte : Bricolage Grotesque (700/800), texte en Geist. */
-  --font-display: 'Bricolage Grotesque', 'Geist', system-ui, sans-serif;
+  /* Titres : Geist très gras, comme la landing (skin du 28/10 ; Bricolage Grotesque avant). */
+  --font-display: 'Geist', system-ui, sans-serif;
   --content-max: 1120px;
 }
 @media (min-width: 1024px) {
@@ -772,9 +772,9 @@ html.native .content, html.native .pg-content, html.native .pf-content {
   }
   /* Pages refaites en pleine largeur (accueil, Programme) : héros bord à bord. */
   html:not(.native) .app.app--large { padding-left: 0; padding-right: 0; }
-  /* Les autres pages, en attendant d'être refaites, laissent une bande en haut au menu
-     (NavHaut, fixé en haut à droite) pour ne rien glisser dessous. */
-  html:not(.native) body:has(.nav-haut) .app:not(.app--large) { padding-top: 64px; }
+  /* Toutes les pages laissent la bande du haut au menu (NavHaut, logo + capsule + Réviz IA,
+     sur toute la largeur depuis le 28/10) pour ne rien glisser dessous. */
+  html:not(.native) body:has(.nav-haut) .app { padding-top: var(--nav-haut-h, 84px); }
   /* Le halo couvre toute la largeur de la coquille */
   html:not(.native) .app::before { left: 0; right: 0; }
   /* La capsule du bas laisse la place au menu du haut */
