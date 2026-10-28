@@ -78,7 +78,7 @@
   position: relative;
   overflow: hidden;
   padding: calc(env(safe-area-inset-top, 0px) + 14px) 20px 86px;
-  border-radius: 0 0 50% 50% / 0 0 44px 44px;
+  border-radius: 32px; margin: 10px 12px 0;
 }
 .bt-hero-moitie { position: absolute; top: 0; bottom: 0; width: 50%; }
 .bt-hero-moitie--g { left: 0; background: var(--bt-lavande); }
@@ -442,7 +442,7 @@ button.bt-choix-btn:active:not(:disabled) { transform: translateY(3px); box-shad
 
 /* ── Ordinateur ── */
 .bt-page--large .bt-defile { padding-bottom: 60px; }
-.bt-page--large .bt-hero { height: 520px; box-sizing: border-box; padding: 28px 56px 0; border-radius: 0 0 50% 50% / 0 0 80px 80px; }
+.bt-page--large .bt-hero { height: 520px; box-sizing: border-box; padding: 28px 56px 0; border-radius: 40px; width: min(1376px, calc(100% - 64px)); box-sizing: border-box; margin-left: auto; margin-right: auto; }
 .bt-page--large .bt-hero-titre { display: block; margin-top: 30px; }
 .bt-page--large .bt-titre { font-size: 56px; }
 /* Elle finit avant la ligne médiane : les mascottes (moitié droite) ne la recouvrent plus. */

@@ -219,7 +219,7 @@
 .mo-erreur { margin: 0; font-size: 13px; font-weight: 600; color: var(--rv-marque-fonce); }
 
 /* ── Ordinateur ── */
-.mo-page--large .mo-hero { height: 540px; box-sizing: border-box; padding: 32px 56px 0; border-radius: 0 0 50% 50% / 0 0 80px 80px; }
+.mo-page--large .mo-hero { height: 540px; box-sizing: border-box; padding: 32px 56px 0; border-radius: 40px; width: min(1376px, calc(100% - 64px)); box-sizing: border-box; margin-left: auto; margin-right: auto; }
 .mo-hero-grille { position: relative; z-index: 1; display: grid; grid-template-columns: 540px 1fr; gap: 24px; align-items: start; max-width: 1328px; }
 .mo-hero-gauche { display: flex; flex-direction: column; }
 .mo-page--large .mo-nom { font-size: 56px; }

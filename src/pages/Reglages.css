@@ -237,7 +237,7 @@
 
 /* ── Ordinateur ── */
 .rg-page--large .rg-defile { padding-bottom: 60px; }
-.rg-page--large .rg-hero { height: 360px; box-sizing: border-box; padding: 32px 56px 0; border-radius: 0 0 50% 50% / 0 0 76px 76px; }
+.rg-page--large .rg-hero { height: 360px; box-sizing: border-box; padding: 32px 56px 0; border-radius: 40px; width: min(1376px, calc(100% - 64px)); box-sizing: border-box; margin-left: auto; margin-right: auto; }
 .rg-page--large .rg-hero-corps { align-items: center; max-width: 1328px; margin: 26px auto 0; justify-content: flex-start; gap: 0; }
 .rg-page--large .rg-hero-titres { flex: 0 0 auto; margin-right: auto; }
 .rg-page--large .rg-hero-haut { max-width: 1328px; margin: 0 auto; }

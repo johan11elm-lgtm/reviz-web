@@ -275,7 +275,7 @@
 .le-dialogue-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 18px; }
 
 /* ── Ordinateur ── */
-.le-page--large .le-hero { padding: 32px 56px 120px; border-radius: 0 0 50% 50% / 0 0 80px 80px; }
+.le-page--large .le-hero { padding: 32px 56px 120px; border-radius: 40px; width: min(1376px, calc(100% - 64px)); box-sizing: border-box; margin-left: auto; margin-right: auto; }
 .le-page--large .ch-haut { padding-right: 420px; }
 .le-hero-grille { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr 560px; align-items: end; gap: 24px; }
 .le-page--large .ch-surtitre { margin-top: 0; }

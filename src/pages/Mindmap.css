@@ -243,7 +243,7 @@
 
 /* ── Ordinateur ── */
 .cm-page--large { min-height: 100vh; }
-.cm-page--large .cm-hero { height: 220px; box-sizing: border-box; padding: 32px 56px 0; border-radius: 0 0 50% 50% / 0 0 70px 70px; }
+.cm-page--large .cm-hero { height: 220px; box-sizing: border-box; padding: 32px 56px 0; border-radius: 40px; width: min(1376px, calc(100% - 64px)); box-sizing: border-box; margin-left: auto; margin-right: auto; }
 .cm-page--large .ch-deco--a { width: 220px; height: 220px; top: 60px; left: -80px; }
 .cm-page--large .ch-deco--b { width: 120px; height: 120px; top: 120px; left: 640px; right: auto; opacity: .6; }
 .cm-page--large .ch-point { width: 16px; height: 16px; top: 100px; left: 420px; }

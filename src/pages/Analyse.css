@@ -50,7 +50,7 @@
 .analyse-page .an-etat-btn:active { transform: translateY(4px); box-shadow: 0 1px 0 var(--rv-orange-tranche); }
 .analyse-page .an-etat-btn--creme { background: var(--rv-fond); box-shadow: 0 5px 0 var(--rv-ligne); color: var(--rv-encre); }
 .analyse-page .an-etat-btn--creme:active { box-shadow: 0 1px 0 var(--rv-ligne); }
-.analyse-page.ch-page--large .an-etat-hero { padding: 40px 56px 130px; border-radius: 0 0 50% 50% / 0 0 80px 80px; }
+.analyse-page.ch-page--large .an-etat-hero { padding: 40px 56px 130px; border-radius: 40px; width: min(1376px, calc(100% - 64px)); box-sizing: border-box; margin-left: auto; margin-right: auto; }
 .analyse-page.ch-page--large .an-etat-carte { margin: -96px auto 48px; padding: 28px; }
 .analyse-page.ch-page--large .an-etat-titre { font-size: 26px; }
 @media (prefers-reduced-motion: reduce) {

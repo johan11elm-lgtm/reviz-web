@@ -179,7 +179,7 @@
 .ag-cal-jour:disabled { opacity: .3; cursor: default; }
 
 /* ── Ordinateur ── */
-.ag-page--large .ag-hero { height: 540px; box-sizing: border-box; padding: 32px 56px 0; border-radius: 0 0 50% 50% / 0 0 80px 80px; }
+.ag-page--large .ag-hero { height: 540px; box-sizing: border-box; padding: 32px 56px 0; border-radius: 40px; width: min(1376px, calc(100% - 64px)); box-sizing: border-box; margin-left: auto; margin-right: auto; }
 .ag-page--large .ag-titre { font-size: 56px; }
 .ag-grille { position: relative; z-index: 2; display: grid; grid-template-columns: 540px minmax(0, 1fr); gap: 32px; max-width: 1440px; box-sizing: border-box; margin: -410px auto 0; padding: 0 56px; align-items: start; }
 .ag-gauche { display: flex; flex-direction: column; }

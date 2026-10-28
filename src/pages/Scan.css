@@ -179,7 +179,7 @@ button.sc-carte:active { transform: scale(.98); }
 .sc-feuille--centre .sc-deux { margin-top: 8px; }
 
 /* ── Ordinateur ── */
-.sc-page--large .sc-hero { padding: 32px 56px 120px; border-radius: 0 0 50% 50% / 0 0 80px 80px; }
+.sc-page--large .sc-hero { padding: 32px 56px 120px; border-radius: 40px; width: min(1376px, calc(100% - 64px)); box-sizing: border-box; margin-left: auto; margin-right: auto; }
 .sc-page--large .ch-haut { padding-right: 420px; }
 .sc-hero-grille { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 24px; }
 .sc-page--large .sc-titre { max-width: none; font-size: 56px; }

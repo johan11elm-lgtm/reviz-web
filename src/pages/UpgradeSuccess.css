@@ -4,7 +4,7 @@
 .ugs-defile { position: relative; flex: 1; min-height: 0; overflow-y: auto; overflow-x: hidden; padding-bottom: calc(40px + env(safe-area-inset-bottom, 0px)); scrollbar-width: none; }
 .ugs-defile::-webkit-scrollbar { display: none; }
 
-.ugs-hero { position: relative; overflow: hidden; height: 430px; box-sizing: border-box; padding: calc(env(safe-area-inset-top, 0px) + 18px) 20px 0; border-radius: 0 0 50% 50% / 0 0 44px 44px; background: var(--rv-peche); }
+.ugs-hero { position: relative; overflow: hidden; height: 430px; box-sizing: border-box; padding: calc(env(safe-area-inset-top, 0px) + 18px) 20px 0; border-radius: 32px; margin: 10px 12px 0; background: var(--rv-peche); }
 .ugs-hero--attente { height: 500px; }
 .ugs-hero > :not(.ugs-deco):not(.ch-grain) { position: relative; z-index: 1; }
 .ugs-deco { position: absolute; border-radius: 50%; background: var(--rv-peche-bulle); }
