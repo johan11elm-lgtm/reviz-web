@@ -26,12 +26,15 @@ vi.mock('../_chatQuota.js', () => ({
   refundChatQuota: (...a) => refundChatQuota(...a),
 }))
 vi.mock('../_chatPrompt.js', () => ({
-  MODEL: 'test-model',
-  buildChatSystemPrompt: () => 'sys',
+  buildChatRequest: (o) => ({ model: 'test-model', system: 'sys', messages: o.messages, aujourdhui: o.aujourdhui }),
   buildChatLessonContext: () => 'ctx',
+  CHAT_MESSAGE_REFUS: 'Refus.',
   CHAT_MAX_MESSAGE_LENGTH: 1000,
   CHAT_MAX_HISTORY: 20,
-  CHAT_MAX_OUTPUT_TOKENS: 1024,
+}))
+const anthropicCreate = vi.fn()
+vi.mock('@anthropic-ai/sdk', () => ({
+  default: class { constructor() { this.messages = { create: (...a) => anthropicCreate(...a) } } },
 }))
 
 const { default: handler, sanitizeMessages } = await import('../chat.js')
@@ -50,12 +53,12 @@ function mockRes() {
   }
 }
 
-// Corps SSE Anthropic minimal, sous forme d'itérable async de chunks binaires.
-function sseBody(events) {
-  const enc = new TextEncoder()
-  const raw = events.map(e => `data: ${JSON.stringify(e)}\n`).join('\n')
-  return (async function* () { yield enc.encode(raw) })()
+// Flux du SDK : un itérable async d'événements déjà décodés.
+function flux(events) {
+  return (async function* () { yield* events })()
 }
+// Erreur HTTP du SDK (APIError) : seul `status` compte pour le handler.
+const erreurApi = status => Object.assign(new Error(`HTTP ${status}`), { status })
 
 const VALID_BODY = {
   idToken: 'good',
@@ -63,8 +66,6 @@ const VALID_BODY = {
   level: { cycle: 'college', classe: '3ème' },
   messages: [{ role: 'user', content: 'Explique-moi' }],
 }
-
-const anthropicFetch = vi.fn()
 
 describe('sanitizeMessages', () => {
   it('accepte une conversation valide et la normalise', () => {
@@ -114,8 +115,7 @@ describe('/api/chat', () => {
     refundChatQuota.mockReset()
     getUserDoc.mockReset()
     getLessonDoc.mockReset()
-    anthropicFetch.mockReset()
-    vi.stubGlobal('fetch', anthropicFetch)
+    anthropicCreate.mockReset()
 
     verifyIdToken.mockResolvedValue({ uid: 'u1', email_verified: true })
     getUserDoc.mockResolvedValue({ exists: true, data: () => ({ plan: 'free' }) })
@@ -140,7 +140,7 @@ describe('/api/chat', () => {
     await handler({ method: 'POST', body: { ...VALID_BODY, messages: [] } }, res2)
     expect(res2.statusCode).toBe(400)
     expect(res2.payload).toBe('INVALID_MESSAGES')
-    expect(anthropicFetch).not.toHaveBeenCalled()
+    expect(anthropicCreate).not.toHaveBeenCalled()
   })
 
   it('refuse (401) sans token ou token invalide', async () => {
@@ -152,7 +152,7 @@ describe('/api/chat', () => {
     const res2 = mockRes()
     await handler({ method: 'POST', body: VALID_BODY }, res2)
     expect(res2.statusCode).toBe(401)
-    expect(anthropicFetch).not.toHaveBeenCalled()
+    expect(anthropicCreate).not.toHaveBeenCalled()
   })
 
   it('refuse (403 EMAIL_NOT_VERIFIED) si l\'email n\'est pas vérifié', async () => {
@@ -179,26 +179,34 @@ describe('/api/chat', () => {
     await handler({ method: 'POST', body: VALID_BODY }, res)
     expect(res.statusCode).toBe(429)
     expect(res.payload).toBe('CHAT_LIMIT')
-    expect(anthropicFetch).not.toHaveBeenCalled()
+    expect(anthropicCreate).not.toHaveBeenCalled()
   })
 
   it('applique la limite premium pour un compte premium', async () => {
     getUserDoc.mockResolvedValue({ exists: true, data: () => ({ plan: 'premium' }) })
-    anthropicFetch.mockResolvedValue({ ok: true, body: sseBody([]) })
+    anthropicCreate.mockResolvedValue(flux([]))
     const res = mockRes()
     await handler({ method: 'POST', body: VALID_BODY }, res)
     expect(consumeChatQuota).toHaveBeenCalledWith(expect.objectContaining({ limit: 200 }))
   })
 
-  it('streame les deltas de texte puis [DONE] (200)', async () => {
-    anthropicFetch.mockResolvedValue({
-      ok: true,
-      body: sseBody([
-        { type: 'content_block_delta', delta: { type: 'text_delta', text: 'Salut ' } },
-        { type: 'content_block_delta', delta: { type: 'text_delta', text: 'toi !' } },
-        { type: 'message_stop' },
-      ]),
-    })
+  it('envoie la requête du prompt partagé, en streaming, avec le jour à Paris', async () => {
+    anthropicCreate.mockResolvedValue(flux([]))
+    await handler({ method: 'POST', body: VALID_BODY }, mockRes())
+    const params = anthropicCreate.mock.calls[0][0]
+    expect(params).toMatchObject({ model: 'test-model', system: 'sys', stream: true, messages: VALID_BODY.messages })
+    expect(params.aujourdhui).toMatch(/^\d{4}-\d{2}-\d{2}$/)
+  })
+
+  it('streame les deltas de texte puis [DONE] (200), sans la réflexion du modèle', async () => {
+    anthropicCreate.mockResolvedValue(flux([
+      { type: 'content_block_start', index: 0, content_block: { type: 'thinking', thinking: '' } },
+      { type: 'content_block_delta', index: 0, delta: { type: 'signature_delta', signature: 'sig' } },
+      { type: 'content_block_delta', index: 1, delta: { type: 'text_delta', text: 'Salut ' } },
+      { type: 'content_block_delta', index: 1, delta: { type: 'text_delta', text: 'toi !' } },
+      { type: 'message_delta', delta: { stop_reason: 'end_turn' } },
+      { type: 'message_stop' },
+    ]))
     const res = mockRes()
     await handler({ method: 'POST', body: VALID_BODY }, res)
 
@@ -209,20 +217,44 @@ describe('/api/chat', () => {
     expect(joined).toContain(JSON.stringify({ text: 'Salut ' }))
     expect(joined).toContain(JSON.stringify({ text: 'toi !' }))
     expect(joined).toContain('data: [DONE]')
-    // Le flux brut Anthropic (métadonnées) n'est jamais relayé tel quel.
+    // Le flux brut Anthropic (métadonnées, réflexion) n'est jamais relayé tel quel.
     expect(joined).not.toContain('content_block_delta')
+    expect(joined).not.toContain('sig')
+  })
+
+  it('ajoute une phrase pour l\'élève quand le modèle refuse (stop_reason refusal)', async () => {
+    anthropicCreate.mockResolvedValue(flux([
+      { type: 'message_delta', delta: { stop_reason: 'refusal' } },
+      { type: 'message_stop' },
+    ]))
+    const res = mockRes()
+    await handler({ method: 'POST', body: VALID_BODY }, res)
+    expect(res.chunks.join('')).toContain('Refus.')
   })
 
   it('rembourse le quota si Anthropic échoue avant le stream', async () => {
-    anthropicFetch.mockResolvedValue({ ok: false, status: 500 })
+    anthropicCreate.mockRejectedValue(erreurApi(500))
     const res = mockRes()
     await handler({ method: 'POST', body: VALID_BODY }, res)
     expect(res.statusCode).toBe(502)
+    expect(res.payload).toBe('API_ERROR_500')
     expect(refundChatQuota).toHaveBeenCalled()
   })
 
+  it('traduit les erreurs de clé et de débit', async () => {
+    anthropicCreate.mockRejectedValue(erreurApi(401))
+    const res1 = mockRes()
+    await handler({ method: 'POST', body: VALID_BODY }, res1)
+    expect(res1.payload).toBe('INVALID_API_KEY')
+    anthropicCreate.mockRejectedValue(erreurApi(429))
+    const res2 = mockRes()
+    await handler({ method: 'POST', body: VALID_BODY }, res2)
+    expect(res2.statusCode).toBe(429)
+    expect(res2.payload).toBe('RATE_LIMIT')
+  })
+
   it('rembourse aussi sur erreur réseau', async () => {
-    anthropicFetch.mockRejectedValue(new Error('boom'))
+    anthropicCreate.mockRejectedValue(new Error('boom'))
     const res = mockRes()
     await handler({ method: 'POST', body: VALID_BODY }, res)
     expect(res.statusCode).toBe(502)

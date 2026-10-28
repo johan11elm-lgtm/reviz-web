@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { buildChatSystemPrompt, buildChatLessonContext } from '../chatPrompts.js'
+import { buildChatSystemPrompt, buildChatLessonContext, buildChatRequest, blocCalendrier, CHAT_MODEL } from '../chatPrompts.js'
 
 const ENTRY = {
   metadata: { title: 'Le théorème de Pythagore', subject: 'Maths' },
@@ -66,5 +66,43 @@ describe('buildChatSystemPrompt', () => {
 
   it('ne crashe pas sans niveau (fallback collège)', () => {
     expect(buildChatSystemPrompt(null, ctx)).toContain('collégien')
+  })
+
+  it('donne les jours qui viennent quand on lui passe le jour, sinon rien', () => {
+    expect(buildChatSystemPrompt(null, ctx, '2026-11-03')).toContain("aujourd'hui : mardi 3 novembre 2026")
+    expect(buildChatSystemPrompt(null, ctx)).not.toContain('LES JOURS QUI VIENNENT')
+  })
+})
+
+describe('blocCalendrier', () => {
+  it('nomme chaque jour sans erreur de décompte, fin de mois comprise', () => {
+    const c = blocCalendrier('2026-10-28')
+    expect(c).toContain("aujourd'hui : mercredi 28 octobre 2026")
+    expect(c).toContain('demain : jeudi 29 octobre')
+    expect(c).toContain('dans 2 jours : vendredi 30 octobre')
+    expect(c).toContain('dans 4 jours : dimanche 1 novembre')
+    expect(c).toContain('dans 13 jours : mardi 10 novembre')
+  })
+
+  it("ne dépend pas du fuseau de la machine (passage à l'heure d'hiver)", () => {
+    expect(blocCalendrier('2026-10-24')).toContain('demain : dimanche 25 octobre')
+    expect(blocCalendrier('2026-10-24')).toContain('dans 2 jours : lundi 26 octobre')
+  })
+})
+
+describe('buildChatRequest', () => {
+  it('assemble modèle, plafond, effort, cache et prompt, sans paramètre refusé par Haiku 5.5', () => {
+    const messages = [{ role: 'user', content: 'Explique' }]
+    const r = buildChatRequest({ level: { cycle: 'college', classe: '4ème' }, lessonContext: 'ctx', messages, aujourdhui: '2026-11-03' })
+    expect(r.model).toBe(CHAT_MODEL)
+    expect(r.messages).toBe(messages)
+    expect(r.output_config).toEqual({ effort: 'low' })
+    expect(r.cache_control).toEqual({ type: 'ephemeral' })
+    expect(r.system).toContain('mardi 3 novembre')
+    for (const interdit of ['temperature', 'top_p', 'top_k', 'thinking']) expect(r).not.toHaveProperty(interdit)
+  })
+
+  it("laisse choisir l'effort (banc d'essai)", () => {
+    expect(buildChatRequest({ lessonContext: '', messages: [], effort: 'medium' }).output_config).toEqual({ effort: 'medium' })
   })
 })

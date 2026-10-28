@@ -1,4 +1,6 @@
-import { MODEL, buildChatSystemPrompt, buildChatLessonContext, CHAT_MAX_MESSAGE_LENGTH, CHAT_MAX_HISTORY, CHAT_MAX_OUTPUT_TOKENS } from './_chatPrompt.js'
+import Anthropic from '@anthropic-ai/sdk'
+import { buildChatRequest, buildChatLessonContext, CHAT_MESSAGE_REFUS, CHAT_MAX_MESSAGE_LENGTH, CHAT_MAX_HISTORY } from './_chatPrompt.js'
+import { jourParis } from '../src/utils/retour.js'
 import { getDb, getAuthAdmin } from './_firebaseAdmin.js'
 import { compteVerifie } from './_compteVerifie.js'
 import { consumeChatQuota, refundChatQuota, CHAT_FREE_LIMIT, CHAT_PREMIUM_LIMIT } from './_chatQuota.js'
@@ -10,9 +12,13 @@ import { revizPlusOffertServeur } from './_offert.js'
 // libre affiché au fil de l'eau — le streaming est le bon choix ici.
 export const config = { maxDuration: 60, supportsResponseStreaming: true }
 
-// Une réponse du coach (~1024 tokens max) tient largement sous ce plafond ;
+// Une réponse du coach (quelques phrases) tient largement sous ce plafond ;
 // au-delà c'est un historique forgé, pas une vraie conversation.
 const MAX_ASSISTANT_LENGTH = 6000
+
+// Un seul essai de plus côté SDK : l'élève attend devant l'écran.
+let client = null
+const anthropic = () => (client ??= new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY, maxRetries: 1 }))
 
 // Valide et normalise l'historique envoyé par le client.
 // Retourne le tableau nettoyé, ou null si invalide.
@@ -75,62 +81,40 @@ export default async function handler(req, res) {
   const q = await consumeChatQuota({ db, uid, limit })
   if (!q.allowed) return res.status(429).send('CHAT_LIMIT')
 
-  // 4. Appel Anthropic en streaming
+  // 4. Appel Anthropic en streaming. `create` avec stream: true rend la main
+  //    une fois les en-têtes reçus : une erreur HTTP lève ici, avant le flux,
+  //    ce qui laisse rembourser le quota et répondre par un code clair.
   const lessonContext = buildChatLessonContext(lessonSnap.data())
-  let anthropicResp
+  let stream
   try {
-    anthropicResp = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-api-key': process.env.ANTHROPIC_API_KEY,
-        'anthropic-version': '2023-06-01',
-      },
-      body: JSON.stringify({
-        model: MODEL,
-        max_tokens: CHAT_MAX_OUTPUT_TOKENS,
-        stream: true,
-        system: buildChatSystemPrompt(level, lessonContext),
-        messages: cleanMessages,
-      }),
+    stream = await anthropic().messages.create({
+      ...buildChatRequest({ level, lessonContext, messages: cleanMessages, aujourdhui: jourParis() }),
+      stream: true,
     })
-  } catch {
+  } catch (err) {
     await refundChatQuota({ db, uid }).catch(() => {})
-    return res.status(502).send('NETWORK_ERROR')
-  }
-
-  if (!anthropicResp.ok) {
-    await refundChatQuota({ db, uid }).catch(() => {})
-    if (anthropicResp.status === 401 || anthropicResp.status === 403) return res.status(502).send('INVALID_API_KEY')
-    if (anthropicResp.status === 429) return res.status(429).send('RATE_LIMIT')
-    return res.status(502).send(`API_ERROR_${anthropicResp.status}`)
+    const status = err?.status
+    if (typeof status !== 'number') return res.status(502).send('NETWORK_ERROR')
+    if (status === 401 || status === 403) return res.status(502).send('INVALID_API_KEY')
+    if (status === 429) return res.status(429).send('RATE_LIMIT')
+    return res.status(502).send(`API_ERROR_${status}`)
   }
 
   // 5. Pont SSE : on ne relaie que les deltas de texte (jamais le flux brut
-  //    Anthropic — pas de métadonnées de modèle côté client).
+  //    Anthropic — ni réflexion du modèle, ni métadonnées côté client).
   res.status(200)
   res.setHeader('Content-Type', 'text/event-stream; charset=utf-8')
   res.setHeader('Cache-Control', 'no-cache, no-transform')
   // Premier event : quota restant (affichage client purement informatif).
   res.write(`data: ${JSON.stringify({ meta: { remaining: q.remaining, limit } })}\n\n`)
 
-  const decoder = new TextDecoder()
-  let buffer = ''
   try {
-    for await (const chunk of anthropicResp.body) {
-      buffer += decoder.decode(chunk, { stream: true })
-      const lines = buffer.split('\n')
-      buffer = lines.pop() // dernière ligne possiblement incomplète
-      for (const line of lines) {
-        if (!line.startsWith('data: ')) continue
-        const payload = line.slice(6).trim()
-        if (!payload) continue
-        try {
-          const event = JSON.parse(payload)
-          if (event.type === 'content_block_delta' && event.delta?.type === 'text_delta') {
-            res.write(`data: ${JSON.stringify({ text: event.delta.text })}\n\n`)
-          }
-        } catch { /* ignore SSE malformés */ }
+    for await (const event of stream) {
+      if (event.type === 'content_block_delta' && event.delta?.type === 'text_delta') {
+        res.write(`data: ${JSON.stringify({ text: event.delta.text })}\n\n`)
+      } else if (event.type === 'message_delta' && event.delta?.stop_reason === 'refusal') {
+        // Refus des filtres de sécurité (pas de repli côté serveur sur Haiku 5.5).
+        res.write(`data: ${JSON.stringify({ text: `\n\n${CHAT_MESSAGE_REFUS}` })}\n\n`)
       }
     }
     res.write('data: [DONE]\n\n')

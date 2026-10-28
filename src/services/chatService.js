@@ -7,7 +7,8 @@
 import { auth } from './firebaseConfig.js'
 import { apiFetch } from './apiClient.js'
 import { loadLessons } from './historyService.js'
-import { MODEL, buildChatSystemPrompt, buildChatLessonContext, CHAT_MAX_MESSAGE_LENGTH, CHAT_MAX_HISTORY, CHAT_MAX_OUTPUT_TOKENS } from '../utils/chatPrompts.js'
+import { buildChatRequest, buildChatLessonContext, CHAT_MESSAGE_REFUS, CHAT_MAX_MESSAGE_LENGTH, CHAT_MAX_HISTORY } from '../utils/chatPrompts.js'
+import { jourParis } from '../utils/retour.js'
 import { memoriserQuotaCoach } from '../utils/revizPlus.js'
 
 export { CHAT_MAX_MESSAGE_LENGTH }
@@ -129,11 +130,8 @@ async function _direct({ lessonId, messages, level, onDelta }) {
       'anthropic-dangerous-direct-browser-access': 'true',
     },
     body: JSON.stringify({
-      model: MODEL,
-      max_tokens: CHAT_MAX_OUTPUT_TOKENS,
+      ...buildChatRequest({ level, lessonContext: buildChatLessonContext(entry), messages, aujourdhui: jourParis() }),
       stream: true,
-      system: buildChatSystemPrompt(level, buildChatLessonContext(entry)),
-      messages,
     }),
   })
 
@@ -149,6 +147,9 @@ async function _direct({ lessonId, messages, level, onDelta }) {
       const event = JSON.parse(payload)
       if (event.type === 'content_block_delta' && event.delta?.type === 'text_delta') {
         text += event.delta.text
+        onDelta?.(text)
+      } else if (event.type === 'message_delta' && event.delta?.stop_reason === 'refusal') {
+        text += `\n\n${CHAT_MESSAGE_REFUS}`
         onDelta?.(text)
       }
     } catch { /* ignore SSE malformés */ }
