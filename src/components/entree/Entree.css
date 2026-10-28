@@ -240,3 +240,110 @@
 :root[data-theme="dark"] .en-deco { background: color-mix(in srgb, var(--en-bulle) 10%, transparent); }
 :root[data-theme="dark"] .en-point { background: color-mix(in srgb, var(--en-point) 30%, transparent); }
 :root[data-theme="dark"] .en-points i:not(.is-fait) { background: rgba(255,255,255,.22); }
+
+/* ═══ Écrans d'entrée façon app Nomad (29/10) ═════════════════════════════════
+ * Fond crème, carte blanche centrée (retour à gauche, logo au centre, « Passer » à
+ * droite), titre à deux graisses avec l'émote de Réviz, progression en barre orange,
+ * champs blancs à libellé gras, bouton marine, boutons sociaux blancs. Ordinateur :
+ * autocollants de Réviz inclinés autour de la carte. Bienvenue : texte à gauche, Réviz
+ * dans un grand bloc orange à droite (en haut sur téléphone). */
+.en-nomad { --en-orange: var(--rv-vif-plein); --en-encre: #042A65; --en-bord: #E6DFD8; background: var(--rv-fond); }
+.en-nomad .en-defile { position: relative; padding: calc(env(safe-area-inset-top, 0px) + 12px) 12px calc(32px + env(safe-area-inset-bottom, 0px)); }
+.en-nomad .en-carte { position: relative; z-index: 1; margin: 0 auto; max-width: 520px; gap: 16px; padding: 18px 18px 22px; border-radius: 24px; background: #fff; box-shadow: 0 1px 3px rgba(4,42,101,.1), 0 10px 30px -14px rgba(4,42,101,.25); }
+.en-nomad .en-dessous { margin: 6px 0 0; gap: 16px; }
+
+/* Tête de carte */
+.en-nomad .en-tete { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; min-height: 44px; }
+.en-nomad .en-tete-droite { justify-self: end; }
+.en-nomad .en-tete-logo .sk-logo-mot { font-size: 1.35rem; }
+.en-nomad .en-tete-logo .sk-logo-pastille { width: 34px; height: 34px; }
+.en-nomad .en-retour { width: 40px; height: 40px; border-radius: 12px; background: #fff; box-shadow: 0 1px 3px rgba(4,42,101,.14); color: #042A65; }
+.en-nomad .en-passer { height: 38px; border-radius: 12px; background: #F2EBFF; color: #042A65; }
+.en-nomad .en-retour:focus-visible, .en-nomad .en-passer:focus-visible { outline: 3px solid #042A65; outline-offset: 2px; }
+
+/* Progression */
+.en-nomad .en-progression { display: flex; flex-direction: column; gap: 6px; }
+.en-nomad .en-points { display: block; height: 10px; overflow: hidden; border-radius: 999px; background: #EFE7E0; }
+.en-nomad .en-points i { display: block; width: auto; height: 100%; border-radius: 999px; background: var(--rv-vif); transition: width .3s ease; }
+.en-nomad .en-sur { font-size: 12px; letter-spacing: .06em; opacity: 1; color: var(--rv-doux); }
+
+/* Titre (ce que dit Réviz) et son émote */
+.en-nomad .en-titre-ligne { display: flex; align-items: center; gap: 12px; }
+.en-nomad .en-titre { flex: 1; min-width: 0; margin: 0; font-size: 25px; line-height: 1.2; letter-spacing: -.01em; color: #042A65; text-wrap: balance; }
+.en-nomad .en-titre-fort { font-weight: 800; }
+.en-nomad .en-titre-leger { display: block; margin-top: 4px; font-size: 16px; font-weight: 500; line-height: 1.4; color: var(--rv-doux); }
+.en-nomad .en-titre-emote { width: 64px; height: 64px; flex: none; border-radius: 50%; background: #F2EBFF; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+
+/* Champs */
+.en-nomad .en-champ-tete label { font-size: 14px; font-weight: 700; color: #042A65; }
+.en-nomad .en-input { height: 52px; border: 1.5px solid #E6DFD8; border-radius: 14px; font-size: 16px; font-weight: 500; }
+.en-nomad .en-input::placeholder { color: #9AA3B5; }
+.en-nomad .en-input:focus, .en-nomad .en-champ.is-erreur .en-input { border-color: var(--rv-vif); }
+.en-nomad .en-afficher { border-radius: 10px; background: #F2EBFF; color: #042A65; }
+.en-nomad .en-champ-tete button, .en-nomad .en-champ-tete a { color: #042A65; text-decoration: underline; text-underline-offset: 3px; }
+.en-nomad .en-date-case { border: 1.5px solid #E6DFD8; border-radius: 14px; box-shadow: none; }
+.en-nomad .en-classe { border-radius: 14px; box-shadow: none; border: 2px solid transparent; }
+.en-nomad .en-classe.is-choisie { border-color: #042A65; }
+.en-nomad .en-case-boite { border-radius: 6px; }
+.en-nomad .en-encart { border-radius: 14px; }
+.en-nomad .en-encart--lavande { background: #F2EBFF; }
+.en-nomad .en-encart--peche { background: #FFE9DF; }
+.en-nomad .en-encart--menthe { background: #DDF5F4; }
+
+/* Boutons */
+.en-nomad .en-btn { min-height: 52px; border-radius: 14px; background: #042A65; box-shadow: 0 4px 0 #001330; font-size: 16px; }
+.en-nomad .en-btn:active:not(:disabled) { box-shadow: 0 1px 0 #001330; }
+.en-nomad .en-btn:hover:not(:disabled) { background: #0B3A82; }
+.en-nomad .en-btn-second { min-height: 50px; border: 1.5px solid #042A65; border-radius: 14px; box-shadow: none; color: #042A65; }
+.en-nomad .en-btn-second:active:not(:disabled) { transform: scale(.98); box-shadow: none; }
+.en-nomad .en-ou { color: var(--rv-doux); }
+.en-nomad .en-sociaux { grid-template-columns: 1fr; gap: 10px; }
+.en-nomad .en-social { justify-content: center; height: 50px; border: 0; border-radius: 14px; background: #fff; box-shadow: 0 1px 3px rgba(4,42,101,.14), 0 1px 2px rgba(4,42,101,.06); font-weight: 600; color: #042A65; }
+.en-nomad .en-social span::before { content: 'Continuer avec '; }
+.en-nomad .en-lien-texte a, .en-nomad .en-lien-texte button { color: var(--rv-vif-plein); text-decoration: underline; text-underline-offset: 3px; }
+.en-nomad .en-mention { color: var(--rv-doux); }
+
+/* Autocollants (ordinateur) */
+.en-autocollants { position: fixed; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
+.en-colle { position: absolute; width: 190px; height: 230px; border-radius: 26px; display: flex; align-items: center; justify-content: center; overflow: hidden; box-shadow: 0 14px 30px -12px rgba(4,42,101,.35); }
+.en-colle--a { left: 6%; top: 22%; background: #DCEAFD; transform: rotate(-8deg); }
+.en-colle--b { right: 7%; top: 9%; background: #FF4B0A; transform: rotate(9deg); }
+.en-colle--c { right: 9%; bottom: 10%; width: 170px; height: 200px; background: #B9A6FB; transform: rotate(-6deg); }
+.en-colle-mot { position: absolute; font-size: 54px; font-weight: 800; letter-spacing: -.02em; color: var(--rv-vif); text-shadow: 3px 0 #fff, -3px 0 #fff, 0 3px #fff, 0 -3px #fff, 2px 2px #fff, -2px -2px #fff, 2px -2px #fff, -2px 2px #fff, 0 10px 18px rgba(4,42,101,.18); }
+.en-colle-mot--a { left: 4%; bottom: 12%; transform: rotate(32deg); }
+.en-colle-mot--b { right: 4%; top: 52%; transform: rotate(-58deg); }
+@media (max-width: 1240px) { .en-colle, .en-colle-mot { opacity: .9; } .en-colle--a { left: 2%; } .en-colle--b { right: 2%; } .en-colle--c { right: 3%; } }
+.en-nomad--large .en-defile { display: flex; align-items: center; justify-content: center; min-height: 100dvh; box-sizing: border-box; padding: 32px; }
+.en-nomad--large .en-carte { width: 520px; padding: 22px 26px 26px; }
+.en-nomad--large .en-titre { font-size: 28px; }
+
+/* Bienvenue */
+.en-nomad--bienvenue .en-defile { padding: calc(env(safe-area-inset-top, 0px) + 12px) 16px calc(28px + env(safe-area-inset-bottom, 0px)); }
+.en-bienvenue { display: flex; flex-direction: column-reverse; gap: 22px; }
+.en-bienvenue-texte { display: flex; flex-direction: column; align-items: center; gap: 18px; text-align: center; }
+.en-bienvenue-logo { display: none; }
+.en-nomad--bienvenue .en-titre { font-size: 30px; text-align: center; }
+.en-nomad--bienvenue .en-titre-fort { color: #042A65; }
+.en-nomad--bienvenue .en-titre-leger { display: inline; margin: 0; font-size: inherit; font-weight: 800; color: var(--rv-vif-plein); }
+.en-bienvenue-actions { width: 100%; max-width: 380px; display: flex; flex-direction: column; gap: 12px; }
+.en-nomad--bienvenue .en-dessous { align-items: center; }
+.en-bienvenue-image { position: relative; display: flex; align-items: flex-end; justify-content: center; min-height: 300px; border-radius: 28px; background: #FF4B0A; }
+.en-colle-mot--bienvenue { right: -10px; top: -16px; font-size: 40px; color: #042A65; transform: rotate(9deg); }
+.en-nomad--large .en-colle-mot--bienvenue { right: -34px; top: -26px; font-size: 64px; }
+.en-note-colle { position: absolute; left: 14px; bottom: 18px; display: flex; flex-direction: column; padding: 8px 14px; border-radius: 16px; background: #fff; color: #042A65; font-size: 12px; font-weight: 600; box-shadow: 0 8px 20px -8px rgba(4,42,101,.4); transform: rotate(-6deg); }
+.en-note-colle b { font-size: 18px; font-weight: 800; }
+.en-nomad--large.en-nomad--bienvenue .en-defile { display: flex; align-items: center; min-height: 100dvh; padding: 32px 48px; }
+.en-nomad--large .en-bienvenue { flex-direction: row; align-items: center; gap: 56px; width: 100%; max-width: 1180px; margin: 0 auto; }
+.en-nomad--large .en-bienvenue-texte { flex: 1; align-items: center; }
+.en-nomad--large .en-bienvenue-logo { display: inline-flex; margin-bottom: 18px; }
+.en-nomad--large.en-nomad--bienvenue .en-titre { font-size: 44px; }
+.en-nomad--large .en-bienvenue-image { flex: 1; min-height: 520px; max-width: 520px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .en-nomad .en-points i { transition: none; }
+}
+.en-nomad .en-classe { background: #fff; border: 0; box-shadow: 0 1px 3px rgba(4,42,101,.14), 0 1px 2px rgba(4,42,101,.06); color: #042A65; }
+.en-nomad .en-classe.is-choisie { background: #042A65; color: #fff; box-shadow: none; }
+.en-nomad .en-classe:focus-visible { outline: 3px solid var(--rv-vif); outline-offset: 2px; }
+.en-nomad .en-titre-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.en-nomad--bienvenue .en-titre-leger { display: block; }

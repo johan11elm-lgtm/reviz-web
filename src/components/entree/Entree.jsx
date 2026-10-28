@@ -1,119 +1,122 @@
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Pantin } from '../Pantin';
-import { BulleReviz } from '../reviz/BulleReviz';
+import { Mascot } from '../Mascot';
+import { LogoReviz } from '../skin/Skin';
 import { useIsDesktop } from '../../hooks/useMediaQuery';
 import { fournisseursVisibles } from '../SocialLogin';
 import '../reviz/HerosMatiere.css';
 import './Entree.css';
 
 /**
- * Parcours d'entrée (handoff Claude Design du 22/10) : bienvenue, essai, inscription, fin
- * d'inscription, e-mail d'un parent, connexion, vérification, découverte. Mêmes briques partout :
- * héros pastel avec Réviz qui parle, une carte avec la question, puis « ou », boutons sociaux et liens.
- * Téléphone : héros en haut, carte à cheval. Ordinateur : héros à gauche, carte à droite.
+ * Parcours d'entrée (handoff Claude Design du 22/10, façon app Nomad le 29/10) : bienvenue, essai,
+ * inscription, fin d'inscription, e-mail d'un parent, connexion, vérification, découverte. Mêmes
+ * briques partout : une carte blanche avec ce que dit Réviz en titre, la question, puis « ou »,
+ * boutons sociaux et liens.
  */
 
 const Chevron = () => (
   <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7" /></svg>
 );
 
-// Taille de Réviz selon l'écran (téléphone / ordinateur).
-const TAILLES = { normal: [150, 320], dense: [96, 320], grand: [230, 380], decouverte: [270, 380] };
+// Émote de Réviz selon son humeur (les écrans d'entrée n'animent plus le pantin, sauf la bienvenue).
+const POSE = { content: 'hello', fier: 'celebration', reflechit: 'thinking', determine: 'pointing', inquiet: 'confused' };
+
+/** Autocollants autour de la carte (ordinateur), comme les photos inclinées de Nomad : Réviz en émotes. */
+function Autocollants() {
+  return (
+    <div className="en-autocollants" aria-hidden="true">
+      <span className="en-colle en-colle--a"><Mascot pose="reading" size={150} alt="" /></span>
+      <span className="en-colle en-colle--b"><Mascot pose="celebration" size={150} alt="" /></span>
+      <span className="en-colle en-colle--c"><Mascot pose="quiz" size={130} alt="" /></span>
+      <span className="en-colle-mot en-colle-mot--a">réviz</span>
+      <span className="en-colle-mot en-colle-mot--b">réviz</span>
+    </div>
+  );
+}
 
 /**
- * @param {'peche'|'lavande'|'menthe'} [teinte]
- * @param {string[]} bulle                  — ce que dit Réviz (2 lignes au plus)
- * @param {string} [expression]            — humeur du Pantin
- * @param {string} [geste]                 — geste joué quand il change (et à l'arrivée)
+ * Écrans d'entrée façon app Nomad (29/10) : fond crème, une carte blanche centrée avec le retour
+ * et le logo en tête, ce que dit Réviz en titre (deux graisses) avec son émote, la progression en
+ * barre orange, puis le contenu ; des autocollants de Réviz autour sur ordinateur. La bienvenue
+ * (taille « grand ») garde le pantin, dans un grand bloc orange comme la photo de leur accueil.
+ *
+ * @param {'peche'|'lavande'|'menthe'} [teinte]  — gardé pour compatibilité (les blocs sont unis)
+ * @param {string[]} bulle                  — ce que dit Réviz (2 lignes au plus) : le titre
+ * @param {string} [expression]            — humeur : choisit l'émote
+ * @param {string} [geste]                 — geste du pantin (bienvenue)
  * @param {'normal'|'dense'|'grand'|'decouverte'} [taille]
  * @param {Function} [onRetour]            — bouton retour (absent si non fourni)
  * @param {Function} [onPasser]            — « Passer » (découverte)
- * @param {{ n: number, total: number, libelle?: boolean }} [etape] — progression en points
- * @param {boolean} [logo]                 — logotype « Réviz » (bienvenue)
+ * @param {{ n: number, total: number, libelle?: boolean }} [etape] — progression
+ * @param {boolean} [logo]                 — bienvenue
  * @param {React.ReactNode} children       — contenu de la carte
- * @param {React.ReactNode} [dessous]      — sous la carte (téléphone) / en bas de la carte (ordinateur)
+ * @param {React.ReactNode} [dessous]      — bas de la carte
  */
 export function EntreeEcran({ teinte = 'peche', bulle, expression = 'content', geste, taille = 'normal', onRetour, onPasser, etape, logo = false, children, dessous }) {
   const isDesktop = useIsDesktop();
-  const pantin = useRef(null);
-  const [parle, setParle] = useState(false);
-  const texte = bulle.join('\n');
-  useEffect(() => { if (parle) pantin.current?.dire(texte); }, [texte, parle]);
-  useEffect(() => {
-    let t;
-    const essai = () => { t = setTimeout(() => (document.hidden ? essai() : setParle(true)), 3000); };
-    essai();
-    return () => clearTimeout(t);
-  }, []);
-  const premierGeste = useRef(geste);
-  useEffect(() => {
-    if (geste && geste !== premierGeste.current) pantin.current?.geste(geste);
-    premierGeste.current = null;
-  }, [geste]);
-
-  const [tTel, tOrdi] = TAILLES[taille] ?? TAILLES.normal;
-  const points = etape && <Progression {...etape} />;
-  const barre = (onRetour || onPasser || (!isDesktop && etape)) && (
-    <div className="en-barre">
-      <span>{onRetour && <button type="button" className="en-retour" onClick={onRetour} aria-label="Retour"><Chevron />{isDesktop && 'Retour'}</button>}</span>
-      <span className="en-barre-centre">{!isDesktop && etape && (
-        <>{etape.libelle !== false && <span className="en-sur">Étape {etape.n} sur {etape.total}</span>}{points}</>
-      )}</span>
-      <span className="en-barre-droite">{onPasser && <button type="button" className="en-passer" onClick={onPasser}>Passer</button>}</span>
+  const [l1, ...suite] = bulle;
+  const titre = (
+    <h1 className="en-titre">
+      {/* La phrase entière pour les lecteurs d'écran ; à l'écran, deux graisses. */}
+      <span className="en-titre-sr rv-bulle-sr">{bulle.join(' ')}</span>
+      <span className="en-titre-fort" aria-hidden="true">{l1}</span>
+      {suite.length > 0 && <span className="en-titre-leger" aria-hidden="true">{suite.join(' ')}</span>}
+    </h1>
+  );
+  const tete = (
+    <div className="en-tete">
+      <span className="en-tete-gauche">
+        {onRetour && <button type="button" className="en-retour" onClick={onRetour} aria-label="Retour"><Chevron /></button>}
+      </span>
+      <LogoReviz className="en-tete-logo" />
+      <span className="en-tete-droite">{onPasser && <button type="button" className="en-passer" onClick={onPasser}>Passer</button>}</span>
     </div>
   );
-  const reviz = (
-    <div className="en-reviz">
-      <BulleReviz key={texte} lignes={bulle} parle={parle} grande={isDesktop} className="en-bulle" />
-      <Pantin ref={pantin} size={isDesktop ? tOrdi : tTel} expression={expression} entree={geste ?? 'saut'} repli={null}
-        onEntree={() => setParle(true)} onClick={() => pantin.current?.geste('saut')} label="Réviz, ta mascotte" />
+  const progression = etape && (
+    <div className="en-progression">
+      <Progression {...etape} />
+      {etape.libelle !== false && <span className="en-sur">Étape {etape.n} sur {etape.total}</span>}
     </div>
   );
-  const deco = (
-    <>
-      <span className="en-deco en-deco--a" aria-hidden="true" />
-      <span className="en-deco en-deco--b" aria-hidden="true" />
-      <span className="en-point" aria-hidden="true" />
-      <span className="ch-grain" aria-hidden="true" />
-    </>
-  );
 
-  if (isDesktop) {
+  // Bienvenue : le texte et les boutons, et le pantin dans un grand bloc orange.
+  if (logo) {
     return (
-      <div className={`app app--no-halo app--large en-page en-page--large en--${teinte}`}>
-        <div className="en-hero">
-          {deco}
-          <span className="en-logo">Réviz</span>
-          {reviz}
-        </div>
-        <div className="en-droite">
-          {barre}
-          <div className="en-carte">
-            {etape && (
-              <div className="en-carte-tete">
-                {etape.libelle !== false ? <span className="en-sur">Étape {etape.n} sur {etape.total}</span> : <span className="en-sur">{etape.n} sur {etape.total}</span>}
-                {points}
-              </div>
-            )}
-            {children}
-            {dessous && <div className="en-dessous">{dessous}</div>}
+      <div className={`app app--no-halo en-page en-nomad en-nomad--bienvenue${isDesktop ? ' app--large en-nomad--large' : ''}`}>
+        <div className="content en-defile">
+          <div className="en-bienvenue">
+            <div className="en-bienvenue-texte">
+              <LogoReviz className="en-bienvenue-logo" />
+              {titre}
+              <div className="en-pile en-bienvenue-actions">{children}</div>
+              {dessous && <div className="en-dessous">{dessous}</div>}
+            </div>
+            <div className="en-bienvenue-image" aria-hidden="true">
+              <Pantin size={isDesktop ? 360 : 230} expression={expression} entree={geste ?? 'coucou'} repli={null} label="Réviz, ta mascotte" />
+              <span className="en-colle-mot en-colle-mot--bienvenue">réviz</span>
+              <span className="en-note-colle"><b>6e → 3e</b>tout le programme</span>
+            </div>
           </div>
         </div>
       </div>
     );
   }
+
   return (
-    <div className={`app app--no-halo en-page en--${teinte} en--${taille}`}>
+    <div className={`app app--no-halo en-page en-nomad en--${teinte} en--${taille}${isDesktop ? ' app--large en-nomad--large' : ''}`}>
       <div className="content en-defile">
-        <div className="en-hero">
-          {deco}
-          {barre}
-          {logo && <span className="en-logo">Réviz</span>}
-          {reviz}
+        {isDesktop && <Autocollants />}
+        <div className="en-carte">
+          {tete}
+          {progression}
+          <div className="en-titre-ligne">
+            {titre}
+            <span className="en-titre-emote" aria-hidden="true"><Mascot pose={POSE[expression] ?? 'hello'} size={isDesktop ? 64 : 56} alt="" /></span>
+          </div>
+          {children}
+          {dessous && <div className="en-dessous">{dessous}</div>}
         </div>
-        <div className="en-carte">{children}</div>
-        {dessous && <div className="en-dessous">{dessous}</div>}
       </div>
     </div>
   );
@@ -122,7 +125,7 @@ export function EntreeEcran({ teinte = 'peche', bulle, expression = 'content', g
 export function Progression({ n, total }) {
   return (
     <span className="en-points" role="img" aria-label={`Étape ${n} sur ${total}`}>
-      {Array.from({ length: total }, (_, i) => <i key={i} className={i + 1 < n ? 'is-fait' : i + 1 === n ? 'is-courant' : ''} />)}
+      <i style={{ width: `${Math.round(n / total * 100)}%` }} />
     </span>
   );
 }
