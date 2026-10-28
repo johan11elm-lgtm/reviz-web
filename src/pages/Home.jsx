@@ -7,6 +7,7 @@ import { ConsentBanner } from '../components/ConsentBanner';
 import { EmailBanner } from '../components/EmailBanner';
 import { PushBanner } from '../components/PushBanner';
 import { Mascot } from '../components/Mascot';
+import { estInstallee } from '../utils/installation';
 import { Pantin } from '../components/Pantin';
 import { loadLessons, restoreLesson, syncFromFirestore } from '../services/historyService';
 import { loadRevisions } from '../services/revisionService';
@@ -406,12 +407,6 @@ export default function Home() {
     </div>
   );
 
-  const Soleil = () => (
-    <svg className="nm-soleil" viewBox="0 0 24 24" width="34" height="34" aria-hidden="true">
-      <circle cx="12" cy="12" r="5.2" fill="#FFC24B" />
-      {[0, 45, 90, 135, 180, 225, 270, 315].map(r => <rect key={r} x="11.1" y="1.2" width="1.8" height="3.6" rx=".9" fill="#FFC24B" transform={`rotate(${r} 12 12)`} />)}
-    </svg>
-  );
   const stats = (
     <ul className="nm-stats" aria-label="Tes chiffres">
       <li><span className="nm-stat-ico nm-stat-ico--xp" aria-hidden="true">XP</span><b>{xpTotal}</b><small>Points d’expérience</small></li>
@@ -431,7 +426,7 @@ export default function Home() {
   );
   const salut = (
     <div className="nm-salut">
-      <h1 className="nm-hello"><Soleil />{prenom ? `Salut ${prenom} !` : 'Salut !'}</h1>
+      <h1 className="nm-hello"><span className="nm-hello-reviz" aria-hidden="true"><Mascot pose="hello" size={isDesktop ? 58 : 48} alt="" /></span>{prenom ? `Salut ${prenom} !` : 'Salut !'}</h1>
       {!isDesktop && stats}
     </div>
   );
@@ -441,11 +436,13 @@ export default function Home() {
       On révise quoi aujourd’hui ?
     </Link>
   );
+  // Les bulles : ce qu'on vient faire (scanner sa leçon, réviser le programme, défier un ami).
+  // L'agenda a déjà son onglet et sa carte « Tes prochains contrôles » : pas de doublon ici.
   const ronds = (
     <nav className="nm-ronds" aria-label="Aller vite">
       {[
+        { to: '/scan', pose: 'scanphone', label: 'Scanner' },
         { to: '/programme', pose: 'reading', label: 'Réviser' },
-        { to: '/agenda', pose: 'examen', label: 'Mes contrôles' },
         { to: '/battle', pose: 'fire', label: 'Défier' },
       ].map(r => (
         <Link key={r.to} to={r.to} className="nm-rond">
@@ -504,10 +501,11 @@ export default function Home() {
         <div className="nm-rail-carte nm-indis">
           {[
             !isGuest && { to: '/coach', etoile: true, label: 'Réviz IA' },
-            { to: '/agenda', pose: 'thinking', label: 'Agenda' },
+            { to: '/cours', pose: 'writing', label: 'Mes cours' },
             classe === '3ème' && { to: '/simulateur-brevet', pose: 'graduation', label: 'Simulateur' },
             { to: '/jeux?depuis=accueil', pose: 'celebration', label: 'Jeux' },
-          ].filter(Boolean).map(r => (
+            !estInstallee() && { to: '/installer', pose: 'pointing', label: 'Installer' },
+          ].filter(Boolean).slice(0, 4).map(r => (
             <Link key={r.to} to={r.to} className="nm-indis-item">
               <span className="nm-indis-rond">{r.etoile ? <EtoileIA id="rv-ia-indis" size={26} /> : <Mascot pose={r.pose} size={40} alt="" aria-hidden="true" />}</span>
               <span>{r.label}</span>

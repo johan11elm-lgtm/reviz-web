@@ -649,7 +649,7 @@
 /* Salut et chiffres */
 .home-page .nm-salut { display: flex; flex-direction: column; align-items: center; gap: 14px; }
 .home-page .nm-hello { display: flex; align-items: center; gap: 8px; margin: 0; font-size: 28px; font-weight: 800; letter-spacing: -.01em; color: var(--rv-encre); text-align: center; }
-.home-page .nm-soleil { flex: none; }
+.home-page .nm-hello-reviz { flex: none; display: flex; margin: -10px 0 -10px -6px; }
 .home-page .nm-stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; width: 100%; margin: 0; padding: 0; list-style: none; }
 .home-page .nm-stats li { display: grid; grid-template-columns: auto auto; justify-content: center; align-items: center; column-gap: 6px; text-align: center; }
 .home-page .nm-stats b { font-size: 21px; font-weight: 800; color: var(--rv-encre); }
