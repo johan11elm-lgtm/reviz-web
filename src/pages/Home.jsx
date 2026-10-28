@@ -7,6 +7,7 @@ import { ConsentBanner } from '../components/ConsentBanner';
 import { EmailBanner } from '../components/EmailBanner';
 import { PushBanner } from '../components/PushBanner';
 import { Mascot } from '../components/Mascot';
+import { Avatar } from '../components/Avatar';
 import { estInstallee } from '../utils/installation';
 import { Pantin } from '../components/Pantin';
 import { loadLessons, restoreLesson, syncFromFirestore } from '../services/historyService';
@@ -344,7 +345,7 @@ export default function Home() {
         {matieres.map(m => (
           <Link key={m.slug} to={`/programme?matiere=${m.slug}`} className="hm-matiere">
             <span className="hm-matiere-rond" style={{ background: m.bg }}>
-              <Mascot pose={m.pose} size={44} alt="" aria-hidden="true" />
+              <Mascot pose={m.pose} size={38} alt="" aria-hidden="true" />
             </span>
             <span className="hm-matiere-nom">{m.nom}</span>
           </Link>
@@ -379,7 +380,7 @@ export default function Home() {
       <span className="hm-battle-txt">
         <span className="hm-battle-titre">Battle</span>
         <span className="hm-battle-sous">
-          {sujetBattle ? `Défie un ami sur ${sujetBattle}. 5 questions, 15 s.` : 'Défie un ami en direct sur un chapitre. 5 questions, 15 s.'}
+          {sujetBattle ? `Défie un ami sur ${sujetBattle}. 5 questions, 15 s chacune.` : 'Défie un ami en direct sur un chapitre. 5 questions, 15 s chacune.'}
         </span>
         <span className="hm-battle-btn">Envoyer un code</span>
       </span>
@@ -421,7 +422,7 @@ export default function Home() {
       <Link to="/" className="nm-tete-logo" aria-label="Réviz"><img src="/logo/pastille.png" width="44" height="44" alt="" /></Link>
       {/* En mode essai, le bandeau juste dessous propose déjà de créer son compte. */}
       {!isGuest && !hasRevizPlus ? <Link to={{ pathname: '/reglages', hash: '#abonnement' }} className="nm-abo">S’abonner <span>Réviz+</span></Link> : <span />}
-      <Link to="/profil" className="nm-tete-avatar" aria-label={`Mon profil${prenom ? `, ${prenom}` : ''}`}><Mascot pose="hello" size={34} alt="" /></Link>
+      <Link to="/profil" className="nm-tete-avatar" aria-label={`Mon profil${prenom ? `, ${prenom}` : ''}`}><Avatar size={40} /></Link>
     </header>
   );
   const salut = (

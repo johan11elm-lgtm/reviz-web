@@ -310,7 +310,11 @@
   align-items: center;
   justify-content: center;
 }
-.home-page .hm-matiere-nom { min-width: 0; font-size: 15px; font-weight: 700; color: var(--hm-encre); overflow-wrap: anywhere; }
+/* Le nom ne se coupe qu'entre deux mots, ou à la césure française si un mot ne tient vraiment pas
+ * (« Géograph / ie » sur le téléphone de Johan, 28/10) : émote et marges un peu plus serrées. */
+.home-page .hm-matiere { gap: 8px; padding: 8px 10px 8px 8px; border-radius: 16px; }
+.home-page .hm-matiere-rond { width: 42px; height: 42px; border-radius: 12px; }
+.home-page .hm-matiere-nom { min-width: 0; font-size: 14px; font-weight: 700; line-height: 1.25; color: var(--hm-encre); overflow-wrap: break-word; -webkit-hyphens: auto; hyphens: auto; }
 
 /* ── « Démarre en un clic » : trois raccourcis blancs, émote, titre, flèche ── */
 .home-page .hm-raccourcis { display: flex; flex-direction: column; gap: 10px; }
@@ -470,15 +474,16 @@
   pointer-events: none;
 }
 
-/* Fondu crème sous la capsule */
+/* Fondu crème sous la capsule du bas : juste la hauteur de la capsule (il voilait 130 px, opaque
+ * dès la moitié, et la dernière carte ne s'en dégageait jamais, Johan 28/10). */
 .home-page::after {
   content: '';
   position: absolute;
   left: 0;
   right: 0;
   bottom: 0;
-  height: 130px;
-  background: linear-gradient(to bottom, rgba(var(--rv-fond-rgb),0), rgba(var(--rv-fond-rgb),.95) 55%);
+  height: calc(72px + env(safe-area-inset-bottom, 0px));
+  background: linear-gradient(to bottom, rgba(var(--rv-fond-rgb),0), rgba(var(--rv-fond-rgb),.9) 70%);
   pointer-events: none;
   z-index: 2;
 }
@@ -629,7 +634,7 @@
  * En-tête (logo, S'abonner, avatar), « Salut ! » et trois chiffres, recherche, raccourcis
  * ronds, bloc lavande « On fait quoi aujourd'hui ? » aux lignes blanches, le plan, les
  * matières, « À la une ». Ordinateur : colonne principale + colonne de droite. */
-.home-page .nm-defile { flex: 1; overflow-y: auto; padding: calc(10px + env(safe-area-inset-top, 0px)) 16px 0; scrollbar-width: none; }
+.home-page .nm-defile { flex: 1; overflow-y: auto; padding: calc(10px + env(safe-area-inset-top, 0px)) 16px calc(112px + env(safe-area-inset-bottom, 0px)); scrollbar-width: none; }
 .home-page .nm-defile::-webkit-scrollbar { display: none; }
 .home-page .nm-grille { display: flex; flex-direction: column; }
 .home-page .nm-principal { display: flex; flex-direction: column; gap: 18px; min-width: 0; }
@@ -644,7 +649,7 @@
   font-size: 12px; font-weight: 700; letter-spacing: .03em; text-transform: uppercase; text-decoration: none;
 }
 .home-page .nm-abo span { padding: 2px 6px; border-radius: 5px; background: #fff; color: var(--rv-vif-plein); font-size: 11px; font-weight: 800; text-transform: none; letter-spacing: 0; }
-.home-page .nm-tete-avatar { width: 44px; height: 44px; border-radius: 50%; background: #fff; display: flex; align-items: center; justify-content: center; overflow: hidden; box-shadow: 0 1px 3px rgba(4,42,101,.12); }
+.home-page .nm-tete-avatar { width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
 
 /* Salut et chiffres */
 .home-page .nm-salut { display: flex; flex-direction: column; align-items: center; gap: 14px; }
