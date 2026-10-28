@@ -20,7 +20,7 @@
   background: linear-gradient(135deg, var(--rp-gold-1) 0%, var(--rp-gold-2) 100%);
   box-shadow: 0 2px 8px rgba(227, 169, 79, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.55);
   color: var(--rp-gold-ink);
-  font: 800 11.5px/1 'Geist', sans-serif;
+  font: 800 11.5px/1 'Poppins', sans-serif;
   letter-spacing: -0.1px;
   white-space: nowrap;
   cursor: default;
@@ -44,7 +44,7 @@ button.rp-badge:active { transform: scale(0.96); }
   border: 2px solid var(--bg-app);
   background: linear-gradient(135deg, var(--rp-gold-1), var(--rp-gold-2));
   color: var(--rp-gold-ink);
-  font: 900 11px/1 'Geist', sans-serif;
+  font: 900 11px/1 'Poppins', sans-serif;
 }
 /* … et sur l'onglet Coach de la barre du bas (BottomNav) : hors du rond
    (overflow: hidden), calée sur son bord haut droit. */

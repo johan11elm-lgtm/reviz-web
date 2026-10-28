@@ -23,7 +23,7 @@
 .mo-carte { position: relative; box-sizing: border-box; border-radius: 26px; background: var(--rv-carte); box-shadow: 0 12px 30px rgba(var(--rv-ombre-2),.10); }
 .mo-niveau { z-index: 2; margin: -68px 20px 0; padding: 18px; }
 .mo-niveau-haut { display: flex; align-items: center; gap: 14px; }
-.mo-piece { flex: none; width: 52px; height: 52px; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: var(--rv-lavande); box-shadow: 0 5px 0 var(--rv-lavande-bulle); font-family: var(--font-display); font-size: 24px; font-weight: 800; color: #1B1A23; }
+.mo-piece { flex: none; width: 52px; height: 52px; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: var(--rv-lavande); box-shadow: 0 5px 0 var(--rv-lavande-bulle); font-family: var(--font-display); font-size: 24px; font-weight: 800; color: #042A65; }
 .mo-niveau-txt { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
 .mo-niveau-txt b { font-family: var(--font-display); font-size: 20px; font-weight: 800; letter-spacing: -.02em; }
 .mo-niveau-txt span { font-size: 13px; font-weight: 500; color: var(--rv-doux); }
@@ -33,7 +33,7 @@
 .mo-astuce { margin: 10px 0 0; font-size: 12px; font-weight: 500; color: var(--rv-doux); }
 .mo-essai { display: flex; align-items: center; gap: 12px; margin: 14px 20px 0; padding: 12px 16px; }
 .mo-essai p { flex: 1; margin: 0; font-size: 13px; font-weight: 500; line-height: 1.4; }
-.mo-lien { flex: none; padding: 0; border: 0; background: none; font: 700 13px 'Geist', system-ui, sans-serif; color: var(--rv-encre); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+.mo-lien { flex: none; padding: 0; border: 0; background: none; font: 700 13px 'Poppins', system-ui, sans-serif; color: var(--rv-encre); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
 .mo-lien--centre { align-self: center; margin-top: 4px; color: var(--rv-doux); text-decoration: none; font-size: 14px; }
 
 /* ── Sections ── */
@@ -98,7 +98,7 @@
 .mo-carte--bloc .mo-compte { padding: 0; }
 .mo-compte li + li { border-top: 1.5px dashed var(--rv-ligne); }
 .mo-compte button { width: 100%; display: flex; align-items: center; gap: 12px; padding: 14px 0; border: 0; background: none; font-family: inherit; color: var(--rv-encre); text-align: left; cursor: pointer; }
-.mo-compte-rond { flex: none; width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; border-radius: 50%; color: #1B1A23; }
+.mo-compte-rond { flex: none; width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; border-radius: 50%; color: #042A65; }
 .mo-compte-rond svg { width: 16px; height: 16px; }
 .mo-compte-rond--lavande { background: var(--rv-lavande); }
 .mo-compte-rond--peche { background: var(--rv-peche-pale); }
@@ -120,7 +120,7 @@
   border-radius: 999px;
   background: var(--rv-orange);
   box-shadow: 0 5px 0 var(--rv-orange-tranche);
-  font: 700 16px 'Geist', system-ui, sans-serif;
+  font: 700 16px 'Poppins', system-ui, sans-serif;
   color: #fff;
   cursor: pointer;
   transition: transform .12s, box-shadow .12s;
@@ -210,10 +210,10 @@
 .mo-edition-tete h2 { margin: 0; font-family: var(--font-display); font-size: 24px; font-weight: 800; letter-spacing: -.03em; }
 .mo-edition-rond { flex: none; width: 52px; height: 52px; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: var(--rv-lavande); overflow: hidden; }
 .mo-champ-titre { margin: 14px 2px 6px; font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--rv-doux); }
-.mo-input { height: 52px; box-sizing: border-box; padding: 0 16px; border: 2px solid var(--rv-ligne); border-radius: 16px; background: var(--rv-carte); font: 600 16px 'Geist', system-ui, sans-serif; color: var(--rv-encre); outline: 0; }
+.mo-input { height: 52px; box-sizing: border-box; padding: 0 16px; border: 2px solid var(--rv-ligne); border-radius: 16px; background: var(--rv-carte); font: 600 16px 'Poppins', system-ui, sans-serif; color: var(--rv-encre); outline: 0; }
 .mo-input:focus { border-color: var(--rv-orange); }
 .mo-classes { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
-.mo-classe-choix { height: 48px; border: 0; border-radius: 999px; background: var(--rv-carte); box-shadow: 0 4px 0 var(--rv-ligne); font: 700 16px 'Geist', system-ui, sans-serif; color: var(--rv-encre); cursor: pointer; }
+.mo-classe-choix { height: 48px; border: 0; border-radius: 999px; background: var(--rv-carte); box-shadow: 0 4px 0 var(--rv-ligne); font: 700 16px 'Poppins', system-ui, sans-serif; color: var(--rv-encre); cursor: pointer; }
 .mo-classe-choix.is-choisie { background: var(--rv-inverse); color:var(--rv-sur-inverse); box-shadow: 0 4px 0 #000; }
 .mo-note { margin: 10px 2px 8px; font-size: 13px; font-weight: 500; line-height: 1.4; color: var(--rv-doux); }
 .mo-erreur { margin: 0; font-size: 13px; font-weight: 600; color: var(--rv-marque-fonce); }
@@ -271,7 +271,7 @@
 
 /* ── Sombre : les blocs pastel (« prochain badge », chiffres sur ordinateur) gardent les encres du clair ── */
 :root[data-theme="dark"] .mo-prochain,
-:root[data-theme="dark"] .mo-carte--bloc .mo-chiffre { --rv-encre: #1B1A23; --rv-doux: #6E675B; --rv-carte: #fff; --rv-piste: #F3E6D8; --rv-orange-texte: #C25407; color: #1B1A23; }
+:root[data-theme="dark"] .mo-carte--bloc .mo-chiffre { --rv-encre: #042A65; --rv-doux: #6E675B; --rv-carte: #fff; --rv-piste: #F3E6D8; --rv-orange-texte: #C25407; color: #042A65; }
 
 /* ── Sombre : ces pastels gardent leur texte sombre (cf. rv-ilot dans global.css) ── */
 :root[data-theme="dark"] .mo-chiffre--peche .mo-chiffre-icone,
@@ -289,10 +289,10 @@
 :root[data-theme="dark"] .mo-carte--bloc .mo-chiffre--peche,
 :root[data-theme="dark"] .mo-carte--bloc .mo-chiffre--lavande,
 :root[data-theme="dark"] .mo-carte--bloc .mo-chiffre--menthe {
-  --rv-encre: #1B1A23; --rv-encre-rgb: 27,26,35; --rv-doux: #6E675B; --rv-doux-rgb: 110,103,91;
+  --rv-encre: #042A65; --rv-encre-rgb: 27,26,35; --rv-doux: #6E675B; --rv-doux-rgb: 110,103,91;
   --rv-carte: #fff; --rv-carte-rgb: 255,255,255; --rv-carte-haute: #fff; --rv-ligne: #EADBCB; --rv-piste: #F3E6D8;
   --rv-orange-texte: #C25407; --rv-vert-texte: #1F8A52; --rv-brun-texte: #8F3E05;
-  --ch-encre: #1B1A23; --ch-doux: #6E675B; --bt-encre: #1B1A23; --bt-doux: #6E675B; --en-encre: #1B1A23; --en-doux: #6E675B; --hb-encre: #1B1A23; --hb-doux: #6E675B;
-  --hm-encre: #1B1A23; --hm-doux: #6E675B; --inst-encre: #1B1A23; --inst-doux: #6E675B; --lg-encre: #1B1A23; --lg-doux: #6E675B; --prg-encre: #1B1A23; --prg-doux: #6E675B;
-  color: #1B1A23;
+  --ch-encre: #042A65; --ch-doux: #6E675B; --bt-encre: #042A65; --bt-doux: #6E675B; --en-encre: #042A65; --en-doux: #6E675B; --hb-encre: #042A65; --hb-doux: #6E675B;
+  --hm-encre: #042A65; --hm-doux: #6E675B; --inst-encre: #042A65; --inst-doux: #6E675B; --lg-encre: #042A65; --lg-doux: #6E675B; --prg-encre: #042A65; --prg-doux: #6E675B;
+  color: #042A65;
 }

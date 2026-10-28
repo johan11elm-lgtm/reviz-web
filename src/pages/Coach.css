@@ -123,7 +123,7 @@
   border: 1px solid var(--ia-bord);
   border-radius: 999px;
   background: var(--rv-carte);
-  font: 700 14px 'Geist', system-ui, sans-serif;
+  font: 700 14px 'Poppins', system-ui, sans-serif;
   color: var(--rv-encre);
   cursor: pointer;
   transition: border-color .15s;
@@ -183,7 +183,7 @@
   outline: 0;
   resize: none;
   background: transparent;
-  font: 500 16px/1.45 'Geist', system-ui, sans-serif;
+  font: 500 16px/1.45 'Poppins', system-ui, sans-serif;
   color: var(--rv-encre);
 }
 .ia-champ textarea::placeholder { color: var(--rv-doux); }
@@ -206,7 +206,7 @@
   animation: iaMenu .18s ease-out both;
 }
 @keyframes iaMenu { from { opacity: 0; transform: translateY(6px); } }
-.ia-menu button { display: flex; align-items: center; gap: 10px; height: 44px; padding: 0 12px; border: 0; border-radius: 12px; background: none; font: 600 15px 'Geist', system-ui, sans-serif; color: var(--rv-encre); text-align: left; cursor: pointer; }
+.ia-menu button { display: flex; align-items: center; gap: 10px; height: 44px; padding: 0 12px; border: 0; border-radius: 12px; background: none; font: 600 15px 'Poppins', system-ui, sans-serif; color: var(--rv-encre); text-align: left; cursor: pointer; }
 .ia-menu button:hover { background: var(--rv-fond); }
 .ia-pastille {
   min-width: 0;
@@ -217,7 +217,7 @@
   padding: 0 14px 0 12px;
   border: 0;
   border-radius: 999px;
-  font: 700 14px 'Geist', system-ui, sans-serif;
+  font: 700 14px 'Poppins', system-ui, sans-serif;
   color: var(--rv-encre);
   cursor: pointer;
 }
@@ -251,7 +251,7 @@
   border-radius: 999px;
   background: var(--rv-orange);
   box-shadow: 0 5px 0 var(--rv-orange-tranche);
-  font: 700 16px 'Geist', system-ui, sans-serif;
+  font: 700 16px 'Poppins', system-ui, sans-serif;
   color: #fff;
   text-decoration: none;
   cursor: pointer;
@@ -309,7 +309,7 @@
   background: var(--rv-carte);
   color: var(--rv-doux);
 }
-.ia-recherche input { flex: 1; min-width: 0; border: 0; outline: 0; background: transparent; font: 500 15px 'Geist', system-ui, sans-serif; color: var(--rv-encre); }
+.ia-recherche input { flex: 1; min-width: 0; border: 0; outline: 0; background: transparent; font: 500 15px 'Poppins', system-ui, sans-serif; color: var(--rv-encre); }
 .ia-choix-liste { flex: 1; min-height: 0; overflow-y: auto; margin: 0 -20px; padding: 6px 20px calc(24px + env(safe-area-inset-bottom, 0px)); }
 .ia-choix--fenetre .ia-choix-liste { margin: 0 -24px; padding: 6px 24px 24px; }
 .ia-groupe-tete { display: flex; justify-content: space-between; margin: 18px 4px 8px; font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--rv-doux); }
@@ -334,7 +334,7 @@
   border-radius: 18px;
   background: var(--rv-carte);
   box-shadow: 0 8px 20px -12px rgba(var(--rv-ombre-2),.16);
-  font: 700 15px 'Geist', system-ui, sans-serif;
+  font: 700 15px 'Poppins', system-ui, sans-serif;
   color: var(--rv-encre);
   cursor: pointer;
 }
@@ -367,7 +367,7 @@
 .ia-colonne .ia-nouvelle { margin-top: 28px; }
 .ia-recents-titre { margin: 28px 12px 8px; font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--rv-doux); }
 .ia-recents { display: flex; flex-direction: column; gap: 2px; margin: 0; padding: 0; overflow-y: auto; list-style: none; }
-.ia-recent { width: 100%; height: 40px; padding: 0 12px; border: 0; border-radius: 12px; background: none; font: 500 14px 'Geist', system-ui, sans-serif; color: var(--rv-doux); text-align: left; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; cursor: pointer; }
+.ia-recent { width: 100%; height: 40px; padding: 0 12px; border: 0; border-radius: 12px; background: none; font: 500 14px 'Poppins', system-ui, sans-serif; color: var(--rv-doux); text-align: left; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; cursor: pointer; }
 .ia-recent:hover { background: var(--rv-survol, #F1E5D8); color: var(--rv-encre); }
 .ia-recent.is-actif { background: var(--rv-survol, #F1E5D8); font-weight: 700; color: var(--rv-encre); }
 .ia-recents-vide { margin: 0 12px; font-size: 13px; color: var(--rv-doux); }
@@ -406,10 +406,10 @@
 
 /* ── Sombre : ces pastels gardent leur texte sombre (cf. rv-ilot dans global.css) ── */
 :root[data-theme="dark"] .ia-limite-rond {
-  --rv-encre: #1B1A23; --rv-encre-rgb: 27,26,35; --rv-doux: #6E675B; --rv-doux-rgb: 110,103,91;
+  --rv-encre: #042A65; --rv-encre-rgb: 27,26,35; --rv-doux: #6E675B; --rv-doux-rgb: 110,103,91;
   --rv-carte: #fff; --rv-carte-rgb: 255,255,255; --rv-carte-haute: #fff; --rv-ligne: #EADBCB; --rv-piste: #F3E6D8;
   --rv-orange-texte: #C25407; --rv-vert-texte: #1F8A52; --rv-brun-texte: #8F3E05;
-  --ch-encre: #1B1A23; --ch-doux: #6E675B; --bt-encre: #1B1A23; --bt-doux: #6E675B; --en-encre: #1B1A23; --en-doux: #6E675B; --hb-encre: #1B1A23; --hb-doux: #6E675B;
-  --hm-encre: #1B1A23; --hm-doux: #6E675B; --inst-encre: #1B1A23; --inst-doux: #6E675B; --lg-encre: #1B1A23; --lg-doux: #6E675B; --prg-encre: #1B1A23; --prg-doux: #6E675B;
-  color: #1B1A23;
+  --ch-encre: #042A65; --ch-doux: #6E675B; --bt-encre: #042A65; --bt-doux: #6E675B; --en-encre: #042A65; --en-doux: #6E675B; --hb-encre: #042A65; --hb-doux: #6E675B;
+  --hm-encre: #042A65; --hm-doux: #6E675B; --inst-encre: #042A65; --inst-doux: #6E675B; --lg-encre: #042A65; --lg-doux: #6E675B; --prg-encre: #042A65; --prg-doux: #6E675B;
+  color: #042A65;
 }

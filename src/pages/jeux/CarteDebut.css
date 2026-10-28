@@ -84,14 +84,14 @@
 .cd-premier {
   position: absolute; left: 8px; bottom: 8px; max-width: calc(100% - 16px); box-sizing: border-box;
   padding: 4px 10px; border-radius: 999px;
-  background: rgba(27, 26, 35, .78); color: #fff;
-  font: 800 12.5px 'Geist', system-ui, sans-serif; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  background: rgba(4,42,101, .78); color: #fff;
+  font: 800 12.5px 'Poppins', system-ui, sans-serif; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
 .cd-premier sup { font-size: .7em; }
 .cd-tag {
   margin-top: 4px; padding: 3px 10px; border-radius: 8px;
   background: #F7D98A; color: #5A3A08; box-shadow: 0 2px 0 #D9B45A;
-  font: 800 12px 'Geist', system-ui, sans-serif; letter-spacing: .04em; text-transform: uppercase;
+  font: 800 12px 'Poppins', system-ui, sans-serif; letter-spacing: .04em; text-transform: uppercase;
 }
 .cd-nom {
   margin: 2px 0 0;
@@ -102,7 +102,7 @@
 .cd-etapes { list-style: none; margin: 6px 0 0; padding: 0; display: flex; flex-direction: column; gap: 7px; width: 100%; text-align: left; }
 .cd-etapes li {
   display: flex; align-items: center; gap: 10px;
-  font: 600 15px/1.3 'Geist', system-ui, sans-serif;
+  font: 600 15px/1.3 'Poppins', system-ui, sans-serif;
   opacity: 0; transform: translateY(6px);
   animation: cd-etape .35s ease-out calc(.85s + var(--k) * .14s) forwards;
 }
@@ -116,7 +116,7 @@
 }
 .cd-infos {
   margin: 8px 0 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 12px;
-  font: 700 13px 'Geist', system-ui, sans-serif; color: #7A5A30;
+  font: 700 13px 'Poppins', system-ui, sans-serif; color: #7A5A30;
 }
 .cd-record b { color: var(--cd-encre); }
 

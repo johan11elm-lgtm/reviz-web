@@ -56,7 +56,7 @@
   border-radius: 999px;
   background: var(--rv-orange);
   box-shadow: 0 5px 0 var(--rv-orange-tranche);
-  font: 700 16px 'Geist', system-ui, sans-serif;
+  font: 700 16px 'Poppins', system-ui, sans-serif;
   color: #fff;
   cursor: pointer;
   transition: transform .12s, box-shadow .12s;
@@ -64,7 +64,7 @@
 .ag-btn:active:not(:disabled) { transform: translateY(4px); box-shadow: 0 1px 0 var(--rv-orange-tranche); }
 .ag-btn:disabled { background: var(--rv-ligne); box-shadow: none; color: var(--rv-doux); cursor: default; }
 .ag-btn--creme { background: var(--rv-fond); color: var(--rv-encre); box-shadow: 0 4px 0 var(--rv-ligne); }
-.ag-pilule { display: inline-flex; align-items: center; gap: 6px; height: 40px; padding: 0 16px; border: 0; border-radius: 999px; background: var(--rv-carte); box-shadow: 0 4px 0 var(--rv-ligne); font: 700 14px 'Geist', system-ui, sans-serif; color: var(--rv-encre); cursor: pointer; }
+.ag-pilule { display: inline-flex; align-items: center; gap: 6px; height: 40px; padding: 0 16px; border: 0; border-radius: 999px; background: var(--rv-carte); box-shadow: 0 4px 0 var(--rv-ligne); font: 700 14px 'Poppins', system-ui, sans-serif; color: var(--rv-encre); cursor: pointer; }
 .ag-pilule:disabled { opacity: .5; cursor: default; }
 .ag-pilule--orange { background: var(--rv-orange); color: #fff; box-shadow: 0 4px 0 var(--rv-orange-tranche); height: 38px; }
 
@@ -118,7 +118,7 @@
 .ag-anneau { width: 22px; height: 22px; border: 3px solid rgba(194,84,7,.2); border-top-color: var(--rv-orange); border-radius: 50%; animation: agTourne .9s linear infinite; }
 @keyframes agTourne { to { transform: rotate(360deg); } }
 .ag-pied { margin: 14px 6px 0; font-size: 13px; font-weight: 500; color: var(--rv-doux); }
-.ag-delier { padding: 0; border: 0; background: none; font: 600 13px 'Geist', system-ui, sans-serif; color: var(--rv-doux); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+.ag-delier { padding: 0; border: 0; background: none; font: 600 13px 'Poppins', system-ui, sans-serif; color: var(--rv-doux); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
 
 /* Relier Pronote */
 .ag-relier { margin: 28px 16px 0; padding: 22px 18px; display: flex; flex-direction: column; gap: 12px; }
@@ -131,14 +131,14 @@
 .ag-relier-form { display: flex; flex-direction: column; gap: 8px; }
 .ag-relier-form label { font-size: 13px; font-weight: 600; color: var(--rv-doux); }
 .ag-relier-ligne { display: flex; gap: 8px; }
-.ag-relier-ligne input, .ag-input { flex: 1; min-width: 0; height: 46px; box-sizing: border-box; padding: 0 14px; border: 1.5px solid var(--rv-ligne); border-radius: 14px; background: var(--rv-carte); font: 500 15px 'Geist', system-ui, sans-serif; color: var(--rv-encre); outline: 0; }
+.ag-relier-ligne input, .ag-input { flex: 1; min-width: 0; height: 46px; box-sizing: border-box; padding: 0 14px; border: 1.5px solid var(--rv-ligne); border-radius: 14px; background: var(--rv-carte); font: 500 15px 'Poppins', system-ui, sans-serif; color: var(--rv-encre); outline: 0; }
 .ag-relier-ligne input:focus, .ag-input:focus { border-color: var(--rv-orange); }
 .ag-relier-ligne .ag-pilule { height: 46px; }
 .ag-erreur { margin: 0; font-size: 13px; font-weight: 600; color: var(--rv-brun-texte); }
 
 /* Toast */
 .ag-toast { position: fixed; left: 50%; bottom: calc(104px + env(safe-area-inset-bottom, 0px)); z-index: 450; display: flex; align-items: center; gap: 14px; padding: 12px 18px; border-radius: 999px; background: var(--rv-inverse); color:var(--rv-sur-inverse); font-size: 14px; font-weight: 600; transform: translateX(-50%); animation: agToast .25s ease-out both; }
-.ag-toast button { padding: 0; border: 0; background: none; font: 700 14px 'Geist', system-ui, sans-serif; color: var(--rv-peche-bulle); cursor: pointer; }
+.ag-toast button { padding: 0; border: 0; background: none; font: 700 14px 'Poppins', system-ui, sans-serif; color: var(--rv-peche-bulle); cursor: pointer; }
 @keyframes agToast { from { opacity: 0; transform: translate(-50%, 8px); } }
 
 /* ── Ajouter un contrôle ── */
@@ -152,7 +152,7 @@
 .ag-champ-titre { display: block; margin: 18px 2px 10px; font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--rv-doux); }
 .ag-champ-titre span { margin-left: 4px; text-transform: none; letter-spacing: 0; font-weight: 500; }
 .ag-matieres { display: flex; flex-wrap: wrap; gap: 10px 8px; }
-.ag-matiere { height: 46px; display: inline-flex; align-items: center; gap: 8px; padding: 0 14px 0 6px; border: 0; border-radius: 999px; font: 700 14px 'Geist', system-ui, sans-serif; color: var(--rv-encre); cursor: pointer; }
+.ag-matiere { height: 46px; display: inline-flex; align-items: center; gap: 8px; padding: 0 14px 0 6px; border: 0; border-radius: 999px; font: 700 14px 'Poppins', system-ui, sans-serif; color: var(--rv-encre); cursor: pointer; }
 .ag-matiere-rond { width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: rgba(255,255,255,.7); overflow: hidden; }
 .ag-dates { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 6px; scrollbar-width: none; }
 .ag-date-tuile { flex: none; width: 62px; height: 68px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; border: 0; border-radius: 20px; background: var(--rv-carte); box-shadow: 0 4px 0 var(--rv-ligne); font-family: inherit; color: var(--rv-encre); cursor: pointer; }
@@ -171,7 +171,7 @@
 .ag-cal-tete button:disabled { opacity: .3; cursor: default; }
 .ag-cal-grille { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; justify-items: center; }
 .ag-cal-nom { font-size: 12px; font-weight: 700; color: var(--rv-doux); padding-bottom: 4px; }
-.ag-cal-jour { width: 40px; height: 40px; border: 0; border-radius: 50%; background: none; font: 600 15px 'Geist', system-ui, sans-serif; color: var(--rv-encre); cursor: pointer; }
+.ag-cal-jour { width: 40px; height: 40px; border: 0; border-radius: 50%; background: none; font: 600 15px 'Poppins', system-ui, sans-serif; color: var(--rv-encre); cursor: pointer; }
 .ag-cal-jour:hover:not(:disabled) { background: var(--rv-fond); }
 .ag-cal-jour.is-weekend { opacity: .55; }
 .ag-cal-jour.is-auj { box-shadow: inset 0 0 0 2px var(--rv-orange); }
@@ -246,10 +246,10 @@
 
 /* ── Sombre : ces pastels gardent leur texte sombre (cf. rv-ilot dans global.css) ── */
 :root[data-theme="dark"] .ag-etapes i {
-  --rv-encre: #1B1A23; --rv-encre-rgb: 27,26,35; --rv-doux: #6E675B; --rv-doux-rgb: 110,103,91;
+  --rv-encre: #042A65; --rv-encre-rgb: 27,26,35; --rv-doux: #6E675B; --rv-doux-rgb: 110,103,91;
   --rv-carte: #fff; --rv-carte-rgb: 255,255,255; --rv-carte-haute: #fff; --rv-ligne: #EADBCB; --rv-piste: #F3E6D8;
   --rv-orange-texte: #C25407; --rv-vert-texte: #1F8A52; --rv-brun-texte: #8F3E05;
-  --ch-encre: #1B1A23; --ch-doux: #6E675B; --bt-encre: #1B1A23; --bt-doux: #6E675B; --en-encre: #1B1A23; --en-doux: #6E675B; --hb-encre: #1B1A23; --hb-doux: #6E675B;
-  --hm-encre: #1B1A23; --hm-doux: #6E675B; --inst-encre: #1B1A23; --inst-doux: #6E675B; --lg-encre: #1B1A23; --lg-doux: #6E675B; --prg-encre: #1B1A23; --prg-doux: #6E675B;
-  color: #1B1A23;
+  --ch-encre: #042A65; --ch-doux: #6E675B; --bt-encre: #042A65; --bt-doux: #6E675B; --en-encre: #042A65; --en-doux: #6E675B; --hb-encre: #042A65; --hb-doux: #6E675B;
+  --hm-encre: #042A65; --hm-doux: #6E675B; --inst-encre: #042A65; --inst-doux: #6E675B; --lg-encre: #042A65; --lg-doux: #6E675B; --prg-encre: #042A65; --prg-doux: #6E675B;
+  color: #042A65;
 }

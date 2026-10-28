@@ -314,7 +314,7 @@
 .fp-page .fp-bulle .rv-bulle-txt {
   max-width: none; width: 100%; box-sizing: border-box;
   padding: 10px 14px 11px;
-  font-family: 'Geist', system-ui, sans-serif; font-size: 16.5px; font-weight: 650; letter-spacing: -.1px; line-height: 1.3;
+  font-family: 'Poppins', system-ui, sans-serif; font-size: 16.5px; font-weight: 650; letter-spacing: -.1px; line-height: 1.3;
   text-wrap: pretty;
   box-shadow: 0 6px 16px -6px rgba(90, 50, 10, .45), 0 0 0 1.5px rgba(120, 80, 30, .12);
 }

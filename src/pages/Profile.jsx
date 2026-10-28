@@ -43,10 +43,10 @@ const Flamme = () => (
   <svg viewBox="0 0 24 24" width="16" height="16" style={{ fill: 'var(--rv-marque)' }} aria-hidden="true"><path d="M12 2c1 3.5 5 5.5 5 11a5 5 0 0 1-10 0c0-2.4 1.1-4 2.3-5.2.2 1.6.9 2.6 1.9 3.2C11 8 11 5 12 2z" /></svg>
 );
 const CocheEncre = () => (
-  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#1B1A23" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg>
+  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#042A65" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg>
 );
 const Livre = () => (
-  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#1B1A23" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 4h11a2 2 0 0 1 2 2v14H7a2 2 0 0 1-2-2zM9 4v16" /></svg>
+  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#042A65" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 4h11a2 2 0 0 1 2 2v14H7a2 2 0 0 1-2-2zM9 4v16" /></svg>
 );
 const Crayon = () => (
   <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M4 20l4-1L19 8l-3-3L5 16zM14 6l3 3" /></svg>

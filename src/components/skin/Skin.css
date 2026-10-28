@@ -7,15 +7,15 @@
   --sk-menthe:  #DCF3E4;
   --sk-encre:   #1E1C3F;
   --sk-marque:  linear-gradient(135deg, #FF5A1F 0%, #FFA033 100%);
-  --sk-ombre:   0 4px 14px rgba(45,43,87,0.07), 0 1px 3px rgba(0,0,0,0.04);
-  --sk-ombre-haute: 0 18px 40px rgba(45,43,87,0.14);
+  --sk-ombre:   0 4px 14px rgba(4,42,101,0.07), 0 1px 3px rgba(0,0,0,0.04);
+  --sk-ombre-haute: 0 18px 40px rgba(4,42,101,0.14);
 }
 
 /* ── Logo autocollant ── */
 .sk-logo {
   display: inline-flex;
   align-items: center;
-  filter: drop-shadow(0 2px 4px rgba(45,43,87,0.18));
+  filter: drop-shadow(0 2px 4px rgba(4,42,101,0.18));
   text-decoration: none;
 }
 .sk-logo-mot {
@@ -23,7 +23,7 @@
   font-weight: 800;
   line-height: 1;
   letter-spacing: -0.02em;
-  color: #2D2B57;
+  color: #042A65;
 }
 .sk-logo-pastille {
   position: relative;
@@ -41,7 +41,7 @@
   position: relative;
   border-radius: 28px;
   padding: 22px 20px;
-  color: #1B1A23;
+  color: #042A65;
   overflow: hidden;
 }
 .sk-bloc--lavande { background: var(--sk-lavande); }
@@ -115,11 +115,11 @@
   transition: transform .2s;
 }
 .sk-bouton:hover .sk-bouton-pastille { transform: rotate(45deg); }
-.sk-bouton--encre   { background: #2D2B57; color: #fff; }
-.sk-bouton--encre:hover { background: #3B3970; }
-.sk-bouton--blanc   { background: #fff; color: #2D2B57; }
+.sk-bouton--encre   { background: #042A65; color: #fff; }
+.sk-bouton--encre:hover { background: #0B3A82; }
+.sk-bouton--blanc   { background: #fff; color: #042A65; }
 .sk-bouton--contour { background: var(--rv-carte); color: var(--rv-encre); border: 1px solid var(--rv-ligne); }
-.sk-bouton--contour .sk-bouton-pastille { background: #EAE8F2; color: #2D2B57; }
+.sk-bouton--contour .sk-bouton-pastille { background: #EAE8F2; color: #042A65; }
 .sk-bouton--compact { height: 40px; padding-left: 16px; gap: 10px; font-size: 14px; }
 .sk-bouton--compact .sk-bouton-pastille { width: 32px; height: 32px; }
 

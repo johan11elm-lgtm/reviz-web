@@ -29,7 +29,7 @@
   border-radius: 18px;
   background: rgba(var(--rv-encre-rgb), .04);
 }
-.pr-etape--aujourdhui { background: var(--rv-carte); box-shadow: 0 0 0 2px #2D2B57; }
+.pr-etape--aujourdhui { background: var(--rv-carte); box-shadow: 0 0 0 2px #042A65; }
 .pr-etape--faite .pr-txt b { text-decoration: line-through; text-decoration-thickness: 2px; color: var(--rv-doux); }
 .pr-etape--ferme { opacity: .55; }
 .pr-rond {
@@ -68,12 +68,12 @@
   padding: 0 16px;
   border: 0;
   border-radius: 999px;
-  background: #2D2B57;
+  background: #042A65;
   color: #fff;
-  font: 700 14px 'Geist', system-ui, sans-serif;
+  font: 700 14px 'Poppins', system-ui, sans-serif;
   cursor: pointer;
 }
-.pr-go:hover { background: #3B3970; }
+.pr-go:hover { background: #0B3A82; }
 .pr-go:focus-visible, .pr-debloquer:focus-visible { outline: 3px solid var(--rv-encre); outline-offset: 2px; }
 .pr-debloquer {
   align-self: flex-start;
@@ -83,6 +83,6 @@
   border-radius: 999px;
   background: var(--sk-marque, #FF5A1F);
   color: #fff;
-  font: 700 14px 'Geist', system-ui, sans-serif;
+  font: 700 14px 'Poppins', system-ui, sans-serif;
   cursor: pointer;
 }

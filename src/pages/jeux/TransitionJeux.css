@@ -93,9 +93,9 @@
 @keyframes tj-scintille { from { transform: scale(var(--t, 1)) rotate(var(--r, 0deg)); } to { transform: scale(calc(var(--t, 1) * 1.12)) rotate(calc(var(--r, 0deg) + 14deg)); opacity: 1; } }
 
 .tj-image { width: 38%; aspect-ratio: 1; object-fit: contain; filter: drop-shadow(0 6px 6px rgba(60, 20, 0, .25)); }
-.tj-tour { font: 800 11px 'Geist', system-ui, sans-serif; letter-spacing: .12em; text-transform: uppercase; opacity: .6; margin-top: 4px; }
+.tj-tour { font: 800 11px 'Poppins', system-ui, sans-serif; letter-spacing: .12em; text-transform: uppercase; opacity: .6; margin-top: 4px; }
 .tj-nom { font-family: var(--font-display, 'Bricolage Grotesque', system-ui); font-size: 26px; font-weight: 900; letter-spacing: -.03em; line-height: 1.02; }
-.tj-theme { font: 700 14px 'Geist', system-ui, sans-serif; color: #B34400; }
+.tj-theme { font: 700 14px 'Poppins', system-ui, sans-serif; color: #B34400; }
 .tj-score {
   margin-top: 6px; padding: 5px 16px; border-radius: 999px;
   background: #2A2140; color: #FFF6E8;
@@ -104,7 +104,7 @@
 
 /* La règle du jeu qui arrive, en une phrase, et le bouton « Je suis prêt » sous la carte : sa jauge
    se vide pendant l'attente, puis la carte passe toute seule. */
-.tj-regle { font: 600 12.5px/1.3 'Geist', system-ui, sans-serif; color: #2A2140; opacity: .85; max-width: 92%; text-wrap: balance; }
+.tj-regle { font: 600 12.5px/1.3 'Poppins', system-ui, sans-serif; color: #2A2140; opacity: .85; max-width: 92%; text-wrap: balance; }
 .tj-carte-int .tj-image { width: 30%; }
 .tj-pret {
   position: absolute; left: 50%; bottom: max(28px, calc(env(safe-area-inset-bottom) + 18px));

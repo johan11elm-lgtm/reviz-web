@@ -7,8 +7,7 @@ import { ConsentBanner } from '../components/ConsentBanner';
 import { EmailBanner } from '../components/EmailBanner';
 import { PushBanner } from '../components/PushBanner';
 import { Mascot } from '../components/Mascot';
-import { Pantin, tempsLettres } from '../components/Pantin';
-import { BulleReviz } from '../components/reviz/BulleReviz';
+import { Pantin } from '../components/Pantin';
 import { loadLessons, restoreLesson, syncFromFirestore } from '../services/historyService';
 import { loadRevisions } from '../services/revisionService';
 import { loadCatalogue } from '../services/programmeService';
@@ -99,15 +98,9 @@ export default function Home() {
   const [essaiTheme, setEssaiTheme] = useState(() => !essaiThemeVu());
   // Les thèmes Réviz+ sont des thèmes clairs : pas d'invitation à les essayer en sombre.
   const montrerEssai = essaiTheme && hasRevizPlus && !isGuest && !isDark && !themeById(theme)?.premium;
-  const [compact, setCompact] = useState(0);
-  const [parle, setParle] = useState(false);
-  const [tour, setTour] = useState(0);
-  const [sortie, setSortie] = useState(false);
   const [caseChoisie, setCaseChoisie] = useState(null);
   const pantin = useRef(null);
   const hero = useRef(null);
-  const heroVu = useRef(true);
-  const survol = useRef(false);
   const controle = useProchainControle(currentUser);
 
   useEffect(() => {
@@ -145,7 +138,7 @@ export default function Home() {
   }, [uidJeux]);
   // Série avec gel automatique : un jour manqué par semaine ne la casse pas (utils/gamification).
   const { serie: streak, gels } = useMemo(() => detailSerie([...loadRevisions(), ...jourJeux.jours.map(j => ({ revisedAt: `${j}T12:00:00` }))], 'revisedAt', { gel: true }), [allLessons, jourJeux]);
-  const { level } = useMemo(() => computeLevel(allLessons), [allLessons]);
+  const { level, xpTotal } = useMemo(() => computeLevel(allLessons), [allLessons]);
   const lastLesson = allLessons[0] ?? null;
   const dailyGoal = parseInt(localStorage.getItem(`reviz-daily-goal-${currentUser?.uid}`) || '3');
   const todayRevisions = useMemo(() => loadRevisions().filter(r =>
@@ -198,31 +191,6 @@ export default function Home() {
   };
   const cibleControle = controle && controle.matiere !== 'autre' ? `/programme?matiere=${controle.matiere}` : '/programme';
 
-  // ditLignes : la phrase du jour découpée pour la bulle (une idée par ligne) ; dit : d'un bloc.
-  let ditLignes, cta, action;
-  if (humeurId === 'fete') {
-    ditLignes = ['Objectif du jour atteint !', 'On fête ça ?'];
-    cta = 'Lancer une Battle bonus';
-    action = () => navigate('/battle');
-  } else if (humeurId === 'soir') {
-    ditLignes = ['Je m’endors…', 'Une carte et dodo ?'];
-    cta = 'Réveiller Réviz · 1 carte';
-    action = ouvrirCartes;
-  } else if (humeurId === 'controle') {
-    ditLignes = [`${controle.m.label} ${controle.quand}.`, `On s'y met ${heure >= 17 ? 'ce soir' : "aujourd'hui"} ?`];
-    cta = 'Réviser avec Réviz';
-    action = () => navigate(cibleControle);
-  } else {
-    ditLignes = ['Envie de réviser ?'];
-    if (dueCards > 0) {
-      cta = 'Réviser mes cartes';
-      action = ouvrirCartes;
-    } else {
-      cta = isGuest ? 'Réviser mon programme' : 'Scanner une leçon';
-      action = () => navigate(isGuest ? '/programme' : '/scan');
-    }
-  }
-  const dit = ditLignes.join(' ');
 
   // ── Ton plan : trois étapes jusqu'au contrôle, ou les trois de la journée ──
   const plan = useMemo(() => {
@@ -284,145 +252,40 @@ export default function Home() {
   const dateTxt = majuscule(new Date().toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' }));
 
   const sauter = () => pantin.current?.geste('saut');
-  // Réviz tombe dans le héros une fois chargé, puis parle (et fait son geste d'humeur).
-  // Distance de chute en unités du pantin (2148 pour sa taille) : il part au-dessus du héros.
-  const TAILLE_PANTIN = isDesktop ? 400 : 226;
-  const entree = useMemo(() => [{ nom: 'chute', depuis: Math.round(2148 * (isDesktop ? 520 : 420) / TAILLE_PANTIN) }], [isDesktop, TAILLE_PANTIN]);
-  const aterri = () => {
-    setParle(true);
-    pantin.current?.dire(ditLignes.join('\n'));
-    if (h.entree) pantin.current?.geste(h.entree);
-  };
-  // Si le moteur ne charge pas, la bulle s'affiche quand même. Onglet en arrière-plan : les
-  // animations sont gelées, Réviz n'a pas encore pu tomber ; on attend que la page soit visible.
-  useEffect(() => {
-    let t;
-    const essai = () => { t = setTimeout(() => (document.hidden ? essai() : setParle(true)), 4000); };
-    essai();
-    return () => clearTimeout(t);
-  }, []);
-
-  // ── Ce que Réviz propose, à tour de rôle : la phrase du jour d'abord, puis le reste de l'app.
-  // Chaque proposition a sa pose (humeur ou réaction du moteur), parfois un geste, son action et sa
-  // carte : depuis l'accueil, on peut aller partout.
-  // Pas de réaction dont l'effet flotte au-dessus de la tête (ampoule, point d'interrogation) :
-  // la bulle le cacherait.
+  const style = { '--hm-bg': h.bg, '--hm-tint': h.tint, '--hm-dot': h.dot, '--hm-btn': h.btn, '--hm-soft': h.soft, '--hm-btn-texte': h.btnTexte, '--rv-accent': h.btn };
   const court = (t, max = 24) => (t.length > max ? `${t.slice(0, max - 1).trimEnd()}…` : t);
-  const titreLecon = lastLesson?.metadata?.title;
-  const pluriel = (n, mot) => `${n} ${mot}${n > 1 ? 's' : ''}`;
-  const avecCompte = isGuest ? 'Avec un compte gratuit' : null;
   const lancerProgramme = () => navigate('/programme');
   const lancerScan = () => navigate('/scan');
+  const prenom = String(currentUser?.displayName ?? '').trim().split(/\s+/)[0];
 
-  // La carte de la phrase du jour : ce que lance l'action principale (id : pour ne pas la reproposer).
-  const carteDuJour = humeurId === 'fete'
-    ? { id: 'battle', pose: 'fire', fond: 'var(--rv-lavande)', titre: 'Battle bonus', sous: 'Objectif atteint, on joue ?' }
-    : humeurId === 'soir'
-      ? { id: 'cartes', pose: 'soir', fond: 'var(--rv-lavande)', titre: 'Une flashcard', sous: '2 minutes, et au lit' }
-      : humeurId === 'controle'
-        ? { id: 'controle', pose: subjectMascot(controle.m.label), fond: 'var(--rv-peche-pale)', titre: `Contrôle de ${controle.m.label.toLowerCase()}`,
-            sous: `${majuscule(controle.quand)}${controle.titre ? ` · ${controle.titre}` : ''}` }
-        : cta === 'Réviser mes cartes'
-          ? { id: 'cartes', pose: 'flashcard', fond: 'var(--rv-peche-pale)', titre: 'Mes cartes du jour', sous: `${pluriel(dueCards, 'carte')} à revoir` }
-          : cta === 'Scanner une leçon'
-            ? { id: 'scan', pose: 'scanphone', fond: 'var(--rv-menthe)', titre: 'Scanner une leçon', sous: 'Résumé, flashcards et quiz' }
-            : { id: 'programme', pose: 'reading', fond: 'var(--rv-peche-pale)', titre: 'Mon programme', sous: 'Les chapitres de ta classe' };
-
-  const suggestions = [
-    { lignes: ditLignes, label: cta, action, expr: h.expression, carte: carteDuJour },
-    !jourJeux.faite && { lignes: ['La partie du jour est prête.', '6 mini-jeux, 2 minutes.'], label: 'Jouer', action: () => navigate('/jeux?depuis=suggestion'), expr: 'emerveille', geste: 'brasEnLair',
-      carte: { id: 'jeux', pose: 'celebration', fond: '#FFE3C7', titre: 'Partie du jour', sous: 'Réviz Games · 6 mini-jeux' } },
-    titreLecon && (fcLast > 0
-      ? { lignes: ['Tes cartes t’attendent.', 'On les revoit ?'], label: 'Réviser mes cartes', action: ouvrirCartes, expr: 'content', geste: 'coucou',
-          carte: { id: 'cartes', pose: 'flashcard', fond: 'var(--rv-peche-pale)', titre: 'Flashcards', sous: `${pluriel(fcLast, 'carte')} à revoir · ${court(titreLecon, 20)}` } }
-      : { lignes: ['Un petit quiz ?', 'Pour voir où tu en es.'], label: 'Lancer le quiz', expr: 'emerveille',
-          action: () => { restoreLesson(lastLesson.id); navigate('/quiz'); },
-          carte: { id: 'quiz', pose: 'quiz', fond: 'var(--rv-lavande)', titre: 'Quiz corrigé', sous: court(titreLecon, 32) } }),
-    { lignes: ['Un autre chapitre ?', 'Tout ton programme est là.'], label: 'Réviser mon programme', action: lancerProgramme, expr: 'content', geste: 'coucou',
-      carte: { id: 'programme', pose: 'reading', fond: 'var(--rv-peche-pale)', titre: 'Réviser', sous: `Tout le programme de ${classe}` } },
-    { lignes: ['Une leçon à apprendre ?', 'Prends-la en photo.'], label: 'Scanner une leçon', action: lancerScan, expr: 'emerveille',
-      carte: { id: 'scan', pose: 'scanphone', fond: 'var(--rv-menthe)', titre: 'Scanner une leçon', sous: avecCompte || 'Résumé, flashcards et quiz' } },
-    { lignes: ['Une question ?', 'Je t’explique ton cours.'], label: 'Parler à Réviz IA', action: () => navigate('/coach'), expr: 'reflechit',
-      carte: { id: 'ia', pose: 'coach', fond: 'var(--rv-rose)', titre: 'Réviz IA', sous: avecCompte || 'Je t’explique, avec des exemples' } },
-    { lignes: ['Prêt pour une Battle ?', 'Défie un ami en direct.'], label: 'Lancer une Battle', action: () => navigate('/battle'), expr: 'determine', geste: 'brasEnLair',
-      carte: { id: 'battle', pose: 'fire', fond: 'var(--rv-lavande)', titre: 'Battle', sous: '5 questions, 15 s, contre un ami' } },
-    !isGuest && allLessons.length > 0 && {
-      lignes: [allLessons.length > 1 ? 'Tes leçons scannées ?' : 'Ta leçon scannée ?', allLessons.length > 1 ? 'Elles sont toutes ici.' : 'Elle est rangée ici.'], label: 'Voir mes leçons',
-      action: () => navigate('/cours'), expr: 'fier',
-      carte: { id: 'cours', pose: 'writing', fond: 'var(--rv-menthe)', titre: 'Mes leçons', sous: `${pluriel(allLessons.length, 'leçon')} scannée${allLessons.length > 1 ? 's' : ''}` } },
-    { lignes: controle ? ['Un autre contrôle ?', 'Note-le dans l’agenda.'] : ['Un contrôle bientôt ?', 'Dis-moi quand.'], label: "Ouvrir l'agenda",
-      action: () => navigate('/agenda'), expr: 'content', geste: 'gratterTete',
-      carte: { id: 'agenda', pose: 'thinking', fond: 'var(--rv-peche-pale)', titre: 'Agenda', sous: 'Tes contrôles et leurs plans' } },
-  ].filter((p, i) => p && (i === 0 || p.carte.id !== carteDuJour.id));
-  const sugg = suggestions[tour % suggestions.length];
-
-  // « Démarre en un clic » (grammaire Nomad, 28/10) : trois raccourcis fixes sous la bulle. L'action du
-  // jour, la préparation d'un contrôle (le plan de révision de l'agenda), puis le programme ou le scan.
+  // « On fait quoi aujourd'hui ? Démarre en un clic » (comme l'accueil de l'app Nomad) : un quiz,
+  // préparer un contrôle (le plan de révision de l'agenda), réviser avec son cours.
   const raccourcis = [
-    { ...carteDuJour, go: action },
-    controle && carteDuJour.id !== 'controle'
-      ? { id: 'plan', pose: 'examen', fond: 'var(--sk-peche)', titre: 'Mon plan de révision', sous: `${controle.m.label} ${controle.quand}`, go: () => navigate('/agenda') }
-      : { id: 'plan', pose: 'examen', fond: 'var(--sk-peche)', titre: 'Préparer un contrôle', sous: 'Ton plan jusqu’au jour J', go: () => navigate('/agenda') },
-    carteDuJour.id === 'programme'
-      ? { id: 'scan', pose: 'scanphone', fond: 'var(--sk-menthe)', titre: 'Scanner une leçon', sous: avecCompte || 'Résumé, flashcards et quiz', go: lancerScan }
-      : { id: 'programme', pose: 'reading', fond: 'var(--sk-lavande)', titre: 'Mon programme', sous: `Tout le programme de ${classe}`, go: lancerProgramme },
+    { id: 'quiz', pose: 'quiz', titre: 'Fais un quiz', sous: lastLesson?.metadata?.title ? court(lastLesson.metadata.title, 36) : 'Sur un chapitre de ton programme', go: lancerQuiz },
+    controle
+      ? { id: 'plan', pose: 'examen', titre: 'Mon plan de révision', sous: `${controle.m.label} ${controle.quand}`, go: () => navigate('/agenda') }
+      : { id: 'plan', pose: 'examen', titre: 'Prépare un contrôle', sous: 'Ton plan jusqu’au jour J', go: () => navigate('/agenda') },
+    isGuest
+      ? { id: 'programme', pose: 'reading', titre: 'Révise ton programme', sous: `Tout le programme de ${classe}`, go: lancerProgramme }
+      : { id: 'scan', pose: 'scanphone', titre: 'Révise avec ton cours', sous: 'Prends ta leçon en photo', go: lancerScan },
   ];
+  const Fleche = () => (
+    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+  );
   const blocRaccourcis = (
-    <div className="hm-raccourcis" role="group" aria-label="Démarre en un clic">
+    <div className="nm-lignes" role="group" aria-label="Démarre en un clic">
       {raccourcis.map(r => (
-        <button key={r.id} type="button" className="hm-raccourci" onClick={r.go}>
-          <span className="hm-raccourci-rond" style={{ background: r.fond }}>
-            <Mascot pose={r.pose} size={isDesktop ? 54 : 48} alt="" aria-hidden="true" />
+        <button key={r.id} type="button" className="nm-ligne" onClick={r.go}>
+          <span className="nm-ligne-icone"><Mascot pose={r.pose} size={isDesktop ? 46 : 42} alt="" aria-hidden="true" /></span>
+          <span className="nm-ligne-txt">
+            <span className="nm-ligne-titre">{r.titre}</span>
+            <span className="nm-ligne-sous">{r.sous}</span>
           </span>
-          <span className="hm-raccourci-txt">
-            <span className="hm-raccourci-titre">{r.titre}</span>
-            <span className="hm-raccourci-sous">{r.sous}</span>
-          </span>
-          <span className="hm-raccourci-fleche" aria-hidden="true">
-            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
-          </span>
+          <span className="nm-ligne-fleche"><Fleche /></span>
         </button>
       ))}
     </div>
   );
-  const texteSugg = sugg.lignes.join('\n');
-
-  // Le héros hors de l'écran ou l'onglet caché : Réviz attend avant de changer de phrase.
-  useEffect(() => {
-    if (!hero.current || !('IntersectionObserver' in window)) return;
-    const obs = new IntersectionObserver(([v]) => { heroVu.current = v.isIntersecting; });
-    obs.observe(hero.current);
-    return () => obs.disconnect();
-  }, [isDesktop]);
-
-  useEffect(() => {
-    if (!parle) return;
-    // La première phrase est dite à l'atterrissage (aterri) ; les suivantes ici, avec leur pose.
-    if (tour > 0) {
-      pantin.current?.expression(sugg.expr);
-      if (sugg.geste) pantin.current?.geste(sugg.geste);
-      pantin.current?.dire(texteSugg);
-    }
-    const temps = tempsLettres(texteSugg);
-    let t1, t2;
-    const suivante = () => {
-      // Héros hors de l'écran, onglet caché ou souris dessus (ordinateur) : il attend.
-      if (document.hidden || !heroVu.current || survol.current) { t1 = setTimeout(suivante, 1500); return; }
-      setSortie(true);
-      t2 = setTimeout(() => { setSortie(false); setTour(t => t + 1); }, 220);
-    };
-    // Le temps de dire la phrase, puis de la lire.
-    t1 = setTimeout(suivante, (temps[temps.length - 1] || 0) * 1000 + 5500);
-    return () => { clearTimeout(t1); clearTimeout(t2); };
-  }, [parle, tour]);
-  // Ordinateur : les points sous la carte mènent directement à une proposition.
-  const allerA = i => {
-    const n = suggestions.length, ici = tour % n;
-    if (i === ici) return;
-    setSortie(false);
-    setTour(t => t - ici + i + (i < ici ? n : 0));
-  };
-  const style = { '--hm-bg': h.bg, '--hm-tint': h.tint, '--hm-dot': h.dot, '--hm-bar': h.bar, '--hm-btn': h.btn, '--hm-soft': h.soft, '--hm-btn-texte': h.btnTexte, '--rv-accent': h.btn };
 
   const serie = streak > 0 && (
     <span className="hm-serie" aria-label={`${streak} jour${streak > 1 ? 's' : ''} de suite${gels.length ? ', série protégée par un jour gelé' : ''}`}
@@ -541,125 +404,141 @@ export default function Home() {
     </div>
   );
 
+  const Soleil = () => (
+    <svg className="nm-soleil" viewBox="0 0 24 24" width="34" height="34" aria-hidden="true">
+      <circle cx="12" cy="12" r="5.2" fill="#FFC24B" />
+      {[0, 45, 90, 135, 180, 225, 270, 315].map(r => <rect key={r} x="11.1" y="1.2" width="1.8" height="3.6" rx=".9" fill="#FFC24B" transform={`rotate(${r} 12 12)`} />)}
+    </svg>
+  );
+  const stats = (
+    <ul className="nm-stats" aria-label="Tes chiffres">
+      <li><span className="nm-stat-ico nm-stat-ico--xp" aria-hidden="true">XP</span><b>{xpTotal}</b><small>Points d’expérience</small></li>
+      <li><span className="nm-stat-ico" aria-hidden="true"><Flamme /></span><b>{streak}</b><small>{gels.length ? 'jours, série protégée' : 'jours de suite'}</small></li>
+      <li><span className="nm-stat-ico nm-stat-ico--niveau" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="9" r="5.5" /><path d="m9 13.5-1.5 7.5 4.5-2.5 4.5 2.5-1.5-7.5" /></svg>
+      </span><b>{level}</b><small>Niveau</small></li>
+    </ul>
+  );
+  const tete = !isDesktop && (
+    <header className="nm-tete">
+      <Link to="/" className="nm-tete-logo" aria-label="Réviz"><img src="/logo/pastille.png" width="44" height="44" alt="" /></Link>
+      {/* En mode essai, le bandeau juste dessous propose déjà de créer son compte. */}
+      {!isGuest && !hasRevizPlus ? <Link to={{ pathname: '/reglages', hash: '#abonnement' }} className="nm-abo">S’abonner <span>Réviz+</span></Link> : <span />}
+      <Link to="/profil" className="nm-tete-avatar" aria-label={`Mon profil${prenom ? `, ${prenom}` : ''}`}><Mascot pose="hello" size={34} alt="" /></Link>
+    </header>
+  );
+  const salut = (
+    <div className="nm-salut">
+      <h1 className="nm-hello"><Soleil />{prenom ? `Salut ${prenom} !` : 'Salut !'}</h1>
+      {!isDesktop && stats}
+    </div>
+  );
+  const recherche = (
+    <Link to="/programme" className="nm-recherche">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>
+      On révise quoi aujourd’hui ?
+    </Link>
+  );
+  const ronds = (
+    <nav className="nm-ronds" aria-label="Aller vite">
+      {[
+        { to: '/programme', pose: 'reading', label: 'Réviser' },
+        { to: '/agenda', pose: 'examen', label: 'Mes contrôles' },
+        { to: '/battle', pose: 'fire', label: 'Défier' },
+      ].map(r => (
+        <Link key={r.to} to={r.to} className="nm-rond">
+          <span className="nm-rond-icone"><Mascot pose={r.pose} size={isDesktop ? 58 : 52} alt="" aria-hidden="true" /></span>
+          <span className="nm-rond-label">{r.label}</span>
+        </Link>
+      ))}
+    </nav>
+  );
+  const blocDuJour = (
+    <section className="nm-bloc" aria-labelledby="nm-bloc-titre" ref={hero}>
+      <div className="nm-bloc-tete">
+        <h2 id="nm-bloc-titre" className="nm-bloc-titre">On fait quoi aujourd’hui ?</h2>
+        <p className="nm-bloc-sous">Démarre en un clic</p>
+      </div>
+      <div className="nm-bloc-reviz">
+        <Pantin ref={pantin} size={isDesktop ? 190 : 118} expression={h.expression} entree="coucou" repli={null} onClick={sauter} label="Réviz, ta mascotte" />
+      </div>
+      {blocRaccourcis}
+    </section>
+  );
+  const aLaUne = (
+    <section className="nm-une" aria-labelledby="nm-une-titre">
+      <h2 id="nm-une-titre" className="nm-titre-barre">À la une</h2>
+      <div className="nm-une-cartes">
+        {carteJeux}
+        {carteBattle}
+        {carteSimulateur}
+      </div>
+    </section>
+  );
+  // Colonne de droite (ordinateur), comme l'app Nomad : les chiffres, le prochain contrôle, les indispensables.
+  const rail = isDesktop && (
+    <aside className="nm-rail" aria-label="En un coup d’œil">
+      <div className="nm-rail-carte">{stats}</div>
+      <section className="nm-rail-section" aria-labelledby="nm-rail-ctrl">
+        <h2 id="nm-rail-ctrl" className="nm-rail-titre">Tes prochains contrôles</h2>
+        <div className="nm-rail-carte nm-rail-ctrl">
+          {controle ? (
+            <>
+              <span className="nm-rail-ctrl-ico"><Mascot pose={subjectMascot(controle.m.label)} size={40} alt="" aria-hidden="true" /></span>
+              <span className="nm-rail-ctrl-txt"><b>{`Contrôle de ${controle.m.label.toLowerCase()}`}</b><span>{majuscule(controle.quand)}{controle.titre ? ` · ${controle.titre}` : ''}</span></span>
+              <Link to="/agenda" className="nm-rail-btn">Voir le plan</Link>
+            </>
+          ) : (
+            <>
+              <span className="nm-rail-ctrl-ico"><Mascot pose="examen" size={40} alt="" aria-hidden="true" /></span>
+              <span className="nm-rail-ctrl-txt"><b>Aucun contrôle noté</b><span>Note-le : Réviz prépare ton plan de révision.</span></span>
+              <Link to="/agenda" className="nm-rail-btn">Ajouter un contrôle</Link>
+            </>
+          )}
+        </div>
+      </section>
+      <section className="nm-rail-section" aria-labelledby="nm-rail-indis">
+        <h2 id="nm-rail-indis" className="nm-rail-titre">Tes indispensables</h2>
+        <div className="nm-rail-carte nm-indis">
+          {[
+            !isGuest && { to: '/coach', pose: 'coach', label: 'Réviz IA' },
+            { to: '/agenda', pose: 'thinking', label: 'Agenda' },
+            classe === '3ème' && { to: '/simulateur-brevet', pose: 'graduation', label: 'Simulateur' },
+            { to: '/jeux?depuis=accueil', pose: 'celebration', label: 'Jeux' },
+          ].filter(Boolean).map(r => (
+            <Link key={r.to} to={r.to} className="nm-indis-item">
+              <span className="nm-indis-rond"><Mascot pose={r.pose} size={40} alt="" aria-hidden="true" /></span>
+              <span>{r.label}</span>
+            </Link>
+          ))}
+        </div>
+      </section>
+    </aside>
+  );
+
   return (
-    <div className={`app app--no-halo home-page${isDesktop ? ' app--large' : ''}`} style={style}>
+    <div className={`app app--no-halo home-page nm-page${isDesktop ? ' app--large nm-page--large' : ''}`} style={style}>
       {newBadge && !annonceJeux && <AchievementToast badge={newBadge} onDone={() => setNewBadge(null)} />}
       {annonceRevizPlus && <RevizPlusAnnonce uid={currentUser.uid} onClose={() => setAnnonceRevizPlus(false)} />}
       {annonceJeux && <JeuxAnnonce uid={currentUser.uid} onClose={() => setAnnonceJeux(false)} />}
 
-      {isDesktop ? (
-        <div className="content hm-desk">
-          <div
-            className="hm-hero hm-hero--desk"
-            ref={hero}
-            onMouseEnter={() => { survol.current = true; }}
-            onMouseLeave={() => { survol.current = false; }}
-          >
-            <span className="hm-bulle hm-bulle--a" aria-hidden="true" />
-            <span className="hm-bulle hm-bulle--b" aria-hidden="true" />
-            <span className="hm-point" aria-hidden="true" />
-            <span className="hm-grain" aria-hidden="true" />
-            {/* Bloc de couleur (28/10) : à gauche le titre, la bulle de Réviz et les raccourcis ;
-                à droite Réviz, vers qui pointe la bulle. */}
-            <div className="hm-scene">
-              <div className="hm-hero-txt">
-                <div className="hm-hero-haut">
-                  <span className="hm-date">{dateTxt}</span>
-                  <div className="hm-hero-titres">
-                    <span className="hm-auj">Aujourd'hui</span>
-                    {serie}
-                  </div>
-                </div>
-                <h1 className="sr-only">{dit}</h1>
-                <BulleReviz key={`${humeurId}-${tour}`} lignes={sugg.lignes} parle={parle} sortie={sortie} onClick={sugg.action} label={sugg.label}
-                  pointe="droite" grande className="hm-bulle-parole" />
-                <div className="hm-points" role="group" aria-label="Ce que Réviz propose">
-                  {suggestions.map((p, i) => (
-                    <button
-                      key={i}
-                      type="button"
-                      className={`hm-point-sugg${i === tour % suggestions.length ? ' hm-point-sugg--la' : ''}`}
-                      onClick={() => allerA(i)}
-                      aria-label={p.carte.titre}
-                      aria-current={i === tour % suggestions.length}
-                    />
-                  ))}
-                </div>
-                {blocRaccourcis}
-              </div>
-              <Pantin
-                ref={pantin}
-                size={TAILLE_PANTIN}
-                expression={h.expression}
-                entree={entree}
-                onEntree={aterri}
-                repli={null}
-                className="hm-pantin"
-                onClick={sauter}
-                label="Réviz, ta mascotte"
-              />
-            </div>
-          </div>
-          {rappels}
-          {montrerEssai && <div className="hm-essai-desk"><ThemeEssai onClose={() => setEssaiTheme(false)} /></div>}
-          <div className="hm-grille">
-            <div className="hm-carte hm-carte--chemin">{chemin}</div>
-            <div className="hm-carte">{carteMatieres}</div>
-            {carteJeux}
-            {carteBattle}
-            {carteSimulateur}
-          </div>
-        </div>
-      ) : (
-        <div
-          className="content hm-mobile"
-          onScroll={e => {
-            // La barre du haut arrive quand le héros a presque fini de passer dessous.
-            const fin = (hero.current?.offsetHeight ?? 400) - 90;
-            setCompact(Math.min(1, Math.max(0, (e.currentTarget.scrollTop - fin) / 30)));
-          }}
-        >
-          <div className="hm-hero" ref={hero}>
-            <span className="hm-bulle hm-bulle--a" aria-hidden="true" />
-            <span className="hm-bulle hm-bulle--b" aria-hidden="true" />
-            <span className="hm-point" aria-hidden="true" />
-            <span className="hm-grain" aria-hidden="true" />
-            <span className="hm-ombre" aria-hidden="true" />
-            <div className="hm-pantin-place">
-              <Pantin
-                ref={pantin}
-                size={TAILLE_PANTIN}
-                expression={h.expression}
-                entree={entree}
-                onEntree={aterri}
-                repli={null}
-                onClick={sauter}
-                label="Réviz, ta mascotte"
-              />
-            </div>
-            {/* Bandeau (essai, e-mail, accord parental) : tout en haut, dans l'aplat du héros. */}
+      <div className="content nm-defile">
+        {tete}
+        <div className="nm-grille">
+          <div className="nm-principal">
             {rappels}
-            <div className="hm-hero-haut">
-              <div className="hm-hero-titres">
-                <span className="hm-date">{dateTxt}</span>
-                <span className="hm-auj">Aujourd'hui</span>
-              </div>
-              {serie}
-            </div>
-            <h1 className="sr-only">{dit}</h1>
-            <BulleReviz key={`${humeurId}-${tour}`} lignes={sugg.lignes} parle={parle} sortie={sortie} onClick={sugg.action} label={sugg.label} className="hm-bulle-parole" />
+            {salut}
+            {recherche}
+            {ronds}
+            {blocDuJour}
+            {montrerEssai && <ThemeEssai onClose={() => setEssaiTheme(false)} />}
+            <div className="nm-carte">{chemin}</div>
+            <div className="nm-carte">{carteMatieres}</div>
+            {aLaUne}
           </div>
-          <div className="hm-pad hm-pad--raccourcis">{blocRaccourcis}</div>
-          <div className="hm-pad hm-pad--chemin">{chemin}</div>
-          <div className="hm-pad">{carteJeux}</div>
-          {carteSimulateur && <div className="hm-pad">{carteSimulateur}</div>}
-          {montrerEssai && <div className="hm-pad"><ThemeEssai onClose={() => setEssaiTheme(false)} /></div>}
-          <div className="hm-pad hm-pad--droite">{carteMatieres}</div>
-          <div className="hm-pad hm-pad--bas">{carteBattle}</div>
+          {rail}
         </div>
-      )}
-      {!isDesktop && <div className="hm-barre" style={{ opacity: compact }} aria-hidden="true">Aujourd'hui</div>}
-
+      </div>
       <BottomNav />
     </div>
   );

@@ -45,7 +45,7 @@
   border: 0; border-radius: 999px;
   background: var(--bt-orange);
   box-shadow: 0 5px 0 var(--bt-tranche);
-  font-family: 'Geist', sans-serif; font-size: 17px; font-weight: 700;
+  font-family: 'Poppins', sans-serif; font-size: 17px; font-weight: 700;
   color: #fff; text-decoration: none;
   cursor: pointer;
   transition: transform .1s, box-shadow .1s;
@@ -55,7 +55,7 @@
 .bt-btn:focus-visible { outline: 3px solid var(--bt-encre); outline-offset: 3px; }
 .bt-btn--blanc { background: var(--rv-carte); color: var(--bt-encre); box-shadow: 0 4px 0 var(--bt-bord); }
 .bt-btn--blanc:active:not(:disabled) { box-shadow: 0 1px 0 var(--bt-bord); }
-.bt-btn--peche { background: var(--bt-peche); color: #1B1A23; box-shadow: 0 4px 0 var(--bt-peche-t); }
+.bt-btn--peche { background: var(--bt-peche); color: #042A65; box-shadow: 0 4px 0 var(--bt-peche-t); }
 .bt-btn--peche:active:not(:disabled) { box-shadow: 0 1px 0 var(--bt-peche-t); }
 .bt-btn--encre { background: var(--rv-inverse); box-shadow: none; }
 .bt-btn--encre:active { box-shadow: none; }
@@ -92,7 +92,7 @@
   height: 42px; padding: 0 16px 0 12px;
   border: 0; border-radius: 999px;
   background: var(--rv-carte); box-shadow: 0 4px 0 rgba(var(--rv-encre-rgb),.08);
-  font-family: 'Geist', sans-serif; font-size: 15px; font-weight: 700; color: var(--bt-encre);
+  font-family: 'Poppins', sans-serif; font-size: 15px; font-weight: 700; color: var(--bt-encre);
   cursor: pointer;
 }
 .bt-hero-titre { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-top: 24px; }
@@ -124,7 +124,7 @@
   flex: none; display: inline-flex; align-items: center; gap: 8px;
   height: 40px; padding: 0 16px 0 8px;
   border: 0; border-radius: 999px; background: var(--rv-fond);
-  font-family: 'Geist', sans-serif; font-size: 14.5px; font-weight: 700; color: var(--bt-encre);
+  font-family: 'Poppins', sans-serif; font-size: 14.5px; font-weight: 700; color: var(--bt-encre);
   cursor: pointer;
 }
 .bt-matiere i { width: 24px; height: 24px; border-radius: 50%; }
@@ -135,7 +135,7 @@
   width: 100%; min-height: 50px; padding: 10px 14px;
   border: 2px solid transparent; border-radius: 18px;
   background: var(--rv-fond);
-  font-family: 'Geist', sans-serif; font-size: 15px; font-weight: 600; line-height: 1.25; text-align: left; color: var(--bt-encre);
+  font-family: 'Poppins', sans-serif; font-size: 15px; font-weight: 600; line-height: 1.25; text-align: left; color: var(--bt-encre);
   cursor: pointer;
 }
 .bt-chapitre.is-choisi { border-color: var(--bt-orange); font-weight: 700; }
@@ -228,7 +228,7 @@
 .bt-prenom-input {
   box-sizing: border-box; width: 100%; height: 56px; padding: 0 20px;
   border: 2px solid var(--bt-bord); border-radius: 999px; background: var(--rv-carte);
-  font-family: 'Geist', sans-serif; font-size: 18px; font-weight: 600; color: var(--bt-encre);
+  font-family: 'Poppins', sans-serif; font-size: 18px; font-weight: 600; color: var(--bt-encre);
   outline: none;
 }
 .bt-prenom-input:focus { border-color: var(--bt-orange); }
@@ -302,7 +302,7 @@
   box-sizing: border-box; width: 100%; min-height: 62px; padding: 10px 16px;
   border: 0; border-radius: 20px;
   background: var(--rv-carte); box-shadow: 0 4px 0 var(--bt-bord);
-  font-family: 'Geist', sans-serif; font-size: 19px; font-weight: 600; text-align: left; color: var(--bt-encre);
+  font-family: 'Poppins', sans-serif; font-size: 19px; font-weight: 600; text-align: left; color: var(--bt-encre);
   cursor: pointer;
   transition: transform .1s, box-shadow .1s, opacity .2s;
 }
@@ -582,10 +582,10 @@ button.bt-choix-btn:active:not(:disabled) { transform: translateY(3px); box-shad
 :root[data-theme="dark"] .bt-panneau--hote,
 :root[data-theme="dark"] .bt-panneau--invite,
 :root[data-theme="dark"] .bt-choix--rev .bt-choix-btn.is-juste {
-  --rv-encre: #1B1A23; --rv-encre-rgb: 27,26,35; --rv-doux: #6E675B; --rv-doux-rgb: 110,103,91;
+  --rv-encre: #042A65; --rv-encre-rgb: 27,26,35; --rv-doux: #6E675B; --rv-doux-rgb: 110,103,91;
   --rv-carte: #fff; --rv-carte-rgb: 255,255,255; --rv-carte-haute: #fff; --rv-ligne: #EADBCB; --rv-piste: #F3E6D8;
   --rv-orange-texte: #C25407; --rv-vert-texte: #1F8A52; --rv-brun-texte: #8F3E05;
-  --ch-encre: #1B1A23; --ch-doux: #6E675B; --bt-encre: #1B1A23; --bt-doux: #6E675B; --en-encre: #1B1A23; --en-doux: #6E675B; --hb-encre: #1B1A23; --hb-doux: #6E675B;
-  --hm-encre: #1B1A23; --hm-doux: #6E675B; --inst-encre: #1B1A23; --inst-doux: #6E675B; --lg-encre: #1B1A23; --lg-doux: #6E675B; --prg-encre: #1B1A23; --prg-doux: #6E675B;
-  color: #1B1A23;
+  --ch-encre: #042A65; --ch-doux: #6E675B; --bt-encre: #042A65; --bt-doux: #6E675B; --en-encre: #042A65; --en-doux: #6E675B; --hb-encre: #042A65; --hb-doux: #6E675B;
+  --hm-encre: #042A65; --hm-doux: #6E675B; --inst-encre: #042A65; --inst-doux: #6E675B; --lg-encre: #042A65; --lg-doux: #6E675B; --prg-encre: #042A65; --prg-doux: #6E675B;
+  color: #042A65;
 }

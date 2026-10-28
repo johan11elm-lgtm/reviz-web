@@ -1,7 +1,7 @@
 import { NavLink, Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { EtoileIA } from './BottomNav';
-import { PleinIcon } from './BottomNav';
+import { Mascot } from './Mascot';
 import { LogoReviz } from './skin/Skin';
 import { AVIS_PROFS_URL, isDecouverte } from '../services/decouverteService';
 import './NavHaut.css';
@@ -15,25 +15,26 @@ const HIDDEN_PREFIXES = [
 const LESSON_PATHS = ['/analyse', '/flashcards', '/quiz', '/resume', '/mindmap'];
 
 const ONGLETS = [
-  { to: '/',          label: "Aujourd'hui", nom: 'accueil',   end: true },
-  { to: '/programme', label: 'Programme',   nom: 'programme', also: ['/cours', ...LESSON_PATHS] },
-  { to: '/agenda',    label: 'Agenda',      nom: 'agenda' },
-  { to: '/profil',    label: 'Moi',         nom: 'moi',       also: ['/reglages'] },
+  { to: '/',          label: "Aujourd'hui", end: true },
+  { to: '/programme', label: 'Programme',   also: ['/cours', ...LESSON_PATHS] },
+  { to: '/agenda',    label: 'Agenda' },
+  { to: '/profil',    label: 'Moi',         also: ['/reglages'] },
 ];
 
 /**
- * Menu des grands écrans (≥ 1024 px, hors app native), refait le 28/10 comme la landing :
- * le logo autocollant au bord gauche, la capsule des onglets au centre (libellés visibles),
- * Réviz IA et le compte au bord droit. En mode essai, « Créer mon compte » remplace
- * Réviz IA (le coach demande un compte).
+ * Menu des grands écrans (≥ 1024 px, hors app native), façon app Nomad (29/10) : le logo à
+ * gauche, les onglets en texte dans une capsule blanche au centre (l'onglet actif en pilule
+ * orange), puis à droite Réviz IA, « S'abonner » (sans Réviz+) et l'avatar du profil. En mode
+ * essai, « Créer mon compte » remplace Réviz IA et l'abonnement (le coach demande un compte).
  * Rendue une fois sous AuthProvider ; invisible en dessous de 1024 px (CSS).
  */
 export function NavHaut() {
-  const { currentUser, isGuest } = useAuth();
+  const { currentUser, isGuest, hasRevizPlus } = useAuth();
   const { pathname } = useLocation();
   if (!currentUser) return null;
   // Une partie de Battle (/battle/:code) est un jeu plein écran, comme les Flashcards et le Quiz.
   if (HIDDEN_PREFIXES.some(p => pathname.startsWith(p)) || /^\/battle\/./.test(pathname)) return null;
+  const prenom = String(currentUser.displayName ?? '').trim().split(/\s+/)[0] || 'Moi';
 
   return (
     <nav className="nav-haut" aria-label="Menu principal">
@@ -46,14 +47,12 @@ export function NavHaut() {
             key={o.to}
             to={o.to}
             end={o.end}
-            aria-label={o.label}
             className={({ isActive }) => {
               const actif = isActive || o.also?.some(p => pathname.startsWith(p));
               return `nav-haut-onglet${actif ? ' nav-haut-onglet--actif' : ''}`;
             }}
           >
-            <PleinIcon nom={o.nom} />
-            <span className="nav-haut-libelle">{o.label}</span>
+            {o.label}
           </NavLink>
         ))}
       </div>
@@ -63,10 +62,19 @@ export function NavHaut() {
           : <Link to="/inscription" className="nav-haut-compte">Créer mon compte</Link>)}
         {!isGuest && (
           <NavLink to="/coach" className={({ isActive }) => `nav-haut-ia${isActive ? ' nav-haut-ia--actif' : ''}`} aria-label="Réviz IA" title="Réviz IA">
-            <span className="nav-haut-ia-rond"><EtoileIA id="rv-ia-nav-haut" size={22} /></span>
+            <EtoileIA id="rv-ia-nav-haut" size={20} />
             <span className="nav-haut-ia-libelle">Réviz IA</span>
           </NavLink>
         )}
+        {!isGuest && !hasRevizPlus && (
+          <Link to={{ pathname: '/reglages', hash: '#abonnement' }} className="nav-haut-compte nav-haut-abo">
+            S’abonner <span className="nav-haut-plus">Réviz+</span>
+          </Link>
+        )}
+        <Link to="/profil" className="nav-haut-profil" aria-label={`Mon profil, ${prenom}`}>
+          <span className="nav-haut-avatar" aria-hidden="true"><Mascot pose="hello" size={30} alt="" /></span>
+          <span className="nav-haut-prenom">{prenom}</span>
+        </Link>
       </div>
     </nav>
   );

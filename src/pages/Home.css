@@ -274,7 +274,7 @@
   border-radius: 99px;
   background: var(--hm-btn);
   color: #fff;
-  font: 700 15px 'Geist', system-ui, sans-serif;
+  font: 700 15px 'Poppins', system-ui, sans-serif;
   box-shadow: 0 8px 16px -8px var(--hm-btn), inset 0 -2px 0 rgba(0,0,0,.18);
   transition: transform .12s, background .5s;
 }
@@ -296,7 +296,7 @@
   padding: 9px 12px 9px 9px;
   border-radius: 20px;
   background: var(--rv-carte);
-  box-shadow: 0 4px 14px rgba(45,43,87,.07), 0 1px 3px rgba(0,0,0,.04);
+  box-shadow: 0 4px 14px rgba(4,42,101,.07), 0 1px 3px rgba(0,0,0,.04);
   text-decoration: none;
   transition: transform .15s;
 }
@@ -323,7 +323,7 @@
   border: 0;
   border-radius: 22px;
   background: var(--rv-carte);
-  box-shadow: 0 4px 14px rgba(45,43,87,.07), 0 1px 3px rgba(0,0,0,.04);
+  box-shadow: 0 4px 14px rgba(4,42,101,.07), 0 1px 3px rgba(0,0,0,.04);
   font: inherit;
   color: var(--hm-encre);
   text-align: left;
@@ -354,7 +354,7 @@
   align-items: center;
   justify-content: center;
   background: var(--sk-lavande);
-  color: #2D2B57;
+  color: #042A65;
   transition: transform .2s;
 }
 .home-page .hm-raccourci:hover .hm-raccourci-fleche { transform: translateX(3px); }
@@ -367,7 +367,7 @@
   border-radius: 28px;
   background: var(--rv-lavande-bulle);
   overflow: hidden;
-  color: #1B1A23;
+  color: #042A65;
 }
 .home-page .hm-battle-rond {
   position: absolute;
@@ -390,7 +390,7 @@
   background: #fff;
   font-size: 14px;
   font-weight: 700;
-  color: #2D2B57;
+  color: #042A65;
 }
 
 /* ── Simulateur du brevet (3e) : bloc ciel, l'émote diplômée à gauche ── */
@@ -401,7 +401,7 @@
   padding: 14px 18px 14px 12px;
   border-radius: 28px;
   background: var(--sk-ciel);
-  color: #1B1A23;
+  color: #042A65;
   text-decoration: none;
   transition: transform .15s;
 }
@@ -410,7 +410,7 @@
 .home-page .hm-simu-txt { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
 .home-page .hm-simu-sur { font-size: 12px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: #2C5CC5; }
 .home-page .hm-simu-titre { font-size: 22px; font-weight: 800; letter-spacing: -.02em; }
-.home-page .hm-simu-sous { font-size: 14px; line-height: 1.35; color: rgba(27,26,35,.72); }
+.home-page .hm-simu-sous { font-size: 14px; line-height: 1.35; color: rgba(4,42,101,.72); }
 .home-page .hm-desk .hm-simu { grid-column: 1 / -1; padding: 18px 28px 18px 18px; }
 .home-page .hm-desk .hm-simu:hover { transform: translateY(-2px); }
 
@@ -431,7 +431,7 @@
   background: #F2701E; color: #fff; font-family: var(--font-display); font-size: 16px; font-weight: 900;
   box-shadow: 0 4px 0 #B24A0C;
 }
-.home-page .hm-jeux--faite .hm-jeux-btn { background: #FFF6E8; color: #1B1A23; box-shadow: 0 4px 0 #D8C7A6; }
+.home-page .hm-jeux--faite .hm-jeux-btn { background: #FFF6E8; color: #042A65; box-shadow: 0 4px 0 #D8C7A6; }
 .home-page .hm-jeux:active { transform: scale(.985); }
 /* Ordinateur : à côté de la Battle (colonne large) ; l'image garde son format 3:2, collée à droite,
    et se fond dans l'aplat (masque), au lieu d'être agrandie sur toute la largeur. */
@@ -517,7 +517,7 @@
 .home-page .hm-desk .hm-bulle-parole { position: relative; left: auto; right: auto; bottom: auto; }
 .home-page .hm-desk .hm-points { margin-top: 18px; }
 .home-page .hm-desk .hm-raccourcis { margin-top: 24px; }
-.home-page .hm-desk .hm-raccourci:hover { box-shadow: 0 14px 30px -12px rgba(45,43,87,.25); }
+.home-page .hm-desk .hm-raccourci:hover { box-shadow: 0 14px 30px -12px rgba(4,42,101,.25); }
 
 /* Les points : une par proposition, pour y aller directement */
 .home-page .hm-points { display: flex; align-items: center; gap: 8px; }
@@ -617,10 +617,127 @@
 
 /* ── Sombre : ces pastels gardent leur texte sombre (cf. rv-ilot dans global.css) ── */
 :root[data-theme="dark"] .home-page .hm-battle-rond {
-  --rv-encre: #1B1A23; --rv-encre-rgb: 27,26,35; --rv-doux: #6E675B; --rv-doux-rgb: 110,103,91;
+  --rv-encre: #042A65; --rv-encre-rgb: 27,26,35; --rv-doux: #6E675B; --rv-doux-rgb: 110,103,91;
   --rv-carte: #fff; --rv-carte-rgb: 255,255,255; --rv-carte-haute: #fff; --rv-ligne: #EADBCB; --rv-piste: #F3E6D8;
   --rv-orange-texte: #C25407; --rv-vert-texte: #1F8A52; --rv-brun-texte: #8F3E05;
-  --ch-encre: #1B1A23; --ch-doux: #6E675B; --bt-encre: #1B1A23; --bt-doux: #6E675B; --en-encre: #1B1A23; --en-doux: #6E675B; --hb-encre: #1B1A23; --hb-doux: #6E675B;
-  --hm-encre: #1B1A23; --hm-doux: #6E675B; --inst-encre: #1B1A23; --inst-doux: #6E675B; --lg-encre: #1B1A23; --lg-doux: #6E675B; --prg-encre: #1B1A23; --prg-doux: #6E675B;
-  color: #1B1A23;
+  --ch-encre: #042A65; --ch-doux: #6E675B; --bt-encre: #042A65; --bt-doux: #6E675B; --en-encre: #042A65; --en-doux: #6E675B; --hb-encre: #042A65; --hb-doux: #6E675B;
+  --hm-encre: #042A65; --hm-doux: #6E675B; --inst-encre: #042A65; --inst-doux: #6E675B; --lg-encre: #042A65; --lg-doux: #6E675B; --prg-encre: #042A65; --prg-doux: #6E675B;
+  color: #042A65;
+}
+
+/* ══ Accueil façon app Nomad (29/10, demande de Johan) ═══════════════════════
+ * En-tête (logo, S'abonner, avatar), « Salut ! » et trois chiffres, recherche, raccourcis
+ * ronds, bloc lavande « On fait quoi aujourd'hui ? » aux lignes blanches, le plan, les
+ * matières, « À la une ». Ordinateur : colonne principale + colonne de droite. */
+.home-page .nm-defile { flex: 1; overflow-y: auto; padding: calc(10px + env(safe-area-inset-top, 0px)) 16px 0; scrollbar-width: none; }
+.home-page .nm-defile::-webkit-scrollbar { display: none; }
+.home-page .nm-grille { display: flex; flex-direction: column; }
+.home-page .nm-principal { display: flex; flex-direction: column; gap: 18px; min-width: 0; }
+.home-page .nm-principal .hm-rappels { margin: 0; }
+
+/* En-tête (téléphone) */
+.home-page .nm-tete { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 14px; }
+.home-page .nm-tete-logo img { display: block; width: 44px; height: 44px; border-radius: 50%; border: 3px solid #fff; box-shadow: 0 2px 6px rgba(4,42,101,.15); }
+.home-page .nm-abo {
+  display: inline-flex; align-items: center; gap: 8px; height: 40px; padding: 0 14px;
+  border-radius: 12px; background: var(--rv-encre); color: #fff;
+  font-size: 12px; font-weight: 700; letter-spacing: .03em; text-transform: uppercase; text-decoration: none;
+}
+.home-page .nm-abo span { padding: 2px 6px; border-radius: 5px; background: #fff; color: var(--rv-vif-plein); font-size: 11px; font-weight: 800; text-transform: none; letter-spacing: 0; }
+.home-page .nm-tete-avatar { width: 44px; height: 44px; border-radius: 50%; background: #fff; display: flex; align-items: center; justify-content: center; overflow: hidden; box-shadow: 0 1px 3px rgba(4,42,101,.12); }
+
+/* Salut et chiffres */
+.home-page .nm-salut { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+.home-page .nm-hello { display: flex; align-items: center; gap: 8px; margin: 0; font-size: 28px; font-weight: 800; letter-spacing: -.01em; color: var(--rv-encre); text-align: center; }
+.home-page .nm-soleil { flex: none; }
+.home-page .nm-stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; width: 100%; margin: 0; padding: 0; list-style: none; }
+.home-page .nm-stats li { display: grid; grid-template-columns: auto auto; justify-content: center; align-items: center; column-gap: 6px; text-align: center; }
+.home-page .nm-stats b { font-size: 21px; font-weight: 800; color: var(--rv-encre); }
+.home-page .nm-stats small { grid-column: 1 / -1; font-size: 11.5px; line-height: 1.25; color: var(--rv-doux); }
+.home-page .nm-stat-ico { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: #E8F1FC; color: var(--rv-vif); }
+.home-page .nm-stat-ico svg { width: 18px; height: 18px; }
+.home-page .nm-stat-ico--xp, .home-page .nm-stat-ico--niveau { background: var(--rv-encre); color: #fff; font-size: 11px; font-weight: 800; }
+
+/* Recherche et raccourcis ronds */
+.home-page .nm-recherche {
+  display: flex; align-items: center; gap: 10px; height: 52px; padding: 0 18px;
+  border-radius: 999px; background: #fff; color: var(--rv-encre); font-size: 15px; font-weight: 500; text-decoration: none;
+  box-shadow: 0 1px 3px rgba(4,42,101,.1), 0 1px 2px rgba(4,42,101,.06);
+}
+.home-page .nm-recherche:focus-visible { outline: 3px solid var(--rv-encre); outline-offset: 2px; }
+.home-page .nm-ronds { display: flex; justify-content: center; gap: 20px; }
+.home-page .nm-rond { display: flex; flex-direction: column; align-items: center; gap: 8px; text-decoration: none; color: var(--rv-encre); }
+.home-page .nm-rond-icone { width: 76px; height: 76px; border-radius: 50%; background: #fff; display: flex; align-items: center; justify-content: center; box-shadow: 0 1px 3px rgba(4,42,101,.1), 0 4px 14px rgba(4,42,101,.06); transition: transform .15s; }
+.home-page .nm-rond:active .nm-rond-icone { transform: scale(.95); }
+.home-page .nm-rond-label { font-size: 15px; font-weight: 700; }
+
+/* Bloc lavande « On fait quoi aujourd'hui ? » */
+.home-page .nm-bloc { position: relative; padding: 20px 14px 14px; border-radius: 24px; background: #B9A6FB; color: var(--rv-encre); }
+.home-page .nm-bloc-tete { position: relative; z-index: 1; max-width: 62%; }
+.home-page .nm-bloc-titre { margin: 0; font-size: 24px; font-weight: 800; line-height: 1.15; color: #042A65; }
+.home-page .nm-bloc-sous { margin: 6px 0 0; font-size: 16px; color: #042A65; }
+.home-page .nm-bloc-reviz { position: absolute; top: -6px; right: 2px; z-index: 1; pointer-events: auto; }
+.home-page .nm-lignes { position: relative; z-index: 2; display: flex; flex-direction: column; gap: 10px; margin-top: 18px; }
+.home-page .nm-ligne {
+  display: flex; align-items: center; gap: 14px; width: 100%; min-height: 66px; padding: 9px 12px 9px 9px;
+  border: 0; border-radius: 14px; background: #fff; color: #042A65; font: inherit; text-align: left; cursor: pointer;
+  transition: transform .15s;
+}
+.home-page .nm-ligne:active { transform: scale(.985); }
+.home-page .nm-ligne:focus-visible { outline: 3px solid #042A65; outline-offset: 2px; }
+.home-page .nm-ligne-icone { width: 50px; height: 50px; flex: none; border-radius: 12px; background: #F2EBFF; display: flex; align-items: center; justify-content: center; }
+.home-page .nm-ligne-txt { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.home-page .nm-ligne-titre { font-size: 16px; font-weight: 600; }
+.home-page .nm-ligne-sous { font-size: 12.5px; color: var(--rv-doux); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.home-page .nm-ligne-fleche { width: 28px; height: 28px; flex: none; border-radius: 8px; background: #F2EBFF; color: #042A65; display: flex; align-items: center; justify-content: center; }
+
+/* Cartes blanches (plan, matières) et « À la une » */
+.home-page .nm-carte { padding: 16px; border-radius: 20px; background: #fff; box-shadow: 0 1px 3px rgba(4,42,101,.08), 0 1px 2px rgba(4,42,101,.05); }
+.home-page .nm-carte .hm-titre { font-size: 20px; letter-spacing: -.01em; }
+.home-page .nm-carte .hm-matiere { background: var(--rv-fond); box-shadow: none; }
+.home-page .nm-titre-barre { margin: 0 0 12px; padding-left: 12px; border-left: 4px solid var(--rv-vif); font-size: 21px; font-weight: 800; line-height: 1.2; color: var(--rv-encre); }
+.home-page .nm-une { padding-bottom: 8px; }
+.home-page .nm-une-cartes { display: flex; flex-direction: column; gap: 12px; }
+
+/* ── Ordinateur : colonne principale + colonne de droite (statistiques, contrôles, indispensables) ── */
+.home-page.nm-page--large .nm-defile { padding: 8px 32px 64px; }
+.home-page.nm-page--large .nm-grille { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 28px; align-items: start; max-width: 1240px; margin: 0 auto; }
+.home-page.nm-page--large .nm-principal { gap: 22px; }
+.home-page.nm-page--large .nm-hello { font-size: 34px; }
+.home-page.nm-page--large .nm-ronds { gap: 36px; }
+.home-page.nm-page--large .nm-rond-icone { width: 86px; height: 86px; }
+.home-page.nm-page--large .nm-bloc { padding: 26px 22px 20px; border-radius: 26px; }
+.home-page.nm-page--large .nm-bloc-titre { font-size: 30px; }
+.home-page.nm-page--large .nm-bloc-reviz { top: -44px; right: 20px; }
+.home-page.nm-page--large .nm-lignes { margin-top: 26px; }
+.home-page.nm-page--large .nm-ligne:hover { box-shadow: 0 8px 20px -10px rgba(4,42,101,.35); }
+.home-page.nm-page--large .nm-une-cartes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.home-page.nm-page--large .nm-une-cartes > .hm-jeux { grid-column: 1 / -1; }
+.home-page.nm-page--large .nm-une-cartes > .hm-simu { grid-column: auto; }
+.home-page .nm-rail {
+  position: sticky; top: 0; display: flex; flex-direction: column; gap: 16px;
+  padding: 16px; border-radius: 22px; background: #E8F1FC;
+}
+.home-page .nm-rail-carte { padding: 14px; border-radius: 16px; background: #fff; box-shadow: 0 1px 3px rgba(4,42,101,.08); }
+.home-page .nm-rail-section { display: flex; flex-direction: column; gap: 8px; }
+.home-page .nm-rail-titre { margin: 0; font-size: 16px; font-weight: 800; color: var(--rv-encre); }
+.home-page .nm-rail-titre::before { content: '↓ '; }
+.home-page .nm-rail-ctrl { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 8px 12px; align-items: center; }
+.home-page .nm-rail-ctrl-ico { width: 52px; height: 52px; border-radius: 12px; background: #F2EBFF; display: flex; align-items: center; justify-content: center; }
+.home-page .nm-rail-ctrl-txt { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.home-page .nm-rail-ctrl-txt b { font-size: 15px; font-weight: 700; color: var(--rv-encre); }
+.home-page .nm-rail-ctrl-txt span { font-size: 13px; color: var(--rv-doux); }
+.home-page .nm-rail-btn {
+  grid-column: 1 / -1; display: flex; align-items: center; justify-content: center; height: 40px;
+  border-radius: 10px; border: 1.5px solid var(--rv-encre); color: var(--rv-encre);
+  font-size: 14px; font-weight: 700; text-decoration: none;
+}
+.home-page .nm-rail-btn:hover { background: var(--rv-encre); color: #fff; }
+.home-page .nm-indis { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; }
+.home-page .nm-indis-item { display: flex; flex-direction: column; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; color: var(--rv-encre); text-decoration: none; text-align: center; }
+.home-page .nm-indis-rond { width: 52px; height: 52px; border-radius: 50%; background: var(--rv-fond); display: flex; align-items: center; justify-content: center; transition: transform .15s; }
+.home-page .nm-indis-item:hover .nm-indis-rond { transform: translateY(-2px); }
+
+@media (prefers-reduced-motion: reduce) {
+  .home-page .nm-ligne, .home-page .nm-rond-icone, .home-page .nm-indis-rond { transition: none; }
 }

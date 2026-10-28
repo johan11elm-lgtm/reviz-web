@@ -27,7 +27,7 @@
   border-radius: 999px;
   background: var(--rv-carte);
   box-shadow: 0 4px 12px var(--ch-ombre);
-  font: 700 13px 'Geist', system-ui, sans-serif;
+  font: 700 13px 'Poppins', system-ui, sans-serif;
   color: var(--ch-encre);
   cursor: pointer;
   transition: background .2s, color .2s;
@@ -87,7 +87,7 @@
   background: var(--cm-pastel);
   box-shadow: 0 6px 0 var(--cm-fonce), 0 14px 24px rgba(var(--rv-ombre-2),.12);
   font-family: inherit;
-  color: #1B1A23;
+  color: #042A65;
   text-align: center;
   cursor: pointer;
   transition: transform .2s, border-color .2s, box-shadow .2s;
@@ -185,7 +185,7 @@
   gap: 10px;
   border: 0;
   border-radius: 999px;
-  font: 700 16px 'Geist', system-ui, sans-serif;
+  font: 700 16px 'Poppins', system-ui, sans-serif;
   cursor: pointer;
   transition: transform .12s, box-shadow .12s;
 }
@@ -193,7 +193,7 @@
 .cm-btn--orange:active { transform: translateY(4px); box-shadow: 0 1px 0 var(--rv-orange-tranche); }
 .cm-btn--blanc { height: 52px; background: var(--rv-carte); color: var(--ch-encre); font-size: 15px; box-shadow: 0 5px 0 var(--ch-bulle); }
 .cm-btn--blanc:active { transform: translateY(4px); box-shadow: 0 1px 0 var(--ch-bulle); }
-.cm-lien { align-self: center; padding: 6px 14px; border: 0; background: none; font: 700 14px 'Geist', system-ui, sans-serif; color: var(--ch-encre); opacity: .7; cursor: pointer; }
+.cm-lien { align-self: center; padding: 6px 14px; border: 0; background: none; font: 700 14px 'Poppins', system-ui, sans-serif; color: var(--ch-encre); opacity: .7; cursor: pointer; }
 
 /* Feuille du bas (téléphone) */
 .cm-voile { position: fixed; inset: 0; z-index: 290; background: rgba(var(--rv-voile-rgb),.28); opacity: 0; pointer-events: none; transition: opacity .25s; }
@@ -231,7 +231,7 @@
   border: 0;
   border-radius: 18px;
   background: var(--rv-fond);
-  font: 700 14px/1.15 'Geist', system-ui, sans-serif;
+  font: 700 14px/1.15 'Poppins', system-ui, sans-serif;
   color: var(--ch-encre);
   text-align: left;
   cursor: pointer;
@@ -368,10 +368,10 @@
 
 /* ── Sombre : ces pastels gardent leur texte sombre (cf. rv-ilot dans global.css) ── */
 :root[data-theme="dark"] .cm-detail-tete {
-  --rv-encre: #1B1A23; --rv-encre-rgb: 27,26,35; --rv-doux: #6E675B; --rv-doux-rgb: 110,103,91;
+  --rv-encre: #042A65; --rv-encre-rgb: 27,26,35; --rv-doux: #6E675B; --rv-doux-rgb: 110,103,91;
   --rv-carte: #fff; --rv-carte-rgb: 255,255,255; --rv-carte-haute: #fff; --rv-ligne: #EADBCB; --rv-piste: #F3E6D8;
   --rv-orange-texte: #C25407; --rv-vert-texte: #1F8A52; --rv-brun-texte: #8F3E05;
-  --ch-encre: #1B1A23; --ch-doux: #6E675B; --bt-encre: #1B1A23; --bt-doux: #6E675B; --en-encre: #1B1A23; --en-doux: #6E675B; --hb-encre: #1B1A23; --hb-doux: #6E675B;
-  --hm-encre: #1B1A23; --hm-doux: #6E675B; --inst-encre: #1B1A23; --inst-doux: #6E675B; --lg-encre: #1B1A23; --lg-doux: #6E675B; --prg-encre: #1B1A23; --prg-doux: #6E675B;
-  color: #1B1A23;
+  --ch-encre: #042A65; --ch-doux: #6E675B; --bt-encre: #042A65; --bt-doux: #6E675B; --en-encre: #042A65; --en-doux: #6E675B; --hb-encre: #042A65; --hb-doux: #6E675B;
+  --hm-encre: #042A65; --hm-doux: #6E675B; --inst-encre: #042A65; --inst-doux: #6E675B; --lg-encre: #042A65; --lg-doux: #6E675B; --prg-encre: #042A65; --prg-doux: #6E675B;
+  color: #042A65;
 }

@@ -33,7 +33,7 @@
 .rg-titre { margin: 2px 0 0; font-family: var(--font-display); font-size: 40px; font-weight: 800; line-height: 1; letter-spacing: -.035em; }
 .rg-bulle { justify-content: flex-start; margin-top: 12px; }
 .rg-bulle .rv-bulle-txt { max-width: 215px; align-items: flex-start; padding: 10px 16px 12px; font-size: 17px; text-align: left; }
-.rg-bulle .rv-bulle-ligne + .rv-bulle-ligne { font-size: 13px; font-family: 'Geist', sans-serif; font-weight: 600; color: var(--ch-doux); }
+.rg-bulle .rv-bulle-ligne + .rv-bulle-ligne { font-size: 13px; font-family: 'Poppins', sans-serif; font-weight: 600; color: var(--ch-doux); }
 .rg-hero-corps > :last-child { flex: none; margin: 0 -14px -30px 0; }
 
 /* ── Cartes et lignes ── */
@@ -54,7 +54,7 @@
 .rg-ligne--fixe { cursor: default; }
 .rg-ligne + .rg-ligne { border-top: 1.5px dashed var(--rg-bord); }
 .rg-ligne > svg { flex: none; color: var(--ch-doux); }
-.rg-rond { flex: none; display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; color: #1B1A23; }
+.rg-rond { flex: none; display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; color: #042A65; }
 .rg-rond svg { width: 18px; height: 18px; }
 .rg-rond--lavande { background: var(--rv-lavande); }
 .rg-rond--peche { background: var(--rv-peche-pale); }
@@ -169,7 +169,7 @@
   display: inline-flex; align-items: center; justify-content: center; gap: 8px;
   width: 100%; min-height: 52px; box-sizing: border-box; padding: 0 20px;
   border: 0; border-radius: 999px; background: var(--rg-orange); box-shadow: 0 5px 0 var(--rg-tranche);
-  font-family: 'Geist', sans-serif; font-size: 16px; font-weight: 700; color: #fff; text-decoration: none;
+  font-family: 'Poppins', sans-serif; font-size: 16px; font-weight: 700; color: #fff; text-decoration: none;
   cursor: pointer; transition: transform .1s, box-shadow .1s;
 }
 .rg-btn:active:not(:disabled) { transform: translateY(4px); box-shadow: 0 1px 0 var(--rg-tranche); }
@@ -201,7 +201,7 @@
 .rg-message--reussite { background: var(--rg-vert-fond); }
 .rg-message--reussite .rg-message-rond { background: var(--rg-vert); }
 .rg-message--reussite b { color: var(--rg-vert-texte); }
-.rg-message--erreur { background: var(--rv-rose); color: #1B1A23; }
+.rg-message--erreur { background: var(--rv-rose); color: #042A65; }
 .rg-message--erreur .rg-message-rond { background: var(--rv-rose-tranche); }
 
 /* ── Feuilles ── */
@@ -225,7 +225,7 @@
 .rg-input {
   width: 100%; height: 52px; box-sizing: border-box; padding: 0 16px;
   border: 2px solid var(--rg-bord); border-radius: 16px; background: var(--rv-carte);
-  font-family: 'Geist', sans-serif; font-size: 16px; font-weight: 500; color: var(--ch-encre); outline: none;
+  font-family: 'Poppins', sans-serif; font-size: 16px; font-weight: 500; color: var(--ch-encre); outline: none;
 }
 .rg-input:focus { border-color: var(--rg-orange); }
 .rg-classes { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 2px; }
@@ -268,22 +268,22 @@
 :root[data-theme="dark"] .rg-rond--menthe,
 :root[data-theme="dark"] .rg-verrou,
 :root[data-theme="dark"] .rg-message--erreur .rg-message-rond {
-  --rv-encre: #1B1A23; --rv-encre-rgb: 27,26,35; --rv-doux: #6E675B; --rv-doux-rgb: 110,103,91;
+  --rv-encre: #042A65; --rv-encre-rgb: 27,26,35; --rv-doux: #6E675B; --rv-doux-rgb: 110,103,91;
   --rv-carte: #fff; --rv-carte-rgb: 255,255,255; --rv-carte-haute: #fff; --rv-ligne: #EADBCB; --rv-piste: #F3E6D8;
   --rv-orange-texte: #C25407; --rv-vert-texte: #1F8A52; --rv-brun-texte: #8F3E05;
-  --ch-encre: #1B1A23; --ch-doux: #6E675B; --bt-encre: #1B1A23; --bt-doux: #6E675B; --en-encre: #1B1A23; --en-doux: #6E675B; --hb-encre: #1B1A23; --hb-doux: #6E675B;
-  --hm-encre: #1B1A23; --hm-doux: #6E675B; --inst-encre: #1B1A23; --inst-doux: #6E675B; --lg-encre: #1B1A23; --lg-doux: #6E675B; --prg-encre: #1B1A23; --prg-doux: #6E675B;
-  color: #1B1A23;
+  --ch-encre: #042A65; --ch-doux: #6E675B; --bt-encre: #042A65; --bt-doux: #6E675B; --en-encre: #042A65; --en-doux: #6E675B; --hb-encre: #042A65; --hb-doux: #6E675B;
+  --hm-encre: #042A65; --hm-doux: #6E675B; --inst-encre: #042A65; --inst-doux: #6E675B; --lg-encre: #042A65; --lg-doux: #6E675B; --prg-encre: #042A65; --prg-doux: #6E675B;
+  color: #042A65;
 }
 
 /* ── Sombre : ces pastels gardent leur texte sombre (cf. rv-ilot dans global.css) ── */
 :root[data-theme="dark"] .rg-message--reussite {
-  --rv-encre: #1B1A23; --rv-encre-rgb: 27,26,35; --rv-doux: #6E675B; --rv-doux-rgb: 110,103,91;
+  --rv-encre: #042A65; --rv-encre-rgb: 27,26,35; --rv-doux: #6E675B; --rv-doux-rgb: 110,103,91;
   --rv-carte: #fff; --rv-carte-rgb: 255,255,255; --rv-carte-haute: #fff; --rv-ligne: #EADBCB; --rv-piste: #F3E6D8;
   --rv-orange-texte: #C25407; --rv-vert-texte: #1F8A52; --rv-brun-texte: #8F3E05;
-  --ch-encre: #1B1A23; --ch-doux: #6E675B; --bt-encre: #1B1A23; --bt-doux: #6E675B; --en-encre: #1B1A23; --en-doux: #6E675B; --hb-encre: #1B1A23; --hb-doux: #6E675B;
-  --hm-encre: #1B1A23; --hm-doux: #6E675B; --inst-encre: #1B1A23; --inst-doux: #6E675B; --lg-encre: #1B1A23; --lg-doux: #6E675B; --prg-encre: #1B1A23; --prg-doux: #6E675B;
-  color: #1B1A23;
+  --ch-encre: #042A65; --ch-doux: #6E675B; --bt-encre: #042A65; --bt-doux: #6E675B; --en-encre: #042A65; --en-doux: #6E675B; --hb-encre: #042A65; --hb-doux: #6E675B;
+  --hm-encre: #042A65; --hm-doux: #6E675B; --inst-encre: #042A65; --inst-doux: #6E675B; --lg-encre: #042A65; --lg-doux: #6E675B; --prg-encre: #042A65; --prg-doux: #6E675B;
+  color: #042A65;
 }
 
 /* Espace parent : le bouton de coupure des liens, sous la ligne */

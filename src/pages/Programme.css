@@ -77,7 +77,7 @@
   border-radius: 999px;
   background: var(--rv-carte);
   box-shadow: 0 4px 12px rgba(150,70,20,.12);
-  font: 700 13px 'Geist', system-ui, sans-serif;
+  font: 700 13px 'Poppins', system-ui, sans-serif;
   color: var(--prg-encre);
   cursor: pointer;
   white-space: nowrap;
@@ -102,7 +102,7 @@
   border-radius: 12px;
   background: none;
   text-align: left;
-  font: 600 14px 'Geist', system-ui, sans-serif;
+  font: 600 14px 'Poppins', system-ui, sans-serif;
   color: var(--prg-encre);
   cursor: pointer;
 }
@@ -266,7 +266,7 @@
   border-radius: 999px;
   background: var(--rv-orange);
   color: #fff;
-  font: 700 15px 'Geist', system-ui, sans-serif;
+  font: 700 15px 'Poppins', system-ui, sans-serif;
   cursor: pointer;
   transition: background .15s, transform .12s;
 }
@@ -282,8 +282,8 @@
   border: 0;
   border-radius: 999px;
   background: var(--rv-peche-pale);
-  color: #1B1A23;
-  font: 700 14px 'Geist', system-ui, sans-serif;
+  color: #042A65;
+  font: 700 14px 'Poppins', system-ui, sans-serif;
   cursor: pointer;
 }
 
@@ -390,10 +390,10 @@
 :root[data-theme="dark"] .prg-page .prg-case-rond,
 :root[data-theme="dark"] .prg-page .prg-trophee-rond,
 :root[data-theme="dark"] .prg-page--large .prg-matiere--on .prg-anneau-rond {
-  --rv-encre: #1B1A23; --rv-encre-rgb: 27,26,35; --rv-doux: #6E675B; --rv-doux-rgb: 110,103,91;
+  --rv-encre: #042A65; --rv-encre-rgb: 27,26,35; --rv-doux: #6E675B; --rv-doux-rgb: 110,103,91;
   --rv-carte: #fff; --rv-carte-rgb: 255,255,255; --rv-carte-haute: #fff; --rv-ligne: #EADBCB; --rv-piste: #F3E6D8;
   --rv-orange-texte: #C25407; --rv-vert-texte: #1F8A52; --rv-brun-texte: #8F3E05;
-  --ch-encre: #1B1A23; --ch-doux: #6E675B; --bt-encre: #1B1A23; --bt-doux: #6E675B; --en-encre: #1B1A23; --en-doux: #6E675B; --hb-encre: #1B1A23; --hb-doux: #6E675B;
-  --hm-encre: #1B1A23; --hm-doux: #6E675B; --inst-encre: #1B1A23; --inst-doux: #6E675B; --lg-encre: #1B1A23; --lg-doux: #6E675B; --prg-encre: #1B1A23; --prg-doux: #6E675B;
-  color: #1B1A23;
+  --ch-encre: #042A65; --ch-doux: #6E675B; --bt-encre: #042A65; --bt-doux: #6E675B; --en-encre: #042A65; --en-doux: #6E675B; --hb-encre: #042A65; --hb-doux: #6E675B;
+  --hm-encre: #042A65; --hm-doux: #6E675B; --inst-encre: #042A65; --inst-doux: #6E675B; --lg-encre: #042A65; --lg-doux: #6E675B; --prg-encre: #042A65; --prg-doux: #6E675B;
+  color: #042A65;
 }

@@ -216,7 +216,7 @@
   color: var(--text-cta);
   border-bottom-right-radius: 6px;
   white-space: pre-wrap;
-  box-shadow: 0 8px 20px rgba(45, 43, 87, 0.18);
+  box-shadow: 0 8px 20px rgba(4,42,101, 0.18);
 }
 
 /* Indicateur « le coach réfléchit » */
@@ -321,12 +321,12 @@
   background: var(--bg-card);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-pill);
-  box-shadow: 0 10px 28px rgba(45, 43, 87, 0.10), 0 1px 3px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 10px 28px rgba(4,42,101, 0.10), 0 1px 3px rgba(0, 0, 0, 0.04);
   transition: box-shadow 0.15s ease, border-color 0.15s ease;
 }
 .coach-input-pill:focus-within {
   border-color: var(--accent-violet);
-  box-shadow: 0 10px 28px rgba(45, 43, 87, 0.14), 0 0 0 3px var(--accent-violet-soft);
+  box-shadow: 0 10px 28px rgba(4,42,101, 0.14), 0 0 0 3px var(--accent-violet-soft);
 }
 
 .coach-input {

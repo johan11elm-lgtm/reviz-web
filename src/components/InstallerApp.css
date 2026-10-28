@@ -49,7 +49,7 @@
   background: var(--inst-creme);
   box-shadow: 0 -10px 40px rgba(var(--rv-encre-rgb), .18);
   color: var(--inst-encre);
-  font-family: 'Geist', system-ui, sans-serif;
+  font-family: 'Poppins', system-ui, sans-serif;
   text-align: left;
   scrollbar-width: none;
   transition: transform .25s cubic-bezier(.3, 1.2, .5, 1);
@@ -112,7 +112,7 @@
   border-radius: 999px;
   background: var(--inst-orange);
   box-shadow: 0 5px 0 var(--inst-tranche);
-  font-family: 'Geist', system-ui, sans-serif;
+  font-family: 'Poppins', system-ui, sans-serif;
   font-size: 17px;
   font-weight: 700;
   color: #fff;
@@ -132,7 +132,7 @@
   gap: 18px;
   width: 100%;
   color: var(--inst-encre);
-  font-family: 'Geist', system-ui, sans-serif;
+  font-family: 'Poppins', system-ui, sans-serif;
   text-align: left;
 }
 
@@ -216,7 +216,7 @@
   font-family: var(--font-display);
   font-size: 16px;
   font-weight: 800;
-  color: #1B1A23;
+  color: #042A65;
 }
 .inst-etape-texte { display: flex; flex-direction: column; gap: 3px; min-width: 0; padding-top: 7px; }
 .inst-etape-titre { font-size: 15.5px; font-weight: 600; line-height: 1.4; text-wrap: pretty; }
@@ -354,10 +354,10 @@
 :root[data-theme="dark"] .inst-etat--menthe,
 :root[data-theme="dark"] .inst-etat--peche,
 :root[data-theme="dark"] html:not(.native) .inst-tete-reviz {
-  --rv-encre: #1B1A23; --rv-encre-rgb: 27,26,35; --rv-doux: #6E675B; --rv-doux-rgb: 110,103,91;
+  --rv-encre: #042A65; --rv-encre-rgb: 27,26,35; --rv-doux: #6E675B; --rv-doux-rgb: 110,103,91;
   --rv-carte: #fff; --rv-carte-rgb: 255,255,255; --rv-carte-haute: #fff; --rv-ligne: #EADBCB; --rv-piste: #F3E6D8;
   --rv-orange-texte: #C25407; --rv-vert-texte: #1F8A52; --rv-brun-texte: #8F3E05;
-  --ch-encre: #1B1A23; --ch-doux: #6E675B; --bt-encre: #1B1A23; --bt-doux: #6E675B; --en-encre: #1B1A23; --en-doux: #6E675B; --hb-encre: #1B1A23; --hb-doux: #6E675B;
-  --hm-encre: #1B1A23; --hm-doux: #6E675B; --inst-encre: #1B1A23; --inst-doux: #6E675B; --lg-encre: #1B1A23; --lg-doux: #6E675B; --prg-encre: #1B1A23; --prg-doux: #6E675B;
-  color: #1B1A23;
+  --ch-encre: #042A65; --ch-doux: #6E675B; --bt-encre: #042A65; --bt-doux: #6E675B; --en-encre: #042A65; --en-doux: #6E675B; --hb-encre: #042A65; --hb-doux: #6E675B;
+  --hm-encre: #042A65; --hm-doux: #6E675B; --inst-encre: #042A65; --inst-doux: #6E675B; --lg-encre: #042A65; --lg-doux: #6E675B; --prg-encre: #042A65; --prg-doux: #6E675B;
+  color: #042A65;
 }

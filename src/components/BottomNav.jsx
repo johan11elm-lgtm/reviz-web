@@ -138,15 +138,13 @@ export function BottomNav() {
           <span className="nav-label">{tab.label}</span>
         </NavLink>
       ))}
-      {/* Le coach passe par une API authentifiée : pas de bouton en mode essai. */}
+      {/* Le coach passe par une API authentifiée : pas d'onglet en mode essai. */}
       {!isGuest && (
-        <>
-          <span className="nav-sep" aria-hidden="true" />
-          <NavLink to="/coach" className={({ isActive }) => `nav-ia${isActive ? ' active' : ''}`} aria-label="Réviz IA">
-            <span className="nav-ia-ring"><span className="nav-ia-core"><EtoileIA id="rv-ia-nav" /></span></span>
-            {hasRevizPlus && <span className="rp-coach-tag" aria-hidden="true">+</span>}
-          </NavLink>
-        </>
+        <NavLink to="/coach" className={({ isActive }) => `nav-item nav-item--ia${isActive ? ' active' : ''}`} aria-label="Réviz IA">
+          <span className="nav-icon"><EtoileIA id="rv-ia-nav" size={22} /></span>
+          <span className="nav-label">Réviz IA</span>
+          {hasRevizPlus && <span className="rp-coach-tag" aria-hidden="true">+</span>}
+        </NavLink>
       )}
     </nav>
   )

@@ -8,8 +8,8 @@
 .sb-page .sb-entete { display: flex; align-items: center; gap: 12px; padding: 22px 18px 22px 22px; }
 .sb-page .sb-entete-txt { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 8px; }
 .sb-page .sb-surtitre { font-size: 12px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: #5B4FC7; }
-.sb-page .sb-chapo { margin: 0; font-size: 15px; line-height: 1.45; color: rgba(27,26,35,.75); }
-.sb-page .sb-mascotte { flex: none; align-self: flex-end; margin: -6px -8px -22px 0; filter: drop-shadow(0 14px 18px rgba(45,43,87,.2)); }
+.sb-page .sb-chapo { margin: 0; font-size: 15px; line-height: 1.45; color: rgba(4,42,101,.75); }
+.sb-page .sb-mascotte { flex: none; align-self: flex-end; margin: -6px -8px -22px 0; filter: drop-shadow(0 14px 18px rgba(4,42,101,.2)); }
 
 .sb-page .sb-grille { display: flex; flex-direction: column; gap: 14px; margin-top: 14px; }
 .sb-page .sb-saisies { display: flex; flex-direction: column; gap: 14px; }
@@ -18,7 +18,7 @@
   padding: 18px 16px;
   border-radius: 28px;
   background: var(--rv-carte);
-  box-shadow: 0 4px 14px rgba(45,43,87,.07), 0 1px 3px rgba(0,0,0,.04);
+  box-shadow: 0 4px 14px rgba(4,42,101,.07), 0 1px 3px rgba(0,0,0,.04);
 }
 .sb-page .sb-carte-tete { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 12px; }
 .sb-page .sb-carte h2 { margin: 0; font-size: 20px; font-weight: 800; letter-spacing: -.02em; color: var(--rv-encre); }
@@ -41,10 +41,10 @@
   border-radius: 999px;
   background: none;
   color: var(--rv-doux);
-  font: 700 13px 'Geist', system-ui, sans-serif;
+  font: 700 13px 'Poppins', system-ui, sans-serif;
   cursor: pointer;
 }
-.sb-page .sb-onglets button.is-actif { background: #2D2B57; color: #fff; }
+.sb-page .sb-onglets button.is-actif { background: #042A65; color: #fff; }
 .sb-page .sb-onglets button:focus-visible { outline: 3px solid var(--rv-encre); outline-offset: 2px; }
 .sb-page .sb-aide { margin: 0 0 10px; font-size: 14px; color: var(--rv-doux); }
 
@@ -75,14 +75,14 @@
   font-weight: 600;
   color: var(--rv-doux);
 }
-.sb-page .sb-champ-saisie:focus-within { box-shadow: inset 0 0 0 2px #2D2B57; }
+.sb-page .sb-champ-saisie:focus-within { box-shadow: inset 0 0 0 2px #042A65; }
 .sb-page .sb-champ-saisie--faux { box-shadow: inset 0 0 0 2px #D32F4D; }
 .sb-page .sb-champ-saisie input {
   width: 54px;
   height: 100%;
   border: 0;
   background: none;
-  font: 800 18px 'Geist', system-ui, sans-serif;
+  font: 800 18px 'Poppins', system-ui, sans-serif;
   color: var(--rv-encre);
   text-align: right;
   outline: none;

@@ -38,7 +38,7 @@ afterEach(() => {
 })
 
 describe('<BottomNav /> — onglets', () => {
-  it('quatre onglets, puis le bouton Réviz IA à droite', () => {
+  it('quatre onglets, puis l’onglet Réviz IA', () => {
     setup()
     const labels = screen.getAllByRole('link').map(l => l.getAttribute('aria-label'))
     expect(labels).toEqual(["Aujourd'hui", 'Programme', 'Agenda', 'Moi', 'Réviz IA'])

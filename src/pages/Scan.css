@@ -32,8 +32,8 @@ button.sc-carte { cursor: pointer; transition: transform .12s; }
 button.sc-carte:active { transform: scale(.98); }
 .sc-photo-carte { width: calc(100% - 40px); display: flex; align-items: center; gap: 14px; margin: -54px 20px 0; padding: 16px; }
 .sc-mini-rond { flex: none; width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: var(--rv-peche-pale); color: var(--rv-marque); }
-.sc-mini-rond--lavande { width: 46px; height: 46px; background: var(--rv-lavande); color: #1B1A23; box-shadow: 0 4px 0 var(--rv-lavande-bulle); }
-.sc-mini-rond--menthe { width: 46px; height: 46px; background: var(--rv-menthe); color: #1B1A23; box-shadow: 0 4px 0 var(--rv-menthe-tranche); }
+.sc-mini-rond--lavande { width: 46px; height: 46px; background: var(--rv-lavande); color: #042A65; box-shadow: 0 4px 0 var(--rv-lavande-bulle); }
+.sc-mini-rond--menthe { width: 46px; height: 46px; background: var(--rv-menthe); color: #042A65; box-shadow: 0 4px 0 var(--rv-menthe-tranche); }
 .sc-carte-txt2 { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
 .sc-carte-txt2 b { font-family: var(--font-display); font-size: 20px; font-weight: 800; letter-spacing: -.02em; }
 .sc-carte-txt2 span { font-size: 14px; font-weight: 500; color: var(--ch-doux); }
@@ -56,7 +56,7 @@ button.sc-carte:active { transform: scale(.98); }
 .sc-quota-plus-txt { display: flex; flex-direction: column; gap: 2px; }
 .sc-quota-plus-txt > span { font-size: 13px; font-weight: 500; color: var(--ch-doux); }
 .sc-sur { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--ch-doux); }
-.sc-lien { display: inline-flex; align-items: center; gap: 4px; align-self: flex-start; padding: 0; border: 0; background: none; font: 700 13px 'Geist', system-ui, sans-serif; color: var(--rv-orange-texte); cursor: pointer; }
+.sc-lien { display: inline-flex; align-items: center; gap: 4px; align-self: flex-start; padding: 0; border: 0; background: none; font: 700 13px 'Poppins', system-ui, sans-serif; color: var(--rv-orange-texte); cursor: pointer; }
 .sc-lien--centre { align-self: center; margin-top: 4px; font-size: 15px; }
 
 /* Boutons à tranche */
@@ -73,7 +73,7 @@ button.sc-carte:active { transform: scale(.98); }
   border-radius: 999px;
   background: var(--rv-orange);
   box-shadow: 0 5px 0 var(--rv-orange-tranche);
-  font: 700 16px 'Geist', system-ui, sans-serif;
+  font: 700 16px 'Poppins', system-ui, sans-serif;
   color: #fff;
   cursor: pointer;
   transition: transform .12s, box-shadow .12s;
@@ -154,7 +154,7 @@ button.sc-carte:active { transform: scale(.98); }
 /* Texte collé */
 .sc-texte { display: flex; flex-direction: column; border: 2px solid var(--rv-ligne); border-radius: 26px; background: var(--rv-carte); transition: border-color .15s; }
 .sc-texte.is-rempli, .sc-texte:focus-within { border-color: var(--rv-orange); }
-.sc-texte textarea { min-height: 260px; padding: 18px 20px 10px; border: 0; outline: 0; resize: vertical; background: transparent; font: 500 16px/1.55 'Geist', system-ui, sans-serif; color: var(--ch-encre); }
+.sc-texte textarea { min-height: 260px; padding: 18px 20px 10px; border: 0; outline: 0; resize: vertical; background: transparent; font: 500 16px/1.55 'Poppins', system-ui, sans-serif; color: var(--ch-encre); }
 .sc-texte textarea::placeholder { color: var(--ch-doux); }
 .sc-texte-pied { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin: 0 20px; padding: 12px 0 14px; border-top: 1.5px dashed var(--rv-ligne); font-size: 13px; font-weight: 600; color: var(--ch-doux); }
 .sc-pastille { display: inline-flex; align-items: center; gap: 6px; height: 28px; padding: 0 10px; border-radius: 999px; background: var(--rv-vert-pale); font-size: 12px; font-weight: 700; color: #1F8A52; }
@@ -194,7 +194,7 @@ button.sc-carte:active { transform: scale(.98); }
 .sc-depot.is-survol { border-color: var(--rv-orange); background: var(--rv-peche-pale); }
 .sc-depot b { max-width: 320px; font-family: var(--font-display); font-size: 26px; font-weight: 800; line-height: 1.15; letter-spacing: -.02em; }
 .sc-depot-rond { width: 84px; height: 84px; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: var(--rv-peche-pale); box-shadow: 0 5px 0 var(--rv-peche-bulle); color: var(--rv-marque); }
-.sc-camera { display: flex; align-items: center; gap: 8px; margin: 14px 8px 2px; padding: 0; border: 0; background: none; font: 500 14px 'Geist', system-ui, sans-serif; color: var(--ch-doux); text-align: left; cursor: pointer; }
+.sc-camera { display: flex; align-items: center; gap: 8px; margin: 14px 8px 2px; padding: 0; border: 0; background: none; font: 500 14px 'Poppins', system-ui, sans-serif; color: var(--ch-doux); text-align: left; cursor: pointer; }
 .sc-camera b { font-weight: 700; color: var(--ch-encre); }
 .sc-camera--sans { cursor: default; }
 .sc-texte-carte { display: flex; flex-direction: column; gap: 16px; padding: 22px; }
@@ -244,10 +244,10 @@ button.sc-carte:active { transform: scale(.98); }
 /* ── Sombre : ces pastels gardent leur texte sombre (cf. rv-ilot dans global.css) ── */
 :root[data-theme="dark"] .sc-depot.is-survol,
 :root[data-theme="dark"] .sc-conseils i {
-  --rv-encre: #1B1A23; --rv-encre-rgb: 27,26,35; --rv-doux: #6E675B; --rv-doux-rgb: 110,103,91;
+  --rv-encre: #042A65; --rv-encre-rgb: 27,26,35; --rv-doux: #6E675B; --rv-doux-rgb: 110,103,91;
   --rv-carte: #fff; --rv-carte-rgb: 255,255,255; --rv-carte-haute: #fff; --rv-ligne: #EADBCB; --rv-piste: #F3E6D8;
   --rv-orange-texte: #C25407; --rv-vert-texte: #1F8A52; --rv-brun-texte: #8F3E05;
-  --ch-encre: #1B1A23; --ch-doux: #6E675B; --bt-encre: #1B1A23; --bt-doux: #6E675B; --en-encre: #1B1A23; --en-doux: #6E675B; --hb-encre: #1B1A23; --hb-doux: #6E675B;
-  --hm-encre: #1B1A23; --hm-doux: #6E675B; --inst-encre: #1B1A23; --inst-doux: #6E675B; --lg-encre: #1B1A23; --lg-doux: #6E675B; --prg-encre: #1B1A23; --prg-doux: #6E675B;
-  color: #1B1A23;
+  --ch-encre: #042A65; --ch-doux: #6E675B; --bt-encre: #042A65; --bt-doux: #6E675B; --en-encre: #042A65; --en-doux: #6E675B; --hb-encre: #042A65; --hb-doux: #6E675B;
+  --hm-encre: #042A65; --hm-doux: #6E675B; --inst-encre: #042A65; --inst-doux: #6E675B; --lg-encre: #042A65; --lg-doux: #6E675B; --prg-encre: #042A65; --prg-doux: #6E675B;
+  color: #042A65;
 }

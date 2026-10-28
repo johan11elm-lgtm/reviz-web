@@ -40,7 +40,7 @@ button.rv-bulle-txt:focus-visible { outline: 3px solid var(--rv-encre); outline-
 /* Une idée par ligne : la première porte la phrase, la suivante la complète, plus doucement. */
 .rv-bulle-ligne { display: block; }
 .rv-bulle-ligne + .rv-bulle-ligne {
-  font-family: 'Geist', system-ui, sans-serif;
+  font-family: 'Poppins', system-ui, sans-serif;
   font-size: 16px;
   font-weight: 600;
   letter-spacing: -.1px;

@@ -17,7 +17,7 @@
 .eb-btn {
   width: 100%; min-height: 56px; margin-top: 14px; border: 0; border-radius: 999px;
   background: var(--rv-orange); box-shadow: 0 5px 0 var(--rv-orange-tranche);
-  font-family: 'Geist', sans-serif; font-size: 17px; font-weight: 700; color: #fff; cursor: pointer;
+  font-family: 'Poppins', sans-serif; font-size: 17px; font-weight: 700; color: #fff; cursor: pointer;
 }
 .eb-btn:active { transform: translateY(4px); box-shadow: 0 1px 0 var(--rv-orange-tranche); }
 .eb-btn:focus-visible { outline: 3px solid var(--rv-encre); outline-offset: 3px; }
