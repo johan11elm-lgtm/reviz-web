@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { entreeSansSession } from '../utils/retour';
 import { sendParentalConsent, consentErrorMessage } from '../services/consentService';
 import { track } from '../services/statsService';
 import { EntreeEcran, Champ, Encart, RetourAction, LienTexte, Erreur } from '../components/entree/Entree';
@@ -49,7 +50,8 @@ const ECRANS = {
 };
 
 export default function ConsentPending() {
-  const { state } = useLocation();
+  const location = useLocation();
+  const { state } = location;
   const { currentUser, consentBlocked, consent, refreshGate, logout } = useAuth();
   const navigate = useNavigate();
   const [parentEmail, setParentEmail] = useState(state?.parentEmail ?? consent?.parentEmail ?? '');
@@ -124,6 +126,11 @@ export default function ConsentPending() {
       {checking ? 'Vérification…' : 'Il a accepté : vérifier'}
     </button>
   );
+
+  // Lien du rappel du lendemain ouvert sans session (souvent dans Safari, pas
+  // dans l'app installée) : la connexion, puis retour sur cet écran.
+  const sansSession = !currentUser ? entreeSansSession(location) : null;
+  if (sansSession && sansSession !== '/welcome') return <Navigate to={sansSession} replace />;
 
   // ── Envoyé (héros menthe) ──
   if (sent) {

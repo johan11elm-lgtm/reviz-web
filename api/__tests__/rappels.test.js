@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
-import { relancerLendemain, mailRappelJ1, sujetRappel, lienDesabo, signatureValide, prenomPropre, AGE_MIN_MS, AGE_MAX_MS } from '../_rappels.js'
+import { relancerLendemain, mailRappelJ1, sujetRappel, lienDesabo, signatureValide, prenomPropre, AGE_MIN_MS, AGE_MAX_MS, LIEN_ACCORD } from '../_rappels.js'
 
 // 17/10/2026 à 18 h, heure de Paris (16 h UTC, heure du cron).
 const MAINTENANT = Date.parse('2026-10-17T16:00:00Z')
@@ -37,7 +37,10 @@ const db = {
         get: async () => docDe(uid),
         update: async m => { updates.push({ id: uid, m }); Object.assign(users[uid], m) },
         collection: sub => ({
-          doc: () => ({ get: async () => ({ exists: uid in consents, data: () => consents[uid] }) }),
+          doc: () => ({ get: async () => {
+            if (consents[uid] === 'panne') throw new Error('firestore indisponible')
+            return { exists: uid in consents, data: () => consents[uid] }
+          } }),
           orderBy: () => ({ limit: () => ({ get: async () => ({ docs: (lecons[uid] ?? []).map(l => ({ data: () => l })) }) }) }),
           _sub: sub,
         }),
@@ -101,14 +104,48 @@ describe('rappel du lendemain (J+1) — première session', () => {
     expect(envoyer).not.toHaveBeenCalled()
   })
 
-  it('moins de 15 ans : seulement avec l’autorisation d’un parent ; sans date de naissance : jamais', async () => {
-    users.attente = { birthDate: ENFANT, premiereSession: SESSION }
-    users.autorise = { birthDate: ENFANT, premiereSession: SESSION }
+  it('moins de 15 ans sans accord : un mail tourné vers l’accord ; sans date de naissance, après un refus ou une panne : rien', async () => {
+    for (const uid of ['adresse', 'sansdoc', 'attente', 'autorise', 'refuse', 'panne']) users[uid] = { prenom: 'Léa', birthDate: ENFANT, premiereSession: SESSION }
     users.inconnu = { premiereSession: SESSION }
-    consents.attente = { status: 'pending', parentEmail: 'p@test.fr' }
+    consents.adresse = { status: 'pending', createdAt: HIER }
+    consents.attente = { status: 'pending', parentEmail: 'p@test.fr', token: 't' }
     consents.autorise = { status: 'approved' }
-    expect(await relancer()).toEqual({ rappelsJ1: 1 })
-    expect(envoyer.mock.calls.map(c => c[0].to)).toEqual(['autorise@test.fr'])
+    consents.refuse = { status: 'refused' }
+    consents.panne = 'panne'
+    expect(await relancer()).toEqual({ rappelsJ1: 4 })
+    const mails = Object.fromEntries(envoyer.mock.calls.map(c => [c[0].to.split('@')[0], c[0]]))
+    expect(Object.keys(mails).sort()).toEqual(['adresse', 'attente', 'autorise', 'sansdoc'])
+    // Sans adresse de parent (ou sans demande enregistrée) : le bouton mène à l'écran de l'accord.
+    for (const m of [mails.adresse, mails.sansdoc]) {
+      expect(m.subject).toBe('Le théorème de Pythagore : tu t\'en souviens ?')
+      expect(m.html).toContain(`href="${LIEN_ACCORD}"`)
+      expect(m.html).toContain('Prévenir un parent →')
+      expect(m.html).toContain('un parent doit dire oui')
+      expect(m.html).toContain(`href="${LIEN_PYTHAGORE}"`)
+      expect(m.html).toContain('Ou fais le quiz tout de suite')
+      expect(m.html).not.toContain('Faire le quiz →')
+    }
+    // Parent prévenu, pas encore d'accord : le quiz, et le rappel de la demande.
+    expect(mails.attente.html).toContain('Faire le quiz →')
+    expect(mails.attente.html).toContain("Ton parent n'a pas encore dit oui")
+    expect(mails.attente.html).not.toContain(LIEN_ACCORD)
+    expect(mails.attente.html).not.toContain('p@test.fr')
+    // Accord donné : le mail habituel.
+    expect(mails.autorise.html).toContain('Faire le quiz →')
+    expect(mails.autorise.html).not.toContain('parent')
+    expect(updates.map(u => u.id).sort()).toEqual(['adresse', 'attente', 'autorise', 'sansdoc'])
+  })
+
+  it('moins de 15 ans sans adresse de parent et adresse non confirmée : la vérification passe par le bouton de l’accord', async () => {
+    users.lea = { prenom: 'Léa', birthDate: ENFANT, premiereSession: SESSION }
+    consents.lea = { status: 'pending', createdAt: HIER }
+    const auth = makeAuth([compte('lea', { emailVerified: false, metadata: { creationTime: new Date(HIER).toUTCString() } })])
+    expect(await relancer({ auth })).toEqual({ rappelsJ1: 1 })
+    expect(auth.generateEmailVerificationLink).toHaveBeenCalledWith('lea@test.fr', { url: LIEN_ACCORD })
+    const m = envoyer.mock.calls[0][0]
+    expect(m.html).toContain('href="https://verif.example/?oob=1"')
+    expect(m.html).toContain(`href="${LIEN_PYTHAGORE}"`)
+    expect(m.html).toContain('confirme aussi ton adresse')
   })
 
   it('leçon scannée : lien vers « Tes leçons scannées »', async () => {
@@ -186,10 +223,17 @@ describe('rappel du lendemain (J+1) — compte créé la veille sans session', (
   it('applique la même règle des moins de 15 ans aux comptes de la veille', async () => {
     users.enfant = { birthDate: ENFANT }
     users.ok = { birthDate: ENFANT }
+    users.non = { birthDate: ENFANT }
     consents.ok = { status: 'approved' }
-    const auth = makeAuth([compte('enfant'), compte('ok')])
-    expect(await relancer({ auth })).toEqual({ rappelsJ1: 1 })
-    expect(envoyer.mock.calls[0][0].to).toBe('ok@test.fr')
+    consents.non = { status: 'refused' }
+    const auth = makeAuth([compte('enfant'), compte('ok'), compte('non')])
+    expect(await relancer({ auth })).toEqual({ rappelsJ1: 2 })
+    const [enfant, ok] = envoyer.mock.calls.map(c => c[0])
+    expect(enfant.to).toBe('enfant@test.fr')
+    expect(enfant.html).toContain(`href="${LIEN_ACCORD}"`)
+    expect(enfant.html).toContain('Ou choisis un chapitre tout de suite')
+    expect(ok.to).toBe('ok@test.fr')
+    expect(ok.html).not.toContain(LIEN_ACCORD)
   })
 
   it('parcourt toutes les pages de comptes', async () => {

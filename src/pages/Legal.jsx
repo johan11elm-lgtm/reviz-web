@@ -77,7 +77,7 @@ const PAGES = {
           <ul>
             <li>Fournir le service de révision (génération IA, suivi de progression).</li>
             <li>Authentifier les utilisateurs.</li>
-            <li>T'envoyer, le lendemain de ta première révision, un seul email de rappel qui te ramène sur ton chapitre (et une notification sur l'application mobile, si tu les as autorisées). Pas d'email de rappel avant 15 ans sans l'autorisation d'un parent. Tu peux t'en désinscrire d'un clic depuis l'email.</li>
+            <li>T'envoyer, le lendemain de ta première révision, un seul email de rappel qui te ramène sur ton chapitre (et une notification sur l'application mobile, si tu les as autorisées). Avant 15 ans, tant qu'un parent n'a pas donné son autorisation, cet email sert d'abord à la demander : il t'invite à donner l'adresse d'un parent, ou te rappelle que ton parent a reçu la demande. Après un refus du parent, aucun email de rappel. Tu peux t'en désinscrire d'un clic depuis l'email.</li>
             <li>Si tu l'as activé, t'envoyer au plus une notification par jour, à 17 h, et seulement les jours où tu n'as pas encore révisé : un contrôle du lendemain, ta série de parties du jour, ou ton dernier chapitre. Après trois rappels restés sans réponse, Réviz se tait jusqu'à ton prochain passage. Pas de notification avant 15 ans sans l'autorisation d'un parent. Tu les coupes à tout moment dans Réglages.</li>
             <li>Envoyer au parent dont tu as donné l'adresse (moins de 15 ans), quelques jours après ton arrivée, un seul email de bilan : les chapitres et les formats que tu as révisés, sans tes scores et sans publicité. Il peut s'en désinscrire d'un clic depuis l'email.</li>
             <li>Améliorer l'application.</li>

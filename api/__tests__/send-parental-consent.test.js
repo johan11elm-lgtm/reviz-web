@@ -182,13 +182,14 @@ describe('send-parental-consent — relance quotidienne (cron)', () => {
   }
   const enAttente = (depuis, extra = {}) => ({ status: 'pending', token: 'tok', parentEmail: 'p@f.fr', createdAt: now - depuis, firstRequestedAt: now - depuis, ...extra })
 
-  it('relance une fois les parents sans réponse depuis 7 jours, avec le prénom et le même lien', async () => {
+  it('relance une fois les parents sans réponse depuis 2 jours, avec le prénom et le même lien', async () => {
     const db = fakeDb({ u1: enAttente(RELANCE_APRES_MS + DAY / 2) }, { u1: { prenom: 'Léa' } })
     const envoyer = vi.fn(async () => {})
     expect(await relancerParents({ db, envoyer, maintenant: now })).toEqual({ relances: 1 })
     const mail = envoyer.mock.calls[0][0]
     expect(mail.to).toBe('p@f.fr')
-    expect(mail.subject).toContain('plus que 3 jours')
+    expect(RELANCE_APRES_MS).toBe(2 * DAY)
+    expect(mail.subject).toContain('plus que 8 jours')
     expect(mail.html).toContain('Léa')
     expect(mail.html).toContain('approve-consent?token=tok&uid=u1')
     expect(db.docs[0].ref.update).toHaveBeenCalledWith({ relanceLe: now })
@@ -196,7 +197,7 @@ describe('send-parental-consent — relance quotidienne (cron)', () => {
 
   it('ne relance pas : trop tôt, déjà relancé, accès déjà suspendu, autorisé, ou rien d\'envoyé', async () => {
     const db = fakeDb({
-      tot: enAttente(6 * DAY),
+      tot: enAttente(DAY),
       deja: enAttente(8 * DAY, { relanceLe: now - DAY }),
       tard: enAttente(10 * DAY),
       ok: { ...enAttente(8 * DAY), status: 'approved' },
@@ -281,6 +282,15 @@ describe('send-parental-consent — relance des élèves sans email parent (cron
     const emailSauf = async uid => (uid === 'anonyme' ? null : `${uid}@eleve.fr`)
     expect(await relancerEleves({ db, envoyer, emailDe: emailSauf, maintenant: now })).toEqual({ relancesEleves: 0 })
     expect(envoyer).not.toHaveBeenCalled()
+  })
+
+  it('J+3 sauté si le rappel du lendemain a déjà demandé l\'adresse ; J+10 part quand même', async () => {
+    const db = fakeDb({ u1: sansAdresse(3 * DAY + DAY / 2), u2: sansAdresse(10 * DAY + DAY / 2, { relancesEleve: [3] }) }, { u1: { rappelJ1Le: now - 2 * DAY }, u2: { rappelJ1Le: now - 9 * DAY } })
+    const envoyer = vi.fn(async () => {})
+    expect(await relancerEleves({ db, envoyer, emailDe, maintenant: now })).toEqual({ relancesEleves: 1 })
+    expect(envoyer.mock.calls.map(c => c[0].to)).toEqual(['u2@eleve.fr'])
+    expect(db.docs[0].ref.update).toHaveBeenCalledWith({ relancesEleve: [3] })
+    expect(db.docs[1].ref.update).toHaveBeenCalledWith({ relancesEleve: [3, 10] })
   })
 
   it('un envoi en échec n\'est pas marqué (réessayé le lendemain)', async () => {

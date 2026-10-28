@@ -7,9 +7,10 @@
 // Sans autorisation sous 10 jours (src/utils/consent.js), l'accès est suspendu.
 //
 // GET /api/send-parental-consent (cron Vercel quotidien, voir vercel.json)
-// Relance une fois les parents qui n'ont pas répondu au bout de 7 jours, et
+// Relance une fois les parents qui n'ont pas répondu au bout de 2 jours, et
 // relance les élèves qui n'ont pas encore donné l'email d'un parent (« Plus
-// tard ») à J+3, J+10 et J+14 avant la mise en pause du compte. Envoie aussi
+// tard ») à J+3, J+10 et J+14 avant la mise en pause du compte (J+3 sauté si
+// le rappel du lendemain l'a déjà demandée). Envoie aussi
 // le rappel du lendemain : première session ou compte créé la veille
 // (api/_rappels.js), et le bilan des premiers jours au parent, à J+3
 // (api/_bilanParent.js). Greffé
@@ -30,8 +31,9 @@ export const config = { maxDuration: 60 };
 // Un envoi d'email par minute maximum (anti-spam / quota Resend).
 const RESEND_THROTTLE_MS = 60 * 1000;
 const JOUR_MS = 24 * 60 * 60 * 1000;
-// Relance unique, 3 jours avant la suspension de l'accès.
-export const RELANCE_APRES_MS = 7 * JOUR_MS;
+// Relance unique, deux jours après la demande : tant que l'élève a encore
+// l'app en tête, et 8 jours avant la suspension de l'accès.
+export const RELANCE_APRES_MS = 2 * JOUR_MS;
 const EXPEDITEUR = 'Réviz <noreply@revizapp.fr>';
 // Relances de l'élève sans email parent, en jours depuis l'inscription.
 export const PALIERS_ELEVE = [3, 10, 14];
@@ -237,9 +239,15 @@ export async function relancerEleves({ db, envoyer, emailDe, maintenant = Date.n
 
     const uid = doc.ref.parent.parent.id;
     try {
+      const profil = await db.collection('users').doc(uid).get().catch(() => null);
+      // Le rappel du lendemain (api/_rappels.js) a déjà demandé l'adresse du
+      // parent : pas de deuxième demande à J+3, la suivante attend J+10.
+      if (palier === 3 && profil?.exists && profil.data()?.rappelJ1Le) {
+        await doc.ref.update({ relancesEleve: [...new Set([...faits, ...atteints])] });
+        continue;
+      }
       const to = await emailDe(uid);
       if (!to) continue;
-      const profil = await db.collection('users').doc(uid).get().catch(() => null);
       const mail = mailEleve({
         prenom: profil?.exists ? profil.data()?.prenom : null,
         joursRestants: Math.ceil((DELAI_ADRESSE_MS - age) / JOUR_MS),

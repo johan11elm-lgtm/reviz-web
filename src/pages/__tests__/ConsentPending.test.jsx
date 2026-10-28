@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { render, screen, fireEvent } from '@testing-library/react'
-import { MemoryRouter, Routes, Route } from 'react-router-dom'
+import { MemoryRouter, Routes, Route, useLocation } from 'react-router-dom'
 
 const auth = { current: null }
 vi.mock('../../context/AuthContext', () => ({ useAuth: () => auth.current }))
@@ -13,12 +13,18 @@ vi.mock('../../hooks/useMediaQuery', () => ({ useIsDesktop: () => false }))
 const { default: ConsentPending } = await import('../ConsentPending.jsx')
 const { ConsentBanner } = await import('../../components/ConsentBanner.jsx')
 
+function SuiteConnexion() {
+  const { search } = useLocation()
+  return <p>Connexion, puis {new URLSearchParams(search).get('next')}</p>
+}
+
 function monter(element, chemin = '/consent-pending') {
   return render(
     <MemoryRouter initialEntries={[chemin]}>
       <Routes>
         <Route path="/consent-pending" element={element} />
         <Route path="/" element={<p>Accueil</p>} />
+        <Route path="/connexion" element={<SuiteConnexion />} />
       </Routes>
     </MemoryRouter>,
   )
@@ -47,6 +53,12 @@ describe('Écran de l\'email du parent', () => {
     // La phrase est dans la bulle de Réviz (texte lu + lettres tapées).
     expect(screen.getAllByText(/ton compte est en pause/i).length).toBeGreaterThan(0)
     expect(screen.queryByRole('button', { name: /plus tard/i })).toBeNull()
+  })
+
+  it('lien du rappel ouvert sans session : la connexion, puis retour sur cet écran', () => {
+    auth.current = { currentUser: null, consentBlocked: false, consent: null, refreshGate: vi.fn(), logout: vi.fn() }
+    monter(<ConsentPending />, '/consent-pending?via=rappel')
+    expect(screen.getByText('Connexion, puis /consent-pending?via=rappel')).toBeInTheDocument()
   })
 
   it('email parti, accès ouvert : renvoie vers l\'accueil', () => {

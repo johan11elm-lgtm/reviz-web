@@ -9,9 +9,12 @@
 //   encore révisé : son dernier chapitre ouvert, sinon son programme.
 // Si l'adresse n'est pas encore confirmée, le lien passe par la page de
 // vérification de Firebase puis continue vers le quiz : un clic fait les deux.
-// Jamais pour un moins de 15 ans sans l'autorisation d'un parent, ni sans
-// date de naissance, ni après une désinscription (lien signé, traité par
-// api/track.js), ni si l'élève est déjà revenu aujourd'hui.
+// Un moins de 15 ans sans l'autorisation d'un parent le reçoit aussi, tourné
+// vers l'accord : sans adresse de parent, le bouton mène à l'écran qui la
+// demande (le quiz passe en lien secondaire) ; parent prévenu mais pas encore
+// d'accord, le mail le rappelle à l'élève. Jamais sans date de naissance,
+// ni après un refus du parent, ni après une désinscription (lien signé,
+// traité par api/track.js), ni si l'élève est déjà revenu aujourd'hui.
 // -------------------------------------------------------
 import { createHmac, timingSafeEqual } from 'node:crypto'
 import { isUnder15 } from '../src/utils/levels.js'
@@ -24,6 +27,9 @@ export const AGE_MIN_MS = 18 * HEURE_MS
 export const AGE_MAX_MS = 48 * HEURE_MS
 const APP = 'https://app.revizapp.fr'
 const EXPEDITEUR = 'Réviz <noreply@revizapp.fr>'
+// Écran « Préviens un parent » (pages/ConsentPending.jsx) ; sans session, il
+// passe par la connexion puis revient (via=rappel, voir utils/retour.js).
+export const LIEN_ACCORD = `${APP}/consent-pending?via=rappel`
 
 export function escapeHtml(s) {
   return String(s).replace(/[&<>"']/g, c => (
@@ -90,9 +96,12 @@ const MASCOTTE = `${APP}/mascot/pose-s4-retour@256.png`
 
 /**
  * Le mail : sujet et HTML (styles en ligne, tableau : les clients mail n'aiment rien d'autre).
- * @param {{ prenom?: string, titre?: string|null, matiere?: string|null, source?: string|null, lien: string, desabo?: string|null, verifieAdresse?: boolean }} p
+ * accord : null (cas général), 'adresse' (moins de 15 ans sans adresse de parent :
+ * bouton vers lienAccord, le chapitre en lien secondaire) ou 'attente' (parent
+ * prévenu, pas encore d'accord : un encadré le rappelle).
+ * @param {{ prenom?: string, titre?: string|null, matiere?: string|null, source?: string|null, lien: string, desabo?: string|null, verifieAdresse?: boolean, accord?: 'adresse'|'attente'|null, lienAccord?: string|null }} p
  */
-export function mailRappelJ1({ prenom, titre = null, matiere = null, source = null, lien, desabo = null, verifieAdresse = false }) {
+export function mailRappelJ1({ prenom, titre = null, matiere = null, source = null, lien, desabo = null, verifieAdresse = false, accord = null, lienAccord = null }) {
   const safeName = escapeHtml(prenomPropre(prenom) || '')
   const safeTitre = titre ? escapeHtml(titre) : null
   const safeMatiere = matiere ? escapeHtml(matiere) : null
@@ -111,8 +120,30 @@ export function mailRappelJ1({ prenom, titre = null, matiere = null, source = nu
       ? `Résumé, flashcards et quiz de ta leçon${safeMatiere ? ` de ${safeMatiere}` : ''} sont prêts. Trois minutes suffisent pour que ça tienne.`
       : `Le quiz prend trois minutes : quelques questions${safeMatiere ? ` de ${safeMatiere}` : ''}, et ton cerveau fait le reste.`
   const bouton = !safeTitre ? 'Choisir un chapitre' : scan ? 'Reprendre ma leçon' : 'Faire le quiz'
+  const demandeAdresse = accord === 'adresse' && !!lienAccord
 
   const p = (txt, extra = '') => `<p style="margin:0 0 14px; font-family:${POLICE}; font-size:16px; line-height:1.55; color:${C.texte};${extra}">${txt}</p>`
+  const gros = (href, texte) => `
+          <table role="presentation" cellpadding="0" cellspacing="0" style="margin:6px 0 22px;"><tr><td style="background:${C.encre}; border-radius:12px;">
+            <a href="${href}" style="display:inline-block; padding:15px 26px; font-family:${POLICE}; font-size:16px; font-weight:700; color:#FFFFFF; text-decoration:none;">${texte} →</a>
+          </td></tr></table>`
+  const encadre = txt => `
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:0 0 18px;"><tr><td style="background:${C.surligneur}; border-radius:12px; padding:12px 14px; font-family:${POLICE}; font-size:14px; line-height:1.5; color:${C.texte};">
+            ${txt}
+          </td></tr></table>`
+  // Le lien de vérification d'adresse porte toujours sur le bouton principal.
+  const verification = verifieAdresse ? encadre('Ce lien confirme aussi ton adresse e-mail : pas besoin de chercher l\'autre mail.') : ''
+  const corps = demandeAdresse
+    ? `
+          ${p('Une chose d\'abord : comme tu as moins de 15 ans, un parent doit dire oui pour que tu gardes ton compte. Tu tapes son adresse, il reçoit un mail avec un bouton. Trente secondes, et tout ce que tu as révisé reste à toi.')}
+          ${gros(lienAccord, 'Prévenir un parent')}
+          ${verification}
+          ${p(`<a href="${lien}" style="color:${C.encre}; font-weight:700;">${!safeTitre ? 'Ou choisis un chapitre' : scan ? 'Ou reprends ta leçon' : 'Ou fais le quiz'} tout de suite</a>`, ` font-size:15px;`)}`
+    : `
+          ${p(detail)}
+          ${gros(lien, bouton)}
+          ${verification}
+          ${accord === 'attente' ? encadre('Ton parent n\'a pas encore dit oui. Il a reçu un mail de Réviz avec le bouton « Donner mon autorisation » : montre-le-lui (et regardez dans ses spams s\'il ne le trouve pas). Sans son accord, ton compte sera mis en pause.') : ''}`
   return {
     subject,
     html: `
@@ -136,14 +167,7 @@ export function mailRappelJ1({ prenom, titre = null, matiere = null, source = nu
         </td></tr>
         <tr><td style="padding:12px 28px 0;">
           ${p(safeName ? `Salut <strong>${safeName}</strong>,` : 'Salut,')}
-          ${p(detail)}
-          <table role="presentation" cellpadding="0" cellspacing="0" style="margin:6px 0 22px;"><tr><td style="background:${C.encre}; border-radius:12px;">
-            <a href="${lien}" style="display:inline-block; padding:15px 26px; font-family:${POLICE}; font-size:16px; font-weight:700; color:#FFFFFF; text-decoration:none;">${bouton} →</a>
-          </td></tr></table>
-          ${verifieAdresse ? `
-          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:0 0 18px;"><tr><td style="background:${C.surligneur}; border-radius:12px; padding:12px 14px; font-family:${POLICE}; font-size:14px; line-height:1.5; color:${C.texte};">
-            Ce lien confirme aussi ton adresse e-mail : pas besoin de chercher l'autre mail.
-          </td></tr></table>` : ''}
+          ${corps}
         </td></tr>
         <tr><td style="padding:0 28px 26px;">
           <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-top:1px solid ${C.filet};"><tr><td style="padding-top:16px;">
@@ -164,14 +188,22 @@ export function mailRappelJ1({ prenom, titre = null, matiere = null, source = nu
 }
 
 /**
- * Un moins de 15 ans ne reçoit le rappel qu'avec l'autorisation d'un parent ;
- * sans date de naissance, on ne sait pas : pas d'envoi.
+ * Quel rappel pour cet élève : 'libre' (15 ans et plus, ou accord donné),
+ * 'adresse' (moins de 15 ans sans adresse de parent : le mail la demande),
+ * 'attente' (parent prévenu, pas encore d'accord : le mail le rappelle), ou
+ * null : sans date de naissance on ne sait pas, après un refus on se tait,
+ * et une lecture ratée de l'accord ne vaut pas un « pas encore ».
+ * @returns {Promise<'libre'|'adresse'|'attente'|null>}
  */
-async function peutRecevoir(db, uid, profil) {
-  if (!profil.birthDate) return false
-  if (!isUnder15(profil.birthDate)) return true
-  const consent = await db.collection('users').doc(uid).collection('parentalConsent').doc('consent').get().catch(() => null)
-  return consent?.exists === true && consent.data()?.status === 'approved'
+async function formuleRappel(db, uid, profil) {
+  if (!profil.birthDate) return null
+  if (!isUnder15(profil.birthDate)) return 'libre'
+  const consent = await db.collection('users').doc(uid).collection('parentalConsent').doc('consent').get().catch(() => undefined)
+  if (consent === undefined) return null
+  const c = consent?.exists ? consent.data() ?? {} : {}
+  if (c.status === 'approved') return 'libre'
+  if (c.status && c.status !== 'pending') return null
+  return c.parentEmail ? 'attente' : 'adresse'
 }
 
 /** Dernière leçon ouverte (pour l'élève sans première session). */
@@ -227,23 +259,31 @@ export async function relancerLendemain({ db, envoyer, emailDe, auth = null, mai
     if (d.derniereRevisionAt && jourParis(new Date(d.derniereRevisionAt)) === aujourdhui) continue
     if (Array.isArray(d.joursActifs) && d.joursActifs.includes(aujourdhui)) continue
     try {
-      if (!(await peutRecevoir(db, uid, d))) continue
+      const formule = await formuleRappel(db, uid, d)
+      if (!formule) continue
       const c = compte ?? (auth?.getUser ? await auth.getUser(uid).catch(() => null) : null)
       const to = c?.email ?? await emailDe(uid)
       if (!to) continue
       const sujet = sujetRappel(d.premiereSession ?? null, d.premiereSession ? null : await derniereLecon(db, uid))
-      let lien = sujet.lien
+      // Le bouton principal : l'écran de l'accord parental, sinon le chapitre.
+      const adresse = formule === 'adresse'
+      let principal = adresse ? LIEN_ACCORD : sujet.lien
       let verifieAdresse = false
       if (c && c.emailVerified === false && auth?.generateEmailVerificationLink) {
         try {
-          lien = await auth.generateEmailVerificationLink(to, { url: lien })
+          principal = await auth.generateEmailVerificationLink(to, { url: principal })
           verifieAdresse = true
         } catch (err) {
           journal(`[rappel-j1] lien de vérification impossible pour ${uid} : ${err?.message || err}`)
         }
       }
       const desabo = lienDesabo(uid, secret)
-      const mail = mailRappelJ1({ prenom: d.prenom ?? c?.displayName, ...sujet, lien, desabo, verifieAdresse })
+      const mail = mailRappelJ1({
+        prenom: d.prenom ?? c?.displayName, ...sujet, desabo, verifieAdresse,
+        lien: adresse ? sujet.lien : principal,
+        accord: formule === 'libre' ? null : formule,
+        lienAccord: adresse ? principal : null,
+      })
       await envoyer({
         from: EXPEDITEUR, to, ...mail,
         ...(desabo ? { headers: { 'List-Unsubscribe': `<${desabo}>`, 'List-Unsubscribe-Post': 'List-Unsubscribe=One-Click' } } : {}),
