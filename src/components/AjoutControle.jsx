@@ -9,7 +9,7 @@ import { ajouterControle } from '../services/agendaService';
 import { track } from '../services/statsService';
 import { MATIERES_CONTROLE, jourIso, ajouterJours, jourCourt, jourEnClair, matiereDuCours } from '../utils/agenda';
 import { loadCatalogue } from '../services/programmeService';
-import { hasProgramme, isProgrammeLessonId, PROGRAMME_FALLBACK } from '../utils/programme';
+import { hasProgramme, isProgrammeLessonId } from '../utils/programme';
 import { loadLessons } from '../services/historyService';
 import '../pages/Agenda.css';
 
@@ -113,14 +113,16 @@ function LigneChapitre({ coche, onClick, marque, nom, sous }) {
  * (sinon le plan le ferait réviser ce qui n'est pas au contrôle). L'étape se voit dès l'ouverture
  * (« choisis la matière ») ; sur téléphone, la feuille descend jusqu'à la liste quand elle arrive.
  * Sans rien à cocher (« Autre » sans cours scanné, catalogue indisponible), l'intitulé devient
- * obligatoire. `onChoix` reçoit le nombre de choix possibles (null tant qu'on charge).
+ * obligatoire. `classe` nulle (lycée, classe inconnue) : pas de programme à proposer — surtout pas
+ * celui de 3e montré ailleurs par défaut —, seulement les cours scannés. `onChoix` reçoit le nombre
+ * de choix possibles (null tant qu'on charge).
  */
 function ChoixChapitres({ classe, matiere, choisis, onChange, onChoix, defiler }) {
   const [etat, setEtat] = useState({ pour: null, chapitres: [], programme: null });
   const titre = useRef(null);
   const scans = useMemo(() => (matiere ? coursScannes(matiere) : []), [matiere]);
   useEffect(() => {
-    if (!matiere || matiere === 'autre') return undefined;
+    if (!matiere || matiere === 'autre' || !classe) return undefined;
     let vivant = true;
     loadCatalogue(classe)
       .then(c => {
@@ -130,8 +132,9 @@ function ChoixChapitres({ classe, matiere, choisis, onChange, onChoix, defiler }
       .catch(() => { if (vivant) setEtat({ pour: matiere, chapitres: [], programme: null }); });
     return () => { vivant = false; };
   }, [classe, matiere]);
-  const charge = matiere === 'autre' || (Boolean(matiere) && etat.pour === matiere);
-  const programme = matiere !== 'autre' && etat.pour === matiere ? etat.chapitres : [];
+  const sansProgramme = matiere === 'autre' || !classe;
+  const charge = sansProgramme || (Boolean(matiere) && etat.pour === matiere);
+  const programme = !sansProgramme && etat.pour === matiere ? etat.chapitres : [];
   const nbChoix = charge ? programme.length + scans.length : null;
   useEffect(() => { onChoix?.(nbChoix); }, [nbChoix, onChoix]);
   useEffect(() => {
@@ -146,12 +149,14 @@ function ChoixChapitres({ classe, matiere, choisis, onChange, onChoix, defiler }
   else if (!charge) mot = 'Chargement des chapitres…';
   else if (!nbChoix) mot = matiere === 'autre'
     ? 'Pas de chapitres pour « Autre », ni de cours scanné : écris le sujet dans l’intitulé.'
-    : 'Pas encore de chapitres pour cette matière : écris le sujet dans l’intitulé.';
+    : !classe
+      ? 'Pas encore le programme de ta classe dans Réviz : écris le sujet dans l’intitulé, ou scanne ton cours pour le cocher ici.'
+      : 'Pas encore de chapitres pour cette matière : écris le sujet dans l’intitulé.';
   if (mot) return <>{entete}<p className="ag-chapitres-vide" role="status">{mot}</p></>;
 
   const estCoche = id => choisis.some(c => c.id === id);
   const basculer = ch => {
-    onChange(estCoche(ch.id) ? choisis.filter(c => c.id !== ch.id) : [...choisis, ch], etat.pour === matiere ? etat.programme : null);
+    onChange(estCoche(ch.id) ? choisis.filter(c => c.id !== ch.id) : [...choisis, ch], !sansProgramme && etat.pour === matiere ? etat.programme : null);
   };
   const deuxListes = scans.length > 0 && programme.length > 0;
   return (
@@ -189,7 +194,8 @@ function ChoixChapitres({ classe, matiere, choisis, onChange, onChoix, defiler }
 export function AjoutControle({ initial = {}, onClose, onSaved }) {
   const { currentUser, getUserLevel } = useAuth();
   const niveau = getUserLevel?.();
-  const classe = hasProgramme(niveau) ? niveau.classe : PROGRAMME_FALLBACK;
+  // Sans programme pour sa classe (lycée), on ne lui propose pas celui de 3e : ses cours scannés seulement.
+  const classe = hasProgramme(niveau) ? niveau.classe : null;
   const [chapitres, setChapitres] = useState([]);
   const [programme, setProgramme] = useState(null);
   const isDesktop = useIsDesktop();

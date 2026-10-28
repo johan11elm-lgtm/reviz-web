@@ -246,6 +246,31 @@ for (const [appareil, viewport] of APPAREILS) {
       await expect(page).toHaveURL(/\/analyse/)
     })
 
+    test('lycéen : pas le programme de 3e à cocher, ses cours scannés ou l’intitulé', async ({ page }) => {
+      await mockApiRoutes(page)
+      await mockProgramme(page)
+      await entrerEnEssai(page, { aller: null })
+      // Un compte d'avant (lycée) : Réviz n'a pas son programme.
+      await page.evaluate(() => {
+        const g = JSON.parse(localStorage.getItem('reviz-guest'))
+        localStorage.setItem(`reviz-level-${g.uid}`, JSON.stringify({ cycle: 'lycee', classe: '2nde' }))
+      })
+      await page.goto('/agenda')
+      await page.getByRole('button', { name: 'Ajouter un contrôle' }).first().click()
+      const feuille = page.getByRole('dialog', { name: 'Ajouter un contrôle' })
+      await feuille.getByRole('button', { name: 'Maths', exact: true }).click()
+      await expect(feuille.getByText(/Pas encore le programme de ta classe dans Réviz/)).toBeVisible()
+      await expect(feuille.getByRole('checkbox', { name: 'Le théorème de Thalès' })).toHaveCount(0)
+      if (viewport.width >= 1024) await feuille.getByRole('button', { name: jourEnClair(jour(2)), exact: true }).click()
+      else await feuille.getByRole('button', { name: /^Demain/ }).click()
+      // Rien à cocher : l'intitulé dit sur quoi porte le contrôle.
+      await expect(feuille.getByText('Écris sur quoi porte le contrôle.')).toBeVisible()
+      await expect(feuille.getByRole('button', { name: 'Ajouter', exact: true })).toBeDisabled()
+      await feuille.getByLabel(/^Intitulé/).fill('Second degré')
+      await feuille.getByRole('button', { name: 'Ajouter', exact: true }).click()
+      await expect(page.getByText('Maths · Second degré')).toBeVisible()
+    })
+
     test('le mode dyslexie change la police des écrans de lecture, et reste choisi', async ({ page }) => {
       await mockApiRoutes(page)
       await mockProgramme(page)
