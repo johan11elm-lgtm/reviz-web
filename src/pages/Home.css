@@ -392,6 +392,27 @@
   color: #2D2B57;
 }
 
+/* ── Simulateur du brevet (3e) : bloc ciel, l'émote diplômée à gauche ── */
+.home-page .hm-simu {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 18px 14px 12px;
+  border-radius: 28px;
+  background: var(--sk-ciel);
+  color: #1B1A23;
+  text-decoration: none;
+  transition: transform .15s;
+}
+.home-page .hm-simu:active { transform: scale(.985); }
+.home-page .hm-simu-mascotte { flex: none; margin: -8px 0; }
+.home-page .hm-simu-txt { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+.home-page .hm-simu-sur { font-size: 12px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: #2C5CC5; }
+.home-page .hm-simu-titre { font-size: 22px; font-weight: 800; letter-spacing: -.02em; }
+.home-page .hm-simu-sous { font-size: 14px; line-height: 1.35; color: rgba(27,26,35,.72); }
+.home-page .hm-desk .hm-simu { grid-column: 1 / -1; padding: 18px 28px 18px 18px; }
+.home-page .hm-desk .hm-simu:hover { transform: translateY(-2px); }
+
 /* ── Réviz Games : la partie du jour (image générée, texte sur un voile chaud) ── */
 .home-page .hm-jeux {
   position: relative; display: block; overflow: hidden; isolation: isolate;

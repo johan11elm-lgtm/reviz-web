@@ -514,6 +514,18 @@ export default function Home() {
     </Link>
   );
 
+  // 3e : le simulateur de notes du brevet (40 % contrôle continu, 60 % épreuves).
+  const carteSimulateur = classe === '3ème' && (
+    <Link to="/simulateur-brevet" className="hm-simu">
+      <Mascot pose="graduation" size={isDesktop ? 104 : 84} alt="" aria-hidden="true" className="hm-simu-mascotte" />
+      <span className="hm-simu-txt">
+        <span className="hm-simu-sur">Brevet 2027</span>
+        <span className="hm-simu-titre">Simule ta note</span>
+        <span className="hm-simu-sous">Ce qu’il te faut aux épreuves pour chaque mention.</span>
+      </span>
+    </Link>
+  );
+
   const rappels = (
     <div className="hm-rappels">
       <GuestBanner />
@@ -589,6 +601,7 @@ export default function Home() {
             <div className="hm-carte">{carteMatieres}</div>
             {carteJeux}
             {carteBattle}
+            {carteSimulateur}
           </div>
         </div>
       ) : (
@@ -633,6 +646,7 @@ export default function Home() {
           <div className="hm-pad hm-pad--raccourcis">{blocRaccourcis}</div>
           <div className="hm-pad hm-pad--chemin">{chemin}</div>
           <div className="hm-pad">{carteJeux}</div>
+          {carteSimulateur && <div className="hm-pad">{carteSimulateur}</div>}
           {montrerEssai && <div className="hm-pad"><ThemeEssai onClose={() => setEssaiTheme(false)} /></div>}
           <div className="hm-pad hm-pad--droite">{carteMatieres}</div>
           <div className="hm-pad hm-pad--bas">{carteBattle}</div>

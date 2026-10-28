@@ -63,6 +63,7 @@ const Profs          = lazy(() => import('./pages/Profs'))
 const Installer      = lazy(() => import('./pages/Installer'))
 const BattleAccueil  = lazy(() => import('./pages/BattleAccueil'))
 const Battle         = lazy(() => import('./pages/Battle'))
+const SimulateurBrevet = lazy(() => import('./pages/SimulateurBrevet'))
 
 // Fallback minimal pendant le chargement
 function LoadingFallback() {
@@ -122,6 +123,7 @@ function AuthRoutes() {
       <Route path="/coach"       element={<PrivateRoute><Coach /></PrivateRoute>} />
       <Route path="/programme"   element={<PrivateRoute><Programme /></PrivateRoute>} />
       <Route path="/jeux"        element={<PrivateRoute><Jeux /></PrivateRoute>} />
+      <Route path="/simulateur-brevet" element={<PrivateRoute><SimulateurBrevet /></PrivateRoute>} />
       <Route path="/programme/:matiere" element={<VersMatiere />} />
       <Route path="/battle"      element={<BattleRoute><BattleAccueil /></BattleRoute>} />
       <Route path="/battle/:code" element={<BattleRoute><Battle /></BattleRoute>} />

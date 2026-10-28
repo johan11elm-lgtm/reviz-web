@@ -1,0 +1,127 @@
+/* CSS scoped to page wrapper — see scripts/scope-page-css.py */
+/* Wrapper: .sb-page */
+
+/* Simulateur de notes du brevet (28/10) : en-tête en bloc lavande, saisies en cartes blanches,
+ * résultat en bloc encre (à droite et collé en haut sur ordinateur). */
+.sb-page .sb-defile { flex: 1; overflow-y: auto; padding: calc(10px + env(safe-area-inset-top, 0px)) 12px 120px; }
+
+.sb-page .sb-entete { display: flex; align-items: center; gap: 12px; padding: 22px 18px 22px 22px; }
+.sb-page .sb-entete-txt { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 8px; }
+.sb-page .sb-surtitre { font-size: 12px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: #5B4FC7; }
+.sb-page .sb-chapo { margin: 0; font-size: 15px; line-height: 1.45; color: rgba(27,26,35,.75); }
+.sb-page .sb-mascotte { flex: none; align-self: flex-end; margin: -6px -8px -22px 0; filter: drop-shadow(0 14px 18px rgba(45,43,87,.2)); }
+
+.sb-page .sb-grille { display: flex; flex-direction: column; gap: 14px; margin-top: 14px; }
+.sb-page .sb-saisies { display: flex; flex-direction: column; gap: 14px; }
+
+.sb-page .sb-carte {
+  padding: 18px 16px;
+  border-radius: 28px;
+  background: var(--rv-carte);
+  box-shadow: 0 4px 14px rgba(45,43,87,.07), 0 1px 3px rgba(0,0,0,.04);
+}
+.sb-page .sb-carte-tete { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 12px; }
+.sb-page .sb-carte h2 { margin: 0; font-size: 20px; font-weight: 800; letter-spacing: -.02em; color: var(--rv-encre); }
+.sb-page .sb-carte h2 span {
+  margin-left: 6px;
+  padding: 3px 9px;
+  border-radius: 999px;
+  background: var(--sk-peche);
+  color: #8F3E05;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0;
+  vertical-align: 3px;
+}
+.sb-page .sb-onglets { display: flex; padding: 3px; border-radius: 999px; background: var(--rv-fond); }
+.sb-page .sb-onglets button {
+  height: 34px;
+  padding: 0 12px;
+  border: 0;
+  border-radius: 999px;
+  background: none;
+  color: var(--rv-doux);
+  font: 700 13px 'Geist', system-ui, sans-serif;
+  cursor: pointer;
+}
+.sb-page .sb-onglets button.is-actif { background: #2D2B57; color: #fff; }
+.sb-page .sb-onglets button:focus-visible { outline: 3px solid var(--rv-encre); outline-offset: 2px; }
+.sb-page .sb-aide { margin: 0 0 10px; font-size: 14px; color: var(--rv-doux); }
+
+.sb-page .sb-champs { display: flex; flex-direction: column; gap: 6px; }
+.sb-page .sb-champ {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 8px 8px 14px;
+  border-radius: 16px;
+  background: var(--rv-fond);
+  cursor: text;
+}
+.sb-page .sb-champ-txt { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 1px; }
+.sb-page .sb-champ-label { font-size: 15px; font-weight: 700; color: var(--rv-encre); }
+.sb-page .sb-champ-detail { font-size: 12.5px; color: var(--rv-doux); line-height: 1.3; }
+.sb-page .sb-champ-saisie {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  height: 42px;
+  padding: 0 12px 0 4px;
+  border-radius: 12px;
+  background: var(--rv-carte);
+  box-shadow: inset 0 0 0 1.5px var(--rv-ligne);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--rv-doux);
+}
+.sb-page .sb-champ-saisie:focus-within { box-shadow: inset 0 0 0 2px #2D2B57; }
+.sb-page .sb-champ-saisie--faux { box-shadow: inset 0 0 0 2px #D32F4D; }
+.sb-page .sb-champ-saisie input {
+  width: 54px;
+  height: 100%;
+  border: 0;
+  background: none;
+  font: 800 18px 'Geist', system-ui, sans-serif;
+  color: var(--rv-encre);
+  text-align: right;
+  outline: none;
+}
+
+/* Résultat */
+.sb-page .sb-resultat { display: flex; flex-direction: column; gap: 6px; }
+.sb-page .sb-sur { font-size: 12px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: #FFB27A; }
+.sb-page .sb-note { font-size: 22px; font-weight: 700; color: rgba(255,255,255,.8); }
+.sb-page .sb-note b { font-size: 64px; font-weight: 800; letter-spacing: -.04em; line-height: 1; color: #fff; }
+.sb-page .sb-mention { align-self: flex-start; padding: 6px 12px; border-radius: 999px; background: #DCF3E4; color: #0F6B3A; font-size: 15px; font-weight: 800; }
+.sb-page .sb-mention--rate { background: #FFE4CF; color: #8F3E05; }
+.sb-page .sb-detail { font-size: 14px; color: rgba(255,255,255,.7); }
+.sb-page .sb-invite { margin: 0; font-size: 17px; font-weight: 600; line-height: 1.4; color: #fff; }
+.sb-page .sb-objectifs { display: flex; flex-direction: column; gap: 6px; margin: 12px 0 0; padding: 0; list-style: none; }
+.sb-page .sb-objectif {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: 14px;
+  background: rgba(255,255,255,.08);
+  font-size: 14px;
+  color: rgba(255,255,255,.85);
+}
+.sb-page .sb-objectif b { color: #fff; white-space: nowrap; }
+.sb-page .sb-objectif--atteint { background: rgba(110,218,155,.18); }
+.sb-page .sb-objectif--atteint b { color: #8FE5B2; }
+
+.sb-page .sb-suite { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; margin-top: 14px; }
+.sb-page .sb-sources { margin: 0; font-size: 12.5px; line-height: 1.45; color: var(--rv-doux); }
+
+/* Ordinateur : saisies à gauche, résultat collé à droite */
+.sb-page--large .sb-defile { padding: 4px 32px 64px; }
+.sb-page--large .sb-entete, .sb-page--large .sb-grille { max-width: 1240px; margin-left: auto; margin-right: auto; box-sizing: border-box; }
+.sb-page--large .sb-entete { padding: 36px 40px; width: 100%; }
+.sb-page--large .sb-chapo { font-size: 17px; max-width: 560px; }
+.sb-page--large .sb-mascotte { margin: -30px 0 -40px; }
+.sb-page--large .sb-grille { display: grid; grid-template-columns: minmax(0, 1fr) 400px; gap: 24px; align-items: start; margin-top: 24px; }
+.sb-page--large .sb-carte { padding: 24px; }
+.sb-page--large .sb-cote { position: sticky; top: 0; }
+.sb-page--large .sb-champs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
