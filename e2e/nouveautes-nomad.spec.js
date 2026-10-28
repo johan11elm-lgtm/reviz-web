@@ -120,6 +120,57 @@ for (const [appareil, viewport] of APPAREILS) {
       await expect(page.getByRole('button', { name: 'Refaire mes erreurs' })).toHaveCount(0)
     })
 
+    test('le contrôle blanc : sujet chronométré, note sur 20, corrigé, étape J-1 cochée', async ({ page }) => {
+      await mockApiRoutes(page)
+      await mockProgramme(page)
+      await entrerEnEssai(page)
+      await ouvrirChapitreDuProgramme(page)
+      const quiz = chapitreThales().quiz
+      // Contrôle de maths demain : le contrôle blanc (J-1), c'est aujourd'hui.
+      await page.evaluate(({ date, cree }) => {
+        const g = JSON.parse(localStorage.getItem('reviz-guest'))
+        localStorage.setItem(`reviz-agenda-${g.uid}`, JSON.stringify({ pronote: null, controles: [{ id: 'c1', matiere: 'maths', titre: 'Thalès', date, cree }], planOffert: 'c1' }))
+      }, { date: jour(1), cree: jour(0) })
+      await page.goto('/agenda')
+      const plan = page.getByRole('region', { name: /^Plan de révision/ })
+      await plan.locator('.pr-etape', { hasText: 'Contrôle blanc' }).getByRole('button', { name: 'C’est parti' }).click()
+      await expect(page).toHaveURL(/\/controle\?c=c1$/)
+
+      // Le sujet : les questions du chapitre ouvert, une minute chacune.
+      await expect(page.getByRole('heading', { level: 1, name: 'Maths · Thalès' })).toBeVisible()
+      await expect(page.getByText(`${quiz.length} questions`)).toBeVisible()
+      await expect(page.getByText(`${quiz.length} minutes`)).toBeVisible()
+      await sansDebordement(page, `sujet du contrôle blanc ${appareil}`)
+      await page.getByRole('button', { name: /Commencer le contrôle/ }).click()
+      await expect(page.getByRole('timer')).toBeVisible()
+
+      // L'épreuve, sans correction : deux erreurs, puis la copie rendue.
+      const plat = t => String(t).replace(/[\s\u00a0\u202f]+/g, ' ').trim()
+      for (let i = 0; i < quiz.length; i++) {
+        const enonce = plat(await page.locator('.qz-question').innerText())
+        const q = quiz.find(x => plat(x.question) === enonce)
+        expect(q, `question « ${enonce} »`).toBeTruthy()
+        const voulue = i < quiz.length - 2 ? q.correct : (q.correct + 1) % q.choices.length
+        await page.getByRole('radio').nth(voulue).click()
+        await expect(page.getByRole('radio').nth(voulue)).toHaveAttribute('aria-checked', 'true')
+        await expect(page.locator('.qz-correction')).toHaveCount(0)
+        await page.getByRole('button', { name: i < quiz.length - 1 ? /Suivante/ : 'Rendre ma copie' }).click()
+      }
+      const note = String(Math.round(((quiz.length - 2) / quiz.length) * 40) / 2).replace('.', ',')
+      await expect(page.getByRole('region', { name: `Ta note : ${note} sur 20` })).toBeVisible()
+      await expect(page.getByRole('heading', { name: 'Le corrigé' })).toBeVisible()
+      await expect(page.locator('.cb-question')).toHaveCount(quiz.length)
+      await expect(page.locator('.cb-question.is-faux')).toHaveCount(2)
+      await sansDebordement(page, `note du contrôle blanc ${appareil}`)
+
+      // Les deux erreurs attendent dans « Refaire mes erreurs », et l'étape J-1 est cochée.
+      await page.getByRole('button', { name: 'Refaire mes erreurs' }).click()
+      await expect(page).toHaveURL(/\/quiz\?erreurs=1$/)
+      await expect(page.getByText(/Question 1 sur 2/)).toBeVisible()
+      await page.goto('/agenda')
+      await expect(plan.locator('.pr-etape--faite', { hasText: 'Contrôle blanc' })).toBeVisible()
+    })
+
     test('le mode dyslexie change la police des écrans de lecture, et reste choisi', async ({ page }) => {
       await mockApiRoutes(page)
       await mockProgramme(page)

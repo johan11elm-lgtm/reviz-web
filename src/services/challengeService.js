@@ -93,7 +93,7 @@ export function updateChallengeProgress(eventType, extra = {}) {
 
     if (c.eventType === eventType) {
       shouldIncrement = true;
-    } else if (c.eventType === 'revision' && ['flashcards', 'quiz', 'resume', 'mindmap'].includes(eventType)) {
+    } else if (c.eventType === 'revision' && ['flashcards', 'quiz', 'resume', 'mindmap', 'controle'].includes(eventType)) {
       shouldIncrement = true;
     } else if (c.eventType === 'formats' && extra.formatsUsed) {
       c.current = extra.formatsUsed.size;

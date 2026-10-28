@@ -104,7 +104,8 @@ function premierJourLocal() {
  * @param {object} [details] champs en plus, ex. { score, total } pour un quiz terminé
  */
 export function recordRevision(type, details = {}) {
-  const lessonId  = localStorage.getItem('reviz-current-lesson-id') ?? null
+  // Le contrôle blanc mêle plusieurs leçons : il passe lessonId: null (sa matière est dans details).
+  const lessonId  = 'lessonId' in details ? details.lessonId : (localStorage.getItem('reviz-current-lesson-id') ?? null)
   const revisions = loadRevisions()
   const { titre, ...ctx } = contexteLecon(lessonId)
   const entry = { ...details, id: String(Date.now()), type, lessonId, revisedAt: Date.now(), ...ctx }

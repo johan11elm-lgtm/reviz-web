@@ -5,6 +5,7 @@ import { BottomNav } from '../components/BottomNav';
 import { Mascot } from '../components/Mascot';
 import { AjoutControle, couleursMatiere } from '../components/AjoutControle';
 import { PlanRevision } from '../components/PlanRevision';
+import { planOuvert } from '../utils/planRevision';
 import { preparerQuizErreurs } from '../services/erreursService';
 import { useIsDesktop } from '../hooks/useMediaQuery';
 import { track } from '../services/statsService';
@@ -103,6 +104,8 @@ export default function Agenda() {
   // Le quiz sur les points ratés (J-3) ouvre les questions ratées de la matière, s'il y en a.
   async function lancerEtape(ctrl, etape) {
     track('agenda_plan_etape', { matiere: ctrl.matiere, etape: etape.id });
+    // J-1 : le contrôle blanc (mode contrôle) ; il coche l'étape une fois la copie rendue.
+    if (etape.id === 'blanc') { navigate(`/controle?c=${ctrl.id}`); return; }
     setAgenda(await marquerEtape(currentUser, ctrl.id, etape.id));
     if (etape.id === 'quiz' && preparerQuizErreurs(currentUser?.uid, ctrl.matiere)) navigate('/quiz?erreurs=1');
     else reviser(ctrl);
@@ -151,6 +154,9 @@ export default function Agenda() {
         onLancer={e => lancerEtape(prochain, e)} onDebloquer={() => navigate('/reglages')} />
       <div className="ag-prochain-bas">
         <button type="button" className="ag-btn" onClick={() => reviser(prochain)}>Réviser<Fleche /></button>
+        <button type="button" className="ag-btn ag-btn--creme" onClick={() => (planOuvert(prochain, agenda, hasRevizPlus) ? navigate(`/controle?c=${prochain.id}`) : navigate('/reglages'))}>
+          Contrôle blanc
+        </button>
         {isDesktop && <p className="ag-rappel"><Cloche />Chaque étape sur l’accueil, et un rappel le jour venu sur iPhone.</p>}
       </div>
       <button type="button" className="ag-retirer ag-retirer--coin" onClick={() => retirer(prochain)} aria-label="Retirer ce contrôle"><Croix taille={14} /></button>

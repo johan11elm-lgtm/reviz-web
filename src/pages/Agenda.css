@@ -324,3 +324,7 @@
 /* Petite notification (« Contrôle ajouté », « Annuler ») : même famille que le badge débloqué. */
 .na-page .ag-toast { width: max-content; max-width: calc(100vw - 32px); box-sizing: border-box; border-radius: 16px; padding: 13px 18px; background: #042A65; color: #fff; box-shadow: 0 14px 30px -10px rgba(4,42,101,.5); }
 .na-page .ag-toast button { color: #FF8A5C; text-decoration: underline; text-underline-offset: 3px; }
+/* Réviser et Contrôle blanc : l'un sous l'autre sur téléphone, côte à côte sur ordinateur. */
+.na-page .ag-prochain-bas { display: flex; flex-direction: column; gap: 10px; }
+.na-page.ag-page--large .ag-prochain-bas { flex-direction: row; flex-wrap: wrap; align-items: center; }
+.na-page .ag-btn--creme { background: #fff; color: #042A65; box-shadow: 0 1px 3px rgba(4,42,101,.12), 0 3px 0 #E6DFD8; }

@@ -1,0 +1,73 @@
+/* Mode contrôle (contrôle blanc), façon app Nomad : l'épreuve reprend l'écran de question du quiz
+ * (qn-*, Quiz.css) ; ici le sujet, le chrono, la réponse choisie, la navigation entre questions,
+ * la note sur 20 et le corrigé. Une seule colonne centrée, aussi sur ordinateur. */
+.cb-page .cb-ecran { gap: 14px; }
+.cb-page.qn-page--large .cb-ecran { display: flex; flex-direction: column; width: 100%; max-width: 720px; margin: 0 auto; padding: 28px 24px 48px; }
+.cb-page.qn-page--large.cb-page--large .cb-ecran { max-width: 1080px; }
+.cb-page .cb-haut .qn-barre { flex: 1; }
+
+.cb-carte { border-radius: 20px; background: #fff; color: #042A65; box-shadow: 0 1px 3px rgba(4,42,101,.1), 0 1px 2px rgba(4,42,101,.06); }
+.cb-sujet { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; padding: 22px 20px; }
+.cb-emote { width: 76px; height: 76px; border-radius: 50%; background: #F2EBFF; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.cb-sur { padding: 3px 9px; border-radius: 7px; background: var(--rv-vif-plein); color: #fff; font-size: 11.5px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; }
+.cb-titre { margin: 2px 0 0; font-size: 26px; font-weight: 800; line-height: 1.15; letter-spacing: -.01em; color: #042A65; text-wrap: balance; }
+.cb-date { margin: -2px 0 0; font-size: 14px; font-weight: 600; color: var(--rv-doux); }
+.cb-txt { margin: 0; font-size: 15px; line-height: 1.5; color: #042A65; }
+
+.cb-regles { display: flex; flex-direction: column; gap: 0; width: 100%; margin: 6px 0 0; padding: 0; list-style: none; }
+.cb-regles li { display: flex; flex-direction: column; gap: 1px; padding: 11px 0; border-top: 1px solid var(--rv-ligne); }
+.cb-regles li:first-child { border-top: 0; }
+.cb-regles b { font-size: 16px; font-weight: 700; }
+.cb-regles span { font-size: 13.5px; color: var(--rv-doux); }
+.cb-chapitres { display: flex; flex-wrap: wrap; gap: 6px; }
+.cb-chapitre { padding: 5px 10px; border-radius: 8px; background: #F2EBFF; font-size: 12.5px; font-weight: 600; color: #042A65; }
+
+.cb-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  width: 100%; min-height: 54px; padding: 0 18px; box-sizing: border-box;
+  border: 0; border-radius: 14px; background: var(--rv-vif-plein); box-shadow: 0 4px 0 #B83706;
+  font: 700 16px 'Poppins', system-ui, sans-serif; color: #fff; cursor: pointer;
+}
+.cb-sujet .cb-btn { margin-top: 8px; }
+.cb-btn:active:not(:disabled) { transform: translateY(3px); box-shadow: 0 1px 0 #B83706; }
+.cb-btn:disabled { opacity: .45; cursor: default; }
+.cb-btn:focus-visible, .cb-lien:focus-visible, .cb-point:focus-visible { outline: 3px solid #042A65; outline-offset: 2px; }
+.cb-btn--second { background: #fff; color: #042A65; box-shadow: 0 1px 3px rgba(4,42,101,.12), 0 3px 0 #E6DFD8; }
+.cb-btn--second:active:not(:disabled) { box-shadow: 0 1px 0 #E6DFD8; }
+.cb-lien { align-self: center; padding: 8px; border: 0; background: none; font: 600 15px 'Poppins', system-ui, sans-serif; color: #042A65; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+
+/* L'épreuve */
+.cb-chrono { flex: none; display: inline-flex; align-items: center; gap: 6px; height: 34px; padding: 0 12px; border-radius: 10px; background: #fff; color: #042A65; font-size: 15px; font-weight: 700; font-variant-numeric: tabular-nums; box-shadow: 0 1px 3px rgba(4,42,101,.1); }
+.cb-chrono.is-presque { background: #FFE5E8; color: #A3172B; }
+.cb-page .qz-choix-btn.is-choisi { background: #F2EBFF; color: #042A65; box-shadow: inset 4px 0 0 var(--rv-vif); }
+.cb-page .qz-choix-btn.is-choisi .qz-lettre { background: #042A65; color: #fff; }
+.cb-points { display: flex; flex-wrap: wrap; justify-content: center; gap: 5px; }
+.cb-point { width: 30px; height: 32px; border: 1.5px solid #E6DFD8; border-radius: 10px; background: #fff; font: 700 13px 'Poppins', system-ui, sans-serif; color: var(--rv-doux); cursor: pointer; }
+.cb-point.is-repondu { border-color: #042A65; background: #042A65; color: #fff; }
+.cb-point.is-ici { border-color: var(--rv-vif); box-shadow: 0 0 0 2px var(--rv-vif); }
+.cb-nav { display: grid; grid-template-columns: 1fr 1.4fr; gap: 10px; margin-top: auto; padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 12px); }
+.cb-page.qn-page--large .cb-nav { margin-top: 6px; padding-bottom: 0; }
+.cb-note-bas { margin: -4px 0 0; font-size: 13px; text-align: center; color: var(--rv-doux); }
+
+/* La note et le corrigé */
+.cb-fin { display: flex; flex-direction: column; gap: 22px; padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 24px); }
+.cb-note { display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 24px 20px; text-align: center; }
+.cb-note-chiffre { font-size: 64px; font-weight: 800; line-height: 1; letter-spacing: -.03em; color: #042A65; }
+.cb-note-chiffre small { font-size: .45em; font-weight: 700; color: var(--rv-doux); }
+.cb-note-detail { margin: 0; font-size: 14px; font-weight: 600; color: var(--rv-doux); }
+.cb-actions { display: flex; flex-direction: column; gap: 10px; width: 100%; margin-top: 8px; }
+.cb-h2 { margin: 0 0 12px; padding-left: 12px; border-left: 4px solid var(--rv-vif); font-size: 21px; font-weight: 800; line-height: 1.2; color: #042A65; }
+.cb-corrige-liste { display: flex; flex-direction: column; gap: 10px; margin: 0; padding: 0; list-style: none; }
+.cb-question { padding: 16px; border-left: 4px solid #04ADB3; }
+.cb-question.is-faux { border-left-color: #E0364D; }
+.cb-question-num { font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--rv-vif-plein); }
+.cb-question-txt { margin: 6px 0 0; font-size: 16px; font-weight: 700; line-height: 1.4; }
+.cb-pastilles { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+.cb-page .qz-pill { border-radius: 8px; }
+.cb-page .qz-pill--faux { background: #FFE5E8; color: #A3172B; }
+.cb-page .qz-pill--juste { background: #DDF5F4; color: #035E62; }
+.cb-question-corr { margin: 10px 0 0; font-size: 14.5px; line-height: 1.5; color: var(--rv-doux); }
+
+/* Ordinateur : la note à gauche (collée), le corrigé à droite */
+.cb-page--large.qn-page--large .cb-fin { display: grid; grid-template-columns: 340px minmax(0, 1fr); align-items: start; gap: 28px; }
+.cb-page--large.qn-page--large .cb-note { position: sticky; top: 24px; }

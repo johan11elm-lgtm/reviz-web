@@ -224,6 +224,8 @@ export default function Home() {
   };
   // Une étape du plan lancée compte comme faite aujourd'hui, puis on va réviser la matière.
   const lancerEtape = async id => {
+    // J-1 : le contrôle blanc (mode contrôle) ; il coche l'étape une fois la copie rendue.
+    if (id === 'blanc') { navigate(`/controle?c=${controle.id}`); return; }
     await marquerEtape(currentUser, controle.id, id).catch(() => {});
     // J-3 : le quiz des questions ratées dans la matière du contrôle, s'il y en a.
     if (id === 'quiz' && preparerQuizErreurs(currentUser?.uid, controle.matiere)) navigate('/quiz?erreurs=1');
