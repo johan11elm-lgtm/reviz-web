@@ -375,3 +375,26 @@
   --hm-encre: #042A65; --hm-doux: #6E675B; --inst-encre: #042A65; --inst-doux: #6E675B; --lg-encre: #042A65; --lg-doux: #6E675B; --prg-encre: #042A65; --prg-doux: #6E675B;
   color: #042A65;
 }
+
+/* ═══ Carte mentale façon app Nomad (29/10) ═══════════════════════════════════
+ * Plus de héros pastel ni de pantin : un en-tête simple sur le fond crème, ce que dit
+ * Réviz dans le bloc lavande avec son émote, panneaux et boutons blancs à ombre légère. */
+.cn-page { --ch-encre: #042A65; --ch-doux: var(--rv-doux); --ch-bulle: #E6DFD8; --ch-fond: var(--rv-fond); --ch-ombre: rgba(4,42,101,.10); background: var(--rv-fond); }
+.cn-page .ch-hero.cm-hero { background: none; border-radius: 0; box-shadow: none; padding: calc(env(safe-area-inset-top, 0px) + 12px) 16px 0; height: auto; overflow: visible; }
+.cn-page .cm-retour { border-radius: 12px; box-shadow: 0 1px 3px rgba(4,42,101,.1), 0 1px 2px rgba(4,42,101,.06); color: #042A65; }
+.cn-page .cm-pilule-teste { border-radius: 12px; box-shadow: 0 1px 3px rgba(4,42,101,.1); }
+.cn-page .cm-bloc { position: relative; margin-top: 14px; padding: 16px 14px; border-radius: 22px; background: #B9A6FB; color: #042A65; }
+.cn-page .cm-bloc-reviz { position: absolute; top: -12px; right: 8px; pointer-events: none; }
+.cn-page .cm-bloc-txt { max-width: 66%; min-height: 48px; margin: 0; font-size: 17px; font-weight: 700; line-height: 1.3; }
+.cn-page .cm-chapitre { box-shadow: 0 1px 3px rgba(4,42,101,.1), 0 1px 2px rgba(4,42,101,.06); }
+.cn-page .cm-feuille, .cn-page .cm-fin-carte, .cn-page .cm-panneau > * { box-shadow: 0 1px 3px rgba(4,42,101,.1), 0 8px 24px -12px rgba(4,42,101,.25); }
+.cn-page .cm-btn--blanc { border-radius: 14px; box-shadow: 0 1px 3px rgba(4,42,101,.12), 0 3px 0 #E6DFD8; }
+.cn-page .cm-fin { background: var(--rv-fond); }
+.cn-page .cm-titre, .cn-page .cm-fin-titre { font-family: inherit; letter-spacing: -.01em; color: #042A65; }
+
+/* Ordinateur */
+.cn-page.cm-page--large .ch-hero.cm-hero { width: auto; max-width: 1240px; margin: 0 auto; padding: 12px 32px 0; }
+.cn-page.cm-page--large .cm-titre { font-size: 34px; }
+.cn-page.cm-page--large .cm-panneau .cm-bloc { margin-top: 0; }
+.cn-page .cm-ecran > .cm-chapitre { margin-top: 18px; }
+.cn-page .cm-bloc { text-align: left; }

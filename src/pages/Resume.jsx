@@ -5,16 +5,14 @@ import { fermerVersFiche, versExercice } from '../utils/navigation'
 import { recordRevision, loadRevisions } from '../services/revisionService'
 import { updateCardState, getCardState, countDueCards } from '../services/srsService'
 import { Mascot } from '../components/Mascot'
+import { subjectMascot } from '../utils/subjects'
 import { MissingLessonState } from '../components/MissingLessonState'
 import { FormatFeedback } from '../components/FormatFeedback'
 import { CoachChat } from '../components/CoachChat'
 import { BottomNav } from '../components/BottomNav'
-import { Pantin } from '../components/Pantin'
-import { BulleReviz } from '../components/reviz/BulleReviz'
 import { Parcours } from '../components/reviz/Parcours'
 import { useAuth } from '../context/AuthContext'
 import { useIsDesktop } from '../hooks/useMediaQuery'
-import { teinteMatiere, varsTeinte } from '../utils/teinteMatiere'
 import { nbsp } from '../utils/typography'
 import { resumeReadingMinutes, splitOnTerms, pickCheckCards } from '../utils/resume'
 import { parseIllustrations } from '../utils/lessonSchema'
@@ -126,8 +124,8 @@ const Exclamation = () => (
 )
 
 /**
- * Résumé d'un chapitre (handoff Claude Design du 21/10) : une page de lecture. Héros dans la
- * teinte de la matière avec Réviz, « Teste-toi » à cheval (points à retenir et définitions
+ * Résumé d'un chapitre (handoff Claude Design du 21/10, en-tête façon app Nomad le 29/10) : une
+ * page de lecture. L'en-tête de la fiche chapitre, « Teste-toi » (points à retenir et définitions
  * cachés, révélés au toucher), puis l'intro, À retenir, les parties, la méthode, les pièges,
  * les mots clés et « Vérifie-toi ». « J'ai fini le résumé » le marque comme lu et ouvre
  * l'écran de fin (temps passé, XP, parcours, suite). Sur ordinateur : sommaire qui suit la
@@ -148,7 +146,6 @@ function ResumeContent() {
   const sections = resumeData.sections ?? []
   const illustrations = useIllustrations(resumeData.illustrations ?? [])
   const figuresDe = ancre => illustrations.filter(ill => ill.ancre === ancre)
-  const teinte = teinteMatiere(resumeData.subject)
 
   const coachLessonId = useMemo(() => localStorage.getItem('reviz-current-lesson-id'), [])
   const [coachOpen, setCoachOpen] = useState(false)
@@ -217,48 +214,10 @@ function ResumeContent() {
     ? ['Bien joué, c’est lu.', 'Les flashcards vont t’aider à retenir.']
     : [`${pluriel(resumeData.readingTime, 'minute')}, ${pluriel(sections.length, 'partie')}.`,
        checks.length ? `${pluriel(checks.length, 'question')} t’attendent à la fin.` : 'Prends ton temps.']
-  const [parle, setParle] = useState(false)
-  const pantin = useRef(null)
-  const texte = lignes.join('\n')
-  useEffect(() => { if (parle) pantin.current?.dire(texte) }, [texte, parle])
-  useEffect(() => {
-    let t
-    const essai = () => { t = setTimeout(() => (document.hidden ? essai() : setParle(true)), 4000) }
-    essai()
-    return () => clearTimeout(t)
-  }, [])
-
   const retourFiche = () => fermerVersFiche(navigate, location)
   const boutonRetour = (
     <button type="button" className="rs-retour" onClick={retourFiche}><Chevron />Fiche chapitre</button>
   )
-  const reviz = (
-    <div className="rs-reviz">
-      <BulleReviz key={texte} lignes={lignes} parle={parle} className="rs-bulle" />
-      <Pantin
-        key={fin ? 'fin' : 'lecture'}
-        ref={pantin}
-        size={isDesktop ? 320 : 220}
-        expression={fin ? 'fier' : 'content'}
-        entree={fin ? 'saut' : undefined}
-        repli={null}
-        onEntree={() => setParle(true)}
-        onClick={() => pantin.current?.geste('saut')}
-        label="Réviz, ta mascotte"
-      />
-    </div>
-  )
-  const deco = (
-    <>
-      <span className="ch-deco ch-deco--a" aria-hidden="true" />
-      <span className="ch-deco ch-deco--b" aria-hidden="true" />
-      <span className="ch-deco ch-deco--c" aria-hidden="true" />
-      {isDesktop && <span className="ch-deco ch-deco--d" aria-hidden="true" />}
-      <span className="ch-point" aria-hidden="true" />
-      <span className="ch-grain" aria-hidden="true" />
-    </>
-  )
-
   // ── Teste-toi ──
   const interrupteur = (petit = false) => (
     <span className={`rs-interrupteur${testMode ? ' is-on' : ''}${petit ? ' rs-interrupteur--petit' : ''}`} aria-hidden="true"><i /></span>
@@ -409,31 +368,36 @@ function ResumeContent() {
     </div>
   )
 
+  // En-tête façon fiche chapitre de l'app Nomad (29/10) : retour, émote de la matière, titre ;
+  // une fois lu, ce que dit Réviz dans le bloc lavande.
   const hero = (
-    <div className={`ch-hero rs-hero${fin ? ' rs-hero--fin' : ''}`}>
-      {deco}
-      <div className="rs-hero-int">
-        <div className="ch-haut">{boutonRetour}</div>
-        <div className="rs-hero-grille">
-          <div className="rs-hero-txt">
-            <span className="ch-surtitre">{resumeData.subject} · Résumé</span>
-            <h1 className="ch-titre rs-titre">{fin ? 'Résumé lu' : resumeData.title}</h1>
-            {!fin && (
-              <span className="rs-pastilles">
-                <span className="rs-pastille"><Horloge />{resumeData.readingTime} min de lecture</span>
-                <span className="rs-pastille">{pluriel(sections.length, 'partie')}</span>
-                <span className="ai-badge rs-ia-badge">✦ Généré par IA</span>
-              </span>
-            )}
-          </div>
-          {reviz}
+    <header className={`rn-entete${fin ? ' rn-entete--fin' : ''}`}>
+      {boutonRetour}
+      <div className="rn-titre-ligne">
+        <span className="rn-emote" aria-hidden="true"><Mascot pose={subjectMascot(resumeData.subject)} size={isDesktop ? 60 : 50} alt="" /></span>
+        <div className="rn-titres">
+          <span className="rn-surtitre">{resumeData.subject} · Résumé</span>
+          <h1 className="rn-titre">{fin ? 'Résumé lu' : resumeData.title}</h1>
         </div>
       </div>
-    </div>
+      {!fin && (
+        <span className="rs-pastilles">
+          <span className="rs-pastille"><Horloge />{resumeData.readingTime} min de lecture</span>
+          <span className="rs-pastille">{pluriel(sections.length, 'partie')}</span>
+          <span className="ai-badge rs-ia-badge">✦ Généré par IA</span>
+        </span>
+      )}
+      {fin && (
+        <section className="rn-bloc" aria-label="Réviz">
+          <span className="rn-bloc-reviz" aria-hidden="true"><Mascot pose="celebration" size={isDesktop ? 104 : 84} alt="" /></span>
+          <p className="rn-bloc-txt">{lignes.join(' ')}</p>
+        </section>
+      )}
+    </header>
   )
 
   return (
-    <div className={`app app--no-halo ch-page resume-page rs-page${isDesktop ? ' app--large ch-page--large rs-page--large' : ''}`} style={varsTeinte(teinte)}>
+    <div className={`app app--no-halo ch-page resume-page rs-page rn-page${isDesktop ? ' app--large ch-page--large rs-page--large' : ''}`}>
       {/* Progression de lecture : une barre en haut (téléphone, après le héros), un trait (ordinateur) */}
       {!fin && (isDesktop ? (
         <div className="rs-trait" aria-hidden="true"><i style={{ width: `${progress * 100}%` }} /></div>
