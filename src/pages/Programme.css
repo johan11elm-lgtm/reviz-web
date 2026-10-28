@@ -15,11 +15,13 @@
 /* ── Héros : le même que l'accueil (hauteur, bulles, Réviz qui tombe et parle) ── */
 .prg-page .prg-hero {
   position: relative;
-  height: calc(414px + env(safe-area-inset-top, 0px));
+  height: 414px;
   box-sizing: border-box;
-  padding: calc(env(safe-area-inset-top, 0px) + 18px) 22px 0;
-  background: var(--rv-peche);
-  border-radius: 0 0 50% 50% / 0 0 64px 64px;
+  margin: calc(10px + env(safe-area-inset-top, 0px)) 12px 0;
+  padding: 18px 22px 0;
+  /* Bloc pêche arrondi posé sur le crème (skin du 28/10, comme les blocs de la landing) */
+  background: var(--sk-peche);
+  border-radius: 32px;
   overflow: hidden;
 }
 .prg-page .prg-grain {
@@ -33,15 +35,15 @@
 .prg-page .prg-deco {
   position: absolute;
   border-radius: 50%;
-  background: var(--rv-peche-bulle);
-  box-shadow: inset 0 -24px 40px rgba(var(--rv-ombre),.08), inset 0 16px 30px rgba(255,255,255,.35);
+  background: #FFD6B8;
+  box-shadow: inset 0 -24px 40px rgba(var(--rv-ombre),.06), inset 0 16px 30px rgba(255,255,255,.35);
 }
-.prg-page .prg-deco--a { right: -70px; top: calc(150px + env(safe-area-inset-top, 0px)); width: 240px; height: 240px; }
-.prg-page .prg-deco--b { left: -50px; top: calc(270px + env(safe-area-inset-top, 0px)); width: 140px; height: 140px; }
+.prg-page .prg-deco--a { right: -70px; top: 150px; width: 240px; height: 240px; }
+.prg-page .prg-deco--b { left: -50px; top: 270px; width: 140px; height: 140px; }
 .prg-page .prg-point {
   position: absolute;
   left: 26px;
-  top: calc(200px + env(safe-area-inset-top, 0px));
+  top: 200px;
   width: 46px;
   height: 46px;
   border-radius: 50%;
@@ -62,10 +64,10 @@
 .prg-page .prg-titre {
   margin: 0;
   font-family: var(--font-display);
-  font-size: 42px;
+  font-size: 38px;
   font-weight: 800;
   line-height: 1;
-  letter-spacing: -1.6px;
+  letter-spacing: -1.4px;
   color: var(--prg-encre);
 }
 .prg-page .prg-choix { position: relative; }
@@ -286,15 +288,14 @@
 }
 
 /* ─── Ordinateur : héros de l'accueil (titre en haut à gauche, Réviz et sa bulle centrés) ─── */
-.prg-page--large .prg-hero { height: auto; margin-top: 0; padding: 32px 56px 72px; border-radius: 0 0 50% 50% / 0 0 80px 80px; }
+.prg-page--large .prg-hero { height: auto; width: min(1376px, calc(100% - 64px)); margin: 4px auto 0; padding: 36px 48px 40px; border-radius: 40px; }
 .prg-page--large .prg-deco--a { right: 18%; top: -120px; width: 520px; height: 520px; box-shadow: inset 0 -40px 60px rgba(var(--rv-ombre),.08), inset 0 24px 40px rgba(255,255,255,.35); }
 .prg-page--large .prg-deco--b { left: -70px; top: 260px; width: 260px; height: 260px; box-shadow: none; }
 .prg-page--large .prg-point { left: auto; right: 12%; top: 380px; width: 18px; height: 18px; box-shadow: none; }
-/* La rangée du titre laisse libre le coin du menu (NavHaut). */
-.prg-page--large .prg-hero-haut { max-width: 1328px; margin: 0 auto; padding-right: 380px; min-height: 58px; }
+.prg-page--large .prg-hero-haut { margin: 0; padding: 0; }
 .prg-page--large .prg-date { font-size: 12px; letter-spacing: .12em; color: var(--prg-encre); opacity: .7; }
 .prg-page--large .prg-hero-titre { justify-content: flex-start; gap: 16px; margin-top: 4px; }
-.prg-page--large .prg-titre { letter-spacing: -.04em; }
+.prg-page--large .prg-titre { font-size: 42px; letter-spacing: -.04em; }
 .prg-page--large .prg-scene { position: relative; z-index: 1; display: flex; align-items: center; justify-content: center; gap: 12px; margin-top: 4px; }
 .prg-page--large .prg-scene-txt { position: relative; z-index: 2; width: 500px; display: flex; flex-direction: column; }
 .prg-page--large .prg-bulle { position: relative; left: auto; right: auto; bottom: auto; }
@@ -306,7 +307,7 @@
   .prg-page--large .rv-bulle-txt { max-width: 400px; font-size: 30px; }
   .prg-page--large .rv-bulle-ligne + .rv-bulle-ligne { font-size: 18px; }
 }
-.prg-page--large .prg-note { margin: 20px 56px 0; }
+.prg-page--large .prg-note { margin: 20px 32px 0; }
 
 .prg-page--large .prg-grille {
   display: grid;
@@ -315,7 +316,7 @@
   max-width: 1440px;
   box-sizing: border-box;
   margin: 0 auto;
-  padding: 48px 56px 64px;
+  padding: 36px 32px 64px;
   grid-auto-rows: max-content;
 }
 .prg-page--large .prg-tete,
