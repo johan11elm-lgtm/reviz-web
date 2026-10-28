@@ -32,7 +32,7 @@
   "redirects": [
     {
       "source": "/((?!api/).*)",
-      "has": [{ "type": "host", "value": "(?<sub>.*)\\.vercel\\.app" }],
+      "has": [{ "type": "host", "value": "(?<sub>reviz-gamma|reviz-johan11elm-8545s-projects|reviz-git-main-johan11elm-8545s-projects)\\.vercel\\.app" }],
       "destination": "https://app.revizapp.fr/$1",
       "permanent": true
     }
