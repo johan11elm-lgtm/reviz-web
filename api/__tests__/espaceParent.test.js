@@ -101,3 +101,15 @@ describe('routeEspaceParent', () => {
     expect(res.corps.lien).toContain(`/parent?u=${UID}&e=`)
   })
 })
+
+describe('bilan J+3 au parent', () => {
+  it('porte le lien de l’espace parent quand il est fourni', async () => {
+    const { mailBilanParent } = await import('../_bilanParent.js')
+    const resume = { chapitres: [{ titre: 'Thalès', matiere: 'Maths', formats: new Set(['quiz']), quizTermine: true }], joursRevision: 2, quizTermines: 1, parties: 0 }
+    const base = { prenom: 'Léa', classe: '3ème', depuis: MAINTENANT - 4 * JOUR, maintenant: MAINTENANT, resume }
+    const lien = lienEspaceParent(UID, { maintenant: MAINTENANT, secret: SECRET })
+    expect(mailBilanParent({ ...base, espace: lien }).html).toContain('Ouvrir l\'espace parent')
+    expect(mailBilanParent({ ...base, espace: lien }).html).toContain(lien.replace(/&/g, '&amp;'))
+    expect(mailBilanParent(base).html).not.toContain('espace parent')
+  })
+})

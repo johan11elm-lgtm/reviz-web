@@ -22,6 +22,7 @@ import { getDb, getAuthAdmin } from './_firebaseAdmin.js';
 import { DELAI_ADRESSE_MS, DELAI_REPONSE_MS } from '../src/utils/consent.js';
 import { relancerLendemain } from './_rappels.js';
 import { envoyerBilansParent } from './_bilanParent.js';
+import { lienEspaceParent } from './_espaceParent.js';
 import { envoyerNotifs, preparerEnvoi } from './_push.js';
 
 export const config = { maxDuration: 60 };
@@ -268,7 +269,7 @@ export default async function handler(req, res) {
       const lendemain = await relancerLendemain({ db, envoyer, emailDe, auth: getAuthAdmin() })
         .catch(err => { console.error('[rappel-j1]', err?.message || err); return { rappelsJ1: 0 }; });
       // Après les relances : un parent relancé aujourd'hui n'a pas son bilan le même jour.
-      const bilans = await envoyerBilansParent({ db, envoyer, lienAutorisation, auth: getAuthAdmin() })
+      const bilans = await envoyerBilansParent({ db, envoyer, lienAutorisation, lienEspace: uid => lienEspaceParent(uid), auth: getAuthAdmin() })
         .catch(err => { console.error('[bilan-parent]', err?.message || err); return { bilansParent: 0 }; });
       // En dernier : pas de notification à qui a reçu le rappel par e-mail aujourd'hui.
       const pousser = await preparerEnvoi();

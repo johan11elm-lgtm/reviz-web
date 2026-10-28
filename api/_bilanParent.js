@@ -108,10 +108,11 @@ const classeLisible = c => String(c).replace(/^(\d)ème$/, '$1e')
  *   prenom?: string|null, classe?: string|null, depuis: number, maintenant: number,
  *   resume: ReturnType<typeof resumeActivite>,
  *   autorisation?: { lien: string, jusquau: number }|null, desabo?: string|null,
+ *   espace?: string|null (lien de l'espace parent, api/_espaceParent.js),
  * }} p
  *   resume.chapitres[].titre : titre de la leçon, lu dans users/{uid}/lessons.
  */
-export function mailBilanParent({ prenom = null, classe = null, depuis, maintenant, resume, autorisation = null, desabo = null }) {
+export function mailBilanParent({ prenom = null, classe = null, depuis, maintenant, resume, autorisation = null, desabo = null, espace = null }) {
   const propre = prenomPropre(prenom)
   const nom = propre ? escapeHtml(propre) : 'votre enfant'
   const Nom = propre ? nom : 'Votre enfant'
@@ -167,6 +168,15 @@ export function mailBilanParent({ prenom = null, classe = null, depuis, maintena
           ${autres > 0 ? p(`Et ${nb(autres, 'autre chapitre', 'autres chapitres')}.`, ` font-size:14px; color:${C.second};`) : ''}
           ${parties ? p(`Et ${nb(parties, 'partie du jour', 'parties du jour')}, le mini-jeu quotidien sur le programme.`, ` font-size:14px; color:${C.second};`) : ''}`
 
+  // L'espace parent (api/_espaceParent.js) : suivre ses révisions et ses contrôles au fil des semaines.
+  const blocEspace = !espace ? '' : `
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:4px 0 20px;"><tr><td>
+            ${p(`Pour suivre ses révisions et ses prochains contrôles au fil des semaines, gardez ce lien, valable 60 jours :`, ' margin:0 0 12px; font-size:15px;')}
+            <table role="presentation" cellpadding="0" cellspacing="0"><tr><td style="border:1.5px solid ${C.encre}; border-radius:12px;">
+              <a href="${escapeHtml(espace)}" style="display:inline-block; padding:12px 20px; font-family:${POLICE}; font-size:15px; font-weight:700; color:${C.encre}; text-decoration:none;">Ouvrir l'espace parent →</a>
+            </td></tr></table>
+          </td></tr></table>`
+
   const blocAutorisation = !autorisation ? '' : `
           <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:8px 0 20px; border:1.5px solid ${C.encre}; border-radius:14px;"><tr><td style="padding:16px 16px 4px;">
             ${surtitre('Il manque votre accord', ` color:${C.encre};`)}
@@ -202,6 +212,7 @@ export function mailBilanParent({ prenom = null, classe = null, depuis, maintena
           ${p(`${Nom} utilise Réviz depuis le ${arrivee} pour réviser ${programme} : des quiz, des flashcards et des résumés, chapitre par chapitre. Voici ses premiers jours.`)}
           ${blocChiffres}
           ${blocChapitres}
+          ${blocEspace}
           ${blocAutorisation}
           <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:6px 0 22px;"><tr><td style="background:${C.surligneur}; border-radius:14px; padding:16px;">
             ${surtitre('Le coup de pouce qui marche', ` color:${C.encre};`)}
@@ -245,6 +256,7 @@ export async function avecTitres(ref, chapitres) {
  * Parcourt les demandes d'autorisation parentale et envoie le bilan à ceux qui y ont droit.
  * @param {{
  *   db, envoyer, lienAutorisation: (token:string, uid:string) => string,
+ *   lienEspace?: (uid:string) => string|null (espace parent, api/_espaceParent.js),
  *   auth?: { getUser }|null, maintenant?: number, secret?: string, journal?: (m:string)=>void,
  * }} p
  *   envoyer : ({ from, to, replyTo, subject, html, headers }) => Promise ; une réponse
@@ -252,7 +264,7 @@ export async function avecTitres(ref, chapitres) {
  *   auth (firebase-admin) écarte les comptes supprimés ou désactivés.
  * @returns {Promise<{ bilansParent: number }>}
  */
-export async function envoyerBilansParent({ db, envoyer, lienAutorisation, auth = null, maintenant = Date.now(), secret = process.env.CRON_SECRET, journal = m => console.error(m) }) {
+export async function envoyerBilansParent({ db, envoyer, lienAutorisation, lienEspace = null, auth = null, maintenant = Date.now(), secret = process.env.CRON_SECRET, journal = m => console.error(m) }) {
   // Pas de filtre côté Firestore (même raison que relancerParents : pas d'index à publier).
   const demandes = await db.collectionGroup('parentalConsent').get()
   let bilansParent = 0
@@ -291,6 +303,7 @@ export async function envoyerBilansParent({ db, envoyer, lienAutorisation, auth 
       const desabo = lienDesaboParent(uid, secret)
       const mail = mailBilanParent({
         prenom: u.prenom, classe: u.level?.classe ?? null, depuis, maintenant, resume, desabo,
+        espace: lienEspace ? lienEspace(uid) : null,
         autorisation: enAttente
           ? { lien: lienAutorisation(d.token, uid), jusquau: (d.firstRequestedAt ?? d.createdAt) + DELAI_REPONSE_MS }
           : null,
