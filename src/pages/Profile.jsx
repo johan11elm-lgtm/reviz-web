@@ -4,6 +4,7 @@ import { useAuth } from '../context/AuthContext';
 import { loadLessons, syncFromFirestore } from '../services/historyService';
 import { loadRevisions, syncRevisionsFromFirestore } from '../services/revisionService';
 import { getUserProfile } from '../services/userProfileService';
+import { xpQuetes } from '../services/quetesService';
 import { BottomNav } from '../components/BottomNav';
 import { LevelSelector } from '../components/LevelSelector';
 import { Mascot } from '../components/Mascot';
@@ -110,7 +111,7 @@ export default function Profile() {
   }, [isGuest, currentUser?.uid]);
 
   const serie = computeStreak(revisions, 'revisedAt', { gel: true });
-  const { level, xpInLvl, fillPct } = computeLevel(lecons);
+  const { level, xpInLvl, fillPct } = computeLevel(lecons, revisions, xpQuetes(currentUser?.uid ?? null));
   const badges = computeBadges(lecons, revisions, serie, level);
   const obtenus = badges.filter(b => !b.locked).length;
   const prochain = prochainBadge(badges);
@@ -173,7 +174,7 @@ export default function Profile() {
         aria-valuemin={0} aria-valuemax={XP_PAR_NIVEAU} aria-valuenow={xpInLvl}>
         <i style={{ width: `${Math.max(fillPct, 2)}%` }} />
       </div>
-      <p className="mo-astuce">+{XP_PAR_LECON} XP par leçon ouverte</p>
+      <p className="mo-astuce">L’XP vient des bonnes réponses, des séances finies, des combos et des quêtes · +{XP_PAR_LECON} XP par leçon ouverte</p>
     </div>
   );
   const essai = isGuest && (

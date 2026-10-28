@@ -8,6 +8,8 @@ import { loadChapterContent } from '../services/programmeService';
 import { chapterLessonId, PROGRAMME_FALLBACK } from '../utils/programme';
 import { agendaLocal, marquerEtape } from '../services/agendaService';
 import { recordRevision } from '../services/revisionService';
+import { gainDeSeance } from '../services/xpService';
+import { xpSeance } from '../utils/xp';
 import { noterErreurs, erreursDe, preparerQuizErreurs } from '../services/erreursService';
 import { track } from '../services/statsService';
 import { matiereControle, jourEnClair } from '../utils/agenda';
@@ -158,7 +160,9 @@ function Session({ controle, uid, onRefaire }) {
       const ks = questions.map((q, i) => (q.lessonId === id ? i : -1)).filter(i => i >= 0);
       noterErreurs(uid, id, ks.map(i => questions[i]), ks.map(i => reponses[i]));
     }
-    recordRevision('controle', { lessonId: null, matiere: m.slug, score: justes, total: questions.length, note });
+    // L'XP du contrôle : les bonnes réponses et la copie rendue (pas de combo, conditions d'examen).
+    const xp = gainDeSeance(uid, xpSeance({ bonnes: justes, total: questions.length })).xp;
+    recordRevision('controle', { lessonId: null, matiere: m.slug, score: justes, total: questions.length, note, xp, bonnes: justes });
     if (currentUser) marquerEtape(currentUser, controle.id, 'blanc').catch(() => {});
     track('controle_blanc_termine', { matiere: m.slug, note, total: questions.length, secondes: Math.round(passe) });
     setTempsPasse(passe);

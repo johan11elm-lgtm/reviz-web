@@ -12,6 +12,10 @@ import { nbsp } from '../utils/typography'
 import { construireSeance } from '../utils/exercicesChapitre'
 import { FORMATS, NOMS_FORMATS } from './exercices/formats'
 import { mesurer } from '../services/mesure'
+import { useCombo } from '../hooks/useCombo'
+import { PastilleCombo, BilanXp } from '../components/xp/Xp'
+import { gainDeSeance } from '../services/xpService'
+import { xpSeance } from '../utils/xp'
 // Même écran de jeu que le quiz : fond, barre du haut, feuille de correction, écran de fin.
 import './Flashcards.css'
 import './Quiz.css'
@@ -53,7 +57,8 @@ function Seance({ ai, seance, nouvelle }) {
   const isDesktop = useIsDesktop()
   const navigate = useNavigate()
   const location = useLocation()
-  const { isGuest } = useAuth()
+  const { isGuest, currentUser } = useAuth()
+  const uid = currentUser?.uid ?? null
   useEffect(() => { mesurer('format_ouvert', { format: 'exercices' }) }, [])
   const titre = ai?.metadata?.title || 'Ta leçon'
   const lessonId = useMemo(() => localStorage.getItem('reviz-current-lesson-id'), [])
@@ -64,6 +69,8 @@ function Seance({ ai, seance, nouvelle }) {
   const [fin, setFin] = useState(false)
   const [coach, setCoach] = useState(null)
   const ecran = useRef(null)
+  const combo = useCombo()
+  const [gain, setGain] = useState(null)
 
   const ex = seance[idx]
   const resultat = resultats[idx]
@@ -75,13 +82,18 @@ function Seance({ ai, seance, nouvelle }) {
   function valider(juste, details = {}) {
     if (resultat) return
     setResultats(rs => rs.map((r, k) => (k === idx ? { juste, ...details } : r)))
+    if (juste) combo.bonne()
+    else combo.faute()
   }
   function suivante() {
     if (!resultat) return
     if (derniere) {
       const total = seance.length
-      recordRevision('exercices', { score: nbJustes, total })
+      const { max, paliers } = combo.instantane()
+      const g = gainDeSeance(uid, xpSeance({ bonnes: nbJustes, total, paliers }))
+      recordRevision('exercices', { score: nbJustes, total, xp: g.xp, bonnes: nbJustes, comboMax: max })
       markRevisionDone('exercices', { score: nbJustes, total })
+      setGain(g)
       mesurer('exercices_termines', { score: nbJustes, total })
       setFin(true)
       return
@@ -137,6 +149,7 @@ function Seance({ ai, seance, nouvelle }) {
         <span className="qz-enregistre"><i><Coche taille={12} /></i>{isDesktop ? 'Score enregistré sur la fiche chapitre' : 'Score enregistré'}</span>
       </div>
     )
+    const bilan = <BilanXp gain={gain} uid={uid} />
     const recap = (
       <section className="qz-carte" aria-labelledby="ex-titre-seance">
         <div className="qz-carte-tete">
@@ -181,11 +194,11 @@ function Seance({ ai, seance, nouvelle }) {
           {isDesktop ? (
             <div className="qz-fin-grille">
               <div className="qz-fin-gauche">{score}{reviz}{pastilles}</div>
-              <div className="qz-fin-droite">{recap}{aRevoir}{boutons}<button type="button" className="fc-lien" onClick={fermer}>Retour au chapitre</button></div>
+              <div className="qz-fin-droite">{bilan}{recap}{aRevoir}{boutons}<button type="button" className="fc-lien" onClick={fermer}>Retour au chapitre</button></div>
             </div>
           ) : (
             <>
-              {score}{reviz}{pastilles}{recap}{aRevoir}{boutons}
+              {score}{reviz}{pastilles}{bilan}{recap}{aRevoir}{boutons}
               <button type="button" className="fc-lien" onClick={fermer}>Retour au chapitre</button>
             </>
           )}
@@ -227,6 +240,7 @@ function Seance({ ai, seance, nouvelle }) {
     <div className="qn-haut">
       {boutonFermer}
       <span className="qn-barre" aria-hidden="true"><i style={{ width: `${Math.max(progression * 100, 3)}%` }} /></span>
+      <PastilleCombo combo={combo.combo} casse={combo.casse} palier={combo.palier} />
       <span className="qz-pastille-score" aria-label={`${nbJustes} exercices réussis sur ${nbFaits}`}>
         <i><Coche taille={12} /></i>{nbJustes} / {nbFaits}
       </span>

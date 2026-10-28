@@ -1,0 +1,104 @@
+/* ─── XP, combo et quêtes (29/10) ─────────────────────────────────────────────
+ * Grammaire de l'app façon Nomad : cartes blanches à ombre légère, encre #042A65, turquoise
+ * pour l'avancée, orange vif pour la récompense, lavande pour le niveau. */
+
+/* ── Combo, dans la barre du haut ── */
+.xp-combo {
+  flex: none;
+  height: 34px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0 11px 0 9px;
+  border-radius: 999px;
+  background: var(--rv-vif, #FF4B0A);
+  box-shadow: 0 2px 0 #C23A06;
+  font: 800 14px 'Poppins', system-ui, sans-serif;
+  color: #fff;
+  white-space: nowrap;
+  animation: xpPop .32s cubic-bezier(.3,1.6,.5,1) both;
+}
+.xp-combo small { margin-left: 4px; font-size: 11px; font-weight: 700; opacity: .9; }
+.xp-combo--palier { background: #042A65; box-shadow: 0 2px 0 #001330; animation: xpPalier .6s cubic-bezier(.3,1.6,.5,1) both; }
+.xp-combo--casse { background: #FFE5E8; box-shadow: none; color: #A3172B; animation: xpCasse .4s both; }
+@keyframes xpPop { from { transform: scale(.4); opacity: 0; } }
+@keyframes xpPalier { 0% { transform: scale(.5); } 50% { transform: scale(1.25) rotate(-4deg); } 100% { transform: none; } }
+@keyframes xpCasse { 20%, 60% { transform: translateX(-4px); } 40%, 80% { transform: translateX(4px); } }
+
+/* ── Bilan de fin de séance ── */
+.xp-bilan {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 16px;
+  padding: 18px;
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(4,42,101,.1), 0 1px 2px rgba(4,42,101,.06);
+  color: #042A65;
+  text-align: left;
+}
+.xp-bilan-haut { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.xp-gain { display: inline-flex; align-items: center; gap: 6px; font: 800 26px/1 'Poppins', system-ui, sans-serif; color: #D8400A; animation: xpPop .4s cubic-bezier(.3,1.6,.5,1) both; }
+.xp-niveau-monte { padding: 5px 11px; border-radius: 999px; background: #042A65; font-size: 13px; font-weight: 700; color: #fff; animation: xpPalier .6s .2s cubic-bezier(.3,1.6,.5,1) both; }
+.xp-lignes { display: flex; flex-direction: column; gap: 6px; margin: 0; padding: 0; list-style: none; }
+.xp-lignes li { display: flex; justify-content: space-between; gap: 12px; font-size: 14px; font-weight: 500; color: var(--rv-doux, #4A5B78); }
+.xp-lignes b { font-weight: 700; color: #042A65; }
+.xp-plafond { margin: 0; padding: 10px 12px; border-radius: 12px; background: #FFF3E8; font-size: 13px; font-weight: 600; line-height: 1.4; color: #8F3E05; }
+.xp-niveau { display: flex; flex-direction: column; gap: 6px; padding-top: 12px; border-top: 1px solid var(--rv-ligne, #E6DFD8); }
+.xp-niveau-txt { display: flex; justify-content: space-between; font-size: 14px; }
+.xp-niveau-txt b { font-weight: 800; }
+.xp-niveau-txt span { font-weight: 600; color: var(--rv-doux, #4A5B78); }
+.xp-niveau-barre { height: 10px; overflow: hidden; border-radius: 999px; background: #EFE7E0; }
+.xp-niveau-barre i { display: block; height: 100%; border-radius: 999px; background: #7B6FD6; transition: width .8s cubic-bezier(.2,.9,.3,1); }
+.xp-pretes { display: flex; flex-direction: column; gap: 8px; }
+.xp-prete { display: flex; align-items: center; gap: 10px; padding: 12px; border-radius: 14px; background: #DDF5F4; }
+.xp-prete-txt { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.xp-prete-txt b { font-size: 14px; font-weight: 700; line-height: 1.3; }
+
+/* ── Accueil : les quêtes ── */
+.xp-quetes { display: flex; flex-direction: column; gap: 12px; color: #042A65; }
+.xp-quetes-tete { display: flex; flex-direction: column; gap: 2px; }
+.xp-quetes-h2 { margin: 0; padding-left: 12px; border-left: 4px solid var(--rv-vif, #FF4B0A); font: 800 21px/1.2 'Poppins', system-ui, sans-serif; }
+.xp-quetes-sous { padding-left: 16px; font-size: 13px; font-weight: 500; color: var(--rv-doux, #4A5B78); }
+.xp-carte { display: flex; flex-direction: column; gap: 4px; padding: 14px 16px; border-radius: 20px; background: #fff; box-shadow: 0 1px 3px rgba(4,42,101,.1), 0 1px 2px rgba(4,42,101,.06); }
+.xp-carte--jour { background: #F2EBFF; box-shadow: none; }
+.xp-carte-tete { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; margin-bottom: 2px; }
+.xp-surtitre { font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--rv-doux, #4A5B78); }
+.xp-carte--jour .xp-surtitre { color: #5B4FC7; }
+.xp-renouvelle { flex: none; font-size: 12px; font-weight: 600; color: var(--rv-doux, #4A5B78); }
+.xp-quete { display: flex; align-items: center; gap: 12px; padding: 8px 0; }
+.xp-carte:not(.xp-carte--jour) .xp-quete + .xp-quete { border-top: 1px solid var(--rv-ligne, #E6DFD8); }
+.xp-quete-txt { flex: 1; min-width: 0; display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 6px 10px; }
+.xp-quete-titre { grid-column: 1 / -1; font-size: 14.5px; font-weight: 700; line-height: 1.3; }
+.xp-quete--jour .xp-quete-titre { font-size: 16px; }
+.xp-quete-barre { height: 8px; overflow: hidden; border-radius: 999px; background: #EFE7E0; }
+.xp-carte--jour .xp-quete-barre { background: #fff; }
+.xp-quete-barre i { display: block; height: 100%; border-radius: 999px; background: #04ADB3; transition: width .6s cubic-bezier(.2,.9,.3,1); }
+.xp-quete-compte { font-size: 12px; font-weight: 700; color: var(--rv-doux, #4A5B78); font-variant-numeric: tabular-nums; }
+.xp-quete.is-recuperee .xp-quete-titre { color: var(--rv-doux, #4A5B78); }
+.xp-recompense { flex: none; display: inline-flex; align-items: center; gap: 5px; padding: 5px 10px; border-radius: 999px; background: #FFF0E8; font-size: 13px; font-weight: 800; color: #B83706; white-space: nowrap; }
+.xp-recompense.is-prise { background: #DDF5F4; color: #035E62; }
+.xp-recompense.is-vient { animation: xpPalier .6s cubic-bezier(.3,1.6,.5,1) both; }
+.xp-recuperer {
+  flex: none;
+  min-height: 40px;
+  padding: 0 14px;
+  border: 0;
+  border-radius: 12px;
+  background: var(--rv-vif, #FF4B0A);
+  box-shadow: 0 3px 0 #C23A06;
+  font: 700 13.5px 'Poppins', system-ui, sans-serif;
+  color: #fff;
+  white-space: nowrap;
+  cursor: pointer;
+  animation: xpAppelle 1.6s ease-in-out infinite;
+}
+.xp-recuperer:active { transform: translateY(2px); box-shadow: none; }
+.xp-recuperer:focus-visible { outline: 3px solid #042A65; outline-offset: 2px; }
+@keyframes xpAppelle { 0%, 70%, 100% { transform: none; } 80% { transform: rotate(-3deg) scale(1.04); } 90% { transform: rotate(3deg) scale(1.04); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .xp-combo, .xp-combo--palier, .xp-combo--casse, .xp-gain, .xp-niveau-monte, .xp-recompense.is-vient, .xp-recuperer { animation: none; }
+  .xp-niveau-barre i, .xp-quete-barre i { transition: none; }
+}

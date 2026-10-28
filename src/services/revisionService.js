@@ -143,7 +143,7 @@ export function recordRevision(type, details = {}) {
  * Révision menée jusqu'au bout (dernière question du quiz, dernière carte) :
  * complète l'entrée ouverte par recordRevision() pour ce format.
  * @param {'flashcards'|'quiz'|'exercices'} type
- * @param {{ score?: number, total?: number }} [resultat]
+ * @param {{ score?: number, total?: number, xp?: number, bonnes?: number, comboMax?: number, cartes?: number }} [resultat]
  */
 export function markRevisionDone(type, resultat = {}) {
   const lessonId = localStorage.getItem('reviz-current-lesson-id') ?? null
@@ -154,6 +154,10 @@ export function markRevisionDone(type, resultat = {}) {
   if (Number.isFinite(resultat.score) && Number.isFinite(resultat.total)) {
     entry.score = resultat.score
     entry.total = resultat.total
+  }
+  // XP gagnée et ce que lisent les quêtes (utils/xp.js, utils/quetes.js).
+  for (const champ of ['xp', 'bonnes', 'comboMax', 'cartes']) {
+    if (Number.isFinite(resultat[champ])) entry[champ] = resultat[champ]
   }
   localStorage.setItem(getKey(), JSON.stringify(revisions))
   trackStat('revision_terminee', { format: type, source: entry.source ?? 'scan' }, essaiPayload(entry))

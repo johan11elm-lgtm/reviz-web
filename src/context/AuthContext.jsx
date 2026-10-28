@@ -41,6 +41,7 @@ import { apiFetch, apiUrl } from '../services/apiClient';
 import { collection, getDocs, deleteDoc, doc, getDoc, setDoc } from 'firebase/firestore';
 import { noterOuverture } from '../services/retourService';
 import { reprendreAvatarDuProfil } from '../services/avatarService';
+import { reprendreQuetesDuProfil } from '../services/quetesService';
 
 const AuthContext = createContext();
 
@@ -447,6 +448,8 @@ export function AuthProvider({ children }) {
     setNeedsProfileSetup(!hasPassword && !user.isAnonymous && !profile?.birthDate);
     // Photo de profil choisie sur un autre appareil.
     reprendreAvatarDuProfil(user.uid, profile?.avatar);
+    // Récompenses de quêtes récupérées sur un autre appareil.
+    reprendreQuetesDuProfil(user.uid, profile?.quetes);
 
     const premium = profile?.plan === 'premium';
     setIsPremium(premium);

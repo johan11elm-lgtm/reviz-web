@@ -24,6 +24,10 @@ import './Quiz.css'
 import { mesurer } from '../services/mesure'
 import { questionsPremiere } from '../utils/premiereRevision'
 import { noterErreurs, erreursDe } from '../services/erreursService'
+import { useCombo } from '../hooks/useCombo'
+import { PastilleCombo, BilanXp } from '../components/xp/Xp'
+import { gainDeSeance } from '../services/xpService'
+import { xpSeance, BAREME } from '../utils/xp'
 
 // ---- DONNÉES : localStorage (IA) > état vide (mock réservé au dev) ----
 function getQuestions() {
@@ -114,6 +118,8 @@ function QuizSession() {
   const [reponses, setReponses] = useState(() => questions.map(() => null))
   const [fin, setFin] = useState(false)
   const [coach, setCoach] = useState(null) // question pré-remplie pour Réviz IA
+  const combo = useCombo()
+  const [gain, setGain] = useState(null) // XP de la séance, calculée à la dernière question
 
   const q = questions[idx]
   const choix = reponses[idx]
@@ -127,13 +133,18 @@ function QuizSession() {
   function repondre(i) {
     if (repondu || fin) return
     setReponses(rs => rs.map((r, k) => (k === idx ? i : r)))
+    if (i === q.correct) combo.bonne()
+    else combo.faute()
   }
   function suivante() {
     if (!repondu) return
     if (derniere) {
       // Le quiz terminé compte comme fait, avec son score (fiche chapitre : « 6 / 7 au quiz »).
-      recordRevision('quiz', { score: nbJustes, total: questions.length })
+      const { max, paliers } = combo.instantane()
+      const g = gainDeSeance(uid, xpSeance({ bonnes: nbJustes, total: questions.length, paliers }))
+      recordRevision('quiz', { score: nbJustes, total: questions.length, xp: g.xp, bonnes: nbJustes, comboMax: max })
       markRevisionDone('quiz', { score: nbJustes, total: questions.length })
+      setGain(g)
       noterErreurs(uid, coachLessonId, questions, reponses)
       track('quiz_termine', { source: coachLessonId?.startsWith('prog-') ? 'programme' : 'scan' })
       if (premiere) mesurer('premiere_revision', { etape: 'terminee', score: nbJustes, total: questions.length })
@@ -146,6 +157,8 @@ function QuizSession() {
     setReponses(questions.map(() => null))
     setIdx(0)
     setFin(false)
+    setGain(null)
+    combo.remettre()
   }
   const demanderPourquoi = () => {
     const bonne = q.choices[q.correct], prise = q.choices[choix]
@@ -249,7 +262,6 @@ function QuizSession() {
     )
     const pastilles = (
       <div className="qz-pastilles">
-        <span className="qz-xp">+{nbJustes * 10} XP</span>
         <span className="qz-enregistre"><i><Coche taille={12} /></i>{isDesktop ? 'Score enregistré sur la fiche chapitre' : 'Score enregistré'}</span>
       </div>
     )
@@ -316,13 +328,14 @@ function QuizSession() {
           {isDesktop ? (
             <div className="qz-fin-grille">
               <div className="qz-fin-gauche">{score}{reviz(220, 'fier', 'saut')}{pastilles}</div>
-              <div className="qz-fin-droite">{montre}{premiere ? <>{boutons}{aRevoir}</> : <>{parcours}{aRevoir}{boutons}<FormatFeedback format="quiz" question="Ce quiz t'a aidé ?" /><button type="button" className="fc-lien" onClick={fermer}>Retour au chapitre</button></>}</div>
+              <div className="qz-fin-droite"><BilanXp gain={gain} uid={uid} />{montre}{premiere ? <>{boutons}{aRevoir}</> : <>{parcours}{aRevoir}{boutons}<FormatFeedback format="quiz" question="Ce quiz t'a aidé ?" /><button type="button" className="fc-lien" onClick={fermer}>Retour au chapitre</button></>}</div>
             </div>
           ) : (
             <>
               {score}
               {reviz(170, 'fier', 'saut')}
               {pastilles}
+              <BilanXp gain={gain} uid={uid} />
               {montre}
               {premiere ? <>{boutons}{aRevoir}</> : (
                 <>
@@ -387,6 +400,7 @@ function QuizSession() {
     <div className="qn-haut">
       {boutonFermer}
       <span className="qn-barre" aria-hidden="true"><i style={{ width: `${Math.max(progression * 100, 3)}%` }} /></span>
+      <PastilleCombo combo={combo.combo} casse={combo.casse} palier={combo.palier} />
       <span className="qz-pastille-score" aria-label={`${nbJustes} bonnes réponses sur ${nbRepondues}`}>
         <i><Coche taille={12} /></i>{nbJustes} / {nbRepondues}
       </span>
@@ -421,7 +435,7 @@ function QuizSession() {
               <span className="qz-score-cours">{nbJustes} / {nbRepondues || 0}</span>
               <span className="qz-score-sous">{nbJustes > 1 ? 'bonnes réponses' : 'bonne réponse'}</span>
               <span className="qz-segments" aria-hidden="true">{notes.map((n, i) => <i key={i} className={n ? `is-${n}` : ''} />)}</span>
-              <span className="qz-score-sous">+{nbJustes * 10} XP pour l’instant</span>
+              <span className="qz-score-sous">+{nbJustes * BAREME.bonneReponse} XP pour l’instant</span>
               <span className="qn-infos-titre qn-infos-titre--2">Raccourcis</span>
               <span className="fc-touche"><kbd>1</kbd><kbd>4</kbd>Répondre</span>
               <span className="fc-touche"><kbd>Entrée</kbd>Question suivante</span>

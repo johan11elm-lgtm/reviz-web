@@ -59,7 +59,10 @@ describe('<Quiz /> corrigé', () => {
     fireEvent.click(screen.getByRole('button', { name: /^D : 0,01/ }))
     fireEvent.click(screen.getByRole('button', { name: /Voir mon score/ }))
     expect(screen.getByText('Quiz terminé')).toBeInTheDocument()
-    expect(screen.getByText('+10 XP')).toBeInTheDocument()
+    // L'XP est vraiment créditée : 1 bonne réponse (10) + la séance terminée (20), enregistrée sur la révision.
+    expect(screen.getAllByText('+30 XP').length).toBeGreaterThan(0)
+    expect(screen.getByText('1 bonne réponse')).toBeInTheDocument()
+    expect(JSON.parse(localStorage.getItem(Object.keys(localStorage).find(k => k.startsWith('reviz-revisions')))).find(r => r.type === 'quiz')).toMatchObject({ xp: 30, bonnes: 1 })
     expect(quizScore('prog-puissances')).toEqual({ dernier: { score: 1, total: 2 }, meilleur: { score: 1, total: 2 } })
     expect(screen.getByText('Bonne réponse : 0,001')).toBeInTheDocument()
     // Une erreur : « Refaire mes erreurs » d'abord, et « Tout le quiz » pour tout reprendre.

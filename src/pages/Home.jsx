@@ -32,6 +32,8 @@ import { useTheme } from '../context/ThemeContext';
 import { themeById } from '../utils/themes';
 import { etatDuJour, synchroniserStats } from '../services/partieDuJourService';
 import { battleFaiteAujourdhui } from '../services/battleDuJour';
+import { BlocQuetes } from '../components/xp/Xp';
+import { xpQuetes, EVENEMENT_QUETES } from '../services/quetesService';
 import './Home.css';
 
 /*
@@ -140,7 +142,14 @@ export default function Home() {
   }, [uidJeux]);
   // Série avec gel automatique : un jour manqué par semaine ne la casse pas (utils/gamification).
   const { serie: streak, gels } = useMemo(() => detailSerie([...loadRevisions(), ...jourJeux.jours.map(j => ({ revisedAt: `${j}T12:00:00` }))], 'revisedAt', { gel: true }), [allLessons, jourJeux]);
-  const { level, xpTotal } = useMemo(() => computeLevel(allLessons), [allLessons]);
+  // Le niveau compte l'XP des révisions et des quêtes : il bouge quand une récompense est récupérée.
+  const [quetesTick, setQuetesTick] = useState(0);
+  useEffect(() => {
+    const maj = () => setQuetesTick(n => n + 1);
+    window.addEventListener(EVENEMENT_QUETES, maj);
+    return () => window.removeEventListener(EVENEMENT_QUETES, maj);
+  }, []);
+  const { level, xpTotal } = useMemo(() => computeLevel(allLessons, loadRevisions(), xpQuetes(uidJeux)), [allLessons, uidJeux, quetesTick]); // eslint-disable-line react-hooks/exhaustive-deps
   const lastLesson = allLessons[0] ?? null;
   const dailyGoal = parseInt(localStorage.getItem(`reviz-daily-goal-${currentUser?.uid}`) || '3');
   const todayRevisions = useMemo(() => loadRevisions().filter(r =>
@@ -533,6 +542,7 @@ export default function Home() {
             {recherche}
             {ronds}
             {blocDuJour}
+            <BlocQuetes uid={uidJeux} />
             {montrerEssai && <ThemeEssai onClose={() => setEssaiTheme(false)} />}
             <div className="nm-carte">{chemin}</div>
             <div className="nm-carte">{carteMatieres}</div>

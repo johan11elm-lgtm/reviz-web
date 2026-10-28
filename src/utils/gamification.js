@@ -43,11 +43,17 @@ export function detailSerie(items, dateKey = 'scannedAt', { gel = false, aujourd
   return { serie: streak, gels };
 }
 
+/** XP gagnée en révisant, portée par chaque révision depuis le 29/10 (utils/xp.js). */
+export function xpRevisions(revisions = []) {
+  return revisions.reduce((s, r) => s + (Number.isFinite(r?.xp) ? r.xp : 0), 0);
+}
+
 /**
- * Calcule le niveau et la progression XP.
+ * Calcule le niveau et la progression XP : 100 XP par leçon ouverte, plus l'XP gagnée en
+ * révisant et celle des quêtes récupérées.
  */
-export function computeLevel(lessons) {
-  const xp      = lessons.length * XP_PAR_LECON;
+export function computeLevel(lessons, revisions = [], xpQuetes = 0) {
+  const xp      = lessons.length * XP_PAR_LECON + xpRevisions(revisions) + (Number.isFinite(xpQuetes) ? xpQuetes : 0);
   const level   = Math.floor(xp / XP_PAR_NIVEAU) + 1;
   const xpInLvl = xp % XP_PAR_NIVEAU;
   const xpTotal = xp;
