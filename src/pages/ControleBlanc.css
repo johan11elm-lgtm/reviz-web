@@ -2,7 +2,9 @@
  * (qn-*, Quiz.css) ; ici le sujet, le chrono, la réponse choisie, la navigation entre questions,
  * la note sur 20 et le corrigé. Une seule colonne centrée, aussi sur ordinateur. */
 .cb-page .cb-ecran { gap: 14px; }
-.cb-page.qn-page--large .cb-ecran { display: flex; flex-direction: column; width: 100%; max-width: 720px; margin: 0 auto; padding: 28px 24px 48px; }
+/* En colonne, le justify-content: center de la grille du quiz centrerait en hauteur : un corrigé
+ * plus haut que l'écran déborderait au-dessus, hors d'atteinte. On part du haut. */
+.cb-page.qn-page--large .cb-ecran { display: flex; flex-direction: column; justify-content: flex-start; width: 100%; max-width: 720px; margin: 0 auto; padding: 28px 24px 48px; }
 .cb-page.qn-page--large.cb-page--large .cb-ecran { max-width: 1080px; }
 .cb-page .cb-haut .qn-barre { flex: 1; }
 
