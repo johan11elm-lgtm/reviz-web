@@ -74,3 +74,6 @@
 
 /* Page hors parcours : pas de menu de l'app (NavHaut, affiché aux connectés sur ordinateur). */
 body:has(.pe-page--seule) .nav-haut { display: none; }
+
+/* Façon app Nomad (29/10) : le bloc lavande reste à plat, sans ronds décoratifs. */
+.pe-deco, .pe-point { display: none; }
