@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { useAuth } from '../context/AuthContext';
 import { useModalA11y } from '../hooks/useModalA11y';
@@ -82,11 +82,20 @@ function Calendrier({ valeur, onChange }) {
  */
 /**
  * Les chapitres du contrôle, comme l'assistant d'évaluation de l'app Nomad : ceux du programme de
- * la classe pour la matière choisie, à cocher (facultatif). Sans programme pour la matière (« Autre »,
- * catalogue indisponible), rien ne s'affiche et le contrôle se note comme avant.
+ * la classe pour la matière choisie, à cocher (facultatif). L'étape se voit dès l'ouverture (« choisis
+ * la matière ») pour que l'élève sache qu'on lui demandera sur quoi porte le contrôle ; sur téléphone,
+ * la feuille descend jusqu'aux chapitres quand ils arrivent. Sans programme pour la matière (« Autre »,
+ * catalogue indisponible), un mot renvoie à l'intitulé et le contrôle se note comme avant.
  */
-function ChoixChapitres({ classe, matiere, choisis, onChange }) {
+function ChoixChapitres({ classe, matiere, choisis, onChange, defiler }) {
   const [etat, setEtat] = useState({ pour: null, chapitres: [], programme: null });
+  const titre = useRef(null);
+  const pret = Boolean(matiere) && etat.pour === matiere && etat.chapitres.length > 0;
+  useEffect(() => {
+    if (!pret || !defiler) return;
+    const doux = !window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+    titre.current?.scrollIntoView?.({ block: 'start', behavior: doux ? 'smooth' : 'auto' });
+  }, [pret, matiere, defiler]);
   useEffect(() => {
     if (!matiere || matiere === 'autre') return undefined;
     let vivant = true;
@@ -98,14 +107,20 @@ function ChoixChapitres({ classe, matiere, choisis, onChange }) {
       .catch(() => { if (vivant) setEtat({ pour: matiere, chapitres: [], programme: null }); });
     return () => { vivant = false; };
   }, [classe, matiere]);
-  if (!matiere || matiere === 'autre' || etat.pour !== matiere || !etat.chapitres.length) return null;
+  const entete = <span className="ag-champ-titre" ref={titre}>Chapitres du contrôle <span>facultatif</span></span>;
+  let mot = null;
+  if (!matiere) mot = 'Choisis la matière : ses chapitres s’affichent ici, tu coches ceux qui tombent.';
+  else if (matiere === 'autre') mot = 'Pas de chapitres pour « Autre » : écris le sujet dans l’intitulé.';
+  else if (etat.pour !== matiere) mot = 'Chargement des chapitres…';
+  else if (!etat.chapitres.length) mot = 'Pas de chapitres pour cette matière : écris le sujet dans l’intitulé.';
+  if (mot) return <>{entete}<p className="ag-chapitres-vide" role="status">{mot}</p></>;
   const basculer = ch => {
     const deja = choisis.some(c => c.id === ch.id);
     onChange(deja ? choisis.filter(c => c.id !== ch.id) : [...choisis, { id: ch.id, titre: ch.titre }], etat.programme);
   };
   return (
     <>
-      <span className="ag-champ-titre">Chapitres du contrôle <span>facultatif</span></span>
+      {entete}
       <p className="ag-champ-aide">Coche ce qui tombe : ton plan et ton contrôle blanc porteront dessus.</p>
       <ul className="ag-chapitres" aria-label="Chapitres du contrôle">
         {etat.chapitres.map((ch, i) => {
@@ -174,7 +189,7 @@ export function AjoutControle({ initial = {}, onClose, onSaved }) {
           );
         })}
       </div>
-      <ChoixChapitres classe={classe} matiere={matiere} choisis={chapitres} onChange={(c, p) => { setChapitres(c); setProgramme(p); }} />
+      <ChoixChapitres classe={classe} matiere={matiere} choisis={chapitres} defiler={!isDesktop} onChange={(c, p) => { setChapitres(c); setProgramme(p); }} />
       <span className="ag-champ-titre">Date</span>
       {!isDesktop && (
         <div className="ag-dates">

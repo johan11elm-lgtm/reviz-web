@@ -403,3 +403,10 @@
 .na-page .ag-ctrl-jour { background: #F2EBFF; }
 .na-page .ag-ligne .ag-rond { width: 46px; height: 46px; }
 .na-page.ag-page--large .ag-rebours--mot { font-size: 18px; }
+/* L'étape des chapitres avant le choix de la matière (ou sans programme) : un cadre en pointillés. */
+.ag-chapitres-vide { margin: 0; padding: 14px 16px; border: 1.5px dashed #D9CFC6; border-radius: 14px; font-size: 14px; line-height: 1.4; color: var(--rv-doux); }
+.ag-feuille .ag-champ-titre { scroll-margin-top: 12px; }
+/* Les tuiles de date remplissent la largeur : « Autre date » n'est plus coupée au bord. */
+.ag-feuille .ag-dates { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)) minmax(0, 1.15fr); gap: 8px; overflow: visible; padding: 2px 0 4px; }
+.ag-feuille .ag-date-tuile { width: auto; min-width: 0; }
+.ag-feuille .ag-date-tuile--autre { padding: 0 6px; font-size: 13.5px; }

@@ -180,6 +180,8 @@ for (const [appareil, viewport] of APPAREILS) {
       await page.goto('/agenda')
       await page.getByRole('button', { name: 'Ajouter un contrôle' }).first().click()
       const feuille = page.getByRole('dialog', { name: 'Ajouter un contrôle' })
+      // L'étape des chapitres se voit avant même le choix de la matière.
+      await expect(feuille.getByText(/Choisis la matière : ses chapitres s’affichent ici/)).toBeVisible()
       await feuille.getByRole('button', { name: 'Maths', exact: true }).click()
       // Les chapitres de la matière, à cocher : Thalès, jamais ouvert.
       const thales = feuille.getByRole('checkbox', { name: 'Le théorème de Thalès' })
