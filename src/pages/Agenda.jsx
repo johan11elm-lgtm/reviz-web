@@ -7,6 +7,7 @@ import { Mascot } from '../components/Mascot';
 import { BulleReviz } from '../components/reviz/BulleReviz';
 import { AjoutControle, couleursMatiere } from '../components/AjoutControle';
 import { PlanRevision } from '../components/PlanRevision';
+import { preparerQuizErreurs } from '../services/erreursService';
 import { useIsDesktop } from '../hooks/useMediaQuery';
 import { track } from '../services/statsService';
 import {
@@ -104,10 +105,12 @@ export default function Agenda() {
     navigate(ctrl.matiere === 'autre' ? '/cours' : `/programme?matiere=${ctrl.matiere}`);
   }
   // Une étape du plan lancée compte comme faite (le jour même) : l'élève révise le chapitre.
+  // Le quiz sur les points ratés (J-3) ouvre les questions ratées de la matière, s'il y en a.
   async function lancerEtape(ctrl, etape) {
     track('agenda_plan_etape', { matiere: ctrl.matiere, etape: etape.id });
     setAgenda(await marquerEtape(currentUser, ctrl.id, etape.id));
-    reviser(ctrl);
+    if (etape.id === 'quiz' && preparerQuizErreurs(currentUser?.uid, ctrl.matiere)) navigate('/quiz?erreurs=1');
+    else reviser(ctrl);
   }
   async function retirer(ctrl) {
     setAgenda(await supprimerControle(currentUser, ctrl.id));

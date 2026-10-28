@@ -62,7 +62,9 @@ describe('<Quiz /> corrigé', () => {
     expect(screen.getByText('+10 XP')).toBeInTheDocument()
     expect(quizScore('prog-puissances')).toEqual({ dernier: { score: 1, total: 2 }, meilleur: { score: 1, total: 2 } })
     expect(screen.getByText('Bonne réponse : 0,001')).toBeInTheDocument()
-    fireEvent.click(screen.getByRole('button', { name: 'Refaire le quiz' }))
+    // Une erreur : « Refaire mes erreurs » d'abord, et « Tout le quiz » pour tout reprendre.
+    expect(screen.getByRole('button', { name: 'Refaire mes erreurs' })).toBeInTheDocument()
+    fireEvent.click(screen.getByRole('button', { name: 'Tout le quiz' }))
     expect(screen.getByText('Question 1 sur 2')).toBeInTheDocument()
   })
 })

@@ -166,7 +166,9 @@ test.describe('Mon programme', () => {
       await expect(page.getByText(new RegExp(`^${quiz.length - 1}\\s*/\\s*${quiz.length}$`)).first()).toBeVisible()
       await expect(page.getByText(/Score enregistré/)).toBeVisible()
       await expect(page.getByRole('heading', { name: 'À revoir' })).toBeVisible()
-      await expect(page.getByRole('button', { name: 'Refaire le quiz' })).toBeVisible()
+      // Une erreur : on propose d'abord de refaire ses erreurs, puis tout le quiz.
+      await expect(page.getByRole('button', { name: 'Refaire mes erreurs' })).toBeVisible()
+      await expect(page.getByRole('button', { name: 'Tout le quiz' })).toBeVisible()
       await sansDebordement(page, `fin du quiz ${appareil}`)
       await page.screenshot({ path: test.info().outputPath('quiz-fin.png') })
 

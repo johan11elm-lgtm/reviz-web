@@ -22,6 +22,7 @@ import './Flashcards.css'
 import './Quiz.css'
 import { mesurer } from '../services/mesure'
 import { questionsPremiere } from '../utils/premiereRevision'
+import { noterErreurs, erreursDe } from '../services/erreursService'
 
 // ---- DONNÉES : localStorage (IA) > état vide (mock réservé au dev) ----
 function getQuestions() {
@@ -68,8 +69,10 @@ const Fleche = () => (
 export default function Quiz() {
   // Décision stable pour toute la vie du composant (rules-of-hooks safe).
   const [hasData] = useState(() => getQuestions() !== null)
+  const location = useLocation()
   if (!hasData) return <MissingLessonState title="Quiz" />
-  return <QuizSession />
+  // « Refaire mes erreurs » change seulement ?erreurs=1 : une nouvelle session repart de zéro.
+  return <QuizSession key={location.search} />
 }
 
 /**
@@ -82,11 +85,23 @@ function QuizSession() {
   const isDesktop = useIsDesktop()
   const navigate = useNavigate()
   const location = useLocation()
-  const { isGuest } = useAuth()
+  const { isGuest, currentUser } = useAuth()
+  const uid = currentUser?.uid ?? null
   useEffect(() => { mesurer('format_ouvert', { format: 'quiz' }) }, [])
   // Première révision guidée (fin de la découverte) : 5 questions, puis l'accueil.
   const [premiere] = useState(() => new URLSearchParams(location.search).get('premiere') === '1')
-  const questions = useMemo(() => (premiere ? questionsPremiere(getQuestions()) : getQuestions()), [premiere])
+  // ?erreurs=1 : seulement les questions ratées de cette leçon (services/erreursService), s'il y en a.
+  const [modeErreurs] = useState(() => new URLSearchParams(location.search).get('erreurs') === '1')
+  const questions = useMemo(() => {
+    const toutes = getQuestions()
+    if (premiere) return questionsPremiere(toutes)
+    if (modeErreurs) {
+      const ratees = new Set(erreursDe(uid, localStorage.getItem('reviz-current-lesson-id')))
+      const filtre = toutes.filter(q => ratees.has(q.question))
+      if (filtre.length) return filtre
+    }
+    return toutes
+  }, [premiere, modeErreurs, uid])
   const ai = useMemo(() => lireAi(), [])
   const lessonTitle = useMemo(() => getLessonTitle(), [])
   const matiere = ai.metadata?.subject || ''
@@ -118,6 +133,7 @@ function QuizSession() {
       // Le quiz terminé compte comme fait, avec son score (fiche chapitre : « 6 / 7 au quiz »).
       recordRevision('quiz', { score: nbJustes, total: questions.length })
       markRevisionDone('quiz', { score: nbJustes, total: questions.length })
+      noterErreurs(uid, coachLessonId, questions, reponses)
       track('quiz_termine', { source: coachLessonId?.startsWith('prog-') ? 'programme' : 'scan' })
       if (premiere) mesurer('premiere_revision', { etape: 'terminee', score: nbJustes, total: questions.length })
       setFin(true)
@@ -282,7 +298,10 @@ function QuizSession() {
       </div>
     ) : (
       <div className="qz-fin-actions">
-        <button type="button" className="fc-btn fc-btn--orange" onClick={refaire}>Refaire le quiz</button>
+        {erreurs.length > 0
+          ? <button type="button" className="fc-btn fc-btn--orange" onClick={() => navigate(`/quiz?erreurs=1`, { replace: true, state: location.state })}>Refaire mes erreurs</button>
+          : <button type="button" className="fc-btn fc-btn--orange" onClick={refaire}>Refaire le quiz</button>}
+        {erreurs.length > 0 && <button type="button" className="fc-btn fc-btn--blanc" onClick={refaire}>Tout le quiz</button>}
         {erreurs.length > 0 && total > 0 && (
           <button type="button" className="fc-btn fc-btn--blanc" onClick={() => versExercice(navigate, location, '/flashcards')}>Revoir les cartes</button>
         )}

@@ -1,7 +1,7 @@
 // Les nouveautés du 28/10 (comparatif Nomad, priorité 1) : le plan de révision d'un contrôle,
 // le simulateur de notes du brevet et l'espace parent. Téléphone et ordinateur.
 import { test, expect } from '@playwright/test'
-import { mockApiRoutes, mockProgramme, entrerEnEssai, sansDebordement, compteRapide, lireProfilEmulateur } from './helpers'
+import { mockApiRoutes, mockProgramme, entrerEnEssai, sansDebordement, compteRapide, lireProfilEmulateur, ouvrirChapitreDuProgramme, chapitreThales, jouerQuiz } from './helpers'
 
 const APPAREILS = [
   ['ordinateur', { width: 1280, height: 800 }],
@@ -102,6 +102,22 @@ for (const [appareil, viewport] of APPAREILS) {
       await page.route('**/api/track?op=parent*', route => route.fulfill({ status: 403, contentType: 'application/json', body: '{"error":"LIEN_COUPE"}' }))
       await page.goto(`/parent?u=abcdefghij1234&e=${Math.floor(Date.now() / 1000) + 86400}&v=0&t=x`)
       await expect(page.getByRole('heading', { name: 'L’accès est en pause' })).toBeVisible()
+    })
+
+    test('les erreurs d’un quiz se refont seules, puis disparaissent', async ({ page }) => {
+      await mockApiRoutes(page)
+      await mockProgramme(page)
+      await entrerEnEssai(page)
+      await ouvrirChapitreDuProgramme(page)
+      const quiz = chapitreThales().quiz
+      await page.goto('/quiz')
+      await jouerQuiz(page, quiz, { bonnes: quiz.length - 2 })
+      await page.getByRole('button', { name: 'Refaire mes erreurs' }).click()
+      // Seulement les deux questions ratées
+      await expect(page.getByText(/Question 1 sur 2/)).toBeVisible()
+      await jouerQuiz(page, quiz.slice(-2))
+      await expect(page.getByRole('button', { name: 'Refaire le quiz' })).toBeVisible()
+      await expect(page.getByRole('button', { name: 'Refaire mes erreurs' })).toHaveCount(0)
     })
 
     test('le mode dyslexie change la police des écrans de lecture, et reste choisi', async ({ page }) => {

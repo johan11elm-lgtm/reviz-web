@@ -16,6 +16,7 @@ import { agendaLocal, chargerAgenda } from '../services/agendaService';
 import { controlesAVenir, compteARebours, matiereControle, joursEntre, jourIso } from '../utils/agenda';
 import { planRevision } from '../utils/planRevision';
 import { marquerEtape } from '../services/agendaService';
+import { preparerQuizErreurs } from '../services/erreursService';
 import { hasProgramme, PROGRAMME_FALLBACK } from '../utils/programme';
 import { useIsDesktop } from '../hooks/useMediaQuery';
 import { countDueCards } from '../services/srsService';
@@ -256,7 +257,9 @@ export default function Home() {
   // Une étape du plan lancée compte comme faite aujourd'hui, puis on va réviser la matière.
   const lancerEtape = async id => {
     await marquerEtape(currentUser, controle.id, id).catch(() => {});
-    navigate(cibleControle);
+    // J-3 : le quiz des questions ratées dans la matière du contrôle, s'il y en a.
+    if (id === 'quiz' && preparerQuizErreurs(currentUser?.uid, controle.matiere)) navigate('/quiz?erreurs=1');
+    else navigate(cibleControle);
   };
   // Le chemin (téléphone) : les trois étapes, puis le contrôle au bout s'il y en a un.
   const cases = [
