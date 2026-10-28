@@ -199,7 +199,7 @@ function FlashcardsSession() {
       })()
     : ecran === 'rien' ? ['Rien à revoir aujourd’hui.', 'Tu es à jour sur ce chapitre.']
     : reaction ? REACTION[reaction]
-    : [nbDues && nbNouvelles ? `${nbDues} à revoir, ${pluriel(nbNouvelles, 'nouvelle')}.` : nbDues ? `${pluriel(nbDues, 'carte')} à revoir.` : `${pluriel(nbNouvelles, 'nouvelle carte')}.`,
+    : [nbDues && nbNouvelles ? `${nbDues} à revoir, ${pluriel(nbNouvelles, 'nouvelle')}.` : nbDues ? `${pluriel(nbDues, 'carte')} à revoir.` : `${nbNouvelles} ${nbNouvelles > 1 ? 'nouvelles cartes' : 'nouvelle carte'}.`,
        'Prends ton temps sur chaque carte.']
   const pantin = useRef(null)
   const [parle, setParle] = useState(false)
@@ -397,17 +397,21 @@ function FlashcardsSession() {
     </div>
   )
 
+  // Série façon app Nomad (29/10) : barre de progression orange au lieu de la route, la carte au
+  // centre, sans Réviz pendant la série (il revient à la fin).
+  const barre = (
+    <div className="fc-barre-ligne">
+      {boutonFermer}
+      <span className="fc-barre" aria-hidden="true"><i style={{ width: `${Math.max(idx / serie.length * 100, 3)}%` }} /></span>
+    </div>
+  )
+
   return (
-    <div className={`app app--no-halo flashcards-page fc-page${isDesktop ? ' app--large fc-page--large' : ''}`} style={varsTeinte(teinte)}>
-      {deco}
+    <div className={`app app--no-halo flashcards-page fc-page fc-page--serie${isDesktop ? ' app--large fc-page--large' : ''}`}>
       {isDesktop ? (
         <div className="fc-ecran fc-ecran--serie">
-          <div className="fc-haut-gauche">{boutonFermer}</div>
-          {enTete}
-          <Route notes={notes} idx={idx} grand />
-          <div className="fc-plateau">
-            <div className="fc-col-gauche">{reviz(220, 'bas', 'content')}</div>
-            <div className="fc-col-centre">{scene}{actions}</div>
+          <div className="fc-plateau fc-plateau--nomad">
+            <div className="fc-col-centre">{barre}{enTete}{scene}{actions}</div>
             <aside className="fc-col-droite">
               <div className="fc-infos">
                 <span className="fc-infos-titre">Cette série</span>
@@ -424,10 +428,9 @@ function FlashcardsSession() {
         </div>
       ) : (
         <div className="fc-ecran fc-ecran--serie">
-          <div className="fc-ligne-haut">{boutonFermer}{enTete}</div>
-          <Route notes={notes} idx={idx} />
+          {barre}
+          {enTete}
           {scene}
-          {reviz(96, 'gauche', 'content')}
           {actions}
         </div>
       )}

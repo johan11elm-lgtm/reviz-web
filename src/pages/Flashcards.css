@@ -392,3 +392,77 @@
   --hm-encre: #042A65; --hm-doux: #6E675B; --inst-encre: #042A65; --inst-doux: #6E675B; --lg-encre: #042A65; --lg-doux: #6E675B; --prg-encre: #042A65; --prg-doux: #6E675B;
   color: #042A65;
 }
+
+/* ═══ Jeux plein écran façon app Nomad (29/10) ═══════════════════════════════
+ * Base des Flashcards et des écrans de fin (quiz, série) : fond crème sans ronds
+ * décoratifs, cartes blanches à ombre légère, boutons arrondis aux couleurs de
+ * Nomad (marine, orange vif, turquoise, rose), route des réponses recolorée. */
+.fc-page { background: var(--rv-fond); color: #042A65; --ch-encre: #042A65; --ch-doux: var(--rv-doux); --ch-ombre: rgba(4,42,101,.10); }
+.fc-page .fc-decors, .fc-page .fc-grain { display: none; }
+.fc-page .fc-fermer { box-shadow: 0 1px 3px rgba(4,42,101,.12); color: #042A65; }
+.fc-page .fc-fermer--pilule { border-radius: 12px; }
+
+/* Barre de progression (série de cartes) */
+.fc-page .fc-barre-ligne { display: flex; align-items: center; gap: 12px; }
+.fc-page .fc-barre { flex: 1; height: 12px; overflow: hidden; border-radius: 999px; background: #E8DFD7; }
+.fc-page .fc-barre i { display: block; height: 100%; border-radius: 999px; background: var(--rv-vif); transition: width .4s ease; }
+.fc-page--serie .fc-tete { flex-direction: row; justify-content: space-between; align-items: baseline; gap: 12px; margin-top: 14px; }
+.fc-page--serie .fc-tete-titre { min-width: 0; font-size: 13px; font-weight: 600; opacity: 1; color: var(--rv-doux); }
+.fc-page--serie .fc-tete-compte { flex: none; font-family: inherit; font-size: 13px; font-weight: 700; letter-spacing: 0; color: #042A65; }
+
+/* Carte : elle prend la hauteur, les boutons restent en bas (téléphone) */
+.fc-page--serie:not(.fc-page--large) .fc-scene { max-height: 470px; }
+.fc-page--serie:not(.fc-page--large) .fc-actions { margin-top: auto; padding-top: 18px; }
+.fc-page .fc-pile { box-shadow: 0 1px 3px rgba(4,42,101,.1), 0 1px 2px rgba(4,42,101,.06); border-radius: 24px; }
+.fc-page .fc-face { border-radius: 24px; box-shadow: 0 1px 3px rgba(4,42,101,.1), 0 8px 24px -10px rgba(4,42,101,.25); }
+.fc-page .fc-carte { border-radius: 24px; }
+.fc-page .fc-question, .fc-page .fc-reponse { font-family: inherit; font-weight: 700; letter-spacing: 0; line-height: 1.25; color: #042A65; }
+.fc-page .fc-etiquette { border-radius: 8px; background: #FFE9DF; color: var(--rv-vif-plein); }
+.fc-page .fc-etiquette--nouvelle { background: #F2EBFF; color: #042A65; }
+.fc-page .fc-astuce { color: var(--rv-vif-plein); }
+.fc-page .fc-tampon { font-family: inherit; }
+.fc-page .fc-tampon--sais { color: #035E62; border-color: #04ADB3; }
+.fc-page .fc-tampon--revoir { color: #A3172B; border-color: #E0364D; }
+
+/* Boutons */
+.fc-page .fc-btn { border-radius: 14px; }
+.fc-page .fc-btn--encre { background: #042A65; color: #fff; box-shadow: 0 4px 0 #001330; }
+.fc-page .fc-btn--encre:active { box-shadow: 0 1px 0 #001330; }
+.fc-page .fc-btn--orange { background: var(--rv-vif-plein); box-shadow: 0 4px 0 #B83706; }
+.fc-page .fc-btn--orange:active { box-shadow: 0 1px 0 #B83706; }
+.fc-page .fc-btn--blanc { background: #fff; color: #042A65; box-shadow: 0 1px 3px rgba(4,42,101,.12), 0 3px 0 #E6DFD8; }
+.fc-page .fc-btn--blanc:active { box-shadow: 0 1px 0 #E6DFD8; }
+.fc-page .fc-btn--vert { background: #04ADB3; color: #fff; box-shadow: 0 4px 0 #038A8F; }
+.fc-page .fc-btn--vert:active { box-shadow: 0 1px 0 #038A8F; }
+.fc-page .fc-btn--vert kbd { background: rgba(255,255,255,.22); }
+.fc-page .fc-notes .fc-btn--orange { background: #E0364D; box-shadow: 0 4px 0 #B42438; }
+.fc-page .fc-notes .fc-btn--orange:active { box-shadow: 0 1px 0 #B42438; }
+.fc-page .fc-precedente-point--sais { background: #04ADB3; }
+.fc-page .fc-precedente-point--revoir { background: #E0364D; }
+
+/* Route des réponses (récapitulatifs de fin) */
+.fc-page .fc-route::before { border-top-color: #E0D6CD; }
+.fc-page .fc-case { border-color: #fff; font-family: inherit; }
+.fc-page .fc-case--avenir { background: #EFE7E0; color: #4A5B78; box-shadow: none; }
+.fc-page .fc-case--cours { border-color: var(--rv-vif); color: var(--rv-vif-plein); box-shadow: none; }
+.fc-page .fc-case--sais, .fc-page .fc-case--juste { background: #04ADB3; box-shadow: none; }
+.fc-page .fc-case--revoir, .fc-page .fc-case--faux { background: #E0364D; box-shadow: none; }
+.fc-page .fc-case--presque { border-color: #B9A6FB; box-shadow: none; }
+.fc-page .fc-case--presque i { background: #042A65; }
+
+/* Panneau d'infos (ordinateur) */
+.fc-page .fc-infos { border-radius: 20px; background: #fff; box-shadow: 0 1px 3px rgba(4,42,101,.1), 0 1px 2px rgba(4,42,101,.06); }
+.fc-page .fc-pt--peche { background: var(--rv-vif); }
+.fc-page .fc-pt--lavande { background: #B9A6FB; }
+
+/* Série sur ordinateur : colonne centrale, infos à droite */
+.fc-page--large .fc-plateau--nomad { display: grid; grid-template-columns: minmax(0, 640px) 280px; justify-content: center; align-items: start; gap: 32px; width: 100%; margin: 0; }
+.fc-page--large .fc-plateau--nomad .fc-col-centre { display: flex; flex-direction: column; align-items: stretch; justify-content: flex-start; min-width: 0; height: auto; }
+.fc-page--large .fc-plateau--nomad .fc-actions { width: 100%; max-width: 520px; margin: 22px auto 0; }
+.fc-page--large .fc-plateau--nomad .fc-col-droite { padding-top: 96px; }
+.fc-page--large.fc-page--serie .fc-ecran--serie { justify-content: flex-start; padding-top: 28px; }
+.fc-page--large .fc-plateau--nomad .fc-scene { max-width: 520px; max-height: 420px; height: 420px; flex: none; margin-top: 28px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .fc-page .fc-barre i { transition: none; }
+}

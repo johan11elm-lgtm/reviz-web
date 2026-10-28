@@ -377,3 +377,26 @@
   .qn-page .qz-correction { animation: none; }
   .qn-page .qn-barre i { transition: none; }
 }
+
+/* ═══ Fin du quiz façon app Nomad (29/10) : fond crème (base des jeux), cartes blanches à
+ * ombre légère, titres à barre orange, turquoise pour le juste, rose pour le faux. ═══ */
+.qz-page--fin .qz-score-grand { font-family: inherit; letter-spacing: -.02em; color: #042A65; }
+.qz-page--fin .qz-surtitre { opacity: 1; color: var(--rv-doux); }
+.qz-page--fin .qz-xp, .qz-page--fin .qz-enregistre { border-radius: 10px; box-shadow: 0 1px 3px rgba(4,42,101,.1); }
+.qz-page--fin .qz-xp { font-family: inherit; color: var(--rv-vif-plein); }
+.qz-page--fin .qz-enregistre i { background: #04ADB3; }
+.qz-page--fin .qz-carte { border-radius: 20px; background: #fff; box-shadow: 0 1px 3px rgba(4,42,101,.1), 0 1px 2px rgba(4,42,101,.06); }
+.qz-page--fin .qz-titre2 { padding-left: 12px; border-left: 4px solid var(--rv-vif); font-family: inherit; font-size: 21px; letter-spacing: 0; line-height: 1.2; color: #042A65; }
+.qz-page--fin .qz-parcours-compte.is-fini { color: #037F84; }
+.qz-page--fin .qz-etapes::before { background: #DDF5F4; }
+.qz-page--fin .qz-etape-rond { background: #EFE7E0; box-shadow: none; }
+.qz-page--fin .qz-etapes li.is-fait .qz-etape-rond { background: #04ADB3; box-shadow: none; }
+.qz-page--fin .qz-sep { border-top: 1px solid var(--rv-ligne); }
+.qz-page--fin .qz-erreur-num { color: var(--rv-vif-plein); }
+.qz-page--fin .qz-pill { border-radius: 8px; }
+.qz-page--fin .qz-pill--faux { background: #FFE5E8; color: #A3172B; }
+.qz-page--fin .qz-pill--juste { background: #DDF5F4; color: #035E62; }
+.qz-page--fin .qz-parent { border-color: #F2EBFF; }
+.qz-page--fin .qz-parent-input:focus-visible { border-color: #042A65; }
+.qz-page--fin .qz-segments i.is-juste { background: #04ADB3; }
+.qz-page--fin .qz-segments i.is-faux { background: #E0364D; }
