@@ -21,7 +21,7 @@ vi.mock('../../services/reminderService', async importOriginal => ({ ...(await i
 vi.mock('../../components/ConsentBanner', () => ({ ConsentBanner: () => null }))
 vi.mock('../../components/EmailBanner', () => ({ EmailBanner: () => null }))
 vi.mock('../../components/GuestBanner', () => ({ GuestBanner: () => null }))
-vi.mock('../../components/BottomNav', () => ({ BottomNav: () => null }))
+vi.mock('../../components/BottomNav', () => ({ BottomNav: () => null, EtoileIA: () => null }))
 vi.mock('../../components/Pantin', () => ({ Pantin: () => null, tempsLettres: () => 0 }))
 vi.mock('../../components/reviz/BulleReviz', () => ({ BulleReviz: () => null }))
 

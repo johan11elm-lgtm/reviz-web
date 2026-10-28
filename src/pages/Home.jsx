@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { BottomNav } from '../components/BottomNav';
+import { BottomNav, EtoileIA } from '../components/BottomNav';
 import { GuestBanner } from '../components/GuestBanner';
 import { ConsentBanner } from '../components/ConsentBanner';
 import { EmailBanner } from '../components/EmailBanner';
@@ -503,13 +503,13 @@ export default function Home() {
         <h2 id="nm-rail-indis" className="nm-rail-titre">Tes indispensables</h2>
         <div className="nm-rail-carte nm-indis">
           {[
-            !isGuest && { to: '/coach', pose: 'coach', label: 'Réviz IA' },
+            !isGuest && { to: '/coach', etoile: true, label: 'Réviz IA' },
             { to: '/agenda', pose: 'thinking', label: 'Agenda' },
             classe === '3ème' && { to: '/simulateur-brevet', pose: 'graduation', label: 'Simulateur' },
             { to: '/jeux?depuis=accueil', pose: 'celebration', label: 'Jeux' },
           ].filter(Boolean).map(r => (
             <Link key={r.to} to={r.to} className="nm-indis-item">
-              <span className="nm-indis-rond"><Mascot pose={r.pose} size={40} alt="" aria-hidden="true" /></span>
+              <span className="nm-indis-rond">{r.etoile ? <EtoileIA id="rv-ia-indis" size={26} /> : <Mascot pose={r.pose} size={40} alt="" aria-hidden="true" />}</span>
               <span>{r.label}</span>
             </Link>
           ))}

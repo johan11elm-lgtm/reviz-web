@@ -26,7 +26,9 @@ const ONGLETS = [
  * gauche, les onglets en texte dans une capsule blanche au centre (l'onglet actif en pilule
  * orange), puis à droite Réviz IA, « S'abonner » (sans Réviz+) et l'avatar du profil. En mode
  * essai, « Créer mon compte » remplace Réviz IA et l'abonnement (le coach demande un compte).
- * Rendue une fois sous AuthProvider ; invisible en dessous de 1024 px (CSS).
+ * Au survol, les onglets s'animent comme le menu de nomadeducation.fr ; Réviz IA a le sien
+ * (l'étoile tourne, un liseré dégradé fait le tour). Rendue une fois sous AuthProvider ;
+ * invisible en dessous de 1024 px (CSS).
  */
 export function NavHaut() {
   const { currentUser, isGuest, hasRevizPlus } = useAuth();
@@ -52,7 +54,10 @@ export function NavHaut() {
               return `nav-haut-onglet${actif ? ' nav-haut-onglet--actif' : ''}`;
             }}
           >
-            {o.label}
+            {/* Survol façon nomadeducation.fr : deux bandes inclinées montent (orange puis marine)
+                et le libellé roule, son double blanc tombe d'en haut. Double masqué aux lecteurs d'écran. */}
+            <span className="nh-bandes" aria-hidden="true"><i /><i /></span>
+            <span className="nh-roule"><span>{o.label}</span><span aria-hidden="true">{o.label}</span></span>
           </NavLink>
         ))}
       </div>

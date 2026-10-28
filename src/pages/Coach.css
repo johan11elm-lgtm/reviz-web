@@ -424,6 +424,9 @@
 .ia-eleve { background: #042A65; color: #fff; border-radius: 18px 18px 6px 18px; }
 .ia-relance { border: 0; border-radius: 12px; box-shadow: 0 1px 3px rgba(4,42,101,.1); color: #042A65; }
 .ia-relance:hover { background: #F2EBFF; }
-.ia-champ { border-radius: 20px; box-shadow: 0 1px 3px rgba(4,42,101,.1), 0 8px 24px -12px rgba(4,42,101,.25); }
+/* Le liseré dégradé épouse le champ : rayon du cadre = rayon du champ + épaisseur du liseré
+ * (20 + 2), sinon le dégradé s'épaissit dans les coins. La lueur suit le cadre, pas le champ. */
+.ia-champ-cadre { border-radius: 22px; box-shadow: 0 10px 28px -14px rgba(255,75,10,.38), 0 4px 12px -8px rgba(185,166,251,.5); }
+.ia-champ { border-radius: 20px; box-shadow: none; }
 .ia-envoyer { background: var(--rv-vif-plein); color: #fff; }
 .ia-salut { color: #042A65; }

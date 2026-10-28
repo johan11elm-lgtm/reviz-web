@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { BottomNav } from '../components/BottomNav';
+import { BottomNav, EtoileIA } from '../components/BottomNav';
 import { Mascot } from '../components/Mascot';
 import { analyseLesson, analyseImage, popPendingAnalysis } from '../services/aiService';
 import { LESSON_TEXT_MAX_LABEL } from '../utils/lessonText';
@@ -457,7 +457,7 @@ export default function Analyse() {
   const blocIA = iaDispo && (isDesktop ? (
     <section className="ch-ia-carte" aria-labelledby="ch-ia">
       <div className="ch-ia-tete">
-        <span className="ch-ia-anneau" aria-hidden="true"><span><Mascot pose="coach" size={44} alt="" /></span></span>
+        <span className="ch-ia-anneau" aria-hidden="true"><span><EtoileIA id="rv-ia-fiche" size={24} /></span></span>
         <span>
           <h2 id="ch-ia" className="ch-ia-titre">Une question ?</h2>
           <span className="ch-ia-sous">Réviz IA répond sur ce chapitre.</span>
@@ -475,7 +475,7 @@ export default function Analyse() {
     </section>
   ) : (
     <Link to={`/coach?lesson=${coachLessonId}`} className="nf-ligne nf-ligne--ia">
-      <span className="ch-ia-anneau" aria-hidden="true"><span><Mascot pose="coach" size={38} alt="" /></span></span>
+      <span className="ch-ia-anneau" aria-hidden="true"><span><EtoileIA id="rv-ia-fiche-tel" size={20} /></span></span>
       <span className="nf-ligne-txt">
         <span className="nf-ligne-titre">Poser une question à Réviz IA</span>
         <span className="nf-ligne-sous">Sur ce chapitre</span>
