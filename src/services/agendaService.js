@@ -80,8 +80,10 @@ export async function ajouterControle(user, { matiere, titre, date }) {
   // On ne garde pas les contrôles passés depuis plus d'un mois.
   const limite = jourIso(new Date(Date.now() - 31 * 86_400_000))
   const controles = [...agenda.controles.filter(c => c.date >= limite), controle]
-  // Le premier contrôle noté a son plan de révision offert en entier (Réviz+).
-  return enregistrer(user, { ...agenda, controles, planOffert: agenda.planOffert ?? controle.id })
+  // Le premier contrôle noté a son plan de révision offert en entier (Réviz+). Agenda d'avant le
+  // plan (pas encore de planOffert) : c'est le plus proche des contrôles déjà notés qui l'a.
+  const premier = agenda.planOffert ?? controlesAVenir(agenda.controles)[0]?.id ?? controle.id
+  return enregistrer(user, { ...agenda, controles, planOffert: premier })
 }
 
 /** Note une étape du plan de révision comme faite aujourd'hui (flash, quiz ou blanc). */
