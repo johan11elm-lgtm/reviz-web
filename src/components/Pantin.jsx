@@ -192,6 +192,7 @@ export const Pantin = forwardRef(function Pantin(
     let vivant = true;
     let a = null;
     let obs = null;
+    let finDefilement = null;
     const appels = [];
     const h = hote.current;
     chargerMoteur().then(async gsap => {
@@ -242,11 +243,23 @@ export const Pantin = forwardRef(function Pantin(
       // Pendant la chute, pas d'humeur : ses petits sauts (déterminé…) partent de la hauteur
       // du moment et le feraient remonter après l'atterrissage. Elle arrive à la fin du geste.
       if (!chute) a.expression(versMoteur(exprRef.current));
-      // Hors de l'écran (page qui défile) : le pantin se met en pause, il ne coûte plus rien.
+      // Hors de l'écran, le pantin se met en pause : il ne coûte plus rien. Pendant qu'on fait
+      // défiler aussi : il se redessinait à chaque image, trois fois plus de calcul que la page
+      // seule, en concurrence avec le défilement sur iPhone (Johan, 28/10). Il repart 180 ms
+      // après le dernier mouvement.
+      let visible = true, defile = false, minuterie;
+      const appliquer = () => (visible && !defile ? a.reprendre() : a.pause());
       if ('IntersectionObserver' in window && boite.current) {
-        obs = new IntersectionObserver(([v]) => (v.isIntersecting ? a.reprendre() : a.pause()));
+        obs = new IntersectionObserver(([v]) => { visible = v.isIntersecting; appliquer(); });
         obs.observe(boite.current);
       }
+      const surDefilement = () => {
+        if (!defile) { defile = true; appliquer(); }
+        clearTimeout(minuterie);
+        minuterie = setTimeout(() => { defile = false; appliquer(); }, 180);
+      };
+      document.addEventListener('scroll', surDefilement, { capture: true, passive: true });
+      finDefilement = () => { clearTimeout(minuterie); document.removeEventListener('scroll', surDefilement, { capture: true }); };
       const fini = () => { enEntree.current = false; entreeFinie.current?.(); };
       // La chute part tout de suite (il apparaît déjà en l'air) ; les autres gestes attendent un peu.
       enEntree.current = chute;
@@ -258,6 +271,7 @@ export const Pantin = forwardRef(function Pantin(
     return () => {
       vivant = false;
       obs?.disconnect();
+      finDefilement?.();
       appels.forEach(c => c.kill());
       a?.detruire();
       anim.current = null;

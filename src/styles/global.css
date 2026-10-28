@@ -458,6 +458,10 @@
 html, body, #root {
   height: 100%;
 }
+/* Les pages défilent dans leur conteneur (.content…), jamais le document : sans ça, iOS faisait
+   parfois rebondir tout le document au bord du conteneur et le geste suivant restait collé, un
+   défilement qui paraissait saccadé (Johan, 28/10). */
+html, body { overscroll-behavior-y: none; }
 
 body {
   font-family: 'Poppins', 'Poppins', system-ui, sans-serif;
@@ -654,9 +658,9 @@ html.native .content, html.native .pg-content, html.native .pf-content {
   height: 64px;
   margin: 0 16px 16px;
   padding: 6px;
-  background: rgba(var(--rv-nav-rgb, 255,255,255), .94);
-  -webkit-backdrop-filter: blur(18px) saturate(1.4);
-  backdrop-filter: blur(18px) saturate(1.4);
+  /* Sans flou d'arrière-plan : la capsule était déjà opaque à 94 % (le flou ne se voyait pas) et
+     l'iPhone le recalculait à chaque image du défilement (Johan, 28/10). */
+  background: rgba(var(--rv-nav-rgb, 255,255,255), .98);
   border-radius: 26px;
   box-shadow: 0 0 0 1px rgba(4,42,101,.05), 0 10px 30px -8px rgba(4,42,101,.22);
   flex-shrink: 0;
