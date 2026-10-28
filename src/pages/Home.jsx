@@ -19,7 +19,7 @@ import { marquerEtape } from '../services/agendaService';
 import { hasProgramme, PROGRAMME_FALLBACK } from '../utils/programme';
 import { useIsDesktop } from '../hooks/useMediaQuery';
 import { countDueCards } from '../services/srsService';
-import { computeStreak, computeLevel, computeBadges } from '../utils/gamification';
+import { detailSerie, computeLevel, computeBadges } from '../utils/gamification';
 import { subjectMascot } from '../utils/subjects';
 import { refreshReminder } from '../services/reminderService';
 import { AchievementToast } from '../components/AchievementToast';
@@ -142,7 +142,8 @@ export default function Home() {
     document.addEventListener('visibilitychange', maj);
     return () => { vivant = false; document.removeEventListener('visibilitychange', maj); };
   }, [uidJeux]);
-  const streak = useMemo(() => computeStreak([...loadRevisions(), ...jourJeux.jours.map(j => ({ revisedAt: `${j}T12:00:00` }))], 'revisedAt'), [allLessons, jourJeux]);
+  // Série avec gel automatique : un jour manqué par semaine ne la casse pas (utils/gamification).
+  const { serie: streak, gels } = useMemo(() => detailSerie([...loadRevisions(), ...jourJeux.jours.map(j => ({ revisedAt: `${j}T12:00:00` }))], 'revisedAt', { gel: true }), [allLessons, jourJeux]);
   const { level } = useMemo(() => computeLevel(allLessons), [allLessons]);
   const lastLesson = allLessons[0] ?? null;
   const dailyGoal = parseInt(localStorage.getItem(`reviz-daily-goal-${currentUser?.uid}`) || '3');
@@ -421,8 +422,10 @@ export default function Home() {
   const style = { '--hm-bg': h.bg, '--hm-tint': h.tint, '--hm-dot': h.dot, '--hm-bar': h.bar, '--hm-btn': h.btn, '--hm-soft': h.soft, '--hm-btn-texte': h.btnTexte, '--rv-accent': h.btn };
 
   const serie = streak > 0 && (
-    <span className="hm-serie" aria-label={`${streak} jour${streak > 1 ? 's' : ''} de suite`}>
+    <span className="hm-serie" aria-label={`${streak} jour${streak > 1 ? 's' : ''} de suite${gels.length ? ', série protégée par un jour gelé' : ''}`}
+      title={gels.length ? 'Un jour manqué cette semaine : ta série est protégée (un jour par semaine).' : undefined}>
       <Flamme />{streak}{isDesktop ? ` jour${streak > 1 ? 's' : ''}` : ''}
+      {gels.length > 0 && <span className="hm-serie-gel">protégée</span>}
     </span>
   );
 

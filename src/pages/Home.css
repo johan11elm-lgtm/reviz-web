@@ -93,6 +93,7 @@
   color: var(--rv-peche-encre);
   white-space: nowrap;
 }
+.home-page .hm-serie-gel { margin-left: 4px; padding: 2px 7px; border-radius: 99px; background: #E8F5FF; color: #2C5CC5; font-size: 12px; font-weight: 700; }
 .home-page .hm-pantin-place {
   position: absolute;
   left: 0;

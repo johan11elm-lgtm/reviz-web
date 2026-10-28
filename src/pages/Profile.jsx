@@ -110,7 +110,7 @@ export default function Profile() {
       .catch(() => {});
   }, [isGuest, currentUser?.uid]);
 
-  const serie = computeStreak(revisions, 'revisedAt');
+  const serie = computeStreak(revisions, 'revisedAt', { gel: true });
   const { level, xpInLvl, fillPct } = computeLevel(lecons);
   const badges = computeBadges(lecons, revisions, serie, level);
   const obtenus = badges.filter(b => !b.locked).length;

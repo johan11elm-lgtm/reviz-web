@@ -10,18 +10,37 @@ export const XP_PAR_NIVEAU = 500;
  * @param {Array} items — tableau d'objets avec une date
  * @param {string} dateKey — clé contenant le timestamp (default: 'scannedAt')
  */
-export function computeStreak(items, dateKey = 'scannedAt') {
-  if (!items.length) return 0;
+export function computeStreak(items, dateKey = 'scannedAt', options = {}) {
+  return detailSerie(items, dateKey, options).serie;
+}
+
+/**
+ * La série et les jours gelés. Avec `gel` (comme le bonus de gel automatique de Nomad) : un jour
+ * manqué au plus par semaine ne casse pas la série, sans compter dedans ; deux jours manqués
+ * d'affilée la cassent toujours. Aujourd'hui pas encore révisé ne casse rien.
+ * @returns {{ serie: number, gels: string[] }} gels : jours gelés (« JJ/MM/AAAA »), du plus récent
+ */
+export function detailSerie(items, dateKey = 'scannedAt', { gel = false, aujourdhui = new Date() } = {}) {
+  if (!items.length) return { serie: 0, gels: [] };
   const days = new Set(items.map(l => new Date(l[dateKey]).toLocaleDateString('fr-FR')));
+  const jour = i => {
+    const d = new Date(aujourdhui);
+    d.setDate(aujourdhui.getDate() - i);
+    return d.toLocaleDateString('fr-FR');
+  };
   let streak = 0;
-  const today = new Date();
+  const gels = [];
+  let dernierGel = null;
   for (let i = 0; i < 365; i++) {
-    const d = new Date(today);
-    d.setDate(today.getDate() - i);
-    if (days.has(d.toLocaleDateString('fr-FR'))) streak++;
-    else if (i > 0) break;
+    if (days.has(jour(i))) { streak++; continue; }
+    if (i === 0) continue;
+    // Un jour manqué, gelé si la série continue juste avant et qu'aucun gel n'a servi dans la semaine.
+    const gelPossible = gel && streak > 0 && days.has(jour(i + 1)) && (dernierGel === null || i - dernierGel >= 7);
+    if (!gelPossible) break;
+    gels.push(jour(i));
+    dernierGel = i;
   }
-  return streak;
+  return { serie: streak, gels };
 }
 
 /**
