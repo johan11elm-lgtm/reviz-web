@@ -279,12 +279,21 @@ for (const [appareil, viewport] of APPAREILS) {
       const choix = page.getByRole('dialog', { name: 'Ta photo de profil' })
       await choix.getByRole('button', { name: 'Casquette' }).click()
       await expect(choix.getByRole('button', { name: 'Casquette' })).toHaveAttribute('aria-pressed', 'true')
+      // La couleur du fond se choisit à part.
+      await choix.getByRole('button', { name: 'Menthe', exact: true }).click()
+      await expect(choix.getByRole('button', { name: 'Menthe', exact: true })).toHaveAttribute('aria-pressed', 'true')
+      // Les têtes Réviz+ sont fermées sans Réviz+ : le toucher ouvre l'offre, le choix ne change pas.
+      await choix.getByRole('button', { name: 'Astronaute, avec Réviz+' }).click()
+      const offre = page.getByRole('dialog').filter({ hasNotText: 'Ta photo de profil' })
+      await expect(offre).toBeVisible()
+      await page.keyboard.press('Escape')
+      await expect(choix.getByRole('button', { name: 'Casquette' })).toHaveAttribute('aria-pressed', 'true')
       await choix.getByRole('button', { name: 'Fermer' }).click()
-      await expect(page.locator('.mn-avatar img')).toHaveAttribute('src', '/avatars/jaune.png')
-      await expect.poll(async () => (await lireProfilEmulateur(uid))?.avatar).toBe('jaune')
+      await expect(page.locator('.mn-avatar img')).toHaveAttribute('src', '/avatars/tetes/casquette.png')
+      await expect.poll(async () => (await lireProfilEmulateur(uid))?.avatar).toEqual({ tete: 'casquette', fond: 'menthe' })
       // Ailleurs dans l'app : le menu du haut (ordinateur) ou l'accueil (téléphone).
       await page.goto('/')
-      await expect(page.locator(viewport.width >= 1024 ? '.nav-haut-avatar img' : '.nm-tete-avatar img')).toHaveAttribute('src', '/avatars/jaune.png')
+      await expect(page.locator(viewport.width >= 1024 ? '.nav-haut-avatar img' : '.nm-tete-avatar img')).toHaveAttribute('src', '/avatars/tetes/casquette.png')
     })
 
     test('le mode dyslexie change la police des écrans de lecture, et reste choisi', async ({ page }) => {
