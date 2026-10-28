@@ -239,3 +239,141 @@
   .qz-page--large .qz-fin-grille { grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); gap: 32px; }
   .qz-page--large .qz-score-grand { font-size: 88px; }
 }
+
+/* ═══ Écran de question façon app Nomad (29/10) ═══════════════════════════════
+ * Fond crème, barre de progression orange, question et réponses en cartes blanches
+ * (les réponses en lignes d'une même carte), feuille de correction turquoise ou rose
+ * avec le bouton pour continuer, collée en bas sur téléphone. Ordinateur : colonne
+ * centrale étroite, score et raccourcis à droite. */
+.qn-page { background: var(--rv-fond); color: #042A65; }
+.qn-page .qn-ecran {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  min-height: 0;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: calc(env(safe-area-inset-top, 0px) + 12px) 16px 0;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+.qn-page .qn-ecran::-webkit-scrollbar { display: none; }
+.qn-page .qn-haut { display: flex; align-items: center; gap: 12px; }
+.qn-page .fc-fermer { box-shadow: 0 1px 3px rgba(4,42,101,.12); color: #042A65; }
+.qn-page .qn-barre { flex: 1; height: 12px; overflow: hidden; border-radius: 999px; background: #E8DFD7; }
+.qn-page .qn-barre i { display: block; height: 100%; border-radius: 999px; background: var(--rv-vif); transition: width .4s ease; }
+.qn-page .qz-pastille-score { height: 34px; font-family: inherit; font-size: 14px; color: #042A65; box-shadow: 0 1px 3px rgba(4,42,101,.1); }
+.qn-page .qz-pastille-score i { background: #04ADB3; }
+.qn-page .qn-tete { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+.qn-page .qn-tete-titre { min-width: 0; font-size: 13px; font-weight: 600; color: var(--rv-doux); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.qn-page .qn-tete-compte { flex: none; font-size: 13px; font-weight: 700; color: #042A65; }
+
+.qn-page .qn-question-carte { padding: 20px 18px; border-radius: 20px; background: #fff; box-shadow: 0 1px 3px rgba(4,42,101,.1), 0 1px 2px rgba(4,42,101,.06); }
+.qn-page .qz-question { margin: 0; font-family: inherit; font-size: 20px; font-weight: 700; letter-spacing: 0; line-height: 1.35; text-align: left; text-wrap: pretty; color: #042A65; }
+
+/* Réponses : lignes d'une même carte blanche */
+.qn-page .qz-choix { gap: 0; margin: 0; overflow: hidden; border-radius: 20px; background: #fff; box-shadow: 0 1px 3px rgba(4,42,101,.1), 0 1px 2px rgba(4,42,101,.06); }
+.qn-page .qz-choix-btn {
+  min-height: 62px;
+  max-height: none;
+  gap: 14px;
+  padding: 12px 16px 12px 14px;
+  border-radius: 0;
+  background: #fff;
+  box-shadow: none;
+  font: 500 16px 'Poppins', system-ui, sans-serif;
+  color: #042A65;
+  transition: background .2s;
+}
+.qn-page .qz-choix-btn + .qz-choix-btn { border-top: 1px solid var(--rv-ligne); }
+.qn-page .qz-choix-btn:not(:disabled):hover { background: #FBF8F5; }
+.qn-page .qz-choix-btn:not(:disabled):active { transform: none; box-shadow: none; background: #F6F0EA; }
+.qn-page .qz-choix-btn:focus-visible { outline: 3px solid #042A65; outline-offset: -3px; }
+.qn-page .qz-lettre { width: 34px; height: 34px; border-radius: 10px; background: #F2EBFF; font-family: inherit; font-size: 14px; font-weight: 700; color: #042A65; }
+.qn-page .qz-choix-btn.is-juste { background: #DDF5F4; color: #035E62; box-shadow: none; }
+.qn-page .qz-choix-btn.is-juste .qz-lettre { background: #04ADB3; color: #fff; }
+.qn-page .qz-choix-btn.is-faux { background: #FFE5E8; color: #A3172B; box-shadow: none; }
+.qn-page .qz-choix-btn.is-faux .qz-lettre { background: #E0364D; color: #fff; }
+.qn-page .qz-ecran .qz-choix-btn.is-autre,
+.qn-page .qz-choix-btn.is-autre { max-height: none; min-height: 62px; margin-top: 0; padding: 12px 16px 12px 14px; opacity: .55; }
+.qn-page .qz-choix-mention { font-weight: 700; opacity: 1; }
+
+/* Feuille de correction */
+.qn-page .qz-correction {
+  position: sticky;
+  bottom: 0;
+  z-index: 2;
+  margin: auto -16px 0;
+  padding: 16px 16px calc(env(safe-area-inset-bottom, 0px) + 16px);
+  border-radius: 24px 24px 0 0;
+  box-shadow: 0 -8px 24px rgba(4,42,101,.12);
+  animation: qnFeuille .3s cubic-bezier(.2,.9,.3,1) both;
+}
+@keyframes qnFeuille { from { transform: translateY(40px); opacity: 0; } }
+.qn-page .qz-correction.is-juste { background: #CDEFEE; }
+.qn-page .qz-correction.is-faux { background: #FFDDE2; }
+.qn-page .qz-correction-haut { display: flex; align-items: center; gap: 10px; }
+.qn-page .qz-correction-reviz { width: 56px; height: 56px; flex: none; border-radius: 50%; background: #fff; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.qn-page .qz-verdict { padding: 0; border-radius: 0; background: none; font-size: 20px; font-weight: 800; }
+.qn-page .qz-correction.is-juste .qz-verdict { background: none; color: #035E62; }
+.qn-page .qz-correction.is-faux .qz-verdict { background: none; color: #A3172B; }
+.qn-page .qz-correction-txt { margin: 10px 0 0; font-size: 15px; font-weight: 500; line-height: 1.5; color: #042A65; }
+.qn-page .qz-pourquoi { margin-top: 12px; background: #fff; color: #042A65; }
+.qn-page .qz-suivante {
+  width: 100%;
+  height: 54px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 14px;
+  border: 0;
+  border-radius: 14px;
+  font: 700 16px 'Poppins', system-ui, sans-serif;
+  color: #fff;
+  cursor: pointer;
+}
+.qn-page .qz-correction.is-juste .qz-suivante { background: #04ADB3; box-shadow: 0 4px 0 #038A8F; }
+.qn-page .qz-correction.is-faux .qz-suivante { background: #E0364D; box-shadow: 0 4px 0 #B42438; }
+.qn-page .qz-suivante:active { transform: translateY(3px); box-shadow: none !important; }
+.qn-page .qz-suivante:focus-visible { outline: 3px solid #042A65; outline-offset: 2px; }
+.qn-page .qz-suivante kbd { padding: 2px 7px; border-radius: 6px; background: rgba(255,255,255,.22); font: 600 12px 'Poppins', system-ui, sans-serif; }
+/* Sans correction, un peu d'air sous les réponses */
+.qn-page .qn-ecran::after { content: ''; flex: none; height: 24px; }
+.qn-page .qn-ecran:has(.qz-correction)::after { display: none; }
+
+/* ── Ordinateur ── */
+.qn-page.qn-page--large .qn-ecran {
+  display: grid;
+  grid-template-columns: minmax(0, 720px) 280px;
+  justify-content: center;
+  align-content: start;
+  gap: 32px;
+  padding: 28px 32px 48px;
+}
+.qn-page.qn-page--large .qn-ecran::after { display: none; }
+.qn-page.qn-page--large .qn-colonne { display: flex; flex-direction: column; gap: 16px; min-width: 0; }
+.qn-page.qn-page--large .fc-fermer--pilule { height: 44px; border-radius: 12px; }
+.qn-page.qn-page--large .qn-question-carte { padding: 28px 26px; }
+.qn-page.qn-page--large .qz-question { font-size: 24px; }
+.qn-page.qn-page--large .qz-choix-btn { min-height: 66px; font-size: 16.5px; }
+.qn-page.qn-page--large .qz-correction { position: static; margin: 0; padding: 20px; border-radius: 20px; box-shadow: none; }
+.qn-page.qn-page--large .qz-correction-txt { font-size: 15.5px; }
+.qn-page.qn-page--large .qz-pourquoi { width: auto; }
+.qn-page .qn-cote { position: sticky; top: 28px; padding-top: 96px; }
+.qn-page .qn-infos { display: flex; flex-direction: column; gap: 8px; padding: 20px; border-radius: 20px; background: #fff; box-shadow: 0 1px 3px rgba(4,42,101,.1), 0 1px 2px rgba(4,42,101,.06); }
+.qn-page .qn-infos-titre { font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--rv-doux); }
+.qn-page .qn-infos-titre--2 { margin-top: 12px; }
+.qn-page.qn-page--large .qz-score-cours { font-size: 40px; font-weight: 800; line-height: 1; color: #042A65; }
+.qn-page.qn-page--large .qz-score-sous { font-size: 13px; color: var(--rv-doux); }
+.qn-page.qn-page--large .qz-segments { display: flex; gap: 4px; margin: 4px 0; }
+.qn-page.qn-page--large .qz-segments i { flex: 1; height: 8px; border-radius: 99px; background: #E8DFD7; }
+.qn-page.qn-page--large .qz-segments i.is-juste { background: #04ADB3; }
+.qn-page.qn-page--large .qz-segments i.is-faux { background: #E0364D; }
+
+@media (prefers-reduced-motion: reduce) {
+  .qn-page .qz-correction { animation: none; }
+  .qn-page .qn-barre i { transition: none; }
+}

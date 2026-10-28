@@ -358,76 +358,79 @@ function QuizSession() {
       ))}
     </div>
   )
+  // Feuille de correction, comme chez Nomad : turquoise si c'est juste, rose sinon, avec le bouton
+  // pour continuer. Sur téléphone, elle reste collée en bas de l'écran.
   const correction = repondu && (
     <div className={`qz-correction${juste ? ' is-juste' : ' is-faux'}`} role="status">
-      <div className="qz-correction-txt">
+      <div className="qz-correction-haut">
+        <span className="qz-correction-reviz" aria-hidden="true"><Mascot pose={juste ? 'celebration' : 'confused'} size={isDesktop ? 60 : 52} alt="" /></span>
         <span className="qz-verdict">{juste ? 'Bonne réponse' : 'Pas tout à fait'}</span>
-        {q.explanation && <p>{nbsp(q.explanation)}</p>}
       </div>
+      {q.explanation && <p className="qz-correction-txt">{nbsp(q.explanation)}</p>}
       {!juste && iaDispo && (
         <button type="button" className="qz-pourquoi" onClick={demanderPourquoi}>
           <span className="qz-ia-anneau" aria-hidden="true"><span><Mascot pose="coach" size={30} alt="" /></span></span>
           Pourquoi ? Demande à Réviz IA
         </button>
       )}
+      <button type="button" className="qz-suivante" onClick={suivante}>
+        {derniere ? 'Voir mon score' : 'Question suivante'}<Fleche />{isDesktop && <kbd>Entrée</kbd>}
+      </button>
     </div>
   )
-  const suivanteBtn = repondu && (
-    <button type="button" className="fc-btn fc-btn--orange qz-suivante" onClick={suivante}>
-      {derniere ? 'Voir mon score' : 'Question suivante'}<Fleche />{isDesktop && <kbd>Entrée</kbd>}
-    </button>
+  const progression = (idx + (repondu ? 1 : 0)) / questions.length
+  const barre = (
+    <div className="qn-haut">
+      {boutonFermer}
+      <span className="qn-barre" aria-hidden="true"><i style={{ width: `${Math.max(progression * 100, 3)}%` }} /></span>
+      <span className="qz-pastille-score" aria-label={`${nbJustes} bonnes réponses sur ${nbRepondues}`}>
+        <i><Coche taille={12} /></i>{nbJustes} / {nbRepondues}
+      </span>
+    </div>
   )
   const enTete = (
-    <div className="fc-tete">
-      <span className="fc-tete-titre">Quiz · {lessonTitle}</span>
-      <span className="fc-tete-compte" aria-live="polite">Question {idx + 1} sur {questions.length}</span>
+    <div className="qn-tete">
+      <span className="qn-tete-titre">Quiz · {lessonTitle}</span>
+      <span className="qn-tete-compte" aria-live="polite">Question {idx + 1} sur {questions.length}</span>
     </div>
   )
-  const pastilleScore = (
-    <span className="qz-pastille-score" aria-label={`${nbJustes} bonnes réponses sur ${nbRepondues}`}>
-      <i><Coche taille={12} /></i>{nbJustes} / {nbRepondues}
-    </span>
+  const carteQuestion = (
+    <div className="qn-question-carte">
+      <h1 className="qz-question">{nbsp(q.question)}</h1>
+    </div>
   )
 
   return (
-    <div className={`app app--no-halo quiz-page fc-page qz-page${isDesktop ? ' app--large fc-page--large qz-page--large' : ''}`} style={varsTeinte(teinte)}>
-      {deco}
+    <div className={`app app--no-halo quiz-page fc-page qz-page qn-page${isDesktop ? ' app--large fc-page--large qn-page--large' : ''}`}>
       {isDesktop ? (
-        <div className="fc-ecran fc-ecran--serie">
-          <div className="fc-haut-gauche">{boutonFermer}</div>
-          {enTete}
-          <RouteSerie notes={notes} idx={idx} grand />
-          <div className="qz-plateau">
-            <div className="qz-col-gauche">{reviz(220)}</div>
-            <div className="qz-col-centre">
-              <h1 className="qz-question">{nbsp(q.question)}</h1>
-              {reponsesBloc}
-              {correction}
-              {suivanteBtn}
-            </div>
-            <aside className="qz-col-droite">
-              <div className="fc-infos">
-                <span className="fc-infos-titre">Score</span>
-                <span className="qz-score-cours">{nbJustes} / {nbRepondues || 0}</span>
-                <span className="qz-score-sous">{nbJustes > 1 ? 'bonnes réponses' : 'bonne réponse'}</span>
-                <span className="qz-segments" aria-hidden="true">{notes.map((n, i) => <i key={i} className={n ? `is-${n}` : ''} />)}</span>
-                <span className="qz-score-sous">+{nbJustes * 10} XP pour l’instant</span>
-                <span className="fc-infos-titre fc-infos-titre--2">Raccourcis</span>
-                <span className="fc-touche"><kbd>1</kbd><kbd>4</kbd>Répondre</span>
-                <span className="fc-touche"><kbd>Entrée</kbd>Question suivante</span>
-              </div>
-            </aside>
+        <div className="qn-ecran">
+          <div className="qn-colonne">
+            {barre}
+            {enTete}
+            {carteQuestion}
+            {reponsesBloc}
+            {correction}
           </div>
+          <aside className="qn-cote">
+            <div className="qn-infos">
+              <span className="qn-infos-titre">Score</span>
+              <span className="qz-score-cours">{nbJustes} / {nbRepondues || 0}</span>
+              <span className="qz-score-sous">{nbJustes > 1 ? 'bonnes réponses' : 'bonne réponse'}</span>
+              <span className="qz-segments" aria-hidden="true">{notes.map((n, i) => <i key={i} className={n ? `is-${n}` : ''} />)}</span>
+              <span className="qz-score-sous">+{nbJustes * 10} XP pour l’instant</span>
+              <span className="qn-infos-titre qn-infos-titre--2">Raccourcis</span>
+              <span className="fc-touche"><kbd>1</kbd><kbd>4</kbd>Répondre</span>
+              <span className="fc-touche"><kbd>Entrée</kbd>Question suivante</span>
+            </div>
+          </aside>
         </div>
       ) : (
-        <div className="fc-ecran qz-ecran">
-          <div className="fc-ligne-haut">{boutonFermer}{enTete}{pastilleScore}</div>
-          <RouteSerie notes={notes} idx={idx} />
-          {reviz(130)}
-          <h1 className="qz-question">{nbsp(q.question)}</h1>
+        <div className="qn-ecran qz-ecran">
+          {barre}
+          {enTete}
+          {carteQuestion}
           {reponsesBloc}
           {correction}
-          {suivanteBtn}
         </div>
       )}
       {coachChat}
