@@ -1,7 +1,8 @@
 // Exercices en jeu (29/10) : depuis la fiche du chapitre Thalès (fixture), une séance complète de
 // 10 exercices tous formats mélangés, en mode essai, à 1280 px et à 390 px. La séance est tirée
 // avec une graine fixe (?graine=42) : le test calcule les mêmes exercices et leurs bonnes réponses.
-// Une réponse fausse exprès (le premier QCM), le reste juste ; puis le score sur la fiche.
+// Une réponse fausse exprès (le premier QCM), le reste juste ; puis le score sur la fiche. Sur
+// téléphone, Vrai ou faux et Classement se jouent en glissant la carte.
 import { test, expect } from '@playwright/test'
 import { mockApiRoutes, mockProgramme, entrerEnEssai, ouvrirChapitreDuProgramme, chapitreThales, sansDebordement, estOrdinateur } from './helpers'
 import { construireSeance } from '../src/utils/exercicesChapitre.js'
@@ -11,8 +12,84 @@ const APPAREILS = [
   ['ordinateur', { width: 1280, height: 800 }],
   ['téléphone', { width: 390, height: 844 }],
 ]
-const NOMS = { coins: '4 coins', intrus: 'Intrus', indices: 'Trois indices', definition: 'Définition', paires: 'Paires', ordre: 'Chronologie', annee: 'Année', qcm: 'Quiz' }
+const NOMS = { coins: '4 coins', intrus: 'Intrus', indices: 'Trois indices', definition: 'Définition', paires: 'Paires', ordre: 'Chronologie', annee: 'Année', qcm: 'Quiz', vraifaux: 'Vrai ou faux', phrase: 'Phrase à trous', memory: 'Mémory', classement: 'Classement' }
 const exact = t => new RegExp(`^${nbsp(t).replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace(/\s+/g, '\\s+')}$`)
+// Les formats qui se valident seuls (pas de bouton « Valider »).
+const SANS_VALIDER = ['paires', 'memory', 'classement', 'vraifaux']
+
+/** Glisse une carte vers la gauche ou la droite, à la souris (les mêmes événements que le doigt). */
+async function glisserCarte(page, carte, cote) {
+  const b = await carte.boundingBox()
+  const x = b.x + b.width / 2, y = b.y + b.height / 2
+  await page.mouse.move(x, y)
+  await page.mouse.down()
+  await page.mouse.move(x + (cote === 'droite' ? 160 : -160), y, { steps: 8 })
+  await page.mouse.up()
+}
+
+/**
+ * Joue un exercice jusqu'à la correction. `juste` : seulement pour le QCM (une réponse fausse exprès).
+ * `glisser` : Vrai ou faux et Classement au doigt plutôt qu'aux boutons ; 4 coins glissé sur ordinateur.
+ */
+async function jouer(page, ex, { juste = true, glisser = false, ordinateur = false } = {}) {
+  switch (ex.type) {
+    case 'coins': {
+      const coin = page.getByRole('button', { name: exact(ex.coins[ex.bonne]) })
+      if (ordinateur) await page.locator('.ex-carte-coin').dragTo(coin)
+      else await coin.click()
+      await expect(coin).toHaveAttribute('aria-pressed', 'true')
+      break
+    }
+    case 'intrus':
+      await page.getByRole('button', { name: exact(ex.cartes[ex.bonne]) }).click()
+      await expect(page.locator('.ex-carte-tag')).toHaveText('Intrus')
+      break
+    case 'indices':
+      await page.getByRole('button', { name: exact(ex.choix[ex.bonne]) }).click()
+      await expect(page.locator('.ex-arbre-tete')).toHaveText(nbsp(ex.choix[ex.bonne]))
+      break
+    case 'definition':
+      await page.getByRole('button', { name: exact(ex.choix[ex.bonne]) }).click()
+      break
+    case 'qcm':
+      await page.getByRole('button', { name: exact(ex.choix[juste ? ex.bonne : (ex.bonne + 1) % ex.choix.length]) }).click()
+      break
+    case 'paires':
+      for (const p of ex.paires) {
+        await page.getByRole('button', { name: exact(p.terme) }).click()
+        await page.getByRole('button', { name: exact(p.definition) }).click()
+      }
+      break
+    case 'ordre':
+      for (const k of ex.bonOrdre) await page.getByRole('button', { name: ex.evenements[k].texte, exact: true }).click()
+      break
+    case 'annee':
+      await page.getByRole('slider', { name: 'Année' }).fill(String(ex.annee))
+      break
+    case 'vraifaux':
+      if (glisser) await glisserCarte(page, page.locator('.ex-vf-carte'), ex.vrai ? 'droite' : 'gauche')
+      else await page.getByRole('button', { name: ex.vrai ? 'Vrai' : 'Faux', exact: true }).click()
+      break
+    case 'phrase':
+      await page.getByRole('button', { name: exact(ex.mots[ex.bonne]) }).click()
+      await expect(page.locator('.ex-trou')).toHaveText(ex.mots[ex.bonne])
+      break
+    case 'memory':
+      for (const p of [0, 1, 2]) {
+        for (const i of ex.cartes.map((c, k) => (c.paire === p ? k : -1)).filter(k => k >= 0)) await page.locator('.ex-memo').nth(i).click()
+        await expect(page.locator('.ex-memo.is-trouvee')).toHaveCount(2 * (p + 1))
+      }
+      break
+    case 'classement':
+      for (const [k, c] of ex.cartes.entries()) {
+        await expect(page.locator('.ex-cl-compte')).toHaveText(`Carte ${k + 1} sur 4`)
+        if (glisser) await glisserCarte(page, page.locator('.ex-cl-carte'), c.dossier ? 'droite' : 'gauche')
+        else await page.getByRole('button', { name: exact(ex.dossiers[c.dossier]) }).click()
+        await expect(page.locator('.ex-cl-rangees li')).toHaveCount(k + 1)
+      }
+      break
+  }
+}
 
 test.describe('Exercices en jeu', () => {
   for (const [appareil, viewport] of APPAREILS) {
@@ -41,46 +118,12 @@ test.describe('Exercices en jeu', () => {
         await expect(page.getByText(`${NOMS[ex.type]} · ${i + 1} sur 10`)).toBeVisible()
         await expect(page.getByRole('heading', { level: 1, name: exact(ex.consigne) })).toBeVisible()
         const juste = i !== fauxExpres
-        switch (ex.type) {
-          case 'coins': {
-            const coin = page.getByRole('button', { name: exact(ex.coins[ex.bonne]) })
-            if (estOrdinateur(page)) await page.locator('.ex-carte-coin').dragTo(coin)
-            else await coin.click()
-            await expect(coin).toHaveAttribute('aria-pressed', 'true')
-            break
-          }
-          case 'intrus':
-            await page.getByRole('button', { name: exact(ex.cartes[ex.bonne]) }).click()
-            await expect(page.locator('.ex-carte-tag')).toHaveText('Intrus')
-            break
-          case 'indices':
-            await page.getByRole('button', { name: exact(ex.choix[ex.bonne]) }).click()
-            await expect(page.locator('.ex-arbre-tete')).toHaveText(nbsp(ex.choix[ex.bonne]))
-            break
-          case 'definition':
-            await page.getByRole('button', { name: exact(ex.choix[ex.bonne]) }).click()
-            break
-          case 'qcm':
-            await page.getByRole('button', { name: exact(ex.choix[juste ? ex.bonne : (ex.bonne + 1) % ex.choix.length]) }).click()
-            break
-          case 'paires':
-            for (const p of ex.paires) {
-              await page.getByRole('button', { name: exact(p.terme) }).click()
-              await page.getByRole('button', { name: exact(p.definition) }).click()
-            }
-            break
-          case 'ordre':
-            for (const k of ex.bonOrdre) await page.getByRole('button', { name: ex.evenements[k].texte, exact: true }).click()
-            break
-          case 'annee':
-            await page.getByRole('slider', { name: 'Année' }).fill(String(ex.annee))
-            break
-        }
+        await jouer(page, ex, { juste, glisser: !estOrdinateur(page), ordinateur: estOrdinateur(page) })
         if (!vus.has(ex.type)) {
           await sansDebordement(page, `${ex.type} ${appareil}`)
           await page.screenshot({ path: test.info().outputPath(`${String(i + 1).padStart(2, '0')}-${ex.type}.png`), animations: 'disabled' })
         }
-        if (ex.type !== 'paires') await page.getByRole('button', { name: 'Valider' }).click()
+        if (!SANS_VALIDER.includes(ex.type)) await page.getByRole('button', { name: 'Valider' }).click()
         const correction = page.locator('.qz-correction')
         await expect(correction).toBeVisible()
         await expect(correction).toHaveClass(juste ? /is-juste/ : /is-faux/)
@@ -152,14 +195,9 @@ test.describe('Exercices en jeu', () => {
           await page.getByRole('button', { name: 'Valider' }).click()
           await expect(page.locator('.qz-correction')).toHaveClass(/is-juste/)
           await page.screenshot({ path: test.info().outputPath('annee-corrige.png'), animations: 'disabled' })
-        } else if (ex.type === 'paires') {
-          for (const p of ex.paires) {
-            await page.getByRole('button', { name: exact(p.terme) }).click()
-            await page.getByRole('button', { name: exact(p.definition) }).click()
-          }
         } else {
-          await page.locator('.ex-zone button:not([disabled])').first().click()
-          await page.getByRole('button', { name: 'Valider' }).click()
+          await jouer(page, ex)
+          if (!SANS_VALIDER.includes(ex.type)) await page.getByRole('button', { name: 'Valider' }).click()
         }
         await sansDebordement(page, `${ex.type} ${appareil}`)
         await page.locator('.qz-correction').getByRole('button', { name: /Exercice suivant|Voir mon score/ }).click()
@@ -176,18 +214,9 @@ test.describe('Exercices en jeu', () => {
     await ouvrirChapitreDuProgramme(page)
     await page.goto('/exercices?graine=7')
     const seance = construireSeance(chapitreThales(), { graine: 7 })
-    // On passe les 10 exercices en répondant n'importe quoi de valide (le premier choix).
     for (const ex of seance) {
-      if (ex.type === 'paires') {
-        for (const p of ex.paires) {
-          await page.getByRole('button', { name: exact(p.terme) }).click()
-          await page.getByRole('button', { name: exact(p.definition) }).click()
-        }
-      } else {
-        await page.locator('.ex-zone button:not([disabled])').first().click()
-        if (ex.type === 'ordre') for (const b of await page.locator('.ex-evenement:not(.is-choisi)').all()) await b.click()
-        await page.getByRole('button', { name: 'Valider' }).click()
-      }
+      await jouer(page, ex)
+      if (!SANS_VALIDER.includes(ex.type)) await page.getByRole('button', { name: 'Valider' }).click()
       await page.locator('.qz-correction').getByRole('button', { name: /Exercice suivant|Voir mon score/ }).click()
     }
     await expect(page.getByText('Séance terminée')).toBeVisible()

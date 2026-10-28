@@ -33,6 +33,8 @@ export function useCombo() {
     if (n % PALIER_COMBO === 0) {
       setPaliers(p => p + 1)
       annoncer(n, false, 1600)
+    } else {
+      setPalier(null) // le « +10 XP » ne reste pas affiché sur la réponse suivante
     }
   }, [])
   const faute = useCallback(() => {

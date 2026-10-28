@@ -53,9 +53,18 @@ describe('construireSeance', () => {
     const s = construireSeance(CHAPITRE, { graine: 42 })
     expect(s).toHaveLength(10)
     const types = new Set(s.map(e => e.type))
-    for (const t of ['coins', 'intrus', 'indices', 'definition', 'paires', 'ordre', 'annee', 'qcm']) expect(types.has(t)).toBe(true)
+    // 8 formats différents au plus, les datés d'abord, puis 2 questions du quiz au moins.
+    expect(types.size).toBeGreaterThanOrEqual(8)
+    for (const t of ['ordre', 'annee', 'qcm']) expect(types.has(t)).toBe(true)
+    expect(s.filter(e => e.type === 'qcm').length).toBeGreaterThanOrEqual(2)
     for (let i = 1; i < s.length; i++) expect(s[i].type).not.toBe(s[i - 1].type)
     expect(new Set(s.map(e => e.id)).size).toBe(10)
+  })
+
+  it('les 12 formats sortent tous, d’une séance à l’autre', () => {
+    const vus = new Set()
+    for (let graine = 1; graine <= 30; graine++) for (const e of construireSeance(CHAPITRE, { graine })) vus.add(e.type)
+    expect([...vus].sort()).toEqual(['annee', 'classement', 'coins', 'definition', 'indices', 'intrus', 'memory', 'ordre', 'paires', 'phrase', 'qcm', 'vraifaux'])
   })
 
   it('la même graine redonne la même séance, une autre graine la mélange', () => {
@@ -98,6 +107,39 @@ describe('construireSeance', () => {
           expect(e.max - e.min).toBeLessThanOrEqual(60)
         }
         if (e.type === 'qcm') expect(e.choix[e.bonne]).toBeTruthy()
+      }
+    }
+  })
+
+  it('les nouveaux formats (vrai ou faux, phrase, mémory, classement) tiennent leurs données', () => {
+    const termes = CHAPITRE.resume.keyTerms
+    const branche = nom => CHAPITRE.mindmap.branches.find(x => x.label === nom)
+    for (let graine = 1; graine <= 30; graine++) {
+      for (const e of construireSeance(CHAPITRE, { graine })) {
+        if (e.type === 'vraifaux') {
+          const k = termes.find(x => x.term === e.titre)
+          if (k) expect(e.vrai).toBe(e.affirmation === k.def)
+          else expect(e.titre).toMatch(/^\d{3,4}$/) // une date
+        }
+        if (e.type === 'phrase') {
+          expect(e.mots).toHaveLength(3)
+          const texte = `${e.avant}${e.mots[e.bonne]}${e.apres}`
+          expect(CHAPITRE.resume.keyPoints).toContain(texte)
+          expect(termes.map(x => x.term)).toContain(e.mots[e.bonne])
+        }
+        if (e.type === 'memory') {
+          expect(e.cartes).toHaveLength(6)
+          for (const i of [0, 1, 2]) {
+            const deux = e.cartes.filter(c => c.paire === i)
+            expect(deux.map(c => c.cote).sort()).toEqual(['definition', 'mot'])
+            expect(termes.find(x => x.term === deux.find(c => c.cote === 'mot').texte).def).toBe(deux.find(c => c.cote === 'definition').texte)
+          }
+        }
+        if (e.type === 'classement') {
+          expect(e.cartes).toHaveLength(4)
+          for (const c of e.cartes) expect(branche(e.dossiers[c.dossier]).children).toContain(c.texte)
+          expect(e.cartes.filter(c => c.dossier === 0)).toHaveLength(2)
+        }
       }
     }
   })

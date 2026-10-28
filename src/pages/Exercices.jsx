@@ -208,9 +208,17 @@ function Seance({ ai, seance, nouvelle }) {
   }
 
   // ── Exercice en cours ──
+  const nbErreurs = resultat?.erreurs ?? 0
+  const erreursTexte = `${nbErreurs} erreur${nbErreurs > 1 ? 's' : ''}`
   const verdictTexte = ex.type === 'paires'
-    ? (resultat?.juste ? 'Toutes les paires, sans erreur' : `Paires trouvées, avec ${resultat?.erreurs ?? 1} erreur${(resultat?.erreurs ?? 1) > 1 ? 's' : ''}`)
+    ? (resultat?.juste ? 'Toutes les paires, sans erreur' : `Paires trouvées, avec ${erreursTexte}`)
+    : ex.type === 'memory'
+    ? (nbErreurs === 0 ? 'Mémory sans erreur' : resultat?.juste ? `Mémory fini, avec ${erreursTexte}` : `Mémory fini, mais avec ${erreursTexte}`)
+    : ex.type === 'classement'
+    ? (resultat?.juste ? 'Tout est bien rangé' : `${nbErreurs} carte${nbErreurs > 1 ? 's' : ''} mal rangée${nbErreurs > 1 ? 's' : ''}`)
     : verdict === 'juste' ? 'Bonne réponse' : 'Pas tout à fait'
+  // Les formats à plusieurs éléments montrent la correction complète, pas une « bonne réponse ».
+  const bonneSeule = !['paires', 'memory', 'classement'].includes(ex.type)
   const correction = verdict && (
     <div className={`qz-correction ex-correction${verdict === 'juste' ? ' is-juste' : ' is-faux'}`} role="status">
       <div className="qz-correction-haut">
@@ -220,7 +228,7 @@ function Seance({ ai, seance, nouvelle }) {
         </span>
         <span className="qz-verdict">{verdictTexte}</span>
       </div>
-      {verdict === 'faux' && ex.type !== 'paires' && <p className="ex-bonne">Bonne réponse : <b>{nbsp(ex.aRetenir.bonne)}</b></p>}
+      {verdict === 'faux' && bonneSeule && <p className="ex-bonne">Bonne réponse : <b>{nbsp(ex.aRetenir.bonne)}</b></p>}
       {ex.explication && <p className="qz-correction-txt">{nbsp(ex.explication)}</p>}
       {verdict === 'faux' && iaDispo && (
         <button type="button" className="qz-pourquoi" onClick={() => setCoach(`J'ai raté cet exercice : « ${ex.consigne} — ${ex.bulle} ». La bonne réponse est « ${ex.aRetenir.bonne} ». Tu peux m'expliquer ?`)}>

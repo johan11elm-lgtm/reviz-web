@@ -6,7 +6,7 @@
 // joue au toucher ; sur ordinateur, la carte des 4 coins se glisse aussi.
 // Les données viennent de utils/exercicesChapitre.js.
 // -------------------------------------------------------
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Mascot } from '../../components/Mascot'
 import { nbsp } from '../../utils/typography'
 
@@ -16,6 +16,7 @@ const LETTRES = ['A', 'B', 'C', 'D']
 export const NOMS_FORMATS = {
   coins: '4 coins', intrus: 'Intrus', indices: 'Trois indices', definition: 'Définition',
   paires: 'Paires', ordre: 'Chronologie', annee: 'Année', qcm: 'Quiz',
+  vraifaux: 'Vrai ou faux', phrase: 'Phrase à trous', memory: 'Mémory', classement: 'Classement',
 }
 
 /**
@@ -252,4 +253,203 @@ export function Annee({ ex, verdict, onValider, grand }) {
   )
 }
 
-export const FORMATS = { coins: Coins, intrus: Intrus, indices: Indices, definition: Definition, paires: Paires, ordre: Chronologie, annee: Annee, qcm: Qcm }
+// ── Glisser une carte à gauche ou à droite (Vrai ou faux, Classement) ──
+
+const SEUIL = 80
+/** Le doigt (ou la souris) emmène la carte ; lâchée au-delà de 80 px, elle part de ce côté. */
+function useGlisser(onCote, actif) {
+  const depart = useRef(null)
+  const [dx, setDx] = useState(0)
+  const fin = () => {
+    if (depart.current === null) return
+    depart.current = null
+    if (Math.abs(dx) >= SEUIL) onCote(dx < 0 ? 'gauche' : 'droite')
+    setDx(0)
+  }
+  const poignees = actif ? {
+    onPointerDown: e => { depart.current = e.clientX; e.currentTarget.setPointerCapture?.(e.pointerId) },
+    onPointerMove: e => { if (depart.current !== null) setDx(e.clientX - depart.current) },
+    onPointerUp: fin,
+    onPointerCancel: () => { depart.current = null; setDx(0) },
+  } : {}
+  return { dx, poignees }
+}
+
+const Fleche = ({ vers }) => (
+  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <path d={vers === 'gauche' ? 'M19 12H5M11 6l-6 6 6 6' : 'M5 12h14M13 6l6 6-6 6'} />
+  </svg>
+)
+
+// ── Vrai ou faux : une affirmation, à glisser à droite (vrai) ou à gauche (faux) ──
+
+export function VraiFaux({ ex, verdict, onValider, grand }) {
+  const [choix, setChoix] = useState(null) // true = vrai
+  const repondre = v => { if (verdict || choix !== null) return; setChoix(v); onValider(v === ex.vrai) }
+  const { dx, poignees } = useGlisser(cote => repondre(cote === 'droite'), !verdict && choix === null)
+  const sortie = choix === null ? null : choix ? 'droite' : 'gauche'
+  const penche = Math.max(-1, Math.min(1, dx / SEUIL))
+  return (
+    <CadreExercice ex={ex} verdict={verdict} grand={grand} sansValider>
+      <div className="ex-vf">
+        <div className={`ex-vf-carte${sortie ? ` is-sortie is-sortie--${sortie}` : ''}${verdict ? ` is-${verdict}` : ''}`}
+          style={dx ? { transform: `translateX(${dx}px) rotate(${dx / 14}deg)` } : undefined} {...poignees}>
+          <span className="ex-vf-tampon ex-vf-tampon--vrai" style={{ opacity: Math.max(0, penche) }} aria-hidden="true">Vrai</span>
+          <span className="ex-vf-tampon ex-vf-tampon--faux" style={{ opacity: Math.max(0, -penche) }} aria-hidden="true">Faux</span>
+          <span className="ex-vf-titre">{nbsp(ex.titre)}</span>
+          <span className="ex-vf-affirmation">{nbsp(ex.affirmation)}</span>
+        </div>
+        <div className="ex-vf-boutons">
+          <button type="button" className={`ex-vf-btn ex-vf-btn--faux${choix === false ? ' is-choisi' : ''}`} disabled={!!verdict} onClick={() => repondre(false)}>
+            <Fleche vers="gauche" />Faux
+          </button>
+          <button type="button" className={`ex-vf-btn ex-vf-btn--vrai${choix === true ? ' is-choisi' : ''}`} disabled={!!verdict} onClick={() => repondre(true)}>
+            Vrai<Fleche vers="droite" />
+          </button>
+        </div>
+      </div>
+    </CadreExercice>
+  )
+}
+
+// ── Phrase à trous : un mot-clé manque, trois mots proposés ──
+
+export function Phrase({ ex, verdict, onValider, grand }) {
+  const [sel, setSel] = useState(null)
+  const etatTrou = !verdict ? (sel === null ? 'vide' : 'pose') : sel === ex.bonne ? 'juste' : 'faux'
+  return (
+    <CadreExercice ex={ex} verdict={verdict} grand={grand} peutValider={sel !== null} onValider={() => onValider(sel === ex.bonne)}>
+      <p className="ex-phrase">
+        {nbsp(ex.avant)}
+        <button type="button" className={`ex-trou is-${etatTrou}`} disabled={!!verdict || sel === null} onClick={() => setSel(null)}
+          aria-label={sel === null ? 'Mot manquant' : `Mot placé : ${ex.mots[sel]}, toucher pour l’enlever`}>
+          {sel === null ? '\u00a0' : ex.mots[sel]}
+        </button>
+        {nbsp(ex.apres)}
+      </p>
+      <div className="ex-banque" role="group" aria-label="Mots proposés">
+        {ex.mots.map((m, i) => (
+          <button key={i} type="button" className={`ex-mot ${etatCase({ choisi: sel === i, bonne: i === ex.bonne, verdict })}`}
+            disabled={!!verdict} aria-pressed={sel === i} onClick={() => setSel(i)}>
+            {m}
+          </button>
+        ))}
+      </div>
+    </CadreExercice>
+  )
+}
+
+// ── Mémory : retourner deux cartes, un mot et sa définition ──
+
+export function Memory({ ex, verdict, onValider, grand }) {
+  const [ouvertes, setOuvertes] = useState([]) // indices retournés en ce moment (2 au plus)
+  const [trouvees, setTrouvees] = useState([]) // numéros de paires trouvées
+  const [erreurs, setErreurs] = useState(0)
+  const fini = trouvees.length === 3
+  useEffect(() => {
+    if (ouvertes.length !== 2) return undefined
+    const [a, b] = ouvertes.map(i => ex.cartes[i])
+    if (a.paire === b.paire) {
+      setTrouvees(t => [...t, a.paire])
+      setOuvertes([])
+      return undefined
+    }
+    const t = setTimeout(() => { setErreurs(n => n + 1); setOuvertes([]) }, 900)
+    return () => clearTimeout(t)
+  }, [ouvertes, ex.cartes])
+  useEffect(() => { if (fini && !verdict) onValider(erreurs <= ex.erreursPermises, { erreurs }) }, [fini]) // eslint-disable-line react-hooks/exhaustive-deps
+  const retourner = i => {
+    if (verdict || ouvertes.length === 2 || ouvertes.includes(i) || trouvees.includes(ex.cartes[i].paire)) return
+    setOuvertes(o => [...o, i])
+  }
+  const rate = ouvertes.length === 2 && ex.cartes[ouvertes[0]].paire !== ex.cartes[ouvertes[1]].paire
+  return (
+    <CadreExercice ex={ex} verdict={verdict} grand={grand} sansValider>
+      <div className="ex-memo-grille">
+        {ex.cartes.map((c, i) => {
+          const trouvee = trouvees.includes(c.paire)
+          const visible = trouvee || ouvertes.includes(i)
+          return (
+            <button key={i} type="button" className={`ex-memo${visible ? ' is-visible' : ''}${trouvee ? ' is-trouvee' : ''}${rate && ouvertes.includes(i) ? ' is-rate' : ''} ex-memo--${c.cote}`}
+              disabled={!!verdict || trouvee} onClick={() => retourner(i)}
+              aria-label={visible ? c.texte : `Carte ${i + 1}, face cachée`}>
+              {visible ? (
+                <>
+                  {trouvee && <span className="ex-paire-num" aria-hidden="true">{trouvees.indexOf(c.paire) + 1}</span>}
+                  <span className="ex-memo-txt">{nbsp(c.texte)}</span>
+                </>
+              ) : <span className="ex-memo-dos" aria-hidden="true">?</span>}
+            </button>
+          )
+        })}
+      </div>
+      {!verdict && <p className="ex-aide" aria-live="polite">{trouvees.length} paire{trouvees.length > 1 ? 's' : ''} sur 3{erreurs ? ` · ${erreurs} erreur${erreurs > 1 ? 's' : ''}` : ''}</p>}
+    </CadreExercice>
+  )
+}
+
+// ── Classement : quatre cartes, à glisser vers l'une des deux branches ──
+
+export function Classement({ ex, verdict, onValider, grand }) {
+  const [rangees, setRangees] = useState([]) // pour chaque carte rangée : 0 (gauche) ou 1 (droite)
+  const [part, setPart] = useState(null) // la carte qui s'envole : { cote, juste }
+  const k = rangees.length
+  const carte = ex.cartes[k]
+  const ranger = cote => {
+    if (verdict || part || !carte) return
+    const dossier = cote === 'gauche' ? 0 : 1
+    setPart({ cote, juste: dossier === carte.dossier })
+    // Une seule carte en vol à la fois : `rangees` est à jour quand elle se pose.
+    setTimeout(() => {
+      const suite = [...rangees, dossier]
+      setPart(null)
+      setRangees(suite)
+      if (suite.length === ex.cartes.length) {
+        const fautes = suite.filter((d, i) => d !== ex.cartes[i].dossier).length
+        onValider(fautes === 0, { erreurs: fautes })
+      }
+    }, 320)
+  }
+  const { dx, poignees } = useGlisser(ranger, !verdict && !part && !!carte)
+  const colonne = d => (
+    <div className={`ex-cl-col ex-cl-col--${d ? 'droite' : 'gauche'}`}>
+      <span className="ex-cl-nom">{nbsp(ex.dossiers[d])}</span>
+      <ul className="ex-cl-rangees" aria-label={`Rangées dans ${ex.dossiers[d]}`}>
+        {rangees.map((r, i) => (r === d ? (
+          <li key={i} className={ex.cartes[i].dossier === d ? 'is-juste' : 'is-faux'}>{nbsp(ex.cartes[i].texte)}</li>
+        ) : null))}
+      </ul>
+    </div>
+  )
+  return (
+    <CadreExercice ex={ex} verdict={verdict} grand={grand} sansValider>
+      <div className="ex-cl">
+        <div className="ex-cl-cols">{colonne(0)}{colonne(1)}</div>
+        {carte && (
+          <div className="ex-cl-pile">
+            <span className="ex-cl-compte">Carte {k + 1} sur {ex.cartes.length}</span>
+            <div className={`ex-cl-carte${part ? ` is-part is-part--${part.cote} is-${part.juste ? 'juste' : 'faux'}` : ''}`}
+              style={dx && !part ? { transform: `translateX(${dx}px) rotate(${dx / 14}deg)` } : undefined} {...poignees}>
+              {nbsp(carte.texte)}
+            </div>
+          </div>
+        )}
+        {carte && (
+          <div className="ex-vf-boutons">
+            <button type="button" className="ex-vf-btn ex-cl-btn" disabled={!!verdict || !!part} onClick={() => ranger('gauche')}>
+              <Fleche vers="gauche" /><span>{nbsp(ex.dossiers[0])}</span>
+            </button>
+            <button type="button" className="ex-vf-btn ex-cl-btn" disabled={!!verdict || !!part} onClick={() => ranger('droite')}>
+              <span>{nbsp(ex.dossiers[1])}</span><Fleche vers="droite" />
+            </button>
+          </div>
+        )}
+      </div>
+    </CadreExercice>
+  )
+}
+
+export const FORMATS = {
+  coins: Coins, intrus: Intrus, indices: Indices, definition: Definition, paires: Paires, ordre: Chronologie, annee: Annee, qcm: Qcm,
+  vraifaux: VraiFaux, phrase: Phrase, memory: Memory, classement: Classement,
+}

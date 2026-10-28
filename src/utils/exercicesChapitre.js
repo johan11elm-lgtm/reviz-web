@@ -7,6 +7,9 @@
 //   - mots-clés (keyTerms)       → Définition, Paires
 //   - points datés « 1801 : … »  → Chronologie, Année
 //   - quiz                       → QCM, pour compléter la séance
+// Ajoutés le 29/10 : Vrai ou faux (mot et définition, ou date), Phrase à trous
+// (un mot-clé retiré d'une phrase du résumé), Mémory (mots et définitions face
+// cachée) et Classement (des cartes à glisser entre deux branches).
 // Une séance mélange ces formats (10 exercices au plus), dans un ordre tiré
 // au sort à partir d'une graine : la même graine redonne la même séance.
 // -------------------------------------------------------
@@ -241,6 +244,119 @@ function annee(dates, alea, id, deja) {
   }
 }
 
+function vraiFaux(motsCles, dates, alea, id) {
+  // Une date une fois sur trois quand le chapitre en a, sinon un mot et une définition.
+  if (dates.length >= 2 && alea() < 0.34) {
+    const d = tirer(dates, alea)
+    const vrai = alea() < 0.5
+    const autre = tirer(dates.filter(x => x !== d), alea)
+    const annee = vrai ? d.annee : autre.annee
+    return {
+      id, type: 'vraifaux', pose: 'thinking',
+      consigne: 'Vrai ou faux ?',
+      bulle: 'Glisse la carte : à droite si c’est vrai, à gauche si c’est faux.',
+      titre: libelleAnnee(annee),
+      affirmation: d.evenement,
+      vrai,
+      explication: vrai ? `Vrai : ${d.date} : ${d.evenement}.` : `Faux : c’était en ${libelleAnnee(d.annee)} (${d.date} : ${d.evenement}).`,
+      aRetenir: { question: `${libelleAnnee(annee)} : ${d.evenement}`, bonne: vrai ? 'Vrai' : 'Faux' },
+    }
+  }
+  if (motsCles.length < 2) return null
+  const k = tirer(motsCles, alea)
+  const vrai = alea() < 0.5
+  const autre = tirer(motsCles.filter(x => x !== k), alea)
+  const definition = vrai ? k.definition : autre.definition
+  return {
+    id, type: 'vraifaux', pose: 'thinking',
+    consigne: 'Vrai ou faux ?',
+    bulle: 'Glisse la carte : à droite si c’est vrai, à gauche si c’est faux.',
+    titre: k.terme,
+    affirmation: definition,
+    vrai,
+    explication: vrai ? `Vrai : ${k.terme} : ${k.definition}.` : `Faux : c’est la définition de « ${autre.terme} ». ${k.terme} : ${k.definition}.`,
+    aRetenir: { question: `${k.terme} : ${definition}`, bonne: vrai ? 'Vrai' : 'Faux' },
+  }
+}
+
+/** Le mot-clé dans une phrase, une seule fois et en mot entier : { index, longueur } ou null. */
+function trouverMot(phrase, terme) {
+  const motif = terme.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+  const re = new RegExp(`(^|[^\\p{L}\\p{N}])(${motif})(?=[^\\p{L}\\p{N}]|$)`, 'giu')
+  const trouves = [...phrase.matchAll(re)]
+  if (trouves.length !== 1) return null
+  const m = trouves[0]
+  return { index: m.index + m[1].length, longueur: m[2].length }
+}
+
+function phrase(ai, motsCles, alea, id) {
+  if (motsCles.length < 3) return null
+  const textes = [
+    ...(ai?.resume?.keyPoints ?? []),
+    ...(ai?.resume?.sections ?? []).flatMap(x => String(x?.content ?? '').split(/(?<=[.!?])\s+/)),
+  ].map(t => String(t).trim()).filter(t => t.length >= 25 && t.length <= 170)
+  const candidats = []
+  for (const t of textes) for (const k of motsCles) {
+    const m = k.terme.length > 3 ? trouverMot(t, k.terme) : null
+    if (m) candidats.push({ t, k, m })
+  }
+  if (!candidats.length) return null
+  const { t, k, m } = tirer(candidats, alea)
+  // Les mots proposés prennent la casse du mot dans la phrase (« will » en milieu de phrase, « Unless » en tête).
+  const forme = t.slice(m.index, m.index + m.longueur)
+  // Un sigle (« BBC ») garde ses capitales.
+  const commeLaPhrase = mot => (/^\p{Ll}/u.test(forme) ? (/^\p{Lu}\p{Ll}/u.test(mot) ? mot[0].toLowerCase() + mot.slice(1) : mot) : majuscule(mot))
+  const reponse = forme
+  const mots = melanger([reponse, ...melanger(motsCles.filter(x => x !== k), alea).slice(0, 2).map(x => commeLaPhrase(x.terme))], alea)
+  const avant = t.slice(0, m.index)
+  const apres = t.slice(m.index + m.longueur)
+  return {
+    id, type: 'phrase', pose: 'writing',
+    consigne: 'Complète la phrase',
+    bulle: 'Touche le mot qui manque.',
+    avant, apres, mots,
+    bonne: mots.indexOf(reponse),
+    explication: `${k.terme} : ${k.definition}.`,
+    aRetenir: { question: `${avant}…${apres}`, bonne: reponse },
+  }
+}
+
+/** Mémory : 3 mots et leurs définitions, face cachée. Réussi en 3 erreurs au plus. */
+function memory(motsCles, alea, id) {
+  if (motsCles.length < 3) return null
+  const trois = melanger(motsCles, alea).slice(0, 3)
+  return {
+    id, type: 'memory', pose: 'flashcard',
+    consigne: 'Mémory',
+    bulle: 'Retourne deux cartes : un mot et sa définition.',
+    cartes: melanger(trois.flatMap((k, i) => [{ paire: i, cote: 'mot', texte: k.terme }, { paire: i, cote: 'definition', texte: k.definition }]), alea),
+    erreursPermises: 3,
+    explication: trois.map(k => `${k.terme} : ${k.definition}.`).join(' '),
+    aRetenir: { question: 'Le mémory mot · définition', bonne: trois.map(k => k.terme).join(', ') },
+  }
+}
+
+/** Classement : 4 cartes de deux branches, à glisser à gauche ou à droite. */
+function classement(branches, alea, id, prises) {
+  const pleines = branches.filter(b => b.elements.length >= 2)
+  if (pleines.length < 2) return null
+  const a = tirerBranche(pleines, alea, prises)
+  const b = tirerBranche(pleines.filter(x => x !== a), alea, prises)
+  const cartes = melanger([
+    ...melanger(a.elements, alea).slice(0, 2).map(texte => ({ texte, dossier: 0 })),
+    ...melanger(b.elements, alea).slice(0, 2).map(texte => ({ texte, dossier: 1 })),
+  ], alea)
+  return {
+    id, type: 'classement', pose: 'pointing',
+    consigne: 'Range chaque carte',
+    bulle: `À gauche « ${a.nom} », à droite « ${b.nom} ».`,
+    dossiers: [a.nom, b.nom],
+    cartes,
+    explication: [a, b].map(x => `${x.nom} : ${cartes.filter(c => c.dossier === (x === a ? 0 : 1)).map(c => c.texte).join(', ')}.`).join(' '),
+    aRetenir: { question: `${a.nom} ou ${b.nom}`, bonne: cartes.map(c => `${c.texte} → ${c.dossier ? b.nom : a.nom}`).join(' ; ') },
+  }
+}
+
 function qcm(q, id) {
   if (!q?.question || !Array.isArray(q.choices) || q.choices.length < 2 || !Number.isInteger(q.correct) || !q.choices[q.correct]) return null
   return {
@@ -273,22 +389,26 @@ export function construireSeance(ai, { graine = Date.now(), nombre = 10 } = {}) 
   let n = 0
   const id = t => `${t}-${n++}`
 
-  const exercices = [
+  // Les formats datés sont rares (surtout l'histoire) : ils passent en premier quand le chapitre en a.
+  const dates2 = [chronologie(dates, alea, id('ordre')), annee(dates, alea, id('annee'), anneesPrises)]
+  // Paires et Mémory font travailler la même chose : l'un ou l'autre dans une séance.
+  const motDef = alea() < 0.5 ? paires(motsCles, alea, id('paires')) : memory(motsCles, alea, id('memory'))
+  const autres = melanger([
     coins(branches, alea, id('coins'), branchesPrises),
     intrus(branches, alea, id('intrus'), branchesPrises),
     indices(branches, alea, id('indices'), branchesPrises),
+    classement(branches, alea, id('classement'), branchesPrises),
     definition(motsCles, alea, id('definition'), termesPris),
-    paires(motsCles, alea, id('paires')),
-    chronologie(dates, alea, id('ordre')),
-    annee(dates, alea, id('annee'), anneesPrises),
-    definition(motsCles, alea, id('definition'), termesPris),
-  ].filter(Boolean)
-  // Le quiz du chapitre complète jusqu'au nombre voulu (2 questions au moins).
+    vraiFaux(motsCles, dates, alea, id('vraifaux')),
+    phrase(ai, motsCles, alea, id('phrase')),
+    motDef,
+  ].filter(Boolean), alea)
+  // 8 formats au plus, puis le quiz du chapitre complète jusqu'au nombre voulu (2 questions au moins).
+  const exercices = [...dates2.filter(Boolean), ...autres].slice(0, nombre - 2)
   const questions = melanger(ai?.quiz ?? [], alea).map(q => qcm(q, id('qcm'))).filter(Boolean)
-  const place = Math.max(2, nombre - exercices.length)
-  exercices.push(...questions.slice(0, place))
+  exercices.push(...questions.slice(0, nombre - exercices.length))
   if (exercices.length < 4) return []
-  return espacer(melanger(exercices, alea).slice(0, nombre))
+  return espacer(melanger(exercices, alea))
 }
 
 /**

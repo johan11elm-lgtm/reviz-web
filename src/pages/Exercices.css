@@ -351,6 +351,152 @@
 .ex-page .ex-annee-repere i { order: 2; width: 4px; height: 26px; margin-top: 2px; border-radius: 2px; background: var(--ex-juste); }
 .ex-page .ex-annee-bornes { display: flex; justify-content: space-between; padding: 0 54px; font-size: 12px; font-weight: 600; color: var(--rv-doux); }
 
+/* ── Vrai ou faux : une carte à glisser, deux boutons ── */
+.ex-page .ex-vf { display: flex; flex-direction: column; gap: 14px; }
+.ex-page .ex-vf-carte {
+  position: relative;
+  min-height: 170px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 22px 18px;
+  border-radius: 22px;
+  background: #fff;
+  box-shadow: 0 10px 26px rgba(4,42,101,.12);
+  text-align: center;
+  touch-action: pan-y;
+  user-select: none;
+  cursor: grab;
+  transition: transform .3s cubic-bezier(.3,1.2,.5,1), opacity .3s, background .2s;
+}
+.ex-page .ex-vf-carte:active { cursor: grabbing; }
+.ex-page .ex-vf-carte.is-sortie--droite { transform: translateX(14px) rotate(3deg); }
+.ex-page .ex-vf-carte.is-sortie--gauche { transform: translateX(-14px) rotate(-3deg); }
+.ex-page .ex-vf-carte.is-juste { background: var(--ex-juste-pale); }
+.ex-page .ex-vf-carte.is-faux { background: var(--ex-faux-pale); }
+.ex-page .ex-vf-titre { font-size: 20px; font-weight: 800; line-height: 1.2; color: var(--ex-encre); }
+.ex-page .ex-vf-affirmation { font-size: 16px; font-weight: 500; line-height: 1.45; color: var(--ex-encre); text-wrap: pretty; }
+.ex-page .ex-vf-tampon { position: absolute; top: 14px; padding: 4px 10px; border: 3px solid; border-radius: 10px; font-size: 15px; font-weight: 800; text-transform: uppercase; pointer-events: none; }
+.ex-page .ex-vf-tampon--vrai { left: 14px; color: var(--ex-juste); transform: rotate(-12deg); }
+.ex-page .ex-vf-tampon--faux { right: 14px; color: var(--ex-faux); transform: rotate(12deg); }
+.ex-page .ex-vf-boutons { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.ex-page .ex-vf-btn {
+  min-height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border: 2px solid transparent;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: var(--ex-ombre);
+  font-size: 17px;
+  font-weight: 800;
+  cursor: pointer;
+}
+.ex-page .ex-cadre .ex-vf-btn--faux { color: var(--ex-faux-texte); }
+.ex-page .ex-cadre .ex-vf-btn--vrai { color: var(--ex-juste-texte); }
+.ex-page .ex-vf-btn--faux.is-choisi { border-color: var(--ex-faux); background: var(--ex-faux-pale); }
+.ex-page .ex-vf-btn--vrai.is-choisi { border-color: var(--ex-juste); background: var(--ex-juste-pale); }
+.ex-page .ex-vf-btn:disabled:not(.is-choisi) { opacity: .5; }
+
+/* ── Phrase à trous ── */
+.ex-page .ex-phrase { margin: 0; padding: 18px 16px; border-radius: 20px; background: #fff; box-shadow: var(--ex-ombre); font-size: 17px; font-weight: 500; line-height: 2; color: var(--ex-encre); }
+.ex-page .ex-trou {
+  display: inline-flex;
+  align-items: center;
+  min-width: 96px;
+  min-height: 36px;
+  margin: 0 2px;
+  padding: 0 12px;
+  border: 2px dashed var(--ex-lavande-fort);
+  border-radius: 10px;
+  background: var(--ex-lavande);
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.3;
+  vertical-align: middle;
+  cursor: pointer;
+}
+.ex-page .ex-trou.is-pose { border-style: solid; background: #fff; }
+.ex-page .ex-trou.is-juste { border: 2px solid var(--ex-juste); background: var(--ex-juste-pale); color: var(--ex-juste-texte); }
+.ex-page .ex-trou.is-faux { border: 2px solid var(--ex-faux); background: var(--ex-faux-pale); color: var(--ex-faux-texte); }
+.ex-page .ex-banque { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+.ex-page .ex-mot { min-height: 48px; padding: 8px 16px; border: 0; border-radius: 14px; background: #fff; box-shadow: var(--ex-ombre); font-size: 16px; font-weight: 700; cursor: pointer; }
+.ex-page .ex-mot.is-choisi { background: var(--ex-lavande); box-shadow: inset 0 0 0 2px var(--ex-lavande-fort); }
+.ex-page .ex-mot.is-juste { background: var(--ex-juste-pale); color: var(--ex-juste-texte); }
+.ex-page .ex-mot.is-faux { background: var(--ex-faux-pale); color: var(--ex-faux-texte); }
+.ex-page .ex-mot.is-terne { opacity: .5; }
+
+/* ── Mémory : 6 cartes face cachée, retournées en écrasant la carte (pas de 3D) ── */
+.ex-page .ex-memo-grille { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.ex-page .ex-memo {
+  position: relative;
+  min-height: 104px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 12px;
+  border: 0;
+  border-radius: 16px;
+  background: var(--ex-encre);
+  box-shadow: 0 4px 0 #001330;
+  font-size: 13.5px;
+  font-weight: 600;
+  line-height: 1.35;
+  text-align: center;
+  cursor: pointer;
+}
+.ex-page .ex-memo-dos { font-size: 30px; font-weight: 800; color: #B9A6FB; }
+.ex-page .ex-memo.is-visible { background: #fff; box-shadow: var(--ex-ombre); animation: exRetourne .28s ease-out both; }
+.ex-page .ex-memo--mot.is-visible { font-size: 16px; font-weight: 800; }
+.ex-page .ex-memo.is-trouvee { padding-left: 36px; background: var(--ex-juste-pale); box-shadow: none; color: var(--ex-juste-texte); }
+.ex-page .ex-memo.is-rate { background: var(--ex-faux-pale); color: var(--ex-faux-texte); box-shadow: inset 0 0 0 2px var(--ex-faux); }
+@keyframes exRetourne { 0% { transform: scaleX(.05); } 100% { transform: none; } }
+
+/* ── Classement : deux colonnes, une carte au milieu ── */
+.ex-page .ex-cl { display: flex; flex-direction: column; gap: 12px; }
+.ex-page .ex-cl-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.ex-page .ex-cl-col { min-height: 96px; display: flex; flex-direction: column; gap: 6px; padding: 10px; border: 2px dashed #D8D2F7; border-radius: 16px; background: rgba(255,255,255,.55); }
+.ex-page .ex-cl-col--droite { text-align: right; }
+.ex-page .ex-cl-nom { font-size: 14px; font-weight: 800; line-height: 1.25; color: var(--ex-encre); }
+.ex-page .ex-cl-rangees { display: flex; flex-direction: column; gap: 4px; margin: 0; padding: 0; list-style: none; }
+.ex-page .ex-cl-rangees li { padding: 4px 8px; border-radius: 8px; font-size: 12.5px; font-weight: 600; animation: exTag .25s cubic-bezier(.3,1.6,.5,1) both; }
+.ex-page .ex-cl-rangees li.is-juste { background: var(--ex-juste-pale); color: var(--ex-juste-texte); }
+.ex-page .ex-cl-rangees li.is-faux { background: var(--ex-faux-pale); color: var(--ex-faux-texte); }
+.ex-page .ex-cl-pile { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.ex-page .ex-cl-compte { font-size: 12px; font-weight: 700; color: var(--rv-doux); }
+.ex-page .ex-cl-carte {
+  width: 72%;
+  min-height: 84px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 16px;
+  border-radius: 18px;
+  background: var(--ex-encre);
+  box-shadow: 0 10px 24px rgba(4,42,101,.25);
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.3;
+  text-align: center;
+  color: #fff;
+  touch-action: pan-y;
+  user-select: none;
+  cursor: grab;
+  transition: transform .3s cubic-bezier(.3,1.1,.5,1), opacity .3s, background .2s;
+}
+.ex-page .ex-cl-carte.is-part--gauche { transform: translateX(-60%) rotate(-10deg) scale(.7); opacity: 0; }
+.ex-page .ex-cl-carte.is-part--droite { transform: translateX(60%) rotate(10deg) scale(.7); opacity: 0; }
+.ex-page .ex-cl-carte.is-juste { background: var(--ex-juste); }
+.ex-page .ex-cl-carte.is-faux { background: var(--ex-faux); }
+.ex-page .ex-cl-btn { font-size: 14px; line-height: 1.2; }
+.ex-page .ex-cl-btn span { min-width: 0; overflow-wrap: anywhere; }
+
 /* ── Correction et fin ── */
 .ex-page .ex-correction .qz-verdict { font-size: 19px; }
 .ex-page .ex-fin-reviz { display: flex; flex-direction: column; align-items: center; gap: 8px; margin-top: 10px; }
@@ -389,7 +535,18 @@
 .ex-page .qn-cote .qz-segments { display: flex; gap: 4px; margin: 4px 0; }
 .ex-page.qz-page--large .ex-fin-emote { width: 180px; height: 180px; border-radius: 48px; }
 
+/* Ordinateur : les nouveaux formats un peu plus grands */
+.ex-page.qn-page--large .ex-vf-carte { min-height: 210px; }
+.ex-page.qn-page--large .ex-vf-titre { font-size: 24px; }
+.ex-page.qn-page--large .ex-vf-affirmation { font-size: 18px; }
+.ex-page.qn-page--large .ex-phrase { font-size: 19px; padding: 22px 24px; }
+.ex-page.qn-page--large .ex-memo-grille { grid-template-columns: repeat(3, 1fr); }
+.ex-page.qn-page--large .ex-memo { min-height: 130px; font-size: 14.5px; }
+.ex-page.qn-page--large .ex-memo:not(:disabled):not(.is-visible):hover { transform: translateY(-3px); }
+.ex-page.qn-page--large .ex-cl-col { min-height: 120px; }
+.ex-page.qn-page--large .ex-cl-carte { width: 50%; min-height: 100px; font-size: 19px; }
+
 @media (prefers-reduced-motion: reduce) {
-  .ex-page .ex-cadre, .ex-page .ex-carte-tag, .ex-page .ex-paire.is-faux, .ex-page .ex-evenement.is-choisi .ex-rang { animation: none; }
-  .ex-page .ex-carte-coin, .ex-page .ex-carte { transition: none; }
+  .ex-page .ex-cadre, .ex-page .ex-carte-tag, .ex-page .ex-paire.is-faux, .ex-page .ex-evenement.is-choisi .ex-rang, .ex-page .ex-memo.is-visible, .ex-page .ex-cl-rangees li { animation: none; }
+  .ex-page .ex-carte-coin, .ex-page .ex-carte, .ex-page .ex-vf-carte, .ex-page .ex-cl-carte { transition: none; }
 }
