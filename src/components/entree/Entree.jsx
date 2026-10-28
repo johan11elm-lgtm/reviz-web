@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Pantin } from '../Pantin';
 import { Mascot } from '../Mascot';
@@ -22,12 +22,49 @@ const Chevron = () => (
 // Émote de Réviz selon son humeur (les écrans d'entrée n'animent plus le pantin, sauf la bienvenue).
 const POSE = { content: 'hello', fier: 'celebration', reflechit: 'thinking', determine: 'pointing', inquiet: 'confused' };
 
-/** Autocollants autour de la carte (ordinateur), comme les photos inclinées de Nomad : Réviz en émotes. */
+/**
+ * Le décor suit un peu la souris (parallaxe : --mx et --my de -1 à 1 sur la zone), et Réviz la
+ * suit du regard tant qu'elle bouge ; de temps en temps il détourne les yeux, et il les relâche
+ * quand elle s'arrête. Rien au doigt ni si l'élève a demandé moins d'animations.
+ */
+function useSouris(zone, pantin) {
+  useEffect(() => {
+    const el = zone.current;
+    const fin = window.matchMedia?.('(pointer: fine)').matches;
+    const calme = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+    if (!el || !fin || calme) return undefined;
+    let raf = 0, x = 0, y = 0, repos = 0, suitDepuis = 0, distraitJusqua = 0;
+    const appliquer = () => { raf = 0; el.style.setProperty('--mx', x.toFixed(3)); el.style.setProperty('--my', y.toFixed(3)); };
+    const relacher = () => { suitDepuis = 0; pantin?.current?.libererRegard(); };
+    const bouger = ev => {
+      x = ev.clientX / window.innerWidth * 2 - 1;
+      y = ev.clientY / window.innerHeight * 2 - 1;
+      if (!raf) raf = requestAnimationFrame(appliquer);
+      if (!pantin) return;
+      const t = performance.now();
+      clearTimeout(repos);
+      repos = setTimeout(relacher, 1800);
+      if (t < distraitJusqua) return;
+      if (!suitDepuis) suitDepuis = t;
+      // Après 5 à 10 s à la suivre, il regarde ailleurs une seconde et demie.
+      if (t - suitDepuis > 5000 + Math.random() * 5000) { distraitJusqua = t + 1500; relacher(); return; }
+      pantin.current?.regarderEcran(ev.clientX, ev.clientY);
+    };
+    window.addEventListener('pointermove', bouger, { passive: true });
+    return () => { window.removeEventListener('pointermove', bouger); cancelAnimationFrame(raf); clearTimeout(repos); };
+  }, [zone, pantin]);
+}
+
+/** Autocollants autour de la carte (ordinateur), comme les photos inclinées de Nomad : Réviz en
+ * émotes, et un Réviz animé qui suit le curseur du regard. */
 function Autocollants() {
+  const zone = useRef(null);
+  const pantin = useRef(null);
+  useSouris(zone, pantin);
   return (
-    <div className="en-autocollants" aria-hidden="true">
+    <div className="en-autocollants" ref={zone} aria-hidden="true">
       <span className="en-colle en-colle--a"><Mascot pose="reading" size={150} alt="" /></span>
-      <span className="en-colle en-colle--b"><Mascot pose="celebration" size={150} alt="" /></span>
+      <span className="en-colle en-colle--b"><Pantin ref={pantin} size={190} expression="content" repli="celebration" label="Réviz" /></span>
       <span className="en-colle en-colle--c"><Mascot pose="quiz" size={130} alt="" /></span>
       <span className="en-colle-mot en-colle-mot--a">réviz</span>
       <span className="en-colle-mot en-colle-mot--b">réviz</span>
@@ -81,27 +118,7 @@ export function EntreeEcran({ teinte = 'peche', bulle, expression = 'content', g
   );
 
   // Bienvenue : le texte et les boutons, et le pantin dans un grand bloc orange.
-  if (logo) {
-    return (
-      <div className={`app app--no-halo en-page en-nomad en-nomad--bienvenue${isDesktop ? ' app--large en-nomad--large' : ''}`}>
-        <div className="content en-defile">
-          <div className="en-bienvenue">
-            <div className="en-bienvenue-texte">
-              <LogoReviz className="en-bienvenue-logo" />
-              {titre}
-              <div className="en-pile en-bienvenue-actions">{children}</div>
-              {dessous && <div className="en-dessous">{dessous}</div>}
-            </div>
-            <div className="en-bienvenue-image" aria-hidden="true">
-              <Pantin size={isDesktop ? 360 : 230} expression={expression} entree={geste ?? 'coucou'} repli={null} label="Réviz, ta mascotte" />
-              <span className="en-colle-mot en-colle-mot--bienvenue">réviz</span>
-              <span className="en-note-colle"><b>6e → 3e</b>tout le programme</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
+  if (logo) return <Bienvenue {...{ titre, expression, geste, isDesktop, children, dessous }} />;
 
   return (
     <div className={`app app--no-halo en-page en-nomad en--${teinte} en--${taille}${isDesktop ? ' app--large en-nomad--large' : ''}`}>
@@ -116,6 +133,32 @@ export function EntreeEcran({ teinte = 'peche', bulle, expression = 'content', g
           </div>
           {children}
           {dessous && <div className="en-dessous">{dessous}</div>}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/** Bienvenue : le texte et les boutons, Réviz dans un grand bloc orange qui suit la souris. */
+function Bienvenue({ titre, expression, geste, isDesktop, children, dessous }) {
+  const zone = useRef(null);
+  const pantin = useRef(null);
+  useSouris(zone, pantin);
+  return (
+    <div ref={zone} className={`app app--no-halo en-page en-nomad en-nomad--bienvenue${isDesktop ? ' app--large en-nomad--large' : ''}`}>
+      <div className="content en-defile">
+        <div className="en-bienvenue">
+          <div className="en-bienvenue-texte">
+            <LogoReviz className="en-bienvenue-logo" />
+            {titre}
+            <div className="en-pile en-bienvenue-actions">{children}</div>
+            {dessous && <div className="en-dessous">{dessous}</div>}
+          </div>
+          <div className="en-bienvenue-image" aria-hidden="true">
+            <Pantin ref={pantin} size={isDesktop ? 360 : 230} expression={expression} entree={geste ?? 'coucou'} repli={null} label="Réviz, ta mascotte" />
+            <span className="en-colle-mot en-colle-mot--bienvenue">réviz</span>
+            <span className="en-note-colle"><b>6e → 3e</b>tout le programme</span>
+          </div>
         </div>
       </div>
     </div>

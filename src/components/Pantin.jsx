@@ -367,6 +367,22 @@ export const Pantin = forwardRef(function Pantin(
     },
     // La pizzeria : la part en trop qu'il croque en cachette (bouchee : à chaque coup de dents).
     croquer: ({ bouchee, fini } = {}) => aLaBouche('part', { bouchee, fini }),
+    // Suivre du regard un point de l'écran (clientX, clientY), puis rendre au regard sa vie
+    // (clignements, coups d'œil au hasard) en ramenant yeux et visage au centre.
+    regarderEcran: (x, y) => {
+      const a = anim.current, svg = hote.current?.ownerSVGElement;
+      if (!a || a.calme || !svg?.getScreenCTM()) return;
+      const pt = svg.createSVGPoint();
+      pt.x = x; pt.y = y;
+      const p = pt.matrixTransform(svg.getScreenCTM().inverse());
+      a.regarder(p.x, p.y, 0.3);
+    },
+    libererRegard: () => {
+      const a = anim.current, gsap = gsapRef.current, svg = hote.current?.ownerSVGElement;
+      if (!a || !gsap || !svg) return;
+      gsap.to(a.etat, { regardX: 0, regardY: 0, visageX: 0, visageY: 0, duration: 0.5, ease: 'power2.inOut', overwrite: 'auto' });
+      a.suivre(svg)(); // l'arrêt de suivre() rend le regard libre
+    },
   }), []);
 
   // Un objet porté à la bouche le temps d'un geste (la part de pizza) : le bras prend la pose de
