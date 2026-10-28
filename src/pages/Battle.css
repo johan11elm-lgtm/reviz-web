@@ -589,3 +589,33 @@ button.bt-choix-btn:active:not(:disabled) { transform: translateY(3px); box-shad
   --hm-encre: #042A65; --hm-doux: #6E675B; --inst-encre: #042A65; --inst-doux: #6E675B; --lg-encre: #042A65; --lg-doux: #6E675B; --prg-encre: #042A65; --prg-doux: #6E675B;
   color: #042A65;
 }
+
+/* ═══ Battle façon app Nomad (29/10) ══════════════════════════════════════════
+ * Hôte en lavande Nomad, invité en orange clair (le texte marine y reste lisible), à plat
+ * sans ronds décoratifs ; cartes blanches à ombre légère, boutons orange vif à coins de 14 px,
+ * titres à barre orange. */
+.bt-page {
+  --bt-encre: #042A65; --bt-orange: var(--rv-vif-plein); --bt-tranche: #B83706;
+  --bt-vert: #04ADB3; --bt-vert-fond: #DDF5F4; --bt-vert-texte: #037F84;
+  --bt-lavande: #B9A6FB; --bt-lavande-t: #9A85EE; --bt-peche: #FFB08F; --bt-peche-t: #F08A63;
+}
+.bt-hero { border-radius: 24px; }
+.bt-hero-moitie--g::after, .bt-hero-moitie--d::after,
+.bt-page--invitation .bt-defile::before, .bt-page--salon .bt-defile::before { display: none; }
+.bt-retour { border-radius: 12px; box-shadow: 0 1px 3px rgba(4,42,101,.14); }
+.bt-titre, .bt-h2, .bt-vide h1, .bt-aura b { font-family: inherit; letter-spacing: -.01em; }
+.bt-h2 { padding-left: 12px; border-left: 4px solid var(--rv-vif); font-size: 20px; line-height: 1.2; }
+.bt-carte { border-radius: 20px; }
+.bt-btn { border-radius: 14px; box-shadow: 0 4px 0 var(--bt-tranche); }
+.bt-btn:active:not(:disabled) { box-shadow: 0 1px 0 var(--bt-tranche); }
+.bt-btn--blanc { box-shadow: 0 1px 3px rgba(4,42,101,.12), 0 3px 0 #E6DFD8; }
+.bt-btn--peche { background: #FFE9DF; box-shadow: none; }
+.bt-btn--encre { background: #042A65; }
+.bt-matiere { border-radius: 12px; background: #fff; box-shadow: 0 1px 3px rgba(4,42,101,.12); }
+.bt-matiere.is-choisie { background: #042A65; color: #fff; }
+.bt-chapitre { border-radius: 14px; background: #fff; border-color: #E6DFD8; border-width: 1.5px; }
+.bt-chapitre.is-choisi { border-color: var(--rv-vif); }
+.bt-chapitre.is-choisi .bt-radio { border-color: var(--rv-vif); }
+.bt-vs { font-family: inherit; color: #042A65; }
+.bt-note--carte { border-radius: 14px; }
+.bt-page .bt-deco { display: none; }

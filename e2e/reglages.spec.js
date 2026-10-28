@@ -3,7 +3,7 @@
 // après un rechargement (localStorage, profil Firestore, session Firebase), et la déconnexion
 // doit ramener à l'écran d'entrée. Deux compositions : une colonne sur téléphone, deux sur ordinateur.
 import { test, expect } from '@playwright/test'
-import { mockApiRoutes, compteRapide, lireProfilEmulateur, bulleReviz, uniqueEmail } from './helpers'
+import { mockApiRoutes, compteRapide, lireProfilEmulateur, uniqueEmail } from './helpers'
 
 const APPAREILS = [
   ['téléphone', { width: 390, height: 844 }],
@@ -32,7 +32,7 @@ for (const [appareil, viewport] of APPAREILS) {
     test('l\'écran montre le compte, les rappels, l\'objectif, l\'apparence et Réviz+', async ({ page }) => {
       const { email } = await ouvrirReglages(page)
 
-      await expect(bulleReviz(page, 'Tout se règle ici.')).toBeAttached()
+      await expect(page.getByRole('heading', { level: 1, name: 'Réglages' })).toBeVisible()
       for (const titre of ['Compte', 'Rappels', 'Objectif du jour', 'Apparence', 'Réviz+', 'Informations']) {
         await expect(page.getByRole('heading', { level: 2, name: titre, exact: true })).toBeVisible()
       }

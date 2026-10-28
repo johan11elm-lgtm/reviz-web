@@ -122,3 +122,27 @@
   --hm-encre: #042A65; --hm-doux: #6E675B; --inst-encre: #042A65; --inst-doux: #6E675B; --lg-encre: #042A65; --lg-doux: #6E675B; --prg-encre: #042A65; --prg-doux: #6E675B;
   color: #042A65;
 }
+
+/* ═══ Réviz+ façon app Nomad (29/10) : comparatif et formules en cartes blanches, choix entouré
+ * d'orange, bouton orange vif à coins de 14 px ; limites atteintes dans le bloc lavande. ═══ */
+.rpo-feuille { background: var(--rv-fond); color: #042A65; }
+.rpo-titre { font-family: inherit; letter-spacing: -.02em; color: #042A65; }
+.rpo-sceau { border-radius: 8px; background: #042A65; color: #fff; box-shadow: none; }
+.rpo-compare { border-radius: 18px; box-shadow: 0 1px 3px rgba(4,42,101,.1), 0 1px 2px rgba(4,42,101,.06); }
+.rpo-compare th, .rpo-compare td { border-bottom: 1px solid var(--rv-ligne); }
+.rpo-plus { border-radius: 8px; background: #042A65; color: #fff; }
+.rpo-formule { border: 2px solid #E6DFD8; border-radius: 16px; box-shadow: none; }
+.rpo-formule.is-choisie { border-color: var(--rv-vif); box-shadow: 0 0 0 1px var(--rv-vif), 0 6px 16px -8px rgba(216,64,10,.35); }
+.rpo-formule.is-choisie .rpo-radio { background: var(--rv-vif-plein); }
+.rpo-formule-txt b, .rpo-prix b { font-family: inherit; }
+.rpo-avantage { border-radius: 8px; background: #DDF5F4; color: #037F84; }
+.rpo-avantage::before { background: #04ADB3; }
+.rpo-btn { border-radius: 14px; background: var(--rv-vif-plein); box-shadow: 0 4px 0 #B83706; }
+.rpo-btn:active:not(:disabled) { box-shadow: 0 1px 0 #B83706; }
+.rpo-btn--second { border-radius: 14px; background: #fff; color: #042A65; box-shadow: 0 1px 3px rgba(4,42,101,.12), 0 3px 0 #E6DFD8; }
+.rpo-fermer { border-radius: 12px; }
+.rpo-panneau { border-radius: 20px; }
+.rpo-panneau--lavande, .rpo-panneau--peche { background: #B9A6FB; }
+.rpo-carte { border-radius: 18px; box-shadow: 0 1px 3px rgba(4,42,101,.1), 0 1px 2px rgba(4,42,101,.06); }
+.rpo-erreur { border-radius: 12px; background: #FFE5E8; color: #A3172B; }
+.rpo-toast-rond { background: #F2EBFF; }

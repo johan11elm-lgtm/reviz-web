@@ -288,3 +288,41 @@
 
 /* Espace parent : le bouton de coupure des liens, sous la ligne */
 .rg-page .rg-espace-couper { margin-top: 12px; }
+
+/* ═══ Réglages façon préférences de l'app Nomad (29/10) ═══════════════════════
+ * En-tête simple (retour, « Mon profil », titre, émote) au lieu du héros ; sections en
+ * cartes blanches à titre barré d'orange, lignes à séparateur fin, interrupteurs orange,
+ * choix plats (marine une fois choisis). */
+.rn-reglages { --ch-encre: #042A65; --ch-doux: var(--rv-doux); --rg-orange: #042A65; --rg-tranche: #001330; --rg-vert: var(--rv-vif); --rg-vert-texte: #D8400A; --rg-vert-fond: #DDF5F4; background: var(--rv-fond); }
+.rn-reglages .rg-entete { display: flex; align-items: center; gap: 14px; padding: calc(env(safe-area-inset-top, 0px) + 14px) 16px 0; }
+.rn-reglages .rg-retour { flex: none; width: 44px; height: 44px; border-radius: 12px; background: #fff; box-shadow: 0 1px 3px rgba(4,42,101,.14); color: #042A65; }
+.rn-reglages .rg-entete-titres { flex: 1; min-width: 0; }
+.rn-reglages .rg-sur { font-size: 13px; font-weight: 600; letter-spacing: 0; text-transform: none; opacity: 1; color: var(--rv-doux); }
+.rn-reglages .rg-titre { margin: 0; font-family: inherit; font-size: 28px; letter-spacing: -.01em; line-height: 1.15; color: #042A65; }
+.rn-reglages .rg-entete-emote { width: 56px; height: 56px; flex: none; border-radius: 50%; background: #F2EBFF; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.rn-reglages .rg-colonne { margin: 18px 16px 0; gap: 14px; }
+.rn-reglages .rg-carte { border-radius: 20px; padding: 18px; }
+.rn-reglages .rg-h2 { margin: 0 0 8px; padding-left: 12px; border-left: 4px solid var(--rv-vif); font-family: inherit; font-size: 19px; letter-spacing: 0; line-height: 1.2; color: #042A65; }
+.rn-reglages .rg-ligne + .rg-ligne { border-top: 1px solid var(--rv-ligne); }
+.rn-reglages .rg-rond { border-radius: 12px; }
+.rn-reglages .rg-rond--lavande { background: #F2EBFF; }
+.rn-reglages .rg-rond--peche { background: #FFE9DF; color: var(--rv-vif-plein); }
+.rn-reglages .rg-rond--menthe { background: #DDF5F4; }
+.rn-reglages .rg-inter span { background: #E0D6CD; box-shadow: none; }
+.rn-reglages .rg-inter input:checked + span { background: var(--rv-vif); box-shadow: none; }
+.rn-reglages .rg-objectif { border-radius: 14px; box-shadow: 0 1px 3px rgba(4,42,101,.12); border-color: #E6DFD8; font-family: inherit; }
+.rn-reglages .rg-objectif.is-choisi { box-shadow: none; }
+.rn-reglages .rg-mode { border-radius: 12px; box-shadow: 0 1px 3px rgba(4,42,101,.12); border-color: #E6DFD8; }
+.rn-reglages .rg-mode.is-choisi { box-shadow: none; }
+.rn-reglages .rg-note, .rn-reglages .rg-apropos { border-radius: 14px; }
+.rn-reglages .rg-btn { border-radius: 14px; }
+.rn-reglages .rg-btn--blanc { box-shadow: 0 1px 3px rgba(4,42,101,.12), 0 3px 0 #E6DFD8; }
+.rn-reglages .rg-btn--encre { background: #042A65; color: #fff; box-shadow: 0 4px 0 #001330; }
+.rn-reglages .rg-etat--offert { background: #FFE9DF; color: var(--rv-vif-plein); }
+.rn-reglages .rg-supprimer { border-top: 1px solid var(--rv-ligne); }
+.rn-reglages .rg-feuille-titre { font-family: inherit; letter-spacing: -.01em; }
+
+/* Ordinateur */
+.rn-reglages.rg-page--large .rg-entete { max-width: 1240px; box-sizing: border-box; margin: 0 auto; padding: 12px 32px 0; }
+.rn-reglages.rg-page--large .rg-titre { font-size: 34px; }
+.rn-reglages .rg-colonnes { max-width: 1240px; margin: 22px auto 0; padding: 0 32px; }

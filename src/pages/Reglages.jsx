@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { UserIcon, MailIcon, KeyIcon, BellIcon, LockIcon, CheckIcon, LogOutIcon, InstallIcon, ChatIcon } from '../components/Icons';
 import { InstallerModal } from '../components/InstallerApp';
@@ -10,11 +10,8 @@ import { useModalA11y } from '../hooks/useModalA11y';
 import { BottomNav } from '../components/BottomNav';
 import { LevelSelector } from '../components/LevelSelector';
 import { Mascot } from '../components/Mascot';
-import { Pantin } from '../components/Pantin';
-import { BulleReviz } from '../components/reviz/BulleReviz';
 import { RevizPlusSheet } from '../components/RevizPlus';
 import { THEMES_PROPOSES, SOMBRE_DISPONIBLE, MODES, themeAffiche } from '../utils/themes';
-import { TEINTES, varsTeinte } from '../utils/teinteMatiere';
 import { phaseRevizPlus, joursAvant, dateCourte } from '../utils/revizPlus';
 import { openBillingPortal, startCheckout } from '../services/billingService';
 import { remindersAvailable, isReminderEnabled, enableReminder, disableReminder } from '../services/reminderService';
@@ -113,18 +110,6 @@ export default function Reglages() {
 
   const prenom    = currentUser?.displayName ?? '';
   const userLevel = getUserLevel();
-
-  // ── Réviz dans le héros ──
-  const pantin = useRef(null);
-  const [parle, setParle] = useState(false);
-  const lignes = ['Tout se règle ici.', 'Rien ne part sans ton accord.'];
-  useEffect(() => { if (parle) pantin.current?.dire(lignes.join('\n')); }, [parle]); // eslint-disable-line react-hooks/exhaustive-deps
-  useEffect(() => {
-    let t;
-    const essai = () => { t = setTimeout(() => (document.hidden ? essai() : setParle(true)), 4000); };
-    essai();
-    return () => clearTimeout(t);
-  }, []);
 
   // ── 1. Compte : feuille ouverte (null | 'profil' | 'email' | 'password') ──
   const [feuille, setFeuille]   = useState(null);
@@ -583,26 +568,16 @@ export default function Reglages() {
     </div>
   );
 
+  // En-tête façon préférences de l'app Nomad (29/10) : retour, surtitre, titre ; plus de pantin.
   const hero = (
-    <div className="ch-hero rg-hero">
-      <span className="ch-deco ch-deco--a" aria-hidden="true" />
-      <span className="ch-deco ch-deco--b" aria-hidden="true" />
-      <span className="ch-point" aria-hidden="true" />
-      <span className="ch-grain" aria-hidden="true" />
-      <div className="rg-hero-haut">
-        <button type="button" className="rg-retour" onClick={() => revenir(navigate, '/profil')} aria-label="Retour à Moi"><Chevron sens="gauche" /></button>
+    <header className="rg-entete">
+      <button type="button" className="rg-retour" onClick={() => revenir(navigate, '/profil')} aria-label="Retour à Moi"><Chevron sens="gauche" /></button>
+      <div className="rg-entete-titres">
+        <span className="rg-sur">Mon profil</span>
+        <h1 className="rg-titre">Réglages</h1>
       </div>
-      <div className="rg-hero-corps">
-        <div className="rg-hero-titres">
-          <span className="rg-sur rg-sur--hero">Mon profil</span>
-          <h1 className="rg-titre">Réglages</h1>
-          {!isDesktop && <BulleReviz lignes={lignes} parle={parle} pointe="droite" className="rg-bulle" />}
-        </div>
-        {isDesktop && <BulleReviz lignes={lignes} parle={parle} pointe="droite" grande className="rg-bulle" />}
-        <Pantin ref={pantin} size={isDesktop ? 200 : 150} expression="reflechit" entree="saut" repli={null}
-          onEntree={() => setParle(true)} onClick={() => pantin.current?.geste('gratterTete')} label="Réviz, ta mascotte" />
-      </div>
-    </div>
+      <span className="rg-entete-emote" aria-hidden="true"><Mascot pose="thinking" size={isDesktop ? 60 : 52} alt="" /></span>
+    </header>
   );
 
   const feuilles = (
@@ -712,9 +687,9 @@ export default function Reglages() {
     </>
   );
 
-  const racine = `app app--no-halo ch-page rg-page${isDesktop ? ' app--large ch-page--large rg-page--large' : ''}`;
+  const racine = `app app--no-halo ch-page rg-page rn-reglages${isDesktop ? ' app--large ch-page--large rg-page--large' : ''}`;
   return (
-    <div className={racine} style={varsTeinte(TEINTES.lavande)}>
+    <div className={racine}>
       <div className="content rg-defile">
         {hero}
         {isDesktop ? (

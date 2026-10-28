@@ -114,3 +114,18 @@
   .ep-bande { grid-template-columns: repeat(30, 1fr); }
   .ep-colonnes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; align-items: start; }
 }
+
+/* ═══ Espace parent façon app Nomad (29/10) : en-tête dans le bloc lavande de l'app, titres
+ * à barre orange, jours actifs en orange vif, encart Réviz+ en carte marine. ═══ */
+.ep-page .ep-entete, .ep-page .ep-message { background: #B9A6FB; color: #042A65; border-radius: 24px; }
+.ep-page .ep-entete .sk-titre-leger { font-weight: 500; }
+.ep-page .ep-chapo { color: #042A65; }
+.ep-page .ep-carte h2, .ep-page .ep-revizplus h2 { padding-left: 12px; border-left: 4px solid var(--rv-vif); line-height: 1.2; letter-spacing: 0; color: #042A65; }
+.ep-page .ep-bande li { border-radius: 5px; background: #EFE7E0; }
+.ep-page .ep-bande li.is-actif { background: var(--rv-vif); }
+.ep-page .ep-pastille { background: var(--rv-vif); }
+.ep-page .ep-revizplus.sk-bloc--lavande { background: #042A65; color: #fff; }
+.ep-page .ep-revizplus.sk-bloc--lavande h2 { color: #fff; border-left-color: #B9A6FB; }
+.ep-page .ep-revizplus.sk-bloc--lavande p { color: rgba(255,255,255,.82); }
+.ep-page .ep-revizplus.sk-bloc--lavande .ep-lien { background: #fff; color: #042A65; }
+.ep-page .ep-revizplus.sk-bloc--menthe { background: #DDF5F4; }

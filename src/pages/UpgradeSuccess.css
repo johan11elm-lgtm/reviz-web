@@ -90,3 +90,28 @@
   background: radial-gradient(62% 52% at 50% 60%, color-mix(in srgb, var(--rv-peche) 46%, transparent) 0%, color-mix(in srgb, var(--rv-peche) 16%, transparent) 55%, transparent 82%), var(--rv-carte);
 }
 :root[data-theme="dark"] .ugs-deco { background: color-mix(in srgb, var(--rv-peche-bulle) 10%, transparent); }
+
+/* ═══ Après le paiement, façon app Nomad (29/10) : le bloc orange de la bienvenue, à plat, avec
+ * Réviz qui fête ; titre marine sous le surtitre (plus de chevauchement avec la croix), cartes
+ * blanches, rond turquoise quand c'est actif, boutons à coins de 14 px. ═══ */
+.ugs-page .ugs-hero { background: #FF4B0A; border-radius: 24px; }
+.ugs-page .ugs-deco, .ugs-page .ugs-hero .ch-grain { display: none; }
+.ugs-page .ugs-hero-haut { align-items: flex-start; }
+.ugs-page .ugs-hero-haut > .ugs-sur, .ugs-page .ugs-hero-haut > .ugs-titre { flex-basis: 100%; }
+.ugs-page .ugs-hero-haut { flex-wrap: wrap; position: relative; padding-right: 56px; }
+.ugs-page .ugs-hero-haut .ugs-fermer { position: absolute; top: 0; right: 0; }
+.ugs-page .ugs-sur { opacity: 1; color: #fff; }
+.ugs-page .ugs-titre { margin-top: 2px; font-family: inherit; letter-spacing: -.02em; color: #fff; }
+.ugs-page .ugs-fermer { border-radius: 12px; box-shadow: none; }
+.ugs-page .ugs-carte { border-radius: 20px; }
+.ugs-page .ugs-rond--vert { background: #04ADB3; box-shadow: none; }
+.ugs-page .ugs-rond--attente { background: #FFE9DF; }
+.ugs-page .ugs-rond--lavande { background: #F2EBFF; }
+.ugs-page .ugs-rond--peche { background: #FFE9DF; }
+.ugs-page .ugs-rond--menthe { background: #DDF5F4; }
+.ugs-page .ugs-btn { border-radius: 14px; }
+.ugs-page .ugs-btn--second { box-shadow: 0 1px 3px rgba(4,42,101,.12), 0 3px 0 #E6DFD8; }
+/* Ordinateur : le bloc orange à gauche, en carte arrondie au lieu du demi-cercle */
+.ugs-page--large .ugs-hero { margin: 16px; height: calc(100dvh - 32px); border-radius: 28px; }
+.ugs-page--large .ugs-colonne .ugs-sur { color: var(--rv-doux); }
+.ugs-page--large .ugs-colonne .ugs-titre { color: #042A65; }
