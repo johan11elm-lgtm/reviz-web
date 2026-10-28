@@ -322,5 +322,5 @@
   .na-page.ag-page--large .ag-grille { grid-template-columns: 400px minmax(0, 1fr); padding: 0; }
 }
 /* Petite notification (« Contrôle ajouté », « Annuler ») : même famille que le badge débloqué. */
-.na-page .ag-toast { border-radius: 16px; padding: 13px 18px; background: #042A65; color: #fff; box-shadow: 0 14px 30px -10px rgba(4,42,101,.5); }
+.na-page .ag-toast { width: max-content; max-width: calc(100vw - 32px); box-sizing: border-box; border-radius: 16px; padding: 13px 18px; background: #042A65; color: #fff; box-shadow: 0 14px 30px -10px rgba(4,42,101,.5); }
 .na-page .ag-toast button { color: #FF8A5C; text-decoration: underline; text-underline-offset: 3px; }
