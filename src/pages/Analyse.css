@@ -58,10 +58,11 @@
   .analyse-page .an-barre-fond i { transition: none; }
 }
 
-/* ─── Fiche chapitre (handoff Claude Design du 21/10) ─────────────────
- * Héros dans la teinte de la matière (--ch-* posées par la page), Réviz qui
- * parle, « Prochaine étape » à cheval, puis Ton parcours (Résumé → Flashcards
- * → Quiz sur une petite route), la carte mentale, L'essentiel et Réviz IA. */
+/* ─── Fiche chapitre, façon app Nomad (29/10) ─────────────────────────
+ * En-tête (retour, émote de la matière, surtitre, titre marine, pastille d'état),
+ * bloc lavande « prochaine étape » (celui de l'accueil), les contenus en cartes
+ * blanches avec leur anneau d'avancement, L'essentiel, Réviz IA. Ordinateur :
+ * chapitres de la matière à gauche, Réviz IA à droite. */
 .analyse-page.ch-page { background: var(--rv-fond); }
 .analyse-page .ch-defile {
   display: block;
@@ -71,177 +72,193 @@
   scrollbar-width: none;
 }
 .analyse-page .ch-defile::-webkit-scrollbar { display: none; }
+.analyse-page .nf-pile { display: flex; flex-direction: column; gap: 22px; padding: calc(12px + env(safe-area-inset-top, 0px)) 16px 0; }
 
-/* Réviz et sa bulle */
-.analyse-page .ch-reviz { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; margin-top: 18px; }
-.analyse-page .ch-bulle .rv-bulle-txt { max-width: 280px; padding: 12px 18px; box-shadow: 0 8px 20px var(--ch-ombre); }
-.analyse-page .ch-reviz .pantin { margin-top: 6px; }
+/* En-tête */
+.analyse-page .nf-entete { display: flex; flex-direction: column; align-items: flex-start; gap: 14px; }
+.analyse-page .nf-entete .ch-retour { box-shadow: 0 1px 3px rgba(4,42,101,.1), 0 1px 2px rgba(4,42,101,.06); color: #042A65; border-radius: 12px; }
+.analyse-page .nf-titre-ligne { display: flex; align-items: center; gap: 14px; }
+.analyse-page .nf-emote { width: 60px; height: 60px; flex: none; border-radius: 50%; background: #fff; display: flex; align-items: center; justify-content: center; overflow: hidden; box-shadow: 0 1px 3px rgba(4,42,101,.1); }
+.analyse-page .nf-titres { display: flex; flex-direction: column; min-width: 0; }
+.analyse-page .nf-surtitre { font-size: 13px; font-weight: 600; color: var(--rv-doux); }
+.analyse-page .nf-titre { margin: 2px 0 0; font-size: 26px; font-weight: 800; line-height: 1.15; letter-spacing: -.01em; color: #042A65; text-wrap: balance; }
+.analyse-page .nf-pastille { display: inline-flex; align-items: center; gap: 8px; height: 32px; padding: 0 12px; border-radius: 999px; background: #fff; font-size: 13px; font-weight: 700; color: #042A65; box-shadow: 0 1px 3px rgba(4,42,101,.08); }
+.analyse-page .nf-pastille i { width: 8px; height: 8px; border-radius: 50%; background: #B9A6FB; }
+.analyse-page .nf-pastille--encours i { background: var(--rv-vif); }
+.analyse-page .nf-pastille--revoir { color: var(--rv-vif-plein); }
+.analyse-page .nf-pastille--maitrise i { background: #04ADB3; }
 
-/* ── Prochaine étape, à cheval sur le héros ── */
-.analyse-page .ch-etape-place { position: relative; z-index: 3; margin: -64px 20px 0; }
-.analyse-page .ch-etape {
-  display: block;
-  padding: 14px;
-  border-radius: 26px;
-  background: var(--rv-carte);
-  box-shadow: 0 12px 30px rgba(var(--rv-ombre-2),.14);
-  color: inherit;
-  text-decoration: none;
-}
-.analyse-page .ch-etape-haut { display: flex; align-items: center; gap: 14px; }
-.analyse-page .ch-etape-rond { width: 60px; height: 60px; flex: none; border-radius: 50%; background: var(--rv-peche-pale); display: flex; align-items: center; justify-content: center; overflow: hidden; }
-.analyse-page .ch-etape-txt { flex: 1; min-width: 0; display: flex; flex-direction: column; }
-.analyse-page .ch-etape-surtitre { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--rv-orange-texte); }
-.analyse-page .ch-etape-titre { margin-top: 2px; font-family: var(--font-display); font-size: 18px; font-weight: 800; letter-spacing: -.02em; line-height: 1.15; color: var(--ch-encre); }
-.analyse-page .ch-etape-sous { margin-top: 2px; font-size: 13px; color: var(--ch-doux); }
-.analyse-page .ch-etape-go { width: 44px; height: 44px; flex: none; border-radius: 50%; background: var(--rv-orange); color: #fff; display: flex; align-items: center; justify-content: center; }
-.analyse-page .ch-segments-bloc { display: block; margin-top: 12px; }
-.analyse-page .ch-segments { display: flex; gap: 4px; }
-.analyse-page .ch-segments i { flex: 1; height: 8px; border-radius: 99px; background: var(--rv-ligne); }
-.analyse-page .ch-segments i.ch-seg--sue, .analyse-page .ch-legende i.ch-seg--sue { background: #34C77B; }
-.analyse-page .ch-segments i.ch-seg--revoir, .analyse-page .ch-legende i.ch-seg--revoir { background: var(--rv-orange); }
-.analyse-page .ch-legende { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 8px; font-size: 12px; font-weight: 600; color: var(--ch-doux); }
-.analyse-page .ch-legende span { display: inline-flex; align-items: center; gap: 6px; }
-.analyse-page .ch-legende i { width: 8px; height: 8px; border-radius: 50%; background: var(--rv-ligne); }
-
-/* ── Sections ── */
-.analyse-page .ch-pile { display: flex; flex-direction: column; gap: 28px; padding: 28px 20px 0; }
-.analyse-page .ch-bloc { display: flex; flex-direction: column; gap: 12px; }
-.analyse-page .ch-tete { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
-.analyse-page .ch-titre2 { margin: 0; font-family: var(--font-display); font-size: 24px; font-weight: 800; letter-spacing: -.03em; color: var(--ch-encre); }
-.analyse-page .ch-compte { font-size: 13px; font-weight: 600; color: var(--ch-doux); }
-
-/* Pilules : carte mentale, Réviz IA */
-.analyse-page .ch-pilule {
+/* Bloc lavande : ce que dit Réviz, la prochaine étape */
+.analyse-page .nf-bloc { position: relative; display: flex; flex-direction: column; gap: 14px; padding: 18px 14px 14px; border-radius: 24px; background: #B9A6FB; color: #042A65; }
+.analyse-page .nf-bloc-reviz { position: absolute; top: -18px; right: 4px; pointer-events: none; }
+.analyse-page .nf-bloc-txt { position: relative; max-width: 64%; margin: 0; font-size: 19px; font-weight: 700; line-height: 1.3; }
+.analyse-page .nf-ligne {
+  position: relative;
+  z-index: 1;
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 8px 18px 8px 8px;
-  border-radius: 999px;
-  background: var(--rv-carte);
-  box-shadow: 0 8px 22px rgba(var(--rv-ombre-2),.10);
-  color: inherit;
+  gap: 14px;
+  min-height: 66px;
+  padding: 9px 12px 9px 9px;
+  border-radius: 14px;
+  background: #fff;
+  color: #042A65;
   text-decoration: none;
+  transition: transform .15s, box-shadow .15s;
 }
-.analyse-page .ch-pilule-rond { width: 52px; height: 52px; flex: none; border-radius: 50%; background: var(--rv-peche-pale); display: flex; align-items: center; justify-content: center; overflow: hidden; }
-.analyse-page .ch-pilule-rond--lavande { background: var(--rv-lavande); }
-.analyse-page .ch-pilule-txt { flex: 1; min-width: 0; display: flex; flex-direction: column; }
-.analyse-page .ch-pilule-titre { font-size: 15px; font-weight: 700; color: var(--ch-encre); }
-.analyse-page .ch-pilule-sous { font-size: 13px; color: var(--ch-doux); }
-.analyse-page .ch-pilule-coche { width: 28px; height: 28px; border-radius: 50%; background: #34C77B; display: flex; align-items: center; justify-content: center; }
-.analyse-page .ch-ia-anneau { width: 50px; height: 50px; flex: none; padding: 3px; box-sizing: border-box; border-radius: 50%; background: conic-gradient(var(--rv-orange), var(--rv-rose), var(--rv-orange)); }
-.analyse-page .ch-ia-anneau > span { width: 100%; height: 100%; border-radius: 50%; border: 2px solid var(--rv-carte); box-sizing: border-box; background: var(--rv-carte); display: flex; align-items: center; justify-content: center; overflow: hidden; }
-.analyse-page .ch-pilule--ia { padding-right: 8px; }
-.analyse-page .ch-ia-go { width: 44px; height: 44px; flex: none; border-radius: 50%; background: var(--rv-inverse); display: flex; align-items: center; justify-content: center; }
+.analyse-page .nf-ligne:active { transform: scale(.985); }
+.analyse-page .nf-ligne:focus-visible { outline: 3px solid #042A65; outline-offset: 2px; }
+.analyse-page .nf-ligne-icone { width: 50px; height: 50px; flex: none; border-radius: 12px; background: #F2EBFF; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.analyse-page .nf-ligne-txt { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.analyse-page .nf-ligne-titre { font-size: 16px; font-weight: 600; }
+.analyse-page .nf-ligne-sous { font-size: 12.5px; color: var(--rv-doux); }
+.analyse-page .nf-ligne-fleche { width: 28px; height: 28px; flex: none; border-radius: 8px; background: var(--rv-vif-plein); color: #fff; display: flex; align-items: center; justify-content: center; }
+.analyse-page .nf-ligne--ia { box-shadow: 0 1px 3px rgba(4,42,101,.1), 0 1px 2px rgba(4,42,101,.06); }
+.analyse-page .nf-ligne--ia .nf-ligne-fleche { background: #042A65; }
+.analyse-page .ch-segments-bloc { display: block; padding: 0 4px; }
+.analyse-page .ch-segments { display: flex; gap: 4px; }
+.analyse-page .ch-segments i { flex: 1; height: 8px; border-radius: 99px; background: rgba(255,255,255,.55); }
+.analyse-page .ch-segments i.ch-seg--sue, .analyse-page .ch-legende i.ch-seg--sue { background: #04ADB3; }
+.analyse-page .ch-segments i.ch-seg--revoir, .analyse-page .ch-legende i.ch-seg--revoir { background: var(--rv-vif); }
+.analyse-page .ch-legende { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 8px; font-size: 12px; font-weight: 600; color: #042A65; }
+.analyse-page .ch-legende span { display: inline-flex; align-items: center; gap: 6px; }
+.analyse-page .ch-legende i { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,.7); }
+
+/* Sections : titre à barre orange, comme le Programme */
+.analyse-page .nf-section { display: flex; flex-direction: column; gap: 12px; }
+.analyse-page .nf-tete { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+.analyse-page .nf-h2 { margin: 0; padding-left: 12px; border-left: 4px solid var(--rv-vif); font-size: 21px; font-weight: 800; line-height: 1.2; color: #042A65; }
+.analyse-page .nf-compte { font-size: 13px; font-weight: 600; color: var(--rv-doux); }
+
+/* Contenus en cartes blanches */
+.analyse-page .nf-contenus { display: flex; flex-direction: column; gap: 10px; }
+.analyse-page .nf-contenu {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-height: 72px;
+  padding: 10px 12px 10px 10px;
+  border-radius: 16px;
+  background: #fff;
+  color: #042A65;
+  text-decoration: none;
+  box-shadow: 0 1px 3px rgba(4,42,101,.1), 0 1px 2px rgba(4,42,101,.06);
+  transition: transform .15s, box-shadow .15s;
+}
+.analyse-page .nf-contenu:active { transform: scale(.985); }
+.analyse-page .nf-contenu:focus-visible { outline: 3px solid #042A65; outline-offset: 2px; }
+.analyse-page .nf-contenu--suite { box-shadow: 0 0 0 2px var(--rv-vif-plein), 0 4px 14px rgba(216,64,10,.14); }
+.analyse-page .nf-contenu-icone { width: 54px; height: 54px; flex: none; border-radius: 14px; background: #F2EBFF; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.analyse-page .nf-contenu--fait .nf-contenu-icone { background: #DDF5F4; }
+.analyse-page .nf-contenu-txt { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 1px; }
+.analyse-page .nf-contenu-nom { font-size: 16px; font-weight: 700; }
+.analyse-page .nf-contenu-meta { font-size: 13px; color: var(--rv-doux); }
+.analyse-page .nf-anneau { position: relative; width: 40px; height: 40px; flex: none; display: flex; align-items: center; justify-content: center; }
+.analyse-page .nf-anneau svg { position: absolute; inset: 0; }
+.analyse-page .nf-anneau-txt { position: relative; font-size: 10.5px; font-weight: 700; color: #042A65; }
+.analyse-page .nf-anneau-coche { position: relative; width: 22px; height: 22px; border-radius: 50%; background: #04ADB3; display: flex; align-items: center; justify-content: center; }
 
 /* L'essentiel */
-.analyse-page .ch-points { margin: 0; padding: 6px 18px; list-style: none; border-radius: 26px; background: var(--rv-carte); box-shadow: 0 12px 30px rgba(var(--rv-ombre-2),.10); }
+.analyse-page .ch-points { margin: 0; padding: 4px 16px; list-style: none; border-radius: 18px; background: #fff; box-shadow: 0 1px 3px rgba(4,42,101,.1), 0 1px 2px rgba(4,42,101,.06); }
 .analyse-page .ch-points li { display: flex; align-items: flex-start; gap: 12px; padding: 14px 0; }
-.analyse-page .ch-points li + li { border-top: 1.5px dashed var(--rv-ligne); }
+.analyse-page .ch-points li + li { border-top: 1px solid var(--rv-ligne); }
 .analyse-page .ch-point-num {
   width: 28px;
   height: 28px;
   flex: none;
-  border-radius: 50%;
-  background: var(--ch-interieur);
+  border-radius: 8px;
+  background: #F2EBFF;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: var(--font-display);
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 800;
   color: #042A65;
 }
-.analyse-page .ch-point-txt { font-size: 15px; font-weight: 600; line-height: 1.4; color: var(--ch-encre); }
+.analyse-page .ch-point-txt { font-size: 15px; font-weight: 500; line-height: 1.45; color: #042A65; }
 
-/* ─── Ordinateur (handoff Chapitre desktop) ─── */
-.ch-page--large .ch-hero-int { position: relative; z-index: 1; max-width: 1328px; margin: 0 auto; }
-.ch-page--large .ch-hero-grille { display: grid; grid-template-columns: minmax(0, 1fr) 380px; gap: 32px; align-items: end; margin-top: 12px; }
-.ch-page--large .ch-reviz { margin-top: 0; }
-.ch-page--large .ch-bulle .rv-bulle-txt { max-width: 380px; padding: 14px 22px; border-radius: 24px; font-size: 22px; }
-.ch-page--large .ch-bulle .rv-bulle-ligne + .rv-bulle-ligne { margin-top: 4px; font-size: 15px; }
+/* Réviz IA (anneau dégradé autour du coach) */
+.analyse-page .ch-ia-anneau { width: 50px; height: 50px; flex: none; padding: 3px; box-sizing: border-box; border-radius: 50%; background: conic-gradient(var(--rv-vif), #B9A6FB, var(--rv-vif)); }
+.analyse-page .ch-ia-anneau > span { width: 100%; height: 100%; border-radius: 50%; border: 2px solid #fff; box-sizing: border-box; background: #fff; display: flex; align-items: center; justify-content: center; overflow: hidden; }
 
-.ch-page--large .ch-etape-place { max-width: 1328px; margin: -76px auto 0; }
-@media (max-width: 1440px) { .ch-page--large .ch-etape-place { margin-left: 56px; margin-right: 56px; } }
-.ch-page--large .ch-etape { width: 600px; max-width: 100%; box-sizing: border-box; padding: 18px; border-radius: 28px; }
-.ch-page--large .ch-etape-rond { width: 68px; height: 68px; }
-.ch-page--large .ch-etape-titre { font-size: 22px; }
-.ch-page--large .ch-etape-sous { font-size: 14px; }
-.ch-page--large .ch-etape-cta {
-  flex: none;
-  height: 52px;
+/* Chapitres de la matière (ordinateur) */
+.analyse-page .nf-chapitres { padding: 16px 10px 10px; border-radius: 20px; background: #fff; box-shadow: 0 1px 3px rgba(4,42,101,.1), 0 1px 2px rgba(4,42,101,.06); }
+.analyse-page .nf-chapitres-titre { margin: 0 8px 10px; font-size: 17px; font-weight: 800; color: #042A65; }
+.analyse-page .nf-chapitres-liste { display: flex; flex-direction: column; gap: 2px; margin: 0; padding: 0; list-style: none; }
+.analyse-page .nf-chapitre {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 0 20px;
-  border-radius: 999px;
-  background: var(--rv-orange);
-  color: #fff;
-  font-size: 15px;
-  font-weight: 700;
-  transition: background .15s;
+  gap: 10px;
+  width: 100%;
+  padding: 8px;
+  border: 0;
+  border-radius: 12px;
+  background: none;
+  font: inherit;
+  text-align: left;
+  color: #042A65;
+  cursor: pointer;
 }
-.ch-page--large .ch-etape:hover .ch-etape-cta { background: var(--rv-orange-tranche); }
-.ch-page--large .ch-segments i { height: 9px; }
+.analyse-page .nf-chapitre:hover:not(:disabled) { background: var(--rv-fond); }
+.analyse-page .nf-chapitre:disabled { cursor: default; }
+.analyse-page .nf-chapitre:disabled:not(.nf-chapitre--actif) { opacity: .5; }
+.analyse-page .nf-chapitre:focus-visible { outline: 3px solid #042A65; outline-offset: -1px; }
+.analyse-page .nf-chapitre-num { width: 30px; height: 30px; flex: none; border-radius: 50%; background: #EFE7E0; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800; color: #4A5B78; }
+.analyse-page .nf-chapitre--fait .nf-chapitre-num { background: #04ADB3; }
+.analyse-page .nf-chapitre--actif { background: #FFF4EE; }
+.analyse-page .nf-chapitre--actif .nf-chapitre-num { background: #fff; box-shadow: inset 0 0 0 3px var(--rv-vif); color: var(--rv-vif-plein); }
+.analyse-page .nf-chapitre-nom { font-size: 13.5px; font-weight: 500; line-height: 1.3; }
+.analyse-page .nf-chapitre--actif .nf-chapitre-nom { font-weight: 700; }
 
-.ch-page--large .ch-grille {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: 40px;
-  max-width: 1440px;
-  box-sizing: border-box;
-  margin: 0 auto;
-  padding: 48px 56px 64px;
-  grid-auto-rows: max-content;
-}
-.ch-page--large .ch-col { display: flex; flex-direction: column; gap: 36px; min-width: 0; }
-.ch-page--large .ch-pilule:hover { box-shadow: 0 12px 28px rgba(var(--rv-ombre-2),.16); }
-.ch-page--large .ch-points { display: grid; grid-template-columns: 1fr 1fr; column-gap: 40px; padding: 8px 28px; }
-.ch-page--large .ch-points li:nth-child(2) { border-top: 0; }
-.ch-page--large .ch-points li { padding: 16px 0; }
-.ch-page--large .ch-point-num { width: 32px; height: 32px; font-size: 16px; }
-.ch-page--large .ch-point-txt { font-size: 16px; }
+/* ─── Ordinateur ─── */
+.ch-page--large .nf-grille { display: grid; grid-template-columns: minmax(0, 1fr); gap: 32px; align-items: start; max-width: 1240px; box-sizing: border-box; margin: 0 auto; padding: 12px 32px 64px; }
+.ch-page--large .nf-grille--chapitres { grid-template-columns: 270px minmax(0, 1fr); }
+.ch-page--large .nf-grille--ia { grid-template-columns: minmax(0, 1fr) 340px; }
+.ch-page--large .nf-grille--chapitres.nf-grille--ia { grid-template-columns: 270px minmax(0, 1fr) 320px; gap: 28px; }
+.ch-page--large .nf-gauche, .ch-page--large .nf-droite { position: sticky; top: 12px; }
+.ch-page--large .nf-gauche .nf-chapitres { max-height: calc(100vh - var(--nav-haut-h, 76px) - 40px); overflow-y: auto; scrollbar-width: thin; }
+.ch-page--large .nf-principal { display: flex; flex-direction: column; gap: 26px; min-width: 0; }
+.ch-page--large .nf-titre { font-size: 34px; }
+.ch-page--large .nf-emote { width: 72px; height: 72px; }
+.ch-page--large .nf-bloc { padding: 24px 20px 18px; border-radius: 26px; }
+.ch-page--large .nf-bloc-txt { font-size: 22px; }
+.ch-page--large .nf-bloc-reviz { top: -34px; right: 18px; }
+.ch-page--large .nf-ligne:hover, .ch-page--large .nf-contenu:not(.nf-contenu--suite):hover { box-shadow: 0 8px 20px -10px rgba(4,42,101,.35); }
+.ch-page--large .nf-contenus { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.ch-page--large .nf-h2 { font-size: 24px; }
+.ch-page--large .ch-points { padding: 4px 22px; }
+.ch-page--large .ch-point-txt { font-size: 15.5px; }
 
 /* Réviz IA : une carte avec des suggestions et le champ */
-.ch-page--large .ch-ia-carte { display: flex; flex-direction: column; gap: 16px; padding: 22px; border-radius: 28px; background: var(--rv-carte); box-shadow: 0 12px 30px rgba(var(--rv-ombre-2),.12); }
+.ch-page--large .ch-ia-carte { display: flex; flex-direction: column; gap: 16px; padding: 20px; border-radius: 20px; background: #fff; box-shadow: 0 1px 3px rgba(4,42,101,.1), 0 1px 2px rgba(4,42,101,.06); }
 .ch-page--large .ch-ia-tete { display: flex; align-items: center; gap: 14px; }
-.ch-page--large .ch-ia-tete .ch-ia-anneau { width: 58px; height: 58px; }
-.ch-page--large .ch-ia-titre { margin: 0; font-family: var(--font-display); font-size: 22px; font-weight: 800; letter-spacing: -.02em; color: var(--ch-encre); }
-.ch-page--large .ch-ia-sous { font-size: 14px; color: var(--ch-doux); }
+.ch-page--large .ch-ia-tete .ch-ia-anneau { width: 56px; height: 56px; }
+.ch-page--large .ch-ia-titre { margin: 0; font-size: 20px; font-weight: 800; color: #042A65; }
+.ch-page--large .ch-ia-sous { font-size: 13.5px; color: var(--rv-doux); }
 .ch-page--large .ch-ia-suggestions { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; }
 .ch-page--large .ch-ia-suggestion {
   max-width: 100%;
   padding: 9px 14px;
   border: 0;
-  border-radius: 999px;
-  background: var(--rv-lavande);
-  font: 600 14px 'Poppins', system-ui, sans-serif;
+  border-radius: 12px;
+  background: #F2EBFF;
+  font: 600 13.5px 'Poppins', system-ui, sans-serif;
   color: #042A65;
   text-align: left;
   cursor: pointer;
 }
-.ch-page--large .ch-ia-suggestion:hover { background: var(--rv-lavande-clair); }
-.ch-page--large .ch-ia-champ { display: flex; align-items: center; gap: 8px; height: 52px; padding: 0 6px 0 18px; border-radius: 999px; background: var(--rv-fond); }
-.ch-page--large .ch-ia-champ input { flex: 1; min-width: 0; border: 0; background: none; font: 500 15px 'Poppins', system-ui, sans-serif; color: var(--ch-encre); outline: none; }
-.ch-page--large .ch-ia-champ button { width: 40px; height: 40px; flex: none; border: 0; border-radius: 50%; background: var(--rv-inverse); display: flex; align-items: center; justify-content: center; cursor: pointer; }
+.ch-page--large .ch-ia-suggestion:hover { background: #E7DEFF; }
+.ch-page--large .ch-ia-champ { display: flex; align-items: center; gap: 8px; height: 50px; padding: 0 5px 0 16px; border-radius: 999px; background: var(--rv-fond); }
+.ch-page--large .ch-ia-champ:focus-within { box-shadow: 0 0 0 2px #042A65; }
+.ch-page--large .ch-ia-champ input { flex: 1; min-width: 0; border: 0; background: none; font: 500 14.5px 'Poppins', system-ui, sans-serif; color: #042A65; outline: none; }
+.ch-page--large .ch-ia-champ button { width: 40px; height: 40px; flex: none; border: 0; border-radius: 50%; background: #042A65; display: flex; align-items: center; justify-content: center; cursor: pointer; }
 .ch-page--large .ch-ia-champ button:disabled { opacity: .35; cursor: default; }
 
-/* Assez large : contenu à gauche, Réviz IA à droite */
-.ch-page--large .ch-defile { container-type: inline-size; }
-@container (min-width: 1200px) {
-  .ch-page--large .ch-grille--ia { grid-template-columns: minmax(0, 1fr) 400px; gap: 56px; }
+@media (max-width: 1240px) {
+  .ch-page--large .nf-grille--chapitres.nf-grille--ia { grid-template-columns: 240px minmax(0, 1fr); }
+  .ch-page--large .nf-grille--chapitres.nf-grille--ia .nf-droite { grid-column: 2; position: static; }
 }
 
-/* ── Sombre : ces pastels gardent leur texte sombre (cf. rv-ilot dans global.css) ── */
-:root[data-theme="dark"] .analyse-page .an-format-rond,
-:root[data-theme="dark"] .analyse-page .ch-etape-rond,
-:root[data-theme="dark"] .analyse-page .ch-pilule-rond,
-:root[data-theme="dark"] .analyse-page .ch-pilule-rond--lavande,
-:root[data-theme="dark"] .ch-page--large .ch-ia-suggestion:hover {
-  --rv-encre: #042A65; --rv-encre-rgb: 27,26,35; --rv-doux: #6E675B; --rv-doux-rgb: 110,103,91;
-  --rv-carte: #fff; --rv-carte-rgb: 255,255,255; --rv-carte-haute: #fff; --rv-ligne: #EADBCB; --rv-piste: #F3E6D8;
-  --rv-orange-texte: #C25407; --rv-vert-texte: #1F8A52; --rv-brun-texte: #8F3E05;
-  --ch-encre: #042A65; --ch-doux: #6E675B; --bt-encre: #042A65; --bt-doux: #6E675B; --en-encre: #042A65; --en-doux: #6E675B; --hb-encre: #042A65; --hb-doux: #6E675B;
-  --hm-encre: #042A65; --hm-doux: #6E675B; --inst-encre: #042A65; --inst-doux: #6E675B; --lg-encre: #042A65; --lg-doux: #6E675B; --prg-encre: #042A65; --prg-doux: #6E675B;
-  color: #042A65;
+@media (prefers-reduced-motion: reduce) {
+  .analyse-page .nf-ligne, .analyse-page .nf-contenu { transition: none; }
 }

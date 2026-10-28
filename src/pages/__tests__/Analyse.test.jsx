@@ -81,7 +81,7 @@ describe('<Analyse /> fiche chapitre', () => {
     expect(screen.getByText('Maîtrisé')).toBeInTheDocument()
     expect(screen.getByText('Chapitre maîtrisé. Une révision rapide dans une semaine.')).toBeInTheDocument()
     expect(screen.getByText('3 / 3')).toBeInTheDocument()
-    expect(screen.getByLabelText('vue')).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: 'Carte mentale : Vue, fait' })).toHaveAttribute('href', '/mindmap')
   })
 
   it('Réviz IA reçoit la question posée depuis la fiche (ordinateur)', () => {
@@ -89,6 +89,12 @@ describe('<Analyse /> fiche chapitre', () => {
     fireEvent.change(screen.getByLabelText('Ta question à Réviz IA'), { target: { value: 'Pourquoi 10⁰ = 1 ?' } })
     fireEvent.click(screen.getByRole('button', { name: 'Envoyer à Réviz IA' }))
     expect(nav).toHaveBeenCalledWith(`/coach?lesson=${ID}`, { state: { question: 'Pourquoi 10⁰ = 1 ?' } })
+  })
+
+  it('les questions ratées au quiz ajoutent « Refaire mes erreurs » aux contenus', () => {
+    localStorage.setItem('reviz-erreurs-local', JSON.stringify({ [ID]: { questions: ['q'], at: Date.now() } }))
+    renderPage()
+    expect(screen.getByRole('link', { name: 'Refaire mes erreurs : 1 question ratée au quiz' })).toHaveAttribute('href', '/quiz?erreurs=1')
   })
 
   it('en mode essai, pas d’accès à Réviz IA', () => {

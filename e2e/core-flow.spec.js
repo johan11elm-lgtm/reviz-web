@@ -29,7 +29,8 @@ test.describe('Parcours cœur : inscription → scan → révision', () => {
       await sansDebordement(page, `accueil ${appareil}`)
       // L'accueil ne dit plus le prénom : il vit sur le profil (et dans le coach).
       await page.goto('/profil')
-      await expect(page.getByText('Testeur').first()).toBeVisible()
+      // (Le menu du haut, caché sur téléphone, porte aussi le prénom : on regarde la page.)
+      await expect(page.locator('.app').getByText('Testeur').first()).toBeVisible()
 
       // ── Scan en mode texte ──
       await page.goto('/scan')
