@@ -5,7 +5,8 @@
  */
 export const TEINTES = {
   lavande: { fond: 'var(--rv-lavande)', bulle: 'var(--rv-lavande-bulle)', point: 'var(--rv-peche)', interieur: 'var(--rv-lavande)', ombre: 'rgba(90,70,160,.13)' },
-  peche:   { fond: 'var(--rv-peche)', bulle: 'var(--rv-peche-bulle)', point: 'var(--rv-lavande-bulle)', interieur: 'var(--rv-peche-pale)', ombre: 'rgba(150,70,20,.14)' },
+  // Pêche claire comme les blocs de la landing (skin du 28/10) ; l'aplat orange vif était le seul pastel saturé.
+  peche:   { fond: 'var(--rv-peche-pale)', bulle: 'var(--rv-peche-clair)', point: 'var(--rv-lavande-bulle)', interieur: 'var(--rv-peche-pale)', ombre: 'rgba(150,70,20,.12)' },
   menthe:  { fond: 'var(--rv-menthe)', bulle: 'var(--rv-menthe-bulle)', point: 'var(--rv-peche)', interieur: 'var(--rv-menthe)', ombre: 'rgba(30,110,70,.13)' },
   rose:    { fond: 'var(--rv-rose)', bulle: 'var(--rv-rose-bulle)', point: 'var(--rv-lavande-bulle)', interieur: 'var(--rv-rose)', ombre: 'rgba(160,60,90,.13)' },
 };
