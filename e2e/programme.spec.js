@@ -253,9 +253,9 @@ test.describe('Téléphone (390 px)', () => {
     expect(await page.evaluate(() => JSON.parse(localStorage.getItem('reviz-guest')))).toMatchObject({ uid: essai, prenom: 'Inès' })
   })
 
-  test('le détail d’un chapitre reste dans l’écran, de chaque côté du zigzag', async ({ page }) => {
+  test('le détail d’un chapitre reste dans l’écran, sous chaque ligne de la liste', async ({ page }) => {
     await mockApiRoutes(page)
-    // Huit chapitres prêts : toutes les positions du zigzag.
+    // Huit chapitres prêts : chaque ligne déplie son détail.
     const index = JSON.parse(await (await import('node:fs/promises')).readFile(new URL('./fixtures/programme/index.json', import.meta.url), 'utf8'))
     const maths = index.matieres.find(m => m.slug === 'maths')
     maths.chapitres = Array.from({ length: 8 }, (_, i) => ({
@@ -269,7 +269,7 @@ test.describe('Téléphone (390 px)', () => {
 
     for (let i = 1; i <= 8; i++) {
       const etape = page.getByRole('button', { name: new RegExp(`^Chapitre ${i} : `) })
-      // Rond centré à l'écran : caché sous la barre d'onglets, Playwright le recentrerait aussi à
+      // Ligne centrée à l'écran : cachée sous la barre d'onglets, Playwright le recentrerait aussi à
       // l'horizontale (le halo rend .app défilable) et décalerait toute la page, ce qui fausserait la mesure.
       await etape.evaluate(el => el.scrollIntoView({ block: 'center' }))
       await etape.click()
@@ -281,8 +281,7 @@ test.describe('Téléphone (390 px)', () => {
         expect(box.x, `chapitre ${i}, ${nom}, bord gauche`).toBeGreaterThanOrEqual(16)
         expect(box.x + box.width, `chapitre ${i}, ${nom}, bord droit`).toBeLessThanOrEqual(390 - 16)
       }
-      // La case choisie est à l'écran (la route défile : son bord peut dépasser de quelques pixels,
-      // pas son centre), et la page ne défile pas de côté.
+      // La ligne choisie est à l'écran, et la page ne défile pas de côté.
       const caseBox = await etape.boundingBox()
       expect(caseBox.x + caseBox.width / 2, `chapitre ${i}, centre de la case`).toBeGreaterThan(0)
       expect(caseBox.x + caseBox.width / 2, `chapitre ${i}, centre de la case`).toBeLessThan(390)

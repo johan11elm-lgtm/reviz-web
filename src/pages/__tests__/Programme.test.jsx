@@ -54,19 +54,21 @@ beforeEach(() => {
 afterEach(() => vi.unstubAllGlobals())
 
 describe('<Programme />', () => {
-  it('montre les matières en anneaux et les chapitres de la matière choisie sur la route', async () => {
+  it('montre les matières en tuiles et les chapitres de la matière choisie en liste', async () => {
     renderPage()
     expect(await screen.findByRole('radio', { name: 'Maths : 0 sur 2 chapitres faits' })).toBeInTheDocument()
     expect(screen.getByRole('radio', { name: 'Français : 0 sur 1 chapitres faits' })).toBeInTheDocument()
     expect(screen.getByText('0 % du programme')).toBeInTheDocument()
     expect(screen.getByRole('heading', { name: 'Chapitres · Maths' })).toBeInTheDocument()
-    // Rien d'ouvert : la case en cours est le premier chapitre, annoncé comme le prochain.
+    // Rien d'ouvert : la ligne ouverte est le premier chapitre, annoncé comme le prochain.
     expect(screen.getByRole('heading', { level: 3, name: 'Le théorème de Thalès' })).toBeInTheDocument()
-    expect(screen.getByText('2 chapitres en maths. On commence par le premier ?')).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: 'Chapitre 1 : Le théorème de Thalès, prochain' })).toHaveAttribute('aria-expanded', 'true')
     expect(screen.getByRole('button', { name: "C'est parti" })).toBeEnabled()
     // Un chapitre pas encore prêt ne se lance pas.
     fireEvent.click(screen.getByRole('button', { name: /^Chapitre 2 : Trigonométrie/ }))
     expect(screen.getByRole('button', { name: 'Bientôt' })).toBeDisabled()
+    expect(screen.getByRole('heading', { level: 3, name: 'Trigonométrie' })).toBeInTheDocument()
+    expect(screen.queryByRole('heading', { level: 3, name: 'Le théorème de Thalès' })).not.toBeInTheDocument()
     // Changer de matière remet la case choisie sur le chapitre en cours.
     fireEvent.click(screen.getByRole('radio', { name: /^Français/ }))
     expect(screen.getByRole('heading', { name: 'Chapitres · Français' })).toBeInTheDocument()
@@ -89,11 +91,10 @@ describe('<Programme />', () => {
     expect(screen.getByRole('radio', { name: 'Maths : 0 sur 2 chapitres faits' })).toBeInTheDocument()
     // Thalès compte pour moitié (ouvert, pas maîtrisé), l'argumentation en entier : 1,5 sur 3.
     expect(screen.getByText('50 % du programme')).toBeInTheDocument()
-    expect(screen.getByText('0 chapitre sur 2 en maths. Prochain : le théorème de Thalès.')).toBeInTheDocument()
-    expect(screen.getAllByText('En cours')).toHaveLength(2) // sous la case et dans le détail
+    expect(screen.getByRole('button', { name: 'Chapitre 1 : Le théorème de Thalès, en cours' })).toBeInTheDocument()
     expect(screen.getByText('1 carte à revoir')).toBeInTheDocument()
     fireEvent.click(screen.getByRole('radio', { name: /^Français/ }))
-    expect(screen.getByText('Tout est fait en français. On révise pour garder ça ?')).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: "Chapitre 1 : L'argumentation, fait" })).toBeInTheDocument()
     expect(screen.getByRole('button', { name: 'Réviser' })).toBeInTheDocument()
   })
 
@@ -104,13 +105,32 @@ describe('<Programme />', () => {
     expect(screen.getByText(/Le programme de 2nde arrive bientôt/)).toBeInTheDocument()
   })
 
-  it('en mode essai, les leçons scannées demandent un compte gratuit', async () => {
+  it('« Ajoute ton cours » mène au scan en mode essai, aux leçons avec un compte', async () => {
     authState.isGuest = true
-    renderPage()
+    const { unmount } = renderPage()
     expect(await screen.findByText('Maths')).toBeInTheDocument()
-    expect(screen.getByText('Avec un compte gratuit')).toBeInTheDocument()
-    fireEvent.click(screen.getByRole('button', { name: /Mes leçons scannées/ }))
+    expect(screen.getByText('Prends ta leçon en photo, avec un compte gratuit')).toBeInTheDocument()
+    fireEvent.click(screen.getByRole('button', { name: /^Ajoute ton cours/ }))
     expect(nav).toHaveBeenCalledWith('/scan')
+    unmount()
+    authState.isGuest = false
+    renderPage()
+    fireEvent.click(await screen.findByRole('button', { name: /^Ajoute ton cours/ }))
+    expect(nav).toHaveBeenCalledWith('/cours')
+  })
+
+  it('cherche un chapitre dans toutes les matières, sans tenir compte des accents', async () => {
+    renderPage()
+    const champ = await screen.findByRole('searchbox', { name: 'Chercher un chapitre' })
+    await screen.findByText('Maths')
+    fireEvent.change(champ, { target: { value: 'thales' } })
+    expect(screen.getByRole('button', { name: /Le théorème de Thalès.*Maths · chapitre 1/ })).toBeEnabled()
+    fireEvent.change(champ, { target: { value: 'argu' } })
+    expect(screen.getByRole('button', { name: /L'argumentation.*Français · chapitre 1/ })).toBeInTheDocument()
+    fireEvent.change(champ, { target: { value: 'trigo' } })
+    expect(screen.getByRole('button', { name: /Trigonométrie.*bientôt/ })).toBeDisabled()
+    fireEvent.change(champ, { target: { value: 'volcans' } })
+    expect(screen.getByText('Aucun chapitre ne correspond en 3e.')).toBeInTheDocument()
   })
 
   it('affiche un état d’erreur si le catalogue ne charge pas', async () => {

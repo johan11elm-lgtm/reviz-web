@@ -1,36 +1,30 @@
-import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { BottomNav } from '../components/BottomNav';
 import { Mascot } from '../components/Mascot';
 import { GuestBanner } from '../components/GuestBanner';
-import { Pantin } from '../components/Pantin';
-import { BulleReviz } from '../components/reviz/BulleReviz';
-import { CarteFonction } from '../components/reviz/CarteFonction';
 import { loadCatalogue, chapterProgress, openChapter } from '../services/programmeService';
 import { loadLessons } from '../services/historyService';
 import { track } from '../services/statsService';
 import { useIsDesktop } from '../hooks/useMediaQuery';
 import { subjectMascot } from '../utils/subjects';
-import { accessoireMatiere } from '../utils/accessoireMatiere';
 import { hasProgramme, PROGRAMME_CLASSES, PROGRAMME_FALLBACK } from '../utils/programme';
 import './Programme.css';
 
 /**
- * « Programme » (handoff Claude Design du 21/10) : Réviz qui dit où en est la matière, les
- * leçons scannées, les matières en anneaux de progression, puis les chapitres de la matière
- * choisie sur une route en vague, façon plateau de jeu, avec le détail de la case choisie.
+ * « Programme », façon onglet « Révisions » de l'app Nomad (29/10) : « Programme de [classe] »,
+ * la recherche d'un chapitre, la carte « Ajoute ton cours », les matières en tuiles blanches,
+ * puis les chapitres de la matière choisie en liste ; une ligne ouverte montre son détail.
  * Les contenus sont des fichiers statiques partagés (public/programme) : mode essai compris.
  *
  * Une case par chapitre : fait (maîtrisé), en cours (le dernier chapitre ouvert pas encore
  * maîtrisé, sinon le premier à découvrir), commencé ou à travailler (ouvert, pas maîtrisé),
- * à faire. Le trophée « Fin de l'année » ferme la route.
+ * à faire.
  */
 const court = c => c.replace('ème', 'e');
-const majuscule = s => s.charAt(0).toUpperCase() + s.slice(1);
-const minuscule = s => s.charAt(0).toLowerCase() + s.slice(1);
-const enMatiere = m => (m === m.toUpperCase() ? `en ${m}` : `en ${m.toLowerCase()}`);
 const pluriel = (n, mot) => `${n} ${mot}${n > 1 ? 's' : ''}`;
+const sansAccents = t => String(t ?? '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
 
 const ETIQUETTE = { done: 'Fait', current: 'En cours', commence: 'Commencé', 'a-revoir': 'À travailler', todo: 'À venir' };
 // La case en cours qui n'a encore jamais été ouverte : c'est la prochaine, pas une case « en cours ».
@@ -88,8 +82,7 @@ export default function Programme() {
   const [caseChoisie, setCaseChoisie] = useState(null);
   const [ouverture, setOuverture] = useState(null); // id du chapitre en cours d'ouverture
   const [erreurChapitre, setErreurChapitre] = useState(false);
-  const [parle, setParle] = useState(false);
-  const pantin = useRef(null);
+  const [recherche, setRecherche] = useState('');
 
   useEffect(() => { track('programme_ouvert', { classe }); }, [classe]);
 
@@ -115,40 +108,16 @@ export default function Programme() {
   const scannees = lessons.filter(l => l.source !== 'programme').length;
 
   const choisie = matiere ? Math.min(caseChoisie ?? matiere.enCours?.i ?? 0, matiere.items.length - 1) : 0;
-  const detail = matiere?.items[choisie] ?? null;
 
   const choisirMatiere = s => { setSlug(s); setCaseChoisie(null); setErreurChapitre(false); };
   const choisirCase = i => { setCaseChoisie(i); setErreurChapitre(false); };
 
-  // Ce que dit Réviz : où en est la matière, et le prochain chapitre.
-  const lignes = useMemo(() => {
-    if (!matiere) return ['Je cherche ton programme…'];
-    const n = matiere.items.length, en = enMatiere(matiere.matiere);
-    if (matiere.faits === n) return [`Tout est fait ${en}.`, 'On révise pour garder ça ?'];
-    // Les titres du programme sont souvent longs : au-delà d'une ligne, Réviz donne le numéro.
-    const titre = matiere.enCours.ch.titre;
-    const prochain = titre.length <= 28 ? minuscule(titre) : `le chapitre ${matiere.enCours.i + 1}`;
-    if (matiere.faits === 0 && !matiere.enCours.lesson) return [`${pluriel(n, 'chapitre')} ${en}.`, matiere.enCours.i === 0 ? 'On commence par le premier ?' : `On commence par ${prochain} ?`];
-    return [`${matiere.faits} ${matiere.faits > 1 ? 'chapitres' : 'chapitre'} sur ${n} ${en}.`, `Prochain : ${prochain}.`];
-  }, [matiere]);
-  const texte = lignes.join('\n');
-  useEffect(() => {
-    if (parle) pantin.current?.dire(texte);
-  }, [texte, parle]);
-  // Si le moteur de Réviz ne charge pas, la bulle s'affiche quand même (page visible seulement).
-  useEffect(() => {
-    let t;
-    const essai = () => { t = setTimeout(() => (document.hidden ? essai() : setParle(true)), 4000); };
-    essai();
-    return () => clearTimeout(t);
-  }, []);
-
-  async function lancer(it) {
+  async function lancer(it, m = matiere) {
     if (!it?.ch.pret || ouverture) return;
     setOuverture(it.ch.id);
     setErreurChapitre(false);
     try {
-      await openChapter(classe, matiere.matiere, it.ch);
+      await openChapter(classe, m.matiere, it.ch);
       navigate('/analyse');
     } catch {
       setErreurChapitre(true);
@@ -156,11 +125,18 @@ export default function Programme() {
     }
   }
 
-  const dateTxt = majuscule(new Date().toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' }));
+  // Recherche d'un chapitre dans toutes les matières de la classe (comme la barre de Nomad).
+  const q = sansAccents(recherche.trim());
+  const resultats = q.length >= 2
+    ? matieres.flatMap(m => m.items.filter(it => sansAccents(it.ch.titre).includes(q)).map(it => ({ m, it }))).slice(0, 12)
+    : [];
+
   const pastilleClasse = (
     <div className="prg-choix">
-      <button type="button" className="prg-classe" aria-expanded={choix} aria-haspopup="listbox" onClick={() => setChoix(v => !v)}>
-        Classe de {court(classe)}
+      <button type="button" className="prg-classe" aria-expanded={choix} aria-haspopup="listbox" onClick={() => setChoix(v => !v)}
+        aria-label={`Classe de ${court(classe)}, changer de classe`}>
+        {court(classe)}
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
       </button>
       {choix && (
         <ul className="prg-choix-liste" role="listbox" aria-label="Classe">
@@ -176,301 +152,162 @@ export default function Programme() {
     </div>
   );
 
-  // Comme l'accueil : Réviz tombe dans le héros une fois chargé, puis parle.
-  // Distance de chute en unités du pantin (2148 pour sa taille) : il part au-dessus du héros.
-  const TAILLE_PANTIN = isDesktop ? 400 : 226;
-  const entree = useMemo(() => [{ nom: 'chute', depuis: Math.round(2148 * (isDesktop ? 520 : 420) / TAILLE_PANTIN) }], [isDesktop, TAILLE_PANTIN]);
-
-  const carteScans = (
-    <CarteFonction
-      carte={{
-        pose: 'scanphone', fond: 'var(--rv-peche-pale)', titre: 'Mes leçons scannées',
-        sous: isGuest ? 'Avec un compte gratuit' : scannees ? `${pluriel(scannees, 'leçon')}, prêtes à réviser` : 'Une photo de ton cahier, et Réviz prépare tout',
-      }}
-      grande={isDesktop}
-      onClick={() => navigate(isGuest ? '/scan' : '/cours')}
-    />
-  );
-  const bulle = (
-    <BulleReviz key={`${classe}-${matiere?.slug}`} lignes={lignes} parle={parle} className="prg-bulle"
-      pointe={isDesktop ? 'droite' : 'bas'} grande={isDesktop} />
-  );
-  const reviz = (
-    <Pantin
-      ref={pantin}
-      size={TAILLE_PANTIN}
-      expression="reflechit"
-      entree={entree}
-      repli={null}
-      accessoire={accessoireMatiere(matiere?.matiere)}
-      onEntree={() => setParle(true)}
-      onClick={() => pantin.current?.geste('saut')}
-      label="Réviz, ta mascotte"
-      className="prg-pantin"
-    />
-  );
-
-  // Même héros que l'accueil : titre en haut à gauche ; sur téléphone Réviz en bas, sa bulle
-  // au-dessus de sa tête ; sur ordinateur la bulle et la carte à gauche, face à Réviz.
-  const hero = (
-    <div className="prg-hero">
-      <span className="prg-deco prg-deco--a" aria-hidden="true" />
-      <span className="prg-deco prg-deco--b" aria-hidden="true" />
-      <span className="prg-point" aria-hidden="true" />
-      <span className="prg-grain" aria-hidden="true" />
-      <div className="prg-hero-haut">
-        <span className="prg-date">{dateTxt}</span>
-        <div className="prg-hero-titre">
-          <h1 className="prg-titre">Programme</h1>
-          {pastilleClasse}
-        </div>
+  // En-tête façon onglet « Révisions » de Nomad : « Programme de [3e] », la recherche,
+  // puis la carte encre « Ajoute ton cours » (le scan).
+  const entete = (
+    <header className="pn-entete">
+      <div className="pn-titre-ligne">
+        <h1 className="pn-titre">Programme de</h1>
+        {pastilleClasse}
       </div>
-      {isDesktop ? (
-        <div className="prg-scene">
-          <div className="prg-scene-txt">
-            {bulle}
-            <div className="prg-scans-place">{carteScans}</div>
-          </div>
-          {reviz}
-        </div>
-      ) : (
-        <>
-          <div className="prg-pantin-place">{reviz}</div>
-          {bulle}
-        </>
-      )}
-    </div>
+      <div className="pn-recherche-zone">
+        <label className="pn-recherche">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>
+          <input type="search" value={recherche} onChange={e => setRecherche(e.target.value)} placeholder="On révise quoi aujourd’hui ?" aria-label="Chercher un chapitre" />
+        </label>
+        {resultats.length > 0 && (
+          <ul className="pn-resultats" aria-label="Chapitres trouvés">
+            {resultats.map(({ m, it }) => (
+              <li key={`${m.slug}-${it.ch.id}`}>
+                <button type="button" className="pn-resultat" onClick={() => lancer(it, m)} disabled={!it.ch.pret}>
+                  <span className="pn-resultat-ico"><Mascot pose={subjectMascot(m.matiere)} size={34} alt="" aria-hidden="true" /></span>
+                  <span className="pn-resultat-txt"><b>{it.ch.titre}</b><span>{m.matiere} · chapitre {it.i + 1}{it.ch.pret ? '' : ' · bientôt'}</span></span>
+                </button>
+              </li>
+            ))}
+          </ul>
+        )}
+        {q.length >= 2 && !resultats.length && <p className="pn-rien">Aucun chapitre ne correspond en {court(classe)}.</p>}
+      </div>
+      <button type="button" className="pn-encre" onClick={() => navigate(isGuest ? '/scan' : '/cours')}>
+        <span className="pn-encre-reviz"><Mascot pose="scanphone" size={isDesktop ? 72 : 64} alt="" aria-hidden="true" /></span>
+        <span className="pn-encre-txt">
+          <b>Ajoute ton cours</b>
+          <span>{isGuest ? 'Prends ta leçon en photo, avec un compte gratuit' : scannees ? `${pluriel(scannees, 'leçon scannée')} · on te crée ton parcours de révision` : 'On te crée ton parcours de révision personnalisé'}</span>
+        </span>
+        <span className="pn-encre-fleche" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round"><path d="m9 6 6 6-6 6" /></svg></span>
+      </button>
+    </header>
   );
 
   const blocMatieres = (
-    <section className="prg-bloc" aria-labelledby="prg-matieres">
+    <section className="prg-bloc pn-matieres-bloc" aria-labelledby="prg-matieres">
       <div className="prg-tete">
-        <h2 id="prg-matieres" className="prg-titre2">Mes matières</h2>
+        <h2 id="prg-matieres" className="pn-h2">Mes matières</h2>
         {catalogue && <span className="prg-compte">{pctProgramme} % du programme</span>}
       </div>
-      <div className="prg-matieres" role="radiogroup" aria-label="Matière">
-        {!catalogue && [0, 1, 2, 3, 4].map(i => <span key={i} className="prg-matiere prg-matiere--vide" aria-hidden="true"><span className="prg-anneau" /></span>)}
+      <div className="pn-tuiles" role="radiogroup" aria-label="Matière">
+        {!catalogue && [0, 1, 2, 3].map(i => <span key={i} className="pn-tuile pn-tuile--vide" aria-hidden="true" />)}
         {matieres.map(m => (
-          <Anneau key={m.slug} m={m} on={m.slug === matiere?.slug} grand={isDesktop} onClick={() => choisirMatiere(m.slug)} />
+          <Tuile key={m.slug} m={m} on={m.slug === matiere?.slug} onClick={() => choisirMatiere(m.slug)} />
         ))}
       </div>
     </section>
   );
 
   const blocChapitres = matiere && (
-    <section className="prg-bloc prg-bloc--chapitres" aria-labelledby="prg-chapitres">
+    <section className="prg-bloc prg-bloc--chapitres pn-chapitres-bloc" aria-labelledby="prg-chapitres">
       <div className="prg-tete">
-        <h2 id="prg-chapitres" className="prg-titre2">Chapitres · {matiere.matiere}</h2>
+        <h2 id="prg-chapitres" className="pn-h2">Chapitres · {matiere.matiere}</h2>
         <span className="prg-compte">{matiere.faits} / {matiere.items.length}</span>
       </div>
-      <Vague
-        matiere={matiere}
-        choisie={choisie}
-        onChoisir={choisirCase}
-        grand={isDesktop}
-        detail={detail && (
-          <Detail
-            it={detail}
-            ouverture={ouverture === detail.ch.id}
-            erreur={erreurChapitre}
-            grand={isDesktop}
-            onLancer={() => lancer(detail)}
-            onScanner={() => navigate('/scan')}
-          />
-        )}
-      />
+      <ol className="pn-liste">
+        {matiere.items.map((it, i) => {
+          const st = it.statut, sel = i === choisie;
+          return (
+            <li key={it.ch.id} className={`pn-chap pn-chap--${st}${sel ? ' pn-chap--ouvert' : ''}`}>
+              <button type="button" className="pn-chap-ligne" onClick={() => choisirCase(i)} aria-expanded={sel}
+                aria-label={`Chapitre ${i + 1} : ${it.ch.titre}, ${etiquette(it).toLowerCase()}`}>
+                <span className="pn-chap-rond" aria-hidden="true">
+                  {st === 'done' ? <Coche taille={16} /> : st === 'current' ? <Mascot pose={subjectMascot(matiere.matiere)} size={34} alt="" /> : i + 1}
+                </span>
+                <span className="pn-chap-txt" aria-hidden="true">
+                  <span className="pn-chap-nom">{it.ch.titre}</span>
+                  <span className="pn-chap-etat" style={{ color: COULEUR[st] }}>{st === 'todo' && !it.ch.pret ? 'Bientôt' : etiquette(it)}</span>
+                </span>
+                <svg className="pn-chap-chevron" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
+              </button>
+              {sel && (
+                <Detail
+                  it={it}
+                  ouverture={ouverture === it.ch.id}
+                  erreur={erreurChapitre}
+                  grand={isDesktop}
+                  onLancer={() => lancer(it)}
+                  onScanner={() => navigate('/scan')}
+                />
+              )}
+            </li>
+          );
+        })}
+      </ol>
     </section>
   );
 
   return (
-    <div className={`app app--no-halo prg-page${isDesktop ? ' app--large prg-page--large' : ''}`}>
-      <div className="content prg-defile">
-        {hero}
-        {!isDesktop && <div className="prg-scans-place">{carteScans}</div>}
-        {isGuest && !isDesktop && <div className="prg-pad"><GuestBanner /></div>}
-        {autreClasse && classe === classeEleve && (
-          <p className="prg-note">Le programme de {level.classe} arrive bientôt. En attendant, voici celui de {classe}.</p>
-        )}
-        {error ? (
-          <div className="rv-empty-state prg-erreur">
-            <Mascot pose="confused" size={140} className="rv-empty-state-mascot" alt="" aria-hidden="true" />
-            <h2 className="rv-empty-state-title">Programme indisponible</h2>
-            <p className="rv-empty-state-sub">Impossible de charger les chapitres pour le moment. Vérifie ta connexion et réessaie.</p>
-            <button type="button" className="rv-btn-cta" onClick={() => navigate(0)}>Réessayer</button>
-          </div>
-        ) : (
-          <div className="prg-grille">
-            {blocMatieres}
-            {blocChapitres}
-          </div>
-        )}
+    <div className={`app app--no-halo prg-page pn-page${isDesktop ? ' app--large prg-page--large pn-page--large' : ''}`}>
+      <div className="content prg-defile pn-defile">
+        <div className="pn-cadre">
+          {entete}
+          {isGuest && !isDesktop && <GuestBanner className="pn-essai" />}
+          {autreClasse && classe === classeEleve && (
+            <p className="prg-note">Le programme de {level.classe} arrive bientôt. En attendant, voici celui de {classe}.</p>
+          )}
+          {error ? (
+            <div className="rv-empty-state prg-erreur">
+              <Mascot pose="confused" size={140} className="rv-empty-state-mascot" alt="" aria-hidden="true" />
+              <h2 className="rv-empty-state-title">Programme indisponible</h2>
+              <p className="rv-empty-state-sub">Impossible de charger les chapitres pour le moment. Vérifie ta connexion et réessaie.</p>
+              <button type="button" className="rv-btn-cta" onClick={() => navigate(0)}>Réessayer</button>
+            </div>
+          ) : (
+            <div className="pn-grille">
+              {blocMatieres}
+              {blocChapitres}
+            </div>
+          )}
+        </div>
       </div>
       <BottomNav />
     </div>
   );
 }
 
-/** Une matière : anneau de progression, mascotte au centre, nom et pourcentage. */
-function Anneau({ m, on, grand, onClick }) {
-  const r = 35, C = 2 * Math.PI * r;
-  const taille = grand ? 88 : 76;
+/** Une matière, en tuile blanche comme chez Nomad : l'émote, le nom, l'avancement. */
+function Tuile({ m, on, onClick }) {
   return (
-    <button type="button" role="radio" aria-checked={on} className={`prg-matiere${on ? ' prg-matiere--on' : ''}`} onClick={onClick}
+    <button type="button" role="radio" aria-checked={on} className={`pn-tuile${on ? ' pn-tuile--on' : ''}`} onClick={onClick}
       aria-label={`${m.matiere} : ${m.faits} sur ${m.items.length} chapitres faits`}>
-      <span className="prg-anneau" style={{ width: taille, height: taille }}>
-        <svg viewBox="0 0 76 76" width={taille} height={taille} aria-hidden="true">
-          <circle cx="38" cy="38" r={r} fill="none" style={{ stroke: 'var(--rv-ligne)' }} strokeWidth="4" />
-          {m.pct > 0 && (
-            <circle cx="38" cy="38" r={r} fill="none" style={{ stroke: m.pct === 100 ? '#34C77B' : 'var(--rv-marque)' }} strokeWidth="4"
-              strokeLinecap="round" strokeDasharray={`${(m.pct / 100) * C} ${C}`} />
-          )}
-        </svg>
-        <span className="prg-anneau-rond">
-          <Mascot pose={subjectMascot(m.matiere)} size={grand ? 72 : 62} alt="" aria-hidden="true" />
-        </span>
+      <span className="pn-tuile-ico"><Mascot pose={subjectMascot(m.matiere)} size={44} alt="" aria-hidden="true" /></span>
+      <span className="pn-tuile-txt">
+        <span className="pn-tuile-nom">{m.matiere}</span>
+        <span className="pn-tuile-pct">{m.pct} %</span>
       </span>
-      <span className="prg-matiere-nom">{m.matiere}</span>
-      <span className="prg-matiere-pct">{m.pct} %</span>
     </button>
   );
 }
 
-// Courbe qui passe par chaque point, points de contrôle à mi-chemin en x.
-function courbe(pts) {
-  if (!pts.length) return '';
-  let d = `M${pts[0][0]} ${pts[0][1]}`;
-  for (let i = 1; i < pts.length; i++) {
-    const [x0, y0] = pts[i - 1], [x1, y1] = pts[i], m = (x0 + x1) / 2;
-    d += ` C${m} ${y0} ${m} ${y1} ${x1} ${y1}`;
-  }
-  return d;
-}
-
-/**
- * Les chapitres sur une route en vague, puis le détail de la case choisie. Sur téléphone la
- * route défile ; sur ordinateur elle tient en entier quand la place suffit (sinon elle défile
- * aussi), et la bulle de détail pointe vers la case choisie.
- */
-function Vague({ matiere, choisie, onChoisir, grand, detail }) {
-  const piste = useRef(null);
-  const [largeur, setLargeur] = useState(0);
-  const [defile, setDefile] = useState(0);
-  const n = matiere.items.length;
-
-  useLayoutEffect(() => {
-    const el = piste.current;
-    if (!el) return;
-    const mesure = () => setLargeur(el.clientWidth);
-    mesure();
-    const ro = new ResizeObserver(mesure);
-    ro.observe(el);
-    return () => ro.disconnect();
-  }, []);
-
-  const D = grand
-    ? { h: 250, haut: 64, bas: 142, debut: 60, route: 34, fait: 60, cours: 88, choix: 66, rondCours: 74, label: 120 }
-    : { h: 236, haut: 58, bas: 136, debut: 46, route: 30, fait: 56, cours: 80, choix: 62, rondCours: 66, label: 108 };
-  const marge = grand ? 0 : 20;
-  // Écart entre deux cases : tout tient dans la largeur si possible (ordinateur), sinon 118 px.
-  const tient = grand && n > 1 ? (largeur - D.debut - 80 - 90) / (n - 1) : 0;
-  const ecart = grand && tient >= 110 ? Math.min(150, tient) : 118;
-  const largeurPiste = D.debut + (n - 1) * ecart + 140;
-  const pts = matiere.items.map((_, i) => [D.debut + i * ecart, i % 2 ? D.bas : D.haut]);
-  const trophee = [largeurPiste - 60, (D.haut + D.bas) / 2];
-  const dernierOuvert = matiere.items.reduce((a, it, i) => (it.statut !== 'todo' ? i : a), -1);
-  const routeFaite = dernierOuvert > 0 ? courbe(pts.slice(0, dernierOuvert + 1)) : '';
-  const route = courbe([...pts, trophee]);
-
-  // À l'ouverture et au changement de matière : la case en cours au milieu de l'écran.
-  useEffect(() => {
-    const el = piste.current;
-    if (!el || !matiere.enCours) return;
-    el.scrollLeft = Math.max(0, pts[matiere.enCours.i][0] + marge - el.clientWidth / 2);
-    setDefile(el.scrollLeft);
-  }, [matiere.slug, ecart]);
-
-  const pointe = pts[choisie] ? pts[choisie][0] + marge - defile : 0;
-
-  return (
-    <>
-      <div className="prg-piste" ref={piste} style={{ height: D.h }} onScroll={e => setDefile(e.currentTarget.scrollLeft)}>
-        <div className="prg-piste-int" style={{ width: largeurPiste, height: D.h, margin: `0 ${marge}px` }}>
-          <svg width={largeurPiste} height={D.h} className="prg-route" aria-hidden="true">
-            <path d={route} transform="translate(0 7)" fill="none" stroke="#A0501A" strokeOpacity=".10" strokeWidth={D.route} strokeLinecap="round" />
-            <path d={route} fill="none" style={{ stroke: 'var(--rv-carte)' }} strokeWidth={D.route} strokeLinecap="round" />
-            {routeFaite && <path d={routeFaite} fill="none" style={{ stroke: 'var(--rv-menthe)' }} strokeWidth={D.route} strokeLinecap="round" />}
-            <path d={route} fill="none" style={{ stroke: 'var(--rv-marque)' }} strokeOpacity=".45" strokeWidth="3" strokeDasharray="2 10" strokeLinecap="round" />
-          </svg>
-          {matiere.items.map((it, i) => {
-            const [x, y] = pts[i];
-            const st = it.statut, sel = i === choisie;
-            const taille = st === 'current' ? D.cours : sel ? D.choix : D.fait;
-            return (
-              <div key={it.ch.id}>
-                <button
-                  type="button"
-                  className={`prg-case prg-case--${st}${sel ? ' prg-case--choisie' : ''}`}
-                  style={{ left: x - taille / 2, top: y - taille / 2, width: taille, height: taille }}
-                  onClick={() => onChoisir(i)}
-                  aria-pressed={sel}
-                  aria-label={`Chapitre ${i + 1} : ${it.ch.titre}, ${etiquette(it).toLowerCase()}`}
-                >
-                  {st === 'done' && <Coche taille={grand ? 26 : 24} />}
-                  {st === 'current' && (
-                    <span className="prg-case-rond" style={{ width: D.rondCours, height: D.rondCours }}>
-                      <Mascot pose={subjectMascot(matiere.matiere)} size={D.rondCours} alt="" aria-hidden="true" />
-                    </span>
-                  )}
-                  {st !== 'done' && st !== 'current' && <span className="prg-case-num">{i + 1}</span>}
-                </button>
-                <span className="prg-case-label" style={{ left: x - D.label / 2, top: y + taille / 2 + 10, width: D.label }} aria-hidden="true">
-                  <span className="prg-case-etat" style={{ color: COULEUR[st] }}>{st === 'todo' ? `Chapitre ${i + 1}` : etiquette(it)}</span>
-                  <span className={`prg-case-nom${st === 'todo' ? ' prg-case-nom--todo' : ''}`}>{it.ch.titre}</span>
-                </span>
-              </div>
-            );
-          })}
-          <div className="prg-trophee" style={{ left: trophee[0] - 60, top: trophee[1] - 40 }}>
-            <span className="prg-trophee-rond"><Mascot pose="trophy" size={grand ? 72 : 68} alt="" aria-hidden="true" /></span>
-            <span className="prg-trophee-txt">Fin de l’année</span>
-          </div>
-        </div>
-      </div>
-      {detail && (
-        <div className="prg-detail-place" style={{ '--pointe': `${Math.max(18, pointe)}px` }}>
-          {detail}
-        </div>
-      )}
-    </>
-  );
-}
-
-/** Le détail de la case choisie : état, nom, contenu, et de quoi la lancer. */
+/** Le détail du chapitre ouvert, sous sa ligne : contenu, cartes à revoir, de quoi le lancer. */
 function Detail({ it, ouverture, erreur, grand, onLancer, onScanner }) {
   const st = it.statut;
   // Cartes à revoir : seulement une fois les flashcards commencées (sinon toutes comptent).
   const aRevoir = it.state === 'a-revoir' ? it.dueCards : 0;
-  const meta = aRevoir > 0 ? `${pluriel(aRevoir, 'carte')} à revoir` : `Chapitre ${it.i + 1}`;
   const contenu = it.ch.pret
     ? `${it.ch.flashcards} flashcards · quiz de ${it.ch.quiz} questions · résumé et carte mentale`
     : 'Ce chapitre arrive bientôt.';
   return (
     <div className={`prg-detail${grand ? ' prg-detail--grand' : ''}`}>
-      <div className="prg-detail-txt">
-        <div className="prg-detail-haut">
-          <span className="prg-detail-etat" style={{ color: COULEUR[st] }}>{etiquette(it)}</span>
-          <span className="prg-detail-meta">{meta}</span>
-        </div>
-        <h3 className="prg-detail-nom">{it.ch.titre}</h3>
-        <p className="prg-detail-contenu">{erreur ? 'Impossible d’ouvrir ce chapitre pour le moment. Réessaie.' : contenu}</p>
-        <div className="prg-detail-actions">
-          <button type="button" className="prg-go" onClick={onLancer} disabled={!it.ch.pret || ouverture}>
-            {!it.ch.pret ? 'Bientôt' : ouverture ? 'Ouverture…' : ACTION[st]}
-          </button>
-          <button type="button" className="prg-scanner" onClick={onScanner}>
-            <IconeScan />{grand ? 'Scanner une leçon' : 'Scanner'}
-          </button>
-        </div>
+      {/* Le nom est déjà sur la ligne : ce titre sert aux lecteurs d'écran. */}
+      <h3 className="prg-detail-nom">{it.ch.titre}</h3>
+      <p className="prg-detail-contenu">{erreur ? 'Impossible d’ouvrir ce chapitre pour le moment. Réessaie.' : contenu}</p>
+      {aRevoir > 0 && !erreur && <p className="prg-detail-revoir">{pluriel(aRevoir, 'carte')} à revoir</p>}
+      <div className="prg-detail-actions">
+        <button type="button" className="prg-go" onClick={onLancer} disabled={!it.ch.pret || ouverture}>
+          {!it.ch.pret ? 'Bientôt' : ouverture ? 'Ouverture…' : ACTION[st]}
+        </button>
+        <button type="button" className="prg-scanner" onClick={onScanner}>
+          <IconeScan />{grand ? 'Scanner une leçon' : 'Scanner'}
+        </button>
       </div>
     </div>
   );
