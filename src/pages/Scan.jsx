@@ -3,8 +3,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useIsDesktop } from '../hooks/useMediaQuery';
 import { useModalA11y } from '../hooks/useModalA11y';
-import { Pantin } from '../components/Pantin';
-import { BulleReviz } from '../components/reviz/BulleReviz';
+import { Mascot } from '../components/Mascot';
 import { DecouvrirRevizPlus, ToastPaiementAnnule } from '../components/revizplus/RevizPlusOffre';
 import { RevizPlusBadge } from '../components/RevizPlus';
 import { BottomNav } from '../components/BottomNav';
@@ -194,24 +193,15 @@ export default function Scan() {
     </>
   );
   const racine = `app app--no-halo ch-page sc-page${isDesktop ? ' app--large ch-page--large sc-page--large' : ''}`;
-  const deco = (
-    <>
-      <span className="ch-deco ch-deco--a" aria-hidden="true" />
-      <span className="ch-deco ch-deco--b" aria-hidden="true" />
-      <span className="ch-point" aria-hidden="true" />
-      <span className="ch-grain" aria-hidden="true" />
-    </>
-  );
 
   // ── Quota atteint : la carte remplace le choix ──
   if (!statut.canScan && !hasRevizPlus) {
     return (
       <div className={`${racine} sc-page--carte`} style={varsTeinte(TEINTES.peche)}>
-        <div className="ch-hero sc-hero sc-hero--centre">
-          {deco}
+        <header className="sn-entete">
           <div className="ch-haut"><button type="button" className="ch-retour" onClick={retour}><Chevron />Mes leçons</button></div>
-          <Reviz expression="endormi" lignes={['Belle semaine de travail.', 'Je fais une pause jusqu’à lundi.']} grand={isDesktop} />
-        </div>
+        </header>
+        <Reviz expression="endormi" lignes={['Belle semaine de travail.', 'Je fais une pause jusqu’à lundi.']} grand={isDesktop} />
         <div className="sc-carte sc-carte--etat">
           <h1 className="sc-carte-titre">Tu as utilisé tes scans de la semaine.</h1>
           <p className="sc-carte-txt">Ils reviennent lundi.</p>
@@ -342,17 +332,16 @@ export default function Scan() {
     return (
       <div className={racine} style={varsTeinte(TEINTES.peche)}>
         <div className="content sc-defile">
-          <div className="ch-hero sc-hero">
-            {deco}
+          <header className="sn-entete sn-entete--large">
             <div className="ch-haut"><button type="button" className="ch-retour" onClick={retour}><Chevron />Mes leçons</button></div>
-            <div className="sc-hero-grille">
+            <div className="sn-entete-grille">
               <div>
-                <span className="ch-surtitre">Nouvelle leçon</span>
-                <h1 className="ch-titre sc-titre">Scanner une leçon</h1>
+                <span className="sn-sur">Nouvelle leçon</span>
+                <h1 className="sn-titre">Scanner une leçon</h1>
               </div>
-              <Reviz expression="content" entree="coucou" lignes={['Une photo de ta leçon.', 'Je m’occupe du reste.']} grand pointe="droite" />
+              <Reviz expression="content" lignes={['Une photo de ta leçon.', 'Je m’occupe du reste : résumé, flashcards, quiz et carte mentale.']} grand />
             </div>
-          </div>
+          </header>
           <div className="sc-colonnes">
             <section className="sc-carte sc-depot-carte" aria-label="Photo de ta leçon">
               <div
@@ -398,13 +387,12 @@ export default function Scan() {
   return (
     <div className={racine} style={varsTeinte(TEINTES.peche)}>
       <div className="content sc-defile">
-        <div className="ch-hero sc-hero">
-          {deco}
+        <header className="sn-entete">
           <div className="ch-haut"><button type="button" className="ch-retour" onClick={retour}><Chevron />Mes leçons</button></div>
-          <span className="ch-surtitre">Nouvelle leçon</span>
-          <h1 className="ch-titre sc-titre">Scanner une leçon</h1>
-          <Reviz expression="content" entree="coucou" lignes={['Une photo de ta leçon.', 'Je m’occupe du reste.']} />
-        </div>
+          <span className="sn-sur">Nouvelle leçon</span>
+          <h1 className="sn-titre">Scanner une leçon</h1>
+        </header>
+        <Reviz expression="content" lignes={['Une photo de ta leçon.', 'Je m’occupe du reste : résumé, flashcards, quiz et carte mentale.']} />
         <button type="button" className="sc-carte sc-photo-carte" onClick={() => setEcran('viseur')}>
           <span className="sc-mini-rond" aria-hidden="true"><Appareil /></span>
           <span className="sc-carte-txt2"><b>Prendre une photo</b><span>Avec la caméra du téléphone</span></span>
@@ -429,34 +417,26 @@ export default function Scan() {
   );
 }
 
-/** Réviz, la mascotte animée, en grand dans le héros : il arrive, puis parle dans sa bulle. */
-function Reviz({ expression, entree, lignes, grand, pointe = 'bas' }) {
-  const pantin = useRef(null);
-  const [parle, setParle] = useState(false);
-  const texte = lignes.join('\n');
-  useEffect(() => { if (parle) pantin.current?.dire(texte); }, [texte, parle]);
-  // Si le moteur ne charge pas, la bulle s'affiche quand même (page visible seulement).
-  useEffect(() => {
-    let t;
-    const essai = () => { t = setTimeout(() => (document.hidden ? essai() : setParle(true)), 4000); };
-    essai();
-    return () => clearTimeout(t);
-  }, []);
+// L'émote de Réviz selon ce qu'il dit (les écrans de l'app Nomad n'ont pas de mascotte qui parle :
+// un bloc lavande avec le message et une émote, comme l'accueil et l'agenda, 28/10).
+const EMOTE = { content: 'scanphone', endormi: 'sleeping', determine: 'scan', reflechit: 'thinking' };
+
+/** Le message de Réviz dans un bloc lavande, son émote dans le coin. */
+function Reviz({ expression, lignes, grand }) {
   return (
-    <div className={`sc-reviz${pointe === 'droite' ? ' sc-reviz--cote' : ''}`}>
-      <BulleReviz key={texte} lignes={lignes} parle={parle} pointe={pointe} grande={grand} className="sc-bulle" />
-      <Pantin ref={pantin} size={grand ? 300 : 210} expression={expression} entree={entree} repli={null}
-        onEntree={() => setParle(true)} onClick={() => pantin.current?.geste('saut')} label="Réviz, ta mascotte" />
+    <div className={`sn-bloc${grand ? ' sn-bloc--grand' : ''}`}>
+      <p className="sn-bloc-txt">{lignes.join(' ')}</p>
+      <span className="sn-bloc-reviz" aria-hidden="true"><Mascot pose={EMOTE[expression] ?? 'hello'} size={grand ? 104 : 84} alt="" /></span>
     </div>
   );
 }
 
-/** Réviz en petit à côté de sa bulle (viseur, aperçu, texte). */
+/** Le conseil de Réviz en petit (viseur, aperçu, texte) : une bande lavande, son émote à gauche. */
 function PetitReviz({ expression, lignes }) {
   return (
-    <div className="sc-petit-reviz">
-      <Pantin size={76} expression={expression} repli={null} label="Réviz" />
-      <BulleReviz lignes={lignes} pointe="gauche" className="sc-bulle" />
+    <div className="sn-petit">
+      <span className="sn-petit-reviz" aria-hidden="true"><Mascot pose={EMOTE[expression] ?? 'hello'} size={44} alt="" /></span>
+      <p className="sn-petit-txt">{lignes.join(' ')}</p>
     </div>
   );
 }
@@ -476,12 +456,11 @@ function Essai({ onCompte, onConnexion, onProgramme, grand }) {
   if (grand) return <EssaiLarge onCompte={onCompte} onConnexion={onConnexion} onProgramme={onProgramme} />;
   return (
     <div className={`app app--no-halo ch-page sc-page sc-page--carte${grand ? ' app--large ch-page--large sc-page--large' : ''}`} style={varsTeinte(TEINTES.peche)}>
-      <div className="ch-hero sc-hero sc-hero--centre">
-        <span className="ch-deco ch-deco--a" aria-hidden="true" />
-        <span className="ch-deco ch-deco--b" aria-hidden="true" />
-        <span className="ch-grain" aria-hidden="true" />
-        <Reviz expression="content" entree="coucou" lignes={['Donne-moi tes leçons.', 'Il te faut juste un compte gratuit.']} grand={grand} />
-      </div>
+      <header className="sn-entete">
+        <span className="sn-sur">Nouvelle leçon</span>
+        <h1 className="sn-titre">Scanner une leçon</h1>
+      </header>
+      <Reviz expression="content" lignes={['Donne-moi tes leçons.', 'Il te faut juste un compte gratuit.']} grand={grand} />
       <div className="sc-carte sc-carte--etat">
         <h1 className="sc-carte-titre">Garde tes leçons</h1>
         <p className="sc-carte-txt">Ton compte garde tes leçons scannées, tes flashcards et tes quiz.</p>
@@ -497,18 +476,15 @@ function EssaiLarge({ onCompte, onConnexion, onProgramme }) {
   return (
     <div className="app app--no-halo ch-page sc-page app--large ch-page--large sc-page--large sc-page--essai" style={varsTeinte(TEINTES.peche)}>
       <div className="content sc-defile">
-        <div className="ch-hero sc-hero">
-          <span className="ch-deco ch-deco--a" aria-hidden="true" />
-          <span className="ch-deco ch-deco--b" aria-hidden="true" />
-          <span className="ch-grain" aria-hidden="true" />
-          <div className="sc-hero-grille">
+        <header className="sn-entete sn-entete--large">
+          <div className="sn-entete-grille">
             <div>
-              <span className="ch-surtitre">Nouvelle leçon</span>
-              <h1 className="ch-titre sc-titre">Scanner une leçon</h1>
+              <span className="sn-sur">Nouvelle leçon</span>
+              <h1 className="sn-titre">Scanner une leçon</h1>
             </div>
-            <Reviz expression="content" entree="coucou" lignes={['Donne-moi tes leçons.', 'Il te faut juste un compte gratuit.']} grand pointe="droite" />
+            <Reviz expression="content" lignes={['Donne-moi tes leçons.', 'Il te faut juste un compte gratuit.']} grand />
           </div>
-        </div>
+        </header>
         <div className="sc-colonnes">
           <section className="sc-carte sc-essai-compte" aria-labelledby="sc-essai-titre">
             <h2 id="sc-essai-titre" className="sc-carte-titre">Garde tes leçons</h2>
@@ -546,7 +522,7 @@ function NiveauManquant({ onClose, onProfil }) {
   return (
     <div className="sc-voile" onClick={onClose}>
       <div className="sc-feuille sc-feuille--centre" ref={ref} role="dialog" aria-modal="true" aria-labelledby="sc-niveau" onClick={e => e.stopPropagation()}>
-        <Pantin size={130} expression="reflechit" repli={null} label="Réviz" />
+        <Mascot pose="thinking" size={110} alt="" aria-hidden="true" />
         <h2 id="sc-niveau">Dis-moi d’abord ta classe</h2>
         <p className="sc-carte-txt">J’adapte tes révisions à ta classe. Ça se règle en 10 secondes.</p>
         <div className="sc-deux">

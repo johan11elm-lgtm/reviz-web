@@ -1,10 +1,8 @@
-import { useState, useEffect, useMemo, useRef } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { BottomNav } from '../components/BottomNav';
 import { Mascot } from '../components/Mascot';
-import { Pantin } from '../components/Pantin';
-import { BulleReviz } from '../components/reviz/BulleReviz';
 import { RevizPlusSheet, RevizPlusBadge } from '../components/RevizPlus';
 import { loadLessons, restoreLesson, deleteLesson, syncFromFirestore } from '../services/historyService';
 import { loadRevisions, syncRevisionsFromFirestore } from '../services/revisionService';
@@ -168,16 +166,6 @@ export default function Cours() {
     : !aLecons ? ['Aucune leçon pour l’instant.', 'Scanne ton cours, je prépare le reste.']
     : [`${pluriel(lecons.length, 'leçon')} ${lecons.length > 1 ? 'scannées' : 'scannée'}.`,
        aTravailler ? `${pluriel(aTravailler, 'carte')} ${aTravailler > 1 ? 't’attendent' : 't’attend'} aujourd’hui.` : 'Tout est à jour, bravo.'];
-  const pantin = useRef(null);
-  const [parle, setParle] = useState(false);
-  const texte = lignes.join('\n');
-  useEffect(() => { if (parle) pantin.current?.dire(texte); }, [texte, parle]);
-  useEffect(() => {
-    let t;
-    const essai = () => { t = setTimeout(() => (document.hidden ? essai() : setParle(true)), 4000); };
-    essai();
-    return () => clearTimeout(t);
-  }, []);
 
   function ouvrir(l) { restoreLesson(l.id); navigate('/analyse'); }
   function reprendreLecon(l) { restoreLesson(l.id); navigate(l.av.etat === 'decouvrir' ? '/resume' : l.av.step.to); }
@@ -196,11 +184,11 @@ export default function Cours() {
 
   // ── Blocs ──
   const surtitre = isGuest ? 'Mode essai' : aLecons ? `${pluriel(lecons.length, 'leçon')} · ${pluriel(matieres.length, 'matière')}` : 'Bibliothèque';
+  // Façon app Nomad (28/10) : pas de mascotte qui parle, son message dans un bloc lavande avec une émote.
   const reviz = (
-    <div className="le-reviz">
-      <BulleReviz key={texte} lignes={lignes} parle={parle} grande={isDesktop} className="le-bulle" />
-      <Pantin ref={pantin} size={isDesktop ? 240 : 170} expression="content" entree="coucou" repli={null}
-        onEntree={() => setParle(true)} onClick={() => pantin.current?.geste('saut')} label="Réviz, ta mascotte" />
+    <div className="lc-bloc">
+      <p className="lc-bloc-txt">{lignes.join(' ')}</p>
+      <span className="lc-bloc-reviz" aria-hidden="true"><Mascot pose={aLecons ? 'reading' : 'scanphone'} size={isDesktop ? 100 : 80} alt="" /></span>
     </div>
   );
   const quota = illimite ? (
@@ -378,32 +366,22 @@ export default function Cours() {
   const fermeMenu = menu !== null && <div className="le-attrape" onClick={() => setMenu(null)} aria-hidden="true" />;
   const retour = <button type="button" className="ch-retour" onClick={() => revenir(navigate, '/programme')}><Chevron />Programme</button>;
   const racine = `app app--no-halo ch-page le-page${isDesktop ? ' app--large ch-page--large le-page--large' : ''}`;
-  const deco = (
-    <>
-      <span className="ch-deco ch-deco--a" aria-hidden="true" />
-      <span className="ch-deco ch-deco--b" aria-hidden="true" />
-      <span className="ch-deco ch-deco--c" aria-hidden="true" />
-      <span className="ch-point" aria-hidden="true" />
-      <span className="ch-grain" aria-hidden="true" />
-    </>
-  );
 
   // ── Ordinateur ──
   if (isDesktop) {
     return (
       <div className={racine} style={varsTeinte(TEINTES.peche)}>
         <div className="content le-defile">
-          <div className="ch-hero le-hero">
-            {deco}
+          <header className="lc-entete lc-entete--large">
             <div className="ch-haut">{retour}</div>
-            <div className="le-hero-grille">
+            <div className="lc-entete-grille">
               <div>
-                <span className="ch-surtitre">{surtitre}</span>
-                <h1 className="ch-titre le-titre">Mes leçons scannées</h1>
+                <span className="lc-sur">{surtitre}</span>
+                <h1 className="lc-titre">Mes leçons scannées</h1>
               </div>
               {reviz}
             </div>
-          </div>
+          </header>
           <div className={`le-cartes${carteReprendre ? '' : ' le-cartes--seule'}`}>
             {carteScan}
             {carteReprendre}
@@ -444,13 +422,12 @@ export default function Cours() {
   return (
     <div className={racine} style={varsTeinte(TEINTES.peche)}>
       <div className="content le-defile">
-        <div className="ch-hero le-hero">
-          {deco}
+        <header className="lc-entete">
           <div className="ch-haut">{retour}</div>
-          <span className="ch-surtitre">{surtitre}</span>
-          <h1 className="ch-titre le-titre">Mes leçons</h1>
-          {reviz}
-        </div>
+          <span className="lc-sur">{surtitre}</span>
+          <h1 className="lc-titre">Mes leçons</h1>
+        </header>
+        {reviz}
         {carteScan}
         {chargement ? squelette : aLecons ? (
           <>

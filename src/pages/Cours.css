@@ -400,3 +400,40 @@
   --hm-encre: #042A65; --hm-doux: #6E675B; --inst-encre: #042A65; --inst-doux: #6E675B; --lg-encre: #042A65; --lg-doux: #6E675B; --prg-encre: #042A65; --prg-doux: #6E675B;
   color: #042A65;
 }
+
+/* ═══ Mes leçons façon app Nomad (28/10) : en-tête comme le Programme et l'Agenda (retour, sur-titre,
+ * titre), plus de héros ni de mascotte qui parle — son message dans un bloc lavande avec une émote —,
+ * cartes blanches à ombre légère, titres à barre orange, boutons orange en rectangle arrondi. ═══ */
+.lc-entete { padding: calc(env(safe-area-inset-top, 0px) + 14px) 16px 0; color: #042A65; }
+.lc-entete .ch-haut { margin-bottom: 14px; }
+.lc-sur { display: block; font-size: 13px; font-weight: 600; color: var(--rv-doux); }
+.lc-titre { margin: 2px 0 0; font-size: 30px; font-weight: 800; line-height: 1.1; letter-spacing: -.02em; color: #042A65; }
+.lc-bloc { position: relative; display: flex; align-items: center; min-height: 92px; box-sizing: border-box; margin: 16px 16px 0; padding: 16px 112px 16px 16px; border-radius: 24px; background: #B9A6FB; color: #042A65; }
+.lc-bloc-txt { margin: 0; font-size: 17px; font-weight: 700; line-height: 1.3; }
+.lc-bloc-reviz { position: absolute; right: 12px; bottom: 2px; display: flex; pointer-events: none; }
+.le-page .le-carte { margin: 14px 16px 0; border-radius: 20px; }
+.le-page .le-scan-rond { width: 52px; height: 52px; border-radius: 14px; background: #F2EBFF; }
+.le-page .le-scan-txt b { font-family: inherit; font-size: 17px; letter-spacing: -.01em; color: #042A65; }
+.le-page .le-scan-plus { width: 44px; height: 44px; border-radius: 12px; background: var(--rv-vif-plein); box-shadow: 0 4px 0 #B83706; }
+.le-page .le-btn { border-radius: 14px; font-family: inherit; }
+.le-page .le-btn--orange, .le-page .le-btn--petit { background: var(--rv-vif-plein); box-shadow: 0 4px 0 #B83706; }
+.le-page .le-btn--creme { box-shadow: 0 1px 3px rgba(4,42,101,.12); }
+.le-page .le-section { margin: 26px 16px 0; }
+.le-page .le-h2 { padding-left: 12px; border-left: 4px solid var(--rv-vif); font-family: inherit; font-size: 21px; letter-spacing: 0; line-height: 1.2; color: #042A65; }
+.le-page .le-reprendre { border-radius: 20px; background: #fff; box-shadow: 0 1px 3px rgba(4,42,101,.1), 0 1px 2px rgba(4,42,101,.06); }
+.le-page .le-rond-matiere { border-radius: 14px; background: #F2EBFF; box-shadow: none; }
+.le-page .le-rond-matiere--petit { border-radius: 12px; background: var(--le-pastel); box-shadow: none; }
+.le-page .le-case--fait, .le-page .le-case--cours, .le-page .le-case--afaire { box-shadow: none; }
+.le-page .le-case--fait { background: #04ADB3; }
+.le-page .le-case--cours { border-color: var(--rv-vif); }
+.le-page .le-filtre { border-radius: 12px; box-shadow: 0 1px 3px rgba(4,42,101,.1); }
+.le-page .le-filtre.is-active { background: #042A65; color: #fff; }
+.le-page .le-groupe-tete h3 { font-family: inherit; letter-spacing: -.01em; color: #042A65; }
+.le-page .le-liste, .le-page .le-exemple-carte { border-radius: 20px; }
+/* Ordinateur : l'en-tête et le bloc de Réviz sur une ligne, puis les cartes. */
+.lc-entete--large { max-width: 1440px; box-sizing: border-box; margin: 0 auto; padding: 12px 56px 0; }
+.lc-entete-grille { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 520px); align-items: end; gap: 28px; }
+.lc-entete--large .lc-titre { font-size: 36px; }
+.lc-entete--large .lc-bloc { margin: 0; }
+.le-page--large .le-cartes { margin: 24px auto 0; }
+.le-page--large .le-carte { margin: 0; }

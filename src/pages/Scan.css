@@ -251,3 +251,41 @@ button.sc-carte:active { transform: scale(.98); }
   --hm-encre: #042A65; --hm-doux: #6E675B; --inst-encre: #042A65; --inst-doux: #6E675B; --lg-encre: #042A65; --lg-doux: #6E675B; --prg-encre: #042A65; --prg-doux: #6E675B;
   color: #042A65;
 }
+
+/* ═══ Scanner une leçon façon app Nomad (28/10) : en-tête comme les autres pages, message de Réviz
+ * dans un bloc lavande avec une émote (plus de mascotte qui parle), cartes blanches à ombre légère,
+ * icônes dans des carrés pastel sans tranche, boutons orange en rectangle arrondi. ═══ */
+.sn-entete { padding: calc(env(safe-area-inset-top, 0px) + 14px) 16px 0; color: #042A65; }
+.sn-entete .ch-haut { margin-bottom: 14px; }
+.sn-sur { display: block; font-size: 13px; font-weight: 600; color: var(--rv-doux); }
+.sn-titre { margin: 2px 0 0; font-size: 30px; font-weight: 800; line-height: 1.1; letter-spacing: -.02em; color: #042A65; }
+.sn-bloc { position: relative; display: flex; align-items: center; min-height: 96px; box-sizing: border-box; margin: 16px 16px 0; padding: 16px 116px 16px 16px; border-radius: 24px; background: #B9A6FB; color: #042A65; }
+.sn-bloc-txt { margin: 0; font-size: 17px; font-weight: 700; line-height: 1.3; }
+.sn-bloc-reviz { position: absolute; right: 12px; bottom: 2px; display: flex; pointer-events: none; }
+.sn-petit { display: flex; align-items: center; gap: 10px; padding: 8px 14px 8px 8px; border-radius: 16px; background: #F2EBFF; color: #042A65; }
+.sn-petit-reviz { flex: none; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; border-radius: 12px; background: #fff; overflow: hidden; }
+.sn-petit-txt { margin: 0; font-size: 14px; font-weight: 600; line-height: 1.35; }
+.sc-page .sc-carte { border-radius: 20px; }
+.sc-page .sc-photo-carte { width: calc(100% - 32px); margin: 14px 16px 0; }
+.sc-page .sc-paire { margin: 12px 16px 0; }
+.sc-page .sc-quota-carte { margin: 12px 16px 0; }
+.sc-page .sc-carte--etat { margin: 14px 16px 0; }
+.sc-page .sc-mini-rond { width: 52px; height: 52px; border-radius: 14px; background: #FFE9DF; color: var(--rv-vif-plein); box-shadow: none; }
+.sc-page .sc-mini-rond--lavande { width: 44px; height: 44px; border-radius: 12px; background: #F2EBFF; color: #042A65; }
+.sc-page .sc-mini-rond--menthe { width: 44px; height: 44px; border-radius: 12px; background: #DDF5F4; color: #04807F; }
+.sc-page .sc-go { width: 44px; height: 44px; border-radius: 12px; background: var(--rv-vif-plein); box-shadow: 0 4px 0 #B83706; }
+.sc-page .sc-carte-txt2 b, .sc-page .sc-petite-carte b, .sc-page .sc-carte-titre { font-family: inherit; letter-spacing: -.01em; color: #042A65; }
+.sc-page .sc-btn { border-radius: 14px; background: var(--rv-vif-plein); box-shadow: 0 4px 0 #B83706; font-family: inherit; }
+.sc-page .sc-btn:active:not(:disabled) { box-shadow: 0 1px 0 #B83706; }
+.sc-page .sc-btn:disabled { background: #E0D6CD; box-shadow: none; color: #fff; }
+.sc-page .sc-btn--blanc, .sc-page .sc-btn--creme { background: #fff; color: #042A65; box-shadow: 0 1px 3px rgba(4,42,101,.12), 0 3px 0 #E6DFD8; }
+.sc-page .sc-bouton-rond--lavande, .sc-page .sc-bouton-rond--menthe { box-shadow: 0 1px 3px rgba(4,42,101,.16); }
+.sc-page .sc-depot-rond { border-radius: 20px; background: #FFE9DF; box-shadow: none; color: var(--rv-vif-plein); }
+.sc-page .sc-barre h1 { font-family: inherit; color: #042A65; }
+/* Ordinateur */
+.sn-entete--large { max-width: 1440px; box-sizing: border-box; margin: 0 auto; padding: 12px 56px 0; }
+.sn-entete-grille { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 520px); align-items: end; gap: 28px; }
+.sn-entete--large .sn-titre { font-size: 36px; }
+.sn-entete--large .sn-bloc { margin: 0; }
+.sc-page--large .sc-colonnes { margin: 24px auto 0; }
+.sc-page--large .sc-carte--etat { margin: 24px auto 0; }
