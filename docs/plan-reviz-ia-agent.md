@@ -166,6 +166,15 @@ Chaque étape est testée (tests unitaires et e2e) et le banc est rejoué. La mi
 
    Au banc, Réviz IA passe de 7,2 à 9,4 et bat ChatGPT sur 32 des 35 demandes communes, avec 3 égalités et aucune défaite. Le coût est divisé par cinq environ (`scripts/banc-ia/resultats/2026-10-28-etape1/bilan.md`).
 2. **Agent.** Le mode sans leçon, les outils de lecture et les cartes de contrôle et de révision. Réviz IA s'ouvre sans leçon : l'écran vide actuel (« Réviz IA répond à partir d'une leçon… ») disparaît.
+   **Fait le 29/10** sur la même branche, pas encore en prod. Ce qui a été construit :
+   - **Où vit le code :** `src/utils/agent.js` contient les outils, le prompt et la vérification des cartes, en code pur partagé avec le banc ; `api/_agent.js` contient les sources (Firestore, programme embarqué avec la fonction) et la boucle d'outils, avec 4 tours au plus.
+   - **Le serveur :** `api/chat.js` passe en mode agent quand il n'y a pas de `lessonId`.
+   - **L'écran :** `/coach` sans leçon affiche ce que l'agent regarde et ses cartes. « Ajouter » appelle `ajouterControle`, « Modifier » ouvre la feuille de l'agenda déjà remplie, « Commencer » ouvre le chapitre, les erreurs ou le contrôle blanc. On peut toujours revenir à une leçon.
+   - **Le banc :** une option `--agent` lance l'élève fictif sans le contexte tapé.
+
+   Au banc (`resultats/2026-10-29-etape2/bilan.md`), l'agent a 9,4 sur 10 et bat ChatGPT sur 34 des 35 demandes communes. Sur les 12 demandes où il doit retrouver le contexte lui-même, il a 9,2, contre 8,5 pour le coach de leçon à qui l'élève tape tout. Le coût est d'environ 0,35 centime par demande.
+   - **À surveiller :** le correcteur connaît maintenant le plan calculé par l'app (sinon il comptait comme inventé ce que l'app sait vraiment), et le prompt a été corrigé après avoir lu ses critiques. La relecture de Johan reste la vraie vérification.
+   - **Mesure en prod :** les événements PostHog `ia_carte_proposee` et `ia_carte_validee`.
 3. **Accueil.** Le champ de recherche (local, plus « Demander à Réviz IA ») et les suggestions selon la situation.
 4. **Bats ton toi d'hier.** Une carte d'accueil le lendemain et le lien du mail J+1, avec trois questions et la comparaison.
 5. **Schémas.** Cinq types, un composant de rendu et la carte `dessiner_schema`, aussi dans le coach de leçon.

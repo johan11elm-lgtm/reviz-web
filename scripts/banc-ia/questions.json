@@ -9,7 +9,30 @@
       { "matiere": "Maths", "date": "2026-11-05", "chapitre": "4eme/maths/theoreme-de-pythagore" },
       { "matiere": "Histoire", "date": "2026-11-09", "chapitre": "4eme/histoire/revolution-francaise-1789-1799" },
       { "matiere": "SVT", "date": "2026-11-10", "chapitre": "4eme/svt/volcanisme" }
-    ]
+    ],
+    "noteSources": "Le même élève tel que l'appli le connaît (agenda Firestore, révisions, erreurs gardées sur l'appareil) : ce que lit Réviz IA en agent (--agent), qui ne reçoit pas le contexte tapé.",
+    "appli": "Ce que l'appli Réviz sait et fait déjà pour cet élève (son IA peut s'en servir, ce n'est pas une invention) : les trois contrôles sont notés dans son agenda, sur les chapitres « Racine carrée et théorème de Pythagore » (maths), « La Révolution française : un nouvel ordre politique (1789-1799) » (histoire) et « Le volcanisme » (SVT). Pour chaque contrôle noté, l'appli calcule un plan de révision : flashcards 5 jours avant, quiz sur les questions ratées 3 jours avant, contrôle blanc la veille ; une étape pas faite à sa date revient au jour même. Les questions ratées sont gardées par chapitre et se refont d'un bouton (« Refaire mes erreurs »).",
+    "sources": {
+      "agenda": {
+        "controles": [
+          { "id": "c-maths", "matiere": "maths", "titre": "Racine carrée et théorème de Pythagore", "date": "2026-11-05", "cree": "2026-10-28", "chapitres": [{"id": "theoreme-de-pythagore", "titre": "Racine carrée et théorème de Pythagore"}], "classe": "4ème", "programme": "Maths" },
+          { "id": "c-histoire", "matiere": "histoire", "titre": "La Révolution française : un nouvel ordre politique (1789-1799)", "date": "2026-11-09", "cree": "2026-10-28", "chapitres": [{"id": "revolution-francaise-1789-1799", "titre": "La Révolution française : un nouvel ordre politique (1789-1799)"}], "classe": "4ème", "programme": "Histoire" },
+          { "id": "c-svt", "matiere": "svt", "titre": "Le volcanisme", "date": "2026-11-10", "cree": "2026-10-28", "chapitres": [{"id": "volcanisme", "titre": "Le volcanisme"}], "classe": "4ème", "programme": "SVT" }
+        ]
+      },
+      "revisions": [
+        { "type": "quiz", "lessonId": "prog-theoreme-de-pythagore", "revisedAt": 1793638800000, "score": 4, "total": 7 },
+        { "type": "quiz", "lessonId": "prog-revolution-francaise-1789-1799", "revisedAt": 1793458800000, "score": 5, "total": 7 }
+      ],
+      "lecons": [
+        { "id": "prog-theoreme-de-pythagore", "titre": "Racine carrée et théorème de Pythagore", "matiere": "Maths", "source": "programme" },
+        { "id": "prog-revolution-francaise-1789-1799", "titre": "La Révolution française : un nouvel ordre politique (1789-1799)", "matiere": "Histoire", "source": "programme" }
+      ],
+      "erreurs": [
+        { "lessonId": "prog-theoreme-de-pythagore", "titre": "Racine carrée et théorème de Pythagore", "matiere": "maths", "at": 1793638800000, "questions": ["ABC est rectangle en A, BC = 10 cm et AB = 6 cm. Combien mesure AC ?", "Un triangle a pour côtés 4, 5 et 6. Que peut-on conclure ?", "Pourquoi compare-t-on le carré du PLUS GRAND côté à la somme des deux autres carrés ?"] },
+        { "lessonId": "prog-revolution-francaise-1789-1799", "titre": "La Révolution française : un nouvel ordre politique (1789-1799)", "matiere": "histoire", "at": 1793458800000, "questions": ["Qui sont les sans-culottes ?", "Pourquoi le gouvernement révolutionnaire instaure-t-il la Terreur en 1793 ?"] }
+      ]
+    }
   },
   "categories": {
     "cours": "Question de cours",

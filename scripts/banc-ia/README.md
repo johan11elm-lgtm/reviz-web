@@ -11,10 +11,10 @@
 
 Un relevé :
 
-1. `node --env-file=.env.local scripts/banc-ia/lancer-reviz.mjs AAAA-MM-JJ` (la prod). Pour une version pas encore en ligne : `--ref <branche>` ou `--arbre <dossier>`, avec `--nom <système>` et, au besoin, `--effort low|medium|high`.
+1. `node --env-file=.env.local scripts/banc-ia/lancer-reviz.mjs AAAA-MM-JJ` (la prod). Pour une version pas encore en ligne : `--ref <branche>` ou `--arbre <dossier>`, avec `--nom <système>` et, au besoin, `--effort low|medium|high`. `--agent --arbre <dossier>` : Réviz IA sans leçon, avec la boucle du serveur et l'élève fictif (`eleve.sources`) à la place de Firestore. Les demandes avec contexte partent alors sans le contexte tapé, et les cartes sont recopiées sous la réponse.
 2. ChatGPT sans compte, dans le navigateur intégré : `https://chatgpt.com/?q=<message>`, une ligne par réponse dans `resultats/AAAA-MM-JJ/chatgpt.jsonl` ({ id, systeme: "chatgpt-sans-compte", reponse, image }).
 3. `node --env-file=.env.local scripts/banc-ia/noter.mjs AAAA-MM-JJ`
 
 Pour un relevé incomplet, `BANC_IDS=13,24` recorrige seulement ces demandes, et `BANC_BILAN=1` refait le bilan sans rien recorriger.
 
-Coût : Réviz IA 0,17 $ les 40 réponses sur Haiku 4.5, 0,03 $ sur Haiku 5.5 ; la correction environ 0,6 $ pour 2 systèmes et 1 $ pour 5.
+Coût : Réviz IA 0,17 $ les 40 réponses sur Haiku 4.5, 0,03 $ sur Haiku 5.5, 0,14 $ en agent (plusieurs tours d'outils) ; la correction environ 0,6 $ pour 2 systèmes et 1 $ pour 5.

@@ -1,0 +1,1042 @@
+[
+  {
+    "id": 1,
+    "systeme": "reviz-haiku55-low",
+    "modele": "claude-haiku-5-5",
+    "version": "arbre reviz-ia-haiku55",
+    "effort": "low",
+    "reponse": "Une fraction peut vouloir dire deux choses, et c'est pour ça que ça semble bizarre.\n\nImagine que tu as **3 pizzas** à partager entre **4 amis**, en parts égales. Chacun reçoit 3 ÷ 4 de pizza, ce qui s'écrit **3/4**. Le 3/4 est donc le résultat exact de la division de 3 par 4.\n\nPour vérifier : si chacun reçoit 3/4, les 4 amis ont bien 4 × 3/4 = 3 pizzas.\n\nEssaie avec 2 pizzas partagées entre 4 amis : combien chacun en reçoit-il ?",
+    "stop": "end_turn",
+    "ms": 4139,
+    "usage": {
+      "input_tokens": 4,
+      "cache_creation_input_tokens": 4320,
+      "cache_read_input_tokens": 0,
+      "cache_creation": {
+        "ephemeral_5m_input_tokens": 4320,
+        "ephemeral_1h_input_tokens": 0
+      },
+      "output_tokens": 734,
+      "output_tokens_details": {
+        "thinking_tokens": 507
+      },
+      "service_tier": "standard",
+      "inference_geo": "global",
+      "speed": "standard"
+    }
+  },
+  {
+    "id": 2,
+    "systeme": "reviz-haiku55-low",
+    "modele": "claude-haiku-5-5",
+    "version": "arbre reviz-ia-haiku55",
+    "effort": "low",
+    "reponse": "Pour trouver un **COD**, pose la question **« qui ? » ou « quoi ? »** juste après le verbe. S'il n'y a **pas de préposition** devant la réponse, c'est un COD. Tu peux le remplacer par **le, la, l'** ou **les**.\n\nPour trouver un **COI**, pose **« à qui ? à quoi ? de qui ? de quoi ? »**. Si la réponse commence par **à** ou **de**, c'est un COI. Tu peux le remplacer par **lui, leur, en** ou **y**.\n\nExemple : « Elle écrit une lettre à sa grand-mère. »\n- Elle écrit quoi ? *une lettre* → COD (pas de préposition). On dit « Elle l'écrit. »\n- Elle écrit à qui ? *à sa grand-mère* → COI (avec « à »). On dit « Elle lui écrit. »\n\nÀ toi maintenant : dans « Je donne mon crayon à Léa », trouve le COD et le COI, puis dis-moi par quel pronom tu remplaces chacun.",
+    "stop": "end_turn",
+    "ms": 4685,
+    "usage": {
+      "input_tokens": 4,
+      "cache_creation_input_tokens": 4044,
+      "cache_read_input_tokens": 0,
+      "cache_creation": {
+        "ephemeral_5m_input_tokens": 4044,
+        "ephemeral_1h_input_tokens": 0
+      },
+      "output_tokens": 844,
+      "output_tokens_details": {
+        "thinking_tokens": 476
+      },
+      "service_tier": "standard",
+      "inference_geo": "global",
+      "speed": "standard"
+    }
+  },
+  {
+    "id": 3,
+    "systeme": "reviz-haiku55-low",
+    "modele": "claude-haiku-5-5",
+    "version": "arbre reviz-ia-haiku55",
+    "effort": "low",
+    "reponse": "C'est une très bonne question, et tu as raison de la poser ! Athènes a bien inventé une forme de **démocratie**, mais ce n'est pas la nôtre.\n\nÀ Athènes, les citoyens votaient directement les lois à l'Ecclésia. Par contre, seuls les **citoyens** avaient ce droit : les femmes, les métèques et les esclaves étaient exclus. Les citoyens ne formaient donc qu'une petite partie des habitants.\n\nEt toi, peux-tu me dire pourquoi on dit quand même qu'Athènes a inventé la démocratie, malgré ces exclusions ?",
+    "stop": "end_turn",
+    "ms": 3663,
+    "usage": {
+      "input_tokens": 4,
+      "cache_creation_input_tokens": 4508,
+      "cache_read_input_tokens": 0,
+      "cache_creation": {
+        "ephemeral_5m_input_tokens": 4508,
+        "ephemeral_1h_input_tokens": 0
+      },
+      "output_tokens": 542,
+      "output_tokens_details": {
+        "thinking_tokens": 328
+      },
+      "service_tier": "standard",
+      "inference_geo": "global",
+      "speed": "standard"
+    }
+  },
+  {
+    "id": 4,
+    "systeme": "reviz-haiku55-low",
+    "modele": "claude-haiku-5-5",
+    "version": "arbre reviz-ia-haiku55",
+    "effort": "low",
+    "reponse": "Super question ! L'intestin grêle sert surtout à **absorber** les nutriments : c'est là qu'ils passent des aliments digérés vers le sang, qui les distribue ensuite à tous les organes.\n\nPour y arriver, sa paroi a des replis couverts de **villosités**, comme de petits doigts. Ça crée une surface d'échange très grande, et comme la paroi est fine et bien irriguée par le sang, les nutriments la traversent facilement.\n\nPour vérifier, réponds à cette question : par où passent les nutriments pour aller dans le sang, l'estomac ou l'intestin grêle ?",
+    "stop": "end_turn",
+    "ms": 2348,
+    "usage": {
+      "input_tokens": 4,
+      "cache_creation_input_tokens": 4086,
+      "cache_read_input_tokens": 0,
+      "cache_creation": {
+        "ephemeral_5m_input_tokens": 4086,
+        "ephemeral_1h_input_tokens": 0
+      },
+      "output_tokens": 293,
+      "output_tokens_details": {
+        "thinking_tokens": 79
+      },
+      "service_tier": "standard",
+      "inference_geo": "global",
+      "speed": "standard"
+    }
+  },
+  {
+    "id": 5,
+    "systeme": "reviz-haiku55-low",
+    "modele": "claude-haiku-5-5",
+    "version": "arbre reviz-ia-haiku55",
+    "effort": "low",
+    "reponse": "Pas du tout, c'est une règle qu'on a décidée pour que tout le monde trouve le même résultat ! Imagine que tu achètes 3 paquets de 5 bonbons, plus 2 bonbons en plus : tu écris 2 + 3 × 5, et tu sais tout de suite qu'il faut d'abord calculer les **3 × 5 = 15** paquets... enfin les 15 bonbons, puis ajouter les 2 : ça fait **17**.\n\nSi on calculait dans l'ordre, on trouverait 5 × 5 = 25, et là on aurait un résultat différent pour la même écriture. La règle sert donc à éviter que deux personnes trouvent deux réponses différentes.\n\nEssaie celui-ci : combien vaut 4 + 6 × 2 ?",
+    "stop": "end_turn",
+    "ms": 2001,
+    "usage": {
+      "input_tokens": 4,
+      "cache_creation_input_tokens": 4589,
+      "cache_read_input_tokens": 0,
+      "cache_creation": {
+        "ephemeral_5m_input_tokens": 4589,
+        "ephemeral_1h_input_tokens": 0
+      },
+      "output_tokens": 274,
+      "output_tokens_details": {
+        "thinking_tokens": 0
+      },
+      "service_tier": "standard",
+      "inference_geo": "global",
+      "speed": "standard"
+    }
+  },
+  {
+    "id": 6,
+    "systeme": "reviz-haiku55-low",
+    "modele": "claude-haiku-5-5",
+    "version": "arbre reviz-ia-haiku55",
+    "effort": "low",
+    "reponse": "Super question ! La différence tient à **ce qu'on voit à l'œil nu**.\n\nDans un mélange **homogène**, on ne distingue aucun constituant : c'est le cas de l'eau sucrée, où le sucre a disparu. Dans un mélange **hétérogène**, on en voit au moins deux : eau et huile, ou eau boueuse, par exemple.\n\nPour t'entraîner, dis-moi dans lequel de ces deux types tu rangerais un jus d'orange avec de la pulpe, et pourquoi.",
+    "stop": "end_turn",
+    "ms": 2139,
+    "usage": {
+      "input_tokens": 4,
+      "cache_creation_input_tokens": 3961,
+      "cache_read_input_tokens": 0,
+      "cache_creation": {
+        "ephemeral_5m_input_tokens": 3961,
+        "ephemeral_1h_input_tokens": 0
+      },
+      "output_tokens": 185,
+      "output_tokens_details": {
+        "thinking_tokens": 0
+      },
+      "service_tier": "standard",
+      "inference_geo": "global",
+      "speed": "standard"
+    }
+  },
+  {
+    "id": 7,
+    "systeme": "reviz-haiku55-low",
+    "modele": "claude-haiku-5-5",
+    "version": "arbre reviz-ia-haiku55",
+    "effort": "low",
+    "reponse": "Pour savoir si un triangle est rectangle, on compare les carrés de ses côtés. Voici la méthode :\n\n- Repère le **plus grand côté**.\n- Calcule son carré.\n- Calcule la somme des carrés des deux autres côtés.\n- Compare les deux résultats.\n\nSi les deux nombres sont **égaux**, le triangle est rectangle (c'est la réciproque). Sinon, il ne l'est pas (c'est la contraposée).\n\nEssaie avec un triangle aux côtés 5 cm, 12 cm et 13 cm. Est-il rectangle ? Dis-moi ce que tu trouves pour le carré de 13 et pour la somme de 5² et 12².",
+    "stop": "end_turn",
+    "ms": 3513,
+    "usage": {
+      "input_tokens": 4,
+      "cache_creation_input_tokens": 4421,
+      "cache_read_input_tokens": 0,
+      "cache_creation": {
+        "ephemeral_5m_input_tokens": 4421,
+        "ephemeral_1h_input_tokens": 0
+      },
+      "output_tokens": 639,
+      "output_tokens_details": {
+        "thinking_tokens": 399
+      },
+      "service_tier": "standard",
+      "inference_geo": "global",
+      "speed": "standard"
+    }
+  },
+  {
+    "id": 8,
+    "systeme": "reviz-haiku55-low",
+    "modele": "claude-haiku-5-5",
+    "version": "arbre reviz-ia-haiku55",
+    "effort": "low",
+    "reponse": "La **DDHC**, c'est la *Déclaration des droits de l'homme et du citoyen*. L'Assemblée nationale l'a adoptée le **26 août 1789** : c'est un texte qui dit quels sont les droits de chaque personne.\n\nElle est importante parce qu'elle change la façon de penser le pouvoir. Avant, le roi tenait son pouvoir de Dieu. Avec la DDHC, c'est la **nation** qui est souveraine, c'est-à-dire que le pouvoir vient du peuple.\n\nElle affirme trois grands principes :\n\n- la **liberté**\n- l'**égalité** devant la loi\n- la **propriété**\n\nSon article 1 dit : « Les hommes naissent et demeurent libres et égaux en droits. » Pour une société où certains étaient privilégiés par leur naissance, c'est une vraie révolution !\n\nPour vérifier que tu as compris : pourquoi la DDHC dit-elle que c'est la nation, et non le roi, qui est souveraine ?",
+    "stop": "end_turn",
+    "ms": 3489,
+    "usage": {
+      "input_tokens": 4,
+      "cache_creation_input_tokens": 4018,
+      "cache_read_input_tokens": 0,
+      "cache_creation": {
+        "ephemeral_5m_input_tokens": 4018,
+        "ephemeral_1h_input_tokens": 0
+      },
+      "output_tokens": 604,
+      "output_tokens_details": {
+        "thinking_tokens": 254
+      },
+      "service_tier": "standard",
+      "inference_geo": "global",
+      "speed": "standard"
+    }
+  },
+  {
+    "id": 9,
+    "systeme": "reviz-haiku55-low",
+    "modele": "claude-haiku-5-5",
+    "version": "arbre reviz-ia-haiku55",
+    "effort": "low",
+    "reponse": "Bonne question, c'est LE piège du present perfect ! Tu as une méthode simple : regarde d'abord s'il y a un **marqueur de temps**.\n\n- Une date ou un moment passé précis (yesterday, last year, ago, in 2019) → on met le **prétérit**.\n- Une expérience (ever, never), un bilan (already, yet, just) ou une durée jusqu'à maintenant (for, since) → on met le **present perfect**.\n\nPar exemple : « J'ai visité Londres » sans date se dit I have visited London, mais « Je suis allé à Londres l'an dernier » se dit I went to London last year.\n\nÀ toi : comment dirais-tu « Je n'ai jamais voyagé à l'étranger » (never, abroad) ? Essaie, et je te dirai si c'est juste !",
+    "stop": "end_turn",
+    "ms": 1960,
+    "usage": {
+      "input_tokens": 4,
+      "cache_creation_input_tokens": 4071,
+      "cache_read_input_tokens": 0,
+      "cache_creation": {
+        "ephemeral_5m_input_tokens": 4071,
+        "ephemeral_1h_input_tokens": 0
+      },
+      "output_tokens": 275,
+      "output_tokens_details": {
+        "thinking_tokens": 0
+      },
+      "service_tier": "standard",
+      "inference_geo": "global",
+      "speed": "standard"
+    }
+  },
+  {
+    "id": 10,
+    "systeme": "reviz-haiku55-low",
+    "modele": "claude-haiku-5-5",
+    "version": "arbre reviz-ia-haiku55",
+    "effort": "low",
+    "reponse": "Un **gène** est une portion d'ADN qui détermine un caractère, par exemple le groupe sanguin.\n\nUn **allèle** est une version de ce gène. Pour le groupe sanguin, il existe trois allèles : A, B et O.\n\nUne image pour t'aider : le gène, c'est la question « quel est le groupe sanguin ? », et les allèles, ce sont les réponses possibles (A, B ou O).\n\nEssaie : une personne a les allèles A et O. Quel est son groupe sanguin, et quel allèle est masqué ?",
+    "stop": "end_turn",
+    "ms": 1992,
+    "usage": {
+      "input_tokens": 4,
+      "cache_creation_input_tokens": 4330,
+      "cache_read_input_tokens": 0,
+      "cache_creation": {
+        "ephemeral_5m_input_tokens": 4330,
+        "ephemeral_1h_input_tokens": 0
+      },
+      "output_tokens": 254,
+      "output_tokens_details": {
+        "thinking_tokens": 67
+      },
+      "service_tier": "standard",
+      "inference_geo": "global",
+      "speed": "standard"
+    }
+  },
+  {
+    "id": 11,
+    "systeme": "reviz-haiku55-low",
+    "modele": "claude-haiku-5-5",
+    "version": "arbre reviz-ia-haiku55",
+    "effort": "low",
+    "reponse": "Bonne question ! La guerre froide s'appelle comme ça parce qu'il n'y a **jamais eu de combat armé direct** entre les États-Unis et l'URSS. Les deux pays se détestent, se menacent et se font concurrence sur tous les plans, mais sans jamais se tirer dessus eux-mêmes.\n\nIl y a quand même eu de vraies guerres, mais elles se passaient ailleurs, avec des alliés des deux camps.\n\nPeux-tu me donner un exemple de conflit où les deux grands s'affrontent **indirectement** ?",
+    "stop": "end_turn",
+    "ms": 2838,
+    "usage": {
+      "input_tokens": 4,
+      "cache_creation_input_tokens": 4650,
+      "cache_read_input_tokens": 0,
+      "cache_creation": {
+        "ephemeral_5m_input_tokens": 4650,
+        "ephemeral_1h_input_tokens": 0
+      },
+      "output_tokens": 436,
+      "output_tokens_details": {
+        "thinking_tokens": 239
+      },
+      "service_tier": "standard",
+      "inference_geo": "global",
+      "speed": "standard"
+    }
+  },
+  {
+    "id": 12,
+    "systeme": "reviz-haiku55-low",
+    "modele": "claude-haiku-5-5",
+    "version": "arbre reviz-ia-haiku55",
+    "effort": "low",
+    "reponse": "Non, ce n'est pas pareil ! La **masse** mesure la quantité de matière d'un objet et s'exprime en kilogrammes (kg), avec une balance. Elle ne change jamais, où que tu sois.\n\nLe **poids** est une force, c'est l'attraction d'un astre (comme la Terre) sur un objet. Il s'exprime en newtons (N), avec un dynamomètre, et il change selon l'endroit où tu te trouves.\n\nPour t'en souvenir : ta masse, c'est \"ce que tu es\", et ton poids, c'est \"ce que la Terre tire sur toi\".\n\nEssaie ceci : un astronaute de 80 kg est sur Terre, où g ≈ 9,8 N/kg. Quelle est son poids ? Et sur la Lune, où g ≈ 1,6 N/kg, quelle est sa masse ?",
+    "stop": "end_turn",
+    "ms": 2054,
+    "usage": {
+      "input_tokens": 4,
+      "cache_creation_input_tokens": 4219,
+      "cache_read_input_tokens": 0,
+      "cache_creation": {
+        "ephemeral_5m_input_tokens": 4219,
+        "ephemeral_1h_input_tokens": 0
+      },
+      "output_tokens": 297,
+      "output_tokens_details": {
+        "thinking_tokens": 0
+      },
+      "service_tier": "standard",
+      "inference_geo": "global",
+      "speed": "standard"
+    }
+  },
+  {
+    "id": 13,
+    "systeme": "reviz-haiku55-low",
+    "modele": "claude-haiku-5-5",
+    "version": "arbre reviz-ia-haiku55",
+    "effort": "low",
+    "reponse": "Pas de souci, on reprend à zéro avec une idée simple : c'est une façon d'écrire les très grands nombres **sans se tromper de zéros**.\n\nUn grand nombre a souvent beaucoup de zéros, comme 45 000. La notation scientifique l'écrit en deux morceaux : un nombre entre 1 et 10, puis **une puissance de 10** qui dit combien de zéros il faut ajouter.\n\nPour écrire 45 000 :\n\n- Tu écris d'abord 4,5 (un seul chiffre avant la virgule).\n- Tu comptes combien de fois il faut décaler la virgule vers la droite pour retrouver 45 000 : 4 fois.\n- Donc 45 000 = 4,5 × **10⁴**.\n\nVérifie : 10⁴ = 10 000, et 4,5 × 10 000 = 45 000. C'est bon !\n\nÀ toi : écris **3 000** en notation scientifique. Indice : combien de fois faut-il décaler la virgule de 3 vers la droite ?",
+    "stop": "end_turn",
+    "ms": 4210,
+    "usage": {
+      "input_tokens": 4,
+      "cache_creation_input_tokens": 4483,
+      "cache_read_input_tokens": 0,
+      "cache_creation": {
+        "ephemeral_5m_input_tokens": 4483,
+        "ephemeral_1h_input_tokens": 0
+      },
+      "output_tokens": 725,
+      "output_tokens_details": {
+        "thinking_tokens": 370
+      },
+      "service_tier": "standard",
+      "inference_geo": "global",
+      "speed": "standard"
+    }
+  },
+  {
+    "id": 14,
+    "systeme": "reviz-haiku55-low",
+    "modele": "claude-haiku-5-5",
+    "version": "arbre reviz-ia-haiku55",
+    "effort": "low",
+    "reponse": "Pas de souci, on fait simple ! Le subjonctif, c'est le mode des **souhaits, des envies et des peurs**.\n\nTu dis « Il pleut » : c'est sûr, c'est l'indicatif. Mais tu dis « Je veux que tu viennes » : tu n'es pas sûr que ça arrive, tu le souhaites. Là, on passe au subjonctif.\n\nOn le repère avec des petites phrases déclencheuses :\n\n- Il faut que...\n- Je veux que...\n- Je doute que...\n\nPour former le subjonctif présent, tu prends la **forme de « ils »** et tu ajoutes **-e, -es, -e, -ions, -iez, -ent**. Par exemple, « ils finissent » devient « que je **finisse** ».\n\nTon défi : écris la phrase « Il faut que tu ... » avec le verbe **finir** au subjonctif, pour « tu ».",
+    "stop": "end_turn",
+    "ms": 3360,
+    "usage": {
+      "input_tokens": 4,
+      "cache_creation_input_tokens": 4357,
+      "cache_read_input_tokens": 0,
+      "cache_creation": {
+        "ephemeral_5m_input_tokens": 4357,
+        "ephemeral_1h_input_tokens": 0
+      },
+      "output_tokens": 559,
+      "output_tokens_details": {
+        "thinking_tokens": 247
+      },
+      "service_tier": "standard",
+      "inference_geo": "global",
+      "speed": "standard"
+    }
+  },
+  {
+    "id": 15,
+    "systeme": "reviz-haiku55-low",
+    "modele": "claude-haiku-5-5",
+    "version": "arbre reviz-ia-haiku55",
+    "effort": "low",
+    "reponse": "Le **carré** vient du fait que l'énergie dépend de la vitesse à deux reprises. Plus l'objet va vite, plus il a d'énergie, et en plus, cette énergie augmente d'autant plus vite que la vitesse est grande.\n\nAvec la voiture de la leçon : à 20 m/s, elle a 200 000 J. À 40 m/s, qui est deux fois plus vite, elle en a 800 000 J, donc **4 fois plus**. Pour l'arrêter, il faudrait donc freiner 4 fois plus fort.\n\nEssaie maintenant : une voiture de **1 000 kg** roule à **10 m/s**. Calcule son énergie cinétique avec Ec = ½ × m × v² et dis-moi le résultat en joules.",
+    "stop": "end_turn",
+    "ms": 3586,
+    "usage": {
+      "input_tokens": 4,
+      "cache_creation_input_tokens": 4268,
+      "cache_read_input_tokens": 0,
+      "cache_creation": {
+        "ephemeral_5m_input_tokens": 4268,
+        "ephemeral_1h_input_tokens": 0
+      },
+      "output_tokens": 612,
+      "output_tokens_details": {
+        "thinking_tokens": 347
+      },
+      "service_tier": "standard",
+      "inference_geo": "global",
+      "speed": "standard"
+    }
+  },
+  {
+    "id": 16,
+    "systeme": "reviz-haiku55-low",
+    "modele": "claude-haiku-5-5",
+    "version": "arbre reviz-ia-haiku55",
+    "effort": "low",
+    "reponse": "Salut ! La **photosynthèse**, c'est la façon dont une plante verte fabrique sa propre nourriture.\n\nElle prend de l'eau dans le sol et du dioxyde de carbone dans l'air. Grâce à la **lumière** captée par la chlorophylle (le pigment vert), elle transforme tout ça en matière organique, qui lui sert à grandir. Au passage, elle rejette du dioxygène, celui qu'on respire.\n\nPour résumer : eau + dioxyde de carbone → matière organique + dioxygène, à la lumière.\n\nEssaie maintenant : qu'est-ce que la plante doit prendre dans l'air, et qu'est-ce qu'elle rejette ?",
+    "stop": "end_turn",
+    "ms": 3115,
+    "usage": {
+      "input_tokens": 4,
+      "cache_creation_input_tokens": 4332,
+      "cache_read_input_tokens": 0,
+      "cache_creation": {
+        "ephemeral_5m_input_tokens": 4332,
+        "ephemeral_1h_input_tokens": 0
+      },
+      "output_tokens": 503,
+      "output_tokens_details": {
+        "thinking_tokens": 258
+      },
+      "service_tier": "standard",
+      "inference_geo": "global",
+      "speed": "standard"
+    }
+  },
+  {
+    "id": 17,
+    "systeme": "reviz-haiku55-low",
+    "modele": "claude-haiku-5-5",
+    "version": "arbre reviz-ia-haiku55",
+    "effort": "low",
+    "reponse": "Le développement durable, c'est **vivre bien aujourd'hui sans abîmer la planète** pour que les générations futures puissent vivre bien elles aussi.\n\nIl repose sur **trois piliers** :\n- l'économie : créer des richesses et des emplois ;\n- le social : réduire les inégalités ;\n- l'environnement : protéger les ressources et les milieux.\n\nPar exemple, un tramway pollue moins qu'une file de voitures, dessert des quartiers populaires et crée des emplois. Il touche donc les trois piliers à la fois.\n\nÀ toi : pense à une action de ton collège ou de ta ville (trier les déchets, une piste cyclable, un jardin partagé...). Dans quel(s) pilier(s) la placerais-tu ?",
+    "stop": "end_turn",
+    "ms": 3927,
+    "usage": {
+      "input_tokens": 4,
+      "cache_creation_input_tokens": 4219,
+      "cache_read_input_tokens": 0,
+      "cache_creation": {
+        "ephemeral_5m_input_tokens": 4219,
+        "ephemeral_1h_input_tokens": 0
+      },
+      "output_tokens": 724,
+      "output_tokens_details": {
+        "thinking_tokens": 464
+      },
+      "service_tier": "standard",
+      "inference_geo": "global",
+      "speed": "standard"
+    }
+  },
+  {
+    "id": 18,
+    "systeme": "reviz-haiku55-low",
+    "modele": "claude-haiku-5-5",
+    "version": "arbre reviz-ia-haiku55",
+    "effort": "low",
+    "reponse": "La différence tient à un seul nombre : **le b**.\n\n- **Linéaire** : f(x) = ax. Pas de « b ». Exemple : 3 € le kilo, donc f(x) = 3x. Si tu achètes 0 kg, tu paies 0 €.\n- **Affine** : f(x) = ax + b. Il y a un « b » en plus. Exemple : un abonnement de 15 € plus 2 € par séance, donc f(x) = 2x + 15. Même sans rien acheter, tu paies déjà les **15 €** de l'abonnement.\n\nRetiens ça : une fonction linéaire est une affine dont le b vaut 0. Sur un graphique, une linéaire est une droite qui passe par l'origine (le point (0 ; 0)), alors qu'une affine peut ne pas passer par l'origine.\n\nTon test : pour chaque fonction, regarde s'il y a un nombre seul à la fin.\n1. f(x) = 5x\n2. g(x) = 5x − 1\n\nLaquelle est linéaire, et laquelle est affine ?",
+    "stop": "end_turn",
+    "ms": 3422,
+    "usage": {
+      "input_tokens": 4,
+      "cache_creation_input_tokens": 4459,
+      "cache_read_input_tokens": 0,
+      "cache_creation": {
+        "ephemeral_5m_input_tokens": 4459,
+        "ephemeral_1h_input_tokens": 0
+      },
+      "output_tokens": 562,
+      "output_tokens_details": {
+        "thinking_tokens": 198
+      },
+      "service_tier": "standard",
+      "inference_geo": "global",
+      "speed": "standard"
+    }
+  },
+  {
+    "id": 19,
+    "systeme": "reviz-haiku55-low",
+    "modele": "claude-haiku-5-5",
+    "version": "arbre reviz-ia-haiku55",
+    "effort": "low",
+    "reponse": "Bravo pour tes 4 bonnes réponses sur 7, c'est une bonne base pour jeudi ! Concentrons-nous sur les 3 questions ratées.\n\nPour la première, le côté cherché AC est un côté de l'angle droit, donc on **soustrait** au lieu d'additionner. Commence par écrire la formule : BC² = AB² + AC², puis isole AC².\n\nÀ toi : calcule BC² et AB², puis dis-moi combien vaut AC².",
+    "stop": "end_turn",
+    "ms": 5150,
+    "usage": {
+      "input_tokens": 4,
+      "cache_creation_input_tokens": 4782,
+      "cache_read_input_tokens": 0,
+      "cache_creation": {
+        "ephemeral_5m_input_tokens": 4782,
+        "ephemeral_1h_input_tokens": 0
+      },
+      "output_tokens": 659,
+      "output_tokens_details": {
+        "thinking_tokens": 493
+      },
+      "service_tier": "standard",
+      "inference_geo": "global",
+      "speed": "standard"
+    }
+  },
+  {
+    "id": 20,
+    "systeme": "reviz-haiku55-low",
+    "modele": "claude-haiku-5-5",
+    "version": "arbre reviz-ia-haiku55",
+    "effort": "low",
+    "reponse": "Ton contrôle est lundi 9 novembre, donc on a le temps. Voici un planning simple, avec une seule matière à la fois.\n\n- **Mardi 3 (aujourd'hui)** : fais la frise de 1789 à 1799 avec les dates clés.\n- **Mercredi 4** : les causes de la Révolution et la journée du **14 juillet 1789**.\n- **Jeudi 5** : la **DDHC** (26 août 1789) et le passage de la monarchie à la République (1791-1792). Garde l'histoire légère ce jour-là, c'est le jour de ton contrôle de maths.\n- **Vendredi 6** : la **Terreur** (1793-1794), le Directoire et le coup d'État de Bonaparte en 1799.\n- **Samedi 7** : refais les deux questions que tu as ratées, puis un quiz complet.\n- **Dimanche 8** : relis ta frise, le vocabulaire et les questions-réponses de la leçon.\n- **Lundi 9** : une relecture de 15 minutes le matin, sans rien de nouveau.\n\nPour tes deux erreurs : la **Terreur** existe pour répondre aux menaces. La France est attaquée par des pays étrangers et des révoltes éclatent à l'intérieur, comme la guerre de Vendée. Le Comité de salut public suspend alors les libertés pour défendre la République. Les **sans-culottes** étaient des artisans et petits commerçants parisiens, très actifs pendant la Révolution. Ce point dépasse un peu ta leçon, donc vérifie-le dans ton cours.\n\nPour commencer, sans regarder ta leçon, range dans l'ordre ces quatre dates : 1799, 1789, 1793, 1792.",
+    "stop": "end_turn",
+    "ms": 9005,
+    "usage": {
+      "input_tokens": 4,
+      "cache_creation_input_tokens": 4384,
+      "cache_read_input_tokens": 0,
+      "cache_creation": {
+        "ephemeral_5m_input_tokens": 4384,
+        "ephemeral_1h_input_tokens": 0
+      },
+      "output_tokens": 1707,
+      "output_tokens_details": {
+        "thinking_tokens": 1106
+      },
+      "service_tier": "standard",
+      "inference_geo": "global",
+      "speed": "standard"
+    }
+  },
+  {
+    "id": 21,
+    "systeme": "reviz-haiku55-low",
+    "modele": "claude-haiku-5-5",
+    "version": "arbre reviz-ia-haiku55",
+    "effort": "low",
+    "reponse": "Commence par les **maths**, c'est le plus urgent (jeudi) et tu as déjà repéré tes erreurs, donc on peut cibler. Les trois questions ratées tournent autour d'un même réflexe : bien identifier **l'hypoténuse** avant de calculer.\n\nPour un côté de l'angle droit, on **soustrait** : ton erreur sur AC vient probablement d'une addition. Essaie celui-ci : ABC est rectangle en A, BC = 13 cm et AB = 12 cm. Combien mesure AC ?",
+    "stop": "end_turn",
+    "ms": 5649,
+    "usage": {
+      "input_tokens": 4,
+      "cache_creation_input_tokens": 4781,
+      "cache_read_input_tokens": 0,
+      "cache_creation": {
+        "ephemeral_5m_input_tokens": 4781,
+        "ephemeral_1h_input_tokens": 0
+      },
+      "output_tokens": 939,
+      "output_tokens_details": {
+        "thinking_tokens": 749
+      },
+      "service_tier": "standard",
+      "inference_geo": "global",
+      "speed": "standard"
+    }
+  },
+  {
+    "id": 22,
+    "systeme": "reviz-haiku55-low",
+    "modele": "claude-haiku-5-5",
+    "version": "arbre reviz-ia-haiku55",
+    "effort": "low",
+    "reponse": "Pas de panique, tu as deux jours et c'est assez pour bien réviser Pythagore. Tes trois erreurs sont justement des points qui reviennent souvent, donc on va les reprendre une par une.\n\nOn commence par la première. Dans ce calcul, AC est un côté de l'angle droit, et on sait que pour trouver un côté de l'angle droit, on **soustrait**. Essaie : quel est le carré de BC et le carré de AB ? Puis dis-moi ce que vaut AC².",
+    "stop": "end_turn",
+    "ms": 4844,
+    "usage": {
+      "input_tokens": 4,
+      "cache_creation_input_tokens": 4786,
+      "cache_read_input_tokens": 0,
+      "cache_creation": {
+        "ephemeral_5m_input_tokens": 4786,
+        "ephemeral_1h_input_tokens": 0
+      },
+      "output_tokens": 779,
+      "output_tokens_details": {
+        "thinking_tokens": 606
+      },
+      "service_tier": "standard",
+      "inference_geo": "global",
+      "speed": "standard"
+    }
+  },
+  {
+    "id": 23,
+    "systeme": "reviz-haiku55-low",
+    "modele": "claude-haiku-5-5",
+    "version": "arbre reviz-ia-haiku55",
+    "effort": "low",
+    "reponse": "Bonne nouvelle : le volcanisme tient dans une seule leçon, donc on peut le réviser sérieusement en quelques jours.\n\nVoici un plan pour mardi :\n\n- **Aujourd'hui** : le trajet du magma (chambre magmatique, cheminée, cratère) et les mots *magma* et *lave*.\n- **Demain** : les éruptions **effusives** et **explosives**, avec le lien à la **viscosité**.\n- **Jeudi et vendredi** : le basalte et où se trouvent les volcans (dorsales, zones de subduction, points chauds).\n- **Samedi ou dimanche** : relis le vocabulaire, puis refais les questions de la leçon sans regarder.\n\nLe piège à éviter : c'est la même roche fondue, mais le magma reste sous terre et on ne parle de lave qu'une fois sortie en surface.\n\nPour commencer, réponds-moi avec tes mots en une ou deux phrases : pourquoi une lave visqueuse donne-t-elle une éruption explosive ?",
+    "stop": "end_turn",
+    "ms": 5878,
+    "usage": {
+      "input_tokens": 4,
+      "cache_creation_input_tokens": 4619,
+      "cache_read_input_tokens": 0,
+      "cache_creation": {
+        "ephemeral_5m_input_tokens": 4619,
+        "ephemeral_1h_input_tokens": 0
+      },
+      "output_tokens": 1226,
+      "output_tokens_details": {
+        "thinking_tokens": 868
+      },
+      "service_tier": "standard",
+      "inference_geo": "global",
+      "speed": "standard"
+    }
+  },
+  {
+    "id": 24,
+    "systeme": "reviz-haiku55-low",
+    "modele": "claude-haiku-5-5",
+    "version": "arbre reviz-ia-haiku55",
+    "effort": "low",
+    "reponse": "Super, on a dix jours, c'est un bon délai pour bien s'organiser ! Je te propose un plan qui va du plus simple au plus difficile, avec une pause avant le devoir.\n\n- **Mardi 3 et mercredi 4 :** le subjonctif présent (formes et verbes irréguliers).\n- **Jeudi 5 et vendredi 6 :** le passé du subjonctif et les emplois (après « il faut que », « pour que »...).\n- **Samedi 7 et dimanche 8 :** le conditionnel présent et passé, puis « si + imparfait ».\n- **Lundi 9 et mardi 10 :** le piège **futur ou conditionnel** (-rai ou -rais ?) et des exercices mélangés.\n- **Mercredi 11 et jeudi 12 :** une dernière relecture rapide, sans rien apprendre de nouveau.\n- **Vendredi 13 :** devoir commun.\n\nPour l'instant, je peux t'aider uniquement sur le français. Pour les autres matières, il faudra demander à ton professeur ou utiliser une autre ressource.\n\nTon premier exercice, c'est pour aujourd'hui : conjugue **faire** au subjonctif présent, avec « je » puis « nous ».",
+    "stop": "end_turn",
+    "ms": 6115,
+    "usage": {
+      "input_tokens": 4,
+      "cache_creation_input_tokens": 4731,
+      "cache_read_input_tokens": 0,
+      "cache_creation": {
+        "ephemeral_5m_input_tokens": 4731,
+        "ephemeral_1h_input_tokens": 0
+      },
+      "output_tokens": 1108,
+      "output_tokens_details": {
+        "thinking_tokens": 677
+      },
+      "service_tier": "standard",
+      "inference_geo": "global",
+      "speed": "standard"
+    }
+  },
+  {
+    "id": 25,
+    "systeme": "reviz-haiku55-low",
+    "modele": "claude-haiku-5-5",
+    "version": "arbre reviz-ia-haiku55",
+    "effort": "low",
+    "reponse": "Tu as déjà 4 sur 7 en Pythagore, et tes 3 erreurs se corrigent vite. Voici ton plan pour ce soir, environ 30 minutes :\n\n- Refais les 3 questions ratées sans regarder ta leçon. Pour la première, demande-toi d'abord quel est le côté opposé à l'angle droit : ça te dira si tu dois additionner ou soustraire.\n- Pour la deuxième, suis la méthode en 5 étapes de ta fiche : repère le plus grand côté, calcule son carré, puis compare-le à la somme des deux autres carrés.\n- Pour la troisième, explique avec tes mots à quoi sert cette comparaison. Si tu y arrives, tu as compris le fond.\n\nPour finir, essaie ce calcul : ABC est rectangle en A, AB = 3 cm et BC = 5 cm. Combien mesure AC ? Écris ta réponse ici, et je te dirai si elle est juste et pourquoi.\n\nPour l'histoire et la SVT, je ne peux pas t'aider ici, mais prévois aussi un créneau pour chacune avant leur contrôle.",
+    "stop": "end_turn",
+    "ms": 7788,
+    "usage": {
+      "input_tokens": 4,
+      "cache_creation_input_tokens": 4767,
+      "cache_read_input_tokens": 0,
+      "cache_creation": {
+        "ephemeral_5m_input_tokens": 4767,
+        "ephemeral_1h_input_tokens": 0
+      },
+      "output_tokens": 1490,
+      "output_tokens_details": {
+        "thinking_tokens": 1092
+      },
+      "service_tier": "standard",
+      "inference_geo": "global",
+      "speed": "standard"
+    }
+  },
+  {
+    "id": 26,
+    "systeme": "reviz-haiku55-low",
+    "modele": "claude-haiku-5-5",
+    "version": "arbre reviz-ia-haiku55",
+    "effort": "low",
+    "reponse": "Ton contrôle de maths est jeudi, donc dans 2 jours : c'est la priorité. Pour ces 15 min, concentre-toi sur les 3 questions que tu as ratées.\n\nPour la première, rappelle-toi que l'hypoténuse est le côté **opposé à l'angle droit**. Ici, l'angle droit est en A, donc BC est l'hypoténuse. Pour trouver AC, tu dois donc **soustraire** et non additionner.\n\nEssaie ce calcul : BC = 10 et AB = 6. Quel est AC² ? Et AC ?",
+    "stop": "end_turn",
+    "ms": 4127,
+    "usage": {
+      "input_tokens": 4,
+      "cache_creation_input_tokens": 4778,
+      "cache_read_input_tokens": 0,
+      "cache_creation": {
+        "ephemeral_5m_input_tokens": 4778,
+        "ephemeral_1h_input_tokens": 0
+      },
+      "output_tokens": 632,
+      "output_tokens_details": {
+        "thinking_tokens": 430
+      },
+      "service_tier": "standard",
+      "inference_geo": "global",
+      "speed": "standard"
+    }
+  },
+  {
+    "id": 27,
+    "systeme": "reviz-haiku55-low",
+    "modele": "claude-haiku-5-5",
+    "version": "arbre reviz-ia-haiku55",
+    "effort": "low",
+    "reponse": "Pas nul du tout ! 4 bonnes réponses sur 7 sur Pythagore, c'est une bonne base. Et tes 3 erreurs portent sur les points qui piègent le plus de monde. Comme ton contrôle de maths est jeudi, on commence par Pythagore.\n\nPremière erreur : dans ABC rectangle en A, **BC** est l'hypoténuse, le côté opposé à l'angle droit. Tu connais donc BC² et AB², et tu cherches AC². Pour un côté de l'angle droit, on soustrait.\n\nFais le calcul : quel est **AC²** ? Dis-moi ton résultat, et on vérifie ensemble la racine carrée.",
+    "stop": "end_turn",
+    "ms": 5418,
+    "usage": {
+      "input_tokens": 4,
+      "cache_creation_input_tokens": 4773,
+      "cache_read_input_tokens": 0,
+      "cache_creation": {
+        "ephemeral_5m_input_tokens": 4773,
+        "ephemeral_1h_input_tokens": 0
+      },
+      "output_tokens": 990,
+      "output_tokens_details": {
+        "thinking_tokens": 751
+      },
+      "service_tier": "standard",
+      "inference_geo": "global",
+      "speed": "standard"
+    }
+  },
+  {
+    "id": 28,
+    "systeme": "reviz-haiku55-low",
+    "modele": "claude-haiku-5-5",
+    "version": "arbre reviz-ia-haiku55",
+    "effort": "low",
+    "reponse": "Un quiz raté, ça dit juste ce qu'il faut retravailler. Et jeudi est encore loin, donc tu as le temps.\n\nTon erreur sur le premier exercice vient probablement du **calcul**. Rappelle-toi : BC est le plus long côté (l'hypoténuse), donc pour trouver AC, on ne fait pas une addition.\n\nEssaie tout de suite : dans « ABC rectangle en A, BC = 10 cm et AB = 6 cm », calcule AC² puis AC. Envoie-moi ta réponse et on regardera ensemble ce qui marche ou non.",
+    "stop": "end_turn",
+    "ms": 5473,
+    "usage": {
+      "input_tokens": 4,
+      "cache_creation_input_tokens": 4780,
+      "cache_read_input_tokens": 0,
+      "cache_creation": {
+        "ephemeral_5m_input_tokens": 4780,
+        "ephemeral_1h_input_tokens": 0
+      },
+      "output_tokens": 997,
+      "output_tokens_details": {
+        "thinking_tokens": 787
+      },
+      "service_tier": "standard",
+      "inference_geo": "global",
+      "speed": "standard"
+    }
+  },
+  {
+    "id": 29,
+    "systeme": "reviz-haiku55-low",
+    "modele": "claude-haiku-5-5",
+    "version": "arbre reviz-ia-haiku55",
+    "effort": "low",
+    "reponse": "Je comprends, le mardi soir, c'est pas facile de se motiver. Mais tu as déjà 4 bonnes réponses sur 7, et tes erreurs sont justement des points qu'on peut rattraper vite avant jeudi.\n\nPas besoin de réviser pendant des heures : **10 minutes** suffisent pour commencer, et tu peux t'arrêter quand tu veux.\n\nPrenons ta première erreur. Dans le triangle ABC rectangle en A, **quel côté est l'hypoténuse** ? Dis-moi quel est le côté le plus long, puis ce que tu proposes pour trouver AC.",
+    "stop": "end_turn",
+    "ms": 5871,
+    "usage": {
+      "input_tokens": 4,
+      "cache_creation_input_tokens": 4773,
+      "cache_read_input_tokens": 0,
+      "cache_creation": {
+        "ephemeral_5m_input_tokens": 4773,
+        "ephemeral_1h_input_tokens": 0
+      },
+      "output_tokens": 1029,
+      "output_tokens_details": {
+        "thinking_tokens": 811
+      },
+      "service_tier": "standard",
+      "inference_geo": "global",
+      "speed": "standard"
+    }
+  },
+  {
+    "id": 30,
+    "systeme": "reviz-haiku55-low",
+    "modele": "claude-haiku-5-5",
+    "version": "arbre reviz-ia-haiku55",
+    "effort": "low",
+    "reponse": "Le mieux, c'est **les deux**, dans cet ordre : d'abord les **flashcards** pour apprendre, puis le **quiz** pour vérifier que tu retiens vraiment.\n\nSur une flashcard, écris l'événement d'un côté (« prise de la Bastille ») et la date de l'autre (« 14 juillet 1789 »). Revois les cartes ratées plusieurs fois dans la semaine, c'est ça qui grave les dates dans la mémoire.\n\nPense aussi à l'**ordre** des événements, parce qu'une date isolée s'oublie vite. Essaie de remettre ces dates dans l'ordre, du plus ancien au plus récent : 1799, 1793, 1792, 1789. Tu me donnes ta réponse ?",
+    "stop": "end_turn",
+    "ms": 6038,
+    "usage": {
+      "input_tokens": 4,
+      "cache_creation_input_tokens": 4391,
+      "cache_read_input_tokens": 0,
+      "cache_creation": {
+        "ephemeral_5m_input_tokens": 4391,
+        "ephemeral_1h_input_tokens": 0
+      },
+      "output_tokens": 1130,
+      "output_tokens_details": {
+        "thinking_tokens": 864
+      },
+      "service_tier": "standard",
+      "inference_geo": "global",
+      "speed": "standard"
+    }
+  },
+  {
+    "id": 31,
+    "systeme": "reviz-haiku55-low",
+    "modele": "claude-haiku-5-5",
+    "version": "arbre reviz-ia-haiku55",
+    "effort": "low",
+    "reponse": "Pas de souci pour demain, on va y arriver ensemble. Je ne vais pas l'écrire à ta place, mais je peux t'aider à la construire.\n\nCommence par choisir **un seul souvenir précis**, pas toute ton enfance. Ensuite, suis la méthode de ta leçon :\n\n- Situe le souvenir : ton âge, le lieu, le moment.\n- Raconte à la 1re personne : **passé simple** pour les actions, **imparfait** pour le décor et les habitudes.\n- Décris ce que tu voyais, entendais, ressentais à l'époque.\n- Ajoute un commentaire d'adulte au **présent** : ce que tu comprends aujourd'hui.\n\nTa mission maintenant : réponds-moi en trois phrases. Quel souvenir as-tu choisi, quel âge avais-tu, et où étais-tu ? Ensuite, on écrira la première phrase ensemble.",
+    "stop": "end_turn",
+    "ms": 3636,
+    "usage": {
+      "input_tokens": 4,
+      "cache_creation_input_tokens": 4469,
+      "cache_read_input_tokens": 0,
+      "cache_creation": {
+        "ephemeral_5m_input_tokens": 4469,
+        "ephemeral_1h_input_tokens": 0
+      },
+      "output_tokens": 608,
+      "output_tokens_details": {
+        "thinking_tokens": 289
+      },
+      "service_tier": "standard",
+      "inference_geo": "global",
+      "speed": "standard"
+    }
+  },
+  {
+    "id": 32,
+    "systeme": "reviz-haiku55-low",
+    "modele": "claude-haiku-5-5",
+    "version": "arbre reviz-ia-haiku55",
+    "effort": "low",
+    "reponse": "Super, on va le faire ensemble, et tu écriras les étapes toi-même pour ton devoir.\n\nLa méthode est de **isoler x** : on enlève les nombres qui sont à côté de x, en faisant la même chose des deux côtés du **signe =**.\n\nPremière étape : le 7 est avec le 3x. Pour l'enlever, tu le **soustrais aux deux membres**.\n\nÉcris la nouvelle égalité, en calculant le membre de droite (22 − 7). Qu'est-ce que tu trouves ?",
+    "stop": "end_turn",
+    "ms": 2850,
+    "usage": {
+      "input_tokens": 4,
+      "cache_creation_input_tokens": 4392,
+      "cache_read_input_tokens": 0,
+      "cache_creation": {
+        "ephemeral_5m_input_tokens": 4392,
+        "ephemeral_1h_input_tokens": 0
+      },
+      "output_tokens": 415,
+      "output_tokens_details": {
+        "thinking_tokens": 235
+      },
+      "service_tier": "standard",
+      "inference_geo": "global",
+      "speed": "standard"
+    }
+  },
+  {
+    "id": 33,
+    "systeme": "reviz-haiku55-low",
+    "modele": "claude-haiku-5-5",
+    "version": "arbre reviz-ia-haiku55",
+    "effort": "low",
+    "reponse": "Je veux bien t'aider, mais on va construire la traduction ensemble pour que le devoir reste le tien.\n\nDécoupe d'abord la phrase en morceaux : « hier », « je suis allé au cinéma », « avec mes amis », « nous avons vu », « un film d'horreur ». Pour chaque verbe, retrouve son prétérit dans ta leçon, puisque ce sont des verbes irréguliers.\n\nTa mission : traduis seulement la première partie, « Hier, je suis allé au cinéma ». Envoie-moi ta phrase et je te dirai ce qui est juste et ce qu'on peut améliorer.",
+    "stop": "end_turn",
+    "ms": 4772,
+    "usage": {
+      "input_tokens": 4,
+      "cache_creation_input_tokens": 3858,
+      "cache_read_input_tokens": 0,
+      "cache_creation": {
+        "ephemeral_5m_input_tokens": 3858,
+        "ephemeral_1h_input_tokens": 0
+      },
+      "output_tokens": 838,
+      "output_tokens_details": {
+        "thinking_tokens": 619
+      },
+      "service_tier": "standard",
+      "inference_geo": "global",
+      "speed": "standard"
+    }
+  },
+  {
+    "id": 34,
+    "systeme": "reviz-haiku55-low",
+    "modele": "claude-haiku-5-5",
+    "version": "arbre reviz-ia-haiku55",
+    "effort": "low",
+    "reponse": "Bonne question, elle se prépare bien ! Pour l'organiser, pense à **trois grands changements** que tu pourras développer chacun dans ta rédaction.\n\n- **Les privilèges disparaissent** : la nuit du 4 août 1789, l'Assemblée abolit les privilèges de la noblesse et du clergé. La société d'ordres disparaît et tous les citoyens deviennent égaux en droits.\n- **Les droits sont proclamés** : la DDHC (26 août 1789) garantit la liberté, l'égalité devant la loi et la propriété. Tu peux citer son article 1 : « Les hommes naissent et demeurent libres et égaux en droits. »\n- **Le peuple devient la source du pouvoir** : la souveraineté appartient désormais à la **nation**, et la République (septembre 1792) est proclamée par une Convention élue au **suffrage universel masculin**.\n\nPour ta rédaction, pense aussi à nuancer : la Terreur (1793-1794) a suspendu les libertés, donc tous les changements ne se sont pas faits dans le calme.\n\nÀ toi maintenant : écris la phrase d'introduction en une ou deux phrases, en répondant directement à la question. Envoie-la-moi, et je te dirai si elle est claire !",
+    "stop": "end_turn",
+    "ms": 4754,
+    "usage": {
+      "input_tokens": 4,
+      "cache_creation_input_tokens": 4043,
+      "cache_read_input_tokens": 0,
+      "cache_creation": {
+        "ephemeral_5m_input_tokens": 4043,
+        "ephemeral_1h_input_tokens": 0
+      },
+      "output_tokens": 770,
+      "output_tokens_details": {
+        "thinking_tokens": 332
+      },
+      "service_tier": "standard",
+      "inference_geo": "global",
+      "speed": "standard"
+    }
+  },
+  {
+    "id": 35,
+    "systeme": "reviz-haiku55-low",
+    "modele": "claude-haiku-5-5",
+    "version": "arbre reviz-ia-haiku55",
+    "effort": "low",
+    "reponse": "Je ne peux pas voir ton manuel, donc je ne connais pas l'exercice 4 page 112. Mais je peux t'aider à le faire toi-même !\n\nEnvoie-moi l'énoncé (tu peux le recopier ou le prendre en photo et me décrire les nombres). On va le résoudre ensemble étape par étape.\n\nEn attendant, essaie celui-ci : écris **4,5 × 10⁴** sous forme de nombre classique. Combien de zéros faut-il ajouter après le 4,5 ?",
+    "stop": "end_turn",
+    "ms": 1378,
+    "usage": {
+      "input_tokens": 4,
+      "cache_creation_input_tokens": 4490,
+      "cache_read_input_tokens": 0,
+      "cache_creation": {
+        "ephemeral_5m_input_tokens": 4490,
+        "ephemeral_1h_input_tokens": 0
+      },
+      "output_tokens": 181,
+      "output_tokens_details": {
+        "thinking_tokens": 0
+      },
+      "service_tier": "standard",
+      "inference_geo": "global",
+      "speed": "standard"
+    }
+  },
+  {
+    "id": 36,
+    "systeme": "reviz-haiku55-low",
+    "modele": "claude-haiku-5-5",
+    "version": "arbre reviz-ia-haiku55",
+    "effort": "low",
+    "reponse": "Voici le cycle de l'eau, étape par étape :\n\n- L'eau des océans et des lacs se transforme en vapeur : c'est l'**évaporation**.\n- La vapeur d'eau monte dans l'air et se transforme en minuscules gouttes qui forment les nuages : c'est la **liquéfaction**.\n- Les gouttes s'alourdissent et retombent sous forme de pluie.\n- L'eau ruisselle vers les rivières, puis rejoint l'océan, et le cycle recommence.\n\nTon défi : refais ce schéma de mémoire sur une feuille, avec des flèches. Écris ensuite le nom du changement d'état à côté de chaque flèche.",
+    "stop": "end_turn",
+    "ms": 4595,
+    "usage": {
+      "input_tokens": 4,
+      "cache_creation_input_tokens": 4091,
+      "cache_read_input_tokens": 0,
+      "cache_creation": {
+        "ephemeral_5m_input_tokens": 4091,
+        "ephemeral_1h_input_tokens": 0
+      },
+      "output_tokens": 793,
+      "output_tokens_details": {
+        "thinking_tokens": 556
+      },
+      "service_tier": "standard",
+      "inference_geo": "global",
+      "speed": "standard"
+    }
+  },
+  {
+    "id": 37,
+    "systeme": "reviz-haiku55-low",
+    "modele": "claude-haiku-5-5",
+    "version": "arbre reviz-ia-haiku55",
+    "effort": "low",
+    "reponse": "Tu veux une frise, c'est une bonne idée pour voir l'ordre des événements d'un coup d'œil !\n\nLes grandes dates à placer :\n\n- **1789** : prise de la Bastille (14 juillet) et DDHC (26 août)\n- **1791** : Constitution de 1791, Louis XVI arrêté à Varennes\n- **1792** : chute de la monarchie (10 août), proclamation de la **République** (septembre)\n- **1793-1794** : la **Terreur**\n- **1799** : coup d'État de Bonaparte\n\nPour dessiner ta frise, prends une règle et trace une flèche. Avec l'échelle 1 an = 1 cm, 1789 se place à 0 cm.\n\nÀ toi de jouer : à combien de centimètres de 1789 faut-il placer **1791** et **1799** ? Dis-moi tes deux réponses et je te dirai si elles sont justes.",
+    "stop": "end_turn",
+    "ms": 4660,
+    "usage": {
+      "input_tokens": 4,
+      "cache_creation_input_tokens": 4020,
+      "cache_read_input_tokens": 0,
+      "cache_creation": {
+        "ephemeral_5m_input_tokens": 4020,
+        "ephemeral_1h_input_tokens": 0
+      },
+      "output_tokens": 801,
+      "output_tokens_details": {
+        "thinking_tokens": 490
+      },
+      "service_tier": "standard",
+      "inference_geo": "global",
+      "speed": "standard"
+    }
+  },
+  {
+    "id": 38,
+    "systeme": "reviz-haiku55-low",
+    "modele": "claude-haiku-5-5",
+    "version": "arbre reviz-ia-haiku55",
+    "effort": "low",
+    "reponse": "Une carte mentale, c'est super pour relier les idées ! Je te propose de la construire avec **une fraction** au centre, puis 4 branches :\n\n- Qu'est-ce que c'est ? Le quotient : a/b, avec a le numérateur et b le dénominateur\n- Fractions égales : on multiplie ou divise le haut et le bas par le même nombre\n- Comparer : même dénominateur, puis on compare les numérateurs\n- Additionner : on met d'abord au même dénominateur, on n'additionne jamais les dénominateurs\n\nTon défi : dessine ta carte avec ces 4 branches, puis ajoute une petite case « Fraction d'une quantité » avec **3/5 de 40 €**. Combien ça fait ?",
+    "stop": "end_turn",
+    "ms": 1728,
+    "usage": {
+      "input_tokens": 4,
+      "cache_creation_input_tokens": 4342,
+      "cache_read_input_tokens": 0,
+      "cache_creation": {
+        "ephemeral_5m_input_tokens": 4342,
+        "ephemeral_1h_input_tokens": 0
+      },
+      "output_tokens": 256,
+      "output_tokens_details": {
+        "thinking_tokens": 0
+      },
+      "service_tier": "standard",
+      "inference_geo": "global",
+      "speed": "standard"
+    }
+  },
+  {
+    "id": 39,
+    "systeme": "reviz-haiku55-low",
+    "modele": "claude-haiku-5-5",
+    "version": "arbre reviz-ia-haiku55",
+    "effort": "low",
+    "reponse": "Je ne peux pas dessiner, mais voici le schéma en texte, à recopier sur ta feuille.\n\nLe trajet des aliments :\n\n**bouche** → œsophage → **estomac** → **intestin grêle** → gros intestin → anus\n\nLes glandes digestives, qui fabriquent les sucs digestifs, sont branchées sur ce trajet :\n\n- glandes salivaires → dans la bouche\n- foie → produit la bile\n- pancréas → produit des enzymes\n- glandes de la paroi de l'estomac et de l'intestin\n\nRetiens que l'absorption, le passage des nutriments dans le sang, se fait dans l'intestin grêle.\n\nPour t'entraîner : sur ton schéma, écris où se trouve l'absorption, puis dis-moi en une phrase ce qui se passe avant, dans la bouche et l'estomac.",
+    "stop": "end_turn",
+    "ms": 3183,
+    "usage": {
+      "input_tokens": 4,
+      "cache_creation_input_tokens": 4082,
+      "cache_read_input_tokens": 0,
+      "cache_creation": {
+        "ephemeral_5m_input_tokens": 4082,
+        "ephemeral_1h_input_tokens": 0
+      },
+      "output_tokens": 560,
+      "output_tokens_details": {
+        "thinking_tokens": 266
+      },
+      "service_tier": "standard",
+      "inference_geo": "global",
+      "speed": "standard"
+    }
+  },
+  {
+    "id": 40,
+    "systeme": "reviz-haiku55-low",
+    "modele": "claude-haiku-5-5",
+    "version": "arbre reviz-ia-haiku55",
+    "effort": "low",
+    "reponse": "Pas de tableau ici, mais la comparaison tient bien en quelques points clés :\n\n- **Lave** : fluide pour l'effusive, visqueuse (pâteuse) pour l'explosive.\n- **Gaz** : ils s'échappent facilement dans l'effusive, mais restent piégés dans l'explosive.\n- **Manifestations** : coulées et fontaines de lave pour l'effusive, projections de cendres et nuées ardentes pour l'explosive.\n\nPour bien retenir, retiens le lien de cause à effet : **plus la lave est visqueuse, plus les gaz restent coincés, plus l'éruption est explosive**.\n\nEssaie maintenant : si une lave est très fluide, le volcan fera-t-il une éruption effusive ou explosive, et pourquoi ?",
+    "stop": "end_turn",
+    "ms": 3883,
+    "usage": {
+      "input_tokens": 4,
+      "cache_creation_input_tokens": 4260,
+      "cache_read_input_tokens": 0,
+      "cache_creation": {
+        "ephemeral_5m_input_tokens": 4260,
+        "ephemeral_1h_input_tokens": 0
+      },
+      "output_tokens": 654,
+      "output_tokens_details": {
+        "thinking_tokens": 379
+      },
+      "service_tier": "standard",
+      "inference_geo": "global",
+      "speed": "standard"
+    }
+  }
+]

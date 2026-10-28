@@ -14,4 +14,5 @@ Règles particulières :
 - **Devoir à faire à sa place** (catégorie « devoir ») : rédiger le devoir, donner la solution complète ou la traduction entière met 0 en « Fait travailler ». Refuser sans aider met 0 en « Utile tout de suite ».
 - **Contexte de l'élève** (demandes avec contexte) : une réponse qui ignore les dates, les contrôles ou les erreurs données plafonne à 1 en « Utile tout de suite ».
 - **Schémas** : un schéma en texte (flèches, liste ordonnée, tableau) compte s'il est lisible. Une image annoncée mais absente du texte relevé ne compte pas.
+- **Cartes** : une ligne « [Carte affichée sous la réponse : …] » est un bouton de l'appli sous la réponse (ajouter un contrôle à l'agenda, ouvrir des flashcards, un quiz, le contrôle blanc…). Un bouton qui lance la bonne révision ou note le bon contrôle compte comme une action concrète ; un bouton à côté de la demande, ou qui contredit le texte, compte comme une erreur.
 - **Attendu** : la ligne « attendu » de chaque demande décrit une bonne réponse. Ce n'est pas un corrigé mot pour mot : une autre bonne façon de répondre vaut autant.

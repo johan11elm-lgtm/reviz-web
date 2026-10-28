@@ -1,0 +1,842 @@
+[
+  {
+    "id": 1,
+    "systeme": "reviz-actuelle",
+    "modele": "claude-haiku-4-5-20251001",
+    "version": "1000462",
+    "reponse": "Bonne question ! 🎯 C'est ce qui piège plein de gens.\n\nImagine que tu partages une **pizza en 4 parts égales**. Si tu en prends 3, tu dis que tu as pris \"trois quarts\" = 3/4.\n\nMais voilà le truc : si tu dis à quelqu'un \"j'ai divisé 3 par 4\", ça donne exactement la même réponse ! 3 ÷ 4 = 0,75.\n\nDonc une fraction c'est les **deux à la fois** : c'est une part (le partage) ET c'est le résultat d'une division.\n\nAutre exemple concret : si tu dois partager 3 euros entre 4 copains de façon égale, chacun reçoit 3/4 d'euro (ou 0,75 euros). La fraction dit exactement combien chacun prend.\n\nEst-ce que ça aide si je te montre comment calculer 3/4 en division pour voir que ça marche vraiment ?",
+    "stop": "end_turn",
+    "usage": {
+      "input_tokens": 2999,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 0,
+      "cache_creation": {
+        "ephemeral_5m_input_tokens": 0,
+        "ephemeral_1h_input_tokens": 0
+      },
+      "output_tokens": 266,
+      "service_tier": "standard",
+      "inference_geo": "not_available",
+      "speed": "standard"
+    }
+  },
+  {
+    "id": 2,
+    "systeme": "reviz-actuelle",
+    "modele": "claude-haiku-4-5-20251001",
+    "version": "1000462",
+    "reponse": "Salut ! C'est facile une fois qu'on a le truc 👌\n\n**Le COD**, tu le trouves en posant la question \"**verbe + quoi ?**\" après le verbe. Et pas de préposition devant.\n\nExemple : « Je mange une pomme. » → Je mange quoi ? Une pomme. C'est un **COD**, et tu peux le remplacer par \"la\" : « Je la mange. »\n\n**Le COI**, c'est presque pareil SAUF qu'il y a une préposition comme **à ou de** devant. Tu poses \"verbe + à qui ? de qui ?\" etc.\n\nExemple : « Je pense à mon ami. » → Je pense à quoi ? À mon ami. Y a un \"à\" devant, donc c'est un **COI**. Tu le remplaces par \"y\" : « J'y pense. »\n\nLa différence clé : COD = pas de préposition, COI = avec une préposition.\n\nTu veux qu'on essaie sur une phrase toi ?",
+    "stop": "end_turn",
+    "usage": {
+      "input_tokens": 2669,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 0,
+      "cache_creation": {
+        "ephemeral_5m_input_tokens": 0,
+        "ephemeral_1h_input_tokens": 0
+      },
+      "output_tokens": 261,
+      "service_tier": "standard",
+      "inference_geo": "not_available",
+      "speed": "standard"
+    }
+  },
+  {
+    "id": 3,
+    "systeme": "reviz-actuelle",
+    "modele": "claude-haiku-4-5-20251001",
+    "version": "1000462",
+    "reponse": "Bonne question ! C'est vrai que c'est bizarre dit comme ça. 🤔\n\nEn réalité, Athènes a **inventé l'idée que le peuple peut décider**, mais leur version était incomplète : seuls les **citoyens** votaient (hommes libres, adultes), pas les femmes, ni les esclaves, ni les étrangers.\n\nDonc oui, c'est injuste — mais c'était révolutionnaire pour l'époque : au lieu d'un roi qui décidait tout seul, les citoyens décidaient ensemble. C'était nouveau !\n\nNotre démocratie à nous (en France), c'est la version améliorée : tout le monde a le droit de voter, pas juste les hommes.\n\nEst-ce que ça t'aide à comprendre pourquoi on parle quand même de \"démocratie\" ?",
+    "stop": "end_turn",
+    "usage": {
+      "input_tokens": 3014,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 0,
+      "cache_creation": {
+        "ephemeral_5m_input_tokens": 0,
+        "ephemeral_1h_input_tokens": 0
+      },
+      "output_tokens": 219,
+      "service_tier": "standard",
+      "inference_geo": "not_available",
+      "speed": "standard"
+    }
+  },
+  {
+    "id": 4,
+    "systeme": "reviz-actuelle",
+    "modele": "claude-haiku-4-5-20251001",
+    "version": "1000462",
+    "reponse": "Salut ! L'**intestin grêle** a une mission super importante : c'est là que les **nutriments passent dans le sang** 🩸\n\nTu vois, après que la digestion ait découpé tes aliments en tout petits morceaux (les nutriments), il faut qu'ils rentrent dans ton corps. C'est l'intestin grêle qui fait ça, grâce à sa paroi très fine et bien irriguée.\n\nEt pour que ce soit efficace, l'intestin grêle a un super truc : ses **replis et villosités**. C'est comme s'il était tout plissé pour avoir une très grande surface d'échange — un peu comme si tu dépliaient une feuille froissée pour augmenter sa taille.\n\nÇa te paraît clair ? 😊",
+    "stop": "end_turn",
+    "usage": {
+      "input_tokens": 2636,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 0,
+      "cache_creation": {
+        "ephemeral_5m_input_tokens": 0,
+        "ephemeral_1h_input_tokens": 0
+      },
+      "output_tokens": 206,
+      "service_tier": "standard",
+      "inference_geo": "not_available",
+      "speed": "standard"
+    }
+  },
+  {
+    "id": 5,
+    "systeme": "reviz-actuelle",
+    "modele": "claude-haiku-4-5-20251001",
+    "version": "1000462",
+    "reponse": "Bonne question ! C'est pas inventé au hasard, y a une vraie logique dedans.\n\nImagine que tu as 7 + 3 × 5. Si tu faisais les calculs n'importe comment, tu pourrais trouver 50 (en faisant d'abord 7 + 3 = 10, puis 10 × 5). Mais quelqu'un d'autre pourrait trouver 22 (en faisant d'abord 3 × 5 = 15, puis 7 + 15). Vous auriez deux réponses différentes !\n\n**Donc les maths ont décidé une règle commune** pour que tout le monde tombe d'accord sur la même réponse. C'est comme les règles d'un jeu : sans elles, ça devient le chaos.\n\nEt ça marche bien parce que × et ÷ sont des opérations \"plus fortes\" — elles regroupent plus les nombres ensemble. L'addition, elle, c'est plus \"facile\", donc elle attend son tour. 🧮\n\nT'as d'autres questions sur comment ça marche ?",
+    "stop": "end_turn",
+    "usage": {
+      "input_tokens": 3233,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 0,
+      "cache_creation": {
+        "ephemeral_5m_input_tokens": 0,
+        "ephemeral_1h_input_tokens": 0
+      },
+      "output_tokens": 284,
+      "service_tier": "standard",
+      "inference_geo": "not_available",
+      "speed": "standard"
+    }
+  },
+  {
+    "id": 6,
+    "systeme": "reviz-actuelle",
+    "modele": "claude-haiku-4-5-20251001",
+    "version": "1000462",
+    "reponse": "Hey ! Bonne question 💧\n\nLa différence, c'est **ce qu'on voit** à l'œil nu :\n\n**Mélange homogène** : on ne voit qu'une seule couleur, une seule phase. Les constituants sont **invisibles**.\nExemple : de l'eau sucrée — tu vois juste du liquide transparent, tu ne vois pas le sucre.\n\n**Mélange hétérogène** : on **distingue au moins deux constituants** différents. On voit clairement qu'il y a plusieurs choses.\nExemple : eau + sable — tu vois le sable au fond, c'est évident qu'il y a deux choses.\n\nAutre exemple simple : l'eau boueuse, c'est hétérogène (tu vois la boue), mais l'eau salée bien mélangée, c'est homogène (tu ne vois que du liquide).\n\nÇa t'aide ? 😊",
+    "stop": "end_turn",
+    "usage": {
+      "input_tokens": 2590,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 0,
+      "cache_creation": {
+        "ephemeral_5m_input_tokens": 0,
+        "ephemeral_1h_input_tokens": 0
+      },
+      "output_tokens": 242,
+      "service_tier": "standard",
+      "inference_geo": "not_available",
+      "speed": "standard"
+    }
+  },
+  {
+    "id": 7,
+    "systeme": "reviz-actuelle",
+    "modele": "claude-haiku-4-5-20251001",
+    "version": "1000462",
+    "reponse": "Bonne question ! En fait, il y a **deux façons** d'utiliser Pythagore avec un triangle rectangle.\n\n**Si tu sais DÉJÀ que c'est rectangle** (c'est écrit dans l'énoncé), tu utilises le théorème pour **calculer une longueur manquante**. C'est la formule : BC² = AB² + AC².\n\n**Si tu ne sais PAS que c'est rectangle**, tu utilises la **réciproque** pour le **prouver**. Voici comment :\n\n- Repère le **plus grand côté** du triangle.\n- Calcule le carré de ce côté.\n- Calcule la somme des carrés des deux autres côtés.\n- Compare : si c'est égal, le triangle est rectangle ! 🎯\n\n**Exemple concret :** Côtés 6, 8, 10.\n- Plus grand : 10\n- 10² = 100\n- 6² + 8² = 36 + 64 = 100\n- C'est égal → le triangle est rectangle !\n\nT'as compris la différence entre les deux ?",
+    "stop": "end_turn",
+    "usage": {
+      "input_tokens": 2985,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 0,
+      "cache_creation": {
+        "ephemeral_5m_input_tokens": 0,
+        "ephemeral_1h_input_tokens": 0
+      },
+      "output_tokens": 282,
+      "service_tier": "standard",
+      "inference_geo": "not_available",
+      "speed": "standard"
+    }
+  },
+  {
+    "id": 8,
+    "systeme": "reviz-actuelle",
+    "modele": "claude-haiku-4-5-20251001",
+    "version": "1000462",
+    "reponse": "Salut ! 👋 Bonne question !\n\nLa **DDHC** c'est la Déclaration des droits de l'homme et du citoyen, adoptée le **26 août 1789**. Imagine un document qui dit : \"Voilà, à partir de maintenant, c'est les règles pour tout le monde.\"\n\nAvant, la monarchie absolue, c'était le roi qui décidait de tout, sans limite. Là, la DDHC proclame que **la souveraineté appartient à la nation** (le peuple), pas au roi. Elle garantit que chacun est **libre et égal en droits** — c'est révolutionnaire à l'époque !\n\nPourquoi c'est important ? Parce que c'est le fondement de nos sociétés modernes. Même aujourd'hui, nos droits (liberté, égalité, propriété) viennent de cette idée lancée en 1789.\n\nT'as compris la différence entre la DDHC (qui proclame les principes) et la Constitution de 1791 (qui organise comment le gouvernement fonctionne) ?",
+    "stop": "end_turn",
+    "usage": {
+      "input_tokens": 2604,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 0,
+      "cache_creation": {
+        "ephemeral_5m_input_tokens": 0,
+        "ephemeral_1h_input_tokens": 0
+      },
+      "output_tokens": 282,
+      "service_tier": "standard",
+      "inference_geo": "not_available",
+      "speed": "standard"
+    }
+  },
+  {
+    "id": 9,
+    "systeme": "reviz-actuelle",
+    "modele": "claude-haiku-4-5-20251001",
+    "version": "1000462",
+    "reponse": "Salut ! Bonne question, c'est LA clé pour bien utiliser le **present perfect** 🎯\n\n**Present perfect** = tu parles d'une expérience, d'un bilan ou d'une action qui continue jusqu'à maintenant. Le lien avec le présent compte.\n\n**Prétérit** = tu racontes un truc du passé terminé, avec une date ou un moment précis.\n\nVoici comment choisir :\n\n- **Pas de date** → present perfect : \"I have visited London\" (j'y suis allé, mais tu sais pas quand exactement)\n- **Avec une date** → prétérit : \"I went to London last year\" (l'année dernière, c'est précis, c'est du passé fini)\n\nMême pour des actions similaires :\n- \"Have you ever been to Spain?\" (jamais tu l'as sais, au cours de ta vie)\n- \"Did you go to Spain last summer?\" (l'été dernier : date précise)\n\nEn gros : **cherche la date d'abord**. Si y'a une date ou un \"hier/il y a...\" → prétérit. Sinon → present perfect.\n\nÇa te paraît plus clair comme ça ? 😊",
+    "stop": "end_turn",
+    "usage": {
+      "input_tokens": 2671,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 0,
+      "cache_creation": {
+        "ephemeral_5m_input_tokens": 0,
+        "ephemeral_1h_input_tokens": 0
+      },
+      "output_tokens": 313,
+      "service_tier": "standard",
+      "inference_geo": "not_available",
+      "speed": "standard"
+    }
+  },
+  {
+    "id": 10,
+    "systeme": "reviz-actuelle",
+    "modele": "claude-haiku-4-5-20251001",
+    "version": "1000462",
+    "reponse": "Salut ! C'est une bonne question, c'est vrai que ça peut sembler confus. 🧬\n\n**Le gène**, c'est comme un **mode d'emploi** : il détermine UN caractère (par exemple, la couleur des yeux). C'est une portion d'ADN à un endroit précis du chromosome.\n\n**L'allèle**, c'est une **version** de ce mode d'emploi. Pour le même caractère, il peut y avoir plusieurs versions possibles. Exemple concret : le gène du groupe sanguin a trois allèles différents : A, B et O. Toi, tu en as deux (un du père, un de la mère).\n\n**En résumé** : tu as UN gène pour le groupe sanguin, mais deux allèles (genre A et O). Les allèles sont les variantes du même gène.\n\nÇa te paraît plus clair ?",
+    "stop": "end_turn",
+    "usage": {
+      "input_tokens": 2854,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 0,
+      "cache_creation": {
+        "ephemeral_5m_input_tokens": 0,
+        "ephemeral_1h_input_tokens": 0
+      },
+      "output_tokens": 225,
+      "service_tier": "standard",
+      "inference_geo": "not_available",
+      "speed": "standard"
+    }
+  },
+  {
+    "id": 11,
+    "systeme": "reviz-actuelle",
+    "modele": "claude-haiku-4-5-20251001",
+    "version": "1000462",
+    "reponse": "Bonne question ! 🎯\n\nC'est un **surnom un peu trompeur**, je te l'accorde. En réalité, il y a bien eu des affrontements (en Corée, au Vietnam...), mais pas entre les États-Unis et l'URSS directement.\n\nImagine deux boxeurs qui s'affrontent pas en face-à-face : ils paient chacun des combattants à leur place. Là, tu as la tension, l'hostilité, les coups... mais jamais les deux chefs qui se battent ensemble. C'est \"froid\" parce que c'est pas une **vraie guerre directe**, mais c'est quand même très dangereux (surtout avec les bombes atomiques).\n\nLe terme vient d'un journaliste américain en 1947. Un peu flou comme nom, mais ça s'est collé ! 😄\n\nÇa fait sens pour toi ?",
+    "stop": "end_turn",
+    "usage": {
+      "input_tokens": 3051,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 0,
+      "cache_creation": {
+        "ephemeral_5m_input_tokens": 0,
+        "ephemeral_1h_input_tokens": 0
+      },
+      "output_tokens": 229,
+      "service_tier": "standard",
+      "inference_geo": "not_available",
+      "speed": "standard"
+    }
+  },
+  {
+    "id": 12,
+    "systeme": "reviz-actuelle",
+    "modele": "claude-haiku-4-5-20251001",
+    "version": "1000462",
+    "reponse": "Non, c'est une grosse différence ! 🎯\n\n**Masse** = ce que tu es vraiment, c'est de la matière. Elle change jamais, peu importe où tu es. On la mesure en **kg** avec une balance.\n\n**Poids** = c'est une force (mesurée en **N**), celle que la Terre (ou un autre astre) exerce sur toi vers le bas. Ça change selon où tu es.\n\nExemple concret : toi, tu as une masse de, disons, 50 kg. Sur Terre, tu pèses 50 × 9,8 = **490 N**. Mais sur la Lune, tu pèses 50 × 1,6 = **80 N** — ta masse elle reste toujours 50 kg, mais tu pèses beaucoup moins car la Lune attire moins fort que la Terre.\n\nDonc quand tu dis « je pèse 50 kg », techniquement c'est faux en physique : 50 kg c'est ta **masse**, pas ton poids ! 😄\n\nÇa fait sens pour toi ?",
+    "stop": "end_turn",
+    "usage": {
+      "input_tokens": 2776,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 0,
+      "cache_creation": {
+        "ephemeral_5m_input_tokens": 0,
+        "ephemeral_1h_input_tokens": 0
+      },
+      "output_tokens": 282,
+      "service_tier": "standard",
+      "inference_geo": "not_available",
+      "speed": "standard"
+    }
+  },
+  {
+    "id": 13,
+    "systeme": "reviz-actuelle",
+    "modele": "claude-haiku-4-5-20251001",
+    "version": "1000462",
+    "reponse": "Ah okay, pas de souci ! C'est plus simple que tu le crois. 🙂\n\nImagine que tu dois écrire un nombre **très grand** ou **très petit** sans faire un pavé de zéros. La notation scientifique, c'est juste ça : une façon plus courte et propre.\n\nLa règle est simple :\n\nTu écris le nombre sous la forme : **a × 10ⁿ**\n\nOù **a** est un nombre entre 1 et 10 (avec un seul chiffre avant la virgule), et **10ⁿ** c'est la puissance de 10.\n\nExemple concret :\n\n- 45 000 → tu mets la virgule après le 4 → **4,5 × 10⁴**\n- 0,000 72 → tu mets la virgule après le 7 → **7,2 × 10⁻⁴**\n\nComment tu sais quel exposant mettre ? **Compte juste de combien de rangs la virgule s'est déplacée.**\n\nEst-ce que ça te paraît déjà un peu plus clair ? Veux-tu qu'on fasse un exemple ensemble ?",
+    "stop": "end_turn",
+    "usage": {
+      "input_tokens": 3210,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 0,
+      "cache_creation": {
+        "ephemeral_5m_input_tokens": 0,
+        "ephemeral_1h_input_tokens": 0
+      },
+      "output_tokens": 299,
+      "service_tier": "standard",
+      "inference_geo": "not_available",
+      "speed": "standard"
+    }
+  },
+  {
+    "id": 14,
+    "systeme": "reviz-actuelle",
+    "modele": "claude-haiku-4-5-20251001",
+    "version": "1000462",
+    "reponse": "D'accord ! 😊\n\nImagine que tu dis à ton copain : **\"Je veux que tu viennes à mon anniversaire.\"**\n\nLe verbe « viennes », c'est du subjonctif. Pourquoi ? Parce que tu dis pas une chose qui est sûre → tu dis ce que tu **souhaites**, ce que tu veux qu'il fasse.\n\n**La différence facile :**\n- « Tu viens à mon anniversaire » = c'est sûr, c'est du présent normal\n- « Je veux que tu viennes » = tu le souhaites, c'est du subjonctif\n\n**Autre exemple :**\n- « Elle est malade » = c'est sûr\n- « Je crains qu'elle soit malade » = tu as peur que ça soit vrai, c'est du subjonctif\n\n**Le truc à retenir :** subjonctif = **souhait, peur, doute**. Des choses pas certaines.\n\nÇa fait sens pour toi ? As-tu une phrase précise où tu bloques ?",
+    "stop": "end_turn",
+    "usage": {
+      "input_tokens": 2938,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 0,
+      "cache_creation": {
+        "ephemeral_5m_input_tokens": 0,
+        "ephemeral_1h_input_tokens": 0
+      },
+      "output_tokens": 266,
+      "service_tier": "standard",
+      "inference_geo": "not_available",
+      "speed": "standard"
+    }
+  },
+  {
+    "id": 15,
+    "systeme": "reviz-actuelle",
+    "modele": "claude-haiku-4-5-20251001",
+    "version": "1000462",
+    "reponse": "Salut! 👍 C'est une bonne question, la plupart des ados se posent la même.\n\nImagine que tu fais tomber une balle de 1 kg d'une hauteur de 2 m, puis d'une hauteur de 4 m (deux fois plus haut). Quand elle arrive au sol, elle aura **deux fois plus de vitesse** — mais elle aura beaucoup plus d'énergie de choc, non? Elle va faire beaucoup plus mal. C'est parce que la **vitesse compte au carré**.\n\nConcrètement : si tu passes de 10 à 20 m/s (vitesse doublée), ce n'est pas 2× plus d'énergie, c'est 2² = **4 fois plus d'énergie**. C'est dingue la différence que fait la vitesse!\n\nPourquoi au carré et pas juste v? C'est juste comme ça que fonctionne la physique — plus tu vas vite, plus tu as d'énergie à cause de ton mouvement *et* de ton inertie (le truc qui te maintient en mouvement). Les deux effets se multiplient.\n\nT'as compris l'idée, ou tu veux un autre exemple?",
+    "stop": "end_turn",
+    "usage": {
+      "input_tokens": 2907,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 0,
+      "cache_creation": {
+        "ephemeral_5m_input_tokens": 0,
+        "ephemeral_1h_input_tokens": 0
+      },
+      "output_tokens": 316,
+      "service_tier": "standard",
+      "inference_geo": "not_available",
+      "speed": "standard"
+    }
+  },
+  {
+    "id": 16,
+    "systeme": "reviz-actuelle",
+    "modele": "claude-haiku-4-5-20251001",
+    "version": "1000462",
+    "reponse": "Salut ! Pas de souci, je te l'explique en ultra simple. 🌱\n\nLa plante verte, c'est un peu comme une petite usine. À la lumière, elle prend :\n- De l'eau (par les racines)\n- Du CO₂ de l'air (par les feuilles)\n\nEt elle fabrique :\n- De la **matière organique** (du glucose, qui la nourrit)\n- De l'**oxygène** (qu'elle rejette)\n\nEn gros : lumière + eau + CO₂ = nourriture pour la plante + oxygène pour nous. Win-win ! \n\nC'est pour ça que quand tu vois des bulles qui montent d'une plante aquatique au soleil, c'est de l'oxygène qu'elle rejette.\n\nT'as compris le truc, ou tu veux que je te dise ça autrement ?",
+    "stop": "end_turn",
+    "usage": {
+      "input_tokens": 2892,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 0,
+      "cache_creation": {
+        "ephemeral_5m_input_tokens": 0,
+        "ephemeral_1h_input_tokens": 0
+      },
+      "output_tokens": 232,
+      "service_tier": "standard",
+      "inference_geo": "not_available",
+      "speed": "standard"
+    }
+  },
+  {
+    "id": 17,
+    "systeme": "reviz-actuelle",
+    "modele": "claude-haiku-4-5-20251001",
+    "version": "1000462",
+    "reponse": "Ah oui, je comprends ! À première vue ça sonne abstrait. Mais c'est en vrai super concret 👍\n\nImagine que tu dois **produire des richesses** (économie), **aider tout le monde** (social), ET **protéger la planète** (environnement) — tous les trois à la fois, sans sacrifier un pour l'autre.\n\nPrenons un exemple réel : le **tramway**. C'est durable parce que :\n- Il pollue moins qu'une file de voitures → **environnement**\n- Il dessert les quartiers pauvres, donc tout le monde peut le prendre → **social**\n- Il crée des emplois (conducteurs, mécaniciens, etc.) → **économie**\n\nVersus une voiture perso : ça pollue, ça coûte cher pour la famille, mais oui ça crée des emplois... donc c'est moins durable.\n\nLe truc clé : c'est pas juste \"être écolo\". C'est **équilibrer** les trois. Si tu fais une super forêt écologique mais que personne ne peut y travailler et que les pauvres n'en profitent pas, c'est pas vraiment durable.\n\nEst-ce que avec l'exemple du tramway ça devient plus clair pour toi ?",
+    "stop": "end_turn",
+    "usage": {
+      "input_tokens": 2753,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 0,
+      "cache_creation": {
+        "ephemeral_5m_input_tokens": 0,
+        "ephemeral_1h_input_tokens": 0
+      },
+      "output_tokens": 325,
+      "service_tier": "standard",
+      "inference_geo": "not_available",
+      "speed": "standard"
+    }
+  },
+  {
+    "id": 18,
+    "systeme": "reviz-actuelle",
+    "modele": "claude-haiku-4-5-20251001",
+    "version": "1000462",
+    "reponse": "Salut ! C'est facile une fois qu'on l'a vu 😊\n\n**Fonction linéaire** : f(x) = ax. C'est juste a multiplié par x, rien d'autre.\nExemple : f(x) = 3x\n\n**Fonction affine** : f(x) = ax + b. C'est ax PLUS une constante b.\nExemple : f(x) = 3x + 5\n\nLa différence clé : la fonction affine a un **petit truc en plus** (le b), qui décale tout.\n\nGraphiquement :\n- Une fonction **linéaire** passe toujours par le point (0 ; 0), l'origine.\n- Une fonction **affine** ne passe pas forcément par l'origine — elle peut être décalée vers le haut ou le bas.\n\nPense à un prix : si tu paies 3 € par kg, c'est linéaire (3x). Si tu paies 3 € par kg PLUS un frais de livraison de 5 €, c'est affine (3x + 5).\n\nÇa te paraît plus clair ?",
+    "stop": "end_turn",
+    "usage": {
+      "input_tokens": 3075,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 0,
+      "cache_creation": {
+        "ephemeral_5m_input_tokens": 0,
+        "ephemeral_1h_input_tokens": 0
+      },
+      "output_tokens": 286,
+      "service_tier": "standard",
+      "inference_geo": "not_available",
+      "speed": "standard"
+    }
+  },
+  {
+    "id": 19,
+    "systeme": "reviz-actuelle",
+    "modele": "claude-haiku-4-5-20251001",
+    "version": "1000462",
+    "reponse": "Yo, je vois que tu as du boulot ! 💪 Bon, tu as 4/7 au quiz hier, donc tu as déjà des bases — c'est un bon début. On va bosser sur tes trois erreurs pour que jeudi ça roule.\n\nOn y va dans l'ordre ? On commence par la première : **ABC rectangle en A, BC = 10 cm, AB = 6 cm, trouve AC.**\n\nDis-moi : tu sais que BC est l'hypoténuse (le plus long côté, opposé à l'angle droit) ?",
+    "stop": "end_turn",
+    "usage": {
+      "input_tokens": 3257,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 0,
+      "cache_creation": {
+        "ephemeral_5m_input_tokens": 0,
+        "ephemeral_1h_input_tokens": 0
+      },
+      "output_tokens": 144,
+      "service_tier": "standard",
+      "inference_geo": "not_available",
+      "speed": "standard"
+    }
+  },
+  {
+    "id": 20,
+    "systeme": "reviz-actuelle",
+    "modele": "claude-haiku-4-5-20251001",
+    "version": "1000462",
+    "reponse": "Salut ! 👋 Ok, tu as un contrôle d'histoire lundi, c'est dans 6 jours. Tu as déjà 5/7 au quiz, c'est une bonne base !\n\nVoici un planning simple pour toi :\n\n**Mercredi 4 novembre (ce soir ou demain)** — 20-30 min\n- Relis la leçon en entier, pose-toi les questions du quiz\n- Note les 2 questions que tu as ratées : qui sont les sans-culottes et pourquoi la Terreur\n\n**Vendredi 6 novembre** — 30-40 min\n- Fais une frise chronologique (1789-1799) avec les 5 grandes dates\n- Écris les 3 régimes en couleurs : monarchie absolue → monarchie constitutionnelle → République\n\n**Samedi 7 novembre** — 20 min\n- Quiz de révision sur les termes : tiers état, DDHC, République, suffrage universel\n- Relis juste la partie sur la Terreur et les sans-culottes\n\n**Dimanche 8 novembre** — 15 min\n- Dernière relecture des pièges à éviter (la Bastille ≠ fin de la monarchie, etc.)\n\nTu veux qu'on commence maintenant par tes 2 questions ratées ?",
+    "stop": "end_turn",
+    "usage": {
+      "input_tokens": 2875,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 0,
+      "cache_creation": {
+        "ephemeral_5m_input_tokens": 0,
+        "ephemeral_1h_input_tokens": 0
+      },
+      "output_tokens": 342,
+      "service_tier": "standard",
+      "inference_geo": "not_available",
+      "speed": "standard"
+    }
+  },
+  {
+    "id": 21,
+    "systeme": "reviz-actuelle",
+    "modele": "claude-haiku-4-5-20251001",
+    "version": "1000462",
+    "reponse": "Salut ! 🎯 Pas de panique, tu as le temps et tu l'as déjà bien compris : tu dois consolider Pythagore d'abord (c'est jeudi), puis histoire et SVT.\n\nPour **Pythagore** : tu as raté 3 questions qui montrent où tu bloques vraiment. On peut les reprendre rapidement aujourd'hui ou demain ? C'est ça qui va te faire gagner des points jeudi.\n\n**Ton plan jusqu'à jeudi :**\n- Aujourd'hui ou demain : on règle les trois pièges Pythagore\n- Mercredi : un petit quiz blanc pour tester\n- Jeudi matin : c'est bon, tu entres confiant\n\n**Après jeudi**, tu te lances sur histoire et SVT. Deux jours chacun, c'est honnête.\n\nPar où tu veux commencer ? Les trois questions ratées ? Ou tu préfères qu'on choisisse laquelle d'abord ?",
+    "stop": "end_turn",
+    "usage": {
+      "input_tokens": 3256,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 0,
+      "cache_creation": {
+        "ephemeral_5m_input_tokens": 0,
+        "ephemeral_1h_input_tokens": 0
+      },
+      "output_tokens": 249,
+      "service_tier": "standard",
+      "inference_geo": "not_available",
+      "speed": "standard"
+    }
+  },
+  {
+    "id": 22,
+    "systeme": "reviz-actuelle",
+    "modele": "claude-haiku-4-5-20251001",
+    "version": "1000462",
+    "reponse": "Yo, pas de panique ! 😊 Tu as du temps avant jeudi, et tu as déjà compris des choses (4/7, c'est pas mal). On va déblock les trois questions qui t'ont posé problème — c'est pile ce qu'il faut pour progresser.\n\nOn commence par celle-ci : **ABC est rectangle en A, BC = 10 cm et AB = 6 cm. Combien mesure AC ?**\n\nDis-moi : est-ce que tu sais qui est l'hypoténuse dans ce triangle ? (Indice : c'est le côté opposé à l'angle droit.)",
+    "stop": "end_turn",
+    "usage": {
+      "input_tokens": 3259,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 0,
+      "cache_creation": {
+        "ephemeral_5m_input_tokens": 0,
+        "ephemeral_1h_input_tokens": 0
+      },
+      "output_tokens": 158,
+      "service_tier": "standard",
+      "inference_geo": "not_available",
+      "speed": "standard"
+    }
+  },
+  {
+    "id": 23,
+    "systeme": "reviz-actuelle",
+    "modele": "claude-haiku-4-5-20251001",
+    "version": "1000462",
+    "reponse": "Salut ! 🌋 Pas de panique, tu as bien une semaine : c'est suffisant pour bien comprendre les volcans.\n\nVoici comment je te propose de t'organiser :\n\n**Aujourd'hui/demain (mercredi)** : commence par les concepts clés — magma, lave, chambre magmatique, cheminée, cratère. Lis la leçon, regarde les schémas de ton manuel. C'est la base.\n\n**Jeudi/vendredi** : focus sur les **2 types d'éruptions** (effusive vs explosive) et pourquoi ça change. C'est souvent LA question au contrôle.\n\n**Samedi/dimanche** : fais des exercices, des schémas à légender, des quiz en ligne si tu en trouves. Et retiens les exemples (Piton de la Fournaise, Vésuve, montagne Pelée).\n\n**Lundi/mardi matin** : relecture et dernier entraînement.\n\nTu as quoi comme ressources — manuel, fiches, vidéos YouTube ? Et dès maintenant, y a un truc sur les volcans qui te paraît bizarre ou compliqué ?",
+    "stop": "end_turn",
+    "usage": {
+      "input_tokens": 3089,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 0,
+      "cache_creation": {
+        "ephemeral_5m_input_tokens": 0,
+        "ephemeral_1h_input_tokens": 0
+      },
+      "output_tokens": 297,
+      "service_tier": "standard",
+      "inference_geo": "not_available",
+      "speed": "standard"
+    }
+  },
+  {
+    "id": 24,
+    "systeme": "reviz-actuelle",
+    "modele": "claude-haiku-4-5-20251001",
+    "version": "1000462",
+    "reponse": "Salut ! 👋 Super que tu organises ta révision dès maintenant ! En 10 jours, tu as largement le temps de maîtriser le subjonctif et le conditionnel.\n\nVoici un plan simple :\n\n**Semaine 1 (aujourd'hui à dimanche) :**\n- Lundi-mardi : comprendre la **formation** du subjonctif et du conditionnel (c'est la base)\n- Mercredi-jeudi : apprendre quand les **utiliser** (les emplois)\n- Vendredi-dimanche : exercices et révision des pièges\n\n**Semaine 2 :**\n- Lundi-mardi : contrôle blanc ou exercices plus difficiles\n- Mercredi-jeudi : dernière révision avant le devoir\n\n**Conseil :** garde du temps vendredi pour tes autres révisions (tu as beaucoup de trucs à préparer cette semaine !). Les subjonctif/conditionnel, tu peux les réviser 20 min par jour, c'est suffisant.\n\nTu veux commencer par quoi ? La **formation** du subjonctif, ou tu veux d'abord une vue d'ensemble ?",
+    "stop": "end_turn",
+    "usage": {
+      "input_tokens": 3217,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 0,
+      "cache_creation": {
+        "ephemeral_5m_input_tokens": 0,
+        "ephemeral_1h_input_tokens": 0
+      },
+      "output_tokens": 301,
+      "service_tier": "standard",
+      "inference_geo": "not_available",
+      "speed": "standard"
+    }
+  },
+  {
+    "id": 25,
+    "systeme": "reviz-actuelle",
+    "modele": "claude-haiku-4-5-20251001",
+    "version": "1000462",
+    "reponse": "Coucou ! 👋\n\nTu as 2 jours avant le contrôle de maths (jeudi), donc ce soir ce serait vraiment bien de **bosser Pythagore**. Tu l'as dit toi-même : 4/7, y a de la marge pour progresser.\n\nLes trois trucs que tu as ratés sont exactement ce qui va tomber jeudi. Je peux t'aider à les décortiquer un par un ce soir, si tu veux ?\n\nPour l'histoire et la SVT, t'es moins pressé (lundi et mardi prochains), donc pas besoin de panicker. Mais d'ici ce soir, tu pourrais déjà balancer 20-30 min sur Pythagore ?\n\n**Tu commences par lequel de tes trois erreurs ? Ou je t'aide à reprendre depuis le début ?**",
+    "stop": "end_turn",
+    "usage": {
+      "input_tokens": 3246,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 0,
+      "cache_creation": {
+        "ephemeral_5m_input_tokens": 0,
+        "ephemeral_1h_input_tokens": 0
+      },
+      "output_tokens": 216,
+      "service_tier": "standard",
+      "inference_geo": "not_available",
+      "speed": "standard"
+    }
+  },
+  {
+    "id": 26,
+    "systeme": "reviz-actuelle",
+    "modele": "claude-haiku-4-5-20251001",
+    "version": "1000462",
+    "reponse": "Salut ! 15 min, c'est bon pour **un objectif ciblé**. Tu as un contrôle maths jeudi : je te propose de bosser les **deux premiers pièges du quiz** (les calculs qui t'ont eu hier). C'est sur quoi tu vas galérer le plus au contrôle.\n\nOn fait comment ? Je peux :\n\n- Te **re-expliquer le piège** du calcul d'un côté de l'angle droit (le premier exercice), avec un exemple simple pour que ça rentre vraiment.\n\n- Puis la **réciproque / contraposée** (comment reconnaître si un triangle est rectangle ou pas) avec le deuxième cas.\n\nÇa te va ? Ou tu veux que je commence par un truc spécifique ? 📐",
+    "stop": "end_turn",
+    "usage": {
+      "input_tokens": 3253,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 0,
+      "cache_creation": {
+        "ephemeral_5m_input_tokens": 0,
+        "ephemeral_1h_input_tokens": 0
+      },
+      "output_tokens": 199,
+      "service_tier": "standard",
+      "inference_geo": "not_available",
+      "speed": "standard"
+    }
+  },
+  {
+    "id": 27,
+    "systeme": "reviz-actuelle",
+    "modele": "claude-haiku-4-5-20251001",
+    "version": "1000462",
+    "reponse": "Calmez, t'es loin d'être nul ! 4/7 c'est déjà la moitié, et tu as **2 jours** avant le contrôle — franchement c'est largement faisable. 💪\n\nRegardons tes trois erreurs : elles sont typiques et super faciles à corriger une fois qu'on voit le truc.\n\n**Par quoi commencer :**\n\nCommence par la première question : ABC rectangle en A, BC = 10, AB = 6, trouve AC. C'est une **application directe** du théorème — si tu maîtrises celle-là, plein d'autres exos deviendront clairs.\n\nOn peut la faire ensemble là, maintenant ? Je vais te montrer la méthode pas à pas, et après tu verras comment ça marche.\n\nÇa te tente ? 😊",
+    "stop": "end_turn",
+    "usage": {
+      "input_tokens": 3250,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 0,
+      "cache_creation": {
+        "ephemeral_5m_input_tokens": 0,
+        "ephemeral_1h_input_tokens": 0
+      },
+      "output_tokens": 217,
+      "service_tier": "standard",
+      "inference_geo": "not_available",
+      "speed": "standard"
+    }
+  },
+  {
+    "id": 28,
+    "systeme": "reviz-actuelle",
+    "modele": "claude-haiku-4-5-20251001",
+    "version": "1000462",
+    "reponse": "Pas de panique ! T'as eu 4 sur 7, c'est pas mal et ton contrôle de jeudi, c'est demain — tu as le temps de te rattraper.\n\nJe vois que tu as raté les trois questions clés : **calculer un côté**, **utiliser la réciproque**, et **comprendre pourquoi** on compare. Ce sont exactement les choses qu'on va clarifier ensemble avant jeudi.\n\nOn commence par quoi ? Tu veux que je t'explique :\n\n- Comment calculer AC quand tu connais l'hypoténuse et un autre côté ?\n- Pourquoi on compare le carré du plus grand côté aux deux autres ?\n- Ou tu as une autre question sur Pythagore ?\n\nJe suis là pour que ça devienne clair ! 💪",
+    "stop": "end_turn",
+    "usage": {
+      "input_tokens": 3254,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 0,
+      "cache_creation": {
+        "ephemeral_5m_input_tokens": 0,
+        "ephemeral_1h_input_tokens": 0
+      },
+      "output_tokens": 202,
+      "service_tier": "standard",
+      "inference_geo": "not_available",
+      "speed": "standard"
+    }
+  },
+  {
+    "id": 29,
+    "systeme": "reviz-actuelle",
+    "modele": "claude-haiku-4-5-20251001",
+    "version": "1000462",
+    "reponse": "Yo, je te comprends ! 😅 Mais tu as un contrôle **jeudi en maths**, c'est dans 2 jours à peine — et tu as raté 3 questions clés hier. C'est **super facile à réparer maintenant**, avant le contrôle. Si tu le fais ce soir (15-20 min, pas plus), jeudi tu seras tranquille.\n\nOn peut le faire ultra-simplement : tu me dis laquelle des 3 questions te paraît la plus floue, et je te l'explique d'une manière qui va te bloquer. Après, t'es bon·ne.\n\nÇa te dit ? Laquelle tu veux attaquer en premier ? 📝",
+    "stop": "end_turn",
+    "usage": {
+      "input_tokens": 3251,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 0,
+      "cache_creation": {
+        "ephemeral_5m_input_tokens": 0,
+        "ephemeral_1h_input_tokens": 0
+      },
+      "output_tokens": 182,
+      "service_tier": "standard",
+      "inference_geo": "not_available",
+      "speed": "standard"
+    }
+  },
+  {
+    "id": 30,
+    "systeme": "reviz-actuelle",
+    "modele": "claude-haiku-4-5-20251001",
+    "version": "1000462",
+    "reponse": "Salut ! Les deux marchent, mais pour **toi** en ce moment, je dirais **quiz** — voilà pourquoi.\n\nTu viens de scorer 5/7 au quiz sur la Révolution, et tu as surtout raté des questions qui demandent de **comprendre pourquoi** les choses se passent (sans-culottes, Terreur). Ça veut dire qu'une simple flashcard avec \"1793 = Terreur\" ne suffira pas.\n\nLes quiz te forcent à restituer l'info ET à la relier à du contexte. C'est parfait pour ton type de question. Les flashcards, c'est bon pour retenir juste les dates brutes — mais là, ce qu'il te manque, c'est la **logique**.\n\nMon conseil : fais un ou deux quiz avant lundi, et laisse tomber les flashcards simples. Ça économise du temps et c'est plus efficace pour toi.\n\nT'as envie qu'on élucide un de tes deux points faibles avant ton contrôle ? Genre, on pourrait éclaircir qui sont les sans-culottes, ça te ferait avancer 👀",
+    "stop": "end_turn",
+    "usage": {
+      "input_tokens": 2878,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 0,
+      "cache_creation": {
+        "ephemeral_5m_input_tokens": 0,
+        "ephemeral_1h_input_tokens": 0
+      },
+      "output_tokens": 291,
+      "service_tier": "standard",
+      "inference_geo": "not_available",
+      "speed": "standard"
+    }
+  },
+  {
+    "id": 31,
+    "systeme": "reviz-actuelle",
+    "modele": "claude-haiku-4-5-20251001",
+    "version": "1000462",
+    "reponse": "Salut ! Je vais t'aider à la comprendre, pas te la faire à ta place — ça te servira bien plus ! 😊\n\nDis-moi d'abord : **quel souvenir tu as envie de raconter ?** Un moment sympa, drôle, un peu triste ? Avec ta famille, à l'école, dehors ? Il faut que ce soit **précis** : pas juste \"un jour d'été\", mais plutôt \"cet été-là quand j'avais 8 ans et que...\"\n\nUne fois que tu as ton idée, on va ensemble **vérifier que tu utilises bien** :\n- Le **passé simple** pour les actions principales (j'ouvris, je vis)\n- L'**imparfait** pour le décor et les détails (il pleuvait, les gens parlaient)\n- Le **présent** pour tes commentaires d'adulte (Aujourd'hui je comprends que...)\n\nÇa va être beaucoup plus facile si on part d'une vraie histoire qui te plaît. C'est quoi ton souvenir ? 🎯",
+    "stop": "end_turn",
+    "usage": {
+      "input_tokens": 2896,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 0,
+      "cache_creation": {
+        "ephemeral_5m_input_tokens": 0,
+        "ephemeral_1h_input_tokens": 0
+      },
+      "output_tokens": 278,
+      "service_tier": "standard",
+      "inference_geo": "not_available",
+      "speed": "standard"
+    }
+  },
+  {
+    "id": 32,
+    "systeme": "reviz-actuelle",
+    "modele": "claude-haiku-4-5-20251001",
+    "version": "1000462",
+    "reponse": "Salut ! Je vais te **guider** pour que tu comprennes, pas te donner la réponse directe puisque c'est noté. 👍\n\nRegarde la leçon : pour résoudre une équation, l'objectif c'est d'**isoler x**. Pour ça, tu dois te débarrasser de ce qui le gêne.\n\nIci tu as : 3x + 7 = 22\n\n**Première question : qu'est-ce qui \"accompagne\" le x ?** Il y a un 7 qui s'ajoute. Comment tu le fais partir ?\n\nEssaie de me dire quelle opération tu vas faire sur les deux membres pour éliminer le 7.",
+    "stop": "end_turn",
+    "usage": {
+      "input_tokens": 3013,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 0,
+      "cache_creation": {
+        "ephemeral_5m_input_tokens": 0,
+        "ephemeral_1h_input_tokens": 0
+      },
+      "output_tokens": 179,
+      "service_tier": "standard",
+      "inference_geo": "not_available",
+      "speed": "standard"
+    }
+  },
+  {
+    "id": 33,
+    "systeme": "reviz-actuelle",
+    "modele": "claude-haiku-4-5-20251001",
+    "version": "1000462",
+    "reponse": "Salut ! Je vais t'aider à construire la phrase, mais je vais pas te donner la réponse toute faite — tu vas comprendre comment faire ! 😊\n\nD'abord, repère les **verbes principaux** de ta phrase :\n- \"je suis allé\" → go au prétérit\n- \"nous avons vu\" → see au prétérit\n\nRegarde dans ta leçon : quel est le prétérit de go ? Et celui de see ?\n\nUne fois que tu as ces deux formes, essaie de construire la phrase avec \"yesterday\" au début, et dis-moi ce que tu trouves !",
+    "stop": "end_turn",
+    "usage": {
+      "input_tokens": 2492,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 0,
+      "cache_creation": {
+        "ephemeral_5m_input_tokens": 0,
+        "ephemeral_1h_input_tokens": 0
+      },
+      "output_tokens": 162,
+      "service_tier": "standard",
+      "inference_geo": "not_available",
+      "speed": "standard"
+    }
+  },
+  {
+    "id": 34,
+    "systeme": "reviz-actuelle",
+    "modele": "claude-haiku-4-5-20251001",
+    "version": "1000462",
+    "reponse": "Salut ! Je vais t'aider à comprendre, mais je ne vais pas te faire ton devoir tout complet. 😊\n\nD'abord, pose-toi cette question : qu'est-ce qui existait **avant** la Révolution et qui a changé **après** ?\n\nVoici des pistes pour structurer ta réponse :\n\n- Avant : société d'ordres (nobles, clergé, tiers état). Après : **égalité des droits** pour tous les citoyens.\n\n- Avant : le roi décidait tout seul (monarchie absolue). Après : le pouvoir vient de la **nation** (souveraineté nationale).\n\n- Avant : certains avaient des privilèges. Après : **abolition des privilèges** (nuit du 4 août).\n\n- Avant : peu de libertés garanties. Après : la DDHC proclame la **liberté et l'égalité** (article 1).\n\n- Concretement : disparition des ordres, droits civiques, état civil laïque, fin de l'esclavage...\n\nÀ toi de transformer ça en phrases avec tes propres mots ! Quelle partie te semble la plus importante pour commencer ?",
+    "stop": "end_turn",
+    "usage": {
+      "input_tokens": 2623,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 0,
+      "cache_creation": {
+        "ephemeral_5m_input_tokens": 0,
+        "ephemeral_1h_input_tokens": 0
+      },
+      "output_tokens": 303,
+      "service_tier": "standard",
+      "inference_geo": "not_available",
+      "speed": "standard"
+    }
+  },
+  {
+    "id": 35,
+    "systeme": "reviz-actuelle",
+    "modele": "claude-haiku-4-5-20251001",
+    "version": "1000462",
+    "reponse": "Salut ! 👋\n\nJe peux pas te donner les réponses toutes faites — ça ne t'aiderait pas vraiment à comprendre, et puis je ne vois pas ton manuel.\n\n**Mais je peux t'aider autrement !** Si tu me décris l'exercice 4 page 112 (c'est quoi comme questions ?), on peut le regarder ensemble. Je t'expliquerai la méthode, et après tu pourras le faire.\n\nC'est sur les puissances ou la notation scientifique ? 🤔",
+    "stop": "end_turn",
+    "usage": {
+      "input_tokens": 3219,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 0,
+      "cache_creation": {
+        "ephemeral_5m_input_tokens": 0,
+        "ephemeral_1h_input_tokens": 0
+      },
+      "output_tokens": 140,
+      "service_tier": "standard",
+      "inference_geo": "not_available",
+      "speed": "standard"
+    }
+  },
+  {
+    "id": 36,
+    "systeme": "reviz-actuelle",
+    "modele": "claude-haiku-4-5-20251001",
+    "version": "1000462",
+    "reponse": "Salut ! 😊 Je peux pas vraiment dessiner un schéma ici, mais je peux te l'expliquer et tu pourras le reproduire facilement.\n\nVoici ce que tu dois dessiner :\n\n- En bas, l'**océan** (l'eau liquide)\n- Des flèches qui montent : c'est l'**évaporation** (l'eau se transforme en vapeur)\n- En haut, des nuages : c'est la **condensation** (la vapeur redevient liquide)\n- Des flèches qui redescendent : c'est la **pluie** (eau liquide qui tombe)\n- L'eau ruisselle et retourne à l'océan\n\n**Le truc important** : c'est toujours de l'eau, elle change juste d'état ! Solide (glace) → liquide (océan) → gaz (vapeur) → liquide (nuages) → liquide (pluie) → liquide (océan).\n\nTu veux que je t'explique une étape en particulier ?",
+    "stop": "end_turn",
+    "usage": {
+      "input_tokens": 2689,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 0,
+      "cache_creation": {
+        "ephemeral_5m_input_tokens": 0,
+        "ephemeral_1h_input_tokens": 0
+      },
+      "output_tokens": 265,
+      "service_tier": "standard",
+      "inference_geo": "not_available",
+      "speed": "standard"
+    }
+  },
+  {
+    "id": 37,
+    "systeme": "reviz-actuelle",
+    "modele": "claude-haiku-4-5-20251001",
+    "version": "1000462",
+    "reponse": "# Voilà une frise simple pour visualiser la Révolution ! 📅\n\n**1789** → **1791** → **1792** → **1793-1794** → **1799**\n\n---\n\n**1789 : La Bastille**\nPrise de la Bastille (14 juillet) + DDHC (26 août)\n*Régime : Fin de la monarchie absolue*\n\n**1791 : Fuite du roi**\nLouis XVI essaie de fuir à Varennes\nConstitution qui limite son pouvoir\n*Régime : Monarchie constitutionnelle*\n\n**1792 : La République**\nChute de la monarchie (10 août)\nProclamation de la République (septembre)\n*Régime : Ier République*\n\n**1793-1794 : La Terreur**\nExécution du roi (janvier 1793)\nSuspension des libertés, nombreuses exécutions\n*Régime : République en danger*\n\n**1799 : Bonaparte**\nCoup d'État de Napoléon (novembre)\nFin de la Révolution\n\n---\n\n**Conseil** : Si tu dois la dessiner, trace une flèche horizontale et marque ces 5 dates avec des couleurs différentes selon les régimes. Ça aide vraiment à retenir ! \n\nDes questions sur une date particulière ?",
+    "stop": "end_turn",
+    "usage": {
+      "input_tokens": 2604,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 0,
+      "cache_creation": {
+        "ephemeral_5m_input_tokens": 0,
+        "ephemeral_1h_input_tokens": 0
+      },
+      "output_tokens": 333,
+      "service_tier": "standard",
+      "inference_geo": "not_available",
+      "speed": "standard"
+    }
+  },
+  {
+    "id": 38,
+    "systeme": "reviz-actuelle",
+    "modele": "claude-haiku-4-5-20251001",
+    "version": "1000462",
+    "reponse": "Salut ! 👋 Super, je vais t'aider à créer une **carte mentale** sur les fractions.\n\nVoici comment tu peux l'organiser :\n\n**AU CENTRE : FRACTIONS**\n\nEnsuite, 5 branches principales :\n\n- **C'est quoi ?** → quotient de a par b | b × (a/b) = a | ex : 3/4 = 0,75\n\n- **Fractions égales** → multiplier haut et bas par le même nombre | ex : 3/4 = 6/8 | simplifier\n\n- **Comparer** → même dénominateur d'abord | plus grand numérateur = plus grande fraction | ex : 5/9 > 2/9\n\n- **Additionner/soustraire** → même dénominateur d'abord | additionne juste les numérateurs | ex : 2/7 + 3/7 = 5/7\n\n- **Fraction d'une quantité** → (a/b) × Q = (Q ÷ b) × a | ex : 3/5 de 40 € = 24 €\n\nTu peux ajouter des **couleurs** et des **petits dessins** (des pizzas coupées, des barres, etc.) pour que ce soit plus facile à retenir.\n\nÇa te dit comment ? Des questions sur une branche ? 🎯",
+    "stop": "end_turn",
+    "usage": {
+      "input_tokens": 2995,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 0,
+      "cache_creation": {
+        "ephemeral_5m_input_tokens": 0,
+        "ephemeral_1h_input_tokens": 0
+      },
+      "output_tokens": 348,
+      "service_tier": "standard",
+      "inference_geo": "not_available",
+      "speed": "standard"
+    }
+  },
+  {
+    "id": 39,
+    "systeme": "reviz-actuelle",
+    "modele": "claude-haiku-4-5-20251001",
+    "version": "1000462",
+    "reponse": "Hey ! 😊 Je peux pas te dessiner un schéma ici, mais je peux te l'expliquer pour que tu comprennes et que tu puisses le refaire toi-même !\n\n**Le trajet des aliments**, c'est comme une route :\n\n- Bouche (les dents découpent) \n- Œsophage (le tuyau qui descend)\n- Estomac (ça brasse et ça transforme)\n- Intestin grêle (c'est là que ça passe dans le sang)\n- Gros intestin (on récupère l'eau)\n- Anus (ce qui reste s'en va)\n\n**Et autour**, tu as les **glandes** qui ajoutent des sucs : les glandes salivaires (bouche), le foie et le pancréas (qui déversent dans l'intestin grêle).\n\nTu dois dessiner un long tube avec des noms à côté, et les glandes que tu relies avec des flèches. C'est pas difficile !\n\nÇa te dit quelque chose, ou tu veux que je détaille une partie ?",
+    "stop": "end_turn",
+    "usage": {
+      "input_tokens": 2632,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 0,
+      "cache_creation": {
+        "ephemeral_5m_input_tokens": 0,
+        "ephemeral_1h_input_tokens": 0
+      },
+      "output_tokens": 277,
+      "service_tier": "standard",
+      "inference_geo": "not_available",
+      "speed": "standard"
+    }
+  },
+  {
+    "id": 40,
+    "systeme": "reviz-actuelle",
+    "modele": "claude-haiku-4-5-20251001",
+    "version": "1000462",
+    "reponse": "Salut ! Je comprends que tu veux visualiser les différences, c'est une bonne idée. \n\nMais je ne peux pas faire de tableau (c'est un peu compliqué à lire sur un téléphone). Je vais te l'expliquer autrement, c'est plus simple :\n\n**Volcan effusif** : lave **fluide** (qui coule bien), gaz s'échappent facilement → coulées de lave tranquilles, comme au Piton de la Fournaise.\n\n**Volcan explosif** : lave **visqueuse** (pâteuse), gaz piégés → explosion avec cendres, blocs et nuées ardentes, comme le Vésuve.\n\nEn gros : **plus la lave est épaisse, plus ça explose**. \n\nTu veux que je t'explique pourquoi les gaz se comportent différemment ? 🌋",
+    "stop": "end_turn",
+    "usage": {
+      "input_tokens": 2819,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 0,
+      "cache_creation": {
+        "ephemeral_5m_input_tokens": 0,
+        "ephemeral_1h_input_tokens": 0
+      },
+      "output_tokens": 229,
+      "service_tier": "standard",
+      "inference_geo": "not_available",
+      "speed": "standard"
+    }
+  }
+]

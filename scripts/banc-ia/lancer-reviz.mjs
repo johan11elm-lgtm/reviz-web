@@ -11,8 +11,14 @@
 // Par défaut, le code est lu sur origin/main (la prod), pas dans l'arbre de
 // travail : d'autres sessions y ont des modifications en cours.
 //
+// --agent : Réviz IA sans leçon (étape 2), avec la vraie boucle du serveur
+// (api/_agent.js) branchée sur l'élève fictif (questions.json, eleve.sources) au
+// lieu de Firestore. Les demandes « avec contexte » partent alors sans le
+// contexte tapé : l'agent doit le retrouver avec ses outils. Ses cartes sont
+// recopiées sous la réponse pour le correcteur. Demande --arbre.
+//
 //   node --env-file=.env.local scripts/banc-ia/lancer-reviz.mjs AAAA-MM-JJ
-//     [--ref <branche ou commit> | --arbre <dossier>] [--nom <système>] [--effort low|medium|high]
+//     [--ref <branche ou commit> | --arbre <dossier>] [--nom <système>] [--effort low|medium|high] [--agent]
 // -------------------------------------------------------
 import { execFileSync } from 'node:child_process'
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs'
@@ -23,8 +29,9 @@ import { banc, message, dossierReleve, DOSSIER } from './commun.mjs'
 
 const { values: opt, positionals } = parseArgs({
   allowPositionals: true,
-  options: { ref: { type: 'string', default: 'origin/main' }, arbre: { type: 'string' }, nom: { type: 'string' }, effort: { type: 'string' } },
+  options: { ref: { type: 'string', default: 'origin/main' }, arbre: { type: 'string' }, nom: { type: 'string' }, effort: { type: 'string' }, agent: { type: 'boolean' } },
 })
+if (opt.agent && !opt.arbre) throw new Error('--agent demande --arbre <dossier> (le code de l’agent est importé tel quel).')
 const git = (...args) => execFileSync('git', args, { encoding: 'utf8', maxBuffer: 1 << 26 })
 // Un fichier de la version testée : un dossier (code pas encore commité) ou une référence git.
 const lire = chemin => (opt.arbre ? readFileSync(join(opt.arbre, chemin), 'utf8') : git('show', `${opt.ref}:${chemin}`))
@@ -57,10 +64,66 @@ function chapitre(chemin) {
 }
 
 const client = new Anthropic()
-const nom = opt.nom ?? 'reviz-actuelle'
+const nom = opt.nom ?? (opt.agent ? 'reviz-agent' : 'reviz-actuelle')
 const sortie = join(dossierReleve(positionals[0]), `${nom}.json`)
 
+// L'élève fictif vu par l'agent ; une demande sans contexte part d'un élève sans agenda ni erreur.
+function sourcesBanc(d) {
+  const s = d.contexte ? banc.eleve.sources : { agenda: { controles: [] }, revisions: [], lecons: [], erreurs: [] }
+  const [classe] = d.chapitre.split('/')
+  return {
+    agenda: async () => s.agenda,
+    revisions: async () => s.revisions,
+    lecons: async () => s.lecons,
+    lecon: async () => null,
+    catalogue: async cl => JSON.parse(lire(`public/programme/${cl}/index.json`)),
+    chapitre: async (cl, m, id) => { try { return JSON.parse(lire(`public/programme/${cl}/${m}/${id}.json`)) } catch { return null } },
+    erreurs: s.erreurs,
+    classe,
+  }
+}
+
+// Les cartes, telles que l'élève les voit sous la réponse.
+const carteEnTexte = c => (c.type === 'controle'
+  ? `[Carte affichée sous la réponse : contrôle de ${c.matiere}, ${c.jour}, « ${c.titre} », boutons Ajouter et Modifier]`
+  : `[Carte affichée sous la réponse : ${c.titre}, ${c.sous}, bouton Commencer]`)
+
+async function repondreEnAgent(d) {
+  const { buildAgentRequest, AGENT_MAX_TOURS } = await import(join(opt.arbre, 'src/utils/agent.js'))
+  const { boucleAgent } = await import(join(opt.arbre, 'api/_agent.js'))
+  const level = { cycle: 'college', classe: d.classe }
+  const aujourdhui = banc.eleve.aujourdhui
+  const requete = (conv, tour) => ({ ...buildAgentRequest({ level, messages: conv, aujourdhui, dernierTour: tour >= AGENT_MAX_TOURS, ...(opt.effort ? { effort: opt.effort } : {}) }), stream: true })
+  const conversation = [{ role: 'user', content: d.contexte ? d.texte : message(d) }]
+  let texte = ''
+  const cartes = [], outils = []
+  const usage = { input_tokens: 0, output_tokens: 0, cache_read_input_tokens: 0, cache_creation_input_tokens: 0 }
+  // Compte les tokens de chaque tour au passage (message_start, puis message_delta).
+  async function* compter(flux) {
+    for await (const e of flux) {
+      const u = e.type === 'message_start' ? e.message?.usage : e.type === 'message_delta' ? e.usage : null
+      for (const k of Object.keys(usage)) if (Number.isFinite(u?.[k])) usage[k] += u[k]
+      yield e
+    }
+  }
+  const ouvrir = async conv => compter(await client.messages.create(conv))
+  const debut = Date.now()
+  let tours = 0
+  await boucleAgent({
+    flux: await ouvrir(requete(conversation, 0)),
+    conversation,
+    relancer: (conv, tour) => { tours = tour; return ouvrir(requete(conv, tour)) },
+    sources: sourcesBanc(d),
+    level,
+    aujourdhui,
+    ecrire: e => { if (e.text) texte += e.text; if (e.carte) cartes.push(e.carte); if (e.outil) outils.push(e.outil) },
+  })
+  const reponse = [texte.trim(), ...cartes.map(carteEnTexte)].filter(Boolean).join('\n\n')
+  return { id: d.id, systeme: nom, modele: buildAgentRequest({ messages: [], aujourdhui }).model, version, effort: opt.effort ?? 'low', reponse, cartes, outils, tours: tours + 1, ms: Date.now() - debut, usage }
+}
+
 async function repondre(d) {
+  if (opt.agent) return repondreEnAgent(d)
   const params = requete({ cycle: 'college', classe: d.classe }, prompts.buildChatLessonContext(chapitre(d.chapitre)), [{ role: 'user', content: message(d) }])
   const debut = Date.now()
   const r = await client.messages.create(params)

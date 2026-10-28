@@ -1,0 +1,1016 @@
+[
+  {
+    "id": 1,
+    "systeme": "reviz-agent",
+    "modele": "claude-haiku-5-5",
+    "version": "arbre reviz-ia-haiku55",
+    "effort": "low",
+    "reponse": "Une fraction, c'est deux idées en une, et la division est la deuxième.\n\nImagine **3 pizzas** à partager entre **4 amis**. Chacun reçoit **3/4** d'une pizza. Donc 3 ÷ 4 = 3/4, et ça veut aussi dire « chacun reçoit un quart de 3 pizzas ».\n\nLe **numérateur** (le 3, en haut) dit combien de parts on prend. Le **dénominateur** (le 4, en bas) dit en combien de parts égales on coupe l'unité. Et 3/4 = 0,75.\n\nEssaie celle-ci : 2 tablettes de chocolat pour 4 enfants, combien chacun reçoit-il ? Écris la division, puis le résultat.",
+    "cartes": [],
+    "outils": [
+      "Je cherche dans ton programme…",
+      "Je relis le chapitre…"
+    ],
+    "tours": 3,
+    "ms": 5318,
+    "usage": {
+      "input_tokens": 16,
+      "output_tokens": 693,
+      "cache_read_input_tokens": 18966,
+      "cache_creation_input_tokens": 14700
+    }
+  },
+  {
+    "id": 2,
+    "systeme": "reviz-agent",
+    "modele": "claude-haiku-5-5",
+    "version": "arbre reviz-ia-haiku55",
+    "effort": "low",
+    "reponse": "Pour reconnaître un complément du verbe, pose la question après le verbe.\n\n- **COD** : tu demandes « qui ? » ou « quoi ? ». Il n'y a **pas de préposition** devant. Tu peux le remplacer par **le, la, l', les**.\n- **COI** : tu demandes « à qui ? », « à quoi ? », « de qui ? » ou « de quoi ? ». Il y a une préposition (**à** ou **de**). Tu peux le remplacer par **lui, leur, en** ou **y**.\n\nExemple : « Le chat mange sa souris. » Il mange quoi ? sa souris, donc c'est un COD (« Le chat la mange. »). « Il parle à sa mère. » Il parle à qui ? à sa mère, donc c'est un COI (« Il lui parle. »).\n\nEssaie avec cette phrase : « Léa donne un livre à son frère. » Quel est le COD, et quel est le COI ?",
+    "cartes": [],
+    "outils": [
+      "Je cherche dans ton programme…",
+      "Je relis le chapitre…"
+    ],
+    "tours": 3,
+    "ms": 5118,
+    "usage": {
+      "input_tokens": 16,
+      "output_tokens": 706,
+      "cache_read_input_tokens": 19126,
+      "cache_creation_input_tokens": 14356
+    }
+  },
+  {
+    "id": 3,
+    "systeme": "reviz-agent",
+    "modele": "claude-haiku-5-5",
+    "version": "arbre reviz-ia-haiku55",
+    "effort": "low",
+    "reponse": "Tu as raison de te poser la question, et c'est exactement le piège du chapitre ! Athènes a inventé la **démocratie** (« pouvoir du peuple »), mais seuls les **citoyens** pouvaient voter. Pour être citoyen, il fallait être un homme libre, majeur et né de parents athéniens. Les femmes, les métèques (étrangers installés à Athènes) et les esclaves étaient donc exclus.\n\nÇa fait donc une démocratie, mais pour une **minorité** des habitants seulement. Ce n'est pas la nôtre aujourd'hui, où tout le monde adulte peut voter.\n\nPour vérifier que c'est bien clair, réponds en une phrase : qui était exclu de la citoyenneté à Athènes ?",
+    "cartes": [],
+    "outils": [
+      "Je cherche dans ton programme…",
+      "Je relis le chapitre…"
+    ],
+    "tours": 3,
+    "ms": 5565,
+    "usage": {
+      "input_tokens": 16,
+      "output_tokens": 633,
+      "cache_read_input_tokens": 18804,
+      "cache_creation_input_tokens": 14908
+    }
+  },
+  {
+    "id": 4,
+    "systeme": "reviz-agent",
+    "modele": "claude-haiku-5-5",
+    "version": "arbre reviz-ia-haiku55",
+    "effort": "low",
+    "reponse": "L'intestin grêle sert à **absorber** les nutriments : c'est là qu'ils passent des aliments digérés dans ton sang, qui les envoie ensuite à tous tes organes.\n\nAvant ça, les enzymes des sucs digestifs ont découpé les aliments en petites molécules. Par exemple, l'amidon devient du sucre et les protéines deviennent des acides aminés.\n\nSa paroi est couverte de petites saillies appelées **villosités**. Elles rendent la surface d'échange très grande, donc l'absorption est plus efficace.\n\nPour vérifier, réponds à cette question : que devient l'amidon du pain après la digestion, et quelle enzyme le transforme dans ta bouche ?",
+    "cartes": [],
+    "outils": [
+      "Je cherche dans ton programme…",
+      "Je relis le chapitre…"
+    ],
+    "tours": 3,
+    "ms": 4134,
+    "usage": {
+      "input_tokens": 16,
+      "output_tokens": 553,
+      "cache_read_input_tokens": 18534,
+      "cache_creation_input_tokens": 13850
+    }
+  },
+  {
+    "id": 5,
+    "systeme": "reviz-agent",
+    "modele": "claude-haiku-5-5",
+    "version": "arbre reviz-ia-haiku55",
+    "effort": "low",
+    "reponse": "Bonne question ! C'est une **convention**, c'est-à-dire une règle que les mathématiciens se sont mis d'accord pour suivre. Elle n'est pas tombée du ciel sans raison : elle sert à ce que tout le monde trouve **le même résultat** pour une même écriture.\n\nSans cette règle, `7 + 3 × 5` pourrait donner 50 pour l'un (il fait 7 + 3 = 10, puis × 5) et 22 pour l'autre (il fait 3 × 5 = 15, puis + 7). Avec la règle, c'est toujours **22**.\n\nPour les calculs avec des parenthèses, celles-ci passent avant tout le reste : `(7 + 3) × 5` fait bien 50, parce qu'on écrit la priorité avec les parenthèses.\n\nEssaie celui-ci : combien fait `10 − 2 × 3` ?",
+    "cartes": [],
+    "outils": [
+      "Je cherche dans ton programme…",
+      "Je relis le chapitre…"
+    ],
+    "tours": 3,
+    "ms": 5011,
+    "usage": {
+      "input_tokens": 16,
+      "output_tokens": 775,
+      "cache_read_input_tokens": 19072,
+      "cache_creation_input_tokens": 15342
+    }
+  },
+  {
+    "id": 6,
+    "systeme": "reviz-agent",
+    "modele": "claude-haiku-5-5",
+    "version": "arbre reviz-ia-haiku55",
+    "effort": "low",
+    "reponse": "Un mélange **homogène**, c'est un mélange où on ne voit pas les différents ingrédients à l'œil nu. Exemple : de l'eau sucrée bien remuée, ou l'air.\n\nUn mélange **hétérogène**, c'est un mélange où on distingue au moins deux ingrédients à l'œil nu. Exemple : de l'eau et de l'huile, ou de l'eau avec du sable.\n\nPour t'entraîner, dis-moi : le jus d'orange avec de la pulpe, c'est homogène ou hétérogène, et pourquoi ?",
+    "cartes": [],
+    "outils": [
+      "Je cherche dans ton programme…",
+      "Je relis le chapitre…"
+    ],
+    "tours": 3,
+    "ms": 3461,
+    "usage": {
+      "input_tokens": 16,
+      "output_tokens": 436,
+      "cache_read_input_tokens": 18924,
+      "cache_creation_input_tokens": 13970
+    }
+  },
+  {
+    "id": 7,
+    "systeme": "reviz-agent",
+    "modele": "claude-haiku-5-5",
+    "version": "arbre reviz-ia-haiku55",
+    "effort": "low",
+    "reponse": "Pour savoir si un triangle est rectangle, on utilise la **réciproque** du théorème de Pythagore. C'est le sens inverse : au lieu de partir de l'angle droit pour trouver un côté, on part des trois côtés pour prouver l'angle droit.\n\nOn procède en 3 étapes :\n\n- Repère le **plus grand côté**.\n- Calcule son carré, puis la somme des carrés des deux autres côtés.\n- Compare : si les deux résultats sont égaux, le triangle est rectangle. Sinon, il ne l'est pas.\n\nPar exemple, un triangle de côtés 6, 8 et 10 : 10² = 100 et 6² + 8² = 36 + 64 = 100. Les deux sont égaux, donc il est rectangle.\n\nEssaie avec un triangle aux côtés **7, 24 et 25** : est-il rectangle ? Donne-moi ton calcul et je te dis si c'est juste.",
+    "cartes": [],
+    "outils": [
+      "Je cherche dans ton programme…",
+      "Je relis le chapitre…"
+    ],
+    "tours": 3,
+    "ms": 5311,
+    "usage": {
+      "input_tokens": 16,
+      "output_tokens": 719,
+      "cache_read_input_tokens": 18740,
+      "cache_creation_input_tokens": 14702
+    }
+  },
+  {
+    "id": 8,
+    "systeme": "reviz-agent",
+    "modele": "claude-haiku-5-5",
+    "version": "arbre reviz-ia-haiku55",
+    "effort": "low",
+    "reponse": "La **DDHC**, c'est la **Déclaration des droits de l'homme et du citoyen**, adoptée le **26 août 1789** par les députés pendant la Révolution française. C'est un texte qui affirme que tous les humains naissent **libres et égaux en droits**.\n\nElle est importante parce qu'elle change le pouvoir : la **souveraineté** appartient désormais à la nation, et non plus au roi. Elle pose aussi des principes qu'on retrouve encore aujourd'hui, comme la liberté, l'égalité devant la loi et la propriété.\n\nPour bien la retenir, relis la fiche sur la Révolution et fais-toi une petite frise avec les dates clés.\n\nTouche **Commencer** sur la carte pour ouvrir la fiche de la Révolution. Ensuite, dis-moi en une phrase ce que dit l'article 1 de la DDHC, et on vérifie ensemble.\n\n[Carte affichée sous la réponse : La fiche du chapitre, La Révolution française : un nouvel ordre politique (1789-1799), bouton Commencer]",
+    "cartes": [
+      {
+        "type": "revision",
+        "format": "fiche",
+        "chapitre": {
+          "id": "revolution-francaise-1789-1799",
+          "titre": "La Révolution française : un nouvel ordre politique (1789-1799)"
+        },
+        "classe": "4ème",
+        "programme": "Histoire",
+        "titre": "La fiche du chapitre",
+        "sous": "La Révolution française : un nouvel ordre politique (1789-1799)",
+        "resume": "La fiche du chapitre, La Révolution française : un nouvel ordre politique (1789-1799)"
+      }
+    ],
+    "outils": [
+      "Je cherche dans ton programme…",
+      "Je relis le chapitre…",
+      "Je prépare ta carte…"
+    ],
+    "tours": 4,
+    "ms": 7405,
+    "usage": {
+      "input_tokens": 20,
+      "output_tokens": 991,
+      "cache_read_input_tokens": 33504,
+      "cache_creation_input_tokens": 15804
+    }
+  },
+  {
+    "id": 9,
+    "systeme": "reviz-agent",
+    "modele": "claude-haiku-5-5",
+    "version": "arbre reviz-ia-haiku55",
+    "effort": "low",
+    "reponse": "Le **present perfect** (have / has + participe passé) sert quand le passé a un lien avec maintenant : une expérience, un bilan, une durée qui continue. Le **prétérit simple** (went, saw, played) sert quand l'action est terminée et datée.\n\nLe plus simple est de chercher le marqueur de temps dans la phrase :\n\n- **Date ou moment passé précis** (yesterday, last year, in 2019, two days ago) → prétérit : *I went to London last year.*\n- **Expérience, bilan ou durée jusqu'à maintenant** (ever, never, already, yet, just, for, since) → present perfect : *I have visited London.*\n\nAttention : le prétérit est le « prétérit simple » en français, parce que « preterit » est le nom espagnol du temps.\n\nEssaie celle-ci : comment dirais-tu « Je suis déjà allé en Irlande » et « Je suis allé en Irlande l'été dernier » ? Dis-moi tes deux phrases, je te corrige.",
+    "cartes": [],
+    "outils": [
+      "Je cherche dans ton programme…",
+      "Je relis le chapitre…",
+      "Je relis le chapitre…"
+    ],
+    "tours": 3,
+    "ms": 4716,
+    "usage": {
+      "input_tokens": 16,
+      "output_tokens": 831,
+      "cache_read_input_tokens": 19338,
+      "cache_creation_input_tokens": 19334
+    }
+  },
+  {
+    "id": 10,
+    "systeme": "reviz-agent",
+    "modele": "claude-haiku-5-5",
+    "version": "arbre reviz-ia-haiku55",
+    "effort": "low",
+    "reponse": "Un **gène** est une portion d'ADN qui détermine un caractère, comme le groupe sanguin. Un **allèle** est une version de ce gène.\n\nPar exemple, le gène du groupe sanguin existe en trois allèles : A, B et O. Chaque personne en possède deux, un hérité du père et un de la mère. Le gène, c'est « la case » ; l'allèle, c'est « ce qui est écrit dedans ».\n\nPour t'entraîner : si une personne a les allèles A et O, quel est son groupe sanguin, et pourquoi ?",
+    "cartes": [],
+    "outils": [
+      "Je cherche dans ton programme…",
+      "Je relis le chapitre…"
+    ],
+    "tours": 3,
+    "ms": 4201,
+    "usage": {
+      "input_tokens": 16,
+      "output_tokens": 518,
+      "cache_read_input_tokens": 18796,
+      "cache_creation_input_tokens": 14584
+    }
+  },
+  {
+    "id": 11,
+    "systeme": "reviz-agent",
+    "modele": "claude-haiku-5-5",
+    "version": "arbre reviz-ia-haiku55",
+    "effort": "low",
+    "reponse": "Bonne question ! Le nom vient du fait qu'il n'y a **pas eu d'affrontement militaire direct** entre les deux grandes puissances, les États-Unis et l'URSS. Mais il y avait une tension permanente, un peu comme deux voisins qui ne se parlent plus et se surveillent en permanence.\n\nCette « guerre » se jouait autrement :\n\n- la **course aux armements**, avec la menace de la bombe atomique ;\n- les **guerres par procuration**, où chacun soutenait un camp dans des conflits lointains (Corée, Vietnam) ;\n- l'espionnage et la **course à l'espace**.\n\nLe chapitre est bien dans ton programme. Pour vérifier que tu as retenu, réponds à cette question : pourquoi peut-on parler de « guerre » alors qu'aucun soldat américain n'a combattu directement un soldat soviétique ?",
+    "cartes": [],
+    "outils": [
+      "Je cherche dans ton programme…"
+    ],
+    "tours": 2,
+    "ms": 5488,
+    "usage": {
+      "input_tokens": 12,
+      "output_tokens": 697,
+      "cache_read_input_tokens": 9100,
+      "cache_creation_input_tokens": 10440
+    }
+  },
+  {
+    "id": 12,
+    "systeme": "reviz-agent",
+    "modele": "claude-haiku-5-5",
+    "version": "arbre reviz-ia-haiku55",
+    "effort": "low",
+    "reponse": "Non, ce ne sont pas la même chose. La **masse** c'est la quantité de matière qu'un objet contient : elle se mesure en **kg** avec une balance, et elle ne change jamais, où que tu sois.\n\nLe **poids** c'est une force, l'attraction d'un astre (la Terre, la Lune...) sur un objet. Il se mesure en **newtons (N)** avec un dynamomètre, et il change selon l'astre. Il se calcule avec P = m × g, où g vaut environ 9,8 N/kg sur Terre et 1,6 N/kg sur la Lune.\n\nExemple : un astronaute de 80 kg a un poids d'environ 784 N sur Terre, mais seulement 128 N sur la Lune. Sa masse reste 80 kg partout.\n\nEssaie : si un objet a une masse de 50 kg sur Terre, quel est son poids ? (Indice : P = m × g, avec g = 9,8 N/kg.)",
+    "cartes": [],
+    "outils": [
+      "Je cherche dans ton programme…",
+      "Je relis le chapitre…"
+    ],
+    "tours": 3,
+    "ms": 5449,
+    "usage": {
+      "input_tokens": 16,
+      "output_tokens": 777,
+      "cache_read_input_tokens": 18962,
+      "cache_creation_input_tokens": 14552
+    }
+  },
+  {
+    "id": 13,
+    "systeme": "reviz-agent",
+    "modele": "claude-haiku-5-5",
+    "version": "arbre reviz-ia-haiku55",
+    "effort": "low",
+    "reponse": "La notation scientifique, c'est une façon de raccourcir les très grands ou très petits nombres en gardant seulement **un seul chiffre** avant la virgule, puis une puissance de 10.\n\nPour l'écrire, suis ces trois étapes :\n\n- Déplace la virgule pour qu'il ne reste qu'un chiffre avant elle.\n- Compte combien de rangs tu as fait bouger la virgule : c'est le nombre en exposant.\n- Si le nombre de départ est **grand** (plus grand que 10), l'exposant est **positif**. S'il est **plus petit que 1**, l'exposant est **négatif**.\n\nExemple : 45 000. Tu bouges la virgule de 4 rangs vers la gauche, tu obtiens 4,5. Donc 45 000 = **4,5 × 10⁴**.\n\nTon tour : écris 3 500 en notation scientifique. Dis-moi ta réponse, et on vérifie ensemble.",
+    "cartes": [],
+    "outils": [
+      "Je cherche dans ton programme…",
+      "Je relis le chapitre…"
+    ],
+    "tours": 3,
+    "ms": 5394,
+    "usage": {
+      "input_tokens": 16,
+      "output_tokens": 764,
+      "cache_read_input_tokens": 18724,
+      "cache_creation_input_tokens": 14794
+    }
+  },
+  {
+    "id": 14,
+    "systeme": "reviz-agent",
+    "modele": "claude-haiku-5-5",
+    "version": "arbre reviz-ia-haiku55",
+    "effort": "low",
+    "reponse": "Le subjonctif, c'est une forme de verbe qu'on utilise quand on **souhaite**, qu'on **ordonne** ou qu'on **doute** de quelque chose. Pense à une lettre au Père Noël : « Je veux que tu m'apportes un vélo. » Le verbe « apporter » se met au subjonctif parce que ce n'est pas encore fait, c'est juste souhaité.\n\nUn truc simple : regarde le petit mot **que** juste avant le verbe, après des mots comme « je veux que », « il faut que », « je doute que ».\n\nPour les verbes très courants, retiens-les par cœur : que je **sois**, que j'**aie**, que je **fasse**, que j'**aille**.\n\nEssaie : complète « Il faut que tu ... (être) à l'heure. » Quelle forme tu écris ?",
+    "cartes": [],
+    "outils": [
+      "Je cherche dans ton programme…",
+      "Je relis le chapitre…"
+    ],
+    "tours": 3,
+    "ms": 4828,
+    "usage": {
+      "input_tokens": 16,
+      "output_tokens": 720,
+      "cache_read_input_tokens": 18678,
+      "cache_creation_input_tokens": 14500
+    }
+  },
+  {
+    "id": 15,
+    "systeme": "reviz-agent",
+    "modele": "claude-haiku-5-5",
+    "version": "arbre reviz-ia-haiku55",
+    "effort": "low",
+    "reponse": "Pas de panique, le **carré** (le « ² ») est le point qui bloque souvent. Ça veut juste dire qu'on multiplie la vitesse **par elle-même** : v² = v × v.\n\nPourquoi c'est important ? Parce que l'énergie ne grandit pas en proportion de la vitesse. Si ta vitesse double, l'énergie est **multipliée par 4**, pas par 2. C'est pour ça qu'une voiture qui roule à 40 m/s a 4 fois plus d'énergie qu'à 20 m/s, et qu'elle a donc beaucoup plus de mal à s'arrêter.\n\nEssaie avec une voiture de **1 000 kg** qui roule à **10 m/s**. Calcule d'abord v², puis Ec = 0,5 × m × v². Dis-moi ton résultat, je te corrige.",
+    "cartes": [],
+    "outils": [
+      "Je cherche dans ton programme…",
+      "Je relis le chapitre…"
+    ],
+    "tours": 3,
+    "ms": 6219,
+    "usage": {
+      "input_tokens": 16,
+      "output_tokens": 776,
+      "cache_read_input_tokens": 19198,
+      "cache_creation_input_tokens": 14804
+    }
+  },
+  {
+    "id": 16,
+    "systeme": "reviz-agent",
+    "modele": "claude-haiku-5-5",
+    "version": "arbre reviz-ia-haiku55",
+    "effort": "low",
+    "reponse": "La photosynthèse, c'est la façon dont une plante verte fabrique **sa nourriture** à partir de l'air et de l'eau, grâce à la lumière.\n\nElle prend trois ingrédients :\n- de l'eau, prélevée dans le sol par les racines\n- du **dioxyde de carbone** (CO₂), qui entre dans la feuille par les stomates, de petits trous\n- la lumière, captée par la chlorophylle, le pigment vert\n\nElle fabrique alors de la matière organique (du sucre, stocké sous forme d'amidon) et rejette du **dioxygène**, l'air que nous respirons.\n\nPour te tester, dis-moi : pourquoi une plante mise dans le noir finit-elle par jaunir ?",
+    "cartes": [],
+    "outils": [
+      "Je cherche dans ton programme…",
+      "Je relis le chapitre…"
+    ],
+    "tours": 3,
+    "ms": 3761,
+    "usage": {
+      "input_tokens": 16,
+      "output_tokens": 569,
+      "cache_read_input_tokens": 18534,
+      "cache_creation_input_tokens": 14348
+    }
+  },
+  {
+    "id": 17,
+    "systeme": "reviz-agent",
+    "modele": "claude-haiku-5-5",
+    "version": "arbre reviz-ia-haiku55",
+    "effort": "low",
+    "reponse": "Le développement durable, c'est **agir aujourd'hui sans abîmer la planète ni laisser de côté les gens**, pour que les générations suivantes puissent aussi vivre bien. Ça repose sur trois piliers :\n\n- Le pilier **économique** : créer des richesses et des emplois.\n- Le pilier **social** : réduire les inégalités et répondre aux besoins de tout le monde.\n- Le pilier **environnemental** : protéger les ressources (eau, air, forêts).\n\nExemple : un tramway pollue moins qu'une file de voitures (environnement), il dessert les quartiers populaires (social) et crée des emplois (économie). Il coche les trois cases.\n\nEssaie sur une action : **installer des panneaux solaires** sur les écoles, dans quel(s) pilier(s) tu la mettrais, et pourquoi ?",
+    "cartes": [],
+    "outils": [
+      "Je cherche dans ton programme…",
+      "Je relis le chapitre…"
+    ],
+    "tours": 3,
+    "ms": 4559,
+    "usage": {
+      "input_tokens": 16,
+      "output_tokens": 634,
+      "cache_read_input_tokens": 19070,
+      "cache_creation_input_tokens": 14634
+    }
+  },
+  {
+    "id": 18,
+    "systeme": "reviz-agent",
+    "modele": "claude-haiku-5-5",
+    "version": "arbre reviz-ia-haiku55",
+    "effort": "low",
+    "reponse": "Pas de panique, la différence tient en une seule chose : le **+ b**.\n\nUne fonction **linéaire** s'écrit f(x) = ax, par exemple f(x) = 3x. Elle passe toujours par l'origine du repère, comme dans une situation de proportionnalité (3 € le kg, donc 3x).\n\nUne fonction **affine** s'écrit f(x) = ax + b, par exemple g(x) = 2x + 3. Le **b** est le point de départ, comme un abonnement fixe : la droite ne passe pas forcément par l'origine.\n\nPour t'entraîner, dis-moi : h(x) = 5x + 1 est-elle linéaire ou affine ? Et si tu veux, je te propose une carte de révision sur ce chapitre.",
+    "cartes": [],
+    "outils": [
+      "Je cherche dans ton programme…",
+      "Je relis le chapitre…"
+    ],
+    "tours": 3,
+    "ms": 4088,
+    "usage": {
+      "input_tokens": 16,
+      "output_tokens": 645,
+      "cache_read_input_tokens": 18896,
+      "cache_creation_input_tokens": 14920
+    }
+  },
+  {
+    "id": 19,
+    "systeme": "reviz-agent",
+    "modele": "claude-haiku-5-5",
+    "version": "arbre reviz-ia-haiku55",
+    "effort": "low",
+    "reponse": "Ton contrôle de maths est déjà dans ton agenda : **jeudi 5 novembre**, sur le théorème de Pythagore. Il reste deux étapes à rattraper aujourd'hui, à commencer par le quiz sur tes erreurs, la révision la plus utile.\n\nTu as raté cette question : ABC est rectangle en A, BC = 10 cm et AB = 6 cm. Combien mesure AC ? Indice : BC est l'hypoténuse (le côté en face de l'angle droit), donc BC² = AB² + AC². Essaie et dis-moi ce que tu trouves.\n\nTouche **Commencer** sur la carte « Refaire mes erreurs » pour lancer les 3 questions. Ensuite, les flashcards d'aujourd'hui t'attendent.\n\n[Carte affichée sous la réponse : Refaire mes erreurs, Racine carrée et théorème de Pythagore · 3 questions, bouton Commencer]",
+    "cartes": [
+      {
+        "type": "revision",
+        "format": "erreurs",
+        "lessonId": "prog-theoreme-de-pythagore",
+        "titre": "Refaire mes erreurs",
+        "sous": "Racine carrée et théorème de Pythagore · 3 questions",
+        "resume": "Refaire mes erreurs, Racine carrée et théorème de Pythagore · 3 questions"
+      }
+    ],
+    "outils": [
+      "Je cherche dans ton programme…",
+      "Je regarde ton agenda…",
+      "Je regarde tes erreurs…",
+      "Je prépare ta carte…"
+    ],
+    "tours": 3,
+    "ms": 5965,
+    "usage": {
+      "input_tokens": 16,
+      "output_tokens": 884,
+      "cache_read_input_tokens": 21420,
+      "cache_creation_input_tokens": 13492
+    }
+  },
+  {
+    "id": 20,
+    "systeme": "reviz-agent",
+    "modele": "claude-haiku-5-5",
+    "version": "arbre reviz-ia-haiku55",
+    "effort": "low",
+    "reponse": "Ton contrôle d'histoire sur la Révolution française est **lundi 9 novembre**, et ton plan est déjà prévu dans l'appli :\n\n- Demain, mercredi 4 : des **flashcards** pour revoir les dates et les mots-clés.\n- Vendredi 6 : un quiz sur tes erreurs. Tu as raté la question « Qui sont les **sans-culottes** ? », donc ce sera un bon moment pour la revoir.\n- Dimanche 8 : un contrôle blanc pour t'entraîner dans les conditions du vrai contrôle.\n\nTu peux déjà lancer les flashcards aujourd'hui, c'est un bon début. Touche Commencer sur la carte. Et avant, dis-moi : qui étaient les sans-culottes, à ton avis ?\n\n[Carte affichée sous la réponse : Flashcards, La Révolution française : un nouvel ordre politique (1789-1799), bouton Commencer]",
+    "cartes": [
+      {
+        "type": "revision",
+        "format": "flashcards",
+        "chapitre": {
+          "id": "revolution-francaise-1789-1799",
+          "titre": "La Révolution française : un nouvel ordre politique (1789-1799)"
+        },
+        "classe": "4ème",
+        "programme": "Histoire",
+        "titre": "Flashcards",
+        "sous": "La Révolution française : un nouvel ordre politique (1789-1799)",
+        "resume": "Flashcards, La Révolution française : un nouvel ordre politique (1789-1799)"
+      }
+    ],
+    "outils": [
+      "Je regarde ton agenda…",
+      "Je regarde tes erreurs…",
+      "Je cherche dans ton programme…",
+      "Je prépare ta carte…"
+    ],
+    "tours": 3,
+    "ms": 6179,
+    "usage": {
+      "input_tokens": 16,
+      "output_tokens": 967,
+      "cache_read_input_tokens": 21530,
+      "cache_creation_input_tokens": 13596
+    }
+  },
+  {
+    "id": 21,
+    "systeme": "reviz-agent",
+    "modele": "claude-haiku-5-5",
+    "version": "arbre reviz-ia-haiku55",
+    "effort": "low",
+    "reponse": "Pas de panique, on va y aller étape par étape. Le plus proche, c'est les **maths** jeudi 5 novembre. Pour aujourd'hui, il faut rattraper les flashcards et le quiz sur tes points ratés.\n\nTu as raté par exemple : « Pourquoi compare-t-on le carré du **plus grand côté** à la somme des deux autres carrés ? » Commence par là.\n\nEnsuite viendront l'histoire (lundi 9) et les SVT (mardi 10), chacune avec son propre plan dans l'appli.\n\nTouche Commencer sur cette carte pour lancer le quiz sur tes erreurs de maths.",
+    "cartes": [],
+    "outils": [
+      "Je regarde ton agenda…",
+      "Je regarde tes erreurs…"
+    ],
+    "tours": 2,
+    "ms": 2802,
+    "usage": {
+      "input_tokens": 12,
+      "output_tokens": 393,
+      "cache_read_input_tokens": 9076,
+      "cache_creation_input_tokens": 11694
+    }
+  },
+  {
+    "id": 22,
+    "systeme": "reviz-agent",
+    "modele": "claude-haiku-5-5",
+    "version": "arbre reviz-ia-haiku55",
+    "effort": "low",
+    "reponse": "Pas de panique : ton contrôle est **jeudi 5 novembre**, et on a encore le temps de bien s'organiser. Tu as deux étapes à faire **aujourd'hui** : des flashcards, puis un quiz sur tes erreurs.\n\nTu as raté cette question : « ABC est rectangle en A, BC = 10 cm et AB = 6 cm. Combien mesure AC ? » Réfléchis d'abord à quel côté est l'**hypoténuse** (le côté en face de l'angle droit) : c'est elle qui va dans la formule de Pythagore.\n\nCommence par les flashcards, elles vont vite.\n\n[carte : flashcards]",
+    "cartes": [],
+    "outils": [
+      "Je regarde ton agenda…",
+      "Je regarde tes erreurs…"
+    ],
+    "tours": 2,
+    "ms": 4576,
+    "usage": {
+      "input_tokens": 12,
+      "output_tokens": 663,
+      "cache_read_input_tokens": 9086,
+      "cache_creation_input_tokens": 11756
+    }
+  },
+  {
+    "id": 23,
+    "systeme": "reviz-agent",
+    "modele": "claude-haiku-5-5",
+    "version": "arbre reviz-ia-haiku55",
+    "effort": "low",
+    "reponse": "Ton contrôle de SVT sur **le volcanisme** est mardi 10 novembre. Ton plan de révision est déjà calé :\n\n- Jeudi 5 novembre : les flashcards\n- Samedi 7 novembre : le quiz sur tes points ratés\n- Lundi 9 novembre : le contrôle blanc\n\nTu peux déjà commencer les flashcards du chapitre. Elles te feront revoir le vocabulaire des volcans, comme magma, lave ou éruption.\n\nTouche Commencer sur la carte pour lancer les flashcards. Dis-moi ensuite si un mot ou une notion te paraît flou, je t'explique autrement.\n\n[Carte affichée sous la réponse : Flashcards, Le volcanisme, bouton Commencer]",
+    "cartes": [
+      {
+        "type": "revision",
+        "format": "flashcards",
+        "chapitre": {
+          "id": "volcanisme",
+          "titre": "Le volcanisme"
+        },
+        "classe": "4ème",
+        "programme": "SVT",
+        "titre": "Flashcards",
+        "sous": "Le volcanisme",
+        "resume": "Flashcards, Le volcanisme"
+      }
+    ],
+    "outils": [
+      "Je regarde ton agenda…",
+      "Je regarde tes erreurs…",
+      "Je prépare ta carte…"
+    ],
+    "tours": 3,
+    "ms": 5651,
+    "usage": {
+      "input_tokens": 16,
+      "output_tokens": 945,
+      "cache_read_input_tokens": 20902,
+      "cache_creation_input_tokens": 13410
+    }
+  },
+  {
+    "id": 24,
+    "systeme": "reviz-agent",
+    "modele": "claude-haiku-5-5",
+    "version": "arbre reviz-ia-haiku55",
+    "effort": "low",
+    "reponse": "Bien sûr ! Ton devoir commun de français est le **vendredi 13 novembre**, sur le chapitre « Le subjonctif et le conditionnel : formes et emplois ». Touche **Ajouter** sur la carte ci-dessous, et l'appli te préparera un plan de révision étape par étape.\n\nPour commencer, je te propose de tester tes connaissances sur les formes : quel est le subjonctif présent du verbe « être » après « il faut que » (à la personne « je ») ? Essaie, et dis-moi ta réponse.\n\n[Carte affichée sous la réponse : contrôle de francais, vendredi 13 novembre, « Le subjonctif et le conditionnel : formes et emplois », boutons Ajouter et Modifier]",
+    "cartes": [
+      {
+        "type": "controle",
+        "matiere": "francais",
+        "date": "2026-11-13",
+        "jour": "vendredi 13 novembre",
+        "titre": "Le subjonctif et le conditionnel : formes et emplois",
+        "chapitres": [
+          {
+            "id": "subjonctif-et-conditionnel",
+            "titre": "Le subjonctif et le conditionnel : formes et emplois"
+          }
+        ],
+        "classe": "4ème",
+        "programme": "Français",
+        "resume": "Contrôle de français du vendredi 13 novembre à ajouter (Le subjonctif et le conditionnel : formes et emplois)"
+      }
+    ],
+    "outils": [
+      "Je cherche dans ton programme…",
+      "Je cherche dans ton programme…",
+      "Je regarde tes erreurs…",
+      "Je prépare ta carte…"
+    ],
+    "tours": 3,
+    "ms": 6010,
+    "usage": {
+      "input_tokens": 16,
+      "output_tokens": 729,
+      "cache_read_input_tokens": 19948,
+      "cache_creation_input_tokens": 11434
+    }
+  },
+  {
+    "id": 25,
+    "systeme": "reviz-agent",
+    "modele": "claude-haiku-5-5",
+    "version": "arbre reviz-ia-haiku55",
+    "effort": "low",
+    "reponse": "Ce soir, la priorité c'est le contrôle de maths de jeudi (Pythagore). Il te reste deux étapes à rattraper aujourd'hui : les flashcards et le quiz sur tes points ratés.\n\nTu as raté la question « Pourquoi compare-t-on le carré du **plus grand côté** à la somme des deux autres carrés ? ». C'est l'erreur la plus utile à revoir, donc commence par le quiz.\n\nTouche Commencer sur la carte ci-dessous.\n\nUne fois le quiz fait, passe aux flashcards de ce chapitre. Si tu me dis en une phrase pourquoi on compare le plus grand côté, je te dis si c'est juste.\n\n[Carte affichée sous la réponse : Refaire mes erreurs, Racine carrée et théorème de Pythagore · 3 questions, bouton Commencer]",
+    "cartes": [
+      {
+        "type": "revision",
+        "format": "erreurs",
+        "lessonId": "prog-theoreme-de-pythagore",
+        "titre": "Refaire mes erreurs",
+        "sous": "Racine carrée et théorème de Pythagore · 3 questions",
+        "resume": "Refaire mes erreurs, Racine carrée et théorème de Pythagore · 3 questions"
+      }
+    ],
+    "outils": [
+      "Je regarde ton agenda…",
+      "Je regarde tes erreurs…",
+      "Je prépare ta carte…"
+    ],
+    "tours": 3,
+    "ms": 4867,
+    "usage": {
+      "input_tokens": 16,
+      "output_tokens": 564,
+      "cache_read_input_tokens": 20714,
+      "cache_creation_input_tokens": 12632
+    }
+  },
+  {
+    "id": 26,
+    "systeme": "reviz-agent",
+    "modele": "claude-haiku-5-5",
+    "version": "arbre reviz-ia-haiku55",
+    "effort": "low",
+    "reponse": "Ton contrôle de maths sur Pythagore est **jeudi**, et tes étapes du jour sont encore à rattraper. Pour 15 minutes dans le bus, le plus utile c'est le quiz sur tes points ratés.\n\nTu t'es trompé récemment sur : « ABC est rectangle en A, BC = 10 cm et AB = 6 cm. Combien mesure AC ? ». Pense à quel côté est le plus long (l'hypoténuse) avant de calculer.\n\nTouche **Commencer** sur la carte ci-dessous.\n\nÇa tombe bien : trois questions, ça rentre dans ton trajet. Si tu as encore du temps, dis-le-moi et on enchaînera avec les flashcards.\n\n[Carte affichée sous la réponse : Refaire mes erreurs, Racine carrée et théorème de Pythagore · 3 questions, bouton Commencer]",
+    "cartes": [
+      {
+        "type": "revision",
+        "format": "erreurs",
+        "lessonId": "prog-theoreme-de-pythagore",
+        "titre": "Refaire mes erreurs",
+        "sous": "Racine carrée et théorème de Pythagore · 3 questions",
+        "resume": "Refaire mes erreurs, Racine carrée et théorème de Pythagore · 3 questions"
+      }
+    ],
+    "outils": [
+      "Je regarde ton agenda…",
+      "Je regarde tes erreurs…",
+      "Je prépare ta carte…"
+    ],
+    "tours": 3,
+    "ms": 6790,
+    "usage": {
+      "input_tokens": 16,
+      "output_tokens": 748,
+      "cache_read_input_tokens": 20864,
+      "cache_creation_input_tokens": 13064
+    }
+  },
+  {
+    "id": 27,
+    "systeme": "reviz-agent",
+    "modele": "claude-haiku-5-5",
+    "version": "arbre reviz-ia-haiku55",
+    "effort": "low",
+    "reponse": "Bonne nouvelle : ton contrôle de maths sur **Pythagore** est jeudi, donc tu as le temps, et on commence par le plus simple.\n\nAujourd'hui, ton plan prévoit deux étapes : les **flashcards** pour revoir les formules, puis le quiz sur tes erreurs. Tu as raté une question d'entraînement hier : dans un triangle ABC rectangle en A, avec BC = 10 cm et AB = 6 cm, il faut trouver AC. Le plus grand côté, c'est celui en face de l'angle droit (ici BC), donc tu sais déjà quelle formule utiliser.\n\nCommence par les flashcards, puis on verra ensemble la question ratée.",
+    "cartes": [],
+    "outils": [
+      "Je regarde ton agenda…",
+      "Je regarde tes erreurs…"
+    ],
+    "tours": 2,
+    "ms": 3720,
+    "usage": {
+      "input_tokens": 12,
+      "output_tokens": 628,
+      "cache_read_input_tokens": 9060,
+      "cache_creation_input_tokens": 11786
+    }
+  },
+  {
+    "id": 28,
+    "systeme": "reviz-agent",
+    "modele": "claude-haiku-5-5",
+    "version": "arbre reviz-ia-haiku55",
+    "effort": "low",
+    "reponse": "Pas grave, un quiz raté, c'est une info utile : ça te montre exactement ce qu'il faut revoir. Ton contrôle sur Pythagore est jeudi 5 novembre, et le quiz sur tes points ratés est à rattraper aujourd'hui.\n\nUne question à retravailler : **ABC est rectangle en A, BC = 10 cm et AB = 6 cm. Combien mesure AC ?** Indice : dans un triangle rectangle, le plus grand côté, **l'hypoténuse**, est celui qui est face à l'angle droit. Essaie de dire ici quel côté est l'hypoténuse et quelle formule tu utiliserais.\n\nTouche **Commencer** sur la carte « Refaire mes erreurs » pour reprendre tes 3 questions. Dis-moi ta réponse à celle de BC = 10 cm, je te dirai où tu en es.\n\n[Carte affichée sous la réponse : Refaire mes erreurs, Racine carrée et théorème de Pythagore · 3 questions, bouton Commencer]",
+    "cartes": [
+      {
+        "type": "revision",
+        "format": "erreurs",
+        "lessonId": "prog-theoreme-de-pythagore",
+        "titre": "Refaire mes erreurs",
+        "sous": "Racine carrée et théorème de Pythagore · 3 questions",
+        "resume": "Refaire mes erreurs, Racine carrée et théorème de Pythagore · 3 questions"
+      }
+    ],
+    "outils": [
+      "Je regarde ton agenda…",
+      "Je regarde tes erreurs…",
+      "Je prépare ta carte…"
+    ],
+    "tours": 3,
+    "ms": 5010,
+    "usage": {
+      "input_tokens": 16,
+      "output_tokens": 704,
+      "cache_read_input_tokens": 20876,
+      "cache_creation_input_tokens": 12952
+    }
+  },
+  {
+    "id": 29,
+    "systeme": "reviz-agent",
+    "modele": "claude-haiku-5-5",
+    "version": "arbre reviz-ia-haiku55",
+    "effort": "low",
+    "reponse": "Je comprends, ce soir c'est dur de se motiver. Mais ton contrôle de maths (Pythagore) est jeudi, et il reste **deux petites étapes à rattraper aujourd'hui**. Ça ne prend que quelques minutes.\n\nCommence par les **flashcards** : elles font revoir les formules en vitesse, sans rien rédiger.\n\nUne fois fait, tu pourras attaquer le quiz sur tes points ratés. Par exemple : si ABC est rectangle en A, avec BC = 10 cm et AB = 6 cm, combien mesure AC ? Essaie de répondre avant de lancer le quiz.\n\nTouche **Commencer** sur la carte. Dix minutes suffisent, et après tu seras content d'avoir commencé.\n\n[Carte affichée sous la réponse : Flashcards, Racine carrée et théorème de Pythagore, bouton Commencer]",
+    "cartes": [
+      {
+        "type": "revision",
+        "format": "flashcards",
+        "chapitre": {
+          "id": "theoreme-de-pythagore",
+          "titre": "Racine carrée et théorème de Pythagore"
+        },
+        "classe": "4ème",
+        "programme": "Maths",
+        "titre": "Flashcards",
+        "sous": "Racine carrée et théorème de Pythagore",
+        "resume": "Flashcards, Racine carrée et théorème de Pythagore"
+      }
+    ],
+    "outils": [
+      "Je regarde ton agenda…",
+      "Je regarde tes erreurs…",
+      "Je prépare ta carte…"
+    ],
+    "tours": 3,
+    "ms": 4569,
+    "usage": {
+      "input_tokens": 16,
+      "output_tokens": 634,
+      "cache_read_input_tokens": 20818,
+      "cache_creation_input_tokens": 12830
+    }
+  },
+  {
+    "id": 30,
+    "systeme": "reviz-agent",
+    "modele": "claude-haiku-5-5",
+    "version": "arbre reviz-ia-haiku55",
+    "effort": "low",
+    "reponse": "Pour les dates, commence par les **flashcards** : retrouver une date de mémoire, sans la voir écrite, c'est ce qui la fixe. Le **quiz** vient après, pour vérifier que tu as bien retenu et pour comprendre le reste.\n\nTon contrôle d'histoire est lundi 9 novembre, et tes flashcards sont prévues demain. Pour la suite, tu as raté deux questions sur les **sans-culottes** et sur la **Terreur** (1793) : refais-les avec la carte « erreurs » après les flashcards.\n\nTouche Commencer sur la carte pour lancer les flashcards de la Révolution.\n\nTu peux aussi commencer dès maintenant, puisque ton contrôle de maths sur Pythagore est jeudi et qu'il reste une étape à rattraper aujourd'hui.\n\n[Carte affichée sous la réponse : Flashcards, La Révolution française : un nouvel ordre politique (1789-1799), bouton Commencer]",
+    "cartes": [
+      {
+        "type": "revision",
+        "format": "flashcards",
+        "chapitre": {
+          "id": "revolution-francaise-1789-1799",
+          "titre": "La Révolution française : un nouvel ordre politique (1789-1799)"
+        },
+        "classe": "4ème",
+        "programme": "Histoire",
+        "titre": "Flashcards",
+        "sous": "La Révolution française : un nouvel ordre politique (1789-1799)",
+        "resume": "Flashcards, La Révolution française : un nouvel ordre politique (1789-1799)"
+      }
+    ],
+    "outils": [
+      "Je regarde ton agenda…",
+      "Je regarde tes erreurs…",
+      "Je cherche dans ton programme…",
+      "Je prépare ta carte…"
+    ],
+    "tours": 3,
+    "ms": 5933,
+    "usage": {
+      "input_tokens": 16,
+      "output_tokens": 816,
+      "cache_read_input_tokens": 21868,
+      "cache_creation_input_tokens": 13974
+    }
+  },
+  {
+    "id": 31,
+    "systeme": "reviz-agent",
+    "modele": "claude-haiku-5-5",
+    "version": "arbre reviz-ia-haiku55",
+    "effort": "low",
+    "reponse": "Je ne peux pas écrire ta rédaction à ta place, mais je peux t'aider à la faire toi-même, et ça ira vite. Le chapitre **l'autobiographie** (se raconter, se représenter) correspond bien à ton sujet.\n\nPour un souvenir d'enfance, tu peux suivre ces étapes :\n\n- Choisis un souvenir précis (un moment, un lieu, une personne), pas toute ton enfance.\n- Note 3 idées : ce qui s'est passé, ce que tu ressentais, ce que tu en retiens aujourd'hui.\n- Raconte au **passé composé** l'action principale, et à l'**imparfait** le décor et ce que tu ressentais.\n\nPour démarrer, dis-moi en une phrase quel souvenir tu veux raconter. Puis écris juste la première phrase, et je te dirai comment la améliorer.\n\nTouche **Commencer** sur la fiche du chapitre pour revoir les règles du récit de souvenir avant d'écrire.\n\n[Carte affichée sous la réponse : La fiche du chapitre, Se raconter, se représenter : l'autobiographie, bouton Commencer]",
+    "cartes": [
+      {
+        "type": "revision",
+        "format": "fiche",
+        "chapitre": {
+          "id": "se-raconter-se-representer",
+          "titre": "Se raconter, se représenter : l'autobiographie"
+        },
+        "classe": "3ème",
+        "programme": "Français",
+        "titre": "La fiche du chapitre",
+        "sous": "Se raconter, se représenter : l'autobiographie",
+        "resume": "La fiche du chapitre, Se raconter, se représenter : l'autobiographie"
+      }
+    ],
+    "outils": [
+      "Je regarde ton agenda…",
+      "Je cherche dans ton programme…",
+      "Je prépare ta carte…"
+    ],
+    "tours": 3,
+    "ms": 6850,
+    "usage": {
+      "input_tokens": 16,
+      "output_tokens": 903,
+      "cache_read_input_tokens": 19580,
+      "cache_creation_input_tokens": 11666
+    }
+  },
+  {
+    "id": 32,
+    "systeme": "reviz-agent",
+    "modele": "claude-haiku-5-5",
+    "version": "arbre reviz-ia-haiku55",
+    "effort": "low",
+    "reponse": "Bonne nouvelle, c'est une équation simple : on cherche le nombre **x** qui rend l'égalité vraie. Le but est de faire disparaître le 7 à gauche pour que x reste tout seul.\n\nPremière étape : enlève 7 des deux côtés. Tu écris 3x + 7 − 7 = 22 − 7, puis tu calcules le côté droit.\n\nFais cette étape et écris-moi ce que tu obtiens à droite. Ensuite on passera au **3** qui multiplie x, et tu pourras vérifier ta réponse en remplaçant x dans l'équation d'origine.",
+    "cartes": [],
+    "outils": [],
+    "tours": 1,
+    "ms": 2773,
+    "usage": {
+      "input_tokens": 8,
+      "output_tokens": 354,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 9102
+    }
+  },
+  {
+    "id": 33,
+    "systeme": "reviz-agent",
+    "modele": "claude-haiku-5-5",
+    "version": "arbre reviz-ia-haiku55",
+    "effort": "low",
+    "reponse": "Bonne nouvelle, c'est une phrase au passé, et on peut la découper en morceaux.\n\nCommence par ces mots :\n- **hier** = yesterday\n- **aller** (au passé) : ça devient *went* en anglais\n- **voir** un film (au passé) : c'est un verbe irrégulier, *to see* → *saw*, ou *to watch* → *watched*\n- **un film d'horreur** = *a horror film*\n\nEssaie d'assembler la phrase dans l'ordre français, puis envoie-moi ta version. Je te dirai ce qui est juste et ce qu'on peut améliorer.",
+    "cartes": [],
+    "outils": [],
+    "tours": 1,
+    "ms": 3048,
+    "usage": {
+      "input_tokens": 8,
+      "output_tokens": 484,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 9148
+    }
+  },
+  {
+    "id": 34,
+    "systeme": "reviz-agent",
+    "modele": "claude-haiku-5-5",
+    "version": "arbre reviz-ia-haiku55",
+    "effort": "low",
+    "reponse": "Je ne vais pas écrire le texte à ta place, mais je peux t'aider à le construire. Ton chapitre sur la Révolution française contient tout ce qu'il faut.\n\nTa réponse peut suivre trois idées :\n\n- **Les droits** : la DDHC (26 août 1789) dit que les hommes naissent libres et égaux en droits.\n- **Le pouvoir** : la **souveraineté nationale** remplace le pouvoir du roi, et la République est proclamée en septembre 1792.\n- **La société** : la société d'ordres disparaît, donc les privilèges de la noblesse et du clergé sont abolis.\n\nChoisis une idée par paragraphe et essaie d'écrire les 10 lignes. Envoie-moi ton premier jet, je te dirai ce qui est juste et ce qui manque. Et si tu veux revoir le cours avant, touche Commencer sur la fiche ci-dessous.\n\n[Carte affichée sous la réponse : La fiche du chapitre, La Révolution française : un nouvel ordre politique (1789-1799), bouton Commencer]",
+    "cartes": [
+      {
+        "type": "revision",
+        "format": "fiche",
+        "chapitre": {
+          "id": "revolution-francaise-1789-1799",
+          "titre": "La Révolution française : un nouvel ordre politique (1789-1799)"
+        },
+        "classe": "4ème",
+        "programme": "Histoire",
+        "titre": "La fiche du chapitre",
+        "sous": "La Révolution française : un nouvel ordre politique (1789-1799)",
+        "resume": "La fiche du chapitre, La Révolution française : un nouvel ordre politique (1789-1799)"
+      }
+    ],
+    "outils": [
+      "Je cherche dans ton programme…",
+      "Je regarde ton agenda…",
+      "Je relis le chapitre…",
+      "Je prépare ta carte…"
+    ],
+    "tours": 4,
+    "ms": 7181,
+    "usage": {
+      "input_tokens": 20,
+      "output_tokens": 849,
+      "cache_read_input_tokens": 34458,
+      "cache_creation_input_tokens": 15944
+    }
+  },
+  {
+    "id": 35,
+    "systeme": "reviz-agent",
+    "modele": "claude-haiku-5-5",
+    "version": "arbre reviz-ia-haiku55",
+    "effort": "low",
+    "reponse": "Je ne peux pas te donner les réponses directement, mais je peux t'aider à les trouver toi-même, et c'est souvent plus utile pour le contrôle.\n\nDis-moi le **thème** du chapitre (par exemple les fractions, les équations ou Pythagore) et técris-moi l'énoncé de l'exercice 4, ou au moins la première question. On le fera ensemble étape par étape : je te guide avec la méthode, et tu essaies chaque étape.\n\nTu peux commencer par me dire ce que demande la question 1.",
+    "cartes": [],
+    "outils": [],
+    "tours": 1,
+    "ms": 2898,
+    "usage": {
+      "input_tokens": 8,
+      "output_tokens": 390,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 9104
+    }
+  },
+  {
+    "id": 36,
+    "systeme": "reviz-agent",
+    "modele": "claude-haiku-5-5",
+    "version": "arbre reviz-ia-haiku55",
+    "effort": "low",
+    "reponse": "Je n'ai pas trouvé de chapitre sur le cycle de l'eau dans ton programme de l'appli, mais voici le schéma, qui est bien connu :\n\n- **Évaporation** : le soleil chauffe l'eau des mers, des lacs et des rivières, et elle devient de la vapeur d'eau qui monte dans l'air.\n- **Transpiration** : les plantes rejettent aussi de la vapeur d'eau par leurs feuilles.\n- **Condensation** : en montant et en refroidissant, la vapeur se transforme en minuscules gouttelettes, qui forment les **nuages**.\n- **Précipitations** : quand les gouttelettes grossissent, elles retombent sous forme de pluie, de neige ou de grêle.\n- **Ruissellement et infiltration** : l'eau coule vers les rivières et la mer, ou s'infiltre dans le sol pour remplir les **nappes phréatiques**.\n\nSchéma à recopier :\n\nSoleil → évaporation (mers, lacs, rivières) → vapeur d'eau → condensation → nuages → précipitations → sol et rivières → mers → évaporation...\n\nPour t'entraîner, réponds à cette question : pourquoi le cycle de l'eau ne s'arrête-t-il jamais ? Tu peux me dire ta réponse ici.",
+    "cartes": [],
+    "outils": [
+      "Je cherche dans ton programme…",
+      "Je relis le chapitre…"
+    ],
+    "tours": 3,
+    "ms": 5792,
+    "usage": {
+      "input_tokens": 16,
+      "output_tokens": 1044,
+      "cache_read_input_tokens": 19126,
+      "cache_creation_input_tokens": 14920
+    }
+  },
+  {
+    "id": 37,
+    "systeme": "reviz-agent",
+    "modele": "claude-haiku-5-5",
+    "version": "arbre reviz-ia-haiku55",
+    "effort": "low",
+    "reponse": "Voici la frise, de 1789 à 1799 :\n\n- **1789** → 14 juillet : prise de la Bastille\n- **1789** → 26 août : Déclaration des droits de l'homme et du citoyen (DDHC)\n- **1791** → Juin : fuite du roi, arrêté à Varennes ; Constitution de 1791\n- **1792** → 10 août : chute de la monarchie\n- **1792** → Septembre : proclamation de la **République**\n- **1793** → 21 janvier : exécution de Louis XVI\n- **1793-1794** → La **Terreur**\n- **1799** → Coup d'État de Bonaparte\n\nPour la mettre en forme, colore les périodes : monarchie absolue, monarchie constitutionnelle, République. Attention, la prise de la Bastille ne met pas fin à la monarchie : le roi règne encore jusqu'en août 1792.\n\nPour t'entraîner, dis-moi : qu'est-ce qui vient en premier, la DDHC ou la Constitution de 1791 ?",
+    "cartes": [],
+    "outils": [
+      "Je cherche dans ton programme…",
+      "Je relis le chapitre…"
+    ],
+    "tours": 3,
+    "ms": 4764,
+    "usage": {
+      "input_tokens": 16,
+      "output_tokens": 845,
+      "cache_read_input_tokens": 19328,
+      "cache_creation_input_tokens": 14512
+    }
+  },
+  {
+    "id": 38,
+    "systeme": "reviz-agent",
+    "modele": "claude-haiku-5-5",
+    "version": "arbre reviz-ia-haiku55",
+    "effort": "low",
+    "reponse": "Voilà ta carte mentale sur les fractions, à garder sous les yeux :\n\n**Fractions** (a/b : a = numérateur, b = dénominateur)\n- Sens : un quotient, a ÷ b (3/4 = 0,75)\n- Fractions égales : on multiplie ou divise le haut ET le bas par le même nombre\n  - 18/24 → ÷ 6 → 3/4\n  - 2/3 → × 4 → 8/12\n- Comparer\n  - Même dénominateur : le plus grand numérateur gagne (5/9 > 2/9)\n  - Sinon : on met au même dénominateur (2/3 = 8/12 < 9/12 = 3/4)\n- Additionner / soustraire\n  - Même dénominateur : on additionne les numérateurs, on garde le dénominateur\n  - Sinon : on réduit au même dénominateur, puis on calcule (1/2 + 1/3 = 3/6 + 2/6 = 5/6)\n  - Piège : on n'additionne jamais les dénominateurs\n- Fraction d'une quantité : les 3/5 de 40 € → 40 ÷ 5 × 3 = 24 €\n\nTouche **Commencer** pour ouvrir la carte dans l'appli. Ensuite, essaie ceci : calcule 1/4 + 1/2 (indice : mets les deux fractions au dénominateur 4).\n\n[Carte affichée sous la réponse : Carte mentale, Fractions : égalité, comparaison, addition et soustraction, bouton Commencer]",
+    "cartes": [
+      {
+        "type": "revision",
+        "format": "carte_mentale",
+        "chapitre": {
+          "id": "fractions",
+          "titre": "Fractions : égalité, comparaison, addition et soustraction"
+        },
+        "classe": "5ème",
+        "programme": "Maths",
+        "titre": "Carte mentale",
+        "sous": "Fractions : égalité, comparaison, addition et soustraction",
+        "resume": "Carte mentale, Fractions : égalité, comparaison, addition et soustraction"
+      }
+    ],
+    "outils": [
+      "Je cherche dans ton programme…",
+      "Je relis le chapitre…",
+      "Je prépare ta carte…"
+    ],
+    "tours": 4,
+    "ms": 8113,
+    "usage": {
+      "input_tokens": 20,
+      "output_tokens": 1064,
+      "cache_read_input_tokens": 33232,
+      "cache_creation_input_tokens": 15310
+    }
+  },
+  {
+    "id": 39,
+    "systeme": "reviz-agent",
+    "modele": "claude-haiku-5-5",
+    "version": "arbre reviz-ia-haiku55",
+    "effort": "low",
+    "reponse": "Voici le trajet des aliments, avec ce qui se passe à chaque étape :\n\n- **Bouche** : les dents découpent et broient (action mécanique), la salive commence à transformer l'amidon en sucre.\n- → **Œsophage** : il fait descendre les aliments jusqu'à l'estomac.\n- → **Estomac** : il brasse les aliments et les enzymes commencent à découper les protéines.\n- → **Intestin grêle** : les enzymes finissent la digestion, la bile aide à digérer les graisses, puis les **nutriments** passent dans le sang (c'est l'absorption).\n- → **Gros intestin** : il récupère l'eau et élimine les restes sous forme de selles.\n\nLes glandes digestives (salivaires, foie, pancréas) fournissent les sucs digestifs qui font le travail chimique.\n\nPour retenir la différence clé : la digestion transforme les aliments en nutriments, et l'absorption fait passer ces nutriments dans le sang.\n\nEssaie de réciter le trajet sans regarder, puis dis-moi ce qui se passe dans l'intestin grêle.",
+    "cartes": [],
+    "outils": [
+      "Je cherche dans ton programme…",
+      "Je relis le chapitre…"
+    ],
+    "tours": 3,
+    "ms": 4974,
+    "usage": {
+      "input_tokens": 16,
+      "output_tokens": 708,
+      "cache_read_input_tokens": 18540,
+      "cache_creation_input_tokens": 13864
+    }
+  },
+  {
+    "id": 40,
+    "systeme": "reviz-agent",
+    "modele": "claude-haiku-5-5",
+    "version": "arbre reviz-ia-haiku55",
+    "effort": "low",
+    "reponse": "Je ne peux pas faire de tableau ici, mais voici la comparaison en version liste.\n\n**Éruption effusive**\n- Lave **fluide**, les gaz s'échappent facilement.\n- Ça donne des coulées et des fontaines de lave, plutôt calmes.\n- Exemples : Piton de la Fournaise (La Réunion), Kīlauea (Hawaï).\n\n**Éruption explosive**\n- Lave **visqueuse** (pâteuse), les gaz restent piégés puis sortent brutalement.\n- Ça projette cendres et blocs, avec parfois des nuées ardentes.\n- Exemples : Vésuve en 79, montagne Pelée en 1902.\n\nLe point clé à retenir : plus la lave est visqueuse et riche en gaz, plus l'éruption est **explosive**.\n\nPour vérifier que c'est bien rangé dans ta tête, dis-moi : pourquoi une lave fluide donne-t-elle une éruption plutôt calme ?",
+    "cartes": [],
+    "outils": [
+      "Je cherche dans ton programme…",
+      "Je relis le chapitre…"
+    ],
+    "tours": 3,
+    "ms": 6865,
+    "usage": {
+      "input_tokens": 16,
+      "output_tokens": 709,
+      "cache_read_input_tokens": 18872,
+      "cache_creation_input_tokens": 14500
+    }
+  }
+]

@@ -80,7 +80,8 @@ async function noterUneFois(d) {
     model: CORRECTEUR,
     max_tokens: 8000,
     system: SYSTEME,
-    messages: [{ role: 'user', content: `Classe de l'élève : ${d.classe}. Catégorie : ${banc.categories[d.categorie]}.\n\nMessage envoyé par l'élève :\n<message>\n${message(d)}\n</message>\n\nCe qu'une bonne réponse fait (indicatif) : ${d.attendu}\n\n${blocs}` }],
+    // Demande avec contexte : ce que l'appli sait déjà (Réviz IA en agent le lit au lieu de le recevoir tapé).
+    messages: [{ role: 'user', content: `Classe de l'élève : ${d.classe}. Catégorie : ${banc.categories[d.categorie]}.\n\nMessage envoyé par l'élève :\n<message>\n${message(d)}\n</message>\n\n${d.contexte && banc.eleve.appli ? `${banc.eleve.appli}\n\n` : ''}Ce qu'une bonne réponse fait (indicatif) : ${d.attendu}\n\n${blocs}` }],
     output_config: { format: zodOutputFormat(Note) },
   })
   lus += r.usage.input_tokens; ecrits += r.usage.output_tokens
