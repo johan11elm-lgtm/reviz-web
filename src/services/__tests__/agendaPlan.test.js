@@ -48,6 +48,13 @@ describe('agenda : plan de révision', () => {
     expect(c.controles[2]).not.toHaveProperty('chapitres')
   })
 
+  it('garde la marque des cours scannés cochés pour le contrôle', async () => {
+    const chapitres = [{ id: '1730000000000', titre: 'Mon cours sur Thalès', scan: true }, { id: 'pytha', titre: 'Pythagore' }]
+    const a = await ajouterControle(invite, { matiere: 'maths', titre: '', date: dansJours(6), chapitres, classe: '3ème', programme: 'Maths' })
+    const c = a.controles.find(x => x.titre === 'Mon cours sur Thalès et Pythagore')
+    expect(c.chapitres).toEqual([{ id: '1730000000000', titre: 'Mon cours sur Thalès', scan: true }, { id: 'pytha', titre: 'Pythagore' }])
+  })
+
   it('intitulé : un chapitre, deux, ou le premier et le compte', () => {
     expect(intituleChapitres([])).toBe('')
     expect(intituleChapitres([{ titre: 'A' }])).toBe('A')

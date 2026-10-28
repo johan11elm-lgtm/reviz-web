@@ -79,13 +79,14 @@ export function intituleChapitres(chapitres = []) {
 }
 
 /**
- * Note un contrôle. `chapitres` : ceux du programme choisis à l'ajout ([{ id, titre }]), avec la
- * classe et le nom de la matière dans le programme (« Physique-Chimie ») pour rouvrir leurs
- * contenus ; sans intitulé, ils lui en donnent un. Le plan et le contrôle blanc s'appuient dessus.
+ * Note un contrôle. `chapitres` : ce qui tombe, choisi à l'ajout — chapitres du programme
+ * ([{ id, titre }]) et cours scannés de l'élève ([{ id: id de la leçon, titre, scan: true }]) —,
+ * avec la classe et le nom de la matière dans le programme (« Physique-Chimie ») pour rouvrir
+ * leurs contenus ; sans intitulé, ils lui en donnent un. Le plan et le contrôle blanc s'appuient dessus.
  */
 export async function ajouterControle(user, { matiere, titre, date, chapitres = [], classe = null, programme = null }) {
   const agenda = agendaLocal(user.uid)
-  const chs = (chapitres ?? []).filter(c => c?.id).slice(0, 12).map(c => ({ id: String(c.id), titre: String(c.titre ?? '').slice(0, 120) }))
+  const chs = (chapitres ?? []).filter(c => c?.id).slice(0, 12).map(c => ({ id: String(c.id), titre: String(c.titre ?? '').slice(0, 120), ...(c.scan ? { scan: true } : {}) }))
   const controle = {
     id: `c${Date.now().toString(36)}`,
     matiere,

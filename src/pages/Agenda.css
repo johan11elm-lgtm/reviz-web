@@ -410,3 +410,20 @@
 .ag-feuille .ag-dates { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)) minmax(0, 1.15fr); gap: 8px; overflow: visible; padding: 2px 0 4px; }
 .ag-feuille .ag-date-tuile { width: auto; min-width: 0; }
 .ag-feuille .ag-date-tuile--autre { padding: 0 6px; font-size: 13.5px; }
+/* Cours scannés dans la liste des chapitres, sous-titres des deux listes, ce qui manque pour ajouter. */
+.ag-groupe { display: block; margin: 12px 2px 6px; font-size: 12.5px; font-weight: 700; color: var(--rv-doux); }
+.ag-chapitres--scans { max-height: 200px; }
+.ag-chapitres--scans + .ag-groupe { margin-top: 14px; }
+.ag-chapitre-scan { flex: none; width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; border-radius: 8px; background: #DDF5F4; color: #04807F; font-size: 16px; }
+.ag-chapitre-sous { display: block; margin-top: 1px; font-size: 12px; font-weight: 500; color: var(--rv-doux); }
+.ag-chapitres-astuce { margin: 8px 2px 0; font-size: 12.5px; line-height: 1.4; color: var(--rv-doux); }
+.ag-feuille-pied { flex-wrap: wrap; }
+.ag-manque { flex: 1 1 100%; margin: 0 2px; font-size: 13.5px; font-weight: 600; color: var(--rv-vif-plein); }
+.ag-feuille--fenetre .ag-manque { flex: 1 1 auto; align-self: center; }
+/* La liste s'allonge (cours scannés + programme) : les boutons et « ce qui manque » restent
+ * collés en bas de la feuille, sur téléphone comme dans la fenêtre. */
+.ag-feuille { padding-bottom: 0; }
+.ag-feuille-pied { position: sticky; bottom: 0; z-index: 2; padding: 12px 0 calc(16px + env(safe-area-inset-bottom, 0px)); background: var(--rv-fond); box-shadow: 0 -14px 14px -14px rgba(4,42,101,.22); }
+.ag-feuille.ag-feuille--fenetre { padding-bottom: 0; }
+.ag-feuille--fenetre .ag-feuille-pied { padding-bottom: 22px; }
+.ag-cal-jour.is-choisi, .ag-cal-jour.is-choisi:hover { background: #042A65; color: #fff; }

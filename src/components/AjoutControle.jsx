@@ -1,14 +1,16 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { useAuth } from '../context/AuthContext';
 import { useModalA11y } from '../hooks/useModalA11y';
 import { useIsDesktop } from '../hooks/useMediaQuery';
 import { Mascot } from './Mascot';
+import { CameraIcon } from './Icons';
 import { ajouterControle } from '../services/agendaService';
 import { track } from '../services/statsService';
-import { MATIERES_CONTROLE, jourIso, ajouterJours, jourCourt, jourEnClair } from '../utils/agenda';
+import { MATIERES_CONTROLE, jourIso, ajouterJours, jourCourt, jourEnClair, matiereDuCours } from '../utils/agenda';
 import { loadCatalogue } from '../services/programmeService';
-import { hasProgramme, PROGRAMME_FALLBACK } from '../utils/programme';
+import { hasProgramme, isProgrammeLessonId, PROGRAMME_FALLBACK } from '../utils/programme';
+import { loadLessons } from '../services/historyService';
 import '../pages/Agenda.css';
 
 // Fond et tranche de chaque matière (handoff Agenda du 21/10).
@@ -80,22 +82,43 @@ function Calendrier({ valeur, onChange }) {
  * facultatif. Feuille du bas sur téléphone, fenêtre à deux colonnes sur ordinateur. `initial`
  * peut pré-remplir matière et date (cours touché dans l'emploi du temps).
  */
+/** Les cours que l'élève a scannés dans cette matière (les chapitres ouverts depuis le programme à part). */
+function coursScannes(matiere) {
+  return loadLessons().filter(l => {
+    if (isProgrammeLessonId(l.id) || !l.aiData) return false;
+    const m = matiereDuCours(l.metadata?.subject ?? '') ?? matiereDuCours(l.matiere ?? '');
+    return matiere === 'autre' ? !m || m === 'autre' : m === matiere;
+  });
+}
+
+const scanneLe = t => (t ? `Scanné le ${new Date(t).toLocaleDateString('fr-FR', { day: 'numeric', month: 'short' })}` : 'Cours scanné');
+
+function LigneChapitre({ coche, onClick, marque, nom, sous }) {
+  return (
+    <li>
+      <button type="button" role="checkbox" aria-checked={coche} className={`ag-chapitre${coche ? ' is-coche' : ''}`} onClick={onClick}>
+        <span className="ag-chapitre-case" aria-hidden="true">{coche && (
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="3.2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg>
+        )}</span>
+        {marque}
+        <span className="ag-chapitre-nom">{nom}{sous && <span className="ag-chapitre-sous">{sous}</span>}</span>
+      </button>
+    </li>
+  );
+}
+
 /**
- * Les chapitres du contrôle, comme l'assistant d'évaluation de l'app Nomad : ceux du programme de
- * la classe pour la matière choisie, à cocher (facultatif). L'étape se voit dès l'ouverture (« choisis
- * la matière ») pour que l'élève sache qu'on lui demandera sur quoi porte le contrôle ; sur téléphone,
- * la feuille descend jusqu'aux chapitres quand ils arrivent. Sans programme pour la matière (« Autre »,
- * catalogue indisponible), un mot renvoie à l'intitulé et le contrôle se note comme avant.
+ * Ce qui tombe au contrôle, comme l'assistant d'évaluation de l'app Nomad : les cours que l'élève a
+ * scannés dans la matière, puis les chapitres du programme de sa classe. Il en coche au moins un
+ * (sinon le plan le ferait réviser ce qui n'est pas au contrôle). L'étape se voit dès l'ouverture
+ * (« choisis la matière ») ; sur téléphone, la feuille descend jusqu'à la liste quand elle arrive.
+ * Sans rien à cocher (« Autre » sans cours scanné, catalogue indisponible), l'intitulé devient
+ * obligatoire. `onChoix` reçoit le nombre de choix possibles (null tant qu'on charge).
  */
-function ChoixChapitres({ classe, matiere, choisis, onChange, defiler }) {
+function ChoixChapitres({ classe, matiere, choisis, onChange, onChoix, defiler }) {
   const [etat, setEtat] = useState({ pour: null, chapitres: [], programme: null });
   const titre = useRef(null);
-  const pret = Boolean(matiere) && etat.pour === matiere && etat.chapitres.length > 0;
-  useEffect(() => {
-    if (!pret || !defiler) return;
-    const doux = !window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
-    titre.current?.scrollIntoView?.({ block: 'start', behavior: doux ? 'smooth' : 'auto' });
-  }, [pret, matiere, defiler]);
+  const scans = useMemo(() => (matiere ? coursScannes(matiere) : []), [matiere]);
   useEffect(() => {
     if (!matiere || matiere === 'autre') return undefined;
     let vivant = true;
@@ -107,37 +130,58 @@ function ChoixChapitres({ classe, matiere, choisis, onChange, defiler }) {
       .catch(() => { if (vivant) setEtat({ pour: matiere, chapitres: [], programme: null }); });
     return () => { vivant = false; };
   }, [classe, matiere]);
-  const entete = <span className="ag-champ-titre" ref={titre}>Chapitres du contrôle <span>facultatif</span></span>;
+  const charge = matiere === 'autre' || (Boolean(matiere) && etat.pour === matiere);
+  const programme = matiere !== 'autre' && etat.pour === matiere ? etat.chapitres : [];
+  const nbChoix = charge ? programme.length + scans.length : null;
+  useEffect(() => { onChoix?.(nbChoix); }, [nbChoix, onChoix]);
+  useEffect(() => {
+    if (!nbChoix || !defiler) return;
+    const doux = !window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+    titre.current?.scrollIntoView?.({ block: 'start', behavior: doux ? 'smooth' : 'auto' });
+  }, [nbChoix, matiere, defiler]);
+
+  const entete = <span className="ag-champ-titre" ref={titre}>Chapitres du contrôle</span>;
   let mot = null;
-  if (!matiere) mot = 'Choisis la matière : ses chapitres s’affichent ici, tu coches ceux qui tombent.';
-  else if (matiere === 'autre') mot = 'Pas de chapitres pour « Autre » : écris le sujet dans l’intitulé.';
-  else if (etat.pour !== matiere) mot = 'Chargement des chapitres…';
-  else if (!etat.chapitres.length) mot = 'Pas de chapitres pour cette matière : écris le sujet dans l’intitulé.';
+  if (!matiere) mot = 'Choisis la matière : ses chapitres et tes cours scannés s’affichent ici, tu coches ce qui tombe.';
+  else if (!charge) mot = 'Chargement des chapitres…';
+  else if (!nbChoix) mot = matiere === 'autre'
+    ? 'Pas de chapitres pour « Autre », ni de cours scanné : écris le sujet dans l’intitulé.'
+    : 'Pas encore de chapitres pour cette matière : écris le sujet dans l’intitulé.';
   if (mot) return <>{entete}<p className="ag-chapitres-vide" role="status">{mot}</p></>;
+
+  const estCoche = id => choisis.some(c => c.id === id);
   const basculer = ch => {
-    const deja = choisis.some(c => c.id === ch.id);
-    onChange(deja ? choisis.filter(c => c.id !== ch.id) : [...choisis, { id: ch.id, titre: ch.titre }], etat.programme);
+    onChange(estCoche(ch.id) ? choisis.filter(c => c.id !== ch.id) : [...choisis, ch], etat.pour === matiere ? etat.programme : null);
   };
+  const deuxListes = scans.length > 0 && programme.length > 0;
   return (
     <>
       {entete}
-      <p className="ag-champ-aide">Coche ce qui tombe : ton plan et ton contrôle blanc porteront dessus.</p>
-      <ul className="ag-chapitres" aria-label="Chapitres du contrôle">
-        {etat.chapitres.map((ch, i) => {
-          const coche = choisis.some(c => c.id === ch.id);
-          return (
-            <li key={ch.id}>
-              <button type="button" role="checkbox" aria-checked={coche} className={`ag-chapitre${coche ? ' is-coche' : ''}`} onClick={() => basculer(ch)}>
-                <span className="ag-chapitre-case" aria-hidden="true">{coche && (
-                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="3.2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg>
-                )}</span>
-                <span className="ag-chapitre-num" aria-hidden="true">{i + 1}</span>
-                <span className="ag-chapitre-nom">{ch.titre}</span>
-              </button>
-            </li>
-          );
-        })}
-      </ul>
+      <p className="ag-champ-aide">Coche ce qui tombe : ton plan et ton contrôle blanc porteront dessus, et seulement dessus.</p>
+      {scans.length > 0 && (
+        <>
+          {deuxListes && <span className="ag-groupe">Tes cours scannés</span>}
+          <ul className="ag-chapitres ag-chapitres--scans" aria-label="Tes cours scannés">
+            {scans.map(l => (
+              <LigneChapitre key={l.id} coche={estCoche(l.id)} onClick={() => basculer({ id: l.id, titre: l.metadata?.title ?? 'Cours scanné', scan: true })}
+                marque={<span className="ag-chapitre-scan" aria-hidden="true"><CameraIcon /></span>}
+                nom={l.metadata?.title ?? 'Cours scanné'} sous={scanneLe(l.scannedAt)} />
+            ))}
+          </ul>
+        </>
+      )}
+      {programme.length > 0 && (
+        <>
+          {deuxListes && <span className="ag-groupe">Programme de {classe.replace('ème', 'e')}</span>}
+          <ul className="ag-chapitres" aria-label="Chapitres du programme">
+            {programme.map((ch, i) => (
+              <LigneChapitre key={ch.id} coche={estCoche(ch.id)} onClick={() => basculer({ id: ch.id, titre: ch.titre })}
+                marque={<span className="ag-chapitre-num" aria-hidden="true">{i + 1}</span>} nom={ch.titre} />
+            ))}
+          </ul>
+        </>
+      )}
+      {!scans.length && <p className="ag-chapitres-astuce">Ton cours est en photo ? Scanne-le : il s’ajoutera ici pour tes prochains contrôles.</p>}
     </>
   );
 }
@@ -158,11 +202,19 @@ export function AjoutControle({ initial = {}, onClose, onSaved }) {
   const [titre, setTitre] = useState('');
   const [erreur, setErreur] = useState('');
   const [envoi, setEnvoi] = useState(false);
+  const [nbChoix, setNbChoix] = useState(null);
   const demain = ajouterJours(jourIso(), 1);
+  // Ce qui manque pour noter le contrôle : il faut savoir sur quoi il porte (un chapitre coché,
+  // ou l'intitulé quand il n'y a rien à cocher).
+  const manque = !matiere ? 'Choisis la matière.'
+    : nbChoix === null ? 'Chargement des chapitres…'
+      : nbChoix > 0 && !chapitres.length ? 'Coche au moins un chapitre du contrôle.'
+        : nbChoix === 0 && !titre.trim() ? 'Écris sur quoi porte le contrôle.'
+          : !date ? 'Choisis la date.' : null;
 
   async function enregistrer(e) {
     e.preventDefault();
-    if (!matiere || !date) return;
+    if (manque) return;
     setEnvoi(true);
     setErreur('');
     try {
@@ -189,7 +241,7 @@ export function AjoutControle({ initial = {}, onClose, onSaved }) {
           );
         })}
       </div>
-      <ChoixChapitres classe={classe} matiere={matiere} choisis={chapitres} defiler={!isDesktop} onChange={(c, p) => { setChapitres(c); setProgramme(p); }} />
+      <ChoixChapitres classe={classe} matiere={matiere} choisis={chapitres} defiler={!isDesktop} onChoix={setNbChoix} onChange={(c, p) => { setChapitres(c); setProgramme(p); }} />
       <span className="ag-champ-titre">Date</span>
       {!isDesktop && (
         <div className="ag-dates">
@@ -204,8 +256,8 @@ export function AjoutControle({ initial = {}, onClose, onSaved }) {
       )}
       {calendrier && !isDesktop && <Calendrier valeur={date} onChange={setDate} />}
       {date && <p className="ag-date-choisie">{jourEnClair(date).replace(/^./, c => c.toUpperCase())}</p>}
-      <label className="ag-champ-titre" htmlFor="ajout-intitule">Intitulé <span>facultatif</span></label>
-      <input id="ajout-intitule" className="ag-input" type="text" maxLength={80} placeholder={chapitres.length ? "Pris sur les chapitres cochés" : "Chapitre ou sujet"} value={titre} onChange={e => setTitre(e.target.value)} />
+      <label className="ag-champ-titre" htmlFor="ajout-intitule">Intitulé {nbChoix !== 0 && <span>facultatif</span>}</label>
+      <input id="ajout-intitule" className="ag-input" type="text" maxLength={80} placeholder={nbChoix === 0 ? 'Sur quoi porte le contrôle' : chapitres.length ? 'Pris sur les chapitres cochés' : 'Chapitre ou sujet'} value={titre} onChange={e => setTitre(e.target.value)} />
       {erreur && <p className="ag-erreur" role="alert">{erreur}</p>}
     </>
   );
@@ -229,8 +281,9 @@ export function AjoutControle({ initial = {}, onClose, onSaved }) {
           </div>
         ) : formulaire}
         <div className="ag-feuille-pied">
+          {matiere && manque && nbChoix !== null && <p className="ag-manque" role="status">{manque}</p>}
           {isDesktop && <button type="button" className="ag-btn ag-btn--creme" onClick={onClose}>Annuler</button>}
-          <button type="submit" className="ag-btn" disabled={envoi || !matiere || !date}>{envoi ? 'Enregistrement…' : 'Ajouter'}</button>
+          <button type="submit" className="ag-btn" disabled={envoi || Boolean(manque)}>{envoi ? 'Enregistrement…' : 'Ajouter'}</button>
         </div>
       </form>
     </div>,

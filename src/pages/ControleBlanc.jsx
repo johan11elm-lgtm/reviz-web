@@ -105,7 +105,8 @@ function Session({ controle, uid, onRefaire }) {
   const isDesktop = useIsDesktop();
   const m = matiereControle(controle.matiere);
   // Les leçons du sujet : celles des chapitres choisis pour le contrôle (rouverts depuis le
-  // programme s'ils n'ont jamais été ouverts), sinon les chapitres de la matière déjà ouverts.
+  // programme s'ils n'ont jamais été ouverts, cours scannés tels quels), sinon les chapitres de la
+  // matière déjà ouverts.
   const [lecons, setLecons] = useState(null);
   const [duControle, setDuControle] = useState(false);
   useEffect(() => {
@@ -115,8 +116,8 @@ function Session({ controle, uid, onRefaire }) {
     const chs = controle.chapitres ?? [];
     if (!chs.length) { setLecons(deLaMatiere); return undefined; }
     Promise.all(chs.map(async ch => {
-      const deja = historique.find(l => l.id === chapterLessonId(ch.id));
-      if (deja) return deja;
+      const deja = historique.find(l => l.id === (ch.scan ? ch.id : chapterLessonId(ch.id)));
+      if (deja || ch.scan) return deja ?? null;
       const aiData = await loadChapterContent(controle.classe ?? PROGRAMME_FALLBACK, controle.programme ?? m.slug, ch.id).catch(() => null);
       return aiData && { id: chapterLessonId(ch.id), metadata: { title: ch.titre, subject: controle.programme ?? m.label }, aiData };
     })).then(ls => {

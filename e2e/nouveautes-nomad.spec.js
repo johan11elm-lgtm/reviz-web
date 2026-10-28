@@ -181,7 +181,7 @@ for (const [appareil, viewport] of APPAREILS) {
       await page.getByRole('button', { name: 'Ajouter un contrôle' }).first().click()
       const feuille = page.getByRole('dialog', { name: 'Ajouter un contrôle' })
       // L'étape des chapitres se voit avant même le choix de la matière.
-      await expect(feuille.getByText(/Choisis la matière : ses chapitres s’affichent ici/)).toBeVisible()
+      await expect(feuille.getByText(/Choisis la matière : ses chapitres et tes cours scannés s’affichent ici/)).toBeVisible()
       await feuille.getByRole('button', { name: 'Maths', exact: true }).click()
       // Les chapitres de la matière, à cocher : Thalès, jamais ouvert.
       const thales = feuille.getByRole('checkbox', { name: 'Le théorème de Thalès' })
@@ -207,6 +207,43 @@ for (const [appareil, viewport] of APPAREILS) {
       await page.getByRole('button', { name: /^Réviser/ }).click()
       await expect(page).toHaveURL(/\/analyse/)
       await expect(page.getByRole('heading', { level: 1, name: 'Le théorème de Thalès' })).toBeVisible()
+    })
+
+    test('un cours scanné se coche parmi les chapitres ; sans rien de coché, on ne peut pas ajouter', async ({ page }) => {
+      await mockApiRoutes(page)
+      await mockProgramme(page)
+      await entrerEnEssai(page, { aller: null })
+      const cours = chapitreThales()
+      await page.evaluate(aiData => {
+        const g = JSON.parse(localStorage.getItem('reviz-guest'))
+        const lecon = { id: '1730000000000', scannedAt: Date.now(), source: 'scan', metadata: { title: 'Mon cours sur Thalès', subject: 'Mathématiques' }, flashcardsCount: aiData.flashcards.length, quizCount: aiData.quiz.length, aiData }
+        for (const cle of [`reviz-lessons-${g.uid}`, 'reviz-lessons']) localStorage.setItem(cle, JSON.stringify([lecon]))
+      }, cours)
+      await page.goto('/agenda')
+      await page.getByRole('button', { name: 'Ajouter un contrôle' }).first().click()
+      const feuille = page.getByRole('dialog', { name: 'Ajouter un contrôle' })
+      await feuille.getByRole('button', { name: 'Maths', exact: true }).click()
+      if (viewport.width >= 1024) await feuille.getByRole('button', { name: jourEnClair(jour(2)), exact: true }).click()
+      else await feuille.getByRole('button', { name: /^Demain/ }).click()
+      // Le chapitre est obligatoire : sinon le plan ferait réviser ce qui n'est pas au contrôle.
+      await expect(feuille.getByText('Coche au moins un chapitre du contrôle.')).toBeVisible()
+      await expect(feuille.getByRole('button', { name: 'Ajouter', exact: true })).toBeDisabled()
+      // Le cours scanné de la matière, en tête de liste, avec les chapitres du programme.
+      await expect(feuille.getByText('Tes cours scannés')).toBeVisible()
+      await feuille.getByRole('checkbox', { name: /^Mon cours sur Thalès/ }).click()
+      await sansDebordement(page, `cours scanné dans l’ajout ${appareil}`)
+      await feuille.getByRole('button', { name: 'Ajouter', exact: true }).click()
+      await expect(page.getByText('Maths · Mon cours sur Thalès')).toBeVisible()
+
+      // Le contrôle blanc porte sur le cours scanné.
+      await page.getByRole('button', { name: 'Contrôle blanc', exact: true }).click()
+      await expect(page).toHaveURL(/\/controle\?c=/)
+      await expect(page.getByText('sur 1 chapitre du contrôle')).toBeVisible()
+
+      // La puce du cours ouvre sa fiche.
+      await page.goto('/agenda')
+      await page.getByRole('button', { name: 'Mon cours sur Thalès', exact: true }).click()
+      await expect(page).toHaveURL(/\/analyse/)
     })
 
     test('le mode dyslexie change la police des écrans de lecture, et reste choisi', async ({ page }) => {

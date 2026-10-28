@@ -38,9 +38,11 @@ export async function loadChapterContent(classe, matiere, chapterId) {
   return data
 }
 
-/** Progression de l'élève sur un chapitre, d'après l'historique et la répétition espacée. */
-export function chapterProgress(chapter, lessons = loadLessons()) {
-  const lessonId = chapterLessonId(chapter.id)
+/**
+ * Progression de l'élève sur un chapitre, d'après l'historique et la répétition espacée.
+ * `lessonId` : l'id de la leçon quand ce n'est pas celui du chapitre (cours scanné d'un contrôle).
+ */
+export function chapterProgress(chapter, lessons = loadLessons(), lessonId = chapterLessonId(chapter.id)) {
   const lesson = lessons.find(l => l.id === lessonId) ?? null
   const total = lesson?.flashcardsCount ?? 0
   let seen = 0
