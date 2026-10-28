@@ -50,3 +50,20 @@ export function preparerQuizErreurs(uid, matiere) {
   const id = leconAvecErreurs(uid, matiere)
   return id ? restoreLesson(id) : false
 }
+
+/**
+ * Les questions ratées de ces derniers jours, pour Réviz IA sans leçon : elles ne vivent que sur
+ * l'appareil, l'appli les joint à la demande (api/_agent.js les borne). Les plus récentes d'abord.
+ */
+export function erreursRecentes(uid, jours = 7) {
+  const depuis = Date.now() - jours * 86_400_000
+  const lecons = loadLessons()
+  return Object.entries(lire(uid))
+    .filter(([, e]) => e?.questions?.length && (e.at ?? 0) >= depuis)
+    .sort((a, b) => (b[1].at ?? 0) - (a[1].at ?? 0))
+    .slice(0, 12)
+    .map(([lessonId, e]) => {
+      const l = lecons.find(x => x.id === lessonId)
+      return { lessonId, titre: l?.metadata?.title ?? 'Leçon', matiere: l?.matiere ?? matiereDuCours(l?.metadata?.subject ?? '') ?? '', questions: e.questions.slice(0, 10), at: e.at }
+    })
+}

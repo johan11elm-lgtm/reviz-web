@@ -16,7 +16,7 @@ import { doc, getDoc, setDoc } from 'firebase/firestore'
 import { auth, db } from './firebaseConfig'
 import { apiFetch } from './apiClient'
 import { planifierRappelsControles } from './reminderService'
-import { controlesAVenir, jourIso } from '../utils/agenda'
+import { controlesAVenir, intituleChapitres, jourIso } from '../utils/agenda'
 import { coursDemo, estLienDemo } from '../utils/edtDemo'
 
 const cleAgenda = uid => `reviz-agenda-${uid}`
@@ -68,15 +68,8 @@ async function enregistrer(user, agenda) {
   return agenda
 }
 
-/** Intitulé tiré des chapitres choisis : « Thalès », « Thalès et Pythagore », « Thalès + 2 chapitres ». */
-export function intituleChapitres(chapitres = []) {
-  const t = chapitres.map(c => String(c?.titre ?? '').trim()).filter(Boolean)
-  if (!t.length) return ''
-  if (t.length === 1) return t[0]
-  // Court pour tenir sur la carte du contrôle (les chapitres y sont aussi en puces).
-  if (t.length === 2 && `${t[0]} et ${t[1]}`.length <= 40) return `${t[0]} et ${t[1]}`
-  return `${t[0]} + ${t.length - 1} ${t.length > 2 ? 'chapitres' : 'chapitre'}`
-}
+// L'intitulé tiré des chapitres vit dans utils/agenda.js (Réviz IA s'en sert aussi pour ses cartes).
+export { intituleChapitres }
 
 /**
  * Note un contrôle. `chapitres` : ce qui tombe, choisi à l'ajout — chapitres du programme

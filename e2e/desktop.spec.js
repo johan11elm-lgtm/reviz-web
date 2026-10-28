@@ -256,7 +256,7 @@ test.describe('Ordinateur (1280 px) — avec un compte', () => {
       contentType: 'text/event-stream',
       body: 'data: ' + JSON.stringify({ meta: { remaining: 9, limit: 10 } }) + '\n\n' + 'data: ' + JSON.stringify({ text: reponse }) + '\n\ndata: [DONE]\n\n',
     }))
-    await page.getByLabel('Ta question sur la leçon').fill('À quoi sert le théorème de Thalès ?')
+    await page.getByLabel(/^Ta question/).fill('À quoi sert le théorème de Thalès ?')
     await page.keyboard.press('Enter')
     await expect(page.getByText('Tu veux qu\'on essaie sur un exemple ?')).toBeVisible({ timeout: 10_000 })
     await page.screenshot({ path: test.info().outputPath('desktop-coach-conversation.png') })

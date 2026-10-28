@@ -1,6 +1,8 @@
 import Anthropic from '@anthropic-ai/sdk'
 import { buildChatRequest, buildChatLessonContext, CHAT_MESSAGE_REFUS, CHAT_MAX_MESSAGE_LENGTH, CHAT_MAX_HISTORY } from './_chatPrompt.js'
 import { jourParis } from '../src/utils/retour.js'
+import { buildAgentRequest, AGENT_MAX_TOURS } from '../src/utils/agent.js'
+import { boucleAgent, sourcesFirestore, sanitizeErreurs } from './_agent.js'
 import { getDb, getAuthAdmin } from './_firebaseAdmin.js'
 import { compteVerifie } from './_compteVerifie.js'
 import { consumeChatQuota, refundChatQuota, CHAT_FREE_LIMIT, CHAT_PREMIUM_LIMIT } from './_chatQuota.js'
@@ -41,9 +43,11 @@ export function sanitizeMessages(messages) {
 export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).send('Method not allowed')
 
-  const { idToken, lessonId, messages, level } = req.body ?? {}
+  const { idToken, lessonId, messages, level, erreurs } = req.body ?? {}
 
-  if (typeof lessonId !== 'string' || !lessonId.trim()) return res.status(400).send('MISSING_LESSON')
+  // Sans leçon : Réviz IA en agent (api/_agent.js), qui lit l'agenda, les erreurs et le programme.
+  const agent = lessonId === undefined || lessonId === null || lessonId === ''
+  if (!agent && (typeof lessonId !== 'string' || !lessonId.trim())) return res.status(400).send('MISSING_LESSON')
   const cleanMessages = sanitizeMessages(messages)
   if (!cleanMessages) return res.status(400).send('INVALID_MESSAGES')
   if (!idToken) return res.status(401).send('Unauthorized')
@@ -59,20 +63,22 @@ export default async function handler(req, res) {
   if (!compteVerifie(decoded)) return res.status(403).send('EMAIL_NOT_VERIFIED')
 
   // 2. Contexte = la leçon Firestore de CET élève (le client n'envoie qu'un id,
-  //    jamais le contenu du system prompt) + plan pour le quota.
+  //    jamais le contenu du system prompt) + plan pour le quota. En agent, pas de
+  //    leçon : le document de l'élève porte aussi son agenda.
   const db = getDb()
-  let lessonSnap, isPremium = false
+  let lessonSnap, userData = null, isPremium = false
   try {
     const [userSnap, lSnap] = await Promise.all([
       db.collection('users').doc(uid).get(),
-      db.collection('users').doc(uid).collection('lessons').doc(lessonId).get(),
+      agent ? null : db.collection('users').doc(uid).collection('lessons').doc(lessonId).get(),
     ])
-    isPremium = userSnap.exists && userSnap.data().plan === 'premium'
+    userData = userSnap.exists ? userSnap.data() : null
+    isPremium = userData?.plan === 'premium'
     lessonSnap = lSnap
   } catch {
     return res.status(502).send('NETWORK_ERROR')
   }
-  if (!lessonSnap.exists) return res.status(404).send('LESSON_NOT_FOUND')
+  if (!agent && !lessonSnap.exists) return res.status(404).send('LESSON_NOT_FOUND')
 
   // 3. Quota jour = SOURCE DE VÉRITÉ. Les premium ont aussi un plafond
   //    (généreux) : garde-fou coût, un chat se spamme plus vite qu'un scan.
@@ -83,14 +89,15 @@ export default async function handler(req, res) {
 
   // 4. Appel Anthropic en streaming. `create` avec stream: true rend la main
   //    une fois les en-têtes reçus : une erreur HTTP lève ici, avant le flux,
-  //    ce qui laisse rembourser le quota et répondre par un code clair.
-  const lessonContext = buildChatLessonContext(lessonSnap.data())
+  //    ce qui laisse rembourser le quota et répondre par un code clair. Un message
+  //    de l'élève compte une fois, quel que soit le nombre de tours d'outils.
+  const aujourdhui = jourParis()
+  const requeteAgent = (conv, tour) => ({ ...buildAgentRequest({ level, messages: conv, aujourdhui, dernierTour: tour >= AGENT_MAX_TOURS }), stream: true })
   let stream
   try {
-    stream = await anthropic().messages.create({
-      ...buildChatRequest({ level, lessonContext, messages: cleanMessages, aujourdhui: jourParis() }),
-      stream: true,
-    })
+    stream = await anthropic().messages.create(agent
+      ? requeteAgent(cleanMessages, 0)
+      : { ...buildChatRequest({ level, lessonContext: buildChatLessonContext(lessonSnap.data()), messages: cleanMessages, aujourdhui }), stream: true })
   } catch (err) {
     await refundChatQuota({ db, uid }).catch(() => {})
     const status = err?.status
@@ -108,13 +115,27 @@ export default async function handler(req, res) {
   // Premier event : quota restant (affichage client purement informatif).
   res.write(`data: ${JSON.stringify({ meta: { remaining: q.remaining, limit } })}\n\n`)
 
+  const ecrire = evenement => res.write(`data: ${JSON.stringify(evenement)}\n\n`)
   try {
-    for await (const event of stream) {
-      if (event.type === 'content_block_delta' && event.delta?.type === 'text_delta') {
-        res.write(`data: ${JSON.stringify({ text: event.delta.text })}\n\n`)
-      } else if (event.type === 'message_delta' && event.delta?.stop_reason === 'refusal') {
-        // Refus des filtres de sécurité (pas de repli côté serveur sur Haiku 5.5).
-        res.write(`data: ${JSON.stringify({ text: `\n\n${CHAT_MESSAGE_REFUS}` })}\n\n`)
+    if (agent) {
+      // Texte, puis { outil } pendant qu'il regarde, et { carte } à valider par l'élève.
+      await boucleAgent({
+        flux: stream,
+        conversation: cleanMessages,
+        relancer: (conv, tour) => anthropic().messages.create(requeteAgent(conv, tour)),
+        sources: sourcesFirestore({ db, uid, userData, erreurs: sanitizeErreurs(erreurs) }),
+        level,
+        aujourdhui,
+        ecrire,
+      })
+    } else {
+      for await (const event of stream) {
+        if (event.type === 'content_block_delta' && event.delta?.type === 'text_delta') {
+          ecrire({ text: event.delta.text })
+        } else if (event.type === 'message_delta' && event.delta?.stop_reason === 'refusal') {
+          // Refus des filtres de sécurité (pas de repli côté serveur sur Haiku 5.5).
+          ecrire({ text: `\n\n${CHAT_MESSAGE_REFUS}` })
+        }
       }
     }
     res.write('data: [DONE]\n\n')

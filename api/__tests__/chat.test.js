@@ -130,9 +130,9 @@ describe('/api/chat', () => {
     expect(res.statusCode).toBe(405)
   })
 
-  it('refuse (400) sans lessonId ou avec messages invalides', async () => {
+  it('refuse (400) un lessonId qui n’est pas un texte, ou des messages invalides', async () => {
     const res1 = mockRes()
-    await handler({ method: 'POST', body: { ...VALID_BODY, lessonId: undefined } }, res1)
+    await handler({ method: 'POST', body: { ...VALID_BODY, lessonId: 42 } }, res1)
     expect(res1.statusCode).toBe(400)
     expect(res1.payload).toBe('MISSING_LESSON')
 
@@ -260,5 +260,77 @@ describe('/api/chat', () => {
     expect(res.statusCode).toBe(502)
     expect(res.payload).toBe('NETWORK_ERROR')
     expect(refundChatQuota).toHaveBeenCalled()
+  })
+})
+
+describe('/api/chat sans leçon (Réviz IA en agent)', () => {
+  const AGENT_BODY = { ...VALID_BODY, lessonId: undefined, level: { cycle: 'college', classe: '4ème' }, messages: [{ role: 'user', content: 'je fais quoi ce soir' }] }
+  const dans2Jours = new Date(Date.now() + 2 * 86_400_000).toISOString().slice(0, 10)
+
+  beforeEach(() => {
+    verifyIdToken.mockResolvedValue({ uid: 'u1', email_verified: true })
+    consumeChatQuota.mockReset()
+    consumeChatQuota.mockResolvedValue({ allowed: true, remaining: 9 })
+    getLessonDoc.mockReset()
+    anthropicCreate.mockReset()
+    getUserDoc.mockResolvedValue({
+      exists: true,
+      data: () => ({ plan: 'free', agenda: { controles: [{ id: 'c1', matiere: 'maths', titre: 'Pythagore', date: dans2Jours }] } }),
+    })
+  })
+
+  it('appelle un outil, renvoie son résultat au modèle, puis streame la réponse et la carte', async () => {
+    anthropicCreate
+      .mockResolvedValueOnce(flux([
+        { type: 'content_block_start', index: 0, content_block: { type: 'thinking', thinking: '', signature: '' } },
+        { type: 'content_block_delta', index: 0, delta: { type: 'signature_delta', signature: 'sig1' } },
+        { type: 'content_block_stop', index: 0 },
+        { type: 'content_block_start', index: 1, content_block: { type: 'tool_use', id: 't1', name: 'mes_controles', input: {} } },
+        { type: 'content_block_delta', index: 1, delta: { type: 'input_json_delta', partial_json: '{}' } },
+        { type: 'content_block_stop', index: 1 },
+        { type: 'content_block_start', index: 2, content_block: { type: 'tool_use', id: 't2', name: 'proposer_revision', input: {} } },
+        { type: 'content_block_delta', index: 2, delta: { type: 'input_json_delta', partial_json: '{"format":"controle_blanc",' } },
+        { type: 'content_block_delta', index: 2, delta: { type: 'input_json_delta', partial_json: '"controle":"c1"}' } },
+        { type: 'content_block_stop', index: 2 },
+        { type: 'message_delta', delta: { stop_reason: 'tool_use' } },
+      ]))
+      .mockResolvedValueOnce(flux([
+        { type: 'content_block_start', index: 0, content_block: { type: 'text', text: '' } },
+        { type: 'content_block_delta', index: 0, delta: { type: 'text_delta', text: 'Ton contrôle de maths approche.' } },
+        { type: 'message_delta', delta: { stop_reason: 'end_turn' } },
+      ]))
+    const res = mockRes()
+    await handler({ method: 'POST', body: AGENT_BODY }, res)
+
+    expect(getLessonDoc).not.toHaveBeenCalled()
+    expect(consumeChatQuota).toHaveBeenCalledTimes(1)
+    expect(anthropicCreate).toHaveBeenCalledTimes(2)
+    const [premier, second] = anthropicCreate.mock.calls.map(c => c[0])
+    expect(premier.tools.map(t => t.name)).toContain('mes_controles')
+    // Le tour suivant renvoie la réflexion (signature comprise) et les appels tels quels, puis les résultats.
+    expect(second.messages[1]).toMatchObject({ role: 'assistant', content: [{ type: 'thinking', signature: 'sig1' }, { type: 'tool_use', id: 't1' }, { type: 'tool_use', id: 't2', input: { format: 'controle_blanc', controle: 'c1' } }] })
+    expect(second.messages[2].content[0]).toMatchObject({ type: 'tool_result', tool_use_id: 't1' })
+    expect(second.messages[2].content[0].content).toContain('"id":"c1"')
+
+    const joined = res.chunks.join('')
+    expect(joined).toContain(JSON.stringify({ outil: 'Je regarde ton agenda…' }))
+    expect(joined).toContain('"carte":{"type":"revision","format":"controle_blanc","controleId":"c1"')
+    expect(joined).toContain(JSON.stringify({ text: 'Ton contrôle de maths approche.' }))
+    expect(joined).toContain('data: [DONE]')
+    expect(joined).not.toContain('sig1')
+  })
+
+  it('s’arrête au plafond de tours : le dernier tour se fait sans outil', async () => {
+    const appel = n => flux([
+      { type: 'content_block_start', index: 0, content_block: { type: 'tool_use', id: `t${n}`, name: 'mes_controles', input: {} } },
+      { type: 'content_block_stop', index: 0 },
+      { type: 'message_delta', delta: { stop_reason: 'tool_use' } },
+    ])
+    anthropicCreate.mockImplementation(async () => appel(anthropicCreate.mock.calls.length))
+    const res = mockRes()
+    await handler({ method: 'POST', body: AGENT_BODY }, res)
+    expect(anthropicCreate).toHaveBeenCalledTimes(5)
+    expect(anthropicCreate.mock.calls[4][0].tool_choice).toEqual({ type: 'none' })
+    expect(res.chunks.join('')).toContain('data: [DONE]')
   })
 })

@@ -21,6 +21,7 @@ export const COACH_ERREURS = {
   UNAUTHORIZED:       'Connexion expirée — reconnecte-toi puis réessaie.',
   EMAIL_NOT_VERIFIED: "Confirme ton email d'abord (le lien qu'on t'a envoyé), puis reviens me voir !",
   LESSON_NOT_FOUND:   'Je ne retrouve plus cette leçon… Réessaie depuis « Mes cours ».',
+  AGENT_SERVEUR:      'Sans leçon, Réviz IA a besoin du serveur : choisis une leçon pour tester en local.',
 };
 
 /**

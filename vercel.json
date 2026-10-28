@@ -3,7 +3,8 @@
   "outputDirectory": "dist",
   "framework": "vite",
   "functions": {
-    "api/battle-fin.js": { "includeFiles": "public/programme/**" }
+    "api/battle-fin.js": { "includeFiles": "public/programme/**" },
+    "api/chat.js": { "includeFiles": "public/programme/**" }
   },
   "crons": [
     { "path": "/api/battle-nettoyage", "schedule": "0 3 * * *" },

@@ -191,13 +191,15 @@ function ChoixChapitres({ classe, matiere, choisis, onChange, onChoix, defiler }
   );
 }
 
+// `initial` : { matiere, date } depuis l'agenda ; Réviz IA y ajoute { chapitres, titre, programme }
+// quand l'élève touche « Modifier » sur sa carte (feuille déjà remplie).
 export function AjoutControle({ initial = {}, onClose, onSaved }) {
   const { currentUser, getUserLevel } = useAuth();
   const niveau = getUserLevel?.();
   // Sans programme pour sa classe (lycée), on ne lui propose pas celui de 3e : ses cours scannés seulement.
   const classe = hasProgramme(niveau) ? niveau.classe : null;
-  const [chapitres, setChapitres] = useState([]);
-  const [programme, setProgramme] = useState(null);
+  const [chapitres, setChapitres] = useState(() => initial.chapitres ?? []);
+  const [programme, setProgramme] = useState(initial.programme ?? null);
   const isDesktop = useIsDesktop();
   const ref = useModalA11y(onClose);
   const tuiles = prochainsJours(4);
@@ -205,7 +207,7 @@ export function AjoutControle({ initial = {}, onClose, onSaved }) {
   const [matiere, setMatiere] = useState(initial.matiere ?? null);
   const [date, setDate] = useState(dateInitiale);
   const [calendrier, setCalendrier] = useState(isDesktop || (dateInitiale && !tuiles.includes(dateInitiale)));
-  const [titre, setTitre] = useState('');
+  const [titre, setTitre] = useState(initial.titre ?? '');
   const [erreur, setErreur] = useState('');
   const [envoi, setEnvoi] = useState(false);
   const [nbChoix, setNbChoix] = useState(null);

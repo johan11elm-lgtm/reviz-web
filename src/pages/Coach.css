@@ -339,12 +339,40 @@
   cursor: pointer;
 }
 
-/* ── Sans leçon ── */
-.ia-sans-lecon { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; gap: 10px; max-width: 420px; margin: 0 auto; padding: 40px 24px; text-align: center; }
-.ia-sans-lecon h1 { margin: 0; font-family: var(--font-display); font-size: 34px; font-weight: 800; letter-spacing: -.03em; }
-.ia-sans-lecon p { margin: 0; font-size: 15px; font-weight: 500; line-height: 1.5; color: var(--rv-doux); }
-.ia-sans-lecon .ia-sans-lecon-sous { font-family: var(--font-display); font-size: 19px; font-weight: 800; color: var(--rv-encre); }
-.ia-sans-lecon-btns { display: flex; flex-direction: column; gap: 12px; align-self: stretch; margin-top: 12px; }
+/* ── Cartes de Réviz IA sans leçon : un contrôle à noter, une révision à lancer ── */
+.ia-actions { display: flex; flex-direction: column; gap: 10px; margin-top: 14px; }
+.ia-action {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 12px;
+  padding: 12px 14px;
+  border: 1px solid var(--ia-bord);
+  border-radius: 20px;
+  background: var(--rv-carte);
+  box-shadow: 0 2px 10px rgba(4, 42, 101, .06);
+}
+.ia-action-rond { flex: none; display: grid; place-items: center; width: 48px; height: 48px; border-radius: 16px; background: var(--rv-lavande); }
+.ia-action-txt { flex: 1 1 160px; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.ia-action-txt b { font-size: 15px; font-weight: 700; line-height: 1.25; }
+.ia-action-txt span { font-size: 13px; font-weight: 500; line-height: 1.35; color: var(--rv-doux); }
+.ia-action-btns { display: flex; gap: 8px; margin-left: auto; }
+.ia-action-btn {
+  height: 40px;
+  padding: 0 18px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--rv-orange);
+  font: 700 14px 'Poppins', system-ui, sans-serif;
+  color: #fff;
+  cursor: pointer;
+  transition: transform .12s;
+}
+.ia-action-btn:active { transform: scale(.96); }
+.ia-action-btn--blanc { background: var(--rv-carte); border: 1px solid var(--ia-bord); color: var(--rv-encre); }
+.ia-action-fait { margin-left: auto; font-size: 14px; font-weight: 700; color: var(--rv-encre); text-decoration: underline; text-underline-offset: 3px; }
+/* « Je regarde ton agenda… » sous le texte déjà écrit, pendant qu'un outil tourne. */
+.ia-reflechit--suite { display: block; margin-top: 10px; font-size: 14px; }
 
 /* ── Ordinateur ── */
 .ia-page--grand { height: 100vh; overflow: hidden; }

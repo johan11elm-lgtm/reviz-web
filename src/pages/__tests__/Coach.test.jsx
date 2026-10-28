@@ -10,9 +10,15 @@ vi.mock('../../context/AuthContext', () => ({
   useAuth: () => ({ isPremium: false, hasRevizPlus: auth.plus, currentUser: { displayName: 'Léa Martin' }, getUserLevel: () => ({ cycle: 'college', classe: '3ème' }) }),
 }))
 const lessons = vi.hoisted(() => ({ list: [] }))
-vi.mock('../../services/historyService', () => ({ loadLessons: () => lessons.list }))
+vi.mock('../../services/historyService', () => ({ loadLessons: () => lessons.list, restoreLesson: () => true }))
 const screenSize = vi.hoisted(() => ({ desktop: false }))
 vi.mock('../../hooks/useMediaQuery', () => ({ useIsDesktop: () => screenSize.desktop }))
+// Ce que les cartes de l'agent déclenchent (le code habituel de l'appli).
+const appli = vi.hoisted(() => ({ ajouter: vi.fn(), ouvrir: vi.fn() }))
+vi.mock('../../services/agendaService', () => ({ ajouterControle: appli.ajouter }))
+vi.mock('../../services/controleChapitres', () => ({ ouvrirChapitreDuControle: appli.ouvrir }))
+vi.mock('../../services/erreursService', () => ({ erreursRecentes: () => [{ lessonId: 'prog-x', titre: 'X', matiere: 'maths', questions: ['Q ?'], at: 1 }] }))
+vi.mock('../../services/statsService', () => ({ track: vi.fn() }))
 
 const { default: Coach } = await import('../Coach')
 
@@ -21,6 +27,7 @@ const renderAt = (path) => render(
     <Routes>
       <Route path="/coach" element={<Coach />} />
       <Route path="/scan" element={<p>Page scan</p>} />
+      <Route path="/flashcards" element={<p>Page flashcards</p>} />
     </Routes>
   </MemoryRouter>
 )
@@ -113,10 +120,17 @@ describe('<Coach /> — Réviz IA', () => {
     expect(screen.getByRole('button', { name: /^Leçon : La Révolution française/ })).toBeInTheDocument()
   })
 
-  it('une seule leçon : la pastille ne propose pas d’en changer', () => {
+  it('sans ?lesson : Réviz IA sur toutes les matières ; la pastille passe à une leçon et revient', () => {
     lessons.list = [DEUX[0]]
     renderAt('/coach')
-    expect(screen.getByRole('button', { name: 'Leçon : Théorème de Pythagore' })).toBeDisabled()
+    expect(screen.getByLabelText('Ta question à Réviz IA')).toBeInTheDocument()
+    fireEvent.click(screen.getByRole('button', { name: 'Toutes mes matières. Choisir une leçon' }))
+    const choix = screen.getByRole('dialog', { name: 'Sur quelle leçon ?' })
+    expect(within(choix).getByRole('button', { name: /Toutes mes matières/ })).toHaveAttribute('aria-pressed', 'true')
+    fireEvent.click(within(choix).getByRole('button', { name: /Théorème de Pythagore/ }))
+    fireEvent.click(screen.getByRole('button', { name: 'Leçon : Théorème de Pythagore. Changer de leçon' }))
+    fireEvent.click(within(screen.getByRole('dialog')).getByRole('button', { name: /Toutes mes matières/ }))
+    expect(screen.getByLabelText('Ta question à Réviz IA')).toBeInTheDocument()
   })
 
   it('téléphone : l’horloge montre les discussions entamées, et « Nouvelle discussion » repart de l’accueil', () => {
@@ -162,12 +176,38 @@ describe('<Coach /> — Réviz IA', () => {
     expect(screen.getByText(/Tu as utilisé tes/)).toBeInTheDocument()
   })
 
-  it('sans leçon : état vide, programme et scan proposés', () => {
+  it('aucune leçon : Réviz IA s’ouvre quand même, sur toutes les matières', () => {
     lessons.list = []
     renderAt('/coach')
-    expect(screen.getByText(/Ouvre une leçon pour lui poser tes questions/)).toBeInTheDocument()
-    expect(screen.getByRole('link', { name: 'Ouvrir mon programme' })).toHaveAttribute('href', '/programme')
-    expect(screen.getByRole('link', { name: 'Scanner une leçon' })).toHaveAttribute('href', '/scan')
-    expect(screen.queryByLabelText('Ta question sur la leçon')).toBeNull()
+    expect(screen.getByRole('heading', { name: /Salut Léa\. On révise quoi/ })).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: /Je fais quoi/ })).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: /Toutes mes matières/ })).toBeDisabled()
+    fireEvent.click(screen.getByRole('button', { name: /J'ai un contrôle/ }))
+    expect(screen.getByLabelText('Ta question à Réviz IA')).toHaveValue("J'ai un contrôle de ")
+  })
+
+  it('agent : dit ce qu’il regarde, puis ses cartes ; Ajouter note le contrôle, Commencer ouvre la révision', async () => {
+    const controle = { type: 'controle', matiere: 'svt', date: '2026-11-10', jour: 'mardi 10 novembre', titre: 'Le volcanisme', chapitres: [{ id: 'volcanisme', titre: 'Le volcanisme' }], classe: '4ème', programme: 'SVT', resume: 'r1' }
+    const revision = { type: 'revision', format: 'flashcards', chapitre: { id: 'theoreme-de-pythagore', titre: 'Pythagore' }, classe: '4ème', programme: 'Maths', titre: 'Flashcards', sous: 'Pythagore', resume: 'r2' }
+    let finir
+    chat.send.mockImplementation(({ onOutil }) => new Promise(r => { onOutil('Je regarde ton agenda…'); finir = () => r({ text: 'Je te prépare tout ça.', cartes: [controle, revision] }) }))
+    appli.ajouter.mockResolvedValue({})
+    appli.ouvrir.mockResolvedValue()
+    renderAt('/coach')
+    fireEvent.change(screen.getByLabelText('Ta question à Réviz IA'), { target: { value: 'contrôle de svt mardi sur les volcans' } })
+    fireEvent.click(screen.getByRole('button', { name: 'Envoyer la question' }))
+    expect(screen.getByText('Je regarde ton agenda…')).toBeInTheDocument()
+    expect(chat.send.mock.calls[0][0]).toMatchObject({ lessonId: null, erreurs: [{ lessonId: 'prog-x' }] })
+    await act(async () => finir())
+
+    expect(screen.getByText('Contrôle de SVT')).toBeInTheDocument()
+    expect(screen.getByText('Mardi 10 novembre · Le volcanisme')).toBeInTheDocument()
+    await act(async () => fireEvent.click(screen.getByRole('button', { name: 'Ajouter à l’agenda : Contrôle de SVT, mardi 10 novembre' })))
+    expect(appli.ajouter).toHaveBeenCalledWith(expect.anything(), { matiere: 'svt', titre: 'Le volcanisme', date: '2026-11-10', chapitres: controle.chapitres, classe: '4ème', programme: 'SVT' })
+    expect(screen.getByRole('link', { name: 'Ajouté · voir mon plan' })).toHaveAttribute('href', '/agenda')
+
+    await act(async () => fireEvent.click(screen.getByRole('button', { name: 'Commencer : Flashcards, Pythagore' })))
+    expect(appli.ouvrir).toHaveBeenCalledWith({ classe: '4ème', programme: 'Maths' }, revision.chapitre)
+    expect(screen.getByText('Page flashcards')).toBeInTheDocument()
   })
 })

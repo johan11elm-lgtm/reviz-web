@@ -167,3 +167,13 @@ export function intituleControle(c) {
   const nom = m.label === m.label.toUpperCase() ? m.label : m.label.toLowerCase()
   return /^[aeiouyh]/.test(sansAccents(nom)) ? `Contrôle d'${nom}` : `Contrôle de ${nom}`
 }
+
+/** Intitulé tiré des chapitres choisis : « Thalès », « Thalès et Pythagore », « Thalès + 2 chapitres ». */
+export function intituleChapitres(chapitres = []) {
+  const t = chapitres.map(c => String(c?.titre ?? '').trim()).filter(Boolean)
+  if (!t.length) return ''
+  if (t.length === 1) return t[0]
+  // Court pour tenir sur la carte du contrôle (les chapitres y sont aussi en puces).
+  if (t.length === 2 && `${t[0]} et ${t[1]}`.length <= 40) return `${t[0]} et ${t[1]}`
+  return `${t[0]} + ${t.length - 1} ${t.length > 2 ? 'chapitres' : 'chapitre'}`
+}

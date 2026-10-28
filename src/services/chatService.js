@@ -9,6 +9,7 @@ import { apiFetch } from './apiClient.js'
 import { loadLessons } from './historyService.js'
 import { buildChatRequest, buildChatLessonContext, CHAT_MESSAGE_REFUS, CHAT_MAX_MESSAGE_LENGTH, CHAT_MAX_HISTORY } from '../utils/chatPrompts.js'
 import { jourParis } from '../utils/retour.js'
+import { traceCarte } from '../utils/agent.js'
 import { memoriserQuotaCoach } from '../utils/revizPlus.js'
 
 export { CHAT_MAX_MESSAGE_LENGTH }
@@ -43,19 +44,30 @@ async function _forEachSseEvent(body, onEvent) {
 /**
  * Envoie la conversation au coach et streame la réponse.
  * @param {object} opts
- * @param {string} opts.lessonId  id de la leçon (contexte résolu côté serveur)
- * @param {Array<{role:'user'|'assistant', content:string}>} opts.history
+ * @param {string|null} opts.lessonId  id de la leçon (contexte résolu côté serveur) ;
+ *   null : Réviz IA sans leçon, en agent (agenda, erreurs, programme ; api/_agent.js)
+ * @param {Array<{role:'user'|'assistant', content:string, cartes?:object[]}>} opts.history
  *   conversation complète, dernier message = la question de l'élève
  * @param {object} opts.level     niveau { cycle, classe }
  * @param {(text:string) => void} [opts.onDelta]  texte accumulé, à chaque delta
- * @returns {Promise<{text:string, remaining:number|null}>}
+ * @param {(libelle:string) => void} [opts.onOutil]  agent : ce qu'il regarde (« Je regarde ton agenda… »)
+ * @param {(cartes:object[]) => void} [opts.onCarte]  agent : les cartes reçues jusque-là
+ * @param {object[]} [opts.erreurs]  agent : questions ratées récentes (erreursRecentes)
+ * @returns {Promise<{text:string, remaining:number|null, cartes:object[]}>}
  * @throws {Error} CHAT_LIMIT | RATE_LIMIT | UNAUTHORIZED | EMAIL_NOT_VERIFIED |
- *   LESSON_NOT_FOUND | NETWORK_ERROR | TIMEOUT | EMPTY_RESPONSE | API_ERROR_xxx
+ *   LESSON_NOT_FOUND | NETWORK_ERROR | TIMEOUT | EMPTY_RESPONSE | AGENT_SERVEUR | API_ERROR_xxx
  */
-export async function sendCoachMessage({ lessonId, history, level, onDelta }) {
-  const messages = history.slice(-CHAT_MAX_HISTORY)
+export async function sendCoachMessage({ lessonId = null, history, level, onDelta, onOutil, onCarte, erreurs }) {
+  // Les cartes déjà montrées restent dans l'historique sous forme de trace (le modèle sait ce
+  // qu'il a proposé), sans partir avec leurs données.
+  const messages = history.slice(-CHAT_MAX_HISTORY).map(m => ({
+    role: m.role,
+    content: m.cartes?.length ? `${m.content}\n\n${m.cartes.map(traceCarte).join('\n')}` : m.content,
+  }))
 
-  if (USE_PROXY) return _viaProxy({ lessonId, messages, level, onDelta })
+  if (USE_PROXY) return _viaProxy({ lessonId, messages, level, onDelta, onOutil, onCarte, erreurs: lessonId ? undefined : erreurs })
+  // L'agent lit Firestore et le programme côté serveur : pas d'appel direct possible.
+  if (!lessonId) throw new Error('AGENT_SERVEUR')
   return _direct({ lessonId, messages, level, onDelta })
 }
 
@@ -73,13 +85,13 @@ async function _fetchWithHeaderTimeout(url, init) {
   }
 }
 
-async function _viaProxy({ lessonId, messages, level, onDelta }) {
+async function _viaProxy({ lessonId, messages, level, onDelta, onOutil, onCarte, erreurs }) {
   const idToken = await getIdToken()
 
   const response = await _fetchWithHeaderTimeout('/api/chat', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ idToken, lessonId, messages, level }),
+    body: JSON.stringify({ idToken, ...(lessonId ? { lessonId } : { erreurs }), messages, level }),
   })
 
   if (!response.ok) {
@@ -95,6 +107,7 @@ async function _viaProxy({ lessonId, messages, level, onDelta }) {
   let text = ''
   let remaining = null
   let streamError = null
+  const cartes = []
   await _forEachSseEvent(response.body, (payload) => {
     if (payload === '[DONE]') return
     try {
@@ -102,6 +115,11 @@ async function _viaProxy({ lessonId, messages, level, onDelta }) {
       if (typeof event.text === 'string') {
         text += event.text
         onDelta?.(text)
+      } else if (event.carte) {
+        cartes.push(event.carte)
+        onCarte?.([...cartes])
+      } else if (typeof event.outil === 'string') {
+        onOutil?.(event.outil)
       } else if (event.meta) {
         remaining = event.meta.remaining ?? null
         memoriserQuotaCoach(event.meta.remaining, event.meta.limit)
@@ -111,9 +129,9 @@ async function _viaProxy({ lessonId, messages, level, onDelta }) {
     } catch { /* ignore SSE malformés */ }
   })
 
-  if (streamError && !text) throw new Error(streamError)
-  if (!text) throw new Error('EMPTY_RESPONSE')
-  return { text, remaining }
+  if (streamError && !text && !cartes.length) throw new Error(streamError)
+  if (!text && !cartes.length) throw new Error('EMPTY_RESPONSE')
+  return { text, remaining, cartes }
 }
 
 // Dev local uniquement : contexte construit depuis le cache local des leçons.
