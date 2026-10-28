@@ -426,7 +426,8 @@ export default function Home() {
   );
   const salut = (
     <div className="nm-salut">
-      <h1 className="nm-hello"><span className="nm-hello-reviz" aria-hidden="true"><Mascot pose="hello" size={isDesktop ? 58 : 48} alt="" /></span>{prenom ? `Salut ${prenom} !` : 'Salut !'}</h1>
+      {/* Le prénom au surligneur, comme les mots accentués de la landing (choix de Johan, 28/10). */}
+      <h1 className="nm-hello">{prenom ? <span>Salut <span className="nm-hello-nom">{prenom}</span> !</span> : 'Salut !'}</h1>
       {!isDesktop && stats}
     </div>
   );
