@@ -7,7 +7,7 @@
 // perd rien. Les étapes faites sont gardées dans le contrôle :
 //   controle.plan = { flash: '2026-10-28', quiz: …, blanc: … } (jour fait)
 // -------------------------------------------------------
-import { ajouterJours, joursEntre, jourIso } from './agenda'
+import { ajouterJours, joursEntre, jourIso } from './agenda.js'
 
 export const ETAPES_PLAN = [
   { id: 'flash', avant: 5, quoi: 'Flashcards', detail: 'Les notions à retenir, en cartes', pose: 'flashcard' },
