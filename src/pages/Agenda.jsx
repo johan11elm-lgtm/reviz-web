@@ -6,10 +6,11 @@ import { Pantin } from '../components/Pantin';
 import { Mascot } from '../components/Mascot';
 import { BulleReviz } from '../components/reviz/BulleReviz';
 import { AjoutControle, couleursMatiere } from '../components/AjoutControle';
+import { PlanRevision } from '../components/PlanRevision';
 import { useIsDesktop } from '../hooks/useMediaQuery';
 import { track } from '../services/statsService';
 import {
-  agendaLocal, chargerAgenda, ajouterControle, supprimerControle, relierPronote, delierPronote,
+  agendaLocal, chargerAgenda, ajouterControle, supprimerControle, marquerEtape, relierPronote, delierPronote,
   chargerCours, coursEnCache, messageErreurPronote,
 } from '../services/agendaService';
 import {
@@ -69,7 +70,7 @@ function bulle(prochain, n) {
 export default function Agenda() {
   const navigate = useNavigate();
   const isDesktop = useIsDesktop();
-  const { currentUser, isGuest } = useAuth();
+  const { currentUser, isGuest, hasRevizPlus } = useAuth();
   const [agenda, setAgenda] = useState(() => agendaLocal(currentUser?.uid));
   const [ajout, setAjout] = useState(null); // null | { matiere?, date? }
   const [toast, setToast] = useState(null); // { texte, annuler? }
@@ -101,6 +102,12 @@ export default function Agenda() {
   function reviser(ctrl) {
     track('agenda_reviser', { matiere: ctrl.matiere });
     navigate(ctrl.matiere === 'autre' ? '/cours' : `/programme?matiere=${ctrl.matiere}`);
+  }
+  // Une étape du plan lancée compte comme faite (le jour même) : l'élève révise le chapitre.
+  async function lancerEtape(ctrl, etape) {
+    track('agenda_plan_etape', { matiere: ctrl.matiere, etape: etape.id });
+    setAgenda(await marquerEtape(currentUser, ctrl.id, etape.id));
+    reviser(ctrl);
   }
   async function retirer(ctrl) {
     setAgenda(await supprimerControle(currentUser, ctrl.id));
@@ -140,9 +147,11 @@ export default function Agenda() {
         </span>
         <span className={`ag-rebours${n <= 1 ? ' ag-rebours--mot' : ''}`} style={{ background: c.fond, boxShadow: `0 5px 0 ${c.tranche}` }}>{rebours(n, true)}</span>
       </div>
+      <PlanRevision controle={prochain} agenda={agenda} hasRevizPlus={hasRevizPlus} className="ag-plan"
+        onLancer={e => lancerEtape(prochain, e)} onDebloquer={() => navigate('/reglages')} />
       <div className="ag-prochain-bas">
         <button type="button" className="ag-btn" onClick={() => reviser(prochain)}>Réviser<Fleche /></button>
-        {isDesktop && <p className="ag-rappel"><Cloche />Rappel sur l’accueil, et la veille au soir sur iPhone.</p>}
+        {isDesktop && <p className="ag-rappel"><Cloche />Chaque étape sur l’accueil, et un rappel le jour venu sur iPhone.</p>}
       </div>
       <button type="button" className="ag-retirer ag-retirer--coin" onClick={() => retirer(prochain)} aria-label="Retirer ce contrôle"><Croix taille={14} /></button>
     </div>
@@ -234,7 +243,7 @@ export default function Agenda() {
               {reviz}
             </div>
             {carteProchain}
-            {prochain && <p className="ag-rappel ag-rappel--tel"><Cloche />Rappel sur l’accueil, et la veille au soir sur iPhone.</p>}
+            {prochain && <p className="ag-rappel ag-rappel--tel"><Cloche />Chaque étape sur l’accueil, et un rappel le jour venu sur iPhone.</p>}
             {listeSuite}
             {edt}
           </>

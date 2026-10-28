@@ -13,7 +13,9 @@ import { loadLessons, restoreLesson, syncFromFirestore } from '../services/histo
 import { loadRevisions } from '../services/revisionService';
 import { loadCatalogue } from '../services/programmeService';
 import { agendaLocal, chargerAgenda } from '../services/agendaService';
-import { controlesAVenir, compteARebours, matiereControle } from '../utils/agenda';
+import { controlesAVenir, compteARebours, matiereControle, joursEntre, jourIso } from '../utils/agenda';
+import { planRevision } from '../utils/planRevision';
+import { marquerEtape } from '../services/agendaService';
 import { hasProgramme, PROGRAMME_FALLBACK } from '../utils/programme';
 import { useIsDesktop } from '../hooks/useMediaQuery';
 import { countDueCards } from '../services/srsService';
@@ -222,6 +224,15 @@ export default function Home() {
 
   // ── Ton plan : trois étapes jusqu'au contrôle, ou les trois de la journée ──
   const plan = useMemo(() => {
+    // Un contrôle noté : les étapes de son plan de révision (J-5 flashcards, J-3 quiz, J-1 contrôle
+    // blanc), chacune à son jour ; une étape manquée revient aujourd'hui.
+    if (controle) {
+      const auj = jourIso();
+      return planRevision(controle, auj).map((e, i) => {
+        const jour = jourDans(Math.max(0, joursEntre(auj, e.jour)));
+        return { id: e.id, quoi: e.quoi, meta: e.retard ? `À rattraper · ${e.detail}` : e.detail, done: Boolean(e.fait), pose: e.pose, jour, titre: `${jour} · ${e.quoi}`, ton: TONS_PLAN[i] };
+      });
+    }
     const ecart = controle ? Math.max(1, controle.jours) : 3;
     const jour = i => (controle ? jourDans(Math.min(i, ecart - 1)) : ['Maintenant', 'Ensuite', 'Pour finir'][i]);
     const cartes = dueCards > 0 ? `${dueCards} carte${dueCards > 1 ? 's' : ''}` : 'les flashcards';
@@ -241,11 +252,16 @@ export default function Home() {
     if (lastLesson) { restoreLesson(lastLesson.id); navigate('/quiz'); }
     else navigate(cibleControle);
   };
+  // Une étape du plan lancée compte comme faite aujourd'hui, puis on va réviser la matière.
+  const lancerEtape = async id => {
+    await marquerEtape(currentUser, controle.id, id).catch(() => {});
+    navigate(cibleControle);
+  };
   // Le chemin (téléphone) : les trois étapes, puis le contrôle au bout s'il y en a un.
   const cases = [
     // Chaque étape fait ce qu'elle annonce (pas l'action du héros, qui peut être « Scanner une leçon ») :
     // les cartes de la dernière leçon (ou le programme du contrôle), le quiz, la Battle.
-    ...plan.map((p, i) => ({ ...p, go: [lancerCartes, lancerQuiz, () => navigate('/battle')][i] })),
+    ...plan.map((p, i) => ({ ...p, go: controle ? () => lancerEtape(p.id) : [lancerCartes, lancerQuiz, () => navigate('/battle')][i] })),
     controle && {
       jour: jourDans(controle.jours), quoi: `Contrôle de ${controle.m.label.toLowerCase()}`, meta: controle.titre || 'Le jour J',
       pose: 'examen', arrivee: true, go: () => navigate('/agenda'), label: "Voir l'agenda",

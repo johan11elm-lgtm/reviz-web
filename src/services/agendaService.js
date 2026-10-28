@@ -5,7 +5,10 @@
 // laissent le propriétaire le modifier), copié dans localStorage pour un
 // affichage immédiat (accueil, hors ligne). En mode essai : localStorage
 // seulement, la clé suit l'élève à la création du compte (guestService).
-//   agenda = { pronote: string|null, controles: [{ id, matiere, titre, date }] }
+//   agenda = { pronote: string|null, controles: [{ id, matiere, titre, date, plan? }],
+//              planOffert?: id du premier contrôle noté (son plan de révision est offert) }
+// `plan` : les étapes du plan de révision faites, { flash|quiz|blanc: 'AAAA-MM-JJ' }
+// (utils/planRevision.js).
 // Les cours ne sont jamais stockés en ligne : relus depuis Pronote, mis en
 // cache sur l'appareil.
 // -------------------------------------------------------
@@ -32,6 +35,7 @@ function normaliser(a) {
   return {
     pronote: typeof a?.pronote === 'string' ? a.pronote : null,
     controles: Array.isArray(a?.controles) ? a.controles.filter(c => c?.id && c?.date) : [],
+    ...(typeof a?.planOffert === 'string' ? { planOffert: a.planOffert } : {}),
   }
 }
 
@@ -71,10 +75,19 @@ export async function ajouterControle(user, { matiere, titre, date }) {
     matiere,
     titre: String(titre ?? '').trim().slice(0, 80),
     date,
+    cree: jourIso(),
   }
   // On ne garde pas les contrôles passés depuis plus d'un mois.
   const limite = jourIso(new Date(Date.now() - 31 * 86_400_000))
   const controles = [...agenda.controles.filter(c => c.date >= limite), controle]
+  // Le premier contrôle noté a son plan de révision offert en entier (Réviz+).
+  return enregistrer(user, { ...agenda, controles, planOffert: agenda.planOffert ?? controle.id })
+}
+
+/** Note une étape du plan de révision comme faite aujourd'hui (flash, quiz ou blanc). */
+export async function marquerEtape(user, id, etape) {
+  const agenda = agendaLocal(user.uid)
+  const controles = agenda.controles.map(c => (c.id === id ? { ...c, plan: { ...(c.plan ?? {}), [etape]: jourIso() } } : c))
   return enregistrer(user, { ...agenda, controles })
 }
 

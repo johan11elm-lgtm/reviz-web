@@ -21,6 +21,8 @@
 .ag-carte { position: relative; box-sizing: border-box; border-radius: 26px; background: var(--rv-carte); box-shadow: 0 12px 30px rgba(var(--rv-ombre-2),.12); }
 .ag-prochain { z-index: 2; margin: -72px 16px 0; padding: 16px; }
 .ag-prochain-haut { display: flex; align-items: center; gap: 14px; padding-right: 22px; }
+/* Le plan de révision du prochain contrôle (components/PlanRevision), sous son titre */
+.ag-plan { margin-top: 16px; }
 .ag-rond { flex: none; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; border-radius: 50%; overflow: hidden; }
 .ag-rond--grand { width: 56px; height: 56px; }
 .ag-rond--petit { width: 40px; height: 40px; }

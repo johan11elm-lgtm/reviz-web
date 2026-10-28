@@ -9,6 +9,7 @@
 import { Capacitor } from '@capacitor/core'
 import { LocalNotifications } from '@capacitor/local-notifications'
 import { intituleControle } from '../utils/agenda'
+import { planRevision } from '../utils/planRevision'
 
 const PREF_KEY = 'reviz-reminder'
 const NOTIF_ID = 1001
@@ -73,11 +74,20 @@ export async function disableReminder() {
   catch { /* rien à annuler */ }
 }
 
-// --- Contrôles : un rappel la veille à 18 h 30 (natif seulement) ---
-// Identifiants 2000-2099 réservés, tous annulés puis replanifiés à chaque
-// changement de la liste : pas d'état à tenir à jour.
+// --- Contrôles : un rappel la veille à 18 h 30 (natif seulement), et un rappel
+// les jours des étapes du plan de révision (flashcards J-5, quiz J-3) ---
+// Identifiants 2000-2099 réservés (trois par contrôle), tous annulés puis
+// replanifiés à chaque changement de la liste : pas d'état à tenir à jour.
 const CONTROLE_ID_MIN = 2000
 const CONTROLE_MAX = 100
+
+/** Rappel d'une étape du plan de révision, le jour prévu (« Contrôle de maths dans 5 jours »). */
+export function rappelEtape(etape, intitule) {
+  return {
+    title: `${intitule} dans ${etape.avant} jours`,
+    body: `Ton plan de révision : ${etape.quoi.toLowerCase()} aujourd’hui. Dix minutes ?`,
+  }
+}
 
 export function rappelControle(controle, intitule) {
   return {
@@ -100,11 +110,20 @@ export async function planifierRappelsControles(controles, nommer = intituleCont
     notifications: Array.from({ length: CONTROLE_MAX }, (_, i) => ({ id: CONTROLE_ID_MIN + i })),
   }).catch(() => {})
   const maintenant = new Date()
-  const notifications = controles.slice(0, CONTROLE_MAX).map((c, i) => {
-    const [a, m, j] = c.date.split('-').map(Number)
-    const at = new Date(a, m - 1, j - 1, REMINDER_HOUR, REMINDER_MINUTE)
-    return at > maintenant ? { id: CONTROLE_ID_MIN + i, ...rappelControle(c, nommer(c)), schedule: { at, allowWhileIdle: true } } : null
-  }).filter(Boolean)
+  const a18h = jour => {
+    const [a, m, j] = jour.split('-').map(Number)
+    return new Date(a, m - 1, j, REMINDER_HOUR, REMINDER_MINUTE)
+  }
+  const notifications = controles.slice(0, Math.floor(CONTROLE_MAX / 3)).flatMap((c, i) => {
+    const veille = new Date(a18h(c.date).getTime() - 86_400_000)
+    const liste = veille > maintenant ? [{ id: CONTROLE_ID_MIN + i * 3, ...rappelControle(c, nommer(c)), schedule: { at: veille, allowWhileIdle: true } }] : []
+    // La veille, c'est le contrôle blanc : le rappel ci-dessus suffit.
+    planRevision(c).filter(e => e.id !== 'blanc' && !e.fait).forEach((e, k) => {
+      const at = a18h(e.prevu)
+      if (at > maintenant) liste.push({ id: CONTROLE_ID_MIN + i * 3 + 1 + k, ...rappelEtape(e, nommer(c)), schedule: { at, allowWhileIdle: true } })
+    })
+    return liste
+  })
   if (!notifications.length) return
   let perm = await LocalNotifications.checkPermissions()
   if (perm.display !== 'granted') perm = await LocalNotifications.requestPermissions()
