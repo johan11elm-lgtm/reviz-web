@@ -3,6 +3,7 @@ import { useEffect, lazy, Suspense } from 'react'
 import { ThemeProvider, useTheme } from './context/ThemeContext'
 import { AuthProvider, useAuth } from './context/AuthContext'
 import { resolveTheme } from './utils/themes'
+import { entreeSansSession } from './utils/retour'
 import { ErrorBoundary } from './components/ErrorBoundary'
 import { SplashHider } from './components/SplashHider'
 import { NavHaut } from './components/NavHaut'
@@ -75,7 +76,8 @@ function LoadingFallback() {
 // Redirige vers /welcome si non connecté, vers /consent-pending si en attente
 function PrivateRoute({ children }) {
   const { currentUser, consentBlocked, needsProfileSetup } = useAuth();
-  if (!currentUser) return <Navigate to="/welcome" replace />;
+  const location = useLocation();
+  if (!currentUser) return <Navigate to={entreeSansSession(location)} replace />;
   if (needsProfileSetup) return <Navigate to="/finish-setup" replace />;
   if (consentBlocked) return <Navigate to="/consent-pending" replace />;
   return children;

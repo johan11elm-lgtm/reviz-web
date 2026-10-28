@@ -125,6 +125,15 @@ describe('bilan au parent (J+3) — qui le reçoit', () => {
     expect(envoyer).not.toHaveBeenCalled()
   })
 
+  it('lit la date d’inscription en Timestamp Firestore, comme en base', async () => {
+    // users/{uid}.createdAt vient de serverTimestamp() : tous les bilans
+    // étaient écartés au premier passage du cron (27/10).
+    eleve('lea', { profil: { createdAt: { toMillis: () => INSCRIT } } })
+    eleve('tropTot', { profil: { createdAt: { toMillis: () => MAINTENANT - 2 * J } } })
+    expect(await lancer()).toEqual({ bilansParent: 1 })
+    expect(envoyer.mock.calls[0][0].html).toContain('depuis le lundi 19 octobre')
+  })
+
   it('pas de bilan après « Ne plus recevoir de bilan », ni si le compte a disparu', async () => {
     eleve('desabo', { profil: { bilansParent: false } })
     eleve('supprime')
