@@ -2,9 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { BottomNav } from '../components/BottomNav';
-import { Pantin } from '../components/Pantin';
 import { Mascot } from '../components/Mascot';
-import { BulleReviz } from '../components/reviz/BulleReviz';
 import { AjoutControle, couleursMatiere } from '../components/AjoutControle';
 import { PlanRevision } from '../components/PlanRevision';
 import { preparerQuizErreurs } from '../services/erreursService';
@@ -18,7 +16,6 @@ import {
   controlesAVenir, matiereControle, matiereDuCours, nomDuCours, detailDuCours,
   jourIso, lundiDe, ajouterJours, joursDeLaSemaine, joursEntre, jourEnClair, jourCourt, heure,
 } from '../utils/agenda';
-import { varsTeinte } from '../utils/teinteMatiere';
 import { estLienDemo } from '../utils/edtDemo';
 import '../components/reviz/HerosMatiere.css';
 import './Agenda.css';
@@ -62,8 +59,9 @@ function bulle(prochain, n) {
 }
 
 /**
- * Agenda (handoff Claude Design du 21/10) : ne pas se faire surprendre par un contrôle. Le
- * prochain contrôle dans le héros (teinte de sa matière) avec Réviz et le compte à rebours,
+ * Agenda (handoff Claude Design du 21/10, en-tête façon app Nomad le 29/10) : ne pas se faire
+ * surprendre par un contrôle. Ce que dit Réviz dans le bloc lavande, le prochain contrôle avec
+ * son compte à rebours et son plan,
  * les contrôles suivants, puis l'emploi du temps Pronote semaine par semaine (un jour à la
  * fois sur téléphone, la semaine en grille horaire sur ordinateur). Pronote n'exporte que
  * l'emploi du temps : les contrôles, c'est l'élève qui les note.
@@ -94,11 +92,8 @@ export default function Agenda() {
   const aVenir = controlesAVenir(agenda.controles, aujourdhui);
   const [prochain, ...suite] = aVenir;
   const n = prochain ? joursEntre(aujourdhui, prochain.date) : 0;
-  const { lignes, humeur } = bulle(prochain, n);
+  const { lignes } = bulle(prochain, n);
   const c = prochain ? couleursMatiere(prochain.matiere) : null;
-  const teinte = c
-    ? { fond: c.fond, bulle: c.tranche, point: 'var(--rv-peche)', interieur: c.fond, ombre: 'rgba(160,80,20,.12)' }
-    : { fond: 'var(--rv-peche)', bulle: 'var(--rv-peche-bulle)', point: 'var(--rv-lavande-bulle)', interieur: 'var(--rv-peche-pale)', ombre: 'rgba(150,70,20,.14)' };
 
   function reviser(ctrl) {
     track('agenda_reviser', { matiere: ctrl.matiere });
@@ -120,24 +115,26 @@ export default function Agenda() {
     });
   }
 
-  // Réviz parle une fois arrivé (ou au bout de 4 s si le moteur ne charge pas).
-  const pantin = useRef(null);
-  const [parle, setParle] = useState(false);
-  const texte = lignes.join('\n');
-  useEffect(() => { if (parle) pantin.current?.dire(texte); }, [texte, parle]);
-  useEffect(() => {
-    let t;
-    const essai = () => { t = setTimeout(() => (document.hidden ? essai() : setParle(true)), 4000); };
-    essai();
-    return () => clearTimeout(t);
-  }, []);
-
-  const reviz = (
-    <div className={`ag-reviz${isDesktop ? ' ag-reviz--cote' : ''}`}>
-      <BulleReviz key={texte} lignes={lignes} parle={parle} pointe={isDesktop ? 'droite' : 'bas'} grande={isDesktop} className="ag-bulle" />
-      <Pantin ref={pantin} size={isDesktop ? 260 : 206} expression={humeur} entree="coucou" repli={null}
-        onEntree={() => setParle(true)} onClick={() => pantin.current?.geste('saut')} label="Réviz, ta mascotte" />
-    </div>
+  // Ce que dit Réviz, dans le bloc lavande de l'accueil (façon app Nomad, 29/10) ; sans contrôle
+  // noté, la ligne blanche pour en ajouter un, comme leur « Ajouter une évaluation ».
+  const blocReviz = (
+    <section className="na-bloc" aria-label="Réviz">
+      <span className="na-bloc-reviz" aria-hidden="true">
+        <Mascot pose={!prochain ? 'writing' : n <= 2 ? 'fire' : 'pointing'} size={isDesktop ? 110 : 86} alt="" />
+      </span>
+      <p className="na-bloc-txt">{lignes.join(' ').replace(/ ([?!:;])/g, '\u00a0$1')}</p>
+      {!prochain && (
+        <button type="button" className="na-ligne" onClick={() => setAjout({})}>
+          <span className="na-ligne-icone" aria-hidden="true"><Plus /></span>
+          <span className="na-ligne-txt">
+            <span className="na-ligne-titre">Ajouter un contrôle</span>
+            <span className="na-ligne-sous">Réviz te prépare un plan de révision jour par jour</span>
+          </span>
+          <span className="na-ligne-fleche" aria-hidden="true"><Fleche /></span>
+        </button>
+      )}
+      {!prochain && isGuest && <p className="na-note">Mode essai · tes contrôles restent sur cet appareil.</p>}
+    </section>
   );
   const carteProchain = prochain ? (
     <div className="ag-carte ag-prochain">
@@ -158,12 +155,7 @@ export default function Agenda() {
       </div>
       <button type="button" className="ag-retirer ag-retirer--coin" onClick={() => retirer(prochain)} aria-label="Retirer ce contrôle"><Croix taille={14} /></button>
     </div>
-  ) : (
-    <div className="ag-carte ag-vide">
-      <button type="button" className="ag-btn" onClick={() => setAjout({})}><Plus />Ajouter un contrôle</button>
-      {isGuest && <p className="ag-note">Mode essai · tes contrôles restent sur cet appareil.</p>}
-    </div>
-  );
+  ) : null;
   const listeSuite = prochain && (
     <section className="ag-section" aria-labelledby="ag-suivants">
       <div className="ag-section-tete">
@@ -205,52 +197,42 @@ export default function Agenda() {
       onCompte={() => navigate('/inscription')}
     />
   );
-  const tete = (
-    <>
-      <span className="ag-date">{majuscule(jourEnClair(aujourdhui))}</span>
-      <h1 className="ag-titre">Agenda</h1>
-    </>
-  );
-  const deco = (
-    <>
-      <span className="ch-deco ch-deco--a" aria-hidden="true" />
-      <span className="ch-deco ch-deco--b" aria-hidden="true" />
-      <span className="ch-point" aria-hidden="true" />
-      <span className="ch-grain" aria-hidden="true" />
-    </>
+  const entete = (
+    <header className="na-entete">
+      <div className="na-entete-txt">
+        <span className="ag-date">{majuscule(jourEnClair(aujourdhui))}</span>
+        <h1 className="ag-titre">Agenda</h1>
+      </div>
+      {isDesktop
+        ? <button type="button" className="na-ajouter" onClick={() => setAjout({})}><Plus taille={18} />Ajouter un contrôle</button>
+        : <button type="button" className="ag-ajouter-rond" onClick={() => setAjout({})} aria-label="Ajouter un contrôle"><Plus /></button>}
+    </header>
   );
 
   return (
-    <div className={`app app--no-halo ch-page ag-page${isDesktop ? ' app--large ch-page--large ag-page--large' : ''}`} style={varsTeinte(teinte)}>
+    <div className={`app app--no-halo ag-page na-page${isDesktop ? ' app--large ag-page--large' : ''}`}>
       <div className="content ag-defile">
-        {isDesktop ? (
-          <>
-            <div className="ch-hero ag-hero">{deco}{tete}</div>
+        <div className="na-cadre">
+          {entete}
+          {isDesktop ? (
             <div className="ag-grille">
               <div className="ag-gauche">
-                {reviz}
+                {blocReviz}
                 {carteProchain}
                 {listeSuite}
               </div>
               <div className="ag-droite">{edt}</div>
             </div>
-          </>
-        ) : (
-          <>
-            <div className="ch-hero ag-hero">
-              {deco}
-              <div className="ag-hero-haut">
-                <div>{tete}</div>
-                <button type="button" className="ag-ajouter-rond" onClick={() => setAjout({})} aria-label="Ajouter un contrôle"><Plus /></button>
-              </div>
-              {reviz}
-            </div>
-            {carteProchain}
-            {prochain && <p className="ag-rappel ag-rappel--tel"><Cloche />Chaque étape sur l’accueil, et un rappel le jour venu sur iPhone.</p>}
-            {listeSuite}
-            {edt}
-          </>
-        )}
+          ) : (
+            <>
+              {blocReviz}
+              {carteProchain}
+              {prochain && <p className="ag-rappel ag-rappel--tel"><Cloche />Chaque étape sur l’accueil, et un rappel le jour venu sur iPhone.</p>}
+              {listeSuite}
+              {edt}
+            </>
+          )}
+        </div>
       </div>
       {ajout && (
         <AjoutControle

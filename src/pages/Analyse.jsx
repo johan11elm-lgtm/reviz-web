@@ -375,7 +375,7 @@ export default function Analyse() {
       <span className="nf-bloc-reviz" aria-hidden="true">
         <Mascot pose={etat === 'maitrise' ? 'trophy' : etat === 'encours' ? 'pointing' : 'hello'} size={isDesktop ? 112 : 88} alt="" />
       </span>
-      <p className="nf-bloc-txt">{lignes.join(' ')}</p>
+      <p className="nf-bloc-txt">{lignes.join(' ').replace(/ ([?!:;])/g, '\u00a0$1')}</p>
       <Link to={step.to} state={DEPUIS_FICHE} className="nf-ligne">
         <span className="nf-ligne-icone" aria-hidden="true"><Mascot pose={POSE_ETAPE[step.to] ?? 'reading'} size={42} alt="" /></span>
         <span className="nf-ligne-txt">

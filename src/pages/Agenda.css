@@ -253,3 +253,71 @@
   --hm-encre: #042A65; --hm-doux: #6E675B; --inst-encre: #042A65; --inst-doux: #6E675B; --lg-encre: #042A65; --lg-doux: #6E675B; --prg-encre: #042A65; --prg-doux: #6E675B;
   color: #042A65;
 }
+
+/* ═══ Agenda façon app Nomad (29/10) ══════════════════════════════════════════
+ * Plus de héros : la date et le titre, le bouton d'ajout, puis le bloc lavande de Réviz
+ * (comme l'accueil) et des cartes blanches à ombre légère, titres à barre orange. */
+.na-page .na-cadre { display: flex; flex-direction: column; padding: calc(env(safe-area-inset-top, 0px) + 14px) 16px 0; }
+.na-page .na-entete { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 16px; }
+.na-page .ag-date { font-size: 13px; font-weight: 600; letter-spacing: 0; text-transform: none; opacity: 1; color: var(--rv-doux); }
+.na-page .ag-titre { margin-top: 2px; font-family: inherit; font-size: 30px; letter-spacing: -.01em; color: #042A65; }
+.na-page .ag-ajouter-rond { width: 46px; height: 46px; border-radius: 14px; background: #042A65; color: #fff; box-shadow: none; }
+.na-page .na-ajouter { display: inline-flex; align-items: center; gap: 8px; height: 46px; padding: 0 18px; border: 0; border-radius: 12px; background: #042A65; color: #fff; font: 700 14.5px 'Poppins', system-ui, sans-serif; cursor: pointer; }
+.na-page .na-ajouter:hover { background: #0B3A82; }
+.na-page .na-ajouter:focus-visible, .na-page .ag-ajouter-rond:focus-visible { outline: 3px solid var(--rv-vif); outline-offset: 2px; }
+
+/* Bloc lavande de Réviz */
+.na-page .na-bloc { position: relative; display: flex; flex-direction: column; gap: 14px; padding: 18px 14px 14px; border-radius: 24px; background: #B9A6FB; color: #042A65; }
+.na-page .na-bloc-reviz { position: absolute; top: -14px; right: 6px; pointer-events: none; }
+.na-page .na-bloc-txt { position: relative; max-width: 64%; min-height: 56px; margin: 0; font-size: 19px; font-weight: 700; line-height: 1.3; }
+.na-page .na-ligne { display: flex; align-items: center; gap: 14px; width: 100%; min-height: 66px; padding: 9px 12px 9px 9px; border: 0; border-radius: 14px; background: #fff; color: #042A65; font: inherit; text-align: left; cursor: pointer; }
+.na-page .na-ligne:focus-visible { outline: 3px solid #042A65; outline-offset: 2px; }
+.na-page .na-ligne-icone { width: 50px; height: 50px; flex: none; border-radius: 12px; background: #F2EBFF; display: flex; align-items: center; justify-content: center; }
+.na-page .na-ligne-txt { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.na-page .na-ligne-titre { font-size: 16px; font-weight: 600; }
+.na-page .na-ligne-sous { font-size: 12.5px; color: var(--rv-doux); }
+.na-page .na-ligne-fleche { width: 28px; height: 28px; flex: none; border-radius: 8px; background: var(--rv-vif-plein); color: #fff; display: flex; align-items: center; justify-content: center; }
+.na-page .na-ligne-fleche svg { width: 16px; height: 16px; }
+.na-page .na-note { margin: -4px 4px 0; font-size: 13px; font-weight: 500; color: #042A65; }
+
+/* Cartes, listes, boutons */
+.na-page .ag-carte { border-radius: 20px; background: #fff; box-shadow: 0 1px 3px rgba(4,42,101,.1), 0 1px 2px rgba(4,42,101,.06); }
+.na-page .ag-prochain { margin: 16px 0 0; }
+.na-page .ag-sur { color: var(--rv-vif-plein); }
+.na-page .ag-prochain-txt b { font-family: inherit; }
+.na-page .ag-rebours { font-family: inherit; border-radius: 16px; }
+.na-page .ag-btn { border-radius: 14px; background: var(--rv-vif-plein); box-shadow: 0 4px 0 #B83706; }
+.na-page .ag-btn:active:not(:disabled) { box-shadow: 0 1px 0 #B83706; }
+.na-page .ag-relier .ag-btn, .na-page .ag-relier--essai .ag-btn { background: #042A65; box-shadow: 0 4px 0 #001330; }
+.na-page .ag-pilule { border-radius: 12px; box-shadow: 0 1px 3px rgba(4,42,101,.1), 0 1px 2px rgba(4,42,101,.06); }
+.na-page .ag-rappel--tel { margin: 14px 8px 0; }
+.na-page .ag-section { margin: 28px 0 0; }
+.na-page .ag-section-tete { margin: 0 0 12px; }
+.na-page .ag-h2, .na-page .ag-relier-titre { padding-left: 12px; border-left: 4px solid var(--rv-vif); font-family: inherit; font-size: 21px; letter-spacing: 0; line-height: 1.2; color: #042A65; }
+.na-page .ag-ligne { border-radius: 16px; background: #fff; box-shadow: 0 1px 3px rgba(4,42,101,.1), 0 1px 2px rgba(4,42,101,.06); }
+.na-page .ag-rien { margin: 0 4px; }
+.na-page .ag-relier { margin: 28px 0 0; }
+.na-page .ag-semaine, .na-page .ag-jour { box-shadow: 0 1px 3px rgba(4,42,101,.1); }
+.na-page .ag-jour b { font-family: inherit; }
+.na-page .ag-jour.is-choisi { background: #042A65; color: #fff; box-shadow: none; }
+.na-page .ag-jour.is-auj:not(.is-choisi) { box-shadow: inset 0 0 0 2px var(--rv-vif); }
+.na-page .ag-edt-etat { box-shadow: 0 1px 3px rgba(4,42,101,.1); }
+
+/* Ordinateur : la grille sous l'en-tête, sans chevaucher de héros */
+.na-page.ag-page--large .na-cadre { max-width: 1240px; box-sizing: border-box; margin: 0 auto; padding: 12px 32px 64px; }
+.na-page.ag-page--large .na-entete { margin-bottom: 22px; }
+.na-page.ag-page--large .ag-titre { font-size: 34px; }
+.na-page.ag-page--large .ag-grille { margin: 0; padding: 0; max-width: none; grid-template-columns: 460px minmax(0, 1fr); gap: 28px; align-items: start; }
+.na-page.ag-page--large .na-bloc { padding: 24px 20px 18px; border-radius: 26px; }
+.na-page.ag-page--large .na-bloc-txt { font-size: 21px; }
+.na-page.ag-page--large .na-bloc-reviz { top: -30px; right: 14px; }
+.na-page.ag-page--large .ag-prochain { margin-top: 18px; padding: 22px; border-radius: 20px; }
+.na-page.ag-page--large .ag-prochain-txt b { font-size: 22px; }
+.na-page.ag-page--large .ag-rebours { min-width: 80px; height: 80px; font-size: 32px; }
+.na-page.ag-page--large .ag-relier { margin: 0; min-height: 0; }
+.na-page .ag-gs-tete { box-shadow: 0 1px 3px rgba(4,42,101,.1); background: #fff; }
+.na-page .ag-gs-tete b { font-family: inherit; }
+.na-page .ag-gs-tete.is-auj { background: #042A65; color: #fff; box-shadow: none; }
+@media (max-width: 1240px) {
+  .na-page.ag-page--large .ag-grille { grid-template-columns: 400px minmax(0, 1fr); padding: 0; }
+}
