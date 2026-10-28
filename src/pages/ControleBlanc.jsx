@@ -4,6 +4,8 @@ import { useAuth } from '../context/AuthContext';
 import { useIsDesktop } from '../hooks/useMediaQuery';
 import { Mascot } from '../components/Mascot';
 import { loadLessons } from '../services/historyService';
+import { loadChapterContent } from '../services/programmeService';
+import { chapterLessonId, PROGRAMME_FALLBACK } from '../utils/programme';
 import { agendaLocal, marquerEtape } from '../services/agendaService';
 import { recordRevision } from '../services/revisionService';
 import { noterErreurs, erreursDe, preparerQuizErreurs } from '../services/erreursService';
@@ -102,16 +104,40 @@ function Session({ controle, uid, onRefaire }) {
   const { currentUser } = useAuth();
   const isDesktop = useIsDesktop();
   const m = matiereControle(controle.matiere);
-  const lecons = useMemo(() => loadLessons().filter(l => leconDeLaMatiere(l, m.slug)), [m.slug]);
+  // Les leçons du sujet : celles des chapitres choisis pour le contrôle (rouverts depuis le
+  // programme s'ils n'ont jamais été ouverts), sinon les chapitres de la matière déjà ouverts.
+  const [lecons, setLecons] = useState(null);
+  const [duControle, setDuControle] = useState(false);
+  useEffect(() => {
+    let vivant = true;
+    const historique = loadLessons();
+    const deLaMatiere = historique.filter(l => leconDeLaMatiere(l, m.slug));
+    const chs = controle.chapitres ?? [];
+    if (!chs.length) { setLecons(deLaMatiere); return undefined; }
+    Promise.all(chs.map(async ch => {
+      const deja = historique.find(l => l.id === chapterLessonId(ch.id));
+      if (deja) return deja;
+      const aiData = await loadChapterContent(controle.classe ?? PROGRAMME_FALLBACK, controle.programme ?? m.slug, ch.id).catch(() => null);
+      return aiData && { id: chapterLessonId(ch.id), metadata: { title: ch.titre, subject: controle.programme ?? m.label }, aiData };
+    })).then(ls => {
+      if (!vivant) return;
+      const prets = ls.filter(l => l?.aiData?.quiz?.length);
+      setDuControle(prets.length > 0);
+      setLecons(prets.length ? prets : deLaMatiere);
+    });
+    return () => { vivant = false; };
+  }, [controle, m.slug, m.label]);
   const { questions, chapitres } = useMemo(() => {
+    if (!lecons) return { questions: [], chapitres: [] };
     const ratees = new Set(lecons.flatMap(l => erreursDe(uid, l.id)));
-    return sujetControle({ lecons, matiere: m.slug, ratees });
-  }, [lecons, m.slug, uid]);
+    return sujetControle({ lecons, matiere: duControle ? null : m.slug, ratees });
+  }, [lecons, duControle, m.slug, uid]);
   const duree = dureeControle(questions.length);
 
   const [phase, setPhase] = useState('sujet'); // sujet | epreuve | fin
   const [idx, setIdx] = useState(0);
-  const [reponses, setReponses] = useState(() => questions.map(() => null));
+  const [reponses, setReponses] = useState([]);
+  useEffect(() => { setReponses(questions.map(() => null)); }, [questions]);
   const [reste, setReste] = useState(duree);
   const [tempsPasse, setTempsPasse] = useState(0);
   const debut = useRef(0);
@@ -176,6 +202,18 @@ function Session({ controle, uid, onRefaire }) {
   const fermer = () => navigate('/agenda');
 
   // ── Le sujet ──
+  if (phase === 'sujet' && !lecons) {
+    return (
+      <Cadre onFermer={fermer}>
+        <div className="cb-carte cb-sujet" role="status">
+          <span className="cb-emote" aria-hidden="true"><Mascot pose="writing" size={64} alt="" /></span>
+          <span className="cb-sur">Contrôle blanc</span>
+          <h1 className="cb-titre">{titre}</h1>
+          <p className="cb-txt">Réviz prépare ton sujet…</p>
+        </div>
+      </Cadre>
+    );
+  }
   if (phase === 'sujet') {
     const assez = questions.length >= MIN_QUESTIONS;
     return (
@@ -188,7 +226,7 @@ function Session({ controle, uid, onRefaire }) {
           {assez ? (
             <>
               <ul className="cb-regles">
-                <li><b>{pluriel(questions.length, 'question')}</b><span>sur {pluriel(chapitres.length, 'chapitre')} que tu as ouverts</span></li>
+                <li><b>{pluriel(questions.length, 'question')}</b><span>sur {duControle ? `${pluriel(chapitres.length, 'chapitre')} du contrôle` : `${pluriel(chapitres.length, 'chapitre')} que tu as ouverts`}</span></li>
                 <li><b>{Math.round(duree / 60)} minutes</b><span>le chrono tourne, comme le jour J</span></li>
                 <li><b>Pas de correction</b><span>pendant l’épreuve : tu peux changer tes réponses</span></li>
                 <li><b>Une note sur 20</b><span>puis le corrigé de chaque question</span></li>

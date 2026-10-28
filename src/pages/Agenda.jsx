@@ -6,7 +6,7 @@ import { Mascot } from '../components/Mascot';
 import { AjoutControle, couleursMatiere } from '../components/AjoutControle';
 import { PlanRevision } from '../components/PlanRevision';
 import { planOuvert } from '../utils/planRevision';
-import { preparerQuizErreurs } from '../services/erreursService';
+import { cibleRevision, cibleQuizErreurs, ouvrirChapitreDuControle } from '../services/controleChapitres';
 import { useIsDesktop } from '../hooks/useMediaQuery';
 import { track } from '../services/statsService';
 import {
@@ -96,24 +96,31 @@ export default function Agenda() {
   const { lignes } = bulle(prochain, n);
   const c = prochain ? couleursMatiere(prochain.matiere) : null;
 
-  function reviser(ctrl) {
-    track('agenda_reviser', { matiere: ctrl.matiere });
-    navigate(ctrl.matiere === 'autre' ? '/cours' : `/programme?matiere=${ctrl.matiere}`);
+  // « Réviser » : la fiche du chapitre du contrôle à travailler (chapitres cochés à l'ajout),
+  // sinon le programme de la matière.
+  async function reviser(ctrl) {
+    track('agenda_reviser', { matiere: ctrl.matiere, chapitres: ctrl.chapitres?.length ?? 0 });
+    navigate(await cibleRevision(ctrl));
   }
   // Une étape du plan lancée compte comme faite (le jour même) : l'élève révise le chapitre.
-  // Le quiz sur les points ratés (J-3) ouvre les questions ratées de la matière, s'il y en a.
+  // Le quiz sur les points ratés (J-3) ouvre les questions ratées des chapitres du contrôle.
   async function lancerEtape(ctrl, etape) {
     track('agenda_plan_etape', { matiere: ctrl.matiere, etape: etape.id });
     // J-1 : le contrôle blanc (mode contrôle) ; il coche l'étape une fois la copie rendue.
     if (etape.id === 'blanc') { navigate(`/controle?c=${ctrl.id}`); return; }
     setAgenda(await marquerEtape(currentUser, ctrl.id, etape.id));
-    if (etape.id === 'quiz' && preparerQuizErreurs(currentUser?.uid, ctrl.matiere)) navigate('/quiz?erreurs=1');
+    if (etape.id === 'quiz') navigate(await cibleQuizErreurs(currentUser?.uid, ctrl));
     else reviser(ctrl);
+  }
+  async function ouvrirChapitre(ctrl, ch) {
+    track('agenda_chapitre', { matiere: ctrl.matiere });
+    try { await ouvrirChapitreDuControle(ctrl, ch); navigate('/analyse'); }
+    catch { montrer('Ce chapitre ne s’ouvre pas pour le moment.'); }
   }
   async function retirer(ctrl) {
     setAgenda(await supprimerControle(currentUser, ctrl.id));
     montrer('Contrôle retiré.', async () => {
-      setAgenda(await ajouterControle(currentUser, { matiere: ctrl.matiere, titre: ctrl.titre ?? '', date: ctrl.date }));
+      setAgenda(await ajouterControle(currentUser, { matiere: ctrl.matiere, titre: ctrl.titre ?? '', date: ctrl.date, chapitres: ctrl.chapitres, classe: ctrl.classe, programme: ctrl.programme }));
       setToast(null);
     });
   }
@@ -150,6 +157,13 @@ export default function Agenda() {
         </span>
         <span className={`ag-rebours${n <= 1 ? ' ag-rebours--mot' : ''}`} style={{ background: c.fond, boxShadow: `0 5px 0 ${c.tranche}` }}>{rebours(n, true)}</span>
       </div>
+      {prochain.chapitres?.length > 0 && (
+        <div className="ag-chapitres-du" aria-label="Chapitres du contrôle">
+          {prochain.chapitres.map(ch => (
+            <button key={ch.id} type="button" className="ag-puce-chapitre" onClick={() => ouvrirChapitre(prochain, ch)}>{ch.titre}</button>
+          ))}
+        </div>
+      )}
       <PlanRevision controle={prochain} agenda={agenda} hasRevizPlus={hasRevizPlus} className="ag-plan"
         onLancer={e => lancerEtape(prochain, e)} onDebloquer={() => navigate('/reglages')} />
       <div className="ag-prochain-bas">

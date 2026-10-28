@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
-import { render, screen, fireEvent } from '@testing-library/react'
+import { render, screen, fireEvent, waitFor } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
 import { jourIso, ajouterJours } from '../../utils/agenda'
 
@@ -35,7 +35,7 @@ describe('<Agenda />', () => {
     expect(screen.getByRole('button', { name: 'Ajouter' })).toBeDisabled()
   })
 
-  it('le prochain contrôle : compte à rebours, et « Réviser » ouvre la matière', () => {
+  it('le prochain contrôle : compte à rebours, et « Réviser » ouvre la matière', async () => {
     etat.agenda = { controles: [
       { id: 'a', matiere: 'maths', titre: 'Puissances', date: dans(3) },
       { id: 'b', matiere: 'histoire', titre: 'La Révolution', date: dans(9) },
@@ -45,7 +45,7 @@ describe('<Agenda />', () => {
     expect(screen.getByText('Maths · Puissances')).toBeInTheDocument()
     expect(screen.getByText('Dans 9 jours')).toBeInTheDocument()
     fireEvent.click(screen.getByRole('button', { name: /Réviser/ }))
-    expect(nav).toHaveBeenCalledWith('/programme?matiere=maths')
+    await waitFor(() => expect(nav).toHaveBeenCalledWith('/programme?matiere=maths'))
   })
 
   it('la veille : « Demain »', () => {

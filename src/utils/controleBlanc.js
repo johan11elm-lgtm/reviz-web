@@ -3,8 +3,9 @@
 //
 // La veille d'un contrôle (étape J-1 du plan de révision), ou quand l'élève veut : un sujet
 // type chronométré, sans correction pendant l'épreuve, puis une note sur 20 et le corrigé.
-// Le sujet mélange les questions des chapitres de la matière déjà ouverts (programme et
-// leçons scannées), en donnant leur place aux questions ratées et en couvrant chaque chapitre.
+// Le sujet mélange les questions des chapitres du contrôle (choisis à l'ajout), sinon des chapitres
+// de la matière déjà ouverts (programme et leçons scannées), en donnant leur place aux questions
+// ratées et en couvrant chaque chapitre.
 // -------------------------------------------------------
 import { matiereDuCours } from './agenda'
 
@@ -29,7 +30,8 @@ function melanger(liste, alea) {
 }
 
 /**
- * Le sujet : jusqu'à `nb` questions des leçons de la matière. D'abord une part des questions
+ * Le sujet : jusqu'à `nb` questions des leçons de la matière (toutes les leçons données si
+ * `matiere` est nul : celles des chapitres choisis pour le contrôle). D'abord une part des questions
  * ratées (au plus un tiers du sujet), puis les autres chapitre par chapitre, à tour de rôle,
  * pour que le sujet couvre tout ce qui a été ouvert. Chaque question garde sa leçon (lessonId)
  * et son chapitre, pour noter les erreurs au bon endroit.
@@ -39,7 +41,7 @@ export function sujetControle({ lecons = [], matiere, ratees = new Set(), nb = N
   const vues = new Set()
   const parLecon = []
   for (const l of lecons) {
-    if (!leconDeLaMatiere(l, matiere)) continue
+    if (matiere && !leconDeLaMatiere(l, matiere)) continue
     const qs = []
     for (const q of l.aiData?.quiz ?? []) {
       if (!q?.question || !Array.isArray(q.choices) || q.choices.length < 2 || !Number.isInteger(q.correct) || vues.has(q.question)) continue

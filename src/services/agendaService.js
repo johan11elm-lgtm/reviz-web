@@ -68,15 +68,32 @@ async function enregistrer(user, agenda) {
   return agenda
 }
 
-export async function ajouterControle(user, { matiere, titre, date }) {
+/** Intitulé tiré des chapitres choisis : « Thalès », « Thalès et Pythagore », « Thalès + 2 chapitres ». */
+export function intituleChapitres(chapitres = []) {
+  const t = chapitres.map(c => String(c?.titre ?? '').trim()).filter(Boolean)
+  if (!t.length) return ''
+  if (t.length === 1) return t[0]
+  // Court pour tenir sur la carte du contrôle (les chapitres y sont aussi en puces).
+  if (t.length === 2 && `${t[0]} et ${t[1]}`.length <= 40) return `${t[0]} et ${t[1]}`
+  return `${t[0]} + ${t.length - 1} ${t.length > 2 ? 'chapitres' : 'chapitre'}`
+}
+
+/**
+ * Note un contrôle. `chapitres` : ceux du programme choisis à l'ajout ([{ id, titre }]), avec la
+ * classe et le nom de la matière dans le programme (« Physique-Chimie ») pour rouvrir leurs
+ * contenus ; sans intitulé, ils lui en donnent un. Le plan et le contrôle blanc s'appuient dessus.
+ */
+export async function ajouterControle(user, { matiere, titre, date, chapitres = [], classe = null, programme = null }) {
   const agenda = agendaLocal(user.uid)
+  const chs = (chapitres ?? []).filter(c => c?.id).slice(0, 12).map(c => ({ id: String(c.id), titre: String(c.titre ?? '').slice(0, 120) }))
   const controle = {
     id: `c${Date.now().toString(36)}`,
     matiere,
-    titre: String(titre ?? '').trim().slice(0, 80),
+    titre: (String(titre ?? '').trim() || intituleChapitres(chs)).slice(0, 80),
     date,
     cree: jourIso(),
   }
+  if (chs.length) Object.assign(controle, { chapitres: chs, classe, programme })
   // On ne garde pas les contrôles passés depuis plus d'un mois.
   const limite = jourIso(new Date(Date.now() - 31 * 86_400_000))
   const controles = [...agenda.controles.filter(c => c.date >= limite), controle]

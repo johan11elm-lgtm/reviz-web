@@ -47,6 +47,12 @@ describe('mode contrôle : le sujet', () => {
     expect(questions.map(x => x.question).sort()).toEqual(['même', 'ok'])
   })
 
+  it('sans matière, prend toutes les leçons données (les chapitres du contrôle)', () => {
+    const lecons = [lecon('a', 'Maths', 3), lecon('b', 'Mathématiques', 3)]
+    const { questions } = sujetControle({ lecons, matiere: null, alea: graine(2) })
+    expect(questions).toHaveLength(6)
+  })
+
   it('rend un sujet vide sans leçon de la matière', () => {
     expect(sujetControle({ lecons: [lecon('f', 'Français', 7)], matiere: 'maths' }).questions).toEqual([])
   })

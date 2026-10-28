@@ -2,6 +2,7 @@
 // le simulateur de notes du brevet et l'espace parent. Téléphone et ordinateur.
 import { test, expect } from '@playwright/test'
 import { mockApiRoutes, mockProgramme, entrerEnEssai, sansDebordement, compteRapide, lireProfilEmulateur, ouvrirChapitreDuProgramme, chapitreThales, jouerQuiz } from './helpers'
+import { jourEnClair } from '../src/utils/agenda.js'
 
 const APPAREILS = [
   ['ordinateur', { width: 1280, height: 800 }],
@@ -169,6 +170,41 @@ for (const [appareil, viewport] of APPAREILS) {
       await expect(page.getByText(/Question 1 sur 2/)).toBeVisible()
       await page.goto('/agenda')
       await expect(plan.locator('.pr-etape--faite', { hasText: 'Contrôle blanc' })).toBeVisible()
+    })
+
+    test('noter un contrôle avec ses chapitres : le contrôle blanc et « Réviser » portent dessus', async ({ page }) => {
+      await mockApiRoutes(page)
+      await mockProgramme(page)
+      await entrerEnEssai(page, { aller: null })
+      const quiz = chapitreThales().quiz
+      await page.goto('/agenda')
+      await page.getByRole('button', { name: 'Ajouter un contrôle' }).first().click()
+      const feuille = page.getByRole('dialog', { name: 'Ajouter un contrôle' })
+      await feuille.getByRole('button', { name: 'Maths', exact: true }).click()
+      // Les chapitres de la matière, à cocher : Thalès, jamais ouvert.
+      const thales = feuille.getByRole('checkbox', { name: 'Le théorème de Thalès' })
+      await thales.click()
+      await expect(thales).toHaveAttribute('aria-checked', 'true')
+      if (viewport.width >= 1024) await feuille.getByRole('button', { name: jourEnClair(jour(1)), exact: true }).click()
+      else await feuille.getByRole('button', { name: /^Demain/ }).click()
+      await sansDebordement(page, `ajout d’un contrôle ${appareil}`)
+      await feuille.getByRole('button', { name: 'Ajouter', exact: true }).click()
+
+      // Sans intitulé, le contrôle prend le nom du chapitre ; le chapitre est sur sa carte.
+      await expect(page.getByText('Maths · Le théorème de Thalès')).toBeVisible()
+      await expect(page.getByRole('button', { name: 'Le théorème de Thalès', exact: true })).toBeVisible()
+
+      // Le contrôle blanc porte sur le chapitre coché, même jamais ouvert.
+      await page.getByRole('button', { name: 'Contrôle blanc', exact: true }).click()
+      await expect(page).toHaveURL(/\/controle\?c=/)
+      await expect(page.getByText(`${quiz.length} questions`)).toBeVisible()
+      await expect(page.getByText('sur 1 chapitre du contrôle')).toBeVisible()
+
+      // « Réviser » ouvre la fiche du chapitre du contrôle.
+      await page.goto('/agenda')
+      await page.getByRole('button', { name: /^Réviser/ }).click()
+      await expect(page).toHaveURL(/\/analyse/)
+      await expect(page.getByRole('heading', { level: 1, name: 'Le théorème de Thalès' })).toBeVisible()
     })
 
     test('le mode dyslexie change la police des écrans de lecture, et reste choisi', async ({ page }) => {

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { useModalA11y } from '../hooks/useModalA11y';
 import { useIsDesktop } from '../hooks/useMediaQuery';
@@ -6,6 +6,8 @@ import { Mascot } from './Mascot';
 import { ajouterControle } from '../services/agendaService';
 import { track } from '../services/statsService';
 import { MATIERES_CONTROLE, jourIso, ajouterJours, jourCourt, jourEnClair } from '../utils/agenda';
+import { loadCatalogue } from '../services/programmeService';
+import { hasProgramme, PROGRAMME_FALLBACK } from '../utils/programme';
 import '../pages/Agenda.css';
 
 // Fond et tranche de chaque matière (handoff Agenda du 21/10).
@@ -77,8 +79,59 @@ function Calendrier({ valeur, onChange }) {
  * facultatif. Feuille du bas sur téléphone, fenêtre à deux colonnes sur ordinateur. `initial`
  * peut pré-remplir matière et date (cours touché dans l'emploi du temps).
  */
+/**
+ * Les chapitres du contrôle, comme l'assistant d'évaluation de l'app Nomad : ceux du programme de
+ * la classe pour la matière choisie, à cocher (facultatif). Sans programme pour la matière (« Autre »,
+ * catalogue indisponible), rien ne s'affiche et le contrôle se note comme avant.
+ */
+function ChoixChapitres({ classe, matiere, choisis, onChange }) {
+  const [etat, setEtat] = useState({ pour: null, chapitres: [], programme: null });
+  useEffect(() => {
+    if (!matiere || matiere === 'autre') return undefined;
+    let vivant = true;
+    loadCatalogue(classe)
+      .then(c => {
+        const m = c?.matieres?.find(x => x.slug === matiere);
+        if (vivant) setEtat({ pour: matiere, chapitres: m?.chapitres ?? [], programme: m?.matiere ?? null });
+      })
+      .catch(() => { if (vivant) setEtat({ pour: matiere, chapitres: [], programme: null }); });
+    return () => { vivant = false; };
+  }, [classe, matiere]);
+  if (!matiere || matiere === 'autre' || etat.pour !== matiere || !etat.chapitres.length) return null;
+  const basculer = ch => {
+    const deja = choisis.some(c => c.id === ch.id);
+    onChange(deja ? choisis.filter(c => c.id !== ch.id) : [...choisis, { id: ch.id, titre: ch.titre }], etat.programme);
+  };
+  return (
+    <>
+      <span className="ag-champ-titre">Chapitres du contrôle <span>facultatif</span></span>
+      <p className="ag-champ-aide">Coche ce qui tombe : ton plan et ton contrôle blanc porteront dessus.</p>
+      <ul className="ag-chapitres" aria-label="Chapitres du contrôle">
+        {etat.chapitres.map((ch, i) => {
+          const coche = choisis.some(c => c.id === ch.id);
+          return (
+            <li key={ch.id}>
+              <button type="button" role="checkbox" aria-checked={coche} className={`ag-chapitre${coche ? ' is-coche' : ''}`} onClick={() => basculer(ch)}>
+                <span className="ag-chapitre-case" aria-hidden="true">{coche && (
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="3.2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg>
+                )}</span>
+                <span className="ag-chapitre-num" aria-hidden="true">{i + 1}</span>
+                <span className="ag-chapitre-nom">{ch.titre}</span>
+              </button>
+            </li>
+          );
+        })}
+      </ul>
+    </>
+  );
+}
+
 export function AjoutControle({ initial = {}, onClose, onSaved }) {
-  const { currentUser } = useAuth();
+  const { currentUser, getUserLevel } = useAuth();
+  const niveau = getUserLevel?.();
+  const classe = hasProgramme(niveau) ? niveau.classe : PROGRAMME_FALLBACK;
+  const [chapitres, setChapitres] = useState([]);
+  const [programme, setProgramme] = useState(null);
   const isDesktop = useIsDesktop();
   const ref = useModalA11y(onClose);
   const tuiles = prochainsJours(4);
@@ -97,8 +150,8 @@ export function AjoutControle({ initial = {}, onClose, onSaved }) {
     setEnvoi(true);
     setErreur('');
     try {
-      const agenda = await ajouterControle(currentUser, { matiere, titre: titre.trim(), date });
-      track('agenda_controle_ajoute', { matiere });
+      const agenda = await ajouterControle(currentUser, { matiere, titre: titre.trim(), date, chapitres, classe, programme });
+      track('agenda_controle_ajoute', { matiere, chapitres: chapitres.length });
       onSaved(agenda);
     } catch {
       setErreur('Le contrôle n’a pas pu être enregistré. Réessaie.');
@@ -114,7 +167,7 @@ export function AjoutControle({ initial = {}, onClose, onSaved }) {
           const k = couleursMatiere(x.slug);
           const choisie = matiere === x.slug;
           return (
-            <button key={x.slug} type="button" className={`ag-matiere${choisie ? ' is-choisie' : ''}`} aria-pressed={choisie} onClick={() => setMatiere(x.slug)}
+            <button key={x.slug} type="button" className={`ag-matiere${choisie ? ' is-choisie' : ''}`} aria-pressed={choisie} onClick={() => { if (x.slug !== matiere) setChapitres([]); setMatiere(x.slug); }}
               style={{ background: k.fond, boxShadow: choisie ? `0 0 0 2px var(--rv-encre), 0 4px 0 ${k.tranche}` : `0 4px 0 ${k.tranche}` }}>
               <span className="ag-matiere-rond" aria-hidden="true"><Mascot pose={x.mascot} size={30} alt="" /></span>
               {x.slug === 'autre' ? 'Autre' : x.label}
@@ -122,6 +175,7 @@ export function AjoutControle({ initial = {}, onClose, onSaved }) {
           );
         })}
       </div>
+      <ChoixChapitres classe={classe} matiere={matiere} choisis={chapitres} onChange={(c, p) => { setChapitres(c); setProgramme(p); }} />
       <span className="ag-champ-titre">Date</span>
       {!isDesktop && (
         <div className="ag-dates">
@@ -137,7 +191,7 @@ export function AjoutControle({ initial = {}, onClose, onSaved }) {
       {calendrier && !isDesktop && <Calendrier valeur={date} onChange={setDate} />}
       {date && <p className="ag-date-choisie">{jourEnClair(date).replace(/^./, c => c.toUpperCase())}</p>}
       <label className="ag-champ-titre" htmlFor="ajout-intitule">Intitulé <span>facultatif</span></label>
-      <input id="ajout-intitule" className="ag-input" type="text" maxLength={80} placeholder="Chapitre ou sujet" value={titre} onChange={e => setTitre(e.target.value)} />
+      <input id="ajout-intitule" className="ag-input" type="text" maxLength={80} placeholder={chapitres.length ? "Pris sur les chapitres cochés" : "Chapitre ou sujet"} value={titre} onChange={e => setTitre(e.target.value)} />
       {erreur && <p className="ag-erreur" role="alert">{erreur}</p>}
     </>
   );

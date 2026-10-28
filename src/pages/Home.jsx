@@ -15,7 +15,7 @@ import { agendaLocal, chargerAgenda } from '../services/agendaService';
 import { controlesAVenir, compteARebours, matiereControle, joursEntre, jourIso } from '../utils/agenda';
 import { planRevision } from '../utils/planRevision';
 import { marquerEtape } from '../services/agendaService';
-import { preparerQuizErreurs } from '../services/erreursService';
+import { cibleRevision, cibleQuizErreurs } from '../services/controleChapitres';
 import { hasProgramme, PROGRAMME_FALLBACK } from '../utils/programme';
 import { useIsDesktop } from '../hooks/useMediaQuery';
 import { countDueCards } from '../services/srsService';
@@ -227,9 +227,9 @@ export default function Home() {
     // J-1 : le contrôle blanc (mode contrôle) ; il coche l'étape une fois la copie rendue.
     if (id === 'blanc') { navigate(`/controle?c=${controle.id}`); return; }
     await marquerEtape(currentUser, controle.id, id).catch(() => {});
-    // J-3 : le quiz des questions ratées dans la matière du contrôle, s'il y en a.
-    if (id === 'quiz' && preparerQuizErreurs(currentUser?.uid, controle.matiere)) navigate('/quiz?erreurs=1');
-    else navigate(cibleControle);
+    // J-3 : les questions ratées des chapitres du contrôle ; J-5 : la fiche du chapitre à travailler.
+    if (id === 'quiz') navigate(await cibleQuizErreurs(currentUser?.uid, controle));
+    else navigate(await cibleRevision(controle));
   };
   // Le chemin (téléphone) : les trois étapes, puis le contrôle au bout s'il y en a un.
   const cases = [
