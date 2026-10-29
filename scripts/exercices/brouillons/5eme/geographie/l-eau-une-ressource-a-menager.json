@@ -1,0 +1,161 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Usages agricoles de l'eau",
+      "detail": "Les agriculteurs utilisent l'eau pour cultiver et irriguer : c'est l'usage le plus gourmand, environ 70 % des prélèvements dans le monde.",
+      "cartes": [
+        "Irriguer un champ de coton en Asie centrale",
+        "Inonder une rizière pour faire pousser le riz",
+        "Arroser des tomates cultivées sous serre",
+        "Apporter l'eau au pied des vignes au goutte-à-goutte",
+        "Cultiver du maïs dans une plaine irriguée"
+      ]
+    },
+    {
+      "nom": "Usages industriels de l'eau",
+      "detail": "Les usines utilisent l'eau pour fabriquer, laver et refroidir : environ 20 % des prélèvements dans le monde.",
+      "cartes": [
+        "Refroidir les machines d'une usine d'acier",
+        "Laver des pièces métalliques dans une usine",
+        "Fabriquer du papier dans une papeterie",
+        "Produire des boissons gazeuses dans une usine",
+        "Teindre des tissus dans une usine textile"
+      ]
+    },
+    {
+      "nom": "Usages domestiques de l'eau",
+      "detail": "Les habitants utilisent l'eau chez eux, pour boire, se laver et cuisiner : environ 10 % des prélèvements dans le monde.",
+      "cartes": [
+        "Se laver les mains avant de manger",
+        "Faire la vaisselle après le dîner",
+        "Tirer la chasse d'eau des toilettes",
+        "Prendre une douche le soir",
+        "Faire cuire des pâtes dans une casserole"
+      ]
+    },
+    {
+      "nom": "Usages touristiques de l'eau",
+      "detail": "Le tourisme utilise l'eau pour accueillir et distraire les visiteurs : piscines et spas d'hôtels, neige artificielle, parcs aquatiques et parcs de loisirs.",
+      "cartes": [
+        "Remplir la piscine d'un grand hôtel de bord de mer",
+        "Fabriquer de la neige artificielle dans une station de ski",
+        "Alimenter le spa et les bains d'un hôtel de luxe",
+        "Alimenter les toboggans d'un parc aquatique",
+        "Faire jaillir les fontaines d'un parc d'attractions"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "le détournement des fleuves de la mer d'Aral",
+      "carte": "Le besoin d'irriguer de grands champs de coton",
+      "role": "cause",
+      "explication": "Depuis les années 1960, les fleuves qui alimentaient la mer d'Aral sont détournés pour irriguer le coton en Asie centrale."
+    },
+    {
+      "fait": "le détournement des fleuves de la mer d'Aral",
+      "carte": "La mer d'Aral a perdu la plus grande partie de sa surface",
+      "role": "consequence",
+      "explication": "Privée de l'eau de ses fleuves, la mer d'Aral s'est en grande partie asséchée."
+    },
+    {
+      "fait": "la pollution de l'eau",
+      "carte": "Des usines rejettent leurs déchets dans les rivières",
+      "role": "cause",
+      "explication": "Les rejets industriels font partie des pollutions qui salissent l'eau."
+    },
+    {
+      "fait": "la pollution de l'eau",
+      "carte": "Des villes rejettent leurs eaux usées sans les traiter",
+      "role": "cause",
+      "explication": "Les eaux usées non traitées polluent les rivières et les nappes."
+    },
+    {
+      "fait": "la pollution de l'eau",
+      "carte": "Il reste moins d'eau utilisable pour boire et irriguer",
+      "role": "consequence",
+      "explication": "La pollution aggrave le manque d'eau : une eau polluée n'est plus utilisable."
+    },
+    {
+      "fait": "la pollution de l'eau",
+      "carte": "Les nappes phréatiques sont menacées",
+      "role": "consequence",
+      "explication": "La pollution met en danger les nappes phréatiques, qu'il faut donc protéger."
+    }
+  ],
+  "etiquettes": [],
+  "devinettes": [
+    {
+      "reponse": "Mer d'Aral",
+      "acceptees": ["Aral", "La mer d'Aral", "Lac d'Aral"],
+      "indices": [
+        "Je me trouve en Asie centrale.",
+        "J'ai perdu la plus grande partie de ma surface depuis les années 1960.",
+        "Mes deux fleuves, l'Amu-Daria et le Syr-Daria, ont été détournés pour irriguer des champs de coton."
+      ],
+      "explication": "La mer d'Aral s'est en grande partie asséchée depuis les années 1960, car ses fleuves ont été détournés pour irriguer le coton."
+    },
+    {
+      "reponse": "Stress hydrique",
+      "acceptees": ["Le stress hydrique"],
+      "indices": [
+        "Je suis une situation qui touche l'Afrique du Nord, le Moyen-Orient ou l'Asie centrale.",
+        "Je commence quand les besoins en eau dépassent les ressources disponibles.",
+        "On me mesure : je commence sous la barre de 1 700 m³ d'eau par habitant et par an."
+      ],
+      "explication": "Il y a stress hydrique quand les besoins en eau dépassent les ressources : moins de 1 700 m³ par habitant et par an."
+    },
+    {
+      "reponse": "Dessalement",
+      "acceptees": ["Le dessalement"],
+      "indices": [
+        "Je suis un procédé qui fournit de l'eau douce.",
+        "On m'utilise surtout dans des pays riches et arides, comme l'Arabie saoudite ou Israël.",
+        "Dans une usine, je retire le sel de l'eau de mer, mais je consomme beaucoup d'énergie."
+      ],
+      "explication": "Le dessalement transforme l'eau de mer en eau douce dans une usine ; il est coûteux en énergie."
+    },
+    {
+      "reponse": "Irrigation",
+      "acceptees": ["L'irrigation"],
+      "indices": [
+        "Je suis une activité liée à l'agriculture.",
+        "J'apporte de l'eau aux cultures de façon artificielle.",
+        "Je représente environ 70 % des prélèvements d'eau dans le monde, et le goutte-à-goutte permet de me pratiquer en économisant l'eau."
+      ],
+      "explication": "L'irrigation apporte de l'eau aux cultures : c'est elle qui fait de l'agriculture le premier usage de l'eau, avec environ 70 % des prélèvements."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "On compte que l'agriculture utilise 70 % de l'eau prélevée dans le monde, l'industrie 20 % et les usages domestiques le reste. Quel pourcentage reste pour les usages domestiques ?",
+      "reponse": 10,
+      "unite": "%",
+      "tolerance": 0,
+      "explication": "100 − 70 − 20 = 10. Les usages domestiques représentent environ 10 % des prélèvements."
+    },
+    {
+      "question": "Un pays de 10 millions d'habitants dispose de 12 milliards de m³ d'eau par an. Combien de m³ d'eau cela fait-il par habitant et par an ?",
+      "reponse": 1200,
+      "unite": "m³ par habitant et par an",
+      "tolerance": 0,
+      "explication": "12 000 000 000 ÷ 10 000 000 = 1 200 m³ par habitant et par an, soit moins de 1 700 m³ : ce pays est en stress hydrique."
+    },
+    {
+      "question": "Un pays de 5 millions d'habitants dispose de 4 milliards de m³ d'eau par an. Combien de m³ d'eau cela fait-il par habitant et par an ?",
+      "reponse": 800,
+      "unite": "m³ par habitant et par an",
+      "tolerance": 0,
+      "explication": "4 000 000 000 ÷ 5 000 000 = 800 m³ par habitant et par an, soit moins de 1 000 m³ : ce pays est en pénurie d'eau."
+    },
+    {
+      "question": "Une région prélève 50 millions de m³ d'eau par an, dont 70 % pour l'agriculture. Combien de millions de m³ sont utilisés pour l'agriculture ?",
+      "reponse": 35,
+      "unite": "millions de m³",
+      "tolerance": 0,
+      "explication": "70 % de 50 = 50 × 0,70 = 35 millions de m³."
+    }
+  ],
+  "etapes": []
+}

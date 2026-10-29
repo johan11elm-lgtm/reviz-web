@@ -1,0 +1,176 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Chez les animaux",
+      "detail": "Le développement des jeunes animaux et l'union des cellules reproductrices.",
+      "cartes": [
+        "Un spermatozoïde et un ovule s'unissent",
+        "La grenouille pond ses ovules dans l'eau",
+        "Chez la chatte, la fécondation a lieu dans son corps",
+        "Un chaton ressemble déjà à un petit chat",
+        "La chenille devient chrysalide puis papillon"
+      ]
+    },
+    {
+      "nom": "Chez les plantes à fleurs",
+      "detail": "Le trajet du pollen à la graine, puis de la graine à la nouvelle plante.",
+      "cartes": [
+        "Le vent emporte le pollen vers le pistil d'une fleur",
+        "Après la fécondation, la fleur devient un fruit",
+        "Une graine contient un embryon et des réserves",
+        "Une graine de haricot germe sur du coton humide",
+        "La plantule grandit puis fait de nouvelles fleurs"
+      ]
+    },
+    {
+      "nom": "La reproduction asexuée",
+      "detail": "Des plantes qui donnent de nouvelles plantes sans fleurs ni fécondation.",
+      "cartes": [
+        "Une tige de géranium coupée prend racine dans la terre",
+        "Le fraisier envoie de longues tiges qui rampent",
+        "Une pomme de terre plantée donne un nouveau plant",
+        "Un bulbe de tulipe donne une nouvelle plante",
+        "La nouvelle plante est identique à la plante d'origine"
+      ]
+    },
+    {
+      "nom": "La puberté",
+      "detail": "Les changements du corps humain qui le rendent capable de se reproduire.",
+      "cartes": [
+        "La voix d'un garçon devient plus grave",
+        "Les premières règles apparaissent chez la fille",
+        "Des hormones transforment le corps des adolescents",
+        "Entre 10 et 16 ans environ, le corps change",
+        "Les seins se développent chez la fille"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "la fécondation d'une fleur",
+      "carte": "Le vent ou un insecte apporte du pollen sur le pistil",
+      "role": "cause",
+      "explication": "La pollinisation, c'est-à-dire l'arrivée du pollen sur le pistil, est suivie de la fécondation."
+    },
+    {
+      "fait": "la fécondation d'une fleur",
+      "carte": "La fleur se transforme en fruit",
+      "role": "consequence",
+      "explication": "Après la fécondation, la fleur se transforme en fruit qui contient les graines."
+    },
+    {
+      "fait": "la germination d'une graine",
+      "carte": "La graine reçoit de l'eau, de l'air et une température adaptée",
+      "role": "cause",
+      "explication": "Avec de l'eau, de l'air et une température adaptée, la graine germe en utilisant ses réserves."
+    },
+    {
+      "fait": "la germination d'une graine",
+      "carte": "Une petite racine sort de la graine",
+      "role": "consequence",
+      "explication": "Quand la graine germe, une petite racine sort, puis une tige et des feuilles apparaissent."
+    }
+  ],
+  "etiquettes": [
+    {
+      "consigne": "Quel mot du cours désigne le passage en couleur ?",
+      "texte": "Au printemps, [une abeille dépose du pollen sur le pistil d'une fleur de cerisier].",
+      "choix": ["La pollinisation", "La fécondation", "La germination", "La métamorphose"],
+      "bonne": 0,
+      "explication": "Le transport du pollen jusqu'au pistil d'une fleur s'appelle la pollinisation."
+    },
+    {
+      "consigne": "Quel mot du cours désigne le passage en couleur ?",
+      "texte": "Chez la grenouille, [le spermatozoïde du mâle s'unit à l'ovule de la femelle dans l'eau].",
+      "choix": ["La pollinisation", "La fécondation", "La germination", "La métamorphose"],
+      "bonne": 1,
+      "explication": "L'union d'une cellule reproductrice mâle et d'une cellule reproductrice femelle s'appelle la fécondation."
+    },
+    {
+      "consigne": "Quel mot du cours désigne le passage en couleur ?",
+      "texte": "Sur du coton humide, [la graine de haricot développe une petite racine, puis une tige].",
+      "choix": ["La pollinisation", "La fécondation", "La germination", "La métamorphose"],
+      "bonne": 2,
+      "explication": "Le début du développement d'une graine en plantule s'appelle la germination."
+    },
+    {
+      "consigne": "Quel mot du cours désigne le passage en couleur ?",
+      "texte": "Le têtard respire avec des branchies, puis [il se transforme peu à peu en grenouille adulte].",
+      "choix": ["La pollinisation", "La fécondation", "La germination", "La métamorphose"],
+      "bonne": 3,
+      "explication": "La transformation importante d'une larve pour devenir adulte s'appelle la métamorphose."
+    },
+    {
+      "consigne": "Quel mot du cours désigne le passage en couleur ?",
+      "texte": "Dans le corps de la chatte, [un spermatozoïde et un ovule s'unissent pour former une cellule-œuf].",
+      "choix": ["La pollinisation", "La fécondation", "La germination", "La métamorphose"],
+      "bonne": 1,
+      "explication": "L'union de deux cellules reproductrices qui forme une cellule-œuf s'appelle la fécondation."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Larve",
+      "acceptees": ["Larve", "Une larve", "La larve", "Larves"],
+      "indices": [
+        "Je suis un jeune animal.",
+        "Je ne ressemble pas du tout à l'adulte que je serai.",
+        "La chenille et le têtard sont deux exemples de moi."
+      ],
+      "explication": "Une larve est un jeune animal très différent de l'adulte : elle se transforme lors de la métamorphose."
+    },
+    {
+      "reponse": "Cellule-œuf",
+      "acceptees": ["Cellule-œuf", "Cellule œuf", "Cellule-oeuf", "Cellule oeuf", "La cellule-œuf", "Une cellule-œuf"],
+      "indices": [
+        "Je suis le point de départ d'un nouvel être vivant.",
+        "Je suis formée par l'union d'un spermatozoïde et d'un ovule.",
+        "On me forme au moment de la fécondation."
+      ],
+      "explication": "La fécondation unit deux cellules reproductrices et donne une cellule-œuf."
+    },
+    {
+      "reponse": "Graine",
+      "acceptees": ["Graine", "La graine", "Une graine", "Graines"],
+      "indices": [
+        "Je me trouve dans un fruit.",
+        "Je contiens un embryon de plante et des réserves.",
+        "Avec de l'eau, de l'air et une température adaptée, je germe."
+      ],
+      "explication": "La graine contient un embryon de plante et des réserves ; c'est elle qui germe."
+    },
+    {
+      "reponse": "Puberté",
+      "acceptees": ["Puberté", "La puberté"],
+      "indices": [
+        "Je concerne tout le monde, un jour.",
+        "Je suis la période où la voix des garçons mue.",
+        "Avec moi, le corps devient capable de se reproduire."
+      ],
+      "explication": "La puberté est la période, vers 10 à 16 ans, où le corps devient capable de se reproduire."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Le cycle de vie d'une plante à fleurs",
+      "etapes": [
+        "La graine germe et donne une plantule",
+        "La plantule grandit et devient une plante adulte",
+        "La plante adulte fait des fleurs",
+        "La fleur fécondée se transforme en fruit",
+        "Le fruit contient de nouvelles graines"
+      ]
+    },
+    {
+      "titre": "Le développement d'un papillon",
+      "etapes": [
+        "La femelle papillon pond des œufs",
+        "Un œuf éclot et une chenille en sort",
+        "La chenille devient une chrysalide",
+        "Le papillon adulte sort de la chrysalide"
+      ]
+    }
+  ]
+}

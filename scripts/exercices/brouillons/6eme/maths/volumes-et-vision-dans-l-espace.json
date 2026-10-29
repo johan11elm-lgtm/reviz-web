@@ -1,0 +1,181 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Pavé droit",
+      "detail": "Des objets et des descriptions qui correspondent à un pavé droit : 6 faces rectangulaires, 12 arêtes et 8 sommets.",
+      "cartes": [
+        "Une boîte à chaussures",
+        "Un paquet de céréales",
+        "Un carton de déménagement",
+        "Un solide à 8 sommets et 12 arêtes",
+        "Un solide limité par 6 rectangles"
+      ]
+    },
+    {
+      "nom": "Pyramide",
+      "detail": "Des objets et des descriptions qui correspondent à une pyramide : une base polygonale et des faces triangulaires qui se rejoignent en un sommet.",
+      "cartes": [
+        "Une base carrée et quatre faces triangulaires",
+        "Un solide à 5 faces, 8 arêtes et 5 sommets",
+        "Des faces triangulaires réunies en un sommet",
+        "Un toit pointu à quatre faces triangulaires",
+        "Une base pentagonale et cinq faces triangulaires"
+      ]
+    },
+    {
+      "nom": "Cylindre",
+      "detail": "Des objets et des descriptions qui correspondent à un cylindre : deux bases en forme de disque et une surface courbe.",
+      "cartes": [
+        "Une canette de soda",
+        "Une boîte de conserve",
+        "Une pile électrique",
+        "Deux disques identiques reliés par une surface courbe",
+        "Un pot de peinture"
+      ]
+    },
+    {
+      "nom": "Boule",
+      "detail": "Des objets et des descriptions qui correspondent à une boule : un solide entièrement courbe, sans base.",
+      "cartes": [
+        "Une balle de tennis",
+        "Un ballon de football",
+        "Une bille en verre",
+        "Un globe terrestre",
+        "Un solide qui roule dans toutes les directions"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Comment s'appelle l'élément du solide en couleur ?",
+      "texte": "Un pavé droit est limité par 6 rectangles. On observe [l'un de ces rectangles].",
+      "choix": ["Face", "Arête", "Sommet"],
+      "bonne": 0,
+      "explication": "Les faces sont les surfaces qui limitent le solide : chaque rectangle est une face."
+    },
+    {
+      "consigne": "Comment s'appelle l'élément du solide en couleur ?",
+      "texte": "Sur un cube, deux faces se rencontrent le long d'une ligne droite. On observe [cette ligne droite].",
+      "choix": ["Face", "Arête", "Sommet"],
+      "bonne": 1,
+      "explication": "Une arête est un segment où deux faces d'un solide se rencontrent."
+    },
+    {
+      "consigne": "Comment s'appelle l'élément du solide en couleur ?",
+      "texte": "Un cube a 8 coins. On observe [l'un de ces coins].",
+      "choix": ["Face", "Arête", "Sommet"],
+      "bonne": 2,
+      "explication": "Un sommet est un point où se rejoignent plusieurs arêtes : le cube en a 8."
+    },
+    {
+      "consigne": "Comment s'appelle l'élément du solide en couleur ?",
+      "texte": "Une pyramide à base carrée repose sur le sol. On observe [le carré du dessous].",
+      "choix": ["Face", "Arête", "Sommet"],
+      "bonne": 0,
+      "explication": "La base carrée est une surface plane qui limite le solide : c'est l'une de ses 5 faces."
+    },
+    {
+      "consigne": "Comment s'appelle l'élément du solide en couleur ?",
+      "texte": "Dans une pyramide à base carrée, quatre arêtes se rejoignent en haut. On observe [ce point].",
+      "choix": ["Face", "Arête", "Sommet"],
+      "bonne": 2,
+      "explication": "Un point où plusieurs arêtes se rejoignent est un sommet."
+    },
+    {
+      "consigne": "Comment s'appelle l'élément du solide en couleur ?",
+      "texte": "Une boîte à chaussures a 12 bords droits. On observe [l'un de ces bords].",
+      "choix": ["Face", "Arête", "Sommet"],
+      "bonne": 1,
+      "explication": "Chaque bord est un segment où deux faces se rencontrent : c'est une arête, et le pavé droit en a 12."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Arête",
+      "acceptees": ["Arête", "L'arête", "Une arête", "Arêtes"],
+      "indices": [
+        "Je suis un segment.",
+        "Un cube en possède 12.",
+        "Je suis l'endroit où deux faces d'un solide se rencontrent."
+      ],
+      "explication": "Une arête est un segment commun à deux faces d'un solide : le cube et le pavé droit en ont 12."
+    },
+    {
+      "reponse": "Volume",
+      "acceptees": ["Volume", "Le volume", "Un volume"],
+      "indices": [
+        "Je suis une grandeur.",
+        "Je mesure la place occupée par un solide.",
+        "On me trouve en comptant des cubes unités, et je m'exprime en cm³."
+      ],
+      "explication": "Le volume mesure la place occupée par un solide ; on le trouve en comptant des cubes de 1 cm d'arête, chacun valant 1 cm³."
+    },
+    {
+      "reponse": "Cône",
+      "acceptees": ["Cône", "Le cône", "Un cône"],
+      "indices": [
+        "Je suis un solide qui a une surface courbe.",
+        "Je n'ai qu'une seule base, en forme de disque.",
+        "Un cornet de glace a ma forme."
+      ],
+      "explication": "Le cône a une seule base en disque et un sommet, comme un cornet de glace."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "Un pavé droit est rempli de cubes de 1 cm d'arête : 6 en longueur, 4 en largeur et 3 en hauteur. Quel est son volume en cm³ ?",
+      "reponse": 72,
+      "unite": "cm³",
+      "tolerance": 0,
+      "explication": "Une couche contient 6 × 4 = 24 cubes, et il y a 3 couches : 24 × 3 = 72 cubes, soit 72 cm³."
+    },
+    {
+      "question": "Additionne le nombre d'arêtes d'un cube et celui d'un pavé droit. Quel est le total ?",
+      "reponse": 24,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "Un cube a 12 arêtes et un pavé droit aussi : 12 + 12 = 24."
+    },
+    {
+      "question": "Un escalier a 5 marches faites de cubes : 5 cubes pour la marche du bas, puis 4, 3, 2 et 1 cube pour les marches suivantes. Combien de cubes en tout ?",
+      "reponse": 15,
+      "unite": "cubes",
+      "tolerance": 0,
+      "explication": "On additionne les étages : 5 + 4 + 3 + 2 + 1 = 15 cubes."
+    },
+    {
+      "question": "Combien y a-t-il de faces, d'arêtes et de sommets en tout dans une pyramide à base carrée ?",
+      "reponse": 18,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "Une pyramide à base carrée a 5 faces, 8 arêtes et 5 sommets : 5 + 8 + 5 = 18."
+    },
+    {
+      "question": "Combien de cubes de 1 cm d'arête faut-il pour remplir un cube de 3 cm d'arête ?",
+      "reponse": 27,
+      "unite": "cubes",
+      "tolerance": 0,
+      "explication": "Le grand cube contient 3 cubes en longueur, 3 en largeur et 3 en hauteur : 3 × 3 × 3 = 27 cubes."
+    },
+    {
+      "question": "Un pavé de 4 cubes de long, 2 de large et 5 de haut a le même volume qu'une barre de cubes alignés. Combien de cubes contient la barre ?",
+      "reponse": 40,
+      "unite": "cubes",
+      "tolerance": 0,
+      "explication": "Le pavé contient 4 × 2 × 5 = 40 cubes. Deux solides de formes différentes ont le même volume s'ils contiennent le même nombre de cubes : la barre en a 40."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Compter les cubes d'un assemblage",
+      "etapes": [
+        "Repérer le nombre d'étages de l'assemblage",
+        "Compter les cubes de chaque étage, cachés compris",
+        "Additionner les cubes de tous les étages",
+        "Donner le volume : un cube de 1 cm d'arête vaut 1 cm³"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,195 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "L'agriculture productiviste",
+      "detail": "Produire le plus possible, avec des machines, des engrais et de l'irrigation, comme dans la Beauce ou le Middle West.",
+      "cartes": [
+        "Des tracteurs remplacent le travail des hommes et des animaux",
+        "Engrais, pesticides et irrigation augmentent le rendement",
+        "Elle cherche à produire le plus possible pour vendre",
+        "Peu d'agriculteurs cultivent de très grandes surfaces",
+        "Elle domine dans la Beauce et le Middle West"
+      ]
+    },
+    {
+      "nom": "L'agriculture vivrière",
+      "detail": "Cultiver d'abord pour nourrir sa famille, avec peu de machines, surtout dans les pays du Sud.",
+      "cartes": [
+        "Elle nourrit d'abord la famille de l'agriculteur",
+        "Elle est fréquente dans de nombreux pays d'Afrique et d'Asie",
+        "Elle utilise très peu de machines",
+        "Ses rendements sont plus faibles",
+        "Au Sahel, des paysans cultivent le mil à la main"
+      ]
+    },
+    {
+      "nom": "Habiter loin de tout",
+      "detail": "Les difficultés de la vie dans un espace rural peu peuplé : distances, services rares, voiture indispensable.",
+      "cartes": [
+        "Des petits villages éloignés les uns des autres",
+        "Les commerces, les médecins et les écoles sont éloignés",
+        "La voiture est indispensable pour se déplacer",
+        "Les transports en commun sont rares",
+        "Les fermes sont dispersées au milieu des champs"
+      ]
+    },
+    {
+      "nom": "Les campagnes qui changent",
+      "detail": "Les évolutions récentes : exode rural, arrivée de néoruraux, agriculture biologique et vente directe.",
+      "cartes": [
+        "Beaucoup d'habitants ont quitté les campagnes pour les villes",
+        "Des citadins viennent s'installer pour la qualité de vie",
+        "Une agriculture sans pesticides ni engrais chimiques de synthèse",
+        "Les circuits courts se développent",
+        "La vente directe de la ferme au client progresse"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "la faible densité de population dans les grandes plaines agricoles",
+      "carte": "Peu d'agriculteurs, aidés de machines, cultivent de très grandes surfaces",
+      "role": "cause",
+      "explication": "Comme les machines permettent à peu de personnes de cultiver de grandes surfaces, il y a peu d'habitants."
+    },
+    {
+      "fait": "la faible densité de population dans les grandes plaines agricoles",
+      "carte": "La mécanisation a remplacé le travail de nombreux ouvriers",
+      "role": "cause",
+      "explication": "Les machines remplacent les ouvriers d'autrefois : il reste peu de personnes dans les campagnes."
+    },
+    {
+      "fait": "la faible densité de population dans les grandes plaines agricoles",
+      "carte": "Les services sont parfois rares et éloignés des villages",
+      "role": "consequence",
+      "explication": "Dans un espace rural peu peuplé, commerces, médecins et écoles sont rares et loin."
+    },
+    {
+      "fait": "la faible densité de population dans les grandes plaines agricoles",
+      "carte": "La voiture est indispensable pour se déplacer",
+      "role": "consequence",
+      "explication": "Les villages sont éloignés et les transports en commun rares : on se déplace en voiture."
+    }
+  ],
+  "etiquettes": [
+    {
+      "consigne": "Quel type d'agriculture le groupe en couleur décrit-il ?",
+      "texte": "Dans la Beauce, un agriculteur [cultive 200 hectares avec un tracteur et une moissonneuse-batteuse].",
+      "choix": ["Agriculture productiviste", "Agriculture vivrière", "Agriculture biologique"],
+      "bonne": 0,
+      "explication": "De grandes surfaces cultivées avec des machines : c'est une agriculture productiviste."
+    },
+    {
+      "consigne": "Quel type d'agriculture le groupe en couleur décrit-il ?",
+      "texte": "Au Sahel, une famille [cultive le mil à la main sur un petit champ pour se nourrir].",
+      "choix": ["Agriculture productiviste", "Agriculture vivrière", "Agriculture biologique"],
+      "bonne": 1,
+      "explication": "Une petite production, à la main, pour nourrir la famille : c'est une agriculture vivrière."
+    },
+    {
+      "consigne": "Quel type d'agriculture le groupe en couleur décrit-il ?",
+      "texte": "Cette ferme [n'utilise ni pesticides ni engrais chimiques de synthèse].",
+      "choix": ["Agriculture productiviste", "Agriculture vivrière", "Agriculture biologique"],
+      "bonne": 2,
+      "explication": "Refuser pesticides et engrais chimiques de synthèse caractérise l'agriculture biologique."
+    },
+    {
+      "consigne": "Quel type d'agriculture le groupe en couleur décrit-il ?",
+      "texte": "Dans le Middle West, d'immenses exploitations [produisent du maïs et du soja avec des machines, des engrais et de l'irrigation].",
+      "choix": ["Agriculture productiviste", "Agriculture vivrière", "Agriculture biologique"],
+      "bonne": 0,
+      "explication": "Produire en grande quantité grâce aux machines, aux engrais et à l'irrigation : c'est une agriculture productiviste."
+    },
+    {
+      "consigne": "Quel type d'agriculture le groupe en couleur décrit-il ?",
+      "texte": "Dans ce village, les paysans [cultivent surtout pour nourrir leur famille, avec très peu de machines].",
+      "choix": ["Agriculture productiviste", "Agriculture vivrière", "Agriculture biologique"],
+      "bonne": 1,
+      "explication": "Cultiver d'abord pour sa famille, avec peu de machines, c'est l'agriculture vivrière."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Beauce",
+      "acceptees": ["Beauce", "La Beauce"],
+      "indices": [
+        "Je suis une région agricole de France.",
+        "Je suis une grande plaine au sud-ouest de Paris.",
+        "On me surnomme le « grenier à blé » de la France."
+      ],
+      "explication": "La Beauce est une grande plaine céréalière aux champs ouverts."
+    },
+    {
+      "reponse": "Middle West",
+      "acceptees": ["Middle West", "Le Middle West", "Midwest"],
+      "indices": [
+        "Je suis une grande région agricole des États-Unis.",
+        "Mes exploitations sont immenses.",
+        "J'abrite la Corn Belt, la « ceinture du maïs »."
+      ],
+      "explication": "Le Middle West produit d'énormes quantités de maïs et de soja."
+    },
+    {
+      "reponse": "Néorural",
+      "acceptees": ["Néorural", "Néoruraux", "Un néorural", "Les néoruraux"],
+      "indices": [
+        "Je vis à la campagne aujourd'hui.",
+        "Avant, je vivais en ville.",
+        "Je me suis installé à la campagne pour la qualité de vie."
+      ],
+      "explication": "Un néorural est un citadin qui s'installe à la campagne pour la qualité de vie."
+    },
+    {
+      "reponse": "Openfield",
+      "acceptees": ["Openfield", "Open field", "Champs ouverts"],
+      "indices": [
+        "Je suis un type de paysage agricole.",
+        "Mes champs sont immenses et s'étendent à perte de vue.",
+        "Je n'ai ni haies ni clôtures."
+      ],
+      "explication": "L'openfield est un paysage de grands champs ouverts, sans haies ni clôtures."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "Un champ de blé de 12 hectares produit 960 quintaux. Quel est le rendement en quintaux par hectare ?",
+      "reponse": 80,
+      "unite": "quintaux/ha",
+      "tolerance": 0,
+      "explication": "Rendement = production ÷ surface = 960 ÷ 12 = 80 quintaux par hectare."
+    },
+    {
+      "question": "Une exploitation de 200 hectares est cultivée par 2 personnes. Combien d'hectares cultive chaque personne en moyenne ?",
+      "reponse": 100,
+      "unite": "hectares",
+      "tolerance": 0,
+      "explication": "200 hectares ÷ 2 personnes = 100 hectares par personne."
+    },
+    {
+      "question": "Au Sahel, un paysan récolte 40 quintaux de mil sur 5 hectares. Quel est le rendement en quintaux par hectare ?",
+      "reponse": 8,
+      "unite": "quintaux/ha",
+      "tolerance": 0,
+      "explication": "Rendement = production ÷ surface = 40 ÷ 5 = 8 quintaux par hectare."
+    },
+    {
+      "question": "Une exploitation du Middle West récolte 1 500 quintaux de maïs avec un rendement de 100 quintaux par hectare. Quelle est la surface cultivée en maïs ?",
+      "reponse": 15,
+      "unite": "hectares",
+      "tolerance": 0,
+      "explication": "Surface = production ÷ rendement = 1 500 ÷ 100 = 15 hectares."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "De la mécanisation à l'exode rural",
+      "etapes": [
+        "Des machines remplacent le travail des hommes",
+        "Il faut moins de bras dans les champs",
+        "Beaucoup de ruraux partent travailler en ville",
+        "Une partie des campagnes se vide"
+      ]
+    }
+  ]
+}

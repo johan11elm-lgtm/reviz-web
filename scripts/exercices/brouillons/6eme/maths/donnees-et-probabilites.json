@@ -1,0 +1,193 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Probabilité égale à 0",
+      "detail": "Les événements impossibles : ils ne peuvent jamais se produire.",
+      "cartes": [
+        "Obtenir 7 avec un dé équilibré à 6 faces",
+        "Tirer une bille verte d'un sac rempli de billes bleues",
+        "Obtenir 0 avec un dé équilibré numéroté de 1 à 6",
+        "Piocher une carte rouge parmi des cartes toutes noires",
+        "Obtenir 9 en tirant un jeton numéroté de 1 à 8"
+      ]
+    },
+    {
+      "nom": "Probabilité égale à 1",
+      "detail": "Les événements certains : ils se produisent à tous les coups.",
+      "cartes": [
+        "Obtenir moins de 7 avec un dé équilibré à 6 faces",
+        "Tirer une bille rouge d'un sac rempli de billes rouges",
+        "Obtenir pile ou face en lançant une pièce équilibrée",
+        "Piocher une carte noire parmi des cartes toutes noires",
+        "Obtenir moins de 10 en tirant un jeton de 1 à 8"
+      ]
+    },
+    {
+      "nom": "Probabilité égale à 1/2",
+      "detail": "Les événements qui ont une chance sur deux : la moitié des résultats est favorable.",
+      "cartes": [
+        "Obtenir pile avec une pièce équilibrée",
+        "Obtenir un nombre pair avec un dé équilibré à 6 faces",
+        "Obtenir un nombre plus grand que 3 avec un dé équilibré à 6 faces",
+        "Tirer une bille rouge parmi 5 rouges et 5 bleues",
+        "Tirer un jeton impair parmi les jetons numérotés de 1 à 10"
+      ]
+    },
+    {
+      "nom": "Probabilité égale à 1/6",
+      "detail": "Les événements qui ont un seul résultat favorable sur 6 résultats également possibles.",
+      "cartes": [
+        "Obtenir 5 avec un dé équilibré à 6 faces",
+        "Obtenir un nombre plus grand que 5 avec un dé équilibré à 6 faces",
+        "Tirer la bille jaune parmi 6 billes de couleurs différentes dont une jaune",
+        "Tomber sur le seul secteur rouge d'une roue à 6 secteurs égaux",
+        "Tirer le jeton 3 parmi les jetons numérotés de 1 à 6"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Comment qualifier l'événement en couleur ?",
+      "texte": "Avec un dé à 6 faces numérotées de 1 à 6, on veut [obtenir un 8].",
+      "choix": ["Impossible", "Certain", "Ni impossible ni certain"],
+      "bonne": 0,
+      "explication": "Aucune face ne porte le 8 : l'événement est impossible, sa probabilité est 0."
+    },
+    {
+      "consigne": "Comment qualifier l'événement en couleur ?",
+      "texte": "Un sac contient seulement des billes rouges. On veut [tirer une bille rouge].",
+      "choix": ["Impossible", "Certain", "Ni impossible ni certain"],
+      "bonne": 1,
+      "explication": "Toutes les billes sont rouges : l'événement est certain, sa probabilité est 1."
+    },
+    {
+      "consigne": "Comment qualifier l'événement en couleur ?",
+      "texte": "Avec un dé équilibré à 6 faces, on veut [obtenir un nombre pair].",
+      "choix": ["Impossible", "Certain", "Ni impossible ni certain"],
+      "bonne": 2,
+      "explication": "Le dé peut donner 2, 4 ou 6, mais aussi 1, 3 ou 5 : ce n'est ni impossible ni certain (probabilité 3/6 = 1/2)."
+    },
+    {
+      "consigne": "Comment qualifier l'événement en couleur ?",
+      "texte": "Un sac contient 3 billes rouges et 7 billes bleues. On veut [tirer une bille rouge].",
+      "choix": ["Impossible", "Certain", "Ni impossible ni certain"],
+      "bonne": 2,
+      "explication": "Il y a des billes rouges, donc c'est possible, mais aussi des bleues, donc ce n'est pas certain (probabilité 3/10)."
+    },
+    {
+      "consigne": "Comment qualifier l'événement en couleur ?",
+      "texte": "Avec un dé à 6 faces numérotées de 1 à 6, on veut [obtenir un nombre inférieur à 10].",
+      "choix": ["Impossible", "Certain", "Ni impossible ni certain"],
+      "bonne": 1,
+      "explication": "Toutes les faces portent un nombre inférieur à 10 : l'événement est certain, sa probabilité est 1."
+    },
+    {
+      "consigne": "Comment qualifier l'événement en couleur ?",
+      "texte": "Un sac contient des jetons numérotés de 1 à 5. On veut [tirer le jeton 12].",
+      "choix": ["Impossible", "Certain", "Ni impossible ni certain"],
+      "bonne": 0,
+      "explication": "Aucun jeton ne porte le 12 : l'événement est impossible, sa probabilité est 0."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Probabilité",
+      "acceptees": ["Probabilité", "La probabilité"],
+      "indices": [
+        "Je suis un nombre qui ne dépasse jamais 1.",
+        "Je vaux 0 pour un événement impossible et 1 pour un événement certain.",
+        "Quand tous les résultats ont la même chance, je suis égale au nombre de cas favorables divisé par le nombre total de cas."
+      ],
+      "explication": "La probabilité est un nombre entre 0 et 1 : favorables ÷ total quand tous les résultats ont la même chance."
+    },
+    {
+      "reponse": "Fréquence",
+      "acceptees": ["Fréquence", "La fréquence"],
+      "indices": [
+        "Je suis un nombre que l'on calcule après une série d'essais.",
+        "Je suis le nombre de fois où un résultat est obtenu, divisé par le nombre d'essais.",
+        "Quand on répète l'expérience très souvent, je me rapproche de la probabilité."
+      ],
+      "explication": "La fréquence est le nombre d'apparitions d'un résultat divisé par le nombre d'essais."
+    },
+    {
+      "reponse": "Effectif",
+      "acceptees": ["Effectif", "L'effectif", "Un effectif"],
+      "indices": [
+        "Je suis un nombre que l'on écrit dans un tableau de données.",
+        "Je compte combien de fois une valeur apparaît.",
+        "Dans un diagramme en barres, la hauteur d'une barre me représente."
+      ],
+      "explication": "L'effectif d'une valeur est le nombre de fois où elle apparaît dans les données."
+    },
+    {
+      "reponse": "Diagramme circulaire",
+      "acceptees": ["Diagramme circulaire", "Un diagramme circulaire", "Graphique circulaire", "Camembert"],
+      "indices": [
+        "Je suis une façon de représenter des données.",
+        "Je ressemble à un disque découpé en parts.",
+        "Quand l'une de mes parts occupe la moitié du disque, elle représente 50 % du total."
+      ],
+      "explication": "Dans un diagramme circulaire, chaque part du disque représente une proportion du total."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "Un sac contient 4 billes rouges et 6 billes bleues. On tire une bille au hasard. Quelle est la probabilité, en pourcentage, de tirer une rouge ?",
+      "reponse": 40,
+      "unite": "%",
+      "tolerance": 0,
+      "explication": "Il y a 4 + 6 = 10 billes et 4 sont rouges : 4/10 = 0,4 = 40 %."
+    },
+    {
+      "question": "On lance 300 fois un dé équilibré à 6 faces. En utilisant la probabilité d'obtenir un 4, environ combien de fois s'attend-on à l'obtenir ?",
+      "reponse": 50,
+      "unite": "fois",
+      "tolerance": 0,
+      "explication": "La probabilité d'obtenir un 4 est 1/6, et 300 ÷ 6 = 50 : on s'attend à environ 50 fois."
+    },
+    {
+      "question": "Une pièce équilibrée est lancée 20 fois et tombe 12 fois sur pile. Quelle est la fréquence de pile, écrite en nombre décimal ?",
+      "reponse": 0.6,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "Fréquence = 12 ÷ 20 = 0,6."
+    },
+    {
+      "question": "Dans une classe de 25 élèves, 8 aiment le rugby. On choisit un élève au hasard. Quelle est la probabilité, en pourcentage, qu'il aime le rugby ?",
+      "reponse": 32,
+      "unite": "%",
+      "tolerance": 0,
+      "explication": "8 élèves sur 25 : 8/25 = 32/100 = 0,32 = 32 %."
+    },
+    {
+      "question": "Un tableau donne les effectifs de 4 sports : 8, 6, 5 et 9 élèves. Quel est l'effectif total ?",
+      "reponse": 28,
+      "unite": "élèves",
+      "tolerance": 0,
+      "explication": "L'effectif total est la somme des effectifs : 8 + 6 + 5 + 9 = 28."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Calculer une probabilité",
+      "etapes": [
+        "Vérifie que tous les résultats ont la même chance",
+        "Compte les résultats possibles et les résultats favorables",
+        "Écris le quotient favorables ÷ total",
+        "Vérifie que le résultat est compris entre 0 et 1"
+      ]
+    },
+    {
+      "titre": "Mener une enquête statistique",
+      "etapes": [
+        "Choisis la question à poser",
+        "Recueille les réponses ou les mesures",
+        "Organise les données dans un tableau",
+        "Interprète le tableau ou le graphique"
+      ]
+    }
+  ]
+}

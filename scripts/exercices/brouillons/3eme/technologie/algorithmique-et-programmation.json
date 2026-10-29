@@ -1,0 +1,181 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Les variables",
+      "detail": "Un espace mémoire nommé, qui contient une valeur que le programme peut lire et modifier.",
+      "cartes": [
+        "Ajouter 2 au score quand on gagne un point",
+        "Un espace mémoire qui porte un nom et contient une valeur",
+        "Mémoriser la température mesurée par un capteur",
+        "Mettre le score à 0 au début de la partie",
+        "Le nombre de vies restantes pendant un jeu"
+      ]
+    },
+    {
+      "nom": "Les conditions",
+      "detail": "Un test dont le résultat, vrai ou faux, décide de l'action à exécuter.",
+      "cartes": [
+        "Si la distance est inférieure à 10 cm, arrêter le moteur",
+        "Sinon, la lampe reste éteinte",
+        "Il fait plus de 25 °C ET la fenêtre est fermée",
+        "Le losange d'un organigramme, avec deux sorties : oui ou non",
+        "Choisir une action selon le résultat d'un test"
+      ]
+    },
+    {
+      "nom": "Les boucles",
+      "detail": "Une structure qui répète des instructions : un nombre fixe de fois, jusqu'à un test, ou indéfiniment.",
+      "cartes": [
+        "Répéter 5 fois : allumer la LED puis l'éteindre",
+        "Répéter jusqu'à ce qu'un obstacle soit détecté",
+        "Répéter indéfiniment la mesure de la température",
+        "Remplacer dix instructions identiques par une seule répétée",
+        "Une suite d'instructions exécutée plusieurs fois de suite"
+      ]
+    },
+    {
+      "nom": "Les événements",
+      "detail": "Une action, comme l'appui sur un bouton, qui déclenche une partie du programme.",
+      "cartes": [
+        "L'appui sur le bouton fait démarrer le programme",
+        "Une touche du clavier lance une partie du script",
+        "Un clic sur l'écran déclenche un son",
+        "Une action de l'utilisateur déclenche une partie du programme",
+        "Le jeu réagit au mouvement de la souris"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Quel élément de programme est le groupe en couleur ?",
+      "texte": "[Répéter 8 fois] : allumer la LED, attendre une seconde, éteindre la LED.",
+      "choix": ["Variable", "Condition", "Boucle", "Événement"],
+      "bonne": 2,
+      "explication": "« Répéter 8 fois » est une boucle : les trois instructions sont exécutées 8 fois de suite."
+    },
+    {
+      "consigne": "Quel élément de programme est le groupe en couleur ?",
+      "texte": "[Si la distance est inférieure à 10 cm], arrêter le moteur, sinon avancer.",
+      "choix": ["Variable", "Condition", "Boucle", "Événement"],
+      "bonne": 1,
+      "explication": "Le test « la distance est inférieure à 10 cm » est vrai ou faux : c'est la condition qui décide de l'action."
+    },
+    {
+      "consigne": "Quel élément de programme est le groupe en couleur ?",
+      "texte": "Mettre [le score] à 0, puis ajouter 1 à chaque point marqué.",
+      "choix": ["Variable", "Condition", "Boucle", "Événement"],
+      "bonne": 0,
+      "explication": "Le score est un espace mémoire nommé dont la valeur change : c'est une variable."
+    },
+    {
+      "consigne": "Quel élément de programme est le groupe en couleur ?",
+      "texte": "[L'appui sur le bouton] déclenche l'allumage de la lampe.",
+      "choix": ["Variable", "Condition", "Boucle", "Événement"],
+      "bonne": 3,
+      "explication": "L'appui sur un bouton est un événement : il déclenche le script."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Algorithme",
+      "acceptees": ["Algorithme", "Un algorithme", "L'algorithme"],
+      "indices": [
+        "Je décris comment résoudre un problème.",
+        "Je suis une suite finie d'instructions.",
+        "Je deviens un programme quand on me traduit dans un langage comme Scratch ou Python."
+      ],
+      "explication": "Un algorithme est une suite finie d'instructions ; le programme en est la traduction dans un langage."
+    },
+    {
+      "reponse": "Variable",
+      "acceptees": ["Variable", "Une variable", "La variable"],
+      "indices": [
+        "Je porte un nom.",
+        "Je suis un espace de la mémoire.",
+        "Je contiens une valeur qui peut changer, comme un score."
+      ],
+      "explication": "Une variable est un espace mémoire nommé qui contient une valeur modifiable."
+    },
+    {
+      "reponse": "Boucle",
+      "acceptees": ["Boucle", "Une boucle", "La boucle"],
+      "indices": [
+        "Je permets d'éviter d'écrire dix fois la même instruction.",
+        "Je répète des instructions un nombre fixe de fois, ou indéfiniment.",
+        "Je peux aussi m'arrêter quand une condition devient vraie."
+      ],
+      "explication": "Une boucle répète des instructions : un nombre fixe de fois, jusqu'à une condition, ou indéfiniment."
+    },
+    {
+      "reponse": "Organigramme",
+      "acceptees": ["Organigramme", "Un organigramme", "L'organigramme"],
+      "indices": [
+        "Je suis un schéma.",
+        "J'utilise des ovales, des rectangles et des losanges.",
+        "Je dessine les étapes d'un algorithme."
+      ],
+      "explication": "L'organigramme dessine un algorithme : ovale pour le début et la fin, rectangle pour une action, losange pour une condition."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "La variable score vaut 10. Le programme répète 3 fois « ajouter 4 à score ». Que vaut score à la fin ?",
+      "reponse": 22,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "Chaque répétition ajoute 4, donc 3 × 4 = 12. Puis 10 + 12 = 22."
+    },
+    {
+      "question": "Un programme répète 6 fois : allumer une LED pendant 2 s, puis l'éteindre pendant 1 s. Combien de temps dure l'ensemble ?",
+      "reponse": 18,
+      "unite": "s",
+      "tolerance": 0,
+      "explication": "Une répétition dure 2 + 1 = 3 s. Pour 6 répétitions : 6 × 3 = 18 s."
+    },
+    {
+      "question": "Un jeu commence avec 5 vies. Le joueur perd 1 vie à chaque erreur et fait 3 erreurs. Combien de vies lui reste-t-il ?",
+      "reponse": 2,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "La variable des vies passe de 5 à 5 − 3 = 2."
+    },
+    {
+      "question": "La variable x vaut 0. Le programme répète 5 fois : ajouter 3 à x, puis retirer 1 à x. Que vaut x à la fin ?",
+      "reponse": 10,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "À chaque répétition, x augmente de 3 − 1 = 2. Pour 5 répétitions : 5 × 2 = 10."
+    },
+    {
+      "question": "Un ventilateur s'allume quand la condition « température > 25 » est vraie. Les cinq mesures successives sont 22, 26, 24, 28 et 27 (en °C). Pour combien de mesures le ventilateur s'allume-t-il ?",
+      "reponse": 3,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "Les mesures supérieures à 25 sont 26, 28 et 27 : la condition est vraie 3 fois."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Du problème au programme",
+      "etapes": [
+        "On décrit les étapes qui résolvent le problème",
+        "On dessine l'algorithme sous forme d'organigramme",
+        "On traduit l'algorithme en programme",
+        "On teste le programme",
+        "On débogue jusqu'au comportement voulu"
+      ]
+    },
+    {
+      "titre": "Déboguer un programme",
+      "etapes": [
+        "Constater que le programme ne fait pas ce qui est attendu",
+        "Exécuter le programme pas à pas",
+        "Repérer l'instruction fautive",
+        "Corriger cette instruction",
+        "Tester de nouveau le programme"
+      ]
+    }
+  ]
+}

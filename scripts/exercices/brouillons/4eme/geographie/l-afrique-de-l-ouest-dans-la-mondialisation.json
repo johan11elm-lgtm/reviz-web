@@ -1,0 +1,167 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Les habitants de la région",
+      "detail": "Une région très peuplée, jeune et de plus en plus urbaine, dominée par le Nigeria.",
+      "cartes": [
+        "Plus de 400 millions de personnes",
+        "Le Nigeria, pays le plus peuplé d'Afrique",
+        "Une grande jeunesse et une croissance rapide",
+        "Des migrants qui restent surtout en Afrique de l'Ouest",
+        "Des villes qui grossissent très vite"
+      ]
+    },
+    {
+      "nom": "Les côtes de la région",
+      "detail": "Le littoral concentre les hommes, les activités et les grands ports qui relient l'Afrique de l'Ouest au monde.",
+      "cartes": [
+        "Hommes et activités regroupés au bord de la mer",
+        "Abidjan, Tema, Lomé et Dakar, villes portuaires",
+        "Des corridors routiers et ferroviaires partant des ports",
+        "Un climat plus humide que dans le nord",
+        "Une ouverture sur l'Atlantique et le reste du monde"
+      ]
+    },
+    {
+      "nom": "Les matières premières exportées",
+      "detail": "La région s'insère dans la mondialisation en exportant des produits bruts, dont les prix varient.",
+      "cartes": [
+        "Le cacao de Côte d'Ivoire et du Ghana",
+        "Le pétrole du Nigeria",
+        "L'or extrait notamment au Ghana",
+        "Le coton et l'uranium du Niger",
+        "Des produits peu transformés, aux prix très variables"
+      ]
+    },
+    {
+      "nom": "Le Sahel en difficulté",
+      "detail": "La zone semi-aride au sud du Sahara cumule conflits, sécheresses et pauvreté.",
+      "cartes": [
+        "Une zone semi-aride au sud du Sahara",
+        "Des conflits armés et du terrorisme",
+        "Des sécheresses et la désertification",
+        "Mali, Burkina Faso et Niger, pays enclavés",
+        "Une pauvreté et une insécurité alimentaire fortes"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "l'enclavement du Mali, du Burkina Faso et du Niger",
+      "carte": "Des échanges qui passent par les ports du golfe de Guinée",
+      "role": "consequence",
+      "explication": "Sans accès à la mer, ces pays exportent et importent par les ports de leurs voisins côtiers."
+    },
+    {
+      "fait": "l'enclavement du Mali, du Burkina Faso et du Niger",
+      "carte": "Une dépendance envers les corridors routiers et ferroviaires",
+      "role": "consequence",
+      "explication": "Ces pays dépendent des routes et des voies ferrées qui mènent aux ports côtiers."
+    },
+    {
+      "fait": "l'aggravation des difficultés au Sahel",
+      "carte": "Les sécheresses et la désertification",
+      "role": "cause",
+      "explication": "Le manque d'eau et l'avancée du désert aggravent les difficultés du Sahel."
+    },
+    {
+      "fait": "l'aggravation des difficultés au Sahel",
+      "carte": "Les conflits armés et le terrorisme",
+      "role": "cause",
+      "explication": "Les violences aggravent la pauvreté et l'insécurité alimentaire au Sahel."
+    }
+  ],
+  "etiquettes": [
+    {
+      "consigne": "Quel pays le passage en couleur décrit-il ?",
+      "texte": "Chaque année, [le premier producteur mondial de cacao] exporte ses fèves vers le monde entier.",
+      "choix": ["Nigeria", "Côte d'Ivoire", "Sénégal", "Mali"],
+      "bonne": 1,
+      "explication": "La Côte d'Ivoire est le premier producteur mondial de cacao, devant le Ghana."
+    },
+    {
+      "consigne": "Quel pays le passage en couleur décrit-il ?",
+      "texte": "Avec plus de 220 millions d'habitants, [ce pays est le plus peuplé d'Afrique].",
+      "choix": ["Nigeria", "Côte d'Ivoire", "Sénégal", "Mali"],
+      "bonne": 0,
+      "explication": "Le Nigeria est le pays le plus peuplé d'Afrique, avec plus de 220 millions d'habitants."
+    },
+    {
+      "consigne": "Quel pays le passage en couleur décrit-il ?",
+      "texte": "[Dakar, sa capitale, est un grand port ouvert sur l'Atlantique].",
+      "choix": ["Nigeria", "Côte d'Ivoire", "Sénégal", "Mali"],
+      "bonne": 2,
+      "explication": "Dakar est la capitale du Sénégal et l'un des grands ports de la région."
+    },
+    {
+      "consigne": "Quel pays le passage en couleur décrit-il ?",
+      "texte": "Ce pays du Sahel, [sans accès à la mer, exporte de l'or et du coton].",
+      "choix": ["Nigeria", "Côte d'Ivoire", "Sénégal", "Mali"],
+      "bonne": 3,
+      "explication": "Parmi ces quatre pays, seul le Mali est enclavé : il exporte notamment de l'or et du coton."
+    },
+    {
+      "consigne": "Quel pays le passage en couleur décrit-il ?",
+      "texte": "Lagos est la plus grande ville, mais [la capitale est Abuja] ; le pétrole y est exporté dans le monde entier.",
+      "choix": ["Nigeria", "Côte d'Ivoire", "Sénégal", "Mali"],
+      "bonne": 0,
+      "explication": "Abuja est la capitale du Nigeria, dont la plus grande ville est Lagos."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Le Sahel",
+      "acceptees": ["Sahel", "Le Sahel"],
+      "indices": [
+        "Je suis une zone d'Afrique de l'Ouest.",
+        "Je suis semi-aride et je borde le sud du Sahara.",
+        "Les conflits, les sécheresses et la désertification me touchent."
+      ],
+      "explication": "Le Sahel est la zone semi-aride qui borde le sud du Sahara ; il cumule conflits, sécheresses et pauvreté."
+    },
+    {
+      "reponse": "Lagos",
+      "acceptees": ["Lagos"],
+      "indices": [
+        "Je suis une ville d'Afrique de l'Ouest.",
+        "Je suis la plus grande agglomération de la région, mais pas la capitale de mon pays.",
+        "Je suis un grand port du Nigeria."
+      ],
+      "explication": "Lagos est la plus grande agglomération d'Afrique de l'Ouest ; la capitale du Nigeria est Abuja."
+    },
+    {
+      "reponse": "La CEDEAO",
+      "acceptees": ["CEDEAO", "La CEDEAO", "Communauté économique des États de l'Afrique de l'Ouest"],
+      "indices": [
+        "Je suis une organisation régionale.",
+        "J'ai été créée en 1975 pour favoriser les échanges et la libre circulation.",
+        "Le Mali, le Burkina Faso et le Niger m'ont quittée en 2025."
+      ],
+      "explication": "La CEDEAO, créée en 1975, organise l'intégration régionale de l'Afrique de l'Ouest."
+    },
+    {
+      "reponse": "Le cacao",
+      "acceptees": ["Cacao", "Le cacao"],
+      "indices": [
+        "Je suis une matière première exportée par l'Afrique de l'Ouest.",
+        "Quand mon prix baisse sur les marchés mondiaux, les revenus des planteurs chutent.",
+        "La Côte d'Ivoire est la première productrice mondiale de moi, devant le Ghana."
+      ],
+      "explication": "La Côte d'Ivoire est le premier producteur mondial de cacao ; ses revenus dépendent de son prix mondial."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Réaliser le croquis des dynamiques de l'Afrique de l'Ouest",
+      "etapes": [
+        "Place les repères : océan Atlantique, golfe de Guinée, Sahara, pays",
+        "Colore le littoral dynamique et le Sahel en difficulté",
+        "Place les grandes villes et les grands ports",
+        "Trace les flèches d'exportation et les corridors",
+        "Range la légende en parties et donne un titre"
+      ]
+    }
+  ]
+}

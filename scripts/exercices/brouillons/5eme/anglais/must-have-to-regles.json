@@ -1,0 +1,138 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Une obligation",
+      "detail": "Il faut le faire : must, ou have to / has to, + base verbale.",
+      "cartes": [
+        "You must listen to the teacher",
+        "She has to wear a uniform",
+        "We have to do our homework every night",
+        "You must be on time",
+        "He has to raise his hand before speaking"
+      ]
+    },
+    {
+      "nom": "Une interdiction",
+      "detail": "Il est défendu de le faire : mustn't, not allowed to, ou un panneau comme No entry.",
+      "cartes": [
+        "You mustn't run in the corridors",
+        "You mustn't shout in the library",
+        "We aren't allowed to use phones in class",
+        "A sign that says No entry",
+        "A sign that says Keep off the grass"
+      ]
+    },
+    {
+      "nom": "Une absence d'obligation",
+      "detail": "On peut le faire mais on n'y est pas obligé : don't have to, ou doesn't have to avec he, she, it.",
+      "cartes": [
+        "We don't have to go to school on Sunday",
+        "It's Saturday, so I don't have to get up early",
+        "She doesn't have to wear a uniform on Fridays",
+        "You don't have to run: you can walk",
+        "You don't have to finish it tonight: it's for Monday"
+      ]
+    },
+    {
+      "nom": "Un conseil",
+      "detail": "On recommande de le faire sans l'imposer : should + base verbale.",
+      "cartes": [
+        "You should go to bed early",
+        "You look tired: you should rest",
+        "You should drink more water",
+        "You should do your homework before dinner",
+        "You should see a doctor"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Qu'exprime le passage en couleur ?",
+      "texte": "Look at the sign: [No entry].",
+      "choix": ["Une obligation", "Une interdiction", "Une absence d'obligation", "Un conseil"],
+      "bonne": 1,
+      "explication": "No entry est un panneau d'interdiction : l'entrée est interdite."
+    },
+    {
+      "consigne": "Qu'exprime le passage en couleur ?",
+      "texte": "In my school, [we have to wear a blazer and a tie].",
+      "choix": ["Une obligation", "Une interdiction", "Une absence d'obligation", "Un conseil"],
+      "bonne": 0,
+      "explication": "Have to exprime une obligation qui vient du règlement."
+    },
+    {
+      "consigne": "Qu'exprime le passage en couleur ?",
+      "texte": "It's Sunday, so [we don't have to go to school].",
+      "choix": ["Une obligation", "Une interdiction", "Une absence d'obligation", "Un conseil"],
+      "bonne": 2,
+      "explication": "Don't have to veut dire que ce n'est pas obligatoire : on a le choix."
+    },
+    {
+      "consigne": "Qu'exprime le passage en couleur ?",
+      "texte": "You look tired. [You should go to bed earlier.]",
+      "choix": ["Une obligation", "Une interdiction", "Une absence d'obligation", "Un conseil"],
+      "bonne": 3,
+      "explication": "Should + base verbale donne un simple conseil."
+    },
+    {
+      "consigne": "Qu'exprime le passage en couleur ?",
+      "texte": "In the library, [you mustn't use your phone].",
+      "choix": ["Une obligation", "Une interdiction", "Une absence d'obligation", "Un conseil"],
+      "bonne": 1,
+      "explication": "Mustn't exprime une interdiction : c'est défendu."
+    },
+    {
+      "consigne": "Qu'exprime le passage en couleur ?",
+      "texte": "My sister [has to wear a uniform] at her school.",
+      "choix": ["Une obligation", "Une interdiction", "Une absence d'obligation", "Un conseil"],
+      "bonne": 0,
+      "explication": "Avec she, have to devient has to : c'est une obligation."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Mustn't",
+      "acceptees": ["Mustn't", "Mustnt", "Must not"],
+      "indices": [
+        "Je suis une forme contractée.",
+        "Je suis invariable et je ne suis jamais suivi de to.",
+        "J'exprime une interdiction : c'est défendu."
+      ],
+      "explication": "Mustn't (must not) exprime une interdiction : You mustn't run in the corridors."
+    },
+    {
+      "reponse": "Don't have to",
+      "acceptees": ["Don't have to", "Doesn't have to", "Do not have to", "Dont have to"],
+      "indices": [
+        "Je dis que quelque chose n'est pas nécessaire.",
+        "Avec he, she, it, mon auxiliaire change.",
+        "Ne me confonds pas avec l'interdiction : avec moi, on a le choix."
+      ],
+      "explication": "Don't have to veut dire que ce n'est pas obligatoire, alors que mustn't veut dire que c'est interdit."
+    },
+    {
+      "reponse": "Should",
+      "acceptees": ["Should"],
+      "indices": [
+        "Je suis un mot anglais invariable : je ne prends jamais de -s.",
+        "Je suis suivi de la base verbale, sans to.",
+        "Je donne un simple conseil, pas un ordre."
+      ],
+      "explication": "Should + base verbale donne un conseil : You should go to bed early."
+    },
+    {
+      "reponse": "Uniform",
+      "acceptees": ["Uniform", "A uniform", "School uniform", "Uniforme"],
+      "indices": [
+        "Je suis un mot anglais presque identique au mot français.",
+        "Les élèves des collèges britanniques doivent me porter.",
+        "Je comprends souvent un blazer et une cravate."
+      ],
+      "explication": "Dans un collège britannique, les élèves doivent souvent wear a uniform, avec un blazer et une cravate."
+    }
+  ],
+  "calculs": [],
+  "etapes": []
+}

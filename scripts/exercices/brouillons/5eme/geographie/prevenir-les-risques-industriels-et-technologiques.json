@@ -1,0 +1,176 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "La catastrophe de Bhopal",
+      "detail": "En décembre 1984, en Inde, une fuite de gaz toxique dans une usine de pesticides tue des milliers de personnes : c'est la plus grave catastrophe industrielle de l'histoire.",
+      "cartes": [
+        "Une fuite de gaz toxique dans une usine de pesticides",
+        "Un accident survenu en Inde, en décembre 1984",
+        "Des milliers de morts parmi les habitants voisins",
+        "Des contrôles insuffisants dans l'usine",
+        "Des quartiers pauvres bâtis tout près de l'usine"
+      ]
+    },
+    {
+      "nom": "La catastrophe de Tchernobyl",
+      "detail": "Le 26 avril 1986, en Ukraine alors soviétique, un réacteur nucléaire explose et un nuage radioactif passe sur l'Europe.",
+      "cartes": [
+        "Un réacteur de centrale nucléaire explose",
+        "Un nuage radioactif passe sur l'Europe",
+        "Une zone d'exclusion de 30 km entoure la centrale",
+        "Un accident survenu en Ukraine, alors en URSS",
+        "Un accident daté du 26 avril 1986"
+      ]
+    },
+    {
+      "nom": "La catastrophe d'AZF",
+      "detail": "Le 21 septembre 2001, à Toulouse, un stock de nitrate d'ammonium explose dans une usine d'engrais ; une loi de 2003 en tire les leçons.",
+      "cartes": [
+        "Un stock de nitrate d'ammonium explose",
+        "Une usine d'engrais située à Toulouse",
+        "31 morts et des milliers de blessés",
+        "Un accident daté du 21 septembre 2001",
+        "Une loi de 2003 encadre les constructions près des usines"
+      ]
+    },
+    {
+      "nom": "La catastrophe de Fukushima",
+      "detail": "Le 11 mars 2011, au Japon, un séisme suivi d'un tsunami provoque un accident nucléaire : un risque naturel déclenche une catastrophe technologique.",
+      "cartes": [
+        "Un séisme suivi d'un tsunami",
+        "Un accident survenu au Japon",
+        "Un accident daté du 11 mars 2011",
+        "Plus de 100 000 personnes évacuées après le séisme",
+        "Un risque naturel qui déclenche un accident nucléaire"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "la création des plans de prévention autour des usines",
+      "carte": "La catastrophe d'AZF en 2001",
+      "role": "cause",
+      "explication": "Après AZF, une loi de 2003 crée les plans de prévention des risques technologiques (PPRT)."
+    },
+    {
+      "fait": "la création des plans de prévention autour des usines",
+      "carte": "Des constructions limitées autour des usines dangereuses",
+      "role": "consequence",
+      "explication": "Les PPRT limitent les constructions autour des usines dangereuses."
+    },
+    {
+      "fait": "l'accident nucléaire de Fukushima",
+      "carte": "Un séisme suivi d'un tsunami",
+      "role": "cause",
+      "explication": "Le 11 mars 2011, un séisme suivi d'un tsunami endommage la centrale nucléaire."
+    },
+    {
+      "fait": "l'accident nucléaire de Fukushima",
+      "carte": "Plus de 100 000 personnes évacuées",
+      "role": "consequence",
+      "explication": "L'accident oblige à évacuer plus de 100 000 personnes."
+    }
+  ],
+  "etiquettes": [
+    {
+      "consigne": "Quelle notion le passage en couleur désigne-t-il ?",
+      "texte": "Dans cette usine chimique, [une explosion] peut se produire à tout moment.",
+      "choix": ["Aléa", "Enjeux", "Vulnérabilité", "Risque"],
+      "bonne": 0,
+      "explication": "Un aléa est un phénomène dangereux qui peut se produire : explosion, incendie, fuite toxique."
+    },
+    {
+      "consigne": "Quelle notion le passage en couleur désigne-t-il ?",
+      "texte": "Autour de l'usine, [les habitants, l'école et la route voisine] sont exposés au danger.",
+      "choix": ["Aléa", "Enjeux", "Vulnérabilité", "Risque"],
+      "bonne": 1,
+      "explication": "Les enjeux sont les personnes, les biens et les activités exposés à un aléa."
+    },
+    {
+      "consigne": "Quelle notion le passage en couleur désigne-t-il ?",
+      "texte": "Les maisons touchent l'usine et personne ne connaît les consignes : [la fragilité des habitants face à l'explosion] est très forte.",
+      "choix": ["Aléa", "Enjeux", "Vulnérabilité", "Risque"],
+      "bonne": 2,
+      "explication": "La vulnérabilité est la fragilité des enjeux face à un aléa."
+    },
+    {
+      "consigne": "Quelle notion le passage en couleur désigne-t-il ?",
+      "texte": "Quand une usine dangereuse est tout près d'un quartier, [la possibilité qu'une explosion fasse des victimes] est élevée.",
+      "choix": ["Aléa", "Enjeux", "Vulnérabilité", "Risque"],
+      "bonne": 3,
+      "explication": "Le risque est la possibilité qu'un aléa touche des enjeux et provoque des dégâts."
+    },
+    {
+      "consigne": "Quelle notion le passage en couleur désigne-t-il ?",
+      "texte": "Dans la zone de danger, [les logements, les commerces et les salariés de l'usine] sont exposés.",
+      "choix": ["Aléa", "Enjeux", "Vulnérabilité", "Risque"],
+      "bonne": 1,
+      "explication": "Les logements, les commerces et les salariés sont des enjeux : des biens, des activités et des personnes exposés à l'aléa."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Tchernobyl",
+      "acceptees": ["Tchernobyl", "Chernobyl"],
+      "indices": [
+        "Mon nom reste associé à une catastrophe de 1986.",
+        "Un nuage radioactif est parti de chez moi et a traversé l'Europe.",
+        "Une zone d'exclusion de 30 km entoure ma centrale, en Ukraine."
+      ],
+      "explication": "À Tchernobyl, en Ukraine alors soviétique, un réacteur nucléaire explose le 26 avril 1986."
+    },
+    {
+      "reponse": "Bhopal",
+      "acceptees": ["Bhopal"],
+      "indices": [
+        "Je suis une ville d'Inde.",
+        "En décembre 1984, une usine de pesticides a laissé échapper un gaz toxique chez moi.",
+        "Je suis le lieu de la plus grave catastrophe industrielle de l'histoire."
+      ],
+      "explication": "À Bhopal, en 1984, une fuite de gaz toxique tue des milliers de personnes : c'est la plus grave catastrophe industrielle de l'histoire."
+    },
+    {
+      "reponse": "PPRT",
+      "acceptees": ["PPRT", "Les PPRT", "Plan de prévention des risques technologiques", "Plans de prévention des risques technologiques"],
+      "indices": [
+        "Je suis une mesure créée en France par une loi de 2003.",
+        "Je suis né après une explosion qui a eu lieu à Toulouse.",
+        "Je limite les constructions autour des usines dangereuses."
+      ],
+      "explication": "Après AZF, la loi de 2003 crée les plans de prévention des risques technologiques (PPRT), qui limitent les constructions autour des usines dangereuses."
+    },
+    {
+      "reponse": "Résilience",
+      "acceptees": ["Résilience", "La résilience"],
+      "indices": [
+        "Je suis plus forte dans les pays riches et préparés que dans les pays pauvres.",
+        "Je dépends des moyens de secours et de reconstruction d'une société.",
+        "Je suis la capacité d'une société à se relever après une catastrophe."
+      ],
+      "explication": "La résilience est la capacité d'une société à se relever après une catastrophe."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Les grandes catastrophes dans l'ordre chronologique",
+      "etapes": [
+        "Une fuite de dioxine à Seveso, en Italie",
+        "Une fuite de gaz toxique à Bhopal, en Inde",
+        "L'explosion d'un réacteur à Tchernobyl, en Ukraine",
+        "L'explosion de l'usine AZF à Toulouse",
+        "Un accident nucléaire à Fukushima, au Japon"
+      ]
+    },
+    {
+      "titre": "La prévention des risques industriels en Europe et en France",
+      "etapes": [
+        "La catastrophe de Seveso, en Italie",
+        "La première directive européenne sur les sites dangereux",
+        "L'explosion de l'usine AZF à Toulouse",
+        "La loi qui crée les plans de prévention autour des usines"
+      ]
+    }
+  ]
+}

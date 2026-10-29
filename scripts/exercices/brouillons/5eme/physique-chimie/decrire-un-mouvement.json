@@ -1,0 +1,191 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Rectiligne uniforme",
+      "detail": "Une trajectoire en ligne droite, parcourue à vitesse constante.",
+      "cartes": [
+        "Une voiture roule à vitesse constante sur une route droite",
+        "Sur une chronophotographie, des points alignés et également espacés",
+        "Un escalator monte en ligne droite à vitesse constante",
+        "Une boule de bowling roule droit à vitesse constante",
+        "Un avion vole en ligne droite à vitesse constante"
+      ]
+    },
+    {
+      "nom": "Rectiligne accéléré",
+      "detail": "Une trajectoire en ligne droite, avec une vitesse qui augmente.",
+      "cartes": [
+        "Sur une chronophotographie, des points alignés dont l'écart augmente",
+        "Une voiture démarre sur une route droite",
+        "Un coureur augmente sa vitesse sur une piste droite",
+        "Un avion prend de la vitesse sur la piste droite",
+        "Une moto roule de plus en plus vite tout droit"
+      ]
+    },
+    {
+      "nom": "Rectiligne ralenti",
+      "detail": "Une trajectoire en ligne droite, avec une vitesse qui diminue.",
+      "cartes": [
+        "Sur une chronophotographie, des points alignés dont l'écart diminue",
+        "Une voiture freine sur une route droite",
+        "Un train perd de la vitesse sur une voie droite",
+        "Une bille roule tout droit et finit par s'arrêter",
+        "Un cycliste roule tout droit de moins en moins vite"
+      ]
+    },
+    {
+      "nom": "Circulaire uniforme",
+      "detail": "Une trajectoire en cercle, parcourue à vitesse constante.",
+      "cartes": [
+        "La pointe de l'aiguille des secondes d'une horloge",
+        "Pour le cycliste, un point de la roue tourne régulièrement",
+        "Un cheval de manège qui tourne à vitesse constante",
+        "Une nacelle de grande roue tourne à vitesse constante",
+        "Un point du bord d'un CD en rotation régulière"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Quelle est la trajectoire de l'objet en couleur ?",
+      "texte": "Dans le gymnase, Léo lance [le ballon de basket] vers le panier : le ballon monte puis redescend.",
+      "choix": ["Rectiligne", "Circulaire", "Curviligne"],
+      "bonne": 2,
+      "explication": "Le ballon lancé vers le panier suit une courbe quelconque, ni droite ni circulaire : sa trajectoire est curviligne."
+    },
+    {
+      "consigne": "Quelle est la trajectoire de l'objet en couleur ?",
+      "texte": "Sur le cadran de la montre, [la pointe de l'aiguille des secondes] fait le tour complet en une minute.",
+      "choix": ["Rectiligne", "Circulaire", "Curviligne"],
+      "bonne": 1,
+      "explication": "La pointe de l'aiguille décrit un cercle autour de l'axe du cadran : sa trajectoire est circulaire."
+    },
+    {
+      "consigne": "Quelle est la trajectoire de l'objet en couleur ?",
+      "texte": "Une pomme se détache de la branche : [la pomme] tombe verticalement vers le sol.",
+      "choix": ["Rectiligne", "Circulaire", "Curviligne"],
+      "bonne": 0,
+      "explication": "La pomme suit une ligne droite verticale : sa trajectoire est rectiligne."
+    },
+    {
+      "consigne": "Quel mouvement montrent les écarts en couleur ?",
+      "texte": "Sur une chronophotographie prise toutes les 0,1 s, les positions d'une bille sont espacées de [1 cm, 2 cm, 3 cm, 4 cm].",
+      "choix": ["Uniforme", "Accéléré", "Ralenti"],
+      "bonne": 1,
+      "explication": "Les images sont prises à intervalles de temps égaux. Des écarts qui augmentent montrent que la bille parcourt de plus en plus de distance : le mouvement est accéléré."
+    },
+    {
+      "consigne": "Quel mouvement montrent les écarts en couleur ?",
+      "texte": "Sur une chronophotographie prise toutes les 0,1 s, les positions d'un chariot sont espacées de [4 cm, 3 cm, 2 cm, 1 cm].",
+      "choix": ["Uniforme", "Accéléré", "Ralenti"],
+      "bonne": 2,
+      "explication": "Les écarts diminuent à intervalles de temps égaux : le chariot parcourt de moins en moins de distance, le mouvement est ralenti."
+    },
+    {
+      "consigne": "Quel mouvement montrent les écarts en couleur ?",
+      "texte": "Sur une chronophotographie prise toutes les 0,1 s, les positions d'une balle sont espacées de [2 cm, 2 cm, 2 cm, 2 cm].",
+      "choix": ["Uniforme", "Accéléré", "Ralenti"],
+      "bonne": 0,
+      "explication": "Des écarts égaux à intervalles de temps égaux montrent une vitesse constante : le mouvement est uniforme."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Trajectoire",
+      "acceptees": ["La trajectoire"],
+      "indices": [
+        "Je suis une ligne.",
+        "Je suis formée par les positions successives d'un point de l'objet.",
+        "Je peux être rectiligne, circulaire ou curviligne."
+      ],
+      "explication": "La trajectoire est l'ensemble des positions successives d'un point de l'objet au cours du temps."
+    },
+    {
+      "reponse": "Chronophotographie",
+      "acceptees": ["Chronophoto", "Une chronophotographie"],
+      "indices": [
+        "Je suis une image, mais pas comme les autres.",
+        "Sur moi, on voit un même objet à plusieurs positions successives.",
+        "Mes positions sont séparées par des durées égales : leurs écarts révèlent si l'objet accélère ou ralentit."
+      ],
+      "explication": "Une chronophotographie montre les positions d'un objet à intervalles de temps égaux."
+    },
+    {
+      "reponse": "Vitesse moyenne",
+      "acceptees": ["Vitesse", "La vitesse", "La vitesse moyenne"],
+      "indices": [
+        "Je m'exprime en m/s ou en km/h.",
+        "Je me calcule en divisant une distance par une durée.",
+        "Pour 120 km parcourus en 2 h, je vaux 60 km/h."
+      ],
+      "explication": "La vitesse moyenne est la distance parcourue divisée par la durée du parcours : v = d / t."
+    },
+    {
+      "reponse": "Objet de référence",
+      "acceptees": ["Référence", "Référentiel", "Le référentiel", "Un objet de référence"],
+      "indices": [
+        "Sans moi, impossible de dire si quelque chose bouge.",
+        "Pour un passager de train, je peux être le wagon ou le quai.",
+        "Je suis ce par rapport à quoi on décrit un mouvement."
+      ],
+      "explication": "On décrit toujours un mouvement par rapport à un objet de référence : le même passager est immobile par rapport au wagon et en mouvement par rapport au quai."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "Une voiture parcourt 150 km en 2,5 h. Quelle est sa vitesse moyenne, en km/h ?",
+      "reponse": 60,
+      "unite": "km/h",
+      "tolerance": 0,
+      "explication": "v = d ÷ t = 150 ÷ 2,5 = 60 km/h."
+    },
+    {
+      "question": "Un coureur parcourt 400 m en 50 s. Quelle est sa vitesse moyenne, en m/s ?",
+      "reponse": 8,
+      "unite": "m/s",
+      "tolerance": 0,
+      "explication": "v = d ÷ t = 400 ÷ 50 = 8 m/s."
+    },
+    {
+      "question": "Un train roule à la vitesse moyenne de 90 km/h pendant 3 h. Quelle distance parcourt-il, en km ?",
+      "reponse": 270,
+      "unite": "km",
+      "tolerance": 0,
+      "explication": "d = v × t = 90 × 3 = 270 km."
+    },
+    {
+      "question": "Un guépard court à 25 m/s. Quelle est sa vitesse, en km/h ?",
+      "reponse": 90,
+      "unite": "km/h",
+      "tolerance": 0,
+      "explication": "Pour passer des m/s aux km/h, on multiplie par 3,6 : 25 × 3,6 = 90 km/h."
+    },
+    {
+      "question": "Un scooter roule à 54 km/h. Quelle est sa vitesse, en m/s ?",
+      "reponse": 15,
+      "unite": "m/s",
+      "tolerance": 0,
+      "explication": "Pour passer des km/h aux m/s, on divise par 3,6 : 54 ÷ 3,6 = 15 m/s."
+    },
+    {
+      "question": "Un randonneur parcourt 6 km en 1 h 30 min. Quelle est sa vitesse moyenne, en km/h ?",
+      "reponse": 4,
+      "unite": "km/h",
+      "tolerance": 0,
+      "explication": "1 h 30 min = 1,5 h, donc v = d ÷ t = 6 ÷ 1,5 = 4 km/h."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Les étapes du calcul d'une vitesse moyenne",
+      "etapes": [
+        "On relève la distance et la durée avec leurs unités",
+        "On met la distance et la durée en unités compatibles",
+        "On calcule v = d ÷ t",
+        "On écrit v avec son unité, puis on convertit si besoin"
+      ]
+    }
+  ]
+}

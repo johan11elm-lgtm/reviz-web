@@ -1,0 +1,131 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Territoire, population et ressources",
+      "detail": "Ce que le pays possède par sa taille, ses habitants, ses terres et son sous-sol.",
+      "cartes": [
+        "Une superficie d'environ 9,8 millions de km²",
+        "Plus de 340 millions d'habitants répartis dans 50 États",
+        "Une ouverture sur l'Atlantique et sur le Pacifique",
+        "De vastes terres agricoles",
+        "Du pétrole, du gaz et du charbon"
+      ]
+    },
+    {
+      "nom": "L'économie et la finance",
+      "detail": "La richesse produite, l'argent et les entreprises qui font des États-Unis la première économie du monde.",
+      "cartes": [
+        "Le premier PIB du monde",
+        "Wall Street, la première place boursière du monde",
+        "Le dollar, principale monnaie des échanges internationaux",
+        "Les premiers importateurs mondiaux de marchandises",
+        "Des firmes transnationales parmi les plus puissantes du monde"
+      ]
+    },
+    {
+      "nom": "L'innovation et la recherche",
+      "detail": "Les lieux et les universités où naissent les technologies de pointe, surtout dans le numérique.",
+      "cartes": [
+        "La Silicon Valley, près de San Francisco",
+        "Des universités, des laboratoires et des entreprises de pointe réunis",
+        "Stanford, l'université qui a vu naître Google",
+        "Le MIT, une grande université scientifique",
+        "Des recherches qui nourrissent les entreprises de haute technologie"
+      ]
+    },
+    {
+      "nom": "L'influence culturelle et militaire",
+      "detail": "Les moyens par lesquels les États-Unis pèsent sur le monde : la culture qu'ils diffusent et la force armée qu'ils possèdent.",
+      "cartes": [
+        "Les films d'Hollywood, vus par un public mondial",
+        "Des séries américaines regardées partout dans le monde",
+        "La musique américaine, écoutée dans de nombreux pays",
+        "Le premier budget militaire du monde",
+        "Des bases militaires réparties dans le monde entier"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Quelle notion le passage en couleur illustre-t-il ?",
+      "texte": "Dans le monde entier, [le cinéma, la musique et les séries américaines font aimer le mode de vie des États-Unis].",
+      "choix": ["Soft power", "Hard power", "Technopôle", "Firme transnationale"],
+      "bonne": 0,
+      "explication": "Influencer le monde par la culture et le mode de vie, c'est le soft power."
+    },
+    {
+      "consigne": "Quelle notion le passage en couleur illustre-t-il ?",
+      "texte": "Les États-Unis disposent [du premier budget militaire du monde et de bases dans de nombreux pays].",
+      "choix": ["Soft power", "Hard power", "Technopôle", "Firme transnationale"],
+      "bonne": 1,
+      "explication": "La puissance militaire, c'est le hard power."
+    },
+    {
+      "consigne": "Quelle notion le passage en couleur illustre-t-il ?",
+      "texte": "En Californie, [des universités, des laboratoires de recherche et des entreprises de haute technologie sont réunis au même endroit].",
+      "choix": ["Soft power", "Hard power", "Technopôle", "Firme transnationale"],
+      "bonne": 2,
+      "explication": "Un lieu qui réunit universités, recherche et entreprises de pointe est un technopôle, comme la Silicon Valley."
+    },
+    {
+      "consigne": "Quelle notion le passage en couleur illustre-t-il ?",
+      "texte": "[Apple, Amazon et Walmart ont des activités dans de nombreux pays].",
+      "choix": ["Soft power", "Hard power", "Technopôle", "Firme transnationale"],
+      "bonne": 3,
+      "explication": "Une grande entreprise implantée dans plusieurs pays est une firme transnationale."
+    },
+    {
+      "consigne": "Quelle notion le passage en couleur illustre-t-il ?",
+      "texte": "Hollywood est connue partout : [ses films diffusent le mode de vie américain auprès de spectateurs du monde entier].",
+      "choix": ["Soft power", "Hard power", "Technopôle", "Firme transnationale"],
+      "bonne": 0,
+      "explication": "Les films d'Hollywood influencent le monde par la culture : c'est du soft power."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "La Silicon Valley",
+      "acceptees": ["Silicon Valley", "La Silicon Valley"],
+      "indices": [
+        "Je suis un lieu des États-Unis connu dans le monde entier.",
+        "Je suis en Californie, tout près de San Francisco.",
+        "Je suis le grand technopôle mondial du numérique."
+      ],
+      "explication": "La Silicon Valley, près de San Francisco, est le grand technopôle mondial du numérique et de l'innovation."
+    },
+    {
+      "reponse": "Le soft power",
+      "acceptees": ["Soft power", "Le soft power", "Soft-power", "Le soft-power"],
+      "indices": [
+        "Je suis une forme de puissance.",
+        "Je ne repose pas sur la force armée.",
+        "J'influence le monde grâce à la culture et au mode de vie : le cinéma et les séries me servent."
+      ],
+      "explication": "Le soft power est la capacité d'influencer le monde par la culture et le mode de vie."
+    },
+    {
+      "reponse": "L'ACEUM",
+      "acceptees": ["ACEUM", "L'ACEUM", "Aceum"],
+      "indices": [
+        "Je suis un accord de libre-échange.",
+        "Je lie les États-Unis au Canada et au Mexique.",
+        "J'ai remplacé l'ALENA en 2020."
+      ],
+      "explication": "L'ACEUM associe les États-Unis, le Canada et le Mexique depuis 2020 et remplace l'ALENA de 1994."
+    },
+    {
+      "reponse": "Washington",
+      "acceptees": ["Washington", "Washington DC", "Washington D.C."],
+      "indices": [
+        "Je suis une ville du nord-est des États-Unis.",
+        "Je suis un peu plus au sud que New York.",
+        "Je suis la capitale fédérale du pays, mais pas sa capitale économique."
+      ],
+      "explication": "Washington est la capitale fédérale des États-Unis ; New York en est la capitale économique."
+    }
+  ],
+  "calculs": [],
+  "etapes": []
+}

@@ -1,0 +1,151 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "L'organisation du volcan",
+      "detail": "Les parties d'un volcan et le trajet du magma depuis la chambre magmatique jusqu'au sommet.",
+      "cartes": [
+        "Le réservoir profond où le magma est stocké",
+        "Le conduit par lequel le magma monte jusqu'au sommet",
+        "L'ouverture au sommet par où sort le magma",
+        "Le cône, formé par l'accumulation des produits émis",
+        "Le magma est moins dense que les roches voisines"
+      ]
+    },
+    {
+      "nom": "Éruption effusive",
+      "detail": "Une éruption calme d'une lave fluide, dont les gaz s'échappent facilement.",
+      "cartes": [
+        "Une lave fluide qui s'écoule sur les pentes",
+        "Les gaz de la lave s'échappent sans difficulté",
+        "Des fontaines de lave jaillissent du cratère",
+        "Une éruption calme qui laisse le temps de fuir",
+        "Modèle : de petites bulles d'air s'échappent d'un liquide fluide"
+      ]
+    },
+    {
+      "nom": "Éruption explosive",
+      "detail": "Une éruption violente d'une lave visqueuse : les gaz piégés finissent par exploser.",
+      "cartes": [
+        "Des cendres et des blocs sont projetés dans l'air",
+        "Les gaz restent piégés puis s'échappent brutalement",
+        "Un nuage brûlant dévale les pentes à grande vitesse",
+        "Un dôme de lave pâteuse se forme au sommet",
+        "Pompéi détruite par le Vésuve en l'an 79"
+      ]
+    },
+    {
+      "nom": "Où se trouvent les volcans",
+      "detail": "Les endroits du globe où l'on rencontre des volcans : limites de plaques, points chauds et volcans endormis de France.",
+      "cartes": [
+        "Le long des dorsales océaniques",
+        "Dans les zones de subduction",
+        "Au-dessus d'une remontée de matériel chaud du manteau",
+        "En plein milieu d'une plaque, loin de ses limites",
+        "La chaîne des Puys, des volcans endormis de France"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "une éruption explosive",
+      "carte": "Une lave visqueuse qui retient les gaz",
+      "role": "cause",
+      "explication": "Dans une lave visqueuse, les gaz ne peuvent pas s'échapper facilement : ils restent piégés."
+    },
+    {
+      "fait": "une éruption explosive",
+      "carte": "La pression des gaz piégés qui monte jusqu'à l'explosion",
+      "role": "cause",
+      "explication": "Les gaz s'accumulent dans la lave visqueuse et la pression monte jusqu'à l'explosion."
+    },
+    {
+      "fait": "une éruption explosive",
+      "carte": "Des cendres et des blocs projetés dans l'air",
+      "role": "consequence",
+      "explication": "Quand les gaz s'échappent brutalement, ils projettent des cendres et des blocs."
+    },
+    {
+      "fait": "une éruption explosive",
+      "carte": "Une nuée ardente qui dévale les pentes du volcan",
+      "role": "consequence",
+      "explication": "Une éruption explosive peut produire une nuée ardente, un nuage de gaz brûlants, de cendres et de blocs."
+    },
+    {
+      "fait": "la destruction de Saint-Pierre en 1902",
+      "carte": "Une nuée ardente de la montagne Pelée le 8 mai",
+      "role": "cause",
+      "explication": "Le 8 mai 1902, une nuée ardente de la montagne Pelée a dévasté la ville de Saint-Pierre."
+    },
+    {
+      "fait": "la destruction de Saint-Pierre en 1902",
+      "carte": "Environ 28 000 morts parmi les habitants",
+      "role": "consequence",
+      "explication": "La nuée ardente a fait environ 28 000 morts à Saint-Pierre de la Martinique."
+    }
+  ],
+  "etiquettes": [],
+  "devinettes": [
+    {
+      "reponse": "Nuée ardente",
+      "acceptees": ["Nuée ardente", "Nuées ardentes", "Une nuée ardente"],
+      "indices": [
+        "Je suis un danger pour les habitants des volcans.",
+        "Je dévale les pentes à grande vitesse.",
+        "Je suis un nuage brûlant de gaz, de cendres et de blocs."
+      ],
+      "explication": "Une nuée ardente est un nuage de gaz brûlants, de cendres et de blocs qui dévale les pentes à grande vitesse."
+    },
+    {
+      "reponse": "Basalte",
+      "acceptees": ["Basalte", "Le basalte"],
+      "indices": [
+        "Je suis une roche sombre.",
+        "Je me suis formé quand de la lave a refroidi rapidement en surface.",
+        "Au microscope, on voit de minuscules cristaux, les microlites, dans du verre."
+      ],
+      "explication": "Le basalte est une roche volcanique sombre, faite de verre et de petits cristaux, à structure microlitique."
+    },
+    {
+      "reponse": "Point chaud",
+      "acceptees": ["Point chaud", "Points chauds", "Un point chaud"],
+      "indices": [
+        "Je suis à l'origine de certains volcans.",
+        "Je suis une remontée de matière venue du manteau, loin des limites de plaques.",
+        "Hawaï et La Réunion sont nées au-dessus de moi."
+      ],
+      "explication": "Un point chaud est une remontée de matériel chaud du manteau, à l'origine de volcans isolés comme Hawaï et La Réunion."
+    },
+    {
+      "reponse": "Chambre magmatique",
+      "acceptees": ["Chambre magmatique", "La chambre magmatique"],
+      "indices": [
+        "Je me trouve en profondeur, sous le volcan.",
+        "Une roche fondue chargée de gaz s'accumule en moi.",
+        "Une cheminée part de moi et monte jusqu'au cratère."
+      ],
+      "explication": "Le magma est stocké dans la chambre magmatique, puis monte par la cheminée jusqu'au cratère."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Le trajet du magma jusqu'à la surface",
+      "etapes": [
+        "Des roches du manteau fondent partiellement",
+        "Le magma s'accumule dans la chambre magmatique",
+        "Moins dense que les roches voisines, il monte par la cheminée",
+        "Il sort par le cratère et devient de la lave"
+      ]
+    },
+    {
+      "titre": "Le déroulement d'une éruption explosive",
+      "etapes": [
+        "La lave est visqueuse et riche en gaz",
+        "Les gaz restent piégés et la pression monte",
+        "Les gaz s'échappent brutalement",
+        "Des cendres et des blocs sont projetés"
+      ]
+    }
+  ]
+}

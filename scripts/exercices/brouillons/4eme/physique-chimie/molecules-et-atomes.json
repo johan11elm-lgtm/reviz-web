@@ -1,0 +1,174 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "La molécule d'eau",
+      "detail": "Une molécule de formule H₂O : 2 atomes d'hydrogène et 1 atome d'oxygène.",
+      "cartes": [
+        "Une molécule de formule H₂O",
+        "Une molécule de 2 atomes d'hydrogène et 1 d'oxygène",
+        "Un modèle : une boule rouge et deux boules blanches",
+        "Une formule où le petit 2 compte des atomes d'hydrogène",
+        "Une formule dont l'atome d'oxygène n'a pas d'indice"
+      ]
+    },
+    {
+      "nom": "La molécule de dioxygène",
+      "detail": "Une molécule de formule O₂ : 2 atomes d'oxygène, un corps pur simple.",
+      "cartes": [
+        "Une molécule de formule O₂",
+        "Un modèle fait de deux boules rouges",
+        "Une molécule de seulement 2 atomes en tout",
+        "Un corps pur simple, formé d'une seule sorte d'atome",
+        "Une molécule de l'air, avec celle du diazote"
+      ]
+    },
+    {
+      "nom": "La molécule de dioxyde de carbone",
+      "detail": "Une molécule de formule CO₂ : 1 atome de carbone et 2 atomes d'oxygène.",
+      "cartes": [
+        "Une molécule de formule CO₂",
+        "Une molécule d'un atome de carbone et deux d'oxygène",
+        "Un modèle : une boule noire entre deux boules rouges",
+        "Une formule où le 2 ne s'applique pas au C",
+        "Une molécule de 3 atomes dont un seul de carbone"
+      ]
+    },
+    {
+      "nom": "La molécule de méthane",
+      "detail": "Une molécule de formule CH₄ : 1 atome de carbone et 4 atomes d'hydrogène.",
+      "cartes": [
+        "Une molécule de formule CH₄",
+        "Une molécule d'un atome de carbone et quatre d'hydrogène",
+        "Un modèle : une boule noire entourée de quatre boules blanches",
+        "Une molécule de 5 atomes en tout",
+        "Une formule où le petit 4 compte des atomes d'hydrogène"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "De quel type de matière s'agit-il ?",
+      "texte": "L'air contient surtout du dioxygène et du diazote, de formule [N₂].",
+      "choix": ["Un corps pur simple", "Un corps pur composé", "Un mélange"],
+      "bonne": 0,
+      "explication": "N₂ ne contient qu'une seule sorte d'atome (l'azote) : c'est un corps pur simple."
+    },
+    {
+      "consigne": "De quel type de matière s'agit-il ?",
+      "texte": "Quand le carbone brûle, il se forme [CO₂].",
+      "choix": ["Un corps pur simple", "Un corps pur composé", "Un mélange"],
+      "bonne": 1,
+      "explication": "CO₂ contient deux sortes d'atomes (carbone et oxygène) : c'est un corps pur composé."
+    },
+    {
+      "consigne": "De quel type de matière s'agit-il ?",
+      "texte": "Autour de toi, tu respires [l'air].",
+      "choix": ["Un corps pur simple", "Un corps pur composé", "Un mélange"],
+      "bonne": 2,
+      "explication": "L'air contient plusieurs sortes de molécules, surtout N₂ et O₂ : c'est un mélange."
+    },
+    {
+      "consigne": "De quel type de matière s'agit-il ?",
+      "texte": "Les fils électriques sont faits de [cuivre].",
+      "choix": ["Un corps pur simple", "Un corps pur composé", "Un mélange"],
+      "bonne": 0,
+      "explication": "Le cuivre est formé d'une seule sorte d'atome, le cuivre Cu : c'est un corps pur simple."
+    },
+    {
+      "consigne": "De quel type de matière s'agit-il ?",
+      "texte": "Le gaz de ville est surtout du méthane, de formule [CH₄].",
+      "choix": ["Un corps pur simple", "Un corps pur composé", "Un mélange"],
+      "bonne": 1,
+      "explication": "CH₄ contient deux sortes d'atomes (carbone et hydrogène) : c'est un corps pur composé."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Indice",
+      "acceptees": ["Indice", "L'indice", "Un indice"],
+      "indices": [
+        "Je suis un nombre.",
+        "On m'écrit tout petit, en bas à droite d'un symbole.",
+        "Je dis combien d'atomes d'une sorte contient la molécule, et quand je vaux 1, on ne m'écrit pas."
+      ],
+      "explication": "L'indice, écrit en bas à droite d'un symbole, donne le nombre d'atomes de cette sorte ; l'indice 1 ne s'écrit pas."
+    },
+    {
+      "reponse": "Corps pur simple",
+      "acceptees": ["Corps pur simple", "Un corps pur simple", "Corps simple"],
+      "indices": [
+        "Je suis une catégorie de matière.",
+        "Mes molécules, si j'en ai, ne contiennent qu'une seule sorte d'atome.",
+        "Le dioxygène O₂ et le diazote N₂ en sont des exemples."
+      ],
+      "explication": "Un corps pur simple est formé d'une seule sorte d'atome, comme O₂ ou N₂."
+    },
+    {
+      "reponse": "Molécule",
+      "acceptees": ["Molécule", "Une molécule", "La molécule", "Molécules"],
+      "indices": [
+        "Je suis extrêmement petite.",
+        "Je suis un assemblage d'atomes liés entre eux.",
+        "Je suis électriquement neutre, et ma formule dit quels atomes me composent."
+      ],
+      "explication": "Une molécule est un assemblage d'atomes liés entre eux, électriquement neutre ; sa formule donne la nature et le nombre de ses atomes."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "Combien d'atomes contiennent 3 molécules de dioxyde de carbone CO₂ ?",
+      "reponse": 9,
+      "unite": "atomes",
+      "tolerance": 0,
+      "explication": "Une molécule CO₂ contient 1 + 2 = 3 atomes, donc 3 × 3 = 9 atomes."
+    },
+    {
+      "question": "Combien d'atomes d'oxygène contiennent 5 molécules d'eau H₂O ?",
+      "reponse": 5,
+      "unite": "atomes",
+      "tolerance": 0,
+      "explication": "Dans H₂O, l'oxygène n'a pas d'indice : 1 atome O par molécule, donc 5 × 1 = 5 atomes."
+    },
+    {
+      "question": "Un mélange contient 4 molécules de dioxygène O₂ et 2 molécules de diazote N₂. Combien d'atomes contient-il en tout ?",
+      "reponse": 12,
+      "unite": "atomes",
+      "tolerance": 0,
+      "explication": "4 × 2 = 8 atomes d'oxygène et 2 × 2 = 4 atomes d'azote : 8 + 4 = 12 atomes."
+    },
+    {
+      "question": "Combien d'atomes de carbone contiennent 2 molécules de butane C₄H₁₀ et 3 molécules de méthane CH₄ ?",
+      "reponse": 11,
+      "unite": "atomes",
+      "tolerance": 0,
+      "explication": "2 × 4 = 8 atomes de carbone dans le butane et 3 × 1 = 3 dans le méthane : 8 + 3 = 11 atomes."
+    },
+    {
+      "question": "Combien d'atomes d'hydrogène contiennent 2 molécules d'eau H₂O et 1 molécule de méthane CH₄ ?",
+      "reponse": 8,
+      "unite": "atomes",
+      "tolerance": 0,
+      "explication": "2 × 2 = 4 atomes H dans l'eau et 1 × 4 = 4 dans le méthane : 4 + 4 = 8 atomes."
+    },
+    {
+      "question": "Combien de molécules de dioxygène O₂ contiennent en tout 14 atomes d'oxygène ?",
+      "reponse": 7,
+      "unite": "molécules",
+      "tolerance": 0,
+      "explication": "Chaque molécule O₂ contient 2 atomes d'oxygène, donc 14 ÷ 2 = 7 molécules."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Écrire une formule à partir d'un modèle moléculaire",
+      "etapes": [
+        "On reconnaît chaque atome à la couleur de sa boule",
+        "On compte les boules de chaque couleur",
+        "On écrit les symboles côte à côte",
+        "On place chaque nombre en indice, sans écrire l'indice 1"
+      ]
+    }
+  ]
+}

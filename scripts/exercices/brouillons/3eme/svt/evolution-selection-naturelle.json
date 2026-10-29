@@ -1,0 +1,188 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Les mutations",
+      "detail": "Des modifications de l'ADN qui créent de nouveaux allèles et donc de la diversité.",
+      "cartes": [
+        "Modification aléatoire et rare de l'ADN",
+        "Elles créent de nouveaux allèles",
+        "Elles sont la source de la diversité génétique",
+        "Elles peuvent donner un caractère nouveau",
+        "Grâce à elles, les individus d'une population diffèrent un peu"
+      ]
+    },
+    {
+      "nom": "La sélection naturelle",
+      "detail": "Le tri des variations par le milieu : les individus avantagés survivent et se reproduisent davantage.",
+      "cartes": [
+        "Sur les troncs noircis, les phalènes sombres sont moins mangées",
+        "Les individus au caractère avantageux se reproduisent davantage",
+        "L'antibiotique tue les bactéries sensibles, les résistantes se multiplient",
+        "Le mécanisme proposé par Darwin en 1859",
+        "Elle trie les variations qui existent déjà"
+      ]
+    },
+    {
+      "nom": "La dérive génétique",
+      "detail": "Une variation de la fréquence des allèles due au hasard, surtout dans les petites populations.",
+      "cartes": [
+        "Un allèle disparaît par hasard dans une petite population",
+        "Elle agit surtout dans les petites populations",
+        "La fréquence d'un allèle varie sans lien avec un avantage",
+        "Par accident, les rares porteurs d'un allèle disparaissent",
+        "Un allèle peut devenir fréquent par simple hasard"
+      ]
+    },
+    {
+      "nom": "Les extinctions d'espèces",
+      "detail": "La disparition brutale de nombreuses espèces lors d'une crise biologique.",
+      "cartes": [
+        "Disparition brutale de nombreuses espèces",
+        "La fin des dinosaures non aviens",
+        "Les trilobites, nombreux autrefois, n'existent plus aujourd'hui",
+        "Elles surviennent lors de crises biologiques",
+        "Elles modifient la biodiversité en supprimant des espèces"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "la forme sombre majoritaire chez les phalènes",
+      "carte": "Des troncs d'arbres noircis par la pollution",
+      "role": "cause",
+      "explication": "Sur des troncs noirs, les papillons sombres sont mieux camouflés que les clairs."
+    },
+    {
+      "fait": "la forme sombre majoritaire chez les phalènes",
+      "carte": "Des oiseaux qui repèrent moins les papillons sombres",
+      "role": "cause",
+      "explication": "Moins mangés, les papillons sombres survivent plus souvent."
+    },
+    {
+      "fait": "la forme sombre majoritaire chez les phalènes",
+      "carte": "Des papillons sombres qui laissent plus de descendants",
+      "role": "cause",
+      "explication": "Ils transmettent leurs allèles à plus de descendants : la forme sombre devient de plus en plus fréquente."
+    },
+    {
+      "fait": "la crise biologique d'il y a 66 millions d'années",
+      "carte": "La disparition des dinosaures non aviens",
+      "role": "consequence",
+      "explication": "Cette crise biologique a fait disparaître les dinosaures non aviens."
+    },
+    {
+      "fait": "la crise biologique d'il y a 66 millions d'années",
+      "carte": "La disparition de nombreuses autres espèces",
+      "role": "consequence",
+      "explication": "Cette crise a aussi fait disparaître de nombreuses autres espèces."
+    }
+  ],
+  "etiquettes": [
+    {
+      "consigne": "Quel phénomène le groupe en couleur décrit-il ?",
+      "texte": "Dans une population de quelques individus, [un allèle disparaît parce que ses rares porteurs meurent par accident].",
+      "choix": ["Mutation", "Sélection naturelle", "Dérive génétique"],
+      "bonne": 2,
+      "explication": "L'allèle disparaît par hasard, sans désavantage : c'est la dérive génétique."
+    },
+    {
+      "consigne": "Quel phénomène le groupe en couleur décrit-il ?",
+      "texte": "[Une modification de l'ADN d'une bactérie] la rend résistante à un antibiotique.",
+      "choix": ["Mutation", "Sélection naturelle", "Dérive génétique"],
+      "bonne": 0,
+      "explication": "Une modification rare et aléatoire de l'ADN qui crée un nouvel allèle est une mutation."
+    },
+    {
+      "consigne": "Quel phénomène le groupe en couleur décrit-il ?",
+      "texte": "Sur les troncs noircis par la pollution, [les papillons sombres sont moins mangés] par les oiseaux et se reproduisent davantage.",
+      "choix": ["Mutation", "Sélection naturelle", "Dérive génétique"],
+      "bonne": 1,
+      "explication": "Le milieu avantage les papillons sombres, qui survivent et se reproduisent davantage : c'est la sélection naturelle."
+    },
+    {
+      "consigne": "Quel phénomène le groupe en couleur décrit-il ?",
+      "texte": "[L'antibiotique tue les bactéries sensibles] : les résistantes survivent et se multiplient.",
+      "choix": ["Mutation", "Sélection naturelle", "Dérive génétique"],
+      "bonne": 1,
+      "explication": "L'antibiotique trie les bactéries : seules les résistantes survivent. C'est de la sélection naturelle."
+    },
+    {
+      "consigne": "Quel phénomène le groupe en couleur décrit-il ?",
+      "texte": "Dans une petite population isolée, [la fréquence d'un allèle augmente] alors qu'il n'apporte aucun avantage.",
+      "choix": ["Mutation", "Sélection naturelle", "Dérive génétique"],
+      "bonne": 2,
+      "explication": "Sans avantage, la fréquence d'un allèle ne varie que par hasard : c'est la dérive génétique."
+    },
+    {
+      "consigne": "Quel phénomène le groupe en couleur décrit-il ?",
+      "texte": "Chez un papillon, [un nouvel allèle apparaît] dans une cellule, sans que l'animal en ait eu besoin.",
+      "choix": ["Mutation", "Sélection naturelle", "Dérive génétique"],
+      "bonne": 0,
+      "explication": "Les nouveaux allèles apparaissent par mutation, au hasard : le besoin de l'animal n'y change rien."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Charles Darwin",
+      "acceptees": ["Charles Darwin", "Darwin"],
+      "indices": [
+        "Je suis un scientifique du XIXe siècle.",
+        "J'ai écrit De l'origine des espèces.",
+        "J'ai proposé la théorie de la sélection naturelle en 1859."
+      ],
+      "explication": "Charles Darwin propose la sélection naturelle en 1859 dans De l'origine des espèces."
+    },
+    {
+      "reponse": "Mutation",
+      "acceptees": ["Mutation", "Une mutation", "Les mutations"],
+      "indices": [
+        "Je suis rare.",
+        "Je suis une modification de l'ADN.",
+        "Je crée un nouvel allèle, au hasard."
+      ],
+      "explication": "Une mutation est une modification rare et aléatoire de l'ADN, source de nouveaux allèles."
+    },
+    {
+      "reponse": "Dérive génétique",
+      "acceptees": ["Dérive génétique", "La dérive génétique", "Dérive"],
+      "indices": [
+        "Je dépends du hasard.",
+        "Je modifie la fréquence des allèles.",
+        "J'agis surtout dans les petites populations, sans lien avec un avantage."
+      ],
+      "explication": "La dérive génétique est la variation au hasard de la fréquence des allèles, surtout dans les petites populations."
+    },
+    {
+      "reponse": "Fossile",
+      "acceptees": ["Fossile", "Un fossile", "Fossiles", "Les fossiles"],
+      "indices": [
+        "Je suis un reste ou une trace d'être vivant.",
+        "Je suis conservé dans les roches.",
+        "Grâce à moi, on connaît les trilobites, qui n'existent plus."
+      ],
+      "explication": "Les fossiles, conservés dans les roches, montrent des espèces disparues et d'autres apparues."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Expliquer une évolution par sélection naturelle",
+      "etapes": [
+        "On repère la variation déjà présente dans la population",
+        "On repère ce qui avantage une forme : prédateur, pollution, antibiotique",
+        "On explique que la forme avantagée survit et laisse plus de descendants",
+        "On conclut : ses allèles deviennent plus fréquents au fil des générations"
+      ]
+    },
+    {
+      "titre": "La résistance des bactéries à un antibiotique",
+      "etapes": [
+        "Une mutation rend quelques bactéries résistantes à l'antibiotique",
+        "L'antibiotique tue les bactéries sensibles",
+        "Les bactéries résistantes survivent et se multiplient",
+        "Les bactéries résistantes deviennent majoritaires"
+      ]
+    }
+  ]
+}

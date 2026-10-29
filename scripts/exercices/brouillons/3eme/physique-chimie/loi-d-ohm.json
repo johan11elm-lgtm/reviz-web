@@ -1,0 +1,190 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Résistance de 100 Ω",
+      "detail": "Les mesures d'un dipôle ohmique dont le quotient tension ÷ intensité (en volts et en ampères) vaut 100 Ω.",
+      "cartes": [
+        "Tension de 6 V, courant de 60 mA",
+        "12 V aux bornes, 0,12 A dans le circuit",
+        "U = 2 V et I = 20 mA",
+        "Tension de 9 V, courant de 90 mA",
+        "0,5 V aux bornes, 5 mA dans le circuit"
+      ]
+    },
+    {
+      "nom": "Résistance de 200 Ω",
+      "detail": "Les mesures d'un dipôle ohmique dont le quotient tension ÷ intensité (en volts et en ampères) vaut 200 Ω.",
+      "cartes": [
+        "Tension de 6 V, courant de 30 mA",
+        "10 V aux bornes, 0,05 A dans le circuit",
+        "U = 4 V et I = 20 mA",
+        "Tension de 9 V, courant de 45 mA",
+        "12 V aux bornes, 60 mA dans le circuit"
+      ]
+    },
+    {
+      "nom": "Résistance de 500 Ω",
+      "detail": "Les mesures d'un dipôle ohmique dont le quotient tension ÷ intensité (en volts et en ampères) vaut 500 Ω.",
+      "cartes": [
+        "Tension de 5 V, courant de 10 mA",
+        "12 V aux bornes, 24 mA dans le circuit",
+        "U = 6 V et I = 12 mA",
+        "Tension de 9 V, courant de 18 mA",
+        "10 V aux bornes, 0,02 A dans le circuit"
+      ]
+    },
+    {
+      "nom": "Résistance de 1 000 Ω",
+      "detail": "Les mesures d'un dipôle ohmique dont le quotient tension ÷ intensité (en volts et en ampères) vaut 1 000 Ω.",
+      "cartes": [
+        "Tension de 12 V, courant de 12 mA",
+        "5 V aux bornes, 5 mA dans le circuit",
+        "U = 9 V et I = 9 mA",
+        "Tension de 3 V, courant de 0,003 A",
+        "1,5 V aux bornes, 1,5 mA dans le circuit"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Comment utilise-t-on l'appareil qui mesure directement ce qui est en couleur ?",
+      "texte": "On veut mesurer [la tension aux bornes de la lampe].",
+      "choix": ["En série", "En dérivation", "Le dipôle étant retiré du circuit"],
+      "bonne": 1,
+      "explication": "Une tension se mesure avec un voltmètre branché en dérivation, aux bornes du dipôle."
+    },
+    {
+      "consigne": "Comment utilise-t-on l'appareil qui mesure directement ce qui est en couleur ?",
+      "texte": "On veut mesurer [l'intensité du courant dans le circuit].",
+      "choix": ["En série", "En dérivation", "Le dipôle étant retiré du circuit"],
+      "bonne": 0,
+      "explication": "Une intensité se mesure avec un ampèremètre branché en série, dans le circuit."
+    },
+    {
+      "consigne": "Comment utilise-t-on l'appareil qui mesure directement ce qui est en couleur ?",
+      "texte": "Sur l'établi, on veut mesurer [la résistance d'un conducteur ohmique].",
+      "choix": ["En série", "En dérivation", "Le dipôle étant retiré du circuit"],
+      "bonne": 2,
+      "explication": "Une résistance se mesure avec un ohmmètre, le dipôle étant retiré du circuit."
+    },
+    {
+      "consigne": "Comment utilise-t-on l'appareil qui mesure directement ce qui est en couleur ?",
+      "texte": "Pour vérifier la pile, on veut mesurer [la tension entre ses deux bornes].",
+      "choix": ["En série", "En dérivation", "Le dipôle étant retiré du circuit"],
+      "bonne": 1,
+      "explication": "Une tension se mesure avec un voltmètre branché en dérivation, entre les deux bornes."
+    },
+    {
+      "consigne": "Comment utilise-t-on l'appareil qui mesure directement ce qui est en couleur ?",
+      "texte": "Pour étudier la DEL, on veut mesurer [l'intensité qui la traverse].",
+      "choix": ["En série", "En dérivation", "Le dipôle étant retiré du circuit"],
+      "bonne": 0,
+      "explication": "Une intensité se mesure avec un ampèremètre branché en série, dans le circuit."
+    },
+    {
+      "consigne": "Comment utilise-t-on l'appareil qui mesure directement ce qui est en couleur ?",
+      "texte": "Avant de monter le circuit, on veut mesurer [la valeur d'une résistance en ohms].",
+      "choix": ["En série", "En dérivation", "Le dipôle étant retiré du circuit"],
+      "bonne": 2,
+      "explication": "Une résistance se mesure avec un ohmmètre, le dipôle étant retiré du circuit."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Ampèremètre",
+      "acceptees": ["Ampèremètre", "L'ampèremètre", "Un ampèremètre"],
+      "indices": [
+        "Je me trouve dans un circuit électrique.",
+        "Je me branche en série.",
+        "Je mesure l'intensité du courant."
+      ],
+      "explication": "L'ampèremètre mesure l'intensité du courant et se branche en série dans le circuit."
+    },
+    {
+      "reponse": "Ohmmètre",
+      "acceptees": ["Ohmmètre", "L'ohmmètre", "Un ohmmètre"],
+      "indices": [
+        "Je suis un appareil de mesure.",
+        "Je ne fonctionne que si le dipôle est retiré du circuit.",
+        "Je mesure une résistance."
+      ],
+      "explication": "L'ohmmètre mesure une résistance en ohms, le dipôle étant retiré du circuit."
+    },
+    {
+      "reponse": "Effet Joule",
+      "acceptees": ["Effet Joule", "L'effet Joule", "Joule"],
+      "indices": [
+        "Je suis un phénomène physique.",
+        "Je concerne un dipôle traversé par un courant.",
+        "Je suis l'échauffement de ce dipôle."
+      ],
+      "explication": "L'effet Joule est l'échauffement d'un dipôle traversé par un courant."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "Une résistance de 220 Ω est traversée par un courant de 0,05 A. Quelle est la tension à ses bornes ?",
+      "reponse": 11,
+      "unite": "V",
+      "tolerance": 0,
+      "explication": "U = R × I = 220 × 0,05 = 11 V."
+    },
+    {
+      "question": "Aux bornes d'une résistance, on mesure une tension de 9 V et une intensité de 30 mA. Quelle est la valeur de la résistance ?",
+      "reponse": 300,
+      "unite": "Ω",
+      "tolerance": 0,
+      "explication": "30 mA = 0,03 A, donc R = U ÷ I = 9 ÷ 0,03 = 300 Ω."
+    },
+    {
+      "question": "Un dipôle ohmique de 500 Ω est soumis à une tension de 12 V. Quelle intensité le traverse, en milliampères ?",
+      "reponse": 24,
+      "unite": "mA",
+      "tolerance": 0,
+      "explication": "I = U ÷ R = 12 ÷ 500 = 0,024 A = 24 mA."
+    },
+    {
+      "question": "Une résistance de 2,2 kΩ est traversée par un courant de 3 mA. Quelle est la tension à ses bornes ?",
+      "reponse": 6.6,
+      "unite": "V",
+      "tolerance": 0,
+      "explication": "2,2 kΩ = 2 200 Ω et 3 mA = 0,003 A, donc U = R × I = 2 200 × 0,003 = 6,6 V."
+    },
+    {
+      "question": "Deux résistances en série sont alimentées par un générateur de 9 V. Aux bornes de la première, on mesure 3,5 V. Quelle est la tension aux bornes de la seconde ?",
+      "reponse": 5.5,
+      "unite": "V",
+      "tolerance": 0,
+      "explication": "En série, les tensions s'additionnent : U = U₁ + U₂, donc U₂ = 9 − 3,5 = 5,5 V."
+    },
+    {
+      "question": "Deux lampes sont branchées en dérivation. Les intensités dans leurs branches valent 0,15 A et 0,25 A. Quelle est l'intensité dans la branche principale ?",
+      "reponse": 0.4,
+      "unite": "A",
+      "tolerance": 0,
+      "explication": "En dérivation, les intensités s'additionnent : I = I₁ + I₂ = 0,15 + 0,25 = 0,4 A."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Tracer la caractéristique d'un dipôle",
+      "etapes": [
+        "Brancher l'ampèremètre en série et le voltmètre en dérivation",
+        "Mesurer U et I pour plusieurs valeurs de la tension",
+        "Placer les points de mesure dans un repère",
+        "Tracer la courbe de U en fonction de I"
+      ]
+    },
+    {
+      "titre": "Calculer la tension pour R = 100 Ω et I = 0,05 A",
+      "etapes": [
+        "Écrire la formule U = R × I",
+        "Remplacer R par 100 Ω et I par 0,05 A",
+        "Calculer 100 × 0,05 = 5",
+        "Conclure : la tension vaut 5 V"
+      ]
+    }
+  ]
+}

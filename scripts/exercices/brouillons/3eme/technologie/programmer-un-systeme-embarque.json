@@ -1,0 +1,203 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Les capteurs d'un système",
+      "detail": "Ils mesurent ou détectent quelque chose et envoient l'information à une entrée de la carte.",
+      "cartes": [
+        "Une photorésistance qui mesure la lumière",
+        "Une sonde de température",
+        "Un module à ultrasons qui mesure une distance",
+        "Un microphone qui reçoit les sons",
+        "Une sonde d'humidité plantée dans la terre"
+      ]
+    },
+    {
+      "nom": "Les actionneurs d'un système",
+      "detail": "Ils reçoivent un ordre d'une sortie de la carte et agissent : lumière, son ou mouvement.",
+      "cartes": [
+        "Une LED qui s'allume ou s'éteint",
+        "Un moteur qui fait tourner une roue",
+        "Un buzzer qui émet un son",
+        "Un servomoteur qui ouvre une barrière",
+        "Une pompe qui arrose une plante"
+      ]
+    },
+    {
+      "nom": "Les objets connectés",
+      "detail": "Ils échangent des données par un réseau avec un smartphone, une application ou un serveur.",
+      "cartes": [
+        "Un thermostat réglable depuis une application",
+        "Une caméra de surveillance consultable sur Internet",
+        "Une montre qui envoie ses pas à un smartphone",
+        "Une serrure qui s'ouvre avec une application",
+        "Une enceinte qui diffuse la musique d'Internet par Wi-Fi"
+      ]
+    },
+    {
+      "nom": "Les objets sans connexion",
+      "detail": "Ils fonctionnent seuls, sans échanger de données avec un autre appareil.",
+      "cartes": [
+        "Une lampe de poche à interrupteur",
+        "Un grille-pain mécanique",
+        "Une calculatrice sans aucune liaison",
+        "Un minuteur de cuisine à piles",
+        "Un réveil à aiguilles et à piles"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "le piratage d'une caméra connectée",
+      "carte": "Le mot de passe par défaut n'a jamais été changé",
+      "role": "cause",
+      "explication": "Un mot de passe par défaut est connu de tous : le garder ouvre l'accès à n'importe qui."
+    },
+    {
+      "fait": "le piratage d'une caméra connectée",
+      "carte": "Les mises à jour de sécurité n'ont jamais été faites",
+      "role": "cause",
+      "explication": "Sans mises à jour, les failles connues restent ouvertes et facilitent le piratage."
+    },
+    {
+      "fait": "le piratage d'une caméra connectée",
+      "carte": "Des inconnus peuvent regarder les images de la maison",
+      "role": "consequence",
+      "explication": "Une fois la caméra piratée, les images ne sont plus privées."
+    },
+    {
+      "fait": "le piratage d'une caméra connectée",
+      "carte": "Des données personnelles de la famille peuvent être volées",
+      "role": "consequence",
+      "explication": "Un objet piraté donne accès aux données personnelles qu'il collecte, que le RGPD cherche à protéger."
+    }
+  ],
+  "etiquettes": [
+    {
+      "consigne": "Quel est le rôle de l'élément en couleur ?",
+      "texte": "Dans un arrosage automatique, [la sonde d'humidité] indique à la carte que la terre est sèche.",
+      "choix": ["Capteur", "Actionneur", "Carte programmable"],
+      "bonne": 0,
+      "explication": "La sonde mesure l'humidité et envoie l'information à une entrée de la carte : c'est un capteur."
+    },
+    {
+      "consigne": "Quel est le rôle de l'élément en couleur ?",
+      "texte": "Pour ouvrir le portail, la carte commande [le servomoteur] qui pousse le battant.",
+      "choix": ["Capteur", "Actionneur", "Carte programmable"],
+      "bonne": 1,
+      "explication": "Le servomoteur reçoit un ordre d'une sortie de la carte et produit un mouvement : c'est un actionneur."
+    },
+    {
+      "consigne": "Quel est le rôle de l'élément en couleur ?",
+      "texte": "Dans une alarme, [la carte Arduino] lit le détecteur de mouvement puis décide de faire sonner le buzzer.",
+      "choix": ["Capteur", "Actionneur", "Carte programmable"],
+      "bonne": 2,
+      "explication": "La carte Arduino, pilotée par son microcontrôleur, lit les entrées, décide et commande les sorties."
+    },
+    {
+      "consigne": "Quel est le rôle de l'élément en couleur ?",
+      "texte": "Quand la terre est sèche, la carte met en marche [la pompe] qui arrose les plantes.",
+      "choix": ["Capteur", "Actionneur", "Carte programmable"],
+      "bonne": 1,
+      "explication": "La pompe agit sur ordre de la carte : c'est un actionneur relié à une sortie."
+    },
+    {
+      "consigne": "Quel est le rôle de l'élément en couleur ?",
+      "texte": "Dans un lampadaire, [la photorésistance] mesure la lumière du jour et prévient la carte.",
+      "choix": ["Capteur", "Actionneur", "Carte programmable"],
+      "bonne": 0,
+      "explication": "La photorésistance envoie à la carte une valeur qui varie avec la lumière : c'est un capteur."
+    },
+    {
+      "consigne": "Quel est le rôle de l'élément en couleur ?",
+      "texte": "Sur la maquette d'un feu tricolore, [la carte micro:bit] fait changer les LED toutes les dix secondes.",
+      "choix": ["Capteur", "Actionneur", "Carte programmable"],
+      "bonne": 2,
+      "explication": "La carte micro:bit exécute le programme et commande les LED : c'est la carte programmable."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Microcontrôleur",
+      "acceptees": ["Le microcontrôleur", "Un microcontrôleur", "Micro-contrôleur", "Microcontroleur"],
+      "indices": [
+        "Je suis un circuit électronique caché dans de nombreux objets.",
+        "Je contiens un processeur, de la mémoire et des entrées-sorties.",
+        "Je suis le cerveau d'une carte Arduino ou micro:bit : j'exécute son programme."
+      ],
+      "explication": "Le microcontrôleur réunit processeur, mémoire et entrées-sorties dans un seul circuit et exécute le programme de la carte."
+    },
+    {
+      "reponse": "RGPD",
+      "acceptees": ["Le RGPD", "GDPR", "Règlement général sur la protection des données"],
+      "indices": [
+        "Je suis un texte qui s'applique dans toute l'Europe.",
+        "On m'applique depuis 2018.",
+        "Je protège les données personnelles collectées, par exemple par les objets connectés."
+      ],
+      "explication": "Le RGPD est le règlement européen qui encadre la collecte et l'usage des données personnelles."
+    },
+    {
+      "reponse": "Bluetooth",
+      "acceptees": ["Le Bluetooth"],
+      "indices": [
+        "Je suis une technique de communication sans fil.",
+        "Ma portée est de quelques mètres seulement.",
+        "Je relie un casque ou une enceinte à un smartphone posé tout près."
+      ],
+      "explication": "Le Bluetooth relie des appareils proches, à quelques mètres, alors que le Wi-Fi relie au réseau local et à Internet."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "Un programme fait clignoter une LED en boucle : elle reste allumée 2 secondes, puis éteinte 3 secondes. Combien de cycles complets (allumée puis éteinte) la LED réalise-t-elle en 60 secondes ?",
+      "reponse": 12,
+      "unite": "cycles",
+      "tolerance": 0,
+      "explication": "Un cycle dure 2 + 3 = 5 s. En 60 s, il y a 60 ÷ 5 = 12 cycles."
+    },
+    {
+      "question": "À chaque tour de boucle, la carte lit ses entrées en 5 ms, décide en 3 ms, puis commande ses sorties en 2 ms. Combien de tours de boucle fait-elle en 1 seconde ?",
+      "reponse": 100,
+      "unite": "tours",
+      "tolerance": 0,
+      "explication": "Un tour dure 5 + 3 + 2 = 10 ms. Comme 1 s = 1 000 ms, la carte fait 1 000 ÷ 10 = 100 tours."
+    },
+    {
+      "question": "Un thermostat connecté envoie une mesure à l'application toutes les 10 minutes. Combien de mesures envoie-t-il pendant 24 heures ?",
+      "reponse": 144,
+      "unite": "mesures",
+      "tolerance": 0,
+      "explication": "En 1 heure, il envoie 60 ÷ 10 = 6 mesures. En 24 heures : 6 × 24 = 144 mesures."
+    },
+    {
+      "question": "Un servomoteur doit tourner de 90° pour ouvrir une barrière. Le programme le fait tourner de 5° à chaque tour de boucle. Combien de tours de boucle faut-il pour ouvrir la barrière en entier ?",
+      "reponse": 18,
+      "unite": "tours",
+      "tolerance": 0,
+      "explication": "Il faut 90 ÷ 5 = 18 tours de boucle."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Les étapes pour programmer une carte",
+      "etapes": [
+        "Écrire l'algorithme de ce que la carte doit faire",
+        "Programmer l'algorithme dans l'éditeur de l'ordinateur",
+        "Téléverser le programme dans la carte",
+        "Tester la carte pour vérifier son fonctionnement",
+        "Corriger le programme si besoin"
+      ]
+    },
+    {
+      "titre": "Une lampe qui s'allume quand la nuit tombe",
+      "etapes": [
+        "La photorésistance mesure la lumière ambiante",
+        "La carte lit la valeur sur son entrée analogique",
+        "Le programme décide s'il fait assez sombre",
+        "La carte envoie un ordre sur une sortie",
+        "La lampe reçoit l'ordre et s'allume"
+      ]
+    }
+  ]
+}

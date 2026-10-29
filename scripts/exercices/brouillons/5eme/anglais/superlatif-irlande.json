@@ -1,0 +1,138 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "On ajoute seulement -est",
+      "detail": "L'adjectif court ne change pas : on ajoute -est après lui (tall devient the tallest).",
+      "cartes": [
+        "The Shannon is the longest river in Ireland",
+        "This is the oldest castle in the town",
+        "It was the coldest day of the year",
+        "He is the tallest boy in the class",
+        "That is the greenest field in the valley"
+      ]
+    },
+    {
+      "nom": "On ajoute seulement -st",
+      "detail": "L'adjectif court se termine déjà par un e : on ajoute juste -st (nice devient the nicest).",
+      "cartes": [
+        "This is the nicest café in Dublin",
+        "That is the largest lake in the region",
+        "This is the safest beach for children",
+        "She has the cutest puppy in the street",
+        "He lives in the closest house to the sea"
+      ]
+    },
+    {
+      "nom": "On double la consonne finale",
+      "detail": "L'adjectif court se termine par une voyelle et une seule consonne : on double la consonne avant -est (big devient the biggest).",
+      "cartes": [
+        "Dublin is the biggest city in Ireland",
+        "It was the hottest day of the summer",
+        "It was the saddest film of the year",
+        "He is the thinnest boy in the team",
+        "Yesterday was the wettest day of the week"
+      ]
+    },
+    {
+      "nom": "Le y devient i",
+      "detail": "L'adjectif court se termine par un y : le y devient i avant -est (happy devient the happiest).",
+      "cartes": [
+        "She is the happiest girl in the class",
+        "This is the funniest film of the year",
+        "That is the prettiest village in Ireland",
+        "It is the busiest street in the city",
+        "My brother is the noisiest boy in the family"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Comment ce superlatif est-il formé ?",
+      "texte": "This is [the best] café in Dublin.",
+      "choix": ["Adjectif court : the … -est", "Adjectif long : the most …", "Superlatif irrégulier"],
+      "bonne": 2,
+      "explication": "Good est irrégulier : son superlatif est the best, et non the goodest ni the most good."
+    },
+    {
+      "consigne": "Comment ce superlatif est-il formé ?",
+      "texte": "The Giant's Causeway is [the most spectacular] place in Northern Ireland.",
+      "choix": ["Adjectif court : the … -est", "Adjectif long : the most …", "Superlatif irrégulier"],
+      "bonne": 1,
+      "explication": "Spectacular est un adjectif long : on le place après the most, et il ne change pas."
+    },
+    {
+      "consigne": "Comment ce superlatif est-il formé ?",
+      "texte": "The Shannon is [the longest] river in Ireland.",
+      "choix": ["Adjectif court : the … -est", "Adjectif long : the most …", "Superlatif irrégulier"],
+      "bonne": 0,
+      "explication": "Long est un adjectif court : the + long + -est."
+    },
+    {
+      "consigne": "Comment ce superlatif est-il formé ?",
+      "texte": "That café is [the worst] in town!",
+      "choix": ["Adjectif court : the … -est", "Adjectif long : the most …", "Superlatif irrégulier"],
+      "bonne": 2,
+      "explication": "Bad est irrégulier : son superlatif est the worst, et non the baddest ni the most bad."
+    },
+    {
+      "consigne": "Comment ce superlatif est-il formé ?",
+      "texte": "Killarney is one of [the most beautiful] places in Ireland.",
+      "choix": ["Adjectif court : the … -est", "Adjectif long : the most …", "Superlatif irrégulier"],
+      "bonne": 1,
+      "explication": "Beautiful est un adjectif long : the most beautiful."
+    },
+    {
+      "consigne": "Comment ce superlatif est-il formé ?",
+      "texte": "Dublin is [the biggest] city in Ireland.",
+      "choix": ["Adjectif court : the … -est", "Adjectif long : the most …", "Superlatif irrégulier"],
+      "bonne": 0,
+      "explication": "Big est un adjectif court : on double le g et on ajoute -est, the biggest."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Shannon",
+      "acceptees": ["Shannon", "The Shannon", "Le Shannon"],
+      "indices": [
+        "Je suis un cours d'eau.",
+        "Je traverse l'Irlande du nord au centre, jusqu'à la côte ouest.",
+        "Je suis le plus long fleuve d'Irlande."
+      ],
+      "explication": "Le Shannon est le plus long fleuve d'Irlande : the longest river in Ireland."
+    },
+    {
+      "reponse": "Belfast",
+      "acceptees": ["Belfast"],
+      "indices": [
+        "Je suis une ville.",
+        "Je suis une capitale, mais pas celle de la République d'Irlande.",
+        "Je suis la capitale de l'Irlande du Nord, qui fait partie du Royaume-Uni."
+      ],
+      "explication": "Belfast est la capitale de l'Irlande du Nord, tandis que Dublin est celle de la République d'Irlande."
+    },
+    {
+      "reponse": "Shamrock",
+      "acceptees": ["Shamrock", "Le trèfle", "Trèfle"],
+      "indices": [
+        "Je suis un symbole de l'Irlande.",
+        "Je suis une plante à trois feuilles.",
+        "On me porte pour la fête nationale du 17 mars."
+      ],
+      "explication": "Le shamrock (trèfle) est un symbole de l'Irlande ; on le porte le 17 mars, pour St Patrick's Day."
+    },
+    {
+      "reponse": "Emerald Isle",
+      "acceptees": ["Emerald Isle", "The Emerald Isle", "Emerald Island", "L'île d'Émeraude", "Île d'Émeraude"],
+      "indices": [
+        "Je suis un surnom donné à un pays.",
+        "Je décris les paysages très verts de ce pays.",
+        "En anglais, mon nom contient celui d'une pierre précieuse verte."
+      ],
+      "explication": "L'Irlande s'appelle the Emerald Isle, l'île d'Émeraude, à cause de ses paysages très verts."
+    }
+  ],
+  "calculs": [],
+  "etapes": []
+}

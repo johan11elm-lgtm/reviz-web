@@ -1,0 +1,184 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Calculs égaux à 16",
+      "detail": "Des écritures et des problèmes dont le résultat est 16.",
+      "cartes": [
+        "Le carré de 4",
+        "2 × 2³",
+        "7 + 3²",
+        "(1 + 3)²",
+        "Pour x = 2, la valeur de 4x²"
+      ]
+    },
+    {
+      "nom": "Calculs égaux à 27",
+      "detail": "Des écritures et des problèmes dont le résultat est 27.",
+      "cartes": [
+        "Trois au cube",
+        "Le volume en cm³ d'un cube de 3 cm d'arête",
+        "(2 + 1)³",
+        "5² + 2",
+        "2 × 3² + 9"
+      ]
+    },
+    {
+      "nom": "Calculs égaux à 36",
+      "detail": "Des écritures et des problèmes dont le résultat est 36.",
+      "cartes": [
+        "6 × 6",
+        "(2 × 3)²",
+        "4 × 3²",
+        "L'aire en cm² d'un carré de 6 cm de côté",
+        "9 + 3³"
+      ]
+    },
+    {
+      "nom": "Calculs égaux à 49",
+      "detail": "Des écritures et des problèmes dont le résultat est 49.",
+      "cartes": [
+        "Sept au carré",
+        "(3 + 4)²",
+        "2 × 5² − 1",
+        "40 + 3²",
+        "Pour x = 7, la valeur de x²"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Quelle grandeur le passage en couleur mesure-t-il ?",
+      "texte": "Pour un carré de 6 cm de côté, on trouve [36 cm²].",
+      "choix": ["Une longueur", "Une aire", "Un volume"],
+      "bonne": 1,
+      "explication": "36 cm² est exprimé en cm² : c'est une aire, ici celle du carré (6² = 36)."
+    },
+    {
+      "consigne": "Quelle grandeur le passage en couleur mesure-t-il ?",
+      "texte": "Pour un cube de 3 cm d'arête, on trouve [27 cm³].",
+      "choix": ["Une longueur", "Une aire", "Un volume"],
+      "bonne": 2,
+      "explication": "27 cm³ est exprimé en cm³ : c'est un volume, celui du cube (3³ = 27)."
+    },
+    {
+      "consigne": "Quelle grandeur le passage en couleur mesure-t-il ?",
+      "texte": "Un cube d'arête [3 cm] a des faces carrées de 9 cm².",
+      "choix": ["Une longueur", "Une aire", "Un volume"],
+      "bonne": 0,
+      "explication": "L'arête d'un cube est un segment : 3 cm est une longueur."
+    },
+    {
+      "consigne": "Quelle grandeur le passage en couleur mesure-t-il ?",
+      "texte": "Un carré de côté 7 cm recouvre [49 cm²] de la table.",
+      "choix": ["Une longueur", "Une aire", "Un volume"],
+      "bonne": 1,
+      "explication": "49 cm² est exprimé en cm² : c'est une aire (7² = 49)."
+    },
+    {
+      "consigne": "Quelle grandeur le passage en couleur mesure-t-il ?",
+      "texte": "Un cube d'arête 10 cm contient [1 000 cm³].",
+      "choix": ["Une longueur", "Une aire", "Un volume"],
+      "bonne": 2,
+      "explication": "1 000 cm³ est exprimé en cm³ : c'est un volume (10³ = 1 000)."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Exposant",
+      "acceptees": ["Exposant", "L'exposant", "Un exposant"],
+      "indices": [
+        "Je suis un petit nombre écrit en haut à droite d'un autre nombre.",
+        "Je dis combien de facteurs égaux on multiplie entre eux.",
+        "Dans 5³, c'est moi le 3."
+      ],
+      "explication": "L'exposant indique combien de fois on multiplie le nombre par lui-même : 5³ = 5 × 5 × 5."
+    },
+    {
+      "reponse": "Cube",
+      "acceptees": ["Cube", "Le cube", "Un cube"],
+      "indices": [
+        "Je suis un solide.",
+        "J'ai six faces, toutes des carrés identiques.",
+        "Mon volume se calcule avec a³, où a est la longueur de mon arête."
+      ],
+      "explication": "Le volume d'un cube d'arête a vaut a × a × a = a³."
+    },
+    {
+      "reponse": "Carré",
+      "acceptees": ["Carré", "Le carré", "Un carré"],
+      "indices": [
+        "Je suis une figure plane à quatre côtés.",
+        "Mes quatre côtés ont la même longueur et mes quatre angles sont droits.",
+        "Mon aire vaut c², où c est la longueur de mon côté."
+      ],
+      "explication": "L'aire d'un carré de côté c vaut c × c = c²."
+    },
+    {
+      "reponse": "Parenthèses",
+      "acceptees": ["Parenthèses", "Les parenthèses", "Parenthèse", "Une parenthèse"],
+      "indices": [
+        "Je suis un signe qui va toujours par deux : un qui s'ouvre et un qui se ferme.",
+        "Ce qui est entre mes deux signes se calcule en premier.",
+        "Grâce à moi, (3 + 4)² vaut 49, alors que 3 + 4² vaut 19."
+      ],
+      "explication": "Les parenthèses sont prioritaires : (3 + 4)² = 7² = 49, mais 3 + 4² = 3 + 16 = 19."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "Calcule 4 + 3² × 2.",
+      "reponse": 22,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "Le carré d'abord : 3² = 9. Puis la multiplication : 9 × 2 = 18. Enfin l'addition : 4 + 18 = 22."
+    },
+    {
+      "question": "Un carré a un côté de 9 cm. Quelle est son aire, en cm² ?",
+      "reponse": 81,
+      "unite": "cm²",
+      "tolerance": 0,
+      "explication": "Aire = c² = 9² = 9 × 9 = 81 cm²."
+    },
+    {
+      "question": "Un cube a une arête de 5 cm. Quel est son volume, en cm³ ?",
+      "reponse": 125,
+      "unite": "cm³",
+      "tolerance": 0,
+      "explication": "Volume = a³ = 5 × 5 × 5 = 25 × 5 = 125 cm³."
+    },
+    {
+      "question": "Pour x = 5, calcule 3x² − 10.",
+      "reponse": 65,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "3x² = 3 × 5² = 3 × 25 = 75. Puis 75 − 10 = 65."
+    },
+    {
+      "question": "Calcule (8 − 3)² + 2³.",
+      "reponse": 33,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "La parenthèse d'abord : 8 − 3 = 5, donc 5² = 25. Puis 2³ = 8. Enfin 25 + 8 = 33."
+    },
+    {
+      "question": "Pour x = 3, calcule x³ + 2x².",
+      "reponse": 45,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "x³ = 3³ = 27 et 2x² = 2 × 3² = 2 × 9 = 18. Donc 27 + 18 = 45."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Calculer 2x² + 1 pour x = 4",
+      "etapes": [
+        "On remplace x par 4 : 2 × 4² + 1",
+        "On calcule le carré : 4² = 16",
+        "On effectue la multiplication : 2 × 16 = 32",
+        "On termine par l'addition : 32 + 1 = 33"
+      ]
+    }
+  ]
+}

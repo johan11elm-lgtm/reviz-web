@@ -1,0 +1,166 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Une habitude",
+      "detail": "Ce qu'on fait régulièrement se dit au présent simple, souvent avec un adverbe de fréquence ou every + jour.",
+      "cartes": [
+        "I usually walk to school",
+        "My brother plays football every Saturday",
+        "She always does her homework",
+        "We sometimes have lunch at the canteen",
+        "He often goes to the library after class"
+      ]
+    },
+    {
+      "nom": "Une action en cours",
+      "detail": "Ce qui se passe au moment où l'on parle se dit avec am / is / are + V-ing, souvent avec now, Look! ou Listen!.",
+      "cartes": [
+        "Look! They are reading right now",
+        "Listen! The teacher is talking to the headteacher",
+        "She is writing an email at the moment",
+        "Look! The students are running in the playground",
+        "At the moment, we are waiting for the bus"
+      ]
+    },
+    {
+      "nom": "Un état ou un goût",
+      "detail": "Les verbes d'état (know, like, want, love, understand) restent au présent simple, jamais en be + -ing.",
+      "cartes": [
+        "I know the answer",
+        "She likes maths",
+        "He wants a new school bag",
+        "We understand the lesson",
+        "My friends love the school canteen"
+      ]
+    },
+    {
+      "nom": "Une vérité générale ou un horaire",
+      "detail": "Un fait toujours vrai ou un horaire fixe se disent au présent simple.",
+      "cartes": [
+        "The Earth goes round the Sun",
+        "Water freezes at zero degrees",
+        "The bus leaves at 7.45",
+        "The train to London arrives at 6.15",
+        "The sun rises in the east"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Quelle forme est en couleur ?",
+      "texte": "My brother [plays] football every Saturday.",
+      "choix": [
+        "Présent simple affirmatif",
+        "Négation au présent simple",
+        "Question au présent simple",
+        "Présent en be + -ing"
+      ],
+      "bonne": 0,
+      "explication": "« plays » est le présent simple à la 3e personne du singulier (-s), pour une habitude."
+    },
+    {
+      "consigne": "Quelle forme est en couleur ?",
+      "texte": "She [doesn't like] maths.",
+      "choix": [
+        "Présent simple affirmatif",
+        "Négation au présent simple",
+        "Question au présent simple",
+        "Présent en be + -ing"
+      ],
+      "bonne": 1,
+      "explication": "« doesn't + base verbale » est la négation du présent simple avec she."
+    },
+    {
+      "consigne": "Quelle forme est en couleur ?",
+      "texte": "[Does he walk] to school?",
+      "choix": [
+        "Présent simple affirmatif",
+        "Négation au présent simple",
+        "Question au présent simple",
+        "Présent en be + -ing"
+      ],
+      "bonne": 2,
+      "explication": "« Does + sujet + base verbale » est la question au présent simple avec he."
+    },
+    {
+      "consigne": "Quelle forme est en couleur ?",
+      "texte": "Listen! The teacher [is talking] to the headteacher.",
+      "choix": [
+        "Présent simple affirmatif",
+        "Négation au présent simple",
+        "Question au présent simple",
+        "Présent en be + -ing"
+      ],
+      "bonne": 3,
+      "explication": "« is talking » est am / is / are + V-ing : une action en cours, annoncée par Listen!."
+    },
+    {
+      "consigne": "Quelle forme est en couleur ?",
+      "texte": "I [always do] my homework.",
+      "choix": [
+        "Présent simple affirmatif",
+        "Négation au présent simple",
+        "Question au présent simple",
+        "Présent en be + -ing"
+      ],
+      "bonne": 0,
+      "explication": "« always do » est le présent simple affirmatif : l'adverbe de fréquence se place avant le verbe."
+    },
+    {
+      "consigne": "Quelle forme est en couleur ?",
+      "texte": "Look! They [are reading] right now.",
+      "choix": [
+        "Présent simple affirmatif",
+        "Négation au présent simple",
+        "Question au présent simple",
+        "Présent en be + -ing"
+      ],
+      "bonne": 3,
+      "explication": "« are reading » est are + V-ing : Look! et right now annoncent une action en cours."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Freshman",
+      "acceptees": [
+        "Freshman",
+        "Freshmen",
+        "A freshman"
+      ],
+      "indices": [
+        "Je suis un élève, mais pas en France.",
+        "Je vais dans une high school aux États-Unis.",
+        "Je suis le nom spécial que les Américains donnent à un élève de 9th grade."
+      ],
+      "explication": "Aux États-Unis, un élève de 9th grade, première année de high school, est un freshman."
+    },
+    {
+      "reponse": "GCSE",
+      "acceptees": [
+        "GCSE",
+        "The GCSE",
+        "GCSEs"
+      ],
+      "indices": [
+        "Je suis un examen, pas un cours.",
+        "Je concerne les élèves du Royaume-Uni, pas ceux de France.",
+        "Les élèves de 14-15 ans, en Year 10, me passeront à 16 ans."
+      ],
+      "explication": "Les élèves britanniques passent les examens du GCSE à 16 ans."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Construire une question au présent simple",
+      "etapes": [
+        "On choisit Do ou Does selon le sujet",
+        "On place le sujet juste après Do ou Does",
+        "On met le verbe à la base verbale, sans -s",
+        "On termine par un point d'interrogation"
+      ]
+    }
+  ]
+}

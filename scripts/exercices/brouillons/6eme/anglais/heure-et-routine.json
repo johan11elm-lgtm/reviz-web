@@ -1,0 +1,158 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "On ajoute seulement -s",
+      "detail": "Après la plupart des verbes, et après voyelle + y, la 3e personne prend seulement -s : gets, plays.",
+      "cartes": [
+        "He gets up at seven",
+        "She plays tennis on Saturday",
+        "My brother walks to school",
+        "My mum works in a school",
+        "Tom reads a book at night"
+      ]
+    },
+    {
+      "nom": "On ajoute -es",
+      "detail": "Après s, sh, ch, x ou o, la 3e personne prend -es : watches, washes.",
+      "cartes": [
+        "She watches TV after dinner",
+        "My father washes the dishes",
+        "Lucy brushes her teeth",
+        "Our teacher teaches English",
+        "School finishes at four"
+      ]
+    },
+    {
+      "nom": "Le y devient -ies",
+      "detail": "Après consonne + y, le y devient -ies à la 3e personne : studies, tries.",
+      "cartes": [
+        "My brother studies maths in the evening",
+        "She tries to get up early",
+        "Leo carries his schoolbag",
+        "A plane flies over my house",
+        "The baby cries a lot"
+      ]
+    },
+    {
+      "nom": "Une forme irrégulière",
+      "detail": "Have est irrégulier : he has, she has, jamais haves.",
+      "cartes": [
+        "She has breakfast at half past seven",
+        "My mum has a shower in the morning",
+        "He has lunch at school",
+        "Anna has dinner at seven",
+        "My sister has a snack at four"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Comment se situe l'heure en couleur ?",
+      "texte": "We have lunch at [quarter to one].",
+      "choix": ["Heure pile", "Après l'heure", "Avant l'heure"],
+      "bonne": 2,
+      "explication": "To compte vers l'heure qui arrive : quarter to one = 12 h 45, avant une heure."
+    },
+    {
+      "consigne": "Comment se situe l'heure en couleur ?",
+      "texte": "I get up at [seven o'clock].",
+      "choix": ["Heure pile", "Après l'heure", "Avant l'heure"],
+      "bonne": 0,
+      "explication": "O'clock désigne l'heure pile : seven o'clock = 7 h."
+    },
+    {
+      "consigne": "Comment se situe l'heure en couleur ?",
+      "texte": "She has a snack at [quarter past four].",
+      "choix": ["Heure pile", "Après l'heure", "Avant l'heure"],
+      "bonne": 1,
+      "explication": "Past compte les minutes après l'heure : quarter past four = 4 h 15."
+    },
+    {
+      "consigne": "Comment se situe l'heure en couleur ?",
+      "texte": "He goes to bed at [ten to nine].",
+      "choix": ["Heure pile", "Après l'heure", "Avant l'heure"],
+      "bonne": 2,
+      "explication": "To compte vers l'heure qui arrive : ten to nine = 8 h 50, avant neuf heures."
+    },
+    {
+      "consigne": "Comment se situe l'heure en couleur ?",
+      "texte": "School starts at [ten past eight].",
+      "choix": ["Heure pile", "Après l'heure", "Avant l'heure"],
+      "bonne": 1,
+      "explication": "Past compte les minutes après l'heure : ten past eight = 8 h 10."
+    },
+    {
+      "consigne": "Comment se situe l'heure en couleur ?",
+      "texte": "My brother gets up at [nine o'clock].",
+      "choix": ["Heure pile", "Après l'heure", "Avant l'heure"],
+      "bonne": 0,
+      "explication": "O'clock désigne l'heure pile : nine o'clock = 9 h."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Quarter",
+      "acceptees": ["Quarter", "A quarter", "Un quart", "Le quart"],
+      "indices": [
+        "Je suis un mot anglais pour parler de l'heure.",
+        "Je suis une fraction d'heure.",
+        "Je vaux quinze minutes."
+      ],
+      "explication": "Quarter veut dire le quart : quarter past seven = 7 h 15, quarter to eight = 7 h 45."
+    },
+    {
+      "reponse": "O'clock",
+      "acceptees": ["O'clock", "Oclock", "O clock"],
+      "indices": [
+        "Je suis un mot anglais qui s'écrit avec une apostrophe.",
+        "On me place juste après un nombre pour dire l'heure.",
+        "Avec moi, on dit qu'il est l'heure pile."
+      ],
+      "explication": "O'clock désigne l'heure pile : It's three o'clock = Il est trois heures."
+    },
+    {
+      "reponse": "Finally",
+      "acceptees": ["Finally"],
+      "indices": [
+        "Je suis un mot de liaison.",
+        "Je sers à raconter une journée dans l'ordre.",
+        "Je viens en dernier et je veux dire « enfin »."
+      ],
+      "explication": "Finally veut dire enfin : on le place à la fin d'un récit, après first, then et after that."
+    },
+    {
+      "reponse": "Has",
+      "acceptees": ["Has"],
+      "indices": [
+        "Je suis une forme verbale.",
+        "On m'emploie avec he, she ou it.",
+        "Au présent, je suis le verbe « avoir » à la 3e personne du singulier."
+      ],
+      "explication": "Have devient has à la 3e personne du singulier : she has breakfast, jamais she haves."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Une journée, du matin au soir",
+      "etapes": [
+        "I get up at half past six",
+        "I have breakfast at quarter past seven",
+        "I go to school at ten to eight",
+        "I have lunch at half past twelve",
+        "I go to bed at nine in the evening"
+      ]
+    },
+    {
+      "titre": "Raconter sa journée dans l'ordre",
+      "etapes": [
+        "First, I get up",
+        "Then I have a shower",
+        "After that, I have breakfast",
+        "Finally, I go to school"
+      ]
+    }
+  ]
+}

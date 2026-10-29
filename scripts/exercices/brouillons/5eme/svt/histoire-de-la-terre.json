@@ -1,0 +1,180 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Le principe de superposition",
+      "detail": "Dans des couches non déformées, on ordonne les dépôts du bas (ancien) vers le haut (récent).",
+      "cartes": [
+        "Le sable sous l'argile s'est déposé en premier",
+        "Une couche est plus ancienne que celle qui la recouvre",
+        "Le dépôt du sommet d'une pile est le dernier arrivé",
+        "Ordonner les couches du bas vers le haut",
+        "Plus on descend dans la pile, plus c'est ancien"
+      ]
+    },
+    {
+      "nom": "Le principe de recoupement",
+      "detail": "Ce qui traverse ou coupe des couches est plus récent qu'elles.",
+      "cartes": [
+        "Une faille coupe des couches, elle est plus récente",
+        "Une intrusion traverse A, B et C, elle est arrivée après",
+        "Ce qui traverse une couche est plus récent qu'elle",
+        "Placer une faille juste après la plus récente couche coupée",
+        "Une cassure décale des couches déjà déposées"
+      ]
+    },
+    {
+      "nom": "Les fossiles stratigraphiques",
+      "detail": "Des fossiles d'espèces à vie courte et très répandues servent à comparer l'âge de couches éloignées.",
+      "cartes": [
+        "Une espèce ayant vécu peu de temps sur une large zone",
+        "Même fossile dans deux couches éloignées, même âge",
+        "Certaines ammonites servent de repère pour comparer des couches",
+        "Une espèce disparue vite donne un repère précis",
+        "Un fossile d'espèce très durable donnerait une date imprécise"
+      ]
+    },
+    {
+      "nom": "La datation absolue",
+      "detail": "Elle donne l'âge d'une roche en années, grâce à la radioactivité naturelle.",
+      "cartes": [
+        "Mesurer la radioactivité d'une roche pour trouver son âge",
+        "Une roche est datée de 120 millions d'années",
+        "Établir que la Terre a environ 4,6 milliards d'années",
+        "Chiffrer en années la limite entre deux ères",
+        "Savoir combien d'années séparent deux événements"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Quel principe permet d'affirmer la phrase en couleur ?",
+      "texte": "Dans une falaise, une couche de sable non déformée est sous une couche d'argile. [Le sable s'est déposé avant l'argile.]",
+      "choix": ["Superposition", "Recoupement", "Fossile stratigraphique", "Datation absolue"],
+      "bonne": 0,
+      "explication": "La couche du bas est la plus ancienne : c'est le principe de superposition."
+    },
+    {
+      "consigne": "Quel principe permet d'affirmer la phrase en couleur ?",
+      "texte": "Une faille traverse trois couches empilées. [La faille est plus récente que ces trois couches.]",
+      "choix": ["Superposition", "Recoupement", "Fossile stratigraphique", "Datation absolue"],
+      "bonne": 1,
+      "explication": "Ce qui recoupe des couches est plus récent qu'elles : c'est le principe de recoupement."
+    },
+    {
+      "consigne": "Quel principe permet d'affirmer la phrase en couleur ?",
+      "texte": "Des couches situées sur deux continents contiennent la même ammonite. [Ces couches ont le même âge.]",
+      "choix": ["Superposition", "Recoupement", "Fossile stratigraphique", "Datation absolue"],
+      "bonne": 2,
+      "explication": "Une espèce qui a vécu peu de temps sur une large zone date et relie des couches éloignées."
+    },
+    {
+      "consigne": "Quelle méthode permet d'affirmer la phrase en couleur ?",
+      "texte": "Un laboratoire mesure la radioactivité naturelle d'une roche. [Cette roche a 120 millions d'années.]",
+      "choix": ["Superposition", "Recoupement", "Fossile stratigraphique", "Datation absolue"],
+      "bonne": 3,
+      "explication": "Un âge donné en années s'obtient par la datation absolue, qui utilise la radioactivité."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Ammonite",
+      "acceptees": ["Ammonite", "Ammonites", "Les ammonites", "Une ammonite"],
+      "indices": [
+        "Je suis un animal aujourd'hui disparu.",
+        "On me retrouve dans des couches de même âge, très éloignées les unes des autres.",
+        "J'ai disparu il y a 66 millions d'années, en même temps que les dinosaures non aviens."
+      ],
+      "explication": "Certaines ammonites sont de bons fossiles stratigraphiques et ont disparu à la fin du Crétacé."
+    },
+    {
+      "reponse": "Crise biologique",
+      "acceptees": ["Crise biologique", "Une crise biologique", "Extinction", "Extinction de masse", "Crise"],
+      "indices": [
+        "Je ne dure pas longtemps à l'échelle géologique.",
+        "Je fais disparaître un grand nombre d'espèces.",
+        "Je sers de limite entre deux ères."
+      ],
+      "explication": "Les crises biologiques, comme celles de 252 Ma et de 66 Ma, séparent les ères."
+    },
+    {
+      "reponse": "Paléozoïque",
+      "acceptees": ["Paléozoïque", "Le Paléozoïque", "Paleozoique"],
+      "indices": [
+        "Je suis une ère de l'histoire de la Terre.",
+        "Dans mes mers vivaient les trilobites et les premiers poissons.",
+        "Je me termine il y a 252 millions d'années, avant l'ère des dinosaures."
+      ],
+      "explication": "Le Paléozoïque s'étend d'environ 540 à 252 Ma, avant le Mésozoïque."
+    },
+    {
+      "reponse": "Datation absolue",
+      "acceptees": ["Datation absolue", "La datation absolue", "Absolue"],
+      "indices": [
+        "Je donne un âge en années.",
+        "Je m'appuie sur la radioactivité naturelle de certaines roches.",
+        "C'est grâce à moi qu'on sait que la Terre a environ 4,6 milliards d'années."
+      ],
+      "explication": "La datation absolue chiffre l'âge des roches, de la Terre et des limites entre les ères."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "Le Mésozoïque commence il y a 252 Ma (millions d'années) et se termine il y a 66 Ma. Quelle est sa durée ?",
+      "reponse": 186,
+      "unite": "Ma",
+      "tolerance": 0,
+      "explication": "252 − 66 = 186 millions d'années."
+    },
+    {
+      "question": "Le Paléozoïque va d'environ 540 Ma à 252 Ma (millions d'années). Quelle est sa durée ?",
+      "reponse": 288,
+      "unite": "Ma",
+      "tolerance": 0,
+      "explication": "540 − 252 = 288 millions d'années."
+    },
+    {
+      "question": "La Terre a environ 4,6 milliards d'années. Combien cela fait-il de millions d'années ?",
+      "reponse": 4600,
+      "unite": "millions d'années",
+      "tolerance": 0,
+      "explication": "1 milliard = 1 000 millions, donc 4,6 × 1 000 = 4 600 millions d'années."
+    },
+    {
+      "question": "Les dinosaures non aviens disparaissent il y a 66 Ma et Homo sapiens apparaît il y a 0,3 Ma (300 000 ans). Combien de millions d'années séparent ces deux événements ?",
+      "reponse": 65.7,
+      "unite": "Ma",
+      "tolerance": 0,
+      "explication": "66 − 0,3 = 65,7 millions d'années."
+    },
+    {
+      "question": "La Terre a 4,6 Ga (milliards d'années) et les plus anciennes traces de vie ont 3,5 Ga. Combien de milliards d'années séparent la formation de la Terre de ces traces de vie ?",
+      "reponse": 1.1,
+      "unite": "Ga",
+      "tolerance": 0,
+      "explication": "4,6 − 3,5 = 1,1 milliard d'années."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Reconstituer l'histoire d'une coupe géologique",
+      "etapes": [
+        "On repère les couches et on vérifie qu'elles ne sont pas déformées",
+        "On les numérote de la plus ancienne à la plus récente",
+        "On place chaque faille après la plus récente couche qu'elle coupe",
+        "On écrit la chronologie complète, du plus ancien au plus récent"
+      ]
+    },
+    {
+      "titre": "Des grands événements de l'histoire de la Terre",
+      "etapes": [
+        "Formation de la Terre",
+        "Premières traces de vie : des bactéries",
+        "Crise biologique de la fin du Permien",
+        "Crise biologique de la fin du Crétacé",
+        "Apparition d'Homo sapiens"
+      ]
+    }
+  ]
+}

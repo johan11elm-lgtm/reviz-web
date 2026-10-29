@@ -1,0 +1,180 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Contre l'unité de temps",
+      "detail": "Des situations où l'action dépasse les 24 heures permises au théâtre classique.",
+      "cartes": [
+        "L'action s'étend sur plusieurs années",
+        "Le premier acte a lieu en mars, le dernier en août",
+        "On voit les saisons défiler au cours de la pièce",
+        "Un enfant devient adulte entre le début et la fin",
+        "Les cinq actes se déroulent sur toute une semaine"
+      ]
+    },
+    {
+      "nom": "Contre l'unité de lieu",
+      "detail": "Des situations où l'action change de lieu au lieu de rester dans un seul.",
+      "cartes": [
+        "Le premier acte se passe à Paris, le deuxième à Rome",
+        "L'action passe d'un palais à un champ de bataille lointain",
+        "La pièce se joue dans cinq pays différents",
+        "Le décor change cinq fois, de la forêt à la mer",
+        "Les personnages voyagent d'une capitale à l'autre"
+      ]
+    },
+    {
+      "nom": "Contre l'unité d'action",
+      "detail": "Des situations où la pièce suit plusieurs intrigues au lieu d'une seule intrigue principale.",
+      "cartes": [
+        "Deux intrigues sans rapport se déroulent en parallèle",
+        "Un personnage secondaire vit une histoire sans lien avec l'intrigue",
+        "Chaque acte ouvre une intrigue sans lien avec la précédente",
+        "Trois couples vivent des histoires qui ne se croisent jamais",
+        "Le héros poursuit trois buts qui n'ont aucun rapport"
+      ]
+    },
+    {
+      "nom": "Contre la bienséance",
+      "detail": "Des scènes de mort ou de violence montrées au public, ce que la règle classique interdit.",
+      "cartes": [
+        "Un personnage est poignardé sous les yeux du public",
+        "Un duel mortel est joué sur la scène",
+        "Des cadavres couverts de sang restent sur scène",
+        "Un personnage est battu à coups de bâton devant tous",
+        "Un héros se suicide à la vue de tous"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "la mort du Comte",
+      "carte": "Le Comte donne un soufflet à don Diègue",
+      "role": "cause",
+      "explication": "Le soufflet blesse l'honneur de la famille de Rodrigue et mène au duel."
+    },
+    {
+      "fait": "la mort du Comte",
+      "carte": "Don Diègue est trop âgé pour se venger lui-même",
+      "role": "cause",
+      "explication": "Trop vieux pour se battre, don Diègue compte sur son fils pour laver l'affront."
+    },
+    {
+      "fait": "la mort du Comte",
+      "carte": "Rodrigue choisit l'honneur plutôt que son amour",
+      "role": "cause",
+      "explication": "Après ses stances, Rodrigue choisit de venger son père et tue le Comte en duel."
+    },
+    {
+      "fait": "la mort du Comte",
+      "carte": "Chimène demande au roi la punition de Rodrigue",
+      "role": "consequence",
+      "explication": "Chimène perd son père : elle réclame la punition de celui qui l'a tué."
+    },
+    {
+      "fait": "la mort du Comte",
+      "carte": "Chimène est déchirée entre son amour et son devoir",
+      "role": "consequence",
+      "explication": "Elle doit réclamer la mort de celui qu'elle aime, comme le montre son « Va, je ne te hais point »."
+    }
+  ],
+  "etiquettes": [
+    {
+      "consigne": "Comment appelle-t-on le passage en couleur ?",
+      "texte": "Resté seul sur la scène, Rodrigue [dit son dilemme à voix haute, en strophes] : ce sont les stances.",
+      "choix": ["Monologue", "Aparté", "Tirade", "Stichomythie"],
+      "bonne": 0,
+      "explication": "Rodrigue est seul en scène et dit ses pensées : c'est un monologue."
+    },
+    {
+      "consigne": "Comment appelle-t-on le passage en couleur ?",
+      "texte": "Devant le roi, un courtisan s'incline, puis [murmure : « Quel menteur ! »] sans que le roi l'entende.",
+      "choix": ["Monologue", "Aparté", "Tirade", "Stichomythie"],
+      "bonne": 1,
+      "explication": "Le courtisan parle en présence d'autres personnages, mais ceux-ci sont censés ne pas l'entendre : c'est un aparté."
+    },
+    {
+      "consigne": "Comment appelle-t-on le passage en couleur ?",
+      "texte": "Le Comte et Rodrigue s'affrontent : [– À moi, Comte, deux mots. – Parle. – Ôte-moi d'un doute.]",
+      "choix": ["Monologue", "Aparté", "Tirade", "Stichomythie"],
+      "bonne": 3,
+      "explication": "Les répliques sont très courtes et s'enchaînent vite : c'est une stichomythie."
+    },
+    {
+      "consigne": "Comment appelle-t-on le passage en couleur ?",
+      "texte": "Devant toute la cour, un seigneur [parle longuement, sans être interrompu, pendant plusieurs dizaines de vers].",
+      "choix": ["Monologue", "Aparté", "Tirade", "Stichomythie"],
+      "bonne": 2,
+      "explication": "C'est une longue réplique dite devant d'autres personnages : une tirade. Un monologue se dit seul en scène."
+    },
+    {
+      "consigne": "Quel genre de pièce le passage en couleur décrit-il ?",
+      "texte": "Corneille écrit Le Cid, [une pièce au sujet sérieux dont la fin n'est pas forcément malheureuse].",
+      "choix": ["Une tragédie", "Une comédie", "Une tragi-comédie"],
+      "bonne": 2,
+      "explication": "Un sujet sérieux avec une fin heureuse ou ouverte : c'est une tragi-comédie, comme Le Cid. Une tragédie finit mal."
+    },
+    {
+      "consigne": "Quel genre de pièce le passage en couleur décrit-il ?",
+      "texte": "Molière écrit surtout [des pièces qui font rire et corrigent les mœurs].",
+      "choix": ["Une tragédie", "Une comédie", "Une tragi-comédie"],
+      "bonne": 1,
+      "explication": "La comédie vise à faire rire et à corriger les mœurs."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Rodrigue",
+      "acceptees": ["Rodrigue", "Don Rodrigue", "Le Cid"],
+      "indices": [
+        "Je vis dans l'Espagne médiévale.",
+        "Je dois choisir entre mon amour pour Chimène et l'honneur de mon père.",
+        "J'ai tué le Comte en duel après avoir dit mon dilemme dans des stances."
+      ],
+      "explication": "Rodrigue choisit l'honneur et tue le Comte, père de Chimène, pour venger son père."
+    },
+    {
+      "reponse": "Chimène",
+      "acceptees": ["Chimène"],
+      "indices": [
+        "Je suis une jeune femme noble de l'Espagne médiévale.",
+        "Mon père est tué en duel par celui que j'aime.",
+        "Je demande au roi sa punition, mais je lui dis : « Va, je ne te hais point »."
+      ],
+      "explication": "Chimène doit réclamer la mort de Rodrigue, mais elle l'aime encore : c'est la litote « Va, je ne te hais point »."
+    },
+    {
+      "reponse": "Don Diègue",
+      "acceptees": ["Don Diègue", "Diègue"],
+      "indices": [
+        "Je suis un vieux seigneur de l'Espagne médiévale.",
+        "Un autre noble m'a donné un soufflet.",
+        "Trop âgé pour me venger, je demande à mon fils : « Rodrigue, as-tu du cœur ? »"
+      ],
+      "explication": "Don Diègue, père de Rodrigue, reçoit un soufflet du Comte et demande à son fils de laver l'affront."
+    },
+    {
+      "reponse": "Bienséance",
+      "acceptees": ["La bienséance"],
+      "indices": [
+        "Je suis une règle du théâtre classique.",
+        "Je défends de montrer sur scène ce qui choque, comme la mort ou la violence.",
+        "À cause de moi, la mort du Comte est racontée et non jouée."
+      ],
+      "explication": "La bienséance interdit de montrer la mort ou la violence sur scène : le duel du Cid est raconté, pas joué."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Les grands moments de l'intrigue du Cid",
+      "etapes": [
+        "Le Comte donne un soufflet à don Diègue",
+        "Don Diègue demande à son fils de laver l'affront",
+        "Rodrigue hésite entre amour et honneur dans ses stances",
+        "Rodrigue tue le Comte en duel",
+        "Chimène demande au roi la punition de Rodrigue"
+      ]
+    }
+  ]
+}

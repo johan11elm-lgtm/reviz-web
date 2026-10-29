@@ -1,0 +1,172 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Les racines",
+      "detail": "Les racines puisent l'eau et les sels minéraux dans le sol grâce à leurs poils absorbants.",
+      "cartes": [
+        "Prélever nitrates et phosphates dans le sol",
+        "Des milliers de poils fins en contact avec le sol",
+        "Manchon de poils blancs visible sur une pousse de radis",
+        "Absorber l'eau du sol",
+        "Recevoir les sels minéraux apportés par les engrais"
+      ]
+    },
+    {
+      "nom": "Les stomates",
+      "detail": "Les stomates sont de petits orifices de la feuille où se font les échanges de gaz et la transpiration.",
+      "cartes": [
+        "Petits orifices de la feuille",
+        "Surtout sur la face inférieure des feuilles",
+        "Là où entre le dioxyde de carbone de l'air",
+        "Là où la vapeur d'eau quitte la plante",
+        "Orifices par où l'air pénètre dans la feuille"
+      ]
+    },
+    {
+      "nom": "Les parties vertes",
+      "detail": "Les parties vertes éclairées réalisent la photosynthèse grâce à la chlorophylle.",
+      "cartes": [
+        "Zones riches en chlorophylle",
+        "Lieu de fabrication de la matière organique à la lumière",
+        "Seules zones qui bleuissent à l'eau iodée après éclairement",
+        "Parties qui dégagent du dioxygène à la lumière",
+        "Leur couleur vient d'un pigment qui capte la lumière"
+      ]
+    },
+    {
+      "nom": "Les vaisseaux conducteurs",
+      "detail": "Les vaisseaux font circuler les deux sèves : la sève brute vers les feuilles et la sève élaborée vers tous les organes.",
+      "cartes": [
+        "Conduisent la sève brute des racines aux feuilles",
+        "Distribuent la sève élaborée à tous les organes",
+        "Les deux sèves circulent dans ces conduits",
+        "Amènent la matière organique aux fruits et aux fleurs",
+        "Conduits qui amènent l'eau et les sels aux feuilles"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "la photosynthèse",
+      "carte": "Un éclairement de la feuille",
+      "role": "cause",
+      "explication": "La photosynthèse ne se fait qu'à la lumière."
+    },
+    {
+      "fait": "la photosynthèse",
+      "carte": "Du dioxyde de carbone qui entre par les stomates",
+      "role": "cause",
+      "explication": "Le dioxyde de carbone de l'air est l'une des matières premières de la photosynthèse."
+    },
+    {
+      "fait": "la photosynthèse",
+      "carte": "De l'eau prélevée par les racines",
+      "role": "cause",
+      "explication": "L'eau est l'une des matières premières de la photosynthèse."
+    },
+    {
+      "fait": "la photosynthèse",
+      "carte": "Un rejet de dioxygène",
+      "role": "consequence",
+      "explication": "La photosynthèse produit de la matière organique et rejette du dioxygène."
+    },
+    {
+      "fait": "la photosynthèse",
+      "carte": "La fabrication de matière organique",
+      "role": "consequence",
+      "explication": "La plante fabrique sa matière organique à partir de matière minérale."
+    },
+    {
+      "fait": "la photosynthèse",
+      "carte": "De l'amidon stocké dans la feuille",
+      "role": "consequence",
+      "explication": "La matière organique fabriquée est stockée dans la feuille sous forme d'amidon."
+    }
+  ],
+  "etiquettes": [
+    {
+      "consigne": "Quel est le rôle de ce qui est en couleur ?",
+      "texte": "Sur la racine d'un radis, [les poils absorbants] sont très nombreux.",
+      "choix": ["Prélever l'eau et les sels minéraux", "Faire entrer le dioxyde de carbone", "Capter la lumière", "Stocker des réserves"],
+      "bonne": 0,
+      "explication": "Les poils absorbants prélèvent l'eau et les sels minéraux dans le sol."
+    },
+    {
+      "consigne": "Quel est le rôle de ce qui est en couleur ?",
+      "texte": "Sur la face inférieure d'une feuille, [les stomates] sont nombreux.",
+      "choix": ["Prélever l'eau et les sels minéraux", "Faire entrer le dioxyde de carbone", "Capter la lumière", "Stocker des réserves"],
+      "bonne": 1,
+      "explication": "Le dioxyde de carbone de l'air entre dans la feuille par les stomates."
+    },
+    {
+      "consigne": "Quel est le rôle de ce qui est en couleur ?",
+      "texte": "Une feuille est verte grâce à [la chlorophylle].",
+      "choix": ["Prélever l'eau et les sels minéraux", "Faire entrer le dioxyde de carbone", "Capter la lumière", "Stocker des réserves"],
+      "bonne": 2,
+      "explication": "La chlorophylle est le pigment vert qui capte la lumière pour la photosynthèse."
+    },
+    {
+      "consigne": "Quel est le rôle de ce qui est en couleur ?",
+      "texte": "La pomme de terre est [un tubercule] riche en amidon.",
+      "choix": ["Prélever l'eau et les sels minéraux", "Faire entrer le dioxyde de carbone", "Capter la lumière", "Stocker des réserves"],
+      "bonne": 3,
+      "explication": "Le tubercule met en réserve la matière organique fabriquée par les feuilles."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Stomate",
+      "acceptees": ["Stomate", "Stomates", "Un stomate", "Les stomates"],
+      "indices": [
+        "Je suis un tout petit orifice.",
+        "On me trouve surtout sur la face inférieure des feuilles.",
+        "Je laisse entrer le dioxyde de carbone et sortir la vapeur d'eau."
+      ],
+      "explication": "Les stomates sont les orifices de la feuille qui permettent les échanges de gaz."
+    },
+    {
+      "reponse": "Chlorophylle",
+      "acceptees": ["Chlorophylle", "La chlorophylle"],
+      "indices": [
+        "Je suis un pigment.",
+        "Je donne leur couleur verte aux feuilles.",
+        "Sans moi, la lumière ne peut pas être captée pour fabriquer de la matière organique."
+      ],
+      "explication": "La chlorophylle capte la lumière pour la photosynthèse."
+    },
+    {
+      "reponse": "Amidon",
+      "acceptees": ["Amidon", "L'amidon"],
+      "indices": [
+        "Je suis une matière organique de réserve.",
+        "On me trouve dans le tubercule de pomme de terre.",
+        "L'eau iodée me colore en bleu-noir."
+      ],
+      "explication": "L'amidon est la réserve que l'eau iodée révèle en bleu-noir."
+    },
+    {
+      "reponse": "Sève élaborée",
+      "acceptees": ["Sève élaborée", "La sève élaborée", "Élaborée", "Seve elaboree"],
+      "indices": [
+        "Je circule dans la plante.",
+        "Je contiens de l'eau et de la matière organique.",
+        "Je pars des feuilles vers tous les organes."
+      ],
+      "explication": "La sève élaborée distribue la matière organique fabriquée par les feuilles."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Montrer que la lumière est nécessaire à l'amidon",
+      "etapes": [
+        "On laisse la plante à l'obscurité pour vider ses feuilles d'amidon",
+        "On cache une partie d'une feuille avec un cache opaque",
+        "On éclaire la plante pendant plusieurs heures",
+        "On décolore la feuille puis on dépose de l'eau iodée",
+        "On observe : bleu-noir seulement dans la partie éclairée"
+      ]
+    }
+  ]
+}

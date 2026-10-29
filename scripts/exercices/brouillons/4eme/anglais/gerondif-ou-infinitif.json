@@ -1,0 +1,182 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Verbe de goût + V-ing",
+      "detail": "Enjoy, love, hate, can't stand et don't mind sont suivis d'un verbe en -ing.",
+      "cartes": [
+        "I enjoy reading comics",
+        "She can't stand eating cold soup",
+        "We love dancing at parties",
+        "He doesn't mind doing the washing-up",
+        "My brother hates getting up early"
+      ]
+    },
+    {
+      "nom": "Envie ou projet : to + verbe",
+      "detail": "Want, would like, decide, hope, plan et need sont suivis de to + base verbale.",
+      "cartes": [
+        "I want to play the guitar",
+        "She decided to learn French",
+        "We hope to win the match",
+        "I'd like to go to London",
+        "They plan to visit Dublin"
+      ]
+    },
+    {
+      "nom": "Préposition + V-ing",
+      "detail": "Après une préposition (at, of, about…), le verbe est toujours en -ing.",
+      "cartes": [
+        "She is good at drawing",
+        "I'm afraid of speaking in public",
+        "We are tired of waiting for the bus",
+        "He left without saying goodbye",
+        "Thank you for helping me"
+      ]
+    },
+    {
+      "nom": "V-ing sujet de la phrase",
+      "detail": "Quand une activité est le sujet de la phrase, le verbe prend la forme -ing.",
+      "cartes": [
+        "Reading is my favourite hobby",
+        "Swimming is good for your health",
+        "Dancing makes me feel happy",
+        "Playing chess takes a long time",
+        "Cooking with friends is great fun"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Quelle construction est utilisée dans le passage en couleur ?",
+      "texte": "She is [good at drawing].",
+      "choix": [
+        "Verbe de goût + V-ing",
+        "Envie ou projet : to + verbe",
+        "Préposition + V-ing",
+        "V-ing sujet de la phrase"
+      ],
+      "bonne": 2,
+      "explication": "« at » est une préposition : le verbe qui suit (drawing) est en -ing."
+    },
+    {
+      "consigne": "Quelle construction est utilisée dans le passage en couleur ?",
+      "texte": "We [hope to win] the match.",
+      "choix": [
+        "Verbe de goût + V-ing",
+        "Envie ou projet : to + verbe",
+        "Préposition + V-ing",
+        "V-ing sujet de la phrase"
+      ],
+      "bonne": 1,
+      "explication": "Hope est suivi de to + base verbale (to win), car on parle de ce qu'on espère faire."
+    },
+    {
+      "consigne": "Quelle construction est utilisée dans le passage en couleur ?",
+      "texte": "I [can't stand waiting] in a queue.",
+      "choix": [
+        "Verbe de goût + V-ing",
+        "Envie ou projet : to + verbe",
+        "Préposition + V-ing",
+        "V-ing sujet de la phrase"
+      ],
+      "bonne": 0,
+      "explication": "Can't stand est un verbe de goût : il est suivi d'un verbe en -ing (waiting)."
+    },
+    {
+      "consigne": "Quelle construction est utilisée dans le passage en couleur ?",
+      "texte": "[Running] makes me tired.",
+      "choix": [
+        "Verbe de goût + V-ing",
+        "Envie ou projet : to + verbe",
+        "Préposition + V-ing",
+        "V-ing sujet de la phrase"
+      ],
+      "bonne": 3,
+      "explication": "« Running » est le sujet de la phrase : une activité sujet prend la forme -ing."
+    },
+    {
+      "consigne": "Quelle construction est utilisée dans le passage en couleur ?",
+      "texte": "He [needs to practise] more.",
+      "choix": [
+        "Verbe de goût + V-ing",
+        "Envie ou projet : to + verbe",
+        "Préposition + V-ing",
+        "V-ing sujet de la phrase"
+      ],
+      "bonne": 1,
+      "explication": "Need est suivi de to + base verbale (to practise)."
+    },
+    {
+      "consigne": "Quelle construction est utilisée dans le passage en couleur ?",
+      "texte": "My sister [enjoys reading] comics.",
+      "choix": [
+        "Verbe de goût + V-ing",
+        "Envie ou projet : to + verbe",
+        "Préposition + V-ing",
+        "V-ing sujet de la phrase"
+      ],
+      "bonne": 0,
+      "explication": "Enjoy est un verbe de goût : il est toujours suivi d'un verbe en -ing (reading), jamais de to."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Enjoy",
+      "acceptees": [
+        "Enjoys",
+        "To enjoy"
+      ],
+      "indices": [
+        "Je suis un verbe de goût.",
+        "Je suis toujours suivi d'un verbe en -ing, jamais de to.",
+        "Je veux dire « prendre plaisir à »."
+      ],
+      "explication": "Enjoy se traduit par « prendre plaisir à » et est toujours suivi de V-ing : I enjoy swimming."
+    },
+    {
+      "reponse": "Can't stand",
+      "acceptees": [
+        "Cant stand",
+        "Cannot stand",
+        "Can not stand",
+        "Can't stand it"
+      ],
+      "indices": [
+        "Je suis une expression de goût, du côté négatif.",
+        "Je suis toujours suivi d'un verbe en -ing, comme dans « I ___ waiting ».",
+        "Je suis tout au bout de l'échelle des goûts, plus fort encore que hate."
+      ],
+      "explication": "Can't stand (ne pas supporter) est le plus négatif de l'échelle des goûts : I can't stand waiting."
+    },
+    {
+      "reponse": "Préposition",
+      "acceptees": [
+        "Une préposition",
+        "Prépositions",
+        "Preposition",
+        "Une preposition"
+      ],
+      "indices": [
+        "Je suis un petit mot invariable.",
+        "Dans good at, interested in, fond of ou keen on, je suis le mot qui suit l'adjectif.",
+        "Après moi, le verbe est toujours en -ing."
+      ],
+      "explication": "Après une préposition (at, in, of, on…), le verbe est toujours en -ing : I'm good at drawing."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "L'échelle des goûts, du plus positif au plus négatif",
+      "etapes": [
+        "I love dancing",
+        "I like dancing",
+        "I don't mind dancing",
+        "I hate dancing",
+        "I can't stand dancing"
+      ]
+    }
+  ]
+}

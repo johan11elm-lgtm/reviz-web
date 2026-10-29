@@ -1,0 +1,186 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Exprimer la cause",
+      "detail": "Because (suivi d'une phrase) et because of (suivi d'un nom) expliquent pourquoi quelque chose arrive.",
+      "cartes": [
+        "I'm tired because I played all night",
+        "We stayed at home because of the rain",
+        "She can't sleep because of the noise",
+        "He failed the test because he didn't revise",
+        "I was late because my bus broke down"
+      ]
+    },
+    {
+      "nom": "Exprimer la conséquence",
+      "detail": "So et that's why montrent le résultat de ce qui vient d'être dit.",
+      "cartes": [
+        "My phone was dead, so I couldn't call you",
+        "I was hungry, so I made a sandwich",
+        "Screens keep us awake. That's why we switch them off",
+        "It was too cold. That's why we went inside",
+        "The bus didn't come, so we walked to school"
+      ]
+    },
+    {
+      "nom": "Exprimer l'opposition",
+      "detail": "But, however et although opposent deux idées ou apportent une nuance.",
+      "cartes": [
+        "Social networks are useful. However, they can be dangerous",
+        "It's fun but it's addictive",
+        "Although he likes video games, he reads a lot",
+        "Although it was late, we kept talking",
+        "I like football, but I prefer tennis"
+      ]
+    },
+    {
+      "nom": "Ordonner et ajouter des arguments",
+      "detail": "Firstly, secondly, finally, moreover et also organisent les idées ou en ajoutent une.",
+      "cartes": [
+        "Firstly, screens help us learn new things",
+        "Secondly, they help us relax after school",
+        "Moreover, they let us chat with our friends",
+        "Finally, they keep us in touch with family",
+        "Screens are useful. Also, they are fun"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Quel rôle joue le connecteur en couleur ?",
+      "texte": "I can't sleep [because of] the noise.",
+      "choix": [
+        "Cause",
+        "Conséquence",
+        "Opposition",
+        "Ajout d'un argument"
+      ],
+      "bonne": 0,
+      "explication": "Because of (à cause de) introduit la cause, ici suivie d'un nom : the noise."
+    },
+    {
+      "consigne": "Quel rôle joue le connecteur en couleur ?",
+      "texte": "My phone was dead, [so] I couldn't call you.",
+      "choix": [
+        "Cause",
+        "Conséquence",
+        "Opposition",
+        "Ajout d'un argument"
+      ],
+      "bonne": 1,
+      "explication": "So (donc) introduit la conséquence : le téléphone est éteint, donc je n'ai pas pu appeler."
+    },
+    {
+      "consigne": "Quel rôle joue le connecteur en couleur ?",
+      "texte": "Social networks are useful. [However], they can be dangerous.",
+      "choix": [
+        "Cause",
+        "Conséquence",
+        "Opposition",
+        "Ajout d'un argument"
+      ],
+      "bonne": 2,
+      "explication": "However (cependant) oppose deux idées : utile d'un côté, dangereux de l'autre."
+    },
+    {
+      "consigne": "Quel rôle joue le connecteur en couleur ?",
+      "texte": "Screens are fun. [Moreover], they help us learn.",
+      "choix": [
+        "Cause",
+        "Conséquence",
+        "Opposition",
+        "Ajout d'un argument"
+      ],
+      "bonne": 3,
+      "explication": "Moreover (de plus) ajoute un deuxième argument qui va dans le même sens."
+    },
+    {
+      "consigne": "Quel rôle joue le connecteur en couleur ?",
+      "texte": "[Although] he likes his phone, he reads a lot.",
+      "choix": [
+        "Cause",
+        "Conséquence",
+        "Opposition",
+        "Ajout d'un argument"
+      ],
+      "bonne": 2,
+      "explication": "Although (bien que) exprime l'opposition entre aimer son téléphone et lire beaucoup."
+    },
+    {
+      "consigne": "Quel rôle joue le connecteur en couleur ?",
+      "texte": "Screens keep us awake. [That's why] we should switch them off before bed.",
+      "choix": [
+        "Cause",
+        "Conséquence",
+        "Opposition",
+        "Ajout d'un argument"
+      ],
+      "bonne": 1,
+      "explication": "That's why (c'est pourquoi) tire la conséquence de la phrase précédente."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "However",
+      "acceptees": [
+        "However,",
+        "Nevertheless"
+      ],
+      "indices": [
+        "Je suis un mot anglais qui sert à argumenter.",
+        "Je marque l'opposition entre deux idées.",
+        "Je me place en début de phrase, suivi d'une virgule, et je veux dire « cependant »."
+      ],
+      "explication": "However (cependant) oppose deux idées et se place en début de phrase, suivi d'une virgule."
+    },
+    {
+      "reponse": "That's why",
+      "acceptees": [
+        "That is why",
+        "Thats why"
+      ],
+      "indices": [
+        "Je suis une expression qui ouvre une nouvelle phrase.",
+        "Je tire une conclusion de ce qui vient d'être dit.",
+        "Je veux dire « c'est pourquoi »."
+      ],
+      "explication": "That's why (c'est pourquoi) introduit la conséquence dans une nouvelle phrase."
+    },
+    {
+      "reponse": "Because of",
+      "acceptees": [
+        "Due to",
+        "Owing to"
+      ],
+      "indices": [
+        "Je suis une expression qui explique pourquoi quelque chose arrive.",
+        "Je suis suivi d'un nom, pas d'un verbe conjugué.",
+        "Je veux dire « à cause de »."
+      ],
+      "explication": "Because of (à cause de) est suivi d'un nom : because of my phone."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Rédiger un court paragraphe argumenté",
+      "etapes": [
+        "Annonce ton opinion : In my opinion…",
+        "Donne deux arguments dans l'ordre : Firstly… Secondly…",
+        "Nuance avec un argument contraire : However…",
+        "Conclus avec Finally… ou That's why…"
+      ]
+    },
+    {
+      "titre": "Un paragraphe sur les écrans",
+      "etapes": [
+        "In my opinion, screens are useful",
+        "Firstly, they help us learn",
+        "Secondly, they help us relax",
+        "Finally, they keep us in touch with friends"
+      ]
+    }
+  ]
+}

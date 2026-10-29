@@ -1,0 +1,166 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Les métaux et alliages",
+      "detail": "Des matériaux qui conduisent l'électricité et la chaleur, comme le fer, l'acier, l'aluminium et le cuivre.",
+      "cartes": [
+        "Le fil de cuivre d'un câble électrique",
+        "Un clou en fer qui rouille sous la pluie",
+        "Un cadre de vélo en aluminium",
+        "Une canette en acier attirée par un aimant",
+        "Une statue en bronze"
+      ]
+    },
+    {
+      "nom": "Les matières plastiques",
+      "detail": "Des matériaux légers, isolants et faciles à mettre en forme, souvent fabriqués à partir du pétrole.",
+      "cartes": [
+        "La gaine isolante d'un câble électrique",
+        "Un tuyau de canalisation en PVC",
+        "Du polystyrène de calage dans un colis",
+        "Une bouteille d'eau légère et souple",
+        "Un sac fabriqué à partir de pétrole"
+      ]
+    },
+    {
+      "nom": "Les matériaux organiques",
+      "detail": "Des matériaux d'origine végétale ou animale, comme le bois, le coton, la laine et le cuir.",
+      "cartes": [
+        "Une poignée de casserole taillée dans du chêne",
+        "Un T-shirt fabriqué avec du coton",
+        "Un pull tricoté avec la toison d'un mouton",
+        "Des chaussures faites avec la peau d'un animal",
+        "Une feuille de papier issue de fibres de bois"
+      ]
+    },
+    {
+      "nom": "Les céramiques et minéraux",
+      "detail": "Des matériaux durs mais fragiles, comme le verre, la porcelaine, la terre cuite et le béton.",
+      "cartes": [
+        "Une vitre transparente, dure mais fragile",
+        "Une tasse en porcelaine",
+        "Un pot de fleurs en terre cuite",
+        "Un mur coulé en béton",
+        "Du carrelage de salle de bains"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "la poignée d'une casserole est en bois",
+      "carte": "Le bois conduit mal la chaleur",
+      "role": "cause",
+      "explication": "Le bois est un isolant thermique : c'est pour cette raison qu'on le choisit pour une poignée."
+    },
+    {
+      "fait": "la poignée d'une casserole est en bois",
+      "carte": "On peut la tenir sans se brûler",
+      "role": "consequence",
+      "explication": "Le bois conduit mal la chaleur : la poignée reste supportable à tenir, même quand la casserole est chaude."
+    },
+    {
+      "fait": "une bouteille en verre est recyclée",
+      "carte": "Elle a été triée dans le bon bac",
+      "role": "cause",
+      "explication": "Trier ses déchets selon les consignes facilite le recyclage."
+    },
+    {
+      "fait": "une bouteille en verre est recyclée",
+      "carte": "Sa matière est réutilisée pour fabriquer un nouvel objet",
+      "role": "consequence",
+      "explication": "Le recyclage réutilise la matière d'un objet usagé et économise des ressources."
+    }
+  ],
+  "etiquettes": [
+    {
+      "consigne": "Que montre le passage en couleur sur le matériau testé ?",
+      "texte": "On place un morceau de cuivre dans un circuit avec une pile et une lampe : [la lampe s'allume].",
+      "choix": ["Il est conducteur électrique", "Il est isolant électrique", "Il est attiré par un aimant", "Il n'est pas attiré par un aimant"],
+      "bonne": 0,
+      "explication": "Si la lampe brille, le courant passe : le matériau est conducteur."
+    },
+    {
+      "consigne": "Que montre le passage en couleur sur le matériau testé ?",
+      "texte": "On place un bout de plastique dans un circuit avec une pile et une lampe : [la lampe reste éteinte].",
+      "choix": ["Il est conducteur électrique", "Il est isolant électrique", "Il est attiré par un aimant", "Il n'est pas attiré par un aimant"],
+      "bonne": 1,
+      "explication": "Si la lampe reste éteinte, le courant ne passe pas : le matériau est isolant."
+    },
+    {
+      "consigne": "Que montre le passage en couleur sur le matériau testé ?",
+      "texte": "On approche un aimant d'une canette en acier : [la canette est attirée].",
+      "choix": ["Il est conducteur électrique", "Il est isolant électrique", "Il est attiré par un aimant", "Il n'est pas attiré par un aimant"],
+      "bonne": 2,
+      "explication": "L'acier contient du fer : il est attiré par un aimant."
+    },
+    {
+      "consigne": "Que montre le passage en couleur sur le matériau testé ?",
+      "texte": "On approche un aimant d'un morceau d'aluminium : [rien ne se passe, il n'est pas attiré].",
+      "choix": ["Il est conducteur électrique", "Il est isolant électrique", "Il est attiré par un aimant", "Il n'est pas attiré par un aimant"],
+      "bonne": 3,
+      "explication": "L'aluminium n'est pas attiré par un aimant : tous les métaux ne le sont pas."
+    },
+    {
+      "consigne": "Que montre le passage en couleur sur le matériau testé ?",
+      "texte": "Dans un circuit avec une pile et une lampe, Jules teste un fil de fer : [la lampe brille].",
+      "choix": ["Il est conducteur électrique", "Il est isolant électrique", "Il est attiré par un aimant", "Il n'est pas attiré par un aimant"],
+      "bonne": 0,
+      "explication": "La lampe brille : le courant passe dans le fer, qui est un métal conducteur."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Corrosion",
+      "acceptees": ["Corrosion", "La corrosion", "Rouille", "La rouille"],
+      "indices": [
+        "Je dégrade un métal.",
+        "Je me forme au contact de l'eau et de l'air.",
+        "Sur le fer, on m'appelle la rouille."
+      ],
+      "explication": "La corrosion est la dégradation d'un métal ; pour le fer, c'est la rouille, qui se forme au contact de l'eau et de l'air."
+    },
+    {
+      "reponse": "Composite",
+      "acceptees": ["Composite", "Un composite", "Composites", "Matériau composite", "Un matériau composite"],
+      "indices": [
+        "Je suis un assemblage de plusieurs matières.",
+        "On m'a associé de façon à cumuler les qualités de chacune.",
+        "La fibre de carbone et le contreplaqué sont deux exemples de moi."
+      ],
+      "explication": "Un composite associe plusieurs matériaux pour cumuler leurs qualités."
+    },
+    {
+      "reponse": "Matériau",
+      "acceptees": ["Matériau", "Un matériau", "Le matériau", "Matériaux"],
+      "indices": [
+        "Je suis ce dont un objet est fait.",
+        "Le bois, l'acier et le verre sont des exemples de moi.",
+        "Une table est un objet, et le bois est moi."
+      ],
+      "explication": "Un objet est une chose fabriquée ; le matériau est la matière dont il est fait."
+    },
+    {
+      "reponse": "Recyclage",
+      "acceptees": ["Recyclage", "Le recyclage", "Recycler"],
+      "indices": [
+        "Je permets d'économiser des ressources.",
+        "Je réutilise la matière d'objets usagés.",
+        "Grâce à moi, une bouteille en verre triée peut redevenir une bouteille."
+      ],
+      "explication": "Le recyclage réutilise la matière des objets usagés et économise des ressources."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Tester la conductivité électrique d'un matériau",
+      "etapes": [
+        "On monte un circuit avec une pile et une lampe",
+        "On place l'échantillon dans le circuit",
+        "On regarde si la lampe s'allume",
+        "On conclut : le matériau est conducteur ou isolant"
+      ]
+    }
+  ]
+}

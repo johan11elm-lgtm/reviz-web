@@ -1,0 +1,195 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "L'accumulation d'énergie",
+      "detail": "Avant le séisme, des forces déforment lentement les roches sans les casser.",
+      "cartes": [
+        "Des forces appelées contraintes déforment lentement les roches",
+        "Les roches se déforment sans encore casser",
+        "Une règle en bois qu'on plie lentement",
+        "Les forces agissent pendant très longtemps",
+        "On pousse lentement les couches de pâte à modeler"
+      ]
+    },
+    {
+      "nom": "La rupture des roches",
+      "detail": "Quand la résistance des roches est dépassée, elles cassent brutalement le long d'une faille.",
+      "cartes": [
+        "Les roches cassent brutalement le long d'une faille",
+        "Les deux blocs se décalent : c'est le rejet",
+        "La limite de résistance des roches est dépassée",
+        "L'énergie est libérée d'un seul coup",
+        "La pâte à modeler casse d'un coup"
+      ]
+    },
+    {
+      "nom": "Les ondes sismiques",
+      "detail": "Après la rupture, les secousses se propagent dans toutes les directions sous forme d'ondes.",
+      "cartes": [
+        "Les secousses s'étendent dans toutes les directions",
+        "Les ondes P arrivent avant les ondes S",
+        "Les ondes de surface causent le plus de dégâts",
+        "Les ondes perdent de l'énergie en s'éloignant",
+        "Le sol vibre au passage des ondes"
+      ]
+    },
+    {
+      "nom": "L'observation et la mesure",
+      "detail": "Les scientifiques enregistrent les vibrations, localisent l'épicentre et évaluent la magnitude et l'intensité.",
+      "cartes": [
+        "Un sismomètre enregistre les vibrations du sol",
+        "Le tracé obtenu s'appelle un sismogramme",
+        "La magnitude est calculée à partir des sismogrammes",
+        "L'intensité décrit les effets, de I à XII",
+        "Plusieurs stations permettent de localiser l'épicentre"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "la rupture brutale des roches",
+      "carte": "Des forces déforment lentement les roches pendant très longtemps",
+      "role": "cause",
+      "explication": "Les contraintes accumulent de l'énergie dans les roches jusqu'à ce qu'elles cassent."
+    },
+    {
+      "fait": "la rupture brutale des roches",
+      "carte": "La limite de résistance des roches est dépassée",
+      "role": "cause",
+      "explication": "Quand leur limite de résistance est dépassée, les roches cassent brutalement."
+    },
+    {
+      "fait": "la rupture brutale des roches",
+      "carte": "Les deux blocs de roche se décalent le long de la faille",
+      "role": "consequence",
+      "explication": "La rupture se produit le long d'une faille : les deux blocs se décalent, c'est le rejet."
+    },
+    {
+      "fait": "la rupture brutale des roches",
+      "carte": "L'énergie accumulée est libérée sous forme d'ondes sismiques",
+      "role": "consequence",
+      "explication": "La rupture libère d'un coup l'énergie accumulée, qui se propage dans toutes les directions en ondes."
+    }
+  ],
+  "etiquettes": [
+    {
+      "consigne": "Quel mot désigne le passage en couleur ?",
+      "texte": "En comparant l'heure d'arrivée des ondes dans trois stations, on retrouve [le point de la surface placé à la verticale de la rupture].",
+      "choix": ["Foyer", "Épicentre", "Faille", "Sismogramme"],
+      "bonne": 1,
+      "explication": "Le point de la surface situé à la verticale du foyer est l'épicentre."
+    },
+    {
+      "consigne": "Quel mot désigne le passage en couleur ?",
+      "texte": "Après le séisme, on observe [une cassure des roches le long de laquelle deux blocs se sont déplacés].",
+      "choix": ["Foyer", "Épicentre", "Faille", "Sismogramme"],
+      "bonne": 2,
+      "explication": "Une cassure des roches avec déplacement de deux blocs est une faille."
+    },
+    {
+      "consigne": "Quel mot désigne le passage en couleur ?",
+      "texte": "Sous la surface, les roches cassent d'abord en un point, [le point où commence la rupture], avant que les ondes ne partent.",
+      "choix": ["Foyer", "Épicentre", "Faille", "Sismogramme"],
+      "bonne": 0,
+      "explication": "Le point en profondeur où commence la rupture est le foyer (ou hypocentre)."
+    },
+    {
+      "consigne": "Quel mot désigne le passage en couleur ?",
+      "texte": "Le sismomètre de la station fournit [un enregistrement des vibrations du sol].",
+      "choix": ["Foyer", "Épicentre", "Faille", "Sismogramme"],
+      "bonne": 3,
+      "explication": "L'enregistrement des vibrations du sol par un sismomètre s'appelle un sismogramme."
+    },
+    {
+      "consigne": "Quel mot désigne le passage en couleur ?",
+      "texte": "Les deux blocs de roche se sont déplacés l'un par rapport à l'autre le long de [la cassure].",
+      "choix": ["Foyer", "Épicentre", "Faille", "Sismogramme"],
+      "bonne": 2,
+      "explication": "La cassure le long de laquelle deux blocs se déplacent est une faille."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Épicentre",
+      "acceptees": ["Épicentre", "L'épicentre", "Un épicentre"],
+      "indices": [
+        "Je suis un point que l'on place sur une carte.",
+        "Je me trouve à la surface de la Terre.",
+        "Je suis à la verticale du point où la roche a cassé en profondeur."
+      ],
+      "explication": "L'épicentre est le point de la surface situé à la verticale du foyer."
+    },
+    {
+      "reponse": "Magnitude",
+      "acceptees": ["Magnitude", "La magnitude"],
+      "indices": [
+        "Je suis une mesure liée aux séismes.",
+        "Un séisme n'en a qu'une seule.",
+        "Je mesure l'énergie libérée au foyer, sur l'échelle de Richter."
+      ],
+      "explication": "La magnitude mesure l'énergie libérée au foyer ; un séisme n'a qu'une seule magnitude."
+    },
+    {
+      "reponse": "Sismogramme",
+      "acceptees": ["Sismogramme", "Le sismogramme", "Un sismogramme"],
+      "indices": [
+        "Je suis un enregistrement.",
+        "Je suis obtenu avec un sismomètre.",
+        "On repère sur moi d'abord les ondes P, puis les ondes S."
+      ],
+      "explication": "Le sismogramme est l'enregistrement des vibrations du sol par un sismomètre."
+    },
+    {
+      "reponse": "Tsunami",
+      "acceptees": ["Tsunami", "Un tsunami", "Le tsunami", "Raz-de-marée"],
+      "indices": [
+        "Je suis un danger lié à certains séismes.",
+        "Je peux apparaître après un séisme sous la mer.",
+        "Je suis une vague géante qui peut dévaster les côtes."
+      ],
+      "explication": "Un séisme sous la mer peut provoquer un tsunami, une vague géante qui peut dévaster les côtes."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "Chaque degré de magnitude en plus correspond à environ 30 fois plus d'énergie. Combien de fois plus d'énergie libère un séisme de magnitude 8 qu'un séisme de magnitude 6 ?",
+      "reponse": 900,
+      "unite": "fois",
+      "tolerance": 0,
+      "explication": "De 6 à 8, il y a 2 degrés : 30 × 30 = 900 fois plus d'énergie."
+    },
+    {
+      "question": "Chaque degré de magnitude en plus correspond à environ 30 fois plus d'énergie. Combien de fois plus d'énergie libère un séisme de magnitude 7 qu'un séisme de magnitude 4 ?",
+      "reponse": 27000,
+      "unite": "fois",
+      "tolerance": 0,
+      "explication": "De 4 à 7, il y a 3 degrés : 30 × 30 × 30 = 27 000 fois plus d'énergie."
+    },
+    {
+      "question": "Le séisme de Turquie-Syrie de 2023 avait une magnitude de 7,8 et celui d'Haïti de 2010 une magnitude de 7,0. Quelle est la différence de magnitude entre les deux ?",
+      "reponse": 0.8,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "7,8 − 7,0 = 0,8."
+    },
+    {
+      "question": "Le séisme d'Haïti a eu lieu en 2010 et celui de Turquie-Syrie en 2023. Combien d'années séparent les deux séismes ?",
+      "reponse": 13,
+      "unite": "ans",
+      "tolerance": 0,
+      "explication": "2023 − 2010 = 13 ans."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Du séisme à son enregistrement",
+      "etapes": [
+        "Des forces déforment lentement les roches",
+        "Les roches cassent brutalement le long d'une faille",
+        "Des ondes sismiques partent dans toutes les directions",
+        "Un sismomètre enregistre les vibrations : c'est un sismogramme"
+      ]
+    }
+  ]
+}

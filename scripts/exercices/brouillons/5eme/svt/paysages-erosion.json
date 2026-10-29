@@ -1,0 +1,212 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Le gel",
+      "detail": "Le gel fait éclater les roches fissurées, surtout en montagne.",
+      "cartes": [
+        "L'eau en glace occupe environ 9 % de volume en plus",
+        "Éclatement des roches en montagne pendant l'hiver",
+        "La glace écarte les fissures jusqu'à fragmenter la roche",
+        "Roche fissurée qui éclate quand il fait très froid",
+        "Des blocs détachés par le froid à haute altitude"
+      ]
+    },
+    {
+      "nom": "L'eau liquide",
+      "detail": "L'eau liquide dissout, transforme, arrache et transporte les roches.",
+      "cartes": [
+        "Les vagues font reculer les falaises d'Étretat",
+        "La pluie légèrement acide dissout le calcaire",
+        "Une rivière rapide emporte des galets",
+        "La pluie transforme les feldspaths du granite en argile",
+        "Un courant lent n'emporte que sable fin et argile"
+      ]
+    },
+    {
+      "nom": "Les êtres vivants",
+      "detail": "Plantes et lichens altèrent les roches ou protègent le sol de l'érosion.",
+      "cartes": [
+        "Des racines retiennent le sol d'une pente",
+        "Les feuilles freinent la force des gouttes de pluie",
+        "Du gazon limite la terre emportée dans un bac incliné",
+        "Des racines écartent les fissures d'un rocher",
+        "Des lichens altèrent la surface des roches"
+      ]
+    },
+    {
+      "nom": "Les activités humaines",
+      "detail": "Déboiser, laisser des sols nus ou imperméabiliser accélère l'érosion.",
+      "cartes": [
+        "Couper tous les arbres d'une pente",
+        "Trop de moutons broutent toute l'herbe d'une prairie",
+        "Recouvrir un sol de béton ou de goudron",
+        "Défricher une colline pour y cultiver",
+        "Bétonner une prairie pour construire un lotissement"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "l'érosion accélérée d'une pente",
+      "carte": "Le déboisement de la pente",
+      "role": "cause",
+      "explication": "Sans arbres, les racines ne retiennent plus le sol et le ruissellement augmente."
+    },
+    {
+      "fait": "l'érosion accélérée d'une pente",
+      "carte": "Le surpâturage de la prairie",
+      "role": "cause",
+      "explication": "Le surpâturage accélère le ruissellement et donc l'érosion."
+    },
+    {
+      "fait": "l'érosion accélérée d'une pente",
+      "carte": "L'imperméabilisation des sols par le béton",
+      "role": "cause",
+      "explication": "Le béton empêche l'eau de s'infiltrer : elle ruisselle et emporte plus de terre."
+    },
+    {
+      "fait": "l'érosion accélérée d'une pente",
+      "carte": "Des coulées de boue sur la pente",
+      "role": "consequence",
+      "explication": "Sans végétation, l'eau emporte facilement le sol vers le bas de la pente."
+    },
+    {
+      "fait": "l'érosion accélérée d'une pente",
+      "carte": "Une eau boueuse qui emporte beaucoup de terre",
+      "role": "consequence",
+      "explication": "Sur un sol nu, l'eau qui ruisselle est boueuse : elle emporte beaucoup de terre."
+    }
+  ],
+  "etiquettes": [
+    {
+      "consigne": "Quelle étape décrit la phrase en couleur ?",
+      "texte": "En montagne, [l'eau qui gèle dans les fissures fait éclater un bloc de roche].",
+      "choix": ["Altération physique", "Altération chimique", "Transport", "Dépôt"],
+      "bonne": 0,
+      "explication": "La roche se fragmente sur place sans changer de nature : c'est une altération physique."
+    },
+    {
+      "consigne": "Quelle étape décrit la phrase en couleur ?",
+      "texte": "Dans une forêt, [les racines d'un arbre écartent les fissures d'un rocher].",
+      "choix": ["Altération physique", "Altération chimique", "Transport", "Dépôt"],
+      "bonne": 0,
+      "explication": "Les racines fragmentent la roche sur place : c'est une altération physique."
+    },
+    {
+      "consigne": "Quelle étape décrit la phrase en couleur ?",
+      "texte": "En Bretagne, [l'eau de pluie transforme les feldspaths du granite en argile].",
+      "choix": ["Altération physique", "Altération chimique", "Transport", "Dépôt"],
+      "bonne": 1,
+      "explication": "Les feldspaths changent de nature, ils deviennent de l'argile : c'est une altération chimique."
+    },
+    {
+      "consigne": "Quelle étape décrit la phrase en couleur ?",
+      "texte": "Dans un torrent de montagne, [le courant rapide emporte des galets vers la vallée].",
+      "choix": ["Altération physique", "Altération chimique", "Transport", "Dépôt"],
+      "bonne": 2,
+      "explication": "Des particules sont emportées ailleurs par le courant : c'est le transport."
+    },
+    {
+      "consigne": "Quelle étape décrit la phrase en couleur ?",
+      "texte": "Quand la rivière ralentit dans la plaine, [les plus gros galets s'arrêtent au fond du lit].",
+      "choix": ["Altération physique", "Altération chimique", "Transport", "Dépôt"],
+      "bonne": 3,
+      "explication": "Quand le courant ralentit, les particules se déposent, les plus grosses d'abord."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Gélifraction",
+      "acceptees": ["Gélifraction", "La gélifraction", "Gelifraction", "Le gel"],
+      "indices": [
+        "Je me produis surtout en montagne.",
+        "Je fais éclater les roches.",
+        "Je suis causée par l'eau qui gèle dans les fissures et augmente de volume."
+      ],
+      "explication": "La gélifraction est l'éclatement d'une roche par l'eau qui gèle dans ses fissures."
+    },
+    {
+      "reponse": "Arène granitique",
+      "acceptees": ["Arène granitique", "L'arène granitique", "Arène", "Une arène granitique", "Arene granitique"],
+      "indices": [
+        "Je suis un sable grossier.",
+        "Je viens de l'altération d'une roche dure riche en quartz.",
+        "Mes grains de quartz sont libérés quand l'eau transforme les feldspaths en argile."
+      ],
+      "explication": "L'arène granitique est le sable grossier qui résulte de l'altération du granite."
+    },
+    {
+      "reponse": "Sédiments",
+      "acceptees": ["Sédiments", "Sédiment", "Les sédiments", "Un sédiment"],
+      "indices": [
+        "Je suis un produit de l'érosion.",
+        "Je peux être un bloc, un galet, du sable ou de l'argile.",
+        "Je me dépose quand le courant ralentit."
+      ],
+      "explication": "Les sédiments sont les produits de l'érosion, déposés ailleurs."
+    },
+    {
+      "reponse": "Calcaire",
+      "acceptees": ["Calcaire", "Le calcaire", "Un calcaire"],
+      "indices": [
+        "Je suis une roche.",
+        "L'eau de pluie légèrement acide me dissout.",
+        "Je suis creusé en grottes et en gorges dans les causses."
+      ],
+      "explication": "Le calcaire se dissout dans l'eau de pluie et forme grottes et gorges."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "En gelant, l'eau augmente de volume d'environ 9 %. Dans une fissure, 100 cm³ d'eau gèlent. Quel est le volume de glace obtenu ?",
+      "reponse": 109,
+      "unite": "cm³",
+      "tolerance": 0,
+      "explication": "100 × 1,09 = 109 cm³."
+    },
+    {
+      "question": "En gelant, l'eau augmente de volume de 9 %. Dans une fissure, 500 cm³ d'eau gèlent. Quel est le volume de glace obtenu ?",
+      "reponse": 545,
+      "unite": "cm³",
+      "tolerance": 0,
+      "explication": "500 × 1,09 = 545 cm³."
+    },
+    {
+      "question": "En gelant, l'eau augmente de volume de 9 %. Dans une fissure, 200 cm³ d'eau gèlent. De combien de cm³ le volume augmente-t-il ?",
+      "reponse": 18,
+      "unite": "cm³",
+      "tolerance": 0,
+      "explication": "200 × 0,09 = 18 cm³."
+    },
+    {
+      "question": "On arrose deux bacs inclinés de la même façon. Le bac de terre nue perd 120 g de terre, le bac couvert d'herbe en perd 15 g. Combien de grammes de plus le bac nu perd-il ?",
+      "reponse": 105,
+      "unite": "g",
+      "tolerance": 0,
+      "explication": "120 − 15 = 105 g de terre en plus."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Tester une hypothèse sur l'érosion",
+      "etapes": [
+        "On observe le paysage et on pose une question",
+        "On formule une hypothèse : la végétation limite l'érosion",
+        "On prépare deux bacs identiques où un seul facteur change",
+        "On compare la quantité de terre emportée",
+        "On conclut : l'hypothèse est validée ou rejetée"
+      ]
+    },
+    {
+      "titre": "L'expérience du flacon et le dépôt des sédiments",
+      "etapes": [
+        "On agite un flacon d'eau, de graviers, de sable et d'argile",
+        "On laisse le flacon au repos",
+        "Les graviers tombent au fond en premier",
+        "Le sable se dépose ensuite sur les graviers",
+        "L'argile se dépose en dernier"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,187 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Une photorésistance",
+      "detail": "Le composant dont la résistance diminue quand la lumière augmente : il mesure la luminosité.",
+      "cartes": [
+        "Allumer un lampadaire quand la nuit tombe",
+        "Régler l'écran selon la lumière de la pièce",
+        "Fermer les volets quand le soleil est trop fort",
+        "Mesurer la lumière reçue par une plante",
+        "Allumer les phares d'une voiture à l'entrée d'un tunnel"
+      ]
+    },
+    {
+      "nom": "Un capteur à ultrasons",
+      "detail": "Le composant qui mesure une distance grâce au temps d'aller-retour d'une onde ultrasonore.",
+      "cartes": [
+        "Mesurer la distance entre un robot et un mur",
+        "Aider une voiture à se garer sans toucher l'obstacle",
+        "Arrêter un robot à 10 cm d'un obstacle",
+        "Mesurer la hauteur d'eau dans une cuve",
+        "Guider un robot pour qu'il évite les murs"
+      ]
+    },
+    {
+      "nom": "Un interrupteur de fin de course",
+      "detail": "Le détecteur à deux états qui signale par contact qu'une pièce mobile est arrivée en position.",
+      "cartes": [
+        "Un contact signale que la porte de garage est ouverte",
+        "Arrêter le moteur dès que le portail touche la butée",
+        "Repérer au contact qu'un tiroir est entièrement fermé",
+        "Savoir qu'un chariot a atteint l'extrémité du rail",
+        "Empêcher une imprimante de pousser sa tête trop loin"
+      ]
+    },
+    {
+      "nom": "Un servomoteur",
+      "detail": "L'actionneur qui tourne jusqu'à un angle précis, puis s'y arrête.",
+      "cartes": [
+        "Orienter une antenne exactement à 90°",
+        "Faire pivoter une caméra jusqu'à un angle précis",
+        "Diriger les roues avant d'une voiture télécommandée",
+        "Ouvrir un volet d'aération de 45°",
+        "Positionner un bras de robot à un angle donné"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Quel type de composant est le groupe en couleur ?",
+      "texte": "Dans un lampadaire, [la photorésistance] mesure la luminosité.",
+      "choix": ["Capteur de mesure", "Détecteur tout ou rien", "Actionneur"],
+      "bonne": 0,
+      "explication": "La photorésistance mesure une grandeur qui varie, la luminosité : c'est un capteur de mesure."
+    },
+    {
+      "consigne": "Quel type de composant est le groupe en couleur ?",
+      "texte": "Sur un portail, [l'interrupteur de fin de course] indique seulement si le portail est arrivé ou non.",
+      "choix": ["Capteur de mesure", "Détecteur tout ou rien", "Actionneur"],
+      "bonne": 1,
+      "explication": "Il ne donne que deux états, arrivé ou non : c'est un détecteur tout ou rien."
+    },
+    {
+      "consigne": "Quel type de composant est le groupe en couleur ?",
+      "texte": "Dans un robot, [le servomoteur] oriente une pince à un angle précis.",
+      "choix": ["Capteur de mesure", "Détecteur tout ou rien", "Actionneur"],
+      "bonne": 2,
+      "explication": "Le servomoteur convertit l'énergie en mouvement : c'est un actionneur."
+    },
+    {
+      "consigne": "Quel type de composant est le groupe en couleur ?",
+      "texte": "Dans un robot, [le module à ultrasons] mesure la distance jusqu'au mur.",
+      "choix": ["Capteur de mesure", "Détecteur tout ou rien", "Actionneur"],
+      "bonne": 0,
+      "explication": "Il fournit une valeur qui varie, la distance : c'est un capteur de mesure."
+    },
+    {
+      "consigne": "Quel type de composant est le groupe en couleur ?",
+      "texte": "Dans une alarme, [le module PIR] indique seulement s'il y a un mouvement ou non.",
+      "choix": ["Capteur de mesure", "Détecteur tout ou rien", "Actionneur"],
+      "bonne": 1,
+      "explication": "Il ne donne que deux états, mouvement ou pas de mouvement : c'est un détecteur tout ou rien."
+    },
+    {
+      "consigne": "Quel type de composant est le groupe en couleur ?",
+      "texte": "Dans une alarme, [le buzzer] émet un son quand quelqu'un entre.",
+      "choix": ["Capteur de mesure", "Détecteur tout ou rien", "Actionneur"],
+      "bonne": 2,
+      "explication": "Le buzzer convertit l'énergie électrique en son : c'est un actionneur."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Photorésistance",
+      "acceptees": ["Photorésistance", "Une photorésistance", "La photorésistance", "LDR"],
+      "indices": [
+        "Je suis un composant électronique.",
+        "Ma résistance change avec la lumière.",
+        "Ma résistance diminue quand la lumière augmente : je mesure la luminosité."
+      ],
+      "explication": "La photorésistance (LDR) est un capteur de luminosité : sa résistance diminue quand la lumière augmente."
+    },
+    {
+      "reponse": "Servomoteur",
+      "acceptees": ["Servomoteur", "Un servomoteur", "Le servomoteur", "Servo"],
+      "indices": [
+        "Je suis un actionneur.",
+        "Je transforme l'énergie électrique en mouvement.",
+        "Contrairement à un moteur classique, je m'arrête à un angle précis."
+      ],
+      "explication": "Le servomoteur tourne jusqu'à un angle précis, alors que le moteur tourne en continu."
+    },
+    {
+      "reponse": "Vérin",
+      "acceptees": ["Vérin", "Un vérin", "Le vérin"],
+      "indices": [
+        "Je suis un actionneur.",
+        "Je produis un mouvement de translation.",
+        "Je pousse en ligne droite."
+      ],
+      "explication": "Le vérin pousse en ligne droite : il produit un mouvement de translation."
+    },
+    {
+      "reponse": "Seuil",
+      "acceptees": ["Seuil", "Un seuil", "Le seuil"],
+      "indices": [
+        "Je suis une valeur que l'on choisit dans un programme.",
+        "On me choisit après avoir relevé les valeurs du capteur dans des situations connues.",
+        "Quand la mesure me franchit, le programme déclenche une action."
+      ],
+      "explication": "Le seuil est la valeur limite qui déclenche une action, choisie après l'étalonnage du capteur."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "Un programme dit : si luminosité < 300 alors allumer la lampe. Le capteur indique successivement 450, 280, 310 et 190. Pour combien de mesures la lampe s'allume-t-elle ?",
+      "reponse": 2,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "Seules 280 et 190 sont inférieures à 300 : la condition est vraie 2 fois."
+    },
+    {
+      "question": "Un capteur de luminosité donne 800 le jour et 100 la nuit. On place le seuil exactement au milieu de ces deux valeurs. Quelle est la valeur du seuil ?",
+      "reponse": 450,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "Le milieu de 100 et 800 est (800 + 100) ÷ 2 = 900 ÷ 2 = 450."
+    },
+    {
+      "question": "Un servomoteur est positionné à 30° et doit tourner jusqu'à 90°. De combien de degrés doit-il tourner ?",
+      "reponse": 60,
+      "unite": "°",
+      "tolerance": 0,
+      "explication": "90 − 30 = 60°."
+    },
+    {
+      "question": "Un robot avance de 5 cm tant que la distance mesurée est strictement supérieure à 10 cm. L'obstacle est à 40 cm au départ. Combien de fois le robot avance-t-il ?",
+      "reponse": 6,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "Distances avant chaque pas : 40, 35, 30, 25, 20, 15, toutes supérieures à 10, donc 6 pas. À 10 cm, la condition est fausse : il s'arrête."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Régler l'allumage automatique d'une lampe",
+      "etapes": [
+        "Relever les valeurs du capteur dans des situations connues",
+        "Choisir un seuil entre ces valeurs",
+        "Programmer : si la mesure est sous le seuil, allumer la lampe",
+        "Tester le système dans différentes conditions de lumière"
+      ]
+    },
+    {
+      "titre": "Mesurer une distance avec des ultrasons",
+      "etapes": [
+        "Le capteur émet une onde ultrasonore",
+        "L'onde rencontre un obstacle",
+        "L'onde est renvoyée vers le capteur",
+        "Le capteur mesure le temps d'aller-retour",
+        "Le programme en déduit la distance"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,151 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "De l'extérieur aux poumons",
+      "detail": "Du nez aux alvéoles : les organes que l'air traverse, dans l'ordre.",
+      "cartes": [
+        "L'air entre par le nez ou par la bouche",
+        "L'air traverse ensuite le pharynx, puis le larynx",
+        "La trachée est le tube qui descend vers les poumons",
+        "La trachée se divise en bronches, puis en bronchioles",
+        "Les bronchioles se terminent par de minuscules sacs"
+      ]
+    },
+    {
+      "nom": "Inspirer et expirer",
+      "detail": "Le diaphragme et la cage thoracique font entrer puis sortir l'air.",
+      "cartes": [
+        "Le diaphragme se contracte et s'abaisse",
+        "Les côtes se soulèvent et la cage thoracique grandit",
+        "Le diaphragme se relâche et remonte",
+        "La cage thoracique diminue de volume et l'air sort",
+        "Dans le modèle du bocal, la membrane représente le diaphragme"
+      ]
+    },
+    {
+      "nom": "Les échanges avec le sang",
+      "detail": "Dans les alvéoles, les gaz passent entre l'air et le sang à travers une paroi très fine.",
+      "cartes": [
+        "Le dioxygène passe de l'air des alvéoles au sang",
+        "Le dioxyde de carbone passe du sang à l'air",
+        "Les globules rouges transportent le dioxygène jusqu'aux organes",
+        "La surface totale des alvéoles atteint environ 100 mètres carrés",
+        "Une paroi très mince sépare l'air du sang"
+      ]
+    },
+    {
+      "nom": "Tabac et pollution",
+      "detail": "Ce qui abîme l'appareil respiratoire : goudrons, monoxyde de carbone, nicotine, particules fines.",
+      "cartes": [
+        "Les goudrons de la fumée sont cancérigènes",
+        "La nicotine rend dépendant",
+        "Le monoxyde de carbone des cigarettes remplace le dioxygène",
+        "La fumée paralyse les cils des voies respiratoires",
+        "Les particules fines peuvent aggraver l'asthme"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Quel organe le groupe en couleur désigne-t-il ?",
+      "texte": "Pour inspirer, [le muscle situé sous les poumons] se contracte et s'abaisse.",
+      "choix": ["Diaphragme", "Trachée", "Bronches", "Alvéoles"],
+      "bonne": 0,
+      "explication": "Le muscle situé sous les poumons est le diaphragme : en s'abaissant, il fait entrer l'air."
+    },
+    {
+      "consigne": "Quel organe le groupe en couleur désigne-t-il ?",
+      "texte": "L'air descend dans [le tube qui part du larynx] avant de se diviser en bronches.",
+      "choix": ["Diaphragme", "Trachée", "Bronches", "Alvéoles"],
+      "bonne": 1,
+      "explication": "La trachée part du larynx, puis se divise en bronches."
+    },
+    {
+      "consigne": "Quel organe le groupe en couleur désigne-t-il ?",
+      "texte": "Après la trachée, [les tubes qui se divisent en bronchioles] amènent l'air vers les poumons.",
+      "choix": ["Diaphragme", "Trachée", "Bronches", "Alvéoles"],
+      "bonne": 2,
+      "explication": "Les bronches prolongent la trachée et se divisent en bronchioles."
+    },
+    {
+      "consigne": "Quel organe le groupe en couleur désigne-t-il ?",
+      "texte": "Les échanges de gaz avec le sang se font dans [de minuscules sacs entourés de capillaires].",
+      "choix": ["Diaphragme", "Trachée", "Bronches", "Alvéoles"],
+      "bonne": 3,
+      "explication": "Les alvéoles pulmonaires sont de minuscules sacs entourés de capillaires : c'est là que se font les échanges de gaz."
+    },
+    {
+      "consigne": "Quel organe le groupe en couleur désigne-t-il ?",
+      "texte": "À l'expiration, [le muscle situé sous les poumons] se relâche et remonte.",
+      "choix": ["Diaphragme", "Trachée", "Bronches", "Alvéoles"],
+      "bonne": 0,
+      "explication": "Le diaphragme se relâche et remonte : la cage thoracique diminue de volume et l'air sort."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Diaphragme",
+      "acceptees": ["Le diaphragme", "Un diaphragme"],
+      "indices": [
+        "Je suis un muscle.",
+        "Je suis situé sous les poumons.",
+        "Quand je me contracte et m'abaisse, l'air entre dans les poumons."
+      ],
+      "explication": "Le diaphragme est le muscle situé sous les poumons : en se contractant, il fait entrer l'air."
+    },
+    {
+      "reponse": "Alvéole pulmonaire",
+      "acceptees": ["Alvéole", "Alvéoles", "Les alvéoles", "Une alvéole", "Alvéoles pulmonaires"],
+      "indices": [
+        "Je suis minuscule, et nous sommes des centaines de millions.",
+        "Je suis un petit sac au bout d'une bronchiole.",
+        "C'est chez moi que le dioxygène passe de l'air au sang."
+      ],
+      "explication": "Les alvéoles pulmonaires sont de minuscules sacs où se font les échanges de gaz avec le sang."
+    },
+    {
+      "reponse": "Globule rouge",
+      "acceptees": ["Globules rouges", "Les globules rouges", "Un globule rouge"],
+      "indices": [
+        "Je circule dans le sang.",
+        "Je suis une cellule.",
+        "Je transporte le dioxygène jusqu'à tous les organes."
+      ],
+      "explication": "Les globules rouges sont les cellules du sang qui transportent le dioxygène."
+    },
+    {
+      "reponse": "Monoxyde de carbone",
+      "acceptees": ["Le monoxyde de carbone", "Monoxyde", "CO"],
+      "indices": [
+        "Je suis un gaz.",
+        "Je suis présent dans la fumée de cigarette.",
+        "Je prends la place du dioxygène dans le sang."
+      ],
+      "explication": "Le monoxyde de carbone de la fumée de tabac prend la place du dioxygène dans le sang."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Le trajet de l'air du nez aux alvéoles",
+      "etapes": [
+        "L'air entre par le nez ou la bouche",
+        "Il traverse le pharynx puis le larynx",
+        "Il descend dans la trachée",
+        "Il passe dans les bronches puis les bronchioles",
+        "Il arrive dans les alvéoles pulmonaires"
+      ]
+    },
+    {
+      "titre": "Un cycle respiratoire, en partant de l'inspiration",
+      "etapes": [
+        "Le diaphragme s'abaisse et les côtes se soulèvent",
+        "La cage thoracique grandit et l'air entre",
+        "Le diaphragme se relâche et remonte",
+        "La cage thoracique diminue et l'air sort"
+      ]
+    }
+  ]
+}

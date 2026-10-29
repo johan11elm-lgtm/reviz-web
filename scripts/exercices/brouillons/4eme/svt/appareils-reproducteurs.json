@@ -1,0 +1,179 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Les testicules",
+      "detail": "Organes de l'appareil masculin qui fabriquent les spermatozoïdes et la testostérone, en continu.",
+      "cartes": [
+        "Fabrication des spermatozoïdes",
+        "Production de la testostérone",
+        "Fonctionnement continu à partir de la puberté",
+        "Millions de gamètes produits chaque jour",
+        "Reliés à l'urètre par les spermiductes"
+      ]
+    },
+    {
+      "nom": "Les ovaires",
+      "detail": "Organes de l'appareil féminin qui contiennent les ovocytes, produisent des hormones et libèrent un ovocyte par cycle.",
+      "cartes": [
+        "Réserve des ovocytes avant leur libération",
+        "Production des œstrogènes",
+        "Production de la progestérone",
+        "Libération d'un seul ovocyte par cycle, en général",
+        "Ovulation vers le 14e jour d'un cycle de 28 jours"
+      ]
+    },
+    {
+      "nom": "Les trompes",
+      "detail": "Deux conduits, aussi appelés oviductes, qui recueillent l'ovocyte libéré : la fécondation peut y avoir lieu.",
+      "cartes": [
+        "Recueil de l'ovocyte qui vient d'être libéré",
+        "Lieu où peut avoir lieu la fécondation",
+        "Conduits aussi nommés oviductes",
+        "Conduits situés entre l'ovaire et l'utérus",
+        "Conduits partant du sommet de l'utérus"
+      ]
+    },
+    {
+      "nom": "L'utérus",
+      "detail": "Organe musclé dont la muqueuse peut accueillir un embryon et qui s'ouvre sur le vagin par son col.",
+      "cartes": [
+        "Organe musclé de l'appareil féminin",
+        "Lieu d'accueil de l'embryon",
+        "Épaississement de la muqueuse pendant la première partie du cycle",
+        "Élimination de la muqueuse avec un peu de sang",
+        "Col qui s'ouvre sur le vagin"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "De quel événement s'agit-il dans le passage en couleur ?",
+      "texte": "Léa a eu ses règles le 1er mars. Son cycle dure 28 jours. Vers le 14 mars, [un de ses ovaires libère un ovocyte].",
+      "choix": ["Ovulation", "Fécondation", "Épaississement de la muqueuse", "Règles"],
+      "bonne": 0,
+      "explication": "Un ovaire qui libère un ovocyte vers le 14e jour du cycle : c'est l'ovulation."
+    },
+    {
+      "consigne": "De quel événement s'agit-il dans le passage en couleur ?",
+      "texte": "Si l'ovocyte n'est pas fécondé, les hormones ovariennes chutent. [La muqueuse de l'utérus est éliminée avec un peu de sang].",
+      "choix": ["Ovulation", "Fécondation", "Épaississement de la muqueuse", "Règles"],
+      "bonne": 3,
+      "explication": "L'élimination de la muqueuse utérine avec un peu de sang, quand il n'y a pas eu de fécondation, ce sont les règles."
+    },
+    {
+      "consigne": "De quel événement s'agit-il dans le passage en couleur ?",
+      "texte": "Pendant la première partie du cycle, [la paroi interne de l'utérus devient plus épaisse].",
+      "choix": ["Ovulation", "Fécondation", "Épaississement de la muqueuse", "Règles"],
+      "bonne": 2,
+      "explication": "La paroi interne de l'utérus est la muqueuse utérine : elle s'épaissit pendant la première partie du cycle."
+    },
+    {
+      "consigne": "De quel événement s'agit-il dans le passage en couleur ?",
+      "texte": "Dans une trompe, [un spermatozoïde s'unit à l'ovocyte].",
+      "choix": ["Ovulation", "Fécondation", "Épaississement de la muqueuse", "Règles"],
+      "bonne": 1,
+      "explication": "L'union d'un spermatozoïde et d'un ovocyte dans une trompe, c'est la fécondation."
+    },
+    {
+      "consigne": "De quel événement s'agit-il dans le passage en couleur ?",
+      "texte": "Dans un cycle de 28 jours, [l'ovocyte quitte l'ovaire vers le 14e jour].",
+      "choix": ["Ovulation", "Fécondation", "Épaississement de la muqueuse", "Règles"],
+      "bonne": 0,
+      "explication": "La libération d'un ovocyte par un ovaire, vers le 14e jour du cycle, c'est l'ovulation."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Ovocyte",
+      "acceptees": ["Ovocyte", "L'ovocyte", "Un ovocyte", "Ovocytes", "Gamète femelle"],
+      "indices": [
+        "Je suis une cellule reproductrice.",
+        "Je suis immobile et riche en réserves.",
+        "Un ovaire me libère en général une seule fois par cycle."
+      ],
+      "explication": "L'ovocyte est le gamète féminin : une cellule plus grosse que le spermatozoïde, immobile et riche en réserves."
+    },
+    {
+      "reponse": "Spermatozoïde",
+      "acceptees": ["Spermatozoïde", "Spermatozoïdes", "Un spermatozoïde", "Le spermatozoïde", "Gamète mâle"],
+      "indices": [
+        "Je suis une cellule reproductrice très petite.",
+        "Je suis fabriqué en continu, par millions chaque jour, à partir de la puberté.",
+        "Je me déplace grâce à mon flagelle."
+      ],
+      "explication": "Le spermatozoïde est le gamète masculin : une cellule minuscule, mobile grâce à son flagelle, produite en très grand nombre."
+    },
+    {
+      "reponse": "Trompe",
+      "acceptees": ["Trompe", "Trompes", "Une trompe", "La trompe", "Oviducte", "Un oviducte"],
+      "indices": [
+        "Je fais partie de l'appareil reproducteur féminin.",
+        "Je recueille l'ovocyte qu'un ovaire vient de libérer.",
+        "La fécondation peut avoir lieu en moi."
+      ],
+      "explication": "Les trompes (ou oviductes) recueillent l'ovocyte libéré : c'est là que peut avoir lieu la fécondation."
+    },
+    {
+      "reponse": "Utérus",
+      "acceptees": ["Utérus", "L'utérus", "Un utérus"],
+      "indices": [
+        "Je suis un organe musclé de l'appareil reproducteur féminin.",
+        "Ma paroi interne s'épaissit pendant la première partie du cycle.",
+        "Mon col s'ouvre sur le vagin et je peux accueillir un embryon."
+      ],
+      "explication": "L'utérus est un organe musclé dont la muqueuse peut accueillir un embryon ; son col s'ouvre sur le vagin."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "Le jour 1 d'un cycle est le 5 avril. L'ovulation a lieu le jour 14 du cycle. Quel jour d'avril a-t-elle lieu ?",
+      "reponse": 18,
+      "unite": "avril",
+      "tolerance": 0,
+      "explication": "Le 5 avril est le jour 1, donc le jour 14 est 13 jours plus tard : 5 + 13 = 18 avril."
+    },
+    {
+      "question": "Un cycle de 28 jours commence le 2 mai, qui est son jour 1. Les règles suivantes sont le jour 1 du cycle suivant, soit 28 jours plus tard. Quel jour de mai ont-elles lieu ?",
+      "reponse": 30,
+      "unite": "mai",
+      "tolerance": 0,
+      "explication": "2 + 28 = 30 : les règles suivantes ont lieu vers le 30 mai."
+    },
+    {
+      "question": "Imaginons qu'un homme fabrique 100 millions de spermatozoïdes par jour. Combien en fabrique-t-il en 7 jours ?",
+      "reponse": 700,
+      "unite": "millions",
+      "tolerance": 0,
+      "explication": "100 × 7 = 700 millions de spermatozoïdes, car les testicules produisent en continu."
+    },
+    {
+      "question": "Un ovocyte mesure environ 0,1 mm et un spermatozoïde environ 0,06 mm. Quelle est la différence de taille ?",
+      "reponse": 0.04,
+      "unite": "mm",
+      "tolerance": 0,
+      "explication": "0,1 − 0,06 = 0,04 mm : l'ovocyte est un peu plus gros que le spermatozoïde."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Les grandes étapes d'un cycle menstruel",
+      "etapes": [
+        "Les règles marquent le jour 1 du cycle",
+        "La muqueuse utérine commence à s'épaissir",
+        "Vers le jour 14, un ovaire libère un ovocyte",
+        "Sans fécondation, la muqueuse est éliminée : nouvelles règles"
+      ]
+    },
+    {
+      "titre": "Le trajet des spermatozoïdes jusqu'à la sortie du corps",
+      "etapes": [
+        "Les spermatozoïdes sont fabriqués dans les testicules",
+        "Ils sont conduits par les spermiductes",
+        "Ils rejoignent l'urètre",
+        "Le sperme sort en traversant le pénis"
+      ]
+    }
+  ]
+}

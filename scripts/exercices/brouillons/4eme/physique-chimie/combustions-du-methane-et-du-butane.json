@@ -1,0 +1,211 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Le méthane",
+      "detail": "Le principal constituant du gaz naturel, un hydrocarbure de formule CH₄.",
+      "cartes": [
+        "Le principal constituant du gaz naturel",
+        "Sa formule s'écrit CH₄",
+        "Une de ses molécules brûle avec 2 molécules de dioxygène",
+        "Ses molécules comptent 5 atomes en tout",
+        "Une de ses molécules forme 2 molécules d'eau en brûlant"
+      ]
+    },
+    {
+      "nom": "Le butane",
+      "detail": "L'hydrocarbure vendu en bouteilles pour le camping, de formule C₄H₁₀.",
+      "cartes": [
+        "Il est vendu en bouteilles pour le camping",
+        "Sa formule s'écrit C₄H₁₀",
+        "2 de ses molécules brûlent avec 13 molécules de dioxygène",
+        "Ses molécules comptent 14 atomes en tout",
+        "Une de ses molécules forme 5 molécules d'eau en brûlant"
+      ]
+    },
+    {
+      "nom": "Le dioxyde de carbone",
+      "detail": "Le gaz qui trouble l'eau de chaux et se forme dans toute combustion complète.",
+      "cartes": [
+        "Il trouble l'eau de chaux",
+        "Sa formule s'écrit CO₂",
+        "Rejeté par les combustions, il renforce l'effet de serre",
+        "Avec l'eau, c'est le produit d'une combustion complète",
+        "Ses molécules comptent 3 atomes en tout"
+      ]
+    },
+    {
+      "nom": "Le monoxyde de carbone",
+      "detail": "Le gaz très toxique qui se forme quand le dioxygène manque.",
+      "cartes": [
+        "Un gaz incolore, inodore et très toxique",
+        "Sa formule s'écrit CO",
+        "Seul un détecteur peut signaler sa présence",
+        "Il empêche le sang de transporter correctement le dioxygène",
+        "Il se forme quand le dioxygène manque pendant la combustion"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "une combustion incomplète du gaz",
+      "carte": "Le dioxygène arrive en quantité insuffisante",
+      "role": "cause",
+      "explication": "La combustion est incomplète quand le dioxygène est insuffisant."
+    },
+    {
+      "fait": "une combustion incomplète du gaz",
+      "carte": "La virole du bec Bunsen est fermée",
+      "role": "cause",
+      "explication": "La virole règle l'arrivée d'air : fermée, elle laisse entrer peu de dioxygène."
+    },
+    {
+      "fait": "une combustion incomplète du gaz",
+      "carte": "La flamme devient jaune et éclairante",
+      "role": "consequence",
+      "explication": "Une combustion incomplète donne une flamme jaune et éclairante, alors que la combustion complète donne une flamme bleue."
+    },
+    {
+      "fait": "une combustion incomplète du gaz",
+      "carte": "Une soucoupe placée au-dessus de la flamme se couvre de suie noire",
+      "role": "consequence",
+      "explication": "La combustion incomplète dépose de la suie, c'est-à-dire du carbone."
+    },
+    {
+      "fait": "une intoxication au monoxyde de carbone",
+      "carte": "Une chaudière mal entretenue brûle le gaz sans assez d'air",
+      "role": "cause",
+      "explication": "Une chaudière mal entretenue brûle mal le gaz et produit du monoxyde de carbone : c'est pourquoi on la fait entretenir chaque année."
+    },
+    {
+      "fait": "une intoxication au monoxyde de carbone",
+      "carte": "Des maux de tête, des nausées et des vertiges apparaissent",
+      "role": "consequence",
+      "explication": "Maux de tête, nausées, vertiges et malaise sont les signes d'une intoxication au monoxyde de carbone."
+    }
+  ],
+  "etiquettes": [
+    {
+      "consigne": "Que représente le passage en couleur ?",
+      "texte": "Le gaz naturel est surtout fait de [méthane].",
+      "choix": ["Un combustible", "Un produit de combustion complète", "Un produit de combustion incomplète", "Un geste de prévention"],
+      "bonne": 0,
+      "explication": "Le méthane est le gaz qui brûle : c'est le combustible."
+    },
+    {
+      "consigne": "Que représente le passage en couleur ?",
+      "texte": "La flamme est bleue : le gaz brûle en formant du dioxyde de carbone et de [l'eau].",
+      "choix": ["Un combustible", "Un produit de combustion complète", "Un produit de combustion incomplète", "Un geste de prévention"],
+      "bonne": 1,
+      "explication": "Une flamme bleue indique une combustion complète, qui forme du dioxyde de carbone et de l'eau."
+    },
+    {
+      "consigne": "Que représente le passage en couleur ?",
+      "texte": "La virole est fermée : la flamme devient jaune et une soucoupe se couvre de [suie noire].",
+      "choix": ["Un combustible", "Un produit de combustion complète", "Un produit de combustion incomplète", "Un geste de prévention"],
+      "bonne": 2,
+      "explication": "La flamme jaune signale une combustion incomplète, qui dépose de la suie."
+    },
+    {
+      "consigne": "Que représente le passage en couleur ?",
+      "texte": "Pour éviter les intoxications au monoxyde de carbone, on [fait entretenir la chaudière chaque année].",
+      "choix": ["Un combustible", "Un produit de combustion complète", "Un produit de combustion incomplète", "Un geste de prévention"],
+      "bonne": 3,
+      "explication": "Faire entretenir la chaudière chaque année est un geste de prévention contre l'intoxication."
+    },
+    {
+      "consigne": "Que représente le passage en couleur ?",
+      "texte": "Dans un camping-gaz, la flamme est alimentée par [le butane] de la bouteille.",
+      "choix": ["Un combustible", "Un produit de combustion complète", "Un produit de combustion incomplète", "Un geste de prévention"],
+      "bonne": 0,
+      "explication": "Le butane est le gaz qui brûle : c'est le combustible."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Hydrocarbure",
+      "acceptees": ["Hydrocarbure", "Un hydrocarbure", "Hydrocarbures"],
+      "indices": [
+        "Je désigne une famille de molécules.",
+        "Mes molécules ne contiennent que deux sortes d'atomes.",
+        "Mes atomes sont uniquement du carbone et de l'hydrogène : le méthane et le butane font partie de ma famille."
+      ],
+      "explication": "Un hydrocarbure est une molécule formée uniquement d'atomes de carbone et d'hydrogène, comme le méthane ou le butane."
+    },
+    {
+      "reponse": "Suie",
+      "acceptees": ["Suie", "La suie"],
+      "indices": [
+        "Je suis un dépôt.",
+        "Je suis noire et je salis ce qui se trouve au-dessus d'une flamme jaune.",
+        "Je suis du carbone qui se dépose quand la combustion est incomplète."
+      ],
+      "explication": "La suie est le dépôt noir de carbone laissé par une combustion incomplète."
+    },
+    {
+      "reponse": "Monoxyde de carbone",
+      "acceptees": ["Monoxyde de carbone", "Le monoxyde de carbone", "Monoxyde", "CO"],
+      "indices": [
+        "Je suis un gaz que l'on ne peut ni voir ni sentir.",
+        "Je me forme quand une combustion manque de dioxygène.",
+        "Je suis très toxique et je peux être mortel : seul un détecteur me repère."
+      ],
+      "explication": "Le monoxyde de carbone est incolore, inodore et très toxique : seul un détecteur peut en signaler la présence."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "Combien d'atomes contient au total une molécule de butane C₄H₁₀ ?",
+      "reponse": 14,
+      "unite": "atomes",
+      "tolerance": 0,
+      "explication": "On additionne les indices : 4 atomes de carbone + 10 atomes d'hydrogène = 14 atomes."
+    },
+    {
+      "question": "Combien d'atomes d'hydrogène contiennent 2 molécules de butane C₄H₁₀ ?",
+      "reponse": 20,
+      "unite": "atomes",
+      "tolerance": 0,
+      "explication": "Une molécule de butane contient 10 atomes d'hydrogène, donc 2 × 10 = 20 atomes."
+    },
+    {
+      "question": "Avec CH₄ + 2 O₂ → CO₂ + 2 H₂O, combien de molécules d'eau se forment quand 9 molécules de méthane brûlent complètement ?",
+      "reponse": 18,
+      "unite": "molécules",
+      "tolerance": 0,
+      "explication": "Une molécule de méthane forme 2 molécules d'eau, donc 9 × 2 = 18 molécules."
+    },
+    {
+      "question": "Avec CH₄ + 2 O₂ → CO₂ + 2 H₂O, combien de molécules de dioxygène faut-il pour brûler complètement 5 molécules de méthane ?",
+      "reponse": 10,
+      "unite": "molécules",
+      "tolerance": 0,
+      "explication": "Une molécule de méthane consomme 2 molécules de dioxygène, donc 5 × 2 = 10 molécules."
+    },
+    {
+      "question": "Avec 2 C₄H₁₀ + 13 O₂ → 8 CO₂ + 10 H₂O, combien d'atomes d'oxygène y a-t-il en tout à droite de la flèche ?",
+      "reponse": 26,
+      "unite": "atomes",
+      "tolerance": 0,
+      "explication": "8 CO₂ apportent 8 × 2 = 16 atomes O et 10 H₂O en apportent 10 × 1 = 10 : 16 + 10 = 26 atomes."
+    },
+    {
+      "question": "Avec 2 C₄H₁₀ + 13 O₂ → 8 CO₂ + 10 H₂O, combien de molécules de dioxyde de carbone se forment quand 6 molécules de butane brûlent complètement ?",
+      "reponse": 24,
+      "unite": "molécules",
+      "tolerance": 0,
+      "explication": "2 molécules de butane forment 8 CO₂, donc 1 molécule en forme 8 ÷ 2 = 4. Pour 6 molécules : 6 × 4 = 24 molécules."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Vérifier l'équation d'une combustion",
+      "etapes": [
+        "On écrit les réactifs à gauche et les produits à droite",
+        "On multiplie coefficients et indices pour compter les atomes de chaque côté",
+        "On compare les totaux de C, H et O des deux côtés",
+        "Si besoin, on change les coefficients sans toucher aux indices"
+      ]
+    }
+  ]
+}

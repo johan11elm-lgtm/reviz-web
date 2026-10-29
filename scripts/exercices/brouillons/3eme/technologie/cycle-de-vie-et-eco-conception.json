@@ -1,0 +1,161 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Le réemploi",
+      "detail": "On redonne l'objet tel quel à quelqu'un qui s'en sert, sans le transformer ni le réparer.",
+      "cartes": [
+        "Donner un manteau devenu trop petit à un cousin",
+        "Revendre un vélo d'occasion sur un site d'annonces",
+        "Déposer des livres déjà lus dans une boîte à livres",
+        "Donner un canapé en bon état à une association",
+        "Reprendre les manuels scolaires de sa grande sœur"
+      ]
+    },
+    {
+      "nom": "La réparation",
+      "detail": "On remet en état un objet cassé ou usé, par exemple en changeant la pièce défectueuse.",
+      "cartes": [
+        "Remplacer l'écran fissuré d'un téléphone",
+        "Changer la fermeture éclair cassée d'un sac",
+        "Changer la chaîne cassée d'un vélo",
+        "Ressouder le fil arraché d'un chargeur",
+        "Changer la batterie usée d'un ordinateur portable"
+      ]
+    },
+    {
+      "nom": "Le recyclage",
+      "detail": "On récupère la matière d'un déchet pour fabriquer un autre objet.",
+      "cartes": [
+        "Fondre des canettes en aluminium pour en fabriquer de nouvelles",
+        "Broyer des bouteilles en plastique pour fabriquer des fibres textiles",
+        "Réduire de vieux cartons en pâte pour fabriquer du nouveau carton",
+        "Fondre du verre usagé pour mouler de nouveaux bocaux",
+        "Récupérer l'or et le cuivre des cartes électroniques d'un vieux téléphone"
+      ]
+    },
+    {
+      "nom": "La valorisation énergétique",
+      "detail": "On brûle des déchets que l'on ne peut ni réutiliser ni recycler pour en récupérer l'énergie.",
+      "cartes": [
+        "Brûler des déchets non recyclables pour produire de la chaleur",
+        "Produire de l'électricité avec la vapeur d'une usine d'incinération",
+        "Chauffer une école en brûlant des chutes de bois",
+        "Brûler de vieux pneus dans un four de cimenterie pour économiser du charbon",
+        "Récupérer l'énergie de déchets qu'on ne peut ni réutiliser ni recycler"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "À quelle étape du cycle de vie correspond le passage en couleur ?",
+      "texte": "Dans une mine, [des engins extraient le minerai de fer] qui deviendra de l'acier.",
+      "choix": ["Extraction des matières premières", "Fabrication", "Utilisation", "Fin de vie"],
+      "bonne": 0,
+      "explication": "Le minerai de fer est une matière première prélevée dans la nature : c'est l'étape d'extraction."
+    },
+    {
+      "consigne": "À quelle étape du cycle de vie correspond le passage en couleur ?",
+      "texte": "À l'usine, [des robots assemblent les pièces] de la tablette.",
+      "choix": ["Extraction des matières premières", "Fabrication", "Utilisation", "Fin de vie"],
+      "bonne": 1,
+      "explication": "Assembler les pièces d'un objet dans une usine, c'est l'étape de fabrication."
+    },
+    {
+      "consigne": "À quelle étape du cycle de vie correspond le passage en couleur ?",
+      "texte": "Chaque matin, Inès [écoute de la musique avec ses écouteurs] pendant le trajet.",
+      "choix": ["Extraction des matières premières", "Fabrication", "Utilisation", "Fin de vie"],
+      "bonne": 2,
+      "explication": "Inès se sert de l'objet pour l'usage prévu : c'est l'étape d'utilisation."
+    },
+    {
+      "consigne": "À quelle étape du cycle de vie correspond le passage en couleur ?",
+      "texte": "Le grille-pain ne marche plus, alors Hugo [l'apporte dans un point de collecte].",
+      "choix": ["Extraction des matières premières", "Fabrication", "Utilisation", "Fin de vie"],
+      "bonne": 3,
+      "explication": "L'objet ne sert plus et on s'en sépare : c'est l'étape de fin de vie."
+    },
+    {
+      "consigne": "À quelle étape du cycle de vie correspond le passage en couleur ?",
+      "texte": "Pendant des années, la famille [fait chauffer son eau avec la bouilloire] chaque matin.",
+      "choix": ["Extraction des matières premières", "Fabrication", "Utilisation", "Fin de vie"],
+      "bonne": 2,
+      "explication": "La famille se sert de la bouilloire tous les jours : c'est l'étape d'utilisation."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Recyclage",
+      "acceptees": ["Recyclage", "Le recyclage"],
+      "indices": [
+        "Je me situe tout à la fin de la vie d'un objet.",
+        "Contrairement au réemploi, je ne garde pas l'objet tel quel.",
+        "Je récupère la matière d'un déchet pour fabriquer un nouvel objet, comme une canette fondue qui devient une autre canette."
+      ],
+      "explication": "Le recyclage récupère la matière d'un objet usagé pour en fabriquer un autre."
+    },
+    {
+      "reponse": "Obsolescence programmée",
+      "acceptees": ["Obsolescence programmée", "L'obsolescence programmée"],
+      "indices": [
+        "Je concerne la durée de vie des produits que l'on achète.",
+        "Certains fabricants m'utilisent pour qu'un appareil tombe en panne plus vite.",
+        "Depuis 2015, je suis un délit en France."
+      ],
+      "explication": "L'obsolescence programmée réduit volontairement la durée de vie d'un produit ; c'est un délit en France depuis 2015."
+    },
+    {
+      "reponse": "Indice de réparabilité",
+      "acceptees": ["Indice de réparabilité", "L'indice de réparabilité"],
+      "indices": [
+        "Je suis une note affichée sur certains appareils neufs, depuis 2021.",
+        "Je vaux entre 0 et 10.",
+        "Plus je suis élevé, plus l'appareil est facile à remettre en état."
+      ],
+      "explication": "L'indice de réparabilité est une note sur 10 qui indique si un appareil est facile à réparer."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "L'ACV d'une bouilloire donne, en kg équivalent CO₂ : extraction 4, fabrication 10, transport 2, utilisation 30, fin de vie 1. Quelle est l'empreinte carbone totale de la bouilloire ?",
+      "reponse": 47,
+      "unite": "kg éq. CO₂",
+      "tolerance": 0,
+      "explication": "On additionne les cinq étapes : 4 + 10 + 2 + 30 + 1 = 47 kg équivalent CO₂."
+    },
+    {
+      "question": "L'empreinte carbone totale d'un smartphone est de 70 kg équivalent CO₂, dont 56 kg pour la fabrication. Quel pourcentage de l'empreinte vient de la fabrication ?",
+      "reponse": 80,
+      "unite": "%",
+      "tolerance": 0,
+      "explication": "56 ÷ 70 = 0,8, soit 80 % de l'empreinte totale."
+    },
+    {
+      "question": "Un ordinateur a une empreinte carbone totale de 300 kg équivalent CO₂ sur toute sa vie. Il est gardé 6 ans. Quelle est son empreinte par année d'utilisation ?",
+      "reponse": 50,
+      "unite": "kg éq. CO₂ par an",
+      "tolerance": 0,
+      "explication": "300 ÷ 6 = 50 kg équivalent CO₂ par an."
+    },
+    {
+      "question": "La fabrication d'un téléphone émet 60 kg équivalent CO₂. Quand le téléphone est gardé 2 ans, cela fait 30 kg par an. De combien de kg par an cette part baisse-t-elle si on le garde 5 ans au lieu de 2 ?",
+      "reponse": 18,
+      "unite": "kg éq. CO₂ par an",
+      "tolerance": 0,
+      "explication": "Sur 5 ans : 60 ÷ 5 = 12 kg par an. La baisse est 30 − 12 = 18 kg équivalent CO₂ par an."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Les étapes du cycle de vie d'un objet",
+      "etapes": [
+        "Extraction des matières premières",
+        "Fabrication de l'objet",
+        "Transport et distribution",
+        "Utilisation par le consommateur",
+        "Fin de vie : réemploi, recyclage ou déchet"
+      ]
+    }
+  ]
+}

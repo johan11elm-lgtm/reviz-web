@@ -1,0 +1,192 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Masse finale : 60 g",
+      "detail": "Les situations où la masse obtenue (eau ou solution) est de 60 g : une masse conservée ou la somme de deux masses.",
+      "cartes": [
+        "Fusion de 60 g de glace",
+        "Vaporisation de 60 g d'eau liquide",
+        "10 g de sucre dissous dans 50 g d'eau",
+        "Condensation de 60 g de vapeur d'eau",
+        "15 g de sel dissous dans 45 g d'eau"
+      ]
+    },
+    {
+      "nom": "Masse finale : 100 g",
+      "detail": "Les situations où la masse obtenue (eau ou solution) est de 100 g : une masse conservée ou la somme de deux masses.",
+      "cartes": [
+        "Solidification de 100 g d'eau liquide",
+        "20 g de sucre dissous dans 80 g d'eau",
+        "Fusion de 100 g de glace",
+        "30 g de sel dissous dans 70 g d'eau",
+        "Vaporisation de 100 g d'eau"
+      ]
+    },
+    {
+      "nom": "Masse finale : 150 g",
+      "detail": "Les situations où la masse obtenue (eau ou solution) est de 150 g : une masse conservée ou la somme de deux masses.",
+      "cartes": [
+        "Fusion de 150 g de glace",
+        "50 g de sucre dissous dans 100 g d'eau",
+        "Vaporisation de 150 g d'eau liquide",
+        "10 g de sel dissous dans 140 g d'eau",
+        "Condensation de 150 g de vapeur d'eau"
+      ]
+    },
+    {
+      "nom": "Masse finale : 210 g",
+      "detail": "Les situations où la masse obtenue (eau ou solution) est de 210 g : une masse conservée ou la somme de deux masses.",
+      "cartes": [
+        "10 g de sel dissous dans 200 g d'eau",
+        "Solidification de 210 g d'eau liquide",
+        "60 g de sucre dissous dans 150 g d'eau",
+        "Fusion de 210 g de glace",
+        "Vaporisation de 210 g d'eau"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "un gaz est compressible",
+      "carte": "Il y a beaucoup de vide entre ses molécules",
+      "role": "cause",
+      "explication": "Comme les molécules d'un gaz sont très éloignées, on peut les rapprocher en comprimant le gaz."
+    },
+    {
+      "fait": "un gaz est compressible",
+      "carte": "On peut enfoncer le piston d'une seringue bouchée remplie d'air",
+      "role": "consequence",
+      "explication": "On rapproche les molécules d'air, ce qui réduit le volume du gaz."
+    },
+    {
+      "fait": "la vaporisation de l'eau liquide",
+      "carte": "On chauffe l'eau et ses molécules s'agitent davantage",
+      "role": "cause",
+      "explication": "Plus la température est élevée, plus les molécules sont agitées : cette agitation permet de passer à l'état gazeux."
+    },
+    {
+      "fait": "la vaporisation de l'eau liquide",
+      "carte": "Le volume occupé par l'eau devient bien plus grand",
+      "role": "consequence",
+      "explication": "Les mêmes molécules sont maintenant très espacées, donc elles occupent un volume bien plus grand."
+    }
+  ],
+  "etiquettes": [
+    {
+      "consigne": "Quel état de la matière est décrit ?",
+      "texte": "Dans cet état, [les molécules sont très proches, bien rangées, et vibrent sur place].",
+      "choix": ["Solide", "Liquide", "Gaz"],
+      "bonne": 0,
+      "explication": "Des molécules très proches, rangées et qui vibrent sur place : c'est l'état solide."
+    },
+    {
+      "consigne": "Quel état de la matière est décrit ?",
+      "texte": "Dans cet état, [les molécules sont proches mais désordonnées, et glissent les unes sur les autres].",
+      "choix": ["Solide", "Liquide", "Gaz"],
+      "bonne": 1,
+      "explication": "Des molécules proches mais en désordre, qui glissent : c'est l'état liquide."
+    },
+    {
+      "consigne": "Quel état de la matière est décrit ?",
+      "texte": "Dans cet état, [les molécules sont très éloignées, désordonnées et très agitées].",
+      "choix": ["Solide", "Liquide", "Gaz"],
+      "bonne": 2,
+      "explication": "Des molécules éloignées, en désordre et très agitées : c'est l'état gazeux."
+    },
+    {
+      "consigne": "Quel état de la matière est décrit ?",
+      "texte": "On enfonce facilement le piston d'une seringue bouchée remplie d'air, car [il y a beaucoup de vide entre les molécules].",
+      "choix": ["Solide", "Liquide", "Gaz"],
+      "bonne": 2,
+      "explication": "Beaucoup de vide entre les molécules : c'est un gaz, qu'on peut donc comprimer."
+    },
+    {
+      "consigne": "Quel état de la matière est décrit ?",
+      "texte": "Un glaçon garde sa forme car [ses molécules sont serrées en rangées régulières].",
+      "choix": ["Solide", "Liquide", "Gaz"],
+      "bonne": 0,
+      "explication": "Des molécules serrées et rangées : c'est l'état solide, qui garde sa forme."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Agitation",
+      "acceptees": ["Agitation", "L'agitation", "Agitation des molécules", "Agitation thermique"],
+      "indices": [
+        "Je suis un mouvement désordonné des molécules.",
+        "Je suis plus forte quand la température augmente.",
+        "Dans un gaz, je suis très grande."
+      ],
+      "explication": "L'agitation est le mouvement désordonné des molécules ; elle augmente avec la température."
+    },
+    {
+      "reponse": "Soluté",
+      "acceptees": ["Soluté", "Le soluté", "Un soluté"],
+      "indices": [
+        "Je suis une substance qui se dissout.",
+        "Je peux être du sucre ou du sel.",
+        "Mes particules se dispersent entre les molécules du solvant, invisibles mais présentes."
+      ],
+      "explication": "Le soluté est la substance dissoute : ses particules se dispersent dans le solvant sans disparaître."
+    },
+    {
+      "reponse": "Mélange",
+      "acceptees": ["Mélange", "Un mélange", "Le mélange", "Mélange de gaz"],
+      "indices": [
+        "Je suis un type de matière.",
+        "Dans mon modèle, on dessine plusieurs sortes de molécules.",
+        "L'air, avec ses molécules de N₂ et de O₂, en est un exemple."
+      ],
+      "explication": "Un mélange est représenté par plusieurs sortes de molécules, comme l'air (N₂ et O₂)."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "On dissout 5 g de sucre dans 100 g d'eau. Quelle est la masse de la solution ?",
+      "reponse": 105,
+      "unite": "g",
+      "tolerance": 0,
+      "explication": "Le sucre dissous ne disparaît pas : m(solution) = 5 + 100 = 105 g."
+    },
+    {
+      "question": "On fait fondre 250 g de glace. Quelle est la masse d'eau liquide obtenue ?",
+      "reponse": 250,
+      "unite": "g",
+      "tolerance": 0,
+      "explication": "Le nombre de molécules ne change pas lors de la fusion : la masse se conserve, donc 250 g."
+    },
+    {
+      "question": "On dissout 12 g de sel dans 188 g d'eau. Quelle est la masse de la solution ?",
+      "reponse": 200,
+      "unite": "g",
+      "tolerance": 0,
+      "explication": "Les masses s'additionnent : 12 + 188 = 200 g."
+    },
+    {
+      "question": "Une solution de 350 g contient 30 g de sucre dissous. Quelle est la masse d'eau utilisée ?",
+      "reponse": 320,
+      "unite": "g",
+      "tolerance": 0,
+      "explication": "m(solution) = m(soluté) + m(solvant), donc m(eau) = 350 − 30 = 320 g."
+    },
+    {
+      "question": "Dans un modèle de l'air, on dessine 4 molécules de N₂ pour 1 molécule de O₂. Avec 12 molécules de N₂, combien faut-il dessiner de molécules de O₂ ?",
+      "reponse": 3,
+      "unite": "molécules",
+      "tolerance": 0,
+      "explication": "12 molécules de N₂ correspondent à 12 ÷ 4 = 3 groupes de 4 N₂, donc 3 molécules de O₂."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Chauffer de la glace jusqu'à la vapeur",
+      "etapes": [
+        "La glace est solide : molécules serrées et rangées qui vibrent sur place",
+        "La glace fond : les molécules glissent les unes sur les autres",
+        "L'eau liquide chauffe : ses molécules s'agitent de plus en plus",
+        "L'eau se vaporise : les molécules s'éloignent et se dispersent"
+      ]
+    }
+  ]
+}

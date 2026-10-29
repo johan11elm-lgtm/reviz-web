@@ -1,0 +1,148 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Ajouter une idée",
+      "detail": "Les connecteurs d'addition (de plus, en outre, par ailleurs) ajoutent une idée à la précédente.",
+      "cartes": [
+        "Lire détend ; de plus, cela enrichit le vocabulaire",
+        "Ce film est drôle ; en outre, il est instructif",
+        "Le vélo est économique ; par ailleurs, il protège la planète",
+        "Elle chante bien ; de plus, elle joue de la guitare",
+        "Le sport fortifie ; en outre, il crée des liens"
+      ]
+    },
+    {
+      "nom": "Donner une cause",
+      "detail": "Les connecteurs de cause (car, en effet, parce que) expliquent pourquoi quelque chose arrive.",
+      "cartes": [
+        "Il est en retard car son bus est en panne",
+        "Elle a gagné parce qu'elle s'est entraînée",
+        "Les élèves sont fatigués ; en effet, ils ont veillé tard",
+        "Je reste chez moi car il pleut",
+        "Il a raté son train parce qu'il s'est levé tard"
+      ]
+    },
+    {
+      "nom": "Annoncer une conséquence",
+      "detail": "Les connecteurs de conséquence (donc, ainsi, c'est pourquoi) annoncent un résultat.",
+      "cartes": [
+        "Il a gelé, donc la route est glissante",
+        "Elle a beaucoup travaillé ; c'est pourquoi elle a réussi",
+        "Les prix ont augmenté ; ainsi, on achète moins",
+        "Il manquait de preuves ; il a donc été relâché",
+        "La batterie est vide ; c'est pourquoi le téléphone s'éteint"
+      ]
+    },
+    {
+      "nom": "Marquer une opposition",
+      "detail": "Les connecteurs d'opposition (mais, cependant, pourtant, en revanche) opposent deux idées.",
+      "cartes": [
+        "Ce plat est simple, mais il est délicieux",
+        "Il a étudié ; pourtant, il a raté son examen",
+        "Le film est long ; cependant, on ne s'ennuie pas",
+        "Les maths sont difficiles ; en revanche, elles sont logiques",
+        "Il fait froid, mais nous sortons quand même"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Quel est le rôle du passage en couleur dans ce texte argumentatif ?",
+      "texte": "Il faut limiter les écrans le soir. En effet, [ils nuisent au sommeil]. Ainsi, un élève qui joue jusqu'à minuit s'endort en classe.",
+      "choix": ["Thème", "Thèse", "Argument", "Exemple"],
+      "bonne": 2,
+      "explication": "« Ils nuisent au sommeil » est une idée générale qui justifie la thèse : c'est un argument. L'élève qui s'endort en classe est l'exemple."
+    },
+    {
+      "consigne": "Quel est le rôle du passage en couleur dans ce texte argumentatif ?",
+      "texte": "[Il faut limiter les écrans le soir.] En effet, ils nuisent au sommeil.",
+      "choix": ["Thème", "Thèse", "Argument", "Exemple"],
+      "bonne": 1,
+      "explication": "C'est l'opinion défendue sur le sujet des écrans : c'est la thèse. « Ils nuisent au sommeil » vient la justifier."
+    },
+    {
+      "consigne": "Quel est le rôle du passage en couleur dans ce texte argumentatif ?",
+      "texte": "Il faut limiter les écrans, car ils fatiguent. [Léa, 13 ans, s'est endormie en classe après une nuit de jeux vidéo.]",
+      "choix": ["Thème", "Thèse", "Argument", "Exemple"],
+      "bonne": 3,
+      "explication": "C'est un fait précis et concret qui illustre l'argument « ils fatiguent » : c'est un exemple."
+    },
+    {
+      "consigne": "Quel est le rôle du passage en couleur dans ce texte argumentatif ?",
+      "texte": "Aujourd'hui, nous débattons de [l'usage des téléphones au collège]. Pour ma part, je pense qu'il faut le limiter.",
+      "choix": ["Thème", "Thèse", "Argument", "Exemple"],
+      "bonne": 0,
+      "explication": "C'est le sujet dont on parle, sans prise de position : c'est le thème. La thèse est « il faut le limiter »."
+    },
+    {
+      "consigne": "Quel est le rôle du passage en couleur dans ce texte argumentatif ?",
+      "texte": "Je pense que les devoirs sont inutiles. En effet, [ils fatiguent les élèves sans les faire progresser].",
+      "choix": ["Thème", "Thèse", "Argument", "Exemple"],
+      "bonne": 2,
+      "explication": "Cette idée générale explique pourquoi la thèse « les devoirs sont inutiles » est juste : c'est un argument."
+    },
+    {
+      "consigne": "Quel est le rôle du passage en couleur dans ce texte argumentatif ?",
+      "texte": "Voici mon opinion : [les devoirs doivent être supprimés].",
+      "choix": ["Thème", "Thèse", "Argument", "Exemple"],
+      "bonne": 1,
+      "explication": "C'est l'opinion défendue sur le sujet des devoirs : c'est la thèse."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Concession",
+      "acceptees": ["La concession", "Une concession"],
+      "indices": [
+        "Je suis une manière de tenir compte de l'adversaire.",
+        "Je reconnais qu'une partie de ce que dit l'autre est vraie.",
+        "Je m'exprime souvent par « Certes..., mais... »."
+      ],
+      "explication": "La concession reconnaît une part de vérité dans la thèse adverse avant de la dépasser."
+    },
+    {
+      "reponse": "Réfutation",
+      "acceptees": ["La réfutation", "Une réfutation"],
+      "indices": [
+        "Je réponds à un adversaire.",
+        "Je montre qu'un argument de l'adversaire ne tient pas.",
+        "Je prouve qu'il est faux ou insuffisant."
+      ],
+      "explication": "La réfutation montre qu'un argument adverse est faux ou insuffisant."
+    },
+    {
+      "reponse": "Modalisateur",
+      "acceptees": ["Un modalisateur", "Le modalisateur", "Modalisateurs"],
+      "indices": [
+        "Je suis un mot ou une expression dans une phrase.",
+        "Je montre le degré de certitude de celui qui parle.",
+        "« Sans doute » et « il me semble » sont des exemples de moi."
+      ],
+      "explication": "Le modalisateur (sans doute, il me semble) indique le degré de certitude de l'énonciateur."
+    },
+    {
+      "reponse": "Connecteur logique",
+      "acceptees": ["Un connecteur logique", "Connecteur", "Un connecteur", "Mot de liaison"],
+      "indices": [
+        "Je suis un mot ou une expression de liaison.",
+        "Je montre le lien entre deux idées : addition, cause, opposition.",
+        "« De plus », « en effet » et « cependant » sont mes exemples."
+      ],
+      "explication": "Un connecteur logique exprime le lien entre les idées d'un texte : addition, cause, conséquence, opposition."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Les étapes d'un paragraphe argumentatif",
+      "etapes": [
+        "On commence par un alinéa et on annonce l'argument",
+        "On explique pourquoi cet argument soutient la thèse",
+        "On l'illustre par un exemple précis",
+        "On termine par une phrase de bilan"
+      ]
+    }
+  ]
+}

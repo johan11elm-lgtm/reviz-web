@@ -1,0 +1,200 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Les séquences",
+      "detail": "Une séquence est une suite d'instructions exécutées l'une après l'autre, dans un ordre précis, sans répétition ni choix.",
+      "cartes": [
+        "Avancer de 50, puis tourner de 90°",
+        "Allumer la lampe, attendre 2 secondes, éteindre la lampe",
+        "Dire bonjour, puis avancer de 10 pas",
+        "Jouer un son, puis afficher un message",
+        "Ouvrir le portail, attendre, puis le refermer"
+      ]
+    },
+    {
+      "nom": "Les boucles",
+      "detail": "Une boucle fait répéter un groupe d'instructions, par exemple « répéter 4 fois ».",
+      "cartes": [
+        "Répéter 4 fois : avancer de 100, tourner de 90°",
+        "Répéter 10 fois : allumer puis éteindre la lampe",
+        "Répéter 3 fois : avancer de 20 pas",
+        "Répéter 2 fois : jouer un son, attendre 1 seconde",
+        "Répéter 8 fois : tourner de 45°"
+      ]
+    },
+    {
+      "nom": "Les conditions",
+      "detail": "Une condition fait choisir l'action selon la situation, avec la structure « si… alors… sinon ».",
+      "cartes": [
+        "Si un obstacle est détecté, alors reculer, sinon avancer",
+        "Si la lumière est faible, alors allumer la lampe",
+        "Si la température dépasse 25 °C, lancer le ventilateur",
+        "Si une présence est détectée, allumer, sinon éteindre la lampe",
+        "Si le score atteint 10, alors afficher « Gagné »"
+      ]
+    },
+    {
+      "nom": "Les événements",
+      "detail": "Un événement déclenche le programme, par exemple « quand le drapeau vert est cliqué ».",
+      "cartes": [
+        "Quand le drapeau vert est cliqué",
+        "Quand la touche espace est pressée",
+        "Quand on clique sur le lutin",
+        "Quand le robot reçoit un message",
+        "Quand l'élève appuie sur la flèche droite"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Quel est le rôle du passage en couleur dans l'objet programmé ?",
+      "texte": "Dans l'éclairage automatique, [le détecteur de présence] repère quelqu'un qui passe.",
+      "choix": ["Capteur", "Programme", "Actionneur"],
+      "bonne": 0,
+      "explication": "Le détecteur de présence prélève une information : c'est un capteur."
+    },
+    {
+      "consigne": "Quel est le rôle du passage en couleur dans l'objet programmé ?",
+      "texte": "Dans l'éclairage automatique, [la lampe] s'allume quand quelqu'un passe.",
+      "choix": ["Capteur", "Programme", "Actionneur"],
+      "bonne": 2,
+      "explication": "La lampe agit en s'allumant : c'est un actionneur."
+    },
+    {
+      "consigne": "Quel est le rôle du passage en couleur dans l'objet programmé ?",
+      "texte": "Le robot de Léa suit [des instructions écrites en blocs] pour décider quand tourner.",
+      "choix": ["Capteur", "Programme", "Actionneur"],
+      "bonne": 1,
+      "explication": "Des instructions écrites dans un langage compris par la machine forment un programme."
+    },
+    {
+      "consigne": "Quel est le rôle du passage en couleur dans l'objet programmé ?",
+      "texte": "Dans le thermostat, [un petit thermomètre] mesure la température de la pièce.",
+      "choix": ["Capteur", "Programme", "Actionneur"],
+      "bonne": 0,
+      "explication": "Il prélève une information, la température : c'est un capteur."
+    },
+    {
+      "consigne": "Quel est le rôle du passage en couleur dans l'objet programmé ?",
+      "texte": "Dans l'alarme, [le haut-parleur] émet un son strident quand la porte s'ouvre.",
+      "choix": ["Capteur", "Programme", "Actionneur"],
+      "bonne": 2,
+      "explication": "Le haut-parleur agit en émettant un son : c'est un actionneur."
+    },
+    {
+      "consigne": "Quel est le rôle du passage en couleur dans l'objet programmé ?",
+      "texte": "Pour démarrer le robot, Nina appuie sur [le bouton poussoir].",
+      "choix": ["Capteur", "Programme", "Actionneur"],
+      "bonne": 0,
+      "explication": "Le bouton poussoir prélève une information (on veut démarrer) : c'est un capteur."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Algorithme",
+      "acceptees": ["Algorithme", "Un algorithme", "L'algorithme"],
+      "indices": [
+        "On peut m'écrire en français ou sous forme de schéma.",
+        "Je suis une suite ordonnée d'instructions pour résoudre un problème.",
+        "Une recette de cuisine est un exemple de ce que je suis."
+      ],
+      "explication": "Un algorithme est une suite ordonnée d'instructions pour résoudre un problème, comme une recette de cuisine."
+    },
+    {
+      "reponse": "Capteur",
+      "acceptees": ["Capteur", "Un capteur", "Le capteur"],
+      "indices": [
+        "Je suis un composant d'un objet programmé.",
+        "Je prélève une information : une présence, une lumière ou une température.",
+        "Le détecteur de présence d'un éclairage automatique est un exemple de ce que je suis."
+      ],
+      "explication": "Un capteur est un composant qui prélève une information ; le programme la traite ensuite."
+    },
+    {
+      "reponse": "Signal",
+      "acceptees": ["Signal", "Un signal", "Le signal"],
+      "indices": [
+        "Je transporte une information.",
+        "Je pars d'un émetteur et j'arrive à un récepteur.",
+        "Je peux être sonore, lumineux, électrique ou être une onde radio."
+      ],
+      "explication": "Un signal est un phénomène qui transporte une information d'un émetteur vers un récepteur."
+    },
+    {
+      "reponse": "Boucle",
+      "acceptees": ["Boucle", "Une boucle", "La boucle"],
+      "indices": [
+        "Je suis une instruction d'un programme.",
+        "Je fais répéter un groupe d'instructions.",
+        "Grâce à moi, un robot trace un carré en répétant quatre fois « avancer, tourner de 90° »."
+      ],
+      "explication": "Une boucle fait répéter un groupe d'instructions, par exemple « répéter 4 fois »."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "Un robot exécute : répéter 4 fois [avancer de 100 pas, tourner de 90°]. Quelle distance parcourt-il en tout ?",
+      "reponse": 400,
+      "unite": "pas",
+      "tolerance": 0,
+      "explication": "Il avance de 100 pas à chaque tour de boucle : 4 × 100 = 400 pas."
+    },
+    {
+      "question": "Un robot exécute : répéter 6 fois [avancer de 50 pas, tourner de 60°]. De combien de degrés a-t-il tourné en tout ?",
+      "reponse": 360,
+      "unite": "°",
+      "tolerance": 0,
+      "explication": "Il tourne de 60° à chaque tour de boucle : 6 × 60 = 360°."
+    },
+    {
+      "question": "Un robot exécute : répéter 5 fois [avancer de 20 pas]. Combien de pas parcourt-il en tout ?",
+      "reponse": 100,
+      "unite": "pas",
+      "tolerance": 0,
+      "explication": "5 × 20 = 100 pas."
+    },
+    {
+      "question": "Une lampe reste allumée 2 secondes, puis éteinte 1 seconde, et ce cycle est répété 10 fois. Combien de secondes dure le programme ?",
+      "reponse": 30,
+      "unite": "s",
+      "tolerance": 0,
+      "explication": "Un cycle dure 2 + 1 = 3 secondes, donc 10 × 3 = 30 secondes."
+    },
+    {
+      "question": "Un programme répète 3 fois [avancer de 10 pas, tourner de 90°], puis avance une dernière fois de 5 pas. Combien de pas le robot parcourt-il en tout ?",
+      "reponse": 35,
+      "unite": "pas",
+      "tolerance": 0,
+      "explication": "La boucle donne 3 × 10 = 30 pas, puis 5 pas de plus : 30 + 5 = 35 pas."
+    },
+    {
+      "question": "Pour tracer un carré, un robot répète « avancer, tourner de 90° ». Combien de fois doit-il répéter ces instructions pour avoir tourné de 360° en tout ?",
+      "reponse": 4,
+      "unite": "fois",
+      "tolerance": 0,
+      "explication": "360 ÷ 90 = 4 : un carré a 4 côtés et 4 angles droits."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Écrire un programme simple avec des blocs",
+      "etapes": [
+        "On écrit l'algorithme en français, dans l'ordre",
+        "On choisit l'événement qui lance le programme",
+        "On place les blocs dans l'ordre, avec boucles et conditions",
+        "On teste le programme et on le corrige"
+      ]
+    },
+    {
+      "titre": "Le fonctionnement d'un éclairage automatique",
+      "etapes": [
+        "Le détecteur de présence repère quelqu'un",
+        "Il transmet l'information au programme",
+        "Le programme décide d'allumer la lampe",
+        "La lampe s'allume"
+      ]
+    }
+  ]
+}

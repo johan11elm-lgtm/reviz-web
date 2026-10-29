@@ -1,0 +1,153 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Liaison encastrement",
+      "detail": "Les deux pièces sont fixes l'une par rapport à l'autre : aucun mouvement n'est possible.",
+      "cartes": [
+        "Deux pièces soudées entre elles",
+        "Deux planches collées l'une à l'autre",
+        "Une brique scellée dans un mur",
+        "Une étagère fixée solidement au mur",
+        "Le manche d'un marteau bloqué dans sa tête"
+      ]
+    },
+    {
+      "nom": "Liaison pivot",
+      "detail": "Une seule rotation autour d'un axe est possible, comme avec une charnière.",
+      "cartes": [
+        "Une porte qui tourne autour de ses gonds",
+        "Le couvercle d'une boîte relié par une charnière",
+        "Une roue de vélo qui tourne autour de son axe",
+        "Les deux branches d'une paire de ciseaux",
+        "Le levier de frein d'un vélo"
+      ]
+    },
+    {
+      "nom": "Liaison glissière",
+      "detail": "Une seule translation selon un axe est possible, comme pour un tiroir.",
+      "cartes": [
+        "Un tiroir de bureau qu'on tire vers soi",
+        "Une fenêtre coulissante qui s'ouvre sur le côté",
+        "Un siège de voiture qui avance sur ses rails",
+        "Le chariot d'une imprimante sur son rail",
+        "Une cabine d'ascenseur guidée dans sa gaine"
+      ]
+    },
+    {
+      "nom": "Liaison rotule",
+      "detail": "Trois rotations sont possibles, et aucune translation.",
+      "cartes": [
+        "Une remorque accrochée à la boule d'une voiture",
+        "Le joystick d'une manette de jeu",
+        "L'épaule, qui déplace le bras dans tous les sens",
+        "Un rétroviseur réglable dans toutes les directions",
+        "La tête d'un trépied photo qui se règle en tous sens"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Quelle est la liaison entre les deux pièces en couleur ?",
+      "texte": "Sur un coffre à jouets, [le couvercle et le coffre] sont reliés par une charnière : le couvercle ne peut que tourner autour d'un axe.",
+      "choix": ["Encastrement", "Pivot", "Glissière", "Rotule"],
+      "bonne": 1,
+      "explication": "Une seule rotation autour d'un axe est possible : c'est une liaison pivot, comme une charnière."
+    },
+    {
+      "consigne": "Quelle est la liaison entre les deux pièces en couleur ?",
+      "texte": "Quand tu ouvres le tiroir de ton bureau, [le tiroir et le meuble] ne peuvent bouger que sur une seule ligne droite.",
+      "choix": ["Encastrement", "Pivot", "Glissière", "Rotule"],
+      "bonne": 2,
+      "explication": "Une seule translation selon un axe est possible : c'est une liaison glissière."
+    },
+    {
+      "consigne": "Quelle est la liaison entre les deux pièces en couleur ?",
+      "texte": "Deux tôles sont soudées ensemble : [les deux tôles] ne peuvent faire aucun mouvement l'une par rapport à l'autre.",
+      "choix": ["Encastrement", "Pivot", "Glissière", "Rotule"],
+      "bonne": 0,
+      "explication": "Aucun mouvement n'est possible entre des pièces soudées : c'est une liaison encastrement."
+    },
+    {
+      "consigne": "Quelle est la liaison entre les deux pièces en couleur ?",
+      "texte": "Sur une manette de jeu, [le joystick et la manette] permettent d'incliner la tige dans toutes les directions.",
+      "choix": ["Encastrement", "Pivot", "Glissière", "Rotule"],
+      "bonne": 3,
+      "explication": "Trois rotations sont possibles autour d'un point : c'est une liaison rotule."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Hélicoïdale",
+      "acceptees": ["Hélicoïdale", "Liaison hélicoïdale", "La liaison hélicoïdale", "Une liaison hélicoïdale"],
+      "indices": [
+        "Je relie deux pièces d'un mécanisme.",
+        "Chez moi, la rotation fait forcément avancer la pièce.",
+        "On me trouve entre une vis et son écrou."
+      ],
+      "explication": "Dans la liaison hélicoïdale, la rotation et la translation sont liées : tourner la vis la fait avancer dans l'écrou."
+    },
+    {
+      "reponse": "Pivot glissant",
+      "acceptees": ["Pivot glissant", "Liaison pivot glissant", "La liaison pivot glissant", "Une liaison pivot glissant"],
+      "indices": [
+        "Je relie deux pièces d'un mécanisme.",
+        "Je laisse une rotation et une translation sur le même axe.",
+        "Chez moi, ces deux mouvements sont indépendants l'un de l'autre."
+      ],
+      "explication": "Dans le pivot glissant, la pièce peut tourner et coulisser sur le même axe, sans que l'un entraîne l'autre."
+    },
+    {
+      "reponse": "Schéma cinématique",
+      "acceptees": ["Schéma cinématique", "Un schéma cinématique", "Le schéma cinématique"],
+      "indices": [
+        "Je suis un dessin très simplifié.",
+        "Chaque liaison y est représentée par un symbole normalisé.",
+        "On me dessine pour représenter les mouvements d'un mécanisme."
+      ],
+      "explication": "Le schéma cinématique représente un mécanisme avec des symboles normalisés pour chaque liaison."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "Une pièce libre dans l'espace peut faire 3 translations et 3 rotations, soit 6 mouvements. Une liaison pivot n'en autorise qu'un seul : une rotation. Combien de mouvements supprime-t-elle ?",
+      "reponse": 5,
+      "unite": "mouvements",
+      "tolerance": 0,
+      "explication": "6 − 1 = 5 : la liaison pivot supprime 5 mouvements, seule la rotation autour de l'axe reste possible."
+    },
+    {
+      "question": "Une liaison rotule autorise 3 rotations et aucune translation. Sur les 6 mouvements d'une pièce libre, combien supprime-t-elle ?",
+      "reponse": 3,
+      "unite": "mouvements",
+      "tolerance": 0,
+      "explication": "6 − 3 = 3 : la rotule supprime les 3 translations et garde les 3 rotations."
+    },
+    {
+      "question": "Une liaison pivot glissant supprime 4 des 6 mouvements d'une pièce libre. Combien de degrés de liberté reste-t-il ?",
+      "reponse": 2,
+      "unite": "degrés de liberté",
+      "tolerance": 0,
+      "explication": "6 − 4 = 2 : il reste une rotation et une translation sur le même axe."
+    },
+    {
+      "question": "Le cadre d'un vélo est fait de tubes soudés entre eux. Sur les 6 mouvements possibles d'une pièce libre, combien en reste-t-il entre deux tubes soudés ?",
+      "reponse": 0,
+      "unite": "mouvements",
+      "tolerance": 0,
+      "explication": "Des pièces soudées sont en liaison encastrement : tous les mouvements sont supprimés, il en reste 0."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Modéliser un mécanisme",
+      "etapes": [
+        "On repère toutes les pièces du mécanisme",
+        "On regroupe les pièces qui bougent ensemble",
+        "On relie ces ensembles par des liaisons",
+        "On dessine le schéma cinématique avec les symboles"
+      ]
+    }
+  ]
+}

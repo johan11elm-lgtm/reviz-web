@@ -1,0 +1,184 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Les réactifs d'une équation",
+      "detail": "Les espèces écrites à gauche de la flèche : elles sont consommées pendant la transformation.",
+      "cartes": [
+        "Ils s'écrivent à gauche de la flèche",
+        "Ce sont les espèces qui disparaissent en réagissant",
+        "Le méthane et le dioxygène qui brûlent ensemble",
+        "On les lit avant « se transforment en »",
+        "C et O₂ dans C + O₂ → CO₂"
+      ]
+    },
+    {
+      "nom": "Les produits d'une équation",
+      "detail": "Les espèces écrites à droite de la flèche : elles se forment pendant la transformation.",
+      "cartes": [
+        "Ils s'écrivent à droite de la flèche",
+        "Ce sont les espèces qui se forment pendant la réaction",
+        "Le CO₂ obtenu en brûlant du carbone",
+        "On les lit après « se transforment en »",
+        "L'eau obtenue en brûlant du dihydrogène"
+      ]
+    },
+    {
+      "nom": "Les coefficients d'une équation",
+      "detail": "Le nombre écrit devant une formule : il donne le nombre de molécules.",
+      "cartes": [
+        "Le nombre écrit devant une formule",
+        "Il compte les molécules d'une même espèce",
+        "On le choisit pour ajuster l'équation",
+        "Il multiplie tous les atomes de la molécule",
+        "Dans 3 CO₂, c'est le nombre 3"
+      ]
+    },
+    {
+      "nom": "Les indices d'une formule",
+      "detail": "Le petit nombre en bas à droite d'un symbole : il donne le nombre d'atomes dans la molécule.",
+      "cartes": [
+        "Le petit nombre en bas à droite d'un symbole",
+        "Il indique combien d'atomes de ce symbole la molécule contient",
+        "On n'y touche jamais pour ajuster l'équation",
+        "Le modifier change l'espèce : H₂O devient H₂O₂",
+        "Dans CH₄, c'est le petit 4"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Que représente le passage en couleur ?",
+      "texte": "Combustion du méthane : [CH₄] + 2 O₂ → CO₂ + 2 H₂O.",
+      "choix": ["Un réactif", "Un produit", "Un coefficient", "Un indice"],
+      "bonne": 0,
+      "explication": "CH₄ est écrit à gauche de la flèche : c'est un réactif, le méthane qui brûle."
+    },
+    {
+      "consigne": "Que représente le passage en couleur ?",
+      "texte": "Combustion du méthane : CH₄ + [2] O₂ → CO₂ + 2 H₂O.",
+      "choix": ["Un réactif", "Un produit", "Un coefficient", "Un indice"],
+      "bonne": 2,
+      "explication": "Le 2 est placé devant la formule O₂ : c'est un coefficient, il compte 2 molécules de dioxygène."
+    },
+    {
+      "consigne": "Que représente le passage en couleur ?",
+      "texte": "Formation de l'eau : 2 H₂ + O₂ → 2 H[₂]O.",
+      "choix": ["Un réactif", "Un produit", "Un coefficient", "Un indice"],
+      "bonne": 3,
+      "explication": "Le petit 2 est en bas à droite du symbole H : c'est un indice, il compte 2 atomes d'hydrogène dans la molécule."
+    },
+    {
+      "consigne": "Que représente le passage en couleur ?",
+      "texte": "Formation de l'eau : 2 H₂ + O₂ → 2 [H₂O].",
+      "choix": ["Un réactif", "Un produit", "Un coefficient", "Un indice"],
+      "bonne": 1,
+      "explication": "H₂O est écrit à droite de la flèche : c'est un produit, l'eau qui se forme."
+    },
+    {
+      "consigne": "Que représente le passage en couleur ?",
+      "texte": "Combustion incomplète du carbone : 2 C + O₂ → [2] CO.",
+      "choix": ["Un réactif", "Un produit", "Un coefficient", "Un indice"],
+      "bonne": 2,
+      "explication": "Le 2 est placé devant la formule CO : c'est un coefficient, il compte 2 molécules de CO."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Coefficient",
+      "acceptees": ["Coefficient", "Le coefficient", "Un coefficient"],
+      "indices": [
+        "Je suis un nombre que l'on trouve dans une équation de réaction.",
+        "Je suis écrit devant une formule chimique.",
+        "Je donne le nombre de molécules et je multiplie tous les atomes de la formule."
+      ],
+      "explication": "Le coefficient, placé devant la formule, donne le nombre de molécules ; on le choisit pour ajuster l'équation."
+    },
+    {
+      "reponse": "Indice",
+      "acceptees": ["Indice", "L'indice", "Un indice"],
+      "indices": [
+        "Je suis un nombre, mais très petit.",
+        "On me trouve en bas à droite d'un symbole chimique.",
+        "Je compte les atomes d'une molécule et on ne me modifie jamais pour ajuster."
+      ],
+      "explication": "L'indice fait partie de la formule : il donne le nombre d'atomes dans la molécule et ne se modifie jamais."
+    },
+    {
+      "reponse": "Équation de réaction",
+      "acceptees": ["Équation de réaction", "Équation", "Équation chimique", "Une équation de réaction"],
+      "indices": [
+        "Je suis une écriture chimique.",
+        "Je contiens des formules séparées par des + et une flèche.",
+        "On m'ajuste avec des coefficients pour que les atomes se conservent."
+      ],
+      "explication": "L'équation de réaction traduit une transformation avec les formules ; une fois ajustée, elle montre la conservation des atomes."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "Combien d'atomes d'oxygène contiennent 4 molécules de CO₂ ?",
+      "reponse": 8,
+      "unite": "atomes",
+      "tolerance": 0,
+      "explication": "Une molécule CO₂ contient 2 atomes O, donc 4 × 2 = 8 atomes d'oxygène."
+    },
+    {
+      "question": "Combien d'atomes d'hydrogène contiennent 3 molécules d'eau H₂O ?",
+      "reponse": 6,
+      "unite": "atomes",
+      "tolerance": 0,
+      "explication": "Une molécule H₂O contient 2 atomes H, donc 3 × 2 = 6 atomes d'hydrogène."
+    },
+    {
+      "question": "Combien d'atomes, toutes sortes confondues, contiennent 2 molécules de méthane CH₄ ?",
+      "reponse": 10,
+      "unite": "atomes",
+      "tolerance": 0,
+      "explication": "Une molécule CH₄ contient 1 + 4 = 5 atomes, donc 2 × 5 = 10 atomes."
+    },
+    {
+      "question": "Quel coefficient faut-il placer devant H₂O pour ajuster 2 H₂ + O₂ → … H₂O ?",
+      "reponse": 2,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "À gauche, il y a 2 × 2 = 4 atomes H et 2 atomes O. Avec 2 H₂O à droite : 4 H et 2 O. Le coefficient est 2."
+    },
+    {
+      "question": "Combustion du méthane : 16 g de méthane réagissent avec 64 g de dioxygène et forment 44 g de dioxyde de carbone. Quelle masse d'eau se forme ?",
+      "reponse": 36,
+      "unite": "g",
+      "tolerance": 0,
+      "explication": "La masse est conservée : 16 + 64 = 80 g de réactifs, donc 80 − 44 = 36 g d'eau."
+    },
+    {
+      "question": "Dans CH₄ + 2 O₂ → CO₂ + 2 H₂O, combien d'atomes d'oxygène y a-t-il du côté des produits ?",
+      "reponse": 4,
+      "unite": "atomes",
+      "tolerance": 0,
+      "explication": "CO₂ contient 2 atomes O et 2 H₂O en contiennent 2 × 1 = 2 : 2 + 2 = 4 atomes d'oxygène."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Les étapes pour ajuster une équation",
+      "etapes": [
+        "Écris les formules, réactifs à gauche et produits à droite",
+        "Compte les atomes de chaque sorte de chaque côté",
+        "Place des coefficients devant les formules, sans toucher aux indices",
+        "Recompte chaque sorte d'atome des deux côtés pour vérifier"
+      ]
+    },
+    {
+      "titre": "Ajuster H₂ + O₂ → H₂O pas à pas",
+      "etapes": [
+        "On écrit H₂ + O₂ → H₂O, pas encore ajustée",
+        "On compte 2 atomes O à gauche et 1 seul à droite",
+        "On place 2 devant H₂O pour avoir 2 atomes O",
+        "On compte alors 4 atomes H à droite, donc on place 2 devant H₂",
+        "On vérifie : 4 H et 2 O de chaque côté"
+      ]
+    }
+  ]
+}

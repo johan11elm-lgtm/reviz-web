@@ -1,0 +1,148 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Le passé composé",
+      "detail": "Un auxiliaire au présent (être ou avoir) suivi d'un participe passé : une action passée et achevée.",
+      "cartes": [
+        "Nous avons chanté hier soir",
+        "Elle est tombée dans l'escalier",
+        "Ils ont fini leurs devoirs",
+        "Je suis allé au cinéma samedi",
+        "Vous avez pris le dernier bus"
+      ]
+    },
+    {
+      "nom": "Le plus-que-parfait",
+      "detail": "Un auxiliaire à l'imparfait suivi d'un participe passé : une action antérieure à une autre action passée.",
+      "cartes": [
+        "J'avais fini avant ton arrivée",
+        "Nous étions partis très tôt",
+        "Elle avait pris son parapluie",
+        "Ils étaient déjà arrivés",
+        "Tu avais mangé trop vite"
+      ]
+    },
+    {
+      "nom": "L'impératif présent",
+      "detail": "Un verbe sans sujet exprimé, pour donner un ordre ou un conseil.",
+      "cartes": [
+        "Chantons tous ensemble",
+        "Prends ton manteau",
+        "Sois sage et reste calme",
+        "Finissez vos devoirs",
+        "Va à l'école"
+      ]
+    },
+    {
+      "nom": "Le conditionnel présent",
+      "detail": "Le radical du futur avec les terminaisons de l'imparfait : demande polie, souhait ou imaginaire.",
+      "cartes": [
+        "Je voudrais un verre d'eau, s'il vous plaît",
+        "Nous aimerions réserver une table",
+        "Elle partirait volontiers en voyage",
+        "Tu serais content de la revoir",
+        "Ils iraient bien à la mer"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Quel est le temps du verbe en couleur ?",
+      "texte": "Hier, nous [sommes allés] au parc.",
+      "choix": ["Passé composé", "Plus-que-parfait", "Impératif présent", "Conditionnel présent"],
+      "bonne": 0,
+      "explication": "L'auxiliaire « être » est au présent (sommes) et il est suivi du participe passé « allés » : c'est un passé composé."
+    },
+    {
+      "consigne": "Quel est le temps du verbe en couleur ?",
+      "texte": "Quand je suis arrivé, le film [avait commencé].",
+      "choix": ["Passé composé", "Plus-que-parfait", "Impératif présent", "Conditionnel présent"],
+      "bonne": 1,
+      "explication": "L'auxiliaire « avoir » est à l'imparfait (avait) et il est suivi du participe passé « commencé » : c'est un plus-que-parfait, le film a commencé avant."
+    },
+    {
+      "consigne": "Quel est le temps du verbe en couleur ?",
+      "texte": "[Prends] ton cahier et ouvre-le.",
+      "choix": ["Passé composé", "Plus-que-parfait", "Impératif présent", "Conditionnel présent"],
+      "bonne": 2,
+      "explication": "« Prends » exprime un ordre et n'a pas de sujet exprimé : c'est un impératif présent."
+    },
+    {
+      "consigne": "Quel est le temps du verbe en couleur ?",
+      "texte": "Je [voudrais] un peu d'eau, s'il vous plaît.",
+      "choix": ["Passé composé", "Plus-que-parfait", "Impératif présent", "Conditionnel présent"],
+      "bonne": 3,
+      "explication": "« voudrais » a le radical du futur (voudr-) et la terminaison -ais de l'imparfait : c'est un conditionnel présent, ici pour une demande polie."
+    },
+    {
+      "consigne": "Quel est le temps du verbe en couleur ?",
+      "texte": "Tu [avais oublié] ton sac à la maison.",
+      "choix": ["Passé composé", "Plus-que-parfait", "Impératif présent", "Conditionnel présent"],
+      "bonne": 1,
+      "explication": "L'auxiliaire « avoir » est à l'imparfait (avais) et il est suivi du participe passé « oublié » : c'est un plus-que-parfait."
+    },
+    {
+      "consigne": "Quel est le temps du verbe en couleur ?",
+      "texte": "[Finissez] vos exercices avant de sortir.",
+      "choix": ["Passé composé", "Plus-que-parfait", "Impératif présent", "Conditionnel présent"],
+      "bonne": 2,
+      "explication": "« Finissez » donne un ordre et n'a pas de sujet exprimé : c'est un impératif présent, à la 2e personne du pluriel."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Plus-que-parfait",
+      "acceptees": ["Plus-que-parfait", "Le plus-que-parfait", "Plus que parfait"],
+      "indices": [
+        "Je suis un temps composé.",
+        "Mon auxiliaire est à l'imparfait.",
+        "J'exprime une action antérieure à une autre action passée."
+      ],
+      "explication": "Le plus-que-parfait associe l'auxiliaire à l'imparfait et le participe passé : j'avais chanté."
+    },
+    {
+      "reponse": "Impératif",
+      "acceptees": ["Impératif", "L'impératif", "Impératif présent"],
+      "indices": [
+        "Je suis un mode de la conjugaison.",
+        "Je n'ai que trois personnes et pas de sujet exprimé.",
+        "Je sers à donner un ordre ou un conseil."
+      ],
+      "explication": "L'impératif a trois personnes : chante, chantons, chantez."
+    },
+    {
+      "reponse": "Auxiliaire",
+      "acceptees": ["Auxiliaire", "Un auxiliaire", "L'auxiliaire"],
+      "indices": [
+        "Je suis un verbe.",
+        "Je suis soit « être », soit « avoir ».",
+        "Je me place devant le participe passé pour former les temps composés."
+      ],
+      "explication": "L'auxiliaire (être ou avoir) sert à former les temps composés."
+    },
+    {
+      "reponse": "Conditionnel",
+      "acceptees": ["Conditionnel", "Le conditionnel", "Conditionnel présent"],
+      "indices": [
+        "Je sers à faire une demande polie ou à exprimer un souhait.",
+        "Je me forme sur le radical du futur.",
+        "J'ai les terminaisons de l'imparfait : -ais, -ais, -ait, -ions, -iez, -aient."
+      ],
+      "explication": "Le conditionnel présent se forme avec le radical du futur et les terminaisons de l'imparfait : je chanterais."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Distinguer futur et conditionnel à la 1re personne",
+      "etapes": [
+        "Repère un verbe qui se termine par -rai ou -rais",
+        "Remplace « je » par « nous »",
+        "Lis la nouvelle terminaison : -rons ou -rions",
+        "Avec -rons c'est un futur, avec -rions un conditionnel"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,189 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "La Chine des empereurs",
+      "detail": "Le pouvoir en Chine : le premier empereur, la dynastie des Han et leur administration.",
+      "cartes": [
+        "Un empereur appelé « Fils du Ciel »",
+        "Des fonctionnaires lettrés formés aux idées de Confucius",
+        "En 221 av. J.-C., Qin Shi Huangdi unifie le pays",
+        "Une dynastie qui règne plus de quatre siècles",
+        "Un tombeau gardé par des soldats en terre cuite"
+      ]
+    },
+    {
+      "nom": "Les chemins du commerce",
+      "detail": "Les itinéraires, sur terre et sur mer, qui relient la Chine à la Méditerranée.",
+      "cartes": [
+        "Des caravanes d'oasis en oasis à travers l'Asie centrale",
+        "Des navires par l'océan Indien et la mer Rouge",
+        "Un ensemble d'itinéraires, et non une seule route",
+        "Le nom « route de la soie », né au XIXe siècle",
+        "Un réseau qui mène jusqu'à la Méditerranée"
+      ]
+    },
+    {
+      "nom": "Les produits échangés",
+      "detail": "Ce qui circule entre la Chine et Rome : ce qui part vers l'ouest et ce qui part vers l'est.",
+      "cartes": [
+        "La soie, tissu de luxe très cher à Rome",
+        "Des épices et des pierres précieuses vers l'ouest",
+        "De l'or et de l'argent vers l'est",
+        "Du verre et du vin vers l'est",
+        "Des tissus de laine vers l'est"
+      ]
+    },
+    {
+      "nom": "Les relations entre les deux empires",
+      "detail": "Ce que Romains et Chinois savent les uns des autres et comment ils entrent en contact.",
+      "cartes": [
+        "Les Romains surnomment les Chinois « Sères »",
+        "Les Chinois appellent l'Empire romain « Da Qin »",
+        "Des envoyés se disant romains arrivent à la cour chinoise",
+        "Des peuples comme les Parthes servent d'intermédiaires",
+        "Romains et Chinois se rencontrent très rarement"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "le prix très élevé de la soie à Rome",
+      "carte": "Des marchandises qui passent de main en main et sont revendues plus cher",
+      "role": "cause",
+      "explication": "Chaque intermédiaire revend la soie plus cher : à Rome, elle arrive à un prix très élevé."
+    },
+    {
+      "fait": "le prix très élevé de la soie à Rome",
+      "carte": "Les Chinois qui gardent secrète la fabrication de la soie",
+      "role": "cause",
+      "explication": "Les Chinois gardent le secret de fabrication : la soie est rare et donc très chère."
+    },
+    {
+      "fait": "le prix très élevé de la soie à Rome",
+      "carte": "Pline l'Ancien qui critique l'or dépensé pour en acheter",
+      "role": "consequence",
+      "explication": "La soie coûte si cher que Pline l'Ancien critique l'or que les Romains dépensent pour l'acheter."
+    },
+    {
+      "fait": "le prix très élevé de la soie à Rome",
+      "carte": "Un tissu devenu un produit de luxe réservé aux riches",
+      "role": "consequence",
+      "explication": "Parce qu'elle est très chère, la soie devient à Rome un produit de luxe."
+    }
+  ],
+  "etiquettes": [
+    {
+      "consigne": "Qui est désigné par le passage en couleur ?",
+      "texte": "En 221 av. J.-C., [Qin Shi Huangdi] unifie la Chine.",
+      "choix": ["L'empereur", "Les fonctionnaires lettrés", "Les marchands intermédiaires"],
+      "bonne": 0,
+      "explication": "Qin Shi Huangdi est le premier empereur de Chine."
+    },
+    {
+      "consigne": "Qui est désigné par le passage en couleur ?",
+      "texte": "[Des fonctionnaires lettrés], formés aux idées de Confucius, administrent l'empire.",
+      "choix": ["L'empereur", "Les fonctionnaires lettrés", "Les marchands intermédiaires"],
+      "bonne": 1,
+      "explication": "Ce sont des fonctionnaires lettrés, formés aux idées de Confucius, qui administrent l'empire des Han."
+    },
+    {
+      "consigne": "Qui est désigné par le passage en couleur ?",
+      "texte": "Sur la route, [les Parthes et les marchands indiens] revendent les marchandises plus cher.",
+      "choix": ["L'empereur", "Les fonctionnaires lettrés", "Les marchands intermédiaires"],
+      "bonne": 2,
+      "explication": "Parthes, Kouchans, marchands indiens et arabes sont des intermédiaires : aucun ne fait tout le trajet."
+    },
+    {
+      "consigne": "Qui est désigné par le passage en couleur ?",
+      "texte": "[Le Fils du Ciel] gouverne un immense territoire.",
+      "choix": ["L'empereur", "Les fonctionnaires lettrés", "Les marchands intermédiaires"],
+      "bonne": 0,
+      "explication": "« Fils du Ciel » est le nom donné à l'empereur de Chine."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Qin Shi Huangdi",
+      "acceptees": ["Qin Shi Huangdi", "Shi Huangdi", "Qin Shi Huang"],
+      "indices": [
+        "Je suis un souverain de la Chine ancienne.",
+        "J'unifie la Chine en 221 av. J.-C.",
+        "Je suis le premier empereur de Chine et mon tombeau est gardé par une armée de soldats en terre cuite."
+      ],
+      "explication": "Qin Shi Huangdi unifie la Chine en 221 av. J.-C. et devient le premier empereur."
+    },
+    {
+      "reponse": "Soie",
+      "acceptees": ["La soie", "Soie"],
+      "indices": [
+        "Je suis un produit de luxe.",
+        "Les Chinois gardent secrète ma fabrication.",
+        "Je pars de Chine vers l'ouest et les riches Romains m'achètent très cher."
+      ],
+      "explication": "La soie est le produit de luxe chinois qui donne son nom à la route de la soie."
+    },
+    {
+      "reponse": "Confucius",
+      "acceptees": ["Confucius"],
+      "indices": [
+        "Je suis un penseur de la Chine ancienne.",
+        "Mes idées demandent de respecter l'ordre, les ancêtres et l'autorité.",
+        "Les fonctionnaires lettrés des Han sont formés à mes idées."
+      ],
+      "explication": "Les fonctionnaires lettrés de la Chine des Han sont formés aux idées de Confucius."
+    },
+    {
+      "reponse": "Han",
+      "acceptees": ["Les Han", "La dynastie Han", "Dynastie Han", "Han"],
+      "indices": [
+        "Je suis une dynastie chinoise.",
+        "Je règne plus de quatre siècles, à la même époque que l'Empire romain.",
+        "Je règne de 206 av. J.-C. à 220 apr. J.-C."
+      ],
+      "explication": "La dynastie des Han règne de 206 av. J.-C. à 220 apr. J.-C., après la courte dynastie de Qin Shi Huangdi."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "Qin Shi Huangdi unifie la Chine en 221 av. J.-C. et la dynastie des Han commence en 206 av. J.-C. Combien d'années plus tard ?",
+      "reponse": 15,
+      "unite": "ans",
+      "tolerance": 0,
+      "explication": "221 − 206 = 15 ans."
+    },
+    {
+      "question": "La Chine des Han et l'Empire romain comptent chacun environ 60 millions d'habitants. Combien d'habitants à eux deux, en millions ?",
+      "reponse": 120,
+      "unite": "millions",
+      "tolerance": 0,
+      "explication": "60 + 60 = 120 millions d'habitants."
+    },
+    {
+      "question": "Qin Shi Huangdi unifie la Chine en 221 av. J.-C. et l'empereur envoie Zhang Qian vers l'Asie centrale vers 138 av. J.-C. Combien d'années plus tard ?",
+      "reponse": 83,
+      "unite": "ans",
+      "tolerance": 0,
+      "explication": "221 − 138 = 83 ans."
+    },
+    {
+      "question": "On attribue à Cai Lun l'amélioration du papier vers 105 apr. J.-C. Des envoyés se disant romains arrivent à la cour des Han en 166 apr. J.-C. Combien d'années plus tard ?",
+      "reponse": 61,
+      "unite": "ans",
+      "tolerance": 0,
+      "explication": "166 − 105 = 61 ans."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "La Chine ancienne, de la plus ancienne à la plus récente",
+      "etapes": [
+        "Qin Shi Huangdi unifie la Chine et devient empereur",
+        "La dynastie des Han prend le pouvoir",
+        "L'empereur envoie Zhang Qian vers l'Asie centrale",
+        "Cai Lun améliore la fabrication du papier",
+        "Des envoyés se disant romains arrivent à la cour des Han"
+      ]
+    }
+  ]
+}

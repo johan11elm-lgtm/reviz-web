@@ -1,0 +1,148 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Phrase simple",
+      "detail": "La phrase contient un seul verbe conjugué, donc une seule proposition (un infinitif ne compte pas).",
+      "cartes": [
+        "Le loup attend sous l'arbre",
+        "Il veut partir",
+        "Le loup et le renard rusent",
+        "Nous aimons chanter sous la pluie",
+        "Les enfants courent vers la plage"
+      ]
+    },
+    {
+      "nom": "Propositions juxtaposées",
+      "detail": "Plusieurs propositions séparées par une virgule, un point-virgule ou deux-points, sans mot de liaison.",
+      "cartes": [
+        "La pluie tombe ; le sol devient glissant",
+        "Je suis venu, j'ai vu, j'ai vaincu",
+        "Le loup attend, le renard approche",
+        "Le jour se lève : les oiseaux chantent",
+        "La nuit tombe, les étoiles s'allument"
+      ]
+    },
+    {
+      "nom": "Propositions coordonnées",
+      "detail": "Plusieurs propositions reliées par une conjonction de coordination (mais, ou, et, donc, or, ni, car) ; chacune pourrait former une phrase seule.",
+      "cartes": [
+        "Il pleuvait, mais nous sommes sortis",
+        "Le soleil se couche et la ville s'endort",
+        "Léa a faim, donc elle prépare un sandwich",
+        "Veux-tu du thé ou préfères-tu du café ?",
+        "Le chien aboie, car un inconnu approche"
+      ]
+    },
+    {
+      "nom": "Principale et subordonnée",
+      "detail": "Une proposition dépend d'une autre : la subordonnée est introduite par une conjonction de subordination ou un pronom relatif.",
+      "cartes": [
+        "Nous sommes restés parce qu'il pleuvait",
+        "Les marins chantaient quand le navire quitta le port",
+        "Je pense que tu as raison",
+        "Le garçon qui court est mon cousin",
+        "Nous jouerons dehors si tu viens"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Quelle est la nature du mot en couleur ?",
+      "texte": "Il pleuvait, [mais] nous sommes sortis.",
+      "choix": ["Conjonction de coordination", "Conjonction de subordination", "Pronom relatif"],
+      "bonne": 0,
+      "explication": "« mais » fait partie de la liste mais, ou, et, donc, or, ni, car : c'est une conjonction de coordination."
+    },
+    {
+      "consigne": "Quelle est la nature du mot en couleur ?",
+      "texte": "Le garçon [qui] court est mon cousin.",
+      "choix": ["Conjonction de coordination", "Conjonction de subordination", "Pronom relatif"],
+      "bonne": 2,
+      "explication": "« qui » remplace « le garçon » et introduit la subordonnée « qui court » : c'est un pronom relatif."
+    },
+    {
+      "consigne": "Quelle est la nature du mot en couleur ?",
+      "texte": "Les marins chantaient [quand] le navire quitta le port.",
+      "choix": ["Conjonction de coordination", "Conjonction de subordination", "Pronom relatif"],
+      "bonne": 1,
+      "explication": "« quand » introduit la subordonnée « quand le navire quitta le port », qui dépend de la principale : c'est une conjonction de subordination."
+    },
+    {
+      "consigne": "Quelle est la nature du mot en couleur ?",
+      "texte": "Léa a faim, [donc] elle prépare un sandwich.",
+      "choix": ["Conjonction de coordination", "Conjonction de subordination", "Pronom relatif"],
+      "bonne": 0,
+      "explication": "« donc » relie deux propositions indépendantes : c'est une conjonction de coordination."
+    },
+    {
+      "consigne": "Quelle est la nature du mot en couleur ?",
+      "texte": "C'est la plage [où] nous jouons chaque été.",
+      "choix": ["Conjonction de coordination", "Conjonction de subordination", "Pronom relatif"],
+      "bonne": 2,
+      "explication": "« où » reprend « la plage » et introduit la subordonnée « où nous jouons chaque été » : c'est un pronom relatif."
+    },
+    {
+      "consigne": "Quelle est la nature du mot en couleur ?",
+      "texte": "Nous sommes restés [parce qu']il pleuvait.",
+      "choix": ["Conjonction de coordination", "Conjonction de subordination", "Pronom relatif"],
+      "bonne": 1,
+      "explication": "« parce que » rend la proposition « il pleuvait » dépendante de la principale : c'est une conjonction de subordination."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Phrase complexe",
+      "acceptees": ["La phrase complexe", "Une phrase complexe"],
+      "indices": [
+        "Je suis un type de phrase.",
+        "Je contiens plusieurs verbes conjugués.",
+        "Je suis formée de plusieurs propositions."
+      ],
+      "explication": "Une phrase complexe contient plusieurs propositions, donc plusieurs verbes conjugués."
+    },
+    {
+      "reponse": "Juxtaposition",
+      "acceptees": ["La juxtaposition", "Propositions juxtaposées"],
+      "indices": [
+        "Je suis une façon de relier des propositions.",
+        "Je n'utilise aucun mot de liaison.",
+        "Une virgule, un point-virgule ou deux-points suffisent à me marquer."
+      ],
+      "explication": "La juxtaposition relie des propositions par la seule ponctuation, sans mot de liaison."
+    },
+    {
+      "reponse": "Subordonnée",
+      "acceptees": ["La subordonnée", "Une subordonnée", "Proposition subordonnée", "La proposition subordonnée"],
+      "indices": [
+        "Je suis une proposition, mais je ne suis pas seule.",
+        "Je ne peux pas former une phrase à moi toute seule.",
+        "Je dépends de la principale et je commence souvent par « quand », « si » ou « parce que »."
+      ],
+      "explication": "La proposition subordonnée dépend de la principale et ne peut pas former une phrase seule."
+    },
+    {
+      "reponse": "Conjonction de coordination",
+      "acceptees": ["Une conjonction de coordination", "Mot de coordination"],
+      "indices": [
+        "Je suis un mot de liaison entre deux propositions.",
+        "Les deux propositions que je relie restent indépendantes.",
+        "Mais, ou, et, donc, or, ni, car : on retient la liste."
+      ],
+      "explication": "Les conjonctions de coordination sont mais, ou, et, donc, or, ni, car : elles relient des éléments de même niveau."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Comment analyser une phrase complexe",
+      "etapes": [
+        "Souligne tous les verbes conjugués de la phrase",
+        "Délimite chaque proposition par des crochets",
+        "Repère ce qui relie les propositions : ponctuation ou mot de liaison",
+        "S'il y a subordination, nomme la principale et la subordonnée"
+      ]
+    }
+  ]
+}

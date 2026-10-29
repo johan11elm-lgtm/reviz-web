@@ -1,0 +1,177 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Les terres émergées",
+      "detail": "Les continents : Afrique, Amérique, Antarctique, Asie, Europe et Océanie.",
+      "cartes": [
+        "L'Afrique, au sud de l'Europe",
+        "L'Asie, à l'est de l'Europe",
+        "L'Europe, où se trouve la France métropolitaine",
+        "L'Océanie, avec l'Australie",
+        "L'Antarctique, autour du pôle Sud"
+      ]
+    },
+    {
+      "nom": "Les étendues d'eau salée",
+      "detail": "Les cinq océans : Pacifique, Atlantique, Indien, Arctique et Austral.",
+      "cartes": [
+        "Le Pacifique, le plus vaste de tous",
+        "L'Atlantique, entre l'Europe et l'Amérique",
+        "L'océan Indien, où se trouve La Réunion",
+        "L'océan Arctique, au nord de la Terre",
+        "L'océan Austral, autour de l'Antarctique"
+      ]
+    },
+    {
+      "nom": "Les lignes imaginaires",
+      "detail": "L'équateur, le méridien de Greenwich, les tropiques et les cercles polaires, tracés sur les cartes pour se repérer.",
+      "cartes": [
+        "L'équateur, qui sépare le Nord et le Sud",
+        "Le méridien qui passe par un quartier de Londres",
+        "Le tropique du Cancer, vers 23° Nord",
+        "Le tropique du Capricorne, vers 23° Sud",
+        "Les cercles polaires, vers 66° Nord et 66° Sud"
+      ]
+    },
+    {
+      "nom": "Les coordonnées géographiques",
+      "detail": "La latitude et la longitude : deux nombres en degrés qui situent un lieu précisément.",
+      "cartes": [
+        "Paris : 49° Nord et 2° Est",
+        "De 0° à 90° vers le Nord ou le Sud",
+        "De 0° à 180° vers l'Est ou l'Ouest",
+        "Deux nombres en degrés qui situent un lieu précisément",
+        "Un nombre en degrés toujours suivi d'une direction"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "De quel élément de la carte s'agit-il ?",
+      "texte": "[Une flèche dessinée dans un coin] montre où est le nord.",
+      "choix": ["Le titre", "La légende", "L'échelle", "L'orientation"],
+      "bonne": 3,
+      "explication": "La flèche qui montre le nord indique l'orientation de la carte."
+    },
+    {
+      "consigne": "De quel élément de la carte s'agit-il ?",
+      "texte": "[Le cadre qui explique le sens des couleurs et des symboles] est placé sous la carte.",
+      "choix": ["Le titre", "La légende", "L'échelle", "L'orientation"],
+      "bonne": 1,
+      "explication": "La légende explique les couleurs et les symboles."
+    },
+    {
+      "consigne": "De quel élément de la carte s'agit-il ?",
+      "texte": "Sous la carte, on lit [1 cm = 10 km].",
+      "choix": ["Le titre", "La légende", "L'échelle", "L'orientation"],
+      "bonne": 2,
+      "explication": "Le rapport entre la distance sur la carte et la distance réelle, c'est l'échelle."
+    },
+    {
+      "consigne": "De quel élément de la carte s'agit-il ?",
+      "texte": "En haut de la carte est écrit [« Les continents et les océans »].",
+      "choix": ["Le titre", "La légende", "L'échelle", "L'orientation"],
+      "bonne": 0,
+      "explication": "Le titre dit ce que la carte représente."
+    },
+    {
+      "consigne": "De quel élément de la carte s'agit-il ?",
+      "texte": "Sur cette carte, [une barre de 2 cm correspond à 20 km].",
+      "choix": ["Le titre", "La légende", "L'échelle", "L'orientation"],
+      "bonne": 2,
+      "explication": "Une barre qui relie une longueur sur la carte à une distance réelle, c'est l'échelle."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Équateur",
+      "acceptees": ["Équateur", "L'équateur", "Equateur"],
+      "indices": [
+        "Je suis une ligne imaginaire.",
+        "Ma latitude est 0°.",
+        "Je sépare l'hémisphère Nord de l'hémisphère Sud."
+      ],
+      "explication": "L'équateur, de latitude 0°, sépare l'hémisphère Nord de l'hémisphère Sud."
+    },
+    {
+      "reponse": "Méridien de Greenwich",
+      "acceptees": ["Méridien de Greenwich", "Le méridien de Greenwich", "Greenwich", "Méridien origine"],
+      "indices": [
+        "Je suis une ligne imaginaire qui relie les deux pôles.",
+        "Je passe par un quartier de Londres.",
+        "Je suis le point de départ des longitudes et je sépare l'hémisphère Est de l'hémisphère Ouest."
+      ],
+      "explication": "Le méridien de Greenwich, de longitude 0°, sépare l'hémisphère Est de l'hémisphère Ouest."
+    },
+    {
+      "reponse": "Planisphère",
+      "acceptees": ["Planisphère", "Un planisphère", "Le planisphère", "Mappemonde"],
+      "indices": [
+        "Je suis une représentation de la Terre.",
+        "Je suis plat, contrairement au globe.",
+        "Je suis une carte qui montre toute la surface de la Terre à plat."
+      ],
+      "explication": "Le planisphère représente toute la surface de la Terre à plat."
+    },
+    {
+      "reponse": "Latitude",
+      "acceptees": ["Latitude", "La latitude"],
+      "indices": [
+        "Je suis une mesure en degrés.",
+        "Je vais de 0° à 90° Nord ou Sud.",
+        "Je suis l'écart entre un lieu et l'équateur."
+      ],
+      "explication": "La latitude est la distance en degrés entre un lieu et l'équateur."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "Sur une carte, 1 cm représente 20 km. Deux villes sont séparées de 6 cm sur la carte. Quelle est leur distance réelle ?",
+      "reponse": 120,
+      "unite": "km",
+      "tolerance": 0,
+      "explication": "Distance réelle = 6 cm × 20 km = 120 km."
+    },
+    {
+      "question": "Sur une carte, 1 cm représente 50 km. Deux villes sont séparées de 4 cm sur la carte. Quelle est leur distance réelle ?",
+      "reponse": 200,
+      "unite": "km",
+      "tolerance": 0,
+      "explication": "Distance réelle = 4 cm × 50 km = 200 km."
+    },
+    {
+      "question": "Sur une carte, 1 cm représente 5 km. Un chemin mesure 7 cm sur la carte. Quelle est sa longueur réelle ?",
+      "reponse": 35,
+      "unite": "km",
+      "tolerance": 0,
+      "explication": "Longueur réelle = 7 cm × 5 km = 35 km."
+    },
+    {
+      "question": "Sur une carte, 1 cm représente 100 km. Deux capitales sont séparées de 3,5 cm sur la carte. Quelle est leur distance réelle ?",
+      "reponse": 350,
+      "unite": "km",
+      "tolerance": 0,
+      "explication": "Distance réelle = 3,5 cm × 100 km = 350 km."
+    },
+    {
+      "question": "Sur une carte, 1 cm représente 10 km. Deux villes sont à 80 km l'une de l'autre. Quelle est leur distance sur la carte ?",
+      "reponse": 8,
+      "unite": "cm",
+      "tolerance": 0,
+      "explication": "Chaque centimètre représente 10 km, donc 80 km ÷ 10 km = 8 cm sur la carte."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Localiser un lieu sur un planisphère",
+      "etapes": [
+        "Nommer le continent ou l'océan où se trouve le lieu",
+        "Dire dans quels hémisphères il se trouve",
+        "Préciser sa position par rapport aux tropiques",
+        "Donner sa latitude puis sa longitude, avec la direction"
+      ]
+    }
+  ]
+}

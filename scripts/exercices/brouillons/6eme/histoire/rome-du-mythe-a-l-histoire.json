@@ -1,0 +1,213 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "La légende des origines",
+      "detail": "Les récits légendaires sur la fondation de Rome : jumeaux, dieux et héros troyen.",
+      "cartes": [
+        "Deux jumeaux recueillis par une louve",
+        "Un héros troyen, fils de Vénus, ancêtre des Romains",
+        "Un fondateur qui tue son frère",
+        "Un poème de Virgile qui raconte le voyage d'Énée",
+        "Des jumeaux nés du dieu Mars et de Rhea Silvia"
+      ]
+    },
+    {
+      "nom": "La royauté",
+      "detail": "Le premier régime de Rome, gouverné par des rois.",
+      "cartes": [
+        "Sept rois se succèdent à la tête de la cité",
+        "Les derniers rois sont des Étrusques",
+        "Tarquin le Superbe, son dernier roi",
+        "De 753 à 509 av. J.-C., un régime de rois",
+        "Le tout premier régime politique de Rome"
+      ]
+    },
+    {
+      "nom": "La République",
+      "detail": "Le régime où le pouvoir est partagé entre des magistrats élus, le Sénat et les citoyens.",
+      "cartes": [
+        "Deux magistrats élus pour un an dirigent la cité",
+        "Un Sénat d'anciens magistrats qui conseille et contrôle",
+        "Des assemblées de citoyens votent les lois",
+        "Rome bat Carthage lors des guerres puniques",
+        "Le pouvoir est partagé pour qu'aucun homme ne gouverne seul"
+      ]
+    },
+    {
+      "nom": "L'Empire",
+      "detail": "Le régime où un empereur concentre tous les pouvoirs, à partir d'Auguste.",
+      "cartes": [
+        "Un empereur concentre les pouvoirs politiques, militaires et religieux",
+        "En 27 av. J.-C., un nouveau régime commence",
+        "Son premier chef, Octave, reçoit le titre d'Auguste",
+        "Consuls et Sénat existent encore, mais le chef décide",
+        "Un régime né après l'assassinat de Jules César"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "la fin de la République",
+      "carte": "Jules César prend le pouvoir et devient dictateur",
+      "role": "cause",
+      "explication": "En prenant le pouvoir seul, César ruine le partage du pouvoir qui faisait la République."
+    },
+    {
+      "fait": "la fin de la République",
+      "carte": "En 44 av. J.-C., l'assassinat de Jules César",
+      "role": "cause",
+      "explication": "Après la mort de César, son fils adoptif Octave devient seul maître de Rome."
+    },
+    {
+      "fait": "la fin de la République",
+      "carte": "Un empereur qui concentre les pouvoirs politiques, militaires et religieux",
+      "role": "consequence",
+      "explication": "Avec l'Empire, un seul homme, l'empereur, concentre tous les pouvoirs."
+    },
+    {
+      "fait": "la fin de la République",
+      "carte": "Des consuls et un Sénat qui n'ont plus le dernier mot",
+      "role": "consequence",
+      "explication": "Sous Auguste, les institutions existent toujours, mais c'est l'empereur qui décide."
+    }
+  ],
+  "etiquettes": [
+    {
+      "consigne": "À quel régime appartient le passage en couleur ?",
+      "texte": "Rome est gouvernée par [sept rois, dont les derniers sont étrusques].",
+      "choix": ["Royauté", "République", "Empire"],
+      "bonne": 0,
+      "explication": "Selon la tradition, Rome est d'abord une royauté, avec sept rois entre 753 et 509 av. J.-C."
+    },
+    {
+      "consigne": "À quel régime appartient le passage en couleur ?",
+      "texte": "Chaque année, les citoyens élisent [deux consuls] qui dirigent la cité et l'armée.",
+      "choix": ["Royauté", "République", "Empire"],
+      "bonne": 1,
+      "explication": "Deux consuls élus pour un an dirigent Rome sous la République."
+    },
+    {
+      "consigne": "À quel régime appartient le passage en couleur ?",
+      "texte": "[Un empereur concentre les pouvoirs politiques, militaires et religieux].",
+      "choix": ["Royauté", "République", "Empire"],
+      "bonne": 2,
+      "explication": "L'empereur, chef unique, concentre tous les pouvoirs : c'est l'Empire."
+    },
+    {
+      "consigne": "À quel régime appartient le passage en couleur ?",
+      "texte": "Les [assemblées de citoyens] votent les lois et élisent les magistrats.",
+      "choix": ["Royauté", "République", "Empire"],
+      "bonne": 1,
+      "explication": "Sous la République, les assemblées de citoyens votent les lois et élisent les magistrats."
+    },
+    {
+      "consigne": "À quel régime appartient le passage en couleur ?",
+      "texte": "En 27 av. J.-C., [Octave reçoit le titre d'Auguste].",
+      "choix": ["Royauté", "République", "Empire"],
+      "bonne": 2,
+      "explication": "Octave, devenu Auguste, est le premier empereur : l'Empire commence en 27 av. J.-C."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Romulus",
+      "acceptees": ["Romulus"],
+      "indices": [
+        "Je suis un personnage de légende.",
+        "On dit que j'ai fondé une ville en 753 av. J.-C.",
+        "Une louve m'a recueilli avec mon frère jumeau, que j'ai fini par tuer."
+      ],
+      "explication": "Selon la légende, Romulus fonde Rome en 753 av. J.-C. et tue son frère Remus."
+    },
+    {
+      "reponse": "Énée",
+      "acceptees": ["Énée", "Enée"],
+      "indices": [
+        "Je suis un héros de légende.",
+        "Les Romains disent que je suis leur ancêtre.",
+        "Je suis un Troyen, fils de Vénus, et Virgile raconte mon voyage jusqu'en Italie."
+      ],
+      "explication": "Énée, héros troyen fils de Vénus, est présenté par les Romains comme leur ancêtre."
+    },
+    {
+      "reponse": "Jules César",
+      "acceptees": ["César", "Jules César"],
+      "indices": [
+        "Je suis un chef romain du Ier siècle av. J.-C.",
+        "J'ai conquis la Gaule entre 58 et 51 av. J.-C.",
+        "J'ai pris le pouvoir comme dictateur et j'ai été assassiné aux ides de mars, en 44 av. J.-C."
+      ],
+      "explication": "Jules César conquiert la Gaule, devient dictateur et est assassiné en 44 av. J.-C. Il n'a jamais été empereur."
+    },
+    {
+      "reponse": "Sénat",
+      "acceptees": ["Le Sénat", "Sénat"],
+      "indices": [
+        "Je suis une assemblée.",
+        "Je suis formé d'anciens magistrats.",
+        "Sous la République, je conseille et je contrôle les magistrats."
+      ],
+      "explication": "Le Sénat est l'assemblée d'anciens magistrats qui conseille et contrôle sous la République."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "Selon la tradition, la royauté dure de 753 à 509 av. J.-C. Combien d'années dure-t-elle ?",
+      "reponse": 244,
+      "unite": "ans",
+      "tolerance": 0,
+      "explication": "753 − 509 = 244 ans."
+    },
+    {
+      "question": "La République commence en 509 av. J.-C. et l'Empire en 27 av. J.-C. Combien d'années dure la République ?",
+      "reponse": 482,
+      "unite": "ans",
+      "tolerance": 0,
+      "explication": "509 − 27 = 482 ans."
+    },
+    {
+      "question": "Jules César est assassiné en 44 av. J.-C. et Octave reçoit le titre d'Auguste en 27 av. J.-C. Combien d'années plus tard ?",
+      "reponse": 17,
+      "unite": "ans",
+      "tolerance": 0,
+      "explication": "44 − 27 = 17 ans."
+    },
+    {
+      "question": "Combien d'années séparent la date légendaire de la fondation de Rome (753 av. J.-C.) de l'assassinat de César (44 av. J.-C.) ?",
+      "reponse": 709,
+      "unite": "ans",
+      "tolerance": 0,
+      "explication": "753 − 44 = 709 ans."
+    },
+    {
+      "question": "Chaque année, les citoyens élisent deux nouveaux consuls. Combien de consuls sont élus en 25 ans ?",
+      "reponse": 50,
+      "unite": "consuls",
+      "tolerance": 0,
+      "explication": "2 × 25 = 50 consuls."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "L'histoire de Rome, du plus ancien au plus récent",
+      "etapes": [
+        "Romulus fonde Rome, selon la légende",
+        "Les Romains chassent le dernier roi",
+        "Rome bat Carthage lors des guerres puniques",
+        "Jules César est assassiné aux ides de mars",
+        "Octave reçoit le titre d'Auguste"
+      ]
+    },
+    {
+      "titre": "De César à Auguste",
+      "etapes": [
+        "César conquiert la Gaule",
+        "César prend le pouvoir et devient dictateur",
+        "César meurt assassiné",
+        "Son fils adoptif Octave devient seul maître de Rome",
+        "Le Sénat donne à Octave le titre d'Auguste"
+      ]
+    }
+  ]
+}

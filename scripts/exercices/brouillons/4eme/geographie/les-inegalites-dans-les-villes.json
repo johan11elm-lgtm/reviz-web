@@ -1,0 +1,120 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Les quartiers fermés des riches",
+      "detail": "Les gated communities : des quartiers résidentiels fermés et gardés, réservés à des habitants aisés.",
+      "cartes": [
+        "Des gardiens contrôlent l'entrée du quartier",
+        "Un quartier résidentiel entouré de murs",
+        "Un quartier réservé aux familles aisées",
+        "Les plus riches s'y isolent du reste de la ville",
+        "Un quartier gardé, courant aux États-Unis"
+      ]
+    },
+    {
+      "nom": "Les bidonvilles",
+      "detail": "Les quartiers informels des plus pauvres, construits sans autorisation avec des matériaux de récupération, surtout en Afrique subsaharienne et en Asie du Sud.",
+      "cartes": [
+        "Un quartier construit sans autorisation",
+        "Des abris bâtis avec des matériaux de récupération",
+        "La Rocinha, favela de Rio de Janeiro",
+        "Dharavi, slum de Mumbai, en Inde",
+        "Des quartiers où vit environ un milliard d'habitants"
+      ]
+    },
+    {
+      "nom": "Les difficultés de la vie quotidienne",
+      "detail": "Les manques et les risques que subissent les habitants des quartiers pauvres : eau, égouts, électricité, glissements de terrain, inondations.",
+      "cartes": [
+        "L'eau potable manque ou est difficile à obtenir",
+        "Pas d'égouts pour évacuer les eaux usées",
+        "L'électricité manque dans beaucoup de logements",
+        "Des glissements de terrain pendant les fortes pluies",
+        "Des inondations qui envahissent les logements"
+      ]
+    },
+    {
+      "nom": "Les réponses des villes",
+      "detail": "Les aménagements qui améliorent la vie dans les quartiers informels : la réhabilitation.",
+      "cartes": [
+        "Raccorder le quartier à l'eau et à l'électricité",
+        "Remplacer les abris par des maisons en dur",
+        "Un téléphérique qui relie les collines au métro",
+        "Construire des logements sociaux",
+        "Reloger des familles dans de nouveaux logements"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "la réhabilitation d'un quartier informel",
+      "carte": "Le quartier n'a ni eau potable ni électricité",
+      "role": "cause",
+      "explication": "Le manque d'eau et d'électricité est l'une des raisons pour lesquelles la ville raccorde et réhabilite le quartier."
+    },
+    {
+      "fait": "la réhabilitation d'un quartier informel",
+      "carte": "Les habitants vivent dans des abris faits de matériaux de récupération",
+      "role": "cause",
+      "explication": "Ces abris fragiles expliquent la construction de maisons en dur, une mesure de réhabilitation."
+    },
+    {
+      "fait": "la réhabilitation d'un quartier informel",
+      "carte": "Les conditions de vie des habitants s'améliorent",
+      "role": "consequence",
+      "explication": "Le raccordement aux réseaux, la construction en dur et les transports publics améliorent la vie dans le quartier."
+    },
+    {
+      "fait": "la réhabilitation d'un quartier informel",
+      "carte": "Certains habitants doivent quitter le quartier",
+      "role": "consequence",
+      "explication": "Les travaux ou la hausse des prix peuvent provoquer des expulsions : la réhabilitation a des effets contrastés."
+    }
+  ],
+  "etiquettes": [],
+  "devinettes": [
+    {
+      "reponse": "Dharavi",
+      "acceptees": ["Dharavi"],
+      "indices": [
+        "Je suis un quartier pauvre d'une très grande ville d'Asie.",
+        "Je me trouve à Mumbai, en Inde.",
+        "Je suis l'un des plus grands slums d'Asie."
+      ],
+      "explication": "Dharavi, à Mumbai, en Inde, est l'un des plus grands slums d'Asie."
+    },
+    {
+      "reponse": "Medellín",
+      "acceptees": ["Medellín", "Medellin"],
+      "indices": [
+        "Je suis une grande ville de Colombie.",
+        "Beaucoup de quartiers informels couvrent les collines autour de moi.",
+        "Des téléphériques relient ces quartiers à mon métro."
+      ],
+      "explication": "À Medellín, en Colombie, des téléphériques relient des quartiers informels des collines au métro."
+    },
+    {
+      "reponse": "Rio de Janeiro",
+      "acceptees": ["Rio de Janeiro", "Rio"],
+      "indices": [
+        "Je suis une grande ville du Brésil.",
+        "Mes quartiers aisés de Copacabana et d'Ipanema bordent la mer.",
+        "Sur mes collines, des favelas comme la Rocinha sont menacées par les glissements de terrain."
+      ],
+      "explication": "À Rio de Janeiro, les quartiers aisés bordent la mer tandis que des favelas comme la Rocinha couvrent les collines."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Comparer deux photographies de quartiers d'une même ville",
+      "etapes": [
+        "Présenter les deux photos : ville, quartiers, date",
+        "Relever les indices de richesse et de pauvreté sur chaque photo",
+        "Ranger les relevés dans un tableau à deux colonnes",
+        "Conclure avec l'expression « ségrégation socio-spatiale »"
+      ]
+    }
+  ]
+}

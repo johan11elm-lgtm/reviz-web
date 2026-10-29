@@ -1,0 +1,179 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Ce qui attire les touristes",
+      "detail": "Les atouts qui donnent envie de visiter un lieu : mer, montagne, patrimoine, nature.",
+      "cartes": [
+        "La mer, le sable et le soleil des plages",
+        "Le ski et la randonnée en montagne",
+        "Les sites culturels d'une grande ville",
+        "Les paysages d'un parc naturel protégé",
+        "Le Mont-Saint-Michel, site du patrimoine mondial"
+      ]
+    },
+    {
+      "nom": "Les aménagements touristiques",
+      "detail": "Les constructions et équipements installés pour accueillir les visiteurs.",
+      "cartes": [
+        "Un front de mer bordé d'hôtels",
+        "Des remontées mécaniques sur les pentes",
+        "Une marina pour les bateaux de plaisance",
+        "Un aéroport construit pour les visiteurs",
+        "Une autoroute et des routes qui desservent la station"
+      ]
+    },
+    {
+      "nom": "Les effets positifs",
+      "detail": "Ce que le tourisme apporte à un territoire : emplois, revenus, équipements, patrimoine.",
+      "cartes": [
+        "Des emplois créés dans la région",
+        "Des revenus qui entrent dans le territoire",
+        "De nouveaux équipements utiles aux habitants",
+        "Des monuments entretenus et mis en valeur",
+        "La Grande-Motte, qui fait vivre un littoral"
+      ]
+    },
+    {
+      "nom": "Les effets négatifs",
+      "detail": "Les problèmes que le tourisme peut causer : bétonnage, logements chers, emplois précaires, surtourisme.",
+      "cartes": [
+        "Un littoral bétonné par les constructions",
+        "Des logements plus chers pour les habitants",
+        "Des emplois saisonniers et précaires",
+        "Trop de visiteurs à Venise, Barcelone ou Dubrovnik",
+        "Une forte consommation d'eau et de la pollution"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "la hausse du nombre de visiteurs d'un site du patrimoine mondial",
+      "carte": "L'inscription du site à la liste de l'UNESCO",
+      "role": "cause",
+      "explication": "L'inscription fait connaître le site et attire des visiteurs."
+    },
+    {
+      "fait": "la hausse du nombre de visiteurs d'un site du patrimoine mondial",
+      "carte": "Une pression plus forte sur le site",
+      "role": "consequence",
+      "explication": "Plus de visiteurs signifie plus de pression, au risque d'abîmer le site."
+    },
+    {
+      "fait": "la hausse du nombre de visiteurs d'un site du patrimoine mondial",
+      "carte": "Plus de revenus pour le territoire",
+      "role": "consequence",
+      "explication": "Plus de visiteurs signifie aussi plus de revenus pour le territoire."
+    },
+    {
+      "fait": "l'arrivée de nombreux touristes sur un littoral",
+      "carte": "La mer, le sable et le soleil",
+      "role": "cause",
+      "explication": "Les littoraux attirent les touristes pour la mer, le sable et le soleil."
+    },
+    {
+      "fait": "l'arrivée de nombreux touristes sur un littoral",
+      "carte": "La construction d'hôtels, de résidences et de marinas",
+      "role": "consequence",
+      "explication": "Pour accueillir les touristes, on construit hôtels, résidences et marinas."
+    },
+    {
+      "fait": "l'arrivée de nombreux touristes sur un littoral",
+      "carte": "La création de nombreux emplois",
+      "role": "consequence",
+      "explication": "Le tourisme crée des emplois dans les hôtels, les commerces et les transports."
+    }
+  ],
+  "etiquettes": [
+    {
+      "consigne": "De quel type d'espace touristique s'agit-il ?",
+      "texte": "Dans cette station, [des remontées mécaniques et des pistes ont été installées sur les pentes].",
+      "choix": ["Littoral", "Montagne", "Ville ou site culturel", "Espace naturel"],
+      "bonne": 1,
+      "explication": "Remontées mécaniques et pistes sont les aménagements d'une station de sports d'hiver, en montagne."
+    },
+    {
+      "consigne": "De quel type d'espace touristique s'agit-il ?",
+      "texte": "Cette ville est aménagée avec [un front de mer, des hôtels et une marina].",
+      "choix": ["Littoral", "Montagne", "Ville ou site culturel", "Espace naturel"],
+      "bonne": 0,
+      "explication": "Front de mer, hôtels et marina caractérisent une station balnéaire, sur le littoral."
+    },
+    {
+      "consigne": "De quel type d'espace touristique s'agit-il ?",
+      "texte": "Chaque année, [les visiteurs viennent admirer les monuments et le patrimoine] de cette grande ville.",
+      "choix": ["Littoral", "Montagne", "Ville ou site culturel", "Espace naturel"],
+      "bonne": 2,
+      "explication": "Les grandes villes et les sites culturels attirent les touristes par leur patrimoine."
+    },
+    {
+      "consigne": "De quel type d'espace touristique s'agit-il ?",
+      "texte": "Dans cette région, [les visiteurs viennent pour les paysages préservés d'un parc naturel].",
+      "choix": ["Littoral", "Montagne", "Ville ou site culturel", "Espace naturel"],
+      "bonne": 3,
+      "explication": "Les parcs naturels attirent par leurs paysages : ce sont des espaces naturels."
+    },
+    {
+      "consigne": "De quel type d'espace touristique s'agit-il ?",
+      "texte": "Tout l'été, [les touristes viennent profiter de la mer, du sable et du soleil].",
+      "choix": ["Littoral", "Montagne", "Ville ou site culturel", "Espace naturel"],
+      "bonne": 0,
+      "explication": "La mer, le sable et le soleil font l'attrait du tourisme balnéaire des littoraux."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Le surtourisme",
+      "acceptees": ["Surtourisme", "Le surtourisme", "Sur-tourisme", "Le sur-tourisme"],
+      "indices": [
+        "Je suis un excès.",
+        "Je gêne les habitants et j'abîme les sites.",
+        "Venise me combat avec une taxe d'accès pour les visiteurs à la journée."
+      ],
+      "explication": "Le surtourisme est une fréquentation trop forte d'un lieu, qui gêne les habitants et abîme le site."
+    },
+    {
+      "reponse": "La saisonnalité",
+      "acceptees": ["Saisonnalité", "La saisonnalité", "Saisonnalite", "La saisonnalite"],
+      "indices": [
+        "Je suis un rythme.",
+        "Je rends la fréquentation forte seulement l'été ou l'hiver.",
+        "À cause de moi, beaucoup d'emplois touristiques sont précaires."
+      ],
+      "explication": "La saisonnalité est une forte fréquentation pendant une partie de l'année seulement : les emplois sont souvent saisonniers."
+    },
+    {
+      "reponse": "Une station balnéaire",
+      "acceptees": ["Station balnéaire", "Une station balnéaire", "Balnéaire", "Station balneaire", "Une station balneaire"],
+      "indices": [
+        "Je suis une ville.",
+        "Je suis installée sur le littoral.",
+        "J'ai un front de mer, des hôtels et des marinas."
+      ],
+      "explication": "Une station balnéaire est une ville du littoral aménagée pour les touristes, comme Benidorm ou La Grande-Motte."
+    },
+    {
+      "reponse": "L'écotourisme",
+      "acceptees": ["Écotourisme", "L'écotourisme", "Ecotourisme", "L'ecotourisme"],
+      "indices": [
+        "Je suis une manière de voyager.",
+        "Je me pratique dans des espaces naturels préservés.",
+        "Je finance leur protection et je profite aux habitants."
+      ],
+      "explication": "L'écotourisme est un tourisme de nature qui finance la protection du milieu et profite aux populations locales."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Décrire une station touristique et en faire un croquis",
+      "etapes": [
+        "Découpe la photo en plans et nomme ce qui attire",
+        "Relève les aménagements : front de mer, hôtels, marina",
+        "Trace le trait de côte et colore chaque espace",
+        "Ajoute les axes de transport et les équipements",
+        "Range la légende en deux parties et donne un titre"
+      ]
+    }
+  ]
+}

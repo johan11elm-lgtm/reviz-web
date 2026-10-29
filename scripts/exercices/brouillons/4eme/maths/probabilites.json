@@ -1,0 +1,181 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Probabilité égale à 0",
+      "detail": "Événements impossibles : aucune issue ne les réalise.",
+      "cartes": [
+        "Obtenir 7 avec un dé équilibré à 6 faces",
+        "Tirer une boule verte dans un sac de boules rouges",
+        "Obtenir pile et face à la fois sur un lancer",
+        "Obtenir un nombre négatif avec un dé à 6 faces",
+        "Un événement qu'aucune issue ne réalise"
+      ]
+    },
+    {
+      "nom": "Probabilité égale à 1/6",
+      "detail": "Événements réalisés par une seule issue sur six, toutes équiprobables.",
+      "cartes": [
+        "Obtenir 5 avec un dé équilibré à 6 faces",
+        "Obtenir un nombre inférieur à 2 avec un dé équilibré",
+        "Obtenir un nombre supérieur à 5 avec un dé équilibré",
+        "Tirer l'unique boule rouge d'une urne de 6 boules",
+        "Un événement réalisé par une seule issue sur 6"
+      ]
+    },
+    {
+      "nom": "Probabilité égale à 1/2",
+      "detail": "Événements réalisés par la moitié des issues, toutes équiprobables.",
+      "cartes": [
+        "Obtenir pile avec une pièce équilibrée",
+        "Obtenir un nombre pair avec un dé équilibré",
+        "Obtenir un nombre supérieur à 3 avec un dé équilibré",
+        "Tirer une boule rouge parmi 3 rouges et 3 vertes",
+        "Un événement réalisé par la moitié des issues équiprobables"
+      ]
+    },
+    {
+      "nom": "Probabilité égale à 1",
+      "detail": "Événements certains : toutes les issues les réalisent.",
+      "cartes": [
+        "Obtenir moins de 7 avec un dé à 6 faces",
+        "Tirer une boule rouge dans un sac de boules rouges",
+        "Obtenir un nombre positif avec un dé équilibré",
+        "Un événement réalisé par toutes les issues",
+        "Obtenir un nombre pair ou impair avec un dé équilibré"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "De quel type est l'événement en couleur ?",
+      "texte": "On lance un dé équilibré à 6 faces. On veut [obtenir 7].",
+      "choix": ["Événement impossible", "Événement certain", "Événement élémentaire"],
+      "bonne": 0,
+      "explication": "Aucune face ne porte 7 : c'est un événement impossible, de probabilité 0."
+    },
+    {
+      "consigne": "De quel type est l'événement en couleur ?",
+      "texte": "On lance un dé équilibré à 6 faces. On veut [obtenir un nombre inférieur à 7].",
+      "choix": ["Événement impossible", "Événement certain", "Événement élémentaire"],
+      "bonne": 1,
+      "explication": "Les six faces donnent un nombre inférieur à 7 : c'est un événement certain, de probabilité 1."
+    },
+    {
+      "consigne": "De quel type est l'événement en couleur ?",
+      "texte": "On lance un dé équilibré à 6 faces. On veut [obtenir 4].",
+      "choix": ["Événement impossible", "Événement certain", "Événement élémentaire"],
+      "bonne": 2,
+      "explication": "« Obtenir 4 » ne contient qu'une seule issue : c'est un événement élémentaire."
+    },
+    {
+      "consigne": "De quel type est l'événement en couleur ?",
+      "texte": "Un sac ne contient que des boules rouges. On veut [tirer une boule rouge].",
+      "choix": ["Événement impossible", "Événement certain", "Événement élémentaire"],
+      "bonne": 1,
+      "explication": "Toutes les boules sont rouges : l'événement est réalisé à coup sûr, c'est un événement certain."
+    },
+    {
+      "consigne": "De quel type est l'événement en couleur ?",
+      "texte": "On lance un dé équilibré à 6 faces. On veut [obtenir un nombre négatif].",
+      "choix": ["Événement impossible", "Événement certain", "Événement élémentaire"],
+      "bonne": 0,
+      "explication": "Aucune face ne porte un nombre négatif : c'est un événement impossible."
+    },
+    {
+      "consigne": "De quel type est l'événement en couleur ?",
+      "texte": "On lance une pièce équilibrée. On veut [obtenir pile].",
+      "choix": ["Événement impossible", "Événement certain", "Événement élémentaire"],
+      "bonne": 2,
+      "explication": "« Obtenir pile » ne contient qu'une seule issue : c'est un événement élémentaire."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Expérience aléatoire",
+      "acceptees": ["Expérience aléatoire", "Une expérience aléatoire", "L'expérience aléatoire", "Aléatoire"],
+      "indices": [
+        "Lancer un dé ou tirer une boule dans un sac en est un exemple.",
+        "On connaît tous les résultats possibles.",
+        "Mais on ne peut pas prévoir lequel arrivera."
+      ],
+      "explication": "Une expérience aléatoire a des résultats connus à l'avance, mais on ne peut pas prévoir lequel se produira."
+    },
+    {
+      "reponse": "Événement contraire",
+      "acceptees": ["Événement contraire", "L'événement contraire", "Contraire", "Le contraire", "Non A", "Événement complémentaire"],
+      "indices": [
+        "Je dépends d'un autre cas, noté A.",
+        "Je me réalise exactement quand A ne se réalise pas.",
+        "On me note « non A » et ma probabilité vaut 1 − P(A)."
+      ],
+      "explication": "L'événement contraire de A est réalisé exactement quand A ne l'est pas : P(non A) = 1 − P(A)."
+    },
+    {
+      "reponse": "Fréquence",
+      "acceptees": ["Fréquence", "La fréquence", "Fréquence observée", "La fréquence observée"],
+      "indices": [
+        "Je suis un nombre calculé après avoir répété une expérience.",
+        "Je vaux le nombre de fois où l'événement arrive, divisé par le nombre d'essais.",
+        "Quand les essais sont très nombreux, je me rapproche de la probabilité."
+      ],
+      "explication": "La fréquence observée se rapproche de la probabilité quand on répète l'expérience un très grand nombre de fois."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "Une urne contient 3 boules rouges et 5 boules vertes. On tire une boule au hasard. Quelle est la probabilité d'obtenir une boule verte, en pourcentage ?",
+      "reponse": 62.5,
+      "unite": "%",
+      "tolerance": 0,
+      "explication": "Il y a 8 boules en tout, dont 5 vertes : P = 5/8 = 0,625 = 62,5 %."
+    },
+    {
+      "question": "Si P(A) = 0,35, combien vaut P(non A) ?",
+      "reponse": 0.65,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "P(non A) = 1 − P(A) = 1 − 0,35 = 0,65."
+    },
+    {
+      "question": "Un sac contient 12 boules, dont 9 sont bleues. On tire une boule au hasard. Quelle est la probabilité qu'elle ne soit pas bleue, en pourcentage ?",
+      "reponse": 25,
+      "unite": "%",
+      "tolerance": 0,
+      "explication": "Il y a 12 − 9 = 3 boules non bleues sur 12 : 3/12 = 1/4 = 25 %. Avec le contraire : 1 − 9/12 = 3/12."
+    },
+    {
+      "question": "On tire au hasard une boule parmi 10 boules numérotées de 1 à 10. Quelle est la probabilité d'obtenir un multiple de 3, en pourcentage ?",
+      "reponse": 30,
+      "unite": "%",
+      "tolerance": 0,
+      "explication": "Les multiples de 3 sont 3, 6 et 9 : 3 issues favorables sur 10, soit 3/10 = 30 %."
+    },
+    {
+      "question": "On lance 600 fois un dé équilibré. À peu près combien de fois peut-on s'attendre à obtenir un 6 ?",
+      "reponse": 100,
+      "unite": "fois",
+      "tolerance": 0,
+      "explication": "P(6) = 1/6 et 600 × 1/6 = 100 : environ 100 fois, rarement exactement 100."
+    },
+    {
+      "question": "Sur 50 lancers d'une pièce, on obtient 28 fois pile. Quelle est la fréquence de pile, en pourcentage ?",
+      "reponse": 56,
+      "unite": "%",
+      "tolerance": 0,
+      "explication": "Fréquence = 28/50 = 0,56 = 56 %."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Calculer la probabilité de tirer une boule rouge dans une urne de 3 rouges et 5 vertes",
+      "etapes": [
+        "On vérifie que toutes les boules ont la même chance d'être tirées",
+        "On compte les boules rouges et toutes les boules : 3 sur 8",
+        "On divise : P(rouge) = 3/8",
+        "On contrôle que le résultat est compris entre 0 et 1"
+      ]
+    }
+  ]
+}

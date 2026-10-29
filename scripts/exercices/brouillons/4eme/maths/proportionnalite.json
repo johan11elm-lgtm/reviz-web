@@ -1,0 +1,157 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Prix et quantités achetées",
+      "detail": "Un prix proportionnel à la quantité achetée, avec le prix unitaire pour passer de l'une à l'autre.",
+      "cartes": [
+        "6 cahiers coûtent 9 €, soit 1,50 € pièce",
+        "3 kg coûtent 13,50 €, soit 4,50 € le kilo",
+        "Prix de 5 kg si 3 kg coûtent 7,50 €",
+        "Trois fois plus d'articles coûtent trois fois plus cher",
+        "Combien coûtent 10 stylos à 1,20 € pièce ?"
+      ]
+    },
+    {
+      "nom": "Un trajet à vitesse constante",
+      "detail": "Une distance proportionnelle à la durée, avec la vitesse pour coefficient.",
+      "cartes": [
+        "À 90 km/h pendant 2,5 h, on parcourt 225 km",
+        "36 km parcourus en 2 h, soit 18 km/h",
+        "2 h 30 min s'écrivent 2,5 h",
+        "Durée pour parcourir 150 km à 50 km/h",
+        "d = v × t : distance, vitesse, durée"
+      ]
+    },
+    {
+      "nom": "Appliquer un pourcentage",
+      "detail": "Prendre une part d'une quantité ou la comparer à un total, avec un taux sur 100.",
+      "cartes": [
+        "15 % de 80 élèves, ce sont 12 élèves",
+        "12 élèves sur 30 : 40 %",
+        "t % d'une quantité s'obtient en multipliant par t/100",
+        "50 augmenté de 20 % donne 60",
+        "Diminuer 80 de 10 % donne 72"
+      ]
+    },
+    {
+      "nom": "Cartes et plans",
+      "detail": "Une distance dessinée proportionnelle à la distance réelle, grâce à l'échelle.",
+      "cartes": [
+        "À l'échelle 1/25 000, 4 cm représentent 1 km",
+        "À l'échelle 1/500, 2 cm représentent 10 m",
+        "Sur le papier, 3 cm représentent 750 m en réalité",
+        "Le rapport entre la distance dessinée et la distance réelle",
+        "100 000 cm font 1 km, pas 100 km"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [],
+  "devinettes": [
+    {
+      "reponse": "Coefficient de proportionnalité",
+      "acceptees": ["Coefficient de proportionnalité", "Le coefficient de proportionnalité", "Coefficient", "Le coefficient"],
+      "indices": [
+        "Je suis un nombre non nul.",
+        "Je multiplie une grandeur pour obtenir l'autre.",
+        "Dans un tableau, je suis le quotient de la deuxième ligne par la première."
+      ],
+      "explication": "Le coefficient de proportionnalité est le nombre par lequel on multiplie une grandeur pour obtenir l'autre."
+    },
+    {
+      "reponse": "Produits en croix",
+      "acceptees": ["Produits en croix", "Produit en croix", "Les produits en croix", "Le produit en croix", "Règle de trois", "La règle de trois"],
+      "indices": [
+        "Je suis une égalité entre deux multiplications.",
+        "Je multiplie les nombres placés en diagonale dans un tableau.",
+        "Avec moi, a/b = c/d devient a × d = b × c."
+      ],
+      "explication": "L'égalité des produits en croix permet de calculer la quatrième proportionnelle : a/b = c/d équivaut à a × d = b × c."
+    },
+    {
+      "reponse": "Pourcentage",
+      "acceptees": ["Pourcentage", "Un pourcentage", "Le pourcentage"],
+      "indices": [
+        "Je suis une proportion.",
+        "Je m'exprime avec 100 pour dénominateur.",
+        "12 élèves sur 30 font du sport : je vaux 40."
+      ],
+      "explication": "Un pourcentage est une proportion exprimée sur 100 : 12/30 = 40/100, soit 40 %."
+    },
+    {
+      "reponse": "Échelle",
+      "acceptees": ["Échelle", "L'échelle", "Une échelle"],
+      "indices": [
+        "Je figure sur les cartes et les plans.",
+        "Je suis le quotient d'une distance dessinée par la distance réelle.",
+        "Si je vaux 1/500, alors 2 cm sur le dessin représentent 10 m."
+      ],
+      "explication": "L'échelle relie la distance sur le dessin à la distance réelle, dans la même unité."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "5 kg de pommes coûtent 12,50 €. Quel est le prix de 8 kg de pommes ?",
+      "reponse": 20,
+      "unite": "€",
+      "tolerance": 0,
+      "explication": "1 kg coûte 12,50 ÷ 5 = 2,50 €, donc 8 kg coûtent 8 × 2,50 = 20 €."
+    },
+    {
+      "question": "Un pull à 50 € augmente de 20 %. Quel est son nouveau prix ?",
+      "reponse": 60,
+      "unite": "€",
+      "tolerance": 0,
+      "explication": "20 % de 50 € = 50 × 20/100 = 10 €, donc le nouveau prix est 50 + 10 = 60 €."
+    },
+    {
+      "question": "Dans une classe de 25 élèves, 18 sont demi-pensionnaires. Quel pourcentage cela représente-t-il ?",
+      "reponse": 72,
+      "unite": "%",
+      "tolerance": 0,
+      "explication": "18/25 = 72/100 = 0,72, soit 72 %."
+    },
+    {
+      "question": "Une voiture roule à 90 km/h pendant 2 h 30 min. Quelle distance parcourt-elle ?",
+      "reponse": 225,
+      "unite": "km",
+      "tolerance": 0,
+      "explication": "2 h 30 min = 2,5 h, donc d = v × t = 90 × 2,5 = 225 km."
+    },
+    {
+      "question": "À l'échelle 1/25 000, deux villages sont séparés de 6 cm sur la carte. Quelle est la distance réelle, en km ?",
+      "reponse": 1.5,
+      "unite": "km",
+      "tolerance": 0,
+      "explication": "6 × 25 000 = 150 000 cm = 1 500 m = 1,5 km."
+    },
+    {
+      "question": "Un cycliste parcourt 30 km en 1 h 30 min à vitesse constante. Quelle est sa vitesse, en km/h ?",
+      "reponse": 20,
+      "unite": "km/h",
+      "tolerance": 0,
+      "explication": "1 h 30 min = 1,5 h, donc v = d ÷ t = 30 ÷ 1,5 = 20 km/h."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Trouver le prix de 8 stylos quand 5 stylos coûtent 7,50 €",
+      "etapes": [
+        "On lit la donnée : 5 stylos coûtent 7,50 €",
+        "On calcule le prix d'un stylo : 7,50 ÷ 5 = 1,50 €",
+        "On multiplie par 8 : 1,50 × 8 = 12 €",
+        "On répond par une phrase : 8 stylos coûtent 12 €"
+      ]
+    },
+    {
+      "titre": "Calculer la distance parcourue à 90 km/h pendant 2 h 30 min",
+      "etapes": [
+        "On repère la vitesse, 90 km/h, et la durée, 2 h 30 min",
+        "On convertit la durée en heures : 2 h 30 min = 2,5 h",
+        "On calcule d = v × t = 90 × 2,5 = 225",
+        "On répond avec l'unité : 225 km"
+      ]
+    }
+  ]
+}

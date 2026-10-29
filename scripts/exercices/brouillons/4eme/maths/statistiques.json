@@ -1,0 +1,228 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "La moyenne",
+      "detail": "La somme des valeurs divisée par leur nombre ; en moyenne pondérée, chaque valeur compte selon son coefficient ou son effectif.",
+      "cartes": [
+        "On additionne les valeurs, puis on divise par leur nombre",
+        "(12 + 8 + 15 + 9) ÷ 4 = 11",
+        "(8 × 2 + 14 × 3) ÷ 5 = 11,6",
+        "Elle utilise toutes les valeurs de la série",
+        "Pour 3 ; 6 ; 12, elle vaut 7"
+      ]
+    },
+    {
+      "nom": "La médiane",
+      "detail": "La valeur qui partage la série rangée en deux groupes de même effectif ; elle est peu influencée par les valeurs extrêmes.",
+      "cartes": [
+        "La valeur du milieu d'une série rangée dans l'ordre",
+        "Elle partage la série en deux groupes de même effectif",
+        "Pour 2 ; 5 ; 11, elle vaut 5",
+        "Avec un effectif pair, on regarde les deux valeurs centrales",
+        "Un salaire très élevé la modifie à peine"
+      ]
+    },
+    {
+      "nom": "L'étendue",
+      "detail": "L'écart entre la plus grande et la plus petite valeur : elle mesure la dispersion de la série.",
+      "cartes": [
+        "La plus grande valeur moins la plus petite",
+        "Elle mesure à quel point les valeurs sont éloignées",
+        "Pour 1 ; 4 ; 13, elle vaut 12",
+        "Elle vaut 0 quand toutes les valeurs sont identiques",
+        "Seules les deux valeurs extrêmes comptent pour la calculer"
+      ]
+    },
+    {
+      "nom": "La fréquence",
+      "detail": "L'effectif d'une valeur divisé par l'effectif total : un nombre entre 0 et 1, souvent écrit en pourcentage.",
+      "cartes": [
+        "L'effectif d'une valeur divisé par l'effectif total",
+        "Un nombre toujours compris entre 0 et 1",
+        "6 élèves sur 24 : 6 ÷ 24 = 0,25",
+        "Elle peut s'écrire en pourcentage : 0,25 = 25 %",
+        "Additionnées pour toutes les valeurs, elles donnent 100 %"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Quelle grandeur est calculée dans le passage en couleur ?",
+      "texte": "Pour la série 3 ; 5 ; 7 ; 9 ; 20, on calcule [44 ÷ 5 = 8,8].",
+      "choix": [
+        "La moyenne",
+        "La médiane",
+        "L'étendue",
+        "La fréquence"
+      ],
+      "bonne": 0,
+      "explication": "44 est la somme des cinq valeurs (3 + 5 + 7 + 9 + 20) : en la divisant par 5, on obtient la moyenne."
+    },
+    {
+      "consigne": "Quelle grandeur est calculée dans le passage en couleur ?",
+      "texte": "Pour la série 3 ; 5 ; 7 ; 9 ; 20, on calcule [20 − 3 = 17].",
+      "choix": [
+        "La moyenne",
+        "La médiane",
+        "L'étendue",
+        "La fréquence"
+      ],
+      "bonne": 2,
+      "explication": "20 est la plus grande valeur et 3 la plus petite : leur différence est l'étendue."
+    },
+    {
+      "consigne": "Quelle grandeur est calculée dans le passage en couleur ?",
+      "texte": "Pour la série 4 ; 6 ; 9 ; 11 ; 13 ; 15, on calcule [(9 + 11) ÷ 2 = 10].",
+      "choix": [
+        "La moyenne",
+        "La médiane",
+        "L'étendue",
+        "La fréquence"
+      ],
+      "bonne": 1,
+      "explication": "La série compte 6 valeurs, un effectif pair : on prend la moyenne des deux valeurs centrales, 9 et 11. C'est la médiane."
+    },
+    {
+      "consigne": "Quelle grandeur est calculée dans le passage en couleur ?",
+      "texte": "Dans la série 12 ; 15 ; 12 ; 10 ; 15 ; 12, on calcule [3 ÷ 6 = 0,5] pour la valeur 12.",
+      "choix": [
+        "La moyenne",
+        "La médiane",
+        "L'étendue",
+        "La fréquence"
+      ],
+      "bonne": 3,
+      "explication": "12 apparaît 3 fois sur 6 : l'effectif divisé par l'effectif total est la fréquence."
+    },
+    {
+      "consigne": "Quelle grandeur est calculée dans le passage en couleur ?",
+      "texte": "Trois élèves ont 10, cinq ont 14 et deux ont 18 : on calcule [(3 × 10 + 5 × 14 + 2 × 18) ÷ 10 = 13,6].",
+      "choix": [
+        "La moyenne",
+        "La médiane",
+        "L'étendue",
+        "La fréquence"
+      ],
+      "bonne": 0,
+      "explication": "Chaque note est multipliée par son effectif, puis on divise par l'effectif total 10 : c'est une moyenne pondérée."
+    },
+    {
+      "consigne": "Quelle grandeur est donnée par le passage en couleur ?",
+      "texte": "On range la série 9 ; 3 ; 20 ; 5 ; 7 dans l'ordre : 3 ; 5 ; 7 ; 9 ; 20, puis on choisit [7].",
+      "choix": [
+        "La moyenne",
+        "La médiane",
+        "L'étendue",
+        "La fréquence"
+      ],
+      "bonne": 1,
+      "explication": "7 est la valeur du milieu de la série rangée (effectif impair) : c'est la médiane."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Médiane",
+      "acceptees": [
+        "Médiane",
+        "La médiane",
+        "Une médiane"
+      ],
+      "indices": [
+        "Je suis un nombre associé à une série de valeurs.",
+        "Je partage la série rangée en deux groupes de même effectif.",
+        "Pour la série 3 ; 5 ; 7 ; 9 ; 20, je vaux 7."
+      ],
+      "explication": "La médiane partage la série rangée en deux groupes de même effectif : pour 3 ; 5 ; 7 ; 9 ; 20, c'est 7."
+    },
+    {
+      "reponse": "Étendue",
+      "acceptees": [
+        "Étendue",
+        "L'étendue",
+        "Etendue"
+      ],
+      "indices": [
+        "Je suis un nombre calculé à partir d'une série de valeurs.",
+        "Je mesure à quel point les valeurs sont dispersées.",
+        "Je vaux la plus grande valeur moins la plus petite."
+      ],
+      "explication": "L'étendue est la différence entre la plus grande et la plus petite valeur : elle mesure la dispersion."
+    },
+    {
+      "reponse": "Fréquence",
+      "acceptees": [
+        "Fréquence",
+        "La fréquence",
+        "Une fréquence"
+      ],
+      "indices": [
+        "Je suis un nombre compris entre 0 et 1.",
+        "On peut m'écrire en pourcentage.",
+        "Je suis l'effectif d'une valeur divisé par l'effectif total."
+      ],
+      "explication": "La fréquence d'une valeur est son effectif divisé par l'effectif total ; elle s'écrit aussi en pourcentage."
+    },
+    {
+      "reponse": "Diagramme circulaire",
+      "acceptees": [
+        "Diagramme circulaire",
+        "Un diagramme circulaire",
+        "Diagramme en secteurs",
+        "Camembert"
+      ],
+      "indices": [
+        "Je suis une façon de représenter une série.",
+        "Je suis découpé en secteurs.",
+        "L'angle d'un de mes secteurs vaut la fréquence multipliée par 360°."
+      ],
+      "explication": "Dans un diagramme circulaire, l'angle de chaque secteur est la fréquence multipliée par 360°."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "Un élève a obtenu les notes 14, 9, 16 et 11. Quelle est sa moyenne ?",
+      "reponse": 12.5,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "(14 + 9 + 16 + 11) ÷ 4 = 50 ÷ 4 = 12,5."
+    },
+    {
+      "question": "Une note de 8 a le coefficient 2 et une note de 14 a le coefficient 3. Quelle est la moyenne pondérée ?",
+      "reponse": 11.6,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "(8 × 2 + 14 × 3) ÷ (2 + 3) = (16 + 42) ÷ 5 = 58 ÷ 5 = 11,6."
+    },
+    {
+      "question": "Quelle est la médiane de la série 8 ; 3 ; 15 ; 6 ; 10 ; 12 ?",
+      "reponse": 9,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "Rangée : 3 ; 6 ; 8 ; 10 ; 12 ; 15. Il y a 6 valeurs : on prend la moyenne des 3e et 4e valeurs, (8 + 10) ÷ 2 = 9."
+    },
+    {
+      "question": "Voici des températures relevées : −2 ; 5 ; 9 ; 1 ; 7 (en °C). Quelle est l'étendue de cette série ?",
+      "reponse": 11,
+      "unite": "°C",
+      "tolerance": 0,
+      "explication": "Étendue = 9 − (−2) = 9 + 2 = 11."
+    },
+    {
+      "question": "Dans une classe de 25 élèves, 10 élèves mangent à la cantine. Quelle est la fréquence de ces élèves, en pourcentage ?",
+      "reponse": 40,
+      "unite": "%",
+      "tolerance": 0,
+      "explication": "Fréquence = 10 ÷ 25 = 0,4 = 40 %."
+    },
+    {
+      "question": "Dans un diagramme circulaire, une valeur a pour fréquence 0,3. Quel est l'angle de son secteur, en degrés ?",
+      "reponse": 108,
+      "unite": "°",
+      "tolerance": 0,
+      "explication": "Angle = fréquence × 360° = 0,3 × 360° = 108°."
+    }
+  ],
+  "etapes": []
+}

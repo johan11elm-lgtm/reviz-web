@@ -1,0 +1,190 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Libertés exercées seul",
+      "detail": "Les libertés individuelles : chacun les exerce pour lui-même, comme circuler, se marier, penser, croire ou s'exprimer.",
+      "cartes": [
+        "Voyager librement d'une ville à l'autre",
+        "Choisir librement la personne que l'on épouse",
+        "Avoir ses propres opinions politiques",
+        "Choisir sa religion, ou ne pas en avoir",
+        "Dire ce que l'on pense autour de soi"
+      ]
+    },
+    {
+      "nom": "Libertés exercées à plusieurs",
+      "detail": "Les libertés collectives : elles s'exercent avec d'autres, comme se réunir, s'associer, manifester, se syndiquer ou publier un journal.",
+      "cartes": [
+        "Se retrouver à plusieurs pour débattre d'un sujet",
+        "Fonder un club avec des amis",
+        "Défiler dans la rue pour défendre une cause",
+        "Rejoindre un syndicat de salariés",
+        "Lancer un journal avec une équipe de rédaction"
+      ]
+    },
+    {
+      "nom": "Les abus punis par la loi",
+      "detail": "Ce que la liberté d'expression n'autorise pas, même sur Internet : l'injure, la diffamation, l'appel à la haine et le harcèlement.",
+      "cartes": [
+        "Traiter quelqu'un d'un nom d'oiseau pour l'offenser",
+        "Accuser publiquement quelqu'un pour salir son honneur",
+        "Pousser publiquement à haïr un groupe de personnes",
+        "Répéter des moqueries à un camarade chaque jour",
+        "Envoyer sans cesse des messages méchants sur Internet"
+      ]
+    },
+    {
+      "nom": "Ce que protège l'ordre public",
+      "detail": "Les conditions qui permettent à chacun de vivre en sécurité et d'exercer ses libertés : sécurité, tranquillité, salubrité et dignité.",
+      "cartes": [
+        "Le calme des habitants, par exemple la nuit",
+        "L'hygiène des lieux publics, comme l'eau et les déchets",
+        "La santé de toute la population",
+        "La protection de chacun contre la violence et les accidents",
+        "Un spectacle de « lancer de nains » contraire à la dignité"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "De quel type de situation s'agit-il pour le passage en couleur ?",
+      "texte": "Au collège, quatre élèves [créent une association de théâtre].",
+      "choix": [
+        "Liberté individuelle",
+        "Liberté collective",
+        "Abus de la liberté d'expression"
+      ],
+      "bonne": 1,
+      "explication": "S'associer suppose d'agir avec d'autres personnes : c'est une liberté collective."
+    },
+    {
+      "consigne": "De quel type de situation s'agit-il pour le passage en couleur ?",
+      "texte": "Inès [choisit librement de ne pas avoir de religion].",
+      "choix": [
+        "Liberté individuelle",
+        "Liberté collective",
+        "Abus de la liberté d'expression"
+      ],
+      "bonne": 0,
+      "explication": "Croire ou ne pas croire est un choix personnel : c'est une liberté individuelle."
+    },
+    {
+      "consigne": "De quel type de situation s'agit-il pour le passage en couleur ?",
+      "texte": "Des lycéens [défilent dans la rue pour défendre le climat].",
+      "choix": [
+        "Liberté individuelle",
+        "Liberté collective",
+        "Abus de la liberté d'expression"
+      ],
+      "bonne": 1,
+      "explication": "Manifester se fait avec d'autres : c'est une liberté collective."
+    },
+    {
+      "consigne": "De quel type de situation s'agit-il pour le passage en couleur ?",
+      "texte": "Pour les vacances, Karim [voyage librement d'une région à l'autre].",
+      "choix": [
+        "Liberté individuelle",
+        "Liberté collective",
+        "Abus de la liberté d'expression"
+      ],
+      "bonne": 0,
+      "explication": "Circuler est une liberté que chacun exerce seul : c'est une liberté individuelle."
+    },
+    {
+      "consigne": "De quel type de situation s'agit-il pour le passage en couleur ?",
+      "texte": "Un élève [envoie chaque jour des messages méchants à un camarade sur Internet].",
+      "choix": [
+        "Liberté individuelle",
+        "Liberté collective",
+        "Abus de la liberté d'expression"
+      ],
+      "bonne": 2,
+      "explication": "Des messages répétés qui visent une personne, c'est du cyberharcèlement : un délit puni par la loi."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "La DDHC",
+      "acceptees": [
+        "DDHC",
+        "La DDHC",
+        "Déclaration des droits de l'homme et du citoyen",
+        "La Déclaration des droits de l'homme et du citoyen"
+      ],
+      "indices": [
+        "Je suis un texte né de la Révolution française.",
+        "On me date de 1789.",
+        "Mon article 4 dit que la liberté consiste à pouvoir faire tout ce qui ne nuit pas à autrui."
+      ],
+      "explication": "La Déclaration des droits de l'homme et du citoyen de 1789 fait de la liberté un droit et la limite par l'article 4."
+    },
+    {
+      "reponse": "La CIDE",
+      "acceptees": [
+        "CIDE",
+        "La CIDE",
+        "Convention internationale des droits de l'enfant",
+        "La Convention internationale des droits de l'enfant"
+      ],
+      "indices": [
+        "Je suis un texte international qui protège les plus jeunes.",
+        "L'ONU m'a adoptée en 1989.",
+        "Mon article 3 demande de penser d'abord à l'intérêt supérieur de l'enfant."
+      ],
+      "explication": "La Convention internationale des droits de l'enfant (1989) protège l'intérêt supérieur de l'enfant."
+    },
+    {
+      "reponse": "L'ordre public",
+      "acceptees": [
+        "Ordre public",
+        "L'ordre public"
+      ],
+      "indices": [
+        "Je suis l'ensemble des conditions qui permettent à chacun d'exercer ses libertés.",
+        "Les autorités peuvent limiter une liberté pour me protéger.",
+        "Je comprends la sécurité, la tranquillité, la salubrité et la dignité de la personne."
+      ],
+      "explication": "L'ordre public rassemble la sécurité, la tranquillité, la salubrité publiques et la dignité humaine."
+    },
+    {
+      "reponse": "Le cyberharcèlement",
+      "acceptees": [
+        "Cyberharcèlement",
+        "Le cyberharcèlement",
+        "Cyber harcèlement",
+        "Harcèlement en ligne",
+        "Le harcèlement en ligne"
+      ],
+      "indices": [
+        "Je suis un délit puni par la loi.",
+        "Je consiste à répéter des messages méchants contre la même personne.",
+        "Je me passe sur Internet et les réseaux sociaux, même sous pseudonyme."
+      ],
+      "explication": "Le cyberharcèlement est un harcèlement répété par des moyens numériques, puni par la loi."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Identifier une liberté et ses limites",
+      "etapes": [
+        "On repère qui agit et ce qu'il veut faire",
+        "On nomme la liberté en jeu : individuelle ou collective",
+        "On cite le texte qui la protège",
+        "On cherche ce qui peut la limiter : autrui ou l'ordre public",
+        "On conclut : la limite est-elle prévue par la loi et proportionnée ?"
+      ]
+    },
+    {
+      "titre": "Les textes sur les libertés, du plus ancien au plus récent",
+      "etapes": [
+        "La Déclaration des droits de l'homme et du citoyen",
+        "La loi sur la liberté de la presse",
+        "La Déclaration universelle des droits de l'homme",
+        "La Convention internationale des droits de l'enfant"
+      ]
+    }
+  ]
+}

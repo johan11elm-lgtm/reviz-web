@@ -1,0 +1,186 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "La dissolution",
+      "detail": "Le soluté se disperse dans le solvant : on obtient une solution, un mélange homogène, et la masse se conserve.",
+      "cartes": [
+        "Le sucre se disperse dans l'eau",
+        "On ne voit plus le sel, mais il est toujours là",
+        "Le mélange pèse autant que l'eau et le sel séparés",
+        "Le sel est le soluté et l'eau le solvant",
+        "On obtient un mélange homogène appelé solution"
+      ]
+    },
+    {
+      "nom": "La décantation",
+      "detail": "On laisse reposer le mélange : les particules solides plus lourdes, d'abord les plus grosses, tombent au fond.",
+      "cartes": [
+        "On laisse reposer l'eau boueuse",
+        "Les particules solides plus lourdes tombent au fond",
+        "On verse le liquide du dessus sans remuer le dépôt",
+        "Elle fait tomber d'abord les grosses particules",
+        "Un dépôt de terre se forme au fond du verre"
+      ]
+    },
+    {
+      "nom": "La filtration",
+      "detail": "Un filtre en papier retient les particules solides non dissoutes ; le liquide récupéré est le filtrat.",
+      "cartes": [
+        "Un papier retient les particules solides, le liquide passe",
+        "On verse le liquide dans un entonnoir avec un papier",
+        "Le sel dissous traverse le papier avec le liquide",
+        "Le liquide obtenu est limpide, mais peut rester un mélange",
+        "Elle retire les particules les plus fines du liquide"
+      ]
+    },
+    {
+      "nom": "L'évaporation",
+      "detail": "L'eau s'en va sous forme de vapeur et le sel dissous reste : c'est ainsi qu'on récupère le sel d'une eau salée.",
+      "cartes": [
+        "On chauffe de l'eau salée jusqu'à ce que l'eau parte",
+        "Les marais salants récoltent le sel de l'eau de mer",
+        "Elle permet de récupérer le sel d'une eau salée",
+        "Le soleil et le vent font partir l'eau de mer",
+        "Il ne reste que le sel au fond du récipient"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Comment classer la substance en couleur ?",
+      "texte": "Au laboratoire, on utilise [de l'eau distillée] pour rincer le matériel.",
+      "choix": ["Corps pur", "Mélange homogène", "Mélange hétérogène"],
+      "bonne": 0,
+      "explication": "L'eau distillée ne contient que de l'eau : c'est un corps pur."
+    },
+    {
+      "consigne": "Comment classer la substance en couleur ?",
+      "texte": "Léa remue [de l'eau avec du sucre] jusqu'à ne plus voir aucun grain.",
+      "choix": ["Corps pur", "Mélange homogène", "Mélange hétérogène"],
+      "bonne": 1,
+      "explication": "Le sucre est dissous : on ne voit plus ses grains, c'est un mélange homogène (une solution)."
+    },
+    {
+      "consigne": "Comment classer la substance en couleur ?",
+      "texte": "Après la pluie, [l'eau boueuse] du caniveau est toute trouble.",
+      "choix": ["Corps pur", "Mélange homogène", "Mélange hétérogène"],
+      "bonne": 2,
+      "explication": "On voit la terre en suspension dans l'eau : au moins deux constituants sont visibles, c'est un mélange hétérogène."
+    },
+    {
+      "consigne": "Comment classer la substance en couleur ?",
+      "texte": "Dans la bouteille, [l'eau et l'huile] forment deux couches.",
+      "choix": ["Corps pur", "Mélange homogène", "Mélange hétérogène"],
+      "bonne": 2,
+      "explication": "L'eau et l'huile ne sont pas miscibles : on voit deux couches, c'est un mélange hétérogène."
+    },
+    {
+      "consigne": "Comment classer la substance en couleur ?",
+      "texte": "[L'eau minérale] est limpide, mais l'étiquette indique des sels minéraux.",
+      "choix": ["Corps pur", "Mélange homogène", "Mélange hétérogène"],
+      "bonne": 1,
+      "explication": "L'eau minérale contient des sels minéraux dissous : c'est un mélange, mais on n'en voit pas les constituants, donc il est homogène."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Filtrat",
+      "acceptees": ["Filtrat", "Le filtrat"],
+      "indices": [
+        "On me récupère à la fin d'une séparation.",
+        "Je suis le liquide qui a traversé un papier dans un entonnoir.",
+        "Je suis limpide, mais je peux rester un mélange."
+      ],
+      "explication": "Le filtrat est le liquide récupéré après une filtration ; il peut encore contenir des espèces dissoutes."
+    },
+    {
+      "reponse": "Solvant",
+      "acceptees": ["Solvant", "Le solvant"],
+      "indices": [
+        "Je fais partie d'une solution.",
+        "Je suis le liquide dans lequel on dissout une espèce.",
+        "Dans une eau salée, c'est l'eau qui joue mon rôle."
+      ],
+      "explication": "Le solvant est le liquide dans lequel on dissout le soluté ; dans l'eau salée, c'est l'eau."
+    },
+    {
+      "reponse": "Décantation",
+      "acceptees": ["Décantation", "La décantation", "Décanter"],
+      "indices": [
+        "Je suis une technique de séparation.",
+        "Pour me réaliser, il suffit de laisser reposer le mélange.",
+        "Pendant que je me déroule, les particules solides les plus lourdes tombent au fond."
+      ],
+      "explication": "La décantation consiste à laisser reposer un mélange : les particules solides plus lourdes se déposent au fond."
+    },
+    {
+      "reponse": "Évaporation",
+      "acceptees": ["Évaporation", "L'évaporation", "Evaporation"],
+      "indices": [
+        "Je suis une technique de séparation.",
+        "On me provoque en chauffant un mélange, ou en le laissant au soleil et au vent.",
+        "Grâce à moi, on récolte le sel dans les marais salants."
+      ],
+      "explication": "Par évaporation, l'eau d'une eau salée s'en va et le sel reste : c'est ainsi qu'on le récolte dans les marais salants."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "On dissout 15 g de sucre dans 250 g d'eau. Quelle est la masse de l'eau sucrée obtenue ?",
+      "reponse": 265,
+      "unite": "g",
+      "tolerance": 0,
+      "explication": "La masse se conserve : 250 + 15 = 265 g."
+    },
+    {
+      "question": "Une eau salée pèse 320 g et contient 20 g de sel. Quelle est la masse de l'eau utilisée ?",
+      "reponse": 300,
+      "unite": "g",
+      "tolerance": 0,
+      "explication": "masse de l'eau = masse de la solution − masse du sel = 320 − 20 = 300 g."
+    },
+    {
+      "question": "On dissout du sucre dans 150 g d'eau. La solution obtenue pèse 175 g. Quelle masse de sucre a été dissoute ?",
+      "reponse": 25,
+      "unite": "g",
+      "tolerance": 0,
+      "explication": "masse de sucre = masse de la solution − masse de l'eau = 175 − 150 = 25 g."
+    },
+    {
+      "question": "On fait évaporer toute l'eau de 400 g d'eau salée. Il reste 12 g de sel. Quelle masse d'eau s'est évaporée ?",
+      "reponse": 388,
+      "unite": "g",
+      "tolerance": 0,
+      "explication": "Le sel reste, seule l'eau est partie : 400 − 12 = 388 g."
+    },
+    {
+      "question": "Un verre vide pèse 120 g. On y verse 100 g d'eau, puis on y dissout 5 g de sel. Quelle masse indique la balance pour le verre et son contenu ?",
+      "reponse": 225,
+      "unite": "g",
+      "tolerance": 0,
+      "explication": "La masse se conserve : 120 + 100 + 5 = 225 g."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Rendre une eau boueuse limpide",
+      "etapes": [
+        "On laisse reposer l'eau boueuse : la terre tombe au fond",
+        "On verse doucement le liquide du dessus dans un autre récipient",
+        "On filtre ce liquide avec un entonnoir et un papier",
+        "On observe le filtrat, limpide mais parfois encore un mélange"
+      ]
+    },
+    {
+      "titre": "Obtenir une solution saturée de sel",
+      "etapes": [
+        "On verse de l'eau dans un verre",
+        "On ajoute du sel cuillère après cuillère en remuant",
+        "Au bout d'un moment, le sel ne disparaît plus",
+        "Le sel en trop se dépose au fond du verre"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,195 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Aliments riches en glucides",
+      "detail": "Ces aliments apportent surtout de l'énergie rapidement utilisable.",
+      "cartes": [
+        "Une tartine de pain",
+        "Une assiette de pâtes",
+        "Un bol de riz",
+        "Du sucre en morceaux",
+        "Un plat de semoule"
+      ]
+    },
+    {
+      "nom": "Aliments riches en lipides",
+      "detail": "Ces aliments apportent beaucoup d'énergie et permettent de former des réserves.",
+      "cartes": [
+        "Une cuillère d'huile d'olive",
+        "Une noix de beurre",
+        "De la margarine",
+        "De la mayonnaise",
+        "De l'huile de tournesol"
+      ]
+    },
+    {
+      "nom": "Aliments riches en protéines",
+      "detail": "Ces aliments apportent les matériaux de construction du corps.",
+      "cartes": [
+        "Un steak haché",
+        "Un filet de poisson",
+        "Deux œufs durs",
+        "Un blanc de poulet",
+        "Du jambon blanc"
+      ]
+    },
+    {
+      "nom": "Aliments riches en vitamines et fibres",
+      "detail": "Les fruits et les légumes apportent des vitamines et des fibres.",
+      "cartes": [
+        "Une orange",
+        "Des carottes râpées",
+        "Une salade verte",
+        "Un bol de brocolis",
+        "Une pomme avec sa peau"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "le surpoids",
+      "carte": "Des apports qui dépassent régulièrement les dépenses",
+      "role": "cause",
+      "explication": "L'excès d'énergie est stocké sous forme de graisses."
+    },
+    {
+      "fait": "le surpoids",
+      "carte": "Un mode de vie sédentaire, avec peu d'activité physique",
+      "role": "cause",
+      "explication": "La sédentarité diminue les dépenses d'énergie, et l'excès est stocké en graisses."
+    },
+    {
+      "fait": "le surpoids",
+      "carte": "Un risque plus élevé de diabète de type 2",
+      "role": "consequence",
+      "explication": "Le surpoids augmente le risque de maladies comme le diabète de type 2."
+    },
+    {
+      "fait": "le surpoids",
+      "carte": "Un risque plus élevé de maladies cardiovasculaires",
+      "role": "consequence",
+      "explication": "Le surpoids augmente le risque de maladies cardiovasculaires."
+    }
+  ],
+  "etiquettes": [
+    {
+      "consigne": "Quel est le rôle principal de ce qui est en couleur ?",
+      "texte": "Le pain, les pâtes et le riz apportent surtout [des glucides].",
+      "choix": ["Fournir de l'énergie rapide", "Construire le corps", "Faciliter le transit intestinal", "Hydrater le corps"],
+      "bonne": 0,
+      "explication": "Les glucides sont la principale source d'énergie rapidement utilisable."
+    },
+    {
+      "consigne": "Quel est le rôle principal de ce qui est en couleur ?",
+      "texte": "La viande, le poisson et les œufs apportent [des protéines].",
+      "choix": ["Fournir de l'énergie rapide", "Construire le corps", "Faciliter le transit intestinal", "Hydrater le corps"],
+      "bonne": 1,
+      "explication": "Les protéines sont les matériaux de construction du corps, indispensables à la croissance."
+    },
+    {
+      "consigne": "Quel est le rôle principal de ce qui est en couleur ?",
+      "texte": "Les fruits, les légumes et les céréales complètes contiennent [des fibres].",
+      "choix": ["Fournir de l'énergie rapide", "Construire le corps", "Faciliter le transit intestinal", "Hydrater le corps"],
+      "bonne": 2,
+      "explication": "Les fibres facilitent le transit intestinal."
+    },
+    {
+      "consigne": "Quel est le rôle principal de ce qui est en couleur ?",
+      "texte": "La seule boisson indispensable à l'organisme est [l'eau].",
+      "choix": ["Fournir de l'énergie rapide", "Construire le corps", "Faciliter le transit intestinal", "Hydrater le corps"],
+      "bonne": 3,
+      "explication": "L'eau suffit à hydrater le corps."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Sédentarité",
+      "acceptees": ["Sédentarité", "La sédentarité"],
+      "indices": [
+        "Je suis un mode de vie qui menace la santé.",
+        "Je suis fait de longues heures assises, souvent devant un écran.",
+        "Je suis l'opposé d'une activité physique régulière."
+      ],
+      "explication": "La sédentarité est un mode de vie avec peu d'activité physique."
+    },
+    {
+      "reponse": "Kilojoule",
+      "acceptees": ["Kilojoule", "Kilojoules", "Le kilojoule", "kJ"],
+      "indices": [
+        "Je suis une unité.",
+        "On me lit sur les étiquettes des aliments.",
+        "Je mesure l'énergie, et 1 kcal vaut environ 4,18 fois moi."
+      ],
+      "explication": "Le kilojoule (kJ) est l'unité d'énergie des étiquettes alimentaires ; 1 kcal ≈ 4,18 kJ."
+    },
+    {
+      "reponse": "Nicotine",
+      "acceptees": ["Nicotine", "La nicotine"],
+      "indices": [
+        "Je suis une substance contenue dans le tabac.",
+        "Je rends très difficile le fait d'arrêter de fumer.",
+        "Je suis la cause de la dépendance au tabac."
+      ],
+      "explication": "La nicotine du tabac crée une dépendance."
+    },
+    {
+      "reponse": "Fibres",
+      "acceptees": ["Fibres", "Les fibres", "Fibre", "Fibres alimentaires"],
+      "indices": [
+        "On me trouve dans les végétaux.",
+        "Je suis surtout présente dans les fruits, les légumes et les céréales complètes.",
+        "Je facilite le transit intestinal."
+      ],
+      "explication": "Les fibres des fruits, légumes et céréales complètes facilitent le transit intestinal."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "Un aliment apporte 100 kcal. Sachant que 1 kcal ≈ 4,18 kJ, combien cela fait-il de kJ ?",
+      "reponse": 418,
+      "unite": "kJ",
+      "tolerance": 0,
+      "explication": "100 × 4,18 = 418 kJ."
+    },
+    {
+      "question": "Un biscuit apporte 200 kcal. Sachant que 1 kcal ≈ 4,18 kJ, combien cela fait-il de kJ ?",
+      "reponse": 836,
+      "unite": "kJ",
+      "tolerance": 0,
+      "explication": "200 × 4,18 = 836 kJ."
+    },
+    {
+      "question": "Sur une étiquette, des céréales apportent 1 500 kJ pour 100 g. Combien apporte une portion de 30 g ?",
+      "reponse": 450,
+      "unite": "kJ",
+      "tolerance": 0,
+      "explication": "30 g = 0,3 × 100 g, donc 1 500 × 0,3 = 450 kJ."
+    },
+    {
+      "question": "Sur une étiquette, un fromage contient 20 g de lipides pour 100 g. Combien de lipides dans une portion de 50 g ?",
+      "reponse": 10,
+      "unite": "g",
+      "tolerance": 0,
+      "explication": "50 g = 0,5 × 100 g, donc 20 × 0,5 = 10 g de lipides."
+    },
+    {
+      "question": "L'OMS recommande au moins 60 minutes d'activité physique par jour. Sur une semaine de 7 jours, quel est le minimum de minutes d'activité recommandé ?",
+      "reponse": 420,
+      "unite": "min",
+      "tolerance": 0,
+      "explication": "60 × 7 = 420 minutes par semaine, soit 7 heures."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Lire une étiquette alimentaire",
+      "etapes": [
+        "On repère la colonne « pour 100 g »",
+        "On relève l'énergie, puis glucides, lipides et protéines",
+        "On compare deux aliments à quantité égale",
+        "On rapporte les valeurs à la portion réellement mangée"
+      ]
+    }
+  ]
+}

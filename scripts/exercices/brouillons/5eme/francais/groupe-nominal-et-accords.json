@@ -1,0 +1,148 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Masculin singulier",
+      "detail": "Le nom noyau du groupe est masculin et au singulier, quel que soit le complément du nom qui le suit.",
+      "cartes": [
+        "Un jeune chevalier gallois",
+        "Le château du roi",
+        "Un sac de billes",
+        "Ce vieux cheval fatigué",
+        "Mon petit frère"
+      ]
+    },
+    {
+      "nom": "Féminin singulier",
+      "detail": "Le nom noyau du groupe est féminin et au singulier, quel que soit le complément du nom qui le suit.",
+      "cartes": [
+        "Une fée généreuse",
+        "La porte du château",
+        "Une armée de chevaliers",
+        "Cette longue épée brillante",
+        "Ma voisine préférée"
+      ]
+    },
+    {
+      "nom": "Masculin pluriel",
+      "detail": "Le nom noyau du groupe est masculin et au pluriel, quel que soit le complément du nom qui le suit.",
+      "cartes": [
+        "Des chevaliers vaillants",
+        "Les grands châteaux gris",
+        "Mes deux frères",
+        "Des chevaux rapides",
+        "Ces beaux bateaux de pêche"
+      ]
+    },
+    {
+      "nom": "Féminin pluriel",
+      "detail": "Le nom noyau du groupe est féminin et au pluriel, quel que soit le complément du nom qui le suit.",
+      "cartes": [
+        "Les belles princesses courageuses",
+        "Des robes de soie",
+        "Des tasses à café",
+        "Ces vieilles armures rouillées",
+        "Mes longues journées d'été"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Quelle est l'expansion du nom en couleur ?",
+      "texte": "Le chevalier [courageux] traverse la forêt.",
+      "choix": ["Adjectif épithète", "Complément du nom", "Proposition relative"],
+      "bonne": 0,
+      "explication": "« courageux » est un adjectif placé à côté du nom « chevalier » : c'est un adjectif épithète."
+    },
+    {
+      "consigne": "Quelle est l'expansion du nom en couleur ?",
+      "texte": "Le forgeron répare l'armure [du chevalier].",
+      "choix": ["Adjectif épithète", "Complément du nom", "Proposition relative"],
+      "bonne": 1,
+      "explication": "« du chevalier » est introduit par la préposition « de » et complète le nom « armure » : c'est un complément du nom."
+    },
+    {
+      "consigne": "Quelle est l'expansion du nom en couleur ?",
+      "texte": "Le roi remercie le chevalier [qui a vaincu le dragon].",
+      "choix": ["Adjectif épithète", "Complément du nom", "Proposition relative"],
+      "bonne": 2,
+      "explication": "Ce groupe est introduit par le pronom « qui » et contient un verbe conjugué (« a vaincu ») : c'est une proposition relative."
+    },
+    {
+      "consigne": "Quelle est l'expansion du nom en couleur ?",
+      "texte": "Perceval rencontre un [vieux] sage dans la forêt.",
+      "choix": ["Adjectif épithète", "Complément du nom", "Proposition relative"],
+      "bonne": 0,
+      "explication": "« vieux » est un adjectif placé à côté du nom « sage » : c'est un adjectif épithète, même placé avant le nom."
+    },
+    {
+      "consigne": "Quelle est l'expansion du nom en couleur ?",
+      "texte": "Le garçon range sa boîte [de crayons] dans son sac.",
+      "choix": ["Adjectif épithète", "Complément du nom", "Proposition relative"],
+      "bonne": 1,
+      "explication": "« de crayons » est introduit par la préposition « de » et complète le nom « boîte » : c'est un complément du nom."
+    },
+    {
+      "consigne": "Quelle est l'expansion du nom en couleur ?",
+      "texte": "La fée [que Perceval rencontre] lui donne un conseil.",
+      "choix": ["Adjectif épithète", "Complément du nom", "Proposition relative"],
+      "bonne": 2,
+      "explication": "Ce groupe est introduit par le pronom « que » et contient un verbe conjugué (« rencontre ») : c'est une proposition relative."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Nom noyau",
+      "acceptees": ["Le nom noyau", "Noyau", "Le noyau"],
+      "indices": [
+        "Je suis le mot autour duquel tout un groupe de mots s'organise.",
+        "Les autres mots du groupe s'accordent avec moi.",
+        "Dans « un chevalier à l'armure rouge », je suis « chevalier »."
+      ],
+      "explication": "Le nom noyau est le nom principal du groupe nominal : le déterminant et les adjectifs s'accordent avec lui."
+    },
+    {
+      "reponse": "Adjectif épithète",
+      "acceptees": ["Épithète", "L'épithète", "Un adjectif épithète"],
+      "indices": [
+        "Je suis un mot qui décrit.",
+        "Je suis placé juste à côté du nom que je qualifie, sans préposition.",
+        "Dans « un chevalier courageux », je suis « courageux »."
+      ],
+      "explication": "L'adjectif épithète est placé à côté du nom qu'il qualifie et s'accorde avec lui."
+    },
+    {
+      "reponse": "Complément du nom",
+      "acceptees": ["Le complément du nom", "CDN", "Complément de nom"],
+      "indices": [
+        "Je suis une expansion que l'on peut supprimer.",
+        "Une préposition m'introduit : à, de, en…",
+        "Dans « l'épée du roi », je suis « du roi »."
+      ],
+      "explication": "Le complément du nom est introduit par une préposition et ne s'accorde pas avec le nom noyau."
+    },
+    {
+      "reponse": "Proposition relative",
+      "acceptees": ["La proposition relative", "Relative", "Subordonnée relative", "Proposition subordonnée relative"],
+      "indices": [
+        "Je suis une expansion qui contient un verbe conjugué.",
+        "Un pronom comme « qui », « que » ou « dont » m'introduit.",
+        "Dans « le chevalier qui combat le dragon », je suis « qui combat le dragon »."
+      ],
+      "explication": "La proposition relative est introduite par un pronom relatif et complète un nom."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Accorder un groupe nominal",
+      "etapes": [
+        "Repérer le nom noyau en remplaçant le groupe par un pronom",
+        "Trouver le genre et le nombre du nom noyau",
+        "Tracer une flèche vers chaque mot qui en dépend",
+        "Vérifier chaque accord sans toucher au complément du nom"
+      ]
+    }
+  ]
+}

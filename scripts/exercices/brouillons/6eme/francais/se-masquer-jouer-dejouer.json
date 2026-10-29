@@ -1,0 +1,138 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Le texte de théâtre",
+      "detail": "Le vocabulaire pour lire une pièce : didascalies, tirades, monologues, apartés, actes et scènes.",
+      "cartes": [
+        "Une indication de geste ou de ton, souvent en italique",
+        "Les paroles d'un personnage seul en scène",
+        "Une longue réplique adressée aux autres personnages",
+        "Des paroles que seul le public entend",
+        "Le découpage d'une pièce en actes et en scènes"
+      ]
+    },
+    {
+      "nom": "Les ruses",
+      "detail": "Les moyens habiles de tromper quelqu'un pour obtenir ce que l'on veut.",
+      "cartes": [
+        "Dire une chose fausse pour abuser quelqu'un",
+        "Se déguiser pour ne pas être reconnu",
+        "Flatter quelqu'un pour obtenir ce que l'on veut",
+        "Inventer une fausse attaque pour effrayer quelqu'un",
+        "Se faire passer pour un expert sans l'être"
+      ]
+    },
+    {
+      "nom": "Les formes du comique",
+      "detail": "Les cinq façons de faire rire le public : mots, gestes, situation, caractère et répétition.",
+      "cartes": [
+        "Des jeux de mots",
+        "Des coups de bâton et des chutes",
+        "Un défaut exagéré, comme l'avarice ou la peur",
+        "La même phrase reprise plusieurs fois",
+        "Un personnage caché que les autres ne voient pas"
+      ]
+    },
+    {
+      "nom": "Molière",
+      "detail": "L'auteur, comédien et chef de troupe du XVIIe siècle, et ses pièces.",
+      "cartes": [
+        "Auteur, comédien et chef de troupe",
+        "Son vrai nom est Jean-Baptiste Poquelin",
+        "Il a vécu de 1622 à 1673",
+        "Il a écrit Les Fourberies de Scapin en 1671",
+        "Il a écrit Le Médecin malgré lui en 1666"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Que représente le passage en couleur dans cet extrait de théâtre ?",
+      "texte": "SCAPIN, [en riant] : Ne vous inquiétez pas, Monsieur.",
+      "choix": ["Une didascalie", "Un aparté", "Un monologue"],
+      "bonne": 0,
+      "explication": "« en riant » indique le ton à prendre : c'est une didascalie, une indication pour le comédien."
+    },
+    {
+      "consigne": "Que représente le passage en couleur dans cet extrait de théâtre ?",
+      "texte": "GÉRONTE, à part : [Le coquin me trompe !]",
+      "choix": ["Une didascalie", "Un aparté", "Un monologue"],
+      "bonne": 1,
+      "explication": "Avec « à part », Géronte parle pour le public sans être entendu des autres personnages : c'est un aparté."
+    },
+    {
+      "consigne": "Que représente le passage en couleur dans cet extrait de théâtre ?",
+      "texte": "SCAPIN, seul sur scène : [Quelle belle idée pour tromper ce vieux Géronte !]",
+      "choix": ["Une didascalie", "Un aparté", "Un monologue"],
+      "bonne": 2,
+      "explication": "Scapin est seul en scène et parle à voix haute : c'est un monologue."
+    },
+    {
+      "consigne": "Que représente le passage en couleur dans cet extrait de théâtre ?",
+      "texte": "[Il se cache dans un sac.] GÉRONTE : Je suis bien caché, personne ne me verra.",
+      "choix": ["Une didascalie", "Un aparté", "Un monologue"],
+      "bonne": 0,
+      "explication": "« Il se cache dans un sac » décrit un geste, sans être dit par un personnage : c'est une didascalie."
+    },
+    {
+      "consigne": "Que représente le passage en couleur dans cet extrait de théâtre ?",
+      "texte": "ARGANTE : Mon fils est un garçon honnête. SCAPIN, à part : [Si tu savais la vérité !]",
+      "choix": ["Une didascalie", "Un aparté", "Un monologue"],
+      "bonne": 1,
+      "explication": "Argante est présent mais n'entend pas Scapin : ces paroles sont destinées au public, c'est un aparté."
+    },
+    {
+      "consigne": "Que représente le passage en couleur dans cet extrait de théâtre ?",
+      "texte": "Resté seul, GÉRONTE réfléchit à voix haute : [Combien me coûtera la liberté de mon fils ?]",
+      "choix": ["Une didascalie", "Un aparté", "Un monologue"],
+      "bonne": 2,
+      "explication": "Géronte est seul en scène et parle à voix haute : c'est un monologue."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Molière",
+      "acceptees": ["Molière", "Jean-Baptiste Poquelin"],
+      "indices": [
+        "Je suis un homme de théâtre du XVIIe siècle.",
+        "Je suis auteur, comédien et chef de troupe.",
+        "J'ai écrit Les Fourberies de Scapin en 1671."
+      ],
+      "explication": "Molière, de son vrai nom Jean-Baptiste Poquelin, est l'auteur des Fourberies de Scapin."
+    },
+    {
+      "reponse": "Scapin",
+      "acceptees": ["Scapin"],
+      "indices": [
+        "Je suis un personnage de comédie.",
+        "Je suis un valet qui trompe deux pères avares pour aider leurs fils.",
+        "Je fais cacher Géronte dans un sac, puis je le roue de coups."
+      ],
+      "explication": "Scapin est le valet rusé des Fourberies de Scapin, célèbre pour la scène du sac."
+    },
+    {
+      "reponse": "Sganarelle",
+      "acceptees": ["Sganarelle"],
+      "indices": [
+        "Je suis un personnage de comédie de Molière.",
+        "Je suis un bûcheron.",
+        "On me force à me faire passer pour un médecin savant en latin."
+      ],
+      "explication": "Dans Le Médecin malgré lui (1666), Sganarelle paraît savant alors qu'il n'est qu'un bûcheron."
+    },
+    {
+      "reponse": "Aparté",
+      "acceptees": ["Aparté", "Un aparté"],
+      "indices": [
+        "Je suis une forme de parole au théâtre.",
+        "Je suis dit alors que d'autres personnages sont présents sur scène.",
+        "Seul le public m'entend."
+      ],
+      "explication": "L'aparté est entendu du public mais pas des autres personnages présents."
+    }
+  ],
+  "calculs": [],
+  "etapes": []
+}

@@ -1,0 +1,155 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Offrir ou commander poliment",
+      "detail": "On propose quelque chose à quelqu'un ou on demande poliment à manger ou à boire : Would you like…, I'd like…, Can I have…",
+      "cartes": [
+        "Would you like some tea?",
+        "I'd like a sandwich, please",
+        "Can I have a slice of cake, please?",
+        "Would you like some orange juice?",
+        "Can I have some bread, please?"
+      ]
+    },
+    {
+      "nom": "Une phrase négative",
+      "detail": "On dit qu'il n'y en a pas, qu'on n'en veut pas ou qu'on n'en mange pas : à la forme négative, on emploie any.",
+      "cartes": [
+        "There isn't any milk in the fridge",
+        "We haven't got any eggs",
+        "I don't want any butter on my toast",
+        "There aren't any tomatoes in the salad",
+        "She doesn't eat any meat"
+      ]
+    },
+    {
+      "nom": "Demander une quantité",
+      "detail": "On demande un nombre avec How many (dénombrable pluriel) ou une quantité avec How much (indénombrable).",
+      "cartes": [
+        "How many apples do you need?",
+        "How much sugar is there in this cake?",
+        "How much cheese do you want?",
+        "How many oranges are there in the bag?",
+        "How much rice do we have?"
+      ]
+    },
+    {
+      "nom": "Dire une quantité",
+      "detail": "On dit combien il y en a, avec a lot of, a few, a little ou un contenant comme a bottle of.",
+      "cartes": [
+        "We have a lot of potatoes at home",
+        "I only drink a little coffee",
+        "She eats a few grapes every day",
+        "There are two bottles of water on the table",
+        "There is only a little jam left"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Quel est le type du mot en couleur ?",
+      "texte": "I'd like a [sandwich], please.",
+      "choix": [
+        "Un nom dénombrable",
+        "Un nom indénombrable",
+        "Un contenant ou une portion"
+      ],
+      "bonne": 0,
+      "explication": "Sandwich se compte (a sandwich, two sandwiches) : c'est un nom dénombrable."
+    },
+    {
+      "consigne": "Quel est le type du mot en couleur ?",
+      "texte": "We need some [rice] for dinner.",
+      "choix": [
+        "Un nom dénombrable",
+        "Un nom indénombrable",
+        "Un contenant ou une portion"
+      ],
+      "bonne": 1,
+      "explication": "Rice ne se compte pas et n'a pas de pluriel : c'est un nom indénombrable, d'où some rice."
+    },
+    {
+      "consigne": "Quel est le type du mot en couleur ?",
+      "texte": "Can I have a [slice] of bread, please?",
+      "choix": [
+        "Un nom dénombrable",
+        "Un nom indénombrable",
+        "Un contenant ou une portion"
+      ],
+      "bonne": 2,
+      "explication": "A slice of sert à compter l'indénombrable bread : « slice » est une portion."
+    },
+    {
+      "consigne": "Quel est le type du mot en couleur ?",
+      "texte": "There are three [tomatoes] in the bag.",
+      "choix": [
+        "Un nom dénombrable",
+        "Un nom indénombrable",
+        "Un contenant ou une portion"
+      ],
+      "bonne": 0,
+      "explication": "Tomatoes se compte (three tomatoes) et prend un pluriel : c'est un nom dénombrable."
+    },
+    {
+      "consigne": "Quel est le type du mot en couleur ?",
+      "texte": "She drinks a glass of [milk] every morning.",
+      "choix": [
+        "Un nom dénombrable",
+        "Un nom indénombrable",
+        "Un contenant ou une portion"
+      ],
+      "bonne": 1,
+      "explication": "Milk ne se compte pas et n'a pas de pluriel : c'est un nom indénombrable. Le contenant, c'est « glass »."
+    },
+    {
+      "consigne": "Quel est le type du mot en couleur ?",
+      "texte": "Two [bottles] of water are on the table.",
+      "choix": [
+        "Un nom dénombrable",
+        "Un nom indénombrable",
+        "Un contenant ou une portion"
+      ],
+      "bonne": 2,
+      "explication": "Bottles of sert à compter l'indénombrable water : « bottles » est un contenant."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Many",
+      "acceptees": [],
+      "indices": [
+        "Je suis un petit mot de quantité.",
+        "Je ne vais qu'avec un nom dénombrable au pluriel.",
+        "On me trouve dans la question qui demande un nombre : How … eggs do you need?"
+      ],
+      "explication": "Many va avec un dénombrable pluriel : How many eggs ? Pour un indénombrable, on emploie much."
+    },
+    {
+      "reponse": "Much",
+      "acceptees": [],
+      "indices": [
+        "Je suis un petit mot de quantité.",
+        "Je ne vais qu'avec un nom indénombrable, comme sugar ou milk.",
+        "On me trouve dans la question qui demande une quantité : How … sugar is there?"
+      ],
+      "explication": "Much va avec un indénombrable : How much sugar ? Pour un pluriel dénombrable, on emploie many."
+    },
+    {
+      "reponse": "Crisps",
+      "acceptees": [
+        "Crisp",
+        "Potato crisps"
+      ],
+      "indices": [
+        "Je suis un mot de vocabulaire britannique pour un aliment.",
+        "On me mange en sachet, sous forme de fines tranches de pomme de terre frites.",
+        "Aux États-Unis, on m'appelle chips."
+      ],
+      "explication": "Au Royaume-Uni, les chips en sachet se disent crisps ; chips désigne des frites."
+    }
+  ],
+  "calculs": [],
+  "etapes": []
+}

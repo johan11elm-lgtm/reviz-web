@@ -1,0 +1,166 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Quelqu'un, quelque chose, quelque part",
+      "detail": "Some- parle d'une personne, d'une chose ou d'un lieu qui existe, mais qu'on ne précise pas.",
+      "cartes": [
+        "Somebody stole the diamond last night",
+        "I heard something in the garden",
+        "The thief is hiding somewhere in London",
+        "Someone is knocking at the door",
+        "Holmes found something strange on the floor"
+      ]
+    },
+    {
+      "nom": "Personne, rien, nulle part",
+      "detail": "Nobody, nothing, nowhere, ou not + anybody, anything, anywhere : il n'y a personne, rien ou aucun lieu.",
+      "cartes": [
+        "Nobody knows the truth about the crime",
+        "I didn't see anybody in the street",
+        "There is nothing in the box",
+        "The detective didn't find anything",
+        "The missing jewels are nowhere to be found"
+      ]
+    },
+    {
+      "nom": "Tout le monde, tout, partout",
+      "detail": "Every- parle de la totalité : toutes les personnes, toutes les choses, tous les lieux.",
+      "cartes": [
+        "Everybody is in the room",
+        "The detective looked everywhere for clues",
+        "Everything is clear now",
+        "Everyone in the house is a suspect",
+        "Watson wrote down everything Holmes said"
+      ]
+    },
+    {
+      "nom": "N'importe qui, quoi ou où",
+      "detail": "Dans une phrase affirmative, any- veut dire « n'importe » : anybody, anything, anywhere.",
+      "cartes": [
+        "You can sit anywhere in the room",
+        "You can ask me anything",
+        "Choose anything from the menu",
+        "Anyone could steal this old bike",
+        "Invite anybody you like to the party"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Que veut dire le mot en couleur dans cette phrase ?",
+      "texte": "I heard [something] in the kitchen.",
+      "choix": [
+        "Quelque chose",
+        "Rien",
+        "Tout",
+        "N'importe quoi"
+      ],
+      "bonne": 0,
+      "explication": "Dans une phrase affirmative, something veut dire « quelque chose » : un bruit dont on ne dit pas la nature."
+    },
+    {
+      "consigne": "Que veut dire le mot en couleur dans cette phrase ?",
+      "texte": "The detective didn't find [anything].",
+      "choix": [
+        "Quelque chose",
+        "Rien",
+        "Tout",
+        "N'importe quoi"
+      ],
+      "bonne": 1,
+      "explication": "Après didn't (négation), anything veut dire « rien » : il n'a rien trouvé."
+    },
+    {
+      "consigne": "Que veut dire le mot en couleur dans cette phrase ?",
+      "texte": "He was so hungry that he ate [anything].",
+      "choix": [
+        "Quelque chose",
+        "Rien",
+        "Tout",
+        "N'importe quoi"
+      ],
+      "bonne": 3,
+      "explication": "Dans une phrase affirmative, anything veut dire « n'importe quoi » : il a mangé n'importe quoi."
+    },
+    {
+      "consigne": "Que veut dire le mot en couleur dans cette phrase ?",
+      "texte": "Holmes knows [everything] about the case.",
+      "choix": [
+        "Quelque chose",
+        "Rien",
+        "Tout",
+        "N'importe quoi"
+      ],
+      "bonne": 2,
+      "explication": "Everything parle de la totalité des choses : Holmes sait tout sur l'affaire."
+    },
+    {
+      "consigne": "Que veut dire le mot en couleur dans cette phrase ?",
+      "texte": "Did you find [anything] in the garden?",
+      "choix": [
+        "Quelque chose",
+        "Rien",
+        "Tout",
+        "N'importe quoi"
+      ],
+      "bonne": 0,
+      "explication": "Dans une question, anything veut dire « quelque chose » : as-tu trouvé quelque chose ?"
+    },
+    {
+      "consigne": "Que veut dire le mot en couleur dans cette phrase ?",
+      "texte": "There is [nothing] in the box.",
+      "choix": [
+        "Quelque chose",
+        "Rien",
+        "Tout",
+        "N'importe quoi"
+      ],
+      "bonne": 1,
+      "explication": "Nothing porte déjà la négation et veut dire « rien » : la boîte est vide."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Everybody",
+      "acceptees": [
+        "Everyone",
+        "Every one"
+      ],
+      "indices": [
+        "Je suis un indéfini qui désigne des personnes.",
+        "Je parle de la totalité de ces personnes.",
+        "Même si je désigne plusieurs personnes, mon verbe est au singulier : « ___ is here »."
+      ],
+      "explication": "Everybody (ou everyone) veut dire « tout le monde » et se conjugue au singulier : Everybody is here."
+    },
+    {
+      "reponse": "Nowhere",
+      "acceptees": [
+        "No where"
+      ],
+      "indices": [
+        "Je suis un indéfini de l'anglais.",
+        "Je parle d'un lieu, mais d'aucun lieu précis.",
+        "Je porte déjà la négation : le verbe qui me suit reste affirmatif."
+      ],
+      "explication": "Nowhere veut dire « nulle part » : The jewels are nowhere to be found."
+    },
+    {
+      "reponse": "Sherlock Holmes",
+      "acceptees": [
+        "Holmes",
+        "Sherlock"
+      ],
+      "indices": [
+        "Je suis un personnage de roman policier.",
+        "Mon créateur est l'écrivain écossais Arthur Conan Doyle, qui m'a fait apparaître en 1887.",
+        "J'habite au 221B Baker Street, à Londres, avec le docteur Watson."
+      ],
+      "explication": "Sherlock Holmes, détective imaginé par Arthur Conan Doyle, vit au 221B Baker Street avec le docteur Watson."
+    }
+  ],
+  "calculs": [],
+  "etapes": []
+}

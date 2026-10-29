@@ -1,0 +1,166 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "La Mésopotamie des cités-États",
+      "detail": "La Mésopotamie : villes indépendantes, rois, monuments et géographie.",
+      "cartes": [
+        "Une ville indépendante, avec son propre territoire",
+        "Le roi de la cité, juge et représentant des dieux",
+        "La ziggourat d'Ur, haute tour à étages en briques",
+        "Un pays situé entre le Tigre et l'Euphrate",
+        "Vers 1750 av. J.-C., Babylone a pour roi Hammurabi"
+      ]
+    },
+    {
+      "nom": "L'Égypte du pharaon",
+      "detail": "L'Égypte : royaume unifié, roi-dieu, Nil et monuments.",
+      "cartes": [
+        "Un roi considéré comme un dieu vivant",
+        "Une terre que la crue annuelle du Nil rend fertile",
+        "Vers 3100 av. J.-C., la Haute et la Basse-Égypte s'unissent",
+        "Vers 2500 av. J.-C., on bâtit les pyramides de Gizeh",
+        "Un roi qui possède les terres du royaume"
+      ]
+    },
+    {
+      "nom": "Le cunéiforme",
+      "detail": "L'écriture née en Mésopotamie : ses signes, son outil, son support et ses débuts.",
+      "cartes": [
+        "Des signes en forme de clous",
+        "Un roseau taillé, le calame, qui s'enfonce dans l'argile fraîche",
+        "Une tablette qui note des sacs d'orge livrés au temple",
+        "Une écriture née vers 3300 av. J.-C. à Uruk",
+        "Une écriture née un peu avant celle d'Égypte"
+      ]
+    },
+    {
+      "nom": "Les hiéroglyphes",
+      "detail": "L'écriture égyptienne : ses signes, son support, son déchiffrement et ses débuts.",
+      "cartes": [
+        "Des signes-images, de petits dessins",
+        "Des signes gravés, peints ou tracés sur du papyrus",
+        "Une écriture déchiffrée en 1822 par Champollion",
+        "Une pierre portant un même texte en trois écritures",
+        "Une écriture née après celle de Mésopotamie"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "l'invention de l'écriture",
+      "carte": "Le besoin de garder des traces des récoltes, des troupeaux et des échanges",
+      "role": "cause",
+      "explication": "L'écriture sert d'abord à compter : récoltes, troupeaux, impôts et échanges."
+    },
+    {
+      "fait": "l'invention de l'écriture",
+      "carte": "Des États avec une administration, des impôts et une armée à gérer",
+      "role": "cause",
+      "explication": "Pour gérer un État, il faut garder des traces : c'est ce besoin qui fait naître l'écriture."
+    },
+    {
+      "fait": "l'invention de l'écriture",
+      "carte": "La fin de la Préhistoire et le début de l'Histoire",
+      "role": "consequence",
+      "explication": "L'invention de l'écriture marque la fin de la Préhistoire et le début de l'Histoire."
+    },
+    {
+      "fait": "l'invention de l'écriture",
+      "carte": "Des lois que l'on peut écrire et graver, comme celles de Hammurabi",
+      "role": "consequence",
+      "explication": "Grâce à l'écriture, on peut fixer des lois par écrit, par exemple sur la stèle de Hammurabi."
+    },
+    {
+      "fait": "l'invention de l'écriture",
+      "carte": "Des textes qui nous font connaître les noms et les croyances des rois",
+      "role": "consequence",
+      "explication": "Grâce aux textes écrits, on connaît les noms des rois, leurs lois et leurs croyances."
+    }
+  ],
+  "etiquettes": [],
+  "devinettes": [
+    {
+      "reponse": "Hammurabi",
+      "acceptees": ["Hammurabi", "Le roi Hammurabi"],
+      "indices": [
+        "Je suis un roi de Mésopotamie.",
+        "Je règne sur Babylone vers 1750 av. J.-C.",
+        "J'ai fait graver environ 280 lois sur une stèle de basalte."
+      ],
+      "explication": "Hammurabi, roi de Babylone, fait graver ses lois sur une stèle aujourd'hui conservée au Louvre."
+    },
+    {
+      "reponse": "Champollion",
+      "acceptees": ["Champollion", "Jean-François Champollion"],
+      "indices": [
+        "Je suis un savant qui s'intéresse aux écritures oubliées.",
+        "En 1822, je réussis à lire une écriture que personne ne comprenait plus.",
+        "Je m'appuie sur la pierre de Rosette pour déchiffrer les hiéroglyphes."
+      ],
+      "explication": "Champollion déchiffre les hiéroglyphes en 1822, grâce à la pierre de Rosette."
+    },
+    {
+      "reponse": "Pharaon",
+      "acceptees": ["Le pharaon", "Un pharaon", "Pharaon", "Le roi d'Égypte", "Roi d'Égypte"],
+      "indices": [
+        "Je dirige un royaume le long du Nil.",
+        "Les Égyptiens me considèrent comme un dieu vivant.",
+        "Je suis le roi de l'Égypte ancienne et je possède les terres."
+      ],
+      "explication": "Le pharaon est le roi-dieu de l'Égypte : il possède les terres, lève les impôts et dirige l'armée."
+    },
+    {
+      "reponse": "Cunéiforme",
+      "acceptees": ["Le cunéiforme", "L'écriture cunéiforme", "Écriture cunéiforme"],
+      "indices": [
+        "Je suis née il y a plus de cinq mille ans.",
+        "On me trace avec un roseau taillé, le calame.",
+        "Mes signes ont la forme de clous sur des tablettes d'argile."
+      ],
+      "explication": "L'écriture cunéiforme naît à Uruk, en Mésopotamie, vers 3300 av. J.-C."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "L'écriture apparaît à Uruk vers 3300 av. J.-C. et le Code de Hammurabi date d'environ 1750 av. J.-C. Combien d'années séparent ces deux dates ?",
+      "reponse": 1550,
+      "unite": "ans",
+      "tolerance": 0,
+      "explication": "3300 − 1750 = 1550 ans."
+    },
+    {
+      "question": "L'Égypte est unifiée vers 3100 av. J.-C. et les pyramides de Gizeh sont bâties vers 2500 av. J.-C. Combien d'années plus tard ?",
+      "reponse": 600,
+      "unite": "ans",
+      "tolerance": 0,
+      "explication": "3100 − 2500 = 600 ans."
+    },
+    {
+      "question": "Les hiéroglyphes apparaissent vers 3200 av. J.-C. et le Code de Hammurabi date d'environ 1750 av. J.-C. Combien d'années séparent ces deux dates ?",
+      "reponse": 1450,
+      "unite": "ans",
+      "tolerance": 0,
+      "explication": "3200 − 1750 = 1450 ans."
+    },
+    {
+      "question": "Combien de siècles séparent l'écriture d'Uruk (vers 3300 av. J.-C.) des pyramides de Gizeh (vers 2500 av. J.-C.) ?",
+      "reponse": 8,
+      "unite": "siècles",
+      "tolerance": 0,
+      "explication": "3300 − 2500 = 800 ans, soit 8 siècles."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Les grandes dates, de la plus ancienne à la plus récente",
+      "etapes": [
+        "L'écriture cunéiforme apparaît à Uruk",
+        "Les hiéroglyphes apparaissent en Égypte",
+        "L'Égypte est unifiée sous un seul pharaon",
+        "Hammurabi fait graver ses lois à Babylone",
+        "Champollion déchiffre les hiéroglyphes"
+      ]
+    }
+  ]
+}

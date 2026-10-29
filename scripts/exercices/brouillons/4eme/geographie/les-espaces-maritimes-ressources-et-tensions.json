@@ -1,0 +1,212 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Les richesses des océans",
+      "detail": "Les ressources que l'on tire des océans : poisson, hydrocarbures, minerais, énergie.",
+      "cartes": [
+        "Le poisson de la pêche et de l'aquaculture",
+        "Du pétrole et du gaz extraits en mer",
+        "Des minerais présents sur les fonds marins",
+        "Des éoliennes en mer qui produisent de l'énergie",
+        "Des gisements exploités en mer du Nord"
+      ]
+    },
+    {
+      "nom": "Le partage des espaces maritimes",
+      "detail": "Le découpage fixé par la convention de Montego Bay : eaux territoriales, ZEE et haute mer.",
+      "cartes": [
+        "Une convention signée en Jamaïque en 1982",
+        "Une bande de 12 milles marins où l'État est souverain",
+        "Jusqu'à 200 milles marins, l'État exploite seul les ressources",
+        "Un espace qui n'appartient à aucun État",
+        "La France, deuxième ZEE du monde grâce à l'outre-mer"
+      ]
+    },
+    {
+      "nom": "Les espaces de tensions",
+      "detail": "Les lieux où des États se disputent des îles, des routes ou des ressources, ou où des navires sont attaqués.",
+      "cartes": [
+        "La Chine face au Vietnam et aux Philippines",
+        "Le contrôle du détroit d'Ormuz",
+        "L'Arctique, convoité pour ses routes et ses hydrocarbures",
+        "Des navires attaqués au large de la Somalie",
+        "Des îles disputées avec les ZEE qui les entourent"
+      ]
+    },
+    {
+      "nom": "La santé des océans",
+      "detail": "Les menaces qui pèsent sur la vie marine et les mesures prises pour la protéger.",
+      "cartes": [
+        "La surpêche, qui vide les mers de leurs poissons",
+        "Des déchets plastiques qui forment des continents",
+        "Des marées noires qui souillent les côtes",
+        "Un réchauffement et une acidification des eaux",
+        "Des aires marines protégées pour la vie marine"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "la fonte de la banquise arctique",
+      "carte": "Le réchauffement climatique",
+      "role": "cause",
+      "explication": "Le réchauffement de la planète fait fondre la banquise de l'Arctique."
+    },
+    {
+      "fait": "la fonte de la banquise arctique",
+      "carte": "L'ouverture de nouvelles routes maritimes",
+      "role": "consequence",
+      "explication": "Quand la banquise fond, des routes maritimes deviennent navigables dans l'Arctique."
+    },
+    {
+      "fait": "la fonte de la banquise arctique",
+      "carte": "Des convoitises pour les hydrocarbures de la région",
+      "role": "consequence",
+      "explication": "La fonte rend accessibles des gisements de pétrole et de gaz que les États convoitent."
+    },
+    {
+      "fait": "la deuxième ZEE du monde de la France",
+      "carte": "Ses territoires d'outre-mer, dans tous les océans",
+      "role": "cause",
+      "explication": "C'est grâce à l'outre-mer, comme la Polynésie française ou la Nouvelle-Calédonie, que la France a une immense ZEE."
+    }
+  ],
+  "etiquettes": [
+    {
+      "consigne": "Quelle zone maritime le passage en couleur désigne-t-il ?",
+      "texte": "Un cargo navigue [à 8 milles marins de la côte].",
+      "choix": ["Eaux territoriales", "ZEE", "Haute mer"],
+      "bonne": 0,
+      "explication": "8 milles marins, c'est moins de 12 milles : le cargo est dans les eaux territoriales."
+    },
+    {
+      "consigne": "Quelle zone maritime le passage en couleur désigne-t-il ?",
+      "texte": "Un chalutier pêche [à 150 milles marins de la côte].",
+      "choix": ["Eaux territoriales", "ZEE", "Haute mer"],
+      "bonne": 1,
+      "explication": "150 milles marins se situent entre 12 et 200 milles : le chalutier est dans la ZEE."
+    },
+    {
+      "consigne": "Quelle zone maritime le passage en couleur désigne-t-il ?",
+      "texte": "Un pétrolier croise [à 300 milles marins de toute côte].",
+      "choix": ["Eaux territoriales", "ZEE", "Haute mer"],
+      "bonne": 2,
+      "explication": "Au-delà de 200 milles marins commence la haute mer."
+    },
+    {
+      "consigne": "Quelle zone maritime le passage en couleur désigne-t-il ?",
+      "texte": "[L'État y exploite seul la pêche et le pétrole, mais les navires étrangers y passent librement].",
+      "choix": ["Eaux territoriales", "ZEE", "Haute mer"],
+      "bonne": 1,
+      "explication": "L'exclusivité des ressources avec libre circulation des navires étrangers, c'est la ZEE."
+    },
+    {
+      "consigne": "Quelle zone maritime le passage en couleur désigne-t-il ?",
+      "texte": "[L'État y est souverain, comme sur son propre territoire].",
+      "choix": ["Eaux territoriales", "ZEE", "Haute mer"],
+      "bonne": 0,
+      "explication": "Dans les eaux territoriales, jusqu'à 12 milles marins, l'État est souverain comme sur sa terre."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "La ZEE",
+      "acceptees": ["ZEE", "La ZEE", "Zone économique exclusive", "La zone économique exclusive"],
+      "indices": [
+        "Je suis un espace de mer.",
+        "Je m'étends jusqu'à 200 milles marins des côtes.",
+        "Dans mon espace, un État exploite seul les ressources, mais les navires étrangers peuvent passer."
+      ],
+      "explication": "La zone économique exclusive va jusqu'à 200 milles marins : l'État y exploite seul les ressources."
+    },
+    {
+      "reponse": "Les eaux territoriales",
+      "acceptees": ["Eaux territoriales", "Les eaux territoriales", "Mer territoriale", "La mer territoriale"],
+      "indices": [
+        "Je suis une bande le long des côtes.",
+        "Je m'étends jusqu'à 12 milles marins.",
+        "L'État y est souverain, comme sur sa terre."
+      ],
+      "explication": "Les eaux territoriales s'étendent jusqu'à 12 milles marins des côtes : l'État y est souverain."
+    },
+    {
+      "reponse": "La haute mer",
+      "acceptees": ["Haute mer", "La haute mer"],
+      "indices": [
+        "Je suis un espace immense.",
+        "Je commence au-delà de 200 milles marins des côtes.",
+        "Je n'appartiens à aucun État et je couvre environ les deux tiers des océans."
+      ],
+      "explication": "La haute mer commence au-delà des ZEE ; elle n'appartient à aucun État."
+    },
+    {
+      "reponse": "La piraterie",
+      "acceptees": ["Piraterie", "La piraterie", "Les pirates"],
+      "indices": [
+        "Je suis un danger pour les navires.",
+        "Je sévis dans le golfe d'Aden et le golfe de Guinée.",
+        "L'opération européenne Atalante me combat au large de la Somalie."
+      ],
+      "explication": "La piraterie attaque des navires dans le golfe d'Aden et le golfe de Guinée ; l'opération Atalante les protège depuis 2008."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "Un mille marin vaut 1 852 m. Combien de kilomètres font 100 milles marins ?",
+      "reponse": 185.2,
+      "unite": "km",
+      "tolerance": 0,
+      "explication": "100 × 1 852 m = 185 200 m, soit 185,2 km."
+    },
+    {
+      "question": "Les eaux territoriales s'étendent jusqu'à 12 milles marins. Sachant qu'un mille marin vaut 1 852 m, combien de mètres cela fait-il ?",
+      "reponse": 22224,
+      "unite": "m",
+      "tolerance": 0,
+      "explication": "12 × 1 852 = 22 224 m, soit environ 22 km."
+    },
+    {
+      "question": "Une ZEE s'étend jusqu'à 200 milles marins. Sachant qu'un mille marin vaut 1 852 m, quelle distance cela fait-il en kilomètres ? Arrondis à l'unité.",
+      "reponse": 370,
+      "unite": "km",
+      "tolerance": 0,
+      "explication": "200 × 1 852 m = 370 400 m, soit 370,4 km, arrondis à 370 km."
+    },
+    {
+      "question": "Un bateau navigue à 37 km de la côte. Sachant qu'un mille marin vaut 1,852 km, combien de milles marins cela fait-il ? Arrondis à l'unité.",
+      "reponse": 20,
+      "unite": "milles marins",
+      "tolerance": 0,
+      "explication": "37 ÷ 1,852 ≈ 19,98, soit 20 milles marins après arrondi."
+    },
+    {
+      "question": "Les océans couvrent environ 360 millions de km² et la haute mer en occupe les deux tiers. Quelle est la superficie de la haute mer, en millions de km² ?",
+      "reponse": 240,
+      "unite": "millions de km²",
+      "tolerance": 0,
+      "explication": "Les deux tiers de 360 : 360 ÷ 3 × 2 = 120 × 2 = 240 millions de km²."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Schématiser le découpage des espaces maritimes",
+      "etapes": [
+        "Trace un trait de côte avec la terre d'un côté",
+        "Trace la première limite à 12 milles marins des côtes",
+        "Trace la deuxième limite à 200 milles marins des côtes",
+        "Écris « haute mer » au-delà et colore chaque zone",
+        "Fais une légende qui dit ce que l'État peut y faire"
+      ]
+    },
+    {
+      "titre": "Les espaces maritimes en s'éloignant de la côte",
+      "etapes": [
+        "La terre et la côte de l'État",
+        "Les eaux territoriales, jusqu'à 12 milles marins",
+        "La ZEE, jusqu'à 200 milles marins",
+        "La haute mer, au-delà de la ZEE"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,148 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Who, pour une personne",
+      "detail": "Le pronom who remplace une personne qui est sujet du verbe de la relative.",
+      "cartes": [
+        "Mandela is the man ___ fought against apartheid",
+        "Malala is a young woman ___ fights for girls' education",
+        "I admire people ___ defend human rights",
+        "She is the teacher ___ helps us every day",
+        "She is a girl ___ won the Nobel Peace Prize"
+      ]
+    },
+    {
+      "nom": "Which, pour une chose",
+      "detail": "Le pronom which remplace une chose, un animal ou une idée.",
+      "cartes": [
+        "It was a law ___ separated people",
+        "This is the book ___ changed my life",
+        "He gave a speech ___ moved the whole world",
+        "The prize ___ Malala received in 2014 is famous worldwide",
+        "She read an article ___ talked about Malala"
+      ]
+    },
+    {
+      "nom": "Whose, pour la possession",
+      "detail": "Le pronom whose se traduit par « dont le, dont la, dont les » et est suivi directement d'un nom.",
+      "cartes": [
+        "Malala is a girl ___ school bus was attacked",
+        "Mandela is a man ___ courage inspires millions of people",
+        "She is the student ___ essay won the prize",
+        "That is the family ___ house was destroyed",
+        "He is the pupil ___ bag is on the chair"
+      ]
+    },
+    {
+      "nom": "Where, pour un lieu",
+      "detail": "Le pronom where s'emploie quand l'antécédent est un lieu.",
+      "cartes": [
+        "Robben Island is the island ___ Mandela was imprisoned",
+        "Soweto is the township ___ many protests took place",
+        "This is the village ___ my grandmother was born",
+        "That is the library ___ I do my homework",
+        "I know a café ___ we can meet after school"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Que montre le pronom relatif en couleur ?",
+      "texte": "Mandela is the man [who] fought against apartheid.",
+      "choix": ["Il reprend une personne", "Il reprend une chose", "Il exprime la possession", "Il reprend un lieu"],
+      "bonne": 0,
+      "explication": "L'antécédent est « the man », une personne : on emploie who."
+    },
+    {
+      "consigne": "Que montre le pronom relatif en couleur ?",
+      "texte": "Malala is a girl [whose] school bus was attacked.",
+      "choix": ["Il reprend une personne", "Il reprend une chose", "Il exprime la possession", "Il reprend un lieu"],
+      "bonne": 2,
+      "explication": "« whose » exprime la possession : le bus scolaire de la jeune fille (dont le bus scolaire)."
+    },
+    {
+      "consigne": "Que montre le pronom relatif en couleur ?",
+      "texte": "It was a law [which] separated people.",
+      "choix": ["Il reprend une personne", "Il reprend une chose", "Il exprime la possession", "Il reprend un lieu"],
+      "bonne": 1,
+      "explication": "L'antécédent est « a law », une chose : on emploie which."
+    },
+    {
+      "consigne": "Que montre le pronom relatif en couleur ?",
+      "texte": "Robben Island is the island [where] Mandela was imprisoned.",
+      "choix": ["Il reprend une personne", "Il reprend une chose", "Il exprime la possession", "Il reprend un lieu"],
+      "bonne": 3,
+      "explication": "L'antécédent est « the island », un lieu : on emploie where."
+    },
+    {
+      "consigne": "Que montre le pronom relatif en couleur ?",
+      "texte": "The song [that] we sang was beautiful.",
+      "choix": ["Il reprend une personne", "Il reprend une chose", "Il exprime la possession", "Il reprend un lieu"],
+      "bonne": 1,
+      "explication": "L'antécédent est « the song », une chose : that remplace which dans cette relative sans virgules."
+    },
+    {
+      "consigne": "Que montre le pronom relatif en couleur ?",
+      "texte": "Malala is a young woman [who] fights for girls' education.",
+      "choix": ["Il reprend une personne", "Il reprend une chose", "Il exprime la possession", "Il reprend un lieu"],
+      "bonne": 0,
+      "explication": "L'antécédent est « a young woman », une personne : on emploie who."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Nelson Mandela",
+      "acceptees": ["Mandela", "Nelson Mandela"],
+      "indices": [
+        "Je suis un militant sud-africain de l'ANC.",
+        "J'ai passé 27 ans en prison, notamment sur une île.",
+        "Je suis libéré en 1990 et je deviens le premier président noir de mon pays en 1994."
+      ],
+      "explication": "Nelson Mandela est emprisonné 27 ans, libéré le 11 février 1990, puis président de l'Afrique du Sud en 1994."
+    },
+    {
+      "reponse": "Malala Yousafzai",
+      "acceptees": ["Malala", "Yousafzai", "Malala Yousafzai"],
+      "indices": [
+        "Je suis née au Pakistan en 1997.",
+        "J'ai été blessée par les talibans en 2012, lors de l'attaque de mon bus scolaire.",
+        "En 2014, à 17 ans, je suis devenue la plus jeune lauréate du prix Nobel de la paix."
+      ],
+      "explication": "Malala Yousafzai défend l'éducation des filles ; elle reçoit le prix Nobel de la paix en 2014, à 17 ans."
+    },
+    {
+      "reponse": "Apartheid",
+      "acceptees": ["Apartheid", "L'apartheid", "Ségrégation raciale"],
+      "indices": [
+        "Je suis un système, pas une personne.",
+        "Je sépare officiellement les gens selon leur couleur de peau.",
+        "J'ai existé en Afrique du Sud de 1948 au début des années 1990."
+      ],
+      "explication": "L'apartheid est un système officiel de ségrégation raciale en Afrique du Sud, de 1948 au début des années 1990."
+    },
+    {
+      "reponse": "Robben Island",
+      "acceptees": ["Robben Island", "Robben"],
+      "indices": [
+        "Je suis une île.",
+        "Je fais partie de l'Afrique du Sud.",
+        "Nelson Mandela y a été emprisonné."
+      ],
+      "explication": "Robben Island est l'île où Nelson Mandela a été emprisonné pendant une partie de ses 27 ans de prison."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "La vie politique de Nelson Mandela",
+      "etapes": [
+        "Il est emprisonné 27 ans, notamment à Robben Island",
+        "Il est libéré le 11 février 1990",
+        "Il reçoit le prix Nobel de la paix en 1993",
+        "Il devient président de l'Afrique du Sud en 1994"
+      ]
+    }
+  ]
+}

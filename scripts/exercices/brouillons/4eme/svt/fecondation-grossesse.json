@@ -1,0 +1,212 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "La fécondation",
+      "detail": "Un spermatozoïde et un ovocyte s'unissent dans une trompe pour former la cellule-œuf.",
+      "cartes": [
+        "Des millions de spermatozoïdes remontent dans les trompes",
+        "Un seul spermatozoïde pénètre dans l'ovocyte",
+        "Les noyaux des deux cellules s'unissent",
+        "Formation de la cellule-œuf",
+        "Rencontre des gamètes dans une trompe"
+      ]
+    },
+    {
+      "nom": "Les divisions et la nidation",
+      "detail": "La cellule-œuf se divise en descendant vers l'utérus, puis l'embryon s'implante environ 7 jours après la fécondation.",
+      "cartes": [
+        "La cellule-œuf se divise en 2, 4, 8 cellules",
+        "Descente de l'embryon vers l'utérus",
+        "Implantation dans la muqueuse utérine",
+        "Environ 7 jours après la fécondation",
+        "La grossesse commence et les règles s'arrêtent"
+      ]
+    },
+    {
+      "nom": "Le développement dans l'utérus",
+      "detail": "L'embryon puis le fœtus grandissent, nourris grâce au placenta et protégés par le liquide amniotique.",
+      "cartes": [
+        "L'embryon met ses organes en place pendant deux mois",
+        "Le fœtus baigne dans le liquide amniotique",
+        "Échanges entre le sang de la mère et celui du fœtus",
+        "L'alcool et la nicotine traversent le placenta",
+        "Le cordon ombilical relie le fœtus au placenta"
+      ]
+    },
+    {
+      "nom": "L'accouchement",
+      "detail": "Au terme de la grossesse : contractions de l'utérus, ouverture du col, sortie du bébé, puis délivrance.",
+      "cartes": [
+        "Contractions de l'utérus",
+        "Ouverture du col de l'utérus",
+        "Sortie du bébé par le vagin",
+        "Dernière étape : la délivrance",
+        "Étape qui met fin à la grossesse"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "la nidation",
+      "carte": "La fécondation d'un ovocyte par un spermatozoïde",
+      "role": "cause",
+      "explication": "Sans fécondation, il n'y a pas d'embryon à implanter : la nidation a lieu environ 7 jours plus tard."
+    },
+    {
+      "fait": "la nidation",
+      "carte": "Les premières divisions de la cellule-œuf",
+      "role": "cause",
+      "explication": "La cellule-œuf se divise en descendant vers l'utérus : l'embryon ainsi formé s'implante ensuite."
+    },
+    {
+      "fait": "la nidation",
+      "carte": "Le début de la grossesse",
+      "role": "consequence",
+      "explication": "Une fois l'embryon implanté dans la muqueuse utérine, la grossesse commence."
+    },
+    {
+      "fait": "la nidation",
+      "carte": "L'arrêt des règles",
+      "role": "consequence",
+      "explication": "Après la nidation, la grossesse commence et les règles s'arrêtent."
+    }
+  ],
+  "etiquettes": [
+    {
+      "consigne": "Comment appelle-t-on ce qui est en couleur à ce moment-là ?",
+      "texte": "Dans une trompe, le noyau du spermatozoïde et celui de l'ovocyte s'unissent. Il se forme [la première cellule de l'individu].",
+      "choix": ["Cellule-œuf", "Embryon", "Fœtus"],
+      "bonne": 0,
+      "explication": "La première cellule d'un individu, issue de la fécondation, s'appelle la cellule-œuf."
+    },
+    {
+      "consigne": "Comment appelle-t-on ce qui est en couleur à ce moment-là ?",
+      "texte": "Cinq semaines après la fécondation, [l'enfant à naître] est en train de mettre en place ses organes.",
+      "choix": ["Cellule-œuf", "Embryon", "Fœtus"],
+      "bonne": 1,
+      "explication": "Pendant les 2 premiers mois, les organes se mettent en place : on parle d'embryon."
+    },
+    {
+      "consigne": "Comment appelle-t-on ce qui est en couleur à ce moment-là ?",
+      "texte": "Au cinquième mois de grossesse, [l'enfant à naître] grandit et ses organes sont devenus fonctionnels.",
+      "choix": ["Cellule-œuf", "Embryon", "Fœtus"],
+      "bonne": 2,
+      "explication": "À partir du 3e mois, les organes grandissent et deviennent fonctionnels : on parle de fœtus."
+    },
+    {
+      "consigne": "Comment appelle-t-on ce qui est en couleur à ce moment-là ?",
+      "texte": "Une semaine après la fécondation, [l'enfant à naître, formé de plusieurs cellules,] s'implante dans la muqueuse utérine.",
+      "choix": ["Cellule-œuf", "Embryon", "Fœtus"],
+      "bonne": 1,
+      "explication": "Les divisions de la cellule-œuf donnent le début de l'embryon, qui s'implante lors de la nidation."
+    },
+    {
+      "consigne": "Comment appelle-t-on ce qui est en couleur à ce moment-là ?",
+      "texte": "Au septième mois, [l'enfant à naître] baigne dans le liquide amniotique et ses organes grandissent.",
+      "choix": ["Cellule-œuf", "Embryon", "Fœtus"],
+      "bonne": 2,
+      "explication": "Après les 2 premiers mois, quand les organes grandissent, on parle de fœtus."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Placenta",
+      "acceptees": ["Placenta", "Le placenta", "Un placenta"],
+      "indices": [
+        "Je suis un organe que seule une femme enceinte possède.",
+        "Je suis relié au fœtus par le cordon ombilical.",
+        "Je laisse passer des substances du sang de la mère à celui du fœtus, sans mélanger les deux sangs."
+      ],
+      "explication": "Le placenta permet les échanges entre le sang de la mère et celui du fœtus, sans que les deux sangs se mélangent."
+    },
+    {
+      "reponse": "Nidation",
+      "acceptees": ["Nidation", "La nidation"],
+      "indices": [
+        "Je suis un événement qui marque le début de la grossesse.",
+        "J'ai lieu environ 7 jours après la fécondation.",
+        "L'embryon s'implante alors dans la muqueuse de l'utérus."
+      ],
+      "explication": "La nidation est l'implantation de l'embryon dans la muqueuse utérine, environ 7 jours après la fécondation."
+    },
+    {
+      "reponse": "Fœtus",
+      "acceptees": ["Fœtus", "Foetus", "Fetus", "Le fœtus", "Un fœtus"],
+      "indices": [
+        "Je suis l'enfant à naître.",
+        "On m'appelle ainsi à partir du 3e mois.",
+        "Mes organes grandissent et deviennent fonctionnels."
+      ],
+      "explication": "Le fœtus est l'enfant à naître à partir du 3e mois : ses organes, déjà en place, grandissent."
+    },
+    {
+      "reponse": "Liquide amniotique",
+      "acceptees": ["Liquide amniotique", "Le liquide amniotique", "Amniotique"],
+      "indices": [
+        "Je suis présent dans l'utérus pendant la grossesse.",
+        "Le fœtus baigne en moi.",
+        "Je le protège des chocs."
+      ],
+      "explication": "Le liquide amniotique entoure le fœtus et le protège des chocs."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "Une grossesse dure environ 38 semaines après la fécondation. Les 8 premières semaines sont celles de l'embryon, les suivantes celles du fœtus. Combien de semaines dure la période du fœtus ?",
+      "reponse": 30,
+      "unite": "semaines",
+      "tolerance": 0,
+      "explication": "38 − 8 = 30 semaines de fœtus."
+    },
+    {
+      "question": "La nidation a lieu 7 jours après la fécondation. Une fécondation a lieu le 12 juin. Quel jour de juin a lieu la nidation ?",
+      "reponse": 19,
+      "unite": "juin",
+      "tolerance": 0,
+      "explication": "12 + 7 = 19 : la nidation a lieu vers le 19 juin."
+    },
+    {
+      "question": "Une cellule-œuf se divise en 2 cellules, puis chaque cellule se divise encore en deux : on obtient 4, puis 8 cellules. Combien de cellules obtient-on à la division suivante ?",
+      "reponse": 16,
+      "unite": "cellules",
+      "tolerance": 0,
+      "explication": "À chaque division, chaque cellule donne deux cellules : 8 × 2 = 16 cellules."
+    },
+    {
+      "question": "Une grossesse dure environ 38 semaines après la fécondation. Combien de jours cela représente-t-il ?",
+      "reponse": 266,
+      "unite": "jours",
+      "tolerance": 0,
+      "explication": "Une semaine compte 7 jours : 38 × 7 = 266 jours."
+    },
+    {
+      "question": "Un embryon a 5 semaines de développement. On parle de fœtus à partir de 8 semaines. Dans combien de semaines deviendra-t-il un fœtus ?",
+      "reponse": 3,
+      "unite": "semaines",
+      "tolerance": 0,
+      "explication": "8 − 5 = 3 semaines."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "De la fécondation à la naissance",
+      "etapes": [
+        "Un spermatozoïde féconde l'ovocyte dans une trompe",
+        "La cellule-œuf se divise en descendant vers l'utérus",
+        "L'embryon s'implante dans la muqueuse utérine",
+        "Après deux mois, l'embryon devient un fœtus",
+        "Le bébé naît au terme de la grossesse"
+      ]
+    },
+    {
+      "titre": "Les étapes de l'accouchement",
+      "etapes": [
+        "L'utérus se contracte",
+        "Le col de l'utérus s'ouvre",
+        "Le bébé sort par le vagin",
+        "Le placenta est expulsé : c'est la délivrance"
+      ]
+    }
+  ]
+}

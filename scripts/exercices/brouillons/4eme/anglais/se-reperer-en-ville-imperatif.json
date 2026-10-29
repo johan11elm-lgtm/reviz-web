@@ -1,0 +1,184 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Une consigne d'itinéraire",
+      "detail": "Un impératif positif qui dit où aller, comme Turn left ou Go straight on.",
+      "cartes": [
+        "Turn left at the traffic lights",
+        "Go straight on until the church",
+        "Cross the bridge, then turn right",
+        "Take the second street on the right",
+        "Go along the river to the station"
+      ]
+    },
+    {
+      "nom": "Une interdiction",
+      "detail": "Une phrase qui défend de faire quelque chose : Don't + base verbale.",
+      "cartes": [
+        "Don't cross here",
+        "Don't run in the station",
+        "Don't park in front of the bank",
+        "Don't walk on the road",
+        "Don't take photos in the museum"
+      ]
+    },
+    {
+      "nom": "Une proposition à plusieurs",
+      "detail": "Une phrase qui propose de faire quelque chose ensemble : Let's + base verbale, comme le « -ons » français.",
+      "cartes": [
+        "Let's take the Tube to Westminster",
+        "Let's visit the Tower of London",
+        "Let's meet in front of the station",
+        "Let's have lunch near the park",
+        "Let's go to the London Eye"
+      ]
+    },
+    {
+      "nom": "Une demande de chemin",
+      "detail": "Une question polie pour savoir comment aller quelque part, où se trouve un lieu ou si c'est loin.",
+      "cartes": [
+        "Excuse me, how can I get to Trafalgar Square?",
+        "Where is the nearest Tube station?",
+        "Is it far from here?",
+        "How can I get to the London Eye?",
+        "Excuse me, where is the bank?"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Que veut dire le mot en couleur ?",
+      "texte": "The bank is [opposite] the park.",
+      "choix": [
+        "Devant",
+        "En face de",
+        "À côté de",
+        "Derrière"
+      ],
+      "bonne": 1,
+      "explication": "« opposite » veut dire « en face de ». Pour dire « devant », on emploie in front of."
+    },
+    {
+      "consigne": "Que veut dire le mot en couleur ?",
+      "texte": "The bank is [between] the café and the bookshop.",
+      "choix": [
+        "Devant",
+        "Près de",
+        "Entre",
+        "Derrière"
+      ],
+      "bonne": 2,
+      "explication": "« between … and … » veut dire « entre … et … »."
+    },
+    {
+      "consigne": "Que fait la phrase en couleur ?",
+      "texte": "[Go straight on until the traffic lights], then turn left.",
+      "choix": [
+        "Elle donne un itinéraire",
+        "Elle interdit quelque chose",
+        "Elle propose quelque chose à plusieurs",
+        "Elle demande son chemin"
+      ],
+      "bonne": 0,
+      "explication": "C'est un impératif sans sujet qui dit où aller : une consigne d'itinéraire."
+    },
+    {
+      "consigne": "Que fait la phrase en couleur ?",
+      "texte": "It's raining. [Let's take the Tube.]",
+      "choix": [
+        "Elle donne un itinéraire",
+        "Elle interdit quelque chose",
+        "Elle propose quelque chose à plusieurs",
+        "Elle demande son chemin"
+      ],
+      "bonne": 2,
+      "explication": "Let's + base verbale propose quelque chose à plusieurs, comme le « -ons » français : « Prenons le métro. »"
+    },
+    {
+      "consigne": "Que fait la phrase en couleur ?",
+      "texte": "A car is coming! [Don't cross here!]",
+      "choix": [
+        "Elle donne un itinéraire",
+        "Elle interdit quelque chose",
+        "Elle propose quelque chose à plusieurs",
+        "Elle demande son chemin"
+      ],
+      "bonne": 1,
+      "explication": "Don't + base verbale sert à interdire : « Ne traverse pas ici ! »"
+    },
+    {
+      "consigne": "Que fait la phrase en couleur ?",
+      "texte": "A tourist stops you: [Excuse me, how can I get to Trafalgar Square?]",
+      "choix": [
+        "Elle donne un itinéraire",
+        "Elle interdit quelque chose",
+        "Elle propose quelque chose à plusieurs",
+        "Elle demande son chemin"
+      ],
+      "bonne": 3,
+      "explication": "Excuse me, how can I get to… ? est la formule polie pour demander son chemin."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Big Ben",
+      "acceptees": [],
+      "indices": [
+        "Je suis un repère célèbre de Londres.",
+        "On me voit près du Parlement de Westminster.",
+        "Je suis en réalité la cloche de la tour Elizabeth."
+      ],
+      "explication": "Big Ben est la cloche de la tour Elizabeth, au Parlement de Westminster."
+    },
+    {
+      "reponse": "10 Downing Street",
+      "acceptees": [
+        "Downing Street",
+        "Ten Downing Street",
+        "Number 10"
+      ],
+      "indices": [
+        "Je suis une adresse célèbre de Londres.",
+        "J'ai un numéro, donc on dit « at » devant moi et non « in ».",
+        "Le Premier ministre britannique habite chez moi."
+      ],
+      "explication": "10 Downing Street est la résidence du Premier ministre britannique. On dit at 10 Downing Street, car c'est une adresse précise."
+    },
+    {
+      "reponse": "Opposite",
+      "acceptees": [
+        "Across from"
+      ],
+      "indices": [
+        "Je suis une préposition de lieu.",
+        "Je ne prends jamais of après moi : on dit « … the bank ».",
+        "Je veux dire « en face de », à ne pas confondre avec in front of."
+      ],
+      "explication": "Opposite veut dire « en face de » et s'emploie sans of : The bank is opposite the park."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Donner un itinéraire en anglais",
+      "etapes": [
+        "Repère le départ et l'arrivée sur le plan",
+        "Découpe le trajet et donne un impératif par étape",
+        "Relie les étapes avec and, then ou until",
+        "Situe l'arrivée avec une préposition de lieu"
+      ]
+    },
+    {
+      "titre": "Une demande de chemin, du début à la fin",
+      "etapes": [
+        "Excuse me, how can I get to the museum?",
+        "Go straight on until the traffic lights",
+        "Then take the first street on the right",
+        "It's on your left, opposite the park",
+        "Thank you very much"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,198 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Masse des produits : 22 g",
+      "detail": "Les situations où les produits formés ont une masse totale de 22 g, égale à celle des réactifs consommés.",
+      "cartes": [
+        "6 g de carbone et 16 g de dioxygène consommés",
+        "Les réactifs consommés pèsent 9 g et 13 g",
+        "Deux produits se forment : 15 g et 7 g",
+        "10 g de combustible et 12 g de comburant consommés",
+        "Deux réactifs de 11 g chacun sont consommés"
+      ]
+    },
+    {
+      "nom": "Masse des produits : 36 g",
+      "detail": "Les situations où les produits formés ont une masse totale de 36 g, égale à celle des réactifs consommés.",
+      "cartes": [
+        "4 g de dihydrogène et 32 g de dioxygène consommés",
+        "Les réactifs consommés pèsent 20 g et 16 g",
+        "Deux produits se forment : 25 g et 11 g",
+        "30 g de combustible et 6 g de comburant consommés",
+        "Deux réactifs de 18 g chacun sont consommés"
+      ]
+    },
+    {
+      "nom": "Masse des produits : 44 g",
+      "detail": "Les situations où les produits formés ont une masse totale de 44 g, égale à celle des réactifs consommés.",
+      "cartes": [
+        "12 g de carbone et 32 g de dioxygène consommés",
+        "Les réactifs consommés pèsent 14 g et 30 g",
+        "Deux produits se forment : 24 g et 20 g",
+        "28 g de combustible et 16 g de comburant consommés",
+        "Trois réactifs consommés : 10 g, 14 g et 20 g"
+      ]
+    },
+    {
+      "nom": "Masse des produits : 80 g",
+      "detail": "Les situations où les produits formés ont une masse totale de 80 g, égale à celle des réactifs consommés.",
+      "cartes": [
+        "16 g de méthane et 64 g de dioxygène consommés",
+        "Les réactifs consommés pèsent 35 g et 45 g",
+        "Deux produits se forment : 50 g et 30 g",
+        "55 g de combustible et 25 g de comburant consommés",
+        "Deux réactifs de 40 g chacun sont consommés"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "la conservation de la masse lors d'une transformation chimique",
+      "carte": "Les atomes ne sont ni créés ni détruits",
+      "role": "cause",
+      "explication": "Comme aucun atome n'apparaît ni ne disparaît, la masse totale reste la même."
+    },
+    {
+      "fait": "la conservation de la masse lors d'une transformation chimique",
+      "carte": "Tous les atomes des réactifs se retrouvent dans les produits",
+      "role": "cause",
+      "explication": "Les atomes se réarrangent seulement : ceux des réactifs sont tous dans les produits, donc la masse totale ne change pas."
+    },
+    {
+      "fait": "la conservation de la masse lors d'une transformation chimique",
+      "carte": "12 g de carbone et 32 g de dioxygène donnent 44 g de dioxyde de carbone",
+      "role": "consequence",
+      "explication": "La masse des produits est égale à celle des réactifs consommés : 12 + 32 = 44 g."
+    },
+    {
+      "fait": "la conservation de la masse lors d'une transformation chimique",
+      "carte": "Une masse inconnue se calcule par addition ou soustraction",
+      "role": "consequence",
+      "explication": "Puisque m(réactifs) = m(produits), on retrouve la masse manquante en additionnant ou en soustrayant les autres masses."
+    },
+    {
+      "fait": "la baisse de la masse affichée dans un flacon ouvert",
+      "carte": "Un gaz formé par la réaction s'échappe dans l'air",
+      "role": "cause",
+      "explication": "Le dioxyde de carbone formé quitte le flacon ouvert : il n'est plus pesé, la balance affiche donc moins."
+    }
+  ],
+  "etiquettes": [
+    {
+      "consigne": "Quel est le rôle du passage en couleur dans la transformation ?",
+      "texte": "En brûlant, 12 g de carbone consomment [32 g de dioxygène].",
+      "choix": ["Un réactif consommé", "Un produit formé", "Un réactif en excès"],
+      "bonne": 0,
+      "explication": "Le dioxygène est consommé pendant la combustion : c'est un réactif consommé."
+    },
+    {
+      "consigne": "Quel est le rôle du passage en couleur dans la transformation ?",
+      "texte": "Quand 12 g de carbone et 32 g de dioxygène réagissent, il se forme [44 g de dioxyde de carbone].",
+      "choix": ["Un réactif consommé", "Un produit formé", "Un réactif en excès"],
+      "bonne": 1,
+      "explication": "Le dioxyde de carbone n'existait pas au départ : il se forme, c'est un produit."
+    },
+    {
+      "consigne": "Quel est le rôle du passage en couleur dans la transformation ?",
+      "texte": "On met 10 g de carbone avec 16 g de dioxygène : 6 g de carbone réagissent et [4 g de carbone] ne réagissent pas.",
+      "choix": ["Un réactif consommé", "Un produit formé", "Un réactif en excès"],
+      "bonne": 2,
+      "explication": "Les 4 g de carbone n'ont pas réagi : ils restent à la fin, c'est le réactif en excès."
+    },
+    {
+      "consigne": "Quel est le rôle du passage en couleur dans la transformation ?",
+      "texte": "Pour former de l'eau, on consomme [du dihydrogène] et du dioxygène.",
+      "choix": ["Un réactif consommé", "Un produit formé", "Un réactif en excès"],
+      "bonne": 0,
+      "explication": "Le dihydrogène disparaît pendant la transformation : c'est un réactif consommé."
+    },
+    {
+      "consigne": "Quel est le rôle du passage en couleur dans la transformation ?",
+      "texte": "Après la combustion du méthane, on récupère [de l'eau] et du dioxyde de carbone.",
+      "choix": ["Un réactif consommé", "Un produit formé", "Un réactif en excès"],
+      "bonne": 1,
+      "explication": "L'eau et le dioxyde de carbone se forment pendant la combustion : ce sont des produits."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Lavoisier",
+      "acceptees": ["Lavoisier", "Antoine Lavoisier", "Antoine"],
+      "indices": [
+        "Je suis un chimiste français du XVIIIe siècle.",
+        "J'ai fait des pesées précises en récipient fermé.",
+        "Mon idée se résume souvent par « Rien ne se perd, rien ne se crée, tout se transforme »."
+      ],
+      "explication": "Antoine Lavoisier (1743-1794) a montré par des pesées en récipient fermé que la masse se conserve."
+    },
+    {
+      "reponse": "Atome",
+      "acceptees": ["Atome", "Un atome", "L'atome", "Atomes"],
+      "indices": [
+        "Je suis une particule extrêmement petite de la matière.",
+        "Mon nombre est le même avant et après une transformation chimique.",
+        "Je me réarrange avec mes semblables pour former de nouvelles molécules, sans être créé ni détruit."
+      ],
+      "explication": "Les atomes se conservent au cours d'une transformation chimique, alors que les molécules des réactifs disparaissent."
+    },
+    {
+      "reponse": "Réactif en excès",
+      "acceptees": ["Réactif en excès", "Le réactif en excès", "Un réactif en excès", "Excès"],
+      "indices": [
+        "Je suis une espèce chimique présente au départ d'une transformation.",
+        "À la fin, il m'en reste : je n'ai pas été entièrement consommé.",
+        "Dans un calcul de masses, seule la partie de moi qui a réagi compte."
+      ],
+      "explication": "Un réactif en excès n'est pas entièrement consommé : seule la partie qui a réagi compte dans le calcul des masses."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "Un flacon ouvert contenant du vinaigre et du bicarbonate pèse 312 g avant la réaction et 309 g après. Quelle masse de gaz s'est échappée ?",
+      "reponse": 3,
+      "unite": "g",
+      "tolerance": 0,
+      "explication": "Le gaz formé est parti dans l'air : 312 − 309 = 3 g."
+    },
+    {
+      "question": "8 g de méthane réagissent avec 32 g de dioxygène et forment 22 g de dioxyde de carbone. Quelle masse d'eau se forme ?",
+      "reponse": 18,
+      "unite": "g",
+      "tolerance": 0,
+      "explication": "m(réactifs) = 8 + 32 = 40 g, donc m(eau) = 40 − 22 = 18 g."
+    },
+    {
+      "question": "La combustion de 9 g de carbone forme 33 g de dioxyde de carbone. Quelle masse de dioxygène est consommée ?",
+      "reponse": 24,
+      "unite": "g",
+      "tolerance": 0,
+      "explication": "m(carbone) + m(dioxygène) = m(dioxyde de carbone), donc m(dioxygène) = 33 − 9 = 24 g."
+    },
+    {
+      "question": "4 g de dihydrogène réagissent avec 32 g de dioxygène. Il ne se forme que de l'eau. Quelle masse d'eau se forme ?",
+      "reponse": 36,
+      "unite": "g",
+      "tolerance": 0,
+      "explication": "La masse se conserve : 4 + 32 = 36 g d'eau."
+    },
+    {
+      "question": "On mélange 15 g de carbone et 32 g de dioxygène. Le dioxygène est entièrement consommé et 3 g de carbone restent. Quelle masse de dioxyde de carbone se forme ?",
+      "reponse": 44,
+      "unite": "g",
+      "tolerance": 0,
+      "explication": "Le carbone consommé pèse 15 − 3 = 12 g. Seules les masses consommées comptent : 12 + 32 = 44 g de dioxyde de carbone."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Calculer une masse avec la conservation",
+      "etapes": [
+        "On écrit le bilan et on repère réactifs et produits",
+        "On écrit l'égalité entre masse des réactifs et masse des produits",
+        "On remplace par les valeurs connues de l'énoncé",
+        "On calcule la masse inconnue et on écrit l'unité"
+      ]
+    }
+  ]
+}

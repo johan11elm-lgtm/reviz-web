@@ -1,0 +1,194 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Choisir la référence",
+      "detail": "Dire par rapport à quel objet on décrit le mouvement : tout dépend de ce choix.",
+      "cartes": [
+        "Un passager est immobile par rapport au train",
+        "Un conducteur est immobile par rapport à son volant",
+        "Pour un piéton, une voiture qui passe est en mouvement",
+        "Un même objet peut être immobile ou en mouvement",
+        "Dire qu'un objet bouge n'a pas de sens sans repère"
+      ]
+    },
+    {
+      "nom": "Décrire la trajectoire",
+      "detail": "Dire quelle est la forme de la ligne suivie par un point de l'objet.",
+      "cartes": [
+        "Une bille qui tombe suit une ligne droite",
+        "Un point d'une roue de manège trace un cercle",
+        "Un ballon lancé vers un panier décrit une courbe",
+        "La ligne formée par les positions successives d'un point",
+        "Un skieur qui descend la piste en zigzaguant"
+      ]
+    },
+    {
+      "nom": "Décrire l'évolution de la vitesse",
+      "detail": "Dire si le mouvement est uniforme, accéléré ou ralenti.",
+      "cartes": [
+        "Une voiture démarre au feu vert",
+        "Un cycliste freine devant un obstacle",
+        "Sur une chronophotographie, les écarts entre positions grandissent",
+        "Les positions photographiées sont toutes également espacées",
+        "Une voiture garde la même allure sur l'autoroute"
+      ]
+    },
+    {
+      "nom": "Calculer une vitesse moyenne",
+      "detail": "Utiliser la formule v = d ÷ t et ses variantes, avec les bonnes unités et les bonnes conversions.",
+      "cartes": [
+        "100 m parcourus en 10 s donnent 10 m/s",
+        "On divise la distance parcourue par la durée",
+        "On trouve une distance avec d = v × t",
+        "Pour passer de m/s à km/h, on multiplie par 3,6",
+        "1 h 30 min correspond à 1,5 h dans un calcul"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Quelle est la trajectoire du mouvement en couleur ?",
+      "texte": "Une bille est lâchée au-dessus du sol. [Elle tombe tout droit.]",
+      "choix": ["Rectiligne", "Circulaire", "Curviligne"],
+      "bonne": 0,
+      "explication": "La bille suit une ligne droite : sa trajectoire est rectiligne."
+    },
+    {
+      "consigne": "Quelle est la trajectoire du mouvement en couleur ?",
+      "texte": "Pour marquer un panier, Léo lance son ballon vers l'avant : [il monte en avançant, puis redescend dans le panier].",
+      "choix": ["Rectiligne", "Circulaire", "Curviligne"],
+      "bonne": 2,
+      "explication": "Le ballon suit une ligne courbe, ni droite ni circulaire : sa trajectoire est curviligne."
+    },
+    {
+      "consigne": "Quelle est la trajectoire du mouvement en couleur ?",
+      "texte": "Sur un manège, on a peint un point sur le bord d'une roue. [Ce point tourne autour de l'axe de la roue.]",
+      "choix": ["Rectiligne", "Circulaire", "Curviligne"],
+      "bonne": 1,
+      "explication": "Le point trace un cercle autour de l'axe : sa trajectoire est circulaire."
+    },
+    {
+      "consigne": "Quelle est la trajectoire du mouvement en couleur ?",
+      "texte": "Dans l'immeuble de Maya, [l'ascenseur monte du rez-de-chaussée au 5e étage.]",
+      "choix": ["Rectiligne", "Circulaire", "Curviligne"],
+      "bonne": 0,
+      "explication": "L'ascenseur se déplace le long d'une droite verticale : sa trajectoire est rectiligne."
+    },
+    {
+      "consigne": "Quelle est la trajectoire du mouvement en couleur ?",
+      "texte": "Sur l'horloge de la classe, [le bout de l'aiguille des secondes tourne autour du centre du cadran.]",
+      "choix": ["Rectiligne", "Circulaire", "Curviligne"],
+      "bonne": 1,
+      "explication": "Le bout de l'aiguille trace un cercle autour du centre : sa trajectoire est circulaire."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Trajectoire",
+      "acceptees": ["Trajectoire", "La trajectoire"],
+      "indices": [
+        "Je suis une ligne.",
+        "Je suis formée par les positions successives d'un point de l'objet qui bouge.",
+        "Je peux être droite, circulaire ou courbe."
+      ],
+      "explication": "La trajectoire est la ligne formée par les positions successives d'un point de l'objet en mouvement."
+    },
+    {
+      "reponse": "Chronophotographie",
+      "acceptees": ["Chronophotographie", "Une chronophotographie", "La chronophotographie"],
+      "indices": [
+        "Je suis une seule image qui montre plusieurs positions d'un objet.",
+        "Ces positions sont prises à des intervalles de temps égaux.",
+        "En regardant l'écart entre elles, on sait si l'objet accélère ou ralentit."
+      ],
+      "explication": "La chronophotographie montre des positions successives d'un objet à intervalles de temps égaux."
+    },
+    {
+      "reponse": "Objet de référence",
+      "acceptees": ["Objet de référence", "L'objet de référence", "Un objet de référence", "Référence", "La référence", "Repère", "Point de repère"],
+      "indices": [
+        "Je suis un objet que l'on choisit.",
+        "Sans moi, on ne peut pas dire si quelque chose bouge.",
+        "Pour un passager de train, le quai peut être moi."
+      ],
+      "explication": "Un mouvement se décrit toujours par rapport à un objet de référence que l'on choisit."
+    },
+    {
+      "reponse": "Vitesse moyenne",
+      "acceptees": ["Vitesse moyenne", "La vitesse moyenne", "Vitesse", "La vitesse"],
+      "indices": [
+        "Je me mesure en m/s ou en km/h.",
+        "On me calcule en divisant une distance par une durée.",
+        "Pour un cycliste qui parcourt 30 km en 2 h, je vaux 15 km/h."
+      ],
+      "explication": "La vitesse moyenne est la distance parcourue divisée par la durée du parcours : v = d ÷ t."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "Un cycliste parcourt 45 km en 3 h. Quelle est sa vitesse moyenne ?",
+      "reponse": 15,
+      "unite": "km/h",
+      "tolerance": 0,
+      "explication": "v = d ÷ t = 45 ÷ 3 = 15 km/h."
+    },
+    {
+      "question": "Une voiture roule à 90 km/h pendant 3 h. Quelle distance parcourt-elle ?",
+      "reponse": 270,
+      "unite": "km",
+      "tolerance": 0,
+      "explication": "d = v × t = 90 × 3 = 270 km."
+    },
+    {
+      "question": "Un coureur parcourt 400 m en 50 s. Quelle est sa vitesse moyenne ?",
+      "reponse": 8,
+      "unite": "m/s",
+      "tolerance": 0,
+      "explication": "v = d ÷ t = 400 ÷ 50 = 8 m/s."
+    },
+    {
+      "question": "Un train roule à la vitesse moyenne de 120 km/h. Combien de temps met-il pour parcourir 240 km ?",
+      "reponse": 2,
+      "unite": "h",
+      "tolerance": 0,
+      "explication": "t = d ÷ v = 240 ÷ 120 = 2 h."
+    },
+    {
+      "question": "Une cycliste roule à 5 m/s. Quelle est sa vitesse en km/h ?",
+      "reponse": 18,
+      "unite": "km/h",
+      "tolerance": 0,
+      "explication": "1 m/s = 3,6 km/h, donc 5 × 3,6 = 18 km/h."
+    },
+    {
+      "question": "Une randonneuse parcourt 15 km en 1 h 30 min. Quelle est sa vitesse moyenne en km/h ?",
+      "reponse": 10,
+      "unite": "km/h",
+      "tolerance": 0,
+      "explication": "1 h 30 min = 1,5 h, donc v = 15 ÷ 1,5 = 10 km/h."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Le mouvement d'une voiture au feu rouge",
+      "etapes": [
+        "Le feu est rouge et la voiture est arrêtée",
+        "Le feu passe au vert et la voiture démarre : mouvement accéléré",
+        "Elle roule à 50 km/h : mouvement uniforme",
+        "Un nouveau feu rouge approche : elle freine, mouvement ralenti",
+        "La voiture s'arrête au feu"
+      ]
+    },
+    {
+      "titre": "Calculer une vitesse moyenne",
+      "etapes": [
+        "On relève la distance parcourue et la durée",
+        "On vérifie que les unités sont cohérentes",
+        "On divise la distance par la durée",
+        "On écrit le résultat avec son unité"
+      ]
+    }
+  ]
+}

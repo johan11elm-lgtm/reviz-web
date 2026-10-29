@@ -1,0 +1,193 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Le jour et la nuit",
+      "detail": "Ce que la Terre fait en tournant sur elle-même, et ce que cela donne en un lieu.",
+      "cartes": [
+        "La Terre tourne sur elle-même en environ 24 h",
+        "Le côté de la Terre face au Soleil est éclairé",
+        "L'autre moitié de la Terre est plongée dans l'obscurité",
+        "On appelle rotation ce mouvement de la Terre",
+        "Un lieu passe tour à tour de la lumière à l'ombre"
+      ]
+    },
+    {
+      "nom": "Le calendrier",
+      "detail": "Ce que la Terre fait en tournant autour du Soleil, et ce que cela donne pour les années.",
+      "cartes": [
+        "Une année dure environ 365,25 jours",
+        "Le quart de jour en plus s'accumule chaque année",
+        "Un 29 février s'ajoute en général tous les 4 ans",
+        "Une année bissextile compte 366 jours",
+        "Le tour de la Terre autour du Soleil s'appelle révolution"
+      ]
+    },
+    {
+      "nom": "Les phases de la Lune",
+      "detail": "Pourquoi la Lune paraît plus ou moins grande, d'une nuit à l'autre.",
+      "cartes": [
+        "Le Soleil éclaire toujours une moitié de la Lune",
+        "À la nouvelle lune, la moitié visible est sombre",
+        "À la pleine lune, on voit toute sa moitié éclairée",
+        "La Lune retrouve le même aspect tous les 29,5 jours",
+        "On voit une part variable de la moitié éclairée"
+      ]
+    },
+    {
+      "nom": "Les distances dans l'espace",
+      "detail": "Les éloignements du Système solaire et des étoiles, et la façon de les mesurer.",
+      "cartes": [
+        "La Lune est à environ 384 000 km de nous",
+        "Le Soleil est à environ 150 millions de km",
+        "Proxima du Centaure est à environ 4,2 années-lumière",
+        "L'année-lumière sert à mesurer l'éloignement des étoiles",
+        "La lumière met environ 8 minutes pour venir du Soleil"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Quel type d'astre est le groupe en couleur ?",
+      "texte": "Au centre du Système solaire se trouve [le Soleil], qui produit sa propre lumière.",
+      "choix": ["Étoile", "Planète", "Satellite"],
+      "bonne": 0,
+      "explication": "Le Soleil produit sa propre lumière : c'est une étoile."
+    },
+    {
+      "consigne": "Quel type d'astre est le groupe en couleur ?",
+      "texte": "[Mars] tourne autour du Soleil et ne produit pas de lumière.",
+      "choix": ["Étoile", "Planète", "Satellite"],
+      "bonne": 1,
+      "explication": "Mars tourne autour d'une étoile, le Soleil, sans produire de lumière : c'est une planète."
+    },
+    {
+      "consigne": "Quel type d'astre est le groupe en couleur ?",
+      "texte": "Les astronautes ont marché sur [la Lune], qui tourne autour de la Terre.",
+      "choix": ["Étoile", "Planète", "Satellite"],
+      "bonne": 2,
+      "explication": "La Lune tourne autour d'une planète, la Terre : c'est son satellite naturel."
+    },
+    {
+      "consigne": "Quel type d'astre est le groupe en couleur ?",
+      "texte": "[Proxima du Centaure] est à environ 4,2 années-lumière de nous et brille de sa propre lumière.",
+      "choix": ["Étoile", "Planète", "Satellite"],
+      "bonne": 0,
+      "explication": "Proxima du Centaure produit sa propre lumière : c'est une étoile, la plus proche après le Soleil."
+    },
+    {
+      "consigne": "Quel type d'astre est le groupe en couleur ?",
+      "texte": "[Jupiter] est une géante gazeuse qui tourne autour du Soleil.",
+      "choix": ["Étoile", "Planète", "Satellite"],
+      "bonne": 1,
+      "explication": "Jupiter tourne autour du Soleil sans produire de lumière : c'est une planète géante gazeuse."
+    },
+    {
+      "consigne": "Quel type d'astre est le groupe en couleur ?",
+      "texte": "[Neptune] est une géante glacée, la plus éloignée du Soleil.",
+      "choix": ["Étoile", "Planète", "Satellite"],
+      "bonne": 1,
+      "explication": "Neptune est la huitième planète du Système solaire : c'est une planète géante glacée."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Soleil",
+      "acceptees": ["Le Soleil"],
+      "indices": [
+        "Huit planètes tournent autour de moi.",
+        "Je suis une boule de gaz très chaud.",
+        "Je suis l'étoile la plus proche de la Terre."
+      ],
+      "explication": "Le Soleil est une étoile : une boule de gaz très chaud qui produit sa propre lumière."
+    },
+    {
+      "reponse": "Lune",
+      "acceptees": ["La Lune"],
+      "indices": [
+        "Je ne produis pas ma lumière, je diffuse celle d'une étoile.",
+        "Je tourne autour de la Terre en environ 27 jours.",
+        "Je suis le satellite naturel de la Terre et j'ai des phases."
+      ],
+      "explication": "La Lune est le satellite naturel de la Terre ; elle diffuse la lumière du Soleil."
+    },
+    {
+      "reponse": "Mercure",
+      "acceptees": ["La planète Mercure"],
+      "indices": [
+        "Je suis une petite planète rocheuse.",
+        "Je suis plus près du Soleil que Vénus.",
+        "Je suis la première planète quand on les compte depuis le Soleil."
+      ],
+      "explication": "Mercure est la planète la plus proche du Soleil : c'est une planète tellurique."
+    },
+    {
+      "reponse": "Voie lactée",
+      "acceptees": ["La Voie lactée", "Notre galaxie", "Galaxie", "La galaxie"],
+      "indices": [
+        "Je compte plus de 100 milliards d'étoiles.",
+        "Le Système solaire fait partie de moi.",
+        "Je suis la galaxie dans laquelle se trouve la Terre."
+      ],
+      "explication": "La Voie lactée est notre galaxie : le Système solaire en fait partie."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "La lumière parcourt 300 000 km chaque seconde. Combien de secondes met-elle pour venir de la Lune, située à 384 000 km ? Arrondis au dixième.",
+      "reponse": 1.3,
+      "unite": "s",
+      "tolerance": 0,
+      "explication": "t = d ÷ v = 384 000 ÷ 300 000 = 1,28 s, soit 1,3 s au dixième près."
+    },
+    {
+      "question": "Le Soleil est à 150 000 000 km de la Terre. La lumière parcourt 300 000 km chaque seconde. Combien de secondes met-elle pour venir du Soleil ?",
+      "reponse": 500,
+      "unite": "s",
+      "tolerance": 0,
+      "explication": "t = d ÷ v = 150 000 000 ÷ 300 000 = 500 s, soit un peu plus de 8 minutes."
+    },
+    {
+      "question": "Une année dure 365,25 jours. Combien de jours durent 4 années de suite ?",
+      "reponse": 1461,
+      "unite": "jours",
+      "tolerance": 0,
+      "explication": "4 × 365,25 = 1 461 jours, soit 4 × 365 + 1 : le jour en plus est le 29 février."
+    },
+    {
+      "question": "Le calendrier compte 365 jours par an, alors qu'une année dure 365,25 jours. Quel décalage, en jours, s'accumule en 12 ans ?",
+      "reponse": 3,
+      "unite": "jours",
+      "tolerance": 0,
+      "explication": "Chaque année ajoute 0,25 jour de décalage : 12 × 0,25 = 3 jours."
+    },
+    {
+      "question": "La Lune met 27 jours pour faire un tour autour de la Terre. Combien de jours lui faut-il pour faire 3 tours ?",
+      "reponse": 81,
+      "unite": "jours",
+      "tolerance": 0,
+      "explication": "3 × 27 = 81 jours."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Les phases de la Lune, en partant de la nouvelle lune",
+      "etapes": [
+        "La nouvelle lune",
+        "Le premier quartier",
+        "La pleine lune",
+        "Le dernier quartier"
+      ]
+    },
+    {
+      "titre": "Notre adresse, du plus petit au plus grand",
+      "etapes": [
+        "La Terre, notre planète",
+        "Le Système solaire, autour du Soleil",
+        "La Voie lactée, notre galaxie",
+        "L'Univers, avec des milliards de galaxies"
+      ]
+    }
+  ]
+}

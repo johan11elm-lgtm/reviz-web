@@ -1,0 +1,138 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Phrases déclaratives",
+      "detail": "La phrase donne une information, elle affirme ou nie un fait.",
+      "cartes": [
+        "Le chevalier traverse la forêt",
+        "Il ne dit rien",
+        "Le dragon est vaincu par le chevalier",
+        "Perceval quitte sa mère",
+        "La nuit tombe sur le château"
+      ]
+    },
+    {
+      "nom": "Phrases injonctives",
+      "detail": "La phrase donne un ordre, un conseil ou une interdiction, souvent à l'impératif.",
+      "cartes": [
+        "Ferme la porte",
+        "Ne touche pas à cette épée",
+        "Range ta chambre avant ce soir",
+        "Soyez à l'heure demain matin",
+        "Relis toujours ta copie avant de la rendre"
+      ]
+    },
+    {
+      "nom": "Interrogations totales",
+      "detail": "La question porte sur toute la phrase : on peut y répondre par oui ou par non.",
+      "cartes": [
+        "Est-ce que tu viens avec nous ?",
+        "Viendras-tu à la fête samedi ?",
+        "Le chevalier a-t-il vaincu le dragon ?",
+        "Tu aimes la musique ?",
+        "Veux-tu un morceau de gâteau ?"
+      ]
+    },
+    {
+      "nom": "Interrogations partielles",
+      "detail": "La question porte sur un élément précis et commence par un mot interrogatif : où, pourquoi, quand, qui, combien…",
+      "cartes": [
+        "Où se cache le dragon ?",
+        "Pourquoi pleures-tu ?",
+        "Quand partirez-vous pour le château ?",
+        "Qui a pris l'épée ?",
+        "Combien coûte ce livre ?"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Quelle est la forme de la phrase en couleur ?",
+      "texte": "La bataille fut longue. [Le dragon est vaincu par le chevalier.]",
+      "choix": ["Forme négative", "Forme passive", "Forme exclamative", "Aucune de ces trois formes"],
+      "bonne": 1,
+      "explication": "Le sujet « le dragon » subit l'action et « par le chevalier » est le complément d'agent : c'est la forme passive."
+    },
+    {
+      "consigne": "Quelle est la forme de la phrase en couleur ?",
+      "texte": "Perceval affronte seul le dragon. [Quel courage !]",
+      "choix": ["Forme négative", "Forme passive", "Forme exclamative", "Aucune de ces trois formes"],
+      "bonne": 2,
+      "explication": "La phrase exprime un sentiment fort et se termine par un point d'exclamation : c'est la forme exclamative."
+    },
+    {
+      "consigne": "Quelle est la forme de la phrase en couleur ?",
+      "texte": "Le roi écoute le messager. [Il ne dit rien.]",
+      "choix": ["Forme négative", "Forme passive", "Forme exclamative", "Aucune de ces trois formes"],
+      "bonne": 0,
+      "explication": "La négation en deux parties « ne… rien » encadre le verbe : c'est la forme négative."
+    },
+    {
+      "consigne": "Quelle est la forme de la phrase en couleur ?",
+      "texte": "Tu cherches ta cousine ? [Elle est partie hier soir.]",
+      "choix": ["Forme négative", "Forme passive", "Forme exclamative", "Aucune de ces trois formes"],
+      "bonne": 3,
+      "explication": "« est partie » est un passé composé avec l'auxiliaire être : le sujet ne subit aucune action, ce n'est pas un passif. La phrase n'est ni négative ni exclamative."
+    },
+    {
+      "consigne": "Quelle est la forme de la phrase en couleur ?",
+      "texte": "Les remparts sont solides. [Le château est gardé par deux soldats.]",
+      "choix": ["Forme négative", "Forme passive", "Forme exclamative", "Aucune de ces trois formes"],
+      "bonne": 1,
+      "explication": "Le sujet « le château » subit l'action de garder, et « par deux soldats » est le complément d'agent : c'est la forme passive."
+    },
+    {
+      "consigne": "Quelle est la forme de la phrase en couleur ?",
+      "texte": "Le héros cherche sa route. [Le chevalier ne rencontre jamais le dragon.]",
+      "choix": ["Forme négative", "Forme passive", "Forme exclamative", "Aucune de ces trois formes"],
+      "bonne": 0,
+      "explication": "La négation en deux parties « ne… jamais » encadre le verbe : c'est la forme négative."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Interrogation partielle",
+      "acceptees": ["Une interrogation partielle", "L'interrogation partielle", "Question partielle"],
+      "indices": [
+        "Je suis une question.",
+        "Je porte sur un seul élément de la phrase.",
+        "Je commence par un mot comme « qui », « où », « quand », « comment », « pourquoi » ou « combien »."
+      ],
+      "explication": "L'interrogation partielle porte sur un élément et commence par un mot interrogatif : « Où vas-tu ? »."
+    },
+    {
+      "reponse": "Forme passive",
+      "acceptees": ["La forme passive", "Passive", "Le passif", "Passif", "Voix passive"],
+      "indices": [
+        "Je suis une construction de la phrase.",
+        "Avec moi, le sujet subit l'action.",
+        "Je me construis avec le verbe être suivi d'un participe passé, et souvent d'un groupe introduit par « par »."
+      ],
+      "explication": "À la forme passive, le sujet subit l'action : « Le dragon est vaincu par le chevalier »."
+    },
+    {
+      "reponse": "Injonctive",
+      "acceptees": ["Phrase injonctive", "La phrase injonctive", "Injonctif", "Type injonctif"],
+      "indices": [
+        "Je suis l'un des trois types de phrases.",
+        "Je sers à donner un ordre, un conseil ou une interdiction.",
+        "Mon verbe est souvent à l'impératif : « Ferme la porte. »"
+      ],
+      "explication": "La phrase injonctive donne un ordre, un conseil ou une interdiction, souvent à l'impératif."
+    },
+    {
+      "reponse": "Complément d'agent",
+      "acceptees": ["Le complément d'agent", "Un complément d'agent"],
+      "indices": [
+        "Je suis un groupe de mots dans la phrase.",
+        "Je désigne celui qui fait l'action quand le sujet la subit.",
+        "Je suis introduit le plus souvent par « par » : dans « Le dragon est vaincu par le chevalier », je suis « par le chevalier »."
+      ],
+      "explication": "Le complément d'agent est introduit le plus souvent par « par » et désigne celui qui fait l'action à la forme passive."
+    }
+  ],
+  "calculs": [],
+  "etapes": []
+}

@@ -1,0 +1,148 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Ellis Island",
+      "detail": "Ellis Island est le principal centre d'accueil des immigrants à New York, de 1892 à 1954 : contrôle médical, questions d'identité.",
+      "cartes": [
+        "Un centre d'immigration de 1892 à 1954",
+        "Environ 12 millions d'immigrants y sont passés",
+        "Un contrôle médical pour chaque arrivant",
+        "Des questions sur l'identité des nouveaux arrivants",
+        "La plupart des arrivants y étaient admis en quelques heures"
+      ]
+    },
+    {
+      "nom": "La statue de la Liberté",
+      "detail": "Offerte par la France, inaugurée en 1886, œuvre de Bartholdi avec une structure de Gustave Eiffel.",
+      "cartes": [
+        "Un cadeau offert par la France",
+        "Un monument inauguré en 1886",
+        "Une œuvre du sculpteur Bartholdi",
+        "Une structure conçue par Gustave Eiffel",
+        "Un symbole qui accueille les navires à l'entrée du port"
+      ]
+    },
+    {
+      "nom": "Raisons de quitter son pays",
+      "detail": "Les push factors poussent au départ : pauvreté, famine, persécutions, guerres.",
+      "cartes": [
+        "Vivre dans une grande pauvreté",
+        "Échapper à la famine",
+        "Fuir les persécutions",
+        "Échapper aux guerres",
+        "Une récolte de pommes de terre perdue"
+      ]
+    },
+    {
+      "nom": "Raisons d'aller aux États-Unis",
+      "detail": "Les pull factors attirent vers l'Amérique : travail, terres, liberté religieuse et politique, espoir de réussir.",
+      "cartes": [
+        "Trouver un emploi en Amérique",
+        "Obtenir des terres à cultiver",
+        "Pratiquer librement sa religion",
+        "Participer librement à la vie politique",
+        "Croire que le travail mène à la réussite"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Quel est le temps du verbe en couleur ?",
+      "texte": "When they arrived in New York, they [had travelled] for ten days.",
+      "choix": ["Past perfect", "Prétérit simple", "Présent simple", "Present perfect"],
+      "bonne": 0,
+      "explication": "« had travelled » : had + participe passé. Le voyage est antérieur à l'arrivée."
+    },
+    {
+      "consigne": "Quel est le temps du verbe en couleur ?",
+      "texte": "When they [arrived] in New York, they had travelled for ten days.",
+      "choix": ["Past perfect", "Prétérit simple", "Présent simple", "Present perfect"],
+      "bonne": 1,
+      "explication": "« arrived » est au prétérit simple : c'est l'action la plus récente du récit."
+    },
+    {
+      "consigne": "Quel est le temps du verbe en couleur ?",
+      "texte": "They [hadn't seen] the sea before.",
+      "choix": ["Past perfect", "Prétérit simple", "Présent simple", "Present perfect"],
+      "bonne": 0,
+      "explication": "« hadn't seen » est la forme négative du past perfect : hadn't + participe passé."
+    },
+    {
+      "consigne": "Quel est le temps du verbe en couleur ?",
+      "texte": "After they had passed the medical test, they [took] a ferry to New York.",
+      "choix": ["Past perfect", "Prétérit simple", "Présent simple", "Present perfect"],
+      "bonne": 1,
+      "explication": "« took » est le prétérit de take : le ferry vient après le contrôle médical."
+    },
+    {
+      "consigne": "Quel est le temps du verbe en couleur ?",
+      "texte": "The American Dream [is] the idea that hard work leads to success.",
+      "choix": ["Past perfect", "Prétérit simple", "Présent simple", "Present perfect"],
+      "bonne": 2,
+      "explication": "« is » est au présent simple : on définit une idée toujours vraie."
+    },
+    {
+      "consigne": "Quel est le temps du verbe en couleur ?",
+      "texte": "Many Irish families left because the potato crops [had failed].",
+      "choix": ["Past perfect", "Prétérit simple", "Présent simple", "Present perfect"],
+      "bonne": 0,
+      "explication": "« had failed » : les récoltes avaient échoué avant le départ des familles, d'où le past perfect."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Ellis Island",
+      "acceptees": ["Ellis"],
+      "indices": [
+        "Je suis un lieu des États-Unis.",
+        "Environ 12 millions de personnes sont passées par moi.",
+        "J'ai accueilli les immigrants à New York de 1892 à 1954."
+      ],
+      "explication": "Ellis Island, dans le port de New York, a été le principal centre d'accueil des immigrants de 1892 à 1954."
+    },
+    {
+      "reponse": "Statue de la Liberté",
+      "acceptees": ["La statue de la Liberté", "Statue of Liberty", "The Statue of Liberty", "Lady Liberty"],
+      "indices": [
+        "Je suis un monument.",
+        "J'ai été offerte par la France.",
+        "Je suis l'œuvre de Bartholdi, avec une structure de Gustave Eiffel."
+      ],
+      "explication": "La statue de la Liberté, offerte par la France, est inaugurée en 1886."
+    },
+    {
+      "reponse": "Melting pot",
+      "acceptees": ["Le melting pot", "Melting-pot"],
+      "indices": [
+        "Je suis une image.",
+        "Mon nom signifie « creuset ».",
+        "Je décris une société où des populations venues du monde entier se mêlent."
+      ],
+      "explication": "Le melting pot, littéralement « creuset », est l'image d'une société qui mêle des populations d'origines diverses."
+    },
+    {
+      "reponse": "American Dream",
+      "acceptees": ["The American Dream", "Le rêve américain", "Rêve américain"],
+      "indices": [
+        "Je suis une idée.",
+        "Je suis célèbre aux États-Unis.",
+        "Je dis que chacun peut y réussir grâce à son travail."
+      ],
+      "explication": "L'American Dream est l'idée que chacun peut réussir aux États-Unis par son travail."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Le voyage d'une famille d'immigrants",
+      "etapes": [
+        "La famille vend sa maison et quitte son pays",
+        "La famille voyage plusieurs jours en bateau",
+        "La famille passe le contrôle médical à Ellis Island",
+        "La famille prend un ferry pour New York"
+      ]
+    }
+  ]
+}

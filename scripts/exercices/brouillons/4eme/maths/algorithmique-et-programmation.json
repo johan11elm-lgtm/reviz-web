@@ -1,0 +1,167 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Les événements",
+      "detail": "Les blocs qui déclenchent un script ou envoient un message d'un lutin à l'autre.",
+      "cartes": [
+        "Quand le drapeau vert est cliqué",
+        "Quand ce lutin est cliqué",
+        "Quand je reçois le message « départ »",
+        "Envoyer à tous le message « départ »",
+        "Plusieurs scripts peuvent s'exécuter en même temps"
+      ]
+    },
+    {
+      "nom": "Les variables",
+      "detail": "Des cases mémoire qui portent un nom et dont la valeur peut changer.",
+      "cartes": [
+        "Mettre score à 0 au début de la partie",
+        "Ajouter 1 à score après une bonne réponse",
+        "Une case mémoire qui porte un nom",
+        "Après trois bonnes réponses, score vaut 3",
+        "Un score non remis à 0 garde son ancienne valeur"
+      ]
+    },
+    {
+      "nom": "Les boucles",
+      "detail": "Les blocs qui répètent des instructions : un nombre de fois fixé, jusqu'à une condition, ou sans fin.",
+      "cartes": [
+        "Répéter 4 fois : avancer de 100, tourner de 90°",
+        "Répéter jusqu'à ce que x > 10",
+        "Les blocs se répètent sans jamais s'arrêter",
+        "Un hexagone tracé en répétant six fois les mêmes blocs",
+        "Les mêmes blocs sont exécutés dix fois de suite"
+      ]
+    },
+    {
+      "nom": "Les conditions",
+      "detail": "Les blocs qui choisissent la suite du programme selon qu'un test est vrai ou faux.",
+      "cartes": [
+        "Si réponse = 42 alors dire « Bravo »",
+        "Dire « Perdu » quand la réponse n'est pas 42",
+        "Un seul des deux blocs est exécuté selon un test",
+        "Combiner deux tests avec « et », « ou » ou « non »",
+        "Comparer deux nombres avec <, = ou >"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "De quel type de bloc s'agit-il pour le passage en couleur ?",
+      "texte": "Quand le drapeau vert est cliqué → [répéter 4 fois] → avancer de 100 → tourner de 90°",
+      "choix": ["Événement", "Variable", "Boucle", "Condition"],
+      "bonne": 2,
+      "explication": "« Répéter 4 fois » est une boucle : elle exécute les blocs qu'elle contient exactement 4 fois."
+    },
+    {
+      "consigne": "De quel type de bloc s'agit-il pour le passage en couleur ?",
+      "texte": "Quand ce lutin est cliqué → [mettre score à 0] → dire « Nouvelle partie »",
+      "choix": ["Événement", "Variable", "Boucle", "Condition"],
+      "bonne": 1,
+      "explication": "« Mettre score à 0 » donne sa valeur de départ à la variable score."
+    },
+    {
+      "consigne": "De quel type de bloc s'agit-il pour le passage en couleur ?",
+      "texte": "[Quand ce lutin est cliqué] → dire « Bonjour » pendant 2 secondes",
+      "choix": ["Événement", "Variable", "Boucle", "Condition"],
+      "bonne": 0,
+      "explication": "« Quand ce lutin est cliqué » est un événement : c'est lui qui déclenche le script."
+    },
+    {
+      "consigne": "De quel type de bloc s'agit-il pour le passage en couleur ?",
+      "texte": "Quand le drapeau vert est cliqué → [si réponse = 42 alors dire « Bravo » sinon dire « Perdu »]",
+      "choix": ["Événement", "Variable", "Boucle", "Condition"],
+      "bonne": 3,
+      "explication": "« Si … alors … sinon » est une condition : un seul des deux blocs est exécuté selon que le test est vrai ou faux."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Algorithme",
+      "acceptees": ["Un algorithme", "Algorithmes"],
+      "indices": [
+        "Je suis une suite finie d'instructions.",
+        "Je permets de résoudre un problème.",
+        "Un programme est ma traduction dans un langage compris par l'ordinateur."
+      ],
+      "explication": "Un algorithme est une suite finie d'instructions qui résout un problème ; un programme en est la traduction."
+    },
+    {
+      "reponse": "Variable",
+      "acceptees": ["Une variable", "Variables"],
+      "indices": [
+        "Je suis une case mémoire.",
+        "Je porte un nom, comme score.",
+        "On m'initialise au début du programme, puis on me modifie."
+      ],
+      "explication": "Une variable est une case mémoire nommée dont la valeur peut changer au fil du programme."
+    },
+    {
+      "reponse": "Bloc personnalisé",
+      "acceptees": ["Un bloc personnalisé", "Bloc personnalise", "Mes blocs"],
+      "indices": [
+        "Je suis un sous-programme que l'on définit une fois.",
+        "On me réutilise autant de fois qu'on veut sans tout recopier.",
+        "Je peux avoir des paramètres, comme la taille du côté d'un carré."
+      ],
+      "explication": "Un bloc personnalisé est un sous-programme défini une fois, avec ou sans paramètres, et réutilisable."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "Pour tracer un polygone régulier à 9 côtés, de quel angle le lutin tourne-t-il à chaque sommet ?",
+      "reponse": 40,
+      "unite": "°",
+      "tolerance": 0,
+      "explication": "Le lutin tourne de 360° ÷ n, donc 360 ÷ 9 = 40°."
+    },
+    {
+      "question": "Le lutin trace un polygone régulier en tournant de 72° à chaque sommet. Combien ce polygone a-t-il de côtés ?",
+      "reponse": 5,
+      "unite": "côtés",
+      "tolerance": 0,
+      "explication": "L'angle de rotation vaut 360° ÷ n, donc n = 360 ÷ 72 = 5 : c'est un pentagone."
+    },
+    {
+      "question": "La variable score vaut 3. On exécute 4 fois « ajouter 5 à score ». Que vaut score à la fin ?",
+      "reponse": 23,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "Chaque passage ajoute 5 : 3 + 4 × 5 = 3 + 20 = 23."
+    },
+    {
+      "question": "x vaut 0. On exécute « répéter jusqu'à ce que x > 10 : ajouter 3 à x ». Que vaut x quand la boucle s'arrête ?",
+      "reponse": 12,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "x prend les valeurs 3, 6, 9 puis 12 ; 12 > 10, donc la boucle s'arrête avec x = 12."
+    },
+    {
+      "question": "score vaut 8. On exécute : si score > 5 alors ajouter 10 à score, sinon ajouter 1 à score. Que vaut score ensuite ?",
+      "reponse": 18,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "8 > 5 est vrai, donc seul le premier bloc s'exécute : 8 + 10 = 18."
+    },
+    {
+      "question": "Un lutin exécute « répéter 6 fois : avancer de 25, tourner de 60° ». Quelle distance totale a-t-il parcourue en avançant ?",
+      "reponse": 150,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "Il avance de 25 à chaque tour de boucle : 6 × 25 = 150."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Comment construire un programme",
+      "etapes": [
+        "Décompose le problème en petites tâches simples",
+        "Programme une tâche à la fois",
+        "Teste après chaque étape, avec des valeurs différentes",
+        "Relis les blocs un par un pour trouver l'erreur, puis corrige-la"
+      ]
+    }
+  ]
+}

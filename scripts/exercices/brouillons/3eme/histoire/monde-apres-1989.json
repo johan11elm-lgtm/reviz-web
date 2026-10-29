@@ -1,0 +1,146 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Les guerres à l'intérieur des États",
+      "detail": "Les guerres civiles et les massacres de civils des années 1990, en ex-Yougoslavie et au Rwanda.",
+      "cartes": [
+        "Après l'éclatement de la Yougoslavie, Serbes et Croates s'affrontent",
+        "Des « nettoyages ethniques » frappent les civils en Bosnie",
+        "À Srebrenica, des milliers d'hommes sont massacrés en 1995",
+        "Un génocide des Tutsi fait 800 000 morts en 1994",
+        "Les accords de Dayton mettent fin à la guerre de Bosnie"
+      ]
+    },
+    {
+      "nom": "Le terrorisme",
+      "detail": "La violence contre des civils pour créer la peur dans un but politique, et ses principaux visages.",
+      "cartes": [
+        "Des avions détournés frappent New York et le Pentagone",
+        "Oussama Ben Laden dirige l'organisation Al-Qaïda",
+        "Des attentats islamistes frappent Madrid, Londres, puis Paris",
+        "Daech contrôle une partie de l'Irak et de la Syrie",
+        "La violence contre des civils pour semer la peur"
+      ]
+    },
+    {
+      "nom": "Les interventions des États-Unis",
+      "detail": "Les guerres menées par l'hyperpuissance américaine au Koweït, en Afghanistan et en Irak.",
+      "cartes": [
+        "Une coalition américaine libère le Koweït avec l'accord de l'ONU",
+        "En 2001, les États-Unis attaquent l'Afghanistan des talibans",
+        "Les États-Unis attaquent l'Irak en 2003 sans l'accord de l'ONU",
+        "La France refuse de participer à la guerre en Irak",
+        "Les troupes américaines quittent l'Afghanistan en 2021"
+      ]
+    },
+    {
+      "nom": "Les nouvelles puissances",
+      "detail": "L'émergence de puissances qui contestent la domination américaine et font revenir les tensions.",
+      "cartes": [
+        "En 2014, la Russie annexe la Crimée, une région d'Ukraine",
+        "En février 2022, la Russie envahit l'Ukraine",
+        "Les BRICS réunissent des puissances émergentes",
+        "Depuis 2024, l'Égypte et l'Iran rejoignent les BRICS",
+        "La Chine et l'Inde voient leur poids économique grandir"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "la guerre d'Afghanistan de 2001",
+      "carte": "Les attentats du 11 septembre 2001",
+      "role": "cause",
+      "explication": "Les États-Unis répondent aux attentats en attaquant l'Afghanistan en 2001."
+    },
+    {
+      "fait": "la guerre d'Afghanistan de 2001",
+      "carte": "Les talibans abritent Al-Qaïda",
+      "role": "cause",
+      "explication": "Les États-Unis attaquent l'Afghanistan parce que les talibans y abritent Al-Qaïda."
+    },
+    {
+      "fait": "la guerre d'Afghanistan de 2001",
+      "carte": "En 2021, les talibans reprennent le pouvoir",
+      "role": "consequence",
+      "explication": "Les troupes américaines quittent le pays en 2021 et les talibans reprennent le pouvoir."
+    },
+    {
+      "fait": "la guerre d'Irak de 2003",
+      "carte": "Saddam Hussein est renversé",
+      "role": "consequence",
+      "explication": "Les États-Unis attaquent l'Irak sans l'accord de l'ONU et renversent Saddam Hussein."
+    },
+    {
+      "fait": "la guerre d'Irak de 2003",
+      "carte": "Le monde est divisé et l'Irak plonge dans le chaos",
+      "role": "consequence",
+      "explication": "La guerre divise le monde, car la France s'y oppose, et elle plonge l'Irak dans le chaos."
+    }
+  ],
+  "etiquettes": [],
+  "devinettes": [
+    {
+      "reponse": "Ben Laden",
+      "acceptees": ["Ben Laden", "Oussama Ben Laden"],
+      "indices": [
+        "Je dirige une organisation terroriste.",
+        "Les talibans d'Afghanistan abritent mon organisation.",
+        "J'organise les attentats du 11 septembre 2001."
+      ],
+      "explication": "Oussama Ben Laden dirige Al-Qaïda, responsable des attentats du 11 septembre 2001."
+    },
+    {
+      "reponse": "Saddam Hussein",
+      "acceptees": ["Saddam Hussein", "Saddam", "Hussein"],
+      "indices": [
+        "Je dirige l'Irak.",
+        "En 1990, mon armée envahit le Koweït.",
+        "En 2003, les États-Unis me renversent."
+      ],
+      "explication": "Saddam Hussein envahit le Koweït en 1990 et est renversé par les États-Unis en 2003."
+    },
+    {
+      "reponse": "Srebrenica",
+      "acceptees": ["Srebrenica"],
+      "indices": [
+        "Je suis une ville de Bosnie.",
+        "En juillet 1995, plus de 8 000 hommes et garçons musulmans y sont massacrés.",
+        "La justice internationale a qualifié ce massacre de génocide."
+      ],
+      "explication": "À Srebrenica, en juillet 1995, plus de 8 000 hommes et garçons bosniaques musulmans sont massacrés."
+    },
+    {
+      "reponse": "Les BRICS",
+      "acceptees": ["BRICS", "Les BRICS"],
+      "indices": [
+        "Je suis un groupe de pays.",
+        "Le Brésil, la Russie, l'Inde, la Chine et l'Afrique du Sud me forment.",
+        "Depuis 2024, l'Égypte et l'Iran m'ont rejoint."
+      ],
+      "explication": "Les BRICS rassemblent des puissances émergentes, rejointes depuis 2024 par d'autres pays."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Une chronologie des conflits après 1989",
+      "etapes": [
+        "En 1991, la guerre du Golfe libère le Koweït",
+        "D'avril à juillet 1994, le génocide des Tutsi au Rwanda",
+        "En juillet 1995, le massacre de Srebrenica en Bosnie",
+        "Le 11 septembre 2001, les attentats d'Al-Qaïda aux États-Unis",
+        "En 2003, les États-Unis attaquent l'Irak sans l'ONU"
+      ]
+    },
+    {
+      "titre": "Le terrorisme islamiste en Europe",
+      "etapes": [
+        "En 2004, des attentats islamistes frappent Madrid",
+        "En 2005, des attentats islamistes frappent Londres",
+        "En janvier 2015, des attentats islamistes frappent Paris",
+        "Le 13 novembre 2015, d'autres attentats frappent Paris"
+      ]
+    }
+  ]
+}

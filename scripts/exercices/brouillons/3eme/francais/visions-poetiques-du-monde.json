@@ -1,0 +1,149 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "La comparaison",
+      "detail": "Elle rapproche deux éléments avec un outil de comparaison : comme, tel, pareil à.",
+      "cartes": [
+        "Ses yeux brillent comme des étoiles",
+        "Il court, rapide comme l'éclair",
+        "Les nuages, pareils à des moutons, traversent le ciel",
+        "Tel un oiseau, elle s'envole vers le large",
+        "Sa peau est douce comme du velours"
+      ]
+    },
+    {
+      "nom": "La métaphore",
+      "detail": "Elle rapproche deux éléments sans outil de comparaison : « A est B ».",
+      "cartes": [
+        "Ta voix est une douce musique",
+        "La ville est une fourmilière géante",
+        "Mes pensées sont des oiseaux prisonniers",
+        "Ses cheveux sont un nuage d'or",
+        "Cette salle de classe est un four"
+      ]
+    },
+    {
+      "nom": "La personnification",
+      "detail": "Elle prête des actions ou des sentiments humains à un élément de la nature, un objet ou une idée.",
+      "cartes": [
+        "Le soleil se réveille derrière les montagnes",
+        "Le vent murmure des secrets aux arbres",
+        "La lune sourit aux enfants endormis",
+        "Les vagues jouent à cache-cache sur la plage",
+        "La forêt retient son souffle"
+      ]
+    },
+    {
+      "nom": "L'anaphore",
+      "detail": "Elle répète le même mot ou la même expression au début de plusieurs vers ou phrases.",
+      "cartes": [
+        "Je marche la nuit, je marche sans fin",
+        "Paris outragé ! Paris brisé ! Paris martyrisé !",
+        "Partout des cris, partout des larmes, partout la peur",
+        "Il y avait du vent, il y avait de la pluie",
+        "Rien ne bouge, rien ne parle, rien ne respire"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Quelle figure de style est en couleur ?",
+      "texte": "Il court, [rapide comme l'éclair].",
+      "choix": ["Comparaison", "Métaphore", "Personnification", "Anaphore"],
+      "bonne": 0,
+      "explication": "« Comme » est un outil de comparaison : il rapproche la vitesse du coureur et celle de l'éclair."
+    },
+    {
+      "consigne": "Quelle figure de style est en couleur ?",
+      "texte": "[Ta voix est une douce musique].",
+      "choix": ["Comparaison", "Métaphore", "Personnification", "Anaphore"],
+      "bonne": 1,
+      "explication": "La voix est rapprochée de la musique sans outil de comparaison : c'est une métaphore."
+    },
+    {
+      "consigne": "Quelle figure de style est en couleur ?",
+      "texte": "[Le soleil se réveille] derrière les montagnes.",
+      "choix": ["Comparaison", "Métaphore", "Personnification", "Anaphore"],
+      "bonne": 2,
+      "explication": "Se réveiller est une action humaine prêtée au soleil : c'est une personnification."
+    },
+    {
+      "consigne": "Quelle figure de style est en couleur ?",
+      "texte": "[Rien ne bouge, rien ne parle, rien ne respire].",
+      "choix": ["Comparaison", "Métaphore", "Personnification", "Anaphore"],
+      "bonne": 3,
+      "explication": "Le mot « rien » est répété au début de chaque groupe : c'est une anaphore."
+    },
+    {
+      "consigne": "Quelle figure de style est en couleur ?",
+      "texte": "Les nuages, [pareils à des moutons], traversent le ciel.",
+      "choix": ["Comparaison", "Métaphore", "Personnification", "Anaphore"],
+      "bonne": 0,
+      "explication": "« Pareils à » est un outil de comparaison, comme « comme » ou « tel »."
+    },
+    {
+      "consigne": "Quelle figure de style est en couleur ?",
+      "texte": "[La ville est une fourmilière géante].",
+      "choix": ["Comparaison", "Métaphore", "Personnification", "Anaphore"],
+      "bonne": 1,
+      "explication": "La ville est assimilée à une fourmilière sans outil de comparaison : c'est une métaphore."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Le sonnet",
+      "acceptees": ["Sonnet", "Le sonnet", "Un sonnet"],
+      "indices": [
+        "Je suis une forme de poème.",
+        "Je compte quatorze vers.",
+        "Je suis fait de deux quatrains suivis de deux tercets."
+      ],
+      "explication": "Le sonnet compte 14 vers : deux quatrains (8 vers) puis deux tercets (6 vers)."
+    },
+    {
+      "reponse": "L'alexandrin",
+      "acceptees": ["Alexandrin", "L'alexandrin", "Un alexandrin"],
+      "indices": [
+        "Je suis un vers de la poésie classique.",
+        "Je suis plus long que le décasyllabe.",
+        "Je compte douze syllabes."
+      ],
+      "explication": "L'alexandrin est le vers de douze syllabes ; le décasyllabe en a 10 et l'octosyllabe 8."
+    },
+    {
+      "reponse": "Le calligramme",
+      "acceptees": ["Calligramme", "Le calligramme", "Un calligramme", "Calligrammes"],
+      "indices": [
+        "Je suis un poème un peu particulier.",
+        "Guillaume Apollinaire publie un recueil de moi en 1918.",
+        "Mes mots dessinent une image : « Il pleut » en est un exemple célèbre."
+      ],
+      "explication": "Un calligramme est un poème dont la disposition des mots dessine une image ; « Il pleut » d'Apollinaire en est un."
+    },
+    {
+      "reponse": "Francis Ponge",
+      "acceptees": ["Ponge", "Francis Ponge"],
+      "indices": [
+        "Je suis un poète français du XXe siècle.",
+        "J'écris des poèmes en prose sur des objets ordinaires.",
+        "Mon recueil de 1942 décrit l'huître, le cageot et le pain."
+      ],
+      "explication": "Francis Ponge décrit des objets ordinaires avec un regard neuf dans Le Parti pris des choses (1942)."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Cinq œuvres poétiques, de la plus ancienne à la plus récente",
+      "etapes": [
+        "Les Fleurs du mal, de Baudelaire",
+        "« Le Dormeur du val », de Rimbaud",
+        "Alcools, d'Apollinaire",
+        "Calligrammes, d'Apollinaire",
+        "Le Parti pris des choses, de Ponge"
+      ]
+    }
+  ]
+}

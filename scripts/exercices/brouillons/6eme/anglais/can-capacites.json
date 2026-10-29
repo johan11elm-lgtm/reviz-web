@@ -1,0 +1,158 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Dire ce qu'on sait faire",
+      "detail": "Une phrase affirmative avec can + base verbale exprime une capacité.",
+      "cartes": [
+        "I can swim very well",
+        "My brother can play the guitar",
+        "She can ride a horse",
+        "Tom can do judo",
+        "We can sing a little"
+      ]
+    },
+    {
+      "nom": "Dire ce qu'on ne sait pas faire",
+      "detail": "La négation est can't ou cannot, suivi de la base verbale.",
+      "cartes": [
+        "I can't sing at all",
+        "She can't dance",
+        "My dad cannot swim",
+        "They can't ride a bike",
+        "Max can't play tennis"
+      ]
+    },
+    {
+      "nom": "Demander si quelqu'un sait faire",
+      "detail": "Pour savoir si une personne en est capable, on place can devant le sujet : Can you…? Can she…?",
+      "cartes": [
+        "Can you ride a bike?",
+        "Can your brother swim?",
+        "Can she play the piano?",
+        "Can your friends dance?",
+        "Can they play basketball?"
+      ]
+    },
+    {
+      "nom": "Demander la permission",
+      "detail": "Can I…, please? demande poliment l'autorisation de faire quelque chose.",
+      "cartes": [
+        "Can I open the window, please?",
+        "Can I go to the toilet, please?",
+        "Can I play video games, please?",
+        "Can I use your pencil, please?",
+        "Can I sit here, please?"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Quel verbe faut-il à la place des tirets ?",
+      "texte": "Zoe can ___ [swimming] after school.",
+      "choix": ["play", "go", "do", "make"],
+      "bonne": 1,
+      "explication": "On dit go + verbe en -ing pour la natation : go swimming."
+    },
+    {
+      "consigne": "Quel verbe faut-il à la place des tirets ?",
+      "texte": "Leo can ___ [judo] very well.",
+      "choix": ["play", "go", "do", "make"],
+      "bonne": 2,
+      "explication": "On dit do pour judo, karate ou gymnastics : do judo."
+    },
+    {
+      "consigne": "Quel verbe faut-il à la place des tirets ?",
+      "texte": "Ava can ___ [the piano] very well.",
+      "choix": ["play", "go", "do", "make"],
+      "bonne": 0,
+      "explication": "On dit play the + instrument : play the piano."
+    },
+    {
+      "consigne": "Quel verbe faut-il à la place des tirets ?",
+      "texte": "Can you ___ [football] with us on Saturday?",
+      "choix": ["play", "go", "do", "make"],
+      "bonne": 0,
+      "explication": "On dit play + sport de ballon, sans article : play football."
+    },
+    {
+      "consigne": "Quel verbe faut-il à la place des tirets ?",
+      "texte": "My cousin can ___ [skateboarding] at the park.",
+      "choix": ["play", "go", "do", "make"],
+      "bonne": 1,
+      "explication": "On dit go + verbe en -ing : go skateboarding."
+    },
+    {
+      "consigne": "Quel verbe faut-il à la place des tirets ?",
+      "texte": "Can your sister ___ [gymnastics]?",
+      "choix": ["play", "go", "do", "make"],
+      "bonne": 2,
+      "explication": "On dit do gymnastics, comme do judo ou do karate."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Hobby",
+      "acceptees": ["A hobby", "Hobbies"],
+      "indices": [
+        "Je suis un mot anglais pour une activité qu'on fait pour le plaisir.",
+        "Dessiner, lire et chanter sont des exemples de moi.",
+        "En français, je veux dire « loisir »."
+      ],
+      "explication": "A hobby est un loisir, un passe-temps : sports, musique, dessin…"
+    },
+    {
+      "reponse": "Soccer",
+      "acceptees": ["Le soccer"],
+      "indices": [
+        "Je suis un sport d'équipe qui se joue avec un ballon.",
+        "Je suis très populaire dans le monde entier.",
+        "Aux États-Unis, c'est mon nom, car football y désigne un autre sport."
+      ],
+      "explication": "Aux États-Unis, football est le football américain : le football européen s'y appelle soccer."
+    },
+    {
+      "reponse": "Judo",
+      "acceptees": ["Le judo"],
+      "indices": [
+        "Pour parler de moi en anglais, on dit do ___.",
+        "Je viens du Japon.",
+        "On me pratique en kimono sur un tatami, en essayant de projeter son adversaire au sol."
+      ],
+      "explication": "On dit do judo, do karate ou do gymnastics."
+    },
+    {
+      "reponse": "Piano",
+      "acceptees": ["Le piano", "The piano"],
+      "indices": [
+        "Je suis un instrument de musique.",
+        "Pour parler de moi en anglais, on dit play the ___.",
+        "J'ai 88 touches noires et blanches."
+      ],
+      "explication": "On dit play the piano : devant un instrument, on met the."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Construire une phrase avec can",
+      "etapes": [
+        "Choisir le sujet : My sister",
+        "Ajouter can, sans jamais mettre de -s",
+        "Ajouter le verbe à la base verbale : play",
+        "Ajouter l'activité : the guitar",
+        "Nuancer à la fin avec very well"
+      ]
+    },
+    {
+      "titre": "Répondre à une question avec can",
+      "etapes": [
+        "Lire la question : Can she swim?",
+        "Répondre par Yes ou par No",
+        "Reprendre le sujet sous forme de pronom : she",
+        "Reprendre can ou can't, sans le verbe"
+      ]
+    }
+  ]
+}

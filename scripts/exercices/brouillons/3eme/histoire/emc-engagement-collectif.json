@@ -1,0 +1,106 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Le vote des citoyens",
+      "detail": "Choisir ses représentants ou trancher une question avec un bulletin, lors des grands scrutins.",
+      "cartes": [
+        "Aller aux urnes dès l'âge de 18 ans",
+        "Choisir le président et les députés tous les 5 ans",
+        "Désigner le conseil municipal tous les 6 ans",
+        "Répondre par oui ou par non à une question",
+        "Choisir en secret, dans l'isoloir, sans témoin"
+      ]
+    },
+    {
+      "nom": "Servir dans une institution",
+      "detail": "S'engager au service de l'intérêt général au sein d'une institution publique.",
+      "cartes": [
+        "Servir dans l'armée de son pays",
+        "Devenir policier ou gendarme",
+        "Travailler dans la justice",
+        "Devenir sapeur-pompier dès l'âge de 16 ans",
+        "Rejoindre la réserve opérationnelle comme civil volontaire"
+      ]
+    },
+    {
+      "nom": "La démocratie scolaire",
+      "detail": "Les élèves participent à la vie de leur collège grâce à des élus.",
+      "cartes": [
+        "Devenir délégué de sa classe",
+        "Défendre l'écologie dans son établissement comme éco-délégué",
+        "Siéger au conseil de la vie collégienne (CVC)",
+        "Représenter les élèves au conseil d'administration",
+        "Être élu par ses camarades pour les représenter"
+      ]
+    },
+    {
+      "nom": "L'action collective",
+      "detail": "S'engager avec d'autres dans un parti, un syndicat, une association ou une manifestation.",
+      "cartes": [
+        "Adhérer à un parti pour soutenir ses idées",
+        "Défendre les intérêts des salariés dans un syndicat",
+        "Utiliser le droit de grève garanti en 1946",
+        "Fonder un groupe de bénévoles selon la loi de 1901",
+        "Défiler dans une manifestation déclarée en préfecture"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [],
+  "devinettes": [
+    {
+      "reponse": "L'Arcom",
+      "acceptees": ["Arcom", "L'Arcom"],
+      "indices": [
+        "Je veille au bon déroulement des campagnes électorales.",
+        "Je régule la radio et la télévision.",
+        "Je contrôle le temps de parole de chaque candidat à l'antenne."
+      ],
+      "explication": "L'Arcom régule l'audiovisuel et contrôle les temps de parole pour garantir l'égalité entre les candidats."
+    },
+    {
+      "reponse": "Le référendum",
+      "acceptees": ["Référendum", "Le référendum", "Un référendum"],
+      "indices": [
+        "Je suis une façon de consulter les citoyens.",
+        "On me répond directement par oui ou par non.",
+        "En 2005, les Français m'ont utilisé pour dire non au traité constitutionnel européen."
+      ],
+      "explication": "Lors d'un référendum, les citoyens répondent directement par oui ou par non à une question, comme en 2005."
+    },
+    {
+      "reponse": "Un syndicat",
+      "acceptees": ["Syndicat", "Un syndicat", "Le syndicat", "Les syndicats"],
+      "indices": [
+        "Je suis une organisation.",
+        "Je défends les intérêts des salariés.",
+        "Le préambule de 1946 garantit mon action et le droit de grève qui l'accompagne."
+      ],
+      "explication": "Un syndicat défend les intérêts des salariés ; le droit syndical et le droit de grève sont garantis par le préambule de 1946."
+    },
+    {
+      "reponse": "Le Sénat",
+      "acceptees": ["Sénat", "Le Sénat", "Senat"],
+      "indices": [
+        "Je fais partie du Parlement.",
+        "Mes membres sont élus pour 6 ans par de grands électeurs.",
+        "Je suis renouvelé par moitié tous les 3 ans."
+      ],
+      "explication": "Le Sénat est renouvelé par moitié tous les 3 ans ; les sénateurs sont élus pour 6 ans par de grands électeurs."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Quelques dates de l'engagement des citoyens",
+      "etapes": [
+        "En 1901, une loi garantit la liberté d'association",
+        "En 1946, un préambule garantit le droit de grève",
+        "En 1974, la majorité et le droit de vote passent à 18 ans",
+        "En 1975, la loi Veil est votée",
+        "En 2005, les Français rejettent par référendum le traité constitutionnel européen"
+      ]
+    }
+  ]
+}

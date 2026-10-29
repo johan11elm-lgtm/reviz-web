@@ -1,0 +1,149 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Jean de La Fontaine",
+      "detail": "Le fabuliste dont la fable « Les Animaux malades de la peste » (1678) dénonce une justice qui épargne les puissants et condamne les faibles.",
+      "cartes": [
+        "Un âne condamné pour une faute légère",
+        "« Selon que vous serez puissant ou misérable »",
+        "Une fable du livre VII, parue en 1678",
+        "Des animaux qui parlent pour critiquer les puissants",
+        "Un lion qui cherche le plus coupable à sacrifier"
+      ]
+    },
+    {
+      "nom": "Charles de Montesquieu",
+      "detail": "L'auteur d'une dénonciation ironique de l'esclavage dans De l'esprit des lois (1748) : il feint de le défendre pour en montrer l'absurdité.",
+      "cartes": [
+        "Un extrait de L'Esprit des lois",
+        "Un texte qui feint de défendre l'esclavage",
+        "Un argument absurde : le sucre deviendrait trop cher",
+        "Une ironie qu'il faut lire au second degré",
+        "Un texte du XVIIIe siècle"
+      ]
+    },
+    {
+      "nom": "Victor Hugo",
+      "detail": "Le poète de « Melancholia » (Les Contemplations, 1856), qui dénonce le travail des enfants dans les usines.",
+      "cartes": [
+        "Un poème extrait des Contemplations",
+        "Un texte intitulé « Melancholia »",
+        "Des enfants épuisés par le travail en usine",
+        "« Où vont tous ces enfants… »",
+        "Un texte publié en 1856"
+      ]
+    },
+    {
+      "nom": "Émile Zola",
+      "detail": "L'auteur de « J'accuse…! » (L'Aurore, 13 janvier 1898), lettre ouverte pour défendre le capitaine Dreyfus.",
+      "cartes": [
+        "Une lettre ouverte publiée dans L'Aurore",
+        "Un texte daté du 13 janvier 1898",
+        "La défense d'un capitaine condamné à tort",
+        "Une accusation qui nomme les responsables",
+        "Un cri d'indignation contre une erreur judiciaire"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Quel procédé est en couleur ?",
+      "texte": "Un journaliste écrit en première page : [« J'accuse les chefs de l'armée d'avoir fait condamner un innocent ! »]",
+      "choix": ["Accusation directe", "Ironie", "Caricature", "Apologue"],
+      "bonne": 0,
+      "explication": "L'auteur accuse ouvertement, sans détour : c'est une dénonciation directe, comme celle de Zola dans « J'accuse…! »."
+    },
+    {
+      "consigne": "Quel procédé est en couleur ?",
+      "texte": "Sous une pluie battante, il s'écrie : [« Quel temps magnifique ! »]",
+      "choix": ["Accusation directe", "Ironie", "Caricature", "Apologue"],
+      "bonne": 1,
+      "explication": "Il dit le contraire de ce qu'il pense en laissant comprendre sa vraie pensée : c'est de l'ironie (une antiphrase)."
+    },
+    {
+      "consigne": "Quel procédé est en couleur ?",
+      "texte": "Dans un journal, un dessinateur montre un roi avec [une tête minuscule et un ventre énorme].",
+      "choix": ["Accusation directe", "Ironie", "Caricature", "Apologue"],
+      "bonne": 2,
+      "explication": "Le dessin exagère les traits du roi pour se moquer de lui : c'est une caricature, comme chez Daumier."
+    },
+    {
+      "consigne": "Quel procédé est en couleur ?",
+      "texte": "La Fontaine [met en scène des animaux et termine par une morale] pour critiquer la justice.",
+      "choix": ["Accusation directe", "Ironie", "Caricature", "Apologue"],
+      "bonne": 3,
+      "explication": "Un court récit qui illustre une leçon morale est un apologue : la fable en est un."
+    },
+    {
+      "consigne": "Quel procédé est en couleur ?",
+      "texte": "Montesquieu [feint de défendre l'esclavage avec des arguments absurdes] pour mieux le condamner.",
+      "choix": ["Accusation directe", "Ironie", "Caricature", "Apologue"],
+      "bonne": 1,
+      "explication": "Montesquieu ne pense pas ce qu'il écrit : l'absurdité des arguments révèle sa vraie pensée. C'est de l'ironie."
+    },
+    {
+      "consigne": "Quel procédé est en couleur ?",
+      "texte": "Dans une lettre ouverte, Zola [accuse nommément les responsables d'une erreur judiciaire].",
+      "choix": ["Accusation directe", "Ironie", "Caricature", "Apologue"],
+      "bonne": 0,
+      "explication": "Zola nomme ouvertement les coupables, sans fiction ni ironie : c'est une dénonciation directe."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Candide",
+      "acceptees": ["Candide, ou l'Optimisme", "Candide ou l'optimisme"],
+      "indices": [
+        "Je suis un conte philosophique.",
+        "Au chapitre 19, on y rencontre un esclave de Surinam, mutilé.",
+        "Voltaire m'a publié en 1759."
+      ],
+      "explication": "Dans Candide (1759), Voltaire fait dénoncer l'esclavage par l'esclave de Surinam : « C'est à ce prix que vous mangez du sucre en Europe »."
+    },
+    {
+      "reponse": "Daumier",
+      "acceptees": ["Honoré Daumier"],
+      "indices": [
+        "Je suis un artiste français du XIXe siècle.",
+        "Je dessine des caricatures qui se moquent des puissants de mon temps.",
+        "Mon prénom est Honoré."
+      ],
+      "explication": "Honoré Daumier caricature les puissants de son temps au XIXe siècle."
+    },
+    {
+      "reponse": "Ironie",
+      "acceptees": ["L'ironie"],
+      "indices": [
+        "Je suis un procédé qui permet de critiquer en faisant sourire.",
+        "Je fais dire le contraire de ce que l'on pense, en laissant deviner la vraie pensée.",
+        "Ma forme la plus nette s'appelle l'antiphrase."
+      ],
+      "explication": "L'ironie dit le contraire de ce que l'on pense ; l'antiphrase en est la forme la plus nette."
+    },
+    {
+      "reponse": "Apologue",
+      "acceptees": ["Un apologue", "L'apologue"],
+      "indices": [
+        "Je suis un court récit.",
+        "Je cache une leçon morale derrière une histoire.",
+        "La fable et le conte philosophique sont mes deux formes."
+      ],
+      "explication": "L'apologue est un court récit qui illustre une leçon morale ; la fable et le conte philosophique en sont."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Les textes dans l'ordre de leur publication",
+      "etapes": [
+        "Les Animaux malades de la peste, de La Fontaine",
+        "Un extrait de L'Esprit des lois, de Montesquieu",
+        "Candide, de Voltaire",
+        "« Melancholia », de Victor Hugo",
+        "« J'accuse…! », de Zola"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,120 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Les statuts administratifs",
+      "detail": "Départements d'outre-mer, collectivités autonomes et cas particuliers parmi les territoires ultramarins.",
+      "cartes": [
+        "Cinq territoires où les lois françaises s'appliquent comme en métropole",
+        "Une large autonomie, comme la Polynésie française",
+        "Mayotte est devenue un département en 2011",
+        "Un régime particulier pour la Nouvelle-Calédonie",
+        "Faire partie de l'UE comme région ultrapériphérique"
+      ]
+    },
+    {
+      "nom": "Éloignement, insularité et risques naturels",
+      "detail": "La distance, la mer et les catastrophes naturelles qui pèsent sur ces territoires.",
+      "cartes": [
+        "À plusieurs milliers de kilomètres de la métropole",
+        "La plupart des territoires ultramarins sont des îles",
+        "Cyclones, séismes et volcans",
+        "Le Piton de la Fournaise, volcan très actif",
+        "En décembre 2024, le cyclone Chido a dévasté Mayotte"
+      ]
+    },
+    {
+      "nom": "Les retards de développement",
+      "detail": "Les écarts qui persistent entre les outre-mer et la métropole.",
+      "cartes": [
+        "Un chômage plus élevé qu'en métropole",
+        "Un PIB par habitant plus faible",
+        "Une vie plus chère qu'en métropole",
+        "Un manque de logements et d'équipements",
+        "Une forte dépendance envers la métropole"
+      ]
+    },
+    {
+      "nom": "Les atouts pour la France",
+      "detail": "Ce que les outre-mer apportent à la France dans le monde.",
+      "cartes": [
+        "Une immense zone économique exclusive, la deuxième du monde",
+        "La forêt guyanaise et les récifs coralliens",
+        "Le Centre spatial guyanais lance les fusées Ariane",
+        "Des touristes attirés par ces territoires",
+        "Une présence française dans tous les océans"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "l'importation de nombreux produits en outre-mer",
+      "carte": "L'éloignement et l'insularité",
+      "role": "cause",
+      "explication": "Loin de la métropole et entourés par la mer, ces territoires doivent importer beaucoup par bateau ou par avion."
+    },
+    {
+      "fait": "l'importation de nombreux produits en outre-mer",
+      "carte": "Des marchés locaux de petite taille",
+      "role": "cause",
+      "explication": "Les marchés étant petits, beaucoup de produits doivent être importés."
+    },
+    {
+      "fait": "l'importation de nombreux produits en outre-mer",
+      "carte": "Des prix plus élevés qu'en métropole",
+      "role": "consequence",
+      "explication": "Le transport et le faible nombre de concurrents augmentent les prix."
+    },
+    {
+      "fait": "l'importation de nombreux produits en outre-mer",
+      "carte": "Des frais de transport par bateau ou par avion",
+      "role": "consequence",
+      "explication": "Faire venir les produits de loin oblige à payer leur transport."
+    }
+  ],
+  "etiquettes": [],
+  "devinettes": [
+    {
+      "reponse": "Mayotte",
+      "acceptees": [],
+      "indices": [
+        "Je suis une île.",
+        "Je suis dans l'océan Indien, près de Madagascar.",
+        "Je suis devenue un département en 2011, et le cyclone Chido m'a dévastée en décembre 2024."
+      ],
+      "explication": "Mayotte, dans l'océan Indien, est un département depuis 2011 ; le cyclone Chido l'a dévastée en décembre 2024."
+    },
+    {
+      "reponse": "La Guyane",
+      "acceptees": ["Guyane", "Guyane française"],
+      "indices": [
+        "Je suis un territoire d'outre-mer.",
+        "Je suis située en Amérique du Sud.",
+        "Je suis le seul DROM situé sur un continent, avec le Centre spatial de Kourou."
+      ],
+      "explication": "La Guyane, en Amérique du Sud, est le seul DROM situé sur un continent ; elle abrite le Centre spatial de Kourou."
+    },
+    {
+      "reponse": "La ZEE",
+      "acceptees": ["ZEE", "Zone économique exclusive", "La zone économique exclusive"],
+      "indices": [
+        "Je suis un espace maritime.",
+        "Je m'étends jusqu'à 200 milles marins des côtes d'un État.",
+        "La France possède la deuxième du monde, grâce à ses outre-mer."
+      ],
+      "explication": "La zone économique exclusive est un espace maritime de 200 milles marins dont l'État exploite les ressources ; celle de la France est la deuxième du monde."
+    },
+    {
+      "reponse": "Saint-Pierre-et-Miquelon",
+      "acceptees": ["Saint Pierre et Miquelon"],
+      "indices": [
+        "Je suis une collectivité d'outre-mer.",
+        "Je suis dans l'océan Atlantique.",
+        "Je suis situé tout près du Canada."
+      ],
+      "explication": "Saint-Pierre-et-Miquelon, dans l'Atlantique près du Canada, est une collectivité d'outre-mer."
+    }
+  ],
+  "calculs": [],
+  "etapes": []
+}

@@ -1,0 +1,149 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Donner un ordre ou une indication",
+      "detail": "Des phrases à l'impératif, sans sujet, qui disent à quelqu'un quoi faire ou par où passer.",
+      "cartes": [
+        "Turn left at the bank",
+        "Go straight on, then cross the street",
+        "Take the first street on the right",
+        "Open the door, please",
+        "Take the Tube to the station"
+      ]
+    },
+    {
+      "nom": "Dire de ne pas faire quelque chose",
+      "detail": "Des phrases à l'impératif négatif : Don't + base verbale pour interdire ou déconseiller.",
+      "cartes": [
+        "Don't cross the road here",
+        "Don't run in the park",
+        "Don't turn right at the bank",
+        "Don't stop at the station",
+        "Don't take the black cab"
+      ]
+    },
+    {
+      "nom": "Proposer de faire ensemble",
+      "detail": "Des phrases avec Let's + base verbale, pour proposer une activité à plusieurs.",
+      "cartes": [
+        "Let's visit the museum",
+        "Let's go to the park",
+        "Let's take the Tube",
+        "Let's take a black cab",
+        "Let's go to the library"
+      ]
+    },
+    {
+      "nom": "Demander son chemin",
+      "detail": "Des questions polies pour savoir où se trouve un lieu ou comment y aller.",
+      "cartes": [
+        "Excuse me, where is the station, please?",
+        "How can I get to the museum?",
+        "Where is the library, please?",
+        "Excuse me, how can I get to the hospital?",
+        "Excuse me, where is the bus stop?"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Que fait la personne avec le passage en couleur ?",
+      "texte": "Excuse me, how can I get to the museum? — [Go straight on], then take the first street on the left.",
+      "choix": ["Elle donne un ordre ou une indication", "Elle interdit quelque chose", "Elle propose de faire ensemble", "Elle demande son chemin"],
+      "bonne": 0,
+      "explication": "« Go straight on » commence directement par le verbe, sans sujet : c'est une indication de route à l'impératif."
+    },
+    {
+      "consigne": "Que fait la personne avec le passage en couleur ?",
+      "texte": "The road is very busy. [Don't cross the road here], please.",
+      "choix": ["Elle donne un ordre ou une indication", "Elle interdit quelque chose", "Elle propose de faire ensemble", "Elle demande son chemin"],
+      "bonne": 1,
+      "explication": "Don't + base verbale dit de ne pas faire quelque chose : c'est l'impératif négatif."
+    },
+    {
+      "consigne": "Que fait la personne avec le passage en couleur ?",
+      "texte": "It's a beautiful day in London. [Let's take the Tube] to Big Ben!",
+      "choix": ["Elle donne un ordre ou une indication", "Elle interdit quelque chose", "Elle propose de faire ensemble", "Elle demande son chemin"],
+      "bonne": 2,
+      "explication": "Let's (Let us) + base verbale sert à proposer de faire quelque chose ensemble."
+    },
+    {
+      "consigne": "Que fait la personne avec le passage en couleur ?",
+      "texte": "[Excuse me, where is the station, please?] — It's on your right, next to the bank.",
+      "choix": ["Elle donne un ordre ou une indication", "Elle interdit quelque chose", "Elle propose de faire ensemble", "Elle demande son chemin"],
+      "bonne": 3,
+      "explication": "Excuse me, where is…, please? est la façon polie de demander son chemin."
+    },
+    {
+      "consigne": "Que fait la personne avec le passage en couleur ?",
+      "texte": "[Cross the street] and the bank is on your left.",
+      "choix": ["Elle donne un ordre ou une indication", "Elle interdit quelque chose", "Elle propose de faire ensemble", "Elle demande son chemin"],
+      "bonne": 0,
+      "explication": "« Cross the street » est un verbe à la base verbale, sans sujet : c'est une indication à l'impératif."
+    },
+    {
+      "consigne": "Que fait la personne avec le passage en couleur ?",
+      "texte": "[Don't turn left]! The station is on your right.",
+      "choix": ["Elle donne un ordre ou une indication", "Elle interdit quelque chose", "Elle propose de faire ensemble", "Elle demande son chemin"],
+      "bonne": 1,
+      "explication": "« Don't turn left » dit de ne pas tourner à gauche : c'est une interdiction avec Don't."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Big Ben",
+      "acceptees": ["Big Ben"],
+      "indices": [
+        "Les touristes me photographient souvent à Londres.",
+        "Je suis une grande cloche.",
+        "Je suis dans la tour Elizabeth, au palais de Westminster, où siège le Parlement."
+      ],
+      "explication": "Big Ben est la grande cloche de la tour Elizabeth, au palais de Westminster."
+    },
+    {
+      "reponse": "The Thames",
+      "acceptees": ["The Thames", "Thames", "La Tamise", "Tamise"],
+      "indices": [
+        "Je coule en Angleterre.",
+        "Je suis un fleuve.",
+        "Je traverse Londres, la capitale du Royaume-Uni, d'ouest en est."
+      ],
+      "explication": "La Tamise (the Thames) est le fleuve qui traverse Londres."
+    },
+    {
+      "reponse": "Buckingham Palace",
+      "acceptees": ["Buckingham Palace", "Buckingham", "Le palais de Buckingham", "Palais de Buckingham"],
+      "indices": [
+        "Je suis un monument de Londres que l'on visite.",
+        "Je suis le siège de la monarchie.",
+        "Je suis la résidence officielle du roi à Londres."
+      ],
+      "explication": "Buckingham Palace est la résidence officielle du roi à Londres, siège de la monarchie."
+    },
+    {
+      "reponse": "Edinburgh",
+      "acceptees": ["Edinburgh", "Édimbourg", "Edimbourg"],
+      "indices": [
+        "Je suis la capitale d'une des quatre nations du Royaume-Uni.",
+        "Ma nation est au nord de l'Angleterre.",
+        "Je suis la capitale de l'Écosse."
+      ],
+      "explication": "Edinburgh (Édimbourg) est la capitale de l'Écosse."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Un dialogue pour trouver le musée",
+      "etapes": [
+        "Excuse me, how can I get to the museum, please?",
+        "Go straight on",
+        "Then take the first street on the left",
+        "It's on your right, opposite the bank",
+        "Thank you very much"
+      ]
+    }
+  ]
+}

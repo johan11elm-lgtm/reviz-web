@@ -1,0 +1,166 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Le circuit en série",
+      "detail": "Un montage à une seule boucle, où les dipôles se suivent.",
+      "cartes": [
+        "Le courant n'a qu'un seul chemin possible",
+        "Une lampe grille : toutes les autres s'éteignent",
+        "En ajoutant des lampes identiques, elles brillent moins",
+        "Aucun point du circuit n'est relié à trois fils",
+        "Les dipôles se suivent les uns après les autres"
+      ]
+    },
+    {
+      "nom": "Le circuit en dérivation",
+      "detail": "Un montage à plusieurs branches qui fonctionnent indépendamment.",
+      "cartes": [
+        "Un nœud est relié à au moins trois fils",
+        "Une lampe grille : les autres continuent de briller",
+        "La branche qui contient la pile est la branche principale",
+        "Dans la maison, éteindre la télévision laisse le réfrigérateur allumé",
+        "Deux lampes dans deux branches entre les mêmes nœuds"
+      ]
+    },
+    {
+      "nom": "Le court-circuit",
+      "detail": "Un simple fil relie les deux bornes d'un dipôle.",
+      "cartes": [
+        "Un fil relie directement les deux bornes d'une lampe",
+        "Le courant passe par le fil plutôt que par la lampe",
+        "Un fil joint les deux bornes de la pile",
+        "Le courant devient très intense dans les fils",
+        "La pile et les fils chauffent fortement"
+      ]
+    },
+    {
+      "nom": "La sécurité électrique",
+      "detail": "La tension du secteur, les gestes à éviter et les protections de l'installation.",
+      "cartes": [
+        "La tension du secteur est de 230 V",
+        "Utiliser un sèche-cheveux les mains mouillées est dangereux",
+        "La prise de terre évacue le courant vers le sol",
+        "Le disjoncteur s'ouvre pour couper le courant",
+        "Il ne faut jamais mettre un objet dans une prise"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "le fusible fond",
+      "carte": "Un court-circuit se produit dans l'installation",
+      "role": "cause",
+      "explication": "En cas de court-circuit, le courant devient très intense : le fusible fond pour couper le circuit."
+    },
+    {
+      "fait": "le fusible fond",
+      "carte": "Le courant devient trop intense dans les fils",
+      "role": "cause",
+      "explication": "Le fusible est un fil qui fond quand le courant devient trop intense."
+    },
+    {
+      "fait": "le fusible fond",
+      "carte": "Le courant est coupé dans l'installation",
+      "role": "consequence",
+      "explication": "Quand le fusible a fondu, le circuit est ouvert : le courant ne passe plus."
+    },
+    {
+      "fait": "une lampe grille dans un circuit en série",
+      "carte": "Toutes les lampes du circuit s'éteignent",
+      "role": "consequence",
+      "explication": "En série, il n'y a qu'une boucle : une lampe grillée l'ouvre et plus rien ne fonctionne."
+    }
+  ],
+  "etiquettes": [
+    {
+      "consigne": "Que décrit le passage en couleur ?",
+      "texte": "Une pile et deux lampes forment [une seule boucle, sans aucun nœud].",
+      "choix": ["Un montage en série", "Un montage en dérivation", "Un court-circuit"],
+      "bonne": 0,
+      "explication": "Une seule boucle et aucun nœud : tous les dipôles sont en série."
+    },
+    {
+      "consigne": "Que décrit le passage en couleur ?",
+      "texte": "Une pile alimente [deux lampes placées chacune dans une branche entre les mêmes nœuds].",
+      "choix": ["Un montage en série", "Un montage en dérivation", "Un court-circuit"],
+      "bonne": 1,
+      "explication": "Deux branches dérivées entre les mêmes nœuds : les lampes sont en dérivation."
+    },
+    {
+      "consigne": "Que décrit le passage en couleur ?",
+      "texte": "Dans la maison, [la télévision et le réfrigérateur fonctionnent séparément].",
+      "choix": ["Un montage en série", "Un montage en dérivation", "Un court-circuit"],
+      "bonne": 1,
+      "explication": "Les appareils de la maison sont branchés en dérivation : chacun fonctionne indépendamment des autres."
+    },
+    {
+      "consigne": "Que décrit le passage en couleur ?",
+      "texte": "[Le moteur, la lampe et la pile sont placés à la suite les uns des autres] : si on dévisse la lampe, le moteur s'arrête.",
+      "choix": ["Un montage en série", "Un montage en dérivation", "Un court-circuit"],
+      "bonne": 0,
+      "explication": "Les dipôles sont à la suite dans une seule boucle : en retirer un ouvre le circuit, c'est un montage en série."
+    },
+    {
+      "consigne": "Que décrit le passage en couleur ?",
+      "texte": "[Un fil relie directement les deux bornes de la lampe] : elle s'éteint.",
+      "choix": ["Un montage en série", "Un montage en dérivation", "Un court-circuit"],
+      "bonne": 2,
+      "explication": "Un fil entre les deux bornes d'un dipôle est un court-circuit : le courant passe par le fil et la lampe s'éteint."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Court-circuit",
+      "acceptees": ["Un court-circuit", "Le court-circuit"],
+      "indices": [
+        "Je suis une liaison par un simple fil.",
+        "Je relie les deux bornes d'un dipôle, qui ne fonctionne plus.",
+        "Si je touche une pile, le courant devient très intense et les fils chauffent."
+      ],
+      "explication": "Un court-circuit relie par un fil les deux bornes d'un dipôle ; sur une pile, il est dangereux."
+    },
+    {
+      "reponse": "Nœud",
+      "acceptees": ["Un nœud", "Le nœud", "Noeud"],
+      "indices": [
+        "Je suis un point d'un circuit.",
+        "Je suis relié à au moins trois fils.",
+        "Les branches dérivées se trouvent entre deux d'entre moi."
+      ],
+      "explication": "Un nœud est un point relié à au moins trois fils ; les branches dérivées sont entre deux nœuds."
+    },
+    {
+      "reponse": "Fusible",
+      "acceptees": ["Un fusible", "Le fusible"],
+      "indices": [
+        "Je protège une installation électrique.",
+        "Je suis un fil.",
+        "Je fonds quand le courant devient trop intense, et je coupe ainsi le courant."
+      ],
+      "explication": "Le fusible est un fil qui fond et coupe le courant quand il devient trop intense."
+    },
+    {
+      "reponse": "Branche principale",
+      "acceptees": ["La branche principale"],
+      "indices": [
+        "Je suis une partie d'un circuit en dérivation.",
+        "Je contiens le générateur.",
+        "Les autres parties du circuit partent des mêmes nœuds que moi."
+      ],
+      "explication": "La branche principale est la branche qui contient le générateur."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Les conséquences du court-circuit d'une pile",
+      "etapes": [
+        "Un fil relie les deux bornes de la pile",
+        "Le courant devient très intense",
+        "Les fils et la pile chauffent",
+        "Un incendie peut se déclarer"
+      ]
+    }
+  ]
+}

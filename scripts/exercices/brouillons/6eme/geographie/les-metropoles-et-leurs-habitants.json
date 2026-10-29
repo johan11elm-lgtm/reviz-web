@@ -1,0 +1,181 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Les mégapoles",
+      "detail": "Les très grandes agglomérations de plus de 10 millions d'habitants, nombreuses en Asie.",
+      "cartes": [
+        "Une agglomération de plus de 10 millions d'habitants",
+        "Tokyo, Delhi et Shanghai en Asie",
+        "Le Caire, en Égypte",
+        "Lagos, au Nigeria",
+        "Mexico et São Paulo en Amérique"
+      ]
+    },
+    {
+      "nom": "Le quartier d'affaires",
+      "detail": "Le quartier de bureaux et de gratte-ciel où se trouvent les sièges d'entreprises.",
+      "cartes": [
+        "Des gratte-ciel remplis de bureaux",
+        "Les sièges des grandes entreprises",
+        "Manhattan, au cœur de New York",
+        "La Défense, à l'ouest de Paris",
+        "Souvent situé au centre de la métropole"
+      ]
+    },
+    {
+      "nom": "Le périurbain",
+      "detail": "L'espace autour de la ville où se mêlent maisons, zones commerciales et champs.",
+      "cartes": [
+        "Des lotissements de maisons individuelles",
+        "Des zones commerciales au bord des routes",
+        "Des champs mêlés aux maisons",
+        "Les champs reculent devant les nouvelles constructions",
+        "Il commence au-delà des banlieues"
+      ]
+    },
+    {
+      "nom": "Les bidonvilles",
+      "detail": "Des quartiers d'habitat précaire, construits sans autorisation et mal équipés.",
+      "cartes": [
+        "Des maisons construites sans autorisation",
+        "Pas d'eau courante, d'électricité ni d'égouts",
+        "Dharavi, à Mumbai en Inde",
+        "Les favelas de Rio de Janeiro",
+        "Des quartiers précaires où vit environ un milliard de personnes"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "la croissance rapide des métropoles des pays pauvres",
+      "carte": "Des habitants des campagnes viennent chercher du travail en ville",
+      "role": "cause",
+      "explication": "L'exode rural, le départ des campagnes vers les villes, fait grossir les métropoles."
+    },
+    {
+      "fait": "la croissance rapide des métropoles des pays pauvres",
+      "carte": "Une forte natalité",
+      "role": "cause",
+      "explication": "Les nombreuses naissances s'ajoutent aux arrivées de ruraux et font grossir la population."
+    },
+    {
+      "fait": "la croissance rapide des métropoles des pays pauvres",
+      "carte": "Faute de logements, beaucoup s'installent dans des bidonvilles",
+      "role": "consequence",
+      "explication": "La population arrive plus vite que les logements ne sont construits."
+    },
+    {
+      "fait": "l'exode rural",
+      "carte": "Les campagnes perdent une partie de leurs habitants",
+      "role": "consequence",
+      "explication": "Ceux qui partent vers les villes ne vivent plus à la campagne."
+    },
+    {
+      "fait": "l'exode rural",
+      "carte": "Les métropoles se peuplent de nouveaux arrivants",
+      "role": "consequence",
+      "explication": "Les habitants venus des campagnes s'installent dans les villes et les font grandir."
+    }
+  ],
+  "etiquettes": [
+    {
+      "consigne": "Quel type d'espace le groupe en couleur décrit-il ?",
+      "texte": "Au cœur de New York, [des gratte-ciel de bureaux abritent des sièges d'entreprises].",
+      "choix": ["Le quartier d'affaires", "La banlieue", "Le périurbain", "Le bidonville"],
+      "bonne": 0,
+      "explication": "Des gratte-ciel de bureaux et des sièges d'entreprises : c'est un quartier d'affaires."
+    },
+    {
+      "consigne": "Quel type d'espace le groupe en couleur décrit-il ?",
+      "texte": "Autour de la ville-centre s'étend [un espace bâti en continuité avec elle].",
+      "choix": ["Le quartier d'affaires", "La banlieue", "Le périurbain", "Le bidonville"],
+      "bonne": 1,
+      "explication": "Un espace bâti en continuité avec la ville-centre, c'est la banlieue."
+    },
+    {
+      "consigne": "Quel type d'espace le groupe en couleur décrit-il ?",
+      "texte": "À 40 km de la ville, [des lotissements de maisons, une zone commerciale et des champs] se côtoient.",
+      "choix": ["Le quartier d'affaires", "La banlieue", "Le périurbain", "Le bidonville"],
+      "bonne": 2,
+      "explication": "Maisons, zones commerciales et champs mêlés : c'est le périurbain."
+    },
+    {
+      "consigne": "Quel type d'espace le groupe en couleur décrit-il ?",
+      "texte": "À Dharavi, [des habitations construites sans autorisation et sans égouts] abritent des milliers de personnes.",
+      "choix": ["Le quartier d'affaires", "La banlieue", "Le périurbain", "Le bidonville"],
+      "bonne": 3,
+      "explication": "Un habitat précaire construit sans autorisation et mal équipé : c'est un bidonville."
+    },
+    {
+      "consigne": "Quel type d'espace le groupe en couleur décrit-il ?",
+      "texte": "À l'ouest de Paris, La Défense est [un quartier de tours et de sièges d'entreprises].",
+      "choix": ["Le quartier d'affaires", "La banlieue", "Le périurbain", "Le bidonville"],
+      "bonne": 0,
+      "explication": "Des tours de bureaux et des sièges d'entreprises : La Défense est un quartier d'affaires."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Mégapole",
+      "acceptees": ["Mégapole", "Une mégapole", "Mégapoles", "Megapole"],
+      "indices": [
+        "Je suis une très grande ville.",
+        "Tokyo, Delhi et Lagos sont comme moi.",
+        "Je compte plus de 10 millions d'habitants."
+      ],
+      "explication": "Une mégapole est une agglomération de plus de 10 millions d'habitants."
+    },
+    {
+      "reponse": "Bidonville",
+      "acceptees": ["Bidonville", "Un bidonville", "Bidonvilles", "Favela"],
+      "indices": [
+        "Je suis un quartier d'une grande ville.",
+        "Dharavi, à Mumbai, est comme moi.",
+        "On m'a construit sans autorisation, souvent sans eau courante ni égouts."
+      ],
+      "explication": "Un bidonville est un quartier d'habitat précaire construit sans autorisation."
+    },
+    {
+      "reponse": "Étalement urbain",
+      "acceptees": ["Étalement urbain", "L'étalement urbain", "Etalement urbain", "Étalement"],
+      "indices": [
+        "Je fais reculer les champs.",
+        "Je me traduis par des lotissements, des routes et des zones d'activités.",
+        "Je suis l'extension de la ville sur les espaces ruraux qui l'entourent."
+      ],
+      "explication": "L'étalement urbain est l'extension de la ville sur les campagnes qui l'entourent."
+    },
+    {
+      "reponse": "Quartier d'affaires",
+      "acceptees": ["Quartier d'affaires", "Le quartier d'affaires", "Quartiers d'affaires", "Centre d'affaires"],
+      "indices": [
+        "Je suis un quartier d'une métropole.",
+        "Manhattan et La Défense sont comme moi.",
+        "J'abrite des gratte-ciel, des bureaux et des sièges d'entreprises."
+      ],
+      "explication": "Un quartier d'affaires rassemble des bureaux, des gratte-ciel et des sièges d'entreprises."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Décrire un paysage urbain",
+      "etapes": [
+        "Présenter la photo : quelle ville, quel pays, quelle vue",
+        "Découper le paysage en trois plans",
+        "Nommer l'habitat et les éléments de chaque plan",
+        "Conclure : dire dans quelle partie de la métropole on se trouve"
+      ]
+    },
+    {
+      "titre": "Du centre vers l'extérieur d'une métropole",
+      "etapes": [
+        "Le centre ancien et le quartier d'affaires",
+        "Les banlieues, bâties en continuité avec la ville",
+        "Le périurbain, mêlé aux champs",
+        "Les espaces ruraux qui entourent la métropole"
+      ]
+    }
+  ]
+}

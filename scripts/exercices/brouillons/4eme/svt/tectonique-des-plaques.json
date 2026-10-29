@@ -1,0 +1,212 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Wegener et la dérive",
+      "detail": "L'hypothèse de 1912 : les continents se déplacent. Ses arguments et la raison de son rejet.",
+      "cartes": [
+        "Argument : des côtes africaine et sud-américaine qui s'emboîtent",
+        "Les mêmes fossiles sur des continents séparés par un océan",
+        "Des traces d'anciens glaciers dans des régions tropicales",
+        "Tous les continents réunis en un seul bloc, la Pangée",
+        "Hypothèse rejetée faute d'expliquer ce qui fait bouger les continents"
+      ]
+    },
+    {
+      "nom": "Des plaques qui s'écartent",
+      "detail": "Les dorsales océaniques : du magma remonte et crée une nouvelle lithosphère océanique.",
+      "cartes": [
+        "Du magma remonte et forme une nouvelle lithosphère océanique",
+        "L'océan Atlantique s'agrandit d'environ 2 cm par an",
+        "Un volcanisme effusif et des séismes peu profonds",
+        "Roches plus âgées à mesure qu'on s'éloigne de la dorsale",
+        "Un relief sous-marin au milieu d'un océan"
+      ]
+    },
+    {
+      "nom": "Une plaque qui plonge",
+      "detail": "Les zones de subduction : une plaque océanique plus dense s'enfonce sous une autre plaque.",
+      "cartes": [
+        "Une fosse océanique se creuse",
+        "Des séismes jusqu'à de grandes profondeurs",
+        "Des volcans explosifs, comme dans les Andes",
+        "La plaque la plus dense disparaît dans le manteau",
+        "Zone du Japon, aux séismes et volcans nombreux"
+      ]
+    },
+    {
+      "nom": "La rencontre de deux continents",
+      "detail": "Les collisions : après la fermeture d'un océan, la croûte se plisse et forme une chaîne de montagnes.",
+      "cartes": [
+        "La croûte se plisse et s'épaissit",
+        "Le choc de l'Inde contre l'Asie",
+        "Aucun des deux continents ne s'enfonce vraiment",
+        "Exemple en Europe : la chaîne des Alpes",
+        "Naissance d'une chaîne de montagnes comme l'Himalaya"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "le déplacement des plaques lithosphériques",
+      "carte": "La chaleur interne que la Terre évacue en permanence",
+      "role": "cause",
+      "explication": "La chaleur interne du globe est la source d'énergie qui entraîne les plaques."
+    },
+    {
+      "fait": "le déplacement des plaques lithosphériques",
+      "carte": "Des mouvements très lents du manteau solide, appelés convection",
+      "role": "cause",
+      "explication": "La convection du manteau fait partie des mécanismes qui entraînent les plaques."
+    },
+    {
+      "fait": "le déplacement des plaques lithosphériques",
+      "carte": "L'ouverture progressive de l'océan Atlantique, à environ 2 cm par an",
+      "role": "consequence",
+      "explication": "Les plaques s'écartent à la dorsale atlantique : l'océan s'agrandit peu à peu."
+    },
+    {
+      "fait": "le déplacement des plaques lithosphériques",
+      "carte": "La formation de l'Himalaya après la rencontre de l'Inde et de l'Asie",
+      "role": "consequence",
+      "explication": "Le déplacement des plaques a conduit l'Inde à entrer en collision avec l'Asie, ce qui a plissé la croûte."
+    }
+  ],
+  "etiquettes": [
+    {
+      "consigne": "Quel type de limite entre plaques le passage en couleur décrit-il ?",
+      "texte": "Au milieu de l'Atlantique, [deux plaques s'éloignent l'une de l'autre] et du magma remonte entre elles.",
+      "choix": ["Écartement", "Subduction", "Collision", "Coulissement"],
+      "bonne": 0,
+      "explication": "Quand deux plaques s'éloignent, c'est un écartement : on le trouve aux dorsales."
+    },
+    {
+      "consigne": "Quel type de limite entre plaques le passage en couleur décrit-il ?",
+      "texte": "Au Japon, [une plaque océanique s'enfonce sous une autre plaque] et provoque des séismes profonds.",
+      "choix": ["Écartement", "Subduction", "Collision", "Coulissement"],
+      "bonne": 1,
+      "explication": "Le plongement d'une plaque océanique sous une autre plaque est une subduction."
+    },
+    {
+      "consigne": "Quel type de limite entre plaques le passage en couleur décrit-il ?",
+      "texte": "L'Inde a rejoint l'Asie : [les deux continents se rapprochent et la croûte se plisse].",
+      "choix": ["Écartement", "Subduction", "Collision", "Coulissement"],
+      "bonne": 2,
+      "explication": "Quand deux continents se rencontrent, la croûte se plisse et s'épaissit : c'est une collision."
+    },
+    {
+      "consigne": "Quel type de limite entre plaques le passage en couleur décrit-il ?",
+      "texte": "En Californie, [les deux plaques glissent l'une contre l'autre] le long de la faille de San Andreas.",
+      "choix": ["Écartement", "Subduction", "Collision", "Coulissement"],
+      "bonne": 3,
+      "explication": "Deux plaques qui glissent côte à côte coulissent : c'est le cas de la faille de San Andreas."
+    },
+    {
+      "consigne": "Quel type de limite entre plaques le passage en couleur décrit-il ?",
+      "texte": "Dans les Andes, [la plaque océanique plonge sous l'Amérique du Sud] et des volcans explosifs se forment.",
+      "choix": ["Écartement", "Subduction", "Collision", "Coulissement"],
+      "bonne": 1,
+      "explication": "Les Andes sont un exemple de subduction : la plaque océanique plonge et des volcans explosifs apparaissent."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Alfred Wegener",
+      "acceptees": ["Wegener"],
+      "indices": [
+        "En 1912, j'ai proposé une idée que la plupart des scientifiques ont rejetée.",
+        "J'ai remarqué que les côtes de l'Afrique et de l'Amérique du Sud s'emboîtent.",
+        "J'ai imaginé que tous les continents formaient autrefois un seul bloc."
+      ],
+      "explication": "Alfred Wegener a proposé la dérive des continents en 1912, mais sans pouvoir expliquer ce qui fait bouger les continents."
+    },
+    {
+      "reponse": "Pangée",
+      "acceptees": ["La Pangée"],
+      "indices": [
+        "J'ai existé il y a très longtemps, mais je n'existe plus.",
+        "J'étais un bloc unique regroupant tous les continents actuels.",
+        "Mon fractionnement explique pourquoi les côtes de l'Afrique et de l'Amérique du Sud s'emboîtent."
+      ],
+      "explication": "La Pangée est le bloc unique que formaient les continents avant de se fragmenter, selon Wegener."
+    },
+    {
+      "reponse": "Dorsale",
+      "acceptees": ["La dorsale", "Dorsale océanique"],
+      "indices": [
+        "Je suis un relief du fond des océans.",
+        "Deux plaques s'écartent à mon niveau.",
+        "Du magma remonte chez moi et fabrique de la nouvelle lithosphère océanique."
+      ],
+      "explication": "Une dorsale est un relief sous-marin où deux plaques s'écartent et où se crée de la lithosphère océanique."
+    },
+    {
+      "reponse": "Subduction",
+      "acceptees": ["La subduction"],
+      "indices": [
+        "Je me produis là où deux plaques se rapprochent.",
+        "Je creuse une fosse océanique et je déclenche des séismes profonds.",
+        "Dans mon cas, une plaque océanique plus dense passe sous une autre, comme au Japon."
+      ],
+      "explication": "La subduction est le plongement d'une plaque océanique sous une autre plaque."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "Une balise GPS s'est déplacée de 35 cm en 5 ans. Quelle est la vitesse de la plaque qui la porte, en cm par an ?",
+      "reponse": 7,
+      "unite": "cm/an",
+      "tolerance": 0,
+      "explication": "vitesse = distance ÷ durée = 35 cm ÷ 5 ans = 7 cm par an."
+    },
+    {
+      "question": "Une roche du plancher océanique a 5 millions d'années et se trouve à 150 km de la dorsale. Quelle est la vitesse de la plaque, en cm par an ? (1 km = 100 000 cm)",
+      "reponse": 3,
+      "unite": "cm/an",
+      "tolerance": 0,
+      "explication": "150 km = 15 000 000 cm. Vitesse = 15 000 000 ÷ 5 000 000 = 3 cm par an."
+    },
+    {
+      "question": "Une plaque se déplace de 5 cm par an. Quelle distance parcourt-elle en 20 ans, en mètres ?",
+      "reponse": 1,
+      "unite": "m",
+      "tolerance": 0,
+      "explication": "Distance = vitesse × durée = 5 × 20 = 100 cm, soit 1 m."
+    },
+    {
+      "question": "L'océan Atlantique s'élargit de 2 cm par an. De combien de kilomètres s'est-il élargi en 10 millions d'années ? (1 km = 100 000 cm)",
+      "reponse": 200,
+      "unite": "km",
+      "tolerance": 0,
+      "explication": "2 × 10 000 000 = 20 000 000 cm. Comme 1 km = 100 000 cm, 20 000 000 ÷ 100 000 = 200 km."
+    },
+    {
+      "question": "Une roche vieille de 8 millions d'années se trouve à 480 km de la dorsale. Quelle est la vitesse de la plaque, en cm par an ? (1 km = 100 000 cm)",
+      "reponse": 6,
+      "unite": "cm/an",
+      "tolerance": 0,
+      "explication": "480 km = 48 000 000 cm. Vitesse = 48 000 000 ÷ 8 000 000 = 6 cm par an."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "De Wegener à la tectonique des plaques",
+      "etapes": [
+        "Wegener propose la dérive des continents en 1912",
+        "Son hypothèse est rejetée faute d'explication du mouvement",
+        "Dans les années 1960, l'étude des fonds océaniques progresse",
+        "La théorie de la tectonique des plaques est établie"
+      ]
+    },
+    {
+      "titre": "La formation d'une chaîne de montagnes par collision",
+      "etapes": [
+        "Un océan sépare deux continents",
+        "L'océan se ferme peu à peu",
+        "Les deux continents se rencontrent",
+        "La croûte se plisse et s'épaissit",
+        "Une chaîne de montagnes se forme"
+      ]
+    }
+  ]
+}

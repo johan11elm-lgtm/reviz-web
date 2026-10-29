@@ -1,0 +1,197 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "La localisation des faibles densités",
+      "detail": "Les endroits de France où l'on trouve peu d'habitants au km².",
+      "cartes": [
+        "Une bande qui traverse la France du Nord-Est au Sud-Ouest",
+        "Le Massif central, au centre du pays",
+        "Les Ardennes et la Meuse, au Nord-Est",
+        "Les Landes, au Sud-Ouest",
+        "Les montagnes, souvent peu peuplées"
+      ]
+    },
+    {
+      "nom": "Les difficultés de ces territoires",
+      "detail": "Les problèmes que rencontrent beaucoup de campagnes isolées.",
+      "cartes": [
+        "Des jeunes qui partent vers les villes",
+        "Une population qui vieillit",
+        "Des commerces et des services publics qui ferment",
+        "Trop peu de médecins pour les habitants",
+        "Des territoires mal desservis et mal couverts par le numérique"
+      ]
+    },
+    {
+      "nom": "Le renouveau rural",
+      "detail": "Les nouveaux habitants qui font regagner de la population à certaines campagnes.",
+      "cartes": [
+        "Des citadins qui viennent vivre à la campagne",
+        "Des télétravailleurs qui choisissent la campagne",
+        "Des retraités qui s'installent à la campagne",
+        "Des actifs qui travaillent en ville et logent en campagne",
+        "Des campagnes proches des villes qui regagnent des habitants"
+      ]
+    },
+    {
+      "nom": "Les atouts à valoriser",
+      "detail": "Les richesses sur lesquelles ces espaces peuvent s'appuyer pour se développer.",
+      "cartes": [
+        "Des fromages de qualité, comme le comté du Jura",
+        "Le tourisme vert et de montagne",
+        "Des éoliennes et des barrages hydroélectriques",
+        "Un parc naturel régional, territoire habité et protégé",
+        "Un parc national protégé par l'État avec des règles strictes"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "l'exode rural",
+      "carte": "L'industrialisation du pays",
+      "role": "cause",
+      "explication": "L'industrialisation a attiré les ruraux vers les villes."
+    },
+    {
+      "fait": "l'exode rural",
+      "carte": "La mécanisation de l'agriculture",
+      "role": "cause",
+      "explication": "Les machines ont remplacé les bras dans les champs, ce qui a poussé les ruraux vers les villes."
+    },
+    {
+      "fait": "l'exode rural",
+      "carte": "Le vieillissement de la population des campagnes",
+      "role": "consequence",
+      "explication": "Les jeunes sont partis, donc la population restée sur place a vieilli."
+    },
+    {
+      "fait": "l'exode rural",
+      "carte": "Beaucoup de villages qui se sont vidés",
+      "role": "consequence",
+      "explication": "Après le départ massif des habitants, de nombreux villages se sont vidés."
+    },
+    {
+      "fait": "l'installation de citadins à la campagne",
+      "carte": "Le télétravail",
+      "role": "cause",
+      "explication": "Le télétravail permet de vivre à la campagne sans travailler en ville : il facilite ce mouvement."
+    },
+    {
+      "fait": "l'installation de citadins à la campagne",
+      "carte": "Un cadre de vie recherché",
+      "role": "cause",
+      "explication": "Les néoruraux, les retraités et les télétravailleurs choisissent la campagne pour son cadre de vie."
+    }
+  ],
+  "etiquettes": [
+    {
+      "consigne": "Quelle notion correspond au passage en couleur ?",
+      "texte": "Dans ce canton, [le dernier médecin est parti à la retraite sans être remplacé].",
+      "choix": ["Exode rural", "Arrivée de néoruraux", "Désert médical", "Enclavement"],
+      "bonne": 2,
+      "explication": "Un territoire où il y a trop peu de médecins pour la population est un désert médical."
+    },
+    {
+      "consigne": "Quelle notion correspond au passage en couleur ?",
+      "texte": "[Une famille de citadins s'installe dans un village de la Creuse] et y télétravaille.",
+      "choix": ["Exode rural", "Arrivée de néoruraux", "Désert médical", "Enclavement"],
+      "bonne": 1,
+      "explication": "Les néoruraux sont des citadins qui choisissent de vivre à la campagne."
+    },
+    {
+      "consigne": "Quelle notion correspond au passage en couleur ?",
+      "texte": "Entre la fin du XIXe siècle et les années 1970, [de nombreux jeunes ont quitté les campagnes pour travailler en ville].",
+      "choix": ["Exode rural", "Arrivée de néoruraux", "Désert médical", "Enclavement"],
+      "bonne": 0,
+      "explication": "Le départ massif des habitants des campagnes vers les villes est l'exode rural."
+    },
+    {
+      "consigne": "Quelle notion correspond au passage en couleur ?",
+      "texte": "Ce hameau est très isolé : [aucune route rapide ni aucun train ne le relie aux villes voisines].",
+      "choix": ["Exode rural", "Arrivée de néoruraux", "Désert médical", "Enclavement"],
+      "bonne": 3,
+      "explication": "Un territoire mal relié aux autres, difficile d'accès, est enclavé."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "La diagonale",
+      "acceptees": ["Diagonale", "La diagonale", "La diagonale des faibles densités", "Diagonale des faibles densités", "La diagonale du vide", "Diagonale du vide"],
+      "indices": [
+        "Je suis une bande qui traverse la France.",
+        "Je vais du Nord-Est au Sud-Ouest, de la Meuse aux Landes.",
+        "Je passe par le Massif central et je suis très peu peuplée."
+      ],
+      "explication": "La diagonale des faibles densités traverse la France des Ardennes aux Landes, en passant par le Massif central."
+    },
+    {
+      "reponse": "L'exode rural",
+      "acceptees": ["Exode rural", "L'exode rural", "Exode", "L'exode"],
+      "indices": [
+        "Je suis un mouvement de population qui a duré près d'un siècle.",
+        "Je pousse les habitants des campagnes à partir vers les villes.",
+        "Je suis massif de la fin du XIXe siècle aux années 1970."
+      ],
+      "explication": "L'exode rural est le départ massif des habitants des campagnes vers les villes, de la fin du XIXe siècle aux années 1970."
+    },
+    {
+      "reponse": "Un néorural",
+      "acceptees": ["Néorural", "Un néorural", "Les néoruraux", "Néoruraux", "Un néo-rural", "Néo-rural"],
+      "indices": [
+        "Je suis un citadin.",
+        "J'ai quitté la ville pour vivre à la campagne, parfois en télétravaillant.",
+        "On m'a vu arriver dans les Cévennes dès les années 1970."
+      ],
+      "explication": "Un néorural est un citadin qui s'installe à la campagne pour y vivre, et parfois y travailler."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "Un canton rural compte 4 500 habitants sur 300 km². Quelle est sa densité de population ?",
+      "reponse": 15,
+      "unite": "hab./km²",
+      "tolerance": 0,
+      "explication": "Densité = habitants ÷ superficie = 4 500 ÷ 300 = 15 hab./km²."
+    },
+    {
+      "question": "Une commune de montagne de 120 km² compte 3 600 habitants. Quelle est sa densité de population ?",
+      "reponse": 30,
+      "unite": "hab./km²",
+      "tolerance": 0,
+      "explication": "Densité = 3 600 ÷ 120 = 30 hab./km²."
+    },
+    {
+      "question": "Un département de 8 000 km² compte 96 000 habitants. Quelle est sa densité de population ?",
+      "reponse": 12,
+      "unite": "hab./km²",
+      "tolerance": 0,
+      "explication": "Densité = 96 000 ÷ 8 000 = 12 hab./km²."
+    },
+    {
+      "question": "Un parc naturel de 1 250 km² compte 25 000 habitants. Quelle est sa densité de population ?",
+      "reponse": 20,
+      "unite": "hab./km²",
+      "tolerance": 0,
+      "explication": "Densité = 25 000 ÷ 1 250 = 20 hab./km²."
+    },
+    {
+      "question": "Une commune de 150 km² a une densité de 8 hab./km². Combien d'habitants compte-t-elle ?",
+      "reponse": 1200,
+      "unite": "habitants",
+      "tolerance": 0,
+      "explication": "Habitants = densité × superficie = 8 × 150 = 1 200 habitants."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Utiliser une carte des densités",
+      "etapes": [
+        "D'abord, lis la légende : le foncé indique les fortes densités",
+        "Ensuite, repère les espaces denses : Paris, métropoles, littoraux",
+        "Puis, suis la bande claire des Ardennes aux Landes",
+        "Enfin, ajoute les montagnes et compare espaces denses et peu denses"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,139 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Acquérir l'information",
+      "detail": "Les éléments qui prennent une information sur l'environnement ou une consigne de l'utilisateur.",
+      "cartes": [
+        "Le détecteur qui repère un passage dans le couloir",
+        "Un capteur de lumière sur un lampadaire",
+        "Le bouton sur lequel on appuie",
+        "Le clavier où l'on tape un code",
+        "Un capteur qui mesure la température d'une pièce"
+      ]
+    },
+    {
+      "nom": "Traiter l'information",
+      "detail": "L'élément qui exécute un programme, analyse les mesures et décide de l'action à faire.",
+      "cartes": [
+        "Le microcontrôleur qui exécute les instructions",
+        "La carte micro:bit programmée par un élève",
+        "Le programme qui dit quoi faire selon les mesures",
+        "L'analyse des mesures venues des capteurs",
+        "Une carte Arduino qui décide de la réaction"
+      ]
+    },
+    {
+      "nom": "Informer l'utilisateur",
+      "detail": "Les éléments qui donnent un message à la personne : lumière, texte ou son.",
+      "cartes": [
+        "Le voyant qui prévient que l'objet est allumé",
+        "Le message d'erreur affiché sur un écran",
+        "Le buzzer qui sonne à la fin du minuteur",
+        "L'afficheur qui montre la température du four",
+        "Le signal sonore qui prévient d'un danger"
+      ]
+    },
+    {
+      "nom": "Éléments de la chaîne d'énergie",
+      "detail": "Les éléments qui fournissent l'énergie, la transmettent ou la transforment en action : mouvement, lumière.",
+      "cartes": [
+        "Le moteur qui fait coulisser la porte",
+        "La lampe qui éclaire le couloir",
+        "La pile qui fournit le courant électrique",
+        "Les engrenages qui transmettent le mouvement",
+        "Le ventilateur qui souffle de l'air frais"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Quelle fonction de la chaîne d'information réalise le passage en couleur ?",
+      "texte": "Dans un couloir, [le détecteur de mouvement repère le passage d'une personne].",
+      "choix": ["Acquérir", "Traiter", "Communiquer"],
+      "bonne": 0,
+      "explication": "Le détecteur prend une information sur l'environnement : c'est la fonction acquérir."
+    },
+    {
+      "consigne": "Quelle fonction de la chaîne d'information réalise le passage en couleur ?",
+      "texte": "Quand la nuit tombe, [le microcontrôleur analyse la mesure reçue et décide de l'action à faire].",
+      "choix": ["Acquérir", "Traiter", "Communiquer"],
+      "bonne": 1,
+      "explication": "Analyser l'information et décider grâce à un programme, c'est la fonction traiter."
+    },
+    {
+      "consigne": "Quelle fonction de la chaîne d'information réalise le passage en couleur ?",
+      "texte": "À l'entrée d'un magasin, [la carte envoie l'ordre d'ouvrir au moteur de la porte].",
+      "choix": ["Acquérir", "Traiter", "Communiquer"],
+      "bonne": 2,
+      "explication": "Envoyer un ordre à la chaîne d'énergie, c'est communiquer. Le moteur, lui, fait partie de la chaîne d'énergie."
+    },
+    {
+      "consigne": "Quelle fonction de la chaîne d'information réalise le passage en couleur ?",
+      "texte": "Un robot arrive près d'un mur : [son capteur de distance mesure l'écart avec l'obstacle].",
+      "choix": ["Acquérir", "Traiter", "Communiquer"],
+      "bonne": 0,
+      "explication": "Le capteur transforme la distance en signal électrique : il acquiert l'information."
+    },
+    {
+      "consigne": "Quelle fonction de la chaîne d'information réalise le passage en couleur ?",
+      "texte": "Dans une serre, [le programme compare la température mesurée à celle qui est souhaitée].",
+      "choix": ["Acquérir", "Traiter", "Communiquer"],
+      "bonne": 1,
+      "explication": "Comparer la mesure à la valeur souhaitée pour décider de l'action, c'est traiter l'information."
+    },
+    {
+      "consigne": "Quelle fonction de la chaîne d'information réalise le passage en couleur ?",
+      "texte": "Sur un four, [un petit écran affiche la température à l'utilisateur].",
+      "choix": ["Acquérir", "Traiter", "Communiquer"],
+      "bonne": 2,
+      "explication": "Donner un message à l'utilisateur par un écran, c'est communiquer."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Capteur",
+      "acceptees": ["Un capteur", "Capteur", "Détecteur", "Un détecteur"],
+      "indices": [
+        "Je suis un composant d'un objet automatisé.",
+        "Je détecte une grandeur physique comme la lumière, la température ou la distance.",
+        "Je transforme cette grandeur en signal électrique que la carte peut lire."
+      ],
+      "explication": "Le capteur détecte une grandeur physique et la transforme en signal électrique : c'est lui qui acquiert l'information."
+    },
+    {
+      "reponse": "Microcontrôleur",
+      "acceptees": ["Un microcontrôleur", "Le microcontrôleur", "Micro-contrôleur"],
+      "indices": [
+        "Je suis un tout petit composant électronique.",
+        "Je me trouve sur une carte comme la micro:bit ou l'Arduino.",
+        "J'exécute un programme pour traiter les informations et décider de l'action à faire."
+      ],
+      "explication": "Le microcontrôleur, sur la carte programmable, exécute le programme : c'est lui qui traite l'information."
+    },
+    {
+      "reponse": "Signal logique",
+      "acceptees": ["Logique", "Un signal logique", "Tout ou rien", "Signal tout ou rien", "Binaire", "Signal binaire", "Signal numérique", "Numérique"],
+      "indices": [
+        "Je suis une façon de transmettre une information électrique.",
+        "Je ne prends que deux valeurs.",
+        "On me note 0 ou 1, comme pour un bouton appuyé ou relâché."
+      ],
+      "explication": "Un signal logique ne prend que deux valeurs, 0 ou 1. Un signal analogique, lui, varie de façon continue."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Le fonctionnement d'un éclairage automatique",
+      "etapes": [
+        "Une personne entre dans le couloir",
+        "Le détecteur de mouvement repère son passage",
+        "La carte programmable analyse la mesure et décide",
+        "La carte envoie l'ordre d'allumer à la lampe",
+        "La lampe s'allume dans le couloir"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,200 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Fonction linéaire",
+      "detail": "Les fonctions de la forme f(x) = ax, qui traduisent la proportionnalité.",
+      "cartes": [
+        "f(x) = −4x",
+        "f(x) = 0,75x",
+        "Le prix de x kg de pommes à 3 € le kg",
+        "Augmenter un prix x de 20 %",
+        "La distance parcourue en x heures à 60 km/h"
+      ]
+    },
+    {
+      "nom": "Affine, ni linéaire ni constante",
+      "detail": "Les fonctions de la forme f(x) = ax + b avec a différent de 0 et b différent de 0.",
+      "cartes": [
+        "g(x) = 2x + 3",
+        "g(x) = −x + 4",
+        "g(x) = 5 − 3x",
+        "Un club : 15 € d'inscription puis 2 € par séance",
+        "Une location : 40 € fixes plus 0,5 € par kilomètre"
+      ]
+    },
+    {
+      "nom": "Fonction constante",
+      "detail": "Les fonctions de la forme f(x) = b, qui donnent toujours le même résultat.",
+      "cartes": [
+        "h(x) = 5",
+        "h(x) = −2",
+        "f(x) = 3, pour tout nombre x",
+        "Un forfait à 12 € par mois, quel que soit le nombre de films",
+        "Une droite horizontale qui coupe l'axe des ordonnées en 4"
+      ]
+    },
+    {
+      "nom": "Fonction non affine",
+      "detail": "Les fonctions qui ne s'écrivent pas ax + b, donc dont la représentation n'est pas une droite.",
+      "cartes": [
+        "k(x) = x² + 1",
+        "k(x) = 5x²",
+        "k(x) = 2/x",
+        "L'aire d'un carré de côté x",
+        "Le volume d'un cube d'arête x"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "D'après le nombre en couleur, que fait la droite qui représente la fonction ?",
+      "texte": "La fonction f est définie par f(x) = [2]x + 3.",
+      "choix": ["Elle monte", "Elle descend", "Elle est horizontale"],
+      "bonne": 0,
+      "explication": "Le coefficient directeur 2 est positif : la droite monte."
+    },
+    {
+      "consigne": "D'après le nombre en couleur, que fait la droite qui représente la fonction ?",
+      "texte": "La fonction g est définie par g(x) = [−2]x + 4.",
+      "choix": ["Elle monte", "Elle descend", "Elle est horizontale"],
+      "bonne": 1,
+      "explication": "Le coefficient directeur −2 est négatif : la droite descend."
+    },
+    {
+      "consigne": "D'après le nombre en couleur, que fait la droite qui représente la fonction ?",
+      "texte": "La fonction h est définie par h(x) = [0]x + 6.",
+      "choix": ["Elle monte", "Elle descend", "Elle est horizontale"],
+      "bonne": 2,
+      "explication": "Le coefficient directeur est 0 : la droite est parallèle à l'axe des abscisses, donc horizontale."
+    },
+    {
+      "consigne": "D'après le nombre en couleur, que fait la droite qui représente la fonction ?",
+      "texte": "La fonction k est définie par k(x) = [−0,5]x.",
+      "choix": ["Elle monte", "Elle descend", "Elle est horizontale"],
+      "bonne": 1,
+      "explication": "Le coefficient directeur −0,5 est négatif : la droite descend."
+    },
+    {
+      "consigne": "D'après le nombre en couleur, que fait la droite qui représente la fonction ?",
+      "texte": "La fonction m est définie par m(x) = [4]x − 7.",
+      "choix": ["Elle monte", "Elle descend", "Elle est horizontale"],
+      "bonne": 0,
+      "explication": "Le coefficient directeur 4 est positif : la droite monte."
+    },
+    {
+      "consigne": "D'après le nombre en couleur, que fait la droite qui représente la fonction ?",
+      "texte": "La fonction p est définie par p(x) = [0,3]x.",
+      "choix": ["Elle monte", "Elle descend", "Elle est horizontale"],
+      "bonne": 0,
+      "explication": "Le coefficient directeur 0,3 est positif : la droite monte."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Coefficient directeur",
+      "acceptees": ["Coefficient directeur", "Le coefficient directeur", "Pente", "Coefficient", "a"],
+      "indices": [
+        "Je suis un nombre associé à une droite.",
+        "Je suis ce dont on monte ou descend quand on avance de 1 vers la droite.",
+        "Dans f(x) = 2x + 3, je vaux 2."
+      ],
+      "explication": "Le coefficient directeur a donne la pente de la droite : on monte (ou descend) de a quand on avance de 1."
+    },
+    {
+      "reponse": "Ordonnée à l'origine",
+      "acceptees": ["Ordonnée à l'origine", "L'ordonnée à l'origine", "Ordonnée", "b"],
+      "indices": [
+        "Je suis un nombre que l'on lit sur un axe du repère.",
+        "Je suis la valeur de f(0).",
+        "Je suis l'endroit où la droite coupe l'axe vertical."
+      ],
+      "explication": "L'ordonnée à l'origine b vaut f(0) : la droite coupe l'axe des ordonnées au point (0 ; b)."
+    },
+    {
+      "reponse": "Fonction linéaire",
+      "acceptees": ["Fonction linéaire", "Une fonction linéaire", "Linéaire"],
+      "indices": [
+        "Je modélise la proportionnalité.",
+        "Ma représentation graphique est une droite qui passe par l'origine.",
+        "Je m'écris ax, sans nombre ajouté, comme 3x."
+      ],
+      "explication": "Une fonction linéaire s'écrit f(x) = ax et se représente par une droite passant par l'origine."
+    },
+    {
+      "reponse": "Fonction constante",
+      "acceptees": ["Fonction constante", "Une fonction constante", "Constante"],
+      "indices": [
+        "Je suis un cas particulier d'expression ax + b.",
+        "Mon coefficient directeur vaut 0.",
+        "Ma droite est parallèle à l'axe des abscisses."
+      ],
+      "explication": "Une fonction constante s'écrit f(x) = b : elle donne le même résultat pour tout x et sa droite est horizontale."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "Soit f(x) = 3x − 7. Que vaut f(4) ?",
+      "reponse": 5,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "f(4) = 3 × 4 − 7 = 12 − 7 = 5."
+    },
+    {
+      "question": "f est une fonction linéaire telle que f(6) = 15. Quel est son coefficient a ?",
+      "reponse": 2.5,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "Pour une fonction linéaire, f(x) = ax donc a = f(6) ÷ 6 = 15 ÷ 6 = 2,5."
+    },
+    {
+      "question": "f est une fonction affine telle que f(1) = 4 et f(4) = 13. Quel est son coefficient directeur ?",
+      "reponse": 3,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "a = (f(4) − f(1)) / (4 − 1) = (13 − 4) / 3 = 9 / 3 = 3."
+    },
+    {
+      "question": "f est une fonction affine telle que f(1) = 4 et f(4) = 13. Quelle est son ordonnée à l'origine ?",
+      "reponse": 1,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "Le coefficient directeur vaut 3, donc f(x) = 3x + b. Avec f(1) = 4 : 3 × 1 + b = 4, d'où b = 1. Vérification : f(4) = 3 × 4 + 1 = 13."
+    },
+    {
+      "question": "Un prix de 80 € augmente de 15 %. Quel est le nouveau prix ?",
+      "reponse": 92,
+      "unite": "€",
+      "tolerance": 0,
+      "explication": "Augmenter de 15 %, c'est multiplier par 1 + 15/100 = 1,15. Le nouveau prix est 80 × 1,15 = 92 €."
+    },
+    {
+      "question": "L'offre A coûte f(x) = 4x euros et l'offre B coûte g(x) = x + 12 euros pour x séances. Pour combien de séances les deux offres coûtent-elles le même prix ?",
+      "reponse": 4,
+      "unite": "séances",
+      "tolerance": 0,
+      "explication": "On résout 4x = x + 12 : 3x = 12, donc x = 4. Pour 4 séances, les deux offres coûtent 16 €."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Trouver f(x) = ax + b quand f(2) = 7 et f(5) = 13",
+      "etapes": [
+        "On calcule a = (13 − 7) / (5 − 2) = 2",
+        "On remplace dans f(x) = 2x + b avec f(2) = 7 : b = 3",
+        "On écrit la fonction : f(x) = 2x + 3",
+        "On vérifie avec l'autre valeur : f(5) = 13"
+      ]
+    },
+    {
+      "titre": "Comparer deux offres avec des fonctions",
+      "etapes": [
+        "On traduit chaque offre par une fonction",
+        "On écrit l'équation qui égalise les deux prix",
+        "On résout cette équation",
+        "On conclut : avant cette valeur une offre est moins chère, après c'est l'autre"
+      ]
+    }
+  ]
+}

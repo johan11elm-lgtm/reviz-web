@@ -1,0 +1,164 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Stéréotypes et préjugés",
+      "detail": "Les idées toutes faites sur un groupe et les jugements portés à l'avance : ce que l'on pense, avant tout acte.",
+      "cartes": [
+        "« Les filles sont nulles en maths »",
+        "« Les garçons ne savent pas cuisiner »",
+        "Une idée toute faite et caricaturale sur un groupe",
+        "Un jugement porté à l'avance, sans connaître la personne",
+        "« Les adolescents ne pensent qu'à leur téléphone »"
+      ]
+    },
+    {
+      "nom": "Des discriminations",
+      "detail": "Des actes qui traitent une personne moins bien à cause d'un critère interdit par la loi.",
+      "cartes": [
+        "Refuser un logement parce que le nom laisse deviner l'origine",
+        "Refuser un candidat compétent parce qu'il est en fauteuil roulant",
+        "Écarter une fille d'un club à cause de son sexe",
+        "Refuser l'accès à un magasin à cause de l'apparence physique",
+        "Refuser un emploi à cause de l'orientation sexuelle"
+      ]
+    },
+    {
+      "nom": "Les droits des femmes",
+      "detail": "Les grandes étapes, de 1944 à 2000, qui rapprochent les droits des femmes de ceux des hommes.",
+      "cartes": [
+        "En 1944, une ordonnance accorde le droit de vote",
+        "En 1945, voter pour la première fois",
+        "En 1965, ouvrir un compte bancaire sans l'accord du mari",
+        "En 1972, une loi sur l'égalité des salaires",
+        "En 2000, une loi impose la parité en politique"
+      ]
+    },
+    {
+      "nom": "Agir en cas de discrimination",
+      "detail": "Les réactions possibles quand on est victime ou témoin d'une discrimination ou d'un harcèlement.",
+      "cartes": [
+        "Porter plainte auprès de la police",
+        "Demander gratuitement l'aide du Défenseur des droits",
+        "Appeler le 3018, numéro gratuit contre le harcèlement",
+        "En parler à un adulte de confiance",
+        "Garder des preuves des messages reçus"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "une discrimination",
+      "carte": "Des stéréotypes sur un groupe de personnes",
+      "role": "cause",
+      "explication": "Les stéréotypes peuvent conduire à une discrimination : on traite alors une personne moins bien à cause de son groupe."
+    },
+    {
+      "fait": "une discrimination",
+      "carte": "Des préjugés portés avant de connaître la personne",
+      "role": "cause",
+      "explication": "Un préjugé est un jugement porté à l'avance, et il peut conduire à une discrimination."
+    },
+    {
+      "fait": "une discrimination",
+      "carte": "Une peine de prison et une amende prévues par la loi",
+      "role": "consequence",
+      "explication": "Une discrimination est un délit du Code pénal : elle est punie en général de 3 ans de prison et 45 000 euros d'amende."
+    },
+    {
+      "fait": "une discrimination",
+      "carte": "Une plainte déposée par la victime",
+      "role": "consequence",
+      "explication": "Face à une discrimination, la victime peut porter plainte ou être aidée par le Défenseur des droits."
+    }
+  ],
+  "etiquettes": [
+    {
+      "consigne": "De quoi s'agit-il dans le passage en couleur ?",
+      "texte": "Lina répète que [« les filles sont nulles en maths »].",
+      "choix": ["Un stéréotype", "Une discrimination", "Une réaction possible"],
+      "bonne": 0,
+      "explication": "C'est une idée toute faite et caricaturale sur un groupe : un stéréotype."
+    },
+    {
+      "consigne": "De quoi s'agit-il dans le passage en couleur ?",
+      "texte": "Une agence [refuse de louer un logement à une famille à cause de son origine].",
+      "choix": ["Un stéréotype", "Une discrimination", "Une réaction possible"],
+      "bonne": 1,
+      "explication": "Traiter une famille moins bien à cause de son origine, un critère interdit par la loi, est une discrimination."
+    },
+    {
+      "consigne": "De quoi s'agit-il dans le passage en couleur ?",
+      "texte": "Harcelé sur un réseau social, un élève [appelle le 3018 avec l'aide d'un adulte].",
+      "choix": ["Un stéréotype", "Une discrimination", "Une réaction possible"],
+      "bonne": 2,
+      "explication": "Le 3018 est le numéro national gratuit contre le harcèlement : c'est une façon de réagir."
+    },
+    {
+      "consigne": "De quoi s'agit-il dans le passage en couleur ?",
+      "texte": "Un club de danse [refuse d'inscrire un garçon parce que c'est un garçon].",
+      "choix": ["Un stéréotype", "Une discrimination", "Une réaction possible"],
+      "bonne": 1,
+      "explication": "Refuser quelqu'un à cause de son sexe est un acte de discrimination."
+    },
+    {
+      "consigne": "De quoi s'agit-il dans le passage en couleur ?",
+      "texte": "Selon Hugo, [« les garçons ne savent pas cuisiner »].",
+      "choix": ["Un stéréotype", "Une discrimination", "Une réaction possible"],
+      "bonne": 0,
+      "explication": "C'est une idée toute faite sur un groupe, pas un acte : un stéréotype."
+    },
+    {
+      "consigne": "De quoi s'agit-il dans le passage en couleur ?",
+      "texte": "Écartée d'un emploi à cause de son handicap, une candidate [saisit le Défenseur des droits].",
+      "choix": ["Un stéréotype", "Une discrimination", "Une réaction possible"],
+      "bonne": 2,
+      "explication": "Saisir le Défenseur des droits est un recours pour faire valoir ses droits."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Le Défenseur des droits",
+      "acceptees": ["Défenseur des droits", "Le Défenseur des droits", "Defenseur des droits", "Le Defenseur des droits"],
+      "indices": [
+        "Je suis une autorité de la République.",
+        "J'aide gratuitement les personnes victimes de discriminations.",
+        "J'ai été créé en 2011 et on peut me saisir si on est écarté d'un emploi à cause de son handicap."
+      ],
+      "explication": "Le Défenseur des droits, créé en 2011, aide gratuitement les victimes de discriminations."
+    },
+    {
+      "reponse": "La parité",
+      "acceptees": ["Parité", "La parité", "Parite", "La parite"],
+      "indices": [
+        "Je suis un principe d'égalité entre les femmes et les hommes.",
+        "Une loi de 2000 m'impose en politique.",
+        "Grâce à moi, chaque canton élit un binôme formé d'une femme et d'un homme."
+      ],
+      "explication": "La parité est l'égal accès des femmes et des hommes aux responsabilités, imposée en politique par une loi de 2000."
+    },
+    {
+      "reponse": "3018",
+      "acceptees": ["3018", "Le 3018", "Numéro 3018", "Le numéro 3018"],
+      "indices": [
+        "Je suis un numéro de téléphone.",
+        "Je suis gratuit et j'aide les élèves moqués ou insultés.",
+        "Je suis le numéro national contre le harcèlement, y compris en ligne."
+      ],
+      "explication": "Le 3018 est le numéro national gratuit contre le harcèlement, y compris en ligne."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Les droits des femmes, du plus ancien au plus récent",
+      "etapes": [
+        "Une ordonnance accorde le droit de vote aux femmes",
+        "Les femmes votent pour la première fois",
+        "Les femmes peuvent ouvrir un compte bancaire sans leur mari",
+        "Une loi impose l'égalité des salaires",
+        "Une loi impose la parité en politique"
+      ]
+    }
+  ]
+}

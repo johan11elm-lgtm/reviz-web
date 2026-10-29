@@ -1,0 +1,178 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Ce que fait un commutateur",
+      "detail": "Le commutateur relie les machines d'un même réseau local et envoie les données au bon destinataire, sans sortir du réseau.",
+      "cartes": [
+        "Relier les ordinateurs d'une salle informatique entre eux",
+        "Livrer les données à la bonne machine du réseau local",
+        "Relier huit postes d'un même réseau local",
+        "Relier l'imprimante et les postes de la salle des profs",
+        "Relier des machines sans jamais sortir de leur réseau local"
+      ]
+    },
+    {
+      "nom": "Ce que fait un routeur",
+      "detail": "Le routeur relie des réseaux différents, par exemple un réseau local et Internet, et choisit le chemin des données.",
+      "cartes": [
+        "Relier le réseau d'une maison à Internet",
+        "Choisir le chemin des données vers un autre réseau",
+        "Le travail de la box Internet d'une famille",
+        "Relier le réseau du collège à celui d'un autre établissement",
+        "Permettre à la tablette du salon d'aller sur Internet"
+      ]
+    },
+    {
+      "nom": "Ce que fait le DNS",
+      "detail": "Le DNS associe un nom de domaine à l'adresse IP correspondante.",
+      "cartes": [
+        "Transformer education.gouv.fr en adresse IP",
+        "Retrouver l'adresse d'un site à partir de son nom",
+        "Permettre de taper un nom plutôt qu'une suite de nombres",
+        "Être interrogé avant que le navigateur contacte le site",
+        "Traduire wikipedia.org pour que le navigateur sache où aller"
+      ]
+    },
+    {
+      "nom": "Ce que fait un serveur",
+      "detail": "Le serveur fournit un service ou des données aux clients qui les demandent.",
+      "cartes": [
+        "Héberger les pages d'un site web",
+        "Répondre à la requête envoyée par un navigateur",
+        "Fournir au client le service ou les données demandés",
+        "Stocker les fichiers que partagent tous les postes d'une salle",
+        "Rester allumé en permanence pour répondre aux demandes"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Quel rôle joue l'élément en couleur ?",
+      "texte": "Léa tape l'adresse d'un site dans son navigateur. [Son ordinateur] envoie alors une requête pour obtenir la page.",
+      "choix": ["Client", "Serveur", "Commutateur", "Routeur"],
+      "bonne": 0,
+      "explication": "L'ordinateur de Léa envoie la requête : c'est le client."
+    },
+    {
+      "consigne": "Quel rôle joue l'élément en couleur ?",
+      "texte": "Léa demande la page d'un site. [La machine qui héberge le site] lui renvoie la page.",
+      "choix": ["Client", "Serveur", "Commutateur", "Routeur"],
+      "bonne": 1,
+      "explication": "La machine qui héberge le site et répond à la requête est le serveur."
+    },
+    {
+      "consigne": "Quel rôle joue l'élément en couleur ?",
+      "texte": "Chez Léa, [la box Internet] relie le réseau de la maison à Internet.",
+      "choix": ["Client", "Serveur", "Commutateur", "Routeur"],
+      "bonne": 3,
+      "explication": "La box relie deux réseaux différents, le réseau local et Internet : c'est un routeur."
+    },
+    {
+      "consigne": "Quel rôle joue l'élément en couleur ?",
+      "texte": "Les 24 ordinateurs de la salle de technologie sont branchés sur [le même boîtier], qui les relie entre eux dans le réseau local.",
+      "choix": ["Client", "Serveur", "Commutateur", "Routeur"],
+      "bonne": 2,
+      "explication": "Un équipement qui relie les machines d'un même réseau local est un commutateur."
+    },
+    {
+      "consigne": "Quel rôle joue l'élément en couleur ?",
+      "texte": "Pour regarder une vidéo, [le smartphone de Tom] demande le fichier au site.",
+      "choix": ["Client", "Serveur", "Commutateur", "Routeur"],
+      "bonne": 0,
+      "explication": "Le smartphone envoie la demande : il joue le rôle de client."
+    },
+    {
+      "consigne": "Quel rôle joue l'élément en couleur ?",
+      "texte": "Tom ouvre sa messagerie : [l'ordinateur qui garde ses courriels] répond à sa demande.",
+      "choix": ["Client", "Serveur", "Commutateur", "Routeur"],
+      "bonne": 1,
+      "explication": "L'ordinateur qui conserve les courriels et répond à la demande est le serveur."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Routeur",
+      "acceptees": ["Le routeur", "Un routeur", "La box", "Box", "Box Internet", "La box Internet"],
+      "indices": [
+        "Je suis un équipement qu'on trouve dans presque toutes les maisons.",
+        "Je relie des réseaux différents et je choisis le chemin des données.",
+        "Je suis l'équipement qui relie un réseau local à Internet."
+      ],
+      "explication": "Le routeur relie des réseaux différents et choisit le chemin des données ; la box Internet en est un."
+    },
+    {
+      "reponse": "Commutateur",
+      "acceptees": ["Le commutateur", "Un commutateur", "Switch", "Un switch", "Le switch"],
+      "indices": [
+        "Je suis un équipement qu'on trouve dans une salle informatique.",
+        "Je relie les machines d'un même réseau local.",
+        "J'envoie chaque message à son destinataire et je reste à l'intérieur du réseau local."
+      ],
+      "explication": "Le commutateur (switch) relie les machines d'un réseau local et envoie les données au bon destinataire."
+    },
+    {
+      "reponse": "DNS",
+      "acceptees": ["Le DNS", "Domain Name System", "Système de noms de domaine"],
+      "indices": [
+        "Je suis un service du réseau, pas un appareil.",
+        "Ton navigateur m'interroge avant de contacter un site.",
+        "Je transforme un nom comme wikipedia.org en adresse IP."
+      ],
+      "explication": "Le DNS traduit un nom de domaine en adresse IP pour que le navigateur trouve le serveur."
+    },
+    {
+      "reponse": "Paquet",
+      "acceptees": ["Un paquet", "Les paquets", "Paquets", "Paquet de données"],
+      "indices": [
+        "Je suis un petit morceau d'un message plus grand.",
+        "Je porte l'adresse de mon destinataire et je voyage par mon propre chemin.",
+        "À l'arrivée, on me remet dans l'ordre avec les autres."
+      ],
+      "explication": "Les données sont découpées en paquets qui peuvent suivre des chemins différents puis sont remis dans l'ordre à l'arrivée."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "Un fichier de 3 000 octets est découpé en paquets de 500 octets. Combien de paquets faut-il pour l'envoyer en entier ?",
+      "reponse": 6,
+      "unite": "paquets",
+      "tolerance": 0,
+      "explication": "3 000 ÷ 500 = 6 paquets."
+    },
+    {
+      "question": "Un message est découpé en 12 paquets. Neuf paquets sont déjà arrivés. Combien de paquets manquent encore pour reconstituer le message ?",
+      "reponse": 3,
+      "unite": "paquets",
+      "tolerance": 0,
+      "explication": "12 − 9 = 3 paquets manquent encore."
+    },
+    {
+      "question": "Un ordinateur envoie 50 paquets chaque seconde. Combien de paquets envoie-t-il en 2 minutes ?",
+      "reponse": 6000,
+      "unite": "paquets",
+      "tolerance": 0,
+      "explication": "2 minutes = 120 secondes, donc 50 × 120 = 6 000 paquets."
+    },
+    {
+      "question": "Un courriel est découpé en 25 paquets de 400 octets chacun. Quelle est la taille totale du courriel ?",
+      "reponse": 10000,
+      "unite": "octets",
+      "tolerance": 0,
+      "explication": "25 × 400 = 10 000 octets."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Ouvrir un site web depuis un navigateur",
+      "etapes": [
+        "Tu tapes l'adresse d'un site dans ton navigateur",
+        "Le DNS retrouve l'adresse IP du serveur du site",
+        "Le navigateur envoie sa requête vers cette adresse",
+        "Le serveur répond en envoyant la page en paquets",
+        "Le navigateur remet les paquets dans l'ordre et affiche la page"
+      ]
+    }
+  ]
+}

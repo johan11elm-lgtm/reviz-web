@@ -1,0 +1,138 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Le passé composé",
+      "detail": "L'auxiliaire être ou avoir est au présent, suivi du participe passé.",
+      "cartes": [
+        "Nous avons fini notre exposé",
+        "Elle est arrivée très tard",
+        "Tu as ouvert la fenêtre",
+        "Ils sont partis hier matin",
+        "Le roi a vu un dragon"
+      ]
+    },
+    {
+      "nom": "Le plus-que-parfait",
+      "detail": "L'auxiliaire être ou avoir est à l'imparfait, suivi du participe passé.",
+      "cartes": [
+        "Il avait rangé son bureau",
+        "Elles étaient sorties avant nous",
+        "Nous avions mangé trop tôt",
+        "J'étais tombé dans la boue",
+        "Le chevalier avait perdu son cheval"
+      ]
+    },
+    {
+      "nom": "Le passé antérieur",
+      "detail": "L'auxiliaire être ou avoir est au passé simple, suivi du participe passé.",
+      "cartes": [
+        "Dès qu'il eut terminé son repas",
+        "Quand elle fut partie",
+        "Aussitôt que nous eûmes compris",
+        "Après qu'ils eurent quitté la ville",
+        "Lorsque tu eus gagné la partie"
+      ]
+    },
+    {
+      "nom": "Le futur antérieur",
+      "detail": "L'auxiliaire être ou avoir est au futur simple, suivi du participe passé.",
+      "cartes": [
+        "J'aurai lu ce livre avant midi",
+        "Elle sera rentrée à l'aube",
+        "Ils auront dîné avant votre arrivée",
+        "Tu auras écrit ta lettre",
+        "Ils seront venus avant la nuit"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Quel est le temps du verbe en couleur ?",
+      "texte": "Chaque matin, ma sœur [boit] un grand bol de lait.",
+      "choix": ["Présent", "Imparfait", "Futur simple", "Passé simple"],
+      "bonne": 0,
+      "explication": "« boit » est la forme du présent de « boire » (elle boit)."
+    },
+    {
+      "consigne": "Quel est le temps du verbe en couleur ?",
+      "texte": "Autrefois, les villageois [allaient] au marché à pied.",
+      "choix": ["Présent", "Imparfait", "Futur simple", "Passé simple"],
+      "bonne": 1,
+      "explication": "« allaient » se termine par -aient, la terminaison de l'imparfait : c'est l'imparfait de « aller »."
+    },
+    {
+      "consigne": "Quel est le temps du verbe en couleur ?",
+      "texte": "Demain, mes cousins [viendront] déjeuner chez nous.",
+      "choix": ["Présent", "Imparfait", "Futur simple", "Passé simple"],
+      "bonne": 2,
+      "explication": "« viendront » est formé sur le radical « viendr- » avec la terminaison -ont : c'est le futur simple de « venir »."
+    },
+    {
+      "consigne": "Quel est le temps du verbe en couleur ?",
+      "texte": "Soudain, le chevalier [prit] son épée et s'élança.",
+      "choix": ["Présent", "Imparfait", "Futur simple", "Passé simple"],
+      "bonne": 3,
+      "explication": "« prit » est le passé simple de « prendre » (il prit). L'imparfait serait « prenait »."
+    },
+    {
+      "consigne": "Quel est le temps du verbe en couleur ?",
+      "texte": "Le roi [eut] très peur du dragon.",
+      "choix": ["Présent", "Imparfait", "Futur simple", "Passé simple"],
+      "bonne": 3,
+      "explication": "« eut » est le passé simple de « avoir » (il eut). L'imparfait serait « avait »."
+    },
+    {
+      "consigne": "Quel est le temps du verbe en couleur ?",
+      "texte": "Quand j'étais petit, je [dormais] avec une veilleuse.",
+      "choix": ["Présent", "Imparfait", "Futur simple", "Passé simple"],
+      "bonne": 1,
+      "explication": "« dormais » = radical « dorm- » + -ais, la terminaison de l'imparfait. Le présent serait « je dors »."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Auxiliaire",
+      "acceptees": ["Auxiliaires", "Verbe auxiliaire"],
+      "indices": [
+        "Je suis un verbe qui en aide un autre.",
+        "Je me conjugue pour former un temps composé.",
+        "Les deux seuls verbes de ma classe sont « avoir » et « être »."
+      ],
+      "explication": "L'auxiliaire (être ou avoir) se conjugue et s'associe au participe passé pour former un temps composé."
+    },
+    {
+      "reponse": "Participe passé",
+      "acceptees": ["Le participe passé"],
+      "indices": [
+        "Je suis une forme du verbe.",
+        "Je m'associe à un auxiliaire pour former un temps composé.",
+        "Dans « il a chanté » et « elle est partie », je suis « chanté » et « partie »."
+      ],
+      "explication": "Le participe passé s'associe à l'auxiliaire pour former un temps composé."
+    },
+    {
+      "reponse": "Radical",
+      "acceptees": ["Le radical"],
+      "indices": [
+        "Je suis une partie d'une forme verbale.",
+        "Je porte le sens du verbe.",
+        "Dans « nous chantions », je suis « chant- »."
+      ],
+      "explication": "Le radical porte le sens du verbe ; la terminaison indique le temps, la personne et le nombre."
+    },
+    {
+      "reponse": "Terminaison",
+      "acceptees": ["Terminaisons"],
+      "indices": [
+        "Je me trouve à la fin d'une forme verbale.",
+        "J'indique le temps, la personne et le nombre.",
+        "Dans « nous chantions », je suis « -ions »."
+      ],
+      "explication": "La terminaison est la fin du verbe : -ions marque l'imparfait et la 1re personne du pluriel."
+    }
+  ],
+  "calculs": [],
+  "etapes": []
+}

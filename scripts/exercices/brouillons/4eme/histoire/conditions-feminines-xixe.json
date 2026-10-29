@@ -1,0 +1,169 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "L'épouse face à la loi",
+      "detail": "Ce que la loi impose à la femme mariée depuis le Code civil de 1804, et les premiers changements : divorce rétabli en 1884, libre usage du salaire en 1907.",
+      "cartes": [
+        "La femme mariée doit obéissance à son mari",
+        "La femme mariée ne peut pas gérer ses biens seule",
+        "Une femme mariée est juridiquement incapable",
+        "Le divorce, supprimé en 1816, n'est rétabli qu'en 1884",
+        "Depuis 1907, une femme mariée dispose librement de son salaire"
+      ]
+    },
+    {
+      "nom": "Le travail des milieux populaires",
+      "detail": "Les emplois traditionnels des femmes du peuple : paysannes, ouvrières du textile, domestiques, couturières, qui travaillent pour faire vivre leur famille.",
+      "cartes": [
+        "Une paysanne qui travaille aux champs",
+        "Une ouvrière du textile qui passe ses journées à l'usine",
+        "Une domestique employée chez une famille aisée",
+        "Une couturière qui coud des vêtements pour des clientes",
+        "Une mère qui travaille par nécessité pour nourrir sa famille"
+      ]
+    },
+    {
+      "nom": "L'instruction et les nouveaux métiers",
+      "detail": "L'école qui s'ouvre aux filles (lois de 1880 et 1881-1882) et les emplois qui s'ouvrent aux femmes à la fin du siècle.",
+      "cartes": [
+        "La loi de 1880 crée des lycées de jeunes filles",
+        "Les lois Ferry rendent l'école obligatoire pour les filles",
+        "Marie Curie étudie à la Sorbonne",
+        "Une institutrice devant sa classe d'élèves",
+        "Une employée de bureau ou de grand magasin"
+      ]
+    },
+    {
+      "nom": "Le droit de vote",
+      "detail": "Le combat des militantes et les dates où les femmes obtiennent enfin le droit de vote : 1893 en Nouvelle-Zélande, 1906 en Finlande, 1944 en France.",
+      "cartes": [
+        "Hubertine Auclert milite pour que les femmes votent",
+        "Les suffragettes d'Emmeline Pankhurst, au Royaume-Uni",
+        "La Nouvelle-Zélande, premier pays où les femmes votent",
+        "En 1906, les Finlandaises peuvent voter à leur tour",
+        "En France, les femmes ne votent qu'à partir de 1944"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "l'incapacité juridique de la femme mariée",
+      "carte": "Le Code civil de 1804 place l'épouse sous l'autorité de son mari",
+      "role": "cause",
+      "explication": "C'est le Code civil de 1804 qui rend la femme mariée juridiquement incapable : elle doit obéissance à son mari."
+    },
+    {
+      "fait": "l'incapacité juridique de la femme mariée",
+      "carte": "La femme mariée ne peut pas travailler sans l'accord de son mari",
+      "role": "consequence",
+      "explication": "Étant juridiquement incapable, elle ne peut pas travailler sans l'autorisation de son mari."
+    },
+    {
+      "fait": "l'incapacité juridique de la femme mariée",
+      "carte": "La femme mariée ne peut pas disposer de ses biens sans autorisation",
+      "role": "consequence",
+      "explication": "Étant juridiquement incapable, elle ne peut pas disposer de ses biens sans l'autorisation de son mari."
+    },
+    {
+      "fait": "la meilleure instruction des filles",
+      "carte": "La loi Camille Sée crée des lycées de jeunes filles",
+      "role": "cause",
+      "explication": "En 1880, la loi Camille Sée ouvre des lycées aux jeunes filles : elles peuvent poursuivre leurs études."
+    },
+    {
+      "fait": "la meilleure instruction des filles",
+      "carte": "Les lois Ferry rendent l'école obligatoire pour les filles",
+      "role": "cause",
+      "explication": "Avec les lois Ferry de 1881-1882, l'instruction est obligatoire de 6 à 13 ans pour les filles comme pour les garçons."
+    },
+    {
+      "fait": "la meilleure instruction des filles",
+      "carte": "Des femmes accèdent à de nouveaux métiers, comme institutrice",
+      "role": "consequence",
+      "explication": "Mieux instruites, les femmes peuvent accéder à de nouveaux métiers, comme celui d'institutrice."
+    }
+  ],
+  "etiquettes": [
+    {
+      "consigne": "À quel milieu social appartient la femme en couleur ?",
+      "texte": "Dans sa belle maison, [Madame Moreau] dirige la cuisinière et la femme de chambre.",
+      "choix": ["Bourgeoisie", "Monde ouvrier", "Monde paysan"],
+      "bonne": 0,
+      "explication": "Elle reste au foyer et dirige ses domestiques : c'est une bourgeoise."
+    },
+    {
+      "consigne": "À quel milieu social appartient la femme en couleur ?",
+      "texte": "[Marie] passe ses journées à l'usine de textile, puis s'occupe de sa maison le soir.",
+      "choix": ["Bourgeoisie", "Monde ouvrier", "Monde paysan"],
+      "bonne": 1,
+      "explication": "Elle travaille à l'usine pour vivre, puis s'occupe de son foyer : c'est une ouvrière."
+    },
+    {
+      "consigne": "À quel milieu social appartient la femme en couleur ?",
+      "texte": "[Jeanne] travaille aux champs avec sa famille et soigne les animaux de la ferme.",
+      "choix": ["Bourgeoisie", "Monde ouvrier", "Monde paysan"],
+      "bonne": 2,
+      "explication": "Elle travaille la terre et élève des animaux : c'est une paysanne."
+    },
+    {
+      "consigne": "À quel milieu social appartient la femme en couleur ?",
+      "texte": "[Madame Lenoir], épouse et mère, ne travaille pas hors de chez elle et reçoit des invités.",
+      "choix": ["Bourgeoisie", "Monde ouvrier", "Monde paysan"],
+      "bonne": 0,
+      "explication": "Épouse, mère et maîtresse de maison, elle reste au foyer : c'est le modèle de la bourgeoise."
+    },
+    {
+      "consigne": "À quel milieu social appartient la femme en couleur ?",
+      "texte": "[Colette] s'occupe des vaches et des récoltes de la ferme familiale.",
+      "choix": ["Bourgeoisie", "Monde ouvrier", "Monde paysan"],
+      "bonne": 2,
+      "explication": "Elle travaille sur une ferme, avec les animaux et les récoltes : c'est une paysanne."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Louise Michel",
+      "acceptees": ["Louise Michel", "Michel"],
+      "indices": [
+        "Je suis une Française du XIXe siècle.",
+        "Je suis institutrice.",
+        "En 1871, je combats aux côtés des communards à Paris."
+      ],
+      "explication": "Louise Michel, institutrice, combat aux côtés des communards pendant la Commune de Paris en 1871."
+    },
+    {
+      "reponse": "Emmeline Pankhurst",
+      "acceptees": ["Emmeline Pankhurst", "Pankhurst"],
+      "indices": [
+        "Je suis britannique.",
+        "Je mène des militantes au début du XXe siècle.",
+        "Mes militantes, les suffragettes, réclament le droit de vote."
+      ],
+      "explication": "Emmeline Pankhurst mène les suffragettes britanniques, qui réclament le droit de vote des femmes."
+    },
+    {
+      "reponse": "Marie Curie",
+      "acceptees": ["Marie Curie", "Curie", "Madame Curie"],
+      "indices": [
+        "J'ai étudié à la Sorbonne.",
+        "J'ai reçu un prix Nobel en 1903.",
+        "J'en ai reçu un deuxième en 1911."
+      ],
+      "explication": "Marie Curie, qui a étudié à la Sorbonne, reçoit le prix Nobel en 1903 puis en 1911."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Les droits des femmes en France, dans l'ordre chronologique",
+      "etapes": [
+        "Le Code civil place la femme mariée sous l'autorité de son mari",
+        "La loi Camille Sée crée les lycées de jeunes filles",
+        "La loi Naquet rétablit le divorce",
+        "Les femmes mariées peuvent disposer librement de leur salaire",
+        "Les Françaises obtiennent le droit de vote"
+      ]
+    }
+  ]
+}

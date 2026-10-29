@@ -1,0 +1,180 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Les anciennes régions industrielles",
+      "detail": "Les territoires du Nord-Est nés du charbon et du fer, aujourd'hui en difficulté.",
+      "cartes": [
+        "Des mines, des usines sidérurgiques et textiles qui ferment",
+        "Des emplois supprimés par les délocalisations",
+        "Le Nord et la Lorraine",
+        "Un ancien site minier devenu musée : le Louvre-Lens",
+        "Un recul de l'industrie dans l'emploi depuis les années 1970"
+      ]
+    },
+    {
+      "nom": "Les industries lourdes des littoraux",
+      "detail": "Les zones industrielles installées dans les grands ports, qui reçoivent leurs matières premières par la mer.",
+      "cartes": [
+        "Dunkerque, Le Havre et Fos-sur-Mer",
+        "Des raffineries et de la sidérurgie au bord de la mer",
+        "Des matières premières importées qui arrivent par bateau",
+        "Une industrie lourde installée sur les littoraux",
+        "Un port qui accueille aussi des usines"
+      ]
+    },
+    {
+      "nom": "Les industries de pointe",
+      "detail": "Les espaces d'innovation qui cherchent la proximité des métropoles, des universités et des transports.",
+      "cartes": [
+        "Entreprises de haute technologie, universités et laboratoires réunis",
+        "Sophia Antipolis, près de Nice, depuis 1969",
+        "Une main-d'œuvre très qualifiée à proximité",
+        "Un aéroport et une ligne à grande vitesse proches",
+        "Des entreprises voisines qui s'associent autour d'un projet innovant"
+      ]
+    },
+    {
+      "nom": "Le pôle industriel toulousain",
+      "detail": "L'exemple d'un espace dynamique : la capitale européenne de l'aéronautique et du spatial.",
+      "cartes": [
+        "Airbus, qui assemble des avions",
+        "La capitale européenne de l'aéronautique et du spatial",
+        "Un réseau de sous-traitants dans tout le Sud-Ouest",
+        "Des éléments d'avions fabriqués dans plusieurs pays d'Europe",
+        "Des appareils livrés à des compagnies du monde entier"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "la désindustrialisation du Nord et de la Lorraine",
+      "carte": "La crise des années 1970",
+      "role": "cause",
+      "explication": "La crise des années 1970 frappe les mines, la sidérurgie et le textile : c'est le début de la désindustrialisation."
+    },
+    {
+      "fait": "la désindustrialisation du Nord et de la Lorraine",
+      "carte": "Les délocalisations vers des pays à main-d'œuvre moins chère",
+      "role": "cause",
+      "explication": "Transférer la production à l'étranger supprime des emplois industriels en France."
+    },
+    {
+      "fait": "la désindustrialisation du Nord et de la Lorraine",
+      "carte": "Des territoires qui tentent de se reconvertir",
+      "role": "consequence",
+      "explication": "Après la fermeture des mines et des usines, ces territoires cherchent de nouvelles activités."
+    },
+    {
+      "fait": "la désindustrialisation du Nord et de la Lorraine",
+      "carte": "L'ouverture du Louvre-Lens sur le site d'une ancienne mine",
+      "role": "consequence",
+      "explication": "Le Louvre-Lens, ouvert en 2012, est un exemple de reconversion par la culture."
+    },
+    {
+      "fait": "la présence d'industries de pointe près des métropoles",
+      "carte": "Une main-d'œuvre très qualifiée",
+      "role": "cause",
+      "explication": "Les industries de haute technologie ont besoin d'une main-d'œuvre qualifiée, qu'on trouve dans les métropoles."
+    },
+    {
+      "fait": "la présence d'industries de pointe près des métropoles",
+      "carte": "Des infrastructures comme un aéroport ou une LGV",
+      "role": "cause",
+      "explication": "Ces industries recherchent de bonnes infrastructures de transport, que les métropoles offrent."
+    }
+  ],
+  "etiquettes": [
+    {
+      "consigne": "De quoi s'agit-il dans le passage en couleur ?",
+      "texte": "Cette entreprise [ferme son usine du Nord et transfère sa production dans un pays où la main-d'œuvre coûte moins cher].",
+      "choix": ["Délocalisation", "Reconversion", "Littoralisation", "Technopôle"],
+      "bonne": 0,
+      "explication": "Transférer une production vers un autre pays, souvent à main-d'œuvre moins chère, est une délocalisation."
+    },
+    {
+      "consigne": "De quoi s'agit-il dans le passage en couleur ?",
+      "texte": "[Un ancien site minier du Nord devient un musée], le Louvre-Lens.",
+      "choix": ["Délocalisation", "Reconversion", "Littoralisation", "Technopôle"],
+      "bonne": 1,
+      "explication": "Remplacer des activités en déclin par de nouvelles activités, comme la culture, est une reconversion."
+    },
+    {
+      "consigne": "De quoi s'agit-il dans le passage en couleur ?",
+      "texte": "[Les raffineries et les usines sidérurgiques s'installent dans les grands ports], où leurs matières premières arrivent par bateau.",
+      "choix": ["Délocalisation", "Reconversion", "Littoralisation", "Technopôle"],
+      "bonne": 2,
+      "explication": "L'installation de l'industrie lourde sur les littoraux s'appelle la littoralisation."
+    },
+    {
+      "consigne": "De quoi s'agit-il dans le passage en couleur ?",
+      "texte": "À Sophia Antipolis, près de Nice, [des entreprises de haute technologie, des universités et des laboratoires sont réunis dans un même espace].",
+      "choix": ["Délocalisation", "Reconversion", "Littoralisation", "Technopôle"],
+      "bonne": 3,
+      "explication": "Un espace qui rassemble entreprises de haute technologie, universités et laboratoires est un technopôle."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Une délocalisation",
+      "acceptees": ["Délocalisation", "Une délocalisation", "La délocalisation", "Les délocalisations", "Délocalisations"],
+      "indices": [
+        "Je suis une décision d'entreprise.",
+        "Je transfère la production d'une usine vers un autre pays.",
+        "Je suis souvent motivée par une main-d'œuvre moins chère."
+      ],
+      "explication": "La délocalisation est le transfert d'une production vers un autre pays, souvent là où la main-d'œuvre coûte moins cher."
+    },
+    {
+      "reponse": "Sophia Antipolis",
+      "acceptees": ["Sophia Antipolis", "Sophia-Antipolis", "Sophia"],
+      "indices": [
+        "Je suis un espace de haute technologie.",
+        "Je suis situé près de Nice.",
+        "J'ai été créé en 1969 et je réunis entreprises, universités et laboratoires."
+      ],
+      "explication": "Sophia Antipolis, créé en 1969 près de Nice, est un technopôle."
+    },
+    {
+      "reponse": "Toulouse",
+      "acceptees": ["Toulouse"],
+      "indices": [
+        "Je suis une métropole du Sud-Ouest.",
+        "Airbus assemble des avions chez moi.",
+        "Je suis la capitale européenne de l'aéronautique et du spatial."
+      ],
+      "explication": "Toulouse est la capitale européenne de l'aéronautique et du spatial, avec Airbus et ses sous-traitants."
+    },
+    {
+      "reponse": "Une ZIP",
+      "acceptees": ["ZIP", "Une ZIP", "Les ZIP", "Zone industrialo-portuaire", "Une zone industrialo-portuaire", "Un port industriel"],
+      "indices": [
+        "Je suis un lieu où l'on fabrique de l'acier et où l'on raffine du pétrole.",
+        "Mes matières premières arrivent par la mer.",
+        "Dunkerque, Le Havre et Fos-sur-Mer en sont des exemples."
+      ],
+      "explication": "Une zone industrialo-portuaire (ZIP) est une zone industrielle installée dans un port, comme Dunkerque, Le Havre ou Fos-sur-Mer."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Lire une carte des espaces industriels",
+      "etapes": [
+        "D'abord, lis le titre et la légende de la carte",
+        "Ensuite, localise les régions industrielles en difficulté du Nord-Est",
+        "Puis, localise les espaces dynamiques : métropoles, technopôles, ZIP",
+        "Enfin, oppose les deux ensembles et explique-les"
+      ]
+    },
+    {
+      "titre": "Du déclin à la reconversion d'un bassin minier",
+      "etapes": [
+        "Dans les années 1970, la crise frappe les mines et la sidérurgie",
+        "Mines et usines ferment dans le Nord et en Lorraine",
+        "Le territoire cherche de nouvelles activités",
+        "En 2012, le Louvre-Lens ouvre sur le site d'une ancienne mine"
+      ]
+    }
+  ]
+}

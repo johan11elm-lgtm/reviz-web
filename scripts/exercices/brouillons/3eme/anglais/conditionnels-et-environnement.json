@@ -1,0 +1,169 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Une vérité générale (type 0)",
+      "detail": "If + présent simple, présent simple : ce qui se produit toujours, comme une loi de la nature.",
+      "cartes": [
+        "If you heat ice, it melts",
+        "If the temperature drops below zero, water freezes",
+        "If plants get no light, they die",
+        "If you mix blue and yellow, you get green",
+        "If you press the button, the light comes on"
+      ]
+    },
+    {
+      "nom": "Une condition réalisable (type 1)",
+      "detail": "If + présent simple, will + base verbale : une condition possible et sa conséquence probable.",
+      "cartes": [
+        "If we recycle more, we will reduce waste",
+        "If it rains tomorrow, we will stay at home",
+        "If we take the bus, we will reduce pollution",
+        "If we plant more trees, the air will be cleaner",
+        "If we use solar panels, we will save energy"
+      ]
+    },
+    {
+      "nom": "Une hypothèse imaginaire (type 2)",
+      "detail": "If + prétérit, would + base verbale : une situation peu probable ou imaginaire.",
+      "cartes": [
+        "If I had a garden, I would grow vegetables",
+        "If I were the president, I would ban plastic bags",
+        "If I had more money, I would buy solar panels",
+        "If we had no cars, there would be less pollution",
+        "If everyone planted a tree, the planet would be greener"
+      ]
+    },
+    {
+      "nom": "Condition avec « à moins que »",
+      "detail": "Unless signifie « à moins que » (if … not) et est suivi du présent, jamais de will.",
+      "cartes": [
+        "Unless we act now, the planet will get warmer",
+        "Unless we recycle more, the waste will increase",
+        "The ice will keep melting unless we reduce pollution",
+        "We won't save energy unless we turn off the lights",
+        "Unless we protect nature, many animals will disappear"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "le réchauffement climatique",
+      "carte": "Les gaz à effet de serre comme le CO₂",
+      "role": "cause",
+      "explication": "Les gaz à effet de serre, comme le CO₂, retiennent la chaleur et font monter la température moyenne de la Terre."
+    },
+    {
+      "fait": "le réchauffement climatique",
+      "carte": "La combustion du charbon, du pétrole et du gaz",
+      "role": "cause",
+      "explication": "Elle rejette du CO₂, le principal gaz à effet de serre d'origine humaine."
+    },
+    {
+      "fait": "le réchauffement climatique",
+      "carte": "La fonte des glaces",
+      "role": "consequence",
+      "explication": "La hausse de la température moyenne fait fondre les glaces : c'est l'une de ses conséquences."
+    },
+    {
+      "fait": "le réchauffement climatique",
+      "carte": "Les périodes de sécheresse",
+      "role": "consequence",
+      "explication": "Les sécheresses font partie des conséquences du réchauffement climatique."
+    },
+    {
+      "fait": "le réchauffement climatique",
+      "carte": "Des événements météorologiques extrêmes",
+      "role": "consequence",
+      "explication": "Le réchauffement climatique entraîne des événements météorologiques extrêmes."
+    }
+  ],
+  "etiquettes": [
+    {
+      "consigne": "Quelle est la forme du verbe en couleur ?",
+      "texte": "If it [rains] tomorrow, we will stay at home.",
+      "choix": ["Présent simple", "Prétérit", "Will + base verbale", "Would + base verbale"],
+      "bonne": 0,
+      "explication": "Au type 1, le verbe après if est au présent simple (rains), jamais au futur."
+    },
+    {
+      "consigne": "Quelle est la forme du verbe en couleur ?",
+      "texte": "If I [had] a garden, I would grow vegetables.",
+      "choix": ["Présent simple", "Prétérit", "Will + base verbale", "Would + base verbale"],
+      "bonne": 1,
+      "explication": "Au type 2, le verbe après if est au prétérit (had)."
+    },
+    {
+      "consigne": "Quelle est la forme du verbe en couleur ?",
+      "texte": "If I were the president, I [would ban] plastic bags.",
+      "choix": ["Présent simple", "Prétérit", "Will + base verbale", "Would + base verbale"],
+      "bonne": 3,
+      "explication": "Au type 2, la proposition principale est en would + base verbale (would ban)."
+    },
+    {
+      "consigne": "Quelle est la forme du verbe en couleur ?",
+      "texte": "If we recycle more, we [will reduce] waste.",
+      "choix": ["Présent simple", "Prétérit", "Will + base verbale", "Would + base verbale"],
+      "bonne": 2,
+      "explication": "Au type 1, la proposition principale est en will + base verbale (will reduce)."
+    },
+    {
+      "consigne": "Quelle est la forme du verbe en couleur ?",
+      "texte": "If you heat ice, it [melts].",
+      "choix": ["Présent simple", "Prétérit", "Will + base verbale", "Would + base verbale"],
+      "bonne": 0,
+      "explication": "Au type 0, les deux verbes sont au présent simple : « melts » est au présent, avec un -s à la 3e personne."
+    },
+    {
+      "consigne": "Quelle est la forme du verbe en couleur ?",
+      "texte": "If everyone [planted] a tree, the planet would be greener.",
+      "choix": ["Présent simple", "Prétérit", "Will + base verbale", "Would + base verbale"],
+      "bonne": 1,
+      "explication": "« planted » est le prétérit de plant : c'est le verbe qui suit if au type 2."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Le réchauffement climatique",
+      "acceptees": ["Réchauffement climatique", "Global warming", "Le global warming"],
+      "indices": [
+        "Je concerne toute la planète.",
+        "Je suis dû aux gaz à effet de serre, comme le CO₂.",
+        "Je suis la hausse de la température moyenne de la Terre."
+      ],
+      "explication": "Le réchauffement climatique (global warming) est la hausse de la température moyenne due aux gaz à effet de serre."
+    },
+    {
+      "reponse": "L'accord de Paris",
+      "acceptees": ["Accord de Paris", "Paris Agreement", "The Paris Agreement", "Paris", "COP21"],
+      "indices": [
+        "Je suis un engagement international sur le climat.",
+        "J'ai été adopté en 2015.",
+        "Je veux limiter le réchauffement nettement en dessous de 2 °C."
+      ],
+      "explication": "L'accord de Paris (2015) vise à limiter le réchauffement nettement en dessous de 2 °C par rapport à l'ère préindustrielle."
+    },
+    {
+      "reponse": "Unless",
+      "acceptees": [],
+      "indices": [
+        "Je suis un mot anglais qui introduit une condition.",
+        "Comme if, je suis suivi du présent et jamais de will.",
+        "Je veux dire « à moins que » et je remplace if … not."
+      ],
+      "explication": "Unless signifie « à moins que » : Unless we act now, the planet will get warmer."
+    },
+    {
+      "reponse": "Empreinte carbone",
+      "acceptees": ["L'empreinte carbone", "Carbon footprint", "The carbon footprint"],
+      "indices": [
+        "Je dépends de ce que chacun fait au quotidien.",
+        "On peut me réduire en utilisant des énergies renouvelables.",
+        "Je mesure la quantité de CO₂ liée à nos activités."
+      ],
+      "explication": "L'empreinte carbone (carbon footprint) est la quantité de CO₂ liée à nos activités."
+    }
+  ],
+  "calculs": [],
+  "etapes": []
+}

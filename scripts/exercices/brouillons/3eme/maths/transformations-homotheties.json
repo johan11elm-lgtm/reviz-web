@@ -1,0 +1,184 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Une symétrie axiale",
+      "detail": "Le retournement d'une figure par rapport à une droite, comme dans un miroir.",
+      "cartes": [
+        "La figure est retournée comme dans un miroir",
+        "L'axe est la médiatrice du segment [MM']",
+        "On plie la feuille et les deux figures se superposent",
+        "Le reflet d'un arbre dans l'eau d'un lac calme",
+        "Tous les points d'une droite restent à leur place"
+      ]
+    },
+    {
+      "nom": "Une translation",
+      "detail": "Le glissement d'une figure selon une direction, un sens et une longueur.",
+      "cartes": [
+        "A est envoyé sur B : ABM'M est un parallélogramme",
+        "Le déplacement est défini par une direction, un sens et une longueur",
+        "Un pion avance de trois cases vers le haut sans pivoter",
+        "Aucun point ne reste fixe : tous se déplacent de la même longueur",
+        "Le motif d'une frise avance du même écart, sans se retourner"
+      ]
+    },
+    {
+      "nom": "Une rotation",
+      "detail": "Le pivotement d'une figure autour d'un centre, d'un angle donné.",
+      "cartes": [
+        "OM' = OM et l'angle MOM' mesure 90°",
+        "Dans une rosace de 8 motifs, on tourne de 45° d'un motif au suivant",
+        "Un carré fait un quart de tour autour de son centre",
+        "Les aiguilles d'une montre parcourent un angle autour de leur centre",
+        "La figure pivote d'un angle donné, dans un sens indiqué"
+      ]
+    },
+    {
+      "nom": "Une homothétie",
+      "detail": "L'agrandissement ou la réduction d'une figure, de centre O et de rapport k.",
+      "cartes": [
+        "Les longueurs sont multipliées par 2 et les aires par 4",
+        "M' est sur la droite (OM) et OM' = 3 × OM",
+        "(M'N') // (MN) et M'N' = 1,5 × MN",
+        "Avec un rapport négatif, l'image passe de l'autre côté du centre",
+        "Si |k| est plus grand que 1, la figure est agrandie"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Quelle transformation décrit le passage en couleur ?",
+      "texte": "Dans une rosace, on passe d'un motif au suivant en [tournant de 45° autour du centre].",
+      "choix": ["Une translation", "Une rotation", "Une symétrie axiale", "Une homothétie"],
+      "bonne": 1,
+      "explication": "Tourner autour d'un centre d'un angle donné, c'est une rotation."
+    },
+    {
+      "consigne": "Quelle transformation décrit le passage en couleur ?",
+      "texte": "Pour agrandir une photo sans la déformer, on [multiplie toutes les longueurs par 3 à partir d'un point O].",
+      "choix": ["Une translation", "Une rotation", "Une symétrie axiale", "Une homothétie"],
+      "bonne": 3,
+      "explication": "Agrandir à partir d'un centre O en multipliant les longueurs par un rapport, c'est une homothétie."
+    },
+    {
+      "consigne": "Quelle transformation décrit le passage en couleur ?",
+      "texte": "Sur un plateau de jeu, on [déplace une pièce de 4 cases vers la droite sans la tourner].",
+      "choix": ["Une translation", "Une rotation", "Une symétrie axiale", "Une homothétie"],
+      "bonne": 0,
+      "explication": "Faire glisser une figure dans une direction, un sens et une longueur donnés, c'est une translation."
+    },
+    {
+      "consigne": "Quelle transformation décrit le passage en couleur ?",
+      "texte": "Pour obtenir le reflet d'un arbre dans un lac, on [retourne la figure par rapport à la surface de l'eau].",
+      "choix": ["Une translation", "Une rotation", "Une symétrie axiale", "Une homothétie"],
+      "bonne": 2,
+      "explication": "Retourner une figure par rapport à une droite, comme dans un miroir, c'est une symétrie axiale."
+    },
+    {
+      "consigne": "Quelle transformation décrit le passage en couleur ?",
+      "texte": "La maquette est [une réduction du bâtiment : chaque longueur est divisée par 10], avec les mêmes angles.",
+      "choix": ["Une translation", "Une rotation", "Une symétrie axiale", "Une homothétie"],
+      "bonne": 3,
+      "explication": "Réduire une figure en multipliant ses longueurs par 0,1 sans changer ses angles, c'est une homothétie."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Homothétie",
+      "acceptees": ["Homothétie", "Une homothétie", "L'homothétie"],
+      "indices": [
+        "Je suis une transformation du plan.",
+        "Je suis définie par un centre O et un nombre k.",
+        "Je multiplie les longueurs par |k| et les aires par k²."
+      ],
+      "explication": "L'homothétie de centre O et de rapport k multiplie les longueurs par |k| et les aires par k²."
+    },
+    {
+      "reponse": "Rotation",
+      "acceptees": ["Rotation", "Une rotation", "La rotation"],
+      "indices": [
+        "Je suis une transformation qui conserve les longueurs et les aires.",
+        "J'ai un centre et un angle.",
+        "Dans une rosace, je fais passer d'un motif au suivant."
+      ],
+      "explication": "Une rotation de centre O et d'angle α donne OM' = OM et un angle MOM' de mesure α."
+    },
+    {
+      "reponse": "Translation",
+      "acceptees": ["Translation", "Une translation", "La translation"],
+      "indices": [
+        "Je suis une transformation qui conserve les longueurs et les angles.",
+        "Je suis définie par une direction, un sens et une longueur.",
+        "Avec moi, si A devient B, alors ABM'M est un parallélogramme."
+      ],
+      "explication": "Une translation fait glisser la figure : si elle envoie A sur B, alors ABM'M est un parallélogramme."
+    },
+    {
+      "reponse": "Rapport",
+      "acceptees": ["Rapport", "Le rapport", "Rapport de l'homothétie", "Coefficient"],
+      "indices": [
+        "Je suis un nombre.",
+        "Je suis associé à un centre pour définir une homothétie.",
+        "Mon signe indique de quel côté du centre se trouve l'image, et ma valeur sans signe multiplie les longueurs."
+      ],
+      "explication": "Le rapport k d'une homothétie : son signe place l'image d'un côté ou de l'autre du centre, et |k| multiplie les longueurs."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "Une homothétie de rapport 3 agrandit un segment de 4 cm. Quelle est la longueur de son image ?",
+      "reponse": 12,
+      "unite": "cm",
+      "tolerance": 0,
+      "explication": "Les longueurs sont multipliées par |3| = 3 : 4 × 3 = 12 cm."
+    },
+    {
+      "question": "Un triangle a une aire de 5 cm². Quelle est l'aire de son image par une homothétie de rapport 4 ?",
+      "reponse": 80,
+      "unite": "cm²",
+      "tolerance": 0,
+      "explication": "Les aires sont multipliées par k² = 16 : 5 × 16 = 80 cm²."
+    },
+    {
+      "question": "Une homothétie de rapport −2 transforme un segment de 7 cm. Quelle est la longueur de son image ?",
+      "reponse": 14,
+      "unite": "cm",
+      "tolerance": 0,
+      "explication": "Les longueurs sont multipliées par |−2| = 2 : 7 × 2 = 14 cm."
+    },
+    {
+      "question": "Une homothétie de rapport 0,5 transforme un carré de côté 10 cm. Quelle est l'aire de son image ?",
+      "reponse": 25,
+      "unite": "cm²",
+      "tolerance": 0,
+      "explication": "Le côté devient 10 × 0,5 = 5 cm, donc l'aire vaut 5 × 5 = 25 cm². Autrement : 100 × 0,5² = 25 cm²."
+    },
+    {
+      "question": "Dans une rosace de 12 motifs identiques, de quel angle tourne-t-on pour passer d'un motif au suivant ?",
+      "reponse": 30,
+      "unite": "°",
+      "tolerance": 0,
+      "explication": "Un tour complet mesure 360° : 360° ÷ 12 = 30°."
+    },
+    {
+      "question": "On a OM = 5 cm. M' est l'image de M par l'homothétie de centre O et de rapport 1,6. Combien mesure OM' ?",
+      "reponse": 8,
+      "unite": "cm",
+      "tolerance": 0,
+      "explication": "OM' = |k| × OM = 1,6 × 5 = 8 cm."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Construire l'image d'un point par une homothétie",
+      "etapes": [
+        "Tracer la droite (OM) qui passe par le centre et le point",
+        "Mesurer OM et calculer OM' = |k| × OM",
+        "Placer M' du bon côté de O selon le signe de k",
+        "Pour une figure, refaire cela pour chaque sommet puis relier"
+      ]
+    }
+  ]
+}

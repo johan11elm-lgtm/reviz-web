@@ -1,0 +1,225 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Énergie cinétique de 25 J",
+      "detail": "Les objets en mouvement dont l'énergie cinétique, calculée avec Ec = ½ × m × v², vaut 25 J.",
+      "cartes": [
+        "Un enfant de 50 kg qui avance à 1 m/s",
+        "Un colis de 2 kg qui glisse à 5 m/s",
+        "Un ballon de 0,5 kg lancé à 10 m/s",
+        "Une balle de 20 g tirée à 50 m/s",
+        "Une brique de 8 kg lancée à 2,5 m/s"
+      ]
+    },
+    {
+      "nom": "Énergie cinétique de 100 J",
+      "detail": "Les objets en mouvement dont l'énergie cinétique, calculée avec Ec = ½ × m × v², vaut 100 J.",
+      "cartes": [
+        "Un colis de 2 kg lancé à 10 m/s",
+        "Un caddie de 8 kg qui roule à 5 m/s",
+        "Un ballon de 0,5 kg frappé à 20 m/s",
+        "Un enfant de 50 kg qui court à 2 m/s",
+        "Un chariot de 200 kg qui avance à 1 m/s"
+      ]
+    },
+    {
+      "nom": "Énergie cinétique de 400 J",
+      "detail": "Les objets en mouvement dont l'énergie cinétique, calculée avec Ec = ½ × m × v², vaut 400 J.",
+      "cartes": [
+        "Un chariot de 8 kg lancé à 10 m/s",
+        "Un colis de 2 kg lancé à 20 m/s",
+        "Une valise de 32 kg qui roule à 5 m/s",
+        "Un élève de 50 kg qui court à 4 m/s",
+        "Un scooter de 200 kg qui roule à 2 m/s"
+      ]
+    },
+    {
+      "nom": "Énergie cinétique de 900 J",
+      "detail": "Les objets en mouvement dont l'énergie cinétique, calculée avec Ec = ½ × m × v², vaut 900 J.",
+      "cartes": [
+        "Un vélo de 18 kg lancé à 10 m/s",
+        "Un cycliste de 72 kg qui roule à 5 m/s",
+        "Un sprinteur de 50 kg qui court à 6 m/s",
+        "Un chariot de 200 kg qui roule à 3 m/s",
+        "Un sac de 8 kg lancé à 15 m/s"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "l'augmentation de la distance d'arrêt d'une voiture",
+      "carte": "La route est mouillée",
+      "role": "cause",
+      "explication": "Une route mouillée allonge la distance de freinage, donc la distance d'arrêt."
+    },
+    {
+      "fait": "l'augmentation de la distance d'arrêt d'une voiture",
+      "carte": "Le conducteur est fatigué",
+      "role": "cause",
+      "explication": "La fatigue allonge le temps de réaction, donc la distance de réaction et la distance d'arrêt."
+    },
+    {
+      "fait": "le doublement de la vitesse d'une voiture",
+      "carte": "Son énergie cinétique est multipliée par 4",
+      "role": "consequence",
+      "explication": "Ec dépend de v² : si la vitesse double, Ec est multipliée par 2² = 4."
+    },
+    {
+      "fait": "le doublement de la vitesse d'une voiture",
+      "carte": "Sa distance de freinage augmente beaucoup",
+      "role": "consequence",
+      "explication": "La distance de freinage augmente avec la vitesse, à peu près comme v²."
+    }
+  ],
+  "etiquettes": [
+    {
+      "consigne": "Quelle conversion d'énergie se produit pendant ce qui est en couleur ?",
+      "texte": "Sans frottements, une bille lâchée du haut d'une table [tombe vers le sol].",
+      "choix": ["Position vers cinétique", "Cinétique vers position", "Cinétique vers thermique"],
+      "bonne": 0,
+      "explication": "En tombant, l'altitude diminue : l'énergie de position se convertit en énergie cinétique et la vitesse augmente."
+    },
+    {
+      "consigne": "Quelle conversion d'énergie se produit pendant ce qui est en couleur ?",
+      "texte": "Un ballon est lancé en l'air, sans frottements : [il monte en ralentissant].",
+      "choix": ["Position vers cinétique", "Cinétique vers position", "Cinétique vers thermique"],
+      "bonne": 1,
+      "explication": "En montant, le ballon ralentit : son énergie cinétique se convertit en énergie de position."
+    },
+    {
+      "consigne": "Quelle conversion d'énergie se produit pendant ce qui est en couleur ?",
+      "texte": "Un conducteur appuie sur la pédale de frein : [la voiture ralentit jusqu'à l'arrêt] sur une route plate.",
+      "choix": ["Position vers cinétique", "Cinétique vers position", "Cinétique vers thermique"],
+      "bonne": 2,
+      "explication": "Les frottements des freins convertissent l'énergie cinétique en énergie thermique : les freins chauffent."
+    },
+    {
+      "consigne": "Quelle conversion d'énergie se produit pendant ce qui est en couleur ?",
+      "texte": "Sans frottements, une pomme se détache d'une branche et [tombe sur l'herbe].",
+      "choix": ["Position vers cinétique", "Cinétique vers position", "Cinétique vers thermique"],
+      "bonne": 0,
+      "explication": "En tombant, la pomme perd de l'altitude : son énergie de position se convertit en énergie cinétique."
+    },
+    {
+      "consigne": "Quelle conversion d'énergie se produit pendant ce qui est en couleur ?",
+      "texte": "Un skateur lancé sur une rampe, sans frottements, [monte en perdant de la vitesse].",
+      "choix": ["Position vers cinétique", "Cinétique vers position", "Cinétique vers thermique"],
+      "bonne": 1,
+      "explication": "Il gagne de l'altitude et perd de la vitesse : l'énergie cinétique se convertit en énergie de position."
+    },
+    {
+      "consigne": "Quelle conversion d'énergie se produit pendant ce qui est en couleur ?",
+      "texte": "Au feu rouge, un cycliste serre ses freins pour [s'arrêter sur une route plate].",
+      "choix": ["Position vers cinétique", "Cinétique vers position", "Cinétique vers thermique"],
+      "bonne": 2,
+      "explication": "Le vélo perd de la vitesse sans changer d'altitude : l'énergie cinétique est convertie en énergie thermique par les freins."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Joule",
+      "acceptees": ["Joule", "Joules", "Le joule", "J"],
+      "indices": [
+        "Je suis une unité de mesure.",
+        "On me note avec une seule lettre majuscule.",
+        "Je suis l'unité de toutes les énergies."
+      ],
+      "explication": "Le joule (J) est l'unité de l'énergie."
+    },
+    {
+      "reponse": "Énergie cinétique",
+      "acceptees": ["Énergie cinétique", "L'énergie cinétique", "Cinétique", "Ec"],
+      "indices": [
+        "Je dépends du mouvement d'un objet.",
+        "Je suis nulle quand l'objet est immobile.",
+        "On me calcule avec ½ × m × v²."
+      ],
+      "explication": "L'énergie cinétique est l'énergie d'un objet due à son mouvement : Ec = ½ × m × v²."
+    },
+    {
+      "reponse": "Énergie mécanique",
+      "acceptees": ["Énergie mécanique", "L'énergie mécanique", "Mécanique", "Em"],
+      "indices": [
+        "Je suis une somme de deux termes.",
+        "Je reste constante pendant une chute sans frottements.",
+        "Je vaux Ec + Ep."
+      ],
+      "explication": "L'énergie mécanique est la somme de l'énergie cinétique et de l'énergie de position : Em = Ec + Ep."
+    },
+    {
+      "reponse": "Distance de réaction",
+      "acceptees": ["Distance de réaction", "La distance de réaction"],
+      "indices": [
+        "Je me mesure en mètres.",
+        "J'augmente quand le conducteur est fatigué ou au téléphone.",
+        "Je suis parcourue avant que le conducteur ne commence à freiner."
+      ],
+      "explication": "La distance de réaction est parcourue pendant le temps de réaction du conducteur, avant le début du freinage."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "Une voiture de 800 kg roule à 10 m/s. Quelle est son énergie cinétique, en kilojoules ?",
+      "reponse": 40,
+      "unite": "kJ",
+      "tolerance": 0,
+      "explication": "Ec = ½ × m × v² = 0,5 × 800 × 10² = 0,5 × 800 × 100 = 40 000 J = 40 kJ."
+    },
+    {
+      "question": "Un cycliste et son vélo ont une masse totale de 80 kg et roulent à 36 km/h. Quelle est leur énergie cinétique, en joules ?",
+      "reponse": 4000,
+      "unite": "J",
+      "tolerance": 0,
+      "explication": "36 km/h = 36 ÷ 3,6 = 10 m/s. Ec = 0,5 × 80 × 10² = 0,5 × 80 × 100 = 4 000 J."
+    },
+    {
+      "question": "Une bille lâchée a, au départ, une énergie de position de 8 J et une énergie cinétique nulle. Sans frottements, quelle est son énergie cinétique quand son énergie de position vaut 3 J ?",
+      "reponse": 5,
+      "unite": "J",
+      "tolerance": 0,
+      "explication": "Em = Ec + Ep = 0 + 8 = 8 J, et elle reste constante sans frottements. Donc Ec = Em − Ep = 8 − 3 = 5 J."
+    },
+    {
+      "question": "Une voiture roule à 108 km/h. Le temps de réaction du conducteur est de 1 s. Quelle distance la voiture parcourt-elle pendant ce temps, en mètres ?",
+      "reponse": 30,
+      "unite": "m",
+      "tolerance": 0,
+      "explication": "108 km/h = 108 ÷ 3,6 = 30 m/s. En 1 s, la voiture parcourt 30 × 1 = 30 m."
+    },
+    {
+      "question": "La distance de réaction d'un conducteur est de 18 m et sa distance de freinage de 40 m. Quelle est sa distance d'arrêt, en mètres ?",
+      "reponse": 58,
+      "unite": "m",
+      "tolerance": 0,
+      "explication": "Distance d'arrêt = distance de réaction + distance de freinage = 18 + 40 = 58 m."
+    },
+    {
+      "question": "Une moto a une énergie cinétique de 50 kJ. Sa vitesse double. Quelle est sa nouvelle énergie cinétique, en kilojoules ?",
+      "reponse": 200,
+      "unite": "kJ",
+      "tolerance": 0,
+      "explication": "Ec dépend de v² : doubler la vitesse multiplie Ec par 2² = 4. Donc 50 × 4 = 200 kJ."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Calculer une énergie cinétique",
+      "etapes": [
+        "Convertir la masse en kg et la vitesse en m/s",
+        "Calculer le carré de la vitesse",
+        "Multiplier par la masse, puis par ½",
+        "Écrire le résultat en joules"
+      ]
+    },
+    {
+      "titre": "Un arrêt d'urgence en voiture",
+      "etapes": [
+        "Le conducteur voit un obstacle sur la route",
+        "La voiture avance pendant le temps de réaction",
+        "Le conducteur freine et la voiture ralentit",
+        "La voiture s'immobilise : la distance d'arrêt est parcourue"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,190 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "La moitié",
+      "detail": "Les écritures qui désignent la moitié d'une quantité, soit 50 %.",
+      "cartes": [
+        "50 % de la quantité",
+        "15 élèves sur 30",
+        "Les 5/10 du total",
+        "Le nombre décimal 0,5",
+        "Diviser la quantité par 2"
+      ]
+    },
+    {
+      "nom": "Le quart",
+      "detail": "Les écritures qui désignent le quart d'une quantité, soit 25 %.",
+      "cartes": [
+        "25 % de la quantité",
+        "6 élèves sur 24",
+        "Les 2/8 du total",
+        "Le nombre décimal 0,25",
+        "Diviser la quantité par 4"
+      ]
+    },
+    {
+      "nom": "Le dixième",
+      "detail": "Les écritures qui désignent le dixième d'une quantité, soit 10 %.",
+      "cartes": [
+        "10 % de la quantité",
+        "3 élèves sur 30",
+        "Les 2/20 du total",
+        "Le nombre décimal 0,1",
+        "Diviser la quantité par 10"
+      ]
+    },
+    {
+      "nom": "Le tout",
+      "detail": "Les écritures qui désignent la quantité entière, soit 100 %.",
+      "cartes": [
+        "100 % de la quantité",
+        "28 élèves sur 28",
+        "Les 8/8 du total",
+        "Le nombre décimal 1",
+        "Multiplier la quantité par 1"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Quelle méthode est utilisée dans le raisonnement en couleur ?",
+      "texte": "8 stylos coûtent 12 €. [16 stylos, c'est 2 fois plus de stylos, donc 2 × 12 € = 24 €.]",
+      "choix": ["Linéarité multiplicative", "Linéarité additive", "Retour à l'unité"],
+      "bonne": 0,
+      "explication": "On passe de 8 à 16 stylos en multipliant par 2, donc on multiplie aussi le prix par 2 : c'est la linéarité multiplicative."
+    },
+    {
+      "consigne": "Quelle méthode est utilisée dans le raisonnement en couleur ?",
+      "texte": "2 m de ruban coûtent 5 € et 3 m coûtent 7,50 €. [5 m = 2 m + 3 m, donc 5 € + 7,50 € = 12,50 €.]",
+      "choix": ["Linéarité multiplicative", "Linéarité additive", "Retour à l'unité"],
+      "bonne": 1,
+      "explication": "5 m est la somme de 2 m et de 3 m, donc le prix est la somme des deux prix : c'est la linéarité additive."
+    },
+    {
+      "consigne": "Quelle méthode est utilisée dans le raisonnement en couleur ?",
+      "texte": "5 baguettes coûtent 4 €. [Une baguette coûte 4 ÷ 5 = 0,80 €, donc 8 baguettes coûtent 8 × 0,80 = 6,40 €.]",
+      "choix": ["Linéarité multiplicative", "Linéarité additive", "Retour à l'unité"],
+      "bonne": 2,
+      "explication": "On calcule d'abord le prix d'une seule baguette (4 ÷ 5 = 0,80 €), puis on multiplie : c'est le retour à l'unité."
+    },
+    {
+      "consigne": "Quelle méthode est utilisée dans le raisonnement en couleur ?",
+      "texte": "3 L de peinture couvrent 12 m². [9 L, c'est 3 fois plus de peinture, donc 3 × 12 m² = 36 m².]",
+      "choix": ["Linéarité multiplicative", "Linéarité additive", "Retour à l'unité"],
+      "bonne": 0,
+      "explication": "On passe de 3 L à 9 L en multipliant par 3, donc on multiplie aussi la surface par 3 : c'est la linéarité multiplicative."
+    },
+    {
+      "consigne": "Quelle méthode est utilisée dans le raisonnement en couleur ?",
+      "texte": "3 kg de pommes coûtent 6 € et 4 kg coûtent 8 €. [7 kg = 3 kg + 4 kg, donc 6 € + 8 € = 14 €.]",
+      "choix": ["Linéarité multiplicative", "Linéarité additive", "Retour à l'unité"],
+      "bonne": 1,
+      "explication": "7 kg est la somme de 3 kg et de 4 kg, donc le prix est la somme des deux prix : c'est la linéarité additive."
+    },
+    {
+      "consigne": "Quelle méthode est utilisée dans le raisonnement en couleur ?",
+      "texte": "6 cahiers coûtent 15 €. [Un cahier coûte 15 ÷ 6 = 2,50 €, donc 10 cahiers coûtent 10 × 2,50 = 25 €.]",
+      "choix": ["Linéarité multiplicative", "Linéarité additive", "Retour à l'unité"],
+      "bonne": 2,
+      "explication": "On calcule d'abord le prix d'un seul cahier (15 ÷ 6 = 2,50 €), puis on multiplie : c'est le retour à l'unité."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Pourcentage",
+      "acceptees": ["Pourcentage", "Le pourcentage", "Un pourcentage", "Pour cent"],
+      "indices": [
+        "Je suis une façon d'exprimer une part d'un tout.",
+        "Je suis une fraction dont le dénominateur est toujours 100.",
+        "Je m'écris avec le signe %, comme dans 50 %."
+      ],
+      "explication": "Un pourcentage est une fraction de dénominateur 100 : 25 % = 25/100."
+    },
+    {
+      "reponse": "Échelle",
+      "acceptees": ["Échelle", "L'échelle", "Une échelle"],
+      "indices": [
+        "Je compare une longueur dessinée à une longueur réelle.",
+        "On me lit sur un plan : je dis combien de fois la réalité est plus grande que le dessin.",
+        "Quand je vaux 1/100, 1 cm sur le plan représente 1 m en vrai."
+      ],
+      "explication": "L'échelle d'un plan relie les longueurs dessinées aux longueurs réelles : à l'échelle 1/100, 1 cm représente 100 cm."
+    },
+    {
+      "reponse": "Retour à l'unité",
+      "acceptees": ["Retour à l'unité", "Le retour à l'unité", "Passer par l'unité"],
+      "indices": [
+        "Je suis une méthode pour résoudre un problème de proportionnalité.",
+        "Je commence par calculer la valeur pour 1 seul objet, ou pour 1 kg.",
+        "Avec 4 cahiers à 10 €, je trouve d'abord 2,50 € pour un cahier."
+      ],
+      "explication": "Avec le retour à l'unité, on calcule d'abord la valeur pour 1, puis on multiplie : 10 ÷ 4 = 2,50 €, puis 7 × 2,50 € = 17,50 €."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "5 kg de poires coûtent 12,50 €. Combien coûtent 8 kg de poires ?",
+      "reponse": 20,
+      "unite": "€",
+      "tolerance": 0,
+      "explication": "Retour à l'unité : 1 kg coûte 12,50 ÷ 5 = 2,50 €. Donc 8 kg coûtent 8 × 2,50 = 20 €."
+    },
+    {
+      "question": "Une recette pour 4 personnes demande 300 g de farine. Quelle masse de farine faut-il pour 10 personnes ?",
+      "reponse": 750,
+      "unite": "g",
+      "tolerance": 0,
+      "explication": "Pour 1 personne : 300 ÷ 4 = 75 g. Pour 10 personnes : 10 × 75 = 750 g."
+    },
+    {
+      "question": "Sur un plan à l'échelle 1/200, une pièce mesure 6 cm. Quelle est sa longueur réelle, en mètres ?",
+      "reponse": 12,
+      "unite": "m",
+      "tolerance": 0,
+      "explication": "6 cm × 200 = 1 200 cm, soit 12 m (100 cm = 1 m)."
+    },
+    {
+      "question": "Dans un collège de 600 élèves, 40 % vont à la cantine. Combien d'élèves vont à la cantine ?",
+      "reponse": 240,
+      "unite": "élèves",
+      "tolerance": 0,
+      "explication": "40 % de 600 = 40/100 × 600 = 240. Autre méthode : 10 % de 600 = 60, donc 40 % = 4 × 60 = 240."
+    },
+    {
+      "question": "Dans une classe de 20 élèves, 7 portent des lunettes. Quel pourcentage de la classe cela représente-t-il ?",
+      "reponse": 35,
+      "unite": "%",
+      "tolerance": 0,
+      "explication": "7/20 = 35/100 (on multiplie le haut et le bas par 5), donc 35 %."
+    },
+    {
+      "question": "Léa a 4 fois moins de timbres que Paul. Paul en a 48. Combien Léa en a-t-elle ?",
+      "reponse": 12,
+      "unite": "timbres",
+      "tolerance": 0,
+      "explication": "« 4 fois moins » veut dire diviser par 4 : 48 ÷ 4 = 12 timbres."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Résoudre un problème par le retour à l'unité",
+      "etapes": [
+        "Ranger les données dans un tableau, avec les unités",
+        "Calculer la valeur pour une seule unité",
+        "Multiplier par la quantité demandée",
+        "Répondre par une phrase, avec l'unité"
+      ]
+    },
+    {
+      "titre": "Écrire 6 élèves sur 25 en pourcentage",
+      "etapes": [
+        "Écrire la proportion sous forme de fraction : 6/25",
+        "Chercher par combien multiplier 25 pour obtenir 100",
+        "Multiplier aussi le numérateur : 6 × 4 = 24",
+        "Lire le pourcentage : 24/100, soit 24 %"
+      ]
+    }
+  ]
+}

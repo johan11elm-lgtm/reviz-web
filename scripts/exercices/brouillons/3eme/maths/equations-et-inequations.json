@@ -1,0 +1,201 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Une seule solution : 4",
+      "detail": "Les équations du premier degré dont l'unique solution est x = 4.",
+      "cartes": [
+        "5x − 3 = 2x + 9",
+        "7x − 10 = 3x + 6",
+        "3(x − 1) = 9",
+        "2(x + 3) = 5x − 6",
+        "−x + 10 = 6"
+      ]
+    },
+    {
+      "nom": "Deux solutions : 3 et −3",
+      "detail": "Les équations dont les solutions sont x = 3 et x = −3.",
+      "cartes": [
+        "x² = 9",
+        "x² + 7 = 16",
+        "(x − 3)(x + 3) = 0",
+        "(2x − 6)(x + 3) = 0",
+        "(−x + 3)(x + 3) = 0"
+      ]
+    },
+    {
+      "nom": "Les solutions sont x < −3",
+      "detail": "Les inéquations dont les solutions sont tous les nombres strictement inférieurs à −3.",
+      "cartes": [
+        "−3x + 2 > 11",
+        "2x + 7 < 1",
+        "−2x > 6",
+        "4x + 5 < −7",
+        "5 − x > 8"
+      ]
+    },
+    {
+      "nom": "Aucune solution",
+      "detail": "Les équations qu'aucun nombre ne vérifie, car un carré n'est jamais négatif.",
+      "cartes": [
+        "x² = −9",
+        "x² + 4 = 0",
+        "x² + 7 = 3",
+        "2 − x² = 6",
+        "x² − 5 = −30"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "De quel type est l'équation en couleur ?",
+      "texte": "Sam doit résoudre [5x − 3 = 2x + 9] dans son devoir.",
+      "choix": ["Équation du premier degré", "Équation produit nul", "Équation x² = a"],
+      "bonne": 0,
+      "explication": "Il n'y a que des x à la puissance 1 : on regroupe les termes en x d'un côté et les nombres de l'autre, puis on isole x."
+    },
+    {
+      "consigne": "De quel type est l'équation en couleur ?",
+      "texte": "Léa doit résoudre [(x − 3)(x + 5) = 0] dans son devoir.",
+      "choix": ["Équation du premier degré", "Équation produit nul", "Équation x² = a"],
+      "bonne": 1,
+      "explication": "Un produit de facteurs est égal à 0 : on utilise la propriété du produit nul, ce qui donne x = 3 ou x = −5."
+    },
+    {
+      "consigne": "De quel type est l'équation en couleur ?",
+      "texte": "Inès doit résoudre [x² = 49] dans son devoir.",
+      "choix": ["Équation du premier degré", "Équation produit nul", "Équation x² = a"],
+      "bonne": 2,
+      "explication": "C'est une équation x² = a avec a = 49 > 0 : elle a deux solutions, 7 et −7."
+    },
+    {
+      "consigne": "De quel type est l'équation en couleur ?",
+      "texte": "Tom doit résoudre [3(x + 2) = 2x + 11] dans son devoir.",
+      "choix": ["Équation du premier degré", "Équation produit nul", "Équation x² = a"],
+      "bonne": 0,
+      "explication": "On développe 3(x + 2) = 3x + 6, puis on isole x : x = 5. C'est une équation du premier degré."
+    },
+    {
+      "consigne": "De quel type est l'équation en couleur ?",
+      "texte": "Jade doit résoudre [2x(x − 4) = 0] dans son devoir.",
+      "choix": ["Équation du premier degré", "Équation produit nul", "Équation x² = a"],
+      "bonne": 1,
+      "explication": "Un produit de facteurs (2x et x − 4) est égal à 0 : produit nul, avec x = 0 ou x = 4."
+    },
+    {
+      "consigne": "De quel type est l'équation en couleur ?",
+      "texte": "Karim doit résoudre [x² = 100] dans son devoir.",
+      "choix": ["Équation du premier degré", "Équation produit nul", "Équation x² = a"],
+      "bonne": 2,
+      "explication": "C'est une équation x² = a avec a = 100 > 0 : deux solutions, 10 et −10."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Solution",
+      "acceptees": ["Solution", "Une solution", "Solutions", "Racine"],
+      "indices": [
+        "Je suis un nombre associé à une équation.",
+        "On me trouve en résolvant.",
+        "Si on me met à la place de l'inconnue, l'égalité devient vraie : 4 est moi pour 2x + 1 = 9."
+      ],
+      "explication": "Une solution est une valeur de l'inconnue qui rend l'égalité vraie : 2 × 4 + 1 = 9."
+    },
+    {
+      "reponse": "Produit nul",
+      "acceptees": ["Produit nul", "Le produit nul", "Propriété du produit nul", "Équation produit nul"],
+      "indices": [
+        "Je concerne une multiplication de facteurs.",
+        "Si le résultat de la multiplication est 0, l'un au moins des facteurs vaut 0.",
+        "Avec moi, (x − 3)(x + 5) = 0 se coupe en x − 3 = 0 ou x + 5 = 0."
+      ],
+      "explication": "Un produit est nul si et seulement si l'un au moins de ses facteurs est nul."
+    },
+    {
+      "reponse": "Inéquation",
+      "acceptees": ["Inéquation", "Une inéquation", "Inéquations"],
+      "indices": [
+        "Je ressemble à une équation, mais avec un autre signe que le signe égal.",
+        "J'utilise un des signes <, >, ≤ ou ≥.",
+        "Quand on me multiplie ou divise par un nombre négatif, le sens du signe change."
+      ],
+      "explication": "Une inéquation est une inégalité contenant une inconnue ; diviser par un nombre négatif change le sens de l'inégalité."
+    },
+    {
+      "reponse": "Membre",
+      "acceptees": ["Membre", "Un membre", "Côté"],
+      "indices": [
+        "Je suis une expression.",
+        "Une équation en possède deux.",
+        "Je me trouve à gauche ou à droite du signe égal."
+      ],
+      "explication": "Les deux membres d'une équation sont les expressions situées de part et d'autre du signe égal."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "Résous 7x + 4 = 3x + 24. Que vaut x ?",
+      "reponse": 5,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "7x − 3x = 24 − 4, donc 4x = 20 et x = 5. Vérification : 7 × 5 + 4 = 39 et 3 × 5 + 24 = 39."
+    },
+    {
+      "question": "Quelle est la solution positive de l'équation x² = 144 ?",
+      "reponse": 12,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "Comme 12² = 144, les solutions sont 12 et −12. La solution positive est 12."
+    },
+    {
+      "question": "Quelle est la plus petite solution de l'équation (x − 4)(2x + 6) = 0 ?",
+      "reponse": -3,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "x − 4 = 0 donne x = 4 ; 2x + 6 = 0 donne 2x = −6, soit x = −3. La plus petite solution est −3."
+    },
+    {
+      "question": "Quelle est la plus petite valeur entière de x qui vérifie 2x − 5 > 9 ?",
+      "reponse": 8,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "2x > 14, donc x > 7. L'inégalité est stricte : 7 ne convient pas, la plus petite valeur entière est 8."
+    },
+    {
+      "question": "Quel est le plus grand nombre entier x qui vérifie −3x > 10 ?",
+      "reponse": -4,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "On divise par −3, donc on change le sens : x < −10/3, soit x < −3,33… Le plus grand entier strictement inférieur à −3,33… est −4."
+    },
+    {
+      "question": "Un rectangle a un périmètre de 40 cm et sa longueur dépasse sa largeur de 4 cm. Quelle est sa largeur ?",
+      "reponse": 8,
+      "unite": "cm",
+      "tolerance": 0,
+      "explication": "Avec la largeur x : 2(x + x + 4) = 40, donc 4x + 8 = 40 et x = 8. Vérification : longueur 12, périmètre 2 × (8 + 12) = 40."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Résoudre une équation produit nul",
+      "etapes": [
+        "On vérifie qu'un membre est un produit et que l'autre vaut 0",
+        "On écrit « A = 0 ou B = 0 » avec chaque facteur",
+        "On résout chacune des deux équations du premier degré",
+        "On donne toutes les solutions et on les vérifie"
+      ]
+    },
+    {
+      "titre": "Mettre un problème en équation",
+      "etapes": [
+        "On choisit l'inconnue, par exemple la largeur x",
+        "On écrit l'équation qui traduit l'énoncé",
+        "On résout l'équation",
+        "On vérifie la solution dans la situation",
+        "On conclut par une phrase"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,182 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Philippe Auguste",
+      "detail": "Le roi conquérant (1180-1223) : il reprend la Normandie, gagne à Bouvines et crée baillis et sénéchaux.",
+      "cartes": [
+        "Reprise de la Normandie au roi d'Angleterre en 1204",
+        "Vainqueur de l'empereur germanique à Bouvines en 1214",
+        "Créateur des baillis au nord et des sénéchaux au sud",
+        "Roi de 1180 à 1223",
+        "Le roi conquérant qui agrandit le domaine royal"
+      ]
+    },
+    {
+      "nom": "Louis IX",
+      "detail": "Saint Louis (1226-1270), roi pieux et justicier, mort en croisade et proclamé saint par l'Église en 1297.",
+      "cartes": [
+        "Un roi pieux et justicier",
+        "Imposition de la monnaie royale dans tout le royaume",
+        "Interdiction des guerres privées entre seigneurs",
+        "Mort devant Tunis, en croisade, en 1270",
+        "Proclamé saint par l'Église en 1297"
+      ]
+    },
+    {
+      "nom": "Philippe le Bel",
+      "detail": "Le roi (1285-1314) qui s'appuie sur les légistes, réunit des assemblées et s'oppose au pape Boniface VIII.",
+      "cartes": [
+        "Un roi qui s'appuie sur des juristes, les légistes",
+        "Un roi en conflit avec le pape Boniface VIII",
+        "Un roi qui réunit des assemblées",
+        "Roi de 1285 à 1314",
+        "Grand-père du roi d'Angleterre Édouard III"
+      ]
+    },
+    {
+      "nom": "Charles VII",
+      "detail": "Le roi (1422-1461) sacré à Reims grâce à Jeanne d'Arc, qui crée la taille et une armée permanente et sort vainqueur de la guerre de Cent Ans.",
+      "cartes": [
+        "Sacré à Reims grâce à Jeanne d'Arc",
+        "Créateur de la taille, un impôt permanent",
+        "Fondateur d'une armée permanente",
+        "Roi de 1422 à 1461",
+        "Vainqueur de la guerre de Cent Ans à Castillon"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "la guerre de Cent Ans",
+      "carte": "Le roi d'Angleterre Édouard III revendique la couronne de France",
+      "role": "cause",
+      "explication": "Édouard III d'Angleterre, petit-fils de Philippe le Bel, revendique la couronne de France : c'est la cause principale de la guerre."
+    },
+    {
+      "fait": "la guerre de Cent Ans",
+      "carte": "La couronne passe aux Valois faute d'héritier direct",
+      "role": "cause",
+      "explication": "En 1328, faute d'héritier direct, la couronne passe à Philippe VI de Valois, ce qui provoque la revendication anglaise."
+    },
+    {
+      "fait": "la guerre de Cent Ans",
+      "carte": "La création de la taille et d'une armée permanente",
+      "role": "consequence",
+      "explication": "La guerre renforce le roi : Charles VII crée un impôt permanent, la taille, et une armée permanente."
+    },
+    {
+      "fait": "la guerre de Cent Ans",
+      "carte": "Les Anglais ne gardent que Calais",
+      "role": "consequence",
+      "explication": "À la fin de la guerre, après Castillon en 1453, les Anglais ne gardent que Calais."
+    },
+    {
+      "fait": "l'agrandissement du domaine royal",
+      "carte": "Des guerres, des mariages et des héritages",
+      "role": "cause",
+      "explication": "Les rois agrandissent leur domaine par la guerre, les mariages et les héritages."
+    },
+    {
+      "fait": "l'agrandissement du domaine royal",
+      "carte": "Le roi s'impose face aux seigneurs",
+      "role": "consequence",
+      "explication": "Plus le domaine royal grandit, plus le roi s'impose face aux seigneurs."
+    }
+  ],
+  "etiquettes": [],
+  "devinettes": [
+    {
+      "reponse": "Jeanne d'Arc",
+      "acceptees": ["Jeanne d'Arc", "Jeanne"],
+      "indices": [
+        "Je suis une figure de la guerre de Cent Ans.",
+        "En 1429, je délivre Orléans.",
+        "Je fais sacrer Charles VII à Reims, puis je suis brûlée à Rouen en 1431."
+      ],
+      "explication": "Jeanne d'Arc délivre Orléans en 1429, fait sacrer Charles VII à Reims et est brûlée à Rouen en 1431."
+    },
+    {
+      "reponse": "Hugues Capet",
+      "acceptees": ["Hugues Capet", "Capet", "Hugues"],
+      "indices": [
+        "Je suis élu roi par les grands seigneurs.",
+        "Mes terres sont petites : elles s'étendent autour de Paris et d'Orléans.",
+        "Je suis le premier roi de ma dynastie, élu en 987."
+      ],
+      "explication": "Hugues Capet est élu roi en 987 et fonde la dynastie des Capétiens ; son domaine royal est alors petit."
+    },
+    {
+      "reponse": "Louis IX",
+      "acceptees": ["Louis IX", "Saint Louis", "Louis 9"],
+      "indices": [
+        "Je suis un roi pieux et justicier.",
+        "J'impose la monnaie royale dans tout le royaume et j'interdis les guerres privées.",
+        "Je pars en croisade et je meurs devant Tunis en 1270."
+      ],
+      "explication": "Louis IX, appelé Saint Louis, est mort devant Tunis en 1270 ; l'Église l'a proclamé saint en 1297."
+    },
+    {
+      "reponse": "Bailli",
+      "acceptees": ["Bailli", "Un bailli", "Le bailli", "Baillis"],
+      "indices": [
+        "Je représente le roi dans une région.",
+        "Je suis une invention de Philippe Auguste, pour le nord du royaume.",
+        "Je rends la justice et je lève les impôts au nom du roi."
+      ],
+      "explication": "Le bailli représente le roi dans une région du nord ; au sud, ce rôle est tenu par le sénéchal."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "La guerre de Cent Ans dure de 1337 à 1453. Combien d'années dure-t-elle exactement ?",
+      "reponse": 116,
+      "unite": "ans",
+      "tolerance": 0,
+      "explication": "1453 − 1337 = 116 ans : un peu plus de cent ans, avec des trêves."
+    },
+    {
+      "question": "Philippe Auguste est roi de 1180 à 1223. Combien d'années dure son règne ?",
+      "reponse": 43,
+      "unite": "ans",
+      "tolerance": 0,
+      "explication": "1223 − 1180 = 43 ans."
+    },
+    {
+      "question": "Louis IX règne de 1226 à 1270. Combien d'années dure son règne ?",
+      "reponse": 44,
+      "unite": "ans",
+      "tolerance": 0,
+      "explication": "1270 − 1226 = 44 ans."
+    },
+    {
+      "question": "Hugues Capet est élu roi en 987 et la bataille de Bouvines a lieu en 1214. Combien d'années séparent ces deux dates ?",
+      "reponse": 227,
+      "unite": "ans",
+      "tolerance": 0,
+      "explication": "1214 − 987 = 227 ans."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Les grandes dates de l'affirmation du pouvoir royal",
+      "etapes": [
+        "Hugues Capet est élu roi",
+        "Philippe Auguste gagne la bataille de Bouvines",
+        "Saint Louis meurt devant Tunis",
+        "Jeanne d'Arc délivre Orléans",
+        "Les Anglais sont battus à Castillon"
+      ]
+    },
+    {
+      "titre": "Les grands moments de la guerre de Cent Ans",
+      "etapes": [
+        "Les Français sont battus à Crécy",
+        "La peste noire ravage le royaume",
+        "Les Français sont battus à Azincourt",
+        "Jeanne d'Arc délivre Orléans",
+        "Les Anglais perdent la dernière bataille à Castillon"
+      ]
+    }
+  ]
+}

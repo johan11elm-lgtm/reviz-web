@@ -1,0 +1,149 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Quantités égales à 1 litre",
+      "detail": "Des volumes et des contenances qui valent exactement 1 litre, soit 1 dm³.",
+      "cartes": [
+        "Un volume de 1 dm³",
+        "Un volume de 1 000 cm³",
+        "Une contenance de 1 000 mL",
+        "Une contenance de 100 cL",
+        "Une contenance de 10 dL"
+      ]
+    },
+    {
+      "nom": "Quantités égales à 2,5 litres",
+      "detail": "Des volumes et des contenances qui valent exactement 2,5 litres.",
+      "cartes": [
+        "Un volume de 2,5 dm³",
+        "Un volume de 2 500 cm³",
+        "Une contenance de 2 500 mL",
+        "Une contenance de 250 cL",
+        "Une contenance de 25 dL"
+      ]
+    },
+    {
+      "nom": "Quantités égales à 1 m³",
+      "detail": "Des volumes et des contenances qui valent exactement 1 mètre cube, soit 1 000 litres.",
+      "cartes": [
+        "Un volume de 1 000 dm³",
+        "Un volume de 1 000 000 cm³",
+        "Une contenance de 1 000 L",
+        "Une contenance de 100 000 cL",
+        "Une contenance de 10 000 dL"
+      ]
+    },
+    {
+      "nom": "Quantités égales à 60 litres",
+      "detail": "Des volumes et des contenances qui valent exactement 60 litres, comme l'aquarium de 60 000 cm³.",
+      "cartes": [
+        "Un volume de 60 dm³",
+        "Un volume de 60 000 cm³",
+        "Une contenance de 60 000 mL",
+        "Une contenance de 6 000 cL",
+        "Une contenance de 600 dL"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [],
+  "devinettes": [
+    {
+      "reponse": "Patron",
+      "acceptees": ["Patron", "Le patron", "Un patron"],
+      "indices": [
+        "Je suis dessiné à plat sur une feuille.",
+        "Quand on me plie, on fabrique un solide.",
+        "Pour un pavé droit, je suis formé de six rectangles."
+      ],
+      "explication": "Le patron est une figure plane qui, une fois pliée, permet de fabriquer un solide."
+    },
+    {
+      "reponse": "Cylindre",
+      "acceptees": ["Cylindre", "Le cylindre", "Un cylindre", "Cylindre de révolution"],
+      "indices": [
+        "Je suis un solide.",
+        "Mon volume est l'aire de ma base multipliée par ma hauteur.",
+        "Mes deux bases sont des disques parallèles."
+      ],
+      "explication": "Le cylindre a deux bases en forme de disques parallèles ; son volume vaut π × r² × h."
+    },
+    {
+      "reponse": "Litre",
+      "acceptees": ["Litre", "Le litre", "Un litre"],
+      "indices": [
+        "Je suis une unité.",
+        "Je mesure une contenance.",
+        "Je vaux 1 dm³."
+      ],
+      "explication": "Le litre est une unité de contenance : 1 L = 1 dm³."
+    },
+    {
+      "reponse": "Disque",
+      "acceptees": ["Disque", "Le disque", "Un disque"],
+      "indices": [
+        "Je suis une surface plane.",
+        "Je suis formé d'un cercle et de son intérieur.",
+        "Mon aire vaut π × r²."
+      ],
+      "explication": "Le disque est la surface formée par un cercle et son intérieur ; son aire vaut π × r²."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "Un disque a un rayon de 5 cm. Quelle est son aire en cm² ? Prends 3,14 pour π.",
+      "reponse": 78.5,
+      "unite": "cm²",
+      "tolerance": 0.05,
+      "explication": "A = π × r² = 3,14 × 5² = 3,14 × 25 = 78,5 cm²."
+    },
+    {
+      "question": "Un pavé droit mesure 12 cm de long, 5 cm de large et 4 cm de haut. Quel est son volume ?",
+      "reponse": 240,
+      "unite": "cm³",
+      "tolerance": 0,
+      "explication": "V = L × l × h = 12 × 5 × 4 = 60 × 4 = 240 cm³."
+    },
+    {
+      "question": "Un cube a une arête de 6 cm. Quel est son volume ?",
+      "reponse": 216,
+      "unite": "cm³",
+      "tolerance": 0,
+      "explication": "V = 6 × 6 × 6 = 36 × 6 = 216 cm³."
+    },
+    {
+      "question": "Un prisme droit a une base d'aire 15 cm² et une hauteur de 8 cm. Quel est son volume ?",
+      "reponse": 120,
+      "unite": "cm³",
+      "tolerance": 0,
+      "explication": "V = aire de la base × hauteur = 15 × 8 = 120 cm³."
+    },
+    {
+      "question": "Un cylindre a un rayon de 3 cm et une hauteur de 10 cm. Quel est son volume en cm³ ? Prends 3,14 pour π.",
+      "reponse": 282.6,
+      "unite": "cm³",
+      "tolerance": 0.15,
+      "explication": "V = π × r² × h = 3,14 × 3² × 10 = 3,14 × 9 × 10 = 3,14 × 90 = 282,6 cm³."
+    },
+    {
+      "question": "Une piscine a la forme d'un pavé droit de 8 m de long, 4 m de large et 1,5 m de profondeur. Combien de litres d'eau peut-elle contenir ?",
+      "reponse": 48000,
+      "unite": "L",
+      "tolerance": 0,
+      "explication": "V = 8 × 4 × 1,5 = 32 × 1,5 = 48 m³, et 1 m³ = 1 000 L, donc 48 × 1 000 = 48 000 L."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Calculer la contenance d'un récipient",
+      "etapes": [
+        "On repère le solide et on lit ses dimensions",
+        "On convertit toutes les longueurs dans la même unité",
+        "On calcule le volume avec la formule du solide",
+        "On convertit le volume en litres",
+        "On répond par une phrase"
+      ]
+    }
+  ]
+}

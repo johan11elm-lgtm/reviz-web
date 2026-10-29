@@ -1,0 +1,194 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Énergie cinétique",
+      "detail": "L'énergie que possède tout ce qui est en mouvement.",
+      "cartes": [
+        "Un cycliste qui roule sur la route",
+        "Les pales d'une éolienne qui tournent",
+        "Un ballon lancé à travers le terrain",
+        "Un skieur qui descend la piste",
+        "L'eau d'une rivière qui s'écoule"
+      ]
+    },
+    {
+      "nom": "Énergie chimique",
+      "detail": "L'énergie stockée dans les piles, les aliments et les combustibles.",
+      "cartes": [
+        "Une pile neuve dans sa boîte",
+        "Une barre de céréales dans un sac",
+        "Un morceau de charbon avant d'être brûlé",
+        "Du gaz naturel dans une bouteille",
+        "Du bois rangé près d'une cheminée"
+      ]
+    },
+    {
+      "nom": "Énergie thermique",
+      "detail": "L'énergie liée à la température d'un objet ou d'un liquide.",
+      "cartes": [
+        "Une soupe brûlante dans un bol",
+        "Un radiateur allumé qui chauffe la pièce",
+        "Le sable brûlant d'une plage en plein été",
+        "Le fer à repasser chaud posé sur son support",
+        "Un bain rempli d'eau bien chaude"
+      ]
+    },
+    {
+      "nom": "Énergie électrique",
+      "detail": "L'énergie transportée par le courant dans les fils.",
+      "cartes": [
+        "Le courant qui passe dans les fils d'une lampe allumée",
+        "Le courant produit par un panneau photovoltaïque",
+        "Le courant envoyé par une éolienne vers le réseau",
+        "Le courant fourni par une prise murale",
+        "Le courant produit par la dynamo d'une bicyclette"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "De quel type de source d'énergie parle le groupe en couleur ?",
+      "texte": "Sur la colline, les éoliennes tournent en utilisant [le vent].",
+      "choix": ["Renouvelable", "Combustible fossile", "Nucléaire"],
+      "bonne": 0,
+      "explication": "Le vent se renouvelle sans cesse : c'est une source d'énergie renouvelable."
+    },
+    {
+      "consigne": "De quel type de source d'énergie parle le groupe en couleur ?",
+      "texte": "Cette ancienne centrale produit de l'électricité en brûlant [du charbon].",
+      "choix": ["Renouvelable", "Combustible fossile", "Nucléaire"],
+      "bonne": 1,
+      "explication": "Le charbon est un combustible fossile, formé très lentement dans le sous-sol."
+    },
+    {
+      "consigne": "De quel type de source d'énergie parle le groupe en couleur ?",
+      "texte": "Cette centrale produit de la chaleur à partir de [l'uranium].",
+      "choix": ["Renouvelable", "Combustible fossile", "Nucléaire"],
+      "bonne": 2,
+      "explication": "L'uranium est la matière de l'énergie nucléaire, stockée dans les noyaux des atomes."
+    },
+    {
+      "consigne": "De quel type de source d'énergie parle le groupe en couleur ?",
+      "texte": "Les panneaux posés sur le toit du collège captent [le Soleil].",
+      "choix": ["Renouvelable", "Combustible fossile", "Nucléaire"],
+      "bonne": 0,
+      "explication": "Le Soleil brille chaque jour : c'est une source d'énergie renouvelable."
+    },
+    {
+      "consigne": "De quel type de source d'énergie parle le groupe en couleur ?",
+      "texte": "Le cargo traverse l'océan en consommant [du pétrole].",
+      "choix": ["Renouvelable", "Combustible fossile", "Nucléaire"],
+      "bonne": 1,
+      "explication": "Le pétrole est un combustible fossile : il a mis des millions d'années à se former."
+    },
+    {
+      "consigne": "De quel type de source d'énergie parle le groupe en couleur ?",
+      "texte": "Le vieux moulin tourne grâce à [l'eau de la rivière en mouvement].",
+      "choix": ["Renouvelable", "Combustible fossile", "Nucléaire"],
+      "bonne": 0,
+      "explication": "L'eau en mouvement se renouvelle en permanence : c'est une source renouvelable."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Joule",
+      "acceptees": ["Le joule", "Joules", "Les joules", "J"],
+      "indices": [
+        "Je suis une unité de mesure.",
+        "Je mesure ce que l'on peut produire : du mouvement, de la chaleur, de la lumière.",
+        "Je suis l'unité de l'énergie, à ne pas confondre avec le watt ni avec le volt."
+      ],
+      "explication": "L'énergie se mesure en joules (J) ; le watt est une unité de puissance et le volt une unité de tension."
+    },
+    {
+      "reponse": "Convertisseur",
+      "acceptees": ["Un convertisseur", "Le convertisseur", "Les convertisseurs"],
+      "indices": [
+        "La lampe, le moteur et l'éolienne sont comme moi.",
+        "Je change la forme de l'énergie qui me traverse.",
+        "Dans une chaîne énergétique, je suis placé entre le réservoir et l'énergie utile."
+      ],
+      "explication": "Un convertisseur transforme une forme d'énergie en une autre ; il se place entre le réservoir et l'énergie utile."
+    },
+    {
+      "reponse": "Éolienne",
+      "acceptees": ["Une éolienne", "L'éolienne", "Les éoliennes"],
+      "indices": [
+        "Je me dresse souvent sur une colline ou en mer.",
+        "Mes pales se mettent à tourner quand il y a du vent.",
+        "Je convertis l'énergie cinétique du vent en énergie électrique."
+      ],
+      "explication": "L'éolienne convertit l'énergie cinétique du vent en énergie électrique."
+    },
+    {
+      "reponse": "Panneau photovoltaïque",
+      "acceptees": ["Un panneau photovoltaïque", "Panneau solaire", "Un panneau solaire", "Cellule photovoltaïque", "Panneaux photovoltaïques"],
+      "indices": [
+        "On me place souvent sur un toit.",
+        "Je reçois de l'énergie lumineuse du Soleil.",
+        "Je la convertis en énergie électrique."
+      ],
+      "explication": "Le panneau photovoltaïque convertit l'énergie lumineuse en énergie électrique."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "Un moteur reçoit 3,2 kJ d'énergie électrique. Combien cela fait-il de joules ?",
+      "reponse": 3200,
+      "unite": "J",
+      "tolerance": 0,
+      "explication": "1 kJ = 1 000 J, donc 3,2 kJ = 3,2 × 1 000 = 3 200 J."
+    },
+    {
+      "question": "Une lampe reçoit 1 500 J d'énergie électrique. Combien cela fait-il de kilojoules ?",
+      "reponse": 1.5,
+      "unite": "kJ",
+      "tolerance": 0,
+      "explication": "1 kJ = 1 000 J, donc 1 500 J = 1 500 ÷ 1 000 = 1,5 kJ."
+    },
+    {
+      "question": "Une lampe à incandescence reçoit 100 J d'énergie électrique et produit 12 J d'énergie lumineuse. Le reste est perdu sous forme d'énergie thermique. Combien de joules sont perdus ?",
+      "reponse": 88,
+      "unite": "J",
+      "tolerance": 0,
+      "explication": "L'énergie se conserve : 100 − 12 = 88 J sont perdus sous forme thermique."
+    },
+    {
+      "question": "Une lampe à DEL reçoit 20 J d'énergie électrique et en convertit 15 J en énergie lumineuse. Le reste est perdu sous forme thermique. Combien de joules sont perdus ?",
+      "reponse": 5,
+      "unite": "J",
+      "tolerance": 0,
+      "explication": "L'énergie se conserve : 20 − 15 = 5 J sont perdus sous forme thermique."
+    },
+    {
+      "question": "Un moteur électrique reçoit 500 J d'énergie électrique et fournit 350 J d'énergie cinétique. Le reste est perdu sous forme thermique. Combien de joules sont perdus ?",
+      "reponse": 150,
+      "unite": "J",
+      "tolerance": 0,
+      "explication": "L'énergie se conserve : 500 − 350 = 150 J sont perdus sous forme thermique."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Construire une chaîne énergétique",
+      "etapes": [
+        "On repère le réservoir d'énergie et le convertisseur",
+        "On les place dans des cases, de gauche à droite",
+        "On les relie par des flèches",
+        "On écrit sur chaque flèche la forme d'énergie transférée",
+        "On sépare l'énergie utile et l'énergie perdue en sortie"
+      ]
+    },
+    {
+      "titre": "Le trajet de l'énergie dans une lampe de poche",
+      "etapes": [
+        "La pile contient de l'énergie chimique",
+        "La pile convertit cette énergie en énergie électrique",
+        "La lampe reçoit cette énergie électrique",
+        "La lampe produit de la lumière et de la chaleur"
+      ]
+    }
+  ]
+}

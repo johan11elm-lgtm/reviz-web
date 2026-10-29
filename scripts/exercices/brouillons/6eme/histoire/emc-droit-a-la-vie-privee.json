@@ -1,0 +1,95 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Textes et institutions qui protègent",
+      "detail": "Les articles de loi, les règlements et l'organisme qui protègent la vie privée et les données.",
+      "cartes": [
+        "L'article 9 du Code civil, depuis 1970",
+        "L'article 12 de la Déclaration universelle des droits de l'homme",
+        "L'article 16 de la Convention internationale des droits de l'enfant",
+        "La CNIL, créée en 1978",
+        "Le RGPD, la règle européenne de 2018"
+      ]
+    },
+    {
+      "nom": "Exemples de données personnelles",
+      "detail": "Les informations qui permettent d'identifier une personne : nom, adresse, photo, téléphone, localisation.",
+      "cartes": [
+        "Ton nom de famille",
+        "Ton adresse postale",
+        "Une photo de toi, qui montre ton visage",
+        "Ton numéro de téléphone",
+        "Ta localisation à un moment précis"
+      ]
+    },
+    {
+      "nom": "Les bons réflexes en ligne",
+      "detail": "Les gestes simples qui protègent sa vie privée et celle des autres sur internet.",
+      "cartes": [
+        "Mettre son compte en privé",
+        "Garder ses mots de passe secrets",
+        "Réfléchir avant de publier",
+        "Demander l'accord de chaque personne d'une photo de groupe",
+        "Refuser les demandes d'inconnus sur son compte"
+      ]
+    },
+    {
+      "nom": "Des actes de cyberharcèlement",
+      "detail": "Des moqueries, des insultes, des rumeurs ou des images diffusées de façon répétée pour faire du mal.",
+      "cartes": [
+        "Des moqueries répétées dans un groupe de discussion",
+        "Des insultes envoyées chaque jour par téléphone",
+        "Une rumeur lancée sur un camarade en ligne",
+        "La diffusion répétée d'images pour humilier quelqu'un",
+        "Aimer ou partager un message qui humilie un camarade"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [],
+  "devinettes": [
+    {
+      "reponse": "CNIL",
+      "acceptees": ["CNIL", "La CNIL", "Commission nationale de l'informatique et des libertés"],
+      "indices": [
+        "Je suis un organisme français.",
+        "J'ai été créée en 1978.",
+        "Mon rôle est de protéger les données personnelles en France."
+      ],
+      "explication": "La CNIL, créée en 1978, veille à la protection des données personnelles en France."
+    },
+    {
+      "reponse": "Cyberharcèlement",
+      "acceptees": ["Cyberharcèlement", "Cyber-harcèlement", "Cyber harcèlement", "Harcèlement en ligne", "Harcèlement"],
+      "indices": [
+        "Je suis fait de moqueries, d'insultes ou de rumeurs.",
+        "Je passe par internet ou par téléphone, et je me répète.",
+        "On peut m'arrêter en parlant à un adulte de confiance et en appelant le 3018."
+      ],
+      "explication": "Le cyberharcèlement, ce sont des moqueries, des insultes, des rumeurs ou des images diffusées de façon répétée, par internet ou par téléphone."
+    },
+    {
+      "reponse": "Droit à l'image",
+      "acceptees": ["Droit à l'image", "Le droit à l'image", "Droit image"],
+      "indices": [
+        "Tout le monde me possède, même les enfants.",
+        "Je protège les photos et les vidéos où l'on apparaît.",
+        "Grâce à moi, personne ne peut publier ta photo sans ton accord."
+      ],
+      "explication": "Le droit à l'image permet de refuser qu'on photographie, filme ou publie son image sans son accord."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Analyser une situation où un droit n'est pas respecté",
+      "etapes": [
+        "Décrire les faits : qui, quoi, où",
+        "Repérer le droit qui n'est pas respecté",
+        "Citer le texte qui protège ce droit",
+        "Proposer une réponse adaptée"
+      ]
+    }
+  ]
+}

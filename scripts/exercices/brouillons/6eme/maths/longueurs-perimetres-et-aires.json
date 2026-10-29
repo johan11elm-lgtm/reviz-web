@@ -1,0 +1,193 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Résultat en centimètres",
+      "detail": "Les périmètres de figures dont les mesures sont données en cm : le résultat est une longueur en cm.",
+      "cartes": [
+        "Le périmètre d'un carré de 6 cm de côté",
+        "Le contour d'un rectangle de 5 cm sur 3 cm",
+        "Le périmètre d'un cercle de 10 cm de diamètre",
+        "Le tour d'un triangle de côtés 3 cm, 4 cm et 5 cm",
+        "Le contour d'un pentagone dont les cinq côtés mesurent 3 cm"
+      ]
+    },
+    {
+      "nom": "Résultat en mètres",
+      "detail": "Les périmètres de figures dont les mesures sont données en m : le résultat est une longueur en m.",
+      "cartes": [
+        "Le périmètre d'un rectangle de 8 m sur 3,5 m",
+        "La clôture autour d'un jardin carré de 10 m de côté",
+        "Le périmètre d'un cercle de 2 m de diamètre",
+        "Le tour d'un terrain rectangulaire de 40 m sur 25 m",
+        "Le périmètre d'un triangle de côtés 6 m, 7 m et 9 m"
+      ]
+    },
+    {
+      "nom": "Résultat en centimètres carrés",
+      "detail": "Les aires de figures dont les mesures sont données en cm : le résultat est une surface en cm².",
+      "cartes": [
+        "L'aire d'un carré de 4 cm de côté",
+        "L'aire d'un rectangle de 5 cm sur 3 cm",
+        "La surface d'une feuille rectangulaire de 21 cm sur 30 cm",
+        "La surface d'un timbre carré de 2 cm de côté",
+        "La surface d'un carnet rectangulaire de 15 cm sur 10 cm"
+      ]
+    },
+    {
+      "nom": "Résultat en mètres carrés",
+      "detail": "Les aires de figures dont les mesures sont données en m : le résultat est une surface en m².",
+      "cartes": [
+        "L'aire d'un rectangle de 8 m sur 3,5 m",
+        "La surface d'un terrain carré de 30 m de côté",
+        "L'aire d'un jardin rectangulaire de 12 m sur 5 m",
+        "La surface du sol d'une classe de 9 m sur 7 m",
+        "La surface d'une piscine rectangulaire de 10 m sur 4 m"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Que calcule la formule en couleur ?",
+      "texte": "Dans son cours, Léa a recopié la formule [P = 4 × c], où c est la longueur d'un côté.",
+      "choix": ["Le périmètre d'un carré", "Le périmètre d'un rectangle", "Le périmètre d'un cercle", "L'aire d'un rectangle"],
+      "bonne": 0,
+      "explication": "Les quatre côtés d'un carré ont la même longueur c : son périmètre est P = 4 × c."
+    },
+    {
+      "consigne": "Que calcule la formule en couleur ?",
+      "texte": "Au tableau, le professeur écrit la formule [P = 2 × (L + ℓ)], avec L la longueur et ℓ la largeur.",
+      "choix": ["Le périmètre d'un carré", "Le périmètre d'un rectangle", "Le périmètre d'un cercle", "L'aire d'un rectangle"],
+      "bonne": 1,
+      "explication": "Un rectangle a deux longueurs et deux largeurs : son périmètre est P = 2 × (L + ℓ)."
+    },
+    {
+      "consigne": "Que calcule la formule en couleur ?",
+      "texte": "Pour une roue de vélo, Tom utilise la formule [P = π × d], où d est le diamètre.",
+      "choix": ["Le périmètre d'un carré", "Le périmètre d'un rectangle", "Le périmètre d'un cercle", "L'aire d'un rectangle"],
+      "bonne": 2,
+      "explication": "Le périmètre d'un cercle est proportionnel à son diamètre : P = π × d."
+    },
+    {
+      "consigne": "Que calcule la formule en couleur ?",
+      "texte": "Pour un terrain rectangulaire, Inès applique la formule [A = L × ℓ].",
+      "choix": ["Le périmètre d'un carré", "Le périmètre d'un rectangle", "Le périmètre d'un cercle", "L'aire d'un rectangle"],
+      "bonne": 3,
+      "explication": "L'aire d'un rectangle est le produit de sa longueur par sa largeur : A = L × ℓ."
+    },
+    {
+      "consigne": "Que calcule la formule en couleur ?",
+      "texte": "Pour une assiette ronde de rayon r, Noé écrit la formule [P = 2 × π × r].",
+      "choix": ["Le périmètre d'un carré", "Le périmètre d'un rectangle", "Le périmètre d'un cercle", "L'aire d'un rectangle"],
+      "bonne": 2,
+      "explication": "Le diamètre vaut deux rayons : P = π × d s'écrit aussi P = 2 × π × r."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Périmètre",
+      "acceptees": ["Périmètre", "Le périmètre"],
+      "indices": [
+        "Je suis une grandeur que l'on associe à une figure.",
+        "Je me mesure avec une unité de longueur, comme le mètre.",
+        "Je suis la longueur du contour d'une figure."
+      ],
+      "explication": "Le périmètre d'une figure est la longueur de son contour."
+    },
+    {
+      "reponse": "Aire",
+      "acceptees": ["Aire", "L'aire", "Une aire"],
+      "indices": [
+        "Je suis une grandeur que l'on associe à une figure.",
+        "On peut me comparer en comptant les carreaux d'un quadrillage.",
+        "Je me mesure en cm² ou en m²."
+      ],
+      "explication": "L'aire d'une figure est la mesure de sa surface, en cm², m²…"
+    },
+    {
+      "reponse": "Pi",
+      "acceptees": ["Pi", "π", "Le nombre pi"],
+      "indices": [
+        "Je suis un nombre qui n'est pas entier.",
+        "Je vaux environ 3,14.",
+        "Je relie la longueur d'un cercle à son diamètre."
+      ],
+      "explication": "Le nombre π vaut environ 3,14 : P = π × d pour un cercle de diamètre d."
+    },
+    {
+      "reponse": "Diamètre",
+      "acceptees": ["Diamètre", "Le diamètre"],
+      "indices": [
+        "Je suis un segment lié à un cercle.",
+        "Je passe par le centre du cercle et je joins deux de ses points.",
+        "Je mesure deux rayons."
+      ],
+      "explication": "Le diamètre passe par le centre du cercle : il mesure deux rayons."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "Quel est le périmètre d'un rectangle de 12 cm sur 7 cm ?",
+      "reponse": 38,
+      "unite": "cm",
+      "tolerance": 0,
+      "explication": "P = 2 × (12 + 7) = 2 × 19 = 38 cm."
+    },
+    {
+      "question": "Quelle est l'aire d'un carré de 9 m de côté ?",
+      "reponse": 81,
+      "unite": "m²",
+      "tolerance": 0,
+      "explication": "A = c × c = 9 × 9 = 81 m²."
+    },
+    {
+      "question": "Quel est le périmètre d'un cercle de 20 cm de diamètre ? Prends π ≈ 3,14.",
+      "reponse": 62.8,
+      "unite": "cm",
+      "tolerance": 0,
+      "explication": "P = π × d ≈ 3,14 × 20 = 62,8 cm."
+    },
+    {
+      "question": "Combien font 4,5 m² en dm² ?",
+      "reponse": 450,
+      "unite": "dm²",
+      "tolerance": 0,
+      "explication": "Pour les aires, on multiplie par 100 d'une unité à la suivante : 4,5 × 100 = 450 dm²."
+    },
+    {
+      "question": "Combien font 2 700 cm² en dm² ?",
+      "reponse": 27,
+      "unite": "dm²",
+      "tolerance": 0,
+      "explication": "1 dm² = 100 cm², donc 2 700 ÷ 100 = 27 dm²."
+    },
+    {
+      "question": "Combien de mètres y a-t-il dans 2,4 km ?",
+      "reponse": 2400,
+      "unite": "m",
+      "tolerance": 0,
+      "explication": "1 km = 1 000 m, donc 2,4 × 1 000 = 2 400 m."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Calculer le périmètre d'une figure composée",
+      "etapes": [
+        "Découpe le contour en morceaux simples : segments et demi-cercles",
+        "Calcule la longueur de chaque morceau du bord",
+        "Additionne ces longueurs, sans les segments intérieurs",
+        "Écris le résultat avec une unité de longueur"
+      ]
+    },
+    {
+      "titre": "Calculer l'aire d'un rectangle",
+      "etapes": [
+        "Repère la longueur et la largeur",
+        "Convertis-les dans la même unité si besoin",
+        "Multiplie la longueur par la largeur",
+        "Écris le résultat avec une unité d'aire"
+      ]
+    }
+  ]
+}

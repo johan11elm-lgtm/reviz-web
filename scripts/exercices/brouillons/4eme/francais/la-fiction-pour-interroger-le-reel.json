@@ -1,0 +1,149 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Un récit réaliste",
+      "detail": "Une histoire vraisemblable : des gens ordinaires dans un cadre réel, sans rien de surnaturel.",
+      "cartes": [
+        "Une ouvrière parisienne s'endette pour une robe de bal",
+        "Un petit employé de ministère rêve d'une vie plus riche",
+        "Une famille de mineurs lutte contre la misère dans le Nord",
+        "Un paysan normand est ruiné par un procès",
+        "Un clerc de notaire découvre l'injustice sociale à Paris"
+      ]
+    },
+    {
+      "nom": "Un récit fantastique",
+      "detail": "Un fait étrange survient dans un cadre réel et laisse le doute entre explication rationnelle et explication surnaturelle.",
+      "cartes": [
+        "Une statue semble bouger la nuit : rêve ou réalité ?",
+        "Un homme se croit hanté, mais est-il simplement fou ?",
+        "Une ombre sans corps traverse la chambre : rêve ou fantôme ?",
+        "Des pas résonnent dans la maison vide : écho ou spectre ?",
+        "Un miroir ne montre plus son reflet : fatigue ou surnaturel ?"
+      ]
+    },
+    {
+      "nom": "Un conte merveilleux",
+      "detail": "Un monde où la magie est naturelle : personne ne doute ni ne s'étonne.",
+      "cartes": [
+        "Une fée accorde trois vœux, et nul ne s'en étonne",
+        "Un loup parle à l'enfant, qui répond sans surprise",
+        "Une citrouille devient carrosse d'un coup de baguette",
+        "Un génie sorti d'une lampe exauce les désirs du pauvre",
+        "Le chevalier combat un dragon qui garde un trésor"
+      ]
+    },
+    {
+      "nom": "De la science-fiction",
+      "detail": "Une histoire qui se projette dans le futur, avec des techniques ou des mondes imaginés.",
+      "cartes": [
+        "Des colons voyagent vers une planète lointaine en l'an 3000",
+        "Un robot du futur apprend à ressentir des émotions",
+        "En 2300, des humains vivent sous la mer",
+        "Un vaisseau spatial traverse une galaxie inconnue",
+        "Dans un futur lointain, une machine intelligente gouverne la Terre"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Quel est le point de vue dans le passage en couleur ?",
+      "texte": "La nuit tombait. [Pierre sentit son cœur battre plus fort : cette ombre, là-bas, bougeait-elle vraiment ?]",
+      "choix": ["Point de vue interne", "Point de vue externe", "Point de vue omniscient"],
+      "bonne": 0,
+      "explication": "On connaît les sensations et les doutes d'un seul personnage, Pierre : c'est un point de vue interne."
+    },
+    {
+      "consigne": "Quel est le point de vue dans le passage en couleur ?",
+      "texte": "[Un homme entra, posa sa valise près de la porte, puis fixa longuement l'horloge.]",
+      "choix": ["Point de vue interne", "Point de vue externe", "Point de vue omniscient"],
+      "bonne": 1,
+      "explication": "On voit seulement des gestes, comme à travers une caméra, sans connaître les pensées de l'homme : c'est un point de vue externe."
+    },
+    {
+      "consigne": "Quel est le point de vue dans le passage en couleur ?",
+      "texte": "[Paul croyait que Léa dormait, mais Léa faisait semblant et préparait déjà sa réponse.]",
+      "choix": ["Point de vue interne", "Point de vue externe", "Point de vue omniscient"],
+      "bonne": 2,
+      "explication": "Le narrateur connaît les pensées de Paul et celles de Léa : c'est un point de vue omniscient."
+    },
+    {
+      "consigne": "Quel procédé le passage en couleur illustre-t-il ?",
+      "texte": "Dans le noir, [il me semblait] que la statue me regardait.",
+      "choix": ["Modalisateur du doute", "Champ lexical de la peur", "Détail réaliste"],
+      "bonne": 0,
+      "explication": "« Il me semblait » montre que le narrateur n'est pas sûr de ce qu'il voit : c'est un modalisateur du doute."
+    },
+    {
+      "consigne": "Quel procédé le passage en couleur illustre-t-il ?",
+      "texte": "Dans le couloir, [une terreur glacée me saisit ; je frissonnai d'effroi].",
+      "choix": ["Modalisateur du doute", "Champ lexical de la peur", "Détail réaliste"],
+      "bonne": 1,
+      "explication": "« Terreur », « glacée », « frissonnai » et « effroi » appartiennent tous au thème de la peur : c'est un champ lexical de la peur."
+    },
+    {
+      "consigne": "Quel procédé le passage en couleur illustre-t-il ?",
+      "texte": "Mathilde est l'épouse d'un [petit employé de ministère], à Paris.",
+      "choix": ["Modalisateur du doute", "Champ lexical de la peur", "Détail réaliste"],
+      "bonne": 2,
+      "explication": "Un personnage ordinaire, avec un métier précis dans une ville réelle : c'est un détail réaliste qui crée l'illusion du réel."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Guy de Maupassant",
+      "acceptees": ["Maupassant", "Guy de Maupassant"],
+      "indices": [
+        "Je suis un écrivain français du XIXe siècle.",
+        "J'ai écrit environ trois cents nouvelles, réalistes comme fantastiques.",
+        "Dans l'une de mes nouvelles, « La Parure », une femme perd un bijou emprunté."
+      ],
+      "explication": "Maupassant (1850-1893) est l'auteur de « La Parure » (1884) et du « Horla » (1887)."
+    },
+    {
+      "reponse": "Le Horla",
+      "acceptees": ["Horla", "Le Horla"],
+      "indices": [
+        "Je suis une nouvelle publiée en 1887.",
+        "Je prends la forme d'un journal tenu par mon narrateur.",
+        "Mon narrateur se croit dominé par un être invisible : est-il fou ou face au surnaturel ?"
+      ],
+      "explication": "« Le Horla » (1887) est le journal d'un homme persuadé qu'un être invisible le domine : folie ou surnaturel ?"
+    },
+    {
+      "reponse": "Chute",
+      "acceptees": ["La chute", "Une chute"],
+      "indices": [
+        "Je viens à la fin d'une histoire.",
+        "Je suis une fin surprenante qui change le sens de tout le récit.",
+        "Dans « La Parure », je révèle que le bijou était faux."
+      ],
+      "explication": "La chute est la fin surprenante d'une nouvelle : dans « La Parure », elle révèle que le bijou était faux."
+    },
+    {
+      "reponse": "Fantastique",
+      "acceptees": ["Le fantastique", "Récit fantastique", "Un récit fantastique", "Registre fantastique", "Le registre fantastique"],
+      "indices": [
+        "Je suis un registre littéraire.",
+        "Un fait étrange survient dans un cadre réaliste.",
+        "Je fais hésiter le lecteur entre une explication rationnelle et une explication surnaturelle."
+      ],
+      "explication": "Le fantastique fait hésiter entre une explication rationnelle et une explication surnaturelle."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Les événements de « La Parure »",
+      "etapes": [
+        "Mathilde emprunte une rivière de diamants pour un bal",
+        "Elle perd le bijou",
+        "Le couple s'endette pour le remplacer",
+        "Le couple rembourse ses dettes pendant dix ans",
+        "La chute révèle que le bijou était faux"
+      ]
+    }
+  ]
+}

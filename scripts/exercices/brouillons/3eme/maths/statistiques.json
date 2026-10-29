@@ -1,0 +1,184 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "La moyenne d'une série",
+      "detail": "La somme des valeurs divisée par leur nombre, avec ou sans coefficients.",
+      "cartes": [
+        "Somme des valeurs divisée par le nombre de valeurs",
+        "Pour 2 ; 3 ; 4 ; 11, on trouve 5",
+        "Une seule valeur très grande suffit à la faire monter",
+        "(2 × 12 + 3 × 15) ÷ 5 = 13,8",
+        "Pour 3 ; 5 ; 7 ; 8 ; 12 ; 15, on trouve environ 8,33"
+      ]
+    },
+    {
+      "nom": "La médiane d'une série",
+      "detail": "La valeur qui partage la série rangée en deux groupes de même effectif.",
+      "cartes": [
+        "Valeur qui partage la série rangée en deux groupes de même effectif",
+        "Pour 3 ; 5 ; 7 ; 8 ; 12 ; 15, on trouve 7,5",
+        "Avec 7 valeurs rangées, c'est la 4e valeur",
+        "Avec 6 valeurs rangées, on prend le milieu entre la 3e et la 4e",
+        "Une valeur extrême très grande ne la change presque pas"
+      ]
+    },
+    {
+      "nom": "L'étendue d'une série",
+      "detail": "L'écart entre la plus grande et la plus petite valeur, qui mesure la dispersion.",
+      "cartes": [
+        "Écart entre la plus grande et la plus petite valeur",
+        "Pour 14 ; 9 ; 21 ; 6 ; 17, on trouve 15",
+        "Elle indique si les valeurs sont regroupées ou éparpillées",
+        "Plus grande valeur 30, plus petite 12 : on trouve 18",
+        "Pour 3 ; 5 ; 7 ; 8 ; 12 ; 15, on trouve 12"
+      ]
+    },
+    {
+      "nom": "La fréquence d'une valeur",
+      "detail": "La part de l'effectif total qui correspond à une valeur.",
+      "cartes": [
+        "Effectif d'une valeur divisé par l'effectif total",
+        "10 élèves sur 25 viennent à vélo : on trouve 0,4",
+        "Elle s'écrit en fraction, en décimal ou en pourcentage",
+        "On la multiplie par 360° pour trouver un angle de secteur",
+        "Sur 40 voyageurs, 6 ont un billet gratuit : 15 %"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Quel indicateur permet de répondre à la question en couleur ?",
+      "texte": "Dans une petite entreprise, quatre salaires sont proches de 1 700 € et un seul atteint 9 000 €. [Quel salaire représente le mieux ce que gagne un employé, sans être faussé par le plus gros ?]",
+      "choix": ["La moyenne", "La médiane", "L'étendue", "La fréquence"],
+      "bonne": 1,
+      "explication": "Le salaire de 9 000 € tire la moyenne vers le haut, alors que la médiane y résiste : elle représente mieux un salaire typique."
+    },
+    {
+      "consigne": "Quel indicateur permet de répondre à la question en couleur ?",
+      "texte": "Deux élèves ont la même moyenne en maths. [Lequel a les notes les plus proches les unes des autres ?]",
+      "choix": ["La moyenne", "La médiane", "L'étendue", "La fréquence"],
+      "bonne": 2,
+      "explication": "Pour savoir si des notes sont regroupées ou éparpillées, on compare les étendues : la plus petite indique les notes les plus proches."
+    },
+    {
+      "consigne": "Quel indicateur permet de répondre à la question en couleur ?",
+      "texte": "Un élève a 12 en maths avec le coefficient 2 et 15 en français avec le coefficient 3. [Quelle note globale obtient-il en tenant compte des coefficients ?]",
+      "choix": ["La moyenne", "La médiane", "L'étendue", "La fréquence"],
+      "bonne": 0,
+      "explication": "On calcule une moyenne pondérée : (2 × 12 + 3 × 15) ÷ 5 = 13,8."
+    },
+    {
+      "consigne": "Quel indicateur permet de répondre à la question en couleur ?",
+      "texte": "Dans une classe de 25 élèves, 10 viennent à vélo. [Quelle part de la classe vient à vélo ?]",
+      "choix": ["La moyenne", "La médiane", "L'étendue", "La fréquence"],
+      "bonne": 3,
+      "explication": "Une part de l'effectif total est une fréquence : 10 ÷ 25 = 0,4, soit 40 %."
+    },
+    {
+      "consigne": "Quel indicateur permet de répondre à la question en couleur ?",
+      "texte": "Les températures d'une semaine vont de 8 °C à 21 °C. [Quel écart y a-t-il entre la plus haute et la plus basse ?]",
+      "choix": ["La moyenne", "La médiane", "L'étendue", "La fréquence"],
+      "bonne": 2,
+      "explication": "L'écart entre la plus grande et la plus petite valeur est l'étendue : 21 − 8 = 13 °C."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Médiane",
+      "acceptees": ["Médiane", "La médiane"],
+      "indices": [
+        "Je suis un nombre qui résume une série.",
+        "Pour me trouver, il faut d'abord ranger les valeurs dans l'ordre croissant.",
+        "Je partage la série en deux groupes de même effectif."
+      ],
+      "explication": "La médiane partage la série rangée en deux groupes de même effectif."
+    },
+    {
+      "reponse": "Étendue",
+      "acceptees": ["Étendue", "L'étendue"],
+      "indices": [
+        "Je suis un nombre qui mesure la dispersion.",
+        "Je ne dépends que de deux valeurs de la série.",
+        "Je suis la plus grande valeur moins la plus petite."
+      ],
+      "explication": "L'étendue est la différence entre la plus grande et la plus petite valeur."
+    },
+    {
+      "reponse": "Moyenne pondérée",
+      "acceptees": ["Moyenne pondérée", "La moyenne pondérée", "Moyenne", "La moyenne"],
+      "indices": [
+        "Je suis un nombre qui résume des notes.",
+        "Chaque valeur compte plus ou moins, selon son coefficient.",
+        "On multiplie chaque valeur par son coefficient, on additionne, puis on divise par la somme des coefficients."
+      ],
+      "explication": "La moyenne pondérée tient compte des effectifs ou des coefficients : on divise par la somme des coefficients."
+    },
+    {
+      "reponse": "Fréquence",
+      "acceptees": ["Fréquence", "La fréquence"],
+      "indices": [
+        "Je suis un nombre compris entre 0 et 1.",
+        "Je peux aussi m'écrire en pourcentage.",
+        "Je suis l'effectif d'une valeur divisé par l'effectif total."
+      ],
+      "explication": "La fréquence d'une valeur est son effectif divisé par l'effectif total."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "Quelle est la moyenne de 6, 9, 10 et 15 ?",
+      "reponse": 10,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "(6 + 9 + 10 + 15) ÷ 4 = 40 ÷ 4 = 10."
+    },
+    {
+      "question": "Quelle est la médiane de la série 4 ; 9 ; 6 ; 12 ; 8 ; 15 ?",
+      "reponse": 8.5,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "On range : 4 ; 6 ; 8 ; 9 ; 12 ; 15. L'effectif 6 est pair : médiane = (8 + 9) ÷ 2 = 8,5."
+    },
+    {
+      "question": "Quelle est l'étendue de la série 18 ; 7 ; 25 ; 12 ; 9 ?",
+      "reponse": 18,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "Plus grande valeur 25, plus petite 7 : 25 − 7 = 18."
+    },
+    {
+      "question": "Un élève a 14 avec le coefficient 3 et 8 avec le coefficient 1. Quelle est sa moyenne ?",
+      "reponse": 12.5,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "(3 × 14 + 1 × 8) ÷ (3 + 1) = (42 + 8) ÷ 4 = 50 ÷ 4 = 12,5."
+    },
+    {
+      "question": "Sur 40 élèves, 14 mangent à la cantine. Quelle est la fréquence des élèves qui mangent à la cantine, en pourcentage ?",
+      "reponse": 35,
+      "unite": "%",
+      "tolerance": 0,
+      "explication": "14 ÷ 40 = 0,35, soit 35 %."
+    },
+    {
+      "question": "Dans un diagramme circulaire, une valeur a une fréquence de 30 %. Quel est l'angle de son secteur ?",
+      "reponse": 108,
+      "unite": "°",
+      "tolerance": 0,
+      "explication": "Angle = fréquence × 360° = 0,3 × 360° = 108°."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Comparer deux séries statistiques",
+      "etapes": [
+        "Ranger chaque série dans l'ordre croissant",
+        "Calculer la moyenne, la médiane et l'étendue de chaque série",
+        "Comparer les valeurs centrales puis la dispersion",
+        "Conclure par une phrase qui cite les indicateurs"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,149 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Avant un séisme",
+      "detail": "Les mesures de prévention prises à l'avance pour réduire les dégâts d'un séisme.",
+      "cartes": [
+        "Construire des bâtiments parasismiques",
+        "Dessiner la carte du zonage sismique",
+        "Organiser des exercices en cas de séisme",
+        "Informer la population des risques sismiques",
+        "Établir des plans de prévention des risques sismiques"
+      ]
+    },
+    {
+      "nom": "Pendant un séisme",
+      "detail": "Les bons gestes à faire pendant que le sol tremble.",
+      "cartes": [
+        "À l'intérieur, s'abriter sous un meuble solide",
+        "À l'intérieur, rester loin des fenêtres",
+        "Dehors, s'éloigner des bâtiments",
+        "Dehors, s'éloigner des fils électriques",
+        "Rester à l'abri jusqu'à la fin des secousses"
+      ]
+    },
+    {
+      "nom": "Après un séisme",
+      "detail": "Les bons gestes une fois que les secousses sont terminées.",
+      "cartes": [
+        "Évacuer l'immeuble calmement par l'escalier",
+        "Ne pas prendre l'ascenseur pour sortir",
+        "Couper le gaz en quittant les lieux",
+        "Couper l'électricité en quittant les lieux",
+        "Rejoindre les hauteurs si l'alerte au tsunami est donnée"
+      ]
+    },
+    {
+      "nom": "Face à un volcan actif",
+      "detail": "La surveillance d'un volcan et l'évacuation de la population avant une éruption.",
+      "cartes": [
+        "Des sismomètres enregistrent les petits séismes sous le volcan",
+        "Inclinomètres et GPS mesurent la déformation du sol du volcan",
+        "On analyse les gaz émis par le volcan",
+        "Les autorités évacuent la population avant l'éruption",
+        "L'observatoire du Piton de la Fournaise surveille le volcan en permanence"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "À quelle notion correspond le passage en couleur ?",
+      "texte": "À La Réunion, [une éruption du Piton de la Fournaise] est possible.",
+      "choix": ["Aléa", "Enjeux", "Vulnérabilité", "Prévention"],
+      "bonne": 0,
+      "explication": "Une éruption est un événement naturel possible : c'est un aléa."
+    },
+    {
+      "consigne": "À quelle notion correspond le passage en couleur ?",
+      "texte": "Au pied du volcan, [les habitants et leurs maisons] sont exposés aux éruptions.",
+      "choix": ["Aléa", "Enjeux", "Vulnérabilité", "Prévention"],
+      "bonne": 1,
+      "explication": "Les personnes et les biens exposés à un aléa sont les enjeux."
+    },
+    {
+      "consigne": "À quelle notion correspond le passage en couleur ?",
+      "texte": "À Haïti, [les constructions fragiles et le manque de préparation] ont aggravé les dégâts du séisme.",
+      "choix": ["Aléa", "Enjeux", "Vulnérabilité", "Prévention"],
+      "bonne": 2,
+      "explication": "Des bâtiments fragiles et une population mal préparée rendent les enjeux plus sensibles aux dégâts : c'est la vulnérabilité."
+    },
+    {
+      "consigne": "À quelle notion correspond le passage en couleur ?",
+      "texte": "Pour réduire les dégâts, la ville impose [des règles de construction parasismique].",
+      "choix": ["Aléa", "Enjeux", "Vulnérabilité", "Prévention"],
+      "bonne": 3,
+      "explication": "Les règles de construction parasismique limitent les dégâts : c'est de la prévention."
+    },
+    {
+      "consigne": "À quelle notion correspond le passage en couleur ?",
+      "texte": "Dans un désert sans habitants, [un séisme de forte magnitude] ne cause aucun dégât.",
+      "choix": ["Aléa", "Enjeux", "Vulnérabilité", "Prévention"],
+      "bonne": 0,
+      "explication": "Le séisme est l'événement naturel : c'est l'aléa. Sans enjeux exposés, il n'y a pas de risque."
+    },
+    {
+      "consigne": "À quelle notion correspond le passage en couleur ?",
+      "texte": "Dans une ville côtière, [les usines et les commerces] sont exposés aux séismes.",
+      "choix": ["Aléa", "Enjeux", "Vulnérabilité", "Prévention"],
+      "bonne": 1,
+      "explication": "Les activités et les biens exposés à un aléa sont des enjeux."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Aléa",
+      "acceptees": ["Aléa", "Un aléa", "L'aléa"],
+      "indices": [
+        "Je suis un événement naturel possible.",
+        "Je peux être un séisme ou une éruption.",
+        "On me décrit par ma probabilité et mon intensité."
+      ],
+      "explication": "Un aléa est un événement naturel possible, avec une certaine probabilité et une certaine intensité."
+    },
+    {
+      "reponse": "Vulnérabilité",
+      "acceptees": ["Vulnérabilité", "La vulnérabilité"],
+      "indices": [
+        "Je peux être forte ou faible selon les pays.",
+        "Je suis plus forte quand les bâtiments sont fragiles et la population mal préparée.",
+        "Je mesure la sensibilité des enjeux aux dégâts."
+      ],
+      "explication": "La vulnérabilité est la sensibilité des enjeux aux dégâts."
+    },
+    {
+      "reponse": "Piton de la Fournaise",
+      "acceptees": ["Piton de la Fournaise", "Le Piton de la Fournaise", "Fournaise", "La Fournaise"],
+      "indices": [
+        "Je suis un volcan actif français.",
+        "Je me trouve sur l'île de La Réunion.",
+        "Un observatoire me surveille en permanence."
+      ],
+      "explication": "Le Piton de la Fournaise est surveillé en permanence par l'Observatoire volcanologique de La Réunion."
+    },
+    {
+      "reponse": "Sismomètre",
+      "acceptees": ["Sismomètre", "Un sismomètre", "Sismomètres", "Sismographe"],
+      "indices": [
+        "Je suis un instrument de mesure.",
+        "J'enregistre les secousses du sol.",
+        "On m'installe sur les volcans pour repérer les petits séismes dus à la remontée du magma."
+      ],
+      "explication": "Les sismomètres enregistrent les petits séismes qui précèdent une éruption."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Anticiper une éruption volcanique",
+      "etapes": [
+        "Le magma remonte vers la surface",
+        "La remontée du magma provoque de petits séismes",
+        "Les sismomètres enregistrent ces séismes",
+        "Les scientifiques annoncent une éruption possible",
+        "La population est évacuée"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,204 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Pourquoi il faut produire plus",
+      "detail": "Les besoins alimentaires augmentent avec la population et avec les changements de régime alimentaire.",
+      "cartes": [
+        "La population mondiale ne cesse d'augmenter",
+        "Les assiettes contiennent de plus en plus de viande",
+        "Les produits laitiers sont de plus en plus consommés",
+        "Les produits transformés prennent une place croissante",
+        "Les besoins augmentent plus vite que la population"
+      ]
+    },
+    {
+      "nom": "La révolution verte",
+      "detail": "Les techniques et les pays qui ont fait grimper les rendements à partir des années 1960.",
+      "cartes": [
+        "Des semences sélectionnées à haut rendement",
+        "Des engrais, des pesticides et l'irrigation",
+        "Une forte hausse des récoltes de riz et de blé",
+        "Un mouvement qui démarre dans les années 1960",
+        "Surtout l'Inde, le Mexique et l'Asie du Sud-Est"
+      ]
+    },
+    {
+      "nom": "Les grands exportateurs",
+      "detail": "Quelques pays aux vastes terres, aux machines et aux grandes entreprises dominent les ventes agricoles dans le monde.",
+      "cartes": [
+        "Les États-Unis et le Brésil vendent beaucoup de soja",
+        "L'Ukraine et la Russie vendent beaucoup de blé",
+        "L'Argentine, le Canada et l'Australie dominent aussi les ventes",
+        "L'Union européenne, dont la France, vend beaucoup à l'étranger",
+        "De vastes terres, des machines et de grandes entreprises"
+      ]
+    },
+    {
+      "nom": "Les dégâts pour la nature",
+      "detail": "Forêts détruites, eaux polluées, sols épuisés, gaz à effet de serre : le coût écologique de l'agriculture.",
+      "cartes": [
+        "On déboise l'Amazonie pour le soja et l'élevage",
+        "En Indonésie, des forêts disparaissent pour l'huile de palme",
+        "Les engrais et les pesticides polluent les eaux",
+        "Les sols s'épuisent à force d'être cultivés",
+        "L'élevage émet des gaz à effet de serre"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "la déforestation en Amazonie",
+      "carte": "L'extension des cultures de soja",
+      "role": "cause",
+      "explication": "On défriche l'Amazonie pour étendre les surfaces de soja."
+    },
+    {
+      "fait": "la déforestation en Amazonie",
+      "carte": "Le besoin de pâturages pour l'élevage",
+      "role": "cause",
+      "explication": "On déboise aussi pour créer des pâturages destinés à l'élevage."
+    },
+    {
+      "fait": "la déforestation en Amazonie",
+      "carte": "La perte de biodiversité",
+      "role": "consequence",
+      "explication": "Quand la forêt disparaît, la biodiversité diminue."
+    },
+    {
+      "fait": "l'usage massif d'engrais et de pesticides",
+      "carte": "La recherche des rendements les plus élevés",
+      "role": "cause",
+      "explication": "L'agriculture productiviste cherche les plus hauts rendements avec beaucoup d'engrais."
+    },
+    {
+      "fait": "l'usage massif d'engrais et de pesticides",
+      "carte": "La pollution des eaux",
+      "role": "consequence",
+      "explication": "Les engrais et les pesticides polluent les rivières et les nappes."
+    },
+    {
+      "fait": "l'usage massif d'engrais et de pesticides",
+      "carte": "L'épuisement des sols",
+      "role": "consequence",
+      "explication": "L'usage massif de produits chimiques et d'eau épuise les sols."
+    }
+  ],
+  "etiquettes": [
+    {
+      "consigne": "Quelle notion le passage en couleur décrit-il ?",
+      "texte": "Au Sahel, [un paysan cultive du mil pour nourrir sa famille].",
+      "choix": ["Agriculture vivrière", "Agriculture commerciale", "Agriculture productiviste", "Agrobusiness"],
+      "bonne": 0,
+      "explication": "La récolte sert d'abord à nourrir la famille : c'est de l'agriculture vivrière."
+    },
+    {
+      "consigne": "Quelle notion le passage en couleur décrit-il ?",
+      "texte": "Dans cette plantation, [la récolte de cacao est vendue à l'étranger].",
+      "choix": ["Agriculture vivrière", "Agriculture commerciale", "Agriculture productiviste", "Agrobusiness"],
+      "bonne": 1,
+      "explication": "La production est faite pour être vendue, souvent exportée : c'est de l'agriculture commerciale."
+    },
+    {
+      "consigne": "Quelle notion le passage en couleur décrit-il ?",
+      "texte": "Dans les Grandes Plaines, [des machines et beaucoup d'engrais servent à obtenir les rendements les plus élevés].",
+      "choix": ["Agriculture vivrière", "Agriculture commerciale", "Agriculture productiviste", "Agrobusiness"],
+      "bonne": 2,
+      "explication": "Une agriculture intensive, très mécanisée, qui cherche les plus hauts rendements est productiviste."
+    },
+    {
+      "consigne": "Quelle notion le passage en couleur décrit-il ?",
+      "texte": "Dans les grands pays exportateurs, [de grandes entreprises contrôlent la production, la transformation et la vente des produits agricoles].",
+      "choix": ["Agriculture vivrière", "Agriculture commerciale", "Agriculture productiviste", "Agrobusiness"],
+      "bonne": 3,
+      "explication": "L'agrobusiness regroupe les grandes entreprises qui contrôlent toute la filière agricole."
+    },
+    {
+      "consigne": "Quelle notion le passage en couleur décrit-il ?",
+      "texte": "En Afrique subsaharienne, [les récoltes servent d'abord à nourrir la population locale].",
+      "choix": ["Agriculture vivrière", "Agriculture commerciale", "Agriculture productiviste", "Agrobusiness"],
+      "bonne": 0,
+      "explication": "Une production destinée d'abord à la population locale est de l'agriculture vivrière."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Révolution verte",
+      "acceptees": ["Révolution verte", "La révolution verte"],
+      "indices": [
+        "Je change les campagnes à partir des années 1960.",
+        "Je repose sur des semences sélectionnées, des engrais, des pesticides et l'irrigation.",
+        "En Inde, je fais fortement augmenter les récoltes de riz et de blé."
+      ],
+      "explication": "La révolution verte fait augmenter les rendements à partir des années 1960, surtout en Inde, mais elle épuise et pollue les sols et les nappes."
+    },
+    {
+      "reponse": "Agrobusiness",
+      "acceptees": ["Agrobusiness", "L'agrobusiness", "Agro-business", "Agribusiness"],
+      "indices": [
+        "Je ne suis pas une personne, mais un ensemble d'acteurs de l'agriculture.",
+        "Je suis très présent dans les grands pays qui dominent les ventes agricoles.",
+        "Je regroupe les grandes entreprises qui contrôlent la production, la transformation et la vente."
+      ],
+      "explication": "L'agrobusiness regroupe les grandes entreprises qui contrôlent la production, la transformation et la vente des produits agricoles."
+    },
+    {
+      "reponse": "Rendement",
+      "acceptees": ["Rendement", "Le rendement", "Rendement agricole"],
+      "indices": [
+        "Je me calcule avec une division.",
+        "On m'exprime par exemple en quintaux par hectare.",
+        "Je suis la quantité produite par unité de surface."
+      ],
+      "explication": "Le rendement est la production divisée par la surface : par exemple 80 quintaux par hectare."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "Une exploitation récolte 450 quintaux de blé sur 5 hectares. Quel est son rendement ?",
+      "reponse": 90,
+      "unite": "q/ha",
+      "tolerance": 0,
+      "explication": "Rendement = production ÷ surface = 450 ÷ 5 = 90 q/ha."
+    },
+    {
+      "question": "Un champ de 25 hectares produit 1750 quintaux de maïs. Quel est son rendement ?",
+      "reponse": 70,
+      "unite": "q/ha",
+      "tolerance": 0,
+      "explication": "Rendement = production ÷ surface = 1750 ÷ 25 = 70 q/ha."
+    },
+    {
+      "question": "Un agriculteur obtient un rendement de 45 q/ha sur 8 hectares. Combien de quintaux récolte-t-il ?",
+      "reponse": 360,
+      "unite": "quintaux",
+      "tolerance": 0,
+      "explication": "Production = rendement × surface = 45 × 8 = 360 quintaux."
+    },
+    {
+      "question": "Pour récolter 900 quintaux avec un rendement de 50 q/ha, combien d'hectares faut-il cultiver ?",
+      "reponse": 18,
+      "unite": "hectares",
+      "tolerance": 0,
+      "explication": "Surface = production ÷ rendement = 900 ÷ 50 = 18 hectares."
+    },
+    {
+      "question": "Grâce à la révolution verte, un paysan passe de 20 q/ha à 35 q/ha sur ses 4 hectares. Combien de quintaux de plus récolte-t-il ?",
+      "reponse": 60,
+      "unite": "quintaux",
+      "tolerance": 0,
+      "explication": "Avant : 20 × 4 = 80 quintaux. Après : 35 × 4 = 140 quintaux. Différence : 140 − 80 = 60 quintaux."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Comment lire un graphique de la population et de la production",
+      "etapes": [
+        "Lire le titre, la période et les unités des courbes",
+        "Décrire l'évolution de la population et celle de la production",
+        "Comparer les deux courbes sur la même période",
+        "Nuancer la conclusion : la faim existe malgré tout"
+      ]
+    }
+  ]
+}

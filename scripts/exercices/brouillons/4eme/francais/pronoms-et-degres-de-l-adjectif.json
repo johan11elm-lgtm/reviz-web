@@ -1,0 +1,138 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Pronom démonstratif",
+      "detail": "Un pronom qui remplace un nom en le désignant : celui, celle, ceux, celles, ceci, cela.",
+      "cartes": [
+        "Celui qui parle est le délégué",
+        "Ceux de la classe voisine sont partis",
+        "Cela me plaît beaucoup",
+        "Voici celle que Paul m'a donnée",
+        "Ceci est un cadeau pour toi"
+      ]
+    },
+    {
+      "nom": "Pronom possessif",
+      "detail": "Un pronom qui remplace un nom en indiquant à qui il appartient : le mien, le tien, le sien, le nôtre, le vôtre, le leur.",
+      "cartes": [
+        "Ton vélo est neuf, le mien est vieux",
+        "Votre maison est grande, la nôtre est petite",
+        "Les gants sur la table sont les tiens",
+        "Le vélo rouge est le sien",
+        "Mes clés sont ici, où sont les vôtres ?"
+      ]
+    },
+    {
+      "nom": "Comparatif",
+      "detail": "Un degré qui compare deux éléments : plus… que, aussi… que, moins… que.",
+      "cartes": [
+        "Léa est plus grande que Tom",
+        "Julie est aussi patiente que Marc",
+        "Le film est moins long que le livre",
+        "Elle chante mieux que moi",
+        "Le gâteau d'Anna est meilleur que la tarte"
+      ]
+    },
+    {
+      "nom": "Superlatif",
+      "detail": "Un degré qui place un élément au plus haut ou au plus bas d'un groupe (relatif), ou qui marque une intensité forte sans comparaison (absolu).",
+      "cartes": [
+        "C'est la plus haute tour de la ville",
+        "Marc est le moins bavard du groupe",
+        "Le film est extrêmement drôle",
+        "La tarte est très sucrée",
+        "Le chemin est fort dangereux"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Quelle est la nature du passage en couleur ?",
+      "texte": "[Ces] fleurs sentent très bon.",
+      "choix": ["Déterminant démonstratif", "Pronom démonstratif", "Déterminant possessif", "Pronom possessif"],
+      "bonne": 0,
+      "explication": "« Ces » accompagne le nom « fleurs » : c'est un déterminant démonstratif, pas un pronom."
+    },
+    {
+      "consigne": "Quelle est la nature du passage en couleur ?",
+      "texte": "Mon vélo est en panne, prête-moi [le tien].",
+      "choix": ["Déterminant démonstratif", "Pronom démonstratif", "Déterminant possessif", "Pronom possessif"],
+      "bonne": 3,
+      "explication": "« Le tien » remplace un nom (« ton vélo ») et indique le possesseur : c'est un pronom possessif."
+    },
+    {
+      "consigne": "Quelle est la nature du passage en couleur ?",
+      "texte": "[Notre] jardin est plus petit que le vôtre.",
+      "choix": ["Déterminant démonstratif", "Pronom démonstratif", "Déterminant possessif", "Pronom possessif"],
+      "bonne": 2,
+      "explication": "« Notre », sans accent, accompagne le nom « jardin » : c'est un déterminant possessif."
+    },
+    {
+      "consigne": "Quelle est la nature du passage en couleur ?",
+      "texte": "Ce gâteau est bon, mais [celui] de Paul est meilleur.",
+      "choix": ["Déterminant démonstratif", "Pronom démonstratif", "Déterminant possessif", "Pronom possessif"],
+      "bonne": 1,
+      "explication": "« Celui » remplace le nom « gâteau » pour le désigner : c'est un pronom démonstratif."
+    },
+    {
+      "consigne": "Quelle est la nature du passage en couleur ?",
+      "texte": "Ces deux robes me plaisent, mais [celle-ci] est trop chère.",
+      "choix": ["Déterminant démonstratif", "Pronom démonstratif", "Déterminant possessif", "Pronom possessif"],
+      "bonne": 1,
+      "explication": "« Celle-ci » remplace le nom « robe » : c'est un pronom démonstratif."
+    },
+    {
+      "consigne": "Quelle est la nature du passage en couleur ?",
+      "texte": "Mon frère a pris sa veste, j'ai pris [la mienne].",
+      "choix": ["Déterminant démonstratif", "Pronom démonstratif", "Déterminant possessif", "Pronom possessif"],
+      "bonne": 3,
+      "explication": "« La mienne » remplace « ma veste » : c'est un pronom possessif."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Meilleur",
+      "acceptees": ["Le meilleur", "Meilleure", "Meilleurs", "Meilleures"],
+      "indices": [
+        "Je sers à comparer.",
+        "Je suis un adjectif et je m'accorde avec le nom.",
+        "On ne dit jamais « plus bon » : c'est moi qu'il faut employer."
+      ],
+      "explication": "« Meilleur » est le comparatif de supériorité de l'adjectif « bon » : « ce gâteau est meilleur que l'autre »."
+    },
+    {
+      "reponse": "Comparatif",
+      "acceptees": ["Le comparatif", "Un comparatif"],
+      "indices": [
+        "Je suis un degré de l'adjectif.",
+        "Je peux exprimer la supériorité, l'égalité ou l'infériorité.",
+        "Je me construis avec « plus », « aussi » ou « moins », suivi de « que »."
+      ],
+      "explication": "Le comparatif compare deux éléments : « Léa est plus grande que Tom »."
+    },
+    {
+      "reponse": "Superlatif",
+      "acceptees": ["Le superlatif", "Un superlatif"],
+      "indices": [
+        "Je concerne les adjectifs, comme « haut » ou « drôle ».",
+        "Je peux être relatif ou absolu.",
+        "Avec moi, on dit « la plus haute tour de la ville » ou « extrêmement drôle »."
+      ],
+      "explication": "Le superlatif relatif place un élément au sommet d'un groupe ; le superlatif absolu marque une intensité forte sans comparaison."
+    },
+    {
+      "reponse": "Le nôtre",
+      "acceptees": ["Nôtre", "La nôtre", "Les nôtres"],
+      "indices": [
+        "Je remplace un nom pour éviter de le répéter.",
+        "Je précise à qui appartient quelque chose.",
+        "Je correspond à « nous » et je porte un accent circonflexe."
+      ],
+      "explication": "« Le nôtre » est le pronom possessif de la 1re personne du pluriel : « votre maison est grande, la nôtre est petite »."
+    }
+  ],
+  "calculs": [],
+  "etapes": []
+}

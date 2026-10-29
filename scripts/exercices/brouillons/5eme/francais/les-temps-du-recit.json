@@ -1,0 +1,138 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Phrases au passé simple",
+      "detail": "Le verbe est au passé simple : une action ponctuelle et achevée, qui fait avancer l'histoire.",
+      "cartes": [
+        "Le chevalier frappa à la porte",
+        "Soudain, un cavalier apparut au loin",
+        "Elle ouvrit la fenêtre et sauta",
+        "Les soldats traversèrent la rivière à la nage",
+        "Le roi se leva et sortit de la salle"
+      ]
+    },
+    {
+      "nom": "Phrases à l'imparfait",
+      "detail": "Le verbe est à l'imparfait : le décor, une habitude ou une action qui dure.",
+      "cartes": [
+        "La forêt était sombre et silencieuse",
+        "Chaque matin, il chassait dans la forêt",
+        "Le vent soufflait sur la lande",
+        "Les enfants jouaient dans la cour",
+        "Le château dominait toute la vallée"
+      ]
+    },
+    {
+      "nom": "Phrases au plus-que-parfait",
+      "detail": "Le verbe est au plus-que-parfait : une action passée, antérieure à une autre action passée.",
+      "cartes": [
+        "Il avait perdu son épée la veille",
+        "Elle était partie avant l'aube",
+        "Les voyageurs avaient marché toute la nuit",
+        "Nous étions arrivés trop tard",
+        "Le dragon avait détruit le village"
+      ]
+    },
+    {
+      "nom": "Phrases au présent",
+      "detail": "Le verbe est au présent, que ce soit pour une vérité générale, un fait actuel ou un récit rendu vivant.",
+      "cartes": [
+        "Le géant s'avance vers le chevalier",
+        "La Terre tourne autour du Soleil",
+        "Aujourd'hui, nous mangeons à la cantine",
+        "Les élèves écoutent attentivement le professeur",
+        "Le soleil se couche derrière la colline"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Quelle est la valeur du verbe en couleur ?",
+      "texte": "Le chevalier tira son épée et [frappa] le dragon.",
+      "choix": ["Action de premier plan", "Description", "Habitude", "Antériorité"],
+      "bonne": 0,
+      "explication": "« frappa » est au passé simple : une action ponctuelle et achevée, qui fait avancer l'histoire. C'est une action de premier plan."
+    },
+    {
+      "consigne": "Quelle est la valeur du verbe en couleur ?",
+      "texte": "Chaque matin, le vieux berger [rentrait] ses moutons.",
+      "choix": ["Action de premier plan", "Description", "Habitude", "Antériorité"],
+      "bonne": 2,
+      "explication": "« Chaque matin » montre une action qui se répète : l'imparfait exprime ici une habitude."
+    },
+    {
+      "consigne": "Quelle est la valeur du verbe en couleur ?",
+      "texte": "Il retrouva l'épée qu'il [avait perdue] la veille.",
+      "choix": ["Action de premier plan", "Description", "Habitude", "Antériorité"],
+      "bonne": 3,
+      "explication": "La perte a eu lieu avant le moment où il retrouve l'épée : le plus-que-parfait exprime l'antériorité."
+    },
+    {
+      "consigne": "Quelle est la valeur du verbe en couleur ?",
+      "texte": "Le soir tombait. La forêt [était] sombre et silencieuse.",
+      "choix": ["Action de premier plan", "Description", "Habitude", "Antériorité"],
+      "bonne": 1,
+      "explication": "« était sombre et silencieuse » décrit le décor, sans faire avancer l'histoire : l'imparfait sert ici à la description."
+    },
+    {
+      "consigne": "Quelle est la valeur du verbe en couleur ?",
+      "texte": "Soudain, un cavalier [apparut] au bout du chemin.",
+      "choix": ["Action de premier plan", "Description", "Habitude", "Antériorité"],
+      "bonne": 0,
+      "explication": "« apparut » est au passé simple : un événement soudain et achevé, qui fait avancer l'histoire."
+    },
+    {
+      "consigne": "Quelle est la valeur du verbe en couleur ?",
+      "texte": "Quand les secours arrivèrent, le feu [avait déjà détruit] la maison.",
+      "choix": ["Action de premier plan", "Description", "Habitude", "Antériorité"],
+      "bonne": 3,
+      "explication": "Le feu a détruit la maison avant l'arrivée des secours : le plus-que-parfait exprime une action antérieure à une autre action passée."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Imparfait",
+      "acceptees": ["L'imparfait", "Imparfait de l'indicatif", "L'imparfait de l'indicatif"],
+      "indices": [
+        "Je suis un temps du passé que l'on rencontre dans les récits.",
+        "Je décris le décor et les personnages, et j'exprime aussi les habitudes.",
+        "Dans « Il dormait quand le dragon surgit », je suis le temps de « dormait »."
+      ],
+      "explication": "L'imparfait décrit le décor, exprime une habitude ou présente une action en cours, interrompue par une action au passé simple."
+    },
+    {
+      "reponse": "Passé simple",
+      "acceptees": ["Le passé simple", "Passé simple de l'indicatif"],
+      "indices": [
+        "Je suis un temps de l'indicatif que l'on emploie surtout à l'écrit.",
+        "Je présente des actions ponctuelles, achevées et successives, qui font avancer l'histoire.",
+        "Dans « Il monta à cheval et partit », je suis le temps de « monta » et de « partit »."
+      ],
+      "explication": "Le passé simple exprime les actions de premier plan : ponctuelles, achevées et successives."
+    },
+    {
+      "reponse": "Plus-que-parfait",
+      "acceptees": ["Le plus-que-parfait", "Plus que parfait", "Le plus que parfait", "Plus-que-parfait de l'indicatif"],
+      "indices": [
+        "Je suis un temps composé du passé.",
+        "Je permets un retour en arrière dans un récit.",
+        "J'exprime une action qui a eu lieu avant une autre action passée, comme « avait perdu » dans « Il retrouva l'épée qu'il avait perdue »."
+      ],
+      "explication": "Le plus-que-parfait exprime l'antériorité : une action passée qui a eu lieu avant une autre action passée."
+    },
+    {
+      "reponse": "Présent de narration",
+      "acceptees": ["Le présent de narration", "Présent historique", "Le présent historique"],
+      "indices": [
+        "Je suis un choix d'écriture : l'auteur change volontairement de temps.",
+        "On me trouve dans un récit au passé, quand l'auteur veut rendre une action plus vivante.",
+        "Dans « Soudain, le géant s'avance vers lui », c'est moi qui rends la scène plus dramatique."
+      ],
+      "explication": "Le présent de narration remplace un temps du passé dans un récit pour rendre une action plus vivante. Ce n'est pas une erreur : c'est un choix d'écriture."
+    }
+  ],
+  "calculs": [],
+  "etapes": []
+}

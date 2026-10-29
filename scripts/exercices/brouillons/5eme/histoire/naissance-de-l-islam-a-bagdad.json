@@ -1,0 +1,130 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Mahomet et les débuts de l'islam",
+      "detail": "Le prophète, le départ de 622, le livre sacré et les pratiques des croyants.",
+      "cartes": [
+        "Un marchand de La Mecque annonce un Dieu unique",
+        "Le départ de La Mecque vers Médine en 622",
+        "Le livre sacré mis par écrit après la mort du prophète",
+        "La prière cinq fois par jour",
+        "Le jeûne pendant le mois de ramadan"
+      ]
+    },
+    {
+      "nom": "Conquêtes et gouvernement de l'empire",
+      "detail": "L'expansion des musulmans, leurs dirigeants et le statut des peuples conquis.",
+      "cartes": [
+        "Les armées musulmanes arrivent en Espagne en 711",
+        "La Syrie, l'Égypte et la Perse sont conquises rapidement",
+        "Les Omeyyades ont Damas pour capitale",
+        "Le calife dirige les musulmans et les territoires conquis",
+        "Les juifs et les chrétiens conquis paient un impôt spécial"
+      ]
+    },
+    {
+      "nom": "La ville de Bagdad",
+      "detail": "La capitale des Abbassides : sa fondation, son savoir et sa chute.",
+      "cartes": [
+        "Une grande ville ronde fondée sur le Tigre en 762",
+        "Une capitale où l'on traduit les textes grecs",
+        "Des savants étudient les mathématiques, l'astronomie et la médecine",
+        "Lieu de travail du savant al-Khwarizmi au IXe siècle",
+        "La capitale des Abbassides est prise et pillée en 1258"
+      ]
+    },
+    {
+      "nom": "Les croisades et les échanges",
+      "detail": "Les expéditions chrétiennes vers Jérusalem et les contacts pacifiques entre chrétiens et musulmans.",
+      "cartes": [
+        "Le pape appelle les chrétiens à partir vers Jérusalem",
+        "Des chrétiens d'Occident s'emparent de Jérusalem en 1099",
+        "Saladin reprend Jérusalem en 1187",
+        "Des marchands italiens commercent en Méditerranée",
+        "Des mots français, comme chiffre et sucre, viennent de l'arabe"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "la première croisade",
+      "carte": "L'appel du pape Urbain II à partir vers Jérusalem",
+      "role": "cause",
+      "explication": "En 1095, le pape Urbain II appelle les chrétiens à partir vers Jérusalem : c'est ce qui lance la première croisade."
+    },
+    {
+      "fait": "la première croisade",
+      "carte": "La prise de Jérusalem par les croisés en 1099",
+      "role": "consequence",
+      "explication": "Les croisés, partis en 1095, prennent Jérusalem en 1099 : c'est l'aboutissement de la première croisade."
+    },
+    {
+      "fait": "la prise de Bagdad par les Mongols en 1258",
+      "carte": "L'immense empire bâti par les Mongols venus d'Asie centrale",
+      "role": "cause",
+      "explication": "Au XIIIe siècle, les Mongols bâtissent un immense empire : c'est avec cette puissance qu'ils prennent Bagdad."
+    },
+    {
+      "fait": "la prise de Bagdad par les Mongols en 1258",
+      "carte": "La fin du califat abbasside de Bagdad",
+      "role": "consequence",
+      "explication": "Après la prise et le pillage de Bagdad en 1258, le califat abbasside prend fin."
+    }
+  ],
+  "etiquettes": [],
+  "devinettes": [
+    {
+      "reponse": "Mahomet",
+      "acceptees": ["Mahomet", "Le prophète Mahomet", "Muhammad", "Mohammed"],
+      "indices": [
+        "Je suis un marchand d'une ville d'Arabie.",
+        "J'annonce qu'il n'existe qu'un seul Dieu, Allah.",
+        "En 622, je pars de La Mecque pour Médine."
+      ],
+      "explication": "Mahomet, marchand de La Mecque, annonce un Dieu unique et part pour Médine en 622 : c'est l'Hégire."
+    },
+    {
+      "reponse": "Saladin",
+      "acceptees": ["Saladin", "Le sultan Saladin"],
+      "indices": [
+        "Je suis un chef musulman.",
+        "Je combats les chrétiens venus d'Occident en Terre sainte.",
+        "En 1187, je reprends Jérusalem."
+      ],
+      "explication": "Saladin, sultan musulman, reprend Jérusalem aux croisés en 1187."
+    },
+    {
+      "reponse": "Bagdad",
+      "acceptees": ["Bagdad", "Baghdad", "La ville de Bagdad"],
+      "indices": [
+        "Je suis une grande ville de forme ronde.",
+        "Je suis la capitale des califes abbassides, sur le Tigre.",
+        "Les Mongols m'ont prise et pillée en 1258."
+      ],
+      "explication": "Bagdad, fondée en 762 par les Abbassides, est prise et pillée par les Mongols en 1258."
+    },
+    {
+      "reponse": "Calife",
+      "acceptees": ["Calife", "Le calife", "Un calife", "Califes"],
+      "indices": [
+        "Je dirige une communauté de croyants.",
+        "Je suis le successeur de Mahomet.",
+        "Je suis à la fois chef politique et chef religieux des musulmans."
+      ],
+      "explication": "Le calife, successeur de Mahomet, est le chef politique et religieux de la communauté musulmane."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Quatre événements, de 622 à 1258",
+      "etapes": [
+        "Mahomet quitte La Mecque pour Médine : c'est l'Hégire",
+        "Les Abbassides fondent la ville de Bagdad",
+        "Les croisés s'emparent de Jérusalem",
+        "Les Mongols prennent et pillent Bagdad"
+      ]
+    }
+  ]
+}

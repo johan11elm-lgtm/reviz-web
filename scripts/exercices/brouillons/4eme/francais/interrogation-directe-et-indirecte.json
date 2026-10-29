@@ -1,0 +1,168 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Directe et totale",
+      "detail": "Une question posée telle quelle, avec un point d'interrogation, à laquelle on répond par oui ou non.",
+      "cartes": [
+        "Viens-tu ce soir ?",
+        "Est-ce que tu as faim ?",
+        "Paul est-il déjà parti ?",
+        "Tu as fini ?",
+        "A-t-elle terminé son exposé ?"
+      ]
+    },
+    {
+      "nom": "Directe et partielle",
+      "detail": "Une question posée telle quelle, avec un point d'interrogation, qui commence par un mot interrogatif.",
+      "cartes": [
+        "Où as-tu rangé tes clés ?",
+        "Pourquoi pleures-tu devant la porte ?",
+        "Quelles chansons préfères-tu ?",
+        "Qui parle dans la cour ?",
+        "Quand est-ce que le film commence ?"
+      ]
+    },
+    {
+      "nom": "Indirecte et totale",
+      "detail": "Une question rapportée dans une subordonnée introduite par « si », sans point d'interrogation.",
+      "cartes": [
+        "Je me demande s'il viendra",
+        "Il ignore si elle a gagné",
+        "Dis-moi si tu as faim",
+        "Elle demande si le train est parti",
+        "Je voudrais savoir si tu viens"
+      ]
+    },
+    {
+      "nom": "Indirecte et partielle",
+      "detail": "Une question rapportée dans une subordonnée introduite par un mot interrogatif, sans point d'interrogation.",
+      "cartes": [
+        "Je me demande où il va",
+        "Dis-moi quand tu pars",
+        "Elle ignore pourquoi il pleure",
+        "Il demande ce que tu veux",
+        "Je voudrais savoir comment tu fais"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Quelle est la nature du mot interrogatif en couleur ?",
+      "texte": "[Qui] parle dans la cour ?",
+      "choix": [
+        "Pronom interrogatif",
+        "Adverbe interrogatif",
+        "Déterminant interrogatif"
+      ],
+      "bonne": 0,
+      "explication": "« Qui » remplace une personne et est le sujet de « parle » : c'est un pronom interrogatif."
+    },
+    {
+      "consigne": "Quelle est la nature du mot interrogatif en couleur ?",
+      "texte": "[Où] as-tu rangé tes clés ?",
+      "choix": [
+        "Pronom interrogatif",
+        "Adverbe interrogatif",
+        "Déterminant interrogatif"
+      ],
+      "bonne": 1,
+      "explication": "« Où » interroge sur le lieu et ne varie pas : c'est un adverbe interrogatif."
+    },
+    {
+      "consigne": "Quelle est la nature du mot interrogatif en couleur ?",
+      "texte": "[Quelles] chansons préfères-tu ?",
+      "choix": [
+        "Pronom interrogatif",
+        "Adverbe interrogatif",
+        "Déterminant interrogatif"
+      ],
+      "bonne": 2,
+      "explication": "« Quelles » accompagne le nom « chansons » et s'accorde avec lui : c'est un déterminant interrogatif."
+    },
+    {
+      "consigne": "Quelle est la nature du mot interrogatif en couleur ?",
+      "texte": "Dis-moi [quand] tu pars.",
+      "choix": [
+        "Pronom interrogatif",
+        "Adverbe interrogatif",
+        "Déterminant interrogatif"
+      ],
+      "bonne": 1,
+      "explication": "« Quand » interroge sur le moment et ne varie pas : c'est un adverbe interrogatif, même dans une interrogation indirecte."
+    },
+    {
+      "consigne": "Quelle est la nature du mot interrogatif en couleur ?",
+      "texte": "Il demande [quel] film nous allons voir.",
+      "choix": [
+        "Pronom interrogatif",
+        "Adverbe interrogatif",
+        "Déterminant interrogatif"
+      ],
+      "bonne": 2,
+      "explication": "« Quel » accompagne le nom « film » : c'est un déterminant interrogatif."
+    },
+    {
+      "consigne": "Quelle est la nature du mot interrogatif en couleur ?",
+      "texte": "[Que] fais-tu ce soir ?",
+      "choix": [
+        "Pronom interrogatif",
+        "Adverbe interrogatif",
+        "Déterminant interrogatif"
+      ],
+      "bonne": 0,
+      "explication": "« Que » remplace une chose (« tu fais quoi ? ») : c'est un pronom interrogatif."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Inversion du sujet",
+      "acceptees": [
+        "L'inversion du sujet",
+        "Inversion",
+        "L'inversion"
+      ],
+      "indices": [
+        "Je suis une manière de construire une question.",
+        "Je mets le pronom personnel après le verbe.",
+        "Je suis dans « Viens-tu ? » et dans « Paul vient-il ? »."
+      ],
+      "explication": "Dans l'inversion du sujet, le pronom est placé après le verbe, avec un trait d'union : « Viens-tu ? »."
+    },
+    {
+      "reponse": "Interrogation totale",
+      "acceptees": [
+        "Une interrogation totale",
+        "L'interrogation totale",
+        "Totale",
+        "Question totale",
+        "Une question totale"
+      ],
+      "indices": [
+        "Je suis une sorte de question.",
+        "Je porte sur toute la phrase.",
+        "On me répond par oui ou par non, comme à « Viens-tu ce soir ? »."
+      ],
+      "explication": "L'interrogation totale porte sur toute la phrase : on répond par oui ou non."
+    },
+    {
+      "reponse": "Interrogation partielle",
+      "acceptees": [
+        "Une interrogation partielle",
+        "L'interrogation partielle",
+        "Partielle",
+        "Question partielle",
+        "Une question partielle"
+      ],
+      "indices": [
+        "Je suis une sorte de question.",
+        "Je porte sur un seul élément de la phrase.",
+        "Je commence par un mot interrogatif comme où, quand ou qui : on ne peut pas me répondre par oui ou non."
+      ],
+      "explication": "L'interrogation partielle porte sur un seul élément et commence par un mot interrogatif : « Quand viens-tu ? »."
+    }
+  ],
+  "calculs": [],
+  "etapes": []
+}

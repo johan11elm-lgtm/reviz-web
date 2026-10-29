@@ -1,0 +1,105 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Le domaine économique",
+      "detail": "Ce qui fait peser la France et l'UE par la richesse, la monnaie et le commerce.",
+      "cartes": [
+        "La France a environ le 7e PIB du monde",
+        "L'euro est la deuxième monnaie internationale",
+        "L'UE est l'un des premiers marchés de consommation du monde",
+        "L'UE compte parmi les premiers acteurs du commerce mondial",
+        "Pour vendre dans l'UE, les entreprises étrangères suivent ses règles"
+      ]
+    },
+    {
+      "nom": "Le domaine militaire",
+      "detail": "Ce qui fait peser la France, et ce qui manque à l'UE, par la force des armes.",
+      "cartes": [
+        "La France possède l'arme nucléaire",
+        "Des troupes françaises sont stationnées à l'étranger et en outre-mer",
+        "La France envoie ses soldats dans des opérations internationales",
+        "L'UE n'a pas d'armée commune",
+        "Beaucoup d'États de l'UE comptent sur l'OTAN pour se défendre"
+      ]
+    },
+    {
+      "nom": "Le domaine diplomatique",
+      "detail": "Ce qui fait peser la France, et ce qui limite l'UE, dans les négociations entre États.",
+      "cartes": [
+        "La France siège en permanence au Conseil de sécurité de l'ONU",
+        "La France peut bloquer seule une résolution de l'ONU",
+        "La France possède l'un des plus grands réseaux d'ambassades",
+        "Les États de l'UE sont parfois divisés en politique étrangère",
+        "Dans les négociations, la France pèse plus que sa population"
+      ]
+    },
+    {
+      "nom": "Le domaine culturel",
+      "detail": "Ce qui fait rayonner la France par sa langue, son image et ses événements.",
+      "cartes": [
+        "Des centaines de millions de personnes parlent français",
+        "La gastronomie française est célèbre dans le monde entier",
+        "La mode et le luxe français sont connus partout",
+        "Paris a accueilli les Jeux olympiques de 2024",
+        "La France séduit par sa langue et son image"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [],
+  "devinettes": [
+    {
+      "reponse": "Conseil de sécurité",
+      "acceptees": ["Le Conseil de sécurité", "Conseil de sécurité de l'ONU", "Le Conseil de sécurité de l'ONU"],
+      "indices": [
+        "Je suis un organe de l'ONU.",
+        "Je suis chargé de veiller à la paix dans le monde.",
+        "Cinq pays, dont la France, y siègent en permanence et peuvent y bloquer une résolution par leur veto."
+      ],
+      "explication": "Le Conseil de sécurité de l'ONU compte cinq membres permanents (États-Unis, Chine, Russie, Royaume-Uni, France), qui ont un droit de veto."
+    },
+    {
+      "reponse": "La francophonie",
+      "acceptees": ["Francophonie", "Les francophones", "Le monde francophone", "OIF"],
+      "indices": [
+        "Je désigne un ensemble de personnes et de pays.",
+        "Ce qui nous unit, c'est une langue que nous avons en partage.",
+        "Nous sommes des centaines de millions à parler français dans le monde."
+      ],
+      "explication": "La francophonie rassemble les personnes et les pays qui ont le français en partage."
+    },
+    {
+      "reponse": "Le soft power",
+      "acceptees": ["Soft power", "Puissance douce", "Le rayonnement culturel", "Rayonnement culturel"],
+      "indices": [
+        "Mon nom vient de l'anglais.",
+        "Je désigne une façon d'avoir de l'influence sans utiliser la force.",
+        "Je repose sur la langue, la gastronomie, la mode et l'image d'un pays."
+      ],
+      "explication": "Le soft power est la capacité d'influencer par la culture, la langue, l'image et les valeurs plutôt que par la force."
+    },
+    {
+      "reponse": "L'OTAN",
+      "acceptees": ["OTAN", "NATO"],
+      "indices": [
+        "Je suis une alliance militaire.",
+        "Je rassemble des pays d'Amérique du Nord et d'Europe.",
+        "Beaucoup d'États de l'UE comptent sur moi pour leur défense, et mon siège est à Bruxelles."
+      ],
+      "explication": "L'OTAN est une alliance militaire entre des pays d'Amérique du Nord et d'Europe, dont dépendent beaucoup de membres de l'UE pour leur défense."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Les étapes pour étudier la puissance d'un État",
+      "etapes": [
+        "Tracer un tableau avec les quatre domaines de la puissance",
+        "Ranger chaque élément de puissance dans la bonne colonne",
+        "Ajouter une ligne sur les limites de chaque domaine",
+        "Conclure : puissance complète ou incomplète ?"
+      ]
+    }
+  ]
+}

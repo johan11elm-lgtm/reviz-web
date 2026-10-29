@@ -1,0 +1,148 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Simple ajout de -ly",
+      "detail": "Pour la plupart des adjectifs, on ajoute -ly : quick devient quickly, slow devient slowly.",
+      "cartes": [
+        "He ran quickly to the stage",
+        "She spoke slowly to the judges",
+        "The band played perfectly",
+        "The audience listened quietly",
+        "The singer shouted loudly"
+      ]
+    },
+    {
+      "nom": "Consonne + y devient -ily",
+      "detail": "Quand l'adjectif finit par une consonne + y, le y devient i puis on ajoute -ly : happy devient happily.",
+      "cartes": [
+        "The children played happily on stage",
+        "She won the contest easily",
+        "He argued angrily with the judges",
+        "The audience clapped noisily",
+        "It rained heavily during the show"
+      ]
+    },
+    {
+      "nom": "Adjectif en -le devient -ly",
+      "detail": "Quand l'adjectif finit par -le, le e final est remplacé par y : gentle devient gently.",
+      "cartes": [
+        "She held the baby gently",
+        "He played the piano terribly",
+        "They sat comfortably in the front row",
+        "She explained the rules simply",
+        "He thanked the audience humbly"
+      ]
+    },
+    {
+      "nom": "Adverbe irrégulier ou identique",
+      "detail": "Good devient well, et fast, hard, late, early gardent la même forme que l'adjectif.",
+      "cartes": [
+        "She dances well",
+        "He runs fast",
+        "She works hard",
+        "The magician arrived late",
+        "The judges arrived early"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Quelle est la nature du mot en couleur ?",
+      "texte": "The music sounds [good].",
+      "choix": ["Adjectif", "Adverbe de manière", "Nom"],
+      "bonne": 0,
+      "explication": "Après sound, on emploie un adjectif, car il décrit la musique : good est un adjectif."
+    },
+    {
+      "consigne": "Quelle est la nature du mot en couleur ?",
+      "texte": "She sings [well].",
+      "choix": ["Adjectif", "Adverbe de manière", "Nom"],
+      "bonne": 1,
+      "explication": "Well décrit la façon de chanter : c'est l'adverbe de manière qui correspond à good."
+    },
+    {
+      "consigne": "Quelle est la nature du mot en couleur ?",
+      "texte": "He is a [friendly] boy.",
+      "choix": ["Adjectif", "Adverbe de manière", "Nom"],
+      "bonne": 0,
+      "explication": "Friendly finit par -ly mais c'est un adjectif : il décrit le nom boy."
+    },
+    {
+      "consigne": "Quelle est la nature du mot en couleur ?",
+      "texte": "He sang the song [beautifully].",
+      "choix": ["Adjectif", "Adverbe de manière", "Nom"],
+      "bonne": 1,
+      "explication": "Beautifully décrit la manière de chanter : c'est un adverbe de manière."
+    },
+    {
+      "consigne": "Quelle est la nature du mot en couleur ?",
+      "texte": "She is a [fast] runner.",
+      "choix": ["Adjectif", "Adverbe de manière", "Nom"],
+      "bonne": 0,
+      "explication": "Ici fast décrit le nom runner : c'est un adjectif, qui a la même forme que l'adverbe."
+    },
+    {
+      "consigne": "Quelle est la nature du mot en couleur ?",
+      "texte": "He runs [fast].",
+      "choix": ["Adjectif", "Adverbe de manière", "Nom"],
+      "bonne": 1,
+      "explication": "Ici fast décrit l'action de courir : c'est un adverbe, qui garde la même forme que l'adjectif."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Well",
+      "acceptees": ["Well"],
+      "indices": [
+        "Je suis un mot anglais qui décrit la manière de faire une action.",
+        "Je viens d'un adjectif, mais je ne prends pas -ly.",
+        "Je suis l'adverbe de good : She sings ___."
+      ],
+      "explication": "Well est l'adverbe de manière qui correspond à l'adjectif good."
+    },
+    {
+      "reponse": "Talent show",
+      "acceptees": ["A talent show", "The talent show", "Concours de talents"],
+      "indices": [
+        "Je suis un concours.",
+        "Des chanteurs, des danseurs et des magiciens se produisent sur scène.",
+        "Un jury et un public votent pour désigner le gagnant."
+      ],
+      "explication": "Un talent show est un concours de talents devant un jury (the judges) et un public (the audience)."
+    },
+    {
+      "reponse": "The judges",
+      "acceptees": ["Judges", "The judge", "Le jury", "Jury"],
+      "indices": [
+        "Je suis un groupe de personnes assises face à la scène.",
+        "Je note les candidats d'un concours.",
+        "En français, on m'appelle le jury."
+      ],
+      "explication": "The judges est le jury d'un talent show : il évalue les candidats."
+    },
+    {
+      "reponse": "The audience",
+      "acceptees": ["Audience", "Le public", "Public"],
+      "indices": [
+        "On me trouve dans une salle de spectacle.",
+        "J'applaudis et je vote pour mon candidat préféré.",
+        "Je suis le public, assis face à la scène."
+      ],
+      "explication": "The audience est le public d'un spectacle ; il applaudit et vote pour désigner le gagnant."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Choisir entre adjectif et adverbe",
+      "etapes": [
+        "Repère le mot décrit : un nom ou une action",
+        "Après be, look ou feel, garde l'adjectif",
+        "Sinon forme l'adverbe : -ly, -ily ou forme irrégulière",
+        "Place l'adverbe après le verbe et son complément"
+      ]
+    }
+  ]
+}

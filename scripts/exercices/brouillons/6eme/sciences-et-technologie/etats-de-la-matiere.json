@@ -1,0 +1,218 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "La fusion",
+      "detail": "Le passage de l'état solide à l'état liquide.",
+      "cartes": [
+        "Un glaçon qui fond dans un verre",
+        "Du beurre qui fond dans une poêle chaude",
+        "De la neige qui fond au soleil",
+        "La cire d'une bougie allumée qui devient liquide",
+        "Un iceberg qui fond en mer"
+      ]
+    },
+    {
+      "nom": "La solidification",
+      "detail": "Le passage de l'état liquide à l'état solide.",
+      "cartes": [
+        "L'eau d'un bac à glaçons placé au congélateur",
+        "Une flaque d'eau qui gèle pendant la nuit",
+        "Du chocolat fondu qui durcit au frais",
+        "La lave d'un volcan qui se fige en refroidissant",
+        "Du métal liquide qui refroidit dans un moule"
+      ]
+    },
+    {
+      "nom": "La vaporisation",
+      "detail": "Le passage de l'état liquide à l'état gazeux, lentement (évaporation) ou avec des bulles (ébullition).",
+      "cartes": [
+        "Du linge mouillé étendu dehors qui finit par sécher",
+        "L'eau d'une casserole qui bout",
+        "Une flaque d'eau qui disparaît au soleil d'été",
+        "Du parfum qui s'évapore d'un flacon ouvert",
+        "Une goutte d'alcool qui disparaît sur la peau"
+      ]
+    },
+    {
+      "nom": "La liquéfaction",
+      "detail": "Le passage de l'état gazeux à l'état liquide.",
+      "cartes": [
+        "La buée sur une vitre froide",
+        "Des gouttes qui perlent sur un verre d'eau glacée",
+        "La rosée sur l'herbe au petit matin",
+        "Les gouttelettes sous le couvercle d'une casserole chaude",
+        "La vapeur d'eau qui devient des gouttes en refroidissant"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "l'eau gèle au congélateur",
+      "carte": "Sa température descend en dessous de 0 °C",
+      "role": "cause",
+      "explication": "L'eau se solidifie à 0 °C : elle gèle quand elle est refroidie jusqu'à cette température."
+    },
+    {
+      "fait": "l'eau gèle au congélateur",
+      "carte": "Son volume augmente",
+      "role": "consequence",
+      "explication": "En se solidifiant, l'eau prend plus de place : c'est pour cela que la glace flotte."
+    },
+    {
+      "fait": "l'eau d'une casserole bout",
+      "carte": "Elle est chauffée jusqu'à 100 °C",
+      "role": "cause",
+      "explication": "L'eau pure bout à 100 °C : il faut la chauffer jusqu'à cette température."
+    },
+    {
+      "fait": "l'eau d'une casserole bout",
+      "carte": "Un nuage blanc de fines gouttes se forme au-dessus",
+      "role": "consequence",
+      "explication": "La vapeur d'eau, invisible, se liquéfie en refroidissant dans l'air : on voit de fines gouttes d'eau liquide."
+    }
+  ],
+  "etiquettes": [
+    {
+      "consigne": "Dans quel état se trouve la matière décrite en couleur ?",
+      "texte": "Sur la table, [le glaçon garde sa forme propre et son volume propre].",
+      "choix": ["Solide", "Liquide", "Gazeux"],
+      "bonne": 0,
+      "explication": "Un solide a une forme propre et un volume propre."
+    },
+    {
+      "consigne": "Dans quel état se trouve la matière décrite en couleur ?",
+      "texte": "Dans le verre, [l'eau prend la forme du récipient et sa surface est plane et horizontale].",
+      "choix": ["Solide", "Liquide", "Gazeux"],
+      "bonne": 1,
+      "explication": "Un liquide prend la forme du récipient et, au repos, sa surface est plane et horizontale."
+    },
+    {
+      "consigne": "Dans quel état se trouve la matière décrite en couleur ?",
+      "texte": "Dans une seringue bouchée, [l'air se comprime quand on enfonce le piston].",
+      "choix": ["Solide", "Liquide", "Gazeux"],
+      "bonne": 2,
+      "explication": "Un gaz peut être comprimé : il n'a ni forme propre ni volume propre."
+    },
+    {
+      "consigne": "Dans quel état se trouve la matière décrite en couleur ?",
+      "texte": "Dans la cuisine, [la vapeur d'eau occupe tout l'espace de la pièce et reste invisible].",
+      "choix": ["Solide", "Liquide", "Gazeux"],
+      "bonne": 2,
+      "explication": "La vapeur d'eau est de l'eau à l'état gazeux : un gaz occupe tout l'espace disponible."
+    },
+    {
+      "consigne": "Dans quel état se trouve la matière décrite en couleur ?",
+      "texte": "Dans un flacon, [le sirop prend la forme du flacon mais garde son volume].",
+      "choix": ["Solide", "Liquide", "Gazeux"],
+      "bonne": 1,
+      "explication": "Un liquide prend la forme de son récipient mais garde le même volume."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Éprouvette graduée",
+      "acceptees": ["Éprouvette graduée", "Une éprouvette graduée", "L'éprouvette graduée", "Éprouvette", "Une éprouvette", "L'éprouvette"],
+      "indices": [
+        "Je suis un instrument de mesure.",
+        "Je mesure le volume d'un liquide.",
+        "Pour me lire, on place son œil à la hauteur du liquide."
+      ],
+      "explication": "L'éprouvette graduée mesure un volume, en mL : on lit au bas du ménisque, l'œil à la hauteur du liquide."
+    },
+    {
+      "reponse": "Palier",
+      "acceptees": ["Palier", "Un palier", "Le palier"],
+      "indices": [
+        "Je suis une pause de la température.",
+        "Je me produis pendant un changement d'état d'un corps pur.",
+        "Pendant moi, la température reste constante."
+      ],
+      "explication": "Pendant un changement d'état d'un corps pur, la température reste constante : c'est un palier."
+    },
+    {
+      "reponse": "Liquéfaction",
+      "acceptees": ["Liquéfaction", "La liquéfaction", "Condensation", "La condensation", "Condensation liquide"],
+      "indices": [
+        "Je suis un changement d'état.",
+        "Je transforme un gaz en liquide.",
+        "La buée sur une vitre froide, c'est moi."
+      ],
+      "explication": "La liquéfaction est le passage de l'état gazeux à l'état liquide, comme la buée sur une vitre froide."
+    },
+    {
+      "reponse": "Masse",
+      "acceptees": ["Masse", "La masse"],
+      "indices": [
+        "Je suis une quantité de matière.",
+        "Je ne change pas quand un glaçon fond.",
+        "On me mesure en grammes avec une balance."
+      ],
+      "explication": "La masse se conserve lors d'un changement d'état, et se mesure avec une balance."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "On fait fondre 80 g de glace. Quelle est la masse de l'eau liquide obtenue ?",
+      "reponse": 80,
+      "unite": "g",
+      "tolerance": 0,
+      "explication": "La masse se conserve lors d'un changement d'état : 80 g de glace donnent 80 g d'eau liquide."
+    },
+    {
+      "question": "Un flacon contient 250 mL de sirop. Quel est son volume en litres ?",
+      "reponse": 0.25,
+      "unite": "L",
+      "tolerance": 0,
+      "explication": "1 L = 1 000 mL, donc 250 mL = 250 ÷ 1 000 = 0,25 L."
+    },
+    {
+      "question": "Une bouteille contient 1,5 L d'eau. Quel est son volume en mL ?",
+      "reponse": 1500,
+      "unite": "mL",
+      "tolerance": 0,
+      "explication": "1 L = 1 000 mL, donc 1,5 L = 1,5 × 1 000 = 1 500 mL."
+    },
+    {
+      "question": "Un paquet de farine a une masse de 2,5 kg. Quelle est sa masse en grammes ?",
+      "reponse": 2500,
+      "unite": "g",
+      "tolerance": 0,
+      "explication": "1 kg = 1 000 g, donc 2,5 kg = 2,5 × 1 000 = 2 500 g."
+    },
+    {
+      "question": "Un flacon contient 500 mL de liquide. Quel est son volume en cm³ ?",
+      "reponse": 500,
+      "unite": "cm³",
+      "tolerance": 0,
+      "explication": "1 mL = 1 cm³, donc 500 mL = 500 cm³."
+    },
+    {
+      "question": "Une casserole contient de l'eau pure à 20 °C. De combien de degrés sa température doit-elle monter pour que l'eau se mette à bouillir ?",
+      "reponse": 80,
+      "unite": "°C",
+      "tolerance": 0,
+      "explication": "L'eau pure bout à 100 °C. Il faut donc 100 − 20 = 80 °C de plus."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Chauffer de la glace pilée en relevant la température",
+      "etapes": [
+        "On met de la glace pilée dans un récipient",
+        "On chauffe doucement et on relève la température chaque minute",
+        "La température reste à 0 °C tant qu'il reste de la glace",
+        "Quand toute la glace a fondu, la température monte"
+      ]
+    },
+    {
+      "titre": "Les états de l'eau quand on la chauffe",
+      "etapes": [
+        "L'eau est solide : c'est un glaçon",
+        "À 0 °C, le glaçon fond et devient liquide",
+        "L'eau liquide chauffée atteint 100 °C",
+        "À 100 °C, l'eau bout et devient un gaz"
+      ]
+    }
+  ]
+}

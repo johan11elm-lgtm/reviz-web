@@ -1,0 +1,163 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "La mégalopole du Nord-Est",
+      "detail": "La chaîne de grandes villes de Boston à Washington, principal centre de commandement du pays.",
+      "cartes": [
+        "Une chaîne de grandes villes de Boston à Washington",
+        "Les villes de New York, Philadelphie et Baltimore",
+        "La finance et les sièges sociaux du pays",
+        "Le principal centre de commandement du pays",
+        "La capitale fédérale et le pouvoir politique"
+      ]
+    },
+    {
+      "nom": "La Rust Belt",
+      "detail": "L'ancienne région industrielle du Nord-Est et des Grands Lacs, touchée par les fermetures d'usines.",
+      "cartes": [
+        "Détroit, ancienne capitale de l'automobile",
+        "Pittsburgh, ancienne ville de l'acier",
+        "Des usines fermées face à la concurrence mondiale",
+        "Des villes reconverties dans la santé et les universités",
+        "Chicago, grande ville près des Grands Lacs"
+      ]
+    },
+    {
+      "nom": "La Sun Belt",
+      "detail": "Les États du Sud et de l'Ouest, qui attirent habitants et entreprises depuis les années 1970.",
+      "cartes": [
+        "Des habitants et des entreprises attirés depuis les années 1970",
+        "Un climat agréable qui attire les retraités",
+        "Houston, sa chimie et son centre spatial",
+        "Le Texas, la Californie et la Floride",
+        "Du pétrole, des industries de pointe et du tourisme"
+      ]
+    },
+    {
+      "nom": "La frontière avec le Mexique",
+      "detail": "Une zone de contact et d'échanges très active, mais aussi très surveillée.",
+      "cartes": [
+        "San Diego et Tijuana, villes jumelles",
+        "Des usines mexicaines qui assemblent pour le marché américain",
+        "Des murs et des barrières contre l'immigration clandestine",
+        "Un va-et-vient intense de camions et de marchandises",
+        "Une zone de contact entre deux territoires différents"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "la fermeture de nombreuses usines dans le Nord-Est et les Grands Lacs",
+      "carte": "Une forte concurrence des produits fabriqués ailleurs dans le monde",
+      "role": "cause",
+      "explication": "Face à la concurrence mondiale, beaucoup d'usines de la Manufacturing Belt ont fermé."
+    },
+    {
+      "fait": "la fermeture de nombreuses usines dans le Nord-Est et les Grands Lacs",
+      "carte": "Le surnom de « ceinture de la rouille » donné à la région",
+      "role": "consequence",
+      "explication": "Les usines fermées ont donné son nom à la Rust Belt, la « ceinture de la rouille »."
+    },
+    {
+      "fait": "la fermeture de nombreuses usines dans le Nord-Est et les Grands Lacs",
+      "carte": "Des villes qui se reconvertissent dans la santé et les universités",
+      "role": "consequence",
+      "explication": "Pour compenser les usines fermées, certaines villes comme Pittsburgh se reconvertissent."
+    },
+    {
+      "fait": "l'arrivée de nombreux habitants et entreprises dans la Sun Belt",
+      "carte": "Un climat agréable dans le Sud et l'Ouest",
+      "role": "cause",
+      "explication": "Le climat agréable attire habitants, retraités et entreprises depuis les années 1970."
+    },
+    {
+      "fait": "l'arrivée de nombreux habitants et entreprises dans la Sun Belt",
+      "carte": "Du pétrole et des industries de pointe sur place",
+      "role": "cause",
+      "explication": "Le pétrole et les industries de pointe offrent des emplois et attirent les entreprises."
+    }
+  ],
+  "etiquettes": [
+    {
+      "consigne": "Quel type d'espace le passage en couleur décrit-il ?",
+      "texte": "[Boston, New York et Washington concentrent le pouvoir politique, la finance et les sièges sociaux].",
+      "choix": ["Centre de commandement", "Région en reconversion", "Région dynamique", "Interface"],
+      "bonne": 0,
+      "explication": "La mégalopole du Nord-Est, avec ses pouvoirs et ses sièges sociaux, est le principal centre de commandement du pays."
+    },
+    {
+      "consigne": "Quel type d'espace le passage en couleur décrit-il ?",
+      "texte": "Près des Grands Lacs, [Pittsburgh, ancienne ville de l'acier, s'est reconvertie dans la santé et les universités].",
+      "choix": ["Centre de commandement", "Région en reconversion", "Région dynamique", "Interface"],
+      "bonne": 1,
+      "explication": "Une ancienne ville industrielle qui change d'activité appartient à la Rust Belt, une région en reconversion."
+    },
+    {
+      "consigne": "Quel type d'espace le passage en couleur décrit-il ?",
+      "texte": "[La Californie, le Texas et la Floride attirent habitants et entreprises grâce à leur climat agréable].",
+      "choix": ["Centre de commandement", "Région en reconversion", "Région dynamique", "Interface"],
+      "bonne": 2,
+      "explication": "Ces États de la Sun Belt gagnent habitants et entreprises depuis les années 1970 : ce sont des régions dynamiques."
+    },
+    {
+      "consigne": "Quel type d'espace le passage en couleur décrit-il ?",
+      "texte": "[San Diego et Tijuana se font face de part et d'autre de la frontière].",
+      "choix": ["Centre de commandement", "Région en reconversion", "Région dynamique", "Interface"],
+      "bonne": 3,
+      "explication": "Deux villes jumelles de part et d'autre d'une frontière active forment une interface, zone de contact entre deux territoires."
+    },
+    {
+      "consigne": "Quel type d'espace le passage en couleur décrit-il ?",
+      "texte": "Près de la frontière, [les maquiladoras mexicaines assemblent des produits pour le marché américain].",
+      "choix": ["Centre de commandement", "Région en reconversion", "Région dynamique", "Interface"],
+      "bonne": 3,
+      "explication": "Les maquiladoras font vivre les échanges entre le Mexique et les États-Unis : c'est la frontière comme interface."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Détroit",
+      "acceptees": ["Détroit", "Detroit"],
+      "indices": [
+        "Je suis une grande ville du nord des États-Unis.",
+        "J'ai été la capitale de l'automobile et j'ai perdu une grande partie de mes habitants depuis les années 1950.",
+        "J'ai fait faillite en 2013."
+      ],
+      "explication": "Détroit, capitale de l'automobile, symbolise le déclin de la Rust Belt : elle a fait faillite en 2013."
+    },
+    {
+      "reponse": "Une maquiladora",
+      "acceptees": ["Maquiladora", "Une maquiladora", "Les maquiladoras", "Maquiladoras"],
+      "indices": [
+        "Je suis une usine.",
+        "Je suis installée au Mexique, près d'une frontière.",
+        "Je profite d'une main-d'œuvre moins chère pour assembler des produits destinés au marché américain."
+      ],
+      "explication": "Une maquiladora est une usine d'assemblage mexicaine installée près de la frontière avec les États-Unis."
+    },
+    {
+      "reponse": "La Sun Belt",
+      "acceptees": ["Sun Belt", "La Sun Belt", "Sunbelt", "La Sunbelt"],
+      "indices": [
+        "Je suis une grande région des États-Unis.",
+        "Je regroupe des États du Sud et de l'Ouest, comme la Californie.",
+        "Mon climat agréable attire retraités et entreprises depuis les années 1970."
+      ],
+      "explication": "La Sun Belt regroupe les États dynamiques du Sud et de l'Ouest, dont la Californie, le Texas et la Floride."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Le déclin puis la reconversion de la Manufacturing Belt",
+      "etapes": [
+        "La Manufacturing Belt est la grande région industrielle du pays",
+        "La concurrence mondiale s'intensifie",
+        "De nombreuses usines ferment",
+        "On parle alors de Rust Belt, la ceinture de la rouille",
+        "Certaines villes se reconvertissent dans la santé et les universités"
+      ]
+    }
+  ]
+}

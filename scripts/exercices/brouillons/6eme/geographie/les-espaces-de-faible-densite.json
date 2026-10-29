@@ -1,0 +1,193 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Calculer et lire la densité",
+      "detail": "Mesurer le peuplement d'un espace : la formule, les valeurs moyennes et la lecture d'une carte.",
+      "cartes": [
+        "Le nombre d'habitants divisé par la superficie",
+        "Environ 60 habitants par km² dans le monde",
+        "Environ 120 habitants par km² en France",
+        "Sur une carte, une teinte claire indique peu d'habitants",
+        "Une moyenne qui cache de grandes différences"
+      ]
+    },
+    {
+      "nom": "Les contraintes naturelles",
+      "detail": "Les éléments du milieu qui gênent l'installation des hommes.",
+      "cartes": [
+        "Un froid intense presque toute l'année",
+        "La sécheresse du désert, où il pleut très peu",
+        "L'altitude des hautes montagnes",
+        "Des pentes trop raides pour construire",
+        "Une forêt si dense qu'on y avance mal"
+      ]
+    },
+    {
+      "nom": "Les facteurs humains",
+      "detail": "L'éloignement, le manque de routes et de services et l'histoire du peuplement expliquent aussi les faibles densités.",
+      "cartes": [
+        "Les grandes villes sont très éloignées",
+        "Il manque des routes pour y accéder",
+        "Les écoles, les hôpitaux et les commerces sont rares",
+        "Les transports en commun y sont presque absents",
+        "L'histoire du peuplement a laissé ces régions peu habitées"
+      ]
+    },
+    {
+      "nom": "Les espaces convoités",
+      "detail": "Les richesses qui attirent entreprises, agriculteurs et touristes dans des espaces peu peuplés.",
+      "cartes": [
+        "Le pétrole et le gaz de la Sibérie",
+        "Le bois de l'Amazonie",
+        "Les minerais cachés dans le sous-sol",
+        "Des paysages sauvages qui attirent les touristes",
+        "De vastes terres agricoles encore peu cultivées"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Que représente le groupe en couleur ?",
+      "texte": "Au Sahara, [la sécheresse] gêne l'installation des hommes.",
+      "choix": ["Une contrainte naturelle", "Un facteur humain", "Une richesse convoitée"],
+      "bonne": 0,
+      "explication": "La sécheresse est un élément du milieu : c'est une contrainte naturelle."
+    },
+    {
+      "consigne": "Que représente le groupe en couleur ?",
+      "texte": "Ce village reste peu peuplé car [les routes qui y mènent sont rares].",
+      "choix": ["Une contrainte naturelle", "Un facteur humain", "Une richesse convoitée"],
+      "bonne": 1,
+      "explication": "Le manque de routes dépend des aménagements faits par les hommes : c'est un facteur humain."
+    },
+    {
+      "consigne": "Que représente le groupe en couleur ?",
+      "texte": "L'Amazonie attire des entreprises à cause de [son bois et de ses terres agricoles].",
+      "choix": ["Une contrainte naturelle", "Un facteur humain", "Une richesse convoitée"],
+      "bonne": 2,
+      "explication": "Le bois et les terres agricoles sont des richesses qui attirent : l'espace est convoité."
+    },
+    {
+      "consigne": "Que représente le groupe en couleur ?",
+      "texte": "Dans l'Himalaya, [l'altitude et la pente] limitent le peuplement.",
+      "choix": ["Une contrainte naturelle", "Un facteur humain", "Une richesse convoitée"],
+      "bonne": 0,
+      "explication": "L'altitude et la pente viennent du relief : ce sont des contraintes naturelles."
+    },
+    {
+      "consigne": "Que représente le groupe en couleur ?",
+      "texte": "Dans cette vallée, [les écoles, les hôpitaux et les commerces sont très loin] et peu de gens s'y installent.",
+      "choix": ["Une contrainte naturelle", "Un facteur humain", "Une richesse convoitée"],
+      "bonne": 1,
+      "explication": "Le manque de services est un facteur humain d'isolement."
+    },
+    {
+      "consigne": "Que représente le groupe en couleur ?",
+      "texte": "La Sibérie attire les entreprises avec [son pétrole et son gaz].",
+      "choix": ["Une contrainte naturelle", "Un facteur humain", "Une richesse convoitée"],
+      "bonne": 2,
+      "explication": "Le pétrole et le gaz sont des ressources qui rendent la Sibérie convoitée."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Sahara",
+      "acceptees": ["Sahara", "Le Sahara"],
+      "indices": [
+        "Je suis un espace presque vide d'hommes.",
+        "Ma contrainte principale est la sécheresse.",
+        "Je suis le plus grand désert chaud du monde, au nord de l'Afrique."
+      ],
+      "explication": "Le Sahara est un immense désert chaud où la sécheresse limite fortement le peuplement."
+    },
+    {
+      "reponse": "Himalaya",
+      "acceptees": ["Himalaya", "L'Himalaya"],
+      "indices": [
+        "Je suis un espace très peu peuplé, en Asie.",
+        "Mes contraintes sont l'altitude et la pente.",
+        "Je suis la plus haute chaîne de montagnes du monde."
+      ],
+      "explication": "L'Himalaya est presque vide à cause de l'altitude et des pentes."
+    },
+    {
+      "reponse": "Amazonie",
+      "acceptees": ["Amazonie", "L'Amazonie", "La forêt amazonienne", "Forêt amazonienne"],
+      "indices": [
+        "Je suis un espace peu peuplé d'Amérique du Sud.",
+        "On me convoite pour mon bois et mes terres agricoles.",
+        "Je suis la plus grande forêt tropicale du monde."
+      ],
+      "explication": "L'Amazonie est une immense forêt tropicale convoitée pour son bois et ses terres."
+    },
+    {
+      "reponse": "Densité",
+      "acceptees": ["Densité", "La densité", "Densité de population"],
+      "indices": [
+        "Je mesure le peuplement d'un espace.",
+        "On me calcule par une division.",
+        "Je m'exprime en habitants par km²."
+      ],
+      "explication": "La densité est le nombre moyen d'habitants par km²."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "Une région compte 3 000 habitants sur 100 km². Quelle est sa densité ?",
+      "reponse": 30,
+      "unite": "hab./km²",
+      "tolerance": 0,
+      "explication": "Densité = habitants ÷ superficie = 3 000 ÷ 100 = 30 hab./km²."
+    },
+    {
+      "question": "Une île de 50 km² compte 400 habitants. Quelle est sa densité ?",
+      "reponse": 8,
+      "unite": "hab./km²",
+      "tolerance": 0,
+      "explication": "Densité = 400 ÷ 50 = 8 hab./km²."
+    },
+    {
+      "question": "Un désert de 200 km² compte 100 habitants. Quelle est sa densité ?",
+      "reponse": 0.5,
+      "unite": "hab./km²",
+      "tolerance": 0,
+      "explication": "Densité = 100 ÷ 200 = 0,5 hab./km² : un habitant pour deux km²."
+    },
+    {
+      "question": "Une région de montagne de 400 km² compte 2 000 habitants. Quelle est sa densité ?",
+      "reponse": 5,
+      "unite": "hab./km²",
+      "tolerance": 0,
+      "explication": "Densité = 2 000 ÷ 400 = 5 hab./km²."
+    },
+    {
+      "question": "La densité de la France est d'environ 120 hab./km² et celle du monde d'environ 60 hab./km². Combien de fois la densité de la France est-elle plus grande que celle du monde ?",
+      "reponse": 2,
+      "unite": "fois",
+      "tolerance": 0,
+      "explication": "120 ÷ 60 = 2 : la France est deux fois plus dense que la moyenne mondiale."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Calculer une densité de population",
+      "etapes": [
+        "Relever le nombre d'habitants et la superficie en km²",
+        "Diviser le nombre d'habitants par la superficie",
+        "Écrire le résultat avec l'unité hab./km²",
+        "Comparer le résultat à la moyenne mondiale de 60 hab./km²"
+      ]
+    },
+    {
+      "titre": "Lire une carte des densités",
+      "etapes": [
+        "Lire le titre et la légende de la carte",
+        "Repérer les teintes claires, qui indiquent les faibles densités",
+        "Nommer les espaces peu peuplés avec un planisphère",
+        "Expliquer ces faibles densités par une contrainte naturelle ou l'isolement"
+      ]
+    }
+  ]
+}

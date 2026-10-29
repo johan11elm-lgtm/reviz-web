@@ -1,0 +1,184 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Nombres égaux à 8",
+      "detail": "Les écritures, puissances ou racines, dont la valeur est 8.",
+      "cartes": [
+        "2³",
+        "√64",
+        "2⁵ ÷ 2²",
+        "2⁻¹ × 2⁴",
+        "(√8)²"
+      ]
+    },
+    {
+      "nom": "Nombres égaux à 0,125",
+      "detail": "Les écritures dont la valeur est 0,125, c'est-à-dire 1/8.",
+      "cartes": [
+        "2⁻³",
+        "8⁻¹",
+        "2⁻⁵ × 2²",
+        "(2⁻¹)³",
+        "125 × 10⁻³"
+      ]
+    },
+    {
+      "nom": "Nombres égaux à 1",
+      "detail": "Les écritures dont la valeur est 1.",
+      "cartes": [
+        "7⁰",
+        "(−3)⁰",
+        "5³ ÷ 5³",
+        "10⁻² × 10²",
+        "√49 ÷ 7"
+      ]
+    },
+    {
+      "nom": "Nombres égaux à 4 500",
+      "detail": "Les écritures dont la valeur est 4 500.",
+      "cartes": [
+        "4,5 × 10³",
+        "45 × 10²",
+        "0,45 × 10⁴",
+        "450 × 10",
+        "45 000 × 10⁻¹"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Quelle règle permet de simplifier le calcul en couleur ?",
+      "texte": "On veut écrire [2³ × 2⁵] avec une seule puissance de 2.",
+      "choix": ["aᵐ × aⁿ = aᵐ⁺ⁿ", "aᵐ / aⁿ = aᵐ⁻ⁿ", "(aᵐ)ⁿ = aᵐⁿ", "Aucune de ces règles"],
+      "bonne": 0,
+      "explication": "C'est un produit de puissances de même base : on additionne les exposants, 2³ × 2⁵ = 2⁸."
+    },
+    {
+      "consigne": "Quelle règle permet de simplifier le calcul en couleur ?",
+      "texte": "On veut écrire [3⁷ / 3⁴] avec une seule puissance de 3.",
+      "choix": ["aᵐ × aⁿ = aᵐ⁺ⁿ", "aᵐ / aⁿ = aᵐ⁻ⁿ", "(aᵐ)ⁿ = aᵐⁿ", "Aucune de ces règles"],
+      "bonne": 1,
+      "explication": "C'est un quotient de puissances de même base : on soustrait les exposants, 3⁷ / 3⁴ = 3³."
+    },
+    {
+      "consigne": "Quelle règle permet de simplifier le calcul en couleur ?",
+      "texte": "On veut écrire [(5²)⁴] avec une seule puissance de 5.",
+      "choix": ["aᵐ × aⁿ = aᵐ⁺ⁿ", "aᵐ / aⁿ = aᵐ⁻ⁿ", "(aᵐ)ⁿ = aᵐⁿ", "Aucune de ces règles"],
+      "bonne": 2,
+      "explication": "C'est une puissance de puissance : on multiplie les exposants, (5²)⁴ = 5⁸."
+    },
+    {
+      "consigne": "Quelle règle permet de simplifier le calcul en couleur ?",
+      "texte": "On veut écrire [2³ + 2²] avec une seule puissance de 2.",
+      "choix": ["aᵐ × aⁿ = aᵐ⁺ⁿ", "aᵐ / aⁿ = aᵐ⁻ⁿ", "(aᵐ)ⁿ = aᵐⁿ", "Aucune de ces règles"],
+      "bonne": 3,
+      "explication": "Ces règles ne valent pas pour une somme : 2³ + 2² = 8 + 4 = 12, qui n'est pas une puissance de 2."
+    },
+    {
+      "consigne": "Quelle règle permet de simplifier le calcul en couleur ?",
+      "texte": "On veut écrire [10⁴ × 10⁻⁶] avec une seule puissance de 10.",
+      "choix": ["aᵐ × aⁿ = aᵐ⁺ⁿ", "aᵐ / aⁿ = aᵐ⁻ⁿ", "(aᵐ)ⁿ = aᵐⁿ", "Aucune de ces règles"],
+      "bonne": 0,
+      "explication": "C'est un produit de puissances de même base : on additionne les exposants, 4 + (−6) = −2, donc 10⁻²."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Racine carrée",
+      "acceptees": ["Racine carrée", "La racine carrée", "Racine", "La racine"],
+      "indices": [
+        "Je suis une opération qui s'applique à un nombre positif.",
+        "Je n'existe pas pour un nombre négatif et je suis toujours positive.",
+        "Pour 49, je vaux 7, car 7 × 7 = 49."
+      ],
+      "explication": "La racine carrée de a est le nombre positif dont le carré vaut a : √49 = 7."
+    },
+    {
+      "reponse": "Carré parfait",
+      "acceptees": ["Carré parfait", "Un carré parfait", "Carrés parfaits", "Les carrés parfaits"],
+      "indices": [
+        "Je suis un nombre entier.",
+        "1, 4, 9, 16, 25 et 36 sont mes premiers exemples.",
+        "Quand on prend ma racine, on obtient un entier, comme √144 = 12."
+      ],
+      "explication": "Un carré parfait est le carré d'un entier : 1, 4, 9, 16, 25… Sa racine carrée est un entier."
+    },
+    {
+      "reponse": "Notation scientifique",
+      "acceptees": ["Notation scientifique", "La notation scientifique", "Écriture scientifique", "L'écriture scientifique"],
+      "indices": [
+        "Je suis une façon d'écrire un nombre.",
+        "Je suis pratique pour les très grands ou les très petits nombres.",
+        "On m'écrit a × 10ⁿ avec 1 ≤ a < 10."
+      ],
+      "explication": "La notation scientifique d'un nombre s'écrit a × 10ⁿ avec 1 ≤ a < 10 et n entier relatif."
+    },
+    {
+      "reponse": "Exposant",
+      "acceptees": ["Exposant", "Un exposant", "L'exposant", "Exposants"],
+      "indices": [
+        "Je suis un petit nombre écrit en haut à droite d'un autre nombre.",
+        "Quand je suis un entier positif, je compte les facteurs égaux dans un produit.",
+        "Quand je vaux 0, le résultat est 1 ; quand je suis négatif, le résultat est un inverse."
+      ],
+      "explication": "L'exposant n de aⁿ indique le nombre de facteurs égaux à a. Si n = 0, aⁿ = 1 ; si n est négatif, aⁿ est l'inverse de a⁻ⁿ."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "Que vaut 3⁴ ?",
+      "reponse": 81,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "3⁴ = 3 × 3 × 3 × 3 = 9 × 9 = 81."
+    },
+    {
+      "question": "Que vaut 5⁻² ? Donne le résultat sous forme décimale.",
+      "reponse": 0.04,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "5⁻² = 1/5² = 1/25 = 0,04."
+    },
+    {
+      "question": "Que vaut √169 ?",
+      "reponse": 13,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "13 × 13 = 169 et 13 est positif, donc √169 = 13."
+    },
+    {
+      "question": "On calcule (5 × 10⁴) × (6 × 10⁻²) et on l'écrit sous la forme a × 10ⁿ avec 1 ≤ a < 10. Quelle est la valeur de n ?",
+      "reponse": 3,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "(5 × 6) × (10⁴ × 10⁻²) = 30 × 10² = 3 × 10 × 10² = 3 × 10³. Donc n = 3."
+    },
+    {
+      "question": "On écrit 0,00072 = 7,2 × 10ⁿ. Quelle est la valeur de n ?",
+      "reponse": -4,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "Pour passer de 0,00072 à 7,2, la virgule se déplace de 4 rangs vers la droite : 0,00072 = 7,2 × 10⁻⁴. Donc n = −4."
+    },
+    {
+      "question": "Que vaut 2⁷ × 2⁻³ ?",
+      "reponse": 16,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "On additionne les exposants : 7 + (−3) = 4, donc 2⁷ × 2⁻³ = 2⁴ = 16."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Calculer un produit en notation scientifique",
+      "etapes": [
+        "Regrouper les nombres d'un côté et les puissances de 10 de l'autre",
+        "Calculer le produit des nombres",
+        "Additionner les exposants des puissances de 10",
+        "Corriger l'écriture si le nombre n'est pas entre 1 et 10"
+      ]
+    }
+  ]
+}

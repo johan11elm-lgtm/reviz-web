@@ -1,0 +1,148 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Parler à voix basse",
+      "detail": "Le verbe de parole montre que le personnage parle doucement, en murmurant.",
+      "cartes": [
+        "Il murmura quelques mots à l'oreille de sa sœur",
+        "Elle chuchota pour ne pas réveiller le bébé",
+        "Le vieil homme marmonna dans sa barbe",
+        "Les élèves chuchotèrent pendant la lecture du poème",
+        "La maman murmura une berceuse à son enfant"
+      ]
+    },
+    {
+      "nom": "Parler très fort",
+      "detail": "Le verbe de parole montre que le personnage crie ou élève la voix.",
+      "cartes": [
+        "Le chevalier s'écria de toutes ses forces",
+        "Le supporter hurla de joie dans le stade",
+        "L'enfant cria pour appeler sa mère",
+        "Du haut de la falaise, le randonneur hurla",
+        "Le professeur s'écria devant la classe en désordre"
+      ]
+    },
+    {
+      "nom": "Poser une question",
+      "detail": "Le verbe de parole introduit une demande d'information.",
+      "cartes": [
+        "Il demanda à un passant où se trouvait la gare",
+        "Le juge interrogea le témoin sur la nuit du crime",
+        "Elle questionna sa tante sur son enfance",
+        "L'enfant demanda à sa mère quand ils partiraient",
+        "Le touriste s'informa de l'heure du prochain train"
+      ]
+    },
+    {
+      "nom": "Répondre à quelqu'un",
+      "detail": "Le verbe de parole introduit une réponse ou une réplique à ce que quelqu'un vient de dire.",
+      "cartes": [
+        "Elle répondit poliment à son voisin",
+        "Il répliqua sèchement à sa sœur",
+        "Le prisonnier rétorqua qu'il était innocent",
+        "Le ministre riposta aux critiques de l'opposition",
+        "Léa lui répondit d'un ton moqueur"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Quelle est la nature du passage en couleur ?",
+      "texte": "Perceval demanda : [« Qui êtes-vous ? »]",
+      "choix": ["Discours direct", "Discours indirect", "Proposition incise"],
+      "bonne": 0,
+      "explication": "Les paroles sont rapportées telles qu'elles ont été prononcées, après deux-points et entre guillemets : c'est du discours direct."
+    },
+    {
+      "consigne": "Quelle est la nature du passage en couleur ?",
+      "texte": "Perceval demanda [qui il était].",
+      "choix": ["Discours direct", "Discours indirect", "Proposition incise"],
+      "bonne": 1,
+      "explication": "La question est intégrée au récit dans une subordonnée, sans guillemets ni point d'interrogation : c'est du discours indirect."
+    },
+    {
+      "consigne": "Quelle est la nature du passage en couleur ?",
+      "texte": "« Je partirai, [dit-il], demain matin. »",
+      "choix": ["Discours direct", "Discours indirect", "Proposition incise"],
+      "bonne": 2,
+      "explication": "« dit-il » est une courte proposition insérée dans les paroles, avec le sujet inversé : une incise. Elle indique qui parle."
+    },
+    {
+      "consigne": "Quelle est la nature du passage en couleur ?",
+      "texte": "Le chevalier déclara [qu'il partirait le lendemain].",
+      "choix": ["Discours direct", "Discours indirect", "Proposition incise"],
+      "bonne": 1,
+      "explication": "Les paroles sont intégrées au récit dans une subordonnée, sans guillemets, avec un conditionnel et « le lendemain » : c'est du discours indirect."
+    },
+    {
+      "consigne": "Quelle est la nature du passage en couleur ?",
+      "texte": "Le roi s'écria : [« Qu'on m'apporte mon épée ! »]",
+      "choix": ["Discours direct", "Discours indirect", "Proposition incise"],
+      "bonne": 0,
+      "explication": "Après les deux-points, les paroles du roi sont entre guillemets, telles qu'il les a prononcées : c'est du discours direct."
+    },
+    {
+      "consigne": "Quelle est la nature du passage en couleur ?",
+      "texte": "« Partons maintenant, [murmura-t-elle], avant l'aube. »",
+      "choix": ["Discours direct", "Discours indirect", "Proposition incise"],
+      "bonne": 2,
+      "explication": "« murmura-t-elle » est insérée au milieu des paroles et son sujet est inversé : c'est une proposition incise."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Incise",
+      "acceptees": ["Une incise", "La proposition incise", "Proposition incise", "Une proposition incise"],
+      "indices": [
+        "Je suis une courte proposition.",
+        "On me glisse au milieu ou à la fin des paroles d'un personnage pour dire qui parle.",
+        "Mon sujet est placé après le verbe, comme dans « dit-il » ou « murmura-t-elle »."
+      ],
+      "explication": "L'incise est une courte proposition insérée dans les paroles ; son sujet est inversé et elle indique qui parle."
+    },
+    {
+      "reponse": "Discours indirect",
+      "acceptees": ["Le discours indirect", "Style indirect"],
+      "indices": [
+        "Je rapporte les paroles de quelqu'un.",
+        "Je les intègre au récit dans une subordonnée, après un verbe de parole, sans guillemets.",
+        "Avec moi, « Je partirai demain » devient « Il dit qu'il partirait le lendemain »."
+      ],
+      "explication": "Le discours indirect intègre les paroles au récit dans une subordonnée : les pronoms, les temps et les repères de temps changent."
+    },
+    {
+      "reponse": "Conditionnel",
+      "acceptees": ["Le conditionnel", "Conditionnel présent", "Le conditionnel présent"],
+      "indices": [
+        "Je suis un mode verbal.",
+        "Je ressemble au futur, mais mes terminaisons sont celles de l'imparfait.",
+        "Au discours indirect, après un verbe au passé, je remplace le futur : « Je partirai » devient « il partirait »."
+      ],
+      "explication": "Après un verbe introducteur au passé, le futur du discours direct devient un conditionnel au discours indirect."
+    },
+    {
+      "reponse": "Registre familier",
+      "acceptees": ["Familier", "Le registre familier", "Langue familière", "Langage familier"],
+      "indices": [
+        "Je suis une manière de parler adaptée à la situation.",
+        "On m'emploie entre proches, surtout à l'oral.",
+        "Avec moi, on dit « bouquin » ou « bagnole », et on supprime souvent le « ne » : « J'sais pas »."
+      ],
+      "explication": "Le registre familier est une langue relâchée, employée entre proches : « bouquin » au lieu de « livre », « J'sais pas » au lieu de « Je ne sais pas »."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Les étapes pour ponctuer un dialogue",
+      "etapes": [
+        "On écrit un verbe de parole suivi de deux-points",
+        "On ouvre les guillemets avant la première réplique",
+        "On va à la ligne avec un tiret à chaque changement d'interlocuteur",
+        "On ferme les guillemets à la fin du dialogue"
+      ]
+    }
+  ]
+}

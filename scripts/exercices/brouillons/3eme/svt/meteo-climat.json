@@ -1,0 +1,210 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "L'énergie solaire reçue",
+      "detail": "L'énergie du Soleil n'arrive pas pareil partout : elle dépend de l'inclinaison des rayons selon le lieu.",
+      "cartes": [
+        "Aux pôles, les rayons arrivent rasants sur le sol",
+        "À l'équateur, les rayons arrivent presque perpendiculairement au sol",
+        "Une lampe éclaire une feuille inclinée : chaque partie reçoit moins",
+        "Une zone chaude, deux zones tempérées, deux zones froides",
+        "Plus on s'éloigne de l'équateur, plus il fait froid"
+      ]
+    },
+    {
+      "nom": "Vents et courants marins",
+      "detail": "Les mouvements de l'atmosphère et des océans, qui répartissent la chaleur sur la Terre.",
+      "cartes": [
+        "Transport de la chaleur de l'équateur vers les pôles",
+        "Le Gulf Stream adoucit l'ouest de l'Europe",
+        "L'air chaud, moins dense, s'élève",
+        "La vapeur d'eau se condense en nuages en altitude",
+        "Les écarts de température mettent l'air et l'eau en mouvement"
+      ]
+    },
+    {
+      "nom": "L'effet de serre",
+      "detail": "Des gaz de l'atmosphère retiennent une partie de la chaleur émise par la Terre.",
+      "cartes": [
+        "Des gaz retiennent la chaleur émise par la Terre",
+        "Une Terre à +15 °C au lieu de −18 °C",
+        "Vapeur d'eau, CO₂ et méthane sont les gaz concernés",
+        "Un phénomène naturel qui rend la Terre habitable",
+        "La Terre chauffée émet un rayonnement infrarouge invisible"
+      ]
+    },
+    {
+      "nom": "Les climats du passé",
+      "detail": "Les changements de climat au cours des temps géologiques et les indices qui permettent de les retrouver.",
+      "cartes": [
+        "Des périodes glaciaires et des périodes plus chaudes se succèdent",
+        "Le dernier maximum glaciaire date d'environ 20 000 ans",
+        "Des pollens anciens de plantes de milieux froids",
+        "Des bulles d'air piégées dans les glaces polaires",
+        "Des fossiles témoignent du temps qu'il faisait autrefois"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "l'inégale énergie solaire reçue sur la Terre",
+      "carte": "Les rayons du Soleil arrivent presque perpendiculaires à l'équateur et rasants aux pôles",
+      "role": "cause",
+      "explication": "L'inclinaison des rayons selon la latitude fait varier l'énergie reçue par m²."
+    },
+    {
+      "fait": "l'inégale énergie solaire reçue sur la Terre",
+      "carte": "L'atmosphère et les océans se mettent en mouvement",
+      "role": "consequence",
+      "explication": "Les écarts de température créent les vents et les courants marins, qui transportent la chaleur vers les pôles."
+    },
+    {
+      "fait": "l'inégale énergie solaire reçue sur la Terre",
+      "carte": "Une zone chaude, des zones tempérées et des zones froides apparaissent",
+      "role": "consequence",
+      "explication": "Les grandes zones climatiques suivent la latitude, donc l'énergie solaire reçue."
+    },
+    {
+      "fait": "la montée de l'air chaud dans l'atmosphère",
+      "carte": "Il est moins dense que l'air qui l'entoure",
+      "role": "cause",
+      "explication": "L'air chaud est moins dense, donc il s'élève."
+    },
+    {
+      "fait": "la montée de l'air chaud dans l'atmosphère",
+      "carte": "En altitude, la vapeur d'eau se condense en nuages",
+      "role": "consequence",
+      "explication": "En montant, l'air se refroidit : la vapeur d'eau se condense en gouttelettes qui forment les nuages."
+    }
+  ],
+  "etiquettes": [
+    {
+      "consigne": "De quoi parle le passage en couleur ?",
+      "texte": "Au journal du soir, on apprend que [demain, il pleuvra à Lyon].",
+      "choix": ["La météo", "Le climat", "L'effet de serre"],
+      "bonne": 0,
+      "explication": "Une prévision pour demain en un lieu précis relève de la météo, pas du climat."
+    },
+    {
+      "consigne": "De quoi parle le passage en couleur ?",
+      "texte": "Dans cette région, [les étés sont chauds et secs et les hivers sont doux].",
+      "choix": ["La météo", "Le climat", "L'effet de serre"],
+      "bonne": 1,
+      "explication": "Des conditions habituelles, observées sur de longues années dans une région, décrivent son climat."
+    },
+    {
+      "consigne": "De quoi parle le passage en couleur ?",
+      "texte": "Dans l'atmosphère, [des gaz comme le CO₂ et la vapeur d'eau retiennent une partie de la chaleur émise par la Terre].",
+      "choix": ["La météo", "Le climat", "L'effet de serre"],
+      "bonne": 2,
+      "explication": "Des gaz qui retiennent la chaleur de la Terre, c'est l'effet de serre."
+    },
+    {
+      "consigne": "De quoi parle le passage en couleur ?",
+      "texte": "En regardant par la fenêtre, on voit que [ce matin, il fait 12 °C et il pleut à Brest].",
+      "choix": ["La météo", "Le climat", "L'effet de serre"],
+      "bonne": 0,
+      "explication": "Le temps qu'il fait à un moment donné, en un lieu, c'est la météo."
+    },
+    {
+      "consigne": "De quoi parle le passage en couleur ?",
+      "texte": "Pour décrire une région, les climatologues calculent [la moyenne des températures et des pluies sur au moins 30 ans].",
+      "choix": ["La météo", "Le climat", "L'effet de serre"],
+      "bonne": 1,
+      "explication": "Le climat est la moyenne des conditions météorologiques d'une région sur au moins 30 ans."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Climatogramme",
+      "acceptees": ["Climatogramme", "Un climatogramme", "Le climatogramme", "Diagramme climatique"],
+      "indices": [
+        "Je suis un graphique qui décrit un lieu.",
+        "Je représente les douze mois de l'année, un par un.",
+        "Mes températures sont en courbe et mes précipitations en barres."
+      ],
+      "explication": "Le climatogramme montre les températures moyennes (courbe) et les précipitations (barres) de chaque mois."
+    },
+    {
+      "reponse": "Gulf Stream",
+      "acceptees": ["Gulf Stream", "Le Gulf Stream", "Gulfstream", "Le Gulfstream"],
+      "indices": [
+        "Je suis un courant chaud de l'océan.",
+        "Je viens des régions tropicales.",
+        "J'adoucis le climat de l'ouest de l'Europe."
+      ],
+      "explication": "Le Gulf Stream, courant marin chaud venu des tropiques, adoucit le climat de l'ouest de l'Europe."
+    },
+    {
+      "reponse": "Effet de serre",
+      "acceptees": ["Effet de serre", "L'effet de serre", "Effet de serre naturel", "L'effet de serre naturel"],
+      "indices": [
+        "Je suis un phénomène naturel.",
+        "Je fais passer la température moyenne de la Terre de −18 °C à +15 °C.",
+        "Je dépends de gaz comme le CO₂ et la vapeur d'eau, qui retiennent la chaleur."
+      ],
+      "explication": "L'effet de serre naturel réchauffe la Terre : sans lui, elle serait à −18 °C en moyenne."
+    },
+    {
+      "reponse": "Latitude",
+      "acceptees": ["Latitude", "La latitude"],
+      "indices": [
+        "Je me mesure en degrés.",
+        "Je vaux 0° à l'équateur.",
+        "Je vaux 90° à chaque pôle."
+      ],
+      "explication": "La latitude est la position d'un lieu entre l'équateur (0°) et un pôle (90°)."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "Sans effet de serre, la température moyenne de la Terre serait de −18 °C. Avec l'effet de serre naturel, elle est de +15 °C. De combien de degrés l'effet de serre réchauffe-t-il la Terre ?",
+      "reponse": 33,
+      "unite": "°C",
+      "tolerance": 0,
+      "explication": "15 − (−18) = 15 + 18 = 33 °C."
+    },
+    {
+      "question": "Sur un climatogramme, le mois le plus chaud est à 24 °C et le mois le plus froid à 4 °C. Quel est l'écart de température entre ces deux mois ?",
+      "reponse": 20,
+      "unite": "°C",
+      "tolerance": 0,
+      "explication": "24 − 4 = 20 °C."
+    },
+    {
+      "question": "Sur le climatogramme d'une autre ville, le mois le plus chaud est à 27 °C et le mois le plus froid à −3 °C. Quel est l'écart de température entre ces deux mois ?",
+      "reponse": 30,
+      "unite": "°C",
+      "tolerance": 0,
+      "explication": "27 − (−3) = 27 + 3 = 30 °C."
+    },
+    {
+      "question": "La température moyenne annuelle d'une ville a été de 11 °C, 12 °C, 12 °C, 13 °C et 12 °C pendant cinq années de suite. Quelle est la moyenne de ces cinq années ?",
+      "reponse": 12,
+      "unite": "°C",
+      "tolerance": 0,
+      "explication": "11 + 12 + 12 + 13 + 12 = 60, puis 60 ÷ 5 = 12 °C."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "La formation d'un nuage",
+      "etapes": [
+        "L'air chaud, moins dense, s'élève",
+        "En montant, l'air se refroidit",
+        "La vapeur d'eau se condense en gouttelettes",
+        "Les gouttelettes forment un nuage"
+      ]
+    },
+    {
+      "titre": "L'effet de serre naturel",
+      "etapes": [
+        "Le Soleil chauffe la Terre",
+        "La Terre émet un rayonnement infrarouge",
+        "Des gaz de l'atmosphère absorbent une partie de ce rayonnement",
+        "La Terre est réchauffée : +15 °C au lieu de −18 °C"
+      ]
+    }
+  ]
+}

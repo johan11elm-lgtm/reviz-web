@@ -1,0 +1,209 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Le diazote",
+      "detail": "Le gaz le plus abondant de l'air (environ 78 %), qui n'intervient ni dans la respiration ni dans la combustion.",
+      "cartes": [
+        "Le gaz qui forme près de 4/5 de l'air",
+        "Le gaz dont 100 L d'air contiennent 78 L",
+        "Le gaz noté N₂ dans la composition de l'air",
+        "Le gaz sans rôle dans la respiration ni la combustion",
+        "Le gaz presque quatre fois plus abondant que le dioxygène"
+      ]
+    },
+    {
+      "nom": "Le dioxygène",
+      "detail": "Le gaz de l'air (environ 21 %) indispensable à la respiration et aux combustions.",
+      "cartes": [
+        "Le gaz qui forme environ 1/5 de l'air",
+        "Le gaz indispensable à la respiration",
+        "Le gaz sans lequel un feu s'éteint",
+        "Le gaz dont 100 L d'air contiennent 21 L",
+        "Le gaz dont l'air expiré contient moins que l'air inspiré"
+      ]
+    },
+    {
+      "nom": "Le dioxyde de carbone",
+      "detail": "Un gaz très peu présent dans l'air (environ 0,04 %), produit par la respiration, qui trouble l'eau de chaux.",
+      "cartes": [
+        "Le gaz qui trouble l'eau de chaux",
+        "Le gaz dont l'air expiré contient plus que l'air inspiré",
+        "Le gaz qui ne forme qu'environ 0,04 % de l'air",
+        "Le gaz produit par la respiration des êtres vivants",
+        "Le gaz important pour l'effet de serre"
+      ]
+    },
+    {
+      "nom": "Les polluants de l'air",
+      "detail": "Les substances nuisibles rejetées dans l'air par les transports, le chauffage ou l'industrie.",
+      "cartes": [
+        "Les particules fines",
+        "Les oxydes d'azote",
+        "Le dioxyde de soufre",
+        "Le gaz toxique produit par une mauvaise combustion",
+        "Les substances nuisibles rejetées dans l'air"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "la respiration d'un être vivant",
+      "carte": "L'air expiré contient plus de dioxyde de carbone que l'air inspiré",
+      "role": "consequence",
+      "explication": "En respirant, l'être vivant consomme du dioxygène et rejette du dioxyde de carbone."
+    },
+    {
+      "fait": "la respiration d'un être vivant",
+      "carte": "L'air expiré contient moins de dioxygène que l'air inspiré",
+      "role": "consequence",
+      "explication": "Une partie du dioxygène inspiré est utilisée par l'organisme : l'air expiré en contient moins."
+    },
+    {
+      "fait": "l'extinction d'une bougie sous un verre retourné",
+      "carte": "Il ne reste plus assez de dioxygène sous le verre",
+      "role": "cause",
+      "explication": "La combustion a besoin de dioxygène : quand il n'y en a plus assez sous le verre, la flamme s'éteint."
+    },
+    {
+      "fait": "l'extinction d'une bougie sous un verre retourné",
+      "carte": "La combustion de la bougie a besoin de dioxygène",
+      "role": "cause",
+      "explication": "Sans dioxygène, il n'y a pas de combustion : c'est pourquoi la flamme s'éteint quand le gaz manque."
+    }
+  ],
+  "etiquettes": [
+    {
+      "consigne": "De quel gaz de l'air s'agit-il ?",
+      "texte": "Dans 100 L d'air, [le gaz majoritaire] occupe environ 78 L.",
+      "choix": ["Diazote", "Dioxygène", "Dioxyde de carbone"],
+      "bonne": 0,
+      "explication": "Le gaz majoritaire de l'air est le diazote, environ 78 % du volume."
+    },
+    {
+      "consigne": "De quel gaz de l'air s'agit-il ?",
+      "texte": "Sous le verre retourné, la bougie s'éteint quand [le gaz qui entretient la flamme] n'est plus assez présent.",
+      "choix": ["Diazote", "Dioxygène", "Dioxyde de carbone"],
+      "bonne": 1,
+      "explication": "La combustion a besoin de dioxygène : quand il manque, la flamme s'éteint."
+    },
+    {
+      "consigne": "De quel gaz de l'air s'agit-il ?",
+      "texte": "Dans le souffle de Nina, [le gaz qui trouble l'eau de chaux] est plus abondant que dans l'air inspiré.",
+      "choix": ["Diazote", "Dioxygène", "Dioxyde de carbone"],
+      "bonne": 2,
+      "explication": "L'eau de chaux se trouble en présence de dioxyde de carbone, rejeté par la respiration."
+    },
+    {
+      "consigne": "De quel gaz de l'air s'agit-il ?",
+      "texte": "Près de 4/5 de l'air sont formés de [ce gaz qui n'intervient ni dans la respiration ni dans la combustion].",
+      "choix": ["Diazote", "Dioxygène", "Dioxyde de carbone"],
+      "bonne": 0,
+      "explication": "Le diazote forme près de 4/5 de l'air, mais il n'est utilisé ni pour respirer ni pour brûler."
+    },
+    {
+      "consigne": "De quel gaz de l'air s'agit-il ?",
+      "texte": "Les êtres vivants respirent grâce à [ce gaz qui forme environ 1/5 de l'air].",
+      "choix": ["Diazote", "Dioxygène", "Dioxyde de carbone"],
+      "bonne": 1,
+      "explication": "Le dioxygène représente environ 21 % de l'air, soit 1/5, et il est indispensable à la respiration."
+    },
+    {
+      "consigne": "De quel gaz de l'air s'agit-il ?",
+      "texte": "L'air contient très peu de [ce gaz], environ 0,04 %, mais il joue un rôle dans l'effet de serre.",
+      "choix": ["Diazote", "Dioxygène", "Dioxyde de carbone"],
+      "bonne": 2,
+      "explication": "Le dioxyde de carbone ne représente qu'environ 0,04 % de l'air mais joue un rôle important dans l'effet de serre."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Eau de chaux",
+      "acceptees": ["L'eau de chaux"],
+      "indices": [
+        "Je suis un liquide limpide.",
+        "Je sers à tester la présence d'un gaz précis.",
+        "Je me trouble et deviens blanchâtre en présence de dioxyde de carbone."
+      ],
+      "explication": "L'eau de chaux, limpide, se trouble en présence de dioxyde de carbone."
+    },
+    {
+      "reponse": "Monoxyde de carbone",
+      "acceptees": ["Le monoxyde de carbone", "CO"],
+      "indices": [
+        "Je suis un gaz polluant.",
+        "Je suis toxique et sans odeur.",
+        "Je suis produit par une mauvaise combustion."
+      ],
+      "explication": "Le monoxyde de carbone est un gaz toxique et inodore, produit par une mauvaise combustion."
+    },
+    {
+      "reponse": "Atmosphère",
+      "acceptees": ["L'atmosphère"],
+      "indices": [
+        "Je suis une couche.",
+        "Je suis formée d'air.",
+        "J'entoure la Terre."
+      ],
+      "explication": "L'atmosphère est la couche d'air qui entoure la Terre."
+    },
+    {
+      "reponse": "Diazote",
+      "acceptees": ["Le diazote", "Azote", "N2"],
+      "indices": [
+        "Je suis un gaz de l'air.",
+        "Je suis le plus abondant de tous les gaz de l'air.",
+        "Je représente environ 78 % de l'air, presque 4/5."
+      ],
+      "explication": "Le diazote est le gaz le plus abondant de l'air, environ 78 % en volume."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "Un ballon de sport contient 5 L d'air. On prendra 1,2 g pour la masse de 1 L d'air. Quelle est la masse de cet air, en g ?",
+      "reponse": 6,
+      "unite": "g",
+      "tolerance": 0,
+      "explication": "5 L × 1,2 g/L = 6 g."
+    },
+    {
+      "question": "Dans 100 L d'air, il y a environ 21 L de dioxygène. Quel volume de dioxygène y a-t-il dans 200 L d'air, en L ?",
+      "reponse": 42,
+      "unite": "L",
+      "tolerance": 0,
+      "explication": "200 L d'air, c'est 2 fois 100 L : 2 × 21 = 42 L de dioxygène."
+    },
+    {
+      "question": "Dans 100 L d'air, il y a environ 78 L de diazote. Quel volume de diazote y a-t-il dans 50 L d'air, en L ?",
+      "reponse": 39,
+      "unite": "L",
+      "tolerance": 0,
+      "explication": "50 L d'air, c'est la moitié de 100 L : 78 ÷ 2 = 39 L de diazote."
+    },
+    {
+      "question": "Une pièce contient 3 m³ d'air. On prendra 1 m³ = 1 000 L et 1,2 g pour la masse de 1 L d'air. Quelle est la masse de cet air, en g ?",
+      "reponse": 3600,
+      "unite": "g",
+      "tolerance": 0,
+      "explication": "3 m³ = 3 000 L, donc 3 000 × 1,2 = 3 600 g, soit 3,6 kg."
+    },
+    {
+      "question": "Un ballon contient 18 g d'air. On prendra 1,2 g pour la masse de 1 L d'air. Quel est le volume de cet air, en L ?",
+      "reponse": 15,
+      "unite": "L",
+      "tolerance": 0,
+      "explication": "18 g ÷ 1,2 g/L = 15 L."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Mettre en évidence le dioxyde de carbone",
+      "etapes": [
+        "On verse de l'eau de chaux limpide dans un tube à essai",
+        "On fait barboter le gaz à tester dans l'eau de chaux",
+        "On observe si l'eau de chaux se trouble",
+        "On conclut : un trouble signifie la présence de dioxyde de carbone"
+      ]
+    }
+  ]
+}

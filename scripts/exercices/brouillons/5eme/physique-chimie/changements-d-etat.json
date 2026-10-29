@@ -1,0 +1,211 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "La fusion",
+      "detail": "Le passage de l'état solide à l'état liquide.",
+      "cartes": [
+        "Un glaçon qui devient de l'eau dans un verre",
+        "La neige qui se transforme en eau sous le soleil",
+        "Un glacier dont la glace alimente un torrent",
+        "200 g de glace qui donnent 200 g d'eau",
+        "La banquise qui se réduit en été"
+      ]
+    },
+    {
+      "nom": "La solidification",
+      "detail": "Le passage de l'état liquide à l'état solide.",
+      "cartes": [
+        "De l'eau versée dans un bac à glaçons au congélateur",
+        "Une flaque qui gèle pendant la nuit d'hiver",
+        "L'eau de pluie qui gèle dans une fissure de roche",
+        "Des gouttes d'eau qui forment un glaçon sous un toit",
+        "Une bouteille d'eau pleine qui éclate au congélateur"
+      ]
+    },
+    {
+      "nom": "La vaporisation",
+      "detail": "Le passage de l'état liquide à l'état gazeux, lentement ou rapidement.",
+      "cartes": [
+        "Le linge qui sèche dehors à 20 °C",
+        "Une casserole d'eau qui fait de grosses bulles",
+        "Une flaque d'eau qui disparaît au soleil",
+        "L'eau des océans qui devient vapeur",
+        "Un verre d'eau oublié qui se vide en plusieurs jours"
+      ]
+    },
+    {
+      "nom": "La liquéfaction",
+      "detail": "Le passage de l'état gazeux à l'état liquide.",
+      "cartes": [
+        "La buée sur le miroir de la salle de bain",
+        "Les gouttes sur un verre froid sorti du frigo",
+        "La vapeur d'eau qui forme des nuages",
+        "La rosée du matin sur l'herbe",
+        "Les gouttes qui se forment sous le couvercle d'une casserole"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "l'eau pure se solidifie",
+      "carte": "L'eau pure est refroidie jusqu'à 0 °C",
+      "role": "cause",
+      "explication": "À la pression normale, l'eau pure se solidifie à 0 °C quand on la refroidit."
+    },
+    {
+      "fait": "l'eau pure se solidifie",
+      "carte": "Le volume de l'eau augmente d'environ 9 %",
+      "role": "consequence",
+      "explication": "En gelant, l'eau gagne environ 9 % de volume, alors que sa masse ne change pas."
+    },
+    {
+      "fait": "l'eau pure se solidifie",
+      "carte": "Une bouteille d'eau pleine éclate au congélateur",
+      "role": "consequence",
+      "explication": "La glace occupe plus de place que l'eau liquide : la bouteille pleine n'a pas assez de volume et éclate."
+    },
+    {
+      "fait": "la glace flotte sur l'eau liquide",
+      "carte": "La glace est moins dense que l'eau liquide",
+      "role": "cause",
+      "explication": "À masse égale, la glace prend plus de place : elle est moins dense, donc elle flotte."
+    }
+  ],
+  "etiquettes": [
+    {
+      "consigne": "Quel changement d'état le passage en couleur décrit-il ?",
+      "texte": "Après la douche, [la vapeur d'eau se change en gouttes] sur le carrelage froid.",
+      "choix": ["Fusion", "Solidification", "Vaporisation", "Liquéfaction"],
+      "bonne": 3,
+      "explication": "La vapeur d'eau (gaz) redevient liquide au contact du carrelage froid : c'est une liquéfaction."
+    },
+    {
+      "consigne": "Quel changement d'état le passage en couleur décrit-il ?",
+      "texte": "Quand la température dépasse 0 °C, [la glace du lac devient de l'eau].",
+      "choix": ["Fusion", "Solidification", "Vaporisation", "Liquéfaction"],
+      "bonne": 0,
+      "explication": "La glace (solide) devient de l'eau liquide à 0 °C : c'est une fusion."
+    },
+    {
+      "consigne": "Quel changement d'état le passage en couleur décrit-il ?",
+      "texte": "Pendant la nuit, [l'eau de la flaque devient de la glace].",
+      "choix": ["Fusion", "Solidification", "Vaporisation", "Liquéfaction"],
+      "bonne": 1,
+      "explication": "L'eau liquide devient de la glace solide : c'est une solidification."
+    },
+    {
+      "consigne": "Quel changement d'état le passage en couleur décrit-il ?",
+      "texte": "Dans la casserole, [l'eau liquide devient gaz] en faisant de grosses bulles.",
+      "choix": ["Fusion", "Solidification", "Vaporisation", "Liquéfaction"],
+      "bonne": 2,
+      "explication": "Le liquide passe à l'état gazeux : c'est une vaporisation, ici une ébullition puisqu'il y a des bulles."
+    },
+    {
+      "consigne": "Quel changement d'état le passage en couleur décrit-il ?",
+      "texte": "Sur la terrasse, [l'eau de la serpillière passe peu à peu à l'état gazeux].",
+      "choix": ["Fusion", "Solidification", "Vaporisation", "Liquéfaction"],
+      "bonne": 2,
+      "explication": "Le liquide passe lentement à l'état gazeux, sans bulles : c'est une vaporisation, ici une évaporation."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Ébullition",
+      "acceptees": ["L'ébullition", "Ebullition"],
+      "indices": [
+        "Je suis un changement d'état de l'eau.",
+        "Je suis une vaporisation rapide.",
+        "Je fais apparaître des bulles dans tout le liquide, à 100 °C pour l'eau pure."
+      ],
+      "explication": "L'ébullition est une vaporisation rapide, avec des bulles de vapeur dans tout le liquide."
+    },
+    {
+      "reponse": "Évaporation",
+      "acceptees": ["L'évaporation", "Evaporation"],
+      "indices": [
+        "Je suis une forme de vaporisation.",
+        "Je suis lente et je n'ai pas besoin d'atteindre 100 °C.",
+        "Je me produis seulement à la surface du liquide, comme pour le linge qui sèche."
+      ],
+      "explication": "L'évaporation est une vaporisation lente, à la surface du liquide et à toute température."
+    },
+    {
+      "reponse": "Palier",
+      "acceptees": ["Le palier", "Un palier"],
+      "indices": [
+        "Je suis visible sur une courbe température-temps.",
+        "Je suis une partie horizontale de la courbe.",
+        "Sur moi, la température d'un corps pur reste constante pendant le changement d'état."
+      ],
+      "explication": "Le palier est la partie horizontale de la courbe : la température d'un corps pur reste constante."
+    },
+    {
+      "reponse": "Liquéfaction",
+      "acceptees": ["La liquéfaction", "Condensation", "La condensation"],
+      "indices": [
+        "Je suis un passage d'un état à un autre.",
+        "La buée sur une vitre froide est un exemple de moi.",
+        "Je fais passer la vapeur d'eau de l'état gazeux à l'état liquide."
+      ],
+      "explication": "La liquéfaction est le passage de l'état gazeux à l'état liquide (on dit souvent condensation dans la vie courante)."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "On fait fondre 350 g de glace dans un verre vide de 120 g. Quelle est la masse de l'ensemble verre + eau liquide ?",
+      "reponse": 470,
+      "unite": "g",
+      "tolerance": 0,
+      "explication": "La masse se conserve : 350 g de glace donnent 350 g d'eau. Ensemble : 350 + 120 = 470 g."
+    },
+    {
+      "question": "Un récipient contient 2 L d'eau liquide. En gelant, l'eau gagne 9 % de volume. Quel est le volume de la glace obtenue ?",
+      "reponse": 2.18,
+      "unite": "L",
+      "tolerance": 0,
+      "explication": "9 % de 2 L = 0,09 × 2 = 0,18 L. Volume de la glace : 2 + 0,18 = 2,18 L."
+    },
+    {
+      "question": "Sur la courbe de chauffage de l'eau pure, le palier de l'ébullition commence à 5 min et se termine à 17 min. Quelle est la durée du palier ?",
+      "reponse": 12,
+      "unite": "min",
+      "tolerance": 0,
+      "explication": "Durée du palier : 17 − 5 = 12 min."
+    },
+    {
+      "question": "À la pression atmosphérique normale, de combien de degrés faut-il réchauffer de l'eau pure de 20 °C pour qu'elle commence à bouillir ?",
+      "reponse": 80,
+      "unite": "°C",
+      "tolerance": 0,
+      "explication": "L'eau pure bout à 100 °C : 100 − 20 = 80 °C d'écart."
+    },
+    {
+      "question": "À la pression atmosphérique normale, un glaçon d'eau pure sort du congélateur à −18 °C. De combien de degrés faut-il le réchauffer pour qu'il commence à fondre ?",
+      "reponse": 18,
+      "unite": "°C",
+      "tolerance": 0,
+      "explication": "L'eau pure fond à 0 °C : 0 − (−18) = 18 °C d'écart."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Les étapes pour lire une courbe de changement d'état",
+      "etapes": [
+        "Lis les axes : le temps en abscisse, la température en ordonnée",
+        "Repère la partie horizontale de la courbe : le palier",
+        "Lis la température du palier sur l'axe vertical",
+        "Conclus : un palier net indique un corps pur"
+      ]
+    },
+    {
+      "titre": "Les étapes du cycle de l'eau",
+      "etapes": [
+        "L'eau des océans s'évapore",
+        "La vapeur d'eau se liquéfie en nuages",
+        "L'eau retombe en pluie",
+        "L'eau de pluie ruisselle sur le sol"
+      ]
+    }
+  ]
+}

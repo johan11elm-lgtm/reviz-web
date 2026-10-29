@@ -1,0 +1,148 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Une comparaison",
+      "detail": "Un rapprochement entre deux éléments à l'aide d'un outil : comme, tel, pareil à, ressembler à.",
+      "cartes": [
+        "Elle court comme une gazelle",
+        "Sa peau est douce comme de la soie",
+        "Les nuages ressemblent à des moutons blancs",
+        "Il restait immobile, pareil à une statue",
+        "Il avance lentement, tel un escargot"
+      ]
+    },
+    {
+      "nom": "Une métaphore",
+      "detail": "Un rapprochement entre deux éléments sans aucun outil de comparaison.",
+      "cartes": [
+        "Ses yeux sont des étoiles",
+        "La nuit est un grand manteau noir",
+        "Cette route est un long ruban gris",
+        "Mon grand-père est un roc",
+        "Le lac est un miroir ce matin"
+      ]
+    },
+    {
+      "nom": "Une personnification",
+      "detail": "Des actions ou des sentiments humains prêtés à un objet, un animal, un élément ou une idée.",
+      "cartes": [
+        "Le vent hurlait sa colère",
+        "La lune nous souriait derrière les nuages",
+        "La ville s'éveille doucement",
+        "Le vieux chêne murmurait des secrets",
+        "La pluie pleurait sur les toits"
+      ]
+    },
+    {
+      "nom": "Une hyperbole",
+      "detail": "Une exagération qui grossit la réalité pour frapper l'esprit.",
+      "cartes": [
+        "Je te l'ai répété mille fois",
+        "Cette valise pèse une tonne",
+        "Ça fait un siècle que je t'attends",
+        "Ma sœur possède un million de chaussures",
+        "Je meurs de faim"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Quelle figure de style est en couleur ?",
+      "texte": "Le soir venu, [la vieille maison soupire d'ennui] au bout du chemin.",
+      "choix": ["Comparaison", "Métaphore", "Personnification", "Hyperbole"],
+      "bonne": 2,
+      "explication": "La maison reçoit un trait humain : elle soupire d'ennui. C'est une personnification."
+    },
+    {
+      "consigne": "Quelle figure de style est en couleur ?",
+      "texte": "Le soir, [la plage est un grand tapis doré].",
+      "choix": ["Comparaison", "Métaphore", "Personnification", "Hyperbole"],
+      "bonne": 1,
+      "explication": "La plage est rapprochée d'un tapis sans outil de comparaison (pas de « comme ») : c'est une métaphore."
+    },
+    {
+      "consigne": "Quelle figure de style est en couleur ?",
+      "texte": "Méfie-toi de Paul : [il est rusé comme un renard].",
+      "choix": ["Comparaison", "Métaphore", "Personnification", "Hyperbole"],
+      "bonne": 0,
+      "explication": "L'outil « comme » rapproche Paul et le renard : c'est une comparaison."
+    },
+    {
+      "consigne": "Quelle figure de style est en couleur ?",
+      "texte": "Dans la salle d'attente, [un silence assourdissant] pesait sur tout le monde.",
+      "choix": ["Antithèse", "Oxymore", "Anaphore", "Gradation"],
+      "bonne": 1,
+      "explication": "« Silence » et « assourdissant » sont de sens contraire et unis dans un même groupe : c'est un oxymore."
+    },
+    {
+      "consigne": "Quelle figure de style est en couleur ?",
+      "texte": "Mon voisin [rit le jour et pleure la nuit].",
+      "choix": ["Antithèse", "Oxymore", "Anaphore", "Gradation"],
+      "bonne": 0,
+      "explication": "« Rit » s'oppose à « pleure » et « le jour » à « la nuit » dans une même phrase, sans être unis dans un seul groupe : c'est une antithèse."
+    },
+    {
+      "consigne": "Quelle figure de style est en couleur ?",
+      "texte": "Dans le jardin, [il y avait des fleurs, il y avait des oiseaux, il y avait du soleil].",
+      "choix": ["Antithèse", "Oxymore", "Anaphore", "Gradation"],
+      "bonne": 2,
+      "explication": "Les mots « il y avait » reviennent au début de chaque groupe : c'est une anaphore."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Hyperbole",
+      "acceptees": ["Une hyperbole", "L'hyperbole"],
+      "indices": [
+        "Je sers à insister sur une idée.",
+        "Je grossis la réalité bien au-delà du vrai, pour frapper l'esprit.",
+        "On m'entend dans « Je te l'ai dit mille fois ! » et dans « Je meurs de faim »."
+      ],
+      "explication": "L'hyperbole exagère pour frapper l'esprit, comme dans « Je meurs de faim »."
+    },
+    {
+      "reponse": "Oxymore",
+      "acceptees": ["Un oxymore", "L'oxymore"],
+      "indices": [
+        "Je suis une figure qui joue avec les contraires.",
+        "J'unis dans un même groupe deux mots de sens opposé, souvent un nom et un adjectif.",
+        "Corneille m'emploie quand il écrit « cette obscure clarté »."
+      ],
+      "explication": "L'oxymore unit deux mots de sens contraire dans un même groupe : « cette obscure clarté »."
+    },
+    {
+      "reponse": "Gradation",
+      "acceptees": ["Une gradation", "La gradation"],
+      "indices": [
+        "Je suis une suite de mots.",
+        "Mes mots sont de plus en plus forts, ou de plus en plus faibles.",
+        "Corneille m'emploie dans « Va, cours, vole »."
+      ],
+      "explication": "La gradation est une suite de termes d'intensité croissante : « Va, cours, vole »."
+    },
+    {
+      "reponse": "Personnification",
+      "acceptees": ["Une personnification", "La personnification"],
+      "indices": [
+        "Je rends vivant ce qui ne l'est pas.",
+        "Je prête des gestes ou des sentiments humains à un objet, un animal ou une idée.",
+        "Grâce à moi, « la ville s'éveille » et « le vent hurle sa colère »."
+      ],
+      "explication": "La personnification donne des traits humains à ce qui n'est pas humain : « la ville s'éveille »."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Les étapes pour analyser une figure de style",
+      "etapes": [
+        "Repère le passage et cite-le entre guillemets",
+        "Nomme la figure de style",
+        "Explique l'effet produit : image, insistance, émotion",
+        "Relie cet effet au sens du texte"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,176 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Présent dès la naissance",
+      "detail": "Les caractères sexuels primaires : les appareils reproducteurs sont là avant la puberté.",
+      "cartes": [
+        "Les testicules d'un bébé garçon",
+        "Les ovaires d'un bébé fille",
+        "L'utérus d'une fillette de trois ans",
+        "L'appareil reproducteur d'un nouveau-né",
+        "Le pénis d'un garçon de deux ans"
+      ]
+    },
+    {
+      "nom": "Puberté : seulement les filles",
+      "detail": "Des transformations propres à la fille : seins, bassin, règles, fonctionnement des ovaires.",
+      "cartes": [
+        "Les seins commencent à se développer",
+        "Le bassin devient plus large",
+        "Les premières règles apparaissent",
+        "Les ovaires se mettent à fonctionner de façon cyclique",
+        "Les ovaires stimulés produisent des œstrogènes"
+      ]
+    },
+    {
+      "nom": "Puberté : seulement les garçons",
+      "detail": "Des transformations propres au garçon : voix, éjaculations, poils du visage, testicules.",
+      "cartes": [
+        "La voix mue de façon marquée",
+        "Les premières éjaculations ont lieu",
+        "Des poils poussent sur le visage",
+        "Les testicules grossissent",
+        "Les testicules stimulés produisent de la testostérone"
+      ]
+    },
+    {
+      "nom": "Puberté : filles et garçons",
+      "detail": "Des transformations communes aux deux : croissance, poils, transpiration, acné, émotions.",
+      "cartes": [
+        "Une forte poussée de croissance",
+        "Des poils poussent au pubis et aux aisselles",
+        "La transpiration devient plus importante",
+        "De l'acné peut apparaître",
+        "Les émotions et les relations aux autres changent"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "les transformations du corps à la puberté",
+      "carte": "Le cerveau déclenche la puberté par l'intermédiaire de l'hypophyse",
+      "role": "cause",
+      "explication": "C'est le cerveau qui donne le signal de départ, par l'hypophyse."
+    },
+    {
+      "fait": "les transformations du corps à la puberté",
+      "carte": "La production d'hormones sexuelles par les ovaires ou les testicules",
+      "role": "cause",
+      "explication": "Ces hormones, transportées par le sang, provoquent les transformations."
+    },
+    {
+      "fait": "les transformations du corps à la puberté",
+      "carte": "La voix du garçon mue",
+      "role": "consequence",
+      "explication": "La testostérone agit sur le larynx : la mue de la voix est un effet de l'hormone."
+    },
+    {
+      "fait": "les transformations du corps à la puberté",
+      "carte": "Les seins de la fille se développent",
+      "role": "consequence",
+      "explication": "Le développement des seins est un caractère sexuel secondaire dû aux hormones ovariennes."
+    },
+    {
+      "fait": "les transformations du corps à la puberté",
+      "carte": "Le corps connaît une forte poussée de croissance",
+      "role": "consequence",
+      "explication": "Chez la fille comme chez le garçon, les hormones sexuelles entraînent une poussée de croissance."
+    },
+    {
+      "fait": "les transformations du corps à la puberté",
+      "carte": "L'hypophyse augmente sa production d'hormones",
+      "role": "cause",
+      "explication": "Ces hormones stimulent les ovaires ou les testicules, qui produisent à leur tour des hormones sexuelles."
+    }
+  ],
+  "etiquettes": [
+    {
+      "consigne": "Que désigne le passage en couleur ?",
+      "texte": "Chez un bébé fille, [l'utérus] est déjà présent à la naissance.",
+      "choix": ["Caractère sexuel primaire", "Caractère sexuel secondaire", "Hormone", "Organe cible"],
+      "bonne": 0,
+      "explication": "L'utérus fait partie de l'appareil reproducteur, présent dès la naissance : c'est un caractère sexuel primaire."
+    },
+    {
+      "consigne": "Que désigne le passage en couleur ?",
+      "texte": "Pendant sa puberté, Léa voit [ses seins se développer].",
+      "choix": ["Caractère sexuel primaire", "Caractère sexuel secondaire", "Hormone", "Organe cible"],
+      "bonne": 1,
+      "explication": "Le développement des seins apparaît à la puberté : c'est un caractère sexuel secondaire."
+    },
+    {
+      "consigne": "Que désigne le passage en couleur ?",
+      "texte": "Le sang transporte [la testostérone] depuis les testicules jusqu'aux autres organes.",
+      "choix": ["Caractère sexuel primaire", "Caractère sexuel secondaire", "Hormone", "Organe cible"],
+      "bonne": 2,
+      "explication": "La testostérone est une hormone : une substance produite par une glande et transportée par le sang."
+    },
+    {
+      "consigne": "Que désigne le passage en couleur ?",
+      "texte": "La testostérone, transportée par le sang, agit sur [le larynx] : la voix du garçon mue.",
+      "choix": ["Caractère sexuel primaire", "Caractère sexuel secondaire", "Hormone", "Organe cible"],
+      "bonne": 3,
+      "explication": "Le larynx est l'organe sur lequel agit la testostérone : c'est son organe cible."
+    },
+    {
+      "consigne": "Que désigne le passage en couleur ?",
+      "texte": "À 14 ans, Tom voit apparaître [des poils sur son visage].",
+      "choix": ["Caractère sexuel primaire", "Caractère sexuel secondaire", "Hormone", "Organe cible"],
+      "bonne": 1,
+      "explication": "Les poils du visage apparaissent à la puberté chez le garçon : c'est un caractère sexuel secondaire."
+    },
+    {
+      "consigne": "Que désigne le passage en couleur ?",
+      "texte": "Les ovaires produisent des [œstrogènes] et de la progestérone.",
+      "choix": ["Caractère sexuel primaire", "Caractère sexuel secondaire", "Hormone", "Organe cible"],
+      "bonne": 2,
+      "explication": "Les œstrogènes sont des hormones sexuelles produites par les ovaires."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "L'hypophyse",
+      "acceptees": ["Hypophyse", "L'hypophyse"],
+      "indices": [
+        "Je suis une petite glande.",
+        "Je suis située à la base du cerveau.",
+        "À la puberté, j'augmente ma production d'hormones qui stimulent les ovaires ou les testicules."
+      ],
+      "explication": "L'hypophyse relaie le signal du cerveau et stimule les ovaires ou les testicules."
+    },
+    {
+      "reponse": "La testostérone",
+      "acceptees": ["Testostérone", "La testostérone"],
+      "indices": [
+        "Je suis une hormone.",
+        "Ce sont les testicules qui me produisent.",
+        "Transportée par le sang, j'agis sur le larynx et la voix du garçon mue."
+      ],
+      "explication": "La testostérone est l'hormone produite par les testicules ; elle provoque les caractères sexuels secondaires masculins."
+    },
+    {
+      "reponse": "Une hormone",
+      "acceptees": ["Hormone", "Une hormone", "Les hormones", "Hormones"],
+      "indices": [
+        "Je suis une substance fabriquée par une glande.",
+        "Le sang me transporte dans tout le corps.",
+        "Je n'agis que sur certains organes, mes organes cibles."
+      ],
+      "explication": "Une hormone est produite par une glande, transportée par le sang et agit sur des organes cibles."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "La chaîne de commande de la puberté",
+      "etapes": [
+        "Le cerveau déclenche la puberté",
+        "L'hypophyse augmente sa production d'hormones",
+        "Les testicules ou les ovaires, stimulés, produisent des hormones sexuelles",
+        "Le sang transporte ces hormones jusqu'aux organes cibles",
+        "Les caractères sexuels secondaires apparaissent"
+      ]
+    }
+  ]
+}

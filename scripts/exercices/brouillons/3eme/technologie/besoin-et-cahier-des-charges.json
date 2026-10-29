@@ -1,0 +1,185 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "La sécurité des personnes",
+      "detail": "Les contraintes qui évitent de blesser ou de mettre en danger celui qui utilise l'objet.",
+      "cartes": [
+        "Éviter tout risque d'électrocution",
+        "Ne pas chauffer au contact des mains",
+        "Avoir des angles arrondis pour ne pas blesser",
+        "Protéger les doigts pour éviter de se pincer",
+        "Rester stable pour ne pas faire tomber son utilisateur"
+      ]
+    },
+    {
+      "nom": "L'énergie utilisée",
+      "detail": "Les contraintes sur l'alimentation de l'objet : pile, prise, recharge, consommation, autonomie.",
+      "cartes": [
+        "Fonctionner avec une pile de 9 V",
+        "Se brancher sur une prise de 230 V",
+        "Se recharger entièrement en moins de 3 heures",
+        "Ne pas consommer plus de 50 W",
+        "Avoir une autonomie d'au moins 8 heures"
+      ]
+    },
+    {
+      "nom": "L'environnement de l'objet",
+      "detail": "Les contraintes liées aux conditions extérieures dans lesquelles l'objet est utilisé.",
+      "cartes": [
+        "Résister à la pluie",
+        "Fonctionner de −10 °C à 40 °C",
+        "Supporter la poussière d'un atelier",
+        "Résister au sel de l'eau de mer",
+        "Supporter les vibrations de la route"
+      ]
+    },
+    {
+      "nom": "Le prix du produit",
+      "detail": "Les contraintes d'argent : prix d'achat, fabrication, pièces de rechange, entretien.",
+      "cartes": [
+        "Ne pas dépasser 30 € à l'achat",
+        "Rester dans le budget prévu pour la fabrication",
+        "Avoir des pièces de rechange bon marché",
+        "Demander peu d'argent pour l'entretien",
+        "Se vendre moins cher que les concurrents"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "De quel type est la fonction en couleur ?",
+      "texte": "Pour une montre : [indiquer l'heure à l'utilisateur].",
+      "choix": ["Fonction d'usage", "Fonction d'estime", "Fonction contrainte"],
+      "bonne": 0,
+      "explication": "Indiquer l'heure est la raison d'être de la montre : c'est sa fonction d'usage."
+    },
+    {
+      "consigne": "De quel type est la fonction en couleur ?",
+      "texte": "Pour une montre : [plaire par son design et sa couleur].",
+      "choix": ["Fonction d'usage", "Fonction d'estime", "Fonction contrainte"],
+      "bonne": 1,
+      "explication": "Ce qui rend l'objet attirant relève de la fonction d'estime."
+    },
+    {
+      "consigne": "De quel type est la fonction en couleur ?",
+      "texte": "Pour un chargeur : [respecter les normes de sécurité électrique].",
+      "choix": ["Fonction d'usage", "Fonction d'estime", "Fonction contrainte"],
+      "bonne": 2,
+      "explication": "C'est une exigence imposée par le milieu extérieur : une fonction contrainte."
+    },
+    {
+      "consigne": "De quel type est la fonction en couleur ?",
+      "texte": "Pour une trottinette : [transporter une personne en ville].",
+      "choix": ["Fonction d'usage", "Fonction d'estime", "Fonction contrainte"],
+      "bonne": 0,
+      "explication": "Transporter une personne est la raison d'être de la trottinette : sa fonction d'usage."
+    },
+    {
+      "consigne": "De quel type est la fonction en couleur ?",
+      "texte": "Pour un vélo : [avoir une couleur vive qui fait envie].",
+      "choix": ["Fonction d'usage", "Fonction d'estime", "Fonction contrainte"],
+      "bonne": 1,
+      "explication": "L'aspect qui plaît à l'utilisateur est la fonction d'estime."
+    },
+    {
+      "consigne": "De quel type est la fonction en couleur ?",
+      "texte": "Pour une lampe : [fonctionner avec une pile de 9 V].",
+      "choix": ["Fonction d'usage", "Fonction d'estime", "Fonction contrainte"],
+      "bonne": 2,
+      "explication": "L'énergie disponible est imposée par le milieu extérieur : c'est une fonction contrainte."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Bête à cornes",
+      "acceptees": ["Bête à cornes", "La bête à cornes", "Diagramme bête à cornes", "Le diagramme bête à cornes"],
+      "indices": [
+        "Je suis un schéma.",
+        "Je pose trois questions : à qui, sur quoi, dans quel but.",
+        "Je sers à exprimer le besoin auquel répond un objet."
+      ],
+      "explication": "Le diagramme bête à cornes exprime le besoin : à qui l'objet rend service, sur quoi il agit, dans quel but."
+    },
+    {
+      "reponse": "Matière d'œuvre",
+      "acceptees": ["Matière d'œuvre", "La matière d'œuvre", "Matière d'oeuvre", "La matière d'oeuvre"],
+      "indices": [
+        "Je suis un élément du diagramme bête à cornes.",
+        "Je réponds à la question « sur quoi l'objet agit-il ? ».",
+        "Pour un lave-linge, je suis le linge qu'on lave."
+      ],
+      "explication": "La matière d'œuvre est ce sur quoi l'objet agit : ce qu'il transforme ou déplace."
+    },
+    {
+      "reponse": "Pieuvre",
+      "acceptees": ["Pieuvre", "La pieuvre", "Diagramme pieuvre", "Le diagramme pieuvre"],
+      "indices": [
+        "Je suis un schéma.",
+        "L'objet est placé au centre, avec des liens vers l'extérieur.",
+        "Je relie l'objet, par ses fonctions, aux éléments de son milieu extérieur."
+      ],
+      "explication": "Le diagramme pieuvre relie l'objet au centre aux éléments du milieu extérieur par ses fonctions."
+    },
+    {
+      "reponse": "Flexibilité",
+      "acceptees": ["Flexibilité", "La flexibilité"],
+      "indices": [
+        "Je suis une marge.",
+        "J'indique l'écart accepté autour de la valeur attendue.",
+        "Dans « 10 m plus ou moins 1 m », je suis le « plus ou moins 1 m »."
+      ],
+      "explication": "La flexibilité est la marge acceptée autour du niveau attendu."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "Un niveau est fixé à 2 kg avec une flexibilité de plus ou moins 0,2 kg. Quelle est la masse maximale acceptée ?",
+      "reponse": 2.2,
+      "unite": "kg",
+      "tolerance": 0,
+      "explication": "Masse maximale = niveau + flexibilité = 2 + 0,2 = 2,2 kg."
+    },
+    {
+      "question": "La longueur d'un cadre doit être de 50 cm, avec une flexibilité de plus ou moins 2 cm. Quelle est la longueur minimale acceptée ?",
+      "reponse": 48,
+      "unite": "cm",
+      "tolerance": 0,
+      "explication": "Longueur minimale = niveau − flexibilité = 50 − 2 = 48 cm."
+    },
+    {
+      "question": "Une batterie doit offrir 8 h d'autonomie, avec une flexibilité de plus ou moins 30 min. Quelle est l'autonomie maximale acceptée, en heures ?",
+      "reponse": 8.5,
+      "unite": "h",
+      "tolerance": 0,
+      "explication": "30 min = 0,5 h. Autonomie maximale = 8 + 0,5 = 8,5 h."
+    },
+    {
+      "question": "Une lampe doit éclairer à 10 m, avec une flexibilité de plus ou moins 1 m. Elle éclaire à 8,5 m. Combien de mètres lui manquent pour atteindre la distance minimale acceptée ?",
+      "reponse": 0.5,
+      "unite": "m",
+      "tolerance": 0,
+      "explication": "Distance minimale acceptée = 10 − 1 = 9 m. Il manque 9 − 8,5 = 0,5 m."
+    },
+    {
+      "question": "Un portail doit s'ouvrir en 15 s, avec une flexibilité de plus ou moins 2 s. Il s'ouvre en 18 s. De combien de secondes dépasse-t-il le temps maximal accepté ?",
+      "reponse": 1,
+      "unite": "s",
+      "tolerance": 0,
+      "explication": "Temps maximal accepté = 15 + 2 = 17 s. Il dépasse de 18 − 17 = 1 s."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Du besoin au cahier des charges",
+      "etapes": [
+        "Exprimer le besoin avec la bête à cornes",
+        "Repérer les fonctions avec le diagramme pieuvre",
+        "Associer un critère mesurable à chaque fonction",
+        "Fixer le niveau chiffré de chaque critère",
+        "Préciser la flexibilité si c'est utile"
+      ]
+    }
+  ]
+}

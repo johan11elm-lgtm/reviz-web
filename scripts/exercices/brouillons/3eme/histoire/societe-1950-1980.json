@@ -1,0 +1,147 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Les Trente Glorieuses",
+      "detail": "La période de forte croissance qui transforme la France entre 1945 et le milieu des années 1970.",
+      "cartes": [
+        "Une forte croissance économique et le plein emploi",
+        "Le baby-boom : une forte hausse des naissances",
+        "L'exode rural fait grandir les villes",
+        "On construit des grands ensembles et des villes nouvelles",
+        "Le secteur tertiaire progresse"
+      ]
+    },
+    {
+      "nom": "Consommation et culture jeune",
+      "detail": "Les nouveaux modes de vie des Français et la place des jeunes dans la société.",
+      "cartes": [
+        "Les Français s'équipent en voitures et en télévisions",
+        "Le premier hypermarché Carrefour ouvre en 1963",
+        "La musique yé-yé et le rock séduisent les jeunes",
+        "Les jeunes contestent la société en mai 1968",
+        "La majorité passe de 21 à 18 ans en 1974"
+      ]
+    },
+    {
+      "nom": "L'émancipation des femmes",
+      "detail": "Les lois et les mouvements qui donnent plus d'autonomie aux femmes, de 1965 à 1983.",
+      "cartes": [
+        "Dès 1965, une femme mariée peut travailler sans autorisation",
+        "La loi Neuwirth autorise la contraception en 1967",
+        "Simone Veil fait dépénaliser l'IVG en 1975",
+        "Le Mouvement de libération des femmes naît en 1970",
+        "La loi Roudy affirme l'égalité professionnelle en 1983"
+      ]
+    },
+    {
+      "nom": "Les travailleurs immigrés",
+      "detail": "Le rôle des immigrés dans la croissance et l'évolution de leur situation jusqu'en 1976.",
+      "cartes": [
+        "Italiens, Espagnols et Portugais viennent travailler en France",
+        "Puis des travailleurs arrivent du Maghreb",
+        "Beaucoup vivent dans les bidonvilles de Nanterre",
+        "L'immigration de travail est suspendue en 1974",
+        "Le regroupement familial est autorisé en 1976"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "la fin des Trente Glorieuses",
+      "carte": "Le premier choc pétrolier de 1973",
+      "role": "cause",
+      "explication": "Le prix du pétrole monte fortement en 1973 : c'est la fin de la forte croissance."
+    },
+    {
+      "fait": "la fin des Trente Glorieuses",
+      "carte": "Le chômage augmente",
+      "role": "consequence",
+      "explication": "Après 1973, la croissance ralentit et le chômage augmente."
+    },
+    {
+      "fait": "la fin des Trente Glorieuses",
+      "carte": "De nombreuses industries ferment",
+      "role": "consequence",
+      "explication": "C'est la désindustrialisation : par exemple, des usines sidérurgiques ferment en Lorraine."
+    },
+    {
+      "fait": "l'appel à l'immigration de travail",
+      "carte": "Le besoin de main-d'œuvre pour reconstruire le pays et faire tourner les usines",
+      "role": "cause",
+      "explication": "La France fait appel à des travailleurs immigrés pour reconstruire le pays et faire tourner les usines."
+    },
+    {
+      "fait": "l'appel à l'immigration de travail",
+      "carte": "Beaucoup d'immigrés vivent d'abord dans des bidonvilles",
+      "role": "consequence",
+      "explication": "Beaucoup de travailleurs immigrés vivent d'abord dans des conditions très difficiles, comme dans les bidonvilles de Nanterre."
+    }
+  ],
+  "etiquettes": [],
+  "devinettes": [
+    {
+      "reponse": "Simone Veil",
+      "acceptees": ["Simone Veil", "Veil", "Madame Veil"],
+      "indices": [
+        "Je suis une femme politique française.",
+        "Je suis ministre de la Santé en 1974.",
+        "Je défends devant les députés, presque tous des hommes, la loi qui dépénalise l'IVG."
+      ],
+      "explication": "Simone Veil, ministre de la Santé, défend la loi de janvier 1975 qui dépénalise l'IVG."
+    },
+    {
+      "reponse": "Le choc pétrolier",
+      "acceptees": ["Choc pétrolier", "Le choc pétrolier", "Le premier choc pétrolier", "Premier choc pétrolier"],
+      "indices": [
+        "Je suis un événement économique de 1973.",
+        "Après moi, le chômage augmente et des usines ferment.",
+        "Je fais fortement monter le prix d'une matière première essentielle et je mets fin aux Trente Glorieuses."
+      ],
+      "explication": "Le premier choc pétrolier de 1973 multiplie le prix du pétrole et met fin aux Trente Glorieuses."
+    },
+    {
+      "reponse": "Le baby-boom",
+      "acceptees": ["Baby-boom", "Le baby-boom", "Baby boom", "Le baby boom"],
+      "indices": [
+        "Je suis un phénomène démographique.",
+        "Je commence en 1946, après la guerre.",
+        "Je fais fortement augmenter les naissances jusqu'au milieu des années 1960."
+      ],
+      "explication": "Le baby-boom, de 1946 au milieu des années 1960, fait augmenter la population française."
+    },
+    {
+      "reponse": "Mai 1968",
+      "acceptees": ["Mai 1968", "Mai 68", "Mai-68", "Mai 1968 en France"],
+      "indices": [
+        "Je suis un événement des années 1960.",
+        "Les jeunes y contestent la société.",
+        "J'ai lieu en pleine croissance, au printemps."
+      ],
+      "explication": "En mai 1968, les jeunes contestent la société, en pleine période de croissance."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Les lois et les combats pour les droits des femmes",
+      "etapes": [
+        "En 1965, la femme mariée peut travailler sans l'accord de son mari",
+        "En 1967, la loi Neuwirth autorise la contraception",
+        "En 1970, le Mouvement de libération des femmes naît",
+        "En 1971, des femmes signent le manifeste des 343",
+        "En janvier 1975, la loi Veil dépénalise l'IVG"
+      ]
+    },
+    {
+      "titre": "Des repères de la société française de 1946 à 1974",
+      "etapes": [
+        "En 1946, le baby-boom commence",
+        "En 1963, le premier hypermarché Carrefour ouvre",
+        "En mai 1968, les jeunes contestent la société",
+        "En 1973, le premier choc pétrolier met fin aux Trente Glorieuses",
+        "En 1974, la majorité passe de 21 à 18 ans"
+      ]
+    }
+  ]
+}

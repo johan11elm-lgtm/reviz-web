@@ -1,0 +1,193 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Décrire un solide",
+      "detail": "Reconnaître une pyramide ou un cône : sa base, ses faces, son patron.",
+      "cartes": [
+        "Les faces latérales d'une pyramide sont des triangles",
+        "La base d'un cône de révolution est un disque",
+        "Une pyramide à base carrée a 5 faces et 8 arêtes",
+        "Une pyramide à base triangulaire a 4 faces en tout",
+        "Patron d'un cône : disque et portion de disque"
+      ]
+    },
+    {
+      "nom": "Calculer un volume",
+      "detail": "Le volume d'une pyramide ou d'un cône : formule, aire de la base et résultat.",
+      "cartes": [
+        "V = aire de la base × hauteur ÷ 3",
+        "Base carrée de 6 cm, hauteur 5 cm : 60 cm³",
+        "Pour un cône, l'aire de la base est π × r²",
+        "Rayon 3 cm, hauteur 10 cm : 30π cm³",
+        "Le tiers du volume du prisme de même base"
+      ]
+    },
+    {
+      "nom": "Convertir des unités",
+      "detail": "Passer d'une unité de volume à une autre, ou aux litres et aux millilitres.",
+      "cartes": [
+        "1 dm³ = 1 L",
+        "1 cm³ = 1 mL",
+        "2 500 cm³ = 2,5 L",
+        "2,5 m³ = 2 500 L",
+        "Chaque unité de volume vaut 1 000 fois la suivante"
+      ]
+    },
+    {
+      "nom": "Se repérer dans l'espace",
+      "detail": "Repérer un point d'un pavé droit avec une origine, trois axes et trois coordonnées.",
+      "cartes": [
+        "Un point est repéré par trois nombres",
+        "L'origine est un sommet du pavé droit",
+        "Les trois axes suivent les arêtes qui partent de l'origine",
+        "L'altitude est la troisième coordonnée d'un point",
+        "L'abscisse est la première coordonnée d'un point"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "De quel solide parle-t-on ?",
+      "texte": "Un solide a [une base carrée et quatre faces latérales triangulaires].",
+      "choix": ["Une pyramide", "Un cône de révolution", "Un pavé droit"],
+      "bonne": 0,
+      "explication": "Une base polygonale et des faces latérales triangulaires qui se rejoignent en un sommet : c'est une pyramide."
+    },
+    {
+      "consigne": "De quel solide parle-t-on ?",
+      "texte": "Un solide a [une base en forme de disque et un sommet].",
+      "choix": ["Une pyramide", "Un cône de révolution", "Un pavé droit"],
+      "bonne": 1,
+      "explication": "Le cône de révolution a pour base un disque."
+    },
+    {
+      "consigne": "De quel solide parle-t-on ?",
+      "texte": "Un solide a [six faces, toutes rectangulaires].",
+      "choix": ["Une pyramide", "Un cône de révolution", "Un pavé droit"],
+      "bonne": 2,
+      "explication": "Un pavé droit a six faces rectangulaires."
+    },
+    {
+      "consigne": "De quel solide parle-t-on ?",
+      "texte": "Un solide a [une base triangulaire et trois faces latérales triangulaires].",
+      "choix": ["Une pyramide", "Un cône de révolution", "Un pavé droit"],
+      "bonne": 0,
+      "explication": "Quatre faces triangulaires dont une base : c'est une pyramide à base triangulaire."
+    },
+    {
+      "consigne": "De quel solide parle-t-on ?",
+      "texte": "On obtient un solide en [faisant tourner un triangle rectangle autour d'un côté de l'angle droit].",
+      "choix": ["Une pyramide", "Un cône de révolution", "Un pavé droit"],
+      "bonne": 1,
+      "explication": "C'est la définition du cône de révolution."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Apothème",
+      "acceptees": ["Apothème", "L'apothème", "Un apothème", "Apotheme"],
+      "indices": [
+        "Je suis un segment tracé dans une pyramide régulière.",
+        "Je suis la hauteur d'une face latérale.",
+        "Je suis plus long que la hauteur de la pyramide et je ne sers pas au calcul du volume."
+      ],
+      "explication": "L'apothème est la hauteur d'une face latérale d'une pyramide régulière, issue du sommet."
+    },
+    {
+      "reponse": "Patron",
+      "acceptees": ["Patron", "Le patron", "Un patron"],
+      "indices": [
+        "Je suis une figure plane.",
+        "Une fois pliée, je forme un solide.",
+        "Pour un cône, je suis un disque et une portion de disque."
+      ],
+      "explication": "Un patron est une figure plane qui, une fois pliée, forme le solide."
+    },
+    {
+      "reponse": "Hauteur",
+      "acceptees": ["Hauteur", "La hauteur", "Une hauteur"],
+      "indices": [
+        "Je suis un segment issu du sommet.",
+        "Je suis perpendiculaire à la base.",
+        "J'interviens dans la formule du volume."
+      ],
+      "explication": "La hauteur d'une pyramide est le segment issu du sommet et perpendiculaire à la base."
+    },
+    {
+      "reponse": "Cône de révolution",
+      "acceptees": ["Cône de révolution", "Le cône de révolution", "Cône", "Un cône", "Le cône"],
+      "indices": [
+        "Je suis un solide qui se termine en pointe.",
+        "On m'obtient en faisant tourner un triangle rectangle autour d'un côté de l'angle droit.",
+        "Ma base est un disque."
+      ],
+      "explication": "Un cône de révolution a pour base un disque et on l'obtient en faisant tourner un triangle rectangle."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "Une pyramide a pour base un carré de côté 6 cm et pour hauteur 5 cm. Quel est son volume, en cm³ ?",
+      "reponse": 60,
+      "unite": "cm³",
+      "tolerance": 0,
+      "explication": "Aire de la base : 6 × 6 = 36 cm². V = 36 × 5 ÷ 3 = 180 ÷ 3 = 60 cm³."
+    },
+    {
+      "question": "Un cône a pour rayon 3 cm et pour hauteur 10 cm. Quel est son volume en cm³, arrondi au dixième ?",
+      "reponse": 94.2,
+      "unite": "cm³",
+      "tolerance": 0,
+      "explication": "V = π × 3² × 10 ÷ 3 = 30π ≈ 94,2 cm³."
+    },
+    {
+      "question": "Une pyramide a une base d'aire 30 cm² et une hauteur de 9 cm. Quel est son volume, en cm³ ?",
+      "reponse": 90,
+      "unite": "cm³",
+      "tolerance": 0,
+      "explication": "V = 30 × 9 ÷ 3 = 270 ÷ 3 = 90 cm³."
+    },
+    {
+      "question": "Combien de litres contient un récipient de 2 500 cm³ ?",
+      "reponse": 2.5,
+      "unite": "L",
+      "tolerance": 0,
+      "explication": "1 L = 1 dm³ = 1 000 cm³, donc 2 500 cm³ = 2,5 dm³ = 2,5 L."
+    },
+    {
+      "question": "Un cône a un diamètre de base de 8 cm et une hauteur de 6 cm. Quel est son volume en cm³, arrondi au dixième ?",
+      "reponse": 100.5,
+      "unite": "cm³",
+      "tolerance": 0,
+      "explication": "Le rayon est 8 ÷ 2 = 4 cm. V = π × 4² × 6 ÷ 3 = 32π ≈ 100,5 cm³."
+    },
+    {
+      "question": "Une pyramide a un volume de 48 cm³ et une hauteur de 4 cm. Quelle est l'aire de sa base, en cm² ?",
+      "reponse": 36,
+      "unite": "cm²",
+      "tolerance": 0,
+      "explication": "V = aire × h ÷ 3, donc aire = 3 × V ÷ h = 3 × 48 ÷ 4 = 144 ÷ 4 = 36 cm²."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Calculer le volume d'une pyramide à base carrée de côté 6 cm et de hauteur 5 cm",
+      "etapes": [
+        "On calcule l'aire de la base : 6 × 6 = 36 cm²",
+        "On multiplie par la hauteur : 36 × 5 = 180",
+        "On divise par 3 : 180 ÷ 3 = 60",
+        "On écrit le résultat avec l'unité : 60 cm³"
+      ]
+    },
+    {
+      "titre": "Calculer le volume d'un cône de rayon 3 cm et de hauteur 10 cm",
+      "etapes": [
+        "On calcule l'aire de la base : π × 3² = 9π cm²",
+        "On multiplie par la hauteur : 9π × 10 = 90π",
+        "On divise par 3 : 90π ÷ 3 = 30π",
+        "On écrit le résultat avec l'unité : 30π cm³"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,132 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Les unités d'intensité",
+      "detail": "L'ampère, le milliampère et les conversions de l'un à l'autre.",
+      "cartes": [
+        "1 A est égal à 1 000 mA",
+        "Des A aux mA : on multiplie par 1 000",
+        "0,25 A s'écrit aussi 250 mA",
+        "80 mA s'écrivent 0,08 A",
+        "L'ampère s'abrège A, le milliampère mA"
+      ]
+    },
+    {
+      "nom": "Le branchement de l'ampèremètre",
+      "detail": "La place de l'ampèremètre dans le circuit : en série, jamais en dérivation.",
+      "cartes": [
+        "On ouvre le circuit pour y insérer l'appareil",
+        "Il se met en série avec la lampe",
+        "Il fait partie de la boucle",
+        "Le courant qui traverse la lampe le traverse aussi",
+        "Il ne se met jamais en dérivation"
+      ]
+    },
+    {
+      "nom": "Le réglage du multimètre",
+      "detail": "Le choix du sélecteur et du calibre pour une mesure précise.",
+      "cartes": [
+        "On place le sélecteur en zone A, courant continu",
+        "On commence par le plus grand calibre",
+        "On vise le plus petit calibre qui dépasse la valeur",
+        "Une mesure de 150 mA se fait sur le calibre 200 mA",
+        "Un calibre juste au-dessus donne une mesure plus précise"
+      ]
+    },
+    {
+      "nom": "La sécurité électrique",
+      "detail": "Les dangers d'une intensité trop forte et les dispositifs qui coupent le courant.",
+      "cartes": [
+        "Les fils chauffent et un incendie peut se déclarer",
+        "Le fusible fond et coupe le courant",
+        "Le disjoncteur coupe le courant en cas de surintensité",
+        "Environ 30 mA dans le corps peut être mortel",
+        "Les habitations ont un disjoncteur différentiel 30 mA"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [],
+  "devinettes": [
+    {
+      "reponse": "Calibre",
+      "acceptees": ["Calibre", "Le calibre", "Un calibre"],
+      "indices": [
+        "Je suis une valeur maximale que l'appareil peut afficher.",
+        "Il y en a plusieurs sur le sélecteur du multimètre : 10 A, 200 mA, 20 mA.",
+        "On commence par le plus grand, puis on prend le plus petit au-dessus de la valeur mesurée."
+      ],
+      "explication": "Le calibre est la valeur maximale affichable ; on choisit le plus petit calibre supérieur à la valeur pour plus de précision."
+    },
+    {
+      "reponse": "Ampèremètre",
+      "acceptees": ["Ampèremètre", "L'ampèremètre", "Un ampèremètre", "Amperemetre"],
+      "indices": [
+        "Je suis un appareil de mesure.",
+        "On me place en série : le courant doit me traverser.",
+        "Mon symbole est un cercle contenant la lettre A."
+      ],
+      "explication": "L'ampèremètre mesure l'intensité du courant et se branche en série dans le circuit."
+    },
+    {
+      "reponse": "Disjoncteur",
+      "acceptees": ["Disjoncteur", "Le disjoncteur", "Un disjoncteur", "Disjoncteur différentiel"],
+      "indices": [
+        "Je protège une installation électrique.",
+        "Je coupe le courant quand l'intensité devient trop forte.",
+        "Dans les habitations, il existe un modèle différentiel de 30 mA qui me ressemble."
+      ],
+      "explication": "Le disjoncteur coupe le courant en cas de surintensité ; le disjoncteur différentiel 30 mA protège les personnes."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "Convertis 0,36 A en milliampères.",
+      "reponse": 360,
+      "unite": "mA",
+      "tolerance": 0,
+      "explication": "1 A = 1 000 mA, donc 0,36 × 1 000 = 360 mA."
+    },
+    {
+      "question": "Convertis 270 mA en ampères.",
+      "reponse": 0.27,
+      "unite": "A",
+      "tolerance": 0,
+      "explication": "On divise par 1 000 : 270 ÷ 1 000 = 0,27 A."
+    },
+    {
+      "question": "Une DEL est traversée par 20 mA et une lampe de poche par 0,2 A. Combien de fois l'intensité dans la lampe est-elle plus grande que dans la DEL ?",
+      "reponse": 10,
+      "unite": "fois",
+      "tolerance": 0,
+      "explication": "0,2 A = 200 mA, et 200 ÷ 20 = 10 : l'intensité est 10 fois plus grande dans la lampe."
+    },
+    {
+      "question": "L'ampèremètre affiche −0,12 A parce qu'il est branché à l'envers. Quelle est la vraie intensité du courant, en milliampères ?",
+      "reponse": 120,
+      "unite": "mA",
+      "tolerance": 0,
+      "explication": "La valeur sans le signe reste la bonne intensité : 0,12 A = 0,12 × 1 000 = 120 mA."
+    },
+    {
+      "question": "L'intensité dans une lampe passe de 0,3 A à 0,1 A. De combien de milliampères a-t-elle diminué ?",
+      "reponse": 200,
+      "unite": "mA",
+      "tolerance": 0,
+      "explication": "0,3 − 0,1 = 0,2 A, soit 0,2 × 1 000 = 200 mA."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Les étapes d'une mesure d'intensité",
+      "etapes": [
+        "Ouvre le circuit à l'endroit de la mesure",
+        "Insère le multimètre en série dans le circuit",
+        "Lis la valeur sur le plus grand calibre",
+        "Passe au plus petit calibre supérieur à la valeur lue",
+        "Note le résultat avec son unité"
+      ]
+    }
+  ]
+}

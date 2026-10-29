@@ -1,0 +1,159 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "La taille et la silhouette",
+      "detail": "On décrit la taille et la corpulence d'une personne avec be et des adjectifs comme tall, short, slim ou strong.",
+      "cartes": [
+        "My sister is tall and slim",
+        "He is short and strong",
+        "My uncle is of medium height",
+        "Her cousin is very thin",
+        "The new boy is quite short"
+      ]
+    },
+    {
+      "nom": "Les cheveux et les yeux",
+      "detail": "On décrit les cheveux et les yeux avec have got : la longueur, la forme, puis la couleur.",
+      "cartes": [
+        "He has got short dark hair",
+        "She has got long straight red hair",
+        "My brother has got blue eyes",
+        "Her sister has got long curly fair hair",
+        "She has got big brown eyes"
+      ]
+    },
+    {
+      "nom": "Une qualité de caractère",
+      "detail": "On dit un point positif de la personnalité : kind, generous, polite, patient, brave, clever, hard-working.",
+      "cartes": [
+        "Anna is kind and generous",
+        "Our teacher is very patient with us",
+        "He is polite: he always says thank you",
+        "She is hard-working: she studies every evening",
+        "My cousin is brave and clever"
+      ]
+    },
+    {
+      "nom": "Un défaut de caractère",
+      "detail": "On dit un point négatif de la personnalité : lazy, bossy, rude, selfish, impatient.",
+      "cartes": [
+        "He is lazy: he never does his homework",
+        "She is a bit bossy with her friends",
+        "My brother is rude to the teachers",
+        "He is selfish: he never shares his snacks",
+        "Our neighbour is impatient and hates waiting"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Que demande la question en couleur ?",
+      "texte": "Your new teacher is Mrs Green. [What does she look like?]",
+      "choix": [
+        "Le physique",
+        "Le caractère",
+        "Les goûts"
+      ],
+      "bonne": 0,
+      "explication": "What does she look like? demande à quoi ressemble la personne : on répond sur son physique."
+    },
+    {
+      "consigne": "Que demande la question en couleur ?",
+      "texte": "We have a new student in class. [What is he like?]",
+      "choix": [
+        "Le physique",
+        "Le caractère",
+        "Les goûts"
+      ],
+      "bonne": 1,
+      "explication": "What is he like? demande comment est la personne : on répond sur son caractère (friendly, funny…)."
+    },
+    {
+      "consigne": "Que demande la question en couleur ?",
+      "texte": "Sam is coming to dinner tonight. [What does he like?]",
+      "choix": [
+        "Le physique",
+        "Le caractère",
+        "Les goûts"
+      ],
+      "bonne": 2,
+      "explication": "What does he like? demande ce qu'il aime : on répond sur ses goûts."
+    },
+    {
+      "consigne": "Que demande la question en couleur ?",
+      "texte": "Tell me about your best friend. [What is she like?]",
+      "choix": [
+        "Le physique",
+        "Le caractère",
+        "Les goûts"
+      ],
+      "bonne": 1,
+      "explication": "What is she like? porte sur la personnalité : on répond avec des adjectifs de caractère."
+    },
+    {
+      "consigne": "Que demande la question en couleur ?",
+      "texte": "I can't see your penfriend in this photo. [What does he look like?]",
+      "choix": [
+        "Le physique",
+        "Le caractère",
+        "Les goûts"
+      ],
+      "bonne": 0,
+      "explication": "What does he look like? porte sur l'apparence : taille, cheveux, yeux."
+    },
+    {
+      "consigne": "Que demande la question en couleur ?",
+      "texte": "It's Grandma's birthday soon. [What does she like?]",
+      "choix": [
+        "Le physique",
+        "Le caractère",
+        "Les goûts"
+      ],
+      "bonne": 2,
+      "explication": "What does she like? demande ce qu'elle aime : ses goûts, pas son physique ni son caractère."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Sensible",
+      "acceptees": [
+        "Sensible"
+      ],
+      "indices": [
+        "Je suis un adjectif anglais qui parle du caractère.",
+        "Je ressemble à un mot français, mais je n'ai pas du tout le même sens.",
+        "Je veux dire « raisonnable » ; pour parler de quelqu'un d'émotif, on emploie sensitive à ma place."
+      ],
+      "explication": "Sensible est un faux ami : en anglais il veut dire raisonnable, et « sensible » se dit sensitive."
+    },
+    {
+      "reponse": "Look like",
+      "acceptees": [
+        "Looks like",
+        "To look like"
+      ],
+      "indices": [
+        "Je suis une expression anglaise de deux mots.",
+        "Je sers à parler du physique de quelqu'un.",
+        "On me trouve dans la question « What does she … ? » qui demande à quoi ressemble une personne."
+      ],
+      "explication": "What does she look like? demande le physique ; pour le caractère, on dit What is she like?"
+    },
+    {
+      "reponse": "Hair",
+      "acceptees": [
+        "The hair"
+      ],
+      "indices": [
+        "Je suis un nom anglais qui cache un piège de grammaire.",
+        "Je désigne la chevelure.",
+        "Je suis indénombrable : on dit « her … is long », jamais « her … are long »."
+      ],
+      "explication": "Hair, au sens de chevelure, est indénombrable : her hair is long, sans -s."
+    }
+  ],
+  "calculs": [],
+  "etapes": []
+}

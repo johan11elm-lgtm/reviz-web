@@ -1,0 +1,161 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Le demi-tour autour de O",
+      "detail": "Ce qu'est la symétrie centrale et où se placent M, O et M'.",
+      "cartes": [
+        "Une rotation de 180° autour d'un point",
+        "Le symétrique de O est O lui-même",
+        "O est exactement à mi-chemin entre M et M'",
+        "On tourne la figure sans la retourner",
+        "OM = 3 cm donne MM' = 6 cm"
+      ]
+    },
+    {
+      "nom": "Construire un symétrique",
+      "detail": "Les gestes pour tracer le symétrique d'un point ou d'une figure.",
+      "cartes": [
+        "Tracer la demi-droite [MO) pour un point M",
+        "Reporter OM au compas de l'autre côté de O",
+        "Sur quadrillage, refaire à partir de O le même déplacement",
+        "Placer les images des deux extrémités d'un segment",
+        "Relier les images des sommets dans le même ordre"
+      ]
+    },
+    {
+      "nom": "Les propriétés conservées",
+      "detail": "Ce qui ne change pas entre une figure et son symétrique.",
+      "cartes": [
+        "Les longueurs : A'B' = AB",
+        "Un angle de 40° reste un angle de 40°",
+        "Deux figures symétriques ont la même aire",
+        "Une droite a pour image une droite parallèle",
+        "Trois points alignés ont des images alignées"
+      ]
+    },
+    {
+      "nom": "Le centre d'une figure",
+      "detail": "Où se trouve le centre de symétrie des figures qui en ont un, et celles qui n'en ont pas.",
+      "cartes": [
+        "Le parallélogramme : l'intersection de ses diagonales",
+        "Le cercle : son centre",
+        "Le segment : son milieu",
+        "Le carré : un centre et aussi quatre axes",
+        "Le triangle équilatéral : aucun, malgré ses trois axes"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Quelle propriété de la symétrie centrale le passage en couleur illustre-t-il ?",
+      "texte": "A' et B' sont les symétriques de A et B par rapport à O, donc [A'B' = AB].",
+      "choix": ["Les longueurs", "Les angles", "Les aires", "Le parallélisme"],
+      "bonne": 0,
+      "explication": "Un segment et son symétrique ont la même longueur : la symétrie centrale conserve les longueurs."
+    },
+    {
+      "consigne": "Quelle propriété de la symétrie centrale le passage en couleur illustre-t-il ?",
+      "texte": "L'angle ABC mesure 50°, donc [l'angle A'B'C' mesure aussi 50°].",
+      "choix": ["Les longueurs", "Les angles", "Les aires", "Le parallélisme"],
+      "bonne": 1,
+      "explication": "Un angle et son symétrique ont la même mesure : la symétrie centrale conserve les angles."
+    },
+    {
+      "consigne": "Quelle propriété de la symétrie centrale le passage en couleur illustre-t-il ?",
+      "texte": "Le triangle ABC a une aire de 12 cm², donc [son symétrique a aussi une aire de 12 cm²].",
+      "choix": ["Les longueurs", "Les angles", "Les aires", "Le parallélisme"],
+      "bonne": 2,
+      "explication": "Une figure et son symétrique sont superposables : la symétrie centrale conserve les aires."
+    },
+    {
+      "consigne": "Quelle propriété de la symétrie centrale le passage en couleur illustre-t-il ?",
+      "texte": "Le symétrique de la droite (d) est la droite (d'), et [(d') est parallèle à (d)].",
+      "choix": ["Les longueurs", "Les angles", "Les aires", "Le parallélisme"],
+      "bonne": 3,
+      "explication": "Le symétrique d'une droite est une droite qui lui est parallèle : c'est la conservation du parallélisme."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Centre de symétrie",
+      "acceptees": ["Le centre de symétrie", "Centre", "Le centre"],
+      "indices": [
+        "Je suis un point.",
+        "Un demi-tour autour de moi superpose une figure à elle-même.",
+        "Dans un parallélogramme, je suis le point d'intersection des diagonales."
+      ],
+      "explication": "Le centre de symétrie d'un parallélogramme est le point d'intersection de ses diagonales."
+    },
+    {
+      "reponse": "Symétrie centrale",
+      "acceptees": ["La symétrie centrale", "Demi-tour", "Rotation de 180°"],
+      "indices": [
+        "Je ne déforme jamais les figures : longueurs et angles sont conservés.",
+        "Pour passer d'une figure à son image, on la fait tourner de 180°.",
+        "Je transforme M en M' de sorte que O soit le milieu de [MM']."
+      ],
+      "explication": "La symétrie centrale de centre O est un demi-tour : O est le milieu de [MM']."
+    },
+    {
+      "reponse": "Symétrie axiale",
+      "acceptees": ["La symétrie axiale", "Symétrie par rapport à une droite"],
+      "indices": [
+        "Je ne déforme pas les figures.",
+        "Je suis un pliage le long d'une droite.",
+        "La droite de pliage est la médiatrice de [MM']."
+      ],
+      "explication": "La symétrie axiale est un pliage le long d'une droite, qui est la médiatrice de [MM']."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "O est le milieu de [MM']. On mesure OM = 4,3 cm. Quelle est la longueur MM' ?",
+      "reponse": 8.6,
+      "unite": "cm",
+      "tolerance": 0,
+      "explication": "O est le milieu de [MM'], donc MM' = 2 × OM = 2 × 4,3 = 8,6 cm."
+    },
+    {
+      "question": "A' est le symétrique de A par rapport à O, et AA' = 11 cm. Quelle est la longueur OA ?",
+      "reponse": 5.5,
+      "unite": "cm",
+      "tolerance": 0,
+      "explication": "O est le milieu de [AA'], donc OA = AA' ÷ 2 = 11 ÷ 2 = 5,5 cm."
+    },
+    {
+      "question": "Le triangle ABC a pour côtés AB = 3 cm, BC = 4 cm et AC = 6 cm. Quel est le périmètre de son symétrique A'B'C' par rapport à O ?",
+      "reponse": 13,
+      "unite": "cm",
+      "tolerance": 0,
+      "explication": "Les longueurs sont conservées : A'B'C' a les mêmes côtés. Périmètre : 3 + 4 + 6 = 13 cm."
+    },
+    {
+      "question": "Sur un quadrillage, M est à 4 carreaux à droite et 3 carreaux au-dessus de O. M' est son symétrique par rapport à O. De combien de carreaux M' est-il à gauche de M ?",
+      "reponse": 8,
+      "unite": "carreaux",
+      "tolerance": 0,
+      "explication": "M' est 4 carreaux à gauche de O, et M est 4 carreaux à droite de O : l'écart horizontal est 4 + 4 = 8 carreaux."
+    },
+    {
+      "question": "Le triangle ABC a pour périmètre 21 cm, avec AB = 5 cm et BC = 7 cm. Quelle est la longueur du côté [A'C'] de son symétrique A'B'C' par rapport à O ?",
+      "reponse": 9,
+      "unite": "cm",
+      "tolerance": 0,
+      "explication": "AC = 21 − 5 − 7 = 9 cm. La symétrie centrale conserve les longueurs, donc A'C' = AC = 9 cm."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Les étapes pour construire le symétrique d'un polygone",
+      "etapes": [
+        "Trace la demi-droite [AO) pour un sommet A",
+        "Reporte la longueur OA au compas de l'autre côté de O",
+        "Fais de même pour les autres sommets",
+        "Relie les images dans le même ordre que la figure de départ",
+        "Contrôle que chaque côté image est parallèle au côté de départ"
+      ]
+    }
+  ]
+}

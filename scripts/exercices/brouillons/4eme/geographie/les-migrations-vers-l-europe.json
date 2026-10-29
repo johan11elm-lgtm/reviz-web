@@ -1,0 +1,211 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Le début du voyage",
+      "detail": "Les pays de départ : ceux que les migrants quittent, pour la guerre, la pauvreté ou un avenir meilleur.",
+      "cartes": [
+        "La Syrie, que des familles quittent pour fuir la guerre",
+        "L'Afghanistan, d'où partent de nombreux migrants",
+        "Le Mali, d'où part un migrant vers l'Italie",
+        "Des pays d'Afrique de l'Est que des migrants quittent",
+        "Le pays où le migrant est né ou qu'il fuit"
+      ]
+    },
+    {
+      "nom": "Les pays de transit",
+      "detail": "Les pays que les migrants traversent avant d'atteindre leur destination : Niger, Libye, Tunisie, Maroc, Turquie.",
+      "cartes": [
+        "Le Niger, que l'on traverse avant la Libye",
+        "La Libye, que l'on traverse avant d'embarquer",
+        "La Tunisie, traversée avant de prendre la mer",
+        "Le Maroc, que des migrants traversent avant l'Espagne",
+        "La Turquie, traversée avant de rejoindre la Grèce"
+      ]
+    },
+    {
+      "nom": "La traversée de la mer",
+      "detail": "Le passage de la Méditerranée en bateau, organisé par des passeurs et très dangereux.",
+      "cartes": [
+        "Des bateaux surchargés où les migrants sont entassés",
+        "Des dizaines de milliers de morts ou disparus depuis 2014",
+        "La route de la Méditerranée centrale, la plus meurtrière",
+        "Une mer à franchir entre l'Afrique et l'Europe"
+      ]
+    },
+    {
+      "nom": "L'arrivée en Europe",
+      "detail": "Les premières terres européennes atteintes et ce qu'on y met en place pour enregistrer et accueillir les migrants.",
+      "cartes": [
+        "Lampedusa et Lesbos, premières terres européennes atteintes",
+        "Des pays de l'UE du bord de la Méditerranée",
+        "Des centres d'enregistrement installés sur les îles",
+        "Des camps où des demandeurs d'asile patientent",
+        "Des ONG et des habitants qui accueillent les arrivants"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "l'arrivée de plus d'un million de personnes en Europe en 2015",
+      "carte": "La guerre en Syrie pousse des familles à fuir",
+      "role": "cause",
+      "explication": "En 2015, beaucoup de personnes arrivées en Europe par la mer fuyaient la guerre en Syrie."
+    },
+    {
+      "fait": "l'arrivée de plus d'un million de personnes en Europe en 2015",
+      "carte": "L'Europe est riche, en paix et protège les droits",
+      "role": "cause",
+      "explication": "La richesse, la paix et la protection des droits attirent des migrants vers l'Union européenne."
+    },
+    {
+      "fait": "l'arrivée de plus d'un million de personnes en Europe en 2015",
+      "carte": "Les capacités d'accueil des États sont débordées",
+      "role": "consequence",
+      "explication": "Ces arrivées massives ont débordé les capacités d'accueil : on a parlé de « crise migratoire »."
+    },
+    {
+      "fait": "la transformation d'îles comme Lampedusa et Lesbos",
+      "carte": "Ces îles sont les premières terres européennes proches des côtes de départ",
+      "role": "cause",
+      "explication": "Proches des côtes africaines ou turques, ces îles reçoivent de nombreux arrivants."
+    },
+    {
+      "fait": "la transformation d'îles comme Lampedusa et Lesbos",
+      "carte": "Des centres d'enregistrement et des camps sont installés",
+      "role": "consequence",
+      "explication": "Pour faire face aux arrivées, on y installe des hotspots, centres d'enregistrement, et des camps."
+    },
+    {
+      "fait": "la transformation d'îles comme Lampedusa et Lesbos",
+      "carte": "Des ONG et des habitants se mobilisent pour secourir et accueillir",
+      "role": "consequence",
+      "explication": "Face aux nombreuses arrivées, habitants et ONG se mobilisent pour secourir et accueillir les migrants."
+    }
+  ],
+  "etiquettes": [
+    {
+      "consigne": "Quel rôle joue le pays en couleur dans le parcours de ce migrant ?",
+      "texte": "Parti du Mali, un migrant traverse [la Libye], puis embarque vers l'Italie.",
+      "choix": [
+        "Pays de départ",
+        "Pays de transit",
+        "Pays d'arrivée"
+      ],
+      "bonne": 1,
+      "explication": "Le migrant traverse la Libye avant d'embarquer : c'est un pays de transit."
+    },
+    {
+      "consigne": "Quel rôle joue le pays en couleur dans le parcours de cette famille ?",
+      "texte": "Une famille fuit la guerre : elle quitte [la Syrie], passe par la Turquie, puis rejoint la Grèce.",
+      "choix": [
+        "Pays de départ",
+        "Pays de transit",
+        "Pays d'arrivée"
+      ],
+      "bonne": 0,
+      "explication": "La famille quitte la Syrie : c'est son pays de départ."
+    },
+    {
+      "consigne": "Quel rôle joue le pays en couleur dans le parcours de ce migrant ?",
+      "texte": "Parti d'Afrique de l'Ouest, un migrant traverse le Niger, puis la Libye, et embarque vers [l'Italie].",
+      "choix": [
+        "Pays de départ",
+        "Pays de transit",
+        "Pays d'arrivée"
+      ],
+      "bonne": 2,
+      "explication": "L'Italie est le pays de l'UE que le migrant veut atteindre : c'est le pays d'arrivée."
+    },
+    {
+      "consigne": "Quel rôle joue le pays en couleur dans le parcours de cette famille ?",
+      "texte": "Une famille syrienne quitte son pays, passe par [la Turquie], puis embarque vers l'île grecque de Lesbos.",
+      "choix": [
+        "Pays de départ",
+        "Pays de transit",
+        "Pays d'arrivée"
+      ],
+      "bonne": 1,
+      "explication": "La Turquie est traversée avant la mer : c'est un pays de transit."
+    },
+    {
+      "consigne": "Quel rôle joue le pays en couleur dans le parcours de ce migrant ?",
+      "texte": "Un migrant afghan quitte son pays, traverse la Turquie, puis arrive en [Grèce].",
+      "choix": [
+        "Pays de départ",
+        "Pays de transit",
+        "Pays d'arrivée"
+      ],
+      "bonne": 2,
+      "explication": "La Grèce, membre de l'UE, est le pays où le migrant arrive : c'est le pays d'arrivée."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Frontex",
+      "acceptees": [
+        "Frontex"
+      ],
+      "indices": [
+        "Je suis un organisme de l'Union européenne.",
+        "J'ai été créée en 2004.",
+        "Je suis l'agence de garde-frontières et de garde-côtes qui aide les États à surveiller les frontières extérieures."
+      ],
+      "explication": "Frontex, créée en 2004, est l'agence européenne de garde-frontières et de garde-côtes."
+    },
+    {
+      "reponse": "Schengen",
+      "acceptees": [
+        "Schengen",
+        "Espace Schengen",
+        "Accords de Schengen"
+      ],
+      "indices": [
+        "Je suis un espace qui n'est pas exactement l'Union européenne.",
+        "Je permets de circuler librement entre la plupart des pays européens.",
+        "Je suis né d'accords signés en 1985, et mes frontières extérieures sont contrôlées."
+      ],
+      "explication": "L'espace Schengen, né des accords de 1985, permet de circuler librement ; ses frontières extérieures sont contrôlées."
+    },
+    {
+      "reponse": "Lampedusa",
+      "acceptees": [
+        "Lampedusa"
+      ],
+      "indices": [
+        "Je suis une petite île.",
+        "Je suis italienne, mais plus proche de la Tunisie que de la Sicile.",
+        "Je suis devenue un symbole de l'arrivée des migrants sur la route de la Méditerranée centrale."
+      ],
+      "explication": "Lampedusa, petite île italienne proche de la Tunisie, est un symbole de l'arrivée des migrants."
+    },
+    {
+      "reponse": "Passeur",
+      "acceptees": [
+        "Passeur",
+        "Un passeur",
+        "Passeurs",
+        "Trafiquant"
+      ],
+      "indices": [
+        "Mon activité est illégale.",
+        "Je fais payer cher le passage des frontières.",
+        "J'entasse des migrants dans des bateaux surchargés."
+      ],
+      "explication": "Le passeur fait payer cher le passage illégal des frontières et entasse les migrants dans des bateaux surchargés."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Le parcours d'un migrant d'Afrique de l'Ouest vers l'Italie",
+      "etapes": [
+        "Il quitte son pays d'Afrique de l'Ouest",
+        "Il traverse le Niger",
+        "Il traverse la Libye",
+        "Il embarque sur un bateau vers l'Italie",
+        "Il arrive à Lampedusa ou en Sicile"
+      ]
+    }
+  ]
+}

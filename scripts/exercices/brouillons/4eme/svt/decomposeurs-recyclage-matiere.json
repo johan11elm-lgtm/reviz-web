@@ -1,0 +1,181 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Les producteurs",
+      "detail": "Les végétaux fabriquent de la matière organique, grâce notamment aux sels minéraux absorbés par leurs racines.",
+      "cartes": [
+        "Un chêne dans la forêt",
+        "L'herbe d'une prairie",
+        "Un champ de blé",
+        "Une fougère de sous-bois",
+        "Un rosier du jardin"
+      ]
+    },
+    {
+      "nom": "Les consommateurs",
+      "detail": "Des animaux qui mangent la matière organique vivante fabriquée par les producteurs ou par d'autres animaux.",
+      "cartes": [
+        "Un lapin qui broute de l'herbe",
+        "Un cerf qui mange de jeunes pousses",
+        "Une chenille qui ronge une feuille de chou",
+        "Un renard qui attrape un mulot",
+        "Une mésange qui avale des insectes"
+      ]
+    },
+    {
+      "nom": "Les décomposeurs",
+      "detail": "Des êtres vivants qui se nourrissent de matière organique morte : la faune du sol fragmente, les champignons et les bactéries minéralisent.",
+      "cartes": [
+        "Un ver de terre qui avale des feuilles mortes",
+        "Un cloporte qui grignote la litière",
+        "Un collembole qui se nourrit de débris de litière",
+        "Un champignon du sol qui vit sur du bois mort",
+        "Une bactérie du sol qui vit de cadavres"
+      ]
+    },
+    {
+      "nom": "La matière organique morte",
+      "detail": "Les restes d'êtres vivants que les décomposeurs recyclent : feuilles mortes, cadavres, excréments.",
+      "cartes": [
+        "Les feuilles mortes qui tapissent le sol",
+        "Le cadavre d'un oiseau dans un bois",
+        "Les excréments des animaux",
+        "Les épluchures jetées dans un composteur",
+        "Une branche morte tombée dans la forêt"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "la faune du sol diminue",
+      "carte": "L'usage excessif de certains pesticides",
+      "role": "cause",
+      "explication": "En éliminant des organismes du sol, certains pesticides réduisent la faune du sol."
+    },
+    {
+      "fait": "la faune du sol diminue",
+      "carte": "Le tassement du sol",
+      "role": "cause",
+      "explication": "Un sol tassé contient moins d'air : la faune du sol y survit moins bien."
+    },
+    {
+      "fait": "la faune du sol diminue",
+      "carte": "Un travail excessif du sol",
+      "role": "cause",
+      "explication": "Le chapitre cite le travail excessif du sol parmi les pratiques qui réduisent la faune du sol."
+    },
+    {
+      "fait": "la faune du sol diminue",
+      "carte": "La décomposition de la litière ralentit",
+      "role": "consequence",
+      "explication": "Sans assez d'animaux pour fragmenter la litière, la décomposition ralentit."
+    },
+    {
+      "fait": "la faune du sol diminue",
+      "carte": "La fertilité du sol baisse",
+      "role": "consequence",
+      "explication": "Moins de faune, c'est moins de recyclage des sels minéraux : la fertilité du sol diminue."
+    }
+  ],
+  "etiquettes": [
+    {
+      "consigne": "Quelle couche du sol est décrite par le passage en couleur ?",
+      "texte": "Dans la forêt, [les feuilles mortes et les débris encore reconnaissables] couvrent le sol.",
+      "choix": ["Litière", "Humus", "Horizons minéraux", "Roche-mère"],
+      "bonne": 0,
+      "explication": "La litière est la couche du dessus : des feuilles mortes et des débris encore reconnaissables."
+    },
+    {
+      "consigne": "Quelle couche du sol est décrite par le passage en couleur ?",
+      "texte": "Un jardinier creuse sous la litière : il trouve [une matière sombre, organique, déjà en cours de décomposition].",
+      "choix": ["Litière", "Humus", "Horizons minéraux", "Roche-mère"],
+      "bonne": 1,
+      "explication": "L'humus est une matière organique sombre, déjà en cours de décomposition, située sous la litière."
+    },
+    {
+      "consigne": "Quelle couche du sol est décrite par le passage en couleur ?",
+      "texte": "En descendant plus profond dans le sol, on traverse [des couches de plus en plus minérales].",
+      "choix": ["Litière", "Humus", "Horizons minéraux", "Roche-mère"],
+      "bonne": 2,
+      "explication": "Sous l'humus, les horizons contiennent de plus en plus de matière minérale."
+    },
+    {
+      "consigne": "Quelle couche du sol est décrite par le passage en couleur ?",
+      "texte": "Tout en bas du sol se trouve [la roche à l'origine de sa matière minérale].",
+      "choix": ["Litière", "Humus", "Horizons minéraux", "Roche-mère"],
+      "bonne": 3,
+      "explication": "La roche-mère est la roche située sous le sol : elle est à l'origine de sa matière minérale."
+    },
+    {
+      "consigne": "Quelle couche du sol est décrite par le passage en couleur ?",
+      "texte": "Au printemps, [un tapis de feuilles tombées à l'automne] recouvre le sol de la forêt.",
+      "choix": ["Litière", "Humus", "Horizons minéraux", "Roche-mère"],
+      "bonne": 0,
+      "explication": "Des feuilles tombées et encore reconnaissables forment la litière, au sommet du sol."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Litière",
+      "acceptees": ["Litière", "La litière", "Une litière"],
+      "indices": [
+        "Je suis une couche du sol.",
+        "Je suis la couche tout en haut, à la surface.",
+        "Je suis faite de feuilles mortes et de débris encore reconnaissables."
+      ],
+      "explication": "La litière est la couche de feuilles mortes et de débris à la surface du sol."
+    },
+    {
+      "reponse": "Humus",
+      "acceptees": ["Humus", "L'humus", "De l'humus"],
+      "indices": [
+        "Je suis de la matière organique.",
+        "Je suis sombre et je me trouve juste sous la litière.",
+        "Je suis déjà en cours de décomposition."
+      ],
+      "explication": "L'humus est une matière organique sombre, en cours de décomposition, située sous la litière."
+    },
+    {
+      "reponse": "Appareil de Berlese",
+      "acceptees": ["Appareil de Berlese", "L'appareil de Berlese", "Un appareil de Berlese", "Berlese", "Entonnoir de Berlese"],
+      "indices": [
+        "Je sers à étudier les petits animaux du sol.",
+        "Je suis un montage avec une lampe au-dessus et un entonnoir en dessous.",
+        "Les animaux d'un échantillon de sol, qui fuient la lumière et la chaleur, tombent par moi dans un récipient."
+      ],
+      "explication": "L'appareil de Berlese extrait la petite faune du sol : les animaux fuient la lampe et tombent dans un récipient."
+    },
+    {
+      "reponse": "Compost",
+      "acceptees": ["Compost", "Le compost", "Du compost"],
+      "indices": [
+        "Je suis une matière que les jardiniers fabriquent chez eux.",
+        "Des décomposeurs me forment à partir d'épluchures et de feuilles mortes.",
+        "Je sers à enrichir le sol."
+      ],
+      "explication": "Le compost est obtenu par la décomposition de déchets organiques ; il enrichit le sol."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Le recyclage d'une feuille de chêne tombée",
+      "etapes": [
+        "Une feuille de chêne tombe sur le sol",
+        "La faune du sol la fragmente",
+        "Les champignons et les bactéries la minéralisent",
+        "Les racines du chêne absorbent les sels minéraux libérés"
+      ]
+    },
+    {
+      "titre": "Les couches d'un sol, de haut en bas",
+      "etapes": [
+        "La litière de feuilles mortes et de débris",
+        "L'humus, matière organique sombre",
+        "Des horizons de plus en plus minéraux",
+        "La roche-mère d'où vient la matière minérale"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,183 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Écritures égales à 1/2",
+      "detail": "Des fractions, des calculs et des quotients qui ont pour valeur 1/2.",
+      "cartes": [
+        "6/12",
+        "1/3 + 1/6",
+        "3 ÷ 6",
+        "5/8 − 1/8",
+        "2/3 − 1/6"
+      ]
+    },
+    {
+      "nom": "Écritures égales à 2/3",
+      "detail": "Des fractions, des calculs et des quotients qui ont pour valeur 2/3.",
+      "cartes": [
+        "8/12",
+        "1/3 + 1/3",
+        "5/6 − 1/6",
+        "4 ÷ 6",
+        "2 − 4/3"
+      ]
+    },
+    {
+      "nom": "Écritures égales à 3/4",
+      "detail": "Des fractions, des calculs et des quotients qui ont pour valeur 3/4.",
+      "cartes": [
+        "18/24",
+        "1/2 + 1/4",
+        "3 ÷ 4",
+        "7/4 − 1",
+        "0,75"
+      ]
+    },
+    {
+      "nom": "Écritures égales à 5/6",
+      "detail": "Des fractions, des calculs et des quotients qui ont pour valeur 5/6.",
+      "cartes": [
+        "10/12",
+        "1/2 + 1/3",
+        "5 ÷ 6",
+        "1 − 1/6",
+        "7/6 − 2/6"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Cette fraction est-elle plus petite que 1, égale à 1 ou plus grande que 1 ?",
+      "texte": "Pour son gâteau, Tom utilise [7/4] de litre de lait.",
+      "choix": ["Plus petite que 1", "Égale à 1", "Plus grande que 1"],
+      "bonne": 2,
+      "explication": "Dans 7/4, le numérateur 7 est plus grand que le dénominateur 4 : la fraction est supérieure à 1."
+    },
+    {
+      "consigne": "Cette fraction est-elle plus petite que 1, égale à 1 ou plus grande que 1 ?",
+      "texte": "Il reste [3/8] de la tarte sur la table.",
+      "choix": ["Plus petite que 1", "Égale à 1", "Plus grande que 1"],
+      "bonne": 0,
+      "explication": "Dans 3/8, le numérateur 3 est plus petit que le dénominateur 8 : la fraction est inférieure à 1."
+    },
+    {
+      "consigne": "Cette fraction est-elle plus petite que 1, égale à 1 ou plus grande que 1 ?",
+      "texte": "La pizza est coupée en 8 parts et Inès en mange [8/8].",
+      "choix": ["Plus petite que 1", "Égale à 1", "Plus grande que 1"],
+      "bonne": 1,
+      "explication": "8/8 = 8 ÷ 8 = 1 : Inès mange toute la pizza."
+    },
+    {
+      "consigne": "Cette fraction est-elle plus petite que 1, égale à 1 ou plus grande que 1 ?",
+      "texte": "Un coureur a parcouru [11/10] de la distance prévue.",
+      "choix": ["Plus petite que 1", "Égale à 1", "Plus grande que 1"],
+      "bonne": 2,
+      "explication": "Dans 11/10, le numérateur 11 est plus grand que le dénominateur 10 : la fraction est supérieure à 1."
+    },
+    {
+      "consigne": "Cette fraction est-elle plus petite que 1, égale à 1 ou plus grande que 1 ?",
+      "texte": "Il y a [5/9] de filles dans la classe.",
+      "choix": ["Plus petite que 1", "Égale à 1", "Plus grande que 1"],
+      "bonne": 0,
+      "explication": "Dans 5/9, le numérateur 5 est plus petit que le dénominateur 9 : la fraction est inférieure à 1."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Dénominateur",
+      "acceptees": ["Dénominateur", "Le dénominateur", "Un dénominateur"],
+      "indices": [
+        "Je suis un nombre écrit dans une fraction.",
+        "Je suis écrit sous le trait de fraction.",
+        "Je ne peux jamais valoir 0."
+      ],
+      "explication": "Le dénominateur est le nombre sous le trait de fraction ; il n'est jamais nul."
+    },
+    {
+      "reponse": "Numérateur",
+      "acceptees": ["Numérateur", "Le numérateur", "Un numérateur"],
+      "indices": [
+        "Je suis un nombre écrit dans une fraction.",
+        "Je suis écrit au-dessus du trait de fraction.",
+        "Dans 5/9, je vaux 5."
+      ],
+      "explication": "Le numérateur est le nombre écrit au-dessus du trait de fraction."
+    },
+    {
+      "reponse": "Fraction",
+      "acceptees": ["Fraction", "Une fraction", "La fraction"],
+      "indices": [
+        "Je suis un nombre.",
+        "Je m'écris avec un trait, un nombre en haut et un nombre en bas.",
+        "1/2 et 3/4 sont des exemples de moi."
+      ],
+      "explication": "Une fraction a/b s'écrit avec un numérateur a, un dénominateur b et un trait de fraction."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "Combien valent les 3/8 de 56 € ?",
+      "reponse": 21,
+      "unite": "€",
+      "tolerance": 0,
+      "explication": "On divise par le dénominateur puis on multiplie par le numérateur : 56 ÷ 8 = 7, puis 7 × 3 = 21 €."
+    },
+    {
+      "question": "Quel nombre faut-il écrire à la place du point d'interrogation pour que 3/4 = ?/20 ?",
+      "reponse": 15,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "On passe de 4 à 20 en multipliant par 5, donc on multiplie aussi le numérateur : 3 × 5 = 15. Ainsi 3/4 = 15/20."
+    },
+    {
+      "question": "Quel nombre faut-il écrire à la place du point d'interrogation pour que 35/45 = 7/? ?",
+      "reponse": 9,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "On passe de 35 à 7 en divisant par 5, donc on divise aussi 45 par 5 : 45 ÷ 5 = 9. Ainsi 35/45 = 7/9."
+    },
+    {
+      "question": "Un réservoir de 60 L est rempli aux 3/5, puis on ajoute 1/4 de sa capacité. Combien de litres contient-il alors ?",
+      "reponse": 51,
+      "unite": "L",
+      "tolerance": 0,
+      "explication": "Les 3/5 de 60 L font 60 ÷ 5 × 3 = 36 L. Le quart de 60 L fait 15 L. Au total : 36 + 15 = 51 L."
+    },
+    {
+      "question": "Écris 7/4 sous forme décimale.",
+      "reponse": 1.75,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "Une fraction est un quotient : 7/4 = 7 ÷ 4 = 1,75."
+    },
+    {
+      "question": "Un bidon de 24 L est plein aux 5/6. Combien de litres manque-t-il pour le remplir complètement ?",
+      "reponse": 4,
+      "unite": "L",
+      "tolerance": 0,
+      "explication": "Les 5/6 de 24 L font 24 ÷ 6 × 5 = 20 L. Il manque 24 − 20 = 4 L, soit 1/6 de la capacité."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Calculer 5/4 − 2/3",
+      "etapes": [
+        "On cherche un dénominateur commun : 12",
+        "On écrit 5/4 = 15/12 et 2/3 = 8/12",
+        "On soustrait les numérateurs : 15/12 − 8/12 = 7/12",
+        "On simplifie le résultat si c'est possible"
+      ]
+    },
+    {
+      "titre": "Comparer 2/3 et 3/4",
+      "etapes": [
+        "On cherche un dénominateur commun : 12",
+        "On écrit 2/3 = 8/12 et 3/4 = 9/12",
+        "On compare les numérateurs : 8 est plus petit que 9",
+        "On conclut : 2/3 < 3/4"
+      ]
+    }
+  ]
+}

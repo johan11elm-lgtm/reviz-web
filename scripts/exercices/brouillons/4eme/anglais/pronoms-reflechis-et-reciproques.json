@@ -1,0 +1,177 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Un pronom réfléchi",
+      "detail": "Le sujet agit sur lui-même : on met myself, herself, themselves… accordé avec le sujet.",
+      "cartes": [
+        "Je me suis fait mal",
+        "Elle s'est regardée dans le miroir",
+        "Fais attention, ne te coupe pas !",
+        "Il s'est présenté à toute la classe",
+        "Je me suis brûlé en touchant le four"
+      ]
+    },
+    {
+      "nom": "L'un l'autre (each other)",
+      "detail": "Deux personnes agissent l'une sur l'autre : on emploie each other, jamais un pronom réfléchi.",
+      "cartes": [
+        "Tom et Ben s'aident mutuellement",
+        "Nous nous faisons confiance",
+        "Mon amie et moi, nous nous connaissons depuis longtemps",
+        "Ils se sont fait mal l'un à l'autre",
+        "Les deux amies s'écrivent chaque semaine"
+      ]
+    },
+    {
+      "nom": "Tout seul (by + réfléchi)",
+      "detail": "« Tout seul, sans aide » se dit by + pronom réfléchi : by myself, by himself.",
+      "cartes": [
+        "Il vit tout seul",
+        "J'ai fait mes devoirs tout seul",
+        "Elle est rentrée à pied toute seule",
+        "Nous avons monté la tente tout seuls",
+        "Tu peux porter ce sac tout seul ?"
+      ]
+    },
+    {
+      "nom": "Aucun pronom en anglais",
+      "detail": "Beaucoup de verbes pronominaux français n'ont pas de pronom en anglais : get up, wake up, feel, hurry up, remember.",
+      "cartes": [
+        "Je me lève à sept heures",
+        "Je me réveille toujours tôt",
+        "Je me sens triste aujourd'hui",
+        "Dépêche-toi, on est en retard !",
+        "Je me souviens de ma première classe"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Que fait le mot en couleur dans la phrase ?",
+      "texte": "She looked at [herself] in the mirror.",
+      "choix": [
+        "Action sur soi",
+        "Insistance (moi-même)",
+        "Réciprocité (l'un l'autre)",
+        "Tout seul (avec by)"
+      ],
+      "bonne": 0,
+      "explication": "Le sujet (she) et celle qui est regardée sont la même personne : c'est un réfléchi, accordé avec she."
+    },
+    {
+      "consigne": "Que fait le mot en couleur dans la phrase ?",
+      "texte": "Tom and Ben help [each other].",
+      "choix": [
+        "Action sur soi",
+        "Insistance (moi-même)",
+        "Réciprocité (l'un l'autre)",
+        "Tout seul (avec by)"
+      ],
+      "bonne": 2,
+      "explication": "Tom aide Ben et Ben aide Tom : each other exprime l'action mutuelle."
+    },
+    {
+      "consigne": "Que fait le mot en couleur dans la phrase ?",
+      "texte": "I made this cake [myself]!",
+      "choix": [
+        "Action sur soi",
+        "Insistance (moi-même)",
+        "Réciprocité (l'un l'autre)",
+        "Tout seul (avec by)"
+      ],
+      "bonne": 1,
+      "explication": "Myself ne remplace pas le complément (cake) : il insiste, comme « moi-même » en français."
+    },
+    {
+      "consigne": "Que fait le mot en couleur dans la phrase ?",
+      "texte": "He lives [by himself].",
+      "choix": [
+        "Action sur soi",
+        "Insistance (moi-même)",
+        "Réciprocité (l'un l'autre)",
+        "Tout seul (avec by)"
+      ],
+      "bonne": 3,
+      "explication": "By + réfléchi veut dire « tout seul, sans aide » : he lives by himself."
+    },
+    {
+      "consigne": "Que fait le mot en couleur dans la phrase ?",
+      "texte": "The singer [himself] answered the phone.",
+      "choix": [
+        "Action sur soi",
+        "Insistance (moi-même)",
+        "Réciprocité (l'un l'autre)",
+        "Tout seul (avec by)"
+      ],
+      "bonne": 1,
+      "explication": "Himself insiste sur le sujet : c'est le chanteur en personne qui a répondu."
+    },
+    {
+      "consigne": "Que fait le mot en couleur dans la phrase ?",
+      "texte": "Be careful, don't cut [yourself].",
+      "choix": [
+        "Action sur soi",
+        "Insistance (moi-même)",
+        "Réciprocité (l'un l'autre)",
+        "Tout seul (avec by)"
+      ],
+      "bonne": 0,
+      "explication": "Celui qui risque de se couper est la personne à qui l'on parle : yourself est un réfléchi."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Each other",
+      "acceptees": [
+        "Each-other",
+        "One another"
+      ],
+      "indices": [
+        "Je suis une expression de deux mots.",
+        "Je marque une action mutuelle : chacun agit sur l'autre.",
+        "Dans « Tom and Ben help ___ », je veux dire « l'un l'autre »."
+      ],
+      "explication": "Each other exprime la réciprocité : Tom and Ben help each other."
+    },
+    {
+      "reponse": "Themselves",
+      "acceptees": [],
+      "indices": [
+        "Je suis un pronom réfléchi.",
+        "Je renvoie à plusieurs personnes, à la troisième personne.",
+        "Dans « They hurt ___ », chacun s'est fait mal à soi-même."
+      ],
+      "explication": "Themselves est le pronom réfléchi de they : They hurt themselves."
+    },
+    {
+      "reponse": "Get up",
+      "acceptees": [
+        "To get up",
+        "Gets up",
+        "Getting up"
+      ],
+      "indices": [
+        "Je suis un verbe de l'anglais, de deux mots.",
+        "Je traduis « se lever ».",
+        "En anglais, je n'ai pas besoin de pronom : « I ___ at seven o'clock »."
+      ],
+      "explication": "Se lever se dit get up, sans pronom réfléchi : I get up at seven."
+    },
+    {
+      "reponse": "Reliable",
+      "acceptees": [
+        "Dependable"
+      ],
+      "indices": [
+        "Je suis un adjectif qui décrit un bon ami.",
+        "Je veux dire « sur qui on peut compter ».",
+        "Je commence par la lettre r."
+      ],
+      "explication": "Reliable décrit quelqu'un sur qui on peut compter : a good friend is reliable."
+    }
+  ],
+  "calculs": [],
+  "etapes": []
+}

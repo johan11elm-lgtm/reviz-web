@@ -1,0 +1,141 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Le poème de Ronsard",
+      "detail": "« Mignonne, allons voir si la rose » (1553) : la rose fanée en un soir invite la jeune fille à profiter de sa jeunesse, c'est le carpe diem.",
+      "cartes": [
+        "Un poème qui s'adresse à « Mignonne »",
+        "Une rose qui se fane en un seul soir",
+        "« Cueillez, cueillez votre jeunesse »",
+        "Une jeune fille invitée à profiter du présent",
+        "Une beauté fragile comparée à une fleur"
+      ]
+    },
+    {
+      "nom": "Le poème de Louise Labé",
+      "detail": "« Je vis, je meurs » (1555) : la passion fait vivre des sentiments contraires, que disent les antithèses.",
+      "cartes": [
+        "Une poétesse qui décrit sa propre passion",
+        "Un vers qui oppose vivre et mourir",
+        "Le feu et l'eau dans un même vers",
+        "« J'ai chaud extrême en endurant froidure »",
+        "Une amoureuse ballottée entre des états opposés"
+      ]
+    },
+    {
+      "nom": "Le poème de Victor Hugo",
+      "detail": "« Demain, dès l'aube… » (1856) : un père marche vers la tombe de sa fille Léopoldine, noyée en 1843.",
+      "cartes": [
+        "Un poème du recueil Les Contemplations",
+        "Un père qui part à pied dès l'aube",
+        "Une jeune fille noyée en 1843",
+        "« Vois-tu, je sais que tu m'attends »",
+        "Un faux rendez-vous d'amour qui mène à une tombe"
+      ]
+    },
+    {
+      "nom": "Le poème d'Apollinaire",
+      "detail": "« Le Pont Mirabeau » (1913) : l'amour passe comme l'eau de la Seine, alors que le poète demeure.",
+      "cartes": [
+        "Un poème du recueil Alcools",
+        "Un amour qui s'écoule comme l'eau",
+        "« Les jours s'en vont je demeure »",
+        "Un refrain répété après chaque strophe",
+        "Un pont sous lequel coule la Seine"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Quelle marque du lyrisme est en couleur ?",
+      "texte": "[Je] marche vers toi, le cœur lourd.",
+      "choix": ["Première personne", "Apostrophe", "Exclamation", "Champ lexical des sentiments"],
+      "bonne": 0,
+      "explication": "« Je » montre que le poète parle de lui : c'est la première personne, première marque du lyrisme."
+    },
+    {
+      "consigne": "Quelle marque du lyrisme est en couleur ?",
+      "texte": "[Ô toi que j'aime], entends ma voix !",
+      "choix": ["Première personne", "Apostrophe", "Exclamation", "Champ lexical des sentiments"],
+      "bonne": 1,
+      "explication": "« Ô toi » interpelle directement l'être aimé : c'est une apostrophe."
+    },
+    {
+      "consigne": "Quelle marque du lyrisme est en couleur ?",
+      "texte": "Le poète s'écrie : [Quelle nuit merveilleuse !]",
+      "choix": ["Première personne", "Apostrophe", "Exclamation", "Champ lexical des sentiments"],
+      "bonne": 2,
+      "explication": "Cette phrase exprime une émotion forte et se termine par un point d'exclamation : c'est une exclamation."
+    },
+    {
+      "consigne": "Quelle marque du lyrisme est en couleur ?",
+      "texte": "Dans ce poème, on lit les mots [aimer, cœur, passion, désir].",
+      "choix": ["Première personne", "Apostrophe", "Exclamation", "Champ lexical des sentiments"],
+      "bonne": 3,
+      "explication": "Ces mots renvoient tous à l'amour : ils forment le champ lexical des sentiments."
+    },
+    {
+      "consigne": "Quelle marque du lyrisme est en couleur ?",
+      "texte": "Reviens, [ma douce], reviens !",
+      "choix": ["Première personne", "Apostrophe", "Exclamation", "Champ lexical des sentiments"],
+      "bonne": 1,
+      "explication": "« ma douce » est le nom par lequel le poète interpelle l'être aimé : c'est une apostrophe."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Sonnet",
+      "acceptees": ["Le sonnet", "Un sonnet"],
+      "indices": [
+        "Je suis une forme de poème.",
+        "Je suis une forme fixe, faite de strophes de longueurs différentes.",
+        "J'ai quatorze vers : deux quatrains puis deux tercets."
+      ],
+      "explication": "Le sonnet est une forme fixe de 14 vers : deux quatrains (4 vers) puis deux tercets (3 vers)."
+    },
+    {
+      "reponse": "Alexandrin",
+      "acceptees": ["L'alexandrin", "Un alexandrin"],
+      "indices": [
+        "Je suis un type de vers.",
+        "Je suis plus long que le décasyllabe.",
+        "Je compte douze syllabes, comme « Demain, dès l'aube, à l'heure où blanchit la campagne »."
+      ],
+      "explication": "L'alexandrin est le vers de 12 syllabes. Le décasyllabe en compte 10 et l'octosyllabe 8."
+    },
+    {
+      "reponse": "Carpe diem",
+      "acceptees": [],
+      "indices": [
+        "Je suis une expression latine.",
+        "Je viens du poète Horace.",
+        "Je veux dire « cueille le jour » : profite du présent, car le temps passe vite."
+      ],
+      "explication": "« Carpe diem » invite à profiter du moment présent. Ronsard le reprend dans « Mignonne, allons voir si la rose »."
+    },
+    {
+      "reponse": "Léopoldine",
+      "acceptees": ["Léopoldine Hugo", "Leopoldine"],
+      "indices": [
+        "Je suis une jeune femme du XIXe siècle.",
+        "Je suis morte noyée en 1843.",
+        "Mon père, un grand poète, marche vers ma tombe dans « Demain, dès l'aube… »."
+      ],
+      "explication": "Léopoldine est la fille de Victor Hugo, morte noyée en 1843. Il marche vers sa tombe dans « Demain, dès l'aube… »."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Du plus court au plus long, en nombre de vers",
+      "etapes": [
+        "Un distique",
+        "Un tercet",
+        "Un quatrain",
+        "Un sonnet"
+      ]
+    }
+  ]
+}

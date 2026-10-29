@@ -1,0 +1,158 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Prévision, promesse, décision immédiate",
+      "detail": "Will + base verbale : une prévision générale, une promesse ou une décision prise au moment où l'on parle.",
+      "cartes": [
+        "Robots will do many jobs",
+        "People will live longer in the future",
+        "Don't worry, I'll help you",
+        "I won't forget you",
+        "Wait, I'll carry your bag"
+      ]
+    },
+    {
+      "nom": "Une intention ou un indice visible",
+      "detail": "Be going to + base verbale : une intention déjà décidée ou une prédiction fondée sur un indice que l'on voit.",
+      "cartes": [
+        "I'm going to study biology",
+        "Look at those clouds! It's going to rain",
+        "She is going to become a vet",
+        "Are you going to apply for this job?",
+        "Watch out! The glass is going to fall"
+      ]
+    },
+    {
+      "nom": "Un rendez-vous ou un projet organisé",
+      "detail": "Le présent en be + -ing, souvent avec une date ou une heure : ce qui est déjà inscrit dans l'agenda.",
+      "cartes": [
+        "I'm meeting the careers adviser on Monday",
+        "I'm seeing the doctor tomorrow at nine",
+        "We are visiting the hospital next Friday",
+        "She is starting her work experience next week",
+        "My parents are flying to Dublin on Sunday"
+      ]
+    },
+    {
+      "nom": "Une possibilité, peut-être",
+      "detail": "May ou might + base verbale : ce qui est possible, sans en être sûr.",
+      "cartes": [
+        "I might study abroad",
+        "She may become an architect",
+        "He might apply for a job in a bank",
+        "We may move to another city",
+        "They might open a shop one day"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Quelle forme du futur est en couleur ?",
+      "texte": "I think machines [will replace] some workers.",
+      "choix": [
+        "Will / won't + base verbale",
+        "Be going to + base verbale",
+        "Présent en be + -ing",
+        "May / might + base verbale"
+      ],
+      "bonne": 0,
+      "explication": "« will replace » : will + base verbale, pour une prévision générale."
+    },
+    {
+      "consigne": "Quelle forme du futur est en couleur ?",
+      "texte": "Look at the sky! It [is going to snow].",
+      "choix": [
+        "Will / won't + base verbale",
+        "Be going to + base verbale",
+        "Présent en be + -ing",
+        "May / might + base verbale"
+      ],
+      "bonne": 1,
+      "explication": "« is going to snow » : be going to + base verbale, pour une prédiction fondée sur un indice visible (le ciel)."
+    },
+    {
+      "consigne": "Quelle forme du futur est en couleur ?",
+      "texte": "On Friday, we [are visiting] a hospital.",
+      "choix": [
+        "Will / won't + base verbale",
+        "Be going to + base verbale",
+        "Présent en be + -ing",
+        "May / might + base verbale"
+      ],
+      "bonne": 2,
+      "explication": "« are visiting » : le présent en be + -ing, avec un jour précis, exprime un projet organisé."
+    },
+    {
+      "consigne": "Quelle forme du futur est en couleur ?",
+      "texte": "Next year, I [might change] schools.",
+      "choix": [
+        "Will / won't + base verbale",
+        "Be going to + base verbale",
+        "Présent en be + -ing",
+        "May / might + base verbale"
+      ],
+      "bonne": 3,
+      "explication": "« might change » : might + base verbale exprime une possibilité, un peut-être."
+    },
+    {
+      "consigne": "Quelle forme du futur est en couleur ?",
+      "texte": "Don't worry, I [won't forget] your birthday.",
+      "choix": [
+        "Will / won't + base verbale",
+        "Be going to + base verbale",
+        "Présent en be + -ing",
+        "May / might + base verbale"
+      ],
+      "bonne": 0,
+      "explication": "« won't forget » : won't est la forme négative de will, ici pour une promesse."
+    },
+    {
+      "consigne": "Quelle forme du futur est en couleur ?",
+      "texte": "After the exams, I [am going to apply] for a job.",
+      "choix": [
+        "Will / won't + base verbale",
+        "Be going to + base verbale",
+        "Présent en be + -ing",
+        "May / might + base verbale"
+      ],
+      "bonne": 1,
+      "explication": "« am going to apply » : be going to + base verbale, pour une intention déjà décidée."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Work experience",
+      "acceptees": ["The work experience", "Stage d'observation", "Le stage d'observation", "Stage"],
+      "indices": [
+        "Je concerne les élèves de 3e.",
+        "Je me déroule en entreprise, par exemple dans un hôpital.",
+        "En français, on m'appelle le stage d'observation."
+      ],
+      "explication": "Work experience désigne le stage d'observation de 3e : I did my work experience in a hospital."
+    },
+    {
+      "reponse": "Will",
+      "acceptees": [],
+      "indices": [
+        "Je suis un auxiliaire.",
+        "Je suis suivi de la base verbale, sans to.",
+        "Ma contraction est 'll et ma négation est won't."
+      ],
+      "explication": "Will + base verbale sert à faire une prévision, une promesse ou une décision immédiate ; il est identique à toutes les personnes."
+    },
+    {
+      "reponse": "Be going to",
+      "acceptees": ["Going to"],
+      "indices": [
+        "Je suis une expression qui parle de l'avenir.",
+        "On m'emploie pour une intention déjà décidée.",
+        "Je sers aussi à prédire ce que l'on voit venir, comme de gros nuages noirs."
+      ],
+      "explication": "Be going to exprime une intention déjà décidée ou une prédiction fondée sur un indice visible."
+    }
+  ],
+  "calculs": [],
+  "etapes": []
+}

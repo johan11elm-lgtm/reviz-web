@@ -1,0 +1,130 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Un milieu exceptionnel",
+      "detail": "Les caractères naturels de la forêt amazonienne, la plus grande forêt tropicale humide du monde.",
+      "cartes": [
+        "Une forêt dense, chaude et très arrosée toute l'année",
+        "Environ 5,5 millions de km² de superficie",
+        "Le fleuve le plus puissant du monde par son débit",
+        "Environ 10 % des espèces vivantes connues y vivent",
+        "Une forêt répartie sur neuf pays et territoires"
+      ]
+    },
+    {
+      "nom": "Les causes de la déforestation",
+      "detail": "Les activités qui font reculer la forêt : élevage, soja, bois, routes et barrages.",
+      "cartes": [
+        "Des pâturages pour les bovins remplacent la forêt",
+        "Des champs de soja gagnent du terrain",
+        "Des arbres coupés pour vendre le bois",
+        "Des routes qui ouvrent la forêt aux défricheurs",
+        "Des barrages construits sur les fleuves"
+      ]
+    },
+    {
+      "nom": "L'orpaillage et ses dégâts",
+      "detail": "La recherche de l'or dans les rivières, souvent illégale, qui pollue l'eau au mercure.",
+      "cartes": [
+        "Des chercheurs d'or qui fouillent les rivières",
+        "Du mercure sert à séparer l'or",
+        "Le mercure empoisonne les poissons et les habitants",
+        "Une pratique souvent illégale dans les rivières",
+        "Les berges des rivières sont détruites"
+      ]
+    },
+    {
+      "nom": "Les mesures de protection",
+      "detail": "Ce qui est fait pour préserver la forêt : parcs nationaux, réserves et défense de l'environnement.",
+      "cartes": [
+        "Le Parc amazonien de Guyane, créé en 2007",
+        "Le plus grand parc national de France",
+        "Des réserves où les activités humaines sont limitées",
+        "Des territoires préservés pour les peuples autochtones",
+        "Des défenseurs de l'environnement qui veulent préserver la forêt"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "la déforestation en Amazonie",
+      "carte": "L'élevage de bovins, qui a besoin de grands pâturages",
+      "role": "cause",
+      "explication": "L'élevage de bovins est la première cause de déforestation : les pâturages remplacent de très grandes surfaces de forêt."
+    },
+    {
+      "fait": "la déforestation en Amazonie",
+      "carte": "La culture du soja, qui a besoin de terres",
+      "role": "cause",
+      "explication": "Les champs de soja prennent la place de la forêt : c'est la deuxième cause de déforestation."
+    },
+    {
+      "fait": "l'orpaillage illégal dans les rivières d'Amazonie",
+      "carte": "Les berges des rivières sont détruites",
+      "role": "consequence",
+      "explication": "Les orpailleurs détruisent les berges en cherchant l'or."
+    },
+    {
+      "fait": "l'orpaillage illégal dans les rivières d'Amazonie",
+      "carte": "L'eau des rivières est polluée au mercure",
+      "role": "consequence",
+      "explication": "Le mercure utilisé pour séparer l'or pollue l'eau des rivières."
+    }
+  ],
+  "etiquettes": [],
+  "devinettes": [
+    {
+      "reponse": "Biodiversité",
+      "acceptees": ["Biodiversité", "La biodiversité"],
+      "indices": [
+        "Je suis très riche dans les forêts tropicales humides.",
+        "Je compte les plantes, les animaux et les micro-organismes d'un milieu.",
+        "Je suis la diversité des êtres vivants présents dans un milieu."
+      ],
+      "explication": "La biodiversité est la diversité des êtres vivants présents dans un milieu."
+    },
+    {
+      "reponse": "Manaus",
+      "acceptees": ["Manaus"],
+      "indices": [
+        "Je suis une ville du Brésil.",
+        "Je suis située au cœur de la forêt amazonienne.",
+        "J'ai plus de 2 millions d'habitants."
+      ],
+      "explication": "Manaus est une grande ville du Brésil, au cœur de l'Amazonie."
+    },
+    {
+      "reponse": "Orpaillage",
+      "acceptees": ["Orpaillage", "L'orpaillage"],
+      "indices": [
+        "Je me pratique dans les rivières.",
+        "Je pollue l'eau au mercure.",
+        "Je suis la recherche de l'or, souvent illégale."
+      ],
+      "explication": "L'orpaillage est la recherche de l'or dans les rivières ; il pollue l'eau au mercure."
+    },
+    {
+      "reponse": "Front pionnier",
+      "acceptees": ["Front pionnier", "Le front pionnier", "Un front pionnier"],
+      "indices": [
+        "Je suis une zone qui change vite.",
+        "On y défriche de nouvelles terres.",
+        "Agriculteurs et éleveurs y avancent dans la forêt, souvent le long des routes."
+      ],
+      "explication": "Sur un front pionnier, on défriche la forêt pour mettre en valeur de nouvelles terres."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Comment la forêt recule sur un front pionnier",
+      "etapes": [
+        "Une route comme la Transamazonienne ouvre la forêt",
+        "Des éleveurs et des agriculteurs arrivent le long de la route",
+        "Ils défrichent de nouvelles terres sur le front pionnier",
+        "Des pâturages et des champs remplacent la forêt"
+      ]
+    }
+  ]
+}

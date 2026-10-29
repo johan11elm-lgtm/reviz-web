@@ -1,0 +1,115 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Polythéisme et monothéisme",
+      "detail": "Les peuples qui croient en plusieurs dieux et les Hébreux, qui croient en un seul.",
+      "cartes": [
+        "Croire en plusieurs dieux",
+        "Croire en un dieu unique",
+        "Rê, Osiris et Isis, dieux des Égyptiens",
+        "Des Mésopotamiens qui prient de nombreux dieux",
+        "Yahvé, le dieu des Hébreux"
+      ]
+    },
+    {
+      "nom": "Textes et pratiques du judaïsme",
+      "detail": "Les livres sacrés des Juifs et les gestes de leur vie religieuse.",
+      "cartes": [
+        "Les cinq premiers livres sacrés des Juifs",
+        "Des livres écrits du VIIIe au IIe siècle av. J.-C.",
+        "Un jour de repos, du vendredi soir au samedi soir",
+        "Un lieu où les croyants viennent prier",
+        "Des maîtres dont les croyants suivent l'enseignement"
+      ]
+    },
+    {
+      "nom": "Les grands récits de la Bible",
+      "detail": "Les épisodes que la Bible raconte sur Abraham, Moïse et le roi Salomon.",
+      "cartes": [
+        "Dieu fait alliance avec Abraham",
+        "Dieu promet à Abraham la terre de Canaan",
+        "Moïse conduit les Hébreux hors d'Égypte",
+        "Moïse reçoit les Dix Commandements sur le mont Sinaï",
+        "Salomon fait construire le Temple de Jérusalem"
+      ]
+    },
+    {
+      "nom": "Destructions, exil et dispersion",
+      "detail": "Les épreuves historiques des Hébreux : conquêtes, destructions du Temple, déportation et départ loin de leur terre.",
+      "cartes": [
+        "En 722 av. J.-C., les Assyriens détruisent le royaume d'Israël",
+        "En 587 av. J.-C., Nabuchodonosor détruit le Temple de Jérusalem",
+        "Des habitants de Jérusalem sont emmenés de force à Babylone",
+        "En 70 apr. J.-C., les Romains détruisent le second Temple",
+        "Les Juifs vivent loin de leur terre d'origine"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [],
+  "devinettes": [
+    {
+      "reponse": "Moïse",
+      "acceptees": ["Moïse", "Moise"],
+      "indices": [
+        "Selon la Bible, je suis un chef des Hébreux.",
+        "Selon la Bible, je les conduis hors d'Égypte.",
+        "Je reçois les Dix Commandements sur le mont Sinaï."
+      ],
+      "explication": "Selon la Bible, Moïse conduit les Hébreux hors d'Égypte et reçoit les Dix Commandements sur le mont Sinaï."
+    },
+    {
+      "reponse": "Abraham",
+      "acceptees": ["Abraham"],
+      "indices": [
+        "Selon la Bible, je suis un patriarche.",
+        "Dieu fait alliance avec moi.",
+        "Dieu me promet la terre de Canaan."
+      ],
+      "explication": "Selon la Bible, Dieu fait alliance avec Abraham et lui promet la terre de Canaan."
+    },
+    {
+      "reponse": "Nabuchodonosor",
+      "acceptees": ["Nabuchodonosor", "Nabuchodonosor II"],
+      "indices": [
+        "Je suis un roi.",
+        "Je règne sur Babylone.",
+        "En 587 av. J.-C., je prends Jérusalem et je détruis le Temple."
+      ],
+      "explication": "Nabuchodonosor, roi de Babylone, prend Jérusalem en 587 av. J.-C., détruit le Temple et déporte des habitants."
+    },
+    {
+      "reponse": "Torah",
+      "acceptees": ["Torah", "La Torah", "Thora"],
+      "indices": [
+        "Je suis un ensemble de livres.",
+        "Je fais partie de la Bible hébraïque.",
+        "Je suis formée de ses cinq premiers livres."
+      ],
+      "explication": "La Torah regroupe les cinq premiers livres de la Bible hébraïque."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Les épreuves du peuple hébreu, de 722 à 70",
+      "etapes": [
+        "Les Assyriens détruisent le royaume d'Israël",
+        "Nabuchodonosor détruit le Temple et déporte des habitants",
+        "Le Temple est reconstruit après le retour d'exil",
+        "Les Romains détruisent le second Temple"
+      ]
+    },
+    {
+      "titre": "Les grands récits de la Bible, dans l'ordre",
+      "etapes": [
+        "Dieu fait alliance avec Abraham et lui promet Canaan",
+        "Moïse conduit les Hébreux hors d'Égypte",
+        "Moïse reçoit les Dix Commandements sur le mont Sinaï",
+        "David règne sur les Hébreux",
+        "Salomon fait construire le Temple de Jérusalem"
+      ]
+    }
+  ]
+}

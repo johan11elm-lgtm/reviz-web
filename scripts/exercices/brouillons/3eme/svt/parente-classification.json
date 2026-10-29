@@ -1,0 +1,166 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Classer les êtres vivants",
+      "detail": "La classification regroupe les espèces selon les attributs qu'elles partagent, en groupes emboîtés.",
+      "cartes": [
+        "On regroupe les espèces selon leurs attributs communs",
+        "« N'a pas de pattes » ne forme pas un groupe",
+        "Les mammifères sont des tétrapodes, qui sont des vertébrés",
+        "Vivant dans l'eau, le dauphin est pourtant un mammifère",
+        "Individus qui se reproduisent entre eux avec une descendance fertile"
+      ]
+    },
+    {
+      "nom": "L'ancêtre commun et l'arbre",
+      "detail": "Un attribut partagé est hérité d'un ancêtre commun, que l'on représente par un nœud sur un arbre de parenté.",
+      "cartes": [
+        "Un attribut partagé est hérité du même ancêtre",
+        "Plus d'attributs partagés, ancêtre plus récent",
+        "Une espèce disparue, jamais une espèce actuelle",
+        "Un nœud représente un ancêtre supposé",
+        "Les espèces actuelles sont au bout des branches"
+      ]
+    },
+    {
+      "nom": "Les preuves de parenté",
+      "detail": "Les arguments qui montrent que des espèces sont apparentées : l'anatomie, l'ADN, les cellules.",
+      "cartes": [
+        "Bras humain, aile de chauve-souris : même plan d'os",
+        "Des organes de même plan malgré des fonctions différentes",
+        "Moins de différences d'ADN, des espèces plus proches",
+        "Tous les êtres vivants ont des cellules et de l'ADN",
+        "On compare les protéines de deux espèces"
+      ]
+    },
+    {
+      "nom": "La place de l'Homme",
+      "detail": "L'espèce humaine, Homo sapiens, est un primate proche du chimpanzé.",
+      "cartes": [
+        "L'espèce humaine est classée parmi les primates",
+        "Notre pouce est opposable et nos ongles sont plats",
+        "Le chimpanzé est notre plus proche cousin actuel",
+        "Nous ne descendons pas du chimpanzé",
+        "Notre espèce se nomme Homo sapiens"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "le partage de quatre membres par le chat et la grenouille",
+      "carte": "Ils ont hérité leurs membres d'un ancêtre commun tétrapode",
+      "role": "cause",
+      "explication": "Un attribut partagé a été hérité d'un même ancêtre commun."
+    },
+    {
+      "fait": "le partage de quatre membres par le chat et la grenouille",
+      "carte": "Ils sont rangés dans le groupe des tétrapodes",
+      "role": "consequence",
+      "explication": "On réunit dans un même groupe les espèces qui partagent un attribut : ici, quatre membres."
+    },
+    {
+      "fait": "le classement du dauphin parmi les mammifères",
+      "carte": "Il a des mamelles et allaite ses petits",
+      "role": "cause",
+      "explication": "On classe d'après les attributs : les mamelles sont un attribut des mammifères, même si le dauphin vit dans l'eau."
+    },
+    {
+      "fait": "le classement du dauphin parmi les mammifères",
+      "carte": "On ne le range pas avec les poissons",
+      "role": "consequence",
+      "explication": "Vivre dans l'eau ne compte pas pour classer : le dauphin est un mammifère, pas un poisson."
+    }
+  ],
+  "etiquettes": [
+    {
+      "consigne": "Dans quel groupe le plus précis classe-t-on l'animal en couleur ?",
+      "texte": "[La truite] a une colonne vertébrale, mais pas de membres.",
+      "choix": ["Vertébré", "Tétrapode", "Mammifère", "Primate"],
+      "bonne": 0,
+      "explication": "Elle a une colonne vertébrale mais pas quatre membres : c'est un vertébré, sans être un tétrapode."
+    },
+    {
+      "consigne": "Dans quel groupe le plus précis classe-t-on l'animal en couleur ?",
+      "texte": "[La grenouille] a une colonne vertébrale et quatre membres, mais ni poils ni mamelles.",
+      "choix": ["Vertébré", "Tétrapode", "Mammifère", "Primate"],
+      "bonne": 1,
+      "explication": "Quatre membres : c'est un tétrapode. Sans poils ni mamelles, ce n'est pas un mammifère."
+    },
+    {
+      "consigne": "Dans quel groupe le plus précis classe-t-on l'animal en couleur ?",
+      "texte": "[Le chat] a une colonne vertébrale, quatre membres, des poils et des mamelles.",
+      "choix": ["Vertébré", "Tétrapode", "Mammifère", "Primate"],
+      "bonne": 2,
+      "explication": "Poils et mamelles sont les attributs des mammifères."
+    },
+    {
+      "consigne": "Dans quel groupe le plus précis classe-t-on l'animal en couleur ?",
+      "texte": "[Le chimpanzé] a des poils, des mamelles, un pouce opposable et des ongles plats.",
+      "choix": ["Vertébré", "Tétrapode", "Mammifère", "Primate"],
+      "bonne": 3,
+      "explication": "Le pouce opposable et les ongles plats sont les attributs des primates."
+    },
+    {
+      "consigne": "Dans quel groupe le plus précis classe-t-on l'animal en couleur ?",
+      "texte": "[La chauve-souris] a des ailes, des poils et des mamelles.",
+      "choix": ["Vertébré", "Tétrapode", "Mammifère", "Primate"],
+      "bonne": 2,
+      "explication": "Poils et mamelles en font un mammifère : ses ailes ne suffisent pas à en faire un oiseau."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Ancêtre commun",
+      "acceptees": ["Ancêtre commun", "Un ancêtre commun", "L'ancêtre commun", "Ancêtre", "Ancetre commun"],
+      "indices": [
+        "Je suis une espèce disparue.",
+        "Plusieurs espèces actuelles descendent de moi.",
+        "On me représente par un nœud sur un arbre de parenté."
+      ],
+      "explication": "L'ancêtre commun est une espèce disparue dont descendent plusieurs espèces actuelles."
+    },
+    {
+      "reponse": "Organes homologues",
+      "acceptees": ["Organes homologues", "Des organes homologues", "Les organes homologues", "Organe homologue", "Homologues"],
+      "indices": [
+        "Nous existons chez des espèces différentes.",
+        "Nous avons le même plan d'organisation, même si nous servons à autre chose.",
+        "Le bras humain, l'aile de la chauve-souris et la nageoire du dauphin en sont."
+      ],
+      "explication": "Des organes homologues ont le même plan d'organisation chez des espèces différentes : signe d'un ancêtre commun."
+    },
+    {
+      "reponse": "Primates",
+      "acceptees": ["Primates", "Les primates", "Primate", "Un primate"],
+      "indices": [
+        "Nous sommes un groupe de mammifères.",
+        "Nous avons un pouce opposable et des ongles plats.",
+        "L'Homme et le chimpanzé font partie de ce groupe."
+      ],
+      "explication": "Les primates ont un pouce opposable et des ongles plats ; l'Homme est un primate."
+    },
+    {
+      "reponse": "Tétrapodes",
+      "acceptees": ["Tétrapodes", "Tétrapode", "Les tétrapodes", "Un tétrapode", "Tetrapodes"],
+      "indices": [
+        "Je suis un groupe de vertébrés.",
+        "Je réunis les espèces à quatre membres.",
+        "Le chat, la grenouille et l'Homme en font partie."
+      ],
+      "explication": "Les tétrapodes sont les vertébrés à quatre membres : grenouille, chat, Homme…"
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Construire une classification",
+      "etapes": [
+        "On fait un tableau : espèces en lignes, attributs en colonnes",
+        "On repère l'attribut partagé par le plus d'espèces",
+        "On trace les ensembles suivants, du plus grand au plus petit",
+        "On construit l'arbre avec un nœud par attribut"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,209 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Les producteurs primaires",
+      "detail": "Les végétaux chlorophylliens et les algues, qui fabriquent leur matière organique avec la lumière.",
+      "cartes": [
+        "L'herbe d'une prairie",
+        "Un chêne dans la forêt",
+        "Les algues d'un étang",
+        "Un champ de blé",
+        "Une fougère dans un sous-bois"
+      ]
+    },
+    {
+      "nom": "Les consommateurs primaires",
+      "detail": "Les herbivores, qui mangent des végétaux.",
+      "cartes": [
+        "Le lapin qui broute l'herbe",
+        "Le mulot qui mange des graines",
+        "La chenille qui mange des feuilles",
+        "La vache qui broute dans un pré",
+        "Le cerf qui broute de jeunes pousses"
+      ]
+    },
+    {
+      "nom": "Les consommateurs secondaires",
+      "detail": "Les carnivores qui mangent des herbivores.",
+      "cartes": [
+        "Le renard qui attrape un lapin",
+        "La chouette qui mange un mulot",
+        "Le lynx qui chasse un chevreuil",
+        "La coccinelle qui mange des pucerons",
+        "La mésange qui capture des chenilles"
+      ]
+    },
+    {
+      "nom": "Les décomposeurs",
+      "detail": "Les êtres vivants qui se nourrissent de cadavres, de déchets et de feuilles mortes.",
+      "cartes": [
+        "Un champignon qui dégrade des feuilles mortes",
+        "Des bactéries qui décomposent un cadavre",
+        "Un ver de terre qui mange des feuilles mortes",
+        "Un cloporte qui se nourrit de bois mort",
+        "Une moisissure sur un fruit pourri"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "la baisse de la quantité de matière à chaque niveau d'une chaîne alimentaire",
+      "carte": "Une grande partie de la nourriture sert à vivre : respirer, bouger",
+      "role": "cause",
+      "explication": "La matière utilisée pour vivre ne construit pas le corps du consommateur."
+    },
+    {
+      "fait": "la baisse de la quantité de matière à chaque niveau d'une chaîne alimentaire",
+      "carte": "Une partie de la nourriture est rejetée par l'animal",
+      "role": "cause",
+      "explication": "La matière rejetée n'est pas gardée dans le corps du consommateur."
+    },
+    {
+      "fait": "la baisse de la quantité de matière à chaque niveau d'une chaîne alimentaire",
+      "carte": "Les chaînes alimentaires comptent rarement plus de 4 ou 5 maillons",
+      "role": "consequence",
+      "explication": "À force de perdre de la matière, il n'en reste presque plus pour un maillon de plus."
+    },
+    {
+      "fait": "la baisse de la quantité de matière à chaque niveau d'une chaîne alimentaire",
+      "carte": "Il y a bien moins de matière dans les renards que dans les lapins",
+      "role": "consequence",
+      "explication": "Environ 10 % passe au niveau suivant : 100 kg de lapins ne donnent que 10 kg de renards."
+    }
+  ],
+  "etiquettes": [
+    {
+      "consigne": "Quel est le rôle de l'être vivant en couleur ?",
+      "texte": "Dans la haie, [la chouette] mange des mulots, qui mangent des graines.",
+      "choix": ["Producteur primaire", "Consommateur primaire", "Consommateur secondaire", "Décomposeur"],
+      "bonne": 2,
+      "explication": "La chouette mange le mulot, qui est lui-même un herbivore : c'est un consommateur secondaire."
+    },
+    {
+      "consigne": "Quel est le rôle de l'être vivant en couleur ?",
+      "texte": "Dans la haie, la chouette mange des [mulots], qui mangent des graines.",
+      "choix": ["Producteur primaire", "Consommateur primaire", "Consommateur secondaire", "Décomposeur"],
+      "bonne": 1,
+      "explication": "Le mulot mange des graines, donc des végétaux : c'est un consommateur primaire."
+    },
+    {
+      "consigne": "Quel est le rôle de l'être vivant en couleur ?",
+      "texte": "Dans une prairie, le lapin broute [l'herbe].",
+      "choix": ["Producteur primaire", "Consommateur primaire", "Consommateur secondaire", "Décomposeur"],
+      "bonne": 0,
+      "explication": "L'herbe est un végétal chlorophyllien : c'est un producteur primaire."
+    },
+    {
+      "consigne": "Quel est le rôle de l'être vivant en couleur ?",
+      "texte": "Sur le sol d'une forêt, [des champignons] se nourrissent de feuilles mortes.",
+      "choix": ["Producteur primaire", "Consommateur primaire", "Consommateur secondaire", "Décomposeur"],
+      "bonne": 3,
+      "explication": "Des champignons qui se nourrissent de feuilles mortes sont des décomposeurs."
+    },
+    {
+      "consigne": "Quel est le rôle de l'être vivant en couleur ?",
+      "texte": "Un renard attrape [un lapin], qui broutait l'herbe de la prairie.",
+      "choix": ["Producteur primaire", "Consommateur primaire", "Consommateur secondaire", "Décomposeur"],
+      "bonne": 1,
+      "explication": "Le lapin broute de l'herbe : c'est un herbivore, donc un consommateur primaire."
+    },
+    {
+      "consigne": "Quel est le rôle de l'être vivant en couleur ?",
+      "texte": "Dans un étang, des têtards mangent [des algues].",
+      "choix": ["Producteur primaire", "Consommateur primaire", "Consommateur secondaire", "Décomposeur"],
+      "bonne": 0,
+      "explication": "Les algues fabriquent leur matière avec la lumière : ce sont des producteurs primaires."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Décomposeur",
+      "acceptees": ["Décomposeur", "Un décomposeur", "Décomposeurs", "Les décomposeurs"],
+      "indices": [
+        "Je recycle la matière de tous les êtres vivants.",
+        "Des champignons, des bactéries et des petits animaux du sol font partie de ma catégorie.",
+        "Je me nourris de cadavres, de déchets et de feuilles mortes."
+      ],
+      "explication": "Les décomposeurs se nourrissent de matière morte et la recyclent."
+    },
+    {
+      "reponse": "Parasite",
+      "acceptees": ["Parasite", "Un parasite", "Parasites", "Les parasites"],
+      "indices": [
+        "J'ai besoin d'un hôte pour vivre.",
+        "Je suis par exemple le gui sur un arbre ou le ténia.",
+        "Je vis aux dépens d'un autre être vivant et je lui nuis."
+      ],
+      "explication": "Un parasite vit aux dépens de son hôte et lui nuit."
+    },
+    {
+      "reponse": "Lichen",
+      "acceptees": ["Lichen", "Le lichen", "Lichens", "Les lichens"],
+      "indices": [
+        "Je suis une association durable entre deux êtres vivants.",
+        "Je réunis un champignon et une algue.",
+        "Mes deux partenaires sont gagnants : c'est une symbiose."
+      ],
+      "explication": "Le lichen est une symbiose entre un champignon et une algue."
+    },
+    {
+      "reponse": "Pelote de réjection",
+      "acceptees": ["Pelote de réjection", "Une pelote de réjection", "Pelotes de réjection", "Pelote", "Pelotes"],
+      "indices": [
+        "Je contiens des os et des poils.",
+        "Une chouette me rejette par le bec.",
+        "En me disséquant, on découvre ce que la chouette a mangé."
+      ],
+      "explication": "L'analyse des pelotes de réjection permet de connaître le régime alimentaire d'une chouette."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "Une prairie produit 2 000 kg d'herbe. On admet que 10 % de la matière consommée construit le corps des lapins qui la mangent. Quelle masse de lapins obtient-on ?",
+      "reponse": 200,
+      "unite": "kg",
+      "tolerance": 0,
+      "explication": "2 000 kg × 10 % = 2 000 × 0,10 = 200 kg de lapins."
+    },
+    {
+      "question": "Des renards mangent 100 kg de lapins. On admet que 10 % de la matière consommée construit leur corps. Quelle masse de renards obtient-on ?",
+      "reponse": 10,
+      "unite": "kg",
+      "tolerance": 0,
+      "explication": "100 kg × 10 % = 100 × 0,10 = 10 kg de renards."
+    },
+    {
+      "question": "Dans une haie, 5 000 kg de graines nourrissent des mulots, qui nourrissent des chouettes. À chaque niveau, 10 % de la matière construit le corps du consommateur. Quelle masse de chouettes obtient-on ?",
+      "reponse": 50,
+      "unite": "kg",
+      "tolerance": 0,
+      "explication": "Mulots : 5 000 × 0,10 = 500 kg. Chouettes : 500 × 0,10 = 50 kg."
+    },
+    {
+      "question": "Des mulots forment 30 kg de matière. On admet que 10 % de ce qu'ils mangent construit leur corps. Quelle masse de graines ont-ils mangée ?",
+      "reponse": 300,
+      "unite": "kg",
+      "tolerance": 0,
+      "explication": "Les mulots gardent 10 % de ce qu'ils mangent : 30 kg ÷ 0,10 = 300 kg de graines."
+    },
+    {
+      "question": "Dans un pré, les herbivores représentent 450 kg de matière. On admet que 10 % de ce que mangent les carnivores construit leur corps. Quelle masse de carnivores peut vivre à partir de ces herbivores ?",
+      "reponse": 45,
+      "unite": "kg",
+      "tolerance": 0,
+      "explication": "450 kg × 10 % = 450 × 0,10 = 45 kg de carnivores."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Construire un réseau alimentaire",
+      "etapes": [
+        "Déterminer le régime alimentaire de chaque être vivant",
+        "Placer d'abord les producteurs primaires",
+        "Relier les êtres vivants par des flèches « est mangé par »",
+        "Relier les chaînes qui ont des êtres vivants en commun"
+      ]
+    }
+  ]
+}

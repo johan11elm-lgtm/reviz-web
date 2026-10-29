@@ -1,0 +1,148 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "La prouesse",
+      "detail": "Le courage et l'habileté du chevalier au combat.",
+      "cartes": [
+        "Il terrasse seul un dragon cracheur de feu",
+        "Il remporte le tournoi sans jamais tomber",
+        "Il se jette dans la mêlée sans trembler",
+        "Il affronte trois ennemis armés à la fois",
+        "Il défie en duel le plus redoutable chevalier"
+      ]
+    },
+    {
+      "nom": "La loyauté",
+      "detail": "La fidélité du chevalier envers son seigneur.",
+      "cartes": [
+        "Il tient la parole donnée à son roi",
+        "Il refuse de trahir son seigneur pour de l'or",
+        "Il reste aux côtés de son maître dans le malheur",
+        "Il garde le secret que son roi lui a confié",
+        "Il suit sans discuter les ordres de son roi"
+      ]
+    },
+    {
+      "nom": "La largesse",
+      "detail": "La générosité du chevalier envers les autres.",
+      "cartes": [
+        "Il offre un grand festin à tous les villageois",
+        "Il donne sa bourse pleine d'or à un pauvre",
+        "Il prête son cheval à un voyageur sans monture",
+        "Il distribue des cadeaux à tous ses invités",
+        "Il offre son manteau à un mendiant grelottant"
+      ]
+    },
+    {
+      "nom": "La courtoisie",
+      "detail": "Les belles manières du chevalier, surtout envers les dames.",
+      "cartes": [
+        "Il s'incline devant la dame du château",
+        "Il parle aux dames avec douceur et respect",
+        "Il aide une dame à descendre de cheval",
+        "Il laisse la dame passer avant lui",
+        "Il récite des vers élégants en l'honneur d'une dame"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Quel rôle joue le personnage en couleur dans la quête ?",
+      "texte": "Perceval veut devenir chevalier. [Gornemant de Goort] lui apprend à manier l'épée et lui enseigne les règles de la chevalerie.",
+      "choix": ["Le héros", "Un adjuvant", "Un opposant"],
+      "bonne": 1,
+      "explication": "Gornemant de Goort aide Perceval à atteindre son but : c'est un adjuvant."
+    },
+    {
+      "consigne": "Quel rôle joue le personnage en couleur dans la quête ?",
+      "texte": "Pour délivrer la princesse, le chevalier traverse la forêt. [Un sorcier] lui tend des pièges sur le chemin.",
+      "choix": ["Le héros", "Un adjuvant", "Un opposant"],
+      "bonne": 2,
+      "explication": "Le sorcier fait obstacle au chevalier avec ses pièges : c'est un opposant."
+    },
+    {
+      "consigne": "Quel rôle joue le personnage en couleur dans la quête ?",
+      "texte": "Le roi confie une mission : retrouver l'épée volée. [Yvain] accepte et part aussitôt à sa recherche.",
+      "choix": ["Le héros", "Un adjuvant", "Un opposant"],
+      "bonne": 0,
+      "explication": "Yvain mène la quête et affronte les épreuves : c'est le héros, le sujet de la quête."
+    },
+    {
+      "consigne": "Quel rôle joue le personnage en couleur dans la quête ?",
+      "texte": "Le chevalier doit traverser un fleuve en crue. [Une fée] lui offre une barque magique.",
+      "choix": ["Le héros", "Un adjuvant", "Un opposant"],
+      "bonne": 1,
+      "explication": "La fée donne au chevalier le moyen d'avancer : c'est un adjuvant."
+    },
+    {
+      "consigne": "Quel rôle joue le personnage en couleur dans la quête ?",
+      "texte": "Le héros cherche un trésor. [Un dragon] garde l'entrée de la grotte et crache du feu sur lui.",
+      "choix": ["Le héros", "Un adjuvant", "Un opposant"],
+      "bonne": 2,
+      "explication": "Le dragon barre la route au héros : c'est un opposant."
+    },
+    {
+      "consigne": "Quel rôle joue le personnage en couleur dans la quête ?",
+      "texte": "Pour sauver son village, [Lina] part seule chercher la source magique, malgré ses peurs.",
+      "choix": ["Le héros", "Un adjuvant", "Un opposant"],
+      "bonne": 0,
+      "explication": "Lina est celle qui part en quête et affronte les épreuves : c'est l'héroïne, le sujet de la quête."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Chrétien de Troyes",
+      "acceptees": ["Chrétien"],
+      "indices": [
+        "Je suis un auteur du Moyen Âge.",
+        "J'ai créé les romans de la Table ronde : Lancelot, Yvain, Perceval.",
+        "J'ai écrit Perceval ou le Conte du Graal vers 1180."
+      ],
+      "explication": "Chrétien de Troyes, auteur du XIIe siècle, écrit Perceval ou le Conte du Graal vers 1180."
+    },
+    {
+      "reponse": "Perceval",
+      "acceptees": [],
+      "indices": [
+        "Je suis un jeune Gallois naïf.",
+        "Ma mère m'a élevé dans la Gaste Forêt, loin des chevaliers.",
+        "Chez le Roi Pêcheur, je vois le cortège du Graal mais je n'ose poser aucune question."
+      ],
+      "explication": "Perceval grandit dans la Gaste Forêt, devient chevalier au fil des épreuves et n'ose pas interroger le Roi Pêcheur."
+    },
+    {
+      "reponse": "Adoubement",
+      "acceptees": ["L'adoubement"],
+      "indices": [
+        "Je suis une cérémonie.",
+        "Je fais d'un jeune homme un chevalier.",
+        "On y remet l'épée et les éperons."
+      ],
+      "explication": "L'adoubement est la cérémonie qui fait d'un jeune homme un chevalier, avec la remise de l'épée et des éperons."
+    },
+    {
+      "reponse": "Merveilleux",
+      "acceptees": ["Le merveilleux"],
+      "indices": [
+        "Je suis très présent dans les romans de chevalerie.",
+        "Fées, enchanteurs et dragons font partie de mon monde.",
+        "Dans mon monde, personne ne s'étonne de la magie."
+      ],
+      "explication": "Dans le merveilleux, le surnaturel est accepté comme normal : fées, dragons, enchanteurs."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Le parcours de Perceval",
+      "etapes": [
+        "Perceval quitte la Gaste Forêt",
+        "Il arrive à la cour du roi Arthur",
+        "Gornemant de Goort le forme au métier de chevalier",
+        "Chez le Roi Pêcheur, il voit le cortège du Graal"
+      ]
+    }
+  ]
+}

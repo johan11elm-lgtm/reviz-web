@@ -1,0 +1,216 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Un solide",
+      "detail": "Une matière qui a une forme propre et un volume propre, dont les particules sont serrées et rangées. Une poudre en fait partie.",
+      "cartes": [
+        "Un glaçon garde sa forme dans n'importe quel récipient",
+        "Des particules serrées et rangées en un bloc régulier",
+        "Chaque grain de sucre en poudre garde sa forme",
+        "Un caillou a une forme propre et un volume propre",
+        "Le sable qui s'écoule d'un seau"
+      ]
+    },
+    {
+      "nom": "Un liquide",
+      "detail": "Une matière qui a un volume propre mais pas de forme propre : elle prend la forme du récipient.",
+      "cartes": [
+        "L'huile prend la forme du verre où on la verse",
+        "La surface libre reste horizontale quand on penche la bouteille",
+        "Des particules serrées et désordonnées qui glissent",
+        "L'eau du robinet garde son volume mais pas sa forme",
+        "Une seringue bouchée pleine d'eau : le piston bouge à peine"
+      ]
+    },
+    {
+      "nom": "Un gaz",
+      "detail": "Une matière sans forme propre ni volume propre, qui occupe tout l'espace disponible. Ses particules sont très espacées.",
+      "cartes": [
+        "Ni forme propre ni volume propre",
+        "Des particules très espacées, désordonnées et agitées",
+        "L'air d'un ballon occupe tout l'espace du ballon",
+        "La vapeur d'eau, que l'on ne voit pas",
+        "Une seringue bouchée pleine d'air : on enfonce le piston"
+      ]
+    },
+    {
+      "nom": "Mesurer un volume",
+      "detail": "Les gestes et les unités qui servent à lire un volume avec une éprouvette graduée.",
+      "cartes": [
+        "On place l'œil à la hauteur du bas du ménisque",
+        "Le niveau d'eau monte quand on y plonge une bille",
+        "Des litres aux millilitres : on multiplie par 1 000",
+        "L'éprouvette graduée se pose à plat sur la table",
+        "Calculer la valeur d'une petite graduation"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "la compressibilité d'un gaz",
+      "carte": "Les particules d'un gaz sont très espacées",
+      "role": "cause",
+      "explication": "Entre les particules d'un gaz, il y a beaucoup de vide : on peut les rapprocher, donc comprimer le gaz."
+    },
+    {
+      "fait": "la compressibilité d'un gaz",
+      "carte": "On peut enfoncer le piston d'une seringue bouchée pleine d'air",
+      "role": "consequence",
+      "explication": "Comme les particules du gaz peuvent se rapprocher, l'air se comprime et le piston s'enfonce."
+    },
+    {
+      "fait": "l'écoulement d'un liquide",
+      "carte": "Les particules d'un liquide glissent les unes sur les autres",
+      "role": "cause",
+      "explication": "Un liquide coule parce que ses particules, serrées mais désordonnées, glissent les unes sur les autres."
+    },
+    {
+      "fait": "l'écoulement d'un liquide",
+      "carte": "On peut verser un liquide d'une bouteille dans un verre",
+      "role": "consequence",
+      "explication": "Un liquide qui coule se transvase d'un récipient à un autre et en prend la forme."
+    }
+  ],
+  "etiquettes": [
+    {
+      "consigne": "Dans quel état de la matière se trouve le groupe en couleur ?",
+      "texte": "Au petit déjeuner, Nina verse [le lait] dans un bol : il prend la forme du bol.",
+      "choix": ["Solide", "Liquide", "Gaz"],
+      "bonne": 1,
+      "explication": "Le lait prend la forme du récipient mais garde son volume : c'est un liquide."
+    },
+    {
+      "consigne": "Dans quel état de la matière se trouve le groupe en couleur ?",
+      "texte": "Dans un ballon de baudruche gonflé, [l'air] occupe tout l'espace disponible.",
+      "choix": ["Solide", "Liquide", "Gaz"],
+      "bonne": 2,
+      "explication": "Une matière qui occupe tout l'espace disponible est un gaz."
+    },
+    {
+      "consigne": "Dans quel état de la matière se trouve le groupe en couleur ?",
+      "texte": "Sur la table, [le glaçon] garde sa forme, même quand on le change de place.",
+      "choix": ["Solide", "Liquide", "Gaz"],
+      "bonne": 0,
+      "explication": "Le glaçon garde sa forme propre : c'est un solide, l'eau sous forme de glace."
+    },
+    {
+      "consigne": "Dans quel état de la matière se trouve le groupe en couleur ?",
+      "texte": "Quand on renverse un seau, [le sable] s'écoule, mais chaque grain garde sa forme.",
+      "choix": ["Solide", "Liquide", "Gaz"],
+      "bonne": 0,
+      "explication": "Le sable coule, mais chaque grain garde sa forme : c'est un solide en poudre, pas un liquide."
+    },
+    {
+      "consigne": "Dans quel état de la matière se trouve le groupe en couleur ?",
+      "texte": "Au-dessus de la casserole qui bout, [la vapeur d'eau] reste invisible.",
+      "choix": ["Solide", "Liquide", "Gaz"],
+      "bonne": 2,
+      "explication": "La vapeur d'eau est de l'eau à l'état gazeux ; elle est invisible. Le panache blanc qu'on voit est fait de gouttelettes d'eau liquide."
+    },
+    {
+      "consigne": "Dans quel état de la matière se trouve le groupe en couleur ?",
+      "texte": "Dans une éprouvette, [l'eau] a une surface libre plane et horizontale.",
+      "choix": ["Solide", "Liquide", "Gaz"],
+      "bonne": 1,
+      "explication": "La surface libre plane et horizontale est une propriété des liquides au repos."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Ménisque",
+      "acceptees": ["Le ménisque"],
+      "indices": [
+        "Je suis une courbure.",
+        "On me voit à la surface d'un liquide dans un tube étroit.",
+        "Pour lire un volume, l'œil se place à la hauteur de mon point le plus bas."
+      ],
+      "explication": "Le ménisque est la courbure de la surface d'un liquide dans un tube : on lit le volume au bas du ménisque."
+    },
+    {
+      "reponse": "Surface libre",
+      "acceptees": ["Surface", "La surface libre", "Surface libre d'un liquide"],
+      "indices": [
+        "Je suis en contact avec l'air.",
+        "Je suis plane et horizontale quand le liquide est au repos.",
+        "Je reste horizontale même quand on penche la bouteille."
+      ],
+      "explication": "La surface libre d'un liquide au repos est plane et horizontale, même si le récipient est penché."
+    },
+    {
+      "reponse": "Vapeur d'eau",
+      "acceptees": ["La vapeur d'eau", "Vapeur"],
+      "indices": [
+        "Je suis un gaz que l'on ne voit pas.",
+        "Je suis la forme gazeuse de ce qui fait la glace et la pluie.",
+        "Je ne suis pas le panache blanc qui sort d'une casserole : lui est fait de fines gouttelettes."
+      ],
+      "explication": "La vapeur d'eau est de l'eau à l'état gazeux, invisible. La buée et les nuages sont faits de gouttelettes d'eau liquide."
+    },
+    {
+      "reponse": "Éprouvette graduée",
+      "acceptees": ["Éprouvette", "Une éprouvette", "Une éprouvette graduée"],
+      "indices": [
+        "Je suis un récipient en verre ou en plastique.",
+        "On me pose à plat sur la table pour lire un volume.",
+        "Je suis étroite, avec des traits et des nombres en mL sur ma paroi."
+      ],
+      "explication": "L'éprouvette graduée sert à mesurer le volume d'un liquide, posée à plat, l'œil au niveau du bas du ménisque."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "Un bidon contient 3,2 L d'eau. Exprime ce volume en mL.",
+      "reponse": 3200,
+      "unite": "mL",
+      "tolerance": 0,
+      "explication": "1 L = 1 000 mL, donc 3,2 × 1 000 = 3 200 mL."
+    },
+    {
+      "question": "Un verre contient 250 mL de jus. Exprime ce volume en L.",
+      "reponse": 0.25,
+      "unite": "L",
+      "tolerance": 0,
+      "explication": "On divise par 1 000 : 250 ÷ 1 000 = 0,25 L."
+    },
+    {
+      "question": "Une éprouvette contient 80 mL d'eau. On y plonge un caillou qui coule : le niveau monte à 95 mL. Quel est le volume du caillou, en cm³ ?",
+      "reponse": 15,
+      "unite": "cm³",
+      "tolerance": 0,
+      "explication": "V(caillou) = V(final) − V(initial) = 95 − 80 = 15 mL, soit 15 cm³ car 1 mL = 1 cm³."
+    },
+    {
+      "question": "Sur une éprouvette graduée, entre les nombres 20 mL et 40 mL, il y a 10 intervalles. Quelle est la valeur d'une petite graduation, en mL ?",
+      "reponse": 2,
+      "unite": "mL",
+      "tolerance": 0,
+      "explication": "(40 − 20) ÷ 10 = 20 ÷ 10 = 2 mL par graduation."
+    },
+    {
+      "question": "Un flacon contient 750 cm³ de sirop. Exprime ce volume en L.",
+      "reponse": 0.75,
+      "unite": "L",
+      "tolerance": 0,
+      "explication": "1 cm³ = 1 mL, donc 750 cm³ = 750 mL = 750 ÷ 1 000 = 0,75 L."
+    },
+    {
+      "question": "Une bouteille de 1,5 L contient déjà 350 mL d'eau. Quel volume d'eau, en mL, peut-on encore y verser ?",
+      "reponse": 1150,
+      "unite": "mL",
+      "tolerance": 0,
+      "explication": "1,5 L = 1 500 mL, donc 1 500 − 350 = 1 150 mL."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Mesurer le volume d'un caillou par déplacement d'eau",
+      "etapes": [
+        "On verse de l'eau dans l'éprouvette et on lit le volume initial",
+        "On plonge le caillou dans l'éprouvette",
+        "On lit le volume final de l'eau",
+        "On calcule le volume final moins le volume initial"
+      ]
+    }
+  ]
+}

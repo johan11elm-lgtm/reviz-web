@@ -1,0 +1,138 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Passif au présent",
+      "detail": "L'auxiliaire être est au présent (est, sont…), suivi du participe passé.",
+      "cartes": [
+        "La souris est attrapée par le chat",
+        "Le pont est emprunté chaque jour par des cyclistes",
+        "Elle est aimée de tous",
+        "Les élèves sont félicités par le directeur",
+        "Le gâteau est préparé par ma mère"
+      ]
+    },
+    {
+      "nom": "Passif à l'imparfait",
+      "detail": "L'auxiliaire être est à l'imparfait (était, étaient…), suivi du participe passé.",
+      "cartes": [
+        "Le village était protégé par un mur",
+        "Les champs étaient inondés chaque printemps",
+        "Léa était souvent invitée par ses voisins",
+        "Les clés étaient cachées par ma sœur",
+        "Nos voisins étaient respectés de tout le quartier"
+      ]
+    },
+    {
+      "nom": "Passif au passé composé",
+      "detail": "L'auxiliaire être est au passé composé (a été, ont été…), suivi du participe passé.",
+      "cartes": [
+        "L'arbre a été renversé par le vent",
+        "Le magasin a été cambriolé",
+        "Les voleurs ont été arrêtés par la police",
+        "La porte a été fermée à clé",
+        "Le tableau a été peint par un élève"
+      ]
+    },
+    {
+      "nom": "Passif au futur",
+      "detail": "L'auxiliaire être est au futur (sera, seront, serez…), suivi du participe passé.",
+      "cartes": [
+        "Ce film sera récompensé par le jury",
+        "Les résultats seront annoncés demain",
+        "La maison sera vendue par ses propriétaires",
+        "Vous serez accueillis par la directrice",
+        "Le match sera retransmis à la télévision"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Quelle est la fonction du passage en couleur ?",
+      "texte": "La souris est attrapée [par le chat].",
+      "choix": ["Complément d'agent", "Sujet apparent", "Sujet réel"],
+      "bonne": 0,
+      "explication": "« Par le chat » désigne celui qui fait l'action d'attraper : c'est le complément d'agent."
+    },
+    {
+      "consigne": "Quelle est la fonction du passage en couleur ?",
+      "texte": "[Il] manque deux élèves dans la classe.",
+      "choix": ["Complément d'agent", "Sujet apparent", "Sujet réel"],
+      "bonne": 1,
+      "explication": "« Il » ne représente personne : c'est le sujet apparent. Le sujet réel est « deux élèves »."
+    },
+    {
+      "consigne": "Quelle est la fonction du passage en couleur ?",
+      "texte": "Il arrive [un malheur].",
+      "choix": ["Complément d'agent", "Sujet apparent", "Sujet réel"],
+      "bonne": 2,
+      "explication": "« Un malheur » fait vraiment l'action d'arriver (= un malheur arrive) : c'est le sujet réel. « Il » n'est que le sujet apparent."
+    },
+    {
+      "consigne": "Quelle est la fonction du passage en couleur ?",
+      "texte": "Elle est aimée [de tous].",
+      "choix": ["Complément d'agent", "Sujet apparent", "Sujet réel"],
+      "bonne": 0,
+      "explication": "« De tous » indique qui fait l'action d'aimer : c'est le complément d'agent, ici introduit par « de »."
+    },
+    {
+      "consigne": "Quelle est la fonction du passage en couleur ?",
+      "texte": "Il reste [du gâteau] pour ce soir.",
+      "choix": ["Complément d'agent", "Sujet apparent", "Sujet réel"],
+      "bonne": 2,
+      "explication": "« Du gâteau » est ce qui reste (= du gâteau reste) : c'est le sujet réel. « Il » n'est que le sujet apparent."
+    },
+    {
+      "consigne": "Quelle est la fonction du passage en couleur ?",
+      "texte": "Hier, [il] est arrivé un accident.",
+      "choix": ["Complément d'agent", "Sujet apparent", "Sujet réel"],
+      "bonne": 1,
+      "explication": "« Il » ne représente rien : c'est le sujet apparent. Le sujet réel est « un accident »."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Complément d'agent",
+      "acceptees": ["Le complément d'agent", "Un complément d'agent"],
+      "indices": [
+        "Je me trouve dans une phrase à la voix passive.",
+        "Je désigne celui qui fait l'action.",
+        "On me reconnaît au mot « par », et je peux être supprimé de la phrase."
+      ],
+      "explication": "Le complément d'agent désigne celui qui fait l'action au passif : « La souris est attrapée par le chat »."
+    },
+    {
+      "reponse": "Passif",
+      "acceptees": ["Le passif", "La voix passive", "Voix passive"],
+      "indices": [
+        "Je suis une manière de construire une phrase autour du verbe.",
+        "Dans ma phrase, le sujet subit l'action.",
+        "Je me construis avec l'auxiliaire être suivi d'un participe passé."
+      ],
+      "explication": "À la voix passive, le sujet subit l'action : on emploie l'auxiliaire être et le participe passé."
+    },
+    {
+      "reponse": "Impersonnel",
+      "acceptees": ["Verbe impersonnel", "Un verbe impersonnel", "Tournure impersonnelle", "La tournure impersonnelle", "Impersonnelle", "Forme impersonnelle"],
+      "indices": [
+        "Je m'emploie seulement à la 3e personne du singulier.",
+        "Mon sujet est un « il » qui ne représente rien.",
+        "Je décris « il pleut », « il neige » ou « il faut »."
+      ],
+      "explication": "Un verbe impersonnel s'emploie avec un « il » qui ne représente rien : il pleut, il neige, il faut."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Mettre une phrase active au passif",
+      "etapes": [
+        "Vérifie que le verbe a un COD",
+        "Fais de ce COD le nouveau sujet",
+        "Écris être au temps du verbe actif, puis le participe passé accordé",
+        "Ajoute après le verbe l'ancien sujet, introduit par « par »"
+      ]
+    }
+  ]
+}

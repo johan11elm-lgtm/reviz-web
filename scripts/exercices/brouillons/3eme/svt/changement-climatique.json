@@ -1,0 +1,188 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Les causes humaines",
+      "detail": "Des activités qui rejettent des gaz à effet de serre ou qui réduisent leur stockage.",
+      "cartes": [
+        "Brûler du charbon, du pétrole et du gaz",
+        "Raser une forêt pour cultiver ou construire",
+        "Élever des bovins, dont la digestion rejette du méthane",
+        "Cultiver du riz dans des rizières inondées",
+        "Épandre beaucoup d'engrais sur les champs"
+      ]
+    },
+    {
+      "nom": "Les conséquences observées",
+      "detail": "Les effets du réchauffement et du CO₂ sur la planète et les êtres vivants.",
+      "cartes": [
+        "Les glaciers des Alpes reculent depuis le XIXe siècle",
+        "Le niveau de la mer monte",
+        "Les vagues de chaleur et les sécheresses se multiplient",
+        "Des espèces se déplacent ou disparaissent",
+        "L'eau des océans devient plus acide"
+      ]
+    },
+    {
+      "nom": "Les actions d'atténuation",
+      "detail": "Des actions qui réduisent les émissions de gaz à effet de serre.",
+      "cartes": [
+        "Installer des éoliennes et des panneaux solaires",
+        "Isoler les bâtiments pour chauffer moins",
+        "Préférer le vélo ou les transports en commun",
+        "Protéger les forêts qui existent encore",
+        "Éviter le gaspillage pour consommer moins"
+      ]
+    },
+    {
+      "nom": "Les actions d'adaptation",
+      "detail": "Des actions qui se préparent aux effets du réchauffement sans réduire ses causes.",
+      "cartes": [
+        "Construire une digue contre la montée de la mer",
+        "Planter des cultures résistantes à la sécheresse",
+        "Végétaliser les villes pour rafraîchir les rues",
+        "Planter des arbres dans une cour pour la rafraîchir",
+        "Évacuer les habitants des zones côtières menacées"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "le réchauffement climatique",
+      "carte": "La combustion du charbon, du pétrole et du gaz",
+      "role": "cause",
+      "explication": "Brûler des combustibles fossiles libère du CO₂, un gaz à effet de serre qui renforce l'effet de serre."
+    },
+    {
+      "fait": "le réchauffement climatique",
+      "carte": "La déforestation",
+      "role": "cause",
+      "explication": "Moins d'arbres, c'est moins de CO₂ stocké : il reste dans l'air et renforce l'effet de serre."
+    },
+    {
+      "fait": "le réchauffement climatique",
+      "carte": "Le méthane rejeté par l'élevage et les rizières",
+      "role": "cause",
+      "explication": "Le méthane est un gaz à effet de serre : il retient la chaleur émise par la Terre."
+    },
+    {
+      "fait": "le réchauffement climatique",
+      "carte": "La fonte des glaciers et des calottes glaciaires",
+      "role": "consequence",
+      "explication": "Le climat se réchauffe, donc les glaciers et les calottes fondent."
+    },
+    {
+      "fait": "le réchauffement climatique",
+      "carte": "Des vagues de chaleur plus fréquentes",
+      "role": "consequence",
+      "explication": "Avec un climat plus chaud, les canicules deviennent plus fréquentes."
+    },
+    {
+      "fait": "le réchauffement climatique",
+      "carte": "Des espèces qui se déplacent ou disparaissent",
+      "role": "consequence",
+      "explication": "Les milieux changent avec la hausse des températures : certaines espèces migrent, d'autres disparaissent."
+    }
+  ],
+  "etiquettes": [
+    {
+      "consigne": "Que représente le groupe en couleur ?",
+      "texte": "Pour chauffer moins sa maison, la famille [l'isole].",
+      "choix": ["Cause du réchauffement", "Conséquence du réchauffement", "Atténuation", "Adaptation"],
+      "bonne": 2,
+      "explication": "Isoler réduit la consommation d'énergie, donc les émissions : c'est de l'atténuation."
+    },
+    {
+      "consigne": "Que représente le groupe en couleur ?",
+      "texte": "Les agriculteurs de la région [plantent des cultures résistantes à la sécheresse].",
+      "choix": ["Cause du réchauffement", "Conséquence du réchauffement", "Atténuation", "Adaptation"],
+      "bonne": 3,
+      "explication": "Ces cultures ne réduisent pas les émissions : elles aident à vivre avec le réchauffement. C'est de l'adaptation."
+    },
+    {
+      "consigne": "Que représente le groupe en couleur ?",
+      "texte": "[Le niveau de la mer monte] depuis plusieurs décennies.",
+      "choix": ["Cause du réchauffement", "Conséquence du réchauffement", "Atténuation", "Adaptation"],
+      "bonne": 1,
+      "explication": "L'eau se dilate en se réchauffant et les glaciers fondent : la montée de la mer est une conséquence du réchauffement."
+    },
+    {
+      "consigne": "Que représente le groupe en couleur ?",
+      "texte": "[La combustion du pétrole] libère du dioxyde de carbone dans l'air.",
+      "choix": ["Cause du réchauffement", "Conséquence du réchauffement", "Atténuation", "Adaptation"],
+      "bonne": 0,
+      "explication": "Brûler du pétrole rejette du CO₂, un gaz à effet de serre : c'est une cause du réchauffement."
+    },
+    {
+      "consigne": "Que représente le groupe en couleur ?",
+      "texte": "Pendant les canicules, la mairie décide de [végétaliser les rues] pour les rafraîchir.",
+      "choix": ["Cause du réchauffement", "Conséquence du réchauffement", "Atténuation", "Adaptation"],
+      "bonne": 3,
+      "explication": "Végétaliser rafraîchit la ville face aux canicules sans réduire les émissions : c'est de l'adaptation."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "GIEC",
+      "acceptees": ["GIEC", "Le GIEC", "IPCC"],
+      "indices": [
+        "Je suis un groupe d'experts.",
+        "J'ai été créé en 1988.",
+        "Je rassemble et je résume les travaux des scientifiques sur le climat."
+      ],
+      "explication": "Le GIEC, Groupe d'experts intergouvernemental sur l'évolution du climat, synthétise les travaux scientifiques sur le climat."
+    },
+    {
+      "reponse": "Méthane",
+      "acceptees": ["Méthane", "Le méthane", "CH4"],
+      "indices": [
+        "Je suis un gaz qui retient la chaleur.",
+        "Les rizières m'émettent.",
+        "Je suis produit par la digestion des bovins."
+      ],
+      "explication": "Le méthane est un puissant gaz à effet de serre, émis par l'élevage de bovins et les rizières."
+    },
+    {
+      "reponse": "Effet de serre",
+      "acceptees": ["Effet de serre", "L'effet de serre"],
+      "indices": [
+        "Je retiens une partie de la chaleur émise par la Terre.",
+        "Je suis renforcé par les gaz que rejettent les activités humaines.",
+        "Ne me confonds pas avec le trou dans la couche d'ozone."
+      ],
+      "explication": "L'effet de serre retient la chaleur de la Terre ; les gaz rejetés par les activités humaines le renforcent."
+    },
+    {
+      "reponse": "Accord de Paris",
+      "acceptees": ["Accord de Paris", "L'accord de Paris", "COP21"],
+      "indices": [
+        "Je suis un texte signé par de nombreux pays.",
+        "J'ai été adopté en 2015.",
+        "Mon objectif : limiter le réchauffement nettement sous 2 °C, si possible à 1,5 °C."
+      ],
+      "explication": "L'accord de Paris (2015) vise à limiter le réchauffement nettement en dessous de 2 °C, si possible à 1,5 °C."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Comparer une courbe de CO₂ et une courbe de température",
+      "etapes": [
+        "On lit le titre, les axes et les unités de chaque courbe",
+        "On décrit l'évolution de chaque courbe avec des valeurs chiffrées",
+        "On constate qu'elles évoluent ensemble : c'est une corrélation",
+        "On explique le lien par le mécanisme de l'effet de serre"
+      ]
+    },
+    {
+      "titre": "Des émissions au réchauffement",
+      "etapes": [
+        "Les activités humaines rejettent des gaz à effet de serre",
+        "La concentration de ces gaz dans l'air augmente",
+        "L'effet de serre est renforcé : plus de chaleur est retenue",
+        "La température moyenne de la planète monte",
+        "Les glaciers fondent et le niveau de la mer monte"
+      ]
+    }
+  ]
+}

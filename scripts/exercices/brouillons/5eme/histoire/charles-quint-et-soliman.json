@@ -1,0 +1,172 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Les grandes découvertes",
+      "detail": "Les voyages maritimes des Européens à la fin du XVe siècle et au XVIe siècle, et ce qui les motive ou les rend possibles.",
+      "cartes": [
+        "Un navigateur croit atteindre l'Asie mais arrive aux Antilles",
+        "Un Portugais atteint l'Inde en 1498 en contournant l'Afrique",
+        "Une expédition fait le premier tour du monde (1519-1522)",
+        "Un navire rapide capable de naviguer en haute mer",
+        "Une route maritime vers les épices et l'or de l'Asie"
+      ]
+    },
+    {
+      "nom": "Charles Quint",
+      "detail": "Le souverain qui hérite de l'Espagne et des Pays-Bas, est élu empereur en 1519 et affronte François Ier.",
+      "cartes": [
+        "Un souverain élu empereur du Saint-Empire en 1519",
+        "Un roi d'Espagne qui hérite aussi des Pays-Bas",
+        "Un empire où le soleil ne se couche jamais",
+        "Le grand rival de François Ier, roi de France",
+        "Un empereur né en 1500, mort en 1558"
+      ]
+    },
+    {
+      "nom": "La conquête de l'Amérique",
+      "detail": "La conquête des empires aztèque et inca par les Espagnols, et ses conséquences pour les Amérindiens.",
+      "cartes": [
+        "Cortés prend Tenochtitlan, capitale des Aztèques, en 1521",
+        "Pizarro soumet l'Empire inca à partir de 1532",
+        "Des maladies venues d'Europe déciment les Amérindiens",
+        "Des Africains sont déportés pour remplacer les Amérindiens",
+        "Las Casas défend les Amérindiens face à Sepúlveda"
+      ]
+    },
+    {
+      "nom": "Soliman le Magnifique",
+      "detail": "Le sultan de l'Empire ottoman, qui règne depuis Istanbul et assiège Vienne.",
+      "cartes": [
+        "Un sultan musulman au pouvoir de 1520 à 1566",
+        "Un empire en Europe, en Asie et en Afrique",
+        "Le siège de Vienne en 1529, qui échoue",
+        "La mosquée Süleymaniye, construite par l'architecte Sinan",
+        "Istanbul, l'ancienne Constantinople prise en 1453"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "les grandes découvertes",
+      "carte": "La recherche d'une route maritime vers les épices et l'or de l'Asie",
+      "role": "cause",
+      "explication": "Les Européens veulent atteindre l'Asie par la mer pour commercer sans intermédiaires : c'est ce qui les lance sur les océans."
+    },
+    {
+      "fait": "les grandes découvertes",
+      "carte": "Le désir de répandre le christianisme",
+      "role": "cause",
+      "explication": "En plus des épices et de l'or, les Européens veulent répandre le christianisme : c'est l'une des raisons de leurs voyages."
+    },
+    {
+      "fait": "les grandes découvertes",
+      "carte": "La conquête de l'Amérique par les conquistadors",
+      "role": "consequence",
+      "explication": "Une fois l'Amérique atteinte, les conquistadors partent la conquérir : Cortés chez les Aztèques, Pizarro chez les Incas."
+    },
+    {
+      "fait": "l'effondrement de la population amérindienne",
+      "carte": "Des maladies venues d'Europe, comme la variole",
+      "role": "cause",
+      "explication": "Les Amérindiens n'étaient pas protégés contre ces maladies : elles tuent beaucoup plus que les violences."
+    },
+    {
+      "fait": "l'effondrement de la population amérindienne",
+      "carte": "Le travail forcé imposé aux Amérindiens",
+      "role": "cause",
+      "explication": "Violences et travail forcé s'ajoutent aux maladies et font s'effondrer la population."
+    },
+    {
+      "fait": "l'effondrement de la population amérindienne",
+      "carte": "La déportation d'Africains réduits en esclavage vers l'Amérique",
+      "role": "consequence",
+      "explication": "Pour remplacer cette main-d'œuvre disparue, les Européens déportent des Africains : c'est le début de la traite atlantique."
+    }
+  ],
+  "etiquettes": [
+    {
+      "consigne": "Qui est désigné par le passage en couleur ?",
+      "texte": "En 1529, [le sultan] assiège Vienne sans réussir à la prendre.",
+      "choix": ["Charles Quint", "Soliman le Magnifique", "Christophe Colomb", "Hernan Cortés"],
+      "bonne": 1,
+      "explication": "Le sultan qui assiège Vienne en 1529 est Soliman le Magnifique."
+    },
+    {
+      "consigne": "Qui est désigné par le passage en couleur ?",
+      "texte": "En 1521, [le conquistador] prend Tenochtitlan, la capitale des Aztèques.",
+      "choix": ["Charles Quint", "Soliman le Magnifique", "Christophe Colomb", "Hernan Cortés"],
+      "bonne": 3,
+      "explication": "Hernan Cortés soumet l'Empire aztèque et prend Tenochtitlan en 1521."
+    },
+    {
+      "consigne": "Qui est désigné par le passage en couleur ?",
+      "texte": "En 1519, [le roi d'Espagne] est élu empereur du Saint-Empire.",
+      "choix": ["Charles Quint", "Soliman le Magnifique", "Christophe Colomb", "Hernan Cortés"],
+      "bonne": 0,
+      "explication": "Charles Quint, roi d'Espagne, est élu empereur en 1519."
+    },
+    {
+      "consigne": "Qui est désigné par le passage en couleur ?",
+      "texte": "En 1492, [un navigateur au service des rois d'Espagne] atteint les Antilles.",
+      "choix": ["Charles Quint", "Soliman le Magnifique", "Christophe Colomb", "Hernan Cortés"],
+      "bonne": 2,
+      "explication": "Christophe Colomb atteint les Antilles en 1492 en pensant arriver en Asie."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Charles Quint",
+      "acceptees": ["Charles Quint", "Charles-Quint", "Charles V", "Quint"],
+      "indices": [
+        "Je suis un souverain européen du XVIe siècle.",
+        "Je suis roi d'Espagne et je règne aussi sur les Pays-Bas.",
+        "En 1519, je suis élu empereur, et on dit que le soleil ne se couche jamais sur mes terres."
+      ],
+      "explication": "Charles Quint est roi d'Espagne et empereur élu en 1519 ; son empire s'étend sur plusieurs continents."
+    },
+    {
+      "reponse": "Soliman le Magnifique",
+      "acceptees": ["Soliman", "Soliman le Magnifique", "Soliman Ier", "Suleiman", "Suleyman", "Süleyman"],
+      "indices": [
+        "Je suis un souverain musulman du XVIe siècle.",
+        "Je règne sur trois continents depuis Istanbul.",
+        "En 1529, j'assiège Vienne sans parvenir à la prendre."
+      ],
+      "explication": "Soliman le Magnifique, sultan de 1520 à 1566, assiège Vienne en 1529 sans la prendre."
+    },
+    {
+      "reponse": "Christophe Colomb",
+      "acceptees": ["Colomb", "Christophe Colomb", "Cristobal Colon", "Christopher Columbus"],
+      "indices": [
+        "Je suis un navigateur de la fin du XVe siècle.",
+        "Je navigue au service des rois d'Espagne.",
+        "En 1492, je pars vers l'ouest et j'arrive aux Antilles, en croyant être en Asie."
+      ],
+      "explication": "Christophe Colomb atteint les Antilles en 1492 en croyant arriver en Asie."
+    },
+    {
+      "reponse": "Magellan",
+      "acceptees": ["Magellan", "Fernand de Magellan", "Ferdinand Magellan", "Fernand Magellan"],
+      "indices": [
+        "Je suis un navigateur du XVIe siècle.",
+        "Je meurs aux Philippines en 1521, en pleine expédition.",
+        "Mon expédition réalise le premier tour du monde, de 1519 à 1522."
+      ],
+      "explication": "Magellan meurt en 1521, mais son expédition réalise le premier tour du monde."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Cinq événements, du plus ancien au plus récent",
+      "etapes": [
+        "Colomb atteint les Antilles",
+        "Vasco de Gama atteint l'Inde en contournant l'Afrique",
+        "Charles Quint est élu empereur du Saint-Empire",
+        "Cortés prend Tenochtitlan, capitale des Aztèques",
+        "Soliman assiège Vienne sans parvenir à la prendre"
+      ]
+    }
+  ]
+}

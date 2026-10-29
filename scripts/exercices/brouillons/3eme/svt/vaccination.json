@@ -1,0 +1,162 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Le vaccin",
+      "detail": "Un antigène inoffensif donné à l'avance, qui prépare le corps et crée une mémoire immunitaire durable.",
+      "cartes": [
+        "Une préparation à base d'antigène rendu inoffensif",
+        "Une protection lente à s'installer mais durable",
+        "Des lymphocytes mémoire sont formés sans maladie",
+        "Un geste préventif, avant tout contact avec le microbe",
+        "Des rappels pour entretenir la mémoire immunitaire"
+      ]
+    },
+    {
+      "nom": "Le sérum",
+      "detail": "Des anticorps déjà fabriqués : l'action est immédiate mais temporaire, et le corps n'en garde pas de mémoire.",
+      "cartes": [
+        "Une injection d'anticorps déjà fabriqués",
+        "Une action immédiate mais de courte durée",
+        "Une protection qui ne laisse aucune mémoire",
+        "Le traitement d'une morsure de serpent venimeux",
+        "Un traitement curatif, donné quand le danger est là"
+      ]
+    },
+    {
+      "nom": "Les grandes dates",
+      "detail": "Les moments de l'histoire de la vaccination, de Jenner aux obligations actuelles en France.",
+      "cartes": [
+        "En 1796, la maladie d'une vache protège contre la variole",
+        "En 1885, Pasteur protège un enfant contre la rage",
+        "En 1980, l'OMS déclare la variole éradiquée",
+        "Depuis 2018, onze vaccinations sont obligatoires pour les nourrissons",
+        "Depuis 2025, les méningocoques s'ajoutent aux vaccinations obligatoires"
+      ]
+    },
+    {
+      "nom": "Protéger toute la population",
+      "detail": "L'intérêt collectif : quand beaucoup de personnes sont vaccinées, les autres sont protégées aussi.",
+      "cartes": [
+        "Un bébé trop jeune est protégé par son entourage vacciné",
+        "Le microbe circule peu quand presque tous sont vaccinés",
+        "Le pourcentage de personnes vaccinées dans un groupe",
+        "Quand peu de gens sont vaccinés, la maladie revient",
+        "Se faire vacciner protège aussi les autres"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "l'épidémie de rougeole de 2008 à 2011",
+      "carte": "Trop peu de personnes étaient vaccinées",
+      "role": "cause",
+      "explication": "La couverture vaccinale était trop faible : le microbe a pu circuler et toucher beaucoup de monde."
+    },
+    {
+      "fait": "l'épidémie de rougeole de 2008 à 2011",
+      "carte": "Des milliers de personnes ont été malades",
+      "role": "consequence",
+      "explication": "L'épidémie a touché des milliers de personnes."
+    },
+    {
+      "fait": "l'immunité collective",
+      "carte": "Une grande partie de la population est vaccinée",
+      "role": "cause",
+      "explication": "Quand la couverture vaccinale est forte, le microbe circule peu : c'est l'immunité collective."
+    },
+    {
+      "fait": "l'immunité collective",
+      "carte": "Un bébé trop jeune pour être vacciné est protégé",
+      "role": "consequence",
+      "explication": "L'immunité collective protège aussi les personnes qui ne peuvent pas être vaccinées."
+    }
+  ],
+  "etiquettes": [],
+  "devinettes": [
+    {
+      "reponse": "Edward Jenner",
+      "acceptees": ["Edward Jenner", "Jenner"],
+      "indices": [
+        "Je suis un personnage de l'histoire de la médecine.",
+        "En 1796, j'ai protégé quelqu'un de la variole.",
+        "J'ai utilisé une maladie de la vache, et mon travail a donné son nom au vaccin."
+      ],
+      "explication": "En 1796, Edward Jenner inocule la vaccine, une maladie de la vache, pour protéger contre la variole : le mot « vaccin » vient de là."
+    },
+    {
+      "reponse": "Louis Pasteur",
+      "acceptees": ["Louis Pasteur", "Pasteur"],
+      "indices": [
+        "Je suis un savant du XIXe siècle.",
+        "Un enfant mordu par un chien enragé a été sauvé grâce à moi en 1885.",
+        "Mon vaccin contre la rage a protégé Joseph Meister."
+      ],
+      "explication": "En 1885, Louis Pasteur vaccine le jeune Joseph Meister contre la rage."
+    },
+    {
+      "reponse": "Sérum",
+      "acceptees": ["Sérum", "Le sérum", "Un sérum", "Sérothérapie", "La sérothérapie"],
+      "indices": [
+        "Je suis une injection.",
+        "Je contiens des anticorps déjà fabriqués.",
+        "Mon action est immédiate mais temporaire, et je soigne une morsure de serpent."
+      ],
+      "explication": "Le sérum apporte des anticorps tout faits : action immédiate mais temporaire, sans mémoire."
+    },
+    {
+      "reponse": "Immunité collective",
+      "acceptees": ["Immunité collective", "L'immunité collective", "Immunité de groupe"],
+      "indices": [
+        "Je protège des personnes qui ne sont pas vaccinées.",
+        "J'apparais quand une grande part de la population est vaccinée.",
+        "Grâce à moi, un bébé trop jeune pour être vacciné est protégé."
+      ],
+      "explication": "Quand la couverture vaccinale est forte, le microbe circule peu : l'immunité collective protège aussi les personnes non vaccinées."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "Dans une ville de 2 000 habitants, 1 700 sont vaccinés contre la rougeole. Quelle est la couverture vaccinale, en pourcentage ?",
+      "reponse": 85,
+      "unite": "%",
+      "tolerance": 0,
+      "explication": "La couverture vaccinale est la part de la population vaccinée : 1 700 ÷ 2 000 = 0,85, soit 85 %."
+    },
+    {
+      "question": "Dans une école de 500 élèves, 40 élèves ne sont pas vaccinés contre la rougeole. Quelle est la couverture vaccinale, en pourcentage ?",
+      "reponse": 92,
+      "unite": "%",
+      "tolerance": 0,
+      "explication": "Il y a 500 − 40 = 460 élèves vaccinés. 460 ÷ 500 = 0,92, soit 92 %."
+    },
+    {
+      "question": "Dans un pays, une maladie touche 600 000 personnes par an avant le vaccin, puis 60 000 par an après son introduction. Par combien le nombre de cas a-t-il été divisé ?",
+      "reponse": 10,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "600 000 ÷ 60 000 = 10 : il y a 10 fois moins de cas après le vaccin."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Ce qui se passe après une vaccination",
+      "etapes": [
+        "Le vaccin apporte un antigène inoffensif",
+        "Le système immunitaire donne une première réponse",
+        "Des lymphocytes mémoire restent dans le corps",
+        "Le vrai microbe arrive plus tard",
+        "Une réponse secondaire rapide empêche la maladie"
+      ]
+    },
+    {
+      "titre": "Comment interpréter un graphique du nombre de cas",
+      "etapes": [
+        "Lire le titre et les axes du graphique",
+        "Repérer la date d'introduction du vaccin",
+        "Décrire l'évolution avant puis après cette date",
+        "Conclure en reliant la baisse des cas à la vaccination"
+      ]
+    }
+  ]
+}

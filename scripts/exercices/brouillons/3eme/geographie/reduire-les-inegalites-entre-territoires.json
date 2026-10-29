@@ -1,0 +1,136 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Redonner vie aux centres-villes",
+      "detail": "Les programmes de l'État pour relancer les commerces et les logements des centres des villes moyennes et petites.",
+      "cartes": [
+        "Le programme Action cœur de ville, lancé en 2018",
+        "Le programme Petites villes de demain, lancé en 2020",
+        "Des commerces qui ferment au profit d'une zone commerciale",
+        "Revitaliser commerces, logements et espaces publics du centre",
+        "Des petites villes qui servent de centres aux campagnes voisines"
+      ]
+    },
+    {
+      "nom": "Démarches et soins près des habitants",
+      "detail": "Rapprocher des habitants les guichets des services publics et les soins médicaux.",
+      "cartes": [
+        "Des maisons France Services dans les territoires ruraux",
+        "Impôts, retraite et emploi traités au même guichet",
+        "Ouvrir des maisons de santé là où elles manquent",
+        "Aider les médecins à s'installer là où ils manquent",
+        "Des services publics éloignés ou fermés dans les petites communes"
+      ]
+    },
+    {
+      "nom": "Le désenclavement des territoires",
+      "detail": "Relier les territoires isolés par les transports et le numérique.",
+      "cartes": [
+        "Un territoire qui n'est pas couvert par le réseau mobile",
+        "Le plan France Très Haut Débit, lancé en 2013",
+        "Construire des routes, des voies ferrées et des aéroports",
+        "Avec la fibre, on peut télétravailler depuis un village isolé",
+        "Des campagnes où Internet est lent ou absent"
+      ]
+    },
+    {
+      "nom": "Cohésion et équité territoriales",
+      "detail": "Les deux grands principes de l'aménagement : réduire les écarts et aider davantage les territoires qui en ont le plus besoin.",
+      "cartes": [
+        "Réduire les écarts pour que tous aient des chances comparables",
+        "Donner davantage à ceux qui en ont le plus besoin",
+        "Un quartier prioritaire reçoit plus d'aides qu'un quartier aisé",
+        "Plus de moyens pour l'école d'un quartier en difficulté",
+        "Rénovation urbaine, emploi et éducation dans les quartiers prioritaires"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "les inégalités entre territoires",
+      "carte": "La métropolisation concentre emplois et richesses dans les grandes villes",
+      "role": "cause",
+      "explication": "Les métropoles attirent emplois et habitants qualifiés, ce qui creuse l'écart avec les autres territoires."
+    },
+    {
+      "fait": "les inégalités entre territoires",
+      "carte": "La désindustrialisation d'anciennes régions industrielles",
+      "role": "cause",
+      "explication": "Quand l'industrie recule, des régions industrielles se retrouvent en difficulté face aux régions les plus riches."
+    },
+    {
+      "fait": "les inégalités entre territoires",
+      "carte": "L'enclavement d'un territoire mal relié aux autres",
+      "role": "cause",
+      "explication": "Un territoire mal relié est moins accessible : le désenclavement cherche à corriger cela."
+    },
+    {
+      "fait": "les inégalités entre territoires",
+      "carte": "La création de programmes comme Action cœur de ville",
+      "role": "consequence",
+      "explication": "Pour répondre aux écarts entre territoires, l'État lance des programmes comme Action cœur de ville (2018)."
+    },
+    {
+      "fait": "les inégalités entre territoires",
+      "carte": "La création de maisons France Services dans les territoires ruraux",
+      "role": "consequence",
+      "explication": "Pour répondre à l'éloignement des services publics, l'État crée des maisons qui les rapprochent des habitants."
+    }
+  ],
+  "etiquettes": [],
+  "devinettes": [
+    {
+      "reponse": "Zone blanche",
+      "acceptees": ["Une zone blanche", "La zone blanche", "Zones blanches"],
+      "indices": [
+        "Je suis un type de territoire mal desservi.",
+        "Mon nom contient une couleur.",
+        "Je suis un territoire qui n'est pas couvert par le réseau de téléphonie mobile."
+      ],
+      "explication": "Une zone blanche est un territoire non couvert par le réseau mobile."
+    },
+    {
+      "reponse": "Action cœur de ville",
+      "acceptees": ["Action coeur de ville"],
+      "indices": [
+        "Je suis un programme de l'État.",
+        "J'ai été lancé en 2018.",
+        "Je redonne vie aux commerces, aux logements et aux espaces publics des centres des communes moyennes."
+      ],
+      "explication": "Action cœur de ville (2018) revitalise les centres des villes moyennes : commerces, logements, espaces publics."
+    },
+    {
+      "reponse": "France Services",
+      "acceptees": ["Une maison France Services", "Maison France Services", "Les maisons France Services", "Maisons France Services"],
+      "indices": [
+        "Je suis un lieu ouvert au public.",
+        "On me trouve dans les territoires ruraux et les quartiers prioritaires.",
+        "On y règle ses démarches d'impôts, de retraite et d'emploi au même endroit."
+      ],
+      "explication": "Une maison France Services regroupe plusieurs services publics près des habitants."
+    },
+    {
+      "reponse": "La fibre optique",
+      "acceptees": ["Fibre optique", "La fibre", "Fibre"],
+      "indices": [
+        "Je suis un câble.",
+        "Je permets un accès à Internet très rapide.",
+        "Un plan lancé en 2013 vise à me déployer sur tout le territoire."
+      ],
+      "explication": "Le plan France Très Haut Débit (2013) vise à couvrir tout le territoire en fibre optique."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Les étapes pour présenter un aménagement",
+      "etapes": [
+        "Décrire l'inégalité : quel territoire, quel problème",
+        "Identifier la cause de cette inégalité",
+        "Présenter l'aménagement qui y répond, ses acteurs et son financement",
+        "Terminer par les limites : coût, délais, territoires oubliés"
+      ]
+    }
+  ]
+}

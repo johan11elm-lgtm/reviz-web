@@ -1,0 +1,142 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Jean de La Fontaine",
+      "detail": "Le poète du XVIIe siècle et son recueil de Fables, dont les morales sont restées célèbres.",
+      "cartes": [
+        "Des fables publiées en 1668 et dédiées au Dauphin",
+        "Un poète né en 1621 et mort en 1695",
+        "« La raison du plus fort est toujours la meilleure »",
+        "« Tout flatteur vit aux dépens de celui qui l'écoute »",
+        "« On a souvent besoin d'un plus petit que soi »"
+      ]
+    },
+    {
+      "nom": "Le Roman de Renart",
+      "detail": "Des récits du Moyen Âge où des animaux se moquent de la société féodale.",
+      "cartes": [
+        "Isengrin, le loup souvent victime de ruses",
+        "Noble, le roi lion de la cour",
+        "Le coq Chantecler et le corbeau Tiécelin",
+        "Des récits appelés branches, écrits aux XIIe-XIIIe siècles",
+        "Une satire de la société féodale"
+      ]
+    },
+    {
+      "nom": "Les Mille et Une Nuits",
+      "detail": "Un recueil de contes orientaux : une conteuse y retarde sa mort en captivant un roi, et Galland le traduit en français.",
+      "cartes": [
+        "Une conteuse qui raconte pour retarder sa mort",
+        "Un roi nommé Shahriyar qui écoute des histoires",
+        "Un conte laissé inachevé pour captiver son auditeur",
+        "Traduit en français par Antoine Galland",
+        "Un recueil de contes orientaux"
+      ]
+    },
+    {
+      "nom": "Les fabulistes anciens",
+      "detail": "Les auteurs et les recueils de fables qui existaient bien avant La Fontaine : Ésope, Phèdre, Marie de France, Kalila et Dimna.",
+      "cartes": [
+        "Un auteur grec de fables, au VIe siècle avant J.-C.",
+        "Un auteur de fables à Rome, au Ier siècle",
+        "L'autrice d'un des premiers recueils de fables en français",
+        "Un recueil de fables d'origine indienne",
+        "Une traduction arabe d'Ibn al-Muqaffa, au VIIIe siècle"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Quel rôle joue la phrase en couleur dans cette fable ?",
+      "texte": "[Un renard affamé rôde autour d'un poulailler.] Il flatte le coq pour qu'il ouvre la porte. Le coq, méfiant, appelle le fermier.",
+      "choix": ["Situation de départ", "Péripétie", "Issue", "Morale"],
+      "bonne": 0,
+      "explication": "Cette phrase présente le personnage et la situation de départ. L'événement vient ensuite (il flatte le coq), puis l'issue (le coq appelle le fermier)."
+    },
+    {
+      "consigne": "Quel rôle joue la phrase en couleur dans cette fable ?",
+      "texte": "Un lièvre se vante d'être le plus rapide du pré. [Une tortue le défie à la course.] Le lièvre s'endort en chemin et perd.",
+      "choix": ["Situation de départ", "Péripétie", "Issue", "Morale"],
+      "bonne": 1,
+      "explication": "Le défi est l'événement qui lance l'action : c'est la péripétie. La situation de départ est la vantardise du lièvre, l'issue est sa défaite."
+    },
+    {
+      "consigne": "Quel rôle joue la phrase en couleur dans cette fable ?",
+      "texte": "Deux chèvres se croisent sur une passerelle étroite. Aucune ne veut reculer. [Elles tombent toutes les deux dans la rivière.]",
+      "choix": ["Situation de départ", "Péripétie", "Issue", "Morale"],
+      "bonne": 2,
+      "explication": "Cette phrase raconte comment l'histoire se termine : c'est l'issue. La situation de départ est la rencontre sur la passerelle, la péripétie est le refus de reculer."
+    },
+    {
+      "consigne": "Quel rôle joue la phrase en couleur dans cette fable ?",
+      "texte": "Un corbeau tient un fromage dans son bec. Un renard le flatte, et le corbeau lâche sa proie. [Tout flatteur vit aux dépens de celui qui l'écoute.]",
+      "choix": ["Situation de départ", "Péripétie", "Issue", "Morale"],
+      "bonne": 3,
+      "explication": "Cette phrase est une leçon générale, au présent de vérité générale : c'est la morale. Elle ne raconte plus l'histoire, elle en tire un enseignement."
+    },
+    {
+      "consigne": "Quel rôle joue la phrase en couleur dans cette fable ?",
+      "texte": "[La raison du plus fort est toujours la meilleure.] Un loup accuse un agneau de troubler son eau, puis le dévore.",
+      "choix": ["Situation de départ", "Péripétie", "Issue", "Morale"],
+      "bonne": 3,
+      "explication": "La phrase en couleur est la leçon de la fable, placée avant le récit : c'est la morale. Elle peut ouvrir ou fermer la fable."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "La Fontaine",
+      "acceptees": ["La Fontaine", "Jean de La Fontaine", "Fontaine"],
+      "indices": [
+        "Je suis un poète français du XVIIe siècle.",
+        "Je réécris à ma manière des fables d'Ésope et de Phèdre.",
+        "Mon premier recueil paraît en 1668 et il est dédié au Dauphin."
+      ],
+      "explication": "Jean de La Fontaine (1621-1695) publie le premier recueil de ses Fables en 1668, dédié au Dauphin."
+    },
+    {
+      "reponse": "Shéhérazade",
+      "acceptees": ["Shéhérazade", "Scheherazade", "Chéhérazade"],
+      "indices": [
+        "Je suis un personnage d'un recueil de contes orientaux.",
+        "Je raconte chaque nuit une histoire au roi Shahriyar.",
+        "Je laisse chacun de mes contes inachevé pour retarder ma mort."
+      ],
+      "explication": "Shéhérazade capte l'attention du roi Shahriyar avec un conte inachevé chaque nuit, dans Les Mille et Une Nuits."
+    },
+    {
+      "reponse": "Marie de France",
+      "acceptees": ["Marie de France", "Marie"],
+      "indices": [
+        "Je suis une autrice du Moyen Âge.",
+        "J'écris des fables en langue française et non en latin.",
+        "À la fin du XIIe siècle, je compose l'un des premiers recueils de fables en français."
+      ],
+      "explication": "Marie de France compose, à la fin du XIIe siècle, l'un des premiers recueils de fables en français."
+    },
+    {
+      "reponse": "Apologue",
+      "acceptees": ["Apologue", "Un apologue", "L'apologue"],
+      "indices": [
+        "Je suis un genre de récit court.",
+        "Je cherche à plaire et à instruire.",
+        "La fable et certains contes sont mes formes."
+      ],
+      "explication": "L'apologue est un court récit qui divertit et donne une leçon ; la fable et certains contes en sont des formes."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Les étapes pour analyser une fable",
+      "etapes": [
+        "Identifier les personnages et ce qu'ils représentent",
+        "Résumer l'histoire : situation, péripétie, issue",
+        "Repérer la morale, explicite ou implicite",
+        "Reformuler la morale avec ses propres mots",
+        "Discuter si cette morale est juste et toujours vraie"
+      ]
+    }
+  ]
+}

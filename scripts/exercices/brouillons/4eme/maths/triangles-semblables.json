@@ -1,0 +1,193 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Rapport égal à 2",
+      "detail": "Les situations où le premier triangle est transformé en le second avec un rapport k = 2.",
+      "cartes": [
+        "Côté de 4 cm devenu 8 cm",
+        "Le triangle 3-4-5 devient le triangle 6-8-10",
+        "Toutes les longueurs sont doublées",
+        "Quotients des côtés : 6/3, 8/4 et 10/5",
+        "Le plus grand côté passe de 7 cm à 14 cm"
+      ]
+    },
+    {
+      "nom": "Rapport égal à 3",
+      "detail": "Les situations où le premier triangle est transformé en le second avec un rapport k = 3.",
+      "cartes": [
+        "Côté de 4 cm devenu 12 cm",
+        "Le triangle 2-3-4 devient le triangle 6-9-12",
+        "Toutes les longueurs sont triplées",
+        "Quotients des côtés : 9/3, 12/4 et 15/5",
+        "Le plus grand côté passe de 5 cm à 15 cm"
+      ]
+    },
+    {
+      "nom": "Rapport égal à 0,5",
+      "detail": "Les situations où le premier triangle est transformé en le second avec un rapport k = 0,5.",
+      "cartes": [
+        "Côté de 10 cm devenu 5 cm",
+        "Le triangle 6-8-10 devient le triangle 3-4-5",
+        "Toutes les longueurs sont divisées par 2",
+        "Quotients des côtés : 3/6, 4/8 et 5/10",
+        "Le plus grand côté passe de 14 cm à 7 cm"
+      ]
+    },
+    {
+      "nom": "Rapport égal à 1,5",
+      "detail": "Les situations où le premier triangle est transformé en le second avec un rapport k = 1,5.",
+      "cartes": [
+        "Côté de 6 cm devenu 9 cm",
+        "Le triangle 4-6-8 devient le triangle 6-9-12",
+        "Toutes les longueurs sont multipliées par 1,5",
+        "Quotients des côtés : 9/6, 12/8 et 15/10",
+        "Le plus grand côté passe de 10 cm à 15 cm"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Quel mot décrit le passage en couleur ?",
+      "texte": "On passe du triangle ABC au triangle A'B'C' : [toutes les longueurs sont multipliées par 3].",
+      "choix": ["Un agrandissement", "Une réduction", "Deux triangles égaux"],
+      "bonne": 0,
+      "explication": "Le rapport k = 3 est supérieur à 1 : les longueurs augmentent, c'est un agrandissement."
+    },
+    {
+      "consigne": "Quel mot décrit le passage en couleur ?",
+      "texte": "On passe du triangle ABC au triangle A'B'C' : [toutes les longueurs sont multipliées par 0,4].",
+      "choix": ["Un agrandissement", "Une réduction", "Deux triangles égaux"],
+      "bonne": 1,
+      "explication": "Le rapport k = 0,4 est compris entre 0 et 1 : les longueurs diminuent, c'est une réduction."
+    },
+    {
+      "consigne": "Quel mot décrit le passage en couleur ?",
+      "texte": "On passe du triangle ABC au triangle A'B'C' : [toutes les longueurs sont multipliées par 1].",
+      "choix": ["Un agrandissement", "Une réduction", "Deux triangles égaux"],
+      "bonne": 2,
+      "explication": "Le rapport k = 1 ne change aucune longueur : les triangles sont égaux, c'est-à-dire superposables."
+    },
+    {
+      "consigne": "Quel mot décrit le passage en couleur ?",
+      "texte": "On passe du triangle ABC, de côtés 6 cm, 9 cm et 12 cm, au triangle A'B'C' : [ses côtés mesurent maintenant 2 cm, 3 cm et 4 cm].",
+      "choix": ["Un agrandissement", "Une réduction", "Deux triangles égaux"],
+      "bonne": 1,
+      "explication": "Chaque longueur est divisée par 3 : le rapport k = 1/3 est compris entre 0 et 1, c'est une réduction."
+    },
+    {
+      "consigne": "Quel mot décrit le passage en couleur ?",
+      "texte": "On passe du triangle ABC au triangle A'B'C' avec [un rapport k = 1,5].",
+      "choix": ["Un agrandissement", "Une réduction", "Deux triangles égaux"],
+      "bonne": 0,
+      "explication": "Le rapport k = 1,5 est supérieur à 1 : les longueurs augmentent, c'est un agrandissement."
+    },
+    {
+      "consigne": "Quel mot décrit le passage en couleur ?",
+      "texte": "On passe du triangle ABC, de côtés 3 cm, 4 cm et 5 cm, au triangle A'B'C' : [ses côtés mesurent maintenant 4,5 cm, 6 cm et 7,5 cm].",
+      "choix": ["Un agrandissement", "Une réduction", "Deux triangles égaux"],
+      "bonne": 0,
+      "explication": "4,5 ÷ 3 = 6 ÷ 4 = 7,5 ÷ 5 = 1,5 : le rapport est supérieur à 1, c'est un agrandissement."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Rapport",
+      "acceptees": ["Rapport", "Le rapport", "Rapport k", "Le rapport k", "k", "Coefficient", "Le coefficient"],
+      "indices": [
+        "Je suis un nombre.",
+        "Je multiplie les longueurs d'un triangle pour obtenir celles de l'autre.",
+        "On me note k."
+      ],
+      "explication": "Le rapport k est le nombre par lequel on multiplie les longueurs d'un triangle semblable pour obtenir celles de l'autre."
+    },
+    {
+      "reponse": "Agrandissement",
+      "acceptees": ["Agrandissement", "Un agrandissement", "L'agrandissement"],
+      "indices": [
+        "Je change la taille d'une figure sans changer sa forme.",
+        "Mon rapport k est supérieur à 1.",
+        "Les longueurs de la figure obtenue sont plus grandes que celles de départ."
+      ],
+      "explication": "Un agrandissement multiplie les longueurs par un rapport k supérieur à 1."
+    },
+    {
+      "reponse": "Réduction",
+      "acceptees": ["Réduction", "Une réduction", "La réduction"],
+      "indices": [
+        "Je change la taille d'une figure sans changer sa forme.",
+        "Mon rapport k est compris entre 0 et 1.",
+        "Les longueurs de la figure obtenue sont plus petites que celles de départ."
+      ],
+      "explication": "Une réduction multiplie les longueurs par un rapport k compris entre 0 et 1."
+    },
+    {
+      "reponse": "Homologues",
+      "acceptees": ["Homologues", "Les homologues", "Côtés homologues", "Les côtés homologues", "Sommets homologues"],
+      "indices": [
+        "Nous sommes des côtés ou des sommets qui se correspondent.",
+        "Nous apparaissons dans deux triangles semblables, en face d'angles égaux.",
+        "Le plus grand de l'un correspond au plus grand de l'autre."
+      ],
+      "explication": "Les côtés homologues de deux triangles semblables sont opposés à des angles égaux : le plus grand correspond au plus grand."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "Dans un triangle, deux angles mesurent 48° et 67°. Combien mesure le troisième angle ?",
+      "reponse": 65,
+      "unite": "°",
+      "tolerance": 0,
+      "explication": "La somme des angles d'un triangle vaut 180° : 180 − 48 − 67 = 65°."
+    },
+    {
+      "question": "Le triangle DEF est obtenu à partir du triangle ABC avec un rapport k = 2,5. Si AB = 6 cm, combien mesure le côté homologue DE ?",
+      "reponse": 15,
+      "unite": "cm",
+      "tolerance": 0,
+      "explication": "On multiplie par le rapport : DE = 6 × 2,5 = 15 cm."
+    },
+    {
+      "question": "Le triangle ABC a des côtés de 4 cm, 6 cm et 8 cm. Le triangle DEF, semblable à ABC, a un plus petit côté de 6 cm. Combien mesure son plus grand côté ?",
+      "reponse": 12,
+      "unite": "cm",
+      "tolerance": 0,
+      "explication": "Le plus petit côté passe de 4 à 6 cm : k = 6 ÷ 4 = 1,5. Le plus grand côté de DEF mesure 8 × 1,5 = 12 cm."
+    },
+    {
+      "question": "Les triangles ABC et A'B'C' sont semblables. AB = 8 cm et son côté homologue A'B' = 6 cm. Quel est le rapport k pour passer de ABC à A'B'C' ?",
+      "reponse": 0.75,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "k = A'B' ÷ AB = 6 ÷ 8 = 0,75. C'est une réduction."
+    },
+    {
+      "question": "Les triangles ABC et A'B'C' sont semblables. On passe de ABC à A'B'C' avec k = 1,5, et A'B' = 12 cm. Combien mesure AB ?",
+      "reponse": 8,
+      "unite": "cm",
+      "tolerance": 0,
+      "explication": "Pour revenir au premier triangle, on divise par k : AB = 12 ÷ 1,5 = 8 cm."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Calculer une longueur avec des triangles semblables",
+      "etapes": [
+        "Montrer que deux angles sont égaux, donc que les triangles sont semblables",
+        "Repérer les sommets et les côtés homologues",
+        "Calculer le rapport k avec deux côtés homologues connus",
+        "Multiplier ou diviser par k pour trouver la longueur cherchée"
+      ]
+    },
+    {
+      "titre": "Reconnaître des triangles semblables avec les longueurs",
+      "etapes": [
+        "Ranger les côtés de chaque triangle du plus petit au plus grand",
+        "Calculer les trois quotients des côtés qui se correspondent",
+        "Comparer les trois quotients",
+        "Conclure : les triangles sont semblables si les quotients sont égaux"
+      ]
+    }
+  ]
+}

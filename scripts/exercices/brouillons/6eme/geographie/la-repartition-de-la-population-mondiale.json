@@ -1,0 +1,172 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Les pays des grands foyers d'Asie",
+      "detail": "Des pays de l'Asie de l'Est et de l'Asie du Sud, deux des trois grands foyers de peuplement.",
+      "cartes": [
+        "La Chine, plus de 1,4 milliard d'habitants",
+        "L'Inde, pays le plus peuplé depuis 2023",
+        "Le Japon, en Asie de l'Est",
+        "Le Pakistan, en Asie du Sud",
+        "Le Bangladesh, en Asie du Sud"
+      ]
+    },
+    {
+      "nom": "Les foyers secondaires",
+      "detail": "Des régions très peuplées situées hors des trois grands foyers, sur d'autres continents.",
+      "cartes": [
+        "Le Nord-Est des États-Unis",
+        "Le golfe de Guinée, avec le Nigeria",
+        "La vallée du Nil, en Égypte",
+        "Le Sud-Est du Brésil",
+        "L'île de Java, en Indonésie"
+      ]
+    },
+    {
+      "nom": "Les vides humains",
+      "detail": "Des espaces presque inhabités à cause du froid, de l'aridité, de la forêt ou de l'altitude.",
+      "cartes": [
+        "Le désert du Sahara",
+        "L'Antarctique, le continent glacé du pôle Sud",
+        "Le Grand Nord, balayé par le froid",
+        "La forêt amazonienne",
+        "Les sommets des hautes montagnes"
+      ]
+    },
+    {
+      "nom": "Ce qui attire les hommes",
+      "detail": "Les conditions naturelles qui favorisent le peuplement.",
+      "cartes": [
+        "Une plaine aux sols fertiles",
+        "Un grand fleuve qui apporte de l'eau",
+        "Un delta où l'on peut cultiver",
+        "Un littoral, au contact de la mer",
+        "Un climat tempéré ou de mousson"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "la faible densité du Canada",
+      "carte": "Un territoire immense",
+      "role": "cause",
+      "explication": "Le Canada est immense : ses habitants se répartissent sur une très vaste superficie."
+    },
+    {
+      "fait": "la faible densité du Canada",
+      "carte": "Un froid intense sur une grande partie du pays",
+      "role": "cause",
+      "explication": "Le froid repousse les hommes : une grande partie du pays est presque inhabitée."
+    },
+    {
+      "fait": "la faible densité du Canada",
+      "carte": "Une population très dispersée",
+      "role": "consequence",
+      "explication": "Avec environ 4 habitants par km², la population canadienne est très dispersée."
+    },
+    {
+      "fait": "l'eau et les sols fertiles des vallées fluviales",
+      "carte": "De nombreuses personnes peuvent être nourries sur place",
+      "role": "consequence",
+      "explication": "Grâce à l'eau et aux sols fertiles, on cultive beaucoup et la vallée nourrit une forte population."
+    },
+    {
+      "fait": "l'eau et les sols fertiles des vallées fluviales",
+      "carte": "De grandes civilisations anciennes naissent le long des fleuves",
+      "role": "consequence",
+      "explication": "Depuis l'Antiquité, les vallées fertiles du Nil, du Gange ou du fleuve Jaune ont attiré et nourri les hommes."
+    }
+  ],
+  "etiquettes": [],
+  "devinettes": [
+    {
+      "reponse": "L'Inde",
+      "acceptees": ["Inde", "L'Inde"],
+      "indices": [
+        "Je suis un pays d'Asie du Sud.",
+        "Plus de 1,4 milliard de personnes vivent chez moi.",
+        "Depuis 2023, je suis le pays le plus peuplé du monde."
+      ],
+      "explication": "L'Inde est le pays le plus peuplé du monde depuis 2023, devant la Chine."
+    },
+    {
+      "reponse": "L'Antarctique",
+      "acceptees": ["Antarctique", "L'Antarctique"],
+      "indices": [
+        "Je suis un espace presque inhabité.",
+        "Je suis un continent situé au pôle Sud.",
+        "À cause de mon froid extrême, presque personne n'y habite."
+      ],
+      "explication": "L'Antarctique est un vide humain à cause du froid extrême."
+    },
+    {
+      "reponse": "Une anamorphose",
+      "acceptees": ["Anamorphose", "Une anamorphose", "L'anamorphose", "Carte en anamorphose"],
+      "indices": [
+        "Je suis un type de carte.",
+        "Je déforme la taille des pays selon leur population.",
+        "Sur moi, l'Inde et la Chine paraissent énormes, et le Canada minuscule."
+      ],
+      "explication": "Une anamorphose déforme la taille des pays selon leur population, et non selon leur superficie."
+    },
+    {
+      "reponse": "La densité",
+      "acceptees": ["Densité", "La densité", "Densité de population", "La densité de population"],
+      "indices": [
+        "Je suis un nombre qui permet de comparer des pays de tailles très différentes.",
+        "On me calcule en divisant le nombre d'habitants par la superficie.",
+        "Je m'exprime en habitants par km²."
+      ],
+      "explication": "La densité est le nombre moyen d'habitants par km² : densité = nombre d'habitants ÷ superficie."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "Une région compte 60 000 000 d'habitants sur 500 000 km². Quelle est sa densité ?",
+      "reponse": 120,
+      "unite": "hab./km²",
+      "tolerance": 0,
+      "explication": "densité = habitants ÷ superficie = 60 000 000 ÷ 500 000 = 120 hab./km²."
+    },
+    {
+      "question": "Une île compte 3 000 000 d'habitants sur 1 500 km². Quelle est sa densité ?",
+      "reponse": 2000,
+      "unite": "hab./km²",
+      "tolerance": 0,
+      "explication": "densité = 3 000 000 ÷ 1 500 = 2 000 hab./km²."
+    },
+    {
+      "question": "Un territoire de 10 000 km² compte 450 000 habitants. Quelle est sa densité ?",
+      "reponse": 45,
+      "unite": "hab./km²",
+      "tolerance": 0,
+      "explication": "densité = 450 000 ÷ 10 000 = 45 hab./km²."
+    },
+    {
+      "question": "Un État de 400 000 km² compte 80 000 000 d'habitants. Quelle est sa densité ?",
+      "reponse": 200,
+      "unite": "hab./km²",
+      "tolerance": 0,
+      "explication": "densité = 80 000 000 ÷ 400 000 = 200 hab./km²."
+    },
+    {
+      "question": "Une région de 20 000 km² compte 30 000 habitants. Quelle est sa densité ?",
+      "reponse": 1.5,
+      "unite": "hab./km²",
+      "tolerance": 0,
+      "explication": "densité = 30 000 ÷ 20 000 = 1,5 hab./km² : c'est un espace très peu peuplé."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Calculer la densité d'un pays",
+      "etapes": [
+        "Écrire la formule : densité = habitants ÷ superficie",
+        "Remplacer par le nombre d'habitants et la superficie en km²",
+        "Effectuer la division",
+        "Donner le résultat avec l'unité hab./km²"
+      ]
+    }
+  ]
+}

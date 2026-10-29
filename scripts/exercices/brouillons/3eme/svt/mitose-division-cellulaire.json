@@ -1,0 +1,175 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "La duplication de l'ADN",
+      "detail": "La copie de l'ADN de chaque chromosome, qui a lieu avant la division.",
+      "cartes": [
+        "L'ADN de chaque chromosome est copié",
+        "Chaque chromosome est formé de deux chromatides identiques",
+        "Elle se produit avant le début de la division",
+        "Une erreur de copie peut produire une mutation",
+        "Un centromère relie les deux chromatides"
+      ]
+    },
+    {
+      "nom": "Les étapes de la division",
+      "detail": "Ce qui se passe dans la cellule pendant la mitose, de la condensation des chromosomes à la coupure en deux.",
+      "cartes": [
+        "Les chromosomes se condensent et deviennent visibles",
+        "Les chromosomes s'alignent au centre de la cellule",
+        "Les deux chromatides de chaque chromosome se séparent",
+        "Les chromatides migrent vers deux pôles opposés",
+        "Le cytoplasme se coupe en deux"
+      ]
+    },
+    {
+      "nom": "Les cellules filles obtenues",
+      "detail": "Le résultat d'une mitose : des cellules conformes à la cellule mère.",
+      "cartes": [
+        "Elles ont 46 chromosomes chez l'humain",
+        "Chaque chromosome n'a plus qu'une seule chromatide",
+        "Elles ont la même information génétique que leur mère",
+        "Une cellule mère en donne deux, pas quatre",
+        "Elles forment un clone"
+      ]
+    },
+    {
+      "nom": "À quoi sert la mitose",
+      "detail": "Les rôles de la mitose dans l'organisme : croissance, cicatrisation et renouvellement des cellules.",
+      "cartes": [
+        "Passer d'un bébé à un adulte",
+        "La cicatrisation d'une blessure",
+        "Remplacer les cellules usées de la peau",
+        "Renouveler les cellules du sang",
+        "La pointe d'une racine qui s'allonge"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "la division des cellules de la peau autour d'une plaie",
+      "carte": "Une coupure a abîmé la peau",
+      "role": "cause",
+      "explication": "Après une coupure, les cellules de la peau autour de la plaie se divisent par mitose."
+    },
+    {
+      "fait": "la division des cellules de la peau autour d'une plaie",
+      "carte": "La blessure se referme",
+      "role": "consequence",
+      "explication": "Les nouvelles cellules produites par mitose referment la blessure : c'est la cicatrisation."
+    },
+    {
+      "fait": "une mutation dans une cellule de peau",
+      "carte": "Une erreur pendant la copie de l'ADN",
+      "role": "cause",
+      "explication": "Une erreur de copie lors de la duplication peut produire une mutation."
+    },
+    {
+      "fait": "une mutation dans une cellule de peau",
+      "carte": "Les cellules issues de cette cellule portent la mutation",
+      "role": "consequence",
+      "explication": "La mitose copie l'ADN fidèlement, y compris l'erreur : les cellules descendantes portent la mutation."
+    },
+    {
+      "fait": "une mutation dans une cellule de peau",
+      "carte": "Les autres cellules du corps ne la portent pas",
+      "role": "consequence",
+      "explication": "Seules les cellules qui descendent de la cellule mutée portent la mutation."
+    }
+  ],
+  "etiquettes": [],
+  "devinettes": [
+    {
+      "reponse": "Chromatide",
+      "acceptees": ["Chromatide", "Une chromatide", "Chromatides"],
+      "indices": [
+        "Je fais partie d'un chromosome.",
+        "Je suis relié à ma jumelle identique par un centromère.",
+        "Je me sépare d'elle pendant la mitose pour partir vers une cellule fille."
+      ],
+      "explication": "Après la duplication, un chromosome a deux chromatides identiques, qui se séparent pendant la mitose."
+    },
+    {
+      "reponse": "Cellule-œuf",
+      "acceptees": ["Cellule-œuf", "Cellule œuf", "Cellule-oeuf", "Cellule oeuf", "La cellule-œuf", "Une cellule-œuf", "Œuf", "Oeuf", "Zygote"],
+      "indices": [
+        "Je suis le tout début d'un être humain.",
+        "Je suis issue de la fécondation.",
+        "Tout ton corps descend de moi, par des mitoses successives."
+      ],
+      "explication": "Tout organisme se développe à partir de la cellule-œuf, issue de la fécondation, par mitoses successives."
+    },
+    {
+      "reponse": "Duplication",
+      "acceptees": ["Duplication", "La duplication", "Réplication", "La réplication"],
+      "indices": [
+        "Je prépare la division d'une cellule.",
+        "Je copie l'ADN de chaque chromosome.",
+        "Grâce à moi, chaque chromosome a deux chromatides."
+      ],
+      "explication": "La duplication copie l'ADN avant la mitose : chaque chromosome a alors deux chromatides identiques."
+    },
+    {
+      "reponse": "Mitose",
+      "acceptees": ["Mitose", "La mitose"],
+      "indices": [
+        "Je suis une division de cellule.",
+        "Je donne deux cellules filles identiques à leur cellule mère.",
+        "Je permets la croissance et la cicatrisation."
+      ],
+      "explication": "La mitose divise une cellule en deux cellules filles génétiquement identiques."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "Une cellule-œuf se divise par mitose, puis chaque cellule obtenue se divise à son tour, et ainsi de suite. Combien y a-t-il de cellules après 5 divisions successives ?",
+      "reponse": 32,
+      "unite": "cellules",
+      "tolerance": 0,
+      "explication": "Le nombre double à chaque division : 1 → 2 → 4 → 8 → 16 → 32 cellules."
+    },
+    {
+      "question": "Une cellule-œuf se divise par mitose, puis chaque cellule obtenue se divise à son tour, et ainsi de suite. Combien de divisions successives faut-il pour obtenir 64 cellules ?",
+      "reponse": 6,
+      "unite": "divisions",
+      "tolerance": 0,
+      "explication": "1 → 2 → 4 → 8 → 16 → 32 → 64 : on double 6 fois, donc 6 divisions."
+    },
+    {
+      "question": "Une cellule humaine a 46 chromosomes. Après la duplication de l'ADN, chaque chromosome a 2 chromatides. Combien de chromatides la cellule contient-elle alors ?",
+      "reponse": 92,
+      "unite": "chromatides",
+      "tolerance": 0,
+      "explication": "46 chromosomes × 2 chromatides = 92 chromatides."
+    },
+    {
+      "question": "Une cellule d'une racine d'oignon a 16 chromosomes. Combien de chromosomes possède chacune de ses cellules filles après une mitose ?",
+      "reponse": 16,
+      "unite": "chromosomes",
+      "tolerance": 0,
+      "explication": "La mitose conserve le nombre de chromosomes : chaque cellule fille a 16 chromosomes, comme la cellule mère."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Le déroulement d'une mitose",
+      "etapes": [
+        "L'ADN de chaque chromosome est copié",
+        "Les chromosomes se condensent et deviennent visibles",
+        "Les chromosomes s'alignent au centre de la cellule",
+        "Les chromatides se séparent et migrent vers deux pôles",
+        "Le cytoplasme se coupe en deux cellules filles"
+      ]
+    },
+    {
+      "titre": "Repérer des cellules en division au microscope",
+      "etapes": [
+        "On prend une préparation colorée de pointe de racine d'oignon",
+        "On observe au faible grossissement, puis on l'augmente",
+        "On cherche les cellules aux chromosomes visibles",
+        "On identifie l'étape de la mitose de chaque cellule"
+      ]
+    }
+  ]
+}

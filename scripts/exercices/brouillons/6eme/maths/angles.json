@@ -1,0 +1,150 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Angles aigus",
+      "detail": "Un angle aigu mesure entre 0° et 90°.",
+      "cartes": [
+        "Un angle de 35°",
+        "Un angle de 89°",
+        "Un angle de 180° − 130°",
+        "Chaque angle formé par la bissectrice d'un angle de 80°",
+        "Un angle de 360° ÷ 8"
+      ]
+    },
+    {
+      "nom": "Angles droits",
+      "detail": "Un angle droit mesure exactement 90°.",
+      "cartes": [
+        "Un angle de 90°",
+        "Un angle codé par un petit carré",
+        "Un angle de 180° ÷ 2",
+        "Un angle de 360° ÷ 4",
+        "Le supplémentaire d'un angle de 90°"
+      ]
+    },
+    {
+      "nom": "Angles obtus",
+      "detail": "Un angle obtus mesure entre 90° et 180°.",
+      "cartes": [
+        "Un angle de 120°",
+        "Un angle de 91°",
+        "Un angle de 175°",
+        "Le supplémentaire d'un angle de 40°",
+        "Un angle de 100° + 30°"
+      ]
+    },
+    {
+      "nom": "Angles plats",
+      "detail": "Un angle plat mesure exactement 180°.",
+      "cartes": [
+        "Un angle de 180°",
+        "Le double d'un angle de 90°",
+        "La somme de deux angles supplémentaires",
+        "Un angle de 360° ÷ 2",
+        "Un angle de 110° + 70°"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [],
+  "devinettes": [
+    {
+      "reponse": "Bissectrice",
+      "acceptees": ["La bissectrice", "Une bissectrice", "Bissectrice"],
+      "indices": [
+        "Je pars du sommet d'un angle.",
+        "Je suis une demi-droite.",
+        "Je partage cet angle en deux angles de même mesure."
+      ],
+      "explication": "La bissectrice d'un angle est la demi-droite issue du sommet qui le partage en deux angles égaux."
+    },
+    {
+      "reponse": "Rapporteur",
+      "acceptees": ["Le rapporteur", "Un rapporteur", "Rapporteur"],
+      "indices": [
+        "Je suis un instrument gradué.",
+        "J'ai deux graduations qui vont de 0° à 180°.",
+        "On place mon centre sur le sommet d'un angle."
+      ],
+      "explication": "Le rapporteur sert à mesurer et à construire des angles : son centre se place sur le sommet."
+    },
+    {
+      "reponse": "Sommet",
+      "acceptees": ["Le sommet", "Un sommet", "Sommet"],
+      "indices": [
+        "Je suis un point.",
+        "Je suis la lettre du milieu quand on note un angle avec trois lettres, comme dans AÔB.",
+        "Je suis l'origine commune des deux côtés d'un angle."
+      ],
+      "explication": "Le sommet est le point d'origine commun des deux côtés de l'angle ; c'est la lettre du milieu dans AÔB."
+    },
+    {
+      "reponse": "Degré",
+      "acceptees": ["Le degré", "Un degré", "Les degrés", "Degré", "Degrés"],
+      "indices": [
+        "Je suis une unité de mesure.",
+        "On me note avec un petit cercle placé en haut à droite d'un nombre.",
+        "Je sers à mesurer les angles."
+      ],
+      "explication": "Le degré (°) est l'unité de mesure des angles : un angle droit mesure 90°."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "Deux angles sont supplémentaires. L'un mesure 48°. Combien mesure l'autre ?",
+      "reponse": 132,
+      "unite": "°",
+      "tolerance": 0,
+      "explication": "Deux angles supplémentaires ont une somme de 180° : 180 − 48 = 132°."
+    },
+    {
+      "question": "Deux droites sécantes forment un angle de 52°. Combien mesure l'angle opposé par le sommet ?",
+      "reponse": 52,
+      "unite": "°",
+      "tolerance": 0,
+      "explication": "Deux angles opposés par le sommet ont la même mesure : 52°."
+    },
+    {
+      "question": "Deux droites sécantes forment un angle de 52°. Combien mesure l'un des deux angles adjacents à cet angle ?",
+      "reponse": 128,
+      "unite": "°",
+      "tolerance": 0,
+      "explication": "Les deux angles adjacents sont supplémentaires, car leurs côtés sont sur une même droite : 180 − 52 = 128°."
+    },
+    {
+      "question": "La bissectrice d'un angle de 134° le partage en deux angles égaux. Combien mesure chacun d'eux ?",
+      "reponse": 67,
+      "unite": "°",
+      "tolerance": 0,
+      "explication": "La bissectrice partage l'angle en deux angles de même mesure : 134 ÷ 2 = 67°."
+    },
+    {
+      "question": "Pour un angle visiblement aigu, un élève lit 125° au rapporteur : il a lu sur la mauvaise graduation. Quelle est la vraie mesure de l'angle ?",
+      "reponse": 55,
+      "unite": "°",
+      "tolerance": 0,
+      "explication": "Un angle aigu mesure moins de 90°. On a lu sur l'autre graduation : 180 − 125 = 55°."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Construire un angle de mesure donnée au rapporteur",
+      "etapes": [
+        "Trace d'abord un côté de l'angle à partir du sommet",
+        "Place le centre du rapporteur sur le sommet, zéro sur ce côté",
+        "Marque un point à la mesure voulue sur la bonne graduation",
+        "Trace le second côté depuis le sommet jusqu'à ce point"
+      ]
+    },
+    {
+      "titre": "Construire la bissectrice d'un angle au compas",
+      "etapes": [
+        "Trace un arc de centre le sommet qui coupe les deux côtés",
+        "Trace deux arcs de même rayon centrés sur ces deux points",
+        "Repère le point où les deux arcs se croisent",
+        "Trace la demi-droite du sommet jusqu'à ce point de croisement"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,150 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Les ions Cu²⁺",
+      "detail": "Les ions cuivre II, que la soude révèle par un précipité bleu.",
+      "cartes": [
+        "Un précipité bleu apparaît avec la soude",
+        "On les trouve dans le sulfate de cuivre",
+        "On les trouve dans le chlorure de cuivre II",
+        "Précipité bleu à la soude, rien au nitrate d'argent",
+        "Précipité bleu à la soude, blanc au nitrate d'argent"
+      ]
+    },
+    {
+      "nom": "Les ions Fe²⁺",
+      "detail": "Les ions fer II, que la soude révèle par un précipité vert.",
+      "cartes": [
+        "Un précipité vert apparaît avec la soude",
+        "On les trouve dans le chlorure de fer II",
+        "On les trouve dans le sulfate de fer II",
+        "Précipité vert à la soude, rien au nitrate d'argent",
+        "Précipité vert à la soude, blanc au nitrate d'argent"
+      ]
+    },
+    {
+      "nom": "Les ions Fe³⁺",
+      "detail": "Les ions fer III, que la soude révèle par un précipité rouille ; ils portent trois charges positives.",
+      "cartes": [
+        "Un précipité rouille apparaît avec la soude",
+        "On les trouve dans le chlorure de fer III",
+        "Précipité rouille à la soude, blanc au nitrate d'argent",
+        "Chaque ion porte trois charges positives",
+        "Chacun s'associe à trois ions chlorure dans la solution"
+      ]
+    },
+    {
+      "nom": "Les ions Zn²⁺",
+      "detail": "Les ions zinc, que la soude révèle par un précipité blanc qui se redissout avec trop de soude.",
+      "cartes": [
+        "Un précipité blanc apparaît avec la soude",
+        "Leur précipité blanc disparaît avec trop de soude",
+        "On les trouve dans le chlorure de zinc",
+        "Précipité blanc à la soude, rien au nitrate d'argent",
+        "Précipité blanc à la soude, blanc au nitrate d'argent"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Quel ion le groupe en couleur révèle-t-il ?",
+      "texte": "On verse de la soude dans un tube : [un précipité rouille apparaît].",
+      "choix": ["Cu²⁺", "Fe²⁺", "Fe³⁺", "Zn²⁺"],
+      "bonne": 2,
+      "explication": "Avec la soude, le précipité rouille signe les ions fer III, Fe³⁺."
+    },
+    {
+      "consigne": "Quel ion le groupe en couleur révèle-t-il ?",
+      "texte": "On ajoute de la soude à une solution et [un précipité vert] se forme.",
+      "choix": ["Cu²⁺", "Fe²⁺", "Fe³⁺", "Zn²⁺"],
+      "bonne": 1,
+      "explication": "Avec la soude, le précipité vert signe les ions fer II, Fe²⁺."
+    },
+    {
+      "consigne": "Quel ion le groupe en couleur révèle-t-il ?",
+      "texte": "Avec la soude, [un précipité blanc] se forme dans le tube.",
+      "choix": ["Cu²⁺", "Fe²⁺", "Fe³⁺", "Zn²⁺"],
+      "bonne": 3,
+      "explication": "Avec la soude, le précipité blanc signe les ions zinc, Zn²⁺."
+    },
+    {
+      "consigne": "Quel ion le groupe en couleur révèle-t-il ?",
+      "texte": "La soude fait apparaître [un précipité bleu] dans la solution.",
+      "choix": ["Cu²⁺", "Fe²⁺", "Fe³⁺", "Zn²⁺"],
+      "bonne": 0,
+      "explication": "Avec la soude, le précipité bleu signe les ions cuivre II, Cu²⁺."
+    },
+    {
+      "consigne": "Quel ion le groupe en couleur révèle-t-il ?",
+      "texte": "On verse du nitrate d'argent : [un précipité blanc qui noircit à la lumière] se forme.",
+      "choix": ["Cu²⁺", "Fe²⁺", "Zn²⁺", "Cl⁻"],
+      "bonne": 3,
+      "explication": "Le nitrate d'argent est le réactif des ions chlorure Cl⁻ : il donne un précipité blanc qui noircit à la lumière."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Précipité",
+      "acceptees": ["Précipité", "Un précipité", "Le précipité"],
+      "indices": [
+        "Je suis un solide.",
+        "Je me forme au milieu d'un liquide quand on ajoute un réactif.",
+        "Ma couleur révèle l'ion cherché, et quand j'apparais, le test est positif."
+      ],
+      "explication": "Un précipité est un solide qui se forme dans une solution lors d'un test chimique."
+    },
+    {
+      "reponse": "Soude",
+      "acceptees": ["Soude", "La soude", "Hydroxyde de sodium"],
+      "indices": [
+        "Je suis un réactif corrosif : lunettes et gants obligatoires.",
+        "Je fais apparaître un précipité coloré avec certains ions.",
+        "Ma formule ionique est (Na⁺ + HO⁻) et je révèle les ions métalliques."
+      ],
+      "explication": "La soude, solution d'hydroxyde de sodium (Na⁺ + HO⁻), est le réactif des ions métalliques."
+    },
+    {
+      "reponse": "Nitrate d'argent",
+      "acceptees": ["Nitrate d'argent", "Le nitrate d'argent"],
+      "indices": [
+        "Je suis une solution qui sert de réactif.",
+        "Je forme un précipité blanc avec les ions chlorure.",
+        "Ma formule ionique est (Ag⁺ + NO₃⁻)."
+      ],
+      "explication": "Le nitrate d'argent (Ag⁺ + NO₃⁻) est le réactif des ions chlorure."
+    },
+    {
+      "reponse": "Ion chlorure",
+      "acceptees": ["Ion chlorure", "Ions chlorure", "Les ions chlorure", "Chlorure", "Cl⁻"],
+      "indices": [
+        "Je porte une charge négative.",
+        "On me trouve dans l'eau salée.",
+        "Un réactif à base d'argent me révèle par un précipité blanc qui noircit à la lumière."
+      ],
+      "explication": "Les ions chlorure Cl⁻ se reconnaissent au précipité blanc, noircissant à la lumière, formé avec le nitrate d'argent."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Réaliser un test d'identification",
+      "etapes": [
+        "On prélève un peu de solution dans un tube propre",
+        "On verse quelques gouttes de réactif dans le tube",
+        "On observe : précipité ou non, et sa couleur",
+        "On conclut sur l'ion présent dans la solution"
+      ]
+    },
+    {
+      "titre": "Identifier une solution inconnue",
+      "etapes": [
+        "On répartit la solution dans plusieurs tubes",
+        "On teste un tube à la soude et un autre au nitrate d'argent",
+        "On note la couleur du précipité de chaque tube",
+        "On rassemble les résultats pour nommer la solution"
+      ]
+    }
+  ]
+}

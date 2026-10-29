@@ -1,0 +1,182 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Les conquêtes de Rome",
+      "detail": "Les légions étendent l'Empire autour de la Méditerranée : conquête de la Gaule, chute de Vercingétorix, apogée sous Trajan.",
+      "cartes": [
+        "César conquiert la Gaule entre 58 et 51 av. J.-C.",
+        "Vercingétorix se rend à César après le siège d'Alésia",
+        "En 117, l'Empire atteint sa plus grande étendue",
+        "Les Romains appellent la Méditerranée « notre mer »",
+        "Des légions de soldats entraînés étendent l'Empire"
+      ]
+    },
+    {
+      "nom": "La paix romaine",
+      "detail": "Une longue période sans guerre à l'intérieur de l'Empire, dont les frontières sont fortifiées et gardées par les légions.",
+      "cartes": [
+        "Une frontière fortifiée gardée par les légions",
+        "Le mur d'Hadrien ferme le nord de la Bretagne",
+        "Pendant des siècles, plus de guerre à l'intérieur de l'Empire",
+        "Une période calme, du règne d'Auguste au IIe siècle",
+        "Le limes longe le Rhin et le Danube"
+      ]
+    },
+    {
+      "nom": "Une ville romaine",
+      "detail": "Une ville bâtie sur un plan régulier, avec son forum, ses thermes, son amphithéâtre et son aqueduc.",
+      "cartes": [
+        "Des rues régulières qui se croisent à angle droit",
+        "Le forum, place publique entourée de temples",
+        "Un amphithéâtre pour les combats de gladiateurs",
+        "Des thermes, c'est-à-dire des bains publics",
+        "Un aqueduc qui apporte l'eau dans la ville"
+      ]
+    },
+    {
+      "nom": "La romanisation",
+      "detail": "Les peuples conquis adoptent la langue, les dieux, le droit et le mode de vie des Romains.",
+      "cartes": [
+        "Les Gaulois parlent peu à peu le latin",
+        "Les Gallo-Romains mêlent traditions gauloises et romaines",
+        "L'édit de Caracalla étend la citoyenneté romaine en 212",
+        "Les habitants des provinces adoptent le mode de vie romain",
+        "Les Gaulois adoptent aussi les dieux romains"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "la romanisation de la Gaule",
+      "carte": "La conquête de la Gaule par Jules César",
+      "role": "cause",
+      "explication": "Après la conquête, les Gaulois sont intégrés à l'Empire et adoptent peu à peu le mode de vie romain."
+    },
+    {
+      "fait": "la romanisation de la Gaule",
+      "carte": "La paix à l'intérieur de l'Empire, qui permet les échanges, les routes et les villes",
+      "role": "cause",
+      "explication": "Sans guerre, la sécurité favorise le commerce et la construction de villes et de routes, qui diffusent le mode de vie romain."
+    },
+    {
+      "fait": "la romanisation de la Gaule",
+      "carte": "Les Gaulois adoptent peu à peu le latin",
+      "role": "consequence",
+      "explication": "La langue latine se diffuse dans les provinces conquises."
+    },
+    {
+      "fait": "la romanisation de la Gaule",
+      "carte": "Les habitants de la Gaule deviennent des Gallo-Romains",
+      "role": "consequence",
+      "explication": "Les Gaulois mêlent leurs traditions à celles des Romains : ce sont les Gallo-Romains."
+    },
+    {
+      "fait": "la romanisation de la Gaule",
+      "carte": "Le français vient du latin parlé en Gaule romaine",
+      "role": "consequence",
+      "explication": "Le mot latin « aqua » a donné « eau » : la langue des Romains a laissé des traces."
+    }
+  ],
+  "etiquettes": [
+    {
+      "consigne": "Quel monument romain le groupe en couleur désigne-t-il ?",
+      "texte": "Au centre de la ville, [la place publique entourée de temples] est le cœur de la vie des habitants.",
+      "choix": ["Le forum", "Les thermes", "L'amphithéâtre", "L'aqueduc"],
+      "bonne": 0,
+      "explication": "La place publique entourée de temples, au centre de la ville, est le forum."
+    },
+    {
+      "consigne": "Quel monument romain le groupe en couleur désigne-t-il ?",
+      "texte": "Les habitants vont se laver dans [les bains publics de la ville].",
+      "choix": ["Le forum", "Les thermes", "L'amphithéâtre", "L'aqueduc"],
+      "bonne": 1,
+      "explication": "Les bains publics des Romains sont les thermes."
+    },
+    {
+      "consigne": "Quel monument romain le groupe en couleur désigne-t-il ?",
+      "texte": "Les gladiateurs combattent dans [un grand édifice ovale].",
+      "choix": ["Le forum", "Les thermes", "L'amphithéâtre", "L'aqueduc"],
+      "bonne": 2,
+      "explication": "Les combats de gladiateurs ont lieu dans l'amphithéâtre."
+    },
+    {
+      "consigne": "Quel monument romain le groupe en couleur désigne-t-il ?",
+      "texte": "Le pont du Gard porte [un conduit qui apporte l'eau jusqu'à la ville].",
+      "choix": ["Le forum", "Les thermes", "L'amphithéâtre", "L'aqueduc"],
+      "bonne": 3,
+      "explication": "Un conduit qui apporte l'eau dans la ville est un aqueduc : le pont du Gard en porte un."
+    },
+    {
+      "consigne": "Quel monument romain le groupe en couleur désigne-t-il ?",
+      "texte": "Près des temples, [la grande place publique] est le centre d'une ville romaine.",
+      "choix": ["Le forum", "Les thermes", "L'amphithéâtre", "L'aqueduc"],
+      "bonne": 0,
+      "explication": "La place publique d'une ville romaine, entourée de temples, est le forum."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Vercingétorix",
+      "acceptees": ["Vercingétorix", "Vercingetorix", "Vercingétorix le Gaulois"],
+      "indices": [
+        "Je suis un chef gaulois.",
+        "Je suis le chef des Arvernes et j'unis plusieurs peuples gaulois.",
+        "Je me rends à César en 52 av. J.-C. après le siège d'Alésia."
+      ],
+      "explication": "Vercingétorix, chef des Arvernes, est vaincu par César à Alésia en 52 av. J.-C."
+    },
+    {
+      "reponse": "Jules César",
+      "acceptees": ["Jules César", "César", "Caesar"],
+      "indices": [
+        "Je suis un général romain.",
+        "Je conquiers la Gaule entre 58 et 51 av. J.-C.",
+        "Je raconte moi-même cette conquête dans la Guerre des Gaules."
+      ],
+      "explication": "Jules César conquiert la Gaule et en fait le récit dans la Guerre des Gaules."
+    },
+    {
+      "reponse": "Limes",
+      "acceptees": ["Limes", "Le limes"],
+      "indices": [
+        "Je suis une frontière.",
+        "Je suis gardé par les légions.",
+        "Je suis la frontière fortifiée de l'Empire romain, dont le mur d'Hadrien fait partie."
+      ],
+      "explication": "Le limes est la frontière fortifiée de l'Empire, gardée par les légions."
+    },
+    {
+      "reponse": "Gallo-Romains",
+      "acceptees": ["Gallo-Romains", "Les Gallo-Romains", "Gallo-Romain", "Un Gallo-Romain"],
+      "indices": [
+        "Nous vivons en Gaule, il y a près de deux mille ans.",
+        "Nous parlons latin et adoptons les villes romaines.",
+        "Nous mêlons traditions gauloises et romaines."
+      ],
+      "explication": "Les Gallo-Romains sont les habitants de la Gaule romanisée."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "De la conquête de la Gaule à l'édit de Caracalla",
+      "etapes": [
+        "Jules César commence la conquête de la Gaule",
+        "Vercingétorix est vaincu à Alésia",
+        "La paix romaine commence sous Auguste",
+        "L'Empire atteint sa plus grande étendue sous Trajan",
+        "Caracalla étend la citoyenneté à presque tous les hommes libres"
+      ]
+    },
+    {
+      "titre": "Montrer qu'un monument témoigne de la romanisation",
+      "etapes": [
+        "Situer le monument dans l'Empire",
+        "Décrire sa forme, son matériau et sa fonction",
+        "Montrer qu'il ressemble aux monuments de Rome",
+        "Conclure : les habitants adoptent le mode de vie romain"
+      ]
+    }
+  ]
+}

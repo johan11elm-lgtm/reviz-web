@@ -1,0 +1,199 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Le combustible",
+      "detail": "Ce qui brûle dans une combustion : le carbone, le bois, le gaz.",
+      "cartes": [
+        "Le charbon de bois d'un barbecue",
+        "Le bois d'un feu de camp",
+        "Le papier qui s'enflamme dans la cheminée",
+        "Le gaz d'une gazinière",
+        "L'essence versée dans le réservoir d'une voiture"
+      ]
+    },
+    {
+      "nom": "Le comburant",
+      "detail": "Ce qui entretient la combustion : le plus souvent le dioxygène de l'air.",
+      "cartes": [
+        "Le dioxygène contenu dans l'air",
+        "Ce qui manque quand un couvercle étouffe le feu",
+        "Les 21 % de l'air qui entretiennent la combustion",
+        "Ce qu'on apporte aux braises en soufflant dessus",
+        "Le gaz pur qui rend la combustion très vive"
+      ]
+    },
+    {
+      "nom": "La source de chaleur",
+      "detail": "Ce qui apporte la chaleur nécessaire pour démarrer la combustion.",
+      "cartes": [
+        "Une étincelle qui démarre le feu",
+        "Le frottement qui enflamme une allumette",
+        "Le rayon de soleil concentré par une loupe",
+        "Un fil électrique chauffé au rouge",
+        "La flamme d'un briquet qui allume le charbon"
+      ]
+    },
+    {
+      "nom": "Le produit formé",
+      "detail": "Le dioxyde de carbone, qui se forme quand le carbone brûle complètement.",
+      "cartes": [
+        "Le gaz qui trouble l'eau de chaux",
+        "Une molécule d'un atome de carbone et deux d'oxygène",
+        "L'espèce écrite à droite de la flèche de l'équation",
+        "Le gaz des combustions qui renforce l'effet de serre",
+        "Le gaz formé par la combustion complète du carbone"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "une combustion incomplète du carbone",
+      "carte": "Le dioxygène vient à manquer",
+      "role": "cause",
+      "explication": "Une combustion est incomplète quand le comburant ne suffit pas : c'est le manque de dioxygène qui la provoque."
+    },
+    {
+      "fait": "une combustion incomplète du carbone",
+      "carte": "Un barbecue est allumé dans une pièce fermée",
+      "role": "cause",
+      "explication": "Dans une pièce fermée, le dioxygène s'épuise, donc la combustion devient incomplète."
+    },
+    {
+      "fait": "une combustion incomplète du carbone",
+      "carte": "Du monoxyde de carbone, un gaz très toxique, se forme",
+      "role": "consequence",
+      "explication": "Quand le dioxygène manque, la combustion produit du monoxyde de carbone au lieu du seul dioxyde de carbone."
+    },
+    {
+      "fait": "le renforcement de l'effet de serre",
+      "carte": "Les combustions rejettent du dioxyde de carbone dans l'atmosphère",
+      "role": "cause",
+      "explication": "Le dioxyde de carbone rejeté par les combustions s'accumule dans l'atmosphère et renforce l'effet de serre."
+    },
+    {
+      "fait": "le renforcement de l'effet de serre",
+      "carte": "Le climat de la Terre se réchauffe",
+      "role": "consequence",
+      "explication": "Le renforcement de l'effet de serre est responsable du réchauffement climatique."
+    }
+  ],
+  "etiquettes": [
+    {
+      "consigne": "Quel rôle joue le passage en couleur dans la combustion ?",
+      "texte": "Un morceau de [charbon de bois] rougeoie dans le barbecue.",
+      "choix": ["Combustible", "Comburant", "Source de chaleur", "Produit"],
+      "bonne": 0,
+      "explication": "Le charbon de bois, presque entièrement du carbone, est ce qui brûle : c'est le combustible."
+    },
+    {
+      "consigne": "Quel rôle joue le passage en couleur dans la combustion ?",
+      "texte": "On souffle sur des braises : on leur apporte plus de [dioxygène] et elles rougeoient plus fort.",
+      "choix": ["Combustible", "Comburant", "Source de chaleur", "Produit"],
+      "bonne": 1,
+      "explication": "Le dioxygène entretient la combustion : c'est le comburant. Plus on en apporte, plus les braises rougeoient."
+    },
+    {
+      "consigne": "Quel rôle joue le passage en couleur dans la combustion ?",
+      "texte": "Pour démarrer le feu de cheminée, on approche [la flamme d'un briquet] des bûches.",
+      "choix": ["Combustible", "Comburant", "Source de chaleur", "Produit"],
+      "bonne": 2,
+      "explication": "La flamme du briquet apporte la chaleur qui démarre la combustion des bûches : c'est la source de chaleur."
+    },
+    {
+      "consigne": "Quel rôle joue le passage en couleur dans la combustion ?",
+      "texte": "Quand le carbone brûle, [le dioxyde de carbone] se forme et trouble l'eau de chaux.",
+      "choix": ["Combustible", "Comburant", "Source de chaleur", "Produit"],
+      "bonne": 3,
+      "explication": "Le dioxyde de carbone n'existait pas au départ : il se forme pendant la combustion, c'est le produit."
+    },
+    {
+      "consigne": "Quel rôle joue le passage en couleur dans la combustion ?",
+      "texte": "Dans un flacon de dioxygène pur, [le carbone] brûle avec des étincelles.",
+      "choix": ["Combustible", "Comburant", "Source de chaleur", "Produit"],
+      "bonne": 0,
+      "explication": "Le carbone est consommé en brûlant : c'est le combustible. Le dioxygène du flacon est le comburant."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Dioxygène",
+      "acceptees": ["Dioxygène", "Le dioxygène", "Oxygène", "O2", "O₂"],
+      "indices": [
+        "Je suis un gaz présent dans l'air que tu respires.",
+        "Je représente environ 21 % de l'air.",
+        "Quand on souffle sur des braises, c'est moi qu'on leur apporte pour les raviver."
+      ],
+      "explication": "Le dioxygène, de formule O₂, forme environ 21 % de l'air et entretient les combustions : c'est le comburant."
+    },
+    {
+      "reponse": "Monoxyde de carbone",
+      "acceptees": ["Monoxyde de carbone", "Le monoxyde de carbone", "Monoxyde", "CO"],
+      "indices": [
+        "Je suis un gaz qui se forme dans certaines combustions.",
+        "Je me forme quand le dioxygène manque.",
+        "Je suis très toxique : on n'allume jamais de barbecue dans un lieu fermé à cause de moi."
+      ],
+      "explication": "Le monoxyde de carbone (CO) est produit par une combustion incomplète et il est très toxique."
+    },
+    {
+      "reponse": "Eau de chaux",
+      "acceptees": ["Eau de chaux", "L'eau de chaux", "Chaux"],
+      "indices": [
+        "Je suis un liquide limpide que l'on garde dans un flacon.",
+        "Je change d'aspect : je deviens trouble et blanchâtre.",
+        "Je sers à prouver qu'il s'est formé du dioxyde de carbone."
+      ],
+      "explication": "L'eau de chaux, limpide, se trouble en présence de dioxyde de carbone : c'est le test de ce gaz."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "24 g de carbone réagissent complètement avec 64 g de dioxygène. Quelle masse de dioxyde de carbone se forme ?",
+      "reponse": 88,
+      "unite": "g",
+      "tolerance": 0,
+      "explication": "La masse se conserve : 24 + 64 = 88 g de dioxyde de carbone."
+    },
+    {
+      "question": "La combustion de 18 g de carbone forme 66 g de dioxyde de carbone. Quelle masse de dioxygène a été consommée ?",
+      "reponse": 48,
+      "unite": "g",
+      "tolerance": 0,
+      "explication": "m(carbone) + m(dioxygène) = m(dioxyde de carbone), donc m(dioxygène) = 66 − 18 = 48 g."
+    },
+    {
+      "question": "Selon l'équation C + O₂ → CO₂, combien de molécules de dioxygène faut-il pour brûler complètement 9 atomes de carbone ?",
+      "reponse": 9,
+      "unite": "molécules",
+      "tolerance": 0,
+      "explication": "Un atome de carbone réagit avec une molécule de dioxygène, donc 9 atomes de carbone demandent 9 molécules de dioxygène."
+    },
+    {
+      "question": "L'air contient 21 % de dioxygène en volume. Quel volume de dioxygène y a-t-il dans 200 L d'air ?",
+      "reponse": 42,
+      "unite": "L",
+      "tolerance": 0,
+      "explication": "21 % de 200 L : 200 × 21 ÷ 100 = 42 L de dioxygène."
+    },
+    {
+      "question": "3 g de carbone et 8 g de dioxygène sont entièrement consommés. Quelle masse de dioxyde de carbone se forme ?",
+      "reponse": 11,
+      "unite": "g",
+      "tolerance": 0,
+      "explication": "La masse se conserve : 3 + 8 = 11 g de dioxyde de carbone."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Prouver que la combustion du carbone forme du dioxyde de carbone",
+      "etapes": [
+        "On chauffe un morceau de charbon de bois jusqu'à ce qu'il rougeoie",
+        "On plonge le charbon incandescent dans un flacon de dioxygène",
+        "Le charbon brûle vivement et diminue peu à peu",
+        "Après la combustion, on verse de l'eau de chaux et on agite",
+        "L'eau de chaux se trouble : du dioxyde de carbone s'est formé"
+      ]
+    }
+  ]
+}

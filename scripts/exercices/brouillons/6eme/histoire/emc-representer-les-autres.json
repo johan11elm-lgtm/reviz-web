@@ -1,0 +1,115 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Le conseil municipal et le maire",
+      "detail": "Les élus de la commune : leur élection, leur mandat et ce dont ils s'occupent.",
+      "cartes": [
+        "Élus pour 6 ans par les habitants de la commune",
+        "Élit le maire après les élections",
+        "Entretenir les écoles maternelles et élémentaires",
+        "Tenir l'état civil : naissances, mariages, décès",
+        "Entretenir les rues de la commune"
+      ]
+    },
+    {
+      "nom": "Le rôle d'un délégué de classe",
+      "detail": "Ce que fait l'élève élu pour représenter ses camarades.",
+      "cartes": [
+        "Faire le lien entre élèves, professeurs et direction",
+        "Représenter toute la classe, pas seulement ses amis",
+        "Recueillir l'avis de ses camarades avant une réunion",
+        "Participer au conseil de classe avec les professeurs",
+        "Rendre compte fidèlement à la classe après la réunion"
+      ]
+    },
+    {
+      "nom": "Les étapes d'une élection",
+      "detail": "Les moments d'une élection, de la candidature à l'annonce des résultats.",
+      "cartes": [
+        "Présenter sa candidature",
+        "Défendre ses idées avec des arguments pendant la campagne",
+        "Voter en secret et en personne",
+        "Compter les bulletins lors du dépouillement",
+        "Annoncer les résultats"
+      ]
+    },
+    {
+      "nom": "Des demandes d'intérêt général",
+      "detail": "Des demandes qui profitent à toute la classe ou à tout le collège, et pas à une seule personne.",
+      "cartes": [
+        "Installer des bancs dans la cour pour tous les élèves",
+        "Demander un casier pour chaque élève de la classe",
+        "Proposer une action contre le gaspillage à la cantine",
+        "Demander du matériel de sport pour toute la classe",
+        "Réclamer un abri contre la pluie dans la cour"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [],
+  "devinettes": [
+    {
+      "reponse": "Délégué de classe",
+      "acceptees": ["Délégué de classe", "Déléguée de classe", "Délégué", "Déléguée", "Le délégué", "Délégué de la classe"],
+      "indices": [
+        "Les élèves m'élisent au début de l'année, au scrutin secret.",
+        "Je représente tous mes camarades, pas seulement mes amis.",
+        "Je fais le lien entre les élèves, les professeurs et la direction."
+      ],
+      "explication": "Le délégué de classe est élu par ses camarades pour les représenter et faire le lien avec les professeurs et la direction."
+    },
+    {
+      "reponse": "Maire",
+      "acceptees": ["Maire", "Le maire", "La maire"],
+      "indices": [
+        "Je travaille pour l'intérêt général d'une commune.",
+        "Je ne suis pas élu directement par les habitants.",
+        "C'est le conseil municipal qui m'élit."
+      ],
+      "explication": "Les habitants élisent le conseil municipal, et c'est le conseil municipal qui élit ensuite le maire."
+    },
+    {
+      "reponse": "Conseil municipal",
+      "acceptees": ["Conseil municipal", "Le conseil municipal"],
+      "indices": [
+        "Je suis une assemblée de la commune.",
+        "Les habitants m'élisent pour 6 ans, au suffrage universel direct.",
+        "J'élis ensuite le maire."
+      ],
+      "explication": "Le conseil municipal est élu pour 6 ans par les habitants de la commune et il élit le maire."
+    },
+    {
+      "reponse": "Intérêt général",
+      "acceptees": ["Intérêt général", "L'intérêt général", "Bien commun", "Le bien commun"],
+      "indices": [
+        "Je suis une idée essentielle pour un représentant.",
+        "Quand on me sert, on agit pour toute la communauté et pas pour soi.",
+        "Demander des bancs pour tous les élèves de la cour, c'est me servir."
+      ],
+      "explication": "L'intérêt général, c'est ce qui profite à toute la communauté ; un représentant doit le faire passer avant les demandes particulières."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Comment trier les demandes quand on est délégué",
+      "etapes": [
+        "Écouter la demande et chercher à qui elle profite",
+        "Vérifier que la demande ne nuit à personne et respecte le règlement",
+        "Défendre la demande avec des arguments si elle sert l'intérêt général",
+        "Rendre compte fidèlement à la classe après la réunion"
+      ]
+    },
+    {
+      "titre": "Le déroulement d'une élection",
+      "etapes": [
+        "Les candidats se présentent",
+        "Les candidats défendent leurs idées pendant la campagne",
+        "Les électeurs votent en secret",
+        "Les bulletins sont comptés lors du dépouillement",
+        "Les résultats sont annoncés"
+      ]
+    }
+  ]
+}

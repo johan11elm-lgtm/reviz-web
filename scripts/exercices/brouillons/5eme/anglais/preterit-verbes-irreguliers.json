@@ -1,0 +1,138 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Une phrase affirmative",
+      "detail": "Une phrase sans négation et sans question, où le verbe irrégulier prend sa forme propre du prétérit.",
+      "cartes": [
+        "We went to Scotland last summer",
+        "I saw a dolphin from the boat",
+        "She bought a souvenir for her mum",
+        "We ate fish and chips on the pier",
+        "My cousins came with us to Wales"
+      ]
+    },
+    {
+      "nom": "Une phrase négative",
+      "detail": "Une phrase avec didn't, suivi du verbe à la base verbale.",
+      "cartes": [
+        "We didn't go to the beach",
+        "I didn't sleep well in the tent",
+        "They didn't leave before noon",
+        "He didn't find his suitcase",
+        "She didn't write any postcards"
+      ]
+    },
+    {
+      "nom": "Une question sans mot interrogatif",
+      "detail": "Une question qui commence par did, à laquelle on répond par oui ou par non.",
+      "cartes": [
+        "Did you take photos?",
+        "Did she make new friends?",
+        "Did they swim in the sea?",
+        "Did you drink the local lemonade?",
+        "Did you get lost in the city?"
+      ]
+    },
+    {
+      "nom": "Une question avec un mot interrogatif",
+      "detail": "Une question qui commence par where, what, who ou how, comme pour demander des détails sur un voyage.",
+      "cartes": [
+        "Where did you go?",
+        "What did you eat?",
+        "Who did you meet?",
+        "How did you travel?",
+        "Who went with you?"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Quelle est la forme du verbe en couleur ?",
+      "texte": "Last summer, we [went] to Scotland.",
+      "choix": ["Prétérit irrégulier", "Prétérit régulier en -ed", "Base verbale après did ou didn't"],
+      "bonne": 0,
+      "explication": "« went » est la forme propre du prétérit de go, un verbe irrégulier."
+    },
+    {
+      "consigne": "Quelle est la forme du verbe en couleur ?",
+      "texte": "We didn't [go] to the beach.",
+      "choix": ["Prétérit irrégulier", "Prétérit régulier en -ed", "Base verbale après did ou didn't"],
+      "bonne": 2,
+      "explication": "Après didn't, le verbe reste à la base verbale : go, et non went."
+    },
+    {
+      "consigne": "Quelle est la forme du verbe en couleur ?",
+      "texte": "We [travelled] to London by train.",
+      "choix": ["Prétérit irrégulier", "Prétérit régulier en -ed", "Base verbale après did ou didn't"],
+      "bonne": 1,
+      "explication": "« travelled » est le verbe régulier travel avec la terminaison -ed du prétérit."
+    },
+    {
+      "consigne": "Quelle est la forme du verbe en couleur ?",
+      "texte": "Did you [take] photos in Dublin?",
+      "choix": ["Prétérit irrégulier", "Prétérit régulier en -ed", "Base verbale après did ou didn't"],
+      "bonne": 2,
+      "explication": "Après did, le verbe reste à la base verbale : take, et non took."
+    },
+    {
+      "consigne": "Quelle est la forme du verbe en couleur ?",
+      "texte": "I [saw] a dolphin from the boat.",
+      "choix": ["Prétérit irrégulier", "Prétérit régulier en -ed", "Base verbale après did ou didn't"],
+      "bonne": 0,
+      "explication": "« saw » est la forme propre du prétérit de see, un verbe irrégulier."
+    },
+    {
+      "consigne": "Quelle est la forme du verbe en couleur ?",
+      "texte": "We [stayed] in a hotel near the sea.",
+      "choix": ["Prétérit irrégulier", "Prétérit régulier en -ed", "Base verbale après did ou didn't"],
+      "bonne": 1,
+      "explication": "« stayed » est le verbe régulier stay avec la terminaison -ed du prétérit."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Went",
+      "acceptees": ["Went"],
+      "indices": [
+        "Je suis un verbe au prétérit.",
+        "Je suis irrégulier : on ne m'écrit pas avec -ed.",
+        "Je suis le prétérit de go, et je reste le même avec tous les sujets."
+      ],
+      "explication": "Went est le prétérit irrégulier de go : I went, she went, they went."
+    },
+    {
+      "reponse": "Souvenir",
+      "acceptees": ["Souvenir", "A souvenir"],
+      "indices": [
+        "Je suis un objet, pas un lieu.",
+        "On m'achète en vacances pour garder un souvenir du voyage.",
+        "Mon nom s'écrit exactement comme en français."
+      ],
+      "explication": "Souvenir s'écrit pareil en français et en anglais : She bought a souvenir."
+    },
+    {
+      "reponse": "On foot",
+      "acceptees": ["On foot", "Foot"],
+      "indices": [
+        "Je suis un moyen de se déplacer.",
+        "Tous les autres moyens de transport se disent avec by : by car, by train, by plane. Moi, non.",
+        "En français, je veux dire « à pied »."
+      ],
+      "explication": "À pied se dit on foot, alors que les autres transports prennent by : by train, by plane."
+    },
+    {
+      "reponse": "Holiday",
+      "acceptees": ["Holiday", "Holidays", "The holidays"],
+      "indices": [
+        "Je suis un nom anglais.",
+        "En français, je veux dire « vacances ».",
+        "Je suis la version britannique : les Américains disent vacation."
+      ],
+      "explication": "Holiday est le mot de l'anglais britannique pour les vacances ; l'anglais américain dit vacation."
+    }
+  ],
+  "calculs": [],
+  "etapes": []
+}

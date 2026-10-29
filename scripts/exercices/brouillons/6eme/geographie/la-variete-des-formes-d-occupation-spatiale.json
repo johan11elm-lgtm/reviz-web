@@ -1,0 +1,156 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Les villes et les mégapoles",
+      "detail": "Des espaces urbains très denses, qui concentrent des millions d'habitants et s'étendent sur les campagnes voisines.",
+      "cartes": [
+        "Tokyo, au Japon",
+        "Delhi, en Inde",
+        "Shanghai, en Chine",
+        "Des quartiers très denses où vivent des millions d'habitants",
+        "Des lotissements et des zones commerciales gagnent sur les champs"
+      ]
+    },
+    {
+      "nom": "Les campagnes très peuplées d'Asie",
+      "detail": "Les campagnes rizicoles d'Asie du Sud et de l'Est, où de nombreux paysans cultivent de petites parcelles.",
+      "cartes": [
+        "Le delta du Gange, au Bangladesh",
+        "Des rizières en terrasses sur les collines",
+        "De nombreux paysans sur de petites parcelles",
+        "Une culture qui demande beaucoup de travail à la main",
+        "Les deltas fertiles d'Asie du Sud et de l'Est"
+      ]
+    },
+    {
+      "nom": "Les campagnes mécanisées des pays riches",
+      "detail": "Les grandes plaines agricoles où de vastes exploitations n'ont besoin que de peu d'agriculteurs.",
+      "cartes": [
+        "La Beauce, en France",
+        "Le Middle West, aux États-Unis",
+        "Des machines qui remplacent les paysans",
+        "D'immenses champs de céréales à perte de vue",
+        "Quelques agriculteurs seulement pour une très vaste exploitation"
+      ]
+    },
+    {
+      "nom": "Les espaces presque vides",
+      "detail": "Les milieux difficiles où l'on habite très peu : déserts, froid, montagnes et forêts.",
+      "cartes": [
+        "Un désert immense et très aride",
+        "Une région où règne un froid extrême",
+        "De hautes montagnes à très forte altitude",
+        "Une immense forêt très dense",
+        "Des oasis ou de petits villages isolés"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "la culture du riz en Asie",
+      "carte": "Beaucoup de paysans cultivent de petites parcelles",
+      "role": "consequence",
+      "explication": "La riziculture demande beaucoup de main-d'œuvre : de nombreux paysans travaillent sur de petites parcelles."
+    },
+    {
+      "fait": "la culture du riz en Asie",
+      "carte": "Les campagnes rizicoles sont très peuplées",
+      "role": "consequence",
+      "explication": "Comme il faut beaucoup de bras pour repiquer et récolter, les deltas et les plaines rizicoles ont de fortes densités."
+    },
+    {
+      "fait": "le petit nombre d'agriculteurs dans les pays riches",
+      "carte": "Les machines remplacent les paysans",
+      "role": "cause",
+      "explication": "Dans les pays riches, les machines font le travail : il faut beaucoup moins de paysans."
+    },
+    {
+      "fait": "le petit nombre d'agriculteurs dans les pays riches",
+      "carte": "Les exploitations sont vastes et mécanisées",
+      "role": "cause",
+      "explication": "De vastes exploitations mécanisées n'ont besoin que de peu d'agriculteurs."
+    },
+    {
+      "fait": "le petit nombre d'agriculteurs dans les pays riches",
+      "carte": "Les grandes plaines agricoles sont peu peuplées",
+      "role": "consequence",
+      "explication": "Avec peu d'agriculteurs sur d'immenses surfaces, des plaines comme la Beauce ou le Middle West ont une faible densité."
+    }
+  ],
+  "etiquettes": [],
+  "devinettes": [
+    {
+      "reponse": "Une rizière",
+      "acceptees": [
+        "Rizière",
+        "Une rizière",
+        "La rizière",
+        "Les rizières",
+        "Des rizières"
+      ],
+      "indices": [
+        "Je suis un champ très particulier.",
+        "Je suis inondé d'eau.",
+        "En Asie, je suis souvent aménagé en terrasses sur les collines pour y cultiver une céréale."
+      ],
+      "explication": "Une rizière est un champ inondé où l'on cultive le riz, souvent en terrasses sur les collines."
+    },
+    {
+      "reponse": "L'habitat dispersé",
+      "acceptees": [
+        "Habitat dispersé",
+        "L'habitat dispersé",
+        "Un habitat dispersé",
+        "Dispersé"
+      ],
+      "indices": [
+        "Je suis une manière d'occuper l'espace.",
+        "Je suis fait de fermes ou de maisons isolées.",
+        "Contrairement au village, où les maisons sont rassemblées, je les éparpille dans les champs."
+      ],
+      "explication": "L'habitat dispersé est fait de fermes et de maisons isolées, à l'inverse de l'habitat groupé en villages."
+    },
+    {
+      "reponse": "La Beauce",
+      "acceptees": [
+        "Beauce",
+        "La Beauce"
+      ],
+      "indices": [
+        "Je suis une région agricole.",
+        "Mes immenses champs sont cultivés avec beaucoup de machines et peu d'agriculteurs.",
+        "Je suis une grande plaine de France, cousine du Middle West américain."
+      ],
+      "explication": "La Beauce, en France, est une grande plaine agricole mécanisée : immenses champs, peu d'agriculteurs."
+    },
+    {
+      "reponse": "Un croquis",
+      "acceptees": [
+        "Croquis",
+        "Un croquis",
+        "Le croquis",
+        "Croquis de synthèse",
+        "Un croquis de synthèse"
+      ],
+      "indices": [
+        "Je suis une représentation simplifiée d'un espace.",
+        "J'ai un titre, une légende et des figurés.",
+        "On me dessine soi-même sur un fond de carte pour faire la synthèse d'une leçon."
+      ],
+      "explication": "Un croquis est une représentation simplifiée d'un espace, avec un titre, une légende et des figurés."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Réaliser un croquis de synthèse",
+      "etapes": [
+        "Choisir le bon figuré : surface, point, ligne ou flèche",
+        "Placer les figurés sur le fond de carte",
+        "Nommer les lieux importants",
+        "Vérifier que chaque figuré apparaît dans la légende"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,148 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Proposer avec la base verbale",
+      "detail": "Let's, Shall we et Why don't we sont suivis de la base verbale, sans to.",
+      "cartes": [
+        "Let's visit the castle!",
+        "Shall we take the train?",
+        "Why don't we go to the museum?",
+        "Why don't we book a room in a youth hostel?",
+        "Let's have lunch in the old town"
+      ]
+    },
+    {
+      "nom": "Proposer avec How about ou What about",
+      "detail": "How about et What about sont suivis de V-ing ou d'un nom.",
+      "cartes": [
+        "How about going to the Highlands?",
+        "What about a picnic?",
+        "How about taking a guided tour?",
+        "What about visiting Arthur's Seat?",
+        "How about a trip to Glasgow?"
+      ]
+    },
+    {
+      "nom": "Accepter une proposition",
+      "detail": "Pour accepter, on montre son enthousiasme avec Good idea!, That sounds great! ou Why not?",
+      "cartes": [
+        "That sounds great!",
+        "Good idea! I love castles",
+        "Why not? It sounds fun",
+        "That's a great idea, thanks!",
+        "Yes, a picnic sounds lovely"
+      ]
+    },
+    {
+      "nom": "Refuser poliment",
+      "detail": "Pour refuser poliment, on adoucit la réponse : I'm not sure, Maybe another time, I'd rather + base verbale.",
+      "cartes": [
+        "I'm not sure about that",
+        "Maybe another time",
+        "I don't really feel like it",
+        "I'd rather stay at the hostel",
+        "I'd rather watch a film"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Quelle est la fonction de la réplique en couleur ?",
+      "texte": "— [Shall we take the train?] — Good idea!",
+      "choix": ["Proposer une activité", "Proposer son aide", "Accepter", "Refuser poliment"],
+      "bonne": 0,
+      "explication": "Shall we…? propose de faire quelque chose ensemble : c'est une proposition d'activité."
+    },
+    {
+      "consigne": "Quelle est la fonction de la réplique en couleur ?",
+      "texte": "— Shall we go to the festival? — [I'd rather stay here.]",
+      "choix": ["Proposer une activité", "Proposer son aide", "Accepter", "Refuser poliment"],
+      "bonne": 3,
+      "explication": "I'd rather + base verbale (je préférerais) est une façon polie de refuser."
+    },
+    {
+      "consigne": "Quelle est la fonction de la réplique en couleur ?",
+      "texte": "— How about a picnic? — [That sounds great!]",
+      "choix": ["Proposer une activité", "Proposer son aide", "Accepter", "Refuser poliment"],
+      "bonne": 2,
+      "explication": "That sounds great! (ça me semble super) accepte la proposition."
+    },
+    {
+      "consigne": "Quelle est la fonction de la réplique en couleur ?",
+      "texte": "— [Shall I book the tickets?] — Yes, please.",
+      "choix": ["Proposer une activité", "Proposer son aide", "Accepter", "Refuser poliment"],
+      "bonne": 1,
+      "explication": "Shall I…? propose de faire l'action soi-même : c'est une proposition d'aide."
+    },
+    {
+      "consigne": "Quelle est la fonction de la réplique en couleur ?",
+      "texte": "— Why don't we climb Arthur's Seat? — [Maybe another time.]",
+      "choix": ["Proposer une activité", "Proposer son aide", "Accepter", "Refuser poliment"],
+      "bonne": 3,
+      "explication": "Maybe another time (peut-être une autre fois) adoucit un refus."
+    },
+    {
+      "consigne": "Quelle est la fonction de la réplique en couleur ?",
+      "texte": "— What about a guided tour? — [Good idea!]",
+      "choix": ["Proposer une activité", "Proposer son aide", "Accepter", "Refuser poliment"],
+      "bonne": 2,
+      "explication": "Good idea! accepte la proposition de visite guidée."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Édimbourg",
+      "acceptees": ["Edimbourg", "Edinburgh"],
+      "indices": [
+        "Je suis une ville du nord du Royaume-Uni.",
+        "Un château domine mes toits depuis un rocher volcanique.",
+        "Je suis la capitale de l'Écosse."
+      ],
+      "explication": "Édimbourg (Edinburgh) est la capitale de l'Écosse ; son château domine la ville depuis un rocher volcanique."
+    },
+    {
+      "reponse": "Hogmanay",
+      "acceptees": ["Le Hogmanay"],
+      "indices": [
+        "Je suis une fête écossaise.",
+        "Je tombe en hiver, à la fin de l'année.",
+        "Je suis le Nouvel An écossais."
+      ],
+      "explication": "Hogmanay est le Nouvel An écossais."
+    },
+    {
+      "reponse": "Royal Mile",
+      "acceptees": ["The Royal Mile", "Le Royal Mile"],
+      "indices": [
+        "Je suis une rue.",
+        "Je traverse la vieille ville d'Édimbourg.",
+        "Les visiteurs me parcourent à pied : je suis la rue principale de la vieille ville."
+      ],
+      "explication": "Le Royal Mile est la rue principale de la vieille ville d'Édimbourg."
+    },
+    {
+      "reponse": "Bagpipes",
+      "acceptees": ["Bagpipe", "The bagpipes", "La cornemuse", "Cornemuse"],
+      "indices": [
+        "Je suis un instrument de musique.",
+        "Je suis un symbole de l'Écosse, comme le kilt et le tartan.",
+        "Je suis un instrument à vent doté d'un sac d'air."
+      ],
+      "explication": "Les bagpipes (cornemuse) sont un symbole de l'Écosse."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Organiser une sortie dans un dialogue",
+      "etapes": [
+        "Propose une activité : Shall we… ? / How about… ?",
+        "Réponds à la proposition : accepte ou refuse poliment",
+        "Propose ton aide : Shall I book the tickets ?",
+        "Conclus ensemble : OK, let's do that !"
+      ]
+    }
+  ]
+}

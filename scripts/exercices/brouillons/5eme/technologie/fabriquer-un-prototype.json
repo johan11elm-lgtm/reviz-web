@@ -1,0 +1,177 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Le rôle du prototype",
+      "detail": "Un premier exemplaire sert à essayer la solution et à la corriger avant de produire en série.",
+      "cartes": [
+        "Un premier exemplaire fabriqué avant la production",
+        "Une version d'essai souvent simplifiée de l'objet",
+        "Tester si la solution fonctionne vraiment",
+        "Corriger les défauts avant de lancer la série",
+        "Valider ou rejeter la solution choisie"
+      ]
+    },
+    {
+      "nom": "Les procédés de fabrication",
+      "detail": "Les techniques qui transforment un matériau en pièce : enlever, déformer ou ajouter de la matière.",
+      "cartes": [
+        "Découper une plaque de bois à la scie",
+        "Percer un trou dans une planche",
+        "Plier une tôle à angle droit",
+        "Déposer du plastique fondu couche par couche",
+        "Chauffer une feuille de plastique sur un moule"
+      ]
+    },
+    {
+      "nom": "La gamme et le contrôle",
+      "detail": "La méthode : suivre les étapes dans l'ordre, puis mesurer la pièce pour vérifier ses dimensions.",
+      "cartes": [
+        "Lister dans l'ordre les étapes à suivre",
+        "Noter pour chaque étape la machine et l'outil",
+        "Mesurer une longueur avec un pied à coulisse",
+        "Vérifier une dimension avec un réglet",
+        "Comparer la pièce aux dimensions prévues"
+      ]
+    },
+    {
+      "nom": "La sécurité à l'atelier",
+      "detail": "Les règles à respecter pour travailler sans danger avec les machines et les outils.",
+      "cartes": [
+        "Porter des lunettes de protection",
+        "Attacher ses cheveux longs avant de commencer",
+        "Remettre les protections de la machine en place",
+        "Ranger son poste de travail après usage",
+        "Obéir à un pictogramme rond à fond bleu"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Quel type de procédé le passage en couleur illustre-t-il ?",
+      "texte": "Pour faire un trou dans la planche, l'élève [perce le bois avec une perceuse].",
+      "choix": ["Enlèvement de matière", "Déformation", "Ajout de matière"],
+      "bonne": 0,
+      "explication": "Percer retire de la matière pour faire le trou : c'est un enlèvement de matière."
+    },
+    {
+      "consigne": "Quel type de procédé le passage en couleur illustre-t-il ?",
+      "texte": "Le professeur [chauffe une feuille de plastique qui se plaque ensuite sur un moule].",
+      "choix": ["Enlèvement de matière", "Déformation", "Ajout de matière"],
+      "bonne": 1,
+      "explication": "C'est du thermoformage : la feuille change de forme sans qu'on retire ni qu'on ajoute de matière."
+    },
+    {
+      "consigne": "Quel type de procédé le passage en couleur illustre-t-il ?",
+      "texte": "L'imprimante 3D [dépose du plastique fondu couche après couche].",
+      "choix": ["Enlèvement de matière", "Déformation", "Ajout de matière"],
+      "bonne": 2,
+      "explication": "L'imprimante construit la pièce en superposant des couches : c'est un ajout de matière."
+    },
+    {
+      "consigne": "Quel type de procédé le passage en couleur illustre-t-il ?",
+      "texte": "Dans l'atelier, [la tôle est pliée à angle droit].",
+      "choix": ["Enlèvement de matière", "Déformation", "Ajout de matière"],
+      "bonne": 1,
+      "explication": "Plier change la forme de la tôle sans rien enlever : c'est une déformation."
+    },
+    {
+      "consigne": "Quel type de procédé le passage en couleur illustre-t-il ?",
+      "texte": "Avant de peindre, l'élève [ponce les bords de la pièce].",
+      "choix": ["Enlèvement de matière", "Déformation", "Ajout de matière"],
+      "bonne": 0,
+      "explication": "Poncer retire un peu de matière : c'est un enlèvement de matière."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Prototype",
+      "acceptees": ["Un prototype", "Le prototype"],
+      "indices": [
+        "Je suis un objet fabriqué avant tous les autres.",
+        "Je permets de tester la solution avant la production.",
+        "Je suis le premier exemplaire d'un objet, souvent simplifié."
+      ],
+      "explication": "Le prototype est un premier exemplaire qui sert à tester et à corriger la solution avant la production."
+    },
+    {
+      "reponse": "Gamme de fabrication",
+      "acceptees": ["La gamme de fabrication", "Une gamme de fabrication", "Gamme", "La gamme"],
+      "indices": [
+        "Je suis un document utilisé à l'atelier.",
+        "Je liste les étapes dans l'ordre.",
+        "Pour chaque étape, je note la machine, l'outil et le contrôle."
+      ],
+      "explication": "La gamme de fabrication donne l'ordre des étapes, avec la machine, l'outil et le contrôle de chacune."
+    },
+    {
+      "reponse": "Thermoformage",
+      "acceptees": ["Le thermoformage"],
+      "indices": [
+        "Je suis un procédé de fabrication.",
+        "Je change la forme de la matière sans en retirer ni en ajouter.",
+        "Une feuille de plastique chauffée se plaque sur un moule."
+      ],
+      "explication": "Dans le thermoformage, la feuille de plastique chauffée prend la forme du moule en refroidissant."
+    },
+    {
+      "reponse": "Imprimante 3D",
+      "acceptees": ["Une imprimante 3D", "L'imprimante 3D", "Imprimante en 3D", "Imprimante"],
+      "indices": [
+        "Je suis une machine d'atelier.",
+        "Je fabrique une pièce sans rien enlever.",
+        "Je dépose du plastique fondu couche par couche."
+      ],
+      "explication": "L'imprimante 3D ajoute de la matière : elle dépose un fil de plastique fondu, couche par couche."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "Une pièce doit mesurer 50 mm. Après la découpe, on mesure 48 mm. Combien de millimètres manque-t-il ?",
+      "reponse": 2,
+      "unite": "mm",
+      "tolerance": 0,
+      "explication": "50 − 48 = 2. Il manque 2 mm : le contrôle montre un défaut à corriger."
+    },
+    {
+      "question": "Une barre de 240 mm est découpée en 4 morceaux de même longueur. On néglige la perte due à la scie. Quelle est la longueur d'un morceau ?",
+      "reponse": 60,
+      "unite": "mm",
+      "tolerance": 0,
+      "explication": "240 ÷ 4 = 60. Chaque morceau mesure 60 mm."
+    },
+    {
+      "question": "Une plaque mesure 350 mm de long. On y découpe 3 pièces de 80 mm chacune. On néglige la perte due à la scie. Quelle longueur de plaque reste-t-il ?",
+      "reponse": 110,
+      "unite": "mm",
+      "tolerance": 0,
+      "explication": "3 × 80 = 240, puis 350 − 240 = 110. Il reste 110 mm de plaque."
+    },
+    {
+      "question": "Une imprimante 3D dépose des couches de 0,2 mm d'épaisseur. Combien de couches faut-il pour une pièce de 9 mm de hauteur ?",
+      "reponse": 45,
+      "unite": "couches",
+      "tolerance": 0,
+      "explication": "9 ÷ 0,2 = 45. Il faut 45 couches, car 45 × 0,2 = 9."
+    },
+    {
+      "question": "Sur la gamme, une pièce doit mesurer 120 mm. Au contrôle, elle mesure 121,5 mm. De combien de millimètres est-elle trop longue ?",
+      "reponse": 1.5,
+      "unite": "mm",
+      "tolerance": 0,
+      "explication": "121,5 − 120 = 1,5. La pièce est trop longue de 1,5 mm."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "De la fabrication du prototype à sa validation",
+      "etapes": [
+        "On fabrique le premier exemplaire",
+        "On teste la solution",
+        "On corrige les défauts repérés",
+        "On valide la solution"
+      ]
+    }
+  ]
+}

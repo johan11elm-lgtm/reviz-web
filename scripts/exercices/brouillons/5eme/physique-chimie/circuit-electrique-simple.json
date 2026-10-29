@@ -1,0 +1,166 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Les générateurs",
+      "detail": "Les dipôles qui font circuler le courant dans le circuit.",
+      "cartes": [
+        "Une pile plate du commerce",
+        "La batterie d'une voiture",
+        "Une pile bouton de montre",
+        "La batterie d'une trottinette électrique",
+        "Les piles d'une télécommande"
+      ]
+    },
+    {
+      "nom": "Les récepteurs",
+      "detail": "Les dipôles qui reçoivent l'énergie électrique et la convertissent.",
+      "cartes": [
+        "L'ampoule d'une lampe de poche",
+        "Le moteur d'un ventilateur",
+        "Une DEL qui s'allume en vert",
+        "Le moteur d'un petit train électrique",
+        "Une lampe de bureau"
+      ]
+    },
+    {
+      "nom": "Les conducteurs",
+      "detail": "Les matériaux qui laissent passer le courant.",
+      "cartes": [
+        "Le cuivre d'un fil électrique",
+        "Un clou en fer",
+        "Une feuille d'aluminium",
+        "La mine de crayon en graphite",
+        "L'eau salée de la mer"
+      ]
+    },
+    {
+      "nom": "Les isolants",
+      "detail": "Les matériaux qui ne laissent pas passer le courant.",
+      "cartes": [
+        "Une règle en plastique",
+        "Une vitre en verre",
+        "Un manche en bois sec",
+        "Une gomme en caoutchouc",
+        "L'air d'une pièce"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "la lampe ne brille pas alors que la pile est neuve",
+      "carte": "Un fil de connexion est débranché",
+      "role": "cause",
+      "explication": "Le courant ne circule que dans une boucle fermée : un fil débranché coupe la boucle."
+    },
+    {
+      "fait": "la lampe ne brille pas alors que la pile est neuve",
+      "carte": "L'interrupteur du circuit est ouvert",
+      "role": "cause",
+      "explication": "Un interrupteur ouvert coupe la boucle : le courant ne circule pas et la lampe reste éteinte."
+    },
+    {
+      "fait": "on inverse les bornes de la pile",
+      "carte": "Le moteur du circuit tourne dans l'autre sens",
+      "role": "consequence",
+      "explication": "Le sens du courant s'inverse, donc le moteur tourne dans l'autre sens."
+    },
+    {
+      "fait": "on inverse les bornes de la pile",
+      "carte": "Le courant circule dans l'autre sens dans les fils",
+      "role": "consequence",
+      "explication": "Le courant sort par la borne + du générateur : en inversant les bornes, il change de sens dans le circuit."
+    }
+  ],
+  "etiquettes": [
+    {
+      "consigne": "Quel est le rôle de l'élément en couleur dans le circuit ?",
+      "texte": "Dans la lampe de poche, [l'ampoule] brille quand le courant la traverse.",
+      "choix": ["Générateur", "Récepteur", "Interrupteur", "Fil de connexion"],
+      "bonne": 1,
+      "explication": "L'ampoule reçoit l'énergie électrique et la convertit en lumière : c'est un récepteur."
+    },
+    {
+      "consigne": "Quel est le rôle de l'élément en couleur dans le circuit ?",
+      "texte": "Dans la lampe de poche, [le bouton] ouvre ou ferme le circuit.",
+      "choix": ["Générateur", "Récepteur", "Interrupteur", "Fil de connexion"],
+      "bonne": 2,
+      "explication": "Ce qui ouvre ou ferme la boucle est un interrupteur."
+    },
+    {
+      "consigne": "Quel est le rôle de l'élément en couleur dans le circuit ?",
+      "texte": "Dans ce jouet, [la pile] est reliée au moteur par deux fils.",
+      "choix": ["Générateur", "Récepteur", "Interrupteur", "Fil de connexion"],
+      "bonne": 0,
+      "explication": "La pile fait circuler le courant dans le circuit : c'est le générateur."
+    },
+    {
+      "consigne": "Quel est le rôle de l'élément en couleur dans le circuit ?",
+      "texte": "Dans ce montage, [un fil de cuivre] relie la borne + de la pile à la lampe.",
+      "choix": ["Générateur", "Récepteur", "Interrupteur", "Fil de connexion"],
+      "bonne": 3,
+      "explication": "Un fil de cuivre conduit le courant d'un dipôle à l'autre : c'est un fil de connexion."
+    },
+    {
+      "consigne": "Quel est le rôle de l'élément en couleur dans le circuit ?",
+      "texte": "Dans le ventilateur à piles, [le moteur] fait tourner les pales.",
+      "choix": ["Générateur", "Récepteur", "Interrupteur", "Fil de connexion"],
+      "bonne": 1,
+      "explication": "Le moteur reçoit l'énergie électrique et la convertit en mouvement : c'est un récepteur."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Générateur",
+      "acceptees": ["Un générateur", "Le générateur"],
+      "indices": [
+        "Je suis un dipôle d'un circuit.",
+        "Une pile ou une batterie est un exemple de moi.",
+        "Je fais circuler le courant dans les récepteurs."
+      ],
+      "explication": "Le générateur (pile, batterie) fait circuler le courant dans le circuit."
+    },
+    {
+      "reponse": "Interrupteur",
+      "acceptees": ["Un interrupteur", "L'interrupteur"],
+      "indices": [
+        "Je suis un élément d'un circuit électrique.",
+        "Fermé, je laisse passer le courant.",
+        "Ouvert, je coupe la boucle et la lampe s'éteint."
+      ],
+      "explication": "L'interrupteur ouvre ou ferme le circuit : ouvert, il coupe la boucle."
+    },
+    {
+      "reponse": "Conducteur",
+      "acceptees": ["Un conducteur", "Le conducteur", "Conducteur électrique"],
+      "indices": [
+        "Je suis un matériau.",
+        "Le cuivre, le fer et le graphite sont des exemples de moi.",
+        "Je laisse passer le courant électrique."
+      ],
+      "explication": "Un conducteur est un matériau qui laisse passer le courant, comme les métaux et le graphite."
+    },
+    {
+      "reponse": "Isolant",
+      "acceptees": ["Un isolant", "L'isolant", "Isolant électrique"],
+      "indices": [
+        "Je suis un matériau.",
+        "Le plastique, le verre et le bois sec sont des exemples de moi.",
+        "Je ne laisse pas passer le courant électrique."
+      ],
+      "explication": "Un isolant ne laisse pas passer le courant : plastique, verre, bois sec, caoutchouc, air."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Le trajet du courant dans un circuit avec une pile et une lampe",
+      "etapes": [
+        "Le courant sort par la borne + de la pile",
+        "Le courant suit un fil jusqu'à la lampe",
+        "Le courant traverse la lampe, qui brille",
+        "Le courant revient à la borne − de la pile par l'autre fil"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,131 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Les étapes de la construction",
+      "detail": "Les grands moments de l'histoire de l'Union européenne, de 1951 au Brexit.",
+      "cartes": [
+        "En 1951, six pays mettent en commun charbon et acier",
+        "Le traité de Rome crée la Communauté économique européenne",
+        "Le traité de Maastricht crée l'Union européenne",
+        "La Croatie adhère à l'UE en 2013",
+        "Le Royaume-Uni quitte l'UE en 2020"
+      ]
+    },
+    {
+      "nom": "Les États membres et leurs limites",
+      "detail": "Le nombre d'États, d'habitants et les ensembles qui ne coïncident pas : UE, zone euro et espace Schengen.",
+      "cartes": [
+        "Un ensemble de 27 États membres",
+        "Environ 450 millions d'habitants",
+        "La Suisse est dans Schengen mais pas dans l'UE",
+        "La Pologne est dans l'UE mais n'utilise pas l'euro",
+        "21 pays utilisent l'euro comme monnaie"
+      ]
+    },
+    {
+      "nom": "Les institutions européennes",
+      "detail": "Les organes qui proposent, votent et appliquent les décisions, chacun avec son siège.",
+      "cartes": [
+        "Le Parlement européen siège à Strasbourg",
+        "La Commission européenne propose les lois depuis Bruxelles",
+        "Le Conseil européen réunit les chefs d'État et de gouvernement",
+        "La Banque centrale européenne est à Francfort",
+        "La Cour de justice siège à Luxembourg"
+      ]
+    },
+    {
+      "nom": "Ce que l'UE change au quotidien",
+      "detail": "Les droits et les habitudes des habitants de l'Union : voter, étudier, travailler, voyager.",
+      "cartes": [
+        "Un Français installé en Espagne vote aux municipales",
+        "Un étudiant passe un semestre à l'étranger grâce à Erasmus",
+        "On franchit les frontières intérieures sans contrôle systématique",
+        "Un citoyen peut travailler dans un autre État membre",
+        "Les Français élisent leurs députés européens"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "la citoyenneté européenne",
+      "carte": "Le traité de Maastricht de 1992",
+      "role": "cause",
+      "explication": "Le traité de Maastricht crée l'Union européenne et la citoyenneté européenne en 1992."
+    },
+    {
+      "fait": "la citoyenneté européenne",
+      "carte": "Avoir la nationalité d'un État membre",
+      "role": "cause",
+      "explication": "Tout citoyen d'un État membre est citoyen européen."
+    },
+    {
+      "fait": "la citoyenneté européenne",
+      "carte": "Un Français installé en Espagne peut voter aux municipales",
+      "role": "consequence",
+      "explication": "Un citoyen européen vote aux élections municipales dans son pays de résidence."
+    },
+    {
+      "fait": "la citoyenneté européenne",
+      "carte": "Le droit d'étudier et de travailler dans un autre État de l'UE",
+      "role": "consequence",
+      "explication": "La citoyenneté européenne donne le droit de circuler, d'étudier et de travailler dans l'UE."
+    }
+  ],
+  "etiquettes": [],
+  "devinettes": [
+    {
+      "reponse": "Traité de Rome",
+      "acceptees": ["Le traité de Rome", "Rome"],
+      "indices": [
+        "Je suis un accord signé entre six États européens.",
+        "Mon nom est celui d'une capitale.",
+        "Je crée la Communauté économique européenne en 1957."
+      ],
+      "explication": "Le traité de Rome (1957) crée la CEE, fondée par six pays dont la France."
+    },
+    {
+      "reponse": "Schengen",
+      "acceptees": ["L'espace Schengen", "Espace Schengen"],
+      "indices": [
+        "Je ne suis pas la même chose que l'UE.",
+        "Mes accords datent de 1985 et sont appliqués à partir de 1995.",
+        "Dans mes limites, on franchit les frontières intérieures sans contrôle systématique, y compris en Suisse et en Norvège."
+      ],
+      "explication": "L'espace Schengen supprime en principe les contrôles aux frontières intérieures ; il comprend aussi des pays hors de l'UE, comme la Suisse et la Norvège."
+    },
+    {
+      "reponse": "Parlement européen",
+      "acceptees": ["Le Parlement européen", "Parlement de l'UE"],
+      "indices": [
+        "Je suis une institution de l'UE.",
+        "Je siège à Strasbourg.",
+        "Mes membres sont élus au suffrage universel direct depuis 1979."
+      ],
+      "explication": "Le Parlement européen siège à Strasbourg et est élu au suffrage universel direct depuis 1979."
+    },
+    {
+      "reponse": "Erasmus",
+      "acceptees": ["Le programme Erasmus", "Erasmus+"],
+      "indices": [
+        "Je suis un programme.",
+        "J'ai été créé en 1987.",
+        "Grâce à moi, un étudiant peut passer un semestre à l'étranger."
+      ],
+      "explication": "Le programme Erasmus, créé en 1987, permet à un étudiant de passer un semestre dans un autre pays européen."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Les étapes de la construction européenne",
+      "etapes": [
+        "Six pays mettent en commun le charbon et l'acier",
+        "Le traité de Rome crée la Communauté économique européenne",
+        "Le traité de Maastricht crée l'Union européenne",
+        "La Croatie rejoint l'Union européenne",
+        "Le Royaume-Uni quitte l'Union européenne"
+      ]
+    }
+  ]
+}

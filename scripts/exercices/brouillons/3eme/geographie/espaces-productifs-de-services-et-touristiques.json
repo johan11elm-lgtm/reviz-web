@@ -1,0 +1,162 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Le secteur tertiaire en général",
+      "detail": "Les activités de services de tous les jours, qui fournissent la majorité des emplois.",
+      "cartes": [
+        "Environ 3 emplois sur 4 en France",
+        "Des services présents partout où vivent des habitants",
+        "Des plateformes où se croisent route, rail, fleuve ou avion",
+        "Le transport et le stockage des marchandises",
+        "Des activités comme le commerce, la santé et l'éducation"
+      ]
+    },
+    {
+      "nom": "Les services très qualifiés",
+      "detail": "Le tertiaire supérieur, concentré dans les métropoles et surtout à Paris.",
+      "cartes": [
+        "La Défense, à l'ouest de Paris",
+        "Des sièges sociaux de grandes entreprises",
+        "La finance, la recherche et le conseil",
+        "Des métropoles avec universités et liaisons rapides",
+        "Des actifs très qualifiés, surtout à Paris"
+      ]
+    },
+    {
+      "nom": "Les grands espaces touristiques",
+      "detail": "Les lieux de France qui attirent des millions de visiteurs : littoraux, montagnes, villes et parcs.",
+      "cartes": [
+        "Les plages de la Côte d'Azur",
+        "Les stations de sports d'hiver des Alpes",
+        "Les châteaux de la Loire",
+        "Le parc de loisirs Disneyland Paris",
+        "Paris et son patrimoine"
+      ]
+    },
+    {
+      "nom": "Les effets et les défis du tourisme",
+      "detail": "Les problèmes que posent l'afflux de visiteurs et le changement climatique aux territoires touristiques.",
+      "cartes": [
+        "Des emplois souvent saisonniers",
+        "Des lieux saturés de visiteurs",
+        "Des prix de logements qui montent",
+        "Un enneigement qui diminue avec le réchauffement",
+        "Des pressions sur l'environnement"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "la concentration des services très qualifiés dans les métropoles",
+      "carte": "Une main-d'œuvre très qualifiée sur place",
+      "role": "cause",
+      "explication": "Les métropoles offrent la main-d'œuvre qualifiée dont ces services ont besoin."
+    },
+    {
+      "fait": "la concentration des services très qualifiés dans les métropoles",
+      "carte": "Des universités dans les métropoles",
+      "role": "cause",
+      "explication": "Les universités forment les actifs très qualifiés que recherchent ces services."
+    },
+    {
+      "fait": "la concentration des services très qualifiés dans les métropoles",
+      "carte": "Des liaisons rapides avec le reste du monde",
+      "role": "cause",
+      "explication": "Aéroports et lignes à grande vitesse attirent les sièges sociaux et la finance."
+    },
+    {
+      "fait": "le réchauffement climatique",
+      "carte": "Moins de neige en moyenne montagne",
+      "role": "consequence",
+      "explication": "Le réchauffement climatique réduit l'enneigement, surtout en moyenne montagne."
+    },
+    {
+      "fait": "le réchauffement climatique",
+      "carte": "Des stations qui développent la randonnée et le VTT en été",
+      "role": "consequence",
+      "explication": "Faute de neige, des stations de moyenne montagne développent des activités d'été."
+    }
+  ],
+  "etiquettes": [
+    {
+      "consigne": "Quelle activité le passage en couleur illustre-t-il ?",
+      "texte": "[Une boulangerie] ouvre au centre du village pour ses habitants.",
+      "choix": ["Service de proximité", "Tertiaire supérieur", "Logistique", "Tourisme"],
+      "bonne": 0,
+      "explication": "Une boulangerie est un service de proximité : on la trouve partout où vivent des habitants."
+    },
+    {
+      "consigne": "Quelle activité le passage en couleur illustre-t-il ?",
+      "texte": "À La Défense, [une banque installe son siège social dans une tour de bureaux].",
+      "choix": ["Service de proximité", "Tertiaire supérieur", "Logistique", "Tourisme"],
+      "bonne": 1,
+      "explication": "La finance et les sièges sociaux relèvent du tertiaire supérieur, concentré dans les quartiers d'affaires."
+    },
+    {
+      "consigne": "Quelle activité le passage en couleur illustre-t-il ?",
+      "texte": "Sur la plateforme, [des conteneurs passent du train au camion avant de repartir par le fleuve].",
+      "choix": ["Service de proximité", "Tertiaire supérieur", "Logistique", "Tourisme"],
+      "bonne": 2,
+      "explication": "Transférer des marchandises entre plusieurs modes de transport, c'est la logistique d'une plateforme multimodale."
+    },
+    {
+      "consigne": "Quelle activité le passage en couleur illustre-t-il ?",
+      "texte": "[Une famille passe une semaine de vacances dans une station de ski des Alpes].",
+      "choix": ["Service de proximité", "Tertiaire supérieur", "Logistique", "Tourisme"],
+      "bonne": 3,
+      "explication": "Se déplacer au moins une nuit hors de chez soi pour ses loisirs, c'est faire du tourisme."
+    },
+    {
+      "consigne": "Quelle activité le passage en couleur illustre-t-il ?",
+      "texte": "Dans une métropole, [un laboratoire de recherche emploie des chercheurs très qualifiés].",
+      "choix": ["Service de proximité", "Tertiaire supérieur", "Logistique", "Tourisme"],
+      "bonne": 1,
+      "explication": "La recherche est un service très qualifié du tertiaire supérieur, installé dans les métropoles."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "La Défense",
+      "acceptees": ["La Défense", "Défense", "Paris La Défense"],
+      "indices": [
+        "Je suis un quartier d'affaires.",
+        "Je suis juste à l'ouest de Paris, relié au centre par le métro et le RER.",
+        "Mes tours de bureaux accueillent des sièges sociaux : je suis le premier quartier d'affaires d'Europe continentale."
+      ],
+      "explication": "La Défense est le premier quartier d'affaires d'Europe continentale, juste à l'ouest de Paris."
+    },
+    {
+      "reponse": "Le surtourisme",
+      "acceptees": ["Surtourisme", "Le surtourisme", "Sur-tourisme", "Le sur-tourisme", "Tourisme de masse", "Le tourisme de masse"],
+      "indices": [
+        "Je suis un excès.",
+        "Je sature certains lieux très visités.",
+        "Je fais monter les prix des logements, car on les loue aux visiteurs."
+      ],
+      "explication": "Le surtourisme est un excès de touristes dans un même lieu : il sature les sites et fait monter les prix des logements."
+    },
+    {
+      "reponse": "Une plateforme multimodale",
+      "acceptees": ["Plateforme multimodale", "Une plateforme multimodale", "Plateforme logistique", "Une plateforme logistique"],
+      "indices": [
+        "Je suis un lieu de la logistique.",
+        "Des marchandises y passent d'un moyen de transport à un autre.",
+        "Route, rail, fleuve ou avion s'y croisent."
+      ],
+      "explication": "Une plateforme multimodale est un lieu où se croisent plusieurs modes de transport, au cœur de la logistique."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Réaliser un croquis des espaces touristiques",
+      "etapes": [
+        "D'abord, colore les grands espaces touristiques sur le fond de carte",
+        "Ensuite, place des figurés ponctuels pour les grands foyers",
+        "Puis, trace des flèches pour les flux de touristes",
+        "Enfin, range la légende en parties et donne un titre"
+      ]
+    }
+  ]
+}

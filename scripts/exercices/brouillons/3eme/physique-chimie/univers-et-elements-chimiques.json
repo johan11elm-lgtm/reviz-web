@@ -1,0 +1,187 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Les planètes telluriques",
+      "detail": "Les quatre planètes rocheuses, les plus proches du Soleil : Mercure, Vénus, la Terre et Mars.",
+      "cartes": [
+        "Mercure, la plus proche du Soleil",
+        "Vénus, entre Mercure et la Terre",
+        "La Terre, troisième en partant du Soleil",
+        "Mars, la dernière avant Jupiter",
+        "Les quatre planètes les plus proches du Soleil"
+      ]
+    },
+    {
+      "nom": "Les planètes gazeuses",
+      "detail": "Les quatre planètes géantes, les plus éloignées du Soleil : Jupiter, Saturne, Uranus et Neptune.",
+      "cartes": [
+        "Jupiter, juste après Mars",
+        "Saturne, entre Jupiter et Uranus",
+        "Uranus, entre Saturne et Neptune",
+        "Neptune, la plus éloignée du Soleil",
+        "Les quatre planètes les plus éloignées du Soleil"
+      ]
+    },
+    {
+      "nom": "Les étoiles",
+      "detail": "Des astres qui fabriquent des éléments par fusion nucléaire, comme le Soleil.",
+      "cartes": [
+        "Le Soleil, au centre du système solaire",
+        "Proxima du Centaure, à 4,2 années-lumière de nous",
+        "Au cœur de chacune, des noyaux fusionnent",
+        "Elles fabriquent le carbone, l'oxygène et le fer",
+        "Quand elles sont très massives, elles explosent en supernovas"
+      ]
+    },
+    {
+      "nom": "Les galaxies",
+      "detail": "De gigantesques ensembles d'étoiles, de gaz et de poussières, comme la Voie lactée.",
+      "cartes": [
+        "La Voie lactée est celle qui contient le Soleil",
+        "On en compte des centaines de milliards dans l'Univers observable",
+        "Ensemble gigantesque d'étoiles, de gaz et de poussières",
+        "La nôtre mesure environ 100 000 années-lumière de diamètre",
+        "Elle rassemble plus de 100 milliards d'étoiles"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Quelle grandeur le groupe en couleur exprime-t-il ?",
+      "texte": "Proxima du Centaure est à 4,2 [années-lumière] de nous.",
+      "choix": ["Une durée", "Une distance", "Une vitesse"],
+      "bonne": 1,
+      "explication": "Malgré son nom, l'année-lumière est une unité de distance : celle que parcourt la lumière en un an."
+    },
+    {
+      "consigne": "Quelle grandeur le groupe en couleur exprime-t-il ?",
+      "texte": "Dans le vide, la lumière se propage à [300 000 km/s].",
+      "choix": ["Une durée", "Une distance", "Une vitesse"],
+      "bonne": 2,
+      "explication": "Des kilomètres par seconde expriment une vitesse : la distance parcourue en une seconde."
+    },
+    {
+      "consigne": "Quelle grandeur le groupe en couleur exprime-t-il ?",
+      "texte": "L'Univers est né il y a [13,8 milliards d'années].",
+      "choix": ["Une durée", "Une distance", "Une vitesse"],
+      "bonne": 0,
+      "explication": "Des années mesurent une durée : le temps écoulé depuis le Big Bang."
+    },
+    {
+      "consigne": "Quelle grandeur le groupe en couleur exprime-t-il ?",
+      "texte": "La lumière du Soleil met [environ 8 minutes] à nous parvenir.",
+      "choix": ["Une durée", "Une distance", "Une vitesse"],
+      "bonne": 0,
+      "explication": "Des minutes mesurent une durée : le temps que met la lumière pour venir du Soleil."
+    },
+    {
+      "consigne": "Quelle grandeur le groupe en couleur exprime-t-il ?",
+      "texte": "Le Soleil est situé à [150 millions de km] de la Terre.",
+      "choix": ["Une durée", "Une distance", "Une vitesse"],
+      "bonne": 1,
+      "explication": "Des kilomètres mesurent une distance : celle qui sépare la Terre du Soleil."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Année-lumière",
+      "acceptees": ["Année-lumière", "Une année-lumière", "Année lumière", "a.l."],
+      "indices": [
+        "Mon nom est trompeur : il parle de temps.",
+        "Pourtant, je suis une unité de distance.",
+        "Je vaux environ 9,46 × 10¹⁵ m."
+      ],
+      "explication": "L'année-lumière est la distance parcourue par la lumière dans le vide en un an, environ 9,46 × 10¹⁵ m."
+    },
+    {
+      "reponse": "Big Bang",
+      "acceptees": ["Big Bang", "Le Big Bang"],
+      "indices": [
+        "Je suis un modèle scientifique.",
+        "Je décris la naissance de l'Univers, qui est en expansion depuis.",
+        "J'ai eu lieu il y a 13,8 milliards d'années, à partir d'un état très dense et chaud."
+      ],
+      "explication": "Le Big Bang est le modèle selon lequel l'Univers est né il y a environ 13,8 milliards d'années."
+    },
+    {
+      "reponse": "Voie lactée",
+      "acceptees": ["Voie lactée", "La Voie lactée", "Notre galaxie"],
+      "indices": [
+        "Je suis un immense ensemble d'étoiles, de gaz et de poussières.",
+        "Je compte plus de 100 milliards d'étoiles.",
+        "Le Soleil et la Terre font partie de moi : je suis notre galaxie."
+      ],
+      "explication": "La Voie lactée est la galaxie qui contient le Soleil et plus de 100 milliards d'étoiles."
+    },
+    {
+      "reponse": "Fusion nucléaire",
+      "acceptees": ["Fusion nucléaire", "La fusion nucléaire", "Fusion"],
+      "indices": [
+        "Je réunis des noyaux légers pour en former de plus lourds.",
+        "Je me produis au cœur des étoiles.",
+        "Dans le Soleil, c'est moi qui transforme l'hydrogène en hélium."
+      ],
+      "explication": "La fusion nucléaire réunit des noyaux légers en noyaux plus lourds, au cœur des étoiles."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "La lumière se propage à 300 000 km/s. Le Soleil est à 150 000 000 km de la Terre. Combien de secondes sa lumière met-elle pour nous parvenir ?",
+      "reponse": 500,
+      "unite": "s",
+      "tolerance": 0,
+      "explication": "t = d ÷ c = 150 000 000 ÷ 300 000 = 500 s, soit environ 8 minutes."
+    },
+    {
+      "question": "Un astre est situé à 750 000 000 km de nous. La lumière va à 300 000 km/s. Combien de minutes met-elle pour nous parvenir ? Arrondis à l'unité.",
+      "reponse": 42,
+      "unite": "min",
+      "tolerance": 0,
+      "explication": "t = d ÷ c = 750 000 000 ÷ 300 000 = 2 500 s. Puis 2 500 ÷ 60 ≈ 41,7 min, soit 42 min."
+    },
+    {
+      "question": "L'Univers a 13,8 milliards d'années et le système solaire 4,6 milliards d'années. Combien de milliards d'années s'écoulent entre la naissance de l'Univers et celle du système solaire ?",
+      "reponse": 9.2,
+      "unite": "milliards d'années",
+      "tolerance": 0,
+      "explication": "13,8 − 4,6 = 9,2 milliards d'années."
+    },
+    {
+      "question": "La lumière se propage à 300 000 km/s. Combien de millions de kilomètres parcourt-elle en 20 secondes ?",
+      "reponse": 6,
+      "unite": "millions de km",
+      "tolerance": 0,
+      "explication": "d = v × t = 300 000 × 20 = 6 000 000 km, soit 6 millions de kilomètres."
+    },
+    {
+      "question": "Une distance de 10¹⁶ m est 10ˣ fois plus grande qu'une distance de 10¹¹ m. Combien vaut x ?",
+      "reponse": 5,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "10¹⁶ ÷ 10¹¹ = 10¹⁶⁻¹¹ = 10⁵, donc x = 5 : c'est 100 000 fois plus grand."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Du Big Bang aux poussières d'étoiles",
+      "etapes": [
+        "L'Univers naît d'un état extrêmement dense et chaud",
+        "Les premiers noyaux, surtout d'hydrogène et d'hélium, se forment",
+        "Au cœur des étoiles, la fusion nucléaire fabrique des éléments plus lourds",
+        "Des étoiles massives explosent et dispersent les éléments dans l'espace",
+        "Dans les nébuleuses naissent de nouvelles étoiles et planètes"
+      ]
+    },
+    {
+      "titre": "Calculer la durée du trajet de la lumière",
+      "etapes": [
+        "Écris la distance d en mètres, en notation scientifique",
+        "Utilise t = d ÷ c, avec c = 3,0 × 10⁸ m/s",
+        "Divise les nombres, puis les puissances de 10",
+        "Convertis les secondes en minutes si la durée est grande"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,208 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Les forces de sécurité intérieure",
+      "detail": "Police, gendarmerie et douanes protègent les habitants au quotidien et luttent contre les délits.",
+      "cartes": [
+        "Contrôler les marchandises qui passent la frontière",
+        "Enquêter sur un cambriolage dans un village",
+        "Surveiller la commune sous l'autorité du maire",
+        "Assurer la sécurité dans les grandes villes",
+        "Rechercher les auteurs de délits et les arrêter"
+      ]
+    },
+    {
+      "nom": "La sécurité civile",
+      "detail": "Les sapeurs-pompiers, professionnels ou volontaires, secourent la population lors des accidents et des catastrophes.",
+      "cartes": [
+        "Lutter contre un incendie de forêt en été",
+        "Secourir les victimes d'un accident",
+        "Protéger les personnes et les biens lors d'une catastrophe",
+        "Porter secours, qu'on soit professionnel ou volontaire",
+        "Intervenir après une inondation pour sauver des habitants"
+      ]
+    },
+    {
+      "nom": "Les armées",
+      "detail": "L'armée de Terre, la Marine et l'armée de l'Air défendent la souveraineté de la France, sous l'autorité du président.",
+      "cartes": [
+        "Défendre la souveraineté de la France sur son territoire",
+        "Dissuader toute attaque grâce à l'arme nucléaire",
+        "Maintenir la paix à l'étranger avec l'ONU",
+        "L'armée de Terre, la Marine nationale et l'armée de l'Air",
+        "Avoir pour chef le président de la République"
+      ]
+    },
+    {
+      "nom": "Face aux nouvelles menaces",
+      "detail": "Les services qui répondent aux dangers récents : manipulation de l'information, attaques informatiques, atteintes à la nature.",
+      "cartes": [
+        "Repérer de faux comptes créés à l'étranger",
+        "Protéger les réseaux informatiques de l'État contre les attaques",
+        "Veiller sur les rivières et les espèces animales menacées",
+        "Détecter une fausse vidéo diffusée pendant une élection"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "la création de VIGINUM en 2021",
+      "carte": "Les manipulations de l'information venues de l'étranger menacent l'opinion",
+      "role": "cause",
+      "explication": "La guerre informationnelle utilise de fausses informations en ligne : l'État crée VIGINUM pour y répondre."
+    },
+    {
+      "fait": "la création de VIGINUM en 2021",
+      "carte": "Les ingérences numériques étrangères peuvent être détectées",
+      "role": "consequence",
+      "explication": "VIGINUM a pour mission de détecter les ingérences numériques venues de l'étranger."
+    },
+    {
+      "fait": "la création du plan Vigipirate en 1978",
+      "carte": "La menace terroriste",
+      "role": "cause",
+      "explication": "Face à la menace terroriste, l'État crée le plan Vigipirate."
+    },
+    {
+      "fait": "la création du plan Vigipirate en 1978",
+      "carte": "Une vigilance renforcée aux abords des écoles",
+      "role": "consequence",
+      "explication": "Le plan Vigipirate organise la vigilance et la prévention, par exemple aux abords des écoles."
+    }
+  ],
+  "etiquettes": [
+    {
+      "consigne": "Quel service doit intervenir pour le danger en couleur ?",
+      "texte": "Dans un village, [un cambriolage a lieu en pleine nuit].",
+      "choix": [
+        "Police ou gendarmerie",
+        "Sécurité civile",
+        "Armées",
+        "VIGINUM"
+      ],
+      "bonne": 0,
+      "explication": "Un cambriolage est un délit : la gendarmerie, qui agit surtout dans les villages, enquête."
+    },
+    {
+      "consigne": "Quel service doit intervenir pour le danger en couleur ?",
+      "texte": "En plein été, [un incendie de forêt menace plusieurs maisons].",
+      "choix": [
+        "Police ou gendarmerie",
+        "Sécurité civile",
+        "Armées",
+        "VIGINUM"
+      ],
+      "bonne": 1,
+      "explication": "Les sapeurs-pompiers de la sécurité civile luttent contre les incendies de forêt."
+    },
+    {
+      "consigne": "Quel service doit intervenir pour le danger en couleur ?",
+      "texte": "Un pays étranger [envahit une partie du territoire français].",
+      "choix": [
+        "Police ou gendarmerie",
+        "Sécurité civile",
+        "Armées",
+        "VIGINUM"
+      ],
+      "bonne": 2,
+      "explication": "Les armées défendent le territoire et la souveraineté nationale."
+    },
+    {
+      "consigne": "Quel service doit intervenir pour le danger en couleur ?",
+      "texte": "Pendant une élection, [de faux comptes créés à l'étranger diffusent une fausse vidéo].",
+      "choix": [
+        "Police ou gendarmerie",
+        "Sécurité civile",
+        "Armées",
+        "VIGINUM"
+      ],
+      "bonne": 3,
+      "explication": "VIGINUM détecte les ingérences numériques étrangères et les manipulations de l'information."
+    },
+    {
+      "consigne": "Quel service doit intervenir pour le danger en couleur ?",
+      "texte": "Dans une grande ville, [un homme agresse un passant et lui vole son sac].",
+      "choix": [
+        "Police ou gendarmerie",
+        "Sécurité civile",
+        "Armées",
+        "VIGINUM"
+      ],
+      "bonne": 0,
+      "explication": "Une agression est un délit : la police nationale, qui agit surtout en ville, intervient."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "La gendarmerie nationale",
+      "acceptees": [
+        "Gendarmerie",
+        "La gendarmerie",
+        "Gendarmerie nationale",
+        "La gendarmerie nationale",
+        "Les gendarmes"
+      ],
+      "indices": [
+        "Je fais partie des forces de sécurité intérieure.",
+        "Mes membres sont des militaires.",
+        "J'agis surtout dans les campagnes et les zones périurbaines."
+      ],
+      "explication": "La gendarmerie nationale est composée de militaires et agit surtout dans les zones rurales et périurbaines."
+    },
+    {
+      "reponse": "VIGINUM",
+      "acceptees": [
+        "VIGINUM",
+        "Viginum"
+      ],
+      "indices": [
+        "J'ai été créé en 2021.",
+        "Je détecte des manipulations de l'information en ligne.",
+        "Je repère les ingérences numériques venues de l'étranger."
+      ],
+      "explication": "VIGINUM, créé en 2021, détecte les ingérences numériques étrangères."
+    },
+    {
+      "reponse": "L'OFB",
+      "acceptees": [
+        "OFB",
+        "L'OFB",
+        "Office français de la biodiversité",
+        "L'Office français de la biodiversité"
+      ],
+      "indices": [
+        "J'ai été créé en 2020.",
+        "Je suis une police de l'environnement.",
+        "Mes agents peuvent sanctionner celui qui pollue une rivière ou capture une espèce protégée."
+      ],
+      "explication": "L'Office français de la biodiversité, créé en 2020, contrôle le respect des lois qui protègent la nature."
+    },
+    {
+      "reponse": "Le plan Vigipirate",
+      "acceptees": [
+        "Vigipirate",
+        "Le plan Vigipirate",
+        "Plan Vigipirate"
+      ],
+      "indices": [
+        "Je suis un dispositif de vigilance.",
+        "J'ai été créé en 1978.",
+        "Je protège contre la menace terroriste, par exemple aux abords des écoles."
+      ],
+      "explication": "Le plan Vigipirate, créé en 1978, organise la vigilance et la prévention face au terrorisme."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Les créations du plus ancien au plus récent",
+      "etapes": [
+        "Création du plan Vigipirate",
+        "Adoption de la Charte de l'environnement",
+        "Création de l'Office français de la biodiversité",
+        "Création du service VIGINUM"
+      ]
+    }
+  ]
+}

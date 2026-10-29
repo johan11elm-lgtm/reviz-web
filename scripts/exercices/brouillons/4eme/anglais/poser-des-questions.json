@@ -1,0 +1,182 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Une raison (Why)",
+      "detail": "Ces réponses disent pourquoi : à une question en Why, on répond avec Because.",
+      "cartes": [
+        "Because I missed the bus",
+        "Because it was raining all day",
+        "Because I wanted to meet the team",
+        "Because my sister was ill",
+        "Because the shop was closed"
+      ]
+    },
+    {
+      "nom": "Un lieu (Where)",
+      "detail": "Ces réponses disent où : elles répondent à une question en Where.",
+      "cartes": [
+        "I'm from Leeds",
+        "We met at the cinema",
+        "She lives near the station",
+        "My school is in the town centre",
+        "The concert is at the stadium"
+      ]
+    },
+    {
+      "nom": "Une fréquence (How often)",
+      "detail": "Ces réponses disent combien de fois : elles répondent à une question en How often.",
+      "cartes": [
+        "Twice a week",
+        "Once a month",
+        "Three times a year",
+        "Almost every day",
+        "Four times a day"
+      ]
+    },
+    {
+      "nom": "Une durée (How long)",
+      "detail": "Ces réponses disent combien de temps : elles répondent à une question en How long.",
+      "cartes": [
+        "For two hours",
+        "For about three weeks",
+        "It lasts ninety minutes",
+        "We played all afternoon",
+        "The trip took ten days"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "De quel type est la question en couleur ?",
+      "texte": "[Who called you?]",
+      "choix": [
+        "Mot interrogatif sujet",
+        "Mot interrogatif complément",
+        "Question fermée (yes / no)"
+      ],
+      "bonne": 0,
+      "explication": "« Who » fait l'action : il est le sujet. Pas de did, et le verbe est au prétérit (called)."
+    },
+    {
+      "consigne": "De quel type est la question en couleur ?",
+      "texte": "[Do you like football?]",
+      "choix": [
+        "Mot interrogatif sujet",
+        "Mot interrogatif complément",
+        "Question fermée (yes / no)"
+      ],
+      "bonne": 2,
+      "explication": "Il n'y a pas de mot interrogatif : on répond par une réponse courte (Yes, I do. / No, I don't.)."
+    },
+    {
+      "consigne": "De quel type est la question en couleur ?",
+      "texte": "[What did you buy?]",
+      "choix": [
+        "Mot interrogatif sujet",
+        "Mot interrogatif complément",
+        "Question fermée (yes / no)"
+      ],
+      "bonne": 1,
+      "explication": "« What » est le complément (ce que tu as acheté) : l'auxiliaire did est obligatoire, avec le verbe à la base verbale."
+    },
+    {
+      "consigne": "De quel type est la question en couleur ?",
+      "texte": "[What happened at school?]",
+      "choix": [
+        "Mot interrogatif sujet",
+        "Mot interrogatif complément",
+        "Question fermée (yes / no)"
+      ],
+      "bonne": 0,
+      "explication": "« What » fait l'action (what happened) : il est le sujet, donc pas de did."
+    },
+    {
+      "consigne": "De quel type est la question en couleur ?",
+      "texte": "[Who did you meet at the party?]",
+      "choix": [
+        "Mot interrogatif sujet",
+        "Mot interrogatif complément",
+        "Question fermée (yes / no)"
+      ],
+      "bonne": 1,
+      "explication": "« Who » est le complément (la personne rencontrée) : l'auxiliaire did est obligatoire, avec le verbe à la base verbale."
+    },
+    {
+      "consigne": "De quel type est la question en couleur ?",
+      "texte": "[Can you swim?]",
+      "choix": [
+        "Mot interrogatif sujet",
+        "Mot interrogatif complément",
+        "Question fermée (yes / no)"
+      ],
+      "bonne": 2,
+      "explication": "Sans mot interrogatif, c'est une question fermée : on répond Yes, I can. ou No, I can't."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Because",
+      "acceptees": [],
+      "indices": [
+        "Je suis un mot de la réponse.",
+        "Je commence la réponse à une question en Why.",
+        "Dans « ___ I missed the bus », je veux dire « parce que »."
+      ],
+      "explication": "Because (parce que) répond à une question en Why : Why are you late? — Because I missed the bus."
+    },
+    {
+      "reponse": "Which",
+      "acceptees": [],
+      "indices": [
+        "Je suis un mot interrogatif.",
+        "Je demande de choisir parmi un petit nombre d'éléments connus.",
+        "Dans « ___ do you prefer, tea or coffee? », je veux dire « lequel »."
+      ],
+      "explication": "Which (lequel, quel) sert à choisir parmi quelques éléments connus : Which do you prefer, tea or coffee?"
+    },
+    {
+      "reponse": "Auxiliaire",
+      "acceptees": [
+        "Un auxiliaire",
+        "Auxiliary",
+        "Les auxiliaires",
+        "Auxiliaires"
+      ],
+      "indices": [
+        "Je suis une sorte de mot de la phrase.",
+        "Do, does, did, can et be sont mes exemples.",
+        "Dans une question sur le complément, je me place entre le mot interrogatif et le sujet."
+      ],
+      "explication": "L'auxiliaire (do, does, did, can, be…) se place avant le sujet : Where do you live?"
+    },
+    {
+      "reponse": "Interview",
+      "acceptees": [
+        "Une interview",
+        "Interviews",
+        "Entretien",
+        "Un entretien"
+      ],
+      "indices": [
+        "Je suis un moment où l'on parle à quelqu'un.",
+        "On me prépare avec des questions ouvertes en Wh-.",
+        "Je me termine par « Thank you for your time »."
+      ],
+      "explication": "Une interview est un entretien fait de questions et de réponses : on se présente, on questionne, on relance, on remercie."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Les temps d'une interview, du début à la fin",
+      "etapes": [
+        "On se présente : « Hello, I'm Léa »",
+        "On pose une question ouverte en Wh-",
+        "On relance avec « Really? Why? »",
+        "On remercie : « Thank you for your time »"
+      ]
+    }
+  ]
+}

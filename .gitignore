@@ -40,3 +40,4 @@ assets-src/mascot/_old/
 build/
 .unslop/
 .app-designer/
+.tests-aveugle/

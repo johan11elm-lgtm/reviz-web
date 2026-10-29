@@ -1,0 +1,121 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "L'installation de la République",
+      "detail": "La proclamation de 1870, la Commune et les lois de 1875 qui organisent le régime.",
+      "cartes": [
+        "La République est proclamée à Paris après la défaite de Sedan",
+        "L'armée écrase une insurrection parisienne en mai 1871",
+        "Une Chambre des députés et un Sénat sont créés en 1875",
+        "Le président est élu par les deux chambres",
+        "Le gouvernement doit rendre des comptes devant le Parlement"
+      ]
+    },
+    {
+      "nom": "Les symboles de la République",
+      "detail": "Les signes que la République adopte à partir de 1879 pour se faire aimer des Français.",
+      "cartes": [
+        "Un chant devient l'hymne national en 1879",
+        "Le 14 juillet devient la fête nationale en 1880",
+        "Le visage de Marianne figure sur les pièces et les timbres",
+        "La devise « Liberté, Égalité, Fraternité » orne les mairies",
+        "Le bonnet phrygien représente la liberté"
+      ]
+    },
+    {
+      "nom": "L'école de Jules Ferry",
+      "detail": "Les lois de 1881-1882 et le rôle des instituteurs dans l'enracinement de la République.",
+      "cartes": [
+        "L'école primaire publique devient gratuite en 1881",
+        "Les enfants de 6 à 13 ans doivent aller à l'école",
+        "Les instituteurs sont surnommés les « hussards noirs »",
+        "Un livre de lecture fait découvrir les régions de France",
+        "Les maîtres enseignent la morale civique et la langue française"
+      ]
+    },
+    {
+      "nom": "L'affaire Dreyfus",
+      "detail": "De la condamnation d'un capitaine en 1894 à sa réhabilitation en 1906.",
+      "cartes": [
+        "Un capitaine juif est condamné à tort pour espionnage",
+        "Un écrivain défend le condamné dans le journal L'Aurore",
+        "Une partie des Français place l'honneur de l'armée avant tout",
+        "Un fort antisémitisme se révèle dans la société",
+        "Le condamné est enfin réhabilité en 1906"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "les lois Ferry de 1881-1882",
+      "carte": "La volonté de former des citoyens attachés à la République",
+      "role": "cause",
+      "explication": "La République veut former des citoyens qui aiment ses valeurs : c'est pour cela que l'école devient gratuite, obligatoire et laïque."
+    },
+    {
+      "fait": "les lois Ferry de 1881-1882",
+      "carte": "La République s'enracine dans tout le pays",
+      "role": "consequence",
+      "explication": "Grâce à l'école, les valeurs républicaines et la langue française se diffusent dans tout le pays."
+    },
+    {
+      "fait": "l'affaire Dreyfus",
+      "carte": "La condamnation à tort du capitaine Dreyfus en 1894",
+      "role": "cause",
+      "explication": "La condamnation du capitaine Dreyfus pour espionnage, alors qu'il est innocent, déclenche l'affaire."
+    },
+    {
+      "fait": "l'affaire Dreyfus",
+      "carte": "La France se divise entre dreyfusards et antidreyfusards",
+      "role": "consequence",
+      "explication": "Les uns défendent les droits de l'individu, les autres l'honneur de l'armée : l'affaire divise les Français."
+    }
+  ],
+  "etiquettes": [],
+  "devinettes": [
+    {
+      "reponse": "Émile Zola",
+      "acceptees": ["Zola", "Emile Zola", "Émile Zola"],
+      "indices": [
+        "Je suis un écrivain français.",
+        "Je défends un capitaine condamné à tort pour espionnage.",
+        "Mon article « J'accuse… ! » paraît dans L'Aurore le 13 janvier 1898."
+      ],
+      "explication": "Émile Zola publie « J'accuse… ! » en 1898 pour dénoncer l'injustice faite à Dreyfus."
+    },
+    {
+      "reponse": "Jules Ferry",
+      "acceptees": ["Ferry", "Jules Ferry"],
+      "indices": [
+        "Je suis un homme politique républicain.",
+        "Des lois de 1881 et 1882 portent mon nom.",
+        "Elles rendent l'école primaire gratuite, obligatoire et laïque."
+      ],
+      "explication": "Les lois Jules Ferry de 1881-1882 créent l'école gratuite, obligatoire et laïque."
+    },
+    {
+      "reponse": "Dreyfus",
+      "acceptees": ["Alfred Dreyfus", "Capitaine Dreyfus", "Le capitaine Dreyfus"],
+      "indices": [
+        "Je suis capitaine dans l'armée française.",
+        "En 1894, je suis condamné à tort pour espionnage.",
+        "Mon innocence n'est reconnue qu'en 1906."
+      ],
+      "explication": "Le capitaine Alfred Dreyfus, condamné à tort en 1894, est réhabilité en 1906."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Les grandes étapes de la IIIe République",
+      "etapes": [
+        "La République est proclamée après la défaite de Sedan",
+        "La Commune de Paris est écrasée par l'armée",
+        "Les lois constitutionnelles organisent le régime",
+        "Les lois Ferry rendent l'école gratuite et obligatoire",
+        "Les Églises sont séparées de l'État"
+      ]
+    }
+  ]
+}

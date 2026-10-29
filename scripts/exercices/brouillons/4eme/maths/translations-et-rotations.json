@@ -1,0 +1,186 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Rotation de 60°",
+      "detail": "Les façons de décrire une rotation d'un sixième de tour.",
+      "cartes": [
+        "Rosace de 6 motifs : d'un motif au suivant",
+        "360° ÷ 6",
+        "Un sixième de tour complet",
+        "Six rotations identiques font un tour complet",
+        "Petite aiguille d'une horloge pendant 2 heures"
+      ]
+    },
+    {
+      "nom": "Rotation de 90°",
+      "detail": "Les façons de décrire une rotation d'un quart de tour.",
+      "cartes": [
+        "Rosace de 4 motifs : d'un motif au suivant",
+        "360° ÷ 4",
+        "Un quart de tour complet",
+        "Quatre rotations identiques font un tour complet",
+        "Petite aiguille d'une horloge pendant 3 heures"
+      ]
+    },
+    {
+      "nom": "Rotation de 120°",
+      "detail": "Les façons de décrire une rotation d'un tiers de tour.",
+      "cartes": [
+        "Rosace de 3 motifs : d'un motif au suivant",
+        "360° ÷ 3",
+        "Un tiers de tour complet",
+        "Trois rotations identiques font un tour complet",
+        "Petite aiguille d'une horloge pendant 4 heures"
+      ]
+    },
+    {
+      "nom": "Rotation de 180°",
+      "detail": "Les façons de décrire une rotation d'un demi-tour.",
+      "cartes": [
+        "La symétrie centrale de centre O",
+        "360° ÷ 2",
+        "Un demi-tour autour du centre",
+        "Deux rotations identiques font un tour complet",
+        "Petite aiguille d'une horloge pendant 6 heures"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Quelle transformation le passage en couleur décrit-il ?",
+      "texte": "Pour fabriquer la frise, on dessine un motif, puis [on le fait glisser vers la droite sans le tourner] plusieurs fois.",
+      "choix": ["Une translation", "Une rotation", "Une symétrie axiale"],
+      "bonne": 0,
+      "explication": "Un glissement dans une direction, sans tourner, est une translation. C'est ce qui construit une frise."
+    },
+    {
+      "consigne": "Quelle transformation le passage en couleur décrit-il ?",
+      "texte": "Pour dessiner la rosace, [on fait tourner un pétale de 45° autour du centre] huit fois de suite.",
+      "choix": ["Une translation", "Une rotation", "Une symétrie axiale"],
+      "bonne": 1,
+      "explication": "Tourner autour d'un centre, d'un angle donné, est une rotation. C'est ce qui construit une rosace."
+    },
+    {
+      "consigne": "Quelle transformation le passage en couleur décrit-il ?",
+      "texte": "Sur la figure, [le triangle est retourné, comme son reflet dans un miroir].",
+      "choix": ["Une translation", "Une rotation", "Une symétrie axiale"],
+      "bonne": 2,
+      "explication": "Une figure retournée comme dans un miroir est transformée par une symétrie axiale. Une translation ou une rotation ne la retourne pas."
+    },
+    {
+      "consigne": "Quelle transformation le passage en couleur décrit-il ?",
+      "texte": "Le point M a pour image M' : [OM' = OM et l'angle MOM' mesure 70°].",
+      "choix": ["Une translation", "Une rotation", "Une symétrie axiale"],
+      "bonne": 1,
+      "explication": "M' est sur le cercle de centre O qui passe par M, avec un angle de 70° : c'est une rotation de centre O."
+    },
+    {
+      "consigne": "Quelle transformation le passage en couleur décrit-il ?",
+      "texte": "Le triangle ABC a pour image A'B'C' : [chaque point avance de 3 cm dans la direction de (AB), de A vers B].",
+      "choix": ["Une translation", "Une rotation", "Une symétrie axiale"],
+      "bonne": 0,
+      "explication": "Tous les points avancent de la même longueur, dans la même direction et le même sens : c'est la translation qui transforme A en B."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Rosace",
+      "acceptees": ["Rosace", "Une rosace", "La rosace"],
+      "indices": [
+        "Je suis une figure qui répète un motif.",
+        "Mes motifs se déduisent les uns des autres par rotation.",
+        "Ils tournent tous autour d'un même centre."
+      ],
+      "explication": "Une rosace est obtenue en répétant un motif par rotation autour d'un centre."
+    },
+    {
+      "reponse": "Frise",
+      "acceptees": ["Frise", "Une frise", "La frise"],
+      "indices": [
+        "Je suis une figure qui répète un motif.",
+        "Mes motifs se déduisent les uns des autres par translation.",
+        "Je m'étire dans une seule direction, comme une bande décorative."
+      ],
+      "explication": "Une frise répète un motif par translation dans une seule direction."
+    },
+    {
+      "reponse": "Pavage",
+      "acceptees": ["Pavage", "Un pavage", "Le pavage", "Carrelage"],
+      "indices": [
+        "Je recouvre une surface plane avec des motifs.",
+        "Je ne laisse aucun trou.",
+        "Mes motifs ne se chevauchent pas."
+      ],
+      "explication": "Un pavage recouvre le plan avec des motifs, sans trou ni chevauchement."
+    },
+    {
+      "reponse": "Centre de rotation",
+      "acceptees": ["Centre de rotation", "Le centre de rotation", "Centre", "Le centre", "Centre de la rotation"],
+      "indices": [
+        "Je suis un point.",
+        "Je suis le seul point qui ne bouge pas.",
+        "Tous les autres points tournent autour de moi."
+      ],
+      "explication": "Le centre de la rotation est le seul point qui reste fixe : les autres tournent autour de lui."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "Une rosace est formée de 9 motifs identiques. De combien de degrés faut-il tourner pour passer d'un motif au suivant ?",
+      "reponse": 40,
+      "unite": "°",
+      "tolerance": 0,
+      "explication": "Un tour complet fait 360°, partagé entre 9 motifs : 360 ÷ 9 = 40°."
+    },
+    {
+      "question": "Dans une rosace, on passe d'un motif au suivant en tournant de 36°. Combien la rosace compte-t-elle de motifs ?",
+      "reponse": 10,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "Il faut 360° pour faire un tour complet : 360 ÷ 36 = 10 motifs."
+    },
+    {
+      "question": "M' est l'image de M par la rotation de centre O et d'angle 180°. Sachant que OM = 4,5 cm, combien mesure MM' ?",
+      "reponse": 9,
+      "unite": "cm",
+      "tolerance": 0,
+      "explication": "Une rotation de 180° est une symétrie centrale : O est le milieu de [MM'], donc MM' = 2 × 4,5 = 9 cm."
+    },
+    {
+      "question": "Un rectangle de 6 cm sur 3 cm subit une translation. Quelle est l'aire de son image ?",
+      "reponse": 18,
+      "unite": "cm²",
+      "tolerance": 0,
+      "explication": "Une translation conserve les aires. L'image est un rectangle de 6 cm sur 3 cm : 6 × 3 = 18 cm²."
+    },
+    {
+      "question": "Un triangle équilatéral de côté 5 cm subit une rotation. Quel est le périmètre de son image ?",
+      "reponse": 15,
+      "unite": "cm",
+      "tolerance": 0,
+      "explication": "Une rotation conserve les longueurs. L'image est un triangle équilatéral de côté 5 cm : 3 × 5 = 15 cm."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Construire l'image d'un point par une rotation",
+      "etapes": [
+        "Tracer le segment [OM] qui relie le centre au point",
+        "Reporter l'angle au rapporteur en O, dans le bon sens",
+        "Reporter la longueur OM au compas sur la demi-droite",
+        "Recommencer avec chaque sommet puis relier les images"
+      ]
+    },
+    {
+      "titre": "Construire l'image d'un point par une translation",
+      "etapes": [
+        "Tracer la parallèle à (AB) passant par M",
+        "Reporter au compas la longueur AB à partir de M, dans le sens de A vers B",
+        "Nommer M' le point obtenu",
+        "Recommencer avec chaque sommet puis relier les images"
+      ]
+    }
+  ]
+}

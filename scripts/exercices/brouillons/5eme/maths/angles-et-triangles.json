@@ -1,0 +1,150 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Angles qui mesurent 60°",
+      "detail": "Des angles dont la mesure se calcule avec les propriétés du cours et vaut 60°.",
+      "cartes": [
+        "Un angle d'un triangle équilatéral",
+        "Le troisième angle d'un triangle avec 50° et 70°",
+        "L'angle complémentaire d'un angle de 30°",
+        "L'angle supplémentaire d'un angle de 120°",
+        "Un angle aigu d'un triangle rectangle dont l'autre mesure 30°"
+      ]
+    },
+    {
+      "nom": "Angles qui mesurent 70°",
+      "detail": "Des angles dont la mesure se calcule avec les propriétés du cours et vaut 70°.",
+      "cartes": [
+        "Angle à la base d'un isocèle avec 40° au sommet",
+        "Le troisième angle d'un triangle avec 45° et 65°",
+        "L'angle complémentaire d'un angle de 20°",
+        "L'angle supplémentaire d'un angle de 110°",
+        "L'angle opposé par le sommet d'un angle de 70°"
+      ]
+    },
+    {
+      "nom": "Angles qui mesurent 50°",
+      "detail": "Des angles dont la mesure se calcule avec les propriétés du cours et vaut 50°.",
+      "cartes": [
+        "Un angle aigu d'un triangle rectangle dont l'autre mesure 40°",
+        "Angle à la base d'un isocèle avec 80° au sommet",
+        "Le troisième angle d'un triangle avec 60° et 70°",
+        "L'angle supplémentaire d'un angle de 130°",
+        "L'angle correspondant d'un angle de 50° entre droites parallèles"
+      ]
+    },
+    {
+      "nom": "Angles qui mesurent 30°",
+      "detail": "Des angles dont la mesure se calcule avec les propriétés du cours et vaut 30°.",
+      "cartes": [
+        "Un angle aigu d'un triangle rectangle dont l'autre mesure 60°",
+        "Angle à la base d'un isocèle avec 120° au sommet",
+        "Le troisième angle d'un triangle avec 100° et 50°",
+        "L'angle supplémentaire d'un angle de 150°",
+        "L'angle alterne-interne d'un angle de 30° entre droites parallèles"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [],
+  "devinettes": [
+    {
+      "reponse": "Sécante",
+      "acceptees": ["Sécante", "La sécante", "Une sécante"],
+      "indices": [
+        "Je suis une droite.",
+        "Je coupe deux autres droites.",
+        "Je forme avec elles des angles alternes-internes et des angles correspondants."
+      ],
+      "explication": "Une sécante est une droite qui coupe deux autres droites ; elle forme des angles alternes-internes et correspondants."
+    },
+    {
+      "reponse": "Complémentaires",
+      "acceptees": ["Complémentaires", "Complémentaire", "Angles complémentaires", "Deux angles complémentaires"],
+      "indices": [
+        "Je qualifie deux angles.",
+        "La somme de leurs mesures vaut 90°.",
+        "35° et 55° sont deux angles de ce type."
+      ],
+      "explication": "Deux angles complémentaires ont une somme de 90° : 35° + 55° = 90°."
+    },
+    {
+      "reponse": "Supplémentaires",
+      "acceptees": ["Supplémentaires", "Supplémentaire", "Angles supplémentaires", "Deux angles supplémentaires"],
+      "indices": [
+        "Je qualifie deux angles.",
+        "La somme de leurs mesures vaut 180°.",
+        "65° et 115° sont deux angles de ce type."
+      ],
+      "explication": "Deux angles supplémentaires ont une somme de 180° : 65° + 115° = 180°."
+    },
+    {
+      "reponse": "Triangle équilatéral",
+      "acceptees": ["Triangle équilatéral", "Équilatéral", "Un triangle équilatéral", "Le triangle équilatéral"],
+      "indices": [
+        "Mes trois côtés ont la même longueur.",
+        "Mes trois angles sont égaux.",
+        "Chacun de mes angles mesure 60°."
+      ],
+      "explication": "Dans un triangle équilatéral, chaque angle mesure 180° ÷ 3 = 60°."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "Dans un triangle ABC, l'angle Â mesure 48° et l'angle B̂ mesure 67°. Combien mesure l'angle Ĉ ?",
+      "reponse": 65,
+      "unite": "°",
+      "tolerance": 0,
+      "explication": "La somme des angles d'un triangle vaut 180° : Ĉ = 180° − 48° − 67° = 180° − 115° = 65°."
+    },
+    {
+      "question": "Un triangle isocèle a un angle au sommet de 52°. Combien mesure chacun de ses deux angles à la base ?",
+      "reponse": 64,
+      "unite": "°",
+      "tolerance": 0,
+      "explication": "Les deux angles à la base sont égaux : (180° − 52°) ÷ 2 = 128° ÷ 2 = 64°."
+    },
+    {
+      "question": "Deux angles sont supplémentaires. L'un mesure 117°. Combien mesure l'autre ?",
+      "reponse": 63,
+      "unite": "°",
+      "tolerance": 0,
+      "explication": "Supplémentaires : la somme vaut 180°, donc 180° − 117° = 63°."
+    },
+    {
+      "question": "Dans un triangle rectangle, un angle aigu mesure 37°. Combien mesure l'autre angle aigu ?",
+      "reponse": 53,
+      "unite": "°",
+      "tolerance": 0,
+      "explication": "Les deux angles aigus d'un triangle rectangle sont complémentaires : 90° − 37° = 53°."
+    },
+    {
+      "question": "Un triangle a deux angles de 72° chacun. Combien mesure son troisième angle ?",
+      "reponse": 36,
+      "unite": "°",
+      "tolerance": 0,
+      "explication": "72° + 72° = 144°, donc le troisième angle mesure 180° − 144° = 36°."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Rédiger le calcul d'un angle dans un triangle",
+      "etapes": [
+        "On écrit les données de l'énoncé",
+        "On cite la propriété utilisée",
+        "On écrit le calcul",
+        "On vérifie que le résultat est possible"
+      ]
+    },
+    {
+      "titre": "Démontrer que la somme des angles d'un triangle ABC vaut 180°",
+      "etapes": [
+        "On trace la parallèle à (BC) passant par A",
+        "Les angles alternes-internes sont égaux aux angles B et C",
+        "Avec l'angle en A, ils forment un angle plat",
+        "Un angle plat mesure 180°, donc la somme vaut 180°"
+      ]
+    }
+  ]
+}

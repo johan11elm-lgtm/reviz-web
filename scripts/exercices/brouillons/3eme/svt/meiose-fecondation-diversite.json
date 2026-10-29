@@ -1,0 +1,170 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "La méiose",
+      "detail": "La division cellulaire qui forme les gamètes en séparant les chromosomes de chaque paire.",
+      "cartes": [
+        "Elle sépare les deux chromosomes de chaque paire",
+        "Elle divise par deux le nombre de chromosomes",
+        "Le tri des chromosomes se fait au hasard",
+        "C'est la division cellulaire qui forme les gamètes",
+        "Elle donne plus de 8 millions de sortes de gamètes"
+      ]
+    },
+    {
+      "nom": "La fécondation",
+      "detail": "La rencontre d'un spermatozoïde et d'un ovule, qui forme la cellule-œuf.",
+      "cartes": [
+        "Un spermatozoïde et un ovule fusionnent",
+        "Elle réunit 23 chromosomes paternels et 23 maternels",
+        "Elle aboutit à une cellule-œuf",
+        "Quel spermatozoïde rencontre l'ovule dépend du hasard",
+        "Un ovule X et un spermatozoïde Y donnent un garçon"
+      ]
+    },
+    {
+      "nom": "Les gamètes",
+      "detail": "Les cellules reproductrices, spermatozoïdes et ovules, qui n'ont que 23 chromosomes.",
+      "cartes": [
+        "Les cellules reproductrices de l'être humain",
+        "Produits dans les testicules et dans les ovaires",
+        "Cellules qui ne possèdent que 23 chromosomes",
+        "L'ovule porte toujours un chromosome X",
+        "Le spermatozoïde porte soit un X, soit un Y"
+      ]
+    },
+    {
+      "nom": "Le tableau de croisement",
+      "detail": "L'outil qui combine les gamètes des deux parents pour prévoir les allèles possibles d'un enfant.",
+      "cartes": [
+        "Les gamètes du père sont placés en colonnes",
+        "Chaque case réunit l'allèle d'une colonne et d'une ligne",
+        "Avec les parents A//O et B//O, il montre quatre combinaisons",
+        "Il indique des chances, jamais une certitude",
+        "Il sert à prévoir les enfants possibles d'un couple"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "la formation d'une cellule-œuf XY",
+      "carte": "Un spermatozoïde porteur d'un chromosome Y féconde l'ovule",
+      "role": "cause",
+      "explication": "L'ovule apporte toujours un X : avec un spermatozoïde Y, la cellule-œuf est XY."
+    },
+    {
+      "fait": "la formation d'une cellule-œuf XY",
+      "carte": "L'enfant qui se développe est un garçon",
+      "role": "consequence",
+      "explication": "Une cellule-œuf XY donne un garçon, alors qu'une cellule-œuf XX donne une fille."
+    },
+    {
+      "fait": "la naissance de vrais jumeaux",
+      "carte": "Une même cellule-œuf se sépare en deux embryons",
+      "role": "cause",
+      "explication": "Les vrais jumeaux sont issus d'une seule cellule-œuf qui s'est séparée en deux."
+    },
+    {
+      "fait": "la naissance de vrais jumeaux",
+      "carte": "Les deux enfants ont la même information génétique",
+      "role": "consequence",
+      "explication": "Comme ils viennent de la même cellule-œuf, les vrais jumeaux ont la même information génétique."
+    }
+  ],
+  "etiquettes": [],
+  "devinettes": [
+    {
+      "reponse": "Méiose",
+      "acceptees": ["Méiose", "La méiose", "Meiose"],
+      "indices": [
+        "Je suis une division de cellule.",
+        "Je me déroule dans les testicules et dans les ovaires.",
+        "Je sépare les chromosomes de chaque paire pour former les gamètes."
+      ],
+      "explication": "La méiose est la division qui forme les gamètes, avec un seul chromosome de chaque paire."
+    },
+    {
+      "reponse": "Fécondation",
+      "acceptees": ["Fécondation", "La fécondation", "Fecondation"],
+      "indices": [
+        "Je suis une rencontre entre deux cellules.",
+        "Un spermatozoïde et un ovule fusionnent en moi.",
+        "Je forme la cellule-œuf, qui compte 46 chromosomes."
+      ],
+      "explication": "La fécondation est la fusion d'un spermatozoïde et d'un ovule : elle forme la cellule-œuf à 46 chromosomes."
+    },
+    {
+      "reponse": "Spermatozoïde",
+      "acceptees": ["Spermatozoïde", "Un spermatozoïde", "Le spermatozoïde", "Spermatozoïdes"],
+      "indices": [
+        "Je suis une cellule reproductrice.",
+        "Je suis produit dans les testicules.",
+        "Je porte un chromosome X ou Y et je décide du sexe de l'enfant."
+      ],
+      "explication": "Le spermatozoïde porte un X ou un Y : c'est lui qui détermine le sexe de l'enfant."
+    },
+    {
+      "reponse": "Cellule-œuf",
+      "acceptees": ["Cellule-œuf", "Cellule œuf", "Cellule-oeuf", "Cellule oeuf", "La cellule-œuf", "Une cellule-œuf", "Œuf", "Oeuf", "Zygote"],
+      "indices": [
+        "J'ai 46 chromosomes, répartis en 23 paires.",
+        "Je viens de la fusion de deux gamètes.",
+        "Je suis XX pour une fille, XY pour un garçon."
+      ],
+      "explication": "La cellule-œuf, formée à la fécondation, a 46 chromosomes : 23 du père et 23 de la mère."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "Une cellule du corps d'un animal contient 12 chromosomes, soit 6 paires. Combien de chromosomes contient un de ses gamètes ?",
+      "reponse": 6,
+      "unite": "chromosomes",
+      "tolerance": 0,
+      "explication": "Un gamète a un seul chromosome de chaque paire : 12 ÷ 2 = 6 chromosomes."
+    },
+    {
+      "question": "Un animal possède 4 paires de chromosomes. En ne tenant compte que du hasard de la répartition des chromosomes, combien de sortes de gamètes peut-il produire ?",
+      "reponse": 16,
+      "unite": "sortes de gamètes",
+      "tolerance": 0,
+      "explication": "Pour chaque paire, il y a 2 choix : 2 × 2 × 2 × 2 = 16 sortes de gamètes."
+    },
+    {
+      "question": "Un ovule d'un animal contient 15 chromosomes, et un spermatozoïde de la même espèce aussi. Combien de chromosomes contient la cellule-œuf formée par leur fusion ?",
+      "reponse": 30,
+      "unite": "chromosomes",
+      "tolerance": 0,
+      "explication": "La fécondation additionne les chromosomes des deux gamètes : 15 + 15 = 30 chromosomes."
+    },
+    {
+      "question": "Le père a les allèles A et O, la mère les allèles B et O. Chaque case du tableau de croisement a la même chance. Quelle est la chance, en pourcentage, que l'enfant ait les allèles O et O ?",
+      "reponse": 25,
+      "unite": "%",
+      "tolerance": 0,
+      "explication": "Le tableau a 4 cases (A//B, A//O, B//O, O//O) et une seule est O//O : 1 chance sur 4, soit 25 %."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "De la méiose à la cellule-œuf",
+      "etapes": [
+        "Une cellule à 46 chromosomes entre en méiose",
+        "Les deux chromosomes de chaque paire sont séparés",
+        "Des gamètes à 23 chromosomes sont formés",
+        "Un spermatozoïde et un ovule fusionnent",
+        "La cellule-œuf retrouve 46 chromosomes"
+      ]
+    },
+    {
+      "titre": "Remplir un tableau de croisement",
+      "etapes": [
+        "On écrit les allèles du père et ceux de la mère",
+        "On déduit les gamètes possibles : un seul allèle chacun",
+        "On place les gamètes des parents en colonnes et en lignes",
+        "On remplit chaque case : allèle de la colonne et de la ligne",
+        "On traduit chaque case en phénotype et on compte les chances"
+      ]
+    }
+  ]
+}

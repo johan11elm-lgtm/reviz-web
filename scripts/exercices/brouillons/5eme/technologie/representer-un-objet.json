@@ -1,0 +1,184 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Le croquis",
+      "detail": "Un dessin rapide, à main levée et sans instrument, pour exprimer une idée.",
+      "cartes": [
+        "Un dessin sans règle ni compas pour exprimer une idée",
+        "Un dessin rapide fait pendant une recherche d'idées",
+        "Un dessin à main levée, annoté de quelques remarques",
+        "Le premier jet griffonné d'un futur cartable",
+        "Une idée de poignée dessinée à toute vitesse sur une feuille"
+      ]
+    },
+    {
+      "nom": "Le schéma",
+      "detail": "Une représentation simplifiée qui montre le fonctionnement d'un objet avec des symboles normalisés.",
+      "cartes": [
+        "Une pile, un interrupteur et une lampe reliés par des symboles",
+        "Un dessin simplifié qui montre comment circule le courant",
+        "Une figure faite de symboles que tous les techniciens reconnaissent",
+        "Un dessin qui explique le fonctionnement sans montrer l'aspect réel",
+        "Un circuit de lampe de poche tracé avec ses symboles"
+      ]
+    },
+    {
+      "nom": "Le dessin technique",
+      "detail": "Une représentation précise, à l'échelle et cotée en millimètres, qui sert à fabriquer l'objet.",
+      "cartes": [
+        "Un dessin à l'échelle avec toutes les dimensions en millimètres",
+        "Un plan précis pour que l'atelier fabrique la pièce",
+        "Un dessin où chaque dimension est indiquée par une cote",
+        "Les trois vues d'une pièce : face, dessus et gauche",
+        "Une pièce dessinée à l'échelle pour pouvoir la fabriquer"
+      ]
+    },
+    {
+      "nom": "La maquette numérique en CAO",
+      "detail": "Un modèle virtuel en 3D créé avec un logiciel, qu'on peut tester et modifier avant de fabriquer.",
+      "cartes": [
+        "Une esquisse rectangulaire à laquelle on donne 10 mm d'épaisseur",
+        "Un modèle virtuel en 3D qu'on fait tourner à l'écran",
+        "Un fichier envoyé à l'imprimante 3D pour fabriquer la pièce",
+        "Un objet testé et corrigé sur ordinateur avant sa fabrication",
+        "Un volume tiré d'un dessin plat sur l'ordinateur"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Quelle représentation le passage en couleur décrit-il ?",
+      "texte": "Au début du projet, l'équipe [griffonne en cinq minutes plusieurs solutions possibles].",
+      "choix": ["Croquis", "Schéma", "Dessin technique", "Maquette numérique"],
+      "bonne": 0,
+      "explication": "Un dessin rapide et libre pour chercher des idées, c'est un croquis."
+    },
+    {
+      "consigne": "Quelle représentation le passage en couleur décrit-il ?",
+      "texte": "Pour montrer comment la lampe s'allume, Hugo [relie une pile, un interrupteur et une lampe avec des symboles normalisés].",
+      "choix": ["Croquis", "Schéma", "Dessin technique", "Maquette numérique"],
+      "bonne": 1,
+      "explication": "Des symboles normalisés qui montrent le fonctionnement d'un circuit forment un schéma électrique."
+    },
+    {
+      "consigne": "Quelle représentation le passage en couleur décrit-il ?",
+      "texte": "Pour que l'atelier fabrique la pièce, [le plan à l'échelle indique chaque dimension en millimètres].",
+      "choix": ["Croquis", "Schéma", "Dessin technique", "Maquette numérique"],
+      "bonne": 2,
+      "explication": "Un plan précis, à l'échelle et coté en millimètres, est un dessin technique : il sert à fabriquer."
+    },
+    {
+      "consigne": "Quelle représentation le passage en couleur décrit-il ?",
+      "texte": "Sur l'ordinateur, Sam [dessine une esquisse puis l'extrude pour obtenir un volume].",
+      "choix": ["Croquis", "Schéma", "Dessin technique", "Maquette numérique"],
+      "bonne": 3,
+      "explication": "Dessiner une esquisse 2D puis l'extruder avec un logiciel de CAO donne une maquette numérique en 3D."
+    },
+    {
+      "consigne": "Quelle représentation le passage en couleur décrit-il ?",
+      "texte": "Le technicien lit [les cotes d'un plan en vue de face] avant de fabriquer la pièce.",
+      "choix": ["Croquis", "Schéma", "Dessin technique", "Maquette numérique"],
+      "bonne": 2,
+      "explication": "Les cotes et les vues (face, dessus, gauche) sont les marques d'un dessin technique."
+    },
+    {
+      "consigne": "Quelle représentation le passage en couleur décrit-il ?",
+      "texte": "Avant de fabriquer, la classe [teste et corrige l'objet virtuel en 3D sur l'écran].",
+      "choix": ["Croquis", "Schéma", "Dessin technique", "Maquette numérique"],
+      "bonne": 3,
+      "explication": "On teste et on modifie l'objet sur ordinateur avant de le fabriquer : c'est l'intérêt de la maquette numérique."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Croquis",
+      "acceptees": ["Un croquis"],
+      "indices": [
+        "Je suis une façon de représenter un objet.",
+        "Je suis fait sans règle ni compas.",
+        "Je sers à proposer une idée très vite, et je suis souvent annoté."
+      ],
+      "explication": "Le croquis est un dessin rapide, à main levée et annoté, qui sert à exprimer une idée."
+    },
+    {
+      "reponse": "Schéma",
+      "acceptees": ["Un schéma", "Schema", "Schéma électrique", "Un schéma électrique"],
+      "indices": [
+        "Je ne montre pas l'aspect réel d'un objet.",
+        "J'utilise des symboles normalisés, compris par tous.",
+        "Je montre comment fonctionne un objet, par exemple comment le courant circule dans une lampe de poche."
+      ],
+      "explication": "Le schéma simplifie l'objet pour montrer son fonctionnement, avec des symboles normalisés."
+    },
+    {
+      "reponse": "Extrusion",
+      "acceptees": ["L'extrusion", "Extruder", "Une extrusion"],
+      "indices": [
+        "Je suis une opération qu'on fait dans un logiciel de CAO.",
+        "Je pars d'une esquisse plate en 2D.",
+        "Grâce à moi, cette forme plate gagne une épaisseur et devient un volume."
+      ],
+      "explication": "L'extrusion donne une épaisseur à une esquisse 2D pour créer un volume en 3D."
+    },
+    {
+      "reponse": "Cotation",
+      "acceptees": ["La cotation", "Cote", "Une cote", "Cotes", "Les cotes"],
+      "indices": [
+        "Je suis une indication qu'on trouve sur un dessin technique.",
+        "Je donne les dimensions de la pièce.",
+        "En dessin technique, je suis exprimée en millimètres."
+      ],
+      "explication": "La cotation indique les dimensions sur un dessin technique, en millimètres."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "Une esquisse rectangulaire de 50 mm sur 20 mm est extrudée de 4 mm. Quel est le volume du pavé obtenu ?",
+      "reponse": 4000,
+      "unite": "mm³",
+      "tolerance": 0,
+      "explication": "Volume = longueur × largeur × épaisseur = 50 × 20 × 4 = 1 000 × 4 = 4 000 mm³."
+    },
+    {
+      "question": "Une esquisse carrée de 30 mm de côté est extrudée de 5 mm. Quel est le volume du pavé obtenu ?",
+      "reponse": 4500,
+      "unite": "mm³",
+      "tolerance": 0,
+      "explication": "Volume = 30 × 30 × 5 = 900 × 5 = 4 500 mm³."
+    },
+    {
+      "question": "Une pièce mesure 4,5 cm de long. Quelle cote écrit-on sur le dessin technique, en millimètres ?",
+      "reponse": 45,
+      "unite": "mm",
+      "tolerance": 0,
+      "explication": "1 cm = 10 mm, donc 4,5 cm = 4,5 × 10 = 45 mm."
+    },
+    {
+      "question": "Sur un dessin à l'échelle 1:2, toutes les longueurs sont divisées par 2. Une pièce réelle mesure 80 mm : quelle longueur dessine-t-on ?",
+      "reponse": 40,
+      "unite": "mm",
+      "tolerance": 0,
+      "explication": "À l'échelle 1:2, on divise par 2 : 80 ÷ 2 = 40 mm."
+    },
+    {
+      "question": "Une cote de 150 sur un dessin technique est exprimée en millimètres. Quelle est cette longueur en centimètres ?",
+      "reponse": 15,
+      "unite": "cm",
+      "tolerance": 0,
+      "explication": "10 mm = 1 cm, donc 150 mm = 150 ÷ 10 = 15 cm."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Passer d'une idée à un objet imprimé en 3D",
+      "etapes": [
+        "Dessiner une esquisse 2D de la pièce",
+        "Extruder l'esquisse pour lui donner une épaisseur",
+        "Obtenir la maquette numérique en 3D",
+        "Envoyer le fichier à l'imprimante 3D"
+      ]
+    }
+  ]
+}

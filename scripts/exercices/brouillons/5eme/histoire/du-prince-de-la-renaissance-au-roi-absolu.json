@@ -1,0 +1,160 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "François Ier",
+      "detail": "Le roi de la Renaissance (1515-1547), protecteur des artistes, qui renforce son pouvoir.",
+      "cartes": [
+        "Un roi vainqueur à Marignan en 1515",
+        "Un roi mécène qui accueille Léonard de Vinci",
+        "Un roi fait construire le château de Chambord",
+        "En 1539, le français remplace le latin dans la justice",
+        "Le roi nomme les évêques par le concordat de Bologne"
+      ]
+    },
+    {
+      "nom": "De Henri IV à la Fronde",
+      "detail": "Le temps où la monarchie retrouve la paix et l'autorité, jusqu'à la révolte des parlementaires et des nobles.",
+      "cartes": [
+        "En 1598, un édit met fin aux guerres de Religion",
+        "Sully aide le roi à reconstruire le royaume",
+        "Ravaillac assassine le roi en 1610",
+        "Le cardinal de Richelieu, ministre de Louis XIII",
+        "Des nobles et des parlementaires se révoltent en 1648"
+      ]
+    },
+    {
+      "nom": "La monarchie absolue",
+      "detail": "Le pouvoir de Louis XIV : un roi qui tient son pouvoir de Dieu et gouverne avec des ministres et des agents.",
+      "cartes": [
+        "Un roi qui tient son pouvoir de Dieu",
+        "Le roi concentre tous les pouvoirs",
+        "Un agent du roi qui applique ses décisions en province",
+        "Colbert s'occupe des finances et de l'économie",
+        "En 1661, un roi décide de gouverner sans Premier ministre"
+      ]
+    },
+    {
+      "nom": "Versailles",
+      "detail": "La cour du roi, où la vie des nobles est réglée et où le pouvoir est mis en scène.",
+      "cartes": [
+        "L'installation de la cour du roi en 1682",
+        "L'étiquette règle chaque moment de la vie des courtisans",
+        "Assister au lever du roi est un privilège recherché",
+        "Des nobles surveillés qui cherchent les faveurs du roi",
+        "Molière, Lully et Le Brun travaillent pour la cour"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "la révocation de l'édit de Nantes en 1685",
+      "carte": "La volonté d'avoir un royaume d'une seule religion",
+      "role": "cause",
+      "explication": "Louis XIV veut un royaume d'une seule religion : il révoque l'édit de Nantes par l'édit de Fontainebleau."
+    },
+    {
+      "fait": "la révocation de l'édit de Nantes en 1685",
+      "carte": "La fuite de nombreux protestants à l'étranger",
+      "role": "consequence",
+      "explication": "Après la révocation, de nombreux protestants quittent le royaume pour les Provinces-Unies, l'Angleterre, la Suisse ou la Prusse."
+    },
+    {
+      "fait": "les impôts qui pèsent sur les paysans",
+      "carte": "Les guerres nombreuses et très coûteuses de Louis XIV",
+      "role": "cause",
+      "explication": "Les guerres coûtent très cher : le roi lève de lourds impôts, qui pèsent surtout sur les paysans."
+    },
+    {
+      "fait": "les impôts qui pèsent sur les paysans",
+      "carte": "Des révoltes de paysans",
+      "role": "consequence",
+      "explication": "Les impôts pèsent sur les paysans et provoquent des révoltes : la puissance du roi a des limites."
+    }
+  ],
+  "etiquettes": [
+    {
+      "consigne": "Qui est désigné par le passage en couleur ?",
+      "texte": "Sous Louis XIII, [le cardinal] renforce l'autorité du roi face aux nobles et aux protestants.",
+      "choix": ["François Ier", "Henri IV", "Richelieu", "Louis XIV"],
+      "bonne": 2,
+      "explication": "Le cardinal de Richelieu est le ministre de Louis XIII."
+    },
+    {
+      "consigne": "Qui est désigné par le passage en couleur ?",
+      "texte": "En 1685, [le roi] révoque l'édit de Nantes et de nombreux protestants fuient.",
+      "choix": ["François Ier", "Henri IV", "Richelieu", "Louis XIV"],
+      "bonne": 3,
+      "explication": "Louis XIV révoque l'édit de Nantes par l'édit de Fontainebleau, en 1685."
+    },
+    {
+      "consigne": "Qui est désigné par le passage en couleur ?",
+      "texte": "Vainqueur à Marignan en 1515, [le roi] fait ensuite construire le château de Chambord.",
+      "choix": ["François Ier", "Henri IV", "Richelieu", "Louis XIV"],
+      "bonne": 0,
+      "explication": "François Ier est vainqueur à Marignan en 1515 et fait construire Chambord."
+    },
+    {
+      "consigne": "Qui est désigné par le passage en couleur ?",
+      "texte": "En 1598, [le roi] met fin aux guerres de Religion par l'édit de Nantes.",
+      "choix": ["François Ier", "Henri IV", "Richelieu", "Louis XIV"],
+      "bonne": 1,
+      "explication": "Henri IV met fin aux guerres de Religion avec l'édit de Nantes, en 1598."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Louis XIV",
+      "acceptees": ["Louis XIV", "Louis 14", "Louis quatorze", "Le Roi-Soleil", "Roi-Soleil"],
+      "indices": [
+        "Je deviens roi en 1643, alors que je suis encore un enfant.",
+        "Je gouverne personnellement à partir de 1661, à la mort de Mazarin.",
+        "En 1682, j'installe ma cour à Versailles, et en 1685 je révoque l'édit de Nantes."
+      ],
+      "explication": "Louis XIV, roi de 1643 à 1715, gouverne seul à partir de 1661 et s'installe à Versailles en 1682."
+    },
+    {
+      "reponse": "François Ier",
+      "acceptees": ["François Ier", "François 1er", "Francois Ier", "Francois 1er", "François premier"],
+      "indices": [
+        "Je suis un roi de France de la Renaissance.",
+        "Je suis vainqueur à Marignan en 1515.",
+        "Mon ordonnance de Villers-Cotterêts impose le français dans les actes officiels."
+      ],
+      "explication": "François Ier, roi de 1515 à 1547, signe l'ordonnance de Villers-Cotterêts en 1539."
+    },
+    {
+      "reponse": "Henri IV",
+      "acceptees": ["Henri IV", "Henri 4", "Henri quatre"],
+      "indices": [
+        "Je suis le premier roi de la famille des Bourbons.",
+        "Avec mon ministre Sully, je reconstruis le royaume.",
+        "Je mets fin aux guerres de Religion en 1598, puis Ravaillac m'assassine en 1610."
+      ],
+      "explication": "Henri IV, premier roi Bourbon, met fin aux guerres de Religion par l'édit de Nantes (1598)."
+    },
+    {
+      "reponse": "Colbert",
+      "acceptees": ["Colbert", "Jean-Baptiste Colbert"],
+      "indices": [
+        "Je suis un ministre du XVIIe siècle.",
+        "Je m'occupe des finances et de l'économie du royaume.",
+        "Je suis le ministre de Louis XIV."
+      ],
+      "explication": "Colbert est le ministre de Louis XIV pour les finances et l'économie."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Cinq repères, du plus ancien au plus récent",
+      "etapes": [
+        "François Ier remporte la bataille de Marignan",
+        "Le français remplace le latin dans les actes officiels",
+        "Henri IV signe l'édit de Nantes",
+        "Louis XIV gouverne seul à la mort de Mazarin",
+        "La cour de Louis XIV s'installe à Versailles"
+      ]
+    }
+  ]
+}

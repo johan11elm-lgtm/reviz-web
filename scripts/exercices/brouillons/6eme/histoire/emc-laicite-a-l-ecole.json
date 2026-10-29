@@ -1,0 +1,115 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Les lois de 1881 à 2004",
+      "detail": "Les grandes lois qui ont construit la laïcité et l'école publique, de Jules Ferry à 2004.",
+      "cartes": [
+        "1881 : l'école primaire publique devient gratuite",
+        "1882 : l'enseignement public devient laïque",
+        "1882 : l'instruction devient obligatoire de 6 à 13 ans",
+        "1905 : les Églises sont séparées de l'État",
+        "2004 : les signes religieux ostensibles sont interdits aux élèves"
+      ]
+    },
+    {
+      "nom": "La Charte de la laïcité",
+      "detail": "Le texte de 2013 qui explique la laïcité aux élèves et qui est affiché dans les établissements publics.",
+      "cartes": [
+        "Un texte de 2013 composé de 15 articles",
+        "Un texte affiché dans les écoles, collèges et lycées publics",
+        "Un texte qui protège les élèves de toute pression",
+        "Un texte qui permet aux élèves d'exercer leur liberté d'expression",
+        "Aucun élève ne peut contester un cours au nom de ses croyances"
+      ]
+    },
+    {
+      "nom": "Le règlement intérieur",
+      "detail": "Le texte propre à un collège qui fixe ses règles de vie, les droits, les devoirs et les sanctions.",
+      "cartes": [
+        "Voté par le conseil d'administration du collège",
+        "Un texte qui fixe les droits et les devoirs des élèves",
+        "Des punitions et des sanctions prévues pour les fautes",
+        "Un bavardage n'est pas sanctionné comme une violence",
+        "Les règles de vie du collège, valables pour tous"
+      ]
+    },
+    {
+      "nom": "La neutralité de l'École",
+      "detail": "L'attitude des adultes de l'École publique, qui ne montrent aucune préférence religieuse ou politique.",
+      "cartes": [
+        "Un professeur ne montre pas sa religion en classe",
+        "Les personnels du collège ne montrent aucune préférence politique",
+        "Expliquer une religion sans dire si elle est vraie",
+        "Les personnels traitent tous les élèves de la même façon",
+        "Un professeur ne juge jamais un élève sur sa religion"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [],
+  "devinettes": [
+    {
+      "reponse": "Jules Ferry",
+      "acceptees": ["Jules Ferry", "Ferry"],
+      "indices": [
+        "Des lois portent mon nom.",
+        "Elles changent l'école publique à partir de 1881.",
+        "Grâce à elles, l'école primaire est gratuite et laïque, et l'instruction est obligatoire de 6 à 13 ans."
+      ],
+      "explication": "Les lois Jules Ferry de 1881-1882 rendent l'école primaire publique gratuite et laïque et l'instruction obligatoire de 6 à 13 ans."
+    },
+    {
+      "reponse": "Laïcité",
+      "acceptees": ["Laïcité", "La laïcité", "Laicite"],
+      "indices": [
+        "Je suis un principe de la République.",
+        "Je sépare l'État et les religions.",
+        "Je garantis la liberté de croire ou de ne pas croire."
+      ],
+      "explication": "La laïcité sépare l'État et les religions et garantit la liberté de croire ou de ne pas croire."
+    },
+    {
+      "reponse": "Règlement intérieur",
+      "acceptees": ["Règlement intérieur", "Le règlement intérieur", "Règlement"],
+      "indices": [
+        "Je suis un texte qui s'impose à tous dans le collège.",
+        "Je suis voté par le conseil d'administration.",
+        "Je fixe les droits, les devoirs, les punitions et les sanctions des élèves."
+      ],
+      "explication": "Le règlement intérieur fixe les règles de vie du collège ; il est voté par le conseil d'administration."
+    },
+    {
+      "reponse": "Charte de la laïcité",
+      "acceptees": ["Charte de la laïcité", "La Charte de la laïcité", "Charte", "La Charte", "Charte de la laïcité à l'École"],
+      "indices": [
+        "Je suis un texte de 2013.",
+        "Je compte 15 articles.",
+        "Je suis affichée dans les établissements publics pour expliquer les règles aux élèves."
+      ],
+      "explication": "La Charte de la laïcité à l'École, de 2013, compte 15 articles et est affichée dans les établissements publics."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Analyser une situation avec la Charte de la laïcité",
+      "etapes": [
+        "Décrire la situation : qui, où, ce qui se passe",
+        "Repérer le principe en jeu",
+        "Chercher la règle ou la loi qui s'applique",
+        "Conclure : permis ou non, et à quoi sert la règle"
+      ]
+    },
+    {
+      "titre": "Les grandes étapes de la laïcité à l'École",
+      "etapes": [
+        "L'école primaire publique devient gratuite",
+        "L'enseignement devient laïque et l'instruction obligatoire",
+        "Les Églises sont séparées de l'État",
+        "Les signes religieux ostensibles sont interdits aux élèves",
+        "La Charte de la laïcité à l'École est publiée"
+      ]
+    }
+  ]
+}

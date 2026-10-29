@@ -1,0 +1,193 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "L'abscisse",
+      "detail": "Le nombre qui repère un point sur l'axe horizontal ; elle s'écrit en premier dans les coordonnées.",
+      "cartes": [
+        "Le premier nombre dans les coordonnées d'un point",
+        "Dans A(−3 ; 2), c'est le nombre −3",
+        "Elle repère un point sur l'axe horizontal",
+        "Elle est nulle pour un point de l'axe vertical",
+        "Elle est négative pour un point à gauche de l'origine"
+      ]
+    },
+    {
+      "nom": "L'ordonnée",
+      "detail": "Le nombre qui repère un point sur l'axe vertical ; elle s'écrit en second dans les coordonnées.",
+      "cartes": [
+        "Le second nombre dans les coordonnées d'un point",
+        "Dans A(−3 ; 2), c'est le nombre 2",
+        "Elle repère un point sur l'axe vertical",
+        "Elle est nulle pour un point de l'axe horizontal",
+        "Elle est négative pour un point sous l'axe horizontal"
+      ]
+    },
+    {
+      "nom": "L'opposé d'un nombre",
+      "detail": "Le nombre qui a la même distance à zéro que lui, mais le signe contraire.",
+      "cartes": [
+        "Même distance à zéro, mais signe contraire",
+        "Celui de 4 est −4",
+        "Il est symétrique du nombre par rapport à l'origine",
+        "Celui de −9 est 9, mais celui de 9 est −9",
+        "Celui d'un nombre strictement positif est strictement négatif"
+      ]
+    },
+    {
+      "nom": "La valeur absolue",
+      "detail": "La distance à zéro d'un nombre : elle est toujours positive.",
+      "cartes": [
+        "Autre nom de la distance à zéro",
+        "Elle est toujours positive",
+        "Elle vaut 7 pour −7 comme pour 7",
+        "Elle est la même pour deux nombres opposés",
+        "Elle mesure la distance entre un point et l'origine"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Que peut-on dire du nombre en couleur ?",
+      "texte": "Ce matin, le thermomètre affichait [−4] °C.",
+      "choix": ["Strictement positif", "Strictement négatif", "Ni strictement positif ni strictement négatif"],
+      "bonne": 1,
+      "explication": "−4 est inférieur à 0 et différent de 0 : il est strictement négatif."
+    },
+    {
+      "consigne": "Que peut-on dire du nombre en couleur ?",
+      "texte": "Le point A a pour abscisse [+5].",
+      "choix": ["Strictement positif", "Strictement négatif", "Ni strictement positif ni strictement négatif"],
+      "bonne": 0,
+      "explication": "+5 est supérieur à 0 et différent de 0 : il est strictement positif."
+    },
+    {
+      "consigne": "Que peut-on dire du nombre en couleur ?",
+      "texte": "Le solde du compte de Léa est de [0] €.",
+      "choix": ["Strictement positif", "Strictement négatif", "Ni strictement positif ni strictement négatif"],
+      "bonne": 2,
+      "explication": "0 est à la fois positif et négatif, mais il n'est ni strictement positif ni strictement négatif."
+    },
+    {
+      "consigne": "Que peut-on dire du nombre en couleur ?",
+      "texte": "Au sommet de la colline, l'altitude est de [+120] m.",
+      "choix": ["Strictement positif", "Strictement négatif", "Ni strictement positif ni strictement négatif"],
+      "bonne": 0,
+      "explication": "+120 est supérieur à 0 et différent de 0 : il est strictement positif."
+    },
+    {
+      "consigne": "Que peut-on dire du nombre en couleur ?",
+      "texte": "Le sous-marin plonge à l'altitude [−35] m.",
+      "choix": ["Strictement positif", "Strictement négatif", "Ni strictement positif ni strictement négatif"],
+      "bonne": 1,
+      "explication": "−35 est inférieur à 0 et différent de 0 : il est strictement négatif."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Abscisse",
+      "acceptees": ["Abscisse", "L'abscisse", "Une abscisse"],
+      "indices": [
+        "Je fais partie des coordonnées d'un point.",
+        "Je suis écrite en premier, avant le point-virgule.",
+        "Je repère le point sur l'axe horizontal."
+      ],
+      "explication": "L'abscisse est le premier nombre des coordonnées : elle repère un point sur l'axe horizontal."
+    },
+    {
+      "reponse": "Valeur absolue",
+      "acceptees": ["Valeur absolue", "La valeur absolue", "Distance à zéro", "La distance à zéro", "Distance"],
+      "indices": [
+        "Je suis un nombre qui n'est jamais négatif.",
+        "Je mesure la distance entre un point et l'origine d'une droite graduée.",
+        "Pour −7 comme pour 7, je vaux 7."
+      ],
+      "explication": "La valeur absolue d'un nombre est sa distance à zéro : elle vaut 7 pour −7 comme pour 7."
+    },
+    {
+      "reponse": "Opposé",
+      "acceptees": ["Opposé", "L'opposé", "Un opposé", "Nombre opposé", "Le nombre opposé"],
+      "indices": [
+        "Je suis lié à un autre nombre.",
+        "J'ai la même distance à zéro que lui.",
+        "Mon signe est contraire au sien : s'il vaut 4, je vaux −4."
+      ],
+      "explication": "Deux nombres opposés ont la même distance à zéro et des signes contraires : 4 et −4."
+    },
+    {
+      "reponse": "Origine",
+      "acceptees": ["Origine", "L'origine", "Origine du repère", "L'origine du repère"],
+      "indices": [
+        "Je suis un point du repère.",
+        "Les deux axes gradués se coupent en moi.",
+        "Mes coordonnées sont (0 ; 0)."
+      ],
+      "explication": "L'origine du repère est le point de coordonnées (0 ; 0), où se coupent les deux axes."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "Quel est l'opposé de −12,5 ?",
+      "reponse": 12.5,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "L'opposé a la même distance à zéro et le signe contraire : l'opposé de −12,5 est 12,5."
+    },
+    {
+      "question": "Quelle est la distance à zéro de −9,2 ?",
+      "reponse": 9.2,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "Une distance est toujours positive : le point d'abscisse −9,2 est à 9,2 unités de l'origine."
+    },
+    {
+      "question": "Quel est le plus petit des nombres −3 ; 1 ; −3,5 ; 0 ; −0,5 ?",
+      "reponse": -3.5,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "Les négatifs sont −3 ; −3,5 et −0,5. Entre négatifs, le plus petit est le plus loin de zéro : 3,5 > 3 > 0,5, donc −3,5 est le plus petit."
+    },
+    {
+      "question": "Le point K est 2 unités à droite de l'origine et 7 unités en dessous. Quelle est son ordonnée ?",
+      "reponse": -7,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "Il est sous l'axe horizontal, à 7 unités : son ordonnée est −7. Ses coordonnées sont (2 ; −7)."
+    },
+    {
+      "question": "Sur une droite graduée de 0,5 en 0,5, le point P est situé 5 graduations à gauche de l'origine. Quelle est son abscisse ?",
+      "reponse": -2.5,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "5 graduations de 0,5 font 5 × 0,5 = 2,5 unités. Le point est à gauche de l'origine : son abscisse est −2,5."
+    },
+    {
+      "question": "Combien y a-t-il de nombres entiers strictement compris entre −3 et 2 ?",
+      "reponse": 4,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "Ces entiers sont −2 ; −1 ; 0 et 1. Il y en a 4 (−3 et 2 sont exclus)."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Placer le point A(−3 ; 2) dans un repère",
+      "etapes": [
+        "On lit l'abscisse : −3",
+        "On part de l'origine et on se déplace de 3 unités vers la gauche",
+        "On lit l'ordonnée, 2, et on monte de 2 unités",
+        "On marque le point d'une croix et on écrit son nom"
+      ]
+    },
+    {
+      "titre": "Comparer −7 et −2",
+      "etapes": [
+        "On cherche la distance à zéro de chaque nombre",
+        "On trouve 7 pour −7 et 2 pour −2",
+        "On compare les distances : 7 est plus grand que 2",
+        "Pour des négatifs, l'ordre s'inverse : −7 < −2"
+      ]
+    }
+  ]
+}

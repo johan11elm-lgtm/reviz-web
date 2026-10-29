@@ -1,0 +1,130 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Les espaces d'une aire urbaine",
+      "detail": "Les trois auréoles du centre vers l'extérieur : ville-centre, banlieue et couronne périurbaine.",
+      "cartes": [
+        "Le centre historique de la ville",
+        "Le quartier des affaires, au cœur de la ville",
+        "Un espace bâti en continuité avec la ville-centre",
+        "Des communes séparées de la ville par des champs",
+        "Des communes souvent pavillonnaires, avec des maisons individuelles"
+      ]
+    },
+    {
+      "nom": "La hiérarchie des villes françaises",
+      "detail": "Le classement des villes selon leur taille et leurs fonctions, avec Paris très loin devant.",
+      "cartes": [
+        "L'aire de Paris compte environ 13 millions d'habitants",
+        "Lyon est la deuxième aire de France, loin derrière Paris",
+        "Une seule ville écrase toutes les autres par sa taille",
+        "Marseille-Aix, Lille, Toulouse et Bordeaux sont des métropoles régionales",
+        "Les villes sont classées selon leur population et leurs fonctions"
+      ]
+    },
+    {
+      "nom": "Les grandes villes dans la mondialisation",
+      "detail": "La concentration des richesses, des emplois et des décisions dans les plus grandes villes, ouvertes sur le monde.",
+      "cartes": [
+        "Richesses et emplois se concentrent dans les plus grandes villes",
+        "Paris accueille de nombreux sièges de grandes entreprises",
+        "Les aéroports de Roissy-Charles-de-Gaulle et d'Orly relient Paris au monde",
+        "Des millions de touristes étrangers viennent à Paris",
+        "Paris est considérée comme une ville mondiale"
+      ]
+    },
+    {
+      "nom": "Les mobilités pendulaires",
+      "detail": "Les trajets quotidiens entre le domicile et le lieu de travail, surtout de la couronne vers le pôle.",
+      "cartes": [
+        "Des allers-retours quotidiens entre le domicile et le travail",
+        "Des flux surtout orientés de la couronne vers le pôle",
+        "Des trajets faits surtout en voiture",
+        "Des embouteillages et de la pollution sur les routes",
+        "Peu de transports en commun dans les communes périurbaines"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "les déplacements quotidiens en voiture vers le pôle",
+      "carte": "Le pôle concentre les emplois de l'aire",
+      "role": "cause",
+      "explication": "Les actifs de la couronne doivent aller travailler dans le pôle, qui concentre les emplois."
+    },
+    {
+      "fait": "les déplacements quotidiens en voiture vers le pôle",
+      "carte": "Les communes peu denses sont mal desservies par les transports en commun",
+      "role": "cause",
+      "explication": "Sans transports en commun suffisants, la voiture devient le moyen de transport principal."
+    },
+    {
+      "fait": "les déplacements quotidiens en voiture vers le pôle",
+      "carte": "Des embouteillages sur les routes",
+      "role": "consequence",
+      "explication": "Beaucoup de voitures sur les mêmes routes provoquent des embouteillages."
+    },
+    {
+      "fait": "les déplacements quotidiens en voiture vers le pôle",
+      "carte": "Une pollution de l'air accrue",
+      "role": "consequence",
+      "explication": "Les trajets en voiture entraînent embouteillages et pollution."
+    }
+  ],
+  "etiquettes": [],
+  "devinettes": [
+    {
+      "reponse": "La macrocéphalie",
+      "acceptees": ["Macrocéphalie", "La macrocéphalie parisienne", "Macrocéphalie parisienne"],
+      "indices": [
+        "Je suis un mot de géographie qui décrit les villes d'un pays.",
+        "Je désigne la domination écrasante d'une seule ville sur toutes les autres.",
+        "En France, c'est Paris, avec environ 13 millions d'habitants dans son aire, qui me provoque."
+      ],
+      "explication": "La macrocéphalie est la domination écrasante d'une ville sur toutes les autres d'un pays : en France, c'est le cas de Paris."
+    },
+    {
+      "reponse": "La banlieue",
+      "acceptees": ["Banlieue", "Les banlieues"],
+      "indices": [
+        "Je suis un espace d'une aire urbaine.",
+        "Je me situe autour de la ville-centre.",
+        "Mon bâti est dans la continuité de celui de la ville, sans champs entre elle et moi."
+      ],
+      "explication": "La banlieue est un espace urbanisé en continuité avec le bâti de la ville-centre, à la différence de la couronne périurbaine."
+    },
+    {
+      "reponse": "La couronne périurbaine",
+      "acceptees": ["Couronne périurbaine", "La couronne", "Couronne", "Espace périurbain", "Le périurbain"],
+      "indices": [
+        "Je fais partie d'une aire d'attraction.",
+        "Mes communes sont souvent pavillonnaires.",
+        "Je suis séparée de la ville par des champs, et mes habitants travaillent souvent dans le pôle."
+      ],
+      "explication": "La couronne périurbaine rassemble des communes séparées de la ville par des champs, dont une partie des actifs travaille dans le pôle."
+    },
+    {
+      "reponse": "La Défense",
+      "acceptees": ["Défense", "Quartier de la Défense", "Le quartier d'affaires de La Défense"],
+      "indices": [
+        "Je suis un quartier.",
+        "Je suis un quartier d'affaires.",
+        "J'accueille des sièges de grandes entreprises, dans l'aire de Paris."
+      ],
+      "explication": "La Défense est le quartier d'affaires de l'aire de Paris, où se trouvent de nombreux sièges d'entreprises."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Les étapes du croquis d'une aire urbaine",
+      "etapes": [
+        "Dessiner trois auréoles autour d'un point central",
+        "Choisir des figurés du plus foncé au plus clair",
+        "Ajouter les axes de transport et les flèches des trajets",
+        "Ranger la légende en parties et donner un titre"
+      ]
+    }
+  ]
+}

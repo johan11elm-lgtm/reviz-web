@@ -1,0 +1,138 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Calculs qui valent −8",
+      "detail": "Des additions et des soustractions de relatifs dont le résultat est −8.",
+      "cartes": [
+        "(−3) + (−5)",
+        "2 − 10",
+        "(−12) + 4",
+        "(−5) − 3",
+        "7 − 4 − 11"
+      ]
+    },
+    {
+      "nom": "Calculs qui valent −2",
+      "detail": "Des additions et des soustractions de relatifs dont le résultat est −2.",
+      "cartes": [
+        "(−9) + 7",
+        "3 − 5",
+        "(−6) − (−4)",
+        "5 + (−7)",
+        "8 − 3 − 7"
+      ]
+    },
+    {
+      "nom": "Calculs qui valent 6",
+      "detail": "Des additions et des soustractions de relatifs dont le résultat est 6.",
+      "cartes": [
+        "(−4) − (−10)",
+        "(−5) + 11",
+        "2 − (−4)",
+        "9 + (−3)",
+        "7 − 4 + 3"
+      ]
+    },
+    {
+      "nom": "Calculs qui valent 0",
+      "detail": "Des additions et des soustractions de relatifs dont le résultat est 0.",
+      "cartes": [
+        "(−6) + 6",
+        "(−8) − (−8)",
+        "8 + (−3) + 3 − 8",
+        "12 − 20 + 8",
+        "(+4) + (−9) − (−5)"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [],
+  "devinettes": [
+    {
+      "reponse": "Opposé",
+      "acceptees": ["Opposé", "L'opposé", "Un opposé", "Opposés"],
+      "indices": [
+        "Je suis un nombre lié à un autre nombre.",
+        "J'ai la même distance à zéro que lui, mais le signe contraire.",
+        "Ma somme avec lui vaut 0."
+      ],
+      "explication": "L'opposé de 6 est −6 : deux nombres opposés ont une somme égale à 0."
+    },
+    {
+      "reponse": "Différence",
+      "acceptees": ["Différence", "La différence", "Une différence"],
+      "indices": [
+        "Je suis le résultat d'une opération.",
+        "Pour me calculer, on retire un nombre à un autre.",
+        "Je suis le résultat d'une soustraction, comme 9 − 4."
+      ],
+      "explication": "La différence est le résultat d'une soustraction : 9 − 4 = 5."
+    },
+    {
+      "reponse": "Écriture simplifiée",
+      "acceptees": ["Écriture simplifiée", "L'écriture simplifiée", "Une écriture simplifiée"],
+      "indices": [
+        "Je suis une façon d'écrire un calcul.",
+        "Je supprime les parenthèses et les signes + des additions.",
+        "Avec moi, (+5) + (−3) − (+2) s'écrit 5 − 3 − 2."
+      ],
+      "explication": "En écriture simplifiée, on supprime les parenthèses et le signe + des additions : (+5) + (−3) − (+2) s'écrit 5 − 3 − 2."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "Combien vaut (−17) + (−25) ?",
+      "reponse": -42,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "Même signe : on garde le signe − et on additionne 17 + 25 = 42, donc (−17) + (−25) = −42."
+    },
+    {
+      "question": "Combien vaut (−13) − (−28) ?",
+      "reponse": 15,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "Soustraire −28 revient à ajouter 28 : (−13) + 28. Signes contraires : 28 − 13 = 15, et 28 est le plus loin de zéro, donc le résultat est +15."
+    },
+    {
+      "question": "Combien vaut 15 − 23 + 9 − 4 ?",
+      "reponse": -3,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "On regroupe les positifs et les négatifs : (15 + 9) − (23 + 4) = 24 − 27 = −3."
+    },
+    {
+      "question": "Il fait −7 °C la nuit et 12 °C dans la journée. Quel est l'écart de température ?",
+      "reponse": 19,
+      "unite": "°C",
+      "tolerance": 0,
+      "explication": "Écart = 12 − (−7) = 12 + 7 = 19 °C."
+    },
+    {
+      "question": "Un plongeur est à −18 m. Il remonte de 7 m. À quelle altitude se trouve-t-il alors ?",
+      "reponse": -11,
+      "unite": "m",
+      "tolerance": 0,
+      "explication": "−18 + 7 : signes contraires, 18 − 7 = 11, et −18 est le plus loin de zéro, donc le résultat est −11 m."
+    },
+    {
+      "question": "Quelle est la distance entre les points d'abscisses −5 et 9 sur une droite graduée ?",
+      "reponse": 14,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "Distance = plus grande abscisse − plus petite abscisse = 9 − (−5) = 9 + 5 = 14."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Calculer la distance entre les points d'abscisses −3 et 5",
+      "etapes": [
+        "On repère la plus grande abscisse (5) et la plus petite (−3)",
+        "On écrit : plus grande abscisse moins plus petite abscisse",
+        "On remplace par les valeurs : 5 − (−3)",
+        "On transforme en addition et on calcule : 5 + 3 = 8"
+      ]
+    }
+  ]
+}

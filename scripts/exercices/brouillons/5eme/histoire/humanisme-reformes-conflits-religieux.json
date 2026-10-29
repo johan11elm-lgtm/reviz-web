@@ -1,0 +1,173 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Humanisme et imprimerie",
+      "detail": "Un mouvement des XVe-XVIe siècles qui place l'être humain au centre, et l'invention qui diffuse ses idées.",
+      "cartes": [
+        "Un mouvement qui place l'être humain au centre",
+        "Rabelais écrit Gargantua et Pantagruel",
+        "Montaigne écrit les Essais",
+        "Érasme étudie les textes anciens et la Bible",
+        "Gutenberg met au point les caractères mobiles à Mayence"
+      ]
+    },
+    {
+      "nom": "La Renaissance artistique",
+      "detail": "Un renouveau des arts né en Italie, avec la perspective et un corps humain représenté de façon réaliste.",
+      "cartes": [
+        "La perspective et un corps humain réaliste",
+        "Léonard de Vinci, Michel-Ange et Raphaël",
+        "Le plafond de la chapelle Sixtine, à Rome",
+        "Un renouveau des arts né à Florence",
+        "Le château de Chambord, construit sous François Ier"
+      ]
+    },
+    {
+      "nom": "Luther et Calvin",
+      "detail": "Les deux grands réformateurs qui critiquent l'Église catholique et donnent naissance au protestantisme.",
+      "cartes": [
+        "Un moine allemand publie 95 thèses contre les indulgences",
+        "Un moine excommunié en 1521",
+        "Seule la foi sauve, seule la Bible fait autorité",
+        "Un Français installé à Genève, dont les idées se diffusent",
+        "La Bible traduite en allemand pour être lue de tous"
+      ]
+    },
+    {
+      "nom": "Les guerres de Religion",
+      "detail": "Les affrontements entre catholiques et protestants en France, de 1562 à la paix de 1598.",
+      "cartes": [
+        "Un conflit entre catholiques et protestants de 1562 à 1598",
+        "Le massacre de milliers de protestants à Paris en 1572",
+        "Un roi protestant devenu catholique en 1593",
+        "Un édit de 1598 qui apaise le royaume",
+        "Le catholicisme reste la religion du royaume"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "la Réforme protestante",
+      "carte": "La vente des indulgences",
+      "role": "cause",
+      "explication": "En 1517, Luther publie 95 thèses contre la vente des indulgences : cette critique lance la Réforme."
+    },
+    {
+      "fait": "la Réforme protestante",
+      "carte": "La rupture de l'unité des chrétiens d'Occident",
+      "role": "consequence",
+      "explication": "Au XVIe siècle, l'Occident chrétien se divise entre catholiques et protestants."
+    },
+    {
+      "fait": "la Réforme protestante",
+      "carte": "Le concile de Trente",
+      "role": "consequence",
+      "explication": "L'Église catholique répond à la Réforme par le concile de Trente (1545-1563), qui réaffirme ses dogmes."
+    },
+    {
+      "fait": "l'édit de Nantes en 1598",
+      "carte": "Les guerres de Religion qui déchirent le royaume",
+      "role": "cause",
+      "explication": "Après des années de guerres entre catholiques et protestants, Henri IV signe l'édit de Nantes pour ramener la paix."
+    },
+    {
+      "fait": "l'édit de Nantes en 1598",
+      "carte": "La liberté de conscience accordée aux protestants",
+      "role": "consequence",
+      "explication": "L'édit de Nantes donne aux protestants la liberté de conscience et une liberté de culte limitée."
+    }
+  ],
+  "etiquettes": [
+    {
+      "consigne": "De qui parle-t-on dans le passage en couleur ?",
+      "texte": "Pour eux, [seule la foi sauve et seule la Bible fait autorité].",
+      "choix": ["Les catholiques", "Les protestants", "Les humanistes"],
+      "bonne": 1,
+      "explication": "Pour les protestants, seule la foi sauve et seule la Bible fait autorité."
+    },
+    {
+      "consigne": "De qui parle-t-on dans le passage en couleur ?",
+      "texte": "Pour eux, [le pape reste le chef de l'Église et il existe sept sacrements].",
+      "choix": ["Les catholiques", "Les protestants", "Les humanistes"],
+      "bonne": 0,
+      "explication": "Les catholiques gardent le pape et les sept sacrements."
+    },
+    {
+      "consigne": "De qui parle-t-on dans le passage en couleur ?",
+      "texte": "Ils [placent l'être humain au centre et redécouvrent les textes de l'Antiquité].",
+      "choix": ["Les catholiques", "Les protestants", "Les humanistes"],
+      "bonne": 2,
+      "explication": "Les humanistes placent l'être humain au centre et s'inspirent des textes antiques."
+    },
+    {
+      "consigne": "De qui parle-t-on dans le passage en couleur ?",
+      "texte": "Ils [refusent l'autorité du pape et ne gardent que le baptême et la Cène].",
+      "choix": ["Les catholiques", "Les protestants", "Les humanistes"],
+      "bonne": 1,
+      "explication": "Les protestants refusent l'autorité du pape et ne gardent que deux sacrements."
+    },
+    {
+      "consigne": "De qui parle-t-on dans le passage en couleur ?",
+      "texte": "Au concile de Trente, ils [réaffirment leurs dogmes et l'autorité du pape].",
+      "choix": ["Les catholiques", "Les protestants", "Les humanistes"],
+      "bonne": 0,
+      "explication": "Le concile de Trente (1545-1563) est la réponse des catholiques à la Réforme."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Gutenberg",
+      "acceptees": ["Gutenberg", "Johannes Gutenberg", "Johann Gutenberg"],
+      "indices": [
+        "Je suis un inventeur du XVe siècle.",
+        "Je travaille à Mayence.",
+        "Vers 1450-1455, je mets au point l'imprimerie à caractères mobiles."
+      ],
+      "explication": "Gutenberg met au point l'imprimerie à Mayence : les livres deviennent plus nombreux et moins chers."
+    },
+    {
+      "reponse": "Luther",
+      "acceptees": ["Luther", "Martin Luther"],
+      "indices": [
+        "Je suis un moine allemand.",
+        "En 1517, je publie 95 thèses contre les indulgences.",
+        "J'ai été excommunié en 1521 et j'ai traduit la Bible en allemand."
+      ],
+      "explication": "Martin Luther lance la Réforme en 1517 en critiquant la vente des indulgences."
+    },
+    {
+      "reponse": "Le concile de Trente",
+      "acceptees": ["Concile de Trente", "Le concile de Trente", "Trente"],
+      "indices": [
+        "Je suis une grande réunion.",
+        "Je réaffirme les dogmes de l'Église catholique.",
+        "Je me tiens de 1545 à 1563 et j'améliore la formation des prêtres."
+      ],
+      "explication": "Le concile de Trente (1545-1563) est la réponse de l'Église catholique à la Réforme."
+    },
+    {
+      "reponse": "Henri IV",
+      "acceptees": ["Henri IV", "Henri 4", "Henri quatre"],
+      "indices": [
+        "Je suis un roi de France.",
+        "Je suis protestant, puis je deviens catholique en 1593.",
+        "En 1598, je signe l'édit de Nantes."
+      ],
+      "explication": "Henri IV, protestant devenu catholique en 1593, signe l'édit de Nantes en 1598."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Cinq événements, du plus ancien au plus récent",
+      "etapes": [
+        "Gutenberg met au point l'imprimerie à Mayence",
+        "Luther publie ses 95 thèses contre les indulgences",
+        "Le concile de Trente réaffirme les dogmes catholiques",
+        "Des milliers de protestants sont massacrés à Paris",
+        "Henri IV signe l'édit de Nantes"
+      ]
+    }
+  ]
+}

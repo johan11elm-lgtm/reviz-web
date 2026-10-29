@@ -1,0 +1,213 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Le fer",
+      "detail": "Le métal solide, réactif de la transformation, qui disparaît peu à peu dans l'acide.",
+      "cartes": [
+        "Il disparaît peu à peu dans le tube à essai",
+        "On l'ajoute sous forme de poudre à l'acide",
+        "Un bidon fait de ce métal serait percé par l'acide",
+        "C'est le réactif solide de la transformation",
+        "Contrairement au cuivre, il est attaqué par l'acide"
+      ]
+    },
+    {
+      "nom": "Le dihydrogène",
+      "detail": "Le gaz formé, qui détone près d'une flamme et qui est inflammable.",
+      "cartes": [
+        "Il produit une petite détonation près d'une flamme",
+        "Ce gaz forme les bulles qu'on voit dans le tube",
+        "On le recueille dans un tube retourné",
+        "Il peut faire éclater un récipient bouché",
+        "Chaque molécule est formée de deux atomes d'hydrogène"
+      ]
+    },
+    {
+      "nom": "Les ions H⁺",
+      "detail": "Les ions responsables de l'acidité, apportés par l'acide et consommés par la réaction.",
+      "cartes": [
+        "Ils rendent une solution acide",
+        "Leur consommation fait augmenter le pH",
+        "Dans l'équation, ils sont précédés du coefficient 2",
+        "Ils proviennent de l'acide et sont consommés",
+        "Chacun porte une seule charge positive"
+      ]
+    },
+    {
+      "nom": "Les ions Cl⁻",
+      "detail": "Les ions chlorure, spectateurs : ils restent dans la solution sans réagir.",
+      "cartes": [
+        "Ce sont des spectateurs de la transformation",
+        "Ils restent dans la solution sans réagir",
+        "Ils portent une charge négative",
+        "Leur nombre ne change pas pendant la réaction",
+        "Ils n'apparaissent pas dans l'équation de la réaction"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "le dégagement de dihydrogène",
+      "carte": "Le fer réagit avec les ions H⁺ de l'acide",
+      "role": "cause",
+      "explication": "Fe + 2 H⁺ → H₂ + Fe²⁺ : c'est la réaction du métal avec les ions H⁺ qui forme le dihydrogène."
+    },
+    {
+      "fait": "le dégagement de dihydrogène",
+      "carte": "Un morceau de zinc est plongé dans l'acide chlorhydrique",
+      "role": "cause",
+      "explication": "Le zinc réagit lui aussi avec l'acide : Zn + 2 H⁺ → H₂ + Zn²⁺."
+    },
+    {
+      "fait": "le dégagement de dihydrogène",
+      "carte": "Une flamme approchée du tube provoque une petite détonation",
+      "role": "consequence",
+      "explication": "Le dihydrogène détone à l'approche d'une flamme : c'est le test qui permet de l'identifier."
+    },
+    {
+      "fait": "le dégagement de dihydrogène",
+      "carte": "Un flacon bouché risque d'éclater",
+      "role": "consequence",
+      "explication": "Le gaz s'accumule dans un récipient bouché, qui peut alors éclater."
+    }
+  ],
+  "etiquettes": [
+    {
+      "consigne": "Quel est le rôle de l'espèce en couleur dans la réaction entre le fer et l'acide chlorhydrique ?",
+      "texte": "On verse de l'acide chlorhydrique sur de la poudre de [fer].",
+      "choix": [
+        "Réactif",
+        "Produit",
+        "Ion spectateur"
+      ],
+      "bonne": 0,
+      "explication": "Le fer est consommé par la réaction : c'est un réactif."
+    },
+    {
+      "consigne": "Quel est le rôle de l'espèce en couleur dans la réaction entre le fer et l'acide chlorhydrique ?",
+      "texte": "Un gaz inflammable, [le dihydrogène], se dégage du tube.",
+      "choix": [
+        "Réactif",
+        "Produit",
+        "Ion spectateur"
+      ],
+      "bonne": 1,
+      "explication": "Le dihydrogène se forme pendant la réaction : c'est un produit."
+    },
+    {
+      "consigne": "Quel est le rôle de l'espèce en couleur dans la réaction entre le fer et l'acide chlorhydrique ?",
+      "texte": "Les [ions chlorure Cl⁻] sont dans l'acide avant la réaction et dans la solution après.",
+      "choix": [
+        "Réactif",
+        "Produit",
+        "Ion spectateur"
+      ],
+      "bonne": 2,
+      "explication": "Les ions chlorure ne participent pas à la réaction : ce sont des ions spectateurs."
+    },
+    {
+      "consigne": "Quel est le rôle de l'espèce en couleur dans la réaction entre le fer et l'acide chlorhydrique ?",
+      "texte": "À la fin de la réaction, la solution contient des [ions fer II Fe²⁺].",
+      "choix": [
+        "Réactif",
+        "Produit",
+        "Ion spectateur"
+      ],
+      "bonne": 1,
+      "explication": "Les ions fer II se forment à partir des atomes de fer : ce sont des produits."
+    },
+    {
+      "consigne": "Quel est le rôle de l'espèce en couleur dans la réaction entre le fer et l'acide chlorhydrique ?",
+      "texte": "Pendant la réaction, les [ions hydrogène H⁺] sont consommés.",
+      "choix": [
+        "Réactif",
+        "Produit",
+        "Ion spectateur"
+      ],
+      "bonne": 0,
+      "explication": "Les ions H⁺ disparaissent au cours de la réaction : ce sont des réactifs."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Dihydrogène",
+      "acceptees": [
+        "Dihydrogène",
+        "Le dihydrogène",
+        "H2",
+        "H₂"
+      ],
+      "indices": [
+        "Je suis un gaz.",
+        "Je forme les bulles qui se dégagent quand le fer attaque l'acide.",
+        "Si on approche une flamme de moi, j'aboie : c'est une petite détonation."
+      ],
+      "explication": "Le dihydrogène H₂ est reconnu par la petite détonation qu'il produit à l'approche d'une flamme."
+    },
+    {
+      "reponse": "Précipité",
+      "acceptees": [
+        "Précipité",
+        "Un précipité",
+        "Le précipité"
+      ],
+      "indices": [
+        "Je suis un solide.",
+        "Je me forme dans une solution, par exemple lors d'un test.",
+        "Avec la soude, je suis vert quand la solution contient des ions Fe²⁺."
+      ],
+      "explication": "Un précipité est un solide qui se forme dans une solution : avec la soude, un précipité vert prouve la présence d'ions Fe²⁺."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "Selon l'équation Fe + 2 H⁺ → H₂ + Fe²⁺, combien d'ions H⁺ faut-il pour faire réagir 4 atomes de fer ?",
+      "reponse": 8,
+      "unite": "ions",
+      "tolerance": 0,
+      "explication": "Chaque atome de fer demande 2 ions H⁺ : 4 × 2 = 8 ions H⁺."
+    },
+    {
+      "question": "Dans l'équation Fe + 2 H⁺ → H₂ + Fe²⁺, combien y a-t-il de charges positives au total à gauche de la flèche ?",
+      "reponse": 2,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "À gauche, 2 ions H⁺ portent chacun une charge + : 2 × 1 = 2 charges positives (l'atome de fer est neutre). À droite, Fe²⁺ porte aussi 2 charges positives."
+    },
+    {
+      "question": "Le zinc réagit avec l'acide : Zn + 2 H⁺ → H₂ + Zn²⁺. Combien d'atomes d'hydrogène contient le dihydrogène formé à partir de 3 atomes de zinc ?",
+      "reponse": 6,
+      "unite": "atomes",
+      "tolerance": 0,
+      "explication": "3 atomes de zinc forment 3 molécules H₂, soit 3 × 2 = 6 atomes d'hydrogène."
+    },
+    {
+      "question": "Dans un flacon fermé, on met 100 g de solution d'acide chlorhydrique et 5,6 g de fer. Quelle est la masse du contenu après la réaction, sans que rien ne s'échappe ?",
+      "reponse": 105.6,
+      "unite": "g",
+      "tolerance": 0,
+      "explication": "La masse totale se conserve : 100 + 5,6 = 105,6 g."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Mettre en évidence le dihydrogène",
+      "etapes": [
+        "Verser l'acide chlorhydrique sur la poudre de fer",
+        "Recueillir le gaz dans un tube retourné",
+        "Approcher une flamme de l'ouverture du tube",
+        "Observer une petite détonation"
+      ]
+    },
+    {
+      "titre": "Montrer que la solution contient des ions fer II",
+      "etapes": [
+        "Prélever un peu de la solution obtenue",
+        "Ajouter de la soude",
+        "Observer un précipité vert",
+        "Conclure que la solution contient des ions Fe²⁺"
+      ]
+    }
+  ]
+}

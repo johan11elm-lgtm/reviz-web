@@ -1,0 +1,218 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Dessiner l'esquisse",
+      "detail": "Première opération en CAO : tracer à plat, en deux dimensions, la forme de base de la pièce.",
+      "cartes": [
+        "Dessiner un rectangle à plat sur un plan",
+        "Tracer un cercle sur un plan de travail",
+        "Dessiner le contour d'une plaque en deux dimensions",
+        "Placer des lignes et des arcs de cercle sur un plan",
+        "Dessiner le profil d'un vase vu de côté"
+      ]
+    },
+    {
+      "nom": "Contraindre l'esquisse",
+      "detail": "On impose des cotes en millimètres et des relations (parallèle, même longueur, contact) au dessin de base.",
+      "cartes": [
+        "Fixer la largeur du rectangle à 40 mm",
+        "Imposer un diamètre de 8 mm au cercle",
+        "Rendre deux côtés parallèles",
+        "Imposer la même longueur à deux segments",
+        "Obliger le cercle à toucher un côté du rectangle"
+      ]
+    },
+    {
+      "nom": "Extruder l'esquisse",
+      "detail": "On donne de l'épaisseur ou de la hauteur au dessin de base pour obtenir un volume.",
+      "cartes": [
+        "Donner 5 mm d'épaisseur à la plaque dessinée",
+        "Étirer un cercle sur 30 mm pour obtenir un cylindre",
+        "Donner de la hauteur au contour d'un boîtier",
+        "Pousser un rectangle sur 10 mm pour obtenir un pavé",
+        "Donner de l'épaisseur au contour d'un engrenage"
+      ]
+    },
+    {
+      "nom": "Faire une révolution",
+      "detail": "On fait tourner le dessin de base autour d'un axe pour obtenir un volume.",
+      "cartes": [
+        "Faire tourner le profil d'un vase autour d'un axe",
+        "Faire tourner un rectangle autour de l'un de ses côtés",
+        "Faire pivoter un demi-cercle autour de son diamètre",
+        "Faire tourner un triangle rectangle autour d'un côté",
+        "Faire tourner un trapèze rectangle autour de son côté vertical"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "l'écart entre la simulation et la mesure sur le prototype",
+      "carte": "Le modèle néglige les frottements",
+      "role": "cause",
+      "explication": "Un modèle simplifie la réalité : en négligeant les frottements, il prévoit une valeur trop favorable."
+    },
+    {
+      "fait": "l'écart entre la simulation et la mesure sur le prototype",
+      "carte": "Les matériaux sont supposés parfaits dans le modèle",
+      "role": "cause",
+      "explication": "Idéaliser les matériaux fait diverger la simulation de la réalité."
+    },
+    {
+      "fait": "l'écart entre la simulation et la mesure sur le prototype",
+      "carte": "Les mesures sur le prototype sont un peu imprécises",
+      "role": "cause",
+      "explication": "Des instruments imprécis ajoutent un écart entre la valeur simulée et la valeur mesurée."
+    },
+    {
+      "fait": "la simulation d'un objet avant sa fabrication",
+      "carte": "Un gain de temps et d'argent",
+      "role": "consequence",
+      "explication": "On teste l'objet sans le fabriquer, ce qui évite des essais coûteux."
+    },
+    {
+      "fait": "la simulation d'un objet avant sa fabrication",
+      "carte": "Moins de pièces d'essai à fabriquer",
+      "role": "consequence",
+      "explication": "On repère les défauts sur l'ordinateur, avant de fabriquer des pièces réelles."
+    }
+  ],
+  "etiquettes": [
+    {
+      "consigne": "Quel type de représentation est le passage en couleur ?",
+      "texte": "Pour montrer son idée à l'équipe, Maya fait [un dessin rapide à main levée].",
+      "choix": ["Un croquis", "Un schéma", "Un dessin technique coté", "Une maquette numérique"],
+      "bonne": 0,
+      "explication": "Un dessin rapide à main levée, pour exprimer une idée, est un croquis."
+    },
+    {
+      "consigne": "Quel type de représentation est le passage en couleur ?",
+      "texte": "L'atelier reçoit [un plan précis, avec toutes les cotes en millimètres], pour fabriquer la pièce.",
+      "choix": ["Un croquis", "Un schéma", "Un dessin technique coté", "Une maquette numérique"],
+      "bonne": 2,
+      "explication": "Un plan précis et coté en millimètres, qui sert à fabriquer, est un dessin technique."
+    },
+    {
+      "consigne": "Quel type de représentation est le passage en couleur ?",
+      "texte": "Sur l'écran, Hugo fait tourner [le modèle 3D de la pièce créé avec un logiciel de CAO].",
+      "choix": ["Un croquis", "Un schéma", "Un dessin technique coté", "Une maquette numérique"],
+      "bonne": 3,
+      "explication": "Un modèle 3D créé avec un logiciel de CAO est une maquette numérique."
+    },
+    {
+      "consigne": "Quel type de représentation est le passage en couleur ?",
+      "texte": "Pour expliquer le circuit, le professeur trace [une pile, un interrupteur et une lampe, représentés par leurs symboles et reliés par des traits].",
+      "choix": ["Un croquis", "Un schéma", "Un dessin technique coté", "Une maquette numérique"],
+      "bonne": 1,
+      "explication": "Des symboles reliés par des traits pour expliquer un fonctionnement forment un schéma."
+    },
+    {
+      "consigne": "Quel type de représentation est le passage en couleur ?",
+      "texte": "À l'écran, [l'assemblage virtuel de plusieurs pièces] s'affiche en trois dimensions.",
+      "choix": ["Un croquis", "Un schéma", "Un dessin technique coté", "Une maquette numérique"],
+      "bonne": 3,
+      "explication": "Des pièces assemblées en 3D dans un logiciel forment une maquette numérique."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Extrusion",
+      "acceptees": ["Extrusion", "L'extrusion", "Extruder"],
+      "indices": [
+        "Je suis une opération de CAO.",
+        "Je pars d'un dessin à plat.",
+        "Je lui donne de l'épaisseur pour créer un volume."
+      ],
+      "explication": "L'extrusion donne de l'épaisseur à une esquisse pour en faire un volume."
+    },
+    {
+      "reponse": "Fabrication additive",
+      "acceptees": ["Fabrication additive", "La fabrication additive", "Additive"],
+      "indices": [
+        "Je suis un procédé de fabrication.",
+        "Je construis l'objet couche après couche.",
+        "L'impression 3D est mon exemple le plus connu."
+      ],
+      "explication": "La fabrication additive ajoute la matière couche par couche, comme l'impression 3D."
+    },
+    {
+      "reponse": "Simulation",
+      "acceptees": ["Simulation", "La simulation", "Simuler"],
+      "indices": [
+        "Je me fais sur un ordinateur.",
+        "J'utilise un modèle numérique de l'objet.",
+        "Je prévois son comportement sans le fabriquer, et je fais gagner du temps et de l'argent."
+      ],
+      "explication": "La simulation prévoit le comportement d'un objet avec un modèle numérique, sans le fabriquer."
+    },
+    {
+      "reponse": "STL",
+      "acceptees": ["STL", "Le STL", "Format STL", "Fichier STL"],
+      "indices": [
+        "Je suis un format de fichier.",
+        "Je décris la surface d'une pièce en trois dimensions.",
+        "Les imprimantes 3D me lisent couramment."
+      ],
+      "explication": "Le format STL décrit la surface de la pièce en 3D ; c'est lui que l'on envoie à une imprimante 3D."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "Une simulation prévoit qu'un robot roule à 0,50 m/s. On mesure 0,42 m/s sur le prototype. Quel est l'écart entre les deux valeurs ?",
+      "reponse": 0.08,
+      "unite": "m/s",
+      "tolerance": 0,
+      "explication": "Écart = 0,50 − 0,42 = 0,08 m/s."
+    },
+    {
+      "question": "La simulation prévoit une masse de 280 g. La pièce réelle pèse 310 g, alors que le cahier des charges impose moins de 300 g. De combien de grammes la pièce réelle dépasse-t-elle la limite ?",
+      "reponse": 10,
+      "unite": "g",
+      "tolerance": 0,
+      "explication": "C'est la pièce réelle qui compte : 310 − 300 = 10 g de trop."
+    },
+    {
+      "question": "Une esquisse rectangulaire mesure 40 mm sur 25 mm. On l'extrude sur 10 mm d'épaisseur pour obtenir un pavé. Quel est le volume du pavé ?",
+      "reponse": 10000,
+      "unite": "mm³",
+      "tolerance": 0,
+      "explication": "V = 40 × 25 × 10 = 10 000 mm³."
+    },
+    {
+      "question": "Une imprimante 3D dépose des couches de 0,2 mm d'épaisseur. Combien de couches faut-il pour imprimer une pièce de 12 mm de hauteur ?",
+      "reponse": 60,
+      "unite": "couches",
+      "tolerance": 0,
+      "explication": "12 ÷ 0,2 = 60 couches."
+    },
+    {
+      "question": "Une simulation donne une masse de 200 g et la pièce réelle pèse 230 g. L'écart représente quel pourcentage de la valeur simulée ?",
+      "reponse": 15,
+      "unite": "%",
+      "tolerance": 0,
+      "explication": "Écart : 230 − 200 = 30 g. Puis 30 ÷ 200 = 0,15, soit 15 %."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Créer une pièce en CAO",
+      "etapes": [
+        "Tracer une esquisse 2D",
+        "La contraindre avec des cotes",
+        "Créer un volume par extrusion ou révolution",
+        "Assembler plusieurs pièces"
+      ]
+    },
+    {
+      "titre": "Du modèle numérique au prototype validé",
+      "etapes": [
+        "Créer la maquette numérique",
+        "Simuler le comportement de l'objet",
+        "Fabriquer un prototype",
+        "Mesurer les performances du prototype",
+        "Comparer les mesures à la simulation et au cahier des charges"
+      ]
+    }
+  ]
+}

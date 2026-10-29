@@ -1,0 +1,147 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Additions et soustractions",
+      "detail": "Calculs où l'on ajoute ou retire des fractions, après les avoir mises au même dénominateur.",
+      "cartes": [
+        "2/3 + 3/4 = 8/12 + 9/12 = 17/12",
+        "5/6 − 1/4 = 10/12 − 3/12 = 7/12",
+        "1/2 + 1/3 = 5/6",
+        "7/8 − 3/4 = 1/8",
+        "3/5 + 4/10 = 6/10 + 4/10 = 1"
+      ]
+    },
+    {
+      "nom": "Multiplications de fractions",
+      "detail": "Calculs avec le signe ×, y compris prendre une fraction d'une quantité.",
+      "cartes": [
+        "2/3 × 4/5 = 8/15",
+        "4/9 × 1/3 = 4/27",
+        "3/8 × 5/7 = 15/56",
+        "−1/2 × 3/5 = −3/10",
+        "2/5 de 30 élèves : 2/5 × 30 = 12"
+      ]
+    },
+    {
+      "nom": "Divisions de fractions",
+      "detail": "Calculs avec le signe ÷, où l'on passe par l'inverse de la fraction qui divise.",
+      "cartes": [
+        "3/4 ÷ 5/2 = 3/10",
+        "1/3 ÷ 2/5 = 5/6",
+        "5 ÷ 1/2 = 10",
+        "2/3 ÷ 4 = 1/6",
+        "L'inverse de 2/7 est 7/2"
+      ]
+    },
+    {
+      "nom": "Simplifier ou comparer",
+      "detail": "Écrire une fraction sous une autre forme ou la placer par rapport à une autre, sans opération.",
+      "cartes": [
+        "18/24 = 3/4",
+        "20/50 = 2/5",
+        "3/4 est une fraction irréductible",
+        "8/12 < 9/12, donc 2/3 < 3/4",
+        "5/6 > 3/4 car 10/12 > 9/12"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [],
+  "devinettes": [
+    {
+      "reponse": "Inverse",
+      "acceptees": ["Inverse", "L'inverse", "Un inverse", "L'inverse d'une fraction"],
+      "indices": [
+        "Je suis un nombre lié à une fraction non nulle.",
+        "Mon produit avec cette fraction vaut 1.",
+        "Pour 2/7, je vaux 7/2."
+      ],
+      "explication": "L'inverse de a/b est b/a, car leur produit vaut 1."
+    },
+    {
+      "reponse": "Dénominateur",
+      "acceptees": ["Dénominateur", "Le dénominateur", "Un dénominateur"],
+      "indices": [
+        "Je suis l'un des deux nombres d'une fraction.",
+        "Je ne peux jamais être égal à 0.",
+        "On me trouve sous le trait."
+      ],
+      "explication": "Le dénominateur est le nombre sous le trait de fraction et il n'est jamais nul."
+    },
+    {
+      "reponse": "Fraction irréductible",
+      "acceptees": ["Fraction irréductible", "Une fraction irréductible", "La fraction irréductible", "Irréductible"],
+      "indices": [
+        "Je suis un nombre écrit avec un numérateur, un trait et un dénominateur.",
+        "À la fin d'un calcul, on cherche à m'obtenir.",
+        "3/4 est un exemple de moi, mais pas 6/8."
+      ],
+      "explication": "Une fraction irréductible ne peut plus être simplifiée, comme 3/4."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "Théo parcourt les 3/5 d'un trajet de 40 km. Combien de kilomètres a-t-il parcourus ?",
+      "reponse": 24,
+      "unite": "km",
+      "tolerance": 0,
+      "explication": "3/5 × 40 = 120/5 = 24 km."
+    },
+    {
+      "question": "Un seau contient 3/4 L d'eau. On en verse 1/5 L de plus. Quel est le volume total, en litres ?",
+      "reponse": 0.95,
+      "unite": "L",
+      "tolerance": 0,
+      "explication": "3/4 + 1/5 = 15/20 + 4/20 = 19/20 = 0,95 L."
+    },
+    {
+      "question": "On remplit des bouteilles de 1/4 L avec 3 L d'eau. Combien de bouteilles peut-on remplir ?",
+      "reponse": 12,
+      "unite": "bouteilles",
+      "tolerance": 0,
+      "explication": "3 ÷ 1/4 = 3 × 4 = 12 bouteilles."
+    },
+    {
+      "question": "Léa a 60 €. Elle dépense 1/4 de son argent en livres et 1/3 en sorties. Combien d'euros lui reste-t-il ?",
+      "reponse": 25,
+      "unite": "€",
+      "tolerance": 0,
+      "explication": "Livres : 60 ÷ 4 = 15 €. Sorties : 60 ÷ 3 = 20 €. Il reste 60 − 15 − 20 = 25 €. Avec les fractions : 1 − 7/12 = 5/12 et 5/12 × 60 = 25 €."
+    },
+    {
+      "question": "Calcule −2/3 × 9/4. Donne le résultat en nombre décimal.",
+      "reponse": -1.5,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "Signes contraires donc le résultat est négatif : 2/3 × 9/4 = 18/12 = 3/2, d'où −3/2 = −1,5."
+    },
+    {
+      "question": "Calcule 1/2 + 1/2 × 1/5. Donne le résultat en nombre décimal.",
+      "reponse": 0.6,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "La multiplication passe d'abord : 1/2 × 1/5 = 1/10, puis 5/10 + 1/10 = 6/10 = 0,6."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Calculer 1/2 + 1/2 × 1/3",
+      "etapes": [
+        "On calcule d'abord la multiplication : 1/2 × 1/3 = 1/6",
+        "On met 1/2 au dénominateur 6 : 1/2 = 3/6",
+        "On additionne : 3/6 + 1/6 = 4/6",
+        "On simplifie le résultat : 4/6 = 2/3"
+      ]
+    },
+    {
+      "titre": "Calculer 3/4 ÷ 5/2",
+      "etapes": [
+        "On repère que l'on divise par 5/2",
+        "On prend l'inverse de 5/2 : c'est 2/5",
+        "On multiplie : 3/4 × 2/5 = 6/20",
+        "On simplifie le résultat : 6/20 = 3/10"
+      ]
+    }
+  ]
+}

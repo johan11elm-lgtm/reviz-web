@@ -1,0 +1,124 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "La fonction d'usage",
+      "detail": "Ce à quoi sert l'objet : le besoin auquel il répond.",
+      "cartes": [
+        "Extraire le jus d'un agrume avec un presse-agrumes",
+        "Communiquer à distance avec un téléphone",
+        "Couper du papier avec des ciseaux",
+        "Éclairer une pièce avec une lampe",
+        "Répondre au besoin pour lequel l'objet est conçu"
+      ]
+    },
+    {
+      "nom": "La fonction d'estime",
+      "detail": "Ce qui rend l'objet attirant : sa forme, sa couleur, sa matière, son image de marque.",
+      "cartes": [
+        "La couleur choisie pour un téléphone",
+        "L'image de marque de l'objet",
+        "Une forme élégante qui donne envie de l'utiliser",
+        "Une matière choisie pour son bel aspect",
+        "Ce qui rend l'objet attirant aux yeux de l'utilisateur"
+      ]
+    },
+    {
+      "nom": "L'ergonomie",
+      "detail": "L'adaptation de l'objet au corps humain, pour un usage confortable, efficace et sûr.",
+      "cartes": [
+        "Une souris qui épouse la forme de la main",
+        "Un outil léger qui fatigue peu le poignet",
+        "Des mesures du corps humain pour dimensionner l'objet",
+        "Un manche antidérapant qui évite les accidents",
+        "Une utilisation confortable, efficace et sûre"
+      ]
+    },
+    {
+      "nom": "La conception universelle",
+      "detail": "Concevoir un objet utilisable par le plus grand nombre : enfants, personnes âgées ou en situation de handicap.",
+      "cartes": [
+        "Une poignée en béquille, utilisable même sans serrer la main",
+        "Des boutons en relief pour les personnes aveugles",
+        "Des couleurs contrastées pour les personnes malvoyantes",
+        "Un objet utilisable par les enfants et les personnes âgées",
+        "Un objet accessible aux personnes en situation de handicap"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Quelle notion illustre le groupe en couleur ?",
+      "texte": "Ce presse-agrumes [sert à extraire le jus d'une orange].",
+      "choix": ["Fonction d'usage", "Fonction d'estime", "Ergonomie", "Conception universelle"],
+      "bonne": 0,
+      "explication": "Dire à quoi sert l'objet, c'est décrire sa fonction d'usage."
+    },
+    {
+      "consigne": "Quelle notion illustre le groupe en couleur ?",
+      "texte": "Le fabricant a choisi [une couleur vive] pour rendre ce téléphone plus attirant.",
+      "choix": ["Fonction d'usage", "Fonction d'estime", "Ergonomie", "Conception universelle"],
+      "bonne": 1,
+      "explication": "La couleur rend l'objet attirant sans changer son usage : c'est la fonction d'estime."
+    },
+    {
+      "consigne": "Quelle notion illustre le groupe en couleur ?",
+      "texte": "Cette souris [épouse la forme de la main] et évite de fatiguer le poignet.",
+      "choix": ["Fonction d'usage", "Fonction d'estime", "Ergonomie", "Conception universelle"],
+      "bonne": 2,
+      "explication": "Adapter la forme de l'objet à la main pour limiter la fatigue, c'est de l'ergonomie."
+    },
+    {
+      "consigne": "Quelle notion illustre le groupe en couleur ?",
+      "texte": "Dans cet ascenseur, [les boutons en relief] se reconnaissent au toucher, même sans voir.",
+      "choix": ["Fonction d'usage", "Fonction d'estime", "Ergonomie", "Conception universelle"],
+      "bonne": 3,
+      "explication": "Des boutons en relief rendent l'objet accessible aux personnes aveugles : c'est de la conception universelle."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Ergonomie",
+      "acceptees": ["Ergonomie", "L'ergonomie"],
+      "indices": [
+        "Je m'intéresse au confort d'un objet.",
+        "Je mesure si un objet est efficace et sûr à utiliser.",
+        "Je m'appuie sur les mesures du corps humain pour adapter l'objet à l'être humain."
+      ],
+      "explication": "L'ergonomie adapte l'objet à l'être humain pour qu'il soit confortable, efficace et sûr."
+    },
+    {
+      "reponse": "Anthropométrie",
+      "acceptees": ["Anthropométrie", "L'anthropométrie"],
+      "indices": [
+        "Je m'appuie sur des mesures.",
+        "Je mesure la main, la taille ou la hauteur des yeux.",
+        "Les concepteurs m'utilisent pour dimensionner les objets."
+      ],
+      "explication": "L'anthropométrie mesure le corps humain pour dimensionner les objets."
+    },
+    {
+      "reponse": "Bauhaus",
+      "acceptees": ["Bauhaus", "Le Bauhaus"],
+      "indices": [
+        "Je suis une école d'art et de design.",
+        "J'ai été fondée en Allemagne.",
+        "Je suis née en 1919 et je préfère les formes simples et géométriques."
+      ],
+      "explication": "Le Bauhaus est une école d'art et de design fondée en 1919 en Allemagne, connue pour ses formes géométriques."
+    },
+    {
+      "reponse": "Art nouveau",
+      "acceptees": ["Art nouveau", "L'Art nouveau"],
+      "indices": [
+        "Je suis un courant de design.",
+        "Mes formes sont courbes.",
+        "Je m'inspire des plantes, vers 1890-1910."
+      ],
+      "explication": "L'Art nouveau est un courant de design aux formes courbes inspirées des végétaux."
+    }
+  ],
+  "calculs": [],
+  "etapes": []
+}

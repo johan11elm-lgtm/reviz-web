@@ -1,0 +1,120 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Suzerain et vassal",
+      "detail": "Les cérémonies et les devoirs qui lient un seigneur à un seigneur plus puissant.",
+      "cartes": [
+        "Cérémonie où l'on jure fidélité à un seigneur plus puissant",
+        "La terre qu'un seigneur confie en échange d'une aide",
+        "Combattre dans l'armée du seigneur dont on dépend",
+        "Donner des conseils au seigneur dont on dépend",
+        "Protéger celui qui a juré fidélité"
+      ]
+    },
+    {
+      "nom": "Les paysans de la seigneurie",
+      "detail": "Leur statut, leur terre et ce qu'ils doivent au seigneur.",
+      "cartes": [
+        "Un travail gratuit à faire sur les terres du seigneur",
+        "Une taxe payée pour utiliser le moulin du seigneur",
+        "Un paysan non libre, attaché à la terre",
+        "Un paysan libre qui doit pourtant des corvées",
+        "La terre confiée à une famille de paysans"
+      ]
+    },
+    {
+      "nom": "Le clergé et la religion",
+      "detail": "L'Église dans les villages, les monastères et la paix entre guerriers.",
+      "cartes": [
+        "Le curé accompagne les fidèles du baptême à la mort",
+        "Impôt versé à l'Église, environ un dixième des récoltes",
+        "Des hommes qui vivent dans un monastère selon une règle",
+        "La paix de Dieu et la trêve de Dieu",
+        "Fondation de l'abbaye de Cluny en 910"
+      ]
+    },
+    {
+      "nom": "L'essor des campagnes",
+      "detail": "Du XIe au XIIIe siècle : plus d'habitants, plus de terres et de meilleures récoltes.",
+      "cartes": [
+        "La population augmente fortement du XIe au XIIIe siècle",
+        "Des forêts et des marais deviennent des terres cultivées",
+        "Une charrue qui retourne la terre en profondeur",
+        "Un collier posé sur les épaules du cheval",
+        "Une rotation sur trois ans avec une année de jachère"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "la domination des seigneurs sur les campagnes",
+      "carte": "Le pouvoir royal est faible aux Xe et XIe siècles",
+      "role": "cause",
+      "explication": "Quand le pouvoir royal est faible, des seigneurs bâtissent des châteaux et dominent les campagnes."
+    },
+    {
+      "fait": "la domination des seigneurs sur les campagnes",
+      "carte": "Les paysans doivent des corvées et des banalités",
+      "role": "consequence",
+      "explication": "Dans la seigneurie, les paysans font des corvées sur la réserve et paient les banalités pour le four, le moulin et le pressoir."
+    },
+    {
+      "fait": "les défrichements du XIe au XIIIe siècle",
+      "carte": "Le besoin de nourrir une population plus nombreuse",
+      "role": "cause",
+      "explication": "La population de l'Occident augmente fortement : il faut nourrir plus de monde, donc les paysans défrichent forêts et marais."
+    },
+    {
+      "fait": "les défrichements du XIe au XIIIe siècle",
+      "carte": "De nouveaux villages sont créés",
+      "role": "consequence",
+      "explication": "Les paysans qui défrichent forêts et marais créent de nouveaux villages."
+    }
+  ],
+  "etiquettes": [],
+  "devinettes": [
+    {
+      "reponse": "Dîme",
+      "acceptees": ["Dîme", "La dîme", "Dime"],
+      "indices": [
+        "Je suis une part des récoltes.",
+        "Je représente environ un dixième de ce que produisent les paysans.",
+        "Je suis versée à l'Église par les fidèles."
+      ],
+      "explication": "La dîme est l'impôt payé à l'Église par les fidèles, environ un dixième des récoltes."
+    },
+    {
+      "reponse": "Serf",
+      "acceptees": ["Serf", "Un serf", "Le serf"],
+      "indices": [
+        "Je travaille la terre.",
+        "Je ne suis pas libre.",
+        "Je suis attaché à la terre de mon seigneur."
+      ],
+      "explication": "Le serf est un paysan non libre, attaché à la terre de son seigneur."
+    },
+    {
+      "reponse": "Vassal",
+      "acceptees": ["Vassal", "Un vassal", "Le vassal"],
+      "indices": [
+        "Je suis un seigneur.",
+        "J'ai prêté hommage à un seigneur plus puissant.",
+        "J'ai reçu un fief en échange de mon aide militaire."
+      ],
+      "explication": "Le vassal est un seigneur qui prête hommage à son suzerain et reçoit de lui un fief."
+    },
+    {
+      "reponse": "Banalités",
+      "acceptees": ["Banalités", "Les banalités", "Banalité", "Une banalité"],
+      "indices": [
+        "Je suis une taxe.",
+        "Les paysans me paient au seigneur.",
+        "On me paie pour utiliser le four, le moulin ou le pressoir."
+      ],
+      "explication": "Les banalités sont les taxes payées au seigneur pour utiliser son four, son moulin ou son pressoir."
+    }
+  ],
+  "calculs": [],
+  "etapes": []
+}

@@ -1,0 +1,135 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Les bassins et les strates",
+      "detail": "Où et comment les sédiments s'empilent en couches dans un bassin de sédimentation.",
+      "cartes": [
+        "Les sédiments se déposent là où le courant s'arrête",
+        "Le fond d'un lac, d'une mer ou d'un delta",
+        "Les couches ainsi formées sont à peu près horizontales",
+        "Chaque nouvelle couche recouvre la précédente",
+        "Des substances dissoutes dans l'eau peuvent former des sédiments"
+      ]
+    },
+    {
+      "nom": "Des sédiments aux roches",
+      "detail": "La compaction et la cimentation transforment les sédiments en roches : grès, conglomérat, calcaire.",
+      "cartes": [
+        "Les couches enfouies se tassent et l'eau est chassée",
+        "Un ciment naturel soude les grains entre eux",
+        "Du sable enfoui puis cimenté donne du grès",
+        "Des galets cimentés forment un conglomérat",
+        "Le calcaire fait effervescence avec l'acide chlorhydrique"
+      ]
+    },
+    {
+      "nom": "Les restes d'êtres vivants",
+      "detail": "Les fossiles : restes ou traces d'êtres vivants, et les conditions qui permettent de les conserver.",
+      "cartes": [
+        "Un os ou une dent conservés dans la roche",
+        "Une empreinte ou un terrier conservé dans la roche",
+        "Un enfouissement rapide, à l'abri du dioxygène et des décomposeurs",
+        "Les parties dures se conservent le mieux",
+        "Les ammonites, mollusques marins aujourd'hui disparus"
+      ]
+    },
+    {
+      "nom": "Reconstituer le passé",
+      "detail": "Les roches, les fossiles et le principe d'actualisme permettent de retrouver les milieux de vie anciens.",
+      "cartes": [
+        "Des coraux dans une roche indiquent une mer chaude",
+        "Les phénomènes d'aujourd'hui expliquent ceux du passé",
+        "Des espèces marines en montagne montrent qu'une mer était là",
+        "Des rides de courant indiquent une ancienne plage ou rivière",
+        "On compare les fossiles aux êtres vivants actuels"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Quelle étape de la formation d'une roche sédimentaire est en couleur ?",
+      "texte": "[Le vent et la pluie usent la roche] et libèrent des fragments.",
+      "choix": ["Érosion", "Dépôt", "Compaction", "Cimentation"],
+      "bonne": 0,
+      "explication": "L'érosion use les roches et fournit les sédiments."
+    },
+    {
+      "consigne": "Quelle étape de la formation d'une roche sédimentaire est en couleur ?",
+      "texte": "Quand le courant ralentit, [le sable tombe au fond du lac].",
+      "choix": ["Érosion", "Dépôt", "Compaction", "Cimentation"],
+      "bonne": 1,
+      "explication": "Les sédiments se déposent là où le courant s'arrête : c'est le dépôt."
+    },
+    {
+      "consigne": "Quelle étape de la formation d'une roche sédimentaire est en couleur ?",
+      "texte": "Sous le poids des nouvelles couches, [les grains se tassent] et l'eau est chassée.",
+      "choix": ["Érosion", "Dépôt", "Compaction", "Cimentation"],
+      "bonne": 2,
+      "explication": "La compaction tasse les grains en chassant l'eau."
+    },
+    {
+      "consigne": "Quelle étape de la formation d'une roche sédimentaire est en couleur ?",
+      "texte": "[Un ciment naturel soude les grains] entre eux.",
+      "choix": ["Érosion", "Dépôt", "Compaction", "Cimentation"],
+      "bonne": 3,
+      "explication": "La cimentation soude les grains entre eux : le sédiment meuble devient une roche."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Strate",
+      "acceptees": ["Une strate", "La strate", "Strates", "Les strates", "Couche"],
+      "indices": [
+        "Je suis formée de sédiments ou de roche sédimentaire.",
+        "Je suis à peu près horizontale.",
+        "Plusieurs de mes semblables s'empilent dans un bassin de sédimentation."
+      ],
+      "explication": "Une strate est une couche de sédiments ou de roche sédimentaire, à peu près horizontale."
+    },
+    {
+      "reponse": "Fossile",
+      "acceptees": ["Un fossile", "Fossiles", "Les fossiles"],
+      "indices": [
+        "Je suis conservé dans une roche.",
+        "Je suis le reste ou la trace d'un être vivant.",
+        "Une ammonite, un os ou une empreinte me représente."
+      ],
+      "explication": "Un fossile est un reste ou une trace d'être vivant conservé dans une roche."
+    },
+    {
+      "reponse": "Calcaire",
+      "acceptees": ["Le calcaire", "Craie", "La craie"],
+      "indices": [
+        "Je suis une roche sédimentaire.",
+        "Les ammonites sont fréquentes chez moi.",
+        "Une goutte d'acide chlorhydrique sur moi provoque une effervescence."
+      ],
+      "explication": "Le calcaire fait effervescence avec l'acide chlorhydrique, car il se dégage du dioxyde de carbone."
+    },
+    {
+      "reponse": "Grès",
+      "acceptees": ["Le grès"],
+      "indices": [
+        "Je suis une roche sédimentaire.",
+        "À l'origine, j'étais du sable meuble.",
+        "Mes grains ont été soudés par un ciment naturel."
+      ],
+      "explication": "Le grès se forme à partir de sable enfoui puis cimenté."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "La formation d'une roche sédimentaire",
+      "etapes": [
+        "Les roches s'usent et libèrent des sédiments",
+        "Le courant transporte les sédiments",
+        "Les sédiments se déposent dans un bassin",
+        "Les couches enfouies se tassent",
+        "Un ciment naturel soude les grains"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,158 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Des comparaisons avec un outil",
+      "detail": "Deux éléments rapprochés grâce à un outil de comparaison : comme, tel, pareil à, semblable à, ressembler à.",
+      "cartes": [
+        "La neige est pareille à du coton",
+        "Ses joues rougissent comme des pommes mûres",
+        "Le soleil, tel un ballon rouge, descend sur la mer",
+        "La rivière est semblable à un long ruban d'argent",
+        "Les étoiles ressemblent à des diamants"
+      ]
+    },
+    {
+      "nom": "Des métaphores sans outil",
+      "detail": "Deux éléments rapprochés directement, sans aucun outil de comparaison.",
+      "cartes": [
+        "La lune, pièce d'or du ciel",
+        "Ses yeux sont deux étoiles",
+        "Le ciel est un grand océan bleu",
+        "Mon cœur est une cage vide",
+        "Le temps est un fleuve sans fin"
+      ]
+    },
+    {
+      "nom": "Des personnifications",
+      "detail": "Une chose ou un animal présenté comme une personne, qui fait des actions humaines.",
+      "cartes": [
+        "Le vent chante dans les arbres",
+        "La mer se fâche et gronde",
+        "Le ruisseau bavarde avec les cailloux",
+        "Le vieux chêne se lamente dans la tempête",
+        "Le brouillard dort sur la rivière"
+      ]
+    },
+    {
+      "nom": "Des allitérations en consonnes",
+      "detail": "La répétition d'un même son consonne, qui crée une musique ou imite un bruit.",
+      "cartes": [
+        "Pour qui sont ces serpents qui sifflent sur vos têtes ?",
+        "Trois tortues trottaient sur trois toits très étroits",
+        "Un chasseur sachant chasser sait chasser sans son chien",
+        "Les chaussettes de l'archiduchesse sont-elles sèches ?",
+        "Le roulement rauque du train roule sur les rails"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Quel procédé poétique trouve-t-on dans le passage en couleur ?",
+      "texte": "[Mes rêves volent comme des oiseaux] au-dessus de la ville.",
+      "choix": ["Une comparaison", "Une métaphore", "Une personnification", "Une allitération"],
+      "bonne": 0,
+      "explication": "L'outil « comme » rapproche les rêves et les oiseaux : c'est une comparaison."
+    },
+    {
+      "consigne": "Quel procédé poétique trouve-t-on dans le passage en couleur ?",
+      "texte": "Le ciel est calme et [la nuit est un manteau de velours].",
+      "choix": ["Une comparaison", "Une métaphore", "Une personnification", "Une allitération"],
+      "bonne": 1,
+      "explication": "La nuit et le manteau sont rapprochés sans outil de comparaison : c'est une métaphore."
+    },
+    {
+      "consigne": "Quel procédé poétique trouve-t-on dans le passage en couleur ?",
+      "texte": "[Les fleurs dansent et rient] au bord du chemin.",
+      "choix": ["Une comparaison", "Une métaphore", "Une personnification", "Une allitération"],
+      "bonne": 2,
+      "explication": "Danser et rire sont des actions humaines attribuées à des fleurs : c'est une personnification."
+    },
+    {
+      "consigne": "Quel procédé poétique trouve-t-on dans le passage en couleur ?",
+      "texte": "[Six cygnes sifflent sans cesse] sur le lac.",
+      "choix": ["Une comparaison", "Une métaphore", "Une personnification", "Une allitération"],
+      "bonne": 3,
+      "explication": "Le son consonne [s] est répété tout au long du passage : c'est une allitération."
+    },
+    {
+      "consigne": "Quel procédé poétique trouve-t-on dans le passage en couleur ?",
+      "texte": "Tom court [tel un lièvre] sur la plage.",
+      "choix": ["Une comparaison", "Une métaphore", "Une personnification", "Une allitération"],
+      "bonne": 0,
+      "explication": "« Tel » est un outil de comparaison qui rapproche Tom et le lièvre : c'est une comparaison."
+    },
+    {
+      "consigne": "Quel procédé poétique trouve-t-on dans le passage en couleur ?",
+      "texte": "Pour moi, [l'école est un jardin de livres].",
+      "choix": ["Une comparaison", "Une métaphore", "Une personnification", "Une allitération"],
+      "bonne": 1,
+      "explication": "L'école est directement présentée comme un jardin, sans « comme » : c'est une métaphore."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Apollinaire",
+      "acceptees": ["Apollinaire", "Guillaume Apollinaire"],
+      "indices": [
+        "Je suis un poète français du début du XXe siècle.",
+        "J'ai publié le recueil Calligrammes en 1918.",
+        "J'ai écrit « Il pleut », un poème dont les mots tombent comme la pluie."
+      ],
+      "explication": "Guillaume Apollinaire publie Calligrammes en 1918 : dans « Il pleut », les vers dessinent la pluie."
+    },
+    {
+      "reponse": "Alexandrin",
+      "acceptees": ["Alexandrin", "Un alexandrin"],
+      "indices": [
+        "Je suis un vers.",
+        "Je compte plus de syllabes que l'octosyllabe et le décasyllabe.",
+        "Je compte douze syllabes."
+      ],
+      "explication": "L'alexandrin est le vers de douze syllabes, comme « Demain, dès l'aube, à l'heure où blanchit la campagne »."
+    },
+    {
+      "reponse": "Haïku",
+      "acceptees": ["Haïku", "Haiku", "Un haïku"],
+      "indices": [
+        "Je suis un court poème.",
+        "Je viens du Japon.",
+        "Je compte trois vers de 5, 7 et 5 syllabes."
+      ],
+      "explication": "Le haïku est un court poème japonais de trois vers qui saisit un instant de la nature, comme chez Bashō."
+    },
+    {
+      "reponse": "Allitération",
+      "acceptees": ["Allitération", "Une allitération", "Alliteration"],
+      "indices": [
+        "Je suis un procédé qui joue avec les sons.",
+        "Je répète toujours le même son.",
+        "Je répète un son consonne, alors que l'assonance répète un son voyelle."
+      ],
+      "explication": "L'allitération répète un même son consonne : le [s] de « serpents qui sifflent sur vos têtes » imite le sifflement."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Les étapes pour compter les syllabes d'un vers",
+      "etapes": [
+        "Lis le vers à voix haute",
+        "Repère les « e » muets qui ne se prononcent pas",
+        "Découpe le vers en syllabes prononcées",
+        "Compte les syllabes obtenues",
+        "Donne son nom : octosyllabe, décasyllabe ou alexandrin"
+      ]
+    },
+    {
+      "titre": "Les étapes pour trouver la disposition des rimes",
+      "etapes": [
+        "Repère le dernier son de chaque vers",
+        "Note chaque son par une lettre : A, B…",
+        "Lis la suite de lettres, par exemple ABBA",
+        "Nomme la disposition : suivies, croisées ou embrassées"
+      ]
+    }
+  ]
+}

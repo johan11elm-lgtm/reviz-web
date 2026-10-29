@@ -1,0 +1,142 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Le Feu (Barbusse)",
+      "detail": "Le roman de Barbusse (1916), journal d'une escouade de poilus dans les tranchées de la Première Guerre mondiale.",
+      "cartes": [
+        "Le journal d'une escouade de soldats",
+        "Un roman couronné par le prix Goncourt en 1916",
+        "Une œuvre sur la guerre de 1914-1918",
+        "La vie et la mort dans les tranchées",
+        "Les souffrances des poilus français au front"
+      ]
+    },
+    {
+      "nom": "« Liberté » (Éluard)",
+      "detail": "Le poème de la Résistance d'Éluard (1942), rythmé par l'anaphore « Sur… » et le refrain « J'écris ton nom ».",
+      "cartes": [
+        "Chaque strophe se termine par « J'écris ton nom »",
+        "« Sur le sable sur la neige »",
+        "Un poème parachuté par les avions alliés",
+        "Un poème de 1942 extrait de Poésie et vérité",
+        "Un poème qui appelle à résister et à espérer"
+      ]
+    },
+    {
+      "nom": "Si c'est un homme (Levi)",
+      "detail": "Le témoignage de Primo Levi (1947) sur sa déportation à Auschwitz et la déshumanisation des prisonniers.",
+      "cartes": [
+        "Le récit d'une déportation à Auschwitz",
+        "Des prisonniers désignés par un numéro tatoué sur le bras",
+        "La destruction de la dignité humaine dans les camps",
+        "Un auteur juif italien qui raconte ce qu'il a vécu",
+        "Une œuvre parue en 1947"
+      ]
+    },
+    {
+      "nom": "Le Silence de la mer (Vercors)",
+      "detail": "Le récit de fiction de Vercors (1942) : une famille française résiste sans violence à un officier allemand logé chez elle.",
+      "cartes": [
+        "Un officier allemand logé chez une famille française",
+        "Une résistance sans arme, par le refus de parler",
+        "Une fiction publiée clandestinement en 1942",
+        "Un récit paru aux Éditions de Minuit",
+        "Des personnages qui gardent leur dignité face à l'occupant"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Quel est le genre de l'œuvre en couleur ?",
+      "texte": "Primo Levi publie [Si c'est un homme] en 1947.",
+      "choix": ["Témoignage", "Récit de fiction", "Poésie engagée"],
+      "bonne": 0,
+      "explication": "Primo Levi y raconte sa propre déportation à Auschwitz : c'est un témoignage, un récit à la première personne d'événements vécus."
+    },
+    {
+      "consigne": "Quel est le genre de l'œuvre en couleur ?",
+      "texte": "En 1942, Vercors publie [Le Silence de la mer] aux Éditions de Minuit.",
+      "choix": ["Témoignage", "Récit de fiction", "Poésie engagée"],
+      "bonne": 1,
+      "explication": "Vercors invente l'histoire d'une famille qui résiste par le silence : c'est un récit de fiction, pas un témoignage."
+    },
+    {
+      "consigne": "Quel est le genre de l'œuvre en couleur ?",
+      "texte": "Éluard écrit [« Liberté »] en 1942.",
+      "choix": ["Témoignage", "Récit de fiction", "Poésie engagée"],
+      "bonne": 2,
+      "explication": "« Liberté » est un poème de la Résistance : il utilise la force des images et du rythme (anaphore, refrain) pour mobiliser. C'est de la poésie engagée."
+    },
+    {
+      "consigne": "Quel est le genre de l'œuvre en couleur ?",
+      "texte": "Aragon rend hommage au groupe Manouchian dans [« L'Affiche rouge »].",
+      "choix": ["Témoignage", "Récit de fiction", "Poésie engagée"],
+      "bonne": 2,
+      "explication": "« L'Affiche rouge » est un poème qui rend hommage aux résistants étrangers fusillés en 1944 : c'est de la poésie engagée."
+    },
+    {
+      "consigne": "Quel est le genre de l'œuvre en couleur ?",
+      "texte": "Remarque publie [À l'Ouest rien de nouveau] en 1929.",
+      "choix": ["Témoignage", "Récit de fiction", "Poésie engagée"],
+      "bonne": 1,
+      "explication": "Remarque s'inspire de son expérience mais construit une fiction : c'est un roman, donc un récit de fiction."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Éluard",
+      "acceptees": ["Paul Éluard", "Eluard"],
+      "indices": [
+        "Je suis un poète français du XXe siècle.",
+        "Sous l'Occupation, je publie le recueil Poésie et vérité.",
+        "Mon poème « Liberté » répète « J'écris ton nom » et a été parachuté par des avions."
+      ],
+      "explication": "Paul Éluard est l'auteur de « Liberté » (1942), poème de la Résistance."
+    },
+    {
+      "reponse": "Primo Levi",
+      "acceptees": ["Levi"],
+      "indices": [
+        "Je suis un écrivain italien.",
+        "J'ai été déporté parce que j'étais juif.",
+        "J'ai raconté mon expérience d'Auschwitz dans un témoignage publié en 1947."
+      ],
+      "explication": "Primo Levi, déporté juif italien, raconte Auschwitz dans Si c'est un homme (1947)."
+    },
+    {
+      "reponse": "Pseudonyme",
+      "acceptees": ["Un pseudonyme", "Nom de plume", "Un nom de plume", "Faux nom", "Nom d'emprunt"],
+      "indices": [
+        "Je suis un nom.",
+        "Sous l'Occupation, des auteurs me choisissent pour échapper à la répression.",
+        "Vercors est l'un de mes exemples."
+      ],
+      "explication": "Beaucoup d'auteurs de la Résistance signaient d'un pseudonyme pour se protéger : Vercors en est un."
+    },
+    {
+      "reponse": "Devoir de mémoire",
+      "acceptees": ["Le devoir de mémoire", "Mémoire"],
+      "indices": [
+        "Je suis une obligation morale.",
+        "Je demande de transmettre le souvenir des victimes aux générations suivantes.",
+        "Les écrivains qui témoignent ou rendent hommage aux victimes m'accomplissent."
+      ],
+      "explication": "Le devoir de mémoire consiste à transmettre le souvenir des victimes pour ne pas oublier les violences du XXe siècle."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Les œuvres dans l'ordre de leur parution",
+      "etapes": [
+        "Le Feu, de Barbusse",
+        "Les Croix de bois, de Dorgelès",
+        "À l'Ouest rien de nouveau, de Remarque",
+        "« Liberté », d'Éluard",
+        "Si c'est un homme, de Primo Levi"
+      ]
+    }
+  ]
+}

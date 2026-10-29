@@ -1,0 +1,148 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Un souhait",
+      "detail": "Want ou would like + complément + to + base verbale dit ce que quelqu'un souhaite que l'autre fasse.",
+      "cartes": [
+        "My grandmother wants me to visit her",
+        "I'd like you to come to my birthday party",
+        "Tom wants his friends to help him with the project",
+        "Anna wants her brother to come to the cinema",
+        "My dad would like me to learn the guitar"
+      ]
+    },
+    {
+      "nom": "Une permission",
+      "detail": "Let + complément + base verbale, ou be allowed to, disent que quelqu'un a le droit de faire quelque chose.",
+      "cartes": [
+        "My mum lets me go out on Saturdays",
+        "I'm allowed to use my phone after dinner",
+        "Our teacher lets us listen to music while we draw",
+        "They were allowed to watch a film in class",
+        "My parents let me invite my friends home"
+      ]
+    },
+    {
+      "nom": "Une obligation imposée",
+      "detail": "Make + complément + base verbale dit que quelqu'un oblige l'autre à faire quelque chose.",
+      "cartes": [
+        "My dad makes me do the dishes",
+        "The teacher made us read the text again",
+        "My mum makes me finish my homework first",
+        "Our coach makes us run ten laps",
+        "My grandfather made me eat all my vegetables"
+      ]
+    },
+    {
+      "nom": "Une interdiction",
+      "detail": "Not allowed to, ou don't let + complément + base verbale, disent que quelqu'un n'a pas le droit de faire quelque chose.",
+      "cartes": [
+        "I'm not allowed to go out at night",
+        "My parents don't let me watch TV before dinner",
+        "We aren't allowed to use our phones in class",
+        "My mum doesn't let my brother play outside in the rain",
+        "She wasn't allowed to go to the party"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Qu'exprime la phrase en couleur ?",
+      "texte": "Sam says: [My parents let me go out on Saturdays.] I'm lucky.",
+      "choix": ["Un souhait", "Une permission", "Une obligation", "Une interdiction"],
+      "bonne": 1,
+      "explication": "Let + complément + base verbale veut dire « laisser, permettre » : c'est une permission."
+    },
+    {
+      "consigne": "Qu'exprime la phrase en couleur ?",
+      "texte": "Mia: I hate tidying. [My mum makes me clean my room every Sunday.]",
+      "choix": ["Un souhait", "Une permission", "Une obligation", "Une interdiction"],
+      "bonne": 2,
+      "explication": "Make + complément + base verbale veut dire « obliger » : c'est une obligation imposée par la mère."
+    },
+    {
+      "consigne": "Qu'exprime la phrase en couleur ?",
+      "texte": "Léa asks her friend: [I'd like you to help me with the project.]",
+      "choix": ["Un souhait", "Une permission", "Une obligation", "Une interdiction"],
+      "bonne": 0,
+      "explication": "I'd like you to + base verbale (would like + complément + to + base verbale) exprime un souhait poli."
+    },
+    {
+      "consigne": "Qu'exprime la phrase en couleur ?",
+      "texte": "Ben is sad: [he isn't allowed to go out at night.]",
+      "choix": ["Un souhait", "Une permission", "Une obligation", "Une interdiction"],
+      "bonne": 3,
+      "explication": "Not allowed to veut dire « ne pas avoir le droit de » : c'est une interdiction."
+    },
+    {
+      "consigne": "Qu'exprime la phrase en couleur ?",
+      "texte": "Anna's grandmother is alone, so [she wants Anna to visit on Sunday.]",
+      "choix": ["Un souhait", "Une permission", "Une obligation", "Une interdiction"],
+      "bonne": 0,
+      "explication": "Want + complément + to + base verbale exprime ce que quelqu'un souhaite que l'autre fasse : c'est un souhait."
+    },
+    {
+      "consigne": "Qu'exprime la phrase en couleur ?",
+      "texte": "Emma: [We were allowed to watch a film in class today.]",
+      "choix": ["Un souhait", "Une permission", "Une obligation", "Une interdiction"],
+      "bonne": 1,
+      "explication": "Be allowed to veut dire « avoir le droit de » : au passé, was / were allowed to exprime une permission."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Make",
+      "acceptees": ["To make", "Makes", "Made"],
+      "indices": [
+        "Je suis un verbe très courant de l'anglais.",
+        "Je suis suivi d'un complément puis de la base verbale, sans to.",
+        "Je veux dire « obliger, faire faire » et mon passé a une forme irrégulière."
+      ],
+      "explication": "Make + complément + base verbale, sans to, veut dire « obliger » : My dad makes me do the dishes. Au passé, il devient made."
+    },
+    {
+      "reponse": "Let",
+      "acceptees": ["To let", "Lets"],
+      "indices": [
+        "Je suis un verbe qui se construit avec un complément, comme me ou us.",
+        "Je ne change pas au passé.",
+        "Je veux dire « laisser, permettre » et je suis suivi de la base verbale sans to."
+      ],
+      "explication": "Let + complément + base verbale, sans to, veut dire « laisser, permettre » : My mum lets me go out. Au passé, il reste let."
+    },
+    {
+      "reponse": "Curfew",
+      "acceptees": [],
+      "indices": [
+        "Je suis une règle que des parents fixent à leurs ados.",
+        "Je concerne le soir et l'heure de retour.",
+        "Je suis l'heure limite pour rentrer à la maison."
+      ],
+      "explication": "Un curfew est l'heure limite à laquelle on doit être rentré le soir."
+    },
+    {
+      "reponse": "Pocket money",
+      "acceptees": ["Allowance", "Pocket-money"],
+      "indices": [
+        "Je suis une somme d'argent.",
+        "Je suis donné par les parents à leurs enfants, chaque semaine ou chaque mois.",
+        "En français, on m'appelle « argent de poche »."
+      ],
+      "explication": "Pocket money est l'argent de poche que les parents donnent régulièrement à leurs enfants."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Traduire « vouloir que quelqu'un fasse »",
+      "etapes": [
+        "Repère qui veut et qui doit agir",
+        "Écris le sujet puis want ou would like",
+        "Mets la personne qui doit agir au pronom complément",
+        "Termine par to et la base verbale"
+      ]
+    }
+  ]
+}

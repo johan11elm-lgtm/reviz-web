@@ -1,0 +1,157 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Une action en cours",
+      "detail": "Be + -ing dit ce qui se passe au moment où l'on parle, avec des repères comme Look!, Listen!, now ou at the moment.",
+      "cartes": [
+        "Look! The children are playing in the garden",
+        "Listen! Someone is singing in the kitchen",
+        "My brother is doing his homework right now",
+        "We are watching a film at the moment",
+        "Be quiet! The baby is sleeping"
+      ]
+    },
+    {
+      "nom": "Une habitude",
+      "detail": "Le présent simple dit ce qu'on fait régulièrement, avec des repères comme usually, always, never ou every day.",
+      "cartes": [
+        "I usually walk to school with my friends",
+        "He plays football every Saturday",
+        "My mother always drinks tea in the morning",
+        "They never eat fish on Friday",
+        "My cousins visit us every summer"
+      ]
+    },
+    {
+      "nom": "Un vêtement",
+      "detail": "Des phrases qui parlent de ce que l'on met : jeans, trainers, jumper, scarf, cap…",
+      "cartes": [
+        "My jeans are too long",
+        "Where are my new trainers?",
+        "A red scarf and a warm coat",
+        "Your blue jumper is really nice",
+        "Is this your cap?"
+      ]
+    },
+    {
+      "nom": "Le temps qu'il fait",
+      "detail": "Des phrases qui décrivent la météo : sunny, cloudy, windy, foggy, cold, hot…",
+      "cartes": [
+        "It's sunny and hot today",
+        "It's cloudy and windy this morning",
+        "What's the weather like in London?",
+        "It's very cold and foggy",
+        "It's rainy and grey today"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Quelle règle explique l'écriture du verbe en couleur ?",
+      "texte": "Look! The cat is [sitting] on my bed.",
+      "choix": ["On ajoute simplement -ing", "On supprime le e", "On double la consonne", "Le ie devient y"],
+      "bonne": 2,
+      "explication": "Sit finit par une voyelle courte et une consonne : on double la consonne, sitting."
+    },
+    {
+      "consigne": "Quelle règle explique l'écriture du verbe en couleur ?",
+      "texte": "Tom is [writing] a long letter.",
+      "choix": ["On ajoute simplement -ing", "On supprime le e", "On double la consonne", "Le ie devient y"],
+      "bonne": 1,
+      "explication": "Write finit par un e muet, qui disparaît devant -ing : writing."
+    },
+    {
+      "consigne": "Quelle règle explique l'écriture du verbe en couleur ?",
+      "texte": "She is [playing] with her dog.",
+      "choix": ["On ajoute simplement -ing", "On supprime le e", "On double la consonne", "Le ie devient y"],
+      "bonne": 0,
+      "explication": "Play ne demande aucun changement : on ajoute simplement -ing."
+    },
+    {
+      "consigne": "Quelle règle explique l'écriture du verbe en couleur ?",
+      "texte": "The old man is [lying] on the sofa.",
+      "choix": ["On ajoute simplement -ing", "On supprime le e", "On double la consonne", "Le ie devient y"],
+      "bonne": 3,
+      "explication": "Lie finit par ie : le groupe ie devient y, lying."
+    },
+    {
+      "consigne": "Quelle règle explique l'écriture du verbe en couleur ?",
+      "texte": "My sister is [dancing] in the kitchen.",
+      "choix": ["On ajoute simplement -ing", "On supprime le e", "On double la consonne", "Le ie devient y"],
+      "bonne": 1,
+      "explication": "Dance finit par un e muet, qui disparaît devant -ing : dancing."
+    },
+    {
+      "consigne": "Quelle règle explique l'écriture du verbe en couleur ?",
+      "texte": "We are [swimming] in the sea.",
+      "choix": ["On ajoute simplement -ing", "On supprime le e", "On double la consonne", "Le ie devient y"],
+      "bonne": 2,
+      "explication": "Swim finit par une voyelle courte et une consonne : on double la consonne, swimming."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Wear",
+      "acceptees": ["To wear", "Wearing"],
+      "indices": [
+        "Je suis un verbe anglais.",
+        "On m'emploie pour décrire une tenue.",
+        "En français, je veux dire « porter » un vêtement."
+      ],
+      "explication": "Wear signifie porter un vêtement : She is wearing jeans."
+    },
+    {
+      "reponse": "Jumper",
+      "acceptees": ["A jumper", "Sweater", "A sweater"],
+      "indices": [
+        "Je suis un vêtement.",
+        "On me porte sur le haut du corps quand il fait frais.",
+        "En français, on m'appelle un pull."
+      ],
+      "explication": "Un pull se dit a jumper au Royaume-Uni, ou a sweater."
+    },
+    {
+      "reponse": "Weather",
+      "acceptees": ["The weather"],
+      "indices": [
+        "Je suis un mot qu'on utilise pour parler du ciel et de la température.",
+        "Pour me demander, on dit What's ___ like?",
+        "En français, je veux dire « la météo » ou « le temps qu'il fait »."
+      ],
+      "explication": "What's the weather like? se traduit par « Quel temps fait-il ? »."
+    },
+    {
+      "reponse": "Winter",
+      "acceptees": ["In winter"],
+      "indices": [
+        "Je suis une saison de l'année.",
+        "Je suis la saison où il fait le plus froid et où il neige.",
+        "Je suis le contraire de summer."
+      ],
+      "explication": "Winter est l'hiver, et on dit in winter."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Construire une phrase avec be + -ing",
+      "etapes": [
+        "Choisir le sujet : She",
+        "Conjuguer be au présent avec ce sujet : is",
+        "Ajouter le verbe en -ing : reading",
+        "Finir par le complément : a book"
+      ]
+    },
+    {
+      "titre": "Écrire le -ing du verbe write",
+      "etapes": [
+        "Partir de la base verbale : write",
+        "Supprimer le e muet à la fin",
+        "Ajouter -ing à ce qui reste",
+        "Vérifier le résultat obtenu : writing"
+      ]
+    }
+  ]
+}

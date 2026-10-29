@@ -1,0 +1,141 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "La défaite et l'occupation",
+      "detail": "La défaite militaire de 1940 et la division du pays qui en découle.",
+      "cartes": [
+        "L'offensive allemande de mai-juin 1940 vainc l'armée en quelques semaines",
+        "Des millions de civils fuient sur les routes",
+        "L'armistice est signé à Rethondes le 22 juin 1940",
+        "Le pays est coupé en zone occupée et zone libre",
+        "La zone libre est occupée en novembre 1942"
+      ]
+    },
+    {
+      "nom": "Le régime de Vichy",
+      "detail": "Le régime autoritaire du maréchal Pétain et sa collaboration avec l'Allemagne nazie.",
+      "cartes": [
+        "Les parlementaires votent les pleins pouvoirs à Pétain",
+        "La devise « Travail, Famille, Patrie » remplace « Liberté, Égalité, Fraternité »",
+        "Pétain rencontre Hitler à Montoire en octobre 1940",
+        "Plus d'élections et le culte du chef s'impose",
+        "Pierre Laval renforce la collaboration comme chef du gouvernement"
+      ]
+    },
+    {
+      "nom": "La persécution des Juifs",
+      "detail": "Les mesures et les violences qui frappent les Juifs de France entre 1940 et 1944.",
+      "cartes": [
+        "Le statut d'octobre 1940 exclut les Juifs de nombreux métiers",
+        "Une politique antisémite décidée sans que l'Allemagne l'exige",
+        "La police française arrête des milliers de Juifs à Paris",
+        "Environ 75 000 Juifs sont déportés de France",
+        "Très peu de Juifs déportés de France reviennent"
+      ]
+    },
+    {
+      "nom": "Résister à l'occupant",
+      "detail": "Les actions de ceux qui refusent la défaite, à Londres comme en France.",
+      "cartes": [
+        "Un général appelle à la BBC à continuer la guerre",
+        "Publier en secret des journaux interdits",
+        "Saboter des voies ferrées pour gêner l'occupant",
+        "Refuser de partir travailler en Allemagne et rejoindre un maquis",
+        "Jean Moulin crée le CNR le 27 mai 1943"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "la défaite de la France en 1940",
+      "carte": "L'offensive allemande de mai-juin 1940",
+      "role": "cause",
+      "explication": "L'offensive allemande de mai-juin 1940 provoque une défaite rapide de l'armée française."
+    },
+    {
+      "fait": "la défaite de la France en 1940",
+      "carte": "L'armistice signé à Rethondes le 22 juin 1940",
+      "role": "consequence",
+      "explication": "Après la défaite, Pétain demande l'armistice, signé le 22 juin 1940."
+    },
+    {
+      "fait": "l'appel du 18 juin 1940",
+      "carte": "Pétain annonce qu'il faut cesser le combat",
+      "role": "cause",
+      "explication": "De Gaulle refuse la défaite que Pétain vient d'accepter et appelle à continuer la guerre."
+    },
+    {
+      "fait": "l'appel du 18 juin 1940",
+      "carte": "Le début de la France libre",
+      "role": "consequence",
+      "explication": "À partir de l'appel de Londres, de Gaulle fonde la France libre, qui continue la guerre aux côtés des Alliés."
+    }
+  ],
+  "etiquettes": [],
+  "devinettes": [
+    {
+      "reponse": "Charles de Gaulle",
+      "acceptees": ["De Gaulle", "Charles de Gaulle", "Le général de Gaulle", "Général de Gaulle"],
+      "indices": [
+        "Je suis un général français.",
+        "Le 18 juin 1940, j'appelle à continuer la guerre depuis Londres.",
+        "Je fonde la France libre, puis je préside le gouvernement provisoire en 1944."
+      ],
+      "explication": "De Gaulle lance l'appel du 18 juin 1940, fonde la France libre et préside le GPRF."
+    },
+    {
+      "reponse": "Philippe Pétain",
+      "acceptees": ["Pétain", "Philippe Pétain", "Le maréchal Pétain", "Maréchal Pétain"],
+      "indices": [
+        "Je suis un maréchal.",
+        "Le 17 juin 1940, je demande l'armistice.",
+        "Le 10 juillet 1940, les parlementaires me donnent les pleins pouvoirs et je dirige l'État français installé à Vichy."
+      ],
+      "explication": "Pétain demande l'armistice, reçoit les pleins pouvoirs le 10 juillet 1940 et dirige le régime de Vichy."
+    },
+    {
+      "reponse": "Jean Moulin",
+      "acceptees": ["Moulin", "Jean Moulin"],
+      "indices": [
+        "Je suis un résistant français.",
+        "De Gaulle m'envoie en France pour unifier la Résistance.",
+        "Je crée le Conseil national de la Résistance le 27 mai 1943, puis je suis arrêté et torturé."
+      ],
+      "explication": "Jean Moulin unifie la Résistance intérieure et crée le CNR le 27 mai 1943 ; il est arrêté en juin et meurt après avoir été torturé."
+    },
+    {
+      "reponse": "Le Vél d'Hiv",
+      "acceptees": ["Vél d'Hiv", "Vel d'Hiv", "Le Vél d'Hiv", "Le Vel d'Hiv", "La rafle du Vél d'Hiv", "Rafle du Vel d'Hiv"],
+      "indices": [
+        "Je suis une opération de police menée à Paris.",
+        "Je me déroule les 16 et 17 juillet 1942.",
+        "La police française arrête plus de 13 000 Juifs lors de cet événement."
+      ],
+      "explication": "La rafle du Vél d'Hiv (16-17 juillet 1942) est menée par la police française : c'est un exemple de collaboration d'État."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "De 1942 à la Libération",
+      "etapes": [
+        "En juillet 1942, la rafle du Vél d'Hiv a lieu à Paris",
+        "En novembre 1942, la zone libre est occupée par les Allemands",
+        "En mai 1943, Jean Moulin crée le Conseil national de la Résistance",
+        "Le 6 juin 1944, les Alliés débarquent en Normandie",
+        "Le 25 août 1944, Paris est libéré"
+      ]
+    },
+    {
+      "titre": "L'été et l'automne 1940",
+      "etapes": [
+        "Le 17 juin, Pétain annonce qu'il faut cesser le combat",
+        "Le 18 juin, de Gaulle appelle à continuer la guerre depuis Londres",
+        "Le 22 juin, l'armistice est signé à Rethondes",
+        "Le 10 juillet, les parlementaires votent les pleins pouvoirs à Pétain",
+        "En octobre, Pétain rencontre Hitler à Montoire"
+      ]
+    }
+  ]
+}

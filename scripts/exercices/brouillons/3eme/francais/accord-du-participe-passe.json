@@ -1,0 +1,148 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Accord avec le sujet",
+      "detail": "Avec être, à la voix passive et avec la plupart des verbes pronominaux, le participe passé s'accorde avec le sujet.",
+      "cartes": [
+        "Elles sont parties tôt",
+        "La lettre a été envoyée hier",
+        "Les élèves sont rentrés à pied",
+        "Elle s'est évanouie dans la cour",
+        "Mes cousines sont venues ce matin"
+      ]
+    },
+    {
+      "nom": "Accord avec le COD placé avant",
+      "detail": "Avec avoir, le participe passé s'accorde avec le COD seulement quand ce COD est placé avant le verbe.",
+      "cartes": [
+        "Ces fleurs, je les ai cueillies",
+        "Voici les lettres qu'il a écrites",
+        "Quelles villes as-tu visitées ?",
+        "La voiture que j'ai repeinte brille",
+        "Ces romans, je les ai lus en une semaine"
+      ]
+    },
+    {
+      "nom": "Participe invariable, sans accord",
+      "detail": "Le participe reste invariable quand le verbe avec avoir n'a pas de COD, quand le COD est placé après, ou quand « se » est un COI.",
+      "cartes": [
+        "J'ai cueilli des fleurs",
+        "Elles ont couru dans le parc",
+        "Elles se sont parlé hier",
+        "Elle s'est lavé les mains",
+        "Il a regardé les étoiles"
+      ]
+    },
+    {
+      "nom": "Accord avec le nom, comme un adjectif",
+      "detail": "Employé seul, sans auxiliaire, le participe passé s'accorde en genre et en nombre avec le nom auquel il se rapporte.",
+      "cartes": [
+        "Des fenêtres fermées",
+        "Une histoire inventée",
+        "Des fruits cueillis ce matin",
+        "Les portes ouvertes de l'école",
+        "Une lettre écrite à la main"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Quelle est la fonction du mot en couleur ?",
+      "texte": "Ces fleurs, je [les] ai cueillies.",
+      "choix": ["Sujet", "COD placé avant le verbe", "COD placé après le verbe", "COI"],
+      "bonne": 1,
+      "explication": "« les » remplace « ces fleurs » : c'est le COD, placé avant le verbe, donc « cueillies » s'accorde."
+    },
+    {
+      "consigne": "Quelle est la fonction du mot en couleur ?",
+      "texte": "J'ai cueilli [des fleurs].",
+      "choix": ["Sujet", "COD placé avant le verbe", "COD placé après le verbe", "COI"],
+      "bonne": 2,
+      "explication": "« des fleurs » répond à « j'ai cueilli quoi ? » et suit le verbe : COD placé après, donc « cueilli » reste invariable."
+    },
+    {
+      "consigne": "Quelle est la fonction du mot en couleur ?",
+      "texte": "Voici les lettres [qu']il a écrites.",
+      "choix": ["Sujet", "COD placé avant le verbe", "COD placé après le verbe", "COI"],
+      "bonne": 1,
+      "explication": "« qu' » (que) est mis pour « les lettres » : c'est le COD de « a écrites », placé avant le verbe."
+    },
+    {
+      "consigne": "Quelle est la fonction du mot en couleur ?",
+      "texte": "Elles [se] sont parlé hier.",
+      "choix": ["Sujet", "COD placé avant le verbe", "COD placé après le verbe", "COI"],
+      "bonne": 3,
+      "explication": "On parle à quelqu'un : « se » est un COI, donc « parlé » ne s'accorde pas."
+    },
+    {
+      "consigne": "Quelle est la fonction du mot en couleur ?",
+      "texte": "[Elles] ont couru dans le parc.",
+      "choix": ["Sujet", "COD placé avant le verbe", "COD placé après le verbe", "COI"],
+      "bonne": 0,
+      "explication": "« Elles » fait l'action de courir : c'est le sujet. Avec avoir, on n'accorde jamais le participe avec le sujet."
+    },
+    {
+      "consigne": "Quelle est la fonction du mot en couleur ?",
+      "texte": "Elle s'est lavé [les mains].",
+      "choix": ["Sujet", "COD placé avant le verbe", "COD placé après le verbe", "COI"],
+      "bonne": 2,
+      "explication": "« les mains » répond à « elle a lavé quoi ? » et suit le verbe : COD placé après, donc « lavé » reste invariable."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Auxiliaire",
+      "acceptees": ["Auxiliaire", "L'auxiliaire", "Un auxiliaire", "Verbe auxiliaire"],
+      "indices": [
+        "Je suis un verbe, mais je n'apporte pas le sens principal.",
+        "Je me place devant un participe passé.",
+        "Je suis le verbe être ou le verbe avoir dans un temps composé."
+      ],
+      "explication": "Les auxiliaires être et avoir aident à former les temps composés."
+    },
+    {
+      "reponse": "COD",
+      "acceptees": ["COD", "Le COD", "Complément d'objet direct", "COD antéposé", "COD placé avant"],
+      "indices": [
+        "Je suis une fonction dans la phrase.",
+        "Je réponds à la question « quoi ? » ou « qui ? » posée après le verbe.",
+        "Quand je suis placé avant le verbe avec avoir, le participe passé s'accorde avec moi."
+      ],
+      "explication": "Le COD répond à « quoi ? » ou « qui ? » ; avec avoir, le participe s'accorde avec lui s'il est placé avant le verbe."
+    },
+    {
+      "reponse": "Verbe pronominal",
+      "acceptees": ["Verbe pronominal", "Verbes pronominaux", "Un verbe pronominal", "Pronominal"],
+      "indices": [
+        "Je me conjugue avec un petit mot comme « se » ou « me ».",
+        "Se laver et s'évanouir sont des exemples de moi.",
+        "Mon participe passé s'accorde le plus souvent avec le sujet."
+      ],
+      "explication": "Un verbe pronominal se conjugue avec un pronom réfléchi ; son participe passé s'accorde le plus souvent avec le sujet."
+    },
+    {
+      "reponse": "Participe passé",
+      "acceptees": ["Participe passé", "Le participe passé", "Un participe passé"],
+      "indices": [
+        "Je suis une forme du verbe.",
+        "Je me termine par -é pour les verbes du 1er groupe.",
+        "On me trouve dans les temps composés, après être ou avoir."
+      ],
+      "explication": "Le participe passé sert à former les temps composés et la voix passive."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Accorder un participe passé employé avec avoir",
+      "etapes": [
+        "Repère l'auxiliaire : c'est avoir",
+        "Pose la question « quoi ? » ou « qui ? » après le verbe",
+        "Regarde si le COD est placé avant ou après le verbe",
+        "Si le COD est placé avant, accorde avec lui"
+      ]
+    }
+  ]
+}

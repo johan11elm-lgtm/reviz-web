@@ -1,0 +1,148 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Une déclaration",
+      "detail": "Une phrase qui affirme quelque chose devient une subordonnée introduite par « que ».",
+      "cartes": [
+        "Il dit qu'il est fatigué",
+        "Elle a affirmé qu'elle avait réussi",
+        "Paul répond qu'il viendra demain",
+        "Les élèves ont avoué qu'ils avaient oublié leur livre",
+        "Ma mère a expliqué qu'elle était en retard"
+      ]
+    },
+    {
+      "nom": "Une question à réponse oui ou non",
+      "detail": "Une question à laquelle on répond par oui ou par non devient une subordonnée introduite par « si ».",
+      "cartes": [
+        "Il demande si tu viens",
+        "Elle a demandé s'il pleuvait",
+        "Léa voulait savoir si le train était arrivé",
+        "Le guide demanda si tout le monde était là",
+        "Mon frère a demandé si nous avions faim"
+      ]
+    },
+    {
+      "nom": "Une question avec un mot interrogatif",
+      "detail": "Une question qui commence par pourquoi, où, quand, qui… garde son mot interrogatif, sans inversion ni point d'interrogation.",
+      "cartes": [
+        "Il demanda pourquoi je partais",
+        "Elle a demandé où il habitait",
+        "Paul voulait savoir quand le train arriverait",
+        "Le professeur a demandé qui avait fini",
+        "Léa m'a demandé combien coûtait ce livre"
+      ]
+    },
+    {
+      "nom": "Un ordre",
+      "detail": "Un ordre à l'impératif devient « de » + infinitif.",
+      "cartes": [
+        "La mère lui ordonna de ranger sa chambre",
+        "Il lui dit de sortir",
+        "Le professeur nous a demandé de nous taire",
+        "Elle lui répéta de se dépêcher",
+        "Le gardien cria aux enfants de s'arrêter"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Que repère-t-on en couleur ?",
+      "texte": "Il [dit] : « Je suis fatigué. »",
+      "choix": ["Un verbe de parole", "Une incise", "Des paroles au discours direct", "Une subordonnée au discours indirect"],
+      "bonne": 0,
+      "explication": "« dit » est le verbe de parole : il annonce les paroles qui suivent les deux-points."
+    },
+    {
+      "consigne": "Que repère-t-on en couleur ?",
+      "texte": "« Je reviendrai, [promit-elle], avant la nuit. »",
+      "choix": ["Un verbe de parole", "Une incise", "Des paroles au discours direct", "Une subordonnée au discours indirect"],
+      "bonne": 1,
+      "explication": "« promit-elle » est insérée dans les paroles et le sujet est inversé après le verbe : c'est une incise."
+    },
+    {
+      "consigne": "Que repère-t-on en couleur ?",
+      "texte": "Elle répondit : [« Je n'ai pas le temps. »]",
+      "choix": ["Un verbe de parole", "Une incise", "Des paroles au discours direct", "Une subordonnée au discours indirect"],
+      "bonne": 2,
+      "explication": "Les paroles sont citées telles quelles, entre guillemets, après les deux-points : c'est du discours direct."
+    },
+    {
+      "consigne": "Que repère-t-on en couleur ?",
+      "texte": "Il affirme [qu'il a réussi].",
+      "choix": ["Un verbe de parole", "Une incise", "Des paroles au discours direct", "Une subordonnée au discours indirect"],
+      "bonne": 3,
+      "explication": "Les paroles sont intégrées dans une subordonnée introduite par « que », sans guillemets : c'est du discours indirect."
+    },
+    {
+      "consigne": "Que repère-t-on en couleur ?",
+      "texte": "Léa [murmura] qu'elle avait peur.",
+      "choix": ["Un verbe de parole", "Une incise", "Des paroles au discours direct", "Une subordonnée au discours indirect"],
+      "bonne": 0,
+      "explication": "« murmura » est un verbe de parole : il introduit les paroles de Léa et précise le ton, plus précis que « dit »."
+    },
+    {
+      "consigne": "Que repère-t-on en couleur ?",
+      "texte": "« Nous partons, [dit le guide], dès que tout le monde est là. »",
+      "choix": ["Un verbe de parole", "Une incise", "Des paroles au discours direct", "Une subordonnée au discours indirect"],
+      "bonne": 1,
+      "explication": "« dit le guide » s'insère au milieu des paroles, avec le sujet après le verbe : c'est une incise."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Incise",
+      "acceptees": ["Une incise", "L'incise", "Proposition incise"],
+      "indices": [
+        "Je suis une courte proposition.",
+        "Je m'insère au milieu des paroles d'un personnage.",
+        "Mon sujet est placé après le verbe, comme dans « dit-il »."
+      ],
+      "explication": "L'incise est une courte proposition insérée dans les paroles, avec inversion du sujet : « Je pars, dit-il, mais je reviendrai. »"
+    },
+    {
+      "reponse": "Concordance des temps",
+      "acceptees": ["La concordance des temps", "Concordance"],
+      "indices": [
+        "Je suis une règle de grammaire.",
+        "Je m'applique au discours indirect.",
+        "Quand le verbe introducteur est au passé, je fais reculer les verbes des paroles : le présent devient imparfait, le futur devient conditionnel."
+      ],
+      "explication": "La concordance des temps adapte les verbes des paroles quand le verbe introducteur est au passé : « Je suis prêt » devient « il a dit qu'il était prêt »."
+    },
+    {
+      "reponse": "Verbe de parole",
+      "acceptees": ["Un verbe de parole", "Le verbe de parole", "Verbe introducteur", "Le verbe introducteur"],
+      "indices": [
+        "Je suis un mot qui se conjugue.",
+        "J'annonce ce que quelqu'un va dire.",
+        "Je peux être « répondre », « demander » ou « murmurer »."
+      ],
+      "explication": "Le verbe de parole (ou verbe introducteur) annonce les paroles : dire, demander, répondre, murmurer, s'écrier…"
+    },
+    {
+      "reponse": "La veille",
+      "acceptees": ["Veille", "Le jour précédent", "Le jour d'avant"],
+      "indices": [
+        "Je suis un indicateur de temps.",
+        "J'apparais à la place d'un autre mot quand on rapporte des paroles au passé.",
+        "Je remplace « hier »."
+      ],
+      "explication": "Au discours indirect passé, « hier » devient « la veille » et « demain » devient « le lendemain »."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Passer du discours direct au discours indirect",
+      "etapes": [
+        "Supprime les deux-points et les guillemets",
+        "Choisis le mot qui introduit la subordonnée",
+        "Adapte les pronoms et les déterminants",
+        "Verbe de parole au passé : adapte temps et indicateurs"
+      ]
+    }
+  ]
+}

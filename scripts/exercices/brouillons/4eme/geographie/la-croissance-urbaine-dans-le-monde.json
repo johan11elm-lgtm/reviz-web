@@ -1,0 +1,208 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "La part des citadins",
+      "detail": "Les chiffres et le calcul qui mesurent la part de la population mondiale qui vit en ville.",
+      "cartes": [
+        "Moins d'un habitant sur trois en ville vers 1950",
+        "Plus de la moitié des humains en ville depuis 2007-2008",
+        "Environ 2 humains sur 3 en ville en 2050",
+        "Plus de 75 % de citadins en Europe",
+        "La population urbaine divisée par la population totale, fois 100"
+      ]
+    },
+    {
+      "nom": "Pourquoi les villes grossissent",
+      "detail": "Les deux causes de la croissance des villes : l'arrivée des ruraux et les naissances.",
+      "cartes": [
+        "Des habitants quittent les campagnes pour la ville",
+        "Des ruraux qui cherchent du travail en ville",
+        "Des familles qui cherchent des écoles et des soins",
+        "De nombreuses naissances parmi les citadins",
+        "Un accroissement naturel qui reste élevé"
+      ]
+    },
+    {
+      "nom": "Les mégapoles",
+      "detail": "Les agglomérations de plus de 10 millions d'habitants, définies uniquement par leur population.",
+      "cartes": [
+        "Une agglomération de plus de 10 millions d'habitants",
+        "Plus de 30 agglomérations géantes, surtout en Asie",
+        "Tokyo, Delhi, Mumbai et Lagos",
+        "Une ville définie par le nombre de ses habitants",
+        "Shanghai, Mexico, São Paulo et Le Caire"
+      ]
+    },
+    {
+      "nom": "Les métropoles",
+      "detail": "Les grandes villes mesurées à leur influence et à leurs fonctions de commandement.",
+      "cartes": [
+        "Une grande ville qui influence un vaste territoire",
+        "Une ville qui concentre pouvoirs et activités de commandement",
+        "Londres, très influente dans le monde",
+        "Des sièges sociaux, une bourse et des institutions",
+        "Une ville jugée sur son influence, non sur ses habitants"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "la croissance rapide des villes d'Afrique et d'Asie",
+      "carte": "Le départ des ruraux vers les villes",
+      "role": "cause",
+      "explication": "L'exode rural amène chaque année de nouveaux habitants dans les villes."
+    },
+    {
+      "fait": "la croissance rapide des villes d'Afrique et d'Asie",
+      "carte": "De nombreuses naissances parmi les citadins",
+      "role": "cause",
+      "explication": "Dans les pays en développement, l'accroissement naturel des citadins reste élevé."
+    },
+    {
+      "fait": "la croissance rapide des villes d'Afrique et d'Asie",
+      "carte": "Des mégapoles de plus en plus nombreuses, surtout en Asie",
+      "role": "consequence",
+      "explication": "Les villes grossissent si vite qu'il y a aujourd'hui plus de 30 mégapoles, surtout en Asie."
+    },
+    {
+      "fait": "l'exode rural",
+      "carte": "La recherche de travail, d'écoles et de soins en ville",
+      "role": "cause",
+      "explication": "Les ruraux partent vers la ville pour y trouver du travail, des écoles et des soins."
+    },
+    {
+      "fait": "l'exode rural",
+      "carte": "Des campagnes qui se vident au profit des villes",
+      "role": "consequence",
+      "explication": "En quittant la campagne, les habitants font baisser la population rurale et grossir les villes."
+    }
+  ],
+  "etiquettes": [
+    {
+      "consigne": "Quelle notion le passage en couleur désigne-t-il ?",
+      "texte": "Dans le monde, [la part des habitants qui vivent en ville augmente] d'année en année.",
+      "choix": ["Urbanisation", "Exode rural", "Mégapole", "Métropole"],
+      "bonne": 0,
+      "explication": "L'urbanisation est l'augmentation de la part de la population qui vit en ville."
+    },
+    {
+      "consigne": "Quelle notion le passage en couleur désigne-t-il ?",
+      "texte": "Dans ce pays, [de nombreux habitants quittent la campagne pour trouver du travail en ville].",
+      "choix": ["Urbanisation", "Exode rural", "Mégapole", "Métropole"],
+      "bonne": 1,
+      "explication": "Le départ des habitants des campagnes vers les villes s'appelle l'exode rural."
+    },
+    {
+      "consigne": "Quelle notion le passage en couleur désigne-t-il ?",
+      "texte": "Cette agglomération compte [plus de 10 millions d'habitants].",
+      "choix": ["Urbanisation", "Exode rural", "Mégapole", "Métropole"],
+      "bonne": 2,
+      "explication": "Une mégapole est une agglomération de plus de 10 millions d'habitants."
+    },
+    {
+      "consigne": "Quelle notion le passage en couleur désigne-t-il ?",
+      "texte": "[Londres, avec ses sièges sociaux, sa bourse et ses institutions, influence le monde entier].",
+      "choix": ["Urbanisation", "Exode rural", "Mégapole", "Métropole"],
+      "bonne": 3,
+      "explication": "Une métropole se mesure à son influence : elle concentre pouvoirs et activités de commandement."
+    },
+    {
+      "consigne": "Quelle notion le passage en couleur désigne-t-il ?",
+      "texte": "Avec [25 millions d'habitants dans son agglomération], cette ville fait partie des plus peuplées du monde.",
+      "choix": ["Urbanisation", "Exode rural", "Mégapole", "Métropole"],
+      "bonne": 2,
+      "explication": "Au-delà de 10 millions d'habitants, une agglomération est une mégapole."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "L'exode rural",
+      "acceptees": ["Exode rural", "L'exode rural", "Exode"],
+      "indices": [
+        "Je suis un mouvement d'habitants.",
+        "Je fais quitter leur village à ceux qui cherchent du travail, des écoles et des soins.",
+        "Avec les naissances, je suis l'une des deux causes de la croissance des villes."
+      ],
+      "explication": "L'exode rural est le départ des habitants des campagnes vers les villes."
+    },
+    {
+      "reponse": "Une mégapole",
+      "acceptees": ["Mégapole", "Une mégapole", "Megapole", "Les mégapoles", "Mégapoles"],
+      "indices": [
+        "Je suis une agglomération.",
+        "Tokyo, Delhi et Lagos en font partie.",
+        "Je compte plus de 10 millions d'habitants."
+      ],
+      "explication": "Une mégapole est une agglomération de plus de 10 millions d'habitants, comme Tokyo, Delhi ou Lagos."
+    },
+    {
+      "reponse": "Une métropole",
+      "acceptees": ["Métropole", "Une métropole", "Metropole", "Les métropoles", "Métropoles"],
+      "indices": [
+        "Je suis une grande ville.",
+        "Je concentre la population, les pouvoirs et les activités de commandement.",
+        "On me mesure à mon influence sur un vaste territoire, pas à mon nombre d'habitants."
+      ],
+      "explication": "Une métropole est une grande ville qui concentre pouvoirs et activités de commandement et qui influence un vaste territoire."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "Un pays compte 50 millions d'habitants, dont 35 millions de citadins. Quel est son taux d'urbanisation ?",
+      "reponse": 70,
+      "unite": "%",
+      "tolerance": 0,
+      "explication": "Taux d'urbanisation = population urbaine ÷ population totale × 100 = 35 ÷ 50 × 100 = 70 %."
+    },
+    {
+      "question": "Un pays compte 80 millions d'habitants et son taux d'urbanisation est de 75 %. Combien a-t-il de citadins, en millions ?",
+      "reponse": 60,
+      "unite": "millions de citadins",
+      "tolerance": 0,
+      "explication": "75 % de 80 millions : 80 × 75 ÷ 100 = 60 millions de citadins."
+    },
+    {
+      "question": "Un pays compte 120 millions d'habitants, dont 78 millions de citadins. Quel est son taux d'urbanisation ?",
+      "reponse": 65,
+      "unite": "%",
+      "tolerance": 0,
+      "explication": "78 ÷ 120 × 100 = 65 %."
+    },
+    {
+      "question": "Dans un pays, 24 millions de personnes vivent en ville, ce qui représente 60 % de la population. Quelle est la population totale, en millions d'habitants ?",
+      "reponse": 40,
+      "unite": "millions d'habitants",
+      "tolerance": 0,
+      "explication": "Si 24 millions représentent 60 %, la population totale vaut 24 ÷ 60 × 100 = 40 millions d'habitants."
+    },
+    {
+      "question": "Un pays compte 200 millions d'habitants, dont 90 millions de ruraux. Quel est son taux d'urbanisation ?",
+      "reponse": 55,
+      "unite": "%",
+      "tolerance": 0,
+      "explication": "Citadins = 200 − 90 = 110 millions. Taux = 110 ÷ 200 × 100 = 55 %."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Les grandes dates de l'urbanisation du monde",
+      "etapes": [
+        "Vers 1950, moins d'un habitant sur trois vit en ville",
+        "En 1975, il y avait seulement quelques mégapoles",
+        "En 2007-2008, les citadins deviennent majoritaires",
+        "Aujourd'hui, plus de 30 mégapoles existent",
+        "En 2050, environ 2 humains sur 3 vivront en ville"
+      ]
+    },
+    {
+      "titre": "Décrire une carte de l'urbanisation",
+      "etapes": [
+        "Lis le titre, la date et la légende",
+        "Localise les plus gros cercles et nomme les continents",
+        "Compare les continents entre eux",
+        "Conclus en une phrase avec un chiffre"
+      ]
+    }
+  ]
+}

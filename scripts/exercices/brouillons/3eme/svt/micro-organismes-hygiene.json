@@ -1,0 +1,201 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Les bactéries",
+      "detail": "Des micro-organismes formés d'une seule cellule, la plupart inoffensifs ou utiles.",
+      "cartes": [
+        "Une cellule sans noyau",
+        "Elles mesurent quelques micromètres",
+        "Elles se multiplient vite par division",
+        "Celles de l'intestin forment un microbiote utile",
+        "Elles servent à fabriquer les yaourts"
+      ]
+    },
+    {
+      "nom": "Les voies d'entrée des microbes",
+      "detail": "Les chemins par lesquels des micro-organismes peuvent entrer dans le corps (la contamination).",
+      "cartes": [
+        "Par une coupure ou une plaie",
+        "Avec l'air qu'on respire",
+        "Avec des aliments avalés",
+        "Par le sang d'une autre personne",
+        "Lors d'un rapport sexuel non protégé"
+      ]
+    },
+    {
+      "nom": "Les gestes d'hygiène",
+      "detail": "Les gestes qui empêchent les microbes d'arriver (asepsie) ou les détruisent (antisepsie).",
+      "cartes": [
+        "Se laver les mains avant de cuisiner",
+        "Porter un masque pour limiter la transmission",
+        "Stériliser le matériel avant de s'en servir",
+        "Désinfecter un genou écorché",
+        "Utiliser un préservatif contre les infections sexuellement transmissibles"
+      ]
+    },
+    {
+      "nom": "Les antibiotiques",
+      "detail": "Les médicaments qui soignent les infections bactériennes, mais pas les infections virales.",
+      "cartes": [
+        "Médicaments qui détruisent les bactéries ou bloquent leur multiplication",
+        "La pénicilline, découverte par Fleming en 1928",
+        "On n'en prend que sur prescription d'un médecin",
+        "Leur usage excessif sélectionne des bactéries résistantes",
+        "Inefficaces contre la grippe, due à un virus"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "la sélection de bactéries résistantes",
+      "carte": "Un usage excessif ou inadapté des antibiotiques",
+      "role": "cause",
+      "explication": "Trop d'antibiotiques tuent les bactéries sensibles et sélectionnent celles qui résistent."
+    },
+    {
+      "fait": "la sélection de bactéries résistantes",
+      "carte": "Les bactéries sensibles sont éliminées par l'antibiotique",
+      "role": "cause",
+      "explication": "Sans leurs concurrentes sensibles, les bactéries résistantes survivent et se multiplient."
+    },
+    {
+      "fait": "la sélection de bactéries résistantes",
+      "carte": "Certaines infections deviennent plus difficiles à soigner",
+      "role": "consequence",
+      "explication": "Contre des bactéries résistantes, l'antibiotique n'agit plus."
+    },
+    {
+      "fait": "l'infection",
+      "carte": "L'entrée de micro-organismes dans le corps",
+      "role": "cause",
+      "explication": "La contamination (l'entrée) précède l'infection (la multiplication)."
+    },
+    {
+      "fait": "l'infection",
+      "carte": "Une maladie peut se déclarer",
+      "role": "consequence",
+      "explication": "Quand les micro-organismes sont pathogènes, leur multiplication dans le corps provoque une maladie."
+    }
+  ],
+  "etiquettes": [
+    {
+      "consigne": "Quelle notion illustre le passage en couleur ?",
+      "texte": "Léa se coupe avec une boîte de conserve sale : [des bactéries entrent dans la plaie].",
+      "choix": ["Contamination", "Infection", "Asepsie", "Antisepsie"],
+      "bonne": 0,
+      "explication": "L'entrée de micro-organismes dans le corps est une contamination."
+    },
+    {
+      "consigne": "Quelle notion illustre le passage en couleur ?",
+      "texte": "Les jours suivants, [les bactéries se multiplient dans la plaie de Léa].",
+      "choix": ["Contamination", "Infection", "Asepsie", "Antisepsie"],
+      "bonne": 1,
+      "explication": "La multiplication de micro-organismes dans le corps est une infection."
+    },
+    {
+      "consigne": "Quelle notion illustre le passage en couleur ?",
+      "texte": "Avant de cuisiner, Tom [se lave les mains] pour ne pas apporter de microbes sur les aliments.",
+      "choix": ["Contamination", "Infection", "Asepsie", "Antisepsie"],
+      "bonne": 2,
+      "explication": "Se laver les mains empêche les microbes d'arriver : c'est de l'asepsie."
+    },
+    {
+      "consigne": "Quelle notion illustre le passage en couleur ?",
+      "texte": "Tom s'est écorché le genou : sa mère [le désinfecte avec un antiseptique].",
+      "choix": ["Contamination", "Infection", "Asepsie", "Antisepsie"],
+      "bonne": 3,
+      "explication": "Détruire les microbes déjà présents sur une plaie avec un antiseptique, c'est de l'antisepsie."
+    },
+    {
+      "consigne": "Quelle notion illustre le passage en couleur ?",
+      "texte": "Avant une opération, [le chirurgien se lave les mains et porte un masque].",
+      "choix": ["Contamination", "Infection", "Asepsie", "Antisepsie"],
+      "bonne": 2,
+      "explication": "Le lavage des mains et le port du masque empêchent la contamination : c'est de l'asepsie."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Microbiote",
+      "acceptees": ["Microbiote", "Le microbiote", "Microbiote intestinal", "Le microbiote intestinal", "Flore intestinale"],
+      "indices": [
+        "Je suis un ensemble de bactéries.",
+        "Je vis dans ton intestin.",
+        "J'aide à digérer et je te protège contre les pathogènes."
+      ],
+      "explication": "Le microbiote intestinal est l'ensemble des bactéries de l'intestin, utiles à la digestion et à la protection."
+    },
+    {
+      "reponse": "Asepsie",
+      "acceptees": ["Asepsie", "L'asepsie"],
+      "indices": [
+        "Je regroupe des mesures d'hygiène.",
+        "Je te fais laver les mains, porter un masque ou stériliser le matériel.",
+        "J'empêche la contamination, avant l'arrivée des microbes."
+      ],
+      "explication": "L'asepsie regroupe les mesures qui empêchent les micro-organismes d'entrer."
+    },
+    {
+      "reponse": "Antibiotique",
+      "acceptees": ["Antibiotique", "Un antibiotique", "Les antibiotiques", "Antibiotiques"],
+      "indices": [
+        "Je suis un médicament.",
+        "Je détruis les bactéries ou je bloque leur multiplication.",
+        "Je ne soigne jamais la grippe, qui est due à un virus."
+      ],
+      "explication": "Les antibiotiques agissent uniquement sur les bactéries, jamais sur les virus."
+    },
+    {
+      "reponse": "Virus",
+      "acceptees": ["Virus", "Un virus", "Les virus"],
+      "indices": [
+        "Je suis bien plus petit qu'une bactérie, environ 0,1 µm.",
+        "Je ne suis pas une cellule.",
+        "Je ne me multiplie qu'à l'intérieur d'une cellule que j'infecte."
+      ],
+      "explication": "Un virus n'est pas une cellule : il se multiplie seulement dans une cellule qu'il infecte."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "Une bactérie se divise en deux toutes les 30 minutes. En partant d'une seule bactérie, combien y en a-t-il au bout de 2 heures ?",
+      "reponse": 16,
+      "unite": "bactéries",
+      "tolerance": 0,
+      "explication": "2 h = 120 min, soit 120 ÷ 30 = 4 divisions. Le nombre double à chaque fois : 2 × 2 × 2 × 2 = 16 bactéries."
+    },
+    {
+      "question": "Une bactérie se divise en deux toutes les 20 minutes. En partant d'une seule bactérie, combien y en a-t-il au bout de 2 heures ?",
+      "reponse": 64,
+      "unite": "bactéries",
+      "tolerance": 0,
+      "explication": "2 h = 120 min, soit 120 ÷ 20 = 6 divisions. Le nombre double 6 fois : 2 × 2 × 2 × 2 × 2 × 2 = 64 bactéries."
+    },
+    {
+      "question": "Dans une plaie, 3 bactéries se divisent chacune en deux toutes les 20 minutes. Combien y en a-t-il au bout d'une heure ?",
+      "reponse": 24,
+      "unite": "bactéries",
+      "tolerance": 0,
+      "explication": "1 h = 60 min, soit 60 ÷ 20 = 3 divisions. Chaque bactérie en donne 2 × 2 × 2 = 8, donc 3 × 8 = 24 bactéries."
+    },
+    {
+      "question": "Un virus mesure environ 0,1 µm et une bactérie 2 µm. Combien de fois la bactérie est-elle plus grande que le virus ?",
+      "reponse": 20,
+      "unite": "fois",
+      "tolerance": 0,
+      "explication": "2 ÷ 0,1 = 20 : la bactérie est 20 fois plus grande."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "La sélection de bactéries résistantes",
+      "etapes": [
+        "Une personne prend un antibiotique",
+        "Les bactéries sensibles sont éliminées",
+        "Quelques bactéries résistantes survivent",
+        "Elles se multiplient et deviennent majoritaires"
+      ]
+    }
+  ]
+}

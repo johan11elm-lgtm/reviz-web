@@ -1,0 +1,178 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Réaliser la préparation",
+      "detail": "Les gestes pour fabriquer la lame que l'on va observer : un échantillon très fin, de l'eau et une lamelle.",
+      "cartes": [
+        "Choisir un échantillon très fin",
+        "Mettre une goutte d'eau sur la lame",
+        "Poser l'échantillon dans la goutte d'eau",
+        "Recouvrir le tout d'une lamelle",
+        "Vérifier qu'il ne reste aucune bulle d'air"
+      ]
+    },
+    {
+      "nom": "Régler le microscope",
+      "detail": "Les gestes à faire devant le microscope : placer la lame, commencer par le plus petit objectif, rendre l'image nette.",
+      "cartes": [
+        "Poser la lame sur la platine, au-dessus de la lumière",
+        "Commencer par le plus petit objectif",
+        "Tourner la vis jusqu'à obtenir une image nette",
+        "Centrer ce que l'on veut observer avant de grossir",
+        "Passer ensuite à un objectif plus fort"
+      ]
+    },
+    {
+      "nom": "Le dessin d'observation",
+      "detail": "Les règles pour dessiner ce que l'on a vu : crayon à papier, traits nets, légendes à la règle et titre.",
+      "cartes": [
+        "Utiliser un crayon à papier",
+        "Tracer des traits bien nets",
+        "Ne représenter que ce que l'on voit",
+        "Relier chaque légende par un trait horizontal à la règle",
+        "Donner un titre qui dit ce qu'on a observé"
+      ]
+    },
+    {
+      "nom": "Calculer le grossissement",
+      "detail": "Le grossissement total d'un microscope est le grossissement de l'oculaire multiplié par celui de l'objectif.",
+      "cartes": [
+        "Oculaire ×10 et objectif ×40 donnent ×400",
+        "Oculaire ×10 et objectif ×4 donnent ×40",
+        "Oculaire ×5 et objectif ×10 donnent ×50",
+        "Oculaire ×15 et objectif ×20 donnent ×300",
+        "Oculaire ×10 et objectif ×100 donnent ×1 000"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Quel élément de la cellule le passage en couleur désigne-t-il ?",
+      "texte": "Dans la feuille d'élodée, on voit [de nombreux petits grains verts].",
+      "choix": ["Membrane", "Noyau", "Paroi", "Chloroplastes"],
+      "bonne": 3,
+      "explication": "Les petits grains verts des cellules des parties vertes d'une plante sont des chloroplastes."
+    },
+    {
+      "consigne": "Quel élément de la cellule le passage en couleur désigne-t-il ?",
+      "texte": "Autour de la membrane d'une cellule d'oignon, on voit [une enveloppe rigide].",
+      "choix": ["Membrane", "Noyau", "Paroi", "Chloroplastes"],
+      "bonne": 2,
+      "explication": "L'enveloppe rigide qui entoure la membrane des cellules végétales est la paroi."
+    },
+    {
+      "consigne": "Quel élément de la cellule le passage en couleur désigne-t-il ?",
+      "texte": "Dans une cellule de joue colorée, on distingue [l'élément qui contient les informations qui commandent la cellule].",
+      "choix": ["Membrane", "Noyau", "Paroi", "Chloroplastes"],
+      "bonne": 1,
+      "explication": "Le noyau contient les informations qui commandent la cellule."
+    },
+    {
+      "consigne": "Quel élément de la cellule le passage en couleur désigne-t-il ?",
+      "texte": "Toute cellule est délimitée par [une fine enveloppe].",
+      "choix": ["Membrane", "Noyau", "Paroi", "Chloroplastes"],
+      "bonne": 0,
+      "explication": "La membrane est la fine enveloppe qui délimite la cellule ; toutes les cellules en ont une."
+    },
+    {
+      "consigne": "Quel élément de la cellule le passage en couleur désigne-t-il ?",
+      "texte": "Les plantes vertes fabriquent leur matière grâce à la lumière avec [de petits éléments verts de leurs cellules].",
+      "choix": ["Membrane", "Noyau", "Paroi", "Chloroplastes"],
+      "bonne": 3,
+      "explication": "Les chloroplastes sont de petits éléments verts qui permettent à la plante de fabriquer sa matière grâce à la lumière."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Chloroplaste",
+      "acceptees": ["Chloroplaste", "Chloroplastes", "Un chloroplaste"],
+      "indices": [
+        "On ne me trouve que dans certaines cellules.",
+        "On me voit dans une feuille d'élodée, mais pas dans l'épiderme d'oignon.",
+        "Je suis vert et je permets à la plante de fabriquer sa matière grâce à la lumière."
+      ],
+      "explication": "Les chloroplastes sont de petits éléments verts présents dans les cellules des parties vertes des plantes."
+    },
+    {
+      "reponse": "Noyau",
+      "acceptees": ["Noyau", "Le noyau"],
+      "indices": [
+        "Je suis présent dans la plupart des cellules, mais pas dans les bactéries.",
+        "On me trouve à l'intérieur de la cellule, par exemple dans une cellule de joue.",
+        "Je contiens les informations qui commandent la cellule."
+      ],
+      "explication": "Le noyau contient les informations qui commandent la cellule ; les bactéries n'en ont pas."
+    },
+    {
+      "reponse": "Paroi",
+      "acceptees": ["Paroi", "La paroi", "Paroi rigide"],
+      "indices": [
+        "Tu ne me trouves pas dans les cellules de ta joue.",
+        "Je suis une enveloppe rigide.",
+        "Je me trouve autour de la membrane des cellules végétales."
+      ],
+      "explication": "La paroi est l'enveloppe rigide qui entoure la membrane des cellules végétales ; les cellules animales n'en ont pas."
+    },
+    {
+      "reponse": "Lamelle",
+      "acceptees": ["Lamelle", "La lamelle", "Une lamelle"],
+      "indices": [
+        "On me manipule quand on fabrique une préparation pour le microscope.",
+        "Je recouvre l'échantillon déposé dans une goutte d'eau.",
+        "Je rends la couche d'échantillon fine et plane, sans bulles d'air."
+      ],
+      "explication": "La lamelle recouvre l'échantillon posé sur la lame : elle l'aplatit et le protège."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "Un microscope a un oculaire ×10 et un objectif ×20. Quel est son grossissement total ?",
+      "reponse": 200,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "Grossissement = oculaire × objectif = 10 × 20 = 200, soit ×200."
+    },
+    {
+      "question": "Avec un oculaire ×15 et un objectif ×10, quel est le grossissement total ?",
+      "reponse": 150,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "15 × 10 = 150, soit ×150."
+    },
+    {
+      "question": "Le grossissement total est ×400 et l'oculaire grossit ×10. Quel est le grossissement de l'objectif ?",
+      "reponse": 40,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "400 = 10 × objectif, donc objectif = 400 ÷ 10 = 40, soit ×40."
+    },
+    {
+      "question": "Avec un objectif ×100, un microscope donne un grossissement total de ×1 000. Quel est le grossissement de l'oculaire ?",
+      "reponse": 10,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "1 000 = oculaire × 100, donc oculaire = 1 000 ÷ 100 = 10, soit ×10."
+    },
+    {
+      "question": "Un microscope a un oculaire ×10 et trois objectifs : ×4, ×10 et ×40. Quel grossissement total donne l'objectif par lequel on commence l'observation ?",
+      "reponse": 40,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "On commence par le plus faible grossissement, donc par l'objectif ×4 : 10 × 4 = 40, soit ×40."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Observer des cellules au microscope",
+      "etapes": [
+        "Préparer la lame : échantillon, goutte d'eau, lamelle",
+        "Poser la lame sur la platine",
+        "Régler la netteté au plus faible grossissement",
+        "Passer à un objectif plus fort et refaire la mise au point",
+        "Dessiner ce que l'on voit, avec un titre et des légendes"
+      ]
+    }
+  ]
+}

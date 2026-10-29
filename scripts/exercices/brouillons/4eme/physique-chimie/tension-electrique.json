@@ -1,0 +1,198 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Les unités de tension",
+      "detail": "Le volt, ses multiples et sous-multiples, et les conversions entre eux.",
+      "cartes": [
+        "Le volt, de symbole V",
+        "Le millivolt, pour les petites tensions",
+        "Le kilovolt, pour les très grandes tensions",
+        "1 V est égal à 1 000 mV",
+        "1 kV est égal à 1 000 V"
+      ]
+    },
+    {
+      "nom": "Les ordres de grandeur",
+      "detail": "Les valeurs de tension à connaître : piles, batterie, secteur, et le seuil de danger.",
+      "cartes": [
+        "Une pile bâton fournit environ 1,5 V",
+        "Une pile plate fournit environ 4,5 V",
+        "Une batterie de voiture fournit environ 12 V",
+        "La prise du secteur fournit 230 V",
+        "Au-delà d'environ 50 V, la tension devient dangereuse"
+      ]
+    },
+    {
+      "nom": "Brancher le voltmètre",
+      "detail": "La façon de relier le voltmètre au circuit pour mesurer une tension.",
+      "cartes": [
+        "Ses deux fils se relient aux bornes du dipôle",
+        "Il se branche en dérivation",
+        "On ne débranche rien dans le circuit pour le poser",
+        "La borne V se place côté borne + du générateur",
+        "La borne COM se place côté borne − du générateur"
+      ]
+    },
+    {
+      "nom": "Régler le sélecteur",
+      "detail": "Le choix du calibre du multimètre pour lire la tension avec précision.",
+      "cartes": [
+        "On commence par le plus grand calibre",
+        "On vise le plus petit calibre supérieur à la valeur",
+        "4,6 V lus sur 200 V : on choisit 20 V",
+        "Le calibre 2 V est trop petit pour 4,6 V",
+        "La valeur maximale que l'appareil peut afficher"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "la fermeture de l'interrupteur d'un circuit en série simple",
+      "carte": "La lampe s'allume",
+      "role": "consequence",
+      "explication": "Le circuit est maintenant fermé : le courant circule et la lampe s'allume."
+    },
+    {
+      "fait": "la fermeture de l'interrupteur d'un circuit en série simple",
+      "carte": "La tension aux bornes de l'interrupteur devient nulle",
+      "role": "consequence",
+      "explication": "Un interrupteur fermé a une tension nulle à ses bornes, alors qu'ouvert il avait toute la tension du générateur."
+    },
+    {
+      "fait": "une tension nulle aux bornes de la lampe d'un circuit en série",
+      "carte": "L'interrupteur du circuit est ouvert",
+      "role": "cause",
+      "explication": "Quand l'interrupteur est ouvert, toute la tension du générateur se retrouve à ses bornes et la lampe a une tension nulle."
+    },
+    {
+      "fait": "une tension nulle aux bornes de la lampe d'un circuit en série",
+      "carte": "La lampe reste éteinte",
+      "role": "consequence",
+      "explication": "Une lampe qui n'a aucune tension à ses bornes ne s'allume pas."
+    },
+    {
+      "fait": "l'affichage d'une valeur négative par le voltmètre",
+      "carte": "La borne V est reliée du côté de la borne − du générateur",
+      "role": "cause",
+      "explication": "Si la borne V est du côté − et la borne COM du côté +, le voltmètre affiche une valeur négative : il suffit d'inverser les fils."
+    }
+  ],
+  "etiquettes": [
+    {
+      "consigne": "Quelle valeur le voltmètre affiche-t-il ?",
+      "texte": "Un circuit en série contient une pile de 4,5 V, une lampe et un interrupteur ouvert. Le voltmètre est branché aux bornes de [l'interrupteur].",
+      "choix": ["0 V", "4,5 V", "12 V"],
+      "bonne": 1,
+      "explication": "Un interrupteur ouvert a à ses bornes toute la tension du générateur : 4,5 V."
+    },
+    {
+      "consigne": "Quelle valeur le voltmètre affiche-t-il ?",
+      "texte": "Un circuit en série contient une pile de 4,5 V, une lampe et un interrupteur ouvert. Le voltmètre est branché aux bornes de [la lampe].",
+      "choix": ["0 V", "4,5 V", "12 V"],
+      "bonne": 0,
+      "explication": "Quand l'interrupteur est ouvert, la lampe a une tension nulle à ses bornes : 0 V."
+    },
+    {
+      "consigne": "Quelle valeur le voltmètre affiche-t-il ?",
+      "texte": "La lampe d'un circuit en série brille, l'interrupteur est fermé. Le voltmètre est branché aux bornes de [l'interrupteur].",
+      "choix": ["0 V", "4,5 V", "12 V"],
+      "bonne": 0,
+      "explication": "La tension aux bornes d'un interrupteur fermé est nulle : 0 V."
+    },
+    {
+      "consigne": "Quelle valeur le voltmètre affiche-t-il ?",
+      "texte": "Une batterie de voiture est reliée à un phare par un interrupteur ouvert. Le voltmètre est branché aux bornes de [l'interrupteur].",
+      "choix": ["0 V", "4,5 V", "12 V"],
+      "bonne": 2,
+      "explication": "L'interrupteur ouvert reçoit toute la tension de la batterie : environ 12 V."
+    },
+    {
+      "consigne": "Quelle valeur le voltmètre affiche-t-il ?",
+      "texte": "Un voltmètre est branché aux bornes d'[une pile plate] posée sur la table, reliée à rien.",
+      "choix": ["0 V", "4,5 V", "12 V"],
+      "bonne": 1,
+      "explication": "Une pile a une tension à ses bornes même non branchée : environ 4,5 V pour une pile plate."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Tension",
+      "acceptees": ["Tension", "La tension", "Une tension", "Tension électrique"],
+      "indices": [
+        "Je suis une grandeur électrique.",
+        "Je suis notée U.",
+        "Je me mesure entre les deux bornes d'un dipôle, en volts."
+      ],
+      "explication": "La tension, notée U, existe entre les bornes d'un dipôle et s'exprime en volts."
+    },
+    {
+      "reponse": "Voltmètre",
+      "acceptees": ["Voltmètre", "Le voltmètre", "Un voltmètre"],
+      "indices": [
+        "Je suis un appareil de mesure.",
+        "Mon symbole est un cercle contenant la lettre V.",
+        "On me branche en dérivation aux bornes d'un dipôle pour mesurer une tension."
+      ],
+      "explication": "Le voltmètre mesure la tension et se branche en dérivation, directement aux bornes du dipôle."
+    },
+    {
+      "reponse": "Calibre",
+      "acceptees": ["Calibre", "Le calibre", "Un calibre"],
+      "indices": [
+        "Je suis une valeur écrite autour du sélecteur d'un multimètre.",
+        "Je suis la valeur maximale que l'appareil peut afficher sur la position choisie.",
+        "On commence par mon plus grand réglage, puis on prend le plus petit qui dépasse la valeur mesurée."
+      ],
+      "explication": "Le calibre est la valeur maximale affichable sur une position : on prend le plus petit calibre supérieur à la valeur mesurée."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "Convertis 4,5 V en millivolts.",
+      "reponse": 4500,
+      "unite": "mV",
+      "tolerance": 0,
+      "explication": "1 V = 1 000 mV, donc 4,5 × 1 000 = 4 500 mV."
+    },
+    {
+      "question": "Convertis 750 mV en volts.",
+      "reponse": 0.75,
+      "unite": "V",
+      "tolerance": 0,
+      "explication": "1 V = 1 000 mV, donc 750 ÷ 1 000 = 0,75 V."
+    },
+    {
+      "question": "Convertis 2,5 kV en volts.",
+      "reponse": 2500,
+      "unite": "V",
+      "tolerance": 0,
+      "explication": "1 kV = 1 000 V, donc 2,5 × 1 000 = 2 500 V."
+    },
+    {
+      "question": "Un voltmètre affiche 4,6 V sur le calibre 200 V. Parmi les calibres 200 V, 20 V et 2 V, lequel donne la mesure la plus précise ? Réponds par sa valeur.",
+      "reponse": 20,
+      "unite": "V",
+      "tolerance": 0,
+      "explication": "On prend le plus petit calibre supérieur à 4,6 V. Le calibre 2 V est trop petit, donc c'est 20 V."
+    },
+    {
+      "question": "Dans un circuit en série avec une pile de 9 V, une lampe et un interrupteur ouvert, quelle est la tension aux bornes de l'interrupteur ?",
+      "reponse": 9,
+      "unite": "V",
+      "tolerance": 0,
+      "explication": "Un interrupteur ouvert a à ses bornes la tension du générateur : 9 V."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Mesurer une tension avec un multimètre",
+      "etapes": [
+        "D'abord, on place le sélecteur sur le plus grand calibre",
+        "On relie les fils V et COM aux bornes du dipôle",
+        "On lit, puis on passe au plus petit calibre supérieur",
+        "On écrit le résultat avec son unité"
+      ]
+    }
+  ]
+}

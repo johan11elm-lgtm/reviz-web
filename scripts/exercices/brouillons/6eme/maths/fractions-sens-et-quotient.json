@@ -1,0 +1,160 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Égale à un nombre entier",
+      "detail": "Les fractions dont la division tombe juste : leur valeur est un entier, sans chiffre après la virgule.",
+      "cartes": ["La fraction 12/4", "La fraction 20/5", "La fraction 35/7", "La fraction 18/3", "La fraction 56/8"]
+    },
+    {
+      "nom": "Un seul chiffre après la virgule",
+      "detail": "Les fractions dont la valeur décimale s'écrit avec un seul chiffre après la virgule.",
+      "cartes": ["La fraction 3/2", "La fraction 1/5", "La fraction 9/10", "La fraction 7/5", "La fraction 4/5"]
+    },
+    {
+      "nom": "Deux chiffres après la virgule",
+      "detail": "Les fractions dont la valeur décimale s'écrit avec deux chiffres après la virgule.",
+      "cartes": ["La fraction 7/4", "La fraction 3/4", "La fraction 1/4", "La fraction 37/100", "La fraction 9/4"]
+    },
+    {
+      "nom": "Nombre non décimal",
+      "detail": "Les fractions dont la division ne s'arrête jamais : on ne peut pas les écrire exactement avec une virgule.",
+      "cartes": ["La fraction 1/3", "La fraction 2/3", "La fraction 5/3", "La fraction 4/9", "La fraction 1/6"]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Comment appelle-t-on le nombre en couleur ?",
+      "texte": "Dans la fraction 5/8, on regarde le nombre [5].",
+      "choix": ["Numérateur", "Dénominateur", "Quotient"],
+      "bonne": 0,
+      "explication": "Le nombre du haut est le numérateur : il dit combien de parts on prend."
+    },
+    {
+      "consigne": "Comment appelle-t-on le nombre en couleur ?",
+      "texte": "Dans la fraction 11/3, on regarde le nombre [3].",
+      "choix": ["Numérateur", "Dénominateur", "Quotient"],
+      "bonne": 1,
+      "explication": "Le nombre du bas est le dénominateur : il dit en combien de parts égales on partage l'unité."
+    },
+    {
+      "consigne": "Comment appelle-t-on le nombre en couleur ?",
+      "texte": "Le nombre [3/4] est le résultat exact de la division de 3 par 4.",
+      "choix": ["Numérateur", "Dénominateur", "Quotient"],
+      "bonne": 2,
+      "explication": "Le résultat exact d'une division est le quotient : 3/4 est le quotient de 3 par 4."
+    },
+    {
+      "consigne": "Comment appelle-t-on le nombre en couleur ?",
+      "texte": "Une tarte est coupée en 8 parts égales et Lou en mange 3. Dans la fraction 3/8, on regarde le nombre [3].",
+      "choix": ["Numérateur", "Dénominateur", "Quotient"],
+      "bonne": 0,
+      "explication": "Le nombre 3 est au-dessus de la barre : c'est le numérateur, le nombre de parts mangées."
+    },
+    {
+      "consigne": "Comment appelle-t-on le nombre en couleur ?",
+      "texte": "On partage 2 pizzas entre 5 enfants : chaque enfant reçoit [2/5] de pizza.",
+      "choix": ["Numérateur", "Dénominateur", "Quotient"],
+      "bonne": 2,
+      "explication": "La part de chaque enfant est le résultat exact de 2 ÷ 5 : 2/5 est un quotient."
+    },
+    {
+      "consigne": "Comment appelle-t-on le nombre en couleur ?",
+      "texte": "La fraction 1/6 représente une part d'un gâteau coupé en 6 parts égales. On regarde le nombre [6].",
+      "choix": ["Numérateur", "Dénominateur", "Quotient"],
+      "bonne": 1,
+      "explication": "Le nombre 6 est au-dessous de la barre : c'est le dénominateur, le nombre de parts égales."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Dénominateur",
+      "acceptees": ["Dénominateur", "Le dénominateur"],
+      "indices": [
+        "Je suis un nombre que l'on trouve dans une fraction.",
+        "Je dis en combien de parts égales on partage l'unité.",
+        "Dans 3/4, je suis le nombre 4."
+      ],
+      "explication": "Le dénominateur est le nombre du bas : il dit en combien de parts égales on partage l'unité."
+    },
+    {
+      "reponse": "Numérateur",
+      "acceptees": ["Numérateur", "Le numérateur"],
+      "indices": [
+        "Je suis un nombre que l'on trouve dans une fraction.",
+        "Je dis combien de parts on prend.",
+        "Dans 3/4, je suis le nombre 3."
+      ],
+      "explication": "Le numérateur est le nombre du haut : il dit combien de parts on prend."
+    },
+    {
+      "reponse": "Guide-âne",
+      "acceptees": ["Guide-âne", "Guide âne", "Guide-ane", "Un guide-âne"],
+      "indices": [
+        "Je suis un outil que l'on trace sur une feuille.",
+        "Je suis un réseau de droites parallèles à égale distance les unes des autres.",
+        "Je sers à partager un segment en 5, 7 ou 11 parts égales."
+      ],
+      "explication": "Un guide-âne est un réseau de droites parallèles équidistantes : il permet de partager un segment en parts égales."
+    },
+    {
+      "reponse": "Nombre mixte",
+      "acceptees": ["Nombre mixte", "Un nombre mixte", "Mixte"],
+      "indices": [
+        "Je suis une écriture possible pour certaines quantités plus grandes que 1.",
+        "Je suis la somme d'un entier et d'une fraction plus petite que 1.",
+        "L'écriture 1 + 3/4 est la mienne pour la fraction 7/4."
+      ],
+      "explication": "Un nombre mixte s'écrit comme un entier plus une fraction plus petite que 1 : 7/4 = 1 + 3/4."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "Une classe compte 40 élèves. Les 3/5 d'entre eux déjeunent à la cantine. Combien d'élèves déjeunent à la cantine ?",
+      "reponse": 24,
+      "unite": "élèves",
+      "tolerance": 0,
+      "explication": "40 ÷ 5 = 8 élèves pour 1/5, puis 8 × 3 = 24 élèves pour les 3/5."
+    },
+    {
+      "question": "Écris la fraction 9/4 en nombre décimal.",
+      "reponse": 2.25,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "9/4 = 9 ÷ 4 = 2,25 car 4 × 2,25 = 9."
+    },
+    {
+      "question": "Quel nombre complète l'égalité 4 × … = 3 ? Donne-le en écriture décimale.",
+      "reponse": 0.75,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "Le nombre cherché est le quotient 3/4 = 3 ÷ 4 = 0,75. Vérification : 4 × 0,75 = 3."
+    },
+    {
+      "question": "Combien vaut 7 × 1/4 ? Donne le résultat en écriture décimale.",
+      "reponse": 1.75,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "7 × 1/4 est le quart de 7, soit 7/4 = 7 ÷ 4 = 1,75."
+    },
+    {
+      "question": "Sur une demi-droite graduée, chaque unité est partagée en 5 parts égales. Un point est placé à 13 parts de 0. Quelle est son abscisse, en nombre décimal ?",
+      "reponse": 2.6,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "Chaque part vaut 1/5, donc 13 parts valent 13/5 = 13 ÷ 5 = 2,6. Le point est entre 2 et 3."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Placer une fraction sur une demi-droite graduée",
+      "etapes": [
+        "Lis le dénominateur : il donne le nombre de parts par unité",
+        "Vérifie que chaque unité est bien partagée en ce nombre de parts",
+        "Compte depuis 0 autant de parts que le numérateur",
+        "Contrôle que le point est entre les bons entiers"
+      ]
+    }
+  ]
+}

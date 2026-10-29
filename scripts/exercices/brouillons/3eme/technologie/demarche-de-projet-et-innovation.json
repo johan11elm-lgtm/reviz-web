@@ -1,0 +1,180 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Définir le besoin",
+      "detail": "Première phase du projet : comprendre ce qu'il faut faire et l'écrire dans le cahier des charges.",
+      "cartes": [
+        "Interroger des élèves sur ce qui les gêne au quotidien",
+        "Se demander à quoi l'objet servira et pour qui",
+        "Lister les fonctions que l'objet doit remplir",
+        "Fixer un budget maximal et une date de livraison",
+        "Observer comment les gens se débrouillent sans cet objet"
+      ]
+    },
+    {
+      "nom": "Chercher et choisir une solution",
+      "detail": "Deuxième phase : imaginer plusieurs solutions, puis retenir la meilleure.",
+      "cartes": [
+        "Proposer un maximum d'idées sans les juger",
+        "Dessiner plusieurs croquis à main levée",
+        "Faire une carte mentale pour trouver des pistes",
+        "Comparer deux solutions selon leur coût et leur délai",
+        "Retenir l'idée qui respecte le mieux les contraintes"
+      ]
+    },
+    {
+      "nom": "Fabriquer et tester",
+      "detail": "Troisième phase : réaliser un premier exemplaire, l'essayer, le corriger et le valider.",
+      "cartes": [
+        "Fabriquer un premier exemplaire simplifié de l'objet",
+        "Faire essayer le premier exemplaire à un utilisateur",
+        "Mesurer si chaque niveau demandé est atteint",
+        "Corriger la solution puis refaire les essais",
+        "Valider la solution quand tous les essais sont réussis"
+      ]
+    },
+    {
+      "nom": "Présenter le projet",
+      "detail": "Dernière phase : communiquer le résultat et défendre les choix de l'équipe.",
+      "cartes": [
+        "Préparer un diaporama pour la soutenance",
+        "Présenter le résultat du travail devant la classe",
+        "Répartir la parole entre les membres de l'équipe pour l'oral",
+        "Répondre aux questions posées par le jury",
+        "Faire une démonstration devant le public"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "De quel type de nouveauté s'agit-il pour le passage en couleur ?",
+      "texte": "Un fabricant sort le même smartphone que l'an dernier, mais [avec une batterie plus endurante].",
+      "choix": ["Invention non adoptée", "Innovation incrémentale", "Innovation de rupture"],
+      "bonne": 1,
+      "explication": "L'objet existe déjà et son principe ne change pas : on l'améliore, c'est une innovation incrémentale."
+    },
+    {
+      "consigne": "De quel type de nouveauté s'agit-il pour le passage en couleur ?",
+      "texte": "[L'ampoule LED] remplace l'ampoule à incandescence, et presque tous les foyers l'utilisent.",
+      "choix": ["Invention non adoptée", "Innovation incrémentale", "Innovation de rupture"],
+      "bonne": 2,
+      "explication": "Un nouveau principe remplace l'ancien et le public l'adopte : c'est une innovation de rupture."
+    },
+    {
+      "consigne": "De quel type de nouveauté s'agit-il pour le passage en couleur ?",
+      "texte": "Un inventeur dépose un brevet pour [un cadenas qui s'ouvre avec la voix]. Aucun magasin ne le vend et personne ne l'utilise.",
+      "choix": ["Invention non adoptée", "Innovation incrémentale", "Innovation de rupture"],
+      "bonne": 0,
+      "explication": "L'objet est nouveau, mais personne ne l'adopte : ce n'est qu'une invention, pas une innovation."
+    },
+    {
+      "consigne": "De quel type de nouveauté s'agit-il pour le passage en couleur ?",
+      "texte": "Pour sa nouvelle version, un casque audio offre [une meilleure réduction de bruit que le modèle précédent].",
+      "choix": ["Invention non adoptée", "Innovation incrémentale", "Innovation de rupture"],
+      "bonne": 1,
+      "explication": "Le casque garde le même principe et gagne en performance : c'est une innovation incrémentale."
+    },
+    {
+      "consigne": "De quel type de nouveauté s'agit-il pour le passage en couleur ?",
+      "texte": "[La photographie numérique] remplace la pellicule : plus de films à développer, et tout le monde l'adopte.",
+      "choix": ["Invention non adoptée", "Innovation incrémentale", "Innovation de rupture"],
+      "bonne": 2,
+      "explication": "Le numérique change complètement de principe et remplace la pellicule : c'est une innovation de rupture."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Brevet",
+      "acceptees": ["Brevet", "Un brevet", "Le brevet"],
+      "indices": [
+        "Je suis un document officiel.",
+        "Je protège une invention.",
+        "Je réserve son exploitation à son auteur pendant 20 ans en France."
+      ],
+      "explication": "Le brevet protège une invention et en réserve l'exploitation à son auteur pendant 20 ans en France."
+    },
+    {
+      "reponse": "Diagramme de Gantt",
+      "acceptees": ["Diagramme de Gantt", "Le diagramme de Gantt", "Un diagramme de Gantt", "Gantt"],
+      "indices": [
+        "Je sers à organiser un projet.",
+        "Je place chaque tâche sur une ligne de temps.",
+        "Chaque tâche est une barre dont la longueur montre la durée."
+      ],
+      "explication": "Le diagramme de Gantt place les tâches du projet dans le temps pour voir leur durée et leur ordre."
+    },
+    {
+      "reponse": "Prototype",
+      "acceptees": ["Prototype", "Un prototype", "Le prototype"],
+      "indices": [
+        "J'apparais au milieu d'un projet, une fois la solution choisie.",
+        "Je suis un premier exemplaire, souvent simplifié, de l'objet.",
+        "On m'essaie pour vérifier que la solution répond au cahier des charges avant de lancer la fabrication."
+      ],
+      "explication": "Le prototype est le premier exemplaire réalisé pour tester une solution avant la fabrication."
+    },
+    {
+      "reponse": "Remue-méninges",
+      "acceptees": ["Remue-méninges", "Remue méninges", "Le remue-méninges", "Brainstorming"],
+      "indices": [
+        "Je suis une méthode de groupe.",
+        "On me pratique au début de la recherche de solutions.",
+        "Pendant moi, chacun propose un maximum d'idées sans les juger tout de suite."
+      ],
+      "explication": "Le remue-méninges sert à produire un maximum d'idées ; le tri et le choix viennent après."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "Le budget d'un projet est de 30 euros. Les matériaux coûtent 12 euros et les composants électroniques 9 euros. Combien d'euros reste-t-il pour les autres dépenses ?",
+      "reponse": 9,
+      "unite": "euros",
+      "tolerance": 0,
+      "explication": "Dépenses déjà prévues : 12 + 9 = 21 euros. Il reste 30 − 21 = 9 euros."
+    },
+    {
+      "question": "Dans un diagramme de Gantt, la tâche A dure 3 jours. Les tâches B (4 jours) et C (6 jours) commencent ensemble quand A est terminée. La tâche D (2 jours) commence quand B et C sont toutes les deux terminées. Quelle est la durée minimale du projet ?",
+      "reponse": 11,
+      "unite": "jours",
+      "tolerance": 0,
+      "explication": "B et C se déroulent en même temps : on garde la plus longue, C (6 jours). Durée : 3 + 6 + 2 = 11 jours."
+    },
+    {
+      "question": "Un projet prévoit 40 heures de travail. L'équipe en a déjà utilisé 28. Quel pourcentage du temps prévu a été utilisé ?",
+      "reponse": 70,
+      "unite": "%",
+      "tolerance": 0,
+      "explication": "28 ÷ 40 = 0,7, soit 70 % du temps prévu."
+    },
+    {
+      "question": "Un brevet protège une invention pendant 20 ans. Il a été déposé en 2010. Combien d'années de protection lui reste-t-il en 2024 ?",
+      "reponse": 6,
+      "unite": "ans",
+      "tolerance": 0,
+      "explication": "De 2010 à 2024, 14 ans se sont écoulés. Il reste 20 − 14 = 6 ans."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Les étapes d'une démarche de projet",
+      "etapes": [
+        "Identifier le besoin",
+        "Rédiger le cahier des charges",
+        "Chercher puis choisir une solution",
+        "Réaliser et tester un prototype",
+        "Présenter le projet à l'oral"
+      ]
+    },
+    {
+      "titre": "Quand un test du prototype échoue",
+      "etapes": [
+        "Un niveau du cahier des charges n'est pas atteint au test",
+        "L'équipe modifie la solution",
+        "Elle refait les tests",
+        "Le prototype respecte enfin le cahier des charges"
+      ]
+    }
+  ]
+}

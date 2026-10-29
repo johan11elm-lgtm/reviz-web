@@ -1,0 +1,184 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Effectifs et fréquences",
+      "detail": "Compter les valeurs d'une série et dire quelle part du total elles représentent.",
+      "cartes": [
+        "Le nombre de fois où une valeur apparaît",
+        "Le nombre total d'élèves interrogés : 24",
+        "6 élèves à pied sur 24 interrogés, soit 25 %",
+        "Le nombre d'apparitions d'une valeur divisé par le total",
+        "Dans un tableau, 12 élèves viennent en bus"
+      ]
+    },
+    {
+      "nom": "Les diagrammes",
+      "detail": "Représenter une série par des barres ou par des secteurs d'un disque.",
+      "cartes": [
+        "Des barres plus hautes pour les valeurs plus nombreuses",
+        "Un disque partagé en secteurs",
+        "Un secteur qui représente 25 % mesure 90°",
+        "La somme des angles de tous les secteurs vaut 360°",
+        "Montrer comment un tout se répartit en parties"
+      ]
+    },
+    {
+      "nom": "La moyenne",
+      "detail": "Résumer une série de valeurs par un seul nombre.",
+      "cartes": [
+        "Additionner toutes les valeurs, puis diviser par leur nombre",
+        "(12 + 15 + 9 + 14) ÷ 4",
+        "(8 + 10 + 18) ÷ 3 = 12",
+        "(50 + 20) ÷ 5 = 14",
+        "Les notes 10, 10 et 13 donnent 11"
+      ]
+    },
+    {
+      "nom": "Les probabilités",
+      "detail": "Mesurer par un nombre entre 0 et 1 la chance qu'un événement se produise.",
+      "cartes": [
+        "Un événement certain vaut 1, un impossible vaut 0",
+        "Avec un dé équilibré, 3 issues favorables sur 6 possibles",
+        "Une expérience dont on ne peut pas prévoir le résultat",
+        "Les deux positions d'une punaise ne sont pas équiprobables",
+        "Un dé équilibré : chaque face a la même chance"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Quel nombre le passage en couleur désigne-t-il ?",
+      "texte": "Sur les 24 élèves interrogés, [6] viennent à pied.",
+      "choix": ["Un effectif", "Une fréquence", "Une moyenne", "Une probabilité"],
+      "bonne": 0,
+      "explication": "6 est le nombre de fois où la valeur « à pied » apparaît : c'est un effectif."
+    },
+    {
+      "consigne": "Quel nombre le passage en couleur désigne-t-il ?",
+      "texte": "Sur les 24 élèves interrogés, [25 %] viennent à pied.",
+      "choix": ["Un effectif", "Une fréquence", "Une moyenne", "Une probabilité"],
+      "bonne": 1,
+      "explication": "25 % = 6 ÷ 24 : c'est l'effectif de la valeur divisé par l'effectif total, donc une fréquence."
+    },
+    {
+      "consigne": "Quel nombre le passage en couleur désigne-t-il ?",
+      "texte": "Les notes 12, 15, 9 et 14 sont additionnées, puis la somme est divisée par 4 : on obtient [12,5].",
+      "choix": ["Un effectif", "Une fréquence", "Une moyenne", "Une probabilité"],
+      "bonne": 2,
+      "explication": "On additionne les valeurs puis on divise par l'effectif total : 50 ÷ 4 = 12,5, c'est la moyenne."
+    },
+    {
+      "consigne": "Quel nombre le passage en couleur désigne-t-il ?",
+      "texte": "Avec un dé équilibré, la chance d'obtenir un nombre pair est de [1/2].",
+      "choix": ["Un effectif", "Une fréquence", "Une moyenne", "Une probabilité"],
+      "bonne": 3,
+      "explication": "3 issues favorables sur 6 possibles, en équiprobabilité : 3/6 = 1/2 est une probabilité."
+    },
+    {
+      "consigne": "Quel nombre le passage en couleur désigne-t-il ?",
+      "texte": "Sur les 20 élèves interrogés, la part de ceux qui viennent en vélo est de [0,4].",
+      "choix": ["Un effectif", "Une fréquence", "Une moyenne", "Une probabilité"],
+      "bonne": 1,
+      "explication": "0,4 est la part des élèves à vélo dans la série (8 ÷ 20) : c'est une fréquence."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Moyenne",
+      "acceptees": ["La moyenne", "Une moyenne"],
+      "indices": [
+        "Je résume une série de nombres par un seul nombre.",
+        "Pour me calculer, on additionne toutes les valeurs.",
+        "Ensuite, on divise cette somme par l'effectif total."
+      ],
+      "explication": "La moyenne est la somme des valeurs divisée par l'effectif total."
+    },
+    {
+      "reponse": "Fréquence",
+      "acceptees": ["La fréquence", "Une fréquence"],
+      "indices": [
+        "Je suis un nombre qui compare une partie au total.",
+        "Je me calcule en divisant l'effectif d'une valeur par l'effectif total.",
+        "Pour 6 élèves sur 24, je vaux 0,25, soit 25 %."
+      ],
+      "explication": "La fréquence d'une valeur est son effectif divisé par l'effectif total : 6 ÷ 24 = 0,25 = 25 %."
+    },
+    {
+      "reponse": "Probabilité",
+      "acceptees": ["La probabilité", "Une probabilité"],
+      "indices": [
+        "Je suis un nombre compris entre 0 et 1.",
+        "Je vaux 0 pour un événement impossible et 1 pour un événement certain.",
+        "Quand toutes les issues ont la même chance, je suis le nombre d'issues favorables divisé par le nombre d'issues possibles."
+      ],
+      "explication": "En équiprobabilité, P = issues favorables ÷ issues possibles, un nombre entre 0 et 1."
+    },
+    {
+      "reponse": "Diagramme circulaire",
+      "acceptees": ["Diagramme en secteurs", "Graphique circulaire", "Camembert"],
+      "indices": [
+        "Je représente une série de données.",
+        "L'angle de chacun de mes secteurs dépend de la fréquence de la valeur.",
+        "Je suis un disque, et 25 % des données y occupent 90°."
+      ],
+      "explication": "Dans un diagramme circulaire, angle = fréquence × 360° : 0,25 × 360° = 90°."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "Les notes d'un élève sont 14, 9, 16 et 13. Quelle est sa moyenne ?",
+      "reponse": 13,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "Somme : 14 + 9 + 16 + 13 = 52. Moyenne : 52 ÷ 4 = 13."
+    },
+    {
+      "question": "Sur 40 élèves interrogés, 14 aiment le basket. Quelle est la fréquence de ces élèves, en pourcentage ?",
+      "reponse": 35,
+      "unite": "%",
+      "tolerance": 0,
+      "explication": "Fréquence = 14 ÷ 40 = 0,35, soit 35 %."
+    },
+    {
+      "question": "Dans un diagramme circulaire, un secteur représente 30 % des données. Quel est l'angle de ce secteur, en degrés ?",
+      "reponse": 108,
+      "unite": "°",
+      "tolerance": 0,
+      "explication": "Angle = fréquence × 360° = 0,3 × 360° = 108°."
+    },
+    {
+      "question": "Un sac contient 20 jetons identiques au toucher : 3 rouges, 12 verts et 5 bleus. On tire un jeton au hasard. Quelle est la probabilité d'obtenir un jeton rouge ? Donne un nombre décimal.",
+      "reponse": 0.15,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "Les 20 jetons ont la même chance d'être tirés : P = 3 ÷ 20 = 0,15."
+    },
+    {
+      "question": "La moyenne de 4 notes est 10. On ajoute une cinquième note de 15. Quelle est la nouvelle moyenne ?",
+      "reponse": 11,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "Somme des 4 notes : 4 × 10 = 40. Avec la nouvelle note : 40 + 15 = 55. Moyenne : 55 ÷ 5 = 11."
+    },
+    {
+      "question": "La moyenne de 6 notes est 11. Quelle est la somme de ces 6 notes ?",
+      "reponse": 66,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "Moyenne = somme ÷ effectif total, donc somme = 6 × 11 = 66."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Les étapes pour construire un diagramme circulaire",
+      "etapes": [
+        "Calcule la fréquence de chaque valeur",
+        "Multiplie chaque fréquence par 360° pour trouver l'angle",
+        "Vérifie que la somme des angles fait 360°",
+        "Trace le cercle, puis les secteurs au rapporteur"
+      ]
+    }
+  ]
+}

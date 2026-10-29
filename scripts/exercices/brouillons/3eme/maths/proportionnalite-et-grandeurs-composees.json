@@ -1,0 +1,193 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Un pourcentage ou une évolution",
+      "detail": "Une part exprimée sur 100, ou une hausse ou une baisse d'un prix.",
+      "cartes": [
+        "Un pull à 80 € est soldé à −15 %",
+        "Un prix passe de 50 € à 60 €",
+        "Un prix augmente de 10 %, puis baisse de 10 %",
+        "Calculer 15 % de 80 €",
+        "Multiplier par 1,15 pour augmenter un prix de 15 %"
+      ]
+    },
+    {
+      "nom": "Un partage selon un ratio",
+      "detail": "Une quantité répartie en parts, d'après des nombres comme 2 : 3.",
+      "cartes": [
+        "Partager 60 bonbons entre deux amis selon 2 : 3",
+        "Une peinture mélange 3 volumes de bleu pour 2 de blanc",
+        "Partager 90 € en trois parts selon 1 : 2 : 3",
+        "Additionner 2 et 3 pour compter le nombre de parts",
+        "Dans une classe, il y a 3 filles pour 2 garçons"
+      ]
+    },
+    {
+      "nom": "Une distance à l'échelle",
+      "detail": "Une distance dessinée sur un plan ou une carte, proportionnelle à la distance réelle.",
+      "cartes": [
+        "1 cm sur la carte représente 25 000 cm sur le terrain",
+        "Deux villages sont à 4 cm sur une carte au 1/50 000",
+        "6 cm sur un plan pour 3 km réels",
+        "Sur un plan au 1/200, une pièce mesure 3 cm",
+        "Sur une carte, 2 cm représentent 1 km"
+      ]
+    },
+    {
+      "nom": "Une grandeur composée",
+      "detail": "Une grandeur obtenue en divisant ou en multipliant deux autres grandeurs.",
+      "cartes": [
+        "Une voiture parcourt 150 km en 1 h 30",
+        "Un appareil de 2 kW fonctionne pendant 3 h",
+        "Un robinet remplit 30 litres en 5 minutes",
+        "90 km/h, c'est 25 m/s",
+        "Un morceau de métal de 270 g occupe 100 cm³"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Quelle grandeur est écrite en couleur ?",
+      "texte": "Un cycliste roule à [18 km/h] sur une route plate.",
+      "choix": ["Une vitesse", "Un débit", "Une masse volumique", "Une énergie"],
+      "bonne": 0,
+      "explication": "Des kilomètres par heure : c'est une distance divisée par une durée, donc une vitesse."
+    },
+    {
+      "consigne": "Quelle grandeur est écrite en couleur ?",
+      "texte": "Une douche fournit [9 L/min] quand on l'ouvre en grand.",
+      "choix": ["Une vitesse", "Un débit", "Une masse volumique", "Une énergie"],
+      "bonne": 1,
+      "explication": "Des litres par minute : c'est un volume divisé par une durée, donc un débit."
+    },
+    {
+      "consigne": "Quelle grandeur est écrite en couleur ?",
+      "texte": "Le fer a une masse de [7,8 g/cm³].",
+      "choix": ["Une vitesse", "Un débit", "Une masse volumique", "Une énergie"],
+      "bonne": 2,
+      "explication": "Des grammes par centimètre cube : c'est une masse divisée par un volume, donc une masse volumique."
+    },
+    {
+      "consigne": "Quelle grandeur est écrite en couleur ?",
+      "texte": "Un radiateur consomme [6 kWh] en une journée.",
+      "choix": ["Une vitesse", "Un débit", "Une masse volumique", "Une énergie"],
+      "bonne": 3,
+      "explication": "Le kWh est une puissance multipliée par une durée : c'est une énergie."
+    },
+    {
+      "consigne": "Quelle grandeur est écrite en couleur ?",
+      "texte": "Un train avance à [25 m/s] sur une ligne droite.",
+      "choix": ["Une vitesse", "Un débit", "Une masse volumique", "Une énergie"],
+      "bonne": 0,
+      "explication": "Des mètres par seconde : c'est une distance divisée par une durée, donc une vitesse."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Coefficient multiplicateur",
+      "acceptees": ["Coefficient multiplicateur", "Le coefficient multiplicateur", "Coefficient", "Le coefficient"],
+      "indices": [
+        "Je suis un nombre.",
+        "On multiplie un prix par moi pour obtenir le nouveau prix après une hausse ou une baisse.",
+        "Pour une hausse de 15 %, je vaux 1,15."
+      ],
+      "explication": "Une évolution de t % se traduit par le coefficient multiplicateur 1 ± t/100 : 1,15 pour une hausse de 15 %."
+    },
+    {
+      "reponse": "Produit en croix",
+      "acceptees": ["Produit en croix", "Le produit en croix", "Produits en croix", "Règle de trois", "La règle de trois"],
+      "indices": [
+        "Je suis une méthode de calcul.",
+        "Je permets de trouver le quatrième nombre d'un tableau de proportionnalité.",
+        "On multiplie les deux nombres placés en diagonale, puis on divise par le troisième."
+      ],
+      "explication": "Avec le produit en croix, on multiplie les deux nombres en diagonale et on divise par le troisième."
+    },
+    {
+      "reponse": "Ratio",
+      "acceptees": ["Ratio", "Un ratio", "Le ratio", "Rapport de partage"],
+      "indices": [
+        "Je décris un partage.",
+        "On m'écrit avec des nombres séparés par deux points, comme 2 : 3.",
+        "Pour partager une quantité selon moi, on additionne mes nombres afin de compter les parts."
+      ],
+      "explication": "Un ratio comme 2 : 3 donne 2 + 3 = 5 parts égales : on calcule la valeur d'une part, puis on la multiplie par chaque nombre du ratio."
+    },
+    {
+      "reponse": "Échelle",
+      "acceptees": ["Échelle", "Une échelle", "L'échelle"],
+      "indices": [
+        "Je suis un quotient.",
+        "Sur une carte, je compare la distance dessinée à la distance réelle.",
+        "Je peux valoir 1/25 000 : alors 1 cm sur la carte représente 250 m."
+      ],
+      "explication": "L'échelle est la distance sur le plan divisée par la distance réelle, dans la même unité."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "Un jeu coûte 60 €. Son prix baisse de 20 %. Quel est son nouveau prix ?",
+      "reponse": 48,
+      "unite": "€",
+      "tolerance": 0,
+      "explication": "On multiplie par 1 − 0,20 = 0,80 : 60 × 0,80 = 48 €."
+    },
+    {
+      "question": "Un vélo passe de 250 € à 300 €. De quel pourcentage son prix a-t-il augmenté ?",
+      "reponse": 20,
+      "unite": "%",
+      "tolerance": 0,
+      "explication": "Le coefficient multiplicateur est 300 ÷ 250 = 1,2, soit une hausse de 20 %."
+    },
+    {
+      "question": "Un train parcourt 270 km en 1 h 30 min. Quelle est sa vitesse moyenne ?",
+      "reponse": 180,
+      "unite": "km/h",
+      "tolerance": 0,
+      "explication": "1 h 30 min = 1,5 h, donc v = 270 ÷ 1,5 = 180 km/h."
+    },
+    {
+      "question": "Convertis 54 km/h en m/s.",
+      "reponse": 15,
+      "unite": "m/s",
+      "tolerance": 0,
+      "explication": "On divise par 3,6 : 54 ÷ 3,6 = 15 m/s. Vérification : 15 × 3,6 = 54."
+    },
+    {
+      "question": "Sur une carte à l'échelle 1/25 000, deux villes sont à 8 cm l'une de l'autre. Quelle est la distance réelle, en km ?",
+      "reponse": 2,
+      "unite": "km",
+      "tolerance": 0,
+      "explication": "8 × 25 000 = 200 000 cm = 2 000 m = 2 km."
+    },
+    {
+      "question": "On partage 84 € selon le ratio 3 : 4. Quelle est la plus grande part ?",
+      "reponse": 48,
+      "unite": "€",
+      "tolerance": 0,
+      "explication": "3 + 4 = 7 parts de 84 ÷ 7 = 12 €. La plus grande part vaut 4 × 12 = 48 €."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Convertir 90 km/h en m/s",
+      "etapes": [
+        "Écrire la vitesse comme un quotient : 90 km en 1 h",
+        "Convertir chaque unité : 90 000 m et 3 600 s",
+        "Diviser : 90 000 ÷ 3 600 = 25",
+        "Conclure : 90 km/h = 25 m/s"
+      ]
+    },
+    {
+      "titre": "Partager 60 selon le ratio 2 : 3",
+      "etapes": [
+        "Additionner les nombres du ratio : 2 + 3 = 5 parts",
+        "Calculer la valeur d'une part : 60 ÷ 5 = 12",
+        "Multiplier : 2 × 12 = 24 et 3 × 12 = 36",
+        "Conclure : les parts valent 24 et 36"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,183 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Le résultat vaut 16",
+      "detail": "Des puissances et des carrés qui donnent 16, signe compris.",
+      "cartes": [
+        "Le calcul de 2⁴",
+        "Le calcul de (−2)⁴",
+        "Le calcul de 4²",
+        "Le carré de −4",
+        "Le produit de quatre facteurs égaux à 2"
+      ]
+    },
+    {
+      "nom": "Le résultat vaut −16",
+      "detail": "Des puissances où le signe moins reste devant et donne −16.",
+      "cartes": [
+        "Le calcul de −2⁴",
+        "Le calcul de −4²",
+        "L'opposé de 2⁴",
+        "Le calcul de −(−4)²",
+        "L'opposé du carré de 4"
+      ]
+    },
+    {
+      "nom": "Le résultat vaut 8",
+      "detail": "Des calculs de puissances qui donnent 8.",
+      "cartes": [
+        "Le calcul de 2³",
+        "Le calcul de −(−2)³",
+        "Le calcul de 8¹",
+        "Le calcul de 2² × 2",
+        "Le produit de trois facteurs égaux à 2"
+      ]
+    },
+    {
+      "nom": "Le résultat vaut −8",
+      "detail": "Des puissances d'un nombre négatif, ou d'un opposé, qui donnent −8.",
+      "cartes": [
+        "Le calcul de (−2)³",
+        "Le calcul de −2³",
+        "Le produit de trois facteurs égaux à −2",
+        "Le cube de −2",
+        "L'opposé de 2³"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Comment s'appelle le nombre en couleur dans cette puissance ?",
+      "texte": "Dans la puissance [7]⁴, on regarde le grand nombre.",
+      "choix": ["La base", "L'exposant", "Le résultat"],
+      "bonne": 0,
+      "explication": "Dans aⁿ, le nombre a est la base : c'est le facteur qui se répète."
+    },
+    {
+      "consigne": "Comment s'appelle le nombre en couleur dans cette puissance ?",
+      "texte": "Dans la puissance 5[²], on regarde le petit nombre en haut.",
+      "choix": ["La base", "L'exposant", "Le résultat"],
+      "bonne": 1,
+      "explication": "Le petit nombre écrit en haut à droite est l'exposant : il donne le nombre de facteurs."
+    },
+    {
+      "consigne": "Comment s'appelle le nombre en couleur dans ce calcul ?",
+      "texte": "On calcule 2⁵ = [32].",
+      "choix": ["La base", "L'exposant", "Le résultat"],
+      "bonne": 2,
+      "explication": "2⁵ = 2 × 2 × 2 × 2 × 2 = 32 : 32 est le résultat du calcul."
+    },
+    {
+      "consigne": "Comment s'appelle le nombre en couleur dans cette puissance de 10 ?",
+      "texte": "On écrit 0,001 = [10]⁻³.",
+      "choix": ["La base", "L'exposant", "Le résultat"],
+      "bonne": 0,
+      "explication": "Dans 10⁻³, la base est 10 et l'exposant est −3."
+    },
+    {
+      "consigne": "Comment s'appelle le nombre en couleur dans cette puissance de 10 ?",
+      "texte": "On écrit 0,001 = 10[⁻³].",
+      "choix": ["La base", "L'exposant", "Le résultat"],
+      "bonne": 1,
+      "explication": "Dans 10⁻³, la base est 10 et l'exposant est −3."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Notation scientifique",
+      "acceptees": ["Notation scientifique", "La notation scientifique", "Écriture scientifique", "L'écriture scientifique"],
+      "indices": [
+        "Je suis une façon d'écrire un nombre très grand ou très petit.",
+        "Je m'écris a × 10ⁿ.",
+        "Dans ma forme, a est compris entre 1 et 10, 10 exclu."
+      ],
+      "explication": "La notation scientifique s'écrit a × 10ⁿ, avec 1 ≤ a < 10. Par exemple 45 000 = 4,5 × 10⁴."
+    },
+    {
+      "reponse": "Exposant",
+      "acceptees": ["Exposant", "L'exposant", "Un exposant"],
+      "indices": [
+        "Je suis un petit nombre écrit en haut, à droite d'un autre nombre.",
+        "Je compte le nombre de facteurs égaux dans un produit.",
+        "Dans 2⁵, je suis le 5."
+      ],
+      "explication": "L'exposant indique le nombre de facteurs égaux à la base : dans 2⁵, il y en a 5."
+    },
+    {
+      "reponse": "Nano",
+      "acceptees": ["Nano", "Le préfixe nano", "Préfixe nano"],
+      "indices": [
+        "Je suis un préfixe qu'on place devant une unité.",
+        "Je vaux un milliardième.",
+        "Je suis égal à 10⁻⁹."
+      ],
+      "explication": "Le préfixe nano vaut 10⁻⁹, soit un milliardième : 1 nm = 10⁻⁹ m."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "Calcule 3⁴.",
+      "reponse": 81,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "3⁴ = 3 × 3 × 3 × 3 = 9 × 9 = 81."
+    },
+    {
+      "question": "Calcule −3².",
+      "reponse": -9,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "Sans parenthèses, la puissance ne porte que sur 3 : −3² = −(3 × 3) = −9."
+    },
+    {
+      "question": "Calcule 2⁵ − 3².",
+      "reponse": 23,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "2⁵ = 32 et 3² = 9, donc 32 − 9 = 23."
+    },
+    {
+      "question": "On écrit 45 000 sous la forme 4,5 × 10ⁿ. Quelle est la valeur de n ?",
+      "reponse": 4,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "On décale la virgule de 4 rangs pour passer de 45 000 à 4,5, donc n = 4."
+    },
+    {
+      "question": "On écrit 0,000 72 sous la forme 7,2 × 10ⁿ. Quelle est la valeur de n ?",
+      "reponse": -4,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "On décale la virgule de 4 rangs vers la droite pour passer de 0,000 72 à 7,2, et le nombre est plus petit que 1 : n = −4."
+    },
+    {
+      "question": "On écrit 10⁴ × 10⁻⁶ sous la forme 10ⁿ. Quelle est la valeur de n ?",
+      "reponse": -2,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "Pour multiplier des puissances de 10, on additionne les exposants : 4 + (−6) = −2, donc n = −2."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Écrire 38 × 10⁵ en notation scientifique",
+      "etapes": [
+        "On écrit 38 sous la forme 3,8 × 10",
+        "On remplace : 38 × 10⁵ = 3,8 × 10 × 10⁵",
+        "On additionne les exposants : 10 × 10⁵ = 10⁶",
+        "On écrit le résultat : 3,8 × 10⁶"
+      ]
+    },
+    {
+      "titre": "Calculer 10⁴ × 10⁻⁶",
+      "etapes": [
+        "On repère deux puissances de 10 à multiplier",
+        "On additionne les exposants : 4 + (−6)",
+        "On calcule la somme : 4 + (−6) = −2",
+        "On conclut : 10⁴ × 10⁻⁶ = 10⁻²"
+      ]
+    }
+  ]
+}

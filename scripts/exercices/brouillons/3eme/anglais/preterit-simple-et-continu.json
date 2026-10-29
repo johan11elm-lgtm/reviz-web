@@ -1,0 +1,148 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Prétérit régulier en -ed",
+      "detail": "Les verbes réguliers forment leur prétérit simple en ajoutant -ed à la base verbale (play → played, stop → stopped, study → studied).",
+      "cartes": [
+        "She played tennis yesterday",
+        "We stopped at the station",
+        "He studied hard last week",
+        "They visited London in 2019",
+        "I walked home two days ago"
+      ]
+    },
+    {
+      "nom": "Prétérit irrégulier",
+      "detail": "Les verbes irréguliers ont une forme de prétérit à apprendre par cœur (go → went, see → saw, take → took, sink → sank, leave → left).",
+      "cartes": [
+        "The Titanic sank in 1912",
+        "The ship left Southampton on 10 April",
+        "We went to London last week",
+        "She saw her cousin two days ago",
+        "He took the bus to school yesterday"
+      ]
+    },
+    {
+      "nom": "Prétérit en was / were + -ing",
+      "detail": "Was ou were + V-ing décrit une action en cours à un moment du passé : c'est le décor du récit.",
+      "cartes": [
+        "The passengers were sleeping",
+        "I was reading a book",
+        "She was watching TV at nine o'clock",
+        "They were playing in the garden",
+        "The ship was sailing fast"
+      ]
+    },
+    {
+      "nom": "Négation ou question avec did",
+      "detail": "Avec didn't ou Did, la marque du passé est portée par did : le verbe reste à la base verbale.",
+      "cartes": [
+        "They didn't see the iceberg in time",
+        "Did the ship reach New York?",
+        "Did you finish your homework?",
+        "She didn't go to the party",
+        "We didn't take the train"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Quelle forme est en couleur ?",
+      "texte": "The Titanic [sank] in 1912.",
+      "choix": ["Prétérit simple affirmatif", "Prétérit en was / were + -ing", "Négation au prétérit simple", "Question au prétérit simple"],
+      "bonne": 0,
+      "explication": "« sank » est le prétérit irrégulier de sink : une action terminée et datée (in 1912)."
+    },
+    {
+      "consigne": "Quelle forme est en couleur ?",
+      "texte": "The passengers [were sleeping] when the ship hit the iceberg.",
+      "choix": ["Prétérit simple affirmatif", "Prétérit en was / were + -ing", "Négation au prétérit simple", "Question au prétérit simple"],
+      "bonne": 1,
+      "explication": "« were sleeping » est were + V-ing : l'action de fond, en cours quand le navire heurte l'iceberg."
+    },
+    {
+      "consigne": "Quelle forme est en couleur ?",
+      "texte": "They [didn't see] the iceberg in time.",
+      "choix": ["Prétérit simple affirmatif", "Prétérit en was / were + -ing", "Négation au prétérit simple", "Question au prétérit simple"],
+      "bonne": 2,
+      "explication": "« didn't + base verbale » est la négation du prétérit simple."
+    },
+    {
+      "consigne": "Quelle forme est en couleur ?",
+      "texte": "[Did the ship reach] New York?",
+      "choix": ["Prétérit simple affirmatif", "Prétérit en was / were + -ing", "Négation au prétérit simple", "Question au prétérit simple"],
+      "bonne": 3,
+      "explication": "« Did + sujet + base verbale » est la question au prétérit simple."
+    },
+    {
+      "consigne": "Quelle forme est en couleur ?",
+      "texte": "The ship was sailing fast when it [hit] an iceberg.",
+      "choix": ["Prétérit simple affirmatif", "Prétérit en was / were + -ing", "Négation au prétérit simple", "Question au prétérit simple"],
+      "bonne": 0,
+      "explication": "« hit » est le prétérit simple (hit, hit, hit) : l'événement soudain qui interrompt l'action de fond."
+    },
+    {
+      "consigne": "Quelle forme est en couleur ?",
+      "texte": "While the musicians were playing, the ship [was sinking].",
+      "choix": ["Prétérit simple affirmatif", "Prétérit en was / were + -ing", "Négation au prétérit simple", "Question au prétérit simple"],
+      "bonne": 1,
+      "explication": "« was sinking » est was + V-ing : une action qui dure, introduite par while."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Titanic",
+      "acceptees": ["Titanic", "Le Titanic", "RMS Titanic"],
+      "indices": [
+        "Je suis un paquebot britannique.",
+        "Mon voyage inaugural devait me mener de Southampton à New York.",
+        "On me disait insubmersible, mais je coule le 15 avril 1912."
+      ],
+      "explication": "Le Titanic quitte Southampton le 10 avril 1912 et coule le 15 avril après avoir heurté un iceberg."
+    },
+    {
+      "reponse": "Iceberg",
+      "acceptees": ["Iceberg", "Un iceberg", "The iceberg"],
+      "indices": [
+        "Je suis fait de glace et je flotte sur l'océan.",
+        "Je suis un danger pour les navires dans l'Atlantique Nord.",
+        "Dans la nuit du 14 avril 1912, un paquebot britannique m'a heurté."
+      ],
+      "explication": "Le Titanic heurte un iceberg dans la nuit du 14 avril 1912."
+    },
+    {
+      "reponse": "Canot de sauvetage",
+      "acceptees": ["Canot de sauvetage", "Canots de sauvetage", "Un canot de sauvetage", "Lifeboat", "Lifeboats", "Canot", "Chaloupe"],
+      "indices": [
+        "Je suis une petite embarcation.",
+        "Je sers à quitter un navire en danger.",
+        "Sur le Titanic, il n'y avait pas assez de moi pour tous les passagers."
+      ],
+      "explication": "Il manquait des canots de sauvetage (lifeboats) : plus de 1 500 personnes sont mortes."
+    },
+    {
+      "reponse": "Southampton",
+      "acceptees": ["Southampton"],
+      "indices": [
+        "Je suis une ville portuaire du Royaume-Uni.",
+        "Je suis située sur la côte sud de l'Angleterre.",
+        "Le Titanic est parti de moi le 10 avril 1912 pour son voyage inaugural."
+      ],
+      "explication": "Le Titanic quitte Southampton le 10 avril 1912 pour New York."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Construire une phrase négative au prétérit simple",
+      "etapes": [
+        "On écrit le sujet en premier",
+        "On ajoute didn't juste après le sujet",
+        "On met le verbe à la base verbale, sans marque du passé",
+        "On termine par le complément"
+      ]
+    }
+  ]
+}

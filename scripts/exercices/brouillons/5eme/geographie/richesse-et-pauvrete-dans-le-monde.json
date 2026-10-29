@@ -1,0 +1,177 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Les pays développés",
+      "detail": "Les pays du Nord, au niveau de vie et à l'IDH élevés : Amérique du Nord, Europe, Japon, Australie.",
+      "cartes": [
+        "L'Amérique du Nord, l'Europe et le Japon",
+        "Un niveau de vie et un IDH élevés",
+        "Des pays qu'on appelle aussi pays du Nord",
+        "La Norvège, l'Islande et la Suisse, aux IDH très élevés",
+        "L'Australie, située pourtant dans l'hémisphère Sud"
+      ]
+    },
+    {
+      "nom": "Les pays émergents",
+      "detail": "Des pays en forte croissance qui s'intègrent à la mondialisation, mais où les inégalités restent fortes.",
+      "cartes": [
+        "Une forte croissance économique",
+        "Des inégalités qui restent fortes malgré la croissance",
+        "La Chine et l'Inde, géants très peuplés",
+        "Le Brésil, l'Afrique du Sud et le Mexique",
+        "Une entrée rapide dans la mondialisation"
+      ]
+    },
+    {
+      "nom": "Les pays les moins avancés",
+      "detail": "Une quarantaine de pays parmi les plus pauvres du monde selon l'ONU, surtout en Afrique subsaharienne.",
+      "cartes": [
+        "Un petit groupe d'environ quarante pays",
+        "Des pays situés surtout en Afrique subsaharienne",
+        "Haïti et l'Afghanistan, en dehors de l'Afrique",
+        "Des pays dont fait partie le Niger",
+        "Des pays aux IDH parmi les plus faibles du monde"
+      ]
+    },
+    {
+      "nom": "L'extrême pauvreté",
+      "detail": "Vivre avec moins d'environ 3 dollars par jour, selon la Banque mondiale : une personne sur dix, en recul depuis 1990.",
+      "cartes": [
+        "Vivre avec moins d'environ 3 dollars par jour",
+        "Environ une personne sur dix dans le monde",
+        "Un seuil fixé par la Banque mondiale, relevé en 2025",
+        "Un net recul depuis 1990, surtout en Asie de l'Est",
+        "Manquer de ressources pour se nourrir, se loger, se soigner"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "De quel type de pays parle le passage en couleur ?",
+      "texte": "Le Brésil connaît [une forte croissance économique mais garde de fortes inégalités].",
+      "choix": ["Pays développé", "Pays émergent", "PMA"],
+      "bonne": 1,
+      "explication": "Une forte croissance qui garde de fortes inégalités caractérise un pays émergent."
+    },
+    {
+      "consigne": "De quel type de pays parle le passage en couleur ?",
+      "texte": "La Norvège a [un niveau de vie et un IDH très élevés].",
+      "choix": ["Pays développé", "Pays émergent", "PMA"],
+      "bonne": 0,
+      "explication": "Un niveau de vie et un IDH élevés caractérisent un pays développé, comme la Norvège."
+    },
+    {
+      "consigne": "De quel type de pays parle le passage en couleur ?",
+      "texte": "Haïti figure parmi [les pays les plus pauvres du monde selon l'ONU].",
+      "choix": ["Pays développé", "Pays émergent", "PMA"],
+      "bonne": 2,
+      "explication": "Les PMA sont les pays les moins avancés, les plus pauvres du monde selon l'ONU."
+    },
+    {
+      "consigne": "De quel type de pays parle le passage en couleur ?",
+      "texte": "L'Afrique du Sud est [un pays en forte croissance qui s'intègre à la mondialisation].",
+      "choix": ["Pays développé", "Pays émergent", "PMA"],
+      "bonne": 1,
+      "explication": "Un pays en forte croissance qui s'intègre à la mondialisation est un pays émergent."
+    },
+    {
+      "consigne": "De quel type de pays parle le passage en couleur ?",
+      "texte": "Au Japon, [le niveau de vie et l'IDH sont élevés].",
+      "choix": ["Pays développé", "Pays émergent", "PMA"],
+      "bonne": 0,
+      "explication": "Le Japon est un pays développé : son niveau de vie et son IDH sont élevés."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "IDH",
+      "acceptees": ["IDH", "L'IDH", "Indice de développement humain"],
+      "indices": [
+        "Je suis une note comprise entre 0 et 1.",
+        "Je combine la santé, l'éducation et le niveau de vie.",
+        "J'ai été créé en 1990 par le PNUD, un programme de l'ONU."
+      ],
+      "explication": "L'IDH, indice de développement humain, combine espérance de vie, durée de scolarisation et revenu par habitant."
+    },
+    {
+      "reponse": "Banque mondiale",
+      "acceptees": ["Banque mondiale", "La Banque mondiale"],
+      "indices": [
+        "Je suis une institution internationale.",
+        "C'est moi qui fixe le seuil de l'extrême pauvreté.",
+        "En 2025, j'ai relevé ce seuil, aujourd'hui d'environ 3 dollars par jour."
+      ],
+      "explication": "La Banque mondiale fixe le seuil de l'extrême pauvreté, relevé en 2025 : environ 3 dollars par jour."
+    },
+    {
+      "reponse": "Brésil",
+      "acceptees": ["Brésil", "Le Brésil"],
+      "indices": [
+        "Je suis un pays émergent.",
+        "Je suis situé en Amérique du Sud.",
+        "Dans l'une de mes villes, Rio de Janeiro, les favelas côtoient les quartiers aisés."
+      ],
+      "explication": "Le Brésil est un pays émergent où les inégalités restent fortes : à Rio de Janeiro, les favelas côtoient les quartiers aisés."
+    },
+    {
+      "reponse": "PMA",
+      "acceptees": ["PMA", "Les PMA", "Pays les moins avancés", "Les pays les moins avancés"],
+      "indices": [
+        "Je regroupe une quarantaine de pays.",
+        "On me trouve surtout en Afrique subsaharienne, mais aussi avec Haïti et l'Afghanistan.",
+        "Je suis le groupe des pays les plus pauvres du monde selon l'ONU."
+      ],
+      "explication": "Les PMA, pays les moins avancés, sont les plus pauvres du monde selon l'ONU, surtout en Afrique subsaharienne."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "Un pays produit 900 milliards de dollars de richesses en un an et compte 60 millions d'habitants. Quel est son PIB par habitant ?",
+      "reponse": 15000,
+      "unite": "dollars par habitant",
+      "tolerance": 0,
+      "explication": "PIB par habitant = PIB ÷ nombre d'habitants = 900 milliards ÷ 60 millions = 900 000 millions ÷ 60 millions = 15 000 dollars."
+    },
+    {
+      "question": "Un pays a un PIB de 400 milliards de dollars et compte 80 millions d'habitants. Quel est son PIB par habitant ?",
+      "reponse": 5000,
+      "unite": "dollars par habitant",
+      "tolerance": 0,
+      "explication": "400 milliards ÷ 80 millions = 400 000 millions ÷ 80 millions = 5 000 dollars par habitant."
+    },
+    {
+      "question": "Un pays de 10 millions d'habitants a un PIB par habitant de 30000 dollars. Quel est son PIB, en milliards de dollars ?",
+      "reponse": 300,
+      "unite": "milliards de dollars",
+      "tolerance": 0,
+      "explication": "PIB = PIB par habitant × nombre d'habitants = 30 000 × 10 millions = 300 000 millions, soit 300 milliards de dollars."
+    },
+    {
+      "question": "Une personne vit avec exactement 3 dollars par jour. Combien de dollars a-t-elle pour 30 jours ?",
+      "reponse": 90,
+      "unite": "dollars",
+      "tolerance": 0,
+      "explication": "3 × 30 = 90 dollars en 30 jours."
+    },
+    {
+      "question": "Environ une personne sur dix vit dans l'extrême pauvreté. Dans un village de 2000 habitants qui suivrait cette proportion, combien de personnes sont concernées ?",
+      "reponse": 200,
+      "unite": "personnes",
+      "tolerance": 0,
+      "explication": "Une personne sur dix, c'est 2000 ÷ 10 = 200 personnes."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Comment lire une carte de l'IDH",
+      "etapes": [
+        "Lire le titre, la date et la légende de la carte",
+        "Localiser les IDH les plus élevés et les plus faibles",
+        "Comparer avec une carte du PIB par habitant",
+        "Conclure en une phrase sur les inégalités"
+      ]
+    }
+  ]
+}

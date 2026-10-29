@@ -1,0 +1,159 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Une puissance agricole",
+      "detail": "Le poids de la France dans l'agriculture de l'Union européenne et du monde.",
+      "cartes": [
+        "Le premier producteur agricole de l'UE",
+        "Un grand exportateur de blé, de vins et de lait",
+        "Moins de 2 % des actifs travaillent dans l'agriculture",
+        "La première bénéficiaire des aides de la PAC",
+        "L'industrie agroalimentaire, premier secteur industriel du pays"
+      ]
+    },
+    {
+      "nom": "Des régions spécialisées",
+      "detail": "Chaque grande région agricole a une production dominante.",
+      "cartes": [
+        "Les grandes cultures céréalières de la Beauce",
+        "Des élevages de porcs et de volailles en Bretagne",
+        "Les vignobles du Bordelais, de la Champagne et de la Bourgogne",
+        "Les fruits et légumes de la vallée du Rhône",
+        "L'élevage et la production de lait en Normandie"
+      ]
+    },
+    {
+      "nom": "Le productivisme et ses effets",
+      "detail": "Le modèle né après 1950 pour produire le plus possible, et ce qu'il coûte à l'environnement.",
+      "cartes": [
+        "Des machines et des semences sélectionnées",
+        "Des engrais et des pesticides utilisés en grande quantité",
+        "Des nitrates qui favorisent les algues vertes",
+        "Des sols et des eaux pollués",
+        "Une biodiversité qui recule"
+      ]
+    },
+    {
+      "nom": "Une agriculture plus durable",
+      "detail": "Les pratiques qui respectent mieux l'environnement et rapprochent producteurs et clients.",
+      "cartes": [
+        "Une culture qui se passe de produits chimiques de synthèse",
+        "Un produit lié à un territoire et à un savoir-faire",
+        "Des légumes vendus directement à la ferme",
+        "Un producteur qui vend ses produits sur le marché",
+        "Au plus un intermédiaire entre le producteur et le client"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "les algues vertes sur certaines plages bretonnes",
+      "carte": "Des engrais riches en nitrates",
+      "role": "cause",
+      "explication": "Les engrais enrichissent les eaux en nitrates, qui favorisent la prolifération des algues."
+    },
+    {
+      "fait": "les algues vertes sur certaines plages bretonnes",
+      "carte": "Des élevages intensifs de porcs et de volailles",
+      "role": "cause",
+      "explication": "Les nitrates venus de l'élevage intensif breton polluent les eaux et favorisent les algues vertes."
+    },
+    {
+      "fait": "la mécanisation de l'agriculture",
+      "carte": "Des exploitations moins nombreuses mais plus grandes",
+      "role": "consequence",
+      "explication": "Avec les machines, un agriculteur cultive beaucoup plus de surface : les exploitations s'agrandissent et se font plus rares."
+    },
+    {
+      "fait": "la mécanisation de l'agriculture",
+      "carte": "Un agriculteur qui cultive beaucoup plus de surface",
+      "role": "consequence",
+      "explication": "Les machines permettent à un seul agriculteur de travailler de bien plus grandes surfaces."
+    }
+  ],
+  "etiquettes": [
+    {
+      "consigne": "De quoi s'agit-il dans le passage en couleur ?",
+      "texte": "Dans cette ferme, [on se passe de pesticides et d'engrais chimiques de synthèse].",
+      "choix": ["Agriculture productiviste", "Agriculture biologique", "Circuit court", "Label AOP"],
+      "bonne": 1,
+      "explication": "Une agriculture qui se passe de pesticides et d'engrais chimiques de synthèse est une agriculture biologique."
+    },
+    {
+      "consigne": "De quoi s'agit-il dans le passage en couleur ?",
+      "texte": "Ce maraîcher [vend ses légumes directement sur le marché, sans intermédiaire].",
+      "choix": ["Agriculture productiviste", "Agriculture biologique", "Circuit court", "Label AOP"],
+      "bonne": 2,
+      "explication": "Une vente avec au plus un intermédiaire entre le producteur et le consommateur est un circuit court."
+    },
+    {
+      "consigne": "De quoi s'agit-il dans le passage en couleur ?",
+      "texte": "Ce fromage de comté [vient d'un territoire précis et respecte un savoir-faire].",
+      "choix": ["Agriculture productiviste", "Agriculture biologique", "Circuit court", "Label AOP"],
+      "bonne": 3,
+      "explication": "Le label AOP lie un produit à un territoire précis et à un savoir-faire, comme le comté."
+    },
+    {
+      "consigne": "De quoi s'agit-il dans le passage en couleur ?",
+      "texte": "Depuis 1950, cet agriculteur [cherche à produire le plus possible avec des machines, des engrais et des pesticides].",
+      "choix": ["Agriculture productiviste", "Agriculture biologique", "Circuit court", "Label AOP"],
+      "bonne": 0,
+      "explication": "Produire le plus possible grâce aux machines, aux engrais et aux pesticides, c'est l'agriculture productiviste."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "La PAC",
+      "acceptees": ["PAC", "La PAC", "La politique agricole commune", "Politique agricole commune"],
+      "indices": [
+        "Je suis née en 1962.",
+        "Je suis une aide de l'Union européenne pour les agriculteurs.",
+        "Je soutiens leurs revenus, et la France est ma première bénéficiaire."
+      ],
+      "explication": "La PAC, politique agricole commune créée en 1962, soutient les revenus des agriculteurs européens."
+    },
+    {
+      "reponse": "Un circuit court",
+      "acceptees": ["Circuit court", "Un circuit court", "Les circuits courts", "Circuits courts", "Vente directe", "La vente directe"],
+      "indices": [
+        "Je suis une façon de vendre des produits.",
+        "Je comporte au plus un intermédiaire entre le producteur et le consommateur.",
+        "La vente à la ferme et le marché en sont des exemples."
+      ],
+      "explication": "Un circuit court compte au plus un intermédiaire entre le producteur et le consommateur."
+    },
+    {
+      "reponse": "Le productivisme",
+      "acceptees": ["Productivisme", "Le productivisme", "L'agriculture productiviste", "Agriculture productiviste", "Une agriculture productiviste", "Agriculture intensive", "L'agriculture intensive"],
+      "indices": [
+        "Je suis un modèle agricole né après 1950.",
+        "J'utilise des machines, des engrais, des pesticides et des semences sélectionnées.",
+        "Je vise des récoltes maximales, mais je pollue les sols et les eaux."
+      ],
+      "explication": "L'agriculture productiviste cherche à produire le plus possible, au prix de pollutions et d'une perte de biodiversité."
+    },
+    {
+      "reponse": "Rouen",
+      "acceptees": ["Rouen", "Le port de Rouen", "Port de Rouen"],
+      "indices": [
+        "Je suis un port français.",
+        "Je suis relié aux champs du Bassin parisien.",
+        "Je suis le premier port céréalier d'Europe de l'Ouest."
+      ],
+      "explication": "Rouen exporte le blé du Bassin parisien : c'est le premier port céréalier d'Europe de l'Ouest."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Lire une carte des spécialisations agricoles",
+      "etapes": [
+        "D'abord, lis le titre et la légende de la carte",
+        "Ensuite, localise chaque région et sa spécialisation",
+        "Puis, repère les ports d'exportation et relie-les aux régions",
+        "Enfin, conclus sur la puissance agricole de la France"
+      ]
+    }
+  ]
+}

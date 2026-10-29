@@ -1,0 +1,211 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Ce que défendent les philosophes",
+      "detail": "Les idées que les philosophes des Lumières défendent contre l'arbitraire et l'intolérance.",
+      "cartes": [
+        "La séparation des pouvoirs législatif, exécutif et judiciaire",
+        "La souveraineté appartient au peuple",
+        "Le respect de la religion des autres",
+        "L'égalité de tous devant la loi",
+        "Le droit de dire et d'écrire ce que l'on pense"
+      ]
+    },
+    {
+      "nom": "Comment les idées se diffusent",
+      "detail": "Les lieux et les moyens qui font circuler les idées nouvelles dans toute l'Europe.",
+      "cartes": [
+        "Chez Madame Geoffrin, philosophes et artistes discutent",
+        "On débat des idées nouvelles autour d'un café",
+        "Des savants se retrouvent dans des académies",
+        "Des savants de toute l'Europe s'écrivent des lettres",
+        "Des journaux font connaître les idées nouvelles"
+      ]
+    },
+    {
+      "nom": "Les souverains face aux Lumières",
+      "detail": "Des rois et des impératrices inspirés par les philosophes, et un roi de France de plus en plus contesté.",
+      "cartes": [
+        "Frédéric II de Prusse accueille Voltaire à sa cour",
+        "Catherine II, impératrice de Russie, garde un pouvoir absolu",
+        "Joseph II d'Autriche mène des réformes",
+        "Un monarque réformateur inspiré par les philosophes",
+        "Louis XVI, roi de France, voit son pouvoir contesté"
+      ]
+    },
+    {
+      "nom": "Savants et inventeurs",
+      "detail": "Les progrès des sciences au XVIIIe siècle : chimie, sciences naturelles, paratonnerre, ballon à air chaud.",
+      "cartes": [
+        "Lavoisier fait progresser la chimie",
+        "Buffon fait avancer les sciences naturelles",
+        "Franklin invente le paratonnerre",
+        "Les frères Montgolfier font voler un ballon à air chaud",
+        "Des savants font de grandes découvertes au XVIIIe siècle"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "l'engagement de Voltaire dans l'affaire Calas",
+      "carte": "L'exécution à tort de Jean Calas, un protestant de Toulouse",
+      "role": "cause",
+      "explication": "Voltaire s'engage parce qu'un protestant innocent a été exécuté en 1762."
+    },
+    {
+      "fait": "l'engagement de Voltaire dans l'affaire Calas",
+      "carte": "L'intolérance religieuse envers les protestants",
+      "role": "cause",
+      "explication": "Voltaire dénonce l'intolérance religieuse, qui a conduit à la condamnation de Calas."
+    },
+    {
+      "fait": "l'engagement de Voltaire dans l'affaire Calas",
+      "carte": "La publication du Traité sur la tolérance en 1763",
+      "role": "consequence",
+      "explication": "À la suite de l'affaire, Voltaire publie le Traité sur la tolérance."
+    },
+    {
+      "fait": "l'engagement de Voltaire dans l'affaire Calas",
+      "carte": "La réhabilitation de Jean Calas",
+      "role": "consequence",
+      "explication": "Grâce à son combat, Voltaire obtient la réhabilitation de Jean Calas."
+    }
+  ],
+  "etiquettes": [
+    {
+      "consigne": "Quel philosophe des Lumières est décrit par le passage en couleur ?",
+      "texte": "Pour éviter le despotisme, un philosophe [propose de séparer les pouvoirs législatif, exécutif et judiciaire].",
+      "choix": [
+        "Montesquieu",
+        "Voltaire",
+        "Rousseau",
+        "Diderot"
+      ],
+      "bonne": 0,
+      "explication": "Dans De l'esprit des lois (1748), Montesquieu propose la séparation des pouvoirs."
+    },
+    {
+      "consigne": "Quel philosophe des Lumières est décrit par le passage en couleur ?",
+      "texte": "Dans l'affaire Calas, un philosophe [obtient la réhabilitation d'un protestant exécuté à tort].",
+      "choix": [
+        "Montesquieu",
+        "Voltaire",
+        "Rousseau",
+        "Diderot"
+      ],
+      "bonne": 1,
+      "explication": "Voltaire défend Jean Calas et dénonce l'intolérance religieuse."
+    },
+    {
+      "consigne": "Quel philosophe des Lumières est décrit par le passage en couleur ?",
+      "texte": "En 1762, un philosophe [affirme que la souveraineté appartient au peuple].",
+      "choix": [
+        "Montesquieu",
+        "Voltaire",
+        "Rousseau",
+        "Diderot"
+      ],
+      "bonne": 2,
+      "explication": "Dans Du contrat social (1762), Rousseau affirme la souveraineté du peuple."
+    },
+    {
+      "consigne": "Quel philosophe des Lumières est décrit par le passage en couleur ?",
+      "texte": "Entre 1751 et 1772, un philosophe [dirige l'Encyclopédie avec d'Alembert].",
+      "choix": [
+        "Montesquieu",
+        "Voltaire",
+        "Rousseau",
+        "Diderot"
+      ],
+      "bonne": 3,
+      "explication": "Diderot dirige l'Encyclopédie, qui rassemble les connaissances de l'époque."
+    },
+    {
+      "consigne": "Quel philosophe des Lumières est décrit par le passage en couleur ?",
+      "texte": "En 1763, un philosophe [publie le Traité sur la tolérance].",
+      "choix": [
+        "Montesquieu",
+        "Voltaire",
+        "Rousseau",
+        "Diderot"
+      ],
+      "bonne": 1,
+      "explication": "Voltaire publie le Traité sur la tolérance en 1763, après l'affaire Calas."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Voltaire",
+      "acceptees": [
+        "Voltaire"
+      ],
+      "indices": [
+        "Je suis un philosophe célèbre pour mon combat contre l'intolérance.",
+        "Je défends la mémoire d'un protestant de Toulouse exécuté à tort.",
+        "Je publie le Traité sur la tolérance en 1763."
+      ],
+      "explication": "Voltaire défend la tolérance religieuse, notamment dans l'affaire Calas."
+    },
+    {
+      "reponse": "Rousseau",
+      "acceptees": [
+        "Rousseau",
+        "Jean-Jacques Rousseau",
+        "Jean Jacques Rousseau"
+      ],
+      "indices": [
+        "Je suis un philosophe du XVIIIe siècle.",
+        "Je pense que la souveraineté appartient au peuple.",
+        "Mon livre Du contrat social paraît en 1762."
+      ],
+      "explication": "Dans Du contrat social (1762), Rousseau affirme que la souveraineté appartient au peuple."
+    },
+    {
+      "reponse": "Frédéric II",
+      "acceptees": [
+        "Frédéric II",
+        "Frederic II",
+        "Frédéric II de Prusse",
+        "Frederic II de Prusse",
+        "Frédéric 2",
+        "Frédéric"
+      ],
+      "indices": [
+        "Je suis un souverain qui garde un pouvoir absolu.",
+        "J'ai accueilli Voltaire à ma cour.",
+        "Je règne sur la Prusse."
+      ],
+      "explication": "Frédéric II de Prusse est un despote éclairé : il accueille Voltaire mais reste un monarque absolu."
+    },
+    {
+      "reponse": "L'Encyclopédie",
+      "acceptees": [
+        "Encyclopédie",
+        "L'Encyclopédie",
+        "Encyclopedie",
+        "L'Encyclopedie",
+        "La grande Encyclopédie"
+      ],
+      "indices": [
+        "Je suis un grand ouvrage qui rassemble les connaissances de mon époque.",
+        "Diderot et d'Alembert me dirigent.",
+        "Je suis publiée de 1751 à 1772, malgré la censure."
+      ],
+      "explication": "L'Encyclopédie de Diderot et d'Alembert (1751-1772) rassemble les connaissances du XVIIIe siècle."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Les grandes dates des Lumières, de la plus ancienne à la plus récente",
+      "etapes": [
+        "Montesquieu publie De l'esprit des lois",
+        "Début de la publication de l'Encyclopédie",
+        "Rousseau publie Du contrat social",
+        "Voltaire publie le Traité sur la tolérance",
+        "Les États-Unis déclarent leur indépendance"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,138 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Une affirmation",
+      "detail": "Une phrase sans négation et sans question, qui dit ce qui était vrai dans le passé avec was ou were.",
+      "cartes": [
+        "I was tired yesterday",
+        "They were at the beach last Sunday",
+        "There were two cats in the garden",
+        "My grandmother was a teacher",
+        "I was born in Lyon"
+      ]
+    },
+    {
+      "nom": "Une négation",
+      "detail": "Une phrase avec wasn't ou weren't, qui dit que quelque chose n'était pas vrai dans le passé.",
+      "cartes": [
+        "We weren't at school yesterday",
+        "It wasn't cold in the morning",
+        "My cousins weren't at the party",
+        "I wasn't afraid of the dark",
+        "The film wasn't very good"
+      ]
+    },
+    {
+      "nom": "Une question sans mot interrogatif",
+      "detail": "Une question qui commence par was ou were, avec be placé devant le sujet : on y répond par oui ou par non.",
+      "cartes": [
+        "Were you happy at primary school?",
+        "Was your grandfather a farmer?",
+        "Were your parents at the concert?",
+        "Was there a park near your house?",
+        "Was the weather nice last weekend?"
+      ]
+    },
+    {
+      "nom": "Une question avec un mot interrogatif",
+      "detail": "Une question qui commence par where, what, who ou why, suivi de was ou were et du sujet.",
+      "cartes": [
+        "Where were you last night?",
+        "What was your first pet?",
+        "Where were you born?",
+        "Who was your best friend at school?",
+        "Why were you late yesterday?"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Quel est le rôle du passage en couleur ?",
+      "texte": "[Two days ago], we were at the cinema.",
+      "choix": ["Le sujet", "Une forme de be", "Un repère du passé", "Un lieu"],
+      "bonne": 2,
+      "explication": "« Two days ago » veut dire « il y a deux jours » : ago se place après la durée, et c'est un repère du passé."
+    },
+    {
+      "consigne": "Quel est le rôle du passage en couleur ?",
+      "texte": "My grandmother [was] a teacher.",
+      "choix": ["Le sujet", "Une forme de be", "Un repère du passé", "Un lieu"],
+      "bonne": 1,
+      "explication": "« was » est le prétérit de be, employé avec un sujet singulier."
+    },
+    {
+      "consigne": "Quel est le rôle du passage en couleur ?",
+      "texte": "[My little brother] was very tired yesterday.",
+      "choix": ["Le sujet", "Une forme de be", "Un repère du passé", "Un lieu"],
+      "bonne": 0,
+      "explication": "« My little brother » est le sujet de be : il est singulier, donc on emploie was."
+    },
+    {
+      "consigne": "Quel est le rôle du passage en couleur ?",
+      "texte": "They were [at the beach] last Sunday.",
+      "choix": ["Le sujet", "Une forme de be", "Un repère du passé", "Un lieu"],
+      "bonne": 3,
+      "explication": "« at the beach » dit où ils étaient : c'est un lieu."
+    },
+    {
+      "consigne": "Quel est le rôle du passage en couleur ?",
+      "texte": "We weren't at school [last Monday].",
+      "choix": ["Le sujet", "Une forme de be", "Un repère du passé", "Un lieu"],
+      "bonne": 2,
+      "explication": "« last Monday » veut dire « lundi dernier » : last est un repère du passé."
+    },
+    {
+      "consigne": "Quel est le rôle du passage en couleur ?",
+      "texte": "[Were] you happy at primary school?",
+      "choix": ["Le sujet", "Une forme de be", "Un repère du passé", "Un lieu"],
+      "bonne": 1,
+      "explication": "« Were » est le prétérit de be, placé devant le sujet you pour poser la question."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Ago",
+      "acceptees": ["Ago"],
+      "indices": [
+        "Je suis un petit mot anglais.",
+        "Je me place après une durée, jamais avant.",
+        "Avec moi, three years veut dire « il y a trois ans »."
+      ],
+      "explication": "Ago se place après la durée : three years ago = il y a trois ans."
+    },
+    {
+      "reponse": "Were",
+      "acceptees": ["Were"],
+      "indices": [
+        "Je suis une forme de be au prétérit.",
+        "On m'emploie avec we et avec they.",
+        "Avec you, on me choisit toujours, même pour une seule personne."
+      ],
+      "explication": "Were s'emploie avec you, we et they ; avec you, c'est toujours were, même pour une seule personne."
+    },
+    {
+      "reponse": "Wasn't",
+      "acceptees": ["Wasn't", "Wasn’t", "Wasnt", "Was not"],
+      "indices": [
+        "Je sers à faire une négation au passé.",
+        "Je suis une forme de be, écrite avec une apostrophe.",
+        "On m'emploie avec I, he, she ou it, jamais avec we."
+      ],
+      "explication": "Wasn't (was not) est la négation de was : It wasn't cold."
+    },
+    {
+      "reponse": "Be born",
+      "acceptees": ["Be born", "To be born", "Born"],
+      "indices": [
+        "Je suis une expression de deux mots.",
+        "En français, je veux dire « naître ».",
+        "Avec moi, on dit I was ___ in 2014, et non I am ___ in 2014."
+      ],
+      "explication": "Naître se dit be born, au prétérit : I was born in 2014."
+    }
+  ],
+  "calculs": [],
+  "etapes": []
+}

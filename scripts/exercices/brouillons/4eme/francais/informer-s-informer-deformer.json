@@ -1,0 +1,157 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Un titre trompeur",
+      "detail": "Un titre qui annonce autre chose que ce que dit vraiment l'article.",
+      "cartes": [
+        "« Drame à Lyon ! » : l'article décrit une simple panne",
+        "« Une star meurt ! » : en fait, elle prend sa retraite",
+        "« Le collège ferme ! » : seulement pour une journée",
+        "« Un chien attaque un enfant ! » : il jouait avec lui",
+        "Un gros scoop annoncé en première page, absent de l'article"
+      ]
+    },
+    {
+      "nom": "Une image hors contexte",
+      "detail": "Une vraie photo présentée avec une légende ou une date qui change son sens.",
+      "cartes": [
+        "Une photo d'inondation de 2010 présentée comme récente",
+        "Une photo prise en Italie légendée « Hier à Paris »",
+        "Une photo tirée d'un film présentée comme un vrai reportage",
+        "Une vraie photo de foule attribuée à un autre événement",
+        "Une photo coupée pour cacher ce qui se passe autour"
+      ]
+    },
+    {
+      "nom": "Des chiffres incomplets",
+      "detail": "Des chiffres donnés sans les précisions qui permettent de les comprendre.",
+      "cartes": [
+        "Une hausse de 100 % sans le nombre de départ",
+        "Un sondage cité sans dire combien de personnes ont répondu",
+        "Un nombre de victimes donné sans préciser l'année",
+        "Une moyenne annoncée sans dire sur quelle période",
+        "Seules les statistiques favorables sont citées, les autres cachées"
+      ]
+    },
+    {
+      "nom": "Des mots orientés",
+      "detail": "Des mots choisis pour influencer l'opinion du lecteur.",
+      "cartes": [
+        "Le journal écrit « avoue » au lieu de « déclare »",
+        "Des supporters sont appelés une « horde »",
+        "« Le ministre s'est enfin décidé » plutôt que « a décidé »",
+        "On écrit « envahissent » au lieu de « arrivent »",
+        "Une manifestante est qualifiée de « furie » dans l'article"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Quel genre journalistique est le passage en couleur ?",
+      "texte": "Dans le journal du lundi, on lit : [– Pourquoi avez-vous changé de club ? – Parce que je voulais un nouveau défi.]",
+      "choix": ["Brève", "Reportage", "Interview", "Éditorial"],
+      "bonne": 2,
+      "explication": "Le texte est fait de questions et de réponses : c'est une interview."
+    },
+    {
+      "consigne": "Quel genre journalistique est le passage en couleur ?",
+      "texte": "Dans le journal, on lit : [Nous le disons haut et fort : cette réforme est une erreur, et notre journal demande qu'on la corrige.]",
+      "choix": ["Brève", "Reportage", "Interview", "Éditorial"],
+      "bonne": 3,
+      "explication": "Le journal donne son opinion et engage sa rédaction (« nous », « notre journal ») : c'est un éditorial."
+    },
+    {
+      "consigne": "Quel genre journalistique est le passage en couleur ?",
+      "texte": "Dans le journal, on lit : [J'ai passé la nuit avec les pompiers : sur place, l'odeur de fumée flottait encore.]",
+      "choix": ["Brève", "Reportage", "Interview", "Éditorial"],
+      "bonne": 1,
+      "explication": "Le journaliste raconte ce qu'il a vu sur place : c'est un reportage."
+    },
+    {
+      "consigne": "À quelle question de la règle des 5W le passage en couleur répond-il ?",
+      "texte": "[Samedi vers 20 heures], un incendie a détruit un entrepôt.",
+      "choix": ["Qui ?", "Où ?", "Quand ?", "Pourquoi ?"],
+      "bonne": 2,
+      "explication": "« Samedi vers 20 heures » donne le moment de l'événement : il répond à « Quand ? »."
+    },
+    {
+      "consigne": "À quelle question de la règle des 5W le passage en couleur répond-il ?",
+      "texte": "Un incendie a détruit un entrepôt [à Lyon].",
+      "choix": ["Qui ?", "Où ?", "Quand ?", "Pourquoi ?"],
+      "bonne": 1,
+      "explication": "« À Lyon » donne le lieu de l'événement : il répond à « Où ? »."
+    },
+    {
+      "consigne": "À quelle question de la règle des 5W le passage en couleur répond-il ?",
+      "texte": "Un incendie a détruit un entrepôt ; [un court-circuit serait en cause].",
+      "choix": ["Qui ?", "Où ?", "Quand ?", "Pourquoi ?"],
+      "bonne": 3,
+      "explication": "« Un court-circuit serait en cause » donne la raison de l'incendie : il répond à « Pourquoi ? »."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Théophraste Renaudot",
+      "acceptees": ["Théophraste Renaudot", "Renaudot"],
+      "indices": [
+        "Je vis au XVIIe siècle.",
+        "J'ai fondé l'un des premiers journaux français.",
+        "Mon journal s'appelle La Gazette et date de 1631."
+      ],
+      "explication": "Théophraste Renaudot fonde La Gazette en 1631, l'un des premiers journaux français."
+    },
+    {
+      "reponse": "Émile Zola",
+      "acceptees": ["Émile Zola", "Zola"],
+      "indices": [
+        "Je suis un écrivain français du XIXe siècle.",
+        "J'ai publié une lettre ouverte dans le journal L'Aurore.",
+        "Le 13 janvier 1898, j'ai écrit « J'accuse… ! » pour défendre le capitaine Dreyfus."
+      ],
+      "explication": "Zola publie « J'accuse… ! » dans L'Aurore le 13 janvier 1898 pour défendre le capitaine Dreyfus."
+    },
+    {
+      "reponse": "Infox",
+      "acceptees": ["Une infox", "L'infox", "Fake news", "Une fake news", "Les fake news", "Fausse information", "Une fausse information"],
+      "indices": [
+        "Je suis une information.",
+        "Je suis fausse, et on me diffuse volontairement.",
+        "Je circule surtout sur les réseaux sociaux, pour faire réagir."
+      ],
+      "explication": "Une infox est une fausse information diffusée volontairement, souvent sur les réseaux sociaux."
+    },
+    {
+      "reponse": "Éditorial",
+      "acceptees": ["Un éditorial", "L'éditorial", "Édito", "Un édito", "L'édito"],
+      "indices": [
+        "Je suis un article de presse.",
+        "Je donne un point de vue, pas seulement des faits.",
+        "J'exprime l'opinion de la rédaction du journal."
+      ],
+      "explication": "L'éditorial est un article d'opinion qui engage la rédaction du journal."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "L'ordre des éléments d'un article de presse",
+      "etapes": [
+        "Le titre qui accroche le lecteur",
+        "Le chapeau qui résume l'essentiel",
+        "L'attaque qui donne envie de lire",
+        "Le corps de l'article avec les détails"
+      ]
+    },
+    {
+      "titre": "Quatre moments de l'histoire de la presse, du plus ancien au plus récent",
+      "etapes": [
+        "Renaudot fonde La Gazette",
+        "Balzac écrit Illusions perdues",
+        "La loi établit la liberté de la presse",
+        "Zola publie « J'accuse… ! »"
+      ]
+    }
+  ]
+}

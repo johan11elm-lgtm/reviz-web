@@ -1,0 +1,138 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Avec un article défini",
+      "detail": "Des groupes nominaux dont le déterminant est un article défini : le, la, l' ou les.",
+      "cartes": [
+        "le vieux navire",
+        "la mer agitée",
+        "les îles lointaines",
+        "l'ancien marin fatigué",
+        "le petit chat noir"
+      ]
+    },
+    {
+      "nom": "Avec un article indéfini",
+      "detail": "Des groupes nominaux dont le déterminant est un article indéfini : un, une ou des.",
+      "cartes": [
+        "un énorme rocher",
+        "une grotte sombre",
+        "des voiles blanches",
+        "un grand loup affamé",
+        "une longue route poussiéreuse"
+      ]
+    },
+    {
+      "nom": "Avec un déterminant possessif",
+      "detail": "Des groupes nominaux dont le déterminant indique à qui appartient le nom : mon, ta, ses, notre, leurs…",
+      "cartes": [
+        "mon livre préféré",
+        "ta sœur aînée",
+        "ses cheveux bouclés",
+        "notre vieille maison",
+        "leurs nouveaux voisins"
+      ]
+    },
+    {
+      "nom": "Avec un déterminant démonstratif",
+      "detail": "Des groupes nominaux dont le déterminant montre le nom : ce, cet, cette ou ces.",
+      "cartes": [
+        "ce matin ensoleillé",
+        "cet arbre immense",
+        "cette histoire incroyable",
+        "ces oiseaux migrateurs",
+        "ce petit village paisible"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Quelle est la nature du mot en couleur ?",
+      "texte": "Je [la] ferme avant de partir.",
+      "choix": ["Déterminant", "Pronom", "Adverbe", "Préposition"],
+      "bonne": 1,
+      "explication": "« la » est placé devant le verbe « ferme » et remplace un nom (la porte) : c'est un pronom."
+    },
+    {
+      "consigne": "Quelle est la nature du mot en couleur ?",
+      "texte": "Elle ouvre [la] porte.",
+      "choix": ["Déterminant", "Pronom", "Adverbe", "Préposition"],
+      "bonne": 0,
+      "explication": "« la » est placé devant le nom « porte » et s'accorde avec lui : c'est un déterminant."
+    },
+    {
+      "consigne": "Quelle est la nature du mot en couleur ?",
+      "texte": "Il court [très] vite.",
+      "choix": ["Déterminant", "Pronom", "Adverbe", "Préposition"],
+      "bonne": 2,
+      "explication": "« très » est invariable et précise l'adverbe « vite » : c'est un adverbe."
+    },
+    {
+      "consigne": "Quelle est la nature du mot en couleur ?",
+      "texte": "Il part [avec] son frère.",
+      "choix": ["Déterminant", "Pronom", "Adverbe", "Préposition"],
+      "bonne": 3,
+      "explication": "« avec » est invariable et introduit le groupe « son frère » : c'est une préposition."
+    },
+    {
+      "consigne": "Quelle est la nature du mot en couleur ?",
+      "texte": "Je [leur] parle souvent.",
+      "choix": ["Déterminant", "Pronom", "Adverbe", "Préposition"],
+      "bonne": 1,
+      "explication": "« leur » est placé devant le verbe « parle » et remplace des personnes : c'est un pronom (COI)."
+    },
+    {
+      "consigne": "Quelle est la nature du mot en couleur ?",
+      "texte": "[Leur] maison est grande.",
+      "choix": ["Déterminant", "Pronom", "Adverbe", "Préposition"],
+      "bonne": 0,
+      "explication": "« leur » est placé devant le nom « maison » : c'est un déterminant possessif."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Antécédent",
+      "acceptees": ["Antécédent", "L'antécédent", "Un antécédent"],
+      "indices": [
+        "Je suis un mot ou un groupe de mots d'une phrase.",
+        "Un pronom est là pour me remplacer.",
+        "Dans « Le Cyclope dort. Ulysse l'aveugle. », je suis « le Cyclope »."
+      ],
+      "explication": "L'antécédent est le mot ou le groupe que le pronom remplace : « l' » a pour antécédent « le Cyclope »."
+    },
+    {
+      "reponse": "Adverbe",
+      "acceptees": ["Adverbe", "Un adverbe", "L'adverbe"],
+      "indices": [
+        "Je suis un mot invariable.",
+        "Je précise un verbe, un adjectif ou un mot de ma propre classe.",
+        "On me reconnaît dans « vite », « très » ou « hier »."
+      ],
+      "explication": "L'adverbe est invariable et modifie un verbe, un adjectif ou un autre adverbe : vite, très, hier."
+    },
+    {
+      "reponse": "Préposition",
+      "acceptees": ["Préposition", "Une préposition", "La préposition"],
+      "indices": [
+        "Je suis un mot invariable.",
+        "J'introduis un groupe de mots.",
+        "Je suis « à », « dans », « sans » ou « avec »."
+      ],
+      "explication": "La préposition est invariable et introduit un groupe : à, de, dans, par, pour, sans, avec, sur, sous, chez."
+    },
+    {
+      "reponse": "Déterminant",
+      "acceptees": ["Déterminant", "Un déterminant", "Le déterminant"],
+      "indices": [
+        "Je suis un mot variable.",
+        "Je me place devant le nom et je m'accorde avec lui.",
+        "Je suis « le », « un », « mon » ou « ce »."
+      ],
+      "explication": "Le déterminant se place devant le nom et s'accorde avec lui : article, possessif ou démonstratif."
+    }
+  ],
+  "calculs": [],
+  "etapes": []
+}

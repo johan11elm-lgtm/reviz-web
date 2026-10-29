@@ -1,0 +1,138 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Le comique de mots",
+      "detail": "Le rire vient de la manière de parler : langage déformé, termes inventés, sens détournés, insultes.",
+      "cartes": [
+        "Un médecin parle un latin de cuisine à ses malades",
+        "Une servante écorche les termes savants qu'elle emploie",
+        "Deux personnages se lancent des insultes inventées",
+        "Un valet joue sur les deux sens d'un même terme",
+        "Un personnage prononce tout de travers avec un accent exagéré"
+      ]
+    },
+    {
+      "nom": "Le comique de gestes",
+      "detail": "Le rire vient de ce que font les corps : coups de bâton, chutes, grimaces, maladresses.",
+      "cartes": [
+        "Un valet donne des coups de bâton à son maître",
+        "Un personnage glisse sur une peau de banane",
+        "Un comédien se cogne contre la porte en entrant",
+        "Un acteur fait des grimaces exagérées",
+        "Un domestique renverse un plateau en trébuchant"
+      ]
+    },
+    {
+      "nom": "Le comique de situation",
+      "detail": "Le rire vient de l'embarras où se trouvent les personnages : quiproquo, personnage caché, déguisement.",
+      "cartes": [
+        "Un père prend un inconnu pour son futur gendre",
+        "Un mari caché sous la table écoute sa femme",
+        "Un amoureux se cache dans un placard",
+        "Un jeune homme se déguise en servante pour entrer",
+        "Un fils prend son père pour un voleur"
+      ]
+    },
+    {
+      "nom": "Le comique de caractère",
+      "detail": "Le rire vient d'un défaut exagéré du personnage : avarice, crédulité, vantardise, jalousie, paresse.",
+      "cartes": [
+        "Un avare cache son argent et soupçonne tout le monde",
+        "Un homme crédule croit toutes les histoires qu'on lui raconte",
+        "Un fanfaron se vante d'exploits qu'il n'a jamais accomplis",
+        "Un jaloux surveille sa femme et la croit toujours coupable",
+        "Un paresseux refuse de travailler et dort toute la journée"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Que représente le passage en couleur ?",
+      "texte": "GÉRONTE. — Que ce valet est fidèle ! SCAPIN, à part. — [Le pauvre homme ne se doute de rien.]",
+      "choix": ["Didascalie", "Aparté", "Monologue"],
+      "bonne": 1,
+      "explication": "Scapin parle de Géronte, qui est présent mais n'est pas censé l'entendre, alors que le public l'entend : c'est un aparté."
+    },
+    {
+      "consigne": "Que représente le passage en couleur ?",
+      "texte": "SCAPIN, [en changeant de voix]. — Où est-il, ce coquin de Géronte ?",
+      "choix": ["Didascalie", "Aparté", "Monologue"],
+      "bonne": 0,
+      "explication": "« en changeant de voix » est une indication de jeu donnée par l'auteur : elle n'est pas prononcée, c'est une didascalie."
+    },
+    {
+      "consigne": "Que représente le passage en couleur ?",
+      "texte": "SCAPIN, seul. — [Il me faut de l'argent avant ce soir. Mais comment en trouver ?]",
+      "choix": ["Didascalie", "Aparté", "Monologue"],
+      "bonne": 2,
+      "explication": "Scapin est seul en scène et parle pour lui-même : c'est un monologue. Dans un aparté, d'autres personnages seraient présents."
+    },
+    {
+      "consigne": "Que représente le passage en couleur ?",
+      "texte": "ARGANTE, [furieux, entrant à grands pas]. — Où est mon fils ?",
+      "choix": ["Didascalie", "Aparté", "Monologue"],
+      "bonne": 0,
+      "explication": "« furieux, entrant à grands pas » indique le ton et le déplacement d'Argante : ce sont des didascalies, que les acteurs ne prononcent pas."
+    },
+    {
+      "consigne": "Que représente le passage en couleur ?",
+      "texte": "ARGANTE. — Je te crois, Scapin. SCAPIN, à part. — [Quel bon tour je lui joue !]",
+      "choix": ["Didascalie", "Aparté", "Monologue"],
+      "bonne": 1,
+      "explication": "Argante est présent mais n'entend pas cette réplique, que seul le public entend : c'est un aparté."
+    },
+    {
+      "consigne": "Que représente le passage en couleur ?",
+      "texte": "LÉANDRE, seul sur la scène. — [Que faire ? Mon père arrive et je n'ai pas un sou !]",
+      "choix": ["Didascalie", "Aparté", "Monologue"],
+      "bonne": 2,
+      "explication": "Léandre est seul sur la scène : il parle pour lui-même devant le public, c'est un monologue."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Molière",
+      "acceptees": ["Moliere", "Jean-Baptiste Poquelin", "Poquelin"],
+      "indices": [
+        "Je suis né en 1622 et je suis mort en 1673.",
+        "Je suis à la fois comédien et auteur de théâtre.",
+        "J'ai écrit L'Avare et Les Fourberies de Scapin."
+      ],
+      "explication": "Molière (Jean-Baptiste Poquelin, 1622-1673) est l'auteur de L'Avare (1668) et des Fourberies de Scapin (1671)."
+    },
+    {
+      "reponse": "Aparté",
+      "acceptees": ["Un aparté", "L'aparté", "À part"],
+      "indices": [
+        "Je suis une réplique de théâtre.",
+        "Un personnage me dit pour lui-même, alors que d'autres personnages sont sur scène.",
+        "Le public m'entend, mais les autres personnages ne m'entendent pas."
+      ],
+      "explication": "L'aparté est une réplique que le personnage dit pour lui-même : le public l'entend, mais pas les autres personnages."
+    },
+    {
+      "reponse": "Quiproquo",
+      "acceptees": ["Un quiproquo", "Le quiproquo"],
+      "indices": [
+        "Je suis un ressort du comique de situation.",
+        "Je repose sur une confusion qui fait rire le public.",
+        "Avec moi, un personnage prend une personne ou une chose pour une autre."
+      ],
+      "explication": "Le quiproquo est un malentendu où un personnage prend une personne ou une chose pour une autre."
+    },
+    {
+      "reponse": "Commedia dell'arte",
+      "acceptees": ["La commedia dell'arte", "Commedia dell arte", "Commedia"],
+      "indices": [
+        "Je suis un type de théâtre né en Italie au XVIe siècle.",
+        "Mes acteurs jouent masqués et improvisent à partir d'un canevas.",
+        "Arlequin et Pantalon sont parmi mes personnages types."
+      ],
+      "explication": "La commedia dell'arte est un théâtre italien du XVIe siècle : des acteurs masqués improvisent avec des personnages types, comme Arlequin."
+    }
+  ],
+  "calculs": [],
+  "etapes": []
+}

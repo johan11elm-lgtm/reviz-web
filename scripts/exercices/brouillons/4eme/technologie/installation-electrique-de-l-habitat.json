@@ -1,0 +1,207 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "L'organisation de l'installation",
+      "detail": "Les éléments qui amènent l'électricité dans le logement et la répartissent : compteur, tableau, circuits.",
+      "cartes": [
+        "Mesure l'énergie consommée en kilowattheures",
+        "Répartit le courant entre les circuits du logement",
+        "Tension alternative de 230 V et de fréquence 50 Hz",
+        "Circuit qui alimente les lampes du logement",
+        "Circuit réservé aux appareils puissants"
+      ]
+    },
+    {
+      "nom": "Schémas et montages",
+      "detail": "Les façons de brancher les appareils et de les commander : dérivation, série, va-et-vient.",
+      "cartes": [
+        "Chaque appareil fonctionne seul sur sa propre branche",
+        "Débrancher un appareil coupe tous les autres",
+        "Une lampe commandée du bas et du haut d'un escalier",
+        "Deux interrupteurs simples dont il faut fermer les deux",
+        "Dessin utilisant des symboles normalisés"
+      ]
+    },
+    {
+      "nom": "Les dangers du courant",
+      "detail": "Les risques pour l'installation et pour les personnes : court-circuit, surcharge, électrisation, incendie.",
+      "cartes": [
+        "Courant très intense quand un fil relie les deux bornes",
+        "Trop d'appareils puissants sur une même multiprise",
+        "Un courant qui traverse le corps d'une personne",
+        "Des fils qui chauffent trop et provoquent un incendie",
+        "Un fil dénudé touche la carcasse d'un appareil"
+      ]
+    },
+    {
+      "nom": "Protections et sécurité",
+      "detail": "Les dispositifs et les règles qui protègent l'installation et les personnes.",
+      "cartes": [
+        "Coupe le circuit en cas de court-circuit ou de surcharge",
+        "Coupe le courant dès qu'il détecte une fuite",
+        "Évacue vers le sol un courant de fuite",
+        "Couper le courant avant toute intervention",
+        "La norme NF C 15-100, pour la sécurité des logements"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "une surcharge sur un circuit",
+      "carte": "Trop d'appareils puissants sont branchés sur le même circuit",
+      "role": "cause",
+      "explication": "C'est l'accumulation d'appareils puissants qui provoque la surcharge."
+    },
+    {
+      "fait": "une surcharge sur un circuit",
+      "carte": "Les fils chauffent, avec un risque d'incendie",
+      "role": "consequence",
+      "explication": "Un courant trop fort fait chauffer les fils et peut déclencher un incendie."
+    },
+    {
+      "fait": "une surcharge sur un circuit",
+      "carte": "Le disjoncteur coupe le circuit",
+      "role": "consequence",
+      "explication": "Le disjoncteur réagit à la surcharge en coupant le circuit pour protéger les fils."
+    },
+    {
+      "fait": "une fuite de courant",
+      "carte": "Un fil dénudé touche la carcasse métallique d'un appareil",
+      "role": "cause",
+      "explication": "Le contact entre le fil et la carcasse fait fuir le courant."
+    },
+    {
+      "fait": "une fuite de courant",
+      "carte": "L'interrupteur différentiel 30 mA coupe le courant",
+      "role": "consequence",
+      "explication": "Le différentiel détecte la fuite et coupe l'alimentation pour protéger les personnes."
+    },
+    {
+      "fait": "une fuite de courant",
+      "carte": "La prise de terre évacue le courant vers le sol",
+      "role": "consequence",
+      "explication": "Le fil de terre guide le courant de fuite vers le sol au lieu de traverser l'utilisateur."
+    }
+  ],
+  "etiquettes": [
+    {
+      "consigne": "Quel montage le passage en couleur décrit-il ?",
+      "texte": "Dans un escalier, [la lampe s'allume ou s'éteint depuis le bas comme depuis le haut].",
+      "choix": ["En série", "En dérivation", "En va-et-vient"],
+      "bonne": 2,
+      "explication": "Commander une même lampe depuis deux endroits demande un montage va-et-vient."
+    },
+    {
+      "consigne": "Quel montage le passage en couleur décrit-il ?",
+      "texte": "Dans un logement, [chaque prise reçoit 230 V et fonctionne seule].",
+      "choix": ["En série", "En dérivation", "En va-et-vient"],
+      "bonne": 1,
+      "explication": "Les appareils d'un logement sont en dérivation : chacun reçoit 230 V et fonctionne indépendamment."
+    },
+    {
+      "consigne": "Quel montage le passage en couleur décrit-il ?",
+      "texte": "Quand on dévisse une lampe, [toutes les autres s'éteignent].",
+      "choix": ["En série", "En dérivation", "En va-et-vient"],
+      "bonne": 0,
+      "explication": "En série, retirer un appareil coupe le circuit et arrête tous les autres."
+    },
+    {
+      "consigne": "Quel montage le passage en couleur décrit-il ?",
+      "texte": "Dans un couloir, [deux commutateurs commandent la même lampe].",
+      "choix": ["En série", "En dérivation", "En va-et-vient"],
+      "bonne": 2,
+      "explication": "Deux commutateurs pour une même lampe : c'est le montage va-et-vient."
+    },
+    {
+      "consigne": "Quel montage le passage en couleur décrit-il ?",
+      "texte": "Le four et le lave-linge fonctionnent séparément : [chacun est sur sa propre branche].",
+      "choix": ["En série", "En dérivation", "En va-et-vient"],
+      "bonne": 1,
+      "explication": "Chaque appareil sur sa propre branche : c'est le montage en dérivation."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Disjoncteur",
+      "acceptees": ["Le disjoncteur", "Disjoncteur divisionnaire"],
+      "indices": [
+        "Je suis installé dans le tableau électrique.",
+        "Je coupe le circuit en cas de court-circuit ou de surcharge.",
+        "Je protège surtout l'installation, pas directement les personnes."
+      ],
+      "explication": "Le disjoncteur protège l'installation en coupant le circuit en cas de surcharge ou de court-circuit."
+    },
+    {
+      "reponse": "Court-circuit",
+      "acceptees": ["Un court-circuit", "Court circuit"],
+      "indices": [
+        "Je suis un danger pour une installation électrique.",
+        "Je relie les deux bornes du générateur par un fil, sans appareil.",
+        "Mon courant est très intense et je peux provoquer un incendie."
+      ],
+      "explication": "Un court-circuit relie directement les deux bornes du générateur : le courant devient très intense."
+    },
+    {
+      "reponse": "Va-et-vient",
+      "acceptees": ["Le va-et-vient", "Montage va-et-vient"],
+      "indices": [
+        "Je suis un montage qui sert à commander.",
+        "J'utilise deux commutateurs.",
+        "Grâce à moi, on allume ou on éteint une même lampe depuis deux endroits."
+      ],
+      "explication": "Le va-et-vient utilise deux commutateurs pour commander une lampe depuis deux endroits."
+    },
+    {
+      "reponse": "Prise de terre",
+      "acceptees": ["La terre", "Terre", "Fil de terre"],
+      "indices": [
+        "Je suis reliée aux carcasses métalliques des appareils.",
+        "Mon fil est vert et jaune.",
+        "J'évacue vers le sol un courant de fuite."
+      ],
+      "explication": "La prise de terre évacue vers le sol les courants de fuite ; son fil est vert et jaune."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "Le compteur indique 12 450 kWh au début du mois et 12 630 kWh au début du mois suivant. Quelle énergie le logement a-t-il consommée dans le mois, en kWh ?",
+      "reponse": 180,
+      "unite": "kWh",
+      "tolerance": 0,
+      "explication": "12 630 − 12 450 = 180 kWh."
+    },
+    {
+      "question": "Un logement a consommé 180 kWh dans le mois. Le kilowattheure coûte 0,25 €. Quel est le coût de cette électricité, en euros ?",
+      "reponse": 45,
+      "unite": "€",
+      "tolerance": 0,
+      "explication": "180 × 0,25 = 45 €."
+    },
+    {
+      "question": "Un courant de fuite a une intensité de 0,05 A. Exprime cette intensité en mA.",
+      "reponse": 50,
+      "unite": "mA",
+      "tolerance": 0,
+      "explication": "1 A = 1 000 mA, donc 0,05 A = 0,05 × 1 000 = 50 mA."
+    },
+    {
+      "question": "L'interrupteur différentiel d'un logement coupe le courant à partir de 30 mA. Exprime cette intensité en ampères.",
+      "reponse": 0.03,
+      "unite": "A",
+      "tolerance": 0,
+      "explication": "1 mA = 0,001 A, donc 30 mA = 30 × 0,001 = 0,03 A."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Le chemin de l'électricité dans un logement",
+      "etapes": [
+        "Le courant arrive par le compteur",
+        "Le tableau électrique le répartit en circuits",
+        "Un circuit l'amène jusqu'à la prise",
+        "L'appareil branché sur la prise fonctionne"
+      ]
+    }
+  ]
+}

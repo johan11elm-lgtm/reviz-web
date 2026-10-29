@@ -1,0 +1,148 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Les comparaisons avec un outil",
+      "detail": "Deux éléments rapprochés à l'aide d'un outil comme « comme », « tel » ou « pareil à ».",
+      "cartes": [
+        "Ses joues sont rouges comme des pommes",
+        "Le navire glisse tel un cygne sur l'eau",
+        "Cet homme est pareil à un vieux chêne",
+        "Les nuages ressemblent à des moutons",
+        "Sa voix est douce comme du miel"
+      ]
+    },
+    {
+      "nom": "Les métaphores sans outil",
+      "detail": "Deux éléments rapprochés directement, sans outil de comparaison.",
+      "cartes": [
+        "Ses yeux sont deux étoiles",
+        "La neige est un tapis blanc",
+        "Le désert est un océan de sable",
+        "Cette ville est une immense fourmilière",
+        "Le train est un long serpent d'acier"
+      ]
+    },
+    {
+      "nom": "Les personnifications",
+      "detail": "Une chose ou un animal à qui l'on prête des gestes ou des sentiments humains.",
+      "cartes": [
+        "Le vent murmure des secrets aux arbres",
+        "La lune sourit aux voyageurs de la nuit",
+        "Le soleil se lève en bâillant",
+        "Les vagues se disputent la plage",
+        "Le vieux train soupire en entrant en gare"
+      ]
+    },
+    {
+      "nom": "Les anaphores",
+      "detail": "Un même mot ou groupe de mots répété au début de plusieurs vers ou phrases.",
+      "cartes": [
+        "Loin des villes, loin du bruit, loin de tout",
+        "Je vois la mer, je vois le ciel",
+        "Ici le vent, ici le sable, ici le silence",
+        "Pour la liberté, pour le voyage, pour la vie",
+        "Chaque matin un nouveau ciel, chaque matin un nouveau pays"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Quelle est la disposition des rimes du passage en couleur ?",
+      "texte": "Dans « Les Regrets », Du Bellay écrit : [Heureux qui, comme Ulysse, a fait un beau voyage, / Ou comme cestuy-là qui conquit la toison, / Et puis est retourné, plein d'usage et raison, / Vivre entre ses parents le reste de son âge !]",
+      "choix": ["Rimes plates", "Rimes croisées", "Rimes embrassées"],
+      "bonne": 2,
+      "explication": "Les fins de vers donnent voyage (A), toison (B), raison (B), âge (A) : la paire B est encadrée par la rime A, ce sont des rimes embrassées (ABBA)."
+    },
+    {
+      "consigne": "Quelle est la disposition des rimes du passage en couleur ?",
+      "texte": "Dans « Demain, dès l'aube », Victor Hugo écrit : [Demain, dès l'aube, à l'heure où blanchit la campagne, / Je partirai. Vois-tu, je sais que tu m'attends. / J'irai par la forêt, j'irai par la montagne. / Je ne puis demeurer loin de toi plus longtemps.]",
+      "choix": ["Rimes plates", "Rimes croisées", "Rimes embrassées"],
+      "bonne": 1,
+      "explication": "Les fins de vers donnent campagne (A), attends (B), montagne (A), longtemps (B) : les deux rimes alternent, ce sont des rimes croisées (ABAB)."
+    },
+    {
+      "consigne": "Quelle est la disposition des rimes du passage en couleur ?",
+      "texte": "Dans « Booz endormi », Victor Hugo écrit : [Booz s'était couché de fatigue accablé ; / Il avait tout le jour travaillé dans son aire ; / Puis avait fait son lit à sa place ordinaire ; / Booz dormait auprès des grains entassés.]",
+      "choix": ["Rimes plates", "Rimes croisées", "Rimes embrassées"],
+      "bonne": 2,
+      "explication": "Les fins de vers donnent accablé (A), aire (B), ordinaire (B), entassés (A) : la paire B est encadrée par la rime A, ce sont des rimes embrassées (ABBA)."
+    },
+    {
+      "consigne": "Quelle est la disposition des rimes du passage en couleur ?",
+      "texte": "Un élève écrit un poème de voyage : [Je m'en vais demain, au petit matin, / Sur les routes du pays lointain. / Le vent m'appelle, la mer m'attend, / Et mon cœur chante en partant.]",
+      "choix": ["Rimes plates", "Rimes croisées", "Rimes embrassées"],
+      "bonne": 0,
+      "explication": "Les fins de vers donnent matin (A), lointain (A), attend (B), partant (B) : les rimes se suivent deux par deux, ce sont des rimes plates (AABB)."
+    },
+    {
+      "consigne": "Quelle est la disposition des rimes du passage en couleur ?",
+      "texte": "Un élève écrit un poème de voyage : [Le bateau quitte le port, / Le soleil brille sur l'eau, / Il part vers les îles d'or, / Sous un ciel toujours nouveau.]",
+      "choix": ["Rimes plates", "Rimes croisées", "Rimes embrassées"],
+      "bonne": 1,
+      "explication": "Les fins de vers donnent port (A), eau (B), or (A), nouveau (B) : les deux rimes alternent, ce sont des rimes croisées (ABAB)."
+    },
+    {
+      "consigne": "Quelle est la disposition des rimes du passage en couleur ?",
+      "texte": "Un élève écrit un poème de voyage : [Le voyageur marche sur la route, / Sans jamais craindre le moindre doute. / La nuit tombe sur les montagnes, / Et le silence gagne les campagnes.]",
+      "choix": ["Rimes plates", "Rimes croisées", "Rimes embrassées"],
+      "bonne": 0,
+      "explication": "Les fins de vers donnent route (A), doute (A), montagnes (B), campagnes (B) : les rimes se suivent deux par deux, ce sont des rimes plates (AABB)."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Haïku",
+      "acceptees": ["Haïku", "Haiku", "Un haïku"],
+      "indices": [
+        "Je suis un poème extrêmement court.",
+        "Je viens du Japon et je saisis un instant de nature.",
+        "Je compte trois vers, traditionnellement de 5, 7 et 5 syllabes."
+      ],
+      "explication": "Le haïku est un court poème japonais de trois vers (5, 7 et 5 syllabes) qui saisit un instant de nature."
+    },
+    {
+      "reponse": "Sonnet",
+      "acceptees": ["Sonnet", "Un sonnet", "Le sonnet"],
+      "indices": [
+        "Je suis un poème composé de quatre strophes.",
+        "Mes deux premières strophes ont quatre vers, les deux dernières en ont trois.",
+        "Je compte quatorze vers en tout."
+      ],
+      "explication": "Le sonnet compte 14 vers : deux quatrains suivis de deux tercets."
+    },
+    {
+      "reponse": "Blaise Cendrars",
+      "acceptees": ["Cendrars", "Blaise Cendrars"],
+      "indices": [
+        "Je suis un poète du XXe siècle.",
+        "Poète voyageur, j'ai écrit la Prose du Transsibérien en 1913.",
+        "La formule « Du monde entier au cœur du monde » vient de moi."
+      ],
+      "explication": "Blaise Cendrars (1887-1961), poète voyageur, est l'auteur de la Prose du Transsibérien et de la formule « Du monde entier au cœur du monde »."
+    },
+    {
+      "reponse": "Joachim du Bellay",
+      "acceptees": ["Du Bellay", "Joachim du Bellay", "Bellay"],
+      "indices": [
+        "Je suis un poète du XVIe siècle.",
+        "J'ai écrit Les Regrets, qui datent de 1558.",
+        "Loin de chez moi, j'ai écrit « Heureux qui, comme Ulysse, a fait un beau voyage »."
+      ],
+      "explication": "Du Bellay écrit Les Regrets (1558), où il rêve, loin de chez lui, de retrouver son village."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Ces poètes voyageurs, du plus ancien au plus récent",
+      "etapes": [
+        "Du Bellay écrit Les Regrets",
+        "Bashô écrit ses journaux de voyage",
+        "Baudelaire publie Les Fleurs du mal",
+        "Cendrars écrit la Prose du Transsibérien"
+      ]
+    }
+  ]
+}

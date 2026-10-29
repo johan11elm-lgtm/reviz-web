@@ -1,0 +1,142 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "L'œuvre de Jules Verne",
+      "detail": "Des romans d'aventures scientifiques écrits avec enthousiasme : De la Terre à la Lune (1865), Vingt mille lieues sous les mers (1869-1870).",
+      "cartes": [
+        "Un voyage vers la Lune imaginé en 1865",
+        "Un sous-marin, le Nautilus, explore les océans",
+        "Un auteur enthousiaste devant les inventions de son temps",
+        "Un roman publié en 1869-1870",
+        "Des aventures scientifiques qui font rêver le lecteur"
+      ]
+    },
+    {
+      "nom": "L'œuvre de Mary Shelley",
+      "detail": "Frankenstein ou le Prométhée moderne (1818) : un savant crée un être vivant puis l'abandonne.",
+      "cartes": [
+        "Un savant donne la vie à un être qu'il a fabriqué",
+        "Après l'avoir créée, le savant abandonne sa créature",
+        "Le roman interroge la responsabilité du créateur",
+        "Un roman de 1818 sous-titré « le Prométhée moderne »",
+        "Son titre porte le nom du savant, pas celui de sa créature"
+      ]
+    },
+    {
+      "nom": "L'œuvre de George Orwell",
+      "detail": "1984 (1949) : un régime totalitaire surveille et contrôle chacun.",
+      "cartes": [
+        "Un pouvoir totalitaire surveille chaque habitant",
+        "Le slogan « Big Brother vous regarde » est affiché partout",
+        "Le pouvoir réécrit l'histoire pour garder le contrôle",
+        "Un roman publié en 1949",
+        "Son titre est une année située dans le futur de l'auteur"
+      ]
+    },
+    {
+      "nom": "L'œuvre de Ray Bradbury",
+      "detail": "Fahrenheit 451 (1953) : une société où les livres sont interdits et brûlés par des pompiers.",
+      "cartes": [
+        "Des pompiers sont chargés de brûler les livres",
+        "Dans ce monde, posséder des livres est interdit",
+        "Son titre est la température où le papier s'enflamme",
+        "Un roman publié en 1953",
+        "Les pompiers allument des feux au lieu de les éteindre"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Quel genre de récit le passage en couleur illustre-t-il ?",
+      "texte": "Dans cette cité imaginaire, [tous les habitants vivent heureux, libres et égaux, sans pauvreté ni guerre].",
+      "choix": ["Une utopie", "Une dystopie", "Une autobiographie"],
+      "bonne": 0,
+      "explication": "Une société idéale imaginaire, où rien n'opprime personne, est une utopie."
+    },
+    {
+      "consigne": "Quel genre de récit le passage en couleur illustre-t-il ?",
+      "texte": "Dans cette ville, [un pouvoir unique observe chaque habitant et punit tout désaccord, tout en affirmant que tous sont heureux].",
+      "choix": ["Une utopie", "Une dystopie", "Une autobiographie"],
+      "bonne": 1,
+      "explication": "La société se dit idéale mais elle est oppressive : surveillance et punition. C'est une dystopie, qui avertit le lecteur."
+    },
+    {
+      "consigne": "Quel genre de récit le passage en couleur illustre-t-il ?",
+      "texte": "Le gouvernement assure que le bonheur est total ; [pourtant, les livres sont brûlés et nul n'ose penser autrement].",
+      "choix": ["Une utopie", "Une dystopie", "Une autobiographie"],
+      "bonne": 1,
+      "explication": "Derrière l'image d'une société heureuse, la liberté de penser a disparu : c'est une dystopie."
+    },
+    {
+      "consigne": "Quel genre de récit le passage en couleur illustre-t-il ?",
+      "texte": "Sur cette île imaginaire, [chacun mange à sa faim, partage les richesses et vit en paix avec ses voisins].",
+      "choix": ["Une utopie", "Une dystopie", "Une autobiographie"],
+      "bonne": 0,
+      "explication": "Rien ne vient opprimer les habitants : c'est la description d'une société idéale imaginaire, une utopie."
+    },
+    {
+      "consigne": "Quel genre de récit le passage en couleur illustre-t-il ?",
+      "texte": "Chaque matin, [les habitants sont conditionnés pour accepter la place qu'on leur a imposée, sans jamais protester].",
+      "choix": ["Une utopie", "Une dystopie", "Une autobiographie"],
+      "bonne": 1,
+      "explication": "Le conditionnement prive les habitants de leur liberté : la société est oppressive, c'est une dystopie."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Victor Frankenstein",
+      "acceptees": ["Frankenstein", "Victor Frankenstein", "Victor"],
+      "indices": [
+        "Je suis un personnage de roman, imaginé par Mary Shelley en 1818.",
+        "Je suis un savant, passionné par la science.",
+        "J'ai fabriqué un être vivant, puis je l'ai abandonné."
+      ],
+      "explication": "Victor Frankenstein est le savant du roman : c'est lui qui porte ce nom, pas la créature qu'il fabrique."
+    },
+    {
+      "reponse": "Utopie",
+      "acceptees": ["Utopie", "Une utopie", "Utopia"],
+      "indices": [
+        "Je suis un mot qui désigne une société imaginaire.",
+        "Mon nom vient d'un livre de Thomas More, paru en 1516.",
+        "Je décris une société idéale, où tout va pour le mieux."
+      ],
+      "explication": "L'utopie décrit une société idéale imaginaire ; le mot vient de l'Utopia de Thomas More (1516)."
+    },
+    {
+      "reponse": "Dystopie",
+      "acceptees": ["Dystopie", "Une dystopie", "Contre-utopie"],
+      "indices": [
+        "Je suis une société imaginaire.",
+        "Je me présente comme un monde parfait.",
+        "En réalité, je suis oppressive, et je sers d'avertissement au lecteur."
+      ],
+      "explication": "La dystopie, ou contre-utopie, est une société imaginaire présentée comme idéale mais en réalité oppressive."
+    },
+    {
+      "reponse": "Jules Verne",
+      "acceptees": ["Verne", "Jules Verne"],
+      "indices": [
+        "Je suis un écrivain français du XIXe siècle.",
+        "J'écris des romans d'aventures scientifiques, pleins d'enthousiasme pour le progrès.",
+        "J'ai imaginé un sous-marin nommé Nautilus et un voyage vers la Lune."
+      ],
+      "explication": "Jules Verne est l'auteur de Vingt mille lieues sous les mers et de De la Terre à la Lune."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Cinq œuvres, de la plus ancienne à la plus récente",
+      "etapes": [
+        "Utopia, de Thomas More",
+        "Frankenstein, de Mary Shelley",
+        "De la Terre à la Lune, de Jules Verne",
+        "1984, de George Orwell",
+        "Fahrenheit 451, de Ray Bradbury"
+      ]
+    }
+  ]
+}

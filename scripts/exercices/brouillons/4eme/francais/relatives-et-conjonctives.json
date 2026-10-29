@@ -1,0 +1,149 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Propositions juxtaposées",
+      "detail": "Des propositions placées côte à côte, séparées seulement par une virgule, un point-virgule ou deux-points.",
+      "cartes": [
+        "Il pleuvait ; nous sommes restés à la maison",
+        "Il fait froid, je mets mon manteau",
+        "Je suis arrivé, tout le monde dormait",
+        "Léa chante, Tom danse, Paul applaudit",
+        "Prends ton manteau : il fait froid dehors"
+      ]
+    },
+    {
+      "nom": "Propositions coordonnées",
+      "detail": "Des propositions reliées par une conjonction de coordination : mais, ou, et, donc, or, ni, car.",
+      "cartes": [
+        "Il pleut, donc je reste",
+        "Tu viens avec nous ou tu restes ici",
+        "Je voulais sortir, mais il pleuvait",
+        "Elle lit et son frère dessine",
+        "Je pensais gagner, or j'ai perdu"
+      ]
+    },
+    {
+      "nom": "Subordonnée relative",
+      "detail": "Une proposition qui complète un nom (l'antécédent) et commence par un pronom relatif : qui, que, dont, où, lequel…",
+      "cartes": [
+        "J'ai lu le roman que tu m'as prêté",
+        "J'aime les gens qui sourient",
+        "Voici la ville où je suis né",
+        "Le film dont tu parles est excellent",
+        "Voici le stylo avec lequel j'écris"
+      ]
+    },
+    {
+      "nom": "Subordonnée conjonctive",
+      "detail": "Une proposition introduite par une conjonction de subordination, qui ne remplace aucun mot : que, quand, parce que, si, tellement… que…",
+      "cartes": [
+        "Je reste à la maison parce qu'il pleut",
+        "Je sais que tu as raison",
+        "Nous dînerons quand il rentrera",
+        "Il pleuvait tellement que le match fut annulé",
+        "Je viendrai si tu m'invites"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Quel est le rôle du mot en couleur dans la phrase ?",
+      "texte": "J'ai lu le roman [que] tu m'as prêté.",
+      "choix": ["Pronom relatif", "Antécédent", "Conjonction de subordination", "Conjonction de coordination"],
+      "bonne": 0,
+      "explication": "« Que » reprend le nom « roman », placé juste avant lui : c'est un pronom relatif, COD de « as prêté »."
+    },
+    {
+      "consigne": "Quel est le rôle du mot en couleur dans la phrase ?",
+      "texte": "Je sais [que] tu as raison.",
+      "choix": ["Pronom relatif", "Antécédent", "Conjonction de subordination", "Conjonction de coordination"],
+      "bonne": 2,
+      "explication": "« Que » suit le verbe « sais » et ne remplace aucun nom : c'est une conjonction de subordination."
+    },
+    {
+      "consigne": "Quel est le rôle du mot en couleur dans la phrase ?",
+      "texte": "Voici le [stylo] avec lequel j'écris.",
+      "choix": ["Pronom relatif", "Antécédent", "Conjonction de subordination", "Conjonction de coordination"],
+      "bonne": 1,
+      "explication": "« Lequel » reprend le nom « stylo », placé avant lui : « stylo » est l'antécédent."
+    },
+    {
+      "consigne": "Quel est le rôle du mot en couleur dans la phrase ?",
+      "texte": "Il pleut, [donc] je reste.",
+      "choix": ["Pronom relatif", "Antécédent", "Conjonction de subordination", "Conjonction de coordination"],
+      "bonne": 3,
+      "explication": "« Donc » relie deux propositions de même niveau : c'est une conjonction de coordination."
+    },
+    {
+      "consigne": "Quel est le rôle du mot en couleur dans la phrase ?",
+      "texte": "J'aime les gens [qui] sourient.",
+      "choix": ["Pronom relatif", "Antécédent", "Conjonction de subordination", "Conjonction de coordination"],
+      "bonne": 0,
+      "explication": "« Qui » reprend « les gens » et il est sujet de « sourient » : c'est un pronom relatif."
+    },
+    {
+      "consigne": "Quel est le rôle du mot en couleur dans la phrase ?",
+      "texte": "Nous dînerons [quand] il rentrera.",
+      "choix": ["Pronom relatif", "Antécédent", "Conjonction de subordination", "Conjonction de coordination"],
+      "bonne": 2,
+      "explication": "« Quand » introduit une subordonnée de temps sans remplacer aucun mot : c'est une conjonction de subordination."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Antécédent",
+      "acceptees": ["L'antécédent", "Un antécédent"],
+      "indices": [
+        "Je suis un nom ou un pronom.",
+        "Je suis placé avant un autre mot, qui me reprend pour éviter une répétition.",
+        "Je suis le mot que « qui », « que » ou « dont » reprend dans une relative."
+      ],
+      "explication": "L'antécédent est le nom placé avant le pronom relatif : dans « le roman que tu lis », c'est « roman »."
+    },
+    {
+      "reponse": "Complétive",
+      "acceptees": ["Une complétive", "La complétive", "Conjonctive complétive", "Subordonnée complétive", "Proposition complétive", "Subordonnée conjonctive complétive", "Conjonctive"],
+      "indices": [
+        "Je suis une proposition subordonnée.",
+        "Je commence par « que ».",
+        "Je complète le verbe de la principale, et je peux être remplacée par « cela »."
+      ],
+      "explication": "La complétive est introduite par « que » et complète le verbe, le plus souvent comme COD : « Je pense que tu as raison » → « Je pense cela »."
+    },
+    {
+      "reponse": "Juxtaposition",
+      "acceptees": ["La juxtaposition", "Propositions juxtaposées", "Juxtaposées"],
+      "indices": [
+        "Je relie deux propositions.",
+        "Je n'utilise aucun mot de liaison.",
+        "On me reconnaît à une simple ponctuation : virgule, point-virgule ou deux-points."
+      ],
+      "explication": "Dans la juxtaposition, les propositions sont séparées par la seule ponctuation : « Il pleut, je reste »."
+    },
+    {
+      "reponse": "Conséquence",
+      "acceptees": ["La conséquence", "Une conséquence", "Circonstancielle de conséquence", "Subordonnée de conséquence"],
+      "indices": [
+        "Je suis un des sens que peut exprimer une subordonnée circonstancielle.",
+        "On me reconnaît à « si bien que » ou « de sorte que ».",
+        "Dans « Il pleuvait tellement que le match fut annulé », je suis ce que la pluie a produit."
+      ],
+      "explication": "La circonstancielle de conséquence indique le résultat de la principale : « si bien que », « de sorte que », « tellement… que »."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Analyser une phrase complexe",
+      "etapes": [
+        "Souligne tous les verbes conjugués de la phrase",
+        "Délimite chaque proposition avec des crochets",
+        "Repère le mot qui introduit la subordonnée",
+        "Cherche un antécédent placé avant ce mot",
+        "Donne la fonction de la subordonnée"
+      ]
+    }
+  ]
+}

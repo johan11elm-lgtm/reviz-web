@@ -1,0 +1,173 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Les innovations techniques",
+      "detail": "Les machines et les énergies nouvelles : charbon et vapeur d'abord, électricité, pétrole et chimie à la fin du XIXe siècle.",
+      "cartes": [
+        "La machine à vapeur perfectionnée par James Watt",
+        "Le charbon qui alimente les usines et les locomotives",
+        "L'électricité et le pétrole de la fin du XIXe siècle",
+        "Le moteur à explosion et l'apparition de l'automobile",
+        "La chimie, qui se développe à la fin du XIXe siècle"
+      ]
+    },
+    {
+      "nom": "Paysages et villes transformés",
+      "detail": "Ce que l'industrialisation change dans les paysages : mines, usines, voies ferrées, quartiers neufs et exode rural.",
+      "cartes": [
+        "Des puits de mine et des terrils dans un bassin minier",
+        "Des cheminées d'usine qui couvrent le ciel de fumée",
+        "Des voies ferrées qui sillonnent les campagnes",
+        "Les campagnes se vident et les villes grandissent très vite",
+        "Des rangées de maisons identiques près des usines"
+      ]
+    },
+    {
+      "nom": "Les patrons et le capitalisme",
+      "detail": "Le monde de la bourgeoisie : propriétaires d'usines, banquiers, recherche du profit et paternalisme.",
+      "cartes": [
+        "Patrons, banquiers et ingénieurs de plus en plus riches",
+        "Des banques et des sociétés par actions se développent",
+        "Des propriétaires privés possèdent les usines et cherchent le profit",
+        "Un patron loge et soigne son personnel pour être obéi",
+        "Les Schneider dirigent d'immenses usines au Creusot"
+      ]
+    },
+    {
+      "nom": "Les ouvriers et leurs luttes",
+      "detail": "La condition ouvrière au XIXe siècle et la façon dont les ouvriers s'organisent pour améliorer leur sort.",
+      "cartes": [
+        "Des journées de 12 à 15 heures de travail",
+        "Des enfants travaillent en usine",
+        "Des travailleurs arrêtent le travail pour de meilleurs salaires",
+        "Des travailleurs fondent une association pour se défendre",
+        "Marx et Engels appellent les prolétaires à s'unir"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "la croissance rapide des villes industrielles",
+      "carte": "Les usines embauchent beaucoup de monde",
+      "role": "cause",
+      "explication": "Les usines attirent des habitants qui cherchent du travail, et les villes grandissent."
+    },
+    {
+      "fait": "la croissance rapide des villes industrielles",
+      "carte": "L'exode rural pousse les paysans vers les villes",
+      "role": "cause",
+      "explication": "Les campagnes se vident au profit des villes, qui grandissent très vite."
+    },
+    {
+      "fait": "la croissance rapide des villes industrielles",
+      "carte": "Des quartiers ouvriers sont construits vite et souvent mal",
+      "role": "consequence",
+      "explication": "Comme les villes grandissent très vite, les quartiers ouvriers sont bâtis dans l'urgence."
+    },
+    {
+      "fait": "l'essor des syndicats ouvriers",
+      "carte": "Seul, un ouvrier ne peut rien obtenir face à son patron",
+      "role": "cause",
+      "explication": "Les ouvriers se regroupent en syndicats pour être plus forts face aux patrons."
+    },
+    {
+      "fait": "l'essor des syndicats ouvriers",
+      "carte": "Les ouvriers négocient ensemble salaires et horaires",
+      "role": "consequence",
+      "explication": "Grâce aux syndicats, les ouvriers réclament ensemble des salaires et des horaires plus justes."
+    }
+  ],
+  "etiquettes": [
+    {
+      "consigne": "À quelle époque correspond le passage en couleur ?",
+      "texte": "Au XVIIIe siècle, [un forgeron fabrique des outils à la main dans son atelier].",
+      "choix": ["Économie agricole et artisanale", "Première phase : vapeur et charbon", "Seconde phase : électricité et pétrole"],
+      "bonne": 0,
+      "explication": "Avant l'industrialisation, on produit surtout à la main, dans des ateliers : l'économie est agricole et artisanale."
+    },
+    {
+      "consigne": "À quelle époque correspond le passage en couleur ?",
+      "texte": "Vers 1800, dans une usine textile, [la machine à vapeur fait tourner les métiers grâce au charbon].",
+      "choix": ["Économie agricole et artisanale", "Première phase : vapeur et charbon", "Seconde phase : électricité et pétrole"],
+      "bonne": 1,
+      "explication": "La machine à vapeur au charbon caractérise la première phase de l'industrialisation."
+    },
+    {
+      "consigne": "À quelle époque correspond le passage en couleur ?",
+      "texte": "En 1830, [une locomotive à vapeur relie Liverpool à Manchester].",
+      "choix": ["Économie agricole et artisanale", "Première phase : vapeur et charbon", "Seconde phase : électricité et pétrole"],
+      "bonne": 1,
+      "explication": "La ligne Liverpool-Manchester utilise des locomotives à vapeur : c'est la première phase."
+    },
+    {
+      "consigne": "À quelle époque correspond le passage en couleur ?",
+      "texte": "Vers 1890, [des usines et des rues s'éclairent à l'électricité].",
+      "choix": ["Économie agricole et artisanale", "Première phase : vapeur et charbon", "Seconde phase : électricité et pétrole"],
+      "bonne": 2,
+      "explication": "L'électricité se diffuse à la fin du XIXe siècle : c'est la seconde phase."
+    },
+    {
+      "consigne": "À quelle époque correspond le passage en couleur ?",
+      "texte": "Vers 1900, [les premières automobiles roulent grâce au moteur à explosion et au pétrole].",
+      "choix": ["Économie agricole et artisanale", "Première phase : vapeur et charbon", "Seconde phase : électricité et pétrole"],
+      "bonne": 2,
+      "explication": "Le moteur à explosion et le pétrole appartiennent à la seconde phase de l'industrialisation."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "James Watt",
+      "acceptees": ["James Watt", "Watt"],
+      "indices": [
+        "Je suis un inventeur du XVIIIe siècle.",
+        "J'ai perfectionné une machine en 1769.",
+        "Ma machine à vapeur fonctionne au charbon et fait tourner les usines."
+      ],
+      "explication": "James Watt perfectionne la machine à vapeur en 1769."
+    },
+    {
+      "reponse": "Karl Marx",
+      "acceptees": ["Karl Marx", "Marx"],
+      "indices": [
+        "Je suis un penseur majeur du socialisme.",
+        "Je critique le capitalisme.",
+        "En 1848, je publie le Manifeste du Parti communiste avec Friedrich Engels."
+      ],
+      "explication": "Karl Marx publie le Manifeste du Parti communiste en 1848 avec Friedrich Engels."
+    },
+    {
+      "reponse": "Le paternalisme",
+      "acceptees": ["Paternalisme", "Le paternalisme"],
+      "indices": [
+        "Je suis un système pratiqué par certains patrons.",
+        "Le patron loge, soigne et éduque ses ouvriers.",
+        "En échange, il attend leur obéissance."
+      ],
+      "explication": "Dans le paternalisme, le patron prend en charge la vie de ses ouvriers en échange de leur obéissance."
+    },
+    {
+      "reponse": "L'exode rural",
+      "acceptees": ["Exode rural", "L'exode rural", "Lexode rural"],
+      "indices": [
+        "Je suis un déplacement de population.",
+        "Je vide les campagnes.",
+        "Je fais grandir les villes très vite."
+      ],
+      "explication": "L'exode rural est le départ massif des habitants des campagnes vers les villes."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Les grandes dates de l'industrialisation, de la plus ancienne à la plus récente",
+      "etapes": [
+        "James Watt perfectionne la machine à vapeur",
+        "La ligne de chemin de fer Liverpool-Manchester est ouverte",
+        "Marx et Engels publient le Manifeste du Parti communiste",
+        "En France, la grève n'est plus un délit",
+        "En France, les syndicats sont autorisés"
+      ]
+    }
+  ]
+}

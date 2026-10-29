@@ -1,0 +1,194 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Racines carrées égales à 5",
+      "detail": "Des racines carrées dont le résultat est 5, écrites de cinq façons différentes.",
+      "cartes": [
+        "√25",
+        "√(3² + 4²)",
+        "√(13² − 12²)",
+        "√(100 − 75)",
+        "√(10 × 2,5)"
+      ]
+    },
+    {
+      "nom": "Racines carrées égales à 8",
+      "detail": "Des racines carrées dont le résultat est 8, écrites de cinq façons différentes.",
+      "cartes": [
+        "√64",
+        "√(10² − 6²)",
+        "√(17² − 15²)",
+        "√(48 + 16)",
+        "√(128 ÷ 2)"
+      ]
+    },
+    {
+      "nom": "Racines carrées égales à 10",
+      "detail": "Des racines carrées dont le résultat est 10, écrites de cinq façons différentes.",
+      "cartes": [
+        "√100",
+        "√(6² + 8²)",
+        "√(26² − 24²)",
+        "√(150 − 50)",
+        "√(200 ÷ 2)"
+      ]
+    },
+    {
+      "nom": "Racines carrées égales à 12",
+      "detail": "Des racines carrées dont le résultat est 12, écrites de cinq façons différentes.",
+      "cartes": [
+        "√144",
+        "√(15² − 9²)",
+        "√(13² − 5²)",
+        "√(80 + 64)",
+        "√(72 × 2)"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Quel énoncé du cours utilise-t-on pour faire ce qui est en couleur ?",
+      "texte": "Le triangle ABC est rectangle en A, avec AB = 5 cm et AC = 12 cm. [On veut calculer la longueur BC.]",
+      "choix": ["Le théorème de Pythagore", "La réciproque", "La contraposée"],
+      "bonne": 0,
+      "explication": "Le triangle est connu rectangle et on cherche une longueur : on applique le théorème de Pythagore, BC² = AB² + AC²."
+    },
+    {
+      "consigne": "Quel énoncé du cours utilise-t-on pour faire ce qui est en couleur ?",
+      "texte": "Les côtés d'un triangle mesurent 6 cm, 8 cm et 10 cm. [On veut démontrer qu'il a un angle droit.]",
+      "choix": ["Le théorème de Pythagore", "La réciproque", "La contraposée"],
+      "bonne": 1,
+      "explication": "Pour prouver qu'un triangle est rectangle, on utilise la réciproque : 10² = 6² + 8², donc il est rectangle."
+    },
+    {
+      "consigne": "Quel énoncé du cours utilise-t-on pour faire ce qui est en couleur ?",
+      "texte": "Les côtés d'un triangle mesurent 4 cm, 5 cm et 6 cm. [On veut démontrer qu'il n'a pas d'angle droit.]",
+      "choix": ["Le théorème de Pythagore", "La réciproque", "La contraposée"],
+      "bonne": 2,
+      "explication": "Pour prouver qu'un triangle n'est pas rectangle, on utilise la contraposée : 6² = 36 et 4² + 5² = 41, donc 36 ≠ 41."
+    },
+    {
+      "consigne": "Quel énoncé du cours utilise-t-on pour faire ce qui est en couleur ?",
+      "texte": "Le triangle DEF est rectangle en E, avec DF = 13 cm et DE = 5 cm. [On cherche la longueur EF.]",
+      "choix": ["Le théorème de Pythagore", "La réciproque", "La contraposée"],
+      "bonne": 0,
+      "explication": "Le triangle est connu rectangle et on cherche une longueur : on applique le théorème de Pythagore, DF² = DE² + EF²."
+    },
+    {
+      "consigne": "Quel énoncé du cours utilise-t-on pour faire ce qui est en couleur ?",
+      "texte": "Un triangle a pour côtés 5 cm, 12 cm et 13 cm, et on a calculé 13² = 5² + 12². [On en déduit qu'il est rectangle.]",
+      "choix": ["Le théorème de Pythagore", "La réciproque", "La contraposée"],
+      "bonne": 1,
+      "explication": "Une égalité entre le carré du plus grand côté et la somme des deux autres carrés prouve l'angle droit : c'est la réciproque."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Hypoténuse",
+      "acceptees": ["Hypoténuse", "L'hypoténuse", "Le plus long côté", "Le côté opposé à l'angle droit"],
+      "indices": [
+        "Je suis un côté d'un triangle rectangle.",
+        "Je suis le plus long des trois côtés.",
+        "Je suis le côté opposé à l'angle droit."
+      ],
+      "explication": "L'hypoténuse est le côté opposé à l'angle droit : c'est le plus long côté du triangle rectangle."
+    },
+    {
+      "reponse": "Racine carrée",
+      "acceptees": ["Racine carrée", "La racine carrée", "Racine", "La racine"],
+      "indices": [
+        "Un nombre négatif n'a pas de moi.",
+        "Je suis le nombre positif qui, multiplié par lui-même, redonne le nombre de départ.",
+        "On me note avec le signe √."
+      ],
+      "explication": "La racine carrée de a est le nombre positif qui, multiplié par lui-même, donne a. Par exemple √49 = 7."
+    },
+    {
+      "reponse": "Réciproque",
+      "acceptees": ["Réciproque", "La réciproque", "La réciproque du théorème de Pythagore"],
+      "indices": [
+        "Je suis un énoncé lié au théorème de Pythagore.",
+        "On m'utilise pour démontrer qu'un triangle est rectangle.",
+        "J'échange l'hypothèse et la conclusion du théorème."
+      ],
+      "explication": "La réciproque du théorème de Pythagore prouve qu'un triangle est rectangle quand le carré du plus grand côté égale la somme des deux autres carrés."
+    },
+    {
+      "reponse": "Contraposée",
+      "acceptees": ["Contraposée", "La contraposée", "La contraposée du théorème de Pythagore"],
+      "indices": [
+        "Je suis un énoncé lié au théorème de Pythagore.",
+        "On m'utilise pour démontrer qu'un triangle n'est pas rectangle.",
+        "Je m'applique quand le carré du plus grand côté n'est pas égal à la somme des deux autres carrés."
+      ],
+      "explication": "La contraposée du théorème de Pythagore prouve qu'un triangle n'est pas rectangle quand l'égalité de Pythagore est fausse."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "Le triangle ABC est rectangle en A, avec AB = 9 cm et AC = 12 cm. Combien mesure BC ?",
+      "reponse": 15,
+      "unite": "cm",
+      "tolerance": 0,
+      "explication": "BC est l'hypoténuse : BC² = AB² + AC² = 81 + 144 = 225, donc BC = √225 = 15 cm."
+    },
+    {
+      "question": "Le triangle ABC est rectangle en A, avec BC = 20 cm et AB = 12 cm. Combien mesure AC ?",
+      "reponse": 16,
+      "unite": "cm",
+      "tolerance": 0,
+      "explication": "BC est l'hypoténuse : AC² = BC² − AB² = 400 − 144 = 256, donc AC = √256 = 16 cm."
+    },
+    {
+      "question": "Quel est le nombre positif dont le carré vaut 121 ?",
+      "reponse": 11,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "11² = 121 et la racine carrée est positive, donc √121 = 11."
+    },
+    {
+      "question": "Le triangle ABC est rectangle en A, avec AB = 2 cm et AC = 3 cm. Calcule BC, arrondi au dixième de centimètre.",
+      "reponse": 3.6,
+      "unite": "cm",
+      "tolerance": 0,
+      "explication": "BC² = 2² + 3² = 4 + 9 = 13, donc BC = √13 ≈ 3,6 cm."
+    },
+    {
+      "question": "Un écran rectangulaire mesure 80 cm de large et 60 cm de haut. Quelle est la longueur de sa diagonale ?",
+      "reponse": 100,
+      "unite": "cm",
+      "tolerance": 0,
+      "explication": "La diagonale est l'hypoténuse d'un triangle rectangle de côtés 80 et 60 : 80² + 60² = 6 400 + 3 600 = 10 000, donc la diagonale mesure √10 000 = 100 cm."
+    },
+    {
+      "question": "Une échelle de 5 m est posée contre un mur vertical. Son pied est à 3 m du mur, sur un sol horizontal. À quelle hauteur l'échelle touche-t-elle le mur ?",
+      "reponse": 4,
+      "unite": "m",
+      "tolerance": 0,
+      "explication": "L'échelle est l'hypoténuse : hauteur² = 5² − 3² = 25 − 9 = 16, donc la hauteur est √16 = 4 m."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Calculer une longueur avec le théorème de Pythagore",
+      "etapes": [
+        "Écrire les données : ABC est rectangle en A",
+        "Citer le théorème de Pythagore",
+        "Écrire l'égalité BC² = AB² + AC²",
+        "Remplacer par les longueurs et calculer BC²",
+        "Prendre la racine carrée pour trouver BC"
+      ]
+    },
+    {
+      "titre": "Savoir si un triangle est rectangle",
+      "etapes": [
+        "Repérer le plus grand côté du triangle",
+        "Calculer le carré de ce côté et la somme des carrés des deux autres",
+        "Comparer les deux résultats",
+        "Conclure avec la réciproque ou la contraposée"
+      ]
+    }
+  ]
+}

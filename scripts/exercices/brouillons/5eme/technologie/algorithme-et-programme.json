@@ -1,0 +1,178 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "De la recette au programme",
+      "detail": "Un algorithme est une suite ordonnée d'instructions ; traduit pour la machine, il devient un programme.",
+      "cartes": [
+        "Une recette de cuisine, étape par étape",
+        "Une suite finie et ordonnée d'instructions",
+        "Des instructions écrites dans un langage que la machine comprend",
+        "Scratch assemble des blocs, Python s'écrit au clavier",
+        "Changer l'ordre des instructions peut changer le résultat"
+      ]
+    },
+    {
+      "nom": "Les événements",
+      "detail": "Les actions qui déclenchent un script : drapeau vert, touche pressée, clic sur un lutin.",
+      "cartes": [
+        "Un clic sur le drapeau vert",
+        "L'appui sur la touche espace",
+        "Un clic sur un lutin",
+        "Ce qui déclenche l'exécution d'un script",
+        "Le bloc placé tout en haut d'un script"
+      ]
+    },
+    {
+      "nom": "Se repérer avec x et y",
+      "detail": "Les coordonnées d'un lutin sur la scène : x à l'horizontale, y à la verticale, centre en (0 ; 0).",
+      "cartes": [
+        "Au centre de la scène, x et y valent 0",
+        "x va de −240 à 240 sur la scène",
+        "y va de −180 à 180 sur la scène",
+        "Aller vers la droite fait augmenter x",
+        "x se lit à l'horizontale, y à la verticale"
+      ]
+    },
+    {
+      "nom": "Représenter et déboguer",
+      "detail": "L'organigramme représente l'algorithme avec des formes ; on teste ensuite le programme pour corriger les bugs.",
+      "cartes": [
+        "Un ovale marque le début ou la fin",
+        "Un rectangle contient une instruction à exécuter",
+        "Un losange contient un test oui ou non",
+        "Une erreur dans un programme s'appelle un bug",
+        "Tester, repérer l'erreur puis la corriger"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Dans quelle forme met-on le groupe en couleur ?",
+      "texte": "Dans l'organigramme d'un jeu, on lit : [Début].",
+      "choix": ["Ovale", "Rectangle", "Losange"],
+      "bonne": 0,
+      "explication": "Le début et la fin d'un organigramme se placent dans des ovales."
+    },
+    {
+      "consigne": "Dans quelle forme met-on le groupe en couleur ?",
+      "texte": "Dans l'organigramme d'un jeu, on lit : [Avancer de 100 pas].",
+      "choix": ["Ovale", "Rectangle", "Losange"],
+      "bonne": 1,
+      "explication": "Une instruction à exécuter se place dans un rectangle."
+    },
+    {
+      "consigne": "Dans quelle forme met-on le groupe en couleur ?",
+      "texte": "Dans l'organigramme d'un labyrinthe, on lit : [Le lutin touche-t-il le mur ?]",
+      "choix": ["Ovale", "Rectangle", "Losange"],
+      "bonne": 2,
+      "explication": "Une question à réponse oui ou non est un test : elle se place dans un losange."
+    },
+    {
+      "consigne": "Dans quelle forme met-on le groupe en couleur ?",
+      "texte": "Dans l'organigramme d'un jeu, on lit : [Tourner de 90 degrés].",
+      "choix": ["Ovale", "Rectangle", "Losange"],
+      "bonne": 1,
+      "explication": "Tourner est une instruction à exécuter : elle se place dans un rectangle."
+    },
+    {
+      "consigne": "Dans quelle forme met-on le groupe en couleur ?",
+      "texte": "Dans l'organigramme d'un jeu, on lit : [La touche espace est-elle pressée ?]",
+      "choix": ["Ovale", "Rectangle", "Losange"],
+      "bonne": 2,
+      "explication": "C'est un test avec une réponse oui ou non : il se place dans un losange."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Algorithme",
+      "acceptees": ["Un algorithme", "L'algorithme"],
+      "indices": [
+        "Je suis une suite d'étapes.",
+        "Une recette de cuisine me ressemble.",
+        "Quand on me traduit dans un langage compris par la machine, je deviens un programme."
+      ],
+      "explication": "Un algorithme est une suite finie et ordonnée d'instructions ; traduit pour la machine, il devient un programme."
+    },
+    {
+      "reponse": "Lutin",
+      "acceptees": ["Un lutin", "Le lutin", "Sprite"],
+      "indices": [
+        "Je suis un personnage ou un objet.",
+        "Je me déplace sur la scène.",
+        "Des scripts m'animent dans Scratch."
+      ],
+      "explication": "Le lutin est le personnage ou l'objet que l'on anime avec des scripts dans Scratch."
+    },
+    {
+      "reponse": "Organigramme",
+      "acceptees": ["Un organigramme", "L'organigramme"],
+      "indices": [
+        "Je suis un dessin.",
+        "J'utilise des ovales, des rectangles et des losanges.",
+        "Je représente un algorithme."
+      ],
+      "explication": "L'organigramme représente un algorithme avec des ovales, des rectangles et des losanges."
+    },
+    {
+      "reponse": "Bug",
+      "acceptees": ["Un bug", "Le bug", "Bugs"],
+      "indices": [
+        "Je suis une erreur.",
+        "Je me cache dans un programme.",
+        "On me cherche en testant, puis on me corrige."
+      ],
+      "explication": "Un bug est une erreur dans un programme : déboguer, c'est le trouver et le corriger."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "Un lutin est en x = −50. Il avance de 120 pas vers la droite. Quelle est la nouvelle valeur de x ?",
+      "reponse": 70,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "Aller vers la droite fait augmenter x : −50 + 120 = 70."
+    },
+    {
+      "question": "Sur la scène, x va de −240 à 240. Quelle est la largeur de la scène, en pas ?",
+      "reponse": 480,
+      "unite": "pas",
+      "tolerance": 0,
+      "explication": "240 − (−240) = 240 + 240 = 480 pas."
+    },
+    {
+      "question": "Sur la scène, y va de −180 à 180. Quelle est la hauteur de la scène, en pas ?",
+      "reponse": 360,
+      "unite": "pas",
+      "tolerance": 0,
+      "explication": "180 − (−180) = 180 + 180 = 360 pas."
+    },
+    {
+      "question": "Un lutin est en x = 40. Il avance de 90 pas vers la gauche. Quelle est la nouvelle valeur de x ?",
+      "reponse": -50,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "Aller vers la gauche fait diminuer x : 40 − 90 = −50."
+    },
+    {
+      "question": "Un lutin est en x = −200. Il avance de 300 pas vers la droite. Quelle est la nouvelle valeur de x ?",
+      "reponse": 100,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "Aller vers la droite fait augmenter x : −200 + 300 = 100."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Déboguer un programme",
+      "etapes": [
+        "On teste le programme",
+        "On remarque un résultat différent de celui attendu",
+        "On cherche l'instruction qui pose problème",
+        "On corrige l'erreur",
+        "On teste à nouveau pour vérifier"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,219 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Chercher un emploi",
+      "detail": "Partir à l'étranger pour trouver un poste ou un meilleur salaire.",
+      "cartes": [
+        "Un maçon part gagner sa vie dans un autre pays",
+        "Une infirmière accepte un poste dans un hôpital étranger",
+        "Un informaticien est embauché par une entreprise étrangère",
+        "Une couturière est engagée dans une usine à l'étranger",
+        "Un ouvrier part pour un meilleur salaire en Allemagne"
+      ]
+    },
+    {
+      "nom": "Rejoindre sa famille",
+      "detail": "Partir pour vivre auprès de proches déjà installés dans un autre pays.",
+      "cartes": [
+        "Des enfants retrouvent leurs parents installés à l'étranger",
+        "Une femme part vivre auprès de son mari à l'étranger",
+        "Un grand-père s'installe près de sa fille à l'étranger",
+        "Un père installé depuis longtemps fait venir ses enfants",
+        "Un neveu part vivre chez son oncle à l'étranger"
+      ]
+    },
+    {
+      "nom": "Fuir la guerre ou les persécutions",
+      "detail": "Quitter son pays pour échapper à un danger, comme le font les réfugiés.",
+      "cartes": [
+        "Des habitants quittent leur village attaqué par des soldats",
+        "Des Syriens partent sous les bombes depuis 2011",
+        "Un opposant menacé de prison s'exile à l'étranger",
+        "Des croyants menacés pour leur religion quittent leur pays",
+        "Des civils quittent leur pays pour échapper aux combats"
+      ]
+    },
+    {
+      "nom": "Partir à cause du climat",
+      "detail": "Quitter une région devenue trop dure ou trop dangereuse à cause du climat.",
+      "cartes": [
+        "Des insulaires quittent leur île que la mer envahit",
+        "Des éleveurs quittent leur région après des sécheresses répétées",
+        "Des habitants partent après des inondations qui reviennent chaque année",
+        "Des sinistrés d'un cyclone quittent définitivement leur région",
+        "Des habitants quittent une région devenue trop chaude"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "la baisse de la mortalité",
+      "carte": "Les progrès de la médecine",
+      "role": "cause",
+      "explication": "Mieux soigner les maladies fait reculer le nombre de décès."
+    },
+    {
+      "fait": "la baisse de la mortalité",
+      "carte": "Une meilleure hygiène",
+      "role": "cause",
+      "explication": "Avec plus d'hygiène, les maladies sont moins fréquentes et les décès diminuent."
+    },
+    {
+      "fait": "la baisse de la mortalité",
+      "carte": "Une alimentation plus abondante",
+      "role": "cause",
+      "explication": "La médecine, l'hygiène et l'alimentation sont les trois progrès qui font baisser la mortalité."
+    },
+    {
+      "fait": "la baisse de la mortalité",
+      "carte": "La population mondiale est multipliée par huit depuis 1800",
+      "role": "consequence",
+      "explication": "Les décès reculent alors que les naissances restent nombreuses : la population augmente très vite."
+    },
+    {
+      "fait": "la baisse de la mortalité",
+      "carte": "Les naissances dépassent largement les décès",
+      "role": "consequence",
+      "explication": "Les décès diminuent alors que la natalité reste forte : l'accroissement naturel devient très positif."
+    }
+  ],
+  "etiquettes": [
+    {
+      "consigne": "Quelle notion le groupe en couleur illustre-t-il ?",
+      "texte": "Dans cette ville, [1 200 bébés sont nés en un an].",
+      "choix": ["Natalité", "Mortalité", "Fécondité", "Accroissement naturel"],
+      "bonne": 0,
+      "explication": "Le nombre de naissances sur une année, c'est la natalité."
+    },
+    {
+      "consigne": "Quelle notion le groupe en couleur illustre-t-il ?",
+      "texte": "Dans cette ville, [800 personnes sont décédées en un an].",
+      "choix": ["Natalité", "Mortalité", "Fécondité", "Accroissement naturel"],
+      "bonne": 1,
+      "explication": "Le nombre de décès sur une année, c'est la mortalité."
+    },
+    {
+      "consigne": "Quelle notion le groupe en couleur illustre-t-il ?",
+      "texte": "Dans ce pays, [une femme a en moyenne quatre enfants].",
+      "choix": ["Natalité", "Mortalité", "Fécondité", "Accroissement naturel"],
+      "bonne": 2,
+      "explication": "Le nombre moyen d'enfants par femme, c'est la fécondité."
+    },
+    {
+      "consigne": "Quelle notion le groupe en couleur illustre-t-il ?",
+      "texte": "Une ville compte 1 200 naissances et 800 décès par an. On calcule [1 200 − 800 = +400].",
+      "choix": ["Natalité", "Mortalité", "Fécondité", "Accroissement naturel"],
+      "bonne": 3,
+      "explication": "Naissances moins décès : cette différence est l'accroissement naturel."
+    },
+    {
+      "consigne": "Quelle notion le groupe en couleur illustre-t-il ?",
+      "texte": "Pour que la population se renouvelle, il faut [environ 2,1 enfants par femme].",
+      "choix": ["Natalité", "Mortalité", "Fécondité", "Accroissement naturel"],
+      "bonne": 2,
+      "explication": "Un nombre moyen d'enfants par femme : c'est la fécondité, qui doit atteindre environ 2,1."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Accroissement naturel",
+      "acceptees": ["Accroissement naturel", "L'accroissement naturel", "Solde naturel"],
+      "indices": [
+        "Je suis un nombre qui dit si une population augmente ou diminue.",
+        "On me calcule avec une soustraction.",
+        "Je suis égal aux naissances moins les décès."
+      ],
+      "explication": "L'accroissement naturel est la différence entre les naissances et les décès."
+    },
+    {
+      "reponse": "Fécondité",
+      "acceptees": ["Fécondité", "La fécondité", "Taux de fécondité", "Indice de fécondité"],
+      "indices": [
+        "Je concerne les femmes d'un pays.",
+        "Je suis une moyenne, pas un total.",
+        "Je dois valoir environ 2,1 enfants par femme pour que la population se renouvelle."
+      ],
+      "explication": "La fécondité est le nombre moyen d'enfants par femme."
+    },
+    {
+      "reponse": "Exode rural",
+      "acceptees": ["Exode rural", "L'exode rural", "Exode"],
+      "indices": [
+        "Je suis un mouvement d'habitants.",
+        "J'alimente la croissance des villes, surtout en Afrique et en Asie.",
+        "Je suis le départ des habitants des campagnes vers les villes."
+      ],
+      "explication": "L'exode rural est le départ des habitants des campagnes vers les villes."
+    },
+    {
+      "reponse": "Réfugié",
+      "acceptees": ["Réfugié", "Un réfugié", "Réfugiés", "Les réfugiés", "Réfugiée"],
+      "indices": [
+        "Je suis un migrant international.",
+        "Des millions de Syriens sont devenus comme moi depuis 2011.",
+        "J'ai quitté mon pays pour fuir une guerre ou des persécutions."
+      ],
+      "explication": "Un réfugié quitte son pays pour fuir la guerre ou des persécutions."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "Une ville compte 1 500 naissances et 900 décès en un an. Quel est son accroissement naturel ?",
+      "reponse": 600,
+      "unite": "habitants",
+      "tolerance": 0,
+      "explication": "Accroissement naturel = naissances − décès = 1 500 − 900 = +600 habitants."
+    },
+    {
+      "question": "Un pays enregistre 30 000 naissances et 36 000 décès en un an. Quel est son accroissement naturel ?",
+      "reponse": -6000,
+      "unite": "habitants",
+      "tolerance": 0,
+      "explication": "Accroissement naturel = naissances − décès = 30 000 − 36 000 = −6 000 : le pays perd des habitants."
+    },
+    {
+      "question": "Une ville de 80 000 habitants compte 2 000 naissances et 1 200 décès en un an. On suppose qu'il n'y a ni arrivée ni départ. Combien d'habitants compte-t-elle à la fin de l'année ?",
+      "reponse": 80800,
+      "unite": "habitants",
+      "tolerance": 0,
+      "explication": "Accroissement naturel = 2 000 − 1 200 = +800. Puis 80 000 + 800 = 80 800 habitants."
+    },
+    {
+      "question": "Vers 1800, la Terre compte environ 1 milliard d'habitants ; en 2022, elle en compte 8 milliards. De combien de milliards a-t-elle augmenté ?",
+      "reponse": 7,
+      "unite": "milliards",
+      "tolerance": 0,
+      "explication": "8 − 1 = 7 milliards d'habitants de plus."
+    },
+    {
+      "question": "L'ONU prévoit environ 9,7 milliards d'habitants en 2050. Combien de milliards de plus qu'en 2022, où la Terre compte 8 milliards d'habitants ?",
+      "reponse": 1.7,
+      "unite": "milliards",
+      "tolerance": 0,
+      "explication": "9,7 − 8 = 1,7 milliard d'habitants de plus."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Pourquoi la croissance de la population ralentit",
+      "etapes": [
+        "La médecine, l'hygiène et l'alimentation progressent",
+        "La mortalité baisse",
+        "La population mondiale augmente très vite",
+        "La fécondité baisse presque partout",
+        "La croissance de la population ralentit"
+      ]
+    },
+    {
+      "titre": "Les milliards d'habitants de la Terre",
+      "etapes": [
+        "1 milliard d'habitants vers 1800",
+        "2 milliards d'habitants en 1927",
+        "6 milliards d'habitants en 1999",
+        "8 milliards d'habitants en 2022",
+        "9,7 milliards d'habitants prévus en 2050"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,138 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Une affirmation complète",
+      "detail": "Une phrase complète avec have got ou has got : I've got, she's got.",
+      "cartes": [
+        "I've got a goldfish",
+        "My sister has got long brown hair",
+        "They've got two black cats",
+        "He's got green eyes",
+        "The dog has got a red ball"
+      ]
+    },
+    {
+      "nom": "Une négation complète",
+      "detail": "Une phrase complète avec haven't got ou hasn't got.",
+      "cartes": [
+        "I haven't got a pet",
+        "She hasn't got a brother",
+        "We haven't got a dog",
+        "My hamster hasn't got a name",
+        "Tom hasn't got glasses"
+      ]
+    },
+    {
+      "nom": "Une question",
+      "detail": "On place Have ou Has devant le sujet, et got reste après.",
+      "cartes": [
+        "Have you got a pet?",
+        "Has your sister got a dog?",
+        "Have they got a guinea pig?",
+        "Has he got glasses?",
+        "Has your cat got green eyes?"
+      ]
+    },
+    {
+      "nom": "Une réponse courte",
+      "detail": "On répond Yes ou No avec have ou has, sans reprendre got.",
+      "cartes": [
+        "Yes, I have",
+        "No, she hasn't",
+        "Yes, they have",
+        "No, I haven't",
+        "Yes, he has"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Que signifie la contraction du passage en couleur ?",
+      "texte": "[She's] got glasses.",
+      "choix": ["Is", "Has", "Have"],
+      "bonne": 1,
+      "explication": "« She's got » veut dire she has got. Le mot got montre qu'il s'agit de have."
+    },
+    {
+      "consigne": "Que signifie la contraction du passage en couleur ?",
+      "texte": "[They've] got two cats.",
+      "choix": ["Is", "Has", "Have"],
+      "bonne": 2,
+      "explication": "« They've » est la contraction de they have : 've remplace have."
+    },
+    {
+      "consigne": "Que signifie la contraction du passage en couleur ?",
+      "texte": "[He's] tall.",
+      "choix": ["Is", "Has", "Have"],
+      "bonne": 0,
+      "explication": "Il n'y a pas de got : « He's tall » veut dire he is tall."
+    },
+    {
+      "consigne": "Que signifie la contraction du passage en couleur ?",
+      "texte": "Look at my rabbit! [It's] got long ears.",
+      "choix": ["Is", "Has", "Have"],
+      "bonne": 1,
+      "explication": "« It's got » veut dire it has got : le sujet it va avec has."
+    },
+    {
+      "consigne": "Que signifie la contraction du passage en couleur ?",
+      "texte": "[We've] got a rabbit.",
+      "choix": ["Is", "Has", "Have"],
+      "bonne": 2,
+      "explication": "« We've » est la contraction de we have : we have got a rabbit."
+    },
+    {
+      "consigne": "Que signifie la contraction du passage en couleur ?",
+      "texte": "My sister is eleven. [She's] short.",
+      "choix": ["Is", "Has", "Have"],
+      "bonne": 0,
+      "explication": "Il n'y a pas de got : « She's short » veut dire she is short."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Hair",
+      "acceptees": ["Hair", "The hair", "Cheveux", "Les cheveux"],
+      "indices": [
+        "Je suis un nom anglais.",
+        "Je désigne ce qui pousse sur la tête.",
+        "Je ne prends jamais de -s en anglais."
+      ],
+      "explication": "Hair désigne les cheveux et ne prend pas de -s : She's got long hair."
+    },
+    {
+      "reponse": "Mice",
+      "acceptees": ["Mice"],
+      "indices": [
+        "Je suis un pluriel irrégulier.",
+        "Je désigne de petits animaux.",
+        "Mon singulier se traduit par « souris »."
+      ],
+      "explication": "Le pluriel irrégulier de mouse est mice : I've got two mice."
+    },
+    {
+      "reponse": "Glasses",
+      "acceptees": ["Glasses", "Lunettes", "Les lunettes"],
+      "indices": [
+        "Je suis un objet que certaines personnes portent.",
+        "On me met sur le nez.",
+        "Je les aide à mieux voir."
+      ],
+      "explication": "Les lunettes se disent glasses : She's got glasses."
+    },
+    {
+      "reponse": "Tall",
+      "acceptees": ["Tall"],
+      "indices": [
+        "Je suis un adjectif anglais.",
+        "Je décris la taille d'une personne.",
+        "Je suis le contraire de short."
+      ],
+      "explication": "Tall veut dire grand pour une personne ; son contraire est short."
+    }
+  ],
+  "calculs": [],
+  "etapes": []
+}

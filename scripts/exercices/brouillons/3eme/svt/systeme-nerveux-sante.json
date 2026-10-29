@@ -1,0 +1,203 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Du stimulus au mouvement",
+      "detail": "Le chemin de l'information, de l'organe qui la capte jusqu'au muscle qui réagit.",
+      "cartes": [
+        "L'œil capte l'arrivée d'un ballon",
+        "Un nerf sensitif conduit l'information jusqu'au cerveau",
+        "Le cerveau et la moelle épinière élaborent la réponse",
+        "Un nerf moteur transmet l'ordre aux muscles du bras",
+        "Le muscle du bras exécute la réponse"
+      ]
+    },
+    {
+      "nom": "Les cellules nerveuses",
+      "detail": "Les neurones : leur forme, leurs prolongements et leur façon de communiquer.",
+      "cartes": [
+        "Le long prolongement d'un neurone s'appelle l'axone",
+        "Les dendrites sont de courts prolongements du corps cellulaire",
+        "La synapse est la zone de contact entre deux neurones",
+        "Un neurotransmetteur se fixe sur le neurone suivant",
+        "Le cerveau contient environ 86 milliards de neurones"
+      ]
+    },
+    {
+      "nom": "L'alcool et les drogues",
+      "detail": "Les effets de l'alcool, du cannabis et de la nicotine sur le cerveau, et la dépendance qu'ils entraînent.",
+      "cartes": [
+        "Un conducteur qui a bu réagit plus lentement",
+        "Fumer du cannabis trouble la mémoire",
+        "La nicotine imite un neurotransmetteur",
+        "Boire pendant l'adolescence ou la grossesse est très dangereux",
+        "Le besoin de consommer malgré les effets néfastes"
+      ]
+    },
+    {
+      "nom": "Bien dormir",
+      "detail": "La durée de la nuit, les écrans du soir et leurs effets sur la mémoire et l'attention.",
+      "cartes": [
+        "Il faut 8 à 10 heures par nuit à l'adolescence",
+        "Se coucher à minuit pour se lever à 7 h",
+        "La lumière des écrans le soir retarde l'endormissement",
+        "Le manque de repos réduit la vigilance et la mémoire",
+        "Pendant la nuit, le cerveau consolide ce qu'on a appris"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "l'allongement du temps de réaction",
+      "carte": "L'alcool perturbe le fonctionnement des synapses",
+      "role": "cause",
+      "explication": "L'alcool perturbe les synapses : le cerveau traite les informations plus lentement."
+    },
+    {
+      "fait": "l'allongement du temps de réaction",
+      "carte": "Un risque plus élevé d'accident de la route",
+      "role": "consequence",
+      "explication": "Réagir plus lentement au volant augmente le risque d'accident : l'alcool est, avec la vitesse, l'une des deux premières causes de mortalité routière."
+    },
+    {
+      "fait": "le manque de sommeil",
+      "carte": "La lumière des écrans le soir",
+      "role": "cause",
+      "explication": "La lumière des écrans retarde l'endormissement : la nuit devient plus courte."
+    },
+    {
+      "fait": "le manque de sommeil",
+      "carte": "Un coucher tardif avec un réveil à 7 h",
+      "role": "cause",
+      "explication": "Se coucher à minuit et se lever à 7 h, c'est 7 heures de sommeil, moins que les 8 à 10 heures nécessaires."
+    },
+    {
+      "fait": "le manque de sommeil",
+      "carte": "Une vigilance et une mémoire réduites",
+      "role": "consequence",
+      "explication": "Le manque de sommeil réduit la vigilance et la mémoire."
+    },
+    {
+      "fait": "le manque de sommeil",
+      "carte": "Des apprentissages moins bien consolidés",
+      "role": "consequence",
+      "explication": "C'est pendant le sommeil que le cerveau consolide ce qui a été appris dans la journée."
+    }
+  ],
+  "etiquettes": [
+    {
+      "consigne": "Quel élément du trajet nerveux le groupe en couleur représente-t-il ?",
+      "texte": "Un ballon arrive vers toi : [ton œil] le voit.",
+      "choix": ["Organe sensoriel", "Nerf sensitif", "Centre nerveux", "Nerf moteur"],
+      "bonne": 0,
+      "explication": "L'œil capte l'information : c'est un organe sensoriel, ou récepteur."
+    },
+    {
+      "consigne": "Quel élément du trajet nerveux le groupe en couleur représente-t-il ?",
+      "texte": "L'œil voit le ballon, puis [le nerf optique] conduit l'information vers le cerveau.",
+      "choix": ["Organe sensoriel", "Nerf sensitif", "Centre nerveux", "Nerf moteur"],
+      "bonne": 1,
+      "explication": "Le nerf optique conduit l'information de l'organe sensoriel vers le centre nerveux : c'est un nerf sensitif."
+    },
+    {
+      "consigne": "Quel élément du trajet nerveux le groupe en couleur représente-t-il ?",
+      "texte": "Je touche une plaque brûlante : l'information arrive à [la moelle épinière].",
+      "choix": ["Organe sensoriel", "Nerf sensitif", "Centre nerveux", "Nerf moteur"],
+      "bonne": 2,
+      "explication": "Le cerveau et la moelle épinière sont les deux centres nerveux."
+    },
+    {
+      "consigne": "Quel élément du trajet nerveux le groupe en couleur représente-t-il ?",
+      "texte": "Le cerveau a décidé d'attraper le ballon : [le nerf relié au muscle du bras] transmet l'ordre.",
+      "choix": ["Organe sensoriel", "Nerf sensitif", "Centre nerveux", "Nerf moteur"],
+      "bonne": 3,
+      "explication": "Le nerf qui conduit l'ordre du centre nerveux vers le muscle est un nerf moteur."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Synapse",
+      "acceptees": ["Synapse", "La synapse", "Une synapse"],
+      "indices": [
+        "Je suis un lieu de contact dans le système nerveux.",
+        "Je suis la zone où un neurotransmetteur est libéré.",
+        "Je suis le point où le message passe d'un neurone à l'autre en devenant chimique."
+      ],
+      "explication": "La synapse est la zone de contact entre deux neurones, où le message électrique devient chimique."
+    },
+    {
+      "reponse": "Neurone",
+      "acceptees": ["Neurone", "Un neurone", "Les neurones", "Cellule nerveuse", "Une cellule nerveuse"],
+      "indices": [
+        "Je suis une cellule du corps humain.",
+        "Je possède un corps cellulaire, des dendrites et un long prolongement.",
+        "Le cerveau en compte environ 86 milliards comme moi."
+      ],
+      "explication": "Le neurone est la cellule nerveuse : un corps cellulaire, des dendrites et un axone."
+    },
+    {
+      "reponse": "Moelle épinière",
+      "acceptees": ["Moelle épinière", "La moelle épinière", "Moelle"],
+      "indices": [
+        "Je fais partie du système nerveux.",
+        "Je suis un centre nerveux, mais pas le cerveau.",
+        "Je reçois l'information d'un nerf sensitif et je peux élaborer une réponse."
+      ],
+      "explication": "Le cerveau et la moelle épinière sont les deux centres nerveux."
+    },
+    {
+      "reponse": "Addiction",
+      "acceptees": ["Addiction", "L'addiction", "Une addiction", "Dépendance", "La dépendance"],
+      "indices": [
+        "Je peux apparaître après des consommations répétées.",
+        "Je pousse à recommencer même quand cela fait du mal.",
+        "Je suis le besoin de consommer une substance malgré ses effets néfastes."
+      ],
+      "explication": "L'addiction est une dépendance : le besoin de consommer malgré les effets néfastes."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "Tom se couche à 23 h 30 et se lève à 6 h 30. Combien d'heures dure sa nuit ?",
+      "reponse": 7,
+      "unite": "h",
+      "tolerance": 0,
+      "explication": "De 23 h 30 à minuit, il y a 0,5 h ; de minuit à 6 h 30, il y a 6,5 h ; 0,5 + 6,5 = 7 h."
+    },
+    {
+      "question": "Un adolescent a besoin d'au moins 8 heures de sommeil. Léa s'endort dès qu'elle se couche à minuit et se réveille à 7 h. Combien d'heures de sommeil lui manque-t-il ?",
+      "reponse": 1,
+      "unite": "h",
+      "tolerance": 0,
+      "explication": "De minuit à 7 h, elle dort 7 h ; 8 − 7 = 1 h de moins que le minimum nécessaire."
+    },
+    {
+      "question": "Quatre élèves reposés ont des temps de réaction de 0,20 s, 0,22 s, 0,18 s et 0,24 s. Quel est leur temps de réaction moyen ?",
+      "reponse": 0.21,
+      "unite": "s",
+      "tolerance": 0,
+      "explication": "(0,20 + 0,22 + 0,18 + 0,24) ÷ 4 = 0,84 ÷ 4 = 0,21 s."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Le trajet du message nerveux pour attraper un ballon",
+      "etapes": [
+        "Un organe sensoriel capte l'information",
+        "Un nerf sensitif la conduit au centre nerveux",
+        "Le centre nerveux élabore une réponse",
+        "Un nerf moteur transmet l'ordre",
+        "Le muscle exécute la réponse"
+      ]
+    },
+    {
+      "titre": "Le passage du message d'un neurone à l'autre",
+      "etapes": [
+        "Le message électrique parcourt le premier neurone",
+        "Le neurone libère un neurotransmetteur dans la synapse",
+        "Le neurotransmetteur se fixe sur les récepteurs du neurone suivant",
+        "Un nouveau message électrique naît dans le neurone suivant"
+      ]
+    }
+  ]
+}

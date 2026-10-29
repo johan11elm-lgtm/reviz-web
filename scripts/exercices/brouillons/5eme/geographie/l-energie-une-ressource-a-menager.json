@@ -1,0 +1,167 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Les énergies fossiles",
+      "detail": "Le pétrole, le charbon et le gaz naturel, issus d'êtres vivants disparus depuis des millions d'années.",
+      "cartes": [
+        "Le pétrole, qui fait rouler la plupart des voitures",
+        "Le charbon, très produit en Chine et en Inde",
+        "Le gaz naturel, extrait notamment au Qatar",
+        "Une ressource née d'êtres vivants disparus depuis des millions d'années",
+        "Une source qui fournit environ 80 % de l'énergie mondiale"
+      ]
+    },
+    {
+      "nom": "L'énergie nucléaire",
+      "detail": "L'électricité produite dans des centrales à partir de l'uranium.",
+      "cartes": [
+        "L'uranium, un minerai utilisé comme combustible",
+        "Source de 65 à 70 % de l'électricité française",
+        "Une production qui laisse des déchets radioactifs",
+        "Des risques d'accident dans les centrales",
+        "Peu de CO₂ rejeté, mais une ressource non renouvelable"
+      ]
+    },
+    {
+      "nom": "Les énergies renouvelables",
+      "detail": "Les sources qui se renouvellent rapidement : vent, soleil, eau, biomasse et chaleur du sous-sol.",
+      "cartes": [
+        "Des éoliennes qui tournent grâce au vent",
+        "Des panneaux solaires installés sur un toit",
+        "Le barrage des Trois-Gorges, sur le Yangzi",
+        "La biomasse : du bois et des déchets",
+        "La chaleur du sous-sol, ou géothermie"
+      ]
+    },
+    {
+      "nom": "Les économies d'énergie",
+      "detail": "Les gestes et les choix qui permettent de consommer moins ou de consommer mieux.",
+      "cartes": [
+        "Isoler les murs et le toit d'une maison",
+        "Prendre le bus plutôt que la voiture",
+        "Choisir un appareil qui consomme peu d'électricité",
+        "Éteindre la lumière en quittant une pièce",
+        "Baisser un peu le chauffage en hiver"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "De quelle famille d'énergie parle-t-on dans le passage en couleur ?",
+      "texte": "Les voitures roulent surtout grâce au [pétrole].",
+      "choix": ["Énergie fossile", "Énergie nucléaire", "Énergie renouvelable"],
+      "bonne": 0,
+      "explication": "Le pétrole, comme le charbon et le gaz naturel, est une énergie fossile."
+    },
+    {
+      "consigne": "De quelle famille d'énergie parle-t-on dans le passage en couleur ?",
+      "texte": "En France, environ 65 à 70 % de l'électricité vient de [centrales qui utilisent l'uranium].",
+      "choix": ["Énergie fossile", "Énergie nucléaire", "Énergie renouvelable"],
+      "bonne": 1,
+      "explication": "Les centrales qui utilisent l'uranium produisent de l'énergie nucléaire."
+    },
+    {
+      "consigne": "De quelle famille d'énergie parle-t-on dans le passage en couleur ?",
+      "texte": "En Chine, [le barrage des Trois-Gorges] produit une énorme quantité d'électricité.",
+      "choix": ["Énergie fossile", "Énergie nucléaire", "Énergie renouvelable"],
+      "bonne": 2,
+      "explication": "Un barrage utilise la force de l'eau : c'est une énergie renouvelable (hydraulique)."
+    },
+    {
+      "consigne": "De quelle famille d'énergie parle-t-on dans le passage en couleur ?",
+      "texte": "Sur ce toit, des [panneaux solaires] fournissent de l'électricité les jours de soleil.",
+      "choix": ["Énergie fossile", "Énergie nucléaire", "Énergie renouvelable"],
+      "bonne": 2,
+      "explication": "Le soleil se renouvelle sans cesse : l'énergie solaire est renouvelable."
+    },
+    {
+      "consigne": "De quelle famille d'énergie parle-t-on dans le passage en couleur ?",
+      "texte": "Au Qatar, on extrait beaucoup de [gaz naturel].",
+      "choix": ["Énergie fossile", "Énergie nucléaire", "Énergie renouvelable"],
+      "bonne": 0,
+      "explication": "Le gaz naturel est une énergie fossile, comme le pétrole et le charbon."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Trois-Gorges",
+      "acceptees": ["Trois-Gorges", "Les Trois-Gorges", "Trois Gorges", "Barrage des Trois-Gorges", "Le barrage des Trois-Gorges", "Barrage des Trois Gorges"],
+      "indices": [
+        "Je produis une énorme quantité d'électricité sans rejeter de CO₂.",
+        "On m'a construit en Chine, sur le Yangzi.",
+        "Mon lac de retenue a inondé des vallées entières et plus d'un million de personnes ont dû partir."
+      ],
+      "explication": "Le barrage des Trois-Gorges, en Chine, produit beaucoup d'électricité mais a déplacé plus d'un million de personnes."
+    },
+    {
+      "reponse": "Le nucléaire",
+      "acceptees": ["Nucléaire", "Le nucléaire", "L'énergie nucléaire", "Énergie nucléaire"],
+      "indices": [
+        "Je rejette très peu de CO₂, mais je ne suis pas renouvelable.",
+        "J'utilise l'uranium, un minerai en quantité limitée.",
+        "En France, je fournis 65 à 70 % de l'électricité."
+      ],
+      "explication": "Le nucléaire utilise l'uranium et produit l'essentiel de l'électricité française."
+    },
+    {
+      "reponse": "Géothermie",
+      "acceptees": ["Géothermie", "La géothermie"],
+      "indices": [
+        "Je suis une énergie qui se renouvelle rapidement.",
+        "Je ne dépends ni du vent ni du soleil.",
+        "J'utilise la chaleur du sous-sol."
+      ],
+      "explication": "La géothermie est une énergie renouvelable qui exploite la chaleur du sous-sol."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "Dans le mix énergétique d'un pays, le pétrole fournit 38 %, le charbon 22 % et le gaz naturel 24 % de l'énergie. Quelle part vient des énergies fossiles ?",
+      "reponse": 84,
+      "unite": "%",
+      "tolerance": 0,
+      "explication": "Pétrole, charbon et gaz naturel sont les trois énergies fossiles : 38 + 22 + 24 = 84 %."
+    },
+    {
+      "question": "Dans le mix électrique d'un pays, le nucléaire fournit 40 %, l'hydraulique 20 %, l'éolien 15 %, le solaire 10 % et le charbon 15 % de l'électricité. Quelle part vient des énergies renouvelables ?",
+      "reponse": 45,
+      "unite": "%",
+      "tolerance": 0,
+      "explication": "Le nucléaire et le charbon ne sont pas renouvelables. Hydraulique, éolien et solaire : 20 + 15 + 10 = 45 %."
+    },
+    {
+      "question": "Une ville utilise 200 unités d'électricité par jour, dont 130 sont produites par des centrales nucléaires. Quel pourcentage cela représente-t-il ?",
+      "reponse": 65,
+      "unite": "%",
+      "tolerance": 0,
+      "explication": "130 ÷ 200 = 0,65, soit 65 % de l'électricité."
+    },
+    {
+      "question": "Le monde consomme 500 unités d'énergie par an et 80 % viennent des énergies fossiles. Combien d'unités cela représente-t-il ?",
+      "reponse": 400,
+      "unite": "unités",
+      "tolerance": 0,
+      "explication": "80 % de 500 = 500 × 80 ÷ 100 = 400 unités."
+    },
+    {
+      "question": "Dans un pays, les énergies fossiles fournissent 71 % de l'énergie et le nucléaire 9 %. Tout le reste vient des énergies renouvelables. Quelle est leur part ?",
+      "reponse": 20,
+      "unite": "%",
+      "tolerance": 0,
+      "explication": "71 + 9 = 80 %, donc les renouvelables fournissent 100 − 80 = 20 %."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Lire un diagramme du mix énergétique",
+      "etapes": [
+        "Lis le titre : quel pays, quelle année, quelle énergie",
+        "Repère la plus grande part, puis les autres pourcentages",
+        "Additionne par familles : fossiles, nucléaire, renouvelables",
+        "Conclus : le pays dépend-il surtout des énergies fossiles"
+      ]
+    }
+  ]
+}

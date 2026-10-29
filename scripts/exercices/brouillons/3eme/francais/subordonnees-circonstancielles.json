@@ -1,0 +1,138 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "La cause",
+      "detail": "La subordonnée dit ce qui provoque l'action principale : parce que, puisque, comme en tête de phrase, étant donné que (indicatif).",
+      "cartes": [
+        "Comme il pleuvait, nous sommes restés à la maison",
+        "Puisque tu es prêt, nous pouvons partir",
+        "Il n'a pas répondu parce qu'il dormait",
+        "Étant donné que le train est en retard, nous attendons",
+        "Sa voix tremblait parce qu'il avait très peur"
+      ]
+    },
+    {
+      "nom": "La conséquence",
+      "detail": "La subordonnée dit le résultat obtenu de l'action principale : si bien que, tellement… que, si… que, tant… que (indicatif).",
+      "cartes": [
+        "Il a tellement couru qu'il est épuisé",
+        "Il a gelé, si bien que la route est fermée",
+        "Le vent soufflait si fort que le toit s'est envolé",
+        "Il a tant mangé qu'il ne peut plus bouger",
+        "Elle parlait si bas qu'on ne l'entendait pas"
+      ]
+    },
+    {
+      "nom": "Le but",
+      "detail": "La subordonnée dit le résultat visé par l'action principale : pour que, afin que, de peur que (subjonctif).",
+      "cartes": [
+        "Je parle fort pour qu'on m'entende",
+        "Je lui écris afin qu'il sache la vérité",
+        "Elle étudie afin que ses parents soient fiers",
+        "Nous partons tôt pour que tu arrives à l'heure",
+        "Il baisse la voix afin que personne n'entende"
+      ]
+    },
+    {
+      "nom": "La concession",
+      "detail": "La subordonnée dit un fait qui aurait dû empêcher l'action principale : bien que, quoique (subjonctif).",
+      "cartes": [
+        "Bien qu'il soit malade, il travaille",
+        "Quoiqu'il soit tard, elle travaille encore",
+        "Bien qu'il ait peur, il avance",
+        "Elle sourit bien qu'elle ait perdu le match",
+        "Il sort en t-shirt quoiqu'il fasse froid"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Quelle circonstance exprime la subordonnée en couleur ?",
+      "texte": "[Comme il pleuvait], nous sommes restés à la maison.",
+      "choix": ["Cause", "Conséquence", "But", "Concession"],
+      "bonne": 0,
+      "explication": "« Comme » en tête de phrase, avec l'indicatif, donne la cause : on est resté parce qu'il pleuvait."
+    },
+    {
+      "consigne": "Quelle circonstance exprime la subordonnée en couleur ?",
+      "texte": "Il a tellement couru [qu'il est épuisé].",
+      "choix": ["Cause", "Conséquence", "But", "Concession"],
+      "bonne": 1,
+      "explication": "« Tellement… que » introduit un résultat obtenu, à l'indicatif : c'est la conséquence."
+    },
+    {
+      "consigne": "Quelle circonstance exprime la subordonnée en couleur ?",
+      "texte": "Il parle doucement [pour que le bébé ne se réveille pas].",
+      "choix": ["Cause", "Conséquence", "But", "Concession"],
+      "bonne": 2,
+      "explication": "« Pour que » introduit un résultat visé, au subjonctif : c'est le but."
+    },
+    {
+      "consigne": "Quelle circonstance exprime la subordonnée en couleur ?",
+      "texte": "Il continue à courir [quoiqu'il soit épuisé].",
+      "choix": ["Cause", "Conséquence", "But", "Concession"],
+      "bonne": 3,
+      "explication": "La fatigue aurait dû l'empêcher de courir : « quoique », avec le subjonctif, exprime la concession."
+    },
+    {
+      "consigne": "Quelle circonstance exprime la subordonnée en couleur ?",
+      "texte": "[Puisque tu es prêt], nous pouvons partir.",
+      "choix": ["Cause", "Conséquence", "But", "Concession"],
+      "bonne": 0,
+      "explication": "« Puisque » donne la raison pour laquelle on peut partir : c'est la cause, à l'indicatif."
+    },
+    {
+      "consigne": "Quelle circonstance exprime la subordonnée en couleur ?",
+      "texte": "Il ferme la porte [pour que le chat ne sorte pas].",
+      "choix": ["Cause", "Conséquence", "But", "Concession"],
+      "bonne": 2,
+      "explication": "« Pour que » suivi du subjonctif « sorte » exprime le but : le résultat qu'il vise."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "La cause",
+      "acceptees": ["Cause", "La cause"],
+      "indices": [
+        "Je suis une circonstance exprimée par une subordonnée.",
+        "Je dis ce qui provoque l'action principale.",
+        "Mes conjonctions sont « parce que », « puisque » et « étant donné que »."
+      ],
+      "explication": "La subordonnée de cause dit ce qui provoque l'action ; elle se construit avec l'indicatif."
+    },
+    {
+      "reponse": "La conséquence",
+      "acceptees": ["Conséquence", "La conséquence"],
+      "indices": [
+        "Je suis une circonstance exprimée par une subordonnée.",
+        "Je dis le résultat obtenu de l'action principale.",
+        "Mes conjonctions sont « si bien que » et « tellement… que »."
+      ],
+      "explication": "La subordonnée de conséquence dit le résultat obtenu ; elle se construit avec l'indicatif."
+    },
+    {
+      "reponse": "La concession",
+      "acceptees": ["Concession", "La concession"],
+      "indices": [
+        "Je suis une circonstance exprimée par une subordonnée.",
+        "Je présente un fait qui aurait dû empêcher l'action principale.",
+        "Mes conjonctions sont « bien que » et « quoique »."
+      ],
+      "explication": "« Bien qu'il soit malade, il travaille » : la maladie aurait dû l'empêcher de travailler. C'est la concession, au subjonctif."
+    },
+    {
+      "reponse": "Le subjonctif",
+      "acceptees": ["Subjonctif", "Le subjonctif"],
+      "indices": [
+        "Je suis un mode verbal.",
+        "On m'emploie après « pour que » et après « avant que ».",
+        "On m'emploie aussi après « bien que » : on écrit « bien qu'il soit malade »."
+      ],
+      "explication": "Le subjonctif suit le but (pour que, afin que), la concession (bien que, quoique) et « avant que »."
+    }
+  ],
+  "calculs": [],
+  "etapes": []
+}

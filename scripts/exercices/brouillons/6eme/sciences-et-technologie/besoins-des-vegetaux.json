@@ -1,0 +1,189 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Les producteurs primaires",
+      "detail": "Les plantes vertes : elles fabriquent leur propre matière sans manger d'autres êtres vivants.",
+      "cartes": [
+        "Un grand chêne au milieu de la forêt",
+        "Un pied de blé dans un champ",
+        "Un rosier fleuri dans un jardin",
+        "Un brin d'herbe dans une prairie",
+        "Un pommier chargé de pommes"
+      ]
+    },
+    {
+      "nom": "Animaux qui mangent des êtres vivants",
+      "detail": "Des animaux qui ne fabriquent pas leur matière : ils se nourrissent d'autres êtres vivants.",
+      "cartes": [
+        "Un lapin qui broute de l'herbe verte",
+        "Un faucon qui attrape une souris",
+        "Une coccinelle qui dévore des pucerons",
+        "Une mésange qui picore une chenille",
+        "Un brochet qui avale un petit poisson"
+      ]
+    },
+    {
+      "nom": "Les décomposeurs",
+      "detail": "Les êtres vivants qui transforment la matière morte en humus et en sels minéraux.",
+      "cartes": [
+        "Un ver de terre qui enrichit la terre en humus",
+        "Un cloporte qui ronge du bois pourri",
+        "Un champignon qui pousse sur une souche morte",
+        "Des bactéries invisibles qui transforment la matière morte",
+        "Un être vivant du sol qui libère des sels minéraux"
+      ]
+    },
+    {
+      "nom": "Les déchets à recycler",
+      "detail": "La matière morte laissée par les êtres vivants, que le sol recycle.",
+      "cartes": [
+        "Des feuilles mortes sous un arbre",
+        "Le cadavre d'un oiseau sur le sentier",
+        "Les excréments d'un animal sauvage",
+        "Une branche morte tombée dans le chemin",
+        "Un fruit pourri resté dans l'herbe"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "la production de matière par une plante verte",
+      "carte": "Ses racines prélèvent de l'eau et des sels minéraux",
+      "role": "cause",
+      "explication": "L'eau et les sels minéraux du sol sont des éléments dont la plante a besoin pour fabriquer sa matière."
+    },
+    {
+      "fait": "la production de matière par une plante verte",
+      "carte": "Ses feuilles prélèvent du dioxyde de carbone dans l'air",
+      "role": "cause",
+      "explication": "Le dioxyde de carbone de l'air fait partie des éléments à partir desquels la plante fabrique sa matière."
+    },
+    {
+      "fait": "la production de matière par une plante verte",
+      "carte": "Elle reçoit de la lumière",
+      "role": "cause",
+      "explication": "Sans lumière, la plante ne peut plus produire sa matière : elle jaunit puis meurt."
+    },
+    {
+      "fait": "la production de matière par une plante verte",
+      "carte": "Un petit gland grandit et devient un grand chêne",
+      "role": "consequence",
+      "explication": "La matière produite permet à la plante de grandir, sans qu'elle mange d'autres êtres vivants."
+    },
+    {
+      "fait": "la décomposition de la matière morte dans le sol",
+      "carte": "Des sels minéraux sont libérés dans le sol",
+      "role": "consequence",
+      "explication": "La décomposition libère des sels minéraux, qui sont de nouveau utilisés par les plantes."
+    },
+    {
+      "fait": "la décomposition de la matière morte dans le sol",
+      "carte": "Il se forme de l'humus",
+      "role": "consequence",
+      "explication": "La décomposition des déchets forme l'humus, la matière organique du sol."
+    }
+  ],
+  "etiquettes": [
+    {
+      "consigne": "Quel est le rôle du passage en couleur dans cette expérience ?",
+      "texte": "Pour tester le besoin en lumière, Léa prépare deux plantes. [Les deux plantes sont de la même espèce, dans le même pot, avec la même terre.] L'une reste près de la fenêtre, l'autre est enfermée dans un placard.",
+      "choix": ["Le lot témoin", "Le lot privé de l'élément testé", "Une condition gardée identique", "Un résultat observé"],
+      "bonne": 2,
+      "explication": "Tout est identique dans les deux lots, sauf la lumière : on ne change qu'un seul facteur à la fois."
+    },
+    {
+      "consigne": "Quel est le rôle du passage en couleur dans cette expérience ?",
+      "texte": "Deux plantes identiques poussent sur du sable lavé, qui n'apporte aucun sel minéral. L'une est arrosée avec de l'eau distillée. [L'autre est arrosée avec de l'eau contenant des sels minéraux.]",
+      "choix": ["Le lot témoin", "Le lot privé de l'élément testé", "Une condition gardée identique", "Un résultat observé"],
+      "bonne": 0,
+      "explication": "Ce lot reçoit tout ce dont la plante a besoin : c'est le témoin, qui sert de référence pour comparer."
+    },
+    {
+      "consigne": "Quel est le rôle du passage en couleur dans cette expérience ?",
+      "texte": "Après une semaine, la plante du placard [a jauni], alors que celle de la fenêtre est restée bien verte.",
+      "choix": ["Le lot témoin", "Le lot privé de l'élément testé", "Une condition gardée identique", "Un résultat observé"],
+      "bonne": 3,
+      "explication": "Jaunir est ce que l'on observe à la fin de l'expérience : c'est le résultat, qui permet de conclure."
+    },
+    {
+      "consigne": "Quel est le rôle du passage en couleur dans cette expérience ?",
+      "texte": "Pour tester le besoin en lumière, Zoé a deux plantes identiques. L'une reste sur le rebord de la fenêtre. [L'autre est enfermée dans un placard.]",
+      "choix": ["Le lot témoin", "Le lot privé de l'élément testé", "Une condition gardée identique", "Un résultat observé"],
+      "bonne": 1,
+      "explication": "Cette plante est privée de lumière, l'élément testé : c'est le lot qu'on compare au témoin."
+    },
+    {
+      "consigne": "Quel est le rôle du passage en couleur dans cette expérience ?",
+      "texte": "Pour tester l'effet des sels minéraux, Tom prépare deux pots. [Il utilise le même sable lavé, la même espèce de plante et la même température dans les deux pots.] Seule l'eau d'arrosage change.",
+      "choix": ["Le lot témoin", "Le lot privé de l'élément testé", "Une condition gardée identique", "Un résultat observé"],
+      "bonne": 2,
+      "explication": "Ces conditions restent identiques dans les deux pots : seul le facteur testé, les sels minéraux, change."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Chlorophylle",
+      "acceptees": ["Chlorophylle", "La chlorophylle"],
+      "indices": [
+        "Je suis présent dans les parties vertes des plantes.",
+        "Je suis un pigment vert.",
+        "Grâce à moi, la plante utilise la lumière pour fabriquer sa matière."
+      ],
+      "explication": "La chlorophylle est le pigment vert des plantes : elle leur permet d'utiliser la lumière."
+    },
+    {
+      "reponse": "Poils absorbants",
+      "acceptees": ["Poils absorbants", "Les poils absorbants", "Poil absorbant", "Un poil absorbant"],
+      "indices": [
+        "Je suis très fin et très nombreux.",
+        "Je me trouve près du bout des racines.",
+        "C'est par moi que l'eau et les sels minéraux entrent dans la plante."
+      ],
+      "explication": "Les poils absorbants, situés près du bout des racines, prélèvent l'eau et les sels minéraux du sol."
+    },
+    {
+      "reponse": "Dioxyde de carbone",
+      "acceptees": ["Dioxyde de carbone", "Le dioxyde de carbone", "CO2", "CO₂", "Gaz carbonique"],
+      "indices": [
+        "Je suis un gaz présent dans l'air.",
+        "Je suis prélevé par les feuilles de la plante.",
+        "Je suis le quatrième besoin de la plante, avec l'eau, les sels minéraux et la lumière."
+      ],
+      "explication": "Le dioxyde de carbone de l'air est prélevé par les feuilles et sert à fabriquer la matière de la plante."
+    },
+    {
+      "reponse": "Lot témoin",
+      "acceptees": ["Lot témoin", "Le lot témoin", "Témoin", "Le témoin"],
+      "indices": [
+        "Je fais partie d'une expérience.",
+        "Je suis le groupe de plantes qui reçoit tout ce dont elles ont besoin.",
+        "On me compare à l'autre groupe, privé d'un seul facteur, pour comprendre ce qui change."
+      ],
+      "explication": "Le lot témoin reçoit tous les facteurs : il sert de référence pour comparer avec le lot privé d'un élément."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Concevoir une expérience sur les besoins d'une plante",
+      "etapes": [
+        "On se demande de quoi la plante a besoin",
+        "On prépare deux lots de plantes identiques",
+        "On prive un seul lot de l'élément testé",
+        "On observe et on compare les deux lots pendant plusieurs jours",
+        "On conclut sur le besoin de la plante"
+      ]
+    },
+    {
+      "titre": "Le recyclage de la matière dans une forêt",
+      "etapes": [
+        "Des feuilles meurent et tombent au sol",
+        "Des décomposeurs transforment les feuilles mortes",
+        "L'humus se forme et des sels minéraux sont libérés",
+        "Les racines des arbres prélèvent ces sels minéraux",
+        "Les arbres fabriquent de la nouvelle matière"
+      ]
+    }
+  ]
+}

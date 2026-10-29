@@ -1,0 +1,148 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "On ajoute seulement -d",
+      "detail": "Le verbe se termine déjà par -e : au prétérit, on ajoute juste un -d (like devient liked).",
+      "cartes": [
+        "We danced all evening",
+        "She smiled at the camera",
+        "I phoned my grandmother",
+        "They arrived at six o'clock",
+        "I liked the new film"
+      ]
+    },
+    {
+      "nom": "Le y devient -ied",
+      "detail": "Le verbe se termine par une consonne suivie de y : le y est remplacé par -ied (study devient studied).",
+      "cartes": [
+        "She studied English last night",
+        "I tidied my room on Saturday",
+        "He cried at the end of the film",
+        "We carried the bags upstairs",
+        "They hurried to the bus stop"
+      ]
+    },
+    {
+      "nom": "On double la consonne finale",
+      "detail": "Le verbe se termine par une voyelle courte et une seule consonne : on double la consonne avant -ed (stop devient stopped).",
+      "cartes": [
+        "The bus stopped near the school",
+        "We planned a picnic for Sunday",
+        "They chatted on the phone for an hour",
+        "My cousin jogged around the park",
+        "She dropped her phone on the floor"
+      ]
+    },
+    {
+      "nom": "On ajoute simplement -ed",
+      "detail": "Le verbe se termine par une consonne ou par voyelle + y : on ajoute -ed sans rien changer (play devient played).",
+      "cartes": [
+        "He played football on Saturday",
+        "We enjoyed the concert",
+        "She watched a film with her sister",
+        "I helped my dad in the garden",
+        "They walked to school together"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Comment se prononce la terminaison -ed du verbe en couleur ?",
+      "texte": "Last Saturday, we [walked] to the park.",
+      "choix": ["/t/", "/d/", "/ɪd/"],
+      "bonne": 0,
+      "explication": "Après le son sourd k de walk, le -ed se prononce /t/."
+    },
+    {
+      "consigne": "Comment se prononce la terminaison -ed du verbe en couleur ?",
+      "texte": "She [played] tennis with her cousin.",
+      "choix": ["/t/", "/d/", "/ɪd/"],
+      "bonne": 1,
+      "explication": "Play ne finit ni par t ou d, ni par un son sourd : le -ed se prononce /d/."
+    },
+    {
+      "consigne": "Comment se prononce la terminaison -ed du verbe en couleur ?",
+      "texte": "He [wanted] a new bike for his birthday.",
+      "choix": ["/t/", "/d/", "/ɪd/"],
+      "bonne": 2,
+      "explication": "Après le son t de want, le -ed se prononce /ɪd/ : on entend une syllabe de plus."
+    },
+    {
+      "consigne": "Comment se prononce la terminaison -ed du verbe en couleur ?",
+      "texte": "The bus [stopped] in front of the school.",
+      "choix": ["/t/", "/d/", "/ɪd/"],
+      "bonne": 0,
+      "explication": "Après le son sourd p de stop, le -ed se prononce /t/."
+    },
+    {
+      "consigne": "Comment se prononce la terminaison -ed du verbe en couleur ?",
+      "texte": "I [cleaned] my room yesterday.",
+      "choix": ["/t/", "/d/", "/ɪd/"],
+      "bonne": 1,
+      "explication": "Clean ne finit ni par t ou d, ni par un son sourd : le -ed se prononce /d/."
+    },
+    {
+      "consigne": "Comment se prononce la terminaison -ed du verbe en couleur ?",
+      "texte": "We [visited] our grandparents last weekend.",
+      "choix": ["/t/", "/d/", "/ɪd/"],
+      "bonne": 2,
+      "explication": "Après le son t de visit, le -ed se prononce /ɪd/ : on entend une syllabe de plus."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Didn't",
+      "acceptees": ["Didn't", "Didn’t", "Didnt", "Did not"],
+      "indices": [
+        "Je suis un mot court, écrit avec une apostrophe.",
+        "Je sers à faire la négation d'un verbe au passé.",
+        "Après moi, le verbe reste à la base verbale : I ___ watch TV."
+      ],
+      "explication": "Didn't (did not) + base verbale forme la négation au prétérit : I didn't watch TV."
+    },
+    {
+      "reponse": "Base verbale",
+      "acceptees": ["Base verbale", "La base verbale", "Base", "Infinitif"],
+      "indices": [
+        "Je suis la forme d'un verbe.",
+        "On me trouve dans le dictionnaire, sans aucune terminaison.",
+        "Après did ou didn't, c'est moi qu'on emploie : watch, play, visit."
+      ],
+      "explication": "Après did ou didn't, le verbe reste à la base verbale : Did you visit London? I didn't watch TV."
+    },
+    {
+      "reponse": "Finally",
+      "acceptees": ["Finally", "At last", "In the end", "Lastly"],
+      "indices": [
+        "Je suis un mot anglais.",
+        "Je sers à relier les étapes d'un récit.",
+        "Après first, then, next et after that, c'est moi qui conclus."
+      ],
+      "explication": "Finally est le connecteur qui ouvre la dernière étape d'un récit."
+    },
+    {
+      "reponse": "Did",
+      "acceptees": ["Did"],
+      "indices": [
+        "Je suis un auxiliaire du passé.",
+        "Je commence la question : ___ you visit your grandparents ?",
+        "On me reprend dans la réponse courte : Yes, I ___."
+      ],
+      "explication": "Did est l'auxiliaire du passé : Did you visit your grandparents? — Yes, I did."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Raconter un samedi, du matin au soir",
+      "etapes": [
+        "First, I tidied my room in the morning",
+        "Then I played football in the afternoon",
+        "In the evening, I watched a film",
+        "Finally, I relaxed in my bed"
+      ]
+    }
+  ]
+}

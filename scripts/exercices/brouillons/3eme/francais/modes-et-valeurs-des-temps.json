@@ -1,0 +1,138 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Le présent d'énonciation",
+      "detail": "Le présent situe l'action au moment précis où l'on parle.",
+      "cartes": [
+        "En ce moment, je lis un roman",
+        "Regarde, le chat dort sur le canapé",
+        "Écoute, quelqu'un frappe à la porte",
+        "Aujourd'hui, il pleut sur toute la région",
+        "Maintenant, nous attendons le bus"
+      ]
+    },
+    {
+      "nom": "Le présent de vérité générale",
+      "detail": "Le présent exprime un fait toujours vrai, valable en tout temps.",
+      "cartes": [
+        "La Terre tourne autour du Soleil",
+        "L'eau bout à 100 °C",
+        "Les chats sont des mammifères",
+        "Un triangle a trois côtés",
+        "Deux et deux font quatre"
+      ]
+    },
+    {
+      "nom": "Le présent d'habitude",
+      "detail": "Le présent exprime une action qui se répète régulièrement.",
+      "cartes": [
+        "Le lundi, je vais à la piscine",
+        "Chaque matin, elle boit un café",
+        "Il se couche toujours avant dix heures",
+        "Tous les étés, ils partent en Bretagne",
+        "Le dimanche, nous déjeunons chez ma grand-mère"
+      ]
+    },
+    {
+      "nom": "Le présent de narration",
+      "detail": "Le présent raconte un fait passé de façon vivante, comme s'il se déroulait sous nos yeux.",
+      "cartes": [
+        "En 1789, le peuple prend la Bastille",
+        "En 1914, la guerre éclate en Europe",
+        "En 1940, de Gaulle lance un appel depuis Londres",
+        "En 1815, Napoléon perd la bataille de Waterloo",
+        "En 1804, Napoléon devient empereur des Français"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Quelle est la valeur du conditionnel en couleur ?",
+      "texte": "[Je voudrais] un renseignement, s'il vous plaît.",
+      "choix": ["Politesse", "Hypothèse", "Information non confirmée", "Futur dans le passé"],
+      "bonne": 0,
+      "explication": "Le conditionnel adoucit la demande pour être poli : c'est le conditionnel de politesse."
+    },
+    {
+      "consigne": "Quelle est la valeur du conditionnel en couleur ?",
+      "texte": "Selon les journaux, le ministre [serait] malade.",
+      "choix": ["Politesse", "Hypothèse", "Information non confirmée", "Futur dans le passé"],
+      "bonne": 2,
+      "explication": "Le journaliste ne garantit pas l'information : le conditionnel signale qu'elle n'est pas confirmée."
+    },
+    {
+      "consigne": "Quelle est la valeur du conditionnel en couleur ?",
+      "texte": "Si j'avais le temps, [je lirais] ce roman.",
+      "choix": ["Politesse", "Hypothèse", "Information non confirmée", "Futur dans le passé"],
+      "bonne": 1,
+      "explication": "Après « si » + imparfait, le conditionnel de la principale exprime ce qui arriverait dans l'hypothèse : c'est une hypothèse."
+    },
+    {
+      "consigne": "Quelle est la valeur du conditionnel en couleur ?",
+      "texte": "Il annonça qu'il [viendrait] le lendemain.",
+      "choix": ["Politesse", "Hypothèse", "Information non confirmée", "Futur dans le passé"],
+      "bonne": 3,
+      "explication": "Dans un récit au passé, le conditionnel exprime une action postérieure : c'est le futur dans le passé."
+    },
+    {
+      "consigne": "Quelle est la valeur du conditionnel en couleur ?",
+      "texte": "[Pourriez-vous] m'indiquer la gare ?",
+      "choix": ["Politesse", "Hypothèse", "Information non confirmée", "Futur dans le passé"],
+      "bonne": 0,
+      "explication": "On atténue la demande pour être poli : c'est le conditionnel de politesse."
+    },
+    {
+      "consigne": "Quelle est la valeur du conditionnel en couleur ?",
+      "texte": "Selon une rumeur, ce chanteur [quitterait] la France.",
+      "choix": ["Politesse", "Hypothèse", "Information non confirmée", "Futur dans le passé"],
+      "bonne": 2,
+      "explication": "« Selon une rumeur » : l'information n'est pas sûre, le conditionnel le signale."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Subjonctif",
+      "acceptees": ["Le subjonctif", "Le subjonctif présent", "Subjonctif présent"],
+      "indices": [
+        "Je suis un mode.",
+        "Je présente l'action comme envisagée, souhaitée ou redoutée.",
+        "On m'emploie après « il faut que » ou « bien que »."
+      ],
+      "explication": "Le subjonctif présente l'action comme envisagée ; il suit « il faut que », « bien que », « pour que »."
+    },
+    {
+      "reponse": "Passé simple",
+      "acceptees": ["Le passé simple"],
+      "indices": [
+        "Je suis un temps du passé.",
+        "Dans un récit, je raconte les actions de premier plan, ponctuelles et successives.",
+        "Dans « Soudain, la porte s'ouvrit », je suis le verbe « ouvrit »."
+      ],
+      "explication": "Le passé simple exprime les actions de premier plan qui font avancer le récit."
+    },
+    {
+      "reponse": "Gérondif",
+      "acceptees": ["Le gérondif"],
+      "indices": [
+        "Je suis une forme du verbe qui ne change pas selon la personne.",
+        "Je commence par le petit mot « en ».",
+        "Je me forme avec « en » suivi d'un participe présent, comme dans « en venant »."
+      ],
+      "explication": "Le gérondif se forme avec « en » + participe présent : en venant, en chantant."
+    },
+    {
+      "reponse": "Conditionnel",
+      "acceptees": ["Le conditionnel", "Conditionnel présent", "Le conditionnel présent"],
+      "indices": [
+        "Je suis une forme verbale très employée pour demander poliment.",
+        "Je peux exprimer l'hypothèse, comme dans « Si j'avais le temps, je lirais ».",
+        "Je me forme avec le radical du futur et les terminaisons de l'imparfait."
+      ],
+      "explication": "Le conditionnel présent combine le radical du futur et les terminaisons de l'imparfait : je chanterais, nous finirions."
+    }
+  ],
+  "calculs": [],
+  "etapes": []
+}

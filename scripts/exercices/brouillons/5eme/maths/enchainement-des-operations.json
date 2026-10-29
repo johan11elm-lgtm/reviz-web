@@ -1,0 +1,193 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Une somme",
+      "detail": "Un calcul dont la dernière opération effectuée est une addition.",
+      "cartes": [
+        "3 + 4 × 5",
+        "12 ÷ 3 + 8",
+        "6 × 2 + 9 × 3",
+        "2 × (9 − 4) + 1",
+        "18 ÷ (6 − 3) + 5"
+      ]
+    },
+    {
+      "nom": "Une différence",
+      "detail": "Un calcul dont la dernière opération effectuée est une soustraction.",
+      "cartes": [
+        "10 − 2 × 3",
+        "20 − 12 ÷ 4",
+        "5 × 6 − 4 × 3",
+        "(7 + 3) − 2",
+        "3 × (4 + 5) − 1"
+      ]
+    },
+    {
+      "nom": "Un produit",
+      "detail": "Un calcul dont la dernière opération effectuée est une multiplication.",
+      "cartes": [
+        "(3 + 4) × 5",
+        "4 × (9 − 6)",
+        "(8 − 2) × (3 + 1)",
+        "(12 ÷ 4) × 5",
+        "6 × (4 + 2 × 3)"
+      ]
+    },
+    {
+      "nom": "Un quotient",
+      "detail": "Un calcul dont la dernière opération effectuée est une division.",
+      "cartes": [
+        "(12 + 8) ÷ (7 − 2)",
+        "24 ÷ (2 + 4)",
+        "(10 − 4) ÷ 3",
+        "60 ÷ (4 × 5)",
+        "(2 + 3 × 6) ÷ 4"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Dans la division euclidienne de 47 par 6, quel est le rôle du nombre en couleur ?",
+      "texte": "47 = 6 × [7] + 5",
+      "choix": ["Le diviseur", "Le quotient", "Le reste"],
+      "bonne": 1,
+      "explication": "47 = 6 × 7 + 5 : le quotient est 7 (6 × 7 = 42, le plus grand multiple de 6 inférieur à 47)."
+    },
+    {
+      "consigne": "Dans la division euclidienne de 47 par 6, quel est le rôle du nombre en couleur ?",
+      "texte": "47 = 6 × 7 + [5]",
+      "choix": ["Le diviseur", "Le quotient", "Le reste"],
+      "bonne": 2,
+      "explication": "47 − 42 = 5 : c'est le reste, plus petit que le diviseur 6."
+    },
+    {
+      "consigne": "Dans la division euclidienne de 83 par 8, quel est le rôle du nombre en couleur ?",
+      "texte": "83 = [8] × 10 + 3",
+      "choix": ["Le diviseur", "Le quotient", "Le reste"],
+      "bonne": 0,
+      "explication": "On divise 83 par 8 : 8 est le diviseur (83 = 8 × 10 + 3)."
+    },
+    {
+      "consigne": "Dans la division euclidienne de 100 par 12, quel est le rôle du nombre en couleur ?",
+      "texte": "100 = 12 × 8 + [4]",
+      "choix": ["Le diviseur", "Le quotient", "Le reste"],
+      "bonne": 2,
+      "explication": "12 × 8 = 96 et 100 − 96 = 4 : 4 est le reste, plus petit que 12."
+    },
+    {
+      "consigne": "Dans la division euclidienne de 58 par 7, quel est le rôle du nombre en couleur ?",
+      "texte": "58 = 7 × [8] + 2",
+      "choix": ["Le diviseur", "Le quotient", "Le reste"],
+      "bonne": 1,
+      "explication": "7 × 8 = 56 et 58 − 56 = 2 : le quotient est 8."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Priorités opératoires",
+      "acceptees": ["Priorités opératoires", "Les priorités opératoires", "Priorités", "Les priorités", "Priorités des opérations", "Les priorités des opérations", "Priorité des opérations"],
+      "indices": [
+        "Je suis un ensemble de règles de calcul.",
+        "Je dis dans quel ordre il faut faire les opérations.",
+        "Grâce à moi, 7 + 3 × 5 vaut 22 et non 50."
+      ],
+      "explication": "Les priorités opératoires fixent l'ordre des calculs : parenthèses, puis × et ÷, puis + et −."
+    },
+    {
+      "reponse": "Quotient",
+      "acceptees": ["Quotient", "Le quotient", "Un quotient"],
+      "indices": [
+        "Je suis le résultat d'une opération.",
+        "Cette opération est la division.",
+        "Dans la division euclidienne de 47 par 6, je vaux 7."
+      ],
+      "explication": "Le quotient est le résultat d'une division : 47 = 6 × 7 + 5, le quotient est 7."
+    },
+    {
+      "reponse": "Diviseur",
+      "acceptees": ["Diviseur", "Le diviseur", "Un diviseur"],
+      "indices": [
+        "Je suis un nombre entier.",
+        "Je divise un autre nombre sans laisser de reste.",
+        "Pour 63, je peux être 3, 7 ou 9."
+      ],
+      "explication": "Un diviseur de 63 donne un reste nul : 63 = 9 × 7, donc 9 et 7 sont des diviseurs de 63."
+    },
+    {
+      "reponse": "Division euclidienne",
+      "acceptees": ["Division euclidienne", "La division euclidienne", "Une division euclidienne", "Division", "La division"],
+      "indices": [
+        "Je suis une opération.",
+        "Je donne un quotient et un reste, et le reste est plus petit que le diviseur.",
+        "47 = 6 × 7 + 5 est une façon de m'écrire."
+      ],
+      "explication": "La division euclidienne de a par b s'écrit a = b × q + r avec 0 ≤ r < b."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "Calcule 5 + 2 × (10 − 4 × 2).",
+      "reponse": 9,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "Dans la parenthèse : 4 × 2 = 8, puis 10 − 8 = 2. Ensuite 2 × 2 = 4, puis 5 + 4 = 9."
+    },
+    {
+      "question": "Calcule 20 − 5 + 3 × 2.",
+      "reponse": 21,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "La multiplication d'abord : 3 × 2 = 6. Puis de gauche à droite : 20 − 5 = 15, puis 15 + 6 = 21."
+    },
+    {
+      "question": "Quel est le reste de la division euclidienne de 74 par 9 ?",
+      "reponse": 2,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "74 = 9 × 8 + 2 : 9 × 8 = 72 et 74 − 72 = 2, qui est plus petit que 9."
+    },
+    {
+      "question": "Quel est le quotient de la division euclidienne de 205 par 25 ?",
+      "reponse": 8,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "205 = 25 × 8 + 5 : 25 × 8 = 200 et le reste 5 est plus petit que 25."
+    },
+    {
+      "question": "Calcule 24 ÷ 4 × 2 + 1.",
+      "reponse": 13,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "De gauche à droite : 24 ÷ 4 = 6, puis 6 × 2 = 12. Enfin 12 + 1 = 13."
+    },
+    {
+      "question": "Par quel chiffre faut-il remplacer * pour que le nombre 7*5 soit divisible par 9 ?",
+      "reponse": 6,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "Il faut que 7 + * + 5 soit divisible par 9. 7 + 5 = 12, donc * = 6 pour obtenir 18. Le nombre 765 = 9 × 85."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Calculer 4 × (9 − 2 × 3)",
+      "etapes": [
+        "On calcule le produit dans la parenthèse : 2 × 3 = 6",
+        "On termine la parenthèse : 9 − 6 = 3",
+        "On effectue la multiplication restante : 4 × 3",
+        "On obtient le résultat : 12"
+      ]
+    },
+    {
+      "titre": "Montrer que 4 572 est divisible par 9",
+      "etapes": [
+        "On additionne les chiffres : 4 + 5 + 7 + 2",
+        "On trouve la somme des chiffres : 18",
+        "On constate que 18 est divisible par 9",
+        "On conclut que 4 572 est divisible par 9"
+      ]
+    }
+  ]
+}

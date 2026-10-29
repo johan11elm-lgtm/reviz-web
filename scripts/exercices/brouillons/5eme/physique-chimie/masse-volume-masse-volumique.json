@@ -1,0 +1,229 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "La masse",
+      "detail": "Ce qui concerne la quantité de matière d'un objet, la balance et les unités de masse.",
+      "cartes": [
+        "La quantité de matière contenue dans un objet",
+        "On remet la balance à zéro avec le récipient dessus",
+        "1,5 kg équivaut à 1 500 g",
+        "Le kilogramme est l'unité légale pour peser un objet",
+        "Une tonne équivaut à 1 000 kilogrammes"
+      ]
+    },
+    {
+      "nom": "Le volume",
+      "detail": "Ce qui concerne l'espace pris par un objet, l'éprouvette et les unités de volume.",
+      "cartes": [
+        "On lit 50 mL sur l'éprouvette graduée",
+        "La place occupée par un objet",
+        "1 L équivaut à 1 000 cm³",
+        "Plonger un caillou fait monter l'eau de 18 mL",
+        "Un mètre cube contient 1 000 litres"
+      ]
+    },
+    {
+      "nom": "La masse volumique",
+      "detail": "Ce qui caractérise une substance : son symbole, son calcul, ses unités et ses valeurs dans les tableaux.",
+      "cartes": [
+        "Une grandeur notée avec la lettre grecque rhô",
+        "54 g pour 20 cm³ donnent 2,7 g/cm³",
+        "1 g/cm³ équivaut à 1 000 kg/m³",
+        "Valeur de l'eau liquide : environ 1 g/cm³",
+        "Un objet de 7,9 g/cm³ peut être en fer"
+      ]
+    },
+    {
+      "nom": "Flotter ou couler",
+      "detail": "Ce qui se passe quand on place un objet, un liquide ou une bulle dans l'eau : il reste en surface ou il descend.",
+      "cartes": [
+        "Un glaçon reste à la surface d'un verre d'eau",
+        "Une bille de fer lâchée dans l'eau va au fond",
+        "L'huile versée dans l'eau forme une couche au-dessus",
+        "Un bateau d'acier tient sur l'eau car il est creux",
+        "Une bulle d'air s'élève dans un verre d'eau"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Quelle grandeur le groupe en couleur indique-t-il ?",
+      "texte": "Sur la balance, le bécher plein d'huile affiche [142 g].",
+      "choix": [
+        "Masse",
+        "Volume",
+        "Masse volumique"
+      ],
+      "bonne": 0,
+      "explication": "Une balance mesure une masse : 142 g est une masse, exprimée en grammes."
+    },
+    {
+      "consigne": "Quelle grandeur le groupe en couleur indique-t-il ?",
+      "texte": "On plonge le caillou et l'eau de l'éprouvette monte jusqu'à [68 mL].",
+      "choix": [
+        "Masse",
+        "Volume",
+        "Masse volumique"
+      ],
+      "bonne": 1,
+      "explication": "Le niveau lu sur une éprouvette graduée est un volume, ici en millilitres."
+    },
+    {
+      "consigne": "Quelle grandeur le groupe en couleur indique-t-il ?",
+      "texte": "Dans le tableau de valeurs, l'aluminium a [2,7 g/cm³].",
+      "choix": [
+        "Masse",
+        "Volume",
+        "Masse volumique"
+      ],
+      "bonne": 2,
+      "explication": "Des grammes par centimètre cube, g/cm³, c'est l'unité d'une masse volumique."
+    },
+    {
+      "consigne": "Quelle grandeur le groupe en couleur indique-t-il ?",
+      "texte": "La piscine de l'école peut contenir [250 m³] d'eau.",
+      "choix": [
+        "Masse",
+        "Volume",
+        "Masse volumique"
+      ],
+      "bonne": 1,
+      "explication": "Le mètre cube mesure la place occupée par l'eau : c'est un volume."
+    },
+    {
+      "consigne": "Quelle grandeur le groupe en couleur indique-t-il ?",
+      "texte": "Le sac de farine posé sur la balance indique [2 kg].",
+      "choix": [
+        "Masse",
+        "Volume",
+        "Masse volumique"
+      ],
+      "bonne": 0,
+      "explication": "Le kilogramme est l'unité légale de la masse, que mesure la balance."
+    },
+    {
+      "consigne": "Quelle grandeur le groupe en couleur indique-t-il ?",
+      "texte": "Pour l'eau liquide, on lit [1 kg/L] dans le tableau.",
+      "choix": [
+        "Masse",
+        "Volume",
+        "Masse volumique"
+      ],
+      "bonne": 2,
+      "explication": "Des kilogrammes par litre, kg/L, c'est une masse volumique : 1 L d'eau a une masse de 1 kg."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Masse volumique",
+      "acceptees": [
+        "La masse volumique",
+        "Rhô",
+        "Rho",
+        "ρ"
+      ],
+      "indices": [
+        "Je suis une valeur propre à chaque substance.",
+        "On me calcule en divisant ce que donne la balance par ce que donne l'éprouvette.",
+        "Pour l'eau liquide, je vaux environ 1 g/cm³ et on me note avec la lettre grecque rhô."
+      ],
+      "explication": "La masse volumique ρ = m ÷ V caractérise une substance ; celle de l'eau liquide vaut environ 1 g/cm³."
+    },
+    {
+      "reponse": "Éprouvette",
+      "acceptees": [
+        "Une éprouvette",
+        "L'éprouvette",
+        "Éprouvette graduée",
+        "Une éprouvette graduée"
+      ],
+      "indices": [
+        "Je fais partie du matériel de laboratoire.",
+        "Je suis un tube transparent avec des graduations en mL.",
+        "On me remplit d'un peu d'eau puis on y plonge un caillou pour connaître son volume."
+      ],
+      "explication": "L'éprouvette graduée mesure un volume, et le déplacement d'eau donne le volume d'un solide."
+    },
+    {
+      "reponse": "Glace",
+      "acceptees": [
+        "La glace",
+        "Un glaçon",
+        "Glaçon",
+        "Les glaçons"
+      ],
+      "indices": [
+        "Je flotte quand on me met dans un verre d'eau.",
+        "Je suis de l'eau à l'état solide.",
+        "Ma masse volumique est d'environ 0,92 g/cm³, plus petite que celle de l'eau liquide."
+      ],
+      "explication": "La glace (0,92 g/cm³) a une masse volumique plus petite que l'eau liquide (1 g/cm³) : elle flotte."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "Un morceau d'aluminium a une masse de 135 g et un volume de 50 cm³. Quelle est sa masse volumique en g/cm³ ?",
+      "reponse": 2.7,
+      "unite": "g/cm³",
+      "tolerance": 0,
+      "explication": "ρ = m ÷ V = 135 ÷ 50 = 2,7 g/cm³."
+    },
+    {
+      "question": "Un cube de fer a une masse de 79 g et un volume de 10 cm³. Quelle est sa masse volumique en g/cm³ ?",
+      "reponse": 7.9,
+      "unite": "g/cm³",
+      "tolerance": 0,
+      "explication": "ρ = m ÷ V = 79 ÷ 10 = 7,9 g/cm³."
+    },
+    {
+      "question": "L'eau d'une éprouvette est au niveau 40 mL. On y plonge un caillou et le niveau monte à 73 mL. Quel est le volume du caillou en cm³ ?",
+      "reponse": 33,
+      "unite": "cm³",
+      "tolerance": 0,
+      "explication": "V(caillou) = V(final) − V(initial) = 73 − 40 = 33 mL, soit 33 cm³ car 1 mL = 1 cm³."
+    },
+    {
+      "question": "Un bécher vide a une masse de 60 g. Rempli d'huile, il a une masse de 138 g. Quelle est la masse de l'huile en g ?",
+      "reponse": 78,
+      "unite": "g",
+      "tolerance": 0,
+      "explication": "Masse d'huile = masse du bécher plein − masse du bécher vide = 138 − 60 = 78 g."
+    },
+    {
+      "question": "L'eau liquide a une masse volumique de 1 kg/L. Quelle est la masse de 3,5 L d'eau, en kg ?",
+      "reponse": 3.5,
+      "unite": "kg",
+      "tolerance": 0,
+      "explication": "1 L d'eau a une masse de 1 kg, donc 3,5 L d'eau ont une masse de 3,5 × 1 = 3,5 kg."
+    },
+    {
+      "question": "Une pièce de 27 g est plongée dans une éprouvette : le niveau de l'eau passe de 40 mL à 50 mL. Quelle est la masse volumique de la pièce, en g/cm³ ?",
+      "reponse": 2.7,
+      "unite": "g/cm³",
+      "tolerance": 0,
+      "explication": "V = 50 − 40 = 10 mL = 10 cm³, puis ρ = m ÷ V = 27 ÷ 10 = 2,7 g/cm³."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Mesurer le volume d'un caillou",
+      "etapes": [
+        "On verse de l'eau dans l'éprouvette et on lit le niveau",
+        "On plonge le caillou dans l'éprouvette",
+        "On lit le nouveau niveau de l'eau",
+        "On calcule la différence entre les deux niveaux"
+      ]
+    },
+    {
+      "titre": "Mesurer la masse d'huile dans un bécher",
+      "etapes": [
+        "On pèse le bécher vide",
+        "On verse l'huile dans le bécher",
+        "On pèse le bécher rempli d'huile",
+        "On soustrait la masse du bécher vide"
+      ]
+    }
+  ]
+}

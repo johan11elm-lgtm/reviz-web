@@ -1,0 +1,172 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Partir pour trouver un emploi",
+      "detail": "Les migrants économiques : on migre surtout pour trouver du travail et de meilleurs revenus.",
+      "cartes": [
+        "Un ouvrier indien part construire des immeubles aux Émirats",
+        "Un ouvrier agricole mexicain cherche du travail aux États-Unis",
+        "Un médecin part exercer à l'étranger pour un meilleur salaire",
+        "Un jeune quitte son pays faute de trouver un emploi",
+        "Une serveuse part chercher un meilleur revenu à l'étranger"
+      ]
+    },
+    {
+      "nom": "Rejoindre sa famille",
+      "detail": "Le regroupement familial : la personne part retrouver un proche déjà installé dans un autre pays.",
+      "cartes": [
+        "Une mère va vivre avec son mari, installé en France",
+        "Des enfants vont vivre chez leur père installé en Allemagne",
+        "Une grand-mère retrouve ses enfants partis vivre au Canada",
+        "Un jeune homme retrouve son frère installé en Belgique",
+        "Une famille séparée se réunit enfin dans un autre pays"
+      ]
+    },
+    {
+      "nom": "Fuir la guerre ou les persécutions",
+      "detail": "Les réfugiés et les déplacés quittent leur foyer pour échapper aux combats, aux violences ou à des menaces.",
+      "cartes": [
+        "Une famille ukrainienne quitte sa ville bombardée",
+        "Des habitants du Soudan fuient les violences",
+        "Une famille syrienne échappe aux combats et part en Allemagne",
+        "Un opposant menacé à cause de ses idées quitte son pays",
+        "Un journaliste menacé de mort doit quitter son pays"
+      ]
+    },
+    {
+      "nom": "Fuir sécheresses et catastrophes",
+      "detail": "Le climat et les catastrophes naturelles poussent aussi des habitants à partir.",
+      "cartes": [
+        "Une sécheresse détruit les récoltes et un village se vide",
+        "Une inondation emporte les maisons d'un quartier entier",
+        "Un ouragan ravage une île et ses habitants partent",
+        "Un séisme détruit une ville et des familles s'en vont",
+        "Une éruption volcanique oblige des villageois à partir"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "l'émigration depuis un pays du Sud",
+      "carte": "Beaucoup d'habitants cherchent un emploi et de meilleurs revenus",
+      "role": "cause",
+      "explication": "On migre surtout pour trouver un emploi et de meilleurs revenus."
+    },
+    {
+      "fait": "l'émigration depuis un pays du Sud",
+      "carte": "La guerre et les persécutions menacent des habitants",
+      "role": "cause",
+      "explication": "Guerres et persécutions poussent des millions de personnes à fuir leur pays."
+    },
+    {
+      "fait": "l'émigration depuis un pays du Sud",
+      "carte": "Des sécheresses détruisent les récoltes",
+      "role": "cause",
+      "explication": "Les sécheresses et les catastrophes poussent aussi au départ."
+    },
+    {
+      "fait": "l'émigration depuis un pays du Sud",
+      "carte": "Les familles restées au pays reçoivent de l'argent des migrants",
+      "role": "consequence",
+      "explication": "Ce sont les transferts de fonds : plus de 600 milliards de dollars par an."
+    },
+    {
+      "fait": "l'émigration depuis un pays du Sud",
+      "carte": "Le pays perd des jeunes actifs et des diplômés",
+      "role": "consequence",
+      "explication": "C'est la fuite des cerveaux : médecins et ingénieurs partent travailler à l'étranger."
+    }
+  ],
+  "etiquettes": [
+    {
+      "consigne": "Quel est le statut de la personne en couleur ?",
+      "texte": "[Un Syrien] a fui la guerre et a obtenu l'asile en Allemagne.",
+      "choix": ["Réfugié", "Déplacé interne", "Migrant venu travailler", "Migrant venu étudier"],
+      "bonne": 0,
+      "explication": "Il a fui son pays et obtenu une protection à l'étranger : c'est un réfugié, protégé par la Convention de Genève (1951)."
+    },
+    {
+      "consigne": "Quel est le statut de la personne en couleur ?",
+      "texte": "[Une famille de Syrie] a fui les combats et s'est abritée dans une autre région de Syrie.",
+      "choix": ["Réfugié", "Déplacé interne", "Migrant venu travailler", "Migrant venu étudier"],
+      "bonne": 1,
+      "explication": "Cette famille a fui son foyer mais reste dans son propre pays : ce sont des déplacés internes."
+    },
+    {
+      "consigne": "Quel est le statut de la personne en couleur ?",
+      "texte": "[Un ouvrier indien] est parti construire des immeubles aux Émirats arabes unis.",
+      "choix": ["Réfugié", "Déplacé interne", "Migrant venu travailler", "Migrant venu étudier"],
+      "bonne": 2,
+      "explication": "Il vit dans un autre pays que le sien pour y travailler : c'est un migrant venu travailler."
+    },
+    {
+      "consigne": "Quel est le statut de la personne en couleur ?",
+      "texte": "[Une étudiante marocaine] est partie préparer un diplôme dans une université française.",
+      "choix": ["Réfugié", "Déplacé interne", "Migrant venu travailler", "Migrant venu étudier"],
+      "bonne": 3,
+      "explication": "Elle vit dans un autre pays que le sien pour y étudier : c'est une migrante venue étudier."
+    },
+    {
+      "consigne": "Quel est le statut de la personne en couleur ?",
+      "texte": "[Un habitant du Soudan] a fui les violences de son village et s'est installé dans une autre région du Soudan.",
+      "choix": ["Réfugié", "Déplacé interne", "Migrant venu travailler", "Migrant venu étudier"],
+      "bonne": 1,
+      "explication": "Il a fui son foyer mais reste dans son propre pays : c'est un déplacé interne."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Diaspora",
+      "acceptees": ["Diaspora", "La diaspora", "Une diaspora"],
+      "indices": [
+        "Je désigne un groupe de personnes.",
+        "Mes membres viennent du même pays mais vivent dans d'autres pays.",
+        "Je garde des liens avec mon pays d'origine : grâce à moi, l'Inde reçoit le plus de transferts de fonds au monde."
+      ],
+      "explication": "Une diaspora est un ensemble de personnes originaires d'un même pays, dispersées ailleurs, qui gardent des liens avec lui."
+    },
+    {
+      "reponse": "Réfugié",
+      "acceptees": ["Réfugié", "Un réfugié", "Réfugiés", "Réfugiée"],
+      "indices": [
+        "Je suis une personne qui a quitté son pays.",
+        "J'y étais persécuté ou menacé.",
+        "Je suis protégé par la Convention de Genève de 1951."
+      ],
+      "explication": "Un réfugié a fui son pays parce qu'il y était persécuté ou menacé ; la Convention de Genève (1951) le protège."
+    },
+    {
+      "reponse": "Déplacé interne",
+      "acceptees": ["Déplacé interne", "Un déplacé interne", "Déplacés internes", "Déplacé"],
+      "indices": [
+        "J'ai dû quitter mon foyer.",
+        "J'ai fui la guerre ou la violence.",
+        "Mais je suis resté dans mon propre pays."
+      ],
+      "explication": "Un déplacé interne a fui son foyer mais reste dans son propre pays."
+    },
+    {
+      "reponse": "États-Unis",
+      "acceptees": ["États-Unis", "Etats-Unis", "Les États-Unis", "USA", "États-Unis d'Amérique"],
+      "indices": [
+        "Mon territoire touche le Mexique.",
+        "Je suis une grande puissance qui attire des migrants d'Amérique centrale.",
+        "Je suis le premier pays d'accueil de migrants au monde, devant l'Allemagne et l'Arabie saoudite."
+      ],
+      "explication": "Les États-Unis sont le premier pays d'accueil de migrants, devant l'Allemagne et l'Arabie saoudite."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Le parcours d'un migrant qui aide sa famille restée au pays",
+      "etapes": [
+        "Il quitte son pays de départ",
+        "Il traverse un pays de transit",
+        "Il s'installe dans un pays d'accueil",
+        "Il envoie de l'argent à sa famille restée au pays"
+      ]
+    }
+  ]
+}

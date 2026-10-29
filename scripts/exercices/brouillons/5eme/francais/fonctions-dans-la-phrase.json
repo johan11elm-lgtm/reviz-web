@@ -1,0 +1,138 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Les compléments de lieu",
+      "detail": "Des compléments circonstanciels qui répondent à la question « où ? ».",
+      "cartes": [
+        "Dans la grande forêt",
+        "Sur le chemin du château",
+        "Au bord de la rivière",
+        "Devant la porte de l'église",
+        "Au sommet de la tour"
+      ]
+    },
+    {
+      "nom": "Les compléments de temps",
+      "detail": "Des compléments circonstanciels qui répondent à la question « quand ? ».",
+      "cartes": [
+        "Le lendemain de la bataille",
+        "Au lever du jour",
+        "Pendant toute la nuit",
+        "Chaque matin à huit heures",
+        "Quelques heures plus tard"
+      ]
+    },
+    {
+      "nom": "Les compléments de manière",
+      "detail": "Des compléments circonstanciels qui répondent à la question « comment ? ».",
+      "cartes": [
+        "Avec beaucoup de courage",
+        "Sans faire le moindre bruit",
+        "À toute vitesse",
+        "D'un air très triste",
+        "De toutes ses forces"
+      ]
+    },
+    {
+      "nom": "Les compléments de cause",
+      "detail": "Des compléments circonstanciels qui répondent à la question « pourquoi ? ».",
+      "cartes": [
+        "À cause de la tempête",
+        "Par jalousie envers son frère",
+        "Parce qu'il avait très peur",
+        "Par manque d'argent",
+        "En raison d'une panne de courant"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Quelle est la fonction du groupe en couleur ?",
+      "texte": "Soudain, derrière les arbres, apparaissent [trois loups].",
+      "choix": ["Sujet", "COD", "COI", "Complément circonstanciel"],
+      "bonne": 0,
+      "explication": "« Ce sont trois loups qui apparaissent » : « trois loups » est le sujet, placé après le verbe, et le verbe est au pluriel."
+    },
+    {
+      "consigne": "Quelle est la fonction du groupe en couleur ?",
+      "texte": "Le forgeron répare [l'armure du chevalier] avant la nuit.",
+      "choix": ["Sujet", "COD", "COI", "Complément circonstanciel"],
+      "bonne": 1,
+      "explication": "Le forgeron répare quoi ? l'armure du chevalier. Il n'y a pas de préposition et on ne peut ni le supprimer ni le déplacer : c'est un COD."
+    },
+    {
+      "consigne": "Quelle est la fonction du groupe en couleur ?",
+      "texte": "Le vieux roi se souvient [de ses anciennes batailles].",
+      "choix": ["Sujet", "COD", "COI", "Complément circonstanciel"],
+      "bonne": 2,
+      "explication": "On se souvient de quelque chose : le groupe est introduit par la préposition « de » et dépend du verbe, c'est un COI."
+    },
+    {
+      "consigne": "Quelle est la fonction du mot en couleur ?",
+      "texte": "Les chevaliers arrivent au château. Le roi [leur] parle longuement.",
+      "choix": ["Sujet", "COD", "COI", "Complément circonstanciel"],
+      "bonne": 2,
+      "explication": "On parle à quelqu'un : « leur » remplace « aux chevaliers », c'est un COI."
+    },
+    {
+      "consigne": "Quelle est la fonction du groupe en couleur ?",
+      "texte": "[Au lever du jour], les chevaliers quittèrent le château.",
+      "choix": ["Sujet", "COD", "COI", "Complément circonstanciel"],
+      "bonne": 3,
+      "explication": "Ce groupe répond à « quand ? », on peut le supprimer et le déplacer : c'est un complément circonstanciel de temps."
+    },
+    {
+      "consigne": "Quelle est la fonction du groupe en couleur ?",
+      "texte": "Le chevalier voyage [la nuit] pour éviter la chaleur.",
+      "choix": ["Sujet", "COD", "COI", "Complément circonstanciel"],
+      "bonne": 3,
+      "explication": "« la nuit » répond à « quand ? » et se déplace (« La nuit, le chevalier voyage ») : c'est un complément circonstanciel de temps, pas un COD."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "COD",
+      "acceptees": ["Le COD", "Complément d'objet direct"],
+      "indices": [
+        "Je précise le verbe et je ne peux ni être supprimé ni être déplacé.",
+        "Je me construis sans préposition.",
+        "Dans « Perceval cherche le Graal », je suis « le Graal »."
+      ],
+      "explication": "Le COD complète le verbe sans préposition et répond à « qui ? » ou « quoi ? »."
+    },
+    {
+      "reponse": "COI",
+      "acceptees": ["Le COI", "Complément d'objet indirect"],
+      "indices": [
+        "On ne peut ni me supprimer ni me déplacer sans changer la phrase.",
+        "Une préposition, à ou de, m'introduit.",
+        "Dans « Il parle à sa mère », je suis « à sa mère »."
+      ],
+      "explication": "Le COI complète le verbe avec une préposition (à, de) et répond à « à qui ? », « de quoi ? »."
+    },
+    {
+      "reponse": "Sujet",
+      "acceptees": ["Le sujet"],
+      "indices": [
+        "Je commande l'accord du verbe.",
+        "On me trouve avec « C'est… qui ».",
+        "Dans « Le roi, furieux, se lève », je suis « le roi »."
+      ],
+      "explication": "Le sujet commande l'accord du verbe et se repère avec « C'est… qui »."
+    },
+    {
+      "reponse": "Pronominalisation",
+      "acceptees": ["La pronominalisation"],
+      "indices": [
+        "Je suis une manipulation.",
+        "Je remplace un groupe par « le », « la », « les », « lui » ou « leur ».",
+        "Grâce à moi, on distingue un COD d'un COI."
+      ],
+      "explication": "La pronominalisation remplace un groupe par un pronom : le, la, les pour un COD ; lui, leur pour un COI."
+    }
+  ],
+  "calculs": [],
+  "etapes": []
+}

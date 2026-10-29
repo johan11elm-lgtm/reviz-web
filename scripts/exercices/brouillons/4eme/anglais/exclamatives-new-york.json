@@ -1,0 +1,138 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "What a ou What an + nom singulier",
+      "detail": "Devant un nom singulier dénombrable, on emploie What a, ou What an devant un son voyelle.",
+      "cartes": [
+        "What a view!",
+        "What an amazing city!",
+        "What a noisy street!",
+        "What an enormous skyscraper!",
+        "What a crowded subway!"
+      ]
+    },
+    {
+      "nom": "What sans article",
+      "detail": "Devant un nom pluriel ou indénombrable, What s'emploie sans article.",
+      "cartes": [
+        "What tall buildings!",
+        "What awful weather!",
+        "What huge crowds!",
+        "What loud music!",
+        "What expensive shops!"
+      ]
+    },
+    {
+      "nom": "How + adjectif ou adverbe",
+      "detail": "How s'emploie devant un adjectif ou un adverbe, sans nom, et la phrase garde l'ordre sujet + verbe.",
+      "cartes": [
+        "How beautiful this city is!",
+        "How fast the yellow cab drives!",
+        "How big this park is!",
+        "How noisy it is!",
+        "How slowly the subway moves!"
+      ]
+    },
+    {
+      "nom": "Exclamatives avec une erreur",
+      "detail": "Ces phrases contiennent une faute : article oublié ou en trop, an devant une consonne, ou inversion après How.",
+      "cartes": [
+        "What nice day!",
+        "What a weather!",
+        "What a good advice!",
+        "How crowded is Times Square!",
+        "What an small hotel!"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Quel type de nom est en couleur ?",
+      "texte": "What a [view] from the Empire State Building!",
+      "choix": ["Singulier dénombrable", "Pluriel", "Indénombrable"],
+      "bonne": 0,
+      "explication": "« view » est singulier et dénombrable : on dit What a view!"
+    },
+    {
+      "consigne": "Quel type de nom est en couleur ?",
+      "texte": "What tall [buildings]!",
+      "choix": ["Singulier dénombrable", "Pluriel", "Indénombrable"],
+      "bonne": 1,
+      "explication": "« buildings » est un pluriel : What s'emploie sans article."
+    },
+    {
+      "consigne": "Quel type de nom est en couleur ?",
+      "texte": "What awful [weather]!",
+      "choix": ["Singulier dénombrable", "Pluriel", "Indénombrable"],
+      "bonne": 2,
+      "explication": "« weather » est indénombrable : on ne dit jamais What a weather."
+    },
+    {
+      "consigne": "Quel type de nom est en couleur ?",
+      "texte": "What a noisy [street]!",
+      "choix": ["Singulier dénombrable", "Pluriel", "Indénombrable"],
+      "bonne": 0,
+      "explication": "« street » est singulier et dénombrable : What a + adjectif + nom."
+    },
+    {
+      "consigne": "Quel type de nom est en couleur ?",
+      "texte": "What loud [music] in Times Square!",
+      "choix": ["Singulier dénombrable", "Pluriel", "Indénombrable"],
+      "bonne": 2,
+      "explication": "« music » est indénombrable : What loud music!, sans article."
+    },
+    {
+      "consigne": "Quel type de nom est en couleur ?",
+      "texte": "What huge [crowds]!",
+      "choix": ["Singulier dénombrable", "Pluriel", "Indénombrable"],
+      "bonne": 1,
+      "explication": "« crowds » est un pluriel : What huge crowds!, sans article."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "The Big Apple",
+      "acceptees": ["Big Apple", "La Grosse Pomme"],
+      "indices": [
+        "Je suis un surnom.",
+        "Je désigne la plus grande ville des États-Unis.",
+        "En français, on me traduit par « la Grosse Pomme »."
+      ],
+      "explication": "The Big Apple est le surnom de New York."
+    },
+    {
+      "reponse": "Times Square",
+      "acceptees": ["Time Square", "Le Times Square"],
+      "indices": [
+        "Je suis un lieu très célèbre de Manhattan.",
+        "Je suis toujours bondé, de jour comme de nuit.",
+        "Mes écrans géants brillent partout autour de moi."
+      ],
+      "explication": "Times Square, à Manhattan, est célèbre pour ses écrans géants et sa foule."
+    },
+    {
+      "reponse": "The Empire State Building",
+      "acceptees": ["Empire State Building", "Empire State", "The Empire State"],
+      "indices": [
+        "Je suis un gratte-ciel de Manhattan.",
+        "J'ai été achevé en 1931.",
+        "On monte à mon sommet pour admirer la vue sur New York."
+      ],
+      "explication": "L'Empire State Building est un gratte-ciel de Manhattan achevé en 1931."
+    },
+    {
+      "reponse": "The Brooklyn Bridge",
+      "acceptees": ["Brooklyn Bridge", "Le pont de Brooklyn", "Pont de Brooklyn"],
+      "indices": [
+        "Je suis un ouvrage qui enjambe une rivière.",
+        "Je relie Manhattan à un autre quartier de New York.",
+        "Je suis ouvert depuis 1883."
+      ],
+      "explication": "Le pont de Brooklyn, ouvert en 1883, relie Manhattan à Brooklyn."
+    }
+  ],
+  "calculs": [],
+  "etapes": []
+}

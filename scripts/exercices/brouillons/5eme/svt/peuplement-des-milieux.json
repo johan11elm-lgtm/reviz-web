@@ -1,0 +1,175 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Les animaux qui migrent",
+      "detail": "La migration est le départ vers une région plus favorable pour passer la mauvaise saison.",
+      "cartes": [
+        "Les hirondelles disparaissent du milieu en hiver",
+        "La cigogne quitte son milieu avant les grands froids",
+        "Départ vers une région plus favorable à la mauvaise saison",
+        "Oiseaux qui quittent le milieu à l'automne",
+        "S'éloigner du milieu jusqu'au retour du beau temps"
+      ]
+    },
+    {
+      "nom": "Les animaux qui hibernent",
+      "detail": "L'hibernation est un sommeil profond d'hiver de certains mammifères.",
+      "cartes": [
+        "La marmotte dort dans son terrier tout l'hiver",
+        "Le hérisson dort profondément pendant la mauvaise saison",
+        "Le loir dort profondément jusqu'au printemps",
+        "Température du corps et rythme cardiaque baissent fortement",
+        "Sommeil profond d'hiver de certains mammifères"
+      ]
+    },
+    {
+      "nom": "Les animaux en vie ralentie",
+      "detail": "Ces animaux ont une température qui suit celle du milieu et deviennent inactifs quand il fait froid.",
+      "cartes": [
+        "La grenouille devient inactive quand il fait froid",
+        "Le lézard se cache, immobile, par temps froid",
+        "L'escargot reste inactif pendant l'hiver",
+        "Animal dont la température suit celle du milieu",
+        "Des insectes deviennent inactifs quand le froid arrive"
+      ]
+    },
+    {
+      "nom": "Les végétaux en hiver",
+      "detail": "Les végétaux survivent sous une forme de résistance : bourgeons, graines, bulbes ou tubercules.",
+      "cartes": [
+        "Le chêne garde des bourgeons protégés par des écailles",
+        "La tulipe passe l'hiver sous forme de bulbe",
+        "Le tubercule de la pomme de terre survit sous terre",
+        "La plante annuelle meurt et laisse des graines",
+        "Le hêtre perd ses feuilles en automne"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "les changements de peuplement d'un milieu au fil des saisons",
+      "carte": "La baisse de la température en automne",
+      "role": "cause",
+      "explication": "Le peuplement varie surtout à cause de la température."
+    },
+    {
+      "fait": "les changements de peuplement d'un milieu au fil des saisons",
+      "carte": "La diminution de la durée du jour",
+      "role": "cause",
+      "explication": "La durée du jour fait partie des facteurs qui font varier le peuplement."
+    },
+    {
+      "fait": "les changements de peuplement d'un milieu au fil des saisons",
+      "carte": "Une nourriture moins abondante",
+      "role": "cause",
+      "explication": "La nourriture disponible fait varier le peuplement d'une saison à l'autre."
+    },
+    {
+      "fait": "les changements de peuplement d'un milieu au fil des saisons",
+      "carte": "Le départ des hirondelles",
+      "role": "consequence",
+      "explication": "À la mauvaise saison, certaines espèces quittent le milieu."
+    },
+    {
+      "fait": "les changements de peuplement d'un milieu au fil des saisons",
+      "carte": "L'inactivité des grenouilles",
+      "role": "consequence",
+      "explication": "Quand il fait froid, certains animaux restent inactifs ou invisibles."
+    }
+  ],
+  "etiquettes": [
+    {
+      "consigne": "Comment l'être vivant en couleur passe-t-il l'hiver ?",
+      "texte": "À la fin de l'été, [l'hirondelle] quitte le milieu pour une région plus favorable.",
+      "choix": ["Migration", "Hibernation", "Vie ralentie", "Forme de résistance"],
+      "bonne": 0,
+      "explication": "L'hirondelle part vers une région plus favorable : c'est une migration."
+    },
+    {
+      "consigne": "Comment l'être vivant en couleur passe-t-il l'hiver ?",
+      "texte": "En hiver, [la marmotte] dort profondément dans son terrier.",
+      "choix": ["Migration", "Hibernation", "Vie ralentie", "Forme de résistance"],
+      "bonne": 1,
+      "explication": "La marmotte est un mammifère qui hiberne : sa température et son rythme cardiaque baissent fortement."
+    },
+    {
+      "consigne": "Comment l'être vivant en couleur passe-t-il l'hiver ?",
+      "texte": "Quand il fait froid, [le lézard] devient inactif et se cache.",
+      "choix": ["Migration", "Hibernation", "Vie ralentie", "Forme de résistance"],
+      "bonne": 2,
+      "explication": "La température du lézard suit celle du milieu : il entre en vie ralentie."
+    },
+    {
+      "consigne": "Comment l'être vivant en couleur passe-t-il l'hiver ?",
+      "texte": "À l'automne, [le chêne] perd ses feuilles mais garde ses bourgeons.",
+      "choix": ["Migration", "Hibernation", "Vie ralentie", "Forme de résistance"],
+      "bonne": 3,
+      "explication": "Les bourgeons protégés par des écailles sont la forme de résistance du chêne."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Hibernation",
+      "acceptees": ["Hibernation", "L'hibernation", "Hiberner"],
+      "indices": [
+        "Je suis une façon de passer l'hiver.",
+        "Je concerne la marmotte, le hérisson et le loir.",
+        "Pendant moi, la température du corps et le rythme cardiaque baissent fortement."
+      ],
+      "explication": "L'hibernation est le sommeil profond d'hiver de certains mammifères."
+    },
+    {
+      "reponse": "Cloporte",
+      "acceptees": ["Cloporte", "Cloportes", "Le cloporte", "Un cloporte"],
+      "indices": [
+        "Je suis un petit animal.",
+        "Je me cache sous les pierres et les feuilles mortes.",
+        "Je recherche l'obscurité et l'humidité, comme le montre l'expérience avec une boîte moitié sèche, moitié humide."
+      ],
+      "explication": "Le cloporte se regroupe du côté humide et sombre d'une boîte."
+    },
+    {
+      "reponse": "Bulbe",
+      "acceptees": ["Bulbe", "Le bulbe", "Un bulbe"],
+      "indices": [
+        "Je suis un organe de plante.",
+        "Je reste sous terre pendant l'hiver.",
+        "La tulipe passe l'hiver sous cette forme."
+      ],
+      "explication": "Le bulbe est un organe souterrain de réserve qui résiste au froid."
+    },
+    {
+      "reponse": "Facteur abiotique",
+      "acceptees": ["Facteur abiotique", "Un facteur abiotique", "Abiotique", "Facteurs abiotiques"],
+      "indices": [
+        "Je suis une condition du milieu.",
+        "Je ne suis pas vivant.",
+        "La lumière, la température et l'humidité en sont des exemples."
+      ],
+      "explication": "Un facteur abiotique est une condition non vivante du milieu."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Tester l'influence de l'humidité sur les cloportes",
+      "etapes": [
+        "On émet l'hypothèse : le cloporte préfère l'humidité",
+        "On prépare une boîte sombre, moitié sèche, moitié humide",
+        "On place les cloportes dans la boîte",
+        "On observe où les cloportes se regroupent",
+        "On conclut : ils préfèrent le côté humide"
+      ]
+    },
+    {
+      "titre": "Relier une espèce aux conditions du milieu",
+      "etapes": [
+        "On relève les espèces et les facteurs dans chaque zone",
+        "On range les relevés dans un tableau",
+        "On met en relation les espèces et les valeurs des facteurs",
+        "On vérifie par une expérience avec témoin"
+      ]
+    }
+  ]
+}

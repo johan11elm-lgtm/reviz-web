@@ -1,0 +1,148 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Développer une expression",
+      "detail": "On transforme un produit en somme en multipliant chaque terme de la parenthèse.",
+      "cartes": [
+        "4(x + 3) devient 4x + 12",
+        "2(5 − y) devient 10 − 2y",
+        "3(x + 2) devient 3x + 6",
+        "5(2a + 1) devient 10a + 5",
+        "7(x − 4) devient 7x − 28"
+      ]
+    },
+    {
+      "nom": "Factoriser une expression",
+      "detail": "On transforme une somme en produit en repérant un facteur commun.",
+      "cartes": [
+        "6x + 9 devient 3(2x + 3)",
+        "7a + 7b devient 7(a + b)",
+        "5x + 10 devient 5(x + 2)",
+        "8y − 12 devient 4(2y − 3)",
+        "9x + 6 devient 3(3x + 2)"
+      ]
+    },
+    {
+      "nom": "Réduire une expression",
+      "detail": "On regroupe les termes de même nature pour écrire une somme plus courte.",
+      "cartes": [
+        "2x + 4 + x − 1 devient 3x + 3",
+        "7a − 2a + 3 devient 5a + 3",
+        "4y + 1 + 2y + 6 devient 6y + 7",
+        "5x + 2 + 3x + 4 devient 8x + 6",
+        "9 + 2y − 4 + y devient 3y + 5"
+      ]
+    },
+    {
+      "nom": "Remplacer la lettre par un nombre",
+      "detail": "On substitue une valeur à la lettre, puis on calcule le résultat.",
+      "cartes": [
+        "Pour x = 3, 5x − 2 vaut 13",
+        "Pour x = 4, 2x + 1 vaut 9",
+        "Pour x = 2, 3x + 1 vaut 7",
+        "Pour x = 5, 10 − 2x vaut 0",
+        "Pour a = 6, 4a vaut 24"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [],
+  "devinettes": [
+    {
+      "reponse": "Équation",
+      "acceptees": ["Équation", "Une équation", "L'équation"],
+      "indices": [
+        "Je suis une égalité.",
+        "Je contiens un nombre inconnu à trouver.",
+        "x + 7 = 15 est un exemple de moi."
+      ],
+      "explication": "Une équation est une égalité qui contient une inconnue : x + 7 = 15."
+    },
+    {
+      "reponse": "Solution",
+      "acceptees": ["Solution", "La solution", "Une solution"],
+      "indices": [
+        "Je suis un nombre.",
+        "Quand on me met à la place de l'inconnue, l'égalité devient vraie.",
+        "Pour x + 7 = 15, je vaux 8."
+      ],
+      "explication": "La solution est la valeur de l'inconnue qui rend l'égalité vraie : 8 + 7 = 15."
+    },
+    {
+      "reponse": "Distributivité",
+      "acceptees": ["Distributivité", "La distributivité"],
+      "indices": [
+        "Je suis une propriété du calcul.",
+        "Je permets de transformer un produit en somme, et inversement.",
+        "Je m'écris k(a + b) = ka + kb."
+      ],
+      "explication": "La distributivité permet de développer et de factoriser : k(a + b) = ka + kb."
+    },
+    {
+      "reponse": "Factoriser",
+      "acceptees": ["Factoriser", "Factorisation", "Factoriser une expression"],
+      "indices": [
+        "Je suis une transformation d'une expression.",
+        "Je transforme une somme en produit.",
+        "Pour me faire, on repère un facteur commun."
+      ],
+      "explication": "Factoriser, c'est transformer une somme en produit : 6x + 9 = 3(2x + 3)."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "Pour x = 4, combien vaut 3x + 5 ?",
+      "reponse": 17,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "3x signifie 3 × x : 3 × 4 + 5 = 12 + 5 = 17."
+    },
+    {
+      "question": "Pour x = 6, combien vaut 7x − 10 ?",
+      "reponse": 32,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "7x signifie 7 × x : 7 × 6 − 10 = 42 − 10 = 32."
+    },
+    {
+      "question": "Quelle est la solution de l'équation x + 13 = 40 ?",
+      "reponse": 27,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "x = 40 − 13 = 27. Vérification : 27 + 13 = 40."
+    },
+    {
+      "question": "Quelle est la solution de l'équation 6x = 84 ?",
+      "reponse": 14,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "x = 84 ÷ 6 = 14. Vérification : 6 × 14 = 84."
+    },
+    {
+      "question": "Le triple d'un nombre vaut 63. Quel est ce nombre ?",
+      "reponse": 21,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "Le triple de x, c'est 3x : 3x = 63 donne x = 63 ÷ 3 = 21. Vérification : 3 × 21 = 63."
+    },
+    {
+      "question": "Le périmètre d'un carré de côté c est 4c. Quel est son périmètre, en cm, pour c = 7,5 cm ?",
+      "reponse": 30,
+      "unite": "cm",
+      "tolerance": 0,
+      "explication": "4c = 4 × 7,5 = 30 cm."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Résoudre l'équation x + 7 = 15",
+      "etapes": [
+        "On repère la forme de l'équation : x + 7 = 15",
+        "On calcule : x = 15 − 7 = 8",
+        "On vérifie en remplaçant : 8 + 7 = 15",
+        "On conclut : « La solution est 8. »"
+      ]
+    }
+  ]
+}

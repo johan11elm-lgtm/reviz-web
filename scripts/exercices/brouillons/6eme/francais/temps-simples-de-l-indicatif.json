@@ -1,0 +1,148 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Le présent",
+      "detail": "Le temps de ce qui se passe au moment où l'on parle, et des faits toujours vrais.",
+      "cartes": [
+        "Elles chantent en chœur",
+        "Nous finissons notre repas",
+        "Vous faites trop de bruit",
+        "Je vais au collège à pied",
+        "La Terre tourne autour du Soleil"
+      ]
+    },
+    {
+      "nom": "L'imparfait",
+      "detail": "Le temps de l'arrière-plan d'un récit : décor, habitudes, actions en cours.",
+      "cartes": [
+        "Nous chantions chaque matin",
+        "Il pleuvait sans arrêt",
+        "Je mangeais une pomme",
+        "Le vent soufflait sur la mer",
+        "Vous finissiez vos devoirs"
+      ]
+    },
+    {
+      "nom": "Le passé simple",
+      "detail": "Le temps des actions brèves qui font avancer un récit au passé.",
+      "cartes": [
+        "Il chanta une vieille chanson",
+        "Ils partirent à l'aube",
+        "Elle fut très surprise",
+        "Soudain, le mât se brisa",
+        "Il prit son sac et sortit"
+      ]
+    },
+    {
+      "nom": "Le futur",
+      "detail": "Le temps de ce qui se passera : l'infinitif suivi de -ai, -as, -a, -ons, -ez, -ont.",
+      "cartes": [
+        "Je chanterai demain",
+        "Nous irons à la mer",
+        "Tu verras bien",
+        "Elle viendra ce soir",
+        "Ils seront en retard"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Quel est le temps du verbe en couleur ?",
+      "texte": "Il y a longtemps, un vieux pêcheur [vivait] près de la mer.",
+      "choix": ["Présent", "Imparfait", "Passé simple", "Futur"],
+      "bonne": 1,
+      "explication": "« vivait » (terminaison -ait) décrit le décor du récit : c'est l'imparfait."
+    },
+    {
+      "consigne": "Quel est le temps du verbe en couleur ?",
+      "texte": "Soudain, la porte [s'ouvrit] en grinçant.",
+      "choix": ["Présent", "Imparfait", "Passé simple", "Futur"],
+      "bonne": 2,
+      "explication": "« s'ouvrit » est une action brève qui fait avancer le récit : c'est le passé simple."
+    },
+    {
+      "consigne": "Quel est le temps du verbe en couleur ?",
+      "texte": "Demain, nous [irons] au cinéma.",
+      "choix": ["Présent", "Imparfait", "Passé simple", "Futur"],
+      "bonne": 3,
+      "explication": "« irons » est le futur du verbe aller (radical irr-, terminaison -ons)."
+    },
+    {
+      "consigne": "Quel est le temps du verbe en couleur ?",
+      "texte": "En ce moment, les élèves [attendent] devant le portail.",
+      "choix": ["Présent", "Imparfait", "Passé simple", "Futur"],
+      "bonne": 0,
+      "explication": "« attendent » est au présent : l'action se passe au moment où l'on parle."
+    },
+    {
+      "consigne": "Quel est le temps du verbe en couleur ?",
+      "texte": "Le roi [prit] son épée et monta sur son cheval.",
+      "choix": ["Présent", "Imparfait", "Passé simple", "Futur"],
+      "bonne": 2,
+      "explication": "« prit » est une action de premier plan qui fait avancer le récit : c'est le passé simple."
+    },
+    {
+      "consigne": "Quel est le temps du verbe en couleur ?",
+      "texte": "Quand il arriva, tous les invités [dormaient].",
+      "choix": ["Présent", "Imparfait", "Passé simple", "Futur"],
+      "bonne": 1,
+      "explication": "« dormaient » (terminaison -aient) décrit une action en cours à l'arrière-plan : c'est l'imparfait."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Radical",
+      "acceptees": ["Radical", "Le radical"],
+      "indices": [
+        "Je fais partie d'un verbe conjugué.",
+        "Je porte le sens du verbe.",
+        "Dans « nous chantions », je suis « chant »."
+      ],
+      "explication": "Le radical porte le sens du verbe ; la terminaison indique le temps et la personne."
+    },
+    {
+      "reponse": "Imparfait",
+      "acceptees": ["Imparfait", "L'imparfait"],
+      "indices": [
+        "Je suis un temps du passé.",
+        "Je décris le décor et les habitudes dans un récit.",
+        "Mes terminaisons sont -ais, -ais, -ait, -ions, -iez, -aient."
+      ],
+      "explication": "L'imparfait exprime l'arrière-plan du récit : descriptions, habitudes, actions en cours."
+    },
+    {
+      "reponse": "Passé simple",
+      "acceptees": ["Passé simple", "Le passé simple"],
+      "indices": [
+        "On me trouve surtout dans les récits écrits.",
+        "Je raconte les actions brèves qui font avancer l'histoire.",
+        "À la 3e personne du 1er groupe, je me termine par -a ou -èrent."
+      ],
+      "explication": "Le passé simple exprime le premier plan du récit : il chanta, ils chantèrent."
+    },
+    {
+      "reponse": "Futur",
+      "acceptees": ["Futur", "Le futur", "Futur simple"],
+      "indices": [
+        "Je suis un temps simple de l'indicatif.",
+        "Je me forme à partir de l'infinitif du verbe.",
+        "Mes terminaisons sont -ai, -as, -a, -ons, -ez, -ont."
+      ],
+      "explication": "Le futur se forme avec l'infinitif (ou le radical) et -ai, -as, -a, -ons, -ez, -ont : je chanterai."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Conjuguer un verbe à un temps simple",
+      "etapes": [
+        "Trouve l'infinitif du verbe et son groupe",
+        "Prends le bon radical selon le temps",
+        "Ajoute la terminaison du temps et de la personne",
+        "Vérifie l'accord avec le sujet et l'orthographe"
+      ]
+    }
+  ]
+}

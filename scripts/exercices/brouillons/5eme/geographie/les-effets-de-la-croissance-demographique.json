@@ -1,0 +1,191 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Des besoins qui augmentent",
+      "detail": "Plus d'habitants, c'est plus de nourriture, de logements, d'écoles, d'hôpitaux et d'emplois à fournir.",
+      "cartes": [
+        "Produire assez de nourriture pour tous",
+        "Construire davantage de logements",
+        "Ouvrir de nouvelles écoles pour les enfants",
+        "Ouvrir des hôpitaux pour soigner tous les habitants",
+        "Créer assez d'emplois pour tous ceux qui cherchent du travail"
+      ]
+    },
+    {
+      "nom": "L'urbanisation rapide",
+      "detail": "Les villes du Sud grandissent très vite, par l'exode rural et par les naissances, et les bidonvilles se développent.",
+      "cartes": [
+        "Le départ des habitants des campagnes vers les villes",
+        "Des villes de plus de 10 millions d'habitants",
+        "Plus de la moitié de l'humanité vit en ville",
+        "Des quartiers précaires sans eau courante ni électricité",
+        "Lagos, où quartiers aisés et bidonvilles se côtoient"
+      ]
+    },
+    {
+      "nom": "L'environnement sous pression",
+      "detail": "Une population nombreuse sollicite davantage l'eau, les sols et les forêts, et augmente la pollution.",
+      "cartes": [
+        "Des réserves d'eau de plus en plus sollicitées",
+        "Des sols cultivés de plus en plus intensément",
+        "Des forêts abattues pour obtenir du bois et des terres",
+        "Un air pollué par les voitures et les usines",
+        "Des ressources naturelles utilisées plus vite qu'elles ne se renouvellent"
+      ]
+    },
+    {
+      "nom": "Des atouts économiques",
+      "detail": "Une population jeune fournit de la main-d'œuvre et des consommateurs, et peut dynamiser l'économie.",
+      "cartes": [
+        "Une main-d'œuvre nombreuse pour les entreprises",
+        "Un grand marché de consommateurs",
+        "Une économie qui gagne en dynamisme",
+        "Une part d'adultes en âge de travailler qui augmente",
+        "Une chance économique quand la natalité commence à baisser"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "la croissance très rapide de Lagos",
+      "carte": "Plus de naissances que de décès",
+      "role": "cause",
+      "explication": "L'accroissement naturel fait grandir les villes du Sud."
+    },
+    {
+      "fait": "la croissance très rapide de Lagos",
+      "carte": "L'arrivée de nombreux habitants des campagnes",
+      "role": "cause",
+      "explication": "L'exode rural est, avec l'accroissement naturel, l'une des deux causes de la croissance des villes."
+    },
+    {
+      "fait": "la croissance très rapide de Lagos",
+      "carte": "Le développement de bidonvilles comme Makoko",
+      "role": "consequence",
+      "explication": "Les logements ne suivent pas : les nouveaux venus s'installent dans des quartiers précaires."
+    },
+    {
+      "fait": "la croissance très rapide de Lagos",
+      "carte": "Plus d'embouteillages et de pollution",
+      "role": "consequence",
+      "explication": "Dans les grandes villes, la pollution et les embouteillages augmentent."
+    },
+    {
+      "fait": "la croissance très rapide de Lagos",
+      "carte": "Un secteur informel qui se développe",
+      "role": "consequence",
+      "explication": "Faute d'emplois déclarés, beaucoup d'habitants travaillent dans le secteur informel."
+    }
+  ],
+  "etiquettes": [
+    {
+      "consigne": "De quoi s'agit-il dans le passage en couleur ?",
+      "texte": "Chaque année, [des milliers de paysans quittent leur village] pour s'installer à Lagos.",
+      "choix": ["Exode rural", "Urbanisation", "Bidonville", "Secteur informel"],
+      "bonne": 0,
+      "explication": "Le départ des habitants des campagnes vers les villes s'appelle l'exode rural."
+    },
+    {
+      "consigne": "De quoi s'agit-il dans le passage en couleur ?",
+      "texte": "À Makoko, [des maisons sur pilotis, sans eau courante ni électricité,] abritent des familles.",
+      "choix": ["Exode rural", "Urbanisation", "Bidonville", "Secteur informel"],
+      "bonne": 2,
+      "explication": "Un quartier d'habitat précaire, sans eau courante ni électricité, est un bidonville."
+    },
+    {
+      "consigne": "De quoi s'agit-il dans le passage en couleur ?",
+      "texte": "Ce chauffeur de moto-taxi exerce son métier [sans contrat ni déclaration].",
+      "choix": ["Exode rural", "Urbanisation", "Bidonville", "Secteur informel"],
+      "bonne": 3,
+      "explication": "Les emplois non déclarés forment le secteur informel."
+    },
+    {
+      "consigne": "De quoi s'agit-il dans le passage en couleur ?",
+      "texte": "Depuis 2007-2008, [plus de la moitié des humains vivent en ville].",
+      "choix": ["Exode rural", "Urbanisation", "Bidonville", "Secteur informel"],
+      "bonne": 1,
+      "explication": "L'urbanisation est la hausse de la part de la population qui vit en ville."
+    },
+    {
+      "consigne": "De quoi s'agit-il dans le passage en couleur ?",
+      "texte": "Faute de terres, [cette famille quitte la campagne pour la capitale].",
+      "choix": ["Exode rural", "Urbanisation", "Bidonville", "Secteur informel"],
+      "bonne": 0,
+      "explication": "Quitter la campagne pour la ville est un cas d'exode rural."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Mégapole",
+      "acceptees": ["Mégapole", "Une mégapole"],
+      "indices": [
+        "Je suis une très grande ville.",
+        "Delhi, Mumbai et Le Caire en sont des exemples.",
+        "Je compte plus de 10 millions d'habitants."
+      ],
+      "explication": "Une mégapole est une ville de plus de 10 millions d'habitants."
+    },
+    {
+      "reponse": "Exode rural",
+      "acceptees": ["Exode rural", "L'exode rural"],
+      "indices": [
+        "Je suis un mouvement de population.",
+        "Je vide peu à peu les campagnes.",
+        "Je désigne le départ des habitants des campagnes vers les villes."
+      ],
+      "explication": "L'exode rural est le départ des habitants des campagnes vers les villes."
+    },
+    {
+      "reponse": "Lagos",
+      "acceptees": ["Lagos"],
+      "indices": [
+        "Je suis une ville d'Afrique.",
+        "Je suis la plus grande ville du Nigeria.",
+        "Mon quartier de Makoko est bâti en partie sur pilotis, au bord de la lagune."
+      ],
+      "explication": "Lagos est la plus grande ville du Nigeria, une mégapole où se trouve le bidonville de Makoko."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "En un an, une ville gagne 80 000 habitants par accroissement naturel et 120 000 par exode rural. De combien d'habitants grandit-elle ?",
+      "reponse": 200000,
+      "unite": "habitants",
+      "tolerance": 0,
+      "explication": "Croissance urbaine = accroissement naturel + exode rural = 80 000 + 120 000 = 200 000 habitants."
+    },
+    {
+      "question": "En un an, une ville compte 30 000 naissances et 10 000 décès, et reçoit 50 000 personnes venues des campagnes. De combien d'habitants grandit-elle ?",
+      "reponse": 70000,
+      "unite": "habitants",
+      "tolerance": 0,
+      "explication": "Accroissement naturel : 30 000 − 10 000 = 20 000. Avec l'exode rural : 20 000 + 50 000 = 70 000 habitants."
+    },
+    {
+      "question": "Un pays compte 40 millions d'habitants, dont 28 millions vivent en ville. Quel pourcentage de la population vit en ville ?",
+      "reponse": 70,
+      "unite": "%",
+      "tolerance": 0,
+      "explication": "28 ÷ 40 = 0,7, soit 70 % de la population."
+    },
+    {
+      "question": "Dans une ville de 2 000 000 d'habitants, un quart des habitants vit en bidonville. Combien d'habitants cela représente-t-il ?",
+      "reponse": 500000,
+      "unite": "habitants",
+      "tolerance": 0,
+      "explication": "Un quart de 2 000 000 = 2 000 000 ÷ 4 = 500 000 habitants."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Faire le schéma des effets de la croissance urbaine",
+      "etapes": [
+        "Choisis une ville du Sud et écris au centre sa forte croissance",
+        "Place autour les difficultés et les atouts de cette croissance",
+        "Relie la cause à chaque effet par une flèche",
+        "Donne un titre précis à ton schéma"
+      ]
+    }
+  ]
+}

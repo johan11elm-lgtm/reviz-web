@@ -1,0 +1,153 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Les premières étapes (1950-1957)",
+      "detail": "Les débuts de la construction européenne, de la déclaration Schuman au traité de Rome.",
+      "cartes": [
+        "Schuman propose de mettre en commun charbon et acier",
+        "Jean Monnet inspire la proposition de Schuman",
+        "La Communauté du charbon et de l'acier naît en 1951",
+        "Six fondateurs, dont la France, la RFA et l'Italie",
+        "Le traité de Rome de 1957 crée un marché commun"
+      ]
+    },
+    {
+      "nom": "Les réalisations de l'Union depuis 1979",
+      "detail": "Ce que l'Europe change concrètement dans la vie des citoyens.",
+      "cartes": [
+        "Un marché unique où marchandises, capitaux, services et personnes circulent",
+        "Les accords de Schengen suppriment les contrôles aux frontières intérieures",
+        "L'euro circule en pièces et en billets depuis 2002",
+        "Les députés européens sont élus au suffrage universel direct",
+        "Tout citoyen d'un pays membre peut voter aux élections européennes"
+      ]
+    },
+    {
+      "nom": "Les élargissements successifs",
+      "detail": "Les vagues d'entrée de nouveaux pays dans la communauté européenne.",
+      "cartes": [
+        "Le Royaume-Uni, l'Irlande et le Danemark entrent en 1973",
+        "L'Espagne et le Portugal entrent en 1986",
+        "L'Autriche, la Finlande et la Suède entrent en 1995",
+        "Dix pays, surtout d'anciens pays communistes, entrent en 2004",
+        "La Roumanie et la Bulgarie entrent en 2007"
+      ]
+    },
+    {
+      "nom": "Les débats sur l'Europe",
+      "detail": "Les moments où le projet européen est contesté ou fragilisé.",
+      "cartes": [
+        "En 2005, les Français rejettent par référendum la Constitution européenne",
+        "En 2016, un référendum britannique donne la victoire au Brexit",
+        "La sortie du Royaume-Uni devient effective en 2020",
+        "La crise de la dette fragilise l'Union",
+        "Une méfiance ou une opposition envers la construction européenne"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "la construction européenne",
+      "carte": "Le besoin de garantir la paix entre la France et l'Allemagne",
+      "role": "cause",
+      "explication": "Après deux guerres mondiales, il faut réconcilier anciens ennemis, surtout la France et l'Allemagne."
+    },
+    {
+      "fait": "la construction européenne",
+      "carte": "La nécessité de reconstruire l'économie après la guerre",
+      "role": "cause",
+      "explication": "Mettre en commun des ressources aide à reconstruire l'économie des pays européens."
+    },
+    {
+      "fait": "la construction européenne",
+      "carte": "L'euro, une monnaie commune qui circule depuis 2002",
+      "role": "consequence",
+      "explication": "L'euro est l'une des réalisations de la construction européenne : on paie avec la même monnaie dans plusieurs pays."
+    },
+    {
+      "fait": "la construction européenne",
+      "carte": "Un marché unique où les marchandises circulent librement",
+      "role": "consequence",
+      "explication": "Le marché unique, en place depuis 1993, est l'une des réalisations de l'Union européenne."
+    },
+    {
+      "fait": "le Brexit",
+      "carte": "Les Britanniques votent pour quitter l'UE par référendum en 2016",
+      "role": "cause",
+      "explication": "Le référendum de 2016 aboutit à la sortie du Royaume-Uni, effective le 31 janvier 2020."
+    },
+    {
+      "fait": "le Brexit",
+      "carte": "L'Union européenne passe à 27 membres",
+      "role": "consequence",
+      "explication": "Après le départ du Royaume-Uni en 2020, l'UE compte 27 États membres."
+    }
+  ],
+  "etiquettes": [],
+  "devinettes": [
+    {
+      "reponse": "Robert Schuman",
+      "acceptees": ["Schuman", "Robert Schuman"],
+      "indices": [
+        "Je suis un homme politique français.",
+        "Le 9 mai 1950, je fais une déclaration célèbre.",
+        "Je propose, inspiré par Jean Monnet, de mettre en commun le charbon et l'acier."
+      ],
+      "explication": "Robert Schuman lance l'idée de la CECA dans sa déclaration du 9 mai 1950."
+    },
+    {
+      "reponse": "Schengen",
+      "acceptees": ["Schengen", "L'espace Schengen", "Espace Schengen"],
+      "indices": [
+        "Je suis un espace de libre circulation des personnes.",
+        "Mes accords datent de 1985.",
+        "Dans mon espace, il n'y a en principe plus de contrôles aux frontières intérieures."
+      ],
+      "explication": "L'espace Schengen supprime les contrôles aux frontières intérieures ; la Suisse et la Norvège en font partie sans être dans l'UE."
+    },
+    {
+      "reponse": "La CECA",
+      "acceptees": ["CECA", "La CECA", "Communauté européenne du charbon et de l'acier"],
+      "indices": [
+        "Je suis la première communauté européenne.",
+        "Six pays me créent en 1951.",
+        "Je mets en commun deux productions indispensables pour faire la guerre."
+      ],
+      "explication": "La CECA (1951) met en commun le charbon et l'acier entre six pays."
+    },
+    {
+      "reponse": "Le Brexit",
+      "acceptees": ["Brexit", "Le Brexit"],
+      "indices": [
+        "Je suis un événement qui touche l'Union européenne.",
+        "Un référendum organisé en 2016 me décide.",
+        "Depuis le 31 janvier 2020, le Royaume-Uni n'est plus membre de l'UE à cause de moi."
+      ],
+      "explication": "Le Brexit est la sortie du Royaume-Uni de l'Union européenne, effective le 31 janvier 2020."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Les grandes étapes de la construction européenne",
+      "etapes": [
+        "Le 9 mai 1950, Robert Schuman fait sa déclaration",
+        "En 1951, six pays créent la CECA",
+        "En 1957, le traité de Rome crée la CEE",
+        "En 1992, le traité de Maastricht crée l'Union européenne",
+        "En 2002, l'euro circule en pièces et en billets"
+      ]
+    },
+    {
+      "titre": "Les élargissements de l'Europe",
+      "etapes": [
+        "En 1973, le Royaume-Uni, l'Irlande et le Danemark entrent",
+        "En 1986, l'Espagne et le Portugal entrent",
+        "En 1995, l'Autriche, la Finlande et la Suède entrent",
+        "En 2004, dix pays entrent dans l'UE",
+        "En 2013, la Croatie entre dans l'UE"
+      ]
+    }
+  ]
+}

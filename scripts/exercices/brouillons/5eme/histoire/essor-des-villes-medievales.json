@@ -1,0 +1,178 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Le commerce",
+      "detail": "Les échanges qui font vivre les villes : foires, banquiers et grands centres marchands.",
+      "cartes": [
+        "Des foires de plusieurs semaines à Troyes et à Provins",
+        "La lettre de change, qui évite de transporter des pièces",
+        "Des banquiers, souvent italiens",
+        "Les villes de la Hanse, comme Lübeck",
+        "Venise, Gênes et Florence, grands centres marchands"
+      ]
+    },
+    {
+      "nom": "Le pouvoir dans la ville",
+      "detail": "Les libertés que les bourgeois obtiennent du seigneur et la façon dont ils dirigent leur ville.",
+      "cartes": [
+        "Un texte par lequel le seigneur accorde des libertés",
+        "Une ville qui se gouverne elle-même",
+        "Des échevins ou des consuls, choisis par les bourgeois",
+        "La haute tour de la ville, symbole de ses libertés",
+        "Des impôts fixés et une justice pour les habitants"
+      ]
+    },
+    {
+      "nom": "La société urbaine",
+      "detail": "Les habitants des villes au Moyen Âge : bourgeois, artisans organisés en métiers, riches et pauvres.",
+      "cartes": [
+        "Un habitant d'un bourg, c'est-à-dire d'une ville",
+        "Un jeune qui apprend le métier chez un artisan",
+        "Un artisan qui peut ouvrir son propre atelier",
+        "Une organisation d'artisans qui fixe les règles de travail",
+        "Une société inégale, des plus riches aux plus pauvres"
+      ]
+    },
+    {
+      "nom": "L'Église en ville",
+      "detail": "Les édifices, les religieux et les écoles que l'Église développe dans les villes du Moyen Âge.",
+      "cartes": [
+        "Des voûtes sur croisée d'ogives et des arcs-boutants",
+        "Notre-Dame de Paris, Chartres et Amiens",
+        "Des religieux qui prêchent et vivent de dons",
+        "Des universités nées à Bologne, Paris et Oxford",
+        "Un enseignement en latin de la théologie et du droit"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "l'essor des villes à partir du XIe siècle",
+      "carte": "La hausse de la population",
+      "role": "cause",
+      "explication": "La population augmente à partir du XIe siècle : il y a plus d'habitants et les villes grandissent."
+    },
+    {
+      "fait": "l'essor des villes à partir du XIe siècle",
+      "carte": "Des campagnes qui produisent davantage",
+      "role": "cause",
+      "explication": "Les campagnes produisent plus : il y a de quoi nourrir plus de citadins."
+    },
+    {
+      "fait": "une charte de franchise accordée à une ville",
+      "carte": "Le désir des bourgeois de gérer eux-mêmes leurs affaires",
+      "role": "cause",
+      "explication": "Les bourgeois veulent gérer eux-mêmes leurs affaires : ils obtiennent donc une charte de franchise."
+    },
+    {
+      "fait": "une charte de franchise accordée à une ville",
+      "carte": "L'argent versé au seigneur par les bourgeois",
+      "role": "cause",
+      "explication": "Les bourgeois obtiennent la charte du seigneur, souvent contre de l'argent : ce n'est pas un cadeau."
+    },
+    {
+      "fait": "une charte de franchise accordée à une ville",
+      "carte": "Des impôts fixés pour les habitants",
+      "role": "consequence",
+      "explication": "La charte accorde des libertés : les impôts sont fixés, la ville a sa justice et son administration."
+    },
+    {
+      "fait": "une charte de franchise accordée à une ville",
+      "carte": "Une administration de la ville par ses habitants",
+      "role": "consequence",
+      "explication": "Grâce à la charte, les bourgeois administrent eux-mêmes la ville, au lieu de dépendre du seigneur."
+    }
+  ],
+  "etiquettes": [
+    {
+      "consigne": "À quel grand espace du commerce appartient la ville en couleur ?",
+      "texte": "Au Moyen Âge, [Gênes] est un grand port marchand de la Méditerranée.",
+      "choix": ["L'Italie", "La Flandre", "La Champagne", "La Hanse"],
+      "bonne": 0,
+      "explication": "Gênes, comme Venise et Florence, est une ville marchande d'Italie."
+    },
+    {
+      "consigne": "À quel grand espace du commerce appartient la ville en couleur ?",
+      "texte": "Les marchands de [Lübeck] commercent en mer du Nord et en mer Baltique.",
+      "choix": ["L'Italie", "La Flandre", "La Champagne", "La Hanse"],
+      "bonne": 3,
+      "explication": "Lübeck fait partie de la Hanse, qui commerce en mer du Nord et en mer Baltique."
+    },
+    {
+      "consigne": "À quel grand espace du commerce appartient la ville en couleur ?",
+      "texte": "Aux XIIe-XIIIe siècles, de grandes foires ont lieu à [Provins].",
+      "choix": ["L'Italie", "La Flandre", "La Champagne", "La Hanse"],
+      "bonne": 2,
+      "explication": "Provins et Troyes accueillent les foires de Champagne."
+    },
+    {
+      "consigne": "À quel grand espace du commerce appartient la ville en couleur ?",
+      "texte": "À [Bruges], les marchands vendent des draps de laine.",
+      "choix": ["L'Italie", "La Flandre", "La Champagne", "La Hanse"],
+      "bonne": 1,
+      "explication": "Bruges est un grand centre marchand de Flandre, connue pour ses draps de laine."
+    },
+    {
+      "consigne": "À quel grand espace du commerce appartient la ville en couleur ?",
+      "texte": "[Venise] vend en Europe les épices et la soie d'Orient.",
+      "choix": ["L'Italie", "La Flandre", "La Champagne", "La Hanse"],
+      "bonne": 0,
+      "explication": "Les marchands italiens, dont ceux de Venise, apportent les épices et la soie d'Orient."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Les bourgeois",
+      "acceptees": ["Bourgeois", "Les bourgeois", "Un bourgeois", "Bourgeoisie"],
+      "indices": [
+        "Nous sommes des habitants d'une ville du Moyen Âge.",
+        "Les plus riches parmi nous sont des marchands.",
+        "Nous voulons gérer nos affaires nous-mêmes, et nous payons le seigneur pour obtenir une charte."
+      ],
+      "explication": "Au Moyen Âge, les bourgeois sont les habitants d'une ville ; ils obtiennent des libertés du seigneur."
+    },
+    {
+      "reponse": "Une charte de franchise",
+      "acceptees": ["Charte de franchise", "Une charte de franchise", "La charte de franchise", "Charte"],
+      "indices": [
+        "Je suis un texte.",
+        "Le seigneur m'accorde aux habitants d'une ville, souvent contre de l'argent.",
+        "Je donne des libertés : des impôts fixés, une justice et une administration."
+      ],
+      "explication": "Une charte de franchise est un texte par lequel le seigneur accorde des libertés aux habitants d'une ville."
+    },
+    {
+      "reponse": "Le beffroi",
+      "acceptees": ["Beffroi", "Le beffroi", "Un beffroi"],
+      "indices": [
+        "Je suis une tour.",
+        "Je domine la ville et j'abrite la cloche.",
+        "Je symbolise les libertés des bourgeois de la commune."
+      ],
+      "explication": "Le beffroi, tour de la commune, symbolise les libertés des bourgeois."
+    },
+    {
+      "reponse": "La lettre de change",
+      "acceptees": ["Lettre de change", "La lettre de change", "Une lettre de change"],
+      "indices": [
+        "Je suis un papier.",
+        "Les marchands m'utilisent pour leurs affaires.",
+        "J'évite de transporter de grosses sommes en pièces."
+      ],
+      "explication": "La lettre de change évite aux marchands de transporter de grosses sommes en pièces."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Le parcours d'un artisan dans un métier",
+      "etapes": [
+        "Il entre comme apprenti chez un artisan",
+        "Il devient compagnon, ouvrier qualifié",
+        "Il devient maître du métier",
+        "Il ouvre son propre atelier"
+      ]
+    }
+  ]
+}

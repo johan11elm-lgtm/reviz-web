@@ -1,0 +1,138 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Une expérience de vie",
+      "detail": "Le present perfect dit ce que l'on a déjà vécu ou jamais vécu, sans date : ever, never, ou un nombre de fois.",
+      "cartes": [
+        "Have you ever been to Scotland?",
+        "I have never been to the USA",
+        "I've been to Ireland twice",
+        "She has seen the Eiffel Tower three times",
+        "My cousin has visited Japan once"
+      ]
+    },
+    {
+      "nom": "Un résultat ou un bilan",
+      "detail": "Already, yet et just disent ce qui est fait, pas encore fait ou tout juste fait.",
+      "cartes": [
+        "The plane has just landed",
+        "I haven't packed my bag yet",
+        "She has already booked the hotel",
+        "Have you finished your project yet?",
+        "They have just missed the train"
+      ]
+    },
+    {
+      "nom": "Une durée qui continue",
+      "detail": "For + durée et since + point de départ : l'action a commencé dans le passé et dure encore.",
+      "cartes": [
+        "I have lived here for five years",
+        "She has known him since 2019",
+        "How long have you lived here?",
+        "We have studied English since September",
+        "My uncle has worked in Paris for ten years"
+      ]
+    },
+    {
+      "nom": "Un passé précis et terminé",
+      "detail": "Avec une date ou un repère comme yesterday, ago ou last year, on emploie le prétérit simple et non le present perfect.",
+      "cartes": [
+        "I went to London last year",
+        "She visited Dublin two years ago",
+        "We saw that film yesterday",
+        "They moved to Lyon in 2019",
+        "He bought his ticket last Monday"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Quelle valeur a le passage en couleur ?",
+      "texte": "[Has she ever visited] Dublin?",
+      "choix": ["Une expérience", "Un bilan", "Une durée qui continue", "Un passé daté (prétérit)"],
+      "bonne": 0,
+      "explication": "« ever » demande si elle a déjà vécu cette expérience, sans date : present perfect d'expérience."
+    },
+    {
+      "consigne": "Quelle valeur a le passage en couleur ?",
+      "texte": "My sister [has just arrived] at the station.",
+      "choix": ["Une expérience", "Un bilan", "Une durée qui continue", "Un passé daté (prétérit)"],
+      "bonne": 1,
+      "explication": "« just » signifie « venir de » : on fait le bilan d'une action tout juste terminée."
+    },
+    {
+      "consigne": "Quelle valeur a le passage en couleur ?",
+      "texte": "We [have studied] English for four years.",
+      "choix": ["Une expérience", "Un bilan", "Une durée qui continue", "Un passé daté (prétérit)"],
+      "bonne": 2,
+      "explication": "« for four years » donne une durée : l'action a commencé dans le passé et continue."
+    },
+    {
+      "consigne": "Quelle valeur a le passage en couleur ?",
+      "texte": "They [went] to Rome two years ago.",
+      "choix": ["Une expérience", "Un bilan", "Une durée qui continue", "Un passé daté (prétérit)"],
+      "bonne": 3,
+      "explication": "« two years ago » est un repère de passé terminé : on emploie le prétérit simple."
+    },
+    {
+      "consigne": "Quelle valeur a le passage en couleur ?",
+      "texte": "I [have never seen] a kangaroo.",
+      "choix": ["Une expérience", "Un bilan", "Une durée qui continue", "Un passé daté (prétérit)"],
+      "bonne": 0,
+      "explication": "« never » dit que l'on n'a jamais vécu cela : c'est une expérience de vie."
+    },
+    {
+      "consigne": "Quelle valeur a le passage en couleur ?",
+      "texte": "He [hasn't finished] his homework yet.",
+      "choix": ["Une expérience", "Un bilan", "Une durée qui continue", "Un passé daté (prétérit)"],
+      "bonne": 1,
+      "explication": "« yet » en fin de négation dit que l'action attendue n'est pas encore faite : c'est un bilan."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Since",
+      "acceptees": [],
+      "indices": [
+        "Je suis un petit mot anglais.",
+        "Je suis suivi d'un point de départ, comme 2022 ou Monday.",
+        "On me confond avec for, qui est suivi d'une durée."
+      ],
+      "explication": "Since + point de départ (since 2022) ; for + durée (for three years)."
+    },
+    {
+      "reponse": "Been",
+      "acceptees": [],
+      "indices": [
+        "Je suis un participe passé.",
+        "Je complète la question « Have you ever … to Scotland? ».",
+        "Avec moi, « He has … to New York » veut dire qu'il y est allé et qu'il en est revenu."
+      ],
+      "explication": "Been est le participe passé de be : He has been to New York = il y est allé et il en est revenu. Gone voudrait dire qu'il y est encore."
+    },
+    {
+      "reponse": "Abroad",
+      "acceptees": [],
+      "indices": [
+        "Je suis un mot anglais pour parler de voyages.",
+        "On ne met aucune préposition devant moi.",
+        "Je veux dire « à l'étranger »."
+      ],
+      "explication": "Abroad signifie « à l'étranger » et s'emploie sans préposition : I've never travelled abroad."
+    },
+    {
+      "reponse": "Just",
+      "acceptees": [],
+      "indices": [
+        "Je suis un adverbe.",
+        "Je me place entre have et le participe passé.",
+        "Je veux dire « venir de »."
+      ],
+      "explication": "Dans The plane has just landed, just signifie « venir de » : l'avion vient d'atterrir."
+    }
+  ],
+  "calculs": [],
+  "etapes": []
+}

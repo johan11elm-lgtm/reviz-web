@@ -1,0 +1,131 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Des ports du monde et de France",
+      "detail": "Les grands ports cités dans le cours : deux géants mondiaux et trois ports français ou européens.",
+      "cartes": [
+        "Shanghai, en Chine, premier port à conteneurs du monde",
+        "Rotterdam, aux Pays-Bas, premier port d'Europe",
+        "Singapour, port géant d'Asie du Sud-Est",
+        "Le Havre, grand port français sur la Manche",
+        "Dunkerque, grand port français en mer du Nord"
+      ]
+    },
+    {
+      "nom": "Les installations d'un grand port",
+      "detail": "Les équipements qui permettent d'accueillir les navires et de manipuler les marchandises.",
+      "cartes": [
+        "Des quais et des bassins pour accueillir les navires",
+        "Des digues qui protègent l'entrée du port",
+        "De hautes grues pour soulever les conteneurs",
+        "Des terminaux où s'empilent les conteneurs",
+        "De vastes zones de stockage pour les marchandises"
+      ]
+    },
+    {
+      "nom": "Le port, carrefour des échanges",
+      "detail": "Le rôle du port : relier la mer, la terre et les différentes parties du monde.",
+      "cartes": [
+        "80 % des marchandises du monde voyagent par bateau",
+        "Un conteneur passe du navire au train ou au camion",
+        "Un fleuve relie le port aux villes de l'intérieur",
+        "Le port met en contact la mer et la terre",
+        "Le port joue un rôle clé dans la mondialisation"
+      ]
+    },
+    {
+      "nom": "Les problèmes posés par le port",
+      "detail": "Les pollutions, les risques et les conflits que les activités portuaires provoquent.",
+      "cartes": [
+        "L'air et l'eau sont pollués autour des usines",
+        "Un navire accidenté peut provoquer une marée noire",
+        "L'extension du port détruit des zones humides",
+        "Un accident d'usine menacerait les habitants voisins",
+        "Des pêcheurs et des habitants s'opposent au port"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "l'installation d'usines au bord des quais",
+      "carte": "Le pétrole et le minerai de fer arrivent par bateau",
+      "role": "cause",
+      "explication": "Les matières premières arrivent par la mer : les usines s'installent au plus près pour les transformer sur place."
+    },
+    {
+      "fait": "l'installation d'usines au bord des quais",
+      "carte": "Transporter les matières premières vers l'intérieur des terres coûterait cher",
+      "role": "cause",
+      "explication": "Installer les usines près des quais évite des transports longs et coûteux."
+    },
+    {
+      "fait": "l'installation d'usines au bord des quais",
+      "carte": "L'air et l'eau sont pollués autour du port",
+      "role": "consequence",
+      "explication": "Les zones industrialo-portuaires polluent l'air et l'eau."
+    },
+    {
+      "fait": "l'installation d'usines au bord des quais",
+      "carte": "Un accident industriel peut menacer les habitants voisins",
+      "role": "consequence",
+      "explication": "Les usines dangereuses, classées Seveso, créent des risques industriels pour les habitants proches."
+    }
+  ],
+  "etiquettes": [],
+  "devinettes": [
+    {
+      "reponse": "Shanghai",
+      "acceptees": ["Shanghai", "Shangaï", "Shanghaï"],
+      "indices": [
+        "Je suis un grand port d'Asie.",
+        "Je me trouve en Chine.",
+        "Je suis le premier port à conteneurs du monde."
+      ],
+      "explication": "Shanghai, en Chine, est le premier port à conteneurs du monde."
+    },
+    {
+      "reponse": "Rotterdam",
+      "acceptees": ["Rotterdam"],
+      "indices": [
+        "Je suis un port du nord-ouest de l'Europe.",
+        "Je me trouve aux Pays-Bas.",
+        "Je suis le premier port d'Europe."
+      ],
+      "explication": "Rotterdam, aux Pays-Bas, est le premier port d'Europe."
+    },
+    {
+      "reponse": "L'hinterland",
+      "acceptees": ["Hinterland", "L'hinterland", "Un hinterland", "L'arrière-pays", "Arrière-pays", "Un arrière-pays"],
+      "indices": [
+        "Je suis un espace situé loin de la mer, à l'intérieur des terres.",
+        "Des routes, des voies ferrées et des fleuves me relient à un port.",
+        "Pour Le Havre, je comprends la région parisienne."
+      ],
+      "explication": "L'hinterland est l'arrière-pays qu'un port dessert ; la région parisienne fait partie de celui du Havre."
+    },
+    {
+      "reponse": "Un conteneur",
+      "acceptees": ["Conteneur", "Un conteneur", "Le conteneur", "Les conteneurs", "Container", "Un container"],
+      "indices": [
+        "Je suis une grande boîte métallique.",
+        "J'ai une taille standard, comme des milliers de mes semblables.",
+        "Je passe facilement du bateau au train ou au camion."
+      ],
+      "explication": "Le conteneur est une boîte métallique standard qui passe du bateau au train ou au camion."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Le trajet d'un conteneur dans un grand port",
+      "etapes": [
+        "Le porte-conteneurs franchit les digues de l'avant-port",
+        "Le navire s'amarre le long d'un quai du terminal",
+        "Les grues déchargent les conteneurs sur le quai",
+        "Les conteneurs sont chargés sur un train ou un camion",
+        "Le train ou le camion part desservir l'arrière-pays"
+      ]
+    }
+  ]
+}

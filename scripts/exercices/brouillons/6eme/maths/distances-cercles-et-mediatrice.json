@@ -1,0 +1,149 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Le milieu d'un segment",
+      "detail": "Le milieu I de [AB] est le point du segment tel que IA = IB.",
+      "cartes": [
+        "Le point I du segment [AB] tel que IA = IB",
+        "Il partage le segment en deux segments de même longueur",
+        "Si AB = 8 cm, il est à 4 cm des extrémités",
+        "Le seul point du segment équidistant des extrémités",
+        "Les deux longueurs égales qu'il crée se codent du même symbole"
+      ]
+    },
+    {
+      "nom": "La médiatrice d'un segment",
+      "detail": "La médiatrice de [AB] est la droite perpendiculaire à [AB] qui passe par son milieu ; ses points sont à égale distance de A et de B.",
+      "cartes": [
+        "La droite perpendiculaire au segment qui passe par son milieu",
+        "Ses points sont tous à égale distance des extrémités",
+        "Si M est sur elle, alors MA = MB",
+        "On la construit avec des arcs de même rayon",
+        "Après le tracé, on vérifie à l'équerre qu'elle est perpendiculaire"
+      ]
+    },
+    {
+      "nom": "Le cercle de centre O",
+      "detail": "Le cercle de centre O et de rayon r est l'ensemble des points situés exactement à la distance r de O.",
+      "cartes": [
+        "Ses points sont tous à la même distance de O",
+        "Exactement les points M tels que OM = r",
+        "La ligne que trace la mine du compas",
+        "Un point à l'intérieur n'en fait pas partie",
+        "Il n'a pas d'intérieur : c'est seulement une ligne"
+      ]
+    },
+    {
+      "nom": "Le disque de centre O",
+      "detail": "Le disque de centre O et de rayon r est l'ensemble des points situés à une distance inférieure ou égale à r de O : le cercle et son intérieur.",
+      "cartes": [
+        "Les points M tels que OM est inférieur ou égal à r",
+        "Le cercle avec tout son intérieur",
+        "Une surface, et pas seulement une ligne",
+        "Un point à l'intérieur en fait partie",
+        "Le centre en fait partie"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [],
+  "devinettes": [
+    {
+      "reponse": "Médiatrice",
+      "acceptees": ["La médiatrice", "Une médiatrice", "Mediatrice", "Médiatrice"],
+      "indices": [
+        "Je suis une droite.",
+        "Tous mes points sont à égale distance des deux extrémités d'un segment.",
+        "Je suis perpendiculaire à ce segment, en son milieu."
+      ],
+      "explication": "La médiatrice d'un segment est la droite perpendiculaire à ce segment qui passe par son milieu."
+    },
+    {
+      "reponse": "Diamètre",
+      "acceptees": ["Le diamètre", "Un diamètre", "Diamètre"],
+      "indices": [
+        "Je suis un segment.",
+        "Je joins deux points d'un cercle.",
+        "Je passe par le centre et je mesure deux rayons."
+      ],
+      "explication": "Un diamètre est une corde qui passe par le centre : il mesure deux rayons, d = 2 × r."
+    },
+    {
+      "reponse": "Disque",
+      "acceptees": ["Le disque", "Un disque", "Disque"],
+      "indices": [
+        "Je suis une surface.",
+        "Je suis défini par un centre et un rayon.",
+        "J'inclus le cercle et tout son intérieur."
+      ],
+      "explication": "Le disque est le cercle et tout son intérieur, c'est-à-dire les points à une distance inférieure ou égale au rayon."
+    },
+    {
+      "reponse": "Milieu",
+      "acceptees": ["Le milieu", "Un milieu", "Milieu"],
+      "indices": [
+        "Je suis un point.",
+        "Je suis situé sur un segment.",
+        "Je partage ce segment en deux segments de même longueur."
+      ],
+      "explication": "Le milieu I de [AB] est le point du segment tel que IA = IB."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "Un cercle a pour diamètre 18 cm. Quel est son rayon ?",
+      "reponse": 9,
+      "unite": "cm",
+      "tolerance": 0,
+      "explication": "Le rayon est la moitié du diamètre : 18 ÷ 2 = 9 cm."
+    },
+    {
+      "question": "Un cercle a pour rayon 7,5 cm. Quel est son diamètre ?",
+      "reponse": 15,
+      "unite": "cm",
+      "tolerance": 0,
+      "explication": "Le diamètre est le double du rayon : d = 2 × r = 2 × 7,5 = 15 cm."
+    },
+    {
+      "question": "I est le milieu de [AB] et AB = 14 cm. Combien mesure IA ?",
+      "reponse": 7,
+      "unite": "cm",
+      "tolerance": 0,
+      "explication": "IA = IB et IA + IB = 14 cm, donc IA = 14 ÷ 2 = 7 cm."
+    },
+    {
+      "question": "I est le milieu de [AB] et IA = 5,5 cm. Combien mesure AB ?",
+      "reponse": 11,
+      "unite": "cm",
+      "tolerance": 0,
+      "explication": "IB = IA = 5,5 cm, donc AB = 5,5 + 5,5 = 11 cm."
+    },
+    {
+      "question": "M est sur la médiatrice de [AB] et MA = 4 cm. Quelle est la somme MA + MB ?",
+      "reponse": 8,
+      "unite": "cm",
+      "tolerance": 0,
+      "explication": "Un point de la médiatrice est à égale distance de A et de B : MB = MA = 4 cm, donc MA + MB = 8 cm."
+    },
+    {
+      "question": "On veut tracer au compas un cercle de diamètre 9 cm. De combien faut-il écarter le compas ?",
+      "reponse": 4.5,
+      "unite": "cm",
+      "tolerance": 0,
+      "explication": "Le compas s'écarte du rayon, pas du diamètre : 9 ÷ 2 = 4,5 cm."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Construire la médiatrice de [AB] au compas",
+      "etapes": [
+        "Écarte le compas d'une longueur plus grande que la moitié de AB",
+        "Pointe en A et trace un arc de chaque côté du segment",
+        "Même écartement, pointe en B : deux arcs coupent les premiers",
+        "Trace à la règle la droite passant par les deux intersections",
+        "Contrôle avec l'équerre qu'elle est perpendiculaire à [AB]"
+      ]
+    }
+  ]
+}

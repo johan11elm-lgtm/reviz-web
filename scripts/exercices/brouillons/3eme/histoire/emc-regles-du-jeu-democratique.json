@@ -1,0 +1,152 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Le Parlement",
+      "detail": "L'Assemblée nationale et le Sénat : ils votent la loi et contrôlent le gouvernement.",
+      "cartes": [
+        "Voter les lois à l'Assemblée nationale et au Sénat",
+        "Se renvoyer un texte lors de la navette",
+        "Renverser le gouvernement par une motion de censure",
+        "Créer une commission d'enquête sur un sujet de société",
+        "Se réunir en Congrès à Versailles pour réviser la Constitution"
+      ]
+    },
+    {
+      "nom": "Le président et le gouvernement",
+      "detail": "Le pouvoir exécutif : il prépare les lois, les promulgue et les fait appliquer.",
+      "cartes": [
+        "Déposer un projet de loi",
+        "Promulguer une loi une fois qu'elle est votée",
+        "Prendre un décret pour appliquer la loi",
+        "Le chef de l'État est élu directement depuis 1962",
+        "Travailler sous la direction d'un Premier ministre"
+      ]
+    },
+    {
+      "nom": "Le Conseil constitutionnel",
+      "detail": "L'institution qui contrôle que les lois respectent les droits garantis par la Constitution.",
+      "cartes": [
+        "Vérifier qu'une loi respecte la norme suprême avant sa promulgation",
+        "Vérifier une loi quand 60 élus nationaux le demandent",
+        "Répondre à une personne qui conteste une loi en procès",
+        "Abroger une loi contraire aux droits et libertés garantis",
+        "Examiner la loi Veil avant sa promulgation en janvier 1975"
+      ]
+    },
+    {
+      "nom": "L'Union européenne",
+      "detail": "Les grandes institutions qui proposent, votent et font respecter les règles communes aux États membres.",
+      "cartes": [
+        "Proposer les textes de l'Union et veiller à leur application",
+        "Voter les textes avec des représentants élus directement depuis 1979",
+        "Réunir les ministres des États membres",
+        "Fixer les grandes orientations avec les dirigeants des États membres",
+        "Siéger à Luxembourg pour veiller au respect du droit commun"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Quel pouvoir exerce l'institution en couleur ?",
+      "texte": "Chaque année, [l'Assemblée nationale et le Sénat] votent de nouvelles lois.",
+      "choix": ["Pouvoir législatif", "Pouvoir exécutif", "Pouvoir judiciaire"],
+      "bonne": 0,
+      "explication": "Le Parlement (Assemblée nationale et Sénat) exerce le pouvoir législatif : il vote les lois."
+    },
+    {
+      "consigne": "Quel pouvoir exerce l'institution en couleur ?",
+      "texte": "Pour appliquer une loi, [le gouvernement] publie un décret.",
+      "choix": ["Pouvoir législatif", "Pouvoir exécutif", "Pouvoir judiciaire"],
+      "bonne": 1,
+      "explication": "Le gouvernement exerce le pouvoir exécutif : il fait appliquer les lois, notamment par des décrets."
+    },
+    {
+      "consigne": "Quel pouvoir exerce l'institution en couleur ?",
+      "texte": "Au tribunal, [les juges] rendent la justice en toute indépendance.",
+      "choix": ["Pouvoir législatif", "Pouvoir exécutif", "Pouvoir judiciaire"],
+      "bonne": 2,
+      "explication": "Les juges exercent le pouvoir judiciaire, qui est indépendant (article 64)."
+    },
+    {
+      "consigne": "Quel pouvoir exerce l'institution en couleur ?",
+      "texte": "Quand les deux assemblées ont voté le texte, [le président de la République] promulgue la loi.",
+      "choix": ["Pouvoir législatif", "Pouvoir exécutif", "Pouvoir judiciaire"],
+      "bonne": 1,
+      "explication": "Le président de la République fait partie du pouvoir exécutif : c'est lui qui promulgue la loi."
+    },
+    {
+      "consigne": "Quel pouvoir exerce l'institution en couleur ?",
+      "texte": "Des élus déposent une proposition de loi : [les parlementaires] la discutent ensuite en séance.",
+      "choix": ["Pouvoir législatif", "Pouvoir exécutif", "Pouvoir judiciaire"],
+      "bonne": 0,
+      "explication": "Les parlementaires exercent le pouvoir législatif : ils proposent, discutent et votent les lois."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "La laïcité",
+      "acceptees": ["Laïcité", "La laïcité", "Laicite"],
+      "indices": [
+        "Je suis un principe inscrit à l'article 1 de la Constitution.",
+        "Je rends l'État neutre à l'égard des religions et je garantis la liberté de conscience.",
+        "Depuis la loi du 9 décembre 1905, l'État ne subventionne aucun culte grâce à moi."
+      ],
+      "explication": "La laïcité rend l'État neutre et indépendant des religions ; elle garantit à chacun la liberté de croire ou de ne pas croire."
+    },
+    {
+      "reponse": "Le Conseil constitutionnel",
+      "acceptees": ["Conseil constitutionnel", "Le Conseil constitutionnel"],
+      "indices": [
+        "Je suis une institution française.",
+        "Je vérifie qu'une loi respecte la norme suprême du pays.",
+        "Depuis 2010, une personne en procès peut m'adresser une question prioritaire (QPC)."
+      ],
+      "explication": "Le Conseil constitutionnel vérifie que les lois respectent la Constitution, notamment grâce à la QPC depuis 2010."
+    },
+    {
+      "reponse": "La motion de censure",
+      "acceptees": ["Motion de censure", "La motion de censure", "Une motion de censure", "Censure"],
+      "indices": [
+        "Je suis un outil du Parlement.",
+        "Je permets de contrôler le gouvernement.",
+        "Si une majorité me vote, le gouvernement est renversé."
+      ],
+      "explication": "La motion de censure permet au Parlement de renverser le gouvernement (article 49)."
+    },
+    {
+      "reponse": "Le traité de Maastricht",
+      "acceptees": ["Maastricht", "Traité de Maastricht", "Le traité de Maastricht"],
+      "indices": [
+        "Je suis un texte européen.",
+        "Je suis signé en 1992.",
+        "Grâce à moi, tout citoyen d'un État membre devient citoyen européen."
+      ],
+      "explication": "Le traité de Maastricht (1992) crée la citoyenneté européenne."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Les grands textes de la République",
+      "etapes": [
+        "En 1789, la Déclaration des droits de l'homme est adoptée",
+        "En 1905, une loi pose le principe de la laïcité",
+        "En 1946, un préambule garantit le droit de grève",
+        "Le 4 octobre 1958, la Constitution de la Ve République est adoptée",
+        "En 1962, le président est élu au suffrage universel direct"
+      ]
+    },
+    {
+      "titre": "La construction de l'Europe des citoyens",
+      "etapes": [
+        "En 1949, la France devient membre du Conseil de l'Europe",
+        "En 1950, la Convention européenne des droits de l'homme est signée",
+        "En 1979, le Parlement européen est élu directement par les citoyens",
+        "En 1992, le traité de Maastricht crée la citoyenneté européenne",
+        "En 2000, la Charte des droits fondamentaux de l'UE protège les citoyens"
+      ]
+    }
+  ]
+}

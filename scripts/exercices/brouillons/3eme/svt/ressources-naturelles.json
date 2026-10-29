@@ -1,0 +1,205 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Les combustibles fossiles",
+      "detail": "Charbon, pétrole et gaz : des ressources non renouvelables formées en millions d'années.",
+      "cartes": [
+        "Le charbon vient de végétaux accumulés dans des marécages",
+        "Le pétrole vient surtout du plancton enfoui",
+        "Formés en millions d'années sous chaleur et pression",
+        "Réserves de charbon, pétrole et gaz limitées",
+        "On les brûle pour obtenir de l'énergie"
+      ]
+    },
+    {
+      "nom": "L'eau douce",
+      "detail": "Une ressource rare, que l'on capte, traite, distribue puis épure après usage.",
+      "cartes": [
+        "Environ 2,5 % de l'eau de la Terre",
+        "On la capte dans une rivière ou une nappe",
+        "On la filtre lors de son traitement",
+        "On la désinfecte avant de la distribuer",
+        "Les eaux usées sont épurées en station d'épuration"
+      ]
+    },
+    {
+      "nom": "Les impacts de l'exploitation",
+      "detail": "Les dégâts causés par l'exploitation des ressources : milieux détruits, érosion, réchauffement, déchets.",
+      "cartes": [
+        "Une mine à ciel ouvert détruit le milieu sur place",
+        "Les gaz à effet de serre accentuent le réchauffement",
+        "Sans la forêt, la pluie emporte la terre d'une pente",
+        "Une centrale nucléaire produit des déchets radioactifs",
+        "Des espèces perdent leur milieu et la biodiversité baisse"
+      ]
+    },
+    {
+      "nom": "La gestion durable",
+      "detail": "Les gestes et principes qui préservent les ressources pour les générations futures.",
+      "cartes": [
+        "Recycler une canette en aluminium",
+        "Utiliser des énergies renouvelables",
+        "Pratiquer une agriculture qui préserve les sols",
+        "Répondre aux besoins du présent sans compromettre l'avenir",
+        "Réutiliser les objets plutôt que les jeter"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "l'érosion d'un sol sur une pente",
+      "carte": "La forêt qui retenait la terre avec ses racines a été coupée",
+      "role": "cause",
+      "explication": "Sans racines pour le retenir, le sol est emporté par la pluie."
+    },
+    {
+      "fait": "l'érosion d'un sol sur une pente",
+      "carte": "La terre perdue ne se reforme qu'en plusieurs siècles",
+      "role": "consequence",
+      "explication": "Un sol se forme très lentement : une fois emporté, il met des siècles à se reconstituer."
+    },
+    {
+      "fait": "le renforcement de l'effet de serre",
+      "carte": "La combustion du charbon, du pétrole et du gaz",
+      "role": "cause",
+      "explication": "Brûler des combustibles fossiles libère du CO₂, un gaz à effet de serre."
+    },
+    {
+      "fait": "le renforcement de l'effet de serre",
+      "carte": "Un réchauffement du climat",
+      "role": "consequence",
+      "explication": "Les gaz à effet de serre sont responsables du réchauffement climatique."
+    }
+  ],
+  "etiquettes": [
+    {
+      "consigne": "Quelle source d'énergie le passage en couleur décrit-il ?",
+      "texte": "Voici une source d'énergie : [elle est renouvelable, émet peu de CO₂, mais modifie le paysage].",
+      "choix": ["Charbon", "Éolien", "Nucléaire"],
+      "bonne": 1,
+      "explication": "L'éolien est renouvelable et émet peu de CO₂, mais les éoliennes modifient le paysage."
+    },
+    {
+      "consigne": "Quelle source d'énergie le passage en couleur décrit-il ?",
+      "texte": "Voici une source d'énergie : [elle n'est pas renouvelable et émet beaucoup de CO₂].",
+      "choix": ["Charbon", "Éolien", "Nucléaire"],
+      "bonne": 0,
+      "explication": "Le charbon est un combustible fossile non renouvelable : sa combustion émet beaucoup de CO₂."
+    },
+    {
+      "consigne": "Quelle source d'énergie le passage en couleur décrit-il ?",
+      "texte": "Voici une source d'énergie : [elle émet peu de CO₂, mais utilise de l'uranium non renouvelable et produit des déchets radioactifs].",
+      "choix": ["Charbon", "Éolien", "Nucléaire"],
+      "bonne": 2,
+      "explication": "Le nucléaire émet peu de CO₂, mais l'uranium n'est pas renouvelable et les déchets sont radioactifs."
+    },
+    {
+      "consigne": "Quelle source d'énergie le passage en couleur décrit-il ?",
+      "texte": "Une centrale produit de l'électricité en brûlant [une roche formée de végétaux enfouis pendant des millions d'années].",
+      "choix": ["Charbon", "Éolien", "Nucléaire"],
+      "bonne": 0,
+      "explication": "Le charbon provient de végétaux accumulés dans des marécages puis enfouis."
+    },
+    {
+      "consigne": "Quelle source d'énergie le passage en couleur décrit-il ?",
+      "texte": "Sur la colline, des pales tournent quand [le vent souffle] et produisent de l'électricité.",
+      "choix": ["Charbon", "Éolien", "Nucléaire"],
+      "bonne": 1,
+      "explication": "Une éolienne transforme l'énergie du vent, une ressource renouvelable, en électricité."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Érosion",
+      "acceptees": ["Érosion", "L'érosion", "Erosion"],
+      "indices": [
+        "Je menace les sols.",
+        "L'eau ou le vent me provoquent.",
+        "Sans racines pour retenir la terre, je l'emporte."
+      ],
+      "explication": "L'érosion est l'usure et le transport du sol par l'eau ou le vent."
+    },
+    {
+      "reponse": "Pétrole",
+      "acceptees": ["Pétrole", "Le pétrole", "Petrole"],
+      "indices": [
+        "Je suis un combustible fossile.",
+        "Je viens surtout de plancton enfoui dans des sédiments marins.",
+        "Une marée noire me répand sur les côtes."
+      ],
+      "explication": "Le pétrole se forme à partir de plancton enfoui, en millions d'années ; une marée noire en pollue les côtes."
+    },
+    {
+      "reponse": "Station d'épuration",
+      "acceptees": ["Station d'épuration", "Une station d'épuration", "La station d'épuration", "Station d'épuration des eaux", "Station épuration"],
+      "indices": [
+        "Je suis une installation.",
+        "Je retire une grande partie des polluants des eaux usées.",
+        "Je rejette ensuite l'eau dans le milieu naturel."
+      ],
+      "explication": "La station d'épuration retire une grande partie des polluants avant le rejet dans le milieu naturel."
+    },
+    {
+      "reponse": "Développement durable",
+      "acceptees": ["Développement durable", "Le développement durable", "Developpement durable"],
+      "indices": [
+        "Je suis un principe pour gérer les ressources.",
+        "Je réponds aux besoins du présent.",
+        "Je ne compromets pas ceux des générations futures."
+      ],
+      "explication": "Le développement durable répond aux besoins du présent sans compromettre ceux des générations futures."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "Imagine que toute l'eau de la Terre tienne dans un bidon de 200 litres. L'eau douce en représente environ 2,5 %. Combien de litres d'eau douce y a-t-il dans le bidon ?",
+      "reponse": 5,
+      "unite": "L",
+      "tolerance": 0,
+      "explication": "2,5 % de 200 L : 200 × 2,5 ÷ 100 = 5 L."
+    },
+    {
+      "question": "Un sol se forme au rythme de 2 cm en 300 ans. Combien d'années faut-il pour former 10 cm de sol au même rythme ?",
+      "reponse": 1500,
+      "unite": "ans",
+      "tolerance": 0,
+      "explication": "10 cm, c'est 5 fois plus que 2 cm : 5 × 300 = 1 500 ans."
+    },
+    {
+      "question": "Une forêt produit chaque année 4 000 m³ de bois. On en coupe 3 500 m³ par an. Combien de m³ de bois la forêt gagne-t-elle chaque année ?",
+      "reponse": 500,
+      "unite": "m³",
+      "tolerance": 0,
+      "explication": "4 000 − 3 500 = 500 m³ de bois en plus chaque année : on coupe moins qu'il n'en repousse."
+    },
+    {
+      "question": "Un robinet ouvert débite 6 litres d'eau par minute. Combien de litres sont gaspillés si on le laisse couler pendant 3 minutes en se brossant les dents ?",
+      "reponse": 18,
+      "unite": "L",
+      "tolerance": 0,
+      "explication": "6 L/min × 3 min = 18 L."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Le parcours de l'eau du robinet",
+      "etapes": [
+        "L'eau est captée dans une rivière ou une nappe",
+        "L'eau est filtrée puis désinfectée",
+        "L'eau est distribuée jusqu'au robinet",
+        "Les eaux usées partent vers la station d'épuration",
+        "L'eau épurée est rejetée dans le milieu naturel"
+      ]
+    },
+    {
+      "titre": "La formation du pétrole",
+      "etapes": [
+        "Du plancton meurt et tombe au fond de la mer",
+        "Il est enfoui sous des couches de sédiments",
+        "La chaleur et la pression le transforment",
+        "Au bout de millions d'années, du pétrole s'est formé"
+      ]
+    }
+  ]
+}

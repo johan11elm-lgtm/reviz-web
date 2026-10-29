@@ -1,0 +1,200 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "La Restauration",
+      "detail": "De 1815 à 1830, les Bourbons gouvernent avec la Charte de 1814 et très peu d'hommes votent.",
+      "cartes": [
+        "Les Bourbons reviennent sur le trône en 1815",
+        "Louis XVIII puis Charles X règnent sur la France",
+        "Le roi gouverne avec la Charte de 1814",
+        "Vers 1820, environ 100 000 hommes seulement votent",
+        "Charles X veut limiter la presse et le vote"
+      ]
+    },
+    {
+      "nom": "La monarchie de Juillet",
+      "detail": "De 1830 à 1848, Louis-Philippe est roi des Français et le vote reste réservé à une petite minorité.",
+      "cartes": [
+        "Après trois jours de barricades, Louis-Philippe devient roi",
+        "Le cens est abaissé, mais le vote reste très restreint",
+        "Vers 1846, environ 240 000 hommes seulement votent",
+        "Le refus d'élargir le vote renverse le roi en 1848",
+        "Ce régime dure de 1830 à 1848"
+      ]
+    },
+    {
+      "nom": "La IIe République",
+      "detail": "En 1848, tous les hommes obtiennent le droit de vote, l'esclavage est aboli et les libertés s'élargissent.",
+      "cartes": [
+        "Environ 9 millions d'hommes deviennent électeurs en 1848",
+        "L'esclavage est aboli le 27 avril",
+        "La fermeture des Ateliers nationaux provoque une insurrection ouvrière",
+        "Louis-Napoléon Bonaparte est élu président en décembre 1848",
+        "La liberté de la presse et de réunion est accordée"
+      ]
+    },
+    {
+      "nom": "Le Second Empire",
+      "detail": "De 1852 à 1870, Napoléon III garde le suffrage universel masculin mais le contrôle étroitement.",
+      "cartes": [
+        "Napoléon III devient empereur en 1852",
+        "Les candidats du gouvernement sont soutenus par les préfets",
+        "Les Français approuvent l'empereur par des plébiscites",
+        "La presse est surveillée par le pouvoir",
+        "L'empereur est fait prisonnier à Sedan en 1870"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "la révolution de juillet 1830",
+      "carte": "Charles X veut limiter la liberté de la presse et le droit de vote",
+      "role": "cause",
+      "explication": "En juillet 1830, les projets de Charles X contre la presse et le vote poussent les Parisiens à se révolter."
+    },
+    {
+      "fait": "la révolution de juillet 1830",
+      "carte": "Charles X est chassé du pouvoir",
+      "role": "consequence",
+      "explication": "Les Trois Glorieuses renversent Charles X."
+    },
+    {
+      "fait": "la révolution de juillet 1830",
+      "carte": "Louis-Philippe devient roi des Français",
+      "role": "consequence",
+      "explication": "Après la chute de Charles X, Louis-Philippe devient roi : c'est la monarchie de Juillet."
+    },
+    {
+      "fait": "la révolution de février 1848",
+      "carte": "Le refus d'élargir le droit de vote",
+      "role": "cause",
+      "explication": "En février 1848, le refus d'élargir le droit de vote provoque une nouvelle révolution à Paris."
+    },
+    {
+      "fait": "la révolution de février 1848",
+      "carte": "La IIe République est proclamée",
+      "role": "consequence",
+      "explication": "Louis-Philippe tombe et la IIe République est proclamée."
+    },
+    {
+      "fait": "la révolution de février 1848",
+      "carte": "Le suffrage universel masculin est établi",
+      "role": "consequence",
+      "explication": "La IIe République instaure en 1848 le suffrage universel masculin : environ 9 millions d'électeurs."
+    }
+  ],
+  "etiquettes": [
+    {
+      "consigne": "De quel type de suffrage parle le passage en couleur ?",
+      "texte": "Vers 1820, [seuls les hommes assez riches pour payer un impôt minimum peuvent voter].",
+      "choix": ["Suffrage censitaire", "Suffrage universel masculin", "Suffrage universel (hommes et femmes)"],
+      "bonne": 0,
+      "explication": "Quand seuls votent les hommes qui paient le cens, un impôt minimum, c'est le suffrage censitaire."
+    },
+    {
+      "consigne": "De quel type de suffrage parle le passage en couleur ?",
+      "texte": "En 1848, [tous les hommes de 21 ans et plus ont le droit de voter].",
+      "choix": ["Suffrage censitaire", "Suffrage universel masculin", "Suffrage universel (hommes et femmes)"],
+      "bonne": 1,
+      "explication": "Tous les hommes adultes votent, mais pas les femmes : c'est le suffrage universel masculin."
+    },
+    {
+      "consigne": "De quel type de suffrage parle le passage en couleur ?",
+      "texte": "Vers 1846, [seuls 240 000 hommes, les plus riches, ont le droit de voter].",
+      "choix": ["Suffrage censitaire", "Suffrage universel masculin", "Suffrage universel (hommes et femmes)"],
+      "bonne": 0,
+      "explication": "Le droit de vote dépend de la richesse : c'est le suffrage censitaire de la monarchie de Juillet."
+    },
+    {
+      "consigne": "De quel type de suffrage parle le passage en couleur ?",
+      "texte": "Sous Napoléon III, [tous les hommes de 21 ans et plus votent, mais le gouvernement soutient ses candidats].",
+      "choix": ["Suffrage censitaire", "Suffrage universel masculin", "Suffrage universel (hommes et femmes)"],
+      "bonne": 1,
+      "explication": "Le Second Empire garde le suffrage universel masculin, mais il le contrôle."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Louis-Philippe",
+      "acceptees": ["Louis Philippe", "Louis-Philippe Ier"],
+      "indices": [
+        "Je suis un roi du XIXe siècle.",
+        "Je deviens roi en 1830, après trois journées de révolution à Paris.",
+        "Une nouvelle révolution me renverse en février 1848."
+      ],
+      "explication": "Louis-Philippe, roi des Français de 1830 à 1848, est renversé par la révolution de février 1848."
+    },
+    {
+      "reponse": "Napoléon III",
+      "acceptees": ["Napoléon 3", "Napoleon 3", "Louis-Napoléon Bonaparte", "Louis Napoléon Bonaparte", "Louis-Napoléon"],
+      "indices": [
+        "Je suis le neveu d'un célèbre empereur.",
+        "Je suis élu président de la République en décembre 1848.",
+        "Je prends tous les pouvoirs par un coup d'État en 1851, puis je deviens empereur."
+      ],
+      "explication": "Louis-Napoléon Bonaparte, élu président en 1848, devient l'empereur Napoléon III en 1852."
+    },
+    {
+      "reponse": "Charles X",
+      "acceptees": ["Charles 10"],
+      "indices": [
+        "Je suis un roi de la famille des Bourbons.",
+        "Je veux limiter la liberté de la presse et le droit de vote en 1830.",
+        "Les Parisiens me chassent du pouvoir pendant les Trois Glorieuses."
+      ],
+      "explication": "Charles X est renversé par les Trois Glorieuses des 27, 28 et 29 juillet 1830."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "Vers 1846, environ 240 000 hommes ont le droit de voter. En 1848, environ 9 millions d'hommes peuvent voter. Combien de fois plus d'électeurs y a-t-il en 1848 ?",
+      "reponse": 37.5,
+      "unite": "fois",
+      "tolerance": 0,
+      "explication": "9 000 000 ÷ 240 000 = 37,5 : le corps électoral est multiplié par près de 40."
+    },
+    {
+      "question": "Vers 1846, environ 240 000 hommes votent. En 1848, environ 9 millions d'hommes votent. De combien de millions le nombre d'électeurs augmente-t-il ?",
+      "reponse": 8.76,
+      "unite": "millions",
+      "tolerance": 0,
+      "explication": "240 000 = 0,24 million, donc 9 − 0,24 = 8,76 millions d'électeurs en plus."
+    },
+    {
+      "question": "Vers 1820, environ 100 000 hommes votent. Vers 1846, ils sont environ 240 000. Combien d'électeurs de plus y a-t-il en 1846 ?",
+      "reponse": 140000,
+      "unite": "électeurs",
+      "tolerance": 0,
+      "explication": "240 000 − 100 000 = 140 000 électeurs de plus."
+    },
+    {
+      "question": "La Restauration commence en 1815 et s'achève en 1830. Combien d'années dure-t-elle ?",
+      "reponse": 15,
+      "unite": "ans",
+      "tolerance": 0,
+      "explication": "1830 − 1815 = 15 ans."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Les régimes de 1815 à 1870",
+      "etapes": [
+        "Les Bourbons reviennent : c'est la Restauration",
+        "Louis-Philippe devient roi : c'est la monarchie de Juillet",
+        "Le suffrage universel masculin naît avec la IIe République",
+        "Napoléon III gouverne : c'est le Second Empire"
+      ]
+    },
+    {
+      "titre": "La IIe République, de 1848 à 1851",
+      "etapes": [
+        "La IIe République est proclamée en février 1848",
+        "L'esclavage est aboli le 27 avril",
+        "La fermeture des Ateliers nationaux provoque une insurrection en juin",
+        "Louis-Napoléon Bonaparte est élu président en décembre 1848",
+        "Louis-Napoléon Bonaparte prend tous les pouvoirs par un coup d'État"
+      ]
+    }
+  ]
+}

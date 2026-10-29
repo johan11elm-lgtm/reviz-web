@@ -1,0 +1,148 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Un nombre pour compter",
+      "detail": "Un nombre cardinal dit combien il y en a : twelve, thirty, forty-five.",
+      "cartes": [
+        "My sister is twelve years old",
+        "There are thirty pupils in my class",
+        "I have got forty-five stickers",
+        "The bus has sixty seats",
+        "Hannah has fourteen cousins"
+      ]
+    },
+    {
+      "nom": "Un nombre pour classer",
+      "detail": "Un nombre ordinal donne un rang : first, second, third, fourth, fifth…",
+      "cartes": [
+        "Tom lives on the fifth floor",
+        "This is my second English lesson today",
+        "Anna is the first girl in the line",
+        "My seat is in the sixth row",
+        "It is my tenth birthday today"
+      ]
+    },
+    {
+      "nom": "Un jour de la semaine",
+      "detail": "Les jours (Monday, Tuesday…) prennent une majuscule et s'emploient avec on.",
+      "cartes": [
+        "See you on Friday!",
+        "We have maths on Thursday",
+        "Is the match on Saturday?",
+        "The museum is closed on Monday",
+        "My cousin visits us on Sunday"
+      ]
+    },
+    {
+      "nom": "Un mois de l'année",
+      "detail": "Les mois (January, February…) prennent une majuscule et s'emploient avec in.",
+      "cartes": [
+        "My birthday is in March",
+        "We go to the beach in August",
+        "School starts again in September",
+        "It often snows in January",
+        "Christmas is in December"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Quelle indication de temps le passage en couleur donne-t-il ?",
+      "texte": "I've got English [on Wednesday].",
+      "choix": ["Un jour de la semaine", "Une date précise", "Un mois", "Une année"],
+      "bonne": 0,
+      "explication": "Wednesday est un jour de la semaine, et on emploie on devant un jour."
+    },
+    {
+      "consigne": "Quelle indication de temps le passage en couleur donne-t-il ?",
+      "texte": "My birthday is [on 12th June].",
+      "choix": ["Un jour de la semaine", "Une date précise", "Un mois", "Une année"],
+      "bonne": 1,
+      "explication": "12th June donne le jour et le mois : c'est une date précise, avec on."
+    },
+    {
+      "consigne": "Quelle indication de temps le passage en couleur donne-t-il ?",
+      "texte": "We go skiing [in February].",
+      "choix": ["Un jour de la semaine", "Une date précise", "Un mois", "Une année"],
+      "bonne": 2,
+      "explication": "February est un mois seul : on emploie in devant un mois."
+    },
+    {
+      "consigne": "Quelle indication de temps le passage en couleur donne-t-il ?",
+      "texte": "My brother was born [in 2014].",
+      "choix": ["Un jour de la semaine", "Une date précise", "Un mois", "Une année"],
+      "bonne": 3,
+      "explication": "2014 est une année : on emploie in devant un mois ou une année."
+    },
+    {
+      "consigne": "Quelle indication de temps le passage en couleur donne-t-il ?",
+      "texte": "The concert is [on 3rd May].",
+      "choix": ["Un jour de la semaine", "Une date précise", "Un mois", "Une année"],
+      "bonne": 1,
+      "explication": "3rd May est une date précise (le jour et le mois) : on emploie on."
+    },
+    {
+      "consigne": "Quelle indication de temps le passage en couleur donne-t-il ?",
+      "texte": "It rains a lot [in November].",
+      "choix": ["Un jour de la semaine", "Une date précise", "Un mois", "Une année"],
+      "bonne": 2,
+      "explication": "November est un mois seul : on emploie in."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Double",
+      "acceptees": ["Double N"],
+      "indices": [
+        "Je suis un mot qu'on utilise quand on épelle.",
+        "Je sers à dire qu'une lettre est répétée.",
+        "Dans A, ___ N, A, je suis le mot qui manque."
+      ],
+      "explication": "On épelle Anna : A, double N, A. Double indique une lettre répétée."
+    },
+    {
+      "reponse": "Forty",
+      "acceptees": ["40"],
+      "indices": [
+        "Je suis un nombre anglais qui se termine par -ty.",
+        "On m'écrit sans u, contrairement au nombre 4.",
+        "Je suis la dizaine qui vient après thirty."
+      ],
+      "explication": "40 s'écrit forty, sans u, alors que 4 s'écrit four."
+    },
+    {
+      "reponse": "February",
+      "acceptees": [],
+      "indices": [
+        "Je suis un mois.",
+        "Je suis le plus court de l'année.",
+        "Je viens juste après January."
+      ],
+      "explication": "February est le deuxième mois de l'année et le plus court, avec une majuscule."
+    },
+    {
+      "reponse": "Ordinal",
+      "acceptees": ["Nombre ordinal", "Un nombre ordinal", "Un ordinal", "Ordinals", "Ordinaux"],
+      "indices": [
+        "Je suis un type de nombre.",
+        "Je sers à dire la date.",
+        "Mes trois premiers sont irréguliers : first, second et third."
+      ],
+      "explication": "Les nombres ordinaux indiquent un rang et servent à dire la date : first, second, third, puis -th."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Écrire une date à la britannique",
+      "etapes": [
+        "Écrire la préposition on",
+        "Écrire le jour de la semaine : Monday",
+        "Écrire le jour du mois en ordinal : 3rd",
+        "Écrire le mois avec une majuscule : May"
+      ]
+    }
+  ]
+}

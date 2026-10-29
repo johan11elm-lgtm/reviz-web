@@ -1,0 +1,225 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "La hauteur du son",
+      "detail": "Un son est plus ou moins grave ou aigu selon sa fréquence, en hertz.",
+      "cartes": [
+        "Elle se mesure en hertz",
+        "Plus elle est grande, plus le son est aigu",
+        "L'oreille humaine perçoit de 20 à 20 000 Hz",
+        "Les infrasons sont en dessous de 20 Hz",
+        "Les ultrasons sont au-dessus de 20 000 Hz"
+      ]
+    },
+    {
+      "nom": "Le niveau sonore",
+      "detail": "Un son est plus ou moins fort : on le mesure en décibels et il peut devenir dangereux.",
+      "cartes": [
+        "Il se mesure en décibels",
+        "On le mesure avec un sonomètre",
+        "Un danger pour l'oreille apparaît dès 85 dB",
+        "Le seuil de la douleur est autour de 120 dB",
+        "Des bouchons d'oreille le réduisent au concert"
+      ]
+    },
+    {
+      "nom": "La vitesse de propagation",
+      "detail": "La vitesse à laquelle un signal avance : environ 340 m/s pour le son dans l'air, 3 × 10⁸ m/s pour la lumière.",
+      "cartes": [
+        "Dans l'air, elle vaut environ 340 m/s",
+        "Dans l'eau, elle atteint environ 1 500 m/s",
+        "Dans le vide, la lumière atteint 3 × 10⁸ m/s",
+        "Elle explique pourquoi l'éclair précède le tonnerre",
+        "Elle est plus grande dans un solide que dans l'air"
+      ]
+    },
+    {
+      "nom": "La mesure d'une distance",
+      "detail": "Un signal réfléchi permet de calculer une distance avec d = v × t, divisé par 2 pour un aller-retour.",
+      "cartes": [
+        "Un sonar mesure la profondeur grâce à un écho",
+        "On divise par 2 car le signal fait l'aller-retour",
+        "Un télémètre laser envoie de la lumière vers l'obstacle",
+        "Elle se calcule avec d = v × t",
+        "L'écho met 2 s à revenir de l'obstacle"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "l'impossibilité d'entendre un son dans le vide",
+      "carte": "Le son a besoin d'un milieu matériel pour se propager",
+      "role": "cause",
+      "explication": "Le son est une vibration qui se transmet de proche en proche dans la matière : sans matière, il ne se propage pas."
+    },
+    {
+      "fait": "l'impossibilité d'entendre un son dans le vide",
+      "carte": "Le vide ne contient aucune matière pour transmettre la vibration",
+      "role": "cause",
+      "explication": "La vibration ne peut pas passer de proche en proche quand il n'y a pas de matière."
+    },
+    {
+      "fait": "l'impossibilité d'entendre un son dans le vide",
+      "carte": "Dans l'espace, une explosion ne s'entend pas",
+      "role": "consequence",
+      "explication": "L'espace est un vide : le son de l'explosion ne peut pas se propager jusqu'à nos oreilles."
+    },
+    {
+      "fait": "l'impossibilité d'entendre un son dans le vide",
+      "carte": "Sous une cloche, le réveil s'entend de moins en moins quand on pompe l'air",
+      "role": "consequence",
+      "explication": "En retirant l'air, on se rapproche du vide : la sonnerie s'entend de moins en moins."
+    }
+  ],
+  "etiquettes": [
+    {
+      "consigne": "Quel est le type de signal dont la fréquence est en couleur ?",
+      "texte": "Un sonar émet des signaux de [50 000 Hz] dans l'eau.",
+      "choix": ["Infrason", "Son audible", "Ultrason"],
+      "bonne": 2,
+      "explication": "50 000 Hz dépasse 20 000 Hz : c'est un ultrason."
+    },
+    {
+      "consigne": "Quel est le type de signal dont la fréquence est en couleur ?",
+      "texte": "Une personne parle avec une voix grave de [200 Hz].",
+      "choix": ["Infrason", "Son audible", "Ultrason"],
+      "bonne": 1,
+      "explication": "200 Hz est compris entre 20 Hz et 20 000 Hz : c'est un son audible."
+    },
+    {
+      "consigne": "Quel est le type de signal dont la fréquence est en couleur ?",
+      "texte": "Un capteur mesure une vibration du sol de [5 Hz].",
+      "choix": ["Infrason", "Son audible", "Ultrason"],
+      "bonne": 0,
+      "explication": "5 Hz est inférieur à 20 Hz : c'est un infrason, inaudible pour l'être humain."
+    },
+    {
+      "consigne": "Quel est le type de signal dont la fréquence est en couleur ?",
+      "texte": "Une corde de guitare vibre à [440 Hz].",
+      "choix": ["Infrason", "Son audible", "Ultrason"],
+      "bonne": 1,
+      "explication": "440 Hz est compris entre 20 Hz et 20 000 Hz : c'est un son audible."
+    },
+    {
+      "consigne": "Quel est le type de signal dont la fréquence est en couleur ?",
+      "texte": "Une échographie utilise des signaux de [2 000 000 Hz].",
+      "choix": ["Infrason", "Son audible", "Ultrason"],
+      "bonne": 2,
+      "explication": "2 000 000 Hz dépasse largement 20 000 Hz : c'est un ultrason."
+    },
+    {
+      "consigne": "Quel est le type de signal dont la fréquence est en couleur ?",
+      "texte": "Une machine fait vibrer le sol [12 fois par seconde].",
+      "choix": ["Infrason", "Son audible", "Ultrason"],
+      "bonne": 0,
+      "explication": "12 vibrations par seconde, c'est 12 Hz, soit moins de 20 Hz : c'est un infrason."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Écho",
+      "acceptees": ["Écho", "L'écho", "Un écho", "Echo"],
+      "indices": [
+        "Je suis un son.",
+        "Je suis un son réfléchi par un obstacle.",
+        "Grâce à moi, un sonar mesure la profondeur de l'eau."
+      ],
+      "explication": "Un écho est un son réfléchi par un obstacle ; le sonar l'utilise pour mesurer des distances."
+    },
+    {
+      "reponse": "Fréquence",
+      "acceptees": ["Fréquence", "La fréquence"],
+      "indices": [
+        "Je suis une grandeur d'un son.",
+        "Je me mesure en hertz.",
+        "Plus je suis grande, plus le son est aigu."
+      ],
+      "explication": "La fréquence est le nombre de vibrations par seconde, en hertz : elle fixe la hauteur du son."
+    },
+    {
+      "reponse": "Sonomètre",
+      "acceptees": ["Sonomètre", "Le sonomètre", "Un sonomètre"],
+      "indices": [
+        "Je suis un appareil de mesure.",
+        "Je mesure un niveau sonore.",
+        "Mon unité est le décibel."
+      ],
+      "explication": "Le sonomètre mesure le niveau d'intensité sonore, en décibels."
+    },
+    {
+      "reponse": "Ultrason",
+      "acceptees": ["Ultrason", "Ultrasons", "Les ultrasons", "Un ultrason"],
+      "indices": [
+        "Je suis un son.",
+        "Mon domaine commence au-dessus de 20 000 Hz.",
+        "On m'utilise en échographie, et des animaux comme les chauves-souris m'émettent."
+      ],
+      "explication": "Les ultrasons ont une fréquence supérieure à 20 000 Hz : l'oreille humaine ne les entend pas."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "On entend le tonnerre 6 s après avoir vu l'éclair. Le son se propage à 340 m/s dans l'air. À quelle distance se trouve l'orage ?",
+      "reponse": 2040,
+      "unite": "m",
+      "tolerance": 0,
+      "explication": "On néglige la durée du trajet de la lumière : d = v × t = 340 × 6 = 2 040 m."
+    },
+    {
+      "question": "Un sonar émet un ultrason dans l'eau, où le son va à 1 500 m/s. L'écho revient après 0,4 s. Quelle est la profondeur ?",
+      "reponse": 300,
+      "unite": "m",
+      "tolerance": 0,
+      "explication": "Le signal fait l'aller-retour : d = v × t ÷ 2 = 1 500 × 0,4 ÷ 2 = 600 ÷ 2 = 300 m."
+    },
+    {
+      "question": "Une vibration a une période de 0,005 s. Quelle est sa fréquence ?",
+      "reponse": 200,
+      "unite": "Hz",
+      "tolerance": 0,
+      "explication": "f = 1 ÷ T = 1 ÷ 0,005 = 200 Hz."
+    },
+    {
+      "question": "Un son a une fréquence de 50 Hz. Quelle est sa période ?",
+      "reponse": 0.02,
+      "unite": "s",
+      "tolerance": 0,
+      "explication": "T = 1 ÷ f = 1 ÷ 50 = 0,02 s."
+    },
+    {
+      "question": "Un promeneur crie face à une falaise et entend l'écho 4 s plus tard. Le son va à 340 m/s dans l'air. À quelle distance est la falaise ?",
+      "reponse": 680,
+      "unite": "m",
+      "tolerance": 0,
+      "explication": "Le son fait l'aller-retour : d = v × t ÷ 2 = 340 × 4 ÷ 2 = 1 360 ÷ 2 = 680 m."
+    },
+    {
+      "question": "Un signal lumineux voyage pendant 2 s à 300 000 km/s. Quelle distance parcourt-il ?",
+      "reponse": 600000,
+      "unite": "km",
+      "tolerance": 0,
+      "explication": "d = v × t = 300 000 × 2 = 600 000 km."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Montrer que le son ne se propage pas dans le vide",
+      "etapes": [
+        "Placer un réveil qui sonne sous une cloche",
+        "Pomper l'air de la cloche",
+        "Écouter la sonnerie qui s'affaiblit peu à peu",
+        "Conclure que le son ne se propage pas dans le vide"
+      ]
+    },
+    {
+      "titre": "Mesurer la profondeur de l'eau avec un sonar",
+      "etapes": [
+        "Le sonar envoie un ultrason vers le fond",
+        "L'ultrason est réfléchi par le fond",
+        "Le sonar mesure la durée de l'aller-retour",
+        "Il calcule la profondeur avec d = v × t ÷ 2"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,138 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Possesseur masculin",
+      "detail": "Le possesseur est un garçon ou un homme : on emploie his, même quand le nom qui suit est féminin.",
+      "cartes": [
+        "Tom and his sister are at school",
+        "Leo is washing his bike",
+        "My uncle is cleaning his car",
+        "Ben shows me his new football",
+        "Jack is looking for his keys"
+      ]
+    },
+    {
+      "nom": "Possesseur féminin",
+      "detail": "Le possesseur est une fille ou une femme : on emploie her, même quand le nom qui suit est masculin.",
+      "cartes": [
+        "Emma loves her brother",
+        "Julie is with her father",
+        "Anna is brushing her long hair",
+        "My grandmother loves her garden",
+        "Lucy is playing with her cat"
+      ]
+    },
+    {
+      "nom": "Plusieurs possesseurs",
+      "detail": "Le possesseur est un groupe de personnes : on emploie our ou their.",
+      "cartes": [
+        "My cousins and their dog",
+        "We live in Leeds. Our house is small",
+        "The children are playing with their toys",
+        "Lucy and Tom love their grandmother",
+        "My parents love their new flat"
+      ]
+    },
+    {
+      "nom": "Animal ou chose",
+      "detail": "Le possesseur est un animal ou une chose : on emploie its, sans apostrophe.",
+      "cartes": [
+        "The cat is sleeping in its basket",
+        "Look at the dog! Its tail is very long",
+        "The bird is cleaning its wings",
+        "The tree has lost its leaves",
+        "The table has lost one of its legs"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Quelle est la nature du passage en couleur ?",
+      "texte": "The cat is sleeping in [its] basket.",
+      "choix": ["Adjectif possessif", "Génitif ('s ou ')", "It's = it is", "It's = it has"],
+      "bonne": 0,
+      "explication": "« its » est le possessif d'un animal ou d'une chose : il n'a jamais d'apostrophe."
+    },
+    {
+      "consigne": "Quelle est la nature du passage en couleur ?",
+      "texte": "This is [Emma's] bike.",
+      "choix": ["Adjectif possessif", "Génitif ('s ou ')", "It's = it is", "It's = it has"],
+      "bonne": 1,
+      "explication": "« Emma's » est un génitif : le possesseur, puis 's, puis l'objet, sans article."
+    },
+    {
+      "consigne": "Quelle est la nature du passage en couleur ?",
+      "texte": "Look at the dog! [It's] very big.",
+      "choix": ["Adjectif possessif", "Génitif ('s ou ')", "It's = it is", "It's = it has"],
+      "bonne": 2,
+      "explication": "« It's » est ici la contraction de it is : « it is very big » a du sens."
+    },
+    {
+      "consigne": "Quelle est la nature du passage en couleur ?",
+      "texte": "My [parents'] car is red.",
+      "choix": ["Adjectif possessif", "Génitif ('s ou ')", "It's = it is", "It's = it has"],
+      "bonne": 1,
+      "explication": "« parents' » est un pluriel en -s : pour le génitif, on ajoute seulement l'apostrophe."
+    },
+    {
+      "consigne": "Quelle est la nature du passage en couleur ?",
+      "texte": "Look at my cat! [It's] got a long black tail.",
+      "choix": ["Adjectif possessif", "Génitif ('s ou ')", "It's = it is", "It's = it has"],
+      "bonne": 3,
+      "explication": "« It's got » veut dire it has got : on peut remplacer It's par It has."
+    },
+    {
+      "consigne": "Quelle est la nature du passage en couleur ?",
+      "texte": "Julie shows me [her] family tree.",
+      "choix": ["Adjectif possessif", "Génitif ('s ou ')", "It's = it is", "It's = it has"],
+      "bonne": 0,
+      "explication": "« her » est l'adjectif possessif de Julie, une fille."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Génitif",
+      "acceptees": ["Génitif", "Le génitif", "Génitif 's"],
+      "indices": [
+        "Je sers à dire à qui appartient quelque chose.",
+        "Je m'écris avec une apostrophe.",
+        "Je me place après le nom du possesseur et avant l'objet, sans article."
+      ],
+      "explication": "Le génitif 's marque la possession : Tom's dog veut dire le chien de Tom."
+    },
+    {
+      "reponse": "Its",
+      "acceptees": ["Its"],
+      "indices": [
+        "Je suis un mot anglais de trois lettres.",
+        "Je suis un adjectif possessif.",
+        "Je m'emploie pour un animal ou une chose, et je n'ai jamais d'apostrophe."
+      ],
+      "explication": "Its est le possessif d'un animal ou d'une chose. Il n'a pas d'apostrophe, contrairement à it's."
+    },
+    {
+      "reponse": "Uncle",
+      "acceptees": ["Uncle", "An uncle", "Oncle", "Un oncle"],
+      "indices": [
+        "Je suis un membre de la famille.",
+        "Je suis un homme.",
+        "Je suis le frère du père ou de la mère de quelqu'un."
+      ],
+      "explication": "Uncle veut dire oncle : le frère du père ou de la mère."
+    },
+    {
+      "reponse": "Only child",
+      "acceptees": ["Only child", "An only child", "Enfant unique", "Un enfant unique", "Fils unique", "Fille unique"],
+      "indices": [
+        "Je suis une expression anglaise qui décrit la famille de quelqu'un.",
+        "Je décris une situation que vivent certains élèves à la maison.",
+        "Je désigne la personne qui n'a ni frère ni sœur."
+      ],
+      "explication": "An only child est un enfant sans frère ni sœur."
+    }
+  ],
+  "calculs": [],
+  "etapes": []
+}

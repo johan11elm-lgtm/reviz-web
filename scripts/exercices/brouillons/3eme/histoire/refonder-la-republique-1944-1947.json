@@ -1,0 +1,146 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "La Libération et l'État de droit",
+      "detail": "Le retour de la légalité républicaine et la punition des collaborateurs en 1944-1945.",
+      "cartes": [
+        "Un gouvernement provisoire est créé en juin 1944",
+        "Les actes du régime de Vichy sont déclarés nuls",
+        "Une ordonnance d'août 1944 proclame que la République existe toujours",
+        "L'épuration est d'abord « sauvage » : exécutions sommaires, femmes tondues",
+        "Des tribunaux jugent les collaborateurs, dont Pétain en 1945"
+      ]
+    },
+    {
+      "nom": "Les femmes deviennent citoyennes",
+      "detail": "L'élargissement du droit de vote et d'éligibilité en 1944-1945.",
+      "cartes": [
+        "Une ordonnance d'avril 1944 accorde le droit de vote aux Françaises",
+        "Les Françaises peuvent aussi se présenter aux élections",
+        "Aux municipales d'avril 1945, les Françaises votent enfin",
+        "Le corps électoral double",
+        "Le suffrage devient vraiment universel"
+      ]
+    },
+    {
+      "nom": "Une démocratie sociale",
+      "detail": "Les réformes économiques et sociales qui protègent les citoyens, inspirées du programme de la Résistance.",
+      "cartes": [
+        "Les ordonnances d'octobre 1945 créent la Sécurité sociale",
+        "Renault est nationalisée en janvier 1945",
+        "Électricité et gaz nationalisés avec EDF-GDF en 1946",
+        "Des comités d'entreprise sont créés en 1945",
+        "L'État-providence protège les citoyens contre les risques sociaux"
+      ]
+    },
+    {
+      "nom": "La naissance de la IVe République",
+      "detail": "Les étapes qui mènent à la Constitution de 1946, après le départ de de Gaulle.",
+      "cartes": [
+        "Les Français refusent par référendum de revenir à la IIIe République",
+        "Le général de Gaulle démissionne en janvier 1946",
+        "Un premier projet de Constitution est rejeté en mai 1946",
+        "La Constitution est adoptée par référendum le 13 octobre 1946",
+        "Un régime parlementaire où l'Assemblée nationale domine"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "la création de la Sécurité sociale en 1945",
+      "carte": "Le programme du CNR de mars 1944 prévoit un plan complet de Sécurité sociale",
+      "role": "cause",
+      "explication": "Le gouvernement applique à la Libération les réformes prévues par le programme du Conseil national de la Résistance."
+    },
+    {
+      "fait": "la création de la Sécurité sociale en 1945",
+      "carte": "L'État devient un État-providence",
+      "role": "consequence",
+      "explication": "En protégeant les citoyens contre les risques de la vie, l'État devient un État-providence."
+    },
+    {
+      "fait": "la création de la Sécurité sociale en 1945",
+      "carte": "Les travailleurs sont protégés contre la maladie, la vieillesse et les accidents du travail",
+      "role": "consequence",
+      "explication": "C'est le rôle de la Sécurité sociale, qui verse aussi des allocations familiales."
+    },
+    {
+      "fait": "la démission de de Gaulle en janvier 1946",
+      "carte": "Un désaccord avec les partis qui veulent une Assemblée dominante",
+      "role": "cause",
+      "explication": "De Gaulle veut un pouvoir exécutif fort, alors que les partis veulent un régime parlementaire."
+    },
+    {
+      "fait": "la démission de de Gaulle en janvier 1946",
+      "carte": "De Gaulle ne revient au pouvoir qu'en 1958",
+      "role": "consequence",
+      "explication": "Après sa démission, il reste éloigné du pouvoir jusqu'en 1958."
+    }
+  ],
+  "etiquettes": [],
+  "devinettes": [
+    {
+      "reponse": "De Gaulle",
+      "acceptees": ["De Gaulle", "Charles de Gaulle", "Le général de Gaulle", "Général de Gaulle"],
+      "indices": [
+        "Je suis un général français.",
+        "Je dirige le gouvernement provisoire de 1944 à 1946.",
+        "En janvier 1946, je démissionne, en désaccord avec les partis."
+      ],
+      "explication": "Le général de Gaulle dirige le GPRF jusqu'à sa démission en janvier 1946."
+    },
+    {
+      "reponse": "La Sécurité sociale",
+      "acceptees": ["Sécurité sociale", "La Sécurité sociale", "La Sécu", "Sécu"],
+      "indices": [
+        "Je suis une création de 1945.",
+        "Je suis mise en place avec Pierre Laroque et Ambroise Croizat.",
+        "Je protège les travailleurs contre la maladie, la vieillesse et les accidents du travail."
+      ],
+      "explication": "La Sécurité sociale, créée par les ordonnances d'octobre 1945, protège contre les risques de la vie."
+    },
+    {
+      "reponse": "L'épuration",
+      "acceptees": ["Épuration", "L'épuration", "Epuration", "L'Épuration"],
+      "indices": [
+        "Je suis un mouvement de la Libération.",
+        "Je punis les collaborateurs, d'abord par des actes de vengeance.",
+        "Je deviens légale quand des tribunaux jugent les accusés."
+      ],
+      "explication": "L'épuration sanctionne les collaborateurs : sauvage au début, elle devient légale avec les tribunaux."
+    },
+    {
+      "reponse": "Pétain",
+      "acceptees": ["Pétain", "Philippe Pétain", "Le maréchal Pétain", "Maréchal Pétain"],
+      "indices": [
+        "Je suis un maréchal français.",
+        "Je dirige le régime de Vichy pendant l'Occupation.",
+        "En 1945, je suis condamné à mort, mais ma peine est commuée en détention à vie."
+      ],
+      "explication": "Pétain, chef du régime de Vichy, est condamné à mort en 1945 ; sa peine est commuée en détention à vie."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "De la Libération à la Constitution de 1946",
+      "etapes": [
+        "Le 21 avril 1944, les femmes obtiennent le droit de vote",
+        "Le 9 août 1944, une ordonnance proclame que la République existe toujours",
+        "Le 29 avril 1945, les femmes votent pour la première fois",
+        "En janvier 1946, de Gaulle démissionne",
+        "Le 13 octobre 1946, la Constitution de la IVe République est adoptée"
+      ]
+    },
+    {
+      "titre": "Comment naît la IVe République",
+      "etapes": [
+        "En octobre 1945, les Français refusent de revenir à la IIIe République",
+        "En janvier 1946, de Gaulle démissionne",
+        "En mai 1946, un premier projet de Constitution est rejeté",
+        "Le 13 octobre 1946, le second projet est adopté par référendum"
+      ]
+    }
+  ]
+}

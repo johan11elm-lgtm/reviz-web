@@ -1,0 +1,212 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Les détroits stratégiques",
+      "detail": "Des passages maritimes naturels et étroits entre deux terres, où se concentre une grande partie du trafic mondial.",
+      "cartes": [
+        "Malacca, par où passent les échanges entre l'Asie et l'Europe",
+        "Ormuz, par où passe une grande part du pétrole",
+        "Gibraltar, entre l'Europe et l'Afrique",
+        "Bab el-Mandeb, à l'entrée de la mer Rouge",
+        "Le Pas-de-Calais, entre la France et le Royaume-Uni"
+      ]
+    },
+    {
+      "nom": "Les canaux creusés par l'homme",
+      "detail": "Suez (1869) et Panama (1914) : des passages artificiels qui évitent de longs détours aux navires.",
+      "cartes": [
+        "Suez, ouvert en 1869",
+        "Panama, ouvert en 1914",
+        "Un passage qui évite de contourner l'Afrique",
+        "Le passage qui relie l'Atlantique au Pacifique",
+        "Le passage bloqué par l'Ever Given en 2021"
+      ]
+    },
+    {
+      "nom": "Les ports d'Asie",
+      "detail": "Les plus grands ports à conteneurs du monde sont en Asie de l'Est et du Sud-Est, devant Rotterdam, premier port d'Europe.",
+      "cartes": [
+        "Shanghai, le premier port à conteneurs du monde",
+        "Singapour, grand port d'Asie du Sud-Est",
+        "Ningbo, grand port à conteneurs de Chine",
+        "Shenzhen, grand port du sud de la Chine",
+        "Busan, grand port de Corée du Sud"
+      ]
+    },
+    {
+      "nom": "Les zones industrialo-portuaires",
+      "detail": "Les ZIP associent un port et des industries (raffineries, sidérurgie) installées au bord de l'eau pour recevoir directement les matières premières.",
+      "cartes": [
+        "Des raffineries et des usines sidérurgiques au bord de l'eau",
+        "Rotterdam, un port entouré d'industries",
+        "Le Havre, un port associé à des usines",
+        "Fos-Marseille, port et industries réunis",
+        "Des usines qui reçoivent les matières premières arrivées par bateau"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "le blocage du canal de Suez en 2021",
+      "carte": "Le porte-conteneurs Ever Given reste coincé en travers du canal",
+      "role": "cause",
+      "explication": "En 2021, l'Ever Given reste coincé près d'une semaine et bloque le canal de Suez."
+    },
+    {
+      "fait": "le blocage du canal de Suez en 2021",
+      "carte": "Des centaines de navires restent bloqués",
+      "role": "consequence",
+      "explication": "Le blocage du canal retient des centaines de navires."
+    },
+    {
+      "fait": "le blocage du canal de Suez en 2021",
+      "carte": "Le commerce mondial est perturbé",
+      "role": "consequence",
+      "explication": "Le blocage d'un passage stratégique perturbe le commerce mondial, qui dépend de quelques passages étroits."
+    }
+  ],
+  "etiquettes": [
+    {
+      "consigne": "De quel type de lieu s'agit-il ?",
+      "texte": "De très nombreux navires qui relient l'Asie et l'Europe franchissent [Malacca].",
+      "choix": [
+        "Un détroit",
+        "Un canal",
+        "Un port à conteneurs",
+        "Une façade maritime"
+      ],
+      "bonne": 0,
+      "explication": "Malacca est un passage naturel et étroit entre deux terres : c'est un détroit stratégique."
+    },
+    {
+      "consigne": "De quel type de lieu s'agit-il ?",
+      "texte": "[Panama], ouvert en 1914, relie l'Atlantique et le Pacifique.",
+      "choix": [
+        "Un détroit",
+        "Un canal",
+        "Un port à conteneurs",
+        "Une façade maritime"
+      ],
+      "bonne": 1,
+      "explication": "Panama a été creusé par les hommes entre l'Atlantique et le Pacifique : c'est un canal."
+    },
+    {
+      "consigne": "De quel type de lieu s'agit-il ?",
+      "texte": "Avec des millions de conteneurs par an, [Shanghai] est le numéro un mondial.",
+      "choix": [
+        "Un détroit",
+        "Un canal",
+        "Un port à conteneurs",
+        "Une façade maritime"
+      ],
+      "bonne": 2,
+      "explication": "Shanghai est le premier port à conteneurs du monde."
+    },
+    {
+      "consigne": "De quel type de lieu s'agit-il ?",
+      "texte": "Du Havre à Hambourg, [la Northern Range] regroupe de grands ports reliés à leur arrière-pays.",
+      "choix": [
+        "Un détroit",
+        "Un canal",
+        "Un port à conteneurs",
+        "Une façade maritime"
+      ],
+      "bonne": 3,
+      "explication": "La Northern Range regroupe plusieurs grands ports proches reliés à un arrière-pays : c'est une façade maritime."
+    },
+    {
+      "consigne": "De quel type de lieu s'agit-il ?",
+      "texte": "Une grande part du pétrole du monde passe par [Ormuz].",
+      "choix": [
+        "Un détroit",
+        "Un canal",
+        "Un port à conteneurs",
+        "Une façade maritime"
+      ],
+      "bonne": 0,
+      "explication": "Ormuz est un passage naturel et étroit où se concentrent les navires pétroliers : c'est un détroit."
+    },
+    {
+      "consigne": "De quel type de lieu s'agit-il ?",
+      "texte": "[Suez], ouvert en 1869, relie la Méditerranée à la mer Rouge.",
+      "choix": [
+        "Un détroit",
+        "Un canal",
+        "Un port à conteneurs",
+        "Une façade maritime"
+      ],
+      "bonne": 1,
+      "explication": "Suez est un passage creusé par les hommes, ouvert en 1869 : c'est un canal."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Canal de Suez",
+      "acceptees": [
+        "Canal de Suez",
+        "Le canal de Suez",
+        "Suez"
+      ],
+      "indices": [
+        "Je suis un passage creusé par les hommes.",
+        "Je relie la Méditerranée à la mer Rouge et j'ai été ouvert en 1869.",
+        "En 2021, un porte-conteneurs géant, l'Ever Given, m'a bloqué pendant près d'une semaine."
+      ],
+      "explication": "Le canal de Suez, ouvert en 1869, a été bloqué en 2021 par l'Ever Given."
+    },
+    {
+      "reponse": "Shanghai",
+      "acceptees": [
+        "Shanghai",
+        "Shangai"
+      ],
+      "indices": [
+        "Je suis une grande ville portuaire d'Asie de l'Est.",
+        "Je suis située en Chine.",
+        "Je suis le premier port à conteneurs du monde, devant Singapour."
+      ],
+      "explication": "Shanghai, en Chine, est le premier port à conteneurs du monde."
+    },
+    {
+      "reponse": "Conteneur",
+      "acceptees": [
+        "Conteneur",
+        "Un conteneur",
+        "Conteneurs",
+        "Container"
+      ],
+      "indices": [
+        "Je suis une grande boîte.",
+        "Je suis métallique et de taille standard.",
+        "J'ai été inventé aux États-Unis dans les années 1950 et je passe facilement du navire au camion ou au train."
+      ],
+      "explication": "Le conteneur est une grande boîte métallique de taille standard, facile à passer du navire au camion ou au train."
+    },
+    {
+      "reponse": "Rotterdam",
+      "acceptees": [
+        "Rotterdam"
+      ],
+      "indices": [
+        "Je suis un grand port du nord-ouest de l'Europe.",
+        "Je suis une zone industrialo-portuaire, comme Le Havre et Fos-Marseille.",
+        "Je suis le premier port d'Europe."
+      ],
+      "explication": "Rotterdam est le premier port d'Europe et une zone industrialo-portuaire."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Le voyage de vêtements fabriqués en Chine jusqu'en Europe",
+      "etapes": [
+        "Des vêtements sont mis dans un conteneur en Chine",
+        "Un camion amène le conteneur jusqu'à un port chinois",
+        "Un porte-conteneurs l'emmène en Europe en plusieurs semaines",
+        "Il est déchargé dans un grand port européen",
+        "Un train ou un camion le conduit jusqu'au magasin"
+      ]
+    }
+  ]
+}

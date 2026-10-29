@@ -1,0 +1,148 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Sujet suivi d'un complément du nom",
+      "detail": "Un groupe introduit par « de » se glisse entre le nom noyau du sujet et le verbe, qui s'accorde avec le noyau.",
+      "cartes": [
+        "Les marins du vieux navire chantent",
+        "Le chat de mes voisins miaule",
+        "La porte des cachots grince",
+        "Les voiles du bateau claquent",
+        "Le cri des mouettes résonne"
+      ]
+    },
+    {
+      "nom": "Sujet placé après le verbe",
+      "detail": "Le sujet est inversé : il vient après le verbe mais commande quand même l'accord.",
+      "cartes": [
+        "Au loin brillent les étoiles",
+        "Sur la mer avancent de grands navires",
+        "Dans la grotte dormaient trois pirates",
+        "Derrière la colline surgissent les cavaliers",
+        "Sur le toit chantent des oiseaux"
+      ]
+    },
+    {
+      "nom": "Plusieurs sujets reliés par « et »",
+      "detail": "Deux sujets coordonnés : le verbe se met au pluriel.",
+      "cartes": [
+        "Le loup et le renard rusent",
+        "Lucas et Inès arrivent en retard",
+        "Ma sœur et mon frère jouent ensemble",
+        "Le vent et la pluie frappent la vitre",
+        "Le capitaine et son second lèvent l'ancre"
+      ]
+    },
+    {
+      "nom": "Pronom complément devant le verbe",
+      "detail": "Un pronom (le, la, les) placé avant le verbe fait écran : il ne commande pas l'accord, le verbe s'accorde avec le sujet.",
+      "cartes": [
+        "Il les regarde",
+        "Elle les écoute chanter",
+        "Le pirate les cherche partout",
+        "Nous la suivons dans le noir",
+        "Tu les entends d'ici"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Quel est le rôle du mot ou du groupe en couleur dans le groupe nominal ?",
+      "texte": "Le capitaine range la [vieille] carte du pirate.",
+      "choix": ["Nom noyau", "Adjectif épithète", "Complément du nom"],
+      "bonne": 1,
+      "explication": "« vieille » est un adjectif placé à côté du nom « carte », qu'il qualifie et avec lequel il s'accorde : c'est une épithète."
+    },
+    {
+      "consigne": "Quel est le rôle du mot ou du groupe en couleur dans le groupe nominal ?",
+      "texte": "Le capitaine range la vieille carte [du pirate].",
+      "choix": ["Nom noyau", "Adjectif épithète", "Complément du nom"],
+      "bonne": 2,
+      "explication": "« du pirate » est introduit par la préposition « de » (« du » = « de le ») et précise le nom « carte » : c'est un complément du nom."
+    },
+    {
+      "consigne": "Quel est le rôle du mot ou du groupe en couleur dans le groupe nominal ?",
+      "texte": "Le capitaine range la vieille [carte] du pirate.",
+      "choix": ["Nom noyau", "Adjectif épithète", "Complément du nom"],
+      "bonne": 0,
+      "explication": "« carte » est le nom principal du groupe « la vieille carte du pirate » : c'est le nom noyau. Les autres mots tournent autour de lui."
+    },
+    {
+      "consigne": "Quel est le rôle du mot ou du groupe en couleur dans le groupe nominal ?",
+      "texte": "Le marin porte un sac [de cuir].",
+      "choix": ["Nom noyau", "Adjectif épithète", "Complément du nom"],
+      "bonne": 2,
+      "explication": "« de cuir » est introduit par la préposition « de » et précise le nom « sac » : c'est un complément du nom. Il ne s'accorde pas avec « sac »."
+    },
+    {
+      "consigne": "Quel est le rôle du mot ou du groupe en couleur dans le groupe nominal ?",
+      "texte": "Des voiles [blanches] gonflent au vent.",
+      "choix": ["Nom noyau", "Adjectif épithète", "Complément du nom"],
+      "bonne": 1,
+      "explication": "« blanches » est un adjectif placé directement à côté du nom « voiles » et accordé avec lui (féminin pluriel) : c'est une épithète."
+    },
+    {
+      "consigne": "Quel est le rôle du mot ou du groupe en couleur dans le groupe nominal ?",
+      "texte": "Une [barque] à voile quitte le port.",
+      "choix": ["Nom noyau", "Adjectif épithète", "Complément du nom"],
+      "bonne": 0,
+      "explication": "« barque » est le nom principal du groupe « une barque à voile » : c'est le nom noyau. « à voile » est un complément du nom."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Nom noyau",
+      "acceptees": ["Le nom noyau", "Noyau", "Le noyau"],
+      "indices": [
+        "Je suis le mot principal d'un groupe nominal.",
+        "Le déterminant et les adjectifs s'accordent avec moi.",
+        "Dans « le vieux navire du pirate », je suis « navire »."
+      ],
+      "explication": "Le nom noyau est le nom principal du groupe nominal : il commande les accords."
+    },
+    {
+      "reponse": "Épithète",
+      "acceptees": ["L'épithète", "Adjectif épithète", "Un adjectif épithète"],
+      "indices": [
+        "Je suis un adjectif.",
+        "Je suis placé juste à côté du nom, sans verbe entre nous.",
+        "Je m'accorde en genre et en nombre avec ce nom : « des voiles blanches »."
+      ],
+      "explication": "L'adjectif épithète est placé directement à côté du nom et s'accorde avec lui."
+    },
+    {
+      "reponse": "Complément du nom",
+      "acceptees": ["Le complément du nom", "Un complément du nom"],
+      "indices": [
+        "Je précise un nom.",
+        "Je suis introduit par une préposition comme « de », « à » ou « en ».",
+        "Je ne m'accorde pas avec le nom que je précise : « des sacs de cuir »."
+      ],
+      "explication": "Le complément du nom est introduit par une préposition et ne s'accorde pas avec le nom noyau."
+    },
+    {
+      "reponse": "Sujet inversé",
+      "acceptees": ["Le sujet inversé", "Un sujet inversé"],
+      "indices": [
+        "Je suis le sujet d'un verbe.",
+        "Je suis placé après lui, comme dans « Au loin brillent les étoiles ».",
+        "Même placé après le verbe, je commande son accord."
+      ],
+      "explication": "Le sujet inversé vient après le verbe mais le verbe s'accorde quand même avec lui."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Comment vérifier ses accords",
+      "etapes": [
+        "Trouve le nom noyau du groupe, ou le sujet du verbe",
+        "Détermine son genre et son nombre, ou sa personne",
+        "Vérifie un à un les mots qui en dépendent",
+        "Relis en vérifiant les mots placés entre le sujet et le verbe"
+      ]
+    }
+  ]
+}

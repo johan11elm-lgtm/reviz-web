@@ -1,0 +1,187 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "La structure d'un écosystème",
+      "detail": "Le milieu, les êtres vivants et leurs relations alimentaires.",
+      "cartes": [
+        "L'eau, la vase et la lumière d'une mare",
+        "Les algues, les larves et les grenouilles d'une mare",
+        "Les animaux mangent les végétaux, puis sont mangés",
+        "Des bactéries transforment la matière morte",
+        "Des producteurs, des consommateurs et des décomposeurs interagissent"
+      ]
+    },
+    {
+      "nom": "Un service rendu aux humains",
+      "detail": "Un bienfait fourni gratuitement par les écosystèmes : pollinisation, eau épurée, nourriture, carbone, climat.",
+      "cartes": [
+        "Les abeilles pollinisent les fleurs et assurent les récoltes de fruits",
+        "Des milieux naturels épurent l'eau qui les traverse",
+        "Les écosystèmes produisent de la nourriture et du bois",
+        "Les forêts stockent du carbone",
+        "Les écosystèmes aident à réguler le climat"
+      ]
+    },
+    {
+      "nom": "Une menace pour la biodiversité",
+      "detail": "Une activité ou un phénomène qui fait reculer les espèces : habitats coupés, espèce envahissante, pollution, surexploitation.",
+      "cartes": [
+        "Une autoroute coupe une forêt en deux",
+        "Le frelon asiatique introduit en France menace les abeilles",
+        "Trop d'engrais font proliférer les algues d'une rivière",
+        "Des pêcheurs prélèvent trop de poissons",
+        "Des pesticides tuent les pollinisateurs"
+      ]
+    },
+    {
+      "nom": "Une mesure de protection",
+      "detail": "Une mesure qui protège la biodiversité ou répare les milieux abîmés.",
+      "cartes": [
+        "Un parc national ou une réserve naturelle",
+        "Un passage à faune au-dessus d'une autoroute",
+        "Des corridors écologiques relient les milieux naturels",
+        "On renature un cours d'eau abîmé",
+        "Une règle limite la pêche et la chasse"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "la baisse du nombre de pollinisateurs",
+      "carte": "Le frelon asiatique, qui chasse les abeilles",
+      "role": "cause",
+      "explication": "Ce prédateur introduit chasse les abeilles près des ruches."
+    },
+    {
+      "fait": "la baisse du nombre de pollinisateurs",
+      "carte": "Les pesticides de l'agriculture intensive",
+      "role": "cause",
+      "explication": "Les pesticides réduisent la biodiversité, notamment les pollinisateurs."
+    },
+    {
+      "fait": "la baisse du nombre de pollinisateurs",
+      "carte": "Beaucoup moins de fruits sur les arbres fruitiers",
+      "role": "consequence",
+      "explication": "Sans pollinisateurs, les fleurs ne sont plus fécondées : les arbres donnent beaucoup moins de fruits."
+    },
+    {
+      "fait": "l'eutrophisation d'une rivière",
+      "carte": "Un excès d'engrais (nitrates et phosphates) dans l'eau",
+      "role": "cause",
+      "explication": "Les nitrates et phosphates nourrissent les algues, qui prolifèrent."
+    },
+    {
+      "fait": "l'eutrophisation d'une rivière",
+      "carte": "Un manque de dioxygène dans l'eau",
+      "role": "consequence",
+      "explication": "En se décomposant, les algues consomment le dioxygène de l'eau."
+    },
+    {
+      "fait": "l'eutrophisation d'une rivière",
+      "carte": "La mort des poissons",
+      "role": "consequence",
+      "explication": "Privés de dioxygène, les poissons meurent."
+    }
+  ],
+  "etiquettes": [
+    {
+      "consigne": "Que représente le groupe en couleur dans l'écosystème ?",
+      "texte": "Dans la mare, [les nénuphars] poussent à la surface de l'eau.",
+      "choix": ["Biotope", "Producteur", "Consommateur", "Décomposeur"],
+      "bonne": 1,
+      "explication": "Les nénuphars sont des végétaux : ce sont des producteurs."
+    },
+    {
+      "consigne": "Que représente le groupe en couleur dans l'écosystème ?",
+      "texte": "Dans la mare, [les grenouilles] chassent des insectes.",
+      "choix": ["Biotope", "Producteur", "Consommateur", "Décomposeur"],
+      "bonne": 2,
+      "explication": "Les grenouilles sont des animaux qui se nourrissent d'autres êtres vivants : ce sont des consommateurs."
+    },
+    {
+      "consigne": "Que représente le groupe en couleur dans l'écosystème ?",
+      "texte": "Les feuilles mortes tombées dans la mare sont transformées par [des bactéries].",
+      "choix": ["Biotope", "Producteur", "Consommateur", "Décomposeur"],
+      "bonne": 3,
+      "explication": "Ces bactéries transforment la matière morte : ce sont des décomposeurs."
+    },
+    {
+      "consigne": "Que représente le groupe en couleur dans l'écosystème ?",
+      "texte": "Dans la mare, [la température de l'eau] change avec les saisons.",
+      "choix": ["Biotope", "Producteur", "Consommateur", "Décomposeur"],
+      "bonne": 0,
+      "explication": "La température de l'eau est une caractéristique du milieu de vie : elle fait partie du biotope."
+    },
+    {
+      "consigne": "Que représente le groupe en couleur dans l'écosystème ?",
+      "texte": "Dans la rivière, [les poissons] mangent des larves d'insectes.",
+      "choix": ["Biotope", "Producteur", "Consommateur", "Décomposeur"],
+      "bonne": 2,
+      "explication": "Les poissons sont des animaux qui mangent d'autres êtres vivants : ce sont des consommateurs."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Biotope",
+      "acceptees": ["Biotope", "Le biotope"],
+      "indices": [
+        "Je fais partie d'un écosystème.",
+        "Je suis le milieu de vie, avec ses caractéristiques physiques.",
+        "Dans une mare, je suis l'eau, la vase, la lumière et la température."
+      ],
+      "explication": "Le biotope est le milieu de vie d'un écosystème. Les êtres vivants forment la biocénose."
+    },
+    {
+      "reponse": "Eutrophisation",
+      "acceptees": ["Eutrophisation", "L'eutrophisation"],
+      "indices": [
+        "Je touche surtout l'eau d'un étang ou d'une rivière.",
+        "Je viens d'un excès de nitrates et de phosphates.",
+        "Avec moi, les algues prolifèrent, privent l'eau de dioxygène, et les poissons meurent."
+      ],
+      "explication": "L'eutrophisation est la prolifération d'algues due à un excès d'engrais dans l'eau."
+    },
+    {
+      "reponse": "Frelon asiatique",
+      "acceptees": ["Frelon asiatique", "Le frelon asiatique", "Frelon"],
+      "indices": [
+        "Je suis un insecte.",
+        "Je suis arrivé en France vers 2004.",
+        "Je suis un prédateur qui chasse les abeilles près des ruches."
+      ],
+      "explication": "Le frelon asiatique, introduit en France vers 2004, est une espèce exotique envahissante qui chasse les abeilles."
+    },
+    {
+      "reponse": "Lutte biologique",
+      "acceptees": ["Lutte biologique", "La lutte biologique"],
+      "indices": [
+        "Je suis une pratique agricole durable.",
+        "J'utilise un être vivant pour limiter un ravageur.",
+        "Des coccinelles qui mangent les pucerons, c'est un exemple de moi."
+      ],
+      "explication": "La lutte biologique utilise un être vivant, comme la coccinelle, pour limiter un ravageur, à la place d'un pesticide."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Limiter l'impact d'un aménagement",
+      "etapes": [
+        "On pèse les avantages du projet et ses impacts sur l'écosystème",
+        "On cherche d'abord à éviter les impacts",
+        "On cherche ensuite à réduire ceux qui restent",
+        "En dernier recours, on compense les impacts restants"
+      ]
+    },
+    {
+      "titre": "Les étapes de l'eutrophisation",
+      "etapes": [
+        "Des engrais en excès arrivent dans la rivière",
+        "Les algues prolifèrent grâce aux nitrates et aux phosphates",
+        "En se décomposant, les algues consomment le dioxygène de l'eau",
+        "Privés de dioxygène, les poissons meurent"
+      ]
+    }
+  ]
+}

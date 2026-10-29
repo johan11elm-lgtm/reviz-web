@@ -1,0 +1,170 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Organisation des fichiers",
+      "detail": "Ranger et nommer ses fichiers pour les retrouver : dossiers, arborescence, chemin d'accès, extension.",
+      "cartes": [
+        "Un dossier qui regroupe tous les fichiers d'une matière",
+        "Le trajet qui mène à un fichier, dossier après dossier",
+        "Les lettres .jpg à la fin du nom d'une photo",
+        "Appeler un fichier « exposé-volcans » plutôt que « doc1 »",
+        "Des fichiers classés comme les branches d'un arbre"
+      ]
+    },
+    {
+      "nom": "Supports de stockage",
+      "detail": "Les appareils et les lieux où les données sont enregistrées : disque dur, SSD, clé USB, cloud, centre de données.",
+      "cartes": [
+        "Un boîtier contenant des plateaux magnétiques qui tournent",
+        "Une mémoire flash sans aucune pièce mobile",
+        "Un petit objet qu'on branche sur un port USB",
+        "Des serveurs distants qu'on atteint par Internet"
+      ]
+    },
+    {
+      "nom": "Protection des données",
+      "detail": "Ne pas perdre ses données et empêcher qu'elles tombent entre de mauvaises mains : sauvegarde, mot de passe, droits d'accès, RGPD.",
+      "cartes": [
+        "La règle des 3 copies dont une gardée ailleurs",
+        "Un mot de passe long, unique pour chaque compte",
+        "Choisir qui peut lire ou modifier un fichier",
+        "Le droit de demander l'effacement de ses informations personnelles",
+        "La CNIL, l'autorité française qui veille aux données personnelles"
+      ]
+    },
+    {
+      "nom": "Impact environnemental",
+      "detail": "Ce que le stockage et l'échange de données coûtent à la planète, et les gestes pour le limiter.",
+      "cartes": [
+        "De très grandes quantités d'électricité consommées sans arrêt",
+        "L'énergie dépensée pour refroidir des salles pleines de machines",
+        "Garder son téléphone plus longtemps avant d'en changer",
+        "Éviter d'envoyer de lourdes pièces jointes à beaucoup de monde",
+        "Effacer les vieux fichiers pour consommer moins d'énergie"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Quel type de fichier le nom en couleur désigne-t-il ?",
+      "texte": "Léa a rangé [portrait.png] dans le dossier Collège.",
+      "choix": [
+        "Une image",
+        "Un son",
+        "Un document"
+      ],
+      "bonne": 0,
+      "explication": "L'extension .png est celle d'un format d'image."
+    },
+    {
+      "consigne": "Quel type de fichier le nom en couleur désigne-t-il ?",
+      "texte": "Tom a envoyé [dictée.mp3] à son professeur d'anglais.",
+      "choix": [
+        "Une image",
+        "Un son",
+        "Un document"
+      ],
+      "bonne": 1,
+      "explication": "L'extension .mp3 est celle d'un fichier son."
+    },
+    {
+      "consigne": "Quel type de fichier le nom en couleur désigne-t-il ?",
+      "texte": "Le professeur a mis [programme.pdf] dans le dossier de la classe.",
+      "choix": [
+        "Une image",
+        "Un son",
+        "Un document"
+      ],
+      "bonne": 2,
+      "explication": "L'extension .pdf est celle d'un document."
+    },
+    {
+      "consigne": "Quel type de fichier le nom en couleur désigne-t-il ?",
+      "texte": "Inès a copié [carte-postale.jpg] sur sa clé USB.",
+      "choix": [
+        "Une image",
+        "Un son",
+        "Un document"
+      ],
+      "bonne": 0,
+      "explication": "L'extension .jpg est celle d'un format d'image."
+    },
+    {
+      "consigne": "Quel type de fichier le nom en couleur désigne-t-il ?",
+      "texte": "Hugo a ouvert [interview.mp3] depuis son dossier Collège.",
+      "choix": [
+        "Une image",
+        "Un son",
+        "Un document"
+      ],
+      "bonne": 1,
+      "explication": "L'extension .mp3 est celle d'un fichier son."
+    },
+    {
+      "consigne": "Quel type de fichier le nom en couleur désigne-t-il ?",
+      "texte": "Maël a imprimé [exposé.pdf] avant le cours.",
+      "choix": [
+        "Une image",
+        "Un son",
+        "Un document"
+      ],
+      "bonne": 2,
+      "explication": "L'extension .pdf est celle d'un document."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Arborescence",
+      "acceptees": [
+        "Arborescence",
+        "L'arborescence",
+        "Une arborescence"
+      ],
+      "indices": [
+        "Je suis une façon d'organiser des fichiers.",
+        "Je suis faite de dossiers qui contiennent d'autres dossiers.",
+        "On me compare aux branches d'un arbre."
+      ],
+      "explication": "L'arborescence organise les fichiers en dossiers et sous-dossiers, comme les branches d'un arbre."
+    },
+    {
+      "reponse": "Cloud",
+      "acceptees": [
+        "Cloud",
+        "Le cloud",
+        "Stockage en ligne",
+        "Le stockage en ligne",
+        "Nuage",
+        "Le nuage"
+      ],
+      "indices": [
+        "Je suis une façon de stocker ses fichiers, mais pas sur son propre appareil.",
+        "Mes données sont sur des serveurs distants, dans des centres de données.",
+        "Mon nom anglais veut dire « nuage »."
+      ],
+      "explication": "Le cloud (« nuage » en anglais) stocke les données sur des serveurs distants, accessibles par Internet."
+    },
+    {
+      "reponse": "Extension",
+      "acceptees": [
+        "Extension",
+        "L'extension",
+        "Une extension",
+        "Extension de fichier",
+        "L'extension du fichier",
+        "Format",
+        "Le format"
+      ],
+      "indices": [
+        "Je fais partie du nom d'un fichier.",
+        "Je suis la fin du nom, après le point : .jpg, .mp3, .pdf.",
+        "Je dis si le fichier est une image, un son ou un document."
+      ],
+      "explication": "L'extension, placée à la fin du nom d'un fichier, indique son type."
+    }
+  ],
+  "calculs": [],
+  "etapes": []
+}

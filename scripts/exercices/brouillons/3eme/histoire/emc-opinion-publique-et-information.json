@@ -1,0 +1,142 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Les sondages d'opinion",
+      "detail": "La façon de mesurer l'opinion publique et ses limites.",
+      "cartes": [
+        "Interroger un échantillon représentatif de la population",
+        "Construire le groupe interrogé avec la méthode des quotas",
+        "Annoncer des résultats avec une marge d'erreur d'environ 3 points",
+        "Ne pas pouvoir publier les résultats la veille d'un vote",
+        "Voir ses résultats changer selon la formulation des questions"
+      ]
+    },
+    {
+      "nom": "La désinformation",
+      "detail": "Les fausses informations diffusées pour manipuler l'opinion, et les réponses à ce danger.",
+      "cartes": [
+        "Chercher volontairement à tromper ou à manipuler l'opinion",
+        "Fabriquer de faux textes, images et vidéos avec une IA",
+        "Faire retirer rapidement un faux contenu en période électorale",
+        "Croire qu'un groupe caché organise tout en secret",
+        "Présenter comme vraie une fausse nouvelle appelée « infox »"
+      ]
+    },
+    {
+      "nom": "Les lanceurs d'alerte",
+      "detail": "Les personnes qui révèlent un danger pour l'intérêt général, au prix de risques personnels.",
+      "cartes": [
+        "Révéler de bonne foi un danger pour l'intérêt général",
+        "Une médecin révèle en 2010 les dangers du Mediator",
+        "Divulguer des documents sur les guerres d'Irak et d'Afghanistan",
+        "Être protégé contre les représailles par la loi Sapin II",
+        "Prendre des risques pour sa carrière sans être payé"
+      ]
+    },
+    {
+      "nom": "Les médias et le débat public",
+      "detail": "Les moyens par lesquels les citoyens s'informent, discutent et expriment leur opinion.",
+      "cartes": [
+        "Informer les citoyens par la presse, la radio et la télévision",
+        "Garantir la liberté de la presse avec la loi de 1881",
+        "Voir #MeToo se répandre sur les réseaux sociaux en 2017",
+        "Exprimer son opinion par des manifestations et des pétitions",
+        "Préparer les décisions par le débat et l'échange d'arguments"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Cette affirmation est-elle une croyance, une opinion ou un savoir ?",
+      "texte": "Dans son exposé, Léa écrit : [La Terre tourne autour du Soleil.]",
+      "choix": ["Croyance", "Opinion", "Savoir"],
+      "bonne": 2,
+      "explication": "C'est un savoir : une connaissance établie et vérifiée par des méthodes scientifiques."
+    },
+    {
+      "consigne": "Cette affirmation est-elle une croyance, une opinion ou un savoir ?",
+      "texte": "Tom dit à ses amis : [L'été est la plus belle saison.]",
+      "choix": ["Croyance", "Opinion", "Savoir"],
+      "bonne": 1,
+      "explication": "C'est une opinion : un point de vue personnel, que l'on peut discuter."
+    },
+    {
+      "consigne": "Cette affirmation est-elle une croyance, une opinion ou un savoir ?",
+      "texte": "Inès est convaincue : [Il existe une vie après la mort.]",
+      "choix": ["Croyance", "Opinion", "Savoir"],
+      "bonne": 0,
+      "explication": "C'est une croyance : une conviction personnelle qui n'est pas démontrée."
+    },
+    {
+      "consigne": "Cette affirmation est-elle une croyance, une opinion ou un savoir ?",
+      "texte": "Pendant le débat, un élève propose : [Il faudrait abaisser le droit de vote à 16 ans.]",
+      "choix": ["Croyance", "Opinion", "Savoir"],
+      "bonne": 1,
+      "explication": "C'est une opinion : un point de vue sur ce qu'il faudrait faire, que l'on peut discuter."
+    },
+    {
+      "consigne": "Cette affirmation est-elle une croyance, une opinion ou un savoir ?",
+      "texte": "Le professeur rappelle : [En France, on peut voter à partir de 18 ans.]",
+      "choix": ["Croyance", "Opinion", "Savoir"],
+      "bonne": 2,
+      "explication": "C'est un savoir : un fait établi, que l'on peut vérifier dans les textes de loi."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Irène Frachon",
+      "acceptees": ["Frachon", "Irène Frachon", "Irene Frachon"],
+      "indices": [
+        "Je suis médecin.",
+        "J'ai révélé les dangers d'un médicament en 2010.",
+        "Mon combat concerne le Mediator."
+      ],
+      "explication": "Irène Frachon est la lanceuse d'alerte qui a révélé les dangers du Mediator en 2010."
+    },
+    {
+      "reponse": "Chelsea Manning",
+      "acceptees": ["Manning", "Chelsea Manning"],
+      "indices": [
+        "Je suis une militaire américaine.",
+        "J'ai divulgué des documents secrets.",
+        "Ils concernaient les guerres d'Irak et d'Afghanistan."
+      ],
+      "explication": "Chelsea Manning, militaire américaine, est une lanceuse d'alerte qui a divulgué des documents sur les guerres d'Irak et d'Afghanistan."
+    },
+    {
+      "reponse": "Le complotisme",
+      "acceptees": ["Complotisme", "Le complotisme", "Théorie du complot", "Les théories du complot"],
+      "indices": [
+        "Je suis une croyance.",
+        "Je suppose qu'un groupe caché organise les événements en secret.",
+        "La désinformation me nourrit et je suis souvent liée au racisme et à l'antisémitisme."
+      ],
+      "explication": "Le complotisme est la croyance qu'un groupe caché organise secrètement les événements ; la désinformation le nourrit."
+    },
+    {
+      "reponse": "Un sondage",
+      "acceptees": ["Sondage", "Un sondage", "Le sondage", "Les sondages", "Sondage d'opinion"],
+      "indices": [
+        "Je suis une enquête.",
+        "J'interroge un échantillon de la population pour mesurer l'opinion.",
+        "Ma publication est interdite la veille d'un vote et mes résultats ont une marge d'erreur."
+      ],
+      "explication": "Un sondage interroge un échantillon représentatif ; la loi de 1977 interdit sa publication la veille et le jour du scrutin."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Les lois qui encadrent l'information",
+      "etapes": [
+        "En 1881, une loi garantit la liberté de la presse",
+        "En 1977, une loi encadre les sondages électoraux",
+        "En 2016, la loi Sapin II protège les lanceurs d'alerte",
+        "En 2018, une loi lutte contre la manipulation de l'information",
+        "En 2022, une loi renforce la protection des lanceurs d'alerte"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,192 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Situer un élément",
+      "detail": "On dit où se trouve un élément de l'image : au premier plan, à l'arrière-plan, à gauche, à droite, en haut, en bas.",
+      "cartes": [
+        "In the foreground, there is a small wooden cart",
+        "In the background, I can see blue hills",
+        "There are two tall trees on the right",
+        "At the bottom, there is a frozen river",
+        "In the centre, there is a red house"
+      ]
+    },
+    {
+      "nom": "Dire ce qui se passe",
+      "detail": "On décrit une action en train de se dérouler dans l'image, avec be + verbe en -ing.",
+      "cartes": [
+        "A man is fishing with a long rod",
+        "Two children are playing in the snow",
+        "A woman is walking her dog",
+        "The farmers are carrying baskets of apples",
+        "A little girl is flying a red kite"
+      ]
+    },
+    {
+      "nom": "Associer un sentiment à l'œuvre",
+      "detail": "On relie la scène ou un personnage à un sentiment, avec look + adjectif.",
+      "cartes": [
+        "The whole scene looks very peaceful",
+        "The old man in the picture looks lonely",
+        "The children look happy and cheerful",
+        "The foggy night looks mysterious",
+        "The woman in the painting looks sad"
+      ]
+    },
+    {
+      "nom": "Donner son avis",
+      "detail": "On dit ce que l'on pense du tableau avec I like, I think ou In my opinion, et on le justifie avec because.",
+      "cartes": [
+        "I like this painting because the colours are bright",
+        "In my opinion, this is a beautiful picture",
+        "I don't like this painting because it is too dark",
+        "I think this painting is amazing because of the light",
+        "I love this picture because the sky is so blue"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "À quoi sert le passage en couleur ?",
+      "texte": "[In the foreground], there is a small boat.",
+      "choix": [
+        "Situer un élément",
+        "Dire ce qui se passe",
+        "Donner son avis",
+        "Parler de la météo"
+      ],
+      "bonne": 0,
+      "explication": "« In the foreground » veut dire « au premier plan » : il sert à situer le bateau dans l'image."
+    },
+    {
+      "consigne": "À quoi sert le passage en couleur ?",
+      "texte": "In autumn, [it's windy and cloudy].",
+      "choix": [
+        "Situer un élément",
+        "Dire ce qui se passe",
+        "Donner son avis",
+        "Parler de la météo"
+      ],
+      "bonne": 3,
+      "explication": "« It's windy and cloudy » (il y a du vent et des nuages) parle du temps qu'il fait : c'est la météo."
+    },
+    {
+      "consigne": "À quoi sert le passage en couleur ?",
+      "texte": "Look! Two children [are playing] in the snow.",
+      "choix": [
+        "Situer un élément",
+        "Dire ce qui se passe",
+        "Donner son avis",
+        "Parler de la météo"
+      ],
+      "bonne": 1,
+      "explication": "« are playing » est be + verbe en -ing : on décrit une action qui se passe dans l'image."
+    },
+    {
+      "consigne": "À quoi sert le passage en couleur ?",
+      "texte": "[In my opinion], this is a beautiful painting.",
+      "choix": [
+        "Situer un élément",
+        "Dire ce qui se passe",
+        "Donner son avis",
+        "Parler de la météo"
+      ],
+      "bonne": 2,
+      "explication": "« In my opinion » veut dire « à mon avis » : il introduit une opinion sur le tableau."
+    },
+    {
+      "consigne": "À quoi sert le passage en couleur ?",
+      "texte": "There are tall trees [on the right].",
+      "choix": [
+        "Situer un élément",
+        "Dire ce qui se passe",
+        "Donner son avis",
+        "Parler de la météo"
+      ],
+      "bonne": 0,
+      "explication": "« on the right » veut dire « à droite » : il sert à situer les arbres dans l'image."
+    },
+    {
+      "consigne": "À quoi sert le passage en couleur ?",
+      "texte": "[I don't like this painting] because it is too dark.",
+      "choix": [
+        "Situer un élément",
+        "Dire ce qui se passe",
+        "Donner son avis",
+        "Parler de la météo"
+      ],
+      "bonne": 2,
+      "explication": "« I don't like this painting » est une opinion, que « because it is too dark » justifie."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Edward Hopper",
+      "acceptees": [
+        "Hopper",
+        "Edward Hopper"
+      ],
+      "indices": [
+        "Je suis un peintre du XXe siècle.",
+        "Je suis américain et je peins souvent la solitude en ville.",
+        "Mon tableau Nighthawks (1942) montre des clients dans un café, la nuit."
+      ],
+      "explication": "Edward Hopper (1882-1967) est un peintre américain de la solitude urbaine, connu pour Nighthawks."
+    },
+    {
+      "reponse": "John Constable",
+      "acceptees": [
+        "Constable",
+        "John Constable"
+      ],
+      "indices": [
+        "Je suis un peintre qui aime la campagne.",
+        "Je suis anglais et je suis né en 1776.",
+        "J'ai peint The Hay Wain en 1821, avec une charrette dans une rivière."
+      ],
+      "explication": "John Constable (1776-1837) est un peintre anglais de paysages ruraux, auteur de The Hay Wain."
+    },
+    {
+      "reponse": "David Hockney",
+      "acceptees": [
+        "Hockney",
+        "David Hockney"
+      ],
+      "indices": [
+        "Je suis un peintre britannique.",
+        "J'ai peint les saisons dans le Yorkshire.",
+        "J'ai aussi peint des piscines en Californie."
+      ],
+      "explication": "David Hockney, peintre britannique, a peint les saisons dans le Yorkshire et des piscines en Californie."
+    },
+    {
+      "reponse": "Foreground",
+      "acceptees": [
+        "The foreground",
+        "Au premier plan",
+        "Premier plan",
+        "Le premier plan"
+      ],
+      "indices": [
+        "Je suis un mot anglais qui sert à décrire une image.",
+        "On me trouve dans l'expression « in the … » pour situer un élément.",
+        "Je suis la zone de l'image la plus proche de celui qui regarde."
+      ],
+      "explication": "Le foreground est le premier plan de l'image : on dit in the foreground (et in the background pour l'arrière-plan)."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Les étapes pour décrire un tableau",
+      "etapes": [
+        "Présenter l'œuvre : titre, peintre et date",
+        "Dire ce que l'on voit et où",
+        "Décrire l'atmosphère avec un adjectif de sentiment",
+        "Donner son avis et le justifier"
+      ]
+    }
+  ]
+}

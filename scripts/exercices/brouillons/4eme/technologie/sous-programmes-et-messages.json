@@ -1,0 +1,187 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Les sous-programmes",
+      "detail": "Des blocs personnalisés qui regroupent des instructions réutilisables.",
+      "cartes": [
+        "Suite d'instructions regroupée sous un nom",
+        "Se crée dans la catégorie « Mes blocs »",
+        "Appelé plusieurs fois sans réécrire ses instructions",
+        "Un bloc personnalisé défini par le programmeur",
+        "Bloc qui programme à lui seul un sous-problème"
+      ]
+    },
+    {
+      "nom": "Les paramètres",
+      "detail": "Les valeurs transmises à un bloc quand on l'appelle, qui adaptent son comportement.",
+      "cartes": [
+        "Valeur transmise à un bloc quand on l'appelle",
+        "Adapte le comportement du bloc à chaque situation",
+        "La lettre n dans le bloc « polygone (n) »",
+        "Intervient dans le calcul de l'angle : 360 ÷ n",
+        "Sa valeur change à chaque appel du bloc"
+      ]
+    },
+    {
+      "nom": "Messages et parallélisme",
+      "detail": "Les signaux qui synchronisent les scripts, et les scripts qui s'exécutent en même temps.",
+      "cartes": [
+        "Signal qui déclenche des scripts chez d'autres lutins",
+        "Le bloc « quand je reçois » démarre le script d'un lutin",
+        "« Envoyer à tous et attendre » fait patienter le script",
+        "Permet de synchroniser les actions de plusieurs lutins",
+        "Deux scripts lancés par le même événement s'exécutent simultanément"
+      ]
+    },
+    {
+      "nom": "Le débogage",
+      "detail": "Tester un programme puis corriger ses erreurs.",
+      "cartes": [
+        "Comparer le comportement obtenu au comportement attendu",
+        "Exécuter le programme pas à pas",
+        "Afficher les variables pour suivre leurs valeurs",
+        "Rechercher et corriger les erreurs d'un programme",
+        "Remplacer le bloc fautif après l'avoir repéré"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Que représente l'élément en couleur ?",
+      "texte": "Dans « polygone (5) », [le nombre 5] indique le nombre de côtés à tracer.",
+      "choix": ["Appel d'un sous-programme", "Valeur d'un paramètre", "Envoi d'un message", "Réception d'un message"],
+      "bonne": 1,
+      "explication": "Le nombre 5 est la valeur transmise au sous-programme quand on l'appelle : c'est la valeur du paramètre."
+    },
+    {
+      "consigne": "Que représente l'élément en couleur ?",
+      "texte": "Pour dessiner un carré, le script utilise [le bloc « polygone »] avec la valeur 4.",
+      "choix": ["Appel d'un sous-programme", "Valeur d'un paramètre", "Envoi d'un message", "Réception d'un message"],
+      "bonne": 0,
+      "explication": "Utiliser un bloc personnalisé dans un script, c'est appeler un sous-programme."
+    },
+    {
+      "consigne": "Que représente l'élément en couleur ?",
+      "texte": "Quand la balle touche le sol, le lutin « Balle » exécute [« envoyer à tous rebond »].",
+      "choix": ["Appel d'un sous-programme", "Valeur d'un paramètre", "Envoi d'un message", "Réception d'un message"],
+      "bonne": 2,
+      "explication": "« Envoyer à tous » émet un message qui déclenche les scripts des autres lutins."
+    },
+    {
+      "consigne": "Que représente l'élément en couleur ?",
+      "texte": "Le lutin « Public » commence son script par [« quand je reçois rebond »].",
+      "choix": ["Appel d'un sous-programme", "Valeur d'un paramètre", "Envoi d'un message", "Réception d'un message"],
+      "bonne": 3,
+      "explication": "« Quand je reçois » démarre un script dès que le message est reçu."
+    },
+    {
+      "consigne": "Que représente l'élément en couleur ?",
+      "texte": "Le lutin « Chef » exécute [« envoyer à tous départ et attendre »], puis attend la fin des scripts déclenchés.",
+      "choix": ["Appel d'un sous-programme", "Valeur d'un paramètre", "Envoi d'un message", "Réception d'un message"],
+      "bonne": 2,
+      "explication": "« Envoyer à tous et attendre » envoie un message, puis le script patiente jusqu'à la fin des scripts déclenchés."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Sous-programme",
+      "acceptees": ["Un sous-programme", "Bloc personnalisé"],
+      "indices": [
+        "Je suis une suite d'instructions qui porte un nom.",
+        "On me crée avec le bouton « Créer un bloc ».",
+        "On peut m'appeler plusieurs fois sans réécrire mes instructions."
+      ],
+      "explication": "Un sous-programme regroupe des instructions sous un nom et peut être appelé plusieurs fois."
+    },
+    {
+      "reponse": "Paramètre",
+      "acceptees": ["Un paramètre", "Le paramètre"],
+      "indices": [
+        "Je suis une valeur.",
+        "On me transmet à un bloc quand on l'appelle.",
+        "Je suis le n de « polygone (n) » et je change selon la figure à tracer."
+      ],
+      "explication": "Un paramètre est une valeur transmise à un sous-programme lors de son appel."
+    },
+    {
+      "reponse": "Parallélisme",
+      "acceptees": ["Le parallélisme", "En parallèle"],
+      "indices": [
+        "Je concerne plusieurs scripts à la fois.",
+        "Je me produis quand plusieurs scripts partent du même événement.",
+        "Avec moi, les scripts s'exécutent en même temps."
+      ],
+      "explication": "Le parallélisme, c'est l'exécution de plusieurs scripts en même temps."
+    },
+    {
+      "reponse": "Débogage",
+      "acceptees": ["Le débogage", "Déboguer", "Debogage"],
+      "indices": [
+        "Je consiste à chercher ce qui ne va pas dans un programme.",
+        "On me pratique en testant le programme pas à pas.",
+        "Grâce à moi, on corrige les erreurs d'un programme."
+      ],
+      "explication": "Le débogage consiste à rechercher et corriger les erreurs d'un programme en le testant."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "Le bloc « polygone (n) » répète n fois : avancer de 50 pas, puis tourner de 360 ÷ n degrés. De combien de degrés le lutin tourne-t-il pour « polygone (5) » ?",
+      "reponse": 72,
+      "unite": "°",
+      "tolerance": 0,
+      "explication": "n = 5, donc l'angle vaut 360 ÷ 5 = 72°."
+    },
+    {
+      "question": "Le bloc « polygone (n) » répète n fois : avancer de 50 pas, puis tourner de 360 ÷ n degrés. De combien de degrés le lutin tourne-t-il pour « polygone (8) » ?",
+      "reponse": 45,
+      "unite": "°",
+      "tolerance": 0,
+      "explication": "n = 8, donc l'angle vaut 360 ÷ 8 = 45°."
+    },
+    {
+      "question": "Le bloc « polygone (n) » répète n fois : avancer de 50 pas, puis tourner de 360 ÷ n degrés. Un lutin tourne de 36° à chaque côté. Quelle valeur de n a-t-on utilisée ?",
+      "reponse": 10,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "360 ÷ n = 36, donc n = 360 ÷ 36 = 10 côtés."
+    },
+    {
+      "question": "Le bloc « polygone (n) » répète n fois : avancer de 50 pas, puis tourner de 360 ÷ n degrés. Quelle longueur totale, en pas, le lutin parcourt-il avec « polygone (6) » ?",
+      "reponse": 300,
+      "unite": "pas",
+      "tolerance": 0,
+      "explication": "Le bloc répète 6 fois « avancer de 50 pas » : 6 × 50 = 300 pas."
+    },
+    {
+      "question": "Le bloc « polygone (n) » répète n fois : avancer de 50 pas, puis tourner de 360 ÷ n degrés. De combien de degrés le lutin tourne-t-il pour « polygone (12) » ?",
+      "reponse": 30,
+      "unite": "°",
+      "tolerance": 0,
+      "explication": "n = 12, donc l'angle vaut 360 ÷ 12 = 30°."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Structurer un programme",
+      "etapes": [
+        "Découper le problème en sous-problèmes",
+        "Programmer chaque sous-problème dans un bloc",
+        "Appeler les blocs depuis le programme principal",
+        "Tester le programme pas à pas",
+        "Corriger le bloc fautif"
+      ]
+    },
+    {
+      "titre": "Ce que fait « envoyer à tous et attendre »",
+      "etapes": [
+        "Un lutin envoie le message avec « et attendre »",
+        "Les lutins qui le reçoivent lancent leurs scripts",
+        "Les scripts déclenchés se terminent",
+        "Le lutin émetteur reprend la suite de son script"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,157 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Le Minotaure",
+      "detail": "Le monstre mi-homme, mi-taureau enfermé en Crète et tué par Thésée.",
+      "cartes": [
+        "Un monstre mi-homme, mi-taureau",
+        "Enfermé en Crète dans un labyrinthe",
+        "Son labyrinthe a été construit par Dédale",
+        "Thésée le tue dans sa prison",
+        "Son vainqueur ressort grâce au fil d'Ariane"
+      ]
+    },
+    {
+      "nom": "Le Cyclope Polyphème",
+      "detail": "Le géant de L'Odyssée qu'Ulysse aveugle par la ruse.",
+      "cartes": [
+        "Un géant qui n'a qu'un seul œil",
+        "Il dévore des compagnons d'Ulysse",
+        "Il apparaît dans le chant IX de L'Odyssée",
+        "Il est enivré puis aveuglé par Ulysse",
+        "Il crie que « Personne » l'a blessé"
+      ]
+    },
+    {
+      "nom": "Le monstre Méduse",
+      "detail": "La Gorgone aux cheveux de serpents que Persée a tuée.",
+      "cartes": [
+        "Une chevelure faite de serpents",
+        "Son regard change en pierre ceux qui la regardent",
+        "Persée la tue",
+        "Persée la regarde dans le reflet de son bouclier",
+        "On l'appelle la Gorgone"
+      ]
+    },
+    {
+      "nom": "La Bête du conte",
+      "detail": "Le personnage laid mais bon du conte de Madame Leprince de Beaumont.",
+      "cartes": [
+        "Laide d'aspect, mais bonne et généreuse",
+        "Elle redevient prince grâce à l'amour de Belle",
+        "Son auteur est Madame Leprince de Beaumont",
+        "Son histoire nous apprend à ne pas juger sur l'apparence",
+        "Son histoire date de 1757"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Quel outil de description reconnais-tu dans le groupe en couleur ?",
+      "texte": "Dans la grotte, ses yeux brillaient [comme des braises].",
+      "choix": ["Comparaison", "Adjectif qualificatif", "Complément du nom", "Mot du vocabulaire de la peur"],
+      "bonne": 0,
+      "explication": "« comme » rapproche les yeux et les braises : c'est une comparaison."
+    },
+    {
+      "consigne": "Quel outil de description reconnais-tu dans le groupe en couleur ?",
+      "texte": "Une créature [gigantesque] sortit de la forêt.",
+      "choix": ["Comparaison", "Adjectif qualificatif", "Complément du nom", "Mot du vocabulaire de la peur"],
+      "bonne": 1,
+      "explication": "« gigantesque » est un adjectif qualificatif qui précise le nom « créature »."
+    },
+    {
+      "consigne": "Quel outil de description reconnais-tu dans le groupe en couleur ?",
+      "texte": "Le monstre avait des griffes [d'acier].",
+      "choix": ["Comparaison", "Adjectif qualificatif", "Complément du nom", "Mot du vocabulaire de la peur"],
+      "bonne": 2,
+      "explication": "« d'acier » complète le nom « griffes » avec la préposition « de » : c'est un complément du nom."
+    },
+    {
+      "consigne": "Quel outil de description reconnais-tu dans le groupe en couleur ?",
+      "texte": "À la vue du monstre, une [terreur] glaciale s'empara de Thésée.",
+      "choix": ["Comparaison", "Adjectif qualificatif", "Complément du nom", "Mot du vocabulaire de la peur"],
+      "bonne": 3,
+      "explication": "« terreur » fait partie du vocabulaire de la peur, avec effroi, épouvante et frisson."
+    },
+    {
+      "consigne": "Quel outil de description reconnais-tu dans le groupe en couleur ?",
+      "texte": "Le Minotaure est un monstre [à tête de taureau].",
+      "choix": ["Comparaison", "Adjectif qualificatif", "Complément du nom", "Mot du vocabulaire de la peur"],
+      "bonne": 2,
+      "explication": "« à tête de taureau » complète le nom « monstre » : c'est un complément du nom."
+    },
+    {
+      "consigne": "Quel outil de description reconnais-tu dans le groupe en couleur ?",
+      "texte": "Sa voix résonnait [comme le tonnerre].",
+      "choix": ["Comparaison", "Adjectif qualificatif", "Complément du nom", "Mot du vocabulaire de la peur"],
+      "bonne": 0,
+      "explication": "« comme » relie la voix et le tonnerre : c'est une comparaison."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Ulysse",
+      "acceptees": ["Ulysse"],
+      "indices": [
+        "Je suis un héros de la mythologie grecque.",
+        "Face à un géant, je me fais appeler « Personne ».",
+        "Je suis le héros de L'Odyssée et j'ai aveuglé Polyphème."
+      ],
+      "explication": "Ulysse trompe le Cyclope Polyphème par la ruse."
+    },
+    {
+      "reponse": "Minotaure",
+      "acceptees": ["Le Minotaure", "Minotaure"],
+      "indices": [
+        "Je suis un monstre hybride.",
+        "Je vis enfermé en Crète.",
+        "Thésée m'a tué, puis il est ressorti du Labyrinthe grâce à un fil."
+      ],
+      "explication": "Le Minotaure est mi-homme, mi-taureau ; Thésée le tue dans le Labyrinthe."
+    },
+    {
+      "reponse": "Méduse",
+      "acceptees": ["Méduse", "Gorgone"],
+      "indices": [
+        "Je suis une créature de la mythologie grecque.",
+        "Mes cheveux sont des serpents.",
+        "Persée m'a tuée en me regardant dans le reflet de son bouclier."
+      ],
+      "explication": "Méduse, la Gorgone, change en pierre ceux qui la regardent ; Persée la tue."
+    },
+    {
+      "reponse": "Quasimodo",
+      "acceptees": ["Quasimodo"],
+      "indices": [
+        "Je suis un personnage de roman du XIXe siècle.",
+        "Je suis sonneur de cloches et difforme.",
+        "Victor Hugo m'a créé dans Notre-Dame de Paris."
+      ],
+      "explication": "Quasimodo fait peur par son aspect, mais il est généreux et capable d'amour."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Thésée face au Minotaure",
+      "etapes": [
+        "Ariane donne un fil à Thésée",
+        "Thésée entre dans le Labyrinthe en déroulant le fil",
+        "Thésée tue le Minotaure",
+        "Thésée suit le fil pour retrouver la sortie"
+      ]
+    },
+    {
+      "titre": "Ulysse face au Cyclope",
+      "etapes": [
+        "Ulysse enivre Polyphème",
+        "Ulysse aveugle le Cyclope",
+        "Polyphème appelle à l'aide en criant que « Personne » l'a blessé",
+        "Les autres Cyclopes ne viennent pas l'aider"
+      ]
+    }
+  ]
+}

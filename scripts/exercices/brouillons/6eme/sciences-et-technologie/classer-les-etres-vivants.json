@@ -1,0 +1,148 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Les mammifères",
+      "detail": "Des animaux à squelette interne qui ont des poils et des mamelles pour allaiter leurs petits.",
+      "cartes": [
+        "Un chat qui ronronne sur un canapé",
+        "Une baleine qui nage dans l'océan",
+        "Une chauve-souris qui vole la nuit",
+        "Un cheval qui galope dans un pré",
+        "Un chien qui garde la maison"
+      ]
+    },
+    {
+      "nom": "Les oiseaux",
+      "detail": "Des animaux à squelette interne dont le corps est couvert de plumes.",
+      "cartes": [
+        "Un aigle qui plane au-dessus des montagnes",
+        "Une poule qui picore dans la cour",
+        "Un manchot sur la banquise",
+        "Une autruche qui court dans la savane",
+        "Un canard qui nage sur la mare"
+      ]
+    },
+    {
+      "nom": "Les insectes",
+      "detail": "Des animaux qui ont six pattes articulées.",
+      "cartes": [
+        "Une fourmi qui transporte une graine",
+        "Une abeille qui butine une fleur",
+        "Une coccinelle posée sur une feuille",
+        "Un criquet qui saute dans l'herbe",
+        "Une libellule au-dessus d'un étang"
+      ]
+    },
+    {
+      "nom": "Les poissons",
+      "detail": "Des animaux à squelette interne qui vivent dans l'eau et respirent avec des branchies.",
+      "cartes": [
+        "Une truite dans un torrent de montagne",
+        "Un requin qui chasse en pleine mer",
+        "Un saumon qui remonte la rivière",
+        "Un thon dans l'océan",
+        "Une sardine au milieu d'un banc"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Quel type de critère est proposé en couleur pour trier les animaux ?",
+      "texte": "Pour ranger des animaux, Inès propose ce critère : « [possède des plumes] ».",
+      "choix": ["Un attribut possédé", "Un mode de vie (milieu, nourriture)", "Une absence de caractère"],
+      "bonne": 0,
+      "explication": "Avoir des plumes est un caractère que l'on observe chez l'animal : c'est un attribut, valable pour classer."
+    },
+    {
+      "consigne": "Quel type de critère est proposé en couleur pour trier les animaux ?",
+      "texte": "Hugo veut trier les animaux et choisit ce critère : « [vit dans l'eau] ».",
+      "choix": ["Un attribut possédé", "Un mode de vie (milieu, nourriture)", "Une absence de caractère"],
+      "bonne": 1,
+      "explication": "Vivre dans l'eau décrit un milieu de vie : c'est un tri par mode de vie, pas une classification scientifique."
+    },
+    {
+      "consigne": "Quel type de critère est proposé en couleur pour trier les animaux ?",
+      "texte": "Sarah répartit des animaux en deux groupes d'après ce critère : « [n'a pas de pattes] ».",
+      "choix": ["Un attribut possédé", "Un mode de vie (milieu, nourriture)", "Une absence de caractère"],
+      "bonne": 2,
+      "explication": "Ce critère dit ce que l'animal n'a pas : une absence ne peut pas servir à former un groupe."
+    },
+    {
+      "consigne": "Quel type de critère est proposé en couleur pour trier les animaux ?",
+      "texte": "Pour son exposé, Malik sépare les animaux selon ce critère : « [mange de l'herbe] ».",
+      "choix": ["Un attribut possédé", "Un mode de vie (milieu, nourriture)", "Une absence de caractère"],
+      "bonne": 1,
+      "explication": "Ce que l'animal mange fait partie de son mode de vie : ce tri mélange des animaux qui ne sont pas proches parents."
+    },
+    {
+      "consigne": "Quel type de critère est proposé en couleur pour trier les animaux ?",
+      "texte": "Chloé classe des animaux avec ce critère : « [a des poils et des mamelles] ».",
+      "choix": ["Un attribut possédé", "Un mode de vie (milieu, nourriture)", "Une absence de caractère"],
+      "bonne": 0,
+      "explication": "Les poils et les mamelles sont des caractères que l'animal possède : ce sont des attributs, valables pour classer."
+    },
+    {
+      "consigne": "Quel type de critère est proposé en couleur pour trier les animaux ?",
+      "texte": "Lucas propose de regrouper des animaux ainsi : « [n'a pas de squelette interne] ».",
+      "choix": ["Un attribut possédé", "Un mode de vie (milieu, nourriture)", "Une absence de caractère"],
+      "bonne": 2,
+      "explication": "« Sans squelette » est une absence : on classe selon ce que les êtres vivants possèdent, jamais selon ce qui leur manque."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Vertébrés",
+      "acceptees": ["Vertébrés", "Les vertébrés", "Vertébré", "Un vertébré"],
+      "indices": [
+        "Je regroupe des animaux comme la truite, la grenouille et le chat.",
+        "Les animaux de mon groupe ont un squelette interne.",
+        "Leur squelette interne est soutenu par une colonne dorsale."
+      ],
+      "explication": "Les vertébrés sont les animaux qui possèdent un squelette interne avec une colonne vertébrale."
+    },
+    {
+      "reponse": "Espèce",
+      "acceptees": ["Espèce", "Une espèce", "L'espèce", "Espèces"],
+      "indices": [
+        "Je suis un groupe d'individus qui se ressemblent.",
+        "Mes individus peuvent se reproduire entre eux.",
+        "Leurs petits sont fertiles, contrairement à ceux d'un cheval et d'une ânesse."
+      ],
+      "explication": "Une espèce regroupe des individus semblables qui peuvent avoir entre eux des descendants fertiles."
+    },
+    {
+      "reponse": "Biodiversité",
+      "acceptees": ["Biodiversité", "La biodiversité"],
+      "indices": [
+        "On parle de moi quand on regarde la nature d'un lieu.",
+        "Je rassemble la variété des espèces, des individus et des milieux.",
+        "Je ne concerne pas seulement les espèces rares ou menacées."
+      ],
+      "explication": "La biodiversité est la diversité des êtres vivants et de leurs milieux."
+    },
+    {
+      "reponse": "Ancêtre commun",
+      "acceptees": ["Ancêtre commun", "L'ancêtre commun", "Un ancêtre commun", "Ancêtre"],
+      "indices": [
+        "Je suis un être vivant très ancien.",
+        "Plusieurs espèces descendent de moi.",
+        "Les attributs que ces espèces partagent, elles les ont hérités de moi."
+      ],
+      "explication": "Les espèces d'un même groupe ont hérité leurs attributs d'un ancêtre commun : c'est ce qui crée leurs liens de parenté."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Construire des groupes emboîtés",
+      "etapes": [
+        "On fait un tableau des êtres vivants et de leurs attributs",
+        "On cherche l'attribut partagé par le plus d'êtres vivants",
+        "On dessine à l'intérieur une boîte plus petite pour un autre attribut",
+        "On écrit chaque être vivant dans sa plus petite boîte"
+      ]
+    }
+  ]
+}

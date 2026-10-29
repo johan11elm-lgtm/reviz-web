@@ -1,0 +1,169 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Le centre riche de l'UE",
+      "detail": "L'espace dominant de l'Union européenne, le plus riche et le plus peuplé.",
+      "cartes": [
+        "Un axe urbain de Londres à Milan",
+        "L'espace le plus riche et le plus peuplé d'Europe",
+        "Les régions du Benelux et de la vallée du Rhin",
+        "De grandes villes comme Bruxelles et Amsterdam",
+        "Un espace qui concentre les pouvoirs"
+      ]
+    },
+    {
+      "nom": "Les périphéries de l'UE",
+      "detail": "Les espaces dominés, plus pauvres ou moins bien reliés au centre.",
+      "cartes": [
+        "Les pays de l'Est entrés dans l'UE en 2004-2007",
+        "Le Portugal, le sud de l'Italie et la Grèce",
+        "La Guyane, la Réunion et d'autres régions très lointaines",
+        "Un espace dominé, plus pauvre ou mal relié au centre",
+        "Une région éloignée du centre, même riche"
+      ]
+    },
+    {
+      "nom": "La politique de cohésion",
+      "detail": "Les aides de l'UE pour que les régions en retard rattrapent les autres.",
+      "cartes": [
+        "Une aide pour réduire les écarts de développement entre régions",
+        "Le FEDER finance routes, équipements et innovation",
+        "Les aides vont d'abord aux régions les moins développées",
+        "Des fonds européens ont aidé le rattrapage polonais",
+        "Les fonds structurels financent aussi la formation"
+      ]
+    },
+    {
+      "nom": "Les coopérations transfrontalières",
+      "detail": "Les projets communs entre régions situées de part et d'autre d'une frontière.",
+      "cartes": [
+        "Un territoire qui réunit des régions voisines de plusieurs pays",
+        "Interreg finance des projets entre régions voisines",
+        "Habiter dans un pays et travailler dans le pays voisin",
+        "Des villes françaises et belges réunies autour de Lille",
+        "De nombreux Lorrains travaillent chaque jour au Luxembourg"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "les aides européennes versées aux pays de l'Est",
+      "carte": "Un niveau de développement plus faible que dans le reste de l'UE",
+      "role": "cause",
+      "explication": "Les fonds européens vont en priorité aux régions les moins développées."
+    },
+    {
+      "fait": "les aides européennes versées aux pays de l'Est",
+      "carte": "L'entrée de ces pays dans l'UE en 2004-2007",
+      "role": "cause",
+      "explication": "C'est depuis leur adhésion que les régions d'Europe de l'Est reçoivent d'importants financements."
+    },
+    {
+      "fait": "les aides européennes versées aux pays de l'Est",
+      "carte": "Le rattrapage économique de pays comme la Pologne",
+      "role": "consequence",
+      "explication": "Ces financements ont aidé le rattrapage de pays comme la Pologne."
+    },
+    {
+      "fait": "les aides européennes versées aux pays de l'Est",
+      "carte": "La construction de routes et d'équipements dans ces régions",
+      "role": "consequence",
+      "explication": "Le FEDER finance des routes, des équipements, de la formation et de l'innovation."
+    },
+    {
+      "fait": "les nombreux Lorrains qui travaillent au Luxembourg",
+      "carte": "Des salaires et des emplois plus attractifs au Luxembourg",
+      "role": "cause",
+      "explication": "Le Luxembourg est l'un des pays les plus riches de l'UE : ses emplois attirent les travailleurs voisins."
+    },
+    {
+      "fait": "les nombreux Lorrains qui travaillent au Luxembourg",
+      "carte": "La libre circulation des personnes dans l'UE",
+      "role": "cause",
+      "explication": "Grâce à la libre circulation, les travailleurs frontaliers peuvent profiter des emplois du pays voisin."
+    }
+  ],
+  "etiquettes": [
+    {
+      "consigne": "Dans quel espace de l'UE se trouve le lieu en couleur ?",
+      "texte": "Une entreprise installe son siège à [Amsterdam], aux Pays-Bas.",
+      "choix": ["Sur la dorsale", "Périphérie de l'Est", "Périphérie du Sud", "Région ultrapériphérique"],
+      "bonne": 0,
+      "explication": "Amsterdam est l'une des grandes villes de la dorsale européenne, avec Bruxelles et la vallée du Rhin."
+    },
+    {
+      "consigne": "Dans quel espace de l'UE se trouve le lieu en couleur ?",
+      "texte": "Depuis 2004, des fonds européens financent des routes en [Pologne].",
+      "choix": ["Sur la dorsale", "Périphérie de l'Est", "Périphérie du Sud", "Région ultrapériphérique"],
+      "bonne": 1,
+      "explication": "La Pologne fait partie des pays de l'Est entrés dans l'UE en 2004-2007 : c'est une périphérie."
+    },
+    {
+      "consigne": "Dans quel espace de l'UE se trouve le lieu en couleur ?",
+      "texte": "De nombreux touristes passent leurs vacances en [Grèce].",
+      "choix": ["Sur la dorsale", "Périphérie de l'Est", "Périphérie du Sud", "Région ultrapériphérique"],
+      "bonne": 2,
+      "explication": "La Grèce, comme le Portugal et le sud de l'Italie, est une périphérie du Sud de l'UE."
+    },
+    {
+      "consigne": "Dans quel espace de l'UE se trouve le lieu en couleur ?",
+      "texte": "Le centre spatial de Kourou se trouve en [Guyane].",
+      "choix": ["Sur la dorsale", "Périphérie de l'Est", "Périphérie du Sud", "Région ultrapériphérique"],
+      "bonne": 3,
+      "explication": "La Guyane est une région ultrapériphérique (RUP) : elle fait partie de l'UE mais se trouve loin du continent."
+    },
+    {
+      "consigne": "Dans quel espace de l'UE se trouve le lieu en couleur ?",
+      "texte": "Un journaliste travaille à [Bruxelles], capitale de la Belgique.",
+      "choix": ["Sur la dorsale", "Périphérie de l'Est", "Périphérie du Sud", "Région ultrapériphérique"],
+      "bonne": 0,
+      "explication": "Bruxelles est sur la dorsale européenne, l'axe le plus riche et le plus peuplé d'Europe."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "La dorsale européenne",
+      "acceptees": ["Dorsale", "La dorsale", "Dorsale européenne", "La dorsale européenne", "La banane bleue", "Banane bleue"],
+      "indices": [
+        "Je suis un axe urbain d'Europe.",
+        "Je commence au sud-est de l'Angleterre et je finis au nord de l'Italie.",
+        "Je passe par le Benelux et la vallée du Rhin, et je suis l'espace le plus riche d'Europe."
+      ],
+      "explication": "La dorsale européenne est l'axe le plus riche et le plus peuplé d'Europe, de Londres à Milan."
+    },
+    {
+      "reponse": "Interreg",
+      "acceptees": ["Interreg", "Le programme Interreg", "Programme Interreg"],
+      "indices": [
+        "Je suis un programme européen.",
+        "Je soutiens des projets communs entre régions situées de part et d'autre d'une frontière.",
+        "Je suis le programme qui finance la coopération transfrontalière."
+      ],
+      "explication": "Interreg est le programme européen qui finance les coopérations entre régions frontalières."
+    },
+    {
+      "reponse": "Un travailleur frontalier",
+      "acceptees": ["Travailleur frontalier", "Un travailleur frontalier", "Frontalier", "Un frontalier", "Travailleurs frontaliers", "Les travailleurs frontaliers", "Les frontaliers"],
+      "indices": [
+        "Je suis une personne qui se déplace chaque jour.",
+        "J'habite dans un pays, mais mon emploi est dans le pays voisin.",
+        "Le Luxembourg, pays très riche, attire beaucoup de personnes comme moi."
+      ],
+      "explication": "Un travailleur frontalier vit dans un pays et travaille dans un pays voisin, comme de nombreux Lorrains au Luxembourg."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Réaliser un croquis des contrastes de l'UE",
+      "etapes": [
+        "Dessine la dorsale européenne en foncé",
+        "Colore d'une deuxième couleur les périphéries riches et bien reliées",
+        "Colore d'une troisième couleur les périphéries à l'Est et au Sud",
+        "Ajoute les grandes métropoles par des points",
+        "Range la légende en parties et donne un titre"
+      ]
+    }
+  ]
+}

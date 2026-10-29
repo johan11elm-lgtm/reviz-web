@@ -1,0 +1,157 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "La pauvreté",
+      "detail": "Le manque d'argent empêche de se procurer la nourriture qui existe.",
+      "cartes": [
+        "Une famille qui n'a pas de quoi acheter à manger",
+        "Un salaire trop faible pour nourrir tous ses enfants",
+        "Un chômeur sans revenu pour payer ses repas",
+        "Des étals pleins, mais des familles sans argent",
+        "Un pays trop démuni pour importer de la nourriture"
+      ]
+    },
+    {
+      "nom": "Les conflits armés",
+      "detail": "Les combats détruisent les récoltes, bloquent les routes et font fuir les paysans.",
+      "cartes": [
+        "Des paysans qui fuient les combats",
+        "Des champs détruits par des bombardements",
+        "Un convoi de vivres bloqué par des soldats",
+        "Le Yémen, pays déchiré par la guerre",
+        "Des marchés fermés à cause des affrontements"
+      ]
+    },
+    {
+      "nom": "Les aléas climatiques",
+      "detail": "Sécheresses, inondations et autres phénomènes du climat qui détruisent les cultures.",
+      "cartes": [
+        "Une longue période sans pluie qui détruit la récolte",
+        "Des inondations qui noient les champs",
+        "Une tempête qui arrache les plantations",
+        "Une gelée tardive qui brûle les jeunes pousses",
+        "Une canicule qui grille les cultures"
+      ]
+    },
+    {
+      "nom": "Routes et stockage insuffisants",
+      "detail": "Sans routes ni lieux de stockage, la nourriture n'arrive pas ou se perd en chemin.",
+      "cartes": [
+        "Aucune route praticable pour livrer le village",
+        "Pas d'entrepôt pour conserver le grain après la récolte",
+        "Des fruits qui pourrissent avant d'arriver en ville",
+        "Des céréales gâtées dans un hangar mal protégé",
+        "Un marché trop éloigné pour y vendre ses légumes"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "une famine",
+      "carte": "Une guerre qui bloque l'arrivée des vivres",
+      "role": "cause",
+      "explication": "Les conflits détruisent les récoltes, bloquent les routes et font fuir les paysans."
+    },
+    {
+      "fait": "une famine",
+      "carte": "Une sécheresse qui détruit les récoltes",
+      "role": "cause",
+      "explication": "Sans récolte, il n'y a plus de nourriture à manger ni à vendre."
+    },
+    {
+      "fait": "une famine",
+      "carte": "De nombreux décès dans la population",
+      "role": "consequence",
+      "explication": "La famine est un manque extrême de nourriture qui provoque de nombreux décès."
+    },
+    {
+      "fait": "une famine",
+      "carte": "L'envoi de nourriture d'urgence par le Programme alimentaire mondial",
+      "role": "consequence",
+      "explication": "Lors des crises, le Programme alimentaire mondial distribue de la nourriture."
+    }
+  ],
+  "etiquettes": [
+    {
+      "consigne": "Comment appelle-t-on la situation décrite dans le passage en couleur ?",
+      "texte": "Dans cette famille, [les enfants ne mangent pas assez de calories chaque jour].",
+      "choix": ["Sous-nutrition", "Malnutrition", "Famine", "Sécurité alimentaire"],
+      "bonne": 0,
+      "explication": "Un apport insuffisant en calories, c'est de la sous-nutrition : le problème est la quantité."
+    },
+    {
+      "consigne": "Comment appelle-t-on la situation décrite dans le passage en couleur ?",
+      "texte": "Dans ce pays riche, [une alimentation trop riche en graisses et en sucres] provoque de l'obésité.",
+      "choix": ["Sous-nutrition", "Malnutrition", "Famine", "Sécurité alimentaire"],
+      "bonne": 1,
+      "explication": "Une alimentation déséquilibrée par excès est de la malnutrition, comme l'obésité."
+    },
+    {
+      "consigne": "Comment appelle-t-on la situation décrite dans le passage en couleur ?",
+      "texte": "Après des mois de guerre, [toute la population manque de nourriture et des milliers de personnes meurent].",
+      "choix": ["Sous-nutrition", "Malnutrition", "Famine", "Sécurité alimentaire"],
+      "bonne": 2,
+      "explication": "Un manque extrême de nourriture qui touche toute une population et fait de nombreux morts, c'est une famine."
+    },
+    {
+      "consigne": "Comment appelle-t-on la situation décrite dans le passage en couleur ?",
+      "texte": "Dans ce pays, [chacun peut à tout moment se procurer une nourriture suffisante, saine et nutritive].",
+      "choix": ["Sous-nutrition", "Malnutrition", "Famine", "Sécurité alimentaire"],
+      "bonne": 3,
+      "explication": "Quand tous ont accès à tout moment à une nourriture suffisante et saine, il y a sécurité alimentaire."
+    },
+    {
+      "consigne": "Comment appelle-t-on la situation décrite dans le passage en couleur ?",
+      "texte": "Malgré des repas copieux, cet enfant souffre de [carences en vitamines et en fer].",
+      "choix": ["Sous-nutrition", "Malnutrition", "Famine", "Sécurité alimentaire"],
+      "bonne": 1,
+      "explication": "Des repas copieux mais déséquilibrés, avec des carences en vitamines et en fer, c'est de la malnutrition."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "FAO",
+      "acceptees": ["FAO", "La FAO", "Organisation des Nations unies pour l'alimentation et l'agriculture"],
+      "indices": [
+        "Je suis une organisation rattachée à l'ONU.",
+        "Chaque année, je compte combien de personnes souffrent de la faim.",
+        "J'aide les pays à mieux produire, mais l'aide d'urgence, c'est le travail du PAM."
+      ],
+      "explication": "La FAO est l'organisation de l'ONU pour l'alimentation et l'agriculture ; le PAM, lui, apporte l'aide d'urgence."
+    },
+    {
+      "reponse": "Commerce équitable",
+      "acceptees": ["Commerce équitable", "Le commerce équitable"],
+      "indices": [
+        "Je concerne les petits producteurs du Sud.",
+        "Je concerne surtout le café, le cacao et les bananes.",
+        "Je garantis un prix juste et stable à ceux qui produisent."
+      ],
+      "explication": "Le commerce équitable garantit aux petits producteurs du Sud un prix juste et stable."
+    },
+    {
+      "reponse": "Agroécologie",
+      "acceptees": ["Agroécologie", "L'agroécologie", "Agro-écologie", "L'agro-écologie"],
+      "indices": [
+        "Je suis une manière de cultiver la terre et d'élever des animaux.",
+        "Je m'appuie sur le fonctionnement de la nature.",
+        "Je pratique la rotation des cultures et je plante des haies."
+      ],
+      "explication": "L'agroécologie s'appuie sur le fonctionnement de la nature : rotation des cultures, haies, association avec l'élevage."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Lire une carte de la sous-nutrition",
+      "etapes": [
+        "Lis le titre, la date et la légende de la carte",
+        "Repère les couleurs les plus foncées et nomme les régions",
+        "Repère ensuite les régions les moins touchées",
+        "Explique les régions touchées par leurs causes : pauvreté, guerres, sécheresses",
+        "Compare avec une autre carte pour vérifier ton explication"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,218 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Définir le tourisme",
+      "detail": "Ce qui fait d'un déplacement du tourisme : quitter son lieu de vie pour au moins une nuit, sans dépasser un an.",
+      "cartes": [
+        "Un déplacement hors de son lieu de vie habituel",
+        "Au moins une nuit passée hors de chez soi",
+        "Un séjour qui dure moins d'un an",
+        "Un voyage surtout de loisirs, parfois d'affaires",
+        "Une simple sortie à la journée ne compte pas"
+      ]
+    },
+    {
+      "nom": "Les chiffres depuis 1950",
+      "detail": "L'évolution du nombre de touristes internationaux, de 25 millions en 1950 à près de 1,5 milliard en 2019.",
+      "cartes": [
+        "Environ 25 millions d'arrivées en 1950",
+        "Près de 1,5 milliard d'arrivées en 2019",
+        "Des arrivées multipliées par environ 60 depuis 1950",
+        "Une chute brutale en 2020 à cause du Covid-19",
+        "Un retour proche du niveau de 2019 en 2024"
+      ]
+    },
+    {
+      "nom": "Pourquoi les voyages ont explosé",
+      "detail": "Plus d'argent, plus de temps libre et des transports plus rapides et moins chers.",
+      "cartes": [
+        "Des revenus qui augmentent",
+        "Les congés payés accordés en 1936 en France",
+        "Plus de temps libre pour les salariés",
+        "L'avion et les compagnies à bas coût",
+        "Internet, qui facilite la réservation en ligne"
+      ]
+    },
+    {
+      "nom": "Les pays émetteurs et récepteurs",
+      "detail": "D'où viennent les touristes, où ils vont, et pourquoi les flux sont surtout régionaux.",
+      "cartes": [
+        "La France, première destination du monde",
+        "Des flux surtout régionaux, sur un même continent",
+        "Des touristes qui viennent surtout des pays riches",
+        "La Chine, d'où partent de plus en plus de touristes",
+        "Une moitié des touristes du monde est accueillie en Europe"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "l'essor du tourisme mondial depuis 1950",
+      "carte": "La hausse des revenus",
+      "role": "cause",
+      "explication": "Quand les revenus augmentent, davantage de gens peuvent payer un voyage."
+    },
+    {
+      "fait": "l'essor du tourisme mondial depuis 1950",
+      "carte": "Les congés payés et le temps libre",
+      "role": "cause",
+      "explication": "Avec des congés payés, les salariés ont le temps de partir en voyage."
+    },
+    {
+      "fait": "l'essor du tourisme mondial depuis 1950",
+      "carte": "Les compagnies aériennes à bas coût",
+      "role": "cause",
+      "explication": "L'avion et les compagnies à bas coût rendent les voyages plus rapides et moins chers."
+    },
+    {
+      "fait": "le développement du tourisme en France",
+      "carte": "La création de nombreux emplois",
+      "role": "consequence",
+      "explication": "Hôtels, restaurants et transports emploient beaucoup de monde grâce aux touristes."
+    },
+    {
+      "fait": "le développement du tourisme en France",
+      "carte": "La construction d'hôtels et d'aéroports",
+      "role": "consequence",
+      "explication": "Pour accueillir beaucoup de touristes, il faut construire des hôtels et des aéroports."
+    },
+    {
+      "fait": "le développement du tourisme en France",
+      "carte": "Des devises qui entrent dans le pays",
+      "role": "consequence",
+      "explication": "Les dépenses des touristes étrangers rapportent des devises à la France."
+    }
+  ],
+  "etiquettes": [
+    {
+      "consigne": "De quel type de déplacement s'agit-il ?",
+      "texte": "[Une famille de Lyon passe une semaine de vacances en Bretagne].",
+      "choix": ["Tourisme dans son pays", "Tourisme international", "Pas du tourisme"],
+      "bonne": 0,
+      "explication": "La famille dort hors de chez elle pendant plus d'une nuit, mais reste dans son pays."
+    },
+    {
+      "consigne": "De quel type de déplacement s'agit-il ?",
+      "texte": "[Une famille de Lyon passe une semaine de vacances en Espagne].",
+      "choix": ["Tourisme dans son pays", "Tourisme international", "Pas du tourisme"],
+      "bonne": 1,
+      "explication": "Elle séjourne plusieurs nuits dans un autre pays que le sien : ce sont des touristes internationaux."
+    },
+    {
+      "consigne": "De quel type de déplacement s'agit-il ?",
+      "texte": "[Une habitante de Lille passe la journée à Paris, puis rentre dormir chez elle].",
+      "choix": ["Tourisme dans son pays", "Tourisme international", "Pas du tourisme"],
+      "bonne": 2,
+      "explication": "Une sortie à la journée n'est pas du tourisme : il faut passer au moins une nuit hors de chez soi."
+    },
+    {
+      "consigne": "De quel type de déplacement s'agit-il ?",
+      "texte": "[Un cadre de Marseille passe deux nuits à Berlin pour assister à un congrès].",
+      "choix": ["Tourisme dans son pays", "Tourisme international", "Pas du tourisme"],
+      "bonne": 1,
+      "explication": "On voyage aussi pour ses affaires : deux nuits dans un autre pays, c'est du tourisme international."
+    },
+    {
+      "consigne": "De quel type de déplacement s'agit-il ?",
+      "texte": "[Un étudiant s'installe pendant deux ans à Montréal pour ses études].",
+      "choix": ["Tourisme dans son pays", "Tourisme international", "Pas du tourisme"],
+      "bonne": 2,
+      "explication": "Un séjour de plus d'un an n'est pas du tourisme : le touriste reste moins d'un an."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "La France",
+      "acceptees": ["France", "La France"],
+      "indices": [
+        "Je suis un pays d'Europe.",
+        "J'ai accueilli environ 100 millions de touristes internationaux en 2024.",
+        "Je suis la première destination du monde."
+      ],
+      "explication": "La France est la première destination touristique mondiale, avec environ 100 millions de touristes internationaux en 2024."
+    },
+    {
+      "reponse": "Les congés payés",
+      "acceptees": ["Congés payés", "Les congés payés", "Conges payes", "Les conges payes"],
+      "indices": [
+        "Je suis une mesure sociale française.",
+        "Je donne du temps libre aux salariés sans leur retirer leur salaire.",
+        "Le Front populaire m'a accordés en 1936."
+      ],
+      "explication": "Les congés payés, accordés en 1936 en France, donnent du temps libre aux salariés et favorisent le tourisme."
+    },
+    {
+      "reponse": "Un pays émetteur",
+      "acceptees": ["Pays émetteur", "Un pays émetteur", "Émetteur", "Emetteur", "Pays émetteurs", "Les pays émetteurs"],
+      "indices": [
+        "Je suis un pays.",
+        "C'est de chez moi que partent les touristes.",
+        "Je suis souvent riche, comme l'Europe, l'Amérique du Nord ou le Japon, et la Chine me ressemble de plus en plus."
+      ],
+      "explication": "Un pays émetteur est un pays d'où partent les touristes ; un pays récepteur est celui qui les accueille."
+    },
+    {
+      "reponse": "Le tourisme de masse",
+      "acceptees": ["Tourisme de masse", "Le tourisme de masse"],
+      "indices": [
+        "Je suis une manière de voyager.",
+        "Je concerne un très grand nombre de personnes.",
+        "Je m'installe à partir des années 1960, grâce à l'avion, aux revenus et au temps libre."
+      ],
+      "explication": "Le tourisme de masse concerne un très grand nombre de personnes ; il se développe à partir des années 1960."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "Les arrivées de touristes internationaux passent de 25 millions en 1950 à 1 500 millions en 2019. Par combien ont-elles été multipliées ?",
+      "reponse": 60,
+      "unite": "fois",
+      "tolerance": 0,
+      "explication": "1 500 ÷ 25 = 60 : les arrivées ont été multipliées par 60."
+    },
+    {
+      "question": "Les arrivées de touristes internationaux passent de 25 millions en 1950 à 1 500 millions en 2019. Combien d'arrivées en plus, en millions ?",
+      "reponse": 1475,
+      "unite": "millions",
+      "tolerance": 0,
+      "explication": "1 500 − 25 = 1 475 millions d'arrivées en plus."
+    },
+    {
+      "question": "En 2019, le monde compte 1 500 millions d'arrivées de touristes internationaux. On suppose que l'Europe en reçoit exactement la moitié. Combien l'Europe en reçoit-elle, en millions ?",
+      "reponse": 750,
+      "unite": "millions",
+      "tolerance": 0,
+      "explication": "La moitié de 1 500 est 1 500 ÷ 2 = 750 millions."
+    },
+    {
+      "question": "En 2019, le monde compte 1 500 millions d'arrivées. Imagine que les voyages baissent exactement des trois quarts en 2020. Combien d'arrivées reste-t-il en 2020, en millions ?",
+      "reponse": 375,
+      "unite": "millions",
+      "tolerance": 0,
+      "explication": "Baisser des trois quarts, c'est garder un quart : 1 500 ÷ 4 = 375 millions."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Lire une carte des flux touristiques",
+      "etapes": [
+        "Lis le titre, la date et la légende",
+        "Repère les pays d'où partent les flèches",
+        "Repère les pays où arrivent les flèches",
+        "Compare l'épaisseur des flèches",
+        "Conclus : les flux sont surtout régionaux"
+      ]
+    },
+    {
+      "titre": "Les grandes dates du tourisme",
+      "etapes": [
+        "En 1936, les congés payés sont accordés en France",
+        "À partir des années 1960, le tourisme de masse se développe",
+        "En 2019, on compte près de 1,5 milliard d'arrivées",
+        "En 2020, le Covid-19 fait chuter les voyages",
+        "En 2024, les voyages retrouvent un niveau proche de 2019"
+      ]
+    }
+  ]
+}

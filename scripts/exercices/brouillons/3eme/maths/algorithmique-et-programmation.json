@@ -1,0 +1,227 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "La variable finit à 9",
+      "detail": "Les petits scripts après lesquels la variable vaut 9.",
+      "cartes": [
+        "Mettre score à 4, puis ajouter 5 à score",
+        "Mettre t à 0, répéter 3 fois : ajouter 3 à t",
+        "Mettre n à 1, répéter jusqu'à n > 7 : ajouter 4 à n",
+        "Mettre p à 7, si p < 5 alors ajouter 10, sinon ajouter 2",
+        "Mettre q à 18, puis mettre q à q ÷ 2"
+      ]
+    },
+    {
+      "nom": "La variable finit à 12",
+      "detail": "Les petits scripts après lesquels la variable vaut 12.",
+      "cartes": [
+        "Mettre points à 6, répéter 2 fois : ajouter 3 à points",
+        "Mettre b à 3, puis mettre b à b × 4",
+        "Mettre y à 2, répéter jusqu'à y > 10 : ajouter 5 à y",
+        "Mettre k à 20, mettre k à 7, puis ajouter 5 à k",
+        "Mettre m à 8, si m > 5 alors ajouter 4 à m"
+      ]
+    },
+    {
+      "nom": "La variable finit à 15",
+      "detail": "Les petits scripts après lesquels la variable vaut 15.",
+      "cartes": [
+        "Mettre compteur à 5, répéter 5 fois : ajouter 2 à compteur",
+        "Mettre z à 3, puis mettre z à z × 5",
+        "Mettre r à 0, répéter jusqu'à r > 12 : ajouter 5 à r",
+        "Mettre d à 9, si d = 10 alors ajouter 1, sinon ajouter 6",
+        "Mettre h à 4, ajouter 8 à h, puis ajouter 3 à h"
+      ]
+    },
+    {
+      "nom": "La variable finit à 20",
+      "detail": "Les petits scripts après lesquels la variable vaut 20.",
+      "cartes": [
+        "Mettre pts à 8, puis ajouter 12 à pts",
+        "Mettre c à 0, répéter 4 fois : ajouter 5 à c",
+        "Mettre g à 5, répéter jusqu'à g > 12 : mettre g à g × 2",
+        "Mettre e à 14, si e > 10 alors ajouter 6, sinon ajouter 1",
+        "Mettre u à 3, mettre u à 8, puis ajouter 12 à u"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "À quelle notion de programmation correspond le passage en couleur ?",
+      "texte": "Pour dessiner un carré, le lutin exécute [répéter 4 fois : avancer de 100, tourner de 90 degrés].",
+      "choix": [
+        "Variable",
+        "Boucle",
+        "Instruction conditionnelle",
+        "Événement"
+      ],
+      "bonne": 1,
+      "explication": "« Répéter 4 fois » est une boucle : elle exécute les mêmes instructions un nombre fixé de fois."
+    },
+    {
+      "consigne": "À quelle notion de programmation correspond le passage en couleur ?",
+      "texte": "Au début du jeu, on commence par [mettre score à 0].",
+      "choix": [
+        "Variable",
+        "Boucle",
+        "Instruction conditionnelle",
+        "Événement"
+      ],
+      "bonne": 0,
+      "explication": "« Mettre score à 0 » donne sa première valeur à la variable score : on l'initialise."
+    },
+    {
+      "consigne": "À quelle notion de programmation correspond le passage en couleur ?",
+      "texte": "Le script du lutin Balle commence par [quand je reçois saut].",
+      "choix": [
+        "Variable",
+        "Boucle",
+        "Instruction conditionnelle",
+        "Événement"
+      ],
+      "bonne": 3,
+      "explication": "« Quand je reçois saut » est un événement : la réception d'un message déclenche le script."
+    },
+    {
+      "consigne": "À quelle notion de programmation correspond le passage en couleur ?",
+      "texte": "Pour éviter que le lutin sorte de la scène, on écrit [si abscisse x > 200 alors dire « Stop » sinon avancer de 10].",
+      "choix": [
+        "Variable",
+        "Boucle",
+        "Instruction conditionnelle",
+        "Événement"
+      ],
+      "bonne": 2,
+      "explication": "« Si… alors… sinon » est une instruction conditionnelle : elle exécute un bloc ou l'autre selon que la condition est vraie ou fausse."
+    },
+    {
+      "consigne": "À quelle notion de programmation correspond le passage en couleur ?",
+      "texte": "L'animation du jeu tourne tant que le programme est lancé grâce à [répéter indéfiniment].",
+      "choix": [
+        "Variable",
+        "Boucle",
+        "Instruction conditionnelle",
+        "Événement"
+      ],
+      "bonne": 1,
+      "explication": "« Répéter indéfiniment » est une boucle : elle répète sans fin les instructions qu'elle contient."
+    },
+    {
+      "consigne": "À quelle notion de programmation correspond le passage en couleur ?",
+      "texte": "Le joueur ramasse un diamant : [ajouter 5 à score].",
+      "choix": [
+        "Variable",
+        "Boucle",
+        "Instruction conditionnelle",
+        "Événement"
+      ],
+      "bonne": 0,
+      "explication": "« Ajouter 5 à score » modifie la valeur de la variable score à partir de sa valeur actuelle."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Variable",
+      "acceptees": [
+        "Variable",
+        "Une variable",
+        "La variable",
+        "Case mémoire"
+      ],
+      "indices": [
+        "Je porte un nom, comme score ou vies.",
+        "Je contiens une valeur que le programme peut changer.",
+        "On m'initialise au début du programme, puis « mettre à » remplace ma valeur."
+      ],
+      "explication": "Une variable est une case mémoire nommée qui contient une valeur modifiable."
+    },
+    {
+      "reponse": "Algorithme",
+      "acceptees": [
+        "Algorithme",
+        "Un algorithme",
+        "L'algorithme"
+      ],
+      "indices": [
+        "Je suis une suite d'instructions.",
+        "Je suis finie et je résous un problème.",
+        "Si on me traduit dans un langage comme Scratch, on obtient un programme."
+      ],
+      "explication": "Un algorithme est une suite finie d'instructions qui résout un problème ; le programme en est la traduction dans un langage."
+    },
+    {
+      "reponse": "Événement",
+      "acceptees": [
+        "Événement",
+        "Un événement",
+        "Evenement",
+        "Déclencheur"
+      ],
+      "indices": [
+        "Je fais démarrer un script.",
+        "Je peux être un clic, l'appui sur une touche ou la réception d'un message.",
+        "« Quand le drapeau vert est cliqué » en est un exemple."
+      ],
+      "explication": "Un événement (clic, touche, message) déclenche un script."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "Pour tracer un octogone régulier (8 côtés), de combien de degrés le lutin tourne-t-il à chaque sommet ?",
+      "reponse": 45,
+      "unite": "°",
+      "tolerance": 0,
+      "explication": "L'angle de rotation vaut 360 ÷ n avec n = 8 : 360 ÷ 8 = 45°."
+    },
+    {
+      "question": "Le lutin trace un polygone régulier en tournant de 40° à chaque sommet. Combien ce polygone a-t-il de côtés ?",
+      "reponse": 9,
+      "unite": "côtés",
+      "tolerance": 0,
+      "explication": "L'angle de rotation vaut 360 ÷ n, donc n = 360 ÷ 40 = 9 côtés."
+    },
+    {
+      "question": "La variable score est mise à 5, puis on répète 4 fois : ajouter 3 à score. Que vaut score à la fin ?",
+      "reponse": 17,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "On ajoute 3 quatre fois, soit 4 × 3 = 12, à la valeur de départ : 5 + 12 = 17."
+    },
+    {
+      "question": "La variable x vaut 1 au départ. On répète jusqu'à x > 50 : mettre x à x × 3. Que vaut x à la fin ?",
+      "reponse": 81,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "x prend les valeurs 3, 9, 27 puis 81. Tant que x n'est pas supérieur à 50 la boucle continue : 27 ne suffit pas, 81 > 50 l'arrête. x vaut 81."
+    },
+    {
+      "question": "La variable pas vaut 7. Le script exécute : si pas > 5 alors mettre total à pas × 4, sinon mettre total à pas + 4. Que vaut total à la fin ?",
+      "reponse": 28,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "7 > 5 est vrai, donc on exécute le premier bloc : total = 7 × 4 = 28."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Faire rebondir la balle grâce à un message",
+      "etapes": [
+        "On appuie sur la touche espace",
+        "Le lutin Chat envoie à tous le message « saut »",
+        "Le lutin Balle reçoit le message « saut »",
+        "Le lutin Balle se met à rebondir"
+      ]
+    },
+    {
+      "titre": "Les blocs du script qui trace un carré",
+      "etapes": [
+        "Quand le drapeau vert est cliqué",
+        "Mettre le stylo en position d'écriture",
+        "Répéter 4 fois : avancer de 100, tourner de 90 degrés",
+        "Le carré est tracé"
+      ]
+    }
+  ]
+}

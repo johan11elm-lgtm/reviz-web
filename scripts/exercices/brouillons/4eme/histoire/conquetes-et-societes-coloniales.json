@@ -1,0 +1,146 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Les raisons de coloniser",
+      "detail": "Ce que cherchent les Européens quand ils se lancent dans la colonisation, avec leurs prétextes.",
+      "cartes": [
+        "Se procurer des matières premières pour les usines",
+        "Trouver de nouveaux marchés pour vendre ses produits",
+        "Rendre son pays plus puissant face aux autres États",
+        "Gagner du prestige aux yeux des autres nations",
+        "Prétendre apporter la « civilisation » aux peuples dominés"
+      ]
+    },
+    {
+      "nom": "La mainmise sur les territoires",
+      "detail": "La façon dont les États européens s'emparent de territoires et construisent leurs empires.",
+      "cartes": [
+        "En 1830, la France commence à s'emparer de l'Algérie",
+        "La conférence de Berlin organise le partage de l'Afrique",
+        "Partout, les armées avancent par la guerre et les massacres",
+        "En 1914, l'Empire britannique est le plus vaste du monde",
+        "L'Empire français comprend notamment le Maghreb et l'Indochine"
+      ]
+    },
+    {
+      "nom": "La domination au quotidien",
+      "detail": "La vie dans les colonies : les colons ont plus de droits et les colonisés subissent un régime spécial.",
+      "cartes": [
+        "Le code de l'indigénat impose des sanctions spéciales",
+        "Un colonisé est puni par l'administration, sans procès",
+        "Le travail forcé existe dans certaines colonies",
+        "Les écoles et les hôpitaux profitent surtout aux colons",
+        "Les colons européens ont plus de droits que les colonisés"
+      ]
+    },
+    {
+      "nom": "La fin de l'esclavage",
+      "detail": "Les abolitions de l'esclavage dans les colonies, de 1794 à 1848, et leurs limites.",
+      "cartes": [
+        "Victor Schœlcher prépare le décret du 27 avril 1848",
+        "Dès 1833, le Royaume-Uni supprime l'esclavage dans ses colonies",
+        "L'esclavage supprimé en 1794 est rétabli en 1802",
+        "Les anciens propriétaires sont indemnisés, mais pas les anciens esclaves",
+        "Le décret de 1848 s'applique à toutes les colonies françaises"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "la colonisation européenne au XIXe siècle",
+      "carte": "Les usines européennes ont besoin de matières premières",
+      "role": "cause",
+      "explication": "Chercher des matières premières est l'une des raisons qui poussent les Européens à coloniser."
+    },
+    {
+      "fait": "la colonisation européenne au XIXe siècle",
+      "carte": "Les Européens veulent de nouveaux marchés pour leurs produits",
+      "role": "cause",
+      "explication": "Les colonies servent de débouchés : c'est une des raisons économiques de la colonisation."
+    },
+    {
+      "fait": "la colonisation européenne au XIXe siècle",
+      "carte": "Les États veulent gagner en puissance et en prestige",
+      "role": "cause",
+      "explication": "Posséder un empire montre la force d'un pays : c'est un motif politique de la colonisation."
+    },
+    {
+      "fait": "la colonisation européenne au XIXe siècle",
+      "carte": "Les colonisés sont privés des droits des citoyens",
+      "role": "consequence",
+      "explication": "Dans les colonies, le code de l'indigénat prive les colonisés des droits des citoyens."
+    },
+    {
+      "fait": "la colonisation européenne au XIXe siècle",
+      "carte": "En 1914, les empires européens couvrent une grande partie du monde",
+      "role": "consequence",
+      "explication": "La conquête du XIXe siècle aboutit à de vastes empires coloniaux, dont l'Empire britannique est le plus grand."
+    }
+  ],
+  "etiquettes": [],
+  "devinettes": [
+    {
+      "reponse": "Abd el-Kader",
+      "acceptees": ["Abd el-Kader", "Abdelkader", "Abd el Kader", "Abdel Kader", "L'émir Abd el-Kader"],
+      "indices": [
+        "Je suis un émir d'Algérie.",
+        "Je dirige la résistance contre l'armée française qui a débarqué en 1830.",
+        "Je combats les Français jusqu'en 1847."
+      ],
+      "explication": "L'émir Abd el-Kader résiste à la conquête française de l'Algérie jusqu'en 1847."
+    },
+    {
+      "reponse": "Samory Touré",
+      "acceptees": ["Samory Touré", "Samory", "Samori", "Samory Ture", "Samori Touré"],
+      "indices": [
+        "Je suis un chef d'Afrique de l'Ouest.",
+        "Je dirige un État que les Français veulent conquérir.",
+        "Je résiste jusqu'à ma capture en 1898."
+      ],
+      "explication": "Samory Touré, chef d'un État d'Afrique de l'Ouest, résiste aux Français jusqu'en 1898."
+    },
+    {
+      "reponse": "Jules Ferry",
+      "acceptees": ["Jules Ferry", "Ferry"],
+      "indices": [
+        "Je suis un homme politique français de la fin du XIXe siècle.",
+        "Je défends la colonisation devant les députés en 1885.",
+        "Georges Clemenceau s'oppose à moi dans ce débat."
+      ],
+      "explication": "En 1885, Jules Ferry défend la colonisation à la Chambre des députés ; Clemenceau s'y oppose."
+    },
+    {
+      "reponse": "Victor Schœlcher",
+      "acceptees": ["Victor Schœlcher", "Victor Schoelcher", "Schœlcher", "Schoelcher"],
+      "indices": [
+        "Je suis un homme politique français qui combat l'esclavage.",
+        "En 1848, je prépare un décret pour les colonies françaises.",
+        "Mon décret du 27 avril 1848 met fin définitivement à l'esclavage."
+      ],
+      "explication": "Victor Schœlcher prépare le décret du 27 avril 1848 qui abolit l'esclavage dans les colonies françaises."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Les grandes dates de la colonisation",
+      "etapes": [
+        "La France commence à conquérir l'Algérie",
+        "Un décret abolit définitivement l'esclavage dans les colonies françaises",
+        "Le code de l'indigénat est créé en Algérie",
+        "La conférence de Berlin fixe les règles du partage de l'Afrique"
+      ]
+    },
+    {
+      "titre": "Analyser un document de propagande coloniale",
+      "etapes": [
+        "On présente le document : sa nature, sa date et son auteur",
+        "On décrit comment sont montrés les colons et les colonisés",
+        "On repère le message : la colonisation présentée comme un progrès",
+        "On le confronte à ce que l'on sait : violence, indigénat, travail forcé",
+        "On conclut : le document veut convaincre et n'est pas neutre"
+      ]
+    }
+  ]
+}

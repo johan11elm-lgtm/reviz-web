@@ -1,0 +1,146 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "La naissance des deux blocs",
+      "detail": "Entre 1946 et 1955, le monde se divise en deux camps qui s'organisent.",
+      "cartes": [
+        "Churchill dénonce un rideau de fer coupant l'Europe",
+        "La doctrine Truman vise à contenir le communisme",
+        "Une aide américaine finance la reconstruction de l'Europe",
+        "Les pays occidentaux forment l'OTAN en 1949",
+        "Les pays communistes forment le pacte de Varsovie en 1955"
+      ]
+    },
+    {
+      "nom": "L'Allemagne et Berlin divisées",
+      "detail": "L'Allemagne et sa capitale, au cœur des tensions entre les deux camps.",
+      "cartes": [
+        "L'URSS bloque l'accès à Berlin-Ouest en juin 1948",
+        "Les Américains ravitaillent Berlin-Ouest par un pont aérien",
+        "La RFA et la RDA naissent en 1949",
+        "Le 13 août 1961, un mur coupe Berlin en deux",
+        "En 1963, Kennedy déclare « Je suis un Berlinois »"
+      ]
+    },
+    {
+      "nom": "La menace nucléaire",
+      "detail": "La peur d'une guerre atomique entre les deux grands, jusqu'à la crise de Cuba.",
+      "cartes": [
+        "L'URSS possède à son tour la bombe atomique en 1949",
+        "Chaque camp sait qu'une attaque entraînerait sa propre destruction",
+        "L'URSS installe des missiles à Cuba",
+        "Les États-Unis organisent un blocus de l'île de Cuba",
+        "Un téléphone rouge relie ensuite les deux grands"
+      ]
+    },
+    {
+      "nom": "La fin de la guerre froide",
+      "detail": "Les années 1980 et 1990 : les réformes, la réunification et la disparition de l'URSS.",
+      "cartes": [
+        "Gorbatchev arrive au pouvoir en 1985",
+        "La perestroïka restructure l'économie soviétique",
+        "La glasnost impose la transparence",
+        "L'Allemagne est réunifiée le 3 octobre 1990",
+        "L'URSS disparaît en décembre 1991"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "la crise de Cuba en 1962",
+      "carte": "L'URSS installe des missiles à Cuba",
+      "role": "cause",
+      "explication": "L'installation de missiles soviétiques à Cuba déclenche la crise d'octobre 1962."
+    },
+    {
+      "fait": "la crise de Cuba en 1962",
+      "carte": "Un téléphone rouge relie les deux grands",
+      "role": "consequence",
+      "explication": "Le monde a frôlé la guerre nucléaire : après la crise, un téléphone rouge est installé entre les deux grands."
+    },
+    {
+      "fait": "la crise de Cuba en 1962",
+      "carte": "Le début de la détente",
+      "role": "consequence",
+      "explication": "La crise débouche sur une période d'apaisement des tensions, la détente."
+    },
+    {
+      "fait": "la disparition de l'URSS en 1991",
+      "carte": "L'affaiblissement de l'URSS dans les années 1980",
+      "role": "cause",
+      "explication": "Dans les années 1980, l'URSS est affaiblie, ce qui conduit à sa disparition en décembre 1991."
+    },
+    {
+      "fait": "la disparition de l'URSS en 1991",
+      "carte": "La fin de la guerre froide",
+      "role": "consequence",
+      "explication": "Avec la disparition de l'URSS, le monde n'est plus divisé en deux blocs : c'est la fin de la guerre froide."
+    }
+  ],
+  "etiquettes": [],
+  "devinettes": [
+    {
+      "reponse": "Khrouchtchev",
+      "acceptees": ["Khrouchtchev", "Nikita Khrouchtchev", "Khrouchtchov"],
+      "indices": [
+        "Je dirige l'URSS au début des années 1960.",
+        "En octobre 1962, j'installe des missiles à Cuba.",
+        "Face au blocus américain, je finis par les retirer."
+      ],
+      "explication": "Khrouchtchev, dirigeant de l'URSS, retire ses missiles de Cuba après le blocus américain."
+    },
+    {
+      "reponse": "Gorbatchev",
+      "acceptees": ["Gorbatchev", "Mikhaïl Gorbatchev", "Mikhail Gorbatchev"],
+      "indices": [
+        "Je dirige l'URSS à partir de 1985.",
+        "Je lance des réformes appelées perestroïka et glasnost.",
+        "Sous mon pouvoir, l'Allemagne est réunifiée et l'URSS disparaît en 1991."
+      ],
+      "explication": "Gorbatchev lance la perestroïka et la glasnost ; l'URSS disparaît en décembre 1991."
+    },
+    {
+      "reponse": "Le plan Marshall",
+      "acceptees": ["Plan Marshall", "Le plan Marshall"],
+      "indices": [
+        "Je suis une aide.",
+        "Je viens des États-Unis et je finance la reconstruction de l'Europe.",
+        "Lancé en 1947, je cherche à éloigner l'Europe du communisme."
+      ],
+      "explication": "Le plan Marshall est une aide économique américaine à la reconstruction de l'Europe, lancée en 1947."
+    },
+    {
+      "reponse": "Le mur de Berlin",
+      "acceptees": ["Mur de Berlin", "Le mur de Berlin", "Le mur", "Mur"],
+      "indices": [
+        "Je suis une barrière.",
+        "Je suis construit le 13 août 1961 par la RDA pour empêcher ses habitants de fuir.",
+        "Le 9 novembre 1989, des habitants franchissent mon passage et commencent à me détruire."
+      ],
+      "explication": "Le mur de Berlin, élevé en 1961 par la RDA, tombe le 9 novembre 1989."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "De 1946 à 1962",
+      "etapes": [
+        "En 1946, Churchill dénonce le rideau de fer",
+        "En 1947, le plan Marshall est lancé",
+        "En juin 1948, l'URSS bloque Berlin-Ouest",
+        "Le 13 août 1961, la RDA construit le mur de Berlin",
+        "En octobre 1962, la crise de Cuba éclate"
+      ]
+    },
+    {
+      "titre": "La fin de la guerre froide",
+      "etapes": [
+        "En 1985, Gorbatchev arrive au pouvoir",
+        "Le 9 novembre 1989, le mur de Berlin tombe",
+        "Le 3 octobre 1990, l'Allemagne est réunifiée",
+        "En décembre 1991, l'URSS disparaît"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,205 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "La natalité",
+      "detail": "Le nombre de naissances dans une population en un an, souvent donné pour 1 000 habitants.",
+      "cartes": [
+        "35 naissances pour 1 000 habitants en un an",
+        "Beaucoup de bébés nés chaque année en Afrique",
+        "Le nombre de bébés nés dans une population en un an",
+        "Un taux resté fort après 1950, tandis que les décès reculent",
+        "Sur 2 000 habitants, 50 bébés sont nés cette année"
+      ]
+    },
+    {
+      "nom": "La mortalité",
+      "detail": "Le nombre de décès dans une population en un an, souvent donné pour 1 000 habitants.",
+      "cartes": [
+        "8 décès pour 1 000 habitants en un an",
+        "Un taux en baisse grâce aux vaccins et à l'hygiène",
+        "Le nombre de personnes mortes dans une population en un an",
+        "La baisse qui a lancé l'explosion démographique après 1950",
+        "Sur 500 habitants, 5 personnes sont mortes cette année"
+      ]
+    },
+    {
+      "nom": "L'accroissement naturel",
+      "detail": "La différence entre les naissances et les décès : positive, la population augmente ; négative, elle diminue.",
+      "cartes": [
+        "30 naissances moins 10 décès, soit +20 pour 1 000 habitants",
+        "La différence entre le nombre de naissances et de décès",
+        "Un résultat négatif si les décès dépassent les naissances",
+        "Sur 1 000 habitants : 12 naissances et 8 décès dans l'année",
+        "L'écart qui grandit après 1950, car les décès baissent"
+      ]
+    },
+    {
+      "nom": "La densité",
+      "detail": "Le nombre moyen d'habitants par kilomètre carré.",
+      "cartes": [
+        "1 000 habitants sur 10 km², soit 100 habitants au km²",
+        "Le nombre moyen d'habitants sur un kilomètre carré",
+        "Une valeur très faible dans les déserts et les régions froides",
+        "Obtenue en divisant le nombre d'habitants par la superficie",
+        "Une valeur très forte dans les grands foyers de peuplement"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "la baisse de la mortalité après 1950",
+      "carte": "La diffusion des vaccins",
+      "role": "cause",
+      "explication": "Les vaccins évitent de nombreux décès : c'est l'une des causes de la baisse de la mortalité."
+    },
+    {
+      "fait": "la baisse de la mortalité après 1950",
+      "carte": "Les progrès de l'hygiène",
+      "role": "cause",
+      "explication": "Une meilleure hygiène fait reculer les maladies et donc les décès."
+    },
+    {
+      "fait": "la baisse de la mortalité après 1950",
+      "carte": "Une meilleure alimentation",
+      "role": "cause",
+      "explication": "Mieux nourries, les populations meurent moins : l'alimentation fait partie des causes citées dans le cours."
+    },
+    {
+      "fait": "la baisse de la mortalité après 1950",
+      "carte": "L'explosion démographique",
+      "role": "consequence",
+      "explication": "Les décès baissent alors que la natalité reste forte : la population augmente très vite."
+    },
+    {
+      "fait": "la baisse de la mortalité après 1950",
+      "carte": "Un écart de plus en plus grand entre naissances et décès",
+      "role": "consequence",
+      "explication": "Comme les naissances restent nombreuses et que les décès diminuent, l'accroissement naturel augmente."
+    }
+  ],
+  "etiquettes": [
+    {
+      "consigne": "Que représente le passage en couleur ?",
+      "texte": "Dans ce pays, [35 bébés sont nés pour 1 000 habitants] cette année.",
+      "choix": ["Un taux de natalité", "Un taux de mortalité", "Un accroissement naturel", "Une densité"],
+      "bonne": 0,
+      "explication": "Le nombre de naissances pour 1 000 habitants en un an est le taux de natalité."
+    },
+    {
+      "consigne": "Que représente le passage en couleur ?",
+      "texte": "Cette année, [9 personnes sont mortes pour 1 000 habitants].",
+      "choix": ["Un taux de natalité", "Un taux de mortalité", "Un accroissement naturel", "Une densité"],
+      "bonne": 1,
+      "explication": "Le nombre de décès pour 1 000 habitants en un an est le taux de mortalité."
+    },
+    {
+      "consigne": "Que représente le passage en couleur ?",
+      "texte": "Ce pays compte 25 naissances et 9 décès pour 1 000 habitants : [la différence est de 16 pour 1 000].",
+      "choix": ["Un taux de natalité", "Un taux de mortalité", "Un accroissement naturel", "Une densité"],
+      "bonne": 2,
+      "explication": "La différence entre les naissances et les décès est l'accroissement naturel : 25 − 9 = 16 pour 1 000."
+    },
+    {
+      "consigne": "Que représente le passage en couleur ?",
+      "texte": "Sur cette île, [100 habitants vivent sur chaque km²] en moyenne.",
+      "choix": ["Un taux de natalité", "Un taux de mortalité", "Un accroissement naturel", "Une densité"],
+      "bonne": 3,
+      "explication": "Un nombre moyen d'habitants par km² est une densité."
+    },
+    {
+      "consigne": "Que représente le passage en couleur ?",
+      "texte": "Dans cette ville, [on compte 6 naissances de moins que de décès pour 1 000 habitants].",
+      "choix": ["Un taux de natalité", "Un taux de mortalité", "Un accroissement naturel", "Une densité"],
+      "bonne": 2,
+      "explication": "Avec moins de naissances que de décès, l'accroissement naturel est négatif : ici −6 pour 1 000."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Nigeria",
+      "acceptees": ["Nigeria", "Le Nigeria", "Nigéria", "Le Nigéria"],
+      "indices": [
+        "Je suis un pays d'Afrique, près du golfe de Guinée.",
+        "Je suis le pays le plus peuplé d'Afrique.",
+        "Je compte plus de 220 millions d'habitants."
+      ],
+      "explication": "Le Nigeria est le pays le plus peuplé d'Afrique, avec plus de 220 millions d'habitants."
+    },
+    {
+      "reponse": "Inde",
+      "acceptees": ["Inde", "L'Inde"],
+      "indices": [
+        "Je suis un pays d'Asie du Sud.",
+        "Je compte plus de 1,4 milliard d'habitants.",
+        "Depuis 2023, je suis le pays le plus peuplé du monde, devant la Chine."
+      ],
+      "explication": "Depuis 2023, l'Inde est le pays le plus peuplé du monde, devant la Chine."
+    },
+    {
+      "reponse": "ONU",
+      "acceptees": ["ONU", "L'ONU", "Nations unies", "Les Nations unies", "Organisation des Nations unies"],
+      "indices": [
+        "Je suis une organisation internationale.",
+        "J'ai annoncé que la Terre comptait 8 milliards d'habitants en novembre 2022.",
+        "Je prévois environ 9,7 milliards d'habitants en 2050."
+      ],
+      "explication": "L'ONU a annoncé les 8 milliards d'habitants en novembre 2022 et prévoit environ 9,7 milliards en 2050."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "Un pays a un taux de natalité de 28 ‰ et un taux de mortalité de 9 ‰. Quel est son taux d'accroissement naturel ?",
+      "reponse": 19,
+      "unite": "‰",
+      "tolerance": 0,
+      "explication": "Taux d'accroissement naturel = natalité − mortalité = 28 − 9 = 19 ‰."
+    },
+    {
+      "question": "Un pays a un taux de natalité de 11 ‰ et un taux de mortalité de 14 ‰. Quel est son taux d'accroissement naturel ?",
+      "reponse": -3,
+      "unite": "‰",
+      "tolerance": 0,
+      "explication": "11 − 14 = −3 ‰ : il y a plus de décès que de naissances, la population diminue naturellement."
+    },
+    {
+      "question": "Dans une ville de 10 000 habitants, il y a 250 naissances et 90 décès en un an. Quel est le taux d'accroissement naturel, pour 1 000 habitants ?",
+      "reponse": 16,
+      "unite": "‰",
+      "tolerance": 0,
+      "explication": "Pour 1 000 habitants : 250 ÷ 10 = 25 naissances et 90 ÷ 10 = 9 décès. Donc 25 − 9 = 16 ‰."
+    },
+    {
+      "question": "Un pays compte 60 000 habitants sur 300 km². Quelle est sa densité ?",
+      "reponse": 200,
+      "unite": "habitants/km²",
+      "tolerance": 0,
+      "explication": "Densité = habitants ÷ superficie = 60 000 ÷ 300 = 200 habitants par km²."
+    },
+    {
+      "question": "Une île compte 2 500 habitants sur 50 km². Quelle est sa densité ?",
+      "reponse": 50,
+      "unite": "habitants/km²",
+      "tolerance": 0,
+      "explication": "2 500 ÷ 50 = 50 habitants par km²."
+    },
+    {
+      "question": "La Terre compte 2,5 milliards d'habitants en 1950 et 8 milliards en 2022. De combien de milliards d'habitants la population a-t-elle augmenté ?",
+      "reponse": 5.5,
+      "unite": "milliards",
+      "tolerance": 0,
+      "explication": "8 − 2,5 = 5,5 milliards d'habitants en plus entre 1950 et 2022."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Construire un graphique d'évolution",
+      "etapes": [
+        "Trace les deux axes : années en bas, population à gauche",
+        "Reporte chaque valeur par un point",
+        "Relie les points entre eux",
+        "Termine par un titre"
+      ]
+    }
+  ]
+}

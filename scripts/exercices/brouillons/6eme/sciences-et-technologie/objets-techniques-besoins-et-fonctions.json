@@ -1,0 +1,158 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Les fonctions techniques",
+      "detail": "Une fonction technique est une action que l'objet doit réaliser pour assurer sa fonction d'usage, comme produire de la lumière.",
+      "cartes": [
+        "Produire de la lumière",
+        "Stocker de l'énergie",
+        "Allumer ou éteindre la lampe",
+        "Freiner le vélo",
+        "Transmettre le mouvement jusqu'aux roues"
+      ]
+    },
+    {
+      "nom": "Les solutions techniques",
+      "detail": "Une solution technique est l'élément choisi pour réaliser une fonction technique : une DEL, des piles, des patins de frein.",
+      "cartes": [
+        "Une DEL dans une lampe de poche",
+        "Des piles dans une lampe de poche",
+        "Un interrupteur dans une lampe de poche",
+        "Des patins de frein sur la roue",
+        "Un frein à disque sur la roue"
+      ]
+    },
+    {
+      "nom": "Les contraintes du cahier des charges",
+      "detail": "Le cahier des charges fixe des limites au concepteur : le coût, la sécurité, l'esthétique, l'environnement, la taille.",
+      "cartes": [
+        "Le prix ne doit pas dépasser 20 €",
+        "L'objet ne doit pas blesser l'utilisateur",
+        "La forme de l'objet doit être agréable",
+        "L'objet doit respecter l'environnement",
+        "Il doit être assez petit pour tenir dans une poche"
+      ]
+    },
+    {
+      "nom": "Les innovations",
+      "detail": "Une innovation est une amélioration nouvelle qui modifie un objet ou la façon de l'utiliser.",
+      "cartes": [
+        "Passer de la draisienne au vélo à pédales",
+        "Passer de la lampe à huile à la bougie",
+        "Passer de la bougie à l'ampoule à incandescence",
+        "Équiper le vélo de pneus gonflables",
+        "Ajouter une assistance électrique au vélo"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "De quel type est le passage en couleur ?",
+      "texte": "Une lampe de poche sert à [éclairer dans l'obscurité].",
+      "choix": ["Fonction d'usage", "Fonction technique", "Solution technique"],
+      "bonne": 0,
+      "explication": "Éclairer dans l'obscurité dit à quoi sert la lampe : c'est sa fonction d'usage."
+    },
+    {
+      "consigne": "De quel type est le passage en couleur ?",
+      "texte": "Pour fonctionner, la lampe de poche doit [stocker de l'énergie].",
+      "choix": ["Fonction d'usage", "Fonction technique", "Solution technique"],
+      "bonne": 1,
+      "explication": "Stocker de l'énergie est une action que l'objet doit réaliser : c'est une fonction technique."
+    },
+    {
+      "consigne": "De quel type est le passage en couleur ?",
+      "texte": "Pour produire de la lumière, la lampe de poche utilise [une DEL].",
+      "choix": ["Fonction d'usage", "Fonction technique", "Solution technique"],
+      "bonne": 2,
+      "explication": "Une DEL est l'élément choisi pour produire la lumière : c'est une solution technique."
+    },
+    {
+      "consigne": "De quel type est le passage en couleur ?",
+      "texte": "Un vélo sert à [se déplacer].",
+      "choix": ["Fonction d'usage", "Fonction technique", "Solution technique"],
+      "bonne": 0,
+      "explication": "Se déplacer dit à quoi sert le vélo pour son utilisateur : c'est sa fonction d'usage."
+    },
+    {
+      "consigne": "De quel type est le passage en couleur ?",
+      "texte": "Pour assurer son usage, un vélo doit [freiner].",
+      "choix": ["Fonction d'usage", "Fonction technique", "Solution technique"],
+      "bonne": 1,
+      "explication": "Freiner est une action que le vélo doit réaliser : c'est une fonction technique."
+    },
+    {
+      "consigne": "De quel type est le passage en couleur ?",
+      "texte": "Pour stocker de l'énergie, la lampe de poche utilise [des piles].",
+      "choix": ["Fonction d'usage", "Fonction technique", "Solution technique"],
+      "bonne": 2,
+      "explication": "Les piles sont l'élément choisi pour stocker l'énergie : c'est une solution technique."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Prototype",
+      "acceptees": ["Prototype", "Le prototype", "Un prototype"],
+      "indices": [
+        "Je suis fabriqué avant l'objet définitif.",
+        "Je suis un premier exemplaire.",
+        "On me fabrique pour tester l'objet et corriger ses défauts avant de le fabriquer en série."
+      ],
+      "explication": "Le prototype est un premier exemplaire réalisé pour tester l'objet avant de le fabriquer."
+    },
+    {
+      "reponse": "Cahier des charges",
+      "acceptees": ["Cahier des charges", "Le cahier des charges"],
+      "indices": [
+        "On m'écrit avant de fabriquer l'objet.",
+        "Je dis ce que l'objet doit faire.",
+        "Je liste aussi ses contraintes : coût, sécurité, esthétique, environnement."
+      ],
+      "explication": "Le cahier des charges décrit ce que doit faire l'objet et ses contraintes."
+    },
+    {
+      "reponse": "Innovation",
+      "acceptees": ["Innovation", "L'innovation", "Une innovation"],
+      "indices": [
+        "Je peux changer la façon d'utiliser un objet.",
+        "Je suis une nouveauté qui améliore un objet.",
+        "C'est grâce à moi qu'on est passé de la draisienne au vélo à pédales."
+      ],
+      "explication": "Une innovation est une amélioration nouvelle qui modifie un objet ou la façon de l'utiliser."
+    },
+    {
+      "reponse": "Draisienne",
+      "acceptees": ["Draisienne", "La draisienne", "Une draisienne"],
+      "indices": [
+        "Je permets de me déplacer sans moteur.",
+        "Je n'ai pas de pédales.",
+        "Je suis l'ancêtre du vélo et je date de 1817."
+      ],
+      "explication": "La draisienne, sans pédales, date de 1817 : c'est l'ancêtre du vélo."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Décrire un objet technique",
+      "etapes": [
+        "On répond aux trois questions : à qui, sur quoi, dans quel but",
+        "On écrit sa fonction d'usage en une phrase",
+        "On liste ses fonctions techniques",
+        "On nomme la solution technique de chaque fonction"
+      ]
+    },
+    {
+      "titre": "L'éclairage, du plus ancien au plus récent",
+      "etapes": [
+        "Éclairer avec une lampe à huile",
+        "Éclairer avec une bougie",
+        "Éclairer avec une ampoule à incandescence",
+        "Éclairer avec une lampe fluocompacte",
+        "Éclairer avec une lampe à DEL"
+      ]
+    }
+  ]
+}

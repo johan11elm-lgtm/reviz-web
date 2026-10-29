@@ -1,0 +1,172 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Les problèmes de la ville actuelle",
+      "detail": "Ce qui rend la vie en ville difficile aujourd'hui : circulation, pollution, déchets, étalement et chaleur.",
+      "cartes": [
+        "Des embouteillages aux heures de pointe",
+        "Du bruit et un air pollué dans les rues",
+        "Des déchets toujours plus nombreux",
+        "Des champs recouverts par une ville qui s'étale",
+        "Le béton et le goudron qui emmagasinent la chaleur"
+      ]
+    },
+    {
+      "nom": "Des déplacements plus propres",
+      "detail": "La marche, le vélo, la trottinette et les transports collectifs propres, qui remplacent la voiture.",
+      "cartes": [
+        "Aller au collège à pied",
+        "Rouler à vélo sur une piste cyclable",
+        "Circuler en trottinette dans le quartier",
+        "Prendre le tramway pour traverser la ville",
+        "Voyager dans un bus électrique silencieux"
+      ]
+    },
+    {
+      "nom": "Les énergies renouvelables",
+      "detail": "Des sources d'énergie qui ne s'épuisent pas : Soleil, vent, eau et chaleur du sous-sol.",
+      "cartes": [
+        "Des panneaux solaires installés sur un toit",
+        "Une éolienne qui tourne grâce au vent",
+        "Un barrage qui produit de l'électricité avec l'eau",
+        "De la chaleur puisée dans le sous-sol pour chauffer des immeubles",
+        "Une énergie qui ne s'épuise pas"
+      ]
+    },
+    {
+      "nom": "Végétaliser la ville",
+      "detail": "Planter et créer des espaces verts pour rafraîchir l'air, absorber la pluie et accueillir la nature.",
+      "cartes": [
+        "Un toit couvert de plantes",
+        "Des arbres plantés le long des rues",
+        "Un nouveau parc au cœur du quartier",
+        "Un sol planté qui absorbe l'eau de la pluie",
+        "Des oiseaux et des insectes qui reviennent en ville"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "l'apparition d'îlots de chaleur en ville",
+      "carte": "Le béton et le goudron stockent la chaleur",
+      "role": "cause",
+      "explication": "Les surfaces minérales emmagasinent la chaleur du jour et la restituent la nuit."
+    },
+    {
+      "fait": "l'apparition d'îlots de chaleur en ville",
+      "carte": "Le manque de végétation",
+      "role": "cause",
+      "explication": "Sans arbres ni plantes, rien ne rafraîchit l'air : la ville reste plus chaude que la campagne."
+    },
+    {
+      "fait": "la végétalisation de la ville",
+      "carte": "L'air de la ville est rafraîchi",
+      "role": "consequence",
+      "explication": "Les plantes et les arbres rafraîchissent l'air et luttent contre les îlots de chaleur."
+    },
+    {
+      "fait": "la végétalisation de la ville",
+      "carte": "L'eau de pluie est mieux absorbée",
+      "role": "consequence",
+      "explication": "Un sol planté absorbe l'eau de pluie, contrairement au béton."
+    },
+    {
+      "fait": "la végétalisation de la ville",
+      "carte": "Des plantes et des animaux sont accueillis en ville",
+      "role": "consequence",
+      "explication": "Parcs, toits et murs végétalisés offrent un refuge aux plantes et aux animaux."
+    }
+  ],
+  "etiquettes": [
+    {
+      "consigne": "À quel pilier du développement durable répond le passage en couleur ?",
+      "texte": "Dans l'écoquartier, [des familles aux revenus très différents habitent les mêmes rues].",
+      "choix": ["Pilier environnemental", "Pilier social", "Pilier économique"],
+      "bonne": 1,
+      "explication": "Mêler des habitants aux revenus variés, c'est la mixité sociale : elle réduit les inégalités, donc c'est le pilier social."
+    },
+    {
+      "consigne": "À quel pilier du développement durable répond le passage en couleur ?",
+      "texte": "Pour le nouveau quartier, la mairie [protège les arbres et les oiseaux du parc voisin].",
+      "choix": ["Pilier environnemental", "Pilier social", "Pilier économique"],
+      "bonne": 0,
+      "explication": "Protéger les arbres et les oiseaux, c'est protéger la nature : c'est le pilier environnemental."
+    },
+    {
+      "consigne": "À quel pilier du développement durable répond le passage en couleur ?",
+      "texte": "La construction du tramway [crée des centaines d'emplois] dans la région.",
+      "choix": ["Pilier environnemental", "Pilier social", "Pilier économique"],
+      "bonne": 2,
+      "explication": "Créer des emplois et des richesses, c'est le pilier économique."
+    },
+    {
+      "consigne": "À quel pilier du développement durable répond le passage en couleur ?",
+      "texte": "La mairie veut [réduire les inégalités entre les quartiers de la ville].",
+      "choix": ["Pilier environnemental", "Pilier social", "Pilier économique"],
+      "bonne": 1,
+      "explication": "Réduire les inégalités entre habitants, c'est le pilier social."
+    },
+    {
+      "consigne": "À quel pilier du développement durable répond le passage en couleur ?",
+      "texte": "Grâce aux bus électriques, la ville [réduit la pollution de l'air].",
+      "choix": ["Pilier environnemental", "Pilier social", "Pilier économique"],
+      "bonne": 0,
+      "explication": "Réduire la pollution, c'est protéger l'environnement : c'est le pilier environnemental."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Vauban",
+      "acceptees": ["Vauban", "Le Vauban", "Le quartier Vauban", "Quartier Vauban"],
+      "indices": [
+        "Je suis un morceau de ville pensé pour respecter l'environnement.",
+        "Je suis construit à partir des années 1990, en Allemagne.",
+        "Je me trouve à Fribourg-en-Brisgau, et beaucoup de mes habitants vivent sans voiture."
+      ],
+      "explication": "Le quartier Vauban, à Fribourg-en-Brisgau, est un écoquartier célèbre où beaucoup d'habitants vivent sans voiture."
+    },
+    {
+      "reponse": "Un îlot de chaleur",
+      "acceptees": ["Îlot de chaleur", "Un îlot de chaleur", "Ilot de chaleur", "Un ilot de chaleur", "Îlot de chaleur urbain", "Un îlot de chaleur urbain", "Les îlots de chaleur"],
+      "indices": [
+        "Je suis une zone de la ville.",
+        "En été, je suis plus chaud que la campagne voisine.",
+        "Le béton, le goudron et le manque d'arbres me créent."
+      ],
+      "explication": "Un îlot de chaleur urbain est une zone de la ville plus chaude que la campagne, à cause du béton et du manque de végétation."
+    },
+    {
+      "reponse": "Les mobilités douces",
+      "acceptees": ["Mobilités douces", "Les mobilités douces", "Mobilité douce", "Une mobilité douce", "Transports doux", "Les transports doux", "Déplacements doux", "Les déplacements doux"],
+      "indices": [
+        "Je suis une manière de se déplacer en ville.",
+        "Je n'utilise aucun moteur : seule l'énergie humaine me fait avancer.",
+        "Je comprends la marche, le vélo et la trottinette."
+      ],
+      "explication": "Les mobilités douces sont des déplacements sans moteur : marche, vélo, trottinette."
+    },
+    {
+      "reponse": "Une énergie renouvelable",
+      "acceptees": ["Énergie renouvelable", "Une énergie renouvelable", "Energie renouvelable", "Énergies renouvelables", "Les énergies renouvelables"],
+      "indices": [
+        "Je sers à produire de l'électricité ou de la chaleur.",
+        "Je ne m'épuise pas.",
+        "Le Soleil, le vent, l'eau et la chaleur du sous-sol me fournissent."
+      ],
+      "explication": "Une énergie renouvelable ne s'épuise pas : solaire, éolienne, hydraulique, géothermie."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Comment se forme un îlot de chaleur, puis comment le réduire",
+      "etapes": [
+        "En été, le soleil chauffe le béton et le goudron",
+        "Ces surfaces stockent la chaleur et la restituent la nuit",
+        "La ville reste plus chaude que la campagne voisine",
+        "On plante des arbres et des toits végétalisés pour rafraîchir"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,212 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Multiples de 2",
+      "detail": "Des nombres divisibles par 2 (chiffre des unités pair), mais ni par 3, ni par 5, ni par 7.",
+      "cartes": [
+        "Le nombre 16",
+        "Le nombre 38",
+        "Le nombre 58",
+        "Le nombre 74",
+        "Nombre dont le chiffre des unités est pair"
+      ]
+    },
+    {
+      "nom": "Multiples de 3",
+      "detail": "Des nombres divisibles par 3 (somme des chiffres divisible par 3), mais ni par 2, ni par 5, ni par 7.",
+      "cartes": [
+        "Le nombre 27",
+        "Le nombre 33",
+        "Le nombre 51",
+        "Le nombre 57",
+        "Nombre dont la somme des chiffres est divisible par 3"
+      ]
+    },
+    {
+      "nom": "Multiples de 5",
+      "detail": "Des nombres divisibles par 5 (terminés par 0 ou 5), mais ni par 2, ni par 3, ni par 7.",
+      "cartes": [
+        "Le nombre 25",
+        "Le nombre 55",
+        "Le nombre 65",
+        "Le nombre 95",
+        "Nombre qui se termine par 0 ou par 5"
+      ]
+    },
+    {
+      "nom": "Multiples de 7",
+      "detail": "Des nombres divisibles par 7, mais ni par 2, ni par 3, ni par 5 : 49 = 7 × 7, 77 = 7 × 11, 91 = 7 × 13, 119 = 7 × 17, 133 = 7 × 19.",
+      "cartes": [
+        "Le nombre 49",
+        "Le nombre 77",
+        "Le nombre 91",
+        "Le nombre 119",
+        "Le nombre 133"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Quel est le rôle du nombre en couleur dans cette division ?",
+      "texte": "Division euclidienne de 47 par 6 : 47 = 6 × 7 + [5]",
+      "choix": [
+        "Le nombre divisé (a)",
+        "Le diviseur (b)",
+        "Le quotient (q)",
+        "Le reste (r)"
+      ],
+      "bonne": 3,
+      "explication": "47 = 6 × 7 + 5 : le reste est 5, il est plus petit que 6."
+    },
+    {
+      "consigne": "Quel est le rôle du nombre en couleur dans cette division ?",
+      "texte": "Division euclidienne de 47 par 6 : 47 = 6 × [7] + 5",
+      "choix": [
+        "Le nombre divisé (a)",
+        "Le diviseur (b)",
+        "Le quotient (q)",
+        "Le reste (r)"
+      ],
+      "bonne": 2,
+      "explication": "47 = 6 × 7 + 5 : le quotient est 7, car 6 × 7 = 42 est le plus grand multiple de 6 qui ne dépasse pas 47."
+    },
+    {
+      "consigne": "Quel est le rôle du nombre en couleur dans cette division ?",
+      "texte": "Division euclidienne de 47 par 6 : 47 = [6] × 7 + 5",
+      "choix": [
+        "Le nombre divisé (a)",
+        "Le diviseur (b)",
+        "Le quotient (q)",
+        "Le reste (r)"
+      ],
+      "bonne": 1,
+      "explication": "47 = 6 × 7 + 5 : on divise 47 par 6, le diviseur est donc 6."
+    },
+    {
+      "consigne": "Quel est le rôle du nombre en couleur dans cette division ?",
+      "texte": "Division euclidienne de 47 par 6 : [47] = 6 × 7 + 5",
+      "choix": [
+        "Le nombre divisé (a)",
+        "Le diviseur (b)",
+        "Le quotient (q)",
+        "Le reste (r)"
+      ],
+      "bonne": 0,
+      "explication": "47 = 6 × 7 + 5 : 47 est le nombre que l'on divise."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Nombre premier",
+      "acceptees": [
+        "Un nombre premier",
+        "Premier",
+        "Nombres premiers"
+      ],
+      "indices": [
+        "Je suis un entier.",
+        "J'ai exactement deux diviseurs : 1 et moi-même.",
+        "Il y en a dix inférieurs à 30 : 2, 3, 5, 7, 11, 13, 17, 19, 23 et 29."
+      ],
+      "explication": "Un nombre premier a exactement deux diviseurs distincts : 1 et lui-même."
+    },
+    {
+      "reponse": "Crible d'Ératosthène",
+      "acceptees": [
+        "Le crible d'Ératosthène",
+        "Crible",
+        "Le crible",
+        "Ératosthène",
+        "Eratosthene"
+      ],
+      "indices": [
+        "Je suis une méthode.",
+        "On barre les multiples de 2, de 3, de 5, de 7…",
+        "Les nombres qui restent sans être barrés, sauf 1, sont ceux que je révèle."
+      ],
+      "explication": "Le crible d'Ératosthène barre les multiples de 2, 3, 5, 7… : les nombres non barrés, sauf 1, sont premiers."
+    },
+    {
+      "reponse": "Plus grand diviseur commun",
+      "acceptees": [
+        "Le plus grand diviseur commun",
+        "PGCD",
+        "Le PGCD"
+      ],
+      "indices": [
+        "Je sers à faire le maximum de paquets identiques avec toutes les billes.",
+        "Pour 84 et 126, je vaux 42.",
+        "Je suis le produit des facteurs premiers présents dans les deux décompositions."
+      ],
+      "explication": "Pour 84 et 126, le plus grand diviseur commun est 2 × 3 × 7 = 42."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "Quel est le reste de la division euclidienne de 100 par 7 ?",
+      "reponse": 2,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "100 = 7 × 14 + 2, avec un reste 2 compris entre 0 et 6."
+    },
+    {
+      "question": "Combien y a-t-il de nombres premiers inférieurs à 30 ?",
+      "reponse": 10,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "Ce sont 2, 3, 5, 7, 11, 13, 17, 19, 23 et 29 : 10 nombres."
+    },
+    {
+      "question": "Quel est le plus petit nombre premier supérieur à 90 ?",
+      "reponse": 97,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "91 = 7 × 13, 93 = 3 × 31 et 95 = 5 × 19 ne sont pas premiers, et 92, 94, 96 sont pairs. 97 n'est divisible ni par 2, 3, 5 ni par 7 : il est premier."
+    },
+    {
+      "question": "Avec 84 billes rouges et 126 billes bleues, on fait le plus grand nombre possible de paquets identiques en utilisant toutes les billes. Combien de paquets fait-on ?",
+      "reponse": 42,
+      "unite": "paquets",
+      "tolerance": 0,
+      "explication": "84 = 2² × 3 × 7 et 126 = 2 × 3² × 7. Les facteurs communs donnent 2 × 3 × 7 = 42 paquets de 2 rouges et 3 bleues."
+    },
+    {
+      "question": "Combien le nombre 12 a-t-il de diviseurs ?",
+      "reponse": 6,
+      "unite": "diviseurs",
+      "tolerance": 0,
+      "explication": "Les diviseurs de 12 sont 1, 2, 3, 4, 6 et 12 : il y en a 6."
+    },
+    {
+      "question": "Calcule 2 × 3² × 7.",
+      "reponse": 126,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "On calcule la puissance d'abord : 3² = 9, puis 2 × 9 × 7 = 126."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Comment décomposer un entier en facteurs premiers",
+      "etapes": [
+        "Divise le nombre par 2 tant que c'est possible",
+        "Passe ensuite à 3, puis à 5, 7, 11…",
+        "Arrête-toi quand le quotient vaut 1",
+        "Écris le produit des diviseurs utilisés, avec des puissances",
+        "Vérifie en recalculant le produit"
+      ]
+    },
+    {
+      "titre": "La décomposition de 60 en facteurs premiers",
+      "etapes": [
+        "Divise 60 par 2 : le quotient est 30",
+        "Divise 30 par 2 : le quotient est 15",
+        "Divise 15 par 3 : le quotient est 5",
+        "Divise 5 par 5 : le quotient est 1",
+        "Écris 60 = 2² × 3 × 5"
+      ]
+    }
+  ]
+}

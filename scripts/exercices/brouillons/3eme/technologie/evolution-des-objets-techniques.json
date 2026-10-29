@@ -1,0 +1,214 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Une famille d'objets",
+      "detail": "Des objets qui répondent au même besoin, même s'ils fonctionnent avec des principes techniques différents.",
+      "cartes": [
+        "Le vélo, la voiture et le train",
+        "Télégraphe, téléphone et smartphone : tous servent à communiquer",
+        "Bougie, ampoule et lampe LED, trois objets pour s'éclairer",
+        "Cheminée, radiateur et pompe à chaleur",
+        "Plume, stylo à bille et clavier : même besoin d'écrire"
+      ]
+    },
+    {
+      "nom": "Une lignée d'objets",
+      "detail": "Des objets d'une même famille qui gardent le même principe technique et se succèdent dans le temps.",
+      "cartes": [
+        "Les vélos à pédales et chaîne, de 1900 à aujourd'hui",
+        "Les ampoules à filament chauffé, de 1880 à nos jours",
+        "Les voitures à moteur thermique, de 1900 à aujourd'hui",
+        "Les appareils photo à pellicule, de 1900 aux années 1990",
+        "Les locomotives à vapeur, du XIXe siècle aux années 1960"
+      ]
+    },
+    {
+      "nom": "Un principe technique",
+      "detail": "Le phénomène scientifique qui fait fonctionner un objet.",
+      "cartes": [
+        "La combustion, qui fait avancer un moteur thermique",
+        "L'électromagnétisme, qui fait tourner un moteur électrique",
+        "L'effet photovoltaïque, qui transforme la lumière en électricité",
+        "L'incandescence : un filament chauffé qui émet de la lumière",
+        "La vapeur d'eau sous pression qui pousse un piston"
+      ]
+    },
+    {
+      "nom": "Une rupture technologique",
+      "detail": "Un changement de principe technique, qui ouvre une nouvelle lignée d'objets.",
+      "cartes": [
+        "La bougie remplacée par l'éclairage électrique",
+        "L'ampoule à filament remplacée par la LED",
+        "Le moteur à essence remplacé par le moteur électrique",
+        "La pellicule remplacée par la photo numérique",
+        "Le téléviseur à tube remplacé par l'écran plat"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "l'évolution des objets techniques",
+      "carte": "Des progrès scientifiques, comme l'invention du transistor",
+      "role": "cause",
+      "explication": "Les progrès des sciences permettent de nouvelles solutions techniques."
+    },
+    {
+      "fait": "l'évolution des objets techniques",
+      "carte": "L'arrivée de nouveaux matériaux plus légers ou plus solides",
+      "role": "cause",
+      "explication": "De nouveaux matériaux, comme le carbone, permettent de concevoir autrement les objets."
+    },
+    {
+      "fait": "l'évolution des objets techniques",
+      "carte": "Une loi qui impose de nouvelles règles aux fabricants",
+      "role": "cause",
+      "explication": "La réglementation pousse les fabricants à changer leurs objets."
+    },
+    {
+      "fait": "l'évolution des objets techniques",
+      "carte": "L'apparition de nouveaux métiers",
+      "role": "consequence",
+      "explication": "Les nouveaux objets créent des métiers, et en font disparaître d'autres."
+    },
+    {
+      "fait": "l'évolution des objets techniques",
+      "carte": "Plus de ressources consommées et plus de déchets produits",
+      "role": "consequence",
+      "explication": "Fabriquer et utiliser de nouveaux objets consomme des ressources et produit des déchets."
+    },
+    {
+      "fait": "l'évolution des objets techniques",
+      "carte": "De nouvelles façons de communiquer et de travailler",
+      "role": "consequence",
+      "explication": "Les nouveaux objets, comme le smartphone, changent la manière de vivre et de travailler."
+    }
+  ],
+  "etiquettes": [
+    {
+      "consigne": "Que représente le passage en couleur ?",
+      "texte": "Dans cette ville, les habitants veulent [traverser le centre rapidement sans polluer].",
+      "choix": ["Un besoin", "Un principe technique", "Une solution technique"],
+      "bonne": 0,
+      "explication": "Ce que les utilisateurs cherchent à obtenir est un besoin."
+    },
+    {
+      "consigne": "Que représente le passage en couleur ?",
+      "texte": "Le moteur d'une voiture thermique fonctionne grâce à [la combustion du carburant].",
+      "choix": ["Un besoin", "Un principe technique", "Une solution technique"],
+      "bonne": 1,
+      "explication": "La combustion est le phénomène scientifique qui fait fonctionner le moteur : c'est son principe technique."
+    },
+    {
+      "consigne": "Que représente le passage en couleur ?",
+      "texte": "Pour freiner, ce vélo utilise [un frein à disque].",
+      "choix": ["Un besoin", "Un principe technique", "Une solution technique"],
+      "bonne": 2,
+      "explication": "Le frein à disque est le moyen concret choisi pour réaliser la fonction « freiner » : c'est une solution technique."
+    },
+    {
+      "consigne": "Que représente le passage en couleur ?",
+      "texte": "Léa veut [parler avec son amie qui habite à l'autre bout du monde].",
+      "choix": ["Un besoin", "Un principe technique", "Une solution technique"],
+      "bonne": 0,
+      "explication": "Léa exprime ce qu'elle cherche à faire : c'est un besoin."
+    },
+    {
+      "consigne": "Que représente le passage en couleur ?",
+      "texte": "Un moteur électrique fonctionne grâce à [l'électromagnétisme].",
+      "choix": ["Un besoin", "Un principe technique", "Une solution technique"],
+      "bonne": 1,
+      "explication": "L'électromagnétisme est le phénomène scientifique qui fait tourner le moteur : c'est son principe technique."
+    },
+    {
+      "consigne": "Que représente le passage en couleur ?",
+      "texte": "Pour la fonction « éclairer », l'équipe choisit [une ampoule LED].",
+      "choix": ["Un besoin", "Un principe technique", "Une solution technique"],
+      "bonne": 2,
+      "explication": "L'ampoule LED est le moyen concret retenu pour réaliser la fonction : c'est une solution technique."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Transistor",
+      "acceptees": ["Transistor", "Le transistor", "Un transistor"],
+      "indices": [
+        "Je suis un composant minuscule.",
+        "J'ai été mis au point en 1947 dans les laboratoires Bell.",
+        "Je suis à la base de l'électronique moderne, celle des ordinateurs et des téléphones."
+      ],
+      "explication": "Le transistor, mis au point en 1947 dans les laboratoires Bell, est à la base de l'électronique moderne."
+    },
+    {
+      "reponse": "Tim Berners-Lee",
+      "acceptees": ["Tim Berners-Lee", "Berners-Lee", "Tim Berners Lee", "Berners Lee"],
+      "indices": [
+        "Je suis un scientifique qui travaillait dans un laboratoire de recherche européen.",
+        "Mon laboratoire s'appelle le CERN.",
+        "En 1989, j'y ai proposé le Web."
+      ],
+      "explication": "Tim Berners-Lee a proposé le Web au CERN en 1989."
+    },
+    {
+      "reponse": "Lignée",
+      "acceptees": ["Lignée", "Une lignée", "La lignée", "Lignée d'objets", "Lignée d'objets techniques"],
+      "indices": [
+        "Je suis un ensemble d'objets d'une même famille.",
+        "Les objets que je regroupe se succèdent dans le temps.",
+        "Ils gardent tous le même principe technique."
+      ],
+      "explication": "Une lignée regroupe des objets d'une même famille qui utilisent le même principe technique."
+    },
+    {
+      "reponse": "Rupture technologique",
+      "acceptees": ["Rupture technologique", "Une rupture technologique", "La rupture technologique", "Rupture"],
+      "indices": [
+        "Je suis un événement dans l'histoire des techniques.",
+        "Je change le principe technique d'un objet.",
+        "Je crée une nouvelle lignée d'objets, comme la LED qui remplace l'ampoule à filament."
+      ],
+      "explication": "Une rupture technologique est un changement de principe technique qui crée une nouvelle lignée."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "Combien d'années séparent la mise au point du transistor de la proposition du Web par Tim Berners-Lee ?",
+      "reponse": 42,
+      "unite": "ans",
+      "tolerance": 0,
+      "explication": "Transistor en 1947, Web en 1989 : 1989 − 1947 = 42 ans."
+    },
+    {
+      "question": "Combien d'années séparent le téléphone de Bell de la sortie du premier iPhone ?",
+      "reponse": 131,
+      "unite": "ans",
+      "tolerance": 0,
+      "explication": "Téléphone de Bell en 1876, iPhone en 2007 : 2007 − 1876 = 131 ans."
+    },
+    {
+      "question": "Combien d'années séparent la proposition du Web de la sortie du premier iPhone ?",
+      "reponse": 18,
+      "unite": "ans",
+      "tolerance": 0,
+      "explication": "Web en 1989, iPhone en 2007 : 2007 − 1989 = 18 ans."
+    },
+    {
+      "question": "Combien d'années séparent la mise au point du transistor de la sortie du premier iPhone ?",
+      "reponse": 60,
+      "unite": "ans",
+      "tolerance": 0,
+      "explication": "Transistor en 1947, iPhone en 2007 : 2007 − 1947 = 60 ans."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Dans l'ordre d'apparition",
+      "etapes": [
+        "Le premier téléphone de Bell",
+        "Le transistor, base de l'électronique",
+        "Le Web proposé au CERN",
+        "Le premier iPhone d'Apple"
+      ]
+    }
+  ]
+}

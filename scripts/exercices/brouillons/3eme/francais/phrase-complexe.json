@@ -1,0 +1,148 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "La subordonnée relative",
+      "detail": "Elle commence par un pronom relatif (qui, que, dont, où) et complète un antécédent.",
+      "cartes": [
+        "L'élève qui parle est mon voisin",
+        "Le livre que je lis est passionnant",
+        "Le chien dont tu parles est perdu",
+        "La maison où j'ai grandi a été vendue",
+        "Je cherche le stylo que tu m'as prêté"
+      ]
+    },
+    {
+      "nom": "La subordonnée complétive",
+      "detail": "Elle commence par la conjonction « que », sans antécédent, et complète le verbe principal (souvent COD).",
+      "cartes": [
+        "Je crois que tu as raison",
+        "Je sais que tu mens",
+        "Elle pense que le train est en retard",
+        "Il affirme qu'il n'a rien vu",
+        "Nous espérons que tu viendras demain"
+      ]
+    },
+    {
+      "nom": "La subordonnée circonstancielle",
+      "detail": "Elle commence par une conjonction (parce que, pour que, bien que, dès que, quand…) et exprime une circonstance : cause, but, opposition, temps.",
+      "cartes": [
+        "Je reste parce qu'il pleut",
+        "Il travaille pour que sa mère soit fière",
+        "Bien qu'il soit tard, je travaille",
+        "Dès que la cloche sonne, nous sortons",
+        "Elle sourit quand elle voit son chien"
+      ]
+    },
+    {
+      "nom": "L'interrogative indirecte",
+      "detail": "Elle rapporte une question, après un verbe comme demander, savoir ou ignorer, avec « si » ou un mot interrogatif et sans point d'interrogation.",
+      "cartes": [
+        "Je me demande s'il viendra",
+        "Elle ignore pourquoi il est parti",
+        "Dis-moi comment tu as fait",
+        "Le garde lui demanda s'il avait un billet",
+        "Nous ne savons pas qui a gagné"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Quelle est la nature du mot en couleur ?",
+      "texte": "Il est fatigué [car] il a couru.",
+      "choix": ["Conjonction de coordination", "Conjonction de subordination", "Pronom relatif"],
+      "bonne": 0,
+      "explication": "« Car » fait partie de la liste mais, ou, et, donc, or, ni, car : c'est une conjonction de coordination."
+    },
+    {
+      "consigne": "Quelle est la nature du mot en couleur ?",
+      "texte": "Je reste [parce qu']il pleut.",
+      "choix": ["Conjonction de coordination", "Conjonction de subordination", "Pronom relatif"],
+      "bonne": 1,
+      "explication": "« Parce que » introduit une subordonnée circonstancielle de cause : c'est une conjonction de subordination."
+    },
+    {
+      "consigne": "Quelle est la nature du mot en couleur ?",
+      "texte": "Le livre [que] je lis est passionnant.",
+      "choix": ["Conjonction de coordination", "Conjonction de subordination", "Pronom relatif"],
+      "bonne": 2,
+      "explication": "« Que » reprend l'antécédent « livre » et il est COD de « lis » : c'est un pronom relatif."
+    },
+    {
+      "consigne": "Quelle est la nature du mot en couleur ?",
+      "texte": "Je crois [que] tu as raison.",
+      "choix": ["Conjonction de coordination", "Conjonction de subordination", "Pronom relatif"],
+      "bonne": 1,
+      "explication": "Ici « que » n'a pas d'antécédent : c'est une conjonction de subordination, qui introduit une complétive."
+    },
+    {
+      "consigne": "Quelle est la nature du mot en couleur ?",
+      "texte": "Il pleut, [donc] je reste à la maison.",
+      "choix": ["Conjonction de coordination", "Conjonction de subordination", "Pronom relatif"],
+      "bonne": 0,
+      "explication": "« Donc » fait partie de la liste mais, ou, et, donc, or, ni, car : c'est une conjonction de coordination."
+    },
+    {
+      "consigne": "Quelle est la nature du mot en couleur ?",
+      "texte": "La maison [où] j'ai grandi a été vendue.",
+      "choix": ["Conjonction de coordination", "Conjonction de subordination", "Pronom relatif"],
+      "bonne": 2,
+      "explication": "« Où » reprend l'antécédent « maison » : c'est un pronom relatif, complément de lieu."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Antécédent",
+      "acceptees": ["L'antécédent", "Un antécédent"],
+      "indices": [
+        "Je suis un nom ou un pronom.",
+        "Un pronom relatif me reprend.",
+        "Dans « le livre que je lis », c'est « livre » qui me représente."
+      ],
+      "explication": "L'antécédent est le nom ou le pronom que reprend le pronom relatif."
+    },
+    {
+      "reponse": "Juxtaposition",
+      "acceptees": ["La juxtaposition", "Juxtaposées", "Propositions juxtaposées"],
+      "indices": [
+        "Je relie des propositions.",
+        "Je n'utilise aucun mot de liaison.",
+        "La ponctuation seule me suffit : virgule, point-virgule ou deux-points."
+      ],
+      "explication": "Des propositions juxtaposées sont reliées seulement par un signe de ponctuation : « Il pleut, je reste. »"
+    },
+    {
+      "reponse": "Complétive",
+      "acceptees": ["La complétive", "Une complétive", "Subordonnée complétive", "Conjonctive complétive"],
+      "indices": [
+        "Je suis une proposition subordonnée.",
+        "Je commence par « que » et je n'ai pas d'antécédent.",
+        "Je suis souvent COD du verbe principal, comme dans « Je crois que tu as raison »."
+      ],
+      "explication": "La complétive commence par la conjonction « que » et complète le verbe principal, souvent comme COD."
+    },
+    {
+      "reponse": "Proposition principale",
+      "acceptees": ["La proposition principale", "Principale", "La principale", "Une principale"],
+      "indices": [
+        "Je suis un groupe de mots organisé autour d'un verbe conjugué.",
+        "Une subordonnée dépend de moi.",
+        "Dans « Je crois que tu as raison », je suis « Je crois »."
+      ],
+      "explication": "La proposition principale est celle dont dépend la subordonnée : « Je crois » dans « Je crois que tu as raison »."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Les étapes pour analyser une phrase complexe",
+      "etapes": [
+        "On souligne les verbes conjugués et on les compte",
+        "On délimite chaque proposition avec des crochets",
+        "On cherche ce qui relie les propositions",
+        "On donne la sorte de chaque subordonnée"
+      ]
+    }
+  ]
+}

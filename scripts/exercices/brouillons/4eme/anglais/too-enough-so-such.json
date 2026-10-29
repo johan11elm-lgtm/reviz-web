@@ -1,0 +1,138 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Un excès (trop)",
+      "detail": "Too, too much et too many disent qu'il y en a trop ou que c'est trop.",
+      "cartes": [
+        "This skirt is too short",
+        "We have too much homework",
+        "There are too many rules at my school",
+        "I'm too tired to go out",
+        "These shoes are too expensive for me"
+      ]
+    },
+    {
+      "nom": "Une suffisance (assez)",
+      "detail": "Enough dit que c'est assez ; il se place après l'adjectif et avant le nom.",
+      "cartes": [
+        "She's old enough to come with us",
+        "The classroom is big enough for thirty students",
+        "There are enough chairs for the whole class",
+        "He is strong enough to carry the bag",
+        "The park is close enough to walk"
+      ]
+    },
+    {
+      "nom": "Une insuffisance (pas assez)",
+      "detail": "Not … enough dit que ce n'est pas assez ; enough garde sa place habituelle.",
+      "cartes": [
+        "This coat isn't warm enough",
+        "We haven't got enough time",
+        "There isn't enough space in my bag",
+        "My brother isn't tall enough to reach the shelf",
+        "I don't have enough money for a new tie"
+      ]
+    },
+    {
+      "nom": "Une intensité (si, tellement)",
+      "detail": "So et such renforcent une description : so devant un adjectif seul, such devant un groupe nominal.",
+      "cartes": [
+        "The uniform is so smart",
+        "It's such a nice tie",
+        "They are such good friends",
+        "My cousin is so funny",
+        "We had such bad weather on our trip"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Que dit le groupe en couleur ?",
+      "texte": "These trousers are [too long].",
+      "choix": ["Trop", "Assez", "Pas assez", "Si, tellement"],
+      "bonne": 0,
+      "explication": "Too + adjectif veut dire « trop » : c'est un excès."
+    },
+    {
+      "consigne": "Que dit le groupe en couleur ?",
+      "texte": "She is [old enough] to go to school alone.",
+      "choix": ["Trop", "Assez", "Pas assez", "Si, tellement"],
+      "bonne": 1,
+      "explication": "Adjectif + enough veut dire « assez » : elle a l'âge qu'il faut."
+    },
+    {
+      "consigne": "Que dit le groupe en couleur ?",
+      "texte": "This coat [isn't warm enough].",
+      "choix": ["Trop", "Assez", "Pas assez", "Si, tellement"],
+      "bonne": 2,
+      "explication": "La forme négative avec enough veut dire « pas assez » : le manteau ne tient pas assez chaud."
+    },
+    {
+      "consigne": "Que dit le groupe en couleur ?",
+      "texte": "The uniform is [so smart]!",
+      "choix": ["Trop", "Assez", "Pas assez", "Si, tellement"],
+      "bonne": 3,
+      "explication": "So + adjectif veut dire « si, tellement » : il renforce la description."
+    },
+    {
+      "consigne": "Que dit le groupe en couleur ?",
+      "texte": "We have [too many rules].",
+      "choix": ["Trop", "Assez", "Pas assez", "Si, tellement"],
+      "bonne": 0,
+      "explication": "Too many + nom pluriel veut dire « trop de » : c'est un excès."
+    },
+    {
+      "consigne": "Que dit le groupe en couleur ?",
+      "texte": "It's [such a nice tie]!",
+      "choix": ["Trop", "Assez", "Pas assez", "Si, tellement"],
+      "bonne": 3,
+      "explication": "Such a + adjectif + nom veut dire « si, tellement » : il renforce la description."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Enough",
+      "acceptees": [],
+      "indices": [
+        "Je suis un petit mot de l'anglais qui parle de quantité ou de degré.",
+        "Je me place après l'adjectif mais avant le nom.",
+        "Je veux dire « assez »."
+      ],
+      "explication": "Enough veut dire « assez » : big enough, mais enough money."
+    },
+    {
+      "reponse": "Too much",
+      "acceptees": [],
+      "indices": [
+        "Je me place devant un nom.",
+        "Je ne m'emploie qu'avec un nom indénombrable, comme homework ou noise.",
+        "Je veux dire « trop de »."
+      ],
+      "explication": "Too much se met devant un nom indénombrable : too much homework. Avec un pluriel, on dit too many."
+    },
+    {
+      "reponse": "Such",
+      "acceptees": [],
+      "indices": [
+        "Je suis un petit mot de l'anglais qui renforce une description.",
+        "Je m'emploie devant un groupe nominal, pas devant un adjectif seul.",
+        "Je me traduis par « si » ou « tellement » et je me place avant a : « It's … a nice tie »."
+      ],
+      "explication": "Such s'emploie devant un groupe nominal : such a nice tie, such good friends. Devant un adjectif seul, on dit so."
+    },
+    {
+      "reponse": "Blazer",
+      "acceptees": ["A blazer", "Jacket"],
+      "indices": [
+        "Je suis un vêtement.",
+        "On me porte dans beaucoup d'écoles britanniques, avec une cravate.",
+        "Je suis la veste de l'uniforme, souvent ornée d'un écusson."
+      ],
+      "explication": "Le blazer est la veste de l'uniforme scolaire britannique, souvent avec un écusson (school badge)."
+    }
+  ],
+  "calculs": [],
+  "etapes": []
+}

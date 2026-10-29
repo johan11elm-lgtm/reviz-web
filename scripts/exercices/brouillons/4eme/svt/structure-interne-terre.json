@@ -1,0 +1,183 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "La croûte",
+      "detail": "L'enveloppe superficielle de la Terre, continentale (granite, 30 km) ou océanique (basalte, 7 km).",
+      "cartes": [
+        "Roches de type granite sous les continents",
+        "Épaisse d'environ 7 km sous les océans",
+        "Peut atteindre 70 km d'épaisseur sous les montagnes",
+        "Enveloppe la plus superficielle de la Terre",
+        "Trop fine pour être dessinée sur un modèle à l'échelle"
+      ]
+    },
+    {
+      "nom": "Le manteau",
+      "detail": "L'enveloppe solide en péridotite, du Moho jusqu'à 2 900 km de profondeur.",
+      "cartes": [
+        "Formé surtout de péridotite",
+        "Contient l'asthénosphère, plus chaude et plus déformable",
+        "S'étend du Moho jusqu'à 2 900 km de profondeur",
+        "Sa partie haute forme la lithosphère avec la croûte",
+        "Siège de mouvements très lents dus à la chaleur interne"
+      ]
+    },
+    {
+      "nom": "Le noyau externe",
+      "detail": "La seule enveloppe liquide du globe, de 2 900 à 5 150 km de profondeur.",
+      "cartes": [
+        "Seule enveloppe liquide du globe",
+        "Les ondes S ne parviennent pas à le traverser",
+        "S'étend de 2 900 à 5 150 km de profondeur",
+        "Première couche rencontrée sous le manteau",
+        "Entoure la graine, au centre de la Terre"
+      ]
+    },
+    {
+      "nom": "Le noyau interne",
+      "detail": "La graine solide qui occupe le centre du globe, à partir de 5 150 km de profondeur.",
+      "cartes": [
+        "Appelé aussi la graine",
+        "Existence démontrée par Inge Lehmann en 1936",
+        "Commence à 5 150 km de profondeur",
+        "Son rayon mesure environ 1 220 km",
+        "Seule enveloppe du noyau à l'état solide"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Quel est l'état physique de l'enveloppe en couleur ?",
+      "texte": "À 1 500 km de profondeur, on traverse [le manteau].",
+      "choix": ["Solide", "Liquide", "Gazeux"],
+      "bonne": 0,
+      "explication": "Le manteau est solide : il se déforme très lentement mais il n'est pas liquide."
+    },
+    {
+      "consigne": "Quel est l'état physique de l'enveloppe en couleur ?",
+      "texte": "À 4 000 km de profondeur, on traverse [le noyau externe].",
+      "choix": ["Solide", "Liquide", "Gazeux"],
+      "bonne": 1,
+      "explication": "Le noyau externe, entre 2 900 et 5 150 km de profondeur, est la seule enveloppe liquide."
+    },
+    {
+      "consigne": "Quel est l'état physique de l'enveloppe en couleur ?",
+      "texte": "Tout au centre de la Terre se trouve [la graine].",
+      "choix": ["Solide", "Liquide", "Gazeux"],
+      "bonne": 0,
+      "explication": "La graine, ou noyau interne, est solide."
+    },
+    {
+      "consigne": "Quel est l'état physique de l'enveloppe en couleur ?",
+      "texte": "Sous la lithosphère, [l'asthénosphère] est plus chaude et plus déformable.",
+      "choix": ["Solide", "Liquide", "Gazeux"],
+      "bonne": 0,
+      "explication": "L'asthénosphère fait partie du manteau : elle est plus déformable, mais elle reste solide."
+    },
+    {
+      "consigne": "Quel est l'état physique de l'enveloppe en couleur ?",
+      "texte": "Sous l'océan, [la croûte océanique] forme une pellicule d'environ 7 km.",
+      "choix": ["Solide", "Liquide", "Gazeux"],
+      "bonne": 0,
+      "explication": "La croûte est solide, qu'elle soit continentale ou océanique."
+    },
+    {
+      "consigne": "Quel est l'état physique de l'enveloppe en couleur ?",
+      "texte": "Les ondes S ne traversent pas [le noyau externe].",
+      "choix": ["Solide", "Liquide", "Gazeux"],
+      "bonne": 1,
+      "explication": "Les ondes S ne traversent pas les liquides : leur blocage montre que le noyau externe est liquide."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Moho",
+      "acceptees": ["Le Moho", "Mohorovicic", "Discontinuité de Mohorovičić"],
+      "indices": [
+        "Je suis une limite, pas une enveloppe.",
+        "Les ondes sismiques changent de vitesse quand elles me traversent.",
+        "Je sépare la croûte du manteau, et on m'a découvert en 1909."
+      ],
+      "explication": "Le Moho est la limite entre la croûte et le manteau, découverte en 1909 par Mohorovičić."
+    },
+    {
+      "reponse": "Lithosphère",
+      "acceptees": ["La lithosphère"],
+      "indices": [
+        "Je suis une enveloppe rigide.",
+        "Je suis épaisse d'environ 100 km et découpée en plaques.",
+        "Je regroupe la croûte et la partie supérieure du manteau."
+      ],
+      "explication": "La lithosphère est l'enveloppe rigide formée de la croûte et du haut du manteau, découpée en plaques."
+    },
+    {
+      "reponse": "Ondes S",
+      "acceptees": ["Onde S", "Les ondes S", "Ondes secondaires"],
+      "indices": [
+        "Je suis produite par un séisme et je traverse l'intérieur de la Terre.",
+        "Je ne traverse pas les liquides.",
+        "On ne me détecte plus au-delà d'une certaine distance du séisme : c'est la preuve que le noyau externe est liquide."
+      ],
+      "explication": "Les ondes S ne traversent pas les liquides : leur absence montre que le noyau externe est liquide."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "Un modèle de la Terre est à l'échelle de 1 cm pour 500 km. Le rayon de la Terre mesure 6 370 km. Quelle longueur, en cm, le représente sur le modèle ? Arrondis au dixième.",
+      "reponse": 12.7,
+      "unite": "cm",
+      "tolerance": 0,
+      "explication": "6 370 ÷ 500 = 12,74, soit environ 12,7 cm."
+    },
+    {
+      "question": "Le noyau externe s'étend de 2 900 km à 5 150 km de profondeur. Quelle est son épaisseur, en km ?",
+      "reponse": 2250,
+      "unite": "km",
+      "tolerance": 0,
+      "explication": "5 150 − 2 900 = 2 250 km."
+    },
+    {
+      "question": "La graine commence à 5 150 km de profondeur et le rayon de la Terre est de 6 370 km. Quel est le rayon de la graine, en km ?",
+      "reponse": 1220,
+      "unite": "km",
+      "tolerance": 0,
+      "explication": "Le rayon de la graine est la distance entre sa limite et le centre : 6 370 − 5 150 = 1 220 km."
+    },
+    {
+      "question": "Dans la croûte continentale, la température augmente d'environ 3 °C tous les 100 m. De combien de degrés augmente-t-elle entre la surface et 1 500 m de profondeur ?",
+      "reponse": 45,
+      "unite": "°C",
+      "tolerance": 0,
+      "explication": "1 500 m contiennent 15 fois 100 m, donc 15 × 3 = 45 °C de plus qu'en surface."
+    },
+    {
+      "question": "À l'échelle de 1 cm pour 500 km, quelle longueur, en cm, représente le rayon du noyau, qui mesure 3 470 km ? Arrondis au dixième.",
+      "reponse": 6.9,
+      "unite": "cm",
+      "tolerance": 0,
+      "explication": "3 470 ÷ 500 = 6,94, soit environ 6,9 cm."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Construire un modèle à l'échelle du globe",
+      "etapes": [
+        "Choisir une échelle adaptée à la feuille",
+        "Calculer le rayon de chaque limite sur le modèle",
+        "Tracer au compas des cercles de même centre",
+        "Légender chaque enveloppe avec son état, solide ou liquide"
+      ]
+    },
+    {
+      "titre": "Les enveloppes de la surface vers le centre",
+      "etapes": [
+        "La croûte, fine pellicule en surface",
+        "Le manteau, épais et solide",
+        "Le noyau externe, liquide",
+        "Le noyau interne, solide"
+      ]
+    }
+  ]
+}

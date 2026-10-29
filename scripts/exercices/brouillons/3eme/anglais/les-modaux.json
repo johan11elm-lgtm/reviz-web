@@ -1,0 +1,138 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Une capacité",
+      "detail": "Can au présent, could au passé et will be able to au futur disent ce que l'on sait ou peut faire.",
+      "cartes": [
+        "My sister can swim 400 metres",
+        "I could read when I was five",
+        "One day, I will be able to play the piano",
+        "My grandmother can speak three languages",
+        "Penguins can swim but they can't fly"
+      ]
+    },
+    {
+      "nom": "Une obligation",
+      "detail": "Must et have to disent ce qu'il faut faire ; au passé, must est remplacé par had to.",
+      "cartes": [
+        "Pupils have to wear a tie",
+        "Last year, we had to wear a uniform",
+        "You must finish your homework tonight",
+        "She has to get up at six every day",
+        "I must hand in my project on Friday"
+      ]
+    },
+    {
+      "nom": "Un conseil",
+      "detail": "Should + base verbale recommande quelque chose, sans l'imposer.",
+      "cartes": [
+        "You should revise every day",
+        "You should drink more water",
+        "He should see a doctor about his cough",
+        "I think you should talk to your teacher",
+        "You should go to bed earlier"
+      ]
+    },
+    {
+      "nom": "Une possibilité",
+      "detail": "May et might disent que quelque chose est possible, sans en être certain : peut-être.",
+      "cartes": [
+        "It might rain later",
+        "She may be late for school",
+        "We might go to the cinema tonight",
+        "My brother might forget his keys",
+        "They may win the match"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Que dit le modal en couleur ?",
+      "texte": "[May] I come in?",
+      "choix": ["Une permission", "Une obligation", "Une interdiction", "Une absence d'obligation"],
+      "bonne": 0,
+      "explication": "May I…? demande poliment la permission."
+    },
+    {
+      "consigne": "Que dit le modal en couleur ?",
+      "texte": "Pupils [have to] wear a tie.",
+      "choix": ["Une permission", "Une obligation", "Une interdiction", "Une absence d'obligation"],
+      "bonne": 1,
+      "explication": "Have to exprime une obligation : les élèves sont obligés de porter une cravate."
+    },
+    {
+      "consigne": "Que dit le modal en couleur ?",
+      "texte": "You [mustn't] use your phone in class.",
+      "choix": ["Une permission", "Une obligation", "Une interdiction", "Une absence d'obligation"],
+      "bonne": 2,
+      "explication": "Mustn't exprime une interdiction : c'est défendu."
+    },
+    {
+      "consigne": "Que dit le modal en couleur ?",
+      "texte": "You [don't have to] come on Saturday.",
+      "choix": ["Une permission", "Une obligation", "Une interdiction", "Une absence d'obligation"],
+      "bonne": 3,
+      "explication": "Don't have to signifie « tu n'es pas obligé » : ce n'est pas nécessaire, mais ce n'est pas interdit."
+    },
+    {
+      "consigne": "Que dit le modal en couleur ?",
+      "texte": "We [are not allowed to] run in the corridors.",
+      "choix": ["Une permission", "Une obligation", "Une interdiction", "Une absence d'obligation"],
+      "bonne": 2,
+      "explication": "Be not allowed to signifie « ne pas avoir le droit de » : c'est une interdiction."
+    },
+    {
+      "consigne": "Que dit le modal en couleur ?",
+      "texte": "Last week, we [had to] stay at school until six.",
+      "choix": ["Une permission", "Une obligation", "Une interdiction", "Une absence d'obligation"],
+      "bonne": 1,
+      "explication": "Had to est le passé de must et de have to : une obligation dans le passé."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Mustn't",
+      "acceptees": ["Must not", "Mustnt"],
+      "indices": [
+        "Je suis un modal à la forme négative.",
+        "Je dis qu'une action est interdite.",
+        "Les francophones me confondent avec don't have to."
+      ],
+      "explication": "Mustn't exprime l'interdiction ; don't have to veut seulement dire « tu n'es pas obligé »."
+    },
+    {
+      "reponse": "Pledge of Allegiance",
+      "acceptees": ["The Pledge of Allegiance", "Pledge", "Serment au drapeau"],
+      "indices": [
+        "Je viens des États-Unis.",
+        "Je suis un serment au drapeau.",
+        "Les élèves américains me prononcent souvent en début de journée."
+      ],
+      "explication": "Aux États-Unis, les élèves prononcent souvent le Pledge of Allegiance, serment au drapeau, en début de journée."
+    },
+    {
+      "reponse": "Should",
+      "acceptees": [],
+      "indices": [
+        "Je suis un modal.",
+        "Je suis moins fort que must.",
+        "Je sers à donner un conseil."
+      ],
+      "explication": "Should + base verbale donne un conseil : You should revise every day."
+    },
+    {
+      "reponse": "Had to",
+      "acceptees": [],
+      "indices": [
+        "Je suis une forme du passé.",
+        "J'exprime une obligation.",
+        "Je remplace must, qui n'a pas de passé."
+      ],
+      "explication": "Must n'a pas de passé : « nous devions porter un uniforme » se dit We had to wear a uniform."
+    }
+  ],
+  "calculs": [],
+  "etapes": []
+}

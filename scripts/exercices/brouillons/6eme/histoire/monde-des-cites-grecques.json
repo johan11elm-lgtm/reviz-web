@@ -1,0 +1,115 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Cités, colonies et guerres médiques",
+      "detail": "Le monde grec : des petits États rivaux, des colonies lointaines et la lutte contre les Perses.",
+      "cartes": [
+        "Une ville et le territoire agricole qui l'entoure",
+        "Des rivalités, parfois des guerres, entre voisines",
+        "Des colonies fondées sur les rivages de la Méditerranée",
+        "Marseille, fondée vers 600 av. J.-C. par des Phocéens",
+        "Marathon, en 490 av. J.-C., face aux Perses"
+      ]
+    },
+    {
+      "nom": "Mythologie et poèmes d'Homère",
+      "detail": "Les dieux, les récits fabuleux et les grands poèmes que tous les Grecs connaissent.",
+      "cartes": [
+        "Zeus, le roi des dieux de l'Olympe",
+        "Poséidon, le dieu de la mer",
+        "Un récit fabuleux qui explique le monde et les origines",
+        "L'Iliade, qui raconte la guerre de Troie",
+        "L'Odyssée, le long retour d'Ulysse à Ithaque"
+      ]
+    },
+    {
+      "nom": "Langue, sanctuaires et Jeux",
+      "detail": "Ce qui rassemble les Grecs malgré leurs cités séparées : parler pareil et se retrouver aux mêmes endroits.",
+      "cartes": [
+        "Une même langue et un même alphabet",
+        "Delphes et son oracle",
+        "Des Jeux tous les quatre ans à Olympie",
+        "Les premiers Jeux en 776 av. J.-C., selon la tradition",
+        "Une trêve sacrée qui protège les voyageurs"
+      ]
+    },
+    {
+      "nom": "La démocratie athénienne",
+      "detail": "Les institutions d'Athènes, où les citoyens décident, et ceux qui en sont exclus.",
+      "cartes": [
+        "Clisthène réforme Athènes vers 508 av. J.-C.",
+        "L'assemblée des citoyens, réunie sur la colline de la Pnyx",
+        "500 citoyens tirés au sort pour préparer les lois",
+        "Un citoyen jugé dangereux peut être exilé",
+        "Les femmes, les métèques et les esclaves ne sont pas citoyens"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [],
+  "devinettes": [
+    {
+      "reponse": "Clisthène",
+      "acceptees": ["Clisthène", "Clisthene"],
+      "indices": [
+        "Je suis un homme politique athénien.",
+        "Je réforme Athènes vers 508 av. J.-C.",
+        "C'est moi qui mets en place la démocratie."
+      ],
+      "explication": "Clisthène met en place la démocratie à Athènes vers 508 av. J.-C."
+    },
+    {
+      "reponse": "Périclès",
+      "acceptees": ["Périclès", "Pericles"],
+      "indices": [
+        "Je suis un homme politique athénien.",
+        "Je suis célèbre au Ve siècle av. J.-C.",
+        "Sous mon influence, la démocratie athénienne atteint son apogée."
+      ],
+      "explication": "Périclès est l'homme politique célèbre du Ve siècle av. J.-C., à l'apogée de la démocratie athénienne."
+    },
+    {
+      "reponse": "Ecclésia",
+      "acceptees": ["Ecclésia", "L'Ecclésia", "Ecclesia", "Ekklesia"],
+      "indices": [
+        "Je suis une assemblée.",
+        "Je me réunis sur la colline de la Pnyx.",
+        "Les citoyens athéniens y votent les lois et décident de la guerre et de la paix."
+      ],
+      "explication": "L'Ecclésia, réunie sur la Pnyx, vote les lois et décide de la guerre et de la paix."
+    },
+    {
+      "reponse": "Zeus",
+      "acceptees": ["Zeus"],
+      "indices": [
+        "Je suis un dieu grec.",
+        "Je suis le roi des dieux et je règne sur l'Olympe.",
+        "Les Jeux olympiques ont lieu à Olympie en mon honneur."
+      ],
+      "explication": "Zeus règne sur les dieux de l'Olympe ; les Jeux olympiques se déroulent à Olympie en son honneur."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Des premiers Jeux à la bataille de Salamine",
+      "etapes": [
+        "Les premiers Jeux olympiques, selon la tradition",
+        "La fondation de Marseille par des Phocéens",
+        "Clisthène met en place la démocratie à Athènes",
+        "La bataille de Marathon contre les Perses",
+        "La bataille de Salamine contre les Perses"
+      ]
+    },
+    {
+      "titre": "Décrire la démocratie athénienne",
+      "etapes": [
+        "Dire qui participe et qui est exclu",
+        "Expliquer l'organisation : l'Ecclésia et la Boulè",
+        "Dire ce que décide chaque institution",
+        "Conclure : les citoyens ont le pouvoir, mais ils sont une minorité"
+      ]
+    }
+  ]
+}

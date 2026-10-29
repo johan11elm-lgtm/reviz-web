@@ -1,0 +1,208 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Fournit de l'énergie électrique",
+      "detail": "Des objets dont l'énergie utile en sortie est de l'électricité.",
+      "cartes": [
+        "Un panneau photovoltaïque posé sur un toit",
+        "Une éolienne qui fournit du courant à un village",
+        "Une pile glissée dans une télécommande",
+        "Un moulin à eau qui produit du courant avec un générateur",
+        "Les cellules solaires d'une calculatrice de poche"
+      ]
+    },
+    {
+      "nom": "Fournit de l'énergie mécanique",
+      "detail": "Des objets dont l'énergie utile en sortie est un mouvement.",
+      "cartes": [
+        "Le moteur d'un ventilateur",
+        "Une perceuse dont la mèche tourne",
+        "Un volet roulant qui descend tout seul",
+        "Une voiture télécommandée qui roule",
+        "Un batteur de cuisine dont les fouets tournent"
+      ]
+    },
+    {
+      "nom": "Fournit de l'énergie lumineuse",
+      "detail": "Des objets dont l'énergie utile en sortie est de la lumière.",
+      "cartes": [
+        "Une lampe de poche qui éclaire un couloir",
+        "Le phare avant d'une voiture",
+        "Le projecteur d'un terrain de sport",
+        "Le plafonnier d'une salle de classe",
+        "L'écran allumé d'une tablette"
+      ]
+    },
+    {
+      "nom": "Fournit de l'énergie thermique",
+      "detail": "Des objets dont l'énergie utile en sortie est de la chaleur.",
+      "cartes": [
+        "Un radiateur dans une chambre",
+        "Une bouilloire qui chauffe l'eau",
+        "Un grille-pain qui dore les tartines",
+        "Une plaque de cuisson allumée",
+        "Un fer à repasser branché"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "la limitation de l'usage des énergies fossiles",
+      "carte": "Leurs réserves sont limitées et ne se renouvellent pas vite",
+      "role": "cause",
+      "explication": "Le pétrole, le gaz et le charbon sont des sources non renouvelables : elles sont limitées."
+    },
+    {
+      "fait": "la limitation de l'usage des énergies fossiles",
+      "carte": "Leur combustion rejette du dioxyde de carbone",
+      "role": "cause",
+      "explication": "Brûler du pétrole, du gaz ou du charbon rejette du CO₂, qui contribue au réchauffement climatique."
+    },
+    {
+      "fait": "le branchement d'un moteur électrique",
+      "carte": "Il se met à tourner",
+      "role": "consequence",
+      "explication": "Le moteur convertit l'énergie électrique reçue en énergie mécanique : un mouvement."
+    },
+    {
+      "fait": "le branchement d'un moteur électrique",
+      "carte": "Il chauffe un peu : de l'énergie est perdue en chaleur",
+      "role": "consequence",
+      "explication": "Une conversion n'est jamais parfaite : une partie de l'énergie est toujours perdue sous forme de chaleur."
+    }
+  ],
+  "etiquettes": [
+    {
+      "consigne": "Que désigne le passage en couleur ?",
+      "texte": "Sur le toit, des panneaux captent [le soleil] pour fournir de l'énergie à la maison.",
+      "choix": ["Source renouvelable", "Source non renouvelable", "Forme d'énergie", "Convertisseur d'énergie"],
+      "bonne": 0,
+      "explication": "Le soleil est une source d'énergie qui se renouvelle sans cesse : une source renouvelable."
+    },
+    {
+      "consigne": "Que désigne le passage en couleur ?",
+      "texte": "Cette centrale produit de l'électricité en brûlant [du charbon].",
+      "choix": ["Source renouvelable", "Source non renouvelable", "Forme d'énergie", "Convertisseur d'énergie"],
+      "bonne": 1,
+      "explication": "Le charbon est une énergie fossile : une source limitée, non renouvelable."
+    },
+    {
+      "consigne": "Que désigne le passage en couleur ?",
+      "texte": "Dans le ventilateur, [le moteur] fait tourner l'hélice.",
+      "choix": ["Source renouvelable", "Source non renouvelable", "Forme d'énergie", "Convertisseur d'énergie"],
+      "bonne": 3,
+      "explication": "Le moteur transforme l'énergie électrique en énergie mécanique : c'est un convertisseur."
+    },
+    {
+      "consigne": "Que désigne le passage en couleur ?",
+      "texte": "Le fil apporte [l'énergie électrique] au ventilateur.",
+      "choix": ["Source renouvelable", "Source non renouvelable", "Forme d'énergie", "Convertisseur d'énergie"],
+      "bonne": 2,
+      "explication": "L'énergie électrique est une forme d'énergie, comme l'énergie mécanique, thermique ou lumineuse."
+    },
+    {
+      "consigne": "Que désigne le passage en couleur ?",
+      "texte": "Sur la côte, [le vent] fait tourner les pales des éoliennes.",
+      "choix": ["Source renouvelable", "Source non renouvelable", "Forme d'énergie", "Convertisseur d'énergie"],
+      "bonne": 0,
+      "explication": "Le vent se renouvelle sans cesse : c'est une source renouvelable."
+    },
+    {
+      "consigne": "Que désigne le passage en couleur ?",
+      "texte": "Ce vieux chauffage fonctionne avec [du gaz naturel].",
+      "choix": ["Source renouvelable", "Source non renouvelable", "Forme d'énergie", "Convertisseur d'énergie"],
+      "bonne": 1,
+      "explication": "Le gaz naturel est une énergie fossile : une source non renouvelable."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Watt",
+      "acceptees": ["Le watt", "Watts"],
+      "indices": [
+        "Je suis une unité de mesure.",
+        "Je mesure la puissance d'un appareil.",
+        "Mon symbole est la lettre W."
+      ],
+      "explication": "Le watt (W) est l'unité de puissance ; l'énergie, elle, se mesure en joules ou en kilowattheures."
+    },
+    {
+      "reponse": "Renouvelable",
+      "acceptees": ["Énergie renouvelable", "Une énergie renouvelable", "Énergies renouvelables", "Source renouvelable", "Renouvelables"],
+      "indices": [
+        "Je suis une qualité que partagent le soleil, le vent et l'eau.",
+        "Ce que je décris se reconstitue vite à l'échelle humaine.",
+        "Je suis le contraire de ce que sont le pétrole, le gaz et le charbon."
+      ],
+      "explication": "Une énergie renouvelable vient d'une source qui se reconstitue vite : soleil, vent, eau, biomasse."
+    },
+    {
+      "reponse": "Conversion d'énergie",
+      "acceptees": ["Conversion", "La conversion", "Une conversion", "Transformation d'énergie", "Transformation"],
+      "indices": [
+        "Je suis réalisée par un moteur, une pile ou un panneau photovoltaïque.",
+        "Je fais passer d'une forme à une autre, comme de la lumière à l'électricité.",
+        "Je ne suis jamais parfaite : une partie est toujours perdue en chaleur."
+      ],
+      "explication": "Une conversion d'énergie transforme une forme d'énergie en une autre, avec toujours des pertes en chaleur."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "Un grille-pain de 800 W fonctionne pendant 0,5 h. Quelle énergie consomme-t-il ?",
+      "reponse": 400,
+      "unite": "Wh",
+      "tolerance": 0,
+      "explication": "E = P × t = 800 × 0,5 = 400 Wh."
+    },
+    {
+      "question": "Un radiateur de 1 500 W fonctionne pendant 3 h. Quelle énergie consomme-t-il, en kWh ?",
+      "reponse": 4.5,
+      "unite": "kWh",
+      "tolerance": 0,
+      "explication": "E = P × t = 1 500 × 3 = 4 500 Wh, soit 4 500 ÷ 1 000 = 4,5 kWh."
+    },
+    {
+      "question": "Une ampoule de 10 W reste allumée pendant 5 h. Quelle énergie consomme-t-elle ?",
+      "reponse": 50,
+      "unite": "Wh",
+      "tolerance": 0,
+      "explication": "E = P × t = 10 × 5 = 50 Wh."
+    },
+    {
+      "question": "Rappel : E = P × t. Un appareil consomme 600 Wh en 2 h. Quelle est sa puissance ?",
+      "reponse": 300,
+      "unite": "W",
+      "tolerance": 0,
+      "explication": "Si E = P × t, alors P = E ÷ t = 600 ÷ 2 = 300 W."
+    },
+    {
+      "question": "Un fer à repasser de 1 200 W fonctionne pendant 2 h. Quelle énergie consomme-t-il, en kWh ?",
+      "reponse": 2.4,
+      "unite": "kWh",
+      "tolerance": 0,
+      "explication": "E = P × t = 1 200 × 2 = 2 400 Wh, soit 2 400 ÷ 1 000 = 2,4 kWh."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "La chaîne d'énergie d'une éolienne",
+      "etapes": [
+        "Le vent pousse les pales de l'éolienne",
+        "Les pales tournent : c'est de l'énergie mécanique",
+        "Un générateur transforme ce mouvement en électricité",
+        "Le courant électrique alimente des appareils"
+      ]
+    },
+    {
+      "titre": "Les conversions dans une lampe de poche",
+      "etapes": [
+        "La pile contient de l'énergie chimique",
+        "La pile la convertit en énergie électrique",
+        "Le courant arrive dans l'ampoule",
+        "L'ampoule produit de la lumière et un peu de chaleur"
+      ]
+    }
+  ]
+}

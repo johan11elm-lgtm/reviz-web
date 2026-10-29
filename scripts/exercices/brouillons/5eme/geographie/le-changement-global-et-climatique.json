@@ -1,0 +1,198 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Les causes du réchauffement",
+      "detail": "Les activités humaines qui rejettent des gaz à effet de serre dans l'atmosphère.",
+      "cartes": [
+        "La combustion du pétrole, du charbon et du gaz",
+        "Des forêts coupées sur de grandes surfaces",
+        "Un élevage de très nombreux animaux",
+        "Les rejets de gaz des usines",
+        "Les rejets de CO₂ de la Chine et des États-Unis"
+      ]
+    },
+    {
+      "nom": "Les signes du réchauffement",
+      "detail": "Les phénomènes que l'on observe déjà : fonte des glaces, mer qui monte, chaleur et pluies extrêmes.",
+      "cartes": [
+        "Des glaciers qui fondent",
+        "Une banquise arctique qui recule",
+        "Un niveau de la mer monté d'environ 20 cm depuis 1900",
+        "Des vagues de chaleur de plus en plus fréquentes",
+        "Des pluies intenses et des inondations plus fréquentes"
+      ]
+    },
+    {
+      "nom": "Les mesures d'atténuation",
+      "detail": "Les actions qui réduisent les émissions de gaz à effet de serre pour limiter le réchauffement.",
+      "cartes": [
+        "Développer les énergies renouvelables",
+        "Consommer moins d'énergie au quotidien",
+        "Choisir des transports moins polluants",
+        "Replanter des forêts pour absorber du CO₂",
+        "Réduire les émissions de gaz à effet de serre"
+      ]
+    },
+    {
+      "nom": "Les mesures d'adaptation",
+      "detail": "Les actions qui préparent à faire face aux effets du réchauffement, qui sont déjà là.",
+      "cartes": [
+        "Construire des digues contre la montée des eaux",
+        "Cultiver des plantes résistantes à la sécheresse",
+        "Végétaliser les villes pour mieux supporter la chaleur",
+        "Prévoir des réserves d'eau pour les périodes sèches",
+        "Surélever les maisons dans une zone inondable"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "le réchauffement climatique",
+      "carte": "La combustion du pétrole, du charbon et du gaz",
+      "role": "cause",
+      "explication": "Brûler les énergies fossiles rejette du CO₂, qui renforce l'effet de serre."
+    },
+    {
+      "fait": "le réchauffement climatique",
+      "carte": "La déforestation",
+      "role": "cause",
+      "explication": "Couper les forêts fait partie des activités humaines qui augmentent les gaz à effet de serre."
+    },
+    {
+      "fait": "le réchauffement climatique",
+      "carte": "L'élevage",
+      "role": "cause",
+      "explication": "L'élevage fait partie des activités humaines qui rejettent des gaz à effet de serre, comme le méthane."
+    },
+    {
+      "fait": "le réchauffement climatique",
+      "carte": "La fonte des glaciers et de la banquise arctique",
+      "role": "consequence",
+      "explication": "Quand la Terre se réchauffe, les glaces fondent."
+    },
+    {
+      "fait": "le réchauffement climatique",
+      "carte": "Des vagues de chaleur plus fréquentes",
+      "role": "consequence",
+      "explication": "Le réchauffement rend les vagues de chaleur plus fréquentes."
+    },
+    {
+      "fait": "le réchauffement climatique",
+      "carte": "Des sécheresses plus fréquentes",
+      "role": "consequence",
+      "explication": "Le réchauffement multiplie les sécheresses, comme les vagues de chaleur."
+    }
+  ],
+  "etiquettes": [
+    {
+      "consigne": "Que représente l'action en couleur ?",
+      "texte": "Pour se protéger de la montée de la mer, une ville [construit une digue].",
+      "choix": ["Une cause du réchauffement", "Une mesure d'atténuation", "Une mesure d'adaptation"],
+      "bonne": 2,
+      "explication": "Une digue ne réduit pas les émissions : elle aide à faire face à un effet déjà là, c'est de l'adaptation."
+    },
+    {
+      "consigne": "Que représente l'action en couleur ?",
+      "texte": "Pour réduire ses émissions, un pays [remplace ses centrales à charbon par des éoliennes].",
+      "choix": ["Une cause du réchauffement", "Une mesure d'atténuation", "Une mesure d'adaptation"],
+      "bonne": 1,
+      "explication": "Passer du charbon à l'éolien réduit les émissions de gaz à effet de serre : c'est de l'atténuation."
+    },
+    {
+      "consigne": "Que représente l'action en couleur ?",
+      "texte": "Dans cette région de plus en plus sèche, [les agriculteurs cultivent des plantes résistantes à la sécheresse].",
+      "choix": ["Une cause du réchauffement", "Une mesure d'atténuation", "Une mesure d'adaptation"],
+      "bonne": 2,
+      "explication": "Se préparer aux effets du réchauffement, comme la sécheresse, c'est de l'adaptation."
+    },
+    {
+      "consigne": "Que représente l'action en couleur ?",
+      "texte": "Pour produire de l'électricité, cette centrale [brûle du charbon].",
+      "choix": ["Une cause du réchauffement", "Une mesure d'atténuation", "Une mesure d'adaptation"],
+      "bonne": 0,
+      "explication": "Brûler du charbon rejette du CO₂ : c'est une cause du réchauffement."
+    },
+    {
+      "consigne": "Que représente l'action en couleur ?",
+      "texte": "Pour absorber du CO₂, une commune [replante une forêt].",
+      "choix": ["Une cause du réchauffement", "Une mesure d'atténuation", "Une mesure d'adaptation"],
+      "bonne": 1,
+      "explication": "Le reboisement absorbe du CO₂ et aide à réduire l'effet de serre : c'est de l'atténuation."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "GIEC",
+      "acceptees": ["GIEC", "Le GIEC", "Groupe d'experts intergouvernemental sur l'évolution du climat"],
+      "indices": [
+        "Je rassemble les travaux de scientifiques du monde entier.",
+        "J'ai été créé en 1988.",
+        "Je dis que le réchauffement actuel est sans équivoque dû aux activités humaines."
+      ],
+      "explication": "Le GIEC, créé en 1988, rassemble les travaux scientifiques sur le climat."
+    },
+    {
+      "reponse": "Accord de Paris",
+      "acceptees": ["Accord de Paris", "L'accord de Paris", "COP21", "La COP21"],
+      "indices": [
+        "Je suis un engagement pris par presque tous les États.",
+        "J'ai été adopté en décembre 2015.",
+        "Je fixe pour objectif de limiter le réchauffement nettement en dessous de 2 °C, si possible 1,5 °C."
+      ],
+      "explication": "L'accord de Paris, adopté lors de la COP21 en 2015, vise 1,5 °C si possible et moins de 2 °C."
+    },
+    {
+      "reponse": "Effet de serre",
+      "acceptees": ["Effet de serre", "L'effet de serre"],
+      "indices": [
+        "Je suis un phénomène naturel.",
+        "Sans moi, il ferait environ −18 °C en moyenne sur la Terre.",
+        "Les activités humaines m'ont renforcé en rejetant du CO₂ et du méthane."
+      ],
+      "explication": "L'effet de serre est naturel : certains gaz retiennent la chaleur. Les activités humaines l'ont renforcé."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "Sans effet de serre, la température moyenne de la Terre serait de −18 °C. Avec l'effet de serre, elle est de +15 °C. De combien de degrés l'effet de serre l'élève-t-il ?",
+      "reponse": 33,
+      "unite": "°C",
+      "tolerance": 0,
+      "explication": "15 − (−18) = 15 + 18 = 33 °C."
+    },
+    {
+      "question": "L'accord de Paris veut, si possible, limiter le réchauffement à 1,5 °C. La Terre s'est déjà réchauffée de 1,3 °C. Combien de degrés de marge reste-t-il ?",
+      "reponse": 0.2,
+      "unite": "°C",
+      "tolerance": 0,
+      "explication": "1,5 − 1,3 = 0,2 °C."
+    },
+    {
+      "question": "Sur une courbe d'exemple, l'écart de température est de −0,3 °C en 1880 et de +1,1 °C en 2020. De combien de degrés l'écart a-t-il augmenté ?",
+      "reponse": 1.4,
+      "unite": "°C",
+      "tolerance": 0,
+      "explication": "1,1 − (−0,3) = 1,1 + 0,3 = 1,4 °C."
+    },
+    {
+      "question": "Un pays émet 80 millions de tonnes de CO₂ par an. Il veut réduire ses émissions de 25 %. Combien de millions de tonnes doit-il supprimer ?",
+      "reponse": 20,
+      "unite": "millions de tonnes",
+      "tolerance": 0,
+      "explication": "25 % de 80 = 80 ÷ 4 = 20 millions de tonnes."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Lire une courbe des températures moyennes",
+      "etapes": [
+        "Lis le titre et les axes : années en bas, température à gauche",
+        "Repère le début et la fin de la période étudiée",
+        "Décris la tendance d'ensemble, pas une année isolée",
+        "Donne un chiffre précis sur l'évolution de la température",
+        "Explique par les activités humaines qui renforcent l'effet de serre"
+      ]
+    }
+  ]
+}

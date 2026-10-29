@@ -1,0 +1,142 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "La solidarité de l'État",
+      "detail": "La protection organisée par l'État : Sécurité sociale, cotisations, impôt et aides publiques.",
+      "cartes": [
+        "La Sécurité sociale, créée en 1945",
+        "Des cotisations prélevées sur les salaires",
+        "Une consultation chez le médecin en partie remboursée",
+        "Les allocations familiales versées aux familles",
+        "L'impôt qui finance l'école et l'hôpital"
+      ]
+    },
+    {
+      "nom": "Les associations",
+      "detail": "Des organisations créées librement par des citoyens, qui s'appuient sur des dons et des bénévoles pour aider les plus fragiles en France.",
+      "cartes": [
+        "Les Restos du cœur, fondés par Coluche en 1985",
+        "Le Secours populaire aide les personnes en difficulté",
+        "Emmaüs, fondé par l'abbé Pierre",
+        "Des bénévoles qui donnent leur temps sans salaire",
+        "Une loi de 1901 laisse les citoyens se regrouper librement"
+      ]
+    },
+    {
+      "nom": "La solidarité internationale",
+      "detail": "L'aide apportée à d'autres pays par les ONG, les États et l'Union européenne.",
+      "cartes": [
+        "Médecins sans frontières, créée en 1971",
+        "Une organisation indépendante des gouvernements qui agit dans le monde",
+        "Une aide envoyée après une catastrophe dans un autre pays",
+        "Une aide au développement pour les pays pauvres",
+        "Les pays de l'Union européenne s'entraident"
+      ]
+    },
+    {
+      "nom": "S'engager au collège",
+      "detail": "Les façons dont un élève peut agir pour les autres à son échelle.",
+      "cartes": [
+        "Représenter ses camarades en étant délégué de classe",
+        "Porter des projets pour la planète comme éco-délégué",
+        "Organiser une collecte de jouets avec sa classe",
+        "Expliquer une leçon à un camarade en difficulté",
+        "Voter pour élire ses délégués de classe"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "De quelle solidarité s'agit-il dans le passage en couleur ?",
+      "texte": "[Les allocations familiales] sont versées aux familles.",
+      "choix": ["Solidarité de l'État", "Solidarité associative", "Solidarité internationale", "Engagement au collège"],
+      "bonne": 0,
+      "explication": "Les allocations familiales sont versées par la protection sociale : c'est une solidarité organisée par l'État."
+    },
+    {
+      "consigne": "De quelle solidarité s'agit-il dans le passage en couleur ?",
+      "texte": "Les Restos du cœur, fondés par Coluche, [distribuent des repas aux plus fragiles].",
+      "choix": ["Solidarité de l'État", "Solidarité associative", "Solidarité internationale", "Engagement au collège"],
+      "bonne": 1,
+      "explication": "Les Restos du cœur sont une association : ils agissent grâce aux dons et aux bénévoles."
+    },
+    {
+      "consigne": "De quelle solidarité s'agit-il dans le passage en couleur ?",
+      "texte": "Après un séisme, [une aide humanitaire est envoyée dans un autre pays].",
+      "choix": ["Solidarité de l'État", "Solidarité associative", "Solidarité internationale", "Engagement au collège"],
+      "bonne": 2,
+      "explication": "Une aide humanitaire envoyée à d'autres pays est de la solidarité internationale."
+    },
+    {
+      "consigne": "De quelle solidarité s'agit-il dans le passage en couleur ?",
+      "texte": "Pendant une séance de tutorat, [un élève aide un camarade en difficulté en maths].",
+      "choix": ["Solidarité de l'État", "Solidarité associative", "Solidarité internationale", "Engagement au collège"],
+      "bonne": 3,
+      "explication": "Le tutorat est une action solidaire que les élèves peuvent mener au collège."
+    },
+    {
+      "consigne": "De quelle solidarité s'agit-il dans le passage en couleur ?",
+      "texte": "[L'impôt] finance l'école et l'hôpital.",
+      "choix": ["Solidarité de l'État", "Solidarité associative", "Solidarité internationale", "Engagement au collège"],
+      "bonne": 0,
+      "explication": "L'impôt finance les services publics et les aides : c'est la redistribution organisée par l'État."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "La Sécurité sociale",
+      "acceptees": ["Sécurité sociale", "La Sécurité sociale", "Securite sociale", "La Sécu", "Sécu"],
+      "indices": [
+        "Je suis un système de protection.",
+        "Je suis financée notamment par des cotisations prélevées sur les salaires.",
+        "Créée en 1945, je protège contre la maladie, les accidents du travail et la vieillesse, et j'aide les familles."
+      ],
+      "explication": "La Sécurité sociale, créée en 1945, protège contre les risques de la vie grâce aux cotisations."
+    },
+    {
+      "reponse": "Coluche",
+      "acceptees": ["Coluche"],
+      "indices": [
+        "Je suis un humoriste.",
+        "En 1985, je crée une association pour aider les plus pauvres.",
+        "Je suis le fondateur des Restos du cœur."
+      ],
+      "explication": "Coluche, humoriste, crée les Restos du cœur en 1985."
+    },
+    {
+      "reponse": "Un bénévole",
+      "acceptees": ["Bénévole", "Un bénévole", "Le bénévole", "Benevole", "Volontaire", "Un volontaire"],
+      "indices": [
+        "Je donne de mon temps.",
+        "Je ne reçois aucun salaire.",
+        "J'aide une association pour une cause qui me tient à cœur."
+      ],
+      "explication": "Un bénévole agit gratuitement pour une cause, souvent dans une association."
+    },
+    {
+      "reponse": "Médecins sans frontières",
+      "acceptees": ["Médecins sans frontières", "Medecins sans frontieres", "MSF"],
+      "indices": [
+        "Je suis une ONG.",
+        "J'ai été créée en 1971.",
+        "Je soigne les victimes de guerres et de catastrophes."
+      ],
+      "explication": "Médecins sans frontières, créée en 1971, soigne les victimes de guerres et de catastrophes."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Cinq repères, du plus ancien au plus récent",
+      "etapes": [
+        "Une loi laisse les citoyens créer librement des associations",
+        "La Sécurité sociale est créée",
+        "Médecins sans frontières est créée",
+        "Coluche fonde les Restos du cœur",
+        "Une loi garantit l'égalité des droits des personnes handicapées"
+      ]
+    }
+  ]
+}

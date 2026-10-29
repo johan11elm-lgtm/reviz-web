@@ -1,0 +1,143 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Se loger dans une métropole",
+      "detail": "Les types de logements, leur prix et le choix du lieu où l'on habite.",
+      "cartes": [
+        "Un appartement dans un immeuble du centre",
+        "Une maison individuelle dans le périurbain",
+        "Un logement à loyer modéré, aidé par l'État",
+        "Des loyers très élevés dans les quartiers du centre",
+        "Des familles qui s'installent loin du centre pour payer moins"
+      ]
+    },
+    {
+      "nom": "Travailler et se distraire",
+      "detail": "Les lieux d'emploi et les lieux de loisirs d'une métropole, souvent regroupés au centre.",
+      "cartes": [
+        "Des bureaux regroupés dans un quartier d'affaires",
+        "Une usine installée dans une zone industrielle",
+        "Un musée que l'on visite le week-end",
+        "Un stade où l'on assiste à un match",
+        "Un grand parc où l'on se promène"
+      ]
+    },
+    {
+      "nom": "Les transports et les trajets",
+      "detail": "Les moyens de transport utilisés en ville et les trajets quotidiens des habitants.",
+      "cartes": [
+        "Le RER, train de banlieue d'Île-de-France",
+        "Le métro de Londres, ouvert en 1863",
+        "Un tramway qui circule dans les rues de la ville",
+        "Des embouteillages à l'heure de pointe",
+        "Une voiture indispensable pour les habitants du périurbain"
+      ]
+    },
+    {
+      "nom": "Lire un plan de métro",
+      "detail": "Le vocabulaire et les règles pour comprendre un plan de lignes de métro.",
+      "cartes": [
+        "Chaque ligne a une couleur et un numéro",
+        "Une station est un point sur la ligne",
+        "Une correspondance permet de changer de ligne",
+        "Le terminus est la dernière station d'une ligne",
+        "On compte les stations et les changements, pas les centimètres"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "l'installation de familles dans le périurbain",
+      "carte": "Les logements du centre sont très chers",
+      "role": "cause",
+      "explication": "Beaucoup d'habitants ne peuvent pas payer les loyers du centre : ils s'installent plus loin."
+    },
+    {
+      "fait": "l'installation de familles dans le périurbain",
+      "carte": "Les logements sont plus grands pour le même prix",
+      "role": "cause",
+      "explication": "Loin du centre, un même budget permet d'avoir un logement plus grand."
+    },
+    {
+      "fait": "l'installation de familles dans le périurbain",
+      "carte": "Les trajets pour aller travailler deviennent plus longs",
+      "role": "consequence",
+      "explication": "Ceux qui habitent loin du centre passent plus de temps dans les transports."
+    },
+    {
+      "fait": "l'installation de familles dans le périurbain",
+      "carte": "La voiture devient souvent indispensable",
+      "role": "consequence",
+      "explication": "Dans le périurbain, les transports en commun sont rares : beaucoup d'habitants dépendent de la voiture."
+    },
+    {
+      "fait": "le grand nombre de voitures en ville",
+      "carte": "Les embouteillages se multiplient",
+      "role": "consequence",
+      "explication": "Les voitures provoquent des bouchons, surtout aux heures de pointe."
+    },
+    {
+      "fait": "le grand nombre de voitures en ville",
+      "carte": "L'air des rues est pollué",
+      "role": "consequence",
+      "explication": "Les voitures rejettent des gaz polluants et font du bruit."
+    }
+  ],
+  "etiquettes": [],
+  "devinettes": [
+    {
+      "reponse": "Le RER",
+      "acceptees": ["RER", "Le RER", "Un RER"],
+      "indices": [
+        "Je transporte chaque jour des millions d'habitants.",
+        "Je suis le train de banlieue d'une grande région.",
+        "Je circule en Île-de-France."
+      ],
+      "explication": "En Île-de-France, le train de banlieue s'appelle le RER."
+    },
+    {
+      "reponse": "Une migration pendulaire",
+      "acceptees": ["Migration pendulaire", "Une migration pendulaire", "Les migrations pendulaires", "Migrations pendulaires", "Navette", "Une navette", "Trajet domicile-travail", "Le trajet domicile-travail"],
+      "indices": [
+        "Je suis un déplacement.",
+        "Je me répète tous les jours : un aller, puis un retour.",
+        "Je relie le domicile et le lieu de travail."
+      ],
+      "explication": "La migration pendulaire est l'aller-retour quotidien entre le domicile et le travail."
+    },
+    {
+      "reponse": "Un logement social",
+      "acceptees": ["Logement social", "Un logement social", "HLM", "Un HLM", "Les HLM", "Logements sociaux"],
+      "indices": [
+        "Je suis un lieu où l'on habite.",
+        "Mon loyer est modéré.",
+        "L'État ou la commune aide à me construire ; en France, on m'appelle par trois lettres."
+      ],
+      "explication": "Un logement social est un logement à loyer modéré aidé par l'État ou la commune, appelé HLM en France."
+    },
+    {
+      "reponse": "Une correspondance",
+      "acceptees": ["Correspondance", "Une correspondance", "La correspondance", "Les correspondances"],
+      "indices": [
+        "Je suis une station un peu particulière.",
+        "Plusieurs lignes se croisent chez moi.",
+        "On m'utilise pour changer de ligne."
+      ],
+      "explication": "Une correspondance est une station où plusieurs lignes se croisent : on peut y changer de ligne."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Trouver un trajet sur un plan de métro",
+      "etapes": [
+        "Repérer la station de départ et celle d'arrivée",
+        "Regarder si une même ligne les relie directement",
+        "Sinon, chercher une correspondance entre deux lignes",
+        "Comparer les trajets : moins de stations, moins de changements",
+        "Noter les lignes à prendre avec leur direction"
+      ]
+    }
+  ]
+}

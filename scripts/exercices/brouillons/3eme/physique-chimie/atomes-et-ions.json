@@ -1,0 +1,209 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "10 électrons",
+      "detail": "Les atomes et les ions qui possèdent exactement 10 électrons.",
+      "cartes": [
+        "L'ion Na⁺ du sodium (Z = 11)",
+        "L'ion Mg²⁺ du magnésium (Z = 12)",
+        "L'ion Al³⁺ de l'aluminium (Z = 13)",
+        "L'ion O²⁻ de l'oxygène (Z = 8)",
+        "L'ion F⁻ du fluor (Z = 9)"
+      ]
+    },
+    {
+      "nom": "18 électrons",
+      "detail": "Les atomes et les ions qui possèdent exactement 18 électrons.",
+      "cartes": [
+        "L'ion Cl⁻ du chlore (Z = 17)",
+        "L'ion S²⁻ du soufre (Z = 16)",
+        "L'ion K⁺ du potassium (Z = 19)",
+        "L'ion Ca²⁺ du calcium (Z = 20)",
+        "L'atome d'argon (Z = 18)"
+      ]
+    },
+    {
+      "nom": "36 électrons",
+      "detail": "Les atomes et les ions qui possèdent exactement 36 électrons.",
+      "cartes": [
+        "L'ion Br⁻ du brome (Z = 35)",
+        "L'ion Se²⁻ du sélénium (Z = 34)",
+        "L'ion Rb⁺ du rubidium (Z = 37)",
+        "L'ion Sr²⁺ du strontium (Z = 38)",
+        "L'atome de krypton (Z = 36)"
+      ]
+    },
+    {
+      "nom": "54 électrons",
+      "detail": "Les atomes et les ions qui possèdent exactement 54 électrons.",
+      "cartes": [
+        "L'ion I⁻ de l'iode (Z = 53)",
+        "L'ion Te²⁻ du tellure (Z = 52)",
+        "L'ion Cs⁺ du césium (Z = 55)",
+        "L'ion Ba²⁺ du baryum (Z = 56)",
+        "L'atome de xénon (Z = 54)"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "la transformation d'un atome de cuivre en ion Cu²⁺",
+      "carte": "L'atome perd 2 électrons",
+      "role": "cause",
+      "explication": "En perdant 2 électrons, l'atome de cuivre devient l'ion Cu²⁺."
+    },
+    {
+      "fait": "la transformation d'un atome de cuivre en ion Cu²⁺",
+      "carte": "L'ion obtenu possède 27 électrons",
+      "role": "consequence",
+      "explication": "L'atome en avait 29 et il en a perdu 2 : 29 − 2 = 27 électrons."
+    },
+    {
+      "fait": "la transformation d'un atome de chlore en ion Cl⁻",
+      "carte": "L'atome gagne 1 électron",
+      "role": "cause",
+      "explication": "En gagnant 1 électron, l'atome de chlore devient l'ion Cl⁻."
+    },
+    {
+      "fait": "la transformation d'un atome de chlore en ion Cl⁻",
+      "carte": "L'ion obtenu possède 18 électrons",
+      "role": "consequence",
+      "explication": "L'atome en avait 17 et il en a gagné 1 : 17 + 1 = 18 électrons."
+    }
+  ],
+  "etiquettes": [
+    {
+      "consigne": "Comment appelle-t-on ce qui est décrit en couleur ?",
+      "texte": "L'eau salée contient en nombres égaux des ions [Na⁺] et des ions Cl⁻.",
+      "choix": ["Atome", "Cation", "Anion"],
+      "bonne": 1,
+      "explication": "Na⁺ porte une charge positive : il a perdu un électron, c'est un cation."
+    },
+    {
+      "consigne": "Comment appelle-t-on ce qui est décrit en couleur ?",
+      "texte": "Le sel de cuisine est formé des ions Na⁺ et [Cl⁻].",
+      "choix": ["Atome", "Cation", "Anion"],
+      "bonne": 2,
+      "explication": "Cl⁻ porte une charge négative : il a gagné un électron, c'est un anion."
+    },
+    {
+      "consigne": "Comment appelle-t-on ce qui est décrit en couleur ?",
+      "texte": "Dans un échantillon, [une entité possède 11 protons et 11 électrons].",
+      "choix": ["Atome", "Cation", "Anion"],
+      "bonne": 0,
+      "explication": "Autant d'électrons que de protons : l'entité est neutre, c'est un atome."
+    },
+    {
+      "consigne": "Comment appelle-t-on ce qui est décrit en couleur ?",
+      "texte": "Dans une solution, [une entité possède 26 protons et 24 électrons].",
+      "choix": ["Atome", "Cation", "Anion"],
+      "bonne": 1,
+      "explication": "Elle a 2 électrons de moins que de protons : sa charge est positive, c'est un cation (Fe²⁺)."
+    },
+    {
+      "consigne": "Comment appelle-t-on ce qui est décrit en couleur ?",
+      "texte": "Dans un cristal, [une entité possède 8 protons et 10 électrons].",
+      "choix": ["Atome", "Cation", "Anion"],
+      "bonne": 2,
+      "explication": "Elle a 2 électrons de plus que de protons : sa charge est négative, c'est un anion (O²⁻)."
+    },
+    {
+      "consigne": "Comment appelle-t-on ce qui est décrit en couleur ?",
+      "texte": "Dans une eau minérale, on trouve des ions [SO₄²⁻] formés de plusieurs atomes.",
+      "choix": ["Atome", "Cation", "Anion"],
+      "bonne": 2,
+      "explication": "L'exposant 2− indique une charge négative : l'ion sulfate SO₄²⁻ est un anion."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Neutron",
+      "acceptees": ["Neutron", "Le neutron", "Un neutron", "Neutrons"],
+      "indices": [
+        "Je fais partie d'un atome.",
+        "Je me trouve dans le noyau, avec les protons.",
+        "Je ne porte aucune charge électrique."
+      ],
+      "explication": "Le neutron est la particule du noyau qui n'a pas de charge."
+    },
+    {
+      "reponse": "Électron",
+      "acceptees": ["Électron", "L'électron", "Un électron", "Électrons"],
+      "indices": [
+        "Je suis la plus légère des particules d'un atome.",
+        "Je me déplace autour du noyau.",
+        "Je porte une charge négative, notée −e."
+      ],
+      "explication": "L'électron est environ 2 000 fois plus léger qu'un proton et porte la charge −e."
+    },
+    {
+      "reponse": "Cation",
+      "acceptees": ["Cation", "Un cation", "Le cation", "Cations"],
+      "indices": [
+        "Je suis un type d'ion.",
+        "J'ai perdu un ou plusieurs électrons.",
+        "Je peux être Na⁺ ou Cu²⁺."
+      ],
+      "explication": "Un cation est un ion positif : il a perdu des électrons (Na⁺, Cu²⁺)."
+    },
+    {
+      "reponse": "Noyau",
+      "acceptees": ["Noyau", "Le noyau"],
+      "indices": [
+        "Je suis au centre de l'atome.",
+        "Je suis environ 100 000 fois plus petit que l'atome.",
+        "Je contiens les protons et les neutrons."
+      ],
+      "explication": "Le noyau, minuscule, concentre presque toute la masse de l'atome."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "L'atome de soufre a pour numéro atomique Z = 16. Combien d'électrons possède l'ion S²⁻ ?",
+      "reponse": 18,
+      "unite": "électrons",
+      "tolerance": 0,
+      "explication": "L'ion S²⁻ est un anion : il a gagné 2 électrons. L'atome en avait 16, donc 16 + 2 = 18 électrons."
+    },
+    {
+      "question": "L'atome de zinc a pour numéro atomique Z = 30. Combien d'électrons possède l'ion Zn²⁺ ?",
+      "reponse": 28,
+      "unite": "électrons",
+      "tolerance": 0,
+      "explication": "L'ion Zn²⁺ est un cation : il a perdu 2 électrons. L'atome en avait 30, donc 30 − 2 = 28 électrons."
+    },
+    {
+      "question": "Un ion Al³⁺ possède 10 électrons. Combien de protons contient son noyau ?",
+      "reponse": 13,
+      "unite": "protons",
+      "tolerance": 0,
+      "explication": "L'ion a perdu 3 électrons : l'atome en avait 10 + 3 = 13. Le noyau ne change pas, il contient donc 13 protons (Z = 13)."
+    },
+    {
+      "question": "Un ion possède 8 protons et 10 électrons. Quelle est sa charge, en multiples de la charge élémentaire e (signe compris) ?",
+      "reponse": -2,
+      "unite": "e",
+      "tolerance": 0,
+      "explication": "Charge = 8 × (+e) + 10 × (−e) = −2e : c'est l'ion O²⁻."
+    },
+    {
+      "question": "Si le noyau d'un atome était une bille de 3 cm, l'atome entier mesurerait combien de kilomètres ? On rappelle que le noyau est 100 000 fois plus petit que l'atome.",
+      "reponse": 3,
+      "unite": "km",
+      "tolerance": 0,
+      "explication": "3 cm × 100 000 = 300 000 cm = 3 000 m = 3 km."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "De l'atome au cation",
+      "etapes": [
+        "Un atome neutre a autant d'électrons que de protons",
+        "Il perd un ou plusieurs électrons",
+        "Il a maintenant moins d'électrons que de protons",
+        "Il porte une charge positive : c'est un cation"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,175 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Les entrées et les sorties",
+      "detail": "Ce que le programme reçoit au départ et ce qu'il affiche à la fin.",
+      "cartes": [
+        "Le bloc « demander Quel est ton âge ? et attendre »",
+        "Le bloc « dire Bravo ! pendant 2 secondes »",
+        "Le nombre que l'utilisateur tape au clavier",
+        "Le résultat affiché à la fin du programme",
+        "Un programme de calcul reçoit 5 et affiche 32"
+      ]
+    },
+    {
+      "nom": "Les variables",
+      "detail": "Une boîte nommée qui garde une valeur que le programme peut modifier.",
+      "cartes": [
+        "Le bloc « mettre score à 0 » au début du jeu",
+        "Le bloc « ajouter 1 à score » à chaque pièce",
+        "Une boîte nommée qui contient une valeur",
+        "Le nom « vies » associé à la valeur 3",
+        "Le contenu de nombre : 5, puis 7, puis 9"
+      ]
+    },
+    {
+      "nom": "Les boucles",
+      "detail": "Répéter les mêmes instructions un nombre fixé de fois, par exemple pour tracer un polygone régulier.",
+      "cartes": [
+        "Le bloc « répéter 10 fois : avancer de 20 »",
+        "Un carré : 4 fois avancer, puis tourner de 90°",
+        "Les mêmes blocs exécutés plusieurs fois de suite",
+        "Polygone régulier à 5 côtés : tourner de 72°",
+        "Un triangle équilatéral : tourner de 120° à chaque sommet"
+      ]
+    },
+    {
+      "nom": "Les conditions",
+      "detail": "Un test vrai ou faux qui fait choisir au programme entre deux actions.",
+      "cartes": [
+        "Si réponse > 10, dire grand, sinon dire petit",
+        "Un test vrai ou faux qui décide de l'action",
+        "10 > 10 est faux : on exécute le « sinon »",
+        "Si la touche espace est pressée, alors sauter",
+        "Le programme choisit entre deux actions"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Que représente le passage en couleur ?",
+      "texte": "Le programme commence par [demander Quel est ton âge ? et attendre].",
+      "choix": ["Une entrée", "Une affectation", "Une boucle", "Une condition"],
+      "bonne": 0,
+      "explication": "« demander … et attendre » fournit au programme une donnée de l'utilisateur : c'est une entrée."
+    },
+    {
+      "consigne": "Que représente le passage en couleur ?",
+      "texte": "Pour partir de zéro, le programme lance [mettre score à 0].",
+      "choix": ["Une entrée", "Une affectation", "Une boucle", "Une condition"],
+      "bonne": 1,
+      "explication": "« mettre … à » donne une valeur à une variable : c'est une affectation."
+    },
+    {
+      "consigne": "Que représente le passage en couleur ?",
+      "texte": "Pour tracer le carré, le lutin exécute [répéter 4 fois : avancer de 100, tourner de 90°].",
+      "choix": ["Une entrée", "Une affectation", "Une boucle", "Une condition"],
+      "bonne": 2,
+      "explication": "« répéter 4 fois » exécute quatre fois de suite les mêmes instructions : c'est une boucle."
+    },
+    {
+      "consigne": "Que représente le passage en couleur ?",
+      "texte": "Le lutin dit grand ou petit grâce à [si réponse > 10 alors dire grand sinon dire petit].",
+      "choix": ["Une entrée", "Une affectation", "Une boucle", "Une condition"],
+      "bonne": 3,
+      "explication": "« si … alors … sinon » exécute un bloc ou l'autre selon un test vrai ou faux : c'est une condition."
+    },
+    {
+      "consigne": "Que représente le passage en couleur ?",
+      "texte": "Pour dessiner l'hexagone, le programme contient [répéter 6 fois : avancer de 50, tourner de 60°].",
+      "choix": ["Une entrée", "Une affectation", "Une boucle", "Une condition"],
+      "bonne": 2,
+      "explication": "Les mêmes instructions sont exécutées 6 fois de suite : c'est une boucle, et 360° ÷ 6 = 60°."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Variable",
+      "acceptees": ["Une variable", "La variable"],
+      "indices": [
+        "Dans un programme, je porte un nom choisi par le programmeur.",
+        "Je suis comme une boîte qui contient une valeur.",
+        "Ma valeur peut changer pendant le programme."
+      ],
+      "explication": "Une variable est une boîte nommée qui contient une valeur modifiable."
+    },
+    {
+      "reponse": "Boucle",
+      "acceptees": ["Une boucle", "La boucle"],
+      "indices": [
+        "Je permets de ne pas recopier plusieurs fois les mêmes blocs.",
+        "Je fais exécuter plusieurs fois de suite les mêmes instructions.",
+        "Mon bloc le plus connu dans Scratch s'appelle « répéter n fois »."
+      ],
+      "explication": "La boucle « répéter n fois » exécute n fois les instructions qu'elle contient."
+    },
+    {
+      "reponse": "Algorithme",
+      "acceptees": ["Un algorithme", "L'algorithme"],
+      "indices": [
+        "Une recette de cuisine me ressemble.",
+        "Je suis une suite finie d'instructions qui résout un problème.",
+        "Écrit dans un langage compris par une machine, je deviens un programme."
+      ],
+      "explication": "Un algorithme est une suite finie d'instructions ; écrit pour une machine, c'est un programme."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "Programme de calcul : choisir un nombre, soustraire 4, puis multiplier le résultat par 3. Quel est le résultat pour le nombre 11 ?",
+      "reponse": 21,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "(11 − 4) × 3 = 7 × 3 = 21."
+    },
+    {
+      "question": "Un programme exécute : mettre score à 10, puis répéter 4 fois « ajouter 3 à score ». Que vaut score à la fin ?",
+      "reponse": 22,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "On ajoute 3 quatre fois : 4 × 3 = 12, donc score = 10 + 12 = 22."
+    },
+    {
+      "question": "Le lutin trace un octogone régulier (8 côtés égaux) avec une boucle « répéter 8 fois ». De quel angle tourne-t-il à chaque sommet ?",
+      "reponse": 45,
+      "unite": "°",
+      "tolerance": 0,
+      "explication": "Angle = 360° ÷ n = 360° ÷ 8 = 45°."
+    },
+    {
+      "question": "Le lutin trace un polygone régulier en tournant de 40° à chaque sommet. Combien ce polygone a-t-il de côtés ?",
+      "reponse": 9,
+      "unite": "côtés",
+      "tolerance": 0,
+      "explication": "n = 360° ÷ 40° = 9. Vérification : 9 × 40° = 360°."
+    },
+    {
+      "question": "Un programme exécute : mettre x à 8, puis si x > 5 alors ajouter 10 à x sinon ajouter 1 à x. Que vaut x à la fin ?",
+      "reponse": 18,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "8 > 5 est vrai, donc on exécute « ajouter 10 à x » : x = 8 + 10 = 18."
+    },
+    {
+      "question": "Un programme exécute : mettre n à 3, puis répéter 2 fois « mettre n à n × 2, puis ajouter 1 à n ». Que vaut n à la fin ?",
+      "reponse": 15,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "Premier tour : 3 × 2 = 6, puis 6 + 1 = 7. Second tour : 7 × 2 = 14, puis 14 + 1 = 15."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Les étapes pour prévoir le résultat d'un programme",
+      "etapes": [
+        "Repère les entrées et les variables du programme",
+        "Fais un tableau avec une colonne par variable",
+        "Exécute les blocs un par un en notant les valeurs",
+        "Compare la sortie au résultat attendu",
+        "Corrige le bloc en cause si les résultats diffèrent"
+      ]
+    }
+  ]
+}

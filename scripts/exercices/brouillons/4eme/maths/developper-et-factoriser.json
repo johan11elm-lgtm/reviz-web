@@ -1,0 +1,149 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Développer un produit",
+      "detail": "Transformer un produit en somme en multipliant chaque terme de la parenthèse par le facteur placé devant.",
+      "cartes": [
+        "3(x + 5) devient 3x + 15",
+        "−2(4x − 3) devient −8x + 6",
+        "4(y − 6) devient 4y − 24",
+        "x(x + 4) devient x² + 4x",
+        "Multiplier ce qui est devant la parenthèse par chaque terme"
+      ]
+    },
+    {
+      "nom": "Factoriser une somme",
+      "detail": "Transformer une somme en produit en repérant le facteur commun à tous les termes.",
+      "cartes": [
+        "6x + 12 devient 6(x + 2)",
+        "7a − 7 devient 7(a − 1)",
+        "5x² − 3x devient x(5x − 3)",
+        "8x + 20 devient 4(2x + 5)",
+        "Repérer le facteur commun à tous les termes"
+      ]
+    },
+    {
+      "nom": "Réduire une expression",
+      "detail": "Regrouper les termes de même nature pour obtenir l'expression la plus courte possible.",
+      "cartes": [
+        "6x + 2 + 4x − 8 devient 10x − 6",
+        "3x + 5x devient 8x",
+        "4a + 3 + 2a − 1 devient 6a + 2",
+        "5y − 3y + 4 devient 2y + 4",
+        "Regrouper les termes de même nature"
+      ]
+    },
+    {
+      "nom": "Supprimer des parenthèses",
+      "detail": "Enlever des parenthèses précédées seulement d'un signe + ou −, en changeant les signes après un moins.",
+      "cartes": [
+        "a + (b − c) devient a + b − c",
+        "a − (b − c) devient a − b + c",
+        "x + (y − 3) devient x + y − 3",
+        "m − (n + 2) devient m − n − 2",
+        "Un signe moins devant la parenthèse change tous les signes"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [],
+  "devinettes": [
+    {
+      "reponse": "Distributivité",
+      "acceptees": ["La distributivité", "Distributivite", "Distributivité simple"],
+      "indices": [
+        "Je suis une propriété des calculs.",
+        "Je permets de passer d'un produit à une somme, et inversement.",
+        "Je m'écris k(a + b) = ka + kb."
+      ],
+      "explication": "La distributivité k(a + b) = ka + kb sert à développer dans un sens et à factoriser dans l'autre."
+    },
+    {
+      "reponse": "Factoriser",
+      "acceptees": ["Factorisation", "Factoriser une somme"],
+      "indices": [
+        "Je suis une opération du calcul littéral.",
+        "J'utilise un facteur commun à tous les termes.",
+        "Je transforme une somme en produit : 6x + 12 devient 6(x + 2)."
+      ],
+      "explication": "Factoriser, c'est transformer une somme en produit grâce à un facteur commun."
+    },
+    {
+      "reponse": "Réduire",
+      "acceptees": ["Réduction", "Reduire", "Réduire une expression"],
+      "indices": [
+        "Je suis une opération du calcul littéral.",
+        "Je regroupe les termes de même nature.",
+        "Après un développement, je donne l'expression la plus courte possible."
+      ],
+      "explication": "Réduire, c'est regrouper les termes de même nature pour simplifier l'expression."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "Calcule de tête 23 × 101 en écrivant 101 = 100 + 1.",
+      "reponse": 2323,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "23 × 101 = 23 × 100 + 23 × 1 = 2 300 + 23 = 2 323."
+    },
+    {
+      "question": "Calcule de tête 15 × 98 en écrivant 98 = 100 − 2.",
+      "reponse": 1470,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "15 × 98 = 15 × 100 − 15 × 2 = 1 500 − 30 = 1 470."
+    },
+    {
+      "question": "Calcule 37 × 8 + 37 × 2 en factorisant.",
+      "reponse": 370,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "37 × 8 + 37 × 2 = 37 × (8 + 2) = 37 × 10 = 370."
+    },
+    {
+      "question": "Que vaut l'expression 5x − (2x − 3) pour x = 4 ?",
+      "reponse": 15,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "5x − (2x − 3) = 5x − 2x + 3 = 3x + 3. Pour x = 4 : 3 × 4 + 3 = 15."
+    },
+    {
+      "question": "Que vaut l'expression 2(3x + 1) + 4(x − 2) pour x = 3 ?",
+      "reponse": 24,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "2(3x + 1) + 4(x − 2) = 6x + 2 + 4x − 8 = 10x − 6. Pour x = 3 : 30 − 6 = 24."
+    },
+    {
+      "question": "Le développement de 7(2x − 3) s'écrit 14x + b. Que vaut b ?",
+      "reponse": -21,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "7 × 2x = 14x et 7 × (−3) = −21, donc 7(2x − 3) = 14x − 21 et b = −21."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Comment développer et réduire une expression",
+      "etapes": [
+        "Repère chaque facteur placé devant une parenthèse, avec son signe",
+        "Multiplie ce facteur par chaque terme de la parenthèse",
+        "Supprime les parenthèses restantes en changeant les signes après un moins",
+        "Regroupe les termes de même nature",
+        "Vérifie en remplaçant x par une même valeur dans les deux expressions"
+      ]
+    },
+    {
+      "titre": "Prouver que la somme de trois entiers consécutifs est un multiple de 3",
+      "etapes": [
+        "Écris trois entiers consécutifs : n, n + 1 et n + 2",
+        "Écris leur somme : n + (n + 1) + (n + 2)",
+        "Réduis la somme : 3n + 3",
+        "Factorise : 3n + 3 = 3(n + 1)",
+        "Conclus : la somme est toujours un multiple de 3"
+      ]
+    }
+  ]
+}

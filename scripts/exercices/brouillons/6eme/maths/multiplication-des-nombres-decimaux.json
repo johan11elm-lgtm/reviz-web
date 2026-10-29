@@ -1,0 +1,167 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Résultat égal à 120",
+      "detail": "Les calculs dont le résultat vaut exactement 120.",
+      "cartes": ["12 × 10", "1,2 × 100", "0,4 × 300", "1 200 × 0,1", "0,2 × 600"]
+    },
+    {
+      "nom": "Résultat égal à 12",
+      "detail": "Les calculs dont le résultat vaut exactement 12.",
+      "cartes": ["3 × 4", "0,3 × 40", "1,2 × 10", "0,12 × 100", "120 × 0,1"]
+    },
+    {
+      "nom": "Résultat égal à 1,2",
+      "detail": "Les calculs dont le résultat vaut exactement 1,2.",
+      "cartes": ["0,4 × 3", "0,2 × 6", "12 × 0,1", "0,12 × 10", "0,012 × 100"]
+    },
+    {
+      "nom": "Résultat égal à 0,12",
+      "detail": "Les calculs dont le résultat vaut exactement 0,12.",
+      "cartes": ["0,3 × 0,4", "0,2 × 0,6", "12 × 0,01", "0,012 × 10", "1,2 ÷ 10"]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Comment appelle-t-on le nombre en couleur ?",
+      "texte": "On calcule 12,5 + 3,75 et on trouve [16,25].",
+      "choix": ["Somme", "Différence", "Produit", "Facteur"],
+      "bonne": 0,
+      "explication": "Le résultat d'une addition est une somme : 12,5 + 3,75 = 16,25."
+    },
+    {
+      "consigne": "Comment appelle-t-on le nombre en couleur ?",
+      "texte": "On calcule 12,5 − 3,75 et on trouve [8,75].",
+      "choix": ["Somme", "Différence", "Produit", "Facteur"],
+      "bonne": 1,
+      "explication": "Le résultat d'une soustraction est une différence : 12,5 − 3,75 = 8,75."
+    },
+    {
+      "consigne": "Comment appelle-t-on le nombre en couleur ?",
+      "texte": "On calcule 3,2 × 1,5 et on trouve [4,8].",
+      "choix": ["Somme", "Différence", "Produit", "Facteur"],
+      "bonne": 2,
+      "explication": "Le résultat d'une multiplication est un produit : 3,2 × 1,5 = 4,8."
+    },
+    {
+      "consigne": "Comment appelle-t-on le nombre en couleur ?",
+      "texte": "Dans la multiplication 3,2 × 1,5 = 4,8, on regarde le nombre [3,2].",
+      "choix": ["Somme", "Différence", "Produit", "Facteur"],
+      "bonne": 3,
+      "explication": "3,2 fait partie des nombres que l'on multiplie : c'est un facteur."
+    },
+    {
+      "consigne": "Comment appelle-t-on le nombre en couleur ?",
+      "texte": "On calcule 7,6 + 2,4 et on trouve [10].",
+      "choix": ["Somme", "Différence", "Produit", "Facteur"],
+      "bonne": 0,
+      "explication": "Le résultat d'une addition est une somme : 7,6 + 2,4 = 10."
+    },
+    {
+      "consigne": "Comment appelle-t-on le nombre en couleur ?",
+      "texte": "On calcule l'aire d'un rectangle de 2,5 m sur 1,2 m avec 2,5 × 1,2 = [3].",
+      "choix": ["Somme", "Différence", "Produit", "Facteur"],
+      "bonne": 2,
+      "explication": "Le résultat d'une multiplication est un produit : 2,5 × 1,2 = 3."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Produit",
+      "acceptees": ["Produit", "Le produit", "Un produit"],
+      "indices": [
+        "Je suis un mot que l'on utilise en calcul.",
+        "Je suis le résultat d'une multiplication.",
+        "Dans 2,5 × 1,2 = 3, je suis le nombre 3."
+      ],
+      "explication": "Le produit est le résultat d'une multiplication."
+    },
+    {
+      "reponse": "Facteur",
+      "acceptees": ["Facteur", "Un facteur", "Le facteur"],
+      "indices": [
+        "Je suis un mot du vocabulaire de la multiplication.",
+        "Je suis l'un des nombres que l'on multiplie.",
+        "Dans 3,2 × 1,5, il y a deux nombres comme moi : 3,2 et 1,5."
+      ],
+      "explication": "Les facteurs sont les nombres que l'on multiplie : dans 3,2 × 1,5, ce sont 3,2 et 1,5."
+    },
+    {
+      "reponse": "Ordre de grandeur",
+      "acceptees": ["Ordre de grandeur", "Un ordre de grandeur", "Estimation", "Une estimation", "Valeur approchée"],
+      "indices": [
+        "Je sers à contrôler un calcul.",
+        "Je suis une valeur approchée simple du résultat.",
+        "Pour 19,8 × 4,1, je vaux 80, car 20 × 4 = 80."
+      ],
+      "explication": "Un ordre de grandeur est une valeur approchée simple qui permet de repérer une erreur, souvent de virgule."
+    },
+    {
+      "reponse": "Différence",
+      "acceptees": ["Différence", "La différence", "Une différence"],
+      "indices": [
+        "Je suis un nombre obtenu en calculant.",
+        "Je suis le résultat d'une soustraction.",
+        "Dans 12,5 − 3,75 = 8,75, je suis le nombre 8,75."
+      ],
+      "explication": "La différence est le résultat d'une soustraction."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "Combien vaut 3,6 × 2,5 ?",
+      "reponse": 9,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "36 × 25 = 900, avec 1 + 1 = 2 chiffres après la virgule : 9,00 = 9."
+    },
+    {
+      "question": "Combien vaut 0,6 × 0,7 ?",
+      "reponse": 0.42,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "6 × 7 = 42, avec 1 + 1 = 2 chiffres après la virgule : 0,42."
+    },
+    {
+      "question": "Combien vaut 52,4 × 0,1 ?",
+      "reponse": 5.24,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "Multiplier par 0,1 revient à diviser par 10 : 52,4 ÷ 10 = 5,24."
+    },
+    {
+      "question": "Combien vaut 12,4 + 7,85 ?",
+      "reponse": 20.25,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "On aligne les virgules : 12,40 + 7,85 = 20,25."
+    },
+    {
+      "question": "Un ruban coûte 4,50 € le mètre. Léa en achète 3,2 m. Combien paie-t-elle ?",
+      "reponse": 14.4,
+      "unite": "€",
+      "tolerance": 0,
+      "explication": "Prix = 4,5 × 3,2 : 45 × 32 = 1 440, avec 2 chiffres après la virgule : 14,40 = 14,4 €."
+    },
+    {
+      "question": "Quelle est l'aire d'un rectangle de 3,5 m sur 2,4 m ?",
+      "reponse": 8.4,
+      "unite": "m²",
+      "tolerance": 0,
+      "explication": "A = 3,5 × 2,4 : 35 × 24 = 840, avec 2 chiffres après la virgule : 8,40 = 8,4 m²."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Résoudre un problème avec une multiplication",
+      "etapes": [
+        "Repère les grandeurs connues et ce que l'on cherche",
+        "Choisis l'opération qui permet de répondre",
+        "Effectue le calcul",
+        "Termine par une phrase de réponse avec l'unité"
+      ]
+    }
+  ]
+}

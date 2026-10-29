@@ -1,0 +1,141 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Analogique ou numérique",
+      "detail": "La différence entre une grandeur continue et une information transformée en nombres.",
+      "cartes": [
+        "Une grandeur qui varie de façon continue",
+        "La position de l'aiguille d'une montre",
+        "La température de l'air, qui monte sans saut",
+        "Un convertisseur transforme le son en nombres",
+        "Un fichier MP3 est déjà numérique"
+      ]
+    },
+    {
+      "nom": "Compter en binaire",
+      "detail": "Les rangs de poids 8, 4, 2, 1 et la façon d'écrire ou de lire un nombre avec des 0 et des 1.",
+      "cartes": [
+        "Les rangs valent successivement 8, 4, 2 et 1",
+        "Le nombre 1101 est égal à 8 + 4 + 0 + 1",
+        "Le nombre 6 s'écrit 110",
+        "On additionne les poids des rangs qui contiennent 1",
+        "Avec 3 bits, on peut coder 8 valeurs"
+      ]
+    },
+    {
+      "nom": "Coder des textes et des images",
+      "detail": "Chaque caractère devient un nombre, et chaque pixel d'une image est décrit par trois nombres.",
+      "cartes": [
+        "En ASCII, la lettre A est codée par 65",
+        "Un codage qui gère aussi les accents",
+        "Chaque pixel est décrit par trois nombres",
+        "Le blanc correspond à (255, 255, 255)",
+        "Une image est une grille de petits carrés"
+      ]
+    },
+    {
+      "nom": "Les unités de l'information",
+      "detail": "Les unités qui servent à mesurer la quantité d'information : du bit au gigaoctet.",
+      "cartes": [
+        "Le plus petit élément d'information, qui vaut 0 ou 1",
+        "Un groupe de 8 bits",
+        "Une unité qui vaut 1 000 octets",
+        "Une unité qui vaut 1 000 ko",
+        "Une unité qui vaut 1 000 Mo"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [],
+  "devinettes": [
+    {
+      "reponse": "Pixel",
+      "acceptees": ["Pixel", "Un pixel", "Pixels"],
+      "indices": [
+        "On me trouve dans toutes les images numériques.",
+        "Je suis le plus petit élément d'une image.",
+        "En RVB, je suis codé par trois octets."
+      ],
+      "explication": "Le pixel est le plus petit élément d'une image numérique ; en RVB, il occupe 3 octets."
+    },
+    {
+      "reponse": "Octet",
+      "acceptees": ["Octet", "Un octet", "Octets"],
+      "indices": [
+        "Je suis une unité qui sert à mesurer la taille d'un fichier.",
+        "Je suis un groupe de 8 bits.",
+        "Je peux prendre 256 valeurs, de 0 à 255."
+      ],
+      "explication": "Un octet est un groupe de 8 bits : il peut prendre 2⁸ = 256 valeurs, de 0 à 255."
+    },
+    {
+      "reponse": "Bit",
+      "acceptees": ["Bit", "Un bit", "Bits"],
+      "indices": [
+        "Je suis une unité d'information.",
+        "Je suis la plus petite, et je ne peux prendre que deux valeurs.",
+        "Huit de mes semblables forment un octet."
+      ],
+      "explication": "Le bit est la plus petite unité d'information : il vaut 0 ou 1, et 8 bits forment un octet."
+    },
+    {
+      "reponse": "Unicode",
+      "acceptees": ["Unicode", "L'Unicode"],
+      "indices": [
+        "Je suis un code qui sert à coder les textes.",
+        "Je code aussi les accents.",
+        "Je peux écrire les textes de toutes les langues."
+      ],
+      "explication": "L'Unicode code les caractères de toutes les langues, accents compris."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "Quel nombre décimal correspond au nombre binaire 1011 ?",
+      "reponse": 11,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "Rangs 8, 4, 2, 1 : 1011 = 8 + 0 + 2 + 1 = 11."
+    },
+    {
+      "question": "Écris le nombre 9 en binaire : tape les quatre chiffres, avec les rangs 8, 4, 2 et 1.",
+      "reponse": 1001,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "9 = 8 + 1 : on met 1 aux rangs 8 et 1 et 0 aux rangs 4 et 2, soit 1001."
+    },
+    {
+      "question": "Combien de valeurs différentes peut-on coder avec 5 bits ?",
+      "reponse": 32,
+      "unite": "valeurs",
+      "tolerance": 0,
+      "explication": "Avec n bits, on code 2ⁿ valeurs : 2⁵ = 2 × 2 × 2 × 2 × 2 = 32."
+    },
+    {
+      "question": "Une image RVB non compressée mesure 400 × 300 pixels. Quelle est sa taille en ko ?",
+      "reponse": 360,
+      "unite": "ko",
+      "tolerance": 0,
+      "explication": "400 × 300 = 120 000 pixels ; 120 000 × 3 octets = 360 000 octets ; 360 000 ÷ 1 000 = 360 ko."
+    },
+    {
+      "question": "Une photo occupe 2 400 000 octets. Quelle est sa taille en Mo ?",
+      "reponse": 2.4,
+      "unite": "Mo",
+      "tolerance": 0,
+      "explication": "1 Mo = 1 000 000 octets, donc 2 400 000 ÷ 1 000 000 = 2,4 Mo."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Calculer la taille d'une image non compressée",
+      "etapes": [
+        "Multiplier la largeur par la hauteur pour avoir les pixels",
+        "Multiplier le nombre de pixels par 3 octets",
+        "On obtient la taille de l'image en octets",
+        "Diviser par 1 000 pour obtenir des ko"
+      ]
+    }
+  ]
+}

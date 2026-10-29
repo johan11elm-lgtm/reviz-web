@@ -1,0 +1,181 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Le noyau de la cellule",
+      "detail": "Le compartiment de la cellule qui renferme les chromosomes, donc l'information génétique.",
+      "cartes": [
+        "Compartiment de la cellule où se trouvent les chromosomes",
+        "Greffé dans un ovule, il fixe les caractères de l'agneau",
+        "Changer celui d'une cellule change les caractères de l'être vivant",
+        "Dans un gamète, il ne renferme que 23 chromosomes",
+        "Le cytoplasme l'entoure dans la cellule"
+      ]
+    },
+    {
+      "nom": "Le chromosome",
+      "detail": "Une longue molécule d'ADN enroulée autour de protéines, qui porte les gènes.",
+      "cartes": [
+        "Longue molécule d'ADN enroulée autour de protéines",
+        "Une cellule humaine en possède 46, hors gamètes",
+        "Ils forment 22 paires d'autosomes et une paire sexuelle",
+        "Avant une division, il est copié et a deux chromatides",
+        "Ses deux chromatides sont reliées par le centromère"
+      ]
+    },
+    {
+      "nom": "Le gène",
+      "detail": "Une portion d'ADN, à un endroit précis d'un chromosome, qui détermine un caractère héréditaire.",
+      "cartes": [
+        "Portion d'ADN qui détermine un caractère héréditaire",
+        "Il détermine par exemple le groupe sanguin",
+        "Un chromosome en porte beaucoup, chacun pour un caractère",
+        "Il existe sous plusieurs versions",
+        "Il occupe un endroit précis, son locus"
+      ]
+    },
+    {
+      "nom": "L'allèle",
+      "detail": "Une version d'un gène, née d'une mutation ; on en possède deux pour chaque gène.",
+      "cartes": [
+        "Une version d'un gène",
+        "A, B et O pour le groupe sanguin",
+        "Deux par gène : un du père, un de la mère",
+        "Il naît d'une mutation, modification rare de l'ADN",
+        "L'un peut être dominant, l'autre récessif"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "le phénotype d'un individu",
+      "carte": "Ses allèles, c'est-à-dire son génotype",
+      "role": "cause",
+      "explication": "Le phénotype dépend d'abord du génotype, l'ensemble des allèles."
+    },
+    {
+      "fait": "le phénotype d'un individu",
+      "carte": "L'environnement dans lequel il vit",
+      "role": "cause",
+      "explication": "L'environnement peut modifier le phénotype, comme le soleil bronze la peau."
+    },
+    {
+      "fait": "la trisomie 21",
+      "carte": "Trois chromosomes 21 dans les cellules au lieu de deux",
+      "role": "cause",
+      "explication": "Cette anomalie du nombre de chromosomes est à l'origine de la trisomie 21."
+    },
+    {
+      "fait": "la trisomie 21",
+      "carte": "Des traits physiques particuliers",
+      "role": "consequence",
+      "explication": "Le chromosome en trop modifie le phénotype : des traits physiques particuliers apparaissent."
+    },
+    {
+      "fait": "la trisomie 21",
+      "carte": "Une déficience intellectuelle plus ou moins importante",
+      "role": "consequence",
+      "explication": "Le chromosome 21 en trop entraîne une déficience intellectuelle plus ou moins importante."
+    }
+  ],
+  "etiquettes": [
+    {
+      "consigne": "Que représente le groupe en couleur ?",
+      "texte": "Après un été à la plage, [la peau de Léa est plus foncée].",
+      "choix": ["Génotype", "Phénotype", "Environnement"],
+      "bonne": 1,
+      "explication": "Un caractère observable, comme la couleur de la peau, fait partie du phénotype."
+    },
+    {
+      "consigne": "Que représente le groupe en couleur ?",
+      "texte": "Pour le groupe sanguin, Léa possède [les allèles A et O].",
+      "choix": ["Génotype", "Phénotype", "Environnement"],
+      "bonne": 0,
+      "explication": "L'ensemble des allèles d'un individu forme son génotype."
+    },
+    {
+      "consigne": "Que représente le groupe en couleur ?",
+      "texte": "La peau de Léa a foncé à cause de [l'exposition au soleil].",
+      "choix": ["Génotype", "Phénotype", "Environnement"],
+      "bonne": 2,
+      "explication": "Le soleil est un facteur de l'environnement : il modifie le phénotype sans changer le génotype."
+    },
+    {
+      "consigne": "Que représente le groupe en couleur ?",
+      "texte": "Deux vrais jumeaux ont [exactement les mêmes allèles].",
+      "choix": ["Génotype", "Phénotype", "Environnement"],
+      "bonne": 0,
+      "explication": "Avoir les mêmes allèles, c'est avoir le même génotype."
+    },
+    {
+      "consigne": "Que représente le groupe en couleur ?",
+      "texte": "Théo grandit mieux grâce à [une bonne alimentation].",
+      "choix": ["Génotype", "Phénotype", "Environnement"],
+      "bonne": 2,
+      "explication": "L'alimentation fait partie de l'environnement : elle aide à atteindre sa taille sans modifier les allèles."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Allèle",
+      "acceptees": ["Allèle", "Un allèle", "Les allèles", "Allèles"],
+      "indices": [
+        "Je suis une version.",
+        "Pour le groupe sanguin, il existe trois comme moi : A, B et O.",
+        "Chaque personne me possède en double pour chaque gène : un du père, un de la mère."
+      ],
+      "explication": "Un allèle est une version d'un gène ; on en possède deux pour chaque gène, un de chaque parent."
+    },
+    {
+      "reponse": "Caryotype",
+      "acceptees": ["Caryotype", "Un caryotype", "Le caryotype"],
+      "indices": [
+        "Je suis une photographie.",
+        "Je range des chromosomes par paires, selon leur taille.",
+        "Je montre XX chez une femme et XY chez un homme."
+      ],
+      "explication": "Le caryotype est la photographie des chromosomes d'une cellule, classés par paires."
+    },
+    {
+      "reponse": "ADN",
+      "acceptees": ["ADN", "L'ADN", "Acide désoxyribonucléique"],
+      "indices": [
+        "Je suis une molécule.",
+        "Je porte l'information génétique.",
+        "Dans un chromosome, je suis enroulé autour de protéines."
+      ],
+      "explication": "L'ADN est la molécule qui porte l'information génétique ; enroulé autour de protéines, il forme un chromosome."
+    },
+    {
+      "reponse": "Trisomie 21",
+      "acceptees": ["Trisomie 21", "La trisomie 21", "Trisomie"],
+      "indices": [
+        "Je suis une anomalie du nombre de chromosomes.",
+        "Avec moi, une cellule compte 47 chromosomes au lieu de 46.",
+        "Je provoque des traits physiques particuliers et une déficience intellectuelle."
+      ],
+      "explication": "Dans la trisomie 21, la cellule possède trois chromosomes 21 au lieu de deux, soit 47 chromosomes."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Analyser un caryotype",
+      "etapes": [
+        "On compte les chromosomes : 46 est le nombre normal",
+        "On vérifie les paires 1 à 22 : deux chromosomes semblables",
+        "On regarde la paire sexuelle : XX ou XY",
+        "On repère une éventuelle anomalie et on conclut"
+      ]
+    },
+    {
+      "titre": "L'expérience de la brebis Dolly",
+      "etapes": [
+        "On prélève le noyau d'une cellule de brebis à tête blanche",
+        "On le place dans un ovule sans noyau d'une brebis à tête noire",
+        "L'ovule se développe et donne naissance à un agneau",
+        "L'agneau a la tête blanche, comme la brebis donneuse du noyau"
+      ]
+    }
+  ]
+}

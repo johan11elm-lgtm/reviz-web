@@ -1,0 +1,141 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "L'URSS stalinienne",
+      "detail": "Les méthodes employées en Union soviétique à partir de la fin des années 1920.",
+      "cartes": [
+        "Les paysans sont forcés de mettre leurs terres en commun",
+        "Les koulaks sont éliminés et une famine frappe l'Ukraine",
+        "Des plans quinquennaux imposent l'industrialisation du pays",
+        "Des millions d'opposants sont envoyés dans les camps du Goulag",
+        "Environ 700 000 personnes sont exécutées pendant la Grande Terreur"
+      ]
+    },
+    {
+      "nom": "L'Allemagne nazie",
+      "detail": "Les actions du régime qui s'installe en Allemagne à partir de 1933.",
+      "cartes": [
+        "Le chef du parti est nommé chancelier en janvier 1933",
+        "La Gestapo et les SS surveillent et arrêtent les opposants",
+        "Les jeunes sont encadrés par les Jeunesses hitlériennes",
+        "Les lois de Nuremberg privent les Juifs de la citoyenneté",
+        "Synagogues et magasins juifs sont détruits en novembre 1938"
+      ]
+    },
+    {
+      "nom": "La France des années 1930",
+      "detail": "La démocratie française de 1934 à 1936 : tensions politiques et réformes sociales.",
+      "cartes": [
+        "Le 6 février 1934, des ligues d'extrême droite manifestent",
+        "Une alliance de gauche gagne les élections de 1936",
+        "Léon Blum devient président du Conseil",
+        "Les accords de Matignon augmentent les salaires",
+        "Les ouvriers obtiennent deux semaines de congés payés"
+      ]
+    },
+    {
+      "nom": "La crise économique mondiale",
+      "detail": "La crise née aux États-Unis qui touche l'Europe et affaiblit les démocraties.",
+      "cartes": [
+        "Les cours de la Bourse de New York s'effondrent en octobre",
+        "La crise américaine s'étend ensuite à l'Europe",
+        "Le chômage de masse touche des millions de familles",
+        "La misère fait perdre confiance dans la démocratie",
+        "Les partis extrémistes en profitent pour progresser"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "la crise de 1929 en Europe",
+      "carte": "Le krach boursier de Wall Street, à New York",
+      "role": "cause",
+      "explication": "La crise commence aux États-Unis, par le krach de Wall Street en octobre 1929, puis touche l'Europe."
+    },
+    {
+      "fait": "la crise de 1929 en Europe",
+      "carte": "Un chômage de masse",
+      "role": "consequence",
+      "explication": "En s'étendant à l'Europe, la crise provoque un chômage de masse."
+    },
+    {
+      "fait": "la nomination de Hitler comme chancelier",
+      "carte": "Le parti nazi devient le premier parti au Parlement en 1932",
+      "role": "cause",
+      "explication": "En 1932, le parti nazi est le premier parti du Parlement allemand : c'est ce qui conduit à la nomination de Hitler en janvier 1933."
+    },
+    {
+      "fait": "la nomination de Hitler comme chancelier",
+      "carte": "Hitler obtient les pleins pouvoirs en mars 1933",
+      "role": "consequence",
+      "explication": "Nommé chancelier en janvier 1933, Hitler obtient les pleins pouvoirs deux mois plus tard."
+    }
+  ],
+  "etiquettes": [],
+  "devinettes": [
+    {
+      "reponse": "Staline",
+      "acceptees": ["Staline", "Joseph Staline", "Iossif Staline"],
+      "indices": [
+        "Je dirige mon pays à partir de la fin des années 1920.",
+        "Je m'impose après la mort de Lénine et j'élimine mes rivaux.",
+        "Je lance la collectivisation forcée des terres et les plans quinquennaux."
+      ],
+      "explication": "Staline succède à Lénine, impose la collectivisation et l'industrialisation, et fait l'objet d'un culte de la personnalité."
+    },
+    {
+      "reponse": "Léon Blum",
+      "acceptees": ["Léon Blum", "Blum"],
+      "indices": [
+        "Je suis un homme politique français des années 1930.",
+        "Je dirige le gouvernement après la victoire de la gauche aux élections de 1936.",
+        "Mon gouvernement signe les accords de Matignon et fait voter les congés payés."
+      ],
+      "explication": "Léon Blum devient président du Conseil en 1936 à la tête du Front populaire."
+    },
+    {
+      "reponse": "Le Goulag",
+      "acceptees": ["Goulag", "Le Goulag", "Les Goulags"],
+      "indices": [
+        "Je suis un ensemble de camps.",
+        "Je me trouve en URSS et on y est forcé de travailler.",
+        "La police politique m'envoie des millions d'opposants, réels ou supposés."
+      ],
+      "explication": "Le Goulag est le système des camps de travail forcé de l'URSS."
+    },
+    {
+      "reponse": "La nuit de Cristal",
+      "acceptees": ["Nuit de Cristal", "La nuit de Cristal", "Kristallnacht"],
+      "indices": [
+        "Je suis un événement de l'automne 1938.",
+        "Dans toute l'Allemagne, des synagogues et des magasins sont détruits.",
+        "Les 9 et 10 novembre, des Juifs sont tués et des milliers d'autres arrêtés."
+      ],
+      "explication": "La nuit de Cristal (9-10 novembre 1938) est une violente persécution des Juifs dans toute l'Allemagne."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Hitler prend le pouvoir en Allemagne",
+      "etapes": [
+        "En 1932, le parti nazi devient le premier parti au Parlement",
+        "Le 30 janvier 1933, Hitler est nommé chancelier",
+        "En mars 1933, il obtient les pleins pouvoirs",
+        "En 1934, il devient le Führer",
+        "En 1935, les lois de Nuremberg privent les Juifs de la citoyenneté"
+      ]
+    },
+    {
+      "titre": "La France de 1934 à 1936",
+      "etapes": [
+        "Le 6 février 1934, des ligues d'extrême droite manifestent à Paris",
+        "En 1936, la gauche unie gagne les élections",
+        "Léon Blum devient président du Conseil",
+        "En juin 1936, les accords de Matignon augmentent les salaires",
+        "Des lois instaurent deux semaines de congés payés"
+      ]
+    }
+  ]
+}

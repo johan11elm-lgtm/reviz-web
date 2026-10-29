@@ -1,0 +1,143 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Les habitants permanents",
+      "detail": "Les personnes qui vivent dans la station toute l'année, souvent grâce aux emplois du tourisme.",
+      "cartes": [
+        "Une hôtelière installée dans la commune depuis vingt ans",
+        "Un pêcheur qui habite le port avec sa famille",
+        "Une institutrice qui enseigne toute l'année à l'école du village",
+        "Un restaurateur qui vit sur place à l'année",
+        "Une famille dont la maison principale est dans la station"
+      ]
+    },
+    {
+      "nom": "Les travailleurs saisonniers",
+      "detail": "Les personnes qui viennent travailler dans la station seulement pendant l'été.",
+      "cartes": [
+        "Une serveuse engagée seulement pour l'été",
+        "Un moniteur de voile embauché de juin à septembre",
+        "Un vendeur de glaces employé en juillet et août",
+        "Un animateur de club de plage recruté pour deux mois",
+        "Une femme de chambre qui travaille en été seulement"
+      ]
+    },
+    {
+      "nom": "Les propriétaires de résidences secondaires",
+      "detail": "Les personnes qui possèdent un logement dans la station, qu'ils n'occupent qu'une petite partie de l'année.",
+      "cartes": [
+        "Un couple dont la villa reste fermée presque toute l'année",
+        "Un cadre parisien qui possède un studio vue sur mer",
+        "Une retraitée propriétaire d'un appartement qu'elle occupe en août",
+        "Une famille qui a acheté un studio pour ses week-ends",
+        "Un avocat lyonnais héritier d'une villa sur la côte"
+      ]
+    },
+    {
+      "nom": "Les touristes",
+      "detail": "Les personnes qui viennent pour leurs loisirs, dorment au moins une nuit sur place, puis repartent.",
+      "cartes": [
+        "Une famille qui passe une semaine à l'hôtel",
+        "Un couple qui réserve un week-end au bord de la mer",
+        "Des amis qui louent un gîte pour leurs vacances",
+        "Un groupe de retraités en séjour de dix jours",
+        "Deux étudiants dormant en auberge de jeunesse pour trois nuits"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "le vote de la loi Littoral en 1986",
+      "carte": "Le tourisme bétonne de plus en plus la côte",
+      "role": "cause",
+      "explication": "Le tourisme bétonise le littoral : l'État vote la loi Littoral pour limiter cette bétonisation."
+    },
+    {
+      "fait": "le vote de la loi Littoral en 1986",
+      "carte": "Les constructions au bord de la mer sont limitées",
+      "role": "consequence",
+      "explication": "La loi Littoral limite les constructions au bord de la mer."
+    },
+    {
+      "fait": "la hausse du prix des logements dans les stations",
+      "carte": "Beaucoup de logements sont achetés comme résidences secondaires",
+      "role": "cause",
+      "explication": "Les résidences secondaires et la demande des touristes font monter les prix."
+    },
+    {
+      "fait": "la hausse du prix des logements dans les stations",
+      "carte": "Beaucoup de logements sont loués aux touristes",
+      "role": "cause",
+      "explication": "Les logements loués aux touristes rapportent plus : les prix montent."
+    },
+    {
+      "fait": "la hausse du prix des logements dans les stations",
+      "carte": "Les habitants permanents ont du mal à se loger",
+      "role": "consequence",
+      "explication": "Quand les prix montent, les habitants qui vivent là toute l'année ne trouvent plus de logement abordable."
+    }
+  ],
+  "etiquettes": [],
+  "devinettes": [
+    {
+      "reponse": "Cancún",
+      "acceptees": [
+        "Cancún",
+        "Cancun"
+      ],
+      "indices": [
+        "Je suis une ville touristique d'Amérique.",
+        "Je borde la mer des Caraïbes.",
+        "L'État mexicain m'a créée dans les années 1970, sur la presqu'île du Yucatán."
+      ],
+      "explication": "Cancún, au Mexique, est une station créée par l'État à partir des années 1970 sur un littoral presque vide."
+    },
+    {
+      "reponse": "La Grande-Motte",
+      "acceptees": [
+        "La Grande-Motte",
+        "Grande-Motte",
+        "La Grande Motte",
+        "Grande Motte"
+      ],
+      "indices": [
+        "Je suis une station balnéaire française.",
+        "Je suis née dans les années 1960.",
+        "Je suis une création de la mission Racine, lancée par l'État en 1963 sur le littoral du Languedoc-Roussillon."
+      ],
+      "explication": "La Grande-Motte naît de la mission Racine (1963), qui aménage le littoral du Languedoc-Roussillon."
+    },
+    {
+      "reponse": "La saisonnalité",
+      "acceptees": [
+        "Saisonnalité",
+        "La saisonnalité",
+        "Les saisons"
+      ],
+      "indices": [
+        "Je suis un phénomène qui dépend du calendrier.",
+        "Je fais varier l'activité d'une station selon les mois de l'année.",
+        "En été, je multiplie la population ; en hiver, la ville se vide."
+      ],
+      "explication": "La saisonnalité est la variation de l'activité selon les saisons : une station est pleine en été et presque vide en hiver."
+    },
+    {
+      "reponse": "Le Conservatoire du littoral",
+      "acceptees": [
+        "Conservatoire du littoral",
+        "Le Conservatoire du littoral",
+        "Le Conservatoire",
+        "Conservatoire"
+      ],
+      "indices": [
+        "Je suis un organisme créé par l'État français.",
+        "J'ai été créé en 1975.",
+        "J'achète des terrains au bord de la mer pour les protéger."
+      ],
+      "explication": "Le Conservatoire du littoral (1975) achète des terrains pour les protéger de la bétonisation."
+    }
+  ],
+  "calculs": [],
+  "etapes": []
+}

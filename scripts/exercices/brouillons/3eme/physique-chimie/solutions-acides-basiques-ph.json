@@ -1,0 +1,148 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Mesurer le pH",
+      "detail": "Le papier pH donne une valeur approchée, le pH-mètre une valeur précise.",
+      "cartes": [
+        "On compare la couleur du papier à une échelle",
+        "Le pH-mètre doit être étalonné avant usage",
+        "On dépose une goutte avec un agitateur en verre",
+        "Le papier pH donne seulement une valeur approchée",
+        "On rince l'agitateur avant de tester une autre solution"
+      ]
+    },
+    {
+      "nom": "Diluer une solution",
+      "detail": "Ajouter de l'eau rapproche le pH de 7, sans jamais le faire passer de l'autre côté.",
+      "cartes": [
+        "Ajouter de l'eau rend la solution moins concentrée",
+        "Le pH d'un acide dilué se rapproche de 7",
+        "Une base diluée voit son pH diminuer",
+        "Du vinaigre mélangé à beaucoup d'eau reste acide",
+        "Après dilution, le pH reste toujours du même côté de 7"
+      ]
+    },
+    {
+      "nom": "Les ions H⁺ et HO⁻",
+      "detail": "Les ions H⁺ rendent une solution acide, les ions HO⁻ la rendent basique.",
+      "cartes": [
+        "L'eau pure contient autant d'ions H⁺ que d'ions HO⁻",
+        "Une solution acide contient plus d'ions H⁺ que d'ions HO⁻",
+        "Un excès d'ions HO⁻ rend une solution basique",
+        "L'ion hydrogène s'écrit H⁺",
+        "L'ion hydroxyde porte une charge négative"
+      ]
+    },
+    {
+      "nom": "Se protéger des produits",
+      "detail": "Les acides et les bases concentrés sont corrosifs : lunettes, gants, blouse et lecture de l'étiquette.",
+      "cartes": [
+        "On porte des lunettes, des gants et une blouse",
+        "Le pictogramme montre un liquide qui attaque une main",
+        "Mélanger un acide et une base peut être violent",
+        "Un déboucheur à la soude peut brûler la peau",
+        "On lit l'étiquette du produit avant de l'utiliser"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Comment qualifier la solution décrite par le passage en couleur ?",
+      "texte": "Le jus de citron a [un pH de 2].",
+      "choix": ["Acide", "Neutre", "Basique"],
+      "bonne": 0,
+      "explication": "Un pH de 2 est inférieur à 7 : la solution est acide."
+    },
+    {
+      "consigne": "Comment qualifier la solution décrite par le passage en couleur ?",
+      "texte": "L'eau pure a [un pH de 7].",
+      "choix": ["Acide", "Neutre", "Basique"],
+      "bonne": 1,
+      "explication": "Un pH égal à 7 correspond à une solution neutre."
+    },
+    {
+      "consigne": "Comment qualifier la solution décrite par le passage en couleur ?",
+      "texte": "Le déboucheur à la soude a [un pH de 14].",
+      "choix": ["Acide", "Neutre", "Basique"],
+      "bonne": 2,
+      "explication": "Un pH de 14 est supérieur à 7 : la solution est basique."
+    },
+    {
+      "consigne": "Comment qualifier la solution décrite par le passage en couleur ?",
+      "texte": "Un élève prépare [une solution qui contient plus d'ions HO⁻ que d'ions H⁺].",
+      "choix": ["Acide", "Neutre", "Basique"],
+      "bonne": 2,
+      "explication": "Un excès d'ions HO⁻ rend la solution basique."
+    },
+    {
+      "consigne": "Comment qualifier la solution décrite par le passage en couleur ?",
+      "texte": "Après avoir dilué du vinaigre, on mesure [un pH de 4].",
+      "choix": ["Acide", "Neutre", "Basique"],
+      "bonne": 0,
+      "explication": "Un pH de 4 est inférieur à 7 : le vinaigre dilué reste acide."
+    },
+    {
+      "consigne": "Comment qualifier la solution décrite par le passage en couleur ?",
+      "texte": "Un élève prépare [une solution qui contient autant d'ions H⁺ que d'ions HO⁻].",
+      "choix": ["Acide", "Neutre", "Basique"],
+      "bonne": 1,
+      "explication": "Autant d'ions H⁺ que d'ions HO⁻ : la solution est neutre, comme l'eau pure."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "pH",
+      "acceptees": ["pH", "Le pH"],
+      "indices": [
+        "Je suis un nombre sans unité.",
+        "Je vais de 0 à 14.",
+        "Si je suis inférieur à 7, la solution est acide."
+      ],
+      "explication": "Le pH est un nombre sans unité, de 0 à 14, qui indique si une solution est acide, neutre ou basique."
+    },
+    {
+      "reponse": "Dilution",
+      "acceptees": ["Dilution", "La dilution", "Diluer"],
+      "indices": [
+        "Je suis une opération simple de chimie.",
+        "On ajoute de l'eau pour me réaliser.",
+        "Grâce à moi, le pH d'un acide augmente et se rapproche de 7."
+      ],
+      "explication": "La dilution consiste à ajouter de l'eau : le pH se rapproche de 7."
+    },
+    {
+      "reponse": "pH-mètre",
+      "acceptees": ["pH-mètre", "Le pH-mètre", "pH mètre", "phmètre", "pHmètre"],
+      "indices": [
+        "Je suis un appareil de mesure.",
+        "Contrairement au papier, je donne une valeur précise.",
+        "On doit m'étalonner avant de me servir."
+      ],
+      "explication": "Le pH-mètre donne une valeur précise du pH, mais il faut l'étalonner avant de s'en servir."
+    },
+    {
+      "reponse": "Corrosif",
+      "acceptees": ["Corrosif", "Le corrosif", "Pictogramme corrosif", "Produit corrosif"],
+      "indices": [
+        "Je suis un danger signalé sur une étiquette.",
+        "Mon pictogramme montre un liquide qui attaque une main.",
+        "On me trouve sur les acides et les bases concentrés, car ils brûlent la peau."
+      ],
+      "explication": "Le pictogramme « corrosif » signale un produit qui peut brûler la peau et les yeux."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Mesurer un pH avec du papier pH",
+      "etapes": [
+        "Poser un morceau de papier pH dans une coupelle propre",
+        "Déposer une goutte de solution avec un agitateur",
+        "Comparer aussitôt la couleur à l'échelle de teintes",
+        "Noter la valeur approchée et conclure"
+      ]
+    }
+  ]
+}

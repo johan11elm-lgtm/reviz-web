@@ -1,0 +1,158 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "La question de départ",
+      "detail": "La question en « Pourquoi ? » à laquelle le récit étiologique répond.",
+      "cartes": [
+        "Pourquoi la girafe a-t-elle un très long cou ?",
+        "Pourquoi les corbeaux sont-ils tout noirs ?",
+        "Pourquoi le hibou ne sort-il que la nuit ?",
+        "Pourquoi l'eau de la mer est-elle salée ?",
+        "Pourquoi la tortue porte-t-elle une carapace sur le dos ?"
+      ]
+    },
+    {
+      "nom": "La situation d'origine",
+      "detail": "Comment étaient les choses avant le changement.",
+      "cartes": [
+        "Au début, la girafe avait un cou tout court",
+        "Au commencement du monde, le corbeau avait des plumes blanches",
+        "Jadis, le hibou vivait le jour comme les autres oiseaux",
+        "Autrefois, la mer était douce comme une rivière",
+        "Il y a longtemps, la tortue vivait sans carapace"
+      ]
+    },
+    {
+      "nom": "L'événement qui change tout",
+      "detail": "Ce qui arrive et transforme les choses, avec souvent un personnage surnaturel ou un objet magique.",
+      "cartes": [
+        "Une feuille magique allonge le cou de la girafe",
+        "Le corbeau tombe dans un feu et ses plumes noircissent",
+        "Un jour, le hibou insulte le soleil, qui le punit",
+        "Un moulin à sel magique coule au fond de l'océan",
+        "Pendant un orage, un dieu couvre la tortue d'une carapace"
+      ]
+    },
+    {
+      "nom": "La conséquence qui dure",
+      "detail": "Ce qui reste vrai encore aujourd'hui à cause de l'événement.",
+      "cartes": [
+        "Depuis ce jour, toutes les girafes ont un long cou",
+        "Aujourd'hui encore, tous les corbeaux ont les plumes noires",
+        "Depuis, le hibou ne sort plus que la nuit",
+        "Encore maintenant, le moulin tourne et la mer reste salée",
+        "Depuis, toutes les tortues portent leur carapace sur le dos"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "De quel type de récit s'agit-il pour le passage en couleur ?",
+      "texte": "Dans le mythe grec, [Pandore ouvre la jarre et les maux se répandent sur la Terre].",
+      "choix": ["Cosmogonie", "Récit étiologique", "Ni l'un ni l'autre"],
+      "bonne": 1,
+      "explication": "Le passage explique d'où viennent les malheurs des hommes : il répond à un « pourquoi », c'est un récit étiologique. Une cosmogonie raconterait la naissance de tout l'univers."
+    },
+    {
+      "consigne": "De quel type de récit s'agit-il pour le passage en couleur ?",
+      "texte": "Chez Hésiode, [au commencement est le Chaos, puis viennent Gaïa, la Terre, et Ouranos, le Ciel].",
+      "choix": ["Cosmogonie", "Récit étiologique", "Ni l'un ni l'autre"],
+      "bonne": 0,
+      "explication": "Le passage raconte la naissance de l'univers à partir du Chaos : c'est une cosmogonie."
+    },
+    {
+      "consigne": "De quel type de récit s'agit-il pour le passage en couleur ?",
+      "texte": "Hier soir, [Léa a fini ses devoirs, puis elle est allée se coucher].",
+      "choix": ["Cosmogonie", "Récit étiologique", "Ni l'un ni l'autre"],
+      "bonne": 2,
+      "explication": "Ce passage raconte une soirée ordinaire : il n'explique ni la naissance de l'univers (cosmogonie) ni l'origine d'une chose précise (récit étiologique)."
+    },
+    {
+      "consigne": "De quel type de récit s'agit-il pour le passage en couleur ?",
+      "texte": "Selon un mythe chinois, [le géant Pangu sépare le ciel de la terre et, à sa mort, son corps devient le monde].",
+      "choix": ["Cosmogonie", "Récit étiologique", "Ni l'un ni l'autre"],
+      "bonne": 0,
+      "explication": "Le passage raconte comment le monde entier prend forme : c'est une cosmogonie."
+    },
+    {
+      "consigne": "De quel type de récit s'agit-il pour le passage en couleur ?",
+      "texte": "Dans ses Histoires comme ça, Kipling raconte [comment le léopard a eu ses taches].",
+      "choix": ["Cosmogonie", "Récit étiologique", "Ni l'un ni l'autre"],
+      "bonne": 1,
+      "explication": "Le passage explique l'origine d'une chose précise, les taches du léopard : c'est un récit étiologique, pas une cosmogonie."
+    },
+    {
+      "consigne": "De quel type de récit s'agit-il pour le passage en couleur ?",
+      "texte": "Dans la Genèse, [Dieu brouille la langue des hommes, qui se mettent à parler des langues différentes].",
+      "choix": ["Cosmogonie", "Récit étiologique", "Ni l'un ni l'autre"],
+      "bonne": 1,
+      "explication": "L'épisode de la tour de Babel explique pourquoi il existe tant de langues : c'est un récit étiologique."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Prométhée",
+      "acceptees": [],
+      "indices": [
+        "Je suis un personnage de la mythologie grecque.",
+        "J'ai pris aux dieux un bien précieux pour le donner aux hommes.",
+        "Zeus m'a puni : je suis enchaîné sur un rocher où un aigle me dévore le foie."
+      ],
+      "explication": "Prométhée vole le feu aux dieux pour les hommes ; Zeus l'enchaîne sur un rocher où un aigle lui dévore le foie."
+    },
+    {
+      "reponse": "Pandore",
+      "acceptees": [],
+      "indices": [
+        "Les Grecs racontent mon histoire pour expliquer d'où vient le malheur.",
+        "J'ouvre une jarre et j'en libère tous les maux.",
+        "Seule l'espérance est restée au fond de la jarre que j'ai ouverte."
+      ],
+      "explication": "Pandore ouvre la jarre qui libère les maux sur la Terre ; seule l'espérance reste à l'intérieur."
+    },
+    {
+      "reponse": "Pangu",
+      "acceptees": ["Pan Gu", "Pan-gu"],
+      "indices": [
+        "Je viens d'un mythe chinois sur la création du monde.",
+        "Je suis un géant et je sors d'un œuf cosmique.",
+        "Je sépare le ciel de la terre, puis, à ma mort, mon corps devient le monde."
+      ],
+      "explication": "Dans le mythe chinois, le géant Pangu sort d'un œuf cosmique et sépare le ciel de la terre ; à sa mort, son corps devient le monde."
+    },
+    {
+      "reponse": "Tour de Babel",
+      "acceptees": ["La tour de Babel", "Babel"],
+      "indices": [
+        "On me trouve dans la Genèse.",
+        "Des hommes me construisent pour atteindre le ciel.",
+        "Dieu brouille la langue de ceux qui me bâtissent : voilà pourquoi on parle tant de langues."
+      ],
+      "explication": "La tour de Babel est un épisode de la Genèse qui explique la diversité des langues."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Les jours de la création dans la Genèse",
+      "etapes": [
+        "Dieu crée la lumière",
+        "Dieu crée la terre et les plantes",
+        "Dieu crée les astres : soleil, lune et étoiles",
+        "Dieu crée les poissons et les oiseaux",
+        "Dieu crée les animaux terrestres, puis l'homme et la femme"
+      ]
+    },
+    {
+      "titre": "Les étapes pour écrire un récit étiologique",
+      "etapes": [
+        "Choisis une question qui commence par « Pourquoi »",
+        "Raconte la situation d'origine, avant le changement",
+        "Raconte l'événement qui transforme tout",
+        "Termine par la conséquence qui dure aujourd'hui"
+      ]
+    }
+  ]
+}

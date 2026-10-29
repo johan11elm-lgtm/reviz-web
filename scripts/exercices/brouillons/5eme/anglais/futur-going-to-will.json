@@ -1,0 +1,148 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Un projet déjà décidé",
+      "detail": "On a déjà décidé de le faire : be going to + base verbale, souvent avec un repère comme next summer.",
+      "cartes": [
+        "I'm going to visit London next summer",
+        "Next weekend, I'm going to visit my grandparents",
+        "We bought the tickets, so we're going to visit Dublin",
+        "She is going to study in Ireland next year",
+        "This summer, I'm going to learn to swim"
+      ]
+    },
+    {
+      "nom": "Une prédiction avec un indice visible",
+      "detail": "On voit déjà dans le présent un signe de ce qui va arriver : be going to + base verbale.",
+      "cartes": [
+        "Look at the clouds! It's going to rain",
+        "Be careful! You are going to fall",
+        "Watch out! The glass is going to break",
+        "Look at that car! It's going to hit the wall",
+        "The traffic is terrible! We're going to be late"
+      ]
+    },
+    {
+      "nom": "Un avis sur l'avenir",
+      "detail": "On pense ou on suppose que cela arrivera, souvent avec I think, probably ou maybe : will + base verbale.",
+      "cartes": [
+        "I think it will be sunny tomorrow",
+        "I think robots will do our homework one day",
+        "People will probably live on Mars one day",
+        "Maybe it will snow next week",
+        "I think our team will win the match"
+      ]
+    },
+    {
+      "nom": "Une promesse ou une décision spontanée",
+      "detail": "On promet, ou on décide au moment où l'on parle : will, souvent contracté en I'll, ou won't.",
+      "cartes": [
+        "Don't worry, I'll call you tonight",
+        "I promise I won't be late",
+        "The phone is ringing. I'll answer it!",
+        "It's cold in here. I'll close the window",
+        "I'll help you with your bags!"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Qu'exprime le passage en couleur ?",
+      "texte": "We've booked the hotel, so [we're going to spend a week in Rome].",
+      "choix": ["Un projet déjà décidé", "Une prédiction avec un indice visible", "Un avis sur l'avenir", "Une promesse ou une décision spontanée"],
+      "bonne": 0,
+      "explication": "L'hôtel est déjà réservé : c'est un projet décidé, donc be going to."
+    },
+    {
+      "consigne": "Qu'exprime le passage en couleur ?",
+      "texte": "Look at those black clouds! [It's going to rain] in a minute.",
+      "choix": ["Un projet déjà décidé", "Une prédiction avec un indice visible", "Un avis sur l'avenir", "Une promesse ou une décision spontanée"],
+      "bonne": 1,
+      "explication": "On voit des nuages noirs : c'est une prédiction appuyée sur un indice visible, donc be going to."
+    },
+    {
+      "consigne": "Qu'exprime le passage en couleur ?",
+      "texte": "I think [people will live on Mars] one day.",
+      "choix": ["Un projet déjà décidé", "Une prédiction avec un indice visible", "Un avis sur l'avenir", "Une promesse ou une décision spontanée"],
+      "bonne": 2,
+      "explication": "I think annonce un simple avis sur l'avenir : will + base verbale."
+    },
+    {
+      "consigne": "Qu'exprime le passage en couleur ?",
+      "texte": "The phone is ringing. — [I'll answer it!]",
+      "choix": ["Un projet déjà décidé", "Une prédiction avec un indice visible", "Un avis sur l'avenir", "Une promesse ou une décision spontanée"],
+      "bonne": 3,
+      "explication": "On décide au moment où l'on parle : will, contracté en I'll."
+    },
+    {
+      "consigne": "Qu'exprime le passage en couleur ?",
+      "texte": "Don't worry, [I won't tell] anyone.",
+      "choix": ["Un projet déjà décidé", "Une prédiction avec un indice visible", "Un avis sur l'avenir", "Une promesse ou une décision spontanée"],
+      "bonne": 3,
+      "explication": "C'est une promesse : won't (will not) + base verbale."
+    },
+    {
+      "consigne": "Qu'exprime le passage en couleur ?",
+      "texte": "Maybe [it will snow] tomorrow.",
+      "choix": ["Un projet déjà décidé", "Une prédiction avec un indice visible", "Un avis sur l'avenir", "Une promesse ou une décision spontanée"],
+      "bonne": 2,
+      "explication": "Maybe introduit une supposition sur l'avenir, sans indice visible : will + base verbale."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Won't",
+      "acceptees": ["Won't", "Wont", "Will not"],
+      "indices": [
+        "Je suis un mot anglais qui exprime une négation.",
+        "Je suis la forme contractée de « will not ».",
+        "On me confond souvent avec « want », qui veut dire vouloir."
+      ],
+      "explication": "Won't est la forme contractée de will not (I won't be late). Il ne faut pas le confondre avec want."
+    },
+    {
+      "reponse": "Forecast",
+      "acceptees": ["Forecast", "A forecast", "The forecast", "Weather forecast", "The weather forecast"],
+      "indices": [
+        "Je suis un nom anglais du vocabulaire de la météo.",
+        "On m'écoute pour savoir quel temps il fera demain.",
+        "En français, je me traduis par « prévision »."
+      ],
+      "explication": "A forecast est une prévision, par exemple la météo."
+    },
+    {
+      "reponse": "Going to",
+      "acceptees": ["Going to", "Be going to", "Is going to", "Am going to", "Are going to"],
+      "indices": [
+        "Je sers à parler de l'avenir.",
+        "Je me place après le verbe « être » conjugué : I'm, she's, they're.",
+        "J'exprime un projet déjà décidé, ou une prédiction quand on voit un indice."
+      ],
+      "explication": "Be going to + base verbale exprime un projet décidé ou une prédiction fondée sur un indice visible."
+    },
+    {
+      "reponse": "Will",
+      "acceptees": ["Will", "The auxiliary will"],
+      "indices": [
+        "Je suis un mot anglais invariable : je ne prends jamais de -s.",
+        "Je suis suivi de la base verbale, sans to.",
+        "Ma forme contractée est 'll, et ma négation est won't."
+      ],
+      "explication": "Will est invariable, suivi de la base verbale ; il se contracte en 'll et sa négation est won't."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Construire une phrase avec be going to",
+      "etapes": [
+        "On écrit le sujet : she",
+        "Après le sujet, on écrit be conjugué : is",
+        "Après be, on écrit going to",
+        "Après going to, on écrit la base verbale : study"
+      ]
+    }
+  ]
+}

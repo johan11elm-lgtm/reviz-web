@@ -1,0 +1,217 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Les besoins des muscles",
+      "detail": "Ce que les muscles consomment et rejettent quand ils travaillent.",
+      "cartes": [
+        "Les muscles actifs consomment davantage de glucose",
+        "Un muscle qui travaille consomme plus de dioxygène",
+        "Le muscle rejette du dioxyde de carbone comme déchet",
+        "Dioxygène et glucose fournissent l'énergie de la contraction",
+        "Un muscle au repos consomme moins qu'un muscle actif"
+      ]
+    },
+    {
+      "nom": "Le cœur et le sang",
+      "detail": "Les battements du cœur, leur mesure et la circulation du sang à l'effort.",
+      "cartes": [
+        "Le pouls se prend au poignet ou au cou",
+        "Le cœur bat plus vite pendant l'effort",
+        "Le débit sanguin augmente à l'effort",
+        "18 battements en 15 secondes donnent 72 battements par minute",
+        "Au repos, l'adulte compte 60 à 80 battements par minute"
+      ]
+    },
+    {
+      "nom": "La respiration",
+      "detail": "Les mouvements de la poitrine et les échanges de gaz dans les poumons.",
+      "cartes": [
+        "On respire plus vite et plus amplement à l'effort",
+        "Le volume d'air inspiré à chaque mouvement augmente",
+        "Plus de dioxygène entre dans les poumons",
+        "Plus de dioxyde de carbone est éliminé en expirant",
+        "On compte les mouvements de la poitrine par minute"
+      ]
+    },
+    {
+      "nom": "Limites et bonnes pratiques",
+      "detail": "Ce que l'organisme ne peut pas dépasser et ce qui aide à pratiquer un sport sans danger.",
+      "cartes": [
+        "La fréquence cardiaque ne peut pas dépasser une valeur maximale",
+        "Il faut s'échauffer avant l'effort et s'hydrater",
+        "Un sportif entraîné récupère plus vite qu'une personne non entraînée",
+        "Le dopage est interdit et dangereux pour la santé",
+        "Bien manger et bien dormir aident le sportif"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "l'accélération du cœur pendant l'effort",
+      "carte": "Les muscles ont besoin de plus de dioxygène et de glucose",
+      "role": "cause",
+      "explication": "Le cœur bat plus vite pour faire circuler plus de sang et répondre aux besoins accrus des muscles."
+    },
+    {
+      "fait": "l'accélération du cœur pendant l'effort",
+      "carte": "Le débit sanguin augmente",
+      "role": "consequence",
+      "explication": "Comme le cœur bat plus vite, le débit sanguin augmente, surtout vers les muscles qui travaillent."
+    },
+    {
+      "fait": "l'accélération de la respiration pendant l'effort",
+      "carte": "Les muscles consomment davantage de dioxygène",
+      "role": "cause",
+      "explication": "Les muscles consomment davantage de dioxygène : on respire plus vite pour en apporter plus au sang."
+    },
+    {
+      "fait": "l'accélération de la respiration pendant l'effort",
+      "carte": "Plus de dioxygène entre dans les poumons",
+      "role": "consequence",
+      "explication": "Respirer plus vite et plus amplement fait entrer plus de dioxygène dans les poumons."
+    },
+    {
+      "fait": "l'accélération de la respiration pendant l'effort",
+      "carte": "Plus de dioxyde de carbone est éliminé",
+      "role": "consequence",
+      "explication": "Respirer plus vite et plus amplement permet d'éliminer plus de dioxyde de carbone."
+    }
+  ],
+  "etiquettes": [
+    {
+      "consigne": "Que mesure le groupe en couleur ?",
+      "texte": "Léa prend son pouls pendant une minute et compte [72 battements].",
+      "choix": ["Fréquence cardiaque", "Fréquence respiratoire", "Débit sanguin"],
+      "bonne": 0,
+      "explication": "Le nombre de battements du cœur par minute, mesuré avec le pouls, est la fréquence cardiaque."
+    },
+    {
+      "consigne": "Que mesure le groupe en couleur ?",
+      "texte": "Hugo observe sa poitrine pendant une minute : il compte [16 mouvements].",
+      "choix": ["Fréquence cardiaque", "Fréquence respiratoire", "Débit sanguin"],
+      "bonne": 1,
+      "explication": "Le nombre de mouvements de la poitrine par minute est la fréquence respiratoire."
+    },
+    {
+      "consigne": "Que mesure le groupe en couleur ?",
+      "texte": "Pendant la course, [la quantité de sang qui traverse les muscles des jambes en une minute] augmente.",
+      "choix": ["Fréquence cardiaque", "Fréquence respiratoire", "Débit sanguin"],
+      "bonne": 2,
+      "explication": "La quantité de sang qui circule dans un organe par minute est le débit sanguin."
+    },
+    {
+      "consigne": "Que mesure le groupe en couleur ?",
+      "texte": "Le cardiofréquencemètre de Samir affiche [150 battements par minute] en fin de course.",
+      "choix": ["Fréquence cardiaque", "Fréquence respiratoire", "Débit sanguin"],
+      "bonne": 0,
+      "explication": "Un cardiofréquencemètre compte les battements du cœur par minute : c'est la fréquence cardiaque."
+    },
+    {
+      "consigne": "Que mesure le groupe en couleur ?",
+      "texte": "Après l'effort, Inès compte [25 mouvements de sa poitrine] en une minute.",
+      "choix": ["Fréquence cardiaque", "Fréquence respiratoire", "Débit sanguin"],
+      "bonne": 1,
+      "explication": "Les mouvements de la poitrine comptés en une minute donnent la fréquence respiratoire."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Pouls",
+      "acceptees": ["Le pouls", "Fréquence cardiaque", "La fréquence cardiaque"],
+      "indices": [
+        "Je me prends au poignet ou au cou.",
+        "On me compte pendant 15 secondes, puis on multiplie par 4.",
+        "Je correspond aux battements du cœur transmis dans les artères."
+      ],
+      "explication": "Le pouls correspond aux battements du cœur : en le comptant, on mesure la fréquence cardiaque."
+    },
+    {
+      "reponse": "Récupération",
+      "acceptees": ["La récupération", "Phase de récupération"],
+      "indices": [
+        "Je viens après l'effort.",
+        "Je ramène peu à peu le cœur et la respiration à leur valeur de repos.",
+        "Je suis plus rapide chez une personne entraînée."
+      ],
+      "explication": "La récupération est le retour progressif de l'organisme à l'état de repos après un effort."
+    },
+    {
+      "reponse": "Dopage",
+      "acceptees": ["Le dopage"],
+      "indices": [
+        "Je suis dangereux pour la santé.",
+        "Je suis interdit dans le sport.",
+        "Je consiste à utiliser des substances pour augmenter artificiellement ses performances."
+      ],
+      "explication": "Le dopage est l'usage de substances interdites pour améliorer ses performances ; il est dangereux pour la santé."
+    },
+    {
+      "reponse": "Glucose",
+      "acceptees": ["Le glucose"],
+      "indices": [
+        "Je suis un nutriment.",
+        "Les muscles me consomment davantage pendant l'effort.",
+        "Avec le dioxygène, je leur fournis de l'énergie."
+      ],
+      "explication": "Les muscles utilisent du glucose et du dioxygène pour produire l'énergie de leur contraction."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "Un élève de 14 ans estime sa fréquence cardiaque maximale avec la formule « 220 − âge ». Quelle valeur trouve-t-il, en battements par minute ?",
+      "reponse": 206,
+      "unite": "battements/min",
+      "tolerance": 0,
+      "explication": "FC max ≈ 220 − âge = 220 − 14 = 206 battements par minute."
+    },
+    {
+      "question": "Une élève de 11 ans estime sa fréquence cardiaque maximale avec la formule « 220 − âge ». Quelle valeur trouve-t-elle, en battements par minute ?",
+      "reponse": 209,
+      "unite": "battements/min",
+      "tolerance": 0,
+      "explication": "FC max ≈ 220 − âge = 220 − 11 = 209 battements par minute."
+    },
+    {
+      "question": "Au repos, Léa compte 21 battements en 15 secondes. Quelle est sa fréquence cardiaque, en battements par minute ?",
+      "reponse": 84,
+      "unite": "battements/min",
+      "tolerance": 0,
+      "explication": "15 secondes sont le quart d'une minute : 21 × 4 = 84 battements par minute."
+    },
+    {
+      "question": "Juste après une course, Samir compte 33 battements en 15 secondes. Quelle est sa fréquence cardiaque, en battements par minute ?",
+      "reponse": 132,
+      "unite": "battements/min",
+      "tolerance": 0,
+      "explication": "15 secondes sont le quart d'une minute : 33 × 4 = 132 battements par minute."
+    },
+    {
+      "question": "La fréquence cardiaque de repos de Tom est de 75 battements par minute. Pendant l'effort, elle monte à 165 battements par minute. De combien augmente-t-elle ?",
+      "reponse": 90,
+      "unite": "battements/min",
+      "tolerance": 0,
+      "explication": "165 − 75 = 90 battements par minute de plus que la valeur de repos."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Prendre son pouls",
+      "etapes": [
+        "On place deux doigts sur le poignet ou sur le cou",
+        "On compte les battements pendant 15 secondes",
+        "On multiplie le nombre trouvé par 4",
+        "On obtient la fréquence en battements par minute"
+      ]
+    },
+    {
+      "titre": "Exploiter des mesures de fréquence cardiaque",
+      "etapes": [
+        "On mesure la fréquence au repos, pendant et après l'effort",
+        "On trace le graphique avec le temps en abscisse",
+        "On repère les phases : repos, effort, récupération",
+        "On interprète la hausse pendant l'effort"
+      ]
+    }
+  ]
+}

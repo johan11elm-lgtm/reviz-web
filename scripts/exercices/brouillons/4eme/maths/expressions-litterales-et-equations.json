@@ -1,0 +1,190 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Les conventions d'écriture",
+      "detail": "Comment écrire une expression littérale sans signe × inutile.",
+      "cartes": [
+        "3 × x s'écrit 3x",
+        "a × b s'écrit ab",
+        "x × x s'écrit x²",
+        "1 × x s'écrit x",
+        "On garde le signe × entre deux nombres"
+      ]
+    },
+    {
+      "nom": "Calculer une valeur",
+      "detail": "Substituer : remplacer la lettre par un nombre puis calculer, en respectant les priorités.",
+      "cartes": [
+        "Pour x = −2, 3x + 1 vaut −5",
+        "Pour x = 2, 4x − 1 vaut 7",
+        "Pour x = −2, x² vaut 4",
+        "Pour x = −2, 3x² − 5x + 1 vaut 23",
+        "Remplacer la lettre par un nombre"
+      ]
+    },
+    {
+      "nom": "Réduire une expression",
+      "detail": "Regrouper les termes de même nature pour écrire l'expression plus simplement.",
+      "cartes": [
+        "5x + 3 − 2x + 7 devient 3x + 10",
+        "4x² + 3x − x² devient 3x² + 3x",
+        "4x + 2 + 3x − 5 devient 7x − 3",
+        "Les termes en x² et en x ne se regroupent pas",
+        "Regrouper les termes de même nature"
+      ]
+    },
+    {
+      "nom": "Résoudre une équation",
+      "detail": "Trouver la valeur de l'inconnue en faisant la même opération sur les deux membres.",
+      "cartes": [
+        "5x − 4 = 2x + 11 donne 3x = 15",
+        "4x + 7 = 1 donne x = −1,5",
+        "3x + 4 = 19 donne x = 5",
+        "Faire la même opération sur les deux membres",
+        "Diviser les deux membres par un nombre non nul"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Comment appelle-t-on le passage en couleur ?",
+      "texte": "Dans l'équation 4x + 7 = 1, la lettre [x] est ...",
+      "choix": [
+        "L'inconnue",
+        "Une solution",
+        "Un membre"
+      ],
+      "bonne": 0,
+      "explication": "La lettre x désigne le nombre à trouver : c'est l'inconnue."
+    },
+    {
+      "consigne": "Comment appelle-t-on le passage en couleur ?",
+      "texte": "Pour l'équation 3x + 4 = 19, [x = 5] est ...",
+      "choix": [
+        "L'inconnue",
+        "Une solution",
+        "Un membre"
+      ],
+      "bonne": 1,
+      "explication": "Pour x = 5, 3 × 5 + 4 = 19 : l'égalité est vraie, donc 5 est une solution."
+    },
+    {
+      "consigne": "Comment appelle-t-on le passage en couleur ?",
+      "texte": "Dans l'équation 2x + 3 = 5x − 6, [5x − 6] est ...",
+      "choix": [
+        "L'inconnue",
+        "Une solution",
+        "Un membre"
+      ],
+      "bonne": 2,
+      "explication": "Un membre est chacune des deux expressions de part et d'autre du signe =."
+    },
+    {
+      "consigne": "Comment appelle-t-on le passage en couleur ?",
+      "texte": "Pour l'équation 4x + 7 = 1, [x = −1,5] est ...",
+      "choix": [
+        "L'inconnue",
+        "Une solution",
+        "Un membre"
+      ],
+      "bonne": 1,
+      "explication": "Pour x = −1,5, 4 × (−1,5) + 7 = −6 + 7 = 1 : l'égalité est vraie, donc −1,5 est une solution."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Équation",
+      "acceptees": [
+        "Une équation",
+        "Equation",
+        "Équations"
+      ],
+      "indices": [
+        "Je suis une égalité.",
+        "Je contiens une inconnue.",
+        "Résoudre, c'est chercher les valeurs qui me rendent vraie."
+      ],
+      "explication": "Une équation est une égalité qui contient une inconnue."
+    },
+    {
+      "reponse": "Membre",
+      "acceptees": [
+        "Un membre",
+        "Membres"
+      ],
+      "indices": [
+        "Je suis une expression.",
+        "Je me trouve d'un côté du signe =.",
+        "Dans une égalité, il y en a deux."
+      ],
+      "explication": "Un membre est chacune des deux expressions de part et d'autre du signe =."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "Combien vaut 3x² − 5x + 1 pour x = −2 ?",
+      "reponse": 23,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "3 × (−2)² − 5 × (−2) + 1 = 3 × 4 + 10 + 1 = 12 + 10 + 1 = 23."
+    },
+    {
+      "question": "Réduis 5x + 3 − 2x + 7, puis calcule la valeur de l'expression réduite pour x = 4.",
+      "reponse": 22,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "5x + 3 − 2x + 7 = 3x + 10. Pour x = 4 : 3 × 4 + 10 = 22."
+    },
+    {
+      "question": "Résous 5x − 4 = 2x + 11. Que vaut x ?",
+      "reponse": 5,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "5x − 2x = 11 + 4, donc 3x = 15 et x = 15 ÷ 3 = 5. Vérification : 5 × 5 − 4 = 21 et 2 × 5 + 11 = 21."
+    },
+    {
+      "question": "Résous 4x + 7 = 1. Que vaut x ?",
+      "reponse": -1.5,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "4x = 1 − 7 = −6, donc x = −6 ÷ 4 = −1,5."
+    },
+    {
+      "question": "Résous 7x − 3 = 2x + 17. Que vaut x ?",
+      "reponse": 4,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "7x − 2x = 17 + 3, donc 5x = 20 et x = 4. Vérification : 7 × 4 − 3 = 25 et 2 × 4 + 17 = 25."
+    },
+    {
+      "question": "Trois entiers consécutifs ont pour somme 81. Quel est le plus grand des trois ?",
+      "reponse": 28,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "x + (x + 1) + (x + 2) = 81 donne 3x + 3 = 81, donc x = 26. Les nombres sont 26, 27 et 28 : le plus grand est 28."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Comment résoudre une équation",
+      "etapes": [
+        "Regroupe les x d'un côté et les nombres de l'autre",
+        "Divise les deux membres par le coefficient de x",
+        "Vérifie la solution dans l'équation de départ",
+        "Conclus par une phrase"
+      ]
+    },
+    {
+      "titre": "Comment mettre un problème en équation",
+      "etapes": [
+        "Choisis ce que représente l'inconnue x",
+        "Traduis l'énoncé par une équation",
+        "Résous l'équation obtenue",
+        "Vérifie avec l'énoncé",
+        "Réponds par une phrase"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,221 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Une probabilité de 1/2",
+      "detail": "Les situations où l'on a une chance sur deux.",
+      "cartes": [
+        "Obtenir un nombre pair avec un dé équilibré à 6 faces",
+        "Obtenir face avec une pièce équilibrée",
+        "Tirer une boule verte parmi 5 vertes et 5 rouges",
+        "Obtenir un nombre supérieur à 3 avec un dé équilibré à 6 faces",
+        "Avec deux pièces équilibrées, obtenir une pile et une face"
+      ]
+    },
+    {
+      "nom": "Une probabilité de 1/3",
+      "detail": "Les situations où l'on a une chance sur trois.",
+      "cartes": [
+        "Obtenir 1 ou 2 avec un dé équilibré à 6 faces",
+        "Obtenir un multiple de 3 avec un dé équilibré à 6 faces",
+        "Tirer une boule rouge parmi 2 rouges et 4 bleues",
+        "Tirer une boule bleue parmi 4 bleues et 8 vertes",
+        "Une roue a 9 secteurs égaux dont 3 rouges : tomber sur rouge"
+      ]
+    },
+    {
+      "nom": "Une probabilité de 1/4",
+      "detail": "Les situations où l'on a une chance sur quatre.",
+      "cartes": [
+        "Obtenir deux fois pile avec deux pièces équilibrées",
+        "Tirer une boule jaune parmi 3 jaunes et 9 noires",
+        "Obtenir 1 avec un dé équilibré à 4 faces",
+        "Avec deux pièces, obtenir d'abord pile puis face",
+        "Tirer une boule rouge parmi 5 rouges et 15 bleues"
+      ]
+    },
+    {
+      "nom": "Une probabilité de 1/6",
+      "detail": "Les situations où l'on a une chance sur six.",
+      "cartes": [
+        "Obtenir 6 avec un dé équilibré à 6 faces",
+        "Obtenir une somme égale à 7 avec deux dés équilibrés",
+        "Obtenir le même numéro sur deux dés équilibrés",
+        "Obtenir un nombre pair multiple de 3 avec un dé à 6 faces",
+        "Tirer la seule boule rouge d'un sac de 6 boules"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Quelle règle permet de calculer ce qui est en couleur ?",
+      "texte": "Un sac contient 4 boules rouges et 6 boules vertes. On tire une boule au hasard. [Calculer la probabilité qu'elle soit rouge.]",
+      "choix": [
+        "Issues favorables ÷ issues possibles",
+        "1 − P(A)",
+        "P(A) + P(B)",
+        "Multiplier le long d'un chemin"
+      ],
+      "bonne": 0,
+      "explication": "Toutes les boules ont la même chance d'être tirées : P = 4 issues favorables ÷ 10 issues possibles = 0,4."
+    },
+    {
+      "consigne": "Quelle règle permet de calculer ce qui est en couleur ?",
+      "texte": "Une urne contient des boules numérotées. On a P(« tirer un 1 ») = 0,2 et P(« tirer un 2 ») = 0,5. Ces deux événements sont incompatibles. [Calculer P(« tirer un 1 ou un 2 »).]",
+      "choix": [
+        "Issues favorables ÷ issues possibles",
+        "1 − P(A)",
+        "P(A) + P(B)",
+        "Multiplier le long d'un chemin"
+      ],
+      "bonne": 2,
+      "explication": "Les événements sont incompatibles : on additionne leurs probabilités. P(1 ou 2) = 0,2 + 0,5 = 0,7."
+    },
+    {
+      "consigne": "Quelle règle permet de calculer ce qui est en couleur ?",
+      "texte": "Dans un arbre, la branche « gagner au premier jeu » porte 0,3 et la branche suivante « gagner au second jeu » porte 0,6. [Calculer la probabilité du chemin « gagner deux fois ».]",
+      "choix": [
+        "Issues favorables ÷ issues possibles",
+        "1 − P(A)",
+        "P(A) + P(B)",
+        "Multiplier le long d'un chemin"
+      ],
+      "bonne": 3,
+      "explication": "Dans un arbre, on multiplie les probabilités le long d'un chemin : 0,3 × 0,6 = 0,18."
+    },
+    {
+      "consigne": "Quelle règle permet de calculer ce qui est en couleur ?",
+      "texte": "La probabilité de gagner à un jeu est 0,35. [Calculer la probabilité de ne pas gagner.]",
+      "choix": [
+        "Issues favorables ÷ issues possibles",
+        "1 − P(A)",
+        "P(A) + P(B)",
+        "Multiplier le long d'un chemin"
+      ],
+      "bonne": 1,
+      "explication": "« Ne pas gagner » est l'événement contraire de « gagner » : 1 − 0,35 = 0,65."
+    },
+    {
+      "consigne": "Quelle règle permet de calculer ce qui est en couleur ?",
+      "texte": "Une roue équitable a 8 secteurs de même taille, dont 3 sont verts. [Calculer la probabilité de tomber sur un secteur vert.]",
+      "choix": [
+        "Issues favorables ÷ issues possibles",
+        "1 − P(A)",
+        "P(A) + P(B)",
+        "Multiplier le long d'un chemin"
+      ],
+      "bonne": 0,
+      "explication": "Les 8 secteurs ont la même chance : P = 3 issues favorables ÷ 8 issues possibles = 3/8."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Événement contraire",
+      "acceptees": [
+        "Événement contraire",
+        "L'événement contraire",
+        "Contraire",
+        "Le contraire",
+        "Non A"
+      ],
+      "indices": [
+        "Je suis réalisé exactement quand un autre ne l'est pas.",
+        "Ma probabilité vaut 1 moins celle de cet autre.",
+        "Avec un dé, « ne pas obtenir 6 » est mon exemple pour « obtenir 6 »."
+      ],
+      "explication": "L'événement contraire de A, noté « non A », est réalisé quand A ne l'est pas : P(non A) = 1 − P(A)."
+    },
+    {
+      "reponse": "Équiprobabilité",
+      "acceptees": [
+        "Équiprobabilité",
+        "L'équiprobabilité",
+        "Situation d'équiprobabilité",
+        "Équiprobable",
+        "Équiprobables"
+      ],
+      "indices": [
+        "Je décris une situation de hasard.",
+        "Dans ma situation, toutes les issues ont la même chance.",
+        "Un dé équilibré ou une pièce équilibrée en sont des exemples."
+      ],
+      "explication": "Il y a équiprobabilité quand toutes les issues ont la même probabilité : on divise alors le nombre d'issues favorables par le nombre total d'issues."
+    },
+    {
+      "reponse": "Arbre des possibles",
+      "acceptees": [
+        "Arbre des possibles",
+        "L'arbre des possibles",
+        "Arbre",
+        "Un arbre",
+        "Arbre de probabilités"
+      ],
+      "indices": [
+        "Je suis un schéma qui liste les issues d'une expérience à deux épreuves.",
+        "Je suis fait de branches qui partent d'un même point.",
+        "Sur mes branches on écrit des probabilités, et on les multiplie le long d'un chemin."
+      ],
+      "explication": "Dans l'arbre des possibles, la probabilité d'un chemin est le produit des probabilités de ses branches."
+    },
+    {
+      "reponse": "Fréquence",
+      "acceptees": [
+        "Fréquence",
+        "La fréquence",
+        "Fréquence observée"
+      ],
+      "indices": [
+        "Je suis un nombre observé après avoir répété une expérience.",
+        "Sur peu d'essais, je peux être très loin de la probabilité.",
+        "Sur un très grand nombre d'essais, je m'en rapproche."
+      ],
+      "explication": "La fréquence observée d'un événement se rapproche de sa probabilité quand on répète beaucoup l'expérience."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "La probabilité qu'un bus soit en retard est 0,28. Quelle est la probabilité qu'il ne soit pas en retard ? (écris un nombre décimal)",
+      "reponse": 0.72,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "« Ne pas être en retard » est l'événement contraire : 1 − 0,28 = 0,72."
+    },
+    {
+      "question": "Un sac contient 7 boules rouges et 13 boules bleues. On tire une boule au hasard. Quelle est la probabilité qu'elle soit rouge ? (écris un nombre décimal)",
+      "reponse": 0.35,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "7 boules rouges sur 7 + 13 = 20 boules : 7 ÷ 20 = 0,35."
+    },
+    {
+      "question": "Un dé équilibré à 20 faces est numéroté de 1 à 20. Quelle est la probabilité d'obtenir un multiple de 5 ? (écris un nombre décimal)",
+      "reponse": 0.2,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "Les multiples de 5 sont 5, 10, 15 et 20 : 4 issues favorables sur 20. 4 ÷ 20 = 0,2."
+    },
+    {
+      "question": "On lance deux dés équilibrés à 6 faces. Combien d'issues donnent une somme égale à 8 ?",
+      "reponse": 5,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "Les couples (2 ; 6), (3 ; 5), (4 ; 4), (5 ; 3) et (6 ; 2) donnent 8 : 5 issues."
+    },
+    {
+      "question": "Dans un arbre, un chemin a deux branches de probabilités 0,7 et 0,2. Quelle est la probabilité de ce chemin ?",
+      "reponse": 0.14,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "On multiplie le long du chemin : 0,7 × 0,2 = 0,14."
+    },
+    {
+      "question": "Les événements A et B sont incompatibles, avec P(A) = 0,3 et P(B) = 0,45. Quelle est P(A ou B) ?",
+      "reponse": 0.75,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "A et B sont incompatibles : P(A ou B) = P(A) + P(B) = 0,3 + 0,45 = 0,75."
+    }
+  ],
+  "etapes": []
+}

@@ -1,0 +1,148 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Passif au présent",
+      "detail": "Au présent, be se met à is / are : is / are + participe passé.",
+      "cartes": [
+        "English is spoken all over the world",
+        "Cars are made in this factory",
+        "French is taught at our school",
+        "These cakes are sold in the canteen",
+        "The tickets are checked at the door"
+      ]
+    },
+    {
+      "nom": "Passif au prétérit",
+      "detail": "Au prétérit, be se met à was / were : was / were + participe passé.",
+      "cartes": [
+        "Penicillin was discovered by Fleming",
+        "The telephone was patented in 1876",
+        "The World Wide Web was invented in 1989",
+        "My bike was stolen yesterday",
+        "The windows were broken last night"
+      ]
+    },
+    {
+      "nom": "Passif au present perfect",
+      "detail": "Au present perfect, on emploie has / have been + participe passé.",
+      "cartes": [
+        "A new vaccine has been discovered",
+        "A new museum has been built",
+        "The classrooms have been cleaned",
+        "Many new apps have been created",
+        "The letter has been sent"
+      ]
+    },
+    {
+      "nom": "Passif au futur",
+      "detail": "Au futur, on emploie will be + participe passé.",
+      "cartes": [
+        "The results will be published tomorrow",
+        "The match will be played on Saturday",
+        "The old bridge will be repaired in June",
+        "The winners will be announced soon",
+        "The package will be delivered next week"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Quel est le rôle du passage en couleur dans la phrase passive ?",
+      "texte": "Penicillin was discovered [by Fleming].",
+      "choix": ["Le sujet, qui subit l'action", "Le verbe be conjugué", "Le participe passé", "Le complément d'agent"],
+      "bonne": 3,
+      "explication": "« by Fleming » est le complément d'agent : il dit qui a fait l'action, il est introduit par by."
+    },
+    {
+      "consigne": "Quel est le rôle du passage en couleur dans la phrase passive ?",
+      "texte": "[The telephone] was patented in 1876.",
+      "choix": ["Le sujet, qui subit l'action", "Le verbe be conjugué", "Le participe passé", "Le complément d'agent"],
+      "bonne": 0,
+      "explication": "« The telephone » est le sujet de la phrase passive : c'est lui qui subit l'action (le brevet est déposé)."
+    },
+    {
+      "consigne": "Quel est le rôle du passage en couleur dans la phrase passive ?",
+      "texte": "English [is] spoken all over the world.",
+      "choix": ["Le sujet, qui subit l'action", "Le verbe be conjugué", "Le participe passé", "Le complément d'agent"],
+      "bonne": 1,
+      "explication": "« is » est le verbe be conjugué au présent : seul be se conjugue au passif."
+    },
+    {
+      "consigne": "Quel est le rôle du passage en couleur dans la phrase passive ?",
+      "texte": "The World Wide Web was [invented] by Tim Berners-Lee.",
+      "choix": ["Le sujet, qui subit l'action", "Le verbe be conjugué", "Le participe passé", "Le complément d'agent"],
+      "bonne": 2,
+      "explication": "« invented » est le participe passé du verbe invent, placé après be."
+    },
+    {
+      "consigne": "Quel est le rôle du passage en couleur dans la phrase passive ?",
+      "texte": "The World Wide Web was invented [by Tim Berners-Lee] in 1989.",
+      "choix": ["Le sujet, qui subit l'action", "Le verbe be conjugué", "Le participe passé", "Le complément d'agent"],
+      "bonne": 3,
+      "explication": "« by Tim Berners-Lee » est le complément d'agent : c'est l'auteur de l'invention."
+    },
+    {
+      "consigne": "Quel est le rôle du passage en couleur dans la phrase passive ?",
+      "texte": "[A new museum] has been built.",
+      "choix": ["Le sujet, qui subit l'action", "Le verbe be conjugué", "Le participe passé", "Le complément d'agent"],
+      "bonne": 0,
+      "explication": "« A new museum » est le sujet de la phrase passive : c'est lui qui subit l'action (il est construit)."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Alexander Graham Bell",
+      "acceptees": ["Bell", "Graham Bell", "Alexander Bell", "Alexander Graham Bell"],
+      "indices": [
+        "Je suis un inventeur du XIXe siècle.",
+        "Mon invention permet de parler à distance.",
+        "J'ai déposé le brevet du téléphone en 1876."
+      ],
+      "explication": "Alexander Graham Bell a déposé le brevet du téléphone en 1876."
+    },
+    {
+      "reponse": "Alexander Fleming",
+      "acceptees": ["Fleming", "Alexander Fleming"],
+      "indices": [
+        "Je suis un scientifique écossais.",
+        "J'ai fait ma découverte à Londres.",
+        "J'ai découvert la pénicilline en 1928."
+      ],
+      "explication": "L'Écossais Alexander Fleming a découvert la pénicilline en 1928, à Londres."
+    },
+    {
+      "reponse": "Tim Berners-Lee",
+      "acceptees": ["Berners-Lee", "Berners Lee", "Tim Berners Lee", "Tim Berners-Lee"],
+      "indices": [
+        "Je suis britannique.",
+        "J'ai travaillé au CERN.",
+        "J'ai inventé le World Wide Web en 1989."
+      ],
+      "explication": "Le Britannique Tim Berners-Lee a inventé le World Wide Web en 1989, au CERN."
+    },
+    {
+      "reponse": "James Watt",
+      "acceptees": ["Watt", "James Watt"],
+      "indices": [
+        "Je suis un ingénieur écossais.",
+        "J'ai perfectionné une machine à partir de 1769.",
+        "Ma machine à vapeur est au cœur de la révolution industrielle."
+      ],
+      "explication": "L'Écossais James Watt a perfectionné la machine à vapeur à partir de 1769."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Construire « Penicillin was discovered by Fleming »",
+      "etapes": [
+        "On écrit d'abord le sujet : Penicillin",
+        "On ajoute be au prétérit : was",
+        "On ajoute le participe passé : discovered",
+        "On termine par l'agent : by Fleming"
+      ]
+    }
+  ]
+}

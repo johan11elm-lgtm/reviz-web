@@ -1,0 +1,180 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "L'État aménageur",
+      "detail": "Les actions de l'État pour rééquilibrer le territoire face à Paris : DATAR (1963), métropoles d'équilibre (1964), villes nouvelles, littoral du Languedoc, ANCT (2020).",
+      "cartes": [
+        "Création en 1963 de la DATAR, qui pilote l'aménagement",
+        "Lyon, Marseille, Lille et Toulouse choisies pour contrebalancer Paris",
+        "Construction de villes nouvelles autour de Paris",
+        "Aménagement du littoral du Languedoc",
+        "Création en 2020 d'une agence nationale, l'ANCT"
+      ]
+    },
+    {
+      "nom": "La décentralisation",
+      "detail": "Depuis les lois Defferre de 1982-1983, des compétences de l'État sont transférées aux collectivités territoriales.",
+      "cartes": [
+        "Les lois Defferre de 1982-1983",
+        "Transfert de compétences de l'État vers les collectivités",
+        "La région devient responsable des lycées",
+        "Le département devient responsable des collèges",
+        "L'aménagement est désormais partagé avec les élus locaux"
+      ]
+    },
+    {
+      "nom": "L'effet tunnel",
+      "detail": "Un territoire traversé par une grande voie de transport, comme une LGV, sans y avoir accès : il subit la ligne sans en profiter.",
+      "cartes": [
+        "Un territoire traversé par une grande voie sans accès",
+        "Le TGV traverse de nombreuses campagnes sans s'y arrêter",
+        "Des villageois voient passer les trains sans pouvoir les prendre",
+        "Une région rurale reste à l'écart malgré une ligne rapide",
+        "Un risque de renforcer l'enclavement du territoire traversé"
+      ]
+    },
+    {
+      "nom": "Les conflits d'aménagement",
+      "detail": "Une opposition entre acteurs autour d'un projet ; le débat public sert à consulter les citoyens pour la limiter.",
+      "cartes": [
+        "Le projet d'aéroport près de Nantes, abandonné en 2018",
+        "Des élus défendent l'emploi, des habitants protègent les terres agricoles",
+        "Une opposition entre acteurs autour d'un projet",
+        "Des associations défendent l'environnement contre un grand projet",
+        "Un débat public consulte les citoyens avant la décision"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "la création de la DATAR en 1963",
+      "carte": "Une France déséquilibrée au profit de Paris",
+      "role": "cause",
+      "explication": "Après 1945, Paris concentre l'essentiel des richesses : l'État crée la DATAR en 1963 pour piloter l'aménagement et réduire ces déséquilibres."
+    },
+    {
+      "fait": "la création de la DATAR en 1963",
+      "carte": "La création des métropoles d'équilibre en 1964",
+      "role": "consequence",
+      "explication": "Avec la DATAR, l'État crée en 1964 des métropoles d'équilibre (Lyon, Marseille, Lille, Toulouse) pour contrebalancer Paris."
+    },
+    {
+      "fait": "la création de la DATAR en 1963",
+      "carte": "La construction de villes nouvelles autour de Paris",
+      "role": "consequence",
+      "explication": "Avec la DATAR, l'État crée aussi des villes nouvelles autour de Paris."
+    },
+    {
+      "fait": "l'effet tunnel",
+      "carte": "Une ligne à grande vitesse qui traverse une région sans y avoir de gare",
+      "role": "cause",
+      "explication": "Les territoires traversés sans arrêt restent à l'écart de la ligne : c'est ce qui produit l'effet tunnel."
+    },
+    {
+      "fait": "l'effet tunnel",
+      "carte": "Un risque d'enclavement renforcé pour la région traversée",
+      "role": "consequence",
+      "explication": "L'effet tunnel peut renforcer l'enclavement : la région subit la ligne sans profiter du service."
+    }
+  ],
+  "etiquettes": [
+    {
+      "consigne": "Quel type d'acteur est en couleur ?",
+      "texte": "Pour piloter l'aménagement, [la DATAR] est créée en 1963.",
+      "choix": ["L'État", "Une collectivité territoriale", "L'Union européenne", "Une entreprise ou une association"],
+      "bonne": 0,
+      "explication": "La DATAR est un organisme de l'État, créé en 1963 pour piloter l'aménagement du territoire."
+    },
+    {
+      "consigne": "Quel type d'acteur est en couleur ?",
+      "texte": "Les lycées sont gérés par [la région].",
+      "choix": ["L'État", "Une collectivité territoriale", "L'Union européenne", "Une entreprise ou une association"],
+      "bonne": 1,
+      "explication": "Les régions, comme les départements et les communes, sont des collectivités territoriales. La région gère les lycées."
+    },
+    {
+      "consigne": "Quel type d'acteur est en couleur ?",
+      "texte": "Une partie du projet est financée par [le FEDER].",
+      "choix": ["L'État", "Une collectivité territoriale", "L'Union européenne", "Une entreprise ou une association"],
+      "bonne": 2,
+      "explication": "Le FEDER est le Fonds européen de développement régional : il finance des projets pour l'Union européenne."
+    },
+    {
+      "consigne": "Quel type d'acteur est en couleur ?",
+      "texte": "La fibre optique est installée par [un opérateur de télécommunications].",
+      "choix": ["L'État", "Une collectivité territoriale", "L'Union européenne", "Une entreprise ou une association"],
+      "bonne": 3,
+      "explication": "Un opérateur de télécommunications est une entreprise : les entreprises, comme la SNCF, participent à l'aménagement."
+    },
+    {
+      "consigne": "Quel type d'acteur est en couleur ?",
+      "texte": "[Des associations] et des habitants s'opposent au projet pour protéger les terres agricoles.",
+      "choix": ["L'État", "Une collectivité territoriale", "L'Union européenne", "Une entreprise ou une association"],
+      "bonne": 3,
+      "explication": "Les associations et les habitants participent à l'aménagement, notamment en s'opposant à un projet : c'est un conflit d'aménagement."
+    },
+    {
+      "consigne": "Quel type d'acteur est en couleur ?",
+      "texte": "Les collèges sont gérés par [le département].",
+      "choix": ["L'État", "Une collectivité territoriale", "L'Union européenne", "Une entreprise ou une association"],
+      "bonne": 1,
+      "explication": "Le département est une collectivité territoriale. Il gère les collèges, alors que la région gère les lycées."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "DATAR",
+      "acceptees": ["DATAR", "La DATAR", "Délégation à l'aménagement du territoire et à l'action régionale"],
+      "indices": [
+        "Je suis un organisme créé par l'État.",
+        "Je suis créée en 1963.",
+        "Je pilote l'aménagement du territoire, et mon nom est un sigle."
+      ],
+      "explication": "La DATAR (Délégation à l'aménagement du territoire et à l'action régionale) est créée en 1963 pour piloter l'aménagement."
+    },
+    {
+      "reponse": "La décentralisation",
+      "acceptees": ["Décentralisation", "La décentralisation"],
+      "indices": [
+        "Je suis un changement important dans l'organisation de la France.",
+        "Je suis lancée en 1982-1983 par les lois Defferre.",
+        "Je transfère des compétences de l'État aux régions, aux départements et aux communes."
+      ],
+      "explication": "La décentralisation transfère des compétences de l'État vers les collectivités territoriales (lois Defferre, 1982-1983)."
+    },
+    {
+      "reponse": "L'effet tunnel",
+      "acceptees": ["Effet tunnel", "L'effet tunnel"],
+      "indices": [
+        "Je concerne les territoires traversés par une grande voie de transport.",
+        "Je touche les campagnes que le TGV traverse sans s'y arrêter.",
+        "Ces territoires subissent la ligne sans en profiter, et je peux renforcer leur enclavement."
+      ],
+      "explication": "L'effet tunnel désigne un territoire traversé par une grande voie de transport sans y avoir accès."
+    },
+    {
+      "reponse": "Notre-Dame-des-Landes",
+      "acceptees": ["Notre-Dame-des-Landes", "Notre Dame des Landes", "NDDL"],
+      "indices": [
+        "Je suis un lieu situé près de Nantes.",
+        "On a voulu y construire un aéroport.",
+        "Le projet, très contesté, a été abandonné en 2018."
+      ],
+      "explication": "Le projet d'aéroport de Notre-Dame-des-Landes, près de Nantes, est abandonné en 2018 après des années d'opposition."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Cinq moments de l'aménagement, du plus ancien au plus récent",
+      "etapes": [
+        "Parution de « Paris et le désert français »",
+        "Création de la DATAR",
+        "Mise en service de la première LGV, Paris-Lyon",
+        "Lois Defferre de décentralisation",
+        "Abandon du projet d'aéroport de Notre-Dame-des-Landes"
+      ]
+    }
+  ]
+}

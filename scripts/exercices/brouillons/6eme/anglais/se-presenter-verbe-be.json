@@ -1,0 +1,148 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Saluer ou prendre congé",
+      "detail": "Des formules pour dire bonjour ou au revoir, selon le moment de la journée.",
+      "cartes": [
+        "Good morning, Mr Brown",
+        "Good afternoon, everybody",
+        "Bye, see you tomorrow",
+        "Goodbye, Miss Green",
+        "Good night, Mum"
+      ]
+    },
+    {
+      "nom": "Se présenter",
+      "detail": "Des phrases qui disent son nom, son âge, sa nationalité ou sa ville avec le verbe be.",
+      "cartes": [
+        "My name is Léa",
+        "I'm eleven years old",
+        "I'm from Leeds, in England",
+        "I'm Tom and I'm French",
+        "I'm Irish and I'm from Dublin"
+      ]
+    },
+    {
+      "nom": "Poser une question pour faire connaissance",
+      "detail": "Des questions où be est placé avant le sujet, pour connaître le nom, l'âge ou l'origine de quelqu'un.",
+      "cartes": [
+        "What's your name?",
+        "How old are you?",
+        "Where are you from?",
+        "Are you English?",
+        "Is she twelve years old?"
+      ]
+    },
+    {
+      "nom": "Dire que ce n'est pas vrai",
+      "detail": "Des phrases négatives : be suivi de not (I'm not, isn't, aren't).",
+      "cartes": [
+        "I'm not English",
+        "She isn't from Paris",
+        "He isn't twelve years old",
+        "They aren't from Scotland",
+        "We aren't French"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Quel pronom sujet remplace le groupe en couleur ?",
+      "texte": "[My brother] is twelve years old.",
+      "choix": ["he", "she", "it", "they"],
+      "bonne": 0,
+      "explication": "« My brother » désigne un garçon : on le remplace par he."
+    },
+    {
+      "consigne": "Quel pronom sujet remplace le groupe en couleur ?",
+      "texte": "[My bag] is blue.",
+      "choix": ["he", "she", "it", "they"],
+      "bonne": 2,
+      "explication": "Un sac est un objet : on le remplace par it."
+    },
+    {
+      "consigne": "Quel pronom sujet remplace le groupe en couleur ?",
+      "texte": "[My sister Léa] is from Lyon.",
+      "choix": ["he", "she", "it", "they"],
+      "bonne": 1,
+      "explication": "« My sister Léa » désigne une fille : on la remplace par she."
+    },
+    {
+      "consigne": "Quel pronom sujet remplace le groupe en couleur ?",
+      "texte": "[Tom and Emma] are English.",
+      "choix": ["he", "she", "it", "they"],
+      "bonne": 3,
+      "explication": "Tom et Emma font deux personnes : on les remplace par they, qui va avec are."
+    },
+    {
+      "consigne": "Quel pronom sujet remplace le groupe en couleur ?",
+      "texte": "[Mr Brown] is our English teacher.",
+      "choix": ["he", "she", "it", "they"],
+      "bonne": 0,
+      "explication": "Mr Brown est un homme : on le remplace par he."
+    },
+    {
+      "consigne": "Quel pronom sujet remplace le groupe en couleur ?",
+      "texte": "[This pen] is red.",
+      "choix": ["he", "she", "it", "they"],
+      "bonne": 2,
+      "explication": "Un stylo est un objet : on le remplace par it."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "She",
+      "acceptees": ["She"],
+      "indices": [
+        "Je suis un petit mot qui remplace un nom.",
+        "Je suis un pronom personnel sujet.",
+        "Je désigne une fille ou une femme."
+      ],
+      "explication": "She remplace une fille ou une femme et se construit avec is : She is twelve."
+    },
+    {
+      "reponse": "It",
+      "acceptees": ["It"],
+      "indices": [
+        "Je suis un pronom personnel sujet.",
+        "Je ne désigne jamais une personne.",
+        "Je remplace un objet ou un animal non nommé, comme un sac."
+      ],
+      "explication": "It remplace un objet ou un animal non nommé : This is my bag. It is blue."
+    },
+    {
+      "reponse": "Good afternoon",
+      "acceptees": ["Good afternoon"],
+      "indices": [
+        "Je suis une façon de dire bonjour.",
+        "Je suis formé de deux mots.",
+        "On me dit l'après-midi, par exemple à 15 heures."
+      ],
+      "explication": "Good afternoon se dit l'après-midi ; Good morning est pour le matin et Good evening pour le soir."
+    },
+    {
+      "reponse": "Am",
+      "acceptees": ["Am", "I am"],
+      "indices": [
+        "Je suis une forme du verbe be.",
+        "Je suis très court : deux lettres seulement.",
+        "On m'emploie uniquement après le pronom I."
+      ],
+      "explication": "Am est la forme de be qui va seulement avec I : I am (I'm)."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Les étapes pour construire une question avec be",
+      "etapes": [
+        "Repère le sujet et remplace-le par le bon pronom",
+        "Choisis la forme de be qui va avec ce pronom",
+        "Écris la phrase : sujet, be, puis le reste",
+        "Pour la question, place be devant le sujet"
+      ]
+    }
+  ]
+}

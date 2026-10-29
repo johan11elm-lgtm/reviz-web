@@ -1,0 +1,185 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Énergie cinétique",
+      "detail": "L'énergie liée au mouvement : celle d'un véhicule, du vent, de l'eau ou d'une turbine qui bougent.",
+      "cartes": [
+        "L'énergie d'une voiture qui roule",
+        "L'énergie du vent qui pousse les pales d'une éolienne",
+        "L'énergie que la turbine transmet à l'alternateur",
+        "L'énergie de l'eau en mouvement qui fait tourner une turbine",
+        "L'énergie d'un cycliste qui file sur la route"
+      ]
+    },
+    {
+      "nom": "Énergie thermique",
+      "detail": "L'énergie liée à la chaleur : celle qui chauffe l'eau, celle qui est perdue par un convertisseur.",
+      "cartes": [
+        "L'énergie perdue par une lampe qui chauffe",
+        "L'énergie apportée à l'eau pour produire de la vapeur",
+        "L'énergie d'une tasse de thé brûlant",
+        "L'énergie dégagée en chaleur quand le charbon brûle",
+        "L'énergie d'un four chaud qui cuit un gâteau"
+      ]
+    },
+    {
+      "nom": "Énergie électrique",
+      "detail": "L'énergie fournie par un alternateur ou un panneau photovoltaïque et reçue par les appareils.",
+      "cartes": [
+        "L'énergie fournie par un alternateur",
+        "L'énergie que reçoit une lampe allumée",
+        "L'énergie produite par un panneau photovoltaïque",
+        "L'énergie qu'un ventilateur reçoit en étant branché",
+        "L'énergie envoyée dans le réseau par une centrale"
+      ]
+    },
+    {
+      "nom": "Énergie lumineuse",
+      "detail": "L'énergie transportée par la lumière : celle du Soleil, d'une lampe ou d'un projecteur.",
+      "cartes": [
+        "L'énergie émise par le Soleil",
+        "L'énergie utile que fournit une lampe",
+        "L'énergie reçue par un panneau photovoltaïque",
+        "L'énergie portée par le faisceau d'un phare",
+        "L'énergie rayonnée par un projecteur sur une scène"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "À quelle famille appartient la source d'énergie en couleur ?",
+      "texte": "Une éolienne produit de l'électricité grâce à [le vent].",
+      "choix": ["Source renouvelable", "Combustible fossile", "Combustible nucléaire"],
+      "bonne": 0,
+      "explication": "Le vent se renouvelle en permanence : c'est une source renouvelable."
+    },
+    {
+      "consigne": "À quelle famille appartient la source d'énergie en couleur ?",
+      "texte": "Une centrale chauffe de l'eau en brûlant [du charbon].",
+      "choix": ["Source renouvelable", "Combustible fossile", "Combustible nucléaire"],
+      "bonne": 1,
+      "explication": "Le charbon est un combustible fossile : son stock s'épuise et sa combustion rejette du CO₂."
+    },
+    {
+      "consigne": "À quelle famille appartient la source d'énergie en couleur ?",
+      "texte": "Dans une centrale nucléaire, la chaleur vient de [l'uranium].",
+      "choix": ["Source renouvelable", "Combustible fossile", "Combustible nucléaire"],
+      "bonne": 2,
+      "explication": "L'uranium est le combustible des centrales nucléaires : un minerai dont les stocks s'épuisent."
+    },
+    {
+      "consigne": "À quelle famille appartient la source d'énergie en couleur ?",
+      "texte": "Un panneau photovoltaïque convertit [la lumière du Soleil] en électricité.",
+      "choix": ["Source renouvelable", "Combustible fossile", "Combustible nucléaire"],
+      "bonne": 0,
+      "explication": "Le Soleil est une source renouvelable à l'échelle humaine."
+    },
+    {
+      "consigne": "À quelle famille appartient la source d'énergie en couleur ?",
+      "texte": "Une centrale au gaz brûle [du gaz naturel] pour produire de la vapeur.",
+      "choix": ["Source renouvelable", "Combustible fossile", "Combustible nucléaire"],
+      "bonne": 1,
+      "explication": "Le gaz naturel est un combustible fossile : il se forme en millions d'années et rejette du CO₂ en brûlant."
+    },
+    {
+      "consigne": "À quelle famille appartient la source d'énergie en couleur ?",
+      "texte": "Un barrage fait tourner une turbine avec [l'eau d'une rivière].",
+      "choix": ["Source renouvelable", "Combustible fossile", "Combustible nucléaire"],
+      "bonne": 0,
+      "explication": "L'eau en mouvement est une source renouvelable."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Alternateur",
+      "acceptees": ["Alternateur", "L'alternateur", "Un alternateur"],
+      "indices": [
+        "Je suis un appareil que l'on trouve dans presque toutes les centrales.",
+        "Je convertis de l'énergie cinétique en énergie électrique.",
+        "Pour cela, j'utilise un aimant qui tourne près d'une bobine."
+      ],
+      "explication": "L'alternateur convertit l'énergie cinétique de la turbine en énergie électrique grâce à un aimant qui tourne près d'une bobine."
+    },
+    {
+      "reponse": "Turbine",
+      "acceptees": ["Turbine", "La turbine", "Une turbine"],
+      "indices": [
+        "Je suis une roue à pales.",
+        "La vapeur, l'eau ou le vent me mettent en rotation.",
+        "En tournant, j'entraîne l'alternateur d'une centrale."
+      ],
+      "explication": "La turbine est mise en rotation par la vapeur, l'eau ou le vent, et entraîne l'alternateur."
+    },
+    {
+      "reponse": "Rendement",
+      "acceptees": ["Rendement", "Le rendement"],
+      "indices": [
+        "Je n'ai pas d'unité.",
+        "Je suis toujours inférieur à 1, soit 100 %.",
+        "Je suis le rapport entre l'énergie utile et l'énergie reçue."
+      ],
+      "explication": "Le rendement vaut énergie utile ÷ énergie reçue : il est toujours inférieur à 1."
+    },
+    {
+      "reponse": "Panneau photovoltaïque",
+      "acceptees": ["Panneau photovoltaïque", "Un panneau photovoltaïque", "Le panneau photovoltaïque", "Photovoltaïque", "Panneau solaire", "Cellule photovoltaïque"],
+      "indices": [
+        "Je suis exposé au Soleil.",
+        "Je convertis directement la lumière en électricité.",
+        "Je n'ai ni turbine ni alternateur."
+      ],
+      "explication": "Le panneau photovoltaïque convertit directement l'énergie lumineuse en énergie électrique, sans turbine ni alternateur."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "Un moteur reçoit 200 J d'énergie électrique et fournit 150 J d'énergie utile. Quel est son rendement, en pourcentage ?",
+      "reponse": 75,
+      "unite": "%",
+      "tolerance": 0,
+      "explication": "η = énergie utile ÷ énergie reçue = 150 ÷ 200 = 0,75, soit 75 %."
+    },
+    {
+      "question": "Une lampe reçoit 60 J d'énergie électrique et fournit 6 J d'énergie lumineuse. Quelle énergie est convertie en énergie thermique ?",
+      "reponse": 54,
+      "unite": "J",
+      "tolerance": 0,
+      "explication": "E reçue = E utile + E perdue, donc E perdue = 60 − 6 = 54 J."
+    },
+    {
+      "question": "Un moteur a un rendement de 0,8 et reçoit 500 J d'énergie. Quelle énergie utile fournit-il ?",
+      "reponse": 400,
+      "unite": "J",
+      "tolerance": 0,
+      "explication": "E utile = η × E reçue = 0,8 × 500 = 400 J."
+    },
+    {
+      "question": "Un convertisseur reçoit 500 J et en perd 150 J sous forme thermique. Quel est son rendement, en pourcentage ?",
+      "reponse": 70,
+      "unite": "%",
+      "tolerance": 0,
+      "explication": "E utile = 500 − 150 = 350 J, donc η = 350 ÷ 500 = 0,7, soit 70 %."
+    },
+    {
+      "question": "Une éolienne fournit 600 J d'énergie électrique et son rendement est de 40 %. Quelle énergie cinétique du vent a-t-elle reçue ?",
+      "reponse": 1500,
+      "unite": "J",
+      "tolerance": 0,
+      "explication": "η = E utile ÷ E reçue, donc E reçue = 600 ÷ 0,4 = 1 500 J."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Produire de l'électricité dans une centrale à charbon",
+      "etapes": [
+        "Le charbon brûle et libère de la chaleur",
+        "L'eau chauffée se transforme en vapeur",
+        "La vapeur fait tourner la turbine",
+        "La turbine entraîne l'alternateur",
+        "L'alternateur fournit de l'énergie électrique"
+      ]
+    }
+  ]
+}

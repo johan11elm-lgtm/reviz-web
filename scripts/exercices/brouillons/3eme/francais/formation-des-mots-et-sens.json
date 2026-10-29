@@ -1,0 +1,148 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Les homonymes",
+      "detail": "Des mots qui se prononcent de la même façon mais ont des sens différents.",
+      "cartes": [
+        "Mer et mère",
+        "Pain et pin",
+        "Cent et sang",
+        "Chant et champ",
+        "Vers et verre"
+      ]
+    },
+    {
+      "nom": "Les paronymes",
+      "detail": "Des mots de forme proche, mais de sens différent, qu'il ne faut pas confondre.",
+      "cartes": [
+        "Éminent et imminent",
+        "Effraction et infraction",
+        "Collision et collusion",
+        "Conjoncture et conjecture",
+        "Allusion et illusion"
+      ]
+    },
+    {
+      "nom": "Les synonymes",
+      "detail": "Des mots de sens proche, qu'on peut souvent remplacer l'un par l'autre.",
+      "cartes": [
+        "Courageux et brave",
+        "Achever et terminer",
+        "Commencer et débuter",
+        "Peur et frayeur",
+        "Énorme et gigantesque"
+      ]
+    },
+    {
+      "nom": "Les antonymes",
+      "detail": "Des mots de sens contraire.",
+      "cartes": [
+        "Utile et inutile",
+        "Chaud et froid",
+        "Monter et descendre",
+        "Ouvrir et fermer",
+        "Riche et pauvre"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Que signifie la racine en couleur ?",
+      "texte": "Au collège, on étudie la [bio]logie.",
+      "choix": ["La vie", "Le temps", "La terre", "Le son"],
+      "bonne": 0,
+      "explication": "La racine grecque « bio » signifie la vie : la biologie est la science du vivant."
+    },
+    {
+      "consigne": "Que signifie la racine en couleur ?",
+      "texte": "Le coureur regarde son [chrono]mètre.",
+      "choix": ["La vie", "Le temps", "La terre", "Le son"],
+      "bonne": 1,
+      "explication": "La racine grecque « chrono » signifie le temps : un chronomètre mesure une durée."
+    },
+    {
+      "consigne": "Que signifie la racine en couleur ?",
+      "texte": "Nous étudions la [géo]graphie des continents.",
+      "choix": ["La vie", "Le temps", "La terre", "Le son"],
+      "bonne": 2,
+      "explication": "La racine grecque « géo » signifie la terre : la géographie décrit la Terre."
+    },
+    {
+      "consigne": "Que signifie la racine en couleur ?",
+      "texte": "Elle répond au télé[phone].",
+      "choix": ["La vie", "Le temps", "La terre", "Le son"],
+      "bonne": 3,
+      "explication": "La racine grecque « phone » signifie le son, la voix : le téléphone transmet la voix au loin."
+    },
+    {
+      "consigne": "Que signifie la racine en couleur ?",
+      "texte": "J'ai lu une [bio]graphie de Napoléon.",
+      "choix": ["La vie", "Le temps", "La terre", "Le son"],
+      "bonne": 0,
+      "explication": "« Bio » signifie la vie et « graph » écrire : une biographie écrit la vie de quelqu'un."
+    },
+    {
+      "consigne": "Que signifie la racine en couleur ?",
+      "texte": "Elle apprend la [chrono]logie de la Révolution.",
+      "choix": ["La vie", "Le temps", "La terre", "Le son"],
+      "bonne": 1,
+      "explication": "« Chrono » signifie le temps et « logie » science, discours : la chronologie range les événements dans le temps."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Préfixe",
+      "acceptees": ["Un préfixe", "Le préfixe", "Préfixes"],
+      "indices": [
+        "Je suis un élément qui sert à former des mots nouveaux.",
+        "Je me place avant le radical.",
+        "Avec moi, « faire » devient « défaire » et « lire » devient « relire »."
+      ],
+      "explication": "Le préfixe se place avant le radical et modifie le sens du mot : dé-faire, re-lire."
+    },
+    {
+      "reponse": "Polysémie",
+      "acceptees": ["La polysémie", "Polysémique"],
+      "indices": [
+        "Je suis une propriété de certains mots.",
+        "Grâce à moi, « feuille » peut désigner une feuille d'arbre ou une feuille de papier.",
+        "Je désigne le fait pour un mot d'avoir plusieurs sens selon le contexte."
+      ],
+      "explication": "La polysémie est le fait, pour un mot, d'avoir plusieurs sens selon le contexte."
+    },
+    {
+      "reponse": "Paronymes",
+      "acceptees": ["Les paronymes", "Paronyme", "Un paronyme"],
+      "indices": [
+        "Je désigne des mots qu'on risque de confondre.",
+        "Mes mots ont une forme proche mais un sens différent.",
+        "« Éminent » et « imminent » forment l'un de mes couples."
+      ],
+      "explication": "Les paronymes ont une forme proche mais un sens différent : éminent (remarquable) et imminent (tout proche)."
+    },
+    {
+      "reponse": "Famille de mots",
+      "acceptees": ["Une famille de mots", "La famille de mots", "Famille"],
+      "indices": [
+        "Je réunis des mots.",
+        "Mes mots partagent le même radical.",
+        "« Terre », « terrain », « terrestre » et « atterrir » me composent."
+      ],
+      "explication": "Une famille de mots rassemble les mots formés sur le même radical : terre, terrain, terrestre, atterrir."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Les étapes pour deviner le sens d'un mot inconnu",
+      "etapes": [
+        "On découpe le mot en préfixe, radical et suffixe",
+        "On cherche un mot de la même famille ou une racine connue",
+        "On assemble les sens des éléments",
+        "On vérifie que ce sens convient à la phrase"
+      ]
+    }
+  ]
+}

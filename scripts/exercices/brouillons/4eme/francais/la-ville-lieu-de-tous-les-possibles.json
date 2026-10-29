@@ -1,0 +1,149 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Le baron Haussmann",
+      "detail": "L'urbaniste qui transforme Paris sous Napoléon III, de 1853 à 1870 : grands boulevards, immeubles alignés, égouts.",
+      "cartes": [
+        "Il transforme Paris sous Napoléon III",
+        "Il fait percer de grands boulevards",
+        "Il fait aligner les immeubles le long des rues",
+        "Il fait construire des égouts sous la ville",
+        "Ses grands travaux durent de 1853 à 1870"
+      ]
+    },
+    {
+      "nom": "Charles Baudelaire",
+      "detail": "Le poète des Fleurs du mal et du Spleen de Paris, qui fait du flâneur une figure du poète moderne.",
+      "cartes": [
+        "Il publie Les Fleurs du mal en 1857",
+        "Il écrit le poème « À une passante »",
+        "Il écrit des poèmes en prose, réunis dans Le Spleen de Paris",
+        "Il célèbre le plaisir de se mêler à la multitude",
+        "Il fait du flâneur une figure du poète moderne"
+      ]
+    },
+    {
+      "nom": "Émile Verhaeren",
+      "detail": "Le poète qui fait de la ville industrielle une pieuvre qui attire et dévore les campagnes.",
+      "cartes": [
+        "Il publie Les Campagnes hallucinées en 1893",
+        "Il écrit un poème intitulé « La Ville »",
+        "Il fait de la ville industrielle « la pieuvre ardente »",
+        "Chez lui, la ville attire les campagnes puis les dévore",
+        "Il publie Les Villes tentaculaires en 1895"
+      ]
+    },
+    {
+      "nom": "Guillaume Apollinaire",
+      "detail": "Le poète de « Zone », qui promène son lecteur dans un Paris moderne.",
+      "cartes": [
+        "Il publie Alcools en 1913",
+        "Il ouvre « Zone » en se disant las du monde ancien",
+        "Chez lui, la tour Eiffel devient une bergère",
+        "Chez lui, les ponts forment un troupeau qui bêle",
+        "Il promène le lecteur dans un Paris d'usines et d'affiches"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Quelle figure de style est en couleur ?",
+      "texte": "Le soir venu, [la ville respire à pleins poumons].",
+      "choix": ["Comparaison", "Métaphore", "Personnification"],
+      "bonne": 2,
+      "explication": "La ville reçoit des traits humains : elle respire avec des poumons. C'est une personnification."
+    },
+    {
+      "consigne": "Quelle figure de style est en couleur ?",
+      "texte": "Vue d'en haut, [la ville est une fourmilière].",
+      "choix": ["Comparaison", "Métaphore", "Personnification"],
+      "bonne": 1,
+      "explication": "La ville est transformée en fourmilière, sans outil de comparaison : c'est une métaphore."
+    },
+    {
+      "consigne": "Quelle figure de style est en couleur ?",
+      "texte": "Dans la nuit, les enseignes [brillent comme des étoiles].",
+      "choix": ["Comparaison", "Métaphore", "Personnification"],
+      "bonne": 0,
+      "explication": "L'outil « comme » rapproche les enseignes et les étoiles : c'est une comparaison."
+    },
+    {
+      "consigne": "Quelle ville le passage en couleur décrit-il ?",
+      "texte": "[Une cité imaginaire où chacun est heureux, libre et ne manque de rien.]",
+      "choix": ["Une utopie", "Une dystopie", "Une ville réelle"],
+      "bonne": 0,
+      "explication": "Une société idéale imaginaire est une utopie."
+    },
+    {
+      "consigne": "Quelle ville le passage en couleur décrit-il ?",
+      "texte": "[Une cité imaginaire où des caméras surveillent chaque habitant jour et nuit.]",
+      "choix": ["Une utopie", "Une dystopie", "Une ville réelle"],
+      "bonne": 1,
+      "explication": "Une société imaginaire cauchemardesque est une dystopie."
+    },
+    {
+      "consigne": "Quelle ville le passage en couleur décrit-il ?",
+      "texte": "[Paris et ses grands boulevards, percés par Haussmann sous Napoléon III.]",
+      "choix": ["Une utopie", "Une dystopie", "Une ville réelle"],
+      "bonne": 2,
+      "explication": "Paris existe vraiment et a été transformé par Haussmann : c'est une ville réelle, pas une ville imaginaire."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Émile Zola",
+      "acceptees": ["Émile Zola", "Zola"],
+      "indices": [
+        "J'écris au XIXe siècle.",
+        "Je raconte l'histoire d'un grand magasin parisien qui ruine les petits commerçants.",
+        "Mon roman de 1883 s'appelle Au Bonheur des Dames."
+      ],
+      "explication": "Zola montre dans Au Bonheur des Dames (1883) un grand magasin qui fascine les clientes et ruine les petits commerçants."
+    },
+    {
+      "reponse": "Flâneur",
+      "acceptees": ["Un flâneur", "Le flâneur"],
+      "indices": [
+        "Je suis un promeneur.",
+        "J'observe la ville sans but précis.",
+        "Baudelaire fait de moi une figure du poète moderne."
+      ],
+      "explication": "Le flâneur observe la ville sans but précis ; Baudelaire en fait une figure du poète moderne."
+    },
+    {
+      "reponse": "Utopie",
+      "acceptees": ["Une utopie", "L'utopie"],
+      "indices": [
+        "Je suis un mot inventé par Thomas More.",
+        "Je désigne une société imaginaire.",
+        "Dans ma ville rêvée, tout est idéal et chacun est heureux."
+      ],
+      "explication": "Une utopie est une société idéale imaginaire ; le mot a été créé par Thomas More en 1516."
+    },
+    {
+      "reponse": "Pieuvre",
+      "acceptees": ["Une pieuvre", "La pieuvre", "Poulpe", "Un poulpe", "Le poulpe"],
+      "indices": [
+        "Je suis un animal marin.",
+        "J'ai huit bras.",
+        "Chez Verhaeren, la ville industrielle prend mon apparence et dévore les campagnes."
+      ],
+      "explication": "Verhaeren fait de la ville industrielle « la pieuvre ardente » qui attire et dévore les campagnes."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Cinq œuvres de la ville, de la plus ancienne à la plus récente",
+      "etapes": [
+        "Les Fleurs du mal de Baudelaire",
+        "Le Spleen de Paris de Baudelaire",
+        "Au Bonheur des Dames de Zola",
+        "Les Villes tentaculaires de Verhaeren",
+        "Alcools d'Apollinaire"
+      ]
+    }
+  ]
+}

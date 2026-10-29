@@ -1,0 +1,165 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Effort de compression",
+      "detail": "La pièce est écrasée, comme un poteau qui porte une charge.",
+      "cartes": [
+        "Un poteau qui porte le plancher de l'étage",
+        "L'arc d'un pont qui reporte les charges vers ses appuis",
+        "Les pieds d'une table qui porte un gros ordinateur",
+        "Une éponge pressée entre deux mains",
+        "Le béton d'un mur qui supporte le toit"
+      ]
+    },
+    {
+      "nom": "Effort de traction",
+      "detail": "La pièce est étirée, comme un câble tendu.",
+      "cartes": [
+        "Un câble de pont suspendu qui porte le tablier",
+        "Les haubans du viaduc de Millau",
+        "Une corde qui retient une cloche suspendue",
+        "Les barres d'acier cachées dans le béton armé",
+        "Les chaînes d'une balançoire qui portent l'enfant"
+      ]
+    },
+    {
+      "nom": "Effort de flexion",
+      "detail": "La pièce se courbe, comme une poutre chargée en son milieu.",
+      "cartes": [
+        "La planche d'une étagère chargée de livres",
+        "Une poutre chargée en son milieu",
+        "Un plongeoir sous le poids d'un plongeur",
+        "Une branche d'arbre sous le poids de la neige",
+        "Une canne à pêche qui plie avec un gros poisson"
+      ]
+    },
+    {
+      "nom": "Effort de torsion",
+      "detail": "La pièce est tordue autour de son axe.",
+      "cartes": [
+        "La tige d'un tournevis qu'on tourne pour visser",
+        "Un torchon mouillé qu'on essore à deux mains",
+        "Une barre dont les deux bouts tournent en sens inverse",
+        "Une bouteille en plastique qu'on tord à deux mains",
+        "Une clé qu'on tourne de force dans une serrure bloquée"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "l'ajout de barres d'acier dans le béton",
+      "carte": "Le béton résiste mal à la traction",
+      "role": "cause",
+      "explication": "Le béton se fissure quand on l'étire : on lui ajoute de l'acier, qui résiste à la traction."
+    },
+    {
+      "fait": "l'ajout de barres d'acier dans le béton",
+      "carte": "Le béton armé résiste aussi aux efforts qui l'étirent",
+      "role": "consequence",
+      "explication": "Le béton armé associe le béton, qui résiste à la compression, et l'acier, qui résiste à la traction."
+    },
+    {
+      "fait": "l'ajout d'une diagonale dans un cadre",
+      "carte": "Un cadre rectangulaire articulé se déforme sous le vent",
+      "role": "cause",
+      "explication": "Un rectangle articulé se déforme : on ajoute une diagonale pour former des triangles."
+    },
+    {
+      "fait": "l'ajout d'une diagonale dans un cadre",
+      "carte": "Le cadre ne se déforme plus sous le vent",
+      "role": "consequence",
+      "explication": "La diagonale forme des triangles, et un triangle est indéformable."
+    },
+    {
+      "fait": "l'ajout d'une diagonale dans un cadre",
+      "carte": "La structure devient rigide avec peu de matière",
+      "role": "consequence",
+      "explication": "La triangulation rigidifie la structure sans demander beaucoup de matière."
+    }
+  ],
+  "etiquettes": [
+    {
+      "consigne": "Quel élément de la structure le groupe en couleur désigne-t-il ?",
+      "texte": "Dans une maison, [la partie enterrée] transmet le poids de l'ouvrage au sol.",
+      "choix": ["Les fondations", "Un poteau", "Une poutre", "Le contreventement"],
+      "bonne": 0,
+      "explication": "Les fondations sont enterrées et transmettent les charges de l'ouvrage au sol."
+    },
+    {
+      "consigne": "Quel élément de la structure le groupe en couleur désigne-t-il ?",
+      "texte": "Dans un hangar, [les barres en diagonale] empêchent la structure de se déformer sous le vent.",
+      "choix": ["Les fondations", "Un poteau", "Une poutre", "Le contreventement"],
+      "bonne": 3,
+      "explication": "Le contreventement, souvent fait de diagonales, empêche la structure de se déformer."
+    },
+    {
+      "consigne": "Quel élément de la structure le groupe en couleur désigne-t-il ?",
+      "texte": "Dans un garage, [la pièce horizontale] posée sur deux poteaux porte le plancher de l'étage.",
+      "choix": ["Les fondations", "Un poteau", "Une poutre", "Le contreventement"],
+      "bonne": 2,
+      "explication": "La poutre est horizontale : elle repose sur les poteaux et porte le plancher."
+    },
+    {
+      "consigne": "Quel élément de la structure le groupe en couleur désigne-t-il ?",
+      "texte": "Dans un immeuble, [la pièce verticale] qui porte les charges des étages est écrasée.",
+      "choix": ["Les fondations", "Un poteau", "Une poutre", "Le contreventement"],
+      "bonne": 1,
+      "explication": "Le poteau est vertical et travaille en compression : il est écrasé par les charges."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Viaduc de Millau",
+      "acceptees": ["Viaduc de Millau", "Le viaduc de Millau", "Pont de Millau", "Le pont de Millau", "Millau"],
+      "indices": [
+        "Je suis un pont très haut, dans le sud de la France.",
+        "Mon tablier est relié à mes pylônes par des haubans.",
+        "J'ai été inauguré en 2004 au-dessus de la vallée du Tarn."
+      ],
+      "explication": "Le viaduc de Millau, inauguré en 2004, est un pont à haubans."
+    },
+    {
+      "reponse": "Tour Eiffel",
+      "acceptees": ["Tour Eiffel", "La tour Eiffel", "Eiffel"],
+      "indices": [
+        "Je suis une construction en métal, située à Paris.",
+        "Ma structure est faite de barres qui forment des triangles.",
+        "J'ai été construite pour l'Exposition universelle de 1889."
+      ],
+      "explication": "La tour Eiffel (1889) montre la triangulation : ses barres forment des triangles indéformables."
+    },
+    {
+      "reponse": "Triangulation",
+      "acceptees": ["Triangulation", "La triangulation"],
+      "indices": [
+        "Je suis une technique de construction.",
+        "Je rends une structure rigide avec peu de matière.",
+        "Je transforme un cadre rectangulaire en triangles, qui ne se déforment pas."
+      ],
+      "explication": "La triangulation ajoute des diagonales qui forment des triangles, formes indéformables."
+    },
+    {
+      "reponse": "Poutre",
+      "acceptees": ["Poutre", "Une poutre", "La poutre"],
+      "indices": [
+        "Je suis un élément d'une structure.",
+        "Je suis une pièce horizontale posée sur des poteaux.",
+        "Chargée en mon milieu, je me courbe : je travaille en flexion."
+      ],
+      "explication": "La poutre est horizontale et travaille en flexion quand elle est chargée en son milieu."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Rigidifier un cadre rectangulaire",
+      "etapes": [
+        "On part d'un cadre rectangulaire articulé",
+        "On constate qu'il se déforme sous l'effort",
+        "On ajoute une barre en diagonale",
+        "Le cadre forme deux triangles et ne se déforme plus"
+      ]
+    }
+  ]
+}

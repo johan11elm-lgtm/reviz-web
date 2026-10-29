@@ -1,0 +1,153 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "La naissance de la Ve République",
+      "detail": "La crise de 1958, le retour de de Gaulle et la nouvelle Constitution.",
+      "cartes": [
+        "La guerre d'Algérie provoque une grave crise en mai 1958",
+        "René Coty appelle le général de Gaulle au pouvoir",
+        "Michel Debré prépare la nouvelle Constitution",
+        "Environ 80 % des votants approuvent la Constitution par référendum",
+        "De Gaulle est élu président par des grands électeurs"
+      ]
+    },
+    {
+      "nom": "Les années 1960",
+      "detail": "Le président élu directement, la crise de mai 1968 et la démission de de Gaulle.",
+      "cartes": [
+        "Les Français décident par référendum d'élire le président directement",
+        "De Gaulle est réélu au second tour en 1965",
+        "Une révolte étudiante est suivie d'une grève générale",
+        "Les accords de Grenelle augmentent le salaire minimum",
+        "De Gaulle démissionne après l'échec d'un référendum"
+      ]
+    },
+    {
+      "nom": "L'alternance de 1981",
+      "detail": "La gauche arrive au pouvoir avec François Mitterrand et mène de grandes réformes.",
+      "cartes": [
+        "François Mitterrand bat Valéry Giscard d'Estaing à la présidentielle",
+        "La gauche arrive au pouvoir pour la première fois depuis 1958",
+        "La loi de Robert Badinter abolit la peine de mort",
+        "Les lois de décentralisation sont votées en 1982",
+        "La retraite à 60 ans et cinq semaines de congés payés"
+      ]
+    },
+    {
+      "nom": "Cohabitations et quinquennat",
+      "detail": "Quand le président et le Premier ministre sont de camps opposés, et le passage du mandat à cinq ans.",
+      "cartes": [
+        "Mitterrand nomme Jacques Chirac Premier ministre en 1986",
+        "Balladur est Premier ministre du président Mitterrand en 1993",
+        "Chirac, président, gouverne avec le Premier ministre Jospin",
+        "Le président et le Premier ministre sont de camps opposés",
+        "Le mandat présidentiel passe de 7 à 5 ans"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "le retour de de Gaulle au pouvoir en 1958",
+      "carte": "La grave crise provoquée par la guerre d'Algérie",
+      "role": "cause",
+      "explication": "La crise de mai 1958, née de la guerre d'Algérie, conduit le président René Coty à appeler de Gaulle."
+    },
+    {
+      "fait": "le retour de de Gaulle au pouvoir en 1958",
+      "carte": "L'appel du président René Coty",
+      "role": "cause",
+      "explication": "René Coty appelle le général de Gaulle, qui devient président du Conseil en juin 1958."
+    },
+    {
+      "fait": "le retour de de Gaulle au pouvoir en 1958",
+      "carte": "Une nouvelle Constitution adoptée par référendum",
+      "role": "consequence",
+      "explication": "Une nouvelle Constitution est préparée, notamment par Michel Debré, puis approuvée par référendum en septembre 1958."
+    },
+    {
+      "fait": "le retour de de Gaulle au pouvoir en 1958",
+      "carte": "L'élection de de Gaulle à la présidence en décembre 1958",
+      "role": "consequence",
+      "explication": "En décembre 1958, de Gaulle est élu président de la République par un collège de grands électeurs."
+    },
+    {
+      "fait": "la démission de de Gaulle en avril 1969",
+      "carte": "L'échec d'un référendum",
+      "role": "cause",
+      "explication": "Après l'échec d'un référendum, de Gaulle démissionne en avril 1969."
+    },
+    {
+      "fait": "la démission de de Gaulle en avril 1969",
+      "carte": "Georges Pompidou lui succède à la présidence",
+      "role": "consequence",
+      "explication": "Après la démission de de Gaulle, Georges Pompidou est président de 1969 à 1974."
+    }
+  ],
+  "etiquettes": [],
+  "devinettes": [
+    {
+      "reponse": "Charles de Gaulle",
+      "acceptees": ["De Gaulle", "Le général de Gaulle", "Général de Gaulle"],
+      "indices": [
+        "Je suis un général.",
+        "Je suis rappelé au pouvoir en 1958, en pleine guerre d'Algérie.",
+        "Je démissionne en 1969 après l'échec d'un référendum."
+      ],
+      "explication": "Le général de Gaulle revient au pouvoir en 1958, fonde la Ve République et démissionne en 1969 après l'échec d'un référendum."
+    },
+    {
+      "reponse": "François Mitterrand",
+      "acceptees": ["Mitterrand", "Francois Mitterrand"],
+      "indices": [
+        "Je suis un homme politique socialiste.",
+        "Je suis battu par de Gaulle au second tour en 1965.",
+        "En 1981, je deviens le premier président de gauche de la Ve République."
+      ],
+      "explication": "François Mitterrand, battu en 1965, est élu en mai 1981 : c'est la première alternance de la Ve République."
+    },
+    {
+      "reponse": "L'alternance",
+      "acceptees": ["Alternance", "La première alternance"],
+      "indices": [
+        "Je suis un changement politique.",
+        "Je fais passer le pouvoir d'une majorité à une majorité opposée.",
+        "En mai 1981, je porte la gauche au pouvoir pour la première fois sous la Ve République."
+      ],
+      "explication": "L'alternance est le passage du pouvoir d'une majorité politique à une majorité opposée, comme en 1981."
+    },
+    {
+      "reponse": "La cohabitation",
+      "acceptees": ["Cohabitation", "Les cohabitations"],
+      "indices": [
+        "Je suis une situation politique.",
+        "Je concerne le président de la République et le Premier ministre.",
+        "Ils appartiennent à des camps opposés, comme Mitterrand et Chirac en 1986."
+      ],
+      "explication": "Il y a cohabitation quand le président et le Premier ministre appartiennent à des camps politiques opposés."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "De la crise de 1958 à la démission de de Gaulle",
+      "etapes": [
+        "La guerre d'Algérie provoque une grave crise et de Gaulle revient",
+        "Une nouvelle Constitution est adoptée par référendum",
+        "Les Français décident d'élire le président au suffrage universel direct",
+        "Une révolte étudiante est suivie d'une grève générale",
+        "De Gaulle démissionne après l'échec d'un référendum"
+      ]
+    },
+    {
+      "titre": "De l'alternance de 1981 au quinquennat",
+      "etapes": [
+        "La gauche arrive au pouvoir avec François Mitterrand",
+        "Mitterrand nomme Jacques Chirac Premier ministre",
+        "Mitterrand gouverne avec le Premier ministre Balladur",
+        "Chirac, président, gouverne avec le Premier ministre Jospin",
+        "Le mandat présidentiel passe de sept à cinq ans"
+      ]
+    }
+  ]
+}

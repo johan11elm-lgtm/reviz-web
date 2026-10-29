@@ -1,0 +1,227 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Calculer une puissance",
+      "detail": "Une puissance en watts se calcule en multipliant U (en volts) par I (en ampères).",
+      "cartes": [
+        "230 V × 2 A = 460 W",
+        "12 V × 5 A = 60 W",
+        "5 V × 2 A = 10 W",
+        "230 V × 10 A = 2 300 W",
+        "9 V × 0,5 A = 4,5 W"
+      ]
+    },
+    {
+      "nom": "Calculer une énergie consommée",
+      "detail": "Une énergie en wattheures se calcule en multipliant la puissance en watts par la durée en heures.",
+      "cartes": [
+        "10 W × 5 h = 50 Wh",
+        "60 W × 4 h = 240 Wh",
+        "2 000 W × 0,5 h = 1 000 Wh",
+        "100 W × 3 h = 300 Wh",
+        "8 W × 6 h = 48 Wh"
+      ]
+    },
+    {
+      "nom": "Calculer un rendement",
+      "detail": "Un rendement est le rapport entre l'énergie utile et l'énergie absorbée, sans unité.",
+      "cartes": [
+        "150 W utiles ÷ 200 W absorbés = 0,75",
+        "10 W de lumière ÷ 40 W absorbés = 0,25",
+        "80 J utiles ÷ 100 J reçus = 0,8",
+        "450 W utiles ÷ 500 W absorbés = 0,9",
+        "30 Wh utiles ÷ 60 Wh absorbés = 0,5"
+      ]
+    },
+    {
+      "nom": "Passer des wattheures aux joules",
+      "detail": "On convertit avec 1 Wh = 3 600 J : on multiplie le nombre de wattheures par 3 600.",
+      "cartes": [
+        "2 Wh = 7 200 J",
+        "1 Wh = 3 600 J",
+        "5 Wh = 18 000 J",
+        "0,5 Wh = 1 800 J",
+        "10 Wh = 36 000 J"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Quelle conversion d'énergie réalise l'élément en couleur ?",
+      "texte": "Dans la perceuse, [le moteur électrique] fait tourner le foret.",
+      "choix": [
+        "Électrique en mécanique",
+        "Lumineuse en électrique",
+        "Chimique en électrique",
+        "Électrique en lumineuse"
+      ],
+      "bonne": 0,
+      "explication": "Un moteur électrique convertit l'énergie électrique en énergie mécanique (le foret tourne)."
+    },
+    {
+      "consigne": "Quelle conversion d'énergie réalise l'élément en couleur ?",
+      "texte": "Sur le toit, [le panneau photovoltaïque] fournit du courant à la maison.",
+      "choix": [
+        "Électrique en mécanique",
+        "Lumineuse en électrique",
+        "Chimique en électrique",
+        "Électrique en lumineuse"
+      ],
+      "bonne": 1,
+      "explication": "Un panneau photovoltaïque reçoit de la lumière et produit de l'énergie électrique."
+    },
+    {
+      "consigne": "Quelle conversion d'énergie réalise l'élément en couleur ?",
+      "texte": "Dans la télécommande, [la pile] fait fonctionner le circuit.",
+      "choix": [
+        "Électrique en mécanique",
+        "Lumineuse en électrique",
+        "Chimique en électrique",
+        "Électrique en lumineuse"
+      ],
+      "bonne": 2,
+      "explication": "Une pile stocke de l'énergie chimique et la convertit en énergie électrique."
+    },
+    {
+      "consigne": "Quelle conversion d'énergie réalise l'élément en couleur ?",
+      "texte": "Sur le bureau, [la lampe LED] éclaire le cahier.",
+      "choix": [
+        "Électrique en mécanique",
+        "Lumineuse en électrique",
+        "Chimique en électrique",
+        "Électrique en lumineuse"
+      ],
+      "bonne": 3,
+      "explication": "Une lampe reçoit de l'énergie électrique et la convertit en énergie lumineuse, avec un peu de chaleur perdue."
+    },
+    {
+      "consigne": "Quelle conversion d'énergie réalise l'élément en couleur ?",
+      "texte": "[Le moteur du ventilateur] brasse l'air de la chambre.",
+      "choix": [
+        "Électrique en mécanique",
+        "Lumineuse en électrique",
+        "Chimique en électrique",
+        "Électrique en lumineuse"
+      ],
+      "bonne": 0,
+      "explication": "Le moteur reçoit de l'énergie électrique et fait tourner les pales : c'est de l'énergie mécanique."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Rendement",
+      "acceptees": [
+        "Rendement",
+        "Le rendement"
+      ],
+      "indices": [
+        "Je suis un nombre sans unité.",
+        "Je compare l'énergie utile à l'énergie absorbée.",
+        "Je suis toujours inférieur à 100 %, car une partie de l'énergie est perdue."
+      ],
+      "explication": "Le rendement est le rapport entre l'énergie utile et l'énergie absorbée ; il est toujours inférieur à 1."
+    },
+    {
+      "reponse": "Wattheure",
+      "acceptees": [
+        "Wattheure",
+        "Wattheures",
+        "Wh",
+        "Le wattheure",
+        "Watt-heure",
+        "Watt heure"
+      ],
+      "indices": [
+        "Je suis une unité.",
+        "Je mesure une énergie, pas une puissance.",
+        "Je vaux 3 600 joules : on me calcule en multipliant une puissance par un nombre d'heures."
+      ],
+      "explication": "Le wattheure (Wh) est l'énergie consommée par un appareil de 1 W en 1 heure ; 1 Wh = 3 600 J."
+    },
+    {
+      "reponse": "Convertisseur",
+      "acceptees": [
+        "Convertisseur",
+        "Un convertisseur",
+        "Le convertisseur",
+        "Convertisseur d'énergie"
+      ],
+      "indices": [
+        "Je suis un élément d'un objet technique.",
+        "Un moteur, une pile ou un panneau photovoltaïque sont des exemples de ce que je suis.",
+        "Je transforme une forme d'énergie en une autre, avec des pertes."
+      ],
+      "explication": "Un convertisseur transforme une forme d'énergie en une autre, avec des pertes surtout sous forme de chaleur."
+    },
+    {
+      "reponse": "Puissance",
+      "acceptees": [
+        "Puissance",
+        "La puissance"
+      ],
+      "indices": [
+        "Je suis une grandeur que l'on calcule pour un appareil électrique.",
+        "Je me calcule en multipliant une tension par une intensité.",
+        "Je mesure l'énergie fournie ou consommée chaque seconde, en watts."
+      ],
+      "explication": "La puissance P = U × I se mesure en watts : c'est l'énergie fournie ou consommée chaque seconde."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "Un sèche-cheveux branché sur 230 V est traversé par un courant de 5 A. Quelle est sa puissance ?",
+      "reponse": 1150,
+      "unite": "W",
+      "tolerance": 0,
+      "explication": "P = U × I = 230 × 5 = 1 150 W."
+    },
+    {
+      "question": "Un ordinateur de 60 W fonctionne pendant 4 heures. Quelle énergie consomme-t-il ?",
+      "reponse": 240,
+      "unite": "Wh",
+      "tolerance": 0,
+      "explication": "E = P × t = 60 × 4 = 240 Wh."
+    },
+    {
+      "question": "Une lampe absorbe 40 W et émet 10 W de lumière utile. Quel est son rendement, en pourcentage ?",
+      "reponse": 25,
+      "unite": "%",
+      "tolerance": 0,
+      "explication": "η = énergie utile ÷ énergie absorbée = 10 ÷ 40 = 0,25, soit 25 %."
+    },
+    {
+      "question": "Combien de joules représentent 2 Wh ? (On rappelle que 1 Wh = 3 600 J.)",
+      "reponse": 7200,
+      "unite": "J",
+      "tolerance": 0,
+      "explication": "2 × 3 600 = 7 200 J."
+    },
+    {
+      "question": "Une lampe de 8 W consomme 48 Wh. Pendant combien d'heures est-elle restée allumée ?",
+      "reponse": 6,
+      "unite": "h",
+      "tolerance": 0,
+      "explication": "E = P × t donc t = E ÷ P = 48 ÷ 8 = 6 heures."
+    },
+    {
+      "question": "Un moteur de rendement 80 % absorbe une puissance de 500 W. Quelle puissance utile fournit-il ?",
+      "reponse": 400,
+      "unite": "W",
+      "tolerance": 0,
+      "explication": "Puissance utile = rendement × puissance absorbée = 0,8 × 500 = 400 W."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Une pile qui fait tourner un moteur",
+      "etapes": [
+        "La pile contient de l'énergie chimique",
+        "La pile fournit de l'énergie électrique",
+        "Le moteur absorbe cette énergie électrique",
+        "Le moteur fournit de l'énergie mécanique"
+      ]
+    }
+  ]
+}

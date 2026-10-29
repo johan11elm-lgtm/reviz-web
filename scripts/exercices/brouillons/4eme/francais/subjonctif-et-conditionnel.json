@@ -1,0 +1,128 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Subjonctif présent",
+      "detail": "Le verbe est au subjonctif présent, souvent après « il faut que », « vouloir que », « douter que », « pour que » ou « bien que ».",
+      "cartes": [
+        "Il faut que tu fasses tes devoirs",
+        "Je veux que tu viennes demain",
+        "Bien qu'il pleuve, nous sortons",
+        "Je doute qu'il réussisse",
+        "Pour que tu comprennes, je répète"
+      ]
+    },
+    {
+      "nom": "Passé du subjonctif",
+      "detail": "Le verbe est formé de l'auxiliaire avoir ou être au subjonctif présent, suivi d'un participe passé.",
+      "cartes": [
+        "Je suis content que tu aies réussi",
+        "Bien qu'elle soit partie, je reste",
+        "Il faut qu'il ait fini avant midi",
+        "Je regrette que vous soyez arrivés si tard",
+        "Je suis surpris qu'elle ait déjà fini"
+      ]
+    },
+    {
+      "nom": "Conditionnel présent",
+      "detail": "Le verbe est formé du radical du futur et des terminaisons de l'imparfait : -rais, -rait, -rions…",
+      "cartes": [
+        "Si j'avais le temps, je lirais plus",
+        "Pourriez-vous fermer la porte ?",
+        "Je partirais volontiers avec vous",
+        "Nous finirions plus tôt avec ton aide",
+        "Il disait qu'il viendrait"
+      ]
+    },
+    {
+      "nom": "Conditionnel passé",
+      "detail": "Le verbe est formé de l'auxiliaire au conditionnel présent, suivi d'un participe passé.",
+      "cartes": [
+        "Si j'avais su, je serais venu",
+        "J'aurais voulu te parler",
+        "Elle serait partie sans toi",
+        "Nous aurions gagné avec un peu plus de chance",
+        "L'incendie aurait fait deux blessés"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Quelle est la forme du verbe en couleur ?",
+      "texte": "Il faut que tu [fasses] tes devoirs.",
+      "choix": ["Indicatif présent", "Subjonctif présent", "Futur simple", "Conditionnel présent"],
+      "bonne": 1,
+      "explication": "Après « il faut que », on emploie le subjonctif : « fasses » est le subjonctif présent de faire (l'indicatif serait « fais »)."
+    },
+    {
+      "consigne": "Quelle est la forme du verbe en couleur ?",
+      "texte": "Demain, je [partirai] chez ma tante.",
+      "choix": ["Indicatif présent", "Subjonctif présent", "Futur simple", "Conditionnel présent"],
+      "bonne": 2,
+      "explication": "« Partirai » devient « nous partirons » : c'est le futur simple. Le conditionnel serait « partirais »."
+    },
+    {
+      "consigne": "Quelle est la forme du verbe en couleur ?",
+      "texte": "Si j'avais le temps, je [lirais] plus.",
+      "choix": ["Indicatif présent", "Subjonctif présent", "Futur simple", "Conditionnel présent"],
+      "bonne": 3,
+      "explication": "Après « si » + imparfait, la principale est au conditionnel présent : « lirais » devient « nous lirions »."
+    },
+    {
+      "consigne": "Quelle est la forme du verbe en couleur ?",
+      "texte": "Je sais que tu [fais] des efforts.",
+      "choix": ["Indicatif présent", "Subjonctif présent", "Futur simple", "Conditionnel présent"],
+      "bonne": 0,
+      "explication": "« Savoir que » est suivi de l'indicatif : « fais » est l'indicatif présent de faire."
+    },
+    {
+      "consigne": "Quelle est la forme du verbe en couleur ?",
+      "texte": "Je veux que nous [partions] à midi.",
+      "choix": ["Indicatif présent", "Subjonctif présent", "Futur simple", "Conditionnel présent"],
+      "bonne": 1,
+      "explication": "« Vouloir que » demande le subjonctif. Pour « nous », la forme ressemble à celle de l'imparfait, mais c'est bien le subjonctif présent."
+    },
+    {
+      "consigne": "Quelle est la forme du verbe en couleur ?",
+      "texte": "[Pourriez]-vous m'aider, s'il vous plaît ?",
+      "choix": ["Indicatif présent", "Subjonctif présent", "Futur simple", "Conditionnel présent"],
+      "bonne": 3,
+      "explication": "« Pourriez » se termine par -riez : c'est le conditionnel présent, employé ici par politesse."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Conditionnel",
+      "acceptees": ["Le conditionnel", "Conditionnel présent", "Le conditionnel présent"],
+      "indices": [
+        "Je suis un temps du verbe.",
+        "Je sers à exprimer la politesse, l'hypothèse ou une information non vérifiée.",
+        "Je me forme avec le radical du futur et les terminaisons de l'imparfait."
+      ],
+      "explication": "Le conditionnel présent se forme avec le radical du futur et les terminaisons de l'imparfait : je chanterais."
+    },
+    {
+      "reponse": "Subjonctif",
+      "acceptees": ["Le subjonctif", "Subjonctif présent", "Le subjonctif présent"],
+      "indices": [
+        "Je suis un mode du verbe.",
+        "J'exprime une action souhaitée, ordonnée ou douteuse.",
+        "On me trouve après « il faut que », « vouloir que » ou « bien que »."
+      ],
+      "explication": "Le subjonctif présente une action envisagée : « Il faut que tu viennes »."
+    },
+    {
+      "reponse": "Irréel du passé",
+      "acceptees": ["L'irréel du passé", "Irréel", "L'irréel"],
+      "indices": [
+        "Je suis une sorte d'hypothèse.",
+        "Je parle d'une condition qui ne s'est jamais réalisée.",
+        "Un exemple de moi : « Si j'avais su, je serais venu »."
+      ],
+      "explication": "L'irréel du passé exprime une condition qui ne s'est pas réalisée : si + plus-que-parfait, puis conditionnel passé dans la principale."
+    }
+  ],
+  "calculs": [],
+  "etapes": []
+}

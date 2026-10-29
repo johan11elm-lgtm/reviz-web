@@ -1,0 +1,184 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "La dureté",
+      "detail": "La capacité d'un matériau à résister à la rayure ou à l'enfoncement.",
+      "cartes": [
+        "Le diamant raye le verre sans se marquer",
+        "Un morceau de plomb qui se raye avec l'ongle",
+        "Une vitre qui ne se raye pas au contact d'une clé",
+        "Un carrelage que les casseroles ne rayent pas",
+        "Un matériau dans lequel une pointe ne s'enfonce pas"
+      ]
+    },
+    {
+      "nom": "L'élasticité",
+      "detail": "La capacité d'un matériau à reprendre sa forme après avoir été déformé.",
+      "cartes": [
+        "Un ressort qui reprend sa longueur après avoir été étiré",
+        "Une règle en plastique qui se plie puis se redresse",
+        "Un élastique relâché après avoir été tendu",
+        "Un matelas qui retrouve sa forme quand on se relève",
+        "Une balle en caoutchouc écrasée qui redevient ronde"
+      ]
+    },
+    {
+      "nom": "La conductivité",
+      "detail": "La façon dont un matériau laisse passer (ou non) le courant électrique ou la chaleur.",
+      "cartes": [
+        "Les fils de cuivre qui transportent le courant",
+        "Un fond d'aluminium qui transmet la chaleur aux aliments",
+        "Une cuillère en métal qui chauffe dans une soupe brûlante",
+        "La gaine en plastique qui isole un fil électrique",
+        "Le manche en bois d'une casserole qui reste tiède"
+      ]
+    },
+    {
+      "nom": "La résistance à la corrosion",
+      "detail": "La capacité d'un métal à ne pas se dégrader chimiquement, par exemple sous l'effet de l'eau ou du sel.",
+      "cartes": [
+        "Un clou en fer qui rouille sous la pluie",
+        "Un cadre de vélo en aluminium qui résiste à la pluie",
+        "Un couvert en inox qui ne rouille pas au lavage",
+        "Une coque de bateau en acier attaquée par l'eau de mer",
+        "Une rambarde de plage qui s'abîme à cause du sel"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "À quelle famille appartient le matériau en couleur ?",
+      "texte": "Le cadre de ce vélo est en [acier, un mélange de fer et de carbone].",
+      "choix": ["Métal ou alliage", "Matière plastique", "Céramique ou verre", "Matériau composite"],
+      "bonne": 0,
+      "explication": "L'acier est un alliage : du fer mélangé à un peu de carbone."
+    },
+    {
+      "consigne": "À quelle famille appartient le matériau en couleur ?",
+      "texte": "Pour imprimer cette pièce, l'imprimante 3D fait fondre un fil de [PLA].",
+      "choix": ["Métal ou alliage", "Matière plastique", "Céramique ou verre", "Matériau composite"],
+      "bonne": 1,
+      "explication": "Le PLA est un thermoplastique : il fond à la chaleur, ce qui permet de l'imprimer en couches."
+    },
+    {
+      "consigne": "À quelle famille appartient le matériau en couleur ?",
+      "texte": "Les murs de cet immeuble sont en [béton renforcé par des barres d'acier].",
+      "choix": ["Métal ou alliage", "Matière plastique", "Céramique ou verre", "Matériau composite"],
+      "bonne": 3,
+      "explication": "Le béton armé associe plusieurs matériaux pour cumuler leurs qualités : c'est un composite."
+    },
+    {
+      "consigne": "À quelle famille appartient le matériau en couleur ?",
+      "texte": "Pour ses assiettes, le potier utilise de l'[argile cuite au four].",
+      "choix": ["Métal ou alliage", "Matière plastique", "Céramique ou verre", "Matériau composite"],
+      "bonne": 2,
+      "explication": "L'argile cuite donne une céramique, comme la poterie ou les briques."
+    },
+    {
+      "consigne": "À quelle famille appartient le matériau en couleur ?",
+      "texte": "Le cadre de cette raquette est en [fibres de carbone liées par une résine].",
+      "choix": ["Métal ou alliage", "Matière plastique", "Céramique ou verre", "Matériau composite"],
+      "bonne": 3,
+      "explication": "Des fibres noyées dans une résine : deux matériaux associés, c'est un composite."
+    },
+    {
+      "consigne": "À quelle famille appartient le matériau en couleur ?",
+      "texte": "Le robinet de la cuisine est en [laiton, un mélange de cuivre et de zinc].",
+      "choix": ["Métal ou alliage", "Matière plastique", "Céramique ou verre", "Matériau composite"],
+      "bonne": 0,
+      "explication": "Le laiton est un alliage de métaux : cuivre et zinc."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Alliage",
+      "acceptees": ["Alliage", "Un alliage", "L'alliage"],
+      "indices": [
+        "Je suis un mélange.",
+        "Je contiens au moins un métal.",
+        "L'acier, le laiton et le bronze sont des exemples de ce que je suis."
+      ],
+      "explication": "Un alliage est un mélange d'un métal avec d'autres éléments, comme l'acier (fer et carbone)."
+    },
+    {
+      "reponse": "Masse volumique",
+      "acceptees": ["Masse volumique", "La masse volumique"],
+      "indices": [
+        "Je suis une propriété physique.",
+        "Je dis combien de grammes pèse un centimètre cube de matière.",
+        "Pour l'aluminium, je vaux environ 2,7 g/cm³ et on me note ρ."
+      ],
+      "explication": "La masse volumique ρ = m ÷ V ; celle de l'aluminium vaut environ 2,7 g/cm³."
+    },
+    {
+      "reponse": "Thermoplastique",
+      "acceptees": ["Thermoplastique", "Un thermoplastique", "Thermoplastiques", "Les thermoplastiques"],
+      "indices": [
+        "Je suis un matériau de synthèse.",
+        "Je me ramollis quand on me chauffe.",
+        "Contrairement au thermodurcissable, je peux être recyclé par refonte."
+      ],
+      "explication": "Un thermoplastique se ramollit à la chaleur et se recycle par refonte, comme le PLA."
+    },
+    {
+      "reponse": "Composite",
+      "acceptees": ["Composite", "Un composite", "Matériau composite", "Un matériau composite"],
+      "indices": [
+        "Je suis le résultat d'une association.",
+        "Je cumule les qualités de plusieurs matériaux de familles différentes.",
+        "Le béton armé, qui associe du béton et de l'acier, est un exemple de ce que je suis."
+      ],
+      "explication": "Un matériau composite associe plusieurs matériaux pour cumuler leurs qualités, comme le béton armé."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "Un cube de laiton a une masse de 85 g et un volume de 10 cm³. Quelle est sa masse volumique ?",
+      "reponse": 8.5,
+      "unite": "g/cm³",
+      "tolerance": 0,
+      "explication": "ρ = m ÷ V = 85 ÷ 10 = 8,5 g/cm³."
+    },
+    {
+      "question": "L'aluminium a une masse volumique de 2,7 g/cm³. Quelle est la masse d'un bloc d'aluminium de 20 cm³ ?",
+      "reponse": 54,
+      "unite": "g",
+      "tolerance": 0,
+      "explication": "m = ρ × V = 2,7 × 20 = 54 g."
+    },
+    {
+      "question": "Un bloc de verre de masse volumique 2,5 g/cm³ a une masse de 125 g. Quel est son volume ?",
+      "reponse": 50,
+      "unite": "cm³",
+      "tolerance": 0,
+      "explication": "V = m ÷ ρ = 125 ÷ 2,5 = 50 cm³."
+    },
+    {
+      "question": "Un cadre en acier (7,8 g/cm³) et un cadre en aluminium (2,7 g/cm³) ont le même volume de matière : 200 cm³. De combien de grammes le cadre en aluminium est-il plus léger ?",
+      "reponse": 1020,
+      "unite": "g",
+      "tolerance": 0,
+      "explication": "Acier : 7,8 × 200 = 1 560 g. Aluminium : 2,7 × 200 = 540 g. Différence : 1 560 − 540 = 1 020 g."
+    },
+    {
+      "question": "Une pièce en PLA de 40 cm³ a une masse de 50 g. Quelle est sa masse volumique ?",
+      "reponse": 1.25,
+      "unite": "g/cm³",
+      "tolerance": 0,
+      "explication": "ρ = m ÷ V = 50 ÷ 40 = 1,25 g/cm³."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Choisir un matériau",
+      "etapes": [
+        "Lire les fonctions et contraintes du cahier des charges",
+        "Rassembler les propriétés des matériaux dans un tableau",
+        "Comparer chaque matériau aux contraintes",
+        "Retenir celui qui répond le mieux"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,135 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Le remue-méninges",
+      "detail": "Une séance de groupe où l'on cherche un maximum d'idées, sans en critiquer aucune.",
+      "cartes": [
+        "Une séance en groupe pour trouver des idées",
+        "On ne critique aucune idée pendant la séance",
+        "On cherche à produire un maximum d'idées",
+        "On rebondit sur les idées des autres",
+        "Les idées originales sont les bienvenues"
+      ]
+    },
+    {
+      "nom": "Le biomimétisme",
+      "detail": "S'inspirer de la nature pour concevoir une solution technique.",
+      "cartes": [
+        "S'inspirer d'une plante ou d'un animal pour concevoir",
+        "Le Velcro copie les petits crochets de la bardane",
+        "Le nez du Shinkansen copie le bec du martin-pêcheur",
+        "La forme du bec réduit le bruit à la sortie des tunnels",
+        "George de Mestral observe des fruits accrochés à ses vêtements"
+      ]
+    },
+    {
+      "nom": "Le croquis de recherche",
+      "detail": "Un dessin rapide à main levée, annoté, qui sert à communiquer une idée de solution.",
+      "cartes": [
+        "Un dessin rapide tracé à main levée",
+        "Des annotations précisent matériaux et fonctionnement",
+        "Il se fait sans règle ni logiciel",
+        "Il ne demande pas de cotes précises",
+        "Il sert à communiquer une idée de solution"
+      ]
+    },
+    {
+      "nom": "La matrice de décision",
+      "detail": "Un tableau qui note chaque solution selon les critères pondérés du cahier des charges.",
+      "cartes": [
+        "Un tableau qui compare les solutions critère par critère",
+        "Chaque note est multipliée par un coefficient",
+        "On additionne les résultats pour obtenir un total",
+        "La solution au total le plus élevé est retenue",
+        "Les critères viennent du cahier des charges"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [],
+  "devinettes": [
+    {
+      "reponse": "Biomimétisme",
+      "acceptees": ["Biomimétisme", "Le biomimétisme"],
+      "indices": [
+        "Je suis une démarche pour concevoir des objets.",
+        "Je consiste à m'inspirer de la nature.",
+        "Le Velcro est né grâce à moi."
+      ],
+      "explication": "Le biomimétisme consiste à s'inspirer de la nature pour concevoir une solution technique, comme le Velcro."
+    },
+    {
+      "reponse": "Remue-méninges",
+      "acceptees": ["Remue-méninges", "Remue méninges", "Le remue-méninges", "Brainstorming"],
+      "indices": [
+        "Je me déroule en séance, en groupe.",
+        "Avec moi, on cherche un maximum d'idées.",
+        "Avec moi, on ne critique aucune idée."
+      ],
+      "explication": "Dans un remue-méninges, on produit un maximum d'idées en groupe, sans critiquer."
+    },
+    {
+      "reponse": "Matrice de décision",
+      "acceptees": ["Matrice de décision", "La matrice de décision", "Matrice"],
+      "indices": [
+        "Je suis un outil pour choisir une solution.",
+        "Je suis un tableau où l'on note chaque solution selon chaque critère.",
+        "Avec moi, on calcule des totaux pondérés pour comparer les solutions."
+      ],
+      "explication": "La matrice de décision note chaque solution selon chaque critère ; on compare les totaux pondérés."
+    },
+    {
+      "reponse": "Croquis",
+      "acceptees": ["Croquis", "Un croquis", "Croquis de recherche"],
+      "indices": [
+        "Je suis un dessin.",
+        "Je suis tracé vite, à main levée.",
+        "Des annotations expliquent les matériaux et le fonctionnement de ma solution."
+      ],
+      "explication": "Le croquis de recherche est un dessin rapide, annoté, qui exprime une idée de solution."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "Une solution obtient 5 en coût (coefficient 2), 3 en sécurité (coefficient 4) et 2 en encombrement (coefficient 1). Quel est son total ?",
+      "reponse": 24,
+      "unite": "points",
+      "tolerance": 0,
+      "explication": "Total = 5 × 2 + 3 × 4 + 2 × 1 = 10 + 12 + 2 = 24."
+    },
+    {
+      "question": "Une solution obtient 4 en coût (coefficient 3) et 2 en sécurité (coefficient 5). Quel est son total ?",
+      "reponse": 22,
+      "unite": "points",
+      "tolerance": 0,
+      "explication": "Total = 4 × 3 + 2 × 5 = 12 + 10 = 22."
+    },
+    {
+      "question": "Chaque critère est noté sur 5. Les coefficients sont 3, 2 et 4. Quel est le total maximal possible ?",
+      "reponse": 45,
+      "unite": "points",
+      "tolerance": 0,
+      "explication": "Avec 5 partout : 5 × 3 + 5 × 2 + 5 × 4 = 15 + 10 + 20 = 45."
+    },
+    {
+      "question": "Coût a le coefficient 2 et sécurité le coefficient 3. La solution A obtient 3 en coût et 5 en sécurité, la solution B obtient 4 et 4. Quel est le total de la meilleure solution ?",
+      "reponse": 21,
+      "unite": "points",
+      "tolerance": 0,
+      "explication": "A : 3 × 2 + 5 × 3 = 6 + 15 = 21. B : 4 × 2 + 4 × 3 = 8 + 12 = 20. La meilleure est A, avec 21."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Les étapes d'une recherche de solution",
+      "etapes": [
+        "Produire beaucoup d'idées sans les critiquer",
+        "Dessiner chaque idée par un croquis annoté",
+        "Noter chaque solution selon les critères du cahier des charges",
+        "Retenir la solution au meilleur total",
+        "Fabriquer la solution choisie"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,151 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Les outils des chasseurs-cueilleurs",
+      "detail": "Les objets que les humains du Paléolithique fabriquent en pierre taillée et en os.",
+      "cartes": [
+        "Un biface taillé sur deux côtés",
+        "Un grattoir en pierre",
+        "Une pointe de sagaie taillée dans la pierre",
+        "Une aiguille fabriquée dans un os",
+        "Des pierres taillées de plus de 2,5 millions d'années"
+      ]
+    },
+    {
+      "nom": "La maîtrise du feu",
+      "detail": "Ce que le feu apporte aux humains du Paléolithique, attesté au plus tard vers 400 000 ans.",
+      "cartes": [
+        "Se réchauffer quand il fait très froid",
+        "Éclairer un abri à la nuit tombée",
+        "Cuire les aliments avant de les manger",
+        "Éloigner les bêtes sauvages du campement",
+        "Des restes de foyers vieux d'au moins 400 000 ans"
+      ]
+    },
+    {
+      "nom": "L'art pariétal",
+      "detail": "Les peintures et les gravures réalisées sur les parois des grottes.",
+      "cartes": [
+        "Des chevaux et des cerfs peints sur une paroi",
+        "Un pigment naturel comme l'ocre",
+        "Du charbon de bois pour dessiner en noir",
+        "La grotte Chauvet (Ardèche), d'environ 36 000 ans",
+        "La grotte de Lascaux (Dordogne), d'environ 18 000 ans"
+      ]
+    },
+    {
+      "nom": "Le mode de vie nomade",
+      "detail": "La façon dont les humains du Paléolithique se nourrissent, se déplacent et s'abritent.",
+      "cartes": [
+        "Suivre le gibier au fil des saisons",
+        "Chasser le mammouth et le renne en période glaciaire",
+        "Pêcher et cueillir des plantes sauvages",
+        "Dormir dans une tente de peaux ou sous un rocher",
+        "Vivre en petit groupe, sans maison fixe"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [],
+  "devinettes": [
+    {
+      "reponse": "Lucy",
+      "acceptees": ["Lucy"],
+      "indices": [
+        "Je suis un squelette d'australopithèque.",
+        "J'ai vécu il y a environ 3,2 millions d'années.",
+        "On m'a découverte en Éthiopie, en 1974."
+      ],
+      "explication": "Lucy est une australopithèque d'environ 3,2 millions d'années, découverte en Éthiopie en 1974."
+    },
+    {
+      "reponse": "Toumaï",
+      "acceptees": ["Toumaï", "Toumai"],
+      "indices": [
+        "Je suis un très vieux fossile d'hominidé.",
+        "On m'a trouvé au Tchad, en Afrique.",
+        "J'ai environ 7 millions d'années."
+      ],
+      "explication": "Toumaï, trouvé au Tchad, a environ 7 millions d'années : c'est l'un des plus anciens fossiles d'hominidés."
+    },
+    {
+      "reponse": "Homo sapiens",
+      "acceptees": ["Homo sapiens", "Sapiens", "Homo sapiens sapiens"],
+      "indices": [
+        "Je suis une espèce humaine née en Afrique.",
+        "Je me suis répandu sur tous les continents, jusqu'en Amérique par la Béringie.",
+        "Je suis apparu il y a environ 300 000 ans et c'est mon espèce que tu as aujourd'hui."
+      ],
+      "explication": "Homo sapiens, notre espèce, apparaît en Afrique il y a environ 300 000 ans puis peuple toute la Terre."
+    },
+    {
+      "reponse": "Lascaux",
+      "acceptees": ["Lascaux", "La grotte de Lascaux", "Grotte de Lascaux"],
+      "indices": [
+        "Je suis célèbre dans le monde entier pour mes peintures préhistoriques.",
+        "Je me trouve en Dordogne.",
+        "Sur mes parois, des chevaux, des aurochs et des cerfs ont été peints il y a environ 18 000 ans."
+      ],
+      "explication": "Lascaux, en Dordogne, est une grotte ornée d'environ 18 000 ans, couverte de chevaux, d'aurochs et de cerfs."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "Sur une frise où 1 cm représente 100 000 ans, à quelle distance d'aujourd'hui place-t-on Lucy, qui a vécu il y a 3,2 millions d'années ?",
+      "reponse": 32,
+      "unite": "cm",
+      "tolerance": 0,
+      "explication": "3,2 millions d'années = 3 200 000 ans. 3 200 000 ÷ 100 000 = 32. Lucy est à 32 cm d'aujourd'hui."
+    },
+    {
+      "question": "Sur une frise où 1 cm représente 100 000 ans, à quelle distance d'aujourd'hui place-t-on le départ d'Afrique d'Homo erectus, il y a environ 2 millions d'années ?",
+      "reponse": 20,
+      "unite": "cm",
+      "tolerance": 0,
+      "explication": "2 millions d'années = 2 000 000 ans. 2 000 000 ÷ 100 000 = 20. Le départ d'Homo erectus est à 20 cm d'aujourd'hui."
+    },
+    {
+      "question": "Sur une frise où 1 cm représente 100 000 ans, à combien de millimètres d'aujourd'hui place-t-on la grotte de Lascaux, peinte il y a environ 18 000 ans ?",
+      "reponse": 1.8,
+      "unite": "mm",
+      "tolerance": 0,
+      "explication": "18 000 ÷ 100 000 = 0,18 cm. Comme 1 cm = 10 mm, 0,18 × 10 = 1,8 mm."
+    },
+    {
+      "question": "Toumaï a environ 7 millions d'années et Lucy environ 3,2 millions d'années. Combien d'années séparent Toumaï de Lucy ? Réponds en millions d'années.",
+      "reponse": 3.8,
+      "unite": "millions d'années",
+      "tolerance": 0,
+      "explication": "7 − 3,2 = 3,8. Toumaï est plus ancien que Lucy d'environ 3,8 millions d'années."
+    },
+    {
+      "question": "Sur une frise où 1 cm représente 500 000 ans, à quelle distance d'aujourd'hui place-t-on Toumaï, qui a environ 7 millions d'années ?",
+      "reponse": 14,
+      "unite": "cm",
+      "tolerance": 0,
+      "explication": "7 millions d'années = 7 000 000 ans. 7 000 000 ÷ 500 000 = 14. Toumaï est à 14 cm d'aujourd'hui."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Le peuplement de la Terre par Homo sapiens",
+      "etapes": [
+        "Homo sapiens apparaît en Afrique, il y a environ 300 000 ans",
+        "Il atteint l'Australie, il y a au moins 50 000 ans",
+        "Il arrive en Europe, vers 45 000 à 40 000 ans",
+        "Il passe en Amérique, il y a au moins 15 000 ans"
+      ]
+    },
+    {
+      "titre": "Des premiers hominidés aux grottes ornées",
+      "etapes": [
+        "Toumaï, le fossile trouvé au Tchad",
+        "Lucy, l'australopithèque d'Éthiopie",
+        "Homo erectus quitte l'Afrique",
+        "Homo sapiens apparaît en Afrique",
+        "Les peintures de la grotte Chauvet"
+      ]
+    }
+  ]
+}

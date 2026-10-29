@@ -1,0 +1,139 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Le présent passif",
+      "detail": "L'auxiliaire être est au présent : « est mangée », « sont corrigés ».",
+      "cartes": [
+        "Les feuilles sont emportées par le vent",
+        "La souris est mangée par le chat",
+        "Les devoirs sont corrigés par le professeur",
+        "Ce film est adoré par les enfants",
+        "La salle est nettoyée par les élèves"
+      ]
+    },
+    {
+      "nom": "L'imparfait passif",
+      "detail": "L'auxiliaire être est à l'imparfait : « était protégé », « étaient récoltés ».",
+      "cartes": [
+        "Le village était protégé par une haute muraille",
+        "Les élèves étaient récompensés par le directeur",
+        "La maison était gardée par un gros chien",
+        "Chaque soir, les portes étaient fermées par le gardien",
+        "Le blé était récolté par les paysans"
+      ]
+    },
+    {
+      "nom": "Le passé composé passif",
+      "detail": "L'auxiliaire être est au passé composé : « a été volé », « ont été sauvés ».",
+      "cartes": [
+        "Un tableau a été volé au musée",
+        "Les enfants ont été sauvés par les pompiers",
+        "Le gâteau a été préparé par Léa",
+        "La route a été fermée hier soir",
+        "Mes voisins ont été réveillés par l'orage"
+      ]
+    },
+    {
+      "nom": "Le futur passif",
+      "detail": "L'auxiliaire être est au futur : « sera inaugurée », « seront annoncés ».",
+      "cartes": [
+        "La salle sera inaugurée par le maire",
+        "Les résultats seront annoncés par le proviseur",
+        "Le pont sera réparé par une équipe de maçons",
+        "Tu seras récompensé par ton professeur",
+        "Les invités seront accueillis par les élèves"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Quelle est la fonction du groupe en couleur ?",
+      "texte": "La souris est mangée [par le chat].",
+      "choix": ["Sujet", "COD", "COI", "Complément d'agent"],
+      "bonne": 3,
+      "explication": "La phrase est à la voix passive : « par le chat » indique qui fait l'action. C'est le complément d'agent."
+    },
+    {
+      "consigne": "Quelle est la fonction du groupe en couleur ?",
+      "texte": "[La souris] est mangée par le chat.",
+      "choix": ["Sujet", "COD", "COI", "Complément d'agent"],
+      "bonne": 0,
+      "explication": "À la voix passive, le sujet subit l'action : « la souris » est le sujet de « est mangée »."
+    },
+    {
+      "consigne": "Quelle est la fonction du groupe en couleur ?",
+      "texte": "Le chat mange [la souris].",
+      "choix": ["Sujet", "COD", "COI", "Complément d'agent"],
+      "bonne": 1,
+      "explication": "À la voix active, « la souris » répond à « le chat mange quoi ? » : c'est le COD. Il deviendra le sujet au passif."
+    },
+    {
+      "consigne": "Quelle est la fonction du groupe en couleur ?",
+      "texte": "Il parle [à son ami].",
+      "choix": ["Sujet", "COD", "COI", "Complément d'agent"],
+      "bonne": 2,
+      "explication": "« À son ami » répond à « il parle à qui ? » : c'est un COI. Un verbe sans COD ne peut pas se mettre au passif."
+    },
+    {
+      "consigne": "Quelle est la fonction du groupe en couleur ?",
+      "texte": "Elle est admirée [de tous].",
+      "choix": ["Sujet", "COD", "COI", "Complément d'agent"],
+      "bonne": 3,
+      "explication": "La phrase est au passif et « de tous » indique qui admire : c'est un complément d'agent introduit par « de »."
+    },
+    {
+      "consigne": "Quelle est la fonction du groupe en couleur ?",
+      "texte": "[Le jury] récompense l'élève.",
+      "choix": ["Sujet", "COD", "COI", "Complément d'agent"],
+      "bonne": 0,
+      "explication": "À la voix active, le sujet fait l'action : « le jury » récompense."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Complément d'agent",
+      "acceptees": ["Complément d'agent", "Le complément d'agent"],
+      "indices": [
+        "Je me trouve seulement dans les phrases à la voix passive.",
+        "Je suis introduit par « par » ou parfois par « de ».",
+        "Je dis qui fait l'action."
+      ],
+      "explication": "Dans « La souris est mangée par le chat », « par le chat » est le complément d'agent."
+    },
+    {
+      "reponse": "La voix passive",
+      "acceptees": ["Voix passive", "La voix passive", "Passive", "Le passif", "Passif"],
+      "indices": [
+        "Je suis une forme du verbe.",
+        "Dans ma phrase, le sujet subit l'action.",
+        "On me forme avec l'auxiliaire être et un participe passé accordé."
+      ],
+      "explication": "À la voix passive, le sujet subit l'action ; le verbe se forme avec être + participe passé."
+    },
+    {
+      "reponse": "COD",
+      "acceptees": ["COD", "Le COD", "Complément d'objet direct"],
+      "indices": [
+        "Je suis une fonction dans la phrase active.",
+        "Je deviens le sujet quand on passe de l'actif au passif.",
+        "Seuls les verbes qui me possèdent peuvent se mettre au passif."
+      ],
+      "explication": "Le COD de la phrase active devient le sujet de la phrase passive ; sans COD, pas de passif."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Mettre une phrase à la voix passive",
+      "etapes": [
+        "On vérifie que le verbe a un COD",
+        "On fait du COD le sujet de la nouvelle phrase",
+        "On conjugue être au temps du verbe de départ",
+        "On ajoute le participe passé, accordé avec le sujet",
+        "On transforme l'ancien sujet en complément d'agent"
+      ]
+    }
+  ]
+}

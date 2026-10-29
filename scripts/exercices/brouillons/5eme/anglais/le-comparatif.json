@@ -1,0 +1,138 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Adjectif court avec -er",
+      "detail": "L'adjectif court prend -er (avec parfois un petit changement d'orthographe), puis than : fast devient faster than.",
+      "cartes": [
+        "A cheetah is faster than a lion",
+        "An elephant is heavier than a horse",
+        "A whale is much bigger than a dolphin",
+        "Your cat is funnier than my dog",
+        "This room is larger than my bedroom"
+      ]
+    },
+    {
+      "nom": "More devant l'adjectif long",
+      "detail": "L'adjectif long ne change pas : on place more devant lui, puis than.",
+      "cartes": [
+        "An elephant is more intelligent than a cow",
+        "Sharks are more dangerous than dolphins",
+        "This film is more interesting than the book",
+        "Gold is more expensive than silver",
+        "Her new house is more beautiful than mine"
+      ]
+    },
+    {
+      "nom": "Comparatif irrégulier",
+      "detail": "Good et bad ont une forme propre : better et worse.",
+      "cartes": [
+        "Your drawing is better than mine",
+        "The weather is worse today than yesterday",
+        "My marks are better than last year",
+        "Their team was worse than ours",
+        "This soup is better than that one"
+      ]
+    },
+    {
+      "nom": "Égalité ou infériorité",
+      "detail": "On dit « aussi … que » avec as … as, et « moins … que » avec not as … as ou less … than.",
+      "cartes": [
+        "My dog is as clever as your cat",
+        "A snail is not as fast as a rabbit",
+        "A cat is less dangerous than a tiger",
+        "My brother is as tall as my father",
+        "Tea is less expensive than coffee"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Comment ce comparatif est-il formé à partir de l'adjectif ?",
+      "texte": "A whale is much [bigger] than a dolphin.",
+      "choix": ["On ajoute seulement -er", "On ajoute seulement -r", "On double la consonne", "Le y devient i"],
+      "bonne": 2,
+      "explication": "Big finit par une seule voyelle et une consonne : on double le g, puis on ajoute -er."
+    },
+    {
+      "consigne": "Comment ce comparatif est-il formé à partir de l'adjectif ?",
+      "texte": "My sister is [happier] than me.",
+      "choix": ["On ajoute seulement -er", "On ajoute seulement -r", "On double la consonne", "Le y devient i"],
+      "bonne": 3,
+      "explication": "Happy finit par un y après une consonne : le y devient i, puis on ajoute -er."
+    },
+    {
+      "consigne": "Comment ce comparatif est-il formé à partir de l'adjectif ?",
+      "texte": "This room is [larger] than my bedroom.",
+      "choix": ["On ajoute seulement -er", "On ajoute seulement -r", "On double la consonne", "Le y devient i"],
+      "bonne": 1,
+      "explication": "Large finit déjà par un e : on ajoute seulement -r."
+    },
+    {
+      "consigne": "Comment ce comparatif est-il formé à partir de l'adjectif ?",
+      "texte": "A cheetah is [faster] than a lion.",
+      "choix": ["On ajoute seulement -er", "On ajoute seulement -r", "On double la consonne", "Le y devient i"],
+      "bonne": 0,
+      "explication": "Fast ne change pas : on ajoute simplement -er."
+    },
+    {
+      "consigne": "Comment ce comparatif est-il formé à partir de l'adjectif ?",
+      "texte": "Today it's [hotter] than yesterday.",
+      "choix": ["On ajoute seulement -er", "On ajoute seulement -r", "On double la consonne", "Le y devient i"],
+      "bonne": 2,
+      "explication": "Hot finit par une seule voyelle et une consonne : on double le t, puis on ajoute -er."
+    },
+    {
+      "consigne": "Comment ce comparatif est-il formé à partir de l'adjectif ?",
+      "texte": "An elephant is [heavier] than a horse.",
+      "choix": ["On ajoute seulement -er", "On ajoute seulement -r", "On double la consonne", "Le y devient i"],
+      "bonne": 3,
+      "explication": "Heavy finit par un y après une consonne : le y devient i, puis on ajoute -er."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Than",
+      "acceptees": ["Than"],
+      "indices": [
+        "Je suis un petit mot anglais.",
+        "On me place après un comparatif.",
+        "Je traduis « que » dans « plus grand que »."
+      ],
+      "explication": "Than se traduit par « que » dans une comparaison : taller than. Il ne faut pas écrire that."
+    },
+    {
+      "reponse": "Better",
+      "acceptees": ["Better"],
+      "indices": [
+        "Je suis un adjectif au comparatif.",
+        "Je suis irrégulier : je ne ressemble pas à l'adjectif de départ.",
+        "Je suis le comparatif de good."
+      ],
+      "explication": "Le comparatif de good est better, et non gooder ni more good."
+    },
+    {
+      "reponse": "Endangered",
+      "acceptees": ["Endangered", "Endangered species", "An endangered species"],
+      "indices": [
+        "Je suis un adjectif.",
+        "Je décris un animal ou une plante menacés.",
+        "En français, je me traduis par « en voie de disparition »."
+      ],
+      "explication": "Endangered veut dire en voie de disparition : an endangered species."
+    },
+    {
+      "reponse": "Less",
+      "acceptees": ["Less"],
+      "indices": [
+        "Je suis un mot anglais.",
+        "J'exprime l'infériorité, surtout avec des adjectifs longs.",
+        "Je suis le contraire de « more »."
+      ],
+      "explication": "Less … than exprime l'infériorité : A cat is less dangerous than a tiger."
+    }
+  ],
+  "calculs": [],
+  "etapes": []
+}

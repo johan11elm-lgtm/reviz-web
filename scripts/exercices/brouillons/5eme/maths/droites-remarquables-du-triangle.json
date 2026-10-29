@@ -1,0 +1,193 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "La médiatrice",
+      "detail": "La droite perpendiculaire à un côté en son milieu, qui mène au cercle circonscrit.",
+      "cartes": [
+        "Droite perpendiculaire à un côté, passant par son milieu",
+        "Tous ses points sont à égale distance des extrémités du segment",
+        "Deux d'entre elles suffisent pour trouver le centre du cercle circonscrit",
+        "Un point équidistant de A et de B est forcément sur elle",
+        "Elle ne passe pas forcément par un sommet du triangle"
+      ]
+    },
+    {
+      "nom": "La hauteur",
+      "detail": "La droite issue d'un sommet et perpendiculaire au côté opposé.",
+      "cartes": [
+        "Issue d'un sommet, perpendiculaire au côté opposé",
+        "Dans un triangle obtus, deux d'entre elles sont à l'extérieur",
+        "Dans ABC rectangle en A, (AB) et (AC) en font partie",
+        "Elle ne passe pas forcément par le milieu du côté opposé",
+        "Son pied est le point où elle coupe le côté opposé"
+      ]
+    },
+    {
+      "nom": "La médiane",
+      "detail": "La droite qui joint un sommet au milieu du côté opposé.",
+      "cartes": [
+        "Elle joint un sommet au milieu du côté opposé",
+        "Si I est le milieu de [BC], (AI) en est une",
+        "Elle partage le triangle en deux triangles de même aire",
+        "Elle n'est pas forcément perpendiculaire au côté opposé",
+        "Elle forme deux triangles de bases égales et de même hauteur"
+      ]
+    },
+    {
+      "nom": "L'aire d'un triangle",
+      "detail": "Le calcul de l'aire à partir d'une base et de la hauteur associée.",
+      "cartes": [
+        "Base × hauteur ÷ 2",
+        "Base 8 cm, hauteur 5 cm : 20 cm²",
+        "ABC rectangle en A, AB = 6 cm et AC = 4 cm : 12 cm²",
+        "Elle s'exprime en cm², en dm² ou en m²",
+        "Il faut mettre base et hauteur dans la même unité"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Quelle droite remarquable est la droite en couleur ?",
+      "texte": "Dans le triangle ABC, I est le milieu du côté BC et on trace [la droite (AI)].",
+      "choix": ["Médiatrice", "Hauteur", "Médiane"],
+      "bonne": 2,
+      "explication": "(AI) passe par le sommet A et par le milieu I du côté opposé BC : c'est une médiane."
+    },
+    {
+      "consigne": "Quelle droite remarquable est la droite en couleur ?",
+      "texte": "Dans le triangle ABC, on trace [la droite passant par A et perpendiculaire à (BC)].",
+      "choix": ["Médiatrice", "Hauteur", "Médiane"],
+      "bonne": 1,
+      "explication": "Elle part du sommet A et est perpendiculaire au côté opposé BC : c'est la hauteur issue de A."
+    },
+    {
+      "consigne": "Quelle droite remarquable est la droite en couleur ?",
+      "texte": "Dans le triangle ABC, on trace [la droite perpendiculaire au côté BC en son milieu].",
+      "choix": ["Médiatrice", "Hauteur", "Médiane"],
+      "bonne": 0,
+      "explication": "Une droite perpendiculaire à un côté en son milieu est la médiatrice de ce côté."
+    },
+    {
+      "consigne": "Quelle droite remarquable est la droite en couleur ?",
+      "texte": "Dans le triangle ABC obtus en B, [la droite passant par A et perpendiculaire à (BC)] tombe à l'extérieur du triangle.",
+      "choix": ["Médiatrice", "Hauteur", "Médiane"],
+      "bonne": 1,
+      "explication": "Elle part de A et est perpendiculaire à (BC) : c'est une hauteur, qui coupe ici le prolongement du côté."
+    },
+    {
+      "consigne": "Quelles droites remarquables sont tracées en couleur ?",
+      "texte": "Pour trouver le centre du cercle circonscrit à ABC, on trace [deux droites perpendiculaires aux côtés en leur milieu].",
+      "choix": ["Médiatrices", "Hauteurs", "Médianes"],
+      "bonne": 0,
+      "explication": "Les droites perpendiculaires aux côtés en leur milieu sont des médiatrices ; elles se coupent au centre du cercle circonscrit."
+    },
+    {
+      "consigne": "Quelle droite remarquable est la droite en couleur ?",
+      "texte": "Pour partager ABC en deux triangles de même aire, on trace [la droite qui joint B au milieu de AC].",
+      "choix": ["Médiatrice", "Hauteur", "Médiane"],
+      "bonne": 2,
+      "explication": "Elle joint le sommet B au milieu du côté opposé AC : c'est une médiane, qui partage le triangle en deux triangles de même aire."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Médiane",
+      "acceptees": ["Médiane", "La médiane", "Une médiane"],
+      "indices": [
+        "Je suis une droite du triangle.",
+        "Je pars toujours d'un sommet.",
+        "Je rejoins le milieu du côté opposé et je coupe le triangle en deux triangles de même aire."
+      ],
+      "explication": "Une médiane joint un sommet au milieu du côté opposé et partage le triangle en deux triangles de même aire."
+    },
+    {
+      "reponse": "Médiatrice",
+      "acceptees": ["Médiatrice", "La médiatrice", "Une médiatrice"],
+      "indices": [
+        "Je suis une droite, mais je ne passe pas forcément par un sommet.",
+        "Je suis perpendiculaire à un côté.",
+        "Je passe par le milieu de ce côté, et tous mes points sont à égale distance de ses extrémités."
+      ],
+      "explication": "La médiatrice d'un segment est la droite perpendiculaire à ce segment en son milieu."
+    },
+    {
+      "reponse": "Hauteur",
+      "acceptees": ["Hauteur", "La hauteur", "Une hauteur"],
+      "indices": [
+        "Je suis une droite qui part d'un sommet du triangle.",
+        "Je suis perpendiculaire au côté opposé.",
+        "Dans un triangle obtus, je peux tomber à l'extérieur du triangle."
+      ],
+      "explication": "Une hauteur passe par un sommet et est perpendiculaire au côté opposé, ou à son prolongement."
+    },
+    {
+      "reponse": "Cercle circonscrit",
+      "acceptees": ["Cercle circonscrit", "Le cercle circonscrit", "Cercle circonscrit au triangle", "Le cercle circonscrit au triangle"],
+      "indices": [
+        "On me trace avec un compas.",
+        "Je passe par les trois sommets d'un triangle.",
+        "Mon centre est le point où se coupent les médiatrices du triangle."
+      ],
+      "explication": "Le cercle circonscrit passe par les trois sommets ; son centre est le point de concours des médiatrices."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "Un triangle a une base de 12 cm et une hauteur associée de 7 cm. Quelle est son aire, en cm² ?",
+      "reponse": 42,
+      "unite": "cm²",
+      "tolerance": 0,
+      "explication": "Aire = base × hauteur ÷ 2 = 12 × 7 ÷ 2 = 84 ÷ 2 = 42 cm²."
+    },
+    {
+      "question": "ABC est rectangle en A avec AB = 9 cm et AC = 5 cm. Quelle est son aire, en cm² ?",
+      "reponse": 22.5,
+      "unite": "cm²",
+      "tolerance": 0,
+      "explication": "Les côtés de l'angle droit servent de base et de hauteur : 9 × 5 ÷ 2 = 45 ÷ 2 = 22,5 cm²."
+    },
+    {
+      "question": "M est sur la médiatrice de [AB] et MA = 6,3 cm. Combien mesure MB, en cm ?",
+      "reponse": 6.3,
+      "unite": "cm",
+      "tolerance": 0,
+      "explication": "Tout point de la médiatrice est à égale distance des extrémités du segment : MB = MA = 6,3 cm."
+    },
+    {
+      "question": "Dans le triangle ABC, le côté BC mesure 10 cm et la hauteur issue de A mesure 6 cm. I est le milieu de [BC]. Quelle est l'aire du triangle ABI, en cm² ?",
+      "reponse": 15,
+      "unite": "cm²",
+      "tolerance": 0,
+      "explication": "I est le milieu de [BC], donc BI = 10 ÷ 2 = 5 cm. La hauteur issue de A est la même : 5 × 6 ÷ 2 = 15 cm²."
+    },
+    {
+      "question": "Un triangle a une base de 6 cm et une hauteur de 0,4 dm. Quelle est son aire, en cm² ?",
+      "reponse": 12,
+      "unite": "cm²",
+      "tolerance": 0,
+      "explication": "On convertit : 0,4 dm = 4 cm. Puis 6 × 4 ÷ 2 = 24 ÷ 2 = 12 cm²."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Calculer l'aire d'un triangle",
+      "etapes": [
+        "On choisit un côté comme base",
+        "On repère la hauteur associée à cette base",
+        "On vérifie que base et hauteur ont la même unité",
+        "On calcule base × hauteur ÷ 2 et on écrit l'unité carrée"
+      ]
+    },
+    {
+      "titre": "Tracer le cercle circonscrit à un triangle",
+      "etapes": [
+        "On trace la médiatrice d'un premier côté",
+        "On trace la médiatrice d'un deuxième côté",
+        "On place le point O où les deux se coupent",
+        "On trace le cercle de centre O passant par A"
+      ]
+    }
+  ]
+}

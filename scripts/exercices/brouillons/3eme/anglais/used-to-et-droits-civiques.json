@@ -1,0 +1,174 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Passé révolu, phrase affirmative",
+      "detail": "Pour une habitude ou une situation passée qui n'existe plus, on emploie used to + base verbale.",
+      "cartes": [
+        "Black people used to sit at the back of the bus",
+        "Segregation used to be legal in the South",
+        "Buses and restaurants used to be segregated",
+        "My grandmother used to walk to work",
+        "We used to live near a big park"
+      ]
+    },
+    {
+      "nom": "Passé révolu, négation ou question",
+      "detail": "À la négative et à l'interrogative, on emploie did : didn't use to + base verbale, Did ... use to ... ?",
+      "cartes": [
+        "Black children didn't use to go to white schools",
+        "Did they use to go to separate schools?",
+        "I didn't use to like history",
+        "Did your parents use to live in Alabama?",
+        "She didn't use to wear glasses"
+      ]
+    },
+    {
+      "nom": "Être habitué à quelque chose",
+      "detail": "Be used to + V-ing veut dire « être habitué à » : ce n'est pas un passé révolu.",
+      "cartes": [
+        "I'm used to getting up early",
+        "She is used to speaking English",
+        "We are used to walking in the rain",
+        "He is used to living in a big city",
+        "They are used to working late"
+      ]
+    },
+    {
+      "nom": "Habitude ou situation actuelle",
+      "detail": "Pour une habitude ou une situation d'aujourd'hui, on emploie le présent simple : used to n'existe qu'au passé.",
+      "cartes": [
+        "Today, all passengers sit where they want",
+        "I usually walk to school",
+        "My cousin plays the piano every evening",
+        "She always takes the bus to work",
+        "Today, children go to the same schools"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "le boycott des bus de Montgomery",
+      "carte": "Rosa Parks refuse de céder sa place à un passager blanc et est arrêtée",
+      "role": "cause",
+      "explication": "Son arrestation, le 1er décembre 1955, est suivie du boycott des bus de la ville."
+    },
+    {
+      "fait": "le boycott des bus de Montgomery",
+      "carte": "Les lois Jim Crow imposent la ségrégation dans les bus",
+      "role": "cause",
+      "explication": "Les places séparées pour Noirs et Blancs sont ce que le boycott dénonce."
+    },
+    {
+      "fait": "le boycott des bus de Montgomery",
+      "carte": "En 1956, la Cour suprême juge la ségrégation dans les bus contraire à la Constitution",
+      "role": "consequence",
+      "explication": "Le boycott, qui dure 381 jours, aboutit en 1956 à la décision de la Cour suprême."
+    },
+    {
+      "fait": "le Civil Rights Act de 1964 et le Voting Rights Act de 1965",
+      "carte": "L'essentiel des lois Jim Crow disparaît",
+      "role": "consequence",
+      "explication": "Ces deux lois font tomber l'essentiel des lois qui imposaient la ségrégation."
+    }
+  ],
+  "etiquettes": [
+    {
+      "consigne": "Quelle structure est en couleur ?",
+      "texte": "Black people [used to sit] at the back of the bus.",
+      "choix": ["Used to + base verbale", "Didn't use to ou Did ... use to", "Be used to + V-ing", "Présent simple"],
+      "bonne": 0,
+      "explication": "« used to + base verbale » décrit une habitude passée qui n'existe plus."
+    },
+    {
+      "consigne": "Quelle structure est en couleur ?",
+      "texte": "Black and white children [didn't use to] go to the same schools.",
+      "choix": ["Used to + base verbale", "Didn't use to ou Did ... use to", "Be used to + V-ing", "Présent simple"],
+      "bonne": 1,
+      "explication": "À la négative, on emploie didn't use to : avec did, used perd son d."
+    },
+    {
+      "consigne": "Quelle structure est en couleur ?",
+      "texte": "I'm [used to getting up] early.",
+      "choix": ["Used to + base verbale", "Didn't use to ou Did ... use to", "Be used to + V-ing", "Présent simple"],
+      "bonne": 2,
+      "explication": "« be used to + V-ing » veut dire « être habitué à » : je suis habitué à me lever tôt."
+    },
+    {
+      "consigne": "Quelle structure est en couleur ?",
+      "texte": "Today, all passengers [sit] where they want.",
+      "choix": ["Used to + base verbale", "Didn't use to ou Did ... use to", "Be used to + V-ing", "Présent simple"],
+      "bonne": 3,
+      "explication": "« sit » est le présent simple : pour une situation d'aujourd'hui, on n'emploie pas used to."
+    },
+    {
+      "consigne": "Quelle structure est en couleur ?",
+      "texte": "[Did they use to] go to separate schools?",
+      "choix": ["Used to + base verbale", "Didn't use to ou Did ... use to", "Be used to + V-ing", "Présent simple"],
+      "bonne": 1,
+      "explication": "À l'interrogative, on emploie Did ... use to : avec did, used perd son d."
+    },
+    {
+      "consigne": "Quelle structure est en couleur ?",
+      "texte": "She [is used to speaking] English.",
+      "choix": ["Used to + base verbale", "Didn't use to ou Did ... use to", "Be used to + V-ing", "Présent simple"],
+      "bonne": 2,
+      "explication": "« is used to + V-ing » veut dire « est habituée à » : elle a l'habitude de parler anglais."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Rosa Parks",
+      "acceptees": ["Parks", "Rosa Parks"],
+      "indices": [
+        "Je suis une femme afro-américaine.",
+        "J'ai refusé de céder ma place à un passager blanc dans un bus.",
+        "J'ai été arrêtée à Montgomery le 1er décembre 1955."
+      ],
+      "explication": "Rosa Parks refuse de céder sa place dans un bus de Montgomery le 1er décembre 1955 et elle est arrêtée."
+    },
+    {
+      "reponse": "Martin Luther King",
+      "acceptees": ["King", "Martin Luther King", "Martin Luther King Jr", "MLK"],
+      "indices": [
+        "Je suis un pasteur américain.",
+        "Je défends la non-violence.",
+        "Le 28 août 1963, j'ai prononcé le discours I Have a Dream devant le Lincoln Memorial."
+      ],
+      "explication": "Martin Luther King, pasteur et défenseur de la non-violence, prononce I Have a Dream à Washington le 28 août 1963."
+    },
+    {
+      "reponse": "Jim Crow",
+      "acceptees": ["Jim Crow", "Lois Jim Crow", "Les lois Jim Crow", "Loi Jim Crow"],
+      "indices": [
+        "Je suis un ensemble de lois du Sud des États-Unis.",
+        "J'impose des écoles, des places dans les bus et des toilettes séparées pour Noirs et Blancs.",
+        "Le Civil Rights Act de 1964 et le Voting Rights Act de 1965 ont fait tomber l'essentiel de moi."
+      ],
+      "explication": "Les lois Jim Crow imposaient la ségrégation dans le Sud des États-Unis jusqu'aux lois de 1964 et 1965."
+    },
+    {
+      "reponse": "Montgomery",
+      "acceptees": ["Montgomery"],
+      "indices": [
+        "Je suis une ville des États-Unis.",
+        "Je suis située dans l'Alabama.",
+        "Un boycott des bus de 381 jours a eu lieu chez moi après l'arrestation de Rosa Parks."
+      ],
+      "explication": "À Montgomery, en Alabama, le boycott des bus dure 381 jours après l'arrestation de Rosa Parks."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "La lutte pour les droits civiques",
+      "etapes": [
+        "Rosa Parks refuse de céder sa place dans un bus",
+        "La Cour suprême juge la ségrégation dans les bus illégale",
+        "Martin Luther King prononce I Have a Dream à Washington",
+        "Le Civil Rights Act interdit la ségrégation dans les lieux publics",
+        "Le Voting Rights Act protège le droit de vote"
+      ]
+    }
+  ]
+}

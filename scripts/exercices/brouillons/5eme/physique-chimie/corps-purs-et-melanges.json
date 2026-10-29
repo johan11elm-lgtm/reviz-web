@@ -1,0 +1,157 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Regarder à l'œil nu",
+      "detail": "Ce qu'on constate simplement en observant un liquide, sans aucun appareil.",
+      "cartes": [
+        "On voit des particules de terre en suspension dans l'eau",
+        "L'huile forme une couche au-dessus de l'eau",
+        "Des morceaux de pulpe restent visibles dans le jus d'orange",
+        "Le sel remué dans l'eau n'est plus visible",
+        "Le sirop dilué paraît formé d'un seul liquide uniforme"
+      ]
+    },
+    {
+      "nom": "Tester avec du sulfate de cuivre",
+      "detail": "Le test de la poudre blanche, qui permet de détecter la présence d'eau.",
+      "cartes": [
+        "La poudre blanche devient bleue",
+        "Quelques gouttes de jus de pomme bleuissent la poudre",
+        "On dépose une goutte du liquide sur une poudre blanche",
+        "La poudre reste blanche : le liquide ne contient pas d'eau",
+        "On apprend seulement que le liquide contient de l'eau"
+      ]
+    },
+    {
+      "nom": "Faire évaporer le liquide",
+      "detail": "Ce qu'on constate quand on chauffe quelques gouttes jusqu'à ce que l'eau ait disparu.",
+      "cartes": [
+        "Il reste un dépôt solide au fond du récipient",
+        "L'eau minérale laisse des sels minéraux en s'évaporant",
+        "L'eau distillée ne laisse aucun résidu",
+        "On chauffe quelques gouttes jusqu'à ce que l'eau ait disparu",
+        "Une eau qui laisse un résidu sec est un mélange"
+      ]
+    },
+    {
+      "nom": "Mesurer la température",
+      "detail": "Ce que montre un thermomètre pendant l'ébullition, la fusion ou la solidification d'un liquide.",
+      "cartes": [
+        "L'eau pure garde 100 °C pendant toute son ébullition",
+        "La glace pure reste à 0 °C pendant qu'elle fond",
+        "L'eau salée gèle sous 0 °C et continue de se refroidir",
+        "Pendant l'ébullition, on lit 101 °C puis 104 °C",
+        "Sur la courbe du chauffage, une portion horizontale apparaît"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "De quel type de matière s'agit-il pour le groupe en couleur ?",
+      "texte": "Au laboratoire, le professeur verse [de l'eau distillée] dans un bécher.",
+      "choix": ["Corps pur", "Mélange homogène", "Mélange hétérogène"],
+      "bonne": 0,
+      "explication": "L'eau distillée ne contient que de l'eau, une seule espèce chimique : c'est un corps pur."
+    },
+    {
+      "consigne": "De quel type de matière s'agit-il pour le groupe en couleur ?",
+      "texte": "Inès remue du sirop dans de l'eau : [le liquide obtenu] est vert et on n'y distingue rien d'autre.",
+      "choix": ["Corps pur", "Mélange homogène", "Mélange hétérogène"],
+      "bonne": 1,
+      "explication": "Il y a plusieurs constituants (eau et sirop) mais on ne les distingue pas à l'œil nu : c'est un mélange homogène."
+    },
+    {
+      "consigne": "De quel type de matière s'agit-il pour le groupe en couleur ?",
+      "texte": "Dans le bol de Samir, [l'eau et l'huile] forment deux couches bien séparées.",
+      "choix": ["Corps pur", "Mélange homogène", "Mélange hétérogène"],
+      "bonne": 2,
+      "explication": "On distingue deux constituants à l'œil nu, l'eau et l'huile : c'est un mélange hétérogène."
+    },
+    {
+      "consigne": "De quel type de matière s'agit-il pour le groupe en couleur ?",
+      "texte": "Lou boit [un jus d'orange avec pulpe] : les morceaux de pulpe flottent dans le verre.",
+      "choix": ["Corps pur", "Mélange homogène", "Mélange hétérogène"],
+      "bonne": 2,
+      "explication": "On voit la pulpe et le liquide, donc au moins deux constituants : c'est un mélange hétérogène."
+    },
+    {
+      "consigne": "De quel type de matière s'agit-il pour le groupe en couleur ?",
+      "texte": "[L'air] contient du diazote et du dioxygène, que l'on ne distingue pas l'un de l'autre.",
+      "choix": ["Corps pur", "Mélange homogène", "Mélange hétérogène"],
+      "bonne": 1,
+      "explication": "L'air contient plusieurs gaz qu'on ne distingue pas à l'œil nu : c'est un mélange homogène."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Sulfate de cuivre anhydre",
+      "acceptees": ["Sulfate de cuivre", "Le sulfate de cuivre anhydre"],
+      "indices": [
+        "Je suis une poudre blanche.",
+        "On me sort au laboratoire pour faire un test.",
+        "Je deviens bleue dès que de l'eau me touche."
+      ],
+      "explication": "Le sulfate de cuivre anhydre est une poudre blanche qui devient bleue au contact de l'eau."
+    },
+    {
+      "reponse": "Palier",
+      "acceptees": ["Un palier", "Plateau", "Palier de température"],
+      "indices": [
+        "Je me vois sur une courbe de température en fonction du temps.",
+        "Je suis une partie horizontale de cette courbe.",
+        "J'apparais pendant un changement d'état seulement si la matière est un corps pur."
+      ],
+      "explication": "Un corps pur change d'état à température constante : la courbe présente un palier."
+    },
+    {
+      "reponse": "Constituant",
+      "acceptees": ["Un constituant", "Les constituants", "Espèce chimique", "Composant"],
+      "indices": [
+        "On me trouve dans un mélange.",
+        "Dans l'eau sucrée, il y en a deux : l'eau et le sucre.",
+        "Je suis chacune des espèces chimiques qui forment un mélange."
+      ],
+      "explication": "Un constituant est chacune des espèces chimiques d'un mélange."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "Une eau minérale contient 80 mg de calcium dissous par litre. Quelle masse de calcium, en mg, contient une bouteille de 1,5 L ?",
+      "reponse": 120,
+      "unite": "mg",
+      "tolerance": 0,
+      "explication": "80 mg par litre × 1,5 L = 120 mg de calcium."
+    },
+    {
+      "question": "Une eau minérale contient 12 mg de magnésium dissous par litre. Quelle masse de magnésium, en mg, y a-t-il dans 0,5 L de cette eau ?",
+      "reponse": 6,
+      "unite": "mg",
+      "tolerance": 0,
+      "explication": "12 mg par litre × 0,5 L = 6 mg de magnésium."
+    },
+    {
+      "question": "Dans une carafe, il y a 0,75 L d'une eau minérale qui contient 20 mg de sodium par litre. Quelle masse de sodium, en mg, contient la carafe ?",
+      "reponse": 15,
+      "unite": "mg",
+      "tolerance": 0,
+      "explication": "20 mg par litre × 0,75 L = 15 mg de sodium."
+    },
+    {
+      "question": "Dans 2 L d'une eau minérale, il y a 160 mg de calcium dissous. Quelle est la teneur en calcium de cette eau, en mg par litre ?",
+      "reponse": 80,
+      "unite": "mg/L",
+      "tolerance": 0,
+      "explication": "La teneur est la masse dissoute dans 1 L : 160 mg ÷ 2 L = 80 mg/L."
+    },
+    {
+      "question": "Une eau minérale laisse 300 mg de résidu sec par litre quand on la fait évaporer. Quelle masse de résidu sec, en mg, reste-t-il après évaporation de 0,5 L de cette eau ?",
+      "reponse": 150,
+      "unite": "mg",
+      "tolerance": 0,
+      "explication": "300 mg par litre × 0,5 L = 150 mg de résidu sec."
+    }
+  ],
+  "etapes": []
+}

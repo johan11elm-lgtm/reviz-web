@@ -1,0 +1,153 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Le froid",
+      "detail": "Le froid du réfrigérateur ralentit le développement des micro-organismes, celui du congélateur (−18 °C) le bloque.",
+      "cartes": [
+        "Un plat de lasagnes au congélateur",
+        "Un yaourt gardé au réfrigérateur",
+        "Des légumes surgelés du commerce",
+        "Du poisson posé sur de la glace",
+        "Un camion frigorifique qui livre des fromages"
+      ]
+    },
+    {
+      "nom": "La chaleur",
+      "detail": "La pasteurisation et la stérilisation chauffent l'aliment pour détruire les micro-organismes.",
+      "cartes": [
+        "Du lait pasteurisé",
+        "Une boîte de conserve stérilisée",
+        "Un bocal de compote chauffé puis fermé",
+        "Un procédé qui détruit les micro-organismes en chauffant",
+        "Des raviolis en boîte"
+      ]
+    },
+    {
+      "nom": "Le séchage",
+      "detail": "En retirant l'eau d'un aliment, on empêche les micro-organismes de se développer.",
+      "cartes": [
+        "Des raisins secs",
+        "Des pruneaux d'Agen",
+        "Un paquet de spaghettis",
+        "Des herbes de Provence en sachet",
+        "Des fruits laissés au soleil jusqu'à perdre leur eau"
+      ]
+    },
+    {
+      "nom": "Le sel ou le sucre",
+      "detail": "Le salage et le sucrage (confitures) freinent le développement des micro-organismes.",
+      "cartes": [
+        "Une confiture de fraises",
+        "Une gelée de groseilles",
+        "Des cerises confites sur un gâteau",
+        "Du lard conservé dans le sel",
+        "Des anchois entre des couches de gros sel"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "le développement de micro-organismes dans un aliment",
+      "carte": "Un aliment humide laissé au chaud",
+      "role": "cause",
+      "explication": "Les micro-organismes se développent surtout quand ils ont de l'eau, de la chaleur et des nutriments."
+    },
+    {
+      "fait": "le développement de micro-organismes dans un aliment",
+      "carte": "La chaîne du froid n'a pas été respectée",
+      "role": "cause",
+      "explication": "Quand la chaîne du froid est rompue, les micro-organismes peuvent se multiplier pendant le transport."
+    },
+    {
+      "fait": "le développement de micro-organismes dans un aliment",
+      "carte": "L'aliment s'abîme : il est altéré",
+      "role": "consequence",
+      "explication": "Certains micro-organismes altèrent les aliments, c'est-à-dire les abîment."
+    },
+    {
+      "fait": "le développement de micro-organismes dans un aliment",
+      "carte": "Celui qui mange l'aliment peut tomber malade",
+      "role": "consequence",
+      "explication": "Certains micro-organismes peuvent rendre malade ceux qui mangent l'aliment."
+    }
+  ],
+  "etiquettes": [
+    {
+      "consigne": "À quel groupe d'aliments appartient l'aliment en couleur ?",
+      "texte": "En entrée, la cantine sert [des carottes râpées].",
+      "choix": ["Fruits et légumes", "Féculents", "Produits laitiers", "Viandes, poissons, œufs"],
+      "bonne": 0,
+      "explication": "La carotte est un légume : elle appartient au groupe des fruits et légumes."
+    },
+    {
+      "consigne": "À quel groupe d'aliments appartient l'aliment en couleur ?",
+      "texte": "Au dîner, Inès prépare [un bol de riz].",
+      "choix": ["Fruits et légumes", "Féculents", "Produits laitiers", "Viandes, poissons, œufs"],
+      "bonne": 1,
+      "explication": "Le riz est un féculent, comme le pain et les pâtes : il fournit surtout de l'énergie."
+    },
+    {
+      "consigne": "À quel groupe d'aliments appartient l'aliment en couleur ?",
+      "texte": "Au goûter, Max prend [un yaourt nature].",
+      "choix": ["Fruits et légumes", "Féculents", "Produits laitiers", "Viandes, poissons, œufs"],
+      "bonne": 2,
+      "explication": "Le yaourt est un produit laitier : il apporte du calcium pour les os."
+    },
+    {
+      "consigne": "À quel groupe d'aliments appartient l'aliment en couleur ?",
+      "texte": "Au déjeuner, Lina mange [un filet de saumon].",
+      "choix": ["Fruits et légumes", "Féculents", "Produits laitiers", "Viandes, poissons, œufs"],
+      "bonne": 3,
+      "explication": "Le saumon est un poisson : il appartient au groupe des viandes, poissons et œufs."
+    },
+    {
+      "consigne": "À quel groupe d'aliments appartient l'aliment en couleur ?",
+      "texte": "Pour le dessert, Hugo choisit [une pomme].",
+      "choix": ["Fruits et légumes", "Féculents", "Produits laitiers", "Viandes, poissons, œufs"],
+      "bonne": 0,
+      "explication": "La pomme est un fruit : elle appartient au groupe des fruits et légumes."
+    },
+    {
+      "consigne": "À quel groupe d'aliments appartient l'aliment en couleur ?",
+      "texte": "Pour le pique-nique, Tom emporte [un œuf dur].",
+      "choix": ["Fruits et légumes", "Féculents", "Produits laitiers", "Viandes, poissons, œufs"],
+      "bonne": 3,
+      "explication": "L'œuf appartient au groupe des viandes, poissons et œufs : il aide à construire et réparer le corps."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Fermentation",
+      "acceptees": ["Fermentation", "La fermentation", "Une fermentation"],
+      "indices": [
+        "Je suis une transformation d'aliments.",
+        "Des micro-organismes font ce travail pour moi.",
+        "Grâce à moi, le lait devient yaourt et le raisin devient vin."
+      ],
+      "explication": "La fermentation est la transformation d'un aliment par des micro-organismes : bactéries pour le yaourt, levures pour le vin."
+    },
+    {
+      "reponse": "Levure",
+      "acceptees": ["Levure", "Levures", "Les levures", "Une levure"],
+      "indices": [
+        "Je suis un être vivant microscopique.",
+        "Je suis un champignon minuscule qui produit un gaz.",
+        "Grâce à moi, la pâte à pain lève."
+      ],
+      "explication": "Les levures produisent un gaz dans la pâte à pain : il forme des bulles qui la font gonfler."
+    },
+    {
+      "reponse": "Congélateur",
+      "acceptees": ["Congélateur", "Le congélateur", "Un congélateur"],
+      "indices": [
+        "Je suis un appareil de cuisine.",
+        "Je conserve les aliments grâce au froid.",
+        "Je suis réglé sur −18 °C."
+      ],
+      "explication": "À −18 °C, le congélateur bloque le développement des micro-organismes sans les détruire."
+    }
+  ],
+  "calculs": [],
+  "etapes": []
+}

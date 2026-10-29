@@ -1,0 +1,189 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Les origines de la Révolution",
+      "detail": "Les causes qui préparent la Révolution : crise financière, pain cher, société inégale et idées nouvelles.",
+      "cartes": [
+        "Le roi Louis XVI manque d'argent pour gouverner",
+        "Le pain est cher après de mauvaises récoltes",
+        "La noblesse et le clergé gardent des privilèges",
+        "Les philosophes des Lumières critiquent la monarchie absolue",
+        "La société est divisée en ordres très inégaux"
+      ]
+    },
+    {
+      "nom": "Les événements de 1789",
+      "detail": "De juin à août 1789 : l'Assemblée nationale, la Bastille, la fin des privilèges et la DDHC.",
+      "cartes": [
+        "Les députés du tiers état se proclament Assemblée nationale",
+        "Les députés jurent de donner une Constitution à la France",
+        "Le peuple de Paris prend la Bastille",
+        "L'Assemblée abolit les privilèges dans la nuit du 4 août",
+        "La DDHC affirme que la souveraineté appartient à la nation"
+      ]
+    },
+    {
+      "nom": "De la monarchie à la République",
+      "detail": "De 1791 à 1792 : le roi tente de fuir, son pouvoir est limité puis il est renversé, et la Convention prend le pouvoir.",
+      "cartes": [
+        "Louis XVI tente de fuir mais il est arrêté à Varennes",
+        "Une Constitution limite le pouvoir du roi",
+        "Le roi est renversé en pleine guerre contre l'Autriche",
+        "La Convention proclame un régime sans roi",
+        "La Convention est élue par tous les hommes adultes"
+      ]
+    },
+    {
+      "nom": "La Terreur et le Directoire",
+      "detail": "De 1793 à 1799 : la République menacée suspend les libertés, puis un régime instable est renversé par un général.",
+      "cartes": [
+        "Le Comité de salut public gouverne, avec Robespierre",
+        "Les libertés sont suspendues et les exécutions nombreuses",
+        "Des paysans royalistes et catholiques se soulèvent en Vendée",
+        "Un régime instable gouverne la France jusqu'en 1799",
+        "Un général prend le pouvoir par un coup d'État"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "la Révolution française",
+      "carte": "La crise financière du royaume",
+      "role": "cause",
+      "explication": "La monarchie est en faillite : Louis XVI doit trouver de l'argent."
+    },
+    {
+      "fait": "la Révolution française",
+      "carte": "La cherté du pain après de mauvaises récoltes",
+      "role": "cause",
+      "explication": "Le pain est cher, ce qui pousse le peuple à la colère."
+    },
+    {
+      "fait": "la Révolution française",
+      "carte": "L'influence des idées des Lumières",
+      "role": "cause",
+      "explication": "Les philosophes critiquent la monarchie absolue, ce qui prépare la Révolution."
+    },
+    {
+      "fait": "la Révolution française",
+      "carte": "La disparition de la société d'ordres",
+      "role": "consequence",
+      "explication": "Après 1789, tous les citoyens sont égaux en droits."
+    },
+    {
+      "fait": "la Révolution française",
+      "carte": "La création des départements en 1790",
+      "role": "consequence",
+      "explication": "Les départements créés par la Révolution existent toujours aujourd'hui."
+    },
+    {
+      "fait": "la Révolution française",
+      "carte": "La souveraineté nationale, fondement du pouvoir",
+      "role": "consequence",
+      "explication": "Désormais, le pouvoir vient de la nation et non plus du roi."
+    }
+  ],
+  "etiquettes": [
+    {
+      "consigne": "De quel régime politique s'agit-il pour le passage en couleur ?",
+      "texte": "Avant 1789, [le roi détient tous les pouvoirs et ne les partage pas].",
+      "choix": ["Monarchie absolue", "Monarchie constitutionnelle", "République"],
+      "bonne": 0,
+      "explication": "Dans la monarchie absolue, le roi concentre tous les pouvoirs."
+    },
+    {
+      "consigne": "De quel régime politique s'agit-il pour le passage en couleur ?",
+      "texte": "Après 1791, [le roi garde sa couronne mais sa puissance est limitée par une Constitution].",
+      "choix": ["Monarchie absolue", "Monarchie constitutionnelle", "République"],
+      "bonne": 1,
+      "explication": "Le pouvoir du roi est limité par une Constitution : c'est une monarchie constitutionnelle."
+    },
+    {
+      "consigne": "De quel régime politique s'agit-il pour le passage en couleur ?",
+      "texte": "En septembre 1792, [la France n'a plus de roi : le pouvoir vient du peuple].",
+      "choix": ["Monarchie absolue", "Monarchie constitutionnelle", "République"],
+      "bonne": 2,
+      "explication": "La Convention proclame la République, un régime où le pouvoir n'est pas héréditaire."
+    },
+    {
+      "consigne": "De quel régime politique s'agit-il pour le passage en couleur ?",
+      "texte": "En 1791, [Louis XVI doit désormais respecter une Constitution et les lois votées par l'Assemblée].",
+      "choix": ["Monarchie absolue", "Monarchie constitutionnelle", "République"],
+      "bonne": 1,
+      "explication": "Le roi règne encore mais il est soumis à la Constitution de 1791."
+    },
+    {
+      "consigne": "De quel régime politique s'agit-il pour le passage en couleur ?",
+      "texte": "Pendant la Terreur, [le pouvoir est exercé au nom du peuple, sans roi].",
+      "choix": ["Monarchie absolue", "Monarchie constitutionnelle", "République"],
+      "bonne": 2,
+      "explication": "La Terreur a lieu sous la République, proclamée en septembre 1792."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Louis XVI",
+      "acceptees": ["Louis XVI", "Louis 16", "Louis seize"],
+      "indices": [
+        "Je suis roi de France quand la Révolution commence.",
+        "En juin 1791, je tente de fuir mais je suis arrêté à Varennes.",
+        "Je suis exécuté le 21 janvier 1793."
+      ],
+      "explication": "Louis XVI, arrêté à Varennes en 1791, est exécuté le 21 janvier 1793."
+    },
+    {
+      "reponse": "Robespierre",
+      "acceptees": ["Robespierre", "Maximilien Robespierre"],
+      "indices": [
+        "Je suis un révolutionnaire.",
+        "Je siège au Comité de salut public.",
+        "Mon nom reste lié à la Terreur, que je ne dirige pourtant pas seul."
+      ],
+      "explication": "Robespierre est l'un des membres du Comité de salut public pendant la Terreur."
+    },
+    {
+      "reponse": "Napoléon Bonaparte",
+      "acceptees": ["Napoléon Bonaparte", "Bonaparte", "Napoléon", "Napoleon Bonaparte", "Napoleon"],
+      "indices": [
+        "Je suis un général.",
+        "En 1799, je renverse le Directoire.",
+        "Mon coup d'État du 18 brumaire met fin à la Révolution."
+      ],
+      "explication": "Le coup d'État du 18 brumaire an VIII (9 novembre 1799) met fin à la Révolution."
+    },
+    {
+      "reponse": "La Bastille",
+      "acceptees": ["Bastille", "La Bastille"],
+      "indices": [
+        "Je suis un bâtiment de Paris.",
+        "Je symbolise l'arbitraire royal.",
+        "Le peuple de Paris me prend le 14 juillet 1789."
+      ],
+      "explication": "La prise de la Bastille, le 14 juillet 1789, symbolise la fin de l'arbitraire royal."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Les événements de 1789, du premier au dernier",
+      "etapes": [
+        "Les députés du tiers état se proclament Assemblée nationale",
+        "Les députés font le serment du Jeu de paume",
+        "Le peuple de Paris prend la Bastille",
+        "L'Assemblée abolit les privilèges",
+        "La DDHC est adoptée"
+      ]
+    },
+    {
+      "titre": "De la fuite du roi au coup d'État, du plus ancien au plus récent",
+      "etapes": [
+        "Louis XVI tente de fuir et est arrêté à Varennes",
+        "La monarchie tombe le 10 août",
+        "La République est proclamée",
+        "Louis XVI est exécuté",
+        "Bonaparte renverse le Directoire"
+      ]
+    }
+  ]
+}

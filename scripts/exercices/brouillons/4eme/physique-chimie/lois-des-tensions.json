@@ -1,0 +1,199 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Tension cherchée : 3 V",
+      "detail": "Les montages où la tension à trouver (une lampe ou la pile) vaut 3 V.",
+      "cartes": [
+        "Deux lampes identiques en série sur 6 V",
+        "Deux lampes en dérivation sur une pile de 3 V",
+        "Pile 4,5 V, lampes en série, L₁ à 1,5 V",
+        "Pile 9 V, lampes en série, L₁ à 6 V",
+        "Pile inconnue, lampes en série à 1 V et 2 V"
+      ]
+    },
+    {
+      "nom": "Tension cherchée : 4,5 V",
+      "detail": "Les montages où la tension à trouver (une lampe ou la pile) vaut 4,5 V.",
+      "cartes": [
+        "Deux lampes identiques en série sur 9 V",
+        "Deux lampes en dérivation sur une pile de 4,5 V",
+        "Pile 6 V, lampes en série, L₁ à 1,5 V",
+        "Pile 12 V, lampes en série, L₁ à 7,5 V",
+        "Pile inconnue, lampes en série à 1,5 V et 3 V"
+      ]
+    },
+    {
+      "nom": "Tension cherchée : 6 V",
+      "detail": "Les montages où la tension à trouver (une lampe ou la pile) vaut 6 V.",
+      "cartes": [
+        "Deux lampes identiques en série sur 12 V",
+        "Deux lampes en dérivation sur une pile de 6 V",
+        "Pile 9 V, lampes en série, L₁ à 3 V",
+        "Pile 7,5 V, lampes en série, L₁ à 1,5 V",
+        "Pile inconnue, lampes en série à 2 V et 4 V"
+      ]
+    },
+    {
+      "nom": "Tension cherchée : 9 V",
+      "detail": "Les montages où la tension à trouver (une lampe ou la pile) vaut 9 V.",
+      "cartes": [
+        "Deux lampes identiques en série sur 18 V",
+        "Deux lampes en dérivation sur une pile de 9 V",
+        "Pile 12 V, lampes en série, L₁ à 3 V",
+        "Pile 10,5 V, lampes en série, L₁ à 1,5 V",
+        "Pile inconnue, lampes en série à 4,5 V chacune"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "une lampe en sous-tension",
+      "carte": "Deux lampes 6 V sont montées en série sur une pile de 6 V",
+      "role": "cause",
+      "explication": "En série, la tension de la pile se partage : chaque lampe a 3 V, bien moins que sa tension nominale."
+    },
+    {
+      "fait": "une lampe en sous-tension",
+      "carte": "La lampe brille faiblement ou pas du tout",
+      "role": "consequence",
+      "explication": "Une tension nettement inférieure à la tension nominale fait briller la lampe faiblement."
+    },
+    {
+      "fait": "une lampe en surtension",
+      "carte": "Une lampe 3,5 V est branchée seule sur une pile de 9 V",
+      "role": "cause",
+      "explication": "La tension de 9 V dépasse largement la tension nominale de 3,5 V de la lampe."
+    },
+    {
+      "fait": "une lampe en surtension",
+      "carte": "La lampe brille très fort et risque de griller",
+      "role": "consequence",
+      "explication": "Une tension trop forte fait briller la lampe très fort et peut la détruire."
+    }
+  ],
+  "etiquettes": [
+    {
+      "consigne": "Dans quel état est la lampe ?",
+      "texte": "Une lampe 6 V – 0,1 A est branchée seule sur [une pile de 12 V].",
+      "choix": ["Sous-tension", "Fonctionnement normal", "Surtension"],
+      "bonne": 2,
+      "explication": "12 V est bien plus que la tension nominale de 6 V : la lampe est en surtension et risque de griller."
+    },
+    {
+      "consigne": "Dans quel état est la lampe ?",
+      "texte": "Une lampe 6 V – 0,1 A est branchée seule sur [une pile de 1,5 V].",
+      "choix": ["Sous-tension", "Fonctionnement normal", "Surtension"],
+      "bonne": 0,
+      "explication": "1,5 V est bien moins que la tension nominale de 6 V : la lampe est en sous-tension et brille à peine."
+    },
+    {
+      "consigne": "Dans quel état est chaque lampe ?",
+      "texte": "Deux lampes 6 V identiques sont montées en série sur [une alimentation de 12 V].",
+      "choix": ["Sous-tension", "Fonctionnement normal", "Surtension"],
+      "bonne": 1,
+      "explication": "En série, 12 V se partagent : chaque lampe a 6 V, sa tension nominale. Elle fonctionne normalement."
+    },
+    {
+      "consigne": "Dans quel état est chaque lampe ?",
+      "texte": "Deux lampes 6 V identiques sont montées en série sur [une pile de 6 V].",
+      "choix": ["Sous-tension", "Fonctionnement normal", "Surtension"],
+      "bonne": 0,
+      "explication": "En série, 6 V se partagent : chaque lampe a 3 V, bien moins que 6 V. Elle est en sous-tension."
+    },
+    {
+      "consigne": "Dans quel état est la lampe ?",
+      "texte": "Une lampe 230 V est branchée sur [le secteur de la maison].",
+      "choix": ["Sous-tension", "Fonctionnement normal", "Surtension"],
+      "bonne": 1,
+      "explication": "Le secteur fournit 230 V, la tension nominale de la lampe : elle fonctionne normalement."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Dérivation",
+      "acceptees": ["Dérivation", "En dérivation", "Montage en dérivation", "La dérivation"],
+      "indices": [
+        "Je suis un type de montage.",
+        "Dans une maison, tous les appareils sont montés ainsi.",
+        "Les dipôles que je relie ont la même tension à leurs bornes."
+      ],
+      "explication": "Des dipôles montés en dérivation ont la même tension : c'est la loi d'unicité des tensions."
+    },
+    {
+      "reponse": "Surtension",
+      "acceptees": ["Surtension", "La surtension", "Une surtension"],
+      "indices": [
+        "Je peux détruire une lampe.",
+        "Je me produis quand la tension à ses bornes dépasse ce qui est prévu.",
+        "Dans ce cas, la lampe brille très fort et risque de griller."
+      ],
+      "explication": "Une surtension est une tension supérieure à la tension nominale : la lampe brille très fort et peut griller."
+    },
+    {
+      "reponse": "Valeurs nominales",
+      "acceptees": ["Valeurs nominales", "Valeur nominale", "Tension nominale", "Les valeurs nominales"],
+      "indices": [
+        "Nous sommes écrites sur le culot d'une lampe.",
+        "Nous indiquons une tension et une intensité, par exemple 6 V – 0,1 A.",
+        "Nous disent comment la lampe brille normalement."
+      ],
+      "explication": "Les valeurs nominales (tension et intensité) sont celles d'un fonctionnement normal de la lampe."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "Une pile de 9 V alimente deux lampes en série. La première a 5 V à ses bornes. Quelle est la tension aux bornes de la seconde ?",
+      "reponse": 4,
+      "unite": "V",
+      "tolerance": 0,
+      "explication": "En série, U = U₁ + U₂, donc U₂ = 9 − 5 = 4 V."
+    },
+    {
+      "question": "Deux lampes identiques sont montées en série avec une pile de 4,5 V. Quelle est la tension aux bornes de chaque lampe ?",
+      "reponse": 2.25,
+      "unite": "V",
+      "tolerance": 0,
+      "explication": "Les deux lampes identiques ont la même tension et leurs tensions s'additionnent : 4,5 ÷ 2 = 2,25 V."
+    },
+    {
+      "question": "Trois lampes sont branchées en dérivation sur une pile de 9 V. Quelle est la tension aux bornes de chaque lampe ?",
+      "reponse": 9,
+      "unite": "V",
+      "tolerance": 0,
+      "explication": "En dérivation, chaque lampe a la même tension que la pile : U = U₁ = U₂ = U₃ = 9 V."
+    },
+    {
+      "question": "Deux lampes en série ont 2,5 V et 3,5 V à leurs bornes. Quelle est la tension de la pile ?",
+      "reponse": 6,
+      "unite": "V",
+      "tolerance": 0,
+      "explication": "En série, U = U₁ + U₂ = 2,5 + 3,5 = 6 V."
+    },
+    {
+      "question": "Une pile de 6 V alimente deux lampes en série. La première a 1 500 mV à ses bornes. Quelle est la tension de la seconde, en volts ?",
+      "reponse": 4.5,
+      "unite": "V",
+      "tolerance": 0,
+      "explication": "1 500 mV = 1,5 V, puis U₂ = 6 − 1,5 = 4,5 V."
+    },
+    {
+      "question": "Deux lampes 230 V identiques sont montées en série sur le secteur (230 V). Quelle est la tension aux bornes de chaque lampe ?",
+      "reponse": 115,
+      "unite": "V",
+      "tolerance": 0,
+      "explication": "La tension se partage entre les deux lampes identiques : 230 ÷ 2 = 115 V chacune."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Les étapes pour calculer une tension",
+      "etapes": [
+        "Identifie le montage : série ou dérivation",
+        "Écris la loi adaptée à ce montage",
+        "Remplace par les valeurs, toutes dans la même unité",
+        "Calcule et écris le résultat avec son unité"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,140 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Se déplacer autrement",
+      "detail": "Les choix de transport qui polluent moins que la voiture utilisée seul.",
+      "cartes": [
+        "Prendre le tramway plutôt que la voiture",
+        "Aller au collège à vélo",
+        "Partager sa voiture avec des voisins",
+        "Créer de nouvelles lignes de bus dans une ville",
+        "Aménager des pistes cyclables sécurisées"
+      ]
+    },
+    {
+      "nom": "Mieux utiliser l'énergie",
+      "detail": "Les équipements et les gestes qui produisent ou consomment l'énergie plus proprement.",
+      "cartes": [
+        "Poser des panneaux solaires sur un toit",
+        "Isoler une maison pour moins la chauffer",
+        "Éteindre les appareils laissés en veille",
+        "Choisir un fournisseur d'électricité renouvelable",
+        "Installer des éoliennes dans une région venteuse"
+      ]
+    },
+    {
+      "nom": "Économiser l'eau",
+      "detail": "Les gestes et les équipements qui limitent la consommation d'eau.",
+      "cartes": [
+        "Utiliser une chasse d'eau à double débit",
+        "Récupérer la pluie pour arroser le jardin",
+        "Réparer un robinet qui fuit",
+        "Fermer le robinet en se brossant les dents",
+        "Planter des espèces qui demandent peu d'arrosage"
+      ]
+    },
+    {
+      "nom": "Mieux se nourrir",
+      "detail": "Les choix d'alimentation qui respectent mieux la terre et les ressources.",
+      "cartes": [
+        "Acheter des légumes issus de l'agriculture biologique",
+        "Choisir des fruits et légumes de saison",
+        "Cuisiner les restes plutôt que les jeter",
+        "Acheter ses produits à un agriculteur voisin",
+        "Faire pousser des tomates dans son jardin"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "À quel pilier du développement durable correspond le passage en couleur ?",
+      "texte": "Pour sa région, cette entreprise cherche à [produire des richesses] et à vendre ses produits.",
+      "choix": ["Économique", "Social", "Environnemental"],
+      "bonne": 0,
+      "explication": "Produire des richesses relève du pilier économique."
+    },
+    {
+      "consigne": "À quel pilier du développement durable correspond le passage en couleur ?",
+      "texte": "Le gouvernement veut [réduire les inégalités entre les habitants].",
+      "choix": ["Économique", "Social", "Environnemental"],
+      "bonne": 1,
+      "explication": "Réduire les inégalités et satisfaire les besoins de tous relève du pilier social."
+    },
+    {
+      "consigne": "À quel pilier du développement durable correspond le passage en couleur ?",
+      "texte": "Une commune décide de [préserver ses forêts et ses rivières].",
+      "choix": ["Économique", "Social", "Environnemental"],
+      "bonne": 2,
+      "explication": "Préserver les ressources et les milieux relève du pilier environnemental."
+    },
+    {
+      "consigne": "À quel pilier du développement durable correspond le passage en couleur ?",
+      "texte": "L'ONU veut que [tous les enfants aient accès à l'école et mangent à leur faim] d'ici 2030.",
+      "choix": ["Économique", "Social", "Environnemental"],
+      "bonne": 1,
+      "explication": "Satisfaire les besoins essentiels de tous, comme apprendre et manger, relève du pilier social."
+    },
+    {
+      "consigne": "À quel pilier du développement durable correspond le passage en couleur ?",
+      "texte": "Une usine ouvre dans la ville : elle va [créer des emplois].",
+      "choix": ["Économique", "Social", "Environnemental"],
+      "bonne": 0,
+      "explication": "Créer des emplois relève du pilier économique."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Brundtland",
+      "acceptees": ["Brundtland", "Le rapport Brundtland", "Rapport Brundtland"],
+      "indices": [
+        "Je suis un texte rédigé pour l'ONU.",
+        "J'ai été publié en 1987.",
+        "Je donne la définition du développement durable."
+      ],
+      "explication": "Le rapport Brundtland (1987) définit le développement durable."
+    },
+    {
+      "reponse": "Empreinte écologique",
+      "acceptees": ["Empreinte écologique", "L'empreinte écologique", "Empreinte", "L'empreinte"],
+      "indices": [
+        "Je mesure une surface.",
+        "Par habitant, je suis bien plus forte dans les pays riches que dans les pays pauvres.",
+        "Je compte la surface nécessaire pour produire ce qu'une population consomme et absorber ses déchets."
+      ],
+      "explication": "L'empreinte écologique mesure la surface nécessaire pour produire ce qu'on consomme et absorber ses déchets."
+    },
+    {
+      "reponse": "Sommet de la Terre",
+      "acceptees": ["Sommet de la Terre", "Le sommet de la Terre", "Sommet de Rio", "Le sommet de Rio", "Sommet de la Terre de Rio de Janeiro"],
+      "indices": [
+        "Je suis une grande réunion internationale.",
+        "J'ai eu lieu en 1992, au Brésil.",
+        "J'ai fait connaître le développement durable dans le monde entier."
+      ],
+      "explication": "Le sommet de la Terre de Rio de Janeiro, en 1992, fait connaître le développement durable."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Classer une action selon les trois piliers",
+      "etapes": [
+        "Dessine trois cercles qui se recoupent : économique, social, environnemental",
+        "Pour chaque action, pose-toi une question par pilier",
+        "Place l'action dans le cercle ou la zone commune qui correspond",
+        "Place au centre les actions qui répondent aux trois piliers"
+      ]
+    },
+    {
+      "titre": "Les grandes dates du développement durable",
+      "etapes": [
+        "1987 : le rapport Brundtland définit le développement durable",
+        "1992 : le sommet de la Terre à Rio le fait connaître",
+        "2015 : l'ONU adopte les 17 objectifs de développement durable",
+        "2030 : date limite pour atteindre ces objectifs"
+      ]
+    }
+  ]
+}
