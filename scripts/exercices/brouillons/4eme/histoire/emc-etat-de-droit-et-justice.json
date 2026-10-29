@@ -1,0 +1,186 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "La hiérarchie des normes",
+      "detail": "Chaque règle doit respecter celles qui lui sont supérieures, la Constitution étant au sommet.",
+      "cartes": [
+        "Une règle doit respecter toutes celles qui lui sont supérieures",
+        "Un arrêté du maire ne peut pas contredire une loi",
+        "Le Conseil constitutionnel vérifie que les lois respectent la Constitution",
+        "La Déclaration de 1789 a valeur constitutionnelle",
+        "Une loi contraire à la Constitution ne peut pas s'appliquer"
+      ]
+    },
+    {
+      "nom": "Les principes de la justice",
+      "detail": "Les règles qui protègent toute personne face aux juges : innocence, défense, débat contradictoire, publicité, indépendance.",
+      "cartes": [
+        "Toute personne est présumée innocente jusqu'à sa condamnation",
+        "Chacun peut se faire défendre par un avocat",
+        "Chaque partie peut répondre aux arguments de l'autre",
+        "Les audiences sont publiques et gratuites",
+        "Les juges ne reçoivent d'ordre de personne"
+      ]
+    },
+    {
+      "nom": "La justice pénale",
+      "detail": "Les juridictions qui sanctionnent les infractions, selon leur gravité, et le cas particulier des mineurs.",
+      "cartes": [
+        "Le tribunal de police juge les contraventions",
+        "Le tribunal correctionnel juge les délits",
+        "La cour d'assises juge les crimes",
+        "Des jurés tirés au sort jugent avec des magistrats"
+      ]
+    },
+    {
+      "nom": "Les recours d'un citoyen",
+      "detail": "Ce qu'une personne peut faire pour contester une décision ou faire respecter ses droits.",
+      "cartes": [
+        "En appel, l'affaire est entièrement rejugée",
+        "En cassation, on vérifie seulement l'application du droit",
+        "Un collégien discriminé peut saisir gratuitement le Défenseur des droits",
+        "Une personne peut contester la loi appliquée à son procès"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Quel type de justice va traiter cette affaire ?",
+      "texte": "Le maire refuse un permis de construire à une famille. [La famille conteste ce refus devant un juge.]",
+      "choix": [
+        "Justice civile",
+        "Justice pénale",
+        "Justice administrative"
+      ],
+      "bonne": 2,
+      "explication": "Un litige entre un particulier et l'administration (ici la mairie) relève de la justice administrative."
+    },
+    {
+      "consigne": "Quel type de justice va traiter cette affaire ?",
+      "texte": "Deux voisins se disputent la limite de leur terrain. [Ils demandent à un juge de trancher leur litige.]",
+      "choix": [
+        "Justice civile",
+        "Justice pénale",
+        "Justice administrative"
+      ],
+      "bonne": 0,
+      "explication": "Un conflit entre deux personnes relève de la justice civile."
+    },
+    {
+      "consigne": "Quel type de justice va traiter cette affaire ?",
+      "texte": "Un homme est accusé d'avoir volé dans un magasin. [Il est jugé pour cette infraction.]",
+      "choix": [
+        "Justice civile",
+        "Justice pénale",
+        "Justice administrative"
+      ],
+      "bonne": 1,
+      "explication": "La justice pénale sanctionne les infractions, comme un vol."
+    },
+    {
+      "consigne": "Quel type de justice va traiter cette affaire ?",
+      "texte": "Une salariée pense avoir été licenciée à tort. [Elle saisit le conseil de prud'hommes.]",
+      "choix": [
+        "Justice civile",
+        "Justice pénale",
+        "Justice administrative"
+      ],
+      "bonne": 0,
+      "explication": "Le conseil de prud'hommes règle les conflits du travail entre salariés et employeurs : il fait partie de la justice civile."
+    },
+    {
+      "consigne": "Quel type de justice va traiter cette affaire ?",
+      "texte": "Une personne est accusée d'avoir commis un crime. [Elle comparaît devant des jurés tirés au sort.]",
+      "choix": [
+        "Justice civile",
+        "Justice pénale",
+        "Justice administrative"
+      ],
+      "bonne": 1,
+      "explication": "Les crimes sont jugés par la cour d'assises, avec des jurés : c'est de la justice pénale."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Le Défenseur des droits",
+      "acceptees": [
+        "Défenseur des droits",
+        "Le Défenseur des droits",
+        "Le Défenseur",
+        "Défenseur"
+      ],
+      "indices": [
+        "Je suis une autorité indépendante.",
+        "On m'a créé en 2011.",
+        "J'aide chacun, notamment les enfants, face aux administrations et aux discriminations."
+      ],
+      "explication": "Le Défenseur des droits, créé en 2011, aide gratuitement chacun à faire respecter ses droits."
+    },
+    {
+      "reponse": "La Constitution",
+      "acceptees": [
+        "Constitution",
+        "La Constitution",
+        "La Constitution de 1958"
+      ],
+      "indices": [
+        "Je suis un texte fondamental.",
+        "Ma version actuelle date de 1958.",
+        "Je suis au sommet de la hiérarchie des normes : les lois et les règlements doivent me respecter."
+      ],
+      "explication": "La Constitution de 1958 est au sommet de la hiérarchie des normes."
+    },
+    {
+      "reponse": "La cour d'assises",
+      "acceptees": [
+        "Cour d'assises",
+        "La cour d'assises",
+        "Assises",
+        "Les assises"
+      ],
+      "indices": [
+        "Je suis une juridiction.",
+        "Je juge les crimes.",
+        "Des citoyens tirés au sort, les jurés, siègent avec les magistrats."
+      ],
+      "explication": "La cour d'assises juge les crimes avec des jurés tirés au sort."
+    },
+    {
+      "reponse": "La présomption d'innocence",
+      "acceptees": [
+        "Présomption d'innocence",
+        "La présomption d'innocence"
+      ],
+      "indices": [
+        "Je suis un principe de la justice.",
+        "Je suis inscrite à l'article 9 de la Déclaration des droits de l'homme et du citoyen de 1789.",
+        "Grâce à moi, une personne n'est pas considérée comme coupable tant que sa culpabilité n'est pas prouvée."
+      ],
+      "explication": "Toute personne est présumée innocente tant qu'elle n'a pas été déclarée coupable."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Le parcours d'un jugement pénal",
+      "etapes": [
+        "Un prévenu est jugé par le tribunal correctionnel",
+        "Condamné, il fait appel devant la cour d'appel",
+        "L'affaire est entièrement rejugée en appel",
+        "Il se pourvoit devant la Cour de cassation",
+        "La Cour de cassation vérifie seulement l'application du droit"
+      ]
+    },
+    {
+      "titre": "La hiérarchie des normes, du sommet à la base",
+      "etapes": [
+        "La Constitution de 1958",
+        "Les traités internationaux",
+        "Les lois de la République",
+        "Les règlements : décrets et arrêtés"
+      ]
+    }
+  ]
+}

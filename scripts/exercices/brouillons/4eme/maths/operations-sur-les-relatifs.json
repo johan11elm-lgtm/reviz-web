@@ -1,0 +1,181 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Résultat égal à 12",
+      "detail": "Les calculs de relatifs dont le résultat vaut 12.",
+      "cartes": [
+        "(−3) × (−4)",
+        "(−48) ÷ (−4)",
+        "(−6) × (−1) × (−1) × (−2)",
+        "5 − (−7)",
+        "(−2)² × 3"
+      ]
+    },
+    {
+      "nom": "Résultat égal à −12",
+      "detail": "Les calculs de relatifs dont le résultat vaut −12.",
+      "cartes": [
+        "2 × (−6)",
+        "36 ÷ (−3)",
+        "(−2) × (−3) × (−2)",
+        "(−5) + (−7)",
+        "−4 × 5 + 8"
+      ]
+    },
+    {
+      "nom": "Résultat égal à 8",
+      "detail": "Les calculs de relatifs dont le résultat vaut 8.",
+      "cartes": [
+        "(−2) × (−4)",
+        "(−16) ÷ (−2)",
+        "(−1) × 4 × (−1) × 2",
+        "3 − (−5)",
+        "−6 + 7 × 2"
+      ]
+    },
+    {
+      "nom": "Résultat égal à −8",
+      "detail": "Les calculs de relatifs dont le résultat vaut −8.",
+      "cartes": [
+        "(−0,5) × 16",
+        "24 ÷ (−3)",
+        "(−2) × (−2) × (−2)",
+        "(−3) + (−5)",
+        "−12 − (−4)"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Comment est le résultat de l'expression en couleur par rapport à 0 ?",
+      "texte": "Avant de calculer, on cherche le signe de [(−7) × (−3)].",
+      "choix": ["Plus grand que 0", "Plus petit que 0", "Égal à 0"],
+      "bonne": 0,
+      "explication": "Deux facteurs de même signe donnent un produit positif : (−7) × (−3) = 21, plus grand que 0."
+    },
+    {
+      "consigne": "Comment est le résultat de l'expression en couleur par rapport à 0 ?",
+      "texte": "Sans calculatrice, Inès détermine le signe de [(−5) × 4 × (−2) × (−1)].",
+      "choix": ["Plus grand que 0", "Plus petit que 0", "Égal à 0"],
+      "bonne": 1,
+      "explication": "Il y a trois facteurs négatifs (−5, −2 et −1), un nombre impair : le produit est négatif, donc plus petit que 0. Il vaut −40."
+    },
+    {
+      "consigne": "Comment est le résultat de l'expression en couleur par rapport à 0 ?",
+      "texte": "Tom veut connaître le signe de [(−18) ÷ 6] avant de poser le calcul.",
+      "choix": ["Plus grand que 0", "Plus petit que 0", "Égal à 0"],
+      "bonne": 1,
+      "explication": "Les deux nombres sont de signes contraires : le quotient est négatif, donc plus petit que 0. On a (−18) ÷ 6 = −3."
+    },
+    {
+      "consigne": "Comment est le résultat de l'expression en couleur par rapport à 0 ?",
+      "texte": "Dans un devoir, on demande le signe de [(−4) × 0 × (−9)].",
+      "choix": ["Plus grand que 0", "Plus petit que 0", "Égal à 0"],
+      "bonne": 2,
+      "explication": "Un des facteurs est nul, donc le produit est nul : il est égal à 0."
+    },
+    {
+      "consigne": "Comment est le résultat de l'expression en couleur par rapport à 0 ?",
+      "texte": "Léo compte les signes moins pour trouver le signe de [(−2) × (−3) × (−1) × (−5) × 2].",
+      "choix": ["Plus grand que 0", "Plus petit que 0", "Égal à 0"],
+      "bonne": 0,
+      "explication": "Il y a quatre facteurs négatifs, un nombre pair : le produit est positif, donc plus grand que 0. Il vaut 60."
+    },
+    {
+      "consigne": "Comment est le résultat de l'expression en couleur par rapport à 0 ?",
+      "texte": "Pour vérifier son résultat, Jade cherche le signe de [(−42) ÷ (−7)].",
+      "choix": ["Plus grand que 0", "Plus petit que 0", "Égal à 0"],
+      "bonne": 0,
+      "explication": "Deux nombres de même signe donnent un quotient positif, donc plus grand que 0 : (−42) ÷ (−7) = 6."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Opposé",
+      "acceptees": ["Opposé", "L'opposé", "Opposé d'un nombre"],
+      "indices": [
+        "Je suis un nombre lié à un autre nombre.",
+        "Si on nous additionne, la somme vaut 0.",
+        "Pour 4, je suis −4."
+      ],
+      "explication": "L'opposé de a est −a : a + (−a) = 0."
+    },
+    {
+      "reponse": "Inverse",
+      "acceptees": ["Inverse", "L'inverse", "Inverse d'un nombre"],
+      "indices": [
+        "Je suis un nombre lié à un autre nombre qui n'est pas nul.",
+        "Si on nous multiplie, le produit vaut 1.",
+        "Pour 4, je suis 0,25."
+      ],
+      "explication": "L'inverse de a est 1/a : a × 1/a = 1. L'inverse de 4 est 0,25."
+    },
+    {
+      "reponse": "Zéro",
+      "acceptees": ["Zéro", "Zero", "0"],
+      "indices": [
+        "Je suis un nombre très particulier en calcul.",
+        "Si je suis l'un des facteurs d'un produit, ce produit est nul.",
+        "On ne peut jamais diviser par moi, et je n'ai pas d'inverse."
+      ],
+      "explication": "Un produit est nul dès qu'un facteur est zéro. On ne divise jamais par 0, et 0 n'a pas d'inverse."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "Calcule (−12) × (−5).",
+      "reponse": 60,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "Deux facteurs de même signe donnent un produit positif : 12 × 5 = 60, donc (−12) × (−5) = 60."
+    },
+    {
+      "question": "Calcule (−84) ÷ 7.",
+      "reponse": -12,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "Signes contraires, donc le quotient est négatif : 84 ÷ 7 = 12, d'où (−84) ÷ 7 = −12."
+    },
+    {
+      "question": "Calcule 5 + (−3) × (−4).",
+      "reponse": 17,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "La multiplication passe avant l'addition : (−3) × (−4) = 12, puis 5 + 12 = 17."
+    },
+    {
+      "question": "Calcule (−2)³ × (−3).",
+      "reponse": 24,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "(−2)³ = (−2) × (−2) × (−2) = −8, puis (−8) × (−3) = 24."
+    },
+    {
+      "question": "Calcule (−2) × (−3) × (−1) × (−5).",
+      "reponse": 30,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "Il y a quatre facteurs négatifs, un nombre pair : le produit est positif. 2 × 3 × 1 × 5 = 30."
+    },
+    {
+      "question": "Quel est l'inverse de −0,2 ?",
+      "reponse": -5,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "(−0,2) × (−5) = 1, donc l'inverse de −0,2 est −5. Un nombre et son inverse ont le même signe."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Calculer −3 + 4 × (−2) en respectant les priorités",
+      "etapes": [
+        "Repérer que la multiplication passe avant l'addition",
+        "Calculer d'abord 4 × (−2), qui vaut −8",
+        "Réécrire le calcul sous la forme −3 + (−8)",
+        "Additionner les deux nombres négatifs pour obtenir −11"
+      ]
+    }
+  ]
+}

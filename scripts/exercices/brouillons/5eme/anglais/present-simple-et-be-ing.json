@@ -1,0 +1,192 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Une habitude",
+      "detail": "Le présent simple dit ce que l'on fait régulièrement, avec des repères comme every day, usually ou once a week.",
+      "cartes": [
+        "I get up at seven every day",
+        "She plays tennis every Monday",
+        "We usually go to school by bike",
+        "My sister watches TV every evening",
+        "They visit their cousins twice a week"
+      ]
+    },
+    {
+      "nom": "Une action en cours",
+      "detail": "Be + -ing dit ce qui se passe au moment où l'on parle, avec des repères comme now ou at the moment.",
+      "cartes": [
+        "Look! The baby is sleeping",
+        "I am doing my homework now",
+        "Listen! Someone is singing in the garden",
+        "They are playing football at the moment",
+        "She is reading in her room right now"
+      ]
+    },
+    {
+      "nom": "Une vérité générale",
+      "detail": "Le présent simple dit aussi ce qui est toujours vrai, comme un fait scientifique ou naturel.",
+      "cartes": [
+        "Water boils at 100 degrees Celsius",
+        "The sun rises in the east",
+        "Fish live in rivers, lakes and seas",
+        "Bees make honey in their hive",
+        "The Earth goes around the Sun"
+      ]
+    },
+    {
+      "nom": "Un goût, un souhait, une pensée",
+      "detail": "Les verbes like, love, hate, want, know et understand restent au présent simple, même au moment où l'on parle.",
+      "cartes": [
+        "I love chocolate ice cream",
+        "She wants a cold drink",
+        "I know the answer to this question",
+        "We understand the new lesson",
+        "He hates big black spiders"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Quelle est la forme du verbe en couleur ?",
+      "texte": "[Does she live] in Dublin?",
+      "choix": [
+        "Présent simple, affirmation",
+        "Présent simple, négation",
+        "Présent simple, question",
+        "Présent en be + -ing"
+      ],
+      "bonne": 2,
+      "explication": "Does + sujet + base verbale (live, sans -s) : c'est une question au présent simple."
+    },
+    {
+      "consigne": "Quelle est la forme du verbe en couleur ?",
+      "texte": "She [plays] tennis every Monday.",
+      "choix": [
+        "Présent simple, affirmation",
+        "Présent simple, négation",
+        "Présent simple, question",
+        "Présent en be + -ing"
+      ],
+      "bonne": 0,
+      "explication": "« plays » est au présent simple, à la forme affirmative : c'est une habitude (every Monday), avec -s à la 3e personne."
+    },
+    {
+      "consigne": "Quelle est la forme du verbe en couleur ?",
+      "texte": "I [am doing] my homework now.",
+      "choix": [
+        "Présent simple, affirmation",
+        "Présent simple, négation",
+        "Présent simple, question",
+        "Présent en be + -ing"
+      ],
+      "bonne": 3,
+      "explication": "« am doing » est be conjugué + verbe en -ing : c'est une action en cours, avec le repère now."
+    },
+    {
+      "consigne": "Quelle est la forme du verbe en couleur ?",
+      "texte": "My brother [doesn't like] fish.",
+      "choix": [
+        "Présent simple, affirmation",
+        "Présent simple, négation",
+        "Présent simple, question",
+        "Présent en be + -ing"
+      ],
+      "bonne": 1,
+      "explication": "doesn't + base verbale (like, sans -s) : c'est la négation du présent simple à la 3e personne."
+    },
+    {
+      "consigne": "Quelle est la forme du verbe en couleur ?",
+      "texte": "We usually [go] to school by bike.",
+      "choix": [
+        "Présent simple, affirmation",
+        "Présent simple, négation",
+        "Présent simple, question",
+        "Présent en be + -ing"
+      ],
+      "bonne": 0,
+      "explication": "« go » est au présent simple, à la forme affirmative : c'est une habitude (usually), sans -s avec we."
+    },
+    {
+      "consigne": "Quelle est la forme du verbe en couleur ?",
+      "texte": "Look! The baby [is sleeping].",
+      "choix": [
+        "Présent simple, affirmation",
+        "Présent simple, négation",
+        "Présent simple, question",
+        "Présent en be + -ing"
+      ],
+      "bonne": 3,
+      "explication": "Avec le repère Look!, « is sleeping » est be conjugué + verbe en -ing : c'est une action en cours."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Présent simple",
+      "acceptees": [
+        "Le présent simple",
+        "Present simple",
+        "Simple present"
+      ],
+      "indices": [
+        "Je suis un temps de l'anglais.",
+        "Je prends un -s à la 3e personne du singulier.",
+        "J'exprime les habitudes et les vérités générales."
+      ],
+      "explication": "Le présent simple sert aux habitudes et aux vérités générales, avec -s après he, she, it."
+    },
+    {
+      "reponse": "Doesn't",
+      "acceptees": [
+        "Does not",
+        "Doesnt"
+      ],
+      "indices": [
+        "Je suis un petit mot qui sert à la négation.",
+        "On ne m'emploie qu'avec he, she ou it.",
+        "Après moi, le verbe reste à la base verbale, sans -s."
+      ],
+      "explication": "Doesn't (does not) + base verbale forme la négation du présent simple à la 3e personne : He doesn't play tennis."
+    },
+    {
+      "reponse": "Always",
+      "acceptees": [],
+      "indices": [
+        "Je suis un adverbe de fréquence.",
+        "Je me place avant le verbe, mais après be.",
+        "Je suis tout en haut de l'échelle de fréquence : 100 %."
+      ],
+      "explication": "Always (toujours) est l'adverbe de fréquence le plus fort : I always read, she is always late."
+    },
+    {
+      "reponse": "Verbe d'état",
+      "acceptees": [
+        "Verbes d'état",
+        "Un verbe d'état",
+        "Stative verb",
+        "Verbe statique",
+        "State verb"
+      ],
+      "indices": [
+        "Je suis un mot qui se conjugue.",
+        "Je ne m'emploie pas avec be + -ing, même quand l'action se passe maintenant.",
+        "Mes exemples sont like, love, hate, want, know et understand."
+      ],
+      "explication": "Un verbe d'état (like, love, want, know…) reste au présent simple : I want a drink, et non I'm wanting a drink."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Les adverbes de fréquence, du plus au moins fréquent",
+      "etapes": [
+        "I always read before bed",
+        "I usually read before bed",
+        "I sometimes read before bed",
+        "I rarely read before bed",
+        "I never read before bed"
+      ]
+    }
+  ]
+}

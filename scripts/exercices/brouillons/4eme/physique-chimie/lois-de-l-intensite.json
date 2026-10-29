@@ -1,0 +1,245 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Branche principale de 0,3 A",
+      "detail": "Les montages en dérivation dont la branche principale est traversée par 0,3 A.",
+      "cartes": [
+        "Deux branches dérivées : 0,1 A et 0,2 A",
+        "Deux branches dérivées : 120 mA et 180 mA",
+        "Deux lampes identiques en dérivation, 0,15 A dans chacune",
+        "Trois branches dérivées : 50, 100 et 150 mA",
+        "Deux branches dérivées : 0,25 A et 50 mA"
+      ]
+    },
+    {
+      "nom": "Branche principale de 0,5 A",
+      "detail": "Les montages en dérivation dont la branche principale est traversée par 0,5 A.",
+      "cartes": [
+        "Deux branches dérivées : 0,2 A et 0,3 A",
+        "Deux branches dérivées : 350 mA et 150 mA",
+        "Deux lampes identiques en dérivation, 0,25 A dans chacune",
+        "Trois branches dérivées : 100, 150 et 250 mA",
+        "Deux branches dérivées : 0,4 A et 100 mA"
+      ]
+    },
+    {
+      "nom": "Branche principale de 0,6 A",
+      "detail": "Les montages en dérivation dont la branche principale est traversée par 0,6 A.",
+      "cartes": [
+        "Deux branches dérivées : 0,4 A et 0,2 A",
+        "Deux branches dérivées : 250 mA et 350 mA",
+        "Deux lampes identiques en dérivation, 0,3 A dans chacune",
+        "Trois branches dérivées : 100, 200 et 300 mA",
+        "Deux branches dérivées : 0,45 A et 150 mA"
+      ]
+    },
+    {
+      "nom": "Branche principale de 0,8 A",
+      "detail": "Les montages en dérivation dont la branche principale est traversée par 0,8 A.",
+      "cartes": [
+        "Deux branches dérivées : 0,5 A et 0,3 A",
+        "Deux branches dérivées : 600 mA et 200 mA",
+        "Deux lampes identiques en dérivation, 0,4 A dans chacune",
+        "Trois branches dérivées : 200, 200 et 400 mA",
+        "Deux branches dérivées : 0,7 A et 100 mA"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "la baisse de l’intensité dans toute la boucle d’un circuit en série",
+      "carte": "On ajoute une lampe de plus dans la boucle",
+      "role": "cause",
+      "explication": "Ajouter un dipôle en série diminue en général l'intensité dans tout le circuit."
+    },
+    {
+      "fait": "la baisse de l’intensité dans toute la boucle d’un circuit en série",
+      "carte": "Les lampes du circuit brillent moins",
+      "role": "consequence",
+      "explication": "Quand l'intensité diminue partout dans le circuit, les lampes brillent moins."
+    },
+    {
+      "fait": "le fil principal d'une multiprise chauffe",
+      "carte": "On branche beaucoup d'appareils en même temps",
+      "role": "cause",
+      "explication": "Chaque appareil est une branche dérivée de plus : les intensités s'additionnent dans le fil principal."
+    },
+    {
+      "fait": "le fil principal d'une multiprise chauffe",
+      "carte": "L'intensité dans le fil principal devient très grande",
+      "role": "cause",
+      "explication": "Une très forte intensité fait chauffer le fil."
+    },
+    {
+      "fait": "le fil principal d'une multiprise chauffe",
+      "carte": "Il y a un risque d'incendie",
+      "role": "consequence",
+      "explication": "Un fil qui chauffe trop peut provoquer un incendie."
+    }
+  ],
+  "etiquettes": [
+    {
+      "consigne": "Comment s'appelle la partie du circuit en couleur ?",
+      "texte": "Dans un circuit en dérivation, [le point relié à trois fils] est l'endroit où le courant se partage.",
+      "choix": [
+        "Nœud",
+        "Branche principale",
+        "Branche dérivée"
+      ],
+      "bonne": 0,
+      "explication": "Un nœud est un point du circuit relié à au moins trois fils."
+    },
+    {
+      "consigne": "Comment s'appelle la partie du circuit en couleur ?",
+      "texte": "L'ampèremètre mesure l'intensité I dans [la partie du circuit qui contient la pile].",
+      "choix": [
+        "Nœud",
+        "Branche principale",
+        "Branche dérivée"
+      ],
+      "bonne": 1,
+      "explication": "La branche principale est celle qui contient le générateur, ici la pile."
+    },
+    {
+      "consigne": "Comment s'appelle la partie du circuit en couleur ?",
+      "texte": "Sur le schéma, la lampe L₁ est placée dans [la partie du circuit comprise entre deux nœuds, sans la pile].",
+      "choix": [
+        "Nœud",
+        "Branche principale",
+        "Branche dérivée"
+      ],
+      "bonne": 2,
+      "explication": "Une branche dérivée est une partie du circuit comprise entre deux nœuds, sans le générateur."
+    },
+    {
+      "consigne": "Comment s'appelle la partie du circuit en couleur ?",
+      "texte": "Le courant venant de la pile se partage au niveau de [ce point du circuit].",
+      "choix": [
+        "Nœud",
+        "Branche principale",
+        "Branche dérivée"
+      ],
+      "bonne": 0,
+      "explication": "C'est au niveau d'un nœud que le courant se partage entre plusieurs branches."
+    },
+    {
+      "consigne": "Comment s'appelle la partie du circuit en couleur ?",
+      "texte": "La somme des intensités des branches dérivées est égale à l'intensité dans [la branche où se trouve le générateur].",
+      "choix": [
+        "Nœud",
+        "Branche principale",
+        "Branche dérivée"
+      ],
+      "bonne": 1,
+      "explication": "La branche qui contient le générateur est la branche principale : I = I₁ + I₂."
+    },
+    {
+      "consigne": "Comment s'appelle la partie du circuit en couleur ?",
+      "texte": "L'intensité I₁ est mesurée dans [la branche de la lampe L₁, placée entre les deux nœuds].",
+      "choix": [
+        "Nœud",
+        "Branche principale",
+        "Branche dérivée"
+      ],
+      "bonne": 2,
+      "explication": "La branche de la lampe L₁ est comprise entre deux nœuds et ne contient pas le générateur : c'est une branche dérivée."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Nœud",
+      "acceptees": [
+        "Nœud",
+        "Noeud",
+        "Un nœud",
+        "Un noeud"
+      ],
+      "indices": [
+        "Je suis un point d'un circuit.",
+        "Je suis relié à au moins trois fils.",
+        "C'est chez moi que le courant se partage entre plusieurs branches."
+      ],
+      "explication": "Un nœud est un point du circuit relié à au moins trois fils, où le courant se partage ou se rejoint."
+    },
+    {
+      "reponse": "Ampèremètre",
+      "acceptees": [
+        "Ampèremètre",
+        "Ampèremetre",
+        "L'ampèremètre",
+        "Multimètre"
+      ],
+      "indices": [
+        "Je suis un appareil de mesure.",
+        "Je mesure l'intensité d'un courant.",
+        "Dans un circuit en série, je donne la même valeur avant et après une lampe."
+      ],
+      "explication": "L'ampèremètre mesure l'intensité du courant. En série, il affiche la même valeur partout."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "Deux lampes sont en dérivation. L'intensité dans la branche principale est I = 0,8 A et celle de la première lampe est I₁ = 0,3 A. Quelle est l'intensité I₂ dans la seconde lampe ?",
+      "reponse": 0.5,
+      "unite": "A",
+      "tolerance": 0,
+      "explication": "En dérivation, I = I₁ + I₂, donc I₂ = I − I₁ = 0,8 − 0,3 = 0,5 A."
+    },
+    {
+      "question": "Deux branches dérivées sont traversées par I₁ = 250 mA et I₂ = 0,15 A. Quelle est l'intensité I dans la branche principale, en ampères ?",
+      "reponse": 0.4,
+      "unite": "A",
+      "tolerance": 0,
+      "explication": "On convertit d'abord : 250 mA = 0,25 A. Puis I = I₁ + I₂ = 0,25 + 0,15 = 0,4 A."
+    },
+    {
+      "question": "Deux lampes identiques sont en dérivation. L'intensité dans la branche principale est 0,9 A. Quelle est l'intensité dans une lampe ?",
+      "reponse": 0.45,
+      "unite": "A",
+      "tolerance": 0,
+      "explication": "Deux branches identiques se partagent le courant à égalité : 0,9 ÷ 2 = 0,45 A."
+    },
+    {
+      "question": "Trois branches dérivées sont traversées par 0,2 A, 0,35 A et 0,15 A. Quelle est l'intensité dans la branche principale ?",
+      "reponse": 0.7,
+      "unite": "A",
+      "tolerance": 0,
+      "explication": "I = 0,2 + 0,35 + 0,15 = 0,7 A."
+    },
+    {
+      "question": "Une pile et deux lampes sont montées en série. L'ampèremètre placé sur la pile indique 150 mA. Quelle est l'intensité dans la seconde lampe, en ampères ?",
+      "reponse": 0.15,
+      "unite": "A",
+      "tolerance": 0,
+      "explication": "En série, l'intensité est la même en tout point : 150 mA dans la seconde lampe. Et 150 mA = 0,15 A."
+    },
+    {
+      "question": "Sur une multiprise fonctionnent une bouilloire (8 A), un radiateur (6 A) et un fer à repasser (4 A). Quelle est l'intensité dans le fil principal ?",
+      "reponse": 18,
+      "unite": "A",
+      "tolerance": 0,
+      "explication": "Les appareils sont en dérivation : I = 8 + 6 + 4 = 18 A."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Trouver une intensité inconnue en dérivation",
+      "etapes": [
+        "Reconnaître un circuit en dérivation",
+        "Écrire la loi d’additivité : I = I₁ + I₂",
+        "Calculer I₂ = I − I₁ avec les valeurs",
+        "Vérifier que I₂ est plus petite que I"
+      ]
+    },
+    {
+      "titre": "Le danger d'une multiprise surchargée",
+      "etapes": [
+        "On branche de plus en plus d'appareils sur la multiprise",
+        "L'intensité augmente dans le fil principal",
+        "Le fil principal chauffe",
+        "Un risque d'incendie apparaît"
+      ]
+    }
+  ]
+}

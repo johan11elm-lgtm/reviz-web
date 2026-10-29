@@ -12,6 +12,11 @@
 // cachée) et Classement (des cartes à glisser entre deux branches).
 // Une séance mélange ces formats (10 exercices au plus), dans un ordre tiré
 // au sort à partir d'une graine : la même graine redonne la même séance.
+// Pilote du 29/10 : un chapitre peut porter un bloc `exercices`, écrit puis
+// passé au test à l'aveugle (scripts/exercices/). Ses catégories étanches
+// remplacent alors la carte mentale, dont les branches se recoupent, et il
+// nourrit six formats de plus : Sélection, Cause ou conséquence, Étiquette,
+// Qui suis-je ?, Trouve le nombre et Les étapes.
 // -------------------------------------------------------
 
 /** Hasard reproductible (mulberry32). */
@@ -46,11 +51,13 @@ const majusculeMot = s => (/^\p{Ll}\p{Ll}/u.test(s) ? majuscule(s) : s)
 
 /**
  * Les branches utilisables : un nom et au moins 2 éléments, sans élément commun à deux branches.
+ * Les catégories relues du bloc `exercices` passent avant la carte mentale.
  * `casse` : la mise en forme des noms et des éléments (majuscule en tête, sauf en maths et en physique).
  */
 function branchesDe(ai, casse) {
-  const brutes = (ai?.mindmap?.branches ?? [])
-    .map(b => ({
+  const relues = lireExercices(ai?.exercices)?.categories
+  const brutes = (relues ?? ai?.mindmap?.branches ?? [])
+    .map(b => (relues ? { nom: casse(b.nom), detail: b.detail, elements: b.cartes.map(casse) } : {
       nom: casse(sansPoint(b?.label)),
       detail: sansPoint(b?.detail),
       elements: (b?.children ?? []).map(c => casse(sansPoint(c))).filter(Boolean),
@@ -73,6 +80,91 @@ function motsClesDe(ai, casse) {
     .map(k => ({ terme: casse(sansPoint(k?.term)), definition: sansPoint(k?.def) }))
     .filter(k => k.terme && k.definition && !vus.has(normaliser(k.terme)) && vus.add(normaliser(k.terme)))
 }
+
+// ── Le bloc `exercices` relu (pilote du 29/10) ──
+
+const texte = s => (typeof s === 'string' ? s.trim() : '')
+const textes = (l, min, max = Infinity) => (Array.isArray(l) && l.length >= min && l.length <= max && l.every(x => texte(x)) ? l.map(texte) : null)
+
+/** Un texte avec un seul passage entre crochets → { avant, passage, apres }, sinon null. */
+export function lirePassage(t) {
+  const m = texte(t).match(/^([^[\]]*)\[([^[\]]+)\]([^[\]]*)$/)
+  return m ? { avant: m[1], passage: m[2], apres: m[3] } : null
+}
+
+/**
+ * Le bloc `exercices` d'un chapitre, débarrassé de tout élément mal formé (il pourrait casser
+ * un format). null s'il n'a pas au moins 2 catégories utilisables.
+ * Format décrit dans scripts/exercices/consignes-ecriture.md.
+ */
+export function lireExercices(ex) {
+  if (!ex || typeof ex !== 'object') return null
+  const vues = new Set()
+  const categories = (Array.isArray(ex.categories) ? ex.categories : [])
+    .map(c => ({ nom: sansPoint(texte(c?.nom)), detail: sansPoint(texte(c?.detail)), cartes: (textes(c?.cartes, 1) ?? []).map(sansPoint) }))
+    .map(c => ({ ...c, cartes: c.cartes.filter(t => !vues.has(normaliser(t)) && vues.add(normaliser(t))) }))
+    .filter(c => c.nom && c.cartes.length >= 2)
+  if (categories.length < 2) return null
+  const liste = cle => (Array.isArray(ex[cle]) ? ex[cle] : [])
+  return {
+    categories,
+    causes: liste('causes')
+      .filter(c => texte(c?.fait) && texte(c?.carte) && ['cause', 'consequence'].includes(c?.role))
+      .map(c => ({ fait: sansPoint(texte(c.fait)), carte: sansPoint(texte(c.carte)), role: c.role, explication: texte(c.explication) })),
+    etiquettes: liste('etiquettes')
+      .filter(e => texte(e?.consigne) && lirePassage(e?.texte) && textes(e?.choix, 2, 4) && Number.isInteger(e?.bonne) && e.bonne >= 0 && e.bonne < e.choix.length)
+      .map(e => ({ consigne: texte(e.consigne), texte: texte(e.texte), choix: textes(e.choix, 2), bonne: e.bonne, explication: texte(e.explication) })),
+    devinettes: liste('devinettes')
+      .filter(d => texte(d?.reponse) && textes(d?.indices, 2, 4))
+      // Un indice qui contient la réponse la donnerait.
+      .filter(d => !d.indices.some(i => normaliser(i).includes(normaliser(sansArticle(d.reponse)))))
+      .map(d => ({ reponse: texte(d.reponse), acceptees: textes(d.acceptees, 0) ?? [], indices: textes(d.indices, 2), explication: texte(d.explication) })),
+    calculs: liste('calculs')
+      .filter(c => texte(c?.question) && Number.isFinite(c?.reponse))
+      .map(c => ({ question: texte(c.question), reponse: c.reponse, unite: texte(c.unite), tolerance: Math.max(0, Number(c.tolerance) || 0), explication: texte(c.explication) })),
+    etapes: liste('etapes')
+      .filter(s => texte(s?.titre) && textes(s?.etapes, 3, 6))
+      .map(s => ({ titre: sansPoint(texte(s.titre)), etapes: textes(s.etapes, 3).map(sansPoint) })),
+  }
+}
+
+/** « Le Code civil » → « Code civil » ; « l'Empire » → « Empire ». */
+const sansArticle = s => String(s ?? '').trim().replace(/^(?:(?:le|la|les|un|une|des|du|the|a|an)\s+|l['’]\s*)/i, '')
+
+/** Distance d'édition, pour pardonner une faute de frappe. */
+function distance(a, b) {
+  const d = Array.from({ length: b.length + 1 }, (_, j) => j)
+  for (let i = 1; i <= a.length; i++) {
+    let diag = d[0]
+    d[0] = i
+    for (let j = 1; j <= b.length; j++) {
+      const haut = d[j]
+      d[j] = Math.min(d[j] + 1, d[j - 1] + 1, diag + (a[i - 1] === b[j - 1] ? 0 : 1))
+      diag = haut
+    }
+  }
+  return d[b.length]
+}
+
+/**
+ * La réponse tapée à un « Qui suis-je ? » : sans casse, accents, article ni tiret, et une faute de
+ * frappe pardonnée au-delà de 5 lettres.
+ */
+export function reponseAcceptee(saisie, { reponse, acceptees = [] }) {
+  const net = s => normaliser(sansArticle(s)).replace(/[-'’.]/g, ' ').replace(/\s+/g, ' ').trim()
+  const tape = net(saisie)
+  if (!tape) return false
+  return [reponse, ...acceptees].map(net).some(r => r === tape || (r.length > 5 && distance(r, tape) <= 1))
+}
+
+/** « 12,5 », « −3 » ou « 1 200 » → nombre ; null si ce n'est pas un nombre. */
+export function lireNombre(saisie) {
+  const s = String(saisie ?? '').replace(/[\s  ]/g, '').replace(/[−–]/g, '-').replace(',', '.')
+  return /^-?\d+(?:\.\d+)?$/.test(s) ? Number(s) : null
+}
+
+/** Un nombre écrit à la française : 12,5 ; −3. */
+export const ecrireNombre = n => String(n).replace('-', '−').replace('.', ',')
 
 const MOIS = 'janvier|février|fevrier|mars|avril|mai|juin|juillet|août|aout|septembre|octobre|novembre|décembre|decembre'
 const DATE_SEULE = new RegExp(`^(?:(?:1er|\\d{1,2})\\s+(?:${MOIS})\\s+)?(\\d{1,4})(\\s+av\\.?\\s*J\\.?-?C\\.?)?(?:\\s*\\([^)]*\\))?$`, 'i')
@@ -176,13 +268,16 @@ function masquer(definition, terme) {
   return texte
 }
 
-function definition(motsCles, alea, id, deja) {
+/** `nbChoix` : 3 mots en séance quand le chapitre en a assez (à 2, la réponse se devinait trop souvent), 2 en Battle. */
+function definition(motsCles, alea, id, deja, nbChoix = 2) {
   const libres = motsCles.filter(k => !deja.has(k.terme))
   if (!libres.length || motsCles.length < 2) return null
   const k = tirer(libres, alea)
   deja.add(k.terme)
-  const leurre = tirer(motsCles.filter(x => x !== k), alea)
-  const choix = melanger([k.terme, leurre.terme], alea)
+  const leurres = nbChoix > 2 && motsCles.length > 2
+    ? melanger(motsCles.filter(x => x !== k), alea).slice(0, nbChoix - 1)
+    : [tirer(motsCles.filter(x => x !== k), alea)]
+  const choix = melanger([k.terme, ...leurres.map(x => x.terme)], alea)
   return {
     id, type: 'definition', pose: 'reading',
     consigne: 'Quel mot correspond à cette définition ?',
@@ -304,8 +399,9 @@ function phrase(ai, motsCles, alea, id) {
   const { t, k, m } = tirer(candidats, alea)
   // Les mots proposés prennent la casse du mot dans la phrase (« will » en milieu de phrase, « Unless » en tête).
   const forme = t.slice(m.index, m.index + m.longueur)
-  // Un sigle (« BBC ») garde ses capitales.
-  const commeLaPhrase = mot => (/^\p{Ll}/u.test(forme) ? (/^\p{Lu}\p{Ll}/u.test(mot) ? mot[0].toLowerCase() + mot.slice(1) : mot) : majuscule(mot))
+  // Un sigle (« BBC ») et un nom propre de plusieurs mots (« Nobel Peace Prize ») gardent leurs capitales.
+  const nomPropre = mot => /\s\p{Lu}/u.test(mot)
+  const commeLaPhrase = mot => (/^\p{Ll}/u.test(forme) ? (/^\p{Lu}\p{Ll}/u.test(mot) && !nomPropre(mot) ? mot[0].toLowerCase() + mot.slice(1) : mot) : majuscule(mot))
   const reponse = forme
   const mots = melanger([reponse, ...melanger(motsCles.filter(x => x !== k), alea).slice(0, 2).map(x => commeLaPhrase(x.terme))], alea)
   const avant = t.slice(0, m.index)
@@ -357,6 +453,122 @@ function classement(branches, alea, id, prises) {
   }
 }
 
+// ── Les formats nourris par le bloc `exercices` relu ──
+
+/** Sélection : 6 cartes, toucher les 2 ou 3 qui vont dans une catégorie. Seulement avec des catégories relues. */
+function selection(branches, alea, id, prises) {
+  const pleines = branches.filter(b => b.elements.length >= 3)
+  if (!pleines.length || branches.length < 3) return null
+  const b = tirerBranche(pleines, alea, prises)
+  const nb = alea() < 0.5 ? 2 : 3
+  const bonnes = melanger(b.elements, alea).slice(0, nb)
+  const autres = melanger(branches.filter(x => x !== b).flatMap(x => x.elements), alea).slice(0, 6 - nb)
+  const cartes = melanger([...bonnes.map(t => ({ texte: t, bonne: true })), ...autres.map(t => ({ texte: t, bonne: false }))], alea)
+  return {
+    id, type: 'selection', pose: 'search',
+    consigne: 'Touche toutes les bonnes cartes',
+    bulle: `Quelles cartes vont dans « ${b.nom} » ?`,
+    theme: b.nom,
+    cartes,
+    // « Bonne réponse » donne déjà les cartes : l'explication dit ce que la catégorie rassemble.
+    explication: b.detail ? `${b.nom} : ${b.detail}.` : '',
+    aRetenir: { question: `Les cartes de « ${b.nom} »`, bonne: bonnes.join(', ') },
+  }
+}
+
+/** « la chute de l'Empire » → « à la chute de l'Empire » ; « les pertes » → « aux pertes » ; « le blocus » → « au blocus ». */
+export function parRapportA(fait) {
+  const f = String(fait ?? '').trim()
+  const m = f.match(/^(le|les)\s+(.*)$/i)
+  return m ? `${m[1].toLowerCase() === 'le' ? 'au' : 'aux'} ${m[2]}` : `à ${f}`
+}
+
+function causeOuConsequence(causes, alea, id) {
+  if (!causes.length) return null
+  const c = tirer(causes, alea)
+  const choix = ['Cause', 'Conséquence']
+  return {
+    id, type: 'cause', pose: 'thinking',
+    consigne: 'Cause ou conséquence ?',
+    // Le fait est déjà écrit au-dessus de la carte : la bulle rappelle ce qui distingue les deux.
+    bulle: 'Une cause provoque le fait, une conséquence en découle. Et cette carte ?',
+    fait: c.fait,
+    parRapport: `Par rapport ${parRapportA(c.fait)}`,
+    carte: majuscule(c.carte),
+    choix,
+    bonne: c.role === 'cause' ? 0 : 1,
+    explication: c.explication,
+    aRetenir: { question: `${majuscule(c.carte)} (par rapport ${parRapportA(c.fait)})`, bonne: choix[c.role === 'cause' ? 0 : 1] },
+  }
+}
+
+function etiquette(etiquettes, alea, id) {
+  if (!etiquettes.length) return null
+  const e = tirer(etiquettes, alea)
+  const { avant, passage, apres } = lirePassage(e.texte)
+  const ordre = melanger(e.choix.map((_, i) => i), alea)
+  return {
+    id, type: 'etiquette', pose: 'pointing',
+    consigne: e.consigne,
+    bulle: 'Touche l’étiquette qui convient au passage en couleur.',
+    avant, passage, apres,
+    choix: ordre.map(i => e.choix[i]),
+    bonne: ordre.indexOf(e.bonne),
+    explication: e.explication,
+    aRetenir: { question: `${e.consigne} « ${passage} »`, bonne: e.choix[e.bonne] },
+  }
+}
+
+function devinette(devinettes, alea, id) {
+  if (!devinettes.length) return null
+  const d = tirer(devinettes, alea)
+  return {
+    id, type: 'devinette', pose: 'hello',
+    consigne: 'Qui suis-je ?',
+    bulle: 'Lis l’indice, puis tape ta réponse. Besoin d’aide ? Demande un autre indice.',
+    indices: d.indices,
+    reponse: d.reponse,
+    acceptees: d.acceptees,
+    explication: d.explication,
+    aRetenir: { question: d.indices.join(' '), bonne: d.reponse },
+  }
+}
+
+function calcul(calculs, alea, id, deja) {
+  const libres = calculs.filter(c => !deja.has(c.question))
+  if (!libres.length) return null
+  const c = tirer(libres, alea)
+  deja.add(c.question)
+  const bonne = `${ecrireNombre(c.reponse)}${c.unite ? ` ${c.unite}` : ''}`
+  return {
+    id, type: 'calcul', pose: 'maths',
+    consigne: 'Trouve le nombre',
+    bulle: c.question,
+    reponse: c.reponse,
+    unite: c.unite,
+    tolerance: c.tolerance,
+    explication: c.explication,
+    aRetenir: { question: c.question, bonne },
+  }
+}
+
+/** Les étapes d'une méthode ou d'un processus, à remettre dans l'ordre (même écran que la chronologie). */
+function etapesDansLOrdre(suites, alea, id) {
+  if (!suites.length) return null
+  const s = tirer(suites, alea)
+  const ordre = melanger(s.etapes.map((_, i) => i), alea)
+  return {
+    id, type: 'etapes', pose: 'writing',
+    consigne: 'Remets les étapes dans l’ordre',
+    bulle: `${s.titre} : touche les étapes de la première à la dernière.`,
+    evenements: ordre.map(i => ({ texte: s.etapes[i] })),
+    bonOrdre: s.etapes.map((_, i) => ordre.indexOf(i)),
+    // La correction montre déjà le bon rang de chaque étape, et « Bonne réponse » la suite entière.
+    explication: '',
+    aRetenir: { question: s.titre, bonne: s.etapes.join(' → ') },
+  }
+}
+
 function qcm(q, id) {
   if (!q?.question || !Array.isArray(q.choices) || q.choices.length < 2 || !Number.isInteger(q.correct) || !q.choices[q.correct]) return null
   return {
@@ -379,17 +591,33 @@ function qcm(q, id) {
 export function construireSeance(ai, { graine = Date.now(), nombre = 10 } = {}) {
   const alea = creerAlea(graine)
   // En maths et en physique, « x² » ou « cos » ne prennent pas de majuscule.
-  const casse = /math|physique/i.test(ai?.metadata?.subject ?? '') ? s => s : majusculeMot
+  const scientifique = /math|physique/i.test(ai?.metadata?.subject ?? '')
+  const casse = scientifique ? s => s : majusculeMot
   const branches = melanger(branchesDe(ai, casse), alea)
   const motsCles = motsClesDe(ai, casse)
   const dates = datesDe(ai)
+  const relues = lireExercices(ai?.exercices)
   const branchesPrises = new Set()
   const termesPris = new Set()
   const anneesPrises = new Set()
+  const calculsPris = new Set()
   let n = 0
   const id = t => `${t}-${n++}`
 
-  // Les formats datés sont rares (surtout l'histoire) : ils passent en premier quand le chapitre en a.
+  // Les formats du bloc relu passent en premier (4 au plus) : ce sont les seuls à faire calculer,
+  // étiqueter ou deviner. En maths et en physique, deux calculs à chaque séance.
+  const calculs = relues ? [calcul(relues.calculs, alea, id('calcul'), calculsPris), scientifique ? calcul(relues.calculs, alea, id('calcul'), calculsPris) : null] : []
+  const relus = relues ? [
+    ...(scientifique ? calculs : []),
+    ...melanger([
+      scientifique ? null : calculs[0],
+      causeOuConsequence(relues.causes, alea, id('cause')),
+      etiquette(relues.etiquettes, alea, id('etiquette')),
+      devinette(relues.devinettes, alea, id('devinette')),
+      etapesDansLOrdre(relues.etapes, alea, id('etapes')),
+    ].filter(Boolean), alea),
+  ].filter(Boolean).slice(0, 4) : []
+  // Les formats datés sont rares (surtout l'histoire) : ils passent ensuite quand le chapitre en a.
   const dates2 = [chronologie(dates, alea, id('ordre')), annee(dates, alea, id('annee'), anneesPrises)]
   // Paires et Mémory font travailler la même chose : l'un ou l'autre dans une séance.
   const motDef = alea() < 0.5 ? paires(motsCles, alea, id('paires')) : memory(motsCles, alea, id('memory'))
@@ -398,13 +626,15 @@ export function construireSeance(ai, { graine = Date.now(), nombre = 10 } = {}) 
     intrus(branches, alea, id('intrus'), branchesPrises),
     indices(branches, alea, id('indices'), branchesPrises),
     classement(branches, alea, id('classement'), branchesPrises),
-    definition(motsCles, alea, id('definition'), termesPris),
+    // La sélection mélange les cartes de toutes les catégories : sans catégories étanches, elle serait ambiguë.
+    relues ? selection(branches, alea, id('selection'), branchesPrises) : null,
+    definition(motsCles, alea, id('definition'), termesPris, 3),
     vraiFaux(motsCles, dates, alea, id('vraifaux')),
     phrase(ai, motsCles, alea, id('phrase')),
     motDef,
   ].filter(Boolean), alea)
   // 8 formats au plus, puis le quiz du chapitre complète jusqu'au nombre voulu (2 questions au moins).
-  const exercices = [...dates2.filter(Boolean), ...autres].slice(0, nombre - 2)
+  const exercices = [...relus, ...dates2.filter(Boolean), ...autres].slice(0, nombre - 2)
   const questions = melanger(ai?.quiz ?? [], alea).map(q => qcm(q, id('qcm'))).filter(Boolean)
   exercices.push(...questions.slice(0, nombre - exercices.length))
   if (exercices.length < 4) return []

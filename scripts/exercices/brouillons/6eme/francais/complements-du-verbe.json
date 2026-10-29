@@ -1,0 +1,178 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Phrases avec un COD",
+      "detail": "Le verbe est suivi d'un groupe construit sans préposition, qui répond à « quoi ? » ou « qui ? ».",
+      "cartes": [
+        "Le vieux marin hisse la grande voile",
+        "Les élèves écoutent la maîtresse",
+        "Ulysse crève l'œil du cyclope",
+        "Nous regardons les étoiles filantes",
+        "Ma sœur lit un roman policier"
+      ]
+    },
+    {
+      "nom": "Phrases avec un COI",
+      "detail": "Le verbe est suivi d'un groupe introduit par une préposition, le plus souvent « à » ou « de ».",
+      "cartes": [
+        "Ulysse pense souvent à sa famille",
+        "Le capitaine parle à ses marins",
+        "Nous obéissons à nos parents",
+        "Tom téléphone à son meilleur ami",
+        "Elle répond poliment à sa mère"
+      ]
+    },
+    {
+      "nom": "Phrases avec un attribut du sujet",
+      "detail": "Un verbe d'état (être, sembler, devenir…) relie le sujet à une caractéristique.",
+      "cartes": [
+        "La mer semble très calme",
+        "Ulysse devient un pauvre mendiant",
+        "Les Sirènes paraissent très douces",
+        "Mon frère est très courageux",
+        "Le ciel d'automne reste gris"
+      ]
+    },
+    {
+      "nom": "Phrases sans complément du verbe",
+      "detail": "Le verbe est intransitif : rien ne le complète après lui, ni COD, ni COI, ni attribut.",
+      "cartes": [
+        "Le petit bébé de ma voisine dort",
+        "Les feuilles du grand chêne tombent",
+        "Le train de Paris arrive",
+        "Les petits oiseaux du jardin chantent",
+        "Le vieux chat de ma cousine miaule"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Quelle est la fonction du groupe en couleur ?",
+      "texte": "Pendant la tempête, Ulysse pense [à sa famille].",
+      "choix": [
+        "COD",
+        "COI",
+        "Attribut du sujet"
+      ],
+      "bonne": 1,
+      "explication": "« à sa famille » est introduit par la préposition « à » et complète le verbe « penser » : c'est un COI."
+    },
+    {
+      "consigne": "Quelle est la fonction du groupe en couleur ?",
+      "texte": "Dans le port, le jeune marin admire [un vieux capitaine].",
+      "choix": [
+        "COD",
+        "COI",
+        "Attribut du sujet"
+      ],
+      "bonne": 0,
+      "explication": "Le marin admire qui ? « un vieux capitaine » : c'est une autre personne que le sujet, et le groupe est sans préposition. C'est un COD, pas un attribut."
+    },
+    {
+      "consigne": "Quelle est la fonction du groupe en couleur ?",
+      "texte": "Ce soir, la mer semble [calme].",
+      "choix": [
+        "COD",
+        "COI",
+        "Attribut du sujet"
+      ],
+      "bonne": 2,
+      "explication": "« sembler » est un verbe d'état et « calme » donne une caractéristique de « la mer » : c'est un attribut du sujet."
+    },
+    {
+      "consigne": "Quelle est la fonction du groupe en couleur ?",
+      "texte": "Chaque matin, les marins obéissent [au capitaine].",
+      "choix": [
+        "COD",
+        "COI",
+        "Attribut du sujet"
+      ],
+      "bonne": 1,
+      "explication": "« obéir » se construit avec la préposition « à » (« au » veut dire « à le ») : « au capitaine » est un COI."
+    },
+    {
+      "consigne": "Quelle est la fonction du groupe en couleur ?",
+      "texte": "Dans la grotte, le héros saisit [son épée].",
+      "choix": [
+        "COD",
+        "COI",
+        "Attribut du sujet"
+      ],
+      "bonne": 0,
+      "explication": "Le héros saisit quoi ? « son épée », sans préposition : c'est le COD. On peut dire « Il la saisit »."
+    },
+    {
+      "consigne": "Quelle est la fonction du groupe en couleur ?",
+      "texte": "Mon grand-père est [un ancien marin].",
+      "choix": [
+        "COD",
+        "COI",
+        "Attribut du sujet"
+      ],
+      "bonne": 2,
+      "explication": "« être » est un verbe d'état et « un ancien marin » désigne le sujet lui-même (mon grand-père = un ancien marin) : c'est un attribut du sujet."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "COD",
+      "acceptees": [
+        "C.O.D.",
+        "Complément d'objet direct",
+        "Le complément d'objet direct"
+      ],
+      "indices": [
+        "Je complète le verbe et je fais partie du groupe verbal.",
+        "Je suis construit sans préposition et je réponds à « quoi ? » ou « qui ? » posé après le verbe.",
+        "On me remplace par « le », « la », « l' » ou « les »."
+      ],
+      "explication": "Le COD (complément d'objet direct) se construit sans préposition et se remplace par le, la, l' ou les."
+    },
+    {
+      "reponse": "COI",
+      "acceptees": [
+        "C.O.I.",
+        "Complément d'objet indirect",
+        "Le complément d'objet indirect"
+      ],
+      "indices": [
+        "Je complète le verbe et on ne peut pas me supprimer sans changer le sens.",
+        "Je suis introduit par une préposition, le plus souvent « à » ou « de ».",
+        "On me remplace par « lui », « leur », « en » ou « y »."
+      ],
+      "explication": "Le COI (complément d'objet indirect) est introduit par une préposition et se remplace par lui, leur, en ou y."
+    },
+    {
+      "reponse": "Attribut du sujet",
+      "acceptees": [
+        "Attribut",
+        "L'attribut",
+        "L'attribut du sujet"
+      ],
+      "indices": [
+        "Je donne une caractéristique de quelqu'un ou de quelque chose.",
+        "Quand je suis un adjectif, je m'accorde en genre et en nombre avec le mot dont je parle.",
+        "Je suis placé après être, sembler, devenir ou rester, et je décris celui ou ce dont parle la phrase."
+      ],
+      "explication": "L'attribut du sujet vient après un verbe d'état et donne une caractéristique du sujet : « La mer semble calme »."
+    },
+    {
+      "reponse": "Verbe d'état",
+      "acceptees": [
+        "Verbes d'état",
+        "Un verbe d'état",
+        "Verbe attributif"
+      ],
+      "indices": [
+        "Je suis un mot qui se conjugue.",
+        "Je n'exprime pas une action.",
+        "Mes exemples sont être, paraître, sembler, devenir et rester."
+      ],
+      "explication": "Un verbe d'état relie le sujet à une caractéristique : l'attribut du sujet."
+    }
+  ],
+  "calculs": [],
+  "etapes": []
+}

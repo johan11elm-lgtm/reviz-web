@@ -1,0 +1,167 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Un achat",
+      "detail": "Un prix proportionnel à la quantité achetée.",
+      "cartes": [
+        "5 stylos coûtent 7,50 €, soit 1,50 € pièce",
+        "4 kg coûtent 10 €, 12 kg coûtent 30 €",
+        "3 cahiers coûtent 6 €, 5 cahiers coûtent 10 €",
+        "2 objets coûtent 3 €, 5 objets coûtent 7,50 €",
+        "Le prix unitaire est le coefficient de proportionnalité"
+      ]
+    },
+    {
+      "nom": "Un déplacement",
+      "detail": "Une distance proportionnelle à la durée, à vitesse constante.",
+      "cartes": [
+        "À 60 km/h, on parcourt 30 km en 30 minutes",
+        "60 km/h : 90 km parcourus en 1,5 h",
+        "36 km en 2 h, soit 18 km/h",
+        "Distance = vitesse × durée",
+        "Convertir 1 h 30 min en heures : 1,5 h"
+      ]
+    },
+    {
+      "nom": "Une part d'un total",
+      "detail": "Une proportion exprimée sur 100, c'est-à-dire un pourcentage.",
+      "cartes": [
+        "20 % de 45 € font 9 €",
+        "12 élèves sur 30, c'est 40 %",
+        "t % de Q = Q × t ÷ 100",
+        "7 % signifie 7 pour 100",
+        "La moitié d'une quantité, c'est 50 %"
+      ]
+    },
+    {
+      "nom": "Un plan ou une carte",
+      "detail": "Une distance dessinée proportionnelle à la distance réelle, grâce à l'échelle.",
+      "cartes": [
+        "À l'échelle 1/1 000, 1 cm représente 10 m",
+        "À l'échelle 1/25 000, 4 cm représentent 1 km",
+        "À l'échelle 1/500, 2 cm représentent 10 m",
+        "Les deux distances doivent être dans la même unité",
+        "Rapport entre la distance dessinée et la distance réelle"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [],
+  "devinettes": [
+    {
+      "reponse": "Produit en croix",
+      "acceptees": [
+        "Produit en croix",
+        "Le produit en croix",
+        "Produits en croix",
+        "Règle de trois",
+        "La règle de trois"
+      ],
+      "indices": [
+        "Je suis une méthode pour trouver un nombre manquant dans un tableau.",
+        "On multiplie deux nombres placés en diagonale.",
+        "Puis on divise le résultat par le troisième nombre."
+      ],
+      "explication": "Avec le produit en croix, on multiplie les deux nombres en diagonale et on divise par le troisième."
+    },
+    {
+      "reponse": "Coefficient de proportionnalité",
+      "acceptees": [
+        "Coefficient de proportionnalité",
+        "Le coefficient de proportionnalité",
+        "Coefficient",
+        "Le coefficient"
+      ],
+      "indices": [
+        "Je suis un nombre.",
+        "Je multiplie une grandeur pour obtenir l'autre.",
+        "Dans un tableau, tous les quotients d'une ligne par l'autre me valent."
+      ],
+      "explication": "Le coefficient de proportionnalité est le nombre par lequel on multiplie une grandeur pour obtenir l'autre."
+    },
+    {
+      "reponse": "Pourcentage",
+      "acceptees": [
+        "Pourcentage",
+        "Un pourcentage",
+        "Le pourcentage"
+      ],
+      "indices": [
+        "Je suis une proportion.",
+        "Je suis exprimé avec un dénominateur 100.",
+        "12 élèves sur 30 font du sport : je vaux 40."
+      ],
+      "explication": "Un pourcentage est une proportion exprimée sur 100 : 12/30 = 40/100, soit 40 %."
+    },
+    {
+      "reponse": "Échelle",
+      "acceptees": [
+        "Échelle",
+        "L'échelle",
+        "Une échelle"
+      ],
+      "indices": [
+        "Je figure sur les cartes et les plans.",
+        "Je relie la distance sur le plan à la distance réelle.",
+        "Si je vaux 1/500, alors 2 cm représentent 10 m."
+      ],
+      "explication": "L'échelle est le coefficient qui relie la distance sur le plan et la distance réelle."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "6 cahiers coûtent 9 €. Combien coûtent 10 cahiers ?",
+      "reponse": 15,
+      "unite": "€",
+      "tolerance": 0,
+      "explication": "Passage à l'unité : 9 ÷ 6 = 1,50 € le cahier, donc 10 cahiers coûtent 10 × 1,50 = 15 €."
+    },
+    {
+      "question": "Un cycliste roule à 24 km/h pendant 1 h 30 min. Quelle distance parcourt-il ?",
+      "reponse": 36,
+      "unite": "km",
+      "tolerance": 0,
+      "explication": "1 h 30 min = 1,5 h, donc d = v × t = 24 × 1,5 = 36 km."
+    },
+    {
+      "question": "Combien font 15 % de 80 € ?",
+      "reponse": 12,
+      "unite": "€",
+      "tolerance": 0,
+      "explication": "15 % de 80 = 80 × 15 ÷ 100 = 12 €."
+    },
+    {
+      "question": "Sur une carte à l'échelle 1/50 000, deux villes sont séparées de 6 cm. Quelle est la distance réelle, en km ?",
+      "reponse": 3,
+      "unite": "km",
+      "tolerance": 0,
+      "explication": "6 × 50 000 = 300 000 cm = 3 000 m = 3 km."
+    },
+    {
+      "question": "18 élèves sur 24 ont eu la moyenne. Quel pourcentage cela représente-t-il ?",
+      "reponse": 75,
+      "unite": "%",
+      "tolerance": 0,
+      "explication": "18/24 = 3/4 = 75/100, soit 75 %."
+    },
+    {
+      "question": "3 kg de cerises coûtent 13,50 €. Combien coûtent 5 kg de cerises ?",
+      "reponse": 22.5,
+      "unite": "€",
+      "tolerance": 0,
+      "explication": "Passage à l'unité : 13,50 ÷ 3 = 4,50 € le kilo, donc 5 kg coûtent 5 × 4,50 = 22,50 €."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Trouver le prix de 8 stylos par le passage à l'unité",
+      "etapes": [
+        "On lit la donnée : 5 stylos coûtent 7,50 €",
+        "On divise 7,50 € par 5 : un stylo coûte 1,50 €",
+        "On multiplie 1,50 € par 8 : 12 €",
+        "On conclut par une phrase : 8 stylos coûtent 12 €"
+      ]
+    }
+  ]
+}

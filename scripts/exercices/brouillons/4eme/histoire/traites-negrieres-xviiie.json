@@ -1,0 +1,153 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Les profits des négociants",
+      "detail": "La richesse que le commerce colonial apporte aux armateurs et aux villes portuaires d'Europe.",
+      "cartes": [
+        "De riches hôtels particuliers sont bâtis à Nantes",
+        "Des raffineries de sucre s'ouvrent dans la ville",
+        "Des chantiers navals se développent autour du port",
+        "Les armateurs s'enrichissent en finançant les expéditions",
+        "Les villes portuaires grandissent grâce au commerce colonial"
+      ]
+    },
+    {
+      "nom": "Le voyage en mer",
+      "detail": "Ce que vivent les captifs pendant la traversée de l'Atlantique, appelée le passage du milieu.",
+      "cartes": [
+        "Les hommes sont entassés et enchaînés dans la cale",
+        "Il faut environ deux mois pour atteindre les Antilles",
+        "De 10 à 15 % des déportés meurent avant l'arrivée",
+        "La traversée de l'Atlantique s'appelle le passage du milieu",
+        "Le navire quitte l'Afrique avec sa cargaison humaine"
+      ]
+    },
+    {
+      "nom": "La vie sur les plantations",
+      "detail": "Le travail, la menace et le statut des esclaves dans les colonies françaises.",
+      "cartes": [
+        "Les esclaves travaillent sans recevoir de salaire",
+        "Le maître impose sa volonté par la menace des châtiments",
+        "Dans les champs, on cultive surtout la canne à sucre",
+        "Selon le Code noir, l'esclave est un bien meuble",
+        "Saint-Domingue compte des centaines de milliers d'esclaves"
+      ]
+    },
+    {
+      "nom": "Les formes de résistance",
+      "detail": "Les manières dont les esclaves refusent leur condition : fuite, refus du travail, révolte, culture préservée.",
+      "cartes": [
+        "Un esclave s'enfuit pour échapper à son maître",
+        "En 1791, les esclaves de Saint-Domingue se révoltent",
+        "Des esclaves refusent d'exécuter le travail demandé",
+        "Des esclaves préservent leurs cultures africaines malgré tout",
+        "En 1804, la colonie révoltée devient Haïti"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "la traite atlantique",
+      "carte": "Les plantations de canne à sucre ont besoin de beaucoup de travailleurs",
+      "role": "cause",
+      "explication": "Pour faire tourner les plantations, les colons font venir des esclaves africains."
+    },
+    {
+      "fait": "la traite atlantique",
+      "carte": "Les colons veulent une main-d'œuvre forcée et non payée",
+      "role": "cause",
+      "explication": "Les esclaves travaillent sans salaire, sous la contrainte : c'est ce qui pousse les colons à recourir à la traite."
+    },
+    {
+      "fait": "la traite atlantique",
+      "carte": "L'enrichissement des négociants et des armateurs",
+      "role": "consequence",
+      "explication": "La bourgeoisie marchande des grands ports tire de grands profits du commerce colonial."
+    },
+    {
+      "fait": "la traite atlantique",
+      "carte": "Le développement de raffineries de sucre et de chantiers navals dans les ports",
+      "role": "consequence",
+      "explication": "Les profits du commerce font naître des industries dans les villes portuaires."
+    },
+    {
+      "fait": "la traite atlantique",
+      "carte": "La construction de riches hôtels particuliers à Nantes et à Bordeaux",
+      "role": "consequence",
+      "explication": "Les négociants font bâtir au XVIIIe siècle des hôtels particuliers encore visibles aujourd'hui."
+    }
+  ],
+  "etiquettes": [],
+  "devinettes": [
+    {
+      "reponse": "Nantes",
+      "acceptees": [
+        "Nantes"
+      ],
+      "indices": [
+        "Je suis une ville de l'ouest de la France.",
+        "Au XVIIIe siècle, mes négociants font fortune grâce au commerce d'êtres humains.",
+        "Je suis le premier port négrier de France, devant Bordeaux et La Rochelle."
+      ],
+      "explication": "Nantes est le premier port négrier français au XVIIIe siècle."
+    },
+    {
+      "reponse": "Saint-Domingue",
+      "acceptees": [
+        "Saint-Domingue",
+        "Saint Domingue",
+        "St-Domingue",
+        "St Domingue"
+      ],
+      "indices": [
+        "Je suis une colonie française d'Amérique.",
+        "À la fin du XVIIIe siècle, je suis la colonie la plus riche du monde grâce au sucre et au café.",
+        "Mes esclaves se révoltent en 1791, puis je prends le nom d'Haïti en 1804."
+      ],
+      "explication": "Saint-Domingue, colonie la plus riche du monde, devient Haïti après la révolte des esclaves."
+    },
+    {
+      "reponse": "Le Code noir",
+      "acceptees": [
+        "Code noir",
+        "Le Code noir"
+      ],
+      "indices": [
+        "Je suis un texte de loi du royaume de France.",
+        "On m'a publié en 1685, sous Louis XIV, pour les colonies.",
+        "Je fais de l'esclave un bien meuble que son maître peut vendre ou transmettre en héritage."
+      ],
+      "explication": "Le Code noir de 1685 encadre l'esclavage dans les colonies françaises."
+    },
+    {
+      "reponse": "Un armateur",
+      "acceptees": [
+        "Armateur",
+        "Un armateur",
+        "L'armateur",
+        "Les armateurs",
+        "Armateurs"
+      ],
+      "indices": [
+        "Je suis un homme d’affaires d’un grand port, comme Nantes ou Bordeaux.",
+        "Je m’enrichis grâce au commerce colonial.",
+        "Le navire négrier m’appartient : je l’équipe et je recrute son équipage."
+      ],
+      "explication": "L'armateur équipe le navire et finance l'expédition négrière."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Le circuit d'un navire négrier",
+      "etapes": [
+        "Le navire quitte l'Europe avec des armes et des tissus",
+        "Sur la côte africaine, ces marchandises sont échangées contre des captifs",
+        "Les captifs sont entassés dans la cale pour traverser l'Atlantique",
+        "Aux Antilles, les captifs sont vendus comme esclaves",
+        "Le navire rentre chargé de sucre et de café"
+      ]
+    }
+  ]
+}

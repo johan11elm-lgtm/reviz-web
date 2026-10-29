@@ -12,6 +12,7 @@ import { useEffect, useRef, useState } from 'react'
 import { Mascot } from '../../components/Mascot'
 import { jouerSon } from '../../utils/sons'
 import { nbsp } from '../../utils/typography'
+import { reponseAcceptee, lireNombre } from '../../utils/exercicesChapitre'
 
 const LETTRES = ['A', 'B', 'C', 'D']
 
@@ -20,6 +21,8 @@ export const NOMS_FORMATS = {
   coins: '4 coins', intrus: 'Intrus', indices: 'Trois indices', definition: 'Définition',
   paires: 'Paires', ordre: 'Chronologie', annee: 'Année', qcm: 'Quiz',
   vraifaux: 'Vrai ou faux', phrase: 'Phrase à trous', memory: 'Mémory', classement: 'Classement',
+  selection: 'Sélection', cause: 'Cause ou conséquence', etiquette: 'Étiquette', devinette: 'Qui suis-je ?',
+  calcul: 'Trouve le nombre', etapes: 'Les étapes',
 }
 
 /**
@@ -218,7 +221,7 @@ export function Chronologie({ ex, verdict, onValider, grand }) {
                 aria-label={`${e.texte}${rang >= 0 ? `, placé en ${rang + 1}` : ''}`}>
                 <span className="ex-rang" aria-hidden="true">{verdict ? bonRang + 1 : rang >= 0 ? rang + 1 : ''}</span>
                 <span className="ex-evenement-txt">{nbsp(e.texte)}</span>
-                {verdict && <span className="ex-evenement-date">{e.date}</span>}
+                {verdict && e.date && <span className="ex-evenement-date">{e.date}</span>}
               </button>
             </li>
           )
@@ -453,7 +456,173 @@ export function Classement({ ex, verdict, onValider, grand }) {
   )
 }
 
+// ── Les formats du bloc `exercices` relu (pilote du 29/10) ──
+
+// Sélection : six cartes, toucher toutes celles de la catégorie. Juste si le choix est exact.
+export function Selection({ ex, verdict, onValider, grand }) {
+  const [sel, setSel] = useState([])
+  const basculer = i => setSel(s => (s.includes(i) ? s.filter(x => x !== i) : [...s, i]))
+  const valider = () => {
+    const fautes = ex.cartes.filter((c, i) => c.bonne !== sel.includes(i)).length
+    onValider(fautes === 0, { erreurs: fautes })
+  }
+  const etat = (c, i) => {
+    const choisi = sel.includes(i)
+    if (!verdict) return choisi ? 'is-choisi' : ''
+    if (c.bonne) return choisi ? 'is-juste' : 'is-manquee'
+    return choisi ? 'is-faux' : 'is-terne'
+  }
+  return (
+    <CadreExercice ex={ex} verdict={verdict} grand={grand} peutValider={sel.length > 0} onValider={valider}>
+      <div className="ex-cartes ex-selection" role="group" aria-label={`Cartes à trier pour ${ex.theme}`}>
+        {ex.cartes.map((c, i) => (
+          <button key={i} type="button" className={`ex-carte ${etat(c, i)}`} aria-pressed={sel.includes(i)} disabled={!!verdict} onClick={() => basculer(i)}>
+            {sel.includes(i) && !verdict && <span className="ex-carte-coche" aria-hidden="true" />}
+            <span className="ex-carte-txt">{nbsp(c.texte)}</span>
+          </button>
+        ))}
+      </div>
+      {!verdict && <p className="ex-aide" aria-live="polite">{sel.length ? `${sel.length} carte${sel.length > 1 ? 's' : ''} choisie${sel.length > 1 ? 's' : ''}` : 'Il y en a 2 ou 3.'}</p>}
+    </CadreExercice>
+  )
+}
+
+// Cause ou conséquence : la carte au centre, deux grandes tuiles.
+export function Cause({ ex, verdict, onValider, grand }) {
+  const [sel, setSel] = useState(null)
+  return (
+    <CadreExercice ex={ex} verdict={verdict} grand={grand} peutValider={sel !== null} onValider={() => onValider(sel === ex.bonne, { choix: sel })}>
+      <div className="ex-cause">
+        <span className="ex-cause-fait">{nbsp(ex.parRapport)}</span>
+        <span className={`ex-cause-carte${verdict ? ` is-${verdict}` : ''}`}>{nbsp(ex.carte)}</span>
+      </div>
+      <ListeChoix choix={ex.choix} sel={sel} bonne={ex.bonne} verdict={verdict} onChoisir={setSel} lettres={false} colonnes />
+    </CadreExercice>
+  )
+}
+
+// Étiquette (« Le Tagueur ») : un passage en couleur dans un texte, et l'étiquette qui lui va.
+export function Etiquette({ ex, verdict, onValider, grand }) {
+  const [sel, setSel] = useState(null)
+  const etatPassage = !verdict ? (sel === null ? '' : 'is-pose') : verdict === 'juste' ? 'is-juste' : 'is-faux'
+  return (
+    <CadreExercice ex={ex} verdict={verdict} grand={grand} peutValider={sel !== null} onValider={() => onValider(sel === ex.bonne, { choix: sel })}>
+      <p className="ex-phrase ex-etiquette-texte">
+        {nbsp(ex.avant)}
+        <mark className={`ex-passage ${etatPassage}`}>
+          {nbsp(ex.passage)}
+          {sel !== null && <span className="ex-passage-tag">{ex.choix[sel]}</span>}
+        </mark>
+        {nbsp(ex.apres)}
+      </p>
+      <div className="ex-banque" role="group" aria-label="Étiquettes">
+        {ex.choix.map((m, i) => (
+          <button key={i} type="button" className={`ex-mot ${etatCase({ choisi: sel === i, bonne: i === ex.bonne, verdict })}`}
+            disabled={!!verdict} aria-pressed={sel === i} onClick={() => setSel(i)}>
+            {m}
+          </button>
+        ))}
+      </div>
+    </CadreExercice>
+  )
+}
+
+// Qui suis-je ? : les indices un par un, une réponse tapée. Juste si elle est trouvée, quel que soit le nombre d'indices.
+export function Devinette({ ex, verdict, onValider, grand }) {
+  const [vus, setVus] = useState(1)
+  const [saisie, setSaisie] = useState('')
+  const [rate, setRate] = useState(false)
+  const valider = () => {
+    if (!saisie.trim() || verdict) return
+    const juste = reponseAcceptee(saisie, ex)
+    // Une réponse fausse avec des indices en réserve : on en montre un de plus et on laisse réessayer.
+    if (!juste && vus < ex.indices.length) { setRate(true); setVus(v => v + 1); setSaisie(''); return }
+    onValider(juste, { indices: vus, saisie })
+  }
+  return (
+    <CadreExercice ex={ex} verdict={verdict} grand={grand} peutValider={!!saisie.trim()} onValider={valider}>
+      <ol className="ex-devinette" aria-label="Indices" aria-live="polite">
+        {ex.indices.slice(0, verdict ? ex.indices.length : vus).map((t, i) => (
+          <li key={i} className={i === vus - 1 && !verdict ? 'is-neuf' : ''}><span className="ex-indice-num" aria-hidden="true">{i + 1}</span>{nbsp(t)}</li>
+        ))}
+      </ol>
+      {verdict ? (
+        <p className={`ex-devinette-reponse is-${verdict}`}>{verdict === 'juste' ? nbsp(ex.reponse) : nbsp(saisie || 'Pas de réponse')}</p>
+      ) : (
+        <>
+          <form className="ex-devinette-saisie" onSubmit={e => { e.preventDefault(); valider() }}>
+            <input type="text" value={saisie} onChange={e => { setSaisie(e.target.value); setRate(false) }} placeholder="Ta réponse"
+              aria-label="Ta réponse" autoComplete="off" autoCorrect="off" autoCapitalize="sentences" spellCheck={false} enterKeyHint="done" />
+          </form>
+          {rate && <p className="ex-aide ex-aide--rate" role="status">Pas tout à fait. Voici un autre indice.</p>}
+          <div className="ex-devinette-actions">
+            {vus < ex.indices.length && <button type="button" className="ex-effacer" onClick={() => setVus(v => v + 1)}>Un autre indice</button>}
+            <button type="button" className="ex-effacer" onClick={() => onValider(false, { indices: vus, abandon: true })}>Je donne ma langue au chat</button>
+          </div>
+        </>
+      )}
+    </CadreExercice>
+  )
+}
+
+const TOUCHES = ['1', '2', '3', '4', '5', '6', '7', '8', '9', ',', '0', 'effacer']
+
+// Trouve le nombre : un pavé de chiffres, la virgule et le signe moins. Le clavier marche aussi sur ordinateur.
+export function Calcul({ ex, verdict, onValider, grand }) {
+  const [saisie, setSaisie] = useState('')
+  const nombre = lireNombre(saisie)
+  const valider = () => { if (nombre !== null && !verdict) onValider(Math.abs(nombre - ex.reponse) <= ex.tolerance + 1e-9, { saisie }) }
+  const taper = t => {
+    if (verdict) return
+    if (t === 'effacer') return setSaisie(s => s.slice(0, -1))
+    if (t === '-') return setSaisie(s => (s.startsWith('−') ? s.slice(1) : `−${s}`))
+    setSaisie(s => {
+      if (t === ',' && (s.includes(',') || !/\d$/.test(s))) return s
+      return s.replace(/^−/, '').length >= 9 ? s : s + t
+    })
+  }
+  const dernier = useRef({})
+  dernier.current = { taper, valider }
+  useEffect(() => {
+    if (verdict) return undefined
+    function onKey(e) {
+      if (e.metaKey || e.ctrlKey || e.altKey) return
+      const t = /^\d$/.test(e.key) ? e.key : [',', '.'].includes(e.key) ? ',' : e.key === '-' ? '-' : e.key === 'Backspace' ? 'effacer' : e.key === 'Enter' ? 'valider' : null
+      if (!t) return
+      e.preventDefault()
+      if (t === 'valider') dernier.current.valider()
+      else dernier.current.taper(t)
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [verdict])
+  return (
+    <CadreExercice ex={ex} verdict={verdict} grand={grand} peutValider={nombre !== null} onValider={valider}>
+      <div className={`ex-calcul${verdict ? ` is-${verdict}` : ''}`}>
+        <output className="ex-calcul-valeur" aria-live="polite" aria-label={saisie ? `Ta réponse : ${saisie} ${ex.unite}` : 'Ta réponse : vide'}>
+          <span className={saisie ? '' : 'is-vide'}>{saisie || '?'}</span>
+          {ex.unite && <small>{ex.unite}</small>}
+        </output>
+        {!verdict && (
+          <div className="ex-pave" role="group" aria-label="Pavé de chiffres">
+            {TOUCHES.map(t => (
+              <button key={t} type="button" className={`ex-touche${t === 'effacer' ? ' ex-touche--effacer' : ''}`} onClick={() => taper(t)}
+                aria-label={t === 'effacer' ? 'Effacer' : t === ',' ? 'Virgule' : t}>
+                {t === 'effacer'
+                  ? <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M9 5h11v14H9l-6-7z M13 9l5 6M18 9l-5 6" /></svg>
+                  : t}
+              </button>
+            ))}
+            <button type="button" className="ex-touche ex-touche--signe" onClick={() => taper('-')} aria-label="Changer le signe">+/−</button>
+          </div>
+        )}
+      </div>
+    </CadreExercice>
+  )
+}
+
 export const FORMATS = {
   coins: Coins, intrus: Intrus, indices: Indices, definition: Definition, paires: Paires, ordre: Chronologie, annee: Annee, qcm: Qcm,
   vraifaux: VraiFaux, phrase: Phrase, memory: Memory, classement: Classement,
+  selection: Selection, cause: Cause, etiquette: Etiquette, devinette: Devinette, calcul: Calcul, etapes: Chronologie,
 }

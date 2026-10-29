@@ -1,0 +1,138 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Adjectif court avec -er ou -est",
+      "detail": "Les adjectifs courts (une syllabe, ou deux en -y) prennent -er than au comparatif et the -est au superlatif.",
+      "cartes": [
+        "London is bigger than Edinburgh",
+        "Ben Nevis is the highest mountain in the UK",
+        "Alaska is the largest state in the USA",
+        "This exercise is easier than the last one",
+        "It is the happiest day of my life"
+      ]
+    },
+    {
+      "nom": "Adjectif long avec more ou most",
+      "detail": "Les adjectifs longs se construisent avec more ... than au comparatif et the most au superlatif.",
+      "cartes": [
+        "This museum is more interesting than the castle",
+        "California is the most populous state",
+        "She is the most famous singer in Britain",
+        "My brother is more patient than I am",
+        "He is the most intelligent boy in my class"
+      ]
+    },
+    {
+      "nom": "Adjectif irrégulier",
+      "detail": "Good et bad ont des formes à apprendre par cœur : better, the best, worse, the worst.",
+      "cartes": [
+        "My English is better than it was last year",
+        "My spelling is the worst in the class",
+        "This is the best pizza in town",
+        "The weather is worse today than yesterday",
+        "Your idea is better than mine"
+      ]
+    },
+    {
+      "nom": "Égalité ou infériorité",
+      "detail": "L'égalité s'exprime avec as ... as, l'infériorité avec not as ... as ou less ... than.",
+      "cartes": [
+        "Cardiff is not as big as London",
+        "This film is less interesting than the book",
+        "Anna is as tall as her brother",
+        "My bag is not as heavy as yours",
+        "Today is as cold as yesterday"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Quelle structure est en couleur ?",
+      "texte": "Anna is [as tall as] her brother.",
+      "choix": ["Comparatif de supériorité", "Superlatif", "Égalité", "Infériorité"],
+      "bonne": 2,
+      "explication": "« as ... as » exprime l'égalité : Anna et son frère ont la même taille."
+    },
+    {
+      "consigne": "Quelle structure est en couleur ?",
+      "texte": "London is [bigger] than Edinburgh.",
+      "choix": ["Comparatif de supériorité", "Superlatif", "Égalité", "Infériorité"],
+      "bonne": 0,
+      "explication": "« bigger » est un adjectif court + -er, suivi de « than » : c'est un comparatif de supériorité (plus grande que)."
+    },
+    {
+      "consigne": "Quelle structure est en couleur ?",
+      "texte": "This film is [less interesting than] the book.",
+      "choix": ["Comparatif de supériorité", "Superlatif", "Égalité", "Infériorité"],
+      "bonne": 3,
+      "explication": "« less ... than » exprime l'infériorité : le film est moins intéressant que le livre."
+    },
+    {
+      "consigne": "Quelle structure est en couleur ?",
+      "texte": "Ben Nevis is [the highest] mountain in the UK.",
+      "choix": ["Comparatif de supériorité", "Superlatif", "Égalité", "Infériorité"],
+      "bonne": 1,
+      "explication": "« the highest » est the + adjectif court + -est : c'est un superlatif (le plus haut)."
+    },
+    {
+      "consigne": "Quelle structure est en couleur ?",
+      "texte": "Your idea is [better than] mine.",
+      "choix": ["Comparatif de supériorité", "Superlatif", "Égalité", "Infériorité"],
+      "bonne": 0,
+      "explication": "« better » est le comparatif irrégulier de « good », suivi de « than » : comparatif de supériorité (meilleure que)."
+    },
+    {
+      "consigne": "Quelle structure est en couleur ?",
+      "texte": "California is [the most populous] state.",
+      "choix": ["Comparatif de supériorité", "Superlatif", "Égalité", "Infériorité"],
+      "bonne": 1,
+      "explication": "« the most » + adjectif long : c'est un superlatif (le plus peuplé)."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Ben Nevis",
+      "acceptees": ["Le Ben Nevis", "Nevis"],
+      "indices": [
+        "Je suis une montagne.",
+        "Je me trouve en Écosse.",
+        "Je suis le plus haut sommet du Royaume-Uni, avec 1 345 m."
+      ],
+      "explication": "Ben Nevis is the highest mountain in the UK : il se trouve en Écosse et mesure 1 345 m."
+    },
+    {
+      "reponse": "Alaska",
+      "acceptees": ["L'Alaska"],
+      "indices": [
+        "Je suis l'un des 50 États des États-Unis.",
+        "La Californie est plus peuplée que moi.",
+        "Je suis le plus grand État des États-Unis."
+      ],
+      "explication": "Alaska is the largest state in the USA, mais la Californie est l'État le plus peuplé."
+    },
+    {
+      "reponse": "Washington",
+      "acceptees": ["Washington D.C.", "Washington DC", "Washington, D.C."],
+      "indices": [
+        "Je suis une ville des États-Unis.",
+        "New York est plus peuplée que moi.",
+        "Je suis la capitale fédérale du pays."
+      ],
+      "explication": "Washington, D.C. est la capitale fédérale des États-Unis ; New York est la ville la plus peuplée, mais pas la capitale."
+    },
+    {
+      "reponse": "Great Britain",
+      "acceptees": ["Britain", "Grande-Bretagne", "La Grande-Bretagne"],
+      "indices": [
+        "Je suis une île.",
+        "Je regroupe l'Angleterre, l'Écosse et le pays de Galles.",
+        "L'Irlande du Nord ne fait pas partie de moi, mais elle fait partie du Royaume-Uni."
+      ],
+      "explication": "Great Britain est l'île qui réunit l'Angleterre, l'Écosse et le pays de Galles ; le United Kingdom y ajoute l'Irlande du Nord."
+    }
+  ],
+  "calculs": [],
+  "etapes": []
+}

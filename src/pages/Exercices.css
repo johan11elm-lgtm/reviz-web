@@ -514,6 +514,59 @@
 .ex-page .ex-recap-formats li.is-faux { background: var(--ex-faux-pale); color: var(--ex-faux-texte); }
 .ex-page .ex-recap-formats li.is-faux i { background: var(--ex-faux); }
 
+/* ── Les formats du bloc relu (pilote du 29/10) ── */
+
+/* Sélection : six cartes, une coche sur celles qu'on a choisies, la bonne qu'on a oubliée en pointillé */
+.ex-page .ex-selection .ex-carte { min-height: 88px; padding: 14px 10px; font-size: 15px; }
+.ex-page .ex-selection .ex-carte:nth-child(n).is-choisi { transform: translateY(-3px); }
+.ex-page .ex-carte-coche { position: absolute; top: 8px; right: 8px; width: 20px; height: 20px; border-radius: 50%; background: var(--ex-lavande-fort); animation: exPop .25s cubic-bezier(.3,1.6,.5,1) both; }
+.ex-page .ex-carte-coche::after { content: ''; position: absolute; left: 7px; top: 4px; width: 5px; height: 9px; border: solid #fff; border-width: 0 2.5px 2.5px 0; transform: rotate(45deg); }
+.ex-page .ex-carte.is-manquee { background: #fff; box-shadow: inset 0 0 0 2px var(--ex-juste); outline: 2px dashed var(--ex-juste); outline-offset: 3px; color: var(--ex-juste-texte); }
+@keyframes exPop { from { transform: scale(.3); opacity: 0; } }
+
+/* Cause ou conséquence : le fait en étiquette, la carte en encre */
+.ex-page .ex-cause { display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 16px 14px 18px; border-radius: 20px; background: #fff; box-shadow: var(--ex-ombre); }
+.ex-page .ex-cause-fait { padding: 5px 12px; border-radius: 999px; background: var(--ex-lavande); font-size: 13px; font-weight: 700; text-align: center; color: var(--ex-encre); }
+.ex-page .ex-cause-carte { max-width: 92%; padding: 16px 18px; border-radius: 16px; background: var(--ex-encre); box-shadow: 0 10px 24px rgba(4,42,101,.22); font-size: 17px; font-weight: 700; line-height: 1.3; text-align: center; color: #fff; transform: rotate(-1.5deg); }
+.ex-page .ex-cause-carte.is-juste { background: var(--ex-juste); }
+.ex-page .ex-cause-carte.is-faux { background: var(--ex-faux); }
+
+/* Étiquette : le passage surligné, l'étiquette posée dessus */
+.ex-page .ex-etiquette-texte { padding-top: 24px; line-height: 2.1; }
+.ex-page .ex-passage { position: relative; padding: 2px 4px; border-radius: 6px; background: #FFE3C7; box-shadow: inset 0 -3px 0 var(--rv-vif); color: inherit; font-weight: 700; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+.ex-page .ex-passage.is-pose { background: var(--ex-lavande); box-shadow: inset 0 -3px 0 var(--ex-lavande-fort); }
+.ex-page .ex-passage.is-juste { background: var(--ex-juste-pale); box-shadow: inset 0 -3px 0 var(--ex-juste); }
+.ex-page .ex-passage.is-faux { background: var(--ex-faux-pale); box-shadow: inset 0 -3px 0 var(--ex-faux); }
+.ex-page .ex-passage-tag { position: absolute; left: 50%; bottom: 100%; margin-bottom: 2px; padding: 1px 8px; border-radius: 999px; background: var(--ex-encre); font-size: 11px; font-weight: 700; line-height: 1.6; white-space: nowrap; color: #fff; transform: translateX(-50%); animation: exTag .25s cubic-bezier(.3,1.6,.5,1) both; }
+.ex-page .ex-passage.is-juste .ex-passage-tag { background: var(--ex-juste); }
+.ex-page .ex-passage.is-faux .ex-passage-tag { background: var(--ex-faux); }
+
+/* Qui suis-je ? : les indices numérotés, la réponse tapée */
+.ex-page .ex-devinette { display: flex; flex-direction: column; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.ex-page .ex-devinette li { display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-radius: 16px; background: #fff; box-shadow: var(--ex-ombre); font-size: 15px; font-weight: 500; line-height: 1.35; color: var(--ex-encre); }
+.ex-page .ex-devinette li.is-neuf { animation: exEntre .35s cubic-bezier(.2,.9,.3,1) both; }
+.ex-page .ex-devinette-saisie input { box-sizing: border-box; width: 100%; height: 56px; padding: 0 18px; border: 2px solid var(--ex-lavande-fort); border-radius: 16px; background: #fff; font: 700 18px 'Poppins', system-ui, sans-serif; color: var(--ex-encre); }
+.ex-page .ex-devinette-saisie input:focus { outline: 3px solid var(--ex-lavande); outline-offset: 1px; }
+.ex-page .ex-devinette-saisie input::placeholder { font-weight: 500; color: var(--rv-doux); }
+.ex-page .ex-devinette-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 12px; }
+.ex-page .ex-aide--rate { color: var(--ex-faux-texte); }
+.ex-page .ex-devinette-reponse { margin: 0; padding: 14px 16px; border-radius: 16px; font-size: 18px; font-weight: 800; text-align: center; }
+.ex-page .ex-devinette-reponse.is-juste { background: var(--ex-juste-pale); color: var(--ex-juste-texte); }
+.ex-page .ex-devinette-reponse.is-faux { background: var(--ex-faux-pale); color: var(--ex-faux-texte); text-decoration: line-through; text-decoration-thickness: 2px; }
+
+/* Trouve le nombre : l'écran de la calculette, puis le pavé */
+.ex-page .ex-calcul { display: flex; flex-direction: column; gap: 12px; padding: 14px; border-radius: 20px; background: #fff; box-shadow: var(--ex-ombre); }
+.ex-page .ex-calcul-valeur { display: flex; align-items: baseline; justify-content: center; gap: 8px; min-height: 64px; padding: 6px 12px; border-radius: 14px; background: #FBF8F5; font: 800 44px/1.2 'Poppins', system-ui, sans-serif; font-variant-numeric: tabular-nums; color: var(--ex-encre); }
+.ex-page .ex-calcul-valeur .is-vide { color: #CFC4BA; }
+.ex-page .ex-calcul-valeur small { font-size: 20px; font-weight: 700; color: var(--rv-doux); }
+.ex-page .ex-calcul.is-juste .ex-calcul-valeur { background: var(--ex-juste-pale); color: var(--ex-juste-texte); }
+.ex-page .ex-calcul.is-faux .ex-calcul-valeur { background: var(--ex-faux-pale); color: var(--ex-faux-texte); }
+.ex-page .ex-calcul.is-faux .ex-calcul-valeur span { text-decoration: line-through; text-decoration-thickness: 3px; }
+.ex-page .ex-pave { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.ex-page .ex-touche { height: 52px; border: 0; border-radius: 14px; background: var(--ex-lavande); font-size: 22px; font-weight: 700; display: flex; align-items: center; justify-content: center; cursor: pointer; touch-action: manipulation; }
+.ex-page .ex-touche:active { transform: translateY(2px); background: #E4DAFB; }
+.ex-page .ex-touche--signe { grid-column: 1 / -1; height: 40px; background: #FBF8F5; font-size: 16px; }
+
 /* ── Ordinateur : la colonne centrale du quiz, des zones plus grandes ── */
 .ex-page.qn-page--large .ex-consigne { font-size: 26px; }
 .ex-page.qn-page--large .ex-bulle { font-size: 17px; padding: 14px 18px; }
@@ -549,4 +602,16 @@
 @media (prefers-reduced-motion: reduce) {
   .ex-page .ex-cadre, .ex-page .ex-carte-tag, .ex-page .ex-paire.is-faux, .ex-page .ex-evenement.is-choisi .ex-rang, .ex-page .ex-memo.is-visible, .ex-page .ex-cl-rangees li { animation: none; }
   .ex-page .ex-carte-coin, .ex-page .ex-carte, .ex-page .ex-vf-carte, .ex-page .ex-cl-carte { transition: none; }
+}
+
+/* Ordinateur : les formats du bloc relu */
+.ex-page.qn-page--large .ex-selection { grid-template-columns: repeat(3, 1fr); }
+.ex-page.qn-page--large .ex-selection .ex-carte { min-height: 110px; font-size: 16px; }
+.ex-page.qn-page--large .ex-cause-carte { font-size: 19px; padding: 20px 26px; }
+.ex-page.qn-page--large .ex-pave { max-width: 360px; width: 100%; margin: 0 auto; }
+.ex-page.qn-page--large .ex-touche:not(:active):hover { background: #E9E0FC; }
+.ex-page.qn-page--large .ex-devinette li { font-size: 16px; }
+.ex-page.qn-page--large .ex-devinette-saisie input { height: 60px; font-size: 19px; }
+@media (prefers-reduced-motion: reduce) {
+  .ex-page .ex-carte-coche, .ex-page .ex-passage-tag, .ex-page .ex-devinette li.is-neuf { animation: none; }
 }

@@ -1,0 +1,136 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "La mortalité",
+      "detail": "Les décès : elle baisse la première pendant la transition démographique.",
+      "cartes": [
+        "Les progrès de la médecine la font baisser",
+        "Une meilleure hygiène la fait baisser",
+        "Une meilleure alimentation la fait baisser",
+        "Celle des enfants de moins d'un an baisse",
+        "Elle est la première à baisser pendant la transition"
+      ]
+    },
+    {
+      "nom": "La natalité",
+      "detail": "Les naissances : elle baisse plus tard, avec les changements de la société.",
+      "cartes": [
+        "La scolarisation des filles la fait baisser",
+        "L'urbanisation la fait baisser",
+        "La contraception la fait baisser",
+        "Le travail des femmes la fait baisser",
+        "Elle baisse à son tour, après la mortalité"
+      ]
+    },
+    {
+      "nom": "L'indice de fécondité",
+      "detail": "Le nombre moyen d'enfants par femme, qui varie beaucoup d'un pays à l'autre.",
+      "cartes": [
+        "Le nombre moyen d'enfants par femme",
+        "Environ 6 enfants par femme au Niger",
+        "Environ 2,2 à 2,3 enfants par femme dans le monde",
+        "Proche de 2 enfants par femme en Inde",
+        "Il en faut environ 2,1 pour renouveler les générations"
+      ]
+    },
+    {
+      "nom": "Le vieillissement",
+      "detail": "L'augmentation de la part des personnes âgées dans la population.",
+      "cartes": [
+        "La part des personnes âgées augmente dans la population",
+        "Environ 3 Japonais sur 10 ont 65 ans ou plus",
+        "Il touche l'Italie, l'Allemagne et la Corée du Sud",
+        "La base de la pyramide se rétrécit, le sommet s'élargit",
+        "Il y a moins d'actifs pour financer les retraites"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "la baisse de la mortalité",
+      "carte": "Les progrès de la médecine",
+      "role": "cause",
+      "explication": "La médecine, l'hygiène et une meilleure alimentation font reculer les décès."
+    },
+    {
+      "fait": "la baisse de la mortalité",
+      "carte": "La population augmente très vite",
+      "role": "consequence",
+      "explication": "Quand la mortalité baisse alors que la natalité reste forte, la population augmente très vite."
+    },
+    {
+      "fait": "la baisse de la natalité",
+      "carte": "La scolarisation des filles",
+      "role": "cause",
+      "explication": "Les filles scolarisées se marient plus tard et ont moins d'enfants."
+    },
+    {
+      "fait": "la baisse de la natalité",
+      "carte": "L'usage de la contraception",
+      "role": "cause",
+      "explication": "La contraception permet de limiter le nombre de naissances : c'est une cause de la baisse de la natalité."
+    },
+    {
+      "fait": "la baisse de la natalité",
+      "carte": "L'accroissement naturel diminue",
+      "role": "consequence",
+      "explication": "Quand la natalité baisse à son tour, l'écart avec la mortalité se réduit : l'accroissement naturel diminue."
+    }
+  ],
+  "etiquettes": [],
+  "devinettes": [
+    {
+      "reponse": "Pyramide des âges",
+      "acceptees": ["Pyramide des âges", "La pyramide des âges", "Pyramide"],
+      "indices": [
+        "Je suis un graphique qui décrit la population d'un pays.",
+        "Les plus jeunes sont en bas, les plus vieux en haut.",
+        "Les hommes sont à ma gauche, les femmes à ma droite."
+      ],
+      "explication": "La pyramide des âges représente la population par âge et par sexe, les hommes à gauche et les femmes à droite."
+    },
+    {
+      "reponse": "Indice de fécondité",
+      "acceptees": ["Indice de fécondité", "L'indice de fécondité", "Fécondité"],
+      "indices": [
+        "Je suis un nombre qui permet de comparer les pays.",
+        "Au Niger, je vaux environ 6.",
+        "Je mesure le nombre moyen d'enfants par femme."
+      ],
+      "explication": "L'indice de fécondité est le nombre moyen d'enfants par femme : environ 6 au Niger."
+    },
+    {
+      "reponse": "Transition démographique",
+      "acceptees": ["Transition démographique", "La transition démographique", "Transition"],
+      "indices": [
+        "Je touche tous les pays, mais pas en même temps.",
+        "Je commence par une baisse de la mortalité.",
+        "Je suis le passage d'une natalité et d'une mortalité fortes à une natalité et une mortalité faibles."
+      ],
+      "explication": "La transition démographique est le passage d'une natalité et d'une mortalité fortes à une natalité et une mortalité faibles."
+    },
+    {
+      "reponse": "Chine",
+      "acceptees": ["Chine", "La Chine"],
+      "indices": [
+        "Je suis un pays dont l'État a agi sur les naissances.",
+        "De 1979 à 2015, j'ai limité les naissances à un enfant par couple.",
+        "J'ai abandonné cette politique en 2015, car ma population vieillissait trop vite."
+      ],
+      "explication": "La Chine a imposé la politique de l'enfant unique de 1979 à 2015, puis l'a abandonnée à cause du vieillissement."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Les étapes de la transition démographique",
+      "etapes": [
+        "Natalité et mortalité sont toutes deux fortes",
+        "La mortalité baisse et la population augmente très vite",
+        "La natalité baisse à son tour",
+        "Natalité et mortalité sont faibles et proches"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,152 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Le cerveau",
+      "detail": "Le centre nerveux qui décide et commande les mouvements volontaires.",
+      "cartes": [
+        "Il élabore le message moteur d'un mouvement volontaire",
+        "Son hémisphère gauche commande les muscles de la main droite",
+        "Son hémisphère droit lésé peut paralyser le côté gauche",
+        "Il analyse l'information venue de l'œil",
+        "Distrait par un téléphone, il traite l'information plus lentement"
+      ]
+    },
+    {
+      "nom": "La moelle épinière",
+      "detail": "Le centre nerveux des réflexes, par où passent aussi les messages moteurs.",
+      "cartes": [
+        "Centre nerveux du réflexe rotulien",
+        "Le message moteur y descend avant d'atteindre le nerf moteur",
+        "Sa lésion paralyse les parties du corps situées en dessous",
+        "Elle commande une réponse rapide, automatique et involontaire",
+        "Lésée en bas du dos, elle laisse les bras bouger"
+      ]
+    },
+    {
+      "nom": "Un muscle",
+      "detail": "L'organe qui se contracte et tire sur un os pour produire le mouvement.",
+      "cartes": [
+        "Il se raccourcit et se gonfle quand il se contracte",
+        "Il ne peut que tirer sur l'os, jamais le pousser",
+        "Le biceps, qui durcit quand on plie le bras",
+        "Des tendons l'attachent aux os",
+        "Il se relâche quand son antagoniste se contracte"
+      ]
+    },
+    {
+      "nom": "Une articulation",
+      "detail": "La zone de contact entre deux os mobiles, autour de laquelle l'os pivote.",
+      "cartes": [
+        "Zone de contact entre deux os mobiles",
+        "Les os y sont reliés par des ligaments",
+        "Du cartilage y recouvre les os pour faciliter le glissement",
+        "Le coude en est un exemple",
+        "L'avant-bras pivote autour d'elle quand on plie le bras"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "la contraction du biceps",
+      "carte": "Un message nerveux moteur arrive au biceps",
+      "role": "cause",
+      "explication": "Le message moteur, conduit par le nerf moteur, commande la contraction du muscle."
+    },
+    {
+      "fait": "la contraction du biceps",
+      "carte": "Le cerveau décide de plier le bras",
+      "role": "cause",
+      "explication": "Un mouvement volontaire est décidé et commandé par le cerveau, qui envoie le message moteur."
+    },
+    {
+      "fait": "la contraction du biceps",
+      "carte": "Le biceps tire sur l'os de l'avant-bras",
+      "role": "consequence",
+      "explication": "En se contractant, le muscle tire sur l'os auquel il est attaché par un tendon."
+    },
+    {
+      "fait": "la contraction du biceps",
+      "carte": "L'avant-bras pivote autour du coude",
+      "role": "consequence",
+      "explication": "L'os tiré par le muscle pivote autour de l'articulation : c'est le mouvement."
+    },
+    {
+      "fait": "l'allongement du temps de réaction",
+      "carte": "Une grande fatigue de la personne",
+      "role": "cause",
+      "explication": "La fatigue, l'alcool ou les distractions augmentent le temps de réaction."
+    },
+    {
+      "fait": "l'allongement du temps de réaction",
+      "carte": "Un conducteur distrait par son téléphone",
+      "role": "cause",
+      "explication": "La distraction ralentit le traitement de l'information par le cerveau : le temps de réaction s'allonge."
+    }
+  ],
+  "etiquettes": [],
+  "devinettes": [
+    {
+      "reponse": "Tendon",
+      "acceptees": ["Tendon", "Le tendon", "Tendons"],
+      "indices": [
+        "Je fais partie de l'appareil locomoteur.",
+        "Je suis attaché à un muscle.",
+        "Je relie ce muscle à un os, et non deux os entre eux."
+      ],
+      "explication": "Le tendon attache le muscle à l'os, alors que le ligament relie deux os entre eux."
+    },
+    {
+      "reponse": "Moelle épinière",
+      "acceptees": ["Moelle épinière", "La moelle épinière", "Moelle"],
+      "indices": [
+        "Je suis un centre nerveux.",
+        "Je suis le centre nerveux du réflexe rotulien.",
+        "Si je suis lésée, les parties du corps situées en dessous sont paralysées."
+      ],
+      "explication": "La moelle épinière commande les réflexes, et sa lésion peut paralyser le corps en dessous."
+    },
+    {
+      "reponse": "Biceps",
+      "acceptees": ["Biceps", "Le biceps"],
+      "indices": [
+        "Je suis un muscle.",
+        "Je me contracte quand on plie l'avant-bras.",
+        "Mon antagoniste est le triceps."
+      ],
+      "explication": "Quand on plie le bras, le biceps se contracte et le triceps se relâche."
+    },
+    {
+      "reponse": "Hémisphère gauche",
+      "acceptees": ["Hémisphère gauche", "L'hémisphère gauche", "Hémisphère cérébral gauche"],
+      "indices": [
+        "Je suis une moitié du cerveau.",
+        "Je commande les muscles du côté droit du corps.",
+        "Si je suis lésé, la main droite risque d'être paralysée."
+      ],
+      "explication": "Chaque hémisphère commande le côté opposé du corps : l'hémisphère gauche commande le côté droit."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Le trajet du message nerveux quand on attrape un ballon",
+      "etapes": [
+        "L'œil capte l'image du ballon qui arrive",
+        "Un nerf sensitif transmet le message au cerveau",
+        "Le cerveau élabore un message moteur",
+        "Le message moteur descend dans la moelle épinière",
+        "Un nerf moteur le conduit jusqu'au muscle"
+      ]
+    },
+    {
+      "titre": "Comment le biceps plie le bras",
+      "etapes": [
+        "Un message moteur arrive au biceps",
+        "Le biceps se contracte : il se raccourcit et se gonfle",
+        "Il tire sur l'os de l'avant-bras par son tendon",
+        "L'avant-bras pivote autour du coude et le bras se plie"
+      ]
+    }
+  ]
+}

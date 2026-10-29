@@ -1,0 +1,146 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Les premières années, 1799-1802",
+      "detail": "La prise du pouvoir par Bonaparte et les premières institutions qu'il crée.",
+      "cartes": [
+        "Un général renverse le Directoire par un coup d'État",
+        "Les préfets sont créés en 1800 pour représenter l'État",
+        "La Banque de France est fondée en 1800",
+        "Un accord de 1801 avec le pape organise l'Église catholique",
+        "Les lycées et la Légion d'honneur sont créés en 1802"
+      ]
+    },
+    {
+      "nom": "Un régime autoritaire",
+      "detail": "Les moyens par lesquels l'empereur concentre le pouvoir et contrôle l'opinion.",
+      "cartes": [
+        "L'empereur concentre tous les pouvoirs entre ses mains",
+        "La presse est censurée par le pouvoir",
+        "La police surveille les opposants",
+        "Les assemblées n'ont pas de réel pouvoir",
+        "Un tableau de David glorifie la puissance de l'empereur"
+      ]
+    },
+    {
+      "nom": "Les guerres de 1805 à 1811",
+      "detail": "Les victoires, la défaite navale et les résistances des peuples pendant l'apogée de l'Empire.",
+      "cartes": [
+        "Napoléon bat les Autrichiens et les Russes à Austerlitz",
+        "La Grande Armée remporte la victoire d'Iéna",
+        "La flotte française est battue par les Britanniques à Trafalgar",
+        "En 1808, les Espagnols se soulèvent contre l'occupation française",
+        "Vers 1811, l'Empire domine une grande partie de l'Europe"
+      ]
+    },
+    {
+      "nom": "La chute de l'Empire",
+      "detail": "Du désastre de la campagne de Russie à la mort de Napoléon en exil.",
+      "cartes": [
+        "La campagne de Russie de 1812 est un désastre",
+        "Napoléon abdique en 1814 et part pour l'île d'Elbe",
+        "Napoléon revient de l'île d'Elbe pour les Cent-Jours",
+        "Napoléon est vaincu à Waterloo le 18 juin 1815",
+        "Napoléon meurt en exil à Sainte-Hélène en 1821"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "la chute de l'Empire",
+      "carte": "Le désastre de la campagne de Russie en 1812",
+      "role": "cause",
+      "explication": "La Grande Armée est détruite en Russie ; battu, Napoléon abdique une première fois en 1814."
+    },
+    {
+      "fait": "la chute de l'Empire",
+      "carte": "La défaite de Napoléon à Waterloo le 18 juin 1815",
+      "role": "cause",
+      "explication": "Waterloo met fin définitivement à l'Empire pendant les Cent-Jours."
+    },
+    {
+      "fait": "la chute de l'Empire",
+      "carte": "L'exil de Napoléon à Sainte-Hélène",
+      "role": "consequence",
+      "explication": "Après sa défaite, Napoléon est exilé à Sainte-Hélène, où il meurt en 1821."
+    },
+    {
+      "fait": "la chute de l'Empire",
+      "carte": "Le retour des Bourbons avec Louis XVIII",
+      "role": "consequence",
+      "explication": "Après la chute de Napoléon, les Bourbons reviennent au pouvoir en France."
+    },
+    {
+      "fait": "la chute de l'Empire",
+      "carte": "Les souverains vainqueurs redessinent la carte de l'Europe au congrès de Vienne",
+      "role": "consequence",
+      "explication": "Le congrès de Vienne (1814-1815) réorganise l'Europe après la défaite de Napoléon."
+    }
+  ],
+  "etiquettes": [],
+  "devinettes": [
+    {
+      "reponse": "Napoléon Bonaparte",
+      "acceptees": ["Napoléon", "Bonaparte", "Napoléon Bonaparte", "Napoléon Ier", "Napoléon 1er"],
+      "indices": [
+        "Je suis un général victorieux.",
+        "Je renverse le Directoire par un coup d'État le 18 brumaire 1799.",
+        "Je suis sacré empereur à Notre-Dame le 2 décembre 1804, puis je meurs en exil à Sainte-Hélène."
+      ],
+      "explication": "Napoléon Bonaparte prend le pouvoir en 1799, devient empereur en 1804 et tombe en 1815."
+    },
+    {
+      "reponse": "Un préfet",
+      "acceptees": ["Préfet", "Un préfet", "Le préfet", "Les préfets", "Préfets"],
+      "indices": [
+        "Je suis une fonction créée en 1800.",
+        "Le pouvoir central me nomme.",
+        "Je représente l'État dans un département, aujourd'hui encore."
+      ],
+      "explication": "Le préfet, créé en 1800 et nommé par le pouvoir, représente l'État dans chaque département."
+    },
+    {
+      "reponse": "Waterloo",
+      "acceptees": ["Waterloo", "La bataille de Waterloo", "Bataille de Waterloo"],
+      "indices": [
+        "Je suis une bataille de l'Empire.",
+        "Je me déroule le 18 juin 1815.",
+        "Napoléon y est vaincu : je mets fin définitivement à l'Empire."
+      ],
+      "explication": "À Waterloo, le 18 juin 1815, Napoléon est battu : c'est la fin définitive de l'Empire."
+    },
+    {
+      "reponse": "Le Code civil",
+      "acceptees": ["Code civil", "Le Code civil", "Code Napoléon", "Le Code Napoléon"],
+      "indices": [
+        "Je suis un recueil de lois.",
+        "On me publie en 1804.",
+        "Je garantis l'égalité devant la loi et la propriété, mais je place la femme sous l'autorité de son mari."
+      ],
+      "explication": "Le Code civil de 1804 garantit l'égalité devant la loi et la propriété, mais soumet la femme à son mari."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Le parcours de Napoléon Bonaparte",
+      "etapes": [
+        "Il renverse le Directoire par le coup d'État du 18 brumaire",
+        "Il est sacré empereur à Notre-Dame",
+        "Il remporte la victoire d'Austerlitz",
+        "Il subit un désastre pendant la campagne de Russie",
+        "Il est vaincu à Waterloo puis exilé à Sainte-Hélène"
+      ]
+    },
+    {
+      "titre": "Les étapes de l'analyse d'un tableau de propagande",
+      "etapes": [
+        "Présenter le document : le peintre, le titre et l'événement représenté",
+        "Décrire ce que l'on voit : personnages, positions, lumière",
+        "Repérer ce que le peintre a embelli ou ajouté",
+        "Conclure sur le message : la glorification de l'empereur"
+      ]
+    }
+  ]
+}

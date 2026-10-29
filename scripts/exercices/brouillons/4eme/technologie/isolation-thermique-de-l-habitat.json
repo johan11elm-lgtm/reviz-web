@@ -1,0 +1,211 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Une fuite de chaleur",
+      "detail": "Un endroit par lequel la chaleur d'un logement s'échappe vers l'extérieur.",
+      "cartes": [
+        "Le toit d'une maison non isolée",
+        "Les murs d'une maison mal isolée",
+        "L'air chaud évacué avec l'air renouvelé",
+        "Les fenêtres, environ 10 à 15 % des pertes",
+        "Une zone où l'isolation est interrompue"
+      ]
+    },
+    {
+      "nom": "Un bon isolant",
+      "detail": "Une matière ou une paroi qui laisse très peu passer la chaleur.",
+      "cartes": [
+        "Le polystyrène (λ ≈ 0,035)",
+        "La laine de verre (λ ≈ 0,04)",
+        "Un matériau dont λ est très petit",
+        "Une couche qui emprisonne beaucoup d'air immobile",
+        "Une paroi dont la résistance thermique R est grande"
+      ]
+    },
+    {
+      "nom": "Un mauvais isolant",
+      "detail": "Une matière ou une paroi qui laisse facilement passer la chaleur.",
+      "cartes": [
+        "L'acier (λ ≈ 50)",
+        "Le béton (λ ≈ 1,7)",
+        "Le verre (λ ≈ 1)",
+        "Un matériau dont λ est très grand"
+      ]
+    },
+    {
+      "nom": "Une solution pour économiser",
+      "detail": "Une action qui limite les pertes de chaleur ou la consommation d'énergie.",
+      "cartes": [
+        "Isoler les combles",
+        "Poser du double vitrage",
+        "Installer une VMC double flux",
+        "Chauffer les pièces à vivre à 19 °C",
+        "Construire un logement neuf selon la RE2020"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "les pertes de chaleur d'un logement",
+      "carte": "Un pont thermique",
+      "role": "cause",
+      "explication": "Là où l'isolation est interrompue, la chaleur s'échappe davantage : les ponts thermiques aggravent les pertes."
+    },
+    {
+      "fait": "les pertes de chaleur d'un logement",
+      "carte": "Un toit sans isolation",
+      "role": "cause",
+      "explication": "Dans une maison mal isolée, le toit représente environ 25 à 30 % des pertes de chaleur."
+    },
+    {
+      "fait": "les pertes de chaleur d'un logement",
+      "carte": "Une consommation de chauffage plus élevée",
+      "role": "consequence",
+      "explication": "Plus la chaleur s'échappe, plus il faut chauffer pour garder la même température."
+    },
+    {
+      "fait": "l'isolation d'un logement",
+      "carte": "Une baisse de la consommation d'énergie",
+      "role": "consequence",
+      "explication": "Isoler limite les pertes de chaleur et réduit la consommation d'énergie."
+    },
+    {
+      "fait": "l'isolation d'un logement",
+      "carte": "Un meilleur confort thermique",
+      "role": "consequence",
+      "explication": "Isoler un logement améliore le confort en limitant les pertes de chaleur."
+    }
+  ],
+  "etiquettes": [
+    {
+      "consigne": "Quel mode de transmission de la chaleur décrit le passage en couleur ?",
+      "texte": "En hiver, [la chaleur traverse le mur, d'une face à l'autre,] et quitte la pièce.",
+      "choix": [
+        "Conduction",
+        "Convection",
+        "Rayonnement"
+      ],
+      "bonne": 0,
+      "explication": "La chaleur qui traverse un mur d'une face à l'autre se transmet par conduction, à travers la matière."
+    },
+    {
+      "consigne": "Quel mode de transmission de la chaleur décrit le passage en couleur ?",
+      "texte": "Dans le salon, [l'air chaud monte vers le plafond] pendant que l'air froid descend.",
+      "choix": [
+        "Conduction",
+        "Convection",
+        "Rayonnement"
+      ],
+      "bonne": 1,
+      "explication": "L'air est un fluide en mouvement : la chaleur se transmet par convection."
+    },
+    {
+      "consigne": "Quel mode de transmission de la chaleur décrit le passage en couleur ?",
+      "texte": "Sur la plage, [tu sens la chaleur du Soleil sur ta peau] sans rien toucher.",
+      "choix": [
+        "Conduction",
+        "Convection",
+        "Rayonnement"
+      ],
+      "bonne": 2,
+      "explication": "La chaleur du Soleil arrive sans contact : c'est du rayonnement."
+    },
+    {
+      "consigne": "Quel mode de transmission de la chaleur décrit le passage en couleur ?",
+      "texte": "On chauffe l'extrémité d'une barre d'acier : [la chaleur se propage dans la matière jusqu'à l'autre bout].",
+      "choix": [
+        "Conduction",
+        "Convection",
+        "Rayonnement"
+      ],
+      "bonne": 0,
+      "explication": "La chaleur se propage à travers la matière solide : c'est de la conduction."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Pont thermique",
+      "acceptees": [
+        "Pont thermique",
+        "Un pont thermique",
+        "Ponts thermiques"
+      ],
+      "indices": [
+        "Je suis une zone d'un logement.",
+        "Chez moi, l'isolation est interrompue.",
+        "La chaleur s'échappe davantage par moi."
+      ],
+      "explication": "Un pont thermique est une zone où l'isolation est interrompue et où la chaleur s'échappe davantage."
+    },
+    {
+      "reponse": "Conductivité thermique",
+      "acceptees": [
+        "Conductivité thermique",
+        "La conductivité thermique",
+        "Conductivité",
+        "Lambda",
+        "λ"
+      ],
+      "indices": [
+        "Je suis une grandeur propre à chaque matériau.",
+        "Je m'exprime en W/(m·K).",
+        "Plus je suis petite, mieux le matériau isole."
+      ],
+      "explication": "La conductivité thermique λ mesure la facilité avec laquelle la chaleur traverse un matériau : plus elle est petite, plus il isole."
+    },
+    {
+      "reponse": "Thermographie",
+      "acceptees": [
+        "Thermographie",
+        "Une thermographie",
+        "Image thermique",
+        "Thermogramme"
+      ],
+      "indices": [
+        "Je suis une image.",
+        "Je montre en couleurs la température des surfaces.",
+        "On me prend avec une caméra infrarouge."
+      ],
+      "explication": "La thermographie est une image des températures prise avec une caméra infrarouge : elle révèle les fuites de chaleur."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "Une couche de laine de verre mesure 0,12 m d'épaisseur. Sa conductivité thermique est λ = 0,04 W/(m·K). Quelle est sa résistance thermique R ?",
+      "reponse": 3,
+      "unite": "m²·K/W",
+      "tolerance": 0,
+      "explication": "R = e ÷ λ = 0,12 ÷ 0,04 = 3 m²·K/W."
+    },
+    {
+      "question": "Une plaque de polystyrène mesure 0,14 m d'épaisseur. Sa conductivité thermique est λ = 0,035 W/(m·K). Quelle est sa résistance thermique R ?",
+      "reponse": 4,
+      "unite": "m²·K/W",
+      "tolerance": 0,
+      "explication": "R = e ÷ λ = 0,14 ÷ 0,035 = 4 m²·K/W."
+    },
+    {
+      "question": "Un mur en béton mesure 0,34 m d'épaisseur. Sa conductivité thermique est λ = 1,7 W/(m·K). Quelle est sa résistance thermique R ?",
+      "reponse": 0.2,
+      "unite": "m²·K/W",
+      "tolerance": 0,
+      "explication": "R = e ÷ λ = 0,34 ÷ 1,7 = 0,2 m²·K/W : le béton isole très mal."
+    },
+    {
+      "question": "Une maison perd 12 000 kWh de chaleur par an. Le toit est responsable de 25 % de ces pertes. Combien de kWh s'échappent par le toit ?",
+      "reponse": 3000,
+      "unite": "kWh",
+      "tolerance": 0,
+      "explication": "25 % de 12 000 = 12 000 × 25 ÷ 100 = 3 000 kWh."
+    },
+    {
+      "question": "On admet qu'une baisse de 1 °C réduit de 7 % la dépense de chauffage. La dépense est de 800 € par an. De combien d'euros baisse-t-elle avec 1 °C de moins ?",
+      "reponse": 56,
+      "unite": "€",
+      "tolerance": 0,
+      "explication": "7 % de 800 = 800 × 7 ÷ 100 = 56 €."
+    }
+  ],
+  "etapes": []
+}

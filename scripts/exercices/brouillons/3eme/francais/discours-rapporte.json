@@ -1,0 +1,185 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Discours direct",
+      "detail": "Les paroles sont citées telles quelles, entre guillemets, avec leurs temps et leurs pronoms.",
+      "cartes": [
+        "Il dit : « Je viendrai demain. »",
+        "Elle cria : « Attention ! »",
+        "« Je viendrai, dit-il, demain. »",
+        "Le professeur entra. Il ordonna : « Taisez-vous ! »",
+        "Léa demanda : « Viens-tu avec nous ? »"
+      ]
+    },
+    {
+      "nom": "Discours indirect",
+      "detail": "Les paroles sont intégrées au récit dans une subordonnée, sans guillemets, avec des transpositions.",
+      "cartes": [
+        "Il a dit qu'il viendrait le lendemain",
+        "Elle demanda s'il avait fini",
+        "Le professeur dit aux élèves de se taire",
+        "Mon père annonce que nous partons demain",
+        "Marie arriva. Elle lui demanda où il habitait"
+      ]
+    },
+    {
+      "nom": "Discours indirect libre",
+      "detail": "La pensée ou la parole se fond dans le récit, sans verbe introducteur ni « que » ; les questions et les exclamations restent.",
+      "cartes": [
+        "Il hésitait. Partirait-il demain ? Quelle folie !",
+        "Elle regardait la route. Où irait-elle, maintenant ?",
+        "Le soldat soupirait. Reverrait-il un jour son village ?",
+        "Il l'avait trahie. Comment pourrait-elle encore lui faire confiance ?",
+        "Il était trop tard. Pourquoi avait-il attendu si longtemps ?"
+      ]
+    },
+    {
+      "nom": "Discours narrativisé",
+      "detail": "Le narrateur résume les paroles : il dit qu'on a parlé, sans les citer ni en donner le contenu.",
+      "cartes": [
+        "Il parla longuement de son voyage",
+        "Elle raconta sa journée à ses parents",
+        "Le guide expliqua l'histoire du château aux touristes",
+        "Le dîner commença. Ils discutèrent pendant des heures",
+        "Le témoin décrivit l'accident aux policiers"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Quel type de discours rapporté est en couleur ?",
+      "texte": "La nuit était tombée. [Où dormirait-il, ce soir ?] Il n'avait pas de toit.",
+      "choix": [
+        "Discours direct",
+        "Discours indirect",
+        "Discours indirect libre",
+        "Discours narrativisé"
+      ],
+      "bonne": 2,
+      "explication": "Il n'y a ni guillemets, ni verbe introducteur, ni « que » : la question du personnage est fondue dans le récit, au conditionnel et à la 3e personne. C'est du discours indirect libre."
+    },
+    {
+      "consigne": "Quel type de discours rapporté est en couleur ?",
+      "texte": "Le capitaine se tourna vers l'équipage : [« Levez l'ancre ! »] Les marins obéirent.",
+      "choix": [
+        "Discours direct",
+        "Discours indirect",
+        "Discours indirect libre",
+        "Discours narrativisé"
+      ],
+      "bonne": 0,
+      "explication": "Les deux-points et les guillemets annoncent les paroles exactes du capitaine : c'est du discours direct."
+    },
+    {
+      "consigne": "Quel type de discours rapporté est en couleur ?",
+      "texte": "Le garde lui demanda [s'il avait un billet].",
+      "choix": [
+        "Discours direct",
+        "Discours indirect",
+        "Discours indirect libre",
+        "Discours narrativisé"
+      ],
+      "bonne": 1,
+      "explication": "La question est intégrée dans une subordonnée introduite par « si », après le verbe « demanda », sans guillemets : c'est du discours indirect."
+    },
+    {
+      "consigne": "Quel type de discours rapporté est en couleur ?",
+      "texte": "À la fin du repas, [le grand-père raconta sa jeunesse] aux enfants.",
+      "choix": [
+        "Discours direct",
+        "Discours indirect",
+        "Discours indirect libre",
+        "Discours narrativisé"
+      ],
+      "bonne": 3,
+      "explication": "Le narrateur dit que le grand-père a parlé, mais il ne cite pas ses paroles et n'en donne pas le contenu : c'est du discours narrativisé."
+    },
+    {
+      "consigne": "Quel type de discours rapporté est en couleur ?",
+      "texte": "Il regardait les nuages. [Pleuvrait-il encore demain ?] Il n'avait pas pris son parapluie.",
+      "choix": [
+        "Discours direct",
+        "Discours indirect",
+        "Discours indirect libre",
+        "Discours narrativisé"
+      ],
+      "bonne": 2,
+      "explication": "Pas de verbe introducteur ni de guillemets, mais une question du personnage transposée au conditionnel et à la 3e personne : c'est du discours indirect libre."
+    },
+    {
+      "consigne": "Quel type de discours rapporté est en couleur ?",
+      "texte": "Sa mère l'appela. Il [répondit qu'il arrivait tout de suite].",
+      "choix": [
+        "Discours direct",
+        "Discours indirect",
+        "Discours indirect libre",
+        "Discours narrativisé"
+      ],
+      "bonne": 1,
+      "explication": "Le verbe de parole « répondit » est suivi de « que » et d'une subordonnée à l'imparfait, sans guillemets : c'est du discours indirect."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Incise",
+      "acceptees": [
+        "Une incise",
+        "L'incise",
+        "Proposition incise",
+        "La proposition incise"
+      ],
+      "indices": [
+        "Je suis un petit groupe de mots avec un verbe.",
+        "Mon sujet est placé après mon verbe.",
+        "Je me glisse au milieu de paroles citées entre guillemets, comme dans « dit-il »."
+      ],
+      "explication": "L'incise est une courte proposition insérée dans les paroles du discours direct, avec le sujet inversé : « dit-il »."
+    },
+    {
+      "reponse": "Discours indirect libre",
+      "acceptees": [
+        "Indirect libre",
+        "Le discours indirect libre",
+        "Style indirect libre"
+      ],
+      "indices": [
+        "Je rapporte des paroles ou des pensées.",
+        "Je n'ai ni guillemets, ni verbe de parole, ni « que ».",
+        "Je mêle la pensée du personnage à la voix du narrateur, en gardant ses questions et ses exclamations."
+      ],
+      "explication": "Le discours indirect libre fait entendre la pensée du personnage de l'intérieur, sans verbe introducteur."
+    },
+    {
+      "reponse": "Concordance des temps",
+      "acceptees": [
+        "La concordance des temps",
+        "Concordance"
+      ],
+      "indices": [
+        "Je concerne les verbes.",
+        "Je m'applique quand le verbe qui annonce les paroles est au passé.",
+        "Avec moi, le présent devient imparfait, le passé composé devient plus-que-parfait et le futur devient conditionnel."
+      ],
+      "explication": "La concordance des temps adapte les temps des paroles quand le verbe introducteur est au passé."
+    },
+    {
+      "reponse": "Verbe introducteur",
+      "acceptees": [
+        "Le verbe introducteur",
+        "Verbe de parole",
+        "Un verbe de parole",
+        "Le verbe de parole"
+      ],
+      "indices": [
+        "Je suis un mot qui se conjugue.",
+        "Je viens avant les paroles rapportées et je les annonce.",
+        "Mes exemples sont dire, demander, murmurer et s'écrier."
+      ],
+      "explication": "Le verbe introducteur est un verbe de parole qui annonce des paroles, comme dire, demander ou s'écrier."
+    }
+  ],
+  "calculs": [],
+  "etapes": []
+}

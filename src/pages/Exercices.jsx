@@ -49,7 +49,8 @@ export default function Exercices() {
 
 /**
  * Exercices en jeu (29/10) : une séance de 10 exercices tirés du chapitre, tous formats mélangés
- * (4 coins, Intrus, Trois indices, Définition, Paires, Chronologie, Année, Quiz). Même cadre pour
+ * (4 coins, Intrus, Trois indices, Définition, Paires, Chronologie, Année, Quiz, et ceux du bloc
+ * relu quand le chapitre en a un : Trouve le nombre, Qui suis-je ?, Étiquette…). Même cadre pour
  * tous, puis la feuille de correction du quiz. En fin de séance, le score est enregistré (fiche
  * chapitre) avec les exercices à revoir.
  */
@@ -216,6 +217,10 @@ function Seance({ ai, seance, nouvelle }) {
     ? (nbErreurs === 0 ? 'Mémory sans erreur' : resultat?.juste ? `Mémory fini, avec ${erreursTexte}` : `Mémory fini, mais avec ${erreursTexte}`)
     : ex.type === 'classement'
     ? (resultat?.juste ? 'Tout est bien rangé' : `${nbErreurs} carte${nbErreurs > 1 ? 's' : ''} mal rangée${nbErreurs > 1 ? 's' : ''}`)
+    : ex.type === 'selection'
+    ? (resultat?.juste ? 'Toutes les bonnes cartes' : `${nbErreurs} carte${nbErreurs > 1 ? 's' : ''} de travers`)
+    : ex.type === 'devinette' && resultat?.juste
+    ? `Trouvé avec ${resultat.indices} indice${resultat.indices > 1 ? 's' : ''}`
     : verdict === 'juste' ? 'Bonne réponse' : 'Pas tout à fait'
   // Les formats à plusieurs éléments montrent la correction complète, pas une « bonne réponse ».
   const bonneSeule = !['paires', 'memory', 'classement'].includes(ex.type)

@@ -1,0 +1,147 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Le quotidien des soldats",
+      "detail": "Ce que vivent les hommes au front, dans les tranchées, de 1914 à 1918.",
+      "cartes": [
+        "Les poilus vivent dans la boue, avec poux et rats",
+        "Les bombardements d'artillerie frappent les hommes dans les tranchées",
+        "Les gaz sont utilisés à partir de 1915",
+        "En 1917, des Français épuisés se mutinent",
+        "Environ 300 000 hommes meurent à Verdun en 1916"
+      ]
+    },
+    {
+      "nom": "La mobilisation de l'arrière",
+      "detail": "Comment toute la société, loin du front, participe à l'effort de la guerre totale.",
+      "cartes": [
+        "Les femmes remplacent les hommes partis au front",
+        "L'État lance des emprunts nationaux",
+        "La propagande et la censure entretiennent le moral",
+        "Toute l'économie du pays produit pour la guerre",
+        "La France fait aussi appel à des travailleurs des colonies"
+      ]
+    },
+    {
+      "nom": "Le génocide des Arméniens",
+      "detail": "L'extermination d'un peuple organisée par le gouvernement de l'Empire ottoman en 1915-1916.",
+      "cartes": [
+        "Le gouvernement Jeune-Turc organise l'extermination d'un peuple",
+        "Des centaines de personnes sont arrêtées à Constantinople en 1915",
+        "Les déportés sont envoyés vers les déserts de Syrie",
+        "Environ 1,2 à 1,5 million de personnes sont tuées",
+        "Le juriste Raphaël Lemkin définit ce crime en 1944"
+      ]
+    },
+    {
+      "nom": "La sortie de guerre",
+      "detail": "Les révolutions russes, l'armistice et la paix qui redessinent l'Europe.",
+      "cartes": [
+        "Les bolcheviks de Lénine prennent le pouvoir en octobre 1917",
+        "L'armistice est signé à Rethondes le 11 novembre 1918",
+        "Le traité de Versailles déclare l'Allemagne responsable",
+        "Les empires austro-hongrois, ottoman et russe disparaissent",
+        "La Société des Nations est créée pour garantir la paix"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "la Première Guerre mondiale",
+      "carte": "L'assassinat de l'archiduc François-Ferdinand à Sarajevo",
+      "role": "cause",
+      "explication": "L'attentat du 28 juin 1914 entraîne la déclaration de guerre début août 1914."
+    },
+    {
+      "fait": "la guerre de position",
+      "carte": "L'avancée allemande est arrêtée à la bataille de la Marne",
+      "role": "cause",
+      "explication": "Après la Marne, en septembre 1914, les armées s'enterrent dans des tranchées et le front ne bouge presque plus."
+    },
+    {
+      "fait": "la Première Guerre mondiale",
+      "carte": "Environ 10 millions de soldats morts",
+      "role": "consequence",
+      "explication": "La guerre fait environ 10 millions de morts parmi les soldats, dont 1,4 million de Français."
+    },
+    {
+      "fait": "la Première Guerre mondiale",
+      "carte": "La disparition des empires austro-hongrois, ottoman et russe",
+      "role": "consequence",
+      "explication": "À la fin de la guerre, ces trois empires disparaissent et de nouveaux États naissent."
+    },
+    {
+      "fait": "la Première Guerre mondiale",
+      "carte": "La création de la Société des Nations",
+      "role": "consequence",
+      "explication": "La SDN est créée après la guerre pour garantir la paix."
+    }
+  ],
+  "etiquettes": [],
+  "devinettes": [
+    {
+      "reponse": "Verdun",
+      "acceptees": ["Verdun", "La bataille de Verdun", "Bataille de Verdun"],
+      "indices": [
+        "Je suis le lieu d'une bataille d'usure.",
+        "Ma bataille dure de février à décembre 1916.",
+        "On compte environ 300 000 morts français et allemands à cause de moi."
+      ],
+      "explication": "Verdun (1916) est un symbole de la guerre d'usure : environ 300 000 morts en dix mois."
+    },
+    {
+      "reponse": "Un poilu",
+      "acceptees": ["Poilu", "Un poilu", "Le poilu", "Les poilus", "Poilus"],
+      "indices": [
+        "Je suis un combattant de 1914-1918.",
+        "Je vis dans les tranchées, dans la boue, avec les poux et les rats.",
+        "Mon surnom désigne les soldats français de cette guerre."
+      ],
+      "explication": "« Poilu » est le surnom donné aux soldats français de la Première Guerre mondiale."
+    },
+    {
+      "reponse": "Lénine",
+      "acceptees": ["Lénine", "Lenine", "Vladimir Lénine", "Vladimir Ilitch Lénine"],
+      "indices": [
+        "Je suis un révolutionnaire russe.",
+        "Je dirige les bolcheviks.",
+        "En octobre 1917, je prends le pouvoir en Russie et je fais ensuite signer la paix avec l'Allemagne."
+      ],
+      "explication": "Lénine, chef des bolcheviks, prend le pouvoir en octobre 1917 et sort la Russie de la guerre."
+    },
+    {
+      "reponse": "Le traité de Versailles",
+      "acceptees": ["Versailles", "Traité de Versailles", "Le traité de Versailles"],
+      "indices": [
+        "Je fixe la paix après la fin des combats.",
+        "On me signe le 28 juin 1919.",
+        "Je déclare l'Allemagne responsable de la guerre et je limite son armée."
+      ],
+      "explication": "Le traité de Versailles (28 juin 1919) rend l'Allemagne responsable de la guerre."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Les grandes étapes de la guerre",
+      "etapes": [
+        "Le 28 juin 1914, l'archiduc François-Ferdinand est assassiné à Sarajevo",
+        "En septembre 1914, la bataille de la Marne arrête les Allemands",
+        "En 1916, Verdun devient une bataille d'usure",
+        "En 1917, les États-Unis entrent en guerre",
+        "Le 11 novembre 1918, l'armistice est signé à Rethondes"
+      ]
+    },
+    {
+      "titre": "De la révolution russe à la paix",
+      "etapes": [
+        "En février 1917, le tsar est renversé",
+        "En octobre 1917, les bolcheviks prennent le pouvoir",
+        "En mars 1918, la Russie signe la paix à Brest-Litovsk",
+        "Le 11 novembre 1918, l'armistice arrête les combats",
+        "Le 28 juin 1919, le traité de Versailles fixe la paix"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,153 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Les contraintes naturelles",
+      "detail": "Ce que le milieu impose et qui gêne l'installation et les activités des hommes.",
+      "cartes": [
+        "Un manque d'eau dû à de très faibles pluies",
+        "Le froid et la neige qui viennent avec l'altitude",
+        "Des pentes très fortes compliquent la vie",
+        "Des villages éloignés de tout, difficiles à rejoindre",
+        "Une chaleur écrasante le jour dans le désert"
+      ]
+    },
+    {
+      "nom": "Les adaptations des habitants",
+      "detail": "La manière dont les habitants organisent leur vie et leurs activités pour vivre malgré le milieu.",
+      "cartes": [
+        "Un éleveur suit ses troupeaux à la recherche d'eau",
+        "À l'ombre des palmiers-dattiers, on cultive aussi des légumes",
+        "L'élevage se pratique avec transhumance",
+        "Les villages sont bâtis sur le versant ensoleillé"
+      ]
+    },
+    {
+      "nom": "Réduire les contraintes par la technique",
+      "detail": "Les équipements modernes qui rendent ces espaces plus faciles à habiter, mais qui ont un coût.",
+      "cartes": [
+        "Des forages modernes puisent l'eau des nappes souterraines",
+        "Des routes et des tunnels relient les régions isolées",
+        "Des avions permettent d'atteindre les lieux isolés",
+        "La climatisation rend la chaleur supportable",
+        "Aménager coûte cher et fragilise parfois le milieu"
+      ]
+    },
+    {
+      "nom": "De nouvelles activités",
+      "detail": "Les ressources et le tourisme qui attirent de nouveaux habitants dans le désert et en montagne.",
+      "cartes": [
+        "Le désert fournit du pétrole, du gaz et des minerais",
+        "Le désert accueille aussi des touristes",
+        "Les Alpes accueillent des stations de ski",
+        "Une station de ski apporte hôtels et emplois saisonniers",
+        "Pétrole et tourisme attirent de nouveaux habitants"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "l'aridité du désert",
+      "carte": "De très faibles pluies, moins de 250 mm par an",
+      "role": "cause",
+      "explication": "L'aridité est un manque d'eau dû à des pluies très faibles."
+    },
+    {
+      "fait": "l'aridité du désert",
+      "carte": "Une forte évaporation de l'eau",
+      "role": "cause",
+      "explication": "La forte évaporation s'ajoute aux faibles pluies et accentue le manque d'eau."
+    },
+    {
+      "fait": "l'aridité du désert",
+      "carte": "Les habitants se regroupent dans les oasis",
+      "role": "consequence",
+      "explication": "Les hommes vivent là où l'eau est accessible, grâce à une source ou une nappe souterraine."
+    },
+    {
+      "fait": "l'aridité du désert",
+      "carte": "Les cultures sont impossibles sans irrigation",
+      "role": "consequence",
+      "explication": "Sans eau, aucune culture n'est possible : il faut irriguer avec des puits, des canaux ou des forages."
+    },
+    {
+      "fait": "l'exploitation du pétrole au Sahara",
+      "carte": "La construction de routes, de pistes d'avion et de logements",
+      "role": "consequence",
+      "explication": "Pour exploiter le pétrole, on aménage routes, pistes d'avion et logements."
+    }
+  ],
+  "etiquettes": [],
+  "devinettes": [
+    {
+      "reponse": "Le Sahara",
+      "acceptees": [
+        "Sahara",
+        "Le Sahara"
+      ],
+      "indices": [
+        "Je suis un désert.",
+        "Je suis situé en Afrique du Nord.",
+        "Avec environ 9 millions de km², je suis le plus grand désert chaud du monde."
+      ],
+      "explication": "Le Sahara, en Afrique du Nord, est le plus grand désert chaud du monde."
+    },
+    {
+      "reponse": "Une oasis",
+      "acceptees": [
+        "Oasis",
+        "Une oasis",
+        "L'oasis",
+        "Les oasis"
+      ],
+      "indices": [
+        "Je suis un lieu du désert.",
+        "On y cultive des palmiers-dattiers et, à leur ombre, des légumes.",
+        "Grâce à une source ou une nappe souterraine, l'eau me permet de cultiver et de vivre."
+      ],
+      "explication": "Dans une oasis, l'eau permet de cultiver et de vivre au milieu du désert."
+    },
+    {
+      "reponse": "Les Touaregs",
+      "acceptees": [
+        "Touaregs",
+        "Les Touaregs",
+        "Touareg",
+        "Les Touareg"
+      ],
+      "indices": [
+        "Je suis un peuple du Sahara.",
+        "Traditionnellement, je suis nomade et je me déplace avec mes troupeaux.",
+        "On me surnomme les « hommes bleus », à cause de la couleur de mes vêtements."
+      ],
+      "explication": "Les Touaregs sont un peuple traditionnellement nomade du Sahara."
+    },
+    {
+      "reponse": "L'Everest",
+      "acceptees": [
+        "Everest",
+        "L'Everest",
+        "Mont Everest",
+        "Le mont Everest"
+      ],
+      "indices": [
+        "Je suis un sommet.",
+        "Je me trouve dans la chaîne de l'Himalaya.",
+        "Avec 8 849 m, je suis le plus haut sommet du monde."
+      ],
+      "explication": "L'Everest, dans l'Himalaya, est le plus haut sommet du monde avec 8 849 m."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "Les étapes pour présenter un espace à fortes contraintes",
+      "etapes": [
+        "Présenter le milieu : où il se trouve, son climat, son relief",
+        "Nommer les contraintes : aridité, froid, altitude, pente, isolement",
+        "Décrire les adaptations des habitants",
+        "Montrer les aménagements modernes et leurs limites"
+      ]
+    }
+  ]
+}

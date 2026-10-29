@@ -1,0 +1,187 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Adjectif épithète",
+      "detail": "Un adjectif collé au nom, sans virgule ni verbe, qui s'accorde avec lui.",
+      "cartes": [
+        "Un ciel gris couvre la ville",
+        "Mon voisin conduit une voiture rouge",
+        "Une longue route traverse la forêt",
+        "Le petit chat boit son lait",
+        "J'ai acheté des fleurs sauvages"
+      ]
+    },
+    {
+      "nom": "Complément du nom",
+      "detail": "Un groupe relié au nom, le plus souvent par une préposition (de, à, en, pour…).",
+      "cartes": [
+        "Elle boit une tasse de thé",
+        "Léa porte une robe en soie",
+        "Nous achetons une machine à laver",
+        "J'emprunte le vélo de mon frère",
+        "Il lit un livre pour enfants"
+      ]
+    },
+    {
+      "nom": "Apposition détachée du nom",
+      "detail": "Un mot ou un groupe séparé du nom par une virgule, qui le précise.",
+      "cartes": [
+        "Fatigués, les marcheurs s'arrêtèrent",
+        "Ma voisine, infirmière, travaille la nuit",
+        "Mon frère, un rêveur, adore dessiner",
+        "Paul, mon cousin, arrive demain",
+        "Inquiète, la mère attendait"
+      ]
+    },
+    {
+      "nom": "Proposition relative",
+      "detail": "Une proposition introduite par un pronom relatif (qui, que, dont, où), qui complète un nom.",
+      "cartes": [
+        "Je lis le livre que tu m'as prêté",
+        "Le chien qui aboie réveille les voisins",
+        "Nous visitons la ville où elle habite",
+        "Voici le film dont tout le monde parle",
+        "Les élèves qui bavardent sont punis"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Quelle expansion du nom est en couleur ?",
+      "texte": "[Fatigués], les marcheurs s'arrêtèrent près du ruisseau.",
+      "choix": [
+        "Adjectif épithète",
+        "Complément du nom",
+        "Apposition",
+        "Proposition relative"
+      ],
+      "bonne": 2,
+      "explication": "« Fatigués » est détaché du nom « les marcheurs » par une virgule et s'accorde avec lui : c'est une apposition, pas une épithète."
+    },
+    {
+      "consigne": "Quelle expansion du nom est en couleur ?",
+      "texte": "Léa porte une robe [en soie].",
+      "choix": [
+        "Adjectif épithète",
+        "Complément du nom",
+        "Apposition",
+        "Proposition relative"
+      ],
+      "bonne": 1,
+      "explication": "« en soie » est relié au nom « robe » par la préposition « en » : c'est un complément du nom. « soie » est un nom, pas un adjectif."
+    },
+    {
+      "consigne": "Quelle expansion du nom est en couleur ?",
+      "texte": "Elle a posé ses clés sur une [vieille] table.",
+      "choix": [
+        "Adjectif épithète",
+        "Complément du nom",
+        "Apposition",
+        "Proposition relative"
+      ],
+      "bonne": 0,
+      "explication": "« vieille » est un adjectif collé au nom « table », sans virgule ni verbe : c'est une épithète. Elle peut être placée avant le nom."
+    },
+    {
+      "consigne": "Quelle expansion du nom est en couleur ?",
+      "texte": "Voici le film [dont tout le monde parle].",
+      "choix": [
+        "Adjectif épithète",
+        "Complément du nom",
+        "Apposition",
+        "Proposition relative"
+      ],
+      "bonne": 3,
+      "explication": "Ce groupe commence par le pronom relatif « dont », contient un verbe conjugué et complète le nom « film » : c'est une proposition relative."
+    },
+    {
+      "consigne": "Quelle expansion du nom est en couleur ?",
+      "texte": "Ma voisine, [infirmière], travaille la nuit.",
+      "choix": [
+        "Adjectif épithète",
+        "Complément du nom",
+        "Apposition",
+        "Proposition relative"
+      ],
+      "bonne": 2,
+      "explication": "« infirmière » est un nom séparé de « ma voisine » par des virgules, et il la précise : c'est une apposition."
+    },
+    {
+      "consigne": "Quelle expansion du nom est en couleur ?",
+      "texte": "Un ciel [gris] couvre la ville.",
+      "choix": [
+        "Adjectif épithète",
+        "Complément du nom",
+        "Apposition",
+        "Proposition relative"
+      ],
+      "bonne": 0,
+      "explication": "« gris » est un adjectif placé juste à côté du nom « ciel », sans virgule ni verbe : c'est une épithète."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Apposition",
+      "acceptees": [
+        "Une apposition",
+        "L'apposition"
+      ],
+      "indices": [
+        "Je précise un nom.",
+        "Je peux souvent changer de place dans la phrase.",
+        "Je suis séparée du nom par une ou deux virgules."
+      ],
+      "explication": "L'apposition est détachée du nom par une ou deux virgules : « Ma voisine, infirmière, travaille la nuit »."
+    },
+    {
+      "reponse": "Épithète",
+      "acceptees": [
+        "Une épithète",
+        "L'épithète",
+        "Adjectif épithète",
+        "Un adjectif épithète"
+      ],
+      "indices": [
+        "Je donne une qualité à un nom.",
+        "Je m'accorde en genre et en nombre avec ce nom.",
+        "Je suis collé au nom, sans virgule ni verbe, comme dans « un ciel gris »."
+      ],
+      "explication": "L'adjectif épithète est collé au nom et s'accorde avec lui : « un ciel gris », « des journées grises »."
+    },
+    {
+      "reponse": "Complément du nom",
+      "acceptees": [
+        "Le complément du nom",
+        "CDN"
+      ],
+      "indices": [
+        "Je précise un mot qui désigne une personne, un animal ou une chose.",
+        "Je suis souvent relié à ce mot par une préposition comme de, à, en ou pour.",
+        "Je suis « de thé » dans « une tasse de thé » et « en soie » dans « une robe en soie »."
+      ],
+      "explication": "Le complément du nom est relié au nom, le plus souvent par une préposition : « une tasse de thé »."
+    },
+    {
+      "reponse": "Proposition relative",
+      "acceptees": [
+        "Relative",
+        "La relative",
+        "Une relative",
+        "Subordonnée relative",
+        "La proposition relative",
+        "Proposition subordonnée relative",
+        "La subordonnée relative"
+      ],
+      "indices": [
+        "Je contiens un verbe conjugué.",
+        "Je commence par qui, que, dont ou où.",
+        "Je complète un nom que l'on appelle mon antécédent."
+      ],
+      "explication": "La proposition subordonnée relative commence par un pronom relatif et complète son antécédent : « le livre que je lis »."
+    }
+  ],
+  "calculs": [],
+  "etapes": []
+}

@@ -1,0 +1,155 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Les phagocytes",
+      "detail": "Les cellules de la réponse rapide, qui détruisent n'importe quel microbe sans le cibler.",
+      "cartes": [
+        "Ils englobent puis digèrent les micro-organismes",
+        "Ils s'attaquent à n'importe quel microbe",
+        "Les macrophages en sont un exemple",
+        "Ils digèrent le microbe neutralisé par des anticorps",
+        "Ils détruisent un intrus en quelques heures"
+      ]
+    },
+    {
+      "nom": "Les anticorps",
+      "detail": "Des molécules spécifiques d'un antigène, produites par les lymphocytes B.",
+      "cartes": [
+        "Ce sont des molécules, pas des cellules",
+        "Ils se fixent sur l'antigène et forment un complexe immun",
+        "Ceux dirigés contre la rougeole n'agissent pas sur la grippe",
+        "Ils neutralisent les microbes libres dans le sang",
+        "Fabriqués par des lymphocytes B, ils circulent dans le sang"
+      ]
+    },
+    {
+      "nom": "Les lymphocytes T",
+      "detail": "Les cellules qui détruisent spécifiquement les cellules infectées par un virus.",
+      "cartes": [
+        "Ils détruisent les cellules infectées par un virus",
+        "Ils agissent contre les virus cachés dans les cellules",
+        "Le VIH infecte certains d'entre eux",
+        "Leur destruction progressive affaiblit le système immunitaire",
+        "Sans eux, des maladies opportunistes apparaissent"
+      ]
+    },
+    {
+      "nom": "Les lymphocytes mémoire",
+      "detail": "Les cellules qui restent dans le corps après un premier contact avec un antigène.",
+      "cartes": [
+        "Ils restent dans le corps après un premier contact",
+        "Ils déclenchent une réponse plus rapide au contact suivant",
+        "Ils rendent la production d'anticorps plus intense au second contact",
+        "Leur existence est la base de la vaccination"
+      ]
+    }
+  ],
+  "causes": [
+    {
+      "fait": "la réponse secondaire plus rapide",
+      "carte": "Des lymphocytes mémoire formés au premier contact",
+      "role": "cause",
+      "explication": "Après un premier contact, les lymphocytes mémoire restent dans le corps et permettent une réponse plus rapide et plus intense."
+    },
+    {
+      "fait": "la réponse secondaire plus rapide",
+      "carte": "On ne tombe souvent même pas malade",
+      "role": "consequence",
+      "explication": "Grâce à la réponse secondaire, le microbe est éliminé avant de provoquer la maladie."
+    },
+    {
+      "fait": "le sida",
+      "carte": "L'infection de certains lymphocytes T par le VIH",
+      "role": "cause",
+      "explication": "Le VIH détruit progressivement des lymphocytes T indispensables, ce qui aboutit au sida."
+    },
+    {
+      "fait": "le sida",
+      "carte": "Des maladies dues à des microbes habituellement peu dangereux",
+      "role": "consequence",
+      "explication": "Le système immunitaire affaibli laisse apparaître des maladies opportunistes."
+    }
+  ],
+  "etiquettes": [],
+  "devinettes": [
+    {
+      "reponse": "Anticorps",
+      "acceptees": [
+        "Anticorps",
+        "Un anticorps",
+        "Les anticorps"
+      ],
+      "indices": [
+        "Je suis une molécule, pas une cellule.",
+        "Je suis fabriqué par un lymphocyte B.",
+        "Je me fixe sur un antigène pour le neutraliser."
+      ],
+      "explication": "Les anticorps, produits par les lymphocytes B, se fixent sur l'antigène et forment un complexe immun."
+    },
+    {
+      "reponse": "Phagocytose",
+      "acceptees": [
+        "Phagocytose",
+        "La phagocytose"
+      ],
+      "indices": [
+        "Je suis une réponse rapide du système immunitaire.",
+        "Je ne cible pas un antigène précis.",
+        "Une cellule englobe un microbe puis le digère : c'est moi."
+      ],
+      "explication": "La phagocytose est l'englobement puis la digestion d'un micro-organisme par un phagocyte."
+    },
+    {
+      "reponse": "Lymphocyte T",
+      "acceptees": [
+        "Lymphocyte T",
+        "Lymphocytes T",
+        "Un lymphocyte T",
+        "LT"
+      ],
+      "indices": [
+        "Je suis un globule blanc.",
+        "Je détruis des cellules de ton corps infectées par un virus.",
+        "Le VIH s'attaque à moi."
+      ],
+      "explication": "Les lymphocytes T détruisent les cellules infectées, et le VIH infecte certains d'entre eux."
+    },
+    {
+      "reponse": "VIH",
+      "acceptees": [
+        "VIH",
+        "Le VIH",
+        "Virus de l'immunodéficience humaine"
+      ],
+      "indices": [
+        "Je suis un virus.",
+        "J'infecte certains lymphocytes T.",
+        "Sans traitement, je provoque le sida."
+      ],
+      "explication": "Le VIH détruit progressivement des lymphocytes T, affaiblit les défenses et aboutit au sida."
+    }
+  ],
+  "calculs": [],
+  "etapes": [
+    {
+      "titre": "La production d'anticorps face à un microbe",
+      "etapes": [
+        "Un lymphocyte B reconnaît l'antigène du microbe",
+        "Les lymphocytes B se multiplient dans les ganglions",
+        "Ils produisent des anticorps, libérés dans le sang",
+        "Les anticorps se fixent sur l'antigène : un complexe immun se forme",
+        "Des phagocytes éliminent le complexe immun"
+      ]
+    },
+    {
+      "titre": "La mémoire immunitaire",
+      "etapes": [
+        "Premier contact avec un antigène",
+        "Des lymphocytes mémoire restent dans le corps",
+        "Second contact avec le même antigène",
+        "Les anticorps apparaissent plus tôt et en plus grande quantité"
+      ]
+    }
+  ]
+}

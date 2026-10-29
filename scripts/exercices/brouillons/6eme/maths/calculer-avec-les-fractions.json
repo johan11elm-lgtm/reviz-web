@@ -1,0 +1,190 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "nom": "Résultat égal à 1/2",
+      "detail": "Les calculs dont le résultat, une fois simplifié, vaut 1/2.",
+      "cartes": [
+        "1/4 + 1/4",
+        "1/3 + 1/6",
+        "5/6 − 1/3",
+        "3/8 + 1/8",
+        "7/10 − 1/5"
+      ]
+    },
+    {
+      "nom": "Résultat égal à 3/4",
+      "detail": "Les calculs dont le résultat, une fois simplifié, vaut 3/4.",
+      "cartes": [
+        "1 − 1/4",
+        "1/2 + 1/4",
+        "3 × 1/4",
+        "9/8 − 3/8",
+        "5/8 + 1/8"
+      ]
+    },
+    {
+      "nom": "Résultat égal à 2/3",
+      "detail": "Les calculs dont le résultat, une fois simplifié, vaut 2/3.",
+      "cartes": [
+        "1/3 + 1/3",
+        "5/6 − 1/6",
+        "1 − 1/3",
+        "1/6 + 1/2",
+        "7/9 − 1/9"
+      ]
+    },
+    {
+      "nom": "Résultat égal à 1",
+      "detail": "Les calculs dont le résultat vaut exactement 1.",
+      "cartes": [
+        "1/2 + 1/2",
+        "2/5 + 3/5",
+        "4 × 1/4",
+        "7/9 + 2/9",
+        "3/2 − 1/2"
+      ]
+    }
+  ],
+  "causes": [],
+  "etiquettes": [
+    {
+      "consigne": "Par rapport à 1, comment est la fraction en couleur ?",
+      "texte": "Dans l'exercice, on étudie la fraction [7/9].",
+      "choix": ["Plus petite que 1", "Égale à 1", "Plus grande que 1"],
+      "bonne": 0,
+      "explication": "Le numérateur 7 est plus petit que le dénominateur 9 : 7/9 est plus petite que 1."
+    },
+    {
+      "consigne": "Par rapport à 1, comment est la fraction en couleur ?",
+      "texte": "Léa a écrit la fraction [12/12] au tableau.",
+      "choix": ["Plus petite que 1", "Égale à 1", "Plus grande que 1"],
+      "bonne": 1,
+      "explication": "Le numérateur et le dénominateur sont égaux : 12/12 = 1."
+    },
+    {
+      "consigne": "Par rapport à 1, comment est la fraction en couleur ?",
+      "texte": "Pour finir, on compare la fraction [9/8] à 1.",
+      "choix": ["Plus petite que 1", "Égale à 1", "Plus grande que 1"],
+      "bonne": 2,
+      "explication": "Le numérateur 9 est plus grand que le dénominateur 8 : 9/8 est plus grande que 1."
+    },
+    {
+      "consigne": "Par rapport à 1, comment est la fraction en couleur ?",
+      "texte": "Tom doit placer la fraction [4/15] sur une droite graduée.",
+      "choix": ["Plus petite que 1", "Égale à 1", "Plus grande que 1"],
+      "bonne": 0,
+      "explication": "Le numérateur 4 est plus petit que le dénominateur 15 : 4/15 est plus petite que 1."
+    },
+    {
+      "consigne": "Par rapport à 1, comment est la fraction en couleur ?",
+      "texte": "Inès hésite sur la fraction [13/10].",
+      "choix": ["Plus petite que 1", "Égale à 1", "Plus grande que 1"],
+      "bonne": 2,
+      "explication": "Le numérateur 13 est plus grand que le dénominateur 10 : 13/10 est plus grande que 1."
+    },
+    {
+      "consigne": "Par rapport à 1, comment est la fraction en couleur ?",
+      "texte": "Au tableau, on lit la fraction [9/9].",
+      "choix": ["Plus petite que 1", "Égale à 1", "Plus grande que 1"],
+      "bonne": 1,
+      "explication": "Le numérateur et le dénominateur sont égaux : 9/9 = 1."
+    }
+  ],
+  "devinettes": [
+    {
+      "reponse": "Dénominateur",
+      "acceptees": ["Dénominateur", "Le dénominateur"],
+      "indices": [
+        "Je suis l'un des deux nombres qui forment une fraction.",
+        "Pour additionner deux fractions, il faut que je sois le même pour les deux.",
+        "Dans 5/9, je suis le 9."
+      ],
+      "explication": "Le dénominateur est le nombre du bas : on le garde quand on additionne deux fractions de même dénominateur."
+    },
+    {
+      "reponse": "Numérateur",
+      "acceptees": ["Numérateur", "Le numérateur"],
+      "indices": [
+        "Je suis un nombre que l'on trouve dans une fraction.",
+        "Quand on multiplie un entier par une fraction, c'est moi qu'on multiplie.",
+        "Dans 5/9, je suis le 5."
+      ],
+      "explication": "Le numérateur est le nombre du haut : 3 × 2/7 = 6/7, on multiplie le numérateur."
+    },
+    {
+      "reponse": "Irréductible",
+      "acceptees": ["Irréductible", "Fraction irréductible", "Une fraction irréductible"],
+      "indices": [
+        "Je suis un adjectif qui qualifie certaines fractions.",
+        "3/4 me convient, mais pas 18/24.",
+        "Une fraction qui me correspond ne peut plus être simplifiée."
+      ],
+      "explication": "Une fraction irréductible ne peut plus être simplifiée : 3/4 est irréductible, 18/24 non."
+    }
+  ],
+  "calculs": [
+    {
+      "question": "On écrit 3/5 = ?/30. Quel nombre faut-il écrire à la place du point d'interrogation ?",
+      "reponse": 18,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "30 = 5 × 6, donc on multiplie aussi le numérateur par 6 : 3 × 6 = 18. Ainsi 3/5 = 18/30."
+    },
+    {
+      "question": "On simplifie 15/25 jusqu'à obtenir une fraction irréductible. Quel est son dénominateur ?",
+      "reponse": 5,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "On divise 15 et 25 par 5 : 15/25 = 3/5. Cette fraction ne peut plus être simplifiée, son dénominateur est 5."
+    },
+    {
+      "question": "On calcule 1/3 + 1/6 en écrivant le résultat avec le dénominateur 6. Quel est le numérateur ?",
+      "reponse": 3,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "1/3 = 2/6, donc 1/3 + 1/6 = 2/6 + 1/6 = 3/6. Le numérateur est 3."
+    },
+    {
+      "question": "On calcule 4 × 3/11 et on écrit le résultat avec le dénominateur 11. Quel est le numérateur ?",
+      "reponse": 12,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "On multiplie seulement le numérateur : 4 × 3/11 = 12/11. Le numérateur est 12."
+    },
+    {
+      "question": "La fraction 17/5 est comprise entre deux entiers consécutifs. Quel est le plus petit des deux ?",
+      "reponse": 3,
+      "unite": "",
+      "tolerance": 0,
+      "explication": "15/5 = 3 et 20/5 = 4, donc 3 < 17/5 < 4. Le plus petit entier est 3."
+    },
+    {
+      "question": "Un réservoir est rempli aux 3/8. Combien de huitièmes faut-il encore ajouter pour le remplir complètement ?",
+      "reponse": 5,
+      "unite": "huitièmes",
+      "tolerance": 0,
+      "explication": "Un réservoir plein, c'est 8/8. On calcule 8/8 − 3/8 = 5/8 : il manque 5 huitièmes."
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Additionner deux fractions quand un dénominateur est multiple de l'autre",
+      "etapes": [
+        "Vérifier que le plus grand dénominateur est un multiple de l'autre",
+        "Transformer l'autre fraction en multipliant en haut et en bas",
+        "Additionner les numérateurs et garder le dénominateur commun",
+        "Simplifier le résultat si c'est possible"
+      ]
+    },
+    {
+      "titre": "Ranger des fractions dans l'ordre croissant",
+      "etapes": [
+        "Chercher un dénominateur commun à toutes les fractions",
+        "Écrire chaque fraction avec ce dénominateur commun",
+        "Comparer les numérateurs entre eux",
+        "Ranger les fractions dans le même ordre que leurs numérateurs"
+      ]
+    }
+  ]
+}
