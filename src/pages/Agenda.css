@@ -255,7 +255,7 @@
 }
 
 /* ═══ Agenda façon app Nomad (29/10) ══════════════════════════════════════════
- * Plus de héros : la date et le titre, le bouton d'ajout, puis le bloc lavande de Réviz
+ * Plus de héros : la date et le titre, le bouton d'ajout, puis le bloc pêche de Réviz
  * (comme l'accueil) et des cartes blanches à ombre légère, titres à barre orange. */
 .na-page .na-cadre { display: flex; flex-direction: column; padding: calc(env(safe-area-inset-top, 0px) + 14px) 16px 0; }
 .na-page .na-entete { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 16px; }
@@ -266,8 +266,8 @@
 .na-page .na-ajouter:hover { background: #0B3A82; }
 .na-page .na-ajouter:focus-visible, .na-page .ag-ajouter-rond:focus-visible { outline: 3px solid var(--rv-vif); outline-offset: 2px; }
 
-/* Bloc lavande de Réviz */
-.na-page .na-bloc { position: relative; display: flex; flex-direction: column; gap: 14px; padding: 18px 14px 14px; border-radius: 24px; background: #B9A6FB; color: #042A65; }
+/* Bloc pêche de Réviz */
+.na-page .na-bloc { position: relative; display: flex; flex-direction: column; gap: 14px; padding: 18px 14px 14px; border-radius: 24px; background: #FFC59B; color: #042A65; }
 .na-page .na-bloc-reviz { position: absolute; top: -14px; right: 6px; pointer-events: none; }
 .na-page .na-bloc-txt { position: relative; max-width: 64%; min-height: 56px; margin: 0; font-size: 19px; font-weight: 700; line-height: 1.3; }
 .na-page .na-ligne { display: flex; align-items: center; gap: 14px; width: 100%; min-height: 66px; padding: 9px 12px 9px 9px; border: 0; border-radius: 14px; background: #fff; color: #042A65; font: inherit; text-align: left; cursor: pointer; }

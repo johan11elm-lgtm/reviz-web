@@ -418,10 +418,10 @@ export default function Scan() {
 }
 
 // L'émote de Réviz selon ce qu'il dit (les écrans de l'app Nomad n'ont pas de mascotte qui parle :
-// un bloc lavande avec le message et une émote, comme l'accueil et l'agenda, 28/10).
+// un bloc pêche avec le message et une émote, comme l'accueil et l'agenda, 28/10).
 const EMOTE = { content: 'scanphone', endormi: 'sleeping', determine: 'scan', reflechit: 'thinking' };
 
-/** Le message de Réviz dans un bloc lavande, son émote dans le coin. */
+/** Le message de Réviz dans un bloc pêche, son émote dans le coin. */
 function Reviz({ expression, lignes, grand }) {
   return (
     <div className={`sn-bloc${grand ? ' sn-bloc--grand' : ''}`}>

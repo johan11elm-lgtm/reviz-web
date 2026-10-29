@@ -402,13 +402,13 @@
 }
 
 /* ═══ Mes leçons façon app Nomad (28/10) : en-tête comme le Programme et l'Agenda (retour, sur-titre,
- * titre), plus de héros ni de mascotte qui parle — son message dans un bloc lavande avec une émote —,
+ * titre), plus de héros ni de mascotte qui parle — son message dans un bloc pêche avec une émote —,
  * cartes blanches à ombre légère, titres à barre orange, boutons orange en rectangle arrondi. ═══ */
 .lc-entete { padding: calc(env(safe-area-inset-top, 0px) + 14px) 16px 0; color: #042A65; }
 .lc-entete .ch-haut { margin-bottom: 14px; }
 .lc-sur { display: block; font-size: 13px; font-weight: 600; color: var(--rv-doux); }
 .lc-titre { margin: 2px 0 0; font-size: 30px; font-weight: 800; line-height: 1.1; letter-spacing: -.02em; color: #042A65; }
-.lc-bloc { position: relative; display: flex; align-items: center; min-height: 92px; box-sizing: border-box; margin: 16px 16px 0; padding: 16px 112px 16px 16px; border-radius: 24px; background: #B9A6FB; color: #042A65; }
+.lc-bloc { position: relative; display: flex; align-items: center; min-height: 92px; box-sizing: border-box; margin: 16px 16px 0; padding: 16px 112px 16px 16px; border-radius: 24px; background: #FFC59B; color: #042A65; }
 .lc-bloc-txt { margin: 0; font-size: 17px; font-weight: 700; line-height: 1.3; }
 .lc-bloc-reviz { position: absolute; right: 12px; bottom: 2px; display: flex; pointer-events: none; }
 .le-page .le-carte { margin: 14px 16px 0; border-radius: 20px; }

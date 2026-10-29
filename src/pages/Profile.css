@@ -298,7 +298,7 @@
 }
 
 /* ═══ Moi façon app Nomad (29/10) ═════════════════════════════════════════════
- * Plus de héros : avatar, prénom et classe, réglages ; le bloc lavande de Réviz ;
+ * Plus de héros : avatar, prénom et classe, réglages ; le bloc pêche de Réviz ;
  * cartes blanches à ombre légère, titres à barre orange. */
 .mn-page .mn-haut { display: flex; flex-direction: column; gap: 16px; padding: calc(env(safe-area-inset-top, 0px) + 14px) 16px 0; }
 .mn-page .mn-identite { display: flex; align-items: center; gap: 14px; }
@@ -315,7 +315,7 @@
 .mn-page .mo-reglages { width: 46px; height: 46px; border-radius: 14px; background: #fff; color: #042A65; box-shadow: 0 1px 3px rgba(4,42,101,.12); }
 .mn-page .mo-reglages:focus-visible { outline: 3px solid #042A65; outline-offset: 2px; }
 
-.mn-page .mn-bloc { position: relative; padding: 18px 14px; border-radius: 24px; background: #B9A6FB; color: #042A65; }
+.mn-page .mn-bloc { position: relative; padding: 18px 14px; border-radius: 24px; background: #FFC59B; color: #042A65; }
 .mn-page .mn-bloc-reviz { position: absolute; top: -12px; right: 8px; pointer-events: none; }
 .mn-page .mn-bloc-txt { max-width: 64%; min-height: 56px; margin: 0; font-size: 19px; font-weight: 700; line-height: 1.3; }
 

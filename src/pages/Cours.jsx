@@ -184,7 +184,7 @@ export default function Cours() {
 
   // ── Blocs ──
   const surtitre = isGuest ? 'Mode essai' : aLecons ? `${pluriel(lecons.length, 'leçon')} · ${pluriel(matieres.length, 'matière')}` : 'Bibliothèque';
-  // Façon app Nomad (28/10) : pas de mascotte qui parle, son message dans un bloc lavande avec une émote.
+  // Façon app Nomad (28/10) : pas de mascotte qui parle, son message dans un bloc pêche avec une émote.
   const reviz = (
     <div className="lc-bloc">
       <p className="lc-bloc-txt">{lignes.join(' ')}</p>

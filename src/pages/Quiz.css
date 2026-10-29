@@ -223,8 +223,10 @@
 .qz-page--large .qz-segments i.is-juste { background: #34C77B; }
 .qz-page--large .qz-segments i.is-faux { background: var(--rv-orange); }
 
-.qz-page--large .qz-ecran-fin { align-items: center; justify-content: center; }
-.qz-page--large .qz-fin-grille { width: 100%; max-width: 1128px; display: grid; grid-template-columns: 480px 600px; justify-content: space-between; align-items: center; }
+/* Centrée en hauteur par ses marges auto, pas par justify-content: center, qui ferait déborder
+ * le haut hors d'atteinte sur un écran bas ; les marges, elles, tombent à zéro. */
+.qz-page--large .qz-ecran-fin { align-items: center; }
+.qz-page--large .qz-fin-grille { width: 100%; max-width: 1128px; margin-block: auto; display: grid; grid-template-columns: 480px 600px; justify-content: space-between; align-items: center; }
 .qz-page--large .qz-fin-gauche { display: flex; flex-direction: column; align-items: center; }
 .qz-page--large .qz-score-grand { font-size: 110px; }
 .qz-page--large .qz-fin-droite { display: flex; flex-direction: column; gap: 18px; }

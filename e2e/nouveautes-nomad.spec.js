@@ -160,6 +160,9 @@ for (const [appareil, viewport] of APPAREILS) {
       const note = String(Math.round(((quiz.length - 2) / quiz.length) * 40) / 2).replace('.', ',')
       await expect(page.getByRole('region', { name: `Ta note : ${note} sur 20` })).toBeVisible()
       await expect(page.getByRole('heading', { name: 'Le corrigé' })).toBeVisible()
+      // Le corrigé commence à l'écran : sur ordinateur, il ne déborde pas au-dessus, hors d'atteinte.
+      await expect(page.getByRole('heading', { name: 'Le corrigé' })).toBeInViewport()
+      await expect(page.locator('.cb-question').first()).toBeInViewport()
       await expect(page.locator('.cb-question')).toHaveCount(quiz.length)
       await expect(page.locator('.cb-question.is-faux')).toHaveCount(2)
       await sansDebordement(page, `note du contrôle blanc ${appareil}`)

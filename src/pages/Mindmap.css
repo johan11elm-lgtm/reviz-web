@@ -378,12 +378,12 @@
 
 /* ═══ Carte mentale façon app Nomad (29/10) ═══════════════════════════════════
  * Plus de héros pastel ni de pantin : un en-tête simple sur le fond crème, ce que dit
- * Réviz dans le bloc lavande avec son émote, panneaux et boutons blancs à ombre légère. */
+ * Réviz dans le bloc pêche avec son émote, panneaux et boutons blancs à ombre légère. */
 .cn-page { --ch-encre: #042A65; --ch-doux: var(--rv-doux); --ch-bulle: #E6DFD8; --ch-fond: var(--rv-fond); --ch-ombre: rgba(4,42,101,.10); background: var(--rv-fond); }
 .cn-page .ch-hero.cm-hero { background: none; border-radius: 0; box-shadow: none; padding: calc(env(safe-area-inset-top, 0px) + 12px) 16px 0; height: auto; overflow: visible; }
 .cn-page .cm-retour { border-radius: 12px; box-shadow: 0 1px 3px rgba(4,42,101,.1), 0 1px 2px rgba(4,42,101,.06); color: #042A65; }
 .cn-page .cm-pilule-teste { border-radius: 12px; box-shadow: 0 1px 3px rgba(4,42,101,.1); }
-.cn-page .cm-bloc { position: relative; margin-top: 14px; padding: 16px 14px; border-radius: 22px; background: #B9A6FB; color: #042A65; }
+.cn-page .cm-bloc { position: relative; margin-top: 14px; padding: 16px 14px; border-radius: 22px; background: #FFC59B; color: #042A65; }
 .cn-page .cm-bloc-reviz { position: absolute; top: -12px; right: 8px; pointer-events: none; }
 .cn-page .cm-bloc-txt { max-width: 66%; min-height: 48px; margin: 0; font-size: 17px; font-weight: 700; line-height: 1.3; }
 .cn-page .cm-chapitre { box-shadow: 0 1px 3px rgba(4,42,101,.1), 0 1px 2px rgba(4,42,101,.06); }
