@@ -213,6 +213,15 @@ describe('<Coach /> — Réviz IA', () => {
     expect(history[1]).toEqual({ role: 'user', content: 'oui' })
   })
 
+  it('une première question refusée (e-mail pas confirmé) : l’explication se voit, la question revient', async () => {
+    chat.send.mockRejectedValue(new Error('EMAIL_NOT_VERIFIED'))
+    renderAt('/coach')
+    fireEvent.change(screen.getByLabelText('Ta question à Réviz IA'), { target: { value: 'je fais quoi' } })
+    await act(async () => fireEvent.click(screen.getByRole('button', { name: 'Envoyer la question' })))
+    expect(screen.getByRole('alert')).toHaveTextContent(/Confirme ton email/)
+    expect(screen.getByLabelText('Ta question à Réviz IA')).toHaveValue('je fais quoi')
+  })
+
   it('une question tapée dans la recherche de l’accueil part tout de suite', async () => {
     chat.send.mockResolvedValue({ text: 'Voilà.', cartes: [] })
     await act(async () => { renderAvecEtat('/coach', { question: 'c’est quoi une fraction', envoyer: true }) })

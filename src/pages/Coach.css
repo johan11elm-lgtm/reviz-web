@@ -145,6 +145,9 @@
 }
 @keyframes iaCurseur { to { visibility: hidden; } }
 .ia-erreur { margin: 0; padding: 12px 16px; border-radius: 18px; background: var(--rv-peche-pale); font-size: 14px; font-weight: 600; color: var(--rv-marque-fonce); }
+/* Sous le fil ou sous l'accueil (alerte de Coach.jsx). */
+.ia-fil > .ia-erreur { margin-top: 20px; }
+.ia-page--grand .ia-fil > .ia-erreur { max-width: 720px; margin-left: auto; margin-right: auto; box-sizing: border-box; }
 
 /* ── Champ ── */
 .ia-pied { position: relative; z-index: 4; }

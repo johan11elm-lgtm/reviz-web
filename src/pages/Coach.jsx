@@ -530,9 +530,11 @@ export default function Coach() {
           ) : <span className="ia-reflechit">{outil ?? 'Réviz réfléchit…'}</span>}
         </div>
       )}
-      {erreur && <p className="ia-erreur" role="alert">{erreur}</p>}
     </div>
   );
+  // L'erreur sous le fil, accueil compris : sur une première question refusée (e-mail pas
+  // confirmé, réseau…), le fil revient à l'accueil et l'erreur restait invisible.
+  const alerte = erreur && <p className="ia-erreur" role="alert">{erreur}</p>;
 
   const composeur = limite ? (
     <div className="ia-limite">
@@ -626,7 +628,7 @@ export default function Coach() {
           ) : <p className="ia-recents-vide">Tes discussions apparaîtront ici.</p>}
         </aside>
         <main className={`ia-centre${vide ? ' ia-centre--accueil' : ''}`}>
-          <div className="ia-fil" ref={fil}>{vide ? accueil : conversation}</div>
+          <div className="ia-fil" ref={fil}>{vide ? accueil : conversation}{alerte}</div>
           <div className="ia-pied">{composeur}</div>
         </main>
         {fenetres}
@@ -644,7 +646,7 @@ export default function Coach() {
         <span className="ia-flex" />
         <button type="button" className="ia-rond" onClick={() => setHisto(true)} aria-haspopup="dialog" aria-label="Tes discussions"><Horloge /></button>
       </header>
-      <main className="ia-fil ia-fil--tel" ref={fil}>{vide ? accueil : conversation}</main>
+      <main className="ia-fil ia-fil--tel" ref={fil}>{vide ? accueil : conversation}{alerte}</main>
       <div className={`ia-pied ia-pied--tel${limite ? ' ia-pied--limite' : ''}`}>{composeur}</div>
       {fenetres}
     </div>

@@ -6,7 +6,7 @@
 // puis les chapitres de son programme et ses cours scannés qui correspondent,
 // trouvés comme les trouve Réviz IA (chercherChapitres). Entrée : Réviz IA.
 // -------------------------------------------------------
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { EtoileIA } from './BottomNav'
 import { openChapter } from '../services/programmeService'
@@ -49,19 +49,30 @@ export function RechercheAccueil({ classe, catalogue, lecons = [] }) {
     }
   }
 
+  // Sur iPhone, toucher un bouton de la liste retire le focus du champ sans le donner au bouton
+  // (relatedTarget vide) : fermer aussitôt la liste au blur faisait disparaître le bouton avant le
+  // clic (Johan, 29/10). La liste garde donc le focus dans le champ, et la fermeture attend un peu.
+  const fermeture = useRef(null)
+  useEffect(() => () => clearTimeout(fermeture.current), [])
+  const garderFocus = e => e.preventDefault()
+
   return (
     <form
       className="nm-recherche nm-recherche--champ"
       role="search"
       onSubmit={e => { e.preventDefault(); demander() }}
-      onBlur={e => { if (!e.currentTarget.contains(e.relatedTarget)) setOuvert(false) }}
+      onBlur={e => {
+        if (e.currentTarget.contains(e.relatedTarget)) return
+        clearTimeout(fermeture.current)
+        fermeture.current = setTimeout(() => setOuvert(false), 250)
+      }}
     >
       <Loupe />
       <input
         type="search"
         value={q}
         onChange={e => { setQ(e.target.value); setOuvert(true); setErreur('') }}
-        onFocus={() => setOuvert(true)}
+        onFocus={() => { clearTimeout(fermeture.current); setOuvert(true) }}
         onKeyDown={e => { if (e.key === 'Escape') setOuvert(false) }}
         placeholder="On révise quoi aujourd’hui ?"
         aria-label="Chercher un chapitre ou demander à Réviz IA"
@@ -69,7 +80,7 @@ export function RechercheAccueil({ classe, catalogue, lecons = [] }) {
         autoComplete="off"
       />
       {ouvert && texte && (
-        <div className="nm-recherche-liste">
+        <div className="nm-recherche-liste" onPointerDown={garderFocus} onMouseDown={garderFocus}>
           <button type="button" className="nm-recherche-item nm-recherche-item--ia" onClick={demander}>
             <EtoileIA id="rv-ia-recherche" size={22} />
             <span><b>Demander à Réviz IA</b><small>« {texte} »</small></span>
