@@ -11,6 +11,7 @@ import { contexteBattle } from '../services/battleConnexion'
 import { apiFetch } from '../services/apiClient'
 import { track } from '../services/statsService'
 import { noterBattleDuJour } from '../services/battleDuJour'
+import { jouerSon } from '../utils/sons'
 import {
   ecouterBattle, ecouterHorloge, tenirPresence, rejoindreBattle, lancerPartie, repondre,
   avancer, declarerAbandon, quitterBattle, lancerRevanche, marquerAbsent,
@@ -204,7 +205,8 @@ export function useBattle(code, { prenom, onRevanche }) {
     finComptee.current = true
     track('battle_terminee', { issue, joueur: ctx.avecCompte ? 'compte' : 'invite' })
     noterBattleDuJour()
-  }, [ctx, joue, issue])
+    jouerSon(issue === 'egalite' ? 'fin' : partie?.vainqueur === uid ? 'victoire' : 'defaite')
+  }, [ctx, joue, issue, partie, uid])
 
   // --- Actions ---
   const executer = useCallback(async (nom, action) => {

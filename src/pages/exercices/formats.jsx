@@ -10,6 +10,7 @@
 // -------------------------------------------------------
 import { useEffect, useRef, useState } from 'react'
 import { Mascot } from '../../components/Mascot'
+import { jouerSon } from '../../utils/sons'
 import { nbsp } from '../../utils/typography'
 
 const LETTRES = ['A', 'B', 'C', 'D']
@@ -265,7 +266,7 @@ function useGlisser(onCote, actif) {
   const fin = () => {
     if (depart.current === null) return
     depart.current = null
-    if (Math.abs(dx) >= SEUIL) onCote(dx < 0 ? 'gauche' : 'droite')
+    if (Math.abs(dx) >= SEUIL) { jouerSon('carte'); onCote(dx < 0 ? 'gauche' : 'droite') }
     setDx(0)
   }
   const poignees = actif ? {
@@ -404,6 +405,7 @@ export function Classement({ ex, verdict, onValider, grand }) {
     // Une seule carte en vol à la fois : `rangees` est à jour quand elle se pose.
     setTimeout(() => {
       const suite = [...rangees, dossier]
+      jouerSon('depot')
       setPart(null)
       setRangees(suite)
       if (suite.length === ex.cartes.length) {

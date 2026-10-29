@@ -258,6 +258,13 @@ export const BellIcon = (p) => (
     <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0" />
   </Icon>
 );
+export const SpeakerIcon = (p) => (
+  <Icon {...p}>
+    <path d="M11 5 6 9H2v6h4l5 4V5Z" />
+    <path d="M15.5 8.5a5 5 0 0 1 0 7" />
+    <path d="M19 5a10 10 0 0 1 0 14" />
+  </Icon>
+);
 export const MoonIcon = (p) => (
   <Icon {...p}><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4 8.5 8.5 0 1 0 20 14.5Z" /></Icon>
 );

@@ -16,6 +16,7 @@ import { matiereControle, jourEnClair } from '../utils/agenda';
 import { planOuvert } from '../utils/planRevision';
 import { sujetControle, leconDeLaMatiere, noteSur20, noteEnClair, dureeControle, chrono, MIN_QUESTIONS } from '../utils/controleBlanc';
 import { nbsp } from '../utils/typography';
+import { jouerSon } from '../utils/sons';
 // Les jeux en plein écran partagent leurs styles (fond, boutons) ; l'épreuve reprend ceux du quiz.
 import './Flashcards.css';
 import './Quiz.css';
@@ -179,6 +180,15 @@ function Session({ controle, uid, onRefaire }) {
     }, 250);
     return () => clearInterval(t);
   }, [phase, duree, rendre]);
+  // Plus qu'une minute : un « ding-dong » calme, une fois. C'est le seul son de l'épreuve (rien quand
+  // on répond, comme le jour J), et pas pour un contrôle de moins de deux minutes.
+  const derniereMinute = phase === 'epreuve' && reste <= 60;
+  const minuteSonnee = useRef(false);
+  useEffect(() => {
+    if (!derniereMinute || duree <= 120 || minuteSonnee.current) return;
+    minuteSonnee.current = true;
+    jouerSon('minute');
+  }, [derniereMinute, duree]);
 
   function commencer() {
     debut.current = Date.now();

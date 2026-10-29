@@ -1,4 +1,6 @@
+import { useEffect, useRef } from 'react';
 import { couleurDe } from './couleurs';
+import { jouerSon } from '../../utils/sons';
 import { BattleMascot } from '../BattleMascot';
 import { useIsDesktop } from '../../hooks/useMediaQuery';
 import {
@@ -70,6 +72,14 @@ function Annonce({ salon, phase, maintenant, chapitre }) {
   const decompte = phase.n === 1;
   const secondes = phase.depart ? Math.min(3, Math.max(1, Math.ceil((phase.depart - maintenant) / 1000))) : 3;
   const titre = decompte ? 'Prêts ?' : nomRound(phase.n);
+  // Un bip par seconde du décompte, un seul à l'annonce des rounds suivants.
+  const repere = decompte ? secondes : phase.n;
+  const bip = useRef(null);
+  useEffect(() => {
+    if (bip.current === repere) return; // le mode strict de React rejoue les effets au montage
+    bip.current = repere;
+    jouerSon('compte');
+  }, [repere]);
   return (
     <div className="bt-annonce" aria-live="polite">
       <span className="bt-sur">{chapitre.matiere} · {chapitre.titre}</span>
@@ -106,6 +116,19 @@ function Question({ salon, uid, role, phase, maintenant, partie, chapitre, ex, m
   const egalite = partie?.scores?.[salon.hote.uid] ?? 0;
   const verdict = aRepondu ? (maReponse === bonneReponseDuel(ex) ? 'juste' : 'faux') : tempsEcoule ? 'faux' : null;
   const Format = FORMATS[ex.type];
+  // Partez ! au début du mini-jeu, puis le verdict tel que le joueur le voit.
+  const joues = useRef(new Set()); // chaque son une fois, même quand React rejoue les effets
+  const unefois = (cle, nom) => { if (joues.current.has(cle)) return; joues.current.add(cle); jouerSon(nom); };
+  useEffect(() => { unefois(`go${phase.n}`, 'go'); }, [phase.n]);
+  useEffect(() => { if (verdict) unefois(`v${phase.n}`, verdict === 'juste' ? 'bonne' : 'faute'); }, [verdict, phase.n]);
+  // Les trois dernières secondes, tant qu'on n'a pas répondu : un tic par seconde, de plus en plus aigu.
+  const derniere = bloque ? 0 : Math.ceil(restant / 1000);
+  const ticPasse = useRef(null);
+  useEffect(() => {
+    if (derniere < 1 || derniere > 3 || ticPasse.current === derniere) return;
+    ticPasse.current = derniere;
+    jouerSon('chrono', { demi: (3 - derniere) * 2 });
+  }, [derniere]);
 
   const etatAdv = advARepondu ? `${adversaire.prenom} a répondu` : `En attente de ${adversaire.prenom}…`;
   const etatDe = j => (j.uid === uid

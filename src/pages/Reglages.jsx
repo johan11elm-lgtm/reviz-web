@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
-import { UserIcon, MailIcon, KeyIcon, BellIcon, LockIcon, CheckIcon, LogOutIcon, InstallIcon, ChatIcon } from '../components/Icons';
+import { UserIcon, MailIcon, KeyIcon, BellIcon, LockIcon, CheckIcon, LogOutIcon, InstallIcon, ChatIcon, SpeakerIcon } from '../components/Icons';
 import { InstallerModal } from '../components/InstallerApp';
 import { useInstallation } from '../hooks/useInstallation';
 import { useAuth } from '../context/AuthContext';
@@ -26,6 +26,8 @@ import './Reglages.css';
 import { revenir } from '../utils/navigation';
 import { lireEspaceParent, reglerEspaceParent, couperLiensParent } from '../services/espaceParentService';
 import { lectureDysActive, appliquerLecture } from '../utils/lecture';
+import { sonActif, bruitagesActifs } from '../utils/bruitages';
+import { jouerSon } from '../utils/sons';
 
 const CLASSES_COLLEGE = ['6ème', '5ème', '4ème', '3ème'];
 const classeCourte = c => c?.replace(/ème$/, 'e') ?? '';
@@ -290,6 +292,7 @@ export default function Reglages() {
   const [espaceParent, setEspaceParent] = useState(null); // null : chargement
   const [espaceMessage, setEspaceMessage] = useState(null); // { type, texte }
   const [lectureDys, setLectureDys] = useState(lectureDysActive);
+  const [sons, setSons] = useState(sonActif);
   useEffect(() => {
     if (isGuest || !currentUser?.uid) return;
     let vivant = true;
@@ -314,6 +317,13 @@ export default function Reglages() {
     const actif = !lectureDys;
     setLectureDys(actif);
     appliquerLecture(actif);
+  }
+  // Le même interrupteur que le bouton son des Réviz Games (utils/bruitages) ; on entend le son en l'allumant.
+  function basculerSons() {
+    const actif = !sons;
+    setSons(actif);
+    bruitagesActifs(actif);
+    if (actif) jouerSon('bonne');
   }
 
   // ── Blocs ──
@@ -386,6 +396,17 @@ export default function Reglages() {
         icone: <ChatIcon />, teinte: 'menthe', label: 'Mode dyslexie',
         sous: 'Police OpenDyslexic et plus d’espace sur les fiches, les résumés, les quiz et les flashcards.',
         droite: <Interrupteur checked={lectureDys} onChange={basculerLecture} label="Activer le mode dyslexie" />,
+      })}
+    </section>
+  );
+
+  const sonsCarte = (
+    <section className="rg-carte" aria-labelledby="rg-sons">
+      <h2 id="rg-sons" className="rg-h2">Sons</h2>
+      {ligne({
+        icone: <SpeakerIcon />, teinte: 'peche', label: 'Bruitages',
+        sous: 'Les réponses, le combo, les récompenses, la Battle et les Réviz Games.',
+        droite: <Interrupteur checked={sons} onChange={basculerSons} label="Activer les bruitages" />,
       })}
     </section>
   );
@@ -695,10 +716,10 @@ export default function Reglages() {
         {isDesktop ? (
           <div className="rg-colonnes">
             <div className="rg-colonne">{essai}{compte}{rappels}{espace}{objectif}</div>
-            <div className="rg-colonne">{apparence}{lecture}{revizPlus}{informations}</div>
+            <div className="rg-colonne">{apparence}{lecture}{sonsCarte}{revizPlus}{informations}</div>
           </div>
         ) : (
-          <div className="rg-colonne">{essai}{compte}{rappels}{espace}{objectif}{apparence}{lecture}{revizPlus}{informations}</div>
+          <div className="rg-colonne">{essai}{compte}{rappels}{espace}{objectif}{apparence}{lecture}{sonsCarte}{revizPlus}{informations}</div>
         )}
         {pied}
       </div>

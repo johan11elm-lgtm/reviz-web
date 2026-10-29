@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Mascot } from './Mascot';
+import { jouerSon } from '../utils/sons';
 import './AchievementToast.css';
 
 const DUREE = 5000; // 5 s : temps de lecture suffisant, notamment via lecteur d'écran.
@@ -24,6 +25,7 @@ export function AchievementToast({ badge, onDone }) {
   const fin = useRef(onDone);
   fin.current = onDone;
   const parti = useRef(false);
+  const aSonne = useRef(false);
   const fermer = useCallback(() => {
     if (parti.current) return;
     parti.current = true;
@@ -33,6 +35,7 @@ export function AchievementToast({ badge, onDone }) {
 
   useEffect(() => {
     const raf = requestAnimationFrame(() => setVisible(true));
+    if (!aSonne.current) { aSonne.current = true; jouerSon('succes'); }
     const timer = setTimeout(fermer, DUREE);
     return () => { cancelAnimationFrame(raf); clearTimeout(timer); };
   }, [fermer]);

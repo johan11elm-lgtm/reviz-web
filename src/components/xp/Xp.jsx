@@ -5,12 +5,13 @@
 //   BlocQuetes    : accueil — la quête du jour et les trois de la semaine.
 // Couleurs de l'app façon Nomad : cartes blanches, turquoise pour l'avancée, orange vif pour la récompense.
 // -------------------------------------------------------
-import { useEffect, useState, useCallback } from 'react'
+import { useEffect, useRef, useState, useCallback } from 'react'
 import { loadRevisions } from '../../services/revisionService'
 import { lireReclamees, recupererQuete, EVENEMENT_QUETES } from '../../services/quetesService'
 import { quetesDuMoment, aRecuperer } from '../../utils/quetes'
 import { XP_PAR_NIVEAU } from '../../utils/gamification'
 import { BAREME } from '../../utils/xp'
+import { jouerSon, rafaleXp } from '../../utils/sons'
 import './xp.css'
 
 const Eclair = ({ taille = 14 }) => (
@@ -43,7 +44,11 @@ export function useQuetes(uid) {
     document.addEventListener('visibilitychange', maj)
     return () => { window.removeEventListener(EVENEMENT_QUETES, maj); document.removeEventListener('visibilitychange', maj) }
   }, [lire])
-  const recuperer = useCallback(q => recupererQuete(uid, q), [uid])
+  const recuperer = useCallback(async q => {
+    const ok = await recupererQuete(uid, q)
+    if (ok) jouerSon('quete')
+    return ok
+  }, [uid])
   return { quetes, recuperer }
 }
 
@@ -107,6 +112,16 @@ export function BilanXp({ gain, uid }) {
   const pretes = aRecuperer(quetes)
   const [prises, setPrises] = useState([])
   const recup = async q => { if (await recuperer(q)) setPrises(p => [...p, q.cle]) }
+  // Le son du bilan : la fin de séance, l'XP qui défile quand « +XP » apparaît, puis le niveau s'il monte.
+  // Une fois par séance (le mode strict de React rejoue les effets au montage).
+  const sonne = useRef(null)
+  useEffect(() => {
+    if (!gain || sonne.current === gain) return
+    sonne.current = gain
+    jouerSon('fin')
+    rafaleXp(8, 0.065, 0.9)
+    if (gain.level > gain.niveauAvant) jouerSon('niveau', { dans: 1.6 })
+  }, [gain])
   if (!gain) return null
   const monte = gain.level > gain.niveauAvant
   const visibles = [...pretes, ...[quetes.jour, ...quetes.semaine].filter(q => prises.includes(q.cle) && q.recuperee)]

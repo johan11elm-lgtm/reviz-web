@@ -106,7 +106,7 @@ function FlashcardsSession() {
   const location = useLocation()
   useEffect(() => { recordRevision('flashcards'); mesurer('format_ouvert', { format: 'flashcards' }) }, [])
   const uid = useAuth()?.currentUser?.uid ?? null
-  const combo = useCombo()
+  const combo = useCombo({ sonFaute: false })
   const [gain, setGain] = useState(null)
   const lessonId = useMemo(() => getLessonId(), [])
   const lessonTitle = useMemo(() => getLessonTitle(), [])

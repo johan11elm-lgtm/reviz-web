@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { BattleMascot } from '../BattleMascot';
 import { useIsDesktop } from '../../hooks/useMediaQuery';
 import { CHRONO_MS, ROUNDS, lienBattle } from '../../utils/battle';
+import { jouerSon } from '../../utils/sons';
 
 const Partage = () => (
   <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M12 15V3M7 8l5-5 5 5M5 13v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6" /></svg>
@@ -19,6 +20,12 @@ export function BattleSalon({ code, salon, role, chapitre, onLancer }) {
   const lien = lienBattle(code, window.location.origin);
   const pret = salon.invite?.present === true;
   const regle = `${ROUNDS} rounds · ${CHRONO_MS / 1000} s par question`;
+  // L'adversaire entre dans le salon (côté hôte) : il ne sonne pas pour l'invité, déjà là en arrivant.
+  const etaitPret = useRef(pret);
+  useEffect(() => {
+    if (pret && !etaitPret.current) jouerSon('adversaire');
+    etaitPret.current = pret;
+  }, [pret]);
 
   async function partager() {
     const texte = `Rejoins ma battle sur Réviz (${chapitre?.titre ?? 'chapitre du programme'}) : code ${code}`;

@@ -18,6 +18,7 @@ import { BulleReviz } from '../components/reviz/BulleReviz';
 import { TEINTES, varsTeinte as variablesTeinte } from '../utils/teinteMatiere';
 import { getScanStatus } from '../services/scanLimitService';
 import { track, scanErrorCode } from '../services/statsService';
+import { jouerSon } from '../utils/sons';
 import { subjectInfo, subjectMascot } from '../utils/subjects';
 import { resumeReadingMinutes } from '../utils/resume';
 import { nextStep } from '../utils/nextStep';
@@ -203,6 +204,7 @@ export default function Analyse() {
         setLesson(buildLessonFromAiData(data));
         setIsLoading(false);
         track('scan_reussi', { source: 'texte' });
+        jouerSon('fiche');
       })
       .catch(err => {
         setError(err.message);
@@ -227,6 +229,7 @@ export default function Analyse() {
         setLesson(buildLessonFromAiData(data));
         setIsLoading(false);
         track('scan_reussi', { source: 'photo' });
+        jouerSon('fiche');
       })
       .catch(err => {
         setError(err.message);
