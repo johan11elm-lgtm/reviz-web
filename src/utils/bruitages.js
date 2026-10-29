@@ -6,12 +6,20 @@
  */
 const CLE = 'reviz-jeux-son';
 let ctx = null;
-let actif = (() => { try { return localStorage.getItem(CLE) !== '0'; } catch { return true; } })();
+// Le réglage est relu à chaque son : il a pu changer depuis le chargement du module, qui a lieu dès
+// le démarrage de l'app (un autre onglet, un réglage posé avant une connexion sans rechargement).
+// `actif` garde le dernier choix connu, pour un stockage illisible, et `seulEnMemoire` fait primer
+// le choix fait sur la page quand le stockage a refusé de l'écrire (quota plein).
+let actif = true;
+let seulEnMemoire = false;
 
-export const sonActif = () => actif;
+export function sonActif() {
+  if (!seulEnMemoire) try { actif = localStorage.getItem(CLE) !== '0'; } catch { /* stockage indisponible */ }
+  return actif;
+}
 export function bruitagesActifs(oui) {
   actif = oui;
-  try { localStorage.setItem(CLE, oui ? '1' : '0'); } catch { /* stockage indisponible */ }
+  try { localStorage.setItem(CLE, oui ? '1' : '0'); seulEnMemoire = false; } catch { seulEnMemoire = true; }
 }
 
 /**
@@ -41,7 +49,7 @@ if (typeof window !== 'undefined') {
 }
 
 function audio() {
-  if (!actif) return null;
+  if (!sonActif()) return null;
   return contexteAudio();
 }
 
