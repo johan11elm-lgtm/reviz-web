@@ -7,7 +7,7 @@ const jours = ns => ns.map(revision)
 
 describe('série', () => {
   it('compte les jours consécutifs, aujourd’hui pas encore révisé ne casse rien', () => {
-    expect(computeStreak(jours([0, 1, 2]), 'revisedAt')).toBe(3)
+    expect(computeStreak(jours([0, 1, 2]), 'revisedAt', { aujourdhui: AUJ })).toBe(3)
     expect(detailSerie(jours([1, 2, 3]), 'revisedAt', { aujourdhui: AUJ }).serie).toBe(3)
     expect(detailSerie(jours([0, 2, 3]), 'revisedAt', { aujourdhui: AUJ }).serie).toBe(1)
   })
