@@ -619,3 +619,13 @@ button.bt-choix-btn:active:not(:disabled) { transform: translateY(3px); box-shad
 .bt-vs { font-family: inherit; color: #042A65; }
 .bt-note--carte { border-radius: 14px; }
 .bt-page .bt-deco { display: none; }
+
+/* ═══ Battle en mini-jeux (29/10) : chaque round est un mini-jeu des exercices en jeu, dans son
+ * cadre habituel (pages/Exercices.css), sous le nom du mini-jeu et le minuteur. ═══ */
+.bt-duel-tete { display: flex; flex-direction: column; gap: 6px; }
+.bt-duel-tete .bt-minuteur { margin-top: 0; }
+.bt-duel-tete.is-mort .bt-sur { color: var(--bt-orange); }
+.ex-page.bt-duel .ex-consigne { font-size: 20px; }
+.ex-page.bt-duel .ex-cadre { gap: 12px; }
+.bt-page--large .ex-page.bt-duel .ex-consigne { font-size: 24px; }
+.bt-rev-reponse { max-width: 100%; font-size: 13px; font-weight: 600; line-height: 1.3; color: var(--bt-doux); overflow-wrap: anywhere; }

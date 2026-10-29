@@ -73,7 +73,7 @@ function Partie({ code }) {
     corps = <EtatVide pose="confused" titre="Connexion impossible" texte="La partie n’a pas pu se connecter. Vérifie ta connexion internet et réessaie." action="Réessayer" onAction={() => navigate(0)} />;
   } else if (etat === 'chapitre') {
     corps = <EtatVide pose="confused" titre="Chapitre indisponible" texte="Les questions de ce chapitre n’ont pas pu être chargées. Vérifie ta connexion." action="Réessayer" onAction={() => navigate(0)} />;
-  } else if (etat === 'chargement' || !chapitre || (role !== 'spectateur' && salon.invite && !partie)) {
+  } else if (etat === 'chargement' || !chapitre || (salon.invite && !chapitre.exercices) || (role !== 'spectateur' && salon.invite && !partie)) {
     corps = <p className="bt-chargement bt-milieu" role="status"><span className="bt-anneau" aria-hidden="true" />Chargement de la partie…</p>;
   } else if (role === 'spectateur') {
     classe = ' bt-page--invitation';
@@ -114,14 +114,14 @@ function Partie({ code }) {
     corps = (
       <BattleJeu
         salon={salon} role={role} uid={uid} phase={phase} partie={partie} maintenant={maintenant}
-        quiz={chapitre.quiz} chapitre={chapitre} mesReponses={mesReponses} onRepondre={actions.repondre}
+        exercices={chapitre.exercices} chapitre={chapitre} mesReponses={mesReponses} onRepondre={actions.repondre}
       />
     );
   } else {
     classe = ' bt-page--fin';
     corps = (
       <BattleFin
-        salon={salon} role={role} uid={uid} partie={partie} quiz={chapitre.quiz} chapitre={chapitre}
+        salon={salon} role={role} uid={uid} partie={partie} exercices={chapitre.exercices} chapitre={chapitre}
         onRevanche={revanche} revancheEnCours={revancheEnCours}
         onChapitre={() => navigate('/battle', { replace: true })}
         avecCompte={avecCompte} compte={compte}

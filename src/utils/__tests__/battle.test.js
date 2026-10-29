@@ -12,6 +12,8 @@ const graine = (s = 42) => () => ((s = (s * 16807) % 2147483647) - 1) / 21474836
 
 // Quiz de 7 questions : la bonne réponse de la question i est i % 4
 const QUIZ = Array.from({ length: 7 }, (_, i) => ({ question: `Q${i}`, choices: ['a', 'b', 'c', 'd'], correct: i % 4 }))
+// Les manches d'un salon aux questions 0 à 5 : la bonne case et le nombre de cases de chaque round.
+const MANCHES = QUIZ.slice(0, 6).map(q => ({ correct: q.correct, nbChoix: q.choices.length }))
 const A = 'hote', B = 'invite'
 
 // Salon en cours : questions 0 à 5 dans l'ordre, un round par entrée de `jeu`.
@@ -140,7 +142,7 @@ describe('une partie', () => {
       [juste(2), faux(2)],              // A
       [faux(3), juste(3)],              // B
       [juste(4, 900), null],            // A
-    ]), QUIZ)
+    ]), MANCHES)
     expect(p.terminee).toBe(true)
     expect(p.issue).toBe('victoire')
     expect(p.vainqueur).toBe(A)
@@ -158,24 +160,24 @@ describe('une partie', () => {
       [null, null],
       [faux(4), faux(4)],
     ]
-    const p = resoudrePartie(salon(cinq), QUIZ)
+    const p = resoudrePartie(salon(cinq), MANCHES)
     expect(p.rounds).toHaveLength(5)
     expect(p.scores).toEqual({ [A]: 1, [B]: 1 })
     expect(p.terminee).toBe(false)
-    expect(prochaineEtape(salon(cinq), QUIZ, 1e9)).toMatchObject({ type: 'round', n: 6 })
+    expect(prochaineEtape(salon(cinq), MANCHES, 1e9)).toMatchObject({ type: 'round', n: 6 })
 
-    const gagnee = resoudrePartie(salon([...cinq, [faux(5), juste(5)]]), QUIZ)
+    const gagnee = resoudrePartie(salon([...cinq, [faux(5), juste(5)]]), MANCHES)
     expect(gagnee.rounds[5].mortSubite).toBe(true)
     expect(gagnee).toMatchObject({ terminee: true, issue: 'victoire', vainqueur: B, scores: { [A]: 1, [B]: 2 } })
 
-    const nulle = resoudrePartie(salon([...cinq, [faux(5), null]]), QUIZ)
+    const nulle = resoudrePartie(salon([...cinq, [faux(5), null]]), MANCHES)
     expect(nulle).toMatchObject({ terminee: true, issue: 'egalite', vainqueur: null })
     expect(nulle.bonus).toEqual({ [A]: AURA.egalite, [B]: AURA.egalite })
   })
 
   it('pas de mort subite quand les scores diffèrent déjà', () => {
     const jeu = [[juste(0), faux(0)], [juste(1), faux(1)], [juste(2), faux(2)], [juste(3), faux(3)], [juste(4), faux(4)], [faux(5), juste(5)]]
-    const p = resoudrePartie(salon(jeu), QUIZ)
+    const p = resoudrePartie(salon(jeu), MANCHES)
     expect(p.rounds).toHaveLength(5)
     expect(p.scores).toEqual({ [A]: 5, [B]: 0 })
   })
@@ -183,25 +185,25 @@ describe('une partie', () => {
   it('ne compte que les rounds clos à l’instant donné', () => {
     const s = salon([[juste(0), faux(0)], [juste(1, 1000), null]])
     const debut2 = s.rounds[2].debut
-    expect(resoudrePartie(s, QUIZ, debut2 + 3000).rounds).toHaveLength(1)
-    expect(resoudrePartie(s, QUIZ, debut2 + CHRONO_MS + MARGE_RESEAU_MS).rounds).toHaveLength(2)
+    expect(resoudrePartie(s, MANCHES, debut2 + 3000).rounds).toHaveLength(1)
+    expect(resoudrePartie(s, MANCHES, debut2 + CHRONO_MS + MARGE_RESEAU_MS).rounds).toHaveLength(2)
   })
 
   it('forfait : l’autre gagne, avec le bonus seulement après 3 rounds', () => {
     const trois = [[juste(0), faux(0)], [faux(1), juste(1)], [faux(2), juste(2)]]
-    const p = resoudrePartie(salon(trois, { etat: 'abandon', abandonPar: B }), QUIZ)
+    const p = resoudrePartie(salon(trois, { etat: 'abandon', abandonPar: B }), MANCHES)
     expect(p).toMatchObject({ terminee: true, issue: 'forfait', vainqueur: A })
     expect(p.bonus[A]).toBe(AURA.victoire)
     // celui qui part garde ses −10 : on ne fuit pas un round perdu
     expect(p.aura[B]).toBe(-10 + 20 + 20)
 
-    const deux = resoudrePartie(salon(trois.slice(0, 2), { etat: 'abandon', abandonPar: B }), QUIZ)
+    const deux = resoudrePartie(salon(trois.slice(0, 2), { etat: 'abandon', abandonPar: B }), MANCHES)
     expect(deux.vainqueur).toBe(A)
     expect(deux.bonus[A]).toBe(0)
   })
 
   it('sans invité, rien à résoudre', () => {
-    expect(resoudrePartie({ hote: { uid: A }, questions: [] }, QUIZ)).toMatchObject({ terminee: false, rounds: [] })
+    expect(resoudrePartie({ hote: { uid: A }, questions: [] }, MANCHES)).toMatchObject({ terminee: false, rounds: [] })
   })
 })
 
@@ -209,9 +211,9 @@ describe('enchaînement des rounds (hôte)', () => {
   it('attend la fin du round, puis programme le suivant après la révélation', () => {
     const s = salon([[juste(0, 1200), null]])
     const debut = s.rounds[1].debut
-    expect(prochaineEtape(s, QUIZ, debut + 5000)).toBeNull()
+    expect(prochaineEtape(s, MANCHES, debut + 5000)).toBeNull()
     s.rounds[1].reponses[B] = { choix: 0, ms: 4000 }
-    expect(prochaineEtape(s, QUIZ, debut + 4100)).toEqual({
+    expect(prochaineEtape(s, MANCHES, debut + 4100)).toEqual({
       type: 'round', n: 2, debut: debut + 4000 + REVELATION_MS + PAUSE_ROUND_MS,
     })
   })
@@ -219,17 +221,17 @@ describe('enchaînement des rounds (hôte)', () => {
   it('ne programme jamais un round dans le passé', () => {
     const s = salon([[null, null]])
     const tard = s.rounds[1].debut + 60_000
-    expect(prochaineEtape(s, QUIZ, tard)).toEqual({ type: 'round', n: 2, debut: tard + PAUSE_ROUND_MS })
+    expect(prochaineEtape(s, MANCHES, tard)).toEqual({ type: 'round', n: 2, debut: tard + PAUSE_ROUND_MS })
   })
 
   it('annonce la fin quand la partie est jouée', () => {
     const s = salon([[juste(0), faux(0)], [juste(1), faux(1)], [juste(2), faux(2)], [juste(3), faux(3)], [juste(4), faux(4)]])
-    expect(prochaineEtape(s, QUIZ, Infinity)).toEqual({ type: 'fin' })
+    expect(prochaineEtape(s, MANCHES, Infinity)).toEqual({ type: 'fin' })
   })
 
   it('ne fait rien hors de la phase de jeu', () => {
-    expect(prochaineEtape({ ...salon([]), etat: 'salon' }, QUIZ, Infinity)).toBeNull()
-    expect(prochaineEtape(null, QUIZ, Infinity)).toBeNull()
+    expect(prochaineEtape({ ...salon([]), etat: 'salon' }, MANCHES, Infinity)).toBeNull()
+    expect(prochaineEtape(null, MANCHES, Infinity)).toBeNull()
   })
 })
 

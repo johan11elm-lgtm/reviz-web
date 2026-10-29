@@ -57,12 +57,15 @@ vi.mock('../_firebaseAdmin.js', () => ({
 }))
 
 const { default: handler, dateParis } = await import('../battle-fin.js')
+const { exercicesDeLaBattle, manchesDe } = await import('../../src/utils/battleJeux.js')
 
 // ── Une vraie partie sur un vrai chapitre du programme ──
-const QUIZ = JSON.parse(readFileSync('public/programme/4eme/svt/mouvement-commande-nerveuse.json', 'utf8')).quiz
 const CHAPITRE = { classe: '4ème', matiere: 'SVT', id: 'mouvement-commande-nerveuse' }
-const juste = (n, ms = 2000) => ({ choix: QUIZ[n].correct, ms })
-const faux = n => ({ choix: (QUIZ[n].correct + 1) % 4, ms: 1500 })
+// Les mini-jeux de la partie, tirés comme le serveur les tire (questions 0 à 5 du salon).
+const DATA = JSON.parse(readFileSync('public/programme/4eme/svt/mouvement-commande-nerveuse.json', 'utf8'))
+const MANCHES = manchesDe(exercicesDeLaBattle(DATA, { chapitre: CHAPITRE, questions: [0, 1, 2, 3, 4, 5] }))
+const juste = (n, ms = 2000) => ({ choix: MANCHES[n].correct, ms })
+const faux = n => ({ choix: (MANCHES[n].correct + 1) % MANCHES[n].nbChoix, ms: 1500 })
 
 // Johan (h) gagne 3–2 contre Léa (i) : rounds 1, 3, 5 pour h ; 2, 4 pour i.
 function salonTermine(extra = {}) {

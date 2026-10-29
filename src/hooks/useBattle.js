@@ -16,6 +16,7 @@ import {
   avancer, declarerAbandon, quitterBattle, lancerRevanche, marquerAbsent,
 } from '../services/battleService'
 import { loadCatalogue, loadChapterContent } from '../services/programmeService'
+import { exercicesDeLaBattle, manchesDe } from '../utils/battleJeux'
 import {
   CHRONO_MS, RETOUR_MS, TEMPS_MIN_MS, phaseDeJeu, prochaineEtape, resoudrePartie, maintenantServeur,
 } from '../utils/battle'
@@ -50,7 +51,7 @@ async function envoyerFin(ctx, code) {
   return (await res.json()).compte ?? null
 }
 
-/** Titre et quiz du chapitre d'un salon (fichiers statiques du programme). */
+/** Titre, quiz et contenu du chapitre d'un salon (fichiers statiques du programme). */
 function useChapitre(chapitre) {
   const [contenu, setContenu] = useState(null)
   const cle = chapitre ? `${chapitre.classe}/${chapitre.matiere}/${chapitre.id}` : null
@@ -64,7 +65,7 @@ function useChapitre(chapitre) {
       if (!vivant) return
       const titre = catalogue?.matieres
         .flatMap(m => m.chapitres).find(c => c.id === chapitre.id)?.titre ?? data.metadata?.title ?? 'Chapitre'
-      setContenu({ titre, matiere: chapitre.matiere, quiz: data.quiz })
+      setContenu({ titre, matiere: chapitre.matiere, quiz: data.quiz, data })
     }).catch(() => { if (vivant) setContenu({ erreur: true }) })
     return () => { vivant = false }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -114,6 +115,14 @@ export function useBattle(code, { prenom, onRevanche }) {
 
   const phase = useMemo(() => phaseDeJeu(salon, maintenant), [salon, maintenant])
   const quiz = contenu?.quiz ?? null
+  // Les mini-jeux de la partie (un par round), les mêmes sur les deux téléphones et pour le serveur.
+  const cleQuestions = salon?.questions ? Object.values(salon.questions).join(',') : null
+  const exercices = useMemo(
+    () => (contenu?.data && salon?.questions ? exercicesDeLaBattle(contenu.data, salon) : null),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [contenu, cleQuestions, salon?.chapitre?.matiere],
+  )
+  const manches = useMemo(() => (exercices ? manchesDe(exercices) : null), [exercices])
 
   // --- Horloge d'affichage : seulement quand quelque chose bouge avec le temps ---
   const enCours = salon?.etat === 'jeu' || (salon?.etat === 'fin' && phase.type === 'revelation')
@@ -128,14 +137,14 @@ export function useBattle(code, { prenom, onRevanche }) {
   // --- Hôte : fait avancer la partie (round suivant, fin) ---
   const etapeEnvoyee = useRef(null)
   useEffect(() => {
-    if (role !== 'hote' || !quiz || salon?.etat !== 'jeu') return
-    const etape = prochaineEtape(salon, quiz, maintenant)
+    if (role !== 'hote' || !manches || salon?.etat !== 'jeu') return
+    const etape = prochaineEtape(salon, manches, maintenant)
     if (!etape) return
     const cle = `${etape.type}-${etape.n ?? ''}`
     if (etapeEnvoyee.current === cle) return
     etapeEnvoyee.current = cle
     avancer(ctx, code, etape).catch(() => { etapeEnvoyee.current = null })
-  }, [ctx, code, role, quiz, salon, maintenant])
+  }, [ctx, code, role, manches, salon, maintenant])
 
   // --- Adversaire parti depuis plus de RETOUR_MS : on déclare l'abandon ---
   const absentDepuis = useRef(null)
@@ -183,8 +192,8 @@ export function useBattle(code, { prenom, onRevanche }) {
   }, [phase])
 
   const partie = useMemo(
-    () => (quiz && salon?.invite ? resoudrePartie(salon, quiz, maintenant) : null),
-    [salon, quiz, maintenant],
+    () => (manches && salon?.invite ? resoudrePartie(salon, manches, maintenant) : null),
+    [salon, manches, maintenant],
   )
 
   // --- Compteur d'usage : une partie terminée, une fois par joueur ---
@@ -240,6 +249,6 @@ export function useBattle(code, { prenom, onRevanche }) {
     avecCompte: !!ctx?.avecCompte,
     // Ce que le serveur a rangé : { [uid]: { delta, aura?, comptee, sansCompte? } }
     compte: salon?.compte ?? compte,
-    chapitre: contenu?.erreur ? null : contenu, mesReponses, erreurAction, actions,
+    chapitre: contenu?.erreur ? null : contenu && { ...contenu, exercices }, mesReponses, erreurAction, actions,
   }
 }

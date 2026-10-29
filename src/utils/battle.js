@@ -5,6 +5,9 @@
 // serveur (api/battle-fin.js recalcule tout avant d'écrire l'aura). Aucune
 // dépendance à Firebase. Plan et décisions : docs/plan-battle.md.
 //
+// Depuis le 29/10, chaque round est un mini-jeu des exercices en jeu (utils/battleJeux.js) :
+// les règles ne voient que ses « manches », { correct, nbChoix } pour chaque round.
+//
 // Un salon (battles/{code} dans Realtime Database) ressemble à :
 //   { etat: 'salon'|'jeu'|'fin'|'abandon', hote: { uid, prenom, present },
 //     invite: { … }, chapitre: { classe, matiere, id }, questions: [3, 0, …],
@@ -153,7 +156,8 @@ export function resoudreRound({ joueurs, correct, reponses = {}, nbChoix = 4 }) 
 }
 
 /**
- * Résout la partie à partir du salon et du quiz du chapitre. Seuls les rounds
+ * Résout la partie à partir du salon et de ses manches (une par round : { correct, nbChoix },
+ * utils/battleJeux.js manchesDe). Seuls les rounds
  * clos à `maintenant` comptent (par défaut tous : c'est le cas du serveur en
  * fin de partie, qui passe aussi son heure pour ignorer un round pas commencé).
  * @returns {{
@@ -163,7 +167,7 @@ export function resoudreRound({ joueurs, correct, reponses = {}, nbChoix = 4 }) 
  *   bonus: Record<string, number>,
  * }}
  */
-export function resoudrePartie(battle, quiz, maintenant = Infinity) {
+export function resoudrePartie(battle, manches, maintenant = Infinity) {
   const joueurs = joueursDe(battle)
   const scores = Object.fromEntries(joueurs.map(uid => [uid, 0]))
   const aura = Object.fromEntries(joueurs.map(uid => [uid, 0]))
@@ -178,10 +182,9 @@ export function resoudrePartie(battle, quiz, maintenant = Infinity) {
     if (mortSubite && scores[a] !== scores[b]) break
     const round = battle.rounds?.[n]
     if (!roundTermine(round, joueurs, maintenant)) break
-    const question = quiz[battle.questions[n - 1]]
-    const res = resoudreRound({
-      joueurs, correct: question.correct, reponses: round.reponses, nbChoix: question.choices?.length ?? 4,
-    })
+    const manche = manches?.[n - 1]
+    if (!manche) break
+    const res = resoudreRound({ joueurs, correct: manche.correct, reponses: round.reponses, nbChoix: manche.nbChoix ?? 4 })
     for (const uid of joueurs) {
       aura[uid] += res.aura[uid]
       if (res.issues[uid] === 'gagne') scores[uid]++
@@ -216,13 +219,13 @@ export function resoudrePartie(battle, quiz, maintenant = Infinity) {
  * round suivant ou fin de partie.
  * @returns {null | { type: 'round', n: number, debut: number } | { type: 'fin' }}
  */
-export function prochaineEtape(battle, quiz, maintenant) {
+export function prochaineEtape(battle, manches, maintenant) {
   if (battle?.etat !== 'jeu') return null
   const joueurs = joueursDe(battle)
   const n = battle.round
   const round = battle.rounds?.[n]
   if (!roundTermine(round, joueurs, maintenant)) return null
-  if (resoudrePartie(battle, quiz, maintenant).terminee) return { type: 'fin' }
+  if (resoudrePartie(battle, manches, maintenant).terminee) return { type: 'fin' }
   const debut = Math.max(finDuRound(round, joueurs) + REVELATION_MS + PAUSE_ROUND_MS, maintenant + PAUSE_ROUND_MS)
   return { type: 'round', n: n + 1, debut }
 }

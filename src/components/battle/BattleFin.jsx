@@ -6,6 +6,7 @@ import { BulleReviz } from '../reviz/BulleReviz';
 import { useIsDesktop } from '../../hooks/useMediaQuery';
 import { AURA, joueursDe } from '../../utils/battle';
 import { nbsp } from '../../utils/typography';
+import { NOMS_FORMATS } from '../../pages/exercices/formats';
 import { track } from '../../services/statsService';
 
 // Au moins 3 rounds d'écart : le gagnant fait le 6-7.
@@ -30,7 +31,7 @@ function detailAura(partie, id) {
  * Fin de partie : le résultat vu par ce joueur, le score, l'aura de la partie,
  * la revanche (lancée par l'hôte, rejointe automatiquement) et la correction.
  */
-export function BattleFin({ salon, role, uid, partie, quiz, chapitre, onRevanche, onChapitre, revancheEnCours, avecCompte, compte }) {
+export function BattleFin({ salon, role, uid, partie, exercices, chapitre, onRevanche, onChapitre, revancheEnCours, avecCompte, compte }) {
   const isDesktop = useIsDesktop();
   const [correction, setCorrection] = useState(false);
   const adversaire = role === 'hote' ? salon.invite : salon.hote;
@@ -90,13 +91,13 @@ export function BattleFin({ salon, role, uid, partie, quiz, chapitre, onRevanche
       {correction && (
         <ol className="bt-carte bt-correction">
           {rounds.map(r => {
-            const q = quiz[r.question];
+            const ex = exercices[r.n - 1];
             const gagnants = [salon.hote, salon.invite].filter(j => r.issues[j.uid] === 'gagne');
             return (
               <li key={r.n}>
-                <span className="bt-sur">{r.mortSubite ? 'Mort subite' : `Round ${r.n}`} · {gagnants.length ? gagnants.map(j => j.prenom).join(' et ') : 'personne'}</span>
-                <p className="bt-correction-q">{nbsp(q.question)}</p>
-                <p className="bt-correction-r">{nbsp(q.choices[q.correct])}</p>
+                <span className="bt-sur">{r.mortSubite ? 'Mort subite' : `Round ${r.n}`} · {NOMS_FORMATS[ex.type]} · {gagnants.length ? gagnants.map(j => j.prenom).join(' et ') : 'personne'}</span>
+                <p className="bt-correction-q">{nbsp(ex.aRetenir.question)}</p>
+                <p className="bt-correction-r">{nbsp(ex.aRetenir.bonne)}</p>
               </li>
             );
           })}

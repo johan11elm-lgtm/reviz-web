@@ -411,6 +411,59 @@ export function construireSeance(ai, { graine = Date.now(), nombre = 10 } = {}) 
   return espacer(melanger(exercices, alea))
 }
 
+// ── La Battle en mini-jeux (29/10) ──
+// Chaque round est un mini-jeu à réponse unique (une case parmi 4 au plus) : la réponse tient
+// dans le champ `choix` (0 à 3) que les règles de la base temps réel acceptent déjà. Les deux
+// téléphones et le serveur tirent les mêmes mini-jeux à partir des questions du salon.
+
+/** Les formats d'une Battle : une seule réponse, assez courts pour le chrono de 15 s. */
+export const FORMATS_DUEL = ['coins', 'intrus', 'indices', 'definition', 'vraifaux', 'phrase']
+
+/** La graine d'une Battle, tirée des numéros de questions du salon. */
+export function graineDuel(questions = []) {
+  let h = 7
+  for (const q of questions) h = (Math.imul(h, 31) + Number(q) + 1) | 0
+  return h
+}
+
+/** La réponse d'un mini-jeu de Battle, en numéro de case (Vrai ou faux : 1 = vrai). */
+export const bonneReponseDuel = ex => (ex.type === 'vraifaux' ? (ex.vrai ? 1 : 0) : ex.bonne)
+/** Le nombre de cases d'un mini-jeu de Battle. */
+export function nbChoixDuel(ex) {
+  if (ex.type === 'coins' || ex.type === 'intrus') return 4
+  if (ex.type === 'vraifaux') return 2
+  if (ex.type === 'qcm') return ex.choix.length
+  return ex.choix?.length ?? ex.mots?.length ?? 0
+}
+
+/**
+ * Les mini-jeux d'une Battle, un par round (5 + la mort subite) : chaque format une fois, dans un
+ * ordre tiré au sort, puis les questions du quiz du salon pour compléter.
+ * @param {object} ai — contenu du chapitre (sa matière dans metadata.subject)
+ * @param {number[]} questions — numéros de questions du quiz tirés à la création du salon
+ * @param {number} [nombre]
+ */
+export function construireDuel(ai, questions = [], nombre = 6) {
+  const alea = creerAlea(graineDuel(questions))
+  const casse = /math|physique/i.test(ai?.metadata?.subject ?? '') ? s => s : majusculeMot
+  const branches = melanger(branchesDe(ai, casse), alea)
+  const motsCles = motsClesDe(ai, casse)
+  const dates = datesDe(ai)
+  const prises = new Set()
+  let n = 0
+  const id = t => `${t}-${n++}`
+  const jeux = melanger([
+    coins(branches, alea, id('coins'), prises),
+    intrus(branches, alea, id('intrus'), prises),
+    indices(branches, alea, id('indices'), prises),
+    definition(motsCles, alea, id('definition'), new Set()),
+    vraiFaux(motsCles, dates, alea, id('vraifaux')),
+    phrase(ai, motsCles, alea, id('phrase')),
+  ].filter(Boolean), alea)
+  const quiz = questions.map(i => qcm(ai?.quiz?.[i], id('qcm'))).filter(Boolean)
+  return [...jeux, ...quiz].filter(e => nbChoixDuel(e) >= 2 && nbChoixDuel(e) <= 4).slice(0, nombre)
+}
+
 /**
  * Évite deux exercices du même format d'affilée, en gardant l'ordre tiré au sort autant que possible :
  * on prend le premier exercice d'un autre format que le précédent, sauf quand un format occupe plus
