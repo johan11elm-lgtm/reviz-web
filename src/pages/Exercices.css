@@ -517,10 +517,11 @@
 /* ── Les formats du bloc relu (pilote du 29/10) ── */
 
 /* Sélection : six cartes, une coche sur celles qu'on a choisies, la bonne qu'on a oubliée en pointillé */
-.ex-page .ex-selection .ex-carte { min-height: 88px; padding: 14px 10px; font-size: 15px; }
+/* La coche se pose dans le coin : la marge de droite et du haut lui laisse sa place, même sur une carte longue. */
+.ex-page .ex-selection .ex-carte { min-height: 88px; padding: 18px 22px 12px 10px; font-size: 15px; }
 .ex-page .ex-selection .ex-carte:nth-child(n).is-choisi { transform: translateY(-3px); }
-.ex-page .ex-carte-coche { position: absolute; top: 8px; right: 8px; width: 20px; height: 20px; border-radius: 50%; background: var(--ex-lavande-fort); animation: exPop .25s cubic-bezier(.3,1.6,.5,1) both; }
-.ex-page .ex-carte-coche::after { content: ''; position: absolute; left: 7px; top: 4px; width: 5px; height: 9px; border: solid #fff; border-width: 0 2.5px 2.5px 0; transform: rotate(45deg); }
+.ex-page .ex-carte-coche { position: absolute; top: 6px; right: 6px; width: 18px; height: 18px; border-radius: 50%; background: var(--ex-lavande-fort); animation: exPop .25s cubic-bezier(.3,1.6,.5,1) both; }
+.ex-page .ex-carte-coche::after { content: ''; position: absolute; left: 6px; top: 3px; width: 5px; height: 9px; border: solid #fff; border-width: 0 2.5px 2.5px 0; transform: rotate(45deg); }
 .ex-page .ex-carte.is-manquee { background: #fff; box-shadow: inset 0 0 0 2px var(--ex-juste); outline: 2px dashed var(--ex-juste); outline-offset: 3px; color: var(--ex-juste-texte); }
 @keyframes exPop { from { transform: scale(.3); opacity: 0; } }
 
