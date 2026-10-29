@@ -188,7 +188,7 @@ function MindmapSession() {
   const lignes = fin ? ['Tu as fait le tour du chapitre.', 'Reviens-y avant ton contrôle.']
     : [nbVues === 0 ? `${pluriel(n, 'branche')} à explorer.` : nbVues === n ? 'Tout est exploré.' : `Encore ${pluriel(n - nbVues, 'branche')}.`,
        teste ? 'Les idées sont cachées : retrouve-les.' : 'Commence par celle que tu veux.']
-  // Façon app Nomad (29/10) : ce que dit Réviz dans le bloc lavande, avec son émote (plus de pantin).
+  // Façon app Nomad (29/10) : ce que dit Réviz dans le bloc pêche, avec son émote (plus de pantin).
   const reviz = () => (
     <div className="cm-bloc">
       <span className="cm-bloc-reviz" aria-hidden="true"><Mascot pose={fin ? 'celebration' : 'thinking'} size={isDesktop ? 84 : 70} alt="" /></span>

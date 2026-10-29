@@ -373,7 +373,7 @@ export default function Analyse() {
     </header>
   );
 
-  // Le bloc lavande de l'accueil : ce que dit Réviz, puis la prochaine étape en ligne blanche.
+  // Le bloc pêche de l'accueil : ce que dit Réviz, puis la prochaine étape en ligne blanche.
   const blocSuite = (
     <section className="nf-bloc" aria-label="Prochaine étape">
       <span className="nf-bloc-reviz" aria-hidden="true">

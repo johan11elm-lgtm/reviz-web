@@ -496,7 +496,7 @@
 .rn-page .rn-surtitre { font-size: 13px; font-weight: 600; color: var(--rv-doux); }
 .rn-page .rn-titre { margin: 2px 0 0; font-size: 26px; font-weight: 800; line-height: 1.15; letter-spacing: -.01em; color: #042A65; text-wrap: balance; }
 .rn-page .rs-pastille { border-radius: 8px; box-shadow: 0 1px 3px rgba(4,42,101,.08); }
-.rn-page .rn-bloc { position: relative; align-self: stretch; padding: 18px 14px; border-radius: 24px; background: #B9A6FB; color: #042A65; }
+.rn-page .rn-bloc { position: relative; align-self: stretch; padding: 18px 14px; border-radius: 24px; background: #FFC59B; color: #042A65; }
 .rn-page .rn-bloc-reviz { position: absolute; top: -14px; right: 8px; pointer-events: none; }
 .rn-page .rn-bloc-txt { max-width: 64%; min-height: 56px; margin: 0; font-size: 19px; font-weight: 700; line-height: 1.3; }
 

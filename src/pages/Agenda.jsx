@@ -61,7 +61,7 @@ function bulle(prochain, n) {
 
 /**
  * Agenda (handoff Claude Design du 21/10, en-tête façon app Nomad le 29/10) : ne pas se faire
- * surprendre par un contrôle. Ce que dit Réviz dans le bloc lavande, le prochain contrôle avec
+ * surprendre par un contrôle. Ce que dit Réviz dans le bloc pêche, le prochain contrôle avec
  * son compte à rebours et son plan,
  * les contrôles suivants, puis l'emploi du temps Pronote semaine par semaine (un jour à la
  * fois sur téléphone, la semaine en grille horaire sur ordinateur). Pronote n'exporte que
@@ -124,7 +124,7 @@ export default function Agenda() {
     });
   }
 
-  // Ce que dit Réviz, dans le bloc lavande de l'accueil (façon app Nomad, 29/10) ; sans contrôle
+  // Ce que dit Réviz, dans le bloc pêche de l'accueil (façon app Nomad, 29/10) ; sans contrôle
   // noté, la ligne blanche pour en ajouter un, comme leur « Ajouter une évaluation ».
   const blocReviz = (
     <section className="na-bloc" aria-label="Réviz">

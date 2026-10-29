@@ -370,7 +370,7 @@ function ResumeContent() {
   )
 
   // En-tête façon fiche chapitre de l'app Nomad (29/10) : retour, émote de la matière, titre ;
-  // une fois lu, ce que dit Réviz dans le bloc lavande.
+  // une fois lu, ce que dit Réviz dans le bloc pêche.
   const hero = (
     <header className={`rn-entete${fin ? ' rn-entete--fin' : ''}`}>
       {boutonRetour}

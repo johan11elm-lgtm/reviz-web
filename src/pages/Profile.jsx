@@ -140,7 +140,7 @@ export default function Profile() {
     : [`Niveau ${level}, ${isGuest ? 'bien joué' : 'bravo'}.`, `Encore ${reste} XP pour le niveau ${level + 1}.`];
   // ── Blocs ──
   // En-tête façon profil de l'app Nomad (29/10) : avatar, prénom, classe, réglages ; puis ce que
-  // dit Réviz dans le bloc lavande de l'accueil.
+  // dit Réviz dans le bloc pêche de l'accueil.
   const identite = (
     <header className="mn-identite">
       <button type="button" className="mn-avatar" onClick={() => setChoixAvatar(true)} aria-label="Changer ma photo de profil">

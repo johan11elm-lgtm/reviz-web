@@ -632,7 +632,7 @@
 
 /* ══ Accueil façon app Nomad (29/10, demande de Johan) ═══════════════════════
  * En-tête (logo, S'abonner, avatar), « Salut ! » et trois chiffres, recherche, raccourcis
- * ronds, bloc lavande « On fait quoi aujourd'hui ? » aux lignes blanches, le plan, les
+ * ronds, bloc pêche « On fait quoi aujourd'hui ? » aux lignes blanches, le plan, les
  * matières, « À la une ». Ordinateur : colonne principale + colonne de droite. */
 .home-page .nm-defile { flex: 1; overflow-y: auto; padding: calc(10px + env(safe-area-inset-top, 0px)) 16px calc(112px + env(safe-area-inset-bottom, 0px)); scrollbar-width: none; }
 .home-page .nm-defile::-webkit-scrollbar { display: none; }
@@ -682,8 +682,8 @@
 .home-page .nm-rond:active .nm-rond-icone { transform: scale(.9); transition-duration: .08s; }
 .home-page .nm-rond-label { font-size: 15px; font-weight: 700; }
 
-/* Bloc lavande « On fait quoi aujourd'hui ? » */
-.home-page .nm-bloc { position: relative; padding: 20px 14px 14px; border-radius: 24px; background: #B9A6FB; color: var(--rv-encre); }
+/* Bloc pêche « On fait quoi aujourd'hui ? » */
+.home-page .nm-bloc { position: relative; padding: 20px 14px 14px; border-radius: 24px; background: #FFC59B; color: var(--rv-encre); }
 .home-page .nm-bloc-tete { position: relative; z-index: 1; max-width: 62%; }
 .home-page .nm-bloc-titre { margin: 0; font-size: 24px; font-weight: 800; line-height: 1.15; color: #042A65; }
 .home-page .nm-bloc-sous { margin: 6px 0 0; font-size: 16px; color: #042A65; }

@@ -1,7 +1,7 @@
 /* CSS scoped to page wrapper — see scripts/scope-page-css.py */
 /* Wrapper: .sb-page */
 
-/* Simulateur de notes du brevet (28/10) : en-tête en bloc lavande, saisies en cartes blanches,
+/* Simulateur de notes du brevet (28/10) : en-tête en bloc pêche, saisies en cartes blanches,
  * résultat en bloc encre (à droite et collé en haut sur ordinateur). */
 .sb-page .sb-defile { flex: 1; overflow-y: auto; padding: calc(10px + env(safe-area-inset-top, 0px)) 12px 120px; }
 
@@ -125,6 +125,6 @@
 .sb-page--large .sb-carte { padding: 24px; }
 .sb-page--large .sb-cote { position: sticky; top: 0; }
 .sb-page--large .sb-champs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
-/* Façon app Nomad (29/10) : l'en-tête dans le bloc lavande de l'app. */
-.sb-entete.sk-bloc--lavande { background: #B9A6FB; }
+/* Façon app Nomad (29/10) : l'en-tête dans le bloc pêche de l'app. */
+.sb-entete.sk-bloc--lavande { background: #FFC59B; }
 .sb-entete.sk-bloc--lavande .sb-surtitre { color: #042A65; opacity: .8; }
