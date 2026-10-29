@@ -1,4 +1,4 @@
-// Battle : deux élèves, deux navigateurs, une partie complète en temps réel
+// Battle : deux élèves, deux navigateurs, une partie complète en temps réel, un mini-jeu par round
 // contre l'Emulator Suite (auth, firestore et base temps réel, projet demo-reviz).
 //
 // Deux parcours :
@@ -12,6 +12,9 @@ import { readFileSync } from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { compteRapide, fermerAnnonceRevizPlus, lireProfilEmulateur, mockApiRoutes } from './helpers'
+import { exercicesDeLaBattle } from '../src/utils/battleJeux.js'
+import { bonneReponseDuel, nbChoixDuel } from '../src/utils/exercicesChapitre.js'
+import { nbsp } from '../src/utils/typography.js'
 
 const here = path.dirname(fileURLToPath(import.meta.url))
 const fixture = name => JSON.parse(readFileSync(path.join(here, 'fixtures/programme', name), 'utf8'))
@@ -60,14 +63,27 @@ const capture = (page, nom) => page.screenshot({ path: test.info().outputPath(`$
 // L'affichage pose des espaces insécables (typographie française) : on compare sans.
 const sansInsecables = t => t.replace(/ /g, ' ').replace(/⁠/g, '').trim()
 
-async function repondre(page, juste) {
-  const texte = sansInsecables(await page.locator('.bt-question-texte').textContent())
-  const q = chapitre.quiz.find(x => x.question === texte)
-  expect(q, `question inconnue : ${texte}`).toBeTruthy()
-  const index = juste ? q.correct : (q.correct + 1) % q.choices.length
-  const bouton = page.locator('.bt-choix-btn').nth(index)
+/** Les mini-jeux d'un salon (un par round), tirés comme l'app les tire : on lit ses questions dans l'émulateur. */
+async function miniJeux(code) {
+  const res = await fetch(`http://127.0.0.1:9000/battles/${code}.json?ns=demo-reviz-default-rtdb`, { headers: { Authorization: 'Bearer owner' } })
+  return exercicesDeLaBattle(chapitre, await res.json())
+}
+const exact = t => new RegExp(`^${nbsp(t).replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace(/\s+/g, '\\s+')}$`)
+
+/** Joue le mini-jeu du round : la bonne case, ou une autre. */
+async function repondre(page, ex, juste) {
+  const bonne = bonneReponseDuel(ex)
+  const i = juste ? bonne : (bonne + 1) % nbChoixDuel(ex)
+  const zone = page.locator('.bt-duel')
+  if (ex.type === 'vraifaux') {
+    await zone.getByRole('button', { name: i ? 'Vrai' : 'Faux', exact: true }).click()
+    return
+  }
+  const textes = ex.type === 'coins' ? ex.coins : ex.type === 'intrus' ? ex.cartes : ex.type === 'phrase' ? ex.mots : ex.choix
+  const bouton = zone.getByRole('button', { name: exact(textes[i]) })
   await bouton.scrollIntoViewIfNeeded()
   await bouton.click()
+  await zone.getByRole('button', { name: 'Valider' }).click()
 }
 
 /** Depuis /battle : Maths, le chapitre de Thalès, « Créer le salon » → code du salon. */
@@ -96,18 +112,22 @@ async function taperLeCode(page, code) {
 
 /** 5 rounds : l'hôte répond juste, l'autre se trompe. Vérifie au passage le premier round en détail. */
 async function jouerCinqRounds(hote, autre, { nomHote, nomAutre }) {
+  const jeux = await miniJeux(hote.url().split('/').pop())
   await hote.getByRole('button', { name: 'C’est parti' }).click()
   await expect(autre.getByText('Prêts ?')).toBeVisible()
   for (let n = 1; n <= 5; n++) {
-    await expect(hote.locator('.bt-question-texte')).toBeVisible({ timeout: 15_000 })
-    await expect(autre.locator('.bt-question-texte')).toBeVisible({ timeout: 15_000 })
+    const ex = jeux[n - 1]
+    for (const page of [hote, autre]) {
+      await expect(page.locator('.bt-duel .ex-consigne')).toHaveText(nbsp(ex.consigne), { timeout: 15_000 })
+    }
     if (n === 1) await capture(hote, '05-question-hote')
-    await repondre(hote, true)
+    await repondre(hote, ex, true)
     if (n === 1) {
       await expect(autre.getByText(`${nomHote} a répondu`).first()).toBeVisible()
       await expect(hote.getByText(`En attente de ${nomAutre}…`).first()).toBeVisible()
     }
-    await repondre(autre, false)
+    if (n === 1) await capture(hote, '05b-mini-jeu-repondu-hote')
+    await repondre(autre, ex, false)
     await expect(hote.getByRole('heading', { name: 'Tu gagnes le round' })).toBeVisible()
     await expect(autre.getByRole('heading', { name: `${nomHote} gagne le round` })).toBeVisible()
     if (n === 1) {
@@ -179,7 +199,7 @@ test.describe('Battle', () => {
     await correction.scrollIntoViewIfNeeded()
     await correction.click()
     await expect(hote.getByRole('button', { name: 'Masquer la correction' })).toBeVisible()
-    await expect(hote.getByText(/Round 1 · Johan/)).toBeVisible()
+    await expect(hote.getByText(/Round 1 · .+ · Johan/)).toBeVisible()
     await hote.getByRole('button', { name: 'Masquer la correction' }).click()
     await capture(hote, '08-fin-hote')
     await capture(autre, '09-fin-autre')

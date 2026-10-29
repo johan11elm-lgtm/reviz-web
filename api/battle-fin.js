@@ -3,7 +3,8 @@
 //
 // Appelée par les deux téléphones à la fin d'une partie (idempotent). Le
 // serveur relit le salon dans Realtime Database, recalcule chaque round avec
-// le quiz du chapitre (mêmes règles que l'app : src/utils/battle.js), puis
+// les mini-jeux du chapitre (mêmes mini-jeux et mêmes règles que l'app :
+// src/utils/battleJeux.js et src/utils/battle.js), puis
 // écrit dans une transaction Firestore l'aura des joueurs qui ont un compte :
 // plancher à 0, 5 parties comptées par jour dont 2 contre le même adversaire.
 // Le client ne peut pas écrire son aura (firestore.rules). Le résultat est
@@ -15,6 +16,7 @@ import { FieldValue } from 'firebase-admin/firestore'
 import { getAuthAdmin, getDb, getRtdb } from './_firebaseAdmin.js'
 import { appliquerAura, joueursDe, normaliserCode, resoudrePartie } from '../src/utils/battle.js'
 import { chapterContentUrl } from '../src/utils/programme.js'
+import { exercicesDeLaBattle, manchesDe } from '../src/utils/battleJeux.js'
 
 export const config = { maxDuration: 30 }
 
@@ -23,12 +25,12 @@ export function dateParis(maintenant = new Date()) {
   return new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Paris' }).format(maintenant)
 }
 
-/** Le quiz du chapitre, lu dans public/programme (embarqué avec la fonction, vercel.json). */
-export async function chargerQuiz(chapitre) {
+/** Le contenu du chapitre, lu dans public/programme (embarqué avec la fonction, vercel.json). */
+export async function chargerChapitre(chapitre) {
   const url = chapterContentUrl(chapitre.classe, chapitre.matiere, chapitre.id)
   const data = JSON.parse(await readFile(path.join(process.cwd(), 'public', url), 'utf8'))
   if (!Array.isArray(data?.quiz)) throw new Error('QUIZ_ABSENT')
-  return data.quiz
+  return data
 }
 
 /**
@@ -92,13 +94,13 @@ export default async function handler(req, res) {
   // L'id du chapitre sert de nom de fichier : rien d'autre que des lettres, chiffres et tirets.
   if (!/^[a-z0-9-]{1,120}$/.test(battle.chapitre?.id ?? '')) return res.status(400).json({ error: 'BAD_CHAPTER' })
 
-  let quiz
+  let manches
   try {
-    quiz = await chargerQuiz(battle.chapitre)
+    manches = manchesDe(exercicesDeLaBattle(await chargerChapitre(battle.chapitre), battle))
   } catch {
     return res.status(500).json({ error: 'CHAPTER_UNAVAILABLE' })
   }
-  const partie = resoudrePartie(battle, quiz, Date.now())
+  const partie = resoudrePartie(battle, manches, Date.now())
   if (!partie.terminee) return res.status(409).json({ error: 'NOT_FINISHED' })
 
   try {

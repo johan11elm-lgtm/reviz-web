@@ -4,6 +4,8 @@
 // bulle, la zone de jeu, « Valider », puis la feuille de correction du quiz.
 // Pas de chrono : on peut changer d'avis tant qu'on n'a pas validé. Tout se
 // joue au toucher ; sur ordinateur, la carte des 4 coins se glisse aussi.
+// Les formats à une seule case passent aussi `{ choix }` à onValider : la
+// Battle l'envoie à l'adversaire (components/battle/BattleJeu.jsx).
 // Les données viennent de utils/exercicesChapitre.js.
 // -------------------------------------------------------
 import { useEffect, useRef, useState } from 'react'
@@ -61,7 +63,7 @@ function ListeChoix({ choix, sel, bonne, verdict, onChoisir, lettres = true, col
 export function Qcm({ ex, verdict, onValider, grand }) {
   const [sel, setSel] = useState(null)
   return (
-    <CadreExercice ex={ex} verdict={verdict} grand={grand} peutValider={sel !== null} onValider={() => onValider(sel === ex.bonne)}>
+    <CadreExercice ex={ex} verdict={verdict} grand={grand} peutValider={sel !== null} onValider={() => onValider(sel === ex.bonne, { choix: sel })}>
       <ListeChoix choix={ex.choix} sel={sel} bonne={ex.bonne} verdict={verdict} onChoisir={setSel} />
     </CadreExercice>
   )
@@ -70,7 +72,7 @@ export function Qcm({ ex, verdict, onValider, grand }) {
 export function Definition({ ex, verdict, onValider, grand }) {
   const [sel, setSel] = useState(null)
   return (
-    <CadreExercice ex={ex} verdict={verdict} grand={grand} peutValider={sel !== null} onValider={() => onValider(sel === ex.bonne)}>
+    <CadreExercice ex={ex} verdict={verdict} grand={grand} peutValider={sel !== null} onValider={() => onValider(sel === ex.bonne, { choix: sel })}>
       <ListeChoix choix={ex.choix} sel={sel} bonne={ex.bonne} verdict={verdict} onChoisir={setSel} lettres={false} colonnes />
     </CadreExercice>
   )
@@ -80,7 +82,7 @@ export function Indices({ ex, verdict, onValider, grand }) {
   const [sel, setSel] = useState(null)
   const pose = sel === null ? null : ex.choix[sel]
   return (
-    <CadreExercice ex={ex} verdict={verdict} grand={grand} peutValider={sel !== null} onValider={() => onValider(sel === ex.bonne)}>
+    <CadreExercice ex={ex} verdict={verdict} grand={grand} peutValider={sel !== null} onValider={() => onValider(sel === ex.bonne, { choix: sel })}>
       <div className="ex-arbre">
         <span className={`ex-arbre-tete ${pose ? (verdict ? (verdict === 'juste' ? 'is-juste' : 'is-faux') : 'is-pose') : ''}`} aria-live="polite">
           {pose ? nbsp(pose) : '?'}
@@ -102,7 +104,7 @@ export function Coins({ ex, verdict, onValider, grand }) {
   const [survol, setSurvol] = useState(null)
   const glisser = grand && !verdict
   return (
-    <CadreExercice ex={ex} verdict={verdict} grand={grand} peutValider={sel !== null} onValider={() => onValider(sel === ex.bonne)}>
+    <CadreExercice ex={ex} verdict={verdict} grand={grand} peutValider={sel !== null} onValider={() => onValider(sel === ex.bonne, { choix: sel })}>
       <div className="ex-coins">
         {ex.coins.map((nom, i) => (
           <button key={i} type="button"
@@ -130,7 +132,7 @@ export function Coins({ ex, verdict, onValider, grand }) {
 export function Intrus({ ex, verdict, onValider, grand }) {
   const [sel, setSel] = useState(null)
   return (
-    <CadreExercice ex={ex} verdict={verdict} grand={grand} peutValider={sel !== null} onValider={() => onValider(sel === ex.bonne)}>
+    <CadreExercice ex={ex} verdict={verdict} grand={grand} peutValider={sel !== null} onValider={() => onValider(sel === ex.bonne, { choix: sel })}>
       <div className="ex-cartes" role="group" aria-label={`Cartes sur le thème ${ex.theme}`}>
         {ex.cartes.map((c, i) => (
           <button key={i} type="button" className={`ex-carte ${etatCase({ choisi: sel === i, bonne: i === ex.bonne, verdict })}`}
@@ -285,7 +287,7 @@ const Fleche = ({ vers }) => (
 
 export function VraiFaux({ ex, verdict, onValider, grand }) {
   const [choix, setChoix] = useState(null) // true = vrai
-  const repondre = v => { if (verdict || choix !== null) return; setChoix(v); onValider(v === ex.vrai) }
+  const repondre = v => { if (verdict || choix !== null) return; setChoix(v); onValider(v === ex.vrai, { choix: v ? 1 : 0 }) }
   const { dx, poignees } = useGlisser(cote => repondre(cote === 'droite'), !verdict && choix === null)
   const sortie = choix === null ? null : choix ? 'droite' : 'gauche'
   const penche = Math.max(-1, Math.min(1, dx / SEUIL))
@@ -318,7 +320,7 @@ export function Phrase({ ex, verdict, onValider, grand }) {
   const [sel, setSel] = useState(null)
   const etatTrou = !verdict ? (sel === null ? 'vide' : 'pose') : sel === ex.bonne ? 'juste' : 'faux'
   return (
-    <CadreExercice ex={ex} verdict={verdict} grand={grand} peutValider={sel !== null} onValider={() => onValider(sel === ex.bonne)}>
+    <CadreExercice ex={ex} verdict={verdict} grand={grand} peutValider={sel !== null} onValider={() => onValider(sel === ex.bonne, { choix: sel })}>
       <p className="ex-phrase">
         {nbsp(ex.avant)}
         <button type="button" className={`ex-trou is-${etatTrou}`} disabled={!!verdict || sel === null} onClick={() => setSel(null)}
