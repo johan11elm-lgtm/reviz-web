@@ -38,3 +38,6 @@
   --hm-encre: #042A65; --hm-doux: #6E675B; --inst-encre: #042A65; --inst-doux: #6E675B; --lg-encre: #042A65; --lg-doux: #6E675B; --prg-encre: #042A65; --prg-doux: #6E675B;
   color: #042A65;
 }
+
+/* Rappel « Confirme ton e-mail » (EmailBanner) : l'adresse entière, coupée où il faut sur téléphone. */
+.email-banner-adresse { font-weight: 700; color: var(--rv-encre); overflow-wrap: anywhere; }

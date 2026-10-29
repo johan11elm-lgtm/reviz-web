@@ -27,6 +27,7 @@ import { openChapter } from '../services/programmeService';
 import { erreursDe } from '../services/erreursService';
 import { construireSeance } from '../utils/exercicesChapitre';
 import { ChapitresMatiere } from '../components/fiche/ChapitresMatiere';
+import { CarteEmail } from '../components/CarteEmail';
 import '../components/reviz/HerosMatiere.css';
 import './Analyse.css';
 
@@ -143,6 +144,7 @@ export default function Analyse() {
   const [progress, setProgress]       = useState(0);
   const [showPremium, setShowPremium] = useState(false);
   const [noLesson, setNoLesson]       = useState(false);
+  const [emailConfirme, setEmailConfirme] = useState(false); // confirmé depuis l'écran de refus
   const navigate   = useNavigate();
   const location   = useLocation();
   const isDesktop  = useIsDesktop();
@@ -257,7 +259,7 @@ export default function Analyse() {
     NETWORK_ERROR:   { title: 'Pas de connexion', sub: 'Vérifie ta connexion internet et réessaie.' },
     TIMEOUT:         { title: 'Ça a pris trop de temps', sub: 'Vérifie ta connexion et réessaie.' },
     UNAUTHORIZED:    { title: 'Reconnecte-toi', sub: 'Connexion expirée — reconnecte-toi puis réessaie.' },
-    EMAIL_NOT_VERIFIED: { title: 'Confirme ton email pour continuer', sub: 'Ta leçon d\'essai est faite. Pour scanner les suivantes, clique sur le lien qu\'on t\'a envoyé par email. Ça prend 10 secondes, promis !', cta: { label: 'Vérifier mon email', to: '/verify-email' } },
+    EMAIL_NOT_VERIFIED: { title: 'Confirme ton e-mail pour scanner la suite', sub: 'Ta leçon d’essai est faite. Un clic sur le lien qu’on t’a envoyé, et tu scannes les suivantes.' },
     TEXT_TOO_LONG:   { title: 'Leçon trop longue', sub: `Réviz lit jusqu'à ${LESSON_TEXT_MAX_LABEL} caractères d'un coup. Raccourcis ton texte, ou découpe ta leçon en deux scans.`, cta: { label: 'Modifier mon texte', to: '/scan?mode=texte' } },
     IMAGE_TOO_LARGE: { title: 'Photo trop lourde', sub: 'Rapproche-toi de ta leçon et reprends la photo, ou recadre-la avant de réessayer.' },
     INVALID_JSON:    { title: 'Oups, ça a coincé', sub: 'Réviz n\'a pas réussi à lire cette leçon. Réessaie de la scanner.' },
@@ -279,6 +281,15 @@ export default function Analyse() {
     texte: conseil ? conseil.texte : parPhoto ? 'Pose ta feuille à plat, près d’une fenêtre ou sous une lampe, et approche-toi jusqu’à ce que les lettres soient nettes.' : 'Recolle le texte de ta leçon, ou prends-la directement en photo.',
     action: [parPhoto ? 'Reprendre la photo' : 'Modifier le texte', verScan],
     autre: [parPhoto ? 'Coller le texte' : 'Prendre une photo', () => navigate(parPhoto ? '/scan?mode=texte' : '/scan', { replace: true })],
+  } : error === 'EMAIL_NOT_VERIFIED' ? {
+    // La carte d'activation est dans l'écran (adresse, messagerie, renvoi, correction).
+    humeur: emailConfirme ? 'content' : 'determine',
+    lignes: emailConfirme ? ['C’est confirmé.', 'On analyse ta leçon ?'] : ['Ta leçon d’essai est faite.', 'Confirme ton e-mail pour la suite.'],
+    titre: emailConfirme ? 'E-mail confirmé' : errInfo.title,
+    texte: emailConfirme ? 'Tu peux scanner toutes tes leçons.' : errInfo.sub,
+    carteEmail: !emailConfirme,
+    action: emailConfirme ? ['Analyser ma leçon', () => window.location.reload()] : null,
+    autre: ['Plus tard', () => navigate('/cours', { replace: true })],
   } : ['NETWORK_ERROR', 'TIMEOUT'].includes(error) ? {
     humeur: 'inquiet',
     lignes: ['La connexion s’est coupée.', parPhoto ? 'Ta photo n’est pas perdue.' : 'Ton texte n’est pas perdu.'],
@@ -555,7 +566,8 @@ export default function Analyse() {
           <div className="an-etat-carte">
             <h1 className="an-etat-titre">{erreur.titre}</h1>
             <p className="an-etat-txt">{erreur.texte}</p>
-            <button type="button" className="an-etat-btn" onClick={erreur.action[1]}>{erreur.action[0]}</button>
+            {erreur.carteEmail && <CarteEmail raison="scan" nu className="an-etat-email" onConfirme={() => setEmailConfirme(true)} />}
+            {erreur.action && <button type="button" className="an-etat-btn" onClick={erreur.action[1]}>{erreur.action[0]}</button>}
             <button type="button" className="an-etat-btn an-etat-btn--creme" onClick={erreur.autre[1]}>{erreur.autre[0]}</button>
           </div>
         </div>

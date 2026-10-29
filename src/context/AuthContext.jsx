@@ -8,7 +8,7 @@ import {
   signInWithEmailAndPassword,
   signOut,
   updateProfile,
-  updateEmail,
+  verifyBeforeUpdateEmail,
   updatePassword,
   reauthenticateWithCredential,
   EmailAuthProvider,
@@ -38,6 +38,7 @@ import { lancementOffert } from '../../api/_lancement.js';
 import { readSessionCache, writeSessionCache, clearSessionCache, userFromSessionCache } from '../services/sessionCache';
 import { track } from '../services/statsService';
 import { apiFetch, apiUrl } from '../services/apiClient';
+import { noterEmailEnAttente, oublierEmailEnAttente } from '../services/emailEnAttente';
 import { collection, getDocs, deleteDoc, doc, getDoc, setDoc } from 'firebase/firestore';
 import { noterOuverture } from '../services/retourService';
 import { reprendreAvatarDuProfil } from '../services/avatarService';
@@ -86,6 +87,20 @@ function providerWeb(id) {
     return p;
   }
   throw new Error(`Fournisseur inconnu : ${id}`);
+}
+
+// Les liens des e-mails (confirmation, nouvelle adresse) ramènent dans l'appli : la page Firebase
+// affiche « Continuer ». Domaine autorisé dans Firebase Auth ; s'il ne l'était plus, le lien part
+// quand même, sans le retour.
+const RETOUR_LIEN = { url: 'https://app.revizapp.fr/' };
+const RETOUR_REFUSE = ['auth/unauthorized-continue-uri', 'auth/invalid-continue-uri', 'auth/missing-continue-uri'];
+async function envoyerLien(envoi) {
+  try {
+    await envoi(RETOUR_LIEN);
+  } catch (err) {
+    if (!RETOUR_REFUSE.includes(err?.code)) throw err;
+    await envoi(undefined);
+  }
 }
 
 export function AuthProvider({ children }) {
@@ -137,7 +152,7 @@ export function AuthProvider({ children }) {
     track('compte_cree', { classe: level?.classe });
     await updateProfile(user, { displayName: prenom });
     // Envoyer l'email de vérification (fire-and-forget)
-    sendEmailVerification(user).catch(() => {});
+    envoyerLien(reglages => sendEmailVerification(user, reglages)).catch(() => {});
     // Profil persistant dans Firestore — ATTENDU : le gate de consentement
     // mineur en dépend (birthDate), donc on ne le laisse pas en fire-and-forget.
     try {
@@ -166,7 +181,23 @@ export function AuthProvider({ children }) {
 
   // --- Renvoyer l'email de vérification ---
   function resendVerificationEmail() {
-    if (auth.currentUser) return sendEmailVerification(auth.currentUser);
+    if (auth.currentUser) return envoyerLien(reglages => sendEmailVerification(auth.currentUser, reglages));
+  }
+
+  // --- Corriger l'adresse d'un compte pas encore confirmé (carte d'activation) ---
+  // La protection contre l'énumération des e-mails (Firebase Auth) refuse updateEmail : le lien part
+  // à la nouvelle adresse, et un clic dessus la remplace et la confirme d'un coup. Mot de passe
+  // seulement si Firebase redemande une connexion récente (auth/requires-recent-login).
+  async function corrigerEmail(nouvelle, password) {
+    const user = auth.currentUser;
+    if (password) await reauthenticateWithCredential(user, EmailAuthProvider.credential(user.email, password));
+    await envoyerLien(reglages => verifyBeforeUpdateEmail(user, nouvelle, reglages));
+    noterEmailEnAttente(user.uid, nouvelle);
+  }
+
+  // --- Relire le compte (e-mail confirmé ailleurs) : les pages se re-rendent ---
+  function actualiserCompte() {
+    if (auth.currentUser) setCurrentUser({ ...auth.currentUser });
   }
 
   // --- Connexion ---
@@ -266,6 +297,8 @@ export function AuthProvider({ children }) {
   // --- Déconnexion ---
   function logout() {
     clearSessionCache();
+    // Déconnexion voulue : l'adresse corrigée en attente ne doit pas être proposée à la connexion.
+    oublierEmailEnAttente();
     if (guest) {
       // Fin de la session d'essai : rien à révoquer côté serveur.
       clearGuest();
@@ -304,11 +337,9 @@ export function AuthProvider({ children }) {
   }
 
   // --- Modifier l'e-mail (réauthentification requise) ---
-  async function updateUserEmail(newEmail, password) {
-    const cred = EmailAuthProvider.credential(auth.currentUser.email, password);
-    await reauthenticateWithCredential(auth.currentUser, cred);
-    await updateEmail(auth.currentUser, newEmail);
-    setCurrentUser({ ...auth.currentUser });
+  // Même chemin que la correction : l'adresse change au clic sur le lien reçu à la nouvelle.
+  function updateUserEmail(newEmail, password) {
+    return corrigerEmail(newEmail, password);
   }
 
   // --- Modifier le mot de passe (réauthentification requise) ---
@@ -584,6 +615,8 @@ export function AuthProvider({ children }) {
     updateUserEmail,
     updateUserPassword,
     resendVerificationEmail,
+    corrigerEmail,
+    actualiserCompte,
     deleteAccount,
   }), [currentUser, loading, consentBlocked, consent, needsProfileSetup, isPremium, abonnement, offert, guest, levelTick]);
 

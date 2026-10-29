@@ -48,6 +48,10 @@
 .analyse-page .an-barre b { min-width: 44px; font-size: 14px; font-weight: 700; text-align: right; }
 .analyse-page .an-etat-btn { height: 56px; margin-top: 6px; border: 0; border-radius: 999px; background: var(--rv-orange); box-shadow: 0 5px 0 var(--rv-orange-tranche); font: 700 16px 'Poppins', system-ui, sans-serif; color: #fff; cursor: pointer; transition: transform .12s, box-shadow .12s; }
 .analyse-page .an-etat-btn:active { transform: translateY(4px); box-shadow: 0 1px 0 var(--rv-orange-tranche); }
+/* Refus « e-mail pas confirmé » : la carte d'activation dans l'écran, boutons à la taille de l'écran. */
+.analyse-page .an-etat-email { margin-top: 4px; }
+.analyse-page .an-etat-email .ce-btn { min-height: 56px; font-size: 16px; box-shadow: 0 5px 0 var(--rv-orange-tranche); }
+.analyse-page .an-etat-email .ce-btn--blanc { box-shadow: 0 5px 0 var(--rv-ligne); }
 .analyse-page .an-etat-btn--creme { background: var(--rv-fond); box-shadow: 0 5px 0 var(--rv-ligne); color: var(--rv-encre); }
 .analyse-page .an-etat-btn--creme:active { box-shadow: 0 1px 0 var(--rv-ligne); }
 .analyse-page.ch-page--large .an-etat-hero { padding: 40px 56px 130px; border-radius: 40px; width: min(1376px, calc(100% - 64px)); box-sizing: border-box; margin-left: auto; margin-right: auto; }

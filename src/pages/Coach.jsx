@@ -16,6 +16,7 @@ import { ouvrirChapitreDuControle } from '../services/controleChapitres';
 import { erreursRecentes } from '../services/erreursService';
 import { track } from '../services/statsService';
 import { AjoutControle } from '../components/AjoutControle';
+import { CarteEmail, useEmailAConfirmer } from '../components/CarteEmail';
 import { SUBJECT_MAP, subjectKey, subjectMascot } from '../utils/subjects';
 import { isProgrammeLessonId } from '../utils/programme';
 import { intituleControle, matiereControle } from '../utils/agenda';
@@ -280,6 +281,12 @@ export default function Coach() {
   const [outil, setOutil] = useState(null); // agent : ce qu'il regarde en ce moment
   const [cartesEnCours, setCartesEnCours] = useState([]);
   const [ajout, setAjout] = useState(null); // carte de contrôle ouverte dans la feuille de l'agenda
+  // E-mail pas confirmé : la carte d'activation prend la place du champ, avant toute question
+  // (2 élèves sur 3 qui essayaient Réviz IA le 29/10 recevaient un refus). refusEmail : le serveur
+  // a refusé alors que l'appli croyait l'e-mail confirmé.
+  const aConfirmer = useEmailAConfirmer();
+  const [refusEmail, setRefusEmail] = useState(false);
+  const bloqueEmail = aConfirmer || refusEmail;
   const fil = useRef(null);
   const champ = useRef(null);
   const enCours = brouillon !== null;
@@ -301,7 +308,8 @@ export default function Coach() {
     if (!question || isGuest) return;
     // Un retour arrière ou un rechargement ne la renvoie pas.
     navigate(`${location.pathname}${location.search}`, { replace: true, state: null });
-    envoyer(question);
+    // E-mail à confirmer : elle reste dans le champ, qui revient une fois l'e-mail confirmé.
+    if (!bloqueEmail) envoyer(question);
   }, []);
   // Le fil suit la réponse qui s'écrit seulement si l'élève est déjà en bas : remonté pour relire le
   // début, il n'est plus ramené en bas à chaque morceau reçu. Envoyer une question le recolle en bas.
@@ -363,7 +371,7 @@ export default function Coach() {
   const limite = quotaOut || (!hasRevizPlus && quota?.remaining === 0);
   async function envoyer(texte) {
     const contenu = texte.trim();
-    if (!contenu || enCours || limite) return;
+    if (!contenu || enCours || limite || bloqueEmail) return;
     // Première question après l'ouverture de Réviz IA : elle fait partie de la conversation.
     const avant = !messages.length && ouverture
       ? [{ role: 'assistant', content: ouverture.texte, ...(ouverture.carte ? { cartes: [ouverture.carte] } : {}) }]
@@ -391,6 +399,7 @@ export default function Coach() {
       setMessages([...historique, { role: 'assistant', content: text, ...(proposees.length ? { cartes: proposees } : {}) }]);
     } catch (err) {
       if (err.message === 'CHAT_LIMIT') setQuotaOut(true);
+      else if (err.message === 'EMAIL_NOT_VERIFIED') setRefusEmail(true);
       else setErreur(COACH_ERREURS[err.message] ?? 'Oups, ça a coincé. Réessaie dans un instant.');
       // La question n'est pas comptée : elle revient dans le champ.
       setMessages(messages);
@@ -483,7 +492,8 @@ export default function Coach() {
           </div>
         </div>
       )}
-      <ul className="ia-cartes">
+      {/* E-mail à confirmer : ces raccourcis posent une question, la carte d'activation passe avant. */}
+      {!bloqueEmail && <ul className="ia-cartes">
         {cartes.map(k => (
           <li key={k.titre}>
             <button type="button" className="ia-carte" onClick={() => (k.aller ? navigate(k.aller) : k.remplir ? remplir(k.remplir) : envoyer(k.envoi))}>
@@ -492,7 +502,7 @@ export default function Coach() {
             </button>
           </li>
         ))}
-      </ul>
+      </ul>}
     </div>
   );
 
@@ -550,6 +560,8 @@ export default function Coach() {
       </div>
       {!hasRevizPlus && <button type="button" className="ia-btn" onClick={() => setOffre(true)}>50 questions par jour avec Réviz+</button>}
     </div>
+  ) : bloqueEmail ? (
+    <CarteEmail raison="ia" note={saisie.trim() ? 'Ta question t’attend ici.' : undefined} onConfirme={() => setRefusEmail(false)} />
   ) : (
     <>
       <form className="ia-champ-cadre" onSubmit={e => { e.preventDefault(); envoyer(saisie); }}>

@@ -62,7 +62,7 @@ export function DecouvrirRevizPlus({ onClose }) {
       await startCheckout(formule); // redirection pleine page en cas de succès
     } catch (err) {
       setPaiement(false);
-      if (err.message === 'EMAIL_NOT_VERIFIED') navigate('/verify-email');
+      if (err.message === 'EMAIL_NOT_VERIFIED') navigate('/verify-email', { state: { raison: 'revizplus' } });
       else setErreur('Impossible d’ouvrir le paiement. Réessaie dans un moment.');
     }
   }

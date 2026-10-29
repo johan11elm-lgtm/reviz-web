@@ -152,7 +152,7 @@ export default function Reglages() {
     setLoading(true); setError('');
     try {
       await updateUserEmail(newEmail.trim(), emailPassword);
-      setSuccess(`Tu te connectes maintenant avec ${newEmail.trim()}.`);
+      setSuccess(`Clique sur le lien envoyé à ${newEmail.trim()} : ton adresse changera à ce moment-là.`);
     } catch (err) {
       setError(erreurFirebase(err.code));
     } finally { setLoading(false); }
@@ -252,7 +252,7 @@ export default function Reglages() {
       await startCheckout(formule); // redirection pleine page en cas de succès
     } catch (err) {
       setPaiement(null);
-      if (err.message === 'EMAIL_NOT_VERIFIED') navigate('/verify-email');
+      if (err.message === 'EMAIL_NOT_VERIFIED') navigate('/verify-email', { state: { raison: 'revizplus' } });
       else setBillingError('Impossible d’ouvrir le paiement. Réessaie dans un moment.');
     }
   }
@@ -643,10 +643,10 @@ export default function Reglages() {
               </>
             )}
             {error && <Message type="erreur" texte={error} />}
-            {success && <Message type="reussite" titre="C’est enregistré." texte={success} />}
+            {success && <Message type="reussite" titre="Lien envoyé." texte={success} />}
             {success
               ? <button type="button" className="rg-btn rg-btn--blanc" onClick={fermer}>Fermer</button>
-              : <button type="submit" className="rg-btn" disabled={loading || !newEmail.trim() || !emailPassword}>{loading ? 'Enregistrement…' : 'Enregistrer'}</button>}
+              : <button type="submit" className="rg-btn" disabled={loading || !newEmail.trim() || !emailPassword}>{loading ? 'Envoi…' : 'Envoyer le lien'}</button>}
           </form>
         </Feuille>
       )}

@@ -5,10 +5,12 @@ import { MemoryRouter, Routes, Route } from 'react-router-dom'
 const chat = vi.hoisted(() => ({ send: vi.fn() }))
 vi.mock('../../services/chatService', () => ({ CHAT_MAX_MESSAGE_LENGTH: 1000, sendCoachMessage: chat.send }))
 vi.mock('../../services/billingService', () => ({ startCheckout: vi.fn() }))
-const auth = vi.hoisted(() => ({ plus: false }))
+const auth = vi.hoisted(() => ({ plus: false, user: null }))
 vi.mock('../../context/AuthContext', () => ({
-  useAuth: () => ({ isPremium: false, hasRevizPlus: auth.plus, currentUser: { displayName: 'Léa Martin' }, getUserLevel: () => ({ cycle: 'college', classe: '3ème' }) }),
+  useAuth: () => ({ isPremium: false, hasRevizPlus: auth.plus, currentUser: auth.user ?? { displayName: 'Léa Martin' }, getUserLevel: () => ({ cycle: 'college', classe: '3ème' }) }),
 }))
+// Compte e-mail + mot de passe dont l'adresse n'est pas encore confirmée.
+const NON_CONFIRME = { uid: 'u1', displayName: 'Léa Martin', email: 'lea@gmail.com', emailVerified: false, providerData: [{ providerId: 'password' }] }
 const lessons = vi.hoisted(() => ({ list: [] }))
 vi.mock('../../services/historyService', () => ({ loadLessons: () => lessons.list, restoreLesson: () => true }))
 const screenSize = vi.hoisted(() => ({ desktop: false }))
@@ -46,7 +48,7 @@ const JOUR = new Date().toISOString().slice(0, 10)
 describe('<Coach /> — Réviz IA', () => {
   beforeEach(() => {
     sessionStorage.clear(); localStorage.clear()
-    screenSize.desktop = false; auth.plus = false
+    screenSize.desktop = false; auth.plus = false; auth.user = null
     chat.send.mockReset()
     lessons.list = DEUX
     appli.erreurs = [{ lessonId: 'prog-x', titre: 'X', matiere: 'maths', questions: ['Q ?'], at: 1 }]
@@ -223,13 +225,26 @@ describe('<Coach /> — Réviz IA', () => {
     expect(history[1]).toEqual({ role: 'user', content: 'oui' })
   })
 
-  it('une première question refusée (e-mail pas confirmé) : l’explication se voit, la question revient', async () => {
+  it('une première question refusée (e-mail pas confirmé) : la carte d’activation prend la place du champ, la question est gardée', async () => {
     chat.send.mockRejectedValue(new Error('EMAIL_NOT_VERIFIED'))
     renderAt('/coach')
     fireEvent.change(screen.getByLabelText('Ta question à Réviz IA'), { target: { value: 'je fais quoi' } })
     await act(async () => fireEvent.click(screen.getByRole('button', { name: 'Envoyer la question' })))
-    expect(screen.getByRole('alert')).toHaveTextContent(/Confirme ton email/)
-    expect(screen.getByLabelText('Ta question à Réviz IA')).toHaveValue('je fais quoi')
+    const carte = screen.getByRole('region', { name: 'Confirmer ton e-mail' })
+    expect(carte).toHaveTextContent('Confirme ton e-mail pour parler à Réviz IA')
+    expect(carte).toHaveTextContent('Ta question t’attend ici.')
+    expect(screen.queryByLabelText('Ta question à Réviz IA')).toBeNull()
+  })
+
+  it('e-mail pas confirmé : la carte d’activation dès l’ouverture, avec l’adresse et sa messagerie, et la question de l’accueil ne part pas', async () => {
+    auth.user = NON_CONFIRME
+    await act(async () => { renderAvecEtat('/coach', { question: 'c’est quoi une fraction', envoyer: true }) })
+    expect(chat.send).not.toHaveBeenCalled()
+    const carte = screen.getByRole('region', { name: 'Confirmer ton e-mail' })
+    expect(carte).toHaveTextContent('lea@gmail.com')
+    expect(within(carte).getByRole('link', { name: 'Ouvrir Gmail' })).toHaveAttribute('href', expect.stringContaining('mail.google.com'))
+    expect(within(carte).getByRole('button', { name: 'Pas la bonne adresse ? Corriger' })).toBeInTheDocument()
+    expect(carte).toHaveTextContent('Ta question t’attend ici.')
   })
 
   it('une question tapée dans la recherche de l’accueil part tout de suite', async () => {

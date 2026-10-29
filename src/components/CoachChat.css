@@ -255,6 +255,9 @@
   max-width: 90%;
 }
 
+/* Carte d'activation de l'e-mail dans le fil (CarteEmail.css) */
+.coach-carte-email { align-self: stretch; }
+
 .coach-quota {
   display: flex;
   flex-direction: column;

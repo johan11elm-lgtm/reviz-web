@@ -106,6 +106,8 @@
 .en-mdp .en-input { padding-right: 104px; }
 .en-afficher { position: absolute; right: 8px; top: 50%; transform: translateY(-50%); height: 36px; padding: 0 14px; border: 0; border-radius: 999px; background: var(--rv-fond); font-family: 'Poppins', sans-serif; font-size: 14px; font-weight: 700; color: var(--en-orange); cursor: pointer; }
 .en-aide { margin: 0; font-size: 13px; font-weight: 500; line-height: 1.45; color: var(--en-doux); }
+/* « Tu voulais dire … ? » : l'adresse proposée se choisit d'un toucher. */
+.en-suggestion { padding: 0; border: 0; background: none; font: inherit; font-weight: 700; color: var(--en-orange); text-decoration: underline; cursor: pointer; overflow-wrap: anywhere; }
 .en-erreur { display: flex; align-items: center; gap: 8px; margin: 0; font-size: 14px; font-weight: 600; color: var(--rv-brun-texte); }
 .en-erreur-rond { flex: none; display: flex; align-items: center; justify-content: center; width: 16px; height: 16px; border-radius: 50%; background: var(--en-orange); font-size: 11px; font-weight: 800; color: #fff; }
 

@@ -3,7 +3,7 @@
 // après un rechargement (localStorage, profil Firestore, session Firebase), et la déconnexion
 // doit ramener à l'écran d'entrée. Deux compositions : une colonne sur téléphone, deux sur ordinateur.
 import { test, expect } from '@playwright/test'
-import { mockApiRoutes, compteRapide, lireProfilEmulateur, uniqueEmail } from './helpers'
+import { mockApiRoutes, compteRapide, lireProfilEmulateur, uniqueEmail, cliquerLienNouvelleAdresse } from './helpers'
 import { SOMBRE_DISPONIBLE } from '../src/utils/themes.js'
 
 const APPAREILS = [
@@ -195,21 +195,26 @@ test.describe('Réglages : suppression et mode essai', () => {
   test.use({ viewport: { width: 390, height: 844 } })
   test.beforeEach(async ({ page }) => { await mockApiRoutes(page) })
 
-  test('changer l\'adresse e-mail : on se connecte ensuite avec la nouvelle', async ({ page }) => {
-    const { motDePasse } = await ouvrirReglages(page)
+  test('changer l\'adresse e-mail : un lien part à la nouvelle, un clic dessus, puis on se connecte avec elle', async ({ page }) => {
+    const { email, motDePasse } = await ouvrirReglages(page)
     const nouvelle = uniqueEmail('nouvelle')
 
     await cliquerAuCentre(page.getByRole('button', { name: /Adresse e-mail/ }))
     const feuille = page.getByRole('dialog', { name: 'Adresse e-mail' })
     await feuille.getByLabel('Nouvel e-mail').fill(nouvelle)
     await feuille.getByLabel('Mot de passe actuel').fill(motDePasse)
-    await feuille.getByRole('button', { name: 'Enregistrer' }).click()
-    await expect(feuille.getByText('C’est enregistré.')).toBeVisible()
+    await feuille.getByRole('button', { name: 'Envoyer le lien' }).click()
+    await expect(feuille.getByText('Lien envoyé.')).toBeVisible()
+    await expect(feuille).toContainText(nouvelle)
     await feuille.getByRole('button', { name: 'Fermer' }).click()
-    await expect(page.getByRole('button', { name: /Adresse e-mail/ })).toContainText(nouvelle)
+    // Rien ne change avant le clic sur le lien (protection contre l'énumération des e-mails).
+    await expect(page.getByRole('button', { name: /Adresse e-mail/ })).toContainText(email)
 
-    await cliquerAuCentre(page.getByRole('button', { name: 'Se déconnecter' }))
-    await expect(page).toHaveURL(/\/welcome/)
+    await cliquerLienNouvelleAdresse(page, nouvelle)
+    // Session gardée : on se déconnecte ; session fermée par le changement : déjà à la bienvenue.
+    await page.reload()
+    if (/reglages/.test(page.url())) await cliquerAuCentre(page.getByRole('button', { name: 'Se déconnecter' }))
+    await expect(page).toHaveURL(/\/welcome/, { timeout: 15_000 })
     await page.goto('/connexion')
     await page.getByLabel('E-mail', { exact: true }).fill(nouvelle)
     await page.getByLabel('Mot de passe', { exact: true }).fill(motDePasse)

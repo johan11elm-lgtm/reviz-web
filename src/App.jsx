@@ -4,6 +4,7 @@ import { ThemeProvider, useTheme } from './context/ThemeContext'
 import { AuthProvider, useAuth } from './context/AuthContext'
 import { resolveTheme } from './utils/themes'
 import { entreeSansSession } from './utils/retour'
+import { emailEnAttente } from './services/emailEnAttente';
 import { ErrorBoundary } from './components/ErrorBoundary'
 import { SplashHider } from './components/SplashHider'
 import { NavHaut } from './components/NavHaut'
@@ -81,7 +82,9 @@ function LoadingFallback() {
 function PrivateRoute({ children }) {
   const { currentUser, consentBlocked, needsProfileSetup } = useAuth();
   const location = useLocation();
-  if (!currentUser) return <Navigate to={entreeSansSession(location)} replace />;
+  // Session fermée juste après une adresse corrigée (Firebase révoque les sessions au changement) :
+  // la connexion, la nouvelle adresse déjà remplie.
+  if (!currentUser) return <Navigate to={emailEnAttente() ? '/connexion?adresse=corrigee' : entreeSansSession(location)} replace />;
   if (needsProfileSetup) return <Navigate to="/finish-setup" replace />;
   if (consentBlocked) return <Navigate to="/consent-pending" replace />;
   return children;

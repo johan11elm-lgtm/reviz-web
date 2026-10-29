@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { emailEnAttente, oublierEmailEnAttente } from '../services/emailEnAttente';
 import { erreurConnexionSociale } from '../components/SocialLogin';
 import { EntreeEcran, Champ, ChampMotDePasse, RetourAction, Ou, BoutonsSociaux, LienTexte } from '../components/entree/Entree';
 import { revenir } from '../utils/navigation';
@@ -27,7 +28,10 @@ export function suiteApresConnexion(search) {
 }
 
 export default function Connexion() {
-  const [email, setEmail]       = useState('');
+  // Adresse corrigée depuis la carte d'activation : Firebase ferme la session au clic sur le lien,
+  // on revient ici avec la nouvelle adresse déjà remplie (CarteEmail).
+  const [corrigee] = useState(() => new URLSearchParams(window.location.search).get('adresse') === 'corrigee' && emailEnAttente());
+  const [email, setEmail]       = useState(() => corrigee || '');
   const [password, setPassword] = useState('');
   const [error, setError]       = useState('');
   const [loading, setLoading]   = useState('');
@@ -43,6 +47,7 @@ export default function Connexion() {
     setLoading(true);
     try {
       await login(email, password);
+      if (corrigee) oublierEmailEnAttente();
       navigate(suite, { replace: true });
     } catch (err) {
       setError(firebaseErrorFr(err.code));
@@ -108,7 +113,8 @@ export default function Connexion() {
       )}
     >
       <form className="en-pile" onSubmit={handleSubmit} noValidate>
-        <Champ id="connexion-email" label="E-mail" type="email" placeholder="lucas@exemple.com" value={email}
+        {corrigee && <RetourAction>Ton adresse est changée et confirmée. Connecte-toi avec elle.</RetourAction>}
+        <Champ id="connexion-email" label="E-mail" type="email" placeholder="ton adresse e-mail" value={email}
           onChange={e => { setEmail(e.target.value); setError(''); }} autoComplete="email" required />
         <ChampMotDePasse id="connexion-password" lien={oublie} value={password} erreur={error}
           onChange={e => { setPassword(e.target.value); setError(''); }} autoComplete="current-password" required />

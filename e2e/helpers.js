@@ -204,6 +204,18 @@ export async function verifyEmailViaEmulator(page, email) {
 }
 
 /**
+ * Le lien « nouvelle adresse » (verifyBeforeUpdateEmail : carte d'activation, Réglages) capturé
+ * par l'émulateur Auth, cliqué comme dans la boîte mail : l'adresse change et est confirmée.
+ */
+export async function cliquerLienNouvelleAdresse(page, nouvelle) {
+  const res = await page.request.get('http://127.0.0.1:9099/emulator/v1/projects/demo-reviz/oobCodes')
+  const { oobCodes = [] } = await res.json()
+  const code = oobCodes.filter(c => c.requestType === 'VERIFY_AND_CHANGE_EMAIL' && (c.newEmail === nouvelle || c.email === nouvelle)).pop()
+  if (!code) throw new Error(`Aucun lien de changement d'adresse pour ${nouvelle} : ${JSON.stringify(oobCodes.slice(-3))}`)
+  await page.request.get(code.oobLink)
+}
+
+/**
  * Après signup() d'un majeur : confirme l'email (via l'émulateur), passe la découverte
  * (« Passer » sur l'écran d'accueil de Réviz) et arrive sur l'accueil. Les popups de l'accueil
  * (« Réviz+ offert jusqu'au … », puis « Nouveau : la Battle ») sont fermées, sauf si la spec veut

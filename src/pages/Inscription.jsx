@@ -6,6 +6,7 @@ import { isUnder15 } from '../utils/levels';
 import { readGuest } from '../services/guestService';
 import { sendParentalConsent, consentErrorMessage } from '../services/consentService';
 import { track } from '../services/statsService';
+import { suggererEmail, adresseExemple } from '../utils/adresseEmail';
 import {
   EntreeEcran, Champ, ChampMotDePasse, ChampDate, ChoixClasse, CaseCGU,
   Encart, Ou, BoutonsSociaux, LienTexte, Erreur,
@@ -22,6 +23,13 @@ function firebaseErreur(code) {
 }
 
 const EMAIL_RE = /^\S+@\S+\.\S+$/;
+
+// « Tu voulais dire lea@gmail.com ? » sous le champ (une adresse sur cinq était mal tapée, 10/2026).
+function suggestion(email, onChoisir) {
+  const s = suggererEmail(email);
+  if (!s) return null;
+  return <>Tu voulais dire <button type="button" className="en-suggestion" onClick={() => onChoisir(s)}>{s}</button> ?</>;
+}
 
 // Attente maximale de la relecture du gate avant de passer à la suite.
 const ATTENTE_GATE_MS = 2000;
@@ -147,12 +155,15 @@ export default function Inscription() {
       case 'account':
         if (!email.trim()) e.email = 'Entre ton e-mail.';
         else if (!EMAIL_RE.test(email.trim())) e.email = 'Adresse e-mail invalide.';
+        // L'exemple recopié (« exemple.com », « exmenple.com ») : le lien de confirmation n'arriverait jamais.
+        else if (adresseExemple(email)) e.email = 'C’est une adresse d’exemple : mets la tienne, on t’y envoie un lien.';
         if (password.length < 6) e.password = '6 caractères au moins.';
         if (!acceptCgu) e.cgu = 'Tu dois accepter les CGU pour continuer.';
         break;
       case 'parent':
         if (!parentEmail.trim()) e.parent = 'Entre l’e-mail de ton parent.';
         else if (!EMAIL_RE.test(parentEmail.trim())) e.parent = 'Adresse e-mail invalide.';
+        else if (adresseExemple(parentEmail)) e.parent = 'C’est une adresse d’exemple : mets celle de ton parent.';
         // Le serveur refuse aussi (PARENT_EMAIL_IS_CHILD) — on échoue tôt ici
         // avec un message clair plutôt qu'après l'aller-retour API.
         else if (parentEmail.trim().toLowerCase() === email.trim().toLowerCase()) {
@@ -308,8 +319,9 @@ export default function Inscription() {
         bulle: ['Crée ton compte', `Dernière étape, ${prenom.trim()}.`],
         corps: (
           <>
-            <Champ id="signup-email" label="E-mail" type="email" placeholder="lucas@exemple.com" value={email}
+            <Champ id="signup-email" label="E-mail" type="email" placeholder="ton adresse e-mail" value={email}
               erreur={erreurs.email} onChange={e => { setEmail(e.target.value); effacer('email', 'emailPris'); }}
+              aide={!erreurs.email && suggestion(email, v => { setEmail(v); effacer('email', 'emailPris'); })}
               autoComplete="email" autoCapitalize="none" enterKeyHint="next"
               onKeyDown={e => {
                 // Entrée sur l'e-mail : on passe au mot de passe, sans valider.
@@ -345,8 +357,9 @@ export default function Inscription() {
               Comme tu as moins de 15 ans, un parent doit dire oui par e-mail. Donne son adresse maintenant,
               ou <b>dans les 15 jours</b>.
             </p>
-            <Champ id="signup-parent-email" label="E-mail de ton parent" type="email" placeholder="parent@exemple.com"
+            <Champ id="signup-parent-email" label="E-mail de ton parent" type="email" placeholder="l’adresse de ton parent"
               value={parentEmail} erreur={erreurs.parent}
+              aide={!erreurs.parent && suggestion(parentEmail, v => { setParentEmail(v); effacer('parent'); })}
               onChange={e => { setParentEmail(e.target.value); effacer('parent'); }}
               autoComplete="email" autoCapitalize="none" enterKeyHint="send" />
           </>

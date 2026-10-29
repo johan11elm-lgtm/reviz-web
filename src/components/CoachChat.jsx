@@ -4,6 +4,7 @@ import { useModalA11y } from '../hooks/useModalA11y';
 import { Mascot } from './Mascot';
 import { sendCoachMessage, CHAT_MAX_MESSAGE_LENGTH } from '../services/chatService';
 import { LimiteAtteinte } from './revizplus/RevizPlusOffre';
+import { CarteEmail, useEmailAConfirmer } from './CarteEmail';
 import './CoachChat.css';
 import './RevizPlus.css';
 
@@ -186,6 +187,10 @@ export function CoachConversation({ lessonId, prefill, className = '' }) {
   const [isStreaming, setIsStreaming] = useState(false);
   const [error, setError]             = useState(null);
   const [quotaOut, setQuotaOut]       = useState(false);
+  // E-mail pas confirmé (ou refusé par le serveur) : la carte d'activation au lieu de la question.
+  const aConfirmer = useEmailAConfirmer();
+  const [refusEmail, setRefusEmail]   = useState(false);
+  const bloqueEmail = aConfirmer || refusEmail;
   const scrollRef = useRef(null);
 
   // Changement de leçon → conversation de cette leçon.
@@ -203,11 +208,11 @@ export function CoachConversation({ lessonId, prefill, className = '' }) {
   useEffect(() => {
     const node = scrollRef.current;
     if (node) node.scrollTop = node.scrollHeight;
-  }, [messages, draft, quotaOut, error]);
+  }, [messages, draft, quotaOut, error, bloqueEmail]);
 
   async function send(text) {
     const content = text.trim();
-    if (!content || isStreaming || quotaOut) return;
+    if (!content || isStreaming || quotaOut || bloqueEmail) return;
 
     const history = [...messages, { role: 'user', content }];
     setMessages(history);
@@ -227,6 +232,8 @@ export function CoachConversation({ lessonId, prefill, className = '' }) {
     } catch (err) {
       if (err.message === 'CHAT_LIMIT') {
         setQuotaOut(true);
+      } else if (err.message === 'EMAIL_NOT_VERIFIED') {
+        setRefusEmail(true);
       } else {
         setError(COACH_ERREURS[err.message] ?? 'Oups, ça a coincé. Réessaie dans un instant.');
       }
@@ -245,7 +252,7 @@ export function CoachConversation({ lessonId, prefill, className = '' }) {
     send(input);
   }
 
-  const empty = messages.length === 0 && !isStreaming && !quotaOut;
+  const empty = messages.length === 0 && !isStreaming && !quotaOut && !bloqueEmail;
 
   return (
     <div className={['coach-conversation', className].filter(Boolean).join(' ')}>
@@ -271,6 +278,8 @@ export function CoachConversation({ lessonId, prefill, className = '' }) {
           {error && (
             <div className="coach-notice" role="alert">{error}</div>
           )}
+
+          {bloqueEmail && <CarteEmail raison="ia" className="coach-carte-email" onConfirme={() => setRefusEmail(false)} />}
 
           {quotaOut && (
             <div className="coach-quota">
@@ -309,13 +318,13 @@ export function CoachConversation({ lessonId, prefill, className = '' }) {
               onChange={e => setInput(e.target.value)}
               placeholder="Pose ta question…"
               maxLength={CHAT_MAX_MESSAGE_LENGTH}
-              disabled={isStreaming || quotaOut}
+              disabled={isStreaming || quotaOut || bloqueEmail}
               aria-label="Ta question sur la leçon"
             />
             <button
               type="submit"
               className="coach-send-btn"
-              disabled={!input.trim() || isStreaming || quotaOut}
+              disabled={!input.trim() || isStreaming || quotaOut || bloqueEmail}
               aria-label="Envoyer la question"
             >
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
