@@ -163,16 +163,26 @@ describe('<Coach /> — Réviz IA', () => {
     expect(screen.getByText('Bonjour')).toBeInTheDocument()
   })
 
-  it('compteur gratuit sous le champ, puis la carte de limite à 0', () => {
-    localStorage.setItem('reviz-coach-quota', JSON.stringify({ remaining: 6, limit: 7, jour: JOUR }))
+  it('compteur gratuit de la semaine sous le champ, puis la carte de limite à 0', () => {
+    const d = new Date(); d.setUTCDate(d.getUTCDate() + (d.getUTCDay() === 0 ? -6 : 1 - d.getUTCDay()))
+    const LUNDI = d.toISOString().slice(0, 10)
+    localStorage.setItem('reviz-coach-quota', JSON.stringify({ remaining: 6, limit: 10, periode: 'semaine', semaine: LUNDI }))
     const { unmount } = renderAt('/coach?lesson=l1')
-    expect(screen.getByText(/6 questions gratuites aujourd'hui · Réviz IA peut se tromper/)).toBeInTheDocument()
+    expect(screen.getByText(/6 questions gratuites cette semaine · Réviz IA peut se tromper/)).toBeInTheDocument()
     unmount()
+    localStorage.setItem('reviz-coach-quota', JSON.stringify({ remaining: 0, limit: 10, periode: 'semaine', semaine: LUNDI }))
+    renderAt('/coach?lesson=l1')
+    expect(screen.getByText('Tu as utilisé tes 10 questions de la semaine.')).toBeInTheDocument()
+    expect(screen.getByText('Elles reviennent lundi.')).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: '50 questions par jour avec Réviz+' })).toBeInTheDocument()
+    expect(screen.queryByLabelText('Ta question sur la leçon')).toBeNull()
+  })
+
+  it('un quota noté avant le 29/10 (au jour, sans période) est ignoré : le champ reste ouvert', () => {
     localStorage.setItem('reviz-coach-quota', JSON.stringify({ remaining: 0, limit: 7, jour: JOUR }))
     renderAt('/coach?lesson=l1')
-    expect(screen.getByText('Tu as utilisé tes 7 questions du jour.')).toBeInTheDocument()
-    expect(screen.getByRole('button', { name: 'Questions illimitées avec Réviz+' })).toBeInTheDocument()
-    expect(screen.queryByLabelText('Ta question sur la leçon')).toBeNull()
+    expect(screen.queryByText(/Tu as utilisé tes/)).toBeNull()
+    expect(screen.getByLabelText('Ta question sur la leçon')).toBeInTheDocument()
   })
 
   it('le serveur refuse (limite atteinte) : la question revient dans le champ… remplacé par la carte', async () => {

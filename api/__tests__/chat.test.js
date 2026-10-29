@@ -21,7 +21,9 @@ vi.mock('../_firebaseAdmin.js', () => ({
 }))
 vi.mock('../_chatQuota.js', () => ({
   CHAT_FREE_LIMIT: 10,
-  CHAT_PREMIUM_LIMIT: 200,
+  CHAT_FREE_PERIODE: 'semaine',
+  CHAT_PREMIUM_LIMIT: 50,
+  CHAT_PREMIUM_PERIODE: 'jour',
   consumeChatQuota: (...a) => consumeChatQuota(...a),
   refundChatQuota: (...a) => refundChatQuota(...a),
 }))
@@ -182,12 +184,17 @@ describe('/api/chat', () => {
     expect(anthropicCreate).not.toHaveBeenCalled()
   })
 
-  it('applique la limite premium pour un compte premium', async () => {
+  it('Réviz+ : 50 par jour ; gratuit : 10 par semaine, et le quota part avec sa période', async () => {
     getUserDoc.mockResolvedValue({ exists: true, data: () => ({ plan: 'premium' }) })
     anthropicCreate.mockResolvedValue(flux([]))
     const res = mockRes()
     await handler({ method: 'POST', body: VALID_BODY }, res)
-    expect(consumeChatQuota).toHaveBeenCalledWith(expect.objectContaining({ limit: 200 }))
+    expect(consumeChatQuota).toHaveBeenCalledWith(expect.objectContaining({ limit: 50, periode: 'jour' }))
+    expect(res.chunks.join('')).toContain('"periode":"jour"')
+
+    getUserDoc.mockResolvedValue({ exists: true, data: () => ({ plan: 'free' }) })
+    await handler({ method: 'POST', body: VALID_BODY }, mockRes())
+    expect(consumeChatQuota).toHaveBeenLastCalledWith(expect.objectContaining({ limit: 10, periode: 'semaine' }))
   })
 
   it('envoie la requête du prompt partagé, en streaming, avec le jour à Paris', async () => {

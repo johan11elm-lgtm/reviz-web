@@ -5,7 +5,7 @@ import { buildAgentRequest, AGENT_MAX_TOURS } from '../src/utils/agent.js'
 import { boucleAgent, sourcesFirestore, sanitizeErreurs } from './_agent.js'
 import { getDb, getAuthAdmin } from './_firebaseAdmin.js'
 import { compteVerifie } from './_compteVerifie.js'
-import { consumeChatQuota, refundChatQuota, CHAT_FREE_LIMIT, CHAT_PREMIUM_LIMIT } from './_chatQuota.js'
+import { consumeChatQuota, refundChatQuota, CHAT_FREE_LIMIT, CHAT_FREE_PERIODE, CHAT_PREMIUM_LIMIT, CHAT_PREMIUM_PERIODE } from './_chatQuota.js'
 import { LANCEMENT_CHAT_LIMIT } from './_lancement.js'
 import { revizPlusOffertServeur } from './_offert.js'
 
@@ -80,11 +80,13 @@ export default async function handler(req, res) {
   }
   if (!agent && !lessonSnap.exists) return res.status(404).send('LESSON_NOT_FOUND')
 
-  // 3. Quota jour = SOURCE DE VÉRITÉ. Les premium ont aussi un plafond
-  //    (généreux) : garde-fou coût, un chat se spamme plus vite qu'un scan.
+  // 3. Quota = SOURCE DE VÉRITÉ : 10 par semaine en gratuit, 50 par jour en Réviz+
+  //    (offre de lancement comprise), garde-fou coût (api/_chatQuota.js).
   const offert = !isPremium && await revizPlusOffertServeur()
+  const plus = isPremium || offert
   const limit = isPremium ? CHAT_PREMIUM_LIMIT : (offert ? LANCEMENT_CHAT_LIMIT : CHAT_FREE_LIMIT)
-  const q = await consumeChatQuota({ db, uid, limit })
+  const periode = plus ? CHAT_PREMIUM_PERIODE : CHAT_FREE_PERIODE
+  const q = await consumeChatQuota({ db, uid, limit, periode })
   if (!q.allowed) return res.status(429).send('CHAT_LIMIT')
 
   // 4. Appel Anthropic en streaming. `create` avec stream: true rend la main
@@ -99,7 +101,7 @@ export default async function handler(req, res) {
       ? requeteAgent(cleanMessages, 0)
       : { ...buildChatRequest({ level, lessonContext: buildChatLessonContext(lessonSnap.data()), messages: cleanMessages, aujourdhui }), stream: true })
   } catch (err) {
-    await refundChatQuota({ db, uid }).catch(() => {})
+    await refundChatQuota({ db, uid, periode }).catch(() => {})
     const status = err?.status
     if (typeof status !== 'number') return res.status(502).send('NETWORK_ERROR')
     if (status === 401 || status === 403) return res.status(502).send('INVALID_API_KEY')
@@ -113,7 +115,7 @@ export default async function handler(req, res) {
   res.setHeader('Content-Type', 'text/event-stream; charset=utf-8')
   res.setHeader('Cache-Control', 'no-cache, no-transform')
   // Premier event : quota restant (affichage client purement informatif).
-  res.write(`data: ${JSON.stringify({ meta: { remaining: q.remaining, limit } })}\n\n`)
+  res.write(`data: ${JSON.stringify({ meta: { remaining: q.remaining, limit, periode } })}\n\n`)
 
   const ecrire = evenement => res.write(`data: ${JSON.stringify(evenement)}\n\n`)
   try {

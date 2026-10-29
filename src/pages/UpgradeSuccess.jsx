@@ -103,7 +103,7 @@ export default function UpgradeSuccess() {
       <h2 className="ugs-h2">Ce que tu as maintenant</h2>
       <ul className="ugs-carte ugs-liste">
         <li><span className="ugs-rond ugs-rond--lavande"><Icone d={APPAREIL} /></span><b>Scans de leçons illimités</b></li>
-        <li><span className="ugs-rond ugs-rond--peche"><Icone d={BULLE} /></span><b>Questions à Réviz IA illimitées</b></li>
+        <li><span className="ugs-rond ugs-rond--peche"><Icone d={BULLE} /></span><b>50 questions à Réviz IA par jour</b></li>
         <li><span className="ugs-rond ugs-rond--menthe"><Icone d={PALETTE} /></span><b>3 thèmes de couleur en plus</b>
           <span className="ugs-themes" aria-hidden="true">{THEMES.map(c => <i key={c} style={{ background: c }} />)}</span></li>
       </ul>

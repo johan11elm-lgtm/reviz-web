@@ -24,7 +24,7 @@ Réviz+ », branche `stripe-live`).
 | Agenda : contrôles, compte à rebours, rappel la veille | Tout | — |
 | Agenda : emploi du temps Pronote | Tout | — |
 | Agenda : **plan de révision automatique** | Offert pour le premier contrôle | Inclus pour tous les contrôles |
-| Coach | 10 messages par jour | Illimité (garde-fou anti-abus : 200 par jour) |
+| Coach | 10 messages par semaine (depuis le 29/10, avant 10 par jour) | 50 par jour (décision de Johan du 29/10, avant « illimité » avec un garde-fou à 200) |
 | Coach : mode « Interroge-moi » | — | Inclus |
 | Coach qui connaît ses contrôles et ses erreurs | — | Inclus |
 | Scan de leçons | 5 par semaine | Illimité (garde-fou anti-abus pendant l'offre de lancement : 100 par semaine) |

@@ -141,7 +141,7 @@ async function _viaProxy({ lessonId, messages, level, onDelta, onOutil, onCarte,
         onOutil?.(event.outil)
       } else if (event.meta) {
         remaining = event.meta.remaining ?? null
-        memoriserQuotaCoach(event.meta.remaining, event.meta.limit)
+        memoriserQuotaCoach(event.meta.remaining, event.meta.limit, event.meta.periode)
       } else if (event.error) {
         streamError = event.error
       }

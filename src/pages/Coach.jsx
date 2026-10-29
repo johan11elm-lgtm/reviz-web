@@ -458,8 +458,11 @@ export default function Coach() {
     { titre: 'Explique-moi', sous: 'une notion du programme', remplir: 'Explique-moi ' },
   ];
   const remplir = texte => { setSaisie(texte); requestAnimationFrame(() => champ.current?.focus()); };
+  // Gratuit : 10 questions par semaine ; Réviz+ : 50 par jour (api/_chatQuota.js). Quota pas encore
+  // reçu du serveur : la période de l'offre de l'élève.
+  const semaine = (quota?.periode ?? (hasRevizPlus ? 'jour' : 'semaine')) === 'semaine';
   const note = !hasRevizPlus && Number.isFinite(quota?.remaining)
-    ? `${pluriel(quota.remaining, 'question')} ${quota.remaining > 1 ? 'gratuites' : 'gratuite'} aujourd'hui · Réviz IA peut se tromper`
+    ? `${pluriel(quota.remaining, 'question')} ${quota.remaining > 1 ? 'gratuites' : 'gratuite'} ${semaine ? 'cette semaine' : "aujourd'hui"} · Réviz IA peut se tromper`
     : 'Réviz IA peut se tromper';
 
   const accueil = (
@@ -541,11 +544,11 @@ export default function Coach() {
       <div className="ia-limite-haut">
         <span className="ia-limite-rond" aria-hidden="true"><Mascot pose="sleeping" size={isDesktop ? 60 : 54} alt="" /></span>
         <span className="ia-limite-txt">
-          <b>{hasRevizPlus ? 'On a beaucoup discuté aujourd’hui.' : `Tu as utilisé tes ${quota?.limit ?? 'questions'} ${quota?.limit ? 'questions ' : ''}du jour.`}</b>
-          <span>{hasRevizPlus ? 'On reprend demain matin.' : 'Elles reviennent demain matin.'}</span>
+          <b>{hasRevizPlus ? 'On a beaucoup discuté aujourd’hui.' : `Tu as utilisé tes ${quota?.limit ?? 'questions'} ${quota?.limit ? 'questions ' : ''}${semaine ? 'de la semaine' : 'du jour'}.`}</b>
+          <span>{hasRevizPlus ? 'On reprend demain matin.' : semaine ? 'Elles reviennent lundi.' : 'Elles reviennent demain matin.'}</span>
         </span>
       </div>
-      {!hasRevizPlus && <button type="button" className="ia-btn" onClick={() => setOffre(true)}>Questions illimitées avec Réviz+</button>}
+      {!hasRevizPlus && <button type="button" className="ia-btn" onClick={() => setOffre(true)}>50 questions par jour avec Réviz+</button>}
     </div>
   ) : (
     <>

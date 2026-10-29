@@ -98,6 +98,7 @@ Coûts par payeur et par mois :
   par jour prévu dans l'offre** : un élève qui le touche tous les jours coûte
   ≈ 30 €/mois. Décidé le 11/10 (attractivité) : coach et scans **illimités** en Réviz+, avec des garde-fous anti-abus invisibles (coach 200 messages par jour). Avant : 60 messages par jour (≈ 9 €/mois au pire,
   jamais atteint en pratique). Reste à activer le cache du prompt du coach.
+  **29/10 (Johan)** : Réviz IA passe sur Haiku 5.5 avec un mode agent (≈ 0,35 c$ par message au plus, cache du prompt activé) ; gratuit 10 messages **par semaine**, Réviz+ **50 par jour** (≈ 5 $/mois au pire par abonné). Les textes de l'appli disent « 50 questions par jour », plus « illimitées ».
 - **Cotisations micro-entreprise** : environ 21 à 25 % du chiffre d'affaires
   selon la catégorie retenue à l'immatriculation.
 - **TVA** : aucune tant que la micro est en franchise de TVA. Au-delà du seuil,

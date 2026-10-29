@@ -48,18 +48,32 @@ export function moisInscription(creationTime) {
 
 const CLE_COACH = 'reviz-coach-quota'
 const jourUTC = () => new Date().toISOString().slice(0, 10)
-
-/** Mémorise le quota du coach renvoyé par le serveur (journée UTC, comme api/_chatQuota.js). */
-export function memoriserQuotaCoach(remaining, limit) {
-  if (typeof remaining !== 'number') return
-  try { localStorage.setItem(CLE_COACH, JSON.stringify({ remaining, limit, jour: jourUTC() })) } catch { /* stockage indisponible */ }
+// Lundi de la semaine en cours (UTC), comme api/_quota.js et api/_chatQuota.js.
+const lundiUTC = () => {
+  const d = new Date()
+  const j = d.getUTCDay()
+  d.setUTCDate(d.getUTCDate() + (j === 0 ? -6 : 1 - j))
+  return d.toISOString().slice(0, 10)
 }
 
-/** Quota du coach connu pour aujourd'hui, ou null. */
+/**
+ * Mémorise le quota du coach renvoyé par le serveur (api/_chatQuota.js) : 10 questions par
+ * semaine en gratuit, 50 par jour en Réviz+. `periode` : 'semaine' | 'jour'.
+ */
+export function memoriserQuotaCoach(remaining, limit, periode = 'jour') {
+  if (typeof remaining !== 'number') return
+  const quand = periode === 'semaine' ? { semaine: lundiUTC() } : { jour: jourUTC() }
+  try { localStorage.setItem(CLE_COACH, JSON.stringify({ remaining, limit, periode, ...quand })) } catch { /* stockage indisponible */ }
+}
+
+/** Quota du coach connu pour la période en cours (jour ou semaine), ou null. */
 export function quotaCoachDuJour() {
   try {
     const q = JSON.parse(localStorage.getItem(CLE_COACH) || 'null')
-    return q && q.jour === jourUTC() ? q : null
+    // Sans période : noté avant le passage à 10 par semaine (29/10), plus juste ; le serveur
+    // renverra le bon au prochain message.
+    if (!q?.periode) return null
+    return (q.periode === 'semaine' ? q.semaine === lundiUTC() : q.jour === jourUTC()) ? q : null
   } catch { return null }
 }
 

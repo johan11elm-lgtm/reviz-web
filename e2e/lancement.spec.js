@@ -23,7 +23,7 @@ async function parcoursOffert(page, moment, { bulle }) {
   await expect(annonce).toBeVisible()
   await expect(annonce.locator('.rv-bulle-sr').filter({ hasText: bulle })).toBeAttached() // ce que dit Réviz
   await expect(annonce.getByText('Scans illimités')).toBeVisible()
-  await expect(annonce.getByText('Réviz IA illimitée')).toBeVisible()
+  await expect(annonce.getByText('Réviz IA chaque jour')).toBeVisible()
   await expect(annonce.getByText('Tous les thèmes')).toBeVisible()
   // Le tarif fondateur se réserve jusqu'au 25 : le bouton le dit, et rien n'est prélevé avant le 26.
   await expect(annonce.getByText(/Rien n’est prélevé avant le 26.octobre/)).toBeVisible()

@@ -32,10 +32,11 @@ export function tarifFondateurOuvert(now = Date.now()) {
 }
 
 // Plafonds pendant le lancement (les vrais abonnés gardent les leurs).
-// Réviz+ est « illimité » : ce sont des garde-fous anti-abus, jamais
-// affichés et très au-dessus d'un usage normal.
+// Les scans Réviz+ sont « illimités » : garde-fou anti-abus, jamais affiché et
+// très au-dessus d'un usage normal. Réviz IA : comme un abonné, 50 messages
+// par jour (api/_chatQuota.js, décision de Johan du 29/10).
 export const LANCEMENT_SCAN_LIMIT = 100 // leçons analysées par semaine
-export const LANCEMENT_CHAT_LIMIT = 200 // messages au coach par jour
+export const LANCEMENT_CHAT_LIMIT = 50 // messages au coach par jour
 
 // Membres fondateurs (sceau « Membre fondateur ») : comptes créés pendant le
 // lancement. Le tarif fondateur, lui, dépend de la date de l'abonnement.

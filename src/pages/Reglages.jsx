@@ -517,7 +517,7 @@ export default function Reglages() {
           </div>
           <ul className="rg-avantages">
             <li><CheckIcon />Scans de leçons illimités</li>
-            <li><CheckIcon />Questions à Réviz IA illimitées</li>
+            <li><CheckIcon />50 questions à Réviz IA par jour</li>
             <li><CheckIcon />Les {THEMES_PROPOSES.filter(t => t.premium).length} thèmes Réviz+</li>
           </ul>
           {VENTES_OUVERTES && <button type="button" className="rg-btn" onClick={() => setRevizPlusOuvert(true)}>Découvrir Réviz+</button>}

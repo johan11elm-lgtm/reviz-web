@@ -80,7 +80,7 @@ export function DecouvrirRevizPlus({ onClose }) {
         <thead><tr><th scope="col"><span className="rpo-sur">Ce que ça change</span></th><th scope="col">Gratuit</th><th scope="col"><span className="rpo-plus">Réviz+</span></th></tr></thead>
         <tbody>
           <tr><th scope="row">Scans de leçons</th><td>5 par semaine</td><td>Illimités</td></tr>
-          <tr><th scope="row">Questions à Réviz IA</th><td>10 par jour</td><td>Illimitées</td></tr>
+          <tr><th scope="row">Questions à Réviz IA</th><td>10 par semaine</td><td>50 par jour</td></tr>
           <tr><th scope="row">Thèmes</th><td>1</td><td>4</td></tr>
         </tbody>
       </table>
@@ -118,9 +118,9 @@ const LIMITES = {
   },
   ia: {
     pose: 'thinking', teinte: 'peche', points: 10,
-    bulle: ['Que de bonnes questions.', 'Je reprends demain matin.'],
-    texte: 'Tu as utilisé tes 10 questions du jour. Elles reviennent demain matin.',
-    action: 'Questions illimitées avec Réviz+',
+    bulle: ['Que de bonnes questions.', 'Je reprends lundi.'],
+    texte: 'Tu as utilisé tes 10 questions de la semaine. Elles reviennent lundi.',
+    action: '50 questions par jour avec Réviz+',
   },
 };
 

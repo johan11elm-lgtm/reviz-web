@@ -104,10 +104,10 @@ describe('<CoachChat />', () => {
     fireEvent.change(screen.getByLabelText('Ta question sur la leçon'), { target: { value: 'Encore une !' } })
     fireEvent.click(screen.getByLabelText('Envoyer la question'))
 
-    expect(await screen.findByText(/tous tes messages du jour/)).toBeInTheDocument()
+    expect(await screen.findByText(/tes questions de la semaine/)).toBeInTheDocument()
     // La limite Réviz IA, puis la feuille Réviz+ (formule et paiement).
-    fireEvent.click(screen.getByRole('button', { name: 'Questions illimitées avec Réviz+' }))
-    fireEvent.click(screen.getAllByRole('button', { name: 'Questions illimitées avec Réviz+' }).at(-1))
+    fireEvent.click(screen.getByRole('button', { name: '50 questions par jour avec Réviz+' }))
+    fireEvent.click(screen.getAllByRole('button', { name: '50 questions par jour avec Réviz+' }).at(-1))
     fireEvent.click(await screen.findByRole('button', { name: 'Passer à Réviz+' }))
     expect(startCheckout).toHaveBeenCalledTimes(1)
     // La saisie est désactivée tant que le quota est épuisé

@@ -277,7 +277,7 @@ export function CoachConversation({ lessonId, prefill, className = '' }) {
               <CoachRow>
                 {hasRevizPlus
                   ? 'Wow, on a beaucoup discuté aujourd\'hui ! On se retrouve demain pour la suite.'
-                  : 'Tu as utilisé tous tes messages du jour ! On se retrouve demain, ou passe à Réviz+ pour continuer maintenant.'}
+                  : 'Tu as utilisé tes questions de la semaine ! On se retrouve lundi, ou passe à Réviz+ pour continuer maintenant.'}
               </CoachRow>
               {!hasRevizPlus && <LimiteAtteinteBouton />}
             </div>
@@ -372,7 +372,7 @@ function LimiteAtteinteBouton() {
   const [ouvert, setOuvert] = useState(false);
   return (
     <>
-      <button type="button" className="rv-btn-cta rv-btn-cta--full coach-formules" onClick={() => setOuvert(true)}>Questions illimitées avec Réviz+</button>
+      <button type="button" className="rv-btn-cta rv-btn-cta--full coach-formules" onClick={() => setOuvert(true)}>50 questions par jour avec Réviz+</button>
       {ouvert && <LimiteAtteinte type="ia" onClose={() => setOuvert(false)} />}
     </>
   );
