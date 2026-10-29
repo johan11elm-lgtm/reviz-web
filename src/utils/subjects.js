@@ -7,6 +7,11 @@
 // génériques après. Exemple : "philosophie" avant "philo" si conflit.
 export const SUBJECT_MAP = {
   // --- Collège & lycée (tronc commun) ---
+  // Avant 'techno' : « Sciences et technologie » (6e) a sa propre mascotte.
+  'sciences et techno': { color: 'green', dot: '#22C55E', bg: '#F0FDF4', mascot: 'sciences' },
+  // Avant 'physique' : « Éducation physique et sportive » n'est pas de la physique-chimie.
+  'éducation physique': { color: 'orange', dot: '#FF6B00', bg: '#FFF7ED', mascot: 'eps' },
+  'eps':         { color: 'orange', dot: '#FF6B00', bg: '#FFF7ED', mascot: 'eps' },
   'maths':       { color: 'orange', dot: '#FF6B00', bg: '#FFF7ED', emoji: '📐', mascot: 'maths' },
   'français':    { color: 'pink',   dot: '#EC4899', bg: '#FDF2F8', emoji: '📖', mascot: 'francais' },
   'histoire':    { color: 'indigo', dot: '#6366F1', bg: '#EEF2FF', emoji: '🌍', mascot: 'histgeo' },
@@ -16,13 +21,14 @@ export const SUBJECT_MAP = {
   'chimie':      { color: 'blue',   dot: '#3B82F6', bg: '#EFF6FF', emoji: '🧪', mascot: 'physique' },
   'techno':      { color: 'cyan',   dot: '#06B6D4', bg: '#ECFEFF', emoji: '⚙️', mascot: 'technonsi' },
   'anglais':     { color: 'yellow', dot: '#EAB308', bg: '#FEFCE8', emoji: '🗣️', mascot: 'langues' },
-  'espagnol':    { color: 'yellow', dot: '#EAB308', bg: '#FEFCE8', emoji: '💬', mascot: 'langues' },
-  'allemand':    { color: 'yellow', dot: '#EAB308', bg: '#FEFCE8', emoji: '🇩🇪', mascot: 'langues' },
+  'espagnol':    { color: 'yellow', dot: '#EAB308', bg: '#FEFCE8', emoji: '💬', mascot: 'espagnol' },
+  'allemand':    { color: 'yellow', dot: '#EAB308', bg: '#FEFCE8', emoji: '🇩🇪', mascot: 'allemand' },
   'langues':     { color: 'yellow', dot: '#EAB308', bg: '#FEFCE8', emoji: '🌐', mascot: 'langues' },
   'llce':        { color: 'yellow', dot: '#EAB308', bg: '#FEFCE8', emoji: '🗣️', mascot: 'langues' },
-  'latin':       { color: 'yellow', dot: '#6366F1', bg: '#EEF2FF', emoji: '🏛️', mascot: 'langues' },
+  'latin':       { color: 'yellow', dot: '#6366F1', bg: '#EEF2FF', emoji: '🏛️', mascot: 'latin' },
   'arts':        { color: 'purple', dot: '#A855F7', bg: '#FAF5FF', emoji: '🎨', mascot: 'arts' },
-  'emc':         { color: 'indigo', dot: '#6366F1', bg: '#EEF2FF', emoji: '⚖️', mascot: 'histgeo' },
+  'emc':         { color: 'indigo', dot: '#6366F1', bg: '#EEF2FF', emoji: '⚖️', mascot: 'emc' },
+  'musique':     { color: 'purple', dot: '#A855F7', bg: '#FAF5FF', mascot: 'musique' },
 
   // --- Spécialités lycée ---
   'ses':         { color: 'green',  dot: '#22C55E', bg: '#F0FDF4', emoji: '📊', mascot: 'histgeo' },

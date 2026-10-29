@@ -32,6 +32,13 @@ export const MASCOT_POSES = {
   philo:       { num: 'm8', alt: 'Cerveau penseur assis sur ses livres' },
   arts:        { num: 'm9', alt: 'Cerveau artiste avec sa palette' },
   geo:         { num: 'm10', alt: 'Cerveau géographe avec sa carte et sa boussole' },
+  sciences:    { num: 'm11', alt: 'Cerveau scientifique avec son ampoule et sa plante' },
+  emc:         { num: 'm12', alt: 'Cerveau citoyen avec sa balance et son drapeau' },
+  espagnol:    { num: 'm13', alt: 'Cerveau hispaniste avec sa guitare et son drapeau' },
+  allemand:    { num: 'm14', alt: 'Cerveau germaniste avec son bretzel et son drapeau' },
+  latin:       { num: 'm15', alt: 'Cerveau latiniste couronné de laurier' },
+  musique:     { num: 'm16', alt: 'Cerveau musicien à la flûte' },
+  eps:         { num: 'm17', alt: 'Cerveau sportif avec son ballon' },
 
   // --- Situations (série 2026-08) ---
   quiz:        { num: 's1', alt: 'Cerveau qui appuie sur un buzzer' },
