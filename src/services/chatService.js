@@ -18,8 +18,20 @@ const API_URL   = 'https://api.anthropic.com/v1/messages'
 const USE_PROXY = !import.meta.env.VITE_ANTHROPIC_API_KEY ||
                   import.meta.env.VITE_ANTHROPIC_API_KEY.includes('REMPLACER')
 
-async function getIdToken() {
-  try { return (await auth.currentUser?.getIdToken()) ?? null } catch { return null }
+async function getIdToken(neuf = false) {
+  try { return (await auth.currentUser?.getIdToken(neuf)) ?? null } catch { return null }
+}
+
+// E-mail confirmé depuis l'ouverture de l'appli (lien cliqué dans le mail, un autre onglet) : le
+// jeton en cache dit encore « pas vérifié » pendant une heure, et Réviz IA n'a pas le bandeau qui
+// le rafraîchit ailleurs (EmailBanner). On relit le compte : true s'il est vérifié maintenant.
+async function vientDEtreVerifie() {
+  try {
+    await auth.currentUser?.reload()
+    return auth.currentUser?.emailVerified === true
+  } catch {
+    return false
+  }
 }
 
 // Lit un flux SSE ligne à ligne et appelle onEvent(payloadString) pour chaque event.
@@ -89,13 +101,17 @@ async function _fetchWithHeaderTimeout(url, init) {
 }
 
 async function _viaProxy({ lessonId, messages, level, onDelta, onOutil, onCarte, erreurs }) {
-  const idToken = await getIdToken()
-
-  const response = await _fetchWithHeaderTimeout('/api/chat', {
+  const envoyer = idToken => _fetchWithHeaderTimeout('/api/chat', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ idToken, ...(lessonId ? { lessonId } : { erreurs }), messages, level }),
   })
+  let response = await envoyer(await getIdToken())
+  // Refus « e-mail pas confirmé » alors qu'il vient de l'être : un jeton neuf, une seule nouvelle
+  // tentative (le serveur refuse avant de compter la question dans le quota).
+  if (response.status === 403 && (await response.clone().text().catch(() => '')) === 'EMAIL_NOT_VERIFIED' && await vientDEtreVerifie()) {
+    response = await envoyer(await getIdToken(true))
+  }
 
   if (!response.ok) {
     const body = await response.text().catch(() => '')
