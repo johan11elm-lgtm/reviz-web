@@ -142,7 +142,11 @@ export function AuthProvider({ children }) {
     // mineur en dépend (birthDate), donc on ne le laisse pas en fire-and-forget.
     try {
       await createUserProfile(user.uid, { prenom, email, birthDate, level });
-    } catch { /* best-effort : le profil sera recréé au besoin */ }
+    } catch (err) {
+      // Best-effort (l'élève entre quand même, le profil se complète à son retour), mais
+      // signalé à Sentry : un refus muet a vidé les profils des essais devenus comptes (26-29/10).
+      globalThis.reportError?.(err);
+    }
     // Mineur <15 ans : trace de consentement 'pending' posée dès l'inscription,
     // même si le tunnel est abandonné avant l'étape parent. Le gate bloque déjà
     // en l'absence de doc ; ceci rend l'attente visible/auditables côté serveur.
@@ -441,6 +445,18 @@ export function AuthProvider({ children }) {
       localStorage.setItem(levelKey, serializeLevel(profile.level));
       setLevelTick(n => n + 1);
     }
+    // Et l'inverse : profil resté sans prénom ou sans classe (essais devenus comptes du 26 au
+    // 29/10, écriture refusée) → complété par le prénom du compte et la classe de ce navigateur.
+    // Jamais de création de fiche ici, ni d'écrasement d'un champ rempli.
+    const manque = {};
+    const levelLocal = parseLevel(localStorage.getItem(levelKey));
+    if (profile && !user.isAnonymous) {
+      if (!profile.prenom && user.displayName) manque.prenom = user.displayName;
+      if (!profile.level?.cycle && levelLocal?.cycle) manque.level = levelLocal;
+    }
+    if (Object.keys(manque).length) {
+      setDoc(doc(db, 'users', user.uid), manque, { merge: true }).catch(() => {});
+    }
 
     // Compte sans mot de passe (Google, Apple, Microsoft, TikTok) sans profil
     // complété (pas de date de naissance) → doit finir l'inscription.
@@ -458,8 +474,10 @@ export function AuthProvider({ children }) {
 
     // Mineur <15 ans : accès ouvert le temps de donner l'email d'un parent
     // puis d'attendre sa réponse ; suspendu à l'issue d'un délai ou en cas de refus.
+    // Naissance perdue (essais devenus comptes, 26-29/10) : la trace de consentement, posée à
+    // l'inscription seulement pour un moins de 15 ans, suffit à le savoir mineur.
     const { blocked, ...detail } = consentGate({
-      under15: isUnder15(profile?.birthDate),
+      under15: isUnder15(profile?.birthDate) || (!profile?.birthDate && !!consentDoc),
       consent: consentDoc,
       inscritLe: Date.parse(user.metadata?.creationTime) || null,
     });

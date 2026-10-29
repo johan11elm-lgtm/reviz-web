@@ -80,7 +80,8 @@ export default function FinishSetup() {
       setUserLevel(level);
       await refreshGate?.();
       navigate(mineur ? '/consent-pending' : '/', { replace: true });
-    } catch {
+    } catch (err) {
+      globalThis.reportError?.(err);
       setErreurs({ general: 'Une erreur est survenue. Réessaie.' });
       setLoading(false);
     }
