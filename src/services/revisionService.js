@@ -100,7 +100,7 @@ function premierJourLocal() {
 
 /**
  * Enregistre une session de révision (ouverture d'un format, résumé lu, quiz terminé…).
- * @param {'flashcards'|'quiz'|'resume'|'mindmap'} type
+ * @param {'flashcards'|'quiz'|'resume'|'mindmap'|'exercices'} type
  * @param {object} [details] champs en plus, ex. { score, total } pour un quiz terminé
  */
 export function recordRevision(type, details = {}) {
@@ -142,8 +142,8 @@ export function recordRevision(type, details = {}) {
 /**
  * Révision menée jusqu'au bout (dernière question du quiz, dernière carte) :
  * complète l'entrée ouverte par recordRevision() pour ce format.
- * @param {'flashcards'|'quiz'} type
- * @param {{ score?: number, total?: number }} [resultat]
+ * @param {'flashcards'|'quiz'|'exercices'} type
+ * @param {{ score?: number, total?: number, xp?: number, bonnes?: number, comboMax?: number, cartes?: number }} [resultat]
  */
 export function markRevisionDone(type, resultat = {}) {
   const lessonId = localStorage.getItem('reviz-current-lesson-id') ?? null
@@ -154,6 +154,10 @@ export function markRevisionDone(type, resultat = {}) {
   if (Number.isFinite(resultat.score) && Number.isFinite(resultat.total)) {
     entry.score = resultat.score
     entry.total = resultat.total
+  }
+  // XP gagnée et ce que lisent les quêtes (utils/xp.js, utils/quetes.js).
+  for (const champ of ['xp', 'bonnes', 'comboMax', 'cartes']) {
+    if (Number.isFinite(resultat[champ])) entry[champ] = resultat[champ]
   }
   localStorage.setItem(getKey(), JSON.stringify(revisions))
   trackStat('revision_terminee', { format: type, source: entry.source ?? 'scan' }, essaiPayload(entry))
@@ -174,9 +178,10 @@ export function lierEssai(essaiId) {
 
 /**
  * Dernier et meilleur score au quiz d'une leçon : { dernier: {score, total}, meilleur } ou null.
+ * `type` : 'exercices' pour le score des exercices en jeu.
  */
-export function quizScore(lessonId) {
-  const faits = loadRevisions().filter(r => r.lessonId === lessonId && r.type === 'quiz' && Number.isFinite(r.score) && r.total)
+export function quizScore(lessonId, type = 'quiz') {
+  const faits = loadRevisions().filter(r => r.lessonId === lessonId && r.type === type && Number.isFinite(r.score) && r.total)
   if (!faits.length) return null
   const meilleur = faits.reduce((m, r) => (r.score / r.total > m.score / m.total ? r : m), faits[0])
   return { dernier: { score: faits[0].score, total: faits[0].total }, meilleur: { score: meilleur.score, total: meilleur.total } }

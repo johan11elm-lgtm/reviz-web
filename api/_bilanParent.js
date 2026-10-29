@@ -56,7 +56,7 @@ export function enMs(v) {
   return Number.isFinite(ms) ? ms : null
 }
 
-const FORMATS = { quiz: 'quiz', flashcards: 'flashcards', resume: 'résumé', mindmap: 'carte mentale' }
+const FORMATS = { quiz: 'quiz', flashcards: 'flashcards', resume: 'résumé', mindmap: 'carte mentale', exercices: 'exercices en jeu' }
 
 /**
  * Ce que l'élève a fait entre `depuis` et `maintenant` : jours de révision,

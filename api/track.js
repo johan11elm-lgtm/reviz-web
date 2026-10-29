@@ -60,7 +60,7 @@ const ALLOWED = {
     'Anglais', 'Allemand', 'Espagnol', 'Sciences et technologie', 'Latin', 'Arts', 'EMC',
     'SES', 'NSI', 'Philosophie', 'Autre',
   ],
-  format: ['flashcards', 'quiz', 'resume', 'mindmap'],
+  format: ['flashcards', 'quiz', 'resume', 'mindmap', 'exercices'],
   source: ['programme', 'scan', 'photo', 'texte'],
   joueur: ['compte', 'invite'],
   issue: ['victoire', 'egalite', 'forfait'],

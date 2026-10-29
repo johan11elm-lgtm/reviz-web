@@ -24,6 +24,7 @@ import { nextStep } from '../utils/nextStep';
 import { DEPUIS_FICHE } from '../utils/navigation';
 import { openChapter } from '../services/programmeService';
 import { erreursDe } from '../services/erreursService';
+import { construireSeance } from '../utils/exercicesChapitre';
 import { ChapitresMatiere } from '../components/fiche/ChapitresMatiere';
 import '../components/reviz/HerosMatiere.css';
 import './Analyse.css';
@@ -53,6 +54,8 @@ function buildLessonFromAiData(data) {
     quizCount:       data.quiz.length,
     keyPoints:       data.resume?.keyPoints ?? [],
     resumeMinutes:   resumeReadingMinutes(data.resume),
+    // Exercices en jeu : seulement si le chapitre a de quoi nourrir une séance.
+    exercicesDispo:  construireSeance(data, { graine: 1 }).length > 0,
   };
 }
 
@@ -310,6 +313,7 @@ export default function Analyse() {
 
   // Score au quiz (enregistré à la fin du quiz depuis le 21/10).
   const scoreQuiz = coachLessonId ? quizScore(coachLessonId) : null;
+  const scoreExercices = coachLessonId ? quizScore(coachLessonId, 'exercices') : null;
   // Ce que dit Réviz : où en est l'élève, et la prochaine action.
   const suite = { '/resume': 'On commence par le résumé ?', '/flashcards': aRevoir > 0 ? 'On revoit tes cartes ?' : 'On finit les flashcards ?', '/quiz': 'Place au quiz ?' }[step.to];
   const lignes = etat === 'decouvrir' ? ['Nouveau chapitre.', 'On commence par le résumé ?']
@@ -410,6 +414,13 @@ export default function Analyse() {
         : e.id === 'flashcards' ? { valeur: avancement?.seen ?? 0, sur: total }
         : { valeur: scoreQuiz ? scoreQuiz.dernier.score : faits.quiz ? 1 : 0, sur: scoreQuiz ? scoreQuiz.dernier.total : faits.quiz ? 1 : (displayLesson.quizCount ?? 0) }),
     })),
+    ...(displayLesson.exercicesDispo ? [{
+      id: 'exercices', nom: 'Exercices en jeu', pose: 'muscu', to: '/exercices',
+      meta: scoreExercices ? `${scoreExercices.dernier.score} / ${scoreExercices.dernier.total} à la dernière séance` : '4 coins, intrus, paires…',
+      statut: scoreExercices ? 'fait' : 'afaire',
+      valeur: scoreExercices ? scoreExercices.dernier.score : 0,
+      sur: scoreExercices ? scoreExercices.dernier.total : 10,
+    }] : []),
     { id: 'mindmap', nom: 'Carte mentale', pose: 'thinking', to: '/mindmap', meta: carteMentaleVue ? 'Vue' : 'Tout le chapitre sur une page', statut: carteMentaleVue ? 'fait' : 'afaire', valeur: carteMentaleVue ? 1 : 0, sur: 1 },
     ...(nbErreurs ? [{ id: 'erreurs', nom: 'Refaire mes erreurs', pose: 'confused', to: '/quiz?erreurs=1', meta: `${pluriel(nbErreurs, 'question ratée')} au quiz`, statut: 'afaire', valeur: 0, sur: nbErreurs }] : []),
   ];

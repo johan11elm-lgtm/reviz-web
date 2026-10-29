@@ -1,7 +1,8 @@
 import { useState, useEffect, useMemo, useRef, useLayoutEffect } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { fermerVersFiche, versExercice } from '../utils/navigation'
-import { recordRevision } from '../services/revisionService'
+import { recordRevision, loadRevisions } from '../services/revisionService'
+import { xpLecture } from '../utils/xp'
 import { BRANCH_COLORS, BRANCH_POSITIONS } from '../utils/aiPrompts'
 import { Mascot } from '../components/Mascot'
 import { MissingLessonState } from '../components/MissingLessonState'
@@ -152,7 +153,7 @@ function plan(n, l, grand) {
  * et un écran de fin calme.
  */
 function MindmapSession() {
-  useEffect(() => { recordRevision('mindmap'); mesurer('format_ouvert', { format: 'mindmap' }) }, [])
+  useEffect(() => { recordRevision('mindmap', { xp: xpLecture(loadRevisions(), 'mindmap', localStorage.getItem('reviz-current-lesson-id')) }); mesurer('format_ouvert', { format: 'mindmap' }) }, [])
   const data = useMemo(() => getMindmapData(), [])
   const navigate = useNavigate()
   const location = useLocation()

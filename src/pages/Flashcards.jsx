@@ -13,6 +13,11 @@ import { useIsDesktop } from '../hooks/useMediaQuery'
 import { teinteMatiere, varsTeinte } from '../utils/teinteMatiere'
 import './Flashcards.css'
 import { mesurer } from '../services/mesure'
+import { useAuth } from '../context/AuthContext'
+import { useCombo } from '../hooks/useCombo'
+import { PastilleCombo, BilanXp } from '../components/xp/Xp'
+import { gainDeSeance } from '../services/xpService'
+import { xpSeance } from '../utils/xp'
 
 // ---- DONNÉES : localStorage (IA) > état vide (mock réservé au dev) ----
 function getFlashcards() {
@@ -100,6 +105,9 @@ function FlashcardsSession() {
   const navigate = useNavigate()
   const location = useLocation()
   useEffect(() => { recordRevision('flashcards'); mesurer('format_ouvert', { format: 'flashcards' }) }, [])
+  const uid = useAuth()?.currentUser?.uid ?? null
+  const combo = useCombo()
+  const [gain, setGain] = useState(null)
   const lessonId = useMemo(() => getLessonId(), [])
   const lessonTitle = useMemo(() => getLessonTitle(), [])
   const matiere = useMemo(() => getLessonSubject(), [])
@@ -129,6 +137,8 @@ function FlashcardsSession() {
   const precedente = idx > 0 ? notes[idx - 1] : null
 
   function lancer(cartes) {
+    combo.remettre()
+    setGain(null)
     setSerie(cartes)
     setNotes(cartes.map(() => null))
     setIdx(0)
@@ -140,13 +150,25 @@ function FlashcardsSession() {
   function noter(note) {
     if (!flipped || sortie || !carte) return
     updateCardState(lessonId, carte.index, NOTE_SRS[note])
-    setNotes(n => n.map((x, i) => (i === idx ? note : x)))
+    const notees = notes.map((x, i) => (i === idx ? note : x))
+    setNotes(notees)
+    // Combo : « Je sais » le fait monter, « À revoir » le casse, « Presque » le laisse.
+    if (note === 'sais') combo.bonne()
+    else if (note === 'revoir') combo.faute()
     setReaction(note)
     setSortie(SORTIE[note])
     setDx(0)
     setTimeout(() => {
       setSortie(null)
-      if (idx + 1 >= serie.length) { setEcran('fin'); markRevisionDone('flashcards'); return }
+      if (idx + 1 >= serie.length) {
+        const sues = notees.filter(n => n && n !== 'revoir').length
+        const { max, paliers } = combo.instantane()
+        const g = gainDeSeance(uid, xpSeance({ bonnes: sues, total: serie.length, paliers, cartes: true }))
+        markRevisionDone('flashcards', { xp: g.xp, bonnes: sues, cartes: serie.length, comboMax: max })
+        setGain(g)
+        setEcran('fin')
+        return
+      }
       // La carte suivante part de la pile, sans transition, puis vient au centre.
       setArrivee(true)
       setFlipped(false)
@@ -283,7 +305,6 @@ function FlashcardsSession() {
     const sues = notes.filter(n => n === 'sais').length
     const aRevoir = serie.filter((_, i) => notes[i] !== 'sais')
     const nouvelles = serie.filter(c => c.nouvelle).length
-    const xp = notes.filter(n => n !== 'revoir').length * 5
     const quizFait = loadRevisions().some(r => r.lessonId === lessonId && r.type === 'quiz')
     return (
       <div className={`app app--no-halo flashcards-page fc-page fc-page--fin${isDesktop ? ' app--large fc-page--large' : ''}`} style={varsTeinte(teinte)}>
@@ -293,7 +314,7 @@ function FlashcardsSession() {
           <div className="fc-fin-tete">
             <span className="fc-surtitre">{matiere ? `${matiere} · ` : ''}Flashcards</span>
             <h1 className="fc-fin-titre">Série terminée</h1>
-            <span className="fc-xp">+{xp} XP</span>
+            <span className="fc-xp">+{gain?.xp ?? 0} XP</span>
           </div>
           {reviz(isDesktop ? 220 : 170, 'bas', aRevoir.length ? 'content' : 'fier', aRevoir.length ? 'coucou' : 'saut')}
           <div className="fc-stats">
@@ -305,6 +326,7 @@ function FlashcardsSession() {
             <Route notes={notes} idx={-1} grand={isDesktop} recap />
             {aRevoir.length > 0 && <p className="fc-priorite"><RetourFleche taille={16} />Les cartes à revoir reviendront en priorité.</p>}
           </div>
+          <BilanXp gain={gain} uid={uid} />
           <div className="fc-fin-actions fc-fin-actions--deux">
             <button type="button" className="fc-btn fc-btn--orange" onClick={() => versExercice(navigate, location, '/quiz')}>
               {quizFait ? 'Refaire le quiz' : 'Passer au quiz'}{nbQuestions ? ` · ${pluriel(nbQuestions, 'question')}` : ''}<Fleche />
@@ -333,6 +355,7 @@ function FlashcardsSession() {
   const enTete = (
     <div className="fc-tete">
       <span className="fc-tete-titre">{isDesktop && matiere ? `${matiere} · ` : ''}{lessonTitle}</span>
+      <PastilleCombo combo={combo.combo} casse={combo.casse} palier={combo.palier} />
       <span className="fc-tete-compte" aria-live="polite">Carte {idx + 1} sur {serie.length}</span>
     </div>
   )

@@ -3,6 +3,7 @@ import { useState, useRef, useEffect, useMemo } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { fermerVersFiche, versExercice } from '../utils/navigation'
 import { recordRevision, loadRevisions } from '../services/revisionService'
+import { xpLecture } from '../utils/xp'
 import { updateCardState, getCardState, countDueCards } from '../services/srsService'
 import { Mascot } from '../components/Mascot'
 import { subjectMascot } from '../utils/subjects'
@@ -194,7 +195,7 @@ function ResumeContent() {
   }
 
   function finir() {
-    recordRevision('resume')
+    recordRevision('resume', { xp: xpLecture(loadRevisions(), 'resume', localStorage.getItem('reviz-current-lesson-id')) })
     setMinutesLues(Math.max(1, Math.round((Date.now() - debut.current) / 60000)))
     setFin(true)
     setBarre(false)
