@@ -1,7 +1,7 @@
 // -------------------------------------------------------
 // Réviz — Contexte d'authentification Firebase
 // -------------------------------------------------------
-import { createContext, useContext, useEffect, useMemo, useState } from 'react';
+import { createContext, useContext, useEffect, useMemo, useRef, useState } from 'react';
 import {
   onAuthStateChanged,
   createUserWithEmailAndPassword,
@@ -133,8 +133,10 @@ export function AuthProvider({ children }) {
   const [consent, setConsent] = useState(() => ({
     status: cached?.consentStatus ?? 'ok', parentEmail: null, joursRestants: null,
   }));
-  // Compte sans mot de passe (Google, Apple…) sans profil complété (pas encore de date de naissance / niveau).
+  // Compte sans date de naissance dans son profil → fin d'inscription (/finish-setup).
   const [needsProfileSetup, setNeedsProfileSetup] = useState(cached?.needsProfileSetup ?? false);
+  // Vrai pendant signup() : la fiche n'a pas encore le profil, ce n'est pas un profil incomplet.
+  const inscriptionEnCours = useRef(false);
   const [isPremium, setIsPremium] = useState(cached?.isPremium ?? false);
   // Récapitulatif de l'abonnement écrit par le webhook Stripe (formule,
   // tarif fondateur, fin de période, annulation programmée) ; null sans abonnement.
@@ -148,6 +150,15 @@ export function AuthProvider({ children }) {
   // --- Inscription ---
   // `level` est un objet { cycle, classe, specialites?, filiere? }
   async function signup(prenom, email, password, level, birthDate = null) {
+    inscriptionEnCours.current = true;
+    try {
+      return await inscrire(prenom, email, password, level, birthDate);
+    } finally {
+      inscriptionEnCours.current = false;
+    }
+  }
+
+  async function inscrire(prenom, email, password, level, birthDate) {
     const { user } = await createUserWithEmailAndPassword(auth, email, password);
     track('compte_cree', { classe: level?.classe });
     await updateProfile(user, { displayName: prenom });
@@ -457,13 +468,15 @@ export function AuthProvider({ children }) {
       setGateUid(null);
       return;
     }
+    // Lue avant les lectures : une fiche lue pendant l'inscription peut précéder le profil.
+    const pendantInscription = inscriptionEnCours.current;
     // Les deux lectures partent en parallèle : un seul aller-retour Firestore
     // au lieu de deux enchaînés. Lecture impossible → on n'élève pas le
-    // blocage (fail-open UX).
+    // blocage (fail-open UX). Profil : null = pas de fiche, undefined = lecture ratée.
     const [profile, consentDoc] = await Promise.all([
       getDoc(doc(db, 'users', user.uid))
         .then(snap => (snap.exists() ? snap.data() : null))
-        .catch(() => null),
+        .catch(() => undefined),
       getDoc(doc(db, 'users', user.uid, 'parentalConsent', 'consent'))
         .then(c => (c.exists() ? c.data() : null))
         .catch(() => null),
@@ -489,10 +502,11 @@ export function AuthProvider({ children }) {
       setDoc(doc(db, 'users', user.uid), manque, { merge: true }).catch(() => {});
     }
 
-    // Compte sans mot de passe (Google, Apple, Microsoft, TikTok) sans profil
-    // complété (pas de date de naissance) → doit finir l'inscription.
-    const hasPassword = user.providerData?.some(p => p.providerId === 'password');
-    setNeedsProfileSetup(!hasPassword && !user.isAnonymous && !profile?.birthDate);
+    // Pas de date de naissance → doit finir l'inscription : compte Google, Apple, Microsoft,
+    // TikTok à sa première connexion, ou compte e-mail dont le profil n'a pas été enregistré
+    // (essais devenus comptes du 26 au 29/10). Jamais pendant l'inscription par e-mail, ni
+    // sur une lecture ratée.
+    setNeedsProfileSetup(!user.isAnonymous && profile !== undefined && !profile?.birthDate && !pendantInscription);
     // Photo de profil choisie sur un autre appareil.
     reprendreAvatarDuProfil(user.uid, profile?.avatar);
     // Récompenses de quêtes récupérées sur un autre appareil.

@@ -24,10 +24,12 @@ vi.mock('firebase/firestore', () => ({
   getDoc: (...a) => fb.getDoc(...a),
   doc: (db, ...path) => path.join('/'),
   collection: vi.fn(), getDocs: vi.fn(), deleteDoc: vi.fn(), setDoc: (...a) => fb.setDoc(...a),
+  serverTimestamp: () => 'maintenant',
 }))
 vi.mock('../../services/firebaseConfig', () => ({ auth: fb.auth, db: {} }))
 vi.mock('@capacitor/core', () => ({ Capacitor: { isNativePlatform: () => false } }))
 
+import { createUserWithEmailAndPassword, sendEmailVerification } from 'firebase/auth'
 import { AuthProvider, useAuth } from '../AuthContext'
 
 const snap = (data) => ({ exists: () => data != null, data: () => data })
@@ -174,12 +176,45 @@ describe('<AuthProvider /> — démarrage optimiste', () => {
     await waitFor(() => expect(cacheOf().needsProfileSetup).toBe(true))
   })
 
-  it('compte e-mail sans profil (écriture ratée) → pas renvoyé vers la fin d’inscription', async () => {
-    mockFirestore({ profile: null })
+  it.each([
+    ['fiche réduite au lien vers l’essai', { essaiId: 'guest-1' }],
+    ['pas de fiche', null],
+  ])('compte e-mail sans date de naissance (%s) → fin d’inscription à la prochaine ouverture', async (_, profile) => {
+    mockFirestore({ profile })
+    renderProvider()
+    await resolveAuth(johan)
+    await waitFor(() => expect(cacheOf().needsProfileSetup).toBe(true))
+  })
+
+  it('lecture du profil ratée → pas renvoyé vers la fin d’inscription', async () => {
+    fb.getDoc.mockImplementation((path) =>
+      (path.endsWith('/consent') ? Promise.resolve(snap(null)) : Promise.reject(new Error('offline'))))
     renderProvider()
     await resolveAuth(johan)
     await waitFor(() => expect(cacheOf().uid).toBe('u1'))
     expect(cacheOf().needsProfileSetup).toBe(false)
+  })
+
+  it('pendant l’inscription par e-mail → pas de fin d’inscription, même si la fiche est encore vide', async () => {
+    // Firebase annonce le compte pendant sa création, avant que le profil soit écrit.
+    mockFirestore({ profile: { essaiId: 'guest-1' } })
+    vi.mocked(createUserWithEmailAndPassword).mockImplementation(async () => {
+      await fb.listeners.at(-1)(johan)
+      return { user: johan }
+    })
+    vi.mocked(sendEmailVerification).mockResolvedValue()
+    let api
+    function Capture() {
+      api = useAuth()
+      return <div data-testid="needs">{`needs=${api.needsProfileSetup}`}</div>
+    }
+    render(<AuthProvider><Capture /></AuthProvider>)
+    await resolveAuth(null)
+    await act(async () => {
+      await api.signup('Johan', 'j@example.com', 'motdepasse123', quatrieme, '2000-01-01')
+    })
+    expect(screen.getByTestId('needs')).toHaveTextContent('needs=false')
+    expect(fb.setDoc).toHaveBeenCalledWith('users/u1', expect.objectContaining({ prenom: 'Johan', birthDate: '2000-01-01' }), { merge: true })
   })
 
   // Essais devenus comptes du 26 au 29/10 : fiche réduite au lien vers l'essai.

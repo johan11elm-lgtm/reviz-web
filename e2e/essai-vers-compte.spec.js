@@ -3,7 +3,7 @@
 // mise à jour (plan: 'free' = champ de facturation) et prénom, classe et naissance étaient
 // perdus, sans erreur visible. Rejoue le parcours avec les vraies règles (émulateur).
 import { test, expect } from '@playwright/test'
-import { entrerEnEssai, lireProfilEmulateur, mockApiRoutes, remplirNaissance, uniqueEmail } from './helpers'
+import { compteRapide, entrerEnEssai, lireProfilEmulateur, mockApiRoutes, remplirNaissance, uniqueEmail } from './helpers'
 
 // uid d'un compte de l'émulateur Auth, retrouvé par son e-mail (accès admin « owner »).
 async function uidDe(email) {
@@ -36,7 +36,8 @@ test.describe('Essai → compte', () => {
     await page.getByLabel('Mot de passe', { exact: true }).fill('motdepasse123')
     await page.getByRole('checkbox').check({ force: true })
     await page.getByRole('button', { name: 'Créer mon compte' }).click()
-    await expect(page).not.toHaveURL(/\/inscription/, { timeout: 15_000 })
+    // La fiche encore vide pendant l'inscription ne renvoie pas vers la fin d'inscription.
+    await expect(page).toHaveURL(/\/(onboarding)?$/, { timeout: 15_000 })
 
     const uid = await uidDe(email)
     expect(uid).toBeTruthy()
@@ -47,5 +48,38 @@ test.describe('Essai → compte', () => {
     expect(profil.level?.classe).toBe('4ème')
     expect(profil.birthDate).toBeTruthy()
     expect(profil.createdAt).toBeTruthy()
+    await expect(page).not.toHaveURL(/finish-setup/)
+  })
+
+  // Comptes vidés du 26 au 29/10 : prénom réparé depuis Auth, naissance perdue.
+  test('profil sans date de naissance : à l’ouverture suivante, elle est demandée avant d’aller plus loin', async ({ page }) => {
+    const { uid } = await compteRapide(page, { prenom: 'Léa', classe: '4ème', birthDate: null })
+    await expect(page).toHaveURL(/\/finish-setup/)
+    await expect(page.getByText(/Content de te revoir, Léa/).first()).toBeVisible()
+    // Classe connue, CGU déjà acceptées : une seule question.
+    await expect(page.getByRole('radio', { name: '4e', exact: true })).toHaveCount(0)
+    await expect(page.getByRole('checkbox')).toHaveCount(0)
+
+    // Tant qu'elle manque, les autres pages ramènent ici.
+    await page.goto('/programme')
+    await expect(page).toHaveURL(/\/finish-setup/)
+
+    await remplirNaissance(page, '2010-03-15')
+    await page.getByRole('button', { name: 'Continuer' }).click()
+    await expect(page).toHaveURL(/\/$/, { timeout: 15_000 })
+    await expect.poll(async () => (await lireProfilEmulateur(uid))?.birthDate, { timeout: 15_000 }).toBe('2010-03-15')
+    expect((await lireProfilEmulateur(uid)).level?.classe).toBe('4ème')
+  })
+
+  test('moins de 15 ans (trace de consentement) : après la date, l’e-mail du parent comme à l’inscription', async ({ page }) => {
+    await compteRapide(page, {
+      prenom: 'Léa', classe: '5ème', birthDate: null,
+      consentement: { status: 'pending', createdAt: Date.now() },
+    })
+    await expect(page).toHaveURL(/\/finish-setup/)
+    await remplirNaissance(page, '2014-02-10')
+    await page.getByRole('button', { name: 'Continuer' }).click()
+    await expect(page).toHaveURL(/\/consent-pending/, { timeout: 15_000 })
+    await expect(page.getByLabel('E-mail de ton parent')).toBeVisible()
   })
 })
