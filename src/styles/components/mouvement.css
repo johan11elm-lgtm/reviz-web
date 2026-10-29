@@ -71,6 +71,57 @@
 .rv-entre { animation: rv-entre .5s var(--rv-sortie) calc(var(--i, 0) * 40ms) backwards; }
 @keyframes rv-entre { from { opacity: 0; transform: translateX(24px); } }
 
+/* ── Entrée d'un écran : ses blocs montent en cascade (leur « content-next », à la verticale) ──
+ * Posé ici, écran par écran, sur les blocs existants ; --i donne le rang dans la cascade.
+ * Court (0,5 s, 14 px) : l'écran est lisible tout de suite, il se pose, c'est tout. */
+@keyframes rv-monte { from { opacity: 0; transform: translateY(14px); } }
+.rv-monte,
+.na-page :is(.na-entete, .na-bloc, .ag-prochain, .ag-rappel, .ag-liste, .ag-edt, .ag-relier),
+.mn-page :is(.mn-bloc, .mo-niveau, .mo-essai, .mo-section, .mo-rangee > *),
+.analyse-page :is(.nf-entete, .nf-bloc, .nf-contenu, .nf-section),
+.ia-page :is(.ia-salut, .ia-cartes > li),
+.rn-reglages :is(.rg-entete, .rg-colonne > *),
+.rn-page .rn-bloc, .cn-page .cm-bloc,
+.cb-page :is(.cb-sujet, .cb-note, .cb-corrige-liste > li) {
+  animation: rv-monte .5s var(--rv-sortie) calc(var(--i, 0) * 60ms + 30ms) backwards;
+}
+.na-page .na-bloc, .mn-page .mn-bloc, .analyse-page .nf-bloc, .rg-colonne > :nth-child(2), .mo-rangee > :nth-child(2) { --i: 1; }
+.na-page .ag-prochain, .mn-page .mo-niveau, .rg-colonne > :nth-child(3), .mo-rangee > :nth-child(3) { --i: 2; }
+.na-page :is(.ag-rappel, .ag-liste), .mn-page .mo-essai, .rg-colonne > :nth-child(4) { --i: 3; }
+.na-page :is(.ag-edt, .ag-relier), .mn-page .mo-section, .analyse-page .nf-section, .rg-colonne > :nth-child(n+5) { --i: 4; }
+.mn-page .mo-section ~ .mo-section { --i: 5; }
+/* Les cartes d'une liste : une par une, après le bloc du haut. */
+.analyse-page .nf-contenu:nth-child(1), .ia-cartes > li:nth-child(1), .cb-corrige-liste > li:nth-child(1) { --i: 1; }
+.analyse-page .nf-contenu:nth-child(2), .ia-cartes > li:nth-child(2), .cb-corrige-liste > li:nth-child(2) { --i: 2; }
+.analyse-page .nf-contenu:nth-child(3), .ia-cartes > li:nth-child(3), .cb-corrige-liste > li:nth-child(3) { --i: 3; }
+.analyse-page .nf-contenu:nth-child(4), .ia-cartes > li:nth-child(4), .cb-corrige-liste > li:nth-child(4) { --i: 4; }
+.analyse-page .nf-contenu:nth-child(n+5), .cb-corrige-liste > li:nth-child(n+5) { --i: 5; }
+/* Les messages de Réviz IA et de l'élève : juste posés. */
+.ia-page :is(.ia-eleve, .ia-reponse) { animation: rv-monte .35s var(--rv-sortie) backwards; }
+
+/* Les étapes du plan de révision arrivent de la droite, une par une. */
+.pr-etapes > li { animation: rv-entre .45s var(--rv-sortie) calc(var(--i, 0) * 70ms + 180ms) backwards; }
+.pr-etapes > li:nth-child(2) { --i: 1; } .pr-etapes > li:nth-child(3) { --i: 2; } .pr-etapes > li:nth-child(4) { --i: 3; }
+
+/* L'émote des blocs pêche : elle se pose avec un petit rebond, puis lévite (comme Mes leçons et le scan). */
+@keyframes rv-pop { from { opacity: 0; transform: scale(.6) translateY(10px); } }
+:is(.na-bloc-reviz, .mn-bloc-reviz, .nf-bloc-reviz, .rn-bloc-reviz, .cm-bloc-reviz) > :is(img, svg),
+:is(.na-bloc-reviz, .mn-bloc-reviz, .nf-bloc-reviz, .rn-bloc-reviz, .cm-bloc-reviz) > picture > img {
+  animation: rv-pop .6s var(--rv-ressort) .2s backwards, rv-levite 6s cubic-bezier(.45, 0, .55, 1) .9s infinite;
+}
+
+/* Les barres se remplissent : niveau, mémoire, minibarres, et les jours de la semaine poussent. */
+@keyframes rv-remplit { from { transform: scaleX(0); } }
+@keyframes rv-pousse { from { transform: scaleY(0); } }
+.mo-barre i, .mo-minibarre i, .mo-memoire-barre { transform-origin: 0 50%; animation: rv-remplit .9s var(--rv-sortie) .35s backwards; }
+.mo-jour-piste i { transform-origin: 50% 100%; animation: rv-pousse .6s var(--rv-sortie) calc(var(--j, 0) * 45ms + .35s) backwards; }
+.mo-jour:nth-child(2) { --j: 1; } .mo-jour:nth-child(3) { --j: 2; } .mo-jour:nth-child(4) { --j: 3; }
+.mo-jour:nth-child(5) { --j: 4; } .mo-jour:nth-child(6) { --j: 5; } .mo-jour:nth-child(7) { --j: 6; }
+/* Les badges : chacun se pose à son tour. */
+.mo-badges > li { animation: rv-pop .5s var(--rv-ressort) calc(var(--b, 0) * 35ms + .3s) backwards; }
+.mo-badges > li:nth-child(2) { --b: 1; } .mo-badges > li:nth-child(3) { --b: 2; } .mo-badges > li:nth-child(4) { --b: 3; }
+.mo-badges > li:nth-child(5) { --b: 4; } .mo-badges > li:nth-child(6) { --b: 5; } .mo-badges > li:nth-child(n+7) { --b: 6; }
+
 /* ── Étincelles autour d'une bonne réponse (leur « shine ») ──
  * <Etincelles /> se pose au centre de son parent (position: relative). */
 .rv-etincelles { position: absolute; top: 50%; left: 50%; width: 0; height: 0; pointer-events: none; }
@@ -112,6 +163,18 @@
 @media (prefers-reduced-motion: reduce) {
   .rv-surgit > :is(img, svg), .rv-surgit > picture > img, .rv-saut, .rv-secousse, .rv-rebond,
   .rv-levite > :is(img, svg), .rv-levite > picture > img, .rv-entre { animation: none; }
+  .rv-monte,
+  .na-page :is(.na-entete, .na-bloc, .ag-prochain, .ag-rappel, .ag-liste, .ag-edt, .ag-relier),
+  .mn-page :is(.mn-bloc, .mo-niveau, .mo-essai, .mo-section, .mo-rangee > *),
+  .analyse-page :is(.nf-entete, .nf-bloc, .nf-contenu, .nf-section),
+  .ia-page :is(.ia-salut, .ia-cartes > li, .ia-eleve, .ia-reponse),
+  .rn-reglages :is(.rg-entete, .rg-colonne > *),
+  .rn-page .rn-bloc, .cn-page .cm-bloc,
+  .cb-page :is(.cb-sujet, .cb-note, .cb-corrige-liste > li),
+  .pr-etapes > li, .mo-badges > li,
+  .mo-barre i, .mo-minibarre i, .mo-memoire-barre, .mo-jour-piste i,
+  :is(.na-bloc-reviz, .mn-bloc-reviz, .nf-bloc-reviz, .rn-bloc-reviz, .cm-bloc-reviz) > :is(img, svg),
+  :is(.na-bloc-reviz, .mn-bloc-reviz, .nf-bloc-reviz, .rn-bloc-reviz, .cm-bloc-reviz) > picture > img { animation: none; }
   .rv-etincelles { display: none; }
   .rv-bandes::before, .rv-bandes::after { display: none; }
 }
