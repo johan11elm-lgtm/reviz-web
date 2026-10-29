@@ -4,6 +4,9 @@
 import { doc, getDoc, setDoc, serverTimestamp } from 'firebase/firestore';
 import { db } from './firebaseConfig';
 
+// Jamais de `plan` ici (sans plan = gratuit) : c'est un champ de facturation, que les règles
+// interdisent au client de modifier. Quand la fiche existe déjà (essai devenu compte : lierEssai
+// passe avant), l'écriture devient une mise à jour, et elle était refusée en entier (26-29/10).
 export async function createUserProfile(uid, profile) {
   const { prenom, email, birthDate, level } = profile;
   await setDoc(
@@ -13,7 +16,6 @@ export async function createUserProfile(uid, profile) {
       email: email ?? null,
       birthDate: birthDate ?? null,
       level: level ?? null,
-      plan: 'free',
       createdAt: serverTimestamp(),
     },
     { merge: true },

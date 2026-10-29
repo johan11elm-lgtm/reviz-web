@@ -6,6 +6,7 @@ const fb = vi.hoisted(() => ({
   listeners: [],
   auth: { currentUser: null, authStateReady: vi.fn(async () => {}) },
   getDoc: vi.fn(),
+  setDoc: vi.fn(async () => {}),
 }))
 vi.mock('firebase/auth', () => ({
   onAuthStateChanged: (auth, cb) => { fb.listeners.push(cb); return () => {} },
@@ -22,7 +23,7 @@ vi.mock('../../services/retourService', () => ({ noterOuverture: () => {} }));
 vi.mock('firebase/firestore', () => ({
   getDoc: (...a) => fb.getDoc(...a),
   doc: (db, ...path) => path.join('/'),
-  collection: vi.fn(), getDocs: vi.fn(), deleteDoc: vi.fn(), setDoc: vi.fn(),
+  collection: vi.fn(), getDocs: vi.fn(), deleteDoc: vi.fn(), setDoc: (...a) => fb.setDoc(...a),
 }))
 vi.mock('../../services/firebaseConfig', () => ({ auth: fb.auth, db: {} }))
 vi.mock('@capacitor/core', () => ({ Capacitor: { isNativePlatform: () => false } }))
@@ -58,6 +59,7 @@ describe('<AuthProvider /> — démarrage optimiste', () => {
     localStorage.clear()
     fb.listeners.length = 0
     fb.getDoc.mockReset()
+    fb.setDoc.mockClear()
     fb.auth.currentUser = null
   })
 
@@ -178,5 +180,50 @@ describe('<AuthProvider /> — démarrage optimiste', () => {
     await resolveAuth(johan)
     await waitFor(() => expect(cacheOf().uid).toBe('u1'))
     expect(cacheOf().needsProfileSetup).toBe(false)
+  })
+
+  // Essais devenus comptes du 26 au 29/10 : fiche réduite au lien vers l'essai.
+  const quatrieme = { cycle: 'college', classe: '4ème', specialites: [] }
+  const ecrituresProfil = () => fb.setDoc.mock.calls.filter(([chemin]) => chemin === 'users/u1')
+
+  it('profil resté vide → complété par le prénom du compte et la classe de ce navigateur', async () => {
+    localStorage.setItem('reviz-level-u1', JSON.stringify(quatrieme))
+    mockFirestore({ profile: { essaiId: 'guest-1' } })
+    renderProvider()
+    await resolveAuth(johan)
+    expect(ecrituresProfil()).toEqual([['users/u1', { prenom: 'Johan', level: quatrieme }, { merge: true }]])
+  })
+
+  it('profil rempli → rien n’est réécrit, même si ce navigateur connaît une autre classe', async () => {
+    localStorage.setItem('reviz-level-u1', JSON.stringify(quatrieme))
+    mockFirestore({ profile: { prenom: 'Jo', level: { cycle: 'college', classe: '3ème' }, birthDate: '2000-01-01' } })
+    renderProvider()
+    await resolveAuth(johan)
+    await waitFor(() => expect(cacheOf().uid).toBe('u1'))
+    expect(ecrituresProfil()).toEqual([])
+  })
+
+  it('naissance perdue mais trace de consentement → traité en mineur (délai pour l’e-mail du parent)', async () => {
+    mockFirestore({ profile: { essaiId: 'guest-1' }, consent: { status: 'pending', createdAt: Date.now() } })
+    renderProvider()
+    await resolveAuth(johan)
+    expect(screen.getByTestId('probe')).toHaveTextContent('blocked=false')
+    await waitFor(() => expect(cacheOf()).toMatchObject({ consentBlocked: false, consentStatus: 'a-fournir' }))
+  })
+
+  it('naissance perdue, parent qui a refusé → bloqué', async () => {
+    mockFirestore({ profile: { essaiId: 'guest-1' }, consent: { status: 'refused', parentEmail: 'p@f.fr' } })
+    renderProvider()
+    await resolveAuth(johan)
+    expect(screen.getByTestId('probe')).toHaveTextContent('blocked=true')
+  })
+
+  it('pas de fiche (ou lecture ratée) → aucune fiche créée à la place de l’inscription', async () => {
+    localStorage.setItem('reviz-level-u1', JSON.stringify(quatrieme))
+    mockFirestore({ profile: null })
+    renderProvider()
+    await resolveAuth(johan)
+    await waitFor(() => expect(cacheOf().uid).toBe('u1'))
+    expect(ecrituresProfil()).toEqual([])
   })
 })
