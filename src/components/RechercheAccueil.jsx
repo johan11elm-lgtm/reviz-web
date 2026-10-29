@@ -18,6 +18,44 @@ const Loupe = () => (
   <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>
 )
 
+// Ce qu'on peut demander, écrit dans le champ vide comme si quelqu'un le tapait (idée de Johan, 29/10).
+export const EXEMPLES_RECHERCHE = [
+  'J’ai un contrôle demain, aide-moi à réviser',
+  'Fais-moi réciter le théorème de Pythagore',
+  'Programme mon contrôle de SVT de mardi',
+  'Explique-moi la photosynthèse simplement',
+  'Je fais quoi ce soir ?',
+  'Fais-moi refaire mes erreurs',
+]
+
+/**
+ * Le texte d'exemple du champ : il se tape lettre à lettre, reste un instant, s'efface, puis le
+ * suivant. À l'arrêt (champ touché, ou mouvement réduit demandé), un exemple entier.
+ */
+function useExempleQuiSeTape(exemples, actif) {
+  const [etat, setEtat] = useState({ i: 0, n: exemples[0].length })
+  useEffect(() => {
+    if (!actif) return undefined
+    if (window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) {
+      const t = setInterval(() => setEtat(e => ({ i: (e.i + 1) % exemples.length, n: Infinity })), 3500)
+      return () => clearInterval(t)
+    }
+    let { i } = etat, n = 0, efface = false, t
+    const pas = () => {
+      const long = exemples[i].length
+      if (!efface && n < long) { n += 1; t = setTimeout(pas, n === long ? 1800 : 45) }
+      else if (!efface) { efface = true; t = setTimeout(pas, 22) }
+      else if (n > 0) { n -= 1; t = setTimeout(pas, n === 0 ? 350 : 22) }
+      else { efface = false; i = (i + 1) % exemples.length; t = setTimeout(pas, 45) }
+      setEtat({ i, n })
+    }
+    t = setTimeout(pas, 600)
+    return () => clearTimeout(t)
+  }, [actif])
+  const ex = exemples[etat.i]
+  return actif ? ex.slice(0, etat.n) : ex
+}
+
 /**
  * @param {string} classe     la classe du programme affiché à l'accueil (« 4ème »)
  * @param {object} catalogue  son index (loadCatalogue), null tant qu'il charge
@@ -27,8 +65,10 @@ export function RechercheAccueil({ classe, catalogue, lecons = [] }) {
   const navigate = useNavigate()
   const [q, setQ] = useState('')
   const [ouvert, setOuvert] = useState(false)
+  const [focus, setFocus] = useState(false)
   const [erreur, setErreur] = useState('')
   const texte = q.trim()
+  const exemple = useExempleQuiSeTape(EXEMPLES_RECHERCHE, !q && !focus)
   const resultats = texte.length >= 2
     ? chercherChapitres({ catalogue, lecons: lecons.map(l => ({ id: l.id, titre: l.metadata?.title ?? 'Leçon', matiere: l.metadata?.subject ?? '' })), recherche: texte, max: 5 })
     : []
@@ -72,9 +112,10 @@ export function RechercheAccueil({ classe, catalogue, lecons = [] }) {
         type="search"
         value={q}
         onChange={e => { setQ(e.target.value); setOuvert(true); setErreur('') }}
-        onFocus={() => { clearTimeout(fermeture.current); setOuvert(true) }}
+        onFocus={() => { clearTimeout(fermeture.current); setOuvert(true); setFocus(true) }}
+        onBlur={() => setFocus(false)}
         onKeyDown={e => { if (e.key === 'Escape') setOuvert(false) }}
-        placeholder="On révise quoi aujourd’hui ?"
+        placeholder={exemple}
         aria-label="Chercher un chapitre ou demander à Réviz IA"
         enterKeyHint="search"
         autoComplete="off"
