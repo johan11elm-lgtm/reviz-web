@@ -41,7 +41,8 @@ const couleurs = matiere => COULEURS.get(teinteMatiere(matiere ?? '')) ?? COULEU
 // Réviz IA sans leçon (en agent : agenda, erreurs, programme ; api/_agent.js) : sa conversation.
 const AGENT = 'reviz-ia';
 // Les cartes de l'agent : où mène « Commencer », et la mascotte de chacune.
-const ROUTE_FORMAT = { fiche: '/analyse', flashcards: '/flashcards', quiz: '/quiz', resume: '/resume', carte_mentale: '/mindmap' };
+// Une carte « quiz » de Réviz IA ouvre la séance d'exercices, qui a remplacé le quiz le 29/10.
+const ROUTE_FORMAT = { fiche: '/analyse', flashcards: '/flashcards', quiz: '/exercices', exercices: '/exercices', resume: '/resume', carte_mentale: '/mindmap' };
 const POSE_FORMAT = { fiche: 'reading', flashcards: 'flashcard', quiz: 'quiz', resume: 'reading', carte_mentale: 'thinking', controle_blanc: 'examen', erreurs: 'quiz', defi: 'quiz' };
 const majuscule = s => (s ? s[0].toUpperCase() + s.slice(1) : s);
 

@@ -6,13 +6,13 @@ import { LogoReviz } from './skin/Skin';
 import { AVIS_PROFS_URL, isDecouverte } from '../services/decouverteService';
 import './NavHaut.css';
 
-// Pages du tunnel (inscription, connexion, essai…) et jeux en plein écran (flashcards, quiz) : pas de menu.
+// Pages du tunnel (inscription, connexion, essai…) et jeux en plein écran (flashcards, quiz, exercices) : pas de menu.
 const HIDDEN_PREFIXES = [
   '/inscription', '/connexion', '/essai', '/verify-email', '/onboarding',
-  '/consent-pending', '/finish-setup', '/welcome', '/legal', '/flashcards', '/quiz', '/controle', '/jeux', '/upgrade-success',
+  '/consent-pending', '/finish-setup', '/welcome', '/legal', '/flashcards', '/quiz', '/exercices', '/controle', '/jeux', '/upgrade-success',
 ];
 // Pages d'une leçon : elles allument « Programme » (leçons scannées comprises).
-const LESSON_PATHS = ['/analyse', '/flashcards', '/quiz', '/resume', '/mindmap'];
+const LESSON_PATHS = ['/analyse', '/flashcards', '/quiz', '/exercices', '/resume', '/mindmap'];
 
 const ONGLETS = [
   { to: '/',          label: "Aujourd'hui", end: true },

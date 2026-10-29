@@ -91,10 +91,10 @@ describe('<Analyse /> fiche chapitre', () => {
     expect(nav).toHaveBeenCalledWith(`/coach?lesson=${ID}`, { state: { question: 'Pourquoi 10⁰ = 1 ?' } })
   })
 
-  it('les questions ratées au quiz ajoutent « Refaire mes erreurs » aux contenus', () => {
+  it('les questions ratées ajoutent « Refaire mes erreurs » aux contenus', () => {
     localStorage.setItem('reviz-erreurs-local', JSON.stringify({ [ID]: { questions: ['q'], at: Date.now() } }))
     renderPage()
-    expect(screen.getByRole('link', { name: 'Refaire mes erreurs : 1 question ratée au quiz' })).toHaveAttribute('href', '/quiz?erreurs=1')
+    expect(screen.getByRole('link', { name: 'Refaire mes erreurs : 1 question ratée' })).toHaveAttribute('href', '/quiz?erreurs=1')
   })
 
   it('en mode essai, pas d’accès à Réviz IA', () => {

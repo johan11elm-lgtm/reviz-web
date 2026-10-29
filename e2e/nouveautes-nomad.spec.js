@@ -111,7 +111,7 @@ for (const [appareil, viewport] of APPAREILS) {
       await entrerEnEssai(page)
       await ouvrirChapitreDuProgramme(page)
       const quiz = chapitreThales().quiz
-      await page.goto('/quiz')
+      await page.goto('/quiz?classique=1')
       await jouerQuiz(page, quiz, { bonnes: quiz.length - 2 })
       await page.getByRole('button', { name: 'Refaire mes erreurs' }).click()
       // Seulement les deux questions ratées

@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo, useRef } from 'react'
-import { useNavigate, useLocation } from 'react-router-dom'
+import { useNavigate, useLocation, Navigate } from 'react-router-dom'
 import { fermerVersFiche, versExercice } from '../utils/navigation'
 import { recordRevision, markRevisionDone } from '../services/revisionService'
 import { Mascot } from '../components/Mascot'
@@ -16,6 +16,11 @@ import { useCombo } from '../hooks/useCombo'
 import { PastilleCombo, BilanXp } from '../components/xp/Xp'
 import { gainDeSeance } from '../services/xpService'
 import { xpSeance } from '../utils/xp'
+import { noterErreurs } from '../services/erreursService'
+import { NB_QUESTIONS_PREMIERE } from '../utils/premiereRevision'
+import { track } from '../services/statsService'
+import { MontreParent } from '../components/MontreParent'
+import { loadLessons } from '../services/historyService'
 // Même écran de jeu que le quiz : fond, barre du haut, feuille de correction, écran de fin.
 import './Flashcards.css'
 import './Quiz.css'
@@ -41,10 +46,16 @@ export default function Exercices() {
     const g = Number(new URLSearchParams(location.search).get('graine'))
     return Number.isFinite(g) && g > 0 ? g : Date.now()
   })
-  const seance = useMemo(() => construireSeance(ai, { graine }), [ai, graine])
-  if (!seance.length) return <MissingLessonState title="Exercices" />
+  // ?premiere=1 : la première révision, juste après l'inscription (Onboarding) : une séance courte.
+  const [premiere] = useState(() => new URLSearchParams(location.search).get('premiere') === '1')
+  const seance = useMemo(() => construireSeance(ai, { graine, ...(premiere ? { nombre: NB_QUESTIONS_PREMIERE } : {}) }), [ai, graine, premiere])
+  if (!seance.length) {
+    // Une leçon trop maigre pour une séance garde son quiz (la séance a remplacé le quiz le 29/10).
+    if (ai?.quiz?.length) return <Navigate to={`/quiz?classique=1${premiere ? '&premiere=1' : ''}`} replace state={location.state} />
+    return <MissingLessonState title="Exercices" />
+  }
   // Une nouvelle séance repart de zéro (nouvelle graine, nouveaux exercices).
-  return <Seance key={graine} ai={ai} seance={seance} nouvelle={() => setGraine(Date.now())} />
+  return <Seance key={graine} ai={ai} seance={seance} premiere={premiere} nouvelle={() => setGraine(Date.now())} />
 }
 
 /**
@@ -54,7 +65,7 @@ export default function Exercices() {
  * tous, puis la feuille de correction du quiz. En fin de séance, le score est enregistré (fiche
  * chapitre) avec les exercices à revoir.
  */
-function Seance({ ai, seance, nouvelle }) {
+function Seance({ ai, seance, premiere, nouvelle }) {
   const isDesktop = useIsDesktop()
   const navigate = useNavigate()
   const location = useLocation()
@@ -94,8 +105,14 @@ function Seance({ ai, seance, nouvelle }) {
       const g = gainDeSeance(uid, xpSeance({ bonnes: nbJustes, total, paliers }))
       recordRevision('exercices', { score: nbJustes, total, xp: g.xp, bonnes: nbJustes, comboMax: max })
       markRevisionDone('exercices', { score: nbJustes, total })
+      // Les questions du quiz jouées dans la séance nourrissent « Refaire mes erreurs » et le défi.
+      const qcms = seance.map((e, i) => ({ e, r: resultats[i] })).filter(x => x.e.type === 'qcm')
+      if (qcms.length) noterErreurs(uid, lessonId, qcms.map(x => ({ question: x.e.bulle, correct: x.e.bonne })), qcms.map(x => x.r?.choix))
       setGain(g)
       mesurer('exercices_termines', { score: nbJustes, total })
+      // La séance a remplacé le quiz : elle compte comme un quiz terminé dans les statistiques d'activation.
+      track('quiz_termine', { source: lessonId?.startsWith('prog-') ? 'programme' : 'scan', format: 'exercices' })
+      if (premiere) mesurer('premiere_revision', { etape: 'terminee', score: nbJustes, total })
       setFin(true)
       return
     }
@@ -115,7 +132,8 @@ function Seance({ ai, seance, nouvelle }) {
     return () => window.removeEventListener('keydown', onKey)
   })
 
-  const fermer = () => fermerVersFiche(navigate, location)
+  // La première révision vient de l'inscription : elle se referme sur l'accueil.
+  const fermer = () => (premiere ? navigate('/', { replace: true }) : fermerVersFiche(navigate, location))
   const boutonFermer = isDesktop
     ? <button type="button" className="fc-fermer fc-fermer--pilule" onClick={fermer}><Croix taille={18} />Fermer</button>
     : <button type="button" className="fc-fermer" onClick={fermer} aria-label="Fermer"><Croix /></button>
@@ -142,7 +160,9 @@ function Seance({ ai, seance, nouvelle }) {
     const reviz = (
       <div className="ex-fin-reviz">
         <span className="ex-fin-emote rv-saut" aria-hidden="true"><Mascot pose={pct >= 0.8 ? 'trophy' : pct >= 0.5 ? 'celebration' : 'muscu'} size={isDesktop ? 150 : 110} alt="" /></span>
-        <p className="ex-fin-phrase">{pct >= 0.8 ? 'Très belle séance. Ce chapitre rentre.' : pct >= 0.5 ? 'Bonne séance. Revois les erreurs, puis rejoue.' : 'On reprend ensemble : lis les corrections, puis rejoue.'}</p>
+        <p className="ex-fin-phrase">{premiere
+          ? `Ta première révision est faite. ${pct >= 0.6 ? 'Tu pars avec une longueur d’avance.' : 'Les erreurs, on les revoit ensemble.'}`
+          : pct >= 0.8 ? 'Très belle séance. Ce chapitre rentre.' : pct >= 0.5 ? 'Bonne séance. Revois les erreurs, puis rejoue.' : 'On reprend ensemble : lis les corrections, puis rejoue.'}</p>
       </div>
     )
     const pastilles = (
@@ -151,6 +171,9 @@ function Seance({ ai, seance, nouvelle }) {
       </div>
     )
     const bilan = <BilanXp gain={gain} uid={uid} />
+    // « Montre ça à tes parents » (moins de 15 ans sans adresse de parent), comme à la fin du quiz.
+    const lecon = lessonId ? loadLessons().find(l => l.id === lessonId) ?? null : null
+    const montre = <MontreParent score={nbJustes} total={seance.length} lecon={lecon} />
     const recap = (
       <section className="qz-carte" aria-labelledby="ex-titre-seance">
         <div className="qz-carte-tete">
@@ -182,7 +205,12 @@ function Seance({ ai, seance, nouvelle }) {
         </div>
       </section>
     )
-    const boutons = (
+    const boutons = premiere ? (
+      // La première révision mène à l'accueil, comme le quiz court d'avant.
+      <div className="qz-fin-actions">
+        <button type="button" className="fc-btn fc-btn--orange rv-bandes" onClick={fermer}>Continuer</button>
+      </div>
+    ) : (
       <div className="qz-fin-actions">
         <button type="button" className="fc-btn fc-btn--orange rv-bandes" onClick={nouvelle}>Nouvelle séance</button>
         <button type="button" className="fc-btn fc-btn--blanc rv-bandes rv-bandes--clair" onClick={() => versExercice(navigate, location, '/flashcards')}>Revoir les cartes</button>
@@ -195,12 +223,12 @@ function Seance({ ai, seance, nouvelle }) {
           {isDesktop ? (
             <div className="qz-fin-grille">
               <div className="qz-fin-gauche">{score}{reviz}{pastilles}</div>
-              <div className="qz-fin-droite">{bilan}{recap}{aRevoir}{boutons}<button type="button" className="fc-lien" onClick={fermer}>Retour au chapitre</button></div>
+              <div className="qz-fin-droite">{bilan}{montre}{recap}{aRevoir}{boutons}<button type="button" className="fc-lien" onClick={fermer}>{premiere ? 'Retour à l’accueil' : 'Retour au chapitre'}</button></div>
             </div>
           ) : (
             <>
-              {score}{reviz}{pastilles}{bilan}{recap}{aRevoir}{boutons}
-              <button type="button" className="fc-lien" onClick={fermer}>Retour au chapitre</button>
+              {score}{reviz}{pastilles}{bilan}{montre}{recap}{aRevoir}{boutons}
+              <button type="button" className="fc-lien" onClick={fermer}>{premiere ? 'Retour à l’accueil' : 'Retour au chapitre'}</button>
             </>
           )}
         </div>

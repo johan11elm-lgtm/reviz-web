@@ -35,7 +35,7 @@ const SLUGS = MATIERES_CONTROLE.map(m => m.slug)
 export const FORMATS_REVISION = {
   fiche: 'La fiche du chapitre',
   flashcards: 'Flashcards',
-  quiz: 'Quiz',
+  quiz: 'Exercices en jeu',
   resume: 'Résumé',
   carte_mentale: 'Carte mentale',
   controle_blanc: 'Contrôle blanc',

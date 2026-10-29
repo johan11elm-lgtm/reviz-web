@@ -56,7 +56,7 @@ export async function cibleQuizErreurs(uid, controle) {
   if (avecErreurs && restoreLesson(avecErreurs)) return '/quiz?erreurs=1'
   const ch = chapitreAReviser(controle, lessons)
   if (ch) {
-    try { await ouvrirChapitreDuControle(controle, ch); return '/quiz' } catch { /* chapitre indisponible */ }
+    try { await ouvrirChapitreDuControle(controle, ch); return '/exercices' } catch { /* chapitre indisponible */ }
   }
   return programmeDeLaMatiere(controle)
 }

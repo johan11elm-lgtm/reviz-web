@@ -11,7 +11,7 @@ import './Onboarding.entree.css';
 
 // Découverte (handoff Claude Design du 22/10, écran 8) : une seule fois, avant
 // l'accueil. Trois écrans : Réviz se présente, deux façons de réviser, on commence.
-// Le dernier lance une première révision (quiz de 5 questions sur le chapitre
+// Le dernier lance une première révision (séance de 5 exercices sur le chapitre
 // du moment) : finir sur la liste des matières en perdait la moitié (26/10).
 // La classe est déjà connue (inscription ou essai) ; si le profil n'en a aucune,
 // on la demande sur le premier écran.
@@ -71,7 +71,7 @@ export default function Onboarding() {
     // La présentation ne reste pas dans l'historique : « Mes leçons » ou un retour ne la rouvrent pas.
     navigate(to, { replace: true });
   }
-  // Ouvre le chapitre comme depuis Programme, puis le quiz court. En cas
+  // Ouvre le chapitre comme depuis Programme, puis une séance d'exercices courte. En cas
   // d'échec (réseau), l'élève arrive quand même sur son programme.
   async function lancerPremiere() {
     if (lancement) return;
@@ -79,7 +79,7 @@ export default function Onboarding() {
     mesurer('premiere_revision', { etape: 'lancee', matiere: premiere.matiere });
     try {
       await openChapter(classeProgramme, premiere.matiere, premiere.chapitre);
-      finir('/quiz?premiere=1');
+      finir('/exercices?premiere=1');
     } catch {
       mesurer('premiere_revision', { etape: 'echec' });
       finir('/programme');
@@ -92,7 +92,7 @@ export default function Onboarding() {
     carte = (
       <>
         <p className="en-texte onb-texte">
-          Je transforme tes leçons en <b>résumés, flashcards, quiz et cartes mentales.</b> Et je te dis quoi réviser, et quand.
+          Je transforme tes leçons en <b>résumés, flashcards, exercices en jeu et cartes mentales.</b> Et je te dis quoi réviser, et quand.
         </p>
         {demanderClasse && (
           <ChoixClasse valeur={classe} erreur={erreurClasse} onChange={c => { setClasse(c); setErreurClasse(''); }} />
@@ -132,7 +132,7 @@ export default function Onboarding() {
     carte = programmePret && premiere ? (
       <>
         <p className="en-texte onb-texte">
-          Ta première révision : <b>{premiere.chapitre.titre}</b>, en {premiere.matiere.toLowerCase()}. 5 questions, une minute.
+          Ta première révision : <b>{premiere.chapitre.titre}</b>, en {premiere.matiere.toLowerCase()}. 5 exercices, deux minutes.
         </p>
         <button type="button" className="en-btn" onClick={lancerPremiere} disabled={lancement}>
           {lancement ? 'Un instant…' : 'C’est parti'}

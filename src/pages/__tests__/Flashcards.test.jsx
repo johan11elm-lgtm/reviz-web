@@ -83,7 +83,7 @@ describe('<Flashcards /> — série', () => {
     await act(() => new Promise(r => setTimeout(r, 400)))
     expect(screen.getByRole('heading', { name: 'Série terminée' })).toBeInTheDocument()
     expect(screen.getByRole('button', { name: 'Refaire les cartes à revoir (1)' })).toBeInTheDocument()
-    expect(screen.getByRole('button', { name: /Passer au quiz · 1 question/ })).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: /Passer aux exercices/ })).toBeInTheDocument()
   })
 
   it('rien à revoir aujourd’hui : la prochaine révision, et « Revoir quand même »', () => {

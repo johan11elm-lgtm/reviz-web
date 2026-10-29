@@ -30,29 +30,29 @@ function elements({ rel, ai }) {
   const sortie = []
   const noms = ex.categories.map(c => c.nom)
   ex.categories.forEach((c, k) => c.cartes.forEach((carte, j) => sortie.push({
-    chap: rel, contexte, type: 'categorie', ref: `categories[${k}].cartes[${j}]`,
+    chap: rel, contexte, type: 'categorie', ref: `categories[${k}].cartes[${j}]`, cible: carte,
     q: `Dans quelle catégorie ranger la carte « ${carte} » ? ${options(noms)}`, cle: L[k],
   })))
   ex.causes.forEach((c, k) => sortie.push({
-    chap: rel, contexte, type: 'cause', ref: `causes[${k}]`,
+    chap: rel, contexte, type: 'cause', ref: `causes[${k}]`, cible: c.carte,
     q: `Par rapport ${parRapportA(c.fait)}, « ${c.carte} » : CAUSE ou CONSEQUENCE ?`, cle: c.role === 'cause' ? 'CAUSE' : 'CONSEQUENCE',
   }))
   ex.etiquettes.forEach((e, k) => {
     const { avant, passage, apres } = lirePassage(e.texte)
-    sortie.push({ chap: rel, contexte, type: 'etiquette', ref: `etiquettes[${k}]`,
+    sortie.push({ chap: rel, contexte, type: 'etiquette', ref: `etiquettes[${k}]`, cible: e.texte,
       q: `${e.consigne} Texte : « ${avant}⟦${passage}⟧${apres} » (le passage visé est entre ⟦ ⟧). ${options(e.choix)}`, cle: L[e.bonne] })
   })
   ex.devinettes.forEach((d, k) => sortie.push({
-    chap: rel, contexte, type: 'devinette', ref: `devinettes[${k}]`, devinette: d,
+    chap: rel, contexte, type: 'devinette', ref: `devinettes[${k}]`, cible: d.reponse, devinette: d,
     q: `Qui suis-je ? Indices : ${d.indices.map((x, i) => `(${i + 1}) ${x}`).join(' ')} Réponds par le nom ou le mot, en toutes lettres.`, cle: d.reponse,
   }))
   ex.calculs.forEach((c, k) => sortie.push({
-    chap: rel, contexte, type: 'calcul', ref: `calculs[${k}]`, calcul: c,
+    chap: rel, contexte, type: 'calcul', ref: `calculs[${k}]`, cible: c.question, calcul: c,
     q: `${c.question}${c.unite ? ` (réponds par un nombre, en ${c.unite})` : ' (réponds par un nombre)'}`, cle: String(c.reponse),
   }))
   ex.etapes.forEach((s, k) => {
     const ordre = s.etapes.map((_, i) => i).sort(() => alea() - 0.5)
-    sortie.push({ chap: rel, contexte, type: 'etapes', ref: `etapes[${k}]`,
+    sortie.push({ chap: rel, contexte, type: 'etapes', ref: `etapes[${k}]`, cible: s.titre,
       q: `${s.titre} : remets ces étapes dans l'ordre. ${ordre.map((i, j) => `${j + 1}) ${s.etapes[i]}`).join('   ')} Réponds par la suite des numéros (ex. 3142).`,
       cle: s.etapes.map((_, i) => ordre.indexOf(i) + 1).join('') })
   })
@@ -67,7 +67,27 @@ function juste(item, reponse) {
 }
 
 const [, , a, b, c] = process.argv
-if (a === '--bilan') {
+if (a === '--lot') {
+  //   node scripts/exercices/aveugle.mjs --lot <dossier> <classe/matière/id> …  → lot.txt et cle.json
+  // Le bloc est lu dans scripts/exercices/brouillons/ (pas encore posé dans le chapitre).
+  const dossier = b
+  const rels = process.argv.slice(4)
+  fs.mkdirSync(dossier, { recursive: true })
+  const tous = []
+  for (const rel of rels) {
+    const ai = JSON.parse(fs.readFileSync(path.join(racine, 'public/programme', `${rel}.json`), 'utf8'))
+    const brouillon = path.join(racine, 'scripts/exercices/brouillons', `${rel}.json`)
+    if (!fs.existsSync(brouillon)) { console.log(`✗ ${rel} : pas de brouillon`); continue }
+    ai.exercices = JSON.parse(fs.readFileSync(brouillon, 'utf8'))
+    if (!lireExercices(ai.exercices)) { console.log(`✗ ${rel} : bloc illisible`); continue }
+    tous.push(...elements({ rel, ai }))
+  }
+  const alea = creerAlea(rels.join('').length)
+  const items = tous.map((x, i) => [alea(), { ...x, n: i + 1 }]).sort((p, q) => p[0] - q[0]).map(([, x]) => x)
+  fs.writeFileSync(path.join(dossier, 'cle.json'), JSON.stringify(items, null, 1))
+  fs.writeFileSync(path.join(dossier, 'lot.txt'), items.map(x => `#${x.n} [${x.contexte}]\n${x.q}`).join('\n\n'))
+  console.log(`${items.length} éléments, ${rels.length} chapitres`)
+} else if (a === '--bilan') {
   const dossier = b
   const cle = JSON.parse(fs.readFileSync(path.join(dossier, 'cle.json'), 'utf8'))
   const reponses = new Map()

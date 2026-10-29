@@ -220,11 +220,11 @@ export default function Home() {
     const ecart = controle ? Math.max(1, controle.jours) : 3;
     const jour = i => (controle ? jourDans(Math.min(i, ecart - 1)) : ['Maintenant', 'Ensuite', 'Pour finir'][i]);
     const cartes = dueCards > 0 ? `${dueCards} carte${dueCards > 1 ? 's' : ''}` : 'les flashcards';
-    const quiz = lastLesson?.quizCount ? `${lastLesson.quizCount} questions` : 'Pour te tester';
     const chapitre = controle?.titre ? `${controle.titre} · ` : '';
     return [
       { quoi: `Résumé + ${cartes}`, meta: `${chapitre}Environ 6 min`, done: todayRevisions > 0, pose: 'flashcard' },
-      { quoi: 'Quiz corrigé', meta: quiz, done: goalReached, pose: 'quiz' },
+      // Depuis le 29/10, la séance d'exercices remplace le quiz (elle en reprend les questions).
+      { quoi: 'Exercices en jeu', meta: '10 exercices pour te tester', done: goalReached, pose: 'muscu' },
       { quoi: "Battle d'entraînement", meta: 'Contre un ami', done: battleFaiteAujourdhui(), pose: 'fire' },
     ].map((p, i) => ({ ...p, jour: jour(i), titre: `${jour(i)} · ${p.quoi}`, ton: TONS_PLAN[i] }));
   }, [controle, dueCards, lastLesson, todayRevisions, goalReached]);
@@ -232,8 +232,8 @@ export default function Home() {
   const enCours = Math.max(0, plan.findIndex(p => !p.done));
   // Un contrôle noté : son programme d'abord ; sinon les cartes de la dernière leçon, ou le programme.
   const lancerCartes = () => (controle || !lastLesson ? navigate(cibleControle) : ouvrirCartes());
-  const lancerQuiz = () => {
-    if (lastLesson) { restoreLesson(lastLesson.id); navigate('/quiz'); }
+  const lancerExercices = () => {
+    if (lastLesson) { restoreLesson(lastLesson.id); navigate('/exercices'); }
     else navigate(cibleControle);
   };
   // Une étape du plan lancée compte comme faite aujourd'hui, puis on va réviser la matière.
@@ -249,7 +249,7 @@ export default function Home() {
   const cases = [
     // Chaque étape fait ce qu'elle annonce (pas l'action du héros, qui peut être « Scanner une leçon ») :
     // les cartes de la dernière leçon (ou le programme du contrôle), le quiz, la Battle.
-    ...plan.map((p, i) => ({ ...p, go: controle ? () => lancerEtape(p.id) : [lancerCartes, lancerQuiz, () => navigate('/battle')][i] })),
+    ...plan.map((p, i) => ({ ...p, go: controle ? () => lancerEtape(p.id) : [lancerCartes, lancerExercices, () => navigate('/battle')][i] })),
     controle && {
       jour: jourDans(controle.jours), quoi: `Contrôle de ${controle.m.label.toLowerCase()}`, meta: controle.titre || 'Le jour J',
       pose: 'examen', arrivee: true, go: () => navigate('/agenda'), label: "Voir l'agenda",
@@ -282,12 +282,12 @@ export default function Home() {
   }, [uidJeux, allLessons]);
   const lancerDefi = () => { restoreLesson(defi.lessonId); navigate('/quiz?erreurs=1&defi=1&depuis=accueil'); };
 
-  // « On fait quoi aujourd'hui ? Démarre en un clic » (comme l'accueil de l'app Nomad) : un quiz,
+  // « On fait quoi aujourd'hui ? Démarre en un clic » (comme l'accueil de l'app Nomad) : une séance d'exercices,
   // préparer un contrôle (le plan de révision de l'agenda), réviser avec son cours.
   const raccourcis = [
     defi
       ? { id: 'defi', pose: 'quiz', titre: 'Bats ton toi d’hier', sous: `${defi.questions.length} question${defi.questions.length > 1 ? 's ratées' : ' ratée'} hier · ${court(defi.titre, 28)}`, go: lancerDefi }
-      : { id: 'quiz', pose: 'quiz', titre: 'Fais un quiz', sous: lastLesson?.metadata?.title ? court(lastLesson.metadata.title, 36) : 'Sur un chapitre de ton programme', go: lancerQuiz },
+      : { id: 'quiz', pose: 'muscu', titre: 'Fais tes exercices', sous: lastLesson?.metadata?.title ? court(lastLesson.metadata.title, 36) : 'Sur un chapitre de ton programme', go: lancerExercices },
     controle
       ? { id: 'plan', pose: 'examen', titre: 'Mon plan de révision', sous: `${controle.m.label} ${controle.quand}`, go: () => navigate('/agenda') }
       : { id: 'plan', pose: 'examen', titre: 'Prépare un contrôle', sous: 'Ton plan jusqu’au jour J', go: () => navigate('/agenda') },

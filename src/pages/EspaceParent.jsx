@@ -105,7 +105,7 @@ export default function EspaceParent() {
 
         <section className="ep-chiffres" aria-label="En chiffres">
           <div className="ep-chiffre"><b>{d.joursRevision}</b><span>{d.joursRevision > 1 ? 'jours de révision' : 'jour de révision'} sur 30</span></div>
-          <div className="ep-chiffre"><b>{d.quizTermines}</b><span>{d.quizTermines > 1 ? 'quiz terminés' : 'quiz terminé'}</span></div>
+          <div className="ep-chiffre"><b>{d.quizTermines}</b><span>{d.quizTermines > 1 ? 'séances terminées' : 'séance terminée'}</span></div>
           <div className="ep-chiffre"><b>{d.chapitres.length}</b><span>{d.chapitres.length > 1 ? 'chapitres travaillés' : 'chapitre travaillé'}</span></div>
         </section>
 

@@ -48,7 +48,7 @@ test.describe('Lien du rappel J+1', () => {
     await mockProgramme(page)
   })
 
-  test('chapitre, pas connecté sur cet appareil : connexion puis le quiz du chapitre', async ({ page }) => {
+  test('chapitre, pas connecté sur cet appareil : connexion puis la séance d’exercices du chapitre', async ({ page }) => {
     const compte = await compteRapide(page, { connecte: false })
     await appareilSansSession(page, compte)
     const events = suivreTrack(page)
@@ -58,17 +58,18 @@ test.describe('Lien du rappel J+1', () => {
     await expect(page).toHaveURL(/\/connexion\?next=/)
     await seConnecter(page, compte)
 
-    await expect(page).toHaveURL(/\/quiz/, { timeout: 15_000 })
-    await expect(page.getByText(chapitreThales().quiz[0].question)).toBeVisible()
+    // Depuis le 29/10, la séance d'exercices remplace le quiz.
+    await expect(page).toHaveURL(/\/exercices/, { timeout: 15_000 })
+    await expect(page.getByText(/· 1 sur 10$/)).toBeVisible()
     expect(events.length).toBeGreaterThan(0)
     expect(events.every(e => e.props?.via === 'rappel')).toBe(true)
   })
 
-  test('chapitre, déjà connecté : le quiz directement', async ({ page }) => {
+  test('chapitre, déjà connecté : la séance d’exercices directement', async ({ page }) => {
     await compteRapide(page)
     await page.goto(LIEN_CHAPITRE)
-    await expect(page).toHaveURL(/\/quiz/, { timeout: 15_000 })
-    await expect(page.getByText(chapitreThales().quiz[0].question)).toBeVisible()
+    await expect(page).toHaveURL(/\/exercices/, { timeout: 15_000 })
+    await expect(page.getByText(/· 1 sur 10$/)).toBeVisible()
   })
 
   // Leçon scannée, sans chapitre ni leçon, ou sans rien de connu : pages réservées aux comptes.

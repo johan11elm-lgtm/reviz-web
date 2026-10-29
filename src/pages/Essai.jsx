@@ -70,7 +70,7 @@ export default function Essai() {
     setOuverture(true);
     const defi = params.get('via') === 'rappel' && erreursDe(currentUser?.uid ?? null, chapterLessonId(chapitre.ch.id)).length > 0;
     openChapter(classeFiche, chapitre.matiere, chapitre.ch)
-      .then(() => navigate(defi ? '/quiz?erreurs=1&defi=1&depuis=rappel' : '/quiz', { replace: true }))
+      .then(() => navigate(defi ? '/quiz?erreurs=1&defi=1&depuis=rappel' : '/exercices', { replace: true }))
       .catch(() => navigate(`/programme?matiere=${matiereFiche}`, { replace: true }));
   }
 

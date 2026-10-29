@@ -67,7 +67,8 @@ export function computeLevel(lessons, revisions = [], xpQuetes = 0) {
  */
 export function computeBadges(lessons, revisions, streak, level) {
   const types = new Set(revisions.map(r => r.type));
-  const formatsEssayes = ['flashcards', 'quiz', 'resume', 'mindmap'].filter(t => types.has(t)).length;
+  // Les exercices en jeu remplacent le quiz depuis le 29/10 : l'un ou l'autre compte pour ce format.
+  const formatsEssayes = ['flashcards', 'resume', 'mindmap'].filter(t => types.has(t)).length + (types.has('quiz') || types.has('exercices') ? 1 : 0);
   const totalFlashcards = lessons.reduce((s, l) => s + (l.flashcardsCount || 0), 0);
   const revsByDay = {};
   revisions.forEach(r => {

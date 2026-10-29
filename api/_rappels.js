@@ -4,14 +4,14 @@
 // Appelé par le cron quotidien de api/send-parental-consent.js (16 h UTC) :
 // un e-mail, une seule fois, le lendemain :
 // - de la première session de révision (premiereSession.jour = hier) : il
-//   rouvre le quiz du chapitre commencé ;
+//   rouvre la séance d'exercices du chapitre commencé (le quiz jusqu'au 29/10) ;
 // - ou de la création du compte, pour l'élève inscrit la veille qui n'a pas
 //   encore révisé : son dernier chapitre ouvert, sinon son programme.
 // Si l'adresse n'est pas encore confirmée, le lien passe par la page de
-// vérification de Firebase puis continue vers le quiz : un clic fait les deux.
+// vérification de Firebase puis continue vers les exercices : un clic fait les deux.
 // Un moins de 15 ans sans l'autorisation d'un parent le reçoit aussi, tourné
 // vers l'accord : sans adresse de parent, le bouton mène à l'écran qui la
-// demande (le quiz passe en lien secondaire) ; parent prévenu mais pas encore
+// demande (les exercices passent en lien secondaire) ; parent prévenu mais pas encore
 // d'accord, le mail le rappelle à l'élève. Jamais sans date de naissance,
 // ni après un refus du parent, ni après une désinscription (lien signé,
 // traité par api/track.js), ni si l'élève est déjà revenu aujourd'hui.
@@ -127,9 +127,10 @@ export function mailRappelJ1({ prenom, titre = null, matiere = null, source = nu
   const detail = !safeTitre
     ? 'Choisis un chapitre de ton programme : trois minutes, quelques questions, et ton cerveau fait le reste.'
     : scan
-      ? `Résumé, flashcards et quiz de ta leçon${safeMatiere ? ` de ${safeMatiere}` : ''} sont prêts. Trois minutes suffisent pour que ça tienne.`
-      : `Le quiz prend trois minutes : quelques questions${safeMatiere ? ` de ${safeMatiere}` : ''}, et ton cerveau fait le reste.`
-  const bouton = !safeTitre ? 'Choisir un chapitre' : scan ? 'Reprendre ma leçon' : 'Faire le quiz'
+      ? `Résumé, flashcards et exercices de ta leçon${safeMatiere ? ` de ${safeMatiere}` : ''} sont prêts. Cinq minutes suffisent pour que ça tienne.`
+      : `La séance prend cinq minutes : dix exercices en jeu${safeMatiere ? ` de ${safeMatiere}` : ''}, et ton cerveau fait le reste.`
+  // Depuis le 29/10, la séance d'exercices remplace le quiz : le lien du chapitre l'ouvre (src/pages/Essai.jsx).
+  const bouton = !safeTitre ? 'Choisir un chapitre' : scan ? 'Reprendre ma leçon' : 'Faire mes exercices'
   const demandeAdresse = accord === 'adresse' && !!lienAccord
   const surtitre = `Le lendemain${safeMatiere ? ` · ${safeMatiere}` : ''}`
 
@@ -158,7 +159,7 @@ export function mailRappelJ1({ prenom, titre = null, matiere = null, source = nu
           </tr></table>
           ${gros(lienAccord, 'Prévenir un parent')}
           ${verification}
-          ${p(`<a href="${lien}" style="color:${DA.orangeTexte}; font-weight:700; text-decoration:underline;">${!safeTitre ? 'Ou choisis un chapitre' : scan ? 'Ou reprends ta leçon' : 'Ou fais le quiz'} tout de suite</a>`, ' text-align:center; font-size:15px;')}`
+          ${p(`<a href="${lien}" style="color:${DA.orangeTexte}; font-weight:700; text-decoration:underline;">${!safeTitre ? 'Ou choisis un chapitre' : scan ? 'Ou reprends ta leçon' : 'Ou fais tes exercices'} tout de suite</a>`, ' text-align:center; font-size:15px;')}`
     : `
           ${p(detail)}
           ${gros(lien, bouton)}

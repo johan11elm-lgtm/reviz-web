@@ -28,8 +28,9 @@ export function avancementLecon(lecon, revisions = loadRevisions()) {
   const step = nextStep(lecon, progress, aOuvert)
   const etat = seen === 0 && siennes.length === 0 ? 'decouvrir'
     : chapterState({ lesson: true, dueCards: due, reviewedCards: seen }) === 'maitrise' ? 'maitrise' : 'encours'
-  const faits = { resume: aOuvert('resume') || seen > 0, flashcards: total > 0 && seen === total && seenDue === 0, quiz: aOuvert('quiz') }
-  const ids = ['resume', 'flashcards', 'quiz']
+  // La troisième étape est la séance d'exercices ; un quiz fait avant le 29/10 la compte aussi.
+  const faits = { resume: aOuvert('resume') || seen > 0, flashcards: total > 0 && seen === total && seenDue === 0, exercices: aOuvert('exercices') || aOuvert('quiz') }
+  const ids = ['resume', 'flashcards', 'exercices']
   const enCours = etat === 'decouvrir' ? null : ids.find(id => `/${id}` === step.to && !faits[id]) ?? ids.find(id => !faits[id])
   const etapes = ids.map(id => (faits[id] ? 'fait' : id === enCours ? 'cours' : 'afaire'))
   const pastille = etat === 'decouvrir' ? 'À découvrir'

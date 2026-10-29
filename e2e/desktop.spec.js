@@ -57,11 +57,11 @@ test.describe('Ordinateur (1280 px)', () => {
     await sansDebordement(page, 'fiche du chapitre')
     await page.screenshot({ path: test.info().outputPath('desktop-analyse.png') })
 
-    // Quiz et flashcards : jeux plein écran, sans menu
-    await page.getByRole('link', { name: /^Quiz corrigé/ }).click()
-    await expect(page.getByRole('heading', { name: 'Que faut-il pour appliquer le théorème de Thalès ?' })).toBeVisible()
+    // Exercices (à la place du quiz depuis le 29/10) et flashcards : jeux plein écran, sans menu
+    await page.getByRole('link', { name: /^Exercices en jeu/ }).click()
+    await expect(page.getByText(/· 1 sur 10$/)).toBeVisible()
     await expect(page.locator('.nav-haut')).toBeHidden()
-    await sansDebordement(page, 'quiz')
+    await sansDebordement(page, 'exercices')
     await page.screenshot({ path: test.info().outputPath('desktop-quiz.png') })
 
     await page.goto('/resume')

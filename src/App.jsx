@@ -16,6 +16,16 @@ function VersMatiere() {
   return <Navigate to={`/programme?matiere=${encodeURIComponent(matiere)}`} replace />
 }
 
+// Depuis le 29/10, la séance d'exercices remplace le quiz (elle en reprend les questions). /quiz ne
+// sert plus qu'aux questions ratées (?erreurs=1, le défi ?defi=1) et au quiz d'une leçon trop maigre
+// pour une séance (?classique=1, posé par la page des exercices) ; les anciens liens y mènent encore.
+function QuizOuExercices() {
+  const location = useLocation()
+  const q = new URLSearchParams(location.search)
+  if (q.get('erreurs') === '1' || q.get('defi') === '1' || q.get('classique') === '1') return <Quiz />
+  return <Navigate to={`/exercices${location.search}`} replace state={location.state} />
+}
+
 function ScrollToTop() {
   const { pathname } = useLocation();
   useEffect(() => {
@@ -122,7 +132,7 @@ function AuthRoutes() {
       <Route path="/scan"        element={<PrivateRoute><Scan /></PrivateRoute>} />
       <Route path="/analyse"     element={<PrivateRoute><Analyse /></PrivateRoute>} />
       <Route path="/flashcards"  element={<PrivateRoute><Flashcards /></PrivateRoute>} />
-      <Route path="/quiz"        element={<PrivateRoute><Quiz /></PrivateRoute>} />
+      <Route path="/quiz"        element={<PrivateRoute><QuizOuExercices /></PrivateRoute>} />
       <Route path="/exercices"   element={<PrivateRoute><Exercices /></PrivateRoute>} />
       <Route path="/controle"    element={<PrivateRoute><ControleBlanc /></PrivateRoute>} />
       <Route path="/resume"      element={<PrivateRoute><Resume /></PrivateRoute>} />

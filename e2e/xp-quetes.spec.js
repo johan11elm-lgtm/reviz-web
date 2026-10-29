@@ -43,7 +43,7 @@ test.describe('XP, combo et quêtes', () => {
       // ── Le quiz du chapitre, tout juste : le combo monte jusqu'au palier ──
       await page.goto('/programme')
       await ouvrirChapitreDuProgramme(page)
-      await page.getByRole('link', { name: /^Quiz corrigé/ }).click()
+      await page.goto('/quiz?classique=1')
       const questions = chapitreThales().quiz
       for (const [i, q] of questions.entries()) {
         await choix(page, q.choices[q.correct]).click()
@@ -89,7 +89,7 @@ test.describe('XP, combo et quêtes', () => {
     await mockProgramme(page)
     await entrerEnEssai(page)
     await ouvrirChapitreDuProgramme(page)
-    await page.getByRole('link', { name: /^Quiz corrigé/ }).click()
+    await page.goto('/quiz?classique=1')
     const [q1, q2, q3] = chapitreThales().quiz
     await choix(page, q1.choices[q1.correct]).click()
     await page.getByRole('button', { name: /Question suivante/ }).click()

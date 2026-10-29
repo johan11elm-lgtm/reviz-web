@@ -124,7 +124,7 @@ const CONSEILS_ILLISIBLE = {
   ecriture: { lignes: ['J’ai du mal à lire l’écriture.', 'Tu peux aussi coller le texte.'], texte: 'Reprends la photo bien à plat et de près, ou tape les points importants dans « Coller le texte ».' },
 };
 
-const POSE_ETAPE = { '/resume': 'reading', '/flashcards': 'flashcard', '/quiz': 'quiz' };
+const POSE_ETAPE = { '/resume': 'reading', '/flashcards': 'flashcard', '/quiz': 'quiz', '/exercices': 'muscu' };
 
 // ─── Préparation (handoff Scanner du 21/10) ──────────────────────────
 // La progression vient du flux de l'analyse ; phrase et pose changent par palier, et les 4
@@ -338,21 +338,28 @@ export default function Analyse() {
   const scoreQuiz = coachLessonId ? quizScore(coachLessonId) : null;
   const scoreExercices = coachLessonId ? quizScore(coachLessonId, 'exercices') : null;
   // Ce que dit Réviz : où en est l'élève, et la prochaine action.
-  const suite = { '/resume': 'On commence par le résumé ?', '/flashcards': aRevoir > 0 ? 'On revoit tes cartes ?' : 'On finit les flashcards ?', '/quiz': 'Place au quiz ?' }[step.to];
+  const suite = { '/resume': 'On commence par le résumé ?', '/flashcards': aRevoir > 0 ? 'On revoit tes cartes ?' : 'On finit les flashcards ?', '/quiz': 'Place au quiz ?', '/exercices': 'Place aux exercices ?' }[step.to];
+  const dernierScore = scoreExercices ?? scoreQuiz;
   const lignes = etat === 'decouvrir' ? ['Nouveau chapitre.', 'On commence par le résumé ?']
-    : etat === 'maitrise' ? [scoreQuiz ? `${scoreQuiz.dernier.score} sur ${scoreQuiz.dernier.total} au quiz corrigé.` : 'Chapitre maîtrisé.', 'Une révision rapide dans une semaine.']
+    : etat === 'maitrise' ? [dernierScore ? `${dernierScore.dernier.score} sur ${dernierScore.dernier.total} ${scoreExercices ? 'à la dernière séance' : 'au quiz corrigé'}.` : 'Chapitre maîtrisé.', 'Une révision rapide dans une semaine.']
     : avancement.seen > 0 ? [`${avancement.seen} ${avancement.seen > 1 ? 'cartes' : 'carte'} sur ${total} déjà vues.`, suite]
     : ['Résumé lu.', suite];
 
-  // Ton parcours : Résumé → Flashcards → Quiz.
+  // Ton parcours : Résumé → Flashcards → Exercices en jeu (depuis le 29/10, la séance remplace le quiz
+  // et en reprend les questions ; le quiz seul reste pour une leçon trop maigre pour une séance).
   const cartesFaites = avancement && total > 0 && avancement.seen === total && aRevoir === 0;
-  const faits = { resume: aOuvert('resume') || (avancement?.seen ?? 0) > 0, flashcards: !!cartesFaites, quiz: aOuvert('quiz') };
-  const enCours = ['resume', 'flashcards', 'quiz'].find(id => `/${id}` === step.to && !faits[id]) ?? ['resume', 'flashcards', 'quiz'].find(id => !faits[id]);
+  const parExercices = !!displayLesson.exercicesDispo;
+  const derniere = parExercices ? 'exercices' : 'quiz';
+  const faits = { resume: aOuvert('resume') || (avancement?.seen ?? 0) > 0, flashcards: !!cartesFaites, [derniere]: aOuvert('exercices') || aOuvert('quiz') };
+  const ids = ['resume', 'flashcards', derniere];
+  const enCours = ids.find(id => `/${id}` === step.to && !faits[id]) ?? ids.find(id => !faits[id]);
   const statut = id => (faits[id] ? 'fait' : id === enCours ? 'cours' : 'afaire');
   const etapes = [
     { id: 'resume', nom: 'Résumé', pose: 'reading', to: '/resume', meta: faits.resume ? 'Lu' : `${displayLesson.resumeMinutes ?? 2} min` },
     { id: 'flashcards', nom: 'Flashcards', pose: 'flashcard', to: '/flashcards', meta: avancement?.seen ? `${avancement.seen} / ${total} vues` : pluriel(total, 'carte') },
-    { id: 'quiz', nom: 'Quiz corrigé', pose: 'quiz', to: '/quiz', meta: scoreQuiz ? `${scoreQuiz.dernier.score} / ${scoreQuiz.dernier.total}` : faits.quiz ? 'Fait' : pluriel(displayLesson.quizCount ?? 0, 'question') },
+    parExercices
+      ? { id: 'exercices', nom: 'Exercices en jeu', pose: 'muscu', to: '/exercices', meta: scoreExercices ? `${scoreExercices.dernier.score} / ${scoreExercices.dernier.total} à la dernière séance` : faits.exercices ? 'Fait' : displayLesson.exercicesRelus ?? '10 exercices, quiz compris' }
+      : { id: 'quiz', nom: 'Quiz corrigé', pose: 'quiz', to: '/quiz', meta: scoreQuiz ? `${scoreQuiz.dernier.score} / ${scoreQuiz.dernier.total}` : faits.quiz ? 'Fait' : pluriel(displayLesson.quizCount ?? 0, 'question') },
   ].map(e => ({ ...e, statut: statut(e.id) }));
   const nbFaites = etapes.filter(e => e.statut === 'fait').length;
   const carteMentaleVue = aOuvert('mindmap');
@@ -435,17 +442,11 @@ export default function Analyse() {
       ...e,
       ...(e.id === 'resume' ? { valeur: faits.resume ? 1 : 0, sur: 1 }
         : e.id === 'flashcards' ? { valeur: avancement?.seen ?? 0, sur: total }
+        : e.id === 'exercices' ? { valeur: scoreExercices ? scoreExercices.dernier.score : faits.exercices ? 1 : 0, sur: scoreExercices ? scoreExercices.dernier.total : faits.exercices ? 1 : 10 }
         : { valeur: scoreQuiz ? scoreQuiz.dernier.score : faits.quiz ? 1 : 0, sur: scoreQuiz ? scoreQuiz.dernier.total : faits.quiz ? 1 : (displayLesson.quizCount ?? 0) }),
     })),
-    ...(displayLesson.exercicesDispo ? [{
-      id: 'exercices', nom: 'Exercices en jeu', pose: 'muscu', to: '/exercices',
-      meta: scoreExercices ? `${scoreExercices.dernier.score} / ${scoreExercices.dernier.total} à la dernière séance` : displayLesson.exercicesRelus ?? '4 coins, intrus, paires…',
-      statut: scoreExercices ? 'fait' : 'afaire',
-      valeur: scoreExercices ? scoreExercices.dernier.score : 0,
-      sur: scoreExercices ? scoreExercices.dernier.total : 10,
-    }] : []),
     { id: 'mindmap', nom: 'Carte mentale', pose: 'thinking', to: '/mindmap', meta: carteMentaleVue ? 'Vue' : 'Tout le chapitre sur une page', statut: carteMentaleVue ? 'fait' : 'afaire', valeur: carteMentaleVue ? 1 : 0, sur: 1 },
-    ...(nbErreurs ? [{ id: 'erreurs', nom: 'Refaire mes erreurs', pose: 'confused', to: '/quiz?erreurs=1', meta: `${pluriel(nbErreurs, 'question ratée')} au quiz`, statut: 'afaire', valeur: 0, sur: nbErreurs }] : []),
+    ...(nbErreurs ? [{ id: 'erreurs', nom: 'Refaire mes erreurs', pose: 'confused', to: '/quiz?erreurs=1', meta: pluriel(nbErreurs, 'question ratée'), statut: 'afaire', valeur: 0, sur: nbErreurs }] : []),
   ];
   const blocContenus = (
     <section className="nf-section" aria-labelledby="ch-parcours">

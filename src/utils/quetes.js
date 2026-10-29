@@ -27,7 +27,8 @@ export const QUETES_DU_JOUR = [
   { id: 'combo5', titre: 'Enchaîne 5 bonnes réponses', mesure: 'combo', cible: 5, xp: 50 },
   { id: 'chapitres2', titre: 'Révise 2 chapitres', mesure: 'chapitres', cible: 2, xp: 50 },
   { id: 'xp100', titre: 'Gagne 100 XP en révisant', mesure: 'xp', cible: 100, xp: 40 },
-  { id: 'quiz1', titre: 'Termine un quiz', mesure: 'quiz', cible: 1, xp: 40 },
+  // Le quiz seul a laissé la place aux séances d'exercices le 29/10 (quiz1 et quiz4 sont remplacées).
+  { id: 'exercices2', titre: 'Termine 2 séances d’exercices', mesure: 'exercices', cible: 2, xp: 70 },
   { id: 'cartes10', titre: 'Revois 10 flashcards', mesure: 'cartes', cible: 10, xp: 40 },
 ]
 
@@ -37,7 +38,7 @@ export const QUETES_DE_LA_SEMAINE = [
   { id: 'bonnes60', titre: 'Donne 60 bonnes réponses', mesure: 'bonnes', cible: 60, xp: 150 },
   { id: 'chapitres5', titre: 'Révise 5 chapitres différents', mesure: 'chapitres', cible: 5, xp: 150 },
   { id: 'combo10', titre: 'Enchaîne 10 bonnes réponses', mesure: 'combo', cible: 10, xp: 150 },
-  { id: 'quiz4', titre: 'Termine 4 quiz', mesure: 'quiz', cible: 4, xp: 120 },
+  { id: 'cartes40', titre: 'Revois 40 flashcards', mesure: 'cartes', cible: 40, xp: 120 },
   { id: 'xp500', titre: 'Gagne 500 XP en révisant', mesure: 'xp', cible: 500, xp: 150 },
 ]
 

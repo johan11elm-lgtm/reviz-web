@@ -5,112 +5,14 @@
 // téléphone, Vrai ou faux et Classement se jouent en glissant la carte.
 import { test, expect } from '@playwright/test'
 import { mockApiRoutes, mockProgramme, entrerEnEssai, ouvrirChapitreDuProgramme, chapitreThales, sansDebordement, estOrdinateur } from './helpers'
-import { construireSeance, ecrireNombre } from '../src/utils/exercicesChapitre.js'
+import { construireSeance } from '../src/utils/exercicesChapitre.js'
 import { nbsp } from '../src/utils/typography.js'
+import { NOMS, exact, SANS_VALIDER, jouer } from './exercices-aides'
 
 const APPAREILS = [
   ['ordinateur', { width: 1280, height: 800 }],
   ['téléphone', { width: 390, height: 844 }],
 ]
-const NOMS = {
-  coins: '4 coins', intrus: 'Intrus', indices: 'Trois indices', definition: 'Définition', paires: 'Paires', ordre: 'Chronologie', annee: 'Année', qcm: 'Quiz', vraifaux: 'Vrai ou faux', phrase: 'Phrase à trous', memory: 'Mémory', classement: 'Classement',
-  selection: 'Sélection', cause: 'Cause ou conséquence', etiquette: 'Étiquette', devinette: 'Qui suis-je ?', calcul: 'Trouve le nombre', etapes: 'Les étapes',
-}
-const exact = t => new RegExp(`^${nbsp(t).replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace(/\s+/g, '\\s+')}$`)
-// Les formats qui se valident seuls (pas de bouton « Valider »).
-const SANS_VALIDER = ['paires', 'memory', 'classement', 'vraifaux']
-
-/** Glisse une carte vers la gauche ou la droite, à la souris (les mêmes événements que le doigt). */
-async function glisserCarte(page, carte, cote) {
-  const b = await carte.boundingBox()
-  const x = b.x + b.width / 2, y = b.y + b.height / 2
-  await page.mouse.move(x, y)
-  await page.mouse.down()
-  await page.mouse.move(x + (cote === 'droite' ? 160 : -160), y, { steps: 8 })
-  await page.mouse.up()
-}
-
-/**
- * Joue un exercice jusqu'à la correction. `juste` : seulement pour le QCM (une réponse fausse exprès).
- * `glisser` : Vrai ou faux et Classement au doigt plutôt qu'aux boutons ; 4 coins glissé sur ordinateur.
- */
-async function jouer(page, ex, { juste = true, glisser = false, ordinateur = false } = {}) {
-  switch (ex.type) {
-    case 'coins': {
-      const coin = page.getByRole('button', { name: exact(ex.coins[ex.bonne]) })
-      if (ordinateur) await page.locator('.ex-carte-coin').dragTo(coin)
-      else await coin.click()
-      await expect(coin).toHaveAttribute('aria-pressed', 'true')
-      break
-    }
-    case 'intrus':
-      await page.getByRole('button', { name: exact(ex.cartes[ex.bonne]) }).click()
-      await expect(page.locator('.ex-carte-tag')).toHaveText('Intrus')
-      break
-    case 'indices':
-      await page.getByRole('button', { name: exact(ex.choix[ex.bonne]) }).click()
-      await expect(page.locator('.ex-arbre-tete')).toHaveText(nbsp(ex.choix[ex.bonne]))
-      break
-    case 'definition':
-      await page.getByRole('button', { name: exact(ex.choix[ex.bonne]) }).click()
-      break
-    case 'qcm':
-      await page.getByRole('button', { name: exact(ex.choix[juste ? ex.bonne : (ex.bonne + 1) % ex.choix.length]) }).click()
-      break
-    case 'paires':
-      for (const p of ex.paires) {
-        await page.getByRole('button', { name: exact(p.terme) }).click()
-        await page.getByRole('button', { name: exact(p.definition) }).click()
-      }
-      break
-    case 'ordre':
-    case 'etapes':
-      for (const k of ex.bonOrdre) await page.getByRole('button', { name: ex.evenements[k].texte, exact: true }).click()
-      break
-    case 'selection':
-      for (const c of ex.cartes.filter(x => x.bonne)) await page.getByRole('button', { name: exact(c.texte) }).click()
-      await expect(page.locator('.ex-carte.is-choisi')).toHaveCount(ex.cartes.filter(x => x.bonne).length)
-      break
-    case 'cause':
-    case 'etiquette':
-      await page.getByRole('button', { name: exact(ex.choix[ex.bonne]) }).click()
-      break
-    case 'devinette':
-      await page.getByRole('textbox', { name: 'Ta réponse' }).fill(ex.reponse)
-      break
-    case 'calcul':
-      // Au pavé : les chiffres, la virgule, puis le signe.
-      for (const t of ecrireNombre(Math.abs(ex.reponse))) await page.getByRole('button', { name: t === ',' ? 'Virgule' : t, exact: true }).click()
-      if (ex.reponse < 0) await page.getByRole('button', { name: 'Changer le signe' }).click()
-      await expect(page.locator('.ex-calcul-valeur span')).toHaveText(ecrireNombre(ex.reponse))
-      break
-    case 'annee':
-      await page.getByRole('slider', { name: 'Année' }).fill(String(ex.annee))
-      break
-    case 'vraifaux':
-      if (glisser) await glisserCarte(page, page.locator('.ex-vf-carte'), ex.vrai ? 'droite' : 'gauche')
-      else await page.getByRole('button', { name: ex.vrai ? 'Vrai' : 'Faux', exact: true }).click()
-      break
-    case 'phrase':
-      await page.getByRole('button', { name: exact(ex.mots[ex.bonne]) }).click()
-      await expect(page.locator('.ex-trou')).toHaveText(ex.mots[ex.bonne])
-      break
-    case 'memory':
-      for (const p of [0, 1, 2]) {
-        for (const i of ex.cartes.map((c, k) => (c.paire === p ? k : -1)).filter(k => k >= 0)) await page.locator('.ex-memo').nth(i).click()
-        await expect(page.locator('.ex-memo.is-trouvee')).toHaveCount(2 * (p + 1))
-      }
-      break
-    case 'classement':
-      for (const [k, c] of ex.cartes.entries()) {
-        await expect(page.locator('.ex-cl-compte')).toHaveText(`Carte ${k + 1} sur 4`)
-        if (glisser) await glisserCarte(page, page.locator('.ex-cl-carte'), c.dossier ? 'droite' : 'gauche')
-        else await page.getByRole('button', { name: exact(ex.dossiers[c.dossier]) }).click()
-        await expect(page.locator('.ex-cl-rangees li')).toHaveCount(k + 1)
-      }
-      break
-  }
-}
 
 test.describe('Exercices en jeu', () => {
   for (const [appareil, viewport] of APPAREILS) {
@@ -121,8 +23,9 @@ test.describe('Exercices en jeu', () => {
       await entrerEnEssai(page)
       await ouvrirChapitreDuProgramme(page)
 
-      // ── La fiche propose les exercices ──
-      const carte = page.getByRole('link', { name: /^Exercices en jeu : 4 coins, intrus, paires/ })
+      // ── La fiche propose les exercices, en dernière étape du parcours (à la place du quiz) ──
+      await expect(page.getByRole('link', { name: /^Quiz corrigé/ })).toHaveCount(0)
+      const carte = page.getByRole('link', { name: /^Exercices en jeu : 10 exercices, quiz compris/ })
       await expect(carte).toBeVisible()
       await carte.click()
       await expect(page).toHaveURL(/\/exercices$/)
@@ -170,6 +73,11 @@ test.describe('Exercices en jeu', () => {
       await page.getByRole('button', { name: 'Retour au chapitre' }).click()
       await expect(page).toHaveURL(/\/analyse/)
       await expect(page.getByRole('link', { name: /^Exercices en jeu : 9 \/ 10 à la dernière séance, fait$/ })).toBeVisible()
+      // La question du quiz ratée dans la séance se refait seule, dans le quiz des erreurs.
+      const erreurs = page.getByRole('link', { name: 'Refaire mes erreurs : 1 question ratée' })
+      await expect(erreurs).toHaveAttribute('href', '/quiz?erreurs=1')
+      await erreurs.click()
+      await expect(page.getByText(nbsp(seance[fauxExpres].bulle))).toBeVisible()
     })
   }
 
@@ -226,6 +134,17 @@ test.describe('Exercices en jeu', () => {
       await expect(page.getByText('Séance terminée')).toBeVisible()
     })
   }
+
+  test('l’ancien lien du quiz ouvre la séance', async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 })
+    await mockApiRoutes(page)
+    await mockProgramme(page)
+    await entrerEnEssai(page)
+    await ouvrirChapitreDuProgramme(page)
+    await page.goto('/quiz')
+    await expect(page).toHaveURL(/\/exercices$/)
+    await expect(page.getByText(/· 1 sur 10$/)).toBeVisible()
+  })
 
   test('une nouvelle séance repart de zéro avec d’autres exercices', async ({ page }) => {
     await page.setViewportSize({ width: 390, height: 844 })

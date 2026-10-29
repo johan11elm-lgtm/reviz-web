@@ -63,7 +63,7 @@ export const EtoileIA = ({ id = 'rv-ia-grad', size = 24 }) => (
 const TABS = [
   { to: '/',          nom: 'accueil',   label: "Aujourd'hui" },
   // Une leçon (scannée ou du programme) et « Mes cours » allument Programme.
-  { to: '/programme', nom: 'programme', label: 'Programme', also: ['/cours', '/analyse', '/flashcards', '/quiz', '/resume', '/mindmap'] },
+  { to: '/programme', nom: 'programme', label: 'Programme', also: ['/cours', '/analyse', '/flashcards', '/quiz', '/exercices', '/resume', '/mindmap'] },
   { to: '/agenda',    nom: 'agenda',    label: 'Agenda' },
   { to: '/profil',    nom: 'moi',       label: 'Moi', also: ['/reglages'] },
 ]

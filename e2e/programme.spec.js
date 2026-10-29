@@ -69,17 +69,19 @@ test.describe('Mon programme', () => {
       await ouvrirChapitreDuProgramme(page)
       await expect(page.getByRole('heading', { name: 'L’essentiel' })).toBeVisible()
       await expect(page.getByRole('heading', { name: 'Le théorème de Thalès', level: 1 })).toBeVisible()
-      const quiz = page.getByRole('link', { name: /^Quiz corrigé/ })
-      await expect(quiz).toBeVisible()
+      // Depuis le 29/10, la séance d'exercices remplace le quiz au bout du parcours.
+      const seance = page.getByRole('link', { name: /^Exercices en jeu/ })
+      await expect(seance).toBeVisible()
+      await expect(page.getByRole('link', { name: /^Quiz corrigé/ })).toHaveCount(0)
       await expect(page.locator('a[href^="/coach"]')).toHaveCount(0)
       await sansDebordement(page, `fiche du chapitre ${appareil}`)
       await page.screenshot({ path: test.info().outputPath('analyse-chapitre.png') })
 
-      // ── Le quiz tourne sur le contenu du chapitre ──
-      await quiz.evaluate(el => el.scrollIntoView({ block: 'center' }))
-      await quiz.click()
-      await expect(page).toHaveURL(/\/quiz/)
-      await expect(page.getByRole('heading', { name: 'Que faut-il pour appliquer le théorème de Thalès ?' })).toBeVisible()
+      // ── La séance tourne sur le contenu du chapitre ──
+      await seance.evaluate(el => el.scrollIntoView({ block: 'center' }))
+      await seance.click()
+      await expect(page).toHaveURL(/\/exercices/)
+      await expect(page.getByText(/· 1 sur 10$/)).toBeVisible()
 
       // ── Accueil : le rappel du mode essai, les matières du programme ; le chapitre devient « en cours » ──
       await page.goto('/')
@@ -160,7 +162,8 @@ test.describe('Mon programme', () => {
 
       // Quiz du chapitre, joué jusqu'à l'écran de fin (une erreur, pour voir « À revoir »)
       const quiz = chapitreThales().quiz
-      await page.goto('/quiz')
+      // Le quiz seul reste celui des erreurs (et des leçons trop maigres pour une séance).
+      await page.goto('/quiz?classique=1')
       await sansDebordement(page, `quiz ${appareil}`)
       await jouerQuiz(page, quiz, { bonnes: quiz.length - 1 })
       await expect(page.getByText(new RegExp(`^${quiz.length - 1}\\s*/\\s*${quiz.length}$`)).first()).toBeVisible()
@@ -180,10 +183,10 @@ test.describe('Mon programme', () => {
         return { chapitre: p?.premiereSession?.chapterId, derniere: !!p?.derniereRevisionAt }
       }, { timeout: 10_000 }).toEqual({ chapitre: 'theoreme-de-thales', derniere: true })
 
-      // De retour sur la fiche du chapitre : le score est inscrit au parcours
+      // De retour sur la fiche du chapitre : le quiz fait compte pour la dernière étape du parcours
       await page.getByRole('button', { name: 'Retour au chapitre' }).click()
       await expect(page).toHaveURL(/\/analyse/)
-      await expect(page.getByRole('link', { name: new RegExp(`^Quiz corrigé : ${quiz.length - 1} / ${quiz.length}`) })).toBeVisible()
+      await expect(page.getByRole('link', { name: /^Exercices en jeu : Fait, fait$/ })).toBeVisible()
     })
   }
 })
@@ -225,7 +228,7 @@ test.describe('Téléphone (390 px)', () => {
     await entrerEnEssai(page)
     // Pour chaque exercice : la case du parcours, puis son bouton de fermeture.
     for (const [exercice, url, fermer] of [
-      [/^Quiz corrigé/, /\/quiz$/, page.getByRole('button', { name: 'Fermer' })],
+      [/^Exercices en jeu/, /\/exercices$/, page.getByRole('button', { name: 'Fermer' })],
       [/^Flashcards/, /\/flashcards$/, page.getByRole('button', { name: 'Fermer' })],
       [/^Résumé/, /\/resume$/, page.locator('.rs-retour')],
     ]) {

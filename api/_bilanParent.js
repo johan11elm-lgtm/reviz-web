@@ -75,10 +75,11 @@ export function resumeActivite({ revisions, jeux = null, depuis, maintenant }) {
     if (!cle) continue
     const ch = chapitres.get(cle) ?? { lessonId: cle, classe: r.classe ?? null, matiere: r.matiere ?? null, formats: new Set(), quizTermine: false, derniere: 0 }
     if (FORMATS[r.type]) ch.formats.add(r.type)
-    // Un quiz n'est enregistré avec son total qu'à la dernière question.
-    if (r.type === 'quiz' && Number.isFinite(r.total) && r.total > 0) {
+    // Un quiz n'est enregistré avec son total qu'à la dernière question. Depuis le 29/10, la séance
+    // d'exercices remplace le quiz : les deux comptent comme une séance terminée.
+    if (['quiz', 'exercices'].includes(r.type) && Number.isFinite(r.total) && r.total > 0) {
       quizTermines++
-      ch.quizTermine = true
+      if (r.type === 'quiz') ch.quizTermine = true
     }
     ch.derniere = Math.max(ch.derniere, r.revisedAt)
     chapitres.set(cle, ch)
@@ -129,7 +130,7 @@ export function mailBilanParent({ prenom = null, classe = null, depuis, maintena
     ? `${Nom} a révisé ${surligne(nb(chapitres.length, 'chapitre', 'chapitres'))} depuis ${quand}.`
     : `${Nom} a joué ${surligne(nb(parties, 'partie du jour', 'parties du jour'))} depuis ${quand}.`
   const apercu = revise
-    ? [nb(chapitres.length, 'chapitre', 'chapitres'), quizTermines ? nb(quizTermines, 'quiz terminé', 'quiz terminés') : null, nb(joursRevision, 'jour de révision', 'jours de révision')].filter(Boolean).join(', ')
+    ? [nb(chapitres.length, 'chapitre', 'chapitres'), quizTermines ? nb(quizTermines, 'séance terminée', 'séances terminées') : null, nb(joursRevision, 'jour de révision', 'jours de révision')].filter(Boolean).join(', ')
     : 'La partie du jour : un mini-jeu sur le programme, chaque jour.'
   const programme = classe ? `le programme de ${escapeHtml(classeLisible(classe))}` : 'ses cours'
 
@@ -139,7 +140,7 @@ export function mailBilanParent({ prenom = null, classe = null, depuis, maintena
   const chiffres = [
     [joursRevision, 'jour de révision', 'jours de révision'],
     [chapitres.length, 'chapitre revu', 'chapitres revus'],
-    quizTermines || !parties ? [quizTermines, 'quiz terminé', 'quiz terminés'] : [parties, 'partie du jour', 'parties du jour'],
+    quizTermines || !parties ? [quizTermines, 'séance terminée', 'séances terminées'] : [parties, 'partie du jour', 'parties du jour'],
   ]
   const blocChiffres = !revise ? '' : `
           <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:4px 0 20px; background:${C.fond}; border-radius:14px;"><tr>

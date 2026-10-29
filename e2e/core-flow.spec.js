@@ -70,7 +70,7 @@ test.describe('Parcours cœur : inscription → scan → révision', () => {
       await sansDebordement(page, `carte mentale ${appareil}`)
 
       // ── Quiz complet (3 questions mockées) ──
-      await page.goto('/quiz')
+      await page.goto('/quiz?classique=1')
       await jouerQuiz(page, MOCK_AI_RESPONSE.quiz)
 
       // ── Écran de fin : score parfait, enregistré ──
@@ -98,7 +98,7 @@ test.describe('Parcours cœur : inscription → scan → révision', () => {
     await page.getByRole('button', { name: /^Chapitre 1 : Le théorème de Thalès/ }).click()
     await page.getByRole('button', { name: /^(C'est parti|Découvrir)$/ }).click()
     await expect(page).toHaveURL(/\/analyse/)
-    await page.goto('/quiz')
+    await page.goto('/quiz?classique=1')
     await jouerQuiz(page, chapitreThales().quiz)
     // Attendu : « Ce quiz t'a aidé ? » avec « Oui, utile » puis « Merci pour ton retour ». Obtenu : rien.
     await page.getByRole('button', { name: 'Oui, utile' }).click()

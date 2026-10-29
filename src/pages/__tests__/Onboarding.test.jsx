@@ -39,7 +39,7 @@ describe('<Onboarding />', () => {
   it('Réviz se présente et salue par le prénom', () => {
     render(<MemoryRouter><Onboarding /></MemoryRouter>)
     expect(screen.getByText("Salut Léa, moi c'est Réviz. Je suis là pour tes révisions.")).toBeInTheDocument()
-    expect(screen.getByText(/résumés, flashcards, quiz et cartes mentales/)).toBeInTheDocument()
+    expect(screen.getByText(/résumés, flashcards, exercices en jeu et cartes mentales/)).toBeInTheDocument()
     expect(screen.getByLabelText('Étape 1 sur 3')).toBeInTheDocument()
   })
 

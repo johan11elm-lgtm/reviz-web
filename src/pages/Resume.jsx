@@ -331,15 +331,16 @@ function ResumeContent() {
     for (let i = 0; i < total; i++) if (getCardState(coachLessonId, i)) vues++
     dues = countDueCards(coachLessonId, total)
   }
-  const quizFait = !!coachLessonId && loadRevisions().some(r => r.lessonId === coachLessonId && r.type === 'quiz')
+  // Depuis le 29/10, la séance d'exercices remplace le quiz (un quiz fait avant compte aussi).
+  const quizFait = !!coachLessonId && loadRevisions().some(r => r.lessonId === coachLessonId && ['exercices', 'quiz'].includes(r.type))
   const cartesFaites = total > 0 && vues === total && dues === 0
   const etapes = [
     { id: 'resume', nom: 'Résumé', pose: 'reading', to: '/resume', meta: 'Lu', statut: 'fait' },
     { id: 'flashcards', nom: 'Flashcards', pose: 'flashcard', to: '/flashcards', meta: vues ? `${vues} / ${total} vues` : pluriel(total, 'carte'), statut: cartesFaites ? 'fait' : 'cours' },
-    { id: 'quiz', nom: 'Quiz corrigé', pose: 'quiz', to: '/quiz', meta: quizFait ? 'Fait' : pluriel(resumeData.nbQuestions, 'question'), statut: quizFait ? 'fait' : cartesFaites ? 'cours' : 'afaire' },
+    { id: 'exercices', nom: 'Exercices en jeu', pose: 'muscu', to: '/exercices', meta: quizFait ? 'Fait' : '10 exercices, quiz compris', statut: quizFait ? 'fait' : cartesFaites ? 'cours' : 'afaire' },
   ]
   const suite = cartesFaites && !quizFait
-    ? { to: '/quiz', label: `Passer au quiz · ${pluriel(resumeData.nbQuestions, 'question')}` }
+    ? { to: '/exercices', label: 'Passer aux exercices · 10 exercices' }
     : { to: '/flashcards', label: `Passer aux flashcards · ${pluriel(total, 'carte')}` }
   const ecranFin = (
     <div className="rs-fin">

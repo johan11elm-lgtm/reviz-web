@@ -50,7 +50,7 @@ async function ouvrirQuiz(page) {
   await mockProgramme(page)
   await entrerEnEssai(page)
   await ouvrirChapitreDuProgramme(page)
-  await page.getByRole('link', { name: /^Quiz corrigé/ }).click()
+  await page.goto('/quiz?classique=1')
   // Les sons de la séance se décodent à l'ouverture du quiz : le temps de lire la première question.
   await page.waitForTimeout(800)
   return chapitreThales().quiz
@@ -102,7 +102,7 @@ test.describe('Bruitages', () => {
 
     await page.goto('/programme')
     await ouvrirChapitreDuProgramme(page)
-    await page.getByRole('link', { name: /^Quiz corrigé/ }).click()
+    await page.goto('/quiz?classique=1')
     await page.waitForTimeout(800)
     const [q1] = chapitreThales().quiz
     await choix(page, q1.choices[q1.correct]).click()

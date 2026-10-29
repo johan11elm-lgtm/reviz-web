@@ -20,8 +20,15 @@ describe('nextStep (carte « Ta prochaine étape »)', () => {
     expect(nextStep(lesson, { seen: 5, seenDue: 2 }, jamais)).toMatchObject({ to: '/flashcards', title: 'Revois tes 2 cartes' })
   })
 
-  it('toutes les cartes vues et à jour : le quiz, puis le refaire', () => {
-    expect(nextStep(lesson, { seen: 8, seenDue: 0 }, jamais)).toMatchObject({ to: '/quiz', action: 'Faire le quiz' })
-    expect(nextStep(lesson, { seen: 8, seenDue: 0 }, f => f === 'quiz')).toMatchObject({ to: '/quiz', action: 'Refaire le quiz' })
+  it('toutes les cartes vues et à jour : la séance d’exercices, puis une nouvelle (un ancien quiz compte)', () => {
+    expect(nextStep(lesson, { seen: 8, seenDue: 0 }, jamais)).toMatchObject({ to: '/exercices', action: 'Lancer la séance' })
+    expect(nextStep(lesson, { seen: 8, seenDue: 0 }, f => f === 'exercices')).toMatchObject({ to: '/exercices', action: 'Nouvelle séance' })
+    expect(nextStep(lesson, { seen: 8, seenDue: 0 }, f => f === 'quiz')).toMatchObject({ to: '/exercices', action: 'Nouvelle séance' })
+  })
+
+  it('une leçon trop maigre pour une séance garde son quiz', () => {
+    const maigre = { ...lesson, exercicesDispo: false }
+    expect(nextStep(maigre, { seen: 8, seenDue: 0 }, jamais)).toMatchObject({ to: '/quiz', action: 'Faire le quiz' })
+    expect(nextStep(maigre, { seen: 8, seenDue: 0 }, f => f === 'quiz')).toMatchObject({ to: '/quiz', action: 'Refaire le quiz' })
   })
 })

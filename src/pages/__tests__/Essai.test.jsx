@@ -52,7 +52,7 @@ describe('<Essai /> — mode essai', () => {
     expect(nav).toHaveBeenCalledWith('/programme?matiere=maths', { replace: true })
   })
 
-  it('venu d’une fiche avec son chapitre : le prénom suffit, et le quiz du chapitre s’ouvre', async () => {
+  it('venu d’une fiche avec son chapitre : le prénom suffit, et la séance d’exercices du chapitre s’ouvre', async () => {
     renderPage('/essai?classe=3%C3%A8me&matiere=maths&chapitre=theoreme-de-thales&via=fiche')
     expect(await screen.findByText('Teste-toi sur ce chapitre. Juste ton prénom avant.')).toBeInTheDocument()
     expect(screen.getByText('Théorème de Thalès (3e)')).toBeInTheDocument()
@@ -61,7 +61,7 @@ describe('<Essai /> — mode essai', () => {
     fireEvent.click(screen.getByRole('button', { name: /Lancer le quiz/ }))
     expect(auth.loginAsGuest).toHaveBeenCalledWith({ prenom: 'Léa', level: { cycle: 'college', classe: '3ème', specialites: [] } })
     expect(prog.openChapter).toHaveBeenCalledWith('3ème', 'Maths', THALES)
-    await waitFor(() => expect(nav).toHaveBeenCalledWith('/quiz', { replace: true }))
+    await waitFor(() => expect(nav).toHaveBeenCalledWith('/exercices', { replace: true }))
   })
 
   it('un chapitre inconnu retombe sur le formulaire habituel et la matière', async () => {
@@ -74,11 +74,11 @@ describe('<Essai /> — mode essai', () => {
     expect(nav).toHaveBeenCalledWith('/programme?matiere=maths', { replace: true })
   })
 
-  it('un essai déjà commencé ouvre directement le quiz du chapitre de la fiche', async () => {
+  it('un essai déjà commencé ouvre directement la séance d’exercices du chapitre de la fiche', async () => {
     auth.currentUser = { uid: 'guest-1' }
     auth.isGuest = true
     renderPage('/essai?classe=3%C3%A8me&matiere=maths&chapitre=theoreme-de-thales')
-    await waitFor(() => expect(nav).toHaveBeenCalledWith('/quiz', { replace: true }))
+    await waitFor(() => expect(nav).toHaveBeenCalledWith('/exercices', { replace: true }))
     expect(auth.loginAsGuest).not.toHaveBeenCalled()
     expect(prog.openChapter).toHaveBeenCalledTimes(1)
   })

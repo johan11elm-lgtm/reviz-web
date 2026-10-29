@@ -112,9 +112,6 @@ function FlashcardsSession() {
   const lessonTitle = useMemo(() => getLessonTitle(), [])
   const matiere = useMemo(() => getLessonSubject(), [])
   const toutes = useMemo(() => getDueCards(lessonId, getFlashcards()), [lessonId])
-  const nbQuestions = useMemo(() => {
-    try { return JSON.parse(localStorage.getItem('reviz-ai-data') || 'null')?.quiz?.length ?? 0 } catch { return 0 }
-  }, [])
   const teinte = teinteMatiere(matiere)
 
   // La série du jour : cartes dues aujourd'hui et nouvelles (isDue compte aussi les jamais vues).
@@ -305,7 +302,8 @@ function FlashcardsSession() {
     const sues = notes.filter(n => n === 'sais').length
     const aRevoir = serie.filter((_, i) => notes[i] !== 'sais')
     const nouvelles = serie.filter(c => c.nouvelle).length
-    const quizFait = loadRevisions().some(r => r.lessonId === lessonId && r.type === 'quiz')
+    // Depuis le 29/10, la séance d'exercices remplace le quiz (elle en reprend les questions).
+    const quizFait = loadRevisions().some(r => r.lessonId === lessonId && ['exercices', 'quiz'].includes(r.type))
     return (
       <div className={`app app--no-halo flashcards-page fc-page fc-page--fin${isDesktop ? ' app--large fc-page--large' : ''}`} style={varsTeinte(teinte)}>
         {deco}
@@ -328,8 +326,8 @@ function FlashcardsSession() {
           </div>
           <BilanXp gain={gain} uid={uid} />
           <div className="fc-fin-actions fc-fin-actions--deux">
-            <button type="button" className="fc-btn fc-btn--orange" onClick={() => versExercice(navigate, location, '/quiz')}>
-              {quizFait ? 'Refaire le quiz' : 'Passer au quiz'}{nbQuestions ? ` · ${pluriel(nbQuestions, 'question')}` : ''}<Fleche />
+            <button type="button" className="fc-btn fc-btn--orange" onClick={() => versExercice(navigate, location, '/exercices')}>
+              {quizFait ? 'Nouvelle séance d’exercices' : 'Passer aux exercices'}<Fleche />
             </button>
             {aRevoir.length > 0 && (
               <button type="button" className="fc-btn fc-btn--blanc" onClick={() => lancer(aRevoir.map(c => ({ ...c, nouvelle: false })))}>
