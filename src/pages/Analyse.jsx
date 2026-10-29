@@ -25,7 +25,7 @@ import { nextStep } from '../utils/nextStep';
 import { DEPUIS_FICHE } from '../utils/navigation';
 import { openChapter } from '../services/programmeService';
 import { erreursDe } from '../services/erreursService';
-import { construireSeance } from '../utils/exercicesChapitre';
+import { construireSeance, lireExercices } from '../utils/exercicesChapitre';
 import { ChapitresMatiere } from '../components/fiche/ChapitresMatiere';
 import { CarteEmail } from '../components/CarteEmail';
 import '../components/reviz/HerosMatiere.css';
@@ -58,7 +58,16 @@ function buildLessonFromAiData(data) {
     resumeMinutes:   resumeReadingMinutes(data.resume),
     // Exercices en jeu : seulement si le chapitre a de quoi nourrir une séance.
     exercicesDispo:  construireSeance(data, { graine: 1 }).length > 0,
+    // Chapitres du pilote (bloc relu) : la carte annonce les formats qu'ils sont seuls à avoir.
+    exercicesRelus:  formatsRelus(data.exercices),
   };
+}
+
+function formatsRelus(exercices) {
+  const r = lireExercices(exercices);
+  if (!r) return null;
+  const noms = [r.calculs.length && 'calculs', r.devinettes.length && 'Qui suis-je ?', r.etiquettes.length && 'étiquettes', r.causes.length && 'causes et conséquences'].filter(Boolean).slice(0, 3);
+  return noms.length ? `${noms.join(', ').replace(/^./, c => c.toUpperCase())}…` : null;
 }
 
 /** Avancement de l'élève sur la leçon (cartes vues, à revoir, séances). */
@@ -430,7 +439,7 @@ export default function Analyse() {
     })),
     ...(displayLesson.exercicesDispo ? [{
       id: 'exercices', nom: 'Exercices en jeu', pose: 'muscu', to: '/exercices',
-      meta: scoreExercices ? `${scoreExercices.dernier.score} / ${scoreExercices.dernier.total} à la dernière séance` : '4 coins, intrus, paires…',
+      meta: scoreExercices ? `${scoreExercices.dernier.score} / ${scoreExercices.dernier.total} à la dernière séance` : displayLesson.exercicesRelus ?? '4 coins, intrus, paires…',
       statut: scoreExercices ? 'fait' : 'afaire',
       valeur: scoreExercices ? scoreExercices.dernier.score : 0,
       sur: scoreExercices ? scoreExercices.dernier.total : 10,
