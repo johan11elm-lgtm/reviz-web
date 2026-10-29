@@ -34,6 +34,11 @@ export function erreursDe(uid, lessonId) {
   return lire(uid)[lessonId]?.questions ?? []
 }
 
+/** Quand ces erreurs ont été notées (fin du dernier quiz raté) : horodatage, ou null. */
+export function erreursNoteesLe(uid, lessonId) {
+  return lire(uid)[lessonId]?.at ?? null
+}
+
 /** La leçon la plus récente de la matière (slug du programme) qui a des erreurs. */
 export function leconAvecErreurs(uid, matiere) {
   const tout = lire(uid)

@@ -5,6 +5,8 @@ import { Mascot } from '../components/Mascot';
 import { CLASSES_BY_CYCLE } from '../utils/levels';
 import { CLASSES_DECOUVERTE, isDecouverte, startDecouverte, stopDecouverte } from '../services/decouverteService';
 import { loadCatalogue, openChapter } from '../services/programmeService';
+import { erreursDe } from '../services/erreursService';
+import { chapterLessonId } from '../utils/programme';
 import { EntreeEcran, Champ, ChoixClasse, Encart, LienTexte } from '../components/entree/Entree';
 import { revenir } from '../utils/navigation';
 
@@ -60,12 +62,15 @@ export default function Essai() {
 
   // Charge le chapitre comme le fait Mon programme, puis lance le quiz.
   // En cas d'échec (réseau), la liste des chapitres de la matière.
+  // Le mail du lendemain (?via=rappel) : s'il reste sur l'appareil des questions ratées de ce
+  // chapitre, « Bats ton toi d'hier » (3 d'entre elles) plutôt que tout le quiz.
   function ouvrirChapitre() {
     if (ouvert.current) return;
     ouvert.current = true;
     setOuverture(true);
+    const defi = params.get('via') === 'rappel' && erreursDe(currentUser?.uid ?? null, chapterLessonId(chapitre.ch.id)).length > 0;
     openChapter(classeFiche, chapitre.matiere, chapitre.ch)
-      .then(() => navigate('/quiz', { replace: true }))
+      .then(() => navigate(defi ? '/quiz?erreurs=1&defi=1&depuis=rappel' : '/quiz', { replace: true }))
       .catch(() => navigate(`/programme?matiere=${matiereFiche}`, { replace: true }));
   }
 

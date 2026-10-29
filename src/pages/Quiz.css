@@ -141,6 +141,13 @@
 .qz-page .qz-score-grand { font-family: var(--font-display); font-size: 72px; font-weight: 800; letter-spacing: -.04em; line-height: 1; }
 .qz-page .qz-score-grand small { font-size: .5em; color: var(--ch-doux); }
 .qz-page .qz-score-legende { font-size: 15px; font-weight: 600; color: var(--ch-doux); }
+/* « Bats ton toi d'hier » : la dernière fois contre aujourd'hui. */
+.qz-page .qz-defi { display: flex; align-items: center; gap: 14px; margin-top: 14px; padding: 10px 18px; border-radius: 18px; background: var(--rv-carte); }
+.qz-page .qz-defi > span:not(.qz-defi-fleche) { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+.qz-page .qz-defi small { font-size: 12px; font-weight: 700; color: var(--ch-doux); }
+.qz-page .qz-defi b { font-family: var(--font-display); font-size: 22px; font-weight: 800; }
+.qz-page .qz-defi .is-mieux b { color: var(--rv-orange-texte); }
+.qz-page .qz-defi-fleche { display: flex; color: var(--ch-doux); }
 .qz-page .qz-pastilles { display: flex; justify-content: center; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
 .qz-page .qz-xp, .qz-page .qz-enregistre { display: inline-flex; align-items: center; gap: 6px; padding: 7px 14px; border-radius: 999px; background: var(--rv-carte); font-size: 14px; font-weight: 700; }
 .qz-page .qz-xp { font-family: var(--font-display); font-size: 16px; font-weight: 800; color: var(--rv-orange-texte); }

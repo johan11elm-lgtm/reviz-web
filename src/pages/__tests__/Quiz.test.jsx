@@ -17,7 +17,7 @@ const AI_DATA = {
     { question: 'Que vaut 10⁻³ ?', choices: ['0,001', '1 000', '−1 000', '0,01'], correct: 0, explanation: '10⁻³ = 1 / 10³.' },
   ],
 }
-const renderQuiz = () => render(<MemoryRouter><Quiz /></MemoryRouter>)
+const renderQuiz = (path = '/quiz') => render(<MemoryRouter initialEntries={[path]}><Quiz /></MemoryRouter>)
 
 beforeEach(() => {
   localStorage.clear()
@@ -69,5 +69,20 @@ describe('<Quiz /> corrigé', () => {
     expect(screen.getByRole('button', { name: 'Refaire mes erreurs' })).toBeInTheDocument()
     fireEvent.click(screen.getByRole('button', { name: 'Tout le quiz' }))
     expect(screen.getByText('Question 1 sur 2')).toBeInTheDocument()
+  })
+
+  it('« Bats ton toi d’hier » : les questions ratées hier, puis hier contre aujourd’hui', () => {
+    const hier = Date.now() - 86_400_000
+    localStorage.setItem('reviz-erreurs-local', JSON.stringify({ 'prog-puissances': { questions: ['Que vaut 10⁻³ ?', 'Que vaut 5⁰ ?'], at: hier } }))
+    renderQuiz('/quiz?erreurs=1&defi=1&depuis=accueil')
+    expect(screen.getByText('Question 1 sur 2')).toBeInTheDocument()
+    fireEvent.click(screen.getByRole('button', { name: /^B : 1/ }))
+    fireEvent.click(screen.getByRole('button', { name: /Question suivante/ }))
+    fireEvent.click(screen.getByRole('button', { name: /^A : 0,001/ }))
+    fireEvent.click(screen.getByRole('button', { name: /Voir mon score/ }))
+    expect(screen.getByText('Bats ton toi d’hier')).toBeInTheDocument()
+    expect(screen.getByLabelText('Hier : 0 sur 2. Aujourd’hui : 2 sur 2.')).toBeInTheDocument()
+    // Réussies, elles sortent de la liste des erreurs.
+    expect(JSON.parse(localStorage.getItem('reviz-erreurs-local'))).toEqual({})
   })
 })

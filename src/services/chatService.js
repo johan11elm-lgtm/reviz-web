@@ -64,6 +64,9 @@ export async function sendCoachMessage({ lessonId = null, history, level, onDelt
     role: m.role,
     content: m.cartes?.length ? `${m.content}\n\n${m.cartes.map(traceCarte).join('\n')}` : m.content,
   }))
+  // L'API attend que l'élève parle en premier : quand Réviz IA a ouvert la conversation (ou quand
+  // l'historique coupé commence par une réponse), une ligne neutre la précède.
+  if (messages[0]?.role === 'assistant') messages.unshift({ role: 'user', content: '(L’élève ouvre Réviz IA.)' })
 
   if (USE_PROXY) return _viaProxy({ lessonId, messages, level, onDelta, onOutil, onCarte, erreurs: lessonId ? undefined : erreurs })
   // L'agent lit Firestore et le programme côté serveur : pas d'appel direct possible.

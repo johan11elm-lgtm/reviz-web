@@ -176,7 +176,17 @@ Chaque étape est testée (tests unitaires et e2e) et le banc est rejoué. La mi
    - **À surveiller :** le correcteur connaît maintenant le plan calculé par l'app (sinon il comptait comme inventé ce que l'app sait vraiment), et le prompt a été corrigé après avoir lu ses critiques. La relecture de Johan reste la vraie vérification.
    - **Mesure en prod :** les événements PostHog `ia_carte_proposee` et `ia_carte_validee`.
 3. **Accueil.** Le champ de recherche (local, plus « Demander à Réviz IA ») et les suggestions selon la situation.
+   **Fait le 29/10** (`components/RechercheAccueil.jsx`) :
+   - les chapitres s'affichent pendant que l'élève tape, trouvés par la même fonction que l'agent (`chercherChapitres`) ;
+   - « Demander à Réviz IA » en première ligne, ou la touche Entrée, envoie la question à Réviz IA sans leçon, qui répond aussitôt ;
+   - la suggestion selon la situation, c'est l'ouverture de Réviz IA (étape 4) et le raccourci du défi.
+   - PostHog : `recherche_accueil`.
 4. **Bats ton toi d'hier.** Une carte d'accueil le lendemain et le lien du mail J+1, avec trois questions et la comparaison.
+   **Fait le 29/10** :
+   - **le quiz** : en mode `?erreurs=1&defi=1`, il pose 3 des questions ratées, puis montre « Hier 0 / 3 → Aujourd'hui x / 3 » avec une phrase de Réviz ;
+   - **trois portes d'entrée** : le raccourci « Bats ton toi d'hier » de l'accueil, qui remplace « Fais un quiz » quand il y a des erreurs de la veille ; Réviz IA qui parle la première ; le mail J+1, dont le lien `?via=rappel` lance le défi s'il reste des erreurs sur l'appareil, et le quiz du chapitre sinon ;
+   - **Réviz IA parle la première** (`ouvertureAgent`, calculé dans l'app, sans appel au modèle) : sur « Toutes mes matières », elle ouvre sur les erreurs d'hier, sinon sur l'étape du jour du plan du contrôle le plus proche, avec sa carte. Une étape lancée de là est cochée comme depuis l'accueil, et l'ouverture fait partie de la conversation si l'élève répond ;
+   - **PostHog** : `defi_ouvert` (avec `depuis` : accueil, ia ou rappel) et `defi_termine`.
 5. **Schémas.** Cinq types, un composant de rendu et la carte `dessiner_schema`, aussi dans le coach de leçon.
 
 **Après le 30/11** : l'interrogation orale pour le brevet, une mémoire longue des notions confondues (dans Firestore), « Demain, c'est toi le prof » et la mission duo, liée à la Battle.

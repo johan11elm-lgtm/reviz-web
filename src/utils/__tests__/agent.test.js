@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest'
 import { readFileSync } from 'node:fs'
 import { join } from 'node:path'
-import { creerOutils, buildAgentRequest, OUTILS_AGENT, LIBELLES_OUTILS, traceCarte } from '../agent.js'
+import { creerOutils, buildAgentRequest, OUTILS_AGENT, LIBELLES_OUTILS, traceCarte, chercherChapitres, ouvertureAgent } from '../agent.js'
 
 const programme = chemin => JSON.parse(readFileSync(join(process.cwd(), 'public/programme', chemin), 'utf8'))
 const AUJ = '2026-11-03' // un mardi
@@ -92,6 +92,40 @@ describe('cartes', () => {
     expect((await outils().executer('effacer_tout', {})).erreur).toBe(true)
     const casse = outils(eleve({ agenda: async () => { throw new Error('réseau') } }))
     expect((await casse.executer('mes_controles', {})).erreur).toBe(true)
+  })
+})
+
+describe('chercherChapitres (outil et recherche de l’accueil)', () => {
+  it('programme et cours scannés, avec le nom de la matière dans le programme', () => {
+    const r = chercherChapitres({ catalogue: programme('4eme/index.json'), lecons: [{ id: 'scan-1', titre: 'Les volcans de la Réunion', matiere: 'SVT' }], recherche: 'volcans' })
+    expect(r[0]).toMatchObject({ id: 'volcanisme', programme: 'SVT', type: 'programme' })
+    expect(r.map(x => x.id)).toContain('scan-1')
+    expect(chercherChapitres({ catalogue: null, recherche: 'de la' })).toEqual([])
+  })
+})
+
+describe('ouvertureAgent (Réviz IA parle la première)', () => {
+  const hier = Date.parse('2026-11-02T17:00:00Z')
+  const pythagore = { id: 'c1', matiere: 'maths', titre: 'Pythagore', date: '2026-11-05', cree: '2026-10-30', chapitres: [{ id: 'theoreme-de-pythagore', titre: 'Racine carrée et théorème de Pythagore' }], classe: '4ème', programme: 'Maths' }
+
+  it('des questions ratées hier : Bats ton toi d’hier, 3 questions au plus', () => {
+    const o = ouvertureAgent({ aujourdhui: AUJ, erreurs: [{ lessonId: 'prog-x', titre: 'Les fractions', questions: ['a', 'b', 'c', 'd'], at: hier }] })
+    expect(o.texte).toBe("Hier, tu as raté 4 questions sur **Les fractions**. On les refait ? 3 questions, et tu bats ton toi d’hier.")
+    expect(o.carte).toMatchObject({ format: 'defi', lessonId: 'prog-x', sous: 'Les fractions · 3 questions' })
+  })
+
+  it('sinon l’étape du jour du contrôle le plus proche, avec sa carte', () => {
+    const o = ouvertureAgent({ aujourdhui: AUJ, controles: [pythagore] })
+    expect(o.texte).toBe('Ton contrôle de maths est dans 2 jours. Tu as une étape à rattraper : **flashcards**.')
+    expect(o.carte).toMatchObject({ format: 'flashcards', controleId: 'c1', etape: 'flash', chapitre: { id: 'theoreme-de-pythagore' }, classe: '4ème', programme: 'Maths' })
+    // J-3 avec des erreurs anciennes sur le chapitre du contrôle : on les refait.
+    const j3 = ouvertureAgent({ aujourdhui: AUJ, controles: [{ ...pythagore, plan: { flash: '2026-11-01' } }], erreurs: [{ lessonId: 'prog-theoreme-de-pythagore', titre: 'Pythagore', questions: ['a'], at: Date.parse('2026-10-25T10:00:00Z') }] })
+    expect(j3.carte).toMatchObject({ format: 'erreurs', etape: 'quiz', lessonId: 'prog-theoreme-de-pythagore' })
+  })
+
+  it('rien de prévu aujourd’hui : rien à dire', () => {
+    expect(ouvertureAgent({ aujourdhui: AUJ, controles: [{ ...pythagore, date: '2026-11-20' }] })).toBeNull()
+    expect(ouvertureAgent({ aujourdhui: AUJ })).toBeNull()
   })
 })
 

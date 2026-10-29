@@ -14,10 +14,10 @@ vi.mock('../../services/historyService', () => ({ loadLessons: () => lessons.lis
 const screenSize = vi.hoisted(() => ({ desktop: false }))
 vi.mock('../../hooks/useMediaQuery', () => ({ useIsDesktop: () => screenSize.desktop }))
 // Ce que les cartes de l'agent déclenchent (le code habituel de l'appli).
-const appli = vi.hoisted(() => ({ ajouter: vi.fn(), ouvrir: vi.fn() }))
-vi.mock('../../services/agendaService', () => ({ ajouterControle: appli.ajouter }))
+const appli = vi.hoisted(() => ({ ajouter: vi.fn(), ouvrir: vi.fn(), erreurs: [] }))
+vi.mock('../../services/agendaService', () => ({ ajouterControle: appli.ajouter, agendaLocal: () => ({ controles: [] }), marquerEtape: vi.fn() }))
 vi.mock('../../services/controleChapitres', () => ({ ouvrirChapitreDuControle: appli.ouvrir }))
-vi.mock('../../services/erreursService', () => ({ erreursRecentes: () => [{ lessonId: 'prog-x', titre: 'X', matiere: 'maths', questions: ['Q ?'], at: 1 }] }))
+vi.mock('../../services/erreursService', () => ({ erreursRecentes: () => appli.erreurs }))
 vi.mock('../../services/statsService', () => ({ track: vi.fn() }))
 
 const { default: Coach } = await import('../Coach')
@@ -28,7 +28,13 @@ const renderAt = (path) => render(
       <Route path="/coach" element={<Coach />} />
       <Route path="/scan" element={<p>Page scan</p>} />
       <Route path="/flashcards" element={<p>Page flashcards</p>} />
+      <Route path="/quiz" element={<p>Page quiz</p>} />
     </Routes>
+  </MemoryRouter>
+)
+const renderAvecEtat = (path, state) => render(
+  <MemoryRouter initialEntries={[{ pathname: path, state }]}>
+    <Routes><Route path="/coach" element={<Coach />} /></Routes>
   </MemoryRouter>
 )
 const DEUX = [
@@ -43,6 +49,7 @@ describe('<Coach /> — Réviz IA', () => {
     screenSize.desktop = false; auth.plus = false
     chat.send.mockReset()
     lessons.list = DEUX
+    appli.erreurs = [{ lessonId: 'prog-x', titre: 'X', matiere: 'maths', questions: ['Q ?'], at: 1 }]
   })
 
   it('téléphone, clavier ouvert : la page prend la zone visible, la barre de saisie reste au-dessus du clavier', () => {
@@ -184,6 +191,33 @@ describe('<Coach /> — Réviz IA', () => {
     expect(screen.getByRole('button', { name: /Toutes mes matières/ })).toBeDisabled()
     fireEvent.click(screen.getByRole('button', { name: /J'ai un contrôle/ }))
     expect(screen.getByLabelText('Ta question à Réviz IA')).toHaveValue("J'ai un contrôle de ")
+  })
+
+  it('Réviz IA parle la première : les questions ratées hier, et « Commencer » lance Bats ton toi d’hier', async () => {
+    appli.erreurs = [{ lessonId: 'prog-fractions', titre: 'Les fractions', matiere: 'maths', questions: ['a', 'b'], at: Date.now() - 86_400_000 }]
+    renderAt('/coach')
+    expect(screen.getByText(/Hier, tu as raté 2 questions sur/)).toBeInTheDocument()
+    expect(screen.getByText('Les fractions · 2 questions')).toBeInTheDocument()
+    await act(async () => fireEvent.click(screen.getByRole('button', { name: /^Commencer : Bats ton toi d’hier/ })))
+    expect(screen.getByText('Page quiz')).toBeInTheDocument()
+  })
+
+  it('l’ouverture fait partie de la conversation quand l’élève répond', async () => {
+    appli.erreurs = [{ lessonId: 'prog-fractions', titre: 'Les fractions', matiere: 'maths', questions: ['a'], at: Date.now() - 86_400_000 }]
+    chat.send.mockResolvedValue({ text: 'Allez !', cartes: [] })
+    renderAt('/coach')
+    fireEvent.change(screen.getByLabelText('Ta question à Réviz IA'), { target: { value: 'oui' } })
+    await act(async () => fireEvent.click(screen.getByRole('button', { name: 'Envoyer la question' })))
+    const history = chat.send.mock.calls[0][0].history
+    expect(history[0]).toMatchObject({ role: 'assistant', cartes: [{ format: 'defi' }] })
+    expect(history[1]).toEqual({ role: 'user', content: 'oui' })
+  })
+
+  it('une question tapée dans la recherche de l’accueil part tout de suite', async () => {
+    chat.send.mockResolvedValue({ text: 'Voilà.', cartes: [] })
+    await act(async () => { renderAvecEtat('/coach', { question: 'c’est quoi une fraction', envoyer: true }) })
+    expect(chat.send).toHaveBeenCalledTimes(1)
+    expect(chat.send.mock.calls[0][0].history.at(-1)).toEqual({ role: 'user', content: 'c’est quoi une fraction' })
   })
 
   it('agent : dit ce qu’il regarde, puis ses cartes ; Ajouter note le contrôle, Commencer ouvre la révision', async () => {

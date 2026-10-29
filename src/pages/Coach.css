@@ -371,6 +371,8 @@
 .ia-action-btn:active { transform: scale(.96); }
 .ia-action-btn--blanc { background: var(--rv-carte); border: 1px solid var(--ia-bord); color: var(--rv-encre); }
 .ia-action-fait { margin-left: auto; font-size: 14px; font-weight: 700; color: var(--rv-encre); text-decoration: underline; text-underline-offset: 3px; }
+/* Réviz IA parle la première (questions ratées hier, étape du jour), entre le salut et les raccourcis. */
+.ia-accueil .ia-ouverture { margin-top: 20px; text-align: left; }
 /* « Je regarde ton agenda… » sous le texte déjà écrit, pendant qu'un outil tourne. */
 .ia-reflechit--suite { display: block; margin-top: 10px; font-size: 14px; }
 

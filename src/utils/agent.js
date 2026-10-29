@@ -24,7 +24,7 @@ import {
   REGLE_GUIDER, REGLES_RIGUEUR, blocFormat, blocCalendrier, coachAudienceBlock, buildChatLessonContext,
 } from './chatPrompts.js'
 import { planRevision, etatPreparation } from './planRevision.js'
-import { MATIERES_CONTROLE, matiereControle, controlesAVenir, joursEntre, jourEnClair, compteARebours, intituleChapitres, intituleControle, matiereDuCours } from './agenda.js'
+import { MATIERES_CONTROLE, matiereControle, controlesAVenir, joursEntre, jourEnClair, compteARebours, intituleChapitres, intituleControle, matiereDuCours, ajouterJours } from './agenda.js'
 import { classeSlug, hasProgramme, isProgrammeLessonId, chapterLessonId } from './programme.js'
 
 // Tours d'outils par message de l'élève : au-delà, il doit répondre avec ce qu'il a.
@@ -168,6 +168,75 @@ const ok = contenu => ({ contenu: typeof contenu === 'string' ? contenu : JSON.s
 const refus = message => ({ contenu: message, erreur: true })
 
 /**
+ * Les chapitres qui correspondent à une recherche : programme de la classe (`catalogue`, index.json)
+ * et cours scannés (`lecons` : [{ id, titre, matiere }]), du plus pertinent au moins pertinent.
+ * Le titre compte triple, les notions et mots-clés une fois. Sert l'outil chercher_chapitre et la
+ * recherche de l'accueil (components/RechercheAccueil.jsx) : les deux trouvent les mêmes chapitres.
+ */
+export function chercherChapitres({ catalogue, lecons = [], recherche, matiere = null, max = 6 }) {
+  const q = mots(recherche)
+  if (!q.length) return []
+  const score = (titre, extra) => {
+    const t = mots(titre), e = mots(extra)
+    return q.reduce((s, m) => s + (t.some(x => racine(x) === racine(m)) ? 3 : 0) + (e.some(x => racine(x) === racine(m)) ? 1 : 0), 0)
+  }
+  const trouves = []
+  for (const m of catalogue?.matieres ?? []) {
+    if (matiere && m.slug !== matiere) continue
+    for (const ch of m.chapitres) {
+      const s = score(ch.titre, [...(ch.notions ?? []), ...(ch.motsCles ?? [])].join(' '))
+      if (s) trouves.push({ s, id: ch.id, titre: ch.titre, matiere: m.slug, programme: m.matiere, type: 'programme' })
+    }
+  }
+  for (const l of lecons) {
+    if (isProgrammeLessonId(l.id)) continue
+    const slug = matiereDuCours(l.matiere ?? '')
+    if (matiere && slug !== matiere) continue
+    const s = score(l.titre, l.matiere ?? '')
+    if (s) trouves.push({ s, id: l.id, titre: l.titre, matiere: slug ?? l.matiere ?? null, programme: null, type: 'cours scanné' })
+  }
+  return trouves.sort((a, b) => b.s - a.s).slice(0, max).map(({ s, ...t }) => t)
+}
+
+/**
+ * Ce que Réviz IA dit en premier, sans qu'on lui demande rien (accueil de /coach sans leçon) :
+ * les questions ratées hier (« Bats ton toi d'hier », 3 questions), sinon l'étape du jour du plan
+ * du contrôle le plus proche. Calculé dans l'appli, sans appel au modèle. null : rien à proposer.
+ * @returns {{ texte: string, carte: object|null } | null}
+ */
+export function ouvertureAgent({ aujourdhui, controles = [], erreurs = [] }) {
+  const hier = ajouterJours(aujourdhui, -1)
+  const e = erreurs.find(x => x?.questions?.length && x.at && jourDe(x.at) === hier)
+  if (e) {
+    const n = Math.min(3, e.questions.length)
+    const ratees = `${e.questions.length} question${e.questions.length > 1 ? 's' : ''}`
+    return {
+      texte: `Hier, tu as raté ${ratees} sur **${e.titre}**. On les refait ? ${n > 1 ? `${n} questions` : 'Une question'}, et tu bats ton toi d’hier.`,
+      carte: { type: 'revision', format: 'defi', lessonId: e.lessonId, titre: "Bats ton toi d’hier", sous: `${e.titre} · ${n} question${n > 1 ? 's' : ''}`, resume: `Bats ton toi d’hier, ${e.titre}` },
+    }
+  }
+  const c = controlesAVenir(controles, aujourdhui)[0]
+  const etape = c && planRevision(c, aujourdhui).find(x => !x.fait && x.etat === 'aujourdhui')
+  if (!etape) return null
+  const intitule = intituleControle(c)
+  const texte = `Ton ${intitule[0].toLowerCase()}${intitule.slice(1)} est ${compteARebours(c.date, aujourdhui)}. ${etape.retard ? 'Tu as une étape à rattraper' : "Aujourd'hui, c'est l'étape"} : **${etape.quoi.toLowerCase()}**.`
+  const ch = c.chapitres?.[0]
+  const base = { type: 'revision', controleId: c.id, etape: etape.id, classe: c.classe ?? null, programme: c.programme ?? null }
+  let carte = null
+  if (etape.id === 'blanc') {
+    carte = { ...base, format: 'controle_blanc', titre: FORMATS_REVISION.controle_blanc, sous: `${matiereControle(c.matiere).label} · ${c.titre}` }
+  } else if (ch) {
+    // J-3 : les questions ratées des chapitres du contrôle s'il y en a, sinon leur quiz.
+    const err = etape.id === 'quiz' && erreurs.find(x => (c.chapitres ?? []).some(k => x.lessonId === (k.scan ? k.id : chapterLessonId(k.id))))
+    carte = err
+      ? { ...base, format: 'erreurs', lessonId: err.lessonId, titre: FORMATS_REVISION.erreurs, sous: err.titre }
+      : { ...base, format: etape.id === 'quiz' ? 'quiz' : 'flashcards', chapitre: { id: ch.id, titre: ch.titre, ...(ch.scan ? { scan: true } : {}) }, titre: etape.id === 'quiz' ? FORMATS_REVISION.quiz : FORMATS_REVISION.flashcards, sous: ch.titre }
+  }
+  if (carte) carte.resume = `${carte.titre}, ${carte.sous}`
+  return { texte, carte }
+}
+
+/**
  * Les outils de l'agent pour un élève. `executer(nom, entree)` renvoie
  * { contenu (pour le modèle), erreur?, carte? (pour l'appli) }.
  */
@@ -234,30 +303,10 @@ export function creerOutils({ sources, level, aujourdhui }) {
     },
 
     async chercher_chapitre({ recherche, matiere }) {
-      const q = mots(recherche)
-      if (!q.length) return refus('Donne des mots du sujet à chercher.')
-      const score = (titre, extra) => {
-        const t = mots(titre), e = mots(extra)
-        return q.reduce((s, m) => s + (t.some(x => racine(x) === racine(m)) ? 3 : 0) + (e.some(x => racine(x) === racine(m)) ? 1 : 0), 0)
-      }
-      const trouves = []
-      for (const m of (await catalogue())?.matieres ?? []) {
-        if (matiere && m.slug !== matiere) continue
-        for (const ch of m.chapitres) {
-          const s = score(ch.titre, [...(ch.notions ?? []), ...(ch.motsCles ?? [])].join(' '))
-          if (s) trouves.push({ s, id: ch.id, titre: ch.titre, matiere: m.slug, type: 'programme' })
-        }
-      }
-      for (const l of await lecons()) {
-        if (isProgrammeLessonId(l.id)) continue
-        const slug = matiereDuCours(l.matiere ?? '')
-        if (matiere && slug !== matiere) continue
-        const s = score(l.titre, l.matiere ?? '')
-        if (s) trouves.push({ s, id: l.id, titre: l.titre, matiere: slug ?? l.matiere ?? null, type: 'cours scanné' })
-      }
-      trouves.sort((a, b) => b.s - a.s)
+      if (!mots(recherche).length) return refus('Donne des mots du sujet à chercher.')
+      const trouves = chercherChapitres({ catalogue: await catalogue(), lecons: await lecons(), recherche, matiere })
       if (!trouves.length) return ok(classe ? 'Aucun chapitre trouvé : essaie d\'autres mots, ou demande à l\'élève.' : "Pas de programme pour la classe de l'élève dans l'appli, et aucun cours scanné ne correspond.")
-      return ok(trouves.slice(0, 6).map(({ s, ...t }) => t))
+      return ok(trouves.map(({ programme, ...t }) => t))
     },
 
     async lire_chapitre({ id }) {

@@ -34,6 +34,9 @@ import { etatDuJour, synchroniserStats } from '../services/partieDuJourService';
 import { battleFaiteAujourdhui } from '../services/battleDuJour';
 import { BlocQuetes } from '../components/xp/Xp';
 import { xpQuetes, EVENEMENT_QUETES } from '../services/quetesService';
+import { RechercheAccueil } from '../components/RechercheAccueil';
+import { erreursRecentes } from '../services/erreursService';
+import { jourParis } from '../utils/retour';
 import './Home.css';
 
 /*
@@ -271,10 +274,20 @@ export default function Home() {
   const lancerScan = () => navigate('/scan');
   const prenom = String(currentUser?.displayName ?? '').trim().split(/\s+/)[0];
 
+  // « Bats ton toi d'hier » (étape 4 de docs/plan-reviz-ia-agent.md) : des questions ratées hier sur
+  // une leçon encore là. Elles remplacent « Fais un quiz » : 3 d'entre elles, puis hier contre aujourd'hui.
+  const defi = useMemo(() => {
+    const hier = jourParis(new Date(Date.now() - 86_400_000));
+    return erreursRecentes(uidJeux, 2).find(e => e.at && jourParis(new Date(e.at)) === hier && allLessons.some(l => l.id === e.lessonId)) ?? null;
+  }, [uidJeux, allLessons]);
+  const lancerDefi = () => { restoreLesson(defi.lessonId); navigate('/quiz?erreurs=1&defi=1&depuis=accueil'); };
+
   // « On fait quoi aujourd'hui ? Démarre en un clic » (comme l'accueil de l'app Nomad) : un quiz,
   // préparer un contrôle (le plan de révision de l'agenda), réviser avec son cours.
   const raccourcis = [
-    { id: 'quiz', pose: 'quiz', titre: 'Fais un quiz', sous: lastLesson?.metadata?.title ? court(lastLesson.metadata.title, 36) : 'Sur un chapitre de ton programme', go: lancerQuiz },
+    defi
+      ? { id: 'defi', pose: 'quiz', titre: 'Bats ton toi d’hier', sous: `${defi.questions.length} question${defi.questions.length > 1 ? 's ratées' : ' ratée'} hier · ${court(defi.titre, 28)}`, go: lancerDefi }
+      : { id: 'quiz', pose: 'quiz', titre: 'Fais un quiz', sous: lastLesson?.metadata?.title ? court(lastLesson.metadata.title, 36) : 'Sur un chapitre de ton programme', go: lancerQuiz },
     controle
       ? { id: 'plan', pose: 'examen', titre: 'Mon plan de révision', sous: `${controle.m.label} ${controle.quand}`, go: () => navigate('/agenda') }
       : { id: 'plan', pose: 'examen', titre: 'Prépare un contrôle', sous: 'Ton plan jusqu’au jour J', go: () => navigate('/agenda') },
@@ -441,12 +454,8 @@ export default function Home() {
       {!isDesktop && stats}
     </div>
   );
-  const recherche = (
-    <Link to="/programme" className="nm-recherche">
-      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>
-      On révise quoi aujourd’hui ?
-    </Link>
-  );
+  // Chercher un chapitre, ou demander à Réviz IA (étape 3 de docs/plan-reviz-ia-agent.md).
+  const recherche = <RechercheAccueil classe={classe} catalogue={catalogue} lecons={allLessons} />;
   // Les bulles : ce qu'on vient faire (scanner sa leçon, réviser le programme, défier un ami).
   // L'agenda a déjà son onglet et sa carte « Tes prochains contrôles » : pas de doublon ici.
   const ronds = (

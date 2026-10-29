@@ -9,7 +9,9 @@ import { DecouvrirRevizPlus } from '../components/revizplus/RevizPlusOffre';
 import { coachPreview, loadConversation, saveConversation, renderCoachMessage, COACH_ERREURS } from '../components/CoachChat';
 import { sendCoachMessage, CHAT_MAX_MESSAGE_LENGTH } from '../services/chatService';
 import { loadLessons, restoreLesson } from '../services/historyService';
-import { ajouterControle } from '../services/agendaService';
+import { ajouterControle, agendaLocal, marquerEtape } from '../services/agendaService';
+import { ouvertureAgent } from '../utils/agent';
+import { jourParis } from '../utils/retour';
 import { ouvrirChapitreDuControle } from '../services/controleChapitres';
 import { erreursRecentes } from '../services/erreursService';
 import { track } from '../services/statsService';
@@ -39,7 +41,7 @@ const couleurs = matiere => COULEURS.get(teinteMatiere(matiere ?? '')) ?? COULEU
 const AGENT = 'reviz-ia';
 // Les cartes de l'agent : où mène « Commencer », et la mascotte de chacune.
 const ROUTE_FORMAT = { fiche: '/analyse', flashcards: '/flashcards', quiz: '/quiz', resume: '/resume', carte_mentale: '/mindmap' };
-const POSE_FORMAT = { fiche: 'reading', flashcards: 'flashcard', quiz: 'quiz', resume: 'reading', carte_mentale: 'thinking', controle_blanc: 'examen', erreurs: 'quiz' };
+const POSE_FORMAT = { fiche: 'reading', flashcards: 'flashcard', quiz: 'quiz', resume: 'reading', carte_mentale: 'thinking', controle_blanc: 'examen', erreurs: 'quiz', defi: 'quiz' };
 const majuscule = s => (s ? s[0].toUpperCase() + s.slice(1) : s);
 
 // Relances sous la dernière réponse : le libellé, et ce qui part vraiment au serveur.
@@ -281,9 +283,26 @@ export default function Coach() {
   const fil = useRef(null);
   const champ = useRef(null);
   const enCours = brouillon !== null;
+  // Sans leçon, Réviz IA parle la première : les questions ratées hier, sinon l'étape du jour du
+  // plan du contrôle le plus proche (calculé ici, sans appel au modèle).
+  const ouverture = useMemo(() => (lecon ? null : ouvertureAgent({
+    aujourdhui: jourParis(),
+    controles: agendaLocal(currentUser?.uid).controles,
+    erreurs: erreursRecentes(currentUser?.uid),
+  })), [lecon, currentUser?.uid]);
+  // Question tapée dans la recherche de l'accueil (« Demander à Réviz IA ») : elle part tout de suite.
+  const envoiAuto = useRef(location.state?.envoyer ? location.state.question : null);
 
   useEffect(() => { setMessages(loadConversation(cle)); setErreur(null); }, [cle]);
   useEffect(() => { saveConversation(cle, messages); }, [messages, cle]);
+  useEffect(() => {
+    const question = envoiAuto.current;
+    envoiAuto.current = null;
+    if (!question || isGuest) return;
+    // Un retour arrière ou un rechargement ne la renvoie pas.
+    navigate(`${location.pathname}${location.search}`, { replace: true, state: null });
+    envoyer(question);
+  }, []);
   // Le fil suit la réponse qui s'écrit seulement si l'élève est déjà en bas : remonté pour relire le
   // début, il n'est plus ramené en bas à chaque morceau reçu. Envoyer une question le recolle en bas.
   // C'est le fil qui défile (téléphone : .app est figé à la hauteur de l'écran) ; sur tablette, où
@@ -345,7 +364,11 @@ export default function Coach() {
   async function envoyer(texte) {
     const contenu = texte.trim();
     if (!contenu || enCours || limite) return;
-    const historique = [...messages, { role: 'user', content: contenu }];
+    // Première question après l'ouverture de Réviz IA : elle fait partie de la conversation.
+    const avant = !messages.length && ouverture
+      ? [{ role: 'assistant', content: ouverture.texte, ...(ouverture.carte ? { cartes: [ouverture.carte] } : {}) }]
+      : messages;
+    const historique = [...avant, { role: 'user', content: contenu }];
     colle.current = true;
     setMessages(historique);
     setSaisie('');
@@ -399,9 +422,11 @@ export default function Coach() {
     track('ia_carte_validee', { type: 'revision', format: carte.format });
     try {
       if (carte.format === 'controle_blanc') return navigate(`/controle?c=${encodeURIComponent(carte.controleId)}`);
-      if (carte.format === 'erreurs') {
+      // Une étape du plan lancée d'ici compte comme faite, comme depuis l'accueil (le contrôle blanc se coche à la copie rendue).
+      if (carte.etape && carte.controleId) await marquerEtape(currentUser, carte.controleId, carte.etape).catch(() => {});
+      if (carte.format === 'erreurs' || carte.format === 'defi') {
         if (!restoreLesson(carte.lessonId)) throw new Error('COURS_EFFACE');
-        return navigate('/quiz?erreurs=1');
+        return navigate(carte.format === 'defi' ? '/quiz?erreurs=1&defi=1&depuis=ia' : '/quiz?erreurs=1');
       }
       await ouvrirChapitreDuControle({ classe: carte.classe, programme: carte.programme }, carte.chapitre);
       return navigate(ROUTE_FORMAT[carte.format] ?? '/analyse');
@@ -446,6 +471,15 @@ export default function Coach() {
         </div>
       )}
       <h1 className="ia-salut"><span className="ia-degrade">{prenom ? `Salut ${prenom}.` : 'Salut.'}</span><br />On révise quoi {moment}&nbsp;?</h1>
+      {ouverture && (
+        <div className="ia-reponse ia-ouverture">
+          <EtoileIA id="rv-ia-ouverture" size={22} />
+          <div className="ia-reponse-txt">
+            {renderCoachMessage(ouverture.texte)}
+            {ouverture.carte && <div className="ia-actions"><CarteIA carte={ouverture.carte} onCommencer={() => commencer(ouverture.carte)} /></div>}
+          </div>
+        </div>
+      )}
       <ul className="ia-cartes">
         {cartes.map(k => (
           <li key={k.titre}>

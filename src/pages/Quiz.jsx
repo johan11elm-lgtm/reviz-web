@@ -23,7 +23,8 @@ import './Flashcards.css'
 import './Quiz.css'
 import { mesurer } from '../services/mesure'
 import { questionsPremiere } from '../utils/premiereRevision'
-import { noterErreurs, erreursDe } from '../services/erreursService'
+import { noterErreurs, erreursDe, erreursNoteesLe } from '../services/erreursService'
+import { jourParis } from '../utils/retour'
 import { useCombo } from '../hooks/useCombo'
 import { PastilleCombo, BilanXp } from '../components/xp/Xp'
 import { gainDeSeance } from '../services/xpService'
@@ -96,17 +97,25 @@ function QuizSession() {
   // Première révision guidée (fin de la découverte) : 5 questions, puis l'accueil.
   const [premiere] = useState(() => new URLSearchParams(location.search).get('premiere') === '1')
   // ?erreurs=1 : seulement les questions ratées de cette leçon (services/erreursService), s'il y en a.
-  const [modeErreurs] = useState(() => new URLSearchParams(location.search).get('erreurs') === '1')
+  // ?defi=1 en plus : « Bats ton toi d'hier », trois d'entre elles, puis la comparaison avec la
+  // dernière fois (où elles étaient toutes ratées). Proposé par l'accueil, Réviz IA et le mail J+1.
+  const [modeDefi] = useState(() => new URLSearchParams(location.search).get('defi') === '1')
+  const [modeErreurs] = useState(() => modeDefi || new URLSearchParams(location.search).get('erreurs') === '1')
+  const [defiDepuis] = useState(() => {
+    const le = erreursNoteesLe(uid, localStorage.getItem('reviz-current-lesson-id'))
+    return le && jourParis(new Date(le)) === jourParis(new Date(Date.now() - 86_400_000)) ? 'Hier' : 'La dernière fois'
+  })
   const questions = useMemo(() => {
     const toutes = getQuestions()
     if (premiere) return questionsPremiere(toutes)
     if (modeErreurs) {
       const ratees = new Set(erreursDe(uid, localStorage.getItem('reviz-current-lesson-id')))
       const filtre = toutes.filter(q => ratees.has(q.question))
-      if (filtre.length) return filtre
+      if (filtre.length) return modeDefi ? filtre.slice(0, 3) : filtre
     }
     return toutes
-  }, [premiere, modeErreurs, uid])
+  }, [premiere, modeErreurs, modeDefi, uid])
+  useEffect(() => { if (modeDefi) track('defi_ouvert', { depuis: new URLSearchParams(location.search).get('depuis') }) }, [])
   const ai = useMemo(() => lireAi(), [])
   const lessonTitle = useMemo(() => getLessonTitle(), [])
   const matiere = ai.metadata?.subject || ''
@@ -147,6 +156,7 @@ function QuizSession() {
       setGain(g)
       noterErreurs(uid, coachLessonId, questions, reponses)
       track('quiz_termine', { source: coachLessonId?.startsWith('prog-') ? 'programme' : 'scan' })
+      if (modeDefi) track('defi_termine', { score: nbJustes, total: questions.length })
       if (premiere) mesurer('premiere_revision', { etape: 'terminee', score: nbJustes, total: questions.length })
       setFin(true)
       return
@@ -183,6 +193,10 @@ function QuizSession() {
   const pct = nbJustes / questions.length
   const lignes = fin && premiere
     ? ['Ta première révision est faite.', pct >= 0.6 ? 'Tu pars avec une longueur d’avance.' : 'Les erreurs, on les revoit ensemble.']
+    : fin && modeDefi
+    ? nbJustes === questions.length ? ['Tu as battu ton toi d’hier.', 'Ces questions-là sont rangées.']
+      : nbJustes > 0 ? ['Mieux que la dernière fois.', 'Le reste, on le reprend demain.']
+      : ['Pas encore cette fois.', 'On les reprend demain, ça va rentrer.']
     : fin
     ? pct >= 0.8 ? ['Très beau score.', 'Ce chapitre est presque maîtrisé.']
       : pct >= 0.5 ? ['C’est un bon début.', 'Revois les erreurs, puis retente.']
@@ -255,9 +269,17 @@ function QuizSession() {
     const erreurs = questions.map((qq, i) => ({ qq, i, r: reponses[i] })).filter(e => e.r !== e.qq.correct)
     const score = (
       <div className="qz-score-fin">
-        <span className="qz-surtitre">Quiz terminé</span>
+        <span className="qz-surtitre">{modeDefi ? 'Bats ton toi d’hier' : 'Quiz terminé'}</span>
         <span className="qz-score-grand">{nbJustes}<small> / {questions.length}</small></span>
         <span className="qz-score-legende">{nbJustes > 1 ? 'bonnes réponses' : 'bonne réponse'}</span>
+        {/* Toi contre toi : ces questions étaient toutes ratées la dernière fois. */}
+        {modeDefi && (
+          <span className="qz-defi" aria-label={`${defiDepuis} : 0 sur ${questions.length}. Aujourd’hui : ${nbJustes} sur ${questions.length}.`}>
+            <span><small>{defiDepuis}</small><b>0 / {questions.length}</b></span>
+            <span className="qz-defi-fleche" aria-hidden="true"><Fleche /></span>
+            <span className={nbJustes > 0 ? 'is-mieux' : ''}><small>Aujourd’hui</small><b>{nbJustes} / {questions.length}</b></span>
+          </span>
+        )}
       </div>
     )
     const pastilles = (
